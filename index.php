@@ -1,66 +1,69 @@
-<?php
-/**
- * The main template file.
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * For example, it puts together the home page when no home.php file exists.
- *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
- *
- * @package WordPress
- * @subpackage Twenty_Twelve
- * @since Twenty Twelve 1.0
- */
+<?php get_header(); ?>
 
-get_header(); ?>
+	<div id="content">
+		<div class="padder">
 
-	<div id="primary" class="site-content">
-		<div id="content" role="main">
-		<?php if ( have_posts() ) : ?>
+		<?php do_action( 'bp_before_blog_home' ); ?>
 
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
-				<?php get_template_part( 'content', get_post_format() ); ?>
-			<?php endwhile; ?>
+		<?php do_action( 'template_notices' ); ?>
 
-			<?php twentytwelve_content_nav( 'nav-below' ); ?>
+		<div class="page" id="blog-latest" role="main">
 
-		<?php else : ?>
+			<?php if ( have_posts() ) : ?>
 
-			<article id="post-0" class="post no-results not-found">
+				<?php bp_dtheme_content_nav( 'nav-above' ); ?>
 
-			<?php if ( current_user_can( 'edit_posts' ) ) :
-				// Show a different message to a logged-in user who can add posts.
-			?>
-				<header class="entry-header">
-					<h1 class="entry-title"><?php _e( 'No posts to display', 'twentytwelve' ); ?></h1>
-				</header>
+				<?php while (have_posts()) : the_post(); ?>
 
-				<div class="entry-content">
-					<p><?php printf( __( 'Ready to publish your first post? <a href="%s">Get started here</a>.', 'twentytwelve' ), admin_url( 'post-new.php' ) ); ?></p>
-				</div><!-- .entry-content -->
+					<?php do_action( 'bp_before_blog_post' ); ?>
 
-			<?php else :
-				// Show the default message to everyone else.
-			?>
-				<header class="entry-header">
-					<h1 class="entry-title"><?php _e( 'Nothing Found', 'twentytwelve' ); ?></h1>
-				</header>
+					<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-				<div class="entry-content">
-					<p><?php _e( 'Apologies, but no results were found. Perhaps searching will help find a related post.', 'twentytwelve' ); ?></p>
-					<?php get_search_form(); ?>
-				</div><!-- .entry-content -->
-			<?php endif; // end current_user_can() check ?>
+						<div class="author-box">
+							<?php echo get_avatar( get_the_author_meta( 'user_email' ), '50' ); ?>
+							<p><?php printf( _x( 'by %s', 'Post written by...', 'buddypress' ), bp_core_get_userlink( $post->post_author ) ); ?></p>
 
-			</article><!-- #post-0 -->
+							<?php if ( is_sticky() ) : ?>
+								<span class="activity sticky-post"><?php _ex( 'Featured', 'Sticky post', 'buddypress' ); ?></span>
+							<?php endif; ?>
+						</div>
 
-		<?php endif; // end have_posts() check ?>
+						<div class="post-content">
+							<h2 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
 
-		</div><!-- #content -->
-	</div><!-- #primary -->
+							<p class="date"><?php printf( __( '%1$s <span>in %2$s</span>', 'buddypress' ), get_the_date(), get_the_category_list( ', ' ) ); ?></p>
 
-<?php get_sidebar(); ?>
+							<div class="entry">
+								<?php the_content( __( 'Read the rest of this entry &rarr;', 'buddypress' ) ); ?>
+								<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
+							</div>
+
+							<p class="postmetadata"><?php the_tags( '<span class="tags">' . __( 'Tags: ', 'buddypress' ), ', ', '</span>' ); ?> <span class="comments"><?php comments_popup_link( __( 'No Comments &#187;', 'buddypress' ), __( '1 Comment &#187;', 'buddypress' ), __( '% Comments &#187;', 'buddypress' ) ); ?></span></p>
+						</div>
+
+					</div>
+
+					<?php do_action( 'bp_after_blog_post' ); ?>
+
+				<?php endwhile; ?>
+
+				<?php bp_dtheme_content_nav( 'nav-below' ); ?>
+
+			<?php else : ?>
+
+				<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
+				<p class="center"><?php _e( 'Sorry, but you are looking for something that isn\'t here.', 'buddypress' ); ?></p>
+
+				<?php get_search_form(); ?>
+
+			<?php endif; ?>
+		</div>
+
+		<?php do_action( 'bp_after_blog_home' ); ?>
+
+		</div><!-- .padder -->
+	</div><!-- #content -->
+
+	<?php get_sidebar(); ?>
+
 <?php get_footer(); ?>

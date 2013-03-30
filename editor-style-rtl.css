@@ -1,28 +1,43 @@
 /*
-Theme Name: Twenty Twelve
-Description: Used to style the TinyMCE editor for RTL languages.
-See also rtl.css file.
+Theme Name: BuddyPress Default
+Description: Used to style the TinyMCE editor (RTL version).
 */
 
-html .mceContentBody {
-	direction: rtl;
-	unicode-bidi: embed;
+html .mceContentBody .alignright {
+	float: left;
+	margin-left: auto;
+	margin-right: 15px;
 }
-li {
-	margin: 0 24px 0 0;
-	margin: 0 1.714285714rem 0 0;
+html .mceContentBody .alignleft {
+	float: right;
+	margin-left: 15px;
+	margin-right: auto;
 }
 dl {
-	margin: 0 24px;
-	margin: 0 1.714285714rem;
+	margin-left: auto;
+	margin-right: 0;
 }
-tr th {
-	text-align: right;
+html .mceContentBody img.alignright {
+	margin: 0 7px 2px 0;
 }
-td {
-	padding: 6px 0 6px 10px;
-	text-align: right;
+html .mceContentBody img.alignleft {
+	margin: 0 0 2px 7px;
 }
-.wp-caption {
-	text-align: right;
+dd.wp-caption p.wp-caption-text,
+.wp-caption p.wp-caption-text {
+	padding: 0 0 5px 4px;
+}
+html .mceContentBody ul,
+html .mceContentBody ol,
+html .mceContentBody dl {
+	margin: 0 1.5em 18px 0;
+}
+
+html .mceContentBody table th:first {
+	border-left: 1px solid #eaeaea;
+	border-right: 0;
+}
+html .mceContentBody table tr td.label {
+	border-left: 1px solid #eaeaea;
+	border-right: 0;
 }

@@ -1,63 +1,64 @@
-<?php
-/**
- * The template for displaying Archive pages.
- *
- * Used to display archive-type pages if nothing more specific matches a query.
- * For example, puts together date-based pages if no date.php file exists.
- *
- * If you'd like to further customize these archive views, you may create a
- * new template file for each specific one. For example, Twenty Twelve already
- * has tag.php for Tag archives, category.php for Category archives, and
- * author.php for Author archives.
- *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
- *
- * @package WordPress
- * @subpackage Twenty_Twelve
- * @since Twenty Twelve 1.0
- */
+<?php get_header(); ?>
 
-get_header(); ?>
+	<div id="content">
+		<div class="padder">
 
-	<section id="primary" class="site-content">
-		<div id="content" role="main">
+		<?php do_action( 'bp_before_archive' ); ?>
 
-		<?php if ( have_posts() ) : ?>
-			<header class="archive-header">
-				<h1 class="archive-title"><?php
-					if ( is_day() ) :
-						printf( __( 'Daily Archives: %s', 'twentytwelve' ), '<span>' . get_the_date() . '</span>' );
-					elseif ( is_month() ) :
-						printf( __( 'Monthly Archives: %s', 'twentytwelve' ), '<span>' . get_the_date( _x( 'F Y', 'monthly archives date format', 'twentytwelve' ) ) . '</span>' );
-					elseif ( is_year() ) :
-						printf( __( 'Yearly Archives: %s', 'twentytwelve' ), '<span>' . get_the_date( _x( 'Y', 'yearly archives date format', 'twentytwelve' ) ) . '</span>' );
-					else :
-						_e( 'Archives', 'twentytwelve' );
-					endif;
-				?></h1>
-			</header><!-- .archive-header -->
+		<div class="page" id="blog-archives" role="main">
 
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) : the_post();
+			<h3 class="pagetitle"><?php printf( __( 'You are browsing the archive for %1$s.', 'buddypress' ), wp_title( false, false ) ); ?></h3>
 
-				/* Include the post format-specific template for the content. If you want to
-				 * this in a child theme then include a file called called content-___.php
-				 * (where ___ is the post format) and that will be used instead.
-				 */
-				get_template_part( 'content', get_post_format() );
+			<?php if ( have_posts() ) : ?>
 
-			endwhile;
+				<?php bp_dtheme_content_nav( 'nav-above' ); ?>
 
-			twentytwelve_content_nav( 'nav-below' );
-			?>
+				<?php while (have_posts()) : the_post(); ?>
 
-		<?php else : ?>
-			<?php get_template_part( 'content', 'none' ); ?>
-		<?php endif; ?>
+					<?php do_action( 'bp_before_blog_post' ); ?>
 
-		</div><!-- #content -->
-	</section><!-- #primary -->
+					<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-<?php get_sidebar(); ?>
+						<div class="author-box">
+							<?php echo get_avatar( get_the_author_meta( 'user_email' ), '50' ); ?>
+							<p><?php printf( _x( 'by %s', 'Post written by...', 'buddypress' ), bp_core_get_userlink( $post->post_author ) ); ?></p>
+						</div>
+
+						<div class="post-content">
+							<h2 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+
+							<p class="date"><?php printf( __( '%1$s <span>in %2$s</span>', 'buddypress' ), get_the_date(), get_the_category_list( ', ' ) ); ?></p>
+
+							<div class="entry">
+								<?php the_content( __( 'Read the rest of this entry &rarr;', 'buddypress' ) ); ?>
+								<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
+							</div>
+
+							<p class="postmetadata"><?php the_tags( '<span class="tags">' . __( 'Tags: ', 'buddypress' ), ', ', '</span>' ); ?> <span class="comments"><?php comments_popup_link( __( 'No Comments &#187;', 'buddypress' ), __( '1 Comment &#187;', 'buddypress' ), __( '% Comments &#187;', 'buddypress' ) ); ?></span></p>
+						</div>
+
+					</div>
+
+					<?php do_action( 'bp_after_blog_post' ); ?>
+
+				<?php endwhile; ?>
+
+				<?php bp_dtheme_content_nav( 'nav-below' ); ?>
+
+			<?php else : ?>
+
+				<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
+				<?php get_search_form(); ?>
+
+			<?php endif; ?>
+
+		</div>
+
+		<?php do_action( 'bp_after_archive' ); ?>
+
+		</div><!-- .padder -->
+	</div><!-- #content -->
+
+	<?php get_sidebar(); ?>
+
 <?php get_footer(); ?>

@@ -1,60 +1,78 @@
 <?php
-/**
- * The template for displaying Comments.
- *
- * The area of the page that contains both current comments
- * and the comment form. The actual display of comments is
- * handled by a callback to twentytwelve_comment() which is
- * located in the functions.php file.
- *
- * @package WordPress
- * @subpackage Twenty_Twelve
- * @since Twenty Twelve 1.0
- */
+	if ( post_password_required() ) {
+		echo '<h3 class="comments-header">' . __( 'Password Protected', 'buddypress' ) . '</h3>';
+		echo '<p class="alert password-protected">' . __( 'Enter the password to view comments.', 'buddypress' ) . '</p>';
+		return;
+	}
 
-/*
- * If the current post is protected by a password and
- * the visitor has not yet entered the password we will
- * return early without loading the comments.
- */
-if ( post_password_required() )
-	return;
+	if ( is_page() && !have_comments() && !comments_open() && !pings_open() )
+		return;
+
+	if ( have_comments() ) :
+		$num_comments = 0;
+		$num_trackbacks = 0;
+		foreach ( (array) $comments as $comment ) {
+			if ( 'comment' != get_comment_type() )
+				$num_trackbacks++;
+			else
+				$num_comments++;
+		}
 ?>
+	<div id="comments">
 
-<div id="comments" class="comments-area">
+		<h3>
+			<?php printf( _n( '1 response to %2$s', '%1$s responses to %2$s', $num_comments, 'buddypress' ), number_format_i18n( $num_comments ), '<em>' . get_the_title() . '</em>' ); ?>
+		</h3>
 
-	<?php // You can start editing here -- including this comment! ?>
-
-	<?php if ( have_comments() ) : ?>
-		<h2 class="comments-title">
-			<?php
-				printf( _n( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'twentytwelve' ),
-					number_format_i18n( get_comments_number() ), '<span>' . get_the_title() . '</span>' );
-			?>
-		</h2>
+		<?php do_action( 'bp_before_blog_comment_list' ); ?>
 
 		<ol class="commentlist">
-			<?php wp_list_comments( array( 'callback' => 'twentytwelve_comment', 'style' => 'ol' ) ); ?>
-		</ol><!-- .commentlist -->
+			<?php wp_list_comments( array( 'callback' => 'bp_dtheme_blog_comments', 'type' => 'comment' ) ); ?>
+		</ol><!-- .comment-list -->
 
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-		<nav id="comment-nav-below" class="navigation" role="navigation">
-			<h1 class="assistive-text section-heading"><?php _e( 'Comment navigation', 'twentytwelve' ); ?></h1>
-			<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'twentytwelve' ) ); ?></div>
-			<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'twentytwelve' ) ); ?></div>
-		</nav>
-		<?php endif; // check for comment navigation ?>
+		<?php do_action( 'bp_after_blog_comment_list' ); ?>
 
-		<?php
-		/* If there are no comments and comments are closed, let's leave a note.
-		 * But we only want the note on posts and pages that had comments in the first place.
-		 */
-		if ( ! comments_open() && get_comments_number() ) : ?>
-		<p class="nocomments"><?php _e( 'Comments are closed.' , 'twentytwelve' ); ?></p>
+		<?php if ( get_option( 'page_comments' ) ) : ?>
+			<div class="comment-navigation paged-navigation">
+				<?php paginate_comments_links(); ?>
+			</div>
 		<?php endif; ?>
 
-	<?php endif; // have_comments() ?>
+	</div><!-- #comments -->
+<?php else : ?>
 
+	<?php if ( pings_open() && !comments_open() && ( is_single() || is_page() ) ) : ?>
+		<p class="comments-closed pings-open">
+			<?php printf( __( 'Comments are closed, but <a href="%1$s" title="Trackback URL for this post">trackbacks</a> and pingbacks are open.', 'buddypress' ), trackback_url( '0' ) ); ?>
+		</p>
+	<?php elseif ( !comments_open() && ( is_single() || is_page() ) ) : ?>
+		<p class="comments-closed">
+			<?php _e( 'Comments are closed.', 'buddypress' ); ?>
+		</p>
+	<?php endif; ?>
+
+<?php endif; ?>
+
+<?php if ( comments_open() ) : ?>
 	<?php comment_form(); ?>
+<?php endif; ?>
 
-</div><!-- #comments .comments-area -->
+<?php if ( !empty( $num_trackbacks ) ) : ?>
+	<div id="trackbacks">
+		<h3><?php printf( _n( '1 trackback', '%d trackbacks', $num_trackbacks, 'buddypress' ), number_format_i18n( $num_trackbacks ) ); ?></h3>
+
+		<ul id="trackbacklist">
+			<?php foreach ( (array) $comments as $comment ) : ?>
+
+				<?php if ( 'comment' != get_comment_type() ) : ?>
+					<li>
+						<h5><?php comment_author_link(); ?></h5>
+						<em>on <?php comment_date(); ?></em>
+					</li>
+ 				<?php endif; ?>
+
+			<?php endforeach; ?>
+		</ul>
+
+	</div>
+<?php endif; ?>
