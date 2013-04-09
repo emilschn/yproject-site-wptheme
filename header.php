@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
-		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?><meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
+		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
 		<title><?php wp_title( '|', true, 'right' ); bloginfo( 'name' ); ?></title>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
@@ -39,7 +40,11 @@
 			</div><!-- #search-bar -->
 
 			<div id="navigation" role="navigation">
-				<?php wp_nav_menu( array( 'container' => false, 'menu_id' => 'nav', 'theme_location' => 'primary', 'fallback_cb' => 'bp_dtheme_main_nav' ) ); ?>
+				<?php wp_nav_menu( array( 'container' => false, 
+				                          'menu_id' => 'nav', 
+										  'theme_location' => 'primary', 
+										  'fallback_cb' => 'bp_dtheme_main_nav' ) ); 
+				?>
 			</div>
 
 			<?php do_action( 'bp_header' ); ?>
