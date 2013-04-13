@@ -789,7 +789,6 @@ function bp_dtheme_remove_nojs_body_class() {
 add_action( 'bp_before_header', 'bp_dtheme_remove_nojs_body_class' );
 
 ?>
-
 <?php
 add_action( 'init', 'register_my_menu' );
  
@@ -797,4 +796,3 @@ function register_my_menu() {
   register_nav_menu( 'primary-menu', __( 'Primary Menu' ) );
 }
 ?>
-
