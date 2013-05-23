@@ -18,26 +18,24 @@
 		<?php do_action( 'bp_before_header' ); ?>
 
 		<div id="header">
-			<div id="search-bar" role="search">
-				<div class="padder">
-					<h1 id="logo" role="banner"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><?php bp_site_name(); ?></a></h1>
-
-						<form action="<?php echo bp_search_form_action(); ?>" method="post" id="search-form">
-							<label for="search-terms" class="accessibly-hidden"><?php _e( 'Search for:', 'buddypress' ); ?></label>
-							<input type="text" id="search-terms" name="search-terms" value="<?php echo isset( $_REQUEST['s'] ) ? esc_attr( $_REQUEST['s'] ) : ''; ?>" />
-
-							<?php echo bp_search_form_type_select(); ?>
-
-							<input type="submit" name="search-submit" id="search-submit" value="<?php _e( 'Search', 'buddypress' ); ?>" />
-
-							<?php wp_nonce_field( 'bp_search_form' ); ?>
-
-						</form><!-- #search-form -->
-
-				<?php do_action( 'bp_search_login_bar' ); ?>
-
-				</div><!-- .padder -->
-			</div><!-- #search-bar -->
+			<div class="padder">
+				<h1 id="logo" role="banner"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><?php bp_site_name(); ?></a></h1>
+				<br />
+				<div id="header_links">
+				    <?php 
+					$page_projects = get_page_by_title('Projets');
+					$page_help = get_page_by_title('Aide');
+					$page_submit_project = get_page_by_title('Proposer un projet');
+					$page_community = get_page_by_title('Communauté');
+				    ?>
+				    <a href="<?php echo home_url(); ?>">Accueil</a>
+				    <a href="<?php echo get_page_link($page_projects->ID); ?>">Découvrir les projets</a>
+				    <a href="<?php echo get_page_link($page_help->ID); ?>">Aide</a>
+				    <a href="<?php echo get_page_link($page_submit_project->ID); ?>">Proposer un projet</a>
+				    <a href="<?php echo get_page_link($page_community->ID); ?>">Communauté</a>
+				    
+				</div>
+			</div><!-- .padder -->
 
 			<div id="navigation" role="navigation">
 				<?php wp_nav_menu( array( 'container' => false, 
