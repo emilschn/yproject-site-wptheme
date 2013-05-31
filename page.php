@@ -1,5 +1,12 @@
 <?php get_header(); ?>
 
+<?php
+    wp_reset_query();
+    if (is_home() or is_front_page()) {
+	require_once(get_template_directory() . "/page-home.php");
+    } else {
+?>
+
 	<div id="content">
 		<div class="padder">
 
@@ -34,5 +41,8 @@
 	</div><!-- #content -->
 
 	<?php get_sidebar(); ?>
+<?php
+    }
+?>
 
 <?php get_footer(); ?>
