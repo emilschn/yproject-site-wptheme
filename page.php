@@ -3,7 +3,7 @@
 <?php
     wp_reset_query();
     if (is_home() or is_front_page()) {
-	require_once(get_template_directory() . "/page-home.php");
+	require_once("page-home.php");
     } else {
 ?>
 
