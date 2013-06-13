@@ -1,3 +1,18 @@
+<?php 
+    /* Récupération des infos Facebook */
+    require_once("_external/facebook/facebook.php");
+    $facebook = new Facebook(array(
+	'appId'  => '370169356424813',
+	'secret' => 'e1f7ee659011a09c8765cf379719104f',
+    ));
+    $fb_infos = $facebook->api('http://graph.facebook.com/381460615282040'); 
+    /* Récupération des infos Twitter */
+    $url = "http://twitter.com/users/show/yproject_co";
+    $response = file_get_contents ( $url );
+    $t_profile = new SimpleXMLElement ( $response );
+    $twitter_infos = $t_profile->followers_count;
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<head profile="http://gmpg.org/xfn/11">
@@ -11,7 +26,8 @@
 
 		<?php do_action( 'bp_head' ); ?>
 		<?php wp_head(); ?>
-
+		
+		<script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo get_stylesheet_directory_uri(); ?>/_inc/js/common.js"></script>
 	</head>
 
 	<body <?php body_class(); ?> id="bp-default">
@@ -21,17 +37,28 @@
 		<nav id="navigation" role="navigation">
 		    <div class="center">
 			<ul id="nav">
-			    <li class="page_item"><a href=""><img src="" width="16" height="16" /></a></li>
+			    <li class="page_item"><a href=""><img src="" width="32" height="16" /></a></li>
 			    <li class="page_item"><a href="">DECOUVRIR LES PROJETS</a></li>
-			    <li class="page_item"><a href="">COMMENT ÇA MARCHE ?</a></li>
 			    <li class="page_item"><a href="">PROPOSER UN PROJET</a></li>
 			    <li class="page_item"><a href="">COMMUNAUTE</a></li>
-			    <li class="page_item"><a href="">CONNEXION</a></li>
-			    <li class="page_item"><a href=""><img src="" width="16" height="16" /></a></li>
-			    <li class="page_item_last"><a href=""><img src="" width="16" height="16" /></a></li>
+			    <li class="page_item_out"><a href="">COMMENT ÇA MARCHE ?</a></li>
+			    <li class="page_item_out page_item_inverted" id="menu_item_connection"><a class="page_item_inverted" href="">CONNEXION</a></li>
+			    <li class="page_item_out" id="menu_item_facebook"><a href=""><img src="" width="16" height="16" /></a></li>
+			    <li class="page_item_out" id="menu_item_twitter"><a href=""><img src="" width="16" height="16" /></a></li>
 			</ul>
 		    </div>
 		</nav>
+		<div id="connection_form">
+		    <a href="">CONNEXION</a><br />
+		    <a href="">FACEBOOK</a><br />
+		    <a href="">S'INSCRIRE</a><br />
+		</div>
+		<div id="fb_infos">
+		    <?php echo $fb_infos['likes']; ?>
+		</div>
+		<div id="twitter_infos">
+		    <?php echo $twitter_infos; ?>
+		</div>
 	    
 		<header>
 		    <div id="site_name" class="center">

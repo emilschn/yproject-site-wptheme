@@ -12,6 +12,27 @@
  * This file intentionally left blank. CSS is enqueued in functions.php
  *
  */
+/* FONTS TO LOAD */
+@font-face {
+    font-family: 'DINPro-Light';
+    src: url('fonts/DINPro-Light.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'DINPro-Medium';
+    src: url('fonts/DINPro-Medium.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: 'DINPro-Black';
+    src: url('fonts/DINPro-Black.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+ 
 body {
     background-color: #FFF;
     color: #000;
@@ -27,13 +48,15 @@ body {
 /* NAV */
 #navigation {
     background-color: #333333;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
  
 #nav {
     list-style: none;
     display: block;
     height: 32px;
-    padding-top: 5px;
     font-size: 9pt;
     text-transform: uppercase;
     -webkit-padding-start: 0px;
@@ -44,9 +67,18 @@ body {
     margin-left: 5px;
     float: left;
     border-right: 1px solid #FFF;
+    font-family: DINPro-Light;
+    padding-bottom: 2px; 
 }
-.page_item_last {
+.page_item_out {
     border-right: none !important;
+}
+.page_item_inverted {
+    background-color: #FFF !important;
+    color: #333333 !important;
+    margin-top: -13px !important;
+    padding-top: 16px !important;
+    padding-bottom: 7px !important; 
 }
 #nav li li {
     background-color: #333333;
@@ -121,6 +153,27 @@ body {
 #nav .sfhover ul li a,
 #nav :hover ul li a {
     padding: 5px 5px 5px 10px;
+}
+
+#connection_form {
+    position: absolute;
+    display: none;
+    border: 1px solid #000;
+    background-color: #FFF;
+}
+
+#fb_infos {
+    position: absolute;
+    display: none;
+    border: 1px solid #000;
+    background-color: #FFF;
+}
+
+#twitter_infos {
+    position: absolute;
+    display: none;
+    border: 1px solid #000;
+    background-color: #FFF;
 }
 /* FIN NAV */
 
