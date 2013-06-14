@@ -38,20 +38,20 @@
 		    <div class="center">
 			<ul id="nav">
 			    <li class="page_item"><a href=""><img src="" width="32" height="16" /></a></li>
-			    <li class="page_item"><a href="">DECOUVRIR LES PROJETS</a></li>
-			    <li class="page_item"><a href="">PROPOSER UN PROJET</a></li>
-			    <li class="page_item"><a href="">COMMUNAUTE</a></li>
-			    <li class="page_item_out"><a href="">COMMENT ÇA MARCHE ?</a></li>
-			    <li class="page_item_out page_item_inverted" id="menu_item_connection"><a class="page_item_inverted" href="">CONNEXION</a></li>
+			    <li class="page_item"><a href=""><?php echo __('DECOUVRIR LES PROJETS', 'yproject'); ?></a></li>
+			    <li class="page_item"><a href=""><?php echo __('PROPOSER UN PROJET', 'yproject'); ?></a></li>
+			    <li class="page_item"><a href=""><?php echo __('COMMUNAUTE', 'yproject'); ?></a></li>
+			    <li class="page_item_out"><a href=""><?php echo __('COMMENT CA MARCHE ?', 'yproject'); ?></a></li>
+			    <li class="page_item_out page_item_inverted" id="menu_item_connection"><a class="page_item_inverted" href=""><?php echo __('CONNEXION', 'yproject'); ?></a></li>
 			    <li class="page_item_out" id="menu_item_facebook"><a href=""><img src="" width="16" height="16" /></a></li>
 			    <li class="page_item_out" id="menu_item_twitter"><a href=""><img src="" width="16" height="16" /></a></li>
 			</ul>
 		    </div>
 		</nav>
 		<div id="connection_form">
-		    <a href="">CONNEXION</a><br />
-		    <a href="">FACEBOOK</a><br />
-		    <a href="">S'INSCRIRE</a><br />
+		    <a href=""><?php echo __('CONNEXION', 'yproject'); ?></a><br />
+		    <a href=""><?php echo __('FACEBOOK', 'yproject'); ?></a><br />
+		    <a href=""><?php echo __('SINSCRIRE', 'yproject'); ?></a><br />
 		</div>
 		<div id="fb_infos">
 		    <?php echo $fb_infos['likes']; ?>

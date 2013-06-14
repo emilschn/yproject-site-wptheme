@@ -16,7 +16,7 @@
 				<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/">
 					<img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/fr/88x31.png" />
 				</a><br />
-				Cette œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/">Licence Creative Commons Attribution -  Partage dans les Mêmes Conditions 3.0 France</a>.
+				<?php echo __('CREATIVE COMMONS PART 1', 'yproject'); ?><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/"><?php echo __('CREATIVE COMMONS PART 2', 'yproject'); ?></a>.
 				
 			</div>
 

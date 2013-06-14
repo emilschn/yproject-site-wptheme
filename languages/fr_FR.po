@@ -1,0 +1,45 @@
+# Copyright (C) 2013 the WordPress team
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Y Project 0.1\n"
+"Report-Msgid-Bugs-To: https://code.google.com/p/yproject-site-wptheme\n"
+"POT-Creation-Date: 2013-05-01 00:19:44+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-06-14 14:42+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.5.5\n"
+
+# Header - menu
+msgid "DECOUVRIR LES PROJETS"
+msgstr "D&Eacute;COUVRIR LES PROJETS"
+
+msgid "PROPOSER UN PROJET"
+msgstr "PROPOSER UN PROJET"
+
+msgid "COMMUNAUTE"
+msgstr "COMMUNAUT&Eacute;"
+
+msgid "COMMENT CA MARCHE ?"
+msgstr "COMMENT &Ccedil;A MARCHE ?"
+
+msgid "CONNEXION"
+msgstr "CONNEXION"
+
+msgid "FACEBOOK"
+msgstr "FACEBOOK"
+
+msgid "SINSCRIRE"
+msgstr "S'INSCRIRE"
+
+# Footer - Creative Commons
+msgid "CREATIVE COMMONS PART 1"
+msgstr "Cette &oelig;uvre est mise à disposition selon les termes de la "
+
+msgid "CREATIVE COMMONS PART 2"
+msgstr ""
+"Licence Creative Commons Attribution -  Partage dans les M&ecirc;mes "
+"Conditions 3.0 France"
