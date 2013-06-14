@@ -12,7 +12,20 @@ msgstr ""
 "Last-Translator: JOHN DOE <john.doe@address.com>\n"
 "Language-Team: FRENCH <LL@li.org>\n"
 
-# Header - menu
+# single.php - Page projet
+msgid "Suivre le blog"
+msgstr "Suivre le blog"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "Jy crois"
+msgstr "J'y crois"
+
+# header.php - menu
 msgid "DECOUVRIR LES PROJETS"
 msgstr "D&Eacute;COUVRIR LES PROJETS"
 
@@ -34,9 +47,9 @@ msgstr "FACEBOOK"
 msgid "SINSCRIRE"
 msgstr "S'INSCRIRE"
 
-# Footer - Creative Commons
+# footer.php - Creative Commons
 msgid "CREATIVE COMMONS PART 1"
 msgstr "Cette &oelig;uvre est mise à disposition selon les termes de la "
 
 msgid "CREATIVE COMMONS PART 2"
-msgstr "Licence Creative Commons Attribution -  Partage dans les M&ecirc;mes Conditions 3.0 France"
+msgstr "Licence Creative Commons Attribution - Partage dans les M&ecirc;mes Conditions 3.0 France"
