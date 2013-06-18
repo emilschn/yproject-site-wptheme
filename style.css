@@ -45,6 +45,97 @@ body {
     margin: auto;
 }
 
+/* PROJECT PREVIEW */
+.projects_preview {
+    font-family: DINPro-Light;
+}
+
+.projects_preview h1 {
+    -webkit-margin-before: 5px !important;
+    -webkit-margin-after: 10px !important;
+    font-size: 30pt;
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+
+#projects_vote {
+    float: left;
+    color: #000;
+    background-color: #EEEEEE;
+}
+
+#projects_vote h1 {
+    text-align: center;
+}
+
+#projects_current {
+    float: left;
+    color: #29ABBA;
+    background-color: #FFFFFF;
+}
+
+.project_preview_item {
+    float: left;
+    width: 200px;
+    font-size: 9pt;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.project_preview_item h2 {
+    font-size: 11pt;
+    text-transform: uppercase;
+}
+
+.project_preview_item_desc {
+    font-family: DINPro-Medium;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: #000;
+}
+
+.project_preview_item_pictos {
+    width: 100%;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.project_preview_item_picto {
+    float: left;
+    width: 45px;
+}
+
+.project_preview_item_votebtn {
+    border-radius: 50%;
+    background-color: #000;
+    width: 100px;
+    height: 100px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    
+    padding-top: 30px;
+    margin-top: 10px;
+    margin-left: 50px;
+    
+    color: #FFF;
+    font-size: 8pt;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#projects_current .project_preview_item_votebtn {
+    background-color: #29ABBA;
+}
+
+/* FIN PROJECT PREVIEW */
+
+/* HOME */
+.padder {
+    margin-top: 20px;
+}
+/* FIN HOME */
+
 /* NAV */
 #navigation {
     background-color: #333333;

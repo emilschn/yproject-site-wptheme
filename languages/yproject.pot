@@ -12,6 +12,25 @@ msgstr ""
 "Last-Translator: JOHN DOE <john.doe@address.com>\n"
 "Language-Team: FRENCH <LL@li.org>\n"
 
+# page-home.php - Page d'accueil
+msgid "Votez !"
+msgstr "Votez !"
+
+msgid "Les projets en cours"
+msgstr "Les projets en cours"
+
+msgid "voter"
+msgstr "voter"
+
+msgid "pour ce projet"
+msgstr "pour ce projet"
+
+msgid "en savoir"
+msgstr "en savoir"
+
+msgid "plus"
+msgstr "plus"
+
 # single.php - Page projet
 msgid "Suivre le blog"
 msgstr "Suivre le blog"
