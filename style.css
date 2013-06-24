@@ -214,7 +214,8 @@ body {
     list-style: none;
     display: block;
     top: 100%;
-    width: 128px;
+    width: 150px;
+    padding-left: 0px !important;
 }
 #nav .sfhover ul li > a,
 #nav :hover ul li > a {
@@ -226,8 +227,9 @@ body {
 #nav :hover ul :hover > ul {
     left: 125px;
     top: -1px;
-    width: 128px;
+    width: 150px;
     display: block;
+    padding-left: 0px !important;
 }
 #nav ul li.sfhover > a,
 #nav ul li:hover > a {
@@ -239,18 +241,12 @@ body {
 #nav :hover ul li {
     min-height: 30px;
     line-height: 20px;
-    width: 128px;
+    width: 150px;
+    padding-left: 0px !important;
 }
 #nav .sfhover ul li a,
 #nav :hover ul li a {
     padding: 5px 5px 5px 10px;
-}
-
-#connection_form {
-    position: absolute;
-    display: none;
-    border: 1px solid #000;
-    background-color: #FFF;
 }
 
 #fb_infos {
@@ -292,5 +288,47 @@ header {
 /* FOOTER */
 footer {
     background-color: #13AED4;
+}
+
+footer div.widget-area {
+    padding-top: 10px;
+    float: left;
+    width: 310px;
+    
+    font-family: DINPro-Light;
+    color: #FFF;
+    font-size: 8pt;
+}
+
+footer div#first {
+    margin-left: 20px;
+}
+
+footer ul.xoxo {
+    list-style: none;
+    padding-left: 0px !important;
+    margin-top: 0px !important;
+}
+
+footer ul.menu {
+    padding-left: 0px !important;
+}
+
+footer li.menu-item {
+    list-style: none;
+}
+
+footer h1 {
+    font-family: DINPro-Light;
+    color: #FFF;
+    font-size: 8pt;
+    text-transform: uppercase;
+}
+
+footer a {
+    font-family: DINPro-Light;
+    color: #FFF;
+    font-size: 8pt;
+    text-decoration: none;
 }
 /* FIN FOOTER */

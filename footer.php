@@ -6,9 +6,7 @@
 		<footer>
 		    <div class="center">
 			<?php if ( is_active_sidebar( 'first-footer-widget-area' ) || is_active_sidebar( 'second-footer-widget-area' ) || is_active_sidebar( 'third-footer-widget-area' ) || is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>
-				<div id="footer-widgets">
-					<?php get_sidebar( 'footer' ); ?>
-				</div>
+				<?php get_sidebar( 'footer' ); ?>
 			<?php endif; ?>
 
 			<div id="site-generator" role="contentinfo" style="padding:20px; text-align:center; color: white; font-size:12px">

@@ -1,4 +1,7 @@
 <?php 
+    global $facebook_infos;
+    global $twitter_infos;
+    
     /* Récupération des infos Facebook */
     require_once("_external/facebook/facebook.php");
     $facebook = new Facebook(array(
@@ -6,6 +9,7 @@
 	'secret' => 'e1f7ee659011a09c8765cf379719104f',
     ));
     $fb_infos = $facebook->api('http://graph.facebook.com/381460615282040'); 
+    $facebook_infos = $fb_infos['likes'];
     /* Récupération des infos Twitter */
     $url = "http://twitter.com/users/show/yproject_co";
     $response = file_get_contents ( $url );
@@ -38,23 +42,38 @@
 		    <div class="center">
 			<ul id="nav">
 			    <li class="page_item"><a href=""><img src="" width="32" height="16" /></a></li>
-			    <li class="page_item"><a href=""><?php echo __('DECOUVRIR LES PROJETS', 'yproject'); ?></a></li>
-			    <li class="page_item"><a href=""><?php echo __('PROPOSER UN PROJET', 'yproject'); ?></a></li>
-			    <li class="page_item"><a href=""><?php echo __('COMMUNAUTE', 'yproject'); ?></a></li>
-			    <li class="page_item_out"><a href=""><?php echo __('COMMENT CA MARCHE ?', 'yproject'); ?></a></li>
-			    <li class="page_item_out page_item_inverted" id="menu_item_connection"><a class="page_item_inverted" href=""><?php echo __('CONNEXION', 'yproject'); ?></a></li>
-			    <li class="page_item_out" id="menu_item_facebook"><a href=""><img src="" width="16" height="16" /></a></li>
-			    <li class="page_item_out" id="menu_item_twitter"><a href=""><img src="" width="16" height="16" /></a></li>
+			    <li class="page_item">
+				<a href=""><?php echo __('Decouvrir les projets', 'yproject'); ?></a>
+				<ul>
+				    <li class="page_item_out"><a href="#">CAT1</a></li>
+				    <li class="page_item_out"><a href="#">CAT2</a></li>
+				</ul>
+			    </li>
+			    <li class="page_item"><a href=""><?php echo __('Proposer un projet', 'yproject'); ?></a></li>
+			    <li class="page_item"><a href=""><?php echo __('Comment ca marche ?', 'yproject'); ?></a></li>
+			    <li class="page_item_out">
+				<a href=""><?php echo __('Communaute', 'yproject'); ?></a>
+				<ul>
+				    <li class="page_item_out"><a href="#"><?php echo __('Fil dactivite', 'yproject'); ?></a></li>
+				    <li class="page_item_out"><a href="#"><?php echo __('Qui sommes-nous ?', 'yproject'); ?></a></li>
+				    <li class="page_item_out"><a href="#"><?php echo __('Blog', 'yproject'); ?></a></li>
+				</ul>
+			    </li>
+			    <li class="page_item_out" id="menu_item_facebook"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank" title="Notre page Facebook"><img src="" width="16" height="16" /></a></li>
+			    <li class="page_item_out" id="menu_item_twitter"><a href="https://twitter.com/yproject_co" target="_blank" title="Notre compte Twitter"><img src="" width="16" height="16" /></a></li>
+			    <li class="page_item_out page_item_inverted" id="menu_item_connection">
+				<a class="page_item_inverted" href=""><?php echo __('Connexion', 'yproject'); ?></a>
+				<ul>
+				    <li class="page_item_out"><a href=""><?php echo __('CONNEXION', 'yproject'); ?></a></li>
+				    <li class="page_item_out"><a href=""><?php echo __('FACEBOOK', 'yproject'); ?></a></li>
+				    <li class="page_item_out"><a href=""><?php echo __('Sinscrire', 'yproject'); ?></a></li>
+				</ul>
+			    </li>
 			</ul>
 		    </div>
 		</nav>
-		<div id="connection_form">
-		    <a href=""><?php echo __('CONNEXION', 'yproject'); ?></a><br />
-		    <a href=""><?php echo __('FACEBOOK', 'yproject'); ?></a><br />
-		    <a href=""><?php echo __('SINSCRIRE', 'yproject'); ?></a><br />
-		</div>
 		<div id="fb_infos">
-		    <?php echo $fb_infos['likes']; ?>
+		    <?php echo $facebook_infos; ?>
 		</div>
 		<div id="twitter_infos">
 		    <?php echo $twitter_infos; ?>

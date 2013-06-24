@@ -45,28 +45,43 @@ msgid "Jy crois"
 msgstr "J'y crois"
 
 # header.php - menu
-msgid "DECOUVRIR LES PROJETS"
-msgstr "D&Eacute;COUVRIR LES PROJETS"
+msgid "Decouvrir les projets"
+msgstr "D&Eacute;couvrir les projets"
 
-msgid "PROPOSER UN PROJET"
-msgstr "PROPOSER UN PROJET"
+msgid "Proposer un projet"
+msgstr "Proposer un projet"
 
-msgid "COMMUNAUTE"
-msgstr "COMMUNAUT&Eacute;"
+msgid "Communaute"
+msgstr "Communaut&eacute;"
 
-msgid "COMMENT CA MARCHE ?"
-msgstr "COMMENT &Ccedil;A MARCHE ?"
+msgid "Comment ca marche ?"
+msgstr "Comment &ccedil;a marche ?"
 
-msgid "CONNEXION"
-msgstr "CONNEXION"
+msgid "Connexion"
+msgstr "Connexion"
 
 msgid "FACEBOOK"
 msgstr "FACEBOOK"
 
-msgid "SINSCRIRE"
-msgstr "S'INSCRIRE"
+msgid "Sinscrire"
+msgstr "S&apos;inscrire"
+
+msgid "Fil dactivite"
+msgstr "Fil d'activit&eacute;"
+
+msgid "Qui sommes-nous ?"
+msgstr "Qui sommes-nous ?"
+
+msgid "Blog"
+msgstr "Blog"
 
 # footer.php - Creative Commons
+msgid "Informations"
+msgstr "Informations"
+
+msgid "Questions"
+msgstr "Questions"
+
 msgid "CREATIVE COMMONS PART 1"
 msgstr "Cette &oelig;uvre est mise à disposition selon les termes de la "
 
