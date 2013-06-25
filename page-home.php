@@ -38,23 +38,6 @@
 		<?php 
 		    wp_reset_query();
 		    the_content();
-		    
-		    
-		    /*
-		     * 
-		<strong>Participer à un projet | Proposer un projet | Différenciations</strong><br />
-		TODO : Diviser en deux et inclure les pages
-		<?php 
-		    $page_show_proj = get_page_by_title('Projets'); 
-		    $page_input_proj = get_page_by_title('Proposer un projet');
-		    $page_how_it_works = get_page_by_title('Comment ça marche');
-		?>
-		<a href="<?php echo get_permalink($page_show_proj->ID); ?>">Lien vers participer à un projet</a> (<a href="<?php echo get_permalink($page_how_it_works->ID); ?>#everyone">Lien vers Comment participer à un projet ?</a>)<br />
-		<a href="<?php echo get_permalink($page_input_proj->ID); ?>">Lien vers proposer un projet</a> (<a href="<?php echo get_permalink($page_how_it_works->ID); ?>#newproject">Lien vers Comment proposer un projet ?</a>)<br />
-		Schéma de ce qui fait la particularité de notre plateforme<br /><br />
-		     * 
-		     * 
-		     */
 		?>
 	    </div>
 	</div>
@@ -89,7 +72,10 @@
 	    </ul>
 	    
 	    <strong>Ces projets ont réussi :</strong><br />
-	    <?php printPreviewProjectsFinished(4); ?>
+	    <div id="projects_finished">
+		<?php printPreviewProjectsFinished(4); ?>
+		<div style="clear: both"></div>
+	    </div>
 	    
 	    <?php
 	    /*

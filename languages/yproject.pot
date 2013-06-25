@@ -84,8 +84,11 @@ msgstr "Fil d'activit&eacute;"
 msgid "Qui sommes-nous ?"
 msgstr "Qui sommes-nous ?"
 
-msgid "Blog"
-msgstr "Blog"
+msgid "Welcome Text 1"
+msgstr "Bienvenue dans la communauté WE DO GOOD !"
+
+msgid "Welcome Text 2"
+msgstr "Nous agissons positivement et selon les moyens de chacun en soutenant des projets utiles. Nous croyons que la valeur doit être partagée entre les entrepreneurs, ceux qui investissent, l’environnement et la société. Nous faisons du financement participatif ou crowdfunding (mais pas que) où tout le monde peut investir. Participez de la manière qui vous convient, recevez-en les bénéfices, et ayez de l’impact !"
 
 # footer.php - Creative Commons
 msgid "Informations"

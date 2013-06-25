@@ -57,7 +57,6 @@ function printPreviewProjectsFinished($nb) {
 	    printProjectsPreview(false);
 	}
     endif;
-    
 }
 
 function printProjectsPreview($vote) {
@@ -71,7 +70,7 @@ function printSinglePreview($vote) {
     global $post;
     ?>
     <div class="project_preview_item">
-	<h2><?php the_title(); ?></h2>
+	<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 	
 	<img src="" width="100%" height="100" /><br />
 	
@@ -98,7 +97,8 @@ function printSinglePreview($vote) {
 	
 	
 	<?php 
-	$percent = $post->_edd_download_earnings / $post->campaign_goal * 100; 
+	if (isset($post->campaign_goal) && $post->campaign_goal > 0) $percent = floor($post->_edd_download_earnings / $post->campaign_goal * 100); 
+	else $percent = 0;
 	$width = 150 * $percent / 100;
 	?>
 	<div class="project_preview_item_progress">

@@ -46,6 +46,22 @@ body {
 }
 
 /* PROJECT PREVIEW */
+#projects_current {
+    float: left;
+    width: 661px;
+    color: #29ABBA;
+    background-color: #FFFFFF;
+}
+#projects_vote {
+    float: left;
+    width: 221px;
+    color: #000;
+    background-color: #EDEEEE;
+}
+#projects_finished {
+    color: #29ABBA;
+}
+
 .projects_preview {
     font-family: DINPro-Light;
 }
@@ -57,23 +73,8 @@ body {
     text-transform: uppercase;
     margin-left: 5px;
 }
-
-#projects_vote {
-    float: left;
-    width: 221px;
-    color: #000;
-    background-color: #EDEEEE;
-}
-
 #projects_vote h1 {
     text-align: center;
-}
-
-#projects_current {
-    float: left;
-    width: 661px;
-    color: #29ABBA;
-    background-color: #FFFFFF;
 }
 
 .project_preview_item {
@@ -88,6 +89,23 @@ body {
 .project_preview_item h2 {
     font-size: 11pt;
     text-transform: uppercase;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    width: 200px;
+    white-space: nowrap;
+}
+
+.project_preview_item h2 a {
+    text-decoration: none;
+}
+#projects_current .project_preview_item h2 a {
+    color: #29ABBA;
+}
+#projects_vote .project_preview_item h2 a {
+    color: #000;
+}
+#projects_finished .project_preview_item h2 a {
+    color: #29ABBA;
 }
 
 .project_preview_item_desc {
@@ -137,6 +155,13 @@ body {
     background-color: #29ABBA;
 }
 
+#projects_finished .project_preview_item_progressbg {
+    background-color: #EDEEEE;
+}
+#projects_finished .project_preview_item_progressbar {
+    background-color: #29ABBA;
+}
+
 .project_preview_item_progressprint {
     font-size: 11pt;
     padding-left: 7px;
@@ -167,6 +192,10 @@ body {
 
 #projects_vote .project_preview_item_btn {
     background-color: #000;
+}
+
+#projects_finished .project_preview_item_btn {
+    background-color: #29ABBA;
 }
 
 .project_preview_item_btn a {
@@ -360,9 +389,10 @@ header {
     background-color: #F4A90B;
     text-align: center;
 }
+
 #site_name {
-    height: 300px;
-    line-height: 300px;
+    padding-top: 90px;
+    height: 240px;
     vertical-align: middle;
     display: inline-block;
 }
@@ -370,8 +400,17 @@ header {
     color: #FFF;
     text-decoration: none;
 }
+
 #logo {
     text-align: center;
+}
+
+#welcome_text {
+    color: #FFF;
+    text-align: left;
+    padding-left: 200px;
+    width: 690px;
+    font-size: 13pt;
 }
 
 /* FIN HEADER */

@@ -82,7 +82,10 @@
 		<header>
 		    <div id="site_name" class="center">
 			    <h1 id="logo" role="banner"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><?php bp_site_name(); ?></a></h1>
-			    <br />
+			    <div id="welcome_text">
+				<?php echo __('Welcome Text 1', 'yproject'); ?><br /><br />
+				<?php echo __('Welcome Text 2', 'yproject'); ?>
+			    </div>
 		    </div>
 
 		    <?php do_action( 'bp_header' ); ?>
