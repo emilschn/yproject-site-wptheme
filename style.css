@@ -60,8 +60,9 @@ body {
 
 #projects_vote {
     float: left;
+    width: 221px;
     color: #000;
-    background-color: #EEEEEE;
+    background-color: #EDEEEE;
 }
 
 #projects_vote h1 {
@@ -70,6 +71,7 @@ body {
 
 #projects_current {
     float: left;
+    width: 661px;
     color: #29ABBA;
     background-color: #FFFFFF;
 }
@@ -93,12 +95,15 @@ body {
     margin-top: 3px;
     margin-bottom: 3px;
     color: #000;
+    height: 150px; 
 }
 
 .project_preview_item_pictos {
     width: 100%;
     text-align: center;
     margin-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .project_preview_item_picto {
@@ -106,7 +111,39 @@ body {
     width: 45px;
 }
 
-.project_preview_item_votebtn {
+.project_preview_item_progress {
+    height: 20px;
+}
+.project_preview_item_progressbg {
+    float: left;
+    width: 150px;
+}
+.project_preview_item_progressbar {
+    width: 0px;
+    height: 20px;
+}
+
+#projects_current .project_preview_item_progressbg {
+    background-color: #EDEEEE;
+}
+#projects_current .project_preview_item_progressbar {
+    background-color: #29ABBA;
+}
+
+#projects_vote .project_preview_item_progressbg {
+    background-color: #000;
+}
+#projects_vote .project_preview_item_progressbar {
+    background-color: #29ABBA;
+}
+
+.project_preview_item_progressprint {
+    font-size: 11pt;
+    padding-left: 7px;
+    font-weight: bold;
+}
+
+.project_preview_item_btn {
     border-radius: 50%;
     background-color: #000;
     width: 100px;
@@ -124,10 +161,64 @@ body {
     text-align: center;
 }
 
-#projects_current .project_preview_item_votebtn {
+#projects_current .project_preview_item_btn {
     background-color: #29ABBA;
 }
 
+#projects_vote .project_preview_item_btn {
+    background-color: #000;
+}
+
+.project_preview_item_btn a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+#home_middle {
+    margin: 30px 0px 10px 0px;
+}
+
+#home_middle_top {
+    background-color: #2B2B2B;
+    height: 120px;
+}
+
+#home_middle_content {
+    background-color: #EDEEEE;
+    padding: 100px 0px 30px 0px;
+}
+
+.round_title_left, .round_title_right {
+    border-radius: 50%;
+    background-color: #F6A117;
+    width: 180px;
+    height: 180px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    
+    padding-top: 70px;
+    
+    color: #FFF;
+    font-size: 14pt;
+    text-transform: uppercase;
+    text-align: center;
+    
+    float: left;
+}
+.round_title_left {
+    margin: 20px 80px 0px 170px;
+} 
+.round_title_right {
+    margin: 20px 170px 0px 80px;
+}
+
+div#home_bottom h1 {
+    color: #000;
+    text-align: center;
+    font-family: DINPro-Light;
+    text-transform: uppercase;
+    font-size: 35pt;
+}
 /* FIN PROJECT PREVIEW */
 
 /* HOME */

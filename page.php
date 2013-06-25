@@ -7,7 +7,7 @@
     } else {
 ?>
 
-	<div id="content">
+	<div id="content" class="center">
 		<div class="padder">
 
 		<?php do_action( 'bp_before_blog_page' ); ?>

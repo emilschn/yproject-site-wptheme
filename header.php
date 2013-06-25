@@ -91,4 +91,4 @@
 		<?php do_action( 'bp_after_header'     ); ?>
 		<?php do_action( 'bp_before_container' ); ?>
 
-		<div id="container" class="center">
+		<div id="container">

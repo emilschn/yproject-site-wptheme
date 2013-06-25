@@ -31,6 +31,18 @@ msgstr "en savoir"
 msgid "plus"
 msgstr "plus"
 
+msgid "Participez à un projet"
+msgstr "Participez à un projet"
+
+msgid "Proposez un projet"
+msgstr "Proposez un projet"
+
+msgid "Actualites"
+msgstr "Actualit&eacute;s"
+
+msgid "Trouvez les projets"
+msgstr "Trouvez les projets"
+
 # single.php - Page projet
 msgid "Suivre le blog"
 msgstr "Suivre le blog"
