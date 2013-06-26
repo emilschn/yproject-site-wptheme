@@ -41,34 +41,47 @@
 		<nav id="navigation" role="navigation">
 		    <div class="center">
 			<ul id="nav">
-			    <li class="page_item"><a href=""><img src="" width="32" height="16" /></a></li>
+			    <?php /* Logo Accueil */ ?>
+			    <li class="page_item"><a href="<?php echo home_url(); ?>"><img src="" width="32" height="16" /></a></li>
+			    <?php /* Menu Découvrir les projets */ $page_discover = get_page_by_path('projects'); ?>
 			    <li class="page_item">
-				<a href=""><?php echo __('Decouvrir les projets', 'yproject'); ?></a>
+				<a href="<?php echo get_permalink($page_discover->ID); ?>"><?php echo __('Decouvrir les projets', 'yproject'); ?></a>
 				<ul>
 				    <li class="page_item_out"><a href="#">CAT1</a></li>
 				    <li class="page_item_out"><a href="#">CAT2</a></li>
 				</ul>
 			    </li>
-			    <li class="page_item"><a href=""><?php echo __('Proposer un projet', 'yproject'); ?></a></li>
-			    <li class="page_item"><a href=""><?php echo __('Comment ca marche ?', 'yproject'); ?></a></li>
+			    <?php /* Menu Proposer un projet */ $page_start = get_page_by_path('proposer-un-projet'); ?>
+			    <li class="page_item"><a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Proposer un projet', 'yproject'); ?></a></li>
+			    <?php /* Menu Comment ça marche ? */ $page_how = get_page_by_path('descriptif'); ?>
+			    <li class="page_item"><a href="<?php echo get_permalink($page_how->ID); ?>"><?php echo __('Comment ca marche ?', 'yproject'); ?></a></li>
+			    <?php /* Menu Communauté */ $page_community = get_page_by_path('community'); ?>
 			    <li class="page_item_out">
-				<a href=""><?php echo __('Communaute', 'yproject'); ?></a>
+				<a href="<?php echo get_permalink($page_community->ID); ?>"><?php echo __('Communaute', 'yproject'); ?></a>
 				<ul>
-				    <li class="page_item_out"><a href="#"><?php echo __('Fil dactivite', 'yproject'); ?></a></li>
-				    <li class="page_item_out"><a href="#"><?php echo __('Qui sommes-nous ?', 'yproject'); ?></a></li>
-				    <li class="page_item_out"><a href="#"><?php echo __('Blog', 'yproject'); ?></a></li>
+				    <?php /* Sous-Menu Communauté */ $page_community_activity = get_page_by_path('activity'); $page_community_who = get_page_by_path('qui-sommes-nous'); $page_community_blog = get_page_by_path('blog'); ?>
+				    <li class="page_item_out"><a href="<?php echo get_permalink($page_community_activity->ID); ?>"><?php echo __('Fil dactivite', 'yproject'); ?></a></li>
+				    <li class="page_item_out"><a href="<?php echo get_permalink($page_community_who->ID); ?>"><?php echo __('Qui sommes-nous ?', 'yproject'); ?></a></li>
+				    <li class="page_item_out"><a href="<?php echo get_permalink($page_community_blog->ID); ?>"><?php echo __('Blog', 'yproject'); ?></a></li>
 				</ul>
 			    </li>
+			    <?php /* Logo FB / TW */ ?>
 			    <li class="page_item_out" id="menu_item_facebook"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank" title="Notre page Facebook"><img src="" width="16" height="16" /></a></li>
 			    <li class="page_item_out" id="menu_item_twitter"><a href="https://twitter.com/yproject_co" target="_blank" title="Notre compte Twitter"><img src="" width="16" height="16" /></a></li>
-			    <li class="page_item_out page_item_inverted" id="menu_item_connection">
-				<a class="page_item_inverted" href=""><?php echo __('Connexion', 'yproject'); ?></a>
+			    
+			    <?php if (is_user_logged_in()) : ?>
+			    <?php /* Menu Mon compte */ ?>
+			    <li class="page_item_out page_item_inverted">
+				<a class="page_item_inverted" href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a>
 				<ul>
-				    <li class="page_item_out"><a href=""><?php echo __('CONNEXION', 'yproject'); ?></a></li>
-				    <li class="page_item_out"><a href=""><?php echo __('FACEBOOK', 'yproject'); ?></a></li>
-				    <li class="page_item_out"><a href=""><?php echo __('Sinscrire', 'yproject'); ?></a></li>
+				    <?php /* Sous-Menu Mon compte */ $page_community_activity = get_page_by_path('activity'); $page_community_who = get_page_by_path('qui-sommes-nous'); $page_community_blog = get_page_by_path('blog'); ?>
+				    <li class="page_item_out"><a href="<?php echo wp_logout_url( wp_guess_url() ); ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
 				</ul>
 			    </li>
+			    <?php else : ?>
+			    <?php /* Menu Connexion */ $page_connexion = get_page_by_path('connexion'); ?>
+			    <li id="menu_item_connection" class="page_item_out page_item_inverted"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
+			    <?php endif; ?>
 			</ul>
 		    </div>
 		</nav>
@@ -78,13 +91,40 @@
 		<div id="twitter_infos">
 		    <?php echo $twitter_infos; ?>
 		</div>
+		<div id="submenu_item_connection">
+		    <?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
+		    <ul>
+			<li class="page_item_out">
+			    <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
+				<label><?php _e('Identifiant', 'yproject'); ?></label>
+				<input type="text" name="log" id="sidebar-user-login" class="input" value="<?php if ( isset( $user_login) ) echo esc_attr(stripslashes($user_login)); ?>" />
+				<br />
+
+				<label><?php _e('Mot de passe', 'yproject'); ?></label>
+				<input type="password" name="pwd" id="sidebar-user-pass" class="input" value="" />
+				<br />
+
+				<p class="forgetmenot">
+				    <input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" /> <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
+				    <input type="submit" name="wp-submit" id="sidebar-wp-submit" value="<?php _e('Connexion', 'yproject'); ?>" />
+				</p>
+				
+				<input type="hidden" name="testcookie" value="1" />
+			    </form>
+			    
+			    <div><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
+			    <br />
+			    <div><a href="<?php echo get_permalink($page_connexion_register->ID); ?>"><?php _e('Sinscrire', 'yproject'); ?></a></div>
+			</li>
+		    </ul>
+		</div>
 	    
 		<header>
 		    <div id="site_name" class="center">
 			    <h1 id="logo" role="banner"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><?php bp_site_name(); ?></a></h1>
 			    <div id="welcome_text">
-				<?php echo __('Welcome Text 1', 'yproject'); ?><br /><br />
-				<?php echo __('Welcome Text 2', 'yproject'); ?>
+				<?php _e('Welcome Text 1', 'yproject'); ?><br /><br />
+				<?php _e('Welcome Text 2', 'yproject'); ?>
 			    </div>
 		    </div>
 

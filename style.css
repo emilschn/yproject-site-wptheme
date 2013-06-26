@@ -284,6 +284,10 @@ div#home_bottom h1 {
 .page_item_out {
     border-right: none !important;
 }
+.page_item_out label {
+    color: #FFF;
+    text-transform: none;
+}
 .page_item_inverted {
     background-color: #FFF !important;
     color: #333333 !important;
@@ -381,6 +385,44 @@ div#home_bottom h1 {
     display: none;
     border: 1px solid #000;
     background-color: #FFF;
+}
+
+#submenu_item_connection {
+    position: absolute;
+    display: none;
+    background-color: #333333;
+    color: #DDDDDD;
+    border: 1px solid #000;
+}
+
+#submenu_item_connection label { 
+    font-family: DINPro-Light;
+    font-size: 9pt;
+    display: inline-block;
+    width: 100px;
+}
+#sidebar-user-login, #sidebar-user-pass { 
+    width: 120px;
+    font-family: DINPro-Light;
+    font-size: 9pt;
+}
+#submenu_item_connection ul {
+    padding-left: 5px !important;
+}
+#submenu_item_connection li {
+    list-style: none;
+    padding-left: 0px !important;
+    padding-bottom: 3px;
+}
+#submenu_item_connection div {
+    text-align: center;
+    color: #FFF;
+    font-family: DINPro-Light;
+    font-size: 11pt;
+}
+#submenu_item_connection a {
+    color: #FFF;
+    text-decoration: none;
 }
 /* FIN NAV */
 

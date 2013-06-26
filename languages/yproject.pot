@@ -69,11 +69,23 @@ msgstr "Communaut&eacute;"
 msgid "Comment ca marche ?"
 msgstr "Comment &ccedil;a marche ?"
 
+msgid "Mon compte"
+msgstr "Mon compte"
+
+msgid "Se deconnecter"
+msgstr "Se d&eacute;connecter"
+
 msgid "Connexion"
 msgstr "Connexion"
 
-msgid "FACEBOOK"
-msgstr "FACEBOOK"
+msgid "Identifiant"
+msgstr "Identifiant"
+
+msgid "Mot de passe"
+msgstr "Mot de passe"
+
+msgid "Se souvenir de moi"
+msgstr "Se souvenir de moi"
 
 msgid "Sinscrire"
 msgstr "S&apos;inscrire"
