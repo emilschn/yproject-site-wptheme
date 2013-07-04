@@ -1,3 +1,14 @@
+<header>
+    <div id="site_name" class="center">
+	    <h1 id="logo" role="banner"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><?php bp_site_name(); ?></a></h1>
+	    <div id="welcome_text">
+		<?php _e('Welcome Text 1', 'yproject'); ?><br /><br />
+		<?php _e('Welcome Text 2', 'yproject'); ?>
+	    </div>
+    </div>
+</header>
+
+
 <?php 
     date_default_timezone_set("Europe/Paris");
     require_once("common.php");

@@ -1,5 +1,11 @@
+<?php 
+    date_default_timezone_set("Europe/Paris");
+    require_once("common.php");
+?>
+
 <?php get_header(); ?>
 
+<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 	<div id="content">
 		<div class="padder">
 
@@ -7,53 +13,28 @@
 
 			<div class="page" id="blog-single" role="main">
 
-			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-					<div class="author-box">
-						<?php echo get_avatar( get_the_author_meta( 'user_email' ), '50' ); ?>
-						<p><?php printf( _x( 'by %s', 'Post written by...', 'buddypress' ), str_replace( '<a href=', '<a rel="author" href=', bp_core_get_userlink( $post->post_author ) ) ); ?></p>
+				    <div class="post-content">
+					<div class="entry">
+					    <?php printPageProject(); ?>
 					</div>
-
-					<div class="post-content">
-						<h2 class="posttitle"><?php the_title(); ?></h2>
-
-						<p class="date">
-							<?php printf( __( '%1$s <span>in %2$s</span>', 'buddypress' ), get_the_date(), get_the_category_list( ', ' ) ); ?>
-						</p>
-
-						<div class="entry">
-							<?php the_content( __( 'Read the rest of this entry &rarr;', 'buddypress' ) ); ?>
-						</div>
-
-						<p class="postmetadata"><?php the_tags( '<span class="tags">' . __( 'Tags: ', 'buddypress' ), ', ', '</span>' ); ?>&nbsp;</p>
-						
-						<div>
-						    <a href="#">[TODO: bouton "J'y crois"] <?php echo __('Jy crois', 'yproject'); ?></a>
-						</div>
-						<div>
-						    <a href="#">[TODO: bouton "Suivre le blog"] <?php echo __('Suivre le blog', 'yproject'); ?></a>
-						    <a href="#">[TODO: lien vers le blog du projet] <?php echo __('Blog', 'yproject'); ?></a>
-						</div>
-						<div>
-						    <a href="#">[TODO: lien vers le forum du projet] <?php echo __('Forum', 'yproject'); ?></a>
-						</div>
-					</div>
-
+				    </div>
 				</div>
 
-			<?php endwhile; else: ?>
+			</div>
 
-				<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
-
-			<?php endif; ?>
-
-		</div>
-
-		<?php do_action( 'bp_after_blog_single_post' ); ?>
+			<?php do_action( 'bp_after_blog_single_post' ); ?>
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
 
+
+<?php endwhile; else: ?>
+	<div id="content">
+	    <div class="padder center">
+		<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
+	    </div><!-- .padder -->
+	</div><!-- #content -->
+<?php endif; ?>
+	
 <?php get_footer(); ?>

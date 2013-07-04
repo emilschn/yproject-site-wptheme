@@ -13,8 +13,10 @@
     /* Récupération des infos Twitter */
     $url = "http://twitter.com/users/show/yproject_co";
     $response = file_get_contents ( $url );
-    $t_profile = new SimpleXMLElement ( $response );
-    $twitter_infos = $t_profile->followers_count;
+    if (isset($response)) {
+	$t_profile = new SimpleXMLElement ( $response );
+	$twitter_infos = $t_profile->followers_count;
+    }
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -118,19 +120,8 @@
 			</li>
 		    </ul>
 		</div>
-	    
-		<header>
-		    <div id="site_name" class="center">
-			    <h1 id="logo" role="banner"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><?php bp_site_name(); ?></a></h1>
-			    <div id="welcome_text">
-				<?php _e('Welcome Text 1', 'yproject'); ?><br /><br />
-				<?php _e('Welcome Text 2', 'yproject'); ?>
-			    </div>
-		    </div>
 
-		    <?php do_action( 'bp_header' ); ?>
-		</header>
-
+		<?php do_action( 'bp_header' ); ?>
 		<?php do_action( 'bp_after_header'     ); ?>
 		<?php do_action( 'bp_before_container' ); ?>
 

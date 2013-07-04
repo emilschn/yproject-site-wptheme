@@ -256,12 +256,55 @@ div#home_bottom h1 {
 }
 /* FIN HOME */
 
+/* PROJECT PAGE */
+#post_top_bg {
+    background-color: #595953; 
+} 
+
+#post_bottom_bg {
+    background-color: #F2F3F2; 
+} 
+
+#post_top_title {
+    background-color: #C1D6DC;
+    height: 240px;
+}
+
+#post_bottom_content {
+    background-color: #FFF;
+}
+
+.project_full_picto {
+    float: left;
+    padding-right: 5px;
+}
+
+.project_progress_bar {
+    float: right;
+    width: 200px;
+    padding-right: 10px;
+}
+
+.project_full_progressbg {
+    float: left;
+    background-color: #EDEFEF;
+    width: 150px;
+    height: 25px;
+}
+
+.project_full_progressbar {
+    background-color: #3DB5C4;
+    height: 25px;
+}
+/* FIN PROJECT PAGE */
+
 /* NAV */
 #navigation {
     background-color: #333333;
     position: absolute;
     left: 0;
     top: 0;
+    z-index: 1000;
 }
  
 #nav {
@@ -453,6 +496,10 @@ header {
     padding-left: 200px;
     width: 690px;
     font-size: 13pt;
+}
+
+#container {
+    padding-top: 35px;
 }
 
 /* FIN HEADER */
