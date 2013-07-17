@@ -45,6 +45,10 @@ body {
     margin: auto;
 }
 
+.left {
+    float: left;
+}
+
 /* PROJECT PREVIEW */
 #projects_current {
     float: left;
@@ -258,7 +262,7 @@ div#home_bottom h1 {
 
 /* PROJECT PAGE */
 #post_top_bg {
-    background-color: #595953; 
+    background-color: #EB5A50; 
 } 
 
 #post_bottom_bg {
@@ -268,33 +272,84 @@ div#home_bottom h1 {
 #post_top_title {
     background-color: #C1D6DC;
     height: 240px;
+    position: relative;
+}
+
+#post_top_title h1 {
+    padding-left: 450px;
+    padding-right: 100px;
+}
+
+#post_top_infos {
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    bottom: 0px;
+    width: 940px;
+    color: #FFF;
+    padding-left: 20px;
+}
+
+#post_top_infos a {
+    color: #FFF;
+    text-decoration: none;
 }
 
 #post_bottom_content {
     background-color: #FFF;
+    padding-top: 10px;
 }
 
-.project_full_picto {
-    float: left;
+.post_bottom_desc {
+    width: 640px;
+}
+
+.post_bottom_infos {
+    width: 310px;
     padding-right: 5px;
 }
 
-.project_progress_bar {
-    float: right;
-    width: 200px;
-    padding-right: 10px;
+.post_bottom_infos_item {
+    margin-bottom: 5px;
+    font-family: DINPro-Medium;
+    font-size: 10pt;
 }
 
 .project_full_progressbg {
-    float: left;
     background-color: #EDEFEF;
-    width: 150px;
-    height: 25px;
+    width: 309px;
 }
 
 .project_full_progressbar {
-    background-color: #3DB5C4;
-    height: 25px;
+    background-color: #4B4A4E;
+    height: 35px;
+}
+
+.post_bottom_buttons div {
+    font-family: DINPro-Light;
+    font-size: 11pt;
+    padding: 15px 0px 15px 0px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+}
+.post_bottom_buttons div a {
+    text-decoration: none;
+}
+
+.post_bottom_buttons div.dark {
+    background-color: #515050;
+}
+
+.post_bottom_buttons div.light {
+    background-color: #F2F2F2;
+}
+    
+.post_bottom_buttons div.dark a {
+    color: #FFF;
+}
+
+.post_bottom_buttons div.light a {
+    color: #515050;
 }
 /* FIN PROJECT PAGE */
 
@@ -506,7 +561,7 @@ header {
 
 /* FOOTER */
 footer {
-    background-color: #13AED4;
+    background-color: #EB5A50;
 }
 
 footer div.widget-area {
