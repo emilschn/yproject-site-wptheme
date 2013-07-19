@@ -36,7 +36,7 @@
 body {
     background-color: #FFF;
     color: #000;
-    font-family: Tahoma;
+    font-family: DINPro-Medium;
     margin: -13px 0px 0px 0px;
 }
 
@@ -113,7 +113,6 @@ body {
 }
 
 .project_preview_item_desc {
-    font-family: DINPro-Medium;
     margin-top: 3px;
     margin-bottom: 3px;
     color: #000;
@@ -276,12 +275,15 @@ div#home_bottom h1 {
 }
 
 #post_top_title h1 {
-    padding-left: 450px;
-    padding-right: 100px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #FFF;
+    padding: 10px;
+    margin-left: 450px;
+    margin-right: 140px;
 }
 
 #post_top_infos {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     bottom: 0px;
     width: 940px;
@@ -300,7 +302,14 @@ div#home_bottom h1 {
 }
 
 .post_bottom_desc {
-    width: 640px;
+    width: 630px;
+    padding-left: 10px;
+    font-size: 9pt;
+}
+
+.post_bottom_desc h2 {
+    color: #E6223C;
+    font-size: 11pt;
 }
 
 .post_bottom_infos {
@@ -309,19 +318,26 @@ div#home_bottom h1 {
 }
 
 .post_bottom_infos_item {
-    margin-bottom: 5px;
-    font-family: DINPro-Medium;
+    margin: 5px 10px 5px 10px;
     font-size: 10pt;
 }
 
 .project_full_progressbg {
     background-color: #EDEFEF;
-    width: 309px;
+    width: 250px;
+    display: inline-block;
 }
 
 .project_full_progressbar {
     background-color: #4B4A4E;
     height: 35px;
+}
+
+.project_full_percent {
+    width: 49px;
+    position: absolute;
+    padding-top: 7px;
+    text-align: right;
 }
 
 .post_bottom_buttons div {
@@ -350,6 +366,27 @@ div#home_bottom h1 {
 
 .post_bottom_buttons div.light a {
     color: #515050;
+}
+
+#popup_share {
+    display: none;
+    position: absolute;
+    background-color: #515050;
+    border: 1px solid #000;
+    text-align: center;
+    padding-top: 8px;
+}
+
+#popup_share a{
+    font-family: DINPro-Light;
+    color: #FFF;
+    text-decoration: none;
+    text-transform: uppercase;
+    line-height: 200%;
+}
+
+#popup_share_close {
+    font-size: 9pt;
 }
 /* FIN PROJECT PAGE */
 

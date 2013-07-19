@@ -43,7 +43,7 @@ msgstr "Actualit&eacute;s"
 msgid "Trouvez les projets"
 msgstr "Trouvez les projets"
 
-# single.php - Page projet
+# single-campaign.php - Page projet
 msgid "Investissez"
 msgstr "Investissez"
 
@@ -61,6 +61,15 @@ msgstr "Statistiques"
 
 msgid "Jy crois"
 msgstr "J'y crois"
+
+msgid "Partager sur Facebook"
+msgstr "Partager sur Facebook"
+
+msgid "Partager sur Twitter"
+msgstr "Partager sur Twitter"
+
+msgid "Fermer"
+msgstr "Fermer"
 
 # header.php - menu
 msgid "Decouvrir les projets"

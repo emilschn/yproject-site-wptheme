@@ -40,6 +40,7 @@ YPMenuFunctions = (function($){
 		}, 650);
 		$("#menu_item_connection").data('timeoutId', timeoutId); 
 	    });
+	    
 	    $("#submenu_item_connection").mouseenter(function(){
 		clearTimeout($("#menu_item_connection").data('timeoutId'));
 		$("#submenu_item_connection").fadeIn("slow");
@@ -48,6 +49,17 @@ YPMenuFunctions = (function($){
 		    $("#submenu_item_connection").fadeOut("slow");
 		}, 650);
 		$("#menu_item_connection").data('timeoutId', timeoutId); 
+	    });
+	    
+	    $("#share_btn").mouseup(function() {
+		$("#popup_share").css("top", $("#share_btn").position().top + $("#share_btn").height() + 20);
+		$("#popup_share").css("left", $("#share_btn").position().left);
+		$("#popup_share").width($("#share_btn").width() - 2);
+		$("#popup_share").toggle();
+	    });
+	    
+	    $("#popup_share_close").mouseup(function() {
+		$("#popup_share").toggle();
 	    });
 	},
 	
