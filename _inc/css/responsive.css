@@ -1,0 +1,87 @@
+@media screen and (max-width: 480px) {
+    .mobile_hidden {
+	display: none !important;
+    }
+    .only_on_mobile {
+	display: block;
+    }
+    .center {
+	width: 479px !important;
+    }
+    
+    #site_name {
+	padding-top: 30px;
+    }
+    #welcome_text {
+	padding-left: 5px !important;
+	width: 474px !important;
+	font-size: 10pt !important;
+    }
+    
+    #projects_current {
+	width: 459px !important;
+    }
+    #projects_vote {
+	width: 459px !important;
+    }
+    .projects_preview h1 {
+	font-size: 28pt !important;
+    }
+    
+    .project_preview_item {
+	width: 459px !important;
+    }
+    .project_preview_item_part {
+	float: left;
+	padding-right: 10px;
+	max-width: 220px;
+    }
+    .project_preview_item h2 {
+	width: 459px !important;
+    }
+    .project_preview_item_desc {
+	width: 200px !important;
+	height: 60px !important;
+    }
+    .project_preview_item_pictos {
+	color: #000;
+	background-color: #EDEEEE;
+	margin-left: 0px !important;
+    }
+    #projects_vote .project_preview_item_pictos {
+	background-color: #FFF;
+    }
+    .project_preview_item_picto {
+	padding: 5px 20px;
+	width: 65px !important;
+    }
+    .project_preview_item_picto img {
+	width: 60px !important;
+	height: 60px !important;
+    }
+    .project_preview_item_progress {
+	margin-top: 5px;
+    }
+
+    nav {
+	position: static !important;
+    }
+    #nav li {
+	margin-left: 0px !important;
+	width: 479px !important;
+    }
+    #nav .sfhover ul,
+    #nav :hover ul {
+	display: none !important;
+    }
+    .page_item_inverted {
+	margin-top: 0px !important;
+	padding-top: 2px !important;
+	padding-bottom: 2px !important;
+    }
+    
+    footer div.widget-area {
+	width: 449px !important;
+	margin-left: 20px !important;
+    }
+}

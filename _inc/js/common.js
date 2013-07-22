@@ -1,16 +1,33 @@
 jQuery(document).ready( function() {
-    YPMenuFunctions.initMenuBar();
+    YPUIFunctions.initUI();
     YPMenuFunctions.refreshMenuBar();
 });
 jQuery(window).scroll( function() {
     YPMenuFunctions.refreshMenuBar();
 });
 
+YPUIFunctions = (function($) {
+    return {
+	initUI: function() {
+	    $(document).load($(window).bind("resize", YPUIFunctions.onWidthChange));
+	    YPMenuFunctions.initMenuBar();
+	    YPUIFunctions.onWidthChange();
+	},
+	
+	onWidthChange: function(e) {
+	    $("#navigation").width($(window).width());
+	    if ($(window).width() < 481) {
+		$("#projects_vote").remove().insertAfter($("#projects_current"));
+	    } else {
+		$("#projects_current").remove().insertAfter($("#projects_vote"));
+	    }
+	}
+    }
+})(jQuery);
+
 YPMenuFunctions = (function($){
     return {
 	initMenuBar: function() {
-	    $("#navigation").width($(window).width());
-	    
 	    $("#menu_item_facebook").hover(function() {
 		$("#fb_infos").css("top", $("#navigation").position().top + $("#navigation").height());
 		$("#fb_infos").css("left", $("#menu_item_facebook").position().left);

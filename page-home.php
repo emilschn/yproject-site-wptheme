@@ -26,8 +26,7 @@
 
 	    <div id="projects_current" class="projects_preview">
 		<h1><?php echo __('Les projets en cours', 'yproject'); ?></h1>
-		<?php printPreviewProjectsTop(3); ?>
-		<?php printPreviewProjectsNew(3); ?>
+		<?php printHomePreviewProjects(3); ?>
 	    </div>	
 
 	    <div style="clear: both"></div>

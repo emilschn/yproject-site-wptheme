@@ -12,6 +12,9 @@
  * This file intentionally left blank. CSS is enqueued in functions.php
  *
  */
+
+@import url("_inc/css/responsive.css") (max-width: 480px);
+
 /* FONTS TO LOAD */
 @font-face {
     font-family: 'DINPro-Light';
@@ -49,15 +52,17 @@ body {
     float: left;
 }
 
+.only_on_mobile {
+    display: none;
+}
+
 /* PROJECT PREVIEW */
 #projects_current {
-    float: left;
     width: 661px;
     color: #29ABBA;
     background-color: #FFFFFF;
 }
 #projects_vote {
-    float: left;
     width: 221px;
     color: #000;
     background-color: #EDEEEE;
@@ -68,6 +73,7 @@ body {
 
 .projects_preview {
     font-family: DINPro-Light;
+    float: left;
 }
 
 .projects_preview h1 {
@@ -112,6 +118,11 @@ body {
     color: #29ABBA;
 }
 
+.project_preview_item_img {
+    width: 200px;
+    height: 100px;
+}
+
 .project_preview_item_desc {
     margin-top: 3px;
     margin-bottom: 3px;
@@ -130,6 +141,11 @@ body {
 .project_preview_item_picto {
     float: left;
     width: 45px;
+}
+
+.project_preview_item_picto img {
+    width: 40px;
+    height: 40px;
 }
 
 .project_preview_item_progress {
@@ -407,6 +423,7 @@ div#home_bottom h1 {
     text-transform: uppercase;
     -webkit-padding-start: 0px;
     -webkit-margin-after: 0em;
+    padding-left: 0px;
 }
 #nav li {
     background-color: #333333;
@@ -414,7 +431,16 @@ div#home_bottom h1 {
     float: left;
     border-right: 1px solid #FFF;
     font-family: DINPro-Light;
+}
+.page_item {
     padding-bottom: 2px; 
+}
+.page_item_inverted {
+    background-color: #FFF !important;
+    color: #333333 !important;
+    margin-top: -13px;
+    padding-top: 26px;
+    padding-bottom: 7px; 
 }
 .page_item_out {
     border-right: none !important;
@@ -422,13 +448,6 @@ div#home_bottom h1 {
 .page_item_out label {
     color: #FFF;
     text-transform: none;
-}
-.page_item_inverted {
-    background-color: #FFF !important;
-    color: #333333 !important;
-    margin-top: -13px !important;
-    padding-top: 16px !important;
-    padding-bottom: 7px !important; 
 }
 #nav li li {
     background-color: #333333;

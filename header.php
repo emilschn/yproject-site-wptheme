@@ -68,8 +68,8 @@
 				</ul>
 			    </li>
 			    <?php /* Logo FB / TW */ ?>
-			    <li class="page_item_out" id="menu_item_facebook"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank" title="Notre page Facebook"><img src="" width="16" height="16" /></a></li>
-			    <li class="page_item_out" id="menu_item_twitter"><a href="https://twitter.com/yproject_co" target="_blank" title="Notre compte Twitter"><img src="" width="16" height="16" /></a></li>
+			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank" title="Notre page Facebook"><img src="" width="16" height="16" /></a></li>
+			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/yproject_co" target="_blank" title="Notre compte Twitter"><img src="" width="16" height="16" /></a></li>
 			    
 			    <?php if (is_user_logged_in()) : ?>
 			    <?php /* Menu Mon compte */ ?>
@@ -84,6 +84,8 @@
 			    <?php /* Menu Connexion */ $page_connexion = get_page_by_path('connexion'); ?>
 			    <li id="menu_item_connection" class="page_item_out page_item_inverted"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
 			    <?php endif; ?>
+			    
+			    <li style="clear:both" class="only_on_mobile"></li>
 			</ul>
 		    </div>
 		</nav>
