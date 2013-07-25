@@ -46,7 +46,7 @@
 					    <div id="post_bottom_bg">
 						<div id="post_bottom_content" class="center">
 						    <div class="left post_bottom_desc">
-							<div><?php echo $campaign->summary(); ?></div>
+							<div><?php echo html_entity_decode($campaign->summary()); ?></div>
 							
 							<h2>En quoi consiste le projet ?</h2>
 							<span><?php the_content(); ?></span>
@@ -56,19 +56,19 @@
 							?>
 
 							<h2>Quelle est l'opportunité économique du projet ?</h2>
-							<div><?php echo $campaign->added_value(); ?></div>
+							<div><?php echo html_entity_decode($campaign->added_value()); ?></div>
 
 							<h2>Quelle est l'utilité sociétale du projet ?</h2>
-							<div><?php echo $campaign->measuring_impact(); ?></div>
-							<div><?php echo $campaign->implementation(); ?></div>
-							<div><?php echo $campaign->societal_challenge(); ?></div>
+							<div><?php echo html_entity_decode($campaign->measuring_impact()); ?></div>
+							<div><?php echo html_entity_decode($campaign->implementation()); ?></div>
+							<div><?php echo html_entity_decode($campaign->societal_challenge()); ?></div>
 							
 							<h2>Quel est le modèle économique du projet ?</h2>
-							<div><?php echo $campaign->economic_model(); ?></div>
-							<div><?php echo $campaign->development_strategy(); ?></div>
+							<div><?php echo html_entity_decode($campaign->economic_model()); ?></div>
+							<div><?php echo html_entity_decode($campaign->development_strategy()); ?></div>
 
 							<h2>Qui porte le projet ?</h2>
-							<div><?php echo $campaign->impact_area(); ?></div>
+							<div><?php echo html_entity_decode($campaign->impact_area()); ?></div>
 						    </div>
 						    
 						    <div class="left post_bottom_infos">

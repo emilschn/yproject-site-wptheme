@@ -12,8 +12,8 @@
     $facebook_infos = $fb_infos['likes'];
     /* Récupération des infos Twitter */
     $url = "http://twitter.com/users/show/yproject_co";
-    $response = file_get_contents ( $url );
-    if (isset($response)) {
+    $response = @file_get_contents($url);
+    if ($response !== FALSE) {
 	$t_profile = new SimpleXMLElement ( $response );
 	$twitter_infos = $t_profile->followers_count;
     }
