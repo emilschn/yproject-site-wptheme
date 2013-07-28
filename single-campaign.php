@@ -46,7 +46,7 @@
 					    <div id="post_bottom_bg">
 						<div id="post_bottom_content" class="center">
 						    <div class="left post_bottom_desc">
-							<div><?php echo html_entity_decode($campaign->summary()); ?></div>
+							<div><?php echo $campaign->summary(); ?></div>
 							
 							<h2>En quoi consiste le projet ?</h2>
 							<span><?php the_content(); ?></span>
@@ -56,19 +56,30 @@
 							?>
 
 							<h2>Quelle est l'opportunité économique du projet ?</h2>
-							<div><?php echo html_entity_decode($campaign->added_value()); ?></div>
-
+							<div><?php echo $campaign->added_value(); ?></div>
 							<h2>Quelle est l'utilité sociétale du projet ?</h2>
-							<div><?php echo html_entity_decode($campaign->measuring_impact()); ?></div>
-							<div><?php echo html_entity_decode($campaign->implementation()); ?></div>
-							<div><?php echo html_entity_decode($campaign->societal_challenge()); ?></div>
+							<div><?php echo $campaign->measuring_impact(); ?></div>
+							
+							<div><?php echo $campaign->implementation(); ?></div>
+							
+							<?php
+							$categories = get_the_category();
+							$separator = ' ';
+							$output = '';
+							if($categories=='category'.' '.$campaign->title){
+								foreach($categories as $category) {
+									$output .= '<a href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
+								}
+							echo trim($output, $separator);
+							}
+							?>
 							
 							<h2>Quel est le modèle économique du projet ?</h2>
-							<div><?php echo html_entity_decode($campaign->economic_model()); ?></div>
-							<div><?php echo html_entity_decode($campaign->development_strategy()); ?></div>
+							<div><?php echo $campaign->economic_model(); ?></div>
+							<div><?php echo $campaign->development_strategy(); ?></div>
 
 							<h2>Qui porte le projet ?</h2>
-							<div><?php echo html_entity_decode($campaign->impact_area()); ?></div>
+							<div><?php echo $campaign->impact_area(); ?></div>
 						    </div>
 						    
 						    <div class="left post_bottom_infos">
@@ -101,10 +112,15 @@
 								<a href="#">[TODO: ] <?php echo __('Investissez', 'yproject'); ?></a>
 							    </div>
 							    <div id="share_btn" class="dark">
-								<a href="javascript:void(0)"><?php echo __('Participer autrement', 'yproject'); ?></a>
+								<a href="#"><?php echo __('Participer autrement', 'yproject'); ?></a>
 							    </div>
 							    <div class="light">
-								<a href="#">[TODO: ] <?php echo __('Blog', 'yproject'); ?></a>
+								<?php
+								    $category_slug = 'cat' . $post->ID;
+								    $category_obj = get_category_by_slug($category_slug);
+								    $category_link = get_category_link($category_obj->cat_ID);
+								?>
+								<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Blog', 'yproject'); ?></a>
 							    </div>
 							    <div class="light">
 								<a href="#">[TODO: ] <?php echo __('Forum', 'yproject'); ?></a>
@@ -139,6 +155,7 @@
 			    
 			    <a id="popup_share_close" href="javascript:void(0)">[<?php echo __('Fermer', 'yproject'); ?>]</a>
 			</div>
+			
 
 			<?php do_action( 'bp_after_blog_single_post' ); ?>
 
