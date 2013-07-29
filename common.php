@@ -75,9 +75,9 @@ function printPageBottomEnd($post, $campaign) {
 		    </div>
 		    <div class="light">
 			<?php
-			    $category_slug = 'cat' . $post->ID;
+			    $category_slug = $post->ID . '-blog-' . $post->post_title;
 			    $category_obj = get_category_by_slug($category_slug);
-			    $category_link = get_category_link($category_obj->cat_ID);
+			    $category_link = (!empty($category_obj)) ? get_category_link($category_obj->cat_ID) : '';
 			?>
 			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Blog', 'yproject'); ?></a>
 		    </div>
@@ -92,6 +92,22 @@ function printPageBottomEnd($post, $campaign) {
 
 	    <div style="clear: both"></div>
 	</div>
+		    
+	<div id="popup_share">
+	    <iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode(get_permalink( $post->ID )); ?>&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=30" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:20px; text-align: center" allowTransparency="true"></iframe>
+	    <?php /*<script>function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script>
+	    <a rel="nofollow" href="http://www.facebook.com/share.php?u=<;url>" onclick="return fbs_click()" target="_blank"><?php echo __('Partager sur Facebook', 'yproject'); ?></a> */ ?>
+	    <?php /*<a href="http://www.facebook.com/sharer.php?u=<?php echo urlencode(get_permalink( $post->ID )); ?>%2F&t=<?php echo urlencode(get_the_title()); ?>" target="_blank"><?php echo __('Partager sur Facebook', 'yproject'); ?></a>*/ ?>
+	    <a href="http://www.facebook.com/sharer.php?u=<?php echo urlencode(get_permalink( $post->ID )); ?>" target="_blank"><?php echo __('Partager sur Facebook', 'yproject'); ?></a>
+	    <br />
+
+	    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	    <a href="https://twitter.com/share" class="twitter-share-button" data-via="yproject_co" data-lang="fr"><?php echo __('Partager sur Twitter', 'yproject'); ?></a>
+	    <?php /*<a href=""><?php echo __('Partager sur Twitter', 'yproject'); ?></a>*/ ?>
+	    <br />
+
+	    <a id="popup_share_close" href="javascript:void(0)">[<?php echo __('Fermer', 'yproject'); ?>]</a>
+	</div>
     </div>
     <?php
 }
@@ -103,8 +119,22 @@ function printPageBottomEnd($post, $campaign) {
 function printPreviewProjectsVote($nb) {
     global $wpdb, $print_project_count;
     $print_project_count = 0;
-    query_posts('showposts=' . $nb . '&post_type=download');
-    //TODO : requête pour prendre seulement les status "en cours de vote"
+    query_posts( array(
+	'showposts' => $nb,
+	'post_type' => 'download',
+	'meta_query' => array (
+	    array (
+		'key' => 'campaign_vote',
+		'compare' => '=',
+		'value' => 'vote'
+	    ),
+	    array (
+		'key' => 'campaign_end_date',
+		'compare' => '>',
+		'value' => date('Y-m-d H:i:s')
+	    )
+	)
+    ) );
     printProjectsPreview(true);
 }
 
@@ -116,36 +146,52 @@ function printHomePreviewProjects($nb) {
 }
 
 function printPreviewProjectsTop($nb) {
-    global $wpdb;
-    $popularreq = "SELECT $wpdb->posts.ID FROM $wpdb->posts";
-    $popularreq .= " LEFT JOIN $wpdb->postmeta AS enddate ON ($wpdb->posts.ID = enddate.post_id AND enddate.meta_key = 'campaign_end_date')";
-    $popularreq .= " LEFT JOIN $wpdb->postmeta AS downloadsales ON ($wpdb->posts.ID = downloadsales.post_id AND downloadsales.meta_key = '_edd_download_sales')";
-    $popularreq .= " WHERE $wpdb->posts.post_type = 'download'";
-    $popularreq .= " AND STR_TO_DATE(enddate.meta_value, '%Y-%m-%d %H:%i:%s')>'" . date('Y-m-d H:i:s')."'";
-    $popularreq .= " ORDER BY downloadsales.meta_value DESC LIMIT ". $nb;
-    $popularproj = $wpdb->get_results($popularreq);
-    if (isset($popularproj)) : 
-	foreach ($popularproj as $temppost) {
-	    query_posts('p='.$temppost->ID.'&post_type=download');
-	    printProjectsPreview(false);
-	}
-    endif;
+    global $wpdb, $print_project_count;
+    $print_project_count = 0;
+    query_posts( array(
+	'showposts' => $nb,
+	'post_type' => 'download',
+	'meta_query' => array (
+	    array (
+		'key' => 'campaign_vote',
+		'compare' => 'NOT LIKE',
+		'value' => 'vote'
+	    ),
+	    array (
+		'key' => 'campaign_end_date',
+		'compare' => '>',
+		'value' => date('Y-m-d H:i:s')
+	    )
+	),
+	'orderby' => '_edd_download_sales',
+	'order' => 'desc'
+    ) );
+    printProjectsPreview(true);
+    
 }
 
 function printPreviewProjectsNew($nb) {
-    global $wpdb;
-    $popularreq = "SELECT $wpdb->posts.ID FROM $wpdb->posts";
-    $popularreq .= " LEFT JOIN $wpdb->postmeta AS enddate ON ($wpdb->posts.ID = enddate.post_id AND enddate.meta_key = 'campaign_end_date')";
-    $popularreq .= " WHERE $wpdb->posts.post_type = 'download'";
-    $popularreq .= " AND STR_TO_DATE(enddate.meta_value, '%Y-%m-%d %H:%i:%s')>'" . date('Y-m-d H:i:s')."'";
-    $popularreq .= " ORDER BY ".$wpdb->posts.".post_date DESC LIMIT ". $nb;
-    $popularproj = $wpdb->get_results($popularreq);
-    if (isset($popularproj)) : 
-	foreach ($popularproj as $temppost) {
-	    query_posts('p='.$temppost->ID.'&post_type=download');
-	    printProjectsPreview(false);
-	}
-    endif;
+    global $wpdb, $print_project_count;
+    $print_project_count = 0;
+    query_posts( array(
+	'showposts' => $nb,
+	'post_type' => 'download',
+	'meta_query' => array (
+	    array (
+		'key' => 'campaign_vote',
+		'compare' => 'NOT LIKE',
+		'value' => 'vote'
+	    ),
+	    array (
+		'key' => 'campaign_end_date',
+		'compare' => '>',
+		'value' => date('Y-m-d H:i:s')
+	    )
+	),
+	'orderby' => 'post_date',
+	'order' => 'desc'
+    ) );
+    printProjectsPreview(true);
 }
 
 function printPreviewProjectsFinished($nb) {

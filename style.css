@@ -547,6 +547,7 @@ div#home_bottom h1 {
     background-color: #333333;
     color: #DDDDDD;
     border: 1px solid #000;
+    z-index: 999;
 }
 
 #submenu_item_connection label { 
