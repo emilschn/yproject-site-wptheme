@@ -1,3 +1,14 @@
+<?php 
+    date_default_timezone_set("Europe/Paris");
+    require_once("common.php");
+    
+    $this_category = get_category($cat);
+    $this_category_name = $this_category->name;
+    $name_exploted = explode('cat', $this_category_name);
+    $campaign_post = get_post($name_exploted[1]);
+    $campaign = atcf_get_campaign( $post );
+?>
+
 <?php get_header(); ?>
 
 	<div id="content">
@@ -6,8 +17,12 @@
 		<?php do_action( 'bp_before_archive' ); ?>
 
 		<div class="page" id="blog-archives" role="main">
+			<?php printPageTop($campaign_post); ?>
+			<?php printPageBottomStart($campaign_post, $campaign); ?>
 
-			<h3 class="pagetitle"><?php printf( __( 'You are browsing the archive for %1$s.', 'buddypress' ), wp_title( false, false ) ); ?></h3>
+			<a href="<?php echo get_permalink($campaign_post->ID); ?>">&lt;&lt; <?php echo __('Revenir à la description du projet', 'yproject'); ?></a>
+		    
+			<h3 class="pagetitle"><?php printf( __( 'Derni&egrave;res actualit&eacute;s du projet %1$s', 'yproject' ), $campaign_post->post_title); ?></h3>
 
 			<?php if ( have_posts() ) : ?>
 
@@ -19,22 +34,16 @@
 
 					<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-						<div class="author-box">
-							<?php echo get_avatar( get_the_author_meta( 'user_email' ), '50' ); ?>
-							<p><?php printf( _x( 'by %s', 'Post written by...', 'buddypress' ), bp_core_get_userlink( $post->post_author ) ); ?></p>
-						</div>
-
 						<div class="post-content">
 							<h2 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
 
-							<p class="date"><?php printf( __( '%1$s <span>in %2$s</span>', 'buddypress' ), get_the_date(), get_the_category_list( ', ' ) ); ?></p>
+							<p class="date"><?php echo get_the_date(); ?></p>
 
 							<div class="entry">
 								<?php the_content( __( 'Read the rest of this entry &rarr;', 'buddypress' ) ); ?>
-								<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
 							</div>
 
-							<p class="postmetadata"><?php the_tags( '<span class="tags">' . __( 'Tags: ', 'buddypress' ), ', ', '</span>' ); ?> <span class="comments"><?php comments_popup_link( __( 'No Comments &#187;', 'buddypress' ), __( '1 Comment &#187;', 'buddypress' ), __( '% Comments &#187;', 'buddypress' ) ); ?></span></p>
+							<span class="comments"><?php comments_popup_link( __( 'No Comments &#187;', 'buddypress' ), __( '1 Comment &#187;', 'buddypress' ), __( '% Comments &#187;', 'buddypress' ) ); ?></span></p>
 						</div>
 
 					</div>
@@ -52,13 +61,12 @@
 
 			<?php endif; ?>
 
+			<?php printPageBottomEnd($campaign_post, $campaign); ?>
 		</div>
 
 		<?php do_action( 'bp_after_archive' ); ?>
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
-
-	<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>

@@ -1,5 +1,102 @@
 <?php
 /******************************************************************************/
+/* PAGE PROJET */
+/******************************************************************************/
+function printPageTop($post) {
+    ?>
+    <div id="post_top_bg">
+	<div id="post_top_title" class="center" style="background-image: url('<?php 
+		if (WP_DEBUG) {$debug_src = 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject/todo.jpg';} else {$debug_src = get_stylesheet_directory_uri();}
+		$attachments = get_posts('post_type=attachment');
+		$image_src = wp_get_attachment_image_src($attachments[0]->ID, "full");
+		if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src;
+		?>'); background-repeat: no-repeat; background-position: center;">
+	    <h1><?php the_title(); ?></h1>
+
+	    <div>
+		<a href="#">[TODO: bouton "J'y crois"] <?php echo __('Jy crois', 'yproject'); ?></a>
+	    </div>
+
+	    <div id="post_top_infos">
+		<img src="" width="40" height="40" />
+		<?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
+
+		<?php echo get_avatar( get_the_author_meta( 'user_email' ), '40' ); ?>
+		<?php echo str_replace( '<a href=', '<a rel="author" href=', bp_core_get_userlink( $post->post_author ) ); ?>
+	    </div>
+	</div>
+    </div>
+    <?php
+}
+
+function printPageBottomStart($post, $campaign) {
+    ?>
+    <div id="post_bottom_bg">
+	<div id="post_bottom_content" class="center">
+	    <div class="left post_bottom_desc">
+    <?php
+}
+
+function printPageBottomEnd($post, $campaign) {
+    ?>
+	    </div>
+
+	    <div class="left post_bottom_infos">
+		<?php 
+		$percent = $campaign->percent_completed(false);
+		$width = 250 * $percent / 100;
+		?>
+		<div>
+		    <div class="project_full_progressbg"><div class="project_full_progressbar" style="width:<?php echo $width; ?>px"></div></div>
+		    <span class="project_full_percent"><?php echo $campaign->percent_completed(); ?></span>
+		</div>
+
+		<div class="post_bottom_infos_item">
+		    <img src="" width="40" height="40" />
+		    <?php echo $campaign->backers_count(); ?>
+		</div>
+
+		<div class="post_bottom_infos_item">
+		    <img src="" width="40" height="40" />
+		    <?php echo $campaign->days_remaining(); ?>
+		</div>
+
+		<div class="post_bottom_infos_item">
+		    <img src="" width="40" height="40" />
+		    <?php echo $campaign->current_amount() . ' / ' . $campaign->goal(); ?>
+		</div>
+
+		<div class="post_bottom_buttons">
+		    <div class="dark">
+			<a href="#">[TODO: ] <?php echo __('Investissez', 'yproject'); ?></a>
+		    </div>
+		    <div id="share_btn" class="dark">
+			<a href="javascript:void(0)"><?php echo __('Participer autrement', 'yproject'); ?></a>
+		    </div>
+		    <div class="light">
+			<?php
+			    $category_slug = 'cat' . $post->ID;
+			    $category_obj = get_category_by_slug($category_slug);
+			    $category_link = get_category_link($category_obj->cat_ID);
+			?>
+			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Blog', 'yproject'); ?></a>
+		    </div>
+		    <div class="light">
+			<a href="#">[TODO: ] <?php echo __('Forum', 'yproject'); ?></a>
+		    </div>
+		    <div class="light">
+			<a href="#">[TODO: ] <?php echo __('Statistiques', 'yproject'); ?></a>
+		    </div>
+		</div>
+	    </div>
+
+	    <div style="clear: both"></div>
+	</div>
+    </div>
+    <?php
+}
+
+/******************************************************************************/
 /* PREVIEW DES PROJETS */
 /******************************************************************************/
 

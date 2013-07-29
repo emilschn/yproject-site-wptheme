@@ -71,6 +71,13 @@ msgstr "Partager sur Twitter"
 msgid "Fermer"
 msgstr "Fermer"
 
+# archive.php - Blog
+msgid "Revenir à la description du projet"
+msgstr "Revenir à la description du projet"
+
+msgid "Derni&egrave;res actualit&eacute;s du projet %1$s"
+msgstr "Derni&egrave;res actualit&eacute;s du projet %1$s"
+
 # header.php - menu
 msgid "Decouvrir les projets"
 msgstr "D&Eacute;couvrir les projets"
