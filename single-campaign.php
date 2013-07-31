@@ -50,6 +50,10 @@
 					</div>
 				    </div>
 				</div>
+				<div>
+				<?php /* Lien gerer un projet  */ $page_start = get_page_by_path('gerer'); ?>
+				<a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Gérer vos informations', 'yproject'); ?></a>
+				</div>
 
 			</div>
 			
