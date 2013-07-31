@@ -1,9 +1,5 @@
 jQuery(document).ready( function() {
     YPUIFunctions.initUI();
-    YPMenuFunctions.refreshMenuBar();
-});
-jQuery(window).scroll( function() {
-    YPMenuFunctions.refreshMenuBar();
 });
 
 YPUIFunctions = (function($) {
@@ -12,6 +8,13 @@ YPUIFunctions = (function($) {
 	    $(document).load($(window).bind("resize", YPUIFunctions.onWidthChange));
 	    YPMenuFunctions.initMenuBar();
 	    YPUIFunctions.onWidthChange();
+	    
+	    if ($("#fundingproject").val()) {
+		$("#fundingproject").click(function() { $("#fundingdevelopment_param").hide(); });
+		$("#fundingdevelopment").click(function() { $("#fundingdevelopment_param").show(); });
+		$("#goalsum_fixe").click(function() { $("#goalsum_flexible_param").hide(); $("#goalsum_fixe_param").show();});
+		$("#goalsum_flexible").click(function() { $("#goalsum_flexible_param").show(); $("#goalsum_fixe_param").hide();});
+	    }
 	},
 	
 	onWidthChange: function(e) {
@@ -78,10 +81,6 @@ YPMenuFunctions = (function($){
 	    $("#popup_share_close").mouseup(function() {
 		$("#popup_share").toggle();
 	    });
-	},
-	
-	refreshMenuBar: function() {
-	    $("#navigation").css("top", $(window).scrollTop());
 	}
     }
 })(jQuery);

@@ -409,9 +409,8 @@ div#home_bottom h1 {
 /* NAV */
 #navigation {
     background-color: #333333;
-    position: absolute;
-    left: 0;
     top: 0;
+    position:fixed;
     z-index: 1000;
 }
  
