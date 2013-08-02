@@ -46,7 +46,18 @@
 					    <h2>Qui porte le projet ?</h2>
 					    <div><?php echo html_entity_decode($campaign->impact_area()); ?></div>
 					    
-					    <?php printPageBottomEnd($post, $campaign); ?>
+					    <?php 
+						
+						$vota = html_entity_decode($campaign->vote());
+			
+						if($vota == 'vote') {
+							printPageVoteForm($post, $campaign);
+							printPageVoteForm_submit($campaign);
+						} else
+						{
+							printPageBottomEnd($post, $campaign);
+						}
+						?>
 					</div>
 				    </div>
 				</div>
