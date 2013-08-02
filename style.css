@@ -404,6 +404,15 @@ div#home_bottom h1 {
 #popup_share_close {
     font-size: 9pt;
 }
+
+#yp_admin_bar {
+    padding: 25px 10px 0px 20px;
+}
+    
+#yp_admin_bar a {
+    text-decoration: none;
+    color: #000;
+}
 /* FIN PROJECT PAGE */
 
 /* NAV */
@@ -612,7 +621,6 @@ header {
 #container {
     padding-top: 35px;
 }
-
 /* FIN HEADER */
 
 /* FOOTER */

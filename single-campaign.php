@@ -16,7 +16,18 @@
 			<?php do_action( 'bp_before_blog_single_post' ); ?>
 
 			<div class="page" id="blog-single" role="main">
-
+				<?php 
+				    // La barre d'admin n'apparait que pour l'admin du site et pour l'admin de la page
+				    $current_user = wp_get_current_user();
+				    $current_user_id = $current_user->ID;
+				    $author_id = get_the_author_meta('ID');
+				    if ($current_user_id == $author_id || current_user_can('manage_options')) {
+				?>
+				<div id="yp_admin_bar" class="center">
+				    <?php /* Lien gerer un projet  */ $page_start = get_page_by_path('gerer'); ?>
+				    <a href="<?php echo get_permalink($page_start->ID); ?>?campaign_id=<?php the_ID(); ?>"><?php echo __('Gérer vos informations', 'yproject'); ?></a>
+				</div>
+				<?php } ?>
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				    <div class="post-content">
 					<div class="entry">
@@ -60,10 +71,6 @@
 						?>
 					</div>
 				    </div>
-				</div>
-				<div>
-				<?php /* Lien gerer un projet  */ $page_start = get_page_by_path('gerer'); ?>
-				<a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Gérer vos informations', 'yproject'); ?></a>
 				</div>
 
 			</div>

@@ -117,9 +117,11 @@ function printPageBottomEnd($post, $campaign) {
 function printPageVoteForm($post, $campaign) {
     ?>
 	
-	</div  class="left post_bottom_infos">
+	    </div>
+
+	    <div class="left post_bottom_infos">
 		<form action="" method="post">
-			<fieldset>
+		    <fieldset>
 			<legend>Votez sur ce projet</legend>
 			
 			<input type="radio" name="radios1" id="impact_positif" value="impact_positif">
@@ -144,7 +146,7 @@ function printPageVoteForm($post, $campaign) {
 			<input id="precision" name="checkboxes0" type="text" placeholder="précisez ici" />
 			</div>
 			
-            <input type="radio" name="radios1" value="impact_negatif" checked="checked">
+			<input type="radio" name="radios1" value="impact_negatif" checked="checked">
 			  Je désapprouve ce projet car son impact prévu n'est pas significatif
 			</input></br></br>
 			
@@ -198,9 +200,10 @@ function printPageVoteForm($post, $campaign) {
 			<input type="submit" name="valider" value="Valider"/>
 			</div>
 			
-			</fieldset>
+		    </fieldset>
 		</form>
 	</div>
+    </div>
 <?php
 }
 
