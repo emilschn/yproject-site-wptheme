@@ -24,10 +24,14 @@
 				    if ($current_user_id == $author_id || current_user_can('manage_options')) {
 				?>
 				<div id="yp_admin_bar" class="center">
-				    <?php /* Lien gerer un projet  */ $page_start = get_page_by_path('gerer'); ?>
-				    <a href="<?php echo get_permalink($page_start->ID); ?>?campaign_id=<?php the_ID(); ?>"><?php echo __('Gérer vos informations', 'yproject'); ?></a>
+				    <?php /* Lien gerer un projet */ $page_manage = get_page_by_path('gerer'); ?>
+				    <a href="<?php echo get_permalink($page_manage->ID); ?>?campaign_id=<?php the_ID(); ?>"><?php echo __('G&eacute;rer vos informations', 'yproject'); ?></a>
+				    .:|:.
+				    <?php /* Lien ajouter une actu */ $page_add_news = get_page_by_path('ajouter-une-actu'); ?>
+				    <a href="<?php echo get_permalink($page_add_news->ID); ?>?campaign_id=<?php the_ID(); ?>"><?php echo __('Ajouter une actualit&eacute;', 'yproject'); ?></a>
 				</div>
 				<?php } ?>
+			    
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				    <div class="post-content">
 					<div class="entry">
@@ -63,7 +67,6 @@
 			
 						if($vota == 'vote') {
 							printPageVoteForm($post, $campaign);
-							printPageVoteForm_submit($campaign);
 						} else
 						{
 							printPageBottomEnd($post, $campaign);

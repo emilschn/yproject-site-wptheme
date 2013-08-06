@@ -71,6 +71,12 @@ msgstr "Partager sur Twitter"
 msgid "Fermer"
 msgstr "Fermer"
 
+msgid "G&eacute;rer vos informations"
+msgstr "G&eacute;rer vos informations"
+
+msgid "Ajouter une actualit&eacute;"
+msgstr "Ajouter une actualit&eacute;"
+
 # archive.php - Blog
 msgid "Revenir à la description du projet"
 msgstr "Revenir à la description du projet"
