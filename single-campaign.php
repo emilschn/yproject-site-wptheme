@@ -63,7 +63,6 @@
 			
 						if($vota == 'vote') {
 							printPageVoteForm($post, $campaign);
-							printPageVoteForm_submit($campaign);
 						} else
 						{
 							printPageBottomEnd($post, $campaign);
