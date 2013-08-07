@@ -122,44 +122,60 @@ function printPageVoteForm($post, $campaign) {
     ob_start();
 
 if( isset($_POST['action']) && $_POST['action']=='vote_submit')
-    {       
+    {      
 
-        $local                      = $_POST[ 'local' ];
-        $environemental             = $_POST[ 'environemental' ];
-        $economique                 = $_POST[ 'economique' ];
-        $social                     = $_POST[ 'social' ];
-        $autre                      = $_POST[ 'autre' ];
+        /** Enregistre les  choix du premier group ( Je pense que ce projet va avoir un impact positif) 
+        *   de checbok dans la BDD
+        */
+
+
+        // $vote est un tableau associatif contenant les elements suivants (les choix possibles):
+       // $vote=array('local','environemental','economique','social','autre');
+
+        $choice = $_POST[’choice’];
+     
+         
+        for ($i=0;$i<sizeof($choice);$i++) {
+            if (isset($choice[$i] )) {
+              // echo("$choice[$i]"); /**test***/
+                $vote[$i] = $choice[$i] ;
+            }
+        }
+
+
+        /** Enregistre les  choix du deuxieme group (  Je pense que ce projet doit être 
+        *   retravaillé avant de pouvoir être financé. Sur quels points) 
+        *   de checbok dans la BDD
+        */
+        // $question est un tableau associatif contenant les elements suivants (les choix possibles):
+       // $question=array('responsable','explication','service','plan','innovation','marche','porteur');
+
+        $choice1 = $_POST[’choice1’];
+     
+         
+        for ($i=0;$i<sizeof($choice);$i++) {
+            if (isset($choice1[$i] )) {
+              // echo("$choice[$i]"); /**test***/
+                $question[$i] = $choice1[$i] ;
+            }
+        }
+
+       
         $precision                  = $_POST[ 'precision' ];
-        $impact_negatif             = $_POST[ 'impact_negatif' ];
-        $pret_collect               = $_POST[ 'pret_collect' ];
         $investir                   = $_POST[ 'investir' ];
         $sum                        = $_POST[ 'sum' ];
-        $risque                     = $_POST[ 'risque' ];
-        $tres_faible                = $_POST[ 'tres_faible' ];
-        $plutot_faible              = $_POST[ 'development_strategy' ];
-        $modere                     = $_POST[ 'modere' ];
-        $plutot_eleve               = $_POST[ 'plutot_eleve' ];
-        $tres_eleve                 = $_POST[ 'tres_eleve' ];
-        $responsable                = $_POST[ 'responsable' ];
-        $mal_explique               = $_POST[ 'mal_explique' ];
-        $service                    = $_POST[ 'service' ];
-        $equipe                     = $_POST[ 'equipe' ];
-        $plan                       = $_POST[ 'plan' ];
-        $porteur                    = $_POST[ 'porteur' ];
-        $expliquer                  = $_POST[ 'expliquer' ];
+        $liste_risque               = $_POST[ 'liste_risque' ];
         $isvoted					= $_POST[ 'isvoted' ];
         
-
-
         $user_id                    =  wp_get_current_user()->ID;
         $campaign_id                =  $this->campaign_id;
            
            
 
-         
+        $wpdb->insert( $table_name , array('vote' => $vote, 'question' => $question));
    
-        $wpdb->query("INSERT INTO $table_name (`id`, `vote`, `question`, `subjects`, `remarks`, `impact_positif`, `local`, `environnemental`, `economique`, `social`, `impact_negatif`, `pret_collect`, `investir`, `sum`, `risque`, `tres_faible`, `plutot_faible`, `modere`, `plutot_eleve`, `tres_eleve`, `responsable`, `mal_explique`, `service`, `equipe`, `plan`, `porteur`, `isvoted`, `user_id`, `campaign_id`) 
-                      VALUES (NULL, '', '', '', '', NULL, $local , $environnemental , $economique , $social , $impact_negatif , $pret_collect , $investir, $sum  , $risque , $tres_faible , $plutot_faible, $modere , $plutot_eleve, $tres_eleve, $responsable, $mal_explique, $service, $equipe ,$plan, $porteur , $isvoted , $user_id  ,  $campaign_id)");
+        $wpdb->query("INSERT INTO $table_name (`precision`, `investir`, `sum`, `liste_risque`,`isvoted`, `user_id`, `campaign_id`) 
+                          VALUES ( $precision , $investir, $sum  , $liste_risque , $isvoted , $user_id  ,  $campaign_id)");
 
 
       // test la BDD  $wpdb->query("SELECT sum, local  FROM `wdg`.`wp_fvote`");
@@ -178,22 +194,22 @@ if( isset($_POST['action']) && $_POST['action']=='vote_submit')
                 <fieldset>
                     <legend>Votez sur ce projet</legend>
                     
-                    <input type="radio" name="radios1" id="impact_positif" value="impact_positif">
+                    <input type="radio" name="radios1"  value="impact_positif">
                     Je pense que ce projet va avoir un impact positif
                     </input>
 
                     <div id="impact_positif_choix">
-                        <input type="checkbox" name="local" id="local" value="local">
+                        <input type="checkbox" name="choice[]"  value="local">
                           Local
                         </input></br>
-                        <input type="checkbox" name="environemental" id="environnemental" value="environnemental">
+                        <input type="checkbox" name="choice[]" value="environnemental">
                           Environnemental
                         </input></br>
                         
-                        <input type="checkbox" name="social" id="social" value="social">
+                        <input type="checkbox" name="choice[]" value="social">
                           Social
                         </label></br>
-                        <input type="checkbox" name="autre" id="autre" value="autre">
+                        <input type="checkbox" name="choice[]" value="autre">
                           Autre
                         </input>
                         <input id="precision" name="precision" type="text" placeholder="précisez ici" />
@@ -229,19 +245,19 @@ if( isset($_POST['action']) && $_POST['action']=='vote_submit')
                          Je pense que ce projet doit être retravaillé avant de pouvoir être financé. Sur quels points 
                         </input>
                     <div>
-                        <input type="checkbox" id="responsable" name="responsable" value="responsable">
+                        <input type="checkbox" iname="choice1[]" value="responsable">
                           Pas d’impact responsable
                         </input></br>
 
-                        <input type="checkbox" id="mal_explique" name="mal_explique" value="mal_expliqué">
+                        <input type="checkbox" name="choice1[]" value="mal_expliqué">
                           Projet mal expliqué  
                         </input></br>
 
-                        <input type="checkbox" id="service" name="service" value="service">
+                        <input type="checkbox" name="choice1[]" value="service">
                           Qualité du produit/service
                         </input></br>
 
-                        <input type="checkbox" id="equipe" name="equipe" value="equipe">
+                        <input type="checkbox" name="choice1[]" value="equipe">
                           Qualité de l’équipe
                         </input></br>
 
