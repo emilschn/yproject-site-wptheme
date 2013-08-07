@@ -112,8 +112,6 @@ function printPageBottomEnd($post, $campaign) {
     </div>
     <?php
 }
-
-
 function printPageVoteForm($post, $campaign) {
     ?>
 	<?php
@@ -123,8 +121,11 @@ function printPageVoteForm($post, $campaign) {
  
     ob_start();
 
+if( isset($_POST['action']) && $_POST['action']=='vote_submit')
+    {       
+
         $local                      = $_POST[ 'local' ];
-        $environnemental            = $_POST[ 'environnemental' ];
+        $environemental             = $_POST[ 'environemental' ];
         $economique                 = $_POST[ 'economique' ];
         $social                     = $_POST[ 'social' ];
         $autre                      = $_POST[ 'autre' ];
@@ -147,17 +148,23 @@ function printPageVoteForm($post, $campaign) {
         $porteur                    = $_POST[ 'porteur' ];
         $expliquer                  = $_POST[ 'expliquer' ];
         $isvoted					= $_POST[ 'isvoted' ];
-        $user_id                    = $_POST[ 'user_id' ];
-        $campaign_id                = $_POST[ 'campaign_id' ];
+        
+
+
+        $user_id                    =  wp_get_current_user()->ID;
+        $campaign_id                =  $this->campaign_id;
+           
            
 
          
-    if (isset($_POST['submit']))
-    {   	
-    
-        // $wpdb->INSERT INTO `wdg`.`wp_fvote` (`id`, `vote`, `question`, `subjects`, `remarks`, `impact_positif`, `local`, `environnemental`, `economique`, `social`, `impact_negatif`, `pret_collect`, `investir`, `sum`, `risque`, `tres_faible`, `plutot_faible`, `modere`, `plutot_eleve`, `tres_eleve`, `responsable`, `mal_explique`, `service`, `equipe`, `plan`, `porteur`, `expliquer`, `isvoted`, `user_id`, `campaign_id`) 
-                     //  VALUES (NULL, '', '', '', '', NULL, $local , $environnemental , $economique , $social , $impact_negatif , $pret_collect , $investir, $sum  , $risque , $tres_faible , $plutot_faible, $modere , $plutot_eleve, $tres_eleve, $responsable, $mal_explique, $service, $equipe ,$plan, $porteur , $expliquer ,  $isvoted , $user_id  ,  $campaign_id);
+   
+        $wpdb->query("INSERT INTO $table_name (`id`, `vote`, `question`, `subjects`, `remarks`, `impact_positif`, `local`, `environnemental`, `economique`, `social`, `impact_negatif`, `pret_collect`, `investir`, `sum`, `risque`, `tres_faible`, `plutot_faible`, `modere`, `plutot_eleve`, `tres_eleve`, `responsable`, `mal_explique`, `service`, `equipe`, `plan`, `porteur`, `isvoted`, `user_id`, `campaign_id`) 
+                      VALUES (NULL, '', '', '', '', NULL, $local , $environnemental , $economique , $social , $impact_negatif , $pret_collect , $investir, $sum  , $risque , $tres_faible , $plutot_faible, $modere , $plutot_eleve, $tres_eleve, $responsable, $mal_explique, $service, $equipe ,$plan, $porteur , $isvoted , $user_id  ,  $campaign_id)");
 
+
+      // test la BDD  $wpdb->query("SELECT sum, local  FROM `wdg`.`wp_fvote`");
+
+        echo 'Success, merci à bientôt !';
     }
      else{
          
@@ -179,7 +186,7 @@ function printPageVoteForm($post, $campaign) {
                         <input type="checkbox" name="local" id="local" value="local">
                           Local
                         </input></br>
-                        <input type="checkbox" name="environnemental" id="environnemental" value="environnemental">
+                        <input type="checkbox" name="environemental" id="environnemental" value="environnemental">
                           Environnemental
                         </input></br>
                         
@@ -217,10 +224,10 @@ function printPageVoteForm($post, $campaign) {
                           <option id="plutot_eleve">Le risque plutôt élevé</option>
                           <option id="tres_eleve">Le risque très élevé</option>
                         </select>
-                        <input type="radio" name="radios2" value="pret_collect">
+                    </div>
+                         <input type="radio" name="radios2" value="pret_collect">
                          Je pense que ce projet doit être retravaillé avant de pouvoir être financé. Sur quels points 
                         </input>
-                    </div>
                     <div>
                         <input type="checkbox" id="responsable" name="responsable" value="responsable">
                           Pas d’impact responsable
@@ -255,7 +262,7 @@ function printPageVoteForm($post, $campaign) {
                         
                         </textarea></br>
                     </div>
-                    <INPUT TYPE="submit" name="submit" value= "valider" />
+                    <INPUT TYPE="submit" name="vote_submit" value= "valider" />
                     
                  </fieldset>
             
@@ -269,7 +276,6 @@ function printPageVoteForm($post, $campaign) {
 
 }
 }
-
 
 /******************************************************************************/
 /* PREVIEW DES PROJETS */
