@@ -270,6 +270,25 @@ function printPageVoteForm($post, $campaign) {
 }
 }
 
+function printAdminBar() {
+    // La barre d'admin n'apparait que pour l'admin du site et pour l'admin de la page
+    $current_user = wp_get_current_user();
+    $current_user_id = $current_user->ID;
+    $author_id = get_the_author_meta('ID');
+    if ($current_user_id == $author_id || current_user_can('manage_options')) {
+	$campaign_id_param = '?campaign_id=';
+	if (isset($_GET['campaign_id'])) $campaign_id_param .= $_GET['campaign_id'];
+	else $campaign_id_param .= get_the_ID();
+    ?>
+	<div id="yp_admin_bar" class="center">
+	    <?php /* Lien gerer un projet */ $page_manage = get_page_by_path('gerer'); ?>
+	    <a href="<?php echo get_permalink($page_manage->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('G&eacute;rer vos informations', 'yproject'); ?></a>
+	    .:|:.
+	    <?php /* Lien ajouter une actu */ $page_add_news = get_page_by_path('ajouter-une-actu'); ?>
+	    <a href="<?php echo get_permalink($page_add_news->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Ajouter une actualit&eacute;', 'yproject'); ?></a>
+	</div>
+    <?php }
+}
 
 /******************************************************************************/
 /* PREVIEW DES PROJETS */

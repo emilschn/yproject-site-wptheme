@@ -1,3 +1,5 @@
+<?php get_header(); ?>
+
 <?php 
     date_default_timezone_set("Europe/Paris");
     require_once("common.php");
@@ -7,8 +9,6 @@
 	    $campaign = atcf_get_campaign( $post );
 ?>
 
-<?php get_header(); ?>
-
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 	<div id="content">
 		<div class="padder">
@@ -17,20 +17,8 @@
 
 			<div class="page" id="blog-single" role="main">
 				<?php 
-				    // La barre d'admin n'apparait que pour l'admin du site et pour l'admin de la page
-				    $current_user = wp_get_current_user();
-				    $current_user_id = $current_user->ID;
-				    $author_id = get_the_author_meta('ID');
-				    if ($current_user_id == $author_id || current_user_can('manage_options')) {
+				    printAdminBar();
 				?>
-				<div id="yp_admin_bar" class="center">
-				    <?php /* Lien gerer un projet */ $page_manage = get_page_by_path('gerer'); ?>
-				    <a href="<?php echo get_permalink($page_manage->ID); ?>?campaign_id=<?php the_ID(); ?>"><?php echo __('G&eacute;rer vos informations', 'yproject'); ?></a>
-				    .:|:.
-				    <?php /* Lien ajouter une actu */ $page_add_news = get_page_by_path('ajouter-une-actu'); ?>
-				    <a href="<?php echo get_permalink($page_add_news->ID); ?>?campaign_id=<?php the_ID(); ?>"><?php echo __('Ajouter une actualit&eacute;', 'yproject'); ?></a>
-				</div>
-				<?php } ?>
 			    
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				    <div class="post-content">
