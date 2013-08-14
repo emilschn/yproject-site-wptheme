@@ -1,3 +1,5 @@
+<?php get_header(); ?>
+
 <?php 
     date_default_timezone_set("Europe/Paris");
     require_once("common.php");
@@ -8,8 +10,6 @@
     $campaign_post = get_post($name_exploted[1]);
     $campaign = atcf_get_campaign( $post );
 ?>
-
-<?php get_header(); ?>
 
 	<div id="content">
 		<div class="padder">

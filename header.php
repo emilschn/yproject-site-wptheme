@@ -10,13 +10,25 @@
     ));
     $fb_infos = $facebook->api('http://graph.facebook.com/381460615282040'); 
     $facebook_infos = $fb_infos['likes'];
-    /* Récupération des infos Twitter */
-    $url = "http://twitter.com/users/show/yproject_co";
-    $response = @file_get_contents($url);
-    if ($response !== FALSE) {
-	$t_profile = new SimpleXMLElement ( $response );
-	$twitter_infos = $t_profile->followers_count;
-    }
+    /* Récupération des infos Twitter *
+    require_once("_external/twitter/TwitterAPIExchange.php");
+    $apiUrl = "https://api.twitter.com/1.1/users/show.json";
+    $requestMethod = 'GET';
+    $getField = '?screen_name=yproject_co';
+    $settings = array(
+        'oauth_access_token' => "YOUR_OAUTH_ACCESS_TOKEN",
+        'oauth_access_token_secret' => "YOUR_OAUTH_ACCESS_TOKEN_SECRET",
+        'consumer_key' => "YOUR_CONSUMER_KEY",
+        'consumer_secret' => "YOUR_CONSUMER_SECRET"
+    );
+
+    $twitter = new TwitterAPIExchange($settings);
+    $response = $twitter->setGetfield($getField)
+			->buildOauth($apiUrl, $requestMethod)
+			->performRequest();
+    echo $response;
+    $followers = json_decode($response);
+    $twitter_infos = $followers->followers_count;*/
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

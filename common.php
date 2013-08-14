@@ -69,7 +69,13 @@ function printPageBottomEnd($post, $campaign) {
 
 		<div class="post_bottom_buttons">
 		    <div class="dark">
-			<a href="#">[TODO: ] <?php echo __('Investissez', 'yproject'); ?></a>
+			<?php 
+			    /* Lien Investissez */ $page_invest = get_page_by_path('investir');
+			    $campaign_id_param = '?campaign_id=';
+			    if (isset($_GET['campaign_id'])) $campaign_id_param .= $_GET['campaign_id'];
+			    else $campaign_id_param .= get_the_ID();
+			?>
+			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Investissez', 'yproject'); ?></a>
 		    </div>
 		    <div id="share_btn" class="dark">
 			<a href="javascript:void(0)"><?php echo __('Participer autrement', 'yproject'); ?></a>

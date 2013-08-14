@@ -15,6 +15,30 @@ YPUIFunctions = (function($) {
 		$("#goalsum_fixe").click(function() { $("#goalsum_flexible_param").hide(); $("#goalsum_fixe_param").show();}); 		
 		$("#goalsum_flexible").click(function() { $("#goalsum_flexible_param").show(); $("#goalsum_fixe_param").hide();});
 	    }
+	    
+	    if ($("#input_invest_amount").length > 0) {
+		$("#input_invest_amount").change(function() {
+		    if ((!$.isNumeric($("#input_invest_amount").val())) 
+			|| (parseInt($("#input_invest_amount").val()) < $("#input_invest_min_value").val()) 
+			|| (parseInt($("#input_invest_amount").val()) > $("#input_invest_max_value").val())) {
+			$("#input_invest_amount").css("color", "red");
+		    } else {
+			$("#input_invest_amount").css("color", "green");
+		    }
+		});
+		
+		$("#invest_form").submit(function() {
+		    if ((!$.isNumeric($("#input_invest_amount").val())) 
+			|| (parseInt($("#input_invest_amount").val()) < $("#input_invest_min_value").val()) 
+			|| (parseInt($("#input_invest_amount").val()) > $("#input_invest_max_value").val())) {
+			$("#input_invest_amount").css("color", "red");
+			return false;
+		    } else {
+			$("#input_invest_amount").css("color", "green");
+			return true;
+		    }
+		});
+	    }
 	},
 	
 	onWidthChange: function(e) {
