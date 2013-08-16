@@ -18,27 +18,44 @@ YPUIFunctions = (function($) {
 	    
 	    if ($("#input_invest_amount").length > 0) {
 		$("#input_invest_amount").change(function() {
-		    if ((!$.isNumeric($("#input_invest_amount").val())) 
-			|| (parseInt($("#input_invest_amount").val()) < $("#input_invest_min_value").val()) 
-			|| (parseInt($("#input_invest_amount").val()) > $("#input_invest_max_value").val())) {
-			$("#input_invest_amount").css("color", "red");
-		    } else {
-			$("#input_invest_amount").css("color", "green");
-		    }
+		    YPUIFunctions.checkInvestInput();
 		});
 		
 		$("#invest_form").submit(function() {
-		    if ((!$.isNumeric($("#input_invest_amount").val())) 
-			|| (parseInt($("#input_invest_amount").val()) < $("#input_invest_min_value").val()) 
-			|| (parseInt($("#input_invest_amount").val()) > $("#input_invest_max_value").val())) {
-			$("#input_invest_amount").css("color", "red");
-			return false;
-		    } else {
-			$("#input_invest_amount").css("color", "green");
-			return true;
-		    }
+		    return YPUIFunctions.checkInvestInput();
 		});
 	    }
+	},
+	
+	checkInvestInput: function() {
+	    $(".invest_error").hide();
+	    $(".invest_success").hide();
+	    
+	    var bValidInput = true;
+	    if (!$.isNumeric($("#input_invest_amount").val())) {
+		$("#invest_error_general").show();
+		bValidInput = false;
+	    } else {
+		if ($("#input_invest_amount").val() != Math.floor($("#input_invest_amount").val())) {
+		    $("#invest_error_integer").show();
+		    bValidInput = false;
+		}
+		if (parseInt($("#input_invest_amount").val()) < $("#input_invest_min_value").val()) {
+		    $("#invest_error_min").show();
+		    bValidInput = false;
+		}
+		if (parseInt($("#input_invest_amount").val()) > $("#input_invest_max_value").val()) {
+		    $("#invest_error_max").show();
+		    bValidInput = false;
+		}
+	    }
+	    if (bValidInput) {
+		$("#invest_success_amount").text( parseInt($("#input_invest_amount_total").val()) + parseInt($("#input_invest_amount").val()));
+		$(".invest_success").show();
+	    }
+	    
+	    $("#input_invest_amount").css("color", bValidInput ? "green" : "red");
+	    return bValidInput;
 	},
 	
 	onWidthChange: function(e) {

@@ -56,6 +56,18 @@ body {
     display: none;
 }
 
+.hidden {
+    display: none;
+}
+
+.invest_error {
+    color: red;
+}
+
+.invest_success {
+    color: green;
+}
+
 /* PROJECT PREVIEW */
 #projects_current {
     width: 661px;
@@ -272,6 +284,10 @@ div#home_bottom h1 {
 /* HOME */
 .padder {
     margin-top: 20px;
+}
+.padder_more {
+    margin-top: 25px;
+    margin-bottom: 5px;
 }
 /* FIN HOME */
 
