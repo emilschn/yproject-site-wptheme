@@ -88,12 +88,15 @@ function printPageBottomEnd($post, $campaign) {
 			?>
 			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Blog', 'yproject'); ?></a>
 		    </div>
-		    <div class="light">
-			<a href="#">[TODO: ] <?php echo __('Forum', 'yproject'); ?></a>
+		     <div class="light">
+			<?php /* Lien statistiques*/ $forum = get_page_by_path('forum'); ?>
+      		<a href="<?php echo get_permalink($forum->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Forum', 'yproject'); ?></a>
 		    </div>
 		    <div class="light">
-			<a href="#">[TODO: ] <?php echo __('Statistiques', 'yproject'); ?></a>
+			<?php /* Lien forum*/ $statistiques = get_page_by_path('statistiques'); ?>
+      		<a href="<?php echo get_permalink($statistiques->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Statistiques', 'yproject'); ?></a>
 		    </div>
+		   
 		</div>
 	    </div>
 
@@ -118,186 +121,7 @@ function printPageBottomEnd($post, $campaign) {
     </div>
     <?php
 }
-function printPageVoteForm($post, $campaign) {
-    ?>
-	<?php
-	global $wpdb;
-    $table_name = $wpdb->prefix . "fVote";
 
- 
-    ob_start();
-
-if( isset($_POST['action']) && $_POST['action']=='vote_submit')
-    {      
-
-        /** Enregistre les  choix du premier group ( Je pense que ce projet va avoir un impact positif) 
-        *   de checbok dans la BDD
-        */
-
-
-        // $vote est un tableau associatif contenant les elements suivants (les choix possibles):
-       // $vote=array('local','environemental','economique','social','autre');
-
-        $choice = $_POST[’choice’];
-     
-         
-        for ($i=0;$i<sizeof($choice);$i++) {
-            if (isset($choice[$i] )) {
-              // echo("$choice[$i]"); /**test***/
-                $vote[$i] = $choice[$i] ;
-            }
-        }
-
-
-        /** Enregistre les  choix du deuxieme group (  Je pense que ce projet doit être 
-        *   retravaillé avant de pouvoir être financé. Sur quels points) 
-        *   de checbok dans la BDD
-        */
-        // $question est un tableau associatif contenant les elements suivants (les choix possibles):
-       // $question=array('responsable','explication','service','plan','innovation','marche','porteur');
-
-        $choice1 = $_POST[’choice1’];
-     
-         
-        for ($i=0;$i<sizeof($choice);$i++) {
-            if (isset($choice1[$i] )) {
-              // echo("$choice[$i]"); /**test***/
-                $question[$i] = $choice1[$i] ;
-            }
-        }
-
-       
-        $precision                  = $_POST[ 'precision' ];
-        $investir                   = $_POST[ 'investir' ];
-        $sum                        = $_POST[ 'sum' ];
-        $liste_risque               = $_POST[ 'liste_risque' ];
-        $isvoted					= $_POST[ 'isvoted' ];
-        
-        $user_id                    =  wp_get_current_user()->ID;
-        $campaign_id                =  $this->campaign_id;
-           
-           
-
-        $wpdb->insert( $table_name , array('vote' => $vote, 'question' => $question));
-   
-        $wpdb->query("INSERT INTO $table_name (`precision`, `investir`, `sum`, `liste_risque`,`isvoted`, `user_id`, `campaign_id`) 
-                          VALUES ( $precision , $investir, $sum  , $liste_risque , $isvoted , $user_id  ,  $campaign_id)");
-
-
-      // test la BDD  $wpdb->query("SELECT sum, local  FROM `wdg`.`wp_fvote`");
-
-        echo 'Success, merci à bientôt !';
-    }
-     else{
-         
-         echo "<b>".$question."</b>";
-        ?>
-        <form name="fVote" action="<?php get_permalink();?>" method="POST" class="fVote-form" enctype="multipart/form-data">
-
-
-            <div class="left post_bottom_infos">
-            
-                <fieldset>
-                    <legend>Votez sur ce projet</legend>
-                    
-                    <input type="radio" name="radios1"  value="impact_positif">
-                    Je pense que ce projet va avoir un impact positif
-                    </input>
-
-                    <div id="impact_positif_choix">
-                        <input type="checkbox" name="choice[]"  value="local">
-                          Local
-                        </input></br>
-                        <input type="checkbox" name="choice[]" value="environnemental">
-                          Environnemental
-                        </input></br>
-                        
-                        <input type="checkbox" name="choice[]" value="social">
-                          Social
-                        </label></br>
-                        <input type="checkbox" name="choice[]" value="autre">
-                          Autre
-                        </input>
-                        <input id="precision" name="precision" type="text" placeholder="précisez ici" />
-                    </div>
-                    
-                    <input type="radio" name="radios1" value="impact_negatif" checked="checked">
-                      Je désapprouve ce projet car son impact prévu n'est pas significatif
-                    </input></br></br>
-                    
-                    <input type="radio" name="radios2" value="pret_collect">
-                     Je pense que ce projet est prêt pour la collecte
-                    </input></br>
-
-                    <div>
-                        <input type="checkbox" id="investir" name="investir" value="investir">
-                          Je serais prêt à investir
-                        </input>
-
-                        <input id="sum" name="sum" type="text" placeholder="200€" /></br>
-
-                        <input type="checkbox" id="risque" name="risque" value="risque">
-                          Risque
-                        </input></br>
-                        <select id="liste_risque" name="liste_risque" >
-                          <option id="tres_faible">Le risque très faible</option>
-                          <option id="plutot_faible">Le risque plutôt faible</option>
-                          <option id="modere">Le risque modéré</option>
-                          <option id="plutot_eleve">Le risque plutôt élevé</option>
-                          <option id="tres_eleve">Le risque très élevé</option>
-                        </select>
-                    </div>
-                         <input type="radio" name="radios2" value="pret_collect">
-                         Je pense que ce projet doit être retravaillé avant de pouvoir être financé. Sur quels points 
-                        </input>
-                    <div>
-                        <input type="checkbox" iname="choice1[]" value="responsable">
-                          Pas d’impact responsable
-                        </input></br>
-
-                        <input type="checkbox" name="choice1[]" value="mal_explique">
-                          Projet mal expliqué  
-                        </input></br>
-
-                        <input type="checkbox" name="choice1[]" value="service">
-                          Qualité du produit/service
-                        </input></br>
-
-                        <input type="checkbox" name="choice1[]" value="equipe">
-                          Qualité de l’équipe
-                        </input></br>
-
-                        <input type="checkbox" id="plan" name="plan" value="plan">
-                          Qualité du business plan
-                        </input></br>
-
-                        <input type="checkbox" id="innovation" name="innovation" value="innovation">
-                          Qualité d’innovation
-                        </input></br>
-
-                        <input type="checkbox" name="porteur" value="porteur" id="porteur">
-                          Qualité du marché, porteur
-                        </input></br>
-						
-						<label> Expliquer pourquoi</label>
-                        <textarea type="text" name="expliquers" id="expliquer" value="expliquer">
-                        
-                        </textarea></br>
-                    </div>
-                    <INPUT TYPE="submit" name="vote_submit" value= "valider" />
-                    
-                 </fieldset>
-            
-            </div>
-            
-            
-         </form>   
-    
-
-<?php
-
-}
-}
 
 function printAdminBar() {
     // La barre d'admin n'apparait que pour l'admin du site et pour l'admin de la page
@@ -316,8 +140,8 @@ function printAdminBar() {
 	    <?php /* Lien ajouter une actu */ $page_add_news = get_page_by_path('ajouter-une-actu'); ?>
 	    <a href="<?php echo get_permalink($page_add_news->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
 	     .:|:.
-        <?php /* Lien resultats des votes*/ $page_add_news = get_page_by_path('vote'); ?>
-        <a href="<?php echo get_permalink($page_add_news->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('R&eacutesultats des votes', 'yproject'); ?></a>
+        <?php /* Lien resultats des votes*/ $vote = get_page_by_path('vote'); ?>
+        <a href="<?php echo get_permalink($vote->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Stats des votes', 'yproject'); ?></a>
 
     </div>
     <?php }

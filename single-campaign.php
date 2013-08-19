@@ -48,13 +48,13 @@
 
 					    <h2>Qui porte le projet ?</h2>
 					    <div><?php echo html_entity_decode($campaign->impact_area()); ?></div>
-					    
+					    </div>
 					    <?php 
 						
 						$vota = html_entity_decode($campaign->vote());
 			
 						if($vota == 'vote') {
-							printPageVoteForm($post, $campaign);
+						do_shortcode('[yproject_crowdfunding_printPageVoteForm]');
 						} else
 						{
 							printPageBottomEnd($post, $campaign);
