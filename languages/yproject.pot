@@ -77,6 +77,70 @@ msgstr "G&eacute;rer vos informations"
 msgid "Ajouter une actualit&eacute;"
 msgstr "Ajouter une actualit&eacute;"
 
+# register.php / page-modifier-mon-compte.php - S'inscrire/Modifier mon compte
+msgid "Les inscriptions ne sont pas ouvertes pour l&apos;instant."
+msgstr "Les inscriptions ne sont pas ouvertes pour l&apos;instant."
+
+msgid "Inscription"
+msgstr "Inscription"
+
+msgid "Modifier mon compte"
+msgstr "Modifier mon compte"
+
+msgid "Informations de base"
+msgstr "Informations de base"
+
+msgid "Ces informations sont n&eacute;cessaires pour obtenir un compte."
+msgstr "Ces informations sont n&eacute;cessaires pour obtenir un compte."
+
+msgid "Identifiant"
+msgstr "Identifiant"
+
+msgid "Adresse e-mail"
+msgstr "Adresse e-mail"
+
+msgid "Mot de passe"
+msgstr "Mot de passe"
+
+msgid "Confirmation du mot de passe"
+msgstr "Confirmation du mot de passe"
+
+msgid "Informations compl&eacute;mentaires"
+msgstr "Informations compl&eacute;mentaires"
+
+msgid "Ces informations sont n&eacute;cessaires pour investir dans un projet."
+msgstr "Ces informations sont n&eacute;cessaires pour investir dans un projet."
+
+msgid "Pr&eacute;nom"
+msgstr "Pr&eacute;nom"
+
+msgid "Nom"
+msgstr "Nom"
+
+msgid "Date de naissance"
+msgstr "Date de naissance"
+
+msgid "Nationalit&eacute;"
+msgstr "Nationalit&eacute;"
+
+msgid "Type de personne"
+msgstr "Type de personne"
+
+msgid "Physique"
+msgstr "Physique"
+
+msgid "Morale"
+msgstr "Morale"
+
+msgid "Un e-mail de confirmation vous a &eacute;t&eacute; envoy&eacute;."
+msgstr "Un e-mail de confirmation vous a &eacute;t&eacute; envoy&eacute;."
+
+msgid "Votre compte est maintenant cr&eacute;&eacute;. Pour l&apos;utiliser, rendez-vous sur l&apos;e-mail que nous avons envoy&eacute;."
+msgstr "Votre compte est maintenant cr&eacute;&eacute;. Pour l&apos;utiliser, rendez-vous sur l&apos;e-mail que nous avons envoy&eacute;."
+
+msgid "Votre compte est maintenant cr&eacute;&eacute;. Vous pouvez &agrave; pr&eacute;sent vous identifier."
+msgstr "Votre compte est maintenant cr&eacute;&eacute;. Vous pouvez &agrave; pr&eacute;sent vous identifier."
+
 # archive.php - Blog
 msgid "Revenir à la description du projet"
 msgstr "Revenir à la description du projet"
