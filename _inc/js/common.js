@@ -48,6 +48,11 @@ YPUIFunctions = (function($) {
 		    $("#invest_error_max").show();
 		    bValidInput = false;
 		}
+		var nAmountInterval = $("#input_invest_max_value").val() - parseInt($("#input_invest_amount").val());
+		if (nAmountInterval < $("#input_invest_min_value").val() && nAmountInterval > 0) {
+		    $("#invest_error_interval").show();
+		    bValidInput = false;
+		}
 	    }
 	    if (bValidInput) {
 		$("#invest_success_amount").text( parseInt($("#input_invest_amount_total").val()) + parseInt($("#input_invest_amount").val()));
