@@ -105,6 +105,9 @@ msgstr "Mot de passe"
 msgid "Confirmation du mot de passe"
 msgstr "Confirmation du mot de passe"
 
+msgid " (vide si pas de changement)"
+msgstr " (vide si pas de changement)"
+
 msgid "Informations compl&eacute;mentaires"
 msgstr "Informations compl&eacute;mentaires"
 

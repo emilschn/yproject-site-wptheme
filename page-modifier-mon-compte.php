@@ -67,16 +67,21 @@
 			<option value="LEGAL_PERSONALITY"<?php if ($current_user->get('user_person_type') == 'LEGAL_PERSONALITY') echo ' selected="selected"';?>><?php _e( 'Morale', 'yproject' ); ?></option>
 		    </select><br />
 		    
+		    <?php 
+		    if (session_id() == '') session_start();
+		    if (!isset($_SESSION['redirect_current_campaign_id'])) {
+		    ?>
+			<h4><?php _e('Informations de base', 'yproject'); ?></h4>
+			<label for="update_email"><?php _e( 'Adresse e-mail', 'yproject' ); ?></label>
+			<input type="text" name="update_email" id="update_email" value="<?php echo $current_user->user_email; ?>" /><br />
 
-		    <h4><?php _e('Informations de base', 'yproject'); ?></h4>
-		    <label for="update_email"><?php _e( 'Adresse e-mail', 'yproject' ); ?></label>
-		    <input type="text" name="update_email" id="update_email" value="<?php echo $current_user->user_email; ?>" /><br />
+			<label for="update_password"><?php _e( 'Mot de passe', 'yproject' ); ?><?php _e(' (vide si pas de changement)', 'yproject'); ?></label>
+			<input type="password" name="update_password" id="update_password" value="" /><br />
 
-		    <label for="update_password"><?php _e( 'Mot de passe', 'yproject' ); ?></label>
-		    <input type="password" name="update_password" id="update_password" value="" /><br />
-
-		    <label for="update_password_confirm"><?php _e( 'Confirmation du mot de passe', 'yproject' ); ?></label>
-		    <input type="password" name="update_password_confirm" id="update_password_confirm" value="" /><br />
+			<label for="update_password_confirm"><?php _e( 'Confirmation du mot de passe', 'yproject' ); ?><?php _e(' (vide si pas de changement)', 'yproject'); ?></label>
+			<input type="password" name="update_password_confirm" id="update_password_confirm" value="" /><br />
+		    <?php } ?>
+		    
 
 		    <input type="hidden" name="update_user_posted" value="posted" />
 		    <input type="hidden" name="update_user_id" value="<?php echo $current_user->ID; ?>" />
