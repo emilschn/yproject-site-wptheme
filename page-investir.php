@@ -24,19 +24,12 @@
 				    <div class="post-content">
 					<div class="entry">
 					    <?php printPageTop($post); ?>
-					    
 					    <?php printPageBottomStart($post, $campaign); ?>
-					    
-					    <div><?php echo html_entity_decode($campaign->summary()); ?></div>
-
-					   
 					    <span><?php the_content(); ?></span>
-
-					
-					    </div>
 					    <?php 
 						 printPageBottomEnd($post, $campaign);
 						?>
+					</div>
 					</div>
 				    </div>
 				</div>
