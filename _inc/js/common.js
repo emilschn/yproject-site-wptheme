@@ -48,11 +48,6 @@ YPUIFunctions = (function($) {
 		    $("#invest_error_max").show();
 		    bValidInput = false;
 		}
-		var nAmountInterval = $("#input_invest_max_value").val() - parseInt($("#input_invest_amount").val());
-		if (nAmountInterval < $("#input_invest_min_value").val() && nAmountInterval > 0) {
-		    $("#invest_error_interval").show();
-		    bValidInput = false;
-		}
 	    }
 	    if (bValidInput) {
 		$("#invest_success_amount").text( parseInt($("#input_invest_amount_total").val()) + parseInt($("#input_invest_amount").val()));
@@ -137,3 +132,28 @@ YPMenuFunctions = (function($){
 	}
     }
 })(jQuery);
+
+ 
+YPVoteFormFunctions = (function(){ 	
+	$("#impact-positif").click(function() { $("#content-impact-positif").show();
+	 									    $("#local").prop('disabled', false);
+    										$("#environmental").prop('disabled', false);
+											$("#social").prop('disabled', false);
+											$("#autre").prop('disabled', false);
+											$("#precision").prop('disabled', false);
+	}); 		
+	$("#desaprouve").click(function() { $("#local").prop('disabled', true);
+    								    $("#environmental").prop('disabled', true);
+										$("#social").prop('disabled', true);
+										$("#autre").prop('disabled', true);
+										$("#precision").prop('disabled', true);
+											
+	});
+
+	$("#pret").click(function() { $("#content-retravaille").hide(); $("#content-pret").show();}); 		
+	$("#retravaille").click(function() { $("#content-retravaille").show(); $("#content-pret").hide();});
+	    
+});
+	
+
+	
