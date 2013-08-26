@@ -47,6 +47,9 @@ msgstr "Trouvez les projets"
 msgid "Investissez"
 msgstr "Investissez"
 
+msgid "Bient&ocirc;t !"
+msgstr "Bient&ocirc;t !"
+
 msgid "Participer autrement"
 msgstr "Participer autrement"
 
@@ -70,6 +73,9 @@ msgstr "Partager sur Twitter"
 
 msgid "Fermer"
 msgstr "Fermer"
+
+msgid "Page projet"
+msgstr "Page projet"
 
 msgid "G&eacute;rer vos informations"
 msgstr "G&eacute;rer vos informations"

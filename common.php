@@ -78,8 +78,17 @@ function printPageBottomEnd($post, $campaign) {
 			    $campaign_id_param = '?campaign_id=';
 			    if (isset($_GET['campaign_id'])) $campaign_id_param .= $_GET['campaign_id'];
 			    else $campaign_id_param .= get_the_ID();
+			    
+			    if ($campaign->vote() == 'vote') {
+			?>
+			    <a href="javascript:void(0);" onclick="javascript:alert('<?php echo __('Bient&ocirc;t !', 'yproject'); ?>');"><?php echo __('Investissez', 'yproject'); ?></a>
+			<?php	
+			    } else {
 			?>
 			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Investissez', 'yproject'); ?></a>
+			<?php
+			    }
+			?>
 		    </div>
 		    <div id="share_btn" class="dark">
 			<a href="javascript:void(0)"><?php echo __('Participer autrement', 'yproject'); ?></a>
@@ -134,10 +143,14 @@ function printAdminBar() {
     $author_id = get_the_author_meta('ID');
     if ($current_user_id == $author_id || current_user_can('manage_options')) {
 	$campaign_id_param = '?campaign_id=';
-	if (isset($_GET['campaign_id'])) $campaign_id_param .= $_GET['campaign_id'];
-	else $campaign_id_param .= get_the_ID();
+	if (isset($_GET['campaign_id'])) $campaign_id = $_GET['campaign_id'];
+	else $campaign_id = get_the_ID();
+	$campaign_id_param .= $campaign_id; 
     ?>
 	<div id="yp_admin_bar" class="center">
+	    <?php /* Lien page projet */ ?>
+	    <a href="<?php echo get_permalink($campaign_id); ?>"><?php echo __('Page projet', 'yproject'); ?></a>
+	    .:|:.
 	    <?php /* Lien gerer un projet */ $page_manage = get_page_by_path('gerer'); ?>
 	    <a href="<?php echo get_permalink($page_manage->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('G&eacute;rer vos informations', 'yproject'); ?></a>
 	    .:|:.
@@ -325,112 +338,6 @@ function printSinglePreview($i, $vote) {
     </div>
     <?php
 }
-
-
-
-/*
- * SAUVEGARDE
- * 
- * 
-function echoProject($tempid) {
-    if (isset($tempid)) query_posts('p='.$tempid.'&post_type=download');
-    else query_posts('showposts=4&post_type=download');
-	
-    while (have_posts()) : the_post();
-	global $post;
-    ?>
-	<li><a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'campaignify' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a> -> <?php echo $post->_edd_download_earnings; ?> récoltés sur <?php echo $post->campaign_goal ?> .:. Nombre de participants : <?php echo $post->_edd_download_sales ?> .:. Fin de la récolte : <?php echo $post->campaign_end_date; ?></li>
-    <?php 
-    endwhile;
-    wp_reset_query();
-}
-	
-	<strong>Les 4 derniers projets</strong><br />
-	<?php 
-	    echoProject('');
-	?>
-	
-	
-	<strong>Les projets en cours</strong><br />
-	<?php 
-	    $currentproj = $wpdb->get_results("SELECT `post_id` FROM wp_postmeta WHERE meta_key='campaign_end_date' AND STR_TO_DATE(meta_value, '%Y-%m-%d %H:%i:%s')>'" . date('Y-m-d H:i:s')."'");
-	    if (isset($currentproj)) : 
-	?>
-		<ul>
-		<?php
-		    foreach ($currentproj as $postitem => $temppost) {
-			echoProject($temppost->post_id);
-		    }
-		?>
-		</ul>
-	<?php 
-	    endif;
-	?>
-	
-	
-	<strong>Les projets terminés</strong><br />
-	<?php 
-	    $endproj = $wpdb->get_results("SELECT `post_id` FROM wp_postmeta WHERE meta_key='campaign_end_date' AND STR_TO_DATE(meta_value, '%Y-%m-%d %H:%i:%s')<='" . date('Y-m-d H:i:s')."'");
-	    if (isset($endproj)) : 
-	?>
-		<ul>
-		<?php
-		    foreach ($endproj as $postitem => $temppost) {
-			echoProject($temppost->post_id);
-		    }
-		?>
-		</ul>
-	<?php 
-	    endif;
-	?>
-	
-	
-	<strong>4 projets réussis</strong><br />
-	<?php 
-	    $successreq = "SELECT $wpdb->posts.ID FROM $wpdb->posts";
-	    $successreq .= " LEFT JOIN $wpdb->postmeta AS downloadearnings ON ($wpdb->posts.ID = downloadearnings.post_id AND downloadearnings.meta_key = '_edd_download_earnings')";
-	    $successreq .= " LEFT JOIN $wpdb->postmeta AS downloadgoal ON ($wpdb->posts.ID = downloadgoal.post_id AND downloadgoal.meta_key = 'campaign_goal')";
-	    $successreq .= " WHERE $wpdb->posts.post_type = 'download'";
-	    $successreq .= " AND CAST(downloadearnings.meta_value AS SIGNED) >= CAST(downloadgoal.meta_value AS SIGNED)";
-	    $successproj = $wpdb->get_results($successreq);
-	    if (isset($successproj)) : 
-	?>
-		<ul>
-		<?php
-		    foreach ($successproj as $postitem => $temppost) {
-			echoProject($temppost->ID);
-		    }
-		?>
-		</ul>
-	<?php 
-	    endif;
-	?>
-	
-	<strong>Les 4 projets en cours avec le plus d'investisseurs</strong>
-	<?php 
-	    $popularreq = "SELECT $wpdb->posts.ID FROM $wpdb->posts";
-	    $popularreq .= " LEFT JOIN $wpdb->postmeta AS enddate ON ($wpdb->posts.ID = enddate.post_id AND enddate.meta_key = 'campaign_end_date')";
-	    $popularreq .= " LEFT JOIN $wpdb->postmeta AS downloadsales ON ($wpdb->posts.ID = downloadsales.post_id AND downloadsales.meta_key = '_edd_download_sales')";
-	    $popularreq .= " WHERE $wpdb->posts.post_type = 'download'";
-	    $popularreq .= " AND STR_TO_DATE(enddate.meta_value, '%Y-%m-%d %H:%i:%s')>'" . date('Y-m-d H:i:s')."'";
-	    $popularreq .= " ORDER BY downloadsales.meta_value DESC LIMIT 4";
-	    $popularproj = $wpdb->get_results($popularreq);
-	    if (isset($popularproj)) : 
-	?>
-		<ul>
-		<?php
-		    foreach ($popularproj as $temppost) {
-			echoProject($temppost->ID);
-		    }
-		?>
-		</ul>
-	<?php 
-	    endif;
-	?>
- * 
- * 
- * 
- */
 
 /******************************************************************************/
 /* PREVIEW DES UTILISATEURS */

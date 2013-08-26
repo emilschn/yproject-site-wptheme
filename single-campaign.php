@@ -54,10 +54,9 @@
 						$vota = html_entity_decode($campaign->vote());
 			
 						if($vota == 'vote') {
-						do_shortcode('[yproject_crowdfunding_printPageVoteForm]');
-						} else
-						{
-							printPageBottomEnd($post, $campaign);
+						    do_shortcode('[yproject_crowdfunding_printPageVoteForm]');
+						} else {
+						    printPageBottomEnd($post, $campaign);
 						}
 						?>
 					</div>
