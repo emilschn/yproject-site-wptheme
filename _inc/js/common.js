@@ -14,6 +14,10 @@ YPUIFunctions = (function($) {
 		$("#fundingdevelopment").click(function() { $("#fundingdevelopment_param").show(); }); 		
 		$("#goalsum_fixe").click(function() { $("#goalsum_flexible_param").hide(); $("#goalsum_fixe_param").show();}); 		
 		$("#goalsum_flexible").click(function() { $("#goalsum_flexible_param").show(); $("#goalsum_fixe_param").hide();});
+		$("#goal_search").change(function() {
+		    $("#goal").val($("#goal_search").val() * $("#campaign_multiplier").val());
+		    $("#goalsum_campaign_multi").text($("#goal").val() + $("#monney").val());
+		});
 	    }
 	    
 	    if ($("#input_invest_amount").length > 0) {
@@ -23,6 +27,13 @@ YPUIFunctions = (function($) {
 		
 		$("#invest_form").submit(function() {
 		    return YPUIFunctions.checkInvestInput();
+		});
+	    }
+	    
+	    if ($("#company_status").length > 0) {
+		$("#company_status").change(function() { 
+		    if ($("#company_status").val() == "Autre") $("#company_status_other_zone").show(); 
+		    else  $("#company_status_other_zone").hide(); 
 		});
 	    }
 	},
@@ -47,6 +58,11 @@ YPUIFunctions = (function($) {
 		if (parseInt($("#input_invest_amount").val()) > $("#input_invest_max_value").val()) {
 		    $("#invest_error_max").show();
 		    bValidInput = false;
+		}
+		var nAmountInterval = $("#input_invest_max_value").val() - parseInt($("#input_invest_amount").val()); 		
+		if (nAmountInterval < $("#input_invest_min_value").val() && nAmountInterval > 0) { 		
+		    $("#invest_error_interval").show(); 		
+		    bValidInput = false; 		
 		}
 	    }
 	    if (bValidInput) {
@@ -124,9 +140,6 @@ YPMenuFunctions = (function($){
 	    });
 	},
 	
-	refreshMenuBar: function() {
-	    $("#navigation").css("top", $(window).scrollTop());
-	},
 	refreshMenuBar: function() {
 	    $("#navigation").css("top", $(window).scrollTop());
 	}
