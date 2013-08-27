@@ -9,10 +9,6 @@ YPUIFunctions = (function($) {
 	    YPMenuFunctions.initMenuBar();
 	    YPUIFunctions.onWidthChange();
 	    
-	    if ($("#finish_subscribe").length > 0) {
-		$("#container").css('padding-top', "55px");
-	    }
-	    
 	    if ($("#fundingproject").val()) { 		
 		$("#fundingproject").click(function() { $("#fundingdevelopment_param").hide(); }); 		
 		$("#fundingdevelopment").click(function() { $("#fundingdevelopment_param").show(); }); 		
@@ -31,23 +27,6 @@ YPUIFunctions = (function($) {
 		
 		$("#invest_form").submit(function() {
 		    return YPUIFunctions.checkInvestInput();
-		});
-	    }
-	    
-	    if ($("#signup_form").length > 0) {
-		$("#signup_form").submit(function() {
-		    $valid_submit = true;
-		    $("#signup_email_error").hide();
-		    $("#signup_password_error").hide();
-		    if ($("#signup_username").val() != $("#signup_email").val()) {
-			$("#signup_email_error").show();
-			$valid_submit = false;
-		    }
-		    if ($("#signup_password").val() != $("#signup_password_confirm").val()) {
-			$("#signup_password_error").show();
-			$valid_submit = false;
-		    }
-		    return $valid_submit; 
 		});
 	    }
 	    
@@ -168,26 +147,35 @@ YPMenuFunctions = (function($){
 })(jQuery);
 
  
-YPVoteFormFunctions = (function(){ 	
-	$("#impact-positif").click(function() { $("#content-impact-positif").show();
-	 									    $("#local").prop('disabled', false);
-    										$("#environmental").prop('disabled', false);
-											$("#social").prop('disabled', false);
-											$("#autre").prop('disabled', false);
-											$("#precision").prop('disabled', false);
-	}); 		
-	$("#desaprouve").click(function() { $("#local").prop('disabled', true);
-    								    $("#environmental").prop('disabled', true);
-										$("#social").prop('disabled', true);
-										$("#autre").prop('disabled', true);
-										$("#precision").prop('disabled', true);
-											
-	});
+YPVoteFormFunctions = (function($) {
+    return {
+    voteformcontrole: function() { 	
+		$("#impact-positif").click(function() { 
+			$("#content-impact-positif").show();
+		 	$("#local").prop('disabled', false);
+	    	$("#environmental").prop('disabled', false);
+			$("#social").prop('disabled', false);
+			$("#autre").prop('disabled', false);
+			$("#precision").prop('disabled', false);
+		}); 		
+		$("#desaprouve").click(function() { 
+			$("#local").prop('disabled', true);
+	    	$("#environmental").prop('disabled', true);
+			$("#social").prop('disabled', true);
+			$("#autre").prop('disabled', true);
+			$("#precision").prop('disabled', true);
+												
+		});
 
-	$("#pret").click(function() { $("#content-retravaille").hide(); $("#content-pret").show();}); 		
-	$("#retravaille").click(function() { $("#content-retravaille").show(); $("#content-pret").hide();});
+		$("#pret").click(function() { 
+			$("#content-retravaille").hide(); $("#content-pret").show();
+		}); 		
+		$("#retravaille").click(function() { 
+			$("#content-retravaille").show(); $("#content-pret").hide();
+		});
+	}
 	    
-});
+})(jQuery);
 	
 
 	

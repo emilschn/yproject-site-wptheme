@@ -24,20 +24,8 @@
 				    <div class="post-content">
 					<div class="entry">
 					    <?php printPageTop($post); ?>
-					    
 					    <?php printPageBottomStart($post, $campaign); ?>
-					    
-					    <div><?php echo html_entity_decode($campaign->summary()); ?></div>
-
-					   
 					    <span><?php the_content(); ?></span>
-					    <?php 
-						global $wp_embed; 
-						echo $wp_embed->run_shortcode( '[embed]' . $campaign->video() . '[/embed]' ); 
-					    ?>
-
-					
-					    </div>
 					    <?php 
 						 printPageBottomEnd($post, $campaign);
 						?>

@@ -431,20 +431,6 @@ div#home_bottom h1 {
 }
 /* FIN PROJECT PAGE */
 
-/* REGISTER PAGE */
-.register_half_part {
-    float: left;
-    width: 49%;
-}
-/* FIN REGISTER PAGE */
-
-/* CONNEXION PAGE */
-.login_fail {
-    color : red;
-    padding-bottom: 10px;
-}
-/* FIN CONNEXION PAGE */
-
 /* NAV */
 #navigation {
     background-color: #333333;
@@ -651,16 +637,6 @@ header {
 #container {
     padding-top: 35px;
 }
-
-#finish_subscribe {
-    width: 100%;
-    text-align: center;
-}
-
-#finish_subscribe a {
-    color: #DDDDDD;
-    text-decoration: none;
-}
 /* FIN HEADER */
 
 /* FOOTER */
@@ -724,7 +700,7 @@ footer a {
     border-width:0px 1px 1px 0px;
     text-align:left;
     padding:7px;
-    font-size:10px;
+    font-size:12px;
     font-family:arial;
     font-weight:normal;
     color:#000000;
