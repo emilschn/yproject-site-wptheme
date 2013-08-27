@@ -3,6 +3,7 @@
  * Enregistrement fait dans le plugin pour gérer la redirection éventuelle au bon moment
  * Le reste de la page devrait être fait dans un shortcode. On verra ça plus tard.
  */ 
+if (!is_user_logged_in()) wp_redirect(site_url());
 ?>
 <?php get_header(); ?>
 
@@ -12,7 +13,7 @@
 	    if (is_user_logged_in()) :
 		$page_update_account = get_page_by_path('modifier-mon-compte'); 
 	    ?>
-		<h2<?php _e( 'Modifier mon compte', 'yproject' ); ?></h2>
+		<h2><?php _e( 'Modifier mon compte', 'yproject' ); ?></h2>
 
 		<form name="update-form" class="standard-form" action="<?php echo get_permalink($page_update_account->ID); ?>" method="post">
 		    

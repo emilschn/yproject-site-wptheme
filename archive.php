@@ -8,7 +8,7 @@
     $this_category_name = $this_category->name;
     $name_exploted = explode('cat', $this_category_name);
     $campaign_post = get_post($name_exploted[1]);
-    $campaign = atcf_get_campaign( $post );
+    $campaign = atcf_get_campaign( $campaign_post );
 ?>
 
 	<div id="content">
