@@ -8,7 +8,11 @@ YPUIFunctions = (function($) {
 	    $(document).load($(window).bind("resize", YPUIFunctions.onWidthChange));
 	    YPMenuFunctions.initMenuBar();
 	    YPUIFunctions.onWidthChange();
-	    
+
+	    if ($("#finish_subscribe").length > 0) {		
+			$("#container").css('padding-top', "55px");		
+		}		
+
 	    if ($("#fundingproject").val()) { 		
 		$("#fundingproject").click(function() { $("#fundingdevelopment_param").hide(); }); 		
 		$("#fundingdevelopment").click(function() { $("#fundingdevelopment_param").show(); }); 		
@@ -29,6 +33,23 @@ YPUIFunctions = (function($) {
 		    return YPUIFunctions.checkInvestInput();
 		});
 	    }
+
+	if ($("#signup_form").length > 0) {		
+			$("#signup_form").submit(function() {		
+		    $valid_submit = true;		
+		    $("#signup_email_error").hide();		
+		    $("#signup_password_error").hide();		
+		    if ($("#signup_username").val() != $("#signup_email").val()) {		
+			$("#signup_email_error").show();		
+			$valid_submit = false;		
+		    }		
+		    if ($("#signup_password").val() != $("#signup_password_confirm").val()) {		
+			$("#signup_password_error").show();		
+			$valid_submit = false;		
+		    }		
+		    return $valid_submit;		
+		});		
+	}
 	    
 	    if ($("#company_status").length > 0) {
 		$("#company_status").change(function() { 
@@ -147,7 +168,7 @@ YPMenuFunctions = (function($){
 })(jQuery);
 
  
-YPVoteFormFunctions = (function($) {
+/*YPVoteFormFunctions = (function($) {
     return {
     voteformcontrole: function() { 	
 		$("#impact-positif").click(function() { 
@@ -176,6 +197,7 @@ YPVoteFormFunctions = (function($) {
 	}
 	    
 })(jQuery);
+*/
 	
 
 	
