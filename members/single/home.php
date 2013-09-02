@@ -38,6 +38,11 @@ get_header( 'buddypress' ); ?>
 			?>
 			
 			<?php
+			if (is_user_logged_in() && get_current_user_id() == bp_current_user_id()) {
+			    echo 'Vous disposez de ' . ypcf_mangopay_get_user_personalamount_by_wpid(bp_current_user_id());
+			}
+				
+			
 			$purchases = edd_get_users_purchases(bp_current_user_id());
 			if ( $purchases ) : ?>
 				<table id="edd_user_history">
