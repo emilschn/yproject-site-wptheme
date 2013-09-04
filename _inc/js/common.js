@@ -13,14 +13,25 @@ YPUIFunctions = (function($) {
 			$("#container").css('padding-top', "55px");		
 		}		
 
-	    if ($("#fundingproject").val()) { 		
-		$("#fundingproject").click(function() { $("#fundingdevelopment_param").hide(); }); 		
-		$("#fundingdevelopment").click(function() { $("#fundingdevelopment_param").show(); }); 		
+	    if ($("#fundingproject").val()) { 				
 		$("#goalsum_fixe").click(function() { $("#goalsum_flexible_param").hide(); $("#goalsum_fixe_param").show();}); 		
 		$("#goalsum_flexible").click(function() { $("#goalsum_flexible_param").show(); $("#goalsum_fixe_param").hide();});
+		
 		$("#goal_search").change(function() {
-		    $("#goal").val($("#goal_search").val() * $("#campaign_multiplier").val());
+		    $("#goal").val(Math.round($("#goal_search").val() * $("#campaign_multiplier").val()));
 		    $("#goalsum_campaign_multi").text($("#goal").val() + $("#monney").val());
+		});
+	    
+		$(".radiofundingtype").change(function(){
+		    $("#goal").val("");
+		    if ($("#fundingproject").attr("checked") == "checked") {
+			$("#fundingdevelopment_param").hide();
+			$(".min_amount_value").html($("#min_amount_project").val());
+		    }
+		    if ($("#fundingdevelopment").attr("checked") == "checked") {
+			$("#fundingdevelopment_param").show();
+			$(".min_amount_value").html($("#min_amount_development").val());
+		    }
 		});
 	    }
 	    
@@ -33,23 +44,6 @@ YPUIFunctions = (function($) {
 		    return YPUIFunctions.checkInvestInput();
 		});
 	    }
-
-	if ($("#signup_form").length > 0) {		
-			$("#signup_form").submit(function() {		
-		    $valid_submit = true;		
-		    $("#signup_email_error").hide();		
-		    $("#signup_password_error").hide();		
-		    if ($("#signup_username").val() != $("#signup_email").val()) {		
-			$("#signup_email_error").show();		
-			$valid_submit = false;		
-		    }		
-		    if ($("#signup_password").val() != $("#signup_password_confirm").val()) {		
-			$("#signup_password_error").show();		
-			$valid_submit = false;		
-		    }		
-		    return $valid_submit;		
-		});		
-	}
 	    
 	    if ($("#company_status").length > 0) {
 		$("#company_status").change(function() { 

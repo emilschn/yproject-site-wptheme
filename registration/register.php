@@ -44,16 +44,14 @@
 				    <h4><?php _e( 'Informations de base', 'yproject' ); ?></h4>
 				    <p><?php _e( 'Ces informations sont n&eacute;cessaires pour obtenir un compte.', 'yproject' ); ?></p>
 
-				    <div id="signup_email_error" class="invest_error" style="display:none"><?php _e( 'Les deux adresses ne sont pas identiques', 'yproject' ); ?></div>
-				    <label for="signup_username"><?php _e( 'Adresse e-mail', 'yproject' ); ?> *</label>
+				    <label for="signup_username"><?php _e( 'Identifiant', 'yproject' ); ?> *</label>
 				    <?php do_action( 'bp_signup_username_errors' ); ?>
 				    <input type="text" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" /><br />
 
-				    <label for="signup_email"><?php _e( 'Confirmation de l&apos;adresse e-mail', 'yproject' ); ?> *</label>
+				    <label for="signup_email"><?php _e( 'Adresse e-mail', 'yproject' ); ?> *</label>
 				    <?php do_action( 'bp_signup_email_errors' ); ?>
 				    <input type="text" name="signup_email" id="signup_email" value="<?php bp_signup_email_value(); ?>" /><br />
 
-				    <div id="signup_password_error" class="invest_error" style="display:none"><?php _e( 'Les deux mots de passe ne sont pas identiques', 'yproject' ); ?></div>
 				    <label for="signup_password"><?php _e( 'Mot de passe', 'yproject' ); ?> *</label>
 				    <?php do_action( 'bp_signup_password_errors' ); ?>
 				    <input type="password" name="signup_password" id="signup_password" value="" /><br />
