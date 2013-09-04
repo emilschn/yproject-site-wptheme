@@ -735,3 +735,21 @@ footer a {
     text-align: center;
 }
 /* FIN PAGE RESULATS DES VOTES */
+
+/*PAGE FORMULAIRE DE VOTE*/
+#tab-end-vote{
+    color: green;
+    font-size: 16px;
+    text-decoration: blink; 
+}
+/*FIN PAGE FORMULAIRE VOTE*/
+
+/**BBPRESS CACHER */
+
+.bbp-breadcrumb{
+    visibility:hidden;
+}
+
+}
+
+/*FIN BBPRESS*/

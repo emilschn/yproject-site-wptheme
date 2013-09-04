@@ -52,10 +52,19 @@
 					    <?php 
 						
 						$vota = html_entity_decode($campaign->vote());
-			
-						if($vota == 'vote') {
+						// Nombre de jours restants
+						
+						$compte_a_rebours = $campaign->days_remaining();
+						
+						
+						if ($vota == 'vote' && $compte_a_rebours <= 80) {
+							do_shortcode('[yproject_crowdfunding_printPageVoteDeadLine]');
+
+						}elseif ($vota == 'vote' && $compte_a_rebours > 80) {
 						    do_shortcode('[yproject_crowdfunding_printPageVoteForm]');
-						} else {
+						}
+						elseif ($vota !='vote') 
+						{
 						    printPageBottomEnd($post, $campaign);
 						}
 						?>
