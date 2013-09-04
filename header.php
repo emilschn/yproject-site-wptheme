@@ -60,10 +60,10 @@
 			    <?php /* Menu Découvrir les projets */ $page_discover = get_page_by_path('projects'); ?>
 			    <li class="page_item">
 				<a href="<?php echo get_permalink($page_discover->ID); ?>"><?php echo __('Decouvrir les projets', 'yproject'); ?></a>
-				<ul>
+				<?php /*<ul>
 				    <li class="page_item_out"><a href="#">CAT1</a></li>
 				    <li class="page_item_out"><a href="#">CAT2</a></li>
-				</ul>
+				</ul> */ ?>
 			    </li>
 			    <?php /* Menu Proposer un projet */ $page_start = get_page_by_path('proposer-un-projet'); ?>
 			    <li class="page_item"><a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Proposer un projet', 'yproject'); ?></a></li>

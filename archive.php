@@ -56,8 +56,12 @@
 
 			<?php else : ?>
 
+			    <?php if ($campaign_post) : ?>
+				Retrouvez bient&ocirc;t les actualit&eacute;s de ce projet !
+			    <?php else : ?>
 				<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
 				<?php get_search_form(); ?>
+			    <?php endif; ?>
 
 			<?php endif; ?>
 
