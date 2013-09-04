@@ -4,7 +4,7 @@
     date_default_timezone_set("Europe/Paris");
     require_once("common.php");
     
-    global $campaign, $post;
+    global $wpdb, $campaign, $post;
     if ( ! is_object( $campaign ) )
 	    $campaign = atcf_get_campaign( $post );
 ?>
@@ -25,7 +25,35 @@
 					<div class="entry">
 					    <?php printPageTop($post); ?>
 					    <?php printPageBottomStart($post, $campaign); ?>
-					    <span><?php the_content(); ?></span>
+
+
+					    <div>
+					    	<ul>
+
+							<?php
+							$post_camp = get_post($_GET['campaign_id']);
+
+							$name = $post_camp->ID.'-2';
+							
+							if ($name!='') {
+								
+								$query="SELECT ID FROM wp_posts WHERE post_type='forum' AND post_name= $post_camp->ID";
+
+								$results=$wpdb->get_results($query);
+
+
+								foreach ($results as $result) {
+									 $forum_projet_id = $result->ID;
+									
+								}
+							}
+							?>
+
+							</ul>
+					    </div>
+					    
+					    <span>
+					    <?php echo do_shortcode('[bbp-single-forum id='.$forum_projet_id.']'); ?>
 					    <?php 
 						 printPageBottomEnd($post, $campaign);
 						?>
