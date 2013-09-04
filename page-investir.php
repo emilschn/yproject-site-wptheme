@@ -16,20 +16,11 @@
 			<?php do_action( 'bp_before_blog_single_post' ); ?>
 
 			<div class="page" id="blog-single" role="main">
-				<?php 
-				    printAdminBar();
-				?>
-			    
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				    <div class="post-content">
 					<div class="entry">
 					    <?php printPageTop($post); ?>
-					    <?php printPageBottomStart($post, $campaign); ?>
-					    <span><?php the_content(); ?></span>
-					    <?php 
-						 printPageBottomEnd($post, $campaign);
-						?>
-					</div>
+					    <div class="center"><?php the_content(); ?></div>
 					</div>
 				    </div>
 				</div>

@@ -7,6 +7,9 @@ function printPageTop($post) {
     <div id="post_top_bg">
 	<div id="post_top_title" class="center" style="background-image: url('<?php 
 		if (WP_DEBUG) {$debug_src = 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject/todo.jpg';} else {$debug_src = get_stylesheet_directory_uri();}
+		if (isset($_GET["campaign_id"])) {
+		    $post = get_post($_GET["campaign_id"]);
+		}
 		$attachments = get_posts(
 		    array('post_type' => 'attachment',
 		    'post_parent' => $post->ID,
@@ -15,11 +18,15 @@ function printPageTop($post) {
 		$image_src = wp_get_attachment_image_src($attachments[0]->ID, "full");
 		if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src;
 		?>'); background-repeat: no-repeat; background-position: center;">
-	    <h1><?php the_title(); ?></h1>
+	    
+		<h1><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h1>
 
+	    <?php /*
 	    <div>
 		<a href="#">[TODO: bouton "J'y crois"] <?php echo __('Jy crois', 'yproject'); ?></a>
 	    </div>
+	     * 
+	     */ ?>
 
 	    <div id="post_top_infos">
 		<img src="" width="40" height="40" />
@@ -118,15 +125,11 @@ function printPageBottomEnd($post, $campaign) {
 		    
 	<div id="popup_share">
 	    <iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode(get_permalink( $post->ID )); ?>&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=30" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:20px; text-align: center" allowTransparency="true"></iframe>
-	    <?php /*<script>function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script>
-	    <a rel="nofollow" href="http://www.facebook.com/share.php?u=<;url>" onclick="return fbs_click()" target="_blank"><?php echo __('Partager sur Facebook', 'yproject'); ?></a> */ ?>
-	    <?php /*<a href="http://www.facebook.com/sharer.php?u=<?php echo urlencode(get_permalink( $post->ID )); ?>%2F&t=<?php echo urlencode(get_the_title()); ?>" target="_blank"><?php echo __('Partager sur Facebook', 'yproject'); ?></a>*/ ?>
 	    <a href="http://www.facebook.com/sharer.php?u=<?php echo urlencode(get_permalink( $post->ID )); ?>" target="_blank"><?php echo __('Partager sur Facebook', 'yproject'); ?></a>
 	    <br />
 
 	    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 	    <a href="https://twitter.com/share" class="twitter-share-button" data-via="yproject_co" data-lang="fr"><?php echo __('Partager sur Twitter', 'yproject'); ?></a>
-	    <?php /*<a href=""><?php echo __('Partager sur Twitter', 'yproject'); ?></a>*/ ?>
 	    <br />
 
 	    <a id="popup_share_close" href="javascript:void(0)">[<?php echo __('Fermer', 'yproject'); ?>]</a>

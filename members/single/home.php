@@ -39,7 +39,7 @@ get_header( 'buddypress' ); ?>
 			
 			<?php
 			if (is_user_logged_in() && get_current_user_id() == bp_current_user_id()) {
-			    echo 'Vous disposez de ' . ypcf_mangopay_get_user_personalamount_by_wpid(bp_current_user_id());
+			    echo 'Vous disposez de ' . ypcf_mangopay_get_user_personalamount_by_wpid(bp_current_user_id()) . edd_get_currency() . ' dans votre porte-monnaie.';
 			}
 				
 			
@@ -51,6 +51,7 @@ get_header( 'buddypress' ); ?>
 							<?php do_action('edd_purchase_history_header_before'); ?>
 							<th class="edd_purchase_date"><?php _e('Date', 'edd'); ?></th>
 							<th class="edd_purchase_project"><?php _e('Project', 'edd'); ?></th>
+							<th class="edd_purchase_status"><?php _e('Status', 'edd'); ?></th>
 							<?php do_action('edd_purchase_history_header_after'); ?>
 						</tr>
 					</thead>
@@ -67,10 +68,13 @@ get_header( 'buddypress' ); ?>
 								if (is_array($downloads[0])) $download_id = $downloads[0]["id"]; 
 								else $download_id = $downloads[0];
 								
-								$post = get_post($download_id);
-								$campaign = atcf_get_campaign( $post );
-								echo '<a href="' . get_permalink($campaign->ID) . '">' . $post->post_title . '</a>';
+								$post_camp = get_post($download_id);
+								$campaign = atcf_get_campaign( $post_camp );
+								echo '<a href="' . get_permalink($campaign->ID) . '">' . $post_camp->post_title . '</a>';
 								?>
+							</td>
+							<td class="edd_purchase_status">
+							    <?php echo edd_get_payment_status( $post, true ); ?>
 							</td>
 							<?php do_action( 'edd_purchase_history_row_end', $post->ID, $purchase_data ); ?>
 						</tr>
