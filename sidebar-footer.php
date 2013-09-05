@@ -64,15 +64,29 @@
 							<div class="menu-footer-3-container">
 							    <ul id="menu-footer-3" class="menu">
 								<?php 
-								    global $facebook_infos;
-								    global $twitter_infos;
+								    global $facebook_infos, $twitter_infos;
 								?>
-								<li class="menu-item"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank">Facebook</a> : <?php echo $facebook_infos; ?></li>
-								<li class="menu-item"><a href="https://twitter.com/yproject_co" target="_blank">Twitter</a> : <?php echo $twitter_infos; ?></li>
+								<li class="menu-item"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank">Facebook</a><?php if ($facebook_infos) echo ' : ' . $facebook_infos; ?></li>
+								<li class="menu-item"><a href="https://twitter.com/yproject_co" target="_blank">Twitter</a><?php if ($twitter_infos) echo ' : ' . $twitter_infos; ?></li>
 								<li class="menu-item"><a href="">LinkedIn</a></li>
 								<li class="menu-item"><a href="">Viadeo</a></li>
-								<li class="menu-item"><a href="">Blog</a></li>
-								<li class="menu-item">Champ inscription newsletter</li>
+								<?php $page_community_blog = get_page_by_path('blog'); ?>
+								<li class="menu-item"><a href="<?php echo get_permalink($page_community_blog->ID); ?>">Blog</a></li>
+								<li class="menu-item">Newsletter</li>
+								<li class="menu-item">
+								    <?php 
+								    $snsf_args = array("thanks" => __("Merci", "yproject"));
+								    echo do_newsletter($snsf_args);
+								    if (!isset($_POST['snsf-subscriber-email'])) {
+								    ?>
+								    <form method="post" name="simple-newsletter-signup-form" id="snsf-form">
+									<input type="text" name="snsf-subscriber-email" />
+									<input type="submit" value="<?php _e('Sinscrire', 'yproject'); ?>" id="snsf-submit-button" />
+								    </form>
+								    <?php
+								    }
+								    ?>
+								</li>
 								
 							    </ul>
 							</div>

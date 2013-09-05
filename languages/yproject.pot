@@ -224,3 +224,9 @@ msgstr "Cette &oelig;uvre est mise à disposition selon les termes de la "
 
 msgid "CREATIVE COMMONS PART 2"
 msgstr "Licence Creative Commons Attribution - Partage dans les M&ecirc;mes Conditions 3.0 France"
+
+msgid "Merci"
+msgstr "Merci"
+
+msgid "Adresse non valide"
+msgstr "Adresse non valide"
