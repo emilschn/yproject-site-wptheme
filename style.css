@@ -43,6 +43,11 @@ body {
     margin: -13px 0px 0px 0px;
 }
 
+body a {
+    color: #000;
+    text-decoration: none;
+}
+
 .center {
     width: 960px;
     margin: auto;
@@ -69,20 +74,23 @@ body {
 }
 
 /* PROJECT PREVIEW */
-#projects_current {
+.projects_current {
     width: 661px;
-    color: #29ABBA;
+    color: #000;
     background-color: #FFFFFF;
 }
-#projects_vote {
+.projects_current_temp {
+    width: 221px !important;
+}
+.projects_vote {
     width: 221px;
     color: #000;
-    background-color: #EDEEEE;
+    background-color: #E6F0F2;
 }
 #projects_finished {
     color: #29ABBA;
 }
-
+    
 .projects_preview {
     font-family: DINPro-Light;
     float: left;
@@ -95,7 +103,7 @@ body {
     text-transform: uppercase;
     margin-left: 5px;
 }
-#projects_vote h1 {
+.projects_vote h1 {
     text-align: center;
 }
 
@@ -120,10 +128,10 @@ body {
 .project_preview_item h2 a {
     text-decoration: none;
 }
-#projects_current .project_preview_item h2 a {
-    color: #29ABBA;
+.projects_current .project_preview_item h2 a {
+    color: #000;
 }
-#projects_vote .project_preview_item h2 a {
+.projects_vote .project_preview_item h2 a {
     color: #000;
 }
 #projects_finished .project_preview_item h2 a {
@@ -139,7 +147,7 @@ body {
     margin-top: 3px;
     margin-bottom: 3px;
     color: #000;
-    height: 150px; 
+    height: 140px; 
 }
 
 .project_preview_item_pictos {
@@ -172,18 +180,11 @@ body {
     height: 20px;
 }
 
-#projects_current .project_preview_item_progressbg {
+.projects_current .project_preview_item_progressbg {
     background-color: #EDEEEE;
 }
-#projects_current .project_preview_item_progressbar {
-    background-color: #29ABBA;
-}
-
-#projects_vote .project_preview_item_progressbg {
+.projects_current .project_preview_item_progressbar {
     background-color: #000;
-}
-#projects_vote .project_preview_item_progressbar {
-    background-color: #29ABBA;
 }
 
 #projects_finished .project_preview_item_progressbg {
@@ -199,41 +200,6 @@ body {
     font-weight: bold;
 }
 
-.project_preview_item_btn {
-    border-radius: 50%;
-    background-color: #000;
-    width: 100px;
-    height: 100px;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    
-    padding-top: 30px;
-    margin-top: 10px;
-    margin-left: 50px;
-    
-    color: #FFF;
-    font-size: 8pt;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-#projects_current .project_preview_item_btn {
-    background-color: #29ABBA;
-}
-
-#projects_vote .project_preview_item_btn {
-    background-color: #000;
-}
-
-#projects_finished .project_preview_item_btn {
-    background-color: #29ABBA;
-}
-
-.project_preview_item_btn a {
-    text-decoration: none;
-    color: #FFF;
-}
-
 #home_middle {
     margin: 30px 0px 10px 0px;
 }
@@ -244,13 +210,13 @@ body {
 }
 
 #home_middle_content {
-    background-color: #EDEEEE;
+    background-color: #E5E5E3;
     padding: 100px 0px 30px 0px;
 }
 
 .round_title_left, .round_title_right {
     border-radius: 50%;
-    background-color: #F6A117;
+    background-color: #FF474F;
     width: 180px;
     height: 180px;
     -moz-box-sizing: border-box;
@@ -266,10 +232,14 @@ body {
     float: left;
 }
 .round_title_left {
-    margin: 20px 80px 0px 170px;
+    margin: 20px 90px 0px 140px;
 } 
 .round_title_right {
-    margin: 20px 170px 0px 80px;
+    margin: 20px 0px 0px 180px;
+}
+.home_half_size {
+    width: 49%;
+    float: left;
 }
 
 div#home_bottom h1 {
@@ -620,7 +590,7 @@ div#home_bottom h1 {
 
 /* HEADER */
 header {
-    background-color: #F4A90B;
+    background-color: #E84651;
     text-align: center;
 }
 

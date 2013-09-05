@@ -18,17 +18,22 @@
 <div id="content">
     <div id="home_top" class="center">
 	<div class="padder">
-	    <?php /* Affichage des projets */ ?>
-	    <div id="projects_vote" class="projects_preview">
+	    <?php /* Affichage des projets 
+	    <div class="projects_vote projects_preview">
 		<h1><?php echo __('Votez !', 'yproject'); ?></h1>
 		<?php printPreviewProjectsVote(2); ?>
 	    </div>
 
-	    <div id="projects_current" class="projects_preview">
+	    <div class="projects_current projects_preview">
 		<h1><?php echo __('Les projets en cours', 'yproject'); ?></h1>
 		<?php printHomePreviewProjects(3); ?>
 	    </div>	
 
+	    <div style="clear: both"></div>
+	     * 
+	     */ ?>
+	    <?php printHomePreviewProjectsTemp(4); ?>
+	    
 	    <div style="clear: both"></div>
 	</div>
     </div>
@@ -44,7 +49,7 @@
 	</div>
 	<div id="home_middle_content">
 	    <div class="center">
-		<?php /* Participer à un projet | Proposer un projet */ ?>
+		<?php // Participer à un projet | Proposer un projet ?>
 		<?php 
 		    wp_reset_query();
 		    the_content();
@@ -56,7 +61,14 @@
 	
     <div id="home_bottom" class="center">
 	<div class="padder">
-	    <?php /* Rechercher */ ?>
+	    <?php $projects_page = get_page_by_path('projects'); ?>
+	    <a href="<?php echo get_permalink($projects_page->ID); ?>"><?php _e('Decouvrir les projets', 'yproject'); ?></a><br /><br />
+	    
+	    Liste des partenaires....<br /><br /><br />
+		   
+	    <?php
+	    /*
+	    <?php // Rechercher ?>
 	    <h1><?php echo __('Trouvez les projets', 'yproject'); ?></h1>
 	    TODO: une carte de France qui a un roll sur chacune des régions. Quand on clique sur une région, ça filtre les projets.<br />
 	    TODO: recherche des projets par centres d'intérêts<br />
@@ -74,7 +86,7 @@
 	    </form><!-- #search-form -->
 
 	    
-	    <?php /* Communauté : actualités | derniers investisseurs */ ?>
+	    <?php // Communauté : actualités | derniers investisseurs ?>
 	    <h1><?php echo __('Actualites', 'yproject'); ?></h1>
 	    <strong>Ces personnes viennent d'investir :</strong><br />
 	    <ul>
@@ -87,8 +99,6 @@
 		<div style="clear: both"></div>
 	    </div>
 	    
-	    <?php
-	    /*
 	    <strong>Fil d'actualité</strong><br />
 	    <ul>
 		<li>TODO: une liste d'activité</li>

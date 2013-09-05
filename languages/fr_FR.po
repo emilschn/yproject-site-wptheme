@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-06-26 10:40+0100\n"
+"PO-Revision-Date: 2013-09-05 12:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "X-Generator: Poedit 1.5.5\n"
@@ -19,6 +19,9 @@ msgstr "Votez !"
 
 msgid "Les projets en cours"
 msgstr "Les projets en cours"
+
+msgid "Soutenez le projet en votant !"
+msgstr "Soutenez le projet en votant !"
 
 msgid "voter"
 msgstr "voter"
@@ -44,9 +47,15 @@ msgstr "Actualit&eacute;s"
 msgid "Trouvez les projets"
 msgstr "Trouvez les projets"
 
-# single.php - Page projet
-msgid "Suivre le blog"
-msgstr "Suivre le blog"
+# single-campaign.php - Page projet
+msgid "Investissez"
+msgstr "Investissez"
+
+msgid "Bient&ocirc;t !"
+msgstr "Bient&ocirc;t !"
+
+msgid "Participer autrement"
+msgstr "Participer autrement"
 
 msgid "Blog"
 msgstr "Blog"
@@ -54,12 +63,118 @@ msgstr "Blog"
 msgid "Forum"
 msgstr "Forum"
 
+msgid "Statistiques"
+msgstr "Statistiques"
+
 msgid "Jy crois"
 msgstr "J'y crois"
 
+msgid "Partager sur Facebook"
+msgstr "Partager sur Facebook"
+
+msgid "Partager sur Twitter"
+msgstr "Partager sur Twitter"
+
+msgid "Fermer"
+msgstr "Fermer"
+
+msgid "Page projet"
+msgstr "Page projet"
+
+msgid "G&eacute;rer vos informations"
+msgstr "G&eacute;rer vos informations"
+
+msgid "Ajouter une actualit&eacute;"
+msgstr "Ajouter une actualit&eacute;"
+
+# register.php / page-modifier-mon-compte.php - S'inscrire/Modifier mon compte
+msgid "Inscription"
+msgstr "Inscription"
+
+msgid "Modifier mon compte"
+msgstr "Modifier mon compte"
+
+msgid "Informations de base"
+msgstr "Informations de base"
+
+msgid "Ces informations sont n&eacute;cessaires pour obtenir un compte."
+msgstr "Ces informations sont n&eacute;cessaires pour obtenir un compte."
+
+msgid "Adresse e-mail"
+msgstr "Adresse e-mail"
+
+msgid "Confirmation de l&apos;adresse e-mail"
+msgstr "Confirmation de l&apos;adresse e-mail"
+
+msgid "Les deux adresses ne sont pas identiques"
+msgstr "Les deux adresses ne sont pas identiques"
+
+msgid "Confirmation du mot de passe"
+msgstr "Confirmation du mot de passe"
+
+msgid "Les deux mots de passe ne sont pas identiques"
+msgstr "Les deux mots de passe ne sont pas identiques"
+
+msgid " (vide si pas de changement)"
+msgstr " (vide si pas de changement)"
+
+msgid "Informations compl&eacute;mentaires"
+msgstr "Informations compl&eacute;mentaires"
+
+msgid "Ces informations sont n&eacute;cessaires pour investir dans un projet."
+msgstr "Ces informations sont n&eacute;cessaires pour investir dans un projet."
+
+msgid "Pr&eacute;nom"
+msgstr "Pr&eacute;nom"
+
+msgid "Nom"
+msgstr "Nom"
+
+msgid "Date de naissance"
+msgstr "Date de naissance"
+
+msgid "Nationalit&eacute;"
+msgstr "Nationalit&eacute;"
+
+msgid "Type de personne"
+msgstr "Type de personne"
+
+msgid "Physique"
+msgstr "Physique"
+
+msgid "Morale"
+msgstr "Morale"
+
+msgid "Un e-mail de confirmation vous a &eacute;t&eacute; envoy&eacute;."
+msgstr "Un e-mail de confirmation vous a &eacute;t&eacute; envoy&eacute;."
+
+msgid ""
+"Votre compte est maintenant cr&eacute;&eacute;. Pour l&apos;utiliser, rendez-"
+"vous sur l&apos;e-mail que nous avons envoy&eacute;."
+msgstr ""
+"Votre compte est maintenant cr&eacute;&eacute;. Pour l&apos;utiliser, rendez-"
+"vous sur l&apos;e-mail que nous avons envoy&eacute;."
+
+msgid ""
+"Votre compte est maintenant cr&eacute;&eacute;. Vous pouvez &agrave; "
+"pr&eacute;sent vous identifier."
+msgstr ""
+"Votre compte est maintenant cr&eacute;&eacute;. Vous pouvez &agrave; "
+"pr&eacute;sent vous identifier."
+
+msgid "Erreur d&apos;identification"
+msgstr "Erreur d&apos;identification"
+
+# archive.php - Blog
+msgid "Revenir à la description du projet"
+msgstr "Revenir à la description du projet"
+
+msgid "Derni&egrave;res actualit&eacute;s du projet %1$s"
+msgstr "Derni&egrave;res actualit&eacute;s du projet %1$s"
+
 # header.php - menu
 msgid "Decouvrir les projets"
-msgstr "D&Eacute;couvrir les projets"
+msgstr "D&eacute;couvrir les projets"
 
 msgid "Proposer un projet"
 msgstr "Proposer un projet"
@@ -96,6 +211,9 @@ msgstr "Fil d'activit&eacute;"
 
 msgid "Qui sommes-nous ?"
 msgstr "Qui sommes-nous ?"
+
+msgid "Terminer mon inscription"
+msgstr "Terminer mon inscription"
 
 msgid "Welcome Text 1"
 msgstr "Bienvenue dans la communauté WE DO GOOD !"

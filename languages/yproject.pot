@@ -19,6 +19,9 @@ msgstr "Votez !"
 msgid "Les projets en cours"
 msgstr "Les projets en cours"
 
+msgid "Soutenez le projet en votant !"
+msgstr "Soutenez le projet en votant !"
+
 msgid "voter"
 msgstr "voter"
 
@@ -96,9 +99,6 @@ msgstr "Informations de base"
 msgid "Ces informations sont n&eacute;cessaires pour obtenir un compte."
 msgstr "Ces informations sont n&eacute;cessaires pour obtenir un compte."
 
-msgid "Identifiant"
-msgstr "Identifiant"
-
 msgid "Adresse e-mail"
 msgstr "Adresse e-mail"
 
@@ -107,9 +107,6 @@ msgstr "Confirmation de l&apos;adresse e-mail"
 
 msgid "Les deux adresses ne sont pas identiques"
 msgstr "Les deux adresses ne sont pas identiques"
-
-msgid "Mot de passe"
-msgstr "Mot de passe"
 
 msgid "Confirmation du mot de passe"
 msgstr "Confirmation du mot de passe"
@@ -168,7 +165,7 @@ msgstr "Derni&egrave;res actualit&eacute;s du projet %1$s"
 
 # header.php - menu
 msgid "Decouvrir les projets"
-msgstr "D&Eacute;couvrir les projets"
+msgstr "D&eacute;couvrir les projets"
 
 msgid "Proposer un projet"
 msgstr "Proposer un projet"

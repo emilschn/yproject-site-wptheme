@@ -171,6 +171,25 @@ function printAdminBar() {
 /* PREVIEW DES PROJETS */
 /******************************************************************************/
 
+function printHomePreviewProjectsTemp($nb) {
+    global $wpdb, $print_project_count;
+    $print_project_count = 0;
+    query_posts( array(
+	'showposts' => $nb,
+	'post_type' => 'download',
+	'meta_query' => array (
+	    array (
+		'key' => 'campaign_end_date',
+		'compare' => '>',
+		'value' => date('Y-m-d H:i:s')
+	    )
+	),
+	'orderby' => 'post_date',
+	'order' => 'desc'
+    ) );
+    printProjectsPreview(false);
+}
+
 function printPreviewProjectsVote($nb) {
     global $wpdb, $print_project_count;
     $print_project_count = 0;
@@ -221,7 +240,7 @@ function printPreviewProjectsTop($nb) {
 	'orderby' => '_edd_download_sales',
 	'order' => 'desc'
     ) );
-    printProjectsPreview(true);
+    printProjectsPreview(false);
     
 }
 
@@ -246,7 +265,7 @@ function printPreviewProjectsNew($nb) {
 	'orderby' => 'post_date',
 	'order' => 'desc'
     ) );
-    printProjectsPreview(true);
+    printProjectsPreview(false);
 }
 
 function printPreviewProjectsFinished($nb) {
@@ -271,6 +290,8 @@ function printProjectsPreview($vote) {
     global $print_project_count;
     while (have_posts()) {
 	the_post();
+	global $post;
+	$vote = (get_post_meta($post->ID, 'campaign_vote', true) == 'vote');
 	printSinglePreview($print_project_count, $vote);
 	$print_project_count++;
     } 
@@ -281,63 +302,71 @@ function printProjectsPreview($vote) {
 
 
 function printSinglePreview($i, $vote) {
-    global $campaign, $post;
-    if ( ! is_object( $campaign ) )
-        $campaign = atcf_get_campaign( $post );
+    global $post;
+    $campaign = atcf_get_campaign( $post );
     ?>
-    <div class="project_preview_item<?php if (($vote && $i > 0) || (!$vote && $i > 2)) echo ' mobile_hidden'; ?>">
-    <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-    
-    <div class="project_preview_item_part">
-        <img src="" class="project_preview_item_img" /><br />
+    <div class="projects_preview<?php if ($vote) { ?> projects_vote<?php } else { ?> projects_current projects_current_temp<?php } ?>">
+	<div class="preview_item_<?php echo $post->ID; ?> project_preview_item<?php if (($vote && $i > 0) || (!$vote && $i > 2)) echo ' mobile_hidden'; ?>">
+	    <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 
-        <div class="project_preview_item_desc"><?php the_excerpt(); ?></div>
-    </div>
-    
-    <div class="project_preview_item_part">
-        <div class="project_preview_item_pictos">
-        <div class="project_preview_item_picto">
-            <img src="" />
-            <?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
-        </div>
-        <div class="project_preview_item_picto">
-            <img src="" />
-            <?php echo $campaign->days_remaining(); ?>
-        </div>
-        <div class="project_preview_item_picto">
-            <img src="" />
-            <?php echo $campaign->goal(); ?>
-        </div>
-        <div class="project_preview_item_picto">
-            <img src="" />
-            <?php echo $campaign->backers_count(); ?>
-        </div>
-        <div style="clear: both"></div>
-        </div>
+	    <?php
+	    if (WP_DEBUG) {$debug_src = 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject/todo.jpg';}
+	    if (isset($_GET["campaign_id"])) {
+		$post = get_post($_GET["campaign_id"]);
+	    }
+	    $attachments = get_posts(
+		array('post_type' => 'attachment',
+		'post_parent' => $post->ID,
+		'post_mime_type' => 'image')
+	    );
+	    if ($attachments) $image_src = wp_get_attachment_image_src($attachments[0]->ID, "medium");
+	    ?>
 
+	    <div class="project_preview_item_part">
+		<img src="<?php if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src; ?>" class="project_preview_item_img" /><br />
 
-        <?php 
-        $percent = $campaign->percent_completed(false);
-        $width = 150 * $percent / 100;
-        ?>
-        <div class="project_preview_item_progress">
-        <div class="project_preview_item_progressbg"><div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">&nbsp;</div></div>
-        <span class="project_preview_item_progressprint"><?php echo $campaign->percent_completed(); ?></span>
-        </div>
+		<div class="project_preview_item_desc"><?php echo html_entity_decode($campaign->summary()); ?></div>
+	    </div>
 
+	    <div class="project_preview_item_part">
+		<div class="project_preview_item_pictos">
+		<div class="project_preview_item_picto">
+		    <img src="" />
+		    <?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
+		</div>
+		<div class="project_preview_item_picto">
+		    <img src="" />
+		    <?php echo $campaign->days_remaining(); ?>
+		</div>
+		<div class="project_preview_item_picto">
+		    <img src="" />
+		    <?php echo $campaign->goal(); ?>
+		</div>
+		<div class="project_preview_item_picto">
+		    <img src="" />
+		    <?php echo $campaign->backers_count(); ?>
+		</div>
+		<div style="clear: both"></div>
+		</div>
 
-        <div class="project_preview_item_btn mobile_hidden">
-        <a href="<?php the_permalink(); ?>">
-            <?php if ($vote) : ?>
-            <strong><?php echo __('voter', 'yproject'); ?></strong><br />
-            <?php echo __('pour ce projet', 'yproject'); ?> 
-            <?php else : ?>
-            <strong><?php echo __('en savoir', 'yproject'); ?></strong><br />
-            <?php echo __('plus', 'yproject'); ?> 
-            <?php endif; ?>
-        </a>
-        </div>
-    </div>
+ 
+		<div class="project_preview_item_progress">
+		<?php
+		if ($vote) {
+		    _e('Soutenez le projet en votant !', 'yproject');
+		} else {
+		    $percent = $campaign->percent_completed(false);
+		    $width = 150 * $percent / 100;
+		    ?>
+		    <div class="project_preview_item_progressbg"><div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">&nbsp;</div></div>
+		    <span class="project_preview_item_progressprint"><?php echo $campaign->percent_completed(); ?></span>
+		<?php
+		}
+		?>
+		</div>
+	    </div>
+	</div>
+	<div style="clear: both"></div>
     </div>
     <?php
 }

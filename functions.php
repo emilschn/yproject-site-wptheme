@@ -41,4 +41,20 @@ function yproject_email_login_authenticate( $user, $username, $password ) {
 }
 remove_filter( 'authenticate', 'wp_authenticate_username_password', 20, 3 );
 add_filter( 'authenticate', 'yproject_email_login_authenticate', 20, 3 );
+
+/**
+ * Les fonctions gèrent l'affichage de la partie centrale de la page d'accueil (participer à un projet, proposer un projet)
+ * @param type $atts
+ * @param type $content
+ * @return type
+ */
+function yproject_participate_project_shortcode($atts, $content) {
+    return '<div class="home_half_size">' . $content . '</div>';
+}
+add_shortcode('yproject_participate_project', 'yproject_participate_project_shortcode');
+
+function yproject_post_project_shortcode($atts, $content) {
+    return '<div class="home_half_size">' . $content . '</div><div style="clear:both"></div>';
+}
+add_shortcode('yproject_post_project', 'yproject_post_project_shortcode');
 ?>
