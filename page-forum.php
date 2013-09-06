@@ -53,7 +53,15 @@
 					    </div>
 					    
 					    <span>
-					    <?php echo do_shortcode('[bbp-single-forum id='.$forum_projet_id.']'); ?>
+					    	<?php
+							if ( is_user_logged_in() ) {
+							    echo do_shortcode('[bbp-single-forum id='.$forum_projet_id.']'); 
+							} else {
+							    echo 'Vous devez être connecté pour accèder au forum !';
+							}
+							?>
+						</span>
+					    
 					    <?php 
 						 printPageBottomEnd($post, $campaign);
 						?>

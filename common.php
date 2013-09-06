@@ -450,3 +450,30 @@ function printCommunityMenu() {
 }
 
 ?>
+
+<?php
+
+/**RENVOIE LES FAQs LES PLUS RECENTS****/
+function showFaq($nb){
+	global $wpdb;
+    $lastfaq = "SELECT DISTINCT $wpdb->posts.post_title FROM $wpdb->posts";
+    $lastfaq .= " WHERE $wpdb->posts.post_type = 'qa_faqs'";
+    $lastfaq .= " ORDER BY $wpdb->posts.post_modified DESC LIMIT " . $nb;
+    $lastfaqproj = $wpdb->get_results($lastfaq);
+    ?>
+<table id="tab-results" style="font-size: 11p">
+    <?php
+    if (isset($lastfaqproj)) : 
+
+	foreach ($lastfaqproj as $temppost) {
+	    echo ('<tr>'.$temppost->post_title.'</tr><br>');
+
+	}
+    endif;
+    ?>
+</table>
+<?php
+}
+?>
+
+
