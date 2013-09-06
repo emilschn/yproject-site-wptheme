@@ -69,15 +69,15 @@
 			    <li class="page_item"><a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Proposer un projet', 'yproject'); ?></a></li>
 			    <?php /* Menu Comment ça marche ? */ $page_how = get_page_by_path('descriptif'); ?>
 			    <li class="page_item"><a href="<?php echo get_permalink($page_how->ID); ?>"><?php echo __('Comment ca marche ?', 'yproject'); ?></a></li>
-			    <?php /* Menu Communauté */ $page_community = get_page_by_path('community'); ?>
+			    <?php /* Menu Communauté */ $page_community = get_page_by_path('communaute'); ?>
 			    <li class="page_item_out">
 				<a href="<?php echo get_permalink($page_community->ID); ?>"><?php echo __('Communaute', 'yproject'); ?></a>
-				<ul>
-				    <?php /* Sous-Menu Communauté */ $page_community_activity = get_page_by_path('activity'); $page_community_who = get_page_by_path('qui-sommes-nous'); $page_community_blog = get_page_by_path('blog'); ?>
+				<?php /*<ul>
+				    $page_community_activity = get_page_by_path('activity'); $page_community_who = get_page_by_path('qui-sommes-nous'); $page_community_blog = get_page_by_path('blog'); ?>
 				    <li class="page_item_out"><a href="<?php echo get_permalink($page_community_activity->ID); ?>"><?php echo __('Fil dactivite', 'yproject'); ?></a></li>
 				    <li class="page_item_out"><a href="<?php echo get_permalink($page_community_who->ID); ?>"><?php echo __('Qui sommes-nous ?', 'yproject'); ?></a></li>
 				    <li class="page_item_out"><a href="<?php echo get_permalink($page_community_blog->ID); ?>"><?php echo __('Blog', 'yproject'); ?></a></li>
-				</ul>
+				</ul> */?>
 			    </li>
 			    <?php /* Logo FB / TW */ ?>
 			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank" title="Notre page Facebook"><img src="" width="16" height="16" /></a></li>

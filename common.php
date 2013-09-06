@@ -398,4 +398,55 @@ function echoUser($tempid) {
     }
 }
 
+/******************************************************************************/
+/* PAGE COMMUNAUTE */
+/******************************************************************************/
+function printCommunityTop($title) {
+    ?>
+    <div id="post_top_bg">
+	<div id="post_top_title" class="center" style="background-image: url('<?php 
+		if (WP_DEBUG) {$debug_src = 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject/todo.jpg';} else {$debug_src = get_stylesheet_directory_uri();}
+		$attachments = get_posts(
+		    array('post_type' => 'attachment',
+		    'post_parent' => $post->ID,
+		    'post_mime_type' => 'image')
+		);
+		$image_src = wp_get_attachment_image_src($attachments[0]->ID, "full");
+		if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src;
+		?>'); background-repeat: no-repeat; background-position: center;">
+	    
+		<h1><?php 
+		$result = count_users();
+		$user_count = $result['total_users'];
+		
+		if ($user_count > 50) echo 'WE ARE ' . $user_count;
+		else _e($title, "yproject");
+		?></h1>
+	</div>
+    </div>
+    <?php
+}
+
+function printCommunityMenu() {
+    ?>
+    <div class="left post_bottom_infos">
+	<div class="post_bottom_buttons">
+	    <div class="dark">
+		<?php $page_team = get_page_by_path('lequipe'); //Lien vers l'équipe ?>
+		<a href="<?php echo get_permalink($page_team->ID); ?>"><?php _e("L&apos;&eacute;quipe", "yproject"); ?></a>
+	    </div>
+	    <div class="dark">
+		<?php $page_makesense = get_page_by_path('makesense'); //Lien vers l'équipe ?>
+		<a href="<?php echo get_permalink($page_makesense->ID); ?>">MakeSense</a>
+	    </div>
+	    <div class="light">
+		<?php $page_blog = get_page_by_path('blog'); //Lien vers l'équipe ?>
+		<a href="<?php echo get_permalink($page_blog->ID); ?>"><?php _e('Blog', 'yproject'); ?></a>
+	    </div>
+	</div>
+	
+    </div>
+    <?php
+}
+
 ?>

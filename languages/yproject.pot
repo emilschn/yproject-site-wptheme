@@ -163,6 +163,16 @@ msgstr "Revenir à la description du projet"
 msgid "Derni&egrave;res actualit&eacute;s du projet %1$s"
 msgstr "Derni&egrave;res actualit&eacute;s du projet %1$s"
 
+# page-communaute.php - Communauté
+msgid "Derniers inscrits"
+msgstr "Derniers inscrits"
+
+msgid "L&apos;&eacute;quipe"
+msgstr "L&apos;&eacute;quipe"
+
+msgid " a rejoint WeDoGood - Il y a "
+msgstr " a rejoint WeDoGood - Il y a "
+
 # header.php - menu
 msgid "Decouvrir les projets"
 msgstr "D&eacute;couvrir les projets"

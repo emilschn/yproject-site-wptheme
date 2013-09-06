@@ -10,7 +10,12 @@
 
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				    <div class="post-content">
-					<div class="entry">
+					<div class="entry center">
+					    <div>
+						<?php $category = get_the_category(); if ($category[0]->slug == 'wedogood') { $page_blog = get_page_by_path('blog'); ?>&lt;&lt; <a href="<?php echo get_permalink($page_blog->ID); ?>"><?php echo __('Blog', 'yproject'); ?></a><?php } ?>
+					    </div>
+					    <h1><?php the_title(); ?></h1>
+					    <?php the_content(); ?>
 					</div>
 				    </div>
 				</div>

@@ -73,6 +73,13 @@ body a {
     color: green;
 }
 
+.underlined {
+    text-transform: uppercase;
+    border-bottom: 1px solid #E6223C;
+    font-weight: normal;
+    font-size: 13pt !important;
+}
+
 /* PROJECT PREVIEW */
 .projects_current {
     width: 661px;
@@ -304,8 +311,9 @@ div#home_bottom h1 {
 }
 
 .post_bottom_desc {
-    width: 630px;
+    width: 610px;
     padding-left: 10px;
+    padding-right: 20px;
     font-size: 9pt;
 }
 
@@ -400,6 +408,7 @@ div#home_bottom h1 {
     color: #000;
 }
 /* FIN PROJECT PAGE */
+
 /* REGISTER PAGE */     
 .register_half_part {       
     float: left;        
@@ -413,6 +422,20 @@ div#home_bottom h1 {
    padding-bottom: 10px;       
 }       
 /* FIN CONNEXION PAGE */
+
+/* COMMUNTY */
+.last_subscribers {
+    -webkit-padding-start: 0px;
+    padding-right: 0px;
+}
+.last_subscribers li {
+    background-color: #F2F2F2;
+    list-style: none;
+    margin-bottom: 2px;
+    padding: 2px 5px;
+    font-size: 11pt;
+}
+/* FIN COMMUNITY */
 
 /* NAV */
 #navigation {
@@ -726,7 +749,4 @@ footer a {
 .bbp-breadcrumb{
     visibility:hidden;
 }
-
-}
-
 /*FIN BBPRESS*/
