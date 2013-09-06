@@ -10,16 +10,24 @@
     ));
     $fb_infos = $facebook->api('http://graph.facebook.com/381460615282040'); 
     $facebook_infos = $fb_infos['likes'];
-    /* Récupération des infos Twitter *
+    /* Récupération des infos Facebook */
+    require_once("_external/facebook/facebook.php");
+    $facebook = new Facebook(array(
+	'appId'  => '370169356424813',
+	'secret' => 'e1f7ee659011a09c8765cf379719104f',
+    ));
+    $fb_infos = $facebook->api('http://graph.facebook.com/381460615282040'); 
+    $facebook_infos = $fb_infos['likes'];
+    /* Récupération des infos Twitter */
     require_once("_external/twitter/TwitterAPIExchange.php");
     $apiUrl = "https://api.twitter.com/1.1/users/show.json";
     $requestMethod = 'GET';
     $getField = '?screen_name=yproject_co';
     $settings = array(
-        'oauth_access_token' => "YOUR_OAUTH_ACCESS_TOKEN",
-        'oauth_access_token_secret' => "YOUR_OAUTH_ACCESS_TOKEN_SECRET",
-        'consumer_key' => "YOUR_CONSUMER_KEY",
-        'consumer_secret' => "YOUR_CONSUMER_SECRET"
+        'oauth_access_token' => "1101378505-YWPrcywDrPrex0A0rLfudCjUmTszmkBWVNjf6nb",
+        'oauth_access_token_secret' => "zle4fnt74ROokjQ8ZzNLKbLGCf4fWejZKyop6FvyLRw",
+        'consumer_key' => "lPo2vDvhrtFPzSVInByLtw",
+        'consumer_secret' => "J1ie7IcWqiMDhpzza87jn1RJ6L4ZYSvYhGDp1G9tcZAs"
     );
 
     $twitter = new TwitterAPIExchange($settings);
@@ -28,7 +36,7 @@
 			->performRequest();
     echo $response;
     $followers = json_decode($response);
-    $twitter_infos = $followers->followers_count;*/
+    $twitter_infos = $followers->followers_count;
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

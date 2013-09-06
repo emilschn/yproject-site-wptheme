@@ -18,8 +18,8 @@
 
 							<div id="post_bottom_content" class="center">
 							    <div class="left post_bottom_desc">
-									
-										<?php descCommentCaMarche(); ?>
+										<span><?php the_content(); ?></span>
+										
 								 	</div> 
 							   
 
@@ -34,7 +34,6 @@
 							    			
 							    		</div>
 							    	</div>
-							    	
 
 							    </div>
 							    <div style="clear: both"></div>
