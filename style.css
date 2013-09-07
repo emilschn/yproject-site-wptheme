@@ -744,10 +744,17 @@ footer a {
 }
 /*FIN PAGE FORMULAIRE VOTE*/
 
-/**BBPRESS CACHER */
+/**BBPRESS FORUM  */
 
 .bbp-breadcrumb{
     visibility:hidden;
+}
+
+.bbp-header{
+    color: red;
+}
+.bbp-template-notice{
+    background-color: #E84651;
 }
 /*FIN BBPRESS*/
 /**FAQ***********************/
