@@ -750,3 +750,11 @@ footer a {
     visibility:hidden;
 }
 /*FIN BBPRESS*/
+/**FAQ***********************/
+.qa-faq-anchor{
+    color: blue;
+    text-decoration : underline;
+    font-weight: normal;
+}
+
+/*****FIN FAQ****/

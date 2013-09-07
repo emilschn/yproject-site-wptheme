@@ -9,23 +9,16 @@
 		<div class="padder">
 				
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-	    	<?php printCommunityTop("Comment ça marche ?"); ?>
+	    	<?php printCommunityTop("FAQ"); ?>
 						<div id="post_bottom_bg">
 
 							<div id="post_bottom_content" class="center">
 							    <div class="left post_bottom_desc">
-									
-										<span style="font-size:15px; font-weight:normal;"><?php the_content(); ?></span>
-										<ul>
-										<?php /* Menu Proposer un projet */ $page_start = get_page_by_path('proposer-un-projet'); ?>
-										<li class="page_item"><a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Proposer un projet', 'yproject'); ?></a></li>
-										</ul>
-
-										<ul>
-										<?php /* Menu Découvrir les projets */ $page_discover = get_page_by_path('projects'); ?>
-										<li class="page_item"><a href="<?php echo get_permalink($page_discover->ID); ?>"><?php echo __('Decouvrir les projets', 'yproject'); ?></a>
-										</li>
-										</ul>
+							    		<?php $page_descriptif = get_page_by_path('descriptif'); // Menu Comment ça marche ?>
+										&lt;&lt; <a href="<?php echo get_permalink($page_descriptif->ID); ?>"><?php echo __('Comment ça marche ?', 'yproject'); ?></a>
+				 		
+										<span><?php the_content(); ?></span>
+										
 								 	</div> 
 							   
 
@@ -40,7 +33,6 @@
 							    	</div>
 							   
 							       	<div class="post_bottom_buttons">
-							       		
 							    		<div class="light" >
 							    			<?php /* forum questions */  $forum = get_page_by_path('Forum Questions'); ?>
       										<a href="<?php echo get_permalink($forum->ID); ?>"> <?php echo __('FORUM Questions', 'yproject'); ?></a>
@@ -50,7 +42,7 @@
 
 							    	<div class="post_bottom_buttons">
 							    		<div class="light" >
-							    			<?php /* forum idees */  $forum = get_page_by_path('Forum Idees'); ?>
+							    	<?php /* forum idees */  $forum = get_page_by_path('Forum Idees'); ?>
       										<a href="<?php echo get_permalink($forum->ID); ?>"> <?php echo __('FORUM Idées', 'yproject'); ?></a>
 	    							    </div>
 							    		
@@ -58,17 +50,17 @@
 
 							    	<div class="post_bottom_buttons">
 							    		<div class="light" >
-							    			<?php /* forum idees */  $forum = get_page_by_path('Forum Bugs'); ?>
-      										<a href="<?php echo get_permalink($forum->ID); ?>"> <?php echo __('FORUM Bugs', 'yproject'); ?></a>
+							    			<?php /* forum bugs */  $forum = get_page_by_path('Forum Bugs'); ?>
+      										<a href="<?php echo get_permalink($forum->ID); ?>"> <?php echo __('bugs', 'yproject'); ?></a>
 	    							    </div>
 							    		
 							    	</div>
-
 							    </div>
 							    <div style="clear: both"></div>
 
 							</div>
-						 </div> 
+						 </div>
+
 			<?php do_action( 'bp_after_blog_single_post' ); ?>
 
 		</div><!-- .padder -->
