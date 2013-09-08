@@ -80,6 +80,10 @@ body a {
     font-size: 13pt !important;
 }
 
+.align-center {
+    text-align: center;
+}
+
 /* PROJECT PREVIEW */
 .projects_current {
     width: 661px;
@@ -263,7 +267,7 @@ div#home_bottom h1 {
     margin-top: 20px;
 }
 .padder_more {
-    margin-top: 25px;
+    margin-top: 22px;
     margin-bottom: 5px;
 }
 /* FIN HOME */
@@ -400,7 +404,8 @@ div#home_bottom h1 {
 }
 
 #yp_admin_bar {
-    padding: 25px 10px 0px 20px;
+    padding: 10px 10px 10px 20px;
+    background-color: #E1E3E2;
 }
     
 #yp_admin_bar a {
@@ -436,6 +441,55 @@ div#home_bottom h1 {
     font-size: 11pt;
 }
 /* FIN COMMUNITY */
+
+/* MON COMPTE */
+#item-header-container {
+    background-color: #FFF;
+    padding: 20px 0px;
+}
+
+#item-header-avatar {
+    width: 151px;
+    padding: 0px 5px;
+}
+
+#item-header-content {
+    width: 370px;
+    padding: 0px 15px 0px 5px;
+}
+
+#item-header-content h1 {
+    -webkit-margin-before: 1px;
+    -webkit-margin-after: 1px;
+    font-weight: normal;
+    font-size: 13pt;
+}
+
+#item-header-content .user-nicename {
+    font-size: 10pt;
+}
+
+#item-header-content-description {
+    padding-top: 5px;
+    font-size: 9pt;
+}
+
+#item-header-content-description h3 {
+    -webkit-margin-before: 1px;
+    -webkit-margin-after: 1px;
+    font-weight: normal;
+    font-size: 10pt;
+}
+
+#item-header-stats{
+    width: 380px;
+    padding: 0px 5px;
+}
+
+#item-header-stats ul {
+    list-style: none;
+}
+/* FIN MON COMPTE */
 
 /* NAV */
 #navigation {
@@ -615,7 +669,7 @@ div#home_bottom h1 {
 header {
     background-color: #E84651;
     background-image: url("images/footer.png");
-    text-align: center;
+    margin-bottom: 10px;
 }
 
 #site_name {

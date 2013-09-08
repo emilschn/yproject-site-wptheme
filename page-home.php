@@ -1,4 +1,4 @@
-<header>
+<header class="align-center">
     <div id="site_name" class="center">
 	    <h1 id="logo" role="banner"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><?php bp_site_name(); ?></a></h1>
 	    <div id="welcome_text">

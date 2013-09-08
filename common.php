@@ -399,6 +399,31 @@ function echoUser($tempid) {
 }
 
 /******************************************************************************/
+/* PAGE PROFILS UTILISATEURS */
+/******************************************************************************/
+function printUserProfileAdminBar($skip_controls = false) {
+    // La barre d'admin n'apparait que pour l'admin du site et si on est l'utilisateur qu'on affiche
+    $current_user = wp_get_current_user();
+    $current_user_id = $current_user->ID;
+    $displayed_user_id = bp_displayed_user_id();
+    if ($skip_controls || $current_user_id == $displayed_user_id || current_user_can('manage_options')) {
+    ?>
+	<div id="yp_admin_bar">
+	    <div class="center">
+		<?php // Lien page profil ?>
+		<a href="<?php echo bp_loggedin_user_domain(); ?>"><?php echo __('Mon profil', 'yproject'); ?></a>
+		.:|:.
+		<?php $page_investments = get_page_by_path('mes-investissements'); // Lien page investissements  ?>
+		<a href="<?php echo get_permalink($page_investments->ID); ?>"><?php echo __('Mes investissements', 'yproject'); ?></a>
+		.:|:.
+		<?php $page_update = get_page_by_path('modifier-mon-compte'); // Lien page paramètres ?>
+		<a href="<?php echo get_permalink($page_update->ID); ?>"><?php echo __('Param&egrave;tres', 'yproject'); ?></a>
+	    </div>
+    </div>
+    <?php }
+}
+
+/******************************************************************************/
 /* PAGE COMMUNAUTE */
 /******************************************************************************/
 function printCommunityTop($title) {
