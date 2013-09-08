@@ -331,19 +331,19 @@ function printSinglePreview($i, $vote) {
 	    <div class="project_preview_item_part">
 		<div class="project_preview_item_pictos">
 		<div class="project_preview_item_picto">
-		    <img src="" />
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" />
 		    <?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
 		</div>
 		<div class="project_preview_item_picto">
-		    <img src="" />
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
 		    <?php echo $campaign->days_remaining(); ?>
 		</div>
 		<div class="project_preview_item_picto">
-		    <img src="" />
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
 		    <?php echo $campaign->goal(); ?>
 		</div>
 		<div class="project_preview_item_picto">
-		    <img src="" />
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
 		    <?php echo $campaign->backers_count(); ?>
 		</div>
 		<div style="clear: both"></div>

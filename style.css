@@ -13,7 +13,7 @@
  *
  */
 
-@import url("_inc/css/responsive.css") (max-width: 480px);
+/* @import url("_inc/css/responsive.css") (max-width: 480px); */
 
 /* FONTS TO LOAD */
 @font-face {
@@ -172,7 +172,7 @@ body a {
 
 .project_preview_item_picto img {
     width: 40px;
-    height: 40px;
+    height: 26px;
 }
 
 .project_preview_item_progress {
@@ -614,6 +614,7 @@ div#home_bottom h1 {
 /* HEADER */
 header {
     background-color: #E84651;
+    background-image: url("images/footer.png");
     text-align: center;
 }
 
@@ -657,12 +658,23 @@ header {
 /* FOOTER */
 footer {
     background-color: #EB5A50;
+    background-image: url("images/footer.png");
 }
 
 footer div.widget-area {
     padding-top: 10px;
     float: left;
-    width: 310px;
+    width: 250px;
+    
+    font-family: DINPro-Light;
+    color: #FFF;
+    font-size: 8pt;
+}
+
+footer div.widget-area-large {
+    padding-top: 10px;
+    float: left;
+    width: 350px;
     
     font-family: DINPro-Light;
     color: #FFF;
@@ -685,6 +697,13 @@ footer ul.menu {
 
 footer li.menu-item {
     list-style: none;
+    padding-bottom: 10px;
+}
+
+footer div.social-icons {
+    float: left; 
+    width: 71px; 
+    text-align: center;
 }
 
 footer h1 {

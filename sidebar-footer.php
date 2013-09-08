@@ -58,22 +58,35 @@
 
 				<?php endif; */ ?>
 					
-					<div id="third" class="widget-area">
+					<div id="third" class="widget-area-large">
+						<h1><?php echo __('Communaut&eacute;', 'yproject'); ?></h1>
 						<ul class="xoxo">
 						    <li id="nav_menu-4" class="widget widget_nav_menu">
 							<div class="menu-footer-3-container">
 							    <ul id="menu-footer-3" class="menu">
 								<?php 
 								    global $facebook_infos, $twitter_infos;
+								    $page_community_blog = get_page_by_path('blog');
 								?>
-								<li class="menu-item"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank">Facebook</a><?php if ($facebook_infos) echo ' : ' . $facebook_infos; ?></li>
-								<li class="menu-item"><a href="https://twitter.com/yproject_co" target="_blank">Twitter</a><?php if ($twitter_infos) echo ' : ' . $twitter_infos; ?></li>
-								<li class="menu-item"><a href="">LinkedIn</a></li>
-								<li class="menu-item"><a href="">Viadeo</a></li>
-								<?php $page_community_blog = get_page_by_path('blog'); ?>
-								<li class="menu-item"><a href="<?php echo get_permalink($page_community_blog->ID); ?>">Blog</a></li>
-								<li class="menu-item">Newsletter</li>
 								<li class="menu-item">
+								    <div class="social-icons">
+									<a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_grenade.png" /></a><br />
+									<?php if ($facebook_infos) echo $facebook_infos; ?>
+								    </div>
+								    <div class="social-icons">
+									<a href="https://twitter.com/yproject_co" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_grenade.png" /></a><br />
+									<?php if ($twitter_infos) echo $twitter_infos; ?>
+								    </div>
+								    <div class="social-icons">
+									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/viadeo_grenade.png" />
+								    </div>
+								    <div class="social-icons">
+									<a href="<?php echo get_permalink($page_community_blog->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/blog_grenade.png" /></a>
+								    </div>
+								    <div style="clear: both"></div>
+								</li>
+								<li class="menu-item">
+								    Newsletter<br />
 								    <?php 
 								    $snsf_args = array("thanks" => __("Merci", "yproject"));
 								    echo do_newsletter($snsf_args);
