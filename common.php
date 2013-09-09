@@ -338,19 +338,19 @@ function printSinglePreview($i, $vote) {
 	    <div class="project_preview_item_part">
 		<div class="project_preview_item_pictos">
 		<div class="project_preview_item_picto">
-		    <img src="" />
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" />
 		    <?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
 		</div>
 		<div class="project_preview_item_picto">
-		    <img src="" />
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
 		    <?php echo $campaign->days_remaining(); ?>
 		</div>
 		<div class="project_preview_item_picto">
-		    <img src="" />
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
 		    <?php echo $campaign->goal(); ?>
 		</div>
 		<div class="project_preview_item_picto">
-		    <img src="" />
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
 		    <?php echo $campaign->backers_count(); ?>
 		</div>
 		<div style="clear: both"></div>
@@ -403,6 +403,32 @@ function echoUser($tempid) {
     <?php
 	endwhile;
     }
+}
+
+		
+/******************************************************************************/		
+/* PAGE PROFILS UTILISATEURS */		
+/******************************************************************************/		
+function printUserProfileAdminBar($skip_controls = false) {		
+    // La barre d'admin n'apparait que pour l'admin du site et si on est l'utilisateur qu'on affiche		
+    $current_user = wp_get_current_user();		
+    $current_user_id = $current_user->ID;		
+    $displayed_user_id = bp_displayed_user_id();		
+    if ($skip_controls || $current_user_id == $displayed_user_id || current_user_can('manage_options')) {		
+    ?>		
+	<div id="yp_admin_bar">		
+		<div class="center">		
+		<?php // Lien page profil ?>		
+		<a href="<?php echo bp_loggedin_user_domain(); ?>"><?php echo __('Mon profil', 'yproject'); ?></a>		
+			.:|:.		
+		<?php $page_investments = get_page_by_path('mes-investissements'); // Lien page investissements  ?>		
+		<a href="<?php echo get_permalink($page_investments->ID); ?>"><?php echo __('Mes investissements', 'yproject'); ?></a>		
+		.:|:.		
+		<?php $page_update = get_page_by_path('modifier-mon-compte'); // Lien page paramètres ?>		
+		<a href="<?php echo get_permalink($page_update->ID); ?>"><?php echo __('Param&egrave;tres', 'yproject'); ?></a>		
+	    </div>		
+    </div>		
+    <?php }		
 }
 
 /******************************************************************************/
@@ -459,6 +485,7 @@ function printCommunityMenu() {
 ?>
 
 <?php
+
 
 
 // la partie droite  sur la page comment ca marche
