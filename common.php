@@ -70,7 +70,14 @@ function printPageBottomEnd($post, $campaign) {
 
 		<div class="post_bottom_infos_item">
 		    <img src="" width="40" height="40" />
-		    <?php echo $campaign->days_remaining(); ?>
+		    <?php if ($campaign->vote()=='vote') 
+		    {
+		    	echo  0;
+		    }else
+		    {
+		     	echo $campaign->days_remaining(); 
+			}
+			?>
 		</div>
 
 		<div class="post_bottom_infos_item">
@@ -331,19 +338,19 @@ function printSinglePreview($i, $vote) {
 	    <div class="project_preview_item_part">
 		<div class="project_preview_item_pictos">
 		<div class="project_preview_item_picto">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" />
+		    <img src="" />
 		    <?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
 		</div>
 		<div class="project_preview_item_picto">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+		    <img src="" />
 		    <?php echo $campaign->days_remaining(); ?>
 		</div>
 		<div class="project_preview_item_picto">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
+		    <img src="" />
 		    <?php echo $campaign->goal(); ?>
 		</div>
 		<div class="project_preview_item_picto">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
+		    <img src="" />
 		    <?php echo $campaign->backers_count(); ?>
 		</div>
 		<div style="clear: both"></div>
@@ -396,31 +403,6 @@ function echoUser($tempid) {
     <?php
 	endwhile;
     }
-}
-
-/******************************************************************************/
-/* PAGE PROFILS UTILISATEURS */
-/******************************************************************************/
-function printUserProfileAdminBar($skip_controls = false) {
-    // La barre d'admin n'apparait que pour l'admin du site et si on est l'utilisateur qu'on affiche
-    $current_user = wp_get_current_user();
-    $current_user_id = $current_user->ID;
-    $displayed_user_id = bp_displayed_user_id();
-    if ($skip_controls || $current_user_id == $displayed_user_id || current_user_can('manage_options')) {
-    ?>
-	<div id="yp_admin_bar">
-	    <div class="center">
-		<?php // Lien page profil ?>
-		<a href="<?php echo bp_loggedin_user_domain(); ?>"><?php echo __('Mon profil', 'yproject'); ?></a>
-		.:|:.
-		<?php $page_investments = get_page_by_path('mes-investissements'); // Lien page investissements  ?>
-		<a href="<?php echo get_permalink($page_investments->ID); ?>"><?php echo __('Mes investissements', 'yproject'); ?></a>
-		.:|:.
-		<?php $page_update = get_page_by_path('modifier-mon-compte'); // Lien page paramètres ?>
-		<a href="<?php echo get_permalink($page_update->ID); ?>"><?php echo __('Param&egrave;tres', 'yproject'); ?></a>
-	    </div>
-    </div>
-    <?php }
 }
 
 /******************************************************************************/
@@ -478,27 +460,6 @@ function printCommunityMenu() {
 
 <?php
 
-/**RENVOIE LES FAQs LES PLUS RECENTS****/
-function showFaq($nb){
-	global $wpdb;
-    $lastfaq = "SELECT DISTINCT $wpdb->posts.post_title FROM $wpdb->posts";
-    $lastfaq .= " WHERE $wpdb->posts.post_type = 'qa_faqs'";
-    $lastfaq .= " ORDER BY $wpdb->posts.post_modified DESC LIMIT " . $nb;
-    $lastfaqproj = $wpdb->get_results($lastfaq);
-    ?>
-<table id="tab-results" style="font-size: 11p">
-    <?php
-    if (isset($lastfaqproj)) : 
-
-	foreach ($lastfaqproj as $temppost) {
-	    echo ('<tr>'.$temppost->post_title.'</tr><br>');
-
-	}
-    endif;
-    ?>
-</table>
-<?php
-}
 
 // la partie droite  sur la page comment ca marche
 function printCommentcamarcheright(){
@@ -536,6 +497,42 @@ function printCommentcamarcheright(){
 							    		
 							    	</div>
 	<?php
+}
+
+/**RENVOIE LES FAQs LES PLUS RECENTS****/
+function showFaq($nb){
+	global $wpdb;
+	$lastfaq = "SELECT DISTINCT $wpdb->posts.post_title, $wpdb->posts.post_name FROM $wpdb->posts";
+	$lastfaq .= " WHERE $wpdb->posts.post_type = 'qa_faqs'";
+	$lastfaq .= " ORDER BY $wpdb->posts.post_modified DESC LIMIT " . $nb;
+	$lastfaqproj = $wpdb->get_results($lastfaq);
+	?>
+	<div class="post_bottom_buttons">
+	<div class="dark" id="tab-faq-dark">
+	<?php /* Lien page faq */ $page_manage = get_page_by_path('faq-2'); ?>
+		<a href="<?php echo get_permalink($page_manage->ID); ?>"><?php echo __('FAQ', 'yproject'); ?></a>
+	</div>
+	</div>
+	<div class="post_bottom_buttons">
+	
+	
+    <?php
+	 	if (isset($lastfaqproj)) :
+
+	 	 	foreach ($lastfaqproj as $temppost) {
+	 	 		?>
+	 	 		<div class="light" id="tab-faq-light">
+	 	 		<?php /* Lien page faq */$page_faq = get_page_by_path('faq'); ?>
+	 	 		<a href ="<?php echo get_permalink($page_faq->post_name); ?>"> <?php echo ($temppost->post_title);	?> </a>
+	 	 		</div>
+	 	 		<?php
+	 	 	}
+	 	endif;
+	?>
+	
+
+	</div>
+<?php
 }
 ?>
 
