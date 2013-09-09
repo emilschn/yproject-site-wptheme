@@ -484,10 +484,76 @@ div#home_bottom h1 {
 #item-header-stats{
     width: 380px;
     padding: 0px 5px;
+    font-family: DINPro-Light;
+    text-transform: uppercase;
 }
 
 #item-header-stats ul {
     list-style: none;
+}
+
+#item-header-stats li {
+    padding-bottom: 10px;
+}
+
+ul.activity-list {
+    list-style: none;
+    -webkit-padding-start: 0px;
+    padding-right: 0px;
+}
+
+ul.activity-list li { 
+    padding-bottom: 10px;
+}
+
+ul.activity-list .activity-header { 
+    color: #E6223C;
+}
+
+ul.activity-list a { 
+    color: #E6223C;
+}
+
+ul.activity-list p { 
+    -webkit-margin-before: 1px;
+    -webkit-margin-after: 1px;
+}
+
+#item-submenu {
+    background-color: #E1E3E2;
+    list-style: none;
+    display: block;
+    height: 45px;
+    font-size: 9pt;
+    -webkit-padding-start: 0px;
+    -webkit-margin-after: 0em;
+}
+
+#item-submenu li {
+    background-color: #E1E3E2;
+    float: left;
+    border-right: 5px solid #FFF;
+    font-family: DINPro-Medium;
+    padding: 15px;
+}
+
+#item-submenu li.selected {
+    background-color: #E6223C;
+    color: #FFF;
+}
+
+#item-submenu li.selected a {
+    color: #FFF;
+}
+
+#item-submenu li.sfhover,
+#item-submenu li:hover {
+    background: #E6223C;
+}
+
+#item-submenu li.sfhover a,
+#item-submenu li:hover a {
+    color: #FFF;
 }
 /* FIN MON COMPTE */
 

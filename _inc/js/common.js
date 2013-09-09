@@ -51,6 +51,17 @@ YPUIFunctions = (function($) {
 		    else  $("#company_status_other_zone").hide(); 
 		});
 	    }
+	    
+	    if ($("#item-body").length > 0) {
+		var aTabs = ["activity", "following", "followers", "projects"];
+		var nHeight = 100;
+		for (var i = 0; i < aTabs.length; i++) {
+		    nHeight = Math.max(nHeight, $("#item-body-" + aTabs[i]).height());
+		}
+		for (var i = 0; i < aTabs.length; i++) {
+		    $("#item-body-" + aTabs[i]).height(nHeight);
+		}
+	    }
 	},
 	
 	checkInvestInput: function() {
@@ -96,6 +107,16 @@ YPUIFunctions = (function($) {
 	    } else {
 		$("#projects_current").remove().insertAfter($("#projects_vote"));
 	    }
+	},
+	
+	switchProfileTab: function(sType) {
+	    var aTabs = ["activity", "following", "followers", "projects"];
+	    for (var i = 0; i < aTabs.length; i++) {
+		$("#item-body-" + aTabs[i]).hide();
+		$("#item-submenu-" + aTabs[i]).removeClass("selected");
+	    }
+	    $("#item-body-" + sType).show();
+	    $("#item-submenu-" + sType).addClass("selected");
 	}
     }
 })(jQuery);

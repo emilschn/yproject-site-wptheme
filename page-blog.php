@@ -31,7 +31,8 @@
 					<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 						<div class="post-content">
-							<h2 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+							<?php /* <h2 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2> */ ?>
+							<h2 class="posttitle"><?php the_title(); ?></h2>
 
 							<p class="date"><?php echo get_the_date(); ?></p>
 

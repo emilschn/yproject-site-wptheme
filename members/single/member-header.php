@@ -26,7 +26,7 @@
 	<span class="user-nicename">@<?php bp_displayed_user_username(); ?></span>
     <?php endif; ?>
 	
-    <div id="item-header-content-description">
+    <div id="item-header-content-description" style="display: none">
 	<h3>Description :</h3>
 	Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... Lorem Ipsum...aaaaa 
 	Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... 
@@ -72,11 +72,26 @@
 
 
 <div id="item-header-stats" class="left">
+    <?php  
+	global $wp_query;
+	
+	$nb_project_created = 0;
+	$posts_temp = query_posts( array(
+	    'post_type' => 'download',
+	    'author_id' => bp_displayed_user_id()
+	) );
+	if ($posts_temp) $nb_project_created = $wp_query->found_posts;
+	
+	$nb_project_founded = 0;
+	$purchases = edd_get_users_purchases(bp_current_user_id());
+	if ($purchases) $nb_project_founded = count($purchases);
+    ?>
     <ul>
-	<li>0000 POINTS</li>
-	<li>0000 PROJETS SOUTENUS</li>
-	<li>0000 PROJETS SOUTENUS</li>
+	<?php /*<li><strong><?php echo mycred_get_users_cred(bp_displayed_user_id()); ?></strong> <?php _e("points", "yproject"); ?></li>*/ ?>
+	<li><strong><?php echo $nb_project_created; ?></strong> <?php _e("projects lanc&eacute;s", "yproject"); ?></li>
+	<li><strong><?php echo $nb_project_founded; ?></strong> <?php _e("projects soutenus", "yproject"); ?></li>
     </ul>
+    <?php bp_follow_add_follow_button(); ?>
 </div>
 
 

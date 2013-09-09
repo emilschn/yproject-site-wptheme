@@ -173,6 +173,29 @@ msgstr "L&apos;&eacute;quipe"
 msgid " a rejoint WeDoGood - Il y a "
 msgstr " a rejoint WeDoGood - Il y a "
 
+# home.php - mon compte
+msgid "Fil d&apos;activit&eacute;"
+msgstr "Fil d&apos;activit&eacute;"
+
+msgid "Abonnements"
+msgstr "Abonnements"
+
+msgid "Abonn&eacute;s"
+msgstr "Abonn&eacute;s"
+
+msgid "Projets"
+msgstr "Projets"
+
+# member-header.php - mon compte
+msgid "points"
+msgstr "points"
+
+msgid "projects soutenus"
+msgstr "projects soutenus"
+
+msgid "projects lanc&eacute;s"
+msgstr "projects lanc&eacute;s"
+
 # header.php - menu
 msgid "Decouvrir les projets"
 msgstr "D&eacute;couvrir les projets"
