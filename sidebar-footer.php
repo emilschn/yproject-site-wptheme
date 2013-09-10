@@ -70,18 +70,18 @@
 								?>
 								<li class="menu-item">
 								    <div class="social-icons">
-									<a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_grenade.png" /></a><br />
+									<a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_grenade.png" /></a><br />
 									<?php if ($facebook_infos) echo $facebook_infos; ?>
 								    </div>
 								    <div class="social-icons">
-									<a href="https://twitter.com/yproject_co" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_grenade.png" /></a><br />
+									<a href="https://twitter.com/yproject_co" target="_blank"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_grenade.png" /></a><br />
 									<?php if ($twitter_infos) echo $twitter_infos; ?>
 								    </div>
 								    <div class="social-icons">
-									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/viadeo_grenade.png" />
+									<img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/viadeo_grenade.png" />
 								    </div>
 								    <div class="social-icons">
-									<a href="<?php echo get_permalink($page_community_blog->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/blog_grenade.png" /></a>
+									<a href="<?php echo get_permalink($page_community_blog->ID); ?>"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/blog_grenade.png" /></a>
 								    </div>
 								    <div style="clear: both"></div>
 								</li>

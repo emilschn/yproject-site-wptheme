@@ -96,7 +96,7 @@ body a {
 .projects_vote {
     width: 221px;
     color: #000;
-    background-color: #E6F0F2;
+    background-color: #D6DCDE;
 }
 #projects_finished {
     color: #29ABBA;
@@ -268,6 +268,23 @@ div#home_bottom h1 {
     margin-bottom: 5px;
 }
 /* FIN HOME */
+
+/* PROJECTS */
+.projects_vote_zone {
+    background-color: #D6DCDE;
+    margin-top: 10px;
+}
+.projects_founding_zone {
+}
+.projects_title {
+    text-transform: uppercase;
+    border-bottom: 1px solid black;
+    text-align: center;
+    font-size: 15pt;
+    padding: 5px;
+    margin: 0px 10px;
+}
+/* FIN PROJECTS */
 
 /* PROJECT PAGE */
 #post_top_bg {
@@ -573,6 +590,8 @@ ul.activity-list p {
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
     padding-left: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
 #nav li {
     background-color: #333333;

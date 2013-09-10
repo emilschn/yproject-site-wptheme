@@ -335,43 +335,41 @@ function printSinglePreview($i, $vote) {
 		<div class="project_preview_item_desc"><?php echo html_entity_decode($campaign->summary()); ?></div>
 	    </div>
 
-	    <div class="project_preview_item_part">
-		<div class="project_preview_item_pictos">
-		<div class="project_preview_item_picto">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" />
-		    <?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
-		</div>
-		<div class="project_preview_item_picto">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
-		    <?php echo $campaign->days_remaining(); ?>
-		</div>
-		<div class="project_preview_item_picto">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
-		    <?php echo $campaign->goal(); ?>
-		</div>
-		<div class="project_preview_item_picto">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
-		    <?php echo $campaign->backers_count(); ?>
-		</div>
-		<div style="clear: both"></div>
-		</div>
+	    <?php if ($vote) : ?>
+		<a href="<?php the_permalink(); ?>"><?php _e('Soutenez le projet en votant !', 'yproject'); ?></a>
+	    <?php else: ?>
+		<div class="project_preview_item_part">
+		    <div class="project_preview_item_pictos">
+		    <div class="project_preview_item_picto">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" />
+			<?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
+		    </div>
+		    <div class="project_preview_item_picto">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+			<?php echo $campaign->days_remaining(); ?>
+		    </div>
+		    <div class="project_preview_item_picto">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
+			<?php echo $campaign->goal(); ?>
+		    </div>
+		    <div class="project_preview_item_picto">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
+			<?php echo $campaign->backers_count(); ?>
+		    </div>
+		    <div style="clear: both"></div>
+		    </div>
 
- 
-		<div class="project_preview_item_progress">
-		<?php
-		if ($vote) {
-		    _e('Soutenez le projet en votant !', 'yproject');
-		} else {
-		    $percent = $campaign->percent_completed(false);
-		    $width = 150 * $percent / 100;
-		    ?>
-		    <div class="project_preview_item_progressbg"><div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">&nbsp;</div></div>
-		    <span class="project_preview_item_progressprint"><?php echo $campaign->percent_completed(); ?></span>
-		<?php
-		}
-		?>
+
+		    <div class="project_preview_item_progress">
+		    <?php
+			$percent = $campaign->percent_completed(false);
+			$width = 150 * $percent / 100;
+			?>
+			<div class="project_preview_item_progressbg"><div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">&nbsp;</div></div>
+			<span class="project_preview_item_progressprint"><?php echo $campaign->percent_completed(); ?></span>
+		    </div>
 		</div>
-	    </div>
+	    <?php endif; ?>
 	</div>
 	<div style="clear: both"></div>
     </div>

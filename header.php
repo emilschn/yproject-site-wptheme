@@ -55,7 +55,7 @@
 		    <div class="center">
 			<ul id="nav">
 			    <?php /* Logo Accueil */ ?>
-			    <li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.png" width="160" height="100" /></a></li>
+			    <li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.png" width="160" height="100" /></a></li>
 			    <?php /* Menu Découvrir les projets */ $page_discover = get_page_by_path('projects'); ?>
 			    <li class="page_item">
 				<span class="page_item_border"><a href="<?php echo get_permalink($page_discover->ID); ?>"><?php echo __('Decouvrir les projets', 'yproject'); ?></a></span>
@@ -79,8 +79,8 @@
 				</ul> */?>
 			    </li>
 			    <?php /* Logo FB / TW */ ?>
-			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank" title="Notre page Facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.png" width="20" height="20" /></a></li>
-			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/yproject_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.png" width="20" height="20" /></a></li>
+			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank" title="Notre page Facebook"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.png" width="20" height="20" /></a></li>
+			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/yproject_co" target="_blank" title="Notre compte Twitter"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.png" width="20" height="20" /></a></li>
 			    
 			    <?php if (is_user_logged_in()) : ?>
 			    <?php /* Menu Mon compte */ ?>
