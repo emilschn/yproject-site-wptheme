@@ -1,9 +1,10 @@
 <header class="align-center">
     <div id="site_name" class="center">
-	    <h1 id="logo" role="banner"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><?php bp_site_name(); ?></a></h1>
 	    <div id="welcome_text">
-		<?php _e('Welcome Text 1', 'yproject'); ?><br /><br />
-		<?php _e('Welcome Text 2', 'yproject'); ?>
+		<?php 
+		    wp_reset_query();
+		    the_content();
+		?>
 	    </div>
     </div>
 </header>
@@ -41,19 +42,19 @@
 	    
     <div id="home_middle">
 	<div id="home_middle_top">
-	    <div class="center">
-		<div class="round_title_left"><?php echo __('Participez à un projet', 'yproject'); ?></div>
-		<div class="round_title_right"><?php echo __('Proposez un projet', 'yproject'); ?></div>
-		<div style="clear: both"></div>
-	    </div>
-	</div>
-	<div id="home_middle_content">
-	    <div class="center">
-		<?php // Participer à un projet | Proposer un projet ?>
-		<?php 
-		    wp_reset_query();
-		    the_content();
-		?>
+	    <div id="home_middle_content">
+		<div class="center">
+		    <div class="round_title_left"><?php echo __('Participez à un projet', 'yproject'); ?></div>
+		    <div class="round_title_right"><?php echo __('Proposez un projet', 'yproject'); ?></div>
+		    <div style="clear: both"></div>
+		</div>
+		<div class="center">
+		    <?php // Participer à un projet | Proposer un projet ?>
+		    <?php 
+			wp_reset_query();
+			the_content();
+		    ?>
+		</div>
 	    </div>
 	</div>
     </div>

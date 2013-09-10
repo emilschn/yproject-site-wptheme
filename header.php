@@ -55,22 +55,22 @@
 		    <div class="center">
 			<ul id="nav">
 			    <?php /* Logo Accueil */ ?>
-			    <li class="page_item"><a href="<?php echo home_url(); ?>"><img src="" width="32" height="16" /></a></li>
+			    <li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.png" width="160" height="100" /></a></li>
 			    <?php /* Menu Découvrir les projets */ $page_discover = get_page_by_path('projects'); ?>
 			    <li class="page_item">
-				<a href="<?php echo get_permalink($page_discover->ID); ?>"><?php echo __('Decouvrir les projets', 'yproject'); ?></a>
+				<span class="page_item_border"><a href="<?php echo get_permalink($page_discover->ID); ?>"><?php echo __('Decouvrir les projets', 'yproject'); ?></a></span>
 				<?php /*<ul>
 				    <li class="page_item_out"><a href="#">CAT1</a></li>
 				    <li class="page_item_out"><a href="#">CAT2</a></li>
 				</ul> */ ?>
 			    </li>
 			    <?php /* Menu Proposer un projet */ $page_start = get_page_by_path('proposer-un-projet'); ?>
-			    <li class="page_item"><a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Proposer un projet', 'yproject'); ?></a></li>
+			    <li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Proposer un projet', 'yproject'); ?></a></span></li>
 			    <?php /* Menu Comment ça marche ? */ $page_how = get_page_by_path('descriptif'); ?>
-			    <li class="page_item"><a href="<?php echo get_permalink($page_how->ID); ?>"><?php echo __('Comment ca marche ?', 'yproject'); ?></a></li>
+			    <li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_how->ID); ?>"><?php echo __('Comment ca marche ?', 'yproject'); ?></a></span></li>
 			    <?php /* Menu Communauté */ $page_community = get_page_by_path('communaute'); ?>
-			    <li class="page_item_out">
-				<a href="<?php echo get_permalink($page_community->ID); ?>"><?php echo __('Communaute', 'yproject'); ?></a>
+			    <li class="page_item">
+				<span class="page_item_border"><a href="<?php echo get_permalink($page_community->ID); ?>"><?php echo __('Communaute', 'yproject'); ?></a></span>
 				<?php /*<ul>
 				    $page_community_activity = get_page_by_path('activity'); $page_community_who = get_page_by_path('qui-sommes-nous'); $page_community_blog = get_page_by_path('blog'); ?>
 				    <li class="page_item_out"><a href="<?php echo get_permalink($page_community_activity->ID); ?>"><?php echo __('Fil dactivite', 'yproject'); ?></a></li>
@@ -79,15 +79,14 @@
 				</ul> */?>
 			    </li>
 			    <?php /* Logo FB / TW */ ?>
-			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank" title="Notre page Facebook"><img src="" width="16" height="16" /></a></li>
-			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/yproject_co" target="_blank" title="Notre compte Twitter"><img src="" width="16" height="16" /></a></li>
+			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank" title="Notre page Facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.png" width="20" height="20" /></a></li>
+			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/yproject_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.png" width="20" height="20" /></a></li>
 			    
 			    <?php if (is_user_logged_in()) : ?>
 			    <?php /* Menu Mon compte */ ?>
 			    <li class="page_item_out page_item_inverted">
 				<a class="page_item_inverted" href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a>
 				<ul>
-				    <?php /* Sous-Menu Mon compte */ $page_community_activity = get_page_by_path('activity'); $page_community_who = get_page_by_path('qui-sommes-nous'); $page_community_blog = get_page_by_path('blog'); ?>
 				    <li class="page_item_out"><a href="<?php echo wp_logout_url( wp_guess_url() ); ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
 				</ul>
 			    </li>
@@ -96,7 +95,7 @@
 			    <li id="menu_item_connection" class="page_item_out page_item_inverted"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
 			    <?php endif; ?>
 			    
-			    <li style="clear:both" class="only_on_mobile"></li>
+			    <?php /* <li style="clear:both" class="only_on_mobile"></li> */ ?>
 			</ul>
 		    </div>
 		    <?php
