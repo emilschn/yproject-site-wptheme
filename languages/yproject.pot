@@ -86,6 +86,13 @@ msgstr "G&eacute;rer vos informations"
 msgid "Ajouter une actualit&eacute;"
 msgstr "Ajouter une actualit&eacute;"
 
+# page-projects.php
+msgid "Les projets en cours de financement"
+msgstr "Les projets en cours de financement"
+
+msgid "Les projets en cours de vote"
+msgstr "Les projets en cours de vote"
+
 # register.php / page-modifier-mon-compte.php - S'inscrire/Modifier mon compte
 msgid "Inscription"
 msgstr "Inscription"
@@ -170,8 +177,30 @@ msgstr "Derniers inscrits"
 msgid "L&apos;&eacute;quipe"
 msgstr "L&apos;&eacute;quipe"
 
+msgid "Partenaires"
+msgstr "Partenaires"
+
 msgid " a rejoint WeDoGood - Il y a "
 msgstr " a rejoint WeDoGood - Il y a "
+
+# common.php - barre admin
+msgid "Mon profil"
+msgstr "Mon profil"
+
+msgid "Mes investissements"
+msgstr "Mes investissements"
+
+msgid "Param&egrave;tres"
+msgstr "Param&egrave;tres"
+
+msgid "Mes porte-monnaie"
+msgstr "Mes porte-monnaie"
+
+msgid "Paiement"
+msgstr "Paiement"
+
+msgid "Annuler mon investissement"
+msgstr "Annuler mon investissement"
 
 # home.php - mon compte
 msgid "Fil d&apos;activit&eacute;"
@@ -190,11 +219,11 @@ msgstr "Projets"
 msgid "points"
 msgstr "points"
 
-msgid "projects soutenus"
-msgstr "projects soutenus"
+msgid "projet(s) soutenu(s)"
+msgstr "projet(s) soutenu(s)"
 
-msgid "projects lanc&eacute;s"
-msgstr "projects lanc&eacute;s"
+msgid "projet(s) lanc&eacute;(s)"
+msgstr "projet(s) lanc&eacute;(s)"
 
 # header.php - menu
 msgid "Decouvrir les projets"

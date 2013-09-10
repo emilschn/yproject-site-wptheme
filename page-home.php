@@ -65,7 +65,22 @@
 	    <?php $projects_page = get_page_by_path('projects'); ?>
 	    <a href="<?php echo get_permalink($projects_page->ID); ?>"><?php _e('Decouvrir les projets', 'yproject'); ?></a><br /><br />
 	    
-	    Liste des partenaires....<br /><br /><br />
+	    <h2 class="underlined"><?php _e("Partenaires", "yproject"); ?></h2>
+	    <?php 
+		$page_makesense = get_page_by_path('makesense');
+		$page_partners = get_page_by_path('partenaires');
+		/*
+	    <a href="<?php echo get_permalink($page_makesense->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partners/partner01.jpg"></a>
+	    <a href="<?php echo get_permalink($page_partners->ID); ?>">
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partners/partner02.jpg">
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partners/partner03.jpg">
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partners/partner04.jpg">
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partners/partner05.jpg">
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partners/partner06.jpg">
+	    </a>
+		 * 
+		 */
+	    ?>
 		   
 	    <?php
 	    /*

@@ -74,6 +74,7 @@ body a {
 }
 
 .underlined {
+    color: #E6223C;
     text-transform: uppercase;
     border-bottom: 1px solid #E6223C;
     font-weight: normal;
@@ -82,6 +83,10 @@ body a {
 
 .align-center {
     text-align: center;
+}
+
+h4 {
+    font-weight: normal;
 }
 
 /* PROJECT PREVIEW */
@@ -195,7 +200,7 @@ body a {
     background-color: #EDEEEE;
 }
 .projects_current .project_preview_item_progressbar {
-    background-color: #000;
+    background-color: #47494B;
 }
 
 #projects_finished .project_preview_item_progressbg {
@@ -261,7 +266,7 @@ div#home_bottom h1 {
 
 /* HOME */
 .padder {
-    margin-top: 20px;
+    margin-top: 0px;
 }
 .padder_more {
     margin-top: 22px;
@@ -307,6 +312,8 @@ div#home_bottom h1 {
     padding: 10px;
     margin-left: 450px;
     margin-right: 140px;
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
 }
 
 #post_top_infos {
@@ -567,6 +574,61 @@ ul.activity-list p {
 
 #item-submenu li.sfhover a,
 #item-submenu li:hover a {
+    color: #FFF;
+}
+
+.standard-form {
+    font-family: DINPro-Light;
+}
+.standard-label {
+    display: inline-block;
+    width: 140px;
+}
+.large-label {
+    display: inline-block;
+    width: 300px;
+}
+
+.user_history {
+    list-style: none;
+    -webkit-padding-start: 0px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    padding-left: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.user_history li {
+    padding-bottom: 10px;
+}
+.user_history_title {
+    text-transform: uppercase;
+}
+.user_history_title .project_preview_item_progressbg {
+    background-color: #EDEEEE;
+}
+.user_history_title .project_preview_item_progressbar {
+    background-color: #47494B;
+}
+
+.user_history_pictos .project_preview_item_pictos {
+    font-size: 8pt;
+    font-family: DINPro-Medium;
+}
+.user_history_pictos .project_preview_item_infos {
+    float: left;
+    margin: 10px;
+    font-size: 10pt;
+    font-family: DINPro-Medium;
+    text-transform: uppercase;
+}
+.user_history_pictos .project_preview_item_cancel {
+    float: left;
+    margin: 5px;
+    padding: 5px;
+    background-color: #515050;
+}
+.user_history_pictos .project_preview_item_cancel a {
     color: #FFF;
 }
 /* FIN MON COMPTE */

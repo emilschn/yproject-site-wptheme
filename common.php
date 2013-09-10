@@ -56,6 +56,7 @@ function printPageBottomEnd($post, $campaign) {
 	    <div class="left post_bottom_infos">
 		<?php 
 		$percent = $campaign->percent_completed(false);
+		$percent = min(100, $percent);
 		$width = 250 * $percent / 100;
 		?>
 		<div>
@@ -363,6 +364,7 @@ function printSinglePreview($i, $vote) {
 		    <div class="project_preview_item_progress">
 		    <?php
 			$percent = $campaign->percent_completed(false);
+			$percent = min(100, $percent);
 			$width = 150 * $percent / 100;
 			?>
 			<div class="project_preview_item_progressbg"><div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">&nbsp;</div></div>
@@ -412,7 +414,7 @@ function printUserProfileAdminBar($skip_controls = false) {
     $current_user = wp_get_current_user();		
     $current_user_id = $current_user->ID;		
     $displayed_user_id = bp_displayed_user_id();		
-    if ($skip_controls || $current_user_id == $displayed_user_id || current_user_can('manage_options')) {		
+    if ($skip_controls || $current_user_id == $displayed_user_id) {		
     ?>		
 	<div id="yp_admin_bar">		
 		<div class="center">		
@@ -427,6 +429,75 @@ function printUserProfileAdminBar($skip_controls = false) {
 	    </div>		
     </div>		
     <?php }		
+}
+
+function printUserInvest($post_invest, $post_campaign) {
+    $campaign = atcf_get_campaign( $post_campaign );
+    //Date de l'investissement : echo date_i18n( get_option('date_format'), strtotime( get_post_field( 'post_date', $post->ID ) ) );
+    //Statut de l'investissement : echo edd_get_payment_status( $post, true );
+    //echo '<a href="' . get_permalink($campaign->ID) . '">' . $post_camp->post_title . '</a>';
+    ?>
+    <li>
+	<div class="user_history_title left">
+	    <a href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $post_campaign->post_title; ?></a><br />
+	    <div class="project_preview_item_progress">
+	    <?php
+		$percent = $campaign->percent_completed(false);
+		$percent = min(100, $percent);
+		$width = 150 * $percent / 100;
+		?>
+		<div class="project_preview_item_progressbg"><div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">&nbsp;</div></div>
+		<span class="project_preview_item_progressprint"><?php echo $campaign->percent_completed(); ?></span>
+	    </div>
+	</div>
+	<div class="user_history_pictos left">
+	    <div class="project_preview_item_pictos">
+		<div class="project_preview_item_picto">
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" />
+		    <?php 
+			$campaign_location = $campaign->location();
+			$exploded = explode(' ', $campaign_location);
+			if (count($exploded) > 1) $campaign_location = $exploded[0];
+			echo (($campaign_location != '') ? $campaign_location : 'France'); 
+		    ?>
+		</div>
+		<div class="project_preview_item_picto">
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+		    <?php echo $campaign->days_remaining(); ?>
+		</div>
+		<div class="project_preview_item_picto">
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
+		    <?php echo $campaign->goal(); ?>
+		</div>
+		<div class="project_preview_item_picto">
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
+		    <?php echo $campaign->backers_count(); ?>
+		</div>
+		<div class="project_preview_item_infos">
+		    <?php echo date_i18n( get_option('date_format'), strtotime( get_post_field( 'post_date', $post_invest->ID ) ) ); ?>
+		</div>
+		<div class="project_preview_item_infos">
+		    <?php echo __("Paiement", "yproject") . ' ' . edd_get_payment_status( $post_invest, true ); ?>
+		</div>
+		
+		<?php
+		    //N'est que visible si la collecte est toujours en cours
+		    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte") :
+			$page_cancel_invest = get_page_by_path('annuler-un-investissement');
+		?>
+		<div class="project_preview_item_cancel">
+		    <a href="<?php echo get_permalink($page_cancel_invest->ID); ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
+		</div>
+		<?php
+		    endif;
+		?>
+		
+		<div style="clear: both"></div>
+	    </div>
+	</div>
+	<div style="clear: both"></div>
+    </li>
+    <?php
 }
 
 /******************************************************************************/
@@ -467,8 +538,12 @@ function printCommunityMenu() {
 		<a href="<?php echo get_permalink($page_team->ID); ?>"><?php _e("L&apos;&eacute;quipe", "yproject"); ?></a>
 	    </div>
 	    <div class="dark">
-		<?php $page_makesense = get_page_by_path('makesense'); //Lien vers l'équipe ?>
+		<?php $page_makesense = get_page_by_path('makesense'); //Lien vers MakeSense ?>
 		<a href="<?php echo get_permalink($page_makesense->ID); ?>">MakeSense</a>
+	    </div>
+	    <div class="dark">
+		<?php $page_partners = get_page_by_path('partenaires'); //Lien vers Partenaires ?>
+		<a href="<?php echo get_permalink($page_partners->ID); ?>"><?php _e("Partenaires", "yproject"); ?></a>
 	    </div>
 	    <div class="light">
 		<?php $page_blog = get_page_by_path('blog'); //Lien vers l'équipe ?>

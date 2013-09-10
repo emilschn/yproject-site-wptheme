@@ -18,24 +18,6 @@ get_header( 'buddypress' );
 
 			<div class="center">
 			    <?php
-			    /*
-			    <div id="item-nav">
-				    <div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
-					    <ul>
-
-						    <?php bp_get_displayed_user_nav(); ?>
-
-						    <?php do_action( 'bp_member_options_nav' ); ?>
-
-					    </ul>
-				    </div>
-			    </div><!-- #item-nav -->
-			     * 
-			     */
-			    ?>
-
-
-			    <?php
 			    $following_count = 0;
 			    $following_list_str = bp_get_following_ids();
 			    if ($following_list_str) { 
@@ -49,13 +31,20 @@ get_header( 'buddypress' );
 				$followers_list = explode(',' , bp_get_follower_ids());
 				$followers_count = count($followers_list);
 			    }
+			    
+			    $projects_count = 0;
+			    $query_temp = query_posts( array(
+				'post_type' => 'download',
+				'author' => bp_displayed_user_id()
+			    ) );
+			    if ($query_temp) $projects_count = $wp_query->found_posts;
 			    ?>
 			    
 			    <ul id="item-submenu">
 				<li id="item-submenu-activity" class="selected"><a href="javascript:void();" onclick="javascript:YPUIFunctions.switchProfileTab('activity')"><?php _e("Fil d&apos;activit&eacute;", "yproject"); ?></a></li>
 				<li id="item-submenu-following"><a href="javascript:void();" onclick="javascript:YPUIFunctions.switchProfileTab('following')"><?php _e("Abonnements", "yproject"); ?> (<?php echo $following_count; ?>)</a></li>
 				<li id="item-submenu-followers"><a href="javascript:void();" onclick="javascript:YPUIFunctions.switchProfileTab('followers')"><?php _e("Abonn&eacute;s", "yproject"); ?> (<?php echo $followers_count; ?>)</a></li>
-				<li id="item-submenu-projects"><a href="javascript:void();" onclick="javascript:YPUIFunctions.switchProfileTab('projects')"><?php _e("Projets", "yproject"); ?></a></li>
+				<li id="item-submenu-projects"><a href="javascript:void();" onclick="javascript:YPUIFunctions.switchProfileTab('projects')"><?php _e("Projets", "yproject"); ?> (<?php echo $projects_count; ?>)</a></li>
 			    </ul>
 			    
 			    <div id="item-body">
@@ -76,7 +65,7 @@ get_header( 'buddypress' );
 				    <?php 
 				    for ($i = 0; $i < $following_count; $i++) {
 					$user_temp = get_userdata($following_list[$i]);
-					echo '<li><a href="">' . $user_temp->display_name . '</a></li>';
+					echo '<li><a href="' . bp_core_get_userlink($user_temp->ID, false, true) . '">' . $user_temp->display_name . '</a></li>';
 				    }
 				    ?>
 				    </ul>
@@ -87,7 +76,7 @@ get_header( 'buddypress' );
 				    <?php 
 				    for ($i = 0; $i < $followers_count; $i++) {
 					$user_temp = get_userdata($followers_list[$i]);
-					echo '<li><a href="">' . $user_temp->display_name . '</a></li>';
+					echo '<li><a href="' . bp_core_get_userlink($user_temp->ID, false, true) . '">' . $user_temp->display_name . '</a></li>';
 				    }
 				    ?>
 				    </ul>
@@ -97,7 +86,7 @@ get_header( 'buddypress' );
 				    <?php
 					query_posts( array(
 					    'post_type' => 'download',
-					    'author_id' => bp_displayed_user_id()
+					    'author' => bp_displayed_user_id()
 					) );
 					
 					echo '<ul>';

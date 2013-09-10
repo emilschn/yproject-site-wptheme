@@ -78,7 +78,7 @@
 	$nb_project_created = 0;
 	$posts_temp = query_posts( array(
 	    'post_type' => 'download',
-	    'author_id' => bp_displayed_user_id()
+	    'author' => bp_displayed_user_id()
 	) );
 	if ($posts_temp) $nb_project_created = $wp_query->found_posts;
 	
@@ -88,8 +88,8 @@
     ?>
     <ul>
 	<?php /*<li><strong><?php echo mycred_get_users_cred(bp_displayed_user_id()); ?></strong> <?php _e("points", "yproject"); ?></li>*/ ?>
-	<li><strong><?php echo $nb_project_created; ?></strong> <?php _e("projects lanc&eacute;s", "yproject"); ?></li>
-	<li><strong><?php echo $nb_project_founded; ?></strong> <?php _e("projects soutenus", "yproject"); ?></li>
+	<li><strong><?php echo $nb_project_created; ?></strong> <?php _e("projet(s) lanc&eacute;(s)", "yproject"); ?></li>
+	<li><strong><?php echo $nb_project_founded; ?></strong> <?php _e("projet(s) soutenu(s)", "yproject"); ?></li>
     </ul>
     <?php bp_follow_add_follow_button(); ?>
 </div>
