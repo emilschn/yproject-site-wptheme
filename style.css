@@ -930,3 +930,10 @@ footer a {
 }
 
 /*****FIN FAQ****/
+
+/*Comment ca marche*/
+#tab-faq-light
+{
+    text-transform: none;
+    border-bottom: 1px solid white;
+}

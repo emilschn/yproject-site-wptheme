@@ -523,7 +523,6 @@ function printCommentcamarcheright(){
 							    	</div>
 	<?php
 }
-
 /**RENVOIE LES FAQs LES PLUS RECENTS****/
 function showFaq($nb){
 	global $wpdb;
@@ -547,8 +546,8 @@ function showFaq($nb){
 	 	 	foreach ($lastfaqproj as $temppost) {
 	 	 		?>
 	 	 		<div class="light" id="tab-faq-light">
-	 	 		<?php /* Lien page faq */$page_faq = get_page_by_path('faq'); ?>
-	 	 		<a href ="<?php echo get_permalink($page_faq->post_name); ?>"> <?php echo ($temppost->post_title);	?> </a>
+	 	 		<?php /* Lien page faq */$page_faq = get_page_by_path('faq-2'); ?>
+	 	 		<a href="<?php echo get_permalink($page_manage->ID); ?>"><?php echo ($temppost->post_title);	?> </a>
 	 	 		</div>
 	 	 		<?php
 	 	 	}
