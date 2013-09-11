@@ -19,13 +19,15 @@ require_once("wp-content/themes/yproject/common.php");
 
 		    <h2 class="underlined"><?php _e( 'Mes porte-monnaie', 'yproject' ); ?></h2>
 		    <?php
-			echo 'Vous disposez de ' . ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id()) . edd_get_currency() . ' dans votre porte-monnaie d&apos;investissement.<br />';
-			echo 'Vous disposez de ' . ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id()) . edd_get_currency() . ' dans votre porte-monnaie d&apos;int&eacuter&ecirc;ts.';
+			$real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id()) / 100;
+			$real_amount_wallet = ypcf_mangopay_get_userwallet_personalamount_by_wpid(get_current_user_id()) / 100;
+			echo 'Vous disposez de ' . $real_amount_invest . edd_get_currency() . ' dans votre porte-monnaie d&apos;investissement.<br />';
+			echo 'Vous disposez de ' . $real_amount_wallet . edd_get_currency() . ' dans votre porte-monnaie d&apos;int&eacuter&ecirc;ts.';
 		    ?>
 
 		    <h2 class="underlined"><?php _e( 'Mes investissements', 'yproject' ); ?></h2>
 		    <?php
-		    $purchases = edd_get_users_purchases(bp_current_user_id());
+		    $purchases = edd_get_users_purchases(bp_current_user_id(), -1, false, array('completed', 'pending', 'publish', 'failed', 'refunded'));
 		    if ( $purchases ) : ?>
 		    <ul class="user_history">
 			<?php 

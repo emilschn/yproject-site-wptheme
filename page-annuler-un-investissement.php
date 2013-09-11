@@ -24,9 +24,36 @@
 
 	    if ($valid_payment_access) {
 		if (isset($_POST["confirm"]) && $_POST["confirm"] == "confirmed") {
-		    //Faire un transfer -> PayerID : project id ; PayerWalletID : projectwallet ; BeneficiaryID : userid ; Amount : edd_get_payment_amount($payment_id) ; BeneficiaryWalletID : 0
-		    //Passer le statut du paiement en refund
+		    //On transfère la somme sur mangopay
+		    $current_user = wp_get_current_user();
+		    $amount = edd_get_payment_amount($payment_id);
+		    $new_transfer = ypcf_mangopay_transfer_project_to_user($current_user, $download_id, $amount);
+		    update_post_meta($payment_id, 'refund_transfer_id', $new_transfer->ID);
+		    
+		    //On passe le statut du paiement en refund
+		    edd_undo_purchase( $download_id, $payment_id );
+		    wp_update_post( array( 'ID' => $payment_id, 'post_status' => 'refunded' ) );
+
+		    //On passe le log à refunded pour que ce soit bien pris en compte au niveau du décompte en cours du projet
+		    $log_payment_id = 0;
+		    query_posts( array(
+			'post_type'  => 'edd_log',
+			'meta_query' => array (array(
+			    'key'   => '_edd_log_payment_id',
+			    'value' => $payment_id
+			))
+		    )); 
+		    if (have_posts()) : while (have_posts()) : the_post(); $log_payment_id = get_the_ID(); endwhile; endif;
+		    wp_reset_query();
+		    wp_update_post( array( 'ID' => $log_payment_id, 'post_status' => 'refunded' ) );
+		    
+		    //Affichage
 		    _e( 'La somme est maintenant disponible dans votre porte-monnaie.', 'yproject' );
+		    echo '<br />';
+		    $page_investments = get_page_by_path('mes-investissements');
+		    ?>
+		    &lt;&lt; <a href="<?php echo get_permalink($page_investments->ID); ?>"><?php echo __('Mes investissements', 'yproject'); ?></a>
+		    <?php
 		    
 		} else {
 		
