@@ -71,8 +71,8 @@
 		$page_makesense = get_page_by_path('makesense');
 		$page_partners = get_page_by_path('partenaires');
 	    ?>
-	    <a href="<?php echo get_permalink($page_makesense->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo_makesens.jpg"></a>
-	    <a href="<?php echo get_permalink($page_partners->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logos_partenaires.jpg" width="800" height="150"></a>
+	    <a href="<?php echo get_permalink($page_makesense->ID); ?>"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo_makesens.jpg"></a>
+	    <a href="<?php echo get_permalink($page_partners->ID); ?>"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/logos_partenaires.jpg" width="800" height="150"></a>
 		   
 	    <?php
 	    /*

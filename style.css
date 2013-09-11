@@ -18,20 +18,32 @@
 /* FONTS TO LOAD */
 @font-face {
     font-family: 'DINPro-Light';
-    src: url('fonts/DINPro-Light.otf');
+    src: url('fonts/DIN-Light_1.eot');
+    src: url('fonts/DIN-Light_1.eot?#iefix') format('embedded-opentype'),
+         url('fonts/DIN-Light_1.woff') format('woff'),
+         url('fonts/DIN-Light_1.ttf') format('truetype'),
+         url('fonts/DIN-Light_1.svg#acknowledge_tt_brkregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'DINPro-Medium';
-    src: url('fonts/DINPro-Medium.otf');
+    src: url('fonts/DIN-Medium_0.eot');
+    src: url('fonts/DIN-Medium_0.eot?#iefix') format('embedded-opentype'),
+         url('fonts/DIN-Medium_0.woff') format('woff'),
+         url('fonts/DIN-Medium_0.ttf') format('truetype'),
+         url('fonts/DIN-Medium_0.svg#acknowledge_tt_brkregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
   
 @font-face {
     font-family: 'DINPro-Black';
-    src: url('fonts/DINPro-Black.otf');
+    src: url('fonts/DIN-Black_0.eot');
+    src: url('fonts/DIN-Black_0.eot?#iefix') format('embedded-opentype'),
+         url('fonts/DIN-Black_0.woff') format('woff'),
+         url('fonts/DIN-Black_0.ttf') format('truetype'),
+         url('fonts/DIN-Black_0.svg#acknowledge_tt_brkregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
