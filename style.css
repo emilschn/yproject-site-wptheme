@@ -96,7 +96,7 @@ h4 {
     background-color: #FFFFFF;
 }
 .projects_current_temp {
-    width: 221px !important;
+    width: 235px !important;
 }
 .projects_vote {
     width: 221px;
@@ -218,10 +218,12 @@ h4 {
 
 #home_middle {
     margin: 30px 0px 10px 0px;
+    background-color: #FAF8F9;
 }
 
-#home_middle {
-    background-color: #FAF8F9;
+#home_middle_top {
+    background: url("images/grenades_fond.png");
+    background-repeat: repeat-x;
 }
 
 #home_middle_content {

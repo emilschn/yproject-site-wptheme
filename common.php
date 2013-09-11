@@ -433,9 +433,6 @@ function printUserProfileAdminBar($skip_controls = false) {
 
 function printUserInvest($post_invest, $post_campaign) {
     $campaign = atcf_get_campaign( $post_campaign );
-    //Date de l'investissement : echo date_i18n( get_option('date_format'), strtotime( get_post_field( 'post_date', $post->ID ) ) );
-    //Statut de l'investissement : echo edd_get_payment_status( $post, true );
-    //echo '<a href="' . get_permalink($campaign->ID) . '">' . $post_camp->post_title . '</a>';
     ?>
     <li>
 	<div class="user_history_title left">
@@ -477,16 +474,19 @@ function printUserInvest($post_invest, $post_campaign) {
 		    <?php echo date_i18n( get_option('date_format'), strtotime( get_post_field( 'post_date', $post_invest->ID ) ) ); ?>
 		</div>
 		<div class="project_preview_item_infos">
-		    <?php echo __("Paiement", "yproject") . ' ' . edd_get_payment_status( $post_invest, true ); ?>
+		    <?php 
+			$payment_status = ypcf_get_updated_payment_status($post_invest->ID);
+			echo __("Paiement", "yproject") . ' ' . edd_get_payment_status( $post_invest, true ); 
+		    ?>
 		</div>
 		
 		<?php
-		    //N'est que visible si la collecte est toujours en cours
-		    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte") :
+		    //N'est que visible si la collecte est toujours en cours et que le paiement a bien été validé
+		    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish") :
 			$page_cancel_invest = get_page_by_path('annuler-un-investissement');
 		?>
 		<div class="project_preview_item_cancel">
-		    <a href="<?php echo get_permalink($page_cancel_invest->ID); ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
+		    <a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $post_invest->ID; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
 		</div>
 		<?php
 		    endif;

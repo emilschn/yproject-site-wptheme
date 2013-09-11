@@ -12,6 +12,9 @@ msgstr ""
 "Last-Translator: JOHN DOE <john.doe@address.com>\n"
 "Language-Team: FRENCH <LL@li.org>\n"
 
+msgid "Acc&egrave;s impossible"
+msgstr "Acc&egrave;s impossible"
+
 # page-home.php - Page d'accueil
 msgid "Votez !"
 msgstr "Votez !"
@@ -224,6 +227,16 @@ msgstr "projet(s) soutenu(s)"
 
 msgid "projet(s) lanc&eacute;(s)"
 msgstr "projet(s) lanc&eacute;(s)"
+
+# page-annuler-un-investissement.php
+msgid "Sans vous, la somme atteinte sera de "
+msgstr "Sans vous, la somme atteinte sera de "
+
+msgid "Confirmer"
+msgstr "Confirmer"
+
+msgid "La somme est maintenant disponible dans votre porte-monnaie."
+msgstr "La somme est maintenant disponible dans votre porte-monnaie."
 
 # header.php - menu
 msgid "Decouvrir les projets"
