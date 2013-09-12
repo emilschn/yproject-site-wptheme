@@ -39,7 +39,7 @@
 	</div>
     </div>
     
-	    
+<?php /*    
     <div id="home_middle">
 	<div id="home_middle_top">
 	    <div id="home_middle_content">
@@ -58,16 +58,18 @@
 	    </div>
 	</div>
     </div>
+ * 
+ */ ?>
 	
 	
     <div id="home_bottom" class="center">
 	<div class="padder">
-	    <?php $projects_page = get_page_by_path('projects'); ?>
-	    <a href="<?php echo get_permalink($projects_page->ID); ?>"><?php _e('Decouvrir les projets', 'yproject'); ?></a><br /><br />
+	    <?php /*$projects_page = get_page_by_path('projects'); ?>
+	    <a href="<?php echo get_permalink($projects_page->ID); ?>"><?php _e('Decouvrir les projets', 'yproject'); ?></a><br /><br />*/ ?>
 	    
-	    
+	    <h2 class="underlined"><?php _e("Nos partenaires", "yproject"); ?></h2>
 	    <?php 
-		/* <h2 class="underlined"><?php _e("Partenaires", "yproject"); ?></h2> */
+		
 		$page_makesense = get_page_by_path('makesense');
 		$page_partners = get_page_by_path('partenaires');
 	    ?>

@@ -49,6 +49,11 @@ msgstr "Actualit&eacute;s"
 msgid "Trouvez les projets"
 msgstr "Trouvez les projets"
 
+msgid "Nos partenaires"
+msgstr "Nos partenaires"
+
+msgid "Trouvez les projets"
+msgstr "Trouvez les projets"
 # single-campaign.php - Page projet
 msgid "Investissez"
 msgstr "Investissez"
@@ -172,6 +177,12 @@ msgstr "Revenir à la description du projet"
 
 msgid "Derni&egrave;res actualit&eacute;s du projet %1$s"
 msgstr "Derni&egrave;res actualit&eacute;s du projet %1$s"
+
+msgid "Foire aux questions"
+msgstr "Foire aux questions"
+
+msgid "Ici vous aurez acc&egrave;s &agrave; vos param&egrave;tres"
+msgstr "Ici vous aurez acc&egrave;s &agrave; vos param&egrave;tres"
 
 # page-communaute.php - Communauté
 msgid "Derniers inscrits"

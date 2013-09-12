@@ -26,14 +26,8 @@
 	<span class="user-nicename">@<?php bp_displayed_user_username(); ?></span>
     <?php endif; ?>
 	
-    <div id="item-header-content-description" style="display: none">
-	<h3>Description :</h3>
-	Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... Lorem Ipsum...aaaaa 
-	Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... 
-	Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... 
-	Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... 
-	Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... 
-	Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... Lorem Ipsum... 
+    <div id="item-header-content-description">
+	<?php _e("Ici vous aurez acc&egrave;s &agrave; vos param&egrave;tres", "yproject"); ?>
     </div>
 	
 	<?php /*
@@ -70,7 +64,7 @@
 
 </div><!-- #item-header-content -->
 
-
+<?php /*
 <div id="item-header-stats" class="left">
     <?php  
 	global $wp_query;
@@ -87,12 +81,12 @@
 	if ($purchases) $nb_project_founded = count($purchases);
     ?>
     <ul>
-	<?php /*<li><strong><?php echo mycred_get_users_cred(bp_displayed_user_id()); ?></strong> <?php _e("points", "yproject"); ?></li>*/ ?>
 	<li><strong><?php echo $nb_project_created; ?></strong> <?php _e("projet(s) lanc&eacute;(s)", "yproject"); ?></li>
 	<li><strong><?php echo $nb_project_founded; ?></strong> <?php _e("projet(s) soutenu(s)", "yproject"); ?></li>
     </ul>
     <?php bp_follow_add_follow_button(); ?>
-</div>
+</div>*/ ?>
+	<?php /*<li><strong><?php echo mycred_get_users_cred(bp_displayed_user_id()); ?></strong> <?php _e("points", "yproject"); ?></li>*/ ?>
 
 
 <div style="clear: both"></div>

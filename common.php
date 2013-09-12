@@ -503,9 +503,22 @@ function printUserInvest($post_invest, $post_campaign) {
 /******************************************************************************/
 /* PAGE COMMUNAUTE */
 /******************************************************************************/
-function printCommunityTop($title) {
+function printMiscPagesTop($title, $is_community = false) {
     ?>
-    <div id="post_top_bg">
+    <header class="align-center">
+	<div id="site_name" class="center">
+		<h1>
+		    <?php 
+			$result = count_users();
+			$user_count = $result['total_users'];
+
+			_e($title, "yproject");
+			if ($is_community && $user_count > 50) echo '<br />WE ARE ' . $user_count;
+		    ?>
+		</h1>
+	</div>
+    </header>
+    <!--<div id="post_top_bg">
 	<div id="post_top_title" class="center" style="background-image: url('<?php 
 		if (WP_DEBUG) {$debug_src = 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject/todo.jpg';} else {$debug_src = get_stylesheet_directory_uri();}
 		$attachments = get_posts(
@@ -525,7 +538,7 @@ function printCommunityTop($title) {
 		else _e($title, "yproject");
 		?></h1>
 	</div>
-    </div>
+    </div>-->
     <?php
 }
 
@@ -555,51 +568,54 @@ function printCommunityMenu() {
     <?php
 }
 
-?>
-
-<?php
-
-
-
-// la partie droite  sur la page comment ca marche
+/******************************************************************************/
+/* PAGE COMMENT ça MARCHE */
+/******************************************************************************/
 function printCommentcamarcheright(){
-	?>
-		<div class="post_bottom_buttons">
-							    		<div class="dark" style="color:white;">
-							    			<?php /* Lien page faq */ $page_manage = get_page_by_path('faq-2'); ?>
-	    									<a href="<?php echo get_permalink($page_manage->ID); ?>"><?php echo __('FAQ', 'yproject'); ?></a>
-	    							    </div>
-							    
-							    	</div>
-							   
-							       	<div class="post_bottom_buttons">
-							       		
-							    		<div class="light" >
-							    			<?php /* forum questions */  $forum = get_page_by_path('Forum Questions'); ?>
-      										<a href="<?php echo get_permalink($forum->ID); ?>"> <?php echo __('FORUM Questions', 'yproject'); ?></a>
-	    							    </div>
-							    		
-							    	</div>
+?>
+    <div class="post_bottom_buttons">
+	<div class="dark" style="color:white;">
+	    <?php /* Lien page faq */ $page_manage = get_page_by_path('faq-2'); ?>
+	    <a href="<?php echo get_permalink($page_manage->ID); ?>"><?php echo __('FAQ', 'yproject'); ?></a>
+	</div>
+    </div>
 
-							    	<div class="post_bottom_buttons">
-							    		<div class="light" >
-							    			<?php /* forum idees */  $forum = get_page_by_path('Forum Idees'); ?>
-      										<a href="<?php echo get_permalink($forum->ID); ?>"> <?php echo __('FORUM Idées', 'yproject'); ?></a>
-	    							    </div>
-							    		
-							    	</div>
+    <div class="post_bottom_buttons">
+	<div class="light" >
+	    <?php /* forum questions */  $forum = get_page_by_path('Forum Questions'); ?>
+	    <a href="<?php echo get_permalink($forum->ID); ?>"> <?php echo __('FORUM Questions', 'yproject'); ?></a>
+	</div>
+    </div>
 
-							    	<div class="post_bottom_buttons">
-							    		<div class="light" >
-							    			<?php /* forum idees */  $forum = get_page_by_path('Forum Bugs'); ?>
-      										<a href="<?php echo get_permalink($forum->ID); ?>"> <?php echo __('FORUM Bugs', 'yproject'); ?></a>
-	    							    </div>
-							    		
-							    	</div>
-	<?php
+    <div class="post_bottom_buttons">
+	<div class="light" >
+	    <?php /* forum idees */  $forum = get_page_by_path('Forum Idees'); ?>
+	    <a href="<?php echo get_permalink($forum->ID); ?>"> <?php echo __('FORUM Idées', 'yproject'); ?></a>
+	</div>
+    </div>
+
+    <div class="post_bottom_buttons">
+	<div class="light" >
+	    <?php /* forum idees */  $forum = get_page_by_path('Forum Bugs'); ?>
+	    <a href="<?php echo get_permalink($forum->ID); ?>"> <?php echo __('FORUM Bugs', 'yproject'); ?></a>
+	</div>
+    </div>
+<?php
 }
-/**RENVOIE LES FAQs LES PLUS RECENTS****/
+
+/******************************************************************************/
+/* PAGE FAQ */
+/******************************************************************************/
 function showFaq($nb){
+	?>
+	<div class="post_bottom_buttons">
+	    <div class="dark" id="tab-faq-dark">
+		<?php /* Lien page faq */ $page_manage = get_page_by_path('faq-2'); ?>
+		<a href="<?php echo get_permalink($page_manage->ID); ?>"><?php echo __('FAQ', 'yproject'); ?></a>
+	    </div>
+	</div>
+	<?php 
+	/*
 	global $wpdb;
 	$lastfaq = "SELECT DISTINCT $wpdb->posts.post_title, $wpdb->posts.post_name FROM $wpdb->posts";
 	$lastfaq .= " WHERE $wpdb->posts.post_type = 'qa_faqs'";
@@ -607,30 +623,21 @@ function showFaq($nb){
 	$lastfaqproj = $wpdb->get_results($lastfaq);
 	?>
 	<div class="post_bottom_buttons">
-	<div class="dark" id="tab-faq-dark">
-	<?php /* Lien page faq */ $page_manage = get_page_by_path('faq-2'); ?>
-		<a href="<?php echo get_permalink($page_manage->ID); ?>"><?php echo __('FAQ', 'yproject'); ?></a>
-	</div>
-	</div>
-	<div class="post_bottom_buttons">
-	
-	
-    <?php
+	    <?php
 	 	if (isset($lastfaqproj)) :
-
-	 	 	foreach ($lastfaqproj as $temppost) {
-	 	 		?>
-	 	 		<div class="light" id="tab-faq-light">
-	 	 		<?php /* Lien page faq */$page_faq = get_page_by_path('faq-2'); ?>
-	 	 		<a href="<?php echo get_permalink($page_manage->ID); ?>"><?php echo ($temppost->post_title);	?> </a>
-	 	 		</div>
-	 	 		<?php
-	 	 	}
+		    foreach ($lastfaqproj as $temppost) {
+			?>
+			<div class="light" id="tab-faq-light">
+			<?php $page_faq = get_page_by_path('faq-2'); // Lien page faq ?>
+			<a href="<?php echo get_permalink($page_manage->ID); ?>"><?php echo ($temppost->post_title);	?> </a>
+			</div>
+			<?php
+		    }
 	 	endif;
-	?>
-	
-
+	    ?>
 	</div>
+	 * 
+	 */?>
 <?php
 }
 ?>

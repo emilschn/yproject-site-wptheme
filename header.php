@@ -45,6 +45,11 @@
 		<?php wp_head(); ?>
 		
 		<script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo get_stylesheet_directory_uri(); ?>/_inc/js/common.js"></script>
+		
+		<!--[if lt IE 9]>
+		    <script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo get_stylesheet_directory_uri(); ?>/_inc/js/html5shiv.js"></script>
+		<![endif]-->
+		
 	</head>
 
 	<body <?php body_class(); ?> id="bp-default">

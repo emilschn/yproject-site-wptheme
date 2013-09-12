@@ -6,7 +6,7 @@ get_header( 'buddypress' );
 	<div id="content">
 		<div class="padder">
 			
-			<?php printUserProfileAdminBar(); ?>
+			<?php //printUserProfileAdminBar(); ?>
 
 			<?php do_action( 'bp_before_member_home_content' ); ?>
 
@@ -16,6 +16,7 @@ get_header( 'buddypress' );
 			    </div>
 			</header><!-- #item-header -->
 
+			<?php /*
 			<div class="center">
 			    <?php
 			    $following_count = 0;
@@ -106,6 +107,8 @@ get_header( 'buddypress' );
 
 			    <?php do_action( 'bp_after_member_home_content' ); ?>
 			</div>
+			 * 
+			 */ ?>
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
