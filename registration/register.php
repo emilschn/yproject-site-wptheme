@@ -1,11 +1,19 @@
 <?php get_header( 'buddypress' ); ?>
 
-    <div id="content" class="center">
-	<div class="padder_more">
+    <div id="content">
+	<div class="padder">
+					
+	    <header class="align-center">
+		<div id="site_name" class="center">
+			<h1>
+			    <?php _e("Inscription", "yproject"); ?>
+			</h1>
+		</div>
+	    </header>
 
 	    <?php do_action( 'bp_before_register_page' ); ?>
 
-	    <div class="page" id="register-page">
+	    <div class="page center" id="register-page">
 
 		    <form action="" name="signup_form" id="signup_form" class="standard-form" method="post" enctype="multipart/form-data">
 
@@ -20,10 +28,7 @@
 
 		    <?php if ( 'request-details' == bp_get_current_signup_step() ) : ?>
 
-			    <h2><?php _e( 'Inscription', 'yproject' ); ?></h2>
-
 			    <?php do_action( 'template_notices' ); ?>
-			    
 
 			    <div class="register_half_part">
 				<?php 
