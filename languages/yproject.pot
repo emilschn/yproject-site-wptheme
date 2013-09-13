@@ -43,6 +43,9 @@ msgstr "Participez à un projet"
 msgid "Proposez un projet"
 msgstr "Proposez un projet"
 
+msgid "Je connais un projet"
+msgstr "Je connais un projet"
+
 msgid "Actualites"
 msgstr "Actualit&eacute;s"
 
@@ -52,8 +55,6 @@ msgstr "Trouvez les projets"
 msgid "Nos partenaires"
 msgstr "Nos partenaires"
 
-msgid "Trouvez les projets"
-msgstr "Trouvez les projets"
 # single-campaign.php - Page projet
 msgid "Investissez"
 msgstr "Investissez"

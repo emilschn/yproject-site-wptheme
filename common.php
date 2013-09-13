@@ -518,27 +518,6 @@ function printMiscPagesTop($title, $is_community = false) {
 		</h1>
 	</div>
     </header>
-    <!--<div id="post_top_bg">
-	<div id="post_top_title" class="center" style="background-image: url('<?php 
-		if (WP_DEBUG) {$debug_src = 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject/todo.jpg';} else {$debug_src = get_stylesheet_directory_uri();}
-		$attachments = get_posts(
-		    array('post_type' => 'attachment',
-		    'post_parent' => $post->ID,
-		    'post_mime_type' => 'image')
-		);
-		$image_src = wp_get_attachment_image_src($attachments[0]->ID, "full");
-		if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src;
-		?>'); background-repeat: no-repeat; background-position: center;">
-	    
-		<h1><?php 
-		$result = count_users();
-		$user_count = $result['total_users'];
-		
-		if ($user_count > 50) echo 'WE ARE ' . $user_count;
-		else _e($title, "yproject");
-		?></h1>
-	</div>
-    </div>-->
     <?php
 }
 
