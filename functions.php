@@ -26,6 +26,15 @@ function yproject_front_end_login_fail($username){
 }
 add_action('wp_login_failed', 'yproject_front_end_login_fail'); 
 
+function _catch_empty_user( $username, $pwd ) {
+    if (empty($username)||empty($pwd)) {
+	$page_connexion = get_page_by_path('connexion');
+	wp_redirect(get_permalink($page_connexion->ID) . '?login=failed');
+	exit();
+    }
+}
+add_action( 'wp_authenticate', '_catch_empty_user', 1, 2 );
+
 /**
  * permet de se loger avec son mail
  * @param type $username

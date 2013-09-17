@@ -19,10 +19,6 @@
 @font-face {
     font-family: DINPro-Light, Arial, sans-serif;
     src: url('fonts/DIN-Light_1.eot');
-    /*src: url('fonts/DIN-Light_1.eot?#iefix') format('embedded-opentype'),
-         url('fonts/DIN-Light_1.woff') format('woff'),
-         url('fonts/DIN-Light_1.ttf') format('truetype'),
-         url('fonts/DIN-Light_1.svg#DINPro-Light') format('svg');*/
     src: url('fonts/DIN-Light_1.woff') format('woff'), url('fonts/DIN-Light_1.ttf') format('truetype'), url('fonts/DIN-Light_1.svg') format('svg');
     font-weight: normal;
     font-style: normal;
@@ -30,10 +26,6 @@
 @font-face {
     font-family: DINPro-Medium, Arial, sans-serif;
     src: url('fonts/DIN-Medium_0.eot');
-    /*src: url('fonts/DIN-Medium_0.eot?#iefix') format('embedded-opentype'),
-         url('fonts/DIN-Medium_0.woff') format('woff'),
-         url('fonts/DIN-Medium_0.ttf') format('truetype'),
-         url('fonts/DIN-Medium_0.svg#DINPro-Medium') format('svg');*/
     src: url('fonts/DIN-Medium_0.woff') format('woff'), url('fonts/DIN-Medium_0.ttf') format('truetype'), url('fonts/DIN-Medium_0.svg') format('svg');
     font-weight: normal;
     font-style: normal;
@@ -56,6 +48,11 @@ body a {
     margin: auto;
 }
 
+.center_small {
+    width: 390px;
+    margin: auto;
+}
+
 .left {
     float: left;
 }
@@ -74,6 +71,10 @@ body a {
 
 .invest_success {
     color: green;
+}
+
+.errors {
+    color: red;
 }
 
 .underlined {
@@ -340,14 +341,18 @@ div#home_bottom h1 {
     padding-top: 10px;
 }
 
-.post_bottom_desc {
+.post_bottom_desc, .post_bottom_desc_small {
     width: 610px;
     padding-left: 10px;
     padding-right: 20px;
-    font-size: 9pt;
+    font-size: 11pt;
 }
 
-.post_bottom_desc h2 {
+.post_bottom_desc_small {
+    width: 380px;
+}
+
+.post_bottom_desc h2, .post_bottom_desc_small h2 {
     color: #E6223C;
     font-size: 11pt;
 }
@@ -394,6 +399,7 @@ div#home_bottom h1 {
 
 .post_bottom_buttons div.dark {
     background-color: #515050;
+    border-bottom: 1px solid white;
 }
 
 .post_bottom_buttons div.light {
@@ -593,6 +599,10 @@ ul.activity-list p {
     display: inline-block;
     width: 140px;
 }
+.medium-label {
+    display: inline-block;
+    width: 230px;
+}
 .large-label {
     display: inline-block;
     width: 300px;
@@ -704,7 +714,7 @@ ul.activity-list p {
 
 #nav li a {
     color: #DDDDDD;
-    padding: 0px 15px;
+    padding: 0px 12px;
     text-decoration: none;
     text-align: left;
 }
@@ -833,6 +843,10 @@ header {
     background-color: #E84651;
     background-image: url("images/header.png");
     background-position: center;
+}
+
+header.header_home {
+    background-image: url("images/header_home.png");
 }
 
 #site_name {

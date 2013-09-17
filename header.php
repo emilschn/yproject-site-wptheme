@@ -62,10 +62,10 @@
 			    <?php /* Logo Accueil */ ?>
 			    <li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.png" width="160" height="100" /></a></li>
 			    <?php /* Menu Découvrir les projets */ $page_discover = get_page_by_path('projects'); ?>
-			    <?php /* TEMP */ $page_discover = get_page_by_path('je-connais-un-projet'); ?>
+			    <?php /* TEMP */ $page_discover = get_page_by_path('reveler-un-projet'); ?>
 			    <li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_discover->ID); ?>"><?php echo __('Decouvrir les projets', 'yproject'); ?></a></span></li>
 			    <?php /* Menu Proposer un projet */ $page_start = get_page_by_path('proposer-un-projet'); ?>
-			    <?php /* TEMP */ $page_start = get_page_by_path('je-connais-un-projet'); ?>
+			    <?php /* TEMP */ $page_start = get_page_by_path('reveler-un-projet'); ?>
 			    <li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Proposer un projet', 'yproject'); ?></a></span></li>
 			    <?php /* Menu Comment ça marche ? */ $page_how = get_page_by_path('descriptif'); ?>
 			    <li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_how->ID); ?>"><?php echo __('Comment ca marche ?', 'yproject'); ?></a></span></li>

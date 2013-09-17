@@ -1,4 +1,4 @@
-<header class="align-center">
+<header class="align-center header_home">
     <div id="site_name" class="center">
 	    <div id="welcome_text">
 		<?php 

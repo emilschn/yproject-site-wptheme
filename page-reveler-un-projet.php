@@ -7,8 +7,8 @@
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 	    <?php printMiscPagesTop("Je connais un projet"); ?>
 	    <div id="post_bottom_bg">
-		<div id="post_bottom_content" class="center">
-		    <div class="left post_bottom_desc">
+		<div id="post_bottom_content" class="center_small">
+		    <div class="left post_bottom_desc_small">
 			<?php the_content(); ?>
 		    </div>
 
