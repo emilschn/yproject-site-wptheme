@@ -33,9 +33,12 @@
 	    <div style="clear: both"></div>
 	     * 
 	     */ ?>
-	    <?php printHomePreviewProjectsTemp(4); ?>
 	    
-	    <div style="clear: both"></div>
+	    <?php /* printHomePreviewProjectsTemp(4); ?>
+	    
+	    <div style="clear: both"></div> */ ?>
+	    
+	    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/home_temp.png" width="955" height="200" />
 	</div>
     </div>
     

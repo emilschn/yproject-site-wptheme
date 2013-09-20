@@ -303,7 +303,7 @@ div#home_bottom h1 {
 } 
 
 #post_bottom_bg {
-    background-color: #F2F3F2; 
+    background-color: #FFF; 
 } 
 
 #post_top_title {
@@ -898,7 +898,7 @@ footer {
 footer div.widget-area {
     padding-top: 10px;
     float: left;
-    width: 250px;
+    width: 280px;
     
     font-family: DINPro-Light, Arial, sans-serif;
     color: #FFF;
@@ -952,6 +952,14 @@ footer a {
     color: #FFF;
     font-size: 8pt;
     text-decoration: none;
+}
+
+footer span {
+    padding: 10px 0px;
+    color: #FFF;
+    display: block;
+    width: 100%;
+    text-align: center;
 }
 
 #snsf-wrapper {
