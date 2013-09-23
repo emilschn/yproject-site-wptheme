@@ -93,6 +93,15 @@ h4 {
     font-weight: normal;
 }
 
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #FFF;
+    margin: 0px 0px 10px 220px;
+}
+
 /* PROJECT PREVIEW */
 .projects_current {
     width: 661px;
@@ -222,7 +231,39 @@ h4 {
 
 #home_middle {
     margin: 30px 0px 10px 0px;
-    background-color: #FAF8F9;
+    background-color: #2B2D2C;
+    color: #FFF;
+    height: 200px; 
+    padding-top: 15px;
+}
+
+#home_middle h2 {
+    text-transform: uppercase;
+    text-align: center;
+    width: 720px;
+    margin-left: 120px;
+    border-bottom: 1px solid #FFF;
+    -webkit-margin-after: 0em;
+}
+
+#home_middle span.light {
+    margin-left: 140px;
+    padding: 10px;
+    background-color: #F2F2F2;
+    text-transform: uppercase;
+}
+
+#home_middle span.light a {
+    color: #515050;
+}
+
+#home_middle .home_half_size, #home_middle .home_intro {
+    display: none;
+}
+.home_discover_half_size {
+    width: 410px;
+    margin-left: 70px;
+    float: left;
 }
 
 #home_middle_top {
@@ -234,10 +275,6 @@ h4 {
     background: url("images/grenades.png");
     background-position: center top;
     background-repeat: no-repeat;
-}
-
-#home_middle .home_intro {
-    display: none;
 }
 
 .round_title_left, .round_title_right {
@@ -864,7 +901,7 @@ header.header_home {
     color: #FFF;
     text-decoration: none;
 }
-#site_name2 .home_half_size {
+#site_name2 .home_half_size, #site_name2 .home_discover_half_size {
     display: none;
 }
 
@@ -885,7 +922,7 @@ header.header_home {
     color: #FFF;
     text-decoration: none;
 }
-#site_name .home_half_size {
+#site_name .home_half_size, #site_name .home_discover_half_size {
     display: none;
 }
 

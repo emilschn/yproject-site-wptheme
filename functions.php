@@ -75,4 +75,9 @@ function yproject_intro_home_shortcode($atts, $content) {
     return '<div class="home_intro">' . $content . '</div>';
 }
 add_shortcode('yproject_intro_home', 'yproject_intro_home_shortcode');
+
+function yproject_home_discover_shortcode($atts, $content) {
+    return '<div class="home_discover_half_size">' . $content . '</div>';
+}
+add_shortcode('yproject_home_discover', 'yproject_home_discover_shortcode');
 ?>
