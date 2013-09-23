@@ -36,8 +36,8 @@
 							$name = $post_camp->ID.'-2';
 							
 							if ($name!='') {
-								
-								$query="SELECT ID FROM wp_posts WHERE post_type='forum' AND post_name= $post_camp->ID";
+								$table_name = $wpdb->prefix . "posts";
+								$query="SELECT ID FROM $table_name WHERE post_type='forum' AND post_name= $post_camp->ID";
 
 								$results=$wpdb->get_results($query);
 
