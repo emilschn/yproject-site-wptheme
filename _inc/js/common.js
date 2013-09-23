@@ -10,8 +10,8 @@ YPUIFunctions = (function($) {
 	    YPUIFunctions.onWidthChange();
 
 	    if ($("#finish_subscribe").length > 0) {		
-			$("#container").css('padding-top', "55px");		
-		}		
+		$("#container").css('padding-top', "55px");		
+	    }
 
 	    if ($("#fundingproject").val()) { 				
 		$("#goalsum_fixe").click(function() { $("#goalsum_flexible_param").hide(); $("#goalsum_fixe_param").show();}); 		
@@ -62,6 +62,15 @@ YPUIFunctions = (function($) {
 		    $("#item-body-" + aTabs[i]).height(nHeight);
 		}
 	    }
+	    
+	    if ($(".wp-editor-wrap")[0]) {
+		setInterval(YPUIFunctions.onRemoveUploadInterval, 3000);
+	    }
+	},
+	
+	onRemoveUploadInterval: function() {
+	    if ($(".media-frame-menu")[0]) $(".media-frame-menu").remove();
+	    if ($(".media-frame-router")[0]) $(".media-frame-router").remove();
 	},
 	
 	checkInvestInput: function() {

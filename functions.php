@@ -80,4 +80,12 @@ function yproject_home_discover_shortcode($atts, $content) {
     return '<div class="home_discover_half_size">' . $content . '</div>';
 }
 add_shortcode('yproject_home_discover', 'yproject_home_discover_shortcode');
+
+
+//Permet à tous les utilisateurs inscrits d'insérer des images
+function change_subscriber_cap() {
+    $role = get_role( 'subscriber' );
+    $role->add_cap( 'upload_files' );
+}
+add_action('init', 'change_subscriber_cap');
 ?>
