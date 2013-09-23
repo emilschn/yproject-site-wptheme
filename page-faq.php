@@ -23,7 +23,9 @@
 							   
 
 							    <div class="left post_bottom_infos">
-							    	<?php printCommentcamarcheright(); ?>
+
+							    	
+							    	<?php showFaq(5); ?>
 							    </div>
 							    <div style="clear: both"></div>
 

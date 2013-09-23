@@ -101,12 +101,12 @@ YPUIFunctions = (function($) {
 	},
 	
 	onWidthChange: function(e) {
-	    $("#navigation").width($(window).width());
-	    if ($(window).width() < 481) {
+	    //$("#navigation").width($(window).width());
+	    /*if ($(window).width() < 481) {
 		$("#projects_vote").remove().insertAfter($("#projects_current"));
 	    } else {
 		$("#projects_current").remove().insertAfter($("#projects_vote"));
-	    }
+	    }*/
 	},
 	
 	switchProfileTab: function(sType) {

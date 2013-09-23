@@ -27,18 +27,23 @@
 			    <?php do_action( 'template_notices' ); ?>
 
 			    <div class="register_half_part">
+				<h2>Inscription avec Facebook</h2>
 				<?php 
 				    if (have_posts()) : 
 					while (have_posts()) : the_post();
 					    the_content();
 					endwhile; 
 				    endif;
-				
+				?>
+				<div style="text-align: center">
+				<?php
 				    dynamic_sidebar( 'sidebar-1' ); 
 				?>
+				</div>
 			    </div>
 			    
 			    <div class="register_half_part">
+				<h2>Inscription par e-mail</h2>
 				<div class="errors">
 				    <?php do_action( 'bp_signup_username_errors' ); ?>
 				    <?php do_action( 'bp_signup_email_errors' ); ?>
@@ -217,7 +222,7 @@
 				    
 				    
 		    <?php do_action( 'bp_custom_signup_steps' ); ?>
-		    <div>&nbps;</div>
+		    <div>&nbsp;</div>
 		    </form>
 		</div>
 	    </div>

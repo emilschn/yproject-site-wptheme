@@ -1,12 +1,16 @@
 <header class="align-center header_home">
-    <div id="site_name" class="center">
-	    <div id="welcome_text">
+
+
+     <div id="site_name2" class="center">
+<div id="welcome_text">
 		<?php 
 		    wp_reset_query();
 		    the_content();
 		?>
 	    </div>
+
     </div>
+
 </header>
 
 
@@ -37,8 +41,22 @@
 	    <?php /* printHomePreviewProjectsTemp(4); ?>
 	    
 	    <div style="clear: both"></div> */ ?>
+
+
+<div style="width:960px; height:400px;">
+
+<div style="width:480px; float:left;">
+<img src="http://www.wedogood.co/wp-content/themes/yproject/images/projet_exemple.jpg" width="480" height="400">  
+</div>
+
+<div style="width:480px; float:right; padding-top:65px;">
+<a style="border:none;" href="http://www.wedogood.co/reveler-un-projet/"><img style="padding-left:60px; padding-bottom:10px;" src="http://www.wedogood.co/wp-content/themes/yproject/images/signaler.jpg" width="410px" height="130px" /></a><br />
+<a style="border:none;" href="<?php $page_connexion_register = get_page_by_path('register'); echo get_permalink($page_connexion_register->ID); ?>"><img style="padding-left:60px; padding-top:10px;" src="http://www.wedogood.co/wp-content/themes/yproject/images/inscription.jpg" width="410px" height="130px" /></a>
+</div>
+
+
 	    
-	    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/home_temp.png" width="955" height="200" />
+	   <!-- <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/home_temp.png" width="955" height="200" /> -->
 	</div>
     </div>
     

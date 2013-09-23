@@ -49,7 +49,7 @@ body a {
 }
 
 .center_small {
-    width: 390px;
+    width: 960px;
     margin: auto;
 }
 
@@ -349,7 +349,7 @@ div#home_bottom h1 {
 }
 
 .post_bottom_desc_small {
-    width: 380px;
+    width: 960px;
 }
 
 .post_bottom_desc h2, .post_bottom_desc_small h2 {
@@ -449,7 +449,8 @@ div#home_bottom h1 {
 /* REGISTER PAGE */     
 .register_half_part {       
     float: left;        
-    width: 49%;     
+    width: 440px;
+    padding: 0px 15px;
 }       
 /* FIN REGISTER PAGE */     
         
@@ -658,6 +659,8 @@ ul.activity-list p {
     top: 0;
     position:fixed;
     z-index: 1000;
+    width: 100%;
+    min-width: 960px;
 }
  
 #nav {
@@ -714,7 +717,7 @@ ul.activity-list p {
 
 #nav li a {
     color: #DDDDDD;
-    padding: 0px 12px;
+    padding: 0px 10px;
     text-decoration: none;
     text-align: left;
 }
@@ -843,11 +846,34 @@ header {
     background-color: #E84651;
     background-image: url("images/header.png");
     background-position: center;
+    min-width: 960px;
 }
 
 header.header_home {
     background-image: url("images/header_home.png");
 }
+
+
+#site_name2 {
+    padding-top: 0px;
+    height: 300px;
+    vertical-align: middle;
+    display: inline-block;
+}
+#site_name2 a {
+    color: #FFF;
+    text-decoration: none;
+}
+#site_name2 .home_half_size {
+    display: none;
+}
+
+#site_name2 h1 {
+    color: #FFF;
+}
+
+
+
 
 #site_name {
     padding-top: 90px;
@@ -893,6 +919,7 @@ header.header_home {
 footer {
     background-color: #EB5A50;
     background-image: url("images/footer.png");
+    min-width: 960px;
 }
 
 footer div.widget-area {
