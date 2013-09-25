@@ -1,12 +1,13 @@
-<?php get_header(); ?>
-
 <?php 
+    global $campaign, $post;
+    //getNewPdfToSign($post->ID); //DEBUG
+    if ( ! is_object( $campaign ) )
+	    $campaign = atcf_get_campaign( $post );
+    
     date_default_timezone_set("Europe/Paris");
     require_once("common.php");
     
-    global $campaign, $post;
-    if ( ! is_object( $campaign ) )
-	    $campaign = atcf_get_campaign( $post );
+    get_header();
 ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
@@ -87,6 +88,7 @@
 		<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
 	    </div><!-- .padder -->
 	</div><!-- #content -->
-<?php endif; ?>
+<?php endif;
 	
-<?php get_footer(); ?>
+    get_footer(); 
+?>

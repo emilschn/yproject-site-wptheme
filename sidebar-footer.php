@@ -70,7 +70,7 @@
 								?>
 								<li class="menu-item">
 								    <div class="social-icons">
-									<a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_grenade.png" /></a><br />
+									<a href="https://www.facebook.com/wedogood.co" target="_blank"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_grenade.png" /></a><br />
 									<?php if ($facebook_infos) echo $facebook_infos; ?>
 								    </div>
 								    <div class="social-icons">

@@ -78,7 +78,7 @@
 				</ul> */?>
 			    </li>
 			    <?php /* Logo FB / TW */ ?>
-			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/pages/Y-Project/381460615282040" target="_blank" title="Notre page Facebook"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.png" width="20" height="20" /></a></li>
+			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.png" width="20" height="20" /></a></li>
 			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/yproject_co" target="_blank" title="Notre compte Twitter"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.png" width="20" height="20" /></a></li>
 			    
 			    <?php if (is_user_logged_in()) : ?>
