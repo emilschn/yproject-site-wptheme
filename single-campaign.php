@@ -1,12 +1,15 @@
-<?php get_header(); ?>
-
 <?php 
-    date_default_timezone_set("Europe/Paris");
-    require_once("common.php");
+  
     
     global $campaign, $post;
+	
+	//getNewPdfToSign($post->ID); //DEBUG
     if ( ! is_object( $campaign ) )
 	    $campaign = atcf_get_campaign( $post );
+		 date_default_timezone_set("Europe/Paris");		
+	    require_once("common.php");		
+			
+	    get_header();
 ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
