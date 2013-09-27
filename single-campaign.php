@@ -1,13 +1,12 @@
+<?php get_header(); ?>
+
 <?php 
-    global $campaign, $post;
-    //getNewPdfToSign($post->ID); //DEBUG
-    if ( ! is_object( $campaign ) )
-	    $campaign = atcf_get_campaign( $post );
-    
     date_default_timezone_set("Europe/Paris");
     require_once("common.php");
     
-    get_header();
+    global $campaign, $post;
+    if ( ! is_object( $campaign ) )
+	    $campaign = atcf_get_campaign( $post );
 ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
@@ -53,16 +52,25 @@
 					    <?php 
 						
 						$vota = html_entity_decode($campaign->vote());
-						// Nombre de jours restants
-						
-						$compte_a_rebours = $campaign->days_remaining();
-						
-						
-						if ($vota == 'vote' && $compte_a_rebours <= 80) {
-							do_shortcode('[yproject_crowdfunding_printPageVoteDeadLine]');
 
-						}elseif ($vota == 'vote' && $compte_a_rebours > 80) {
+
+						// Nombre de jours restants
+						$compte_a_rebours = $campaign->days_remaining();
+					
+						$dateJour = strtotime(date("d-m-Y"));
+						$fin   = strtotime($post->campaign_end_vote);
+
+						$jours_restants = (round(abs($fin - $dateJour)/60/60/24));
+
+						
+
+					
+						if ($vota == 'vote' || jours_restants>0) {
+							echo 'Il vous reste '.($jours_restants).' jours pour voter sur ce projet'.'</br>';
+							do_shortcode('[ypcf_shortcode_compte_rebours]');
 						    do_shortcode('[yproject_crowdfunding_printPageVoteForm]');
+						}elseif ($vota == 'vote' || jours_restants <= 0) {
+							do_shortcode('[yproject_crowdfunding_printPageVoteDeadLine]');
 						}
 						elseif ($vota !='vote') 
 						{
@@ -88,7 +96,6 @@
 		<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
 	    </div><!-- .padder -->
 	</div><!-- #content -->
-<?php endif;
+<?php endif; ?>
 	
-    get_footer(); 
-?>
+<?php get_footer(); ?>
