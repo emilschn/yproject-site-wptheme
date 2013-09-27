@@ -54,9 +54,7 @@
 						$vota = html_entity_decode($campaign->vote());
 
 
-						// Nombre de jours restants
-						$compte_a_rebours = $campaign->days_remaining();
-					
+						// Nombre de jours restants					
 						$dateJour = strtotime(date("d-m-Y"));
 						$fin   = strtotime($post->campaign_end_vote);
 
