@@ -74,7 +74,7 @@
 									<?php if ($facebook_infos) echo $facebook_infos; ?>
 								    </div>
 								    <div class="social-icons">
-									<a href="https://twitter.com/yproject_co" target="_blank"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_grenade.png" /></a><br />
+									<a href="https://twitter.com/wedogood_co" target="_blank"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_grenade.png" /></a><br />
 									<?php if ($twitter_infos) echo $twitter_infos; ?>
 								    </div>
 								    <?php /*<div class="social-icons">

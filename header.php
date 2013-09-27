@@ -14,7 +14,7 @@
     require_once("_external/twitter/TwitterAPIExchange.php");
     $apiUrl = "https://api.twitter.com/1.1/users/show.json";
     $requestMethod = 'GET';
-    $getField = '?screen_name=yproject_co';
+    $getField = '?screen_name=wedogood_co';
     $settings = array(
         'oauth_access_token' => YP_TW_oauth_access_token,
         'oauth_access_token_secret' => YP_TW_oauth_access_token_secret,
@@ -79,7 +79,7 @@
 			    </li>
 			    <?php /* Logo FB / TW */ ?>
 			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.png" width="20" height="20" /></a></li>
-			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/yproject_co" target="_blank" title="Notre compte Twitter"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.png" width="20" height="20" /></a></li>
+			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.png" width="20" height="20" /></a></li>
 			    
 			    <?php if (is_user_logged_in()) : ?>
 			    <?php /* Menu Mon compte */ ?>
