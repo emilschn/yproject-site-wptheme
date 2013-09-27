@@ -63,14 +63,11 @@
 
 						$jours_restants = (round(abs($fin - $dateJour)/60/60/24));
 
-						
-
 					
-						if ($vota == 'vote' || jours_restants>0) {
+						if ($vota == 'vote' && $jours_restants > 0) {
 							echo 'Il vous reste '.($jours_restants).' jours pour voter sur ce projet'.'</br>';
-							do_shortcode('[ypcf_shortcode_compte_rebours]');
 						    do_shortcode('[yproject_crowdfunding_printPageVoteForm]');
-						}elseif ($vota == 'vote' || jours_restants <= 0) {
+						}elseif ($vota == 'vote' && $jours_restants <= 0) {
 							do_shortcode('[yproject_crowdfunding_printPageVoteDeadLine]');
 						}
 						elseif ($vota !='vote') 
