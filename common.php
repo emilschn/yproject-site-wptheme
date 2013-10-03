@@ -29,7 +29,7 @@ function printPageTop($post) {
 	     */ ?>
 
 	    <div id="post_top_infos">
-		<img src="" width="40" height="40" />
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" width="50" height="40"/>
 		<?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
 
 		<?php echo get_avatar( get_the_author_meta( 'user_email' ), '40' ); ?>
@@ -65,12 +65,12 @@ function printPageBottomEnd($post, $campaign) {
 		</div>
 
 		<div class="post_bottom_infos_item">
-		    <img src="" width="40" height="40" />
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png"/>
 		    <?php echo $campaign->backers_count(); ?>
 		</div>
 
 		<div class="post_bottom_infos_item">
-		    <img src="" width="40" height="40" />
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
 		    <?php if ($campaign->vote()=='vote') 
 		    {
 		    	echo  0;
@@ -82,7 +82,7 @@ function printPageBottomEnd($post, $campaign) {
 		</div>
 
 		<div class="post_bottom_infos_item">
-		    <img src="" width="40" height="40" />
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png"/>
 		    <?php echo $campaign->current_amount() . ' / ' . $campaign->goal(); ?>
 		</div>
 
@@ -619,6 +619,7 @@ function showFaq($nb){
 	 */?>
 <?php
 }
+
 ?>
 
 
