@@ -83,9 +83,36 @@ add_shortcode('yproject_home_discover', 'yproject_home_discover_shortcode');
 
 
 //Permet à tous les utilisateurs inscrits d'insérer des images
-function change_subscriber_cap() {
-    $role = get_role( 'subscriber' );
-    $role->add_cap( 'upload_files' );
+function yproject_change_user_cap() {
+    if ( is_user_logged_in() ) {
+	$role_subscriber = get_role("subscriber");
+	$role_subscriber->add_cap( 'read' );
+	$role_subscriber->add_cap( 'upload_files' );
+	$role_subscriber->remove_cap('edit_others_pages' );
+	$role_subscriber->remove_cap('edit_published_pages' );
+	$role_subscriber->remove_cap('publish_pages' );
+	$role_subscriber->remove_cap('edit_pages' );
+    }
 }
-add_action('init', 'change_subscriber_cap');
+add_action('init', 'yproject_change_user_cap');
+
+function yproject_my_files_only( $wp_query ) {
+    global $current_user, $pagenow;
+    if( !is_a( $current_user, 'WP_User') ) return;
+    if( 'admin-ajax.php' != $pagenow || $_REQUEST['action'] != 'query-attachments' ) return;
+    if( !current_user_can('level_5') ) $wp_query->set('author', $current_user->ID );
+    return;
+}
+add_filter('parse_query', 'yproject_my_files_only' );
+
+/*
+function yproject_admin_init() {
+    if (! current_user_can( 'activate_plugins' ) && strpos($_SERVER['PHP_SELF'], 'async-upload.php') === false) {
+	wp_safe_redirect(site_url());
+	exit();
+    }
+}
+add_action( 'admin_init', 'yproject_admin_init', 1 );
+ * 
+ */
 ?>

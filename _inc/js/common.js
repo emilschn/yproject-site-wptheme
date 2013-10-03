@@ -5,9 +5,7 @@ jQuery(document).ready( function() {
 YPUIFunctions = (function($) {
     return {
 	initUI: function() {
-	    $(document).load($(window).bind("resize", YPUIFunctions.onWidthChange));
 	    YPMenuFunctions.initMenuBar();
-	    YPUIFunctions.onWidthChange();
 
 	    if ($("#finish_subscribe").length > 0) {		
 		$("#container").css('padding-top', "55px");		
@@ -64,13 +62,13 @@ YPUIFunctions = (function($) {
 	    }
 	    
 	    if ($(".wp-editor-wrap")[0]) {
-		setInterval(YPUIFunctions.onRemoveUploadInterval, 3000);
+		setInterval(YPUIFunctions.onRemoveUploadInterval, 1000);
 	    }
 	},
 	
 	onRemoveUploadInterval: function() {
 	    if ($(".media-frame-menu")[0]) $(".media-frame-menu").remove();
-	    if ($(".media-frame-router")[0]) $(".media-frame-router").remove();
+	    if ($(".media-frame-router")[0]) $(".media-frame-router").show();
 	},
 	
 	checkInvestInput: function() {
@@ -107,15 +105,6 @@ YPUIFunctions = (function($) {
 	    
 	    $("#input_invest_amount").css("color", bValidInput ? "green" : "red");
 	    return bValidInput;
-	},
-	
-	onWidthChange: function(e) {
-	    //$("#navigation").width($(window).width());
-	    /*if ($(window).width() < 481) {
-		$("#projects_vote").remove().insertAfter($("#projects_current"));
-	    } else {
-		$("#projects_current").remove().insertAfter($("#projects_vote"));
-	    }*/
 	},
 	
 	switchProfileTab: function(sType) {
