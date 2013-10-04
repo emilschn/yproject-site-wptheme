@@ -81,10 +81,15 @@ function yproject_home_discover_shortcode($atts, $content) {
 }
 add_shortcode('yproject_home_discover', 'yproject_home_discover_shortcode');
 
-
 //Permet à tous les utilisateurs inscrits d'insérer des images
 function yproject_change_user_cap() {
     if ( is_user_logged_in() ) {
+	global $editor_styles;
+	$editor_styles = (array) $editor_styles;
+	$stylesheet = 'editor-style.css';
+	$stylesheet    = (array) $stylesheet;
+	$editor_styles = array_merge( $editor_styles, $stylesheet );
+	
 	$role_subscriber = get_role("subscriber");
 	$role_subscriber->add_cap( 'read' );
 	$role_subscriber->add_cap( 'upload_files' );
