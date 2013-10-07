@@ -5,7 +5,7 @@
 function printPageTop($post) {
     ?>
     <div id="post_top_bg">
-	<div id="post_top_title" class="center" style="background-image: url('<?php 
+	<div id="post_top_title" class="center" style=" style="background-color: white; background-image: url('<?php 
 		if (WP_DEBUG) {$debug_src = 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject/todo.jpg';} else {$debug_src = get_stylesheet_directory_uri();}
 		if (isset($_GET["campaign_id"])) {
 		    $post = get_post($_GET["campaign_id"]);
