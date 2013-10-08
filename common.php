@@ -79,7 +79,7 @@ function printPageBottomEnd($post, $campaign) {
 		    {
 		    	$rest = $campaign->days_remaining();
 		    	$days = 90 - $campaign->days_remaining();
-		     	echo $days.' jours sur 90 ! '.'<label style="color:red;"> Plus que '.$rest.' jour(s) !!!</label>'; 
+		     	echo 'Il reste '.'<strong>'.$rest.'</strong>'.' jours pour participer à ce projet'; 
 			}
 			?>
 		</div>
@@ -103,7 +103,7 @@ function printPageBottomEnd($post, $campaign) {
 			<?php	
 			    } else {
 			?>
-			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Investissez', 'yproject'); ?></a>
+			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Investir', 'yproject'); ?></a>
 			<?php
 			    }
 			?>
@@ -117,11 +117,11 @@ function printPageBottomEnd($post, $campaign) {
 			    $category_obj = get_category_by_slug($category_slug);
 			    $category_link = (!empty($category_obj)) ? get_category_link($category_obj->cat_ID) : '';
 			?>
-			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Blog', 'yproject'); ?></a>
+			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Actu', 'yproject'); ?></a>
 		    </div>
 		     <div class="light">
 			<?php /* Lien statistiques*/ $forum = get_page_by_path('forum'); ?>
-      		<a href="<?php echo get_permalink($forum->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Forum', 'yproject'); ?></a>
+      		<a href="<?php echo get_permalink($forum->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Commentaires', 'yproject'); ?></a>
 		    </div>
 		    <div class="light">
 			<?php /* Lien forum*/ $statistiques = get_page_by_path('statistiques'); ?>
