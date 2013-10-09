@@ -93,10 +93,14 @@ function yproject_change_user_cap() {
 	$role_subscriber = get_role("subscriber");
 	$role_subscriber->add_cap( 'read' );
 	$role_subscriber->add_cap( 'upload_files' );
-	$role_subscriber->remove_cap('edit_others_pages' );
-	$role_subscriber->remove_cap('edit_published_pages' );
+	$role_subscriber->add_cap('edit_others_pages' );
+	$role_subscriber->add_cap('edit_published_pages' );
 	$role_subscriber->remove_cap('publish_pages' );
 	$role_subscriber->remove_cap('edit_pages' );
+	$role_subscriber->remove_cap('edit_others_posts' );
+	$role_subscriber->remove_cap('edit_published_posts' );
+	$role_subscriber->remove_cap('publish_posts' );
+	$role_subscriber->remove_cap('edit_posts' );
     }
 }
 add_action('init', 'yproject_change_user_cap');
