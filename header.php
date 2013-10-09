@@ -36,6 +36,8 @@
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
+		
+		<meta name="description" content="Plateforme d'investissement participatif &agrave; impact positif" />
 		<title><?php wp_title( '|', true, 'right' ); bloginfo( 'name' ); ?></title>
 		
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
