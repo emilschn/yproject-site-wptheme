@@ -5,7 +5,7 @@
 function printPageTop($post) {
     ?>
     <div id="post_top_bg">
-	<div id="post_top_title" class="center" style="background-image: url('<?php 
+	<div id="post_top_title" class="center" style="background-color: white;	background-image: url('<?php 
 		if (WP_DEBUG) {$debug_src = 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject/todo.jpg';} else {$debug_src = get_stylesheet_directory_uri();}
 		if (isset($_GET["campaign_id"])) {
 		    $post = get_post($_GET["campaign_id"]);
@@ -17,23 +17,24 @@ function printPageTop($post) {
 		);
 		$image_src = wp_get_attachment_image_src($attachments[0]->ID, "full");
 		if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src;
-		?>'); background-repeat: no-repeat; background-position: center;">
+		?>'); background-repeat: no-repeat; background-position: center;">  
+
 	    
 		<h1><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h1>
 
-	    <?php /*
-	    <div>
-		<a href="#">[TODO: bouton "J'y crois"] <?php echo __('Jy crois', 'yproject'); ?></a>
+	    
+	    <div id="jcrois" style="float:right; margin-right: 20px; margin-bottom: 1px;">
+		<a href="#"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/jycrois_gris.png" alt="j'y crois"></a>
 	    </div>
-	     * 
-	     */ ?>
-
+	    
 	    <div id="post_top_infos">
-		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" width="50" height="40"/>
-		<?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
-
 		<?php echo get_avatar( get_the_author_meta( 'user_email' ), '40' ); ?>
 		<?php echo str_replace( '<a href=', '<a rel="author" href=', bp_core_get_userlink( $post->post_author ) ); ?>
+	    
+	
+	    <img  src="<?php echo get_stylesheet_directory_uri(); ?>/images/france_blc.png" width="50" height="40" />
+	
+		<?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
 	    </div>
 	</div>
     </div>
@@ -66,7 +67,7 @@ function printPageBottomEnd($post, $campaign) {
 
 		<div class="post_bottom_infos_item">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png"/>
-		    <?php echo $campaign->backers_count(); ?>
+		    <?php echo $campaign->backers_count(); ?> personnes ont dèjà financé ce projet
 		</div>
 
 		<div class="post_bottom_infos_item">
@@ -76,7 +77,9 @@ function printPageBottomEnd($post, $campaign) {
 		    	echo  0;
 		    }else
 		    {
-		     	echo $campaign->days_remaining(); 
+		    	$rest = $campaign->days_remaining();
+		    	$days = 90 - $campaign->days_remaining();
+		     	echo 'Il reste '.'<strong>'.$rest.'</strong>'.' jours pour participer à ce projet'; 
 			}
 			?>
 		</div>
@@ -100,7 +103,7 @@ function printPageBottomEnd($post, $campaign) {
 			<?php	
 			    } else {
 			?>
-			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Investissez', 'yproject'); ?></a>
+			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Investir', 'yproject'); ?></a>
 			<?php
 			    }
 			?>
@@ -114,11 +117,11 @@ function printPageBottomEnd($post, $campaign) {
 			    $category_obj = get_category_by_slug($category_slug);
 			    $category_link = (!empty($category_obj)) ? get_category_link($category_obj->cat_ID) : '';
 			?>
-			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Blog', 'yproject'); ?></a>
+			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Actu', 'yproject'); ?></a>
 		    </div>
 		     <div class="light">
 			<?php /* Lien statistiques*/ $forum = get_page_by_path('forum'); ?>
-      		<a href="<?php echo get_permalink($forum->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Forum', 'yproject'); ?></a>
+      		<a href="<?php echo get_permalink($forum->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Commentaires', 'yproject'); ?></a>
 		    </div>
 		    <div class="light">
 			<?php /* Lien forum*/ $statistiques = get_page_by_path('statistiques'); ?>
