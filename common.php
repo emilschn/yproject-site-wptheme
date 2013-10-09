@@ -343,7 +343,12 @@ function printSinglePreview($i, $vote) {
 		    <div class="project_preview_item_pictos">
 		    <div class="project_preview_item_picto">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" />
-			<?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
+			<?php 
+			    $campaign_location = $campaign->location();
+			    $exploded = explode(' ', $campaign_location);
+			    if (count($exploded) > 1) $campaign_location = $exploded[0];
+			    echo (($campaign_location != '') ? $campaign_location : 'France'); 
+			?>
 		    </div>
 		    <div class="project_preview_item_picto">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
