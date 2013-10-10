@@ -1098,3 +1098,22 @@ footer span {
     text-transform: none;
     border-bottom: 1px solid white;
 }
+
+/*J'Y CROIS*/
+.bouton_jcrois{
+width: 100px;
+height: 110px;
+margin: auto 0;
+background-color: white;
+ background-image:url("images/jycrois_gris.png");
+ background-repeat:no-repeat;
+}
+.bouton_jcrois_pas{
+width: 55px;
+height: 55px;
+margin: auto 0;
+background-color: white;
+background-image:url("images/valide_jycrois.png");
+background-repeat: no-repeat;
+}
+/*FIN J'Y CROIS*/
