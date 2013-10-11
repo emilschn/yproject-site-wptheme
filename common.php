@@ -363,7 +363,7 @@ function printSinglePreview($i, $vote) {
 		    </div>
 		    <div class="project_preview_item_picto">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
-			<?php echo $campaign->backers_count(); ?>
+			<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
 		    </div>
 		    <div style="clear: both"></div>
 		    </div>
