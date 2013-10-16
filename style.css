@@ -1121,19 +1121,9 @@ cursor: pointer;
 background-image:url("images/jycrois_gris_rouge.png");
 background-repeat: no-repeat;
 }
-#nb_jycrois_pas{
- color: white;
- font-weight: bolder;
- background-color: red;
- width:100px;
- height: 10px;
-}
 
-#nb_jycrois{
- color: white;
- font-weight: bolder;
- background-color: red;
- width:100px;
- height: 10px;
+
+#tab-count-jycrois{
+   text-align: center;
 }
 /*FIN J'Y CROIS*/

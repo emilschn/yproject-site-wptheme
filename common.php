@@ -23,7 +23,7 @@ function printPageTop($post) {
 		<h1><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h1>
 
 	    
-	    <div id="jcrois" style="float:right; margin-right: 20px; margin-bottom: 1px;">
+	    <div id="tab-count-jycrois" style="float:right; margin-right: 20px; margin-bottom: 1px;">
 	   	<?php do_shortcode('[yproject_crowdfunding_jcrois]');	?>
 	    </div>
 	    
