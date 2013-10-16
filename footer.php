@@ -15,6 +15,11 @@
 			    <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/">
 				<img alt="Licence Creative Commons" width="25" height="25" border="0" style="vertical-align: middle" src="<?php echo get_stylesheet_directory_uri(); ?>/images/cc_logo.png" /> SOME RIGHTS RESERVED
 			    </a>
+			    <br />
+
+			    <!-- GeoTrust QuickSSL [tm] Smart Icon tag. Do not edit. -->
+			    <SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" SRC="https://smarticon.geotrust.com/si.js"></SCRIPT>
+			    <!-- end GeoTrust Smart Icon tag -->
 			</div>
 
 			<?php do_action( 'bp_footer' ); ?>
