@@ -1098,3 +1098,42 @@ footer span {
     text-transform: none;
     border-bottom: 1px solid white;
 }
+
+/*J'Y CROIS*/
+#jcrois{
+width: 100px;
+height: 110px;
+margin: auto 0;
+border: medium none;
+background-color: white;
+cursor: pointer;
+background-image:url("images/jycrois_gris.png");
+background-repeat:no-repeat;
+
+}
+#jcrois_pas{
+width: 90px;
+height: 110px;
+margin: auto 0;
+background-color: white; 
+border: medium none;
+cursor: pointer;
+background-image:url("images/jycrois_gris_rouge.png");
+background-repeat: no-repeat;
+}
+#nb_jycrois_pas{
+ color: white;
+ font-weight: bolder;
+ background-color: red;
+ width:100px;
+ height: 10px;
+}
+
+#nb_jycrois{
+ color: white;
+ font-weight: bolder;
+ background-color: red;
+ width:100px;
+ height: 10px;
+}
+/*FIN J'Y CROIS*/
