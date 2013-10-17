@@ -32,7 +32,7 @@ function printPageTop($post) {
 		<?php echo str_replace( '<a href=', '<a rel="author" href=', bp_core_get_userlink( $post->post_author ) ); ?>
 	    
 	
-	    <img  src="<?php echo get_stylesheet_directory_uri(); ?>/images/france_blc.png" width="50" height="40" />
+	    <img  src="<?php echo get_stylesheet_directory_uri(); ?>/images/france_blc.png" width="40" height="26" />
 	
 		<?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
 	    </div>
@@ -161,7 +161,8 @@ function printAdminBar() {
 	else $campaign_id = get_the_ID();
 	$campaign_id_param .= $campaign_id; 
     ?>
-	<div id="yp_admin_bar" class="center">
+    <div id="yp_admin_bar">
+	<div class="center">
 	    <?php /* Lien page projet */ ?>
 	    <a href="<?php echo get_permalink($campaign_id); ?>"><?php echo __('Page projet', 'yproject'); ?></a>
 	    .:|:.
@@ -171,9 +172,9 @@ function printAdminBar() {
 	    <?php /* Lien ajouter une actu */ $page_add_news = get_page_by_path('ajouter-une-actu'); ?>
 	    <a href="<?php echo get_permalink($page_add_news->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
 	     .:|:.
-        <?php /* Lien resultats des votes*/ $vote = get_page_by_path('vote'); ?>
-        <a href="<?php echo get_permalink($vote->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Stats des votes', 'yproject'); ?></a>
-
+	    <?php /* Lien resultats des votes*/ $vote = get_page_by_path('vote'); ?>
+	    <a href="<?php echo get_permalink($vote->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Stats des votes', 'yproject'); ?></a>
+	</div>
     </div>
     <?php }
 }
@@ -514,7 +515,8 @@ function printUserInvest($post_invest, $post_campaign) {
 function printMiscPagesTop($title, $is_community = false) {
     ?>
     <header class="align-center">
-	<div id="site_name" class="center">
+	<?php global $post; $custom_header = get_stylesheet_directory_uri() . '/images/image_'.$post->post_name.'.jpg'; ?>
+	<div id="site_name" class="center"<?php /*if (file_exists($custom_header)) {*/?> style="background: url('<?php echo $custom_header; ?>');"<?php //} ?>>
 		<h1>
 		    <?php 
 			$result = count_users();

@@ -10,13 +10,8 @@
 		<div id="post_bottom_content" class="center">
 		    <div class="left post_bottom_desc_small">
 			<?php 
-			if (is_user_logged_in()) {
 			    the_content();
-			} else {
-			    $page_connexion = get_page_by_path('connexion');
 			?>
-			    <a href="<?php echo get_permalink($page_connexion->ID); ?>">Vous devez &ecirc;tre connect&eacute; pour proposer un projet</a>
-			<?php } ?>
 		    </div>
 		    <div style="clear: both"></div>
 		</div>

@@ -241,6 +241,7 @@ h4 {
     margin-left: 120px;
     border-bottom: 1px solid #FFF;
     -webkit-margin-after: 0em;
+    margin-bottom: 0px;
 }
 
 #home_middle span.light {
@@ -915,8 +916,8 @@ header.header_home {
 
 
 #site_name {
-    padding-top: 90px;
-    height: 150px;
+    padding-top: 150px;
+    height: 90px;
     vertical-align: middle;
     display: inline-block;
 }
