@@ -1,5 +1,8 @@
 jQuery(document).ready( function() {
     YPUIFunctions.initUI();
+	YPVoteFormFunctions.voteformcontrole();
+   // YPJycroisFunctions.loadJycrois();
+    console.log("testbbbbbbb");
 });
 
 YPUIFunctions = (function($) {
@@ -181,36 +184,63 @@ YPMenuFunctions = (function($){
 })(jQuery);
 
  
-/*YPVoteFormFunctions = (function($) {
+/* FORMULAIRE VOTE*/
+YPVoteFormFunctions = (function($) {
     return {
-    voteformcontrole: function() { 	
-		$("#impact-positif").click(function() { 
-			$("#content-impact-positif").show();
-		 	$("#local").prop('disabled', false);
-	    	$("#environmental").prop('disabled', false);
-			$("#social").prop('disabled', false);
-			$("#autre").prop('disabled', false);
-			$("#precision").prop('disabled', false);
-		}); 		
-		$("#desaprouve").click(function() { 
-			$("#local").prop('disabled', true);
-	    	$("#environmental").prop('disabled', true);
-			$("#social").prop('disabled', true);
-			$("#autre").prop('disabled', true);
-			$("#precision").prop('disabled', true);
-												
-		});
+		voteformcontrole:function() 
+		{ 	
+			$("#impact-positif").click(function(){ 
+				$("#impact-positif-content").show();
+	 			$("#local").prop('disabled', false);
+    			$("#environmental").prop('disabled', false);
+				$("#social").prop('disabled', false);
+				$("#autre").prop('disabled', false);
+				$("#precision").prop('disabled', false);
+			});
 
-		$("#pret").click(function() { 
-			$("#content-retravaille").hide(); $("#content-pret").show();
-		}); 		
-		$("#retravaille").click(function() { 
-			$("#content-retravaille").show(); $("#content-pret").hide();
-		});
-	}
+			$("#desaprouve").click(function(){
+				$("#local").prop('disabled', true);
+    			$("#environmental").prop('disabled', true);
+				$("#social").prop('disabled', true);
+				$("#autre").prop('disabled', true);
+				$("#precision").prop('disabled', true);
+											
+			});
+
+			$("#pret").click(function(){ 
+				$("#retravaille-content").hide(); 
+				$("#pret-content").show();
+			}); 		
+			$("#retravaille").click(function(){
+				$("#retravaille-content").show(); 
+				$("#content-pret").hide();
 	    
+			});
+	    
+    	}
+    }   
 })(jQuery);
-*/
-	
 
-	
+/* FIN FORMULAIRE VOTE*/
+
+/* J'Y CROIS*/
+/*	
+YPJycroisFunctions = (function($) {
+    return 
+    {
+	    loadJycrois:function() 
+	    { 
+			$(.bouton_jcrois).click(function()
+			{
+	        	$("#tab-jycrois").load();
+	        }
+	        );
+	    }
+
+	}
+})(jQuery);
+/* FIN J'Y CROIS */
+
+
+
+   
