@@ -19,7 +19,8 @@ function printPageTop($post) {
 		if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src;
 		?>'); background-repeat: no-repeat; background-position: center;">  
 
-	    
+	    	<img width="960" height="240" src="http://dev.yproject.co/wp-content/themes/yproject/images/blanc_bandeau_projet.png" style="position: absolute;">
+
 		<h1><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h1>
 
 	    
@@ -32,7 +33,7 @@ function printPageTop($post) {
 		<?php echo str_replace( '<a href=', '<a rel="author" href=', bp_core_get_userlink( $post->post_author ) ); ?>
 	    
 	
-	    <img  src="<?php echo get_stylesheet_directory_uri(); ?>/images/france_blc.png" width="40" height="26" />
+	    <img  src="<?php echo get_stylesheet_directory_uri(); ?>/images/france_blc.png" width="20" height="20" />
 	
 		<?php echo ((isset($post->campaign_location) && $post->campaign_location != '') ? $post->campaign_location : 'France'); ?>
 	    </div>
@@ -161,8 +162,7 @@ function printAdminBar() {
 	else $campaign_id = get_the_ID();
 	$campaign_id_param .= $campaign_id; 
     ?>
-    <div id="yp_admin_bar">
-	<div class="center">
+	<div id="yp_admin_bar" class="center">
 	    <?php /* Lien page projet */ ?>
 	    <a href="<?php echo get_permalink($campaign_id); ?>"><?php echo __('Page projet', 'yproject'); ?></a>
 	    .:|:.
@@ -172,9 +172,9 @@ function printAdminBar() {
 	    <?php /* Lien ajouter une actu */ $page_add_news = get_page_by_path('ajouter-une-actu'); ?>
 	    <a href="<?php echo get_permalink($page_add_news->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
 	     .:|:.
-	    <?php /* Lien resultats des votes*/ $vote = get_page_by_path('vote'); ?>
-	    <a href="<?php echo get_permalink($vote->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Stats des votes', 'yproject'); ?></a>
-	</div>
+        <?php /* Lien resultats des votes*/ $vote = get_page_by_path('vote'); ?>
+        <a href="<?php echo get_permalink($vote->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Stats des votes', 'yproject'); ?></a>
+
     </div>
     <?php }
 }
@@ -515,8 +515,7 @@ function printUserInvest($post_invest, $post_campaign) {
 function printMiscPagesTop($title, $is_community = false) {
     ?>
     <header class="align-center">
-	<?php global $post; $custom_header = get_stylesheet_directory_uri() . '/images/image_'.$post->post_name.'.jpg'; ?>
-	<div id="site_name" class="center"<?php /*if (file_exists($custom_header)) {*/?> style="background: url('<?php echo $custom_header; ?>');"<?php //} ?>>
+	<div id="site_name" class="center">
 		<h1>
 		    <?php 
 			$result = count_users();
