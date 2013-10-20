@@ -60,7 +60,6 @@
 	</div>
     </div>
  * 
- */ ?>
     <div id="home_middle">
 	<div class="center">
 	    <?php $projects_page = get_page_by_path('projects'); ?>
@@ -83,6 +82,7 @@
 	    <div style="clear:both"></div>
 	</div>
     </div>
+ */ ?>
 	
 	
     <div id="home_bottom" class="center">

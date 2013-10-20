@@ -21,8 +21,8 @@ require_once("wp-content/themes/yproject/common.php");
 		    <?php
 			$real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id()) / 100;
 			$real_amount_wallet = ypcf_mangopay_get_userwallet_personalamount_by_wpid(get_current_user_id()) / 100;
-			echo 'Vous disposez de ' . $real_amount_invest . edd_get_currency() . ' dans votre porte-monnaie d&apos;investissement.<br />';
-			echo 'Vous disposez de ' . $real_amount_wallet . edd_get_currency() . ' dans votre porte-monnaie d&apos;int&eacuter&ecirc;ts.';
+			echo 'Vous disposez de ' . $real_amount_invest . '&euro; dans votre porte-monnaie d&apos;investissement.<br />';
+			echo 'Vous disposez de ' . $real_amount_wallet . '&euro; dans votre porte-monnaie d&apos;int&eacuter&ecirc;ts.';
 		    ?>
 
 		    <h2 class="underlined"><?php _e( 'Mes investissements', 'yproject' ); ?></h2>

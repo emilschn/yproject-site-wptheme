@@ -53,18 +53,13 @@
 	<span class="user-nicename">@<?php bp_displayed_user_username(); ?></span>
     <?php endif; ?>
 	
-    <div id="item-header-content-description">
-	<?php _e("Ici vous aurez acc&egrave;s &agrave; vos param&egrave;tres", "yproject"); ?>
-    </div>
-	
-	<?php /*
 	<span class="activity"><?php bp_last_activity( bp_displayed_user_id() ); ?></span>
 
 	<?php do_action( 'bp_before_member_header_meta' ); ?>
 
 	<div id="item-meta">
 
-		<?php if ( bp_is_active( 'activity' ) ) : ?>
+		<?php /*if ( bp_is_active( 'activity' ) ) : ?>
 
 			<div id="latest-update">
 
@@ -72,7 +67,7 @@
 
 			</div>
 
-		<?php endif; ?>
+		<?php endif;*/ ?>
 
 		<div id="item-buttons">
 
@@ -86,8 +81,6 @@
 		 ?>
 
 	</div><!-- #item-meta -->
-	 * 
-	 */?>
 
 </div><!-- #item-header-content -->
 

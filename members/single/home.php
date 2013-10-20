@@ -41,10 +41,10 @@ get_header( 'buddypress' );
 			    ?>
 			    
 			    <ul id="item-submenu">
-				<li id="item-submenu-activity" class="selected"><a href="javascript:void();" onclick="javascript:YPUIFunctions.switchProfileTab('activity')"><?php _e("Fil d&apos;activit&eacute;", "yproject"); ?></a></li>
-				<li id="item-submenu-following"><a href="javascript:void();" onclick="javascript:YPUIFunctions.switchProfileTab('following')"><?php _e("Abonnements", "yproject"); ?> (<?php echo $following_count; ?>)</a></li>
-				<li id="item-submenu-followers"><a href="javascript:void();" onclick="javascript:YPUIFunctions.switchProfileTab('followers')"><?php _e("Abonn&eacute;s", "yproject"); ?> (<?php echo $followers_count; ?>)</a></li>
-				<li id="item-submenu-projects"><a href="javascript:void();" onclick="javascript:YPUIFunctions.switchProfileTab('projects')"><?php _e("Projets", "yproject"); ?> (<?php echo $projects_count; ?>)</a></li>
+				<li id="item-submenu-activity" class="selected"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('activity')"><?php _e("Fil d&apos;activit&eacute;", "yproject"); ?></a></li>
+				<li id="item-submenu-following"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('following')"><?php _e("Abonnements", "yproject"); ?> (<?php echo $following_count; ?>)</a></li>
+				<li id="item-submenu-followers"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('followers')"><?php _e("Abonn&eacute;s", "yproject"); ?> (<?php echo $followers_count; ?>)</a></li>
+				<?php /*<li id="item-submenu-projects"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('projects')"><?php _e("Projets", "yproject"); ?> (<?php echo $projects_count; ?>)</a></li>*/ ?>
 			    </ul>
 			    
 			    <div id="item-body">
@@ -82,6 +82,7 @@ get_header( 'buddypress' );
 				    </ul>
 				</div>
 				
+				<?php /*
 				<div id="item-body-projects" style="display:none">
 				    <?php
 					query_posts( array(
@@ -101,6 +102,8 @@ get_header( 'buddypress' );
 					echo '</ul>';
 				    ?>
 				</div>
+				 * 
+				 */ ?>
 
 			    </div><!-- #item-body -->
 
