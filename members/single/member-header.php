@@ -16,7 +16,7 @@
 	
 	<?php
 	    $bp = buddypress();
-	    $bp->avatar->full->default = get_stylesheet_directory_uri() . "/images/default_avatar.png";
+	    $bp->avatar->full->default = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
 	    
 	    $profile_type = "";
 	    $google_meta = get_user_meta(bp_displayed_user_id(), 'social_connect_google_id', true);
@@ -24,7 +24,7 @@
 	    $facebook_meta = get_user_meta(bp_displayed_user_id(), 'social_connect_facebook_id', true);
 	    if (isset($facebook_meta) && $facebook_meta != "") $profile_type = "facebook";
 	    
-	    $url = get_stylesheet_directory_uri() . "/images/default_avatar.png";
+	    $url = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
 	    switch ($profile_type) {
 		case "google":
 		    $meta_explode = explode("id?id=", $google_meta);
