@@ -17,10 +17,10 @@
 	<?php
 	    $bp = buddypress();
 	    $bp->avatar->full->default = get_stylesheet_directory_uri() . "/images/default_avatar.png";
+	    
 	    $profile_type = "";
 	    $google_meta = get_user_meta(bp_displayed_user_id(), 'social_connect_google_id', true);
 	    if (isset($google_meta) && $google_meta != "") $profile_type = ""; //TODO : Remplir avec "google" quand on gèrera correctement
-		
 	    $facebook_meta = get_user_meta(bp_displayed_user_id(), 'social_connect_facebook_id', true);
 	    if (isset($facebook_meta) && $facebook_meta != "") $profile_type = "facebook";
 	    
@@ -37,7 +37,8 @@
 		    echo '<img src="' .$url . '" width="150"/>';
 		    break;
 		default :
-		    bp_displayed_user_avatar( 'type=full' );
+		    //bp_displayed_user_avatar( 'type=full' );
+		    echo '<img src="'.$url.'" width="150" />';
 		    break;
 	    }
 	?>
@@ -52,22 +53,10 @@
     <?php if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) : ?>
 	<span class="user-nicename">@<?php bp_displayed_user_username(); ?></span>
     <?php endif; ?>
-	
-	<span class="activity"><?php bp_last_activity( bp_displayed_user_id() ); ?></span>
 
 	<?php do_action( 'bp_before_member_header_meta' ); ?>
 
 	<div id="item-meta">
-
-		<?php /*if ( bp_is_active( 'activity' ) ) : ?>
-
-			<div id="latest-update">
-
-				<?php bp_activity_latest_update( bp_displayed_user_id() ); ?>
-
-			</div>
-
-		<?php endif;*/ ?>
 
 		<div id="item-buttons">
 

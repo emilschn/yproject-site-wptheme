@@ -12,8 +12,9 @@ add_filter('login_errors',create_function('$a', "return null;"));
  */
 function yproject_setup() {
 	load_child_theme_textdomain( 'yproject', get_stylesheet_directory() . '/languages' );
+	remove_action( 'bp_member_header_actions',    'bp_send_public_message_button',  20 );
 }
-add_action( 'after_setup_theme', 'yproject_setup' );
+add_action( 'after_setup_theme', 'yproject_setup', 15 );
 
 /**
  * Redirige les erreurs de login
@@ -113,15 +114,4 @@ function yproject_my_files_only( $wp_query ) {
     return;
 }
 add_filter('parse_query', 'yproject_my_files_only' );
-
-/*
-function yproject_admin_init() {
-    if (! current_user_can( 'activate_plugins' ) && strpos($_SERVER['PHP_SELF'], 'async-upload.php') === false) {
-	wp_safe_redirect(site_url());
-	exit();
-    }
-}
-add_action( 'admin_init', 'yproject_admin_init', 1 );
- * 
- */
 ?>

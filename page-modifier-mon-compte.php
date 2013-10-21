@@ -21,7 +21,7 @@ require_once("wp-content/themes/yproject/common.php");
 
 		    <form name="update-form" class="standard-form" action="<?php echo get_permalink($page_update_account->ID); ?>" method="post">
 
-			<h4><?php _e('Ces informations sont n&eacute;cessaires pour investir dans un projet.', 'yproject'); ?></h4>
+			<h4><?php _e('Ces informations sont n&eacute;cessaires pour investir dans un projet.', 'yproject'); ?> <?php if (isset($_POST['update_user_posted'])){ ?><span class="invest_success">(<?php _e('Informations enregistr&eacute;es', 'yproject'); ?>)</span><?php }; ?></h4>
 			<label for="update_firstname" class="standard-label"><?php _e( 'Pr&eacute;nom', 'yproject' ); ?></label>
 			<input type="text" name="update_firstname" id="update_firstname" value="<?php echo $current_user->user_firstname; ?>" /><br />
 
@@ -77,7 +77,17 @@ require_once("wp-content/themes/yproject/common.php");
 			if (!isset($_SESSION['redirect_current_campaign_id'])) {
 			?>
 			    <h4><?php _e('Informations de base', 'yproject'); ?></h4>
-			    <label for="update_email" class="standard-label"><?php _e( 'Adresse e-mail', 'yproject' ); ?></label>
+			    <?php
+			    if ( isset($_POST["update_password_current"]) && $_POST["update_password_current"] != "" && !wp_check_password( $_POST["update_password_current"], $current_user->data->user_pass, $current_user->ID)) :
+				?>
+				<span class="errors"><?php _e( 'Le mot de passe actuel est faux. Les modifications ne sont pas prises en compte.', 'yproject' ); ?></span><br /><br />
+				<?php
+			    endif;
+			    ?>
+			    <label for="update_password_current" class="large-label"><?php _e( 'Mot de passe actuel', 'yproject' ); ?><?php _e(' (n&eacute;cessaire pour les modifications ci-dessous)', 'yproject'); ?></label>
+			    <input type="password" name="update_password_current" id="update_password_current" value="" /><br />
+			    
+			    <label for="update_email" class="large-label"><?php _e( 'Adresse e-mail', 'yproject' ); ?></label>
 			    <input type="text" name="update_email" id="update_email" value="<?php echo $current_user->user_email; ?>" /><br />
 
 			    <label for="update_password" class="large-label"><?php _e( 'Mot de passe', 'yproject' ); ?><?php _e(' (vide si pas de changement)', 'yproject'); ?></label>
