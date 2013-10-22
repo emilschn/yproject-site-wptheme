@@ -15,13 +15,39 @@ require_once("wp-content/themes/yproject/common.php");
 	    <div class="center">
 		<?php 
 		if (is_user_logged_in()) :
-		    $page_update_account = get_page_by_path('modifier-mon-compte'); 
+		    $page_update_account = get_page_by_path('modifier-mon-compte');
 		?>
 		    <h2 class="underlined"><?php _e( 'Param&egrave;tres', 'yproject' ); ?></h2>
+		    
+		     <?php if (isset($_POST['update_user_posted'])){ 
+			    global $validate_email;
+			    $valid = true;
+			    if ( isset($_POST["update_password_current"]) && !wp_check_password( $_POST["update_password_current"], $current_user->data->user_pass, $current_user->ID)) :
+			    ?>
+				<span class="errors"><?php _e( 'Le mot de passe renseign&eacute; ne correspond pas. Les modifications ne sont pas enregistr&eacute;es.', 'yproject' ); ?></span><br />
+			    
+			    <?php
+				$valid = false;
+			    endif;
+			    
+			    if ($validate_email !== true):
+			    ?>
+				<span class="errors"><?php _e( 'L&circ;adresse e-mail renseign&eacute;e est invalide ou d&eacute;j&agrave; utilis&eacute;e', 'yproject' ); ?></span><br />
+				
+			    <?php
+				$valid = false;
+			    endif;
+			    ?>
+				
+			    <?php if ($valid) { ?>
+			    <span class="invest_success"><?php _e('Informations enregistr&eacute;es', 'yproject'); ?></span><br />
+			    <?php } ?>
+				
+		    <?php }; ?>
 
 		    <form name="update-form" class="standard-form" action="<?php echo get_permalink($page_update_account->ID); ?>" method="post">
 
-			<h4><?php _e('Ces informations sont n&eacute;cessaires pour investir dans un projet.', 'yproject'); ?> <?php if (isset($_POST['update_user_posted'])){ ?><span class="invest_success">(<?php _e('Informations enregistr&eacute;es', 'yproject'); ?>)</span><?php }; ?></h4>
+			<h4><?php _e('Ces informations sont n&eacute;cessaires pour investir dans un projet.', 'yproject'); ?></h4>
 			<label for="update_firstname" class="standard-label"><?php _e( 'Pr&eacute;nom', 'yproject' ); ?></label>
 			<input type="text" name="update_firstname" id="update_firstname" value="<?php echo $current_user->user_firstname; ?>" /><br />
 
@@ -72,36 +98,44 @@ require_once("wp-content/themes/yproject/common.php");
 			    <option value="LEGAL_PERSONALITY"<?php if ($current_user->get('user_person_type') == 'LEGAL_PERSONALITY') echo ' selected="selected"';?>><?php _e( 'Morale', 'yproject' ); ?></option>
 			</select><br />
 
+			<label for="update_address" class="standard-label"><?php _e( 'Adresse', 'yproject' ); ?></label>
+			<input type="text" name="update_address" id="update_address" value="<?php echo $current_user->get('user_address'); ?>" /><br />
+			
+			<label for="update_postal_code" class="standard-label"><?php _e( 'Code postal', 'yproject' ); ?></label>
+			<input type="text" name="update_postal_code" id="update_postal_code" value="<?php echo $current_user->get('user_postal_code'); ?>" /><br />
+			
+			<label for="update_city" class="standard-label"><?php _e( 'Ville', 'yproject' ); ?></label>
+			<input type="text" name="update_city" id="update_city" value="<?php echo $current_user->get('user_city'); ?>" /><br />
+			
+			<label for="update_country" class="standard-label"><?php _e( 'Pays', 'yproject' ); ?></label>
+			<input type="text" name="update_country" id="update_country" value="<?php echo $current_user->get('user_country'); ?>" /><br />
+			
+			<label for="update_mobile_phone" class="standard-label"><?php _e( 'T&eacute;l&eacute;phone mobile', 'yproject' ); ?></label>
+			<input type="text" name="update_mobile_phone" id="update_mobile_phone" value="<?php echo $current_user->get('user_mobile_phone'); ?>" /><br /><br />
+
 			<?php 
 			if (session_id() == '') session_start();
 			if (!isset($_SESSION['redirect_current_campaign_id'])) {
 			?>
 			    <h4><?php _e('Informations de base', 'yproject'); ?></h4>
-			    <?php
-			    if ( isset($_POST["update_password_current"]) && $_POST["update_password_current"] != "" && !wp_check_password( $_POST["update_password_current"], $current_user->data->user_pass, $current_user->ID)) :
-				?>
-				<span class="errors"><?php _e( 'Le mot de passe actuel est faux. Les modifications ne sont pas prises en compte.', 'yproject' ); ?></span><br /><br />
-				<?php
-			    endif;
-			    ?>
-			    <label for="update_password_current" class="large-label"><?php _e( 'Mot de passe actuel', 'yproject' ); ?><?php _e(' (n&eacute;cessaire pour les modifications ci-dessous)', 'yproject'); ?></label>
-			    <input type="password" name="update_password_current" id="update_password_current" value="" /><br />
 			    
 			    <label for="update_email" class="large-label"><?php _e( 'Adresse e-mail', 'yproject' ); ?></label>
 			    <input type="text" name="update_email" id="update_email" value="<?php echo $current_user->user_email; ?>" /><br />
 
-			    <label for="update_password" class="large-label"><?php _e( 'Mot de passe', 'yproject' ); ?><?php _e(' (vide si pas de changement)', 'yproject'); ?></label>
+			    <label for="update_password" class="large-label"><?php _e( 'Nouveau mot de passe', 'yproject' ); ?><?php _e(' (vide si pas de changement)', 'yproject'); ?></label>
 			    <input type="password" name="update_password" id="update_password" value="" /><br />
 
-			    <label for="update_password_confirm" class="large-label"><?php _e( 'Confirmation du mot de passe', 'yproject' ); ?><?php _e(' (vide si pas de changement)', 'yproject'); ?></label>
+			    <label for="update_password_confirm" class="large-label"><?php _e( 'Confirmer le nouveau mot de passe', 'yproject' ); ?><?php _e(' (vide si pas de changement)', 'yproject'); ?></label>
 			    <input type="password" name="update_password_confirm" id="update_password_confirm" value="" /><br />
 			<?php } ?>
 
 
 			<input type="hidden" name="update_user_posted" value="posted" />
-			<input type="hidden" name="update_user_id" value="<?php echo $current_user->ID; ?>" />
+			<input type="hidden" name="update_user_id" value="<?php echo $current_user->ID; ?>" /><br /><br />
 
-			<input type="submit" name="wp-submit" id="sidebar-wp-submit" />
+			<label for="update_password_current" class="standard-label"><?php _e( 'Mot de passe', 'yproject' ); ?>*</label>
+			<input type="password" name="update_password_current" id="update_password_current" value="" />
+			<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="Enregistrer les modifications" />
 		    </form>
 		<?php
 		endif;
