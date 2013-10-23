@@ -19,17 +19,17 @@ function printPageTop($post) {
 		if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src;
 		?>'); background-repeat: no-repeat; background-position: center;">  
 
-	    	<img width="960" height="240" src="http://dev.yproject.co/wp-content/themes/yproject/images/blanc_bandeau_projet.png" style="position: absolute;">
+	    	<img width="960" height="240" src="<?php echo get_stylesheet_directory_uri(); ?>/images/blanc_bandeau_projet.png" style="position: absolute;">
 
 		<h1><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h1>
 
 	    
-	    <div id="tab-count-jycrois" style="float:right; margin-right: 20px; margin-bottom: 1px;">
+	    <div id="tab-count-jycrois">
 	   	<?php do_shortcode('[yproject_crowdfunding_jcrois]');	?>
 	    </div>
 	    
 	    <div id="post_top_infos">
-		<?php echo get_avatar( get_the_author_meta( 'user_email' ), '40' ); ?>
+		<?php echo get_avatar( get_the_author_meta( 'user_email' ), '20' ); ?>
 		<?php echo str_replace( '<a href=', '<a rel="author" href=', bp_core_get_userlink( $post->post_author ) ); ?>
 	    
 	
@@ -67,7 +67,7 @@ function printPageBottomEnd($post, $campaign) {
 		</div>
 
 		<div class="post_bottom_infos_item">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png"/>
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png"/>
 		    <?php echo $campaign->backers_count(); ?> personnes ont dèjà financé ce projet
 		</div>
 
@@ -165,13 +165,13 @@ function printAdminBar() {
 	<div id="yp_admin_bar" class="center">
 	    <?php /* Lien page projet */ ?>
 	    <a href="<?php echo get_permalink($campaign_id); ?>"><?php echo __('Page projet', 'yproject'); ?></a>
-	    .:|:.
+	    &nbsp; &nbsp; &nbsp;
 	    <?php /* Lien gerer un projet */ $page_manage = get_page_by_path('gerer'); ?>
 	    <a href="<?php echo get_permalink($page_manage->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('G&eacute;rer vos informations', 'yproject'); ?></a>
-	    .:|:.
+	    &nbsp; &nbsp; &nbsp;
 	    <?php /* Lien ajouter une actu */ $page_add_news = get_page_by_path('ajouter-une-actu'); ?>
 	    <a href="<?php echo get_permalink($page_add_news->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
-	     .:|:.
+	     &nbsp; &nbsp; &nbsp;
         <?php /* Lien resultats des votes*/ $vote = get_page_by_path('vote'); ?>
         <a href="<?php echo get_permalink($vote->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Stats des votes', 'yproject'); ?></a>
 

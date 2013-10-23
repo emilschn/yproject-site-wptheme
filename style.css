@@ -36,6 +36,7 @@ body {
 
 body a {
     color: #EA4F51;
+	text-decoration: none;
 }
 
 .center {
@@ -249,8 +250,8 @@ h4 {
 }
 
 #home_middle span.light {
-    margin-left: 60px;
-    padding: 10px;
+    margin-left: 50px;
+    padding: 10px 50px;
     background-color: #F2F2F2;
     text-transform: uppercase;
 	font-size:12px;
@@ -402,6 +403,7 @@ div#home_bottom h1 {
 .post_bottom_desc h2, .post_bottom_desc_small h2 {
     color: #E6223C;
     font-size: 11pt;
+	text-transform: uppercase;
 }
 
 .post_bottom_infos {
@@ -433,8 +435,9 @@ div#home_bottom h1 {
 }
 
 .post_bottom_buttons div {
+	border-bottom: 1px solid #FFFFFF;
     font-family: DINPro-Medium, Arial, sans-serif;
-    font-size: 11pt;
+    font-size: 10pt;
     padding: 15px 0px 15px 0px;
     text-transform: uppercase;
     text-align: center;
@@ -485,6 +488,7 @@ div#home_bottom h1 {
 #yp_admin_bar {
     padding: 10px 10px 10px 20px;
     background-color: #E1E3E2;
+	width:auto;
 }
     
 #yp_admin_bar a {
@@ -1113,6 +1117,7 @@ width: 100px;
 height: 110px;
 border: none;
 cursor: pointer;
+background-color: white;
 background-image:url("images/jycrois_gris.png");
 }
 
@@ -1121,6 +1126,7 @@ width: 100px;
 height: 110px;
 border: none;
 cursor: pointer;
+background-color: white;
 background-image:url("images/jycrois_gris_rouge.png");
 }
 
