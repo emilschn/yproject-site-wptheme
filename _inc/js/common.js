@@ -36,8 +36,8 @@ YPUIFunctions = (function($) {
 		});
 	    }
 	    
-	    if ($("#input_invest_amount").length > 0) {
-		$("#input_invest_amount").change(function() {
+	    if ($("#input_invest_amount_part").length > 0) {
+		$("#input_invest_amount_part").change(function() {
 		    YPUIFunctions.checkInvestInput();
 		});
 		
@@ -79,34 +79,36 @@ YPUIFunctions = (function($) {
 	    $(".invest_success").hide();
 	    
 	    var bValidInput = true;
-	    if (!$.isNumeric($("#input_invest_amount").val())) {
+	    if (!$.isNumeric($("#input_invest_amount_part").val())) {
 		$("#invest_error_general").show();
 		bValidInput = false;
 	    } else {
-		if ($("#input_invest_amount").val() != Math.floor($("#input_invest_amount").val())) {
+		$("#input_invest_amount").text($("#input_invest_part_value").val() * $("#input_invest_amount_part").val());
+		
+		if ($("#input_invest_amount").text() != Math.floor($("#input_invest_amount").text())) {
 		    $("#invest_error_integer").show();
 		    bValidInput = false;
 		}
-		if (parseInt($("#input_invest_amount").val()) < $("#input_invest_min_value").val()) {
+		if (parseInt($("#input_invest_amount").text()) < $("#input_invest_min_value").val()) {
 		    $("#invest_error_min").show();
 		    bValidInput = false;
 		}
-		if (parseInt($("#input_invest_amount").val()) > $("#input_invest_max_value").val()) {
+		if (parseInt($("#input_invest_amount").text()) > $("#input_invest_max_value").val()) {
 		    $("#invest_error_max").show();
 		    bValidInput = false;
 		}
-		var nAmountInterval = $("#input_invest_max_value").val() - parseInt($("#input_invest_amount").val()); 		
+		var nAmountInterval = $("#input_invest_max_value").val() - parseInt($("#input_invest_amount").text()); 		
 		if (nAmountInterval < $("#input_invest_min_value").val() && nAmountInterval > 0) { 		
 		    $("#invest_error_interval").show(); 		
 		    bValidInput = false; 		
 		}
 	    }
 	    if (bValidInput) {
-		$("#invest_success_amount").text( parseInt($("#input_invest_amount_total").val()) + parseInt($("#input_invest_amount").val()));
+		$("#invest_success_amount").text( parseInt($("#input_invest_amount_total").val()) + parseInt($("#input_invest_amount").text()));
 		$(".invest_success").show();
 	    }
 	    
-	    $("#input_invest_amount").css("color", bValidInput ? "green" : "red");
+	    $("#input_invest_amount_part").css("color", bValidInput ? "green" : "red");
 	    return bValidInput;
 	},
 	
