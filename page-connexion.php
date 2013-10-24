@@ -1,3 +1,6 @@
+<?php
+    if (is_user_logged_in()) wp_redirect(home_url());
+?>
 <?php get_header(); ?>
 <?php require_once("common.php"); ?>
 
