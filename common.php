@@ -96,7 +96,7 @@ function printPageBottomEnd($post, $campaign) {
 			    /* Lien Investissez */ $page_invest = get_page_by_path('investir');
 			    $campaign_id_param = '?campaign_id=';
 			    if (isset($_GET['campaign_id'])) $campaign_id_param .= $_GET['campaign_id'];
-			    else $campaign_id_param .= get_the_ID();
+			    else $campaign_id_param .= $post->ID;
 			    
 			    if ($campaign->vote() == 'vote') {
 			?>
@@ -118,17 +118,18 @@ function printPageBottomEnd($post, $campaign) {
 			    $category_obj = get_category_by_slug($category_slug);
 			    $category_link = (!empty($category_obj)) ? get_category_link($category_obj->cat_ID) : '';
 			?>
-			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Actu', 'yproject'); ?></a>
+			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Actualit&eacute;s', 'yproject'); ?></a>
 		    </div>
 		     <div class="light">
 			<?php /* Lien statistiques*/ $forum = get_page_by_path('forum'); ?>
-      		<a href="<?php echo get_permalink($forum->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Commentaires', 'yproject'); ?></a>
+			<a href="<?php echo get_permalink($forum->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Commentaires', 'yproject'); ?></a>
 		    </div>
+		    <?php /*
 		    <div class="light">
-			<?php /* Lien forum*/ $statistiques = get_page_by_path('statistiques'); ?>
-      		<a href="<?php echo get_permalink($statistiques->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Statistiques', 'yproject'); ?></a>
+			<?php $statistiques = get_page_by_path('statistiques'); // Lien forum ?>
+			<a href="<?php echo get_permalink($statistiques->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Statistiques', 'yproject'); ?></a>
 		    </div>
-		   
+		    */ ?>
 		</div>
 	    </div>
 
@@ -160,22 +161,23 @@ function printAdminBar() {
 	$campaign_id_param = '?campaign_id=';
 	if (isset($_GET['campaign_id'])) $campaign_id = $_GET['campaign_id'];
 	else $campaign_id = get_the_ID();
-	$campaign_id_param .= $campaign_id; 
+	$campaign_id_param .= $campaign_id;
     ?>
-	<div id="yp_admin_bar" class="center">
-	    <?php /* Lien page projet */ ?>
-	    <a href="<?php echo get_permalink($campaign_id); ?>"><?php echo __('Page projet', 'yproject'); ?></a>
-	    &nbsp; &nbsp; &nbsp;
-	    <?php /* Lien gerer un projet */ $page_manage = get_page_by_path('gerer'); ?>
-	    <a href="<?php echo get_permalink($page_manage->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('G&eacute;rer vos informations', 'yproject'); ?></a>
-	    &nbsp; &nbsp; &nbsp;
-	    <?php /* Lien ajouter une actu */ $page_add_news = get_page_by_path('ajouter-une-actu'); ?>
-	    <a href="<?php echo get_permalink($page_add_news->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
-	     &nbsp; &nbsp; &nbsp;
-        <?php /* Lien resultats des votes*/ $vote = get_page_by_path('vote'); ?>
-        <a href="<?php echo get_permalink($vote->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Stats des votes', 'yproject'); ?></a>
-
-    </div>
+	<div id="yp_admin_bar">
+	    <div class="center">
+		<?php /* Lien page projet */ ?>
+		<a href="<?php echo get_permalink($campaign_id); ?>"><?php echo __('Page projet', 'yproject'); ?></a>
+		&nbsp; &nbsp; &nbsp;
+		<?php /* Lien gerer un projet */ $page_manage = get_page_by_path('gerer'); ?>
+		<a href="<?php echo get_permalink($page_manage->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('G&eacute;rer vos informations', 'yproject'); ?></a>
+		&nbsp; &nbsp; &nbsp;
+		<?php /* Lien ajouter une actu */ $page_add_news = get_page_by_path('ajouter-une-actu'); ?>
+		<a href="<?php echo get_permalink($page_add_news->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
+		 &nbsp; &nbsp; &nbsp;
+		<?php /* Lien resultats des votes*/ $vote = get_page_by_path('vote'); ?>
+		<a href="<?php echo get_permalink($vote->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Statistiques des votes', 'yproject'); ?></a>
+	    </div>
+	</div>
     <?php }
 }
 

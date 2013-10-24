@@ -26,45 +26,36 @@
 					    <?php printPageTop($post); ?>
 					    <?php printPageBottomStart($post, $campaign); ?>
 
+					    <?php
+						$post_camp = get_post($_GET['campaign_id']);
 
-					    <div>
-					    	<ul>
+						$name = $post_camp->ID.'-2';
 
-							<?php
-							$post_camp = get_post($_GET['campaign_id']);
+						if ($name!='') {
+						    $table_name = $wpdb->prefix . "posts";
+						    $query="SELECT ID FROM $table_name WHERE post_type='forum' AND post_name= $post_camp->ID";
 
-							$name = $post_camp->ID.'-2';
-							
-							if ($name!='') {
-								$table_name = $wpdb->prefix . "posts";
-								$query="SELECT ID FROM $table_name WHERE post_type='forum' AND post_name= $post_camp->ID";
+						    $results=$wpdb->get_results($query);
 
-								$results=$wpdb->get_results($query);
-
-
-								foreach ($results as $result) {
-									 $forum_projet_id = $result->ID;
-									
-								}
-							}
-							?>
-
-							</ul>
-					    </div>
+						    foreach ($results as $result) {
+							$forum_projet_id = $result->ID;
+						    }
+						}
+					    ?>
 					    
 					    <span>
 					    	<?php
-							if ( is_user_logged_in() ) {
-							    echo do_shortcode('[bbp-single-forum id='.$forum_projet_id.']'); 
-							} else {
-							    echo 'Vous devez être connecté pour accèder au forum !';
-							}
-							?>
-						</span>
+						    if ( is_user_logged_in() ) {
+							echo do_shortcode('[bbp-single-forum id='.$forum_projet_id.']'); 
+						    } else {
+							echo 'Vous devez être connecté pour accèder au forum !';
+						    }
+						?>
+					    </span>
 					    
 					    <?php 
-						 printPageBottomEnd($post, $campaign);
-						?>
+						 printPageBottomEnd($post_camp, $campaign);
+					    ?>
 					</div>
 					</div>
 				    </div>
