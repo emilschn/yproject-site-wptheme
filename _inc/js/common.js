@@ -1,8 +1,8 @@
 jQuery(document).ready( function() {
     YPUIFunctions.initUI();
 	YPVoteFormFunctions.voteformcontrole();
-   // YPJycroisFunctions.loadJycrois();
-    console.log("testbbbbbbb");
+    YPJycroisFunctions.loadJycrois();
+    
 });
 
 YPUIFunctions = (function($) {
@@ -225,18 +225,22 @@ YPVoteFormFunctions = (function($) {
 
 /* FIN FORMULAIRE VOTE*/
 
+
 /* J'Y CROIS*/
-/*	
-YPJycroisFunctions = (function($) {
-    return 
-    {
-	    loadJycrois:function() 
-	    { 
-			$(.bouton_jcrois).click(function()
+YPJycroisFunctions = (function($){
+    return {
+	loadJycrois: function() {
+
+			$("#jcrois_pas").click(function () 
 			{
-	        	$("#tab-jycrois").load();
-	        }
-	        );
+		    	$("#tab-count-jycrois").load('single-campaign.php');
+		    });
+
+
+	        $("#jcrois").click(function()
+			{
+	        	$("#tab-count-jycrois").load('single-campaign.php');
+	        });
 	    }
 
 	}
