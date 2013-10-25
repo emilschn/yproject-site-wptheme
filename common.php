@@ -113,6 +113,7 @@ function printPageBottomEnd($post, $campaign) {
 			<a href="javascript:void(0)"><?php echo __('Participer autrement', 'yproject'); ?></a>
 		    </div>
 		    <div class="light">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/actu.png"/>&nbsp;
 			<?php
 			    $category_slug = $post->ID . '-blog-' . $post->post_title;
 			    $category_obj = get_category_by_slug($category_slug);
@@ -121,6 +122,7 @@ function printPageBottomEnd($post, $campaign) {
 			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Actualit&eacute;s', 'yproject'); ?></a>
 		    </div>
 		     <div class="light">
+                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/com.png"/>&nbsp;
 			<?php /* Lien statistiques*/ $forum = get_page_by_path('forum'); ?>
 			<a href="<?php echo get_permalink($forum->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Commentaires', 'yproject'); ?></a>
 		    </div>
