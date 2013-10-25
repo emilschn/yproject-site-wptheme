@@ -30,22 +30,32 @@ get_header( 'buddypress' );
 			    if ($followers_list_str) { 
 				$followers_list = explode(',' , bp_get_follower_ids());
 				$followers_count = count($followers_list);
-			    }
+			    }*/
 			    
-			    $projects_count = 0;*/
-			    /*$query_temp = query_posts( array(
+			    $projects_count = 0;
+			    $query_temp = query_posts( array(
 				'post_type' => 'download',
 				'author' => bp_displayed_user_id()
 			    ) );
 			    if ($query_temp) $projects_count = $wp_query->found_posts;
+			    
+			    $current_user = wp_get_current_user();
+			    if (bp_displayed_user_id() == $current_user->ID) {
+				$query_temp = query_posts( array(
+				    'post_type' => 'download',
+				    'author' => bp_displayed_user_id(),
+				    'post_status' => 'pending'
+				));
+				if ($query_temp) $projects_count += $wp_query->found_posts;
+			    }
 			    ?>
 			    
 			    <ul id="item-submenu">
 				<li id="item-submenu-activity" class="selected"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('activity')"><?php _e("Fil d&apos;activit&eacute;", "yproject"); ?></a></li>
-				<li id="item-submenu-following"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('following')"><?php _e("Abonnements", "yproject"); ?> (<?php echo $following_count; ?>)</a></li>
+				<?php /*<li id="item-submenu-following"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('following')"><?php _e("Abonnements", "yproject"); ?> (<?php echo $following_count; ?>)</a></li>
 				<li id="item-submenu-followers"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('followers')"><?php _e("Abonn&eacute;s", "yproject"); ?> (<?php echo $followers_count; ?>)</a></li>
-				<li id="item-submenu-projects"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('projects')"><?php _e("Projets", "yproject"); ?> (<?php echo $projects_count; ?>)</a></li>
-			    </ul>*/ ?>
+				*/ ?><li id="item-submenu-projects"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('projects')"><?php _e("Projets", "yproject"); ?> (<?php echo $projects_count; ?>)</a></li>
+			    </ul>
 			    
 			    <div id="item-body">
 
@@ -82,6 +92,8 @@ get_header( 'buddypress' );
 				    ?>
 				    </ul>
 				</div>
+				 * 
+				 */ ?>
 				
 				<div id="item-body-projects" style="display:none">
 				    <?php
@@ -90,20 +102,44 @@ get_header( 'buddypress' );
 					    'author' => bp_displayed_user_id()
 					) );
 					
-					echo '<ul>';
-					while (have_posts()) {
-					    the_post();
-					    echo '<li><a href="';
-					    the_permalink();
-					    echo '">';
-					    the_title();
-					    echo '</a></li>';
+					if (have_posts()) {
+					    echo 'Projets sur le site :<br />';
+					    echo '<ul>';
+					    while (have_posts()) {
+						the_post();
+						echo '<li><a href="';
+						the_permalink();
+						echo '">';
+						the_title();
+						echo '</a></li>';
+					    }
+					    echo '</ul>';
 					}
-					echo '</ul>';
+					
+					if (bp_displayed_user_id() == $current_user->ID) {
+					    query_posts( array(
+						'post_type' => 'download',
+						'author' => bp_displayed_user_id(),
+						'post_status' => 'pending'
+					    ));
+
+					    if (have_posts()) {
+						echo 'Projets en attente de validation :<br />';
+						echo '<ul>';
+						while (have_posts()) {
+						    the_post();
+						    echo '<li><a href="';
+						    the_permalink();
+						    echo '">';
+						    the_title();
+						    echo '</a></li>';
+						}
+						echo '</ul>';
+					    }
+					}
+					    
 				    ?>
 				</div>
-				 * 
-				 */ ?>
 
 			    </div><!-- #item-body -->
 

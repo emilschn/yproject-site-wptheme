@@ -41,37 +41,30 @@
 
 					    <h2>Quelle est l'opportunité économique du projet ?</h2>
 					    <div><?php echo html_entity_decode($campaign->added_value()); ?></div>
+					    
 					    <h2>Quelle est l'utilité sociétale du projet ?</h2>
-					    <div><?php echo html_entity_decode($campaign->measuring_impact()); ?></div>
-					    <div><?php echo html_entity_decode($campaign->implementation()); ?></div>
+					    <div><?php echo html_entity_decode($campaign->societal_challenge()); ?></div>
 
 					    <h2>Quel est le modèle économique du projet ?</h2>
 					    <div><?php echo html_entity_decode($campaign->economic_model()); ?></div>
-					    <div><?php echo html_entity_decode($campaign->development_strategy()); ?></div>
 
 					    <h2>Qui porte le projet ?</h2>
-					    <div><?php echo html_entity_decode($campaign->impact_area()); ?></div>
+					    <div><?php echo html_entity_decode($campaign->implementation()); ?></div>
 					    </div>
 					    <?php 
 						
 						$vota = html_entity_decode($campaign->vote());
 
-
 						// Nombre de jours restants					
 						$dateJour = strtotime(date("d-m-Y"));
 						$fin   = strtotime($post->campaign_end_vote);
-
 						$jours_restants = (round(abs($fin - $dateJour)/60/60/24));
-
 					
 						if ($vota == 'vote' && $jours_restants > 0) {
-							echo 'Il vous reste '.($jours_restants).' jours pour voter sur ce projet'.'</br>';
-						    do_shortcode('[yproject_crowdfunding_printPageVoteForm]');
-						}elseif ($vota == 'vote' && $jours_restants <= 0) {
-							do_shortcode('[yproject_crowdfunding_printPageVoteDeadLine]');
-						}
-						elseif ($vota !='vote') 
-						{
+						    do_shortcode('[yproject_crowdfunding_printPageVoteForm remaining_days='.$jours_restants.']');
+						} elseif ($vota == 'vote' && $jours_restants <= 0) {
+						    do_shortcode('[yproject_crowdfunding_printPageVoteDeadLine]');
+						} elseif ($vota !='vote') {
 						    printPageBottomEnd($post, $campaign);
 						}
 						?>

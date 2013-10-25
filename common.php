@@ -158,11 +158,13 @@ function printAdminBar() {
     // La barre d'admin n'apparait que pour l'admin du site et pour l'admin de la page
     $current_user = wp_get_current_user();
     $current_user_id = $current_user->ID;
-    $author_id = get_the_author_meta('ID');
-    if ($current_user_id == $author_id || current_user_can('manage_options')) {
+    
+    if (isset($_GET['campaign_id'])) $campaign_id = $_GET['campaign_id'];
+    else $campaign_id = get_the_ID();
+    $post = get_post($campaign_id);
+    
+    if ($current_user_id == $post->post_author || current_user_can('manage_options')) {
 	$campaign_id_param = '?campaign_id=';
-	if (isset($_GET['campaign_id'])) $campaign_id = $_GET['campaign_id'];
-	else $campaign_id = get_the_ID();
 	$campaign_id_param .= $campaign_id;
     ?>
 	<div id="yp_admin_bar">
