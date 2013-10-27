@@ -2,14 +2,16 @@
 /******************************************************************************/
 /* PAGE PROJET */
 /******************************************************************************/
-function printPageTop($post) {
+function printPageTop($post_campaign) {
+    global $post;
+    if (isset($_GET["campaign_id"])) $post_campaign = get_post($_GET["campaign_id"]);
+    else $post_campaign = $post;
+    $save_post = $post;
+    $post = $post_campaign;
     ?>
     <div id="post_top_bg">
 	<div id="post_top_title" class="center" style="background-color: white;	background-image: url('<?php 
 		if (WP_DEBUG) {$debug_src = 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject/todo.jpg';} else {$debug_src = get_stylesheet_directory_uri();}
-		if (isset($_GET["campaign_id"])) {
-		    $post = get_post($_GET["campaign_id"]);
-		}
 		$attachments = get_posts(
 		    array('post_type' => 'attachment',
 		    'post_parent' => $post->ID,
@@ -40,6 +42,7 @@ function printPageTop($post) {
 	</div>
     </div>
     <?php
+    $post = $save_post;
 }
 
 function printPageBottomStart($post, $campaign) {
@@ -52,6 +55,13 @@ function printPageBottomStart($post, $campaign) {
 
 
 function printPageBottomEnd($post, $campaign) {
+    $campaign_id_param = '?campaign_id=';
+    if (isset($_GET['campaign_id'])) {
+	$campaign_id_param .= $_GET['campaign_id'];
+	$post = get_post($_GET['campaign_id']);
+    } else  {
+	$campaign_id_param .= $post->ID;
+    }
     ?>
 	    </div>
 
@@ -94,10 +104,6 @@ function printPageBottomEnd($post, $campaign) {
 		    <div class="dark">
 			<?php 
 			    /* Lien Investissez */ $page_invest = get_page_by_path('investir');
-			    $campaign_id_param = '?campaign_id=';
-			    if (isset($_GET['campaign_id'])) $campaign_id_param .= $_GET['campaign_id'];
-			    else $campaign_id_param .= $post->ID;
-			    
 			    if ($campaign->vote() == 'vote') {
 			?>
 			    <a href="javascript:void(0);" onclick="javascript:alert('<?php echo __('Bient&ocirc;t !', 'yproject'); ?>');"><?php echo __('Investissez', 'yproject'); ?></a>

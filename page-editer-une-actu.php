@@ -25,7 +25,7 @@
 					<div class="entry">
 					    <?php printPageTop($post); ?>
 					    <?php printPageBottomStart($post, $campaign); ?>
-					    <span><?php do_shortcode('[yproject_crowdfunding_add_news]'); ?></span>
+					    <span><?php do_shortcode('[yproject_crowdfunding_edit_news]'); ?></span>
 					    <?php 
 						 printPageBottomEnd($post, $campaign);
 						?>
