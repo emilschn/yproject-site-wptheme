@@ -189,36 +189,23 @@ YPMenuFunctions = (function($){
 /* FORMULAIRE VOTE*/
 YPVoteFormFunctions = (function($) {
     return {
-		voteformcontrole:function() 
-		{ 	
-			$("#impact-positif").click(function(){ 
-				$("#impact-positif-content").show();
-	 			$("#local").prop('disabled', false);
-    			$("#environmental").prop('disabled', false);
-				$("#social").prop('disabled', false);
-				$("#autre").prop('disabled', false);
-				$("#precision").prop('disabled', false);
-			});
+	voteformcontrole:function() { 	
+	    $("#impact-positif").click(function(){ 
+		$("#impact-positif-content").show();
+	    });
+	    $("#desaprouve").click(function(){
+		$("#impact-positif-content").hide();
+	    });
 
-			$("#desaprouve").click(function(){
-				$("#local").prop('disabled', true);
-    			$("#environmental").prop('disabled', true);
-				$("#social").prop('disabled', true);
-				$("#autre").prop('disabled', true);
-				$("#precision").prop('disabled', true);
-											
-			});
+	    $("#pret").click(function(){ 
+		$("#retravaille-content").hide(); 
+		$("#pret-content").show();
+	    }); 		
+	    $("#retravaille").click(function(){
+		$("#retravaille-content").show(); 
+		$("#pret-content").hide();
 
-			$("#pret").click(function(){ 
-				$("#retravaille-content").hide(); 
-				$("#pret-content").show();
-			}); 		
-			$("#retravaille").click(function(){
-				$("#retravaille-content").show(); 
-				$("#content-pret").hide();
-	    
-			});
-	    
+	    });
     	}
     }   
 })(jQuery);
