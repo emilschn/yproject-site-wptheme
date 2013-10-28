@@ -231,11 +231,12 @@ h4 {
 }
 
 #home_middle {
-    margin: 30px 0px 10px 0px;
+    margin: 30px 0px 20px 0px;
     background-color: #2B2D2C;
     color: #FFF;
     height: 200px; 
     padding-top: 15px;
+    padding-bottom: 30px;
 }
 
 #home_middle h2 {
@@ -1113,20 +1114,20 @@ footer span {
 
 /*J'Y CROIS*/
 #jcrois{
+background-color: white;
 width: 100px;
 height: 110px;
 border: none;
 cursor: pointer;
-background-color: white;
 background-image:url("images/jycrois_gris.png");
 }
 
 #jcrois_pas{
+background-color: white;
 width: 100px;
 height: 110px;
 border: none;
 cursor: pointer;
-background-color: white;
 background-image:url("images/jycrois_gris_rouge.png");
 }
 
@@ -1137,4 +1138,123 @@ background-image:url("images/jycrois_gris_rouge.png");
    margin-left: 840px;
    position: absolute;
 }
+
+.jycrois {
+   padding-top: -10px;
+}
+
+
 /*FIN J'Y CROIS*/
+
+/*FORMUM*/
+
+#bbpress-forums {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    clear: both;
+    font-size: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+#bbp_search_submit {
+    background-color: #FF5050;
+    border: medium none;
+    color: #FFF;
+    text-transform: uppercase;
+    padding: 3px 10px;
+}
+
+#bbp_search {
+   background-color: #FBFBFB;
+   border: medium none;
+   padding: 4px 10px;
+}
+
+#bbpress-forums li.bbp-header {
+   text-transform: uppercase;
+   color: #FF5050;
+}
+
+.bbp-forum-info a {
+   text-transform: uppercase;
+   color: #333333;
+}
+
+.bbp-forum-freshness a {
+   color: #333333;
+}
+
+#bbp_topic_submit {
+   background-color: #FF5050;
+    border: medium none;
+    color: #FFFFFF;
+    padding: 3px 10px;
+    text-transform: uppercase;
+}
+
+/*FORUM PROJET*/
+
+#li.bbp-forum-info, li.bbp-topic-title {
+    width: 50% !important;
+}
+
+#li.bbp-forum-topic-count, li.bbp-topic-voice-count, li.bbp-forum-reply-count, li.bbp-topic-reply-count {
+    width: 15% !important;
+}
+
+#li.bbp-forum-freshness, li.bbp-topic-freshness {
+    width: 20% !important;
+}
+
+.bbp-topic-permalink {
+    text-transform: uppercase;
+    color: #333333;
+}
+
+.bbp-body a {
+     color: #333333;
+     cwhite-space: inherit !important;
+}
+
+.bbp-template-notice.info {
+    background-color: #DFE7ED !important;
+    border: none;
+    border-radius: 0px;
+}
+
+.bbp-template-notice, div.indicator-hint {
+    background-color: #F9D7D7 !important;
+    border: none !important;
+    border-radius: 0px !important;
+}
+
+
+/*FAQ*/
+
+.qa-category {
+    font-size: 12px;
+}
+
+.qa-faq-title {
+    margin: 5px 20px;
+}
+
+.qa-faq-title a {
+    text-decoration: none;
+}
+
+/*SUBMIT*/
+
+#snsf-submit-button {
+   background: #333333;
+   color: #FFF;
+   border: medium none;
+   padding: 3px 8px;
+   text-transform: uppercase;
+}
+
+#snsf-form input[type="text"] {
+    border: none;
+    padding: 4px;
+}
