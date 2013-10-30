@@ -114,6 +114,7 @@ require_once("wp-content/themes/yproject/common.php");
 			<input type="text" name="update_mobile_phone" id="update_mobile_phone" value="<?php echo $current_user->get('user_mobile_phone'); ?>" /><br /><br />
 
 			<?php 
+			if (strpos($current_user->user_url, 'facebook.com') === false) {
 			if (session_id() == '') session_start();
 			if (!isset($_SESSION['redirect_current_campaign_id'])) {
 			?>
@@ -126,16 +127,15 @@ require_once("wp-content/themes/yproject/common.php");
 			    <input type="password" name="update_password" id="update_password" value="" /><br />
 
 			    <label for="update_password_confirm" class="large-label"><?php _e( 'Confirmer le nouveau mot de passe', 'yproject' ); ?><?php _e(' (vide si pas de changement)', 'yproject'); ?></label>
-			    <input type="password" name="update_password_confirm" id="update_password_confirm" value="" /><br />
-			<?php } ?>
+			    <input type="password" name="update_password_confirm" id="update_password_confirm" value="" /><br /><br />
 
+			    <label for="update_password_current" class="standard-label"><?php _e( 'Mot de passe', 'yproject' ); ?>*</label>
+			    <input type="password" name="update_password_current" id="update_password_current" value="" />
+			<?php }} ?>
+			<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="Enregistrer les modifications" />
 
 			<input type="hidden" name="update_user_posted" value="posted" />
 			<input type="hidden" name="update_user_id" value="<?php echo $current_user->ID; ?>" /><br /><br />
-
-			<label for="update_password_current" class="standard-label"><?php _e( 'Mot de passe', 'yproject' ); ?>*</label>
-			<input type="password" name="update_password_current" id="update_password_current" value="" />
-			<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="Enregistrer les modifications" />
 		    </form>
 		<?php
 		endif;
