@@ -192,9 +192,11 @@ YPVoteFormFunctions = (function($) {
 	voteformcontrole:function() { 	
 	    $("#impact-positif").click(function(){ 
 		$("#impact-positif-content").show();
+		$("#impact-negatif-content").hide();
 	    });
 	    $("#desaprouve").click(function(){
 		$("#impact-positif-content").hide();
+		$("#impact-negatif-content").show();
 	    });
 
 	    $("#pret").click(function(){ 

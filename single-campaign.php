@@ -50,24 +50,11 @@
 
 					    <h2>Qui porte le projet ?</h2>
 					    <div><?php echo html_entity_decode($campaign->implementation()); ?></div>
-					    </div>
-					    <?php 
-						
-						$vota = html_entity_decode($campaign->vote());
-
-						// Nombre de jours restants					
-						$dateJour = strtotime(date("d-m-Y"));
-						$fin   = strtotime($post->campaign_end_vote);
-						$jours_restants = (round(abs($fin - $dateJour)/60/60/24));
+					</div>
 					
-						if ($vota == 'vote' && $jours_restants > 0) {
-						    do_shortcode('[yproject_crowdfunding_printPageVoteForm remaining_days='.$jours_restants.']');
-						} elseif ($vota == 'vote' && $jours_restants <= 0) {
-						    do_shortcode('[yproject_crowdfunding_printPageVoteDeadLine]');
-						} elseif ($vota !='vote') {
-						    printPageBottomEnd($post, $campaign);
-						}
-						?>
+					    <?php 
+						printPageBottomEnd($post, $campaign);
+					    ?>
 					</div>
 				    </div>
 				</div>

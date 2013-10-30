@@ -62,14 +62,22 @@ function printPageBottomEnd($post, $campaign) {
     } else  {
 	$campaign_id_param .= $post->ID;
     }
+						
+    $vote_status = html_entity_decode($campaign->vote());
+
+    // Nombre de jours restants					
+    $dateJour = strtotime(date("d-m-Y"));
+    $fin   = strtotime($post->campaign_end_vote);
+    $jours_restants = (round(abs($fin - $dateJour)/60/60/24));
     ?>
 	    </div>
 
 	    <div class="left post_bottom_infos">
 		<?php 
-		$percent = $campaign->percent_completed(false);
-		$percent = min(100, $percent);
-		$width = 250 * $percent / 100;
+		    if ($vote_status != 'vote') :
+			$percent = $campaign->percent_completed(false);
+			$percent = min(100, $percent);
+			$width = 250 * $percent / 100;
 		?>
 		<div>
 		    <div class="project_full_progressbg"><div class="project_full_progressbar" style="width:<?php echo $width; ?>px"></div></div>
@@ -77,30 +85,35 @@ function printPageBottomEnd($post, $campaign) {
 		</div>
 
 		<div class="post_bottom_infos_item">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png"/>
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png"/>
 		    <?php echo $campaign->backers_count(); ?> personnes ont dèjà financé ce projet
 		</div>
 
 		<div class="post_bottom_infos_item">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
-		    <?php if ($campaign->vote()=='vote') 
-		    {
-		    	echo  0;
-		    }else
-		    {
-		    	$rest = $campaign->days_remaining();
-		    	$days = 90 - $campaign->days_remaining();
-		     	echo 'Il reste '.'<strong>'.$rest.'</strong>'.' jours pour participer à ce projet'; 
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+		    <?php 
+			if ($vote_status == 'vote') {
+			    echo 0;
+			} else {
+			    $rest = $campaign->days_remaining();
+			    echo 'Il reste '.'<strong>'.$rest.'</strong>'.' jours pour participer à ce projet'; 
 			}
 			?>
 		</div>
 
 		<div class="post_bottom_infos_item">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png"/>
+		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png"/>
 		    <?php echo $campaign->current_amount() . ' / ' . $campaign->goal(); ?>
 		</div>
+		
+		<?php
+		    endif; 
+		?>
 
 		<div class="post_bottom_buttons">
+		    <?php 
+			if ($vote_status != 'vote') :
+		    ?> 
 		    <div class="dark">
 			<?php 
 			    /* Lien Investissez */ $page_invest = get_page_by_path('investir');
@@ -115,6 +128,15 @@ function printPageBottomEnd($post, $campaign) {
 			    }
 			?>
 		    </div>
+		    <?php
+			else:
+			    if ($jours_restants > 0) {
+				do_shortcode('[yproject_crowdfunding_printPageVoteForm remaining_days='.$jours_restants.']');
+			    } else {
+				do_shortcode('[yproject_crowdfunding_printPageVoteDeadLine]');
+			    }
+			endif; 
+		    ?>
 		    <div id="share_btn" class="dark">
 			<a href="javascript:void(0)"><?php echo __('Participer autrement', 'yproject'); ?></a>
 		    </div>
@@ -352,9 +374,6 @@ function printSinglePreview($i, $vote) {
 		<div class="project_preview_item_desc"><?php echo html_entity_decode($campaign->summary()); ?></div>
 	    </div>
 
-	    <?php if ($vote) : ?>
-		<a href="<?php the_permalink(); ?>"><?php _e('Soutenez le projet en votant !', 'yproject'); ?></a>
-	    <?php else: ?>
 		<div class="project_preview_item_part">
 		    <div class="project_preview_item_pictos">
 		    <div class="project_preview_item_picto">
@@ -382,6 +401,11 @@ function printSinglePreview($i, $vote) {
 		    </div>
 
 
+		<?php if ($vote) : ?>
+		    <div class="project_preview_item_progress" style="text-align: center; text-transform: uppercase; padding-top: 10px;">
+			<a href="<?php the_permalink(); ?>">Votez sur ce projet</a>
+		    </div>
+		<?php else: ?>
 		    <div class="project_preview_item_progress">
 		    <?php
 			$percent = $campaign->percent_completed(false);
@@ -391,8 +415,8 @@ function printSinglePreview($i, $vote) {
 			<div class="project_preview_item_progressbg"><div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">&nbsp;</div></div>
 			<span class="project_preview_item_progressprint"><?php echo $campaign->percent_completed(); ?></span>
 		    </div>
+		<?php endif; ?>
 		</div>
-	    <?php endif; ?>
 	</div>
 	<div style="clear: both"></div>
     </div>
