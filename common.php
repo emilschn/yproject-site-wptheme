@@ -59,16 +59,12 @@ function printPageBottomEnd($post, $campaign) {
     if (isset($_GET['campaign_id'])) {
 	$campaign_id_param .= $_GET['campaign_id'];
 	$post = get_post($_GET['campaign_id']);
+	$campaign = atcf_get_campaign( $post );
     } else  {
 	$campaign_id_param .= $post->ID;
     }
 						
     $vote_status = html_entity_decode($campaign->vote());
-
-    // Nombre de jours restants					
-    $dateJour = strtotime(date("d-m-Y"));
-    $fin   = strtotime($post->campaign_end_vote);
-    $jours_restants = (round(abs($fin - $dateJour)/60/60/24));
     ?>
 	    </div>
 
@@ -130,6 +126,10 @@ function printPageBottomEnd($post, $campaign) {
 		    </div>
 		    <?php
 			else:
+			    // Nombre de jours restants					
+			    $dateJour = strtotime(date("d-m-Y"));
+			    $fin   = strtotime($post->campaign_end_vote);
+			    $jours_restants = (round(abs($fin - $dateJour)/60/60/24));
 			    if ($jours_restants > 0) {
 				do_shortcode('[yproject_crowdfunding_printPageVoteForm remaining_days='.$jours_restants.']');
 			    } else {
