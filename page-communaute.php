@@ -1,7 +1,6 @@
 <?php 
     get_header();
     require_once("common.php");
-    date_default_timezone_set("Europe/Paris");
 ?>
 
 <div id="content">
@@ -17,9 +16,13 @@
 			<h2 class="underlined"><?php _e("Derniers inscrits", "yproject"); ?></h2>
 			<?php 
 			    $args = array (
+				"role" => "Subscriber",
 				"orderby" => "registered", 
 				"order" => "DESC", 
-				"number" => 5
+				"number" => 5,
+				"meta_key" => "last_activity",
+				"meta_value" => "",
+				"meta_compare" => "<>"
 			    );
 			    $user_query = new WP_User_Query( $args ); 
 			    if ( ! empty( $user_query->results ) ) {
@@ -34,7 +37,7 @@
 				    else if ($diff->h > 0) $time = $diff->format("%h heures");
 				    else if ($diff->i > 0) $time = $diff->format("%i minutes");
 				    else if ($diff->s > 0) $time = $diff->format("%s secondes");
-				    echo '<li>' . $user->display_name . __(" a rejoint WeDoGood - Il y a ", "yproject") . $time . '</li>';
+				    echo '<li>' . $user->display_name . __(" a rejoint WEDOGOOD - Il y a ", "yproject") . $time . '</li>';
 				}
 				echo '</ul>';
 			    }
