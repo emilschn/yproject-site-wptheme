@@ -9,6 +9,24 @@
 	    <div id="post_bottom_bg">
 		<div id="post_bottom_content" class="center">
 		    <div class="left post_bottom_desc_small">
+			<?php
+			global $submit_errors;
+			if (isset($submit_errors)) :
+			?>
+			<div class="errors">
+			    Nous n&apos;avons pas pu valider votre proposition :
+			    <ul>
+			    <?php
+			    foreach($submit_errors->errors as $error) {
+				echo '<li>'.$error[0].'</li>';
+			    }
+			    ?>
+			    </ul>
+			</div>
+			<?php 
+			endif;
+			?>
+			
 			<?php 
 			    the_content();
 			?>
