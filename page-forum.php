@@ -48,7 +48,10 @@
 						    if ( is_user_logged_in() ) {
 							echo do_shortcode('[bbp-single-forum id='.$forum_projet_id.']'); 
 						    } else {
-							echo 'Vous devez être connecté pour accèder au forum !';
+							$page_connexion = get_page_by_path('connexion');
+							?>
+							Vous devez <a href="<?php echo get_permalink($page_connexion->ID); ?>">&ecirc;tre connect&eacute;</a> pour acc&eacute;der au forum !
+							<?php
 						    }
 						?>
 					    </span>

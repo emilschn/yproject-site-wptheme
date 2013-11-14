@@ -67,20 +67,6 @@ YPUIFunctions = (function($) {
 	    if ($(".wp-editor-wrap")[0]) {
 		setInterval(YPUIFunctions.onRemoveUploadInterval, 1000);
 	    }
-	    
-	    if ($("#mangopay_strongauth_form").length > 0) {
-		$("#mangopay_strongauth_form").submit(function(event) {
-		    event.preventDefault();
-		    var url = $(this).attr("action");
-		    var term = $(this).find("input[name='StrongValidationDto.Picture']").val();
-		    var posting = $.post(url, {"StrongValidationDto.Picture": term});
-		    
-		    posting.done(function(data){
-			$("#mangopay_strongauth_form").hide();
-			$("#mangopay_strongauth_form_confirm").show();
-		    });
-		});
-	    }
 	},
 	
 	onRemoveUploadInterval: function() {
