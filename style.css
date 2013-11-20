@@ -1056,8 +1056,34 @@ footer span {
 #snsf-wrapper {
     display: none !important;
 }
+
 #snsf-form input[type=text] {
     width: 150px !important;
+    border: none;
+    padding: 4px;
+}
+
+#snsf-submit-button {
+   background: #333333;
+   color: #FFF;
+   border: medium none;
+   padding: 3px 8px;
+   text-transform: uppercase;
+}
+
+.newsletter-input-text {
+    width: 150px !important;
+    display: inline-block !important;
+    border: none;
+    padding: 4px;
+}
+
+.newsletter-submit-button {
+   background: #333333;
+   color: #FFF;
+   border: medium none;
+   padding: 3px 8px;
+   text-transform: uppercase;
 }
 /* FIN FOOTER */
 
@@ -1255,19 +1281,4 @@ background-image:url("images/jycrois_gris_rouge.png");
 
 .qa-faq-title a {
     text-decoration: none;
-}
-
-/*SUBMIT*/
-
-#snsf-submit-button {
-   background: #333333;
-   color: #FFF;
-   border: medium none;
-   padding: 3px 8px;
-   text-transform: uppercase;
-}
-
-#snsf-form input[type="text"] {
-    border: none;
-    padding: 4px;
 }
