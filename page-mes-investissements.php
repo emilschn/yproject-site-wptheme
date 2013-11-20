@@ -3,7 +3,10 @@
  * Enregistrement fait dans le plugin pour gérer la redirection éventuelle au bon moment
  * Le reste de la page devrait être fait dans un shortcode. On verra ça plus tard.
  */ 
-if (!is_user_logged_in()) wp_redirect(site_url());
+if (!is_user_logged_in()) :
+    wp_redirect(site_url());
+    exit();
+else:
 
 require_once("wp-content/themes/yproject/common.php");
 ?>
@@ -15,14 +18,163 @@ require_once("wp-content/themes/yproject/common.php");
 	    <div class="center">
 		<?php 
 		if (is_user_logged_in()) :
+		    $args = array(
+			'author'    => get_current_user_id(),
+			'post_type' => 'withdrawal_order',
+			'post_status'   => 'pending'
+		    );
+		    $pending_transfers = get_posts($args);
+
+		    if (!$pending_transfers && isset($_POST['mangopaytoaccount'])) {
+			//Test d'abord de la somme qu'on tente de retirer : si plus de 1000€, on doit mettre en place une strong auth sur cet utilisateur
+			$mp_amount = ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id());
+			$real_amount_invest = $mp_amount / 100;
+			if ($real_amount_invest > YP_STRONGAUTH_REFUND_LIMIT && !ypcf_mangopay_is_user_strong_authenticated(get_current_user_id())) {
+			    if (isset($_POST['document_submited'])) {
+				$url_request = ypcf_init_mangopay_user_strongauthentification(wp_get_current_user());
+				$curl_result = ypcf_mangopay_send_strong_authentication($url_request);
+				if ($curl_result) ypcf_mangopay_set_user_strong_authentication_doc_transmitted(get_current_user_id());
+				else echo 'Il y a eu une erreur pendant l&apos;envoi.';
+			    }
+			    
+			    if (ypcf_mangopay_is_user_strong_authentication_sent(get_current_user_id())) {
+				?>
+				Votre pi&egrave;ce d&apos;identit&eacute; est en cours de validation. Un d&eacute;lai maximum de 24h est n&eacute;cessaire &agrave; cette validation.<br />
+				Merci de votre compr&eacute;hension.
+				<?php
+
+			    } else {
+				?>
+				Pour retirer une somme sup&eacute;rieure &agrave; <?php echo YP_STRONGAUTH_REFUND_LIMIT; ?>&euro; sur une ann&eacute;e, vous devez fournir une pi&egrave;ce d&apos;identit&eacute;.<br />
+				Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf.<br />
+				Son poids doit &ecirc;tre inf&eacute;rieur &agrave; 2 Mo.<br />
+				<form id="mangopay_strongauth_form" action="" method="post" enctype="multipart/form-data">
+				    <input type="hidden" name="mangopaytoaccount" value="1" />
+				    <input type="hidden" name="document_submited" value="1" />
+				    <input type="file" name="StrongValidationDtoPicture" />
+				    <input type="submit" value="Envoyer"/>
+				</form><br /><br />
+				<?php
+			    }
+			} else {
+			    //Créer le beneficiary
+			    $errors = '';
+			    if (isset($_POST['bankownername'])) {
+				$beneficiary_id = "empty";
+				if (($_POST["bankowneraddress"] == "") || ($_POST["bankowneriban"] == "") || ($_POST["bankownerbic"] == "")) $errors = 'Certaines informations n&apos;ont pas &eacute;t&eacute; correctement remplies.';
+				else $beneficiary_id = ypcf_init_mangopay_beneficiary(get_current_user_id(), $_POST["bankownername"], $_POST["bankowneraddress"], $_POST["bankowneriban"], $_POST["bankownerbic"]);
+				if ($beneficiary_id == "") {
+				    global $mp_errors;
+				    $errors = 'Erreur lors du transfert : ' . $mp_errors;
+				}
+			    }
+			    
+			    //Tester si il existe un beneficiary correspondant à l'utilisateur
+			    $bankaccountownername = (isset($_POST["bankownername"])) ? $_POST["bankownername"] : '';
+			    $bankaccountowneraddress = (isset($_POST["bankowneraddress"])) ? $_POST["bankowneraddress"] : '';
+			    $bankaccountiban = (isset($_POST["bankowneriban"])) ? $_POST["bankowneriban"] : '';
+			    $bankaccountbic = (isset($_POST["bankownerbic"])) ? $_POST["bankownerbic"] : '';
+			    $beneficiary_id = ypcf_mangopay_get_mp_user_beneficiary_id(get_current_user_id());
+			    if ($beneficiary_id == "" || isset($_POST["edit"])) {
+				if (isset($_POST["edit"])) {
+				    $beneficiary_obj = ypcf_mangopay_get_beneficiary_by_id($beneficiary_id);
+				    $bankaccountownername = $beneficiary_obj->BankAccountOwnerName;
+				    $bankaccountowneraddress = $beneficiary_obj->BankAccountOwnerAddress;
+				    $bankaccountiban = $beneficiary_obj->BankAccountIBAN;
+				    $bankaccountbic = $beneficiary_obj->BankAccountBIC;
+				}
+				if ($errors != '') echo '<span class="error">' . $errors . '</span><br />';
+				//Entrer les données d'un beneficiary
+				?>
+				<strong>Veuillez entrer vos informations bancaires</strong><br />
+				<form action="" method="post" enctype="multipart/form-data">
+				    <label for="bankownername" class="large-label">Nom du propri&eacute;taire du compte : </label>
+					<input type="text" name="bankownername" value="<?php echo $bankaccountownername; ?>" /> <br />
+				    <label for="bankowneraddress" class="large-label">Adresse du compte : </label>
+					<input type="text" name="bankowneraddress" value="<?php echo $bankaccountowneraddress; ?>" /> <br />
+				    <label for="bankowneriban" class="large-label">IBAN : </label>
+					<input type="text" name="bankowneriban" value="<?php echo $bankaccountiban; ?>" /> <br />
+				    <label for="bankownerbic" class="large-label">BIC : </label>
+					<input type="text" name="bankownerbic" value="<?php echo $bankaccountbic; ?>" /> <br />
+				    <input type="hidden" name="mangopaytoaccount" value="1" />
+				    <input type="submit" value="Valider" />
+				</form>
+				<?php
+				
+			    } else {
+				if (isset($_POST['valid'])) {
+				    //Faire un withdrawal avec le userid, le beneficiaryid et $mp_amount
+				    $withdrawal_obj = ypcf_mangopay_make_withdrawal(get_current_user_id(), $beneficiary_id, $mp_amount);
+				    
+				    //TODO : enregistrer le withdrawal pour garder une trace
+				    if (is_string($withdrawal_obj)) {
+					echo '<span class="error">Erreur durant la transaction : ' . $withdrawal_obj . '</span>';
+				    } else {
+					//Enregistrement de l'id du withdrawal (en tant que post wp)
+					$withdrawal_post = array(
+					    'post_author'   => get_current_user_id(),
+					    'post_title'    => $mp_amount,
+					    'post_content'  => $withdrawal_obj->ID,
+					    'post_status'   => 'pending',
+					    'post_type'	    => 'withdrawal_order'
+					);
+					wp_insert_post( $withdrawal_post );
+					
+					//Affichage message état
+					?>
+					La transaction est en cours. Vous pourrez suivre son &eacute;volution sur la page <a href="">Mes investissements</a>.
+					<?php
+				    }
+				    
+				} else {
+				    $beneficiary_obj = ypcf_mangopay_get_beneficiary_by_id($beneficiary_id);
+				    //Rappeler les infos de compte
+				    ?>
+				    Veuillez v&eacute;rifier l&apos;exactitude de ces informations :<br />
+					Nom du propri&eacute;taire du compte : <?php echo $beneficiary_obj->BankAccountOwnerName ?> <br />
+					Adresse du compte : <?php echo $beneficiary_obj->BankAccountOwnerAddress ?> <br />
+					IBAN : <?php echo $beneficiary_obj->BankAccountIBAN ?> <br />
+					BIC : <?php echo $beneficiary_obj->BankAccountBIC ?> <br />
+				    <form action="" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="mangopaytoaccount" value="1" />
+					<input type="hidden" name="valid" value="1" />
+					<input type="submit" value="Valider" />
+				    </form>
+				    <form action="" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="mangopaytoaccount" value="1" />
+					<input type="hidden" name="edit" value="1" />
+					<input type="submit" value="Editer" />
+				    </form>
+
+				    <?php
+				}
+				
+			    }
+			}
+		    } else {
 		?>
 
 		    <h2 class="underlined"><?php _e( 'Mes porte-monnaie', 'yproject' ); ?></h2>
 		    <?php
 			$real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id()) / 100;
-//			$real_amount_wallet = ypcf_mangopay_get_userwallet_personalamount_by_wpid(get_current_user_id()) / 100;
-			echo 'Vous disposez de ' . $real_amount_invest . '&euro; dans votre porte-monnaie.<br />';
-//			echo 'Vous disposez de ' . $real_amount_wallet . '&euro; dans votre porte-monnaie d&apos;int&eacuter&ecirc;ts.';
+		    ?>
+			Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br />
+			
+		    <?php
+			if ($pending_transfers) :
+		    ?>
+			Vous avez un transfert en cours.
+		    <?php
+			else :
+			    if ($real_amount_invest > 0) {
+		    ?>
+			<form action="" method="post" enctype="multipart/form-data">
+			    <input type="hidden" name="mangopaytoaccount" value="1" />
+			    <input type="submit" value="Reverser sur mon compte bancaire" />
+			</form>
+		    <?php
+			    }
+			endif;
 		    ?>
 
 		    <h2 class="underlined"><?php _e( 'Mes investissements', 'yproject' ); ?></h2>
@@ -43,12 +195,66 @@ require_once("wp-content/themes/yproject/common.php");
 		    </ul>
 		    <?php endif; ?>
 		    
+		    <h2 class="underlined"><?php _e( 'Mes transferts d&apos;argent', 'yproject' ); ?></h2>
+		    <?php
+		    $args = array(
+			'author'    => get_current_user_id(),
+			'post_type' => 'withdrawal_order',
+			'post_status' => 'any',
+			'orderby'   => 'post_date',
+			'order'     =>  'ASC'
+		    );
+		    $transfers = get_posts($args);
+		    if ($transfers) :
+		    ?>
+		    <ul class="user_history">
+			<?php 
+			    foreach ( $transfers as $post ) :
+				$widthdrawal_obj = ypcf_mangopay_get_withdrawal_by_id($post->post_content);
+				if ($widthdrawal_obj->Error != "" && $widthdrawal_obj->Error != NULL) {
+				    $args = array(
+					'ID'	=>  $post->ID,
+					'post_status'	=> 'draft'
+				    );
+				    wp_update_post($args);
+				    
+				} else if ($widthdrawal_obj->IsSucceeded && $widthdrawal_obj->IsCompleted && $post->post_status != 'publish') {
+				    $args = array(
+					'ID'	=>  $post->ID,
+					'post_status'	=> 'publish'
+				    );
+				    wp_update_post($args);
+				}
+				$post = get_post($post);
+				$post_amount = $post->post_title / 100;
+				if ($post->post_status == 'publish') {
+				    ?>
+				    <li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Termin&eacute;</li>
+				    <?php
+				} else if ($post->post_status == 'draft') {
+				    ?>
+				    <li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Annul&eacute;</li>
+				    <?php
+				} else {
+				    ?>
+				    <li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- En cours</li>
+				    <?php
+				}
+			    endforeach;
+			?>
+		    </ul>
+		    <?php endif; ?>
+		    
 		    
 		<?php
+		    }
 		endif;
 		?>
 	    </div>
 	</div>
     </div>
 
-<?php get_footer(); ?>
+<?php 
+get_footer(); 
+endif;
+?>
