@@ -1,6 +1,48 @@
+<?php require_once("common.php"); ?>
 <?php get_header(); ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+<?php 
+
+    // Articles du blog WDG
+    $category = get_the_category(); 
+    if ($category[0]->slug == 'wedogood') :
+	$page_blog = get_page_by_path('blog');
+
+?>
+    <div id="content">
+	<div class="padder">
+	    <?php printMiscPagesTop("Blog"); ?>
+	    
+	    <div id="post_bottom_bg">
+		<div id="post_bottom_content" class="center">
+		    <div class="left post_bottom_desc">
+
+			<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+			    <div class="post-content">
+				    <div>
+					&lt;&lt; <a href="<?php echo get_permalink($page_blog->ID); ?>"><?php echo __('Blog', 'yproject'); ?></a>
+				    </div>
+				    <h2 class="posttitle"><?php the_title(); ?></h2>
+				    <p class="date"><?php echo get_the_date(); ?></p>
+				    <?php the_content(); ?>
+			    </div>
+			</div>
+
+		    </div>
+		</div>
+		<?php printCommunityMenu(); ?>
+		<div style="clear: both"></div>
+	    </div>
+
+	</div><!-- .padder -->
+    </div><!-- #content -->
+
+<?php
+
+    //Autres articles
+    else:
+?>
 	<div id="content">
 		<div class="padder">
 
@@ -11,9 +53,6 @@
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				    <div class="post-content">
 					<div class="entry center">
-					    <div>
-						<?php $category = get_the_category(); if ($category[0]->slug == 'wedogood') { $page_blog = get_page_by_path('blog'); ?>&lt;&lt; <a href="<?php echo get_permalink($page_blog->ID); ?>"><?php echo __('Blog', 'yproject'); ?></a><?php } ?>
-					    </div>
 					    <h1><?php the_title(); ?></h1>
 					    <?php the_content(); ?>
 					</div>
@@ -26,6 +65,9 @@
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
+<?php
+    endif;
+?>
 
 
 <?php endwhile; else: ?>

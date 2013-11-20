@@ -528,6 +528,18 @@ div#home_bottom h1 {
 }
 /* FIN COMMUNITY */
 
+/* BLOG */
+.category-wedogood {
+    margin-bottom: 80px;
+}
+
+.category-wedogood .posttitle {
+    font-size: 2.1em;
+    color: #E6223C;
+    text-transform: uppercase;
+}
+/* FIN BLOG */
+
 a.qa-faq-anchor {
     color: black;
 }
