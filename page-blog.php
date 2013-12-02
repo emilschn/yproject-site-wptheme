@@ -19,6 +19,8 @@
 			    'orderby' => 'post_date',
 			    'order' => 'desc'
 			) );
+			global $more;
+			$more = 0;
 			
 			if ( have_posts() ) : ?>
 
@@ -31,16 +33,12 @@
 					<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 						<div class="post-content">
-							<?php /* <h2 class="posttitle"><?php the_title(); ?></h2> */ ?>
-							<h2 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+							<h2 class="posttitle"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 							
 							<p class="date"><?php echo get_the_date(); ?></p>
 
 							<div class="entry">
-							    <?php /* the_content( __( 'Read the rest of this entry &rarr;', 'buddypress' ) ); */ ?>
-							    <?php the_excerpt(); ?>
-							    <br />
-							    <a href="<?php the_permalink(); ?>">Lire la suite...</a>
+							    <?php the_content( 'Lire la suite' ); ?>
 							</div>
 						</div>
 
