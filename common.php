@@ -478,6 +478,10 @@ function printUserProfileAdminBar($skip_controls = false) {
 
 function printUserInvest($post_invest, $post_campaign) {
     $campaign = atcf_get_campaign( $post_campaign );
+    $payment_status = ypcf_get_updated_payment_status($post_invest->ID);
+    $contractid = ypcf_get_signsquidcontractid_from_invest($post_invest->ID);
+    $signsquid_infos = signsquid_get_contract_infos($contractid);
+    $signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
     ?>
     <li>
 	<div class="user_history_title left">
@@ -519,10 +523,10 @@ function printUserInvest($post_invest, $post_campaign) {
 		    <?php echo date_i18n( get_option('date_format'), strtotime( get_post_field( 'post_date', $post_invest->ID ) ) ); ?>
 		</div>
 		<div class="project_preview_item_infos">
-		    <?php 
-			$payment_status = ypcf_get_updated_payment_status($post_invest->ID);
-			echo __("Paiement", "yproject") . ' ' . edd_get_payment_status( $post_invest, true ); 
-		    ?>
+		    <?php echo __("Paiement", "yproject") . ' ' . edd_get_payment_status( $post_invest, true ); ?>
+		</div>
+		<div class="project_preview_item_infos">
+		    <?php echo $signsquid_status; ?>
 		</div>
 		
 		<?php

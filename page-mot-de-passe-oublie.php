@@ -74,7 +74,7 @@
 		the_content();
 		endwhile; endif; 
 		
-		if ($_GET["action"] == "rp"):
+		if (isset($_GET["action"]) && $_GET["action"] == "rp"):
 		    if ($feedback != '') {
 			$page_connexion = get_page_by_path('connexion');
 			?>

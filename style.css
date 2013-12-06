@@ -868,41 +868,70 @@ ul.activity-list p {
 
 #submenu_item_connection {
     position: absolute;
+    font-family: Arial, sans-serif;
     display: none;
-    background-color: #333333;
-    color: #DDDDDD;
-    border: 1px solid #000;
+    background-color: #FFF;
+    font-size: 9pt;
+    color: #333333;
+    /*border: 1px solid #000;*/
     z-index: 999;
 }
 
 #submenu_item_connection label { 
-    font-family: Arial, sans-serif;
-    font-size: 9pt;
-    display: inline-block;
-    width: 100px;
+    color: #000
 }
-#sidebar-user-login, #sidebar-user-pass { 
-    width: 120px;
-    font-family: Arial, sans-serif;
+#sidebar-user-login { 
+    width: 227px;
+    font-size: 9pt;
+}
+#sidebar-user-pass {
+    width: 170px;
+    font-size: 9pt;
+}
+#sidebar-wp-submit {
+    width: 55px;
     font-size: 9pt;
 }
 #submenu_item_connection ul {
-    padding-left: 5px !important;
+    margin: 15px 15px 0px 15px;
+    padding-left: 0px !important;
 }
 #submenu_item_connection li {
     list-style: none;
     padding-left: 0px !important;
     padding-bottom: 3px;
 }
-#submenu_item_connection div {
-    text-align: center;
-    color: #FFF;
-    font-family: Arial, sans-serif;
-    font-size: 11pt;
+#submenu_item_connection hr {
+    color: gray;
+    border: 0px;
+    border-top: dotted 1px;
+    margin: 10px 0px 10px 0px;
 }
-#submenu_item_connection a {
+#submenu_item_connection div a {
     color: #FFF;
-    text-decoration: none;
+}
+#submenu_item_connection div img {
+    vertical-align: middle;
+}
+#submenu_item_connection div#submenu_item_connection_register {
+    background-color: #3F3F41;
+    height: 25px;
+    text-transform: uppercase;
+}
+#submenu_item_connection div.social_connect_login_facebook {
+    background-color: #526794;
+    color: #FFF;
+}
+#submenu_item_connection div.social_connect_login_facebook span {
+    border-left: 1px solid #FFF;
+    padding: 5px 0px 6px 3px;
+}
+#submenu_item_connection div#submenu_item_connection_login {
+    background-color: #FFF;
+    color: #000;
+    margin-top: 3px;
+    height: 25px;
+    text-transform: uppercase;
 }
 /* FIN NAV */
 

@@ -132,7 +132,8 @@ require_once("wp-content/themes/yproject/common.php");
 			    <label for="update_password_current" class="standard-label"><?php _e( 'Mot de passe', 'yproject' ); ?>*</label>
 			    <input type="password" name="update_password_current" id="update_password_current" value="" />
 			<?php }} ?>
-			<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="Enregistrer les modifications" />
+			    
+			<input type="submit" value="Enregistrer les modifications" />
 
 			<input type="hidden" name="update_user_posted" value="posted" />
 			<input type="hidden" name="update_user_id" value="<?php echo $current_user->ID; ?>" /><br /><br />

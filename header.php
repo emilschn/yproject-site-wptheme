@@ -118,26 +118,28 @@
 		    <?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
 		    <ul>
 			<li class="page_item_out">
+			    <div id="submenu_item_connection_register"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" width="25" height="25" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
+			    <hr />
+			    <div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" width="25" height="25"/><span>&nbsp;Se connecter avec Facebook</span></a></div>
+			    <div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
+			    <hr />
+			    <div id="submenu_item_connection_login"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_noir_connexion.jpg" width="25" height="25" />&nbsp;Connexion</div>
 			    <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
-				<label><?php _e('Identifiant', 'yproject'); ?></label>
-				<input type="text" name="log" id="sidebar-user-login" class="input" value="<?php if ( isset( $user_login) ) echo esc_attr(stripslashes($user_login)); ?>" />
+				<input type="text" name="log" id="sidebar-user-login" class="input" placeholder="<?php _e('Identifiant', 'yproject'); ?>" />
 				<br />
 
-				<label><?php _e('Mot de passe', 'yproject'); ?></label>
-				<input type="password" name="pwd" id="sidebar-user-pass" class="input" value="" />
+				<input type="password" name="pwd" id="sidebar-user-pass" class="input" placeholder="<?php _e('Mot de passe', 'yproject'); ?>" />
+				<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="OK" />
 				<br />
 
 				<p class="forgetmenot">
-				    <input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" /> <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
-				    <input type="submit" name="wp-submit" id="sidebar-wp-submit" value="<?php _e('Connexion', 'yproject'); ?>" />
+				     <label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" />&nbsp;<?php _e('Se souvenir de moi', 'yproject'); ?></label> 
 				</p>
+				<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
+				<a href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>
 				
 				<input type="hidden" name="testcookie" value="1" />
 			    </form>
-			    
-			    <div><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
-			    <br />
-			    <div><a href="<?php echo get_permalink($page_connexion_register->ID); ?>"><?php _e('Sinscrire', 'yproject'); ?></a></div>
 			</li>
 		    </ul>
 		</div>
