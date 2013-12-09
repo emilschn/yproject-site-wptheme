@@ -35,11 +35,9 @@
 					endwhile; 
 				    endif;
 				?>
-				<div style="text-align: center">
-				<?php
-				    dynamic_sidebar( 'sidebar-1' ); 
-				?>
-				</div>
+
+				<div id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" class="vert-align" width="25" height="25"/><span>&nbsp;S&apos;inscrire avec Facebook</span></a></div>
+				<div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
 			    </div>
 			    
 			    <div class="register_half_part">
@@ -188,7 +186,7 @@
 				    
 				    <?php do_action( 'bp_before_registration_submit_buttons' ); ?>
 				    <div class="submit">
-					<input type="submit" name="signup_submit" id="signup_submit" />
+					<input type="submit" name="signup_submit" id="signup_submit" value="Cr&eacute;er mon compte" />
 				    </div>
 				    <?php do_action( 'bp_after_registration_submit_buttons' ); ?>
 

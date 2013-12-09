@@ -91,6 +91,10 @@ body a {
     text-align: center;
 }
 
+.vert-align {
+    vertical-align: middle;
+}
+
 h4 {
     font-weight: normal;
 }
@@ -504,7 +508,16 @@ div#home_bottom h1 {
     float: left;        
     width: 440px;
     padding: 0px 15px;
-}       
+}
+
+#signup_submit {
+    background-color: #515050;
+    color: #FFF;
+    border: 0px;
+    width: 390px;
+    padding: 5px 0px 5px 0px;
+    text-transform: uppercase;
+}
 /* FIN REGISTER PAGE */     
         
 /* CONNEXION PAGE */        
@@ -873,16 +886,18 @@ ul.activity-list p {
     background-color: #FFF;
     font-size: 9pt;
     color: #333333;
-    /*border: 1px solid #000;*/
+    border: 1px solid #333333;
+    border-top: 0px;
     z-index: 999;
 }
 
 #submenu_item_connection label { 
-    color: #000
+    color: #000;
 }
 #sidebar-user-login { 
     width: 227px;
     font-size: 9pt;
+    margin-bottom: 5px;
 }
 #sidebar-user-pass {
     width: 170px;
@@ -905,9 +920,9 @@ ul.activity-list p {
     color: gray;
     border: 0px;
     border-top: dotted 1px;
-    margin: 10px 0px 10px 0px;
+    margin: 15px 0px 15px 0px;
 }
-#submenu_item_connection div a {
+#submenu_item_connection div#submenu_item_connection_register a, #submenu_item_connection div.social_connect_login_facebook a, div#connexion_facebook_container a {
     color: #FFF;
 }
 #submenu_item_connection div img {
@@ -918,7 +933,7 @@ ul.activity-list p {
     height: 25px;
     text-transform: uppercase;
 }
-#submenu_item_connection div.social_connect_login_facebook {
+#submenu_item_connection div.social_connect_login_facebook, div#connexion_facebook_container {
     background-color: #526794;
     color: #FFF;
 }
@@ -932,6 +947,17 @@ ul.activity-list p {
     margin-top: 3px;
     height: 25px;
     text-transform: uppercase;
+}
+#submenu_item_connection div#submenu_item_connection_login a {
+    text-transform: none;
+}
+div#connexion_facebook_container {
+    display: inline-block;
+    margin-bottom: 3px;
+}
+div#connexion_facebook_container span {
+    border-left: 1px solid #FFF;
+    padding: 2px 10px 6px 3px;
 }
 /* FIN NAV */
 
