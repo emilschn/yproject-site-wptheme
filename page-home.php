@@ -1,11 +1,11 @@
 <header class="align-center header_home">
-     <div id="site_name2" class="center">
-	<div id="welcome_text">
-	    <?php 
-		wp_reset_query();
-		the_content();
-	    ?>
-	</div>
+    <div id="site_name2" class="center">
+       <div id="welcome_text">
+	   <?php 
+	       wp_reset_query();
+	       the_content();
+	   ?>
+       </div>
     </div>
 </header>
 
@@ -32,21 +32,36 @@
 
 	    <div style="clear: both"></div>
 	     * 
-	     */ ?>
-	    
+	     * 
+	     * 
+	     *  
 	    <?php printHomePreviewProjectsTemp(4); ?>
 	    
-	    <div style="clear: both"></div>
+	    <div style="clear: both"></div> */ ?>
+
+
+	    <div style="width:960px; height:400px;">
+		<div style="width:480px; float:left;">
+		    <?php printHomePreviewProjectsTemp(1); ?>
+		    <div style="float: left"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/projet_exemple.jpg" width="235" height="400">  </div>
+		    <div style="clear: both"></div>
+		</div>
+
+		<div style="width:480px; float:right; padding-top:65px;">
+		    <a style="border:none;" href="<?php $page_connexion_register = get_page_by_path('register'); echo get_permalink($page_connexion_register->ID); ?>"><img style="padding-left:60px; padding-bottom:10px;" src="<?php echo get_stylesheet_directory_uri(); ?>/images/inscription.jpg" width="410px" height="130px" /></a><br />
+		    <a style="border:none;" href="<?php $page_new_project = get_page_by_path('reveler-un-projet'); echo get_permalink($page_new_project->ID); ?>"><img style="padding-left:60px; padding-top:10px;" src="<?php echo get_stylesheet_directory_uri(); ?>/images/signaler.jpg" width="410px" height="130px" /></a>
+		</div>
+	    </div>
 	</div>
     </div>
     
-<?php /*    
+    
     <div id="home_middle">
 	<div id="home_middle_top">
 	    <div id="home_middle_content">
 		<div class="center">
-		    <div class="round_title_left"><?php echo __('Participez à un projet', 'yproject'); ?></div>
-		    <div class="round_title_right"><?php echo __('Proposez un projet', 'yproject'); ?></div>
+		    <div class="round_title_left"><strong>Participez</strong><br />&agrave; un projet</div>
+		    <div class="round_title_right"><strong>Proposez</strong><br />un projet</div>
 		    <div style="clear: both"></div>
 		</div>
 		<div class="center">
@@ -59,36 +74,16 @@
 	    </div>
 	</div>
     </div>
- * 
-    <div id="home_middle">
-	<div class="center">
-	    <?php $projects_page = get_page_by_path('projects'); ?>
-	    <h2><?php _e('Decouvrir les projets', 'yproject'); ?></h2>
-	    <div class="home_discover_half_size">
-		<div class="arrow-down"></div>
-	    </div>
-	    <div class="home_discover_half_size">
-		<div class="arrow-down"></div>
-	    </div>
-	    <div style="clear:both"></div>
-	    
-	    <?php 
-		wp_reset_query();
-		the_content();
-	    ?>
-	    <div class="home_discover_half_size">
-		<span class="light"><a href="<?php echo get_permalink($projects_page->ID); ?>"><?php _e('Decouvrir les projets', 'yproject'); ?></a></div>
-	    </div>
-	    <div style="clear:both"></div>
-	</div>
-    </div>
- */ ?>
 	
 	
     <div id="home_bottom" class="center">
 	<div class="padder">
+	    <?php /*$projects_page = get_page_by_path('projects'); ?>
+	    <a href="<?php echo get_permalink($projects_page->ID); ?>"><?php _e('Decouvrir les projets', 'yproject'); ?></a><br /><br />*/ ?>
+	    
 	    <h2 class="underlined"><?php _e("Nos partenaires", "yproject"); ?></h2>
 	    <?php 
+		
 		$page_makesense = get_page_by_path('makesense');
 		$page_partners = get_page_by_path('partenaires');
 	    ?>
