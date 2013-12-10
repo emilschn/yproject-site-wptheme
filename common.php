@@ -201,13 +201,13 @@ function printAdminBar() {
 		<a href="<?php echo get_permalink($campaign_id); ?>"><?php echo __('Page projet', 'yproject'); ?></a>
 		&nbsp; &nbsp; &nbsp;
 		<?php /* Lien gerer un projet */ $page_manage = get_page_by_path('gerer'); ?>
-		<a href="<?php echo get_permalink($page_manage->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('G&eacute;rer vos informations', 'yproject'); ?></a>
+		<a href="<?php echo get_permalink($page_manage->ID); ?><?php echo $campaign_id_param; ?>">G&eacute;rer le projet</a>
 		&nbsp; &nbsp; &nbsp;
 		<?php /* Lien ajouter une actu */ $page_add_news = get_page_by_path('ajouter-une-actu'); ?>
 		<a href="<?php echo get_permalink($page_add_news->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
 		 &nbsp; &nbsp; &nbsp;
 		<?php /* Lien resultats des votes*/ $vote = get_page_by_path('vote'); ?>
-		<a href="<?php echo get_permalink($vote->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Statistiques des votes', 'yproject'); ?></a>
+		<a href="<?php echo get_permalink($vote->ID); ?><?php echo $campaign_id_param; ?>">Statistiques avanc&eacute;es</a>
 	    </div>
 	</div>
     <?php }
@@ -350,6 +350,13 @@ function printProjectsPreview($vote) {
 function printSinglePreview($i, $vote) {
     global $post;
     $campaign = atcf_get_campaign( $post );
+    
+    $days_remaining = $campaign->days_remaining();
+    if ($vote) {
+	$dateJour = strtotime(date("d-m-Y"));
+	$fin   = strtotime($post->campaign_end_vote);
+	$days_remaining = (round(abs($fin - $dateJour)/60/60/24));
+    }
     ?>
     <div class="projects_preview<?php if ($vote) { ?> projects_vote<?php } else { ?> projects_current projects_current_temp<?php } ?>">
 	<div class="preview_item_<?php echo $post->ID; ?> project_preview_item<?php if (($vote && $i > 0) || (!$vote && $i > 2)) echo ' mobile_hidden'; ?>">
@@ -387,7 +394,7 @@ function printSinglePreview($i, $vote) {
 		    </div>
 		    <div class="project_preview_item_picto">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
-			<?php echo $campaign->days_remaining(); ?>
+			<?php echo $days_remaining; ?>
 		    </div>
 		    <div class="project_preview_item_picto">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
