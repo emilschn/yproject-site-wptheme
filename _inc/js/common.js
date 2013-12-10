@@ -22,6 +22,14 @@ YPUIFunctions = (function($) {
 		    $("#goal").val(Math.round($("#goal_search").val() * $("#campaign_multiplier").val()));
 		    $("#goalsum_campaign_multi").text($("#goal").val() + $("#monney").val());
 		});
+		$("#minimum_goal_search").change(function() {
+		    $("#minimum_goal").val(Math.round($("#minimum_goal_search").val() * $("#campaign_multiplier").val()));
+		    $("#goalsum_min_campaign_multi").text($("#minimum_goal").val() + $("#monney").val());
+		});
+		$("#maximum_goal_search").change(function() {
+		    $("#maximum_goal").val(Math.round($("#maximum_goal_search").val() * $("#campaign_multiplier").val()));
+		    $("#goalsum_max_campaign_multi").text($("#maximum_goal").val() + $("#monney").val());
+		});
 	    
 		$(".radiofundingtype").change(function(){
 		    $("#goal").val("");
