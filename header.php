@@ -121,17 +121,23 @@
 			    <div id="submenu_item_connection_register"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" width="25" height="25" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
 			    <hr />
 			    <div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" width="25" height="25"/><span>&nbsp;Se connecter avec Facebook</span></a></div>
-			    <div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
-			    <hr />
-			    <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-			    <div id="submenu_item_connection_login"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_noir_connexion.jpg" width="25" height="25" />&nbsp;Connexion (<a href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)</div>
+			 
+   <div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
+			    <hr /> <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
+			   
+			    <div id="submenu_item_connection_login"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_noir_connexion.jpg" width="25" height="25" />&nbsp;Connexion</div>
 			    <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
 				<input type="text" name="log" id="sidebar-user-login" class="input" placeholder="Identifiant ou e-mail" />
 				<br />
 
+
+
 				<input type="password" name="pwd" id="sidebar-user-pass" class="input" placeholder="<?php _e('Mot de passe', 'yproject'); ?>" />
 				<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="OK" />
 				<br />
+
+(<a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)
+<br><br>
 
 				<label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" />&nbsp;<?php _e('Se souvenir de moi', 'yproject'); ?></label> 
 				

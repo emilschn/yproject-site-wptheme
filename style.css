@@ -120,7 +120,7 @@ h4 {
 .projects_vote {
     width: 221px;
     color: #000;
-    background-color: #D6DCDE;
+    background-color: #DFE2E4;
 }
 #projects_finished {
     color: #29ABBA;
@@ -204,8 +204,17 @@ h4 {
 }
 
 .project_preview_item_progress {
+    background: none repeat scroll 0 0 #FFFFFF;
     height: 20px;
+    color: #232323;
+    padding-top: 15px !important;
+    padding-bottom: 10px !important;
 }
+
+.project_preview_item_progress a {
+    color: #232323;
+}
+
 .project_preview_item_progressbg {
     float: left;
     width: 150px;
@@ -773,6 +782,7 @@ ul.activity-list p {
     color: #333333 !important;
     padding-top: 26px;
     padding-bottom: 7px;
+    float: right !important;
 }
 .page_item_out {
     border-left: none !important;
@@ -885,9 +895,10 @@ ul.activity-list p {
     background-color: #FFF;
     font-size: 9pt;
     color: #333333;
-    border: 1px solid #333333;
+    border: 1px solid #F2F2F2;
     border-top: 0px;
     z-index: 999;
+   padding: 20px 0;
 }
 
 #submenu_item_connection label { 
@@ -905,6 +916,11 @@ ul.activity-list p {
 #sidebar-wp-submit {
     width: 55px;
     font-size: 9pt;
+    background: none repeat scroll 0 0 #333333;
+    border: medium none;
+    color: #FFFFFF;
+    padding: 3px 8px;
+    text-transform: uppercase;
 }
 #submenu_item_connection ul {
     margin: 15px 15px 0px 15px;
@@ -1207,7 +1223,7 @@ footer span {
 
 /*J'Y CROIS*/
 #jcrois{
-background-color: white;
+background-color: transparent;
 width: 100px;
 height: 110px;
 border: none;

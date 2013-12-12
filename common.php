@@ -10,16 +10,16 @@ function printPageTop($post_campaign) {
     $post = $post_campaign;
     ?>
     <div id="post_top_bg">
-	<div id="post_top_title" class="center" style="background-color: white;	background-image: url('<?php 
+	<div id="post_top_title" class="center" style="background-repeat: no-repeat; background-position: center center; background-color: white; background-image: url('<?php 
 		if (WP_DEBUG) {$debug_src = 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject/todo.jpg';} else {$debug_src = get_stylesheet_directory_uri();}
 		$attachments = get_posts(
 		    array('post_type' => 'attachment',
 		    'post_parent' => $post->ID,
 		    'post_mime_type' => 'image')
 		);
-		$image_src = wp_get_attachment_image_src($attachments[0]->ID, "full");
+		$image_src = wp_get_attachment_image_src($attachments[0]->ID, "large");
 		if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src;
-		?>'); background-repeat: no-repeat; background-position: center;">  
+		?>');">  
 
 	    	<img width="960" height="240" src="<?php echo get_stylesheet_directory_uri(); ?>/images/blanc_bandeau_projet.png" style="position: absolute;">
 
@@ -526,19 +526,19 @@ function printUserInvest($post_invest, $post_campaign) {
 		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
 		    <?php echo $campaign->backers_count(); ?>
 		</div>
-		<div class="project_preview_item_infos">
+		<div class="project_preview_item_infos" style="width: 120px;">
 		    <?php echo date_i18n( get_option('date_format'), strtotime( get_post_field( 'post_date', $post_invest->ID ) ) ); ?>
 		</div>
-		<div class="project_preview_item_infos">
+		<div class="project_preview_item_infos" style="width: 120px;">
 		    <?php echo __("Paiement", "yproject") . ' ' . edd_get_payment_status( $post_invest, true ); ?>
 		</div>
-		<div class="project_preview_item_infos">
+		<div class="project_preview_item_infos" style="width: 120px;">
 		    <?php echo $signsquid_status; ?>
 		</div>
 		
 		<?php
 		    //N'est que visible si la collecte est toujours en cours et que le paiement a bien été validé
-		    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish") :
+		    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && $signsquid_infos->{'status'} != 'Agreed') :
 			$page_cancel_invest = get_page_by_path('annuler-un-investissement');
 		?>
 		<div class="project_preview_item_cancel">

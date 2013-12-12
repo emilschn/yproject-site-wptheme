@@ -3,7 +3,6 @@
     
     global $campaign, $post;
 	
-	//getNewPdfToSign($post->ID); //DEBUG
     if ( ! is_object( $campaign ) )
 	    $campaign = atcf_get_campaign( $post );
 		 date_default_timezone_set("Europe/Paris");		

@@ -9,38 +9,46 @@
 	    <?php printMiscPagesTop("Connexion"); ?>
 	    
     <div id="post_bottom_bg">
-	<div id="post_bottom_content" class="center_small">
-	    <div class="left post_bottom_desc_small">
+	<div style="width: 450px;" id="post_bottom_content" class="center_small">
+	    <div style="width: 450px;" class="left post_bottom_desc_small">
 		<div class="login_fail">
 		<?php if (isset($_GET["login"]) && $_GET["login"] == "failed") {?>
 		    <?php _e('Erreur d&apos;identification', 'yproject'); ?>
 		<?php } ?>
 		</div>
 
-		<div id="submenu_item_connection_login"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_noir_connexion.jpg" class="vert-align" width="25" height="25" />&nbsp;Connexion (<a href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)</div>
+		<div style="text-transform: uppercase; margin-bottom: 10px;" id="submenu_item_connection_login"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_noir_connexion.jpg" class="vert-align" width="25" height="25" />&nbsp;Connexion</div>
 		<form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
 		    <label class="standard-label"><?php _e('Identifiant', 'yproject'); ?></label>
-		    <input type="text" name="log" class="input" value="<?php if ( isset( $user_login) ) echo esc_attr(stripslashes($user_login)); ?>" />
+		    <input style="margin-bottom: 5px; width: 254px;" type="text" name="log" class="input" value="<?php if ( isset( $user_login) ) echo esc_attr(stripslashes($user_login)); ?>" />
 		    <br />
 
+
 		    <label class="standard-label"><?php _e('Mot de passe', 'yproject'); ?></label>
-		    <input type="password" name="pwd" class="input" value="" />
+		    <input type="password" name="pwd" class="input" value="" /> 
+		   <input type="submit" name="wp-submit" id="sidebar-wp-submit" style="width: 100px;" value="<?php _e('Connexion', 'yproject'); ?>" />
 		    <br />
+
+(<a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)
 
 		    <p class="forgetmenot">
 			<input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" /> <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
-			<input type="submit" name="wp-submit" value="<?php _e('Connexion', 'yproject'); ?>" />
+		
 		    </p>
 
 		    <input type="hidden" name="testcookie" value="1" />
 		</form>
 
-		<div id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" class="vert-align" width="25" height="25"/><span>&nbsp;Se connecter avec Facebook</span></a></div>
+
+<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
+
+		<div id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" class="vert-align" width="25" height="25"/><span style=" font-size:12px;">&nbsp;Se connecter avec Facebook</span></a></div>
 		<div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
+
+<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
 			    
-		<br />
 		<?php $page_connexion_register = get_page_by_path('register'); ?>
-		<div class="post_bottom_buttons"><div class="dark"><a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div></div>
+		<div style="margin-bottom: 20px;" class="post_bottom_buttons"><div class="dark"><a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div></div>
 	    </div>
 
 	    <div style="clear: both"></div>

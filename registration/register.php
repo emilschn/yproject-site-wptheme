@@ -28,6 +28,8 @@
 
 			    <div class="register_half_part">
 				<h2>Inscription avec Facebook</h2>
+
+<div style="font-size: 13px;">
 				<?php 
 				    if (have_posts()) : 
 					while (have_posts()) : the_post();
@@ -35,35 +37,37 @@
 					endwhile; 
 				    endif;
 				?>
+</div>
 
-				<div id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" class="vert-align" width="25" height="25"/><span>&nbsp;S&apos;inscrire avec Facebook</span></a></div>
+				<div id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" class="vert-align" width="25" height="25"/><span style=" font-size:12px;" >&nbsp;S&apos;inscrire avec Facebook</span></a></div>
 				<div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
 			    </div>
 			    
 			    <div class="register_half_part">
 				<h2>Inscription par e-mail</h2>
-				<div class="errors">
+				<div style="font-size: 13px;" class="errors">
 				    <?php do_action( 'bp_signup_username_errors' ); ?>
 				    <?php do_action( 'bp_signup_email_errors' ); ?>
 				    <?php do_action( 'bp_signup_password_errors' ); ?>
 				    <?php do_action( 'bp_signup_password_confirm_errors' ); ?>
-				</div>
+				</div><br>
 				
 				<div class="register-section" id="basic-details-section">
 				    <?php /***** Basic Account Details ******/ ?>
 				    <?php do_action( 'bp_before_account_details_fields' ); ?>
 
-				    <label class="medium-label" for="signup_username"><?php _e( 'Identifiant', 'yproject' ); ?> *</label>
-				    <input type="text" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" /><br />
+				    <label style="font-size: 13px;" class="medium-label" for="signup_username"><?php _e( 'Identifiant', 'yproject' ); ?> *</label>
+				    <input style="margin-bottom: 5px;" type="text" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" /><br />
 
-				    <label class="medium-label" for="signup_email"><?php _e( 'Adresse e-mail', 'yproject' ); ?> *</label>
-				    <input type="text" name="signup_email" id="signup_email" value="<?php bp_signup_email_value(); ?>" /><br />
+				    <label style="font-size: 13px;" class="medium-label" for="signup_email"><?php _e( 'Adresse e-mail', 'yproject' ); ?> *</label>
+				    <input style="margin-bottom: 5px;" type="text" name="signup_email" id="signup_email" value="<?php bp_signup_email_value(); ?>" /><br />
 
-				    <label class="medium-label" for="signup_password"><?php _e( 'Mot de passe', 'yproject' ); ?> *</label>
-				    <input type="password" name="signup_password" id="signup_password" value="" /><br />
+				    <label style="font-size: 13px;" class="medium-label" for="signup_password"><?php _e( 'Mot de passe', 'yproject' ); ?> *</label>
+				    <input style="margin-bottom: 5px;" type="password" name="signup_password" id="signup_password" value="" /><br />
 
-				    <label class="medium-label" for="signup_password_confirm"><?php _e( 'Confirmation du mot de passe', 'yproject' ); ?> *</label>
-				    <input type="password" name="signup_password_confirm" id="signup_password_confirm" value="" /><br />
+				    <label style="font-size: 13px;" class="medium-label" for="signup_password_confirm"><?php _e( 'Confirmation du mot de passe', 'yproject' ); ?> *</label>
+				    
+				   <input style="margin-bottom: 5px;" type="password" name="signup_password_confirm" id="signup_password_confirm" value="" /><br />
 
 				    <?php do_action( 'bp_after_account_details_fields' ); ?>
 
@@ -85,24 +89,24 @@
 
 								<?php if ( 'textbox' == bp_get_the_profile_field_type() ) : ?>
 
-									<label class="medium-label" for="<?php bp_the_profile_field_input_name(); ?>"><?php if (bp_get_the_profile_field_name() == 'Name') echo 'Nom public'; else bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?>*<?php endif; ?></label>
-									<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
-									<input type="text" name="<?php bp_the_profile_field_input_name(); ?>" id="<?php bp_the_profile_field_input_name(); ?>" value="<?php bp_the_profile_field_edit_value(); ?>" />
+									<label style="font-size: 13px;" class="medium-label" for="<?php bp_the_profile_field_input_name(); ?>"><?php if (bp_get_the_profile_field_name() == 'Name') echo 'Nom public'; else bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?>*<?php endif; ?></label>
+			<div style="font-size: 13px; color: #FF0000;"> <?php do_action( bp_get_the_profile_field_errors_action() ); ?>
+									<input type="text" name="<?php bp_the_profile_field_input_name(); ?>" id="<?php bp_the_profile_field_input_name(); ?>" value="<?php bp_the_profile_field_edit_value(); ?>" /> </div>
 
 								<?php endif; ?>
 
 								<?php if ( 'textarea' == bp_get_the_profile_field_type() ) : ?>
 
-									<label class="medium-label" for="<?php bp_the_profile_field_input_name(); ?>"><?php bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?>*<?php endif; ?></label>
-									<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
-									<textarea rows="5" cols="40" name="<?php bp_the_profile_field_input_name(); ?>" id="<?php bp_the_profile_field_input_name(); ?>"><?php bp_the_profile_field_edit_value(); ?></textarea>
+									<label style="font-size: 13px;" class="medium-label" for="<?php bp_the_profile_field_input_name(); ?>"><?php bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?>*<?php endif; ?></label>
+			<div style="font-size: 13px; color: #FF0000;"><?php do_action( bp_get_the_profile_field_errors_action() ); ?>
+									<textarea rows="5" cols="40" name="<?php bp_the_profile_field_input_name(); ?>" id="<?php bp_the_profile_field_input_name(); ?>"><?php bp_the_profile_field_edit_value(); ?></textarea></div>
 
 								<?php endif; ?>
 
 								<?php if ( 'selectbox' == bp_get_the_profile_field_type() ) : ?>
 
-									<label class="medium-label" for="<?php bp_the_profile_field_input_name(); ?>"><?php bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?>*<?php endif; ?></label>
-									<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
+				                              <label  style="font-size: 13px;"class="medium-label" for="<?php bp_the_profile_field_input_name(); ?>"><?php bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?>*<?php endif; ?></label>
+				<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
 									<select name="<?php bp_the_profile_field_input_name(); ?>" id="<?php bp_the_profile_field_input_name(); ?>">
 										<?php bp_the_profile_field_options(); ?>
 									</select>
@@ -186,7 +190,7 @@
 				    
 				    <?php do_action( 'bp_before_registration_submit_buttons' ); ?>
 				    <div class="submit">
-					<input type="submit" name="signup_submit" id="signup_submit" value="Cr&eacute;er mon compte" />
+					<input style=" font-size: 10pt; padding: 15px 0;" type="submit" name="signup_submit" id="signup_submit" value="Cr&eacute;er mon compte" />
 				    </div>
 				    <?php do_action( 'bp_after_registration_submit_buttons' ); ?>
 
