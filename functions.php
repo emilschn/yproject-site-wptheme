@@ -114,4 +114,10 @@ function yproject_my_files_only( $wp_query ) {
     return;
 }
 add_filter('parse_query', 'yproject_my_files_only' );
+
+function yproject_bbp_get_forum_title($title) {
+    $campaign_post = get_post($title);
+    return  $campaign_post->post_title;
+}
+add_filter('bbp_get_forum_title', 'yproject_bbp_get_forum_title');
 ?>
