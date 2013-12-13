@@ -95,6 +95,10 @@ body a {
     vertical-align: middle;
 }
 
+.padding-top {
+    padding-top: 45px;
+}
+
 h4 {
     font-weight: normal;
 }
@@ -417,7 +421,7 @@ div#home_bottom h1 {
 .post_bottom_desc h2, .post_bottom_desc_small h2 {
     color: #E6223C;
     font-size: 11pt;
-	text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 .post_bottom_infos {
@@ -866,7 +870,7 @@ ul.activity-list p {
 #nav :hover ul li {
     min-height: 30px;
     line-height: 20px;
-    width: 150px;
+    width: 200px;
     padding-left: 0px !important;
 }
 #nav .sfhover ul li a,
@@ -1042,7 +1046,8 @@ header.header_home {
 }
 #finish_subscribe {     
    width: 100%;        
-   text-align: center;     
+   text-align: center; 
+   display: inline-block;
 }       
         
 #finish_subscribe a {       
@@ -1232,7 +1237,7 @@ background-image:url("images/jycrois_gris.png");
 }
 
 #jcrois_pas{
-background-color: white;
+background-color: transparent;
 width: 100px;
 height: 110px;
 border: none;

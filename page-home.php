@@ -43,7 +43,7 @@
 	    <div style="width:960px; height:400px;">
 		<div style="width:480px; float:left;">
 		    <?php printHomePreviewProjectsTemp(1); ?>
-		    <div style="float: left"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/retrouver2.jpg" width="235" height="400">  </div>
+		    <div style="float: left; padding-left: 10px;"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/retrouver2.jpg" width="235" height="400">  </div>
 		    <div style="clear: both"></div>
 		</div>
 

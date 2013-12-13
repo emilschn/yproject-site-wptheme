@@ -90,17 +90,6 @@
 								    <?php 
 								    if (has_shortcode('mc4wp_form')) {
 									echo do_shortcode('[mc4wp_form]');
-								    } else {
-									$snsf_args = array("thanks" => __("Merci", "yproject"));
-									echo do_newsletter($snsf_args);
-									if (!isset($_POST['snsf-subscriber-email'])) {
-								    ?>
-									<form method="post" name="simple-newsletter-signup-form" id="snsf-form">
-									    <input type="text" name="snsf-subscriber-email" />
-									    <input type="submit" value="<?php _e('Sinscrire', 'yproject'); ?>" id="snsf-submit-button" />
-									</form>
-								    <?php
-									}
 								    }
 								    ?>
 								</li>

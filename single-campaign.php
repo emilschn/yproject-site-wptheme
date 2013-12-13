@@ -29,25 +29,25 @@
 					    
 					    <?php printPageBottomStart($post, $campaign); ?>
 					    
-					    <div><?php echo html_entity_decode($campaign->summary()); ?></div>
+					    <div style="padding-top: 25px;"><?php echo html_entity_decode($campaign->summary()); ?></div>
 
-					    <h2>En quoi consiste le projet ?</h2>
+					    <h2 class="padding-top">En quoi consiste le projet ?</h2>
 					    <span><?php the_content(); ?></span>
 					    <?php 
 						global $wp_embed; 
 						echo $wp_embed->run_shortcode( '[embed]' . $campaign->video() . '[/embed]' ); 
 					    ?>
 
-					    <h2>Quelle est l'opportunité économique du projet ?</h2>
+					    <h2 class="padding-top">Quelle est l'opportunité économique du projet ?</h2>
 					    <div><?php echo html_entity_decode($campaign->added_value()); ?></div>
 					    
-					    <h2>Quelle est l'utilité sociétale du projet ?</h2>
+					    <h2 class="padding-top">Quelle est l'utilité sociétale du projet ?</h2>
 					    <div><?php echo html_entity_decode($campaign->societal_challenge()); ?></div>
 
-					    <h2>Quel est le modèle économique du projet ?</h2>
+					    <h2 class="padding-top">Quel est le modèle économique du projet ?</h2>
 					    <div><?php echo html_entity_decode($campaign->economic_model()); ?></div>
 
-					    <h2>Qui porte le projet ?</h2>
+					    <h2 class="padding-top">Qui porte le projet ?</h2>
 					    <div><?php echo html_entity_decode($campaign->implementation()); ?></div>
 					</div>
 					

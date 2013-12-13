@@ -88,6 +88,14 @@
 			    <li class="page_item_out page_item_inverted">
 				<a class="page_item_inverted" href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a>
 				<ul>
+				    <?php
+					if (is_user_logged_in() && !ypcf_check_user_can_invest(false)) {
+					    $page_update_account = get_page_by_path('modifier-mon-compte'); 
+				    ?>
+				    <li class="page_item_out"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Terminer mon inscription', 'yproject'); ?></a></li>
+				    <?php
+					}
+				    ?>
 				    <li class="page_item_out"><a href="<?php echo wp_logout_url( wp_guess_url() ); ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
 				</ul>
 			    </li>
@@ -99,14 +107,6 @@
 			    <?php /* <li style="clear:both" class="only_on_mobile"></li> */ ?>
 			</ul>
 		    </div>
-		    <?php
-			if (is_user_logged_in() && !ypcf_check_user_can_invest(false)) {
-			    $page_update_account = get_page_by_path('modifier-mon-compte'); 
-		    ?>
-			<div id="finish_subscribe"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Terminer mon inscription', 'yproject'); ?></a></div>
-		    <?php
-			}
-		    ?>
 		</nav>
 		<div id="fb_infos">
 		    <?php echo $facebook_infos; ?>
