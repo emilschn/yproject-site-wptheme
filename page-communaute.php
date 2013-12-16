@@ -44,20 +44,20 @@
 			    }
 			?>
 			<br/>
-			<h2 class="underlined"><?php _e("Fil d'actualité", "yproject"); ?></h2>
+			
+			
+			<h2 class="underlined">Fil d&apos;activit&eacute;</h2>
+			<ul class="last_subscribers">
+			<?php // Affichage du fil d'actualité
+			if ( bp_has_activities( bp_ajax_querystring( 'activity' ).'&max=10' ) ) :
+			    while ( bp_activities() ) : bp_the_activity();
+				locate_template( array( 'activity/entry.php' ), true, false );
+			    endwhile;
+			endif; ?>
+			</ul>
 
-				<?php // Affichage du fil d'actualité ?>
-					<?php if ( bp_has_activities( bp_ajax_querystring( 'activity' ).'&max=10' ) )  : ?>
-    				<?php while ( bp_activities() ) : bp_the_activity(); ?>
- 
-        			<?php locate_template( array( 'activity/entry.php' ), true, false ); ?>
- 
-    		<?php endwhile; ?>
-			<?php endif; ?>
-
-			<?php $page_activities = get_page_by_path('activities'); ?>
-				<a href="<?php echo get_permalink($page_activities->ID); ?>"><?php echo __('Plus d\'actualités', 'yproject'); ?></a>
-				&gt;&gt;<br />
+			<?php $page_activities = get_page_by_path('activite'); ?>
+			<a href="<?php echo get_permalink($page_activities->ID); ?>">Plus d&apos;activit&eacute;</a>&nbsp;&gt;&gt;
 		    </div>
 
 		    <?php printCommunityMenu(); ?>
