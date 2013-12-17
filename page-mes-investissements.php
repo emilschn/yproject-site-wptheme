@@ -18,6 +18,28 @@ require_once("wp-content/themes/yproject/common.php");
 	    <div class="center">
 		<?php 
 		if (is_user_logged_in()) :
+		    //Si on a demandé de renvoyer le code
+		    if (isset($_GET['invest_id_resend']) && $_GET['invest_id_resend'] != '') {
+			$contractid = ypcf_get_signsquidcontractid_from_invest($_GET['invest_id_resend']);
+			$signsquid_infos = signsquid_get_contract_infos($contractid);
+			$current_user = wp_get_current_user();
+			if ($signsquid_infos != '' && $signsquid_infos->{'signatories'}[0]->{'email'} == $current_user->user_email) {
+			    if (ypcf_send_mail_purchase($_GET['invest_id_resend'], "send_code", $signsquid_infos->{'signatories'}[0]->{'code'})) {
+				?>
+				Votre code de signature de contrat a &eacute;t&eacute; renvoy&eacute; &agrave; l&apos;adresse <?php echo $current_user->user_email; ?>.<br />
+				<?php
+			    } else {
+				?>
+				<span class="errors">Il y a eu une erreur lors de l&apos;envoi du code. N&apos;h&eacute;sitez pas &agrave; nous contacter.</span><br />
+				<?php
+			    }
+			} else {
+			    ?>
+			    <span class="errors">Nous ne trouvons pas le contrat correspondant.</span><br />
+			    <?php
+			}
+		    }
+		    
 		    $args = array(
 			'author'    => get_current_user_id(),
 			'post_type' => 'withdrawal_order',

@@ -490,7 +490,7 @@ function printUserInvest($post_invest, $post_campaign) {
     $signsquid_infos = signsquid_get_contract_infos($contractid);
     $signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
     ?>
-    <li>
+    <li id="invest-<?php echo $post_invest->ID. '-' .$contractid; ?>">
 	<div class="user_history_title left">
 	    <a href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $post_campaign->post_title; ?></a><br />
 	    <div class="project_preview_item_progress">
@@ -537,9 +537,18 @@ function printUserInvest($post_invest, $post_campaign) {
 		</div>
 		
 		<?php
-		    //N'est que visible si la collecte est toujours en cours et que le paiement a bien été validé
-		    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && $signsquid_infos->{'status'} != 'Agreed') :
+		    //Boutons pour Annuler l'investissement | Recevoir le code à nouveau
+		    //Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
+		    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && is_object($signsquid_infos) && $signsquid_infos->{'status'} != 'Agreed') :
 			$page_cancel_invest = get_page_by_path('annuler-un-investissement');
+			if ($signsquid_infos != '' && is_object($signsquid_infos)):
+			    $page_my_investments = get_page_by_path('mes-investissements');
+		?>
+		<div class="project_preview_item_cancel">
+		    <a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $post_invest->ID; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a>
+		</div>
+		<?php
+			endif;
 		?>
 		<div class="project_preview_item_cancel">
 		    <a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $post_invest->ID; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
