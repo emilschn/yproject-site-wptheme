@@ -25,7 +25,7 @@
 
 	<?php if ( empty( $_POST['page'] ) ) : ?>
 
-		<ul id="activity-stream" class="activity-list item-list">
+		<ul class="com-activity-list">
 
 	<?php endif; ?>
 

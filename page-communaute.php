@@ -26,8 +26,9 @@
 				"meta_compare" => "<>"
 			    );
 			    $user_query = new WP_User_Query( $args ); 
-			    if ( ! empty( $user_query->results ) ) {
-				echo '<ul class="last_subscribers">';
+			    if ( ! empty( $user_query->results ) ) { ?>
+				<ul class="com-activity-list">
+				<?php
 				foreach ( $user_query->results as $user ) {
 				    $now = new DateTime(date("Y-m-d H:i:s"));
 				    $registration = new DateTime($user->user_registered);
@@ -39,15 +40,16 @@
 				    else if ($diff->i > 0) $time = $diff->format("%i minutes");
 				    else if ($diff->s > 0) $time = $diff->format("%s secondes");
 				    echo '<li>' . $user->display_name . __(" a rejoint WEDOGOOD - Il y a ", "yproject") . $time . '</li>';
-				}
-				echo '</ul>';
+				} ?>
+				</ul>
+				<?php
 			    }
 			?>
 			<br/>
 			
 			
 			<h2 class="underlined">Fil d&apos;activit&eacute;</h2>
-			<ul class="last_subscribers">
+			<ul class="com-activity-list">
 			<?php // Affichage du fil d'actualité
 			if ( bp_has_activities( bp_ajax_querystring( 'activity' ).'&max=10' ) ) :
 			    while ( bp_activities() ) : bp_the_activity();

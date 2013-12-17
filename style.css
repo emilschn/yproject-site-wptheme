@@ -540,11 +540,11 @@ div#home_bottom h1 {
 /* FIN CONNEXION PAGE */
 
 /* COMMUNTY */
-.last_subscribers {
+.com-activity-list {
     -webkit-padding-start: 0px;
     padding-right: 0px;
 }
-.last_subscribers li {
+.com-activity-list li {
     background-color: #F2F2F2;
     list-style: none;
     margin-bottom: 2px;
