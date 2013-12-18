@@ -49,6 +49,10 @@ YPUIFunctions = (function($) {
 		    YPUIFunctions.checkInvestInput();
 		});
 		
+		$("#link_validate_invest_amount").click(function() {
+		    $("#validate_invest_amount_feedback").show();
+		});
+		
 		$("#invest_form").submit(function() {
 		    return YPUIFunctions.checkInvestInput();
 		});
