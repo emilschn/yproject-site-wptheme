@@ -132,12 +132,6 @@
 			</ul>
 		    </div>
 		</nav>
-		<div id="fb_infos">
-		    <?php echo $facebook_infos; ?>
-		</div>
-		<div id="twitter_infos">
-		    <?php echo $twitter_infos; ?>
-		</div>
 		<div id="submenu_item_connection">
 		    <?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
 		    <ul>

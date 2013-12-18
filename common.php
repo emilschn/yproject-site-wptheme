@@ -75,32 +75,38 @@ function printPageBottomEnd($post, $campaign) {
 			$percent = min(100, $percent);
 			$width = 250 * $percent / 100;
 		?>
-		<div>
-		    <div class="project_full_progressbg"><div class="project_full_progressbar" style="width:<?php echo $width; ?>px"></div></div>
-		    <span class="project_full_percent"><?php echo $campaign->percent_completed(); ?></span>
-		</div>
+		    <div>
+			<div class="project_full_progressbg"><div class="project_full_progressbar" style="width:<?php echo $width; ?>px"></div></div>
+			<span class="project_full_percent"><?php echo $campaign->percent_completed(); ?></span>
+		    </div>
 
-		<div class="post_bottom_infos_item">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png"/>
-		    <?php echo $campaign->backers_count(); ?> personnes ont dèjà financé ce projet
-		</div>
+		    <div class="post_bottom_infos_item">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png"/>
+			<?php echo $campaign->backers_count(); ?> personnes ont dèjà financé ce projet
+		    </div>
 
-		<div class="post_bottom_infos_item">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
-		    <?php 
-			if ($vote_status == 'vote') {
-			    echo 0;
-			} else {
-			    $rest = $campaign->days_remaining();
-			    echo 'Il reste '.'<strong>'.$rest.'</strong>'.' jours pour participer à ce projet'; 
-			}
-			?>
-		</div>
+		    <div class="post_bottom_infos_item">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+			Il reste <strong><?php echo $campaign->days_remaining(); ?></strong> jours pour participer à ce projet.
+		    </div>
 
-		<div class="post_bottom_infos_item">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png"/>
-		    <?php echo $campaign->current_amount() . ' / ' . $campaign->goal(); ?>
-		</div>
+		    <div class="post_bottom_infos_item">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png"/>
+			<?php echo $campaign->current_amount() . ' / ' . $campaign->goal(); ?>
+		    </div>
+		
+		<?php
+		    else:
+		?>
+		    <div class="post_bottom_infos_item">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png"/>
+			<?php echo $campaign->nb_voters(); ?> personnes ont d&eacute;j&agrave; vot&eacute;
+		    </div>
+
+		    <div class="post_bottom_infos_item">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+			Il reste <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours pour voter
+		    </div>
 		
 		<?php
 		    endif; 
@@ -111,32 +117,28 @@ function printPageBottomEnd($post, $campaign) {
 			if ($vote_status != 'vote') :
 		    ?> 
 		    <div class="dark">
-			<?php 
-			    /* Lien Investissez */ $page_invest = get_page_by_path('investir');
-			    if ($campaign->vote() == 'vote') {
-			?>
-			    <a href="javascript:void(0);" onclick="javascript:alert('<?php echo __('Bient&ocirc;t !', 'yproject'); ?>');"><?php echo __('Investissez', 'yproject'); ?></a>
-			<?php	
-			    } else {
-			?>
 			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Investir', 'yproject'); ?></a>
-			<?php
-			    }
-			?>
 		    </div>
 		    <?php
 			else:
-			    // Nombre de jours restants					
-			    $dateJour = strtotime(date("d-m-Y"));
-			    $fin   = strtotime($post->campaign_end_vote);
-			    $jours_restants = (round(abs($fin - $dateJour)/60/60/24));
-			    if ($jours_restants > 0) {
-				do_shortcode('[yproject_crowdfunding_printPageVoteForm remaining_days='.$jours_restants.']');
+		    ?>
+		    <div id="project_vote_link" class="dark">
+			<a href="javascript:void(0);">Voter</a>
+		    </div>
+		    <div id="project_vote_zone" style="display: none;">
+		    <?php	
+			    if ($campaign->end_vote_remaining() > 0) {
+				do_shortcode('[yproject_crowdfunding_printPageVoteForm remaining_days='.$campaign->end_vote_remaining().']');
 			    } else {
 				do_shortcode('[yproject_crowdfunding_printPageVoteDeadLine]');
 			    }
+		    ?>
+		    </div>
+		    <?php
 			endif; 
 		    ?>
+		    
+		    
 		    <div id="share_btn" class="dark">
 			<a href="javascript:void(0)"><?php echo __('Participer autrement', 'yproject'); ?></a>
 		    </div>
@@ -151,7 +153,7 @@ function printPageBottomEnd($post, $campaign) {
 		    </div>
 		     <div class="light">
                         <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/com.png"/>&nbsp;
-			<?php /* Lien statistiques*/ $forum = get_page_by_path('forum'); ?>
+			<?php $forum = get_page_by_path('forum'); ?>
 			<a href="<?php echo get_permalink($forum->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Commentaires', 'yproject'); ?></a>
 		    </div>
 		    <?php /*
@@ -372,7 +374,7 @@ function printSinglePreview($i, $vote) {
 		'post_parent' => $post->ID,
 		'post_mime_type' => 'image')
 	    );
-	    if ($attachments) $image_src = wp_get_attachment_image_src($attachments[0]->ID, "medium");
+	    if ($attachments) $image_src = wp_get_attachment_image_src($attachments[0]->ID, "thumbnail");
 	    ?>
 
 	    <div class="project_preview_item_part">

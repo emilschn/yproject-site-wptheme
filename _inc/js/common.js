@@ -13,6 +13,10 @@ YPUIFunctions = (function($) {
 	    if ($("#finish_subscribe").length > 0) {		
 		$("#container").css('padding-top', "55px");		
 	    }
+	    
+	    if ($("#project_vote_link").length > 0) {
+		$("#project_vote_link").click(function() {$("#project_vote_zone").show();});
+	    }
 
 	    if ($("#fundingproject").val()) { 				
 		$("#goalsum_fixe").click(function() { $("#goalsum_flexible_param").hide(); $("#goalsum_fixe_param").show();}); 		
@@ -139,7 +143,7 @@ YPUIFunctions = (function($) {
 YPMenuFunctions = (function($){
     return {
 	initMenuBar: function() {
-	    $("#menu_item_facebook").hover(function() {
+	    /*$("#menu_item_facebook").hover(function() {
 		$("#fb_infos").css("top", $("#navigation").position().top + $("#navigation").height());
 		$("#fb_infos").css("left", $("#menu_item_facebook").position().left);
 		$("#fb_infos").show();
@@ -155,7 +159,7 @@ YPMenuFunctions = (function($){
 		
 	    }, function() {
 		$("#twitter_infos").hide();
-	    });
+	    });*/
 	    
 	    $("#menu_item_connection").mouseenter(function(){
 		$("#submenu_item_connection").css("top", $("#navigation").position().top + $("#navigation").height());
