@@ -66,7 +66,6 @@ function printPageBottomEnd($post, $campaign) {
 						
     $vote_status = html_entity_decode($campaign->vote());
     ?>
-	    </div>
 
 	    <div class="left post_bottom_infos">
 		<?php 
@@ -117,6 +116,7 @@ function printPageBottomEnd($post, $campaign) {
 			if ($vote_status != 'vote') :
 		    ?> 
 		    <div class="dark">
+			<?php $page_invest = get_page_by_path('investir'); ?>
 			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Investir', 'yproject'); ?></a>
 		    </div>
 		    <?php

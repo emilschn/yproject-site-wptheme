@@ -29,13 +29,13 @@
  
 body {
     background-color: #FFF;
-    color: #000;
+    color: #2B2C2C;
     font-family: Arial, sans-serif;
     margin: -13px 0px 0px 0px;
 }
 
 body a {
-    color: #EA4F51;
+    color: #FF494C;
 	text-decoration: none;
 }
 
@@ -74,9 +74,9 @@ body a {
 }
 
 .underlined, .underlined_arrow {
-    color: #E6223C;
+    color: #FF494C;
     text-transform: uppercase;
-    border-bottom: 1px solid #E6223C;
+    border-bottom: 1px solid #FF494C;
     font-weight: normal;
     font-size: 13pt !important;
 }
@@ -115,7 +115,7 @@ h4 {
 /* PROJECT PREVIEW */
 .projects_current {
     width: 661px;
-    color: #000;
+    color: #2B2C2C;
     background-color: #FFFFFF;
 }
 .projects_current_temp {
@@ -123,11 +123,8 @@ h4 {
 }
 .projects_vote {
     width: 221px;
-    color: #000;
-    background-color: #DFE2E4;
-}
-#projects_finished {
-    color: #29ABBA;
+    color: #2B2C2C;
+    background-color: #EEECED;
 }
     
 .projects_preview {
@@ -168,25 +165,24 @@ h4 {
     text-decoration: none;
 }
 .projects_current .project_preview_item h2 a {
-    color: #000;
+    color: #2B2C2C;
 }
 .projects_vote .project_preview_item h2 a {
-    color: #000;
+    color: #2B2C2C;
 }
-#projects_finished .project_preview_item h2 a {
-    color: #29ABBA;
-}
+
 
 .project_preview_item_img {
     width: 200px;
-    height: 100px;
+    height: 150px;
 }
 
 .project_preview_item_desc {
     margin-top: 3px;
     margin-bottom: 3px;
-    color: #000;
-    height: 140px; 
+    color: #2B2C2C;
+    height: auto; 
+    padding: 10px 0;
 }
 
 .project_preview_item_pictos {
@@ -210,13 +206,13 @@ h4 {
 .project_preview_item_progress {
     background: none repeat scroll 0 0 #FFFFFF;
     height: 20px;
-    color: #232323;
+    color: #2B2C2C;
     padding-top: 15px !important;
     padding-bottom: 10px !important;
 }
 
 .project_preview_item_progress a {
-    color: #232323;
+    color: #2B2C2C;
 }
 
 .project_preview_item_progressbg {
@@ -229,17 +225,17 @@ h4 {
 }
 
 .projects_current .project_preview_item_progressbg {
-    background-color: #EDEEEE;
+    background-color: #E1E3E2;
 }
 .projects_current .project_preview_item_progressbar {
-    background-color: #47494B;
+    background-color: #333333;
 }
 
 #projects_finished .project_preview_item_progressbg {
-    background-color: #EDEEEE;
+    background-color: #E1E3E2;
 }
 #projects_finished .project_preview_item_progressbar {
-    background-color: #29ABBA;
+    background-color: #FE494C;
 }
 
 .project_preview_item_progressprint {
@@ -250,7 +246,7 @@ h4 {
 
 #home_middle {
     margin: 30px 0px 20px 0px;
-    color: #FFF;
+    color: #2B2C2C;
     padding-top: 15px;
     padding-bottom: 30px;
 }
@@ -275,7 +271,7 @@ h4 {
 }
 
 #home_middle span.light a {
-    color: #515050;
+    color: #333333;
     text-decoration:none;
 }
 
@@ -297,7 +293,7 @@ h4 {
     background: url("images/grenades.png");
     background-position: center top;
     background-repeat: no-repeat;
-    color: #000;
+    color: #2B2C2C;
     width: 960px;
     margin: auto;
 }
@@ -305,7 +301,7 @@ h4 {
 .round_title_left, .round_title_right {
     width: 140px;
     height: 100px;
-    padding-top: 70px;
+    padding-top: 80px;
     color: #FFF;
     font-size: 14pt;
     text-transform: uppercase;
@@ -324,7 +320,7 @@ h4 {
 }
 
 div#home_bottom h1 {
-    color: #000;
+    color: #2B2C2C;
     text-align: center;
     font-family: Arial, sans-serif;
     text-transform: uppercase;
@@ -344,7 +340,7 @@ div#home_bottom h1 {
 
 /* PROJECTS */
 .projects_vote_zone {
-    background-color: #D6DCDE;
+    background-color: #E1E3E2;
     margin-top: 10px;
 }
 .projects_founding_zone {
@@ -361,15 +357,16 @@ div#home_bottom h1 {
 
 /* PROJECT PAGE */
 #post_top_bg {
-    background-color: #EB5A50; 
+    background-color: #FF494C; 
 } 
 
-#post_bottom_bg {
-    background-color: #FFF; 
-} 
+/*#post_bottom_bg {
+    background: #f3f3f3;
+    background-image:url(../yproject/images/fond_site.jpg) !important; 
+    background-repeat: repeat-x;    
+}*/
 
 #post_top_title {
-    background-color: #C1D6DC;
     height: 240px;
     position: relative;
 }
@@ -395,7 +392,7 @@ div#home_bottom h1 {
     bottom: 0px;
     width: 920px;
     color: #FFF;
-	font-size:12px;
+    font-size:12px;
     padding: 5px 20px;
 }
 
@@ -406,7 +403,7 @@ div#home_bottom h1 {
 
 #post_bottom_content {
     background-color: #FFF;
-    padding-top: 10px;
+    padding: 20px 0;
 }
 
 .post_bottom_desc, .post_bottom_desc_small {
@@ -421,7 +418,7 @@ div#home_bottom h1 {
 }
 
 .post_bottom_desc h2, .post_bottom_desc_small h2 {
-    color: #E6223C;
+    color: #FE494C;
     font-size: 11pt;
     text-transform: uppercase;
 }
@@ -437,13 +434,13 @@ div#home_bottom h1 {
 }
 
 .project_full_progressbg {
-    background-color: #EDEFEF;
+    background-color: #EEECED;
     width: 250px;
     display: inline-block;
 }
 
 .project_full_progressbar {
-    background-color: #4B4A4E;
+    background-color: #333333;
     height: 35px;
 }
 
@@ -454,21 +451,32 @@ div#home_bottom h1 {
     text-align: right;
 }
 
-.post_bottom_buttons div {
-	border-bottom: 1px solid #FFFFFF;
-    font-family: DINPro-Medium, Arial, sans-serif;
+.post_bottom_buttons div {    
+    border-bottom: 1px solid #FFFFFF;
+    font-family: DINPro-Medium,Arial,sans-serif;
     font-size: 10pt;
-    padding: 15px 0px 15px 0px;
-    text-transform: uppercase;
+    padding: 15px 0;
     text-align: center;
+    text-transform: uppercase;
     width: 100%;
 }
+
+.post_bottom_buttons_connexion div { 
+    border-bottom: 1px solid #FFFFFF;
+    font-family: DINPro-Medium, Arial, sans-serif;
+    font-size: 9pt;
+    text-transform: uppercase;
+    width: 200px;
+    height: 25px;
+    background-color: #333333;
+}
+
 .post_bottom_buttons div a {
     text-decoration: none;
 }
 
 .post_bottom_buttons div.dark {
-    background-color: #515050;
+    background-color: #333333;
     border-bottom: 1px solid white;
 }
 
@@ -481,13 +489,13 @@ div#home_bottom h1 {
 }
 
 .post_bottom_buttons div.light a {
-    color: #515050;
+    color: #333333;
 }
 
 #popup_share {
     display: none;
     position: absolute;
-    background-color: #515050;
+    background-color: #333333;
     border: 1px solid #000;
     text-align: center;
     padding-top: 8px;
@@ -495,7 +503,7 @@ div#home_bottom h1 {
 
 #popup_share a{
     font-family: Arial, sans-serif;
-    color: #FFF;
+    color: #2B2C2C;
     text-decoration: none;
     text-transform: uppercase;
     line-height: 200%;
@@ -513,7 +521,7 @@ div#home_bottom h1 {
     
 #yp_admin_bar a {
     text-decoration: none;
-    color: #000;
+    color: #2B2C2C;
 }
 /* FIN PROJECT PAGE */
 
@@ -525,8 +533,8 @@ div#home_bottom h1 {
 }
 
 #signup_submit {
-    background-color: #515050;
-    color: #FFF;
+    background-color: #333333;
+    color: #2B2C2C;
     border: 0px;
     width: 390px;
     padding: 5px 0px 5px 0px;
@@ -536,8 +544,7 @@ div#home_bottom h1 {
         
 /* CONNEXION PAGE */        
 .login_fail {       
-   color : red;        
-   padding-bottom: 10px;       
+   color : red;              
 }       
 /* FIN CONNEXION PAGE */
 
@@ -562,7 +569,7 @@ div#home_bottom h1 {
 
 .category-wedogood .posttitle {
     font-size: 2.1em;
-    color: #E6223C;
+    color: #FF494C;
     text-transform: uppercase;
 }
 /* FIN BLOG */
@@ -636,11 +643,11 @@ ul.activity-list li {
 }
 
 ul.activity-list .activity-header { 
-    color: #E6223C;
+    color: #FF494C;
 }
 
 ul.activity-list a { 
-    color: #E6223C;
+    color: #FF494C;
 }
 
 ul.activity-list p { 
@@ -649,6 +656,7 @@ ul.activity-list p {
 }
 
 #item-submenu {
+    color: #2B2C2C;
     background-color: #E1E3E2;
     list-style: none;
     display: block;
@@ -666,23 +674,27 @@ ul.activity-list p {
     padding: 15px;
 }
 
+#item-submenu li a {
+    color: #2B2C2C;
+}
+
 #item-submenu li.selected {
-    background-color: #E6223C;
-    color: #FFF;
+    background-color: #FF494C;
+    color: #2B2C2C;
 }
 
 #item-submenu li.selected a {
-    color: #FFF;
+    color: #2B2C2C;
 }
 
 #item-submenu li.sfhover,
 #item-submenu li:hover {
-    background: #E6223C;
+    background: #FE494C;
 }
 
 #item-submenu li.sfhover a,
 #item-submenu li:hover a {
-    color: #FFF;
+    color: #2B2C2C;
 }
 
 .standard-form {
@@ -717,10 +729,10 @@ ul.activity-list p {
     text-transform: uppercase;
 }
 .user_history_title .project_preview_item_progressbg {
-    background-color: #EDEEEE;
+    background-color: #EEECED;
 }
 .user_history_title .project_preview_item_progressbar {
-    background-color: #47494B;
+    background-color: #333333;
 }
 
 .user_history_pictos .project_preview_item_pictos {
@@ -738,10 +750,10 @@ ul.activity-list p {
     float: left;
     margin: 5px;
     padding: 5px;
-    background-color: #515050;
+    background-color: #333333;
 }
 .user_history_pictos .project_preview_item_cancel a {
-    color: #FFF;
+    color: #2B2C2C;
 }
 /* FIN MON COMPTE */
 
@@ -770,7 +782,6 @@ ul.activity-list p {
     margin-top: 0px;
 }
 #nav li {
-    background-color: #333333;
     float: left;
     vertical-align: middle;
     height: 50px;
@@ -798,7 +809,7 @@ ul.activity-list p {
     padding-top: 0px !important;
 }
 .page_item_out label {
-    color: #FFF;
+    color: #2B2C2C;
     text-transform: none;
 }
 #nav li li {
@@ -809,7 +820,7 @@ ul.activity-list p {
 }
 
 #nav li a {
-    color: #DDDDDD;
+    color: #E1E3E2;
     padding: 0px 9px;
     text-decoration: none;
     text-align: left;
@@ -819,7 +830,7 @@ ul.activity-list p {
 #nav > li.current-menu-item a,
 #nav > li.current_page_item a,
 #nav > li.current_page_ancestor a {
-    color: #DDDDDD;
+    color: #E1E3E2;
 }
 
 
@@ -827,7 +838,7 @@ ul.activity-list p {
 #nav > ul li:hover a {
     list-style: none;
     background: #333333;
-    color: #DDDDDD;
+    color: #E1E3E2;
 }
 #nav li.sfhover,
 #nav li:hover {
@@ -852,7 +863,7 @@ ul.activity-list p {
 #nav :hover ul li > a {
     list-style: none;
     background: #333333;
-    color: #DDDDDD;
+    color: #E1E3E2;
 }
 #nav .sfhover ul .sfhover > ul,
 #nav :hover ul :hover > ul {
@@ -866,7 +877,7 @@ ul.activity-list p {
 #nav ul li:hover > a {
     list-style: none;
     background-color: #333333;
-    color: #DDDDDD;
+    color: #E1E3E2;
 }
 #nav .sfhover ul li,
 #nav :hover ul li {
@@ -877,21 +888,21 @@ ul.activity-list p {
 }
 #nav .sfhover ul li a,
 #nav :hover ul li a {
-    padding: 5px 5px 5px 10px;
+    padding: 5px 5px 5px 5px;
 }
 
 #fb_infos {
     position: absolute;
     display: none;
     border: 1px solid #000;
-    background-color: #FFF;
+    background-color: #2B2C2C;
 }
 
 #twitter_infos {
     position: absolute;
     display: none;
     border: 1px solid #000;
-    background-color: #FFF;
+    background-color: #2B2C2C;
 }
 
 #submenu_item_connection {
@@ -908,7 +919,7 @@ ul.activity-list p {
 }
 
 #submenu_item_connection label { 
-    color: #000;
+    color: #2B2C2C;
 }
 #sidebar-user-login { 
     width: 227px;
@@ -950,8 +961,7 @@ ul.activity-list p {
     vertical-align: middle;
 }
 #submenu_item_connection div#submenu_item_connection_register {
-    background-color: #3F3F41;
-    height: 25px;
+    background-color: #333333;
     text-transform: uppercase;
 }
 #submenu_item_connection div.social_connect_login_facebook, div#connexion_facebook_container {
@@ -964,7 +974,7 @@ ul.activity-list p {
 }
 #submenu_item_connection div#submenu_item_connection_login {
     background-color: #FFF;
-    color: #000;
+    color: #2B2C2C;
     margin-top: 3px;
     height: 25px;
     text-transform: uppercase;
@@ -977,14 +987,13 @@ div#connexion_facebook_container {
     margin-bottom: 3px;
 }
 div#connexion_facebook_container span {
-    border-left: 1px solid #FFF;
     padding: 2px 10px 6px 3px;
 }
 /* FIN NAV */
 
 /* HEADER */
 header {
-    background-color: #E84651;
+    background-color: #FF494C;
     background-image: url("images/header.png");
     background-position: center;
     min-width: 960px;
@@ -1053,14 +1062,14 @@ header.header_home {
 }       
         
 #finish_subscribe a {       
-   color: #DDDDDD;     
+   color: #E1E3E2;     
    text-decoration: none;      
 }
 /* FIN HEADER */
 
 /* FOOTER */
 footer {
-    background-color: #EB5A50;
+    background-color: #FF494C;
     background-image: url("images/footer.png");
     min-width: 960px;
 }
@@ -1209,7 +1218,7 @@ footer span {
     color: red;
 }
 .bbp-template-notice{
-    background-color: #E84651;
+    background-color: #FF494C;
 }
 /*FIN BBPRESS*/
 /**FAQ***********************/
@@ -1274,7 +1283,7 @@ background-image:url("images/jycrois_gris_rouge.png");
 }
 
 #bbp_search_submit {
-    background-color: #FF5050;
+    background-color: #FF494C;
     border: medium none;
     color: #FFF;
     text-transform: uppercase;
@@ -1282,14 +1291,14 @@ background-image:url("images/jycrois_gris_rouge.png");
 }
 
 #bbp_search {
-   background-color: #FBFBFB;
+   background-color: #FFF;
    border: medium none;
    padding: 4px 10px;
 }
 
 #bbpress-forums li.bbp-header {
    text-transform: uppercase;
-   color: #FF5050;
+   color: #FF494C;
 }
 
 .bbp-forum-info a {
@@ -1302,7 +1311,7 @@ background-image:url("images/jycrois_gris_rouge.png");
 }
 
 #bbp_topic_submit {
-   background-color: #FF5050;
+   background-color: #FF494C;
     border: medium none;
     color: #FFFFFF;
     padding: 3px 10px;
@@ -1334,7 +1343,7 @@ background-image:url("images/jycrois_gris_rouge.png");
 }
 
 .bbp-template-notice.info {
-    background-color: #DFE7ED !important;
+    background-color: #EEECED !important;
     border: none;
     border-radius: 0px;
 }

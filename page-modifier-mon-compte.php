@@ -44,10 +44,26 @@ require_once("wp-content/themes/yproject/common.php");
 			    <?php } ?>
 				
 		    <?php }; ?>
+		    <?php 
+			if (isset($_SESSION['error_invest'])) {
+			    for ($i = 0; $i < count($_SESSION['error_invest']); $i++) {
+			    ?>
+			    <span class="errors"><?php echo $_SESSION['error_invest'][$i]; ?></span><br />
+			    <?php
+			    }
+			    unset($_SESSION['error_invest']);
+			}
+		    ?>
 
 		    <form name="update-form" class="standard-form" action="<?php echo get_permalink($page_update_account->ID); ?>" method="post">
 
 			<h4><?php _e('Ces informations sont n&eacute;cessaires pour investir dans un projet.', 'yproject'); ?></h4>
+			<label for="update_gender" class="standard-label">Vous &ecirc;tes</label>
+			<select name="update_gender" id="update_gender">
+			    <option value="female"<?php if ($current_user->get('user_gender') == "Female") echo ' selected="selected"';?>>une femme</option>
+			    <option value="male"<?php if ($current_user->get('user_gender') == "Male") echo ' selected="selected"';?>>un homme</option>
+			</select><br />
+			
 			<label for="update_firstname" class="standard-label"><?php _e( 'Pr&eacute;nom', 'yproject' ); ?></label>
 			<input type="text" name="update_firstname" id="update_firstname" value="<?php echo $current_user->user_firstname; ?>" /><br />
 
@@ -77,8 +93,10 @@ require_once("wp-content/themes/yproject/common.php");
 				<?php }
 			    ?>
 			</select>
-
 			<br />
+
+			<label for="update_birthplace" class="standard-label">Ville de naissance</label>
+			<input type="text" name="update_birthplace" id="update_birthplace" value="<?php echo $current_user->get('user_birthplace'); ?>" /><br />
 
 			<?php require_once("country_list.php"); ?>
 			<label for="update_nationality" class="standard-label"><?php _e( 'Nationalit&eacute;', 'yproject' ); ?></label>
