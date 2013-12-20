@@ -99,7 +99,24 @@ function printPageBottomEnd($post, $campaign) {
 		?>
 		    <div class="post_bottom_infos_item">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png"/>
-			<?php echo $campaign->nb_voters(); ?> personnes ont d&eacute;j&agrave; vot&eacute;
+			<?php
+			$nbvoters = $campaign->nb_voters();
+			
+			if ($nbvoters == 1) :
+			?>
+			1 personne a d&eacute;j&agrave; vot&eacute;
+			<?php 
+			elseif ($nbvoters > 1) :
+			    echo $nbvoters;
+			?>
+			personnes ont d&eacute;j&agrave; vot&eacute;
+			<?php 
+			else :
+			?>
+			Personnes n'a vot&eacute;. Soyez le premier !
+			<?php  
+			endif;
+			?>
 		    </div>
 
 		    <div class="post_bottom_infos_item">
@@ -142,6 +159,15 @@ function printPageBottomEnd($post, $campaign) {
 		    <div id="share_btn" class="dark">
 			<a href="javascript:void(0)"><?php echo __('Participer autrement', 'yproject'); ?></a>
 		    </div>
+		    <div id="share_btn_zone" style="display: none;" class="light">
+			<?php /*<iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode(get_permalink( $post->ID )); ?>&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=30" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:20px; text-align: center" allowTransparency="true"></iframe>*/ ?>
+			<a href="http://www.facebook.com/sharer.php?u=<?php echo urlencode(get_permalink( $post->ID )); ?>" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_bouton_partager.png" /></a>
+			<br />
+
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-via="yproject_co" data-lang="fr"><?php echo __('Partager sur Twitter', 'yproject'); ?></a>
+			<br />
+		    </div>
 		    <div class="light">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/actu.png"/>&nbsp;
 			<?php
@@ -166,18 +192,6 @@ function printPageBottomEnd($post, $campaign) {
 	    </div>
 
 	    <div style="clear: both"></div>
-	</div>
-		    
-	<div id="popup_share">
-	    <?php /*<iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode(get_permalink( $post->ID )); ?>&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=30" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:20px; text-align: center" allowTransparency="true"></iframe>*/ ?>
-	    <a href="http://www.facebook.com/sharer.php?u=<?php echo urlencode(get_permalink( $post->ID )); ?>" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_bouton_partager.png" /></a>
-	    <br />
-
-	    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-	    <a href="https://twitter.com/share" class="twitter-share-button" data-via="yproject_co" data-lang="fr"><?php echo __('Partager sur Twitter', 'yproject'); ?></a>
-	    <br />
-
-	    <a id="popup_share_close" href="javascript:void(0)">[<?php echo __('Fermer', 'yproject'); ?>]</a>
 	</div>
     </div>
     <?php

@@ -184,10 +184,7 @@ YPMenuFunctions = (function($){
 	    });
 	    
 	    $("#share_btn").mouseup(function() {
-		$("#popup_share").css("top", $("#share_btn").position().top + $("#share_btn").height() + 20);
-		$("#popup_share").css("left", $("#share_btn").position().left);
-		$("#popup_share").width($("#share_btn").width() - 2);
-		$("#popup_share").toggle();
+		$("#share_btn_zone").show();
 	    });
 	    
 	    $("#popup_share_close").mouseup(function() {

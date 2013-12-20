@@ -429,8 +429,12 @@ div#home_bottom h1 {
 }
 
 .post_bottom_infos_item {
-    margin: 5px 10px 5px 10px;
+    margin: 5px 10px;
     font-size: 10pt;
+}
+
+.post_bottom_infos_item img {
+    width: 30px;
 }
 
 .project_full_progressbg {
@@ -1367,4 +1371,80 @@ background-image:url("images/jycrois_gris_rouge.png");
 
 .qa-faq-title a {
     text-decoration: none;
+}
+
+
+/*VOTE*/
+
+.ypvote-form input[type=text] {
+    font-size: 12px;
+    padding: 4px;
+}
+
+.ypvote-form-submit-button{
+    margin: 5px 20px;
+    background: #333333;
+    color: #FFF;
+    border: medium none;
+    padding: 3px 8px;
+    text-transform: uppercase;
+}
+
+.ypvote-form {
+    font-size: 12px;
+    padding: 10px;
+    font-family: Arial,sans-serif;
+}
+
+#project_vote_zone {
+    padding-top: 0px;
+    width: 310px;
+}
+
+#project_vote_zone strong {
+    font-size: 15px;
+    line-height: 30px;
+}
+
+#project_vote_zone textarea {
+    padding-top: 10px;
+    border: 1px solid #B7B7B7;
+    width: 285px;
+    margin-top: 10px;
+}
+
+#project_vote_zone em {
+    color: #B7B7B7;
+    font-size: 10px;
+}
+
+#project_vote_zone input {
+    background: none repeat scroll 0 0 #FFF;
+    color: #2B2C2C;
+    border: medium none;
+    padding: 3px 8px;
+}
+
+
+.ypvote-form input[type=submit] {
+    background: none repeat scroll 0 0 #333333 !important;
+    color: #FFF !important;
+    padding: 3px 8px;
+    text-transform: uppercase !important;
+    margin-left: 120px !important;
+}
+
+#pret-content #sum { 
+    text-align: right; 
+    margin: 0 5px;
+}
+
+#project_vote_zone select {
+    margin-top: 5px;
+    width: 200px;
+}
+
+.errors {
+    color: #FE494C;
+    text-transform: none !important;
 }

@@ -16,6 +16,8 @@ function yproject_setup() {
 }
 add_action( 'after_setup_theme', 'yproject_setup', 15 );
 
+if ( ! isset( $content_width ) ) $content_width = 960;
+
 /**
  * Redirige les erreurs de login
  * @param type $username
