@@ -40,7 +40,7 @@
 	    <div style="clear: both"></div> */ ?>
 
 
-	    <div style="width:960px; height:400px;">
+	    <div style="width:960px;">
 		<div style="width:480px; float:left;">
 		    <?php printHomePreviewProjectsTemp(1); ?>
 		    <div style="float: left; padding-left: 10px;"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/retrouver2.jpg" width="235" height="400">  </div>
@@ -51,6 +51,7 @@
 		    <a style="border:none;" href="<?php $page_connexion_register = get_page_by_path('register'); echo get_permalink($page_connexion_register->ID); ?>"><img style="padding-left:60px; padding-bottom:10px;" src="<?php echo get_stylesheet_directory_uri(); ?>/images/inscription.jpg" width="410px" height="130px" /></a><br />
 		    <a style="border:none;" href="<?php $page_new_project = get_page_by_path('reveler-un-projet'); echo get_permalink($page_new_project->ID); ?>"><img style="padding-left:60px; padding-top:10px;" src="<?php echo get_stylesheet_directory_uri(); ?>/images/signaler.jpg" width="410px" height="130px" /></a>
 		</div>
+		<div style="clear: both;"></div>
 	    </div>
 	</div>
     </div>

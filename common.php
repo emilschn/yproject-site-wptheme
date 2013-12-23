@@ -130,7 +130,12 @@ function printPageBottomEnd($post, $campaign) {
 
 		    <div class="post_bottom_infos_item">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+			<?php $remaining_vote_days = $campaign->end_vote_remaining(); ?>
+			<?php if ($remaining_vote_days > 0) : ?>
 			Il reste <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours pour voter
+			<?php else: ?>
+			Le vote est termin&eacute;
+			<?php endif; ?>
 		    </div>
 		
 		<?php
@@ -378,9 +383,7 @@ function printSinglePreview($i, $vote) {
     
     $days_remaining = $campaign->days_remaining();
     if ($vote) {
-	$dateJour = strtotime(date("d-m-Y"));
-	$fin   = strtotime($post->campaign_end_vote);
-	$days_remaining = (round(abs($fin - $dateJour)/60/60/24));
+	$days_remaining = $campaign->end_vote_remaining();
     }
     ?>
     <div class="projects_preview<?php if ($vote) { ?> projects_vote<?php } else { ?> projects_current projects_current_temp<?php } ?>">

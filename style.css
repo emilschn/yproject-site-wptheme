@@ -1246,21 +1246,21 @@ footer span {
 }
 
 /*J'Y CROIS*/
-#jcrois{
+#jcrois, #jcrois_pas{
 background-color: transparent;
 width: 100px;
 height: 110px;
 border: none;
 cursor: pointer;
+padding-top: 75px;
+padding-right: 10px;
+}
+
+#jcrois {
 background-image:url("images/jycrois_gris.png");
 }
 
-#jcrois_pas{
-background-color: transparent;
-width: 100px;
-height: 110px;
-border: none;
-cursor: pointer;
+#jcrois_pas {
 background-image:url("images/jycrois_gris_rouge.png");
 }
 
