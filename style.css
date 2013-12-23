@@ -434,7 +434,7 @@ div#home_bottom h1 {
 }
 
 .post_bottom_infos_item img {
-    width: 30px;
+    width: 25px;
 }
 
 .project_full_progressbg {
@@ -482,10 +482,12 @@ div#home_bottom h1 {
 .post_bottom_buttons div.dark {
     background-color: #333333;
     border-bottom: 1px solid white;
+    color: #FFF
 }
 
 .post_bottom_buttons div.light {
     background-color: #F2F2F2;
+    color: #FFF
 }
     
 .post_bottom_buttons div.dark a {
@@ -520,12 +522,14 @@ div#home_bottom h1 {
 #yp_admin_bar {
     padding: 10px 10px 10px 20px;
     background-color: #E1E3E2;
-	width:auto;
+    width:auto;
+    font-size:13px;
 }
     
 #yp_admin_bar a {
     text-decoration: none;
     color: #2B2C2C;
+    font-size:13px;
 }
 /* FIN PROJECT PAGE */
 
@@ -538,7 +542,7 @@ div#home_bottom h1 {
 
 #signup_submit {
     background-color: #333333;
-    color: #2B2C2C;
+    color: #FFF;
     border: 0px;
     width: 390px;
     padding: 5px 0px 5px 0px;
@@ -674,7 +678,7 @@ ul.activity-list p {
     background-color: #E1E3E2;
     float: left;
     border-right: 5px solid #FFF;
-    font-family: DINPro-Medium, Arial, sans-serif;
+    font-family: Arial,sans-serif;
     padding: 15px;
 }
 
@@ -688,7 +692,7 @@ ul.activity-list p {
 }
 
 #item-submenu li.selected a {
-    color: #2B2C2C;
+    color: #FFF;
 }
 
 #item-submenu li.sfhover,
@@ -937,7 +941,7 @@ ul.activity-list p {
 #sidebar-wp-submit {
     width: 55px;
     font-size: 9pt;
-    background: none repeat scroll 0 0 #333333;
+    background: none repeat scroll 0 0 #333333 !important;
     border: medium none;
     color: #FFFFFF;
     padding: 3px 8px;
@@ -1447,4 +1451,110 @@ background-image:url("images/jycrois_gris_rouge.png");
 .errors {
     color: #FE494C;
     text-transform: none !important;
+}
+
+
+
+/*FORMULAIRE REVELER UN PROJET*/
+
+.wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email input {
+    border: none;
+}
+
+.wpcf7-form-control input {
+    border: none;
+}
+
+.wpcf7-captchar input {
+    border: none;
+}
+
+/*TEST MENU DEROULANT*/
+
+.custom-dropdown--large {
+    font-size: 1.5em;
+}
+
+.custom-dropdown--small {
+    font-size: .7em;
+}
+
+.custom-dropdown__select{
+    font-size: inherit; /* inherit size from .custom-dropdown */
+    padding: .5em; /* add some space*/
+    margin: 0; /* remove default margins */
+}
+
+.custom-dropdown__select--white {
+    background-color: #fff;
+    color: #444;    
+}
+
+@supports (pointer-events: none) and
+      ((-webkit-appearance: none) or
+      (-moz-appearance: none) or
+      (appearance: none)) {
+
+    .custom-dropdown {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .custom-dropdown__select {
+        padding-right: 2.5em; /* accommodate with the pseudo elements for the dropdown arrow */
+        border: 0;
+        border-radius: 3px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;    
+    }
+
+    .custom-dropdown::before,
+    .custom-dropdown::after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .custom-dropdown::after { /*  Custom dropdown arrow */
+        content: "\25BC";
+        height: 1em;
+        font-size: .625em;
+        line-height: 1;
+        right: 1.2em;
+        top: 50%; margin-top: -.5em;
+    }
+
+    .custom-dropdown::before { /*  Custom dropdown arrow cover */
+        width: 2em;
+        right: 0; top: 0; bottom: 0;
+        border-radius: 0 3px 3px 0;
+    }
+
+    .custom-dropdown__select[disabled] {
+        color: rgba(0,0,0,.3);
+    }
+
+    .custom-dropdown.custom-dropdown--disabled::after {
+        color: rgba(0,0,0,.1);
+    }
+
+    /* White dropdown style */
+    .custom-dropdown--white::before {
+        top: .5em; bottom: .5em;
+        background-color: #fff;
+        border-left: 1px solid rgba(0,0,0,.1);
+    }
+
+    .custom-dropdown--white::after {
+        color: rgba(0,0,0,.9);
+    }
+
+    /* FF only temp fix */
+    @-moz-document url-prefix() {
+        .custom-dropdown__select              { padding-right: .9em }
+        .custom-dropdown--large .custom-dropdown__select { padding-right: 1.3em }
+        .custom-dropdown--small .custom-dropdown__select { padding-right: .5em }
+    }
 }

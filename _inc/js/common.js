@@ -13,10 +13,6 @@ YPUIFunctions = (function($) {
 	    if ($("#finish_subscribe").length > 0) {		
 		$("#container").css('padding-top', "55px");		
 	    }
-	    
-	    if ($("#project_vote_link").length > 0) {
-		$("#project_vote_link").click(function() {$("#project_vote_zone").show();});
-	    }
 
 	    if ($("#fundingproject").val()) { 				
 		$("#goalsum_fixe").click(function() { $("#goalsum_flexible_param").hide(); $("#goalsum_fixe_param").show();}); 		

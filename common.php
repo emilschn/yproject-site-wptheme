@@ -70,13 +70,22 @@ function printPageBottomEnd($post, $campaign) {
 	    <div class="left post_bottom_infos">
 		<?php 
 		    if ($vote_status != 'vote') :
-			$percent = $campaign->percent_completed(false);
-			$percent = min(100, $percent);
+			$percent = min(100, $campaign->percent_completed(false));
 			$width = 250 * $percent / 100;
+			$percent_min = $campaign->percent_minimum_to_total();
+			$width_min = 250 * $percent_min / 100;
 		?>
 		    <div>
-			<div class="project_full_progressbg"><div class="project_full_progressbar" style="width:<?php echo $width; ?>px"></div></div>
-			<span class="project_full_percent"><?php echo $campaign->percent_completed(); ?></span>
+			<div class="project_full_progressbg">
+			    <div class="project_full_progressbar" style="width:<?php echo $width; ?>px">
+				<?php if ($campaign->type() == 'flexible'): ?>
+				<div style="width: <?php echo $width_min; ?>px; height: 100%; border: 0px; border-right: 1px solid white;">&nbsp;</div>
+				<?php else: ?>
+				&nbsp;
+				<?php endif; ?>
+			    </div>
+			</div>
+			<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
 		    </div>
 
 		    <div class="post_bottom_infos_item">
@@ -91,7 +100,7 @@ function printPageBottomEnd($post, $campaign) {
 
 		    <div class="post_bottom_infos_item">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png"/>
-			<?php echo $campaign->current_amount() . ' / ' . $campaign->goal(); ?>
+			<?php echo $campaign->current_amount() . ' / ' . $campaign->minimum_goal() . ' (maximum : ' . $campaign->goal() . ')'; ?>
 		    </div>
 		
 		<?php
@@ -139,10 +148,10 @@ function printPageBottomEnd($post, $campaign) {
 		    <?php
 			else:
 		    ?>
-		    <div id="project_vote_link" class="dark">
-			<a href="javascript:void(0);">Voter</a>
+		    <div id="project_vote_link" class="dark" style="color: #FFF">
+			Voter
 		    </div>
-		    <div id="project_vote_zone" style="display: none;">
+		    <div id="project_vote_zone">
 		    <?php	
 			    if ($campaign->end_vote_remaining() > 0) {
 				do_shortcode('[yproject_crowdfunding_printPageVoteForm remaining_days='.$campaign->end_vote_remaining().']');
@@ -431,12 +440,21 @@ function printSinglePreview($i, $vote) {
 		<?php else: ?>
 		    <div class="project_preview_item_progress">
 		    <?php
-			$percent = $campaign->percent_completed(false);
-			$percent = min(100, $percent);
+			$percent = min(100, $campaign->percent_completed(false));
 			$width = 150 * $percent / 100;
+			$percent_min = $campaign->percent_minimum_to_total();
+			$width_min = 150 * $percent_min / 100;
 			?>
-			<div class="project_preview_item_progressbg"><div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">&nbsp;</div></div>
-			<span class="project_preview_item_progressprint"><?php echo $campaign->percent_completed(); ?></span>
+			<div class="project_preview_item_progressbg">
+			    <div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">
+				<?php if ($campaign->type() == 'flexible'): ?>
+				<div style="width: <?php echo $width_min; ?>px; height: 20px; border: 0px; border-right: 1px solid white;">&nbsp;</div>
+				<?php else: ?>
+				&nbsp;
+				<?php endif; ?>
+			    </div>
+			</div>
+			<span class="project_preview_item_progressprint"><?php echo $campaign->percent_minimum_completed(); ?></span>
 		    </div>
 		<?php endif; ?>
 		</div>
