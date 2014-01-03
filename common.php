@@ -53,6 +53,12 @@ function printPageBottomStart($post, $campaign) {
     <?php
 }
 
+function printPageBottomStartEnd() {
+    ?>
+    </div>
+    <?php
+}
+
 
 function printPageBottomEnd($post, $campaign) {
     $campaign_id_param = '?campaign_id=';
@@ -100,7 +106,7 @@ function printPageBottomEnd($post, $campaign) {
 
 		    <div class="post_bottom_infos_item">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png"/>
-			<?php echo $campaign->current_amount() . ' / ' . $campaign->minimum_goal() . ' (maximum : ' . $campaign->goal() . ')'; ?>
+			<?php echo $campaign->current_amount() . ' / ' . $campaign->minimum_goal(true) . ' (maximum : ' . $campaign->goal() . ')'; ?>
 		    </div>
 		
 		<?php
@@ -426,7 +432,7 @@ function printSinglePreview($i, $vote) {
 		    </div>
 		    <div class="project_preview_item_picto">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
-			<?php echo $campaign->goal(); ?>
+			<?php echo $campaign->minimum_goal(true); ?>
 		    </div>
 		    <div class="project_preview_item_picto">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />

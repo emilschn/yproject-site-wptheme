@@ -62,6 +62,7 @@
 </div>
 
 <?php 
+    printPageBottomStartEnd();
     $post = $post_project;
     printPageBottomEnd($post, $campaign); 
 ?>

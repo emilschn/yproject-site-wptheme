@@ -66,7 +66,9 @@
 			    <?php endif; ?>
 
 			<?php endif; ?>
-
+				
+			<?php printPageBottomStartEnd(); ?>
+			
 			<?php printPageBottomEnd($campaign_post, $campaign); ?>
 		</div>
 

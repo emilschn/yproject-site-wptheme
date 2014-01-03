@@ -57,7 +57,8 @@
 					    </span>
 					    
 					    <?php 
-						 printPageBottomEnd($post_camp, $campaign);
+						printPageBottomStartEnd();
+						printPageBottomEnd($post_camp, $campaign);
 					    ?>
 					</div>
 					</div>

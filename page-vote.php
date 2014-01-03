@@ -23,12 +23,13 @@
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				    <div class="post-content">
 					<div class="entry">
-					    <?php printPageTop($post); ?>
-					    <?php printPageBottomStart($post, $campaign); ?>
-					    <span><?php the_content(); ?></span>
 					    <?php 
-						 printPageBottomEnd($post, $campaign);
-						?>
+						printPageTop($post);
+						printPageBottomStart($post, $campaign);
+						the_content();
+						printPageBottomStartEnd();
+						printPageBottomEnd($post, $campaign);
+					    ?>
 					</div>
 				    </div>
 				</div>
