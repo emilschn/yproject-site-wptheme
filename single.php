@@ -20,12 +20,11 @@
 
 			<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			    <div class="post-content">
-				    <div>
-					&lt;&lt; <a href="<?php echo get_permalink($page_blog->ID); ?>"><?php echo __('Blog', 'yproject'); ?></a>
-				    </div>
-				    <h2 class="posttitle"><?php the_title(); ?></h2>
-				    <p class="date"><?php echo get_the_date(); ?></p>
-				    <?php the_content(); ?>
+				<div>&lt;&lt; <a href="<?php echo get_permalink($page_blog->ID); ?>"><?php _e('Blog', 'yproject'); ?></a></div>
+				<h2 class="posttitle"><?php the_title(); ?></h2>
+				<p class="date"><?php echo get_the_date(); ?></p>
+				<?php the_content(); ?>
+				<?php comments_template(); ?>
 			    </div>
 			</div>
 

@@ -21,7 +21,7 @@ function printPageTop($post_campaign) {
 		if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src;
 		?>');">  
 
-	    	<img width="960" height="240" src="<?php echo get_stylesheet_directory_uri(); ?>/images/blanc_bandeau_projet.png" style="position: absolute;">
+	    	<img width="960" height="240" src="<?php echo get_stylesheet_directory_uri(); ?>/images/blanc_bandeau_projet.png" style="position: absolute;" />
 
 		<h1><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h1>
 

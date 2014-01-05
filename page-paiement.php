@@ -16,22 +16,21 @@
 			<?php do_action( 'bp_before_blog_single_post' ); ?>
 
 			<div class="page" id="blog-single" role="main">
-				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-				    <div class="post-content">
-					<div class="entry">
-					    <?php printPageTop($post); ?>
-					    <div class="center">
-						<?php the_content(); ?>
-						<div id="PaylineForm"></div>
-						<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" /></center>
-					    </div>
+			    <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+				<div class="post-content">
+				    <div class="entry">
+					<?php printPageTop($post); ?>
+					<div class="center">
+					    <?php echo ypcf_print_invest_breadcrumb(3); ?>
+					    <?php the_content(); ?>
+					    <div id="PaylineForm"></div>
+					    <center><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" /></center>
 					</div>
 				    </div>
 				</div>
-
+			    </div>
 			</div>
 			
-
 			<?php do_action( 'bp_after_blog_single_post' ); ?>
 
 		</div><!-- .padder -->
