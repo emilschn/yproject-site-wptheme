@@ -5,8 +5,9 @@
 	
     if ( ! is_object( $campaign ) )
 	    $campaign = atcf_get_campaign( $post );
-		 date_default_timezone_set("Europe/Paris");		
-	    require_once("common.php");		
+	    date_default_timezone_set("Europe/Paris");		
+	    require_once("common.php");
+//	    getNewPdfToSign($post->ID, 1);
 			
 	    get_header();
 ?>
