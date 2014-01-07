@@ -40,6 +40,8 @@
 							<div class="entry">
 							    <?php the_content( 'Lire la suite' ); ?>
 							</div>
+							
+							<span class="comments"><?php comments_popup_link( __( 'No Comments &#187;', 'buddypress' ), __( '1 Comment &#187;', 'buddypress' ), __( '% Comments &#187;', 'buddypress' ) ); ?></span></p>
 						</div>
 
 					</div>

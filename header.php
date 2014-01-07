@@ -33,11 +33,12 @@
 	global $post;
 	$buffer = '';
 	if ( is_category() ) {
+	    global $cat;
 	    $this_category = get_category($cat);
 	    $this_category_name = $this_category->name;
-	    $name_exploted = explode('cat', $this_category_name);
-	    $campaign_post = get_post($name_exploted[1]);
-	    $buffer = 'Actualit&eacute;s du projet ' . $campaign_post->post_title . ' | ' . get_bloginfo( 'name' );
+	    $name_exploded = explode('cat', $this_category_name);
+	    $campaign_post = get_post($name_exploded[1]);
+	    $buffer = 'Actualit&eacute;s du projet ' . (is_object($campaign_post) ? $campaign_post->post_title : '') . ' | ' . get_bloginfo( 'name' );
 	} else if (isset($post)) {
 	    $page_name = get_post($post)->post_name;
 	    if ($page_name == 'forum' && isset($_GET['campaign_id'])) {

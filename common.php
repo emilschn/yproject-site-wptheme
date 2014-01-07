@@ -193,8 +193,10 @@ function printPageBottomEnd($post, $campaign) {
 			    $category_slug = $post->ID . '-blog-' . $post->post_title;
 			    $category_obj = get_category_by_slug($category_slug);
 			    $category_link = (!empty($category_obj)) ? get_category_link($category_obj->cat_ID) : '';
+			    $posts_in_category = get_posts(array('category'=>$category_obj->cat_ID));
+			    $nb_cat = (isset($posts_in_category)) ? ' ('.count($posts_in_category).')' : '';
 			?>
-			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Actualit&eacute;s', 'yproject'); ?></a>
+			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Actualit&eacute;s', 'yproject') . $nb_cat; ?></a>
 		    </div>
 		     <div class="light">
                         <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/com.png"/>&nbsp;

@@ -32,7 +32,7 @@ require_once("wp-content/themes/yproject/common.php");
 			    
 			    if ($validate_email !== true):
 			    ?>
-				<span class="errors"><?php _e( 'L&circ;adresse e-mail renseign&eacute;e est invalide ou d&eacute;j&agrave; utilis&eacute;e', 'yproject' ); ?></span><br />
+				<span class="errors"><?php _e( 'L&apos;adresse e-mail renseign&eacute;e est invalide ou d&eacute;j&agrave; utilis&eacute;e', 'yproject' ); ?></span><br />
 				
 			    <?php
 				$valid = false;
@@ -60,8 +60,8 @@ require_once("wp-content/themes/yproject/common.php");
 			<h4><?php _e('Ces informations sont n&eacute;cessaires pour investir dans un projet.', 'yproject'); ?></h4>
 			<label for="update_gender" class="standard-label">Vous &ecirc;tes</label>
 			<select name="update_gender" id="update_gender">
-			    <option value="female"<?php if ($current_user->get('user_gender') == "Female") echo ' selected="selected"';?>>une femme</option>
-			    <option value="male"<?php if ($current_user->get('user_gender') == "Male") echo ' selected="selected"';?>>un homme</option>
+			    <option value="female"<?php if ($current_user->get('user_gender') == "female") echo ' selected="selected"';?>>une femme</option>
+			    <option value="male"<?php if ($current_user->get('user_gender') == "male") echo ' selected="selected"';?>>un homme</option>
 			</select><br />
 			
 			<label for="update_firstname" class="standard-label"><?php _e( 'Pr&eacute;nom', 'yproject' ); ?></label>
@@ -101,6 +101,7 @@ require_once("wp-content/themes/yproject/common.php");
 			<?php require_once("country_list.php"); ?>
 			<label for="update_nationality" class="standard-label"><?php _e( 'Nationalit&eacute;', 'yproject' ); ?></label>
 			<select name="update_nationality" id="update_nationality">
+			    <option value=""></option>
 			    <?php 
 				foreach ($country_list as $country_code => $country_name) {
 			    ?>
