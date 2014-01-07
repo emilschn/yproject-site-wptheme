@@ -538,13 +538,14 @@ div#home_bottom h1 {
     float: left;        
     width: 440px;
     padding: 0px 15px;
+    texts-align: center;
 }
 
 #signup_submit {
     background-color: #333333;
     color: #FFF;
     border: 0px;
-    width: 390px;
+    width: 174px;
     padding: 5px 0px 5px 0px;
     text-transform: uppercase;
 }

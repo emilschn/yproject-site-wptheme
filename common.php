@@ -150,7 +150,7 @@ function printPageBottomEnd($post, $campaign) {
 
 		<div class="post_bottom_buttons">
 		    <?php 
-			if ($vote_status != 'vote') :
+			if ($vote_status != 'vote' && ypcf_check_user_is_complete($post->post_author)) :
 		    ?> 
 		    <div class="dark">
 			<?php $page_invest = get_page_by_path('investir'); ?>
@@ -526,6 +526,8 @@ function printUserProfileAdminBar($skip_controls = false) {
 }
 
 function printUserInvest($post_invest, $post_campaign) {
+    global $post;
+    $post = $post_campaign;
     $campaign = atcf_get_campaign( $post_campaign );
     $payment_status = ypcf_get_updated_payment_status($post_invest->ID);
     $contractid = ypcf_get_signsquidcontractid_from_invest($post_invest->ID);
@@ -562,11 +564,11 @@ function printUserInvest($post_invest, $post_campaign) {
 		</div>
 		<div class="project_preview_item_picto">
 		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
-		    <?php echo $campaign->goal(); ?>
+		    <?php echo $campaign->minimum_goal(true); ?>
 		</div>
 		<div class="project_preview_item_picto">
 		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
-		    <?php echo $campaign->backers_count(); ?>
+		    <?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
 		</div>
 		<div class="project_preview_item_infos" style="width: 120px;">
 		    <?php echo date_i18n( get_option('date_format'), strtotime( get_post_field( 'post_date', $post_invest->ID ) ) ); ?>
