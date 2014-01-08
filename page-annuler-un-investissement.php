@@ -80,6 +80,8 @@
 	<?php } else { ?>
 		<?php _e( 'Acc&egrave;s impossible', 'yproject' ); ?>
 	<?php } ?>
+			
+	    <center><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" /></center>
 		
 	</div>
     </div><!-- .padder -->

@@ -84,7 +84,7 @@ function printPageBottomEnd($post, $campaign) {
 		    <div>
 			<div class="project_full_progressbg">
 			    <div class="project_full_progressbar" style="width:<?php echo $width; ?>px">
-				<?php if ($campaign->type() == 'flexible'): ?>
+				<?php if ($campaign->is_flexible()): ?>
 				<div style="width: <?php echo $width_min; ?>px; height: 100%; border: 0px; border-right: 1px solid white;">&nbsp;</div>
 				<?php else: ?>
 				&nbsp;
@@ -457,7 +457,7 @@ function printSinglePreview($i, $vote) {
 			?>
 			<div class="project_preview_item_progressbg">
 			    <div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">
-				<?php if ($campaign->type() == 'flexible'): ?>
+				<?php if ($campaign->is_flexible()): ?>
 				<div style="width: <?php echo $width_min; ?>px; height: 20px; border: 0px; border-right: 1px solid white;">&nbsp;</div>
 				<?php else: ?>
 				&nbsp;
@@ -548,32 +548,28 @@ function printUserInvest($post_invest, $post_campaign) {
 		<div class="project_preview_item_progressbg"><div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">&nbsp;</div></div>
 		<span class="project_preview_item_progressprint"><?php echo $campaign->percent_completed(); ?></span>
 	    </div>
+	    <div class="user_history_pictos">
+		<div class="project_preview_item_pictos">
+		    <div class="project_preview_item_picto">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+			<?php echo $campaign->days_remaining(); ?>
+		    </div>
+		    <div class="project_preview_item_picto">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
+			<?php echo $campaign->minimum_goal(true); ?>
+		    </div>
+		    <div class="project_preview_item_picto">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
+			<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
+		    </div>
+		</div>
+	    </div>
 	</div>
 	<div class="user_history_pictos left">
 	    <div class="project_preview_item_pictos">
-		<div class="project_preview_item_picto">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" />
-		    <?php 
-			$campaign_location = $campaign->location();
-			$exploded = explode(' ', $campaign_location);
-			if (count($exploded) > 1) $campaign_location = $exploded[0];
-			echo (($campaign_location != '') ? $campaign_location : 'France'); 
-		    ?>
-		</div>
-		<div class="project_preview_item_picto">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
-		    <?php echo $campaign->days_remaining(); ?>
-		</div>
-		<div class="project_preview_item_picto">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
-		    <?php echo $campaign->minimum_goal(true); ?>
-		</div>
-		<div class="project_preview_item_picto">
-		    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
-		    <?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
-		</div>
 		<div class="project_preview_item_infos" style="width: 120px;">
-		    <?php echo date_i18n( get_option('date_format'), strtotime( get_post_field( 'post_date', $post_invest->ID ) ) ); ?>
+		    <?php echo date_i18n( get_option('date_format'), strtotime( get_post_field( 'post_date', $post_invest->ID ) ) ); ?><br />
+		    <?php echo edd_get_payment_amount( $post_invest->ID ) ?>&euro;
 		</div>
 		<div class="project_preview_item_infos" style="width: 120px;">
 		    <?php echo __("Paiement", "yproject") . ' ' . edd_get_payment_status( $post_invest, true ); ?>

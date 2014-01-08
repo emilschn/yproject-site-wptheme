@@ -176,7 +176,7 @@ require_once("wp-content/themes/yproject/common.php");
 		    } else {
 		?>
 
-		    <h2 class="underlined"><?php _e( 'Mes porte-monnaie', 'yproject' ); ?></h2>
+		    <h2 class="underlined">Mon porte-monnaie électronique</h2>
 		    <?php
 			$real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id()) / 100;
 		    ?>
@@ -272,6 +272,7 @@ require_once("wp-content/themes/yproject/common.php");
 		    }
 		endif;
 		?>
+		<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" /></center>
 	    </div>
 	</div>
     </div>
