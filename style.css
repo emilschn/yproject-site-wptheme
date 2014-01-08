@@ -1183,20 +1183,40 @@ footer span {
 /* FIN FOOTER */
 
 /* PAGE INVESTIR */
+
+.form input[entype=multipart/form-data] {
+    background: none repeat scroll 0 0 #333333 !important;
+    color: #FFF !important;
+    padding: 3px 8px;
+    text-transform: uppercase !important;
+    margin-left: 120px !important;
+}
+
+
+#PaylineForm {
+    widh: 500px;
+}
+
 #invest-breadcrumb {
-    padding: 10px;
+    padding: 30px;
     font-size: 9pt;
+    text-align: center;
 }
 #invest-breadcrumb .step {
     font-size: 12pt;
 }
 #invest-breadcrumb .current {
     font-weight: bold;
+    color: #FE494C;
 }
 .invest_part {
-    padding: 5px;
-    border: 1px solid grey;
+    padding: 15px 30px;
+    background: #EEEEEE;
     margin-bottom: 10px;
+    font-size: 13px;
+    width: 500px;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 .invest_part .label {

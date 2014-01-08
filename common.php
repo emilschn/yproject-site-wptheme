@@ -411,7 +411,7 @@ function printSinglePreview($i, $vote) {
 	    ?>
 
 	    <div class="project_preview_item_part">
-		<img src="<?php if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src; ?>" class="project_preview_item_img" /><br />
+		<a href="<?php the_permalink(); ?>"><img src="<?php if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src; ?>" class="project_preview_item_img" border="0" /></a><br />
 
 		<div class="project_preview_item_desc"><?php echo html_entity_decode($campaign->summary()); ?></div>
 	    </div>
@@ -455,6 +455,7 @@ function printSinglePreview($i, $vote) {
 			$percent_min = $campaign->percent_minimum_to_total();
 			$width_min = 150 * $percent_min / 100;
 			?>
+			<a href="<?php the_permalink(); ?>">
 			<div class="project_preview_item_progressbg">
 			    <div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">
 				<?php if ($campaign->is_flexible()): ?>
@@ -465,6 +466,7 @@ function printSinglePreview($i, $vote) {
 			    </div>
 			</div>
 			<span class="project_preview_item_progressprint"><?php echo $campaign->percent_minimum_completed(); ?></span>
+			</a>
 		    </div>
 		<?php endif; ?>
 		</div>
@@ -598,6 +600,12 @@ function printUserInvest($post_invest, $post_campaign) {
 		<?php
 		    endif;
 		?>
+		<div class="project_preview_item_cancel">
+		    <a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $post_invest->ID; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a>
+		</div>
+		<div class="project_preview_item_cancel">
+		    <a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $post_invest->ID; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
+		</div>
 		
 		<div style="clear: both"></div>
 	    </div>
