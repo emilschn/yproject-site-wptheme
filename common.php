@@ -539,8 +539,8 @@ function printUserInvest($post_invest, $post_campaign) {
     $signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
     ?>
     <li id="invest-<?php echo $post_invest->ID. '-' .$contractid; ?>">
+	<a href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $post_campaign->post_title; ?></a><br />
 	<div class="user_history_title left">
-	    <a href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $post_campaign->post_title; ?></a><br />
 	    <div class="project_preview_item_progress">
 	    <?php
 		$percent = $campaign->percent_completed(false);
@@ -550,8 +550,10 @@ function printUserInvest($post_invest, $post_campaign) {
 		<div class="project_preview_item_progressbg"><div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">&nbsp;</div></div>
 		<span class="project_preview_item_progressprint"><?php echo $campaign->percent_completed(); ?></span>
 	    </div>
-	    <div class="user_history_pictos">
-		<div class="project_preview_item_pictos">
+	</div>
+	<div class="user_history_pictos left">
+	    <div class="project_preview_item_pictos">
+		<div class="project_preview_item_infos">
 		    <div class="project_preview_item_picto">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
 			<?php echo $campaign->days_remaining(); ?>
@@ -560,21 +562,13 @@ function printUserInvest($post_invest, $post_campaign) {
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
 			<?php echo $campaign->minimum_goal(true); ?>
 		    </div>
-		    <div class="project_preview_item_picto">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
-			<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
-		    </div>
 		</div>
-	    </div>
-	</div>
-	<div class="user_history_pictos left">
-	    <div class="project_preview_item_pictos">
 		<div class="project_preview_item_infos" style="width: 120px;">
 		    <?php echo date_i18n( get_option('date_format'), strtotime( get_post_field( 'post_date', $post_invest->ID ) ) ); ?><br />
 		    <?php echo edd_get_payment_amount( $post_invest->ID ) ?>&euro;
 		</div>
 		<div class="project_preview_item_infos" style="width: 120px;">
-		    <?php echo __("Paiement", "yproject") . ' ' . edd_get_payment_status( $post_invest, true ); ?>
+		    <?php echo __("Paiement", "yproject") . ' ' . edd_get_payment_status( $post_invest, true ); ?><br />
 		</div>
 		<div class="project_preview_item_infos" style="width: 120px;">
 		    <?php echo $signsquid_status; ?>
@@ -584,28 +578,22 @@ function printUserInvest($post_invest, $post_campaign) {
 		    //Boutons pour Annuler l'investissement | Recevoir le code à nouveau
 		    //Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
 		    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && is_object($signsquid_infos) && $signsquid_infos->{'status'} != 'Agreed') :
-			$page_cancel_invest = get_page_by_path('annuler-un-investissement');
+		?>
+		<div class="project_preview_item_cancel">
+		<?php
 			if ($signsquid_infos != '' && is_object($signsquid_infos)):
 			    $page_my_investments = get_page_by_path('mes-investissements');
 		?>
-		<div class="project_preview_item_cancel">
 		    <a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $post_invest->ID; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a>
-		</div>
 		<?php
 			endif;
+			$page_cancel_invest = get_page_by_path('annuler-un-investissement');
 		?>
-		<div class="project_preview_item_cancel">
 		    <a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $post_invest->ID; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
 		</div>
 		<?php
 		    endif;
 		?>
-		<div class="project_preview_item_cancel">
-		    <a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $post_invest->ID; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a>
-		</div>
-		<div class="project_preview_item_cancel">
-		    <a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $post_invest->ID; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
-		</div>
 		
 		<div style="clear: both"></div>
 	    </div>

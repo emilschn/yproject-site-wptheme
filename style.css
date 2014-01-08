@@ -732,37 +732,35 @@ ul.activity-list p {
     margin-top: 0px;
 }
 .user_history li {
-    padding-bottom: 10px;
-}
-.user_history_title {
-    text-transform: uppercase;
+    padding-top: 15px;
+    padding-left: 15px;
+    margin-bottom: 20px;
 }
 .user_history_title .project_preview_item_progressbg {
-    background-color: #EEECED;
+    background-color: #FFF;
 }
 .user_history_title .project_preview_item_progressbar {
     background-color: #333333;
+}
+.user_history_title .project_preview_item_progress {
+    background-color: #F2F2F2;
 }
 
 .user_history_pictos .project_preview_item_pictos {
     font-size: 8pt;
     font-family: DINPro-Medium, Arial, sans-serif;
+    width: auto;
 }
 .user_history_pictos .project_preview_item_infos {
     float: left;
     margin: 10px;
     font-size: 10pt;
     font-family: DINPro-Medium, Arial, sans-serif;
-    text-transform: uppercase;
 }
 .user_history_pictos .project_preview_item_cancel {
     float: left;
     margin: 5px;
     padding: 5px;
-    background-color: #333333;
-}
-.user_history_pictos .project_preview_item_cancel a {
-    color: #FFF;
 }
 /* FIN MON COMPTE */
 

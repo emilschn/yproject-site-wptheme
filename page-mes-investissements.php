@@ -203,7 +203,7 @@ require_once("wp-content/themes/yproject/common.php");
 		    <?php
 		    $purchases = edd_get_users_purchases(bp_current_user_id(), -1, false, array('completed', 'pending', 'publish', 'failed', 'refunded'));
 		    if ( $purchases ) : ?>
-		    <ul class="user_history">
+		    <ul class="user_history com-activity-list">
 			<?php 
 			    foreach ( $purchases as $post ) : setup_postdata( $post );
 				$downloads = edd_get_payment_meta_downloads($post->ID); 
