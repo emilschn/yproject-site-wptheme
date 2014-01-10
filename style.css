@@ -42,6 +42,7 @@ body a {
 .center {
     width: 960px;
     margin: auto;
+    font-size: 14px;
 }
 
 .center_small {
@@ -429,7 +430,7 @@ div#home_bottom h1 {
 }
 
 .post_bottom_infos_item {
-    margin: 5px 10px;
+    margin: 10px 10px;
     font-size: 10pt;
 }
 
@@ -441,17 +442,19 @@ div#home_bottom h1 {
     background-color: #EEECED;
     width: 250px;
     display: inline-block;
+    height: 25px;
 }
 
 .project_full_progressbar {
     background-color: #333333;
     height: 35px;
+    height: 25px;
 }
 
 .project_full_percent {
     width: 49px;
     position: absolute;
-    padding-top: 7px;
+    padding-top: 3px;
     text-align: right;
 }
 
@@ -719,7 +722,7 @@ ul.activity-list p {
 }
 .large-label {
     display: inline-block;
-    width: 300px;
+    width: 500px;
 }
 
 .user_history {
@@ -863,7 +866,6 @@ ul.activity-list p {
     list-style: none;
     display: block;
     top: 100%;
-    width: 150px;
     padding-left: 0px !important;
 }
 #nav .sfhover ul li > a,
@@ -889,13 +891,17 @@ ul.activity-list p {
 #nav .sfhover ul li,
 #nav :hover ul li {
     min-height: 30px;
-    line-height: 20px;
-    width: 200px;
+    line-height: 25px;
+    width: 102px;
     padding-left: 0px !important;
+    text-transform: none;
+    text-align:center;
+    height: auto;
+    padding: 6px 0px;
 }
 #nav .sfhover ul li a,
 #nav :hover ul li a {
-    padding: 5px 5px 5px 5px;
+    padding: 0px;
 }
 
 #fb_infos {
@@ -938,7 +944,7 @@ ul.activity-list p {
     font-size: 9pt;
 }
 #sidebar-wp-submit {
-    width: 55px;
+    width: auto;
     font-size: 9pt;
     background: none repeat scroll 0 0 #333333 !important;
     border: medium none;
@@ -1197,15 +1203,7 @@ footer span {
 
 #invest-breadcrumb {
     padding: 30px;
-    font-size: 9pt;
     text-align: center;
-}
-#invest-breadcrumb .step {
-    font-size: 12pt;
-}
-#invest-breadcrumb .current {
-    font-weight: bold;
-    color: #FE494C;
 }
 .invest_part {
     padding: 15px 30px;
@@ -1621,4 +1619,71 @@ background-image:url("images/jycrois_gris_rouge.png");
         .custom-dropdown--large .custom-dropdown__select { padding-right: 1.3em }
         .custom-dropdown--small .custom-dropdown__select { padding-right: .5em }
     }
+}
+
+#activate-page {
+        font-size: 13px;
+}
+
+#update_firstname input[type=text] {
+        margin-bottom: 5px;
+}
+
+.standard-form input[type=text] {
+        margin-bottom: 5px;
+}
+
+.standard-form input[type=password] {
+        margin-bottom: 3px;
+}
+
+.standard-form input[type=submit] {
+    background: none repeat scroll 0 0 #333333;
+    border: medium none;
+    color: #FFFFFF;
+    padding: 3px 8px;
+    text-transform: uppercase;
+}
+
+
+/*FORMULAIRE MODIF COMPTE*/
+
+#form_infoperso_projet {
+        background:#F2F2F2;
+        margin: 20px;
+       padding: 30px;
+}
+
+
+/*INVESTISSEMENT*/
+
+#link_validate_invest_amount {
+    background: none repeat scroll 0 0 #333333;
+    border: medium none;
+    color: #FFFFFF;
+    padding: 3px 8px;
+    text-transform: uppercase;
+}
+
+.invest_step1_generalities {
+    width: 800px;
+    margin:auto;
+    font-size: 12px;
+}
+
+.invest_step1_generalities ol li{
+    margin-bottom: 10px;
+}
+
+.invest_step1_currentproject {
+    width: 600px;
+    margin:auto;
+    font-size: 14px;
+}
+
+#invest_form {
+    font-size: 13px;
+    width: 37%;
+    margin: auto;
+    margin-top: 30px;
 }

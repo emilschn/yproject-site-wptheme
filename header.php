@@ -117,7 +117,7 @@
 					if (is_user_logged_in() && !ypcf_check_user_can_invest(false)) {
 					    $page_update_account = get_page_by_path('modifier-mon-compte'); 
 				    ?>
-				    <li class="page_item_out"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Terminer mon inscription', 'yproject'); ?></a></li>
+				    <li style="border-bottom: 1px solid #FFF;" class="page_item_out"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Terminer mon inscription', 'yproject'); ?></a></li>
 				    <?php
 					}
 				    ?>

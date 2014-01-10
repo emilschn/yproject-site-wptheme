@@ -57,7 +57,10 @@ require_once("wp-content/themes/yproject/common.php");
 
 		    <form name="update-form" class="standard-form" action="<?php echo get_permalink($page_update_account->ID); ?>" method="post">
 
-			<h4><?php _e('Ces informations sont n&eacute;cessaires pour investir dans un projet.', 'yproject'); ?></h4>
+
+		<h4 style="padding-left: 20px;"><?php _e('Ces informations sont n&eacute;cessaires pour investir dans un projet.', 'yproject'); ?></h4>
+
+<div id="form_infoperso_projet">
 			<label for="update_gender" class="standard-label">Vous &ecirc;tes</label>
 			<select name="update_gender" id="update_gender">
 			    <option value="female"<?php if ($current_user->get('user_gender') == "female") echo ' selected="selected"';?>>une femme</option>
@@ -137,8 +140,12 @@ require_once("wp-content/themes/yproject/common.php");
 			if (session_id() == '') session_start();
 			if (!isset($_SESSION['redirect_current_campaign_id'])) {
 			?>
-			    <h4><?php _e('Informations de base', 'yproject'); ?></h4>
+
+</div>
+			    <h4 style="padding-left: 20px;"><?php _e('Informations de base', 'yproject'); ?></h4>
 			    
+
+<div id="form_infoperso_projet">
 			    <label for="update_email" class="large-label"><?php _e( 'Adresse e-mail', 'yproject' ); ?></label>
 			    <input type="text" name="update_email" id="update_email" value="<?php echo $current_user->user_email; ?>" /><br />
 
@@ -151,8 +158,9 @@ require_once("wp-content/themes/yproject/common.php");
 			    <label for="update_password_current" class="standard-label"><?php _e( 'Mot de passe', 'yproject' ); ?>*</label>
 			    <input type="password" name="update_password_current" id="update_password_current" value="" />
 			<?php }} ?>
+</div>
 			    
-			<input type="submit" value="Enregistrer les modifications" />
+			<center><input type="submit" value="Enregistrer les modifications" /></center>
 
 			<input type="hidden" name="update_user_posted" value="posted" />
 			<input type="hidden" name="update_user_id" value="<?php echo $current_user->ID; ?>" /><br /><br />

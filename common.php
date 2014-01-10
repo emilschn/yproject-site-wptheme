@@ -584,7 +584,7 @@ function printUserInvest($post_invest, $post_campaign) {
 			if ($signsquid_infos != '' && is_object($signsquid_infos)):
 			    $page_my_investments = get_page_by_path('mes-investissements');
 		?>
-		    <a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $post_invest->ID; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a>
+		    <a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $post_invest->ID; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
 		<?php
 			endif;
 			$page_cancel_invest = get_page_by_path('annuler-un-investissement');
