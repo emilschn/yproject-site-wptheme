@@ -413,7 +413,7 @@ function printSinglePreview($i, $vote) {
 	    <div class="project_preview_item_part">
 		<a href="<?php the_permalink(); ?>"><img src="<?php if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src; ?>" class="project_preview_item_img" border="0" /></a><br />
 
-		<div class="project_preview_item_desc"><?php echo html_entity_decode($campaign->summary()); ?></div>
+		<div class="project_preview_item_desc"><a href="<?php the_permalink(); ?>"><?php echo html_entity_decode($campaign->summary()); ?></a></div>
 	    </div>
 
 		<div class="project_preview_item_part">

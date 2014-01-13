@@ -185,11 +185,13 @@ h4 {
     height: auto; 
     padding: 10px 0;
 }
+.project_preview_item_desc a {
+    color: #2B2C2C;
+}
 
 .project_preview_item_pictos {
     width: 100%;
     text-align: center;
-    margin-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
@@ -197,6 +199,8 @@ h4 {
 .project_preview_item_picto {
     float: left;
     width: 45px;
+    margin-top: -15px;
+    padding: 0 2px;
 }
 
 .project_preview_item_picto img {
@@ -208,7 +212,7 @@ h4 {
     background: none repeat scroll 0 0 #FFFFFF;
     height: 20px;
     color: #2B2C2C;
-    padding-top: 15px !important;
+    padding-top: 5px !important;
     padding-bottom: 10px !important;
 }
 
@@ -1552,11 +1556,7 @@ background-image:url("images/jycrois_gris_rouge.png");
     color: #444;    
 }
 
-@supports (pointer-events: none) and
-      ((-webkit-appearance: none) or
-      (-moz-appearance: none) or
-      (appearance: none)) {
-
+@supports (pointer-events: none) and ((-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none)) {
     .custom-dropdown {
         position: relative;
         display: inline-block;
@@ -1686,4 +1686,12 @@ background-image:url("images/jycrois_gris_rouge.png");
     width: 37%;
     margin: auto;
     margin-top: 30px;
+}
+
+#invest_form input[type=text] {
+    width: 120px;
+}
+
+.user_history_title {
+    padding-top: 25px !important;
 }
