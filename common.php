@@ -154,7 +154,7 @@ function printPageBottomEnd($post, $campaign) {
 		    ?> 
 		    <div class="dark">
 			<?php $page_invest = get_page_by_path('investir'); ?>
-			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Investir', 'yproject'); ?></a>
+			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>&invest_start=1"><?php echo __('Investir', 'yproject'); ?></a>
 		    </div>
 		    <?php
 			else:
