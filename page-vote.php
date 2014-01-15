@@ -1,3 +1,7 @@
+<?php
+global $disable_logs;
+$disable_logs = TRUE;
+?>
 <?php get_header(); ?>
 
 <?php 

@@ -8,6 +8,8 @@ if ( !current_user_can('manage_options') ) {
     status_header( 404 );
     get_template_part( 404 ); exit();
 }
+global $disable_logs;
+$disable_logs = TRUE;
 
 require_once EDD_PLUGIN_DIR . 'includes/admin/payments/class-payments-table.php';
 
