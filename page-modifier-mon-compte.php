@@ -56,7 +56,7 @@ require_once("wp-content/themes/yproject/common.php");
 			}
 		    ?>
 
-		    <form name="update-form" class="standard-form" action="<?php echo get_permalink($page_update_account->ID); ?>" method="post">
+		    <form name="update-form" class="standard-form" action="<?php echo get_permalink($page_update_account->ID); ?>" method="post" enctype="multipart/form-data">
 
 
 			<h4 style="padding-left: 20px;"><?php _e('Ces informations sont n&eacute;cessaires pour investir dans un projet.', 'yproject'); ?></h4>
@@ -269,7 +269,29 @@ function editOrganisation($orga_id = false) {
 		<?php 
 		    }
 		?>
-	    </select><br /><br />
+	    </select><br /><br /><br />
+	    
+	    <strong>Identification</strong><br />
+	    <?php if (!ypcf_mangopay_is_user_strong_authentication_sent($organisation_user->ID)) { ?>
+		Afin de lutter contre le blanchiment d&apos;argent, pour tout investissement de plus de <strong><?php echo YP_STRONGAUTH_AMOUNT_LIMIT; ?>&euro;</strong> sur l&apos;ann&eacute;e, nous devons transmettre les pi&egrave;ces d&apos;identit&eacute; suivantes &agrave; notre partenaire Mangopay
+		(Les fichiers doivent &ecirc;tre de type jpeg, gif, png ou pdf et leur poids inf&eacute;rieur &agrave; 2 Mo) :<br />
+		<label for="new_org_file_cni<?php echo $name_suffix; ?>" class="large-label">CNI et fonction de la personne physique qui agit pour son compte</label>
+		<input type="file"name="new_org_file_cni<?php echo $name_suffix; ?>" /><br />
+		<label for="new_org_file_status<?php echo $name_suffix; ?>" class="large-label">Statuts sign&eacute;s</label>
+		<input type="file"name="new_org_file_status<?php echo $name_suffix; ?>" /><br />
+		<label for="new_org_file_extract<?php echo $name_suffix; ?>" class="large-label">Extrait du registre de commerce datant de moins de 3 mois</label>
+		<input type="file"name="new_org_file_extract<?php echo $name_suffix; ?>" /><br />
+		<label for="new_org_file_declaration<?php echo $name_suffix; ?>" class="large-label">D&eacute;claration de BE (si on n&apos;identifie pas d&apos;actionnaires personnes physiques dans les statuts)</label>
+		<input type="file"name="new_org_file_declaration<?php echo $name_suffix; ?>" /><br />
+		<br /><br />
+	    
+	    <?php } elseif (ypcf_mangopay_is_user_strong_authenticated($organisation_user->ID)) { ?>
+		Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Mangopay. Vous pouvez maintenant investir les sommes que vous souhaitez.<br /><br />
+	    
+	    <?php } else { ?>
+		Les fichiers permettant de valider vos investissements sont en cours d&apos;&eacute;tude chez notre partenaire Mangopay. Merci de votre compr&eacute;hension.<br /><br />
+	    
+	    <?php } ?>
 
 	    <?php if ($orga_id === false) { ?>
 		<input type="checkbox" name="new_organisation_capable" />Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette entreprise.<br />
