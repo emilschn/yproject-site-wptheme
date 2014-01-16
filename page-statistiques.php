@@ -23,13 +23,20 @@
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				    <div class="post-content">
 					<div class="entry">
-					    <?php printPageTop($post); ?>
-					    <?php printPageBottomStart($post, $campaign); ?>
-					    <span><?php the_content(); ?></span>
 					    <?php 
-						 printPageBottomEnd($post, $campaign);
-						?>
-					</div>
+						printPageTop($post);
+						printPageBottomStart($post, $campaign);
+						the_content();
+						if (isset($_GET["campaign_id"])) {
+						    $post_campaign = get_post($_GET["campaign_id"]);
+						    $upload_dir = wp_upload_dir();
+						    if (file_exists($upload_dir['basedir'] . '/projets/' . $post_campaign->post_name . '-stats.jpg')) { 
+							echo '<img src="'.$upload_dir['baseurl'] . '/projets/' . $post_campaign->post_name . '-stats.jpg" />';
+						    }
+						}
+						printPageBottomStartEnd();
+						printPageBottomEnd($post, $campaign);
+					    ?>
 					</div>
 				    </div>
 				</div>

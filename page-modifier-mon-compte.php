@@ -152,6 +152,13 @@ require_once("wp-content/themes/yproject/common.php");
 					<label for="update_password_current" class="standard-label"><?php _e( 'Mot de passe', 'yproject' ); ?>*</label>
 					<input type="password" name="update_password_current" id="update_password_current" value="" />
 				</div>
+			<?php } elseif (strpos($current_user->user_url, 'facebook.com') !== false) { ?>
+			    <h4 style="padding-left: 20px;">Contact</h4>
+
+				<div id="form_infoperso_projet">
+				    <label for="update_email_contact" class="large-label">Adresse e-mail de contact</label>
+				    <input type="text" name="update_email_contact" id="update_email_contact" value="<?php echo $current_user->user_email; ?>" /><br />
+				</div>
 			<?php } ?>
 		
 		

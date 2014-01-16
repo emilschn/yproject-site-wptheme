@@ -203,12 +203,15 @@ function printPageBottomEnd($post, $campaign) {
 			<?php $forum = get_page_by_path('forum'); ?>
 			<a href="<?php echo get_permalink($forum->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Commentaires', 'yproject'); ?></a>
 		    </div>
-		    <?php /*
+		    <?php
+			$upload_dir = wp_upload_dir();
+			if (file_exists($upload_dir['basedir'] . '/projets/' . $post->post_name . '-stats.jpg')) { 
+		    ?>
 		    <div class="light">
-			<?php $statistiques = get_page_by_path('statistiques'); // Lien forum ?>
+			<?php $statistiques = get_page_by_path('statistiques'); ?>
 			<a href="<?php echo get_permalink($statistiques->ID); ?><?php echo $campaign_id_param; ?>"> <?php echo __('Statistiques', 'yproject'); ?></a>
 		    </div>
-		    */ ?>
+		    <?php } ?>
 		</div>
 	    </div>
 
