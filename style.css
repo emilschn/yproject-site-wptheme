@@ -1657,7 +1657,7 @@ background-image:url("images/jycrois_gris_rouge.png");
 
 /*INVESTISSEMENT*/
 
-#link_validate_invest_amount {
+#link_validate_invest_amount, .button {
     background: none repeat scroll 0 0 #333333;
     border: medium none;
     color: #FFFFFF;
@@ -1694,4 +1694,157 @@ background-image:url("images/jycrois_gris_rouge.png");
 
 .user_history_title {
     padding-top: 12px !important;
+}
+
+
+
+/*TABLEAU PROPOSER UN PROJET*/
+
+tbody {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+div, span, h1, h3, a,  ul, li, p {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+	
+.table-container ul {
+    list-style: none;
+}
+
+.table-container a {
+    text-decoration:none;
+    -webkit-transition: background 0.2s linear;
+    -moz-transition: background 0.2s linear;
+    -o-transition: background 0.2s linear;
+    transition: background 0.2s linear;
+}
+
+.table-container {
+    margin:0 auto;
+    width:940px;
+}
+
+.table-container title {
+    font-size:8px;
+    font-weight:bold;
+    color:#3a3a3a;
+    margin:0 0 25px 0;
+    border-bottom:1px solid #e0e0e0;
+}
+
+.price-table-container {
+    float:left;
+    width:940px;
+    margin:50px auto;
+    margin-bottom:10px;
+}
+
+.column h1 {
+    width:300px;
+    height:45px;
+    background:#FF494C;
+    font-size:14px;
+    font-weight:bold;
+    color:#FFF;
+    text-align:center;
+    line-height:45px;
+}
+
+.column h3 {
+    background: none repeat scroll 0 0 #F9F5F5;
+    color: #2B2C2C;
+    font-size: 12px;
+    height: 71px;
+    line-height: 16px;
+    padding: 15px 10px 10px;
+    text-align: center;
+    width: 280px;
+}
+
+.column a {
+    width:300px;
+    height:30px;
+    background:#3a3a3a;
+    border-top:1px solid #fff;
+    border-bottom:1px solid #fff;
+    display:block;
+    font-size:13px;
+    color:#fff;
+    text-align:center;
+    line-height:30px;
+}
+
+.blank-header {
+    width:300px;
+    height:141px;
+    background:none;
+}
+
+.column { 
+    width:300px; 
+    float:left; 
+    display:inline-block; 
+    border-right:1px solid #fff;
+}
+
+.column ul li {
+    width:300px;
+    text-align:center;
+    padding-top:12px;
+    padding-bottom:11px;
+    height: 15px;
+    overflow:hidden;
+    color:#2B2C2C;
+    font-size:11px;
+    background:#f9f5f5;
+    border-top:1px solid #fff;
+    -webkit-transition:all 0.5s ease-in-out;
+    -moz-transition:all 0.5s ease-in-out;
+    -o-transition:all 0.5s ease-in-out;
+    -ms-transition:all 0.5s ease-in-out;
+    transition:all 0.5s ease-in-out;
+}
+
+.column ul li.desc-drop { 
+    cursor:pointer; 
+}
+
+.column ul li.desc-drop:hover { 
+    height:70px; 
+}
+
+.column ul li.desc-drop:hover div { 
+    color:#2B2C2C; 
+}
+
+.column ul li:nth-child(odd) { 
+    background:#f1eeee;
+}
+
+.column ul li div.desc {
+    text-align:left;
+    color:#2B2C2C;
+    padding:15px 10px 0 10px;
+    line-height:15px;
+    display:block;
+}
+
+.column.blue h2 { 
+    color:#FF494C; 
+}
+
+.column.blue li.desc-drop:hover { 
+    color:#FF494C; 
+}
+
+.column.blue a:hover { 
+    background:#FF494C; 
 }

@@ -41,7 +41,7 @@ require_once("wp-content/themes/yproject/common.php");
 			    ?>
 				
 			    <?php if ($valid) { ?>
-			    <span class="invest_success"><?php _e('Informations enregistr&eacute;es', 'yproject'); ?></span><br />
+			    <span class="invest_success"><?php _e('Informations utilisateur enregistr&eacute;es', 'yproject'); ?></span><br />
 			    <?php } ?>
 				
 		    <?php }; ?>
@@ -190,7 +190,7 @@ require_once("wp-content/themes/yproject/common.php");
 			<?php if (isset($_SESSION['redirect_current_amount_part'])) { ?>
 			    <input type="hidden" name="amount_part" value="<?php echo $_SESSION['redirect_current_amount_part']; ?>" />
 			<?php } ?>
-			<?php if (isset($_SESSION['redirect_current_invest_type'])) { ?>
+			<?php if (isset($_SESSION['redirect_current_invest_type']) && $_SESSION['redirect_current_invest_type'] != "new_organisation") { ?>
 			    <input type="hidden" name="invest_type" value="<?php echo $_SESSION['redirect_current_invest_type']; ?>" />
 			<?php } ?>
 			<input type="hidden" name="update_user_posted" value="posted" />
@@ -230,6 +230,18 @@ function editOrganisation($orga_id = false) {
 	$org_idnumber = $organisation_user->get('organisation_idnumber'); 
 	$org_rcs = $organisation_user->get('organisation_rcs'); 
 	$org_capital = $organisation_user->get('organisation_capital'); 
+    } else {
+	if (isset($_POST["new_org_name" . $name_suffix])) $org_name = $_POST["new_org_name" . $name_suffix];
+	if (isset($_POST["new_org_email" . $name_suffix])) $org_email = $_POST["new_org_email" . $name_suffix];
+	if (isset($_POST["new_org_type" . $name_suffix])) $org_type = $_POST["new_org_type" . $name_suffix];
+	if (isset($_POST["new_org_legalform" . $name_suffix])) $org_legalform = $_POST["new_org_legalform" . $name_suffix];
+	if (isset($_POST["new_org_idnumber" . $name_suffix])) $org_idnumber = $_POST["new_org_idnumber" . $name_suffix];
+	if (isset($_POST["new_org_rcs" . $name_suffix])) $org_rcs = $_POST["new_org_rcs" . $name_suffix];
+	if (isset($_POST["new_org_capital" . $name_suffix])) $org_capital = $_POST["new_org_capital" . $name_suffix];
+	if (isset($_POST["new_org_address" . $name_suffix])) $org_address = $_POST["new_org_address" . $name_suffix];
+	if (isset($_POST["new_org_postal_code" . $name_suffix])) $org_postal_code = $_POST["new_org_postal_code" . $name_suffix];
+	if (isset($_POST["new_org_city" . $name_suffix])) $org_city = $_POST["new_org_city" . $name_suffix];
+	if (isset($_POST["new_org_nationality" . $name_suffix])) $org_nationality = $_POST["new_org_nationality" . $name_suffix];
     }
 ?>
     <h4 style="padding-left: 20px;"><?php echo $orga_title; ?></h4>
@@ -279,15 +291,15 @@ function editOrganisation($orga_id = false) {
 	    </select><br /><br /><br />
 	    
 	    <strong>Identification</strong><br />
-	    <?php if (!ypcf_mangopay_is_user_strong_authentication_sent($organisation_user->ID)) { ?>
+	    <?php if ($orga_id == '' || !ypcf_mangopay_is_user_strong_authentication_sent($organisation_user->ID)) { ?>
 		Afin de lutter contre le blanchiment d&apos;argent, pour tout investissement de plus de <strong><?php echo YP_STRONGAUTH_AMOUNT_LIMIT; ?>&euro;</strong> sur l&apos;ann&eacute;e, nous devons transmettre les pi&egrave;ces d&apos;identit&eacute; suivantes &agrave; notre partenaire Mangopay
-		(Les fichiers doivent &ecirc;tre de type jpeg, gif, png ou pdf et leur poids inf&eacute;rieur &agrave; 2 Mo) :<br />
+		(Les fichiers doivent &ecirc;tre de type jpeg, gif, png ou pdf et leur poids inf&eacute;rieur &agrave; 2 Mo) :<br /><br />
 		<label for="new_org_file_cni<?php echo $name_suffix; ?>" class="large-label">CNI et fonction de la personne physique qui agit pour son compte</label>
-		<input type="file"name="new_org_file_cni<?php echo $name_suffix; ?>" /><br />
+		<input type="file"name="new_org_file_cni<?php echo $name_suffix; ?>" /><br /><br />
 		<label for="new_org_file_status<?php echo $name_suffix; ?>" class="large-label">Statuts sign&eacute;s</label>
-		<input type="file"name="new_org_file_status<?php echo $name_suffix; ?>" /><br />
+		<input type="file"name="new_org_file_status<?php echo $name_suffix; ?>" /><br /><br />
 		<label for="new_org_file_extract<?php echo $name_suffix; ?>" class="large-label">Extrait du registre de commerce datant de moins de 3 mois</label>
-		<input type="file"name="new_org_file_extract<?php echo $name_suffix; ?>" /><br />
+		<input type="file"name="new_org_file_extract<?php echo $name_suffix; ?>" /><br /><br />
 		<label for="new_org_file_declaration<?php echo $name_suffix; ?>" class="large-label">D&eacute;claration de BE (si on n&apos;identifie pas d&apos;actionnaires personnes physiques dans les statuts)</label>
 		<input type="file"name="new_org_file_declaration<?php echo $name_suffix; ?>" /><br />
 		<br /><br />
@@ -301,7 +313,7 @@ function editOrganisation($orga_id = false) {
 	    <?php } ?>
 
 	    <?php if ($orga_id === false) { ?>
-		<input type="checkbox" name="new_organisation_capable" />Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette entreprise.<br />
+		<input type="checkbox" name="new_organisation_capable" />Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette organisation.<br />
 		<input type="hidden" name="new_organisation" value="1" />
 	    <?php } else { ?>
 		<input type="hidden" name="update_organisation" value="1" />
