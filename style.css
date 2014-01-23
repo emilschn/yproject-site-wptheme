@@ -184,6 +184,7 @@ h4 {
     color: #2B2C2C;
     height: auto; 
     padding: 5px 0 10px;
+    text-align: justify;
 }
 .project_preview_item_desc a {
     color: #2B2C2C;
@@ -1710,8 +1711,6 @@ tbody {
 }
 
 div, span, h1, h3, a,  ul, li, p {
-    margin: 0;
-    padding: 0;
     border: 0;
 }
 	
@@ -1847,4 +1846,15 @@ div, span, h1, h3, a,  ul, li, p {
 
 .column.blue a:hover { 
     background:#FF494C; 
+}
+
+.su-note-inner { 
+    background:#f2f2f2 !important;
+    padding: 10px !important;
+    background:#F2F2F2 !important;
+    border-color:none !important;
+    color:#333333 !important;
+    border-radius:0px !important;
+    -moz-border-radius:0px !important;
+    -webkit-border-radius:0px !important;
 }

@@ -300,7 +300,7 @@ function editOrganisation($orga_id = false) {
 		<input type="file"name="new_org_file_status<?php echo $name_suffix; ?>" /><br /><br />
 		<label for="new_org_file_extract<?php echo $name_suffix; ?>" class="large-label">Extrait du registre de commerce datant de moins de 3 mois</label>
 		<input type="file"name="new_org_file_extract<?php echo $name_suffix; ?>" /><br /><br />
-		<label for="new_org_file_declaration<?php echo $name_suffix; ?>" class="large-label">D&eacute;claration de BE (si on n&apos;identifie pas d&apos;actionnaires personnes physiques dans les statuts)</label>
+		<label for="new_org_file_declaration<?php echo $name_suffix; ?>" class="large-label">D&eacute;claration de b&eacute;n&eacute;ficiaire &eacute;conomique (si on n&apos;identifie pas d&apos;actionnaires personnes physiques dans les statuts)</label>
 		<input type="file"name="new_org_file_declaration<?php echo $name_suffix; ?>" /><br />
 		<br /><br />
 	    
