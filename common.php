@@ -538,7 +538,7 @@ function printUserInvest($post_invest, $post_campaign) {
     $campaign = atcf_get_campaign( $post_campaign );
     $payment_status = ypcf_get_updated_payment_status($post_invest->ID);
     $contractid = ypcf_get_signsquidcontractid_from_invest($post_invest->ID);
-    $signsquid_infos = signsquid_get_contract_infos($contractid);
+    $signsquid_infos = signsquid_get_contract_infos_complete($contractid);
     $signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
     ?>
     <li id="invest-<?php echo $post_invest->ID. '-' .$contractid; ?>">

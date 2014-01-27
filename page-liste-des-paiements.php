@@ -53,6 +53,8 @@ get_header();
 			    <td style="max-width: 80px; overflow: hidden;">ID MP</td>
 			    <td>Terminé sur MP</td>
 			    <td>Succes sur MP</td>
+			    <td>ID SS</td>
+			    <td>Etat sur SS</td>
 			</tr>
 			</thead>
 
@@ -68,6 +70,8 @@ get_header();
 			    <td style="max-width: 80px; overflow: hidden;">ID MP</td>
 			    <td>Terminé sur MP</td>
 			    <td>Succes sur MP</td>
+			    <td>ID SS</td>
+			    <td>Etat sur SS</td>
 			</tr>
 			</tfoot>
 
@@ -98,6 +102,9 @@ get_header();
 				$mangopay_is_completed = (isset($mangopay_contribution->IsCompleted) && $mangopay_contribution->IsCompleted) ? 'Oui' : 'Non';
 				$mangopay_is_succeeded = (isset($mangopay_contribution->IsSucceeded) && $mangopay_contribution->IsSucceeded) ? 'Oui' : 'Non';
 				
+				$contractid = ypcf_get_signsquidcontractid_from_invest($item['ID']);
+				$signsquid_infos = signsquid_get_contract_infos_complete($contractid);
+				$signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
 				?>
 				<tr style="background-color: <?php echo $bgcolor; ?>">
 				    <td style="max-width: 80px; overflow: hidden;"><?php echo $user_link; ?></td>
@@ -110,6 +117,8 @@ get_header();
 				    <td style="max-width: 80px; overflow: hidden;"><?php echo $mangopay_id; ?></td>
 				    <td><?php echo $mangopay_is_completed; ?></td>
 				    <td><?php echo $mangopay_is_succeeded; ?></td>
+				    <td><?php echo $contractid; ?></td>
+				    <td><?php echo $signsquid_status; ?></td>
 				</tr>
 				<?php
 			    }

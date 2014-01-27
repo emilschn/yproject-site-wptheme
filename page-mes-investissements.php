@@ -21,10 +21,11 @@ require_once("wp-content/themes/yproject/common.php");
 		    //Si on a demandé de renvoyer le code
 		    if (isset($_GET['invest_id_resend']) && $_GET['invest_id_resend'] != '') {
 			$contractid = ypcf_get_signsquidcontractid_from_invest($_GET['invest_id_resend']);
-			$signsquid_infos = signsquid_get_contract_infos($contractid);
+//			$signsquid_infos = signsquid_get_contract_infos($contractid);
+			$signsquid_signatory = signsquid_get_contract_signatory($contractid);
 			$current_user = wp_get_current_user();
-			if ($signsquid_infos != '' && $signsquid_infos->{'signatories'}[0]->{'email'} == $current_user->user_email) {
-			    if (ypcf_send_mail_purchase($_GET['invest_id_resend'], "send_code", $signsquid_infos->{'signatories'}[0]->{'code'})) {
+			if ($signsquid_signatory != '' && $signsquid_signatory->{'email'} == $current_user->user_email) {
+			    if (ypcf_send_mail_purchase($_GET['invest_id_resend'], "send_code", $signsquid_signatory->{'code'})) {
 				?>
 				Votre code de signature de contrat a &eacute;t&eacute; renvoy&eacute; &agrave; l&apos;adresse <?php echo $current_user->user_email; ?>.<br />
 				<?php
@@ -128,7 +129,7 @@ require_once("wp-content/themes/yproject/common.php");
 				    //Faire un withdrawal avec le userid, le beneficiaryid et $mp_amount
 				    $withdrawal_obj = ypcf_mangopay_make_withdrawal(get_current_user_id(), $beneficiary_id, $mp_amount);
 				    
-				    //TODO : enregistrer le withdrawal pour garder une trace
+				    //Enregistrer le withdrawal pour garder une trace
 				    if (is_string($withdrawal_obj)) {
 					echo '<span class="error">Erreur durant la transaction : ' . $withdrawal_obj . '</span>';
 				    } else {

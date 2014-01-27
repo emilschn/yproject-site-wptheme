@@ -1,3 +1,5 @@
+<script type="text/javascript">var sheep_path = "<?php echo get_stylesheet_directory_uri(); ?>"</script>
+
 <header class="align-center header_home">
     <div id="site_name2" class="center">
        <div id="welcome_text">
@@ -61,7 +63,9 @@
 	<div id="home_middle_top">
 	    <div id="home_middle_content">
 		<div class="center">
-		    <div class="round_title_left"><strong>Participez</strong><br />&agrave; un projet</div>
+		    <div class="round_title_left">
+			<strong>Participez</strong><br />&agrave; un projet
+		    </div>
 		    <div class="round_title_right"><strong>Proposez</strong><br />un projet</div>
 		    <div style="clear: both"></div>
 		</div>
@@ -90,7 +94,7 @@
 	    ?>
 	    <a href="<?php echo get_permalink($page_makesense->ID); ?>"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo_makesens.jpg"></a>
 	    <a href="<?php echo get_permalink($page_partners->ID); ?>"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/logos_partenaires.jpg" width="800" height="150"></a>
-		   
+		
 	    <?php
 	    /*
 	    <?php // Rechercher ?>
