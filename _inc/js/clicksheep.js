@@ -1,11 +1,7 @@
-jQuery(document).ready( function() {
-    ClickSheepAPI.create6Sheeps();
-    ClickSheepAPI.init();
-});
-
 var ClickSheepAPI = (function($) {
     return {
 		newones: [],
+		sheepPath: "",
 		
 		create6Sheeps: function() {
 			ClickSheepAPI.newSheep($("header"));
@@ -64,6 +60,8 @@ var ClickSheepAPI = (function($) {
 					$(this).hide();
 					ClickSheepAPI.newSheep(this);
 					ClickSheepAPI.newSheep(this);
+					ClickSheepAPI.newSheep(this);
+					ClickSheepAPI.newSheep(this);
 					setTimeout("ClickSheepAPI.init();", 500);
 				}
 			);
@@ -77,7 +75,7 @@ var ClickSheepAPI = (function($) {
 			while (testRandom > 0.9 && testRandom < 0.05) testRandom = Math.random();
 			var randomTop = testRandom * parseInt($(document).height());
 			var randomColor = (Math.random()<.5) ? "_gris" : "";
-			var newone = $(element).after('<img class="'+sheep_classes+'" src="'+sheep_path+'/images/mouton_petit'+randomColor+'.gif" style="top: '+randomTop+'px" />');
+			var newone = $(element).after('<img class="'+sheep_classes+'" src="'+ClickSheepAPI.sheepPath+'/images/mouton_petit'+randomColor+'.gif" style="top: '+randomTop+'px" />');
 			ClickSheepAPI.newones.push(newone);
 		}
     }

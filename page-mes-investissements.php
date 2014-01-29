@@ -25,7 +25,7 @@ require_once("wp-content/themes/yproject/common.php");
 			$signsquid_signatory = signsquid_get_contract_signatory($contractid);
 			$current_user = wp_get_current_user();
 			if ($signsquid_signatory != '' && $signsquid_signatory->{'email'} == $current_user->user_email) {
-			    if (ypcf_send_mail_purchase($_GET['invest_id_resend'], "send_code", $signsquid_signatory->{'code'})) {
+			    if (ypcf_send_mail_purchase($_GET['invest_id_resend'], "send_code", $signsquid_signatory->{'code'}, $current_user->user_email)) {
 				?>
 				Votre code de signature de contrat a &eacute;t&eacute; renvoy&eacute; &agrave; l&apos;adresse <?php echo $current_user->user_email; ?>.<br />
 				<?php

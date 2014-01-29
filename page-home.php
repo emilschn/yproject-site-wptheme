@@ -1,4 +1,14 @@
-<script type="text/javascript">var sheep_path = "<?php echo get_stylesheet_directory_uri(); ?>"</script>
+<script type="text/javascript">
+    (function(){
+	var tId = setInterval(function(){if(document.readyState == "complete") onComplete()},11);
+	function onComplete(){
+	    ClickSheepAPI.sheepPath = "<?php echo get_stylesheet_directory_uri(); ?>";
+	    ClickSheepAPI.create6Sheeps();
+	    ClickSheepAPI.init();
+	    clearInterval(tId);
+	};
+    })();
+</script>
 
 <header class="align-center header_home">
     <div id="site_name2" class="center">
