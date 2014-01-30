@@ -9,7 +9,7 @@
 
 do_action( 'bp_before_member_activity_content' ); ?>
 
-<div class="activity" role="main">
+<div class="activity center" role="main">
 
 	<?php locate_template( array( 'activity/activity-loop.php' ), true ); ?>
 

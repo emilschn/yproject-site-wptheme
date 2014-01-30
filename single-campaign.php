@@ -40,16 +40,28 @@
 					    ?>
 
 					    <h2 class="padding-top">Quelle est l'opportunité économique du projet ?</h2>
-					    <div><?php echo html_entity_decode($campaign->added_value()); ?></div>
+					    <div><?php 
+						$added_value = html_entity_decode($campaign->added_value()); 
+						echo apply_filters('the_content', $added_value);
+					    ?></div>
 					    
 					    <h2 class="padding-top">Quelle est l'utilité sociétale du projet ?</h2>
-					    <div><?php echo html_entity_decode($campaign->societal_challenge()); ?></div>
+					    <div><?php 
+						$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
+						echo apply_filters('the_content', $societal_challenge);
+					    ?></div>
 
 					    <h2 class="padding-top">Quel est le modèle économique du projet ?</h2>
-					    <div><?php echo html_entity_decode($campaign->economic_model()); ?></div>
+					    <div><?php 
+						$economic_model = html_entity_decode($campaign->economic_model()); 
+						echo apply_filters('the_content', $economic_model);
+					    ?></div>
 
 					    <h2 class="padding-top">Qui porte le projet ?</h2>
-					    <div><?php echo html_entity_decode($campaign->implementation()); ?></div>
+					    <div><?php 
+						$implementation = html_entity_decode($campaign->implementation()); 
+						echo apply_filters('the_content', $implementation);
+					    ?></div>
 					</div>
 					
 					    <?php 

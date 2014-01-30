@@ -1,3 +1,4 @@
+<?php if (true): ?>
 <script type="text/javascript">
     (function(){
 	var tId = setInterval(function(){if(document.readyState == "complete") onComplete()},11);
@@ -9,6 +10,7 @@
 	};
     })();
 </script>
+<?php endif; ?>
 
 <header class="align-center header_home">
     <div id="site_name2" class="center">
@@ -96,9 +98,39 @@
 	    <?php /*$projects_page = get_page_by_path('projects'); ?>
 	    <a href="<?php echo get_permalink($projects_page->ID); ?>"><?php _e('Decouvrir les projets', 'yproject'); ?></a><br /><br />*/ ?>
 	    
+	    <h2 class="underlined">Actualit&eacute;</h2>
+	    <ul class="home-activity-list">
+	    <?php // Affichage du fil d'actualité
+	    if ( bp_has_activities( bp_ajax_querystring( 'activity' ).'&max=5' ) ) :
+		while ( bp_activities() ) : bp_the_activity();
+		    locate_template( array( 'activity/entry.php' ), true, false );
+		endwhile;
+	    endif; ?>
+	    </ul>
+	    
+	    <?php 
+	    query_posts( array(
+		'post_status' => 'publish',
+		'category_name' => 'wedogood',
+		'orderby' => 'post_date',
+		'order' => 'desc',
+		'showposts' => 4
+	    ) );
+	    if ( have_posts() ) : ?>
+	    <ul class="home-blog-list">
+		<?php 
+		while (have_posts()) : the_post(); 
+		    wdg_showblogitem();
+		endwhile; 
+		?>
+		<div style="clear: both;"></div>
+	    </ul>
+	    <?php endif; ?>
+	    
+	    
+	    
 	    <h2 class="underlined"><?php _e("Nos partenaires", "yproject"); ?></h2>
 	    <?php 
-		
 		$page_makesense = get_page_by_path('makesense');
 		$page_partners = get_page_by_path('partenaires');
 	    ?>
@@ -126,27 +158,42 @@
 
 	    
 	    <?php // Communauté : actualités | derniers investisseurs ?>
-	    <h1><?php echo __('Actualites', 'yproject'); ?></h1>
-	    <strong>Ces personnes viennent d'investir :</strong><br />
-	    <ul>
-	    <?php printPreviewUsersLastInvestors(10); ?>
-	    </ul>
-	    
 	    <strong>Ces projets ont réussi :</strong><br />
 	    <div id="projects_finished">
 		<?php printPreviewProjectsFinished(4); ?>
 		<div style="clear: both"></div>
 	    </div>
-	    
-	    <strong>Fil d'actualité</strong><br />
-	    <ul>
-		<li>TODO: une liste d'activité</li>
-	    </ul>
-	    Voir plus (TODO: un lien vers la page communauté)<br />
-	    <br />
 	     * 
 	     */
 	    ?>
 	</div>
     </div>
 </div><!-- #content -->
+
+<?php
+function wdg_showblogitem() {
+    ?>
+    <li>
+	<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+	
+	<?php
+	    global $post;
+	    $attachments = get_posts(
+		array('post_type' => 'attachment',
+		'post_parent' => $post->ID,
+		'post_mime_type' => 'image')
+	    );
+	    if ($attachments) $image_src = wp_get_attachment_image_src($attachments[0]->ID, "thumbnail");
+	?>
+	<a href="<?php the_permalink(); ?>">
+	    <img src="<?php if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src; ?>" class="project_preview_item_img" border="0" />
+	</a>
+	
+	<div>
+	    <a href="<?php the_permalink(); ?>"><?php the_excerpt(); ?></a>
+	</div>
+	
+    </li>
+    <?php
+}
+?>

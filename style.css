@@ -565,19 +565,42 @@ div#home_bottom h1 {
 }       
 /* FIN CONNEXION PAGE */
 
-/* COMMUNTY */
-.com-activity-list {
+/* ACTIVITY LIST */
+.com-activity-list, .home-activity-list {
     -webkit-padding-start: 0px;
-    padding-right: 0px;
+    padding-left: 0px;
 }
-.com-activity-list li {
+.com-activity-list li, .home-activity-list li {
     background-color: #F2F2F2;
     list-style: none;
     margin-bottom: 2px;
-    padding: 2px 5px;
     font-size: 11pt;
+    padding: 2px 5px;
 }
-/* FIN COMMUNITY */
+.home-activity-list p {
+    padding: 5px 5px;
+    margin: 0px;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+}
+/* FIN ACTIVITY LIST */
+
+/* BLOG ACCUEIL */
+.home-blog-list {
+    -webkit-padding-start: 0px;
+    padding-left: 0px;
+}
+.home-blog-list li {
+    list-style: none;
+    float: left;
+    width: 220px;
+    padding: 0px 5px;
+    display: inline-block;
+}
+.home-blog-list a {
+    color: #2B2C2C;
+}
+/* FIN BLOG ACCUEIL */
 
 /* BLOG */
 .category-wedogood {
@@ -1869,4 +1892,47 @@ div, span, h1, h3, a,  ul, li, p {
     transform: scale(-1, 1);
     filter: FlipH;
     right: 0px;
+}
+
+.price-table-container div {
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+
+.price-table-container span {
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+
+.price-table-container h1 {
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+
+.price-table-container h3 {
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+
+.price-table-container a {
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+
+.price-table-container ul {
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.price-table-container p {
+    border: 0 none;
+    margin: 0;
+    padding: 0;
 }

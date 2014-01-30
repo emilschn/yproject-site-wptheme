@@ -76,15 +76,18 @@ function printPageBottomEnd($post, $campaign) {
 	    <div class="left post_bottom_infos">
 		<?php 
 		    if ($vote_status != 'vote') :
-			$percent = min(100, $campaign->percent_completed(false));
+			$percent = min(100, $campaign->percent_minimum_completed(false));
 			$width = 250 * $percent / 100;
-			$percent_min = $campaign->percent_minimum_to_total();
-			$width_min = 250 * $percent_min / 100;
+			$width_min = 0;
+			if ($percent >= 100 && $campaign->is_flexible()) {
+			    $percent_min = $campaign->percent_minimum_to_total();
+			    $width_min = 150 * $percent_min / 100;
+			}
 		?>
 		    <div>
 			<div class="project_full_progressbg">
 			    <div class="project_full_progressbar" style="width:<?php echo $width; ?>px">
-				<?php if ($campaign->is_flexible()): ?>
+				<?php if ($width_min > 0): ?>
 				<div style="width: <?php echo $width_min; ?>px; height: 100%; border: 0px; border-right: 1px solid white;">&nbsp;</div>
 				<?php else: ?>
 				&nbsp;
@@ -453,15 +456,18 @@ function printSinglePreview($i, $vote) {
 		<?php else: ?>
 		    <div class="project_preview_item_progress">
 		    <?php
-			$percent = min(100, $campaign->percent_completed(false));
+			$percent = min(100, $campaign->percent_minimum_completed(false));
 			$width = 150 * $percent / 100;
-			$percent_min = $campaign->percent_minimum_to_total();
-			$width_min = 150 * $percent_min / 100;
+			$width_min = 0;
+			if ($percent >= 100 && $campaign->is_flexible()) {
+			    $percent_min = $campaign->percent_minimum_to_total();
+			    $width_min = 150 * $percent_min / 100;
+			}
 			?>
 			<a href="<?php the_permalink(); ?>">
 			<div class="project_preview_item_progressbg">
 			    <div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">
-				<?php if ($campaign->is_flexible()): ?>
+				<?php if ($width_min > 0): ?>
 				<div style="width: <?php echo $width_min; ?>px; height: 20px; border: 0px; border-right: 1px solid white;">&nbsp;</div>
 				<?php else: ?>
 				&nbsp;
@@ -546,12 +552,24 @@ function printUserInvest($post_invest, $post_campaign) {
 	<div class="user_history_title left">
 	    <div class="project_preview_item_progress">
 	    <?php
-		$percent = $campaign->percent_completed(false);
-		$percent = min(100, $percent);
+		$percent = min(100, $campaign->percent_minimum_completed(false));
 		$width = 150 * $percent / 100;
+		$width_min = 0;
+		if ($percent >= 100 && $campaign->is_flexible()) {
+		    $percent_min = $campaign->percent_minimum_to_total();
+		    $width_min = 150 * $percent_min / 100;
+		}
 		?>
-		<div class="project_preview_item_progressbg"><div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">&nbsp;</div></div>
-		<span class="project_preview_item_progressprint"><?php echo $campaign->percent_completed(); ?></span>
+		<div class="project_preview_item_progressbg">
+		    <div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">
+			<?php if ($width_min > 0): ?>
+			<div style="width: <?php echo $width_min; ?>px; height: 100%; border: 0px; border-right: 1px solid white;">&nbsp;</div>
+			<?php else: ?>
+			&nbsp;
+			<?php endif; ?>
+		    </div>
+		</div>
+		<span class="project_preview_item_progressprint"><?php echo $campaign->percent_minimum_completed(); ?></span>
 	    </div>
 	</div>
 	<div class="user_history_pictos left">
