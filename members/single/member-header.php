@@ -7,6 +7,7 @@
  * @subpackage bp-default
  */
 
+$current_user = wp_get_current_user();
 ?>
 
 <?php do_action( 'bp_before_member_header' ); ?>
@@ -47,7 +48,7 @@
 
 <div id="item-header-content" class="left">
     <h1>
-	<a href="<?php bp_displayed_user_link(); ?>"><?php bp_displayed_user_fullname(); ?></a>
+	<a href="<?php bp_displayed_user_link(); ?>"><?php echo $current_user->display_name; ?></a>
     </h1>
 
     <?php if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) : ?>

@@ -13,14 +13,7 @@
 		    
 		    <div id="post_bottom_bg">
 			<div id="post_bottom_content" class="center">
-			    <div class="left post_bottom_desc">
-				<?php the_content(); ?>
-			    </div> 
-
-			    <div class="left post_bottom_infos">
-				<?php showFaq(6); ?>
-			    </div>
-			    <div style="clear: both"></div>
+			    <?php the_content(); ?>
 			</div>
 		     </div> 
 

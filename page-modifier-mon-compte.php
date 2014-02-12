@@ -74,6 +74,9 @@ require_once("wp-content/themes/yproject/common.php");
 				<label for="update_lastname" class="standard-label"><?php _e( 'Nom', 'yproject' ); ?></label>
 				<input type="text" name="update_lastname" id="update_lastname" value="<?php echo $current_user->user_lastname; ?>" /><br />
 
+				<label for="update_publicname" class="standard-label">Nom public</label>
+				<input type="text" name="update_publicname" id="update_publicname" value="<?php echo $current_user->display_name; ?>" /><br />
+
 				<label for="update_birthday_day" class="standard-label"><?php _e( 'Date de naissance', 'yproject' ); ?></label>
 				<select name="update_birthday_day" id="update_birthday_day">
 				    <?php

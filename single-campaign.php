@@ -30,14 +30,17 @@
 					    
 					    <?php printPageBottomStart($post, $campaign); ?>
 					    
-					    <div style="padding-top: 25px;"><?php echo html_entity_decode($campaign->summary()); ?></div>
+					    <div style="padding-top: 25px"><?php echo html_entity_decode($campaign->summary()); ?></div>
+					    
+					    <?php 
+						if ($campaign->video() != '') {
+						    echo '<br /><br />';
+						    echo wp_oembed_get($campaign->video(), array('width' => 610));
+						}
+					    ?>
 
 					    <h2 class="padding-top">En quoi consiste le projet ?</h2>
 					    <span><?php the_content(); ?></span>
-					    <?php 
-						global $wp_embed; 
-						echo $wp_embed->run_shortcode( '[embed]' . $campaign->video() . '[/embed]' ); 
-					    ?>
 
 					    <h2 class="padding-top">Quelle est l'opportunité économique du projet ?</h2>
 					    <div><?php 

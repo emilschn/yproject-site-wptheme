@@ -90,8 +90,9 @@
 								<?php if ( 'textbox' == bp_get_the_profile_field_type() ) : ?>
 
 									<label style="font-size: 13px;" class="medium-label" for="<?php bp_the_profile_field_input_name(); ?>"><?php if (bp_get_the_profile_field_name() == 'Name') echo 'Nom public'; else bp_the_profile_field_name(); ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?>*<?php endif; ?></label>
-			<div style="font-size: 13px; color: #FF0000;"> <?php do_action( bp_get_the_profile_field_errors_action() ); ?>
-									<input type="text" name="<?php bp_the_profile_field_input_name(); ?>" id="<?php bp_the_profile_field_input_name(); ?>" value="<?php bp_the_profile_field_edit_value(); ?>" /> </div>
+									<div style="font-size: 13px; color: #FF0000; display: inline-block"> <?php do_action( bp_get_the_profile_field_errors_action() ); ?>
+									    <input type="text" name="<?php bp_the_profile_field_input_name(); ?>" id="<?php bp_the_profile_field_input_name(); ?>" value="<?php bp_the_profile_field_edit_value(); ?>" /> 
+									</div>
 
 								<?php endif; ?>
 

@@ -4,12 +4,12 @@ var ClickSheepAPI = (function($) {
 		sheepPath: "",
 		
 		create6Sheeps: function() {
-			ClickSheepAPI.newSheep($("header"));
-			ClickSheepAPI.newSheep($("header"));
-			ClickSheepAPI.newSheep($("header"));
-			ClickSheepAPI.newSheep($("header"));
-			ClickSheepAPI.newSheep($("header"));
-			ClickSheepAPI.newSheep($("header"));
+			ClickSheepAPI.newSheep($("header"), 1);
+			ClickSheepAPI.newSheep($("header"), 1);
+			ClickSheepAPI.newSheep($("header"), 2);
+			ClickSheepAPI.newSheep($("header"), 2);
+			ClickSheepAPI.newSheep($("header"), 3);
+			ClickSheepAPI.newSheep($("header"), 4);
 		},
 		
 		init:function () {
@@ -29,7 +29,10 @@ var ClickSheepAPI = (function($) {
 				endLeft = 0;
 			}
 			var duration = 45000;
-			if ($(sheep).hasClass("fast")) {
+			if ($(sheep).hasClass("realfast")) {
+				duration = 10000;
+			
+			} else if ($(sheep).hasClass("fast")) {
 				duration = 35000;
 			}
 			
@@ -58,21 +61,24 @@ var ClickSheepAPI = (function($) {
 				"linear",
 				function () {
 					$(this).hide();
-					ClickSheepAPI.newSheep(this);
-					ClickSheepAPI.newSheep(this);
-					ClickSheepAPI.newSheep(this);
-					ClickSheepAPI.newSheep(this);
+					ClickSheepAPI.newSheep(this, 1);
+					ClickSheepAPI.newSheep(this, 2);
+					ClickSheepAPI.newSheep(this, 3);
+					ClickSheepAPI.newSheep(this, 4);
 					setTimeout("ClickSheepAPI.init();", 500);
 				}
 			);
 		},
 		
-		newSheep: function(element) {
+		newSheep: function(element, quarter) {
 			var sheep_classes = "sheep";
 			if (Math.random()<.5) sheep_classes += " reverse";
-			if (Math.random()<.5) sheep_classes += " fast";
+			var testSpeed = Math.random();
+			if (testSpeed < 0.04) sheep_classes += " realfast";
+			else if (testSpeed < .5) sheep_classes += " fast";
 			var testRandom = Math.random();
-			while (testRandom > 0.9 && testRandom < 0.05) testRandom = Math.random();
+			var max = 0.25 * quarter;
+			while (testRandom > max || testRandom < 0.1) testRandom = Math.random();
 			var randomTop = testRandom * parseInt($(document).height());
 			var randomColor = (Math.random()<.5) ? "_gris" : "";
 			var newone = $(element).after('<img class="'+sheep_classes+'" src="'+ClickSheepAPI.sheepPath+'/images/mouton_petit'+randomColor+'.gif" style="top: '+randomTop+'px" />');

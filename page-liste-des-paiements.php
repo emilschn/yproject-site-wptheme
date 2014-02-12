@@ -126,6 +126,35 @@ get_header();
 			</tbody>
 		    </table>
 		    
+		    <h2 class="underlined">Tests Contributions Mangopay</h2>
+		    <table class="wp-list-table" cellspacing="0">
+			<thead style="background-color: #CCC;">
+			<tr>
+			    <td style="max-width: 80px; overflow: hidden;">ID Contribution</td>
+			    <td>Infos MP</td>
+			</tr>
+			</thead>
+
+			<tfoot style="background-color: #CCC;">
+			<tr>
+			    <td style="max-width: 80px; overflow: hidden;">ID Contribution</td>
+			    <td>Terminé sur MP</td>
+			    <td>Infos MP</td>
+			</tr>
+			</tfoot>
+
+			<tbody id="the-list">
+			    <?php 
+			    $mangopay_id = 2370868;
+			    $mangopay_contribution = ypcf_mangopay_get_contribution_by_id($mangopay_id);
+			    ?>
+			    <td style="max-width: 80px; overflow: hidden;"><?php echo $mangopay_id; ?></td>
+			    <td><?php print_r($mangopay_contribution); ?></td>
+			</tbody>
+		    </table>
+		    
+		    <br /><br />
+		    
 		    <?php
 		endif;
 		?>

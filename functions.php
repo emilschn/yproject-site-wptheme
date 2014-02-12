@@ -123,4 +123,18 @@ function yproject_bbp_get_forum_title($title) {
     return  $campaign_post->post_title;
 }
 add_filter('bbp_get_forum_title', 'yproject_bbp_get_forum_title');
+
+/**
+ * Ajoute rel=0 à la fin de l'url de la vidéo
+ * @param type $embed
+ * @return type
+ */
+function remove_related_videos($embed) {
+    if (strstr($embed,'http://www.youtube.com/embed/')) {
+	return str_replace('feature=oembed','feature=oembed&rel=0',$embed);
+    } else {
+	return $embed;
+    }
+}
+add_filter('oembed_result', 'remove_related_videos', 1, true);
 ?>
