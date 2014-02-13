@@ -191,7 +191,7 @@
 				    
 				    <?php do_action( 'bp_before_registration_submit_buttons' ); ?>
 				    <div class="submit">
-					<input style=" font-size: 10pt; padding: 15px 0;" type="submit" name="signup_submit" id="signup_submit" value="Cr&eacute;er mon compte" />
+					<input style=" font-size: 9pt;" type="submit" name="signup_submit" id="signup_submit" value="Cr&eacute;er mon compte" />
 				    </div>
 				    <?php do_action( 'bp_after_registration_submit_buttons' ); ?>
 
@@ -207,13 +207,13 @@
 				    
 		    <?php if ( 'completed-confirmation' == bp_get_current_signup_step() ) : ?>
 
-			    <h2><?php _e( 'Un e-mail de confirmation vous a &eacute;t&eacute; envoy&eacute;.', 'yproject' ); ?></h2>
+			    <h2><?php _e( 'Votre compte est maintenant cr&eacute;&eacute;.', 'yproject' ); ?></h2>
 
 			    <?php do_action( 'template_notices' ); ?>
 			    <?php do_action( 'bp_before_registration_confirmed' ); ?>
 
 			    <?php if ( bp_registration_needs_activation() ) : ?>
-				    <p><?php _e( 'Votre compte est maintenant cr&eacute;&eacute;. Pour l&apos;utiliser, rendez-vous sur l&apos;e-mail que nous avons envoy&eacute;.', 'yproject' ); ?></p>
+				    <p><?php _e( 'Pour l&apos;utiliser, rendez-vous sur l&apos;e-mail que nous avons envoy&eacute. Un e-mail de confirmation vous a &eacute;t&eacute; envoy&eacute;. Pensez à vérifier votre courrier indésirable (spam).', 'yproject' ); ?></p>
 			    <?php else : ?>
 				    <p><?php _e( 'Votre compte est maintenant cr&eacute;&eacute;. Vous pouvez &agrave; pr&eacute;sent vous identifier.', 'yproject' ); ?></p>
 			    <?php endif; ?>

@@ -7,7 +7,7 @@
  * @subpackage bp-default
  */
 
-$current_user = wp_get_current_user();
+$current_user = get_user_by('id', bp_displayed_user_id());
 ?>
 
 <?php do_action( 'bp_before_member_header' ); ?>
