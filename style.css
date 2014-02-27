@@ -53,6 +53,9 @@ body a {
 .left {
     float: left;
 }
+.clear {
+    clear: both;
+}
 
 .only_on_mobile {
     display: none;
@@ -158,8 +161,14 @@ h4 {
     text-transform: uppercase;
     text-overflow: ellipsis;
     overflow:hidden;
-    width: 200px;
+    width: 180px;
     white-space: nowrap;
+    display: inline-block;
+}
+
+.project_preview_item span {
+    float: right;
+    margin-top: 14px;
 }
 
 .project_preview_item h2 a {
@@ -583,22 +592,83 @@ div#home_bottom h1 {
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
 }
+.home-activity-list-container {
+    overflow: hidden;
+}
+.home-activity-list {
+    width: 9600px; /* 960px * 10 items */
+    margin: 0px;
+    -webkit-margin-before: 0px;
+}
+.home-activity-list li {
+    float: left;
+    width: 950px;
+    height: 35px;
+}
 /* FIN ACTIVITY LIST */
 
 /* BLOG ACCUEIL */
+.home-blog-list-container {
+    overflow: hidden;
+    width: 570px;
+    height: 270px;
+    display: inline-block;
+}
 .home-blog-list {
     -webkit-padding-start: 0px;
     padding-left: 0px;
+    width: 2810px; /* 560px * 5 items */
+    background-color: #F2F2F2;
+    margin: 15px 0px;
 }
 .home-blog-list li {
     list-style: none;
     float: left;
-    width: 220px;
+    width: 560px;
     padding: 0px 5px;
     display: inline-block;
 }
+.home-blog-list li div {
+    display: inline-block;
+    float: left;
+    padding: 2px 10px;
+}
+.home-blog-list li div.blogimg {
+    width: 170px;
+    height: 150px;
+}
+.home-blog-list li div.blogimg img {
+    width: 150px;
+}
+.home-blog-list li div.blogexcerpt {
+    width: 300px;
+}
 .home-blog-list a {
     color: #2B2C2C;
+}
+.home-blog-list-nav {
+    text-align: center;
+}
+.home-blog-list-nav a.selected {
+    font-weight: bold;
+}
+
+
+.home-news-list-container {
+    overflow: hidden;
+    width: 384px;
+    display: inline-block;
+}
+.home-news-list {
+    background-color: #F2F2F2;
+    margin: 15px 0px 37px 0px;
+    height: 218px;
+}
+.home-news-list li {
+    list-style: none;
+    float: left;
+    display: inline-block;
+    padding: 0px 5px;
 }
 /* FIN BLOG ACCUEIL */
 
@@ -735,6 +805,19 @@ ul.activity-list p {
 #item-submenu li.sfhover a,
 #item-submenu li:hover a {
     color: #2B2C2C;
+}
+
+.follow-button {
+    background: none repeat scroll 0 0 #333333;
+    border: medium none;
+    color: #FFFFFF;
+    margin-top: 8px;
+    padding: 3px 8px;
+    display: inline-block;
+}
+
+.follow-button a {
+    color: #FFF;
 }
 
 .standard-form {
@@ -1677,7 +1760,6 @@ background-image:url("images/jycrois_gris_rouge.png");
         margin: 20px;
        padding: 30px;
 }
-
 
 /*INVESTISSEMENT*/
 

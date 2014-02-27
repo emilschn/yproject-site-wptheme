@@ -79,11 +79,39 @@ YPUIFunctions = (function($) {
 	    if ($(".wp-editor-wrap")[0]) {
 		setInterval(YPUIFunctions.onRemoveUploadInterval, 1000);
 	    }
+	    
+	    if ($(".home-activity-list").length > 0) {
+		setTimeout(function() {YPUIFunctions.onSlideHomeActivity(); }, YPUIFunctions.homeslideInterval);
+	    }
+	    if ($(".home-blog-list-nav").length > 0) {
+		$(".home-blog-list-nav a").click(function() {
+		    $(".home-blog-list-nav a").removeClass("selected");
+		    $(this).addClass("selected");
+		    $(".home-blog-list").animate(
+			{ marginLeft: - $(this).data('targetitem') * 560}, 
+			500
+		    );
+		});
+	    }
 	},
 	
 	onRemoveUploadInterval: function() {
 	    if ($(".media-frame-menu")[0]) $(".media-frame-menu").remove();
 	    if ($(".media-frame-router")[0]) $(".media-frame-router").show();
+	},
+	
+	homeslideItemWidth: 960,
+	homeslideInterval: 3000,
+	onSlideHomeActivity: function() {
+	    var currentMargin = parseInt($(".home-activity-list").css("margin-left").replace("px", ""));
+	    currentMargin -= YPUIFunctions.homeslideItemWidth;
+	    if ($(".home-activity-list").width() < (currentMargin * -1 + 1)) currentMargin = 0;
+	    $(".home-activity-list").animate(
+		{ marginLeft: currentMargin}, 
+		500
+	    );
+	    
+	    setTimeout(function() {YPUIFunctions.onSlideHomeActivity(); }, YPUIFunctions.homeslideInterval);
 	},
 	
 	checkInvestInput: function() {

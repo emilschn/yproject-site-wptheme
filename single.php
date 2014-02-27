@@ -6,7 +6,7 @@
 
     // Articles du blog WDG
     $category = get_the_category(); 
-    if ($category[0]->slug == 'wedogood') :
+    if ($category[0]->slug == 'wedogood' || $category[0]->slug == 'revue-de-presse') :
 	$page_blog = get_page_by_path('blog');
 
 ?>
