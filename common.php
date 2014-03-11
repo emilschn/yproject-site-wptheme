@@ -418,7 +418,7 @@ function printSinglePreview($i, $vote) {
 	    ?>
 
 	    <div class="project_preview_item_part">
-		<a href="<?php the_permalink(); ?>"><img src="<?php if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src; ?>" class="project_preview_item_img" border="0" /></a><br />
+		<a href="<?php the_permalink(); ?>"><img src="<?php if (isset($image_src) && !empty($image_src[0])) echo $image_src[0]; else echo $debug_src; ?>" class="project_preview_item_img" alt="<?php the_title(); ?>" /></a><br />
 
 		<div class="project_preview_item_desc"><a href="<?php the_permalink(); ?>"><?php echo html_entity_decode($campaign->summary()); ?></a></div>
 	    </div>
@@ -426,7 +426,7 @@ function printSinglePreview($i, $vote) {
 		<div class="project_preview_item_part">
 		    <div class="project_preview_item_pictos">
 		    <div class="project_preview_item_picto">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" />
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="Logo France" />
 			<?php 
 			    $campaign_location = $campaign->location();
 			    $exploded = explode(' ', $campaign_location);
@@ -435,15 +435,15 @@ function printSinglePreview($i, $vote) {
 			?>
 		    </div>
 		    <div class="project_preview_item_picto">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" />
 			<?php echo $days_remaining; ?>
 		    </div>
 		    <div class="project_preview_item_picto">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo Cible" />
 			<?php echo $campaign->minimum_goal(true); ?>
 		    </div>
 		    <div class="project_preview_item_picto">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" />
 			<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
 		    </div>
 		    <div style="clear: both"></div>

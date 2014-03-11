@@ -80,6 +80,11 @@ YPUIFunctions = (function($) {
 		setInterval(YPUIFunctions.onRemoveUploadInterval, 1000);
 	    }
 	    
+	    if ($(".video-zone").length > 0) {
+		$(".description-zone").height($(".video-zone").height());
+		var remainheight = $(".description-zone").height() - $(".description-summary").height() - $(".description-discover").height();
+		$(".description-middle").css("top", $(".description-summary").height() - $(".description-middle").height() / 2 + remainheight / 2);
+	    }
 	    if ($(".home-activity-list").length > 0) {
 		setTimeout(function() {YPUIFunctions.onSlideHomeActivity(); }, YPUIFunctions.homeslideInterval);
 	    }
@@ -88,7 +93,7 @@ YPUIFunctions = (function($) {
 		    $(".home-blog-list-nav a").removeClass("selected");
 		    $(this).addClass("selected");
 		    $(".home-blog-list").animate(
-			{ marginLeft: - $(this).data('targetitem') * 560}, 
+			{ marginLeft: - $(this).data('targetitem') * YPUIFunctions.homeblogItemWidth}, 
 			500
 		    );
 		});
@@ -100,6 +105,7 @@ YPUIFunctions = (function($) {
 	    if ($(".media-frame-router")[0]) $(".media-frame-router").show();
 	},
 	
+	homeblogItemWidth: 570,
 	homeslideItemWidth: 960,
 	homeslideInterval: 3000,
 	onSlideHomeActivity: function() {

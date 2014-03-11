@@ -27,7 +27,7 @@
 			->buildOauth($apiUrl, $requestMethod)
 			->performRequest();
     $followers = json_decode($response);
-    if ($followers) $twitter_infos = $followers->followers_count;
+    if ($followers && isset($followers->followers_count)) $twitter_infos = $followers->followers_count;
     
     function getWDGTitle() {
 	global $post;
@@ -50,14 +50,20 @@
     }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
-	<head profile="http://gmpg.org/xfn/11">
+	<head>
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
 		
 		<meta name="description" content="Plateforme d'investissement participatif &agrave; impact positif" />
+		
+		<meta property="og:title" content="WEDOGOOD" />
+		<meta property="og:image" content="<?php echo get_stylesheet_directory_uri(); ?>/images/logo_entier.jpg" />
+		<meta property="og:image:secure_url" content="<?php echo get_stylesheet_directory_uri(); ?>/images/logo_entier.jpg" />
+		<meta property="og:image:type" content="image/jpeg" />
+		
 		<?php $title_str = getWDGTitle();
 		if ($title_str) : ?>
 		<title><?php echo $title_str; ?></title>
@@ -76,7 +82,6 @@
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo get_stylesheet_directory_uri(); ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
-		
 	</head>
 
 	<body <?php body_class(); ?> id="bp-default">
@@ -87,7 +92,7 @@
 		    <div class="center">
 			<ul id="nav">
 			    <?php /* Logo Accueil */ ?>
-			    <li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>" style="padding-left: 0px; padding-right: 14px;"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.png" width="160" height="100" /></a></li>
+			    <li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>" style="padding-left: 0px; padding-right: 14px;"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.png" width="160" height="100" alt="logo" /></a></li>
 			    <?php /* Menu Proposer un projet */ $page_start = get_page_by_path('proposer-un-projet'); ?>
 			    <li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Proposer un projet', 'yproject'); ?></a></span></li>
 			    <?php /* Menu Comment ça marche ? */ $page_how = get_page_by_path('descriptif'); ?>
@@ -103,8 +108,8 @@
 				</ul> */?>
 			    </li>
 			    <?php /* Logo FB / TW */ ?>
-			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.png" width="20" height="20" /></a></li>
-			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.png" width="20" height="20" /></a></li>
+			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.png" width="20" height="20" alt="facebook" /></a></li>
+			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.png" width="20" height="20" alt="facebook" /></a></li>
 			    
 			    <?php if (is_user_logged_in()) : ?>
 			    <?php /* Menu Mon compte */ ?>
@@ -135,13 +140,13 @@
 		    <?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
 		    <ul>
 			<li class="page_item_out">
-			    <div id="submenu_item_connection_register"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" width="25" height="25" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
+			    <div id="submenu_item_connection_register"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
 			    <hr />
-			    <div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" width="25" height="25"/><span>&nbsp;Se connecter avec Facebook</span></a></div>
+			    <div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" width="25" height="25" alt="Connexion Facebook" /><span>&nbsp;Se connecter avec Facebook</span></a></div>
 			    <div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
 			    <hr /> 
 			   
-			    <div id="submenu_item_connection_login"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_noir_connexion.jpg" width="25" height="25" />&nbsp;Connexion</div>
+			    <div id="submenu_item_connection_login"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_noir_connexion.jpg" width="25" height="25" alt="Triangle noir" />&nbsp;Connexion</div>
 			    <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
 				<input type="text" name="log" id="sidebar-user-login" class="input" placeholder="Identifiant ou e-mail" />
 				<br />

@@ -70,25 +70,25 @@
 								?>
 								<li class="menu-item">
 								    <div class="social-icons">
-									<a href="https://www.facebook.com/wedogood.co" target="_blank"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_grenade.png" /></a><br />
+									<a href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_grenade.png" alt="Compte Facebook" /></a><br />
 									<?php if ($facebook_infos) echo $facebook_infos; ?>
 								    </div>
 								    <div class="social-icons">
-									<a href="https://twitter.com/wedogood_co" target="_blank"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_grenade.png" /></a><br />
+									<a href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_grenade.png" alt="Compte Twitter" /></a><br />
 									<?php if ($twitter_infos) echo $twitter_infos; ?>
 								    </div>
 								    <?php /*<div class="social-icons">
 									<img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/viadeo_grenade.png" />
 								    </div>*/ ?>
 								    <div class="social-icons">
-									<a href="<?php echo get_permalink($page_community_blog->ID); ?>"><img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/blog_grenade.png" /></a>
+									<a href="<?php echo get_permalink($page_community_blog->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/blog_grenade.png" alt="Blog" /></a>
 								    </div>
 								    <div style="clear: both"></div>
 								</li>
 								<li class="menu-item">
 								    Newsletter<br />
 								    <?php 
-								    if (has_shortcode('mc4wp_form')) {
+								    if (yp_has_shortcode('mc4wp_form')) {
 									echo do_shortcode('[mc4wp_form]');
 								    }
 								    ?>
@@ -100,12 +100,12 @@
 						</ul>
 					</div><!-- #third .widget-area -->
 
-					<div style="clear: both" />
+					<div style="clear: both"></div>
 			</div><!-- #footer-widget-area -->
 
 <?php
 //TODO : deprecated : changer pour shortcode_exists lors du passage en 3.6.0
-function has_shortcode( $tag = NULL ) {
+function yp_has_shortcode( $tag = NULL ) {
     global $shortcode_tags;
     return array_key_exists( $tag, $shortcode_tags );
 }
