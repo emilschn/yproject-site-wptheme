@@ -156,12 +156,12 @@ function wdg_showblogitem() {
 	
 	<div class="blogimg">
 	    <a href="<?php the_permalink(); ?>">
-		<?php the_post_thumbnail(); ?>
+		<?php the_post_thumbnail('thumbnail'); ?>
 	    </a>
 	</div>
 	
 	<div class="blogexcerpt">
-	    <a href="<?php the_permalink(); ?>"><?php the_content( 'Lire la suite' ); ?></a>
+	    <a href="<?php the_permalink(); ?>"><?php the_excerpt( ); ?></a>
 	</div>
 	
 	<div class="clear"></div>

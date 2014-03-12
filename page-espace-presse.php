@@ -9,6 +9,8 @@
 	    <div id="post_bottom_bg">
 		<div id="post_bottom_content" class="center">
 		    <div class="post_bottom_desc">
+			<?php the_content(); ?>
+			
 			<?php 
 			query_posts( array(
 			    'post_status' => 'publish',
@@ -56,8 +58,6 @@
 			
 			wp_reset_query();
 			?>
-			    
-			<?php the_content(); ?>
 			
 		    </div>
 		</div>

@@ -742,12 +742,12 @@ div#home_bottom h1 {
     padding: 2px 10px;
 }
 .home-blog-list li div.blogimg {
-    width: 170px;
+    width: 150px;
     height: 150px;
     overflow: hidden;
 }
 .home-blog-list li div.blogexcerpt {
-    width: 335px;
+    width: 355px;
     height: 150px;
     overflow: hidden;
     text-align: justify;
@@ -839,8 +839,8 @@ div#home_bottom h1 {
     overflow-x: hidden;
 }
 .partners_zone a {
-    animation: marquee 80s linear infinite;
-    -webkit-animation: marquee 80s linear infinite;
+    animation: marquee 150s linear infinite;
+    -webkit-animation: marquee 150s linear infinite;
 }
 .partners_zone a:hover {
     animation-play-state: paused;

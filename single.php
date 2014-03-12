@@ -7,12 +7,15 @@
     // Articles du blog WDG
     $category = get_the_category(); 
     if ($category[0]->slug == 'wedogood' || $category[0]->slug == 'revue-de-presse') :
-	$page_blog = get_page_by_path('blog');
+	$page_blog = ($category[0]->slug == 'wedogood') ? get_page_by_path('blog') : get_page_by_path('espace-presse');
 
 ?>
     <div id="content">
 	<div class="padder">
-	    <?php printMiscPagesTop("Blog"); ?>
+	    <?php 
+	    $page_title = ($category[0]->slug == 'wedogood') ? "Blog" : "Espace presse";
+	    printMiscPagesTop($page_title); 
+	    ?>
 	    
 	    <div id="post_bottom_bg">
 		<div id="post_bottom_content" class="center">
@@ -20,7 +23,7 @@
 
 			<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			    <div class="post-content">
-				<div>&lt;&lt; <a href="<?php echo get_permalink($page_blog->ID); ?>"><?php _e('Blog', 'yproject'); ?></a></div>
+				<div>&lt;&lt; <a href="<?php echo get_permalink($page_blog->ID); ?>"><?php _e($page_title, 'yproject'); ?></a></div>
 				<h2 class="posttitle"><?php the_title(); ?></h2>
 				<p class="date"><?php echo get_the_date(); ?></p>
 				<?php the_content(); ?>
