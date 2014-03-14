@@ -123,6 +123,7 @@ h4 {
 
 /* PROJECT PREVIEW */
 .home-large-project {
+	padding: 5px;
 	margin: 30px 0px;
 }
 .home-large-project h2 {
@@ -141,8 +142,8 @@ h4 {
 }
 .home-large-project .description-zone {
 	float: left;
-	margin-left: 35px;
-	width: 310px;
+	margin-left: 30px;
+	width: 305px;
 	position: relative;
 }
 .home-large-project .description-zone a, .home-large-project .description-zone a:hover {
@@ -156,11 +157,16 @@ h4 {
 }
 .home-large-project .description-zone .description-middle {
 	position: absolute;
+	width: 100%;
 }
 .home-large-project .description-zone .description-separator {
 	background: url("images/tiret_noir.png");
 	height: 6px;
 	margin: 15px 0px;
+}
+.home-large-project .description-zone .description-status {
+	text-align: justify;
+	margin: 10px;
 }
 .home-large-project .description-zone .description-logos {
 	text-align: center;
@@ -204,7 +210,18 @@ h4 {
 .home-large-project .description-zone .description-discover img {
 	padding: 0px 2px;
 }
-
+.home-large-project.status-preview {
+	background-color: #2B2C2C;
+}
+.home-large-project.status-preview h2 a, .home-large-project.status-preview h2 a:hover, .home-large-project.status-preview .description-summary {
+	color: #FFF;
+}
+.home-large-project.status-preview .description-middle {
+	background-color: #F2F2F2;
+}
+.home-large-project.status-preview .description-logos {
+	margin-top: 5px;
+}
 
 
 .projects_current {

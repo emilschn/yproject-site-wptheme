@@ -1,7 +1,6 @@
 <?php
 function queryHomePojects($nb) {
-	global $wpdb, $print_project_count;
-	$print_project_count = 0;
+	global $wpdb;
 	query_posts( array(
 		'showposts' => $nb,
 		'post_type' => 'download',

@@ -7,7 +7,7 @@ if (isset($_GET['campaign_id'])) {
 } else  {
 	$campaign_id_param .= $post->ID;
 }
-$vote_status = html_entity_decode($campaign->vote());
+$vote_status = $campaign->campaign_status();
 ?>
 
 <?php 
