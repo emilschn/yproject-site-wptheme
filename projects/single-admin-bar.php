@@ -8,6 +8,8 @@ else $campaign_id = get_the_ID();
 $post = get_post($campaign_id);
 
 if ($current_user_id == $post->post_author || current_user_can('manage_options')) {
+	$params_full = ''; $params_partial = '';
+	if (isset($_GET['preview']) && $_GET['preview'] = 'true') { $params_full = '?preview=true'; $params_partial = '&preview=true'; }
 	$campaign_id_param = '?campaign_id=';
 	$campaign_id_param .= $campaign_id;	    // Page projet
 	$page_manage = get_page_by_path('gerer');   // Gérer le projet
@@ -16,13 +18,13 @@ if ($current_user_id == $post->post_author || current_user_can('manage_options')
 ?>
 	<div id="yp_admin_bar">
 		<div class="center">
-			<a href="<?php echo get_permalink($campaign_id); ?>"><?php echo __('Page projet', 'yproject'); ?></a>
+			<a href="<?php echo get_permalink($campaign_id) . $params_full; ?>"><?php echo __('Page projet', 'yproject'); ?></a>
 			&nbsp; &nbsp; &nbsp;
-			<a href="<?php echo get_permalink($page_manage->ID); ?><?php echo $campaign_id_param; ?>">G&eacute;rer le projet</a>
+			<a href="<?php echo get_permalink($page_manage->ID) . $campaign_id_param . $params_partial; ?>">G&eacute;rer le projet</a>
 			&nbsp; &nbsp; &nbsp;
-			<a href="<?php echo get_permalink($page_add_news->ID); ?><?php echo $campaign_id_param; ?>"><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
+			<a href="<?php echo get_permalink($page_add_news->ID) . $campaign_id_param . $params_partial; ?>"><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
 			 &nbsp; &nbsp; &nbsp;
-			<a href="<?php echo get_permalink($vote->ID); ?><?php echo $campaign_id_param; ?>">Statistiques avanc&eacute;es</a>
+			<a href="<?php echo get_permalink($vote->ID) . $campaign_id_param . $params_partial; ?>">Statistiques avanc&eacute;es</a>
 		</div>
 	</div>
 <?php } ?>
