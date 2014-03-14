@@ -4,6 +4,10 @@ date_default_timezone_set("Europe/Paris");
 
 <header class="align-center header_home">
 	<section id="site_name2" class="center">
+		<div id="welcome_text">
+			<?php wp_reset_query(); the_content(); ?>
+		</div>
+	    
 		<nav class="home_intro">
 			<?php 
 			$page_connexion_register = get_page_by_path('register');
