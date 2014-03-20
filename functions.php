@@ -105,7 +105,6 @@ function yproject_change_user_cap() {
 	$role_subscriber->remove_cap('publish_posts' );
 	$role_subscriber->remove_cap('edit_posts' );
     }
-//    wp_enqueue_script( 'clicksheep', get_stylesheet_directory_uri() . '/_inc/js/clicksheep.js', array(), '1.0.0', false );
 }
 add_action('init', 'yproject_change_user_cap');
 

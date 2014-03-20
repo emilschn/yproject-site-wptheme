@@ -5,14 +5,20 @@ else $post_campaign = $post;
 $save_post = $post;
 $post = $post_campaign;
 
+
 $attachments = get_posts( array(
 				    'post_type' => 'attachment',
 				    'post_parent' => $post->ID,
 				    'post_mime_type' => 'image'
 		));
-$image_obj = wp_get_attachment_image_src($attachments[0]->ID, "large");
-$image_src = '';
-if (isset($image_obj) && !empty($image_obj[0])) $image_src = $image_obj[0];
+$image_obj = '';
+//Si on en trouve bien une avec le titre "image_home" on prend celle-là
+foreach ($attachments as $attachment) {
+    if ($attachment->post_title == 'image_header') $image_obj = wp_get_attachment_image_src($attachment->ID, "full");
+}
+//Sinon on prend la première image rattachée à l'article
+if ($image_obj == '') $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
+if ($image_obj != '') $image_src = $image_obj[0];
 ?>
 <div id="post_top_bg">
 	<div id="post_top_title" class="center" style="background-image: url('<?php echo $image_src; ?>');">  

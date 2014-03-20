@@ -139,6 +139,9 @@ h4 {
 .home-large-project .video-zone {
 	float: left;
 	width: 615px;
+	min-height: 330px;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 .home-large-project .description-zone {
 	float: left;
@@ -165,8 +168,9 @@ h4 {
 	margin: 15px 0px;
 }
 .home-large-project .description-zone .description-status {
-	text-align: justify;
+	text-align: center;
 	margin: 10px;
+	text-transform: uppercase;
 }
 .home-large-project .description-zone .description-logos {
 	text-align: center;
@@ -182,7 +186,7 @@ h4 {
 }
 .home-large-project .description-zone .description-progress .project_preview_item_progressbg {
 	width: 240px;
-	background-color: #E1E3E2;
+	background-color: #FFF;
 }
 .home-large-project .description-zone .description-progress .project_preview_item_progressbar {
 	background-color: #333333;
@@ -210,14 +214,13 @@ h4 {
 .home-large-project .description-zone .description-discover img {
 	padding: 0px 2px;
 }
+
+/* projets en vote */
+.home-large-project.status-vote {
+}
+
+/* projets en avant-première */
 .home-large-project.status-preview {
-	background-color: #2B2C2C;
-}
-.home-large-project.status-preview h2 a, .home-large-project.status-preview h2 a:hover, .home-large-project.status-preview .description-summary {
-	color: #FFF;
-}
-.home-large-project.status-preview .description-middle {
-	background-color: #F2F2F2;
 }
 .home-large-project.status-preview .description-logos {
 	margin-top: 5px;
@@ -536,6 +539,9 @@ div#home_bottom h1 {
     padding-left: 10px;
     padding-right: 20px;
     font-size: 11pt;
+}
+.post_bottom_desc img {
+    max-width: 610px;
 }
 
 .post_bottom_desc_small {
@@ -1894,90 +1900,18 @@ background-image:url("images/jycrois_gris_rouge.png");
     border: none;
 }
 
-/*TEST MENU DEROULANT*/
-
-.custom-dropdown--large {
-    font-size: 1.5em;
+/* Modifier projet */
+.update-field-img-header {
+    border: 1px dotted grey;
+    width: 960px;
+    height: 240px;
+    overflow: hidden;
 }
-
-.custom-dropdown--small {
-    font-size: .7em;
-}
-
-.custom-dropdown__select{
-    font-size: inherit; /* inherit size from .custom-dropdown */
-    padding: .5em; /* add some space*/
-    margin: 0; /* remove default margins */
-}
-
-.custom-dropdown__select--white {
-    background-color: #fff;
-    color: #444;    
-}
-
-@supports (pointer-events: none) and ((-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none)) {
-    .custom-dropdown {
-        position: relative;
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-    .custom-dropdown__select {
-        padding-right: 2.5em; /* accommodate with the pseudo elements for the dropdown arrow */
-        border: 0;
-        border-radius: 3px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;    
-    }
-
-    .custom-dropdown::before,
-    .custom-dropdown::after {
-        content: "";
-        position: absolute;
-        pointer-events: none;
-    }
-
-    .custom-dropdown::after { /*  Custom dropdown arrow */
-        content: "\25BC";
-        height: 1em;
-        font-size: .625em;
-        line-height: 1;
-        right: 1.2em;
-        top: 50%; margin-top: -.5em;
-    }
-
-    .custom-dropdown::before { /*  Custom dropdown arrow cover */
-        width: 2em;
-        right: 0; top: 0; bottom: 0;
-        border-radius: 0 3px 3px 0;
-    }
-
-    .custom-dropdown__select[disabled] {
-        color: rgba(0,0,0,.3);
-    }
-
-    .custom-dropdown.custom-dropdown--disabled::after {
-        color: rgba(0,0,0,.1);
-    }
-
-    /* White dropdown style */
-    .custom-dropdown--white::before {
-        top: .5em; bottom: .5em;
-        background-color: #fff;
-        border-left: 1px solid rgba(0,0,0,.1);
-    }
-
-    .custom-dropdown--white::after {
-        color: rgba(0,0,0,.9);
-    }
-
-    /* FF only temp fix */
-    @-moz-document url-prefix() {
-        .custom-dropdown__select              { padding-right: .9em }
-        .custom-dropdown--large .custom-dropdown__select { padding-right: 1.3em }
-        .custom-dropdown--small .custom-dropdown__select { padding-right: .5em }
-    }
+.update-field-img-home {
+    border: 1px dotted grey;
+    width: 610px;
+    height: 330px;
+    overflow: hidden;
 }
 
 #activate-page {
