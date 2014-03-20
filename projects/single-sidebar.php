@@ -17,10 +17,10 @@ switch ($vote_status) {
 	$percent = min(100, $campaign->percent_minimum_completed(false));
 	$width = 250 * $percent / 100;
 	$width_min = 0;
-	if ($percent >= 100 && $campaign->is_flexible()) {
+	/*if ($percent >= 100 && $campaign->is_flexible()) {
 		$percent_min = $campaign->percent_minimum_to_total();
 		$width_min = 150 * $percent_min / 100;
-	}
+	}*/
 ?>
 	<div>
 		<div class="project_full_progressbg">
@@ -90,7 +90,7 @@ switch ($vote_status) {
 	<div class="post_bottom_buttons">
 		<?php 
 		    // Affichage du bouton investir : Statut du projet == 'collecte' && Fiche du porteur de projet complète
-		    if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author)) :
+		    if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) :
 		?> 
 		<div class="dark">
 			<?php $page_invest = get_page_by_path('investir'); ?>
