@@ -1,22 +1,12 @@
 <?php 
-global $wpdb, $campaign, $post;
-if ( ! is_object( $campaign ) ) $campaign = atcf_get_campaign( $post );
-
-$post_camp = get_post($_GET['campaign_id']);
-$post = $post_camp;
-
-$name = $post_camp->ID.'-2';
-
-if ($name!='') {
-	$table_name = $wpdb->prefix . "posts";
-	$query="SELECT ID FROM $table_name WHERE post_type='forum' AND post_name= $post_camp->ID";
-
-	$results=$wpdb->get_results($query);
-
-	foreach ($results as $result) {
-		$forum_projet_id = $result->ID;
-	}
-}
+/**
+ * Template Name: Single Campaign
+ *
+ * @package Atlas
+ */
+    global $campaign, $post;
+    $page_name = get_post($post)->post_name;
+    if ( ! is_object( $campaign ) ) $campaign = atcf_get_campaign( $post );
 ?>
 
 <?php get_header(); ?>
@@ -28,21 +18,34 @@ if ($name!='') {
 			<div class="page" id="blog-single" role="main">
 				
 				<?php require_once('projects/single-admin-bar.php'); ?>
-			    
+
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<?php require_once('projects/single-header.php'); ?>
-				    
+
 					<div id="post_bottom_bg">
 						<div id="post_bottom_content" class="center">
 							<div class="left post_bottom_desc">
 								<?php
-								if ( is_user_logged_in() ) {
-									echo do_shortcode('[bbp-single-forum id='.$forum_projet_id.']'); 
-								} else {
-									$page_connexion = get_page_by_path('connexion');
-								?>
-									Vous devez <a href="<?php echo get_permalink($page_connexion->ID); ?>">&ecirc;tre connect&eacute;</a> pour acc&eacute;der au forum !
-								<?php
+								switch ($page_name) {
+								    case 'ajouter-une-actu':
+									do_shortcode('[yproject_crowdfunding_add_news]');
+									break;
+								    case 'editer-une-actu':
+									do_shortcode('[yproject_crowdfunding_edit_news]');
+									break;
+								    case 'statistiques':
+									the_content();
+									if (isset($_GET["campaign_id"])) {
+									    $post_campaign = get_post($_GET["campaign_id"]);
+									    $upload_dir = wp_upload_dir();
+									    if (file_exists($upload_dir['basedir'] . '/projets/' . $post_campaign->post_name . '-stats.jpg')) { 
+										echo '<img src="'.$upload_dir['baseurl'] . '/projets/' . $post_campaign->post_name . '-stats.jpg" alt="Statistiques du projet" />';
+									    }
+									}
+									break;
+								    default:
+									the_content();
+									break;
 								}
 								?>
 							</div>

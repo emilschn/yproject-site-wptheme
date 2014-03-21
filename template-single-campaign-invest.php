@@ -1,5 +1,11 @@
 <?php 
+/**
+ * Template Name: Single Campaign Invest
+ *
+ * @package Atlas
+ */
     global $campaign, $post;
+    $page_name = get_post($post)->post_name;
     if ( ! is_object( $campaign ) ) $campaign = atcf_get_campaign( $post );
 ?>
 
@@ -10,27 +16,25 @@
 		<div class="padder">
 
 			<div class="page" id="blog-single" role="main">
-				
-				<?php require_once('projects/single-admin-bar.php'); ?>
-
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<?php require_once('projects/single-header.php'); ?>
-
-					<div id="post_bottom_bg">
-						<div id="post_bottom_content" class="center">
-							<div class="left post_bottom_desc">
-								<?php the_content(); ?>
+					<div class="post-content">
+						<div class="entry">
+							<?php require_once('projects/single-header.php'); ?>
+							<div class="center">
+								<?php 
+								if ($page_name == 'paiement') echo ypcf_print_invest_breadcrumb(3);
+								
+								the_content();
+								
+								if ($page_name == 'paiement') :
+								?>
+								<div id="PaylineForm"></div>
+								<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="Bandeau Mangopay" /></center>
+								<?php endif; ?>
 							</div>
-
-							<div class="left post_bottom_infos">
-								<?php require_once('projects/single-sidebar.php'); ?>
-							</div>
-
-							<div style="clear: both"></div>
 						</div>
 					</div>
 				</div>
-
 			</div>
 
 		</div><!-- .padder -->

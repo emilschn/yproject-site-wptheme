@@ -6,63 +6,70 @@
  * @package bbPress
  * @subpackage Theme
  */
-
-    date_default_timezone_set("Europe/Paris");
-    require_once("wp-content/themes/yproject/common.php");
     global $post;
     $post_topic = $post;
     $post_forum = get_post($post_topic->post_parent);
+    echo '$post_forum->post_title : ' . $post_forum->post_title;
     $post_project = get_post($post_forum->post_title);
     $campaign = atcf_get_campaign( $post_project );
     
     $post = $post_project;
-    printPageTop($post);
-    printPageBottomStart($post, $campaign);
-    $post = $post_topic;
 ?>
+<?php require_once('projects/single-admin-bar.php'); ?>
+<?php require_once('projects/single-header.php'); ?>
 
-<div id="bbpress-forums">
+<div id="post_bottom_bg">
+	<div id="post_bottom_content" class="center">
+		<div class="left post_bottom_desc">
 
-	<?php /* bbp_breadcrumb(); */ ?>
+			<div id="bbpress-forums">
 
-	<?php do_action( 'bbp_template_before_single_topic' ); ?>
+				<?php $post = $post_topic; ?>
 
-	<?php if ( post_password_required() ) : ?>
+				<?php do_action( 'bbp_template_before_single_topic' ); ?>
 
-		<?php bbp_get_template_part( 'form', 'protected' ); ?>
+				<?php if ( post_password_required() ) : ?>
 
-	<?php else : ?>
+					<?php bbp_get_template_part( 'form', 'protected' ); ?>
 
-		<?php bbp_topic_tag_list(); ?>
+				<?php else : ?>
 
-		<?php bbp_single_topic_description(); ?>
+					<?php bbp_topic_tag_list(); ?>
 
-		<?php if ( bbp_show_lead_topic() ) : ?>
+					<?php bbp_single_topic_description(); ?>
 
-			<?php bbp_get_template_part( 'content', 'single-topic-lead' ); ?>
+					<?php if ( bbp_show_lead_topic() ) : ?>
 
-		<?php endif; ?>
+						<?php bbp_get_template_part( 'content', 'single-topic-lead' ); ?>
 
-		<?php ob_start(); if ( bbp_has_replies() ) : $temp = ob_get_clean();?>
+					<?php endif; ?>
 
-			<?php bbp_get_template_part( 'pagination', 'replies' ); ?>
+					<?php ob_start(); if ( bbp_has_replies() ) : $temp = ob_get_clean();?>
 
-			<?php bbp_get_template_part( 'loop',       'replies' ); ?>
+						<?php bbp_get_template_part( 'pagination', 'replies' ); ?>
 
-			<?php bbp_get_template_part( 'pagination', 'replies' ); ?>
+						<?php bbp_get_template_part( 'loop',       'replies' ); ?>
 
-		<?php else: $temp = ob_get_clean(); endif; ?>
+						<?php bbp_get_template_part( 'pagination', 'replies' ); ?>
 
-		<?php bbp_get_template_part( 'form', 'reply' ); ?>
+					<?php else: $temp = ob_get_clean(); endif; ?>
 
-	<?php endif; ?>
+					<?php bbp_get_template_part( 'form', 'reply' ); ?>
 
-	<?php do_action( 'bbp_template_after_single_topic' ); ?>
+				<?php endif; ?>
 
+				<?php do_action( 'bbp_template_after_single_topic' ); ?>
+
+			</div>
+		</div>
+
+		<div class="left post_bottom_infos">
+			<?php 
+			$post = $post_project;
+			require_once('projects/single-sidebar.php');
+			?>
+		</div>
+
+		<div style="clear: both"></div>
+	</div>
 </div>
-
-<?php 
-    printPageBottomStartEnd();
-    $post = $post_project;
-    printPageBottomEnd($post, $campaign); 
-?>

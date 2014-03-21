@@ -17,7 +17,7 @@ foreach ($attachments as $attachment) {
     if ($attachment->post_title == 'image_header') $image_obj = wp_get_attachment_image_src($attachment->ID, "full");
 }
 //Sinon on prend la première image rattachée à l'article
-if ($image_obj == '') $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
+if ($image_obj == '' && count($attachments) > 0) $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
 if ($image_obj != '') $image_src = $image_obj[0];
 ?>
 <div id="post_top_bg">
