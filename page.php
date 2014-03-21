@@ -15,8 +15,7 @@
 		<div class="page" id="blog-page" role="main">
 			<?php 
 			    if ($pagename == "gerer" || $pagename == "ajouter-une-actu" || $pagename == "editer-une-actu") {
-				require_once("common.php");
-				printAdminBar();
+				require_once('projects/single-admin-bar.php');
 			    }
 			?>
 

@@ -96,7 +96,8 @@ get_header( 'buddypress' );
 				    <?php
 					query_posts( array(
 					    'post_type' => 'download',
-					    'author' => bp_displayed_user_id()
+					    'author' => bp_displayed_user_id(),
+					    'post_status' => 'publish'
 					) );
 					
 					if (have_posts()) {
@@ -117,7 +118,7 @@ get_header( 'buddypress' );
 					    query_posts( array(
 						'post_type' => 'download',
 						'author' => bp_displayed_user_id(),
-						'post_status' => 'pending'
+						'post_status' => 'private'
 					    ));
 
 					    if (have_posts()) {
@@ -126,8 +127,11 @@ get_header( 'buddypress' );
 						while (have_posts()) {
 						    the_post();
 						    echo '<li><a href="';
-						    the_permalink();
-						    echo '">';
+	$preview_link = set_url_scheme( get_permalink( $post->ID ) );
+	$preview_link = esc_url( apply_filters( 'preview_post_link', add_query_arg( 'preview', 'true', $preview_link ) ) );
+//						    the_permalink();
+//						    echo '&preview=true">';
+	echo $preview_link . '">';
 						    the_title();
 						    echo '</a></li>';
 						}

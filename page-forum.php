@@ -16,9 +16,8 @@
 			<?php do_action( 'bp_before_blog_single_post' ); ?>
 
 			<div class="page" id="blog-single" role="main">
-				<?php 
-				    printAdminBar();
-				?>
+				
+				<?php require_once('projects/single-admin-bar.php'); ?>
 			    
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				    <div class="post-content">

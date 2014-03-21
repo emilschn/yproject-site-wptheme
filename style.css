@@ -123,6 +123,7 @@ h4 {
 
 /* PROJECT PREVIEW */
 .home-large-project {
+	padding: 5px;
 	margin: 30px 0px;
 }
 .home-large-project h2 {
@@ -138,11 +139,14 @@ h4 {
 .home-large-project .video-zone {
 	float: left;
 	width: 615px;
+	min-height: 330px;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 .home-large-project .description-zone {
 	float: left;
-	margin-left: 35px;
-	width: 310px;
+	margin-left: 30px;
+	width: 305px;
 	position: relative;
 }
 .home-large-project .description-zone a, .home-large-project .description-zone a:hover {
@@ -156,11 +160,17 @@ h4 {
 }
 .home-large-project .description-zone .description-middle {
 	position: absolute;
+	width: 100%;
 }
 .home-large-project .description-zone .description-separator {
 	background: url("images/tiret_noir.png");
 	height: 6px;
 	margin: 15px 0px;
+}
+.home-large-project .description-zone .description-status {
+	text-align: center;
+	margin: 10px;
+	text-transform: uppercase;
 }
 .home-large-project .description-zone .description-logos {
 	text-align: center;
@@ -205,6 +215,16 @@ h4 {
 	padding: 0px 2px;
 }
 
+/* projets en vote */
+.home-large-project.status-vote {
+}
+
+/* projets en avant-première */
+.home-large-project.status-preview {
+}
+.home-large-project.status-preview .description-logos {
+	margin-top: 5px;
+}
 
 
 .projects_current {
@@ -463,17 +483,20 @@ div#home_bottom h1 {
 /* PROJECT PAGE */
 #post_top_bg {
     background-color: #FF494C; 
-} 
-
-/*#post_bottom_bg {
-    background: #f3f3f3;
-    background-image:url(../yproject/images/fond_site.jpg) !important; 
-    background-repeat: repeat-x;    
-}*/
+}
 
 #post_top_title {
     height: 240px;
     position: relative;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: white; 
+}
+
+#post_top_title>img {
+    position: absolute;
+    width: 960px;
+    height: 240px;
 }
 
 #post_top_title h1 {
@@ -516,6 +539,10 @@ div#home_bottom h1 {
     padding-left: 10px;
     padding-right: 20px;
     font-size: 11pt;
+}
+.post_bottom_desc img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .post_bottom_desc_small {
@@ -1313,10 +1340,10 @@ header.header_home {
     background-image: url("images/header.png");
 }
 
-
+/* HEADER ACCUEIL */
 #site_name2 {
     padding-top: 0px;
-    height: 300px;
+    height: 350px;
     vertical-align: middle;
     display: inline-block;
 }
@@ -1331,26 +1358,13 @@ header.header_home {
 #site_name2 h1 {
     color: #FFF;
 }
-
-
-
-
-#site_name {
-    padding-top: 90px;
-    height: 150px;
-    vertical-align: middle;
-    display: inline-block;
+#site_name2 #welcome_text {
+    margin-top: 10px;
 }
-#site_name a {
-    color: #FFF;
-    text-decoration: none;
-}
-#site_name .home_half_size, #site_name .home_discover_half_size {
-    display: none;
-}
-
-#site_name h1 {
-    color: #FFF;
+#site_name2 #welcome_text p {
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    margin: 0px;
 }
 
 .home_intro {
@@ -1369,7 +1383,7 @@ header.header_home {
     text-align: center;
     width: 240px;
     height: 190px;
-    margin: 30px 20px 0px 20px;
+    margin: 20px 20px 0px 20px;
     padding: 40px 10px;
 }
 .home_intro .top-button:hover {
@@ -1395,6 +1409,27 @@ header.header_home {
     font-family: Arial, sans-serif;
     font-size: 11pt;
 }
+/* FIN HEADER ACCUEIL */
+
+/* HEADER AUTRES */
+#site_name {
+    padding-top: 90px;
+    height: 150px;
+    vertical-align: middle;
+    display: inline-block;
+}
+#site_name a {
+    color: #FFF;
+    text-decoration: none;
+}
+#site_name .home_half_size, #site_name .home_discover_half_size {
+    display: none;
+}
+
+#site_name h1 {
+    color: #FFF;
+}
+/* FIN HEADER AUTRES */
 
 #container {
     padding-top: 120px;
@@ -1866,90 +1901,18 @@ background-image:url("images/jycrois_gris_rouge.png");
     border: none;
 }
 
-/*TEST MENU DEROULANT*/
-
-.custom-dropdown--large {
-    font-size: 1.5em;
+/* Modifier projet */
+.update-field-img-header {
+    border: 1px dotted grey;
+    width: 960px;
+    height: 240px;
+    overflow: hidden;
 }
-
-.custom-dropdown--small {
-    font-size: .7em;
-}
-
-.custom-dropdown__select{
-    font-size: inherit; /* inherit size from .custom-dropdown */
-    padding: .5em; /* add some space*/
-    margin: 0; /* remove default margins */
-}
-
-.custom-dropdown__select--white {
-    background-color: #fff;
-    color: #444;    
-}
-
-@supports (pointer-events: none) and ((-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none)) {
-    .custom-dropdown {
-        position: relative;
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-    .custom-dropdown__select {
-        padding-right: 2.5em; /* accommodate with the pseudo elements for the dropdown arrow */
-        border: 0;
-        border-radius: 3px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;    
-    }
-
-    .custom-dropdown::before,
-    .custom-dropdown::after {
-        content: "";
-        position: absolute;
-        pointer-events: none;
-    }
-
-    .custom-dropdown::after { /*  Custom dropdown arrow */
-        content: "\25BC";
-        height: 1em;
-        font-size: .625em;
-        line-height: 1;
-        right: 1.2em;
-        top: 50%; margin-top: -.5em;
-    }
-
-    .custom-dropdown::before { /*  Custom dropdown arrow cover */
-        width: 2em;
-        right: 0; top: 0; bottom: 0;
-        border-radius: 0 3px 3px 0;
-    }
-
-    .custom-dropdown__select[disabled] {
-        color: rgba(0,0,0,.3);
-    }
-
-    .custom-dropdown.custom-dropdown--disabled::after {
-        color: rgba(0,0,0,.1);
-    }
-
-    /* White dropdown style */
-    .custom-dropdown--white::before {
-        top: .5em; bottom: .5em;
-        background-color: #fff;
-        border-left: 1px solid rgba(0,0,0,.1);
-    }
-
-    .custom-dropdown--white::after {
-        color: rgba(0,0,0,.9);
-    }
-
-    /* FF only temp fix */
-    @-moz-document url-prefix() {
-        .custom-dropdown__select              { padding-right: .9em }
-        .custom-dropdown--large .custom-dropdown__select { padding-right: 1.3em }
-        .custom-dropdown--small .custom-dropdown__select { padding-right: .5em }
-    }
+.update-field-img-home {
+    border: 1px dotted grey;
+    width: 610px;
+    height: 330px;
+    overflow: hidden;
 }
 
 #activate-page {

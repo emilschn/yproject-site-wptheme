@@ -1,10 +1,10 @@
 <?php
 function queryHomePojects($nb) {
-	global $wpdb, $print_project_count;
-	$print_project_count = 0;
+	global $wpdb;
 	query_posts( array(
 		'showposts' => $nb,
 		'post_type' => 'download',
+		'post_status' => 'publish',
 		'meta_query' => array (
 			array (
 				'key' => 'campaign_end_date',
@@ -13,7 +13,7 @@ function queryHomePojects($nb) {
 			)
 		),
 		'orderby' => 'post_date',
-		'order' => 'desc'
+		'order' => 'asc'
 	) );
 }
 ?>

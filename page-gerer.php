@@ -16,22 +16,24 @@
 			<?php do_action( 'bp_before_blog_single_post' ); ?>
 
 			<div class="page" id="blog-single" role="main">
-				<?php 
-				    printAdminBar();
-				?>
-			    
+				<?php require_once('projects/single-admin-bar.php'); ?>
+
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-				    <div class="post-content">
-					<div class="entry">
-					    <?php 
-						printPageTop($post);
-						printPageBottomStart($post, $campaign);
-						the_content();
-						printPageBottomStartEnd();
-						printPageBottomEnd($post, $campaign);
-					    ?>
+					<?php require_once('projects/single-header.php'); ?>
+
+					<div id="post_bottom_bg">
+						<div id="post_bottom_content" class="center">
+							<div class="left post_bottom_desc">
+								<?php the_content(); ?>
+							</div>
+
+							<div class="left post_bottom_infos">
+								<?php require_once('projects/single-sidebar.php'); ?>
+							</div>
+
+							<div style="clear: both"></div>
+						</div>
 					</div>
-				    </div>
 				</div>
 
 			</div>

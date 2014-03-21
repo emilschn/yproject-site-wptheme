@@ -32,8 +32,22 @@ get_header();
 			    $mp_user_id = get_user_meta($user->ID, 'mangopay_user_id', true);
 			    $mp_user = ypcf_mangopay_get_user_by_id($mp_user_id);
 			    ?>
-			    <li><?php echo $mp_user->ID . ' - ' . $mp_user->FirstName . ' ' . $mp_user->LastName . ' (' . $mp_user->Email . ')'; ?></li>
+			    <li><?php echo 'wp' . $user->ID . ' - mp' .$mp_user->ID . ' -> ' . $mp_user->FirstName . ' ' . $mp_user->LastName . ' (' . $mp_user->Email . ') :: €'.$mp_user->PersonalWalletAmount; ?></li>
 			    <?php
+			    if ($mp_user->ID == 2937648 || $mp_user->ID == 2054788) {
+				?>
+				<ul>
+				    <?php 
+				    $operations = ypcf_mangopay_get_operations_by_user_id($mp_user->ID);
+				    foreach ($operations as $operation) {
+					?>
+					<li><?php print_r($operation); ?></li>
+					<?php
+				    }
+				    ?>
+				</ul>
+				<?php
+			    }
 			}
 		    ?>
 		    </ul>
@@ -67,9 +81,19 @@ get_header();
 			    ?>
 			    <li>
 				<?php 
-				    echo $mp_wallet->ID . ' - ' . $mp_wallet->Name . ' - ' . $mp_wallet->CollectedAmount . ' sur ' . $mp_wallet->RaisingGoalAmount;
+				    echo $mp_wallet->ID . ' - ' . $mp_wallet->Name . ' - ' . $mp_wallet->Amount . ' sur ' . $mp_wallet->RaisingGoalAmount;
 				    echo ' - appartient à ' . $mp_wallet->Owners[0];
 				?>
+				<ul>
+				    <?php
+				    $operations = ypcf_mangopay_get_operations_by_wallet_id($mp_wallet->ID);
+				    foreach ($operations as $operation) {
+					?>
+					<li><?php print_r($operation); ?></li>
+					<?php
+				    }
+				    ?>
+				</ul>
 			    </li>
 			    <?php
 			}
