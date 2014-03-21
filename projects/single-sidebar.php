@@ -102,19 +102,8 @@ switch ($vote_status) {
 	    
 		<?php
 		    // Affichage du bouton voter et de la zone de vote : Statut du projet == 'vote'
-		    if ($vote_status == 'vote'):
+		    if ($vote_status == 'vote') require_once('single-voteform.php');
 		?>
-		<div id="project_vote_link" class="dark" style="color: #FFF">Voter</div>
-		<div id="project_vote_zone">
-			<?php	
-			if ($campaign->end_vote_remaining() > 0) {
-			    do_shortcode('[yproject_crowdfunding_printPageVoteForm remaining_days='.$campaign->end_vote_remaining().']');
-			} else {
-			    do_shortcode('[yproject_crowdfunding_printPageVoteDeadLine]');
-			}
-			?>
-		</div>
-		<?php endif; ?>
 
 		<!-- Zone de partage -->
 		<div id="share_btn" class="dark">

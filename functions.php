@@ -96,14 +96,14 @@ function yproject_change_user_cap() {
 	$role_subscriber = get_role("subscriber");
 	$role_subscriber->add_cap( 'read' );
 	$role_subscriber->add_cap( 'upload_files' );
-	$role_subscriber->add_cap('edit_others_pages' );
-	$role_subscriber->add_cap('edit_published_pages' );
-	$role_subscriber->remove_cap('publish_pages' );
-	$role_subscriber->remove_cap('edit_pages' );
-	$role_subscriber->remove_cap('edit_others_posts' );
-	$role_subscriber->remove_cap('edit_published_posts' );
-	$role_subscriber->remove_cap('publish_posts' );
-	$role_subscriber->remove_cap('edit_posts' );
+	$role_subscriber->remove_cap( 'publish_pages' );
+	$role_subscriber->remove_cap( 'edit_pages' );
+	$role_subscriber->remove_cap( 'edit_published_pages' );
+	$role_subscriber->remove_cap( 'edit_others_pages' );
+	$role_subscriber->remove_cap( 'publish_posts' );
+	$role_subscriber->remove_cap( 'edit_posts' );
+	$role_subscriber->remove_cap( 'edit_published_posts' );
+	$role_subscriber->remove_cap( 'edit_others_posts' );
     }
 }
 add_action('init', 'yproject_change_user_cap');
@@ -136,4 +136,13 @@ function remove_related_videos($embed) {
     }
 }
 add_filter('oembed_result', 'remove_related_videos', 1, true);
+
+function yproject_admin_init() {
+    global $pagenow;
+    if ($pagenow != 'media-new.php' && $pagenow != 'async-upload.php' && $pagenow != 'media-upload.php' && $pagenow != 'media.php' && !current_user_can('manage_categories') ) {
+	wp_redirect( site_url() );
+	exit;
+    }
+}
+add_action( 'admin_init', 'yproject_admin_init' );
 ?>
