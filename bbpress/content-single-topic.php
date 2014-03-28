@@ -9,14 +9,13 @@
     global $post;
     $post_topic = $post;
     $post_forum = get_post($post_topic->post_parent);
-    echo '$post_forum->post_title : ' . $post_forum->post_title;
     $post_project = get_post($post_forum->post_title);
     $campaign = atcf_get_campaign( $post_project );
     
     $post = $post_project;
 ?>
-<?php require_once('projects/single-admin-bar.php'); ?>
-<?php require_once('projects/single-header.php'); ?>
+<?php require_once(get_theme_root() . '/yproject/projects/single-admin-bar.php'); ?>
+<?php require_once(get_theme_root() . '/yproject/projects/single-header.php'); ?>
 
 <div id="post_bottom_bg">
 	<div id="post_bottom_content" class="center">
@@ -66,7 +65,7 @@
 		<div class="left post_bottom_infos">
 			<?php 
 			$post = $post_project;
-			require_once('projects/single-sidebar.php');
+			require_once(get_theme_root() . '/yproject/projects/single-sidebar.php');
 			?>
 		</div>
 

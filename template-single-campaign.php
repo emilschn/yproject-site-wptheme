@@ -10,12 +10,12 @@
 ?>
 
 <?php get_header(); ?>
+<div id="content">
+	<div class="padder">
 
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-	<div id="content">
-		<div class="padder">
+		<div class="page" id="blog-single" role="main">
 
-			<div class="page" id="blog-single" role="main">
+			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 				
 				<?php require_once('projects/single-admin-bar.php'); ?>
 
@@ -58,19 +58,12 @@
 						</div>
 					</div>
 				</div>
+			<?php endwhile; endif; ?>
 
-			</div>
+		</div>
 
-		</div><!-- .padder -->
-	</div><!-- #content -->
+	</div><!-- .padder -->
+</div><!-- #content -->
 
-
-<?php endwhile; else: ?>
-	<div id="content">
-	    <div class="padder center">
-		<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
-	    </div><!-- .padder -->
-	</div><!-- #content -->
-<?php endif; ?>
 	
 <?php get_footer(); ?>
