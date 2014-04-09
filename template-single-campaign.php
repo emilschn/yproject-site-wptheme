@@ -7,6 +7,11 @@
     global $campaign, $post;
     $page_name = get_post($post)->post_name;
     if ( ! is_object( $campaign ) ) $campaign = atcf_get_campaign( $post );
+    if ($page_name == 'vote') {
+	global $disable_logs;
+	$disable_logs = TRUE;
+	ypcf_shortcode_vote_results_header();
+    }
 ?>
 
 <?php get_header(); ?>

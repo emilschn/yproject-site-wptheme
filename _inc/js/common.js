@@ -201,7 +201,7 @@ YPMenuFunctions = (function($){
 	    });*/
 	    
 	    $("#menu_item_connection").mouseenter(function(){
-		$("#submenu_item_connection").css("top", $("#navigation").position().top + $("#navigation").height());
+		$("#submenu_item_connection").css("top", $(document).scrollTop() + $("#navigation").height());
 		$("#submenu_item_connection").css("left", $("#menu_item_connection").position().left + $("#menu_item_connection").width() - $("#submenu_item_connection").width() - 1);
 		clearTimeout($("#menu_item_connection").data('timeoutId'));
 		$("#submenu_item_connection").fadeIn("slow");

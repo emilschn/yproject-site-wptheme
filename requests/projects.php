@@ -1,7 +1,7 @@
 <?php
-function queryHomePojects($nb) {
+function queryHomePojects($nb, $temp = false) {
 	global $wpdb;
-	query_posts( array(
+	$query_options = array(
 		'showposts' => $nb,
 		'post_type' => 'download',
 		'post_status' => 'publish',
@@ -14,6 +14,11 @@ function queryHomePojects($nb) {
 		),
 		'orderby' => 'post_date',
 		'order' => 'asc'
-	) );
+	);
+	if ($temp) {
+	    $query_options['meta_query'] = array();
+	    $query_options['order'] = 'desc';
+	}
+	query_posts( $query_options );
 }
 ?>
