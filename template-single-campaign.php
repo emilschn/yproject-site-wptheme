@@ -2,7 +2,6 @@
 /**
  * Template Name: Single Campaign
  *
- * @package Atlas
  */
     global $campaign, $post;
     $page_name = get_post($post)->post_name;
