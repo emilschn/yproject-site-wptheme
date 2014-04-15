@@ -1,6 +1,7 @@
 <?php 
     get_header();
     require_once("common.php");
+    date_default_timezone_set("Europe/London");
 ?>
 
 <div id="content">
@@ -20,10 +21,7 @@
 				"role" => "Subscriber",
 				"orderby" => "registered", 
 				"order" => "DESC", 
-				"number" => 5,
-				"meta_key" => "last_activity",
-				"meta_value" => "",
-				"meta_compare" => "<>"
+				"number" => 5
 			    );
 			    $user_query = new WP_User_Query( $args ); 
 			    if ( ! empty( $user_query->results ) ) { ?>

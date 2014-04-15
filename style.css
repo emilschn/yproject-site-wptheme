@@ -136,12 +136,15 @@ h4 {
 .home-large-project h2 img {
 	padding-left: 10px;
 }
-.home-large-project .video-zone {
-	float: left;
-	width: 615px;
+.video-zone {
+	width: 610px;
 	min-height: 330px;
 	background-repeat: no-repeat;
 	background-position: center;
+}
+.home-large-project .video-zone {
+	float: left;
+	width: 615px;
 }
 .home-large-project .description-zone {
 	float: left;
@@ -542,7 +545,7 @@ div#home_bottom h1 {
 }
 .post_bottom_desc img {
     max-width: 100%;
-    max-height: 100%;
+    height: auto;
 }
 
 .post_bottom_desc_small {
@@ -621,7 +624,7 @@ div#home_bottom h1 {
 
 .post_bottom_buttons div.light {
     background-color: #F2F2F2;
-    color: #FFF
+    color: #333333;
 }
     
 .post_bottom_buttons div.dark a {
@@ -1090,6 +1093,21 @@ ul.activity-list p {
     padding: 5px;
 }
 /* FIN MON COMPTE */
+
+/* GROUPES INVESTISSEURS */
+#object-nav ul, #subnav ul {
+    padding-left: 0px;
+    height: 20px;
+}
+#object-nav li, #subnav li {
+    float: left;
+    list-style: none;
+    padding-right: 10px;
+}
+#object-nav li.current, #subnav li.current {
+    font-weight: bold;
+}
+/* FIN GROUPES INVESTISSEURS */
 
 /* NAV */
 #navigation {
@@ -1616,8 +1634,8 @@ footer span {
 /* PAGE RESULATS DES VOTES */
 .tab-results{
     width:100%;
-    height:100%;
-    margin:0px;padding:0px;
+    margin:0px;
+    padding:0px;
 }
 
 .tab-results td{
@@ -1989,7 +2007,9 @@ background-image:url("images/jycrois_gris_rouge.png");
     padding-top: 12px !important;
 }
 
-
+table.mceLayout {
+    border: 1px solid #ccc !important;
+}
 
 /*TABLEAU PROPOSER UN PROJET*/
 
@@ -2149,6 +2169,9 @@ div, span, h1, h3, a,  ul, li, p {
     border-radius:0px !important;
     -moz-border-radius:0px !important;
     -webkit-border-radius:0px !important;
+}
+.su-spoiler-content {
+    padding: 1em 0px;
 }
 
 .sheep {

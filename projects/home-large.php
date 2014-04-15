@@ -1,4 +1,4 @@
-<?php queryHomePojects(3); ?>
+<?php queryHomePojects(3, true); ?>
 
 <?php while (have_posts()): the_post(); ?>
 

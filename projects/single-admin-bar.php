@@ -5,6 +5,7 @@ $current_user_id = $current_user->ID;
 
 if (isset($_GET['campaign_id'])) $campaign_id = $_GET['campaign_id'];
 else $campaign_id = get_the_ID();
+$old_post = $post;
 $post = get_post($campaign_id);
 
 if ($current_user_id == $post->post_author || current_user_can('manage_options')) {
@@ -27,4 +28,6 @@ if ($current_user_id == $post->post_author || current_user_can('manage_options')
 			<a href="<?php echo get_permalink($vote->ID) . $campaign_id_param . $params_partial; ?>">Statistiques avanc&eacute;es</a>
 		</div>
 	</div>
-<?php } ?>
+<?php }
+$post = $old_post; 
+?>

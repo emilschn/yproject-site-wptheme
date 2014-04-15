@@ -66,26 +66,32 @@
 			<?php do_action( 'bp_before_blog_single_post' ); ?>
 
 			<div class="page" id="blog-archives" role="main">
-			    <?php printPageTop($campaign_post); ?>
-			    <?php printPageBottomStart($campaign_post, $campaign); ?>
+				<?php require_once('projects/single-admin-bar.php'); ?>
+				<?php require_once('projects/single-header.php'); ?>
 
-			    <a href="<?php echo esc_url($category_link); ?>">&lt;&lt; Revenir &agrave; la liste des actualit&eacute;s</a>
+				<div id="post_bottom_bg">
+					<div id="post_bottom_content" class="center">
+						<div class="left post_bottom_desc">
+							<a href="<?php echo esc_url($category_link); ?>">&lt;&lt; Revenir &agrave; la liste des actualit&eacute;s</a>
 
-			    <?php wp_reset_query(); ?>
-			    <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+							<?php wp_reset_query(); ?>
 
-				    <div class="post-content">
-					<h2 class="posttitle"><?php the_title(); ?></h2>
-					<p class="date"><?php echo get_the_date(); ?></p>
-					<?php the_content(); ?>
-					<?php comments_template(); ?>
-				    </div>
+							<div class="post-content">
+							    <h2 class="posttitle"><?php the_title(); ?></h2>
+							    <p class="date"><?php echo get_the_date(); ?></p>
+							    <?php the_content(); ?>
+							    <?php comments_template(); ?>
+							</div>
+						</div>
 
-			    </div>
+						<div class="left post_bottom_infos">
+							<?php $post = $campaign_post; ?>
+							<?php require_once('projects/single-sidebar.php'); ?>
+						</div>
 
-			    <?php printPageBottomStartEnd(); ?>
-
-			    <?php printPageBottomEnd($campaign_post, $campaign); ?>
+						<div style="clear: both"></div>
+					</div>
+				</div>
 			</div>
 
 			<?php do_action( 'bp_after_blog_single_post' ); ?>

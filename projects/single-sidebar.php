@@ -36,17 +36,17 @@ switch ($vote_status) {
 	</div>
 
 	<div class="post_bottom_infos_item">
-		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png"/>
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png" alt="Logo personnes" />
 		<?php echo $campaign->backers_count(); ?> personnes ont dèjà financé ce projet
 	</div>
 
 	<div class="post_bottom_infos_item">
-		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo horloge" />
 		Il reste <strong><?php echo $campaign->days_remaining(); ?></strong> jours pour participer à ce projet.
 	</div>
 
 	<div class="post_bottom_infos_item">
-		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png"/>
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo cible" />
 		<?php echo $campaign->current_amount() . ' / ' . $campaign->minimum_goal(true) . ' (maximum : ' . $campaign->goal() . ')'; ?>
 	</div>
 
@@ -59,7 +59,7 @@ switch ($vote_status) {
 	$remaining_vote_days = $campaign->end_vote_remaining();
 ?>
 	<div class="post_bottom_infos_item">
-		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png"/>
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png" alt="Logo personnes" />
 
 		<?php if ($nbvoters == 1): ?>
 		1 personne a d&eacute;j&agrave; vot&eacute;
@@ -71,7 +71,7 @@ switch ($vote_status) {
 	</div>
 
 	<div class="post_bottom_infos_item">
-		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo personnes" />
 		
 		<?php if ($remaining_vote_days > 0) : ?>
 		Il reste <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours pour voter
@@ -110,7 +110,7 @@ switch ($vote_status) {
 			<a href="javascript:void(0)">Partager</a>
 		</div>
 		<div id="share_btn_zone" style="display: none;" class="light">
-			<a href="http://www.facebook.com/sharer.php?u=<?php echo urlencode(get_permalink( $post->ID )); ?>" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_bouton_partager.png" /></a>
+			<a href="http://www.facebook.com/sharer.php?u=<?php echo urlencode(get_permalink( $post->ID )); ?>" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_bouton_partager.png" alt="Bouton Facebook" /></a>
 			<br />
 
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -120,19 +120,23 @@ switch ($vote_status) {
 		<!-- FIN Zone de partage -->
 		
 		<div class="light">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/actu.png"/>&nbsp;
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/actu.png" alt="Logo actu" />&nbsp;
 			<?php
 				$category_slug = $post->ID . '-blog-' . $post->post_title;
 				$category_obj = get_category_by_slug($category_slug);
-				$category_link = (!empty($category_obj)) ? get_category_link($category_obj->cat_ID) : '';
-				$posts_in_category = get_posts(array('category'=>$category_obj->cat_ID));
+				if (!empty($category_obj)) {
+				    $category_link = get_category_link($category_obj->cat_ID);
+				    $posts_in_category = get_posts(array('category'=>$category_obj->cat_ID));
+				} else {
+				    $category_link = '';
+				}
 				$nb_cat = (isset($posts_in_category)) ? ' ('.count($posts_in_category).')' : '';
 			?>
 			<a href="<?php echo esc_url( $category_link ); ?>" title=""><?php echo __('Actualit&eacute;s', 'yproject') . $nb_cat; ?></a>
 		</div>
 		
 		<div class="light">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/com.png"/>&nbsp;
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/com.png" alt="Logo forum" />&nbsp;
 			<?php $forum = get_page_by_path('forum'); ?>
 			<a href="<?php echo get_permalink($forum->ID); ?><?php echo $campaign_id_param; ?>">Forum</a>
 		</div>

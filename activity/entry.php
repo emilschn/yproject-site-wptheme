@@ -31,7 +31,7 @@
 
 		<?php endif; ?>
 
-		<?php /*if ( bp_activity_has_content() ) : ?>
+		<?php if ( bp_is_group() && bp_activity_has_content() ) : ?>
 
 			<div class="activity-inner">
 
@@ -39,7 +39,7 @@
 
 			</div>
 
-		<?php endif;*/ ?>
+		<?php endif; ?>
 
 		<?php do_action( 'bp_activity_entry_content' ); ?>
 
