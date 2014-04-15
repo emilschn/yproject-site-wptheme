@@ -1,4 +1,4 @@
-<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
+<?php /* <div class="item-list-tabs no-ajax" id="subnav" role="navigation">
 	<ul>
 		<li class="feed"><a href="<?php bp_group_activity_feed_link(); ?>" title="<?php _e( 'RSS Feed', 'buddypress' ); ?>"><?php _e( 'RSS', 'buddypress' ); ?></a></li>
 
@@ -21,7 +21,7 @@
 			</select>
 		</li>
 	</ul>
-</div><!-- .item-list-tabs -->
+</div><!-- .item-list-tabs --> */ ?>
 
 <?php do_action( 'bp_before_group_activity_post_form' ); ?>
 

@@ -1,19 +1,30 @@
-<?php get_header( 'buddypress' ); ?>
+<?php get_header(); ?>
 
-	<div id="content">
-		<div class="padder">
+<div id="content">
+	<div class="padder">
 
-			<?php if ( bp_has_groups() ) : while ( bp_groups() ) : bp_the_group(); ?>
+		<?php if ( bp_has_groups() ) : while ( bp_groups() ) : bp_the_group(); ?>
+	    
+			<?php
+			    global $post;
+			    $campaign_id = groups_get_groupmeta(bp_get_group_id(), 'campaign_id');
+			    $save_post = $post;
+			    $post = get_post($campaign_id);
+			?>
+	    
+			<?php locate_template( array( 'projects/single-admin-bar.php' ), true ); ?>
+	    
+			<?php locate_template( array( 'projects/single-header.php' ), true ); ?>
 
 			<?php do_action( 'bp_before_group_home_content' ); ?>
 
-			<div id="item-header" role="complementary">
+			<div id="item-header" class="center" role="complementary">
 
 				<?php locate_template( array( 'groups/single/group-header.php' ), true ); ?>
 
 			</div><!-- #item-header -->
 
-			<div id="item-nav">
+			<div id="item-nav" class="center">
 				<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
 					<ul>
 
@@ -25,7 +36,7 @@
 				</div>
 			</div><!-- #item-nav -->
 
-			<div id="item-body">
+			<div id="item-body" class="center">
 
 				<?php do_action( 'bp_before_group_body' );
 
@@ -104,10 +115,9 @@
 
 			<?php do_action( 'bp_after_group_home_content' ); ?>
 
-			<?php endwhile; endif; ?>
+		<?php endwhile; endif; ?>
 
-		</div><!-- .padder -->
-	</div><!-- #content -->
+	</div><!-- .padder -->
+</div><!-- #content -->
 
-<?php get_sidebar( 'buddypress' ); ?>
-<?php get_footer( 'buddypress' ); ?>
+<?php get_footer(); ?>

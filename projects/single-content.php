@@ -30,7 +30,7 @@ if ($campaign->video() == '' || $vote_status == 'preview') {
 	    if ($attachment->post_title == 'image_home') $image_obj = wp_get_attachment_image_src($attachment->ID, "full");
 	}
 	//Sinon on prend la première image rattachée à l'article
-	if ($image_obj == '') $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
+	if ($image_obj == '' && count($attachments) > 0) $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
 	if ($image_obj != '') $img_src = $image_obj[0];
 
 //Sinon on utilise l'objet vidéo fourni par wordpress

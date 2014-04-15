@@ -1094,6 +1094,21 @@ ul.activity-list p {
 }
 /* FIN MON COMPTE */
 
+/* GROUPES INVESTISSEURS */
+#object-nav ul, #subnav ul {
+    padding-left: 0px;
+    height: 20px;
+}
+#object-nav li, #subnav li {
+    float: left;
+    list-style: none;
+    padding-right: 10px;
+}
+#object-nav li.current, #subnav li.current {
+    font-weight: bold;
+}
+/* FIN GROUPES INVESTISSEURS */
+
 /* NAV */
 #navigation {
     background-color: #333333;

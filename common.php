@@ -585,6 +585,23 @@ function printUserInvest($post_invest, $post_campaign) {
 		    endif;
 		?>
 		
+		<?php
+		    //Lien vers le groupe d'investisseurs du projet
+		    //Visible si le groupe existe et que l'utilisateur est bien dans ce groupe
+		    $investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
+		    $group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
+		    $is_user_group_member = groups_is_user_member(bp_loggedin_user_id(), $investors_group_id);
+		    if ($group_exists && $is_user_group_member):
+			$group_obj = groups_get_group(array('group_id' => $investors_group_id));
+			$group_link = bp_get_group_permalink($group_obj);
+		?>
+		<div class="project_preview_item_infos" style="width: 120px;">
+		    <a href="<?php echo $group_link; ?>">Acc&eacute;der au groupe priv&eacute;</a>
+		</div>
+		<?php
+		    endif;
+		?>
+		
 		<div style="clear: both"></div>
 	    </div>
 	</div>
