@@ -1,12 +1,15 @@
 <?php
-require_once("wp-content/themes/yproject/common.php");
+
 get_header( 'buddypress' ); 
 ?>
 
 	<div id="content">
 		<div class="padder">
 			
-			<?php printUserProfileAdminBar(); ?>
+			<?php if(is_user_logged_in()) {
+    				locate_template( array( 'members/single/admin-bar.php' ), true ); 
+					}
+			?>
 
 			<?php do_action( 'bp_before_member_home_content' ); ?>
 

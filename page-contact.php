@@ -1,11 +1,10 @@
 <?php get_header(); ?>
-<?php require_once("common.php"); ?>
 
 <div id="content">
     <div class="padder">
 
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-	    <?php printMiscPagesTop("Nous contacter"); ?>
+	    <?php locate_template( array( 'basic/basic-header.php' ), true ); ?>
 	    <div id="post_bottom_bg">
 		<div id="post_bottom_content" class="center_small">
 		    <div class="left post_bottom_desc_small">

@@ -2,14 +2,12 @@
 
 <?php 
     date_default_timezone_set("Europe/Paris");
-    require_once("common.php");
 ?>
-
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 	<div id="content">
 		<div class="padder">
 				
-		    <?php printMiscPagesTop("Foire aux questions"); ?>
+		    <?php locate_template( array( 'basic/basic-header.php' ), true ); ?>
 		    
 		    <div id="post_bottom_bg">
 			<div id="post_bottom_content" class="center">
@@ -39,3 +37,13 @@
 <?php endif; ?>
 	
 <?php get_footer(); ?>
+
+<?php function showFaq($nb){
+	?>
+	<div class="post_bottom_buttons">
+	    <div class="dark" id="tab-faq-dark">
+		<?php /* Lien page faq */ $page_manage = get_page_by_path('faq-2'); ?>
+		<a href="<?php echo get_permalink($page_manage->ID); ?>"><?php echo __('FAQ', 'yproject'); ?></a>
+	    </div>
+	</div>
+	<?php } ?>

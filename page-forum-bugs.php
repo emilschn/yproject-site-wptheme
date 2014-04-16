@@ -23,7 +23,7 @@
 							   
 
 							    <div class="left post_bottom_infos">
-							    	<?php printCommentcamarcheright(); ?>
+							    	<?php locate_template( array("forum/comment-ca-marche.php"), true ); ?>
 							    </div>
 							    <div style="clear: both"></div>
 

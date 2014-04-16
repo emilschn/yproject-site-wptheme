@@ -2,11 +2,10 @@
     if (is_user_logged_in()) wp_redirect(home_url());
 ?>
 <?php get_header(); ?>
-<?php require_once("common.php"); ?>
 
     <div id="content">
 	<div class="padder">
-	    <?php printMiscPagesTop("Connexion"); ?>
+	   <?php locate_template( array( 'basic/basic-header.php' ), true ); ?>
 	    
     <div id="post_bottom_bg">
 	<div style="width: 450px;" id="post_bottom_content" class="center_small">
