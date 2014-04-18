@@ -30,6 +30,7 @@ get_header();
 			    $current_user = get_user_by('id', 60);
 			    $campaign_id = 1241;
 			    ypcf_mangopay_transfer_project_to_user($current_user, $campaign_id, 638);
+			    //TODO : faire autrement la prochaine fois - gérer les client amount fees
 			}
 		    ?>
 		
