@@ -54,7 +54,7 @@ else:
 			if ($real_amount_invest > YP_STRONGAUTH_REFUND_LIMIT && !ypcf_mangopay_is_user_strong_authenticated(get_current_user_id())) {
 			    if (isset($_POST['document_submited'])) {
 				$url_request = ypcf_init_mangopay_user_strongauthentification(wp_get_current_user());
-				$curl_result = ypcf_mangopay_send_strong_authentication($url_request);
+				$curl_result = ypcf_mangopay_send_strong_authentication($url_request, 'StrongValidationDtoPicture');
 				if ($curl_result) ypcf_mangopay_set_user_strong_authentication_doc_transmitted(get_current_user_id());
 				else echo 'Il y a eu une erreur pendant l&apos;envoi.';
 			    }
