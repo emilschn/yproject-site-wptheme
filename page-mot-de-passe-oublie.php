@@ -59,11 +59,10 @@
     
 ?>
 <?php get_header(); ?>
-<?php require_once("common.php"); ?>
 
     <div id="content">
 	<div class="padder">
-	    <?php printMiscPagesTop("Mot de passe oubli&eacute;"); ?>
+	    <?php locate_template( array( 'basic/basic-header.php' ), true ); ?>
 	    
     <div id="post_bottom_bg">
 	<div id="post_bottom_content" class="center_small">

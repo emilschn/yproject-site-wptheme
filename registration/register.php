@@ -1,10 +1,10 @@
 <?php get_header( 'buddypress' ); ?>
-<?php require_once("wp-content/themes/yproject/common.php"); ?>
+
 
     <div id="content">
 	<div class="padder">
 	
-	    <?php printMiscPagesTop("Inscription"); ?>
+	    <?php locate_template( array( 'basic/basic-header.php' ), true ); ?>
 
 	    <?php do_action( 'bp_before_register_page' ); ?>
 	    

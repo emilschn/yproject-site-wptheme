@@ -6,7 +6,6 @@
 	    
 	<?php 
 	    date_default_timezone_set("Europe/Paris");
-	    require_once("common.php");
 
 	    $payment_id = $_GET["invest_id"];
 	    $payment_post = get_post($payment_id);

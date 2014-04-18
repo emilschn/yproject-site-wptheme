@@ -1,4 +1,3 @@
-<?php require_once("common.php"); ?>
 <?php get_header(); ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
@@ -14,7 +13,7 @@
 	<div class="padder">
 	    <?php 
 	    $page_title = ($category[0]->slug == 'wedogood') ? "Blog" : "Espace presse";
-	    printMiscPagesTop($page_title); 
+	    locate_template( array( 'basic/basic-header.php' ), true );
 	    ?>
 	    
 	    <div id="post_bottom_bg">
@@ -33,7 +32,7 @@
 
 		    </div>
 		</div>
-		<?php printCommunityMenu(); ?>
+		<?php locate_template( array("community/community-menu.php"), true ); ?>
 		<div style="clear: both"></div>
 	    </div>
 
@@ -48,8 +47,6 @@
 
 <?php 
     date_default_timezone_set("Europe/Paris");
-    require_once("common.php");
-    
     $this_category = get_the_category();
     $this_category = $this_category[0];
     $this_category_name = $this_category->name;

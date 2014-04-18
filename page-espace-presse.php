@@ -1,11 +1,11 @@
-<?php require_once("common.php"); ?>
+
 <?php get_header(); ?>
 
 <div id="content">
     <div class="padder">
 
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-	    <?php printMiscPagesTop("Espace presse"); ?>
+	   <?php locate_template( array( 'basic/basic-header.php' ), true ); ?>
 	    <div id="post_bottom_bg">
 		<div id="post_bottom_content" class="center">
 		    <div class="post_bottom_desc">

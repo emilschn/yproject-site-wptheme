@@ -6,13 +6,12 @@
 if (!is_user_logged_in()) wp_redirect(site_url());
 if (session_id() == '') session_start();
 
-require_once("wp-content/themes/yproject/common.php");
 ?>
 <?php get_header(); ?>
 
     <div id="content">
 	<div class="padder">
-	    <?php printUserProfileAdminBar(true);  ?>
+	    <?php locate_template( array( 'members/single/admin-bar.php' ), true ); ?>
 	    <div class="center">
 		<?php 
 		if (is_user_logged_in()) :
