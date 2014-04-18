@@ -26,7 +26,10 @@
     font-weight: normal;
     font-style: normal;
 }
- 
+@font-face {
+font-family: BebasNeue;
+src: url("fonts/BebasNeue.otf") format("opentype");
+ }
 body {
     background-color: #FFF;
     color: #2B2C2C;
@@ -2227,4 +2230,250 @@ div, span, h1, h3, a,  ul, li, p {
     border: 0 none;
     margin: 0;
     padding: 0;
+}
+.notification-settings{
+    width: 80%;
+}
+#settings-form .submit{
+margin-bottom:15px;
+margin-top:15px;
+text-align: center;
+}
+#follow-notification-settings .title{
+    width: 89.3%;
+}
+
+/********* Home V2 *********/
+.separateur{
+    width:960px;
+    margin: auto;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    text-align: center;
+    background-image: url('images/traits.jpg');
+    background-repeat: repeat-x;
+    background-position: center;
+    min-height: 43px;
+    clear: both;
+}
+.titre-partie{
+    background: #FFFFFF;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-family: 'BebasNeue';
+    font-size: 35px;
+}
+
+.home_middle_desc{
+    width: 960px;
+    margin:auto;
+    margin-top: 25px;
+
+}
+.home_middle_desc #home_middle_desc_left, .home_middle_desc #home_middle_desc_right{
+    display: inline-block;
+    width: 50%;
+     margin-bottom: 25px;
+    text-align: center;
+}
+.home_middle_desc #home_middle_desc_left{
+    float: left;
+}
+.home_middle_desc #home_middle_desc_right{
+    float: right;
+}
+.home_middle_desc #home_middle_desc_left p , .home_middle_desc #home_middle_desc_right p{
+  margin: 0;
+}
+
+
+/****** Projets prochainement ******/
+.home-small-project {
+    padding: 5px;
+    margin: 0;
+    margin-top: 15px;
+    width: 440px;
+    display:inline-block;
+    min-height: 480px;
+    max-height: 480px;
+}
+
+.home-small-project-right{
+    float: right;
+    position: relative;
+}
+.home-small-project-left{
+    float: left;
+     position: relative;
+}
+.home-small-project h2 {
+    font-size: 11pt;
+    text-transform: uppercase;
+}
+.home-small-project h2 a, .home-small-project h2 a:hover {
+    color: #2B2C2C;
+}
+.home-small-project h2 img {
+    padding-left: 10px;
+}
+.home-small-project .video-zone {
+    width: 460px;
+    min-height: 252px;
+    max-height: 252px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.home-small-project .description-zone {
+    width: 100%;
+    position: relative;
+}
+.home-small-project .description-zone a, .home-small-project .description-zone a:hover {
+    color: #2B2C2C;
+}
+.home-small-project .description-summary {
+    min-height: 96px;
+    max-height: 96px;
+}
+.home-small-project .description-zone .description-middle {
+    width: 100%;
+}
+.home-small-project .description-separator {
+    background: url("images/tiret_noir.png");
+    height: 6px;
+    margin: 15px 0px;
+    clear: both;
+}
+.home-small-project .description-zone .description-status {
+    text-align: center;
+    width: 100%;
+    text-transform: uppercase;
+}
+.home-small-project .description-zone .description-logos-item {
+    display: inline-block;
+    width: 45px;
+    text-align: center;
+    padding: 0px 5px;
+}
+/******** Projets en preview *********/
+
+
+.home-small-project.status-preview .description-zone .description-summary p {
+    margin: 0;
+    margin-bottom: 13px;
+}
+
+.home-small-project.status-preview .description-zone .description-summary {
+    width: 70%;
+    display: inline-block;
+    float: left;
+}
+.home-small-project.status-preview .description-zone .description-logos {
+    width: 30%;
+    display: inline-block;
+    float: right;
+    margin-top: 15px;
+}
+
+.home-small-project.status-preview .description-discover {
+    text-transform: uppercase;
+    color: #FFF;
+    text-align: center;
+    background-color: #2B2C2C;
+    padding: 13px 0px;
+    display: block;
+    font-size: 13px;
+    width: 100%;
+}
+.home-small-project.status-preview .video-zone {
+    clear: both;
+}
+.home-small-project.status-preview .description-zone .description-discover:hover {
+    color: #FFF;
+}
+.home-small-project.status-preview .description-zone .description-discover img {
+    padding: 0px 2px;
+}
+
+
+
+/* projets en vote */
+.home-small-project.status-vote .description-discover  {
+    text-transform: uppercase;
+    color: #FFF;
+    text-align: center;
+    background-color: #FF494C;
+    padding: 13px 0px;
+    display: inline-block;
+    font-size: 13px;
+    width: 100%;
+
+}
+.home-small-project.status-vote .description-zone .description-summary {
+    width: 60%;
+    display: inline-block;
+    float: left;
+}
+.home-small-project.status-vote .description-zone .description-logos {
+    width: 40%;
+    display: inline-block;
+    float: right;
+    margin-top: 15px;
+}
+.home-small-project.status-vote .description-zone .description-logos-item {
+    display: inline-block;
+    width: 45px;
+    text-align: center;
+    padding: 0px 5px;
+}
+
+
+.vote-bubble-left,.vote-bubble-right,.preview-bubble-left,.preview-bubble-right{
+    width: 190px;
+    height: 165px;
+    color: #FFF;
+    position: absolute;
+    text-transform: uppercase;
+    font-family: 'BebasNeue';
+    font-size: 32px;
+    text-align: center;
+}
+.vote-bubble-left p,.vote-bubble-right p ,.preview-bubble-left p,.preview-bubble-right p{
+    margin: 0;
+    margin-top: -6px;
+    padding: 0;
+    position: relative;
+    top: 35px;
+    left: 13px;
+}
+
+.big-text{
+    margin: 0;
+    font-size: 40px;
+}
+.small-text{
+    margin: 0;
+    font-size: 18px;
+
+}
+
+.vote-bubble-left{
+    background-image:url('images/bulle_rouge_gauche.jpg');
+    left: -185px;
+    top: 50px;
+
+}
+.vote-bubble-right{
+    background-image:url('images/bulle_rouge_droite.jpg');
+    right: -185px; 
+    top: 50px;
+}
+.preview-bubble-left{
+    background-image:url('images/bulle_grise_gauche.jpg');
+    left: -185px;
+    top: 50px;
+}
+.preview-bubble-right{
+    background-image:url('images/bulle_grise_droite.jpg');
+    right: -185px;
+    top: 50px;
 }

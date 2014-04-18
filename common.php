@@ -1,5 +1,8 @@
 <?php
 
+/******************************************************************************/
+/* PREVIEW DES PROJETS */
+/******************************************************************************/
 function printPreviewProjectsVote($nb) {
     global $wpdb, $print_project_count;
     $print_project_count = 0;

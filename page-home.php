@@ -5,7 +5,11 @@ date_default_timezone_set("Europe/Paris");
 <header class="align-center header_home">
 	<section id="site_name2" class="center">
 		<div id="welcome_text">
-			<?php wp_reset_query(); the_content(); ?>
+			<?php wp_reset_query();  ?>
+			
+			
+			
+
 		</div>
 	    
 		<nav class="home_intro">
@@ -37,14 +41,29 @@ date_default_timezone_set("Europe/Paris");
 </header>
 
 <div id="content">
+	<div class="separateur">
+		<span class="titre-partie"> 
+			EN COURS DE FINANCEMENT
+		</span>
+	</div>
 	<div id="home_top" class="center">
 		<div class="padder">
-			<?php require_once('requests/projects.php'); ?>
-			<?php require_once('projects/home-large.php'); ?>
+			<?php require('requests/projects.php'); ?>
+			<?php require('projects/home-large.php'); ?>
 		</div>
 	</div>
-    
-    
+    <div class="separateur">
+		<span class="titre-partie"> 
+			PROCHAINEMENT
+		</span>
+	</div>
+<div id="home_top" class="center">
+		<div class="padder">
+			<?php require('projects/home-small.php'); ?>
+		</div>
+	</div>
+    <div class="separateur" style="padding-top:50px;">
+	</div>
     <div id="home_middle">
 	<div id="home_middle_top">
 	    <div id="home_middle_content">
@@ -67,12 +86,39 @@ date_default_timezone_set("Europe/Paris");
 		</div>
 	    </div>
 	</div>
+	<div class="home_middle_desc">
+		<div id="home_middle_desc_left">
+			<p>SOYEZ ACTEUR ET INFLUENCEUR</p>
+			<p>DE LA COMMUNAUTE !</p>
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/pieces.jpg"/>
+			<p>Investissez à partir de 10€</p>
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/main.jpg"/>
+			<p>Participez à l'aventure</p>
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/fusee.jpg"/>
+			<p>Boostez l'économie positive</p>
+		</div>
+		<div id="home_middle_desc_right">
+			<p>B&#201;N&#201;FICIEZ D'UN FINANCEMENT SOUPLE </p>
+			<p>ET ADAPT&#201; &Agrave; VOS BESOINS.</p>
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/sous.jpg"/>
+			<p>Trouvez un financement pour votre projet</p>
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/hp.jpg"/>
+			<p>Faites connaître votre projet</p>
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/communaute.jpg"/>
+			<p>Fédérez une communauté sur la durée</p>
+		</div>
+		
+	</div>
     </div>
 	
 	
     <div id="home_bottom" class="center">
 	<div class="padder">
-	    <h2 class="underlined">Actualit&eacute;</h2>
+	     <div class="separateur">
+		<span class="titre-partie"> 
+			ACTUALITES
+		</span>
+	</div>
 	    <div class="home-activity-list-container">
 		<ul class="home-activity-list">
 		<?php // Affichage du fil d'actualité
@@ -142,7 +188,11 @@ date_default_timezone_set("Europe/Paris");
 	    
 	    
 	    
-	    <h2 class="underlined"><?php _e("Nos partenaires", "yproject"); ?></h2>
+	      <div class="separateur">
+		<span class="titre-partie"> 
+			NOS PARTENAIRES
+		</span>
+	</div>
 	    <?php 
 		$page_partners = get_page_by_path('partenaires');
 	    ?>

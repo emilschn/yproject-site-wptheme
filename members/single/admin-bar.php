@@ -11,6 +11,6 @@
 		<a href="<?php echo get_permalink($page_update->ID); ?>"><?php echo __('Param&egrave;tres', 'yproject'); ?></a>		
 	    .:|:.
 	    <?php  // Lien page paramètres ?>		
-		<a href="<?php echo bp_loggedin_user_domain(); ?>settings/notifications/"><?php echo __('Abonnements', 'yproject'); ?></a>		
+		<a href="<?php echo bp_loggedin_user_domain(); ?>settings/notifications/"><?php echo __('Notifications', 'yproject'); ?></a>		
 	    </div>		
     </div>		
