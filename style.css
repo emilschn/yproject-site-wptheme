@@ -1589,7 +1589,7 @@ footer span {
 
 
 #PaylineForm {
-    widh: 500px;
+    width: 500px;
 }
 
 #invest-breadcrumb {
@@ -2317,11 +2317,12 @@ text-align: center;
     padding-left: 10px;
 }
 .home-small-project .video-zone {
-    width: 460px;
+    width: 440px;
     min-height: 252px;
     max-height: 252px;
     background-repeat: no-repeat;
     background-position: center;
+    margin-bottom: 15px;
 }
 .home-small-project .description-zone {
     width: 100%;
@@ -2331,7 +2332,7 @@ text-align: center;
     color: #2B2C2C;
 }
 .home-small-project .description-summary {
-    min-height: 96px;
+    min-height: 80px;
     max-height: 96px;
 }
 .home-small-project .description-zone .description-middle {
@@ -2340,8 +2341,11 @@ text-align: center;
 .home-small-project .description-separator {
     background: url("images/tiret_noir.png");
     height: 6px;
-    margin: 15px 0px;
+    margin: 0;
     clear: both;
+}
+.home-small-project .first-description-separator {
+    margin-bottom:15px;
 }
 .home-small-project .description-zone .description-status {
     text-align: center;
@@ -2357,9 +2361,8 @@ text-align: center;
 /******** Projets en preview *********/
 
 
-.home-small-project.status-preview .description-zone .description-summary p {
+.description-summary p {
     margin: 0;
-    margin-bottom: 13px;
 }
 
 .home-small-project.status-preview .description-zone .description-summary {
@@ -2383,6 +2386,7 @@ text-align: center;
     display: block;
     font-size: 13px;
     width: 100%;
+    margin-top: 15px;
 }
 .home-small-project.status-preview .video-zone {
     clear: both;
@@ -2406,6 +2410,7 @@ text-align: center;
     display: inline-block;
     font-size: 13px;
     width: 100%;
+    margin-top: 15px;
 
 }
 .home-small-project.status-vote .description-zone .description-summary {
@@ -2421,9 +2426,9 @@ text-align: center;
 }
 .home-small-project.status-vote .description-zone .description-logos-item {
     display: inline-block;
-    width: 45px;
+    width: 55px;
     text-align: center;
-    padding: 0px 5px;
+    padding: 0px 0px;
 }
 
 
@@ -2437,7 +2442,7 @@ text-align: center;
     font-size: 32px;
     text-align: center;
 }
-.vote-bubble-left p,.vote-bubble-right p ,.preview-bubble-left p,.preview-bubble-right p{
+.vote-bubble-right p ,.preview-bubble-right p{
     margin: 0;
     margin-top: -6px;
     padding: 0;
@@ -2445,14 +2450,21 @@ text-align: center;
     top: 35px;
     left: 13px;
 }
-
+.vote-bubble-left p,.preview-bubble-left p{
+   margin: 0;
+    margin-top: -6px;
+    padding: 0;
+    position: relative;
+    top: 35px;
+    left: -11px;
+}
 .big-text{
     margin: 0;
     font-size: 40px;
 }
 .small-text{
     margin: 0;
-    font-size: 18px;
+    font-size: 16px;
 
 }
 

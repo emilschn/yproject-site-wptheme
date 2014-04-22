@@ -1,5 +1,6 @@
 <?php 
 date_default_timezone_set("Europe/Paris");
+
 ?>
 
 <header class="align-center header_home">
@@ -52,16 +53,43 @@ date_default_timezone_set("Europe/Paris");
 			<?php require('projects/home-large.php'); ?>
 		</div>
 	</div>
-    <div class="separateur">
-		<span class="titre-partie"> 
-			PROCHAINEMENT
-		</span>
-	</div>
-<div id="home_top" class="center">
-		<div class="padder">
-			<?php require('projects/home-small.php'); ?>
-		</div>
-	</div>
+    
+			<?php
+                                require('projects/home-small.php');
+                                $is_right_project=true;
+				$preview_projects=query_projects_collecte(3);
+                                $vote_projects= query_projects_vote(3);
+				$nb_vote_posts=count($vote_projects);
+				$nb_preview_posts=count($preview_projects);
+				$nb_total_projects=$nb_vote_posts+$nb_preview_posts;
+				?>
+                                    <div class="separateur">
+						<span class="titre-partie"> 
+							PROCHAINEMENT
+						</span>
+                                    </div>
+					<div id="home_top" class="center">
+						<div class="padder">
+					<?php
+					if ($nb_vote_posts>0) {
+						foreach ($vote_projects as $vote_post) {
+                                                    
+							$is_right_project=print_vote_post($vote_post,$is_right_project);
+						}
+					}
+					
+					if ($nb_preview_posts>0) {
+						foreach ($preview_projects as $preview_post) {
+							$is_right_project=print_preview_post($vote_preview,$is_right_project);
+						}
+					}
+					?>
+					</div>
+				</div>
+				
+			
+			
+		
     <div class="separateur" style="padding-top:50px;">
 	</div>
     <div id="home_middle">
