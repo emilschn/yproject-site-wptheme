@@ -59,15 +59,15 @@ else:
 				else echo 'Il y a eu une erreur pendant l&apos;envoi.';
 			    }
 			    
-			    if (ypcf_mangopay_is_user_strong_authentication_sent(get_current_user_id())) {
-				?>
-				Votre pi&egrave;ce d&apos;identit&eacute; est en cours de validation. Un d&eacute;lai maximum de 24h est n&eacute;cessaire &agrave; cette validation.<br />
-				Merci de votre compr&eacute;hension.
-				<?php
+			    $strongauth_status = ypcf_mangopay_get_user_strong_authentication_status(get_current_user_id());
+			    if ($strongauth_status['status'] != 'waiting') {
+				echo $strongauth_status['message'];
 
 			    } else {
+				if ($strongauth_status['message'] != '') echo $strongauth_status['message'] . '<br />';
 				?>
 				Pour retirer une somme sup&eacute;rieure &agrave; <?php echo YP_STRONGAUTH_REFUND_LIMIT; ?>&euro; sur une ann&eacute;e, vous devez fournir une pi&egrave;ce d&apos;identit&eacute;.<br />
+				La pi&egrave;ce d&apos;identit&eacute; doit &ecirc;tre pr&eacute;sent&eacute;e recto-verso.<br />
 				Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf.<br />
 				Son poids doit &ecirc;tre inf&eacute;rieur &agrave; 2 Mo.<br />
 				<form id="mangopay_strongauth_form" action="" method="post" enctype="multipart/form-data">
@@ -181,7 +181,27 @@ else:
 			$real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id()) / 100;
 		    ?>
 			Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br />
-			
+		
+		    <?php 
+			$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status(get_current_user_id());
+			if ($strongauth_status['status'] != ''):
+		    ?>
+			<span class="error"><?php echo $strongauth_status; ?></span><br />
+			<?php if ($strongauth_status['status'] != 'waiting'): ?>
+			    La pi&egrave;ce d&apos;identit&eacute; doit &ecirc;tre pr&eacute;sent&eacute;e recto-verso.<br />
+			    Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf.<br />
+			    Son poids doit &ecirc;tre inf&eacute;rieur &agrave; 2 Mo.<br />
+			    <form id="mangopay_strongauth_form" action="" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="mangopaytoaccount" value="1" />
+				<input type="hidden" name="document_submited" value="1" />
+				<input type="file" name="StrongValidationDtoPicture" />
+				<input type="submit" value="Envoyer"/>
+			    </form><br /><br />
+			<?php endif; ?>
+		    <?php 
+			endif; 
+		    ?>
+		
 		    <?php
 			if ($pending_transfers) :
 		    ?>
