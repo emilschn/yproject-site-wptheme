@@ -2358,6 +2358,8 @@ text-align: center;
     text-align: center;
     padding: 0px 5px;
 }
+
+
 /******** Projets en preview *********/
 
 
@@ -2374,7 +2376,7 @@ text-align: center;
     width: 30%;
     display: inline-block;
     float: right;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .home-small-project.status-preview .description-discover {
@@ -2396,6 +2398,11 @@ text-align: center;
 }
 .home-small-project.status-preview .description-zone .description-discover img {
     padding: 0px 2px;
+}
+.home-small-project-empty{
+    width: 440px;
+    height: 480px;
+    background-color: black;
 }
 
 
@@ -2488,4 +2495,14 @@ text-align: center;
     background-image:url('images/bulle_grise_droite.jpg');
     right: -185px;
     top: 50px;
+}
+/************Notifications ************/
+#groups-notification-settings-invitation td:nth-child(1),#groups-notification-settings-info-updated td:nth-child(1), #groups-notification-settings-promoted td:nth-child(1),#groups-notification-settings-request td:nth-child(1),#follow-notification-settings td:nth-child(1), #activity-notification-settings-mentions td:nth-child(1) , #activity-notification-settings-replies td:nth-child(1), .icon{
+    display: none;
+}
+#settings-form .title{
+    text-align: justify;
+}
+#settings-form .yes, #settings-form .no{
+    text-align: center;
 }

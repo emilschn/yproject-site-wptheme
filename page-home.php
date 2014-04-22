@@ -57,35 +57,51 @@ date_default_timezone_set("Europe/Paris");
 			<?php
                                 require('projects/home-small.php');
                                 $is_right_project=true;
-				$preview_projects=query_projects_collecte(3);
-                                $vote_projects= query_projects_vote(3);
+				$preview_projects=query_projects_preview();
+                                $vote_projects= query_projects_vote(2);
 				$nb_vote_posts=count($vote_projects);
 				$nb_preview_posts=count($preview_projects);
 				$nb_total_projects=$nb_vote_posts+$nb_preview_posts;
+                                if($nb_total_projects>0){
 				?>
                                     <div class="separateur">
-						<span class="titre-partie"> 
-							PROCHAINEMENT
-						</span>
+                                        <span class="titre-partie"> 
+                                            PROCHAINEMENT
+					</span>
                                     </div>
-					<div id="home_top" class="center">
-						<div class="padder">
+                                    <div id="home_top" class="center">
+					<div class="padder">
 					<?php
+                                        $nb_printed_post=0;
+                                        $is_last_post=false;
 					if ($nb_vote_posts>0) {
 						foreach ($vote_projects as $vote_post) {
-                                                    
-							$is_right_project=print_vote_post($vote_post,$is_right_project);
+                                                        $nb_printed_post++;
+                                                        if($nb_printed_post==$nb_total_projects&&$nb_total_projects%2!=0){
+                                                            $is_right_project=false;
+                                                            $is_last_post=true;
+                                                        }
+                                                            $is_right_project=print_vote_post($vote_post,$is_right_project);
 						}
+                                                if($is_last_post)print_empty_post ();
 					}
-					
 					if ($nb_preview_posts>0) {
 						foreach ($preview_projects as $preview_post) {
-							$is_right_project=print_preview_post($vote_preview,$is_right_project);
-						}
-					}
-					?>
-					</div>
-				</div>
+                                                        $nb_printed_post++;
+                                                        if($nb_printed_post==$nb_total_projects&&$nb_total_projects%2!=0){
+                                                            $is_right_project=false;
+                                                          $is_last_post=true;
+                                                        }
+                                                            $is_right_project=print_preview_post($preview_post,$is_right_project);
+                                                }
+                                                if($is_last_post) print_empty_post();
+                                        }?>
+                                        </div>
+                                    </div>
+                            <?php
+                                }
+				?>
+					
 				
 			
 			

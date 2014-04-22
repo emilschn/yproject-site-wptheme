@@ -28,7 +28,7 @@ function queryHomeProjects($nb,$type) {
 				),
 			array (
 				'key' => 'campaign_end_date',
-				'compare' => '<',
+				'compare' => '>',
 				'value' => date('Y-m-d H:i:s')
 			)
 		),

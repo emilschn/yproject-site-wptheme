@@ -15,11 +15,7 @@ locate_template( array( 'members/single/admin-bar.php' ), true ); ?>
 
 			<?php do_action( 'bp_before_member_settings_template' ); ?>
 
-			<div id="item-header">
-
-				<?php locate_template( array( 'members/single/member-header.php' ), true ); ?>
-
-			</div><!-- #item-header -->
+			
 
 			<!--<div id="item-nav">
 				<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
