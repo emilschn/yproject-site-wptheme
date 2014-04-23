@@ -16,14 +16,6 @@
 	    
 			<?php locate_template( array( 'projects/single-header.php' ), true ); ?>
 
-			<?php do_action( 'bp_before_group_home_content' ); ?>
-
-			<div id="item-header" class="center" role="complementary">
-
-				<?php locate_template( array( 'groups/single/group-header.php' ), true ); ?>
-
-			</div><!-- #item-header -->
-
 			<div id="item-nav" class="center">
 				<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
 					<ul>
@@ -35,6 +27,14 @@
 					</ul>
 				</div>
 			</div><!-- #item-nav -->
+
+			<?php do_action( 'bp_before_group_home_content' ); ?>
+
+			<div id="item-header" class="center" role="complementary">
+
+				<?php locate_template( array( 'groups/single/group-header.php' ), true ); ?>
+
+			</div><!-- #item-header -->
 
 			<div id="item-body" class="center">
 

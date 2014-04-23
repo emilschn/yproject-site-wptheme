@@ -16,6 +16,20 @@ if ($current_user_id == $post->post_author || current_user_can('manage_options')
 	$page_manage = get_page_by_path('gerer');   // Gérer le projet
 	$page_add_news = get_page_by_path('ajouter-une-actu');	// Ajouter une actualité
 	$vote = get_page_by_path('vote');	    // Statistiques avancées
+	
+	
+	//Lien vers le groupe d'investisseurs du projet
+	//Visible si le groupe existe et que l'utilisateur est bien dans ce groupe
+	$investors_group_id = get_post_meta($campaign_id, 'campaign_investors_group', true);
+	$group_link = '';
+	$group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
+	$is_user_group_member = groups_is_user_member(bp_loggedin_user_id(), $investors_group_id);
+	if ($group_exists && $is_user_group_member) {
+	    $group_obj = groups_get_group(array('group_id' => $investors_group_id));
+	    $group_link = bp_get_group_permalink($group_obj);
+	}
+	
+	
 ?>
 	<div id="yp_admin_bar">
 		<div class="center">
@@ -26,6 +40,10 @@ if ($current_user_id == $post->post_author || current_user_can('manage_options')
 			<a href="<?php echo get_permalink($page_add_news->ID) . $campaign_id_param . $params_partial; ?>"><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
 			 &nbsp; &nbsp; &nbsp;
 			<a href="<?php echo get_permalink($vote->ID) . $campaign_id_param . $params_partial; ?>">Statistiques avanc&eacute;es</a>
+			<?php if ($group_link != '') : ?>
+			 &nbsp; &nbsp; &nbsp;
+			<a href="<?php echo $group_link; ?>">Groupe d&apos;investisseurs</a>
+			<?php endif; ?>
 		</div>
 	</div>
 <?php }

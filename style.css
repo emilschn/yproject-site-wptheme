@@ -1098,6 +1098,11 @@ ul.activity-list p {
 #object-nav ul, #subnav ul {
     padding-left: 0px;
     height: 20px;
+    background-color: #E1E3E2;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    margin: 0px;
+    padding: 10px;
 }
 #object-nav li, #subnav li {
     float: left;
@@ -1106,6 +1111,10 @@ ul.activity-list p {
 }
 #object-nav li.current, #subnav li.current {
     font-weight: bold;
+}
+#object-nav a, #subnav a {
+    color: #2B2C2C;
+    font-size: 13px;
 }
 /* FIN GROUPES INVESTISSEURS */
 
