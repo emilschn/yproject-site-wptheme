@@ -31,7 +31,7 @@
 		$video_element = '';
 		$img_src = '';
 		//Si aucune vidéo n'est définie, ou si on est encore en mode preview, on affiche l'image
-		if ($campaign->video() == '' || $campaign_status == 'preview') {
+		if ($campaign->video() == '' || $campaign_status == 'preview' || ($campaign->days_remaining() == 0 && $campaign->is_funded())) {
 			$attachments = get_posts( array(
 							    'post_type' => 'attachment',
 							    'post_parent' => $post->ID,

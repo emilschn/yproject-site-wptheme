@@ -38,7 +38,7 @@ if ($campaign->video() == '' || $vote_status == 'preview') {
 	$video_element = wp_oembed_get($campaign->video(), array('width' => 610));
 }
 ?>
-<div class="padding-top video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?>>
+<div class="padding-top video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>'); height: 330px; margin-top: 45px; padding-top: 0px;"<?php } ?>>
 	<?php echo $video_element; ?>
 </div>
 
