@@ -11,15 +11,11 @@ get_header( 'buddypress' );
 locate_template( array( 'members/single/admin-bar.php' ), true ); ?>
 
 	<div id="content">
-		<div class="padder">
+		<div class="padder center">
 
 			<?php do_action( 'bp_before_member_settings_template' ); ?>
 
-			<div id="item-header">
-
-				<?php locate_template( array( 'members/single/member-header.php' ), true ); ?>
-
-			</div><!-- #item-header -->
+			
 
 			<!--<div id="item-nav">
 				<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
@@ -47,11 +43,11 @@ locate_template( array( 'members/single/admin-bar.php' ), true ); ?>
 					</ul>
 				</div>--><!-- .item-list-tabs -->
 
-				<h3><?php _e( 'Email Notification', 'buddypress' ); ?></h3>
+				<h2 class="underlined"><?php _e( 'Email Notification', 'buddypress' ); ?></h2>
 
 				<?php do_action( 'bp_template_content' ); ?>
 
-				<form action="<?php echo bp_displayed_user_domain() . bp_get_settings_slug() . '/notifications'; ?>" method="post" class="standard-form" id="settings-form">
+				<form action="<?php echo bp_displayed_user_domain() . bp_get_settings_slug() . '/notifications'; ?>" method="post" class="standard-form " id="settings-form">
 					<p><?php _e( 'Send an email notice when:', 'buddypress' ); ?></p>
 
 					<?php do_action( 'bp_notification_settings' ); ?>
@@ -59,7 +55,7 @@ locate_template( array( 'members/single/admin-bar.php' ), true ); ?>
 					<?php do_action( 'bp_members_notification_settings_before_submit' ); ?>
 
 					<div class="submit">
-						<input type="submit" name="submit" value="<?php _e( 'Save Changes', 'buddypress' ); ?>" id="submit" class="auto" />
+						<input type="submit" name="submit" value="<?php _e( 'Save Changes', 'buddypress' ); ?>" id="submit" class="auto"  />
 					</div>
 
 					<?php do_action( 'bp_members_notification_settings_after_submit' ); ?>

@@ -1,4 +1,4 @@
-<?php queryHomePojects(3, true); ?>
+<?php query_projects_collecte(1); ?>
 
 <?php while (have_posts()): the_post(); ?>
 

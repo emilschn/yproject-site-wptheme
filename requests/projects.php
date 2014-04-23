@@ -1,11 +1,31 @@
 <?php
-function queryHomePojects($nb, $temp = false) {
-	global $wpdb;
+function query_projects_preview($nb=0){
+	return queryHomeProjects($nb,'preview');
+}
+function query_projects_vote($nb=0){
+	return queryHomeProjects($nb,'vote');
+}
+function query_projects_collecte($nb=0){
+	return queryHomeProjects($nb,'collecte');
+}
+function query_projects_funded($nb=0){
+	return queryHomeProjects($nb,'funded');
+}
+function query_projects_archive($nb=0){
+	return queryHomeProjects($nb,'archive');
+}
+
+function queryHomeProjects($nb,$type) {
 	$query_options = array(
 		'showposts' => $nb,
 		'post_type' => 'download',
 		'post_status' => 'publish',
 		'meta_query' => array (
+
+			array (
+				'key' => 'campaign_vote',
+				'value' => $type
+				),
 			array (
 				'key' => 'campaign_end_date',
 				'compare' => '>',
@@ -15,10 +35,7 @@ function queryHomePojects($nb, $temp = false) {
 		'orderby' => 'post_date',
 		'order' => 'asc'
 	);
-	if ($temp) {
-	    $query_options['meta_query'] = array();
-	    $query_options['order'] = 'desc';
-	}
-	query_posts( $query_options );
+	return query_posts( $query_options );
+
 }
 ?>
