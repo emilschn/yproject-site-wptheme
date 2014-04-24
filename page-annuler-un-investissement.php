@@ -6,8 +6,6 @@
 	    
 	<?php 
 	    date_default_timezone_set("Europe/Paris");
-	    require_once("common.php");
-
 	    $payment_id = $_GET["invest_id"];
 	    $payment_post = get_post($payment_id);
 	    $valid_payment_access = (isset($payment_post) && $payment_post->post_author == get_current_user_id() && $payment_post->post_type == 'edd_payment');

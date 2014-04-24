@@ -135,11 +135,9 @@ if ( is_user_logged_in() ) {
 		}
 	}
 	
-        $users = $wpdb->get_results( 'SELECT user_id FROM '.$table_name.' WHERE campaign_id = '.$campaign->ID );
+        $users = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE campaign_id = "'.$campaign->ID.'" AND user_id = "'.wp_get_current_user()->ID.'"' );
         $has_voted = false;
-        foreach ( $users as $user ){
-		if ( $user->user_id == wp_get_current_user()->ID) $has_voted = true;
-        }
+	if ( !empty($users[0]->id) ) $has_voted = true;
 } else {
 	if (isset($_POST['submit_vote'])) {
 	?>

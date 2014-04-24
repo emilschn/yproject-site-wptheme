@@ -2244,7 +2244,7 @@ text-align: center;
 }
 
 /********* Home V2 *********/
-.separateur{
+.part-title-separator{
     width:960px;
     margin: auto;
     margin-bottom: 25px;
@@ -2256,12 +2256,13 @@ text-align: center;
     min-height: 43px;
     clear: both;
 }
-.titre-partie{
+.part-title{
     background: #FFFFFF;
     padding-left: 25px;
     padding-right: 25px;
     font-family: 'BebasNeue';
     font-size: 35px;
+    text-transform: uppercase;
 }
 
 .home_middle_desc{
@@ -2505,4 +2506,8 @@ text-align: center;
 }
 #settings-form .yes, #settings-form .no{
     text-align: center;
+}
+
+#home_middle_desc_right p:nth-child(1),#home_middle_desc_right p:nth-child(2),#home_middle_desc_left p:nth-child(1),#home_middle_desc_left p:nth-child(2){
+text-transform: uppercase;
 }
