@@ -6,13 +6,11 @@ date_default_timezone_set("Europe/Paris");
 <header class="align-center header_home">
 	<section id="site_name2" class="center">
 		<div id="welcome_text">
-			<?php wp_reset_query();  ?>
-			
-			
-			
-
+			<?php wp_reset_query(); 
+						wp_reset_query();
+						the_content();
+		    		?>
 		</div>
-	    
 		<nav class="home_intro">
 			<?php 
 			$page_connexion_register = get_page_by_path('register');
@@ -42,9 +40,9 @@ date_default_timezone_set("Europe/Paris");
 </header>
 
 <div id="content">
-	<div class="separateur">
-		<span class="titre-partie"> 
-			EN COURS DE FINANCEMENT
+	<div class="part-title-separator">
+		<span class="part-title"> 
+			En cours de financement
 		</span>
 	</div>
 	<div id="home_top" class="center">
@@ -55,195 +53,191 @@ date_default_timezone_set("Europe/Paris");
 	</div>
     
 			<?php
-                                require('projects/home-small.php');
-                                $is_right_project=true;
+                require('projects/home-small.php');
+                $is_right_project=true;
 				$preview_projects=query_projects_preview();
-                                $vote_projects= query_projects_vote(2);
+                $vote_projects= query_projects_vote(2);
 				$nb_vote_posts=count($vote_projects);
 				$nb_preview_posts=count($preview_projects);
 				$nb_total_projects=$nb_vote_posts+$nb_preview_posts;
-                                if($nb_total_projects>0){
+                if($nb_total_projects>0){
 				?>
-                                    <div class="separateur">
-                                        <span class="titre-partie"> 
-                                            PROCHAINEMENT
-					</span>
-                                    </div>
-                                    <div id="home_top" class="center">
-					<div class="padder">
+                	<div class="part-title-separator">
+                        <span class="part-title"> 
+                            Prochainement
+						</span>
+                    </div>
+                    <div id="home_top" class="center">
+						<div class="padder">
 					<?php
-                                        $nb_printed_post=0;
-                                        $is_last_post=false;
-					if ($nb_vote_posts>0) {
-						foreach ($vote_projects as $vote_post) {
-                                                        $nb_printed_post++;
-                                                        if($nb_printed_post==$nb_total_projects&&$nb_total_projects%2!=0){
-                                                            $is_right_project=false;
-                                                            $is_last_post=true;
-                                                        }
-                                                            $is_right_project=print_vote_post($vote_post,$is_right_project);
-						}
-                                                if($is_last_post)print_empty_post ();
-					}
-					if ($nb_preview_posts>0) {
-						foreach ($preview_projects as $preview_post) {
-                                                        $nb_printed_post++;
-                                                        if($nb_printed_post==$nb_total_projects&&$nb_total_projects%2!=0){
-                                                            $is_right_project=false;
-                                                          $is_last_post=true;
-                                                        }
-                                                            $is_right_project=print_preview_post($preview_post,$is_right_project);
-                                                }
-                                                if($is_last_post) print_empty_post();
-                                        }?>
-                                        </div>
-                                    </div>
-                            <?php
+                        $nb_printed_post=0;
+                        $is_last_post=false;
+						if ($nb_vote_posts>0) {
+							foreach ($vote_projects as $vote_post) {
+                                $nb_printed_post++;
+                                if($nb_printed_post==$nb_total_projects&&$nb_total_projects%2!=0){
+                               		$is_right_project=false;
+                                 	$is_last_post=true;
                                 }
-				?>
-					
-				
-			
-			
-		
-    <div class="separateur" style="padding-top:50px;">
+                                $is_right_project=print_vote_post($vote_post,$is_right_project);
+							}
+                            if($is_last_post)print_empty_post ();
+						}
+						if ($nb_preview_posts>0) {
+							foreach ($preview_projects as $preview_post) {
+                                $nb_printed_post++;
+                                if($nb_printed_post==$nb_total_projects&&$nb_total_projects%2!=0){
+                                	$is_right_project=false;
+                                    $is_last_post=true;
+                                }
+                                $is_right_project=print_preview_post($preview_post,$is_right_project);
+                            }
+                            if($is_last_post) print_empty_post();
+                        }
+                    ?>
+                     	</div>
+                    </div>
+            <?php
+                }
+			?>
+    <div class="part-title-separator" style="padding-top:50px;">
 	</div>
     <div id="home_middle">
-	<div id="home_middle_top">
-	    <div id="home_middle_content">
-		<div class="center">
-		    <?php $url = 'https://www.wedogood.co/campaigns/la-ferme-de-milgoulle'; ?>
-		    <a href="<?php echo $url; ?>" style="display: block;"><div class="round_title_left">
-			<strong>Participez</strong><br />&agrave; un projet
-		    </div></a>
-		    <a href="<?php echo get_permalink($page_new_project->ID); ?>" style="display: block;"><div class="round_title_right">
-			<strong>Proposez</strong><br />un projet
-		    </div></a>
-		    <div style="clear: both"></div>
+		<div id="home_middle_top">
+	    	<div id="home_middle_content">
+				<div class="center">
+		   			<?php $url = 'https://www.wedogood.co/campaigns/la-ferme-de-milgoulle'; ?>
+		    		<a href="<?php echo $url; ?>" style="display: block;">
+		    			<div class="round_title_left">
+							<strong>Participez</strong><br/>&agrave; un projet
+		    			</div>
+					</a>
+		    		<a href="<?php echo get_permalink($page_new_project->ID); ?>" style="display: block;">
+		    			<div class="round_title_right">
+							<strong>Proposez</strong><br />un projet
+		    			</div>
+		    		</a>
+		    		<div style="clear: both">
+		    		</div>
+				</div>
+				<div class="center">
+		    		<?php 
+						wp_reset_query();
+						the_content();
+		    		?>
+				</div>
+	    	</div>
 		</div>
-		<div class="center">
-		    <?php 
-			// Participer à un projet | Proposer un projet
-			wp_reset_query();
-			the_content();
-		    ?>
+		<div class="home_middle_desc">
+			<div id="home_middle_desc_left">
+				<p>Soyez acteurs et influenceurs</p>
+				<p>de la communaut&#201;</p>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/pieces.jpg"/>
+				<p>Investissez à partir de 10€</p>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/main.jpg"/>
+				<p>Participez à l'aventure</p>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/fusee.jpg"/>
+				<p>Boostez l'économie positive</p>
+			</div>
+			<div id="home_middle_desc_right">
+				<p>B&#201;n&#201;ficiez d'un financement souple </p>
+				<p>et adapt&#201; &Agrave; vos besoin.</p>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/sous.jpg"/>
+				<p>Trouvez un financement pour votre projet</p>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/hp.jpg"/>
+				<p>Faites connaître votre projet</p>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/communaute.jpg"/>
+				<p>Fédérez une communauté sur la durée</p>
+			</div>
 		</div>
-	    </div>
-	</div>
-	<div class="home_middle_desc">
-		<div id="home_middle_desc_left">
-			<p>SOYEZ ACTEUR ET INFLUENCEUR</p>
-			<p>DE LA COMMUNAUTE !</p>
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/pieces.jpg"/>
-			<p>Investissez à partir de 10€</p>
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/main.jpg"/>
-			<p>Participez à l'aventure</p>
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/fusee.jpg"/>
-			<p>Boostez l'économie positive</p>
-		</div>
-		<div id="home_middle_desc_right">
-			<p>B&#201;N&#201;FICIEZ D'UN FINANCEMENT SOUPLE </p>
-			<p>ET ADAPT&#201; &Agrave; VOS BESOINS.</p>
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/sous.jpg"/>
-			<p>Trouvez un financement pour votre projet</p>
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/hp.jpg"/>
-			<p>Faites connaître votre projet</p>
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/communaute.jpg"/>
-			<p>Fédérez une communauté sur la durée</p>
-		</div>
-		
-	</div>
     </div>
-	
-	
     <div id="home_bottom" class="center">
-	<div class="padder">
-	     <div class="separateur">
-		<span class="titre-partie"> 
-			ACTUALITES
-		</span>
-	</div>
-	    <div class="home-activity-list-container">
-		<ul class="home-activity-list">
-		<?php // Affichage du fil d'actualité
-		date_default_timezone_set("Europe/London");
-		if ( bp_has_activities( bp_ajax_querystring( 'activity' ).'&max=10' ) ) :
-		    while ( bp_activities() ) : bp_the_activity();
-			locate_template( array( 'activity/entry.php' ), true, false );
-		    endwhile;
-		endif; ?>
-		</ul>
-	    </div>
-	    
-	    <div class="home-blog-list-container">
-		<ul class="home-blog-list">
-		    <?php 
-		    $nb_posts = 3;
-		    query_posts( array(
-			'post_status' => 'publish',
-			'category_name' => 'wedogood',
-			'orderby' => 'post_date',
-			'order' => 'desc',
-			'showposts' => $nb_posts
-		    ) );
-		    if ( have_posts() ) :
-			while (have_posts()) : the_post(); 
-			    wdg_showblogitem();
-			endwhile;
-		    endif;
-		    ?>
-		    <div style="clear: both;"></div>
-		</ul>
-		<div class="home-blog-list-nav">
-		    <?php for ($i = 1; $i <= $nb_posts; $i++) { ?>
-		    <a href="javascript:void(0);" class="home-blog-btn<?php if($i == 1) echo ' selected'; ?>" data-targetitem="<?php echo ($i-1); ?>"><?php echo $i; ?></a>
-		    <?php } ?>
+		<div class="padder">
+	   		<div class="part-title-separator">
+				<span class="part-title"> 
+					Actualit&#201;s
+				</span>
+			</div>
+	    	<div class="home-activity-list-container">
+				<ul class="home-activity-list">
+					<?php // Affichage du fil d'actualité
+						date_default_timezone_set("Europe/London");
+						if ( bp_has_activities( bp_ajax_querystring( 'activity' ).'&max=10' ) ) :
+		    				while ( bp_activities() ) : bp_the_activity();
+								locate_template( array( 'activity/entry.php' ), true, false );
+		    				endwhile;
+						endif; 
+					?>
+				</ul>
+	    	</div>
+	    	<div class="home-blog-list-container">
+				<ul class="home-blog-list">
+		   			<?php 
+		   				$nb_posts = 3;
+		   				query_posts( array(
+							'post_status' => 'publish',
+							'category_name' => 'wedogood',
+							'orderby' => 'post_date',
+							'order' => 'desc',
+							'showposts' => $nb_posts
+		    				) );
+		   			if ( have_posts() ) :
+						while (have_posts()) : the_post(); 
+			   				wdg_showblogitem();
+						endwhile;
+		    		endif;
+		    		?>
+		    		<div style="clear: both;">
+		    		</div>
+				</ul>
+				<div class="home-blog-list-nav">
+		    		<?php for ($i = 1; $i <= $nb_posts; $i++) { ?>
+		    			<a href="javascript:void(0);" class="home-blog-btn<?php if($i == 1) echo ' selected'; ?>" data-targetitem="<?php echo ($i-1); ?>"><?php echo $i; ?></a>
+		    		<?php } ?>
+				</div>
+				<div class="home-blog-list-more">
+		    		<?php $page_blog = get_page_by_path('blog');?>
+		    		<a href="<?php echo get_permalink($page_blog->ID); ?>">
+		    			Tout le blog
+		    		</a>
+				</div>
+	    	</div>
+	   		<div class="home-news-list-container">
+				<ul class="home-news-list">
+		    		<?php
+		   				query_posts( array(
+							'post_status' => 'publish',
+							'category_name' => 'revue-de-presse',
+							'orderby' => 'post_date',
+							'order' => 'desc',
+							'showposts' => 5
+		    			) );
+		    		if ( have_posts() ) :
+						while (have_posts()) : the_post(); 
+			   				wdg_shownewsitem();
+						endwhile; 
+		    		endif;
+		    		?>
+		    	<div style="clear: both;">
+		   		</div>
+				</ul>
+				<div class="home-news-list-more">
+		    		<?php $page_news = get_page_by_path('espace-presse'); ?>
+		    		<a href="<?php echo get_permalink($page_news->ID); ?>">Espace presse</a>
+				</div>
+	    	</div>
+	      	<div class="part-title-separator">
+				<span class="part-title"> 
+					Nos partenaires
+				</span>
+			</div>
+	    	<?php 
+				$page_partners = get_page_by_path('partenaires');
+	    	?>
+	    	<div class="partners_zone">
+				<a href="<?php echo get_permalink($page_partners->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/frise_partenaires_wedogood.png" width="3135" height="150" alt="logos partenaires"></a>
+	    	</div>
 		</div>
-		<div class="home-blog-list-more">
-		    <?php $page_blog = get_page_by_path('blog'); ?>
-		    <a href="<?php echo get_permalink($page_blog->ID); ?>">Tout le blog</a>
-		</div>
-	    </div>
-	    
-	    
-	    <div class="home-news-list-container">
-		<ul class="home-news-list">
-		    <?php
-		    query_posts( array(
-			'post_status' => 'publish',
-			'category_name' => 'revue-de-presse',
-			'orderby' => 'post_date',
-			'order' => 'desc',
-			'showposts' => 5
-		    ) );
-		    if ( have_posts() ) :
-			while (have_posts()) : the_post(); 
-			    wdg_shownewsitem();
-			endwhile; 
-		    endif;
-		    ?>
-		    <div style="clear: both;"></div>
-		</ul>
-		<div class="home-news-list-more">
-		    <?php $page_news = get_page_by_path('espace-presse'); ?>
-		    <a href="<?php echo get_permalink($page_news->ID); ?>">Espace presse</a>
-		</div>
-	    </div>
-	    
-	    
-	    
-	      <div class="separateur">
-		<span class="titre-partie"> 
-			NOS PARTENAIRES
-		</span>
-	</div>
-	    <?php 
-		$page_partners = get_page_by_path('partenaires');
-	    ?>
-	    <div class="partners_zone">
-		<a href="<?php echo get_permalink($page_partners->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/frise_partenaires_wedogood.png" width="3135" height="150" alt="logos partenaires"></a>
-	    </div>
-	</div>
     </div>
 </div><!-- #content -->
 

@@ -1,5 +1,4 @@
 <?php get_header( 'buddypress' ); ?>
-<?php require_once("wp-content/themes/yproject/common.php"); ?>
 
     <div id="content">
 	<div class="padder">

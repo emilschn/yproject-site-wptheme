@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-<?php require_once("common.php"); ?>
 
 <div id="content">
     <div class="padder">
