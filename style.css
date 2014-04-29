@@ -176,7 +176,6 @@ h4 {
 .home-large-project .description-zone .description-status {
 	text-align: center;
 	margin: 10px;
-	text-transform: uppercase;
 }
 .home-large-project .description-zone .description-logos {
 	text-align: center;
@@ -1110,7 +1109,7 @@ ul.activity-list p {
 #object-nav li, #subnav li {
     float: left;
     list-style: none;
-    padding-right: 30px;
+    padding-right: 10px;
 }
 #object-nav li.current, #subnav li.current {
     font-weight: bold;

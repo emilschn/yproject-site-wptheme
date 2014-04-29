@@ -6,9 +6,13 @@ get_header( 'buddypress' );
 	<div id="content">
 		<div class="padder">
 			
-			<?php if(is_user_logged_in()) {
+			<?php // La barre d'admin n'apparait que pour l'admin du site et si on est l'utilisateur qu'on affiche 		
+			$current_user = wp_get_current_user();
+			$current_user_id = $current_user->ID;
+			$displayed_user_id = bp_displayed_user_id();
+			if ($current_user_id == $displayed_user_id) {
     				locate_template( array( 'members/single/admin-bar.php' ), true ); 
-					}
+			}
 			?>
 
 			<?php do_action( 'bp_before_member_home_content' ); ?>
@@ -42,8 +46,7 @@ get_header( 'buddypress' );
 			    ) );
 			    if ($query_temp) $projects_count = $wp_query->found_posts;
 			    
-			    $current_user = wp_get_current_user();
-			    if (bp_displayed_user_id() == $current_user->ID) {
+			    if ($current_user_id == $displayed_user_id) {
 				$query_temp = query_posts( array(
 				    'post_type' => 'download',
 				    'author' => bp_displayed_user_id(),
@@ -117,7 +120,7 @@ get_header( 'buddypress' );
 					    echo '</ul>';
 					}
 					
-					if (bp_displayed_user_id() == $current_user->ID) {
+					if ($current_user_id == $displayed_user_id) {
 					    query_posts( array(
 						'post_type' => 'download',
 						'author' => bp_displayed_user_id(),
@@ -130,11 +133,9 @@ get_header( 'buddypress' );
 						while (have_posts()) {
 						    the_post();
 						    echo '<li><a href="';
-	$preview_link = set_url_scheme( get_permalink( $post->ID ) );
-	$preview_link = esc_url( apply_filters( 'preview_post_link', add_query_arg( 'preview', 'true', $preview_link ) ) );
-//						    the_permalink();
-//						    echo '&preview=true">';
-	echo $preview_link . '">';
+						    $preview_link = set_url_scheme( get_permalink( $post->ID ) );
+						    $preview_link = esc_url( apply_filters( 'preview_post_link', add_query_arg( 'preview', 'true', $preview_link ) ) );
+						    echo $preview_link . '">';
 						    the_title();
 						    echo '</a></li>';
 						}
