@@ -19,14 +19,9 @@
 
 				<div id="post_bottom_bg">
 					<div id="post_bottom_content" class="center">
-						<div class="left post_bottom_desc">
+						
 							<?php require_once('projects/single-content.php'); ?>
-						</div>
-
-						<div class="left post_bottom_infos">
-							<?php require_once('projects/single-sidebar.php'); ?>
-						</div>
-
+						
 						<div style="clear: both"></div>
 					</div>
 				</div>

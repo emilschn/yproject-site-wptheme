@@ -57,14 +57,18 @@
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
-		
 		<meta name="description" content="Plateforme d'investissement participatif &agrave; impact positif" />
-		
 		<meta property="og:title" content="WEDOGOOD" />
 		<meta property="og:image" content="<?php echo get_stylesheet_directory_uri(); ?>/images/logo_entier.jpg" />
 		<meta property="og:image:secure_url" content="<?php echo get_stylesheet_directory_uri(); ?>/images/logo_entier.jpg" />
 		<meta property="og:image:type" content="image/jpeg" />
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo get_stylesheet_directory_uri(); ?>/_inc/js/common.js?ver=1.1.001"></script>
+		<!--[if lt IE 9]>
+		    <script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo get_stylesheet_directory_uri(); ?>/_inc/js/html5shiv.js"></script>
+		<![endif]-->
+		<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
 		<?php $title_str = getWDGTitle();
 		if ($title_str) : ?>
 		<title><?php echo $title_str; ?></title>
@@ -78,11 +82,8 @@
 		<?php do_action( 'bp_head' ); ?>
 		<?php wp_head(); ?>
 		
-		<script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo get_stylesheet_directory_uri(); ?>/_inc/js/common.js?ver=1.1.001"></script>
 		
-		<!--[if lt IE 9]>
-		    <script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo get_stylesheet_directory_uri(); ?>/_inc/js/html5shiv.js"></script>
-		<![endif]-->
+		
 	</head>
 
 	<body <?php body_class(); ?> id="bp-default">

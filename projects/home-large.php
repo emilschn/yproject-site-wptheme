@@ -1,7 +1,5 @@
-<?php query_projects_collecte(1); ?>
 
 <?php while (have_posts()): the_post(); ?>
-
 	<?php 
 	global $post;
 	$campaign = atcf_get_campaign( $post );
@@ -81,7 +79,7 @@
 						<?php echo $days_remaining; ?>
 					</div>
 				    
-					<div class="description-logos-item">
+					<div class="description-logos-item" style="width: 55px;">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo Cible" />
 						<?php echo $campaign->minimum_goal(true); ?>
 					</div>

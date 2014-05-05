@@ -17,19 +17,19 @@ date_default_timezone_set("Europe/Paris");
 			$page_new_project = get_page_by_path('proposer-un-projet');
 			$page_faq = get_page_by_path('descriptif');
 			?>
-			<a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="top-button">
+			<a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="top-button" id="top-button-sign-in">
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/home_btn_inscrivez-vous.png" alt="Inscrivez-vous" />
 				<div class="line1">Inscrivez-vous</div>
 				<div class="line2">pour soutenir les projets de votre choix</div>
 				<div class="line3"><span>Inscription</span></div>
 			</a>
-			<a href="<?php echo get_permalink($page_new_project->ID); ?>" class="top-button">
+			<a href="<?php echo get_permalink($page_new_project->ID); ?>" class="top-button" id="top-button-offer-project">
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/home_btn_proposez-un-projet.png" alt="Proposez un projet" /><br />
 				<div class="line1">Signalez-nous</div>
 				<div class="line2">des projets &agrave; financer sur WEDOGOOD.co</div>
 				<div class="line3"><span>Proposez un projet</span></div>
 			</a>
-			<a href="<?php echo get_permalink($page_faq->ID); ?>" class="top-button">
+			<a href="<?php echo get_permalink($page_faq->ID); ?>" class="top-button" id="top-button-how-it-works">
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/home_btn_comment-ca-marche.png" alt="Comment ca marche" /><br />
 				<div class="line1">Des questions ?</div>
 				<div class="line2">Voici les r&eacute;ponses</div>
@@ -40,7 +40,7 @@ date_default_timezone_set("Europe/Paris");
 </header>
 
 <div id="content">
-	<div class="part-title-separator">
+	<div class="part-title-separator" >
 		<span class="part-title"> 
 			En cours de financement
 		</span>
@@ -48,6 +48,7 @@ date_default_timezone_set("Europe/Paris");
 	<div id="home_top" class="center">
 		<div class="padder">
 			<?php require('requests/projects.php'); ?>
+			<?php query_projects_collecte(); ?>
 			<?php require('projects/home-large.php'); ?>
 		</div>
 	</div>
@@ -56,10 +57,10 @@ date_default_timezone_set("Europe/Paris");
                 require('projects/home-small.php');
                 $is_right_project=true;
 				$preview_projects=query_projects_preview();
-                $vote_projects= query_projects_vote(2);
-				$nb_vote_posts=count($vote_projects);
-				$nb_preview_posts=count($preview_projects);
-				$nb_total_projects=$nb_vote_posts+$nb_preview_posts;
+                $vote_projects= query_projects_vote(1);
+				$nb_vote_projects=count($vote_projects);
+				$nb_preview_projects=count($preview_projects);
+				$nb_total_projects=$nb_vote_projects+$nb_preview_projects;
                 if($nb_total_projects>0){
 				?>
                 	<div class="part-title-separator">
@@ -67,12 +68,12 @@ date_default_timezone_set("Europe/Paris");
                             Prochainement
 						</span>
                     </div>
-                    <div id="home_top" class="center">
+                    <div  class="center">
 						<div class="padder">
 					<?php
                         $nb_printed_post=0;
                         $is_last_post=false;
-						if ($nb_vote_posts>0) {
+						if ($nb_vote_projects>0) {
 							foreach ($vote_projects as $vote_post) {
                                 $nb_printed_post++;
                                 if($nb_printed_post==$nb_total_projects&&$nb_total_projects%2!=0){
@@ -83,7 +84,7 @@ date_default_timezone_set("Europe/Paris");
 							}
                             if($is_last_post)print_empty_post ();
 						}
-						if ($nb_preview_posts>0) {
+						if ($nb_preview_projects>0) {
 							foreach ($preview_projects as $preview_post) {
                                 $nb_printed_post++;
                                 if($nb_printed_post==$nb_total_projects&&$nb_total_projects%2!=0){
@@ -100,8 +101,22 @@ date_default_timezone_set("Europe/Paris");
             <?php
                 }
 			?>
-    <div class="part-title-separator" style="padding-top:50px;">
-	</div>
+			<div  class="center">
+			 	<div class="part-title-separator">
+					<?php 	wp_reset_query();
+	 			  			$nb_funded_projects=count(query_projects_collecte(3)); 
+	 			  			if($nb_funded_projects>0){?>
+	 			  				<span class="part-title" > 
+                           			 D&#201;j&agrave; financ&#201;
+								</span>	
+	 			 	<?php } ?>
+   				</div>
+   				<?php 	
+   					if($nb_funded_projects>0){
+   						require('projects/home-large.php'); ?>
+   						<div class="part-title-separator"></div>
+   				<?php } ?>
+    	 	</div>
     <div id="home_middle">
 		<div id="home_middle_top">
 	    	<div id="home_middle_content">

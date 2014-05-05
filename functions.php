@@ -18,7 +18,11 @@ add_action( 'after_setup_theme', 'yproject_setup', 15 );
 remove_action("wp_head", "wp_generator");
 add_filter('login_errors',create_function('$a', "return null;"));
 
-
+add_action( 'wp_enqueue_scripts', 'yproject_enqueue_script' );
+function yproject_enqueue_script(){
+	wp_enqueue_script( 'project-script',dirname( get_bloginfo('stylesheet_url')).'/_inc/js/project.js', array('jquery') );
+	wp_localize_script( 'project-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
+}
 
 /** GESTION DU LOGIN **/
 /**
@@ -168,4 +172,75 @@ function remove_related_videos($embed) {
     }
 }
 add_filter('oembed_result', 'remove_related_videos', 1, true);
+
+
+
+/**
+ * Permet d'envoyer la position de l'image de couverture d'un projet.
+ * 
+ */
+function set_cover_position(){
+	if(isset($_POST['top'])){
+		$post_meta=get_post_meta($_POST['id_campaign'], 'campaign_cover_position', TRUE);
+		if($post_meta==''){
+			add_post_meta($_POST['id_campaign'], 'campaign_cover_position', $_POST['top'], TRUE);
+			 }
+		update_post_meta($_POST['id_campaign'],'campaign_cover_position', $_POST['top']);
+	}
+
+}
+add_action( 'wp_ajax_setCoverPosition', 'set_cover_position' );
+
+/**
+ * Permet d'envoyer la position de l'image de couverture d'un projet.
+ * 
+ */
+function set_cursor_position(){
+	if(isset($_POST['top'])){
+		$post_meta_top=get_post_meta($_POST['id_campaign'], 'campaign_cursor_top_position', TRUE);
+		$post_meta_left=get_post_meta($_POST['id_campaign'], 'campaign_cursor_left_position', TRUE);
+		if($post_meta_top==''){
+			add_post_meta($_POST['id_campaign'], 'campaign_cursor_top_position', $_POST['top'], TRUE);
+		}
+		if($post_meta_left==''){
+			add_post_meta($_POST['id_campaign'], 'campaign_cursor_left_position', $_POST['left'], TRUE);
+		}
+		update_post_meta($_POST['id_campaign'],'campaign_cursor_top_position', $_POST['top']);
+		update_post_meta($_POST['id_campaign'],'campaign_cursor_left_position', $_POST['left']);
+		
+	}
+
+}
+add_action( 'wp_ajax_setCursorPosition', 'set_cursor_position' );
+
+
+function print_user_avatar($user_id){
+		
+	    $bp = buddypress();
+	    $bp->avatar->full->default = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
+	    
+	    $profile_type = "";
+	    $google_meta = get_user_meta($user_id, 'social_connect_google_id', true);
+	    if (isset($google_meta) && $google_meta != "") $profile_type = ""; //TODO : Remplir avec "google" quand on gèrera correctement
+	    $facebook_meta = get_user_meta(bp_displayed_user_id(), 'social_connect_facebook_id', true);
+	    if (isset($facebook_meta) && $facebook_meta != "") $profile_type = "facebook";
+	    
+	    $url = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
+	    switch ($profile_type) {
+		case "google":
+		    $meta_explode = explode("id?id=", $google_meta);
+		    $social_id = $meta_explode[1];
+		    $url = "http://plus.google.com/s2/photos/profile/" . $social_id . "?sz=149";
+		    echo '<img src="' .$url . '" width="150"/>';
+		    break;
+		case "facebook":
+		    $url = "https://graph.facebook.com/" . $facebook_meta . "/picture?type=normal";
+		    echo '<img src="' .$url . '" width="150"/>';
+		    break;
+		default :
+		    //bp_displayed_user_avatar( 'type=full' );
+		    echo '<img src="'.$url.'" width="150" />';
+		    break;
+	    }
+}
 ?>
