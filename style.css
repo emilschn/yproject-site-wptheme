@@ -82,7 +82,8 @@ img { border: 0; }
 }
 
 .errors {
-    color: red;
+    color: #FE494C;
+    text-transform: none !important;
 }
 
 .underlined, .underlined_arrow {
@@ -1839,28 +1840,7 @@ background-image:url("images/jycrois_gris_rouge.png");
 }
 
 
-/*VOTE*/
-
-.ypvote-form input[type=text] {
-    font-size: 12px;
-    padding: 4px;
-}
-
-.ypvote-form-submit-button{
-    margin: 5px 20px;
-    background: #333333;
-    color: #FFF;
-    border: medium none;
-    padding: 3px 8px;
-    text-transform: uppercase;
-}
-
-.ypvote-form {
-    font-size: 12px;
-    padding: 10px;
-    font-family: Arial,sans-serif;
-}
-
+/* VOTE */
 #project_vote_zone {
     padding-top: 0px;
     width: 310px;
@@ -1876,6 +1856,7 @@ background-image:url("images/jycrois_gris_rouge.png");
     border: 1px solid #B7B7B7;
     width: 285px;
     margin-top: 10px;
+    font-family: Arial,sans-serif;
 }
 
 #project_vote_zone em {
@@ -1890,6 +1871,24 @@ background-image:url("images/jycrois_gris_rouge.png");
     padding: 3px 8px;
 }
 
+#project_vote_zone .light {
+    text-transform:none;
+    text-align : left;
+}
+#project_vote_zone .errors {
+    padding: 0px 10px;
+}
+
+.ypvote-form {
+    font-size: 12px;
+    padding: 10px;
+    font-family: Arial,sans-serif;
+}
+
+.ypvote-form input[type=text] {
+    font-size: 12px;
+    padding: 4px;
+}
 
 .ypvote-form input[type=submit] {
     background: none repeat scroll 0 0 #333333 !important;
@@ -1897,22 +1896,28 @@ background-image:url("images/jycrois_gris_rouge.png");
     padding: 3px 8px;
     text-transform: uppercase !important;
     margin-left: 120px !important;
+    cursor: pointer;
+}
+
+.ypvote-form ul.impact-list, .ypvote-form ul.more-info-list {
+    padding-left: 5px;
+}
+.ypvote-form ul.impact-list li, .ypvote-form ul.more-info-list li {
+    list-style-type: none;
+}
+.ypvote-form ul.impact-list span {
+    width: 100px;
+    display: inline-block;
+}
+.ypvote-form ul.impact-list select {
+    width: 40px;
 }
 
 #pret-content #sum { 
     text-align: right; 
     margin: 0 5px;
 }
-
-#project_vote_zone select {
-    margin-top: 5px;
-    width: 200px;
-}
-
-.errors {
-    color: #FE494C;
-    text-transform: none !important;
-}
+/* FIN VOTE */
 
 
 

@@ -4,142 +4,126 @@ if (isset($_GET['campaign_id'])) {
 	$campaign = atcf_get_campaign( $post );
 }
 	
-$table_name = $wpdb->prefix . "ypVotes";
+$table_name = $wpdb->prefix . "ypcf_project_votes";
 
-$impact = false;
-$local = false;
-$environmental = false;
-$social = false;
-$autre = false;
-$maturite = false;
-$sum = false;
-$liste_risque = false;
-$pas_responsable = false;
-$qualite_produit = false;
-$qualite_equipe = false; 
-$qualite_marche = false;
-$retravaille_autre = false;
-$conseil = false;
+$impact_economy = 0;
+$impact_environment = 0;
+$impact_social = 0;
+$impact_other = '';
+$validate_project = -1;
+$invest_sum = false;
+$invest_risk = false;
+$more_info_impact = false;
+$more_info_service = false;
+$more_info_team = false;
+$more_info_finance = false;
+$more_info_other = '';
+$advice = '';
+
+$vote_errors = array();
 
 if ( is_user_logged_in() ) {
 	if (isset($_POST['submit_vote'])) { 
-		$vote_valid = true;
-
-		$impact             = isset($_POST[ 'impact' ]) ? $_POST[ 'impact' ] : "";
-		$local              = ($impact == "positif" && isset($_POST[ 'local' ])) ? $_POST[ 'local' ] : false;
-		$environmental      = ($impact == "positif" && isset($_POST[ 'environmental' ])) ? $_POST[ 'environmental' ] : false;
-		$social             = ($impact == "positif" && isset($_POST[ 'social' ])) ? $_POST[ 'social' ] : false;
-		$autre              = ($impact == "positif" && isset($_POST[ 'autre' ]) && $_POST[ 'autre' ] && isset($_POST['precision'])) ? htmlentities($_POST[ 'precision' ], ENT_QUOTES | ENT_HTML401) : '';
-		if ($impact == "") {
-		    echo '<span class="errors">Vous n&apos;avez pas r&eacute;pondu &agrave; la premi&egrave;re question.</span><br />';
-		    $vote_valid = false;
+		$is_vote_valid = true;
+		
+		//Notes des impacts
+		$impact_economy = (isset($_POST[ 'impact_economy' ])) ? $_POST[ 'impact_economy' ] : 0;
+		$impact_environment = (isset($_POST[ 'impact_environment' ])) ? $_POST[ 'impact_environment' ] : 0;
+		$impact_social = (isset($_POST[ 'impact_social' ])) ? $_POST[ 'impact_social' ] : 0;
+		$impact_other = (isset($_POST[ 'impact_other' ])) ? htmlentities($_POST[ 'impact_other' ]) : '';
+		
+		//Est-ce que le projet est validé
+		$validate_project = (isset($_POST[ 'validate_project' ])) ? $_POST[ 'validate_project' ] : -1;
+		if ($validate_project === -1) {
+			array_push($vote_errors, 'Vous n&apos;avez pas r&eacute;pondu si les impacts sont suffisants.');
+			$is_vote_valid = false;
 		}
-		if ($impact == "positif" && !$local && !$environmental && !$social && (!isset($_POST[ 'autre' ]))) {
-		    echo '<span class="errors">Vous n&apos;avez pas pr&eacute;cis&eacute; l&apos;impact.</span><br />';
-		    $vote_valid = false;
+		if ($validate_project == 1) {
+			//Projet validé + Somme pret à investir
+			if (isset($_POST[ 'invest_sum' ])) {
+				//Si on n'a rien rempli, on considère que c'est 0
+				if ($_POST[ 'invest_sum' ] == '') {
+					$invest_sum = 0;
+					
+				//Si la somme n'est pas numérique & supérieure à 0, on affiche une erreur
+				} elseif (!is_numeric($_POST[ 'invest_sum' ]) || $_POST[ 'invest_sum' ] < 0) {
+					array_push($vote_errors, 'La somme &agrave; investir n&apos;est pas valide.');
+					$is_vote_valid = false;
+					
+				//Sinon c'est ok (on arrondit quand même)
+				} else {
+					$invest_sum = round($_POST[ 'invest_sum' ]);
+				}
+			}
+			//Projet validé + Risque d'investissement
+			$invest_risk = (isset($_POST[ 'invest_risk' ])) ? $_POST[ 'invest_risk' ] : 0;
+			if ($invest_risk <= 0) {
+				array_push($vote_errors, 'Vous n&apos;avez pas s&eacute;lectionn&eacute; de risque d&apos;investissement.');
+				$is_vote_valid = false;
+			}
 		}
 
-		$maturite		= isset($_POST[ 'maturite' ]) ? $_POST[ 'maturite' ] : false;
-		if ($maturite == "") {
-		    echo '<span class="errors">Vous n&apos;avez pas r&eacute;pondu &agrave; la deuxi&egrave;me question.</span><br />';
-		    $vote_valid = false;
-		}
-		if  ($maturite == "pret" && !is_numeric($_POST[ 'sum' ])) {
-		    echo '<span class="errors">Somme invalide</span><br />';
-		    $vote_valid = false;
-		} else {
-		    $sum = ($maturite == "pret" && isset($_POST[ 'sum' ])) ? $_POST[ 'sum' ] : 0;
-		}
+		//Plus d'infos
+		$more_info_impact = (isset($_POST[ 'more_info_impact' ])) ? $_POST[ 'more_info_impact' ] : false;
+		$more_info_service = (isset($_POST[ 'more_info_service' ])) ? $_POST[ 'more_info_service' ] : false;
+		$more_info_team = (isset($_POST[ 'more_info_team' ])) ? $_POST[ 'more_info_team' ] : false;
+		$more_info_finance = (isset($_POST[ 'more_info_finance' ])) ? $_POST[ 'more_info_finance' ] : false;
+		$more_info_other = (isset($_POST[ 'more_info_other' ])) ? htmlentities($_POST[ 'more_info_other' ]) : '';
+		
+		//Conseils
+		$advice = (isset($_POST[ 'advice' ])) ? htmlentities($_POST[ 'advice' ]) : '';
 
-		$liste_risque           = ($maturite == "pret" && isset($_POST[ 'liste_risque' ])) ? $_POST[ 'liste_risque' ] : '';
-		$pas_responsable        = ($maturite == "retravaille" && isset($_POST[ 'pas_responsable' ])) ? $_POST[ 'pas_responsable' ] : false; 
-		$qualite_produit        = ($maturite == "retravaille" && isset($_POST[ 'qualite_produit' ])) ? $_POST[ 'qualite_produit' ] : false; 
-		$qualite_equipe         = ($maturite == "retravaille" && isset($_POST[ 'qualite_equipe' ])) ? $_POST[ 'qualite_equipe' ] : false; 
-		$qualite_marche         = ($maturite == "retravaille" && isset($_POST[ 'qualite_marche' ])) ? $_POST[ 'qualite_marche' ] : false;
-		$retravaille_autre      = ($maturite == "retravaille" && isset($_POST[ 'retravaille_autre' ]) && $_POST[ 'retravaille_autre' ] && isset($_POST[ 'retravaille_autre_precision' ])) ? htmlentities($_POST[ 'retravaille_autre_precision' ], ENT_QUOTES | ENT_HTML401) : '';
-
-		if ($maturite == "pret" && $liste_risque == "") {
-		    echo '<span class="errors">Vous n&apos;avez pas pr&eacute;cis&eacute; le risque que vous estimez.</span><br />';
-		    $vote_valid = false;
-		}
-
-		$conseil                = (isset($_POST[ 'conseil' ])) ? htmlentities($_POST[ 'conseil' ]) : '';
-
-		$user_last_name         = wp_get_current_user()->user_lastname;
-		$user_first_name        = wp_get_current_user()->user_firstname;
-		$user_email             = wp_get_current_user()->user_email;
-		$user_login             = wp_get_current_user()->user_login;
-		$user_id                = wp_get_current_user()->ID;
-		$user_display_name      = wp_get_current_user()->display_name;
-
-		$campaign_id            = $campaign->ID;
+		$user_id = wp_get_current_user()->ID;
+		$campaign_id = $campaign->ID;
 
 
 
 		// Vérifie si l'utilisateur a deja voté
-		$users = $wpdb->get_results( "SELECT user_id FROM $table_name WHERE campaign_id = $campaign_id " );
-
-		$isvoted = false; 
-
-		foreach ( $users as $user ){
-		    if ( $user->user_id == $user_id){
-			echo '<span class="errors">D&eacutesol&eacute vous avez d&egraveja vot&eacute, merci !</span><br />';
-			$isvoted = true;
-			break;
-		    } 
-		}
-
-		if ($isvoted == false && $vote_valid) {
-		    $wpdb->insert( $table_name, 
-			array ( 
-			    'impact'                  => $impact, 
-			    'local'                   => $local,
-			    'environmental'           => $environmental,
-			    'social'                  => $social,
-			    'autre'                   => $autre,
-			    'sum'                     => $sum,
-			    'liste_risque'            => $liste_risque,
-			    'retravaille'             => $maturite,
-			    'pas_responsable'         => $pas_responsable,
-			    'mal_explique'            => $retravaille_autre,
-			    'qualite_produit'         => $qualite_produit,
-			    'qualite_equipe'          => $qualite_equipe,
-			    'qualite_business_plan'   => '',
-			    'qualite_innovation'      => '',
-			    'qualite_marche'          => $qualite_marche,
-			    'conseil'                 => $conseil,
-			    'isvoted'                 => $isvoted,
-			    'user_id'                 => $user_id,
-			    'user_first_name'         => $user_first_name,
-			    'user_last_name'          => $user_last_name,
-			    'user_login'              => $user_login,
-			    'user_email'              => $user_email,
-			    'campaign_id'             => $campaign_id
-			)
-		    ); 
+		$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign_id.' AND user_id = '.$user_id );
+		if ( !empty($hasvoted_results[0]->id) ) {
+			array_push($vote_errors, 'D&eacutesol&eacute vous avez d&egraveja vot&eacute, merci !');
+			
+		} else if ($is_vote_valid) {
+			//Ajout à la base de données
+			$wpdb->insert( $table_name, array ( 
+				'user_id'                 => $user_id,
+				'post_id'		  => $campaign_id,
+				'impact_economy'          => $impact_economy, 
+				'impact_environment'      => $impact_environment, 
+				'impact_social'           => $impact_social, 
+				'impact_other'            => $impact_other, 
+				'validate_project'        => $validate_project, 
+				'invest_sum'		  => $invest_sum, 
+				'invest_risk'		  => $invest_risk, 
+				'more_info_impact'        => $more_info_impact, 
+				'more_info_service'       => $more_info_service, 
+				'more_info_team'          => $more_info_team, 
+				'more_info_finance'       => $more_info_finance, 
+				'more_info_other'         => $more_info_other, 
+				'advice'		  => $advice 
+			)); 
 
 
-		    // Construction des urls utilisés dans les liens du fil d'actualité
-		    // url d'une campagne précisée par son nom 
-		    $campaign_url  = get_permalink($post->ID);
-		    $post_title = $post->post_title;
-		    $url_campaign = '<a href="'.$campaign_url.'">'.$post_title.'</a>';
-		    //url d'un utilisateur précis
-		    $url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '">' . $user_display_name . '</a>';
+			// Construction des urls utilisés dans les liens du fil d'actualité
+			// url d'une campagne précisée par son nom 
+			$campaign_url  = get_permalink($post->ID);
+			$post_title = $post->post_title;
+			$url_campaign = '<a href="'.$campaign_url.'">'.$post_title.'</a>';
+			//url d'un utilisateur précis
+			$user_display_name      = wp_get_current_user()->display_name;
+			$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '">' . $user_display_name . '</a>';
 
-		    bp_activity_add(array (
-			'component' => 'profile',
-			'type'      => 'voted',
-			'action'    => $url_profile.' a voté sur le projet '.$url_campaign
-		    ));
+			bp_activity_add(array (
+				'component' => 'profile',
+				'type'      => 'voted',
+				'action'    => $url_profile.' a voté sur le projet '.$url_campaign
+			));
 		}
 	}
 	
-        $users = $wpdb->get_results( 'SELECT user_id FROM '.$table_name.' WHERE campaign_id = '.$campaign->ID );
+        $hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = "'.$campaign->ID.'" AND user_id = "'.wp_get_current_user()->ID.'"' );
         $has_voted = false;
-        foreach ( $users as $user ){
-		if ( $user->user_id == wp_get_current_user()->ID) $has_voted = true;
-        }
+	if ( !empty($hasvoted_results[0]->id) ) $has_voted = true;
 } else {
 	if (isset($_POST['submit_vote'])) {
 	?>
@@ -149,75 +133,89 @@ if ( is_user_logged_in() ) {
 }
 ?>
 		
-<div id="project_vote_link" class="dark" style="color: #FFF">Voter</div>
+<div id="project_vote_link" class="dark">Voter</div>
 
 <div id="project_vote_zone">
     
 <?php
 if ($campaign->end_vote_remaining() > 0) {
 	if ( is_user_logged_in() ) :
+		function displayImpactSelect($name, $value, $min = 0, $max = 5) {
+			?>
+			<select name="<?php echo $name; ?>">
+				<?php for ($i = $min; $i <= $max; $i++) { ?>
+					<option value="<?php echo $i; ?>" <?php if ($i == $value) { ?>selected<?php } ?>><?php echo $i; ?></option>
+				<?php } ?>
+			</select>
+			<?php
+		}
+	    
 		if ($has_voted): ?>
 			Merci pour votre vote.
 			
 		<?php else: ?>
 
-			<div class="light" style="text-transform:none;text-align : left;" >
-				<form name="ypvote" action="<?php get_permalink();?>" method="POST" class="ypvote-form" enctype="multipart/form-data">
+			<div class="light">
+				<?php
+				foreach ($vote_errors as $vote_error_message) {
+				?>
+					<span class="errors"><?php echo $vote_error_message; ?></span><br />
+				<?php
+				}
+				?>
+					
+				<form name="ypvote" action="<?php echo get_permalink($post->ID); ?>" method="POST" class="ypvote-form" enctype="multipart/form-data">
 
 					<strong>Impacts et coh&eacute;rence du projet</strong><br />
-					<em>Cette question d&eacute;termine la publication du projet sur le site.</em><br />
-					<input type="radio" id="impact-positif" name="impact" value="positif" <?php if ($impact == "positif") echo 'checked="checked"'; ?>>Impact positif, j&apos;approuve ce projet !<br />
-					<p id="impact-positif-content" <?php if ($impact != "positif") echo 'style="display: none;"'; ?>>
-					    <em>Selon moi, l&apos;impact du projet sera significatif sur les points suivants :</em><br />
-					    <input type="checkbox" id="local" name="local" value="local" <?php if ($local) echo 'checked="checked"'; ?>>Local<br />
-					    <input type="checkbox" id="environmental" name="environmental" value="environmental" <?php if ($environmental) echo 'checked="checked"'; ?>>Environnemental<br />
-					    <input type="checkbox" id="social" name="social" value="social" <?php if ($social) echo 'checked="checked"'; ?>>Social<br />
-					    <input type="checkbox" id="autre" name="autre" value="autre" <?php if ($autre != "" && $autre != false) echo 'checked="checked"'; ?>>Autre
-					    <input type="text" id="precision" name="precision" placeholder="Pr&eacute;ciser..." <?php if ($autre != "" && $autre != false) echo 'value="'.$_POST['precision'].'"'; ?>/>
-					</p>
-					<input type="radio" id="desaprouve" name="impact" value="negatif" <?php if ($impact == "negatif") echo 'checked="checked"'; ?>>Pas d&apos;impact, je d&eacute;sapprouve.<br />
-					<p id="impact-negatif-content" <?php if ($impact != "negatif") echo 'style="display: none;"'; ?>>
-					    <em>En d&eacute;sapprouvant ce projet, je vote contre sa publication sur le site.</em>
-					</p><br />
-
-
-					<strong>Maturit&eacute; et collecte</strong><br />
-					<em>Cette question permet au porteur de projet de voir les am&eacute;liorations qu'il peut apporter avant de se lancer.</em><br />
-					<input id="pret" type="radio" name="maturite" value="pret" <?php if ($maturite == "pret") echo 'checked="checked"'; ?>>Je pense que ce projet est pr&ecirc;t pour la collecte !<br />
-					<p id="pret-content" <?php if ($maturite != "pret") echo 'style="display: none;"'; ?>>
-					    <label id="investir" name="investir" value="investir">Je serais pr&ecirc;t &agrave; investir</label>
-					    <input type="text" id="sum" name="sum" placeholder="10" size="10" <?php if ($sum !== false) echo 'value="'.$sum.'"'; ?> />&euro;<br />
-
-					    <label class="risque" name="risque" value="risque">Je pense que ce projet pr&eacute;sente un risque [<a href="javascript:void(0);" title="Evaluez les chances de r&eacute;ussite de ce projet en indiquant le risque que vous estimez. 1 repr&eacute;sente un risque faible (donc de grande chances de r&eacute;ussite), 5 un risque &eacute;lev&eacute; (de faibles chances de r&eacute;ussite). Le niveau de risque du projet a une influence sur sa valeur.">?</a>] :</label><br />
-					    <select id="liste_risque" name="liste_risque">
-						<option value=""></option>
-						<option value="tres_faible" <?php if ($liste_risque == "tres_faible") echo 'selected'; ?>>(1) tr&egrave;s faible</option>
-						<option value="plutot_faible" <?php if ($liste_risque == "plutot_faible") echo 'selected'; ?>>(2) plut&ocirc;t faible</option>
-						<option value="modere" <?php if ($liste_risque == "modere") echo 'selected'; ?>>(3) mod&eacute;r&eacute;</option>
-						<option value="plutot_eleve" <?php if ($liste_risque == "plutot_eleve") echo 'selected'; ?>>(4) &eacute;lev&eacute;</option>
-						<option value="tres_eleve" <?php if ($liste_risque == "tres_eleve") echo 'selected'; ?>>(5) tr&egrave;s &eacute;lev&eacute;</option>
+					<em>Comment &eacute;valuez-vous les impacts soci&eacute;taux de ce projet ?</em><br />
+					<ul class="impact-list">
+					    <li><span>Economie</span> <?php displayImpactSelect('impact_economy', $impact_economy); ?></li>
+					    <li><span>Environnement</span> <?php displayImpactSelect('impact_environment', $impact_environment); ?></li>
+					    <li><span>Social</span> <?php displayImpactSelect('impact_social', $impact_social); ?></li>
+					    <li><span>Autre</span> <input type="text" name="impact_other" placeholder="Pr&eacute;ciser..." value="<?php if ($impact_other != '') {echo $impact_other;} ?>" /></li>
+					</ul>
+					
+					
+					<em>Ces impacts sont-ils suffisants pour que ce projet soit en financement sur WEDOGOOD.co ?</em><br />
+					<input type="radio" id="btn-validate_project-true" name="validate_project" value="1" <?php if ($validate_project == 1) echo 'checked="checked"'; ?>>Oui<br />
+					<p id="validate_project-true" <?php if ($validate_project != 1) echo 'style="display: none;"'; ?>>
+					    Je serais pr&ecirc;t &agrave; investir :
+					    <input type="text" name="invest_sum" placeholder="0" size="10" value="<?php if ($invest_sum !== false) echo $invest_sum; ?>" />&euro;<br />
+					    
+					    Je pense que le risque est :
+					    <select name="invest_risk">
+						<option value="0"></option>
+						<option value="1" <?php if ($invest_risk == 1) echo 'selected'; ?>>(1) tr&egrave;s faible</option>
+						<option value="2" <?php if ($invest_risk == 2) echo 'selected'; ?>>(2) plut&ocirc;t faible</option>
+						<option value="3" <?php if ($invest_risk == 3) echo 'selected'; ?>>(3) mod&eacute;r&eacute;</option>
+						<option value="4" <?php if ($invest_risk == 4) echo 'selected'; ?>>(4) &eacute;lev&eacute;</option>
+						<option value="5" <?php if ($invest_risk == 5) echo 'selected'; ?>>(5) tr&egrave;s &eacute;lev&eacute;</option>
 					    </select>
 					</p>
-
-					<input id="retravaille" type="radio" name="maturite" value="retravaille" <?php if ($maturite == "retravaille") echo 'checked="checked"'; ?>>Je pense que ce projet n&apos;est pas pr&ecirc;t.<br />
-					<p id="retravaille-content" <?php if ($maturite != "retravaille") echo 'style="display: none;"'; ?>>
-					    <em>Selon moi, il doit &ecirc;tre retravaill&eacute; sur les points suivants :</em><br />
-					    <input type="checkbox" name="pas_responsable" value="pas_responsable" <?php if ($pas_responsable) echo 'checked="checked"'; ?>>Impact soci&eacute;tal<br />
-					    <input type="checkbox" name="qualite_produit" value="qualite_produit" <?php if ($qualite_produit) echo 'checked="checked"'; ?>>Produit/service<br />
-					    <input type="checkbox" name="qualite_equipe" value="qualite_equipe" <?php if ($qualite_equipe) echo 'checked="checked"'; ?>>Structuration de l&apos;&eacute;quipe<br />
-					    <input type="checkbox" name="qualite_marche" value="qualite_marche" <?php if ($qualite_marche) echo 'checked="checked"'; ?>>Pr&eacute;visionnel financier<br />
-
-					    <input type="checkbox" id="retravaille_autre" name="retravaille_autre" value="autre" <?php if ($retravaille_autre != "" && $retravaille_autre != false) echo 'checked="checked"'; ?>>Autre
-					    <input  type="text" id="retravaille_autre_precision" name="retravaille_autre_precision" placeholder="Pr&eacute;ciser..." <?php if ($retravaille_autre != "" && $retravaille_autre != false) echo 'value="'.$retravaille_autre.'"'; ?>/>
+					<input type="radio" id="btn-validate_project-false" name="validate_project" value="0" <?php if ($validate_project == 0) echo 'checked="checked"'; ?>>Non<br />
+					<p id="validate_project-false" <?php if ($validate_project != 0) echo 'style="display: none;"'; ?>>
+					    <em>Si le projet recueille une majorit&eacute; de non, il ne pourra pas &ecirc;tre financ&eacute; sur le site et ne pourra se repr&eacute;senter au vote avant 3 mois.</em>
 					</p><br />
-
+					
 					<strong>Remarques</strong><br />
-					<span>Quels conseils ou encouragements souhaiteriez-vous donner au(x) porteur(s) de ce projet ?</span><br />
-					<textarea type="text" name="conseil" id="conseil" value="conseil"><?php if ($conseil != "" && $conseil != false) echo $conseil; ?></textarea><br />
+					<em>Avez-vous besoin de plus d&apos;informations concernant l&apos;un des aspects suivants ?</em><br />
+					<ul class="more-info-list">
+					    <li><label><input type="checkbox" name="more_info_impact" value="1" <?php if ($more_info_impact) echo 'checked="checked"'; ?>>L&apos;impact soci&eacute;tal</label></li>
+					    <li><label><input type="checkbox" name="more_info_service" value="1" <?php if ($more_info_service) echo 'checked="checked"'; ?>>Le produit/service</label></li>
+					    <li><label><input type="checkbox" name="more_info_team" value="1" <?php if ($more_info_team) echo 'checked="checked"'; ?>>La structuration de l&apos;&eacute;quipe</label></li>
+					    <li><label><input type="checkbox" name="more_info_finance" value="1" <?php if ($more_info_finance) echo 'checked="checked"'; ?>>Le pr&eacute;visionnel financier</label></li>
 
-					<br />
+					    <li>Autre : <input type="text" name="more_info_other" placeholder="Pr&eacute;ciser..." <?php if ($more_info_other != "" && $more_info_other != false) echo 'value="'.$more_info_other.'"'; ?>/> </li>
+					</ul><br />
+					
+
+					<strong>Conseils</strong><br />
+					<em>Quels conseils ou encouragements souhaitez-vous donner au(x) porteur(s) de ce projet ?</em><br />
+					<textarea type="text" name="advice"><?php if ($advice != "" && $advice != false) echo $advice; ?></textarea><br /><br />
+
+					<em>Vous pouvez poser vos questions sur le forum du projet.</em><br /><br />
+					
 					<input type="submit" name="submit_vote" value="Voter" />
-
 				</form>
 			</div>
 		<?php endif;
