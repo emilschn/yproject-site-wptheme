@@ -30,7 +30,7 @@ if ( is_user_logged_in() ) {
 		$impact_economy = (isset($_POST[ 'impact_economy' ])) ? $_POST[ 'impact_economy' ] : 0;
 		$impact_environment = (isset($_POST[ 'impact_environment' ])) ? $_POST[ 'impact_environment' ] : 0;
 		$impact_social = (isset($_POST[ 'impact_social' ])) ? $_POST[ 'impact_social' ] : 0;
-		$impact_other = (isset($_POST[ 'impact_other' ])) ? htmlentities($_POST[ 'impact_other' ]) : '';
+		$impact_other = (isset($_POST[ 'impact_other' ])) ? stripslashes(htmlentities($_POST[ 'impact_other' ], ENT_QUOTES | ENT_HTML401)) : '';
 		
 		//Est-ce que le projet est validé
 		$validate_project = (isset($_POST[ 'validate_project' ])) ? $_POST[ 'validate_project' ] : -1;
@@ -68,10 +68,10 @@ if ( is_user_logged_in() ) {
 		$more_info_service = (isset($_POST[ 'more_info_service' ])) ? $_POST[ 'more_info_service' ] : false;
 		$more_info_team = (isset($_POST[ 'more_info_team' ])) ? $_POST[ 'more_info_team' ] : false;
 		$more_info_finance = (isset($_POST[ 'more_info_finance' ])) ? $_POST[ 'more_info_finance' ] : false;
-		$more_info_other = (isset($_POST[ 'more_info_other' ])) ? htmlentities($_POST[ 'more_info_other' ]) : '';
+		$more_info_other = (isset($_POST[ 'more_info_other' ])) ? stripslashes(htmlentities($_POST[ 'more_info_other' ], ENT_QUOTES | ENT_HTML401)) : '';
 		
 		//Conseils
-		$advice = (isset($_POST[ 'advice' ])) ? htmlentities($_POST[ 'advice' ]) : '';
+		$advice = (isset($_POST[ 'advice' ])) ? stripslashes(htmlentities($_POST[ 'advice' ], ENT_QUOTES | ENT_HTML401)) : '';
 
 		$user_id = wp_get_current_user()->ID;
 		$campaign_id = $campaign->ID;
