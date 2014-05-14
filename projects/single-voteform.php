@@ -138,7 +138,7 @@ if ( is_user_logged_in() ) {
         $users = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE campaign_id = "'.$campaign->ID.'" AND user_id = "'.wp_get_current_user()->ID.'"' );
         $has_voted = false;
 	if ( !empty($users[0]->id) ) $has_voted = true;
-} else {
+	} else {
 	if (isset($_POST['submit_vote'])) {
 	?>
 		<span class="errors">Vous devez vous connecter pour voter</span><br />

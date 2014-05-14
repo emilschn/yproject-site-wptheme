@@ -18,21 +18,16 @@ if (isset($_GET['campaign_id'])) {
 			<div id="projects-stats-content">
 				<div class="projects-description-separator"></div>
 				 <?php
-					if($vote_status=='collecte') {
+					if($vote_status=='collecte'||$vote_status=='funded') {
     // Affichage des stats quand on est en financement
 					$percent = min(100, $campaign->percent_minimum_completed(false));
 					$width = 250 * $percent / 100;
-					$width_min = 0;
 					
 					?>
 					<div>
 						<div class="project_full_progressbg">
 							<div class="project_full_progressbar" style="width:<?php echo $width; ?>px">
-								<?php if ($width_min > 0): ?>
-									<div style="width: <?php echo $width_min; ?>px; height: 100%; border: 0px; border-right: 1px solid white;">&nbsp;</div>
-								<?php else: ?>
-										&nbsp;
-								<?php endif; ?>
+								&nbsp;
 							</div>
 						</div>
 						<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
@@ -41,7 +36,7 @@ if (isset($_GET['campaign_id'])) {
 							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png" alt="Logo personnes" />
 							<?php echo $campaign->backers_count(); ?> personnes ont dèjà financé ce projet
 						</div>
-						<div class="post_bottom_infos_item">
+						<div class="post_bottom_infos_item" <?php if($vote_status=='funded'){echo "style=opacity:0.5";}?>>
 							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo horloge" />
 							Plus que <strong><?php echo $campaign->days_remaining(); ?></strong> jours !
 						</div>
@@ -56,9 +51,16 @@ if (isset($_GET['campaign_id'])) {
     
     // Affichage des stats quand on est en vote
     				else if($vote_status=='vote') {
-	$nbvoters = $campaign->nb_voters();
-	$remaining_vote_days = $campaign->end_vote_remaining();
-?>
+						$nbvoters = $campaign->nb_voters();
+						$remaining_vote_days = $campaign->end_vote_remaining();
+?>				<div style="opacity:0.5">
+						<div class="project_full_progressbg">
+							<div class="project_full_progressbar" style="width:0px">
+								&nbsp;
+							</div>
+						</div>
+						<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
+						</div>
 	<div class="post_bottom_infos_item">
 		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png" alt="Logo personnes" />
 
@@ -80,6 +82,10 @@ if (isset($_GET['campaign_id'])) {
 		Le vote est termin&eacute;
 		<?php endif; ?>
 	</div>
+	<div class="post_bottom_infos_item">
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo cible" />
+							<?php echo 'Ce projet a besoin de '.$campaign->minimum_goal(true) ; ?>
+						</div>
 	<div class="projects-description-separator"></div>
 <?php 
 }
@@ -89,54 +95,119 @@ if (isset($_GET['campaign_id'])) {
 
 	<div class="post_bottom_buttons">
 		<?php 
+			if (class_exists('Sharing_Service')) {
+	   		//Liens pour partager
+	   		$buffer = ypcf_fake_sharing_display();
+			}
+			echo $buffer;
+			?>
+		
+		<?php
 		    // Affichage du bouton investir : Statut du projet == 'collecte' && Fiche du porteur de projet complète
 		    if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) {
 		?> 
 		<div id="invest-button" >
 			<?php $page_invest = get_page_by_path('investir'); ?>
-			<a href="<?php echo get_permalink($vote_post->ID); ?>" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Investir sur ce projet<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>&invest_start=1" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Investir sur ce projet<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 		</div>
 		<?php
+
 			}else if($vote_status == 'vote' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) {
 		?>		<div id="invest-button" >
 					<a href="javascript:print_vote_form()" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter pour ce projet<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 				</div>
 		<?php
-			}
+			}else if($vote_status=='funded'){
 		?>
-	    
+	    	<div id="funded-button" >
+			<a class="description-discover">Projet financ&eacute;</a>
+		</div>
 		<?php
-		    // Affichage du bouton voter et de la zone de vote : Statut du projet == 'vote'
-		  //  if ($vote_status == 'vote') require_once('single-voteform.php');
+		    }
 		?>
-
-		<!-- Zone de partage -->
-		<div class="stats_btn" class="dark">
-			<a href="javascript:void(0)">J'y crois</a>
-		</div>
-		<div class="stats_btn" class="dark">
-			<a href="javascript:void(0)">Partager</a>
-		</div>
-		<?php do_shortcode('[yproject_crowdfunding_jcrois]'); ?>
 		
-		<div id="share_btn_zone" style="display: none;" class="light">
-			<a href="http://www.facebook.com/sharer.php?u=<?php echo urlencode(get_permalink( $post->ID )); ?>" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_bouton_partager.png" alt="Bouton Facebook" /></a>
-			<br />
+		<!-- Zone de partage -->
+		<?php if ( is_user_logged_in() ) { 
+				global $wpdb, $campaign_id;
+				$user_id = wp_get_current_user()->ID;
+				$table_jcrois = $wpdb->prefix . "jycrois";
+				$users = $wpdb->get_results( "SELECT * FROM $table_jcrois WHERE campaign_id = $campaign_id AND user_id=$user_id" );
+				if ( !empty($users[0]->ID) ) {?>
 
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-			<a href="https://twitter.com/share" class="twitter-share-button" data-via="wedogood_co" data-lang="fr"><?php _e('Partager sur Twitter', 'yproject'); ?></a>
-			<br />
+					<a class="jy-crois" href="javascript:update_jycrois(0,<?php global $post;echo($post->ID); ?>,'<?php echo home_url(); ?>')">
+					<div id="jy-crois-btn" style="background-image: url('<?php echo home_url().'/wp-content/themes/yproject/images/jycrois_gris.png';?>')" class="stats_btn" class="dark">
+					<p id="jy-crois-txt"><p>
+				<?php }
+				else{ ?>
+				<a class="jy-crois" href="javascript:update_jycrois(1,<?php global $post;echo($post->ID); ?>,'<?php echo home_url(); ?>')">
+					<div id="jy-crois-btn" class="stats_btn" class="dark">
+					<p id="jy-crois-txt">J'y crois <p>
+
+				<?php }
+				
+			}
+		
+		else{
+			$page_connexion = get_page_by_path('connexion'); ?>
+			<a class="jy-crois" href="<?php echo get_permalink($page_connexion->ID); ?>">
+
+					<div id="jy-crois-btn" class="stats_btn" class="dark">
+					<p id="jy-crois-txt">J'y crois <p>
+         <?php 
+        	}
+		  ?>
+		  <p id="nb-jycrois"><?php do_shortcode('[yproject_crowdfunding_count_jcrois]') ?></p>
+		</div></a>
+		<a id="share-btn-a" href="javascript:share_btn_click()">
+		<div id="share-btn-div" class="stats_btn" class="dark">
+			<p id="share-txt">Partager</p>	
 		</div>
+		</a>
+		</div>
+		<?php if (class_exists('Sharing_Service')) {
+	    //Liens pour partager
+	    $buffer = ypcf_fake_sharing_display();
+	    $buffer .= '</center>';
+		$buffer .= '<br /><br />&lt;&lt; <a href="'.$campaign_url.'">Retour au projet</a>';
+		echo $buffer;
+		} else {?>
+		<div id="dialog" title="Partager ce projet">
+			
+			<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>">
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.jpg" alt="Logo Facebook" />
+			</a>
+			<a href="http://twitter.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>&text='test'">
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.jpg" alt="Logo twitter" />
+			</a>
+			<a href="https://plus.google.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>">
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/google+.jpg" alt="Logo google" />
+			</a>
+		</div> 
+		<?php } ?>
+		<div id="white-background">
+		</div>
+		
 		<!-- FIN Zone de partage -->
+		<?php if ($vote_status=='vote') { ?>
+		<div id="vote-form">
+			<?php require_once('single-voteform.php'); ?>
+		<!--	<h1>Votez !</h1>
+			<h2>Impacts et cohérence du projet</h2>
+			<h3>Cette question détermine la publication du projet sur le site</h3>
+		-->
+		</div> 
+		<?php } ?>
 	</div>
 
 </div>
 <?php } ?>
 		</div>
+
 		<div id="head-image">
 			<div class="center">
 				<div id="head-content">
 					<p id="title"> <?php echo get_the_title(); ?></p>
+					<p id="subtitle"> <?php echo $campaign->subtitle(); ?> </p>
 					<img src="<?php echo get_stylesheet_directory_uri();?>/images/fond_projet.png"></img>
 					<?php
 				$category_slug = $post->ID . '-blog-' . $post->post_title;
@@ -151,12 +222,39 @@ if (isset($_GET['campaign_id'])) {
 				?>
 				<?php $forum = get_page_by_path('forum'); ?>
 				<?php $statistiques = get_page_by_path('statistiques'); ?>
+				<?php
+                                $category_slug = $post->ID . '-blog-' . $post->post_name;
+                                echo $category_slug;
+                                $category_obj = get_category_by_slug($category_slug);
+                                print_r($category_obj);
+                                if (!empty($category_obj)) {
+                                    $category_link = get_category_link($category_obj->cat_ID);
+                                    $posts_in_category = get_posts(array('category'=>$category_obj->cat_ID));
+                                    $test='if';
+                                     } else {
+                                    $category_link = '';
+                                    $test='else';
+                                }
+                                $nb_cat = (isset($posts_in_category)) ? ' ('.count($posts_in_category).')' : '';
+
+                        ?>
+
 					<nav>
 						<ul>
-							<li><a href="<?php echo get_permalink($campaign_id) . $params_full; ?>">Le projet</a></li>
-							<li><a href="<?php echo esc_url( $category_link ); ?>">Actualités</a></li>
-							<li><a href="<?php echo get_permalink($forum->ID); ?>">Forum</a></li>
-							<li><a href="<?php echo get_permalink($statistiques->ID); ?>">Statistiques</a></li>
+							<?php 
+							 $current_page = 'http';
+							 if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+							 $current_page .= "://";
+							 $current_page .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+							 $project_link=get_permalink($campaign_id);
+							 $news_link=esc_url($category_link);
+							 $forum_link=get_permalink($forum->ID).$campaign_id_param;
+							 $stats_link=get_permalink($statistiques->ID).$campaign_id_param;
+							 ?>
+							<li><a href="<?php echo $project_link; ?>" <?php if($current_page==$project_link) echo 'class="current"'; ?>>Le projet</a></li>
+							<li><a href="<?php echo $news_link; ?>" <?php if($current_page==$news_link) echo 'class="current"'; ?>>Actualit&eacute;<?php echo  $nb_cat; ?></a></li>
+							<li><a href="<?php echo $forum_link; ?>" <?php if($current_page==$forum_link) echo 'class="current"'; ?>>Forum</a></li>
+							<li><a href="<?php echo $stats_link; ?>" <?php if($current_page==$stats_link) echo 'class="current"'; ?>>Statistiques</a></li>
 						</ul>
 					<nav>
 				</div>

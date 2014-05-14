@@ -13,8 +13,8 @@ $vote_status = html_entity_decode($campaign->vote());
 ?>
 <div id="projects-top-desc">
 	<div id="projects-left-desc" class="left">
-		<h1 class="projects-title"><?php echo get_the_title(); ?> </h1>
-		<div style="padding-top: 25px"><?php echo html_entity_decode($campaign->summary()); ?></div>
+		<h1 class="projects-title">Le projet</h1>
+		<div id="projects-summary"><?php echo html_entity_decode($campaign->summary()); ?></div>
 		<?php 
 		$video_element = '';
 		$img_src = '';
@@ -36,10 +36,10 @@ $vote_status = html_entity_decode($campaign->vote());
 
 		//Sinon on utilise l'objet vidéo fourni par wordpress
 		} else {
-			$video_element = wp_oembed_get($campaign->video(), array('width' => 610));
+			$video_element = wp_oembed_get($campaign->video(), array('width' => 580));
 		}
 		?>
-		<div class="padding-top video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>');"<?php } ?>>
+		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>');"<?php } ?>>
 			<?php echo $video_element; ?>
 		</div>
 	</div>

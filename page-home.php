@@ -6,10 +6,7 @@ date_default_timezone_set("Europe/Paris");
 <header class="align-center header_home">
 	<section id="site_name2" class="center">
 		<div id="welcome_text">
-			<?php wp_reset_query(); 
-						wp_reset_query();
-						the_content();
-		    		?>
+			<?php the_content(); ?>
 		</div>
 		<nav class="home_intro">
 			<?php 
@@ -25,8 +22,8 @@ date_default_timezone_set("Europe/Paris");
 			</a>
 			<a href="<?php echo get_permalink($page_new_project->ID); ?>" class="top-button" id="top-button-offer-project">
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/home_btn_proposez-un-projet.png" alt="Proposez un projet" /><br />
-				<div class="line1">Signalez-nous</div>
-				<div class="line2">des projets &agrave; financer sur WEDOGOOD.co</div>
+				<div class="line1">Pr&eacute;sentez</div>
+				<div class="line2">votre projet sur WEDOGOOD.co</div>
 				<div class="line3"><span>Proposez un projet</span></div>
 			</a>
 			<a href="<?php echo get_permalink($page_faq->ID); ?>" class="top-button" id="top-button-how-it-works">
@@ -57,7 +54,7 @@ date_default_timezone_set("Europe/Paris");
                 require('projects/home-small.php');
                 $is_right_project=true;
 				$preview_projects=query_projects_preview();
-                $vote_projects= query_projects_vote(1);
+                $vote_projects= query_projects_vote();
 				$nb_vote_projects=count($vote_projects);
 				$nb_preview_projects=count($preview_projects);
 				$nb_total_projects=$nb_vote_projects+$nb_preview_projects;
@@ -103,8 +100,8 @@ date_default_timezone_set("Europe/Paris");
 			?>
 			<div  class="center">
 			 	<div class="part-title-separator">
-					<?php 	wp_reset_query();
-	 			  			$nb_funded_projects=count(query_projects_collecte(3)); 
+					<?php
+	 			  			$nb_funded_projects=count(query_projects_funded()); 
 	 			  			if($nb_funded_projects>0){?>
 	 			  				<span class="part-title" > 
                            			 D&#201;j&agrave; financ&#201;
@@ -137,7 +134,6 @@ date_default_timezone_set("Europe/Paris");
 				</div>
 				<div class="center">
 		    		<?php 
-						wp_reset_query();
 						the_content();
 		    		?>
 				</div>
@@ -261,7 +257,8 @@ function wdg_showblogitem() {
     ?>
     <li>
 	<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-	
+	<div class="description-separator "></div>
+
 	<div class="blogimg">
 	    <a href="<?php the_permalink(); ?>">
 		<?php the_post_thumbnail('thumbnail'); ?>
@@ -288,6 +285,7 @@ function wdg_shownewsitem(){
 	<div class="news-title">
 	    <a href="<?php the_permalink(); ?>">
 		<?php the_title(); ?>
+		
 	    </a>
 	</div>
     </li>
