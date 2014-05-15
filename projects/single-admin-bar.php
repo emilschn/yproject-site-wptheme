@@ -37,6 +37,7 @@ if ($current_user_id == $post->post_author || current_user_can('manage_options')
 	//Récupération de la page en cours
 	$current_page = 'project';
 	if (isset($page_name)) $current_page = $page_name;
+	if (bp_is_group()) $current_page = 'group';
 ?>
 	<div id="yp_admin_bar">
 		<div class="center">
@@ -49,7 +50,7 @@ if ($current_user_id == $post->post_author || current_user_can('manage_options')
 			<a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'vote' || $current_page == 'statistiques-avancees') { echo 'class="selected"'; } ?>>Statistiques avanc&eacute;es</a>
 			<?php if ($group_link != '') : ?>
 			 &nbsp; &nbsp; &nbsp;
-			<a href="<?php echo $group_link; ?>">Groupe d&apos;investisseurs</a>
+			<a href="<?php echo $group_link; ?>" <?php if ($current_page == 'group') { echo 'class="selected"'; } ?>>Groupe d&apos;investisseurs</a>
 			<?php endif; ?>
 		</div>
 	    
