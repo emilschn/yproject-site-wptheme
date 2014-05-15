@@ -1127,6 +1127,12 @@ ul.activity-list p {
     color: #2B2C2C;
     font-size: 13px;
 }
+#object-nav a#members span::before {
+    content: "(";
+}
+#object-nav a#members span::after {
+    content: ")";
+}
 /* FIN GROUPES INVESTISSEURS */
 
 /* NAV */
