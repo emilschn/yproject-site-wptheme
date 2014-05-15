@@ -33,15 +33,15 @@ if (isset($_GET['campaign_id'])) {
 						<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
 						</div>
 						<div class="post_bottom_infos_item">
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png" alt="Logo personnes" />
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="Logo personnes" />
 							<?php echo $campaign->backers_count(); ?> personnes ont dèjà financé ce projet
 						</div>
 						<div class="post_bottom_infos_item" <?php if($vote_status=='funded'){echo "style=opacity:0.5";}?>>
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo horloge" />
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo horloge" />
 							Plus que <strong><?php echo $campaign->days_remaining(); ?></strong> jours !
 						</div>
 						<div class="post_bottom_infos_item">
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo cible" />
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="Logo cible" />
 							<?php echo $campaign->current_amount() . ' financés sur ' . $campaign->minimum_goal(true) ; ?>
 						</div>
 						<div class="projects-description-separator"></div>
@@ -62,7 +62,7 @@ if (isset($_GET['campaign_id'])) {
 						<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
 						</div>
 	<div class="post_bottom_infos_item">
-		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/personnes.png" alt="Logo personnes" />
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="Logo personnes" />
 
 		<?php if ($nbvoters == 1): ?>
 		1 personne a d&eacute;j&agrave; vot&eacute;
@@ -74,7 +74,7 @@ if (isset($_GET['campaign_id'])) {
 	</div>
 
 	<div class="post_bottom_infos_item">
-		<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo personnes" />
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo personnes" />
 		
 		<?php if ($remaining_vote_days > 0) : ?>
 		Il reste <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours pour voter
@@ -83,7 +83,7 @@ if (isset($_GET['campaign_id'])) {
 		<?php endif; ?>
 	</div>
 	<div class="post_bottom_infos_item">
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo cible" />
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="Logo cible" />
 							<?php echo 'Ce projet a besoin de '.$campaign->minimum_goal(true) ; ?>
 						</div>
 	<div class="projects-description-separator"></div>
@@ -94,27 +94,19 @@ if (isset($_GET['campaign_id'])) {
 ?>
 
 	<div class="post_bottom_buttons">
-		<?php 
-			if (class_exists('Sharing_Service')) {
-	   		//Liens pour partager
-	   		$buffer = ypcf_fake_sharing_display();
-			}
-			echo $buffer;
-			?>
-		
 		<?php
 		    // Affichage du bouton investir : Statut du projet == 'collecte' && Fiche du porteur de projet complète
 		    if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) {
 		?> 
 		<div id="invest-button" >
 			<?php $page_invest = get_page_by_path('investir'); ?>
-			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>&invest_start=1" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Investir sur ce projet<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>&invest_start=1" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Investir sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 		</div>
 		<?php
 
 			}else if($vote_status == 'vote' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) {
 		?>		<div id="invest-button" >
-					<a href="javascript:print_vote_form()" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter pour ce projet<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+					<a href="javascript:print_vote_form()" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter pour ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 				</div>
 		<?php
 			}else if($vote_status=='funded'){
@@ -134,8 +126,8 @@ if (isset($_GET['campaign_id'])) {
 				$users = $wpdb->get_results( "SELECT * FROM $table_jcrois WHERE campaign_id = $campaign_id AND user_id=$user_id" );
 				if ( !empty($users[0]->ID) ) {?>
 
-					<a class="jy-crois" href="javascript:update_jycrois(0,<?php global $post;echo($post->ID); ?>,'<?php echo home_url(); ?>')">
-					<div id="jy-crois-btn" style="background-image: url('<?php echo home_url().'/wp-content/themes/yproject/images/jycrois_gris.png';?>')" class="stats_btn" class="dark">
+					<a class="jy-crois" href="javascript:update_jycrois(0,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
+					<div id="jy-crois-btn" style="background-image: url('<?php echo $stylesheet_directory_uri.'/images/jycrois_gris.png';?>')" class="stats_btn" class="dark">
 					<p id="jy-crois-txt"><p>
 				<?php }
 				else{ ?>
@@ -174,13 +166,13 @@ if (isset($_GET['campaign_id'])) {
 		<div id="dialog" title="Partager ce projet">
 			
 			<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>">
-				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.jpg" alt="Logo Facebook" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.jpg" alt="Logo Facebook" />
 			</a>
 			<a href="http://twitter.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>&text='test'">
-				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.jpg" alt="Logo twitter" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.jpg" alt="Logo twitter" />
 			</a>
 			<a href="https://plus.google.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>">
-				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/google+.jpg" alt="Logo google" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="Logo google" />
 			</a>
 		</div> 
 		<?php } ?>
@@ -208,7 +200,7 @@ if (isset($_GET['campaign_id'])) {
 				<div id="head-content">
 					<p id="title"> <?php echo get_the_title(); ?></p>
 					<p id="subtitle"> <?php echo $campaign->subtitle(); ?> </p>
-					<img src="<?php echo get_stylesheet_directory_uri();?>/images/fond_projet.png"></img>
+					<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png"></img>
 					<?php
 				$category_slug = $post->ID . '-blog-' . $post->post_title;
 				$category_obj = get_category_by_slug($category_slug);

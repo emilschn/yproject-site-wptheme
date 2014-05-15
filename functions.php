@@ -20,7 +20,6 @@ add_filter('login_errors',create_function('$a', "return null;"));
 
 add_action( 'wp_enqueue_scripts', 'yproject_enqueue_script' );
 function yproject_enqueue_script(){
-	wp_enqueue_script( 'project-script',dirname( get_bloginfo('stylesheet_url')).'/_inc/js/project.js', array('jquery') );
 	wp_localize_script( 'project-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
 }
 
@@ -243,7 +242,7 @@ function print_user_avatar($user_id){
 		    break;
 	    }
 }
-function update_jycrois(){
+function update_jy_crois(){
 	 
 	
 	global $wpdb, $post;
@@ -291,5 +290,5 @@ function update_jycrois(){
 
     	echo $wpdb->get_var( "SELECT count(campaign_id) FROM $table_jcrois WHERE campaign_id = $campaign_id" );
 }
-add_action( 'wp_ajax_updateJyCrois', 'update_jycrois' );
+add_action( 'wp_ajax_update_jy_crois', 'update_jy_crois' );
 ?>

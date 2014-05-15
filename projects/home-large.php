@@ -28,7 +28,6 @@
 		<?php 
 		$video_element = '';
 		$img_src = '';
-		$is_video=false;
 		//Si aucune vidéo n'est définie, ou si on est encore en mode preview, on affiche l'image
 		if ($campaign->video() == '' || $campaign_status == 'preview') {
 			$attachments = get_posts( array(
@@ -48,12 +47,11 @@
 		//Sinon on utilise l'objet vidéo fourni par wordpress
 		} else {
 			$video_element = wp_oembed_get($campaign->video(), array('width' => 610));
-			$is_video=true;
 		}
 		?>
 		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?>>
 			<?php echo $video_element;
-			if (!$is_video && $campaign_status== 'funded' ) { ?>
+			if ($video_element = '' && $campaign_status== 'funded' ) { ?>
 					<div class="funded-banner"></div>
 				<?php }
 			 ?>
@@ -85,7 +83,7 @@
                                     
 					<div class="description-logos-item">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo Cible" />
-						<?php echo round($campaign->minimum_goal(true), 0, PHP_ROUND_HALF_UP).' €'; ?>
+						<?php echo $campaign->minimum_goal(true); ?>
 					</div>	
 					<div class="description-logos-item">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" />

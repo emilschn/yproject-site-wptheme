@@ -1,15 +1,20 @@
 <?php 
     global $facebook_infos;
     global $twitter_infos;
-    
+    global $stylesheet_directory_uri;
+    $stylesheet_directory_uri=get_stylesheet_directory_uri();
     /* Récupération des infos Facebook */
     require_once("_external/facebook/facebook.php");
+    if ( false === ( $transient_facebook_count = get_transient( 'header-facebook-count-transient' ) ) ) { 
     $facebook = new Facebook(array(
 	'appId'  => YP_FB_APP_ID,
 	'secret' => YP_FB_SECRET,
     ));
     $fb_infos = $facebook->api(YP_FB_URL); 
     if ($fb_infos) $facebook_infos = $fb_infos['likes'];
+    set_transient('header-facebook-count-transient',$facebook_infos,60*60*24);
+	}
+	$facebook_infos=get_transient( 'header-facebook-count-transient' );
     /* Récupération des infos Twitter */
     require_once("_external/twitter/TwitterAPIExchange.php");
     $apiUrl = "https://api.twitter.com/1.1/users/show.json";
@@ -21,14 +26,17 @@
         'consumer_key' => YP_TW_consumer_key,
         'consumer_secret' => YP_TW_consumer_secret
     );
-
+    if ( false === ( $transient_twitter_count = get_transient( 'header-twitter-count-transient' ) ) ) { 
     $twitter = new TwitterAPIExchange($settings);
     $response = $twitter->setGetfield($getField)
 			->buildOauth($apiUrl, $requestMethod)
 			->performRequest();
     $followers = json_decode($response);
     if ($followers && isset($followers->followers_count)) $twitter_infos = $followers->followers_count;
-    
+    set_transient('header-twitter-count-transient',$twitter_infos ,60*60*24);
+	}
+	$twitter_infos=get_transient( 'header-twitter-count-transient' );
+
     function getWDGTitle() {
 	global $post;
 	$buffer = '';
@@ -57,18 +65,17 @@
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
-		<meta name="description" content="Plateforme d'investissement participatif &agrave; impact positif" />
+		<meta name="description"d content="Plateforme d'investissement participatif &agrave; impact positif" />
 		<meta property="og:title" content="WEDOGOOD" />
-		<meta property="og:image" content="<?php echo get_stylesheet_directory_uri(); ?>/images/logo_entier.jpg" />
-		<meta property="og:image:secure_url" content="<?php echo get_stylesheet_directory_uri(); ?>/images/logo_entier.jpg" />
+		<meta property="og:image" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
+		<meta property="og:image:secure_url" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
 		<meta property="og:image:type" content="image/jpeg" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo get_stylesheet_directory_uri(); ?>/_inc/js/common.js?ver=1.1.001"></script>
+		<script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo $stylesheet_directory_uri; ?>/_inc/js/common.js?ver=1.1.001"></script>
 		<!--[if lt IE 9]>
-		    <script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo get_stylesheet_directory_uri(); ?>/_inc/js/html5shiv.js"></script>
+		    <script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
-		<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
 		<?php $title_str = getWDGTitle();
 		if ($title_str) : ?>
 		<title><?php echo $title_str; ?></title>
@@ -94,7 +101,7 @@
 		    <div class="center">
 			<ul id="nav">
 			    <?php /* Logo Accueil */ ?>
-			    <li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>" style="padding-left: 0px; padding-right: 14px;"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.png" width="160" height="100" alt="logo" /></a></li>
+			    <li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>" style="padding-left: 0px; padding-right: 14px;"><img src="<?php echo $stylesheet_directory_uri; ?>/images/logo.png" width="160" height="100" alt="logo" /></a></li>
 			    <?php /* Menu Proposer un projet */ $page_start = get_page_by_path('proposer-un-projet'); ?>
 			    <li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Proposer un projet', 'yproject'); ?></a></span></li>
 			    <?php /* Menu Comment ça marche ? */ $page_how = get_page_by_path('descriptif'); ?>
@@ -110,8 +117,8 @@
 				</ul> */?>
 			    </li>
 			    <?php /* Logo FB / TW */ ?>
-			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.png" width="20" height="20" alt="facebook" /></a></li>
-			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.png" width="20" height="20" alt="facebook" /></a></li>
+			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.png" width="20" height="20" alt="facebook" /></a></li>
+			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.png" width="20" height="20" alt="facebook" /></a></li>
 			    
 			    <?php if (is_user_logged_in()) : ?>
 			    <?php /* Menu Mon compte */ ?>
@@ -138,17 +145,18 @@
 			</ul>
 		    </div>
 		</nav>
+		
 		<div id="submenu_item_connection">
 		    <?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
 		    <ul>
 			<li class="page_item_out">
-			    <div id="submenu_item_connection_register"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
+			    <div id="submenu_item_connection_register"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
 			    <hr />
-			    <div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" width="25" height="25" alt="Connexion Facebook" /><span>&nbsp;Se connecter avec Facebook</span></a></div>
+			    <div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook_connexion.jpg" width="25" height="25" alt="Connexion Facebook" /><span>&nbsp;Se connecter avec Facebook</span></a></div>
 			    <div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
 			    <hr /> 
 			   
-			    <div id="submenu_item_connection_login"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_noir_connexion.jpg" width="25" height="25" alt="Triangle noir" />&nbsp;Connexion</div>
+			    <div id="submenu_item_connection_login"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_noir_connexion.jpg" width="25" height="25" alt="Triangle noir" />&nbsp;Connexion</div>
 			    <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
 				<input type="text" name="log" id="sidebar-user-login" class="input" placeholder="Identifiant ou e-mail" />
 				<br />

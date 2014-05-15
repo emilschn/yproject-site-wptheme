@@ -8,7 +8,6 @@ function print_vote_post($vote_post,$is_right_project){
 		<?php 
 		$video_element = '';
 		$img_src = '';
-		$is_video=false;
 		if ($campaign->video() == '') {
 			$attachments = get_posts( array(
 				'post_type' => 'attachment',
@@ -27,12 +26,11 @@ function print_vote_post($vote_post,$is_right_project){
 		//Sinon on utilise l'objet vidéo fourni par wordpress
 		} else {
 			$video_element = wp_oembed_get($campaign->video(), array('width' => 440));
-			$is_video=true;
 		}
 		?>
 <div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?> >
 			<?php echo $video_element;
-				if (!$is_video) { ?>
+				if ($video_element = '') { ?>
 					<div class="vote-banner"></div>
 				<?php }
 			 ?>
@@ -129,7 +127,6 @@ function print_vote_post($vote_post,$is_right_project){
 		<?php 
 		$video_element = '';
 		$img_src = '';
-		$is_video=false;
 		//Si aucune vidéo n'est définie, ou si on est encore en mode preview, on affiche l'image
 		if ($campaign->video() == '') {
 			$attachments = get_posts( array(
@@ -149,12 +146,11 @@ function print_vote_post($vote_post,$is_right_project){
 		//Sinon on utilise l'objet vidéo fourni par wordpress
 		} else {
 			$video_element = wp_oembed_get($campaign->video(), array('width' => 440));
-			$is_video=true;
 		}
 		?>
 		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?> >
 			<?php echo $video_element;
-			if (!$is_video) { ?>
+			if ($video_element = '') { ?>
 					<div class="preview-banner"></div>
 				<?php }
 			 ?>

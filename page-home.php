@@ -1,9 +1,8 @@
 <?php 
 date_default_timezone_set("Europe/Paris");
-
-?>
-
-<header class="align-center header_home">
+require_once('requests/projects.php'); 
+ ?>
+	<header class="align-center header_home">
 	<section id="site_name2" class="center">
 		<div id="welcome_text">
 			<?php the_content(); ?>
@@ -36,21 +35,33 @@ date_default_timezone_set("Europe/Paris");
 	</section>
 </header>
 
+
 <div id="content">
 	<div class="part-title-separator" >
 		<span class="part-title"> 
 			En cours de financement
 		</span>
 	</div>
+	<?php  if ( false === ( $transient_collecte_page = get_transient( 'home-page-collecte-transient' ) ) ) {
+		ob_start();  
+		?>
 	<div id="home_top" class="center">
 		<div class="padder">
-			<?php require('requests/projects.php'); ?>
 			<?php query_projects_collecte(); ?>
 			<?php require('projects/home-large.php'); ?>
 		</div>
 	</div>
-    
-			<?php
+	<?php
+		 set_transient('home-page-collecte-transient',ob_get_contents(),60*60);
+		ob_end_clean();
+		}
+		echo get_transient( 'home-page-collecte-transient' );  
+		?>
+
+	    <?php  if ( false === ( $transient_small_page = get_transient( 'home-page-small-transient' ) ) ) {
+			ob_start();  
+			
+			
                 require('projects/home-small.php');
                 $is_right_project=true;
 				$preview_projects=query_projects_preview();
@@ -96,8 +107,14 @@ date_default_timezone_set("Europe/Paris");
                      	</div>
                     </div>
             <?php
-                }
-			?>
+                 }
+		set_transient('home-page-small-transient',ob_get_contents(),60*60);
+		ob_end_clean();
+		}
+		echo get_transient( 'home-page-small-transient' );
+		 if ( false === ( $transient_funded_page = get_transient( 'home-page-funded-transient' ) ) ) {
+			ob_start();
+			  ?>
 			<div  class="center">
 			 	<div class="part-title-separator">
 					<?php
@@ -114,6 +131,12 @@ date_default_timezone_set("Europe/Paris");
    						<div class="part-title-separator"></div>
    				<?php } ?>
     	 	</div>
+    	 	<?php 
+    	 	set_transient('home-page-funded-transient',ob_get_contents(),60*60);
+			ob_end_clean();
+			}
+			echo get_transient( 'home-page-funded-transient' );  
+		?>
     <div id="home_middle">
 		<div id="home_middle_top">
 	    	<div id="home_middle_content">
@@ -172,18 +195,26 @@ date_default_timezone_set("Europe/Paris");
 	    	<div class="home-activity-list-container">
 				<ul class="home-activity-list">
 					<?php // Affichage du fil d'actualité
+					 if ( false === ( $transient_news_feed_page = get_transient( 'home-page-news-feed-transient' ) ) ) {
+						ob_start();  
 						date_default_timezone_set("Europe/London");
 						if ( bp_has_activities( bp_ajax_querystring( 'activity' ).'&max=10' ) ) :
 		    				while ( bp_activities() ) : bp_the_activity();
 								locate_template( array( 'activity/entry.php' ), true, false );
 		    				endwhile;
 						endif; 
-					?>
+    	 	set_transient('home-page-news-feed-transient',ob_get_contents(),60*60);
+			ob_end_clean();
+			}
+			echo get_transient( 'home-page-news-feed-transient' );  
+		?>
+					
 				</ul>
 	    	</div>
 	    	<div class="home-blog-list-container">
 				<ul class="home-blog-list">
-		   			<?php 
+					<?php  if ( false === ( $transient_blog_page = get_transient( 'home-page-blog-transient' ) ) ) {
+						ob_start();  
 		   				$nb_posts = 3;
 		   				query_posts( array(
 							'post_status' => 'publish',
@@ -197,12 +228,15 @@ date_default_timezone_set("Europe/Paris");
 			   				wdg_showblogitem();
 						endwhile;
 		    		endif;
-		    		?>
+		    	 	 set_transient('home-page-blog-transient',ob_get_contents(),60*60);
+					ob_end_clean();
+					}
+					echo get_transient( 'home-page-blog-transient' );  ?>
 		    		<div style="clear: both;">
 		    		</div>
 				</ul>
 				<div class="home-blog-list-nav">
-		    		<?php for ($i = 1; $i <= $nb_posts; $i++) { ?>
+		    		<?php for ($i = 1; $i <= 3; $i++) { ?>
 		    			<a href="javascript:void(0);" class="home-blog-btn<?php if($i == 1) echo ' selected'; ?>" data-targetitem="<?php echo ($i-1); ?>"><?php echo $i; ?></a>
 		    		<?php } ?>
 				</div>
@@ -215,7 +249,8 @@ date_default_timezone_set("Europe/Paris");
 	    	</div>
 	   		<div class="home-news-list-container">
 				<ul class="home-news-list">
-		    		<?php
+					<?php  if ( false === ( $transient_news_page = get_transient( 'home-page-news-transient' ) ) ) {
+						ob_start();  
 		   				query_posts( array(
 							'post_status' => 'publish',
 							'category_name' => 'revue-de-presse',
@@ -228,7 +263,10 @@ date_default_timezone_set("Europe/Paris");
 			   				wdg_shownewsitem();
 						endwhile; 
 		    		endif;
-		    		?>
+		    		 set_transient('home-page-news-transient',ob_get_contents(),60*60);
+					ob_end_clean();
+					}
+					echo get_transient( 'home-page-news-transient' );  ?>
 		    	<div style="clear: both;">
 		   		</div>
 				</ul>
