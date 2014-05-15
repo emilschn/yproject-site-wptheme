@@ -37,6 +37,15 @@
 								    case 'editer-une-actu':
 									do_shortcode('[yproject_crowdfunding_edit_news]');
 									break;
+								    case 'statistiques-avancees':
+									locate_template( array("projects/single-stats-advanced-main.php"), true );
+									break;
+								    case 'statistiques-avancees-votes':
+									locate_template( array("projects/single-stats-advanced-votes.php"), true );
+									break;
+								    case 'statistiques-avancees-investissements':
+									locate_template( array("projects/single-stats-advanced-investments.php"), true );
+									break;
 								    case 'statistiques':
 									the_content();
 									if (isset($_GET["campaign_id"])) {

@@ -241,24 +241,14 @@ YPMenuFunctions = (function($){
 /* FORMULAIRE VOTE*/
 YPVoteFormFunctions = (function($) {
     return {
-	voteformcontrole:function() { 	
-	    $("#impact-positif").click(function(){ 
-		$("#impact-positif-content").show();
-		$("#impact-negatif-content").hide();
+	voteformcontrole:function() {
+	    $("#btn-validate_project-true").click(function(){ 
+		$("#validate_project-true").show();
+		$("#validate_project-false").hide();
 	    });
-	    $("#desaprouve").click(function(){
-		$("#impact-positif-content").hide();
-		$("#impact-negatif-content").show();
-	    });
-
-	    $("#pret").click(function(){ 
-		$("#retravaille-content").hide(); 
-		$("#pret-content").show();
-	    }); 		
-	    $("#retravaille").click(function(){
-		$("#retravaille-content").show(); 
-		$("#pret-content").hide();
-
+	    $("#btn-validate_project-false").click(function(){ 
+		$("#validate_project-false").show();
+		$("#validate_project-true").hide();
 	    });
     	}
     }   
