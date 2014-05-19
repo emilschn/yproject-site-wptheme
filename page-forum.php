@@ -47,9 +47,7 @@ if ($name!='') {
 								?>
 							</div>
 
-							<div class="left post_bottom_infos">
-								<?php require_once('projects/single-sidebar.php'); ?>
-							</div>
+							
 
 							<div style="clear: both"></div>
 						</div>

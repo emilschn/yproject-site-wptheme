@@ -4,17 +4,22 @@
     global $stylesheet_directory_uri;
     $stylesheet_directory_uri=get_stylesheet_directory_uri();
     /* Récupération des infos Facebook */
+    global $WDG_cache_plugin;
+    
+    if(isset($_GET['campaign_id']))$WDG_cache_plugin->set_params('campaign_id',$_GET['campaign_id']);
+
     require_once("_external/facebook/facebook.php");
-    if ( false === ( $transient_facebook_count = get_transient( 'header-facebook-count-transient' ) ) ) { 
+    $cache_result=$WDG_cache_plugin->get_cache('facebook-count');
+    if(false===$cache_result){	
     $facebook = new Facebook(array(
 	'appId'  => YP_FB_APP_ID,
 	'secret' => YP_FB_SECRET,
     ));
     $fb_infos = $facebook->api(YP_FB_URL); 
     if ($fb_infos) $facebook_infos = $fb_infos['likes'];
-    set_transient('header-facebook-count-transient',$facebook_infos,60*60*24);
+    $WDG_cache_plugin->set_cache('facebook-count',$facebook_infos,60*60*24);
 	}
-	$facebook_infos=get_transient( 'header-facebook-count-transient' );
+	$facebook_infos= $cache_result;
     /* Récupération des infos Twitter */
     require_once("_external/twitter/TwitterAPIExchange.php");
     $apiUrl = "https://api.twitter.com/1.1/users/show.json";
@@ -26,16 +31,17 @@
         'consumer_key' => YP_TW_consumer_key,
         'consumer_secret' => YP_TW_consumer_secret
     );
-    if ( false === ( $transient_twitter_count = get_transient( 'header-twitter-count-transient' ) ) ) { 
+    $cache_result=$WDG_cache_plugin->get_cache('twitter-count');
+    if(false===$cache_result){
     $twitter = new TwitterAPIExchange($settings);
     $response = $twitter->setGetfield($getField)
 			->buildOauth($apiUrl, $requestMethod)
 			->performRequest();
     $followers = json_decode($response);
     if ($followers && isset($followers->followers_count)) $twitter_infos = $followers->followers_count;
-    set_transient('header-twitter-count-transient',$twitter_infos ,60*60*24);
+    $WDG_cache_plugin->set_cache('twitter-count',$twitter_infos,60*60*24);
 	}
-	$twitter_infos=get_transient( 'header-twitter-count-transient' );
+	$twitter_infos=$cache_result;
 
     function getWDGTitle() {
 	global $post;
@@ -60,12 +66,23 @@
 ?>
 
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<head>
+		<?php $title_str = getWDGTitle();
+		if ($title_str) : ?>
+		<title><?php echo $title_str; ?></title>
+		<?php else : ?>
+		<title><?php wp_title( '|', true, 'right' ); bloginfo( 'name' ); ?></title>
+		<?php endif; ?>
+		<?php $cache_result=$WDG_cache_plugin->get_cache('header-content');
+ 				if(false===$cache_result){
+					ob_start();
+	?>
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
-		<meta name="description"d content="Plateforme d'investissement participatif &agrave; impact positif" />
+		<meta name="description" content="Plateforme d'investissement participatif &agrave; impact positif" />
 		<meta property="og:title" content="WEDOGOOD" />
 		<meta property="og:image" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
 		<meta property="og:image:secure_url" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
@@ -76,12 +93,7 @@
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
-		<?php $title_str = getWDGTitle();
-		if ($title_str) : ?>
-		<title><?php echo $title_str; ?></title>
-		<?php else : ?>
-		<title><?php wp_title( '|', true, 'right' ); bloginfo( 'name' ); ?></title>
-		<?php endif; ?>
+		
 		
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?ver=1.1.001" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
@@ -119,12 +131,19 @@
 			    <?php /* Logo FB / TW */ ?>
 			    <li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.png" width="20" height="20" alt="facebook" /></a></li>
 			    <li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.png" width="20" height="20" alt="facebook" /></a></li>
-			    
-			    <?php if (is_user_logged_in()) : ?>
+			    <?php ;
+			    $cache_result=ob_get_contents();
+			    $WDG_cache_plugin->set_cache('header-content',$cache_result,60*60*24);
+			    ob_end_clean();
+				}
+				echo $cache_result;
+			     if (is_user_logged_in()) : ?>
 			    <?php /* Menu Mon compte */ ?>
 			    <li class="page_item_out page_item_inverted">
 				<a class="page_item_inverted" href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a>
+				
 				<ul>
+
 				    <?php
 					if (is_user_logged_in() && !ypcf_check_user_can_invest(false)) {
 					    $page_update_account = get_page_by_path('modifier-mon-compte'); 

@@ -1,5 +1,6 @@
 <?php 
 get_header();
+global $campaign_id_param;
 date_default_timezone_set("Europe/London");
 $campaign_id_param = '?campaign_id=';
 if (isset($_GET['campaign_id'])) {
@@ -10,6 +11,7 @@ if (isset($_GET['campaign_id'])) {
 	$campaign_id_param .= $post->ID;
 }
 	$vote_status = $campaign->campaign_status(); 
+
 ?>
 
 <section id="projects-banner">
@@ -51,7 +53,7 @@ if (isset($_GET['campaign_id'])) {
     
     // Affichage des stats quand on est en vote
     				else if($vote_status=='vote') {
-						$nbvoters = $campaign->nb_voters();
+    					$nbvoters = $campaign->nb_voters();
 						$remaining_vote_days = $campaign->end_vote_remaining();
 ?>				<div style="opacity:0.5">
 						<div class="project_full_progressbg">

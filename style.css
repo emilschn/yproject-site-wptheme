@@ -502,7 +502,7 @@ div#home_bottom h1 {
 }
 
 #post_top_title h1 {
-    font-family: DINPro-Medium, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     padding: 10px;
     margin-left: 450px;
     margin-right: 140px;
@@ -572,7 +572,7 @@ div#home_bottom h1 {
 
 .post_bottom_buttons div {    
     border-bottom: 1px solid #FFFFFF;
-    font-family: DINPro-Medium,Arial,sans-serif;
+    font-family: Arial,sans-serif;
     font-size: 10pt;
     padding: 15px 0;
     text-align: center;
@@ -583,7 +583,7 @@ div#home_bottom h1 {
 
 .post_bottom_buttons_connexion div { 
     border-bottom: 1px solid #FFFFFF;
-    font-family: DINPro-Medium, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 9pt;
     text-transform: uppercase;
     width: 200px;

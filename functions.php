@@ -287,7 +287,11 @@ function update_jy_crois(){
 		'action'    => $url_profile.' croit au projet '.$url_campaign
 	    ));
 		}
-
+		do_action('wdg_delete_cache',array(
+						'project-'.$post->ID.'-header',
+						'home-funded-projects',
+						'home-collecte-projects',
+						'home-small-projects'));
     	echo $wpdb->get_var( "SELECT count(campaign_id) FROM $table_jcrois WHERE campaign_id = $campaign_id" );
 }
 add_action( 'wp_ajax_update_jy_crois', 'update_jy_crois' );
