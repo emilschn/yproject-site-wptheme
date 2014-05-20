@@ -3,10 +3,10 @@ global $wpdb, $campaign, $post;
 $table_name = $wpdb->prefix . "ypcf_project_votes";
 $current_user = wp_get_current_user();
 $current_user_id = $current_user->ID;
+$save_post = $post;
+if (isset($_GET['campaign_id'])) $post = get_post($_GET['campaign_id']);
 $author_id = $post->post_author;
 if (($current_user_id == $author_id || current_user_can('manage_options')) && isset($_GET['campaign_id'])) {
-	$save_post = $post;
-	if (isset($_GET['campaign_id'])) $post = get_post($_GET['campaign_id']);
 	$campaign = atcf_get_campaign( $post );
 	$campaign_id =  $campaign->ID;
 	
@@ -50,14 +50,16 @@ if (($current_user_id == $author_id || current_user_can('manage_options')) && is
 		$percent_project_not_validated = round(($count_voters - $count_project_validated) / $count_voters, 2) * 100;
 		
 		$count_invest_ready = $wpdb->get_var( "SELECT count(user_id) FROM ".$table_name." WHERE post_id = ".$campaign_id." AND validate_project = 1 AND invest_sum > 0" );
-		$sum_invest_ready = $wpdb->get_var( "SELECT sum(invest_sum) FROM ".$table_name." WHERE post_id = ".$campaign_id." AND validate_project = 1 AND invest_sum > 0" );
-		$average_invest_ready = $sum_invest_ready / $count_invest_ready;
-		if ($count_invest_ready == 1) {
-		    $median_invest_ready = $average_invest_ready;
-		} else {
-		    $median = 0;
-		    if ($count_invest_ready > 2) $median = round(($count_invest_ready + 1) / 2);
-		    $median_invest_ready = $wpdb->get_var( "SELECT invest_sum FROM ".$table_name." WHERE post_id = ".$campaign_id." AND validate_project = 1 AND invest_sum > 0 ORDER BY `invest_sum` LIMIT ".$median.", 1" );
+		if ($count_invest_ready > 0) {
+		    $sum_invest_ready = $wpdb->get_var( "SELECT sum(invest_sum) FROM ".$table_name." WHERE post_id = ".$campaign_id." AND validate_project = 1 AND invest_sum > 0" );
+		    $average_invest_ready = $sum_invest_ready / $count_invest_ready;
+		    if ($count_invest_ready == 1) {
+			$median_invest_ready = $average_invest_ready;
+		    } else {
+			$median = 0;
+			if ($count_invest_ready > 2) $median = round(($count_invest_ready + 1) / 2);
+			$median_invest_ready = $wpdb->get_var( "SELECT invest_sum FROM ".$table_name." WHERE post_id = ".$campaign_id." AND validate_project = 1 AND invest_sum > 0 ORDER BY `invest_sum` LIMIT ".$median.", 1" );
+		    }
 		}
 		
 		$count_risk = $wpdb->get_var( "SELECT sum(invest_risk) FROM ".$table_name." WHERE post_id = ".$campaign_id." AND validate_project = 1" );
@@ -91,22 +93,22 @@ if (($current_user_id == $author_id || current_user_can('manage_options')) && is
 
 <h2>Impact et cohérence du projet</h2>
 <?php //TODO : grenades ?>
-<ul>
-	<li>Economie : <?php echo round($average_impact_economy, 1); ?></li>
-	<li>Environnement : <?php echo round($average_impact_environment, 1); ?></li>
-	<li>Social : <?php echo round($average_impact_social, 1); ?></li>
-	<li>Autres : <?php echo $list_impact_others_string; ?>
+<ul class="vote-results-impacts">
+	<li><span>Economie :</span> <?php echo round($average_impact_economy, 1); ?></li>
+	<li><span>Environnement :</span> <?php echo round($average_impact_environment, 1); ?></li>
+	<li><span>Social :</span> <?php echo round($average_impact_social, 1); ?></li>
+	<li><span>Autres :</span> <?php echo $list_impact_others_string; ?>
 </ul>
 
 <em>Vos impacts sont-ils suffisants pour que votre projet soit en financement sur WEDOGOOD.co ?</em><br />
-<center><canvas id="canvas-pie" width="200" height="200"></canvas></center>
+<center><canvas id="canvas-pie" width="400" height="200"></canvas></center>
 
 Les <strong><?php echo $count_project_validated; ?></strong> personnes qui ont vot&eacute; oui...<br />
 <ul>
 	<li>
-	    sont <strong><?php echo $count_invest_ready; ?></strong> pr&ecirc;tes &agrave; investir, 
-	    en moyenne, <strong><?php echo $average_invest_ready; ?> &euro;</strong>.
-	    La moiti&eacute; investiraient plus de : <strong><?php echo $median_invest_ready; ?> &euro;</strong>.
+	    investiraient en moyenne <strong><?php echo $average_invest_ready; ?> &euro;</strong>
+	    (<strong><?php echo $count_invest_ready; ?></strong> personnes).
+	    La moiti&eacute; d&apos;entre elles investiraient plus de <strong><?php echo $median_invest_ready; ?> &euro;</strong>.
 	</li>
 	<li>
 	    ont &eacute;valu&eacute; le risque, en moyenne, &agrave; : <strong><?php echo round($average_risk, 2); ?></strong> / 5<br />
@@ -132,18 +134,23 @@ Autres informations : <strong><?php echo $string_more_info_other; ?></strong>
 
 
 <?php
-	$post = $save_post;
 }
+$post = $save_post;
 ?>
 
 <script type="text/javascript">
 jQuery(document).ready( function() {
     var ctxPie = jQuery("#canvas-pie").get(0).getContext("2d");
     var dataPie = [
-	{value: <?php echo $count_project_validated; ?>, color: "#00FF00"}, 
-	{value: <?php echo ($count_voters - $count_project_validated); ?>, color: "#FF0000"}
+	{value: <?php echo $count_project_validated; ?>, color: "#FE494C", title: "Oui"}, 
+	{value: <?php echo ($count_voters - $count_project_validated); ?>, color: "#333333", title: "Non"}
     ];
-    var canvasPie = new Chart(ctxPie).Pie(dataPie);
+    var optionsPie = {
+	legend: true,
+	legendBorders: false,
+	inGraphDataShow : true
+    };
+    var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
     
     
     var ctxVertical = jQuery("#canvas-vertical").get(0).getContext("2d");
@@ -163,17 +170,22 @@ jQuery(document).ready( function() {
 	scaleStartValue: 0,
 	pointDot: false
     }
-    var canvasVertical = new Chart(ctxVertical).Line(dataVertical, optionsVertical);
+    var canvasVertical = new Chart(ctxVertical).Bar(dataVertical, optionsVertical);
     
     
     var ctxHorizontal = jQuery("#canvas-horizontal").get(0).getContext("2d");
     var dataHorizontal = {
-//	labels: ["a", "b", "c", "d", "e"],
-	labels: ["impact sociétal", "produit / service", "structuration de l'équipe", "prévisionnel financier", "autres"],
+	/*labels: ["impact sociétal", "produit / service", "structuration de l'équipe", "prévisionnel financier", "autres"],
 	datasets: [{
 	    fillColor: "#F2F2F2",
 	    strokeColor: "#F2F2F2",
 	    data: [<?php echo $count_more_info_impact .','. $count_more_info_service .','. $count_more_info_team .','. $count_more_info_finance .','. $count_more_info_other; ?>]
+	}]*/
+	labels: ["autres", "prévisionnel financier", "structuration de l'équipe", "produit / service", "impact sociétal"],
+	datasets: [{
+	    fillColor: "#F2F2F2",
+	    strokeColor: "#F2F2F2",
+	    data: [<?php echo $count_more_info_other .','. $count_more_info_finance .','. $count_more_info_team .','. $count_more_info_service .','. $count_more_info_impact; ?>]
 	}]
     };
     var nSteps = Math.max(Math.max(Math.max(Math.max(Math.max(0, <?php echo $count_more_info_impact; ?>), <?php echo $count_more_info_service; ?>), <?php echo $count_more_info_team; ?>), <?php echo $count_more_info_finance; ?>), <?php echo $count_more_info_other; ?>);
@@ -183,6 +195,6 @@ jQuery(document).ready( function() {
 	scaleStepWidth: 1,
 	scaleStartValue: 0
     }
-    var canvasHorizontal = new Chart(ctxHorizontal).Bar(dataHorizontal, optionsHorizontal);
+    var canvasHorizontal = new Chart(ctxHorizontal).HorizontalBar(dataHorizontal, optionsHorizontal);
 });
 </script>
