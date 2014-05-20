@@ -79,7 +79,7 @@
 		<?php wp_head(); ?>
 		
 		<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/_inc/js/common.js?ver=1.1.001"></script>
-		<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/_inc/js/chart.min.js"></script>
+		<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/_inc/js/chart.new.js"></script>
 		
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo get_stylesheet_directory_uri(); ?>/_inc/js/html5shiv.js"></script>

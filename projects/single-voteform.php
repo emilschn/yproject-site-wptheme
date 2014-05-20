@@ -3,12 +3,13 @@ if (isset($_GET['campaign_id'])) {
 	$post = get_post($_GET['campaign_id']);
 	$campaign = atcf_get_campaign( $post );
 }
-	
+
+global $wpdb;
 $table_name = $wpdb->prefix . "ypcf_project_votes";
 
-$impact_economy = 0;
-$impact_environment = 0;
-$impact_social = 0;
+$impact_economy = 1;
+$impact_environment = 1;
+$impact_social = 1;
 $impact_other = '';
 $validate_project = -1;
 $invest_sum = false;
@@ -22,7 +23,7 @@ $advice = '';
 
 $vote_errors = array();
 
-if ( is_user_logged_in() ) {
+if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 	if (isset($_POST['submit_vote'])) { 
 		$is_vote_valid = true;
 		
@@ -85,7 +86,7 @@ if ( is_user_logged_in() ) {
 			
 		} else if ($is_vote_valid) {
 			//Ajout à la base de données
-			$wpdb->insert( $table_name, array ( 
+			$vote_result = $wpdb->insert( $table_name, array ( 
 				'user_id'                 => $user_id,
 				'post_id'		  => $campaign_id,
 				'impact_economy'          => $impact_economy, 
@@ -102,6 +103,7 @@ if ( is_user_logged_in() ) {
 				'more_info_other'         => $more_info_other, 
 				'advice'		  => $advice 
 			)); 
+			if (!$vote_result) array_push($vote_errors, 'Probl&egrave;me de prise en compte du vote.');
 
 
 			// Construction des urls utilisés dans les liens du fil d'actualité
@@ -121,7 +123,7 @@ if ( is_user_logged_in() ) {
 		}
 	}
 	
-	$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = "'.$campaign->ID.'" AND user_id = "'.wp_get_current_user()->ID.'"' );
+	$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign->ID.' AND user_id = '.wp_get_current_user()->ID );
 	$has_voted = false;
 	if ( !empty($hasvoted_results[0]->id) ) $has_voted = true;
 	
@@ -141,7 +143,7 @@ if ( is_user_logged_in() ) {
 <?php
 if ($campaign->end_vote_remaining() > 0) {
 	if ( is_user_logged_in() ) :
-		function displayImpactSelect($name, $value, $min = 0, $max = 5) {
+		function displayImpactSelect($name, $value, $min = 1, $max = 5) {
 			?>
 			<select name="<?php echo $name; ?>">
 				<?php for ($i = $min; $i <= $max; $i++) { ?>

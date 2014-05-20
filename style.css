@@ -1127,6 +1127,12 @@ ul.activity-list p {
     color: #2B2C2C;
     font-size: 13px;
 }
+#object-nav a#members span::before {
+    content: "(";
+}
+#object-nav a#members span::after {
+    content: ")";
+}
 /* FIN GROUPES INVESTISSEURS */
 
 /* NAV */
@@ -1652,6 +1658,11 @@ footer span {
 /* FIN PAGE INVESTIR */
 
 /* PAGE RESULATS DES VOTES */
+.vote-results-impacts span {
+    display: inline-block;
+    width: 110px;
+}
+
 .tab-results{
     width:100%;
     margin:0px;
@@ -1868,7 +1879,6 @@ background-image:url("images/jycrois_gris_rouge.png");
 }
 
 #project_vote_zone em {
-    color: #B7B7B7;
     font-size: 10px;
 }
 
