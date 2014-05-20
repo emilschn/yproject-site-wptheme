@@ -74,7 +74,7 @@ $vote_status = html_entity_decode($campaign->vote());
 		</div>
 		<?php 	
 			if($can_modify){?>
-				<a id="move-cursor" href="JavaScript:void(0);" onclick='javascript:move_cursor(<?php if(isset($_GET['campaign_id'])){echo $_GET['campaign_id'];}else{global $post;echo($post->ID); } ?>)'>Modifier la position du curseur</a>
+				<a id="move-cursor" href="JavaScript:void(0);" onclick='javascript:WDGProjectPageFunctions.move_cursor(<?php if(isset($_GET['campaign_id'])){echo $_GET['campaign_id'];}else{global $post;echo($post->ID); } ?>)'>Modifier la position du curseur</a>
 			<?php } ?>
 	</div>
 </div>

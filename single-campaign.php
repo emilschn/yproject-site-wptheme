@@ -1,9 +1,8 @@
 <?php date_default_timezone_set("Europe/Paris"); ?>
   
 <?php 
-	global $campaign, $post;
+	global $campaign, $post, $campaign_id;
 	$campaign_id=$post->ID;
-	$WDG_cache_plugin->set_params('campaign_id', $campaign_id);
 	if ( ! is_object( $campaign ) ) $campaign = atcf_get_campaign( $post );
 ?>
 			
@@ -16,20 +15,8 @@
 
 			<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				
-				<?php  $cache_result=$WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header');
- 						if(false===$cache_result&&is_user_logged_in()){
-							ob_start();
+				<?php  
 						require_once('projects/single-header.php'); 
-						$cache_result=ob_get_contents();
-						 $WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header',$cache_result,60*60*2);
-						}
-						else{
-							ob_start();
-						require_once('projects/single-header.php'); 
-						$cache_result=ob_get_contents();
-						}
-						ob_end_clean();
-						echo $cache_result;
 				?>
 
 				<div id="post_bottom_bg">
@@ -40,7 +27,7 @@
 									ob_start();
 							 		require_once('projects/single-content.php'); 
 							 		$cache_result=ob_get_contents();
-									$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-content',$cache_result,60*60*24);
+									$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-content',$cache_result);
 						 			ob_end_clean();
 									}
 								echo $cache_result;

@@ -2894,6 +2894,9 @@ height: 18px;
     display: none;
     text-align: center;
 }
+.ui-dialog{
+    background-color: white;
+}
 .ui-widget-header{
     background: transparent;
     color: #333;

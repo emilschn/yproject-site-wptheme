@@ -1,6 +1,5 @@
 <?php 
-get_header();
-global $campaign_id_param;
+global $campaign_id_param,$campaign_id;
 date_default_timezone_set("Europe/London");
 $campaign_id_param = '?campaign_id=';
 if (isset($_GET['campaign_id'])) {
@@ -10,117 +9,109 @@ if (isset($_GET['campaign_id'])) {
 } else  {
 	$campaign_id_param .= $post->ID;
 }
-	$vote_status = $campaign->campaign_status(); 
+get_header();
+$vote_status = $campaign->campaign_status(); 
 
 ?>
+	<section id="projects-banner">
+		<div id="projects-stats" class="center">
+			<?php 
+			if ($vote_status !='preview'){ 
+				$cache_result=$WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-first');
+				if(false===$cache_result){
+					ob_start();
+				?>
 
-<section id="projects-banner">
-	<div id="projects-stats" class="center">
-		<?php if ($vote_status !='preview'){ ?>
-			<div id="projects-stats-content">
-				<div class="projects-description-separator"></div>
-				 <?php
-					if($vote_status=='collecte'||$vote_status=='funded') {
-    // Affichage des stats quand on est en financement
-					$percent = min(100, $campaign->percent_minimum_completed(false));
-					$width = 250 * $percent / 100;
-					
-					?>
-					<div>
-						<div class="project_full_progressbg">
-							<div class="project_full_progressbar" style="width:<?php echo $width; ?>px">
-								&nbsp;
-							</div>
-						</div>
-						<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
-						</div>
-						<div class="post_bottom_infos_item">
-							<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="Logo personnes" />
-							<?php echo $campaign->backers_count(); ?> personnes ont dèjà financé ce projet
-						</div>
-						<div class="post_bottom_infos_item" <?php if($vote_status=='funded'){echo "style=opacity:0.5";}?>>
-							<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo horloge" />
-							Plus que <strong><?php echo $campaign->days_remaining(); ?></strong> jours !
-						</div>
-						<div class="post_bottom_infos_item">
-							<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="Logo cible" />
-							<?php echo $campaign->current_amount() . ' financés sur ' . $campaign->minimum_goal(true) ; ?>
-						</div>
+					<div id="projects-stats-content">
 						<div class="projects-description-separator"></div>
-
+						 	<?php
+							if($vote_status=='collecte'||$vote_status=='funded') {
+								$percent = min(100, $campaign->percent_minimum_completed(false));
+								$width = 250 * $percent / 100;
+							?>
+								<div>
+									<div class="project_full_progressbg">
+										<div class="project_full_progressbar" style="width:<?php echo $width; ?>px">
+											&nbsp;
+										</div>
+									</div>
+									<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
+								</div>
+								<div class="post_bottom_infos_item">
+									<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="Logo personnes" />
+									<?php echo $campaign->backers_count(); ?> personnes ont dèjà financé ce projet
+								</div>
+								<div class="post_bottom_infos_item" <?php if($vote_status=='funded'){echo "style=opacity:0.5";}?>>
+									<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo horloge" />
+									Plus que <strong><?php echo $campaign->days_remaining(); ?></strong> jours !
+								</div>
+								<div class="post_bottom_infos_item">
+									<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="Logo cible" />
+									<?php echo $campaign->current_amount() . ' financés sur ' . $campaign->minimum_goal(true) ; ?>
+								</div>
+								<div class="projects-description-separator"></div>
+							<?php 
+		   					}else if($vote_status=='vote') {
+			    				$nbvoters = $campaign->nb_voters();
+								$remaining_vote_days = $campaign->end_vote_remaining();?>
+								<div style="opacity:0.5">
+									<div class="project_full_progressbg"></div>
+									<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
+								</div>
+								<div class="post_bottom_infos_item">
+									<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="Logo personnes" />
+									<?php if ($nbvoters == 1): ?>
+									1 personne a d&eacute;j&agrave; vot&eacute;
+									<?php elseif ($nbvoters > 1): echo $nbvoters; ?>
+									personnes ont d&eacute;j&agrave; vot&eacute;
+									<?php else: ?>
+									Personne n'a vot&eacute;. Soyez le premier !
+									<?php endif; ?>
+								</div>
+								<div class="post_bottom_infos_item">
+									<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo personnes" />
+									<?php if ($remaining_vote_days > 0) : ?>
+									Il reste <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours pour voter
+									<?php else: ?>
+									Le vote est termin&eacute;
+									<?php endif; ?>
+								</div>
+								<div class="post_bottom_infos_item">
+									<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="Logo cible" />
+									<?php echo 'Ce projet a besoin de '.$campaign->minimum_goal(true) ; ?>
+								</div>
+								<div class="projects-description-separator"></div>
 						<?php 
-   					 }
-    
-    // Affichage des stats quand on est en vote
-    				else if($vote_status=='vote') {
-    					$nbvoters = $campaign->nb_voters();
-						$remaining_vote_days = $campaign->end_vote_remaining();
-?>				<div style="opacity:0.5">
-						<div class="project_full_progressbg">
-							<div class="project_full_progressbar" style="width:0px">
-								&nbsp;
-							</div>
-						</div>
-						<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
-						</div>
-	<div class="post_bottom_infos_item">
-		<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="Logo personnes" />
+							}
+						?>
+							<div class="post_bottom_buttons">
+						<?php
+					   			if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) { ?> 
+									<div id="invest-button" >
+										<?php $page_invest = get_page_by_path('investir'); ?>
+										<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>&invest_start=1" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Investir sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+									</div>
+					<?php
 
-		<?php if ($nbvoters == 1): ?>
-		1 personne a d&eacute;j&agrave; vot&eacute;
-		<?php elseif ($nbvoters > 1): echo $nbvoters; ?>
-		personnes ont d&eacute;j&agrave; vot&eacute;
-		<?php else: ?>
-		Personne n'a vot&eacute;. Soyez le premier !
-		<?php endif; ?>
-	</div>
-
-	<div class="post_bottom_infos_item">
-		<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo personnes" />
+								}else if($vote_status == 'vote' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) { ?>
+									<div id="invest-button" >
+										<a href="javascript:print_vote_form()" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter pour ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+									</div>
+					<?php
+								}else if($vote_status=='funded'){ ?>
+				    				<div id="funded-button" >
+										<a class="description-discover">Projet financ&eacute;</a>
+									</div>
+					<?php 		}
+							$cache_result=ob_get_contents();
+							$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-first',$cache_result);
+							ob_end_clean();
+						}
+					echo $cache_result;
+					?>
 		
-		<?php if ($remaining_vote_days > 0) : ?>
-		Il reste <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours pour voter
-		<?php else: ?>
-		Le vote est termin&eacute;
-		<?php endif; ?>
-	</div>
-	<div class="post_bottom_infos_item">
-							<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="Logo cible" />
-							<?php echo 'Ce projet a besoin de '.$campaign->minimum_goal(true) ; ?>
-						</div>
-	<div class="projects-description-separator"></div>
-<?php 
-}
-
-//Les boutons
-?>
-
-	<div class="post_bottom_buttons">
-		<?php
-		    // Affichage du bouton investir : Statut du projet == 'collecte' && Fiche du porteur de projet complète
-		    if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) {
-		?> 
-		<div id="invest-button" >
-			<?php $page_invest = get_page_by_path('investir'); ?>
-			<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>&invest_start=1" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Investir sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
-		</div>
-		<?php
-
-			}else if($vote_status == 'vote' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) {
-		?>		<div id="invest-button" >
-					<a href="javascript:print_vote_form()" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter pour ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
-				</div>
-		<?php
-			}else if($vote_status=='funded'){
-		?>
-	    	<div id="funded-button" >
-			<a class="description-discover">Projet financ&eacute;</a>
-		</div>
-		<?php
-		    }
-		?>
 		
-		<!-- Zone de partage -->
+		<!-- Zone de partage et j'y crois -->
 		<?php if ( is_user_logged_in() ) { 
 				global $wpdb, $campaign_id;
 				$user_id = wp_get_current_user()->ID;
@@ -128,12 +119,12 @@ if (isset($_GET['campaign_id'])) {
 				$users = $wpdb->get_results( "SELECT * FROM $table_jcrois WHERE campaign_id = $campaign_id AND user_id=$user_id" );
 				if ( !empty($users[0]->ID) ) {?>
 
-					<a class="jy-crois" href="javascript:update_jycrois(0,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
+					<a class="jy-crois" href="javascript:WDGProjectPageFunctions.update_jycrois(0,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
 					<div id="jy-crois-btn" style="background-image: url('<?php echo $stylesheet_directory_uri.'/images/jycrois_gris.png';?>')" class="stats_btn" class="dark">
 					<p id="jy-crois-txt"><p>
 				<?php }
 				else{ ?>
-				<a class="jy-crois" href="javascript:update_jycrois(1,<?php global $post;echo($post->ID); ?>,'<?php echo home_url(); ?>')">
+				<a class="jy-crois" href="javascript:WDGProjectPageFunctions.update_jycrois(1,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
 					<div id="jy-crois-btn" class="stats_btn" class="dark">
 					<p id="jy-crois-txt">J'y crois <p>
 
@@ -152,7 +143,7 @@ if (isset($_GET['campaign_id'])) {
 		  ?>
 		  <p id="nb-jycrois"><?php do_shortcode('[yproject_crowdfunding_count_jcrois]') ?></p>
 		</div></a>
-		<a id="share-btn-a" href="javascript:share_btn_click()">
+		<a id="share-btn-a" href="javascript:WDGProjectPageFunctions.share_btn_click();">
 		<div id="share-btn-div" class="stats_btn" class="dark">
 			<p id="share-txt">Partager</p>	
 		</div>
@@ -190,12 +181,20 @@ if (isset($_GET['campaign_id'])) {
 			<h3>Cette question détermine la publication du projet sur le site</h3>
 		-->
 		</div> 
-		<?php } ?>
+		<?php } 
+		
+		?>
 	</div>
-
 </div>
-<?php } ?>
-		</div>
+<?php }
+?>
+</div>
+<?php
+$cache_result=$WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-second');
+		if(false===$cache_result){
+		ob_start();
+ ?>
+		
 
 		<div id="head-image">
 			<div class="center">
@@ -220,7 +219,6 @@ if (isset($_GET['campaign_id'])) {
                                 $category_slug = $post->ID . '-blog-' . $post->post_name;
                                 echo $category_slug;
                                 $category_obj = get_category_by_slug($category_slug);
-                                print_r($category_obj);
                                 if (!empty($category_obj)) {
                                     $category_link = get_category_link($category_obj->cat_ID);
                                     $posts_in_category = get_posts(array('category'=>$category_obj->cat_ID));
@@ -274,10 +272,16 @@ if (isset($_GET['campaign_id'])) {
             <?php global $current_user_id;
             		global $post;
             if ($can_modify) {?>
-            	<a href="#" id="reposition-cover" onclick='javascript:move_picture(<?php if(isset($_GET['campaign_id'])){echo $_GET['campaign_id'];}else{global $post;echo($post->ID); } ?>)'>Repositionner</a>
+            	<a href="#" id="reposition-cover" onclick='javascript:WDGProjectPageFunctions.move_picture(<?php if(isset($_GET['campaign_id'])){echo $_GET['campaign_id'];}else{global $post;echo($post->ID); } ?>)'>Repositionner</a>
             <?php }
             ?>
 			
 		</div>
-		
+		<?php 
+		$cache_result=ob_get_contents();
+			$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-second',$cache_result);
+			ob_end_clean();
+			}
+			echo $cache_result;
+			?>
 </section>

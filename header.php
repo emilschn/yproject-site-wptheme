@@ -5,12 +5,10 @@
     $stylesheet_directory_uri=get_stylesheet_directory_uri();
     /* Récupération des infos Facebook */
     global $WDG_cache_plugin;
-    
-    if(isset($_GET['campaign_id']))$WDG_cache_plugin->set_params('campaign_id',$_GET['campaign_id']);
-
-    require_once("_external/facebook/facebook.php");
+   
     $cache_result=$WDG_cache_plugin->get_cache('facebook-count');
-    if(false===$cache_result){	
+    if(false===$cache_result){
+   	require_once("_external/facebook/facebook.php");
     $facebook = new Facebook(array(
 	'appId'  => YP_FB_APP_ID,
 	'secret' => YP_FB_SECRET,
@@ -21,6 +19,8 @@
 	}
 	$facebook_infos= $cache_result;
     /* Récupération des infos Twitter */
+     $cache_result=$WDG_cache_plugin->get_cache('twitter-count');
+    if(false===$cache_result){
     require_once("_external/twitter/TwitterAPIExchange.php");
     $apiUrl = "https://api.twitter.com/1.1/users/show.json";
     $requestMethod = 'GET';
@@ -31,8 +31,7 @@
         'consumer_key' => YP_TW_consumer_key,
         'consumer_secret' => YP_TW_consumer_secret
     );
-    $cache_result=$WDG_cache_plugin->get_cache('twitter-count');
-    if(false===$cache_result){
+  
     $twitter = new TwitterAPIExchange($settings);
     $response = $twitter->setGetfield($getField)
 			->buildOauth($apiUrl, $requestMethod)
@@ -89,7 +88,6 @@
 		<meta property="og:image:type" content="image/jpeg" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo $stylesheet_directory_uri; ?>/_inc/js/common.js?ver=1.1.001"></script>
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php if (WP_DEBUG) echo 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject'; else echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->

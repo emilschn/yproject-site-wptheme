@@ -20,7 +20,8 @@ add_filter('login_errors',create_function('$a', "return null;"));
 
 add_action( 'wp_enqueue_scripts', 'yproject_enqueue_script' );
 function yproject_enqueue_script(){
-	wp_localize_script( 'project-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
+	wp_enqueue_script( 'ajax-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery'));
+	wp_localize_script( 'ajax-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
 }
 
 /** GESTION DU LOGIN **/
@@ -186,6 +187,7 @@ function set_cover_position(){
 			 }
 		update_post_meta($_POST['id_campaign'],'campaign_cover_position', $_POST['top']);
 	}
+	do_action('wdg_delete_cache',array('project-'.$post->ID.'-header-second'));
 
 }
 add_action( 'wp_ajax_setCoverPosition', 'set_cover_position' );
@@ -206,7 +208,7 @@ function set_cursor_position(){
 		}
 		update_post_meta($_POST['id_campaign'],'campaign_cursor_top_position', $_POST['top']);
 		update_post_meta($_POST['id_campaign'],'campaign_cursor_left_position', $_POST['left']);
-		
+		do_action('wdg_delete_cache',array('project-'.$post->ID.'-content'));
 	}
 
 }
@@ -243,8 +245,6 @@ function print_user_avatar($user_id){
 	    }
 }
 function update_jy_crois(){
-	 
-	
 	global $wpdb, $post;
 	$table_jcrois = $wpdb->prefix . "jycrois";
 	$campaign               = atcf_get_campaign( $_POST['id_campaign']);
@@ -287,11 +287,6 @@ function update_jy_crois(){
 		'action'    => $url_profile.' croit au projet '.$url_campaign
 	    ));
 		}
-		do_action('wdg_delete_cache',array(
-						'project-'.$post->ID.'-header',
-						'home-funded-projects',
-						'home-collecte-projects',
-						'home-small-projects'));
     	echo $wpdb->get_var( "SELECT count(campaign_id) FROM $table_jcrois WHERE campaign_id = $campaign_id" );
 }
 add_action( 'wp_ajax_update_jy_crois', 'update_jy_crois' );
