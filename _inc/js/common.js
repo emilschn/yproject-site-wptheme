@@ -309,8 +309,8 @@ YPJycroisFunctions = (function($){
 WDGProjectPageFunctions=(function($) {
 	return {
 		move_picture:function(campaign_id) {
+			$('#img-container').draggable({axis :'y'});
 		    $('#img-container').draggable('enable');
-		    $('#img-container').draggable(); // appel du plugin
 		    $('#reposition-cover').text('Sauvegarder');
 		    $('#reposition-cover').attr("onclick", "WDGProjectPageFunctions.save_position("+campaign_id+")");
 		    $("#head-content").css({ opacity: 0 });
@@ -380,8 +380,6 @@ WDGProjectPageFunctions=(function($) {
 	               $('#nb-jycrois').text(parseInt(actual_text)-1);
 	            }
 				$('.jy-crois').attr("href", "javascript:WDGProjectPageFunctions.update_jycrois("+jy_crois_temp+","+campaign_id+",\""+home_url+"\")");
-	   			alert('test');
-	   			alert(ajax_object.ajax_url);
 	   			$.ajax({
 			            	'type' : "POST",
 			            	'url' : ajax_object.ajax_url,
@@ -394,6 +392,7 @@ WDGProjectPageFunctions=(function($) {
 		},
 
 		share_btn_click:function(){
+			$("#dialog").dialog(); 
 	 		$("#dialog").dialog("open"); 
 		},
 

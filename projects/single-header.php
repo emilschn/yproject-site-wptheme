@@ -269,19 +269,18 @@ $cache_result=$WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-seco
 				if ($image_obj != '') $img_src = $image_obj[0];?>
             	   <img id="moved-img" src="<?php echo $img_src; ?>" />
             </div>
-            <?php global $current_user_id;
-            		global $post;
+            <?php 
+			$cache_result=ob_get_contents();
+			$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-second',$cache_result);
+			ob_end_clean();
+			}
+			echo $cache_result;
+			
             if ($can_modify) {?>
             	<a href="#" id="reposition-cover" onclick='javascript:WDGProjectPageFunctions.move_picture(<?php if(isset($_GET['campaign_id'])){echo $_GET['campaign_id'];}else{global $post;echo($post->ID); } ?>)'>Repositionner</a>
             <?php }
             ?>
 			
 		</div>
-		<?php 
-		$cache_result=ob_get_contents();
-			$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-second',$cache_result);
-			ob_end_clean();
-			}
-			echo $cache_result;
-			?>
+		
 </section>
