@@ -20,8 +20,9 @@ add_filter('login_errors',create_function('$a', "return null;"));
 
 add_action( 'wp_enqueue_scripts', 'yproject_enqueue_script' );
 function yproject_enqueue_script(){
-	wp_enqueue_script( 'ajax-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery'));
-	wp_localize_script( 'ajax-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
+	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'));
+	wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
+	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'));
 }
 
 /** GESTION DU LOGIN **/

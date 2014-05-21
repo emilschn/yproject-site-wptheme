@@ -2951,6 +2951,9 @@ height: 18px;
     width: 100%;
     text-align: center;
 }
+.ui-front {
+    z-index: 100;
+}
 
 /******** Formulaire de vote ***********/
 #white-background{

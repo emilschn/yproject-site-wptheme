@@ -139,8 +139,8 @@ $post = $save_post;
 ?>
 
 <script type="text/javascript">
-jQuery(document).ready( function() {
-    var ctxPie = jQuery("#canvas-pie").get(0).getContext("2d");
+jQuery(document).ready( function($) {
+    var ctxPie = $("#canvas-pie").get(0).getContext("2d");
     var dataPie = [
 	{value: <?php echo $count_project_validated; ?>, color: "#FE494C", title: "Oui"}, 
 	{value: <?php echo ($count_voters - $count_project_validated); ?>, color: "#333333", title: "Non"}
@@ -153,7 +153,7 @@ jQuery(document).ready( function() {
     var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
     
     
-    var ctxVertical = jQuery("#canvas-vertical").get(0).getContext("2d");
+    var ctxVertical = $("#canvas-vertical").get(0).getContext("2d");
     var dataVertical = {
 	labels: ["1", "2", "3", "4", "5"],
 	datasets: [{
@@ -173,14 +173,8 @@ jQuery(document).ready( function() {
     var canvasVertical = new Chart(ctxVertical).Bar(dataVertical, optionsVertical);
     
     
-    var ctxHorizontal = jQuery("#canvas-horizontal").get(0).getContext("2d");
+    var ctxHorizontal = $("#canvas-horizontal").get(0).getContext("2d");
     var dataHorizontal = {
-	/*labels: ["impact sociétal", "produit / service", "structuration de l'équipe", "prévisionnel financier", "autres"],
-	datasets: [{
-	    fillColor: "#F2F2F2",
-	    strokeColor: "#F2F2F2",
-	    data: [<?php echo $count_more_info_impact .','. $count_more_info_service .','. $count_more_info_team .','. $count_more_info_finance .','. $count_more_info_other; ?>]
-	}]*/
 	labels: ["autres", "prévisionnel financier", "structuration de l'équipe", "produit / service", "impact sociétal"],
 	datasets: [{
 	    fillColor: "#F2F2F2",

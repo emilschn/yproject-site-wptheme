@@ -1,25 +1,7 @@
-jQuery(document).ready( function() {
+jQuery(document).ready( function($) {
     YPUIFunctions.initUI();
     YPVoteFormFunctions.voteformcontrole();
     YPJycroisFunctions.loadJycrois();
-    $(function () {
-        $("#dialog").dialog({
-            width: '350px',
-            draggable: false,
-            resizable: false,
-            autoOpen: false,
-            modal: true,
-            show: {
-                effect: "blind",
-                duration: 300
-            },
-            hide: {
-                 effect: "blind",
-                duration: 300
-            }
-        });
-    });
-    
 });
 
 YPUIFunctions = (function($) {
@@ -199,24 +181,6 @@ YPUIFunctions = (function($) {
 YPMenuFunctions = (function($){
     return {
 	initMenuBar: function() {
-	    /*$("#menu_item_facebook").hover(function() {
-		$("#fb_infos").css("top", $("#navigation").position().top + $("#navigation").height());
-		$("#fb_infos").css("left", $("#menu_item_facebook").position().left);
-		$("#fb_infos").show();
-		
-	    }, function() {
-		$("#fb_infos").hide();
-	    });
-	    
-	    $("#menu_item_twitter").hover(function() {
-		$("#twitter_infos").css("top", $("#navigation").position().top + $("#navigation").height());
-		$("#twitter_infos").css("left", $("#menu_item_twitter").position().left);
-		$("#twitter_infos").show();
-		
-	    }, function() {
-		$("#twitter_infos").hide();
-	    });*/
-	    
 	    $("#menu_item_connection").mouseenter(function(){
 		$("#submenu_item_connection").css("top", $(document).scrollTop() + $("#navigation").height());
 		$("#submenu_item_connection").css("left", $("#menu_item_connection").position().left + $("#menu_item_connection").width() - $("#submenu_item_connection").width() - 1);
@@ -278,20 +242,16 @@ YPVoteFormFunctions = (function($) {
 YPJycroisFunctions = (function($){
     return {
 	loadJycrois: function() {
+	    $("#jcrois_pas").click(function () {
+		$("#tab-count-jycrois").load('single-campaign.php');
+	    });
 
-			$("#jcrois_pas").click(function () 
-			{
-		    	$("#tab-count-jycrois").load('single-campaign.php');
-		    });
-
-
-	        $("#jcrois").click(function()
-			{
-	        	$("#tab-count-jycrois").load('single-campaign.php');
-	        });
-	    }
-
+	    $("#jcrois").click(function() {
+		$("#tab-count-jycrois").load('single-campaign.php');
+	    });
 	}
+
+    }
 })(jQuery);
 /* FIN J'Y CROIS */
 /* Projet */
@@ -299,8 +259,10 @@ YPJycroisFunctions = (function($){
 WDGProjectPageFunctions=(function($) {
 	return {
 		move_picture:function(campaign_id) {
+		    $('#img-container').draggable({
+			axis: "y"
+		    }); // appel du plugin
 		    $('#img-container').draggable('enable');
-		    $('#img-container').draggable(); // appel du plugin
 		    $('#reposition-cover').text('Sauvegarder');
 		    $('#reposition-cover').attr("onclick", "WDGProjectPageFunctions.save_position("+campaign_id+")");
 		    $("#head-content").css({ opacity: 0 });
@@ -327,10 +289,10 @@ WDGProjectPageFunctions=(function($) {
 		move_cursor:function(campaign_id){
 		  $('#move-cursor').text('Sauvegarder la position du curseur');
 		  $('#move-cursor').attr("onclick", "WDGProjectPageFunctions.save_cursor_position("+campaign_id+")");
-		  $('#map-cursor').draggable('enable');
 		  $('#map-cursor').draggable({
 		    containment: '#project-map'
 		    });
+		  $('#map-cursor').draggable('enable');
 		},
 
 		save_cursor_position:function(campaign_id){
@@ -379,11 +341,27 @@ WDGProjectPageFunctions=(function($) {
 			                      'action':'update_jy_crois',
 			                      'jy_crois' : jy_crois,
 			                      'id_campaign' : campaign_id
-			                    },
+			                    }
 			            }).done(function(){});
 		},
 
-		share_btn_click:function(){
+		share_btn_click:function() {
+			$("#dialog").dialog({
+			    width: '350px',
+			    zIndex: 5,
+			    draggable: false,
+			    resizable: false,
+			    autoOpen: false,
+			    modal: true,
+			    show: {
+				effect: "blind",
+				duration: 300
+			    },
+			    hide: {
+				 effect: "blind",
+				duration: 300
+			    }
+			});
 	 		$("#dialog").dialog("open"); 
 		},
 
