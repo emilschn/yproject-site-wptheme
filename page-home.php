@@ -46,18 +46,21 @@ if(false===$cache_result){
 	?>
 
 <div id="content">
+	<?php 
+		$cache_result=$WDG_cache_plugin->get_cache('home-collecte-projects');
+		if(false===$cache_result){
+		ob_start();
+		$nb_collecte_projects=count(query_projects_collecte()); 
+		if($nb_collecte_projects>0){?>
 	<div class="part-title-separator" >
 		<span class="part-title"> 
 			En cours de financement
 		</span>
 	</div>
-	<?php 	$cache_result=$WDG_cache_plugin->get_cache('home-collecte-projects');
-			if(false===$cache_result){
-			ob_start();
-		?>
+	<?php } ?>
+	
 	<div id="home_top" class="center">
 		<div class="padder">
-			<?php query_projects_collecte(); ?>
 			<?php require('projects/home-large.php'); ?>
 		</div>
 	</div>
