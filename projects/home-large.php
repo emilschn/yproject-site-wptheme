@@ -1,7 +1,5 @@
-<?php query_projects_collecte(1); ?>
 
 <?php while (have_posts()): the_post(); ?>
-
 	<?php 
 	global $post;
 	$campaign = atcf_get_campaign( $post );
@@ -52,7 +50,11 @@
 		}
 		?>
 		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?>>
-			<?php echo $video_element; ?>
+			<?php echo $video_element;
+			if ($video_element = '' && $campaign_status== 'funded' ) { ?>
+					<div class="funded-banner"></div>
+				<?php }
+			 ?>
 		</div>
 		
 		<div class="description-zone">
@@ -74,19 +76,15 @@
 						echo (($campaign_location != '') ? $campaign_location : 'France'); 
 						?>
 					</div>
-				    
-					<?php if ($campaign_status != 'preview'): ?>
 					<div class="description-logos-item">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" />
-						<?php echo $days_remaining; ?>
-					</div>
-				    
+                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" />
+                        <?php echo $days_remaining; ?>
+                    </div>
+                                    
 					<div class="description-logos-item">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo Cible" />
 						<?php echo $campaign->minimum_goal(true); ?>
-					</div>
-					<?php endif; ?>
-				    
+					</div>	
 					<div class="description-logos-item">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" />
 						<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>

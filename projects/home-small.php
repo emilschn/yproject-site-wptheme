@@ -28,8 +28,12 @@ function print_vote_post($vote_post,$is_right_project){
 			$video_element = wp_oembed_get($campaign->video(), array('width' => 440));
 		}
 		?>
-<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?>>
-			<?php echo $video_element; ?>
+<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?> >
+			<?php echo $video_element;
+				if ($video_element = '') { ?>
+					<div class="vote-banner"></div>
+				<?php }
+			 ?>
 		</div>
 		
 			<?php 
@@ -47,11 +51,7 @@ function print_vote_post($vote_post,$is_right_project){
 		<div class="description-zone">
 			<div class="description-summary ">
 				<a href="<?php echo get_permalink($vote_post->ID);?>">
-				<?php $content =html_entity_decode($campaign->summary());
-					 if (strlen($content)>148) {
-					 	$content=substr($content, 0, 148).'[...]';
-					 	}					 
-					  echo $content; ?>
+				<?php $content =$campaign->summary();echo $content;?>
 				</a>
 			</div>
 		    
@@ -96,12 +96,8 @@ function print_vote_post($vote_post,$is_right_project){
 		<div class="description-zone">
 			<div class="description-summary">
 				<a href="<?php echo get_permalink($preview_post->ID);?>">
-				<?php $content =html_entity_decode($campaign->summary());
-					 if (strlen($content)>190) {
-					 	$content=substr($content, 0, 190).'[...]';
-					 	}
-					  echo $content; ?> 
-					</a>
+				<?php $content =html_entity_decode($campaign->summary()); echo $content; ?> 
+				</a>
 			</div>
 		    
 		    
@@ -152,8 +148,12 @@ function print_vote_post($vote_post,$is_right_project){
 			$video_element = wp_oembed_get($campaign->video(), array('width' => 440));
 		}
 		?>
-		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?>>
-			<?php echo $video_element; ?>
+		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?> >
+			<?php echo $video_element;
+			if ($video_element = '') { ?>
+					<div class="preview-banner"></div>
+				<?php }
+			 ?>
 			<?php
 			if($is_right_project){//si a gauche
 			?>
@@ -168,7 +168,7 @@ function print_vote_post($vote_post,$is_right_project){
 		</div>
 		</div>
 		<div class="description-separator"></div>
-		<a href="<?php echo get_permalink($vote_post->ID); ?>" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">D&eacute;couvrir le projet ici<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+		<a href="<?php echo get_permalink($preview_post->ID); ?>" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">D&eacute;couvrir le projet ici<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 	</div>
 	
 
@@ -176,7 +176,8 @@ function print_vote_post($vote_post,$is_right_project){
 
 <?php             
 function print_empty_post(){
-        ?>
+        $page_propose_project = get_page_by_path('proposer-un-projet');?>
+		<a href="<?php echo get_permalink($page_propose_project->ID); ?>">	
         <div class="home-small-project home-small-project-right home-small-project-empty"></div>
-
+        </a>
 <?php } ?>

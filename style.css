@@ -20,15 +20,11 @@
 
 /* FONTS TO LOAD */
 @font-face {
-    font-family: DINPro-Medium, Arial, sans-serif;
-    src: url('fonts/DIN-Medium_0.eot');
-    src: url('fonts/DIN-Medium_0.woff') format('woff'), url('fonts/DIN-Medium_0.ttf') format('truetype'), url('fonts/DIN-Medium_0.svg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
 font-family: BebasNeue;
 src: url("fonts/BebasNeue.otf") format("opentype");
+src: url('fonts/BebasNeue.eot');
+src: url('fonts/BebasNeue.woff') format('woff'), url('fonts/BebasNeue.ttf') format('truetype'), url('fonts/BebasNeue.svg') format('svg');
+
  }
 body {
     background-color: #FFF;
@@ -506,7 +502,7 @@ div#home_bottom h1 {
 }
 
 #post_top_title h1 {
-    font-family: DINPro-Medium, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     padding: 10px;
     margin-left: 450px;
     margin-right: 140px;
@@ -537,28 +533,7 @@ div#home_bottom h1 {
 
 #post_bottom_content {
     background-color: #FFF;
-    padding: 20px 0;
-}
-
-.post_bottom_desc, .post_bottom_desc_small {
-    width: 610px;
-    padding-left: 10px;
-    padding-right: 20px;
-    font-size: 11pt;
-}
-.post_bottom_desc img {
-    max-width: 100%;
-    height: auto;
-}
-
-.post_bottom_desc_small {
-    width: 960px;
-}
-
-.post_bottom_desc h2, .post_bottom_desc_small h2 {
-    color: #FE494C;
-    font-size: 11pt;
-    text-transform: uppercase;
+    padding: 0;
 }
 
 .post_bottom_infos {
@@ -597,17 +572,18 @@ div#home_bottom h1 {
 
 .post_bottom_buttons div {    
     border-bottom: 1px solid #FFFFFF;
-    font-family: DINPro-Medium,Arial,sans-serif;
+    font-family: Arial,sans-serif;
     font-size: 10pt;
     padding: 15px 0;
     text-align: center;
     text-transform: uppercase;
     width: 100%;
+    border: 0;
 }
 
 .post_bottom_buttons_connexion div { 
     border-bottom: 1px solid #FFFFFF;
-    font-family: DINPro-Medium, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 9pt;
     text-transform: uppercase;
     width: 200px;
@@ -625,18 +601,13 @@ div#home_bottom h1 {
     color: #FFF
 }
 
-.post_bottom_buttons div.light {
-    background-color: #F2F2F2;
-    color: #333333;
-}
+
     
 .post_bottom_buttons div.dark a {
     color: #FFF;
 }
 
-.post_bottom_buttons div.light a {
-    color: #333333;
-}
+
 
 #popup_share {
     display: none;
@@ -711,7 +682,6 @@ div#home_bottom h1 {
     padding-left: 0px;
 }
 .com-activity-list li, .home-activity-list li {
-    background-color: #F2F2F2;
     list-style: none;
     margin-bottom: 2px;
     font-size: 11pt;
@@ -748,9 +718,10 @@ div#home_bottom h1 {
 /* ACCUEIL :: BLOG */
 .home-blog-list-container {
     overflow: hidden;
-    width: 570px;
+    width: 540px;
     height: 270px;
     display: inline-block;
+    margin-right: 30px;
 }
 .home-blog-list {
     -webkit-padding-start: 0px;
@@ -760,6 +731,7 @@ div#home_bottom h1 {
     background-color: #F2F2F2;
     margin: 15px 0px;
 }
+
 .home-blog-list li {
     list-style: none;
     float: left;
@@ -770,12 +742,13 @@ div#home_bottom h1 {
 .home-blog-list li h2 {
     text-overflow: ellipsis;
     overflow:hidden;
-    width: 560px;
+    width: 535px;
     white-space: nowrap;
     display: inline-block;
     -webkit-margin-before: 8px;
     -webkit-margin-after: 8px;
     margin: 8px 0px;
+    font-size: 15px;
 }
 .home-blog-list li div {
     display: inline-block;
@@ -788,7 +761,7 @@ div#home_bottom h1 {
     overflow: hidden;
 }
 .home-blog-list li div.blogexcerpt {
-    width: 355px;
+    width: 345px;
     height: 150px;
     overflow: hidden;
     text-align: justify;
@@ -856,6 +829,7 @@ div#home_bottom h1 {
 }
 .home-news-list li .news-img {
     width: 125px;
+    height: 100%;
     display: inline-block;
     vertical-align: middle;
 }
@@ -1089,14 +1063,14 @@ ul.activity-list p {
 
 .user_history_pictos .project_preview_item_pictos {
     font-size: 8pt;
-    font-family: DINPro-Medium, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     width: auto;
 }
 .user_history_pictos .project_preview_item_infos {
     float: left;
     margin: 10px;
     font-size: 10pt;
-    font-family: DINPro-Medium, Arial, sans-serif;
+    font-family:  Arial, sans-serif;
 }
 .user_history_pictos .project_preview_item_cancel {
     float: left;
@@ -1429,16 +1403,29 @@ header.header_home {
     height: 190px;
     margin: 20px 20px 0px 20px;
     padding: 40px 10px;
+    -webkit-transition: all 0.3s ease-out;
+       -moz-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+         -o-transition: all 0.3s ease-out;
+            transition: all 0.3s ease-out;
 }
-.home_intro .top-button:hover {
+
+.top-button:hover{
     background-color: rgba(255, 255, 255, 0.45);
+    -webkit-transform: translate(0,-20px);
+     -moz-transform: translate(0,-20px); 
+     -o-transform: translate(0,-20px); 
+     -ms-transform: translate(0,-20px); 
+     transform: translate(0,-20px);
+    
 }
+
 .home_intro .top-button .line1 {
     text-transform: uppercase;
     margin-top: 10px;
 }
 .home_intro .top-button .line2 {
-    font-size: 9pt;
+    font-size: 8.5pt;
     margin-top: 5px;
 }
 .home_intro .top-button .line3 {
@@ -2278,14 +2265,14 @@ text-align: center;
 .part-title-separator{
     width:960px;
     margin: auto;
-    margin-bottom: 25px;
-    margin-top: 30px;
     text-align: center;
     background-image: url('images/traits.jpg');
     background-repeat: repeat-x;
     background-position: center;
     min-height: 43px;
     clear: both;
+    padding-top: 18px;
+    padding-bottom: 13px;
 }
 .part-title{
     background: #FFFFFF;
@@ -2364,8 +2351,14 @@ text-align: center;
     color: #2B2C2C;
 }
 .home-small-project .description-summary {
-    min-height: 80px;
-    max-height: 96px;
+    height: 80px;
+    overflow: hidden;
+    font-size: 13px;
+}
+.home-small-project .description-summary a{
+height: 66px;
+display: block;
+overflow: hidden;
 }
 .home-small-project .description-zone .description-middle {
     width: 100%;
@@ -2386,7 +2379,7 @@ text-align: center;
 }
 .home-small-project .description-zone .description-logos-item {
     display: inline-block;
-    width: 45px;
+    width: 55px;
     text-align: center;
     padding: 0px 5px;
 }
@@ -2432,9 +2425,12 @@ text-align: center;
     padding: 0px 2px;
 }
 .home-small-project-empty{
+    margin-top: 23px;
     width: 440px;
     height: 480px;
-    background-color: black;
+    background: url('images/projet_pub.jpg') no-repeat scroll 0% 0% transparent;
+    padding: 2px;
+
 }
 
 
@@ -2452,6 +2448,8 @@ text-align: center;
     margin-top: 15px;
 
 }
+
+
 .home-small-project.status-vote .description-zone .description-summary {
     width: 60%;
     display: inline-block;
@@ -2469,7 +2467,9 @@ text-align: center;
     text-align: center;
     padding: 0px 0px;
 }
-
+ .home-large-project .description-zone .description-logos-item img {
+   padding: 0px 5px;
+}
 
 .vote-bubble-left,.vote-bubble-right,.preview-bubble-left,.preview-bubble-right{
     width: 190px;
@@ -2486,7 +2486,7 @@ text-align: center;
     margin-top: -6px;
     padding: 0;
     position: relative;
-    top: 35px;
+    top: 30px;
     left: 13px;
 }
 .vote-bubble-left p,.preview-bubble-left p{
@@ -2494,8 +2494,14 @@ text-align: center;
     margin-top: -6px;
     padding: 0;
     position: relative;
-    top: 35px;
-    left: -11px;
+    top: 32px;
+    left: -12px;
+}
+.vote-bubble-right p, .vote-bubble-left p{
+    top: 40px;
+}
+.preview-bubble-left p, .preview-bubble-right p{
+    top: 37px;
 }
 .big-text{
     margin: 0;
@@ -2503,9 +2509,29 @@ text-align: center;
 }
 .small-text{
     margin: 0;
-    font-size: 16px;
+    font-size: 15.5px;
 
 }
+
+.vote-banner{
+    height: 252px;
+    width: 440px;
+    position: absolute;
+    background:url('images/bandeau_vote.png') no-repeat;
+}
+.preview-banner{
+    height: 252px;
+    width: 440px;
+    position: absolute;
+    background:url('images/bandeau_premiere.png') no-repeat;
+}
+.funded-banner{
+    height: 330px;
+    width: 330px;
+    position: absolute;
+    background:url('images/bandeau_financer.png') no-repeat;
+}
+
 
 .vote-bubble-left{
     background-image:url('images/bulle_rouge_gauche.jpg');
@@ -2528,6 +2554,14 @@ text-align: center;
     right: -185px;
     top: 50px;
 }
+.home-blog-list li .description-separator {
+    width: 91%;
+    background: url("images/tiret_noir.png") repeat-x;
+    height: 4px;
+    margin: 0;
+    margin-bottom: 6px;
+    clear: both;
+}
 /************Notifications ************/
 #groups-notification-settings-invitation td:nth-child(1),#groups-notification-settings-info-updated td:nth-child(1), #groups-notification-settings-promoted td:nth-child(1),#groups-notification-settings-request td:nth-child(1),#follow-notification-settings td:nth-child(1), #activity-notification-settings-mentions td:nth-child(1) , #activity-notification-settings-replies td:nth-child(1), .icon{
     display: none;
@@ -2541,4 +2575,418 @@ text-align: center;
 
 #home_middle_desc_right p:nth-child(1),#home_middle_desc_right p:nth-child(2),#home_middle_desc_left p:nth-child(1),#home_middle_desc_left p:nth-child(2){
 text-transform: uppercase;
+}
+
+
+/****** Projet V2 *********/
+#head-image{
+    width: 100%;
+    height: 370px;
+    overflow: hidden;
+    margin: auto;
+    position: relative;
+    background-image: url("images/fond_projet.png");
+   
+}
+#head-image #img-container{
+    position: relative;
+}
+#head-image img{
+    width: 100%;
+}
+.ui-state-disabled{
+    opacity: 1 !important;
+}
+
+#head-image #reposition-cover{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: none;
+    background-color: rgba(255, 255, 255, 1);
+}
+#head-image:hover>#reposition-cover{
+    display: block;
+  }
+#head-content{
+    position: absolute;
+    width: 1080px;
+    height: 370px;
+    margin: auto;
+     z-index: 2;
+}
+#head-content #title{
+   position: absolute;
+    font-size: 30px;
+    text-transform: uppercase;
+    bottom: 70px;
+    left: 0px;
+}
+#head-content img{
+    left: -70px;
+    position: relative;
+    z-index: -1;
+}
+#head-content ul{
+    position: absolute;
+    font-size: 13px;
+    text-transform: uppercase;
+    bottom: 5px;
+    left: 0px;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    border: 0px;
+}
+#head-content li {
+     display: inline-block;
+     padding: 13px 0px;
+     margin-right: 10px;
+     border: 0px;
+     
+}
+#head-content li a{
+    position: relative;
+    bottom: -3px;
+    color: #FFF;
+    height: 20px;
+    padding: 16px 25px;
+    background-color: #333;
+    border: 0px;
+    font-size: 12px;
+    height: 20px;
+    -webkit-transition: all 0.2s ease-out;
+       -moz-transition: all 0.2s ease-out;
+        -ms-transition: all 0.2s ease-out;
+         -o-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out;
+}
+#head-content li a:hover{
+    background-color: #FF494C;
+}
+#head-content li a.current{
+    background-color: #FF494C;
+}
+#projects-stats{
+
+}
+#projects-stats-content{
+    background: white;
+    height: 370px;
+    width: 340px;
+    position: absolute;
+    z-index: 3;
+    left: 815px;
+}
+.projects-description-separator{
+    background: url("images/tiret_noir.png");
+    height: 6px;
+    margin: 15px 0px;
+}
+#projects-stats-content .post_bottom_infos_item img {
+    width: 30px;
+    height: 19.5px;
+}
+#projects-stats-content .project_full_progressbg{
+    margin-left: 20px;
+    margin-top: 4px;
+}
+#projects-stats-content .project_full_percent{
+    font-size: 26px;
+    padding-top: 0px;
+}
+.post_bottom_buttons #invest-button{
+    position: absolute;
+    padding: 0;
+    bottom:-1px ;
+}
+#invest-button .description-discover {
+    text-transform: uppercase;
+    color: #FFF;
+    text-align: center;
+    background-color: #FF494C;
+    padding: 13px 0px;
+    display: inline-block;
+    font-size: 13px;
+    width: 100%;
+    margin-top: 15px;
+}
+.post_bottom_buttons #funded-button{
+    position: absolute;
+    padding: 0;
+    bottom:-1px ;
+}
+#funded-button .description-discover{
+     text-transform: uppercase;
+    color: #FFF;
+    text-align: center;
+    background-color: #FF494C;
+    padding: 13px 0px;
+    display: inline-block;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 15px;
+}
+#projects-right-desc{
+    width: 340px;
+    height: 500px;
+    background-color: #F2F2F2;
+}
+#projects-bottom-desc img{
+    display: inline-block;
+}
+.projects-desc-content{
+    display: inline-block;
+     background-color: #F2F2F2;
+     width: 805px;
+     position: relative;
+     left: -9px;
+     vertical-align: top;
+     margin-bottom: 40px;
+}
+.projects-desc-content h2{
+    text-transform: uppercase;
+    font-size: 15px;
+    font-style: normal;
+    margin-top: 26px;
+    margin-left: 25px;
+}
+.projects-desc-content p{
+     margin-left: 25px;
+ }
+.indent{
+    margin-left: 50px;
+}
+.vertical-align-middle{
+    display: inline-block;
+    vertical-align: middle;
+}
+.grey-triangle
+{
+    position: relative;
+    left: -5px;
+}
+#project-owner img{
+margin-left: 20px;
+margin-top: 20px;
+width: 100px !important;
+display: inline-block;
+vertical-align: middle;
+}
+
+#project-owner-desc{
+display: inline-block;
+font-size: 11px;
+vertical-align: middle;
+margin-top: 20px;
+}
+#project-owner-desc p{
+    margin: 0;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+#project-about{
+    margin-top: 30px;
+    text-align: center;
+    position: relative;
+}
+#project-about p{
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+#project-map{
+    margin: auto;
+    background:url('images/france3.png');
+    width: 248px;
+    height: 290px;
+}
+#map-cursor{
+    position: relative;
+    background: url("images/curseur.png");
+    width: 67px;
+    height: 95px;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+#map-cursor p{
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    padding : 0;
+}
+
+.stats_btn{
+    background: url("images/grenage_projet.jpg");
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 83px !important;
+    height: 100px;
+    padding: 0px !important;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+.post_bottom_buttons{
+        
+}
+#projects-stats-content .post_bottom_buttons{
+    text-align: center;
+}
+.stats_btn a{
+    position: relative;
+    top: 50px;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: Arial;
+    text-transform: none;
+    color: #FFF;
+
+}
+.stats_btn p{
+    position: relative;
+    top: 83px;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-style: Arial;
+    border-bottom: 0px;
+}
+#share_btn_zone
+{
+display:none;
+}
+#share_btn_zone img{
+
+}
+#projects-left-desc{
+    width: 580px;
+    height: 500px;
+}
+#projects-left-desc .video-zone{
+    width: 580px;
+    height: 325px;
+    margin-top: 15px;
+    min-height:325px !important;
+}
+.projects-title{
+    margin-top: 13px;
+    margin-bottom: 6px;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+#projects-summary{
+    display: block;
+    height: 113px;
+    overflow: hidden;
+}
+
+#projects-summary p{
+    margin: 0px;
+}
+.su-spoiler-icon{
+    display: none !important;
+}
+#subtitle{
+    position: absolute;
+    bottom: 51px;
+    font-size: 18px;
+    color: #747675;
+
+}
+.jy-crois{
+    width: 83px !important;
+height: 100px;
+}
+#jy-crois-txt{
+    position: relative;
+top: 50px;
+font-size: 13px;
+font-weight: bold;
+font-family: Arial;
+text-transform: none;
+color: #FFF;
+height: 18px;
+}
+#share-txt{
+    position: relative;
+top: 50px;
+font-size: 13px;
+font-weight: bold;
+font-family: Arial;
+text-transform: none;
+color: #FFF;
+height: 18px;
+}
+#nb-jycrois{
+    color: #000;
+}
+/********** Fenetre de partage ********************/
+#dialog{
+    display: none;
+    text-align: center;
+}
+.ui-dialog{
+    background-color: white;
+}
+.ui-widget-header{
+    background: transparent;
+    color: #333;
+    border: 0px;
+    border-radius: 0;
+}
+.ui-widget-header .ui-icon{
+    background-image: url('http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/ui-lightness/images/ui-icons_222222_256x240.png');
+}
+.ui-dialog-titlebar-close.ui-corner-all.ui-state-hover{
+    background: initial;
+   border: none;
+}
+.ui-dialog.ui-widget.ui-widget-content.ui-corner-all{
+    padding: 0;
+    border : 0;
+}
+#ui-dialog-title-dialog{
+    display: block;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+
+/******** Formulaire de vote ***********/
+#white-background{
+    height: 370px;
+    width: 340px;
+    position: absolute;
+    top: 0px;
+    background-color: white;
+    z-index: -2;
+}
+#vote-form{
+    position: absolute;
+    bottom: 0px;
+    width: 340px;
+    height: 500px;
+    background-color: #F2F2F2;
+    z-index: -11;
+    text-align: center;
+    text-indent: 
+}
+#vote-form h1{
+    font-family: BebasNeue;
+    text-transform: uppercase;
+    font-size: 35px;
+}
+#vote-form h2{
+    font-size: 17px;
+    text-align: justify;
+    margin-left: 15px;
+    margin-bottom: 0px;
+}
+#vote-form h3{
+    font-style: italic;
+    margin-top: 0;
+    text-align: justify;
+    font-size: 13px;
+    margin-left: 15px;
+    margin-right: 35px;
 }

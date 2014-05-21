@@ -18,7 +18,11 @@ add_action( 'after_setup_theme', 'yproject_setup', 15 );
 remove_action("wp_head", "wp_generator");
 add_filter('login_errors',create_function('$a', "return null;"));
 
-
+add_action( 'wp_enqueue_scripts', 'yproject_enqueue_script' );
+function yproject_enqueue_script(){
+	wp_enqueue_script( 'ajax-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery'));
+	wp_localize_script( 'ajax-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
+}
 
 /** GESTION DU LOGIN **/
 /**
@@ -168,4 +172,122 @@ function remove_related_videos($embed) {
     }
 }
 add_filter('oembed_result', 'remove_related_videos', 1, true);
+
+
+
+/**
+ * Permet d'envoyer la position de l'image de couverture d'un projet.
+ * 
+ */
+function set_cover_position(){
+	if(isset($_POST['top'])){
+		$post_meta=get_post_meta($_POST['id_campaign'], 'campaign_cover_position', TRUE);
+		if($post_meta==''){
+			add_post_meta($_POST['id_campaign'], 'campaign_cover_position', $_POST['top'], TRUE);
+			 }
+		update_post_meta($_POST['id_campaign'],'campaign_cover_position', $_POST['top']);
+	}
+	do_action('wdg_delete_cache',array('project-'.$post->ID.'-header-second'));
+
+}
+add_action( 'wp_ajax_setCoverPosition', 'set_cover_position' );
+
+/**
+ * Permet d'envoyer la position de l'image de couverture d'un projet.
+ * 
+ */
+function set_cursor_position(){
+	if(isset($_POST['top'])){
+		$post_meta_top=get_post_meta($_POST['id_campaign'], 'campaign_cursor_top_position', TRUE);
+		$post_meta_left=get_post_meta($_POST['id_campaign'], 'campaign_cursor_left_position', TRUE);
+		if($post_meta_top==''){
+			add_post_meta($_POST['id_campaign'], 'campaign_cursor_top_position', $_POST['top'], TRUE);
+		}
+		if($post_meta_left==''){
+			add_post_meta($_POST['id_campaign'], 'campaign_cursor_left_position', $_POST['left'], TRUE);
+		}
+		update_post_meta($_POST['id_campaign'],'campaign_cursor_top_position', $_POST['top']);
+		update_post_meta($_POST['id_campaign'],'campaign_cursor_left_position', $_POST['left']);
+		do_action('wdg_delete_cache',array('project-'.$post->ID.'-content'));
+	}
+
+}
+add_action( 'wp_ajax_setCursorPosition', 'set_cursor_position' );
+
+
+function print_user_avatar($user_id){
+		
+	    $bp = buddypress();
+	    $bp->avatar->full->default = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
+	    
+	    $profile_type = "";
+	    $google_meta = get_user_meta($user_id, 'social_connect_google_id', true);
+	    if (isset($google_meta) && $google_meta != "") $profile_type = ""; //TODO : Remplir avec "google" quand on gèrera correctement
+	    $facebook_meta = get_user_meta(bp_displayed_user_id(), 'social_connect_facebook_id', true);
+	    if (isset($facebook_meta) && $facebook_meta != "") $profile_type = "facebook";
+	    
+	    $url = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
+	    switch ($profile_type) {
+		case "google":
+		    $meta_explode = explode("id?id=", $google_meta);
+		    $social_id = $meta_explode[1];
+		    $url = "http://plus.google.com/s2/photos/profile/" . $social_id . "?sz=149";
+		    echo '<img src="' .$url . '" width="150"/>';
+		    break;
+		case "facebook":
+		    $url = "https://graph.facebook.com/" . $facebook_meta . "/picture?type=normal";
+		    echo '<img src="' .$url . '" width="150"/>';
+		    break;
+		default :
+		    //bp_displayed_user_avatar( 'type=full' );
+		    echo '<img src="'.$url.'" width="150" />';
+		    break;
+	    }
+}
+function update_jy_crois(){
+	global $wpdb, $post;
+	$table_jcrois = $wpdb->prefix . "jycrois";
+	$campaign               = atcf_get_campaign( $_POST['id_campaign']);
+	$campaign_id            = $_POST['id_campaign'];
+	// Construction des urls utilisés dans les liens du fil d'actualité
+	// url d'une campagne précisée par son nom 
+	$campaign_url  = get_permalink($_POST['id_campaign']);
+	$post_title = $post->post_title;
+	$url_campaign = '<a href="'.$campaign_url.'">'.$post_title.'</a>';
+	//url d'un utilisateur précis
+	$user_id                = wp_get_current_user()->ID;
+	$user_display_name      = wp_get_current_user()->display_name;
+	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '">' . $user_display_name . '</a>';
+		
+		if(isset($_POST['jy_crois'])&&$_POST['jy_crois']==1){//J'y crois
+			$wpdb->insert( $table_jcrois,
+		array(
+		    'user_id'	    => $user_id,
+		    'campaign_id'   => $campaign_id
+		)
+	    ); 
+	    bp_activity_add(array (
+		'component' => 'profile',
+		'type'      => 'jycrois',
+		'action'    => $url_profile.' croit au projet '.$url_campaign
+	    ));
+		}
+		else if (isset($_POST['jy_crois'])&&$_POST['jy_crois']==0) { //J'y crois pas
+			$wpdb->delete( $table_jcrois,
+		array(
+		    'user_id'      => $user_id,
+		    'campaign_id'  => $campaign_id
+		)
+	    );		
+	    // Inserer l'information dans la table du fil d'activité  de la BDD wp_bp_activity 
+	    bp_activity_delete(array (
+		'user_id'   => $user_id,
+		'component' => 'profile',
+		'type'      => 'jycrois',
+		'action'    => $url_profile.' croit au projet '.$url_campaign
+	    ));
+		}
+    	echo $wpdb->get_var( "SELECT count(campaign_id) FROM $table_jcrois WHERE campaign_id = $campaign_id" );
+}
+add_action( 'wp_ajax_update_jy_crois', 'update_jy_crois' );
 ?>

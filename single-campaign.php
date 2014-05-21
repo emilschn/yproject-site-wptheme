@@ -1,13 +1,12 @@
 <?php date_default_timezone_set("Europe/Paris"); ?>
   
 <?php 
-	global $campaign, $post;
+	global $campaign, $post, $campaign_id;
+	$campaign_id=$post->ID;
 	if ( ! is_object( $campaign ) ) $campaign = atcf_get_campaign( $post );
 ?>
 			
 <?php get_header(); ?>
-
-
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 <div id="content">
 	<div class="padder">
@@ -15,18 +14,24 @@
 			<?php require_once('projects/single-admin-bar.php'); ?>
 
 			<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-				<?php require_once('projects/single-header.php'); ?>
+				
+				<?php  
+						require_once('projects/single-header.php'); 
+				?>
 
 				<div id="post_bottom_bg">
 					<div id="post_bottom_content" class="center">
-						<div class="left post_bottom_desc">
-							<?php require_once('projects/single-content.php'); ?>
-						</div>
-
-						<div class="left post_bottom_infos">
-							<?php require_once('projects/single-sidebar.php'); ?>
-						</div>
-
+						
+							<?php  $cache_result=$WDG_cache_plugin->get_cache('project-'.$campaign_id.'-content');
+									if(false===$cache_result){
+									ob_start();
+							 		require_once('projects/single-content.php'); 
+							 		$cache_result=ob_get_contents();
+									$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-content',$cache_result);
+						 			ob_end_clean();
+									}
+								echo $cache_result;
+						?>
 						<div style="clear: both"></div>
 					</div>
 				</div>

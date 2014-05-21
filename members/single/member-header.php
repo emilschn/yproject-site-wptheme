@@ -15,34 +15,7 @@ $current_user = get_user_by('id', bp_displayed_user_id());
 <div id="item-header-avatar" class="left">
     <a href="<?php bp_displayed_user_link(); ?>">
 	
-	<?php
-	    $bp = buddypress();
-	    $bp->avatar->full->default = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
-	    
-	    $profile_type = "";
-	    $google_meta = get_user_meta(bp_displayed_user_id(), 'social_connect_google_id', true);
-	    if (isset($google_meta) && $google_meta != "") $profile_type = ""; //TODO : Remplir avec "google" quand on gèrera correctement
-	    $facebook_meta = get_user_meta(bp_displayed_user_id(), 'social_connect_facebook_id', true);
-	    if (isset($facebook_meta) && $facebook_meta != "") $profile_type = "facebook";
-	    
-	    $url = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
-	    switch ($profile_type) {
-		case "google":
-		    $meta_explode = explode("id?id=", $google_meta);
-		    $social_id = $meta_explode[1];
-		    $url = "http://plus.google.com/s2/photos/profile/" . $social_id . "?sz=149";
-		    echo '<img src="' .$url . '" width="150"/>';
-		    break;
-		case "facebook":
-		    $url = "https://graph.facebook.com/" . $facebook_meta . "/picture?type=normal";
-		    echo '<img src="' .$url . '" width="150"/>';
-		    break;
-		default :
-		    //bp_displayed_user_avatar( 'type=full' );
-		    echo '<img src="'.$url.'" width="150" />';
-		    break;
-	    }
-	?>
+	<?php print_user_avatar(bp_displayed_user_id()); ?>
     </a>
 </div><!-- #item-header-avatar -->
 
