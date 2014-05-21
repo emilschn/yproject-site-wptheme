@@ -1848,8 +1848,7 @@ background-image:url("images/jycrois_gris_rouge.png");
 
 /* VOTE */
 #project_vote_zone {
-    padding-top: 0px;
-    width: 310px;
+    padding-top: 10px;
 }
 
 #project_vote_zone strong {
@@ -1921,6 +1920,34 @@ background-image:url("images/jycrois_gris_rouge.png");
 #pret-content #sum { 
     text-align: right; 
     margin: 0 5px;
+}
+#vote-form{
+    position: absolute;
+    bottom: 0px;
+    width: 340px;
+    height: 500px;
+    background-color: #F2F2F2;
+    z-index: -11;
+    text-align: center;
+}
+#vote-form h1{
+    font-family: BebasNeue;
+    text-transform: uppercase;
+    font-size: 35px;
+}
+#vote-form h2{
+    font-size: 17px;
+    text-align: justify;
+    margin-left: 15px;
+    margin-bottom: 0px;
+}
+#vote-form h3{
+    font-style: italic;
+    margin-top: 0;
+    text-align: justify;
+    font-size: 13px;
+    margin-left: 15px;
+    margin-right: 35px;
 }
 /* FIN VOTE */
 
@@ -2951,11 +2978,10 @@ height: 18px;
     width: 100%;
     text-align: center;
 }
-.ui-front {
-    z-index: 100;
+.ui-widget-overlay {
+    z-index: 3 !important;
 }
 
-/******** Formulaire de vote ***********/
 #white-background{
     height: 370px;
     width: 340px;
@@ -2963,33 +2989,4 @@ height: 18px;
     top: 0px;
     background-color: white;
     z-index: -2;
-}
-#vote-form{
-    position: absolute;
-    bottom: 0px;
-    width: 340px;
-    height: 500px;
-    background-color: #F2F2F2;
-    z-index: -11;
-    text-align: center;
-    text-indent: 
-}
-#vote-form h1{
-    font-family: BebasNeue;
-    text-transform: uppercase;
-    font-size: 35px;
-}
-#vote-form h2{
-    font-size: 17px;
-    text-align: justify;
-    margin-left: 15px;
-    margin-bottom: 0px;
-}
-#vote-form h3{
-    font-style: italic;
-    margin-top: 0;
-    text-align: justify;
-    font-size: 13px;
-    margin-left: 15px;
-    margin-right: 35px;
 }

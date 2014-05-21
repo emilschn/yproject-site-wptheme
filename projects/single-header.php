@@ -165,68 +165,92 @@ $vote_status = $campaign->campaign_status();
 				<?php } ?>
 			</div>
 		<?php } ?>
+				    
+		<div id="dialog" title="Partager ce projet">
+			<?php if (class_exists('Sharing_Service')) {
+				echo ypcf_fake_sharing_display();
+
+			} else { ?>
+
+				<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.jpg" alt="Logo Facebook" />
+				</a>
+				<a href="http://twitter.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>&text='test'">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.jpg" alt="Logo twitter" />
+				</a>
+				<a href="https://plus.google.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="Logo google" />
+				</a>
+			<?php } ?>
+		</div>
 	</div>
-		    
-    <?php
-    $cache_result = $WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-second');
-    if (false === $cache_result) {
-    ob_start();
-    ?>
+		
 	<div id="head-image">
 		<div class="center">
 			<div id="head-content">
-				<p id="title"> <?php echo get_the_title(); ?></p>
-				<p id="subtitle"> <?php echo $campaign->subtitle(); ?> </p>
-				<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png"></img>
+				
 				<?php
-			$category_slug = $post->ID . '-blog-' . $post->post_title;
-			$category_obj = get_category_by_slug($category_slug);
-			if (!empty($category_obj)) {
-			    $category_link = get_category_link($category_obj->cat_ID);
-			    $posts_in_category = get_posts(array('category'=>$category_obj->cat_ID));
-			} else {
-			    $category_link = '';
-			}
-			$nb_cat = (isset($posts_in_category)) ? ' ('.count($posts_in_category).')' : '';
-			?>
-			<?php $forum = get_page_by_path('forum'); ?>
-			<?php $statistiques = get_page_by_path('statistiques'); ?>
-			<?php
-			$category_slug = $post->ID . '-blog-' . $post->post_name;
-			echo $category_slug;
-			$category_obj = get_category_by_slug($category_slug);
-			if (!empty($category_obj)) {
-			    $category_link = get_category_link($category_obj->cat_ID);
-			    $posts_in_category = get_posts(array('category'=>$category_obj->cat_ID));
-			    $test='if';
-			     } else {
-			    $category_link = '';
-			    $test='else';
-			}
-			$nb_cat = (isset($posts_in_category)) ? ' ('.count($posts_in_category).')' : '';
-
-		?>
-
+				$cache_result = $WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-title');
+				if (false === $cache_result) {
+				ob_start();
+				?>
+				<p id="title"><?php echo get_the_title(); ?></p>
+				<p id="subtitle"><?php echo $campaign->subtitle(); ?></p>
+				<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png"></img>
+				<?php 
+				    $cache_result = ob_get_contents();
+				    $WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-title', $cache_result);
+				    ob_end_clean();
+				}
+				echo $cache_result;
+				?>
+				
+				<?php 
+				    $forum = get_page_by_path('forum');
+				    $statistiques = get_page_by_path('statistiques');
+				    $category_slug = $post->ID . '-blog-' . $post->post_name;
+				    $category_obj = get_category_by_slug($category_slug);
+				    if (!empty($category_obj)) {
+					$category_link = get_category_link($category_obj->cat_ID);
+					$posts_in_category = get_posts(array('category'=>$category_obj->cat_ID));
+				    } else {
+					$category_link = '';
+				    }
+				    $nb_cat = (isset($posts_in_category)) ? ' ('.count($posts_in_category).')' : '';
+				?>
 				<nav>
 					<ul>
 						<?php 
 						$current_page = 'http';
-						if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+						if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {$current_page .= "s";}
 						$current_page .= "://";
 						$current_page .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-						$project_link=get_permalink($campaign_id);
-						$news_link=esc_url($category_link);
-						$forum_link=get_permalink($forum->ID).$campaign_id_param;
-						$stats_link=get_permalink($statistiques->ID).$campaign_id_param;
+						$project_link = get_permalink($campaign_id);
+						$news_link = esc_url($category_link);
+						$forum_link = get_permalink($forum->ID).$campaign_id_param;
+						$stats_link = get_permalink($statistiques->ID).$campaign_id_param;
 						?>
 						<li><a href="<?php echo $project_link; ?>" <?php if($current_page==$project_link) echo 'class="current"'; ?>>Le projet</a></li>
 						<li><a href="<?php echo $news_link; ?>" <?php if($current_page==$news_link) echo 'class="current"'; ?>>Actualit&eacute;<?php echo  $nb_cat; ?></a></li>
 						<li><a href="<?php echo $forum_link; ?>" <?php if($current_page==$forum_link) echo 'class="current"'; ?>>Forum</a></li>
+						
+						<?php 
+						if ($vote_status != 'preview'): 
+						    $upload_dir = wp_upload_dir();
+						    if (file_exists($upload_dir['basedir'] . '/projets/' . $post->post_name . '-stats.jpg')):
+						?>
 						<li><a href="<?php echo $stats_link; ?>" <?php if($current_page==$stats_link) echo 'class="current"'; ?>>Statistiques</a></li>
+						<?php endif; endif; ?>
 					</ul>
 				<nav>
 			</div>
 		</div>
+	    
+		<?php
+		$cache_result = $WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-img');
+		if (false === $cache_result) {
+		ob_start();
+		?>
 		<div id='img-container' style="top:<?php $cover_position=get_post_meta($post->ID,'campaign_cover_position',TRUE); if($cover_position!='') echo $cover_position;?>">
 			<?php 
 			$img_src = '';			
@@ -248,7 +272,7 @@ $vote_status = $campaign->campaign_status();
 		</div>
 		<?php 
 		    $cache_result = ob_get_contents();
-		    $WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-second', $cache_result);
+		    $WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-img', $cache_result);
 		    ob_end_clean();
 		}
 		echo $cache_result;
@@ -264,21 +288,3 @@ $vote_status = $campaign->campaign_status();
 		<?php } ?>
 	</div>
 </section>
-				    
-<div id="dialog" title="Partager ce projet">
-	<?php if (class_exists('Sharing_Service')) {
-		echo ypcf_fake_sharing_display();
-		
-	} else { ?>
-
-		<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.jpg" alt="Logo Facebook" />
-		</a>
-		<a href="http://twitter.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>&text='test'">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.jpg" alt="Logo twitter" />
-		</a>
-		<a href="https://plus.google.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="Logo google" />
-		</a>
-	<?php } ?>
-</div>

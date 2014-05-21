@@ -133,8 +133,6 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 	}
 }
 ?>
-		
-<div id="project_vote_link" class="dark">Voter</div>
 
 <div id="project_vote_zone">
     

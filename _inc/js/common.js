@@ -2,6 +2,21 @@ jQuery(document).ready( function($) {
     YPUIFunctions.initUI();
     YPVoteFormFunctions.voteformcontrole();
     YPJycroisFunctions.loadJycrois();
+    $("#dialog").dialog({
+	width: '350px',
+	draggable: false,
+	resizable: false,
+	autoOpen: false,
+	modal: true,
+	show: {
+	    effect: "blind",
+	    duration: 300
+	},
+	hide: {
+	     effect: "blind",
+	    duration: 300
+	}
+    });
 });
 
 YPUIFunctions = (function($) {
@@ -344,22 +359,6 @@ WDGProjectPageFunctions=(function($) {
 		},
 
 		share_btn_click:function() {
-			$("#dialog").dialog({
-			    width: '350px',
-			    zIndex: 5,
-			    draggable: false,
-			    resizable: false,
-			    autoOpen: false,
-			    modal: true,
-			    show: {
-				effect: "blind",
-				duration: 300
-			    },
-			    hide: {
-				 effect: "blind",
-				duration: 300
-			    }
-			});
 	 		$("#dialog").dialog("open"); 
 		},
 
