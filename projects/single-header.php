@@ -246,6 +246,13 @@ $vote_status = $campaign->campaign_status();
 			?>
 			<img id="moved-img" src="<?php echo $img_src; ?>" />
 		</div>
+		<?php 
+		    $cache_result = ob_get_contents();
+		    $WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-second', $cache_result);
+		    ob_end_clean();
+		}
+		echo $cache_result;
+		?>
 
 		<?php 
 		global $can_modify;
@@ -256,13 +263,6 @@ $vote_status = $campaign->campaign_status();
 		    <a href="#" id="reposition-cover" onclick='javascript:WDGProjectPageFunctions.move_picture(<?php echo $post_id_echo; ?>)'>Repositionner</a>
 		<?php } ?>
 	</div>
-    <?php 
-	$cache_result = ob_get_contents();
-	$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-second', $cache_result);
-	ob_end_clean();
-    }
-    echo $cache_result;
-    ?>
 </section>
 				    
 <div id="dialog" title="Partager ce projet">

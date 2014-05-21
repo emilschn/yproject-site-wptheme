@@ -1,4 +1,7 @@
 <?php 
+$cache_result=$WDG_cache_plugin->get_cache('project-'.$campaign_id.'-content-first');
+if(false===$cache_result){
+	ob_start();
 $images_folder=get_stylesheet_directory_uri().'/images/';
 global $campaign; 
 $campaign_id_param = '?campaign_id=';
@@ -72,10 +75,21 @@ $vote_status = html_entity_decode($campaign->vote());
 			</div>
 			
 		</div>
-		<?php 	
-			if($can_modify){?>
+		<?php
+		$cache_result=ob_get_contents();
+		$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-content-first',$cache_result);
+		ob_end_clean();
+		}
+		echo $cache_result;
+			
+			if($can_modify){ ?>
 				<a id="move-cursor" href="JavaScript:void(0);" onclick='javascript:WDGProjectPageFunctions.move_cursor(<?php if(isset($_GET['campaign_id'])){echo $_GET['campaign_id'];}else{global $post;echo($post->ID); } ?>)'>Modifier la position du curseur</a>
-			<?php } ?>
+			<?php } 
+
+			$cache_result=$WDG_cache_plugin->get_cache('project-'.$campaign_id.'-content-second');
+			if(false===$cache_result){
+				ob_start();
+				?>
 	</div>
 </div>
 <div class="part-title-separator" >
@@ -155,3 +169,11 @@ $vote_status = html_entity_decode($campaign->vote());
 	</div>
 </div>
 </div>
+</div>
+<?php
+$cache_result=ob_get_contents();
+		$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-content-second',$cache_result);
+		ob_end_clean();
+		}
+		echo $cache_result;
+?>

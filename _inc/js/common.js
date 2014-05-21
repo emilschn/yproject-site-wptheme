@@ -260,7 +260,7 @@ WDGProjectPageFunctions=(function($) {
 	return {
 		move_picture:function(campaign_id) {
 		    $('#img-container').draggable({
-			axis: "y"
+				axis: "y"
 		    }); // appel du plugin
 		    $('#img-container').draggable('enable');
 		    $('#reposition-cover').text('Sauvegarder');
@@ -332,8 +332,6 @@ WDGProjectPageFunctions=(function($) {
 	               $('#nb-jycrois').text(parseInt(actual_text)-1);
 	            }
 				$('.jy-crois').attr("href", "javascript:WDGProjectPageFunctions.update_jycrois("+jy_crois_temp+","+campaign_id+",\""+home_url+"\")");
-	   			alert('test');
-	   			alert(ajax_object.ajax_url);
 	   			$.ajax({
 			            	'type' : "POST",
 			            	'url' : ajax_object.ajax_url,

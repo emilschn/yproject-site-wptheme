@@ -22,15 +22,9 @@
 				<div id="post_bottom_bg">
 					<div id="post_bottom_content" class="center">
 						
-							<?php  $cache_result=$WDG_cache_plugin->get_cache('project-'.$campaign_id.'-content');
-									if(false===$cache_result){
-									ob_start();
+							<?php  
 							 		require_once('projects/single-content.php'); 
-							 		$cache_result=ob_get_contents();
-									$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-content',$cache_result);
-						 			ob_end_clean();
-									}
-								echo $cache_result;
+							 		
 						?>
 						<div style="clear: both"></div>
 					</div>
