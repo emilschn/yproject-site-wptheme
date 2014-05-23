@@ -4,10 +4,13 @@
 	global $campaign, $post, $campaign_id;
 	$campaign_id=$post->ID;
 	if ( ! is_object( $campaign ) ) $campaign = atcf_get_campaign( $post );
+	$vote_status = $campaign->campaign_status(); 
 ?>
 			
 <?php get_header(); ?>
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+<?php if($vote_status="vote") require_once('projects/header-voteform.php');
+
+if (have_posts()) : while (have_posts()) : the_post(); ?>
 <div id="content">
 	<div class="padder">
 		<div class="page" id="blog-single" role="main">

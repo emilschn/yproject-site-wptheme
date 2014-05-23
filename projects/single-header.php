@@ -108,7 +108,7 @@ $vote_status = $campaign->campaign_status();
 					?>
 					<div id="invest-button">
 						<?php if ($has_voted): ?>
-						<span class="description-discover">Merci pour votre vote</span>
+						<span class="description-discover" style="background-color:#333;">Merci pour votre vote</span>
 						<?php else : ?>
 						<a href="javascript:WDGProjectPageFunctions.print_vote_form();" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter pour ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 						<?php endif; ?>
@@ -172,7 +172,7 @@ $vote_status = $campaign->campaign_status();
     if (false === $cache_result) {
     ob_start();
     ?>
-	<div id="head-image">
+	<div id="head-image"<?php if($can_modify){echo ' style="margin-top: 37px"';}?>>
 		<div class="center">
 			<div id="head-content">
 				<p id="title"> <?php echo get_the_title(); ?></p>
@@ -263,6 +263,7 @@ $vote_status = $campaign->campaign_status();
 		    <a href="#" id="reposition-cover" onclick='javascript:WDGProjectPageFunctions.move_picture(<?php echo $post_id_echo; ?>)'>Repositionner</a>
 		<?php } ?>
 	</div>
+	<div style="clear:both"></div>
 </section>
 				    
 <div id="dialog" title="Partager ce projet">

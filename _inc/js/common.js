@@ -2,7 +2,10 @@ jQuery(document).ready( function($) {
     YPUIFunctions.initUI();
     YPVoteFormFunctions.voteformcontrole();
     YPJycroisFunctions.loadJycrois();
+  	$('.projects-desc-content').each(function(){WDGProjectPageFunctions.hideOrShow(this)});
+ 
 });
+
 
 YPUIFunctions = (function($) {
     return {
@@ -258,6 +261,7 @@ YPJycroisFunctions = (function($){
 
 WDGProjectPageFunctions=(function($) {
 	return {
+		currentDiv:0,
 		move_picture:function(campaign_id) {
 		    $('#img-container').draggable({
 				axis: "y"
@@ -365,9 +369,41 @@ WDGProjectPageFunctions=(function($) {
 
 		print_vote_form:function(){
 		    $("#vote-form").animate({ 
-	        	bottom: "-500px"
+	        	bottom: "-686px"
 		    }, 500 );
-		}
+		},
+		//Description projet
+		hideOthers:function(currentDiv){
+			var index=0;
+			jQuery.noConflict();
+	 		jQuery('.projects-desc-content').each(function(){
+		 		if(index!=currentDiv){
+		 			jQuery(this).find('.projects-more').slideDown(200);
+		 			jQuery(this).find('p:gt(0)').slideUp(400);
+		 		
+		 		}
+		 		index++;
+			});
+		},
+
+		hideOrShow:function(thisthis){
+	  		if($(thisthis).find('p').length>1){
+	  			$(thisthis).css("cursor", "pointer");
+		  		$(thisthis).find('p:lt(1)').append('<div class="projects-more" data-value="'+WDGProjectPageFunctions.currentDiv+'" >Lire plus! </div>');
+		  		$(thisthis).click(function(){
+						$this=$(this);
+						$(this).find('.projects-more').hide(400,function(){
+							$this.find('p').slideDown(400);
+						});
+						$show=false;
+						WDGProjectPageFunctions.hideOthers($(this).find('.projects-more').attr("data-value"));
+				} 
+		  			);
+	  		}
+	   		$(thisthis).find('p:gt(0)').hide();
+	   		WDGProjectPageFunctions.currentDiv++;
+   		}
+
 	}
 })(jQuery);
 

@@ -55,17 +55,18 @@ $vote_status = html_entity_decode($campaign->vote());
 			?>
 			<div id="project-owner-desc">
 				<?php
+				
 				echo '<p>'.$author['last_name'][0].' '.$author['first_name'][0].'</p>';
-				echo '<p>'.$author['user_address'][0].'</p>';
-				echo '<p>'.$author['user_postal_code'][0].' '.$author['user_city'][0].'</p>';
-				echo '<p>'.$author['user_mobile_phone'][0].'</p>';
+				echo '<p>@'.$author['nickname'][0].'</p>';
+				//echo '<p>'.$author['user_postal_code'][0].' '.$author['user_city'][0].'</p>';
+				//echo '<p>'.$author['user_mobile_phone'][0].'</p>';
 				?>
 			</div>
 		</div>
 
 		<div id="project-about">
-			<p> A propos <p>
-			<p> de <?php echo get_the_title(); ?> </p>
+			<p> A propos de<p>
+			<p>  <?php echo get_the_title(); ?> </p>
 		</div>
 		<div id="project-map">
 			<?php $cursor_top_position=get_post_meta($post->ID,'campaign_cursor_top_position',TRUE); ?>
@@ -100,9 +101,9 @@ $vote_status = html_entity_decode($campaign->vote());
 <div id="projects-bottom-desc">
 	<?php 
 	if ($vote_status == 'preview') : 
-		$forum = get_page_by_path('forum');
+		//$forum = get_page_by_path('forum');
 	?>
-	<br /><br /><center><a href="<?php echo get_permalink($forum->ID) . $campaign_id_param; ?>">Participez sur son forum !</a></center>
+	<!--<center><a href="<?php echo get_permalink($forum->ID) . $campaign_id_param; ?>">Participez sur son forum !</a></center>-->
 <?php endif; ?>
 
 <div class="indent">
@@ -115,6 +116,18 @@ $vote_status = html_entity_decode($campaign->vote());
 		</div>
 	</div>
 
+	<div class="projects-desc-item">
+		<img class="vertical-align-middle" src="<?php echo $images_folder;?>sociale.png"/>
+		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
+		<div class="projects-desc-content">
+		<h2 >Quelle est l'utilité sociétale du projet ?</h2>
+		<div><?php 
+		$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
+		echo apply_filters('the_content', $societal_challenge);
+		?>
+		</div>
+		</div>
+	</div>
 	<?php if ($vote_status != 'preview'): ?>
 	<div class="projects-desc-item">
 		<img class="vertical-align-middle" src="<?php echo $images_folder;?>economie.png"/>
@@ -144,18 +157,6 @@ $vote_status = html_entity_decode($campaign->vote());
 	</div>
 	<?php endif; ?>
 
-	<div class="projects-desc-item">
-		<img class="vertical-align-middle" src="<?php echo $images_folder;?>sociale.png"/>
-		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
-		<div class="projects-desc-content">
-		<h2 >Quelle est l'utilité sociétale du projet ?</h2>
-		<div><?php 
-		$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
-		echo apply_filters('the_content', $societal_challenge);
-		?>
-		</div>
-		</div>
-	</div>
 	<div class="projects-desc-item">
 		<img class="vertical-align-middle" src="<?php echo $images_folder;?>porteur.png"/>
 		<img class="vertical-align-middle grey-triangle"src="<?php echo $images_folder;?>triangle_gris_projet.png"/>

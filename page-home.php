@@ -10,6 +10,7 @@ if(false===$cache_result){
 		<div id="welcome_text">
 			<?php the_content(); ?>
 		</div>
+
 		<nav class="home_intro">
 			<?php 
 			$page_connexion_register = get_page_by_path('register');
