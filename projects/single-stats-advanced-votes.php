@@ -123,20 +123,17 @@ Autres informations : <strong><?php echo $string_more_info_other; ?></strong>
 
 <h2>Conseils</h2>
 <?php if (!empty($list_advice)) { ?>
-<ul>
-	<?php foreach ( $list_advice as $advice ) { ?>
+<ul class="com-activity-list">
+	<?php foreach ( $list_advice as $advice ) { 
+		$user_obj = get_user_by('id', $advice->user_id);
+	?>
 		<li>
-		    <a href="<?php echo bp_core_get_userlink($advice->user_id, false, true); ?>"><?php $advice->user_id; ?></a> : <?php echo html_entity_decode($advice->advice, ENT_QUOTES | ENT_HTML401); ?>
+		    <a href="<?php echo bp_core_get_userlink($advice->user_id, false, true); ?>"><?php echo $user_obj->display_name; ?></a> : <?php echo html_entity_decode($advice->advice, ENT_QUOTES | ENT_HTML401); ?>
 		</li>
 	<?php } ?>
 </ul>
 <?php } ?>
 
-
-<?php
-}
-$post = $save_post;
-?>
 
 <script type="text/javascript">
 jQuery(document).ready( function($) {
@@ -192,3 +189,8 @@ jQuery(document).ready( function($) {
     var canvasHorizontal = new Chart(ctxHorizontal).HorizontalBar(dataHorizontal, optionsHorizontal);
 });
 </script>
+
+<?php
+}
+$post = $save_post;
+?>

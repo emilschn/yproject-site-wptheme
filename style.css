@@ -687,6 +687,9 @@ div#home_bottom h1 {
     font-size: 11pt;
     padding: 2px 5px;
 }
+.com-activity-list li {
+    background-color: #F2F2F2;
+}
 .home-activity-list p {
     padding: 5px 5px;
     margin: 0px;
