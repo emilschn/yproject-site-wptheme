@@ -121,6 +121,12 @@ YPUIFunctions = (function($) {
 		    );
 		});
 	    }
+	    
+	    if ($("#scroll-to-utilite-societale").length > 0) {
+		$("#scroll-to-utilite-societale").click(function() {
+		   $('html, body').animate({scrollTop: $('#utilite-societale').offset().top - $("#navigation").height()}, "slow"); 
+		});
+	    }
 	},
 	
 	onRemoveUploadInterval: function() {

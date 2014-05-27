@@ -130,6 +130,20 @@ $vote_status = html_entity_decode($campaign->vote());
 	</div>
 	<?php endif; ?>
 
+	<a id="utilite-societale"></a>
+	<div class="projects-desc-item">
+		<img class="vertical-align-middle" src="<?php echo $images_folder;?>sociale.png"/>
+		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
+		<div class="projects-desc-content">
+		<h2 >Quelle est l'utilité sociétale du projet ?</h2>
+		<div><?php 
+		$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
+		echo apply_filters('the_content', $societal_challenge);
+		?>
+		</div>
+		</div>
+	</div>
+
 	<?php if ($vote_status != 'preview'): ?>
 	<div class="projects-desc-item">
 		<img class="vertical-align-middle" src="<?php echo $images_folder;?>model.png"/>
@@ -143,19 +157,7 @@ $vote_status = html_entity_decode($campaign->vote());
 		</div>
 	</div>
 	<?php endif; ?>
-
-	<div class="projects-desc-item">
-		<img class="vertical-align-middle" src="<?php echo $images_folder;?>sociale.png"/>
-		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
-		<div class="projects-desc-content">
-		<h2 >Quelle est l'utilité sociétale du projet ?</h2>
-		<div><?php 
-		$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
-		echo apply_filters('the_content', $societal_challenge);
-		?>
-		</div>
-		</div>
-	</div>
+    
 	<div class="projects-desc-item">
 		<img class="vertical-align-middle" src="<?php echo $images_folder;?>porteur.png"/>
 		<img class="vertical-align-middle grey-triangle"src="<?php echo $images_folder;?>triangle_gris_projet.png"/>

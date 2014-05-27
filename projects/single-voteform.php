@@ -166,7 +166,7 @@ if ($campaign->end_vote_remaining() > 0) {
 				<form name="ypvote" action="<?php echo get_permalink($post->ID); ?>" method="POST" class="ypvote-form" enctype="multipart/form-data">
 
 					<strong>Impacts et coh&eacute;rence du projet</strong><br />
-					<em>Comment &eacute;valuez-vous les impacts soci&eacute;taux de ce projet ?</em><br />
+					<em>Comment &eacute;valuez-vous les <a id="scroll-to-utilite-societale" href="javascript:void(0);">impacts soci&eacute;taux</a> de ce projet ?</em><br />
 					<ul class="impact-list">
 					    <li><span>Economie</span> <?php displayImpactSelect('impact_economy', $impact_economy); ?></li>
 					    <li><span>Environnement</span> <?php displayImpactSelect('impact_environment', $impact_environment); ?></li>
