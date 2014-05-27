@@ -51,7 +51,7 @@
 		?>
 		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?>>
 			<?php echo $video_element;
-			if ($video_element = '' && $campaign_status== 'funded' ) { ?>
+			if ($video_element == '' && $campaign_status== 'funded' ) { ?>
 					<div class="funded-banner"></div>
 				<?php }
 			 ?>

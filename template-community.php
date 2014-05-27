@@ -12,7 +12,7 @@ date_default_timezone_set("Europe/London");
 		<?php locate_template( array("community/community-header.php"), true ); ?>
 		<div id="post_bottom_bg">
 			<div id="post_bottom_content" class="center">
-				<div class="left post_bottom_desc">
+				<div class="left community-desc">
 					<?php		    	
 					$page_name = get_post($post)->post_name;
 					switch ($page_name) {

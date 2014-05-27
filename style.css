@@ -2667,7 +2667,8 @@ text-transform: uppercase;
     color: #FFF;
     height: 20px;
     padding: 16px 25px;
-    background-color: #333;
+   /* background-color: #E1E3E2;*/
+   background-color: #7B7B7B;
     border: 0px;
     font-size: 12px;
     height: 20px;
@@ -2678,10 +2679,10 @@ text-transform: uppercase;
             transition: all 0.2s ease-out;
 }
 #head-content li a:hover{
-    background-color: #FF494C;
+    background-color: #2B2C2C;
 }
 #head-content li a.current{
-    background-color: #FF494C;
+    background-color: #2B2C2C;
 }
 #projects-stats{
 
@@ -2712,6 +2713,11 @@ text-transform: uppercase;
     padding-top: 0px;
 }
 .post_bottom_buttons #invest-button{
+    position: absolute;
+    padding: 0;
+    bottom:1px ;
+}
+.post_bottom_buttons #participate-button{
     position: absolute;
     padding: 0;
     bottom:1px ;
@@ -2832,13 +2838,13 @@ margin-top: 20px;
 }
 #map-cursor p{
     position: absolute;
-    bottom: 0;
+    bottom: -11px;
     margin: 0;
     padding : 0;
 }
 
 .stats_btn{
-    background: url("images/grenage_projet.jpg");
+    background: url("images/grenage_projet.png");
     background-repeat: no-repeat;
     display: inline-block;
     width: 83px !important;
@@ -2916,6 +2922,17 @@ margin-top: 20px;
     font-style: Arial;
     border-bottom: 0px;
 }
+#participate-button .description-discover{
+    text-transform: uppercase;
+    color: #FFF;
+    text-align: center;
+    background-color: #FF494C;
+    padding: 13px 0px;
+    display: inline-block;
+    font-size: 13px;
+    width: 100%;
+    margin-top: 15px;
+}
 #share_btn_zone
 {
 display:none;
@@ -2960,7 +2977,7 @@ display:none;
 .su-spoiler-icon{
     display: none !important;
 }
-#subtitle{
+#project-subtitle{
     position: absolute;
     bottom: 51px;
     font-size: 18px;
@@ -3066,4 +3083,23 @@ height: 18px;
     font-size: 13px;
     margin-left: 15px;
     margin-right: 35px;
+}
+.community-desc{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 610px;
+    padding-left: 10px;
+    padding-right: 20px;
+    font-size: 11pt;
+}
+.community-menu{
+    margin-top: 20px; 
+    border-bottom: 1px solid #FFFFFF;
+    font-family: Arial,sans-serif;
+    font-size: 10pt;
+    padding: 15px 0;
+    text-align: center;
+    text-transform: uppercase;
+    width: 310px;
+    border: 0;
 }

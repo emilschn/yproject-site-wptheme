@@ -371,6 +371,7 @@ WDGProjectPageFunctions=(function($) {
 		    $("#vote-form").animate({ 
 	        	bottom: "-686px"
 		    }, 500 );
+		    $(".description-discover").css('background-color','#333');
 		},
 		//Description projet
 		hideOthers:function(currentDiv){

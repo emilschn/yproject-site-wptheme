@@ -2,36 +2,6 @@
 <?php the_content(); ?>
 
 
-<h2 class="underlined"><?php _e("Derniers inscrits", "yproject"); ?></h2>
-<?php 
-$args = array (
-	"role" => "Subscriber",
-	"orderby" => "registered", 
-	"order" => "DESC", 
-	"number" => 5
-	);
-$user_query = new WP_User_Query( $args ); 
-if ( ! empty( $user_query->results ) ) { ?>
-<ul class="com-activity-list">
-	<?php
-	foreach ( $user_query->results as $user ) {
-		$now = new DateTime(date("Y-m-d H:i:s"));
-		$registration = new DateTime($user->user_registered);
-		$diff = $now->diff($registration);
-		if ($diff->y > 0) $time = $diff->format("%y années");
-		else if ($diff->m > 0) $time = $diff->format("%m mois");
-		else if ($diff->days > 0) $time = $diff->format("%d jours");
-		else if ($diff->h > 0) $time = $diff->format("%h heures");
-		else if ($diff->i > 0) $time = $diff->format("%i minutes");
-		else if ($diff->s > 0) $time = $diff->format("%s secondes");
-		echo '<li>' . $user->display_name . __(" a rejoint WEDOGOOD - Il y a ", "yproject") . $time . '</li>';
-	} ?>
-</ul>
-<?php
-}
-?>
-<br/>
-
 
 <h2 class="underlined">Fil d&apos;activit&eacute;</h2>
 <ul class="com-activity-list">

@@ -112,6 +112,21 @@ $vote_status = html_entity_decode($campaign->vote());
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
 		<div class="projects-desc-content">
 		<h2 >En quoi consiste le projet ?</h2>
+		<?php 
+		//$campaign->test_mango_create_user();
+		//$users=$campaign->test_mango_list_users();
+		//print_r($users);
+		//foreach ($users as $user) {
+		//	print_r($campaign->test_mango_get_user($user->Id));
+		//}
+		//print_r($campaign->test_token());
+		$moi=$campaign->test_get_user(2427350);
+		print_r($moi);
+		$campaign->test_update_user($moi);
+		$moi=$campaign->test_get_user(2427350);
+		print_r($moi);
+		 ?>
+
 		<span><?php the_content(); ?></span>
 		</div>
 	</div>

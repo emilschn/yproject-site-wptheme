@@ -30,23 +30,24 @@ function print_vote_post($vote_post,$is_right_project){
 		?>
 <div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?> >
 			<?php echo $video_element;
-				if ($video_element = '') { ?>
+				if ($video_element == '') { ?>
 					<div class="vote-banner"></div>
 				<?php }
 			 ?>
 		</div>
-		
-			<?php 
-			if($is_right_project){//si a gauche
-			?>
-			<div class="vote-bubble-left" >
-			<?php } else { ?>
-			<div class="vote-bubble-right">
-			<?php } ?>
-				<p>Projet</p>
-				<p class="big-text">En vote</p>
-				<p class="small-text">jusqu'au <?php echo $campaign->end_vote_date_home() ?> </p>
-		</div>
+			<a href="<?php echo get_permalink($vote_post->ID); ?>">
+				<?php 
+				if($is_right_project){//si a gauche
+				?>
+				<div class="vote-bubble-left" >
+				<?php } else { ?>
+				<div class="vote-bubble-right">
+				<?php } ?>
+					<p>Projet</p>
+					<p class="big-text">En vote</p>
+					<p class="small-text">jusqu'au <?php echo $campaign->end_vote_date_home() ?> </p>
+				</div>
+			</a>
 
 		<div class="description-zone">
 			<div class="description-summary ">
@@ -79,7 +80,7 @@ function print_vote_post($vote_post,$is_right_project){
 
 		</div>
 		<div class="description-separator "></div>
-		<a href="<?php echo get_permalink($vote_post->ID); ?>" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter pour ce projet ici<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+		<a href="<?php echo get_permalink($vote_post->ID); ?>" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter sur ce projet ici<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 	</div>
 
 <?php return $is_right_project;} ?>
@@ -150,22 +151,23 @@ function print_vote_post($vote_post,$is_right_project){
 		?>
 		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?> >
 			<?php echo $video_element;
-			if ($video_element = '') { ?>
+			if ($video_element == '') { ?>
 					<div class="preview-banner"></div>
 				<?php }
 			 ?>
-			<?php
-			if($is_right_project){//si a gauche
-			?>
-			<div class="preview-bubble-left">
-			<?php } else { ?>
-			<div class="preview-bubble-right">
-				
-			<?php } ?>
-			<p>Projet</p>
-			<p>En avant</p>
-			<p>Premiere</p>
-		</div>
+			<a href="<?php echo get_permalink($preview_post->ID); ?>">
+				<?php
+				if($is_right_project){//si a gauche
+				?>
+					<div class="preview-bubble-left">
+				<?php } else { ?>
+					<div class="preview-bubble-right">	
+				<?php } ?>
+				<p>Projet</p>
+				<p>En avant</p>
+				<p>Premiere</p>
+				</div>
+			</a>
 		</div>
 		<div class="description-separator"></div>
 		<a href="<?php echo get_permalink($preview_post->ID); ?>" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">D&eacute;couvrir le projet ici<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
