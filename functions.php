@@ -18,6 +18,11 @@ add_action( 'after_setup_theme', 'yproject_setup', 15 );
 remove_action("wp_head", "wp_generator");
 add_filter('login_errors',create_function('$a', "return null;"));
 
+if ( !is_admin() ) {
+	wp_deregister_script('jquery');
+	wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"), false);
+	wp_enqueue_script('jquery');
+}
 add_action( 'wp_enqueue_scripts', 'yproject_enqueue_script' );
 function yproject_enqueue_script(){
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'));
