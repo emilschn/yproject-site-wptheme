@@ -14,8 +14,9 @@
 	    $fb_infos = $facebook->api(YP_FB_URL); 
 	    if ($fb_infos) $facebook_infos = $fb_infos['likes'];
 	    $WDG_cache_plugin->set_cache('facebook-count',$facebook_infos,60*60*24);
+    } else {
+	    $facebook_infos = $cache_result;
     }
-    $facebook_infos = $cache_result;
 	
     /* Récupération des infos Twitter */
     global $twitter_infos;
@@ -39,8 +40,9 @@
 	    $followers = json_decode($response);
 	    if ($followers && isset($followers->followers_count)) $twitter_infos = $followers->followers_count;
 	    $WDG_cache_plugin->set_cache('twitter-count',$twitter_infos,60*60*24);
+    } else {
+	    $twitter_infos = $cache_result;
     }
-    $twitter_infos = $cache_result;
 
     function getWDGTitle() {
 	    global $post;
@@ -143,7 +145,7 @@
 						
 					<?php else : ?>
 						<?php /* Menu Connexion */ $page_connexion = get_page_by_path('connexion'); ?>
-						<li id="menu_item_connection" class="page_item_out page_item_inverted"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID);echo '?'.'page_id='.get_the_ID(); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
+						<li id="menu_item_connection" class="page_item_out page_item_inverted"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
 					<?php endif; ?>
 				</ul>
 		    </div>
