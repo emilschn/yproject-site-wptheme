@@ -13,7 +13,7 @@
 		<a href="<?php echo get_permalink($page_partners->ID); ?>"><?php _e("Partenaires", "yproject"); ?></a>
 	    </div>
 	     <div class="dark">
-		<?php $page_like = get_page_by_path('projets-que-nous-aimons'); //Lien vers l'équipe ?>
+		<?php $page_like = get_page_by_path('les-projets-que-nous-aimons'); //Lien vers l'équipe ?>
 		<a href="<?php echo get_permalink($page_like->ID); ?>">Projets que nous aimons</a>
 	    </div>
 	    <div class="dark">

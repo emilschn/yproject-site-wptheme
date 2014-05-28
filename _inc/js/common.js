@@ -3,7 +3,11 @@ jQuery(document).ready( function($) {
     YPVoteFormFunctions.voteformcontrole();
     YPJycroisFunctions.loadJycrois();
   	$('.projects-desc-content').each(function(){WDGProjectPageFunctions.hideOrShow(this)});
- 
+ 	$('.project-content-icon').click(function(){
+ 		var contentDiv = $("#project-content-" + $(this).data("content"));
+ 		contentDiv.trigger("click"); 	
+ 	});
+ 	$('.project-content-icon').css("cursor", "pointer");
 });
 
 
@@ -392,14 +396,13 @@ WDGProjectPageFunctions=(function($) {
 	  			$(thisthis).css("cursor", "pointer");
 		  		$(thisthis).find('p:lt(1)').append('<div class="projects-more" data-value="'+WDGProjectPageFunctions.currentDiv+'" >Lire plus! </div>');
 		  		$(thisthis).click(function(){
-						$this=$(this);
-						$(this).find('.projects-more').hide(400,function(){
-							$this.find('p').slideDown(400);
+						project_content=$(this);
+						project_more=$(this).find('.projects-more');
+						project_more.hide(400,function(){
+							project_content.find('p').slideDown(400);
 						});
-						$show=false;
-						WDGProjectPageFunctions.hideOthers($(this).find('.projects-more').attr("data-value"));
-				} 
-		  			);
+						WDGProjectPageFunctions.hideOthers(project_more.attr("data-value"));
+				});
 	  		}
 	   		$(thisthis).find('p:gt(0)').hide();
 	   		WDGProjectPageFunctions.currentDiv++;
