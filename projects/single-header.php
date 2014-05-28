@@ -16,13 +16,12 @@ $vote_status = $campaign->campaign_status();
 <section id="projects-banner">
 	<div id="projects-stats" class="center">
 		<?php 
-		if ($vote_status != 'preview') { 
 			$cache_result = $WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-first');
 			if (false === $cache_result) {
 				ob_start();
 			?>
-			<div id="projects-stats-content">
-				<div class="projects-description-separator"></div>
+			<div id="projects-stats-content" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>>
+				<div class="projects-description-separator" <?php if($vote_status=='preview')echo 'style="opacity:0;"'?>></div>
 						 	
 				<?php
 				if ($vote_status == 'collecte' || $vote_status == 'funded') {
@@ -86,10 +85,41 @@ $vote_status = $campaign->campaign_status();
 
 				<?php 
 				}
+				else if ($vote_status== 'preview'){?>
+
+					<div style="opacity:0">
+						<div class="project_full_progressbg"></div>
+						<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
+					</div>
+					<div class="post_bottom_infos_item" style="opacity:0">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="Logo personnes" />
+						<?php if ($nbvoters == 1): ?>
+						1 personne a d&eacute;j&agrave; vot&eacute;
+						<?php elseif ($nbvoters > 1): echo $nbvoters; ?>
+						personnes ont d&eacute;j&agrave; vot&eacute;
+						<?php else: ?>
+						Personne n'a vot&eacute;. Soyez le premier !
+						<?php endif; ?>
+					</div>
+					<div class="post_bottom_infos_item" style="opacity:0">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo personnes" />
+						<?php if ($remaining_vote_days > 0) : ?>
+						Il reste <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours pour voter
+						<?php else: ?>
+						Le vote est termin&eacute;
+						<?php endif; ?>
+					</div>
+					<div class="post_bottom_infos_item" style="opacity:0">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="Logo cible" />
+						<?php echo 'Ce projet a besoin de '.$campaign->minimum_goal(true) ; ?>
+					</div>
+					<div class="projects-description-separator" style="opacity:0"></div>
+				<?php
+				}
 				$cache_result=ob_get_contents();
 				$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-first',$cache_result);
 				ob_end_clean();
-			}
+			
 			echo $cache_result;
 			?>
 				<div class="post_bottom_buttons">
@@ -99,7 +129,14 @@ $vote_status = $campaign->campaign_status();
 						<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>&invest_start=1" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Investir sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 					</div>
 
-				<?php } else if ($vote_status == 'vote') {
+				<?php 
+					} else if ($vote_status == 'preview'){?>
+						<div id="participate-button">
+						<?php $page_forum = get_page_by_path('forum'); ?>
+						<a href="<?php echo get_permalink($page_forum->ID); ?><?php echo $campaign_id_param; ?>" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Participer au forum<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+					</div>
+					<?php
+					} else if ($vote_status == 'vote') {
 					global $wpdb;
 					$table_name = $wpdb->prefix . "ypcf_project_votes";
 					$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign->ID.' AND user_id = '.wp_get_current_user()->ID );
@@ -108,9 +145,9 @@ $vote_status = $campaign->campaign_status();
 					?>
 					<div id="invest-button">
 						<?php if ($has_voted): ?>
-						<span class="description-discover">Merci pour votre vote</span>
+						<span class="description-discover" style="background-color:#333;">Merci pour votre vote</span>
 						<?php else : ?>
-						<a href="javascript:WDGProjectPageFunctions.print_vote_form();" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter pour ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+						<a href="javascript:WDGProjectPageFunctions.print_vote_form();" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 						<?php endif; ?>
 					</div>
 
@@ -118,7 +155,13 @@ $vote_status = $campaign->campaign_status();
 					<div id="funded-button">
 						<a class="description-discover">Projet financ&eacute;</a>
 					</div>
-				<?php } ?>
+				<?php }
+					elseif ($vote_status=='preview') {?>
+						<div id="funded-button" style="opacity:0">
+						<a class="description-discover">Projet financ&eacute;</a>
+					</div>
+				<?php	} ?>
+				 
 		
 		
 				<?php if ( is_user_logged_in() ) { 
@@ -156,7 +199,7 @@ $vote_status = $campaign->campaign_status();
 					</a>
 				</div>
 		
-				<div id="white-background"></div>
+				<div id="white-background"  <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>></div>
 
 				<?php if ($vote_status == 'vote') { ?>
 				<div id="vote-form">
@@ -184,11 +227,10 @@ $vote_status = $campaign->campaign_status();
 			<?php } ?>
 		</div>
 	</div>
-		
-	<div id="head-image">
+	
+	<div id="head-image"<?php if($can_modify){echo ' style="margin-top: 37px"';}?>>
 		<div class="center">
 			<div id="head-content">
-				
 				<?php
 				$cache_result = $WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-title');
 				if (false === $cache_result) {
@@ -287,4 +329,5 @@ $vote_status = $campaign->campaign_status();
 		    <a href="#" id="reposition-cover" onclick='javascript:WDGProjectPageFunctions.move_picture(<?php echo $post_id_echo; ?>)'>Repositionner</a>
 		<?php } ?>
 	</div>
+	<div style="clear:both"></div>
 </section>

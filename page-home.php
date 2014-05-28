@@ -10,6 +10,7 @@ if(false===$cache_result){
 		<div id="welcome_text">
 			<?php the_content(); ?>
 		</div>
+
 		<nav class="home_intro">
 			<?php 
 			$page_connexion_register = get_page_by_path('register');
@@ -182,10 +183,10 @@ if(false===$cache_result){
 			<div id="home_middle_desc_left">
 				<p>Soyez acteurs et influenceurs</p>
 				<p>de la communaut&#201;</p>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/main.jpg"/>
+				<p>Votez pour les projets les plus impactants</p>
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/pieces.jpg"/>
 				<p>Investissez à partir de 10€</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/main.jpg"/>
-				<p>Participez à l'aventure</p>
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/fusee.jpg"/>
 				<p>Boostez l'économie positive</p>
 			</div>

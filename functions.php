@@ -36,11 +36,29 @@ function yproject_enqueue_script(){
  * @param type $username
  */
 function yproject_front_end_login_fail($username){
+
 	$page_connexion = get_page_by_path('connexion');
 	wp_redirect(get_permalink($page_connexion->ID) . '?login=failed');
 	exit;
 }
 add_action('wp_login_failed', 'yproject_front_end_login_fail'); 
+
+
+function yproject_redirect_login() {
+	$page_id=$_POST['redirect-page'];
+	$page=get_page($page_id);
+    wp_redirect(get_permalink($page));
+    exit;
+}
+add_action('wp_login', 'yproject_redirect_login');
+
+function yproject_redirect_logout(){
+	$page_id=$_GET['page_id'];
+	$page=get_page($page_id);
+    wp_redirect(get_permalink($page));
+    exit;
+}
+add_action('wp_logout', 'yproject_redirect_logout');
 
 function _catch_empty_user( $username, $pwd ) {
 	if (empty($username)||empty($pwd)) {

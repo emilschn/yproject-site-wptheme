@@ -2,7 +2,6 @@
     global $WDG_cache_plugin;
     global $stylesheet_directory_uri;
     $stylesheet_directory_uri = get_stylesheet_directory_uri();
-	
     /* Récupération des infos Facebook */
     global $facebook_infos;
     $cache_result = $WDG_cache_plugin->get_cache('facebook-count');
@@ -138,13 +137,13 @@
 							<?php
 							}
 							?>
-							<li class="page_item_out"><a href="<?php echo wp_logout_url( wp_guess_url() ); ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
+							<li class="page_item_out"><a href="<?php echo wp_logout_url();echo '&page_id='.get_the_ID() ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
 						</ul>
 						</li>
 						
 					<?php else : ?>
 						<?php /* Menu Connexion */ $page_connexion = get_page_by_path('connexion'); ?>
-						<li id="menu_item_connection" class="page_item_out page_item_inverted"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
+						<li id="menu_item_connection" class="page_item_out page_item_inverted"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID);echo '?'.'page_id='.get_the_ID(); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
 					<?php endif; ?>
 				</ul>
 		    </div>
@@ -167,6 +166,7 @@
 
 					<input type="password" name="pwd" id="sidebar-user-pass" class="input" placeholder="<?php _e('Mot de passe', 'yproject'); ?>" />
 					<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="OK" />
+					<input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo get_the_ID();?>" />
 					<br />
 					<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
 					(<a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)
