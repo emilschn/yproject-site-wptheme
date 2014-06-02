@@ -47,14 +47,7 @@
 									locate_template( array("projects/single-stats-advanced-investments.php"), true );
 									break;
 								    case 'statistiques':
-									the_content();
-									if (isset($_GET["campaign_id"])) {
-									    $post_campaign = get_post($_GET["campaign_id"]);
-									    $upload_dir = wp_upload_dir();
-									    if (file_exists($upload_dir['basedir'] . '/projets/' . $post_campaign->post_name . '-stats.jpg')) { 
-										echo '<img src="'.$upload_dir['baseurl'] . '/projets/' . $post_campaign->post_name . '-stats.jpg" alt="Statistiques du projet" />';
-									    }
-									}
+									locate_template( array("projects/single-stats-public.php"), true );
 									break;
 								    default:
 									the_content();

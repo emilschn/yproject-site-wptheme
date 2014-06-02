@@ -663,7 +663,7 @@ div#home_bottom h1 {
     float: left;        
     width: 440px;
     padding: 0px 15px;
-    texts-align: center;
+    text-align: center;
 }
 
 #signup_submit {
@@ -1597,7 +1597,7 @@ footer span {
 
 /* PAGE INVESTIR */
 
-.form input[entype=multipart/form-data] {
+.form input {
     background: none repeat scroll 0 0 #333333 !important;
     color: #FFF !important;
     padding: 3px 8px;
@@ -1823,7 +1823,7 @@ background-image:url("images/jycrois_gris_rouge.png");
 
 .bbp-body a {
      color: #333333;
-     cwhite-space: inherit !important;
+     white-space: inherit !important;
 }
 
 .bbp-template-notice.info {
@@ -2221,7 +2221,7 @@ div, span, h1, h3, a,  ul, li, p {
     background:#f2f2f2 !important;
     padding: 10px !important;
     background:#F2F2F2 !important;
-    border-color:none !important;
+    border:none !important;
     color:#333333 !important;
     border-radius:0px !important;
     -moz-border-radius:0px !important;
@@ -2949,7 +2949,7 @@ margin-top: 20px;
     margin: 0;
     padding: 0;
     font-weight: bold;
-    font-style: Arial;
+    font-family: Arial;
     border-bottom: 0px;
 }
 #participate-button .description-discover{
@@ -3059,8 +3059,7 @@ height: 18px;
     background-image: url('http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/ui-lightness/images/ui-icons_222222_256x240.png');
 }
 .ui-dialog-titlebar-close.ui-corner-all.ui-state-hover{
-    background: initial;
-   border: none;
+    border: none;
 }
 .ui-dialog.ui-widget.ui-widget-content.ui-corner-all{
     padding: 0;
@@ -3092,7 +3091,6 @@ height: 18px;
     background-color: #F2F2F2;
     z-index: -11;
     text-align: center;
-    text-indent: 
 }
 #vote-form h1{
     font-family: BebasNeue;

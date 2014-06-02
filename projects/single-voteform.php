@@ -10,7 +10,7 @@ if (isset($_GET['campaign_id'])) {
 <?php
 if ($campaign->end_vote_remaining() > 0) {
 	if ( is_user_logged_in() ) :
-		function displayImpactSelect($name, $value, $min = 1, $max = 5) {
+		function ypcf_display_impact_select($name, $value, $min = 1, $max = 5) {
 			?>
 			<select name="<?php echo $name; ?>">
 				<?php for ($i = $min; $i <= $max; $i++) { ?>
@@ -40,9 +40,9 @@ if ($campaign->end_vote_remaining() > 0) {
 					<strong>Impacts et coh&eacute;rence du projet</strong><br />
 					<em>Comment &eacute;valuez-vous les <a id="scroll-to-utilite-societale" href="javascript:void(0);">impacts soci&eacute;taux</a> de ce projet ?</em><br />
 					<ul class="impact-list">
-					    <li><span>Economie</span> <?php displayImpactSelect('impact_economy', $impact_economy); ?></li>
-					    <li><span>Environnement</span> <?php displayImpactSelect('impact_environment', $impact_environment); ?></li>
-					    <li><span>Social</span> <?php displayImpactSelect('impact_social', $impact_social); ?></li>
+					    <li><span>Economie</span> <?php ypcf_display_impact_select('impact_economy', $impact_economy); ?></li>
+					    <li><span>Environnement</span> <?php ypcf_display_impact_select('impact_environment', $impact_environment); ?></li>
+					    <li><span>Social</span> <?php ypcf_display_impact_select('impact_social', $impact_social); ?></li>
 					    <li><span>Autre</span> <input type="text" name="impact_other" placeholder="Pr&eacute;ciser..." value="<?php if ($impact_other != '') {echo $impact_other;} ?>" /></li>
 					</ul>
 					

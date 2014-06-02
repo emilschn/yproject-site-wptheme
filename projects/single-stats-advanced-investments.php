@@ -1,51 +1,16 @@
 <?php 
-	$post_campaign = get_post($_GET['campaign_id']);
-	$campaign = atcf_get_campaign( $post_campaign );
-	$payments_data = $campaign->payments_data();
-	
-	$count_validate_investments = 0;
-	$count_age = 0;
-	$count_female = 0;
-	$count_invest = 0;
-	$amounts_array = array();
-	foreach ( $payments_data as $item ) {
-	    if (($item['status'] == 'publish') && (isset($item['mangopay_contribution']->IsSucceeded) && $item['mangopay_contribution']->IsSucceeded) && $item['signsquid_status'] == 'Agreed') {
-		$count_validate_investments++;
-		$invest_user = get_user_by('id', $item['user']);
-		$count_age += ypcf_get_age($invest_user->get('user_birthday_day'), $invest_user->get('user_birthday_month'), $invest_user->get('user_birthday_year'));
-		if ($invest_user->get('user_gender') == "female") $count_female++;
-		$count_invest += $item['amount'];
-		$amounts_array[] = $item['amount'];
-	    }
-	}
-	asort($amounts_array);
-	
-	$average_age = 0;
-	$percent_female = 0;
-	$percent_male = 0;
-	$average_invest = 0;
-	$median_invest = 0;
-	if ($count_validate_investments) {
-	    $average_age = round($count_age / $count_validate_investments, 1);
-	    $percent_female = round($count_female / $count_validate_investments * 100);
-	    $percent_male = 100 - $percent_female;
-	    $average_invest = round($count_invest / $count_validate_investments, 2);
-	    $median_invest = $amounts_array[0];
-	    if ($count_validate_investments > 2) $median_invest = $amounts_array[round(($count_validate_investments + 1) / 2) - 1];
-	}
-	    
+global $post;
+$current_user = wp_get_current_user();
+$current_user_id = $current_user->ID;
+$author_id = $post->post_author;
+if (($current_user_id == $author_id || current_user_can('manage_options')) && isset($_GET['campaign_id'])) {
+	locate_template( array("requests/investments.php"), true );
+	locate_template( array("projects/stats-investments-public.php"), true ); 
+	$investments_list = wdg_get_project_investments($_GET['campaign_id']);
+	print_investments($investments_list);
 ?>
-
-<h2>G&eacute;n&eacute;ral</h2>
-<strong><?php echo $count_validate_investments; ?></strong> investissements valid&eacute;s.<br />
-Les investisseurs ont <strong><?php echo $average_age; ?></strong> ans de moyenne.<br />
-Ce sont <strong><?php echo $percent_female; ?>%</strong> de femmes et <strong><?php echo $percent_male; ?>%</strong> d&apos;hommes.<br />
-<strong><?php echo $campaign->days_remaining(); ?></strong> jours restants.<br />
-Investissement moyen par personne : <strong><?php echo $average_invest; ?></strong>&euro;<br />
-Investissement m&eacute;dian : <strong><?php echo $median_invest; ?></strong>&euro;
-
-
-<h2>Liste des investisseurs</h2>
+		
+<h3>Liste des investisseurs</h3>
 <table class="wp-list-table" cellspacing="0">
     <thead style="background-color: #CCC;">
     <tr>
@@ -72,7 +37,7 @@ Investissement m&eacute;dian : <strong><?php echo $median_invest; ?></strong>&eu
     <tbody id="the-list">
 	<?php
 	$i = -1;
-	foreach ( $payments_data as $item ) {
+	foreach ( $investments_list['payments_data'] as $item ) {
 	    if ($item['status'] == 'publish' || $item['status'] == 'refunded') {
 		$i++;
 		$bgcolor = ($i % 2 == 0) ? "#FFF" : "#EEE";
@@ -95,3 +60,8 @@ Investissement m&eacute;dian : <strong><?php echo $median_invest; ?></strong>&eu
 	?>
     </tbody>
 </table>
+
+
+<?php
+}
+?>
