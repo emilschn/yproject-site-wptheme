@@ -4,16 +4,18 @@
     $stylesheet_directory_uri = get_stylesheet_directory_uri();
     /* Récupération des infos Facebook */
     global $facebook_infos;
+    require_once("_external/facebook/facebook.php");
     $cache_result = $WDG_cache_plugin->get_cache('facebook-count');
     if (false === $cache_result) {
-	    require_once("_external/facebook/facebook.php");
+	    
 	    $facebook = new Facebook(array(
 		    'appId'  => YP_FB_APP_ID,
 		    'secret' => YP_FB_SECRET,
 	    ));
 	    $fb_infos = $facebook->api(YP_FB_URL); 
-	    if ($fb_infos) $facebook_infos = $fb_infos['likes'];
-	    $WDG_cache_plugin->set_cache('facebook-count',$facebook_infos,60*60*24);
+	    if ($fb_infos) $cache_result= $fb_infos['likes'];
+	    
+	    $WDG_cache_plugin->set_cache('facebook-count',$cache_result,60*60*24);
     }
     $facebook_infos = $cache_result;
 	
@@ -37,8 +39,8 @@
 			    ->buildOauth($apiUrl, $requestMethod)
 			    ->performRequest();
 	    $followers = json_decode($response);
-	    if ($followers && isset($followers->followers_count)) $twitter_infos = $followers->followers_count;
-	    $WDG_cache_plugin->set_cache('twitter-count',$twitter_infos,60*60*24);
+	    if ($followers && isset($followers->followers_count)) $cache_result = $followers->followers_count;
+	    $WDG_cache_plugin->set_cache('twitter-count',$cache_result,60*60*24);
     }
     $twitter_infos = $cache_result;
 
@@ -143,7 +145,7 @@
 						
 					<?php else : ?>
 						<?php /* Menu Connexion */ $page_connexion = get_page_by_path('connexion'); ?>
-						<li id="menu_item_connection" class="page_item_out page_item_inverted"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID);echo '?'.'page_id='.get_the_ID(); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
+						<li id="menu_item_connection" class="page_item_out page_item_inverted"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID);?>"><?php _e('Connexion', 'yproject'); ?></a></li>
 					<?php endif; ?>
 				</ul>
 		    </div>

@@ -4,7 +4,6 @@ if ( ! is_object( $campaign ) ) $campaign = atcf_get_campaign( $post );
 
 $post_camp = get_post($_GET['campaign_id']);
 $post = $post_camp;
-
 $name = $post_camp->ID.'-2';
 
 if ($name!='') {

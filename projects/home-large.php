@@ -77,6 +77,10 @@
 						?>
 					</div>
 					<div class="description-logos-item">
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" />
+						<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
+					</div>
+					<div class="description-logos-item">
                         <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" />
                         <?php echo $days_remaining; ?>
                     </div>
@@ -85,10 +89,7 @@
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo Cible" />
 						<?php echo $campaign->minimum_goal(true); ?>
 					</div>	
-					<div class="description-logos-item">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" />
-						<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
-					</div>
+					
 				</div>
 
 				<?php if ($campaign_status == 'collecte'): ?>
