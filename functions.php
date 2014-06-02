@@ -275,6 +275,35 @@ function print_user_avatar($user_id){
 		    break;
 	    }
 }
+function get_user_avatar($user_id){
+		
+	    $bp = buddypress();
+	    $bp->avatar->full->default = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
+	    
+	    $profile_type = "";
+	    $google_meta = get_user_meta($user_id, 'social_connect_google_id', true);
+	    if (isset($google_meta) && $google_meta != "") $profile_type = ""; //TODO : Remplir avec "google" quand on gèrera correctement
+	    $facebook_meta = get_user_meta(bp_displayed_user_id(), 'social_connect_facebook_id', true);
+	    if (isset($facebook_meta) && $facebook_meta != "") $profile_type = "facebook";
+	    
+	    $url = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
+	    switch ($profile_type) {
+		case "google":
+		    $meta_explode = explode("id?id=", $google_meta);
+		    $social_id = $meta_explode[1];
+		    $url = "http://plus.google.com/s2/photos/profile/" . $social_id . "?sz=149";
+		    return '<img src="' .$url . '" width="150"/>';
+		    break;
+		case "facebook":
+		    $url = "https://graph.facebook.com/" . $facebook_meta . "/picture?type=normal";
+		    return '<img src="' .$url . '" width="150"/>';
+		    break;
+		default :
+		    //bp_displayed_user_avatar( 'type=full' );
+		    return '<img src="'.$url.'" width="150" />';
+		    break;
+	    }
+}
 function update_jy_crois(){
 	global $wpdb, $post;
 	$table_jcrois = $wpdb->prefix . "jycrois";
@@ -321,4 +350,24 @@ function update_jy_crois(){
     	echo $wpdb->get_var( "SELECT count(campaign_id) FROM $table_jcrois WHERE campaign_id = $campaign_id" );
 }
 add_action( 'wp_ajax_update_jy_crois', 'update_jy_crois' );
+
+function comment_blog_post(){
+	global $wpdb, $post;
+	// Construction des urls utilisés dans les liens du fil d'actualité
+	// url d'une campagne précisée par son nom 
+	$post_title = $post->post_title;
+	$url_blog = '<a href="'.get_permalink( $post->ID ).'">'.$post_title.'</a>';
+	//url d'un utilisateur précis
+	$user_id                = wp_get_current_user()->ID;
+	$user_display_name      = wp_get_current_user()->display_name;
+	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '"> ' . $user_display_name . '</a>';
+	$user_avatar=get_user_avatar($user_id);
+
+	bp_activity_add(array (
+		'component' => 'profile',
+		'type'      => 'jycrois',
+		'action'    => $user_avatar.' '.$url_profile.' a commenté '.$url_blog
+	    ));
+}
+add_action('comment_post','comment_blog_post');
 ?>

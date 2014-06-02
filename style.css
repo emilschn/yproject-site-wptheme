@@ -722,6 +722,18 @@ div#home_bottom h1 {
     white-space: nowrap;
     display: inline-block;
 }
+.activity-header img{
+    width: 15px;
+    height: auto;
+    margin-right: 5px;
+}
+.time-since, .activity-time-since{
+    pointer-events: none;
+    cursor: default;
+    font-size: 13px;
+    font-style : italic;
+}
+
 /* FIN ACTIVITY LIST */
 
 /* ACCUEIL :: BLOG */
@@ -1767,7 +1779,7 @@ background-image:url("images/jycrois_gris_rouge.png");
 }
 
 #bbp_search_submit {
-    background-color: #FF494C;
+    background-color: #2B2C2C;
     border: medium none;
     color: #FFF;
     text-transform: uppercase;
@@ -1795,7 +1807,7 @@ background-image:url("images/jycrois_gris_rouge.png");
 }
 
 #bbp_topic_submit {
-   background-color: #FF494C;
+   background-color: #2B2C2C;
     border: medium none;
     color: #FFFFFF;
     padding: 3px 10px;

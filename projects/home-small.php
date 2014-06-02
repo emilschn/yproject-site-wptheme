@@ -5,36 +5,7 @@ function print_vote_post($vote_post,$is_right_project){
 	<div class="home-small-project status-vote <?php if ($is_right_project){echo "home-small-project-right";$is_right_project=false;}else{ echo "home-small-project-left"; $is_right_project=true;}?>">
 		<h2><a href="<?php echo get_permalink($vote_post->ID); ?>"><?php echo $vote_post->post_title; ?></a></h2>
 		<div class="description-separator first-description-separator"></div>
-		<?php 
-		$video_element = '';
-		$img_src = '';
-		if ($campaign->video() == '') {
-			$attachments = get_posts( array(
-				'post_type' => 'attachment',
-				'post_parent' => $vote_post->ID,
-				'post_mime_type' => 'image'
-				));
-			$image_obj = '';
-			//Si on en trouve bien une avec le titre "image_home" on prend celle-là
-			foreach ($attachments as $attachment) {
-				if ($attachment->post_title == 'image_home') $image_obj = wp_get_attachment_image_src($attachment->ID, "full");
-			}
-			//Sinon on prend la première image rattachée à l'article
-			if ($image_obj == '') $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
-			if ($image_obj != '') $img_src = $image_obj[0];
-			
-		//Sinon on utilise l'objet vidéo fourni par wordpress
-		} else {
-			$video_element = wp_oembed_get($campaign->video(), array('width' => 440));
-		}
-		?>
-<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?> >
-			<?php echo $video_element;
-				if ($video_element == '') { ?>
-					<div class="vote-banner"></div>
-				<?php }
-			 ?>
-		</div>
+		
 			<a href="<?php echo get_permalink($vote_post->ID); ?>">
 				<?php 
 				if($is_right_project){//si a gauche
@@ -73,17 +44,52 @@ function print_vote_post($vote_post,$is_right_project){
 						<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
 					</div>
 					<div class="description-logos-item">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo Cible" />
-						<?php echo round($campaign->minimum_goal(true), 0, PHP_ROUND_HALF_UP).' €'; ?>
-					</div>	
+                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" />
+                        <?php echo $campaign->days_remaining(); ?>
+                    </div>
 			</div>
 
 		</div>
-		<div class="description-separator "></div>
+		<?php 
+		$video_element = '';
+		$img_src = '';
+		if ($campaign->video() == '') {
+			$attachments = get_posts( array(
+				'post_type' => 'attachment',
+				'post_parent' => $vote_post->ID,
+				'post_mime_type' => 'image'
+				));
+			$image_obj = '';
+			//Si on en trouve bien une avec le titre "image_home" on prend celle-là
+			foreach ($attachments as $attachment) {
+				if ($attachment->post_title == 'image_home') $image_obj = wp_get_attachment_image_src($attachment->ID, "full");
+			}
+			//Sinon on prend la première image rattachée à l'article
+			if ($image_obj == '') $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
+			if ($image_obj != '') $img_src = $image_obj[0];
+			
+		//Sinon on utilise l'objet vidéo fourni par wordpress
+		} else {
+			$video_element = wp_oembed_get($campaign->video(), array('width' => 440));
+		}
+		?>
+<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>');clear: both;"<?php } ?> >
+			<?php echo $video_element;
+				if ($video_element == '') { ?>
+					<div class="vote-banner"></div>
+				<?php }
+			 ?>
+		</div>
+		<div class="description-separator " <?php if($video_element!='')echo "style='margin-top: 95px;'";?>></div>
 		<a href="<?php echo get_permalink($vote_post->ID); ?>" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter sur ce projet ici<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 	</div>
 
 <?php return $is_right_project;} ?>
+
+
+
+
+
 		
 <?php
  function print_preview_post($preview_post,$is_right_project){

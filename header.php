@@ -6,7 +6,7 @@
     global $facebook_infos;
     $cache_result = $WDG_cache_plugin->get_cache('facebook-count');
     if (false === $cache_result) {
-	    require_once("_external/facebook/facebook.php");
+		require_once("_external/facebook/facebook.php");
 	    $facebook = new Facebook(array(
 		    'appId'  => YP_FB_APP_ID,
 		    'secret' => YP_FB_SECRET,
