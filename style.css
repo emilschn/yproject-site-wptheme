@@ -40,7 +40,7 @@ body a {
 }
 
 #content{
-    overflow-x:hidden;
+    overflow:hidden;
 }
 .center {
     width: 960px;
@@ -2634,7 +2634,6 @@ text-transform: uppercase;
     margin: auto;
     top: 107px;
     position: absolute;
-    background-image: url("images/fond_projet.png");
    
 }
 #head-image #img-container{
@@ -2681,6 +2680,7 @@ text-transform: uppercase;
     left: 0px;
 }
 #head-content img{
+    top: -15px;
     left: -70px;
     position: relative;
     z-index: -1;

@@ -237,7 +237,7 @@ WDGProjectPageFunctions=(function($) {
 	return {
 		currentDiv:0,
 		initUI:function() {
-			$('.projects-desc-content').each(function(){WDGProjectPageFunctions.hideOrShow(this)});
+			$('.projects-desc-content').each(function(){WDGProjectPageFunctions.initClick(this)});
 			$('.project-content-icon').click(function(){
 				var contentDiv = $("#project-content-" + $(this).data("content"));
 				contentDiv.trigger("click"); 	
@@ -372,37 +372,40 @@ WDGProjectPageFunctions=(function($) {
 		    }, 500 );
 		    $(".description-discover").css('background-color','#333');
 		},
+		
 		//Description projet
+		initClick:function(descContentElement){
+	  		if ($(descContentElement).find('p').length > 1) {
+	  			$(descContentElement).css("cursor", "pointer");
+		  		$(descContentElement).find('p:lt(1)').append('<div class="projects-more" data-value="'+WDGProjectPageFunctions.currentDiv+'" >Lire plus !</div>');
+		  		$(descContentElement).click(function(){
+					var projectContent = $(this);
+					var projectMore = $(this).find('.projects-more');
+					if (projectMore.is(':visible')) {
+						projectMore.hide(400,function(){
+							projectContent.find('p').slideDown(400);
+						});
+						WDGProjectPageFunctions.hideOthers(projectMore.attr("data-value"));
+					} else {
+						WDGProjectPageFunctions.hideOthers(-1);
+					}
+				});
+	  		}
+	   		$(descContentElement).find('p:gt(0)').hide();
+	   		WDGProjectPageFunctions.currentDiv++;
+   		},
+
 		hideOthers:function(currentDiv){
-			var index=0;
+			var index = 0;
 			jQuery.noConflict();
 	 		jQuery('.projects-desc-content').each(function(){
-		 		if(index!=currentDiv){
+		 		if (index != currentDiv) {
 		 			jQuery(this).find('.projects-more').slideDown(200);
 		 			jQuery(this).find('p:gt(0)').slideUp(400);
-		 		
 		 		}
 		 		index++;
 			});
-		},
-
-		hideOrShow:function(thisthis){
-	  		if($(thisthis).find('p').length>1){
-	  			$(thisthis).css("cursor", "pointer");
-		  		$(thisthis).find('p:lt(1)').append('<div class="projects-more" data-value="'+WDGProjectPageFunctions.currentDiv+'" >Lire plus! </div>');
-		  		$(thisthis).click(function(){
-						project_content=$(this);
-						project_more=$(this).find('.projects-more');
-						project_more.hide(400,function(){
-							project_content.find('p').slideDown(400);
-						});
-						WDGProjectPageFunctions.hideOthers(project_more.attr("data-value"));
-				});
-	  		}
-	   		$(thisthis).find('p:gt(0)').hide();
-	   		WDGProjectPageFunctions.currentDiv++;
-   		}
-
+		}
 	}
 })(jQuery);
 

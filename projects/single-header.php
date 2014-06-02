@@ -191,15 +191,15 @@ $vote_status = $campaign->campaign_status();
 				</div>
 				</a>
 			</div>
+
+			<div id="white-background" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>></div>
+
+			<?php if ($vote_status == 'vote') { ?>
+			<div id="vote-form">
+				<?php require_once('single-voteform.php'); ?>
+			</div> 
+			<?php } ?>
 		</div>
-
-		<div id="white-background" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>></div>
-
-		<?php if ($vote_status == 'vote') { ?>
-		<div id="vote-form">
-			<?php require_once('single-voteform.php'); ?>
-		</div> 
-		<?php } ?>
 				    
 		<div id="dialog" title="Partager ce projet">
 			<?php if (class_exists('Sharing_Service')) {
