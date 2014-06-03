@@ -1944,9 +1944,9 @@ background-image:url("images/jycrois_gris_rouge.png");
 }
 #vote-form{
     position: absolute;
-    bottom: 0px;
+    top: -350px;
     width: 340px;
-    height: 500px;
+    height: auto;
     background-color: #F2F2F2;
     z-index: -11;
     text-align: center;
@@ -2028,11 +2028,10 @@ background-image:url("images/jycrois_gris_rouge.png");
 
 
 /*FORMULAIRE MODIF COMPTE*/
-
 #form_infoperso_projet {
-        background:#F2F2F2;
-        margin: 20px;
-       padding: 30px;
+    background:#F2F2F2;
+    margin: 20px;
+    padding: 30px;
 }
 
 /*INVESTISSEMENT*/
@@ -2043,6 +2042,7 @@ background-image:url("images/jycrois_gris_rouge.png");
     color: #FFFFFF;
     padding: 3px 8px;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 .invest_step1_generalities {
@@ -3094,34 +3094,6 @@ height: 18px;
     top: 0px;
     background-color: white;
     z-index: -2;
-}
-#vote-form{
-    position: absolute;
-    bottom: 0px;
-    width: 340px;
-    height: 685px;
-    background-color: #F2F2F2;
-    z-index: -11;
-    text-align: center;
-}
-#vote-form h1{
-    font-family: BebasNeue;
-    text-transform: uppercase;
-    font-size: 35px;
-}
-#vote-form h2{
-    font-size: 17px;
-    text-align: justify;
-    margin-left: 15px;
-    margin-bottom: 0px;
-}
-#vote-form h3{
-    font-style: italic;
-    margin-top: 0;
-    text-align: justify;
-    font-size: 13px;
-    margin-left: 15px;
-    margin-right: 35px;
 }
 .community-desc{
     margin-top: 20px;

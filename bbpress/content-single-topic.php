@@ -6,16 +6,19 @@
  * @package bbPress
  * @subpackage Theme
  */
-    global $post;
+    global $post, $campaign_id;
     $post_topic = $post;
     $post_forum = get_post($post_topic->post_parent);
     $post_project = get_post($post_forum->post_title);
     $campaign = atcf_get_campaign( $post_project );
+    $campaign_id = $campaign->ID;
     
     $post = $post_project;
 ?>
-<?php require_once(get_theme_root() . '/yproject/projects/single-admin-bar.php'); ?>
-<?php require_once(get_theme_root() . '/yproject/projects/single-header.php'); ?>
+
+<?php locate_template( array( 'projects/single-admin-bar.php' ), true ); ?>
+
+<?php locate_template( array( 'projects/single-header.php' ), true ); ?>
 
 <div id="post_bottom_bg">
 	<div id="post_bottom_content" class="center">
@@ -60,13 +63,6 @@
 				<?php do_action( 'bbp_template_after_single_topic' ); ?>
 
 			</div>
-		</div>
-
-		<div class="left post_bottom_infos">
-			<?php 
-			$post = $post_project;
-			require_once(get_theme_root() . '/yproject/projects/single-sidebar.php');
-			?>
 		</div>
 
 		<div style="clear: both"></div>

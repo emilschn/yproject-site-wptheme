@@ -368,7 +368,7 @@ WDGProjectPageFunctions=(function($) {
 
 		print_vote_form:function(){
 		    $("#vote-form").animate({ 
-	        	bottom: "-686px"
+	        	top: "370px"
 		    }, 500 );
 		    $(".description-discover").css('background-color','#333');
 		},

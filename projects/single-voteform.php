@@ -28,10 +28,12 @@ if ($campaign->end_vote_remaining() > 0) {
 			<div class="light">
 				<?php
 				global $vote_errors;
+				if (isset($vote_errors)) {
 				foreach ($vote_errors as $vote_error_message) {
 				?>
 					<span class="errors"><?php echo $vote_error_message; ?></span><br />
 				<?php
+				}
 				}
 				?>
 					

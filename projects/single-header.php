@@ -1,15 +1,20 @@
 <?php 
-global $campaign_id_param, $campaign_id, $WDG_cache_plugin;
+global $campaign_id_param, $campaign_id, $WDG_cache_plugin, $stylesheet_directory_uri;
+$stylesheet_directory_uri = get_stylesheet_directory_uri();
 date_default_timezone_set("Europe/London");
 $campaign_id_param = '?campaign_id=';
 if (isset($_GET['campaign_id'])) {
 	$campaign_id_param .= $_GET['campaign_id'];
 	$post = get_post($_GET['campaign_id']);
 	$campaign = atcf_get_campaign( $post );
-} else  {
+	
+} else if (isset($campaign_id)) {
+	$post = get_post($campaign_id);
+	$campaign = atcf_get_campaign( $post );
+	    
+} else {
 	$campaign_id_param .= $post->ID;
 }
-get_header();
 $vote_status = $campaign->campaign_status(); 
 ?>
 
@@ -124,13 +129,13 @@ $vote_status = $campaign->campaign_status();
 				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) { ?> 
 					<div id="invest-button">
 						<?php $page_invest = get_page_by_path('investir'); ?>
-						<a href="<?php echo get_permalink($page_invest->ID); ?><?php echo $campaign_id_param; ?>&invest_start=1" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Investir sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+						<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&invest_start=1" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Investir sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 					</div>
 
 				<?php } else if ($vote_status == 'preview'){ ?>
 						<div id="participate-button">
 						<?php $page_forum = get_page_by_path('forum'); ?>
-						<a href="<?php echo get_permalink($page_forum->ID); ?><?php echo $campaign_id_param; ?>" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Participer au forum<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+						<a href="<?php echo get_permalink($page_forum->ID) . $campaign_id_param; ?>" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Participer au forum<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 					</div>
 
 				<?php } else if ($vote_status == 'vote') {
@@ -220,7 +225,7 @@ $vote_status = $campaign->campaign_status();
 		</div>
 	</div>
 	
-	<div id="head-image"<?php if($can_modify){echo ' style="margin-top: 36px"';}?>>
+	<div id="head-image"<?php global $can_modify; if ($can_modify) { echo ' style="margin-top: 36px"'; } ?>>
 		<div class="center">
 			<div id="head-content">
 				<?php
