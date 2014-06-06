@@ -93,7 +93,8 @@ $vote_status = html_entity_decode($campaign->vote());
 				?>
 	</div>
 </div>
-<div class="part-title-separator" >
+<div id="project-description-title-padding"></div>
+<div class="part-title-separator">
 	<span class="part-title"> 
 		Description du projet
 	</span>

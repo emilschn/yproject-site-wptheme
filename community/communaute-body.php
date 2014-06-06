@@ -1,7 +1,7 @@
-
-<?php the_content(); ?>
-
-
+<?php 
+the_content(); 
+date_default_timezone_set('Atlantic/Azores');
+?>
 
 <h2 class="underlined">Fil d&apos;activit&eacute;</h2>
 <ul class="com-activity-list">
@@ -13,4 +13,6 @@
 	endif; ?>
 </ul>
 <?php $page_activities = get_page_by_path('activite'); ?>
-		<a href="<?php echo get_permalink($page_activities->ID); ?>">Plus d&apos;activit&eacute;</a>&nbsp;&gt;&gt;
+<a href="<?php echo get_permalink($page_activities->ID); ?>">Plus d&apos;activit&eacute;</a>&nbsp;&gt;&gt;
+
+<?php date_default_timezone_set("Europe/Paris"); ?>

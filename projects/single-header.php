@@ -9,6 +9,7 @@ if (isset($_GET['campaign_id'])) {
 	$campaign = atcf_get_campaign( $post );
 	
 } else if (isset($campaign_id)) {
+	$campaign_id_param .= $campaign_id;
 	$post = get_post($campaign_id);
 	$campaign = atcf_get_campaign( $post );
 	    
@@ -265,6 +266,7 @@ $vote_status = $campaign->campaign_status();
 					
 					$forum = get_page_by_path('forum');
 					$forum_link = get_permalink($forum->ID).$campaign_id_param;
+					$forum_link_2 = site_url('forums/forum') . '/' . $campaign_id . '-2/';
 					
 					$stats_page = get_page_by_path('statistiques');
 					$stats_link = get_permalink($stats_page->ID).$campaign_id_param;
@@ -281,12 +283,12 @@ $vote_status = $campaign->campaign_status();
 					<ul>
 						<li><a href="<?php echo $project_link; ?>" <?php if($current_page==$project_link) echo 'class="current"'; ?>>Le projet</a></li>
 						<li><a href="<?php echo $news_link; ?>" <?php if($current_page==$news_link) echo 'class="current"'; ?>>Actualit&eacute;<?php echo $nb_cat; ?></a></li>
-						<li><a href="<?php echo $forum_link; ?>" <?php if($current_page==$forum_link) echo 'class="current"'; ?>>Forum</a></li>
+						<li><a href="<?php echo $forum_link; ?>" <?php if($current_page==$forum_link || $current_page==$forum_link_2) echo 'class="current"'; ?>>Forum</a></li>
 						<?php if ($show_stat_button) { ?>
 						<li><a href="<?php echo $stats_link; ?>" <?php if($current_page==$stats_link) echo 'class="current"'; ?>>Statistiques</a></li>
 						<?php } ?>
 					</ul>
-				<nav>
+				</nav>
 			</div>
 		</div>
 	    

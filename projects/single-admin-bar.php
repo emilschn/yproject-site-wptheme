@@ -3,9 +3,12 @@ global $can_modify;
 // La barre d'admin n'apparait que pour l'admin du site et pour l'admin de la page
 $current_user = wp_get_current_user();
 $current_user_id = $current_user->ID;
-if (isset($_GET['campaign_id'])) $campaign_id = $_GET['campaign_id'];
-else $campaign_id = get_the_ID();
-$can_modify=false;
+global $campaign_id;
+if (!isset($campaign_id)) {
+    if (isset($_GET['campaign_id'])) $campaign_id = $_GET['campaign_id'];
+    else $campaign_id = get_the_ID();
+}
+$can_modify = false;
 $old_post = $post;
 $post = get_post($campaign_id);
 if ($current_user_id == $post->post_author || current_user_can('manage_options')){$can_modify=true;}

@@ -45,7 +45,7 @@ function print_vote_post($vote_post,$is_right_project){
 					</div>
 					<div class="description-logos-item">
                         <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" />
-                        <?php echo $campaign->days_remaining(); ?>
+                        <?php echo $campaign->end_vote_remaining(); ?>
                     </div>
 			</div>
 

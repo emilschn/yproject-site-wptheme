@@ -247,10 +247,12 @@ WDGProjectPageFunctions=(function($) {
 			$("#btn-validate_project-true").click(function(){ 
 			    $("#validate_project-true").show();
 			    $("#validate_project-false").hide();
+			    $("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 			});
 			$("#btn-validate_project-false").click(function(){ 
 			    $("#validate_project-false").show();
 			    $("#validate_project-true").hide();
+			    $("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 			});
 
 			$("#jcrois_pas").click(function () {
@@ -370,7 +372,8 @@ WDGProjectPageFunctions=(function($) {
 		    $("#vote-form").animate({ 
 	        	top: "370px"
 		    }, 500 );
-		    $(".description-discover").css('background-color','#333');
+		    $(".description-discover").css('background-color', '#7B7B7B');
+		    $("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 		},
 		
 		//Description projet

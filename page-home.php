@@ -212,14 +212,14 @@ if(false===$cache_result){
 	    	<div class="home-activity-list-container">
 				<ul class="home-activity-list">
 					<?php // Affichage du fil d'actualité
-						date_default_timezone_set("Europe/London");
 						if ( bp_has_activities( bp_ajax_querystring( 'activity' ).'&max=10' ) ) :
+						date_default_timezone_set('Atlantic/Azores');
 		    				while ( bp_activities() ) : bp_the_activity();
 								locate_template( array( 'activity/entry.php' ), true, false );
 		    				endwhile;
+						date_default_timezone_set("Europe/London");
 						endif; 
-		?>
-					
+					?>
 				</ul>
 	    	</div>
 	    	<div class="home-blog-list-container">
