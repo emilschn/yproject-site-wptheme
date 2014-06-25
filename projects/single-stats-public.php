@@ -1,5 +1,10 @@
-<?php if (isset($_GET["campaign_id"])) { ?>
-<?php global $stylesheet_directory_uri; ?>
+<?php 
+if (isset($_GET["campaign_id"])) { 
+	global $WDG_cache_plugin, $stylesheet_directory_uri;
+	$cache_result = $WDG_cache_plugin->get_cache('public-stats-' . $_GET["campaign_id"]);
+	if ($cache_result === false) {
+		ob_start();
+?>
 
 <h2 class="expandator" data-target="votes">Votes <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" /></h2>
 <div id="extendable-votes" class="expandable">
@@ -27,4 +32,11 @@
 ?>
 </div>
     
-<?php } ?>
+<?php 
+		$cache_result = ob_get_contents();
+		$WDG_cache_plugin->set_cache('public-stats-' . $_GET["campaign_id"], $cache_result, 60*30);
+		ob_end_clean();
+	}
+	echo $cache_result;
+} 
+?>

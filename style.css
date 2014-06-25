@@ -39,9 +39,6 @@ body a {
 	text-decoration: none;
 }
 
-#content{
-    overflow:hidden;
-}
 .center {
     width: 960px;
     margin: auto;
@@ -114,6 +111,10 @@ img { border: 0; }
 
 h4 {
     font-weight: normal;
+}
+
+.two-thirds {
+	width: 650px;
 }
 
 .arrow-down {

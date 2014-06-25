@@ -18,7 +18,7 @@
 	    
 	    <div id="post_bottom_bg">
 		<div id="post_bottom_content" class="center">
-		    <div class="left post_bottom_desc">
+		    <div class="left <?php if ($category[0]->slug == 'wedogood') echo 'two-thirds'; ?>">
 
 			<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			    <div class="post-content">
@@ -26,13 +26,13 @@
 				<h2 class="posttitle"><?php the_title(); ?></h2>
 				<p class="date"><?php echo get_the_date(); ?></p>
 				<?php the_content(); ?>
-				<?php comments_template(); ?>
+				<?php if ($category[0]->slug == 'wedogood') comments_template(); ?>
 			    </div>
 			</div>
 
 		    </div>
+		    <?php if ($category[0]->slug == 'wedogood') locate_template( array("community/community-menu.php"), true ); ?>
 		</div>
-		<?php locate_template( array("community/community-menu.php"), true ); ?>
 		<div style="clear: both"></div>
 	    </div>
 

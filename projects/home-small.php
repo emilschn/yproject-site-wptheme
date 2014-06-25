@@ -1,5 +1,8 @@
 <?php
 function print_vote_post($vote_post,$is_right_project){
+	global $post;
+	$temp_post = $post;
+	$post = $vote_post;
 	$campaign = atcf_get_campaign( $vote_post );
         ?>
 	<div class="home-small-project status-vote <?php if ($is_right_project){echo "home-small-project-right";$is_right_project=false;}else{ echo "home-small-project-left"; $is_right_project=true;}?>">
@@ -27,26 +30,24 @@ function print_vote_post($vote_post,$is_right_project){
 				</a>
 			</div>
 		    
-		    
-
-				<div class="description-logos">
-					<div class="description-logos-item">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="Logo France" />
-						<?php 
-						$campaign_location = $campaign->location();
-						$exploded = explode(' ', $campaign_location);
-						if (count($exploded) > 1) $campaign_location = $exploded[0];
-						echo (($campaign_location != '') ? $campaign_location : 'France'); 
-						?>
-					</div>
-					<div class="description-logos-item" style="width: 45px;">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" />
-						<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
-					</div>
-					<div class="description-logos-item">
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" />
-                        <?php echo $campaign->end_vote_remaining(); ?>
-                    </div>
+			<div class="description-logos">
+				<div class="description-logos-item">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="Logo France" /><br />
+					<?php 
+					$campaign_location = $campaign->location();
+					$exploded = explode(' ', $campaign_location);
+					if (count($exploded) > 1) $campaign_location = $exploded[0];
+					echo (($campaign_location != '') ? $campaign_location : 'France'); 
+					?>
+				</div>
+				<div class="description-logos-item" style="width: 45px;">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" /><br />
+					<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
+				</div>
+				<div class="description-logos-item">
+				    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" /><br />
+				    <?php echo $campaign->end_vote_remaining(); ?>
+				</div>
 			</div>
 
 		</div>
@@ -84,7 +85,11 @@ function print_vote_post($vote_post,$is_right_project){
 		<a href="<?php echo get_permalink($vote_post->ID); ?>" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter sur ce projet ici<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 	</div>
 
-<?php return $is_right_project;} ?>
+<?php
+    $post = $temp_post;
+    return $is_right_project; 
+}
+?>
 
 
 
@@ -93,6 +98,9 @@ function print_vote_post($vote_post,$is_right_project){
 		
 <?php
  function print_preview_post($preview_post,$is_right_project){
+	global $post;
+	$temp_post = $post;
+	$post = $preview_post;
 	$campaign = atcf_get_campaign( $preview_post );
 	?>
 
@@ -107,29 +115,21 @@ function print_vote_post($vote_post,$is_right_project){
 				</a>
 			</div>
 		    
-		    
-
-				<div class="description-logos">
-					<div class="description-logos-item">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="Logo France" />
-						<?php 
-						$campaign_location = $campaign->location();
-						$exploded = explode(' ', $campaign_location);
-						if (count($exploded) > 1) $campaign_location = $exploded[0];
-						echo (($campaign_location != '') ? $campaign_location : 'France'); 
-						?>
-					</div>
-					<div class="description-logos-item" style="width: 45px;">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" />
-						<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
-					</div>
-				
-				
-
-				
+			<div class="description-logos">
+				<div class="description-logos-item">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="Logo France" /><br />
+					<?php 
+					$campaign_location = $campaign->location();
+					$exploded = explode(' ', $campaign_location);
+					if (count($exploded) > 1) $campaign_location = $exploded[0];
+					echo (($campaign_location != '') ? $campaign_location : 'France'); 
+					?>
+				</div>
+				<div class="description-logos-item" style="width: 45px;">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" /><br />
+					<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
+				</div>
 			</div>
-			
-			
 		</div>
 		<?php 
 		$video_element = '';
@@ -180,7 +180,11 @@ function print_vote_post($vote_post,$is_right_project){
 	</div>
 	
 
-<?php return $is_right_project; } ?>
+<?php
+    $post = $temp_post;
+    return $is_right_project; 
+}
+?>
 
 <?php             
 function print_empty_post(){

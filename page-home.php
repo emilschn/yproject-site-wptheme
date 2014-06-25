@@ -50,82 +50,82 @@ if(false===$cache_result){
 	<?php 
 		$cache_result=$WDG_cache_plugin->get_cache('home-collecte-projects');
 		if(false===$cache_result){
-		ob_start();
-		$nb_collecte_projects=count(query_projects_collecte()); 
-		if($nb_collecte_projects>0){?>
-	<div class="part-title-separator" >
-		<span class="part-title"> 
-			En cours de financement
-		</span>
-	</div>
-	<?php } ?>
-	
-	<div id="home_top" class="center">
-		<div class="padder">
-			<?php require('projects/home-large.php'); ?>
-		</div>
-	</div>
-	<?php $cache_result=ob_get_contents();
-		 $WDG_cache_plugin->set_cache('home-collecte-projects',$cache_result,2*60*60);
-	ob_end_clean();
-	}
-	echo $cache_result; 
-		?>
+		    ob_start();
+		    $nb_collecte_projects=count(query_projects_collecte()); 
+		    if($nb_collecte_projects>0){?>
+			<div class="part-title-separator" >
+				<span class="part-title"> 
+					En cours de financement
+				</span>
+			</div>
+		    <?php } ?>
 
-	    <?php 	$cache_result=$WDG_cache_plugin->get_cache('home-small-projects');
-			if(false===$cache_result){
-			ob_start();
-                require('projects/home-small.php');
-                $is_right_project=true;
-				$preview_projects=query_projects_preview();
-                $vote_projects= query_projects_vote();
-				$nb_vote_projects=count($vote_projects);
-				$nb_preview_projects=count($preview_projects);
-				$nb_total_projects=$nb_vote_projects+$nb_preview_projects;
-                if($nb_total_projects>0){
+		    <div id="home_top" class="center">
+			    <div class="padder">
+				    <?php require('projects/home-large.php'); ?>
+			    </div>
+		    </div>
+		<?php 
+		    $cache_result=ob_get_contents();
+		    $WDG_cache_plugin->set_cache('home-collecte-projects',$cache_result,2*60*60);
+		    ob_end_clean();
+		}
+		echo $cache_result; 
+		
+		$cache_result=$WDG_cache_plugin->get_cache('home-small-projects');
+		if(false===$cache_result){
+		    ob_start();
+		    require('projects/home-small.php');
+		    $is_right_project=true;
+		    $preview_projects=query_projects_preview();
+		    $vote_projects = query_projects_vote();
+		    $nb_vote_projects=count($vote_projects);
+		    $nb_preview_projects=count($preview_projects);
+		    $nb_total_projects=$nb_vote_projects+$nb_preview_projects;
+		    if($nb_total_projects>0){
 				?>
                 	<div class="part-title-separator">
                         <span class="part-title"> 
                             Prochainement
 						</span>
                     </div>
-                    <div  class="center">
-						<div class="padder">
-					<?php
-                        $nb_printed_post=0;
-                        $is_last_post=false;
-						if ($nb_vote_projects>0) {
-							foreach ($vote_projects as $vote_post) {
-                                $nb_printed_post++;
-                                if($nb_printed_post==$nb_total_projects&&$nb_total_projects%2!=0){
-                               		$is_right_project=false;
-                                 	$is_last_post=true;
-                                }
-                                $is_right_project=print_vote_post($vote_post,$is_right_project);
-							}
-                            if($is_last_post)print_empty_post ();
-						}
-						if ($nb_preview_projects>0) {
-							foreach ($preview_projects as $preview_post) {
-                                $nb_printed_post++;
-                                if($nb_printed_post==$nb_total_projects&&$nb_total_projects%2!=0){
-                                	$is_right_project=false;
-                                    $is_last_post=true;
-                                }
-                                $is_right_project=print_preview_post($preview_post,$is_right_project);
-                            }
-                            if($is_last_post) print_empty_post();
-                        }
-                    ?>
+                    <div class="center">
+			<div class="padder">
+			    <?php
+				$nb_printed_post=0;
+				$is_last_post=false;
+				if ($nb_vote_projects>0) {
+				    foreach ($vote_projects as $vote_post) {
+					$nb_printed_post++;
+					if($nb_printed_post==$nb_total_projects&&$nb_total_projects%2!=0){
+					    $is_right_project=false;
+					    $is_last_post=true;
+					}
+					$is_right_project=print_vote_post($vote_post,$is_right_project);
+				    }
+				    if($is_last_post) print_empty_post();
+				}
+				if ($nb_preview_projects>0) {
+				    foreach ($preview_projects as $preview_post) {
+					$nb_printed_post++;
+					if($nb_printed_post==$nb_total_projects&&$nb_total_projects%2!=0){
+					    $is_right_project=false;
+					    $is_last_post=true;
+					}
+					$is_right_project=print_preview_post($preview_post,$is_right_project);
+				    }
+				    if($is_last_post) print_empty_post();
+				}
+			    ?>
                      	</div>
                     </div>
-            <?php
-                 }
-                 $cache_result=ob_get_contents();
-				$WDG_cache_plugin->set_cache('home-small-projects',$cache_result,2*60*60);
-				ob_end_clean();
-			}
-			echo $cache_result;
+		    <?php
+		    }
+		    $cache_result=ob_get_contents();
+		    $WDG_cache_plugin->set_cache('home-small-projects',$cache_result,2*60*60);
+		    ob_end_clean();
+		}
+		echo $cache_result;
 
 			$cache_result=$WDG_cache_plugin->get_cache('home-funded-projects');
 			if(false===$cache_result){
@@ -262,28 +262,29 @@ if(false===$cache_result){
 	    	</div>
 	   		<div class="home-news-list-container">
 				<ul class="home-news-list">
-					<?php $cache_result=$WDG_cache_plugin->get_cache('home-news');
-							if(false===$cache_result){
-							ob_start(); 
-							query_posts(array(
+					<?php 
+					$cache_result=$WDG_cache_plugin->get_cache('home-news');
+					if(false===$cache_result){
+						ob_start(); 
+						query_posts(array(
 							'post_status' => 'publish',
 							'category_name' => 'revue-de-presse',
 							'orderby' => 'post_date',
 							'order' => 'desc',
 							'showposts' => 5
-		    			) );
-		    		if ( have_posts() ) :
-						while (have_posts()) : the_post(); 
-			   				wdg_shownewsitem();
-						endwhile; 
-		    		endif;
-		    		$cache_result=ob_get_contents();
-		    		$WDG_cache_plugin->set_cache('home-news',$cache_result,2*60*60);
-					ob_end_clean();
+						) );
+						if ( have_posts() ) :
+							while (have_posts()) : the_post(); 
+								wdg_shownewsitem();
+							endwhile; 
+						endif;
+						$cache_result=ob_get_contents();
+						$WDG_cache_plugin->set_cache('home-news',$cache_result,2*60*60);
+						ob_end_clean();
 					}
-					echo $cache_result;  ?>
-		    	<div style="clear: both;">
-		   		</div>
+					echo $cache_result;
+					?>
+					<li class="clear"></li>
 				</ul>
 				<div class="home-news-list-more">
 		    		<?php $page_news = get_page_by_path('espace-presse'); ?>
@@ -332,7 +333,7 @@ function wdg_shownewsitem(){
     <li>
 	<div class="news-img">
 	    <a href="<?php the_permalink(); ?>">
-		<?php the_post_thumbnail(); ?>
+		<?php the_post_thumbnail("medium"); ?>
 	    </a>
 	</div>
 	<div class="news-title">
