@@ -114,7 +114,8 @@ h4 {
 }
 
 .two-thirds {
-	width: 650px;
+	width: 610px;
+	padding-right: 40px;
 }
 
 .arrow-down {
@@ -1129,6 +1130,12 @@ ul.activity-list p {
 #object-nav a#members span::after {
     content: ")";
 }
+#member-list li {
+    list-style: none;
+}
+#member-list li a {
+    vertical-align: top;
+}
 /* FIN GROUPES INVESTISSEURS */
 
 /* NAV */
@@ -1166,7 +1173,7 @@ ul.activity-list p {
     border-left: 1px solid #FFF;
 }
 .page_item {
-    padding-bottom: 7px; 
+    /*padding-bottom: 7px; */
 }
 .page_item_inverted {
     background-color: #FFF !important;
@@ -1179,7 +1186,7 @@ ul.activity-list p {
     border-left: none !important;
 }
 .page_item_logo {
-    height: 100px !important;
+    /*height: 100px !important;*/
     padding-top: 0px !important;
 }
 .page_item_out label {
@@ -2632,7 +2639,7 @@ text-transform: uppercase;
     position: relative;
 }
 #head-image img{
-    width: 100%;
+    min-width: 100%;
 }
 .ui-state-disabled{
     opacity: 1 !important;

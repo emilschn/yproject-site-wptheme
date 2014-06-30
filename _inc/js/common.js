@@ -8,6 +8,27 @@ YPUIFunctions = (function($) {
 		initUI: function() {
 			YPMenuFunctions.initMenuBar();
 			WDGProjectPageFunctions.initUI();
+			
+			$(document).scroll(function() {
+				if ($(document).scrollTop() > 110) {
+					$(".page_item_logo a").children().eq(0).hide();
+					$(".page_item_logo a").children().eq(1).show();
+					$(".page_item_logo").height(51);
+					$("#nav").height(50);
+					$("#nav li").css("paddingTop", 20);
+					$("#nav li").height(30);
+					$(".page_item_inverted").css("paddingBottom", 0);
+				} else {
+					$(".page_item_logo a").children().eq(0).show();
+					$(".page_item_logo a").children().eq(1).hide();
+					$(".page_item_logo").height(100);
+					$("#nav").height(100);
+					$("#nav li").css("paddingTop", 50);
+					$("#nav li").height(50);
+					$(".page_item_logo").css("paddingTop", 0);
+					$(".page_item_inverted").css("paddingBottom", 7);
+				}
+			});
 
 			if ($("#finish_subscribe").length > 0) {		
 			    $("#container").css('padding-top', "55px");		

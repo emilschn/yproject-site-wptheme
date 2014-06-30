@@ -108,7 +108,10 @@
 		    <div class="center">
 				<ul id="nav">
 					<?php /* Logo Accueil */ ?>
-					<li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>" style="padding-left: 0px; padding-right: 14px;"><img src="<?php echo $stylesheet_directory_uri; ?>/images/logo.png" width="160" height="100" alt="logo" /></a></li>
+					<li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>" style="padding-left: 0px; padding-right: 14px;">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo.png" width="160" height="100" alt="logo" />
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo_court.png" width="160" height="51" alt="logo court" style="display: none;" />
+					</a></li>
 					<?php /* Menu Proposer un projet */ $page_start = get_page_by_path('proposer-un-projet'); ?>
 					<li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Proposer un projet', 'yproject'); ?></a></span></li>
 					<?php /* Menu Comment ça marche ? */ $page_how = get_page_by_path('descriptif'); ?>
