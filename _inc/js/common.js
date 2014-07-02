@@ -8,11 +8,69 @@ jQuery(document).ready( function($) {
  		contentDiv.trigger("click"); 	
  	});
  	$('.project-content-icon').css("cursor", "pointer");
+ 	
+ 	if($('#user-id').length){ YPUIFunctions.getProjects();	}
 });
 
 
 YPUIFunctions = (function($) {
     return {
+    getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué
+    	var user_id;
+ 	user_id=$('#user-id').attr('data-value');
+ 	$.ajax({//Requete pour obtenir les projets
+			            	'type' : "POST",
+			            	'url' : ajax_object.ajax_url,
+			            	'data': { 
+			                      'user_id': user_id,
+			                      'action' : 'print_user_projects'
+			                    }
+	}).done(function(result){
+		//Une fois les projets obtenus
+		$('#ajax-loader').after(result);// On insert le résultat après la roue de chargement.
+		$('#ajax-loader-img').hide();//On cache la roue de chargement.
+		YPUIFunctions.togglePayments();//On cache tous les paiements effectués et on affiche Détails des paiements
+		$(".history-projects").each(function(){//On cache chaque projet
+			$(this).hide();
+		});
+		function filterProjects(){
+			var o=new Object();
+			var tab = [ "jycrois", "invested","voted"];
+			$('#filter-projects :checkbox').each(function(){//On regarde quelles sont les checkbox cochées
+				if(this.checked){// Si elle est cochée, on met un "1"
+					o[this.value]=1;
+				}
+				else{//Sinon un "0"
+					o[this.value]=0;
+				}
+				$(".history-projects").each(function(){// On affiche les projets selon les checkbox cochées
+					var show_project=false;
+					for (var i=0;i<=tab.length;i++){
+						if($(this).attr('data-'+tab[i])==1&&o[tab[i]]==1){//Exemple : L'utilisateur crois au projet  -> data-jycrois=1 (dans le HTML) et J'y crois est coché
+							show_project=true;
+						}
+					}
+					if(show_project){// On affiche le projet s'il n'est pas déja visible
+						if (! $(this).is(':visible') ){
+							$(this).show();
+						}
+					}
+					else{
+						if ($(this).is(':visible') ){// On cache le projet s'il n'est pas déja caché
+							$(this).hide();
+						}
+					}
+				});
+			});
+
+		}
+		filterProjects();// On applique cette fonction une première fois afin d'afficher les projets investi
+		$('#filter-projects :checkbox').change(function() {// On met un listener sur les checkbox
+			filterProjects();
+		});
+});
+
+    },
 	initUI: function() {
 	    YPMenuFunctions.initMenuBar();
 
@@ -174,15 +232,38 @@ YPUIFunctions = (function($) {
 	},
 	
 	switchProfileTab: function(sType) {
-	    var aTabs = ["activity", "following", "followers", "projects"];
+	    var aTabs = ["activity", "projects", "community"];
 	    for (var i = 0; i < aTabs.length; i++) {
 		$("#item-body-" + aTabs[i]).hide();
 		$("#item-submenu-" + aTabs[i]).removeClass("selected");
 	    }
 	    $("#item-body-" + sType).show();
 	    $("#item-submenu-" + sType).addClass("selected");
+	},
+
+	togglePayments: function(){
+		$('.user-history-payments-list').each(function(){
+			$(this).hide();
+		});
+		$('.history-projects').each(function(){
+			$(this).find('.show-payments').each(function(){
+				$(this).css("cursor", "pointer");
+				$(this).click(function(){
+					campaign_id=$(this).attr('data-value');
+					$('.history-projects').each(function(){
+						if($(this).attr('data-value')===campaign_id){
+							$(this).find('.user-history-payments-list').show(400);
+						}
+						else{
+							$(this).find('.user-history-payments-list').hide(400);
+						}
+					});
+				});
+			});
+		});
 	}
-    }
+}
+    
 })(jQuery);
 
 YPMenuFunctions = (function($){

@@ -176,6 +176,18 @@ else:
 		    } else {
 		?>
 
+ <h2 class="underlined">J'y crois</h2>
+
+	<?php	global $wpdb;
+	$table= $wpdb->prefix.'jycrois';
+	$user_id=get_current_user_id();
+	$projects_jy_crois = $wpdb->get_results("SELECT campaign_id FROM $table WHERE user_id=$user_id");
+	foreach ($projects_jy_crois as $project) {
+		echo get_the_title($project->campaign_id).'<br/>'.get_permalink($project->campaign_id).'<br/>';
+	}
+	
+?>
+
 		    <h2 class="underlined">Mon porte-monnaie électronique</h2>
 		    <?php
 			$real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id()) / 100;
