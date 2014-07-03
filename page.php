@@ -35,9 +35,11 @@
 						$campaign_id = $temp_post->post_title;
 						require_once('projects/single-admin-bar.php');
 						require_once('projects/single-header.php');
-					endif; ?>
-
+					?>
+					<div class="entry">
+					<?php else: ?>	
 					<div class="entry center">
+					<?php endif; ?>
 					    
 						<?php the_content( __( '<p class="serif">Read the rest of this page &rarr;</p>', 'buddypress' ) ); ?>
 

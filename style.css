@@ -2668,18 +2668,22 @@ text-transform: uppercase;
     width: 1080px;
     height: 370px;
     margin: auto;
-     z-index: 2;
-     bottom: -1px;
+    z-index: 2;
+    bottom: -1px;
 }
 #head-content #title{
-   position: absolute;
+    position: absolute;
     font-size: 30px;
     text-transform: uppercase;
     bottom: 70px;
     left: 0px;
 }
+#head-content #subtitle{
+    position: absolute;
+    bottom: 50px;
+}
 #head-content img{
-    top: -15px;
+    top: -1px;
     left: -70px;
     position: relative;
     z-index: -1;
@@ -2772,10 +2776,10 @@ text-transform: uppercase;
 .post_bottom_buttons #funded-button{
     position: absolute;
     padding: 0;
-    bottom:-1px ;
+    bottom: 0px;
 }
 #funded-button .description-discover{
-     text-transform: uppercase;
+    text-transform: uppercase;
     color: #FFF;
     text-align: center;
     background-color: #FF494C;
@@ -3067,6 +3071,9 @@ height: 18px;
 .ui-widget-header .ui-icon{
     background-image: url('http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/ui-lightness/images/ui-icons_222222_256x240.png');
 }
+.ui-dialog-titlebar-close:before {
+    font: 400 20px/18px dashicons;
+}
 .ui-dialog-titlebar-close.ui-corner-all.ui-state-hover{
     border: none;
 }
@@ -3082,6 +3089,9 @@ height: 18px;
 }
 .ui-widget-overlay {
     z-index: 3 !important;
+}
+.ui-button-text {
+    display: none;
 }
 
 #white-background{

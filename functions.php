@@ -307,47 +307,54 @@ function get_user_avatar($user_id){
 function update_jy_crois(){
 	global $wpdb, $post;
 	$table_jcrois = $wpdb->prefix . "jycrois";
-	$campaign               = atcf_get_campaign( $_POST['id_campaign']);
-	$campaign_id            = $_POST['id_campaign'];
+
+	if (isset($_POST['id_campaign'])) $post = get_post($_POST['id_campaign']);
+	$campaign = atcf_get_campaign( $post );
+	$campaign_id = $campaign->ID;
+
 	// Construction des urls utilisés dans les liens du fil d'actualité
 	// url d'une campagne précisée par son nom 
-	$campaign_url  = get_permalink($_POST['id_campaign']);
+	$campaign_url = get_permalink($_POST['id_campaign']);
 	$post_title = $post->post_title;
 	$url_campaign = '<a href="'.$campaign_url.'">'.$post_title.'</a>';
 	//url d'un utilisateur précis
-	$user_id                = wp_get_current_user()->ID;
-	$user_display_name      = wp_get_current_user()->display_name;
+	$user_id = wp_get_current_user()->ID;
+	$user_display_name = wp_get_current_user()->display_name;
 	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '">' . $user_display_name . '</a>';
+
+	//J'y crois
+	if(isset($_POST['jy_crois']) && $_POST['jy_crois'] == 1){
+		$wpdb->insert( 
+			$table_jcrois,
+			array(
+				'user_id'	    => $user_id,
+				'campaign_id'   => $campaign_id
+			)
+		); 
+		bp_activity_add(array (
+			'component' => 'profile',
+			'type'      => 'jycrois',
+			'action'    => $url_profile.' croit au projet '.$url_campaign
+		));
 		
-		if(isset($_POST['jy_crois'])&&$_POST['jy_crois']==1){//J'y crois
-			$wpdb->insert( $table_jcrois,
-		array(
-		    'user_id'	    => $user_id,
-		    'campaign_id'   => $campaign_id
-		)
-	    ); 
-	    bp_activity_add(array (
-		'component' => 'profile',
-		'type'      => 'jycrois',
-		'action'    => $url_profile.' croit au projet '.$url_campaign
-	    ));
-		}
-		else if (isset($_POST['jy_crois'])&&$_POST['jy_crois']==0) { //J'y crois pas
-			$wpdb->delete( $table_jcrois,
-		array(
-		    'user_id'      => $user_id,
-		    'campaign_id'  => $campaign_id
-		)
-	    );		
-	    // Inserer l'information dans la table du fil d'activité  de la BDD wp_bp_activity 
-	    bp_activity_delete(array (
-		'user_id'   => $user_id,
-		'component' => 'profile',
-		'type'      => 'jycrois',
-		'action'    => $url_profile.' croit au projet '.$url_campaign
-	    ));
-		}
-    	echo $wpdb->get_var( "SELECT count(campaign_id) FROM $table_jcrois WHERE campaign_id = $campaign_id" );
+	//J'y crois pas
+	} else if (isset($_POST['jy_crois']) && $_POST['jy_crois'] == 0) { 
+		$wpdb->delete( 
+			$table_jcrois,
+			array(
+				'user_id'      => $user_id,
+				'campaign_id'  => $campaign_id
+			)
+		);
+		// Inserer l'information dans la table du fil d'activité  de la BDD wp_bp_activity 
+		bp_activity_delete(array (
+			'user_id'   => $user_id,
+			'component' => 'profile',
+			'type'      => 'jycrois',
+			'action'    => $url_profile.' croit au projet '.$url_campaign
+		));
+	}
+	echo $wpdb->get_var( "SELECT count(campaign_id) FROM $table_jcrois WHERE campaign_id = $campaign_id" );
 }
 add_action( 'wp_ajax_update_jy_crois', 'update_jy_crois' );
 
