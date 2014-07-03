@@ -35,7 +35,10 @@
 			<li>
 				<a href="<?php bp_group_member_domain(); ?>">
 
-					<?php bp_group_member_avatar_thumb(); ?>
+					<?php 
+					global $members_template;
+					print_user_avatar($members_template->member->user_id, 'thumb');
+					?>
 
 				</a>
 
