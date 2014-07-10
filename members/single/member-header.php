@@ -12,21 +12,30 @@ $current_user = get_user_by('id', bp_displayed_user_id());
 
 <?php do_action( 'bp_before_member_header' ); ?>
 
+<span id="user-id" data-value="<?php echo bp_displayed_user_id(); ?>"></span>
+
 <div id="item-header-avatar" class="left">
-    <a href="<?php bp_displayed_user_link(); ?>">
-	
-	<?php print_user_avatar(bp_displayed_user_id()); ?>
-    </a>
+	<a href="<?php bp_displayed_user_link(); ?>">
+		<?php print_user_avatar(bp_displayed_user_id()); ?>
+	</a>
 </div><!-- #item-header-avatar -->
 
 <div id="item-header-content" class="left">
+
     <h1>
 	<a href="<?php bp_displayed_user_link(); ?>"><?php echo $current_user->display_name; ?></a>
     </h1>
-
-    <?php if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) : ?>
+     <?php if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) : ?>
 	<span class="user-nicename">@<?php bp_displayed_user_username(); ?></span>
-    <?php endif; ?>
+    <?php 
+    endif; ?>
+    <?php 
+   
+    $user_meta = get_userdata(bp_displayed_user_id());
+			echo($user_meta->description);
+			?>
+
+   
 
 	<?php do_action( 'bp_before_member_header_meta' ); ?>
 

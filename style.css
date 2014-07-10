@@ -320,15 +320,13 @@ h4 {
 .project_preview_item_pictos {
     width: 100%;
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    margin-top: 10px;
 }
 
 .project_preview_item_picto {
     float: left;
     width: 45px;
-    margin-top: -15px;
-    padding: 0 2px;
+    padding: 0 5px;
 }
 
 .project_preview_item_picto img {
@@ -990,6 +988,7 @@ ul.activity-list p {
 }
 
 #item-submenu {
+    padding: 0;
     color: #2B2C2C;
     background-color: #E1E3E2;
     list-style: none;
@@ -1005,7 +1004,7 @@ ul.activity-list p {
     float: left;
     border-right: 5px solid #FFF;
     font-family: Arial,sans-serif;
-    padding: 15px;
+    padding: 15px 0px;
 }
 
 #item-submenu li a {
@@ -1099,6 +1098,95 @@ ul.activity-list p {
     float: left;
     margin: 5px;
     padding: 5px;
+}
+#item-body ul{
+    padding: 0;
+}
+.history-projects{
+    background-color: #E1E3E2;
+    margin-bottom: 12px;
+}
+.history-projects h3{
+    display: block;
+    padding-left: 15px;
+    padding-top: 15px;
+}
+.history-projects .project_preview_item_progress{
+    background-color: #E1E3E2;
+    display: inline-block;
+    padding-left: 15px;
+    width: 200px;
+    clear:both;
+    vertical-align: top;
+}
+.history-projects .project_preview_item_progressbg{
+    background-color: #FFF;
+}
+.history-projects .project_preview_item_progressbar{
+    background-color: #333;
+}
+.history-projects .user-history-pictos{
+    display: inline-block;
+}
+.history-projects .project_preview_item_infos{
+    width: 200px;
+}
+.history-projects .project_preview_item_picto{
+    width: 52px;
+}
+.history-projects .user-history-payments-list{
+    list-style-type: none;
+    margin: 0px; 
+}
+.history-projects .user-payment-item{
+    display: inline-block;
+}
+.history-projects .user-history-payments{
+    margin-left: 60px;
+    position: relative;
+    bottom: 10px;
+}
+.history-projects .user-history-pictos{
+    position: relative;
+    bottom: 26px;
+}
+.history-projects .show-payments{
+    position: relative;
+    bottom: 21px;
+    margin-left: 15px;
+    font-weight: bold;
+}
+.history-projects .user-payments-list-item td{
+    width: 150px;
+}
+#item-body-projects h3{
+    display: inline-block;
+    font-size: 17px;
+    margin:0;
+    margin-bottom: 15px;
+}
+#item-body-projects #filter-projects{
+    display: inline-block;
+    margin-left: 15px;
+}
+#item-submenu li a {
+    padding: 15px;
+}
+.user-nicename{
+    margin-bottom: 10px;
+    display: block;
+}
+#item-header-content h1{
+    margin-bottom: 5px;
+}
+
+#settings-img {
+    float: right;
+}
+
+#settings-img img{
+    width: 120px;
+    height: auto;
 }
 /* FIN MON COMPTE */
 
@@ -2837,18 +2925,19 @@ text-transform: uppercase;
     left: -5px;
 }
 #project-owner img{
-margin-left: 20px;
-margin-top: 20px;
-width: 100px !important;
-display: inline-block;
-vertical-align: middle;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 100px !important;
+    height: 100px !important;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 #project-owner-desc{
-display: inline-block;
-font-size: 11px;
-vertical-align: middle;
-margin-top: 20px;
+    display: inline-block;
+    font-size: 11px;
+    vertical-align: middle;
+    margin-top: 20px;
 }
 #project-owner-desc p{
     margin: 0;
