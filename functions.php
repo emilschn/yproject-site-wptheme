@@ -378,8 +378,7 @@ function comment_blog_post(){
 add_action('comment_post','comment_blog_post');
 
 function print_user_projects(){
-	?>
-	<?php
+    
 	global $wpdb, $post, $user_projects;
 
 	if(isset($_POST['user_id'])){
@@ -448,7 +447,6 @@ function print_user_projects(){
 				}
 			endforeach;
 
-			$user_projects;
 			$table= $wpdb->prefix.'jycrois';
 			$user_id=bp_displayed_user_id();
 			$projects_jy_crois = $wpdb->get_results("SELECT campaign_id FROM $table WHERE user_id=$user_id");
@@ -566,9 +564,9 @@ function print_user_projects(){
 				    		</div>
 						</div>
 						<span class="project_preview_item_progressprint"><?php echo $project['percent_minimum_completed']; ?></span>
-		    		</div>
+					</div>
 						<div class="user-history-pictos">
-						    <div class="project_preview_item_pictos">
+							<div class="project_preview_item_pictos">
 								<div class="project_preview_item_infos">
 								    <div class="project_preview_item_picto" style="width:45px">
 										<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
@@ -617,9 +615,10 @@ function print_user_projects(){
 								    endif;
 								?>
 								<div style="clear: both"></div>
-						    </div>
+							</div>
 						</div>
-						<?php if(count($payments) > 0 || bp_loggedin_user_id()==bp_displayed_user_id()){?>
+					
+						<?php if(count($payments) > 0 && bp_loggedin_user_id() == bp_displayed_user_id()) {?>
 						<div class="show-payments"  data-value="<?php echo $project['ID'];?>">
 							D&eacute;tails des investissements
 						</div>
@@ -642,26 +641,21 @@ function print_user_projects(){
 											<?php echo $payment['signsquid_status']; ?>
 										</td>
 									</tr>
-								<?php	}?>
+								<?php } ?>
 							</table>
 						</div>
+						<?php } ?>
+					</div>
 				</div>
-			<?php
+				<?php
 			}
 		
-		?>
-	</div>
-<?php
-		}
-		
-	} else {
-		echo "Vous n'êtes pas encore impliqué dans un projet";
-	    
-	}
-}
+		} else {
+			echo "Aucun projet.";
 
-	
-exit();
+		}
+	}
+	exit();
 }
 add_action( 'wp_ajax_print_user_projects', 'print_user_projects' );
 add_action( 'wp_ajax_nopriv_print_user_projects', 'print_user_projects' );

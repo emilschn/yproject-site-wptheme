@@ -129,19 +129,14 @@
 					// END CACHE HEADER CONTENT
 					echo $cache_result;
 					
-					if (is_user_logged_in()) : ?>
-						<?php /* Menu Mon compte */ ?>
+					if (is_user_logged_in()) : 
+						// Menu Mon compte
+						$page_update_account = get_page_by_path('modifier-mon-compte'); 
+						?>
 						<li class="page_item_out page_item_inverted">
 						<a class="page_item_inverted" href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a>
 						<ul>
-							<?php
-							if (is_user_logged_in() && !ypcf_check_user_can_invest(false)) {
-								$page_update_account = get_page_by_path('modifier-mon-compte'); 
-							?>
-							<li style="border-bottom: 1px solid #FFF;" class="page_item_out"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Terminer mon inscription', 'yproject'); ?></a></li>
-							<?php
-							}
-							?>
+							<li style="border-bottom: 1px solid #FFF;" class="page_item_out"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Param&egrave;tres', 'yproject'); ?></a></li>
 							<li class="page_item_out"><a href="<?php echo wp_logout_url();echo '&page_id='.get_the_ID() ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
 						</ul>
 						</li>

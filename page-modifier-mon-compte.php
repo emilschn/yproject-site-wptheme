@@ -124,7 +124,13 @@ if (session_id() == '') session_start();
 				<label for="avatar_image" class="standard-label">Avatar</label>
 				<input type="file" name="avatar_image" id="avatar_image" />
 				<input type="checkbox" name="reset_avatar">Supprimer l'avatar actuel
-				<input type="checkbox" name="facebook_avatar">Utiliser l'avatar facebook<br />
+				<?php 
+				$facebook_meta = get_user_meta($current_user->ID, 'social_connect_facebook_id', true);
+				if (isset($facebook_meta) && $facebook_meta != "") : 
+				?>
+				<input type="checkbox" name="facebook_avatar">Utiliser l'avatar facebook
+				<?php endif; ?>
+				<br />
 
 				<label for="update_birthday_day" class="standard-label"><?php _e( 'Date de naissance', 'yproject' ); ?></label>
 				<select name="update_birthday_day" id="update_birthday_day">

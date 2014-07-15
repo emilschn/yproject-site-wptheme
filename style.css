@@ -989,8 +989,6 @@ ul.activity-list p {
 
 #item-submenu {
     padding: 0;
-    color: #2B2C2C;
-    background-color: #E1E3E2;
     list-style: none;
     display: block;
     height: 45px;
@@ -1000,34 +998,37 @@ ul.activity-list p {
 }
 
 #item-submenu li {
-    background-color: #E1E3E2;
+    background-color: #7B7B7B;
     float: left;
     border-right: 5px solid #FFF;
     font-family: Arial,sans-serif;
     padding: 15px 0px;
+    text-transform: uppercase;
+    -webkit-transition: all 0.2s ease-out;
+       -moz-transition: all 0.2s ease-out;
+        -ms-transition: all 0.2s ease-out;
+         -o-transition: all 0.2s ease-out;
+            transition: all 0.2s ease-out;
+}
+
+#item-submenu li.selected,
+#item-submenu li.sfhover,
+#item-submenu li:hover {
+    background-color: #2B2C2C;
 }
 
 #item-submenu li a {
-    color: #2B2C2C;
+    color: #FFFFFF;
 }
 
-#item-submenu li.selected {
-    background-color: #FF494C;
-    color: #2B2C2C;
+#item-body-community li {
+    list-style: none;
 }
-
-#item-submenu li.selected a {
-    color: #FFF;
+#item-body-community img {
+    padding-right: 5px;
 }
-
-#item-submenu li.sfhover,
-#item-submenu li:hover {
-    background: #FE494C;
-}
-
-#item-submenu li.sfhover a,
-#item-submenu li:hover a {
-    color: #2B2C2C;
+#item-body-community a {
+    vertical-align: top;
 }
 
 .follow-button {
@@ -1159,6 +1160,9 @@ ul.activity-list p {
 .history-projects .user-payments-list-item td{
     width: 150px;
 }
+.item-body-tab {
+    height: auto;
+}
 #item-body-projects h3{
     display: inline-block;
     font-size: 17px;
@@ -1256,6 +1260,9 @@ ul.activity-list p {
     height: 50px;
     display: block;
     padding-top: 50px;
+}
+#nav #menu_item_facebook, #nav #menu_item_twitter {
+    padding-top: 47px;
 }
 #nav .page_item_border {
     border-left: 1px solid #FFF;

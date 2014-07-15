@@ -22,20 +22,18 @@ $current_user = get_user_by('id', bp_displayed_user_id());
 
 <div id="item-header-content" class="left">
 
-    <h1>
-	<a href="<?php bp_displayed_user_link(); ?>"><?php echo $current_user->display_name; ?></a>
-    </h1>
-     <?php if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) : ?>
-	<span class="user-nicename">@<?php bp_displayed_user_username(); ?></span>
-    <?php 
-    endif; ?>
-    <?php 
-   
-    $user_meta = get_userdata(bp_displayed_user_id());
-			echo($user_meta->description);
-			?>
+	<h1>
+		<a href="<?php bp_displayed_user_link(); ?>"><?php echo $current_user->display_name; ?></a>
+	</h1>
 
-   
+	 <?php if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) : ?>
+		<span class="user-nicename">@<?php bp_displayed_user_username(); ?></span>
+	<?php endif; ?>
+
+	<?php
+	$user_meta = get_userdata(bp_displayed_user_id());
+	echo($user_meta->description);
+	?>
 
 	<?php do_action( 'bp_before_member_header_meta' ); ?>
 
@@ -49,8 +47,8 @@ $current_user = get_user_by('id', bp_displayed_user_id());
 
 		<?php
 		// If you'd like to show specific profile fields here use:  bp_member_profile_data( 'field=About Me' ); -- Pass the name of the field
-		 do_action( 'bp_profile_header_meta' );
-		 ?>
+		do_action( 'bp_profile_header_meta' );
+		?>
 
 	</div><!-- #item-meta -->
 

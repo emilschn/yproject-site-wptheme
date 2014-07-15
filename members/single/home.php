@@ -6,11 +6,9 @@ get_header( 'buddypress' );
 	<div id="content">
 		<div class="padder">
 			
-			<?php // La barre d'admin n'apparait que pour l'admin du site et si on est l'utilisateur qu'on affiche 		
-			$current_user = wp_get_current_user();
-			$current_user_id = $current_user->ID;
-			$displayed_user_id = bp_displayed_user_id();
-			if ($current_user_id == $displayed_user_id) {
+			<?php // La barre d'admin n'apparait que pour l'admin du site et si on est l'utilisateur qu'on affiche
+			$display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
+			if ($display_loggedin_user) {
     				//locate_template( array( 'members/single/admin-bar.php' ), true ); 
 			}
 			?>
@@ -20,7 +18,7 @@ get_header( 'buddypress' );
 			<header id="item-header" role="complementary">
 			    <?php 
 			    $page_modify = get_page_by_path('modifier-mon-compte');
-			    if (bp_displayed_user_id() == bp_loggedin_user_id()): 
+			    if ($display_loggedin_user): 
 			    ?>
 			    <div class="center">
 				    <div id="settings-img">
@@ -56,7 +54,7 @@ get_header( 'buddypress' );
 			    ) );
 			    if ($query_temp) $projects_count = $wp_query->found_posts;
 			    
-			    if ($current_user_id == $displayed_user_id) {
+			    if ($display_loggedin_user) {
 				$query_temp = query_posts( array(
 				    'post_type' => 'download',
 				    'author' => bp_displayed_user_id(),
@@ -67,38 +65,24 @@ get_header( 'buddypress' );
 			    ?>
 			    
 			    <ul id="item-submenu">
-				<li id="item-submenu-activity" class="selected"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('activity')"><?php _e("Activit&eacute;s", "yproject"); ?></a></li>
-				<li id="item-submenu-projects"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('projects')"><?php _e("Projets et Investissements", "yproject"); ?></a></li>
-				<li id="item-submenu-community"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('community')"><?php _e("Communaut&eacute;", "yproject"); ?></a></li>
+				<li id="item-submenu-activity" class="selected"><a href="javascript:void(0);"><?php _e("Activit&eacute;s", "yproject"); ?></a></li>
+				<li id="item-submenu-projects"><a href="javascript:void(0);"><?php _e("Projets et investissements", "yproject"); ?></a></li>
+				<li id="item-submenu-community"><a href="javascript:void(0);"><?php _e("Communaut&eacute;", "yproject"); ?></a></li>
 			    </ul>
 			   
 			     
 			    <div id="item-body">
 
-				<div id="item-body-activity">
-				    <?php do_action( 'bp_before_member_body' );
-
-				    if ( bp_is_user_activity() || !bp_current_component() ) :
-					    locate_template( array( 'members/single/activity.php'  ), true );
-
-				    endif;
-
-				    do_action( 'bp_after_member_body' ); ?>
+				<div id="item-body-activity" class="item-body-tab">
+				    <?php locate_template( array( 'members/single/activity.php'  ), true ); ?>
 				</div>
 
-				<div id="item-body-projects" style="display:none">
-				    <?php 
-				    locate_template( array( 'members/single/projects.php'  ), true );
-				    ?>
+				<div id="item-body-projects" class="item-body-tab" style="display:none">
+				    <?php locate_template( array( 'members/single/projects.php'  ), true ); ?>
 				</div>
 				
-				<div id="item-body-community" style="display:none">
-				    <ul>
-				    <?php 
-				    locate_template( array( 'members/single/community.php'  ), true );
-				    ?>
-				   
-				    </ul>
+				<div id="item-body-community" class="item-body-tab" style="display:none">
+				    <?php locate_template( array( 'members/single/community.php'  ), true ); ?>
 				</div>
 			</div><!-- #item-body -->
 			 
