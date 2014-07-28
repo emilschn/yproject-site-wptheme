@@ -21,7 +21,7 @@
 					<?php 
 					ob_start(); 
 					$is_single_forum = false;
-					if ( !bbp_is_forum_category() && bbp_has_topics() ) : 
+					if ( bbp_is_topic(get_the_ID()) && !bbp_is_forum_category() ) : 
 					    $temp = ob_get_clean(); 
 					    $is_single_forum = true;
 					else: 
@@ -37,7 +37,8 @@
 						require_once('projects/single-header.php');
 					?>
 					<div class="entry">
-					<?php else: ?>	
+					<?php else: ?>
+					<?php locate_template( array("basic/basic-header.php"), true ); ?>
 					<div class="entry center">
 					<?php endif; ?>
 					    

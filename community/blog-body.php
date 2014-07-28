@@ -7,8 +7,9 @@ query_posts( array(
 	'post_status' => 'publish',
 	'category_name' => 'wedogood',
 	'orderby' => 'post_date',
-	'order' => 'desc'
-	) );
+	'order' => 'desc',
+	'posts_per_page' => -1
+) );
 global $more;
 $more = 0;
 
