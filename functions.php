@@ -527,12 +527,12 @@ function print_user_projects(){
 						</div>
 						<div class="project_preview_item_picto" style="width:45px">
 							<?php if($project['has_voted']===1){ ?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png" />
 								<span data-voted="1"></span>
 							<?php }
 							else
 							{ ?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good_gris.png" />
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote_gris.png" />
 							<?php
 							}
 							?>
@@ -540,14 +540,14 @@ function print_user_projects(){
 						<div class="project_preview_item_picto" style="width:45px">
 						<?php
 							if(count($project['payments'])>0){ ?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png" />
 								<span data-invested="1"></span>
 							<?php
 							}
 							else
 							{
 								?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good_gris.png" />
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains_gris.png" />
 							<?php
 							}
 							?>
