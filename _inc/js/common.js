@@ -397,56 +397,57 @@ WDGProjectPageFunctions=(function($) {
 		    $("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 		},
 		
-		//Description projet
-		initClick:function(descContentElement){
+		/**
+		 * Gestion des différentes parties de description du projet
+		 */
+		//Initialisation du comportement des différentes parties
+		initClick: function(descContentElement) {
+			//Si il y a plus d'un paragraphe, on initialise le clic
 	  		if ($(descContentElement).find('p').length > 1) {
 	  			$(descContentElement).css("cursor", "pointer");
-		  		$(descContentElement).find('p:lt(1)').append('<div class="projects-more" data-value="'+WDGProjectPageFunctions.currentDiv+'" >Lire plus !</div>');
+				var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" >Lire plus !</div>';
+		  		$(descContentElement).find('div div *:lt(1)').append(sProjectMore);
 		  		$(descContentElement).click(function(){
-					var projectContent = $(this);
-					var projectMore = $(this).find('.projects-more');
-					if (projectMore.is(':visible')) {
-						projectMore.hide(400,function(){
-							projectContent.find('p').slideDown(400);
-						});
-						WDGProjectPageFunctions.hideOthers(projectMore.attr("data-value"));
-					} else {
-						WDGProjectPageFunctions.hideOthers(-1);
-					}
+					WDGProjectPageFunctions.clickItem($(this))
 				});
 	  		}
-	   		$(descContentElement).find('p:gt(0)').hide();
+			//On prend toutes les balises de la description
+			var children = $(descContentElement).children().children().children();
+			//On les masque sauf la première
+	   		$(descContentElement).find(children.not('*:eq(0)')).hide();
 	   		WDGProjectPageFunctions.currentDiv++;
    		},
+		
+		//Clic sur une partie
+		clickItem: function(clickedElement) {
+			var projectMore = clickedElement.find('.projects-more');
+			//Si la balise "lire plus" de l'élément cliqué est affichée
+			if (projectMore.is(':visible')) {
+				//il faut la masquer puis afficher les éléments qui suivent
+				projectMore.hide(400, function(){
+					clickedElement.find('p, ul').slideDown(400);
+				});
+				//on masque aussi toutes les autres parties
+				WDGProjectPageFunctions.hideOthers(projectMore.attr("data-value"));
+			//Sinon on masque tout
+			} else {
+				WDGProjectPageFunctions.hideOthers(-1);
+			}
+		},
 
+		//Masque des parties non utilisées
 		hideOthers:function(currentDiv){
-			var index=0;
+			//Parcours des différentes parties
+			var index = 0;
 	 		$('.projects-desc-content').each(function(){
-		 		if(index!=currentDiv){
+				//On teste pour masquer toutes celles qui ne sont pas celle clickée
+		 		if (index != currentDiv) {
 		 			$(this).find('.projects-more').slideDown(200);
 		 			$(this).children().children().children().not('*:eq(0)').slideUp(400);
 		 		}
 		 		index++;
 			});
-		},
-
-		hideOrShow:function(thisthis){
-			children=$(thisthis).children().children().children();// On prend toutes les balises de la description
-	  		if($(thisthis).find('*').length>1){//Si il y a plus d'une balise dans la description
-	  			$(thisthis).css("cursor", "pointer");
-		  		$(thisthis).find(children.first()).append('<div class="projects-more" data-value="'+WDGProjectPageFunctions.currentDiv+'" >Lire plus! </div>');//On ajoute Un lire plus après le premier élément de la description.
-		  		$(thisthis).click(function(){
-						project_content=$(this);
-						project_more=$(this).find('.projects-more');
-						project_more.hide(400,function(){
-							project_content.find('*').not('.projects-more').slideDown(400);
-						});
-						WDGProjectPageFunctions.hideOthers(project_more.attr("data-value"));
-				});
-	  		}
-	   		$(thisthis).find(children.not('*:eq(0)')).hide();//Toutes les balises de la description sauf la première.
-	   		WDGProjectPageFunctions.currentDiv++;
-   		}
+		}
 	}
 })(jQuery);
 
