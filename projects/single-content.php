@@ -50,16 +50,16 @@ $vote_status = html_entity_decode($campaign->vote());
 		<div id="project-owner">
 			<?php 
 			$author_id=get_the_author_meta('ID');
-			print_user_avatar($author_id);
+//			print_user_avatar($author_id);
 			$author=get_user_meta($author_id);
 			?>
-			<div id="project-owner-desc">
+			<div id="project-owner-desc" style="width: 100%; text-align: center;">
+				<?php echo $author['last_name'][0] . ' ' . $author['first_name'][0]; ?><br />
+				<?php echo '@'.$author['nickname'][0]; ?>
 				<?php
 				
-				echo '<p>'.$author['last_name'][0].' '.$author['first_name'][0].'</p>';
-				echo '<p>@'.$author['nickname'][0].'</p>';
-				//echo '<p>'.$author['user_postal_code'][0].' '.$author['user_city'][0].'</p>';
-				//echo '<p>'.$author['user_mobile_phone'][0].'</p>';
+//				echo '<p>'.$author['last_name'][0].' '.$author['first_name'][0].'</p>';
+//				echo '<p>@'.$author['nickname'][0].'</p>';
 				?>
 			</div>
 		</div>
@@ -113,7 +113,7 @@ $vote_status = html_entity_decode($campaign->vote());
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
 		<div id="project-content-project" class="projects-desc-content">
 		<h2 >En quoi consiste le projet ?</h2>
-		<span><?php the_content(); ?></span>
+		<div><?php the_content(); ?></div>
 		</div>
 	</div>
 

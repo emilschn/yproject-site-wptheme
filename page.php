@@ -1,16 +1,15 @@
 <?php get_header(); ?>
 
 <?php
-    wp_reset_query();
-    if (is_home() or is_front_page()) {
+wp_reset_query();
+if (is_home() or is_front_page()) {
 	require_once("page-home.php");
-    } else {
+} else {
 ?>
 
-	<div id="content">
-		<div class="padder">
-
-		<?php do_action( 'bp_before_blog_page' ); ?>
+<div id="content">
+    
+	<div class="padder">
 
 		<div class="page" id="blog-page" role="main">
 
@@ -38,7 +37,6 @@
 					?>
 					<div class="entry">
 					<?php else: ?>
-					<?php locate_template( array("basic/basic-header.php"), true ); ?>
 					<div class="entry center">
 					<?php endif; ?>
 					    
@@ -52,12 +50,11 @@
 
 		</div><!-- .page -->
 
-		<?php do_action( 'bp_after_blog_page' ); ?>
-
-		</div><!-- .padder -->
-	</div><!-- #content -->
+	</div><!-- .padder -->
+	
+</div><!-- #content -->
 <?php
-    }
+}
 ?>
 
 <?php get_footer(); ?>
