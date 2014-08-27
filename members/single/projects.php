@@ -1,11 +1,11 @@
 <?php 
-$page_publish = get_page_by_path('publier-un-projet');
+$page_publish = get_page_by_path('creer-un-projet');
 $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 ?>
 
 <h2 class="underlined">Projets</h2>
 
-<?php if ($display_loggedin_user) { ?><a href="<?php echo get_permalink($page_publish->ID); ?>" class="button">Publier un projet</a><br /><br /><br /><?php } ?>
+<?php if ($display_loggedin_user) { ?><a href="<?php echo get_permalink($page_publish->ID); ?>" class="button">Cr&eacute;er un projet</a><br /><br /><br /><?php } ?>
 	
 <div id="ajax-loader" class="center" style="text-align: center;"><img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loader.gif"/></div>
 

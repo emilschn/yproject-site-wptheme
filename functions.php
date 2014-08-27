@@ -380,20 +380,38 @@ add_action('comment_post','comment_blog_post');
 function print_user_projects(){
     
 	global $wpdb, $post, $user_projects;
+	$is_same_user = (bp_displayed_user_id() == bp_loggedin_user_id());
+	$str_believe = "J&apos;y crois";
+	$str_vote = "J&apos;ai vot&eacute;";
+	$str_investment = "J&apos;ai investi";
+	$str_not_believe = "Je n&apos;y crois pas";
+	$str_not_vote = "Je n&apos;ai pas vot&eacute;";
+	$str_not_investment = "Je n&apos;ai pas investi";
+	if (!$is_same_user) {
+		$str_believe = "Y croit";
+		$str_vote = "A vot&eacute;";
+		$str_investment = "A investi";
+		$str_not_believe = "N&apos;y croit pas";
+		$str_not_vote = "N&apos;a pas vot&eacute;";
+		$str_not_investment = "N&apos;a pas investi";
+	}
 
 	if(isset($_POST['user_id'])){
 		$purchases = edd_get_users_purchases(bp_displayed_user_id(), -1, false, array('completed', 'pending', 'publish', 'failed', 'refunded'));
 		if($purchases!=''){?>
 			<h3> Afficher les projets : </h3>
 			<form id="filter-projects">
-  				<input type="checkbox" name="filter" value="jycrois">
-  				<label>J'y crois</label>
+  				<label><input type="checkbox" name="filter" value="jycrois">
+  				<?php echo $str_believe; ?>
+				</label>
 		
-   				<input type="checkbox" name="filter" value="voted">
-   				<label>J'ai voté</label>
-   		
-  				<input type="checkbox" checked="checked" name="filter" value="invested">
-  				<label>J'ai investi </label>
+   				<label><input type="checkbox" name="filter" value="voted">
+  				<?php echo $str_vote; ?>
+				</label>
+		
+   				<label><input type="checkbox" name="filter" value="invested" checked="checked">
+  				<?php echo $str_investment; ?>
+				</label>
 			</form>
 			<?php
 			foreach ( $purchases as $post ) : setup_postdata( $post );
@@ -404,10 +422,10 @@ function print_user_projects(){
 				$post_camp = get_post($download_id);
 				$campaign = atcf_get_campaign($post_camp);
 			  	$payment_status = ypcf_get_updated_payment_status($post->ID);
-		    	$contractid = ypcf_get_signsquidcontractid_from_invest($post->ID);
-		    	$signsquid_infos = signsquid_get_contract_infos_complete($contractid);
-		    	$signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
-		    	$payment_date=date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
+				$contractid = ypcf_get_signsquidcontractid_from_invest($post->ID);
+				$signsquid_infos = signsquid_get_contract_infos_complete($contractid);
+				$signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
+				$payment_date=date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
 
 				$percent = min(100, $campaign->percent_minimum_completed(false));
 				$width = 150 * $percent / 100;
@@ -418,7 +436,7 @@ function print_user_projects(){
 				}
 				$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
 				$group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-				$is_user_group_member = groups_is_user_member(bp_loggedin_user_id(), $investors_group_id);
+				$is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
 				$group_link='';
 				if ($group_exists && $is_user_group_member){
 					$group_obj = groups_get_group(array('group_id' => $investors_group_id));
@@ -509,48 +527,29 @@ function print_user_projects(){
 					>
 					<a href="<?php echo get_permalink($project['ID']); ?>"><h3><?php echo $project['title']; ?></h3></a>
 					<div class="project_preview_item_infos">
-				    	<div class="project_preview_item_picto" style="width:45px">
-							<?php
-							if($project['jy_crois']===1){
-							?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" />
-							<?php
-							}
-							else
-							{
-							?>
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good_gris.png" />
-							<span data-jycrois="0"></span>
-							<?php
-							}
-							?>
+						<div class="project_preview_item_picto" style="width:45px">
+							<?php if($project['jy_crois'] === 1) { ?>
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="<?php echo $str_believe; ?>" title="<?php echo $str_believe; ?>" />
+							<?php } else { ?>
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good_gris.png" alt="<?php echo $str_not_believe; ?>" title="<?php echo $str_not_believe; ?>" />
+								<span data-jycrois="0"></span>
+							<?php } ?>
 						</div>
 						<div class="project_preview_item_picto" style="width:45px">
-							<?php if($project['has_voted']===1){ ?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png" />
+							<?php if($project['has_voted'] === 1) { ?>
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png" alt="<?php echo $str_vote; ?>" title="<?php echo $str_vote; ?>" />
 								<span data-voted="1"></span>
-							<?php }
-							else
-							{ ?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote_gris.png" />
-							<?php
-							}
-							?>
+							<?php } else { ?>
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote_gris.png" alt="<?php echo $str_not_vote; ?>" title="<?php echo $str_not_vote; ?>" />
+							<?php } ?>
 						</div>
 						<div class="project_preview_item_picto" style="width:45px">
-						<?php
-							if(count($project['payments'])>0){ ?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png" />
+							<?php if(count($project['payments']) > 0) { ?>
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png" alt="<?php echo $str_investment; ?>" title="<?php echo $str_investment; ?>" />
 								<span data-invested="1"></span>
-							<?php
-							}
-							else
-							{
-								?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains_gris.png" />
-							<?php
-							}
-							?>
+							<?php } else { ?>
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains_gris.png" alt="<?php echo $str_not_investment; ?>" title="<?php echo $str_not_investment; ?>" />
+							<?php } ?>
 						</div>  
 					</div>
 					<div class="project_preview_item_progress">
@@ -561,64 +560,67 @@ function print_user_projects(){
 								<?php else: ?>
 								&nbsp;
 								<?php endif; ?>
-				    		</div>
+							</div>
 						</div>
 						<span class="project_preview_item_progressprint"><?php echo $project['percent_minimum_completed']; ?></span>
 					</div>
-						<div class="user-history-pictos">
-							<div class="project_preview_item_pictos">
-								<div class="project_preview_item_infos">
-								    <div class="project_preview_item_picto" style="width:45px">
-										<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
-										<?php echo $project['days_remaining']; ?>
-								    </div>
-								    <div class="project_preview_item_picto">
-										<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
-										<?php echo $project['minimum_goal']; ?>
-								    </div> 
-								</div>
-								<?php
-								    //Boutons pour Annuler l'investissement | Recevoir le code à nouveau
-								    //Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
-								    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && is_object($signsquid_infos) && $signsquid_infos->{'status'} != 'Agreed') :
-								?>
-								<div class="project_preview_item_cancel">
-								<?php
-									if ($signsquid_infos != '' && is_object($signsquid_infos)):
-									    $page_my_investments = get_page_by_path('mes-investissements');
-								?>
-								    <a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $post_invest->ID; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
-								<?php
-									endif;
-									$page_cancel_invest = get_page_by_path('annuler-un-investissement');
-								?>
-								    <a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $post_invest->ID; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
-								</div>
-								<?php
-								    endif;
-								?>
-								
-								<?php
-								    //Lien vers le groupe d'investisseurs du projet
-								    //Visible si le groupe existe et que l'utilisateur est bien dans ce groupe
-								    $investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
-								    $group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-								    $is_user_group_member = groups_is_user_member(bp_loggedin_user_id(), $investors_group_id);
-								    if ($group_exists && $is_user_group_member):
-									$group_obj = groups_get_group(array('group_id' => $investors_group_id));
-									$group_link = bp_get_group_permalink($group_obj);
-								?>
-								<div class="project_preview_item_infos" style="width: 120px;">
-								    <a href="<?php echo $group_link; ?>">Acc&eacute;der au groupe priv&eacute;</a>
-								</div>
-								<?php
-								    endif;
-								?>
-								<div style="clear: both"></div>
+					<div class="user-history-pictos">
+						<div class="project_preview_item_pictos">
+							<div class="project_preview_item_infos">
+							    <div class="project_preview_item_picto" style="width:45px">
+									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+									<?php echo $project['days_remaining']; ?>
+							    </div>
+							    <div class="project_preview_item_picto">
+									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
+									<?php echo $project['minimum_goal']; ?>
+							    </div> 
 							</div>
+						    
+							<?php if ($is_same_user): ?>
+						    
+							<?php
+							    //Boutons pour Annuler l'investissement | Recevoir le code à nouveau
+							    //Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
+							    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && is_object($signsquid_infos) && $signsquid_infos->{'status'} != 'Agreed') :
+							?>
+							<div class="project_preview_item_cancel">
+								<?php if ($signsquid_infos != '' && is_object($signsquid_infos)):
+								    $page_my_investments = get_page_by_path('mes-investissements');
+								?>
+								<a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $post_invest->ID; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
+								<?php endif;
+								$page_cancel_invest = get_page_by_path('annuler-un-investissement');
+								?>
+								<a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $post_invest->ID; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
+							</div>
+							<?php
+							    endif;
+							?>
+
+							<?php
+							    //Lien vers le groupe d'investisseurs du projet
+							    //Visible si le groupe existe et que l'utilisateur est bien dans ce groupe
+							    $investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
+							    $group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
+							    $is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
+							    if ($group_exists && $is_user_group_member):
+								$group_obj = groups_get_group(array('group_id' => $investors_group_id));
+								$group_link = bp_get_group_permalink($group_obj);
+							?>
+							<div class="project_preview_item_infos" style="width: 120px;">
+							    <a href="<?php echo $group_link; ?>">Acc&eacute;der au groupe priv&eacute;</a>
+							</div>
+							<?php
+							    endif;
+							?>
+						    
+							<?php endif; ?>
+							<div style="clear: both"></div>
 						</div>
+					</div>
 					
-						<?php if(count($payments) > 0 && bp_loggedin_user_id() == bp_displayed_user_id()) {?>
+					<?php if(count($payments) > 0 && $is_same_user) {?>
 						<div class="show-payments"  data-value="<?php echo $project['ID'];?>">
 							D&eacute;tails des investissements
 						</div>
@@ -644,10 +646,10 @@ function print_user_projects(){
 								<?php } ?>
 							</table>
 						</div>
-						<?php } ?>
-					</div>
+					<?php } ?>
 				</div>
-				<?php
+			</div>
+			<?php
 			}
 		
 		} else {
