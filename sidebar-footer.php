@@ -17,7 +17,7 @@
 				<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) : ?>
 
 					<div id="first" class="widget-area">
-						<h1><?php echo __('Informations', 'yproject'); ?></h1>
+						<span class="menutitle"><?php echo __('Informations', 'yproject'); ?></span>
 						
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
@@ -29,7 +29,7 @@
 				<?php if ( is_active_sidebar( 'second-footer-widget-area' ) ) : ?>
 
 					<div id="second" class="widget-area">
-						<h1><?php echo __('Questions', 'yproject'); ?></h1>
+						<span class="menutitle"><?php echo __('Questions', 'yproject'); ?></span>
 						
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'second-footer-widget-area' ); ?>
@@ -59,7 +59,7 @@
 				<?php endif; */ ?>
 					
 					<div id="third" class="widget-area-large">
-						<h1><?php echo __('Communaut&eacute;', 'yproject'); ?></h1>
+						<span class="menutitle"><?php echo __('Communaut&eacute;', 'yproject'); ?></span>
 						<ul class="xoxo">
 						    <li id="nav_menu-4" class="widget widget_nav_menu">
 							<div class="menu-footer-3-container">

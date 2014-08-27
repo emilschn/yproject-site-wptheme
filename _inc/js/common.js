@@ -1,10 +1,12 @@
 jQuery(document).ready( function($) {
-	YPUIFunctions.initUI();
+    YPUIFunctions.initUI();
 });
 
 
 YPUIFunctions = (function($) {
 	return {
+		memberTabs: ["activity", "projects", "community"],
+	    
 		initUI: function() {
 			YPMenuFunctions.initMenuBar();
 			WDGProjectPageFunctions.initUI();
@@ -15,16 +17,18 @@ YPUIFunctions = (function($) {
 					$(".page_item_logo a").children().eq(1).show();
 					$(".page_item_logo").height(51);
 					$("#nav").height(50);
-					$("#nav li").css("paddingTop", 20);
-					$("#nav li").height(30);
+					$("#nav > li").css("paddingTop", 20);
+					$("#nav > li").height(30);
+					$("#nav #menu_item_facebook, #nav #menu_item_twitter").css("paddingTop", 17);
 					$(".page_item_inverted").css("paddingBottom", 0);
 				} else {
 					$(".page_item_logo a").children().eq(0).show();
 					$(".page_item_logo a").children().eq(1).hide();
 					$(".page_item_logo").height(100);
 					$("#nav").height(100);
-					$("#nav li").css("paddingTop", 50);
-					$("#nav li").height(50);
+					$("#nav > li").css("paddingTop", 50);
+					$("#nav > li").height(50);
+					$("#nav #menu_item_facebook, #nav #menu_item_twitter").css("paddingTop", 47);
 					$(".page_item_logo").css("paddingTop", 0);
 					$(".page_item_inverted").css("paddingBottom", 7);
 				}
@@ -93,17 +97,6 @@ YPUIFunctions = (function($) {
 			    });
 			}
 
-			if ($("#item-body").length > 0) {
-			    var aTabs = ["activity", "following", "followers", "projects"];
-			    var nHeight = 100;
-			    for (var i = 0; i < aTabs.length; i++) {
-				nHeight = Math.max(nHeight, $("#item-body-" + aTabs[i]).height());
-			    }
-			    for (var i = 0; i < aTabs.length; i++) {
-				$("#item-body-" + aTabs[i]).height(nHeight);
-			    }
-			}
-
 			if ($(".wp-editor-wrap")[0]) {
 			    setInterval(YPUIFunctions.onRemoveUploadInterval, 1000);
 			}
@@ -141,6 +134,77 @@ YPUIFunctions = (function($) {
 			       $('html, body').animate({scrollTop: $('#utilite-societale').offset().top - $("#navigation").height()}, "slow"); 
 			    });
 			}
+ 	
+			if ($("#user-id").length) { 
+			    YPUIFunctions.getProjects(); 
+			}
+			
+			if ($("#item-submenu").length > 0) {
+				$("#item-submenu").children().each(function() {
+					$(this).click(function() {
+						var sId = $(this).attr("id");
+						sId = sId.split("-").pop();
+						YPUIFunctions.switchProfileTab(sId);
+					});
+				});
+			}
+		},
+		
+		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué
+			var userID = $('#user-id').attr('data-value');
+
+			//Requete pour obtenir les projets
+			$.ajax({
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': { 
+				    'user_id': userID,
+				    'action' : 'print_user_projects'
+				}
+			}).done(function(result){
+				//Une fois les projets obtenus
+				$('#ajax-loader').after(result);// On insert le résultat après la roue de chargement.
+				$("#item-body-projects").height("auto");
+				$('#ajax-loader-img').hide();//On cache la roue de chargement.
+				YPUIFunctions.togglePayments();//On cache tous les paiements effectués et on affiche Détails des paiements
+				$(".history-projects").each(function(){//On cache chaque projet
+					$(this).hide();
+				});
+				function filterProjects(){
+					var o = new Object();
+					var tab = [ "jycrois", "invested","voted"];
+					$('#filter-projects :checkbox').each(function(){//On regarde quelles sont les checkbox cochées
+						if(this.checked){// Si elle est cochée, on met un "1"
+							o[this.value]=1;
+						}
+						else{//Sinon un "0"
+							o[this.value]=0;
+						}
+						$(".history-projects").each(function(){// On affiche les projets selon les checkbox cochées
+							var show_project=false;
+							for (var i=0;i<=tab.length;i++){
+								if($(this).attr('data-'+tab[i])==1&&o[tab[i]]==1){//Exemple : L'utilisateur crois au projet  -> data-jycrois=1 (dans le HTML) et J'y crois est coché
+									show_project=true;
+								}
+							}
+							if(show_project){// On affiche le projet s'il n'est pas déja visible
+								if (! $(this).is(':visible') ){
+									$(this).show();
+								}
+							} else {
+								if ($(this).is(':visible') ){// On cache le projet s'il n'est pas déja caché
+									$(this).hide();
+								}
+							}
+						});
+					});
+
+				}
+				filterProjects();// On applique cette fonction une première fois afin d'afficher les projets investi
+				$('#filter-projects :checkbox').change(function() {// On met un listener sur les checkbox
+					filterProjects();
+				});
+			});
 		},
 
 		onRemoveUploadInterval: function() {
@@ -202,15 +266,37 @@ YPUIFunctions = (function($) {
 		},
 
 		switchProfileTab: function(sType) {
-			var aTabs = ["activity", "following", "followers", "projects"];
-			for (var i = 0; i < aTabs.length; i++) {
-			    $("#item-body-" + aTabs[i]).hide();
-			    $("#item-submenu-" + aTabs[i]).removeClass("selected");
+			for (var i = 0; i < YPUIFunctions.memberTabs.length; i++) {
+			    $("#item-body-" + YPUIFunctions.memberTabs[i]).hide();
+			    $("#item-submenu-" + YPUIFunctions.memberTabs[i]).removeClass("selected");
 			}
 			$("#item-body-" + sType).show();
 			$("#item-submenu-" + sType).addClass("selected");
+		},
+
+		togglePayments: function(){
+			$('.user-history-payments-list').each(function(){
+				$(this).hide();
+			});
+			$('.history-projects').each(function(){
+				$(this).find('.show-payments').each(function(){
+					$(this).css("cursor", "pointer");
+					$(this).click(function(){
+						campaign_id=$(this).attr('data-value');
+						$('.history-projects').each(function(){
+							if($(this).attr('data-value')===campaign_id){
+								$(this).find('.user-history-payments-list').show(400);
+							}
+							else{
+								$(this).find('.user-history-payments-list').hide(400);
+							}
+						});
+					});
+				});
+			});
 		}
 	}
+    
 })(jQuery);
 
 YPMenuFunctions = (function($){
@@ -450,5 +536,3 @@ WDGProjectPageFunctions=(function($) {
 		}
 	}
 })(jQuery);
-
-   

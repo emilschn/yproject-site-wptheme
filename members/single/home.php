@@ -6,18 +6,26 @@ get_header( 'buddypress' );
 	<div id="content">
 		<div class="padder">
 			
-			<?php // La barre d'admin n'apparait que pour l'admin du site et si on est l'utilisateur qu'on affiche 		
-			$current_user = wp_get_current_user();
-			$current_user_id = $current_user->ID;
-			$displayed_user_id = bp_displayed_user_id();
-			if ($current_user_id == $displayed_user_id) {
-    				locate_template( array( 'members/single/admin-bar.php' ), true ); 
+			<?php // La barre d'admin n'apparait que pour l'admin du site et si on est l'utilisateur qu'on affiche
+			$display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
+			if ($display_loggedin_user) {
+    				//locate_template( array( 'members/single/admin-bar.php' ), true ); 
 			}
 			?>
 
 			<?php do_action( 'bp_before_member_home_content' ); ?>
 
 			<header id="item-header" role="complementary">
+			    <?php 
+			    $page_modify = get_page_by_path('modifier-mon-compte');
+			    if ($display_loggedin_user): 
+			    ?>
+			    <div class="center">
+				    <div id="settings-img">
+					    <a href="<?php echo get_permalink($page_modify->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri() . "/images/settings.png";?>"></a>
+				    </div>
+			    </div>
+			    <?php endif; ?>
 			    <div id="item-header-container" class="center">
 				<?php locate_template( array( 'members/single/member-header.php' ), true ); ?>
 			    </div>
@@ -46,7 +54,7 @@ get_header( 'buddypress' );
 			    ) );
 			    if ($query_temp) $projects_count = $wp_query->found_posts;
 			    
-			    if ($current_user_id == $displayed_user_id) {
+			    if ($display_loggedin_user) {
 				$query_temp = query_posts( array(
 				    'post_type' => 'download',
 				    'author' => bp_displayed_user_id(),
@@ -57,101 +65,31 @@ get_header( 'buddypress' );
 			    ?>
 			    
 			    <ul id="item-submenu">
-				<li id="item-submenu-activity" class="selected"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('activity')"><?php _e("Fil d&apos;activit&eacute;", "yproject"); ?></a></li>
-				<li id="item-submenu-following"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('following')"><?php _e("Abonnements", "yproject"); ?> (<?php echo $following_count; ?>)</a></li>
-				<li id="item-submenu-followers"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('followers')"><?php _e("Abonn&eacute;s", "yproject"); ?> (<?php echo $followers_count; ?>)</a></li>
-				<li id="item-submenu-projects"><a href="javascript:void(0);" onclick="javascript:YPUIFunctions.switchProfileTab('projects')"><?php _e("Projets", "yproject"); ?> (<?php echo $projects_count; ?>)</a></li>
+				<li id="item-submenu-activity" class="selected"><a href="javascript:void(0);"><?php _e("Activit&eacute;s", "yproject"); ?></a></li>
+				<li id="item-submenu-projects"><a href="javascript:void(0);"><?php _e("Projets et investissements", "yproject"); ?></a></li>
+				<li id="item-submenu-community"><a href="javascript:void(0);"><?php _e("Communaut&eacute;", "yproject"); ?></a></li>
 			    </ul>
-			    
+			   
+			     
 			    <div id="item-body">
 
-				<div id="item-body-activity">
-				    <?php do_action( 'bp_before_member_body' );
-
-				    if ( bp_is_user_activity() || !bp_current_component() ) :
-					    locate_template( array( 'members/single/activity.php'  ), true );
-
-				    endif;
-
-				    do_action( 'bp_after_member_body' ); ?>
+				<div id="item-body-activity" class="item-body-tab">
+				    <?php locate_template( array( 'members/single/activity.php'  ), true ); ?>
 				</div>
 
-				<div id="item-body-following" style="display:none">
-				    <ul>
-				    <?php 
-				    for ($i = 0; $i < $following_count; $i++) {
-					$user_temp = get_userdata($following_list[$i]);
-					echo '<li><a href="' . bp_core_get_userlink($user_temp->ID, false, true) . '">' . $user_temp->display_name . '</a></li>';
-				    }
-				    ?>
-				    </ul>
+				<div id="item-body-projects" class="item-body-tab" style="display:none">
+				    <?php locate_template( array( 'members/single/projects.php'  ), true ); ?>
 				</div>
 				
-				<div id="item-body-followers" style="display:none">
-				    <ul>
-				    <?php 
-				    for ($i = 0; $i < $followers_count; $i++) {
-					$user_temp = get_userdata($followers_list[$i]);
-					echo '<li><a href="' . bp_core_get_userlink($user_temp->ID, false, true) . '">' . $user_temp->display_name . '</a></li>';
-				    }
-				    ?>
-				    </ul>
+				<div id="item-body-community" class="item-body-tab" style="display:none">
+				    <?php locate_template( array( 'members/single/community.php'  ), true ); ?>
 				</div>
-				
-				<div id="item-body-projects" style="display:none">
-				    <?php
-					query_posts( array(
-					    'post_type' => 'download',
-					    'author' => bp_displayed_user_id(),
-					    'post_status' => 'publish'
-					) );
-					
-					if (have_posts()) {
-					    echo 'Projets sur le site :<br />';
-					    echo '<ul>';
-					    while (have_posts()) {
-						the_post();
-						echo '<li><a href="';
-						the_permalink();
-						echo '">';
-						the_title();
-						echo '</a></li>';
-					    }
-					    echo '</ul>';
-					}
-					
-					if ($current_user_id == $displayed_user_id) {
-					    query_posts( array(
-						'post_type' => 'download',
-						'author' => bp_displayed_user_id(),
-						'post_status' => 'private'
-					    ));
-
-					    if (have_posts()) {
-						echo 'Projets en attente de validation :<br />';
-						echo '<ul>';
-						while (have_posts()) {
-						    the_post();
-						    echo '<li><a href="';
-						    $preview_link = set_url_scheme( get_permalink( $post->ID ) );
-						    $preview_link = esc_url( apply_filters( 'preview_post_link', add_query_arg( 'preview', 'true', $preview_link ) ) );
-						    echo $preview_link . '">';
-						    the_title();
-						    echo '</a></li>';
-						}
-						echo '</ul>';
-					    }
-					}
-					    
-				    ?>
-				</div>
-
-			    </div><!-- #item-body -->
-
+			</div><!-- #item-body -->
+			 
 			    <?php do_action( 'bp_after_member_home_content' ); ?>
-			</div>
+		</div>
 
-		</div><!-- .padder -->
-	</div><!-- #content -->
+	</div><!-- .padder -->
+</div><!-- #content -->
 
 <?php get_footer( 'buddypress' ); ?>

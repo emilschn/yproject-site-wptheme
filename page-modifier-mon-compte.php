@@ -5,16 +5,18 @@
  */ 
 if (!is_user_logged_in()) wp_redirect(site_url());
 if (session_id() == '') session_start();
-
 ?>
-<?php get_header(); ?>
+<?php get_header();
+
+
+
+ ?>
 
     <div id="content">
 	<div class="padder">
 	    <?php locate_template( array( 'members/single/admin-bar.php' ), true ); ?>
 	    <div class="center">
 		<?php 
-		if (is_user_logged_in()) :
 		    $page_update_account = get_page_by_path('modifier-mon-compte');
 		?>
 		    <h2 class="underlined"><?php _e( 'Param&egrave;tres', 'yproject' ); ?></h2>
@@ -25,7 +27,6 @@ if (session_id() == '') session_start();
 			    if ( isset($_POST["update_password_current"]) && !wp_check_password( $_POST["update_password_current"], $current_user->data->user_pass, $current_user->ID)) :
 			    ?>
 				<span class="errors"><?php _e( 'Le mot de passe renseign&eacute; ne correspond pas. Les modifications ne sont pas enregistr&eacute;es.', 'yproject' ); ?></span><br />
-			    
 			    <?php
 				$valid = false;
 			    endif;
@@ -40,11 +41,54 @@ if (session_id() == '') session_start();
 			    ?>
 				
 			    <?php if ($valid) { ?>
-			    <span class="invest_success"><?php _e('Informations utilisateur enregistr&eacute;es', 'yproject'); ?></span><br />
-			    <?php } ?>
-				
-		    <?php }; ?>
-		    <?php 
+				    <span class="invest_success"><?php _e('Informations utilisateur enregistr&eacute;es', 'yproject'); ?></span><br />
+				    	<?php
+				    	if(!empty($_FILES['avatar_image']['name'])) {
+					    	$avatar_error=false;
+					    	if ($_FILES['avatar_image']['error'] > 0) {
+					    		echo "<span class='errors'>Erreur lors du transfert</span><br/>";
+					    		$avatar_error=true;
+					    	}
+					    	else
+					    	{
+					    		$info = getimagesize($_FILES['avatar_image']['tmp_name']);}
+								if ($info === FALSE) {
+				  					 echo "<span class='errors'>Impossible de déterminer le type de l'image</span><br/>";
+				  					 $avatar_error=true;
+								}
+								if (($info[2] !== IMAGETYPE_JPEG) && ($info[2] !== IMAGETYPE_PNG)) {
+									echo "<span class='errors'>L'image n'est pas au format JPG ou PNG</span><br/>";	
+									$avatar_error=true;
+							}
+							$type;
+							if($info[2] === IMAGETYPE_JPEG) $type='.jpg';
+							if($info[2] === IMAGETYPE_PNG) $type='.png';
+							if(!$avatar_error){
+								$avatar_path = BP_AVATAR_UPLOAD_PATH . '/avatars/';
+								if ( !file_exists($avatar_path)) {
+									mkdir($avatar_path);
+								}
+								$avatar_path .= bp_loggedin_user_id().'/';
+								if ( !file_exists($avatar_path)) {
+									mkdir($avatar_path);
+								}
+								move_uploaded_file($_FILES['avatar_image']['tmp_name'],$avatar_path.'avatar'.$type);
+							}
+						}
+						update_user_meta(bp_loggedin_user_id(), 'description', $_POST['user_description'] );
+						if($_POST['facebook_avatar']||$_POST['reset_avatar']){
+							if(file_exists(BP_AVATAR_UPLOAD_PATH. '/avatars/'.bp_loggedin_user_id().'/avatar.png')){
+								unlink(BP_AVATAR_UPLOAD_PATH. '/avatars/'.bp_loggedin_user_id().'/avatar.png');
+							}
+							if(file_exists(BP_AVATAR_UPLOAD_PATH. '/avatars/'.bp_loggedin_user_id().'/avatar.jpg')){
+								unlink(BP_AVATAR_UPLOAD_PATH. '/avatars/'.bp_loggedin_user_id().'/avatar.jpg');
+							}
+							if($_POST['reset_avatar']){
+								file_put_contents(BP_AVATAR_UPLOAD_PATH. '/avatars/'.bp_loggedin_user_id().'/avatar.jpg', file_get_contents(get_stylesheet_directory_uri() . "/images/default_avatar.jpg"));
+							}
+						}			
+		    	}
+		    
 			if (isset($_SESSION['error_invest'])) {
 			    for ($i = 0; $i < count($_SESSION['error_invest']); $i++) {
 			    ?>
@@ -53,9 +97,10 @@ if (session_id() == '') session_start();
 			    }
 			    unset($_SESSION['error_invest']);
 			}
+		}
 		    ?>
 
-		    <form name="update-form" class="standard-form" action="<?php echo get_permalink($page_update_account->ID); ?>" method="post" enctype="multipart/form-data">
+		    <form name="update-form" class="standard-form" action="<?php echo get_permalink($page_update_account->ID); ?>" method="post" enctype="multipart/form-data" id='update-user-form'>
 
 
 			<h4 style="padding-left: 20px;"><?php _e('Ces informations sont n&eacute;cessaires pour investir dans un projet.', 'yproject'); ?></h4>
@@ -75,9 +120,23 @@ if (session_id() == '') session_start();
 
 				<label for="update_publicname" class="standard-label">Nom public</label>
 				<input type="text" name="update_publicname" id="update_publicname" value="<?php echo $current_user->display_name; ?>" /><br />
+				
+				<label for="avatar_image" class="standard-label">Avatar</label>
+				<input type="file" name="avatar_image" id="avatar_image" />
+				<input type="checkbox" name="reset_avatar">Supprimer l'avatar actuel
+				<?php 
+				$facebook_meta = get_user_meta($current_user->ID, 'social_connect_facebook_id', true);
+				if (isset($facebook_meta) && $facebook_meta != "") : 
+				?>
+				<input type="checkbox" name="facebook_avatar">Utiliser l'avatar facebook
+				<?php endif; ?>
+				<br />
 
 				<label for="update_birthday_day" class="standard-label"><?php _e( 'Date de naissance', 'yproject' ); ?></label>
 				<select name="update_birthday_day" id="update_birthday_day">
+
+				
+				 
 				    <?php
 					for ($i = 1; $i <= 31; $i++) { ?>
 					    <option value="<?php echo $i; ?>"<?php if ($current_user->get('user_birthday_day') == $i) echo ' selected="selected"';?>><?php echo $i; ?></option>
@@ -132,6 +191,8 @@ if (session_id() == '') session_start();
 				<label for="update_mobile_phone" class="standard-label"><?php _e( 'T&eacute;l&eacute;phone mobile', 'yproject' ); ?></label>
 				<input type="text" name="update_mobile_phone" id="update_mobile_phone" value="<?php echo $current_user->get('user_mobile_phone'); ?>" /><br /><br />
 
+				<label for="user_description" class="standard-label">Description</label>
+				<textarea name="user_description"> <?php $user_meta = get_userdata(bp_loggedin_user_id()); echo($user_meta->description);?></textarea>
 			    </div>
 		
 
@@ -169,19 +230,19 @@ if (session_id() == '') session_start();
 			//Si l'utilisateur veut investir pour une nouvelle organisation
 			if (isset($_SESSION['redirect_current_invest_type'])) {
 			    if ($_SESSION['redirect_current_invest_type'] == "new_organisation") {
-				editOrganisation();
+					editOrganisation();
 			    } elseif ($_SESSION['redirect_current_invest_type'] != "user") { 
-				editOrganisation($_SESSION['redirect_current_invest_type']);
+					editOrganisation($_SESSION['redirect_current_invest_type']);
 			    }
 			} else {
 			    //Parcourir toutes les organisations
 			    $group_ids = BP_Groups_Member::get_group_ids( $current_user->ID );
 			    foreach ($group_ids['groups'] as $group_id) {
-				$group = groups_get_group( array( 'group_id' => $group_id ) );
-				$group_type = groups_get_groupmeta($group_id, 'group_type');
-				if ($group->status == 'private' && $group_type == 'organisation' && BP_Groups_Member::check_is_admin($current_user->ID, $group_id)) {
-				    editOrganisation($group_id);
-				}
+					$group = groups_get_group( array( 'group_id' => $group_id ) );
+					$group_type = groups_get_groupmeta($group_id, 'group_type');
+					if ($group->status == 'private' && $group_type == 'organisation' && BP_Groups_Member::check_is_admin($current_user->ID, $group_id)) {
+					    editOrganisation($group_id);
+					}
 			    }
 			}
 			?>
@@ -199,7 +260,7 @@ if (session_id() == '') session_start();
 			<input type="hidden" name="update_user_id" value="<?php echo $current_user->ID; ?>" /><br /><br />
 		    </form>
 		<?php
-		endif;
+		
 		?>
 	    </div>
 	</div>
@@ -324,5 +385,26 @@ function editOrganisation($orga_id = false) {
 
 	</div>
 <?php
+}
+
+
+function clearDir($dossier) {
+	$ouverture=@opendir($dossier);
+	if (!$ouverture) return;
+	while($fichier=readdir($ouverture)) {
+		if ($fichier == '.' || $fichier == '..') continue;
+			if (is_dir($dossier."/".$fichier)) {
+				$r=clearDir($dossier."/".$fichier);
+				if (!$r) return false;
+			}
+			else {
+				$r=@unlink($dossier."/".$fichier);
+				if (!$r) return false;
+			}
+	}
+closedir($ouverture);
+$r=@rmdir($dossier);
+if (!$r) return false;
+	return true;
 }
 ?>

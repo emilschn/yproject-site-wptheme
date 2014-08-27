@@ -17,32 +17,7 @@ locate_template( array( 'members/single/admin-bar.php' ), true ); ?>
 
 			
 
-			<!--<div id="item-nav">
-				<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
-					<ul>
-
-						<?php bp_get_displayed_user_nav(); ?>
-
-						<?php do_action( 'bp_member_options_nav' ); ?>
-
-					</ul>
-				</div>
-			</div>
-
-			<div id="item-body" role="main">
-
-				<?php do_action( 'bp_before_member_body' ); ?>
-
-				<div class="item-list-tabs no-ajax" id="subnav">
-					<ul>
-
-						<?php bp_get_options_nav(); ?>
-
-						<?php do_action( 'bp_member_plugin_options_nav' ); ?>
-
-					</ul>
-				</div>--><!-- .item-list-tabs -->
-
+			
 				<h2 class="underlined"><?php _e( 'Email Notification', 'buddypress' ); ?></h2>
 
 				<?php do_action( 'bp_template_content' ); ?>
