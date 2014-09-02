@@ -16,9 +16,10 @@ if ($can_modify) {
 	$params_full = ''; $params_partial = '';
 	if (isset($_GET['preview']) && $_GET['preview'] = 'true') { $params_full = '?preview=true'; $params_partial = '&preview=true'; }
 	$campaign_id_param = '?campaign_id=';
-	$campaign_id_param .= $campaign_id;	    // Page projet
-	$page_manage = get_page_by_path('gerer');   // Gérer le projet
-	$page_add_news = get_page_by_path('ajouter-une-actu');	// Ajouter une actualité
+	$campaign_id_param .= $campaign_id;				// Page projet
+	$page_manage = get_page_by_path('gerer');			// Gérer le projet
+	$page_add_news = get_page_by_path('ajouter-une-actu');		// Ajouter une actualité
+	$page_edit_team = get_page_by_path('projet-editer-equipe');	// Editer l'équipe
 	// Statistiques avancées
 	if (strtotime($post->post_date) < strtotime('2014-02')) {
 	    $pages_stats = get_page_by_path('vote'); 
@@ -40,7 +41,7 @@ if ($can_modify) {
 	
 	//Récupération de la page en cours
 	$current_page = 'project';
-	if (isset($page_name)) $current_page = $page_name;
+	if (isset($old_post->post_name)) $current_page = $old_post->post_name;
 	if (bp_is_group()) $current_page = 'group';
 ?>
 	<div id="yp_admin_bar">
@@ -50,6 +51,8 @@ if ($can_modify) {
 			<a href="<?php echo get_permalink($page_manage->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'gerer') { echo 'class="selected"'; } ?>>G&eacute;rer le projet</a>
 			&nbsp; &nbsp; &nbsp;
 			<a href="<?php echo get_permalink($page_add_news->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'ajouter-une-actu') { echo 'class="selected"'; } ?>><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
+			 &nbsp; &nbsp; &nbsp;
+			<a href="<?php echo get_permalink($page_edit_team->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'projet-editer-equipe') { echo 'class="selected"'; } ?>><?php echo __('Editer l&apos;&eacute;quipe', 'yproject'); ?></a>
 			 &nbsp; &nbsp; &nbsp;
 			<a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'vote' || $current_page == 'statistiques-avancees') { echo 'class="selected"'; } ?>>Statistiques avanc&eacute;es</a>
 			<?php if ($group_link != '') : ?>

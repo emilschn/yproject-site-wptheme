@@ -182,6 +182,37 @@ add_shortcode('yproject_home_discover', 'yproject_home_discover_shortcode');
 
 /** FIN SHORTCODES ACCUEIL **/
 
+/**
+ * BIBLIOTHEQUE POUR VERIFICATIONS
+ */
+function yproject_check_user_can_see_project_page() {
+	//Si l'utilisateur n'est pas connecté, on redirige sur la page de connexion
+	if (!is_user_logged_in()) {
+		$page_connexion = get_page_by_path('connexion');
+		wp_redirect(get_permalink($page_connexion->ID));
+		exit();
+	}
+	//Si la campagne n'est pas définie, on retourne à l'accueil
+	if (!isset($_GET['campaign_id'])) {
+		wp_redirect(site_url());
+		exit();
+	}
+}
+
+function yproject_user_can_manage_project_page() {
+	$buffer = false;
+	
+	//Si l'utilisateur est l'auteur de la campagne ou si c'est un admin, il peut voir la page
+	//TODO : ajouter test pour membres équipe
+	$current_user = wp_get_current_user();
+	$current_user_id = $current_user->ID;
+	global $post;
+	if ($current_user_id == $post->post_author || current_user_can('manage_options'))
+		$buffer = true;
+	    
+	return $buffer;
+    
+}
 
 
 function yproject_bbp_get_forum_title($title) {
