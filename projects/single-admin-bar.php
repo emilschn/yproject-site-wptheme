@@ -1,17 +1,15 @@
 <?php 
-global $can_modify;
-// La barre d'admin n'apparait que pour l'admin du site et pour l'admin de la page
-$current_user = wp_get_current_user();
-$current_user_id = $current_user->ID;
-global $campaign_id;
+global $post, $campaign_id, $can_modify;
 if (!isset($campaign_id)) {
     if (isset($_GET['campaign_id'])) $campaign_id = $_GET['campaign_id'];
     else $campaign_id = get_the_ID();
 }
-$can_modify = false;
 $old_post = $post;
 $post = get_post($campaign_id);
-if ($current_user_id == $post->post_author || current_user_can('manage_options')){$can_modify=true;}
+
+locate_template( array("requests/projects.php"), true );
+$can_modify = YPProjectLib::current_user_can_edit($campaign_id);
+
 if ($can_modify) {
 	$params_full = ''; $params_partial = '';
 	if (isset($_GET['preview']) && $_GET['preview'] = 'true') { $params_full = '?preview=true'; $params_partial = '&preview=true'; }
@@ -19,7 +17,7 @@ if ($can_modify) {
 	$campaign_id_param .= $campaign_id;				// Page projet
 	$page_manage = get_page_by_path('gerer');			// Gérer le projet
 	$page_add_news = get_page_by_path('ajouter-une-actu');		// Ajouter une actualité
-	$page_edit_team = get_page_by_path('projet-editer-equipe');	// Editer l'équipe
+	$page_manage_team = get_page_by_path('projet-gerer-equipe');	// Editer l'équipe
 	// Statistiques avancées
 	if (strtotime($post->post_date) < strtotime('2014-02')) {
 	    $pages_stats = get_page_by_path('vote'); 
@@ -52,7 +50,7 @@ if ($can_modify) {
 			&nbsp; &nbsp; &nbsp;
 			<a href="<?php echo get_permalink($page_add_news->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'ajouter-une-actu') { echo 'class="selected"'; } ?>><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
 			 &nbsp; &nbsp; &nbsp;
-			<a href="<?php echo get_permalink($page_edit_team->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'projet-editer-equipe') { echo 'class="selected"'; } ?>><?php echo __('Editer l&apos;&eacute;quipe', 'yproject'); ?></a>
+			<a href="<?php echo get_permalink($page_manage_team->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'projet-gerer-equipe') { echo 'class="selected"'; } ?>><?php echo __('G&eacute;rer l&apos;&eacute;quipe', 'yproject'); ?></a>
 			 &nbsp; &nbsp; &nbsp;
 			<a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'vote' || $current_page == 'statistiques-avancees') { echo 'class="selected"'; } ?>>Statistiques avanc&eacute;es</a>
 			<?php if ($group_link != '') : ?>

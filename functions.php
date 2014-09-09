@@ -199,21 +199,6 @@ function yproject_check_user_can_see_project_page() {
 	}
 }
 
-function yproject_user_can_manage_project_page() {
-	$buffer = false;
-	
-	//Si l'utilisateur est l'auteur de la campagne ou si c'est un admin, il peut voir la page
-	//TODO : ajouter test pour membres équipe
-	$current_user = wp_get_current_user();
-	$current_user_id = $current_user->ID;
-	global $post;
-	if ($current_user_id == $post->post_author || current_user_can('manage_options'))
-		$buffer = true;
-	    
-	return $buffer;
-    
-}
-
 
 function yproject_bbp_get_forum_title($title) {
     $campaign_post = get_post($title);

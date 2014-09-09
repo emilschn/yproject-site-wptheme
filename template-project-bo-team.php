@@ -5,8 +5,11 @@
  */
 global $campaign, $post;
 yproject_check_user_can_see_project_page();
+locate_template( array("requests/projects.php"), true );
 $feedback = '';
 if (isset($_REQUEST['action'])) $feedback = YPProjectLib::edit_team();
+
+$campaign_id = $_GET['campaign_id'];
 ?>
 
 <?php get_header(); ?>
@@ -16,7 +19,7 @@ if (isset($_REQUEST['action'])) $feedback = YPProjectLib::edit_team();
 
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 				
-				<?php if (yproject_user_can_manage_project_page()): ?>
+				<?php if (YPProjectLib::current_user_can_edit($campaign_id)): ?>
 		    
 					<?php require_once('projects/single-admin-bar.php'); ?>
 
@@ -24,7 +27,7 @@ if (isset($_REQUEST['action'])) $feedback = YPProjectLib::edit_team();
 					    
 						<?php require_once('projects/single-header.php'); ?>
 
-						<div class="center">
+						<div class="center margin-height">
 						    
 							<span class="success"><?php if ($feedback === TRUE) {
 								_e('Modification effectu&eacute;e', 'yproject');
@@ -44,7 +47,30 @@ if (isset($_REQUEST['action'])) $feedback = YPProjectLib::edit_team();
 						    
 							<h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
 							
-							<?php _e('Aucun membre dans l&apos;&eacute;quipe pour l&apos;instant.', 'yproject'); ?>
+							<?php 
+								$project_api_id = BoppLibHelpers::get_api_project_id($_GET['campaign_id']);
+								$team_member_list = BoppLib::get_project_members_by_role($project_api_id, YPProjectLib::$project_team_member_role['slug']); 
+								if (count($team_member_list) > 0):
+							?>
+								<ul>
+							<?php
+									foreach ($team_member_list as $team_member): ?>
+										<li>
+											<?php echo $team_member->user_name . ' ' . $team_member->user_surname; ?>
+											<form action="" method="POST" style="display: inline-block">
+												<input type="hidden" name="action" value="yproject-remove-member" />
+												<input type="hidden" name="user_to_remove" value="<?php echo $team_member->wp_user_id; ?>" />
+												<input type="submit" value="<?php _e('Supprimer', 'yproject'); ?>" />
+											</form>
+										</li>
+									<?php endforeach;
+							?>
+								</ul>
+							<?php	
+								else:
+									_e('Aucun membre dans l&apos;&eacute;quipe pour l&apos;instant.', 'yproject');
+								endif;
+							?>
 						    
 							<h2><?php _e('Ajouter un utilisateur dans l&apos;&eacute;quipe', 'yproject'); ?></h2>
 							

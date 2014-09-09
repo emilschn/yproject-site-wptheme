@@ -1,4 +1,5 @@
 <?php
+if (YPProjectLib::current_user_can_edit($_GET['campaign_id'])) {
 if (isset($_GET['campaign_id'])) $post_camp = get_post($_GET['campaign_id']);
 
 $stats_views = 0;
@@ -58,3 +59,5 @@ Votre projet a &eacute;t&eacute; vu<br />
 <strong><?php echo $nb_users; ?></strong> personnes ont particip&eacute;.<br />
 <a href="<?php echo $forum_last_reply_url; ?>">Derni&egrave;re r&eacute;ponse</a> par <?php echo $forum_last_user_name; ?>. <?php echo $forum_last_activity; ?>.
 <br /><br />
+
+<?php } ?>

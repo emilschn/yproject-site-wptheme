@@ -109,6 +109,10 @@ img { border: 0; }
     padding-top: 45px;
 }
 
+.margin-height {
+    margin: 15px auto;
+}
+
 h4 {
     font-weight: normal;
 }
