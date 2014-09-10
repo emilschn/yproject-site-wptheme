@@ -4,17 +4,17 @@ if ( !function_exists( 'bp_dtheme_enqueue_styles' ) ) :
 	function bp_dtheme_enqueue_styles() {}
 endif;
 
-//Définition de la largeur de l'affichage
+//DÃ©finition de la largeur de l'affichage
 if ( ! isset( $content_width ) ) $content_width = 960;
 
-//Définition du domaine pour les traductions
+//DÃ©finition du domaine pour les traductions
 function yproject_setup() {
 	load_child_theme_textdomain( 'yproject', get_stylesheet_directory() . '/languages' );
 	remove_action( 'bp_member_header_actions',    'bp_send_public_message_button',  20 );
 }
 add_action( 'after_setup_theme', 'yproject_setup', 15 );
 
-//Sécurité
+//SÃ©curitÃ©
 remove_action("wp_head", "wp_generator");
 add_filter('login_errors',create_function('$a', "return null;"));
 
@@ -99,17 +99,17 @@ add_filter( 'authenticate', 'yproject_email_login_authenticate', 20, 3 );
 
 
 /** GESTION DES ROLES UTILISATEURS **/
-//Permet à tous les utilisateurs inscrits d'insérer des images
+//Permet Ã  tous les utilisateurs inscrits d'insÃ©rer des images
 function yproject_change_user_cap() {
 	if ( is_user_logged_in() ) {
-		//Redéfinit le style de tinymce
+		//RedÃ©finit le style de tinymce
 		global $editor_styles;
 		$editor_styles = (array) $editor_styles;
 		$stylesheet    = 'editor-style.css';
 		$stylesheet    = (array) $stylesheet;
 		$editor_styles = array_merge( $editor_styles, $stylesheet );
 
-		//Redéfinit le role utilisateur pour permettre l'upload de fichier
+		//RedÃ©finit le role utilisateur pour permettre l'upload de fichier
 		$role_subscriber = get_role("subscriber");
 		$role_subscriber->add_cap( 'level_0' );
 		$role_subscriber->remove_cap( 'level_1' );
@@ -124,13 +124,13 @@ function yproject_change_user_cap() {
 		$role_subscriber->remove_cap( 'edit_post' );
 		$role_subscriber->remove_cap( 'edit_posts' );
 		$role_subscriber->remove_cap( 'edit_private_posts' );
-		$role_subscriber->remove_cap( 'edit_published_posts' );
-		$role_subscriber->remove_cap( 'edit_others_posts' );
+		$role_subscriber->add_cap( 'edit_published_posts' );
+		$role_subscriber->add_cap( 'edit_others_posts' );
 	}
 }
 add_action('init', 'yproject_change_user_cap');
 
-//Permet de n'afficher que les images uploadées par l'utilisateur en cours
+//Permet de n'afficher que les images uploadÃ©es par l'utilisateur en cours
 function yproject_my_files_only( $wp_query ) {
 	global $current_user, $pagenow;
 	if( !is_a( $current_user, 'WP_User') ) return;
@@ -140,7 +140,7 @@ function yproject_my_files_only( $wp_query ) {
 }
 add_filter('parse_query', 'yproject_my_files_only' );
 
-//Interdit l'accès à l'admin pour les utilisateurs qui ne sont pas admins
+//Interdit l'accÃ¨s Ã  l'admin pour les utilisateurs qui ne sont pas admins
 function yproject_admin_init() {
 	global $pagenow;
 	if ($pagenow != 'media-new.php' && $pagenow != 'async-upload.php' && $pagenow != 'media-upload.php' && $pagenow != 'media.php' && !current_user_can('level_5') ) {
@@ -155,7 +155,7 @@ function yproject_admin_init() {
 
 /** SHORTCODES ACCUEIL **/
 /**
- * Les fonctions gèrent l'affichage de la partie centrale de la page d'accueil (participer à un projet, proposer un projet)
+ * Les fonctions gÃ¨rent l'affichage de la partie centrale de la page d'accueil (participer Ã  un projet, proposer un projet)
  * @param type $atts
  * @param type $content
  * @return type
@@ -186,13 +186,13 @@ add_shortcode('yproject_home_discover', 'yproject_home_discover_shortcode');
  * BIBLIOTHEQUE POUR VERIFICATIONS
  */
 function yproject_check_user_can_see_project_page() {
-	//Si l'utilisateur n'est pas connecté, on redirige sur la page de connexion
+	//Si l'utilisateur n'est pas connectÃ©, on redirige sur la page de connexion
 	if (!is_user_logged_in()) {
 		$page_connexion = get_page_by_path('connexion');
 		wp_redirect(get_permalink($page_connexion->ID));
 		exit();
 	}
-	//Si la campagne n'est pas définie, on retourne à l'accueil
+	//Si la campagne n'est pas dÃ©finie, on retourne Ã  l'accueil
 	if (!isset($_GET['campaign_id'])) {
 		wp_redirect(site_url());
 		exit();
@@ -207,7 +207,7 @@ function yproject_bbp_get_forum_title($title) {
 add_filter('bbp_get_forum_title', 'yproject_bbp_get_forum_title');
 
 /**
- * Ajoute rel=0 à la fin de l'url de la vidéo
+ * Ajoute rel=0 Ã  la fin de l'url de la vidÃ©o
  * @param type $embed
  * @return type
  */
@@ -292,7 +292,7 @@ function get_user_avatar($user_id, $size = 'normal'){
 
 		$profile_type = "";
 		$google_meta = get_user_meta($user_id, 'social_connect_google_id', true);
-		if (isset($google_meta) && $google_meta != "") $profile_type = ""; //TODO : Remplir avec "google" quand on gèrera correctement
+		if (isset($google_meta) && $google_meta != "") $profile_type = ""; //TODO : Remplir avec "google" quand on gÃ¨rera correctement
 		$facebook_meta = get_user_meta($user_id, 'social_connect_facebook_id', true);
 		if (isset($facebook_meta) && $facebook_meta != "") $profile_type = "facebook";
 
@@ -325,13 +325,13 @@ function update_jy_crois(){
 	$campaign = atcf_get_campaign( $post );
 	$campaign_id = $campaign->ID;
 
-	// Construction des urls utilisés dans les liens du fil d'actualité
-	// url d'une campagne précisée par son nom 
+	// Construction des urls utilisÃ©s dans les liens du fil d'actualitÃ©
+	// url d'une campagne prÃ©cisÃ©e par son nom 
 	$campaign_url = get_permalink($_POST['id_campaign']);
 	$post_title = $post->post_title;
 	$url_campaign = '<a href="'.$campaign_url.'">'.$post_title.'</a>';
 	    
-	//url d'un utilisateur précis
+	//url d'un utilisateur prÃ©cis
 	$user_id = wp_get_current_user()->ID;
 	$user_display_name = wp_get_current_user()->display_name;
 	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '">' . $user_display_name . '</a>';
@@ -361,7 +361,7 @@ function update_jy_crois(){
 				'campaign_id'  => $campaign_id
 			)
 		);
-		// Inserer l'information dans la table du fil d'activité  de la BDD wp_bp_activity 
+		// Inserer l'information dans la table du fil d'activitÃ©  de la BDD wp_bp_activity 
 		bp_activity_delete(array (
 			'user_id'   => $user_id,
 			'component' => 'profile',
@@ -375,11 +375,11 @@ add_action( 'wp_ajax_update_jy_crois', 'update_jy_crois' );
 
 function comment_blog_post(){
 	global $wpdb, $post;
-	// Construction des urls utilisés dans les liens du fil d'actualité
-	// url d'une campagne précisée par son nom 
+	// Construction des urls utilisÃ©s dans les liens du fil d'actualitÃ©
+	// url d'une campagne prÃ©cisÃ©e par son nom 
 	$post_title = $post->post_title;
 	$url_blog = '<a href="'.get_permalink( $post->ID ).'">'.$post_title.'</a>';
-	//url d'un utilisateur précis
+	//url d'un utilisateur prÃ©cis
 	$user_id                = wp_get_current_user()->ID;
 	$user_display_name      = wp_get_current_user()->display_name;
 	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '"> ' . $user_display_name . '</a>';
@@ -388,7 +388,7 @@ function comment_blog_post(){
 	bp_activity_add(array (
 		'component' => 'profile',
 		'type'      => 'jycrois',
-		'action'    => $user_avatar.' '.$url_profile.' a commenté '.$url_blog
+		'action'    => $user_avatar.' '.$url_profile.' a commentÃ© '.$url_blog
 	    ));
 }
 add_action('comment_post','comment_blog_post');
@@ -467,7 +467,7 @@ function print_user_projects(){
 				$user_projects[$campaign->ID]['days_remaining']=$campaign->days_remaining();
 				$user_projects[$campaign->ID]['percent_minimum_completed']=$campaign->percent_minimum_completed();
 				$user_projects[$campaign->ID]['minimum_goal']=$campaign->minimum_goal(true);
-				//Infos relatives à l'investissement de l'utilisateur.
+				//Infos relatives Ã  l'investissement de l'utilisateur.
 				//$user_projects[$post->ID]['signsquid_infos']=$signsquid_infos;
 				$user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status']=$signsquid_status;
 				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_date']=$payment_date;
@@ -596,8 +596,8 @@ function print_user_projects(){
 							<?php if ($is_same_user): ?>
 						    
 							<?php
-							    //Boutons pour Annuler l'investissement | Recevoir le code à nouveau
-							    //Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
+							    //Boutons pour Annuler l'investissement | Recevoir le code Ã  nouveau
+							    //Visibles si la collecte est toujours en cours, si le paiement a bien Ã©tÃ© validÃ©, si le contrat n'est pas encore signÃ©
 							    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && is_object($signsquid_infos) && $signsquid_infos->{'status'} != 'Agreed') :
 							?>
 							<div class="project_preview_item_cancel">

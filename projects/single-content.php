@@ -7,10 +7,10 @@ global $campaign;
 $campaign_id_param = '?campaign_id=';
 if (isset($_GET['campaign_id'])) {
 	$campaign_id_param .= $_GET['campaign_id'];
-	$post = get_post($_GET['campaign_id']);
-	$campaign = atcf_get_campaign( $post );
+	$post_campaign = get_post($_GET['campaign_id']);
+	$campaign = atcf_get_campaign( $post_campaign );
 } else  {
-	$campaign_id_param .= $post->ID;
+	$campaign_id_param .= $post_campaign->ID;
 }
 $vote_status = html_entity_decode($campaign->vote());
 ?>
@@ -25,7 +25,7 @@ $vote_status = html_entity_decode($campaign->vote());
 		if ($campaign->video() == '' || $vote_status == 'preview') {
 			$attachments = get_posts( array(
 				'post_type' => 'attachment',
-				'post_parent' => $post->ID,
+				'post_parent' => $post_campaign->ID,
 				'post_mime_type' => 'image'
 				));
 			$image_obj = '';
@@ -69,8 +69,8 @@ $vote_status = html_entity_decode($campaign->vote());
 			<p>  <?php echo get_the_title(); ?> </p>
 		</div>
 		<div id="project-map">
-			<?php $cursor_top_position=get_post_meta($post->ID,'campaign_cursor_top_position',TRUE); ?>
-			<?php $cursor_left_position=get_post_meta($post->ID,'campaign_cursor_left_position',TRUE); ?>
+			<?php $cursor_top_position=get_post_meta($post_campaign->ID,'campaign_cursor_top_position',TRUE); ?>
+			<?php $cursor_left_position=get_post_meta($post_campaign->ID,'campaign_cursor_left_position',TRUE); ?>
 			<div id="map-cursor" style="<?php if($cursor_top_position!='') echo 'top:'.$cursor_top_position.';'; if($cursor_left_position!='') echo 'left:'.$cursor_left_position; ?> ">
 				<p><?php echo $campaign->location(); ?></p>
 			</div>
@@ -94,18 +94,12 @@ $vote_status = html_entity_decode($campaign->vote());
 	</div>
 </div>
 <div id="project-description-title-padding"></div>
+
 <div class="part-title-separator">
 	<span class="part-title"> 
 		Description du projet
 	</span>
 </div>
-<div id="projects-bottom-desc">
-	<?php 
-	if ($vote_status == 'preview') : 
-		//$forum = get_page_by_path('forum');
-	?>
-	<!--<center><a href="<?php echo get_permalink($forum->ID) . $campaign_id_param; ?>">Participez sur son forum !</a></center>-->
-<?php endif; ?>
 
 <div class="indent">
 	<div class="projects-desc-item">

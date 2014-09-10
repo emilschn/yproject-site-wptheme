@@ -4,8 +4,7 @@ if (!isset($campaign_id)) {
     if (isset($_GET['campaign_id'])) $campaign_id = $_GET['campaign_id'];
     else $campaign_id = get_the_ID();
 }
-$old_post = $post;
-$post = get_post($campaign_id);
+$post_campaign = get_post($campaign_id);
 
 locate_template( array("requests/projects.php"), true );
 $can_modify = YPProjectLib::current_user_can_edit($campaign_id);
@@ -19,7 +18,7 @@ if ($can_modify) {
 	$page_add_news = get_page_by_path('ajouter-une-actu');		// Ajouter une actualité
 	$page_manage_team = get_page_by_path('projet-gerer-equipe');	// Editer l'équipe
 	// Statistiques avancées
-	if (strtotime($post->post_date) < strtotime('2014-02')) {
+	if (strtotime($post_campaign->post_date) < strtotime('2014-02')) {
 	    $pages_stats = get_page_by_path('vote'); 
 	} else {
 	    $pages_stats = get_page_by_path('statistiques-avancees');
@@ -76,6 +75,4 @@ if ($can_modify) {
 		}
 		?>
 	</div>
-<?php }
-$post = $old_post; 
-?>
+<?php } ?>
