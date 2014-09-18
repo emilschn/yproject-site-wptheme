@@ -38,7 +38,7 @@ if ($can_modify) {
 	
 	//Récupération de la page en cours
 	$current_page = 'project';
-	if (isset($old_post->post_name)) $current_page = $old_post->post_name;
+	if (isset($post->post_name)) $current_page = $post->post_name;
 	if (bp_is_group()) $current_page = 'group';
 ?>
 	<div id="yp_admin_bar">
