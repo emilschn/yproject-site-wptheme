@@ -43,7 +43,7 @@ if ($can_modify) {
 ?>
 	<div id="yp_admin_bar">
 		<div class="center">
-			<a href="<?php echo get_permalink($campaign_id) . $params_full; ?>" <?php if ($current_page == 'project') { echo 'class="selected"'; } ?>><?php echo __('Page projet', 'yproject'); ?></a>
+			<a href="<?php echo get_permalink($campaign_id) . $params_full; ?>" <?php if ($current_page == $post_campaign->post_name) { echo 'class="selected"'; } ?>><?php echo __('Page projet', 'yproject'); ?></a>
 			&nbsp; &nbsp; &nbsp;
 			<a href="<?php echo get_permalink($page_manage->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'gerer') { echo 'class="selected"'; } ?>>G&eacute;rer le projet</a>
 			&nbsp; &nbsp; &nbsp;

@@ -33,7 +33,7 @@ $campaign_id = $_GET['campaign_id'];
 								_e('Modification effectu&eacute;e', 'yproject');
 							} ?></span>
 						    
-							<span class="error"><?php if ($feedback !== TRUE && !empty($feedback)) {
+							<span class="errors"><?php if ($feedback !== TRUE && !empty($feedback)) {
 								_e($feedback, 'yproject');
 							} ?></span>
 						    
@@ -49,7 +49,7 @@ $campaign_id = $_GET['campaign_id'];
 							
 							<?php 
 								$project_api_id = BoppLibHelpers::get_api_project_id($_GET['campaign_id']);
-								$team_member_list = BoppLib::get_project_members_by_role($project_api_id, YPProjectLib::$project_team_member_role['slug']); 
+								$team_member_list = BoppLib::get_project_members_by_role($project_api_id, YPProjectLib::$project_team_member_role['slug']);
 								if (count($team_member_list) > 0):
 							?>
 								<ul>
@@ -75,7 +75,7 @@ $campaign_id = $_GET['campaign_id'];
 							<h2><?php _e('Ajouter un utilisateur dans l&apos;&eacute;quipe', 'yproject'); ?></h2>
 							
 							<form action="" method="POST">
-								<input type="text" name="new_team_member" style="width: 200px;" placeholder="<?php _e('Saisissez l&apos;e-mail ou l&apos;identifiant', 'ypoject'); ?>" />
+								<input type="text" name="new_team_member" style="width: 200px;" placeholder="<?php _e('Saisissez l&apos;e-mail ou l&apos;identifiant d&apos;un utilisateur inscrit sur WEDOGOOD.co', 'ypoject'); ?>" />
 								<input type="hidden" name="action" value="yproject-add-member" />
 								<input type="submit" value="<?php _e('Ajouter', 'yproject'); ?>" />
 							</form>

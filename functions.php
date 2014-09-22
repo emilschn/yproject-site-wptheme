@@ -149,6 +149,24 @@ function yproject_admin_init() {
 	}
 }
 //add_action( 'admin_init', 'yproject_admin_init' );
+
+function yproject_page_template( $template ) {
+	locate_template( array("requests/projects.php"), true );
+	global $post;
+	$campaign = atcf_get_campaign( $post );
+	$campaign_id = $post->ID;
+	if (is_object( $campaign ) && ($campaign->campaign_status() == 'preparing') && !YPProjectLib::current_user_can_edit($campaign_id)) {
+		header("Status: 404 Not Found");
+		global $wp_query;
+		$wp_query->set_404();
+		status_header(404);
+		nocache_headers();
+		$new_template = locate_template( array( '404.php' ) );
+		return $new_template;
+	}
+	return $template;
+}
+add_filter( 'template_include', 'yproject_page_template', 99 );
 /** FIN GESTION DES ROLES UTILISATEURS **/
 
 

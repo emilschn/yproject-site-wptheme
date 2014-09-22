@@ -71,7 +71,7 @@ body a {
 img { border: 0; }
 
 .invest_error {
-    color: red;
+    color: #FE494C;
 }
 
 .invest_success {

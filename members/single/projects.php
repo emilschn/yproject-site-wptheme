@@ -1,11 +1,49 @@
 <?php 
+locate_template( array("requests/projects.php"), true );
 $page_publish = get_page_by_path('creer-un-projet');
 $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 ?>
 
 <h2 class="underlined">Projets</h2>
 
-<?php if ($display_loggedin_user) { ?><a href="<?php echo get_permalink($page_publish->ID); ?>" class="button">Cr&eacute;er un projet</a><br /><br /><br /><?php } ?>
+	<div>
+		<div class="left two-thirds">
+			<?php
+			$campaign_status = array('publish');
+			if ($display_loggedin_user) array_push($campaign_status, 'private');
+			query_posts( array(
+				'post_type' => 'download',
+				'author' => bp_displayed_user_id(),
+				'post_status' => $campaign_status
+			));
+
+			if (have_posts()) {
+			?>
+			<strong><?php if ($display_loggedin_user) { ?>Mes projets :<?php } else { ?>Ses projets :<?php } ?></strong>
+				<?php 
+				$i = 0;
+				while (have_posts()) {
+					the_post();
+					if ($i > 0) {?> | <?php }
+					?><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a><?php
+					$i++;
+				}
+				?>
+			<?php
+			}
+			?>
+
+		</div>
+	    
+		<?php if ($display_loggedin_user) { ?>
+		<div class="right">
+			<a href="<?php echo get_permalink($page_publish->ID); ?>" class="button right">Cr&eacute;er un projet</a>
+		</div>
+		<?php } ?>
+	    
+		<div class="clear"></div>
+	</div>
+	<br /><br /><br />
 	
 <div id="ajax-loader" class="center" style="text-align: center;"><img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loader.gif"/></div>
 
