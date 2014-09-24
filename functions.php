@@ -436,14 +436,17 @@ function print_user_projects(){
 			<h3> Afficher les projets : </h3>
 			<form id="filter-projects">
   				<label><input type="checkbox" name="filter" value="jycrois">
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="<?php echo $str_believe; ?>" title="<?php echo $str_believe; ?>" />
   				<?php echo $str_believe; ?>
 				</label>
 		
-   				<label><input type="checkbox" name="filter" value="voted">
+   				<label style="margin-left: 35px;"><input type="checkbox" name="filter" value="voted">
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png" alt="<?php echo $str_vote; ?>" title="<?php echo $str_vote; ?>" />
   				<?php echo $str_vote; ?>
 				</label>
 		
-   				<label><input type="checkbox" name="filter" value="invested" checked="checked">
+   				<label style="margin-left: 35px;"><input type="checkbox" name="filter" value="invested" checked="checked">
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png" alt="<?php echo $str_investment; ?>" title="<?php echo $str_investment; ?>" />
   				<?php echo $str_investment; ?>
 				</label>
 			</form>

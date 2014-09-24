@@ -32,6 +32,17 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 			<?php
 			}
 			?>
+					
+			<?php
+			$api_user_id = BoppLibHelpers::get_api_user_id(bp_displayed_user_id());
+			$project_list = BoppLib::get_user_projects_by_role($api_user_id, YPProjectLib::$project_team_member_role['slug']);
+			foreach ($project_list as $project) {
+				$post_project = get_post($project->wp_project_id);	    
+				if ($i > 0) {?> | <?php }
+				?><a href="<?php echo get_permalink($post_project->ID); ?>"><?php echo $post_project->post_title; ?></a><?php
+				$i++;
+			}
+			?>
 
 		</div>
 	    
