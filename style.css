@@ -1659,6 +1659,8 @@ footer span.menutitle {
     color: #FFF;
     font-size: 8pt;
     text-transform: uppercase;
+    text-align: left;
+    font-weight: bold;
 }
 
 footer a {
@@ -2945,12 +2947,12 @@ text-transform: uppercase;
     padding-bottom: 10px;
 }
 .projects-desc-content p img{
-    width:750px; /* you can use % */
+    max-width: 750px;
     height: auto;
- }
- #project-description-title-padding {
-     clear: both;
- }
+}
+#project-description-title-padding {
+    clear: both;
+}
 .indent{
     margin-left: 50px;
 }
@@ -3127,9 +3129,10 @@ display:none;
     font-size: 20px;
     text-transform: uppercase;
 }
-#projects-summary{
+#projects-summary {
+    margin-top: 20px;
     display: block;
-    height: 113px;
+    height: 137px;
     overflow: hidden;
 }
 
@@ -3245,4 +3248,13 @@ height: 18px;
     text-transform: uppercase;
     width: 310px;
     border: 0;
+}
+.wp-editor-container {
+    border: 1px solid rgb(222, 222, 222);
+}
+.wp-editor-container .mce-path {
+    display: none;
+}
+.media-modal-icon .screen-reader-text {
+    display: none;
 }

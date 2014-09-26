@@ -8,6 +8,8 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 
 	<div>
 		<div class="left two-thirds">
+			<strong><?php if ($display_loggedin_user) { ?>Mes projets :<?php } else { ?>Ses projets :<?php } ?></strong>
+			
 			<?php
 			$campaign_status = array('publish');
 			if ($display_loggedin_user) array_push($campaign_status, 'private');
@@ -16,11 +18,10 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 				'author' => bp_displayed_user_id(),
 				'post_status' => $campaign_status
 			));
+			$has_projects = false;
 
 			if (have_posts()) {
-			?>
-			<strong><?php if ($display_loggedin_user) { ?>Mes projets :<?php } else { ?>Ses projets :<?php } ?></strong>
-				<?php 
+				$has_projects = true;
 				$i = 0;
 				while (have_posts()) {
 					the_post();
@@ -28,21 +29,25 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 					?><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a><?php
 					$i++;
 				}
-				?>
-			<?php
 			}
 			?>
 					
 			<?php
 			$api_user_id = BoppLibHelpers::get_api_user_id(bp_displayed_user_id());
 			$project_list = BoppLib::get_user_projects_by_role($api_user_id, YPProjectLib::$project_team_member_role['slug']);
-			foreach ($project_list as $project) {
-				$post_project = get_post($project->wp_project_id);	    
-				if ($i > 0) {?> | <?php }
-				?><a href="<?php echo get_permalink($post_project->ID); ?>"><?php echo $post_project->post_title; ?></a><?php
-				$i++;
+			if (!empty($project_list)) {
+				$has_projects = true;
+				foreach ($project_list as $project) {
+					$post_project = get_post($project->wp_project_id);	    
+					if ($i > 0) {?> | <?php }
+					?><a href="<?php echo get_permalink($post_project->ID); ?>"><?php echo $post_project->post_title; ?></a><?php
+					$i++;
+				}
 			}
-			?>
+			
+			if (!$has_projects): ?>
+			Aucun
+			<?php endif; ?>
 
 		</div>
 	    

@@ -16,7 +16,6 @@ $vote_status = html_entity_decode($campaign->vote());
 ?>
 <div id="projects-top-desc">
 	<div id="projects-left-desc" class="left">
-		<h1 class="projects-title">Le projet</h1>
 		<div id="projects-summary"><?php echo html_entity_decode($campaign->summary()); ?></div>
 		<?php 
 		$video_element = '';

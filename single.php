@@ -81,11 +81,6 @@
 							</div>
 						</div>
 
-						<div class="left post_bottom_infos">
-							<?php $post = $campaign_post; ?>
-							<?php require_once('projects/single-sidebar.php'); ?>
-						</div>
-
 						<div style="clear: both"></div>
 					</div>
 				</div>
