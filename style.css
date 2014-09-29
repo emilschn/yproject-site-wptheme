@@ -50,10 +50,10 @@ body a {
     margin: auto;
 }
 
-.left {
+.left, .alignleft {
     float: left;
 }
-.right {
+.right, .alignright {
     float: right;
 }
 .clear {
