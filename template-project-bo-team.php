@@ -48,8 +48,9 @@ $campaign_id = $_GET['campaign_id'];
 							<h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
 							
 							<?php 
+								ypcf_debug_log('template-project-bo-team >> ' . $_GET['campaign_id']);
 								$project_api_id = BoppLibHelpers::get_api_project_id($_GET['campaign_id']);
-								$team_member_list = BoppLib::get_project_members_by_role($project_api_id, YPProjectLib::$project_team_member_role['slug']);
+								if (isset($project_api_id)) $team_member_list = BoppLib::get_project_members_by_role($project_api_id, YPProjectLib::$project_team_member_role['slug']);
 								if (count($team_member_list) > 0):
 							?>
 								<ul>
