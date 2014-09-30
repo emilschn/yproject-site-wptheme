@@ -2766,6 +2766,7 @@ text-transform: uppercase;
 }
 #head-image #img-container{
     position: relative;
+    background-color: #F2F2F2;
 }
 #head-image img{
     min-width: 100%;
