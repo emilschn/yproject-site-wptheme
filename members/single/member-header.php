@@ -54,33 +54,36 @@ $current_user = get_user_by('id', bp_displayed_user_id());
 
 </div><!-- #item-header-content -->
 
-<?php /*
-<div id="item-header-stats" class="left">
-    <?php  
-	global $wp_query;
-	
-	$nb_project_created = 0;
-	$posts_temp = query_posts( array(
-	    'post_type' => 'download',
-	    'author' => bp_displayed_user_id()
-	) );
-	if ($posts_temp) $nb_project_created = $wp_query->found_posts;
-	
-	$nb_project_founded = 0;
-	$purchases = edd_get_users_purchases(bp_current_user_id());
-	if ($purchases) $nb_project_founded = count($purchases);
-    ?>
-    <ul>
-	<li><strong><?php echo $nb_project_created; ?></strong> <?php _e("projet(s) lanc&eacute;(s)", "yproject"); ?></li>
-	<li><strong><?php echo $nb_project_founded; ?></strong> <?php _e("projet(s) soutenu(s)", "yproject"); ?></li>
-    </ul>
-    <?php bp_follow_add_follow_button(); ?>
-</div>*/ ?>
-	<?php /*<li><strong><?php echo mycred_get_users_cred(bp_displayed_user_id()); ?></strong> <?php _e("points", "yproject"); ?></li>*/ ?>
-
 
 <div style="clear: both"></div>
 
 <?php do_action( 'bp_after_member_header' ); ?>
 
 <?php do_action( 'template_notices' ); ?>
+
+<?php
+$display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
+
+//Gestion de renvoi du code
+if (is_user_logged_in() && $display_loggedin_user) :
+	//Si on a demandé de renvoyer le code
+	if (isset($_GET['invest_id_resend']) && $_GET['invest_id_resend'] != '') {
+		$contractid = ypcf_get_signsquidcontractid_from_invest($_GET['invest_id_resend']);
+		// $signsquid_infos = signsquid_get_contract_infos($contractid);
+		$signsquid_signatory = signsquid_get_contract_signatory($contractid);
+		$current_user = wp_get_current_user();
+		if ($signsquid_signatory != '' && $signsquid_signatory->{'email'} == $current_user->user_email) {
+		    if (ypcf_send_mail_purchase($_GET['invest_id_resend'], "send_code", $signsquid_signatory->{'code'}, $current_user->user_email)) { ?>
+			    Votre code de signature de contrat a &eacute;t&eacute; renvoy&eacute; &agrave; l&apos;adresse <?php echo $current_user->user_email; ?>.<br />
+			    
+		    <?php } else { ?>
+			    <span class="errors">Il y a eu une erreur lors de l&apos;envoi du code. N&apos;h&eacute;sitez pas &agrave; nous contacter.</span><br />
+			
+		    <?php }
+		    
+		} else { ?>
+			<span class="errors">Nous ne trouvons pas le contrat correspondant.</span><br />
+		    
+		<?php }
+	}
+endif; ?>
