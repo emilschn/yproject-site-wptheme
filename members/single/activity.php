@@ -7,6 +7,7 @@
  * @subpackage bp-default
  */
 
+date_default_timezone_set("Atlantic/Azores");
 do_action( 'bp_before_member_activity_content' ); ?>
 <h2 class="underlined">Mon Fil d'activit&eacute;</h2>
 <div class="activity center" role="main">
