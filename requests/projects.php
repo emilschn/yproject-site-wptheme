@@ -9,10 +9,10 @@ function query_projects_collecte($nb=0){
 	return queryHomeProjects($nb,'collecte');
 }
 function query_projects_funded($nb=0){
-	return queryHomeProjects($nb,'funded');
+	return queryFinishedProjects($nb,'funded');
 }
 function query_projects_archive($nb=0){
-	return queryHomeProjects($nb,'archive');
+	return queryFinishedProjects($nb,'archive');
 }
 
 function queryHomeProjects($nb,$type) {
@@ -37,6 +37,23 @@ function queryHomeProjects($nb,$type) {
 	);
 	return query_posts( $query_options );
 
+}
+
+function queryFinishedProjects($nb,$type) {
+	$query_options = array(
+		'showposts' => $nb,
+		'post_type' => 'download',
+		'post_status' => 'publish',
+		'meta_query' => array (
+			array (
+				'key' => 'campaign_vote',
+				'value' => $type
+			)
+		),
+		'orderby' => 'post_date',
+		'order' => 'asc'
+	);
+	return query_posts( $query_options );
 }
 
 class YPProjectLib {
