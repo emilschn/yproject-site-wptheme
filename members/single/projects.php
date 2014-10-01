@@ -201,27 +201,32 @@ if (is_user_logged_in() && $display_loggedin_user) :
 	else: ?>
 		<h2 class="underlined">Mon porte-monnaie électronique</h2>
 		<?php
-		    $real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id()) / 100;
+		    $mp_user_id = ypcf_mangopay_get_mp_user_id(bp_displayed_user_id());
+		    $mp_user = ypcf_mangopay_get_user_by_id($mp_user_id);
+		    $real_amount_invest = $mp_user->PersonalWalletAmount / 100;
 		?>
 		    Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br />
 
 		<?php 
-		    $strongauth_status = ypcf_mangopay_get_user_strong_authentication_status(get_current_user_id());
-		    if ($strongauth_status['status'] != ''):
-		?>
-		    <span class="error"><?php echo $strongauth_status['message']; ?></span><br />
-		    <?php if ($strongauth_status['status'] != 'waiting'): ?>
-			La pi&egrave;ce d&apos;identit&eacute; doit &ecirc;tre pr&eacute;sent&eacute;e recto-verso.<br />
-			Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf.<br />
-			Son poids doit &ecirc;tre inf&eacute;rieur &agrave; 2 Mo.<br />
-			<form id="mangopay_strongauth_form" action="" method="post" enctype="multipart/form-data">
-			    <input type="hidden" name="mangopaytoaccount" value="1" />
-			    <input type="hidden" name="document_submited" value="1" />
-			    <input type="file" name="StrongValidationDtoPicture" />
-			    <input type="submit" value="Envoyer"/>
-			</form><br /><br />
-		    <?php endif; ?>
-		<?php 
+		    $show_strong_auth_form = false;
+		    if ($mp_user->PersonalWalletAmount > 0 && !$mp_user->IsStrongAuthenticated) $show_strong_auth_form = true;
+		    if ($show_strong_auth_form):
+			    $strongauth_status = ypcf_mangopay_get_user_strong_authentication_status(get_current_user_id());
+			    if ($strongauth_status['status'] != ''): ?>
+				    <span class="error"><?php echo $strongauth_status['message']; ?></span><br />
+			    <?php endif;
+				    
+			    if ($strongauth_status['status'] != 'waiting'): ?>
+				    La pi&egrave;ce d&apos;identit&eacute; doit &ecirc;tre pr&eacute;sent&eacute;e recto-verso.<br />
+				    Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf.<br />
+				    Son poids doit &ecirc;tre inf&eacute;rieur &agrave; 2 Mo.<br />
+				    <form id="mangopay_strongauth_form" action="" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="mangopaytoaccount" value="1" />
+					<input type="hidden" name="document_submited" value="1" />
+					<input type="file" name="StrongValidationDtoPicture" />
+					<input type="submit" value="Envoyer"/>
+				    </form><br /><br />
+			    <?php endif;
 		    endif; 
 		?>
 
