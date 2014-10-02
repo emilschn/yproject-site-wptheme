@@ -103,7 +103,7 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 
 			// Construction des urls utilisés dans les liens du fil d'actualité
 			// url d'une campagne précisée par son nom 
-			$campaign_url  = get_permalink($post->ID);
+			$campaign_url = get_permalink($post->ID);
 			$post_title = $post->post_title;
 			$url_campaign = '<a href="'.$campaign_url.'">'.$post_title.'</a>';
 			//url d'un utilisateur précis
@@ -115,6 +115,21 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 				'type'      => 'voted',
 				'action'    => $url_profile.' a voté sur le projet '.$url_campaign
 			));
+			
+			
+			if ($validate_project == 1) {
+				$table_jcrois = $wpdb->prefix . "jycrois";
+				$users = $wpdb->get_results( "SELECT * FROM $table_jcrois WHERE campaign_id = $campaign_id AND user_id=$user_id" );
+				if ( empty($users[0]->ID) ) {
+					$wpdb->insert( 
+						$table_jcrois,
+						array(
+							'user_id'	=> $user_id,
+							'campaign_id'   => $campaign_id
+						)
+					);
+				}
+			}
 		}
 	}
 
