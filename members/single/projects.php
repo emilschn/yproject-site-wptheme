@@ -13,11 +13,17 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 			<?php
 			$campaign_status = array('publish');
 			if ($display_loggedin_user) array_push($campaign_status, 'private');
-			query_posts( array(
+			$args = array(
 				'post_type' => 'download',
 				'author' => bp_displayed_user_id(),
 				'post_status' => $campaign_status
-			));
+			);
+			if (!$display_loggedin_user) {
+				$args['meta_key'] = 'campaign_vote';
+				$args['meta_compare'] = '!='; 
+				$args['meta_value'] = 'preparing';
+			}
+			query_posts($args);
 			$has_projects = false;
 
 			if (have_posts()) {
