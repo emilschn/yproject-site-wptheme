@@ -105,49 +105,52 @@ $vote_status = html_entity_decode($campaign->vote());
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet.png" data-content="project"/>
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
 		<div id="project-content-project" class="projects-desc-content">
-		<h2 >En quoi consiste le projet ?</h2>
-		<div><?php the_content(); ?></div>
+			<h2>En quoi consiste le projet ?</h2>
+			<div><?php the_content(); ?></div>
 		</div>
 	</div>
 
-	<a id="utilite-societale"></a>
+	<a id="anchor-social"></a>
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>sociale.png" data-content="social"/>
-		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>sociale.png" data-content="social" />
+		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" />
 		<div id="project-content-social" class="projects-desc-content">
-		<h2 >Quelle est l'utilité sociétale du projet ?</h2>
-		<div><?php 
-		$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
-		echo apply_filters('the_content', $societal_challenge);
-		?>
-		</div>
+			<h2>Quelle est l&apos;utilit&eacute; soci&eacute;tale du projet ?</h2>
+				<div>
+				<?php 
+				$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
+				echo apply_filters('the_content', $societal_challenge);
+				?>
+			</div>
 		</div>
 	</div>
+	
 	<?php if ($vote_status != 'preview'): ?>
 	<div class="projects-desc-item">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>economie.png" data-content="economic" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
 		<div id="project-content-economic" class="projects-desc-content">
-		<h2 >Quelle est l'opportunité économique du projet ?</h2>
-		<div><?php 
-		$added_value = html_entity_decode($campaign->added_value()); 
-		echo apply_filters('the_content', $added_value);
-		?>
-		</div>
+			<h2>Quelle est l&apos;opportunit&eacute; &eacute;conomique du projet ?</h2>
+			<div>
+				<?php 
+				$added_value = html_entity_decode($campaign->added_value()); 
+				echo apply_filters('the_content', $added_value);
+				?>
+			</div>
 		</div>
 	</div>
-	<?php endif; ?>
-
-	<?php if ($vote_status != 'preview'): ?>
+	
 	<div class="projects-desc-item">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>model.png" data-content="model" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
 		<div id="project-content-model" class="projects-desc-content">
-		<h2 >Quel est le modèle économique du projet ?</h2>
-		<div><?php 
-		$economic_model = html_entity_decode($campaign->economic_model()); 
-		echo apply_filters('the_content', $economic_model);
-		?></div>
+			<h2>Quel est le mod&egrave;le &eacute;conomique du projet ?</h2>
+			<div>
+				<?php 
+				$economic_model = html_entity_decode($campaign->economic_model()); 
+				echo apply_filters('the_content', $economic_model);
+				?>
+			</div>
 		</div>
 	</div>
 	<?php endif; ?>
@@ -156,19 +159,21 @@ $vote_status = html_entity_decode($campaign->vote());
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>porteur.png" data-content="porteur"/>
 		<img class="vertical-align-middle grey-triangle"src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
 		<div id="project-content-porteur" class="projects-desc-content">
-		<h2>Qui porte le projet ?</h2>
-		<div><?php 
-		$implementation = html_entity_decode($campaign->implementation()); 
-		echo apply_filters('the_content', $implementation);
-		?></div>
+			<h2>Qui porte le projet ?</h2>
+			<div>
+				<?php 
+				$implementation = html_entity_decode($campaign->implementation()); 
+				echo apply_filters('the_content', $implementation);
+				?>
+			</div>
 		</div>
 	</div>
 </div>
 </div>
 </div>
 <?php
-$cache_result=ob_get_contents();
-		$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-content-second',$cache_result);
+		$cache_result = ob_get_contents();
+		$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-content-second', $cache_result);
 		ob_end_clean();
 		}
 		echo $cache_result;

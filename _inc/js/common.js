@@ -131,7 +131,7 @@ YPUIFunctions = (function($) {
 
 			if ($("#scroll-to-utilite-societale").length > 0) {
 			    $("#scroll-to-utilite-societale").click(function() {
-			       $('html, body').animate({scrollTop: $('#utilite-societale').offset().top - $("#navigation").height()}, "slow"); 
+			       $('html, body').animate({scrollTop: $('#anchor-social').offset().top - $("#navigation").height()}, "slow"); 
 			    });
 			}
  	
@@ -491,7 +491,7 @@ WDGProjectPageFunctions=(function($) {
 			//Si il y a plus d'un paragraphe, on initialise le clic
 	  		if ($(descContentElement).find('p').length > 1) {
 	  			$(descContentElement).css("cursor", "pointer");
-				var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" >Lire plus !</div>';
+				var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '">Lire plus !</div>';
 		  		$(descContentElement).find('div div *:lt(1)').append(sProjectMore);
 		  		$(descContentElement).click(function(){
 					WDGProjectPageFunctions.clickItem($(this))
@@ -511,6 +511,7 @@ WDGProjectPageFunctions=(function($) {
 			if (projectMore.is(':visible')) {
 				//il faut la masquer puis afficher les éléments qui suivent
 				projectMore.hide(400, function(){
+					$('html, body').animate({scrollTop: clickedElement.offset().top - $("#navigation").height()}, "slow"); 
 					clickedElement.find('p, ul').slideDown(400);
 				});
 				//on masque aussi toutes les autres parties
