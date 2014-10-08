@@ -3,17 +3,16 @@
  * Enregistrement fait dans le plugin pour gérer la redirection éventuelle au bon moment
  * Le reste de la page devrait être fait dans un shortcode. On verra ça plus tard.
  */ 
-if (!is_user_logged_in()) :
-    wp_redirect(site_url());
-    exit();
-else:
-
+if (!is_user_logged_in()) {
+	wp_redirect(site_url());
+	exit();
+}
 ?>
+
 <?php get_header(); ?>
 
     <div id="content">
 	<div class="padder">
-	    <?php locate_template( array( 'members/single/admin-bar.php' ), true ); ?>
 	    <div class="center">
 		<?php 
 		if (is_user_logged_in()) :
@@ -174,27 +173,6 @@ else:
 			    }
 			}
 		    } else {
-		?>
-
- <h2 class="underlined">J'y crois</h2>
-
-	<?php	global $wpdb;
-	$table= $wpdb->prefix.'jycrois';
-	$user_id=get_current_user_id();
-	$projects_jy_crois = $wpdb->get_results("SELECT campaign_id FROM $table WHERE user_id=$user_id");
-	foreach ($projects_jy_crois as $project) {
-		echo get_the_title($project->campaign_id).'<br/>'.get_permalink($project->campaign_id).'<br/>';
-	}
-	
-?>
-
-		    <h2 class="underlined">Mon porte-monnaie électronique</h2>
-		    <?php
-			$real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id()) / 100;
-		    ?>
-			Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br />
-		
-		    <?php 
 			$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status(get_current_user_id());
 			if ($strongauth_status['status'] != ''):
 		    ?>
@@ -230,74 +208,6 @@ else:
 			    }
 			endif;
 		    ?>
-
-		    <h2 class="underlined"><?php _e( 'Mes investissements', 'yproject' ); ?></h2>
-		    <?php
-		    $purchases = edd_get_users_purchases(bp_current_user_id(), -1, false, array('completed', 'pending', 'publish', 'failed', 'refunded'));
-		    if ( $purchases ) : ?>
-		    <ul class="user_history com-activity-list">
-			<?php 
-			    foreach ( $purchases as $post ) : setup_postdata( $post );
-				$downloads = edd_get_payment_meta_downloads($post->ID); 
-				$download_id = '';
-				if (is_array($downloads[0])) $download_id = $downloads[0]["id"]; 
-				else $download_id = $downloads[0];
-				$post_camp = get_post($download_id);
-				printUserInvest($post, $post_camp);
-			    endforeach;
-			?>
-		    </ul>
-		    <?php endif; ?>
-		    
-		    <h2 class="underlined"><?php _e( 'Mes transferts d&apos;argent', 'yproject' ); ?></h2>
-		    <?php
-		    $args = array(
-			'author'    => get_current_user_id(),
-			'post_type' => 'withdrawal_order',
-			'post_status' => 'any',
-			'orderby'   => 'post_date',
-			'order'     =>  'ASC'
-		    );
-		    $transfers = get_posts($args);
-		    if ($transfers) :
-		    ?>
-		    <ul class="user_history">
-			<?php 
-			    foreach ( $transfers as $post ) :
-				$widthdrawal_obj = ypcf_mangopay_get_withdrawal_by_id($post->post_content);
-				if ($widthdrawal_obj->Error != "" && $widthdrawal_obj->Error != NULL) {
-				    $args = array(
-					'ID'	=>  $post->ID,
-					'post_status'	=> 'draft'
-				    );
-				    wp_update_post($args);
-				    
-				} else if ($widthdrawal_obj->IsSucceeded && $widthdrawal_obj->IsCompleted && $post->post_status != 'publish') {
-				    $args = array(
-					'ID'	=>  $post->ID,
-					'post_status'	=> 'publish'
-				    );
-				    wp_update_post($args);
-				}
-				$post = get_post($post);
-				$post_amount = $post->post_title / 100;
-				if ($post->post_status == 'publish') {
-				    ?>
-				    <li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Termin&eacute;</li>
-				    <?php
-				} else if ($post->post_status == 'draft') {
-				    ?>
-				    <li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Annul&eacute;</li>
-				    <?php
-				} else {
-				    ?>
-				    <li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- En cours</li>
-				    <?php
-				}
-			    endforeach;
-			?>
-		    </ul>
-		    <?php endif; ?>
 		    
 		    
 		<?php
@@ -309,110 +219,4 @@ else:
 	</div>
     </div>
 
-<?php 
-get_footer(); 
-endif;
-?>
-<?php
-function printUserInvest($post_invest, $post_campaign) {
-    global $post;
-    $post = $post_campaign;
-    $campaign = atcf_get_campaign( $post_campaign );
-    $payment_status = ypcf_get_updated_payment_status($post_invest->ID);
-    $contractid = ypcf_get_signsquidcontractid_from_invest($post_invest->ID);
-    $signsquid_infos = signsquid_get_contract_infos_complete($contractid);
-    $signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
-    ?>
-    <li id="invest-<?php echo $post_invest->ID. '-' .$contractid; ?>">
-	<a href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $post_campaign->post_title; ?></a><br />
-	<div class="user_history_title left">
-	    <div class="project_preview_item_progress">
-	    <?php
-		$percent = min(100, $campaign->percent_minimum_completed(false));
-		$width = 150 * $percent / 100;
-		$width_min = 0;
-		if ($percent >= 100 && $campaign->is_flexible()) {
-		    $percent_min = $campaign->percent_minimum_to_total();
-		    $width_min = 150 * $percent_min / 100;
-		}
-		?>
-		<div class="project_preview_item_progressbg">
-		    <div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">
-			<?php if ($width_min > 0): ?>
-			<div style="width: <?php echo $width_min; ?>px; height: 100%; border: 0px; border-right: 1px solid white;">&nbsp;</div>
-			<?php else: ?>
-			&nbsp;
-			<?php endif; ?>
-		    </div>
-		</div>
-		<span class="project_preview_item_progressprint"><?php echo $campaign->percent_minimum_completed(); ?></span>
-	    </div>
-	</div>
-	<div class="user_history_pictos left">
-	    <div class="project_preview_item_pictos">
-		<div class="project_preview_item_infos">
-		    <div class="project_preview_item_picto">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
-			<?php echo $campaign->days_remaining(); ?>
-		    </div>
-		    <div class="project_preview_item_picto">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
-			<?php echo $campaign->minimum_goal(true); ?>
-		    </div>
-		</div>
-		<div class="project_preview_item_infos" style="width: 120px;">
-		    <?php echo date_i18n( get_option('date_format'), strtotime( get_post_field( 'post_date', $post_invest->ID ) ) ); ?><br />
-		    <?php echo edd_get_payment_amount( $post_invest->ID ) ?>&euro;
-		</div>
-		<div class="project_preview_item_infos" style="width: 120px;">
-		    <?php echo __("Paiement", "yproject") . ' ' . edd_get_payment_status( $post_invest, true ); ?><br />
-		</div>
-		<div class="project_preview_item_infos" style="width: 120px;">
-		    <?php echo $signsquid_status; ?>
-		</div>
-		
-		<?php
-		    //Boutons pour Annuler l'investissement | Recevoir le code à nouveau
-		    //Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
-		    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && is_object($signsquid_infos) && $signsquid_infos->{'status'} != 'Agreed') :
-		?>
-		<div class="project_preview_item_cancel">
-		<?php
-			if ($signsquid_infos != '' && is_object($signsquid_infos)):
-			    $page_my_investments = get_page_by_path('mes-investissements');
-		?>
-		    <a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $post_invest->ID; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
-		<?php
-			endif;
-			$page_cancel_invest = get_page_by_path('annuler-un-investissement');
-		?>
-		    <a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $post_invest->ID; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
-		</div>
-		<?php
-		    endif;
-		?>
-		
-		<?php
-		    //Lien vers le groupe d'investisseurs du projet
-		    //Visible si le groupe existe et que l'utilisateur est bien dans ce groupe
-		    $investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
-		    $group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-		    $is_user_group_member = groups_is_user_member(bp_loggedin_user_id(), $investors_group_id);
-		    if ($group_exists && $is_user_group_member):
-			$group_obj = groups_get_group(array('group_id' => $investors_group_id));
-			$group_link = bp_get_group_permalink($group_obj);
-		?>
-		<div class="project_preview_item_infos" style="width: 120px;">
-		    <a href="<?php echo $group_link; ?>">Acc&eacute;der au groupe priv&eacute;</a>
-		</div>
-		<?php
-		    endif;
-		?>
-		
-		<div style="clear: both"></div>
-	    </div>
-	</div>
-	<div style="clear: both"></div>
-    </li>
-    <?php
-}?>
+<?php get_footer(); ?>
