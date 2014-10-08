@@ -3216,8 +3216,9 @@ text-transform: none;
 color: #FFF;
 height: 18px;
 }
-#nb-jycrois{
-    color: #000;
+#nb-jycrois {
+    margin-top: -20px;
+    color: #FFFFFF;
 }
 /********** Fenetre de partage ********************/
 #dialog{

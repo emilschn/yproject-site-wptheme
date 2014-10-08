@@ -162,7 +162,7 @@ $vote_status = $campaign->campaign_status();
 				<?php } ?>
 
 
-
+				<?php if ($vote_status != 'vote' && $vote_status != 'preparing') : ?>
 				<?php if ( is_user_logged_in() ) { 
 					global $wpdb, $campaign_id;
 					$user_id = wp_get_current_user()->ID;
@@ -190,6 +190,7 @@ $vote_status = $campaign->campaign_status();
 					<p id="nb-jycrois"><?php do_shortcode('[yproject_crowdfunding_count_jcrois]') ?></p>
 					</div></a>
 				<?php } ?>
+				<?php endif; ?>
 
 				<a id="share-btn-a" href="javascript:WDGProjectPageFunctions.share_btn_click();">
 				<div id="share-btn-div" class="stats_btn" class="dark">
