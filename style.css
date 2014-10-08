@@ -2798,11 +2798,11 @@ text-transform: uppercase;
     margin: auto;
     top: 107px;
     position: absolute;
+    background-color: #F2F2F2;
    
 }
 #head-image #img-container{
     position: relative;
-    background-color: #F2F2F2;
 }
 #head-image img{
     min-width: 100%;
