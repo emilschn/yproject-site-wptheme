@@ -12,7 +12,7 @@ $displayed_user = get_user_by('id', bp_displayed_user_id());
 
 <div id="item-header-avatar" class="left">
     
-	<a href="<?php bp_displayed_user_link(); ?>"><?php print_user_avatar(bp_displayed_user_id()); ?></a>
+	<a href="<?php bp_displayed_user_link(); ?>"><?php UIHelpers::print_user_avatar(bp_displayed_user_id()); ?></a>
 	
 </div><!-- #item-header-avatar -->
 

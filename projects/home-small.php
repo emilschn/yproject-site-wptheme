@@ -40,7 +40,7 @@ function print_vote_post($vote_post,$is_right_project){
 				</div>
 				<div class="description-logos-item" style="width: 45px;">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" /><br />
-					<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
+					<?php echo $campaign->get_jycrois_nb(); ?>
 				</div>
 				<div class="description-logos-item">
 				    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" /><br />
@@ -132,7 +132,7 @@ function print_vote_post($vote_post,$is_right_project){
 				</div>
 				<div class="description-logos-item" style="width: 45px;">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" /><br />
-					<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
+					<?php echo $campaign->get_jycrois_nb(); ?>
 				</div>
 			</div>
 		</div>

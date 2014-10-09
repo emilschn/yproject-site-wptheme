@@ -84,7 +84,7 @@
 					</div>
 					<div class="description-logos-item">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" />
-						<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
+						<?php echo $campaign->get_jycrois_nb(); ?>
 					</div>
 					<div class="description-logos-item">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" />
