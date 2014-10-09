@@ -10,9 +10,7 @@ function print_vote_post($vote_post,$is_right_project){
 		<div class="description-separator first-description-separator"></div>
 		
 			<a href="<?php echo get_permalink($vote_post->ID); ?>">
-				<?php 
-				if($is_right_project){//si a gauche
-				?>
+				<?php if ($is_right_project) { ?>
 				<div class="vote-bubble-left" >
 				<?php } else { ?>
 				<div class="vote-bubble-right">
@@ -74,13 +72,20 @@ function print_vote_post($vote_post,$is_right_project){
 			$video_element = wp_oembed_get($campaign->video(), array('width' => 440));
 		}
 		?>
-<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>');clear: both;"<?php } ?> >
+		
+		<?php if ($img_src != ''): ?>
+		<a href="<?php the_permalink(); ?>" style="display: block;">
+		<?php endif; ?>
+		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>');clear: both;"<?php } ?> >
 			<?php echo $video_element;
-				if ($video_element == '') { ?>
-					<div class="vote-banner"></div>
-				<?php }
-			 ?>
+			if ($video_element == '') { ?>
+				<div class="vote-banner"></div>
+			<?php } ?>
 		</div>
+		<?php if ($img_src != ''): ?>
+		</a>
+		<?php endif; ?>
+		
 		<div class="description-separator " <?php if($video_element!='')echo "style='margin-top: 95px;'";?>></div>
 		<a href="<?php echo get_permalink($vote_post->ID); ?>" class="description-discover"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter sur ce projet ici<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
 	</div>

@@ -1,5 +1,5 @@
 <?php get_header( 'buddypress' ); ?>
-
+<?php ypcf_debug_log(''); ?>
     <div id="content">
 	<div class="padder">
 	

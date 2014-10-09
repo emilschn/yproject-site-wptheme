@@ -27,7 +27,7 @@ function yproject_enqueue_script(){
 	}
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'));
 	wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
-	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'));
+	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), false, true);
 }
 
 /** GESTION DU LOGIN **/
@@ -124,8 +124,8 @@ function yproject_change_user_cap() {
 		$role_subscriber->remove_cap( 'edit_post' );
 		$role_subscriber->remove_cap( 'edit_posts' );
 		$role_subscriber->remove_cap( 'edit_private_posts' );
-		$role_subscriber->remove_cap( 'edit_published_posts' );
-		$role_subscriber->remove_cap( 'edit_others_posts' );
+		$role_subscriber->add_cap( 'edit_published_posts' );
+		$role_subscriber->add_cap( 'edit_others_posts' );
 	}
 }
 add_action('init', 'yproject_change_user_cap');
@@ -149,6 +149,24 @@ function yproject_admin_init() {
 	}
 }
 //add_action( 'admin_init', 'yproject_admin_init' );
+
+function yproject_page_template( $template ) {
+	locate_template( array("requests/projects.php"), true );
+	global $post;
+	$campaign = atcf_get_campaign( $post );
+	$campaign_id = $post->ID;
+	if (!empty($campaign->ID) && is_object( $campaign ) && ($campaign->campaign_status() == 'preparing') && !YPProjectLib::current_user_can_edit($campaign_id)) {
+		header("Status: 404 Not Found");
+		global $wp_query;
+		$wp_query->set_404();
+		status_header(404);
+		nocache_headers();
+		$new_template = locate_template( array( '404.php' ) );
+		return $new_template;
+	}
+	return $template;
+}
+add_filter( 'template_include', 'yproject_page_template', 99 );
 /** FIN GESTION DES ROLES UTILISATEURS **/
 
 
@@ -182,6 +200,22 @@ add_shortcode('yproject_home_discover', 'yproject_home_discover_shortcode');
 
 /** FIN SHORTCODES ACCUEIL **/
 
+/**
+ * BIBLIOTHEQUE POUR VERIFICATIONS
+ */
+function yproject_check_user_can_see_project_page() {
+	//Si l'utilisateur n'est pas connecté, on redirige sur la page de connexion
+	if (!is_user_logged_in()) {
+		$page_connexion = get_page_by_path('connexion');
+		wp_redirect(get_permalink($page_connexion->ID));
+		exit();
+	}
+	//Si la campagne n'est pas définie, on retourne à l'accueil
+	if (!isset($_GET['campaign_id'])) {
+		wp_redirect(site_url());
+		exit();
+	}
+}
 
 
 function yproject_bbp_get_forum_title($title) {
@@ -225,7 +259,6 @@ add_action( 'wp_ajax_setCoverPosition', 'set_cover_position' );
 
 /**
  * Permet d'envoyer la position de l'image de couverture d'un projet.
- * 
  */
 function set_cursor_position(){
 	if(isset($_POST['top'])){
@@ -276,7 +309,7 @@ function get_user_avatar($user_id, $size = 'normal'){
 
 		$profile_type = "";
 		$google_meta = get_user_meta($user_id, 'social_connect_google_id', true);
-		if (isset($google_meta) && $google_meta != "") $profile_type = ""; //TODO : Remplir avec "google" quand on gèrera correctement
+		if (isset($google_meta) && $google_meta != "") $profile_type = ""; //TODO : Remplir avec "google" quand on gÃƒÂ¨rera correctement
 		$facebook_meta = get_user_meta($user_id, 'social_connect_facebook_id', true);
 		if (isset($facebook_meta) && $facebook_meta != "") $profile_type = "facebook";
 
@@ -372,7 +405,7 @@ function comment_blog_post(){
 	bp_activity_add(array (
 		'component' => 'profile',
 		'type'      => 'jycrois',
-		'action'    => $user_avatar.' '.$url_profile.' a commenté '.$url_blog
+		'action'    => $user_avatar.' '.$url_profile.' a commentÃƒÂ© '.$url_blog
 	    ));
 }
 add_action('comment_post','comment_blog_post');
@@ -397,19 +430,39 @@ function print_user_projects(){
 	}
 
 	if(isset($_POST['user_id'])){
-		$purchases = edd_get_users_purchases(bp_displayed_user_id(), -1, false, array('completed', 'pending', 'publish', 'failed', 'refunded'));
-		if($purchases!=''){?>
+		$payment_status = array("publish", "completed");
+//		if ($is_same_user) $payment_status = array("completed", "pending", "publish", "failed", "refunded");
+		$purchases = edd_get_users_purchases(bp_displayed_user_id(), -1, false, $payment_status);
+		$table = $wpdb->prefix.'jycrois';
+		$user_id = bp_displayed_user_id();
+		$projects_jy_crois = $wpdb->get_results("SELECT campaign_id FROM $table WHERE user_id=$user_id");
+		$table = $wpdb->prefix.'ypcf_project_votes';
+		$projects_votes = $wpdb->get_results("SELECT post_id FROM $table WHERE user_id=$user_id");
+		
+		$check_investment = true;
+		$check_vote = false;
+		$check_believe = false;
+		if (empty($purchases) && count($projects_votes) > 0) { $check_investment = false; $check_vote = true; }
+		if (empty($purchases) && count($projects_votes) == 0 && count($projects_jy_crois) == 0) { $check_investment = false; $check_believe = true; }
+		
+		if ($purchases != '' || count($projects_jy_crois) > 0 || count($projects_votes) > 0) { ?>
 			<h3> Afficher les projets : </h3>
 			<form id="filter-projects">
-  				<label><input type="checkbox" name="filter" value="jycrois">
+  				<label>
+				<input type="checkbox" name="filter" value="jycrois" <?php if ($check_believe) { ?>checked="checked"<?php } ?>>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="<?php echo $str_believe; ?>" title="<?php echo $str_believe; ?>" />
   				<?php echo $str_believe; ?>
 				</label>
 		
-   				<label><input type="checkbox" name="filter" value="voted">
+   				<label style="margin-left: 50px;">
+				<input type="checkbox" name="filter" value="voted" <?php if ($check_vote) { ?>checked="checked"<?php } ?>>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png" alt="<?php echo $str_vote; ?>" title="<?php echo $str_vote; ?>" />
   				<?php echo $str_vote; ?>
 				</label>
 		
-   				<label><input type="checkbox" name="filter" value="invested" checked="checked">
+   				<label style="margin-left: 50px;">
+				<input type="checkbox" name="filter" value="invested" <?php if ($check_investment) { ?>checked="checked"<?php } ?>>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png" alt="<?php echo $str_investment; ?>" title="<?php echo $str_investment; ?>" />
   				<?php echo $str_investment; ?>
 				</label>
 			</form>
@@ -425,8 +478,51 @@ function print_user_projects(){
 				$contractid = ypcf_get_signsquidcontractid_from_invest($post->ID);
 				$signsquid_infos = signsquid_get_contract_infos_complete($contractid);
 				$signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
-				$payment_date=date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
+				$payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
 
+				$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
+				$group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
+				$is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
+				$group_link = '';
+				if ($group_exists && $is_user_group_member){
+					$group_obj = groups_get_group(array('group_id' => $investors_group_id));
+					$group_link = bp_get_group_permalink($group_obj);
+				}
+				
+				//Infos relatives au projet
+				$user_projects[$campaign->ID]['ID'] = $campaign->ID;
+				//Infos relatives à l'investissement de l'utilisateur.
+				$user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status']=$signsquid_status;
+				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_date']=$payment_date;
+				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount']=edd_get_payment_amount( $post->ID );
+				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_status']=edd_get_payment_status( $post, true );
+				//Lien vers le groupe d'investisseur
+				$user_projects[$campaign->ID]['group_link']=$group_link;
+				}
+			endforeach;
+
+			foreach ($projects_jy_crois as $project) {
+				$user_projects[$project->campaign_id]['jy_crois'] = 1;
+				$user_projects[$project->campaign_id]['ID'] = $project->campaign_id;
+			}
+			foreach ($projects_votes as $project) {
+				$user_projects[$project->post_id]['has_voted'] = 1;
+			}
+		 
+			?>
+			<div class="center">
+			<?php
+			foreach ($user_projects as $project) {
+				$payments = $project['payments'];
+				$data_jycrois = 0;
+				$data_voted = 0;
+				$data_invested = 0;
+				if (isset($project['jy_crois']) && $project['jy_crois'] === 1) $data_jycrois = 1;
+				if (isset($project['has_voted']) && $project['has_voted'] === 1) $data_voted = 1;
+				if (count($project['payments']) > 0) $data_invested = 1;
+				
+				$post_camp = get_post($project['ID']);
+				$campaign = atcf_get_campaign($post_camp);
 				$percent = min(100, $campaign->percent_minimum_completed(false));
 				$width = 150 * $percent / 100;
 				$width_min = 0;
@@ -434,90 +530,13 @@ function print_user_projects(){
 				    $percent_min = $campaign->percent_minimum_to_total();
 				    $width_min = 150 * $percent_min / 100;
 				}
-				$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
-				$group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-				$is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
-				$group_link='';
-				if ($group_exists && $is_user_group_member){
-					$group_obj = groups_get_group(array('group_id' => $investors_group_id));
-					$group_link = bp_get_group_permalink($group_obj);
-				}
-				
 				//Infos relatives au projet
-				$user_projects[$campaign->ID]['ID']=$campaign->ID;
-				$user_projects[$campaign->ID]['title']=$post_camp->post_title;
-				$user_projects[$campaign->ID]['width_min']=$width_min;
-				$user_projects[$campaign->ID]['width']=$width;
-				$user_projects[$campaign->ID]['days_remaining']=$campaign->days_remaining();
-				$user_projects[$campaign->ID]['percent_minimum_completed']=$campaign->percent_minimum_completed();
-				$user_projects[$campaign->ID]['minimum_goal']=$campaign->minimum_goal(true);
-				//Infos relatives à l'investissement de l'utilisateur.
-				//$user_projects[$post->ID]['signsquid_infos']=$signsquid_infos;
-				$user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status']=$signsquid_status;
-				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_date']=$payment_date;
-				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount']=edd_get_payment_amount( $post->ID );
-				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_status']=edd_get_payment_status( $post, true );
-				//Lien vers le groupe d'investisseur
-				$user_projects[$campaign->ID]['group_link']=$group_link;
-				//On initialise has_voted et jy_crois
-				$user_projects[$campaign->ID]['jy_crois']=0;
-				$user_projects[$campaign->ID]['has_voted']=0;
-				}
-			endforeach;
-
-			$table= $wpdb->prefix.'jycrois';
-			$user_id=bp_displayed_user_id();
-			$projects_jy_crois = $wpdb->get_results("SELECT campaign_id FROM $table WHERE user_id=$user_id");
-			foreach ($projects_jy_crois as $project) {
-				$user_projects[$project->campaign_id]['jy_crois']=1;
-				$user_projects[$project->campaign_id]['ID']=$project->campaign_id;
-			}
-			$table=$wpdb->prefix.'ypcf_project_votes';
-			$projects_votes = $wpdb->get_results("SELECT post_id FROM $table WHERE user_id=$user_id");
-			foreach ($projects_votes as $project) {
-				$user_projects[$project->post_id]['has_voted']=1;
-			}
-		 
-			?>
-			<div class="center">
-			<?php
-			foreach ($user_projects as $project) {
-				$payments=$project['payments'];
-				$data_jycrois=0;
-				$data_voted=0;
-				$data_invested=0;
-				if($project['jy_crois']===1)$data_jycrois=1;
-				if($project['has_voted']===1)$data_voted=1;
-				if(count($project['payments'])>0)$data_invested=1;
-				if($project['title']==''){//Si le projet n'est pas complet
-					$post_camp = get_post($project['ID']);
-					$campaign = atcf_get_campaign($post_camp);
-					$percent = min(100, $campaign->percent_minimum_completed(false));
-					$width = 150 * $percent / 100;
-					$width_min = 0;
-					if ($percent >= 100 && $campaign->is_flexible()) {
-					    $percent_min = $campaign->percent_minimum_to_total();
-					    $width_min = 150 * $percent_min / 100;
-					}
-					$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
-					$group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-					$is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
-					$group_link='';
-					if ($group_exists && $is_user_group_member){
-						$group_obj = groups_get_group(array('group_id' => $investors_group_id));
-						$group_link = bp_get_group_permalink($group_obj);
-					}
-					//Infos relatives au projet
-					$project['ID']=$campaign->ID;
-					$project['title']=$post_camp->post_title;
-					$project['width_min']=$width_min;
-					$project['width']=$width;
-					$project['days_remaining']=$campaign->days_remaining();
-					$project['percent_minimum_completed']=$campaign->percent_minimum_completed();
-					$project['minimum_goal']=$campaign->minimum_goal(true);
-					//Lien vers le groupe d'investisseur
-					$project['group_link']=$group_link;
-				}
+				$project['title'] = $post_camp->post_title;
+				$project['width_min'] = $width_min;
+				$project['width'] = $width;
+				$project['days_remaining'] = $campaign->days_remaining();
+				$project['percent_minimum_completed'] = $campaign->percent_minimum_completed();
+				$project['minimum_goal'] = $campaign->minimum_goal(true);
 			?>
 				<div id="<?php echo $project['ID'] ?>-project" class="history-projects" 
 					data-value="<?php echo $project['ID'] ?>"
@@ -580,8 +599,8 @@ function print_user_projects(){
 							<?php if ($is_same_user): ?>
 						    
 							<?php
-							    //Boutons pour Annuler l'investissement | Recevoir le code à nouveau
-							    //Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
+							    //Boutons pour Annuler l'investissement | Recevoir le code ÃƒÂ  nouveau
+							    //Visibles si la collecte est toujours en cours, si le paiement a bien ÃƒÂ©tÃƒÂ© validÃƒÂ©, si le contrat n'est pas encore signÃƒÂ©
 							    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && is_object($signsquid_infos) && $signsquid_infos->{'status'} != 'Agreed') :
 							?>
 							<div class="project_preview_item_cancel">

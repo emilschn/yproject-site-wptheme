@@ -23,13 +23,13 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 		$is_vote_valid = true;
 		
 		//Notes des impacts
-		$impact_economy = (isset($_POST[ 'impact_economy' ])) ? $_POST[ 'impact_economy' ] : 0;
-		$impact_environment = (isset($_POST[ 'impact_environment' ])) ? $_POST[ 'impact_environment' ] : 0;
-		$impact_social = (isset($_POST[ 'impact_social' ])) ? $_POST[ 'impact_social' ] : 0;
+		$impact_economy = (isset($_POST[ 'impact_economy' ])) ? intval($_POST[ 'impact_economy' ]) : 0;
+		$impact_environment = (isset($_POST[ 'impact_environment' ])) ? intval($_POST[ 'impact_environment' ]) : 0;
+		$impact_social = (isset($_POST[ 'impact_social' ])) ? intval($_POST[ 'impact_social' ]) : 0;
 		$impact_other = (isset($_POST[ 'impact_other' ])) ? stripslashes(htmlentities($_POST[ 'impact_other' ], ENT_QUOTES | ENT_HTML401)) : '';
 		
 		//Est-ce que le projet est validé
-		$validate_project = (isset($_POST[ 'validate_project' ])) ? $_POST[ 'validate_project' ] : -1;
+		$validate_project = (isset($_POST[ 'validate_project' ])) ? intval($_POST[ 'validate_project' ]) : -1;
 		if ($validate_project === -1) {
 			array_push($vote_errors, 'Vous n&apos;avez pas r&eacute;pondu si les impacts sont suffisants.');
 			$is_vote_valid = false;
@@ -48,11 +48,11 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 					
 				//Sinon c'est ok (on arrondit quand même)
 				} else {
-					$invest_sum = round($_POST[ 'invest_sum' ]);
+					$invest_sum = intval(round($_POST[ 'invest_sum' ]));
 				}
 			}
 			//Projet validé + Risque d'investissement
-			$invest_risk = (isset($_POST[ 'invest_risk' ])) ? $_POST[ 'invest_risk' ] : 0;
+			$invest_risk = (isset($_POST[ 'invest_risk' ])) ? intval($_POST[ 'invest_risk' ]) : 0;
 			if ($invest_risk <= 0) {
 				array_push($vote_errors, 'Vous n&apos;avez pas s&eacute;lectionn&eacute; de risque d&apos;investissement.');
 				$is_vote_valid = false;
@@ -60,10 +60,10 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 		}
 
 		//Plus d'infos
-		$more_info_impact = (isset($_POST[ 'more_info_impact' ])) ? $_POST[ 'more_info_impact' ] : false;
-		$more_info_service = (isset($_POST[ 'more_info_service' ])) ? $_POST[ 'more_info_service' ] : false;
-		$more_info_team = (isset($_POST[ 'more_info_team' ])) ? $_POST[ 'more_info_team' ] : false;
-		$more_info_finance = (isset($_POST[ 'more_info_finance' ])) ? $_POST[ 'more_info_finance' ] : false;
+		$more_info_impact = (isset($_POST[ 'more_info_impact' ])) ? intval($_POST[ 'more_info_impact' ]) : false;
+		$more_info_service = (isset($_POST[ 'more_info_service' ])) ? intval($_POST[ 'more_info_service' ]) : false;
+		$more_info_team = (isset($_POST[ 'more_info_team' ])) ? intval($_POST[ 'more_info_team' ]) : false;
+		$more_info_finance = (isset($_POST[ 'more_info_finance' ])) ? intval($_POST[ 'more_info_finance' ]) : false;
 		$more_info_other = (isset($_POST[ 'more_info_other' ])) ? stripslashes(htmlentities($_POST[ 'more_info_other' ], ENT_QUOTES | ENT_HTML401)) : '';
 		
 		//Conseils
@@ -103,7 +103,7 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 
 			// Construction des urls utilisés dans les liens du fil d'actualité
 			// url d'une campagne précisée par son nom 
-			$campaign_url  = get_permalink($post->ID);
+			$campaign_url = get_permalink($post->ID);
 			$post_title = $post->post_title;
 			$url_campaign = '<a href="'.$campaign_url.'">'.$post_title.'</a>';
 			//url d'un utilisateur précis
@@ -115,6 +115,21 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 				'type'      => 'voted',
 				'action'    => $url_profile.' a voté sur le projet '.$url_campaign
 			));
+			
+			
+			if ($validate_project == 1) {
+				$table_jcrois = $wpdb->prefix . "jycrois";
+				$users = $wpdb->get_results( "SELECT * FROM $table_jcrois WHERE campaign_id = $campaign_id AND user_id=$user_id" );
+				if ( empty($users[0]->ID) ) {
+					$wpdb->insert( 
+						$table_jcrois,
+						array(
+							'user_id'	=> $user_id,
+							'campaign_id'   => $campaign_id
+						)
+					);
+				}
+			}
 		}
 	}
 

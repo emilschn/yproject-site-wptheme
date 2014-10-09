@@ -49,6 +49,9 @@
 			$video_element = wp_oembed_get($campaign->video(), array('width' => 610));
 		}
 		?>
+		<?php if ($img_src != ''): ?>
+		<a href="<?php the_permalink(); ?>" style="display: block;">
+		<?php endif; ?>
 		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?>>
 			<?php echo $video_element;
 			if ($video_element == '' && $campaign_status== 'funded' ) { ?>
@@ -56,6 +59,9 @@
 				<?php }
 			 ?>
 		</div>
+		<?php if ($img_src != ''): ?>
+		</a>
+		<?php endif; ?>
 		
 		<div class="description-zone">
 			<div class="description-summary">
@@ -81,10 +87,9 @@
 						<?php do_shortcode('[yproject_crowdfunding_count_jcrois]'); ?>
 					</div>
 					<div class="description-logos-item">
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" />
-                        <?php echo $days_remaining; ?>
-                    </div>
-                                    
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" />
+						<?php echo $days_remaining; ?>
+					</div>
 					<div class="description-logos-item">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo Cible" />
 						<?php echo $campaign->minimum_goal(true); ?>

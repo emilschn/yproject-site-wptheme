@@ -9,8 +9,10 @@
 
 			<h3><?php if ( bp_account_was_activated() ) :
 				_e( 'Account Activated', 'buddypress' );
+				ypcf_debug_log('bp_account_was_activated 1');
 			else :
 				_e( 'Activate your Account', 'buddypress' );
+				ypcf_debug_log('NOT bp_account_was_activated 1');
 			endif; ?></h3>
 
 			<?php do_action( 'template_notices' ); ?>
@@ -18,10 +20,14 @@
 			<?php do_action( 'bp_before_activate_content' ); ?>
 
 			<?php if ( bp_account_was_activated() ) : ?>
+				<?php ypcf_debug_log('bp_account_was_activated 2'); ?>
 
 				<?php if ( isset( $_GET['e'] ) ) : ?>
+					<?php ypcf_debug_log('bp_account_was_activated 2A - ' . $_GET['e']); ?>
 					<p><?php _e( 'Your account was activated successfully! Your account details have been sent to you in a separate email.', 'buddypress' ); ?></p>
 				<?php else : ?>
+					<?php ypcf_debug_log('bp_account_was_activated 2B1'); ?>
+					<?php if ( isset( $user_login) ) ypcf_debug_log('bp_account_was_activated 2B2 ' . $user_login); ?>
 					<p><?php printf( __( 'Your account was activated successfully! You can now <a href="%s">log in</a> with the username and password you provided when you signed up.', 'buddypress' ), wp_login_url( bp_get_root_domain() ) ); ?></p>
 
 					<form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
@@ -46,6 +52,7 @@
 
 			<?php else : ?>
 
+				<?php ypcf_debug_log('NOT bp_account_was_activated 2'); ?>
 				<p><?php _e( 'Please provide a valid activation key.', 'buddypress' ); ?></p>
 
 				<form action="" method="get" class="standard-form" id="activation-form">

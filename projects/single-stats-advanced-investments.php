@@ -1,9 +1,5 @@
 <?php 
-global $post;
-$current_user = wp_get_current_user();
-$current_user_id = $current_user->ID;
-$author_id = $post->post_author;
-if (($current_user_id == $author_id || current_user_can('manage_options')) && isset($_GET['campaign_id'])) {
+if (YPProjectLib::current_user_can_edit($_GET['campaign_id'])) {
 	locate_template( array("requests/investments.php"), true );
 	locate_template( array("projects/stats-investments-public.php"), true ); 
 	$investments_list = wdg_get_project_investments($_GET['campaign_id']);

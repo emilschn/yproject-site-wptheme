@@ -1,11 +1,7 @@
 <?php
-global $post;
-$current_user = wp_get_current_user();
-$current_user_id = $current_user->ID;
-$author_id = $post->post_author;
-if (($current_user_id == $author_id || current_user_can('manage_options')) && isset($_GET['campaign_id'])) {
+if (YPProjectLib::current_user_can_edit($_GET['campaign_id'])) {
 	locate_template( array("requests/votes.php"), true );
-	locate_template( array("projects/single-votes-public.php"), true );
+	locate_template( array("projects/stats-votes-public.php"), true );
 	$vote_results = wdg_get_project_vote_results($_GET['campaign_id']);
 	print_vote_results($vote_results);
 ?>

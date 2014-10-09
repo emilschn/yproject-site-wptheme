@@ -93,7 +93,7 @@
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
 		
-		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?ver=1.1.001" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?ver=1.1.002" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
 		<?php do_action( 'bp_head' ); ?>
@@ -101,8 +101,6 @@
 	</head>
 
 	<body <?php body_class(); ?> id="bp-default">
-
-		<?php do_action( 'bp_before_header' ); ?>
 
 		<nav id="navigation" role="navigation">
 		    <div class="center">
@@ -178,10 +176,24 @@
 		    </ul>
 		</div>
 
-		<?php do_action( 'bp_header' ); ?>
-		<?php do_action( 'bp_after_header'     ); ?>
-		<?php do_action( 'bp_before_container' ); ?>
-
-		<div></div>
+		<?php 
+		LibUsers::check_validate_general_terms();
+		if (LibUsers::must_show_general_terms_block()): 
+			global $edd_options;
+		?>
+		<div id="validate-terms">
+			<div class="validate-terms-padder">
+				<span>Mise &agrave; jour des conditions g&eacute;n&eacute;rales d&apos;utilisation</span>
+				<div class="validate-terms-excerpt">
+					<?php echo wpautop( stripslashes( $edd_options[LibUsers::$edd_general_terms_excerpt])); ?>
+				</div>
+				<form action="" method="POST">
+					<input type="hidden" name="action" value="validate-terms" />
+					<label for="validate-terms-check"><input type="checkbox" name="validate-terms-check" /> J&apos;accepte les conditions g&eacute;n&eacute;rales d&apos;utilisation</label><br />
+					<div style="text-align: center;"><input type="submit" value="Valider" class="button" /></div>
+				</form>
+			</div>
+		</div>
+		<?php endif; ?>
 	    
 		<div id="container">
