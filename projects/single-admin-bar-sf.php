@@ -74,7 +74,6 @@ if ($can_modify) {
 		<?php	
 		}
 		?>
-
 	</div>
 
 <?php }

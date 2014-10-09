@@ -3,7 +3,7 @@
     global $stylesheet_directory_uri;
     $stylesheet_directory_uri = get_stylesheet_directory_uri();
     /* Récupération des infos Facebook */
-    global $facebook_infos;
+/*    global $facebook_infos;
     $cache_result = $WDG_cache_plugin->get_cache('facebook-count');
     if (false === $cache_result) {
 		require_once("_external/facebook/facebook.php");
@@ -17,7 +17,7 @@
     } else {
 	    $facebook_infos = $cache_result;
     }
-	
+*/	
     /* Récupération des infos Twitter */
     global $twitter_infos;
     $cache_result = $WDG_cache_plugin->get_cache('twitter-count');
