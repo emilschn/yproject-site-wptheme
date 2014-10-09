@@ -299,7 +299,7 @@ if(false===$cache_result){
 					$page_partners = get_page_by_path('partenaires');
 			?>
 			<div class="partners_zone">
-					<a href="<?php echo get_permalink($page_partners->ID); ?>"><img src="<?php echo $stylesheet_directory_uri; ?>/images/frise_partenaires_wedogood.png" width="3135" height="150" alt="logos partenaires"></a>
+					<a href="<?php echo get_permalink($page_partners->ID); ?>"><img src="<?php echo $stylesheet_directory_uri; ?>/images/frise_partenaires_wedogood.png" width="3135" height="150" alt="logos partenaires" /></a>
 			</div>
 		</div>
 	</div>

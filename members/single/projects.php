@@ -1,6 +1,7 @@
 <?php 
 locate_template( array("requests/projects.php"), true );
 $page_publish = get_page_by_path('creer-un-projet');
+$page_mes_investissements = get_page_by_path('mes-investissements');
 $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 ?>
 
@@ -101,7 +102,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		    La pi&egrave;ce d&apos;identit&eacute; doit &ecirc;tre pr&eacute;sent&eacute;e recto-verso.<br />
 		    Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf.<br />
 		    Son poids doit &ecirc;tre inf&eacute;rieur &agrave; 2 Mo.<br />
-		    <form id="mangopay_strongauth_form" action="" method="post" enctype="multipart/form-data">
+		    <form id="mangopay_strongauth_form" action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="mangopaytoaccount" value="1" />
 			<input type="hidden" name="document_submited" value="1" />
 			<input type="file" name="StrongValidationDtoPicture" />
@@ -140,7 +141,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		    //Entrer les données d'un beneficiary
 		    ?>
 		    <strong>Veuillez entrer vos informations bancaires</strong><br />
-		    <form action="" method="post" enctype="multipart/form-data">
+		    <form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
 			<label for="bankownername" class="large-label">Nom du propri&eacute;taire du compte : </label>
 			    <input type="text" name="bankownername" value="<?php echo $bankaccountownername; ?>" /> <br />
 			<label for="bankowneraddress" class="large-label">Adresse du compte : </label>
@@ -188,12 +189,12 @@ if (is_user_logged_in() && $display_loggedin_user) :
 			    Adresse du compte : <?php echo $beneficiary_obj->BankAccountOwnerAddress ?> <br />
 			    IBAN : <?php echo $beneficiary_obj->BankAccountIBAN ?> <br />
 			    BIC : <?php echo $beneficiary_obj->BankAccountBIC ?> <br />
-			<form action="" method="post" enctype="multipart/form-data">
+			<form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
 			    <input type="hidden" name="mangopaytoaccount" value="1" />
 			    <input type="hidden" name="valid" value="1" />
 			    <input type="submit" value="Valider" />
 			</form>
-			<form action="" method="post" enctype="multipart/form-data">
+			<form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
 			    <input type="hidden" name="mangopaytoaccount" value="1" />
 			    <input type="hidden" name="edit" value="1" />
 			    <input type="submit" value="Editer" />
@@ -226,7 +227,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 				    La pi&egrave;ce d&apos;identit&eacute; doit &ecirc;tre pr&eacute;sent&eacute;e recto-verso.<br />
 				    Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf.<br />
 				    Son poids doit &ecirc;tre inf&eacute;rieur &agrave; 2 Mo.<br />
-				    <form id="mangopay_strongauth_form" action="" method="post" enctype="multipart/form-data">
+				    <form id="mangopay_strongauth_form" action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="mangopaytoaccount" value="1" />
 					<input type="hidden" name="document_submited" value="1" />
 					<input type="file" name="StrongValidationDtoPicture" />
@@ -244,7 +245,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		    else :
 			if ($real_amount_invest > 0) {
 		?>
-		    <form action="" method="post" enctype="multipart/form-data">
+		    <form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="mangopaytoaccount" value="1" />
 			<input type="submit" value="Reverser sur mon compte bancaire" />
 		    </form>

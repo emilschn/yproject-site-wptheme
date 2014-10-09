@@ -2798,11 +2798,11 @@ text-transform: uppercase;
     margin: auto;
     top: 107px;
     position: absolute;
+    background-color: #F2F2F2;
    
 }
 #head-image #img-container{
     position: relative;
-    background-color: #F2F2F2;
 }
 #head-image img{
     min-width: 100%;
@@ -2895,8 +2895,8 @@ text-transform: uppercase;
 #head-content li a.current{
     background-color: #2B2C2C;
 }
-#projects-stats{
-
+.sharedaddy .share-print {
+	display: none !important;
 }
 #projects-stats-content{
     background: white;
@@ -3216,8 +3216,9 @@ text-transform: none;
 color: #FFF;
 height: 18px;
 }
-#nb-jycrois{
-    color: #000;
+#nb-jycrois {
+    margin-top: -20px;
+    color: #FFFFFF;
 }
 /********** Fenetre de partage ********************/
 #dialog{
