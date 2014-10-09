@@ -44,7 +44,8 @@ $vote_status = $campaign->campaign_status();
 				</div>
 				<div class="post_bottom_infos_item">
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="Logo personnes" />
-					<?php echo $campaign->backers_count(); ?> personnes ont dèjà financé ce projet
+					<?php $backers_count = $campaign->backers_count(); ?>
+					<?php echo $backers_count; ?> personne<?php if ($backers_count > 1) { echo 's ont'; } else { echo ' a'; } ?> d&eacute;j&agrave; financ&eacute; ce projet
 				</div>
 				<div class="post_bottom_infos_item" <?php if($vote_status=='funded'){echo "style=opacity:0.5";}?>>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo horloge" />
