@@ -4,6 +4,12 @@ if ( !function_exists( 'bp_dtheme_enqueue_styles' ) ) :
 	function bp_dtheme_enqueue_styles() {}
 endif;
 
+//Enlever les "magic quotes"
+$_POST      = array_map( 'stripslashes_deep', $_POST );
+$_GET       = array_map( 'stripslashes_deep', $_GET );
+$_COOKIE    = array_map( 'stripslashes_deep', $_COOKIE );
+$_REQUEST   = array_map( 'stripslashes_deep', $_REQUEST );
+
 //Définition de la largeur de l'affichage
 if ( ! isset( $content_width ) ) $content_width = 960;
 
@@ -22,13 +28,22 @@ add_action( 'wp_enqueue_scripts', 'yproject_enqueue_script' );
 function yproject_enqueue_script(){
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
-		wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"), false);
+		wp_register_script('jquery', (dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.min.js'), false);
 		wp_enqueue_script('jquery');
+
 	}
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'));
+	wp_enqueue_script( 'jquery-form-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
+	wp_enqueue_script( 'jquery-qtips2', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
+	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
+	
 	wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
-	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), false, true);
+	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'));
+	
+	wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.js', array('jquery'));
+	wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, false);
 }
+
 
 /** GESTION DU LOGIN **/
 /**
@@ -680,4 +695,483 @@ function print_user_projects(){
 }
 add_action( 'wp_ajax_print_user_projects', 'print_user_projects' );
 add_action( 'wp_ajax_nopriv_print_user_projects', 'print_user_projects' );
+
+/******** NAME ********/
+function update_name() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+
+	$post_update = array();
+	$post_update['ID'] = $wp_project_id;
+	if (isset($_POST['projectName']) && $_POST['projectName'] != "") $post_update['post_title'] = $_POST['projectName'];
+	wp_update_post($post_update);
+
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	$wp_project_video = $_POST['projectVideo'];
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_name' => $_POST['projectName'], 
+			'wp_project_slogan' => $_POST['projectSlogan']
+			)
+		);
+	header("Content-type: text/plain");
+	$arr = array (
+		"project_name" =>$_POST['projectName'],
+		"project_slogan" => $_POST['projectSlogan']
+		); 
+	echo json_encode($arr);
+	die();
+}
+add_action( 'wp_ajax_update_name', 'update_name' );
+
+
+/******** DESCRIPTION ********/
+function update_description() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_description' => $_POST['projectDescription'], 
+			)
+		);
+	header("Content-type: text/plain");
+	$arr = array (
+		"project_description" => $_POST['projectDescription'],
+		); 
+	echo json_encode($arr);
+	die();
+}
+add_action( 'wp_ajax_update_description', 'update_description' );
+
+/******** VIDEO ********/
+function update_video() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_video' => $_POST['projectVideo'], 
+			)
+		);
+	header("Content-type: text/plain");
+	$arr = array (
+		"project_video" => $_POST['projectVideo']
+		); 
+	echo json_encode($arr);
+	die();
+}
+add_action( 'wp_ajax_update_video', 'update_video' );
+
+/******** EN QUOI CONSISTE LE PROJET ********/
+function update_project() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_category' => $_POST['projectCategory'], 
+			'wp_project_business_sector' => $_POST['projectBusinessSector'], 
+			'wp_project_funding_type' => $_POST['projectFundingType'], 
+			'wp_project_funding_duration' => $_POST['projectFundingDuration'], 
+			'wp_project_return_on_investment' => $_POST['projectReturnOnInvestment'], 
+			'wp_project_investor_benefit' => $_POST['projectInvestorBenefit'], 
+			'wp_project_summary' => $_POST['projectSummary']
+			)
+		);
+	$arr = array (
+		"project_category" => $_POST['projectCategory'],
+		"project_business_sector" => $_POST['projectBusinessSector'],
+		"project_funding_type" => $_POST['projectFundingType'],
+		"project_funding_duration" => $_POST['projectFundingDuration'],
+		"project_return_on_investment" => $_POST['projectReturnOnInvestment'],
+		"project_investor_benefit" => $_POST['projectInvestorBenefit'],
+		"project_summary" => $_POST['projectSummary']
+		);
+	echo json_encode($arr); 
+	die();
+}
+add_action( 'wp_ajax_update_project', 'update_project' );
+
+/******** QUELLE EST L'UTILITÉ SOCIÉTALE DU PROJET ? ********/
+function update_societal() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_economy_excerpt' => $_POST['projectEconomyExcerpt'], 
+			'wp_project_social_excerpt' => $_POST['projectSocialExcerpt'], 
+			'wp_project_environment_excerpt' => $_POST['projectEnvironmentExcerpt'], 
+			'wp_project_mission' => $_POST['projectMission'], 
+			'wp_project_economy' => $_POST['projectEconomy'], 
+			'wp_project_social' => $_POST['projectSocial'], 
+			'wp_project_environment' => $_POST['projectEnvironment'], 
+			'wp_project_measure_performance' => $_POST['projectMeasurePerformance'], 
+			'wp_project_good_point' => $_POST['projectGoodPoint']
+			)
+		);
+	header("Content-type: text/plain");
+	$arr = array (
+		"project_economy_excerpt" => $_POST['projectEconomyExcerpt'],
+		"project_social_excerpt" => $_POST['projectSocialExcerpt'],
+		"project_environment_excerpt" => $_POST['projectEnvironmentExcerpt'],
+		"project_mission" => $_POST['projectMission'],
+		"project_economy" => $_POST['projectEconomy'],
+		"project_social" => $_POST['projectSocial'],
+		"project_environment" => $_POST['projectEnvironment'],
+		"project_measure_performance" => $_POST['projectMeasurePerformance'],
+		"project_good_point" => $_POST['projectGoodPoint']
+		); 
+	echo json_encode($arr);
+	die();
+}
+add_action( 'wp_ajax_update_societal', 'update_societal' );
+
+/******** QUELLE EST L'OPPORTUNITÉ ÉCONOMIQUE DU PROJET ? ********/
+function update_economy() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_context_excerpt' => $_POST['projectContextExcerpt'], 
+			'wp_project_market_excerpt' => $_POST['projectMarketExcerpt'], 
+			'wp_project_context' => $_POST['projectContext'], 
+			'wp_project_market' => $_POST['projectMarket']
+			)
+		);
+	header("Content-type: text/plain");
+	$arr = array (
+		'project_context_excerpt' => $_POST['projectContextExcerpt'], 
+		'project_market_excerpt' => $_POST['projectMarketExcerpt'], 
+		'project_context' => $_POST['projectContext'], 
+		'project_market' => $_POST['projectMarket']
+		); 
+	echo json_encode($arr);
+	die();
+}
+add_action( 'wp_ajax_update_economy', 'update_economy' );
+
+/******** QUEL EST LE MODÈLE ÉCONOMIQUE DU PROJET ?********/
+function update_model() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_worth_offer' => $_POST['projectWorthOffer'], 
+			'wp_project_client_collaborator' => $_POST['projectClientCollaborator'], 
+			'wp_project_business_core' => $_POST['projectBusinessCore'], 
+			'wp_project_income' => $_POST['projectIncome'], 
+			'wp_project_cost' => $_POST['projectCost'], 
+			'wp_project_collaborators_canvas' => $_POST['projectCollaboratorsCanvas'], 
+			'wp_project_activities_canvas' => $_POST['projectActivitiesCanvas'], 
+			'wp_project_ressources_canvas' => $_POST['projectRessourcesCanvas'], 
+			'wp_project_worth_offer_canvas' => $_POST['projectWorthOfferCanvas'],
+			'wp_project_customers_relations_canvas' => $_POST['projectCustomersRelationsCanvas'],
+			'wp_project_chain_distribution_canvas' => $_POST['projectChainDistributionsCanvas'], 
+			'wp_project_clients_canvas' => $_POST['projectClientsCanvas'], 
+			'wp_project_cost_structure_canvas' => $_POST['projectCostStructureCanvas'], 
+			'wp_project_source_income_canvas' => $_POST['projectSourceOfIncomeCanvas'], 
+			'wp_project_financial_board' => $_POST['projectFinancialBoard'], 
+			'wp_project_perspectives' => $_POST['projectPerspectives']
+			)
+);
+header("Content-type: text/plain");
+$arr = array (
+	'project_worth_offer' => $_POST['projectWorthOffer'], 
+	'project_client_collaborator' => $_POST['projectClientCollaborator'], 
+	'project_business_core' => $_POST['projectBusinessCore'], 
+	'project_income' => $_POST['projectIncome'], 
+	'project_cost' => $_POST['projectCost'], 
+	'project_collaborators_canvas' => $_POST['projectCollaboratorsCanvas'], 
+	'project_activities_canvas' => $_POST['projectActivitiesCanvas'], 
+	'project_ressources_canvas' => $_POST['projectRessourcesCanvas'], 
+	'project_worth_offer_canvas' => $_POST['projectWorthOfferCanvas'],
+	'project_customers_relations_canvas' => $_POST['projectCustomersRelationsCanvas'],
+	'project_chain_distribution_canvas' => $_POST['projectChainDistributionsCanvas'], 
+	'project_clients_canvas' => $_POST['projectClientsCanvas'], 
+	'project_cost_structure_canvas' => $_POST['projectCostStructureCanvas'], 
+	'project_source_income_canvas' => $_POST['projectSourceOfIncomeCanvas'], 
+	'project_financial_board' => $_POST['projectFinancialBoard'], 
+	'project_perspectives' => $_POST['projectPerspectives'], 
+	); 
+echo json_encode($arr);
+die();
+}
+add_action( 'wp_ajax_update_model', 'update_model' );
+
+
+/******** QUI PORTE LE PROJET ? ********/
+function update_members() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	//var_dump($_POST['projectOtherInformation']);
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_other_information' => $_POST['projectOtherInformation']
+			)
+		);
+	header("Content-type: text/plain");
+	$arr = array (
+		'project_other_information' => $_POST['projectOtherInformation']
+		); 
+	echo json_encode($arr);
+	die();
+}
+add_action( 'wp_ajax_update_members', 'update_members' );
+
+function save_image_home() {
+	//simple Security check
+	$image = $_FILES[ 'image_home' ];
+
+	//get POST data
+	$campaign_id = $_POST['post_id'];
+
+	//require the needed files
+	require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+	require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+	//then loop over the files that were sent and store them using  media_handle_upload();
+	if ($_FILES) {
+		if (isset($_FILES[ 'files' ])) $files = $_FILES[ 'files' ];
+		$edd_files  = array();
+		$upload_overrides = array( 'test_form' => false );
+		if ( ! empty( $files ) ) {
+			foreach ( $files[ 'name' ] as $key => $value ) {
+				if ( $files[ 'name' ][$key] ) {
+					$file = array(
+						'name'     => $files[ 'name' ][$key],
+						'type'     => $files[ 'type' ][$key],
+						'tmp_name' => $files[ 'tmp_name' ][$key],
+						'error'    => $files[ 'error' ][$key],
+						'size'     => $files[ 'size' ][$key]
+						);
+
+					$upload = wp_handle_upload( $file, $upload_overrides );
+
+					if ( isset( $upload[ 'url' ] ) )
+						$edd_files[$key]['file'] = $upload[ 'url' ];
+					else
+						unset($files[$key]);
+				}
+			}
+		}
+	}
+	//and if you want to set that image as Post  then use:
+
+	if (!empty($image)) {
+		if (isset($_FILES[ 'files' ])) $files = $_FILES[ 'files' ];
+
+		$edd_files  = array();
+		$upload_overrides = array( 'test_form' => false );
+		if ( ! empty( $files ) ) {
+			foreach ( $files[ 'name' ] as $key => $value ) {
+				if ( $files[ 'name' ][$key] ) {
+					$file = array(
+						'name'     => $files[ 'name' ][$key],
+						'type'     => $files[ 'type' ][$key],
+						'tmp_name' => $files[ 'tmp_name' ][$key],
+						'error'    => $files[ 'error' ][$key],
+						'size'     => $files[ 'size' ][$key]
+						);
+
+					$upload = wp_handle_upload( $file, $upload_overrides );
+
+					if ( isset( $upload[ 'url' ] ) )
+						$edd_files[$key]['file'] = $upload[ 'url' ];
+					else
+						unset($files[$key]);
+				}
+			}
+		}
+	}    
+	$upload = wp_handle_upload( $image, $upload_overrides );
+	if (isset($upload[ 'url' ])) {
+		$attachment = array(
+			'guid'           => $upload[ 'url' ], 
+			'post_mime_type' => $upload[ 'type' ],
+			'post_title'     => 'image_home',
+			'post_content'   => '',
+			'post_status'    => 'inherit'
+			);
+		global $wpdb;
+		$table_posts = $wpdb->prefix . "posts";
+		$campaign_id = $_POST['post_id'];
+		//Suppression dans la base de données de l'ancienne image
+		$old_attachement_id=$wpdb->get_var( "SELECT * FROM $table_posts WHERE post_parent=$campaign_id and post_title='image_home'" );
+		wp_delete_attachment( $old_attachement_id, true );
+
+		$attach_id = wp_insert_attachment( $attachment, $upload[ 'file' ], $campaign_id );		
+
+		wp_update_attachment_metadata( 
+			$attach_id, 
+			wp_generate_attachment_metadata( $attach_id, $upload[ 'file' ] ) 
+			);
+
+		
+	}
+	$attachmentsGet = get_posts( array(
+		'post_type' => 'attachment',
+		'post_parent' => $campaign_id,
+		'post_mime_type' => 'image'
+		));
+	$image_obj_home = '';
+	$image_obj_header = '';
+	$image_src_home = '';
+	$image_src_header = '';
+	    //Si on en trouve bien une avec le titre "image_home" on prend celle-là
+	foreach ($attachmentsGet as $attachment) {
+		if ($attachment->post_title == 'image_home') $image_obj_home = wp_get_attachment_image_src($attachment->ID, "full");
+	}
+	    //Sinon on prend la première image rattachée à l'article
+	if ($image_obj_home != '') $image_src_home = $image_obj_home[0];
+	echo $image_src_home; 
+	die();
+}
+
+add_action( 'wp_ajax_save_image_home', 'save_image_home' );
+
+
+
+function save_image() {
+		//get POST data
+	$campaign_id = $_POST['post_id'];
+
+		//require the needed files
+	require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+	require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+
+	$image_header = $_FILES[ 'image' ];
+	$path = $_FILES['image']['name'];
+	$ext = pathinfo($path, PATHINFO_EXTENSION);
+	
+	if (!empty($image_header)) {
+		if (isset($_FILES[ 'files' ])) $files = $_FILES[ 'files' ];
+
+		$edd_files  = array();
+		$upload_overrides = array( 'test_form' => false );
+		if ( ! empty( $files ) ) {
+			foreach ( $files[ 'name' ] as $key => $value ) {
+				if ( $files[ 'name' ][$key] ) {
+					$file = array(
+						'name'     => $files[ 'name' ][$key],
+						'type'     => $files[ 'type' ][$key],
+						'tmp_name' => $files[ 'tmp_name' ][$key],
+						'error'    => $files[ 'error' ][$key],
+						'size'     => $files[ 'size' ][$key]
+						);
+
+					$upload = wp_handle_upload( $file, $upload_overrides );
+
+					if ( isset( $upload[ 'url' ] ) )
+						$edd_files[$key]['file'] = $upload[ 'url' ];
+					else
+						unset($files[$key]);
+				}
+			}
+		}
+
+		$upload = wp_handle_upload( $image_header, $upload_overrides );
+		if (isset($upload[ 'url' ])) {
+			$attachment = array(
+				'guid'           => $upload[ 'url' ], 
+				'post_mime_type' => $upload[ 'type' ],
+				'post_title'     => 'image_header',
+				'post_content'   => '',
+				'post_status'    => 'inherit'
+				);
+			
+			$is_image_accepted = true;
+			switch (strtolower($ext)) {
+				case 'png':
+				$image_header = imagecreatefrompng($upload[ 'file' ]);
+				break;
+				case 'jpg':
+				case 'jpeg':
+				$image_header = imagecreatefromjpeg($upload[ 'file' ]);
+				break;
+				default:
+				$is_image_accepted = false;
+				break;
+			}
+			if($is_image_accepted){
+				for($i=0; $i<10 ; $i++){
+					imagefilter ($image_header, IMG_FILTER_GAUSSIAN_BLUR);
+					imagefilter ($image_header , IMG_FILTER_SELECTIVE_BLUR );
+				}
+				$withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $upload[ 'file' ]);
+				$img_name = $withoutExt.'_blur.jpg';
+				imagejpeg($image_header,$img_name);
+				global $wpdb;
+				$table_posts = $wpdb->prefix . "posts";
+			    //Suppression dans la base de données de l'ancienne image
+				$old_attachement_id=$wpdb->get_var( "SELECT * FROM $table_posts WHERE post_parent=$campaign_id and post_title='image_header'" );
+				wp_delete_attachment( $old_attachement_id, true );
+				$attach_id = wp_insert_attachment( $attachment, $img_name, $campaign_id  );		
+
+				wp_update_attachment_metadata( 
+					$attach_id, 
+					wp_generate_attachment_metadata( $attach_id, $img_name ) 
+					);
+			    //Suppression de la position de la couverture
+				delete_post_meta($campaign_id , 'campaign_cover_position');
+
+
+				add_post_meta( $campaign_id , '_thumbnail_id', absint( $attach_id ) );
+			}
+		}
+
+
+		
+		$attachmentsGet = get_posts( array(
+			'post_type' => 'attachment',
+			'post_parent' => $campaign_id,
+			'post_mime_type' => 'image'
+			));
+		$image_obj_home = '';
+		$image_obj_header = '';
+		$image_src_home = '';
+		$image_src_header = '';
+	    //Si on en trouve bien une avec le titre "image_home" on prend celle-là
+		foreach ($attachmentsGet as $attachment) {
+			if ($attachment->post_title == 'image_header') $image_obj_header = wp_get_attachment_image_src($attachment->ID, "full");
+		}
+	    //Sinon on prend la première image rattachée à l'article
+		if ($image_obj_header != '') $image_src_header = $image_obj_header[0];
+		echo $image_src_header; 
+
+	}
+	die();
+}
+
+
+add_action( 'wp_ajax_save_image', 'save_image' );
+
+function cancel_project() {
+	$wp_project_id = $_POST['wpProjectId'];
+	$id =  BoppLib::get_projectwp($wp_project_id);
+	echo $id; 
+	die();
+}
+add_action( 'wp_ajax_update_project', 'update_project' );
 ?>

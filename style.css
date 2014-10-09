@@ -3296,3 +3296,306 @@ height: 18px;
 .media-modal-icon .screen-reader-text {
     display: none;
 }
+
+/********* PROJECT MATTHIEU ***********/
+
+.center.edit_project_menu {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.cancel_save {
+    display: none;
+}
+
+.edit-projects-field, .edit-societal-field, .edit-economy-field, .edit-model-field, .edit-description-field, .edit-video-field, .edit-name-field, .edit-members-field {
+    display: none;
+    width: 46%;
+}
+
+
+label {
+    float: left;
+    width: 35%;
+    text-align: left;
+    margin-left: 25px;
+    margin-right: 0.5em;
+}
+
+label.control-label-wp {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+label.control-label-canvas {
+    display: none;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 12px;
+    padding-top: 5px;
+}
+
+.controls {
+    width: 100%;
+}
+
+.controls-wp {
+    margin-left: 40px;
+    width: 90%;
+}
+
+.edit_projects, .edit_societal, .edit_economy, .edit_model, .edit_description, .edit_video, .edit_name, .edit_members{
+    right: 0;
+    position: absolute;
+}
+
+.edit_name {
+top: 215px;
+right: 570px;
+}
+
+.canvas {
+    width: 800px;
+    height: 600px;
+}
+
+a.readmore, a.readless {
+    text-align: center;
+    display: block;
+    padding: 8px;
+    background: #7B7B7B;
+    color: #FFF;
+    margin-top: 26px;
+}
+
+.more {
+    padding: 26px 0 26px 0;
+}
+ .canvas span {
+   display:inline;
+   float:left;
+   border:1px solid #FF6600;
+   margin:0px;
+   padding:3px;
+   width: 200px;
+   height: 100%;
+  }
+.canvas p {
+   clear:left;
+   margin:0px;
+   padding:0px;
+   height:100% !important; height:1em;
+  }
+
+.edit-textarea {
+margin: 0;
+width: 715px;
+height: 113px;
+}
+
+.ui-tabs.ui-tabs-vertical {
+    padding: 0;
+    width: 620px;
+}
+.ui-tabs.ui-tabs-vertical .ui-widget-header {
+    border: none;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav {
+    float: left;
+    width: 50px;
+    height: 380px;
+    margin-top: 10px;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li {
+    clear: left;
+    width: 100%;
+    border: 1px solid gray;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    height: 50%;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0.6em 1em;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a:hover {
+    cursor: pointer;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
+    padding-bottom: 0;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li:last-child {
+    margin-bottom: 10px;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-panel {
+    float: left;
+    width: 540px;
+    padding: 10px;
+    position: relative;
+
+}
+
+.update_field_label {
+    margin: 0;
+    width: 155%;
+    padding: 10px 0;
+}
+
+#projects-summary{
+    position: relative;
+    width: 610px;
+}
+
+span.project_description.view-description-content {
+    width: 500px;
+    display: inline-block;
+}
+
+textarea#projectDescription {
+width: 450px;
+height: 60px;
+}
+
+
+input#projectVideo {
+margin-top: -4px;
+}
+
+label[for=projectVideo]
+{
+    width: 25%;
+    padding-bottom: 20px;
+}
+
+#output2{
+    display: none;
+}
+
+.head_project_name {
+    width: 500px;
+}
+
+#head-image form{
+    position: absolute;
+    /* right: 0; */
+    /* bottom: 1px; */
+    display: none; 
+    background-color: #333;
+    color: white;
+    padding: 8px;
+    z-index: 2;
+    left: 50px;
+    top: 50px;
+}
+#head-image:hover>form{
+    display: block;
+  }
+
+#loading_image_cover {
+    display: none; 
+    position: absolute;
+    z-index: 5;
+    top: 0px;
+    left: 257px;
+    height: 22px;
+    width: 22px;
+    background: #333 url('images/loading.gif')no-repeat;
+    padding: 8px;
+}
+
+.view-projects-content p img {
+    width: 673px;
+    height: auto;
+}
+
+span.tooltips {
+    position: absolute;
+    left: 11px;
+    display: none;
+}
+
+.update-field-img-home {
+    border: 1px dotted grey;
+    width: 550px;
+    height: 297px;
+    overflow: hidden;
+}
+
+#head-image #reposition-cover{
+    position: absolute;
+    /* right: 0; */
+    /* bottom: 1px; */
+    display: none;
+    background-color: #333;
+    color: white;
+    padding: 8px;
+    top: 90px;
+    left: 50px;
+}
+
+#head-content{
+    position: absolute;
+    width: 1080px;
+    height: 370px;
+    margin: auto;
+    z-index: 2;
+    bottom: -1px;
+}
+#head-content #projectName {
+    position: absolute;
+    font-size: 30px;
+    text-transform: uppercase;
+    bottom: 111px;
+    left: 0px;
+    width: 324px;
+}
+
+
+#head-content #title{
+    position: absolute;
+    font-size: 30px;
+    text-transform: uppercase;
+    bottom: 90px;
+    left: 0px;
+    width: 324px;
+}
+
+#head-content #projectSlogan {
+    position: absolute;
+    bottom: 88px;
+    width: 324px;
+}
+
+#head-content #subtitle {
+    position: absolute;
+    bottom: 75px;
+    width: 324px;
+}
+
+#projects-left-desc{
+    width: 580px;
+    /*height: 500px;*/
+}
+
+#projects-left-desc .video-zone{
+    width: 580px;
+    height: 325px;
+    margin-top: 15px;
+    min-height:325px !important;
+}
+.projects-title{
+    margin-top: 13px;
+    margin-bottom: 6px;
+    font-size: 20px;
+    text-transform: uppercase;
+}
