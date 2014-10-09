@@ -84,7 +84,7 @@
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
-		<meta name="description" content="Plateforme d'investissement participatif &agrave; impact positif" />
+		<meta name="description" content="Plateforme d'investissement participatif a impact positif" />
 		<meta property="og:title" content="WEDOGOOD" />
 		<meta property="og:image" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
 		<meta property="og:image:secure_url" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
