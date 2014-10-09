@@ -135,8 +135,10 @@ YPUIFunctions = (function($) {
 			    });
 			}
  	
-			if ($("#user-id").length) { 
-			    YPUIFunctions.getProjects(); 
+			if ($("#user-id").length > 0) { 
+				var sCurrentTab = window.location.hash.substring(1);
+				if (sCurrentTab != '') YPUIFunctions.switchProfileTab(sCurrentTab);
+				YPUIFunctions.getProjects(); 
 			}
 			
 			if ($("#item-submenu").length > 0) {
