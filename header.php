@@ -2,6 +2,7 @@
 	global $WDG_cache_plugin, $stylesheet_directory_uri;
 	$stylesheet_directory_uri = get_stylesheet_directory_uri();
 	date_default_timezone_set("Europe/Paris");
+	UIHelpers::init_social_infos();
 ?>
 
 <!DOCTYPE html>
