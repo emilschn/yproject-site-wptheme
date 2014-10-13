@@ -6,16 +6,15 @@ $campaign_id_param = '?campaign_id=';
 if (isset($_GET['campaign_id'])) {
 	$campaign_id_param .= $_GET['campaign_id'];
 	$post = get_post($_GET['campaign_id']);
-	$campaign = atcf_get_campaign( $post );
 	
 } else if (isset($campaign_id)) {
 	$campaign_id_param .= $campaign_id;
 	$post = get_post($campaign_id);
-	$campaign = atcf_get_campaign( $post );
 	    
 } else {
 	$campaign_id_param .= $post->ID;
 }
+$campaign = atcf_get_campaign( $post );
 $vote_status = $campaign->campaign_status(); 
 ?>
 
@@ -173,13 +172,13 @@ $vote_status = $campaign->campaign_status();
 						<a class="jy-crois" href="javascript:WDGProjectPageFunctions.update_jycrois(0,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
 						<div id="jy-crois-btn" style="background-image: url('<?php echo $stylesheet_directory_uri.'/images/jycrois_gris.png';?>')" class="stats_btn" class="dark">
 						<p id="jy-crois-txt"><p>    
-						<p id="nb-jycrois"><?php do_shortcode('[yproject_crowdfunding_count_jcrois]') ?></p>
+						<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
 						</div></a>
 					<?php } else { ?>
 						<a class="jy-crois" href="javascript:WDGProjectPageFunctions.update_jycrois(1,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
 						<div id="jy-crois-btn" class="stats_btn" class="dark">
 						<p id="jy-crois-txt">J'y crois<p>
-						<p id="nb-jycrois"><?php do_shortcode('[yproject_crowdfunding_count_jcrois]') ?></p>
+						<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
 						</div></a>
 
 					<?php }
@@ -188,16 +187,18 @@ $vote_status = $campaign->campaign_status();
 					<a class="jy-crois" href="<?php echo get_permalink($page_connexion->ID); ?>">
 					<div id="jy-crois-btn" class="stats_btn" class="dark">
 					<p id="jy-crois-txt">J'y crois<p>
-					<p id="nb-jycrois"><?php do_shortcode('[yproject_crowdfunding_count_jcrois]') ?></p>
+					<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
 					</div></a>
 				<?php } ?>
 				<?php endif; ?>
 
+				<?php if ($vote_status != 'preparing') : ?>
 				<a id="share-btn-a" href="javascript:WDGProjectPageFunctions.share_btn_click();">
 				<div id="share-btn-div" class="stats_btn" class="dark">
 					<p id="share-txt">Partager</p>	
 				</div>
 				</a>
+				<?php endif; ?>
 			</div>
 
 			<div id="white-background" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>></div>
@@ -315,8 +316,10 @@ $vote_status = $campaign->campaign_status();
 			//Sinon on prend la première image rattachée à l'article
 			if ($image_obj == '' && count($attachments) > 0) $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
 			if ($image_obj != '') $img_src = $image_obj[0];
+			if ($img_src != ''):
 			?>
 			<img id="moved-img" src="<?php echo $img_src; ?>" alt="Image du projet" />
+			<?php endif; ?>
 		</div>
 		<?php 
 		    $cache_result = ob_get_contents();

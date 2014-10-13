@@ -49,7 +49,7 @@ $vote_status = html_entity_decode($campaign->vote());
 		<div id="project-owner">
 			<?php 
 			$author_id=get_the_author_meta('ID');
-//			print_user_avatar($author_id);
+//			UIHelpers::print_user_avatar($author_id);
 			$author=get_user_meta($author_id);
 			?>
 			<div id="project-owner-desc" style="width: 100%; text-align: center;">
