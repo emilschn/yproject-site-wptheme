@@ -191,11 +191,13 @@ $vote_status = $campaign->campaign_status();
 				<?php } ?>
 				<?php endif; ?>
 
+				<?php if ($vote_status != 'preparing') : ?>
 				<a id="share-btn-a" href="javascript:WDGProjectPageFunctions.share_btn_click();">
 				<div id="share-btn-div" class="stats_btn" class="dark">
 					<p id="share-txt">Partager</p>	
 				</div>
 				</a>
+				<?php endif; ?>
 			</div>
 
 			<div id="white-background" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>></div>
@@ -313,8 +315,10 @@ $vote_status = $campaign->campaign_status();
 			//Sinon on prend la première image rattachée à l'article
 			if ($image_obj == '' && count($attachments) > 0) $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
 			if ($image_obj != '') $img_src = $image_obj[0];
+			if ($img_src != ''):
 			?>
 			<img id="moved-img" src="<?php echo $img_src; ?>" alt="Image du projet" />
+			<?php endif; ?>
 		</div>
 		<?php 
 		    $cache_result = ob_get_contents();
