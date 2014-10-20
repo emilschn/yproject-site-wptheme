@@ -101,7 +101,7 @@ $vote_status = html_entity_decode($campaign->vote());
 </div>
 
 <div class="indent">
-	<div class="projects-desc-item">
+	<div class="projects-desc-item project-item">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet.png" data-content="project"/>
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
 		<div id="project-content-project" class="projects-desc-content">
@@ -110,7 +110,6 @@ $vote_status = html_entity_decode($campaign->vote());
 		</div>
 	</div>
 
-	<a id="anchor-social"></a>
 	<div class="projects-desc-item">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>sociale.png" data-content="social" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" />
