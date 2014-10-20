@@ -19,7 +19,7 @@
     }
 */	
     /* Récupération des infos Twitter */
-    global $twitter_infos;
+/*    global $twitter_infos;
     $cache_result = $WDG_cache_plugin->get_cache('twitter-count');
     if (false === $cache_result) {
 	    require_once("_external/twitter/TwitterAPIExchange.php");
@@ -42,7 +42,7 @@
 	    $WDG_cache_plugin->set_cache('twitter-count',$twitter_infos,60*60*24);
     } else {
 	    $twitter_infos = $cache_result;
-    }
+    }*/
 
     function getWDGTitle() {
 	    global $post;
