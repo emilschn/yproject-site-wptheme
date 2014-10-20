@@ -2819,12 +2819,14 @@ text-transform: uppercase;
 }
 #head-image #reposition-cover{
     position: absolute;
-    right: 0;
-    bottom: 1px;
+    /* right: 0; */
+    /* bottom: 1px; */
     display: none;
     background-color: #333;
     color: white;
     padding: 8px;
+    top: 90px;
+    left: 50px;
 }
 #head-image:hover>#reposition-cover{
     display: block;
@@ -3529,18 +3531,6 @@ span.tooltips {
     width: 550px;
     height: 297px;
     overflow: hidden;
-}
-
-#head-image #reposition-cover{
-    position: absolute;
-    /* right: 0; */
-    /* bottom: 1px; */
-    display: none;
-    background-color: #333;
-    color: white;
-    padding: 8px;
-    top: 90px;
-    left: 50px;
 }
 
 #head-content{
