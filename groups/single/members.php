@@ -37,7 +37,7 @@
 
 					<?php 
 					global $members_template;
-					print_user_avatar($members_template->member->user_id, 'thumb');
+					UIHelpers::print_user_avatar($members_template->member->user_id, 'thumb');
 					?>
 
 				</a>

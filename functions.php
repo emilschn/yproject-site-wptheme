@@ -257,18 +257,12 @@ add_filter('oembed_result', 'remove_related_videos', 1, true);
 
 /**
  * Permet d'envoyer la position de l'image de couverture d'un projet.
- * 
  */
 function set_cover_position(){
-	if(isset($_POST['top'])){
-		$post_meta=get_post_meta($_POST['id_campaign'], 'campaign_cover_position', TRUE);
-		if($post_meta==''){
-			add_post_meta($_POST['id_campaign'], 'campaign_cover_position', $_POST['top'], TRUE);
-			 }
+	if (isset($_POST['top'])) {
 		update_post_meta($_POST['id_campaign'],'campaign_cover_position', $_POST['top']);
+		do_action('wdg_delete_cache',array('project-'.$_POST['id_campaign'].'-header-second'));
 	}
-	do_action('wdg_delete_cache',array('project-'.$post->ID.'-header-second'));
-
 }
 add_action( 'wp_ajax_setCoverPosition', 'set_cover_position' );
 
@@ -276,132 +270,21 @@ add_action( 'wp_ajax_setCoverPosition', 'set_cover_position' );
  * Permet d'envoyer la position de l'image de couverture d'un projet.
  */
 function set_cursor_position(){
-	if(isset($_POST['top'])){
-		$post_meta_top=get_post_meta($_POST['id_campaign'], 'campaign_cursor_top_position', TRUE);
-		$post_meta_left=get_post_meta($_POST['id_campaign'], 'campaign_cursor_left_position', TRUE);
-		if($post_meta_top==''){
-			add_post_meta($_POST['id_campaign'], 'campaign_cursor_top_position', $_POST['top'], TRUE);
-		}
-		if($post_meta_left==''){
-			add_post_meta($_POST['id_campaign'], 'campaign_cursor_left_position', $_POST['left'], TRUE);
-		}
+	if (isset($_POST['top'])) {
 		update_post_meta($_POST['id_campaign'],'campaign_cursor_top_position', $_POST['top']);
 		update_post_meta($_POST['id_campaign'],'campaign_cursor_left_position', $_POST['left']);
-		do_action('wdg_delete_cache',array('project-'.$post->ID.'-content'));
+		do_action('wdg_delete_cache',array('project-'.$_POST['id_campaign'].'-content'));
 	}
-
 }
 add_action( 'wp_ajax_setCursorPosition', 'set_cursor_position' );
 
-
-function print_user_avatar($user_id, $size = 'normal'){
-	echo get_user_avatar($user_id, $size);
-}
-function get_user_avatar($user_id, $size = 'normal'){
-	switch ($size) {
-	    case 'normal':
-		$width = 150;
-		break;
-	    case 'thumb':
-		$width = 50;
-		break;
-	}
-
-	$avatar_path = '';
-	$upload_dir = wp_upload_dir();
 	
-	if ( file_exists( BP_AVATAR_UPLOAD_PATH . '/avatars/' . bp_loggedin_user_id() . '/avatar.jpg' )) {
-		$avatar_path = $upload_dir['baseurl'] . '/avatars/' . bp_loggedin_user_id() . '/avatar.jpg';
-		return '<img src="' .$avatar_path . '" width="' . $width . '" height="' . $width . '"/>';
-		
-	} elseif (file_exists( BP_AVATAR_UPLOAD_PATH. '/avatars/' . bp_loggedin_user_id() . '/avatar.png' )) {
-		$avatar_path = $upload_dir['baseurl'] . '/avatars/' . bp_loggedin_user_id() . '/avatar.png';
-		return '<img src="' . $avatar_path . '" width="' . $width . '" height="' . $width . '"/>';
-		
-	} else {
-		$bp = buddypress();
-		$bp->avatar->full->default = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
-
-		$profile_type = "";
-		$google_meta = get_user_meta($user_id, 'social_connect_google_id', true);
-		if (isset($google_meta) && $google_meta != "") $profile_type = ""; //TODO : Remplir avec "google" quand on gÃƒÂ¨rera correctement
-		$facebook_meta = get_user_meta($user_id, 'social_connect_facebook_id', true);
-		if (isset($facebook_meta) && $facebook_meta != "") $profile_type = "facebook";
-
-		$url = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
-		switch ($profile_type) {
-		    case "google":
-			$meta_explode = explode("id?id=", $google_meta);
-			$social_id = $meta_explode[1];
-			$url = "http://plus.google.com/s2/photos/profile/" . $social_id . "?sz=".($width-1);
-			return '<img src="' .$url . '" width="'.$width.'"/>';
-			break;
-		    case "facebook":
-			if ($size == 'thumb') {
-			    $size = 'square';
-			}
-			$url = "https://graph.facebook.com/" . $facebook_meta . "/picture?type=" . $size;
-			return '<img src="' .$url . '" width="'.$width.'"/>';
-			break;
-		    default :
-			return '<img src="'.$url.'" width="'.$width.'" />';
-			break;
-		}
-	}
-}
 function update_jy_crois(){
-	global $wpdb, $post;
-	$table_jcrois = $wpdb->prefix . "jycrois";
+	global $post;
 
 	if (isset($_POST['id_campaign'])) $post = get_post($_POST['id_campaign']);
 	$campaign = atcf_get_campaign( $post );
-	$campaign_id = $campaign->ID;
-
-	// Construction des urls utilisés dans les liens du fil d'actualité
-	// url d'une campagne précisée par son nom 
-	$campaign_url = get_permalink($_POST['id_campaign']);
-	$post_title = $post->post_title;
-	$url_campaign = '<a href="'.$campaign_url.'">'.$post_title.'</a>';
-	    
-	//url d'un utilisateur précis
-	$user_id = wp_get_current_user()->ID;
-	$user_display_name = wp_get_current_user()->display_name;
-	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '">' . $user_display_name . '</a>';
-	$user_avatar = get_user_avatar($user_id);
-
-	//J'y crois
-	if(isset($_POST['jy_crois']) && $_POST['jy_crois'] == 1){
-		$wpdb->insert( 
-			$table_jcrois,
-			array(
-				'user_id'	    => $user_id,
-				'campaign_id'   => $campaign_id
-			)
-		); 
-		bp_activity_add(array (
-			'component' => 'profile',
-			'type'      => 'jycrois',
-			'action'    => $user_avatar . $url_profile.' croit au projet '.$url_campaign
-		));
-		
-	//J'y crois pas
-	} else if (isset($_POST['jy_crois']) && $_POST['jy_crois'] == 0) { 
-		$wpdb->delete( 
-			$table_jcrois,
-			array(
-				'user_id'      => $user_id,
-				'campaign_id'  => $campaign_id
-			)
-		);
-		// Inserer l'information dans la table du fil d'activité  de la BDD wp_bp_activity 
-		bp_activity_delete(array (
-			'user_id'   => $user_id,
-			'component' => 'profile',
-			'type'      => 'jycrois',
-			'action'    => $user_avatar . $url_profile . ' croit au projet '.$url_campaign
-		));
-	}
-	echo $wpdb->get_var( "SELECT count(campaign_id) FROM $table_jcrois WHERE campaign_id = $campaign_id" );
+	return $campaign->manage_jycrois();
 }
 add_action( 'wp_ajax_update_jy_crois', 'update_jy_crois' );
 
@@ -415,7 +298,7 @@ function comment_blog_post(){
 	$user_id                = wp_get_current_user()->ID;
 	$user_display_name      = wp_get_current_user()->display_name;
 	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '"> ' . $user_display_name . '</a>';
-	$user_avatar=get_user_avatar($user_id);
+	$user_avatar = UIHelpers::get_user_avatar($user_id);
 
 	bp_activity_add(array (
 		'component' => 'profile',
