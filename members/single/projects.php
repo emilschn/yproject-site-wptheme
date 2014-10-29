@@ -212,7 +212,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		    $mp_user = ypcf_mangopay_get_user_by_id($mp_user_id);
 		    $real_amount_invest = $mp_user->PersonalWalletAmount / 100;
 		?>
-		    Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br />
+		    Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br /><br />
 
 		<?php 
 		    $show_strong_auth_form = false;
@@ -220,7 +220,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		    if ($show_strong_auth_form):
 			    $strongauth_status = ypcf_mangopay_get_user_strong_authentication_status(get_current_user_id());
 			    if ($strongauth_status['status'] != ''): ?>
-				    <span class="error"><?php echo $strongauth_status['message']; ?></span><br />
+				    <span class="error"><?php echo $strongauth_status['message']; ?></span><br /><br />
 			    <?php endif;
 				    
 			    if ($strongauth_status['status'] != 'waiting'): ?>
