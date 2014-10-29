@@ -20,12 +20,12 @@ if (!is_user_logged_in()) {
 		<div class="center">
 			<?php
 			//Demande de renvoi de code
-			if (isset($_GET['invest_id_resend']) && $_GET['invest_id_resend'] != '') {
+			if (isset($_GET['invest_id_resend']) && !empty($_GET['invest_id_resend'])) {
 				$contractid = ypcf_get_signsquidcontractid_from_invest($_GET['invest_id_resend']);
 				$signsquid_signatory = signsquid_get_contract_signatory($contractid);
 				$current_user = wp_get_current_user();
 				if ($signsquid_signatory != '' && $signsquid_signatory->{'email'} == $current_user->user_email) {
-					if (ypcf_send_mail_purchase($_GET['invest_id_resend'], "send_code", $signsquid_signatory->{'code'}, $current_user->user_email)) {
+					if (NotificationsEmails::send_code_user($_GET['invest_id_resend'], $current_user, $signsquid_signatory->{'code'})) {
 						?>Votre code de signature de contrat a &eacute;t&eacute; renvoy&eacute; &agrave; l&apos;adresse <?php echo $current_user->user_email; ?>.<br /><?php
 					    
 					} else {
