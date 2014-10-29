@@ -15,6 +15,7 @@ function yproject_setup() {
 add_action( 'after_setup_theme', 'yproject_setup', 15 );
 
 add_action('wp_insert_comment', array('NotificationsEmails', 'new_comment'), 99 ,2);
+add_action('bbp_new_topic', array('NotificationsEmails', 'new_topic'), 99 ,2);
 
 //Sécurité
 remove_action("wp_head", "wp_generator");
