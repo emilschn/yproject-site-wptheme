@@ -57,9 +57,6 @@ function queryFinishedProjects($nb,$type) {
 }
 
 class YPProjectLib {
-	public static $project_team_member_role = array(
-						    'slug' => 'project-team-member', 
-						    'title' => 'Membre equipe projet');
 	public static function edit_team() {
 		$buffer = '';
 		if (isset($_REQUEST['action']) && isset($_GET['campaign_id'])) {
@@ -78,9 +75,9 @@ class YPProjectLib {
 							//Récupération des infos existantes sur l'API
 							$user_api_id = BoppLibHelpers::get_api_user_id($user_wp_id);
 							$project_api_id = BoppLibHelpers::get_api_project_id($_GET['campaign_id']);
-							BoppLibHelpers::check_create_role(YPProjectLib::$project_team_member_role['slug'], YPProjectLib::$project_team_member_role['title']);
+							BoppLibHelpers::check_create_role(BoppLibHelpers::$project_team_member_role['slug'], BoppLibHelpers::$project_team_member_role['title']);
 							//Ajout à l'API
-							BoppLib::link_user_to_project($project_api_id, $user_api_id, YPProjectLib::$project_team_member_role['slug']);
+							BoppLib::link_user_to_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
 							$buffer = TRUE;
 						}
 					} else {
@@ -96,7 +93,7 @@ class YPProjectLib {
 						$user_api_id = BoppLibHelpers::get_api_user_id($_POST['user_to_remove']);
 						$project_api_id = BoppLibHelpers::get_api_project_id($_GET['campaign_id']);
 						//Supprimer dans l'API
-						BoppLib::unlink_user_from_project($project_api_id, $user_api_id, YPProjectLib::$project_team_member_role['slug']);
+						BoppLib::unlink_user_from_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
 						$buffer = TRUE;
 					}
 					break;
@@ -128,7 +125,7 @@ class YPProjectLib {
 		
 		//On autorise les personnes de l'équipe projet
 		$project_api_id = BoppLibHelpers::get_api_project_id($campaign_id);
-		$team_member_list = BoppLib::get_project_members_by_role($project_api_id, YPProjectLib::$project_team_member_role['slug']);
+		$team_member_list = BoppLib::get_project_members_by_role($project_api_id, BoppLibHelpers::$project_team_member_role['slug']);
 		foreach ($team_member_list as $team_member) {
 			if ($current_user_id == $team_member->wp_user_id) return TRUE;
 		}

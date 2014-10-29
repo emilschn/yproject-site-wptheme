@@ -41,7 +41,7 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 					
 			<?php
 			$api_user_id = BoppLibHelpers::get_api_user_id(bp_displayed_user_id());
-			$project_list = BoppLib::get_user_projects_by_role($api_user_id, YPProjectLib::$project_team_member_role['slug']);
+			$project_list = BoppLib::get_user_projects_by_role($api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
 			if (!empty($project_list)) {
 				$has_projects = true;
 				foreach ($project_list as $project) {
