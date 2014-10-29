@@ -300,25 +300,12 @@ $vote_status = $campaign->campaign_status();
 		if (false === $cache_result) {
 		ob_start();
 		?>
-		<div id='img-container' style="top:<?php $cover_position=get_post_meta($post->ID,'campaign_cover_position',TRUE); if($cover_position!='') echo $cover_position;?>">
+		<div id='img-container' style="<?php echo $campaign->get_header_picture_position_style(); ?>">
 			<?php 
-			$img_src = '';			
-			$attachments = get_posts( array(
-			    'post_type' => 'attachment',
-			    'post_parent' => $post->ID,
-			    'post_mime_type' => 'image'
-			));
-			$image_obj = '';
-			//Si on en trouve bien une avec le titre "image_home" on prend celle-là
-			foreach ($attachments as $attachment) {
-			    if ($attachment->post_title == 'image_header') $image_obj = wp_get_attachment_image_src($attachment->ID, "full");
-			}
-			//Sinon on prend la première image rattachée à l'article
-			if ($image_obj == '' && count($attachments) > 0) $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
-			if ($image_obj != '') $img_src = $image_obj[0];
+			$img_src = $campaign->get_header_picture_src();
 			if ($img_src != ''):
 			?>
-			<img id="moved-img" src="<?php echo $img_src; ?>" alt="Image du projet" />
+			<img id="moved-img" src="<?php echo $img_src; ?>" alt="Bannière <?php echo $post->post_title; ?>" />
 			<?php endif; ?>
 		</div>
 		<?php 
@@ -335,7 +322,7 @@ $vote_status = $campaign->campaign_status();
 		    global $post;
 		    $post_id_echo = (isset($_GET['campaign_id'])) ? $_GET['campaign_id'] : $post->ID;
 		?>
-		    <a href="#" id="reposition-cover" onclick='javascript:WDGProjectPageFunctions.move_picture(<?php echo $post_id_echo; ?>)'>Repositionner</a>
+		    <a href="#" id="reposition-cover" onclick="javascript:WDGProjectPageFunctions.move_picture(<?php echo $post_id_echo; ?>)">Repositionner</a>
 		<?php } ?>
 	</div>
 	<div style="clear:both"></div>

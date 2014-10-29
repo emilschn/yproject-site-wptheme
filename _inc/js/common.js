@@ -493,16 +493,20 @@ WDGProjectPageFunctions=(function($) {
 			//Si il y a plus d'un paragraphe, on initialise le clic
 	  		if ($(descContentElement).find('p').length > 1) {
 	  			$(descContentElement).css("cursor", "pointer");
-				var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '">Lire plus !</div>';
-		  		$(descContentElement).find('div div *:lt(1)').append(sProjectMore);
+				var sDisplay = '';
+				if (WDGProjectPageFunctions.currentDiv === 0) sDisplay = 'style="display:none"';
+				var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'>Lire plus !</div>';
+				$(descContentElement).find('div div *:lt(1)').append(sProjectMore);
 		  		$(descContentElement).click(function(){
 					WDGProjectPageFunctions.clickItem($(this))
 				});
 	  		}
-			//On prend toutes les balises de la description
-			var children = $(descContentElement).children().children().children();
-			//On les masque sauf la première
-	   		$(descContentElement).find(children.not('*:eq(0)')).hide();
+			if (WDGProjectPageFunctions.currentDiv > 0) {
+				//On prend toutes les balises de la description
+				var children = $(descContentElement).children().children().children();
+				//On les masque sauf la première
+				$(descContentElement).find(children.not('*:eq(0)')).hide();
+			}
 	   		WDGProjectPageFunctions.currentDiv++;
    		},
 		
