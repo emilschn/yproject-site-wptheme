@@ -33,11 +33,13 @@ function yproject_enqueue_script(){
 
 	}
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'));
+	wp_enqueue_script( 'wdg-script2', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/project_bopp.js', array('jquery', 'jquery-ui-dialog'));
 	wp_enqueue_script( 'jquery-form-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-qtips2', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	
 	wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
+	wp_localize_script( 'wdg-script2', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'));
 	
 	wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.js', array('jquery'));
@@ -804,7 +806,6 @@ add_action( 'wp_ajax_update_model', 'update_model' );
 function update_members() {
 	global $wpdb, $post;
 	$wp_project_id = $_POST['wpProjectId'];
-	//var_dump($_POST['projectOtherInformation']);
 	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
 	BoppLib::update_project(
 		$id,
@@ -1032,16 +1033,18 @@ function save_image() {
 			'post_mime_type' => 'image'
 			));
 		$image_obj_home = '';
-		$image_obj_header = '';
+		$image_obj_header = array();
 		$image_src_home = '';
 		$image_src_header = '';
 	    //Si on en trouve bien une avec le titre "image_home" on prend celle-là
 		foreach ($attachmentsGet as $attachment) {
-			if ($attachment->post_title == 'image_header') $image_obj_header = wp_get_attachment_image_src($attachment->ID, "full");
+			if ($attachment->post_title == 'image_header') array_push ($image_obj_header, wp_get_attachment_image_src($attachment->ID, "full"));
+
 		}
 	    //Sinon on prend la première image rattachée à l'article
 		if ($image_obj_header != '') $image_src_header = $image_obj_header[0];
-		echo $image_src_header; 
+		//echo $image_src_header; 
+		echo $image_obj_header[0][0];
 
 	}
 	die();

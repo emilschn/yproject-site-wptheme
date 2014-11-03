@@ -245,10 +245,10 @@ $vote_status = $campaign->campaign_status();
 															<div class="head_project_name">
 															<?php if($can_modify){ ?>
 																<div class="edit_name">
-																	<a href="#" data-action="edit_name">Editer</a>
+																	<a class="edit-button" href="#" data-action="edit_name">Editer</a>
 																	<span class="cancel_save">
-																		<a href="#" data-action="cancel_name">Annuler</a> |
-																		<a href="#" data-campaign="<?= $campaign_id ?>" data-action="save_name">Enregistrer</a> 
+																		<a class="cancel-button" href="#" data-action="cancel_name">Annuler</a>
+																		<a class="save-button" href="#" data-campaign="<?= $campaign_id ?>" data-action="save_name">Enregistrer</a> 
 																	</span>
 																</div>
 																<?php } ?>
@@ -333,7 +333,7 @@ $vote_status = $campaign->campaign_status();
 													
 													if ($can_modify) { ?>
 													<form id="image_upload" method="post" action="#" enctype="multipart/form-data" >
-													  <input type="file" name="image" id="image">
+													   <span class="btn_file"><input type="file" name="image" id="image"></span>
 													  <input type='hidden' value='<?php wp_create_nonce( 'upload' ); ?>' name='_nonce' />
 													  <input type="hidden" name="post_id" id="post_id" value="<?= $campaign_id ?>">
 													  <input type="hidden" name="action" id="action" value="save_image">
@@ -350,16 +350,27 @@ $vote_status = $campaign->campaign_status();
 															'post_parent' => $post->ID,
 															'post_mime_type' => 'image'
 															));
-														$image_obj = '';
+														$image_obj = array();
 														//Si on en trouve bien une avec le titre "image_home" on prend celle-là
+														// foreach ($attachments as $attachment) {
+														// 	if ($attachment->post_title == 'image_header') $image_obj = wp_get_attachment_image_src($attachment->ID, "full");
+														// }
+
+
 														foreach ($attachments as $attachment) {
-															if ($attachment->post_title == 'image_header') $image_obj = wp_get_attachment_image_src($attachment->ID, "full");
+															if ($attachment->post_title == 'image_header') array_push($image_obj, wp_get_attachment_image_src($attachment->ID, "full"));
+
 														}
+													    //Sinon on prend la première image rattachée à l'article
+														if ($image_obj_header != '') $image_src_header = $image_obj_header[0];
+														//echo $image_src_header; 
+
+
 														//Sinon on prend la première image rattachée à l'article
 														if ($image_obj == '' && count($attachments) > 0) $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
 														if ($image_obj != '') $img_src = $image_obj[0];
 														?>
-														<img id="moved-img" class="cover-img" src="<?php echo $img_src; ?>" alt="Image du projet" />
+														<img id="moved-img" class="cover-img" src="<?php echo $image_obj[0][0];; ?>" alt="Image du projet" />
 													</div>
 													<?php 
 													$cache_result = ob_get_contents();

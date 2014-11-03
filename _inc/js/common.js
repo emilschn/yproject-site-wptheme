@@ -346,8 +346,8 @@ WDGProjectPageFunctions=(function($) {
 	return {
 		currentDiv:0,
 		initUI:function() {
-			$('.projects-desc-content').each(function(){WDGProjectPageFunctions.initClick(this)});
-			$('.project-content-icon').click(function(){
+			$('.v1 .projects-desc-content').each(function(){WDGProjectPageFunctions.initClick(this)});
+			$('.v1 .project-content-icon').click(function(){
 				var contentDiv = $("#project-content-" + $(this).data("content"));
 				contentDiv.trigger("click"); 	
 			});
