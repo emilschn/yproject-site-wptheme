@@ -5,7 +5,7 @@
 		
 		<?php locate_template( array("basic/basic-header.php"), true ); ?>
 	    
-		<div class="center">
+		<div class="center padding-top">
 
 			<?php 
 			date_default_timezone_set("Europe/Paris");
@@ -80,11 +80,11 @@
 			<?php } ?>
 			
 			<br /><br />
-			&lt;&lt; <a href="<?php bp_loggedin_user_link(); ?>">Mon compte</a>
 			
-			<br /><br />
-			<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" /></center>
-
+			&lt;&lt; <a href="<?php bp_loggedin_user_link(); ?>#projects">Mon compte</a><br /><br />
+			
+			<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" /></center><br /><br />
+			
 		</div>
 	</div><!-- .padder -->
 </div><!-- #content -->
