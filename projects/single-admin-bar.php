@@ -14,6 +14,7 @@ if ($can_modify) {
 	if (isset($_GET['preview']) && $_GET['preview'] = 'true') { $params_full = '?preview=true'; $params_partial = '&preview=true'; }
 	$campaign_id_param = '?campaign_id=';
 	$campaign_id_param .= $campaign_id;				// Page projet
+	$page_dashboard = get_page_by_path('tableau-de-bord');		// Tableau de bord
 	$page_manage = get_page_by_path('gerer');			// Gérer le projet
 	$page_add_news = get_page_by_path('ajouter-une-actu');		// Ajouter une actualité
 	$page_manage_team = get_page_by_path('projet-gerer-equipe');	// Editer l'équipe
@@ -41,19 +42,21 @@ if ($can_modify) {
 	if (isset($post->post_name)) $current_page = $post->post_name;
 	if (bp_is_group()) $current_page = 'group';
 ?>
-	<div id="yp_admin_bar">
+	<div id="single_project_admin_bar">
 		<div class="center">
+			<a href="<?php echo get_permalink($page_dashboard->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'tableau-de-bord') { echo 'class="selected"'; } ?>><?php echo __('Tableau de bord', 'yproject'); ?></a>
+			|
 			<a href="<?php echo get_permalink($campaign_id) . $params_full; ?>" <?php if ($current_page == $post_campaign->post_name) { echo 'class="selected"'; } ?>><?php echo __('Page projet', 'yproject'); ?></a>
-			&nbsp; &nbsp; &nbsp;
-			<a href="<?php echo get_permalink($page_manage->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'gerer') { echo 'class="selected"'; } ?>>G&eacute;rer le projet</a>
-			&nbsp; &nbsp; &nbsp;
-			<a href="<?php echo get_permalink($page_add_news->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'ajouter-une-actu') { echo 'class="selected"'; } ?>><?php echo __('Ajouter une actualit&eacute', 'yproject'); ?></a>
-			 &nbsp; &nbsp; &nbsp;
-			<a href="<?php echo get_permalink($page_manage_team->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'projet-gerer-equipe') { echo 'class="selected"'; } ?>><?php echo __('G&eacute;rer l&apos;&eacute;quipe', 'yproject'); ?></a>
-			 &nbsp; &nbsp; &nbsp;
+			|
+			<a href="<?php echo get_permalink($page_manage->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'gerer') { echo 'class="selected"'; } ?>>Editer le projet</a>
+			|
+			<a href="<?php echo get_permalink($page_manage_team->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'projet-gerer-equipe') { echo 'class="selected"'; } ?>><?php echo __('&Eacute;quipe', 'yproject'); ?></a>
+			|
+			<a href="<?php echo get_permalink($page_add_news->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'ajouter-une-actu') { echo 'class="selected"'; } ?>><?php echo __('Publier une actualit&eacute', 'yproject'); ?></a>
+			|
 			<a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'vote' || $current_page == 'statistiques-avancees') { echo 'class="selected"'; } ?>>Statistiques avanc&eacute;es</a>
 			<?php if ($group_link != '') : ?>
-			 &nbsp; &nbsp; &nbsp;
+			|
 			<a href="<?php echo $group_link; ?>" <?php if ($current_page == 'group') { echo 'class="selected"'; } ?>>Groupe d&apos;investisseurs</a>
 			<?php endif; ?>
 		</div>
