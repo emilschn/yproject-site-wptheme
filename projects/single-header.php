@@ -229,7 +229,7 @@ $vote_status = $campaign->campaign_status();
 		</div>
 	</div>
 	
-	<div id="head-image"<?php global $can_modify; if ($can_modify) { echo ' style="margin-top: 36px"'; } ?>>
+	<div id="head-image"<?php global $can_modify; if ($can_modify) { echo ' style="margin-top: 46px"'; } ?>>
 		<div class="center">
 			<div id="head-content">
 				<?php

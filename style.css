@@ -6,8 +6,8 @@
  * Theme URI: https://code.google.com/p/yproject-site-wptheme/
  * Description: Override of BuddyPress Default
  * Version: 0.1
- * Author: the Y Project team
- * Author URI: http://www.yproject.co
+ * Author: the WEDOGOOD team
+ * Author URI: http://www.wedogood.co
  * License: GNU General Public License
  * License URI: license.txt
  * Template: bp-default
@@ -491,6 +491,35 @@ div#home_bottom h1 {
 /* FIN PROJECTS */
 
 /* PROJECT PAGE */
+#single_project_admin_bar {
+    padding: 15px 0px;
+    background-color: #D9D9D9;
+    width:auto;
+    font-size:13px;
+    z-index: 10;
+    position: relative;
+}
+
+#single_project_admin_bar div {
+    text-align: center;
+}
+
+#single_project_admin_bar a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #2B2C2C;
+    font-size:13px;
+    padding: 0px 3px;
+}
+
+#single_project_admin_bar a:hover {
+    color: #FF494C;
+}
+#single_project_admin_bar a.selected {
+    font-weight: bold;
+    color: #FF494C;
+}
+
 #post_top_bg {
     background-color: #FF494C; 
 }
@@ -637,30 +666,31 @@ div#home_bottom h1 {
 #popup_share_close {
     font-size: 9pt;
 }
+/* FIN PROJECT PAGE */
 
-#yp_admin_bar {
-    padding: 5px 0px;
-    background-color: #E1E3E2;
-    width:auto;
-    font-size:13px;
-    z-index: 10;
-    position: relative;
-}
-
-#yp_admin_bar .center {
-    padding: 5px 0px;
-}
-
-#yp_admin_bar a {
-    text-decoration: none;
-    color: #2B2C2C;
-    font-size:13px;
-}
-
-#yp_admin_bar a.selected {
+/* DASHBOARD - TABLEAU DE BORD */
+#dashboard .currentstep span span {
     font-weight: bold;
 }
-/* FIN PROJECT PAGE */
+#dashboard .button-help {
+    margin: 15px 0px;
+}
+#dashboard .button-help a {
+    text-transform: uppercase;
+    float: left;
+    width: 50%;
+    max-width: 438px;
+    text-align: center;
+    padding: 10px 10px;
+    margin: 0px 10px;
+    border: 1px solid #FF494C;
+}
+#dashboard .google-doc iframe {
+    margin-top: 15px;
+    width: 100%;
+    height: 700px;
+}
+/* FIN DASHBOARD - TABLEAU DE BORD */
 
 /* REGISTER PAGE */     
 .register_half_part {       
@@ -915,6 +945,29 @@ a.qa-faq-anchor {
 }
 
 /* MON COMPTE */
+#yp_admin_bar {
+    padding: 5px 0px;
+    background-color: #E1E3E2;
+    width:auto;
+    font-size:13px;
+    z-index: 10;
+    position: relative;
+}
+
+#yp_admin_bar .center {
+    padding: 5px 0px;
+}
+
+#yp_admin_bar a {
+    text-decoration: none;
+    color: #2B2C2C;
+    font-size:13px;
+}
+
+#yp_admin_bar a.selected {
+    font-weight: bold;
+}
+
 #item-header-container {
     background-color: #FFF;
     padding: 20px 0px;
@@ -2904,6 +2957,9 @@ text-transform: uppercase;
     position: relative;
     float: right;
     z-index: 3;
+}
+#projects-stats-content:after {
+    clear: both;
 }
 .projects-description-separator{
     background: url("images/tiret_noir.png");
