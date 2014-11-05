@@ -30,10 +30,15 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 			if (have_posts()) {
 				$has_projects = true;
 				$i = 0;
+				$page_dashboard = get_page_by_path('tableau-de-bord');
 				while (have_posts()) {
 					the_post();
 					if ($i > 0) {?> | <?php }
+					if ($display_loggedin_user) { 
+					?><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' . get_the_ID(); ?>"><?php the_title(); ?></a><?php
+					} else {
 					?><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a><?php
+					}
 					$i++;
 				}
 			}
@@ -47,7 +52,11 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 				foreach ($project_list as $project) {
 					$post_project = get_post($project->wp_project_id);	    
 					if ($i > 0) {?> | <?php }
+					if ($display_loggedin_user) { 
+					?><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' . $post_project->ID; ?>"><?php echo $post_project->post_title; ?></a><?php
+					} else {
 					?><a href="<?php echo get_permalink($post_project->ID); ?>"><?php echo $post_project->post_title; ?></a><?php
+					}
 					$i++;
 				}
 			}

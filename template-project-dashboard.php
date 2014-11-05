@@ -40,9 +40,11 @@ $campaign_id = $_GET['campaign_id'];
 							<div class="clear"></div>
 						</div>
 
+						<?php if ($campaign->google_doc() != ''): ?>
 						<div class="google-doc">
 							<iframe src="https://docs.google.com/spreadsheets/d/<?php echo $campaign->google_doc(); ?>/pubhtml?widget=true&amp;headers=false"></iframe>
 						</div>
+						<?php endif; ?>
 		    
 					<?php else: ?>
 
