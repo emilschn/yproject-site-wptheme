@@ -1,3 +1,15 @@
+<?php if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadyloggedin'] === '1'): ?>
+<div id="already-connected">
+	<div class="already-connected-padder">
+		<span>Vous &ecirc;tes d&eacute;j&agrave; inscrit et connect&eacute; !</span><br /><br />
+		<a href="<?php echo bp_loggedin_user_domain(); ?>">Mon compte</a>
+		<div class="already-connected-excerpt">
+			[ <a href="#">Fermer</a> ]
+		</div>
+	</div>
+</div>
+<?php endif; ?>
+
 <?php 
 date_default_timezone_set("Europe/Paris");
 require_once('requests/projects.php'); 
@@ -5,7 +17,7 @@ $cache_result=$WDG_cache_plugin->get_cache('home-top');
 if(false===$cache_result){
 	ob_start();
  ?>
-	<header class="align-center header_home">
+<header class="align-center header_home">
 	<section id="site_name2" class="center">
 		<div id="welcome_text">
 			<?php the_content(); ?>

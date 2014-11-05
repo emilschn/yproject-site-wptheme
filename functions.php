@@ -28,7 +28,7 @@ function yproject_enqueue_script(){
 		wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"), false);
 		wp_enqueue_script('jquery');
 	}
-	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'));
+	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '1.1.003');
 	wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), false, true);
 }
@@ -78,6 +78,11 @@ function _catch_empty_user( $username, $pwd ) {
 	}
 }
 add_action( 'wp_authenticate', '_catch_empty_user', 1, 2 );
+
+function catch_register_page_loggedin_users() {
+	return home_url() . '?alreadyloggedin=1';
+}
+add_filter( 'bp_loggedin_register_page_redirect_to', 'catch_register_page_loggedin_users');
 
 /**
  * permet de se loger avec son mail

@@ -1287,8 +1287,8 @@ ul.activity-list p {
 }
 /* FIN GROUPES INVESTISSEURS */
 
-/* LIGHTBOX CGU */
-#validate-terms {
+/* LIGHTBOX CGU + DEJA CONNECTE */
+#validate-terms, #already-connected {
 	background-color: rgba(0, 0, 0, 0.75);;
 	top: 0;
 	position: fixed;
@@ -1297,14 +1297,14 @@ ul.activity-list p {
 	height: 100%;
 }
 
-#validate-terms .validate-terms-padder {
+#validate-terms .validate-terms-padder, #already-connected .already-connected-padder {
 	max-width: 600px;
 	margin: 80px auto;
 	padding: 20px;
 	background-color: #FFFFFF;
 }
 
-#validate-terms .validate-terms-excerpt {
+#validate-terms .validate-terms-excerpt, #already-connected .already-connected-excerpt {
 	margin: 20px 0px;
 	max-height: 250px;
 	overflow-y: auto;
@@ -1321,7 +1321,11 @@ ul.activity-list p {
 	text-transform: uppercase;
 	font-weight: bold;
 }
-/* FIN LIGHTBOX CGU */
+
+#already-connected {
+	text-align: center;
+}
+/* FIN LIGHTBOX CGU + DEJA CONNECTE */
 
 /* NAV */
 #navigation {
