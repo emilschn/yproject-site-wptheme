@@ -156,6 +156,16 @@ YPUIFunctions = (function($) {
 					$("#already-connected").hide();
 				});
 			}
+			
+			if ($("#blog-archives form#add-news").length > 0) {
+				$("#blog-archives #add-news-opener").click(function() {
+					if ($("#blog-archives form#add-news").is(":visible")) {
+						$("#blog-archives form#add-news").hide();
+					} else {
+						$("#blog-archives form#add-news").show();
+					}
+				});
+			}
 		},
 		
 		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué

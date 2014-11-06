@@ -52,8 +52,6 @@ if ($can_modify) {
 			|
 			<a href="<?php echo get_permalink($page_manage_team->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'projet-gerer-equipe') { echo 'class="selected"'; } ?>><?php echo __('&Eacute;quipe', 'yproject'); ?></a>
 			|
-			<a href="<?php echo get_permalink($page_add_news->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'ajouter-une-actu') { echo 'class="selected"'; } ?>><?php echo __('Publier une actualit&eacute', 'yproject'); ?></a>
-			|
 			<a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'vote' || $current_page == 'statistiques-avancees') { echo 'class="selected"'; } ?>>Statistiques avanc&eacute;es</a>
 			<?php if ($group_link != '') : ?>
 			|

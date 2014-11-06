@@ -1,83 +1,122 @@
-<?php get_header(); ?>
-
 <?php 
-    $this_category = get_category($cat);
-    $this_category_name = $this_category->name;
-    $name_exploted = explode('cat', $this_category_name);
-    $campaign_post = get_post($name_exploted[1]);
-    $campaign = atcf_get_campaign( $campaign_post );
-    global $post;
-    $post = $campaign_post;
+$this_category = get_category($cat);
+$this_category_name = $this_category->name;
+$name_exploted = explode('cat', $this_category_name);
+$campaign_post = get_post($name_exploted[1]);
+$campaign = atcf_get_campaign( $campaign_post );
+global $post, $can_modify;
+$post = $campaign_post;
+$page_edit_news = get_page_by_path('editer-une-actu');
+locate_template( array("requests/projects.php"), true );
+if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
+	YPProjectLib::form_validate_news_add($campaign_post->ID);
+	//Afficher le nouvel article : relancer la requete de la page => wp_reset_query ?
+}
 ?>
 
-	<div id="content">
-		<div class="padder">
+<?php get_header(); ?>
 
-		<?php do_action( 'bp_before_archive' ); ?>
+<div id="content">
+	<div class="padder">
 
-		<div class="page" id="blog-archives" role="main">
-			<?php require_once('projects/single-admin-bar.php'); ?>
-			<?php require_once('projects/single-header.php'); ?>
-			
-			<div id="post_bottom_bg">
-				<div id="post_bottom_content" class="center">
-					<div class="left post_bottom_desc">
-						<a href="<?php echo get_permalink($campaign_post->ID); ?>">&lt;&lt; <?php echo __('Revenir à la description du projet', 'yproject'); ?></a>
+	<?php do_action( 'bp_before_archive' ); ?>
 
-						<h3 class="pagetitle"><?php printf( __( 'Derni&egrave;res actualit&eacute;s du projet %1$s', 'yproject' ), $campaign_post->post_title); ?></h3>
+	<div class="page" id="blog-archives" role="main">
 
-						<?php if ( have_posts() ) : ?>
+		<?php locate_template( array("projects/single-admin-bar.php"), true ); ?>
 
-							<?php bp_dtheme_content_nav( 'nav-above' ); ?>
+		<?php locate_template( array("projects/single-header.php"), true ); ?>
 
-							<?php while (have_posts()) : the_post(); ?>
+		<div id="post_bottom_content" class="center margin-height">
 
-								<?php do_action( 'bp_before_blog_post' ); ?>
+			<?php if ($can_modify): ?>
 
-								<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+				<h2><a href="javascript:void();" id="add-news-opener"><?php _e('Ajouter un article', 'yproject'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" /></a></h2>
 
-									<div class="post-content">
-										<h2 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+				<form action="" method="post" enctype="multipart/form-data" id="add-news">
 
-										<p class="date"><?php echo get_the_date(); ?></p>
+					<label for="posttitle"><?php _e( 'Titre', 'ypcf' ); ?></label>
+					<input type="text" name="posttitle" style="width: 250px;"><br />
 
-										<div class="entry">
-											<?php the_content( __( 'Read the rest of this entry &rarr;', 'buddypress' ) ); ?>
-										</div>
+					<label for="postcontent"><?php _e( 'Contenu', 'ypcf' ); ?></label>
+					<?php
+					wp_editor( '', 'postcontent', 
+						array(
+							'media_buttons' => true,
+							'quicktags'     => false,
+							'tinymce'       => array(
+							    'plugins'		    => 'paste',
+							    'paste_remove_styles'   => true
+							)
+						) 
+					);
+					?><br /><br />
 
-										<span class="comments"><?php comments_popup_link( __( 'No Comments &#187;', 'buddypress' ), __( '1 Comment &#187;', 'buddypress' ), __( '% Comments &#187;', 'buddypress' ) ); ?></span></p>
-									</div>
+					<input type="hidden" name="action" value="ypcf-campaign-add-news" />
+					<?php wp_nonce_field('ypcf-campaign-add-news'); ?>
+					<input type="submit" value="<?php _e('Ajouter', 'yproject'); ?>" class="button" />
 
-								</div>
+					<br /><br />
+					<hr>
 
-								<?php do_action( 'bp_after_blog_post' ); ?>
+				</form>
 
-							<?php endwhile; ?>
+			<?php endif; ?>
 
-							<?php bp_dtheme_content_nav( 'nav-below' ); ?>
 
-						<?php else : ?>
+			<h2><?php printf( __( 'Derni&egrave;res actualit&eacute;s du projet %1$s', 'yproject' ), $campaign_post->post_title); ?></h2>
 
-						    <?php if ($campaign_post) : ?>
-							Retrouvez bient&ocirc;t les actualit&eacute;s de ce projet !
-						    <?php else : ?>
-							<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
-							<?php get_search_form(); ?>
-						    <?php endif; ?>
+			<?php if ( have_posts() ) : ?>
 
-						<?php endif; ?>
+				<?php bp_dtheme_content_nav( 'nav-above' ); ?>
+
+				<?php while (have_posts()) : the_post(); ?>
+
+					<?php do_action( 'bp_before_blog_post' ); ?>
+
+					<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+						<div class="post-content">
+							<h3 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
+
+							<?php if ($can_modify): ?>
+							<p><a href="<?php echo get_permalink($page_edit_news->ID); ?>?campaign_id=<?php echo $campaign_post->ID; ?>&edit_post_id=<?php echo $post->ID; ?>">Editer</a></p>
+							<?php endif; ?>
+							
+							<p class="date"><?php echo get_the_date(); ?></p>
+
+							<div class="entry">
+								<?php the_content( __( 'Read the rest of this entry &rarr;', 'buddypress' ) ); ?>
+							</div>
+
+							<span class="comments"><?php comments_popup_link( __( 'No Comments &#187;', 'buddypress' ), __( '1 Comment &#187;', 'buddypress' ), __( '% Comments &#187;', 'buddypress' ) ); ?></span></p>
+						</div>
+
 					</div>
 
-					
-					<div style="clear: both"></div>
-				</div>
-			</div>
-		    
+					<?php do_action( 'bp_after_blog_post' ); ?>
+
+				<?php endwhile; ?>
+
+				<?php bp_dtheme_content_nav( 'nav-below' ); ?>
+
+			<?php else : ?>
+
+			    <?php if ($campaign_post) : ?>
+				Retrouvez bient&ocirc;t les actualit&eacute;s de ce projet !
+			    <?php else : ?>
+				<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
+				<?php get_search_form(); ?>
+			    <?php endif; ?>
+
+			<?php endif; ?>
 		</div>
 
-		<?php do_action( 'bp_after_archive' ); ?>
+	</div>
 
-		</div><!-- .padder -->
-	</div><!-- #content -->
+	<?php do_action( 'bp_after_archive' ); ?>
+
+	</div><!-- .padder -->
+</div><!-- #content -->
 
 <?php get_footer(); ?>

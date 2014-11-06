@@ -67,21 +67,17 @@
 				<?php require_once('projects/single-header.php'); ?>
 
 				<div id="post_bottom_bg">
-					<div id="post_bottom_content" class="center">
-						<div class="left post_bottom_desc">
-							<a href="<?php echo esc_url($category_link); ?>">&lt;&lt; Revenir &agrave; la liste des actualit&eacute;s</a>
+					<div id="post_bottom_content" class="center margin-height">
+						<a href="<?php echo esc_url($category_link); ?>">&lt;&lt; Revenir &agrave; la liste des actualit&eacute;s</a>
 
-							<?php wp_reset_query(); ?>
+						<?php wp_reset_query(); ?>
 
-							<div class="post-content">
-							    <h2 class="posttitle"><?php the_title(); ?></h2>
-							    <p class="date"><?php echo get_the_date(); ?></p>
-							    <?php the_content(); ?>
-							    <?php comments_template(); ?>
-							</div>
+						<div class="post-content">
+						    <h2 class="posttitle"><?php the_title(); ?></h2>
+						    <p class="date"><?php echo get_the_date(); ?></p>
+						    <?php the_content(); ?>
+						    <?php comments_template(); ?>
 						</div>
-
-						<div style="clear: both"></div>
 					</div>
 				</div>
 			</div>

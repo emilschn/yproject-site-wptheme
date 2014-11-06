@@ -3355,3 +3355,18 @@ height: 18px;
 .media-modal-icon .screen-reader-text {
     display: none;
 }
+
+/* ACTUALITES / NEWS */
+#blog-archives h2 {
+	font-size: 1.17em;
+}
+#blog-archives h2 a {
+	color: #2B2C2C;
+}
+#blog-archives form#add-news {
+	display: none;
+}
+#blog-archives .post-content {
+	margin-bottom: 40px;
+}
+/* FIN ACTUALITES / NEWS */
