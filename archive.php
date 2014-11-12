@@ -31,7 +31,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 
 			<?php if ($can_modify): ?>
 
-				<h2><a href="javascript:void();" id="add-news-opener"><?php _e('Ajouter un article', 'yproject'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" /></a></h2>
+				<h2><a href="javascript:void();" id="add-news-opener"><?php _e('Publier une actualit&eacute;', 'yproject'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" /></a></h2>
 
 				<form action="" method="post" enctype="multipart/form-data" id="add-news">
 
@@ -54,9 +54,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 
 					<input type="hidden" name="action" value="ypcf-campaign-add-news" />
 					<?php wp_nonce_field('ypcf-campaign-add-news'); ?>
-					<input type="submit" value="<?php _e('Ajouter', 'yproject'); ?>" class="button" />
-
-					<br /><br />
+					
+					<?php _e('Relayez cette actualit&eacute; sur vos r&eacute;seaux sociaux et pr&eacute;venez WE DO GOOD pour une communication d&eacute;cupl&eacute;e !', 'yproject'); ?><br /><br />
+					
+					<input type="submit" value="<?php _e('Publier', 'yproject'); ?>" class="button" /><br /><br />
+					
 					<hr>
 
 				</form>
@@ -77,11 +79,14 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 					<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 						<div class="post-content">
-							<h3 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
+							<h3 class="posttitle">
+								<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+								<?php if ($can_modify): ?>
+								&nbsp;&nbsp;&nbsp;
+								<a href="<?php echo get_permalink($page_edit_news->ID); ?>?campaign_id=<?php echo $campaign_post->ID; ?>&edit_post_id=<?php echo $post->ID; ?>" class="button"><?php _e('Editer', 'yproject'); ?></a>
+								<?php endif; ?>
+							</h3>
 
-							<?php if ($can_modify): ?>
-							<p><a href="<?php echo get_permalink($page_edit_news->ID); ?>?campaign_id=<?php echo $campaign_post->ID; ?>&edit_post_id=<?php echo $post->ID; ?>">Editer</a></p>
-							<?php endif; ?>
 							
 							<p class="date"><?php echo get_the_date(); ?></p>
 

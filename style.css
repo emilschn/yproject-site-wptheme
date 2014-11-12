@@ -2263,6 +2263,8 @@ background-image:url("images/jycrois_gris_rouge.png");
     padding: 3px 8px;
     text-transform: uppercase;
     cursor: pointer;
+    font-weight: normal;
+    font-size: 14px;
 }
 
 .invest_step1_generalities {

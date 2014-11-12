@@ -27,7 +27,7 @@ $campaign_id = $_GET['campaign_id'];
 					<?php if ($can_modify): ?>
 
 						<div class="part-title-separator">
-							<span class="part-title"><?php _e('Bienvenue', 'yproject'); ?></span>
+							<span class="part-title"><?php echo $post_campaign->post_title; ?></span>
 						</div>
 
 						<div class="currentstep">
@@ -35,12 +35,13 @@ $campaign_id = $_GET['campaign_id'];
 						</div>
 
 						<div class="button-help">
-							<a href="<?php echo get_permalink($page_particular_terms->ID); ?>"><?php _e('Conditions particuli&egrave;res', 'yproject'); ?></a>
-							<a href="<?php echo get_permalink($page_guide->ID); ?>"><?php _e('Guide de campagne', 'yproject'); ?></a>
+							<a href="<?php echo get_permalink($page_particular_terms->ID); ?>" target="_blank"><?php _e('Conditions particuli&egrave;res', 'yproject'); ?></a>
+							<a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><?php _e('Guide de campagne', 'yproject'); ?></a>
 							<div class="clear"></div>
 						</div>
 
 						<?php if ($campaign->google_doc() != ''): ?>
+						<a href="https://docs.google.com/spreadsheets/d/<?php echo $campaign->google_doc(); ?>/edit" target="_blank"><?php _e('Editer le document', 'yproject'); ?></a>
 						<div class="google-doc">
 							<iframe src="https://docs.google.com/spreadsheets/d/<?php echo $campaign->google_doc(); ?>/pubhtml?widget=true&amp;headers=false"></iframe>
 						</div>
