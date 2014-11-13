@@ -682,7 +682,7 @@ div#home_bottom h1 {
     max-width: 438px;
     text-align: center;
     padding: 10px 10px;
-    margin: 0px 10px;
+    margin: 5px 10px;
     border: 1px solid #FF494C;
 }
 #dashboard .google-doc iframe {
@@ -2258,7 +2258,7 @@ background-image:url("images/jycrois_gris_rouge.png");
 
 #link_validate_invest_amount, .button {
     background: none repeat scroll 0 0 #333333;
-    border: medium none;
+    border: 1px solid #333333 !important;
     color: #FFFFFF;
     padding: 3px 8px;
     text-transform: uppercase;
