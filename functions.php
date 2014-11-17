@@ -4,6 +4,12 @@ if ( !function_exists( 'bp_dtheme_enqueue_styles' ) ) :
 	function bp_dtheme_enqueue_styles() {}
 endif;
 
+//Enlever les "magic quotes"
+$_POST      = array_map( 'stripslashes_deep', $_POST );
+$_GET       = array_map( 'stripslashes_deep', $_GET );
+$_COOKIE    = array_map( 'stripslashes_deep', $_COOKIE );
+$_REQUEST   = array_map( 'stripslashes_deep', $_REQUEST );
+
 //Définition de la largeur de l'affichage
 if ( ! isset( $content_width ) ) $content_width = 960;
 
@@ -14,6 +20,9 @@ function yproject_setup() {
 }
 add_action( 'after_setup_theme', 'yproject_setup', 15 );
 
+add_action('wp_insert_comment', array('NotificationsEmails', 'new_comment'), 99 ,2);
+add_action('bbp_new_topic', array('NotificationsEmails', 'new_topic'), 99 ,2);
+
 //Sécurité
 remove_action("wp_head", "wp_generator");
 add_filter('login_errors',create_function('$a', "return null;"));
@@ -22,13 +31,24 @@ add_action( 'wp_enqueue_scripts', 'yproject_enqueue_script' );
 function yproject_enqueue_script(){
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
-		wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"), false);
+		wp_register_script('jquery', (dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.min.js'), false);
 		wp_enqueue_script('jquery');
+
 	}
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'));
+	wp_enqueue_script( 'wdg-script2', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/project_bopp.js', array('jquery', 'jquery-ui-dialog'));
+	wp_enqueue_script( 'jquery-form-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
+	wp_enqueue_script( 'jquery-qtips2', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
+	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
+	
 	wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
+	wp_localize_script( 'wdg-script2', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'));
+	
+	wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.js', array('jquery'));
+	wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, false);
 }
+
 
 /** GESTION DU LOGIN **/
 /**
@@ -124,8 +144,8 @@ function yproject_change_user_cap() {
 		$role_subscriber->remove_cap( 'edit_post' );
 		$role_subscriber->remove_cap( 'edit_posts' );
 		$role_subscriber->remove_cap( 'edit_private_posts' );
-		$role_subscriber->remove_cap( 'edit_published_posts' );
-		$role_subscriber->remove_cap( 'edit_others_posts' );
+		$role_subscriber->add_cap( 'edit_published_posts' );
+		$role_subscriber->add_cap( 'edit_others_posts' );
 	}
 }
 add_action('init', 'yproject_change_user_cap');
@@ -149,6 +169,24 @@ function yproject_admin_init() {
 	}
 }
 //add_action( 'admin_init', 'yproject_admin_init' );
+
+function yproject_page_template( $template ) {
+	locate_template( array("requests/projects.php"), true );
+	global $post;
+	$campaign = atcf_get_campaign( $post );
+	$campaign_id = $post->ID;
+	if (!empty($campaign->ID) && is_object( $campaign ) && ($campaign->campaign_status() == 'preparing') && !YPProjectLib::current_user_can_edit($campaign_id)) {
+		header("Status: 404 Not Found");
+		global $wp_query;
+		$wp_query->set_404();
+		status_header(404);
+		nocache_headers();
+		$new_template = locate_template( array( '404.php' ) );
+		return $new_template;
+	}
+	return $template;
+}
+add_filter( 'template_include', 'yproject_page_template', 99 );
 /** FIN GESTION DES ROLES UTILISATEURS **/
 
 
@@ -182,6 +220,22 @@ add_shortcode('yproject_home_discover', 'yproject_home_discover_shortcode');
 
 /** FIN SHORTCODES ACCUEIL **/
 
+/**
+ * BIBLIOTHEQUE POUR VERIFICATIONS
+ */
+function yproject_check_user_can_see_project_page() {
+	//Si l'utilisateur n'est pas connecté, on redirige sur la page de connexion
+	if (!is_user_logged_in()) {
+		$page_connexion = get_page_by_path('connexion');
+		wp_redirect(get_permalink($page_connexion->ID));
+		exit();
+	}
+	//Si la campagne n'est pas définie, on retourne à l'accueil
+	if (!isset($_GET['campaign_id'])) {
+		wp_redirect(site_url());
+		exit();
+	}
+}
 
 
 function yproject_bbp_get_forum_title($title) {
@@ -208,152 +262,34 @@ add_filter('oembed_result', 'remove_related_videos', 1, true);
 
 /**
  * Permet d'envoyer la position de l'image de couverture d'un projet.
- * 
  */
 function set_cover_position(){
-	if(isset($_POST['top'])){
-		$post_meta=get_post_meta($_POST['id_campaign'], 'campaign_cover_position', TRUE);
-		if($post_meta==''){
-			add_post_meta($_POST['id_campaign'], 'campaign_cover_position', $_POST['top'], TRUE);
-			 }
+	if (isset($_POST['top'])) {
 		update_post_meta($_POST['id_campaign'],'campaign_cover_position', $_POST['top']);
+		do_action('wdg_delete_cache',array('project-'.$_POST['id_campaign'].'-header-second'));
 	}
-	do_action('wdg_delete_cache',array('project-'.$post->ID.'-header-second'));
-
 }
 add_action( 'wp_ajax_setCoverPosition', 'set_cover_position' );
 
 /**
  * Permet d'envoyer la position de l'image de couverture d'un projet.
- * 
  */
 function set_cursor_position(){
-	if(isset($_POST['top'])){
-		$post_meta_top=get_post_meta($_POST['id_campaign'], 'campaign_cursor_top_position', TRUE);
-		$post_meta_left=get_post_meta($_POST['id_campaign'], 'campaign_cursor_left_position', TRUE);
-		if($post_meta_top==''){
-			add_post_meta($_POST['id_campaign'], 'campaign_cursor_top_position', $_POST['top'], TRUE);
-		}
-		if($post_meta_left==''){
-			add_post_meta($_POST['id_campaign'], 'campaign_cursor_left_position', $_POST['left'], TRUE);
-		}
+	if (isset($_POST['top'])) {
 		update_post_meta($_POST['id_campaign'],'campaign_cursor_top_position', $_POST['top']);
 		update_post_meta($_POST['id_campaign'],'campaign_cursor_left_position', $_POST['left']);
-		do_action('wdg_delete_cache',array('project-'.$post->ID.'-content'));
+		do_action('wdg_delete_cache',array('project-'.$_POST['id_campaign'].'-content'));
 	}
-
 }
 add_action( 'wp_ajax_setCursorPosition', 'set_cursor_position' );
 
-
-function print_user_avatar($user_id, $size = 'normal'){
-	echo get_user_avatar($user_id, $size);
-}
-function get_user_avatar($user_id, $size = 'normal'){
-	switch ($size) {
-	    case 'normal':
-		$width = 150;
-		break;
-	    case 'thumb':
-		$width = 50;
-		break;
-	}
-
-	$avatar_path = '';
-	$upload_dir = wp_upload_dir();
 	
-	if ( file_exists( BP_AVATAR_UPLOAD_PATH . '/avatars/' . bp_loggedin_user_id() . '/avatar.jpg' )) {
-		$avatar_path = $upload_dir['baseurl'] . '/avatars/' . bp_loggedin_user_id() . '/avatar.jpg';
-		return '<img src="' .$avatar_path . '" width="' . $width . '" height="' . $width . '"/>';
-		
-	} elseif (file_exists( BP_AVATAR_UPLOAD_PATH. '/avatars/' . bp_loggedin_user_id() . '/avatar.png' )) {
-		$avatar_path = $upload_dir['baseurl'] . '/avatars/' . bp_loggedin_user_id() . '/avatar.png';
-		return '<img src="' . $avatar_path . '" width="' . $width . '" height="' . $width . '"/>';
-		
-	} else {
-		$bp = buddypress();
-		$bp->avatar->full->default = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
-
-		$profile_type = "";
-		$google_meta = get_user_meta($user_id, 'social_connect_google_id', true);
-		if (isset($google_meta) && $google_meta != "") $profile_type = ""; //TODO : Remplir avec "google" quand on gèrera correctement
-		$facebook_meta = get_user_meta($user_id, 'social_connect_facebook_id', true);
-		if (isset($facebook_meta) && $facebook_meta != "") $profile_type = "facebook";
-
-		$url = get_stylesheet_directory_uri() . "/images/default_avatar.jpg";
-		switch ($profile_type) {
-		    case "google":
-			$meta_explode = explode("id?id=", $google_meta);
-			$social_id = $meta_explode[1];
-			$url = "http://plus.google.com/s2/photos/profile/" . $social_id . "?sz=".($width-1);
-			return '<img src="' .$url . '" width="'.$width.'"/>';
-			break;
-		    case "facebook":
-			if ($size == 'thumb') {
-			    $size = 'square';
-			}
-			$url = "https://graph.facebook.com/" . $facebook_meta . "/picture?type=" . $size;
-			return '<img src="' .$url . '" width="'.$width.'"/>';
-			break;
-		    default :
-			return '<img src="'.$url.'" width="'.$width.'" />';
-			break;
-		}
-	}
-}
 function update_jy_crois(){
-	global $wpdb, $post;
-	$table_jcrois = $wpdb->prefix . "jycrois";
+	global $post;
 
 	if (isset($_POST['id_campaign'])) $post = get_post($_POST['id_campaign']);
 	$campaign = atcf_get_campaign( $post );
-	$campaign_id = $campaign->ID;
-
-	// Construction des urls utilisés dans les liens du fil d'actualité
-	// url d'une campagne précisée par son nom 
-	$campaign_url = get_permalink($_POST['id_campaign']);
-	$post_title = $post->post_title;
-	$url_campaign = '<a href="'.$campaign_url.'">'.$post_title.'</a>';
-	    
-	//url d'un utilisateur précis
-	$user_id = wp_get_current_user()->ID;
-	$user_display_name = wp_get_current_user()->display_name;
-	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '">' . $user_display_name . '</a>';
-	$user_avatar = get_user_avatar($user_id);
-
-	//J'y crois
-	if(isset($_POST['jy_crois']) && $_POST['jy_crois'] == 1){
-		$wpdb->insert( 
-			$table_jcrois,
-			array(
-				'user_id'	    => $user_id,
-				'campaign_id'   => $campaign_id
-			)
-		); 
-		bp_activity_add(array (
-			'component' => 'profile',
-			'type'      => 'jycrois',
-			'action'    => $user_avatar . $url_profile.' croit au projet '.$url_campaign
-		));
-		
-	//J'y crois pas
-	} else if (isset($_POST['jy_crois']) && $_POST['jy_crois'] == 0) { 
-		$wpdb->delete( 
-			$table_jcrois,
-			array(
-				'user_id'      => $user_id,
-				'campaign_id'  => $campaign_id
-			)
-		);
-		// Inserer l'information dans la table du fil d'activité  de la BDD wp_bp_activity 
-		bp_activity_delete(array (
-			'user_id'   => $user_id,
-			'component' => 'profile',
-			'type'      => 'jycrois',
-			'action'    => $user_avatar . $url_profile . ' croit au projet '.$url_campaign
-		));
-	}
-	echo $wpdb->get_var( "SELECT count(campaign_id) FROM $table_jcrois WHERE campaign_id = $campaign_id" );
+	return $campaign->manage_jycrois();
 }
 add_action( 'wp_ajax_update_jy_crois', 'update_jy_crois' );
 
@@ -367,12 +303,12 @@ function comment_blog_post(){
 	$user_id                = wp_get_current_user()->ID;
 	$user_display_name      = wp_get_current_user()->display_name;
 	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '"> ' . $user_display_name . '</a>';
-	$user_avatar=get_user_avatar($user_id);
+	$user_avatar = UIHelpers::get_user_avatar($user_id);
 
 	bp_activity_add(array (
 		'component' => 'profile',
 		'type'      => 'jycrois',
-		'action'    => $user_avatar.' '.$url_profile.' a commenté '.$url_blog
+		'action'    => $user_avatar.' '.$url_profile.' a commentÃƒÂ© '.$url_blog
 	    ));
 }
 add_action('comment_post','comment_blog_post');
@@ -397,19 +333,39 @@ function print_user_projects(){
 	}
 
 	if(isset($_POST['user_id'])){
-		$purchases = edd_get_users_purchases(bp_displayed_user_id(), -1, false, array('completed', 'pending', 'publish', 'failed', 'refunded'));
-		if($purchases!=''){?>
+		$payment_status = array("publish", "completed");
+//		if ($is_same_user) $payment_status = array("completed", "pending", "publish", "failed", "refunded");
+		$purchases = edd_get_users_purchases(bp_displayed_user_id(), -1, false, $payment_status);
+		$table = $wpdb->prefix.'jycrois';
+		$user_id = bp_displayed_user_id();
+		$projects_jy_crois = $wpdb->get_results("SELECT campaign_id FROM $table WHERE user_id=$user_id");
+		$table = $wpdb->prefix.'ypcf_project_votes';
+		$projects_votes = $wpdb->get_results("SELECT post_id FROM $table WHERE user_id=$user_id");
+		
+		$check_investment = true;
+		$check_vote = false;
+		$check_believe = false;
+		if (empty($purchases) && count($projects_votes) > 0) { $check_investment = false; $check_vote = true; }
+		if (empty($purchases) && count($projects_votes) == 0 && count($projects_jy_crois) == 0) { $check_investment = false; $check_believe = true; }
+		
+		if ($purchases != '' || count($projects_jy_crois) > 0 || count($projects_votes) > 0) { ?>
 			<h3> Afficher les projets : </h3>
 			<form id="filter-projects">
-  				<label><input type="checkbox" name="filter" value="jycrois">
+  				<label>
+				<input type="checkbox" name="filter" value="jycrois" <?php if ($check_believe) { ?>checked="checked"<?php } ?>>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="<?php echo $str_believe; ?>" title="<?php echo $str_believe; ?>" />
   				<?php echo $str_believe; ?>
 				</label>
 		
-   				<label><input type="checkbox" name="filter" value="voted">
+   				<label style="margin-left: 50px;">
+				<input type="checkbox" name="filter" value="voted" <?php if ($check_vote) { ?>checked="checked"<?php } ?>>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png" alt="<?php echo $str_vote; ?>" title="<?php echo $str_vote; ?>" />
   				<?php echo $str_vote; ?>
 				</label>
 		
-   				<label><input type="checkbox" name="filter" value="invested" checked="checked">
+   				<label style="margin-left: 50px;">
+				<input type="checkbox" name="filter" value="invested" <?php if ($check_investment) { ?>checked="checked"<?php } ?>>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png" alt="<?php echo $str_investment; ?>" title="<?php echo $str_investment; ?>" />
   				<?php echo $str_investment; ?>
 				</label>
 			</form>
@@ -425,8 +381,52 @@ function print_user_projects(){
 				$contractid = ypcf_get_signsquidcontractid_from_invest($post->ID);
 				$signsquid_infos = signsquid_get_contract_infos_complete($contractid);
 				$signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
-				$payment_date=date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
+				$payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
 
+				$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
+				$group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
+				$is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
+				$group_link = '';
+				if ($group_exists && $is_user_group_member){
+					$group_obj = groups_get_group(array('group_id' => $investors_group_id));
+					$group_link = bp_get_group_permalink($group_obj);
+				}
+				
+				//Infos relatives au projet
+				$user_projects[$campaign->ID]['ID'] = $campaign->ID;
+				//Infos relatives à l'investissement de l'utilisateur.
+				$user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_infos'] = $signsquid_infos;
+				$user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status'] = $signsquid_status;
+				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_date'] = $payment_date;
+				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount'] = edd_get_payment_amount( $post->ID );
+				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_status'] = edd_get_payment_status( $post, true );
+				//Lien vers le groupe d'investisseur
+				$user_projects[$campaign->ID]['group_link']=$group_link;
+				}
+			endforeach;
+
+			foreach ($projects_jy_crois as $project) {
+				$user_projects[$project->campaign_id]['jy_crois'] = 1;
+				$user_projects[$project->campaign_id]['ID'] = $project->campaign_id;
+			}
+			foreach ($projects_votes as $project) {
+				$user_projects[$project->post_id]['has_voted'] = 1;
+			}
+		 
+			?>
+			<div class="center">
+			<?php
+			foreach ($user_projects as $project) {
+				$payments = $project['payments'];
+				$data_jycrois = 0;
+				$data_voted = 0;
+				$data_invested = 0;
+				if (isset($project['jy_crois']) && $project['jy_crois'] === 1) $data_jycrois = 1;
+				if (isset($project['has_voted']) && $project['has_voted'] === 1) $data_voted = 1;
+				if (count($project['payments']) > 0) $data_invested = 1;
+				
+				$post_camp = get_post($project['ID']);
+				$campaign = atcf_get_campaign($post_camp);
 				$percent = min(100, $campaign->percent_minimum_completed(false));
 				$width = 150 * $percent / 100;
 				$width_min = 0;
@@ -434,90 +434,13 @@ function print_user_projects(){
 				    $percent_min = $campaign->percent_minimum_to_total();
 				    $width_min = 150 * $percent_min / 100;
 				}
-				$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
-				$group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-				$is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
-				$group_link='';
-				if ($group_exists && $is_user_group_member){
-					$group_obj = groups_get_group(array('group_id' => $investors_group_id));
-					$group_link = bp_get_group_permalink($group_obj);
-				}
-				
 				//Infos relatives au projet
-				$user_projects[$campaign->ID]['ID']=$campaign->ID;
-				$user_projects[$campaign->ID]['title']=$post_camp->post_title;
-				$user_projects[$campaign->ID]['width_min']=$width_min;
-				$user_projects[$campaign->ID]['width']=$width;
-				$user_projects[$campaign->ID]['days_remaining']=$campaign->days_remaining();
-				$user_projects[$campaign->ID]['percent_minimum_completed']=$campaign->percent_minimum_completed();
-				$user_projects[$campaign->ID]['minimum_goal']=$campaign->minimum_goal(true);
-				//Infos relatives à l'investissement de l'utilisateur.
-				//$user_projects[$post->ID]['signsquid_infos']=$signsquid_infos;
-				$user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status']=$signsquid_status;
-				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_date']=$payment_date;
-				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount']=edd_get_payment_amount( $post->ID );
-				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_status']=edd_get_payment_status( $post, true );
-				//Lien vers le groupe d'investisseur
-				$user_projects[$campaign->ID]['group_link']=$group_link;
-				//On initialise has_voted et jy_crois
-				$user_projects[$campaign->ID]['jy_crois']=0;
-				$user_projects[$campaign->ID]['has_voted']=0;
-				}
-			endforeach;
-
-			$table= $wpdb->prefix.'jycrois';
-			$user_id=bp_displayed_user_id();
-			$projects_jy_crois = $wpdb->get_results("SELECT campaign_id FROM $table WHERE user_id=$user_id");
-			foreach ($projects_jy_crois as $project) {
-				$user_projects[$project->campaign_id]['jy_crois']=1;
-				$user_projects[$project->campaign_id]['ID']=$project->campaign_id;
-			}
-			$table=$wpdb->prefix.'ypcf_project_votes';
-			$projects_votes = $wpdb->get_results("SELECT post_id FROM $table WHERE user_id=$user_id");
-			foreach ($projects_votes as $project) {
-				$user_projects[$project->post_id]['has_voted']=1;
-			}
-		 
-			?>
-			<div class="center">
-			<?php
-			foreach ($user_projects as $project) {
-				$payments=$project['payments'];
-				$data_jycrois=0;
-				$data_voted=0;
-				$data_invested=0;
-				if($project['jy_crois']===1)$data_jycrois=1;
-				if($project['has_voted']===1)$data_voted=1;
-				if(count($project['payments'])>0)$data_invested=1;
-				if($project['title']==''){//Si le projet n'est pas complet
-					$post_camp = get_post($project['ID']);
-					$campaign = atcf_get_campaign($post_camp);
-					$percent = min(100, $campaign->percent_minimum_completed(false));
-					$width = 150 * $percent / 100;
-					$width_min = 0;
-					if ($percent >= 100 && $campaign->is_flexible()) {
-					    $percent_min = $campaign->percent_minimum_to_total();
-					    $width_min = 150 * $percent_min / 100;
-					}
-					$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
-					$group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-					$is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
-					$group_link='';
-					if ($group_exists && $is_user_group_member){
-						$group_obj = groups_get_group(array('group_id' => $investors_group_id));
-						$group_link = bp_get_group_permalink($group_obj);
-					}
-					//Infos relatives au projet
-					$project['ID']=$campaign->ID;
-					$project['title']=$post_camp->post_title;
-					$project['width_min']=$width_min;
-					$project['width']=$width;
-					$project['days_remaining']=$campaign->days_remaining();
-					$project['percent_minimum_completed']=$campaign->percent_minimum_completed();
-					$project['minimum_goal']=$campaign->minimum_goal(true);
-					//Lien vers le groupe d'investisseur
-					$project['group_link']=$group_link;
-				}
+				$project['title'] = $post_camp->post_title;
+				$project['width_min'] = $width_min;
+				$project['width'] = $width;
+				$project['days_remaining'] = $campaign->days_remaining();
+				$project['percent_minimum_completed'] = $campaign->percent_minimum_completed();
+				$project['minimum_goal'] = $campaign->minimum_goal(true);
 			?>
 				<div id="<?php echo $project['ID'] ?>-project" class="history-projects" 
 					data-value="<?php echo $project['ID'] ?>"
@@ -577,45 +500,24 @@ function print_user_projects(){
 							    </div> 
 							</div>
 						    
-							<?php if ($is_same_user): ?>
-						    
-							<?php
-							    //Boutons pour Annuler l'investissement | Recevoir le code à nouveau
-							    //Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
-							    if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && is_object($signsquid_infos) && $signsquid_infos->{'status'} != 'Agreed') :
-							?>
-							<div class="project_preview_item_cancel">
-								<?php if ($signsquid_infos != '' && is_object($signsquid_infos)):
-								    $page_my_investments = get_page_by_path('mes-investissements');
-								?>
-								<a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $post_invest->ID; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
-								<?php endif;
-								$page_cancel_invest = get_page_by_path('annuler-un-investissement');
-								?>
-								<a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $post_invest->ID; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
-							</div>
-							<?php
-							    endif;
-							?>
-
-							<?php
-							    //Lien vers le groupe d'investisseurs du projet
-							    //Visible si le groupe existe et que l'utilisateur est bien dans ce groupe
-							    $investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
-							    $group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-							    $is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
-							    if ($group_exists && $is_user_group_member):
-								$group_obj = groups_get_group(array('group_id' => $investors_group_id));
-								$group_link = bp_get_group_permalink($group_obj);
+							<?php 
+							if ($is_same_user) {
+								//Lien vers le groupe d'investisseurs du projet
+								//Visible si le groupe existe et que l'utilisateur est bien dans ce groupe
+								$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
+								$group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
+								$is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
+								if ($group_exists && $is_user_group_member):
+									$group_obj = groups_get_group(array('group_id' => $investors_group_id));
+									$group_link = bp_get_group_permalink($group_obj);
 							?>
 							<div class="project_preview_item_infos" style="width: 120px;">
 							    <a href="<?php echo $group_link; ?>">Acc&eacute;der au groupe priv&eacute;</a>
 							</div>
 							<?php
-							    endif;
+								endif;
+							}
 							?>
-						    
-							<?php endif; ?>
 							<div style="clear: both"></div>
 						</div>
 					</div>
@@ -627,23 +529,43 @@ function print_user_projects(){
 						
 						<div class="user-history-payments">
 							<table class="user-history-payments-list">
-								<?php foreach ($payments as $payment) { 
+							    
+								<?php foreach ($payments as $payment_id => $payment) : ?>
+							    
+								<tr class="user-payments-list-item">
+									<td class="user-payment-item user-payment-date">
+										<?php echo $payment['payment_date']; ?>
+									</td>
+									<td class="user-payment-item user-payment-amount">
+										<?php echo $payment['payment_amount'].' &euro;'; ?>
+									</td>
+									<td class="user-payment-item user-payment-status">
+										<?php echo $payment['payment_status']; ?>
+									</td>
+									<td class="user-payment-item user-payment-signsquid-status">
+										<?php echo $payment['signsquid_status']; ?>
+									</td>
+
+									<?php
+									//Boutons pour Annuler l'investissement | Recevoir le code à nouveau
+									//Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
+									if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && is_object($payment['signsquid_infos']) && $payment['signsquid_status'] != 'Agreed') :
 									?>
-									<tr class="user-payments-list-item">
-										<td class="user-payment-item user-payment-date">
-											<?php echo $payment['payment_date']; ?>
-										</td>
-										<td class="user-payment-item user-payment-amount">
-											<?php echo $payment['payment_amount'].' &euro;'; ?>
-										</td>
-										<td class="user-payment-item user-payment-status">
-											<?php echo $payment['payment_status']; ?>
-										</td>
-										<td class="user-payment-item user-payment-signsquid-status">
-											<?php echo $payment['signsquid_status']; ?>
-										</td>
-									</tr>
-								<?php } ?>
+									<td style="width: 220px;">
+										<?php if ($payment['signsquid_infos'] != '' && is_object($payment['signsquid_infos'])): ?>
+											<?php $page_my_investments = get_page_by_path('mes-investissements'); ?>
+										<a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $payment_id; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
+										<?php endif; ?>
+										
+										<?php $page_cancel_invest = get_page_by_path('annuler-un-investissement'); ?>
+										<a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $payment_id; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
+									</td>
+									<?php endif; ?>
+
+								</tr>
+								
+								<?php endforeach; ?>
+									
 							</table>
 						</div>
 					<?php } ?>
@@ -661,4 +583,484 @@ function print_user_projects(){
 }
 add_action( 'wp_ajax_print_user_projects', 'print_user_projects' );
 add_action( 'wp_ajax_nopriv_print_user_projects', 'print_user_projects' );
+
+/******** NAME ********/
+function update_name() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+
+	$post_update = array();
+	$post_update['ID'] = $wp_project_id;
+	if (isset($_POST['projectName']) && $_POST['projectName'] != "") $post_update['post_title'] = $_POST['projectName'];
+	wp_update_post($post_update);
+
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	$wp_project_video = $_POST['projectVideo'];
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_name' => $_POST['projectName'], 
+			'wp_project_slogan' => $_POST['projectSlogan']
+			)
+		);
+	header("Content-type: text/plain");
+	$arr = array (
+		"project_name" =>$_POST['projectName'],
+		"project_slogan" => $_POST['projectSlogan']
+		); 
+	echo json_encode($arr);
+	die();
+}
+add_action( 'wp_ajax_update_name', 'update_name' );
+
+
+/******** DESCRIPTION ********/
+function update_description() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_description' => $_POST['projectDescription'], 
+			)
+		);
+	header("Content-type: text/plain");
+	$arr = array (
+		"project_description" => $_POST['projectDescription'],
+		); 
+	echo json_encode($arr);
+	die();
+}
+add_action( 'wp_ajax_update_description', 'update_description' );
+
+/******** VIDEO ********/
+function update_video() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_video' => $_POST['projectVideo'], 
+			)
+		);
+	header("Content-type: text/plain");
+	$arr = array (
+		"project_video" => $_POST['projectVideo']
+		); 
+	echo json_encode($arr);
+	die();
+}
+add_action( 'wp_ajax_update_video', 'update_video' );
+
+/******** EN QUOI CONSISTE LE PROJET ********/
+function update_project() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_category' => $_POST['projectCategory'], 
+			'wp_project_business_sector' => $_POST['projectBusinessSector'], 
+			'wp_project_funding_type' => $_POST['projectFundingType'], 
+			'wp_project_funding_duration' => $_POST['projectFundingDuration'], 
+			'wp_project_return_on_investment' => $_POST['projectReturnOnInvestment'], 
+			'wp_project_investor_benefit' => $_POST['projectInvestorBenefit'], 
+			'wp_project_summary' => $_POST['projectSummary']
+			)
+		);
+	$arr = array (
+		"project_category" => $_POST['projectCategory'],
+		"project_business_sector" => $_POST['projectBusinessSector'],
+		"project_funding_type" => $_POST['projectFundingType'],
+		"project_funding_duration" => $_POST['projectFundingDuration'],
+		"project_return_on_investment" => $_POST['projectReturnOnInvestment'],
+		"project_investor_benefit" => $_POST['projectInvestorBenefit'],
+		"project_summary" => $_POST['projectSummary']
+		);
+	echo json_encode($arr); 
+	die();
+}
+add_action( 'wp_ajax_update_project', 'update_project' );
+
+/******** QUELLE EST L'UTILITÉ SOCIÉTALE DU PROJET ? ********/
+function update_societal() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_economy_excerpt' => $_POST['projectEconomyExcerpt'], 
+			'wp_project_social_excerpt' => $_POST['projectSocialExcerpt'], 
+			'wp_project_environment_excerpt' => $_POST['projectEnvironmentExcerpt'], 
+			'wp_project_mission' => $_POST['projectMission'], 
+			'wp_project_economy' => $_POST['projectEconomy'], 
+			'wp_project_social' => $_POST['projectSocial'], 
+			'wp_project_environment' => $_POST['projectEnvironment'], 
+			'wp_project_measure_performance' => $_POST['projectMeasurePerformance'], 
+			'wp_project_good_point' => $_POST['projectGoodPoint']
+			)
+		);
+	header("Content-type: text/plain");
+	$arr = array (
+		"project_economy_excerpt" => $_POST['projectEconomyExcerpt'],
+		"project_social_excerpt" => $_POST['projectSocialExcerpt'],
+		"project_environment_excerpt" => $_POST['projectEnvironmentExcerpt'],
+		"project_mission" => $_POST['projectMission'],
+		"project_economy" => $_POST['projectEconomy'],
+		"project_social" => $_POST['projectSocial'],
+		"project_environment" => $_POST['projectEnvironment'],
+		"project_measure_performance" => $_POST['projectMeasurePerformance'],
+		"project_good_point" => $_POST['projectGoodPoint']
+		); 
+	echo json_encode($arr);
+	die();
+}
+add_action( 'wp_ajax_update_societal', 'update_societal' );
+
+/******** QUELLE EST L'OPPORTUNITÉ ÉCONOMIQUE DU PROJET ? ********/
+function update_economy() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_context_excerpt' => $_POST['projectContextExcerpt'], 
+			'wp_project_market_excerpt' => $_POST['projectMarketExcerpt'], 
+			'wp_project_context' => $_POST['projectContext'], 
+			'wp_project_market' => $_POST['projectMarket']
+			)
+		);
+	header("Content-type: text/plain");
+	$arr = array (
+		'project_context_excerpt' => $_POST['projectContextExcerpt'], 
+		'project_market_excerpt' => $_POST['projectMarketExcerpt'], 
+		'project_context' => $_POST['projectContext'], 
+		'project_market' => $_POST['projectMarket']
+		); 
+	echo json_encode($arr);
+	die();
+}
+add_action( 'wp_ajax_update_economy', 'update_economy' );
+
+/******** QUEL EST LE MODÈLE ÉCONOMIQUE DU PROJET ?********/
+function update_model() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_worth_offer' => $_POST['projectWorthOffer'], 
+			'wp_project_client_collaborator' => $_POST['projectClientCollaborator'], 
+			'wp_project_business_core' => $_POST['projectBusinessCore'], 
+			'wp_project_income' => $_POST['projectIncome'], 
+			'wp_project_cost' => $_POST['projectCost'], 
+			'wp_project_collaborators_canvas' => $_POST['projectCollaboratorsCanvas'], 
+			'wp_project_activities_canvas' => $_POST['projectActivitiesCanvas'], 
+			'wp_project_ressources_canvas' => $_POST['projectRessourcesCanvas'], 
+			'wp_project_worth_offer_canvas' => $_POST['projectWorthOfferCanvas'],
+			'wp_project_customers_relations_canvas' => $_POST['projectCustomersRelationsCanvas'],
+			'wp_project_chain_distribution_canvas' => $_POST['projectChainDistributionsCanvas'], 
+			'wp_project_clients_canvas' => $_POST['projectClientsCanvas'], 
+			'wp_project_cost_structure_canvas' => $_POST['projectCostStructureCanvas'], 
+			'wp_project_source_income_canvas' => $_POST['projectSourceOfIncomeCanvas'], 
+			'wp_project_financial_board' => $_POST['projectFinancialBoard'], 
+			'wp_project_perspectives' => $_POST['projectPerspectives']
+			)
+);
+header("Content-type: text/plain");
+$arr = array (
+	'project_worth_offer' => $_POST['projectWorthOffer'], 
+	'project_client_collaborator' => $_POST['projectClientCollaborator'], 
+	'project_business_core' => $_POST['projectBusinessCore'], 
+	'project_income' => $_POST['projectIncome'], 
+	'project_cost' => $_POST['projectCost'], 
+	'project_collaborators_canvas' => $_POST['projectCollaboratorsCanvas'], 
+	'project_activities_canvas' => $_POST['projectActivitiesCanvas'], 
+	'project_ressources_canvas' => $_POST['projectRessourcesCanvas'], 
+	'project_worth_offer_canvas' => $_POST['projectWorthOfferCanvas'],
+	'project_customers_relations_canvas' => $_POST['projectCustomersRelationsCanvas'],
+	'project_chain_distribution_canvas' => $_POST['projectChainDistributionsCanvas'], 
+	'project_clients_canvas' => $_POST['projectClientsCanvas'], 
+	'project_cost_structure_canvas' => $_POST['projectCostStructureCanvas'], 
+	'project_source_income_canvas' => $_POST['projectSourceOfIncomeCanvas'], 
+	'project_financial_board' => $_POST['projectFinancialBoard'], 
+	'project_perspectives' => $_POST['projectPerspectives'], 
+	); 
+echo json_encode($arr);
+die();
+}
+add_action( 'wp_ajax_update_model', 'update_model' );
+
+
+/******** QUI PORTE LE PROJET ? ********/
+function update_members() {
+	global $wpdb, $post;
+	$wp_project_id = $_POST['wpProjectId'];
+	$id = BoppLibHelpers::get_api_project_id($wp_project_id);
+	BoppLib::update_project(
+		$id,
+		array(
+			'wp_project_id' =>  $wp_project_id, 
+			'wp_project_other_information' => $_POST['projectOtherInformation']
+			)
+		);
+	header("Content-type: text/plain");
+	$arr = array (
+		'project_other_information' => $_POST['projectOtherInformation']
+		); 
+	echo json_encode($arr);
+	die();
+}
+add_action( 'wp_ajax_update_members', 'update_members' );
+
+function save_image_home() {
+	//simple Security check
+	$image = $_FILES[ 'image_home' ];
+
+	//get POST data
+	$campaign_id = $_POST['post_id'];
+
+	//require the needed files
+	require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+	require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+	//then loop over the files that were sent and store them using  media_handle_upload();
+	if ($_FILES) {
+		if (isset($_FILES[ 'files' ])) $files = $_FILES[ 'files' ];
+		$edd_files  = array();
+		$upload_overrides = array( 'test_form' => false );
+		if ( ! empty( $files ) ) {
+			foreach ( $files[ 'name' ] as $key => $value ) {
+				if ( $files[ 'name' ][$key] ) {
+					$file = array(
+						'name'     => $files[ 'name' ][$key],
+						'type'     => $files[ 'type' ][$key],
+						'tmp_name' => $files[ 'tmp_name' ][$key],
+						'error'    => $files[ 'error' ][$key],
+						'size'     => $files[ 'size' ][$key]
+						);
+
+					$upload = wp_handle_upload( $file, $upload_overrides );
+
+					if ( isset( $upload[ 'url' ] ) )
+						$edd_files[$key]['file'] = $upload[ 'url' ];
+					else
+						unset($files[$key]);
+				}
+			}
+		}
+	}
+	//and if you want to set that image as Post  then use:
+
+	if (!empty($image)) {
+		if (isset($_FILES[ 'files' ])) $files = $_FILES[ 'files' ];
+
+		$edd_files  = array();
+		$upload_overrides = array( 'test_form' => false );
+		if ( ! empty( $files ) ) {
+			foreach ( $files[ 'name' ] as $key => $value ) {
+				if ( $files[ 'name' ][$key] ) {
+					$file = array(
+						'name'     => $files[ 'name' ][$key],
+						'type'     => $files[ 'type' ][$key],
+						'tmp_name' => $files[ 'tmp_name' ][$key],
+						'error'    => $files[ 'error' ][$key],
+						'size'     => $files[ 'size' ][$key]
+						);
+
+					$upload = wp_handle_upload( $file, $upload_overrides );
+
+					if ( isset( $upload[ 'url' ] ) )
+						$edd_files[$key]['file'] = $upload[ 'url' ];
+					else
+						unset($files[$key]);
+				}
+			}
+		}
+	}    
+	$upload = wp_handle_upload( $image, $upload_overrides );
+	if (isset($upload[ 'url' ])) {
+		$attachment = array(
+			'guid'           => $upload[ 'url' ], 
+			'post_mime_type' => $upload[ 'type' ],
+			'post_title'     => 'image_home',
+			'post_content'   => '',
+			'post_status'    => 'inherit'
+			);
+		global $wpdb;
+		$table_posts = $wpdb->prefix . "posts";
+		$campaign_id = $_POST['post_id'];
+		//Suppression dans la base de données de l'ancienne image
+		$old_attachement_id=$wpdb->get_var( "SELECT * FROM $table_posts WHERE post_parent=$campaign_id and post_title='image_home'" );
+		wp_delete_attachment( $old_attachement_id, true );
+
+		$attach_id = wp_insert_attachment( $attachment, $upload[ 'file' ], $campaign_id );		
+
+		wp_update_attachment_metadata( 
+			$attach_id, 
+			wp_generate_attachment_metadata( $attach_id, $upload[ 'file' ] ) 
+			);
+
+		
+	}
+	$attachmentsGet = get_posts( array(
+		'post_type' => 'attachment',
+		'post_parent' => $campaign_id,
+		'post_mime_type' => 'image'
+		));
+	$image_obj_home = '';
+	$image_obj_header = '';
+	$image_src_home = '';
+	$image_src_header = '';
+	    //Si on en trouve bien une avec le titre "image_home" on prend celle-là
+	foreach ($attachmentsGet as $attachment) {
+		if ($attachment->post_title == 'image_home') $image_obj_home = wp_get_attachment_image_src($attachment->ID, "full");
+	}
+	    //Sinon on prend la première image rattachée à l'article
+	if ($image_obj_home != '') $image_src_home = $image_obj_home[0];
+	echo $image_src_home; 
+	die();
+}
+
+add_action( 'wp_ajax_save_image_home', 'save_image_home' );
+
+
+
+function save_image() {
+		//get POST data
+	$campaign_id = $_POST['post_id'];
+
+		//require the needed files
+	require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+	require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+
+	$image_header = $_FILES[ 'image' ];
+	$path = $_FILES['image']['name'];
+	$ext = pathinfo($path, PATHINFO_EXTENSION);
+	
+	if (!empty($image_header)) {
+		if (isset($_FILES[ 'files' ])) $files = $_FILES[ 'files' ];
+
+		$edd_files  = array();
+		$upload_overrides = array( 'test_form' => false );
+		if ( ! empty( $files ) ) {
+			foreach ( $files[ 'name' ] as $key => $value ) {
+				if ( $files[ 'name' ][$key] ) {
+					$file = array(
+						'name'     => $files[ 'name' ][$key],
+						'type'     => $files[ 'type' ][$key],
+						'tmp_name' => $files[ 'tmp_name' ][$key],
+						'error'    => $files[ 'error' ][$key],
+						'size'     => $files[ 'size' ][$key]
+						);
+
+					$upload = wp_handle_upload( $file, $upload_overrides );
+
+					if ( isset( $upload[ 'url' ] ) )
+						$edd_files[$key]['file'] = $upload[ 'url' ];
+					else
+						unset($files[$key]);
+				}
+			}
+		}
+
+		$upload = wp_handle_upload( $image_header, $upload_overrides );
+		if (isset($upload[ 'url' ])) {
+			$attachment = array(
+				'guid'           => $upload[ 'url' ], 
+				'post_mime_type' => $upload[ 'type' ],
+				'post_title'     => 'image_header',
+				'post_content'   => '',
+				'post_status'    => 'inherit'
+				);
+			
+			$is_image_accepted = true;
+			switch (strtolower($ext)) {
+				case 'png':
+				$image_header = imagecreatefrompng($upload[ 'file' ]);
+				break;
+				case 'jpg':
+				case 'jpeg':
+				$image_header = imagecreatefromjpeg($upload[ 'file' ]);
+				break;
+				default:
+				$is_image_accepted = false;
+				break;
+			}
+			if($is_image_accepted){
+				for($i=0; $i<10 ; $i++){
+					imagefilter ($image_header, IMG_FILTER_GAUSSIAN_BLUR);
+					imagefilter ($image_header , IMG_FILTER_SELECTIVE_BLUR );
+				}
+				$withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $upload[ 'file' ]);
+				$img_name = $withoutExt.'_blur.jpg';
+				imagejpeg($image_header,$img_name);
+				global $wpdb;
+				$table_posts = $wpdb->prefix . "posts";
+			    //Suppression dans la base de données de l'ancienne image
+				$old_attachement_id=$wpdb->get_var( "SELECT * FROM $table_posts WHERE post_parent=$campaign_id and post_title='image_header'" );
+				wp_delete_attachment( $old_attachement_id, true );
+				$attach_id = wp_insert_attachment( $attachment, $img_name, $campaign_id  );		
+
+				wp_update_attachment_metadata( 
+					$attach_id, 
+					wp_generate_attachment_metadata( $attach_id, $img_name ) 
+					);
+			    //Suppression de la position de la couverture
+				delete_post_meta($campaign_id , 'campaign_cover_position');
+
+
+				add_post_meta( $campaign_id , '_thumbnail_id', absint( $attach_id ) );
+			}
+		}
+
+
+		
+		$attachmentsGet = get_posts( array(
+			'post_type' => 'attachment',
+			'post_parent' => $campaign_id,
+			'post_mime_type' => 'image'
+			));
+		$image_obj_home = '';
+		$image_obj_header = array();
+		$image_src_home = '';
+		$image_src_header = '';
+	    //Si on en trouve bien une avec le titre "image_home" on prend celle-là
+		foreach ($attachmentsGet as $attachment) {
+			if ($attachment->post_title == 'image_header') array_push ($image_obj_header, wp_get_attachment_image_src($attachment->ID, "full"));
+
+		}
+	    //Sinon on prend la première image rattachée à l'article
+		if ($image_obj_header != '') $image_src_header = $image_obj_header[0];
+		//echo $image_src_header; 
+		echo $image_obj_header[0][0];
+
+	}
+	die();
+}
+
+
+add_action( 'wp_ajax_save_image', 'save_image' );
+
+function cancel_project() {
+	$wp_project_id = $_POST['wpProjectId'];
+	$id =  BoppLib::get_projectwp($wp_project_id);
+	echo $id; 
+	die();
+}
+add_action( 'wp_ajax_update_project', 'update_project' );
 ?>

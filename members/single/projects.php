@@ -1,11 +1,71 @@
 <?php 
 $page_publish = get_page_by_path('creer-un-projet');
+$page_mes_investissements = get_page_by_path('mes-investissements');
 $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 ?>
 
 <h2 class="underlined">Projets</h2>
 
-<?php if ($display_loggedin_user) { ?><a href="<?php echo get_permalink($page_publish->ID); ?>" class="button">Cr&eacute;er un projet</a><br /><br /><br /><?php } ?>
+	<div>
+		<div class="left two-thirds">
+			<strong><?php if ($display_loggedin_user) { ?>Mes projets :<?php } else { ?>Ses projets :<?php } ?></strong>
+			
+			<?php
+			$campaign_status = array('publish');
+			if ($display_loggedin_user) array_push($campaign_status, 'private');
+			$args = array(
+				'post_type' => 'download',
+				'author' => bp_displayed_user_id(),
+				'post_status' => $campaign_status
+			);
+			if (!$display_loggedin_user) {
+				$args['meta_key'] = 'campaign_vote';
+				$args['meta_compare'] = '!='; 
+				$args['meta_value'] = 'preparing';
+			}
+			query_posts($args);
+			$has_projects = false;
+
+			if (have_posts()) {
+				$has_projects = true;
+				$i = 0;
+				while (have_posts()) {
+					the_post();
+					if ($i > 0) {?> | <?php }
+					?><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a><?php
+					$i++;
+				}
+			}
+			?>
+					
+			<?php
+			$api_user_id = BoppLibHelpers::get_api_user_id(bp_displayed_user_id());
+			$project_list = BoppLib::get_user_projects_by_role($api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
+			if (!empty($project_list)) {
+				$has_projects = true;
+				foreach ($project_list as $project) {
+					$post_project = get_post($project->wp_project_id);	    
+					if ($i > 0) {?> | <?php }
+					?><a href="<?php echo get_permalink($post_project->ID); ?>"><?php echo $post_project->post_title; ?></a><?php
+					$i++;
+				}
+			}
+			
+			if (!$has_projects): ?>
+			Aucun
+			<?php endif; ?>
+
+		</div>
+	    
+		<?php if ($display_loggedin_user) { ?>
+		<div class="right">
+			<a href="<?php echo get_permalink($page_publish->ID); ?>" class="button right">Cr&eacute;er un projet</a>
+		</div>
+		<?php } ?>
+	    
+		<div class="clear"></div>
+	</div>
+	<br /><br /><br />
 	
 <div id="ajax-loader" class="center" style="text-align: center;"><img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loader.gif"/></div>
 
@@ -64,7 +124,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		    La pi&egrave;ce d&apos;identit&eacute; doit &ecirc;tre pr&eacute;sent&eacute;e recto-verso.<br />
 		    Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf.<br />
 		    Son poids doit &ecirc;tre inf&eacute;rieur &agrave; 2 Mo.<br />
-		    <form id="mangopay_strongauth_form" action="" method="post" enctype="multipart/form-data">
+		    <form id="mangopay_strongauth_form" action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="mangopaytoaccount" value="1" />
 			<input type="hidden" name="document_submited" value="1" />
 			<input type="file" name="StrongValidationDtoPicture" />
@@ -103,7 +163,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		    //Entrer les données d'un beneficiary
 		    ?>
 		    <strong>Veuillez entrer vos informations bancaires</strong><br />
-		    <form action="" method="post" enctype="multipart/form-data">
+		    <form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
 			<label for="bankownername" class="large-label">Nom du propri&eacute;taire du compte : </label>
 			    <input type="text" name="bankownername" value="<?php echo $bankaccountownername; ?>" /> <br />
 			<label for="bankowneraddress" class="large-label">Adresse du compte : </label>
@@ -151,12 +211,12 @@ if (is_user_logged_in() && $display_loggedin_user) :
 			    Adresse du compte : <?php echo $beneficiary_obj->BankAccountOwnerAddress ?> <br />
 			    IBAN : <?php echo $beneficiary_obj->BankAccountIBAN ?> <br />
 			    BIC : <?php echo $beneficiary_obj->BankAccountBIC ?> <br />
-			<form action="" method="post" enctype="multipart/form-data">
+			<form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
 			    <input type="hidden" name="mangopaytoaccount" value="1" />
 			    <input type="hidden" name="valid" value="1" />
 			    <input type="submit" value="Valider" />
 			</form>
-			<form action="" method="post" enctype="multipart/form-data">
+			<form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
 			    <input type="hidden" name="mangopaytoaccount" value="1" />
 			    <input type="hidden" name="edit" value="1" />
 			    <input type="submit" value="Editer" />
@@ -172,25 +232,28 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		<?php
 		    $real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id()) / 100;
 		?>
-		    Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br />
+		    Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br /><br />
 
 		<?php 
-		    $strongauth_status = ypcf_mangopay_get_user_strong_authentication_status(get_current_user_id());
-		    if ($strongauth_status['status'] != ''):
-		?>
-		    <span class="error"><?php echo $strongauth_status['message']; ?></span><br />
-		    <?php if ($strongauth_status['status'] != 'waiting'): ?>
-			La pi&egrave;ce d&apos;identit&eacute; doit &ecirc;tre pr&eacute;sent&eacute;e recto-verso.<br />
-			Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf.<br />
-			Son poids doit &ecirc;tre inf&eacute;rieur &agrave; 2 Mo.<br />
-			<form id="mangopay_strongauth_form" action="" method="post" enctype="multipart/form-data">
-			    <input type="hidden" name="mangopaytoaccount" value="1" />
-			    <input type="hidden" name="document_submited" value="1" />
-			    <input type="file" name="StrongValidationDtoPicture" />
-			    <input type="submit" value="Envoyer"/>
-			</form><br /><br />
-		    <?php endif; ?>
-		<?php 
+		    $show_strong_auth_form = false;
+		    if ($mp_user->PersonalWalletAmount > 0 && !$mp_user->IsStrongAuthenticated) $show_strong_auth_form = true;
+		    if ($show_strong_auth_form):
+			    $strongauth_status = ypcf_mangopay_get_user_strong_authentication_status(get_current_user_id());
+			    if ($strongauth_status['status'] != ''): ?>
+				    <span class="error"><?php echo $strongauth_status['message']; ?></span><br /><br />
+			    <?php endif;
+				    
+			    if ($strongauth_status['status'] != 'waiting'): ?>
+				    La pi&egrave;ce d&apos;identit&eacute; doit &ecirc;tre pr&eacute;sent&eacute;e recto-verso.<br />
+				    Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf.<br />
+				    Son poids doit &ecirc;tre inf&eacute;rieur &agrave; 2 Mo.<br />
+				    <form id="mangopay_strongauth_form" action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="mangopaytoaccount" value="1" />
+					<input type="hidden" name="document_submited" value="1" />
+					<input type="file" name="StrongValidationDtoPicture" />
+					<input type="submit" value="Envoyer"/>
+				    </form><br /><br />
+			    <?php endif;
 		    endif; 
 		?>
 
@@ -202,7 +265,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		    else :
 			if ($real_amount_invest > 0) {
 		?>
-		    <form action="" method="post" enctype="multipart/form-data">
+		    <form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="mangopaytoaccount" value="1" />
 			<input type="submit" value="Reverser sur mon compte bancaire" />
 		    </form>

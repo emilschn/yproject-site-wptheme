@@ -131,12 +131,14 @@ YPUIFunctions = (function($) {
 
 			if ($("#scroll-to-utilite-societale").length > 0) {
 			    $("#scroll-to-utilite-societale").click(function() {
-			       $('html, body').animate({scrollTop: $('#utilite-societale').offset().top - $("#navigation").height()}, "slow"); 
+			       $('html, body').animate({scrollTop: $('#anchor-social').offset().top - $("#navigation").height()}, "slow"); 
 			    });
 			}
  	
-			if ($("#user-id").length) { 
-			    YPUIFunctions.getProjects(); 
+			if ($("#user-id").length > 0) { 
+				var sCurrentTab = window.location.hash.substring(1);
+				if (sCurrentTab != '') YPUIFunctions.switchProfileTab(sCurrentTab);
+				YPUIFunctions.getProjects(); 
 			}
 			
 			if ($("#item-submenu").length > 0) {
@@ -344,8 +346,8 @@ WDGProjectPageFunctions=(function($) {
 	return {
 		currentDiv:0,
 		initUI:function() {
-			$('.projects-desc-content').each(function(){WDGProjectPageFunctions.initClick(this)});
-			$('.project-content-icon').click(function(){
+			$('.v1 .projects-desc-content').each(function(){WDGProjectPageFunctions.initClick(this)});
+			$('.v1 .project-content-icon').click(function(){
 				var contentDiv = $("#project-content-" + $(this).data("content"));
 				contentDiv.trigger("click"); 	
 			});
@@ -491,16 +493,20 @@ WDGProjectPageFunctions=(function($) {
 			//Si il y a plus d'un paragraphe, on initialise le clic
 	  		if ($(descContentElement).find('p').length > 1) {
 	  			$(descContentElement).css("cursor", "pointer");
-				var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" >Lire plus !</div>';
-		  		$(descContentElement).find('div div *:lt(1)').append(sProjectMore);
+				var sDisplay = '';
+				if (WDGProjectPageFunctions.currentDiv === 0) sDisplay = 'style="display:none"';
+				var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'>Lire plus !</div>';
+				$(descContentElement).find('div div *:lt(1)').append(sProjectMore);
 		  		$(descContentElement).click(function(){
 					WDGProjectPageFunctions.clickItem($(this))
 				});
 	  		}
-			//On prend toutes les balises de la description
-			var children = $(descContentElement).children().children().children();
-			//On les masque sauf la première
-	   		$(descContentElement).find(children.not('*:eq(0)')).hide();
+			if (WDGProjectPageFunctions.currentDiv > 0) {
+				//On prend toutes les balises de la description
+				var children = $(descContentElement).children().children().children();
+				//On les masque sauf la première
+				$(descContentElement).find(children.not('*:eq(0)')).hide();
+			}
 	   		WDGProjectPageFunctions.currentDiv++;
    		},
 		
@@ -511,6 +517,7 @@ WDGProjectPageFunctions=(function($) {
 			if (projectMore.is(':visible')) {
 				//il faut la masquer puis afficher les éléments qui suivent
 				projectMore.hide(400, function(){
+					$('html, body').animate({scrollTop: clickedElement.offset().top - $("#navigation").height()}, "slow"); 
 					clickedElement.find('p, ul').slideDown(400);
 				});
 				//on masque aussi toutes les autres parties

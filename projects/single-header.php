@@ -6,16 +6,15 @@ $campaign_id_param = '?campaign_id=';
 if (isset($_GET['campaign_id'])) {
 	$campaign_id_param .= $_GET['campaign_id'];
 	$post = get_post($_GET['campaign_id']);
-	$campaign = atcf_get_campaign( $post );
 	
 } else if (isset($campaign_id)) {
 	$campaign_id_param .= $campaign_id;
 	$post = get_post($campaign_id);
-	$campaign = atcf_get_campaign( $post );
 	    
 } else {
 	$campaign_id_param .= $post->ID;
 }
+$campaign = atcf_get_campaign( $post );
 $vote_status = $campaign->campaign_status(); 
 ?>
 
@@ -44,7 +43,8 @@ $vote_status = $campaign->campaign_status();
 				</div>
 				<div class="post_bottom_infos_item">
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="Logo personnes" />
-					<?php echo $campaign->backers_count(); ?> personnes ont dèjà financé ce projet
+					<?php $backers_count = $campaign->backers_count(); ?>
+					<?php echo $backers_count; ?> personne<?php if ($backers_count > 1) { echo 's ont'; } else { echo ' a'; } ?> d&eacute;j&agrave; financ&eacute; ce projet
 				</div>
 				<div class="post_bottom_infos_item" <?php if($vote_status=='funded'){echo "style=opacity:0.5";}?>>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo horloge" />
@@ -130,13 +130,13 @@ $vote_status = $campaign->campaign_status();
 				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) { ?> 
 					<div id="invest-button">
 						<?php $page_invest = get_page_by_path('investir'); ?>
-						<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&invest_start=1" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Investir sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+						<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&invest_start=1" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />Investir sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
 					</div>
 
 				<?php } else if ($vote_status == 'preview'){ ?>
 						<div id="participate-button">
 						<?php $page_forum = get_page_by_path('forum'); ?>
-						<a href="<?php echo get_permalink($page_forum->ID) . $campaign_id_param; ?>" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Participer au forum<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+						<a href="<?php echo get_permalink($page_forum->ID) . $campaign_id_param; ?>" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />Participer au forum<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
 					</div>
 
 				<?php } else if ($vote_status == 'vote') {
@@ -150,7 +150,7 @@ $vote_status = $campaign->campaign_status();
 						<?php if ($has_voted): ?>
 						<span class="description-discover" style="background-color:#333;">Merci pour votre vote</span>
 						<?php else : ?>
-						<a href="javascript:WDGProjectPageFunctions.print_vote_form();" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle">Voter sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle"></a>
+						<a href="javascript:WDGProjectPageFunctions.print_vote_form();" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />Voter sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
 						<?php endif; ?>
 					</div>
 
@@ -162,23 +162,23 @@ $vote_status = $campaign->campaign_status();
 				<?php } ?>
 
 
-
+				<?php if ($vote_status != 'vote' && $vote_status != 'preparing') : ?>
 				<?php if ( is_user_logged_in() ) { 
-					global $wpdb, $campaign_id;
+					global $wpdb;
 					$user_id = wp_get_current_user()->ID;
 					$table_jcrois = $wpdb->prefix . "jycrois";
-					$users = $wpdb->get_results( "SELECT * FROM $table_jcrois WHERE campaign_id = $campaign_id AND user_id=$user_id" );
+					$users = $wpdb->get_results( 'SELECT * FROM '.$table_jcrois.' WHERE campaign_id = '.$campaign->ID.' AND user_id='.$user_id );
 					if ( !empty($users[0]->ID) ) { ?>
 						<a class="jy-crois" href="javascript:WDGProjectPageFunctions.update_jycrois(0,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
 						<div id="jy-crois-btn" style="background-image: url('<?php echo $stylesheet_directory_uri.'/images/jycrois_gris.png';?>')" class="stats_btn" class="dark">
 						<p id="jy-crois-txt"><p>    
-						<p id="nb-jycrois"><?php do_shortcode('[yproject_crowdfunding_count_jcrois]') ?></p>
+						<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
 						</div></a>
 					<?php } else { ?>
 						<a class="jy-crois" href="javascript:WDGProjectPageFunctions.update_jycrois(1,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
 						<div id="jy-crois-btn" class="stats_btn" class="dark">
 						<p id="jy-crois-txt">J'y crois<p>
-						<p id="nb-jycrois"><?php do_shortcode('[yproject_crowdfunding_count_jcrois]') ?></p>
+						<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
 						</div></a>
 
 					<?php }
@@ -187,15 +187,18 @@ $vote_status = $campaign->campaign_status();
 					<a class="jy-crois" href="<?php echo get_permalink($page_connexion->ID); ?>">
 					<div id="jy-crois-btn" class="stats_btn" class="dark">
 					<p id="jy-crois-txt">J'y crois<p>
-					<p id="nb-jycrois"><?php do_shortcode('[yproject_crowdfunding_count_jcrois]') ?></p>
+					<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
 					</div></a>
 				<?php } ?>
+				<?php endif; ?>
 
+				<?php if ($vote_status != 'preparing') : ?>
 				<a id="share-btn-a" href="javascript:WDGProjectPageFunctions.share_btn_click();">
 				<div id="share-btn-div" class="stats_btn" class="dark">
 					<p id="share-txt">Partager</p>	
 				</div>
 				</a>
+				<?php endif; ?>
 			</div>
 
 			<div id="white-background" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>></div>
@@ -297,24 +300,13 @@ $vote_status = $campaign->campaign_status();
 		if (false === $cache_result) {
 		ob_start();
 		?>
-		<div id='img-container' style="top:<?php $cover_position=get_post_meta($post->ID,'campaign_cover_position',TRUE); if($cover_position!='') echo $cover_position;?>">
+		<div id='img-container' style="<?php echo $campaign->get_header_picture_position_style(); ?>">
 			<?php 
-			$img_src = '';			
-			$attachments = get_posts( array(
-			    'post_type' => 'attachment',
-			    'post_parent' => $post->ID,
-			    'post_mime_type' => 'image'
-			));
-			$image_obj = '';
-			//Si on en trouve bien une avec le titre "image_home" on prend celle-là
-			foreach ($attachments as $attachment) {
-			    if ($attachment->post_title == 'image_header') $image_obj = wp_get_attachment_image_src($attachment->ID, "full");
-			}
-			//Sinon on prend la première image rattachée à l'article
-			if ($image_obj == '' && count($attachments) > 0) $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
-			if ($image_obj != '') $img_src = $image_obj[0];
+			$img_src = $campaign->get_header_picture_src();
+			if ($img_src != ''):
 			?>
-			<img id="moved-img" src="<?php echo $img_src; ?>" alt="Image du projet" />
+			<img id="moved-img" src="<?php echo $img_src; ?>" alt="Bannière <?php echo $post->post_title; ?>" />
+			<?php endif; ?>
 		</div>
 		<?php 
 		    $cache_result = ob_get_contents();
@@ -330,7 +322,7 @@ $vote_status = $campaign->campaign_status();
 		    global $post;
 		    $post_id_echo = (isset($_GET['campaign_id'])) ? $_GET['campaign_id'] : $post->ID;
 		?>
-		    <a href="#" id="reposition-cover" onclick='javascript:WDGProjectPageFunctions.move_picture(<?php echo $post_id_echo; ?>)'>Repositionner</a>
+		    <a href="#" id="reposition-cover" onclick="javascript:WDGProjectPageFunctions.move_picture(<?php echo $post_id_echo; ?>)">Repositionner</a>
 		<?php } ?>
 	</div>
 	<div style="clear:both"></div>

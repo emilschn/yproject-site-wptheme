@@ -17,7 +17,7 @@ if($followers_count>0){ ?>
 <?php
 	for ($i = 0; $i < $followers_count; $i++) {
 		$user_temp = get_userdata($followers_list[$i]);
-		$user_avatar = get_user_avatar($user_temp->ID, "thumb");
+		$user_avatar = UIHelpers::get_user_avatar($user_temp->ID, "thumb");
 		if (isset($user_temp->ID)) echo '<li><a href="' . bp_core_get_userlink($user_temp->ID, false, true) . '">'. $user_avatar . $user_temp->display_name . '</a></li>';
 	}
 ?>
@@ -31,7 +31,7 @@ if($following_count>0){ ?>
 <?php
 	for ($i = 0; $i < $following_count; $i++) {
 		$user_temp = get_userdata($following_list[$i]);
-		$user_avatar = get_user_avatar($user_temp->ID, "thumb");
+		$user_avatar = UIHelpers::get_user_avatar($user_temp->ID, "thumb");
 		if (isset($user_temp->ID)) echo '<li><a href="' . bp_core_get_userlink($user_temp->ID, false, true) . '">'. $user_avatar . $user_temp->display_name . '</a></li>';
 	}
 ?>

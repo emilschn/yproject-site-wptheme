@@ -1,80 +1,20 @@
 <?php 
-    global $WDG_cache_plugin;
-    global $stylesheet_directory_uri;
-    $stylesheet_directory_uri = get_stylesheet_directory_uri();
-    /* Récupération des infos Facebook */
-    global $facebook_infos;
-    $cache_result = $WDG_cache_plugin->get_cache('facebook-count');
-    if (false === $cache_result) {
-		require_once("_external/facebook/facebook.php");
-	    $facebook = new Facebook(array(
-		    'appId'  => YP_FB_APP_ID,
-		    'secret' => YP_FB_SECRET,
-	    ));
-	    $fb_infos = $facebook->api(YP_FB_URL); 
-	    if ($fb_infos) $facebook_infos = $fb_infos['likes'];
-	    $WDG_cache_plugin->set_cache('facebook-count',$facebook_infos,60*60*24);
-    } else {
-	    $facebook_infos = $cache_result;
-    }
-	
-    /* Récupération des infos Twitter */
-    global $twitter_infos;
-    $cache_result = $WDG_cache_plugin->get_cache('twitter-count');
-    if (false === $cache_result) {
-	    require_once("_external/twitter/TwitterAPIExchange.php");
-	    $apiUrl = "https://api.twitter.com/1.1/users/show.json";
-	    $requestMethod = 'GET';
-	    $getField = '?screen_name=wedogood_co';
-	    $settings = array(
-		    'oauth_access_token' => YP_TW_oauth_access_token,
-		    'oauth_access_token_secret' => YP_TW_oauth_access_token_secret,
-		    'consumer_key' => YP_TW_consumer_key,
-		    'consumer_secret' => YP_TW_consumer_secret
-	    );
-
-	    $twitter = new TwitterAPIExchange($settings);
-	    $response = $twitter->setGetfield($getField)
-			    ->buildOauth($apiUrl, $requestMethod)
-			    ->performRequest();
-	    $followers = json_decode($response);
-	    if ($followers && isset($followers->followers_count)) $twitter_infos = $followers->followers_count;
-	    $WDG_cache_plugin->set_cache('twitter-count',$twitter_infos,60*60*24);
-    } else {
-	    $twitter_infos = $cache_result;
-    }
-
-    function getWDGTitle() {
-	    global $post;
-	    $buffer = '';
-	    if ( is_category() ) {
-		    global $cat;
-		    $this_category = get_category($cat);
-		    $this_category_name = $this_category->name;
-		    $name_exploded = explode('cat', $this_category_name);
-		    $campaign_post = get_post($name_exploded[1]);
-		    $buffer = 'Actualit&eacute;s du projet ' . (is_object($campaign_post) ? $campaign_post->post_title : '') . ' | ' . get_bloginfo( 'name' );
-	    } else if (isset($post)) {
-		    $page_name = get_post($post)->post_name;
-		    if ($page_name == 'forum' && isset($_GET['campaign_id'])) {
-			    $campaign_post = get_post($_GET['campaign_id']);
-			    $buffer = 'Commentaires du projet ' . $campaign_post->post_title . ' | ' . get_bloginfo( 'name' );
-		    }
-	    }
-	    return $buffer;
-    }
-    date_default_timezone_set("Europe/Paris");
+	global $WDG_cache_plugin, $stylesheet_directory_uri;
+	$stylesheet_directory_uri = get_stylesheet_directory_uri();
+	date_default_timezone_set("Europe/Paris");
+	UIHelpers::init_social_infos();
 ?>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<head>
-		<?php $title_str = getWDGTitle();
+		<?php $title_str = UIHelpers::current_page_title();
 		if ($title_str) : ?>
 		<title><?php echo $title_str; ?></title>
 		<?php else : ?>
 		<title><?php wp_title( '|', true, 'right' ); bloginfo( 'name' ); ?></title>
 		<?php endif; ?>
+		
 		<?php
 			$cache_result = $WDG_cache_plugin->get_cache('header-content');
 			// START CACHE HEADER CONTENT
@@ -84,7 +24,7 @@
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
-		<meta name="description" content="Plateforme d'investissement participatif &agrave; impact positif" />
+		<meta name="description" content="Plateforme d'investissement participatif a impact positif" />
 		<meta property="og:title" content="WEDOGOOD" />
 		<meta property="og:image" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
 		<meta property="og:image:secure_url" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
@@ -102,10 +42,8 @@
 
 	<body <?php body_class(); ?> id="bp-default">
 
-		<?php do_action( 'bp_before_header' ); ?>
-
 		<nav id="navigation" role="navigation">
-		    <div class="center">
+			<div class="center">
 				<ul id="nav">
 					<?php /* Logo Accueil */ ?>
 					<li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>" style="padding-left: 0px; padding-right: 14px;">
@@ -120,7 +58,7 @@
 					<li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_community->ID); ?>"><?php echo __('Communaute', 'yproject'); ?></a></span></li>
 					<?php /* Logo FB / TW */ ?>
 					<li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.png" width="20" height="20" alt="facebook" /></a></li>
-					<li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.png" width="20" height="20" alt="facebook" /></a></li>
+					<li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.png" width="20" height="20" alt="twitter" /></a></li>
 					<?php
 						$cache_result = ob_get_contents();
 						$WDG_cache_plugin->set_cache('header-content',$cache_result,60*60*24);
@@ -146,12 +84,12 @@
 						<li id="menu_item_connection" class="page_item_out page_item_inverted"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
 					<?php endif; ?>
 				</ul>
-		    </div>
+			</div>
 		</nav>
 		
 		<div id="submenu_item_connection">
-		    <?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
-		    <ul>
+			<?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
+			<ul>
 				<li class="page_item_out">
 					<div id="submenu_item_connection_register"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
 					<hr />
@@ -175,13 +113,27 @@
 					<label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" />&nbsp;<?php _e('Se souvenir de moi', 'yproject'); ?></label>
 					</form>
 				</li>
-		    </ul>
+			</ul>
 		</div>
 
-		<?php do_action( 'bp_header' ); ?>
-		<?php do_action( 'bp_after_header'     ); ?>
-		<?php do_action( 'bp_before_container' ); ?>
-
-		<div></div>
+		<?php 
+		LibUsers::check_validate_general_terms();
+		if (LibUsers::must_show_general_terms_block()): 
+			global $edd_options;
+		?>
+		<div id="validate-terms">
+			<div class="validate-terms-padder">
+				<span>Mise &agrave; jour des conditions g&eacute;n&eacute;rales d&apos;utilisation</span>
+				<div class="validate-terms-excerpt">
+					<?php echo wpautop( stripslashes( $edd_options[LibUsers::$edd_general_terms_excerpt])); ?>
+				</div>
+				<form action="" method="POST">
+					<input type="hidden" name="action" value="validate-terms" />
+					<label for="validate-terms-check"><input type="checkbox" name="validate-terms-check" /> J&apos;accepte les conditions g&eacute;n&eacute;rales d&apos;utilisation</label><br />
+					<div style="text-align: center;"><input type="submit" value="Valider" class="button" /></div>
+				</form>
+			</div>
+		</div>
+		<?php endif; ?>
 	    
 		<div id="container">

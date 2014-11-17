@@ -1,4 +1,5 @@
 <?php 
+global $disable_logs; $disable_logs = TRUE;
 if (isset($_GET["campaign_id"])) { 
 	global $WDG_cache_plugin, $stylesheet_directory_uri;
 	$cache_result = $WDG_cache_plugin->get_cache('public-stats-' . $_GET["campaign_id"]);
