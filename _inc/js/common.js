@@ -152,7 +152,7 @@ YPUIFunctions = (function($) {
 			}
 			
 			if ($("#already-connected").length > 0) {
-				$("#already-connected .already-connected-excerpt a").click(function() {
+				$("#already-connected .already-connected-button a").click(function() {
 					$("#already-connected").hide();
 				});
 			}

@@ -1,11 +1,11 @@
 <?php if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadyloggedin'] === '1'): ?>
 <div id="already-connected">
 	<div class="already-connected-padder">
+		<div class="already-connected-button">
+			<a href="#" class="button">X</a>
+		</div>
 		<span>Vous &ecirc;tes d&eacute;j&agrave; inscrit et connect&eacute; !</span><br /><br />
 		<a href="<?php echo bp_loggedin_user_domain(); ?>">Mon compte</a>
-		<div class="already-connected-excerpt">
-			[ <a href="#">Fermer</a> ]
-		</div>
 	</div>
 </div>
 <?php endif; ?>

@@ -1304,7 +1304,7 @@ ul.activity-list p {
 	background-color: #FFFFFF;
 }
 
-#validate-terms .validate-terms-excerpt, #already-connected .already-connected-excerpt {
+#validate-terms .validate-terms-excerpt {
 	margin: 20px 0px;
 	max-height: 250px;
 	overflow-y: auto;
@@ -1324,6 +1324,9 @@ ul.activity-list p {
 
 #already-connected {
 	text-align: center;
+}
+#already-connected .already-connected-button {
+	float: right;
 }
 /* FIN LIGHTBOX CGU + DEJA CONNECTE */
 
