@@ -362,12 +362,12 @@ WDGProjectPageFunctions=(function($) {
 	return {
 		currentDiv:0,
 		initUI:function() {
-			$('.v1 .projects-desc-content').each(function(){WDGProjectPageFunctions.initClick(this)});
-			$('.v1 .project-content-icon').click(function(){
+			$('.projects-desc-content').each(function(){WDGProjectPageFunctions.initClick(this)});
+			$('.project-content-icon').click(function(){
 				var contentDiv = $("#project-content-" + $(this).data("content"));
 				contentDiv.trigger("click"); 	
 			});
-			$('.project-content-icon').css("cursor", "pointer");  
+			$('.project-content-icon').css("cursor", "pointer");
 
 			$("#btn-validate_project-true").click(function(){ 
 			    $("#validate_project-true").show();
@@ -387,33 +387,6 @@ WDGProjectPageFunctions=(function($) {
 			$("#jcrois").click(function() {
 			    $("#tab-count-jycrois").load('single-campaign.php');
 			});
-		},
-		move_picture:function(campaign_id) {
-		    $('#img-container').draggable({
-				axis: "y"
-		    }); // appel du plugin
-		    $('#img-container').draggable('enable');
-		    $('#reposition-cover').text('Sauvegarder');
-		    $('#reposition-cover').attr("onclick", "WDGProjectPageFunctions.save_position("+campaign_id+")");
-		    $("#head-content").css({ opacity: 0 });
-		    $("#head-content").css({ 'z-index': -1 });
-		},
-
-		save_position:function(campaign_id){
-		    $("#head-content").css({ opacity: 1 });
-		    $("#head-content").css({ 'z-index': 2 });
-		    $('#img-container').draggable('disable');
-		    $('#reposition-cover').text('Repositionner');
-		    $('#reposition-cover').attr("onclick", "WDGProjectPageFunctions.move_picture("+campaign_id+")");
-		    $.ajax({
-		              'type' : "POST",
-		              'url' : ajax_object.ajax_url,
-		              'data': { 
-		                      'action':'setCoverPosition',
-		                      'top' : $('#img-container').css('top'),
-		                      'id_campaign' : campaign_id
-		                    }
-		            }).done()
 		},
 
 		move_cursor:function(campaign_id){

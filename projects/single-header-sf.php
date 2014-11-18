@@ -386,7 +386,7 @@ $vote_status = $campaign->campaign_status();
 													global $post;
 													$post_id_echo = (isset($_GET['campaign_id'])) ? $_GET['campaign_id'] : $post->ID;
 													?>
-													<a href="#" id="reposition-cover" onclick='javascript:WDGProjectPageFunctions.move_picture(<?php echo $post_id_echo; ?>)'>Repositionner</a>
+													<a href="#" id="reposition-cover" onclick='javascript:BOPPFunctions.move_picture(<?php echo $post_id_echo; ?>)'>Repositionner</a>
 
 
 		

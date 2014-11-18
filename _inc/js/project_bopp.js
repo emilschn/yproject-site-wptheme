@@ -2,23 +2,42 @@ jQuery(document).ready( function($) {
 	WDGNewProjectPageFunctions.initUI();
 });
 
+BOPPFunctions = (function($) {
+	return {
+		move_picture:function(campaign_id) {
+			$('#img-container').draggable({ axis: "y" });
+			$('#img-container').draggable('enable');
+			$('#reposition-cover').text('Sauvegarder');
+			$('#reposition-cover').attr("onclick", "BOPPFunctions.save_position("+campaign_id+")");
+			$("#head-content").css({ opacity: 0 });
+			$("#head-content").css({ 'z-index': -1 });
+		},
+
+		save_position:function(campaign_id){
+			$('#img-container').draggable('disable');
+			$('#reposition-cover').text('Repositionner');
+			$('#reposition-cover').attr("onclick", "BOPPFunctions.move_picture("+campaign_id+")");
+			$("#head-content").css({ opacity: 1 });
+			$("#head-content").css({ 'z-index': 2 });
+
+			$.ajax({
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': { 
+					'action':'setCoverPosition',
+					'top' : $('#img-container').css('top'),
+					'id_campaign' : campaign_id
+				}
+			}).done()
+		},
+	};
+})(jQuery);
+
 /* Projet */
 WDGNewProjectPageFunctions=(function($) {
 	return {
 		currentDiv:0,
 		initUI:function() {
-			var moreText = "Lire plus...";
-			$('.more').hide();
-			$('.indent').find('.readmore').click(function(event){
-				event.preventDefault();
-			    //Expand or collapse this panel
-			    $(this).parent().next().slideToggle('fast');
-			    $(this).hide();
-			    $('.indent').find('.readless').show();
-			    //Hide the other panels
-			    //$(".more").not($(this).parent().next()).slideUp('fast');
-			});
-
 			WDGNewProjectPageFunctions.save_image_home();
 			WDGNewProjectPageFunctions.save_image();
 			//WDGNewProjectPageFunctions.display_tooltips();
@@ -144,43 +163,6 @@ WDGNewProjectPageFunctions=(function($) {
 			  }
 			});
 
-		},
-		move_picture:function(campaign_id) {
-			$('#img-container').draggable({
-				axis: "y"
-		    }); // appel du plugin
-			$('#img-container').draggable('enable');
-			$('#reposition-cover').text('Sauvegarder');
-			$('#reposition-cover').attr("onclick", "WDGNewProjectPageFunctions.save_position("+campaign_id+")");
-
-			$('#reposition-cover-sf').text('Sauvegarder');
-			$('#reposition-cover-sf').attr("onclick", "WDGNewProjectPageFunctions.save_position("+campaign_id+")");
-
-
-			$("#head-content").css({ opacity: 0 });
-			$("#head-content").css({ 'z-index': -1 });
-		},
-
-		save_position:function(campaign_id){
-			$("#head-content").css({ opacity: 1 });
-			$("#head-content").css({ 'z-index': 2 });
-			$('#img-container').draggable('disable');
-			$('#reposition-cover').text('Repositionner');
-			$('#reposition-cover').attr("onclick", "WDGNewProjectPageFunctions.move_picture("+campaign_id+")");
-
-			$('#reposition-cover-sf').text('Repositionner');
-			$('#reposition-cover-sf').attr("onclick", "WDGNewProjectPageFunctions.move_picture("+campaign_id+")");
-
-
-			$.ajax({
-				'type' : "POST",
-				'url' : ajax_object.ajax_url,
-				'data': { 
-					'action':'setCoverPosition',
-					'top' : $('#img-container').css('top'),
-					'id_campaign' : campaign_id
-				}
-			}).done()
 		},
 
 		move_cursor:function(campaign_id){
