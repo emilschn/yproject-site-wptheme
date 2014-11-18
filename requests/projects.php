@@ -132,4 +132,32 @@ class YPProjectLib {
 		
 		return FALSE;
 	}
+	
+	/**
+	 * Gère le formulaire d'ajout d'actualité
+	 */
+	public static function form_validate_news_add($campaign_id) {
+		if (!YPProjectLib::current_user_can_edit($campaign_id) 
+				|| !isset($_POST['action'])
+				|| $_POST['action'] != 'ypcf-campaign-add-news') {
+			return FALSE;
+		}
+
+		$current_user = wp_get_current_user();
+		$post_campaign = get_post($campaign_id);
+
+		$category_slug = $post_campaign->ID . '-blog-' . $post_campaign->post_title;
+		$category_obj = get_category_by_slug($category_slug);
+
+		$blog = array(
+			'post_title'    => $_POST['posttitle'],
+			'post_content'  => $_POST['postcontent'],
+			'post_status'   => 'publish',
+			'post_author'   => $current_user->ID,
+			'post_category' => array($category_obj->cat_ID)
+		);
+
+		wp_insert_post($blog, true);
+		do_action('wdg_delete_cache', array( 'project-'.$post_campaign->ID.'-header' ));
+	}
 }

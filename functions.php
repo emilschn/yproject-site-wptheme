@@ -35,12 +35,11 @@ function yproject_enqueue_script(){
 		wp_enqueue_script('jquery');
 
 	}
-	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'));
+	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '1.1.003');
 	wp_enqueue_script( 'wdg-script2', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/project_bopp.js', array('jquery', 'jquery-ui-dialog'));
 	wp_enqueue_script( 'jquery-form-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-qtips2', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
-	
 	wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
 	wp_localize_script( 'wdg-script2', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'));
@@ -95,6 +94,11 @@ function _catch_empty_user( $username, $pwd ) {
 	}
 }
 add_action( 'wp_authenticate', '_catch_empty_user', 1, 2 );
+
+function catch_register_page_loggedin_users() {
+	return home_url() . '?alreadyloggedin=1';
+}
+add_filter( 'bp_loggedin_register_page_redirect_to', 'catch_register_page_loggedin_users');
 
 /**
  * permet de se loger avec son mail

@@ -17,7 +17,10 @@ if (!is_user_logged_in()) {
 		
 		<?php locate_template( array("basic/basic-header.php"), true ); ?>
 	    
-		<div class="center">
+		<div class="center margin-height">
+			
+			&lt;&lt; <a href="<?php bp_loggedin_user_link(); ?>">Mon compte</a><br /><br />
+			
 			<?php
 			//Demande de renvoi de code
 			if (isset($_GET['invest_id_resend']) && !empty($_GET['invest_id_resend'])) {
@@ -80,7 +83,7 @@ if (!is_user_logged_in()) {
 						    <input type="hidden" name="mangopaytoaccount" value="1" />
 						    <input type="hidden" name="document_submited" value="1" />
 						    <input type="file" name="StrongValidationDtoPicture" />
-						    <input type="submit" value="Envoyer"/>
+						    <input type="submit" value="Envoyer" class="button" />
 						</form><br /><br />
 						<?php
 					}
@@ -136,9 +139,9 @@ if (!is_user_logged_in()) {
 							<label for="bankowneriban" class="large-label">IBAN : </label>
 								<input type="text" name="bankowneriban" value="<?php echo $bankaccountiban; ?>" /> <br />
 							<label for="bankownerbic" class="large-label">BIC : </label>
-								<input type="text" name="bankownerbic" value="<?php echo $bankaccountbic; ?>" /> <br />
+								<input type="text" name="bankownerbic" value="<?php echo $bankaccountbic; ?>" /> <br /><br />
 							<input type="hidden" name="mangopaytoaccount" value="1" />
-							<input type="submit" value="Valider" />
+							<input type="submit" value="Valider" class="button" />
 						</form>
 
 						<?php
@@ -183,12 +186,12 @@ if (!is_user_logged_in()) {
 							<form action="" method="post" enctype="multipart/form-data">
 							    <input type="hidden" name="mangopaytoaccount" value="1" />
 							    <input type="hidden" name="valid" value="1" />
-							    <input type="submit" value="Valider" />
+							    <input type="submit" value="Valider" class="button" />
 							</form>
 							<form action="" method="post" enctype="multipart/form-data">
 							    <input type="hidden" name="mangopaytoaccount" value="1" />
 							    <input type="hidden" name="edit" value="1" />
-							    <input type="submit" value="Editer" />
+							    <input type="submit" value="Editer" class="button" />
 							</form>
 
 							<?php
@@ -211,7 +214,7 @@ if (!is_user_logged_in()) {
 						<input type="hidden" name="mangopaytoaccount" value="1" />
 						<input type="hidden" name="document_submited" value="1" />
 						<input type="file" name="StrongValidationDtoPicture" />
-						<input type="submit" value="Envoyer"/>
+						<input type="submit" value="Envoyer" class="button" />
 					    </form><br /><br />
 					<?php endif; ?>
 				<?php endif; ?>
@@ -225,14 +228,14 @@ if (!is_user_logged_in()) {
 					<?php if ($real_amount_invest > 0) : ?>
 						<form action="" method="post" enctype="multipart/form-data">
 						    <input type="hidden" name="mangopaytoaccount" value="1" />
-						    <input type="submit" value="Reverser sur mon compte bancaire" />
+						    <input type="submit" value="Reverser sur mon compte bancaire" class="button" />
 						</form>
 					<?php endif; ?>
 				<?php endif; ?>
 
 			<?php } ?>
 				
-			&lt;&lt; Retour sur <a href="<?php bp_loggedin_user_link(); ?>">votre compte</a><br /><br />
+			<br /><br />
 			
 			<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" /></center>
 		</div>

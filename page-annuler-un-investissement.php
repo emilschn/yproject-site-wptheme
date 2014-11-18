@@ -63,10 +63,10 @@
 						$future_amount = $campaign->current_amount(false) - edd_get_payment_amount($payment_id);
 						?>
 						<a href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $post_campaign->post_title; ?></a><br />
-						<?php echo __("Sans vous, la somme atteinte sera de ", "yproject") . $future_amount . edd_get_currency(); ?>
+						<?php echo __("Sans vous, la somme atteinte sera de ", "yproject") . $future_amount . edd_get_currency(); ?><br /><br />
 						<form action="" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="confirm" value="confirmed" />
-							<input type="submit" value="<?php _e("Confirmer", "yproject"); ?>" />
+							<input type="submit" value="<?php _e("Confirmer", "yproject"); ?>" class="button" />
 						</form>
 
 					<?php endwhile; else: ?>

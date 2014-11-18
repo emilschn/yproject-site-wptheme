@@ -6,8 +6,8 @@
  * Theme URI: https://code.google.com/p/yproject-site-wptheme/
  * Description: Override of BuddyPress Default
  * Version: 0.1
- * Author: the Y Project team
- * Author URI: http://www.yproject.co
+ * Author: the WEDOGOOD team
+ * Author URI: http://www.wedogood.co
  * License: GNU General Public License
  * License URI: license.txt
  * Template: bp-default
@@ -487,6 +487,35 @@ div#home_bottom h1 {
 /* FIN PROJECTS */
 
 /* PROJECT PAGE */
+#single_project_admin_bar {
+    padding: 15px 0px;
+    background-color: #D9D9D9;
+    width:auto;
+    font-size:13px;
+    z-index: 10;
+    position: relative;
+}
+
+#single_project_admin_bar div {
+    text-align: center;
+}
+
+#single_project_admin_bar a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #2B2C2C;
+    font-size:13px;
+    padding: 0px 3px;
+}
+
+#single_project_admin_bar a:hover {
+    color: #FF494C;
+}
+#single_project_admin_bar a.selected {
+    font-weight: bold;
+    color: #FF494C;
+}
+
 #post_top_bg {
     background-color: #FF494C; 
 }
@@ -633,30 +662,31 @@ div#home_bottom h1 {
 #popup_share_close {
     font-size: 9pt;
 }
+/* FIN PROJECT PAGE */
 
-#yp_admin_bar {
-    padding: 5px 0px;
-    background-color: #E1E3E2;
-    width:auto;
-    font-size:13px;
-    z-index: 10;
-    position: relative;
-}
-
-#yp_admin_bar .center {
-    padding: 5px 0px;
-}
-
-#yp_admin_bar a {
-    text-decoration: none;
-    color: #2B2C2C;
-    font-size:13px;
-}
-
-#yp_admin_bar a.selected {
+/* DASHBOARD - TABLEAU DE BORD */
+#dashboard .currentstep span span {
     font-weight: bold;
 }
-/* FIN PROJECT PAGE */
+#dashboard .button-help {
+    margin: 15px 0px;
+}
+#dashboard .button-help a {
+    text-transform: uppercase;
+    float: left;
+    width: 50%;
+    max-width: 438px;
+    text-align: center;
+    padding: 10px 10px;
+    margin: 5px 10px;
+    border: 1px solid #FF494C;
+}
+#dashboard .google-doc iframe {
+    margin-top: 15px;
+    width: 100%;
+    height: 700px;
+}
+/* FIN DASHBOARD - TABLEAU DE BORD */
 
 /* REGISTER PAGE */     
 .register_half_part {       
@@ -911,6 +941,29 @@ a.qa-faq-anchor {
 }
 
 /* MON COMPTE */
+#yp_admin_bar {
+    padding: 5px 0px;
+    background-color: #E1E3E2;
+    width:auto;
+    font-size:13px;
+    z-index: 10;
+    position: relative;
+}
+
+#yp_admin_bar .center {
+    padding: 5px 0px;
+}
+
+#yp_admin_bar a {
+    text-decoration: none;
+    color: #2B2C2C;
+    font-size:13px;
+}
+
+#yp_admin_bar a.selected {
+    font-weight: bold;
+}
+
 #item-header-container {
     background-color: #FFF;
     padding: 20px 0px;
@@ -1230,21 +1283,21 @@ ul.activity-list p {
 }
 /* FIN GROUPES INVESTISSEURS */
 
-/* LIGHTBOX CGU */
-#validate-terms {
-    background-color: rgba(0, 0, 0, 0.75);;
-    top: 0;
-    position: fixed;
-    z-index: 1010;
-    width: 100%;
-    height: 100%;
+/* LIGHTBOX CGU + DEJA CONNECTE */
+#validate-terms, #already-connected {
+	background-color: rgba(0, 0, 0, 0.75);;
+	top: 0;
+	position: fixed;
+	z-index: 1010;
+	width: 100%;
+	height: 100%;
 }
 
-#validate-terms .validate-terms-padder {
-    max-width: 600px;
-    margin: 80px auto;
-    padding: 20px;
-    background-color: #FFFFFF;
+#validate-terms .validate-terms-padder, #already-connected .already-connected-padder {
+	max-width: 600px;
+	margin: 80px auto;
+	padding: 20px;
+	background-color: #FFFFFF;
 }
 
 #validate-terms .validate-terms-excerpt {
@@ -1264,7 +1317,14 @@ ul.activity-list p {
     text-transform: uppercase;
     font-weight: bold;
 }
-/* FIN LIGHTBOX CGU */
+
+#already-connected {
+	text-align: center;
+}
+#already-connected .already-connected-button {
+	float: right;
+}
+/* FIN LIGHTBOX CGU + DEJA CONNECTE */
 
 /* NAV */
 #navigation {
@@ -1771,7 +1831,6 @@ ul.invest-mean-payment li:hover {
 }
 ul.invest-mean-payment li a {
     width: 100%;
-    height: 100%;
     margin: 0px;
     display: block;
 }
@@ -2196,11 +2255,13 @@ ul.invest-mean-payment li img {
 
 #link_validate_invest_amount, .button {
     background: none repeat scroll 0 0 #333333;
-    border: medium none;
+    border: 1px solid #333333 !important;
     color: #FFFFFF;
     padding: 3px 8px;
     text-transform: uppercase;
     cursor: pointer;
+    font-weight: normal;
+    font-size: 14px;
 }
 
 .invest_step1_generalities {
@@ -2901,6 +2962,9 @@ div, span, h1, h3, a,  ul, li, p {
     position: relative;
     float: right;
     z-index: 3;
+}
+#projects-stats-content:after {
+    clear: both;
 }
 .projects-description-separator{
     background: url("images/tiret_noir.png");
@@ -4001,3 +4065,18 @@ input#image_home, input#image {
   margin-left: 0;
   margin-bottom: -16px;
 }
+
+/* ACTUALITES / NEWS */
+#blog-archives h2 {
+	font-size: 1.17em;
+}
+#blog-archives h2 a {
+	color: #2B2C2C;
+}
+#blog-archives form#add-news {
+	display: none;
+}
+#blog-archives .post-content {
+	margin-bottom: 40px;
+}
+/* FIN ACTUALITES / NEWS */

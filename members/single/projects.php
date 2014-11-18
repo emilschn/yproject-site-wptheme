@@ -29,10 +29,15 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 			if (have_posts()) {
 				$has_projects = true;
 				$i = 0;
+				$page_dashboard = get_page_by_path('tableau-de-bord');
 				while (have_posts()) {
 					the_post();
 					if ($i > 0) {?> | <?php }
+					if ($display_loggedin_user) { 
+					?><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' . get_the_ID(); ?>"><?php the_title(); ?></a><?php
+					} else {
 					?><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a><?php
+					}
 					$i++;
 				}
 			}
@@ -46,7 +51,11 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 				foreach ($project_list as $project) {
 					$post_project = get_post($project->wp_project_id);	    
 					if ($i > 0) {?> | <?php }
+					if ($display_loggedin_user) { 
+					?><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' . $post_project->ID; ?>"><?php echo $post_project->post_title; ?></a><?php
+					} else {
 					?><a href="<?php echo get_permalink($post_project->ID); ?>"><?php echo $post_project->post_title; ?></a><?php
+					}
 					$i++;
 				}
 			}
@@ -234,6 +243,24 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		?>
 		    Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br /><br />
 
+		<?php
+		    if ($pending_transfers) :
+		?>
+		    Vous avez un transfert en cours.
+		<?php
+		    else :
+			if ($real_amount_invest > 0) {
+		?>
+		    <form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="mangopaytoaccount" value="1" />
+			<input type="submit" value="Reverser sur mon compte bancaire" class="button" />
+		    </form>
+		    <br /><br />
+		<?php
+			}
+		    endif;
+		?>
+
 		<?php 
 		    $show_strong_auth_form = false;
 		    if ($mp_user->PersonalWalletAmount > 0 && !$mp_user->IsStrongAuthenticated) $show_strong_auth_form = true;
@@ -255,23 +282,6 @@ if (is_user_logged_in() && $display_loggedin_user) :
 				    </form><br /><br />
 			    <?php endif;
 		    endif; 
-		?>
-
-		<?php
-		    if ($pending_transfers) :
-		?>
-		    Vous avez un transfert en cours.
-		<?php
-		    else :
-			if ($real_amount_invest > 0) {
-		?>
-		    <form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="mangopaytoaccount" value="1" />
-			<input type="submit" value="Reverser sur mon compte bancaire" />
-		    </form>
-		<?php
-			}
-		    endif;
 		?>
 
 		<h2 class="underlined"><?php _e( 'Mes transferts d&apos;argent', 'yproject' ); ?></h2>
