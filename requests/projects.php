@@ -160,4 +160,79 @@ class YPProjectLib {
 		wp_insert_post($blog, true);
 		do_action('wdg_delete_cache', array( 'project-'.$post_campaign->ID.'-header' ));
 	}
+	
+	/**
+	 * Gère le formulaire de paramètres projets
+	 */
+	public static function form_validate_edit_parameters() {
+		$buffer = TRUE;
+	    
+		if (!isset($_GET["campaign_id"])) { return FALSE; }
+		$campaign_id = $_GET["campaign_id"];
+		
+		if (!YPProjectLib::current_user_can_edit($campaign_id) 
+				|| !isset($_POST['action'])
+				|| $_POST['action'] != 'edit-project-parameters') {
+			return FALSE;
+		}
+		
+		$title = sanitize_text_field($_POST['project-name']);
+		if (!empty($title)) {
+			wp_update_post(array(
+				'ID' => $campaign_id,
+				'post_title' => $title
+			));
+		} else {
+			$buffer = FALSE;
+		}
+		
+		$cat_cat_id = -1; $cat_act_id = -1;
+		if (isset($_POST['categories'])) { $cat_cat_id = $_POST['categories']; } else { $buffer = FALSE; }
+		if (isset($_POST['activities'])) { $cat_act_id = $_POST['activities']; } else { $buffer = FALSE; }
+		if ($cat_cat_id != -1 && $cat_act_id != -1) {
+			$cat_ids = array_map( 'intval', array($cat_cat_id, $cat_act_id) );
+			wp_set_object_terms($campaign_id, $cat_ids, 'download_category');
+		}
+		
+		if (isset($_POST['project-location'])) {
+			update_post_meta($campaign_id, 'campaign_location', $_POST['project-location']);
+		} else {
+			$buffer = FALSE;
+		}
+		
+		if (isset($_POST['fundingtype'])) { 
+			if ($_POST['fundingtype'] == 'fundingdevelopment' || $_POST['fundingtype'] == 'fundingproject') {
+				update_post_meta($campaign_id, 'campaign_funding_type', $_POST['fundingtype']); 
+			} else {
+				$buffer = FALSE;
+			}
+		}
+		if (isset($_POST['fundingduration'])) { 
+			$duration = $_POST['fundingduration'];
+			if (is_numeric($duration) && $duration > 0 && (int)$duration == $duration) {
+				update_post_meta($campaign_id, 'campaign_funding_duration', $duration); 
+			} else {
+				$buffer = FALSE;
+			}
+		}
+		if (isset($_POST['minimum_goal'])) {
+			$minimum_goal = $_POST['minimum_goal'];
+			if (is_numeric($minimum_goal) && $minimum_goal > 0 && (int)$minimum_goal == $minimum_goal) {
+				update_post_meta($campaign_id, 'campaign_minimum_goal', $minimum_goal); 
+			} else {
+				$buffer = FALSE;
+			}
+		}
+		if (isset($_POST['maximum_goal'])) {
+			$goal = $_POST['maximum_goal'];
+			if (is_numeric($goal) && $goal > 0 && (int)$goal == $goal) {
+				if ($goal < $minimum_goal) $goal = $minimum_goal;
+				update_post_meta($campaign_id, 'campaign_goal', $goal); 
+			} else {
+				$buffer = FALSE;
+			}
+		}
+		    
+		return $buffer;
+	}
 }

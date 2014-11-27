@@ -131,6 +131,39 @@ h4 {
     margin: 0px 0px 10px 155px;
 }
 
+/* FORMS STANDARDS */
+form.wdg-forms {
+	margin: 5px 0px;
+}
+form.wdg-forms label {
+	display: inline-block;
+	margin: 10px 0px;
+	width: 180px;
+	font-weight: bold;
+}
+form.wdg-forms select {
+	width: 180px;
+}
+form.wdg-forms input[type=text] {
+	width: 176px;
+}
+form.wdg-forms input[type=submit] {
+	margin-left: 184px;
+	margin-top: 10px;
+}
+form.wdg-forms input[type=radio] {
+	margin-left: 184px;
+}
+form.wdg-forms input[type=radio].first {
+	margin-left: 0px;
+}
+form.wdg-forms .extra-field {
+	margin-left: 184px;
+}
+/* FIN FORMS STANDARDS */
+
+
+
 /* PROJECT PREVIEW */
 .home-large-project {
     padding: 5px;
@@ -3380,7 +3413,7 @@ div, span, h1, h3, a,  ul, li, p {
 
 
 
-label {
+label.label_sf {
     float: left;
     width: 35%;
     text-align: left;
@@ -3794,7 +3827,7 @@ span.btn_file {
     outline: 6px solid rgba(0, 0, 0, 0.6);
 }
 
-input#image_home::-webkit-file-upload-button, input#image::-webkit-file-upload-button  {
+input#image_home_sf::-webkit-file-upload-button, input#image_sf::-webkit-file-upload-button  {
     background: #48C83E url('http://wedogood.wp/wp-content/themes/yproject/images/lien.png') no-repeat 5px;
     border: none;
     overflow: hidden;
@@ -3838,7 +3871,7 @@ input#submit_image_cover {
     outline: 6px solid rgba(0, 0, 0, 0.6);
 }
 
-input#image_home, input#image {
+input#image_home_sf, input#image_sf {
     cursor: inherit;
     display: block;
     filter: alpha(opacity=0);
