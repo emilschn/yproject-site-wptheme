@@ -237,9 +237,12 @@ $vote_status = $campaign->campaign_status();
 				if (false === $cache_result) {
 					ob_start();
 				?>
-					<p id="title"><?php echo get_the_title(); ?></p>
+					<p id="title">
+						<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/capital.png" alt="Picto Capital" /><br /><?php endif; ?>
+						<?php echo get_the_title(); ?>
+					</p>
 					<p id="subtitle"><?php echo $campaign->subtitle(); ?></p>
-					<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="Fond projet" />
+					<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="Fond projet" class="bg-project" />
 				<?php 
 					$cache_result = ob_get_contents();
 					$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-title', $cache_result);
