@@ -3240,6 +3240,7 @@ div, span, h1, h3, a,  ul, li, p {
     margin: 0px;
 }
 .projects-more{
+    color: #FF494C;
     position: relative;
     cursor: pointer;
     min-height: 20px;
