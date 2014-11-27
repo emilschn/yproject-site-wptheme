@@ -23,6 +23,7 @@ get_header();
 		?>
 		
 		    <?php
+			/*
 			//Virement wallet milgoulle (mpid 2054791) vers matthieu (wpid 63 ; mpid 2054788) & vers wdg (wpid 60 ; mpid 3554029)
 			//Pour Milgoulle : 5302 - 30 (existant) = 5272
 			//Pour WDG : 638
@@ -32,6 +33,8 @@ get_header();
 			    ypcf_mangopay_transfer_project_to_user($current_user, $campaign_id, 638);
 			    //TODO : faire autrement la prochaine fois - gérer les client amount fees
 			}
+			 * 
+			 */
 		    ?>
 		
 		    <h1>Stats Mangopay</h1>
@@ -46,6 +49,7 @@ get_header();
 			    ?>
 			    <li><?php echo 'wp' . $user->ID . ' - mp' .$mp_user->ID . ' -> ' . $mp_user->FirstName . ' ' . $mp_user->LastName . ' (' . $mp_user->Email . ') :: €'.$mp_user->PersonalWalletAmount; ?></li>
 			    <?php
+			    /*
 			    // Matthieu Pires : $mp_user->ID 2054788
 			    if (false && $mp_user->ID == 2054788) {
 				?>
@@ -61,6 +65,8 @@ get_header();
 				</ul>
 				<?php
 			    }
+			     *
+			     */
 			}
 		    ?>
 		    </ul>
@@ -86,6 +92,7 @@ get_header();
 		    </ul>
 		    <?php */ ?>
 		    
+		    <?php /* ?>
 		    <h2>Liste des porte-monnaie projets</h2>
 		    <ul>
 		    <?php 
@@ -98,27 +105,13 @@ get_header();
 				<?php 
 				    echo 'wp' . $post->ID . ' - ' . $mp_wallet->ID . ' - ' . $mp_wallet->Name . ' - ' . $mp_wallet->Amount . ' sur ' . $mp_wallet->RaisingGoalAmount;
 				    echo ' - appartient à ' . $mp_wallet->Owners[0];
-				    
-				    /*
-				?>
-				<ul>
-				    <?php
-				    $operations = ypcf_mangopay_get_operations_by_wallet_id($mp_wallet->ID);
-				    foreach ($operations as $operation) {
-					?>
-					<li><?php print_r($operation); ?></li>
-					<?php
-				    }
-				    ?>
-				</ul>
-				     * 
-				     */
 				?>
 			    </li>
 			    <?php
 			}
 		    ?>
 		    </ul>
+		    <?php */ ?>
 		    
 		    <?php /* ?>
 		    <h2>Liste des contributions</h2>
