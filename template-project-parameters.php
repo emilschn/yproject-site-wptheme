@@ -123,7 +123,7 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 						?>
 
 						<label>Dur&eacute;e du financement :</label>
-						<?php echo $campaign->funding_duration(); ?> ann&eacute;es.
+						<?php echo $campaign->funding_duration(); ?> ann&eacute;es.<br />
 
 						<label>Montant demand&eacute; :</label>
 						<?php $goal = (int)$campaign->goal(false); ?>
