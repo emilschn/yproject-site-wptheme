@@ -3080,10 +3080,22 @@ div, span, h1, h3, a,  ul, li, p {
     padding: 0px 25px;
     padding-bottom: 10px;
 }
-.projects-desc-content p img{
-    width:750px; /* you can use % */
+#projects-bottom-desc .projects-desc-content p img{
+    max-width: 750px;
     height: auto;
  }
+#projects-bottom-desc .projects-desc-content p img.aligncenter {
+    display: block !important;
+    margin: 0px auto;
+}
+#projects-bottom-desc .projects-desc-content p img.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+#projects-bottom-desc .projects-desc-content p img.alignright {
+    float: left;
+    margin: 5px 0 20px 20px;
+}
  #project-description-title-padding {
      clear: both;
  }
@@ -3240,12 +3252,8 @@ div, span, h1, h3, a,  ul, li, p {
     width: 100%;
     margin-top: 15px;
 }
-#share_btn_zone
-{
+#share_btn_zone {
     display:none;
-}
-#share_btn_zone img{
-
 }
 #projects-left-desc{
     width: 580px;

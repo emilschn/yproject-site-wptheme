@@ -32,7 +32,7 @@
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?ver=1.1.003" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?ver=1.1.004" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
 		<?php do_action( 'bp_head' ); ?>

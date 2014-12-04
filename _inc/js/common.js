@@ -507,7 +507,7 @@ WDGProjectPageFunctions=(function($) {
 				//il faut la masquer puis afficher les éléments qui suivent
 				projectMore.hide(400, function(){
 					$('html, body').animate({scrollTop: clickedElement.offset().top - $("#navigation").height()}, "slow"); 
-					clickedElement.find('p, ul').slideDown(400);
+					clickedElement.find('p, ul, table').slideDown(400);
 				});
 				//on masque aussi toutes les autres parties
 				WDGProjectPageFunctions.hideOthers(projectMore.attr("data-value"));
