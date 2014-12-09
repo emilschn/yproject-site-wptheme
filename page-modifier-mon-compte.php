@@ -234,16 +234,6 @@ if (session_id() == '') session_start();
 			    } elseif ($_SESSION['redirect_current_invest_type'] != "user") { 
 					editOrganisation($_SESSION['redirect_current_invest_type']);
 			    }
-			} else {
-			    //Parcourir toutes les organisations
-			    $group_ids = BP_Groups_Member::get_group_ids( $current_user->ID );
-			    foreach ($group_ids['groups'] as $group_id) {
-					$group = groups_get_group( array( 'group_id' => $group_id ) );
-					$group_type = groups_get_groupmeta($group_id, 'group_type');
-					if ($group->status == 'private' && $group_type == 'organisation' && BP_Groups_Member::check_is_admin($current_user->ID, $group_id)) {
-					    editOrganisation($group_id);
-					}
-			    }
 			}
 			?>
 		

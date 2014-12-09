@@ -76,7 +76,7 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 	</div>
 	<br /><br /><br />
 	
-<div id="ajax-loader" class="center" style="text-align: center;"><img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loader.gif"/></div>
+<div id="ajax-loader" class="center" style="text-align: center;"><img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif"/></div>
 
 <?php 
 if (is_user_logged_in() && $display_loggedin_user) :

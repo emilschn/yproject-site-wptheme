@@ -82,6 +82,9 @@ img { border: 0; }
     color: #FE494C;
     text-transform: none !important;
 }
+.success {
+    color: green;
+}
 
 .underlined, .underlined_arrow {
     color: #FF494C;
@@ -150,12 +153,23 @@ form.wdg-forms input[type=text] {
 form.wdg-forms input[type=submit] {
 	margin-left: 184px;
 	margin-top: 10px;
+	background: none repeat scroll 0 0 #333333;
+	border: 1px solid #333333 !important;
+	color: #FFFFFF;
+	padding: 3px 8px;
+	text-transform: uppercase;
+	cursor: pointer;
+	font-weight: normal;
+	font-size: 14px;
 }
 form.wdg-forms input[type=radio] {
 	margin-left: 184px;
 }
 form.wdg-forms input[type=radio].first {
 	margin-left: 0px;
+}
+form.wdg-forms input[type=checkbox] {
+	margin-left: 184px;
 }
 form.wdg-forms .extra-field {
 	margin-left: 184px;
