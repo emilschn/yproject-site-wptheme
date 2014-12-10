@@ -3110,6 +3110,13 @@ div, span, h1, h3, a,  ul, li, p {
     float: left;
     margin: 5px 0 20px 20px;
 }
+#projects-bottom-desc .projects-desc-content table {
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+#projects-bottom-desc .projects-desc-content table td {
+    border: 1px dashed #2B2C2C;
+}
  #project-description-title-padding {
      clear: both;
  }
