@@ -4,7 +4,7 @@ global $disable_logs; $disable_logs = TRUE;
 if (YPProjectLib::current_user_can_edit($_GET['campaign_id'])) {
 	locate_template( array("requests/investments.php"), true );
 	locate_template( array("projects/stats-investments-public.php"), true ); 
-	$investments_list = wdg_get_project_investments($_GET['campaign_id']);
+	$investments_list = wdg_get_project_investments($_GET['campaign_id'], TRUE);
 	print_investments($investments_list);
 ?>
 		

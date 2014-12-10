@@ -1,5 +1,5 @@
 <?php
-function wdg_get_project_investments($camp_id) {
+function wdg_get_project_investments($camp_id, $include_pending = FALSE) {
 	$post_campaign = get_post($camp_id);
 	$campaign = atcf_get_campaign( $post_campaign );
 	$payments_data = $campaign->payments_data();
@@ -23,7 +23,7 @@ function wdg_get_project_investments($camp_id) {
 		'investors_string' => ''
 	);
 	foreach ( $payments_data as $item ) {
-		if (($item['status'] == 'publish') && (isset($item['mangopay_contribution']->IsSucceeded) && $item['mangopay_contribution']->IsSucceeded) && $item['signsquid_status'] == 'Agreed') {
+		if (($item['status'] == 'publish' || ($include_pending && $item['status'] == 'pending')) && (isset($item['mangopay_contribution']->IsSucceeded) && $item['mangopay_contribution']->IsSucceeded) && $item['signsquid_status'] == 'Agreed') {
 			$invest_user = get_user_by('id', $item['user']);
 			$buffer['count_validate_investments']++;
 			if (!isset($buffer['investors_list'][$item['user']])) {

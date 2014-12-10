@@ -18,7 +18,6 @@ get_header();
 
     <div id="content">
 	<div class="padder">
-	    <div class="center">
 		<?php 
 		if ( current_user_can('manage_options') ) :
 		?>
@@ -77,7 +76,7 @@ get_header();
 
 			<tbody id="the-list">
 			    <?php
-			    $payments_data = get_payments_data();
+			    $payments_data = get_payments_data(3268);
 			    $i = -1;
 			    foreach ( $payments_data as $item ) {
 				$i++;
@@ -98,9 +97,16 @@ get_header();
 				ypcf_get_updated_payment_status($item['ID']);
 				
 				$mangopay_id = edd_get_payment_key($item['ID']);
-				$mangopay_contribution = ypcf_mangopay_get_contribution_by_id($mangopay_id);
-				$mangopay_is_completed = (isset($mangopay_contribution->IsCompleted) && $mangopay_contribution->IsCompleted) ? 'Oui' : 'Non';
-				$mangopay_is_succeeded = (isset($mangopay_contribution->IsSucceeded) && $mangopay_contribution->IsSucceeded) ? 'Oui' : 'Non';
+				if (strpos($mangopay_id, 'wire_') !== FALSE) {
+					$mangopay_id = substr($mangopay_id, 5);
+					$mangopay_contribution = ypcf_mangopay_get_withdrawalcontribution_by_id($mangopay_id);
+					$mangopay_is_completed = ($mangopay_contribution->Status == 'ACCEPTED') ? 'Oui' : 'Non';
+					$mangopay_is_succeeded = $mangopay_is_completed;
+				} else {
+					$mangopay_contribution = ypcf_mangopay_get_contribution_by_id($mangopay_id);
+					$mangopay_is_completed = (isset($mangopay_contribution->IsCompleted) && $mangopay_contribution->IsCompleted) ? 'Oui' : 'Non';
+					$mangopay_is_succeeded = (isset($mangopay_contribution->IsSucceeded) && $mangopay_contribution->IsSucceeded) ? 'Oui' : 'Non';
+				}
 				
 				$contractid = ypcf_get_signsquidcontractid_from_invest($item['ID']);
 				$signsquid_infos = signsquid_get_contract_infos_complete($contractid);
@@ -114,7 +120,7 @@ get_header();
 				    <td><?php echo $item['ID']; ?></td>
 				    <td><?php echo edd_get_payment_status( $post_invest, true ); ?></td>
 				    <td><a href="<?php echo add_query_arg( 'id', $item['ID'], admin_url( 'edit.php?post_type=download&page=edd-payment-history&view=view-order-details' ) ); ?>">Détails</a></td>
-				    <td style="max-width: 80px; overflow: hidden;"><?php echo $mangopay_id; ?></td>
+				    <td><?php echo $mangopay_id; ?></td>
 				    <td><?php echo $mangopay_is_completed; ?></td>
 				    <td><?php echo $mangopay_is_succeeded; ?></td>
 				    <td><?php echo $contractid; ?></td>
@@ -138,15 +144,16 @@ get_header();
 			<tfoot style="background-color: #CCC;">
 			<tr>
 			    <td style="max-width: 80px; overflow: hidden;">ID Contribution</td>
-			    <td>Terminé sur MP</td>
 			    <td>Infos MP</td>
 			</tr>
 			</tfoot>
 
 			<tbody id="the-list">
 			    <?php 
-			    $mangopay_id = 2370868;
-			    $mangopay_contribution = ypcf_mangopay_get_contribution_by_id($mangopay_id);
+//			    $mangopay_id = 2370868;
+//			    $mangopay_contribution = ypcf_mangopay_get_contribution_by_id($mangopay_id);
+			    $mangopay_id = 11383090;
+			    $mangopay_contribution = ypcf_mangopay_get_withdrawalcontribution_by_id($mangopay_id);
 			    ?>
 			    <td style="max-width: 80px; overflow: hidden;"><?php echo $mangopay_id; ?></td>
 			    <td><?php print_r($mangopay_contribution); ?></td>
@@ -158,7 +165,6 @@ get_header();
 		    <?php
 		endif;
 		?>
-	    </div>
 	</div>
     </div>
 
