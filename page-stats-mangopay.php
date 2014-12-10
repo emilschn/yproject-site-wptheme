@@ -39,6 +39,7 @@ get_header();
 		
 		    <h1>Stats Mangopay</h1>
 		    
+		    <?php /* ?>
 		    <h2>Liste des utilisateurs</h2>
 		    <ul>
 		    <?php 
@@ -70,6 +71,7 @@ get_header();
 			}
 		    ?>
 		    </ul>
+		    <?php */ ?>
 		    
 		    <?php /* ?>
 		    <h2>Liste des porte-monnaie utilisateurs</h2>

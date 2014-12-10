@@ -130,7 +130,7 @@ get_header();
 				    <td><?php echo $item['ID']; ?></td>
 				    <td><?php echo edd_get_payment_status( $post_invest, true ); ?></td>
 				    <td><a href="<?php echo add_query_arg( 'id', $item['ID'], admin_url( 'edit.php?post_type=download&page=edd-payment-history&view=view-order-details' ) ); ?>">Détails</a></td>
-				    <td style="max-width: 80px; overflow: hidden;"><?php echo $mangopay_id; ?></td>
+				    <td><?php echo $mangopay_id; ?></td>
 				    <td><?php echo $mangopay_is_completed; ?></td>
 				    <td><?php echo $mangopay_is_succeeded; ?></td>
 				    <td><?php echo $contractid; ?></td>
@@ -160,8 +160,14 @@ get_header();
 
 			<tbody id="the-list">
 			    <?php 
+<<<<<<< HEAD
 			    $mangopay_id = 10300325;
 //			    $mangopay_contribution = ypcf_mangopay_get_contribution_by_id($mangopay_id);
+=======
+//			    $mangopay_id = 2370868;
+//			    $mangopay_contribution = ypcf_mangopay_get_contribution_by_id($mangopay_id);
+			    $mangopay_id = 11383090;
+>>>>>>> master
 			    $mangopay_contribution = ypcf_mangopay_get_withdrawalcontribution_by_id($mangopay_id);
 			    ?>
 			    <td style="max-width: 80px; overflow: hidden;"><?php echo $mangopay_id; ?></td>
