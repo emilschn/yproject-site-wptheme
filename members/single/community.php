@@ -71,7 +71,7 @@ if ($str_groups != '') {
 </div>
 
 
-<?php 
+<?php /*
 global $current_user;
 $group_ids = BP_Groups_Member::get_group_ids( $current_user->ID );
 $page_edit_orga = get_page_by_path('editer-une-organisation');
@@ -90,7 +90,7 @@ if ($str_organisations != ''): ?>
 <?php else: ?>
 	<?php _e('Aucune organisation.', 'yproject'); ?>
 
-<?php endif; ?>
+<?php endif; */ ?>
 
 <div class="clear"></div>
 

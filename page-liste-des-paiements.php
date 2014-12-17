@@ -160,14 +160,9 @@ get_header();
 
 			<tbody id="the-list">
 			    <?php 
-<<<<<<< HEAD
-			    $mangopay_id = 10300325;
-//			    $mangopay_contribution = ypcf_mangopay_get_contribution_by_id($mangopay_id);
-=======
 //			    $mangopay_id = 2370868;
 //			    $mangopay_contribution = ypcf_mangopay_get_contribution_by_id($mangopay_id);
 			    $mangopay_id = 11383090;
->>>>>>> master
 			    $mangopay_contribution = ypcf_mangopay_get_withdrawalcontribution_by_id($mangopay_id);
 			    ?>
 			    <td style="max-width: 80px; overflow: hidden;"><?php echo $mangopay_id; ?></td>

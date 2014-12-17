@@ -29,9 +29,21 @@ class YPOrganisationLib {
 		}
 		
 		//Vérification de l'adresse e-mail
-		$org_email = filter_input(INPUT_POST, 'org_email');
+		/*$org_email = filter_input(INPUT_POST, 'org_email');
 		if (bp_core_validate_email_address($org_email) !== TRUE) {
 			$errors_submit_new->add('not-email', __('Cet e-mail n&apos;est pas valide.', 'yproject'));
+		}*/
+		
+		//Vérification du code postal
+		$org_postal_code = filter_input(INPUT_POST, 'org_postal_code', FILTER_VALIDATE_INT);
+		if ($org_postal_code === FALSE) {
+			$errors_submit_new->add('postalcode-not-integer', __('Le code postal doit &ecirc;tre un nombre entier.', 'yproject'));
+		}
+		
+		//Vérification du capital
+		$org_capital = filter_input(INPUT_POST, 'org_capital', FILTER_VALIDATE_INT);
+		if ($org_capital === FALSE) {
+			$errors_submit_new->add('capital-not-integer', __('Le capital doit &ecirc;tre un nombre entier.', 'yproject'));
 		}
 		
 		//On poursuit la procédure
@@ -39,61 +51,30 @@ class YPOrganisationLib {
 			return FALSE;
 		}
 		
-		//On commence par créer un utilisateur qui représentera l'organisation
-		$org_name = filter_input(INPUT_POST, 'org_name');
-		$username = 'org_' . sanitize_title_with_dashes($org_name);
-		$password = wp_generate_password();
-		$organisation_user_id = wp_create_user($username, $password, $org_email);
-
-		//Si il y a eu une erreur lors de la création de l'utilisateur, on arrête la procédure
-		if (isset($organisation_user_id->errors) && count($organisation_user_id->errors) > 0) {
-			$errors_submit_new = $organisation_user_id;
-			return FALSE;
-		}
-
-		//Ajout aux données de l'utilisateur créé
-		wp_update_user( array ( 
-			'ID' => $organisation_user_id, 
-			'first_name' => $org_name,
-			'last_name' => $org_name,
-			'display_name' => $org_name
-		) ) ;
-		update_user_meta($organisation_user_id, 'user_type', 'organisation');
-		YPOrganisation::set_address_by_id($organisation_user_id, filter_input(INPUT_POST, 'org_address'));
-		YPOrganisation::set_nationality_by_id($organisation_user_id, filter_input(INPUT_POST, 'org_nationality'));
-		YPOrganisation::set_postal_code_by_id($organisation_user_id, filter_input(INPUT_POST, 'org_postal_code'));
-		YPOrganisation::set_city_by_id($organisation_user_id, filter_input(INPUT_POST, 'org_city'));
-		YPOrganisation::set_type_by_id($organisation_user_id, 'society');
-		YPOrganisation::set_legalform_by_id($organisation_user_id, filter_input(INPUT_POST, 'org_legalform'));
-		YPOrganisation::set_capital_by_id($organisation_user_id, filter_input(INPUT_POST, 'org_capital'));
-		YPOrganisation::set_idnumber_by_id($organisation_user_id, filter_input(INPUT_POST, 'org_idnumber'));
-		YPOrganisation::set_rcs_by_id($organisation_user_id, filter_input(INPUT_POST, 'org_rcs'));
-
-		//Création d'un groupe pour l'organisation
-		$new_group_id = groups_create_group( array( 
-			'creator_id' => $organisation_user_id,
-			'name' => $org_name,
-			'description' => $org_name,
-			'slug' => groups_check_slug( sanitize_title( esc_attr( $org_name ) ) ), 
-			'date_created' => bp_core_current_time(), 
-			'enable_forum' => 0,
-			'status' => 'private'
-		) );
-		groups_update_groupmeta( $new_group_id, 'group_type', 'organisation');
-
-		//Ajout de l'utilisateur créé et de l'utilisateur en cours dans le groupe (et on les passe admin)
-		groups_accept_invite( $organisation_user_id, $new_group_id);
-		$org_group_member = new BP_Groups_Member($organisation_user_id, $new_group_id);
-		$org_group_member->promote('admin');
-		groups_accept_invite( $current_user->ID, $new_group_id);
-		$current_group_member = new BP_Groups_Member($current_user->ID, $new_group_id);
-		$current_group_member->promote('admin');
+		//Création de l'objet organisation
+		$org_object = new YPOrganisation();
+		$org_object->set_name(filter_input(INPUT_POST, 'org_name'));
+		$org_object->set_address(filter_input(INPUT_POST, 'org_address'));
+		$org_object->set_postal_code($org_postal_code);
+		$org_object->set_city(filter_input(INPUT_POST, 'org_city'));
+		$org_object->set_nationality(filter_input(INPUT_POST, 'org_nationality'));
+		$org_object->set_type('society');
+		$org_object->set_legalform(filter_input(INPUT_POST, 'org_legalform'));
+		$org_object->set_capital($org_capital);
+		$org_object->set_idnumber(filter_input(INPUT_POST, 'org_idnumber'));
+		$org_object->set_rcs(filter_input(INPUT_POST, 'org_rcs'));
+		$org_object->set_ape(filter_input(INPUT_POST, 'org_ape'));
+		$wp_orga_user_id = $org_object->create();
 		
-		$page_edit_orga = get_page_by_path('editer-une-organisation');
-		wp_safe_redirect(get_permalink($page_edit_orga->ID) . '?orga_id=' . $new_group_id);
+		if ($wp_orga_user_id !== FALSE) {
+			$org_object->set_creator($current_user->ID);
+
+			$page_edit_orga = get_page_by_path('editer-une-organisation');
+			wp_safe_redirect(get_permalink($page_edit_orga->ID) . '?orga_id=' . $wp_orga_user_id);
+		}
 	}
 	
-	public static function edit($organisation_obj) {
+	public static function edit($org_object) {
 		global $errors_edit;
 		$errors_edit = new WP_Error();
 		
@@ -113,13 +94,14 @@ class YPOrganisationLib {
 			return FALSE;
 		}
 		
-		$organisation_obj->set_address(filter_input(INPUT_POST, 'org_address'));
-		$organisation_obj->set_nationality(filter_input(INPUT_POST, 'org_nationality'));
-		$organisation_obj->set_postal_code(filter_input(INPUT_POST, 'org_postal_code'));
-		$organisation_obj->set_city(filter_input(INPUT_POST, 'org_city'));
-		$organisation_obj->set_legalform(filter_input(INPUT_POST, 'org_legalform'));
-		$organisation_obj->set_capital(filter_input(INPUT_POST, 'org_capital'));
-		$organisation_obj->set_idnumber(filter_input(INPUT_POST, 'org_idnumber'));
-		$organisation_obj->set_rcs(filter_input(INPUT_POST, 'org_rcs'));
+		$org_object->set_address(filter_input(INPUT_POST, 'org_address'));
+		$org_object->set_nationality(filter_input(INPUT_POST, 'org_nationality'));
+		$org_object->set_postal_code(filter_input(INPUT_POST, 'org_postal_code'));
+		$org_object->set_city(filter_input(INPUT_POST, 'org_city'));
+		$org_object->set_legalform(filter_input(INPUT_POST, 'org_legalform'));
+		$org_object->set_capital(filter_input(INPUT_POST, 'org_capital'));
+		$org_object->set_idnumber(filter_input(INPUT_POST, 'org_idnumber'));
+		$org_object->set_rcs(filter_input(INPUT_POST, 'org_rcs'));
+		$org_object->set_ape(filter_input(INPUT_POST, 'org_ape'));
 	}
 }

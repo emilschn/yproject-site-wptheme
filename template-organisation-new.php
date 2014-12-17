@@ -61,6 +61,9 @@ get_header();
 						<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?></label>
 						<input type="text" name="org_capital" value="<?php echo filter_input(INPUT_POST, 'org_capital'); ?>" /><br />
 
+						<label for="org_ape"><?php _e('Code APE', 'yproject'); ?></label>
+						<input type="text" name="org_ape" value="<?php echo filter_input(INPUT_POST, 'org_ape'); ?>" /><br />
+
 						<label for="org_address"><?php _e('Si&egrave;ge social', 'yproject'); ?></label>
 						<input type="text" name="org_address" value="<?php echo filter_input(INPUT_POST, 'org_address'); ?>" /><br />
 

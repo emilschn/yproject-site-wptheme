@@ -66,8 +66,6 @@ get_header();
 				</ul>
 				<?php
 			    }
-			     *
-			     */
 			}
 		    ?>
 		    </ul>
