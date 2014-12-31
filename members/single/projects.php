@@ -48,13 +48,12 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 			$project_list = BoppUsers::get_projects_by_role($api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
 			if (!empty($project_list)) {
 				$has_projects = true;
-				foreach ($project_list as $project) {
-					$post_project = get_post($project->wp_project_id);	    
+				foreach ($project_list as $project) {	    
 					if ($i > 0) {?> | <?php }
 					if ($display_loggedin_user) { 
-					?><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' . $post_project->ID; ?>"><?php echo $post_project->post_title; ?></a><?php
+					?><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' . $project->project_wp_id; ?>"><?php echo $project->project_name; ?></a><?php
 					} else {
-					?><a href="<?php echo get_permalink($post_project->ID); ?>"><?php echo $post_project->post_title; ?></a><?php
+					?><a href="<?php echo get_permalink($project->project_wp_id); ?>"><?php echo $project->project_name; ?></a><?php
 					}
 					$i++;
 				}

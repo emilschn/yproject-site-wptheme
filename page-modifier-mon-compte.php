@@ -229,15 +229,14 @@ if (session_id() == '') session_start();
 			<?php
 			//Si l'utilisateur veut investir pour une nouvelle organisation
 			if (isset($_SESSION['redirect_current_invest_type'])) {
-			    if ($_SESSION['redirect_current_invest_type'] == "new_organisation") {
+				if ($_SESSION['redirect_current_invest_type'] == "new_organisation") {
 					editOrganisation();
-			    } elseif ($_SESSION['redirect_current_invest_type'] != "user") { 
+				} elseif ($_SESSION['redirect_current_invest_type'] != "user") { 
 					editOrganisation($_SESSION['redirect_current_invest_type']);
-			    }
+				}
 			}
 			?>
-		
-			    
+		   
 			<center><input type="submit" value="Enregistrer les modifications" /></center>
 
 			<?php if (isset($_SESSION['redirect_current_amount_part'])) { ?>
@@ -270,22 +269,20 @@ function editOrganisation($orga_id = false) {
     
     if ($orga_id != '') {
 	$name_suffix = '_' . $orga_id;
-	$group = groups_get_group( array( 'group_id' => $orga_id ) );
-	$org_name = $group->name;
+	$organisation = new YPOrganisation($orga_id);
+	$org_name = $organisation->get_name();
 	$orga_title = 'Informations de l\'organisation <strong>' . $org_name . '</strong>';
-	$organisation_user = get_user_by('id', $group->creator_id);
-	$org_email = $organisation_user->user_email;
-	$org_address = $organisation_user->get('user_address'); 
-	$org_postal_code = $organisation_user->get('user_postal_code'); 
-	$org_city = $organisation_user->get('user_city'); 
-	$org_nationality = $organisation_user->get('user_nationality');
-	$org_legalform = $organisation_user->get('organisation_legalform'); 
-	$org_idnumber = $organisation_user->get('organisation_idnumber'); 
-	$org_rcs = $organisation_user->get('organisation_rcs'); 
-	$org_capital = $organisation_user->get('organisation_capital'); 
+	$organisation_user = $organisation->get_creator();
+	$org_address = $organisation->get_address();
+	$org_postal_code = $organisation->get_postal_code();
+	$org_city = $organisation->get_city();
+	$org_nationality = $organisation->get_nationality();
+	$org_legalform = $organisation->get_legalform();
+	$org_idnumber = $organisation->get_idnumber();
+	$org_rcs = $organisation->get_rcs();
+	$org_capital = $organisation->get_capital();
     } else {
 	if (isset($_POST["new_org_name" . $name_suffix])) $org_name = $_POST["new_org_name" . $name_suffix];
-	if (isset($_POST["new_org_email" . $name_suffix])) $org_email = $_POST["new_org_email" . $name_suffix];
 	if (isset($_POST["new_org_type" . $name_suffix])) $org_type = $_POST["new_org_type" . $name_suffix];
 	if (isset($_POST["new_org_legalform" . $name_suffix])) $org_legalform = $_POST["new_org_legalform" . $name_suffix];
 	if (isset($_POST["new_org_idnumber" . $name_suffix])) $org_idnumber = $_POST["new_org_idnumber" . $name_suffix];
@@ -300,12 +297,6 @@ function editOrganisation($orga_id = false) {
     <h4 style="padding-left: 20px;"><?php echo $orga_title; ?></h4>
 
 	<div id="form_infoperso_projet">
-
-	    <label for="new_org_name<?php echo $name_suffix; ?>" class="standard-label">D&eacute;nomination sociale</label>
-	    <input type="text" name="new_org_name<?php echo $name_suffix; ?>" id="new_org_name" value="<?php echo $org_name; ?>" /><br />
-
-	    <label for="new_org_email<?php echo $name_suffix; ?>" class="standard-label">e-mail de contact</label>
-	    <input type="text" name="new_org_email<?php echo $name_suffix; ?>" id="new_org_email" value="<?php echo $org_email; ?>" /><br />
 
 	    <label for="new_org_type<?php echo $name_suffix; ?>" class="standard-label">Type d&apos;organisation</label>
 	    <em>Pour l&apos;instant, seules les sociétés peuvent investir.</em><br />

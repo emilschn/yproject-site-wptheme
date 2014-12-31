@@ -71,18 +71,14 @@ if ($str_groups != '') {
 </div>
 
 
-<?php /*
-global $current_user;
-$group_ids = BP_Groups_Member::get_group_ids( $current_user->ID );
+<?php
 $page_edit_orga = get_page_by_path('editer-une-organisation');
 $str_organisations = '';
-foreach ($group_ids['groups'] as $group_id) {
-	$group = groups_get_group( array( 'group_id' => $group_id ) );
-	$group_type = groups_get_groupmeta($group_id, 'group_type');
-	if ($group->status == 'private' && $group_type == 'organisation' && BP_Groups_Member::check_is_admin($current_user->ID, $group_id)) {
-		$group = groups_get_group( array( 'group_id' => $group_id ) );
-		$str_organisations .= '<li><a href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$group_id.'">' .$group->name. '</a></li>';
-	}
+global $current_user;
+$api_user_id = BoppLibHelpers::get_api_user_id($current_user->ID);
+$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
+foreach ($organisations_list as $organisation_item) {
+	$str_organisations .= '<li><a href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</a></li>';
 }
 if ($str_organisations != ''): ?>
 	<ul><?php echo $str_organisations; ?></ul>
@@ -90,8 +86,7 @@ if ($str_organisations != ''): ?>
 <?php else: ?>
 	<?php _e('Aucune organisation.', 'yproject'); ?>
 
-<?php endif; */ ?>
-
+<?php endif; ?>
 <div class="clear"></div>
 
 <?php 
