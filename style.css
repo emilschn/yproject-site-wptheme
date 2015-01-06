@@ -134,6 +134,10 @@ h4 {
     margin: 0px 0px 10px 155px;
 }
 
+.wp-list-table td {
+    padding: 0px 5px;
+}
+
 /* FORMS STANDARDS */
 form.wdg-forms {
 	margin: 5px 0px;
@@ -2658,7 +2662,8 @@ div, span, h1, h3, a,  ul, li, p {
     min-height: 252px;
     max-height: 252px;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center left;
+    background-size: 440px;
     margin-bottom: 15px;
 }
 .home-small-project .description-zone {
@@ -2671,7 +2676,8 @@ div, span, h1, h3, a,  ul, li, p {
 .home-small-project .description-summary {
     height: 80px;
     overflow: hidden;
-    font-size: 13px;
+    font-size: 12px;
+    text-align: justify;
 }
 .home-small-project .description-summary a{
     height: 66px;
