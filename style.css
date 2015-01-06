@@ -3100,7 +3100,7 @@ div, span, h1, h3, a,  ul, li, p {
     padding: 0px 25px;
     padding-bottom: 10px;
 }
-#projects-bottom-desc .projects-desc-content p img{
+#projects-bottom-desc .projects-desc-content p img, .projects-desc-content p img{
     max-width: 750px;
     height: auto;
  }
