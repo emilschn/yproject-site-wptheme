@@ -3,7 +3,7 @@ function query_projects_preview($nb=0){
 	return queryHomeProjects($nb,'preview');
 }
 function query_projects_vote($nb=0){
-	return queryHomeProjects($nb,'vote');
+	return queryHomeProjects($nb,'vote','desc');
 }
 function query_projects_collecte($nb=0){
 	return queryHomeProjects($nb,'collecte');
@@ -15,7 +15,7 @@ function query_projects_archive($nb=0){
 	return queryHomeProjects($nb,'archive');
 }
 
-function queryHomeProjects($nb,$type) {
+function queryHomeProjects($nb,$type,$order = 'asc') {
 	$query_options = array(
 		'showposts' => $nb,
 		'post_type' => 'download',
@@ -33,7 +33,7 @@ function queryHomeProjects($nb,$type) {
 			)
 		),
 		'orderby' => 'post_date',
-		'order' => 'asc'
+		'order' => $order
 	);
 	return query_posts( $query_options );
 
