@@ -101,6 +101,28 @@
 			ob_end_clean();
 		}
 		echo $cache_result;
+
+		//PROJETS ECHOUES
+		$cache_result_archived = $WDG_cache_plugin->get_cache('home-archived-projects');
+		if ($cache_result_archived === FALSE) {
+			ob_start(); ?>
+				<div class="part-title-separator">
+					<?php
+					$nb_archived_projects = count(query_projects_archive()); 
+					if ($nb_archived_projects > 0) { ?>
+						<span class="part-title">Projets termin&eacute;s</span>	
+					<?php } ?>
+				</div>
+				<?php if ($nb_archived_projects > 0) { ?>
+					<?php require('projects/home-large.php'); ?>
+				<?php } ?>
+	    
+			<?php 
+			$cache_result = ob_get_contents();
+			$WDG_cache_plugin->set_cache('home-archived-projects', $cache_result, 2*60*60);
+			ob_end_clean();
+		}
+		echo $cache_result;
 	?>
 	</div><!-- .padder -->
 </div><!-- #content -->
