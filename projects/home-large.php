@@ -91,7 +91,7 @@
 					
 				</div>
 
-				<?php if ($campaign_status == 'collecte'): ?>
+				<?php if ($campaign_status == 'collecte' || $campaign_status == 'funded' || $campaign_status == 'archive'): ?>
 				<div class="description-progress">
 					<div class="project_preview_item_progressbg">
 						<div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">

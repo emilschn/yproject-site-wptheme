@@ -29,7 +29,7 @@ $vote_status = $campaign->campaign_status();
 			<div class="projects-description-separator" <?php if($vote_status=='preview')echo 'style="opacity:0;"'?>></div>
 
 			<?php
-			if ($vote_status == 'collecte' || $vote_status == 'funded') {
+			if ($vote_status == 'collecte' || $vote_status == 'funded' || $vote_status == 'archive') {
 				$percent = min(100, $campaign->percent_minimum_completed(false));
 				$width = 250 * $percent / 100;
 			?>
@@ -46,7 +46,7 @@ $vote_status = $campaign->campaign_status();
 					<?php $backers_count = $campaign->backers_count(); ?>
 					<?php echo $backers_count; ?> personne<?php if ($backers_count > 1) { echo 's ont'; } else { echo ' a'; } ?> d&eacute;j&agrave; financ&eacute; ce projet
 				</div>
-				<div class="post_bottom_infos_item" <?php if($vote_status=='funded'){echo "style=opacity:0.5";}?>>
+				<div class="post_bottom_infos_item" <?php if ($vote_status == 'funded' || $vote_status == 'archive'){echo "style=opacity:0.5";}?>>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo horloge" />
 					Plus que <strong><?php echo $campaign->days_remaining(); ?></strong> jours !
 				</div>
