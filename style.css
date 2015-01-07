@@ -3119,6 +3119,8 @@ div, span, h1, h3, a,  ul, li, p {
 #projects-bottom-desc .projects-desc-content table {
     border-spacing: 0px;
     border-collapse: collapse;
+    margin: 0px 25px;
+    width: 755px;
 }
 #projects-bottom-desc .projects-desc-content table td {
     border: 1px dashed #2B2C2C;
