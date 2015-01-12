@@ -30,19 +30,19 @@ if(false===$cache_result){
 			$page_faq = get_page_by_path('descriptif');
 			?>
 			<a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="top-button" id="top-button-sign-in">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/home_btn_inscrivez-vous.png" alt="Inscrivez-vous" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/home_btn_inscrivez-vous.png" alt="inscrivez-vous" />
 				<div class="line1">Inscrivez-vous</div>
 				<div class="line2">pour soutenir les projets de votre choix</div>
 				<div class="line3"><span>Inscription</span></div>
 			</a>
 			<a href="<?php echo get_permalink($page_new_project->ID); ?>" class="top-button" id="top-button-offer-project">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/home_btn_proposez-un-projet.png" alt="Proposez un projet" /><br />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/home_btn_proposez-un-projet.png" alt="proposez un projet" /><br />
 				<div class="line1">Pr&eacute;sentez</div>
 				<div class="line2">votre projet sur WEDOGOOD.co</div>
 				<div class="line3"><span>Proposez un projet</span></div>
 			</a>
 			<a href="<?php echo get_permalink($page_faq->ID); ?>" class="top-button" id="top-button-how-it-works">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/home_btn_comment-ca-marche.png" alt="Comment ca marche" /><br />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/home_btn_comment-ca-marche.png" alt="comment ca marche" /><br />
 				<div class="line1">Des questions ?</div>
 				<div class="line2">Voici les r&eacute;ponses</div>
 				<div class="line3"><span>Comment &ccedil;a marche ?</span></div>
@@ -193,21 +193,21 @@ if(false===$cache_result){
 			<div id="home_middle_desc_left">
 				<p>Soyez acteurs et influenceurs</p>
 				<p>de la communaut&eacute;</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/main.jpg"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/main.jpg" alt="logo main"/>
 				<p>Votez pour les projets les plus impactants</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/pieces.jpg"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/pieces.jpg" alt="logo piece monnaie"/>
 				<p>Investissez &agrave; partir de 10&euro;</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/fusee.jpg"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/fusee.jpg" alt="logo fusée"/>
 				<p>Boostez l&apos;&eacute;conomie positive</p>
 			</div>
 			<div id="home_middle_desc_right">
 				<p>B&eacute;n&eacute;ficiez d'un financement souple</p>
 				<p>et adapt&eacute; &agrave; vos besoins.</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.jpg"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.jpg" alt="logo euro"/>
 				<p>Trouvez un financement pour votre projet</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/hp.jpg"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/hp.jpg" alt="logo megaphone"/>
 				<p>Faites conna&icirc;tre votre projet</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/communaute.jpg"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/communaute.jpg" alt="logo communaute"/>
 				<p>F&eacute;d&eacute;rez une communaut&eacute; sur la dur&eacute;e</p>
 			</div>
 		</div>

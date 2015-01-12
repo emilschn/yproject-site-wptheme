@@ -136,7 +136,7 @@ function yproject_change_user_cap() {
 		$role_subscriber->add_cap( 'edit_others_posts' );
 	}
 }
-add_action('init', 'yproject_change_user_cap');
+add_action('init', 'cp_admin_init');
 
 //Permet de n'afficher que les images uploadées par l'utilisateur en cours
 function yproject_my_files_only( $wp_query ) {
@@ -479,11 +479,11 @@ function print_user_projects(){
 						<div class="project_preview_item_pictos">
 							<div class="project_preview_item_infos">
 							    <div class="project_preview_item_picto" style="width:45px">
-									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="logo horloge" />
 									<?php echo $project['days_remaining']; ?>
 							    </div>
 							    <div class="project_preview_item_picto">
-									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
+									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="logo cible"/>
 									<?php echo $project['minimum_goal']; ?>
 							    </div> 
 							</div>

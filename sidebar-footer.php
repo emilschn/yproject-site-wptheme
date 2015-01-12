@@ -70,18 +70,18 @@
 								?>
 								<li class="menu-item">
 								    <div class="social-icons">
-									<a href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_grenade.png" alt="Compte Facebook" /></a><br />
+									<a href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_grenade.png" alt="compte facebook" /></a><br />
 									<?php if ($facebook_infos) echo $facebook_infos; ?>
 								    </div>
 								    <div class="social-icons">
-									<a href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_grenade.png" alt="Compte Twitter" /></a><br />
+									<a href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_grenade.png" alt="compte twitter" /></a><br />
 									<?php if ($twitter_infos) echo $twitter_infos; ?>
 								    </div>
 								    <?php /*<div class="social-icons">
-									<img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/viadeo_grenade.png" />
+									<img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/viadeo_grenade.png" alt="Envol de fusée" alt="logo viadeo" />
 								    </div>*/ ?>
 								    <div class="social-icons">
-									<a href="<?php echo get_permalink($page_community_blog->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/blog_grenade.png" alt="Blog" /></a>
+									<a href="<?php echo get_permalink($page_community_blog->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/blog_grenade.png" alt="blog" /></a>
 								    </div>
 								    <div style="clear: both"></div>
 								</li>

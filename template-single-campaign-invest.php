@@ -29,7 +29,7 @@
 								if ($page_name == 'paiement') :
 								?>
 								<div id="PaylineForm"></div>
-								<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="Bandeau Mangopay" /></center>
+								<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="bandeau mangopay" /></center>
 								<?php endif; ?>
 							</div>
 						</div>
