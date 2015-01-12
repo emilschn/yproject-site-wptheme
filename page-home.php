@@ -197,7 +197,7 @@ if(false===$cache_result){
 				<p>Votez pour les projets les plus impactants</p>
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/pieces.jpg" alt="logo piece monnaie"/>
 				<p>Investissez &agrave; partir de 10&euro;</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/fusee.jpg" alt="logo fusée"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/fusee.jpg" alt="logo fusee"/>
 				<p>Boostez l&apos;&eacute;conomie positive</p>
 			</div>
 			<div id="home_middle_desc_right">
