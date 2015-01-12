@@ -136,7 +136,7 @@ function yproject_change_user_cap() {
 		$role_subscriber->add_cap( 'edit_others_posts' );
 	}
 }
-add_action('init', 'cp_admin_init');
+add_action('init', 'yproject_change_user_cap');
 
 //Permet de n'afficher que les images uploadées par l'utilisateur en cours
 function yproject_my_files_only( $wp_query ) {

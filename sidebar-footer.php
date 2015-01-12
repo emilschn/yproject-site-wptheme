@@ -78,7 +78,7 @@
 									<?php if ($twitter_infos) echo $twitter_infos; ?>
 								    </div>
 								    <?php /*<div class="social-icons">
-									<img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/viadeo_grenade.png" alt="Envol de fusée" alt="logo viadeo" />
+									<img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/viadeo_grenade.png" alt="logo viadeo" />
 								    </div>*/ ?>
 								    <div class="social-icons">
 									<a href="<?php echo get_permalink($page_community_blog->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/blog_grenade.png" alt="blog" /></a>
