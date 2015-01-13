@@ -9,7 +9,7 @@ if ( !current_user_can('manage_options') ) {
     get_template_part( 404 ); exit();
 }
 global $disable_logs;
-$disable_logs = TRUE;
+//$disable_logs = TRUE;
 
 require_once EDD_PLUGIN_DIR . 'includes/admin/payments/class-payments-table.php';
 get_header(); 
@@ -36,6 +36,16 @@ get_header();
 			 * 
 			 */
 		    ?>
+		    
+		    <?php /*
+		    $user = get_userdata(18);
+		    $download_id = 3268;
+		    $amount = 100;
+		    $payment_id = 3433;
+		    $new_transfer = ypcf_mangopay_transfer_project_to_user($user, $download_id, $amount);
+		    update_post_meta($payment_id, 'refund_wire_id', $new_transfer->ID);
+		    print_r($new_transfer);
+		    */ ?>
 		
 		    <h1>Stats Mangopay</h1>
 		    
@@ -92,7 +102,6 @@ get_header();
 		    </ul>
 		    <?php */ ?>
 		    
-		    <?php /* ?>
 		    <h2>Liste des porte-monnaie projets</h2>
 		    <ul>
 		    <?php 
@@ -111,7 +120,6 @@ get_header();
 			}
 		    ?>
 		    </ul>
-		    <?php */ ?>
 		    
 		    <?php /* ?>
 		    <h2>Liste des contributions</h2>
