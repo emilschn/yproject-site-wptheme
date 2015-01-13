@@ -44,7 +44,7 @@ $campaign_id = $_GET['campaign_id'];
 							<a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><?php _e('Guide de campagne', 'yproject'); ?></a>
 							
 							<?php if ($campaign->google_doc() != ''): ?>
-							<a href="https://docs.google.com/spreadsheets/d/<?php echo $campaign->google_doc(); ?>/edit" target="_blank" class="button"><?php _e('Ouvrir le document de gestion de campagne', 'yproject'); ?></a>
+							<a href="<?php echo $campaign->google_doc(); ?>/edit" target="_blank" class="button"><?php _e('Ouvrir le document de gestion de campagne', 'yproject'); ?></a>
 							<?php endif; ?>
 							<a href="<?php echo $news_link; ?>" class="button"><?php _e('Publier une actualit&eacute;', 'yproject'); ?></a>
 							
@@ -53,7 +53,11 @@ $campaign_id = $_GET['campaign_id'];
 
 						<?php if ($campaign->google_doc() != ''): ?>
 						<div class="google-doc">
-							<iframe src="https://docs.google.com/spreadsheets/d/<?php echo $campaign->google_doc(); ?>/pubhtml?widget=true&amp;headers=false"></iframe>
+							<?php if (strpos('spreadsheet', $campaign->google_doc()) !== FALSE) : ?>
+							<iframe src="<?php echo $campaign->google_doc(); ?>/pubhtml?widget=true&amp;headers=false"></iframe>
+							<?php else : ?>
+							<iframe src="<?php echo $campaign->google_doc(); ?>/pub?embedded=true"></iframe>
+							<?php endif; ?>
 						</div>
 						<?php endif; ?>
 		    
