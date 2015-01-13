@@ -18,6 +18,8 @@ get_header();
 	    
 		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 	    
+			<?php $post->post_title = 'Organisation ' . $organisation_obj->get_name(); ?>
+	    
 			<?php locate_template( array("basic/basic-header.php"), true ); ?>
 	    
 			<div class="center margin-height">

@@ -52,6 +52,7 @@ class YPOrganisationLib {
 		}
 		
 		//Création de l'objet organisation
+		global $current_user;
 		$org_object = new YPOrganisation();
 		$org_object->set_name(filter_input(INPUT_POST, 'org_name'));
 		$org_object->set_address(filter_input(INPUT_POST, 'org_address'));
@@ -68,7 +69,6 @@ class YPOrganisationLib {
 		
 		if ($wp_orga_user_id !== FALSE) {
 			$org_object->set_creator($current_user->ID);
-
 			$page_edit_orga = get_page_by_path('editer-une-organisation');
 			wp_safe_redirect(get_permalink($page_edit_orga->ID) . '?orga_id=' . $wp_orga_user_id);
 		}
