@@ -3,6 +3,7 @@
  * Template Name: Projet Paramètres
  *
  */
+BoppLibHelpers::check_create_role(BoppLibHelpers::$project_organisation_manager_role['slug'], BoppLibHelpers::$project_organisation_manager_role['title']);
 if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parameters();
 ?>
 
@@ -91,6 +92,35 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 						echo $location_str;
 						?>
 					</select><br />
+					
+					<?php
+					// Gestion des organisations
+					$str_organisations = '';
+					global $current_user;
+					$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+					$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+					$api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
+					$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
+					
+					$current_organisation = $current_organisations[0];
+					foreach ($organisations_list as $organisation_item) {
+						$selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
+						$str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
+					}
+					?>
+					<label for="project-organisation">Organisation :</label>
+					    
+					<?php if ($str_organisations != ''): ?>
+						<select name="project-organisation">
+							<option value=""></option>
+							<?php echo $str_organisations; ?>
+						</select>
+
+					<?php else: ?>
+						<?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
+
+					<?php endif; ?><br />
+					
 					
 					<?php if ($campaign->campaign_status() == "preparing") : ?>
 						<label for="fundingtype">Type de financement :</label>

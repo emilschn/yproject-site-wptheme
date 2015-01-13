@@ -169,6 +169,7 @@ class YPProjectLib {
 	    
 		if (!isset($_GET["campaign_id"])) { return FALSE; }
 		$campaign_id = $_GET["campaign_id"];
+		$post_campaign = get_post($campaign_id);
 		
 		if (!YPProjectLib::current_user_can_edit($campaign_id) 
 				|| !isset($_POST['action'])
@@ -196,6 +197,49 @@ class YPProjectLib {
 		
 		if (isset($_POST['project-location'])) {
 			update_post_meta($campaign_id, 'campaign_location', $_POST['project-location']);
+		} else {
+			$buffer = FALSE;
+		}
+		
+		
+		if (isset($_POST['project-organisation'])) {
+			//Récupération de l'ancienne organisation
+			$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+			$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+			$current_organisation = FALSE;
+			if (count($current_organisations) > 0) {
+			    $current_organisation = $current_organisations[0];
+			}
+			
+			$delete = FALSE;
+			$update = FALSE;
+			
+			//On met à jour : si une nouvelle organisation est renseignée et différente de celle d'avant
+			//On supprime : si la nouvelle organisation renseignée est différente de celle d'avant
+			if (!empty($_POST['project-organisation'])) {
+				$organisation_selected = new YPOrganisation($_POST['project-organisation']);
+				if ($current_organisation === FALSE || $current_organisation->organisation_wpref != $organisation_selected->get_wpref()) {
+					$update = TRUE;
+					if ($current_organisation !== FALSE) {
+						$delete = TRUE;
+					}
+				}
+				
+			//On supprime : si rien n'est sélectionné + il y avait quelque chose avant
+			} else {
+				if ($current_organisation !== FALSE) {
+					$delete = TRUE;
+				}
+			}
+			
+			if ($delete) {
+				BoppLib::unlink_organisation_from_project($api_project_id, $current_organisation->id);
+			}
+				
+			if ($update) {
+				$api_organisation_id = $organisation_selected->get_bopp_id();
+				BoppLib::link_organisation_to_project($api_project_id, $api_organisation_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+			}
 		} else {
 			$buffer = FALSE;
 		}

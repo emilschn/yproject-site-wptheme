@@ -49,24 +49,28 @@ $vote_status = html_entity_decode($campaign->vote());
 	<div id="projects-right-desc" class="right" >
 		<div id="project-owner">
 			<?php 
-			$author_id=get_the_author_meta('ID');
-//			UIHelpers::print_user_avatar($author_id);
-			$author=get_user_meta($author_id);
+			$owner_str = '';
+			$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+			$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+			if (count($current_organisations) > 0) {
+				$current_organisation = $current_organisations[0];
+				$owner_str = $current_organisation->organisation_name . '<br />';
+			} else {
+//				UIHelpers::print_user_avatar($author_id);
+				$author = get_userdata($post_campaign->post_author);
+				$owner_str = $author->user_firstname . ' ' . $author->user_lastname . '<br />';
+//				$owner_str .= '@' . $author->user_nickname;
+			}
 			?>
+		    
 			<div id="project-owner-desc" style="width: 100%; text-align: center;">
-				<?php echo $author['last_name'][0] . ' ' . $author['first_name'][0]; ?><br />
-				<?php echo '@'.$author['nickname'][0]; ?>
-				<?php
-				
-//				echo '<p>'.$author['last_name'][0].' '.$author['first_name'][0].'</p>';
-//				echo '<p>@'.$author['nickname'][0].'</p>';
-				?>
+				<?php echo $owner_str; ?>
 			</div>
 		</div>
 
 		<div id="project-about">
-			<p> A propos de<p>
-			<p>  <?php echo get_the_title(); ?> </p>
+			<p>A propos de<p>
+			<p><?php echo get_the_title(); ?></p>
 		</div>
 		<div id="project-map">
 			<?php $cursor_top_position=get_post_meta($post->ID,'campaign_cursor_top_position',TRUE); ?>
