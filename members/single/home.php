@@ -26,23 +26,23 @@ $page_modify = get_page_by_path('modifier-mon-compte');
 		<div class="center">
 		    
 			<ul id="item-submenu">
-				<li id="item-submenu-activity" class="selected"><a href="#activity"><?php _e("Activit&eacute;s", "yproject"); ?></a></li>
-				<li id="item-submenu-projects"><a href="#projects"><?php _e("Projets et investissements", "yproject"); ?></a></li>
+				<li id="item-submenu-projects" class="selected"><a href="#projects"><?php _e("Projets et investissements", "yproject"); ?></a></li>
 				<li id="item-submenu-community"><a href="#community"><?php _e("Communaut&eacute;", "yproject"); ?></a></li>
+				<li id="item-submenu-activity"><a href="#activity"><?php _e("Activit&eacute;s", "yproject"); ?></a></li>
 			</ul>
 
 
 			<div id="item-body">
-				<div id="item-body-activity" class="item-body-tab">
-					<?php locate_template( array( 'members/single/activity.php'  ), true ); ?>
-				</div>
-
-				<div id="item-body-projects" class="item-body-tab" style="display:none">
+				<div id="item-body-projects" class="item-body-tab">
 					<?php locate_template( array( 'members/single/projects.php'  ), true ); ?>
 				</div>
 
 				<div id="item-body-community" class="item-body-tab" style="display:none">
 					<?php locate_template( array( 'members/single/community.php'  ), true ); ?>
+				</div>
+			    
+				<div id="item-body-activity" class="item-body-tab" style="display:none">
+					<?php locate_template( array( 'members/single/activity.php'  ), true ); ?>
 				</div>
 			</div>
 

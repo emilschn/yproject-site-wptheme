@@ -69,8 +69,7 @@ class YPOrganisationLib {
 		
 		if ($wp_orga_user_id !== FALSE) {
 			$org_object->set_creator($current_user->ID);
-			$page_edit_orga = get_page_by_path('editer-une-organisation');
-			wp_safe_redirect(get_permalink($page_edit_orga->ID) . '?orga_id=' . $wp_orga_user_id);
+			wp_safe_redirect(bp_loggedin_user_domain() . '#community');
 		}
 	}
 	

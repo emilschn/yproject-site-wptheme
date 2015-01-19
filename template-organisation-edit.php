@@ -67,7 +67,8 @@ get_header();
 							<label for="org_ape"><?php _e('Code APE', 'yproject'); ?></label>
 							<input type="text" name="org_ape" value="<?php echo $organisation_obj->get_ape(); ?>" /><br />
 
-							<label for="org_address"><?php _e('Si&egrave;ge social', 'yproject'); ?></label>
+							<h2><?php _e('Si&egrave;ge social', 'yproject'); ?></h2>
+							<label for="org_address"><?php _e('Adresse', 'yproject'); ?></label>
 							<input type="text" name="org_address" value="<?php echo $organisation_obj->get_address(); ?>" /><br />
 
 							<label for="org_postal_code"><?php _e('Code postal', 'yproject'); ?></label>
