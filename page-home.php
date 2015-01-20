@@ -18,35 +18,29 @@ if(false===$cache_result){
 	ob_start();
  ?>
 <header class="align-center header_home">
-	<section id="site_name2" class="center">
-		<div id="welcome_text">
-			<?php the_content(); ?>
-		</div>
+	<section id="site_name2" >
 
 		<nav class="home_intro">
-			<?php 
+			<?php
 			$page_connexion_register = get_page_by_path('register');
 			$page_new_project = get_page_by_path('proposer-un-projet');
 			$page_faq = get_page_by_path('descriptif');
 			?>
-			<a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="top-button" id="top-button-sign-in">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/home_btn_inscrivez-vous.png" alt="Inscrivez-vous" />
-				<div class="line1">Inscrivez-vous</div>
-				<div class="line2">pour soutenir les projets de votre choix</div>
-				<div class="line3"><span>Inscription</span></div>
-			</a>
-			<a href="<?php echo get_permalink($page_new_project->ID); ?>" class="top-button" id="top-button-offer-project">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/home_btn_proposez-un-projet.png" alt="Proposez un projet" /><br />
-				<div class="line1">Pr&eacute;sentez</div>
-				<div class="line2">votre projet sur WEDOGOOD.co</div>
-				<div class="line3"><span>Proposez un projet</span></div>
-			</a>
-			<a href="<?php echo get_permalink($page_faq->ID); ?>" class="top-button" id="top-button-how-it-works">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/home_btn_comment-ca-marche.png" alt="Comment ca marche" /><br />
-				<div class="line1">Des questions ?</div>
-				<div class="line2">Voici les r&eacute;ponses</div>
-				<div class="line3"><span>Comment &ccedil;a marche ?</span></div>
-			</a>
+		<div  id="welcome_text" >
+			<?php the_content();?>
+<?php if ( is_user_logged_in() ) { ?>
+
+<?php global $current_user; get_currentuserinfo(); ?>
+
+<p dir="ltr" style="text-align: left; margin-left: 600px; margin-top: 20px; font-weight: bold">Bonjour <?php echo $current_user->user_firstname;?></p>
+
+<?php } else {   ?>
+<div id="header_homepage_link">
+<a href="http://wedogood.co/register" class="button">Inscription</a>
+<a href="http://wedogood.co/connexion" class="button">Connexion</a>
+</div>
+<?php } ?>
+		</div>
 		</nav>
 	</section>
 </header>

@@ -708,6 +708,7 @@ div#home_bottom h1 {
     padding: 5px 0px 5px 0px;
     text-transform: uppercase;
 }
+
 /* FIN REGISTER PAGE */     
         
 /* CONNEXION PAGE */        
@@ -1330,6 +1331,7 @@ ul.activity-list p {
 }
 /* FIN LIGHTBOX CGU + DEJA CONNECTE */
 
+
 /* NAV */
 #navigation {
     background-color: #333333;
@@ -1582,6 +1584,12 @@ header.header_home {
 }
 
 /* HEADER ACCUEIL */
+
+#header_homepage_link {
+    margin-left: 650px;
+	margin-top: 25px;
+}
+
 #site_name2 {
     padding-top: 0px;
     height: 350px;
@@ -1609,7 +1617,7 @@ header.header_home {
 }
 
 .home_intro {
-    color: #FFF;
+    color: #000;
     text-align: left;
     margin: 0 auto;
     width: 910px;
@@ -1663,6 +1671,7 @@ header.header_home {
     font-family: Arial, sans-serif;
     font-size: 11pt;
 }
+
 /* FIN HEADER ACCUEIL */
 
 /* HEADER AUTRES */
