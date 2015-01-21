@@ -187,21 +187,21 @@ if(false===$cache_result){
 			<div id="home_middle_desc_left">
 				<p>Soyez acteurs et influenceurs</p>
 				<p>de la communaut&eacute;</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/main.jpg"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/main.jpg" alt="logo main"/>
 				<p>Votez pour les projets les plus impactants</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/pieces.jpg"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/pieces.jpg" alt="logo piece monnaie"/>
 				<p>Investissez &agrave; partir de 10&euro;</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/fusee.jpg"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/fusee.jpg" alt="logo fusee"/>
 				<p>Boostez l&apos;&eacute;conomie positive</p>
 			</div>
 			<div id="home_middle_desc_right">
 				<p>B&eacute;n&eacute;ficiez d'un financement souple</p>
 				<p>et adapt&eacute; &agrave; vos besoins.</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.jpg"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.jpg" alt="logo euro"/>
 				<p>Trouvez un financement pour votre projet</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/hp.jpg"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/hp.jpg" alt="logo megaphone"/>
 				<p>Faites conna&icirc;tre votre projet</p>
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/communaute.jpg"/>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/communaute.jpg" alt="logo communaute"/>
 				<p>F&eacute;d&eacute;rez une communaut&eacute; sur la dur&eacute;e</p>
 			</div>
 		</div>

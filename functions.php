@@ -1,11 +1,14 @@
 <?php
 // Transforme un tag en meta keyword
 function csv_tags() {
-	$posttags = get_the_tags();
-	foreach((array)$posttags as $tag) {
-		$csv_tags .= $tag->name . ',';
+		$posttags = get_the_tags();
+	if ($posttags) {
+		foreach((array)$posttags as $tag) {
+			$csv_tags .= $tag->name . ',';
+		}
+		echo '<meta name="keywords" content="'.$csv_tags.'" />';
+		
 	}
-	echo '<meta name="keywords" content="'.$csv_tags.'" />';
 }
 
 //possibilité de mettre tag aux pages
@@ -502,11 +505,11 @@ function print_user_projects(){
 						<div class="project_preview_item_pictos">
 							<div class="project_preview_item_infos">
 							    <div class="project_preview_item_picto" style="width:45px">
-									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
+									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="logo horloge" />
 									<?php echo $project['days_remaining']; ?>
 							    </div>
 							    <div class="project_preview_item_picto">
-									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />
+									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="logo cible"/>
 									<?php echo $project['minimum_goal']; ?>
 							    </div> 
 							</div>

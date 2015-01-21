@@ -126,7 +126,7 @@ function printSinglePreview($i, $vote) {
     <div class="projects_preview<?php if ($vote) { ?> projects_vote<?php } else { ?> projects_current projects_current_temp<?php } ?>">
 	<div class="preview_item_<?php echo $post->ID; ?> project_preview_item<?php if (($vote && $i > 0) || (!$vote && $i > 2)) echo ' mobile_hidden'; ?>">
 	    <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-	    <span><a href="<?php the_permalink(); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" border="0" /></a></span>
+	    <span><a href="<?php the_permalink(); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" border="0" alt="signe plus"/></a></span>
 
 	    <?php
 	    if (WP_DEBUG) {$debug_src = 'http://localhost/taffe/wp-yproject-site/wp-content/themes/yproject/todo.jpg';}
@@ -150,7 +150,7 @@ function printSinglePreview($i, $vote) {
 		<div class="project_preview_item_part">
 		    <div class="project_preview_item_pictos">
 		    <div class="project_preview_item_picto">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="Logo France" />
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" />
 			<?php 
 			    $campaign_location = $campaign->location();
 			    $exploded = explode(' ', $campaign_location);
@@ -159,15 +159,15 @@ function printSinglePreview($i, $vote) {
 			?>
 		    </div>
 		    <div class="project_preview_item_picto">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" />
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="logo horloge" />
 			<?php echo $days_remaining; ?>
 		    </div>
 		    <div class="project_preview_item_picto">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo Cible" />
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="logo cible" />
 			<?php echo $campaign->minimum_goal(true); ?>
 		    </div>
 		    <div class="project_preview_item_picto">
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" />
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="logo jy crois" />
 			<?php echo $campaign->get_jycrois_nb(); ?>
 		    </div>
 		    <div style="clear: both"></div>

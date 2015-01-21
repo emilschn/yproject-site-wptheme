@@ -63,8 +63,8 @@
 					<?php /* Menu Blog */ $page_blog = get_page_by_path('blog'); ?>
 					<li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_blog->ID); ?>"><?php echo __('Blog', 'yproject'); ?></a></span></li>
 					<?php /* Logo FB / TW */ ?>
-					<li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.png" width="20" height="20" alt="facebook" /></a></li>
-					<li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.png" width="20" height="20" alt="twitter" /></a></li>
+					<li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.png" width="20" height="20" alt="logo facebook" /></a></li>
+					<li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.png" width="20" height="20" alt="logo twitter" /></a></li>
 					<?php
 						$cache_result = ob_get_contents();
 						$WDG_cache_plugin->set_cache('header-content',$cache_result,60*60*24);
@@ -99,11 +99,11 @@
 				<li class="page_item_out">
 					<div id="submenu_item_connection_register"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
 					<hr />
-					<div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook_connexion.jpg" width="25" height="25" alt="Connexion Facebook" /><span>&nbsp;Se connecter avec Facebook</span></a></div>
+					<div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook_connexion.jpg" width="25" height="25" alt="connexion facebook" /><span>&nbsp;Se connecter avec Facebook</span></a></div>
 					<div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
 					<hr /> 
 				   
-					<div id="submenu_item_connection_login"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_noir_connexion.jpg" width="25" height="25" alt="Triangle noir" />&nbsp;Connexion</div>
+					<div id="submenu_item_connection_login"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_noir_connexion.jpg" width="25" height="25" alt="triangle noir" />&nbsp;Connexion</div>
 					<form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
 					<input type="text" name="log" id="sidebar-user-login" class="input" placeholder="Identifiant ou e-mail" />
 					<br />
