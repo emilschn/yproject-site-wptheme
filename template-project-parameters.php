@@ -118,8 +118,12 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 
 					<?php else: ?>
 						<?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
+						<input type="hidden" name="project-organisation" value="" />
 
-					<?php endif; ?><br />
+					<?php endif; ?>
+					
+					<input type="submit" name="new_orga" value="Cr&eacute;er une organisation" class="small-margin button" />
+					<br />
 					
 					
 					<?php if ($campaign->campaign_status() == "preparing") : ?>

@@ -49,34 +49,33 @@ get_header();
 						<label for="org_type"><?php _e('Type d&apos;organisation', 'yproject'); ?></label>
 						<em>Pour l&apos;instant, seules les sociétés peuvent investir.</em><br />
 
-						<label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?></label>
+						<label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?>*</label>
 						<input type="text" name="org_legalform" value="<?php echo filter_input(INPUT_POST, 'org_legalform'); ?>" /><br />
 
-						<label for="org_idnumber"><?php _e('Num&eacute;ro d&apos;immatriculation', 'yproject'); ?></label>
+						<label for="org_idnumber"><?php _e('Num&eacute;ro d&apos;immatriculation', 'yproject'); ?>*</label>
 						<input type="text" name="org_idnumber" value="<?php echo filter_input(INPUT_POST, 'org_idnumber'); ?>" /><br />
 
-						<label for="org_rcs"><?php _e('RCS', 'yproject'); ?></label>
+						<label for="org_rcs"><?php _e('RCS', 'yproject'); ?>*</label>
 						<input type="text" name="org_rcs" value="<?php echo filter_input(INPUT_POST, 'org_rcs'); ?>" /><br />
 
 						<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?></label>
 						<input type="text" name="org_capital" value="<?php echo filter_input(INPUT_POST, 'org_capital'); ?>" /><br />
 
-						<label for="org_ape"><?php _e('Code APE', 'yproject'); ?></label>
+						<label for="org_ape"><?php _e('Code APE', 'yproject'); ?>*</label>
 						<input type="text" name="org_ape" value="<?php echo filter_input(INPUT_POST, 'org_ape'); ?>" /><br />
 
 						<h2><?php _e('Si&egrave;ge social', 'yproject'); ?></h2>
-						<label for="org_address"><?php _e('Adresse', 'yproject'); ?></label>
+						<label for="org_address"><?php _e('Adresse', 'yproject'); ?>*</label>
 						<input type="text" name="org_address" value="<?php echo filter_input(INPUT_POST, 'org_address'); ?>" /><br />
 
-						<label for="org_postal_code"><?php _e('Code postal', 'yproject'); ?></label>
+						<label for="org_postal_code"><?php _e('Code postal', 'yproject'); ?>*</label>
 						<input type="text" name="org_postal_code" value="<?php echo filter_input(INPUT_POST, 'org_postal_code'); ?>" /><br />
 
-						<label for="org_city"><?php _e('Ville', 'yproject'); ?></label>
+						<label for="org_city"><?php _e('Ville', 'yproject'); ?>*</label>
 						<input type="text" name="org_city" value="<?php echo filter_input(INPUT_POST, 'org_city'); ?>" /><br />
 
-						<label for="org_nationality"><?php _e('Pays', 'yproject'); ?></label>
+						<label for="org_nationality"><?php _e('Pays', 'yproject'); ?>*</label>
 						<select name="org_nationality" id="org_nationality">
-							<option value=""></option>
 							<?php 
 							require_once("country_list.php");
 							global $country_list;
@@ -85,7 +84,22 @@ get_header();
 								<option value="<?php echo $country_code; ?>" <?php if ($country_code == $selected_country) { echo 'selected="selected"'; } ?>><?php echo $country_name; ?></option>
 							<?php endforeach; ?>
 						</select><br />
+						
+						
+						<h2><?php _e('Informations bancaires - si vous souhaitez faire un virement d&apos;une somme obtenue', 'yproject'); ?></h2>
+						<label for="org_bankownername"><?php _e('Nom du propri&eacute;taire du compte', 'yproject'); ?></label>
+						<input type="text" name="org_bankownername" value="<?php echo filter_input(INPUT_POST, 'org_bankownername'); ?>" /> <br />
 
+						<label for="org_bankowneraddress"><?php _e('Adresse du compte', 'yproject'); ?></label>
+						<input type="text" name="org_bankowneraddress" value="<?php echo filter_input(INPUT_POST, 'org_bankowneraddress'); ?>" /> <br />
+
+						<label for="org_bankowneriban"><?php _e('IBAN', 'yproject'); ?></label>
+						<input type="text" name="org_bankowneriban" value="<?php echo filter_input(INPUT_POST, 'org_bankowneriban'); ?>" /> <br />
+
+						<label for="org_bankownerbic"><?php _e('BIC', 'yproject'); ?></label>
+						<input type="text" name="org_bankownerbic" value="<?php echo filter_input(INPUT_POST, 'org_bankownerbic'); ?>" /> <br />
+
+						    
 						<input type="checkbox" name="org_capable" /><?php _e('Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette organisation.', 'yproject'); ?><br />
 
 						<input type="hidden" name="action" value="submit-new-organisation" />

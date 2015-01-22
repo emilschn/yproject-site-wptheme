@@ -178,6 +178,9 @@ form.wdg-forms input[type=checkbox] {
 form.wdg-forms .extra-field {
 	margin-left: 184px;
 }
+form.wdg-forms .small-margin {
+	margin-left: 15px !important;
+}
 /* FIN FORMS STANDARDS */
 
 

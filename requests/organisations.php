@@ -46,6 +46,19 @@ class YPOrganisationLib {
 			$errors_submit_new->add('capital-not-integer', __('Le capital doit &ecirc;tre un nombre entier.', 'yproject'));
 		}
 		
+		//Vérification des données obligatoires
+		$necessary_fields = array('org_name', 'org_address', 'org_city', 'org_nationality', 'org_legalform', 'org_idnumber', 'org_rcs', 'org_ape');
+		$necessary_fields_full = TRUE;
+		foreach ($necessary_fields as $field) {
+			$value = filter_input(INPUT_POST, $field);
+			if (empty($value)) {
+				$necessary_fields_full = FALSE;
+			}
+		}
+		if (!$necessary_fields_full) {
+			$errors_submit_new->add('empty-fields', __('Certains champs obligatoires sont vides. Veuillez les renseigner.', 'yproject'));
+		}
+		
 		//On poursuit la procédure
 		if (count($errors_submit_new->errors) > 0) {
 			return FALSE;
@@ -54,6 +67,7 @@ class YPOrganisationLib {
 		//Création de l'objet organisation
 		global $current_user;
 		$org_object = new YPOrganisation();
+		$org_object->set_strong_authentication(FALSE);
 		$org_object->set_name(filter_input(INPUT_POST, 'org_name'));
 		$org_object->set_address(filter_input(INPUT_POST, 'org_address'));
 		$org_object->set_postal_code($org_postal_code);
@@ -65,11 +79,24 @@ class YPOrganisationLib {
 		$org_object->set_idnumber(filter_input(INPUT_POST, 'org_idnumber'));
 		$org_object->set_rcs(filter_input(INPUT_POST, 'org_rcs'));
 		$org_object->set_ape(filter_input(INPUT_POST, 'org_ape'));
+		$org_object->set_bank_owner(filter_input(INPUT_POST, 'org_bankownername'));
+		$org_object->set_bank_address(filter_input(INPUT_POST, 'org_bankowneraddress'));
+		$org_object->set_bank_iban(filter_input(INPUT_POST, 'org_bankowneriban'));
+		$org_object->set_bank_bic(filter_input(INPUT_POST, 'org_bankownerbic'));
 		$wp_orga_user_id = $org_object->create();
 		
 		if ($wp_orga_user_id !== FALSE) {
 			$org_object->set_creator($current_user->ID);
-			wp_safe_redirect(bp_loggedin_user_domain() . '#community');
+			if (session_id() == '') session_start();
+			if (isset($_SESSION['redirect_current_invest_type']) && $_SESSION['redirect_current_invest_type'] == 'new_organisation') {
+				$_SESSION['redirect_current_invest_type'] = $wp_orga_user_id;
+				wp_redirect(ypcf_login_gobackinvest_url());
+				exit();
+				
+			} else {
+				wp_safe_redirect(bp_loggedin_user_domain() . '#community');
+				exit();
+			}
 		}
 	}
 	
@@ -102,5 +129,17 @@ class YPOrganisationLib {
 		$org_object->set_idnumber(filter_input(INPUT_POST, 'org_idnumber'));
 		$org_object->set_rcs(filter_input(INPUT_POST, 'org_rcs'));
 		$org_object->set_ape(filter_input(INPUT_POST, 'org_ape'));
+		$org_object->set_bank_owner(filter_input(INPUT_POST, 'org_bankownername'));
+		$org_object->set_bank_address(filter_input(INPUT_POST, 'org_bankowneraddress'));
+		$org_object->set_bank_iban(filter_input(INPUT_POST, 'org_bankowneriban'));
+		$org_object->set_bank_bic(filter_input(INPUT_POST, 'org_bankownerbic'));
+		
+		$wp_organisation_user = get_user_by('id', $org_object->get_wpref());
+		$url_request = ypcf_init_mangopay_user_strongauthentification($wp_organisation_user);
+		$curl_result_cni = (isset($_FILES['org_file_cni']['tmp_name'])) ? ypcf_mangopay_send_strong_authentication($url_request, 'org_file_cni') : false;
+		$curl_result_status = (isset($_FILES['org_file_status']['tmp_name'])) ? ypcf_mangopay_send_strong_authentication($url_request, 'org_file_status') : false;
+		$curl_result_extract = (isset($_FILES['org_file_extract']['tmp_name'])) ? ypcf_mangopay_send_strong_authentication($url_request, 'org_file_extract') : false;
+		if (isset($_FILES['org_file_declaration']['tmp_name'])) ypcf_mangopay_send_strong_authentication($url_request, 'org_file_declaration');
+		if ($curl_result_cni && $curl_result_status && $curl_result_extract) ypcf_mangopay_set_user_strong_authentication_doc_transmitted($wp_organisation_user->ID);
 	}
 }

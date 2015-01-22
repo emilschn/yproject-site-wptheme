@@ -79,7 +79,6 @@ get_header();
 
 							<label for="org_nationality"><?php _e('Pays', 'yproject'); ?></label>
 							<select name="org_nationality" id="org_nationality">
-								<option value=""></option>
 								<?php 
 								require_once("country_list.php");
 								global $country_list;
@@ -88,7 +87,62 @@ get_header();
 									<option value="<?php echo $country_code; ?>" <?php if ($country_code == $selected_country) { echo 'selected="selected"'; } ?>><?php echo $country_name; ?></option>
 								<?php endforeach; ?>
 							</select><br />
+						
+						
+							<h2><?php _e('Informations bancaires - si vous souhaitez faire un virement d&apos;une somme obtenue', 'yproject'); ?></h2>
+							<label for="org_bankownername"><?php _e('Nom du propri&eacute;taire du compte', 'yproject'); ?></label>
+							<input type="text" name="org_bankownername" value="<?php echo $organisation_obj->get_bank_owner(); ?>" /> <br />
 
+							<label for="org_bankowneraddress"><?php _e('Adresse du compte', 'yproject'); ?></label>
+							<input type="text" name="org_bankowneraddress" value="<?php echo $organisation_obj->get_bank_address(); ?>" /> <br />
+
+							<label for="org_bankowneriban"><?php _e('IBAN', 'yproject'); ?></label>
+							<input type="text" name="org_bankowneriban" value="<?php echo $organisation_obj->get_bank_iban(); ?>" /> <br />
+
+							<label for="org_bankownerbic"><?php _e('BIC', 'yproject'); ?></label>
+							<input type="text" name="org_bankownerbic" value="<?php echo $organisation_obj->get_bank_bic(); ?>" /> <br />
+
+							
+							<h2><?php _e('Pi&egrave;ces d&apos;identit&eacute;', 'yproject'); ?></h2>
+							
+							
+							<?php 
+							$organisation_obj->check_strong_authentication();
+							$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status($organisation_obj->get_wpref());
+							if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
+							
+							switch ($organisation_obj->get_strong_authentication()) {
+								case '0':
+							?>
+								Afin de lutter contre le blanchiment d&apos;argent, pour tout investissement de plus de <strong><?php echo YP_STRONGAUTH_AMOUNT_LIMIT; ?>&euro;</strong> sur l&apos;ann&eacute;e, nous devons transmettre les pi&egrave;ces d&apos;identit&eacute; suivantes &agrave; notre partenaire Mangopay
+								(Les fichiers doivent &ecirc;tre de type jpeg, gif, png ou pdf et leur poids inf&eacute;rieur &agrave; 2 Mo) :<br /><br />
+
+								<label for="org_file_cni">CNI et fonction de la personne physique qui agit pour son compte</label>
+								<input type="file"name="org_file_cni" /> <br />
+
+								<label for="org_file_status">Statuts sign&eacute;s</label>
+								<input type="file"name="org_file_status" /> <br />
+
+								<label for="org_file_extract">Extrait du registre de commerce datant de moins de 3 mois</label>
+								<input type="file"name="org_file_extract" /> <br />
+
+								<label for="org_file_declaration">D&eacute;claration de b&eacute;n&eacute;ficiaire &eacute;conomique (si on n&apos;identifie pas d&apos;actionnaires personnes physiques dans les statuts)</label>
+								<input type="file"name="org_file_declaration" /><br />
+							<?php
+								    break;
+								case '1':
+							?>
+								Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Mangopay. Vous pouvez maintenant investir les sommes que vous souhaitez.<br /><br />
+							<?php
+								    break;
+								case '5':
+							?>
+								Les fichiers permettant de valider vos investissements sont en cours d&apos;&eacute;tude chez notre partenaire Mangopay. Merci de votre compr&eacute;hension.<br /><br />
+							<?php
+								    break;
+							}
+							?>
+							
 							<input type="hidden" name="action" value="edit-organisation" />
 
 							<input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" />
