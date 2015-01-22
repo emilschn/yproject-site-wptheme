@@ -4,9 +4,8 @@ $this_category_name = $this_category->name;
 $name_exploted = explode('cat', $this_category_name);
 $campaign_post = get_post($name_exploted[1]);
 $campaign = atcf_get_campaign( $campaign_post );
-global $post, $can_modify, $campaign_id;
+global $can_modify, $campaign_id;
 $campaign_id = $name_exploted[1];
-$post = $campaign_post;
 $page_edit_news = get_page_by_path('editer-une-actu');
 locate_template( array("requests/projects.php"), true );
 if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
@@ -41,6 +40,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 
 					<label for="postcontent"><?php _e( 'Contenu', 'ypcf' ); ?></label>
 					<?php
+					global $post_ID, $post;
+					$post_ID = $post = 0;
 					wp_editor( '', 'postcontent', 
 						array(
 							'media_buttons' => true,

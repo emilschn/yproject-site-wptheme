@@ -146,7 +146,7 @@ class YPProjectLib {
 		$current_user = wp_get_current_user();
 		$post_campaign = get_post($campaign_id);
 
-		$category_slug = $post_campaign->ID . '-blog-' . $post_campaign->post_title;
+		$category_slug = $post_campaign->ID . '-blog-' . $post_campaign->post_name;
 		$category_obj = get_category_by_slug($category_slug);
 
 		$blog = array(
@@ -275,6 +275,11 @@ class YPProjectLib {
 			} else {
 				$buffer = FALSE;
 			}
+		}
+		
+		if ($buffer && isset($_POST['new_orga'])) {
+			$page_new_orga = get_page_by_path('creer-une-organisation');
+			header('Location: ' . get_permalink($page_new_orga->ID));
 		}
 		    
 		return $buffer;
