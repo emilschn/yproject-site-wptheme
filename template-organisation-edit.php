@@ -46,6 +46,11 @@ get_header();
 
 						<form action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
 
+							<?php
+							/**
+							 * Données générales
+							 */
+							?>
 							<label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?></label>
 							<em><?php echo $organisation_obj->get_name(); ?></em><br />
 
@@ -89,6 +94,11 @@ get_header();
 							</select><br />
 						
 						
+							<?php
+							/**
+							 * Informations bancaires
+							 */
+							?>
 							<h2><?php _e('Informations bancaires - si vous souhaitez faire un virement d&apos;une somme obtenue', 'yproject'); ?></h2>
 							<label for="org_bankownername"><?php _e('Nom du propri&eacute;taire du compte', 'yproject'); ?></label>
 							<input type="text" name="org_bankownername" value="<?php echo $organisation_obj->get_bank_owner(); ?>" /> <br />
@@ -103,8 +113,12 @@ get_header();
 							<input type="text" name="org_bankownerbic" value="<?php echo $organisation_obj->get_bank_bic(); ?>" /> <br />
 
 							
+							<?php
+							/**
+							 * Pièces d'identité
+							 */
+							?>
 							<h2><?php _e('Pi&egrave;ces d&apos;identit&eacute;', 'yproject'); ?></h2>
-							
 							
 							<?php 
 							$organisation_obj->check_strong_authentication();
@@ -114,7 +128,9 @@ get_header();
 							switch ($organisation_obj->get_strong_authentication()) {
 								case '0':
 							?>
-								Afin de lutter contre le blanchiment d&apos;argent, pour tout investissement de plus de <strong><?php echo YP_STRONGAUTH_AMOUNT_LIMIT; ?>&euro;</strong> sur l&apos;ann&eacute;e, nous devons transmettre les pi&egrave;ces d&apos;identit&eacute; suivantes &agrave; notre partenaire Mangopay
+								Afin de lutter contre le blanchiment d&apos;argent, pour tout investissement de plus de <strong><?php echo YP_STRONGAUTH_AMOUNT_LIMIT; ?>&euro;</strong> sur l&apos;ann&eacute;e,
+								ou pour retirer plus de <strong><?php echo YP_STRONGAUTH_REFUND_LIMIT; ?>&euro;</strong>,
+								nous devons transmettre les pi&egrave;ces d&apos;identit&eacute; suivantes &agrave; notre partenaire Mangopay
 								(Les fichiers doivent &ecirc;tre de type jpeg, gif, png ou pdf et leur poids inf&eacute;rieur &agrave; 2 Mo) :<br /><br />
 
 								<label for="org_file_cni">CNI et fonction de la personne physique qui agit pour son compte</label>
@@ -143,11 +159,156 @@ get_header();
 							}
 							?>
 							
+							
 							<input type="hidden" name="action" value="edit-organisation" />
 
 							<input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" />
-
 						</form>
+							
+								
+						<?php
+						/**
+						 * Demande de transfert
+						 */
+						?>
+						<?php
+						$args = array(
+						    'author'    => $organisation_obj->get_wpref(),
+						    'post_type' => 'withdrawal_order',
+						    'post_status'   => 'pending'
+						);
+						$pending_transfers = get_posts($args);
+
+						if (!$pending_transfers && isset($_POST['mangopaytoaccount'])) {
+							//Teste d'abord de la somme qu'on tente de retirer : si plus de 1000€, on doit mettre en place une strong auth sur cet utilisateur
+							$mp_amount = ypcf_mangopay_get_user_personalamount_by_wpid($organisation_obj->get_wpref());
+							$real_amount_invest = $mp_amount / 100;
+							if ($real_amount_invest < YP_STRONGAUTH_REFUND_LIMIT || $organisation_obj->get_strong_authentication() == '1') {
+								//Crée le beneficiary
+								$errors = '';
+
+								//Teste si il existe un beneficiary correspondant à l'utilisateur, sinon tente de le créer
+								$beneficiary_id = ypcf_mangopay_get_mp_user_beneficiary_id($organisation_obj->get_wpref());
+								if ($beneficiary_id == "") {
+									$beneficiary_id = ypcf_init_mangopay_beneficiary(
+										$organisation_obj->get_wpref(), 
+										$organisation_obj->get_bank_owner(), 
+										$organisation_obj->get_bank_address(), 
+										$organisation_obj->get_bank_iban(), 
+										$organisation_obj->get_bank_bic()
+									);
+								}
+
+								if ($beneficiary_id == "") {
+									global $mp_errors;
+									$errors = 'Erreur lors du transfert : ' . $mp_errors;
+									echo '<span class="error">' . $errors . '</span><br />';
+
+								} else {
+									//Faire un withdrawal avec le userid, le beneficiaryid et $mp_amount
+									$withdrawal_obj = ypcf_mangopay_make_withdrawal($organisation_obj->get_wpref(), $beneficiary_id, $mp_amount);
+
+									//Enregistrer le withdrawal pour garder une trace
+									if (is_string($withdrawal_obj)) {
+										echo '<span class="error">Erreur durant la transaction : ' . $withdrawal_obj . '</span>';
+
+									} else {
+										//Enregistrement de l'id du withdrawal (en tant que post wp)
+										$withdrawal_post = array(
+											'post_author'   => $organisation_obj->get_wpref(),
+											'post_title'    => $mp_amount,
+											'post_content'  => $withdrawal_obj->ID,
+											'post_status'   => 'pending',
+											'post_type'	=> 'withdrawal_order'
+										);
+										wp_insert_post( $withdrawal_post );
+
+										//Affichage message état
+										?>
+										La transaction est en cours..
+										<?php
+									}
+								}
+							}
+						} ?>
+										
+							
+						<?php
+						/**
+						 * Porte-monnaie
+						 */
+						?>
+						<h2 class="underlined"><?php _e( 'Porte-monnaie', 'yproject' ); ?></h2>
+						<?php $real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid($organisation_obj->get_wpref()) / 100; ?>
+						Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br /><br />
+
+						<?php if ($pending_transfers) : ?>
+						    Vous avez un transfert en cours.
+						<?php else :
+							if ($real_amount_invest > 0) { ?>
+						    <form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="mangopaytoaccount" value="1" />
+							<input type="submit" value="Reverser sur mon compte bancaire" class="button" />
+						    </form>
+						    <br /><br />
+						<?php	}
+						endif; ?>
+	
+						    
+						<?php
+						/**
+						 * Transferts d'argent
+						 */
+						?>
+						<h2 class="underlined"><?php _e( 'Transferts d&apos;argent', 'yproject' ); ?></h2>
+						<?php
+						$args = array(
+						    'author'	    => $organisation_obj->get_wpref(),
+						    'post_type'	    => 'withdrawal_order',
+						    'post_status'   => 'any',
+						    'orderby'	    => 'post_date',
+						    'order'	    =>  'ASC'
+						);
+						$transfers = get_posts($args);
+						if ($transfers) :
+						?>
+						<ul class="user_history">
+							<?php foreach ( $transfers as $post ) :
+								$widthdrawal_obj = ypcf_mangopay_get_withdrawal_by_id($post->post_content);
+								if ($widthdrawal_obj->Error != "" && $widthdrawal_obj->Error != NULL) {
+								    $args = array(
+									'ID'	=>  $post->ID,
+									'post_status'	=> 'draft'
+								    );
+								    wp_update_post($args);
+
+								} else if ($widthdrawal_obj->IsSucceeded && $widthdrawal_obj->IsCompleted && $post->post_status != 'publish') {
+								    $args = array(
+									'ID'	=>  $post->ID,
+									'post_status'	=> 'publish'
+								    );
+								    wp_update_post($args);
+								}
+								$post = get_post($post);
+								$post_amount = $post->post_title / 100;
+								if ($post->post_status == 'publish') {
+								    ?>
+								    <li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Termin&eacute;</li>
+								    <?php
+								} else if ($post->post_status == 'draft') {
+								    ?>
+								    <li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Annul&eacute;</li>
+								    <?php
+								} else {
+								    ?>
+								    <li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- En cours</li>
+								    <?php
+								}
+							endforeach; ?>
+						</ul>
+						<?php else: ?>
+							Aucun transfert.
+						<?php endif; ?>
 
 
 					<?php else: ?>
