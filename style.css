@@ -148,6 +148,9 @@ form.wdg-forms label {
 	width: 180px;
 	font-weight: bold;
 }
+form.wdg-forms label.large {
+	width: 280px;
+}
 form.wdg-forms select {
 	width: 180px;
 }

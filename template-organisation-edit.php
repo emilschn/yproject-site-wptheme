@@ -9,6 +9,7 @@
 locate_template( array("requests/organisations.php"), true );
 $organisation_obj = YPOrganisation::get_current();
 YPOrganisationLib::edit($organisation_obj);
+ypcf_init_mangopay_user($organisation_obj->get_wpref(), TRUE);
 get_header();
 ?>
 
@@ -72,7 +73,7 @@ get_header();
 							<label for="org_ape"><?php _e('Code APE', 'yproject'); ?></label>
 							<input type="text" name="org_ape" value="<?php echo $organisation_obj->get_ape(); ?>" /><br />
 
-							<h2><?php _e('Si&egrave;ge social', 'yproject'); ?></h2>
+							<h2 class="underlined"><?php _e('Si&egrave;ge social', 'yproject'); ?></h2>
 							<label for="org_address"><?php _e('Adresse', 'yproject'); ?></label>
 							<input type="text" name="org_address" value="<?php echo $organisation_obj->get_address(); ?>" /><br />
 
@@ -99,7 +100,7 @@ get_header();
 							 * Informations bancaires
 							 */
 							?>
-							<h2><?php _e('Informations bancaires - si vous souhaitez faire un virement d&apos;une somme obtenue', 'yproject'); ?></h2>
+							<h3><?php _e('Informations bancaires - si vous souhaitez faire un virement d&apos;une somme obtenue', 'yproject'); ?></h3>
 							<label for="org_bankownername"><?php _e('Nom du propri&eacute;taire du compte', 'yproject'); ?></label>
 							<input type="text" name="org_bankownername" value="<?php echo $organisation_obj->get_bank_owner(); ?>" /> <br />
 
@@ -115,10 +116,10 @@ get_header();
 							
 							<?php
 							/**
-							 * Pièces d'identité
+							 * Documents
 							 */
 							?>
-							<h2><?php _e('Pi&egrave;ces d&apos;identit&eacute;', 'yproject'); ?></h2>
+							<h3><?php _e('Documents', 'yproject'); ?></h3>
 							
 							<?php 
 							$organisation_obj->check_strong_authentication();
@@ -126,35 +127,33 @@ get_header();
 							if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
 							
 							switch ($organisation_obj->get_strong_authentication()) {
-								case '0':
+								case 0:
 							?>
 								Afin de lutter contre le blanchiment d&apos;argent, pour tout investissement de plus de <strong><?php echo YP_STRONGAUTH_AMOUNT_LIMIT; ?>&euro;</strong> sur l&apos;ann&eacute;e,
 								ou pour retirer plus de <strong><?php echo YP_STRONGAUTH_REFUND_LIMIT; ?>&euro;</strong>,
 								nous devons transmettre les pi&egrave;ces d&apos;identit&eacute; suivantes &agrave; notre partenaire Mangopay
 								(Les fichiers doivent &ecirc;tre de type jpeg, gif, png ou pdf et leur poids inf&eacute;rieur &agrave; 2 Mo) :<br /><br />
 
-								<label for="org_file_cni">CNI et fonction de la personne physique qui agit pour son compte</label>
+								<label for="org_file_cni" class="large">Pi&egrave;ce d&apos;identit&eacute; recto-verso de la personne repr&eacute;sentant l'organisation</label>
 								<input type="file"name="org_file_cni" /> <br />
 
-								<label for="org_file_status">Statuts sign&eacute;s</label>
+								<label for="org_file_status" class="large">Statuts sign&eacute;s</label>
 								<input type="file"name="org_file_status" /> <br />
 
-								<label for="org_file_extract">Extrait du registre de commerce datant de moins de 3 mois</label>
+								<label for="org_file_extract" class="large">Extrait du registre de commerce datant de moins de 3 mois</label>
 								<input type="file"name="org_file_extract" /> <br />
 
-								<label for="org_file_declaration">D&eacute;claration de b&eacute;n&eacute;ficiaire &eacute;conomique (si on n&apos;identifie pas d&apos;actionnaires personnes physiques dans les statuts)</label>
+								<label for="org_file_declaration" class="large">D&eacute;claration de b&eacute;n&eacute;ficiaire &eacute;conomique (si aucun actionnaire personne physique n'est identifi&eacute; dans les statuts)</label>
 								<input type="file"name="org_file_declaration" /><br />
 							<?php
 								    break;
-								case '1':
+								case 1:
 							?>
 								Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Mangopay. Vous pouvez maintenant investir les sommes que vous souhaitez.<br /><br />
 							<?php
 								    break;
-								case '5':
-							?>
-								Les fichiers permettant de valider vos investissements sont en cours d&apos;&eacute;tude chez notre partenaire Mangopay. Merci de votre compr&eacute;hension.<br /><br />
-							<?php
+								case 5:
+								    //Le message d'attente est affiché dans le statut de strong authentication.
 								    break;
 							}
 							?>
