@@ -19,31 +19,25 @@ if(false===$cache_result){
  ?>
 <header class="align-center header_home">
 	<section id="site_name2" >
-
 		<nav class="home_intro">
-			<?php
-			$page_connexion_register = get_page_by_path('register');
-			$page_new_project = get_page_by_path('proposer-un-projet');
-			$page_faq = get_page_by_path('descriptif');
-			?>
-		<div  id="welcome_text" >
-			<?php the_content();?>
-<?php if ( is_user_logged_in() ) { ?>
-
-<?php global $current_user; get_currentuserinfo(); ?>
-
-<p dir="ltr" style="text-align: left; margin-left: 600px; margin-top: 20px; font-weight: bold">Bonjour <?php echo $current_user->user_firstname;?></p>
-
-<?php } else {   ?>
-<div id="header_homepage_link">
-<a href="http://wedogood.co/register" class="button">Inscription</a>
-<a href="http://wedogood.co/connexion" class="button">Connexion</a>
-</div>
-<?php } ?>
-		</div>
+			<div  id="welcome_text" >
+				<?php the_content();?>
+				<?php if ( is_user_logged_in() ) { ?>
+					<?php global $current_user; get_currentuserinfo(); ?>
+					<p id="ligne_bonjour">Bonjour <?php echo $current_user->user_firstname;?> !
+				<?php } else {
+					$page_connexion_register = get_page_by_path('register');
+					$page_connexion = get_page_by_path('connexion');?>
+				<div id="header_homepage_link">
+					<a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="button">Inscription</a>
+					<a href="<?php echo get_permalink($page_connexion->ID); ?>" class="button">Connexion</a>
+				</div>
+				<?php } ?>
+			</div>
 		</nav>
 	</section>
 </header>
+
 <?php
 	$cache_result=ob_get_contents();
 	$WDG_cache_plugin->set_cache('home-top',$cache_result,60*60*24);

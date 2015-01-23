@@ -1589,7 +1589,6 @@ header.header_home {
     margin-left: 650px;
 	margin-top: 25px;
 }
-
 #site_name2 {
     padding-top: 0px;
     height: 350px;
@@ -1671,7 +1670,12 @@ header.header_home {
     font-family: Arial, sans-serif;
     font-size: 11pt;
 }
-
+#ligne_bonjour{
+	text-align: left; 
+	margin-left: 600px!important;
+	margin-top: 20px!important;
+    font-weight: bold;
+}
 /* FIN HEADER ACCUEIL */
 
 /* HEADER AUTRES */

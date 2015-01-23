@@ -1,6 +1,6 @@
 <?php
 // Transforme un tag en meta keyword
-function csv_tags() {
+function csv_tags(){
 		$posttags = get_the_tags();
 	if ($posttags) {
 		foreach((array)$posttags as $tag) {
@@ -10,19 +10,16 @@ function csv_tags() {
 		
 	}
 }
-
 //possibilité de mettre tag aux pages
-function tags_support_all()
-{
+function tags_support_all(){
 	register_taxonomy_for_object_type('post_tag', 'page');
 }
+add_action('init', 'tags_support_all');
+
 //assure que les tags sont inclus dans les requetes
-function tags_support_query($wp_query)
-{
+function tags_support_query($wp_query){
 	if($wp_query->get('tag')) $wp_query->set('post_type', 'any');
 }
-
-add_action('init', 'tags_support_all');
 add_action('pre_get_posts', 'tags_support_query');
 
 //Chargement de la css de buddypress
