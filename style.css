@@ -3307,9 +3307,12 @@ div, span, h1, h3, a,  ul, li, p {
     text-transform: uppercase;
 }
 #projects-summary{
-    display: block;
-    height: 113px;
+    position: relative;
     overflow: hidden;
+    display: block;
+    width: 610px;
+    height: 113px;
+    margin-top: 45px;
 }
 
 #projects-summary p{
@@ -3610,11 +3613,6 @@ a.readmore, a.readless {
     margin: 0;
     width: 155%;
     padding: 10px 0;
-}
-
-#projects-summary{
-    position: relative;
-    width: 610px;
 }
 
 span.project_description.view-description-content {
