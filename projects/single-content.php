@@ -38,7 +38,7 @@ $vote_status = html_entity_decode($campaign->vote());
 
 		//Sinon on utilise l'objet vidéo fourni par wordpress
 		} else {
-			$video_element = wp_oembed_get($campaign->video(), array('width' => 580));
+			$video_element = wp_oembed_get($campaign->video(), array('width' => 580, 'height' => 325));
 		}
 		?>
 		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>');"<?php } ?>>
@@ -105,8 +105,8 @@ $vote_status = html_entity_decode($campaign->vote());
 
 <div class="indent">
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet.png" data-content="project"/>
-		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet.png" alt="logo projet" data-content="project"/>
+		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle projet"/>
 		<div id="project-content-project" class="projects-desc-content">
 			<h2>En quoi consiste le projet ?</h2>
 			<div><?php the_content(); ?></div>
@@ -115,8 +115,8 @@ $vote_status = html_entity_decode($campaign->vote());
 
 	<a id="anchor-social"></a>
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>sociale.png" data-content="social" />
-		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" />
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>sociale.png" alt="logo social" data-content="social" />
+		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris" />
 		<div id="project-content-social" class="projects-desc-content">
 			<h2>Quelle est l&apos;utilit&eacute; soci&eacute;tale du projet ?</h2>
 				<div>
@@ -130,8 +130,8 @@ $vote_status = html_entity_decode($campaign->vote());
 	
 	<?php if ($vote_status != 'preview'): ?>
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>economie.png" data-content="economic" />
-		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>economie.png" alt="logo economie" data-content="economic" />
+		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-economic" class="projects-desc-content">
 			<h2>Quelle est l&apos;opportunit&eacute; &eacute;conomique du projet ?</h2>
 			<div>
@@ -144,8 +144,8 @@ $vote_status = html_entity_decode($campaign->vote());
 	</div>
 	
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>model.png" data-content="model" />
-		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>model.png" alt="logo modele" data-content="model" />
+		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-model" class="projects-desc-content">
 			<h2>Quel est le mod&egrave;le &eacute;conomique du projet ?</h2>
 			<div>
@@ -159,8 +159,8 @@ $vote_status = html_entity_decode($campaign->vote());
 	<?php endif; ?>
     
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>porteur.png" data-content="porteur"/>
-		<img class="vertical-align-middle grey-triangle"src="<?php echo $images_folder;?>triangle_gris_projet.png"/>
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>porteur.png" alt="logo porteur" data-content="porteur"/>
+		<img class="vertical-align-middle grey-triangle"src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-porteur" class="projects-desc-content">
 			<h2>Qui porte le projet ?</h2>
 			<div>
