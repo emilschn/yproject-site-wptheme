@@ -63,7 +63,7 @@ Votre projet a &eacute;t&eacute; vu<br />
 <?php endif; ?>
 
 <?php if (current_user_can('manage_options')) { ?>
-<h2>E-mails des utilisateurs qui croient ou qui ont vot&eacute;</h2>
+<h2>[ADMIN] E-mails des utilisateurs qui croient ou qui ont vot&eacute;</h2>
 
 <?php 
 	$user_list = array();
@@ -83,8 +83,15 @@ Votre projet a &eacute;t&eacute; vu<br />
 	//Affichage de la liste d'e-mails
 	foreach ($user_list as $user_id => $item) {
 		if (!empty($user_id)) {
-			$user_data = get_userdata($user_id);
-			if (!empty($user_data->user_email)) echo $user_data->user_email . ', ';
+			if (YPOrganisation::is_user_organisation($user_id)) {
+				$organisation = new YPOrganisation($user_id);
+				$user_data = $organisation->get_creator();
+				//TODO
+				
+			} else {
+				$user_data = get_userdata($user_id);
+				if (!empty($user_data->user_email)) echo $user_data->user_email . ', ';
+			}
 		}
 	}
 ?>
