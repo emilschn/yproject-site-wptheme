@@ -37,7 +37,7 @@ function print_vote_post($vote_post, $is_right_project){
 		    
 			<div class="description-logos">
 				<div class="description-logos-item">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="Logo France" /><br />
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />
 					<?php 
 					$campaign_location = $campaign->location();
 					$exploded = explode(' ', $campaign_location);
@@ -46,12 +46,12 @@ function print_vote_post($vote_post, $is_right_project){
 					?>
 				</div>
 				<div class="description-logos-item" style="width: 45px;">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" /><br />
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="logo jy crois" /><br />
 					<?php echo $campaign->get_jycrois_nb(); ?>
 
 				</div>
 				<div class="description-logos-item">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" /><br />
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="logo horloge" /><br />
 					<?php echo $campaign->end_vote_remaining(); ?>
 				</div>
 			</div>
@@ -115,7 +115,7 @@ function print_vote_post($vote_post, $is_right_project){
 		    
 			<div class="description-logos">
 				<div class="description-logos-item">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="Logo France" /><br />
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />
 					<?php 
 					$campaign_location = $campaign->location();
 					$exploded = explode(' ', $campaign_location);
@@ -124,7 +124,7 @@ function print_vote_post($vote_post, $is_right_project){
 					?>
 				</div>
 				<div class="description-logos-item" style="width: 45px;">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" /><br />
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="logo jy crois" /><br />
 					<?php echo $campaign->get_jycrois_nb(); ?>
 				</div>
 			</div>

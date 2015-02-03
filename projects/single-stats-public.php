@@ -7,7 +7,7 @@ if (isset($_GET["campaign_id"])) {
 		ob_start();
 ?>
 
-<h2 class="expandator" data-target="votes">Votes <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" /></h2>
+<h2 class="expandator" data-target="votes">Votes <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus"/></h2>
 <div id="extendable-votes" class="expandable">
 <?php
 	$post_campaign = get_post($_GET["campaign_id"]);
@@ -23,7 +23,7 @@ if (isset($_GET["campaign_id"])) {
 ?>
 </div>
 
-<h2 class="expandator" data-target="investments">Investissements <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" /></h2>
+<h2 class="expandator" data-target="investments">Investissements <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus" /></h2>
 <div id="extendable-investments" class="expandable">
 <?php 
 	locate_template( array("requests/investments.php"), true );

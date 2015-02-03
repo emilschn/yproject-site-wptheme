@@ -42,16 +42,16 @@ $vote_status = $campaign->campaign_status();
 					<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
 				</div>
 				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="Logo personnes" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
 					<?php $backers_count = $campaign->backers_count(); ?>
 					<?php echo $backers_count; ?> personne<?php if ($backers_count > 1) { echo 's ont'; } else { echo ' a'; } ?> d&eacute;j&agrave; financ&eacute; ce projet
 				</div>
-				<div class="post_bottom_infos_item" <?php if ($vote_status == 'funded' || $vote_status == 'archive'){echo "style=opacity:0.5";}?>>
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo horloge" />
+				<div class="post_bottom_infos_item" <?php if($vote_status=='funded' || $vote_status == 'archive'){echo "style=opacity:0.5";}?>>
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
 					Plus que <strong><?php echo $campaign->days_remaining(); ?></strong> jours !
 				</div>
 				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="Logo cible" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
 					<?php echo $campaign->current_amount() . ' financés sur ' . $campaign->minimum_goal(true) ; ?>
 				</div>
 				<div class="projects-description-separator"></div>
@@ -66,7 +66,7 @@ $vote_status = $campaign->campaign_status();
 					<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
 				</div>
 				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="Logo personnes" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
 					<?php if ($nbvoters == 1): ?>
 					1 personne a d&eacute;j&agrave; vot&eacute;
 					<?php elseif ($nbvoters > 1): echo $nbvoters; ?>
@@ -76,7 +76,7 @@ $vote_status = $campaign->campaign_status();
 					<?php endif; ?>
 				</div>
 				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo personnes" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo personnes" />
 					<?php if ($remaining_vote_days > 0) : ?>
 					Il reste <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours pour voter
 					<?php else: ?>
@@ -84,7 +84,7 @@ $vote_status = $campaign->campaign_status();
 					<?php endif; ?>
 				</div>
 				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="Logo cible" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
 					<?php echo 'Ce projet a besoin de '.$campaign->minimum_goal(true) ; ?>
 				</div>
 				<div class="projects-description-separator"></div>
@@ -96,7 +96,7 @@ $vote_status = $campaign->campaign_status();
 					<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
 				</div>
 				<div class="post_bottom_infos_item" style="opacity:0">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="Logo personnes" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
 					<?php if ($nbvoters == 1): ?>
 					1 personne a d&eacute;j&agrave; vot&eacute;
 					<?php elseif ($nbvoters > 1): echo $nbvoters; ?>
@@ -106,7 +106,7 @@ $vote_status = $campaign->campaign_status();
 					<?php endif; ?>
 				</div>
 				<div class="post_bottom_infos_item" style="opacity:0">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="Logo personnes" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo personnes" />
 					<?php if ($remaining_vote_days > 0) : ?>
 					Il reste <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours pour voter
 					<?php else: ?>
@@ -114,7 +114,7 @@ $vote_status = $campaign->campaign_status();
 					<?php endif; ?>
 				</div>
 				<div class="post_bottom_infos_item" style="opacity:0">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="Logo cible" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
 					<?php echo 'Ce projet a besoin de '.$campaign->minimum_goal(true) ; ?>
 				</div>
 				<div class="projects-description-separator" style="opacity:0"></div>
@@ -217,13 +217,13 @@ $vote_status = $campaign->campaign_status();
 			} else { ?>
 
 				<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.jpg" alt="Logo Facebook" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.jpg" alt="logo facebook" />
 				</a>
 				<a href="http://twitter.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>&text='test'">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.jpg" alt="Logo twitter" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.jpg" alt="logo twitter" />
 				</a>
 				<a href="https://plus.google.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="Logo google" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="logo google" />
 				</a>
 			<?php } ?>
 		</div>
@@ -242,7 +242,7 @@ $vote_status = $campaign->campaign_status();
 						<?php echo get_the_title(); ?>
 					</p>
 					<p id="subtitle"><?php echo $campaign->subtitle(); ?></p>
-					<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="Fond projet" class="bg-project" />
+					<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="fond projet" class="bg-project" />
 				<?php 
 					$cache_result = ob_get_contents();
 					$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-title', $cache_result);
@@ -308,7 +308,7 @@ $vote_status = $campaign->campaign_status();
 			$img_src = $campaign->get_header_picture_src();
 			if ($img_src != ''):
 			?>
-			<img id="moved-img" src="<?php echo $img_src; ?>" alt="Bannière <?php echo $post->post_title; ?>" />
+			<img id="moved-img" src="<?php echo $img_src; ?>" alt="banniere <?php echo $post->post_title; ?>" />
 			<?php endif; ?>
 		</div>
 		<?php 

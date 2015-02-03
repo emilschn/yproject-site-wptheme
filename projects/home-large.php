@@ -23,7 +23,7 @@
 
 	<div class="home-large-project <?php echo $container_class; ?>">
 
-		<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" border="0" /></a></h2>
+		<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" alt="signe plus" border="0" /></a></h2>
 		
 		<?php 
 		$video_element = '';
@@ -68,7 +68,7 @@
 
 				<div class="description-logos">
 					<div class="description-logos-item">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="Logo France" />
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" />
 						<?php 
 						$campaign_location = $campaign->location();
 						$exploded = explode(' ', $campaign_location);
@@ -77,15 +77,15 @@
 						?>
 					</div>
 					<div class="description-logos-item">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="Logo J'y crois" />
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="logo jy crois" />
 						<?php echo $campaign->get_jycrois_nb(); ?>
 					</div>
 					<div class="description-logos-item">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="Logo Horloge" />
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="logo horloge" />
 						<?php echo $days_remaining; ?>
 					</div>
 					<div class="description-logos-item" style="width: 60px;">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="Logo Cible" />
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="logo cible" />
 						<?php echo $campaign->minimum_goal(true); ?>
 					</div>	
 					

@@ -765,6 +765,7 @@ div#home_bottom h1 {
     padding: 5px 0px 5px 0px;
     text-transform: uppercase;
 }
+
 /* FIN REGISTER PAGE */     
 
 /* CONNEXION PAGE */        
@@ -1387,6 +1388,7 @@ ul.activity-list p {
 }
 /* FIN LIGHTBOX CGU + DEJA CONNECTE */
 
+
 /* NAV */
 #navigation {
     background-color: #333333;
@@ -1639,6 +1641,11 @@ header.header_home {
 }
 
 /* HEADER ACCUEIL */
+
+#header_homepage_link {
+    margin-left: 650px;
+	margin-top: 25px;
+}
 #site_name2 {
     padding-top: 0px;
     height: 350px;
@@ -1657,16 +1664,23 @@ header.header_home {
     color: #FFF;
 }
 #site_name2 #welcome_text {
-    margin-top: 10px;
+    margin-top: 100px;
+    margin-left: 625px;
 }
 #site_name2 #welcome_text p {
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
     margin: 0px;
 }
+#site_name2 #welcome_text #ligne_bonjour{
+    text-align: left; 
+    margin-left: 370px!important;
+    margin-top: 20px!important;
+    font-weight: bold;
+}
 
 .home_intro {
-    color: #FFF;
+    color: #000;
     text-align: left;
     margin: 0 auto;
     width: 910px;
@@ -3295,10 +3309,11 @@ div, span, h1, h3, a,  ul, li, p {
     height: 500px;
 }
 #projects-left-desc .video-zone{
+    margin-top: 15px;
     width: 580px;
     height: 325px;
-    margin-top: 15px;
-    min-height:325px !important;
+    min-height: 325px !important;
+    text-align: center;
 }
 .projects-title{
     margin-top: 13px;

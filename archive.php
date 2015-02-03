@@ -31,7 +31,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 
 			<?php if ($can_modify): ?>
 
-				<h2><a href="javascript:void();" id="add-news-opener"><?php _e('Publier une actualit&eacute;', 'yproject'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" /></a></h2>
+				<h2><a href="javascript:void();" id="add-news-opener"><?php _e('Publier une actualit&eacute;', 'yproject'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" alt="signe plus"/></a></h2>
 
 				<form action="" method="post" enctype="multipart/form-data" id="add-news">
 
