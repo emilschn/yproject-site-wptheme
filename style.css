@@ -1631,21 +1631,15 @@ div#connexion_facebook_container span {
 /* HEADER */
 header {
     background-color: #FF494C;
-    background-image: url("images/header.png");
     background-position: center;
     min-width: 960px;
 }
 
-header.header_home {
-    background-image: url("images/header.png");
-}
-
 /* HEADER ACCUEIL */
-
-#header_homepage_link {
-    margin-left: 650px;
-	margin-top: 25px;
+header.header_home {
+    background-image: url("images/header.jpg");
 }
+
 #site_name2 {
     padding-top: 0px;
     height: 350px;
@@ -1664,8 +1658,9 @@ header.header_home {
     color: #FFF;
 }
 #site_name2 #welcome_text {
-    margin-top: 100px;
-    margin-left: 625px;
+    margin-top: 135px;
+    margin-left: 685px;
+    margin-right: 200px;
 }
 #site_name2 #welcome_text p {
     -webkit-margin-before: 0em;
@@ -1673,10 +1668,13 @@ header.header_home {
     margin: 0px;
 }
 #site_name2 #welcome_text #ligne_bonjour{
-    text-align: left; 
-    margin-left: 370px!important;
-    margin-top: 20px!important;
+    text-align: right; 
+    margin-right: 35px;
+    margin-top: 20px;
     font-weight: bold;
+}
+#site_name2 #welcome_text #header_homepage_link {
+    margin-top: 20px;
 }
 
 .home_intro {
