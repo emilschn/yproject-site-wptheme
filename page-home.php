@@ -18,12 +18,12 @@ if(false===$cache_result){
 	ob_start();
  ?>
 <header class="align-center header_home">
-	<section id="site_name2">
+	<section id="site_name2" class="center">
 		<div id="welcome_text">
 			<?php the_content();?>
 			<?php if ( is_user_logged_in() ) { ?>
 				<?php global $current_user; get_currentuserinfo(); ?>
-				<p id="ligne_bonjour">Bonjour <?php echo $current_user->user_firstname;?> !
+				<p class="hello">Bonjour <?php echo $current_user->user_firstname;?> !</p>
 			<?php } else {
 				$page_connexion_register = get_page_by_path('register');
 				$page_connexion = get_page_by_path('connexion');?>
@@ -169,9 +169,6 @@ if(false===$cache_result){
 						</div>
 					</a>
 					<div class="clear"></div>
-				</div>
-				<div class="center">
-					<?php the_content(); ?>
 				</div>
 			</div>
 		</div>

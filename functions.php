@@ -220,35 +220,6 @@ add_filter( 'template_include', 'yproject_page_template', 99 );
 
 
 
-/** SHORTCODES ACCUEIL **/
-/**
- * Les fonctions gèrent l'affichage de la partie centrale de la page d'accueil (participer à un projet, proposer un projet)
- * @param type $atts
- * @param type $content
- * @return type
- */
-function yproject_participate_project_shortcode($atts, $content) {
-	return '<div class="home_half_size">' . $content . '</div>';
-}
-add_shortcode('yproject_participate_project', 'yproject_participate_project_shortcode');
-
-function yproject_post_project_shortcode($atts, $content) {
-	return '<div class="home_half_size">' . $content . '</div><div style="clear:both"></div>';
-}
-add_shortcode('yproject_post_project', 'yproject_post_project_shortcode');
-
-function yproject_intro_home_shortcode($atts, $content) {
-	return '<div class="home_intro">' . $content . '</div>';
-}
-add_shortcode('yproject_intro_home', 'yproject_intro_home_shortcode');
-
-function yproject_home_discover_shortcode($atts, $content) {
-	return '<div class="home_discover_half_size">' . $content . '</div>';
-}
-add_shortcode('yproject_home_discover', 'yproject_home_discover_shortcode');
-
-/** FIN SHORTCODES ACCUEIL **/
-
 /**
  * BIBLIOTHEQUE POUR VERIFICATIONS
  */

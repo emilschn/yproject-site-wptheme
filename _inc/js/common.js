@@ -33,10 +33,6 @@ YPUIFunctions = (function($) {
 					$(".page_item_inverted").css("paddingBottom", 7);
 				}
 			});
-
-			if ($("#finish_subscribe").length > 0) {		
-			    $("#container").css('padding-top', "55px");		
-			}
 			
 			$(".expandator").css("cursor", "pointer");
 			$(".expandable").hide();
@@ -341,14 +337,6 @@ YPMenuFunctions = (function($){
 		}, 650);
 		$("#menu_item_connection").data('timeoutId', timeoutId); 
 	    });
-	    
-	    $("#share_btn").mouseup(function() {
-		$("#share_btn_zone").show();
-	    });
-	    
-	    $("#popup_share_close").mouseup(function() {
-		$("#popup_share").toggle();
-	    });
 	},
 	
 	refreshMenuBar: function() {
@@ -378,14 +366,6 @@ WDGProjectPageFunctions=(function($) {
 			    $("#validate_project-false").show();
 			    $("#validate_project-true").hide();
 			    $("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
-			});
-
-			$("#jcrois_pas").click(function () {
-			    $("#tab-count-jycrois").load('single-campaign.php');
-			});
-
-			$("#jcrois").click(function() {
-			    $("#tab-count-jycrois").load('single-campaign.php');
 			});
 		},
 
