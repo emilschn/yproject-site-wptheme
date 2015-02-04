@@ -1666,6 +1666,7 @@ header.header_home {
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
     margin: 0px;
+    max-width: 590px;
 }
 #site_name2 #welcome_text #ligne_bonjour{
     text-align: right; 
@@ -3118,29 +3119,29 @@ div, span, h1, h3, a,  ul, li, p {
     padding: 0px 25px;
     padding-bottom: 10px;
 }
-#projects-bottom-desc .projects-desc-content p img, .projects-desc-content p img{
+.projects-desc-content p img {
     max-width: 750px;
     height: auto;
  }
-#projects-bottom-desc .projects-desc-content p img.aligncenter {
+.projects-desc-content p img.aligncenter {
     display: block !important;
     margin: 0px auto;
 }
-#projects-bottom-desc .projects-desc-content p img.alignleft {
+.projects-desc-content p img.alignleft {
     float: left;
     margin: 5px 20px 20px 0;
 }
-#projects-bottom-desc .projects-desc-content p img.alignright {
+.projects-desc-content p img.alignright {
     float: left;
     margin: 5px 0 20px 20px;
 }
-#projects-bottom-desc .projects-desc-content table {
+.projects-desc-content table {
     border-spacing: 0px;
     border-collapse: collapse;
     margin: 0px 25px;
     width: 755px;
 }
-#projects-bottom-desc .projects-desc-content table td {
+.projects-desc-content table td {
     border: 1px dashed #2B2C2C;
 }
  #project-description-title-padding {

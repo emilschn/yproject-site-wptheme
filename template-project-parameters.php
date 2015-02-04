@@ -99,10 +99,12 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					global $current_user;
 					$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
 					$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+					if (isset($current_organisations) && count($current_organisations) > 0) {
+						$current_organisation = $current_organisations[0];
+					}
 					$api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
 					$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
 					
-					$current_organisation = $current_organisations[0];
 					foreach ($organisations_list as $organisation_item) {
 						$selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
 						$str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
