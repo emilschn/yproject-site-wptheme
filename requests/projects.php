@@ -9,10 +9,10 @@ function query_projects_collecte($nb=0){
 	return queryHomeProjects($nb,'collecte');
 }
 function query_projects_funded($nb=0){
-	return queryHomeProjects($nb,'funded');
+	return queryFinishedProjects($nb,'funded');
 }
 function query_projects_archive($nb=0){
-	return queryHomeProjects($nb,'archive');
+	return queryFinishedProjects($nb,'archive');
 }
 
 function queryHomeProjects($nb,$type,$order = 'asc') {
