@@ -49,9 +49,9 @@
 		<?php 
 		$menu_pages = array(
 			'les-projets' => 'Les projets',
-			'proposer-un-projet' => 'Proposer un projet',
+			'financement' => 'Financer son projet',
 			'descriptif' => 'Comment ca marche ?',
-			'blog' => 'Blog'
+			'blog' => 'Actualit&eacute;s'
 		);
 		?>
 
