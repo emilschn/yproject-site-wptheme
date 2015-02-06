@@ -341,6 +341,7 @@ form.wdg-forms .small-margin {
 #nav > li.current_page_item a,
 #nav > li.current_page_ancestor a {
     color: #E1E3E2;
+    font-weight: bold;
 }
 
 
@@ -1111,69 +1112,27 @@ footer div.social-icons {
 *******************************************************************************/
 header.header_home {
     background-image: url("images/header.jpg");
-}
-
-#site_name2 {
-    padding-top: 0px;
     height: 350px;
-    vertical-align: middle;
+}
+header.header_home #welcome_text {
     display: inline-block;
+    margin-top: 145px;
+    vertical-align: middle;
 }
-#site_name2 a {
-    color: #FFF;
-    text-decoration: none;
-}
-
-#site_name2 #welcome_text {
-    margin-top: 135px;
-    margin-left: 550px;
-    margin-right: 50px;
-}
-#site_name2 #welcome_text p {
+header.header_home #welcome_text p {
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
-    margin: 0px;
-    max-width: 590px;
+    margin: 0px 50px 0px 550px;
 }
-#site_name2 #welcome_text p.hello{
-    text-align: right; 
-    margin-right: 35px;
+header.header_home #welcome_text p.hello {
     margin-top: 20px;
+    margin-right: 85px;
+    text-align: right; 
     font-weight: bold;
 }
-#site_name2 #welcome_text #header_homepage_link {
-    margin-top: 20px;
-}
-
-#home_middle {
-    margin: 30px 0px 20px 0px;
-    color: #2B2C2C;
-    padding-top: 15px;
-    padding-bottom: 30px;
-}
-
-#home_middle h2 {
-    text-transform: uppercase;
+header.header_home #welcome_text #header_homepage_link {
+    margin: 20px 50px 0px 550px;
     text-align: center;
-    width: 720px;
-    margin-left: 120px;
-    margin-bottom: 0px;
-    border-bottom: 1px solid #FFF;
-    -webkit-margin-after: 0em;
-    padding: 30px 0px;
-}
-
-#home_middle span.light {
-    margin-left: 50px;
-    padding: 10px 50px;
-    background-color: #F2F2F2;
-    text-transform: uppercase;
-    font-size:12px;
-}
-
-#home_middle span.light a {
-    color: #333333;
-    text-decoration:none;
 }
 
 #home_middle_top {
@@ -1190,28 +1149,23 @@ header.header_home {
     margin: auto;
 }
 
-.home_middle_desc{
-    width: 960px;
-    margin:auto;
-    margin-top: 25px;
-
-}
-.home_middle_desc #home_middle_desc_left, .home_middle_desc #home_middle_desc_right{
+#home_middle_desc_left, #home_middle_desc_right{
     display: inline-block;
     width: 50%;
-    margin-bottom: 25px;
+    margin: 25px 0px;
     text-align: center;
+    font-size: 16px;
 }
-.home_middle_desc #home_middle_desc_left{
+#home_middle_desc_left{
     float: left;
 }
-.home_middle_desc #home_middle_desc_right{
+#home_middle_desc_right{
     float: right;
 }
-.home_middle_desc #home_middle_desc_left p , .home_middle_desc #home_middle_desc_right p{
+#home_middle_desc_left p , #home_middle_desc_right p{
     margin: 0;
 }
-#home_middle_desc_right p:nth-child(1),#home_middle_desc_right p:nth-child(2),#home_middle_desc_left p:nth-child(1),#home_middle_desc_left p:nth-child(2){
+#home_middle_desc_right p:nth-child(1), #home_middle_desc_left p:nth-child(1) {
     text-transform: uppercase;
 }
 

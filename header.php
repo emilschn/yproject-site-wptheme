@@ -45,6 +45,15 @@
 	</head>
 
 	<body <?php body_class(); ?> id="bp-default">
+	    
+		<?php 
+		$menu_pages = array(
+			'les-projets' => 'Les projets',
+			'proposer-un-projet' => 'Proposer un projet',
+			'descriptif' => 'Comment ca marche ?',
+			'blog' => 'Blog'
+		);
+		?>
 
 		<nav id="navigation" role="navigation">
 			<div class="center">
@@ -54,14 +63,16 @@
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo.png" width="160" height="100" alt="logo" />
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo_court.png" width="160" height="51" alt="logo court" style="display: none;" />
 					</a></li>
-					<?php /* Menu Les projets */ $page_projects = get_page_by_path('les-projets'); ?>
-					<li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_projects->ID); ?>"><?php echo __('Les projets', 'yproject'); ?></a></span></li>
-					<?php /* Menu Proposer un projet */ $page_start = get_page_by_path('proposer-un-projet'); ?>
-					<li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_start->ID); ?>"><?php echo __('Proposer un projet', 'yproject'); ?></a></span></li>
-					<?php /* Menu Comment ça marche ? */ $page_how = get_page_by_path('descriptif'); ?>
-					<li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_how->ID); ?>"><?php echo __('Comment ca marche ?', 'yproject'); ?></a></span></li>
-					<?php /* Menu Blog */ $page_blog = get_page_by_path('blog'); ?>
-					<li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($page_blog->ID); ?>"><?php echo __('Blog', 'yproject'); ?></a></span></li>
+				    
+					<?php global $post; ?>
+					<?php foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
+						<?php 
+							$menu_page_object = get_page_by_path($menu_page_key);
+							$selected = ($post->post_name == $menu_page_key) ? ' selected' : ''; 
+						?>
+						<li class="page_item<?php echo $selected; ?>"><span class="page_item_border"><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></span></li>
+					<?php endforeach; ?>
+				    
 					<?php /* Logo FB / TW */ ?>
 					<li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.png" width="20" height="20" alt="logo facebook" /></a></li>
 					<li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.png" width="20" height="20" alt="logo twitter" /></a></li>
