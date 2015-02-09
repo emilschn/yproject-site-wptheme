@@ -46,8 +46,10 @@ get_header();
 						 * 
 						 */ ?>
 
+						<?php /*
 						<label for="org_type"><?php _e('Type d&apos;organisation', 'yproject'); ?></label>
 						<em>Pour l&apos;instant, seules les sociétés peuvent investir.</em><br />
+						 */ ?>
 
 						<label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?>*</label>
 						<input type="text" name="org_legalform" value="<?php echo filter_input(INPUT_POST, 'org_legalform'); ?>" /><br />

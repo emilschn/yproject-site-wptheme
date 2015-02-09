@@ -55,8 +55,10 @@ get_header();
 							<label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?></label>
 							<em><?php echo $organisation_obj->get_name(); ?></em><br />
 
+							<?php /*
 							<label for="org_type"><?php _e('Type d&apos;organisation', 'yproject'); ?></label>
 							<em><?php if ($organisation_obj->get_type() == "society") { echo "Société"; } ?></em><br />
+							 */ ?>
 
 							<label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?></label>
 							<input type="text" name="org_legalform" value="<?php echo $organisation_obj->get_legalform(); ?>" /><br />
