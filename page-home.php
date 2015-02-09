@@ -41,12 +41,12 @@
 			?>
 			<a href="<?php echo get_permalink($page_list_projects->ID); ?>" style="display: block;">
 				<div class="round_title_left">
-					<strong>Participez</strong><br/>&agrave; un projet
+					<strong>Participer</strong><br/>&agrave; un projet
 				</div>
 			</a>
 			<a href="<?php echo get_permalink($page_finance->ID); ?>" style="display: block;">
 				<div class="round_title_right">
-					<strong>Financez</strong><br />un projet
+					<strong>Financer</strong><br />son projet
 				</div>
 			</a>
 			<div class="clear"></div>
