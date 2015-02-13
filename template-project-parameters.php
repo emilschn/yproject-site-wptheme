@@ -104,10 +104,11 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					}
 					$api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
 					$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
-					
-					foreach ($organisations_list as $organisation_item) {
-						$selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
-						$str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
+					if ($organisations_list) {
+						foreach ($organisations_list as $organisation_item) {
+							$selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
+							$str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
+						}
 					}
 					?>
 					<label for="project-organisation">Organisation :</label>

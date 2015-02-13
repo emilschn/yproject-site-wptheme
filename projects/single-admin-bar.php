@@ -1,5 +1,5 @@
 <?php
-global $post, $campaign_id;
+global $post, $campaign_id, $can_modify;
 if (!isset($campaign_id)) {
     if (isset($_GET['campaign_id'])) $campaign_id = $_GET['campaign_id'];
     else $campaign_id = get_the_ID();

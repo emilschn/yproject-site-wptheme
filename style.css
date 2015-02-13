@@ -168,7 +168,7 @@ form.wdg-forms input[type=submit] {
 	margin-left: 184px;
 	margin-top: 10px;
 	background: none repeat scroll 0 0 #333333;
-	border: 1px solid #333333 !important;
+	border: none;
 	color: #FFFFFF;
 	padding: 3px 8px;
 	text-transform: uppercase;
@@ -221,20 +221,37 @@ form.wdg-forms .small-margin {
 /*******************************************************************************
 * LIGHTBOX - CGU / DEJA CONNECTE
 *******************************************************************************/
-#validate-terms, #already-connected {
+.wdg-lightbox {
 	background-color: rgba(0, 0, 0, 0.75);;
-	top: 0;
+	top: 0px;
+	left: 0px;
 	position: fixed;
 	z-index: 1010;
 	width: 100%;
 	height: 100%;
 }
 
-#validate-terms .validate-terms-padder, #already-connected .already-connected-padder {
+.wdg-lightbox .wdg-lightbox-padder {
 	max-width: 600px;
-	margin: 80px auto;
+	max-height: 90%;
+	margin: 5px auto;
 	padding: 20px;
-	background-color: #FFFFFF;
+	background-color: #F2F2F2;
+	overflow-y: auto;
+}
+
+.wdg-lightbox .button {
+	background-color: #FF494C !important;
+	border: none !important;
+}
+
+.wdg-lightbox .wdg-lightbox-button-close {
+	float: right;
+	margin-top: -17px;
+}
+.wdg-lightbox .wdg-lightbox-button-close a {
+	font-size: 16px;
+	font-weight: bold;
 }
 
 #validate-terms .validate-terms-excerpt {
@@ -257,9 +274,6 @@ form.wdg-forms .small-margin {
 
 #already-connected {
 	text-align: center;
-}
-#already-connected .already-connected-button {
-	float: right;
 }
 
 /*******************************************************************************

@@ -144,11 +144,21 @@ YPUIFunctions = (function($) {
 				});
 			}
 			
-			if ($("#already-connected").length > 0) {
-				$("#already-connected .already-connected-button a").click(function() {
-					$("#already-connected").hide();
+			
+			if ($(".wdg-lightbox").length > 0) {
+				$(".wdg-button-lightbox-open").click(function() {
+					var target = $(this).data("lightbox");
+					$("#wdg-lightbox-" + target).show();
 				});
+				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function() {
+					$(".wdg-lightbox").hide();
+				});
+				var sHash = window.location.hash.substring(1);
+				if ($("#wdg-lightbox-" + sHash).length > 0) {
+					$("#wdg-lightbox-" + sHash).show();
+				}
 			}
+			
 			
 			if ($("#blog-archives form#add-news").length > 0) {
 				$("#blog-archives #add-news-opener").click(function() {

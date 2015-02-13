@@ -1,13 +1,16 @@
 <?php date_default_timezone_set("Europe/Paris"); ?>
 
 <?php if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadyloggedin'] === '1'): ?>
-<div id="already-connected">
-	<div class="already-connected-padder">
-		<div class="already-connected-button">
+<div id="already-connected" class="wdg-lightbox">
+	<div class="wdg-lightbox-padder">
+		<div class="wdg-lightbox-button-close">
 			<a href="#" class="button">X</a>
 		</div>
-		<span>Vous &ecirc;tes d&eacute;j&agrave; inscrit et connect&eacute; !</span><br /><br />
-		<a href="<?php echo bp_loggedin_user_domain(); ?>">Mon compte</a>
+		<span>Vous &ecirc;tes d&eacute;j&agrave; inscrit et connect&eacute; !</span><br />
+		<hr /><br />
+		<a href="<?php echo bp_loggedin_user_domain(); ?>" class="button">Aller sur votre compte</a>
+		ou
+		<a href="<?php echo home_url(); ?>" class="button">Retourner &agrave; la case d&eacute;part</a>
 	</div>
 </div>
 <?php endif; ?>
