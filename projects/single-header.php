@@ -130,7 +130,7 @@ $vote_status = $campaign->campaign_status();
 				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) { ?> 
 					<div id="invest-button">
 						<?php $page_invest = get_page_by_path('investir'); ?>
-						<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&invest_start=1" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />Investir sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
+						<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />Investir sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
 					</div>
 
 				<?php } else if ($vote_status == 'preview'){ ?>
@@ -170,13 +170,13 @@ $vote_status = $campaign->campaign_status();
 					$users = $wpdb->get_results( 'SELECT * FROM '.$table_jcrois.' WHERE campaign_id = '.$campaign->ID.' AND user_id='.$user_id );
 					if ( !empty($users[0]->ID) ) { ?>
 						<a class="jy-crois" href="javascript:WDGProjectPageFunctions.update_jycrois(0,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
-						<div id="jy-crois-btn" style="background-image: url('<?php echo $stylesheet_directory_uri.'/images/jycrois_gris.png';?>')" class="stats_btn" class="dark">
+						<div id="jy-crois-btn" style="background-image: url('<?php echo $stylesheet_directory_uri.'/images/jycrois_gris.png';?>')" class="stats_btn">
 						<p id="jy-crois-txt"><p>    
 						<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
 						</div></a>
 					<?php } else { ?>
 						<a class="jy-crois" href="javascript:WDGProjectPageFunctions.update_jycrois(1,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
-						<div id="jy-crois-btn" class="stats_btn" class="dark">
+						<div id="jy-crois-btn" class="stats_btn">
 						<p id="jy-crois-txt">J'y crois<p>
 						<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
 						</div></a>
@@ -185,7 +185,7 @@ $vote_status = $campaign->campaign_status();
 				} else {
 					$page_connexion = get_page_by_path('connexion'); ?>
 					<a class="jy-crois" href="<?php echo get_permalink($page_connexion->ID); ?>">
-					<div id="jy-crois-btn" class="stats_btn" class="dark">
+					<div id="jy-crois-btn" class="stats_btn">
 					<p id="jy-crois-txt">J'y crois<p>
 					<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
 					</div></a>
@@ -194,7 +194,7 @@ $vote_status = $campaign->campaign_status();
 
 				<?php if ($vote_status != 'preparing') : ?>
 				<a id="share-btn-a" href="javascript:WDGProjectPageFunctions.share_btn_click();">
-				<div id="share-btn-div" class="stats_btn" class="dark">
+				<div id="share-btn-div" class="stats_btn">
 					<p id="share-txt">Partager</p>	
 				</div>
 				</a>
