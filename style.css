@@ -1498,6 +1498,8 @@ div#home_bottom h1 {
 #head-content #subtitle{
     position: absolute;
     bottom: 50px;
+    min-width: 30px;
+    min-height: 20px;
 }
 #head-content img.bg-project {
     top: -1px;
@@ -2043,6 +2045,19 @@ div#home_bottom h1 {
 }
 .ui-button-text {
     display: none;
+}
+
+/***** EDITION *****/
+.edit-button, .edit-button-validate {
+    position: absolute;
+    cursor: pointer;
+}
+.edit-input {
+    position: absolute;
+}
+
+#wdg-input-subtitle {
+    width: 470px;
 }
 
 /*******************************************************************************

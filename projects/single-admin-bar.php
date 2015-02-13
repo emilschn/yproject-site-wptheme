@@ -1,5 +1,5 @@
 <?php
-global $post, $campaign_id, $can_modify;
+global $post, $campaign_id;
 if (!isset($campaign_id)) {
     if (isset($_GET['campaign_id'])) $campaign_id = $_GET['campaign_id'];
     else $campaign_id = get_the_ID();
@@ -7,7 +7,6 @@ if (!isset($campaign_id)) {
 $post_campaign = get_post($campaign_id);
 
 locate_template( array("requests/projects.php"), true );
-$can_modify = YPProjectLib::current_user_can_edit($campaign_id);
 
 if ($can_modify) {
 	$campaign = atcf_get_campaign($post_campaign);
