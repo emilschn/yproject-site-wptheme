@@ -444,6 +444,7 @@ WDGProjectPageFunctions=(function($) {
 		},
 
 		print_vote_form:function(){
+		    $('html, body').animate({scrollTop: $("#invest-button").offset().top - $("#navigation").height()}, "fast"); 
 		    $("#vote-form").animate({ 
 	        	top: "370px"
 		    }, 500 );
