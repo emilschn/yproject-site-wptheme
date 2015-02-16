@@ -45,7 +45,6 @@ if(false===$cache_result){
 	}
 	echo $cache_result;
 	?>
-
 <div id="content">
 	<?php 
 		$cache_result=$WDG_cache_plugin->get_cache('home-collecte-projects');
