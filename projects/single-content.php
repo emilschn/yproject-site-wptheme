@@ -16,7 +16,9 @@ $vote_status = html_entity_decode($campaign->vote());
 ?>
 <div id="projects-top-desc">
 	<div id="projects-left-desc" class="left">
-		<div id="projects-summary"><?php echo html_entity_decode($campaign->summary()); ?></div>
+		<div id="project-summary-container">
+			<div id="projects-summary"><?php echo html_entity_decode($campaign->summary()); ?></div>
+		</div>
 		<?php 
 		$video_element = '';
 		$img_src = '';
@@ -89,8 +91,9 @@ $vote_status = html_entity_decode($campaign->vote());
 				<a id="move-cursor" href="JavaScript:void(0);" onclick='javascript:WDGProjectPageFunctions.move_cursor(<?php if(isset($_GET['campaign_id'])){echo $_GET['campaign_id'];}else{global $post;echo($post->ID); } ?>)'>Modifier la position du curseur</a>
 			<?php } 
 
-			$cache_result=$WDG_cache_plugin->get_cache('project-'.$campaign_id.'-content-second');
-			if(false===$cache_result){
+//			$cache_result=$WDG_cache_plugin->get_cache('project-'.$campaign_id.'-content-second');
+			$cache_result = FALSE;
+			if ($cache_result === FALSE) {
 				ob_start();
 				?>
 	</div>
@@ -103,72 +106,111 @@ $vote_status = html_entity_decode($campaign->vote());
 	</span>
 </div>
 
+<?php
+$editor_params = array( 
+	'media_buttons' => true,
+	'quicktags'     => false,
+	'tinymce'       => array(
+		'plugins' => 'paste',
+		'paste_remove_styles' => true
+	)
+);
+?>
+
 <div class="indent">
 	<div class="projects-desc-item">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet.png" alt="logo projet" data-content="project"/>
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle projet"/>
 		<div id="project-content-project" class="projects-desc-content">
 			<h2>En quoi consiste le projet ?</h2>
-			<div><?php the_content(); ?></div>
+			<div class="zone-content"><?php the_content(); ?></div>
+			<?php if ($can_modify): ?>
+				<div class="zone-edit hidden">
+				<?php 
+				$editor_description_content = str_replace( ']]>', ']]&gt;', apply_filters( 'the_content', $campaign->data->post_content ));
+				wp_editor( $editor_description_content, 'wdg-input-description', $editor_params );
+				?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 
-	<a id="anchor-social"></a>
+	<a id="anchor-societal_challenge"></a>
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>sociale.png" alt="logo social" data-content="social" />
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>sociale.png" alt="logo social" data-content="societal_challenge" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris" />
-		<div id="project-content-social" class="projects-desc-content">
+		<div id="project-content-societal_challenge" class="projects-desc-content">
 			<h2>Quelle est l&apos;utilit&eacute; soci&eacute;tale du projet ?</h2>
-				<div>
+			<div class="zone-content">
 				<?php 
 				$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
 				echo apply_filters('the_content', $societal_challenge);
 				?>
 			</div>
+			<?php if ($can_modify): ?>
+				<div class="zone-edit hidden">
+				<?php wp_editor( $societal_challenge, 'wdg-input-societal_challenge', $editor_params ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 	
 	<?php if ($vote_status != 'preview'): ?>
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>economie.png" alt="logo economie" data-content="economic" />
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>economie.png" alt="logo economie" data-content="added_value" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
-		<div id="project-content-economic" class="projects-desc-content">
+		<div id="project-content-added_value" class="projects-desc-content">
 			<h2>Quelle est l&apos;opportunit&eacute; &eacute;conomique du projet ?</h2>
-			<div>
+			<div class="zone-content">
 				<?php 
 				$added_value = html_entity_decode($campaign->added_value()); 
 				echo apply_filters('the_content', $added_value);
 				?>
 			</div>
+			<?php if ($can_modify): ?>
+				<div class="zone-edit hidden">
+				<?php wp_editor( $added_value, 'wdg-input-added_value', $editor_params ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 	
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>model.png" alt="logo modele" data-content="model" />
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>model.png" alt="logo modele" data-content="economic_model" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
-		<div id="project-content-model" class="projects-desc-content">
+		<div id="project-content-economic_model" class="projects-desc-content">
 			<h2>Quel est le mod&egrave;le &eacute;conomique du projet ?</h2>
-			<div>
+			<div class="zone-content">
 				<?php 
 				$economic_model = html_entity_decode($campaign->economic_model()); 
 				echo apply_filters('the_content', $economic_model);
 				?>
 			</div>
+			<?php if ($can_modify): ?>
+				<div class="zone-edit hidden">
+				<?php wp_editor( $economic_model, 'wdg-input-economic_model', $editor_params ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 	<?php endif; ?>
     
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>porteur.png" alt="logo porteur" data-content="porteur"/>
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>porteur.png" alt="logo porteur" data-content="implementation"/>
 		<img class="vertical-align-middle grey-triangle"src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
-		<div id="project-content-porteur" class="projects-desc-content">
+		<div id="project-content-implementation" class="projects-desc-content">
 			<h2>Qui porte le projet ?</h2>
-			<div>
+			<div class="zone-content">
 				<?php 
 				$implementation = html_entity_decode($campaign->implementation()); 
 				echo apply_filters('the_content', $implementation);
 				?>
 			</div>
+			<?php if ($can_modify): ?>
+				<div class="zone-edit hidden">
+				<?php wp_editor( $implementation, 'wdg-input-implementation', $editor_params ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>

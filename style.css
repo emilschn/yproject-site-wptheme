@@ -226,15 +226,15 @@ form.wdg-forms .small-margin {
 	top: 0px;
 	left: 0px;
 	position: fixed;
-	z-index: 1010;
+	z-index: 4000;
 	width: 100%;
 	height: 100%;
 }
 
 .wdg-lightbox .wdg-lightbox-padder {
 	max-width: 600px;
-	max-height: 90%;
-	margin: 5px auto;
+	max-height: 80vh;
+	margin: 5vh auto;
 	padding: 20px;
 	background-color: #F2F2F2;
 	overflow-y: auto;
@@ -283,7 +283,7 @@ form.wdg-forms .small-margin {
     background-color: #333333;
     top: 0;
     position:fixed;
-    z-index: 1000;
+    z-index: 3000;
     width: 100%;
     min-width: 960px;
 }
@@ -1473,13 +1473,6 @@ div#home_bottom h1 {
 .ui-state-disabled{
     opacity: 1 !important;
 }
-#move-cursor{
-    position: relative;
-    left: 134px;
-    background-color: #333;
-    color: white;
-    padding: 4px;
-}
 
 
 #head-image:hover>#reposition-cover{
@@ -1506,14 +1499,18 @@ div#home_bottom h1 {
     position: absolute;
     font-size: 30px;
     text-transform: uppercase;
+    width: 470px;
     bottom: 70px;
     left: 0px;
+    -webkit-margin-before: 0em;
 }
 #head-content #subtitle{
     position: absolute;
     bottom: 50px;
-    min-width: 30px;
-    min-height: 20px;
+    width: 470px;
+    min-height: 18px;
+    padding: 5px 0px;
+    -webkit-margin-before: 0em;
 }
 #head-content img.bg-project {
     top: -1px;
@@ -1850,18 +1847,22 @@ div#home_bottom h1 {
     font-size: 20px;
     text-transform: uppercase;
 }
-#projects-summary{
+
+#project-summary-container {
+    margin-top: 45px;
+    height: 115px;
+}
+#project-summary-container #projects-summary {
     position: relative;
     overflow: hidden;
     display: block;
     width: 610px;
     height: 113px;
-    margin-top: 45px;
 }
-
-#projects-summary p{
+#projects-summary p {
     margin: 0px;
 }
+
 .projects-more{
     color: #FF494C;
     position: relative;
@@ -2062,16 +2063,38 @@ div#home_bottom h1 {
 }
 
 /***** EDITION *****/
+.editable {
+    border: 1px dashed #2B2C2C;
+}
 .edit-button, .edit-button-validate {
     position: absolute;
     cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    z-index: 2000;
+}
+.edit-button {
+    background: url("images/editer.png") #74BF43 center no-repeat;
+}
+.edit-button-validate {
+    background: url("images/editer.png") #74BF43 center no-repeat;
 }
 .edit-input {
     position: absolute;
+    min-height: 24px;
 }
 
-#wdg-input-subtitle {
-    width: 470px;
+#wdg-input-title, #wdg-input-subtitle {
+    width: 468px;
+}
+
+#move-cursor{
+    position: relative;
+    left: 134px;
+    background-color: #74BF43;
+    color: #FFF;
+    padding: 4px;
 }
 
 /*******************************************************************************

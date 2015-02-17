@@ -52,7 +52,7 @@ add_filter('login_errors',create_function('$a', "return null;"));
 
 function yproject_enqueue_script(){
 	global $post, $can_modify;
-	$campaign_id = (isset($_GET['campaign_id'])) ? $_GET['campaign_id'] : $post->ID;
+	$campaign_id = $post->ID;
 	$is_campaign = (get_post_meta($campaign_id, 'campaign_goal', TRUE) != '');
 	$can_modify = $is_campaign ? YPProjectLib::current_user_can_edit($campaign_id) : FALSE;
 	
@@ -63,7 +63,7 @@ function yproject_enqueue_script(){
 	}
 	
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '1.1.004');
-//	if ($is_campaign && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog')); }
+	if ($is_campaign && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog')); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
@@ -643,7 +643,23 @@ add_action('wp_ajax_nopriv_get_current_projects', 'yproject_get_current_projects
 
 
 function yproject_save_edit_project() {
-	update_post_meta($_POST['id_campaign'], 'campaign_' . $_POST['property'], $_POST['value']);
+	switch ($_POST['property']) {
+		case "title":
+			wp_update_post(array(
+				'ID' => $_POST['id_campaign'],
+				'post_title' => $_POST['value']
+			));
+			break;
+		case "description":
+			wp_update_post(array(
+				'ID' => $_POST['id_campaign'],
+				'post_content' => $_POST['value']
+			));
+			break;
+		default: 
+			update_post_meta($_POST['id_campaign'], 'campaign_' . $_POST['property'], $_POST['value']);
+			break;
+	}
 	echo $_POST['property'];
 	exit();
 }
@@ -657,9 +673,11 @@ add_action('wp_ajax_nopriv_save_edit_project', 'yproject_save_edit_project');
 function yproject_shortcode_lightbox_button($atts, $content = '') {
     $atts = shortcode_atts( array(
 	'label' => 'Afficher',
-	'id' => 'lightbox'
+	'id' => 'lightbox',
+	'class' => 'button',
+	'style' => ''
     ), $atts );
-    return '<a href="#'.$atts['id'].'" class="wdg-button-lightbox-open" data-lightbox="'.$atts['id'].'">'.$atts['label'].'</a>';
+    return '<a href="#'.$atts['id'].'" class="wdg-button-lightbox-open '.$atts['class'].'" style="'.$atts['style'].'" data-lightbox="'.$atts['id'].'">'.$atts['label'].'</a>';
 }
 add_shortcode('yproject_lightbox_button', 'yproject_shortcode_lightbox_button');
 
