@@ -70,6 +70,7 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					    'name'        => 'categories'
 					) ); ?><br />
 					
+					<a id="picture-head"></a><a id="video-zone"></a><?php /* ancre déplacée pour cause de menu... */ ?>
 					<label for="activities">Secteur d&apos;activit&eacute; :</label>
 					<?php wp_dropdown_categories( array( 
 					    'hide_empty'  => 0,
@@ -93,40 +94,21 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 						?>
 					</select><br />
 					
-					<?php
-					// Gestion des organisations
-					$str_organisations = '';
-					global $current_user;
-					$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
-					$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-					if (isset($current_organisations) && count($current_organisations) > 0) {
-						$current_organisation = $current_organisations[0];
-					}
-					$api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
-					$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
-					if ($organisations_list) {
-						foreach ($organisations_list as $organisation_item) {
-							$selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
-							$str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
-						}
-					}
-					?>
-					<label for="project-organisation">Organisation :</label>
-					    
-					<?php if ($str_organisations != ''): ?>
-						<select name="project-organisation">
-							<option value=""></option>
-							<?php echo $str_organisations; ?>
-						</select>
-
-					<?php else: ?>
-						<?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
-						<input type="hidden" name="project-organisation" value="" />
-
-					<?php endif; ?>
+					<?php $image_src_header = $campaign->get_header_picture_src(false); ?>
+					<label for="image_header">Image du bandeau :</label>
+					<input type="file" name="image_header" /><br />
+					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 1366px de largeur * 370px de hauteur)</span><br />
+					<input type="checkbox" name="image_header_blur" <?php if ($campaign->is_header_blur()) { echo 'checked="checked"'; } ?> /> Appliquer un flou artistique<br />
+					<?php if ($image_src_header != '') { ?><img src="<?php echo $image_src_header; ?>" /><br /><?php } ?>
 					
-					<input type="submit" name="new_orga" value="Cr&eacute;er une organisation" class="small-margin button" />
-					<br />
+					<?php $image_src_home = $campaign->get_home_picture_src(false); ?>
+					<label for="image_home">Image d&apos;aper&ccedil;u :</label>
+					<input type="file" name="image_home" /><br />
+					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 610px de largeur * 330px de hauteur)</span><br />
+					<?php if ($image_src_home != '') { ?><img src="<?php echo $image_src_home; ?>" /><br /><?php } ?>
+					
+					<label for="video">Vid&eacute;o de pr&eacute;sentation :</label>
+					<input type="text" name="video" placeholder="URL de la vidéo" value="<?php echo $campaign->video(); ?>" /><br />
 					
 					
 					<?php if ($campaign->campaign_status() == "preparing") : ?>
@@ -167,6 +149,42 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 						Entre <?php echo $campaign->minimum_goal(); ?> &euro; et <?php echo $goal; ?> &euro;<br />
 					
 					<?php endif; ?>
+					
+						
+					<?php
+					// Gestion des organisations
+					$str_organisations = '';
+					global $current_user;
+					$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+					$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+					if (isset($current_organisations) && count($current_organisations) > 0) {
+						$current_organisation = $current_organisations[0];
+					}
+					$api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
+					$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
+					if ($organisations_list) {
+						foreach ($organisations_list as $organisation_item) {
+							$selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
+							$str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
+						}
+					}
+					?>
+					<label for="project-organisation">Organisation :</label>
+					    
+					<?php if ($str_organisations != ''): ?>
+						<select name="project-organisation">
+							<option value=""></option>
+							<?php echo $str_organisations; ?>
+						</select>
+
+					<?php else: ?>
+						<?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
+						<input type="hidden" name="project-organisation" value="" />
+
+					<?php endif; ?>
+					
+					<input type="submit" name="new_orga" value="Cr&eacute;er une organisation" class="small-margin button" />
+					<br />
 						
 					<input type="hidden" name="action" value="edit-project-parameters" />
 						

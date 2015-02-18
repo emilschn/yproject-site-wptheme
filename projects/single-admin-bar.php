@@ -49,10 +49,6 @@ if ($can_modify) {
                         |
                         <a href="<?php echo get_permalink($campaign_id) . $params_full; ?>" <?php if ($current_page == $post_campaign->post_name) { echo 'class="selected"'; } ?>><?php echo __('Page projet', 'yproject'); ?></a>
                         |
-			<?php if ($campaign->edit_version() === 1): ?>
-                        <a href="<?php echo get_permalink($page_manage->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'gerer') { echo 'class="selected"'; } ?>>Editer le projet</a>
-                        |
-			<?php endif; ?>
                         <a href="<?php echo get_permalink($page_parameters->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'parametres-projet') { echo 'class="selected"'; } ?>>Param&egrave;tres</a>
                         |
                         <a href="<?php echo get_permalink($page_manage_team->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'projet-gerer-equipe') { echo 'class="selected"'; } ?>><?php echo __('&Eacute;quipe', 'yproject'); ?></a>

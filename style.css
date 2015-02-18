@@ -154,15 +154,21 @@ form.wdg-forms label {
 	margin: 10px 0px;
 	width: 180px;
 	font-weight: bold;
+	vertical-align: top;
 }
 form.wdg-forms label.large {
 	width: 280px;
 }
 form.wdg-forms select {
+	margin: 10px 0px;
 	width: 180px;
 }
 form.wdg-forms input[type=text] {
+	margin: 10px 0px;
 	width: 176px;
+}
+form.wdg-forms input[type=file] {
+	margin: 10px 0px;
 }
 form.wdg-forms input[type=submit] {
 	margin-left: 184px;
@@ -176,14 +182,12 @@ form.wdg-forms input[type=submit] {
 	font-weight: normal;
 	font-size: 14px;
 }
-form.wdg-forms input[type=radio] {
+form.wdg-forms input[type=radio], form.wdg-forms input[type=checkbox] {
 	margin-left: 184px;
 }
 form.wdg-forms input[type=radio].first {
+	margin-top: 10px;
 	margin-left: 0px;
-}
-form.wdg-forms input[type=checkbox] {
-	margin-left: 184px;
 }
 form.wdg-forms .extra-field {
 	margin-left: 184px;
@@ -1475,18 +1479,6 @@ div#home_bottom h1 {
 }
 
 
-#head-image:hover>#reposition-cover{
-    display: block;
-}
-#head-image #reposition-cover {
-    position: absolute;
-    display: none;
-    padding: 8px;
-    top: 104px;
-    left: 58px;
-    z-index: 150;
-}
-
 #head-content{
     position: absolute;
     width: 1080px;
@@ -1707,7 +1699,7 @@ div#home_bottom h1 {
     vertical-align: middle;
 }
 #project-about{
-    margin-top: 30px;
+    margin-top: 20px;
     text-align: center;
     position: relative;
 }
@@ -1735,6 +1727,13 @@ div#home_bottom h1 {
     bottom: -11px;
     margin: 0;
     padding : 0;
+}
+#projects-right-desc .project-rewards {
+    margin: 10px 5px 0px 5px;
+}
+#projects-right-desc #project-rewards-custom {
+    height: 50px;
+    overflow: hidden;
 }
 
 .stats_btn{
@@ -2087,6 +2086,39 @@ div#home_bottom h1 {
 
 #wdg-input-title, #wdg-input-subtitle {
     width: 468px;
+}
+#wdg-input-rewards {
+    margin-left: 5px;
+}
+#wdg-edit-rewards, #wdg-validate-rewards {
+    margin-left: 10px;
+}
+
+.projects-desc-content .zone-edit .wp-editor-wrap .wp-editor-container .wp-editor-area {
+    min-height: 500px !important;
+}
+
+#head-image #wdg-edit-picture-head {
+    display: none;
+    left: 28px;
+    top: 106px;
+}
+#head-image #reposition-cover {
+    display: none;
+    position: absolute;
+    padding: 8px;
+    top: 104px;
+    left: 58px;
+    z-index: 150;
+}
+#head-image:hover>#reposition-cover, #head-image:hover>#wdg-edit-picture-head {
+    display: block;
+}
+#head-image #reposition-cover a {
+    background-color: #74BF43;
+    border: none !important;
+    height: 14px;
+    padding: 7px 8px;
 }
 
 #move-cursor{

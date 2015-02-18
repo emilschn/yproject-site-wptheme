@@ -78,7 +78,6 @@ $vote_status = html_entity_decode($campaign->vote());
 			<div id="map-cursor" style="<?php if($cursor_top_position!='') echo 'top:'.$cursor_top_position.';'; if($cursor_left_position!='') echo 'left:'.$cursor_left_position; ?> ">
 				<p><?php echo $campaign->location(); ?></p>
 			</div>
-			
 		</div>
 		<?php
 		$cache_result=ob_get_contents();
@@ -87,15 +86,19 @@ $vote_status = html_entity_decode($campaign->vote());
 		}
 		echo $cache_result;
 			
-			if($can_modify){ ?>
-				<a id="move-cursor" href="JavaScript:void(0);" onclick='javascript:WDGProjectPageFunctions.move_cursor(<?php if(isset($_GET['campaign_id'])){echo $_GET['campaign_id'];}else{global $post;echo($post->ID); } ?>)'>Modifier la position du curseur</a>
-			<?php } 
-
-//			$cache_result=$WDG_cache_plugin->get_cache('project-'.$campaign_id.'-content-second');
-			$cache_result = FALSE;
-			if ($cache_result === FALSE) {
-				ob_start();
-				?>
+		if($can_modify){ ?>
+			<a id="move-cursor" href="JavaScript:void(0);" onclick='javascript:WDGProjectPageFunctions.move_cursor(<?php if(isset($_GET['campaign_id'])){echo $_GET['campaign_id'];}else{global $post;echo($post->ID); } ?>)'>Modifier la position du curseur</a>
+		<?php } ?>
+			
+		<div class="project-rewards">
+			<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?>
+			Vous recevrez une part de capital de cette entreprise.
+			<?php else: ?>
+			Vous recevrez une partie du chiffre d'affaires de ce projet.
+			<?php endif; ?>
+		</div>
+		
+		<div id="project-rewards-custom" class="project-rewards"><?php echo $campaign->rewards(); ?></div>
 	</div>
 </div>
 <div id="project-description-title-padding"></div>
@@ -110,6 +113,7 @@ $vote_status = html_entity_decode($campaign->vote());
 $editor_params = array( 
 	'media_buttons' => true,
 	'quicktags'     => false,
+	'editor_height' => 500,
 	'tinymce'       => array(
 		'plugins' => 'paste',
 		'paste_remove_styles' => true
@@ -119,9 +123,9 @@ $editor_params = array(
 
 <div class="indent">
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet.png" alt="logo projet" data-content="project"/>
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet.png" alt="logo projet" data-content="description"/>
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle projet"/>
-		<div id="project-content-project" class="projects-desc-content">
+		<div id="project-content-description" class="projects-desc-content">
 			<h2>En quoi consiste le projet ?</h2>
 			<div class="zone-content"><?php the_content(); ?></div>
 			<?php if ($can_modify): ?>
@@ -216,10 +220,3 @@ $editor_params = array(
 </div>
 </div>
 </div>
-<?php
-		$cache_result = ob_get_contents();
-		$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-content-second', $cache_result);
-		ob_end_clean();
-		}
-		echo $cache_result;
-?>

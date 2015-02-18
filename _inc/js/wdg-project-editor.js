@@ -12,35 +12,48 @@ var ProjectEditor = (function($) {
 			ProjectEditor.elements["title"] = {elementId: "#projects-banner #head-content #title", contentId: "#projects-banner #head-content #title span"};
 			ProjectEditor.elements["subtitle"] = {elementId: "#projects-banner #head-content #subtitle", contentId: "#projects-banner #head-content #subtitle"};
 			ProjectEditor.elements["summary"] = {elementId: "#post_bottom_content #projects-summary", contentId: "#post_bottom_content #projects-summary"};
-			ProjectEditor.elements["description"] = {elementId: "#post_bottom_content #project-content-project .zone-content", contentId: "#post_bottom_content #project-content-project .zone-edit"};
+			ProjectEditor.elements["rewards"] = {elementId: "#projects-right-desc #project-rewards-custom", contentId: "#projects-right-desc #project-rewards-custom"};
+			ProjectEditor.elements["description"] = {elementId: "#post_bottom_content #project-content-description .zone-content", contentId: "#post_bottom_content #project-content-description .zone-edit"};
 			ProjectEditor.elements["societal_challenge"] = {elementId: "#post_bottom_content #project-content-societal_challenge .zone-content", contentId: "#post_bottom_content #project-content-societal_challenge .zone-edit"};
 			ProjectEditor.elements["added_value"] = {elementId: "#post_bottom_content #project-content-added_value .zone-content", contentId: "#post_bottom_content #project-content-added_value .zone-edit"};
 			ProjectEditor.elements["economic_model"] = {elementId: "#post_bottom_content #project-content-economic_model .zone-content", contentId: "#post_bottom_content #project-content-economic_model .zone-edit"};
 			ProjectEditor.elements["implementation"] = {elementId: "#post_bottom_content #project-content-implementation .zone-content", contentId: "#post_bottom_content #project-content-implementation .zone-edit"};
+			ProjectEditor.elements["picture-head"] = {elementId: "#projects-banner #head-image #reposition-cover", contentId: "#single_project_admin_bar"};
+			ProjectEditor.elements["video-zone"] = {elementId: "#post_bottom_content #projects-left-desc .video-zone", contentId: "#single_project_admin_bar"};
+			
 		},
 		
 		addEditButton: function(property) {
 			var buttonEdit = '<div id="wdg-edit-'+property+'" class="edit-button" data-property="'+property+'"></div>';
-			$(ProjectEditor.elements[elementKey].elementId).after(buttonEdit);
 			switch (property) {
 				case "societal_challenge":
 				case "added_value":
 				case "economic_model":
 				case "implementation":
+					$(ProjectEditor.elements[elementKey].elementId).after(buttonEdit);
 					$("#wdg-edit-"+property).hide();
 					break;
+					
 				default:
+					$(ProjectEditor.elements[elementKey].elementId).after(buttonEdit);
 					ProjectEditor.showEditButton(property);
 					break;
 			}
 		},
 		
 		showEditButton: function(property) {
-			var elementId = ProjectEditor.elements[property].elementId;
-			$("#wdg-edit-"+property).css("left", $(elementId).position().left + $(elementId).outerWidth());
-			var marginTop = Number($(elementId).css("marginTop").replace("px", ""));
-			$("#wdg-edit-"+property).css("top", $(elementId).position().top + marginTop);
-			$("#wdg-edit-"+property).show();
+			if (property !== "picture-head") {
+				var elementId = ProjectEditor.elements[property].elementId;
+				$("#wdg-edit-"+property).css("left", $(elementId).position().left + $(elementId).outerWidth());
+				var marginTop = Number($(elementId).css("marginTop").replace("px", ""));
+				$("#wdg-edit-"+property).css("top", $(elementId).position().top + marginTop);
+				$("#wdg-edit-"+property).show();
+			}
+			
+		},
+		
+		hideEditButton: function(property) {
+			$("#wdg-edit-"+property).hide();
 		},
 		
 		initClick: function() {
@@ -53,6 +66,7 @@ var ProjectEditor = (function($) {
 						ProjectEditor.createInput(sProperty);
 						break;
 					case "summary":
+					case "rewards":
 						ProjectEditor.createTextArea(sProperty);
 						break;
 					case "description":
@@ -62,6 +76,10 @@ var ProjectEditor = (function($) {
 					case "implementation":
 						ProjectEditor.showEditableZone(sProperty);
 						break;
+					case "picture-head":
+					case "video-zone":
+						ProjectEditor.redirectParams(sProperty);
+						break;
 				}
 			});
 		},
@@ -69,7 +87,9 @@ var ProjectEditor = (function($) {
 		init: function() {
 			ProjectEditor.initElements();
 			for (elementKey in ProjectEditor.elements) {
-				$(ProjectEditor.elements[elementKey].elementId).addClass("editable");
+				if (elementKey !== "picture-head") {
+					$(ProjectEditor.elements[elementKey].elementId).addClass("editable");
+				}
 				ProjectEditor.addEditButton(elementKey);
 			}
 			ProjectEditor.initClick();
@@ -82,6 +102,7 @@ var ProjectEditor = (function($) {
 				case "title":
 				case "subtitle":
 				case "summary":
+				case "rewards":
 					buffer = $(ProjectEditor.elements[property].contentId).text();
 					break;
 			}
@@ -136,6 +157,7 @@ var ProjectEditor = (function($) {
 			$("#wdg-edit-"+property).hide();
 			
 			$(ProjectEditor.elements[property].contentId).show();
+			$(ProjectEditor.elements[property].contentId + "> div").show();
 			var buttonValidate = '<div id="wdg-validate-'+property+'" class="edit-button-validate" data-property="'+property+'"></div>';
 			$(ProjectEditor.elements[property].contentId).after(buttonValidate);
 			$("#wdg-validate-"+property).css("left", $(ProjectEditor.elements[property].contentId).position().left + $(ProjectEditor.elements[property].contentId).outerWidth());
@@ -145,9 +167,21 @@ var ProjectEditor = (function($) {
 			});
 		},
 		
+		redirectParams: function(property) {
+			$(ProjectEditor.elements[property].contentId).children().children().each(function() {
+				if ($(this).text() === "Paramètres") {
+					window.location.href = $(this).attr("href") + "#" + property;
+				}
+			});
+		},
+		
 		validateInput: function(property) {
 			var value = $("#wdg-input-"+property).val();
 			switch (property) {
+				case "summary":
+				case "rewards":
+					value = (value + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '<br />' + '$2');
+					break;
 				case "description":
 				case "societal_challenge":
 				case "added_value":
@@ -178,6 +212,7 @@ var ProjectEditor = (function($) {
 				case "title":
 				case "subtitle":
 				case "summary":
+				case "rewards":
 					ProjectEditor.updateText(property);
 					$(ProjectEditor.elements[property].elementId).show();
 					$("#wdg-input-"+property).remove();
@@ -203,8 +238,13 @@ var ProjectEditor = (function($) {
 			switch (property) {
 				case "title":
 				case "subtitle":
-				case "summary":
 					$(ProjectEditor.elements[property].contentId).text($("#wdg-input-"+property).val());
+					break;
+				case "summary":
+				case "rewards":
+					var value = $("#wdg-input-"+property).val();
+					value = (value + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '<br />' + '$2');
+					$(ProjectEditor.elements[property].contentId).html(value);
 					break;
 				case "description":
 				case "societal_challenge":

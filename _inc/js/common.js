@@ -489,20 +489,19 @@ WDGProjectPageFunctions=(function($) {
 		//Clic sur une partie
 		clickItem: function(clickedElement) {
 			if (!ProjectEditor.isEditing) {
-				//Récupération zone
-				var property = clickedElement.attr("id").substr(("project-content-").length);
-				ProjectEditor.showEditButton(property);
-				
 				//Si la balise "lire plus" de l'élément cliqué est affichée
 				var projectMore = clickedElement.find('.projects-more');
 				if (projectMore.is(':visible')) {
 					//il faut la masquer puis afficher les éléments qui suivent
 					projectMore.hide(400, function(){
 						$('html, body').animate({scrollTop: clickedElement.offset().top - $("#navigation").height()}, "slow"); 
-						clickedElement.find('p, ul, table').slideDown(400);
+						clickedElement.find('.zone-content > p, ul, table').slideDown(400);
 					});
 					//on masque aussi toutes les autres parties
-					WDGProjectPageFunctions.hideOthers(projectMore.attr("data-value"));
+					WDGProjectPageFunctions.hideOthers(parseInt(projectMore.attr("data-value")));
+					//Récupération zone
+					var property = clickedElement.attr("id").substr(("project-content-").length);
+					ProjectEditor.showEditButton(property);
 				//Sinon on masque tout
 				} else {
 					WDGProjectPageFunctions.hideOthers(-1);
@@ -519,7 +518,9 @@ WDGProjectPageFunctions=(function($) {
 		 		if (index !== currentDiv) {
 		 			$(this).find('.projects-more').slideDown(200);
 		 			$(this).children().children().not('*:eq(0)').slideUp(400);
-					console.log($(this).children().children());
+					
+					var property = $(this).attr("id").substr(("project-content-").length);
+					ProjectEditor.hideEditButton(property);
 		 		}
 		 		index++;
 			});

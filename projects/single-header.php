@@ -320,12 +320,14 @@ $vote_status = $campaign->campaign_status();
 		?>
 
 		<?php 
-		global $can_modify;
-		if ($can_modify) { 
+		global $can_modify, $is_campaign_page;
+		if ($can_modify && $is_campaign_page) { 
 		    global $post;
 		    $post_id_echo = (isset($_GET['campaign_id'])) ? $_GET['campaign_id'] : $post->ID;
 		?>
-		    <a href="javascript:void(0);" id="reposition-cover" class="button" onclick="javascript:BOPPFunctions.move_picture(<?php echo $post_id_echo; ?>)">Repositionner</a>
+		    <div id="reposition-cover">
+			    <a href="javascript:void(0);" class="button" onclick="javascript:BOPPFunctions.move_picture(<?php echo $post_id_echo; ?>)">Repositionner</a>
+		    </div>
 		<?php } ?>
 	</div>
 	<div style="clear:both"></div>

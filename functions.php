@@ -51,10 +51,11 @@ remove_action("wp_head", "wp_generator");
 add_filter('login_errors',create_function('$a', "return null;"));
 
 function yproject_enqueue_script(){
-	global $post, $can_modify;
-	$campaign_id = $post->ID;
+	global $post, $can_modify, $is_campaign_page;
+	$campaign_id = (isset($_GET['campaign_id'])) ? $_GET['campaign_id'] : $post->ID;
 	$is_campaign = (get_post_meta($campaign_id, 'campaign_goal', TRUE) != '');
-	$can_modify = $is_campaign ? YPProjectLib::current_user_can_edit($campaign_id) : FALSE;
+	$is_campaign_page = $is_campaign && ($campaign_id == $post->ID);
+	$can_modify = ($is_campaign) && (YPProjectLib::current_user_can_edit($campaign_id));
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -63,7 +64,7 @@ function yproject_enqueue_script(){
 	}
 	
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '1.1.004');
-	if ($is_campaign && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog')); }
+	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog')); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
