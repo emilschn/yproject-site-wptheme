@@ -31,7 +31,6 @@
 	</div>
 </header>
 
-
 <div id="home_middle_top">
 	<div id="home_middle_content">
 		<div class="center">
