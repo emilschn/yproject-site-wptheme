@@ -61,9 +61,8 @@ $vote_status = $campaign->campaign_status();
 				$nbvoters = $campaign->nb_voters();
 				$remaining_vote_days = $campaign->end_vote_remaining(); 
 			?>
-				<div style="opacity:0.5">
-					<div class="project_full_progressbg"></div>
-					<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
+				<div class="post_bottom_infos_item">
+					Projet en vote
 				</div>
 				<div class="post_bottom_infos_item">
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
