@@ -3,6 +3,9 @@ function wdg_get_project_investments($camp_id, $include_pending = FALSE) {
 	$post_campaign = get_post($camp_id);
 	$campaign = atcf_get_campaign( $post_campaign );
 	$payments_data = $campaign->payments_data();
+	$csv_buffer = "\xEF\xBB\xBF";
+	$csv_buffer .= 'Prénom;Nom;e-mail;Investissement;Genre;Date de naissance;Ville de naissance;Nationalité;Adresse;Code postal;Ville;Pays;Téléphone;Compte Facebook';
+	$csv_buffer .= PHP_EOL;
 	
 	$buffer = array(
 		'campaign' => $campaign,
@@ -40,7 +43,13 @@ function wdg_get_project_investments($camp_id, $include_pending = FALSE) {
 			$buffer['count_invest'] += $item['amount'];
 			$buffer['amounts_array'][] = $item['amount'];
 		}
+		if ($item['status'] == 'publish') $csv_buffer .= ypcf_csv_investors_add_line($item['user'], $item['amount']);
 	}
+	
+	$filename = $camp_id . '_investors_' . time() . '.csv';
+        $filepath = dirname ( __FILE__ ) . '/pdf_files/' . $filename;
+	file_put_contents ($filepath, $csv_buffer);
+	
 	asort($buffer['amounts_array']);
 	
 	if ($buffer['count_validate_investments'] > 0) {
