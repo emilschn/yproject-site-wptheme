@@ -6,7 +6,6 @@ jQuery(document).ready( function($) {
 var ProjectEditor = (function($) {
 	return {
 		elements: [],
-		isEditing: false,
 		
 		initElements: function() {
 			ProjectEditor.elements["title"] = {elementId: "#projects-banner #head-content #title", contentId: "#projects-banner #head-content #title span"};
@@ -25,24 +24,23 @@ var ProjectEditor = (function($) {
 		
 		addEditButton: function(property) {
 			var buttonEdit = '<div id="wdg-edit-'+property+'" class="edit-button" data-property="'+property+'"></div>';
+			$(ProjectEditor.elements[elementKey].elementId).after(buttonEdit);
 			switch (property) {
 				case "societal_challenge":
 				case "added_value":
 				case "economic_model":
 				case "implementation":
-					$(ProjectEditor.elements[elementKey].elementId).after(buttonEdit);
 					$("#wdg-edit-"+property).hide();
 					break;
 					
 				default:
-					$(ProjectEditor.elements[elementKey].elementId).after(buttonEdit);
 					ProjectEditor.showEditButton(property);
 					break;
 			}
 		},
 		
 		showEditButton: function(property) {
-			if (property !== "picture-head") {
+			if (property !== "picture-head" && ProjectEditor.elements[property] !== undefined) {
 				var elementId = ProjectEditor.elements[property].elementId;
 				$("#wdg-edit-"+property).css("left", $(elementId).position().left + $(elementId).outerWidth());
 				var marginTop = Number($(elementId).css("marginTop").replace("px", ""));
@@ -58,7 +56,7 @@ var ProjectEditor = (function($) {
 		
 		initClick: function() {
 			$(".edit-button").click(function() {
-				ProjectEditor.isEditing = true;
+				WDGProjectPageFunctions.isEditing = true;
 				var sProperty = $(this).data("property");
 				switch (sProperty) {
 					case "title":
@@ -83,15 +81,27 @@ var ProjectEditor = (function($) {
 				}
 			});
 		},
+		
+		initEditable: function(property) {
+			switch (property) {
+				case "title":
+				case "subtitle":
+				case "summary":
+				case "rewards":
+				case "description":
+				case "video-zone":
+					$(ProjectEditor.elements[property].elementId).addClass("editable");
+					break;
+			}
+		},
 	    
 		init: function() {
 			ProjectEditor.initElements();
 			for (elementKey in ProjectEditor.elements) {
-				if (elementKey !== "picture-head") {
-					$(ProjectEditor.elements[elementKey].elementId).addClass("editable");
-				}
+				ProjectEditor.initEditable(elementKey);
 				ProjectEditor.addEditButton(elementKey);
 			}
+			WDGProjectPageFunctions.refreshEditable();
 			ProjectEditor.initClick();
 		},
 		
@@ -231,7 +241,8 @@ var ProjectEditor = (function($) {
 					$("#wdg-validate-"+property).remove();
 					break;
 			}
-			ProjectEditor.isEditing = false;
+			WDGProjectPageFunctions.initClick();
+			WDGProjectPageFunctions.isEditing = false;
 		},
 		
 		updateText: function(property) { 
