@@ -49,29 +49,45 @@ add_action('bbp_new_topic', array('NotificationsEmails', 'new_topic'), 99 ,2);
 remove_action("wp_head", "wp_generator");
 add_filter('login_errors',create_function('$a', "return null;"));
 
-add_action( 'wp_enqueue_scripts', 'yproject_enqueue_script' );
 function yproject_enqueue_script(){
+	global $post, $can_modify, $is_campaign_page;
+	$campaign_id = (isset($_GET['campaign_id'])) ? $_GET['campaign_id'] : $post->ID;
+	$is_campaign = (get_post_meta($campaign_id, 'campaign_goal', TRUE) != '');
+	$is_campaign_page = $is_campaign && ($campaign_id == $post->ID);
+	$can_modify = ($is_campaign) && (YPProjectLib::current_user_can_edit($campaign_id));
+	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
 		wp_register_script('jquery', (dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.min.js'), false);
 		wp_enqueue_script('jquery');
 	}
 	
-	global $post;
-	$is_campaign = (get_post_meta($post->ID, 'campaign_goal', TRUE) != '');
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '1.1.004');
-	if ($is_campaign) { wp_enqueue_script( 'wdg-script2', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/project_bopp.js', array('jquery', 'jquery-ui-dialog')); }
+	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog')); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
-	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'));
+	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
 //	wp_enqueue_script( 'wdg-ux-helper', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-ux-helper.js', array('wdg-script'));
 	
 	wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.js', array('jquery'));
-	wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, false);
+	wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, 'all');
 	
 	wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
-	if ($is_campaign) { wp_localize_script( 'wdg-script2', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) ); }
+//	if ($is_campaign) { wp_localize_script( 'wdg-script2', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) ); }
 }
+add_action( 'wp_enqueue_scripts', 'yproject_enqueue_script' );
+
+//Cache serveur
+function varnish_safe_http_headers() {
+	header('X-UA-Compatible: IE=edge,chrome=1');
+	session_cache_limiter('');
+	header('Cache-Control: public, s-maxage=120');
+	if( !session_id() ) {
+		session_start();
+	}
+}
+add_action( 'send_headers', 'varnish_safe_http_headers' );
+
 
 
 /** GESTION DU LOGIN **/
@@ -238,6 +254,9 @@ function yproject_check_user_can_see_project_page() {
 }
 
 
+/**
+ * Filtres pour modification de contenu
+ */
 function yproject_bbp_get_forum_title($title) {
     $campaign_post = get_post($title);
     return  $campaign_post->post_title;
@@ -258,8 +277,33 @@ function remove_related_videos($embed) {
 }
 add_filter('oembed_result', 'remove_related_videos', 1, true);
 
+//Suppression de code supplémentaire généré par edd
+remove_filter( 'the_content', 'edd_microdata_wrapper', 10 );
+
+function comment_blog_post(){
+	global $wpdb, $post;
+	// Construction des urls utilisés dans les liens du fil d'actualité
+	// url d'une campagne précisée par son nom 
+	$post_title = $post->post_title;
+	$url_blog = '<a href="'.get_permalink( $post->ID ).'">'.$post_title.'</a>';
+	//url d'un utilisateur précis
+	$user_id                = wp_get_current_user()->ID;
+	$user_display_name      = wp_get_current_user()->display_name;
+	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '"> ' . $user_display_name . '</a>';
+	$user_avatar = UIHelpers::get_user_avatar($user_id);
+
+	bp_activity_add(array (
+		'component' => 'profile',
+		'type'      => 'jycrois',
+		'action'    => $user_avatar.' '.$url_profile.' a commentÃƒÂ© '.$url_blog
+	    ));
+}
+add_action('comment_post','comment_blog_post');
 
 
+/**
+ * Gestion ajax
+ */
 /**
  * Permet d'envoyer la position de l'image de couverture d'un projet.
  */
@@ -293,25 +337,6 @@ function update_jy_crois(){
 }
 add_action( 'wp_ajax_update_jy_crois', 'update_jy_crois' );
 
-function comment_blog_post(){
-	global $wpdb, $post;
-	// Construction des urls utilisés dans les liens du fil d'actualité
-	// url d'une campagne précisée par son nom 
-	$post_title = $post->post_title;
-	$url_blog = '<a href="'.get_permalink( $post->ID ).'">'.$post_title.'</a>';
-	//url d'un utilisateur précis
-	$user_id                = wp_get_current_user()->ID;
-	$user_display_name      = wp_get_current_user()->display_name;
-	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '"> ' . $user_display_name . '</a>';
-	$user_avatar = UIHelpers::get_user_avatar($user_id);
-
-	bp_activity_add(array (
-		'component' => 'profile',
-		'type'      => 'jycrois',
-		'action'    => $user_avatar.' '.$url_profile.' a commentÃƒÂ© '.$url_blog
-	    ));
-}
-add_action('comment_post','comment_blog_post');
 
 function print_user_projects(){
     
@@ -615,3 +640,57 @@ function yproject_get_current_projects() {
 }
 add_action('wp_ajax_get_current_projects', 'yproject_get_current_projects');
 add_action('wp_ajax_nopriv_get_current_projects', 'yproject_get_current_projects');
+
+
+function yproject_save_edit_project() {
+	switch ($_POST['property']) {
+		case "title":
+			wp_update_post(array(
+				'ID' => $_POST['id_campaign'],
+				'post_title' => $_POST['value']
+			));
+			break;
+		case "description":
+			wp_update_post(array(
+				'ID' => $_POST['id_campaign'],
+				'post_content' => $_POST['value']
+			));
+			break;
+		default: 
+			update_post_meta($_POST['id_campaign'], 'campaign_' . $_POST['property'], $_POST['value']);
+			break;
+	}
+	echo $_POST['property'];
+	exit();
+}
+add_action('wp_ajax_save_edit_project', 'yproject_save_edit_project');
+add_action('wp_ajax_nopriv_save_edit_project', 'yproject_save_edit_project');
+
+
+/**
+ * Shortcodes généraux
+ */
+function yproject_shortcode_lightbox_button($atts, $content = '') {
+    $atts = shortcode_atts( array(
+	'label' => 'Afficher',
+	'id' => 'lightbox',
+	'class' => 'button',
+	'style' => ''
+    ), $atts );
+    return '<a href="#'.$atts['id'].'" class="wdg-button-lightbox-open '.$atts['class'].'" style="'.$atts['style'].'" data-lightbox="'.$atts['id'].'">'.$atts['label'].'</a>';
+}
+add_shortcode('yproject_lightbox_button', 'yproject_shortcode_lightbox_button');
+
+function yproject_shortcode_lightbox($atts, $content = '') {
+    $atts = shortcode_atts( array(
+	'id' => 'lightbox'
+    ), $atts );
+    return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox hidden">
+		<div class="wdg-lightbox-padder">
+		    <div class="wdg-lightbox-button-close">
+			<a href="#" class="button">X</a>
+		    </div>'.do_shortcode($content).'
+		</div>
+	    </div>';
+}
+add_shortcode('yproject_lightbox', 'yproject_shortcode_lightbox');

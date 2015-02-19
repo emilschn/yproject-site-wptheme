@@ -1,5 +1,5 @@
 <?php 
-$page_publish = get_page_by_path('creer-un-projet');
+$page_publish = get_page_by_path('financement');
 $page_mes_investissements = get_page_by_path('mes-investissements');
 $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 ?>
@@ -67,7 +67,7 @@ $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
 	    
 		<?php if ($display_loggedin_user) { ?>
 		<div class="right">
-			<a href="<?php echo get_permalink($page_publish->ID); ?>" class="button right">Cr&eacute;er un projet</a>
+			<a href="<?php echo get_permalink($page_publish->ID); ?>" class="button right">Financer mon projet</a>
 		</div>
 		<?php } ?>
 	    
@@ -337,7 +337,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 	<?php endif; ?>
 <?php endif; ?>
 			
-<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="logo mangopay" /></center>
+<div style="text-align: center;"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="logo mangopay" /></div>
 
 
 

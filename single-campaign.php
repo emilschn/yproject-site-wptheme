@@ -11,7 +11,7 @@ $suffix = ($campaign->edit_version() > 1) ? '-sf' : '';
 <?php get_header(); ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-<div id="content">
+<div id="content" data-campaignid="<?php the_ID(); ?>">
 	<div class="padder">
 
 		<?php require_once('projects/single-admin-bar.php'); ?>

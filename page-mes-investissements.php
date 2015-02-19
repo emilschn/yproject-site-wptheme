@@ -237,7 +237,7 @@ if (!is_user_logged_in()) {
 				
 			<br /><br />
 			
-			<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="logo mangopay"></center>
+			<div style="text-align: center;"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="logo mangopay"></div>
 		</div>
 	    
 	</div>

@@ -138,8 +138,8 @@
 		if (LibUsers::must_show_general_terms_block()): 
 			global $edd_options;
 		?>
-		<div id="validate-terms">
-			<div class="validate-terms-padder">
+		<div id="validate-terms" class="wdg-lightbox">
+			<div class="wdg-lightbox-padder">
 				<span>Mise &agrave; jour des conditions g&eacute;n&eacute;rales d&apos;utilisation</span>
 				<div class="validate-terms-excerpt">
 					<?php echo wpautop( stripslashes( $edd_options[LibUsers::$edd_general_terms_excerpt])); ?>

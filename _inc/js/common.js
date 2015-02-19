@@ -60,14 +60,11 @@ YPUIFunctions = (function($) {
 			    });
 
 			    $(".radiofundingtype").change(function(){
-				$("#goal").val("");
-				if ($("#fundingproject").attr("checked") == "checked") {
-				    $("#fundingdevelopment_param").hide();
-				    $(".min_amount_value").html($("#min_amount_project").val());
+				if ($('input[name=fundingtype]:checked').val() == "fundingproject") {
+				    $(".min_amount_value").text($("#min_amount_project").val());
 				}
-				if ($("#fundingdevelopment").attr("checked") == "checked") {
-				    $("#fundingdevelopment_param").show();
-				    $(".min_amount_value").html($("#min_amount_development").val());
+				if ($('input[name=fundingtype]:checked').val() == "fundingdevelopment") {
+				    $(".min_amount_value").text($("#min_amount_development").val());
 				}
 			    });
 			}
@@ -147,11 +144,21 @@ YPUIFunctions = (function($) {
 				});
 			}
 			
-			if ($("#already-connected").length > 0) {
-				$("#already-connected .already-connected-button a").click(function() {
-					$("#already-connected").hide();
+			
+			if ($(".wdg-lightbox").length > 0) {
+				$(".wdg-button-lightbox-open").click(function() {
+					var target = $(this).data("lightbox");
+					$("#wdg-lightbox-" + target).show();
 				});
+				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function() {
+					$(".wdg-lightbox").hide();
+				});
+				var sHash = window.location.hash.substring(1);
+				if ($("#wdg-lightbox-" + sHash).length > 0) {
+					$("#wdg-lightbox-" + sHash).show();
+				}
 			}
+			
 			
 			if ($("#blog-archives form#add-news").length > 0) {
 				$("#blog-archives #add-news-opener").click(function() {
@@ -348,9 +355,11 @@ YPMenuFunctions = (function($){
 /* Projet */
 WDGProjectPageFunctions=(function($) {
 	return {
-		currentDiv:0,
+		currentDiv: 0,
+		isInit: false,
+		isEditing: false,
 		initUI:function() {
-			$('.projects-desc-content').each(function(){WDGProjectPageFunctions.initClick(this)});
+			WDGProjectPageFunctions.initClick();
 			$('.project-content-icon').click(function(){
 				var contentDiv = $("#project-content-" + $(this).data("content"));
 				contentDiv.trigger("click"); 	
@@ -447,6 +456,7 @@ WDGProjectPageFunctions=(function($) {
 		},
 
 		print_vote_form:function(){
+		    $('html, body').animate({scrollTop: $("#invest-button").offset().top - $("#navigation").height()}, "fast"); 
 		    $("#vote-form").animate({ 
 	        	top: "370px"
 		    }, 500 );
@@ -454,46 +464,56 @@ WDGProjectPageFunctions=(function($) {
 		    $("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 		},
 		
-		/**
-		 * Gestion des différentes parties de description du projet
-		 */
+		
+		
 		//Initialisation du comportement des différentes parties
-		initClick: function(descContentElement) {
-			//Si il y a plus d'un paragraphe, on initialise le clic
-	  		if ($(descContentElement).find('p').length > 1) {
-	  			$(descContentElement).css("cursor", "pointer");
-				var sDisplay = '';
-				if (WDGProjectPageFunctions.currentDiv === 0) sDisplay = 'style="display:none"';
-				var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'>Lire plus !</div>';
-				$(descContentElement).find('div div *:lt(1)').append(sProjectMore);
-		  		$(descContentElement).click(function(){
-					WDGProjectPageFunctions.clickItem($(this))
-				});
-	  		}
-			if (WDGProjectPageFunctions.currentDiv > 0) {
-				//On prend toutes les balises de la description
-				var children = $(descContentElement).children().children().children();
-				//On les masque sauf la première
-				$(descContentElement).find(children.not('*:eq(0)')).hide();
-			}
-	   		WDGProjectPageFunctions.currentDiv++;
+		initClick: function() {
+			WDGProjectPageFunctions.currentDiv = 0;
+			$(".projects-more").remove();
+			$('.projects-desc-content').each(function(){
+				//Si il y a plus d'un paragraphe, on initialise le clic
+				if ($(this).find('p').length > 1) {
+					$(this).css("cursor", "pointer");
+					var sDisplay = '';
+					if (!WDGProjectPageFunctions.isInit && WDGProjectPageFunctions.currentDiv === 0) sDisplay = 'style="display:none"';
+					var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'>Lire plus !</div>';
+					$(this).find('div *:lt(1)').append(sProjectMore);
+					$(this).click(function(){
+						WDGProjectPageFunctions.clickItem($(this));
+					});
+				}
+
+				//Rétractation des parties qui ne sont pas la description
+				if (WDGProjectPageFunctions.isInit || WDGProjectPageFunctions.currentDiv > 0) {
+					//On prend toutes les balises de la description
+					var children = $(this).children().children();
+					//On les masque sauf la première
+					$(this).find(children.not('*:eq(0)')).hide();
+				}
+				WDGProjectPageFunctions.currentDiv++;
+			});
+			WDGProjectPageFunctions.refreshEditable();
+			WDGProjectPageFunctions.isInit = true;
    		},
 		
 		//Clic sur une partie
 		clickItem: function(clickedElement) {
-			var projectMore = clickedElement.find('.projects-more');
-			//Si la balise "lire plus" de l'élément cliqué est affichée
-			if (projectMore.is(':visible')) {
-				//il faut la masquer puis afficher les éléments qui suivent
-				projectMore.hide(400, function(){
-					$('html, body').animate({scrollTop: clickedElement.offset().top - $("#navigation").height()}, "slow"); 
-					clickedElement.find('p, ul, table').slideDown(400);
-				});
-				//on masque aussi toutes les autres parties
-				WDGProjectPageFunctions.hideOthers(projectMore.attr("data-value"));
-			//Sinon on masque tout
-			} else {
-				WDGProjectPageFunctions.hideOthers(-1);
+			if (!WDGProjectPageFunctions.isEditing) {
+				//Si la balise "lire plus" de l'élément cliqué est affichée
+				var projectMore = clickedElement.find('.projects-more');
+				if (projectMore.is(':visible')) {
+					//il faut la masquer puis afficher les éléments qui suivent
+					projectMore.hide(400, function(){
+						$('html, body').animate({scrollTop: clickedElement.offset().top - $("#navigation").height()}, "slow"); 
+						clickedElement.find('.zone-content > p, ul, table, blockquote').slideDown(400);
+						WDGProjectPageFunctions.refreshEditable();
+					});
+					//on masque aussi toutes les autres parties
+					WDGProjectPageFunctions.hideOthers(parseInt(projectMore.attr("data-value")));
+				//Sinon on masque tout
+				} else {
+					WDGProjectPageFunctions.hideOthers(-1);
+				}
 			}
 		},
 
@@ -503,12 +523,39 @@ WDGProjectPageFunctions=(function($) {
 			var index = 0;
 	 		$('.projects-desc-content').each(function(){
 				//On teste pour masquer toutes celles qui ne sont pas celle clickée
-		 		if (index != currentDiv) {
+		 		if (index !== currentDiv) {
 		 			$(this).find('.projects-more').slideDown(200);
-		 			$(this).children().children().children().not('*:eq(0)').slideUp(400);
+		 			$(this).children().children().not('*:eq(0)').slideUp(400);
 		 		}
 		 		index++;
 			});
+		},
+		
+		refreshEditable: function() {
+			$(".projects-desc-content .zone-content").removeClass("editable");
+			$('.projects-desc-content').each(function(){
+				var projectMore = $(this).find('.projects-more');
+				var property = $(this).attr("id").substr(("project-content-").length);
+				if (projectMore.is(':visible')) {
+					WDGProjectPageFunctions.hideEditButton(property);
+				} else {
+					$(this).children(".zone-content").addClass("editable");
+					WDGProjectPageFunctions.showEditButton(property);
+				}
+			});
+		},
+		
+		showEditButton: function(property) {
+			if (ProjectEditor !== undefined && ProjectEditor !== null) {
+				ProjectEditor.showEditButton(property);
+			}
+		},
+		
+		hideEditButton: function(property) {
+			if (ProjectEditor !== undefined && ProjectEditor !== null) {
+				ProjectEditor.hideEditButton(property);
+			}
 		}
-	}
+		
+	};
 })(jQuery);
