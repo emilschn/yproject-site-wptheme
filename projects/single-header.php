@@ -62,6 +62,7 @@ $vote_status = $campaign->campaign_status();
 				$remaining_vote_days = $campaign->end_vote_remaining(); 
 			?>
 				<div class="post_bottom_infos_item">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodvote.png" alt="logo vote" />
 					Projet en vote
 				</div>
 				<div class="post_bottom_infos_item">
