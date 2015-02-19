@@ -2170,6 +2170,66 @@ div#home_bottom h1 {
     height: 700px;
 }
 
+
+/*******************************************************************************
+* NEW PROJECT PAGE
+*******************************************************************************/
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    border-bottom-right-radius: 0px !important;
+}
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+    border-bottom-left-radius: 0px !important;
+}
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+    border-top-right-radius: 0px !important;
+}
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
+    border-top-left-radius: 0px !important;
+}
+
+.ui-widget-content {
+    background: none !important;
+}
+
+.wpb_content_element .wpb_accordion_wrapper .wpb_accordion_header, .wpb_content_element.wpb_tabs .wpb_tour_tabs_wrapper .wpb_tab {
+    background-color: #f2f2f2 !important;
+}
+
+.wpb_accordion .wpb_accordion_wrapper .wpb_accordion_header {
+    text-align: center;
+    font-size : 20px !important;
+    color:#222222 !important;
+}
+
+.ui-accordion-header-active ui-state-active {
+    font-weight:400px !important;
+}
+
+.ui-state-default, .ui-widget-content, .ui-state-default, .ui-widget-header, .ui-state-default {
+    background: none !important;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    font-weight:bold !important;
+    background: #ffffff !important;
+}
+
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+    background: none repeat scroll 0 0 #ffffff !important;
+}
+
+#wdg-lightbox-creerprojet .wdg-forms #fundingproject {
+    margin: 10px 0px 0px 4px;
+}
+
+#wdg-lightbox-creerprojet .wdg-forms #edd_terms_agreement label {
+    margin: 0px;
+    width: auto;
+}
+#wdg-lightbox-creerprojet .wdg-forms #edd_terms_agreement input[type=checkbox] {
+    margin-left: 0px;;
+}
+
 /*******************************************************************************
 * CONNEXION PAGE
 *******************************************************************************/
