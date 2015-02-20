@@ -54,7 +54,7 @@ $campaign_id = $_GET['campaign_id'];
 						<?php if ($campaign->google_doc() != ''): ?>
 						<div class="google-doc">
 							<?php if (strpos('spreadsheet', $campaign->google_doc()) !== FALSE) : ?>
-							<iframe src="<?php echo $campaign->google_doc(); ?>/pubhtml?widget=true&amp;headers=false"></iframe>
+							<iframe src="<?php echo $campaign->google_doc(); ?>/edit?usp=sharing&embed=true" width="100%" height="800"></iframe>
 							<?php else : ?>
 							<iframe src="<?php echo $campaign->google_doc(); ?>/pub?embedded=true"></iframe>
 							<?php endif; ?>
