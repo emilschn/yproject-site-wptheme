@@ -546,13 +546,13 @@ WDGProjectPageFunctions=(function($) {
 		},
 		
 		showEditButton: function(property) {
-			if (ProjectEditor !== undefined && ProjectEditor !== null) {
+			if (typeof ProjectEditor !== 'undefined') {
 				ProjectEditor.showEditButton(property);
 			}
 		},
 		
 		hideEditButton: function(property) {
-			if (ProjectEditor !== undefined && ProjectEditor !== null) {
+			if (typeof ProjectEditor !== 'undefined') {
 				ProjectEditor.hideEditButton(property);
 			}
 		}

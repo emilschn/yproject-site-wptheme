@@ -94,23 +94,6 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 						?>
 					</select><br />
 					
-					<?php $image_src_header = $campaign->get_header_picture_src(false); ?>
-					<label for="image_header">Image du bandeau :</label>
-					<input type="file" name="image_header" /><br />
-					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 1366px de largeur * 370px de hauteur)</span><br />
-					<input type="checkbox" name="image_header_blur" <?php if ($campaign->is_header_blur()) { echo 'checked="checked"'; } ?> /> Appliquer un flou artistique<br />
-					<?php if ($image_src_header != '') { ?><img src="<?php echo $image_src_header; ?>" /><br /><?php } ?>
-					
-					<?php $image_src_home = $campaign->get_home_picture_src(false); ?>
-					<label for="image_home">Image d&apos;aper&ccedil;u :</label>
-					<input type="file" name="image_home" /><br />
-					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 610px de largeur * 330px de hauteur)</span><br />
-					<?php if ($image_src_home != '') { ?><img src="<?php echo $image_src_home; ?>" /><br /><?php } ?>
-					
-					<label for="video">Vid&eacute;o de pr&eacute;sentation :</label>
-					<input type="text" name="video" placeholder="URL de la vidéo" value="<?php echo $campaign->video(); ?>" /><br />
-					
-					
 					<?php if ($campaign->campaign_status() == "preparing") : ?>
 						<label for="fundingtype">Type de financement :</label>
 						<?php
@@ -182,6 +165,25 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 						<input type="hidden" name="project-organisation" value="" />
 
 					<?php endif; ?>
+						
+						
+						
+					<?php $image_src_header = $campaign->get_header_picture_src(false); ?>
+					<label for="image_header">Image du bandeau :</label>
+					<input type="file" name="image_header" /><br />
+					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 1366px de largeur * 370px de hauteur)</span><br />
+					<input type="checkbox" name="image_header_blur" <?php if ($campaign->is_header_blur()) { echo 'checked="checked"'; } ?> /> Appliquer un flou artistique<br />
+					<?php if ($image_src_header != '') { ?><img src="<?php echo $image_src_header; ?>" /><br /><?php } ?>
+					
+					<?php $image_src_home = $campaign->get_home_picture_src(false); ?>
+					<label for="image_home">Image d&apos;aper&ccedil;u :</label>
+					<input type="file" name="image_home" /><br />
+					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 610px de largeur * 330px de hauteur)</span><br />
+					<?php if ($image_src_home != '') { ?><img src="<?php echo $image_src_home; ?>" /><br /><?php } ?>
+					
+					<label for="video">Vid&eacute;o de pr&eacute;sentation :</label>
+					<input type="text" name="video" placeholder="URL de la vidéo" value="<?php echo $campaign->video(); ?>" /><br />
+					
 					
 					<input type="submit" name="new_orga" value="Cr&eacute;er une organisation" class="small-margin button" />
 					<br />

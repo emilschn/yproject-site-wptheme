@@ -712,7 +712,6 @@ footer div.social-icons {
 *******************************************************************************/
 .video-zone {
     width: 610px;
-    min-height: 330px;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -1616,7 +1615,7 @@ div#home_bottom h1 {
 }
 #projects-right-desc{
     width: 340px;
-    height: 500px;
+    height: 525px;
     background-color: #F2F2F2;
 }
 #projects-bottom-desc img{
@@ -1691,15 +1690,10 @@ div#home_bottom h1 {
     display: inline-block;
     font-size: 11px;
     vertical-align: middle;
-    margin-top: 20px;
-}
-#project-owner-desc p{
-    margin: 0;
-    margin-left: 10px;
-    vertical-align: middle;
+    margin-top: 15px;
 }
 #project-about{
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
     position: relative;
 }
@@ -1729,7 +1723,12 @@ div#home_bottom h1 {
     padding : 0;
 }
 #projects-right-desc .project-rewards {
-    margin: 10px 5px 0px 5px;
+    margin: 10px 15px 0px 15px;
+    text-align: center;
+}
+#projects-right-desc .project-rewards span {
+    text-transform: uppercase;
+    margin-bottom: 5px;
 }
 #projects-right-desc #project-rewards-custom {
     height: 50px;
@@ -1837,7 +1836,7 @@ div#home_bottom h1 {
     margin-top: 15px;
     width: 580px;
     height: 325px;
-    min-height: 325px !important;
+    min-height: 325px;
     text-align: center;
 }
 .projects-title{
@@ -1855,7 +1854,7 @@ div#home_bottom h1 {
     position: relative;
     overflow: hidden;
     display: block;
-    width: 610px;
+    width: 580px;
     height: 113px;
 }
 #projects-summary p {
@@ -2088,10 +2087,11 @@ div#home_bottom h1 {
     width: 468px;
 }
 #wdg-input-rewards {
-    margin-left: 5px;
+    margin-left: 15px;
+    text-align: center;
 }
 #wdg-edit-rewards, #wdg-validate-rewards {
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 .projects-desc-content .zone-edit .wp-editor-wrap .wp-editor-container .wp-editor-area {
@@ -2127,6 +2127,19 @@ div#home_bottom h1 {
     background-color: #74BF43;
     color: #FFF;
     padding: 4px;
+}
+
+.video-zone.editable:before {
+    content: "Image d'aperçu / Vidéo";
+}
+.video-zone.editable {
+    background-color: #F2F2F2;
+    padding-top: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    height: 305px !important;
+    min-height: 305px !important;
 }
 
 /*******************************************************************************
@@ -2219,7 +2232,10 @@ div#home_bottom h1 {
 }
 
 #wdg-lightbox-creerprojet .wdg-forms #fundingproject {
-    margin: 10px 0px 0px 4px;
+    margin: 10px 3px 0px 4px;
+}
+#wdg-lightbox-creerprojet .wdg-forms #maximum_goal_search {
+    margin-bottom: 10px;
 }
 
 #wdg-lightbox-creerprojet .wdg-forms #edd_terms_agreement label {

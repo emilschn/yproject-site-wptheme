@@ -91,6 +91,10 @@ $vote_status = html_entity_decode($campaign->vote());
 		<?php } ?>
 			
 		<div class="project-rewards">
+			<span>En &eacute;change de votre investissement</span>
+		</div>
+			
+		<div class="project-rewards">
 			<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?>
 			Vous recevrez une part de capital de cette entreprise.
 			<?php else: ?>
