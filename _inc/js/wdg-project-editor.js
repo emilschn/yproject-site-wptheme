@@ -122,7 +122,8 @@ var ProjectEditor = (function($) {
 		
 		createInput: function(property) {
 			var initValue = ProjectEditor.getInitValue(property);
-			var newElement = '<input type="text" id="wdg-input-'+property+'" class="edit-input" value="'+initValue+'" />';
+			var placeholder = (property === "subtitle") ? 'Slogan de la campagne' : '';
+			var newElement = '<input type="text" id="wdg-input-'+property+'" class="edit-input" value="'+initValue+'" placeholder="'+placeholder+'" />';
 			$(ProjectEditor.elements[property].elementId).after(newElement);
 			$("#wdg-input-"+property).css("left", $(ProjectEditor.elements[property].elementId).position().left);
 			$("#wdg-input-"+property).css("top", $(ProjectEditor.elements[property].elementId).position().top);
@@ -141,7 +142,8 @@ var ProjectEditor = (function($) {
 		
 		createTextArea: function(property) {
 			var initValue = ProjectEditor.getInitValue(property);
-			var newElement = '<textarea id="wdg-input-'+property+'" class="edit-input">'+initValue+'</textarea>';
+			var placeholder = (property === "rewards") ? 'X% par an et un avantage' : '';
+			var newElement = '<textarea id="wdg-input-'+property+'" class="edit-input" placeholder="'+placeholder+'">'+initValue+'</textarea>';
 			$(ProjectEditor.elements[property].elementId).after(newElement);
 			$("#wdg-input-"+property).css("left", $(ProjectEditor.elements[property].elementId).position().left);
 			var marginTop = Number($(ProjectEditor.elements[property].elementId).css("marginTop").replace("px", ""));

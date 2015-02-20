@@ -686,6 +686,7 @@ function yproject_shortcode_lightbox($atts, $content = '') {
 	'id' => 'lightbox'
     ), $atts );
     return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox hidden">
+		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder">
 		    <div class="wdg-lightbox-button-close">
 			<a href="#" class="button">X</a>

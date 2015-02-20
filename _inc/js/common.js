@@ -153,6 +153,9 @@ YPUIFunctions = (function($) {
 				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function() {
 					$(".wdg-lightbox").hide();
 				});
+				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function() {
+					$(".wdg-lightbox").hide();
+				});
 				var sHash = window.location.hash.substring(1);
 				if ($("#wdg-lightbox-" + sHash).length > 0) {
 					$("#wdg-lightbox-" + sHash).show();
