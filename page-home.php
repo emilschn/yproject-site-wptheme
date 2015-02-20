@@ -15,7 +15,7 @@
 </div>
 <?php endif; ?>
 
-<header class="header_home dploytest">
+<header class="header_home">
 	<div class="center">
 		<section id="welcome_text">
 			<?php the_content();?>
