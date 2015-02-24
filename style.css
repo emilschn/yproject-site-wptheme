@@ -2258,7 +2258,7 @@ div#home_bottom h1 {
     background: none repeat scroll 0 0 #ffffff !important;
 }
 
-#wdg-lightbox-creerprojet .wdg-forms #fundingproject {
+#wdg-lightbox-creerprojet .wdg-forms input[type=radio] {
     margin: 10px 3px 0px 4px;
 }
 #wdg-lightbox-creerprojet .wdg-forms #maximum_goal_search {
