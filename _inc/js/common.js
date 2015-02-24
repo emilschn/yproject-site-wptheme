@@ -381,31 +381,6 @@ WDGProjectPageFunctions=(function($) {
 			});
 		},
 
-		move_cursor:function(campaign_id){
-		  $('#move-cursor').text('Sauvegarder la position du curseur');
-		  $('#move-cursor').attr("onclick", "WDGProjectPageFunctions.save_cursor_position("+campaign_id+")");
-		  $('#map-cursor').draggable({
-		    containment: '#project-map'
-		    });
-		  $('#map-cursor').draggable('enable');
-		},
-
-		save_cursor_position:function(campaign_id){
-			$('#move-cursor').text('Modifier la position du curseur');
-			$('#move-cursor').attr("onclick", "WDGProjectPageFunctions.move_cursor("+campaign_id+")");
-			$('#map-cursor').draggable('disable');
-			$.ajax({
-			        'type' : "POST",
-			        'url' : ajax_object.ajax_url,
-			        'data': { 
-			                    'action':'setCursorPosition',
-			                    'top' : $('#map-cursor').css('top'),
-			                    'left' : $('#map-cursor').css('left'),
-			                    'id_campaign' : campaign_id
-			                }
-			       }).done(); 
-		},
-
 		update_jycrois:function(jy_crois,campaign_id,home_url){
 	 		var img_url=home_url+'/images/';
 			if(jy_crois==0) {
@@ -516,6 +491,7 @@ WDGProjectPageFunctions=(function($) {
 				//Sinon on masque tout
 				} else {
 					WDGProjectPageFunctions.hideOthers(-1);
+					WDGProjectPageFunctions.refreshEditable();
 				}
 			}
 		},
@@ -534,26 +510,34 @@ WDGProjectPageFunctions=(function($) {
 			});
 		},
 		
+		//Rafraichit chacune des zones pour savoir si elles sont éditables
 		refreshEditable: function() {
 			$(".projects-desc-content .zone-content").removeClass("editable");
 			$('.projects-desc-content').each(function(){
 				var projectMore = $(this).find('.projects-more');
 				var property = $(this).attr("id").substr(("project-content-").length);
+				//Si le Lire plus est visible, la zone n'est pas éditable
 				if (projectMore.is(':visible')) {
 					WDGProjectPageFunctions.hideEditButton(property);
-				} else {
+				//Si le Lire plus n'est pas visible & si la page est en cours d'édition, la zone est éditable
+				} else if ($("#content").hasClass("editing")) {
 					$(this).children(".zone-content").addClass("editable");
 					WDGProjectPageFunctions.showEditButton(property);
+				//Sinon, la zone n'est pas éditable
+				} else {
+					WDGProjectPageFunctions.hideEditButton(property);
 				}
 			});
 		},
 		
+		//Affiche le bouton d'édition d'une zone en particulier
 		showEditButton: function(property) {
 			if (typeof ProjectEditor !== 'undefined') {
 				ProjectEditor.showEditButton(property);
 			}
 		},
 		
+		//Masque le bouton d'édition d'une zone en particulier
 		hideEditButton: function(property) {
 			if (typeof ProjectEditor !== 'undefined') {
 				ProjectEditor.hideEditButton(property);

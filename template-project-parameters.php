@@ -165,7 +165,10 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 						<input type="hidden" name="project-organisation" value="" />
 
 					<?php endif; ?>
-						
+					
+					<input type="submit" name="new_orga" value="Cr&eacute;er une organisation" class="small-margin button" />
+					<br />
+					<br />
 						
 						
 					<?php $image_src_header = $campaign->get_header_picture_src(false); ?>
@@ -183,10 +186,6 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					
 					<label for="video">Vid&eacute;o de pr&eacute;sentation :</label>
 					<input type="text" name="video" placeholder="URL de la vidéo" value="<?php echo $campaign->video(); ?>" /><br />
-					
-					
-					<input type="submit" name="new_orga" value="Cr&eacute;er une organisation" class="small-margin button" />
-					<br />
 						
 					<input type="hidden" name="action" value="edit-project-parameters" />
 						

@@ -87,7 +87,7 @@ $vote_status = html_entity_decode($campaign->vote());
 		echo $cache_result;
 			
 		if($can_modify){ ?>
-			<a id="move-cursor" href="JavaScript:void(0);" onclick='javascript:WDGProjectPageFunctions.move_cursor(<?php if(isset($_GET['campaign_id'])){echo $_GET['campaign_id'];}else{global $post;echo($post->ID); } ?>)'>Modifier la position du curseur</a>
+			<div id="wdg-move-picture-location" class="move-button"></div>
 		<?php } ?>
 			
 		<div class="project-rewards">

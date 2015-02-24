@@ -2,37 +2,6 @@ jQuery(document).ready( function($) {
 	WDGNewProjectPageFunctions.initUI();
 });
 
-BOPPFunctions = (function($) {
-	return {
-		move_picture:function(campaign_id) {
-			$('#img-container').draggable({ axis: "y" });
-			$('#img-container').draggable('enable');
-			$('#reposition-cover').text('Sauvegarder');
-			$('#reposition-cover').attr("onclick", "BOPPFunctions.save_position("+campaign_id+")");
-			$("#head-content").css({ opacity: 0 });
-			$("#head-content").css({ 'z-index': -1 });
-		},
-
-		save_position:function(campaign_id){
-			$('#img-container').draggable('disable');
-			$('#reposition-cover').text('Repositionner');
-			$('#reposition-cover').attr("onclick", "BOPPFunctions.move_picture("+campaign_id+")");
-			$("#head-content").css({ opacity: 1 });
-			$("#head-content").css({ 'z-index': 2 });
-
-			$.ajax({
-				'type' : "POST",
-				'url' : ajax_object.ajax_url,
-				'data': { 
-					'action':'setCoverPosition',
-					'top' : $('#img-container').css('top'),
-					'id_campaign' : campaign_id
-				}
-			}).done()
-		},
-	};
-})(jQuery);
-
 /* Projet */
 WDGNewProjectPageFunctions=(function($) {
 	return {

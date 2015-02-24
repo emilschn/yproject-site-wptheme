@@ -237,10 +237,10 @@ $vote_status = $campaign->campaign_status();
 				if (false === $cache_result) {
 					ob_start();
 				?>
-					<p id="title">
+					<div id="title">
 						<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/capital.png" alt="Picto Capital" /><br /><?php endif; ?>
-						<?php echo get_the_title(); ?>
-					</p>
+						<p><?php echo get_the_title(); ?></p>
+					</div>
 					<p id="subtitle"><?php echo $campaign->subtitle(); ?></p>
 					<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="fond projet" class="bg-project" />
 				<?php 
@@ -322,12 +322,8 @@ $vote_status = $campaign->campaign_status();
 		<?php 
 		global $can_modify, $is_campaign_page;
 		if ($can_modify && $is_campaign_page) { 
-		    global $post;
-		    $post_id_echo = (isset($_GET['campaign_id'])) ? $_GET['campaign_id'] : $post->ID;
 		?>
-		    <div id="reposition-cover">
-			    <a href="javascript:void(0);" class="button" onclick="javascript:BOPPFunctions.move_picture(<?php echo $post_id_echo; ?>)">Repositionner</a>
-		    </div>
+		    <div id="wdg-move-picture-head" class="move-button"></div>
 		<?php } ?>
 	</div>
 	<div style="clear:both"></div>

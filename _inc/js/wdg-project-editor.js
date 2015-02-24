@@ -7,8 +7,64 @@ var ProjectEditor = (function($) {
 	return {
 		elements: [],
 		
+		//Initialisation : création du bouton en haut de page permettant de switcher d'un mode à l'autre
+		init: function() {
+			var buttonEdit = '<div id="wdg-edit-project" class="edit-button"></div>';
+			var linkElementId = "#single_project_admin_bar div a.selected";
+			$(linkElementId).after(buttonEdit);
+			
+			$("#wdg-edit-project").css("left", $(linkElementId).position().left + $(linkElementId).outerWidth() / 2 - $("#wdg-edit-project").outerWidth() / 2);
+			var marginTop = Number($(linkElementId).css("marginTop").replace("px", ""));
+			$("#wdg-edit-project").css("top", $(linkElementId).position().top + $(linkElementId).outerHeight() + 3);
+			
+			$("#wdg-edit-project").click(function() {
+				ProjectEditor.clickEditProject(this);
+			});
+		},
+		
+		//Permet de switcher du mode édition au mode prévisualisation
+		clickEditProject: function(clickedElement) {
+			if ($(clickedElement).hasClass("edit-button")) {
+				$("#content").addClass("editing");
+				ProjectEditor.initEdition();
+				$(clickedElement).removeClass("edit-button");
+				$(clickedElement).addClass("edit-button-validate");
+			} else {
+				if (WDGProjectPageFunctions.isEditing) {
+					alert("Vous ne pouvez pas valider si un champ est en cours d'édition");
+				} else {
+					$("#content").removeClass("editing");
+					ProjectEditor.stopEdition();
+					$(clickedElement).addClass("edit-button");
+					$(clickedElement).removeClass("edit-button-validate");
+				}
+			}
+		},
+	    
+		//Démarre l'édition de la page projet
+		initEdition: function() {
+			ProjectEditor.initElements();
+			for (elementKey in ProjectEditor.elements) {
+				ProjectEditor.initEditable(elementKey);
+				ProjectEditor.addEditButton(elementKey);
+			}
+			WDGProjectPageFunctions.refreshEditable();
+			ProjectEditor.initClick();
+		},
+		
+		//Arrête l'édition de la page projet
+		stopEdition: function() {
+			for (elementKey in ProjectEditor.elements) {
+				$(ProjectEditor.elements[elementKey].elementId).removeClass("editable");
+				ProjectEditor.hideEditButton(elementKey);
+			}
+			WDGProjectPageFunctions.refreshEditable();
+		},
+		
+		//Liste tous les éléments qui peuvent être édités
+		//Un élément contient une référence à son conteneur et à son contenu
 		initElements: function() {
-			ProjectEditor.elements["title"] = {elementId: "#projects-banner #head-content #title", contentId: "#projects-banner #head-content #title span"};
+			ProjectEditor.elements["title"] = {elementId: "#projects-banner #head-content #title p span", contentId: "#projects-banner #head-content #title p span"};
 			ProjectEditor.elements["subtitle"] = {elementId: "#projects-banner #head-content #subtitle", contentId: "#projects-banner #head-content #subtitle"};
 			ProjectEditor.elements["summary"] = {elementId: "#post_bottom_content #projects-summary", contentId: "#post_bottom_content #projects-summary"};
 			ProjectEditor.elements["rewards"] = {elementId: "#projects-right-desc #project-rewards-custom", contentId: "#projects-right-desc #project-rewards-custom"};
@@ -17,11 +73,11 @@ var ProjectEditor = (function($) {
 			ProjectEditor.elements["added_value"] = {elementId: "#post_bottom_content #project-content-added_value .zone-content", contentId: "#post_bottom_content #project-content-added_value .zone-edit"};
 			ProjectEditor.elements["economic_model"] = {elementId: "#post_bottom_content #project-content-economic_model .zone-content", contentId: "#post_bottom_content #project-content-economic_model .zone-edit"};
 			ProjectEditor.elements["implementation"] = {elementId: "#post_bottom_content #project-content-implementation .zone-content", contentId: "#post_bottom_content #project-content-implementation .zone-edit"};
-			ProjectEditor.elements["picture-head"] = {elementId: "#projects-banner #head-image #reposition-cover", contentId: "#single_project_admin_bar"};
-			ProjectEditor.elements["video-zone"] = {elementId: "#post_bottom_content #projects-left-desc .video-zone", contentId: "#single_project_admin_bar"};
-			
+			ProjectEditor.elements["picture-head"] = {elementId: "#projects-banner #head-image #wdg-move-picture-head", contentId: "#single_project_admin_bar"};
+			ProjectEditor.elements["video-zone"] = {elementId: "#post_bottom_content #projects-left-desc .video-zone", contentId: "#single_project_admin_bar"};	
 		},
 		
+		//Ajoute le bouton d'édition d'un élément en paramètre
 		addEditButton: function(property) {
 			var buttonEdit = '<div id="wdg-edit-'+property+'" class="edit-button" data-property="'+property+'"></div>';
 			$(ProjectEditor.elements[elementKey].elementId).after(buttonEdit);
@@ -39,6 +95,7 @@ var ProjectEditor = (function($) {
 			}
 		},
 		
+		//Affiche le bouton d'édition d'un élément en paramètre
 		showEditButton: function(property) {
 			if (property !== "picture-head" && ProjectEditor.elements[property] !== undefined) {
 				var elementId = ProjectEditor.elements[property].elementId;
@@ -50,13 +107,18 @@ var ProjectEditor = (function($) {
 			
 		},
 		
+		//Masque le bouton d'édition d'un élément en paramètre
 		hideEditButton: function(property) {
 			$("#wdg-edit-"+property).hide();
 		},
 		
+		//Définit les événements de clicks sur les différents boutons d'édition
 		initClick: function() {
 			$(".edit-button").click(function() {
-				WDGProjectPageFunctions.isEditing = true;
+				if ($(this).attr("id") !== "wdg-edit-project") {
+					WDGProjectPageFunctions.isEditing = true;
+				}
+				
 				var sProperty = $(this).data("property");
 				switch (sProperty) {
 					case "title":
@@ -80,8 +142,25 @@ var ProjectEditor = (function($) {
 						break;
 				}
 			});
+			$("#wdg-move-picture-head").click(function() {
+				if ($(this).hasClass("edit-button-validate")) {
+					ProjectEditor.saveHeaderPicturePosition();
+				}
+				if ($(this).hasClass("move-button")) {
+					ProjectEditor.moveHeaderPicture();
+				}
+			});
+			$("#wdg-move-picture-location").click(function() {
+				if ($(this).hasClass("edit-button-validate")) {
+					ProjectEditor.saveCursorPosition();
+				}
+				if ($(this).hasClass("move-button")) {
+					ProjectEditor.moveCursor();
+				}
+			});
 		},
 		
+		//Affiche un cadre sur certaines zones éditables
 		initEditable: function(property) {
 			switch (property) {
 				case "title":
@@ -94,17 +173,8 @@ var ProjectEditor = (function($) {
 					break;
 			}
 		},
-	    
-		init: function() {
-			ProjectEditor.initElements();
-			for (elementKey in ProjectEditor.elements) {
-				ProjectEditor.initEditable(elementKey);
-				ProjectEditor.addEditButton(elementKey);
-			}
-			WDGProjectPageFunctions.refreshEditable();
-			ProjectEditor.initClick();
-		},
 		
+		//Récupère la valeur modifiable de certains champs éditables
 		getInitValue: function(property) {
 			var buffer = '';
 			
@@ -120,6 +190,7 @@ var ProjectEditor = (function($) {
 			return buffer;
 		},
 		
+		//Création d'un champ input pour certaines valeurs
 		createInput: function(property) {
 			var initValue = ProjectEditor.getInitValue(property);
 			var placeholder = (property === "subtitle") ? 'Slogan de la campagne' : '';
@@ -140,6 +211,7 @@ var ProjectEditor = (function($) {
 			$("#wdg-edit-"+property).hide();
 		},
 		
+		//Création d'un champ textarea pour certaines valeurs
 		createTextArea: function(property) {
 			var initValue = ProjectEditor.getInitValue(property);
 			var placeholder = (property === "rewards") ? 'X% par an et un avantage' : '';
@@ -164,6 +236,7 @@ var ProjectEditor = (function($) {
 			$("#wdg-edit-"+property).hide();
 		},
 		
+		//Création d'un champ textarea avancé pour certaines valeurs
 		showEditableZone: function(property) {
 			$(ProjectEditor.elements[property].elementId).hide();
 			$("#wdg-edit-"+property).hide();
@@ -179,6 +252,7 @@ var ProjectEditor = (function($) {
 			});
 		},
 		
+		//Redirige vers la page Paramètres
 		redirectParams: function(property) {
 			$(ProjectEditor.elements[property].contentId).children().children().each(function() {
 				if ($(this).text() === "Paramètres") {
@@ -187,6 +261,7 @@ var ProjectEditor = (function($) {
 			});
 		},
 		
+		//Enregistre le contenu d'un élément saisi
 		validateInput: function(property) {
 			var value = $("#wdg-input-"+property).val();
 			switch (property) {
@@ -203,7 +278,7 @@ var ProjectEditor = (function($) {
 					break;
 			}
 		    
-			$("#wdg-validate-"+property).text("...");
+			$("#wdg-validate-"+property).addClass("wait-button");
 			$("#wdg-validate-"+property).unbind("click");
 			$.ajax({
 				'type' : "POST",
@@ -219,6 +294,7 @@ var ProjectEditor = (function($) {
 			});
 		},
 		
+		//Fin de validation d'un élément précis, donc réaffichage normal
 		validateInputDone: function(property) { 
 			switch (property) {
 				case "title":
@@ -247,6 +323,7 @@ var ProjectEditor = (function($) {
 			WDGProjectPageFunctions.isEditing = false;
 		},
 		
+		//Mise à jour du texte dans l'affichage
 		updateText: function(property) { 
 			switch (property) {
 				case "title":
@@ -267,6 +344,70 @@ var ProjectEditor = (function($) {
 					$(ProjectEditor.elements[property].elementId).html(tinyMCE.get("wdg-input-"+property).getContent());
 					break;
 			}
+		},
+		
+		
+		//Déplacement de l'image dans le header
+		moveHeaderPicture:function() {
+			$('#img-container').draggable({ axis: "y" });
+			$('#img-container').draggable('enable');
+			$('#wdg-move-picture-head').addClass("edit-button-validate");
+			$('#wdg-move-picture-head').removeClass('move-button');
+			$("#head-content").css({ opacity: 0 });
+			$("#head-content").css({ 'z-index': -1 });
+		},
+
+		//Enregistrement de la position de l'image dans le header
+		saveHeaderPicturePosition:function(){
+			$('#img-container').draggable('disable');
+			$('#wdg-move-picture-head').addClass('wait-button');
+			$('#wdg-move-picture-head').removeClass("edit-button-validate");
+			$("#head-content").css({ opacity: 1 });
+			$("#head-content").css({ 'z-index': 2 });
+
+			$.ajax({
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': { 
+					'action':   'setCoverPosition',
+					'top':	    $('#img-container').css('top'),
+					'id_campaign': $("#content").data("campaignid")
+				}
+			}).done(function() {
+				$('#wdg-move-picture-head').addClass('move-button');
+				$('#wdg-move-picture-head').removeClass('wait-button');
+			});
+		},
+
+		//Déplacement du curseur de localisation
+		moveCursor:function(){
+			$('#map-cursor').draggable({
+				containment: '#project-map'
+			});
+			$('#map-cursor').draggable('enable');
+			$('#wdg-move-picture-location').addClass("edit-button-validate");
+			$('#wdg-move-picture-location').removeClass('move-button');
+		},
+
+		//Enregistrement de la position du curseur de localisation
+		saveCursorPosition:function(){
+			$('#map-cursor').draggable('disable');
+			$('#wdg-move-picture-location').addClass('wait-button');
+			$('#wdg-move-picture-location').removeClass("edit-button-validate");
+			$.ajax({
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': { 
+					'action': 'setCursorPosition',
+					'top': $('#map-cursor').css('top'),
+					'left': $('#map-cursor').css('left'),
+					'id_campaign': $("#content").data("campaignid")
+				}
+			    
+			}).done(function() {
+				$('#wdg-move-picture-location').addClass('move-button');
+				$('#wdg-move-picture-location').removeClass('wait-button');
+			}); 
 		}
 	};
     

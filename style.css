@@ -817,6 +817,7 @@ footer div.social-icons {
 .home-large-project .video-zone {
     float: left;
     width: 615px;
+    min-height: 330px;
 }
 .home-large-project .description-zone {
     float: left;
@@ -1497,16 +1498,22 @@ div#home_bottom h1 {
     z-index: 2;
     bottom: -1px;
 }
-#head-content #title{
+#head-content #title {
     position: absolute;
-    font-size: 30px;
-    text-transform: uppercase;
-    width: 470px;
+    width: 472px;
     bottom: 70px;
     left: 0px;
-    -webkit-margin-before: 0em;
+    font-size: 30px;
+    text-transform: uppercase;
 }
-#head-content #subtitle{
+#head-content #title p {
+    -webkit-margin-before: 0em;
+    min-height: 30px;
+}
+#head-content #title p span {
+    display: block;
+}
+#head-content #subtitle {
     position: absolute;
     bottom: 50px;
     width: 470px;
@@ -1712,6 +1719,7 @@ div#home_bottom h1 {
     margin: 0;
     padding: 0;
     text-transform: uppercase;
+    font-weight: bold;
 }
 #project-map{
     margin: auto;
@@ -1739,6 +1747,7 @@ div#home_bottom h1 {
 }
 #projects-right-desc .project-rewards span {
     text-transform: uppercase;
+    font-weight: bold;
     margin-bottom: 5px;
 }
 #projects-right-desc #project-rewards-custom {
@@ -2075,7 +2084,7 @@ div#home_bottom h1 {
 .editable {
     border: 1px dashed #2B2C2C;
 }
-.edit-button, .edit-button-validate {
+.edit-button, .edit-button-validate, .move-button, .wait-button {
     position: absolute;
     cursor: pointer;
     width: 30px;
@@ -2087,7 +2096,13 @@ div#home_bottom h1 {
     background: url("images/editer.png") #74BF43 center no-repeat;
 }
 .edit-button-validate {
-    background: url("images/editer.png") #74BF43 center no-repeat;
+    background: url("images/valider.png") #74BF43 center no-repeat;
+}
+.move-button {
+    background: url("images/position.png") #74BF43 center no-repeat;
+}
+.wait-button {
+    background: url("images/chargement.gif") #74BF43 center no-repeat !important;
 }
 .edit-input {
     position: absolute;
@@ -2114,31 +2129,32 @@ div#home_bottom h1 {
     left: 28px;
     top: 106px;
 }
-#head-image #reposition-cover {
+#head-image #wdg-move-picture-head {
     display: none;
     position: absolute;
-    padding: 8px;
-    top: 104px;
-    left: 58px;
+    top: 106px;
+    left: 62px;
     z-index: 150;
 }
-#head-image:hover>#reposition-cover, #head-image:hover>#wdg-edit-picture-head {
+#content.editing #wdg-move-picture-head {
     display: block;
 }
-#head-image #reposition-cover a {
-    background-color: #74BF43;
-    border: none !important;
-    height: 14px;
-    padding: 7px 8px;
-}
+/*#content.editing #head-image:hover>#wdg-move-picture-head, #content.editing #head-image:hover>#wdg-edit-picture-head {
+    display: block;
+}*/
 
-#move-cursor{
-    position: relative;
-    left: 134px;
-    background-color: #74BF43;
-    color: #FFF;
-    padding: 4px;
+#wdg-move-picture-location {
+    display: none;
+    position: absolute;
+    left: 1070px;
+    top: 700px;
 }
+#content.editing #wdg-move-picture-location {
+    display: block;
+}
+/*#content.editing #project-map:hover> #wdg-move-picture-location {
+    display: block;
+}*/
 
 .video-zone.editable:before {
     content: "Image d'aperçu / Vidéo";
