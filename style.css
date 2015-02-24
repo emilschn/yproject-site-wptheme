@@ -2136,7 +2136,7 @@ div#home_bottom h1 {
     left: 62px;
     z-index: 150;
 }
-#content.editing #wdg-move-picture-head {
+#content.editing #wdg-move-picture-head, #content.editing #wdg-edit-picture-head {
     display: block;
 }
 /*#content.editing #head-image:hover>#wdg-move-picture-head, #content.editing #head-image:hover>#wdg-edit-picture-head {
