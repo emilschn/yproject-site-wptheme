@@ -6,16 +6,13 @@ jQuery(document).ready( function($) {
 var ProjectEditor = (function($) {
 	return {
 		elements: [],
+		isInit: false,
 		
 		//Initialisation : création du bouton en haut de page permettant de switcher d'un mode à l'autre
 		init: function() {
 			var buttonEdit = '<div id="wdg-edit-project" class="edit-button"></div>';
 			var linkElementId = "#single_project_admin_bar div a.selected";
 			$(linkElementId).after(buttonEdit);
-			
-			$("#wdg-edit-project").css("left", $(linkElementId).position().left + $(linkElementId).outerWidth() / 2 - $("#wdg-edit-project").outerWidth() / 2);
-			var marginTop = Number($(linkElementId).css("marginTop").replace("px", ""));
-			$("#wdg-edit-project").css("top", $(linkElementId).position().top + $(linkElementId).outerHeight() + 3);
 			
 			$("#wdg-edit-project").click(function() {
 				ProjectEditor.clickEditProject(this);
@@ -43,13 +40,15 @@ var ProjectEditor = (function($) {
 	    
 		//Démarre l'édition de la page projet
 		initEdition: function() {
-			ProjectEditor.initElements();
+			if (!ProjectEditor.isInit) { ProjectEditor.initElements(); }
 			for (elementKey in ProjectEditor.elements) {
 				ProjectEditor.initEditable(elementKey);
-				ProjectEditor.addEditButton(elementKey);
+				if (!ProjectEditor.isInit) { ProjectEditor.addEditButton(elementKey); }
+				else { ProjectEditor.showEditButton(elementKey); }
 			}
 			WDGProjectPageFunctions.refreshEditable();
-			ProjectEditor.initClick();
+			if (!ProjectEditor.isInit) { ProjectEditor.initClick(); }
+			ProjectEditor.isInit = true;
 		},
 		
 		//Arrête l'édition de la page projet
@@ -97,11 +96,13 @@ var ProjectEditor = (function($) {
 		
 		//Affiche le bouton d'édition d'un élément en paramètre
 		showEditButton: function(property) {
-			if (property !== "picture-head" && ProjectEditor.elements[property] !== undefined) {
-				var elementId = ProjectEditor.elements[property].elementId;
-				$("#wdg-edit-"+property).css("left", $(elementId).position().left + $(elementId).outerWidth());
-				var marginTop = Number($(elementId).css("marginTop").replace("px", ""));
-				$("#wdg-edit-"+property).css("top", $(elementId).position().top + marginTop);
+			if (ProjectEditor.elements[property] !== undefined) {
+				if (property !== "picture-head") {
+					var elementId = ProjectEditor.elements[property].elementId;
+					$("#wdg-edit-"+property).css("left", $(elementId).position().left + $(elementId).outerWidth());
+					var marginTop = Number($(elementId).css("marginTop").replace("px", ""));
+					$("#wdg-edit-"+property).css("top", $(elementId).position().top + marginTop);
+				}
 				$("#wdg-edit-"+property).show();
 			}
 			

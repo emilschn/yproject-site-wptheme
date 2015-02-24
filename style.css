@@ -2096,7 +2096,7 @@ div#home_bottom h1 {
     background: url("images/editer.png") #74BF43 center no-repeat;
 }
 .edit-button-validate {
-    background: url("images/valider.png") #74BF43 center no-repeat;
+    background: url("images/valider.png") #3F6923 center no-repeat;
 }
 .move-button {
     background: url("images/position.png") #74BF43 center no-repeat;
@@ -2139,22 +2139,17 @@ div#home_bottom h1 {
 #content.editing #wdg-move-picture-head, #content.editing #wdg-edit-picture-head {
     display: block;
 }
-/*#content.editing #head-image:hover>#wdg-move-picture-head, #content.editing #head-image:hover>#wdg-edit-picture-head {
-    display: block;
-}*/
 
 #wdg-move-picture-location {
     display: none;
-    position: absolute;
-    left: 1070px;
-    top: 700px;
+    position: relative;
+    float: left;
+    left: 250px;
+    top: -200px;
 }
 #content.editing #wdg-move-picture-location {
     display: block;
 }
-/*#content.editing #project-map:hover> #wdg-move-picture-location {
-    display: block;
-}*/
 
 .video-zone.editable:before {
     content: "Image d'aperçu / Vidéo";
@@ -2167,6 +2162,24 @@ div#home_bottom h1 {
     font-weight: bold;
     height: 305px !important;
     min-height: 305px !important;
+}
+
+#wdg-edit-project {
+    color: #FFFFFF;
+    padding: 6px 6px 0px 33px;
+    width: auto;
+    height: 22px;
+    background-position: 2px 2px;
+    position: fixed;
+    top: 200px;
+    right: 0px;
+    font-weight: bold;
+}
+#wdg-edit-project.edit-button:before {
+    content: "Mode édition";
+}
+#wdg-edit-project.edit-button-validate:before {
+    content: "Mode normal";
 }
 
 /*******************************************************************************
