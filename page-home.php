@@ -34,6 +34,15 @@
 	</div>
 </header>
 
+<?php
+//*******************
+//CACHE HOME
+$cache_home = $WDG_cache_plugin->get_cache('home', 1);
+if ($cache_home !== FALSE) { echo $cache_home; }
+else {
+	ob_start();
+?>
+
 <div id="home_middle_top">
 	<div id="home_middle_content">
 		<div class="center">
@@ -105,3 +114,11 @@
 		</div>
 	</div>
 </div>
+<?php
+	$cache_home = ob_get_contents();
+	$WDG_cache_plugin->set_cache('home', $cache_home, 60*60*24, 1);
+	ob_end_clean();
+	echo $cache_home;
+}
+//FIN CACHE HOME
+//*******************

@@ -1,5 +1,5 @@
 <?php 
-global $campaign_id_param, $campaign_id, $WDG_cache_plugin, $stylesheet_directory_uri;
+global $campaign_id_param, $campaign_id, $stylesheet_directory_uri;
 
 $bopp_campaign_id = BoppLibHelpers::get_api_project_id($campaign_id);
 $bopp= BoppLib::get_project($bopp_campaign_id);
@@ -27,11 +27,6 @@ $vote_status = $campaign->campaign_status();
 <section id="projects-banner">
 	<div id="projects-stats" class="center">
 		<div id="projects-stats-content" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>>
-			<?php 
-			$cache_result = $WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-first');
-			if (false === $cache_result) {
-				ob_start();
-				?>
 				<div class="projects-description-separator" <?php if($vote_status=='preview')echo 'style="opacity:0;"'?>></div>
 
 				<?php
@@ -124,13 +119,7 @@ $vote_status = $campaign->campaign_status();
 					</div>
 					<div class="projects-description-separator" style="opacity:0"></div>
 
-					<?php } 
-					$cache_result=ob_get_contents();
-					$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-first',$cache_result);
-					ob_end_clean();
-				}
-				echo $cache_result;
-				?>
+					<?php } ?>
 				<div class="post_bottom_buttons">
 					<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) { ?> 
 					<div id="invest-button">
@@ -236,12 +225,6 @@ $vote_status = $campaign->campaign_status();
 											<div id="head-image"<?php global $can_modify; if ($can_modify) { echo ' style="margin-top: 36px"'; } ?>>
 												<div class="center">
 													<div id="head-content">
-
-														<?php
-														$cache_result = $WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-title');
-														if (false === $cache_result) {
-															ob_start();
-															?>
 															<div class="head_project_name">
 															<?php if($can_modify){ ?>
 																<div class="edit_name">
@@ -271,13 +254,6 @@ $vote_status = $campaign->campaign_status();
 																</div>
 															</div>
 															<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="Fond projet" />
-															<?php 
-															$cache_result = ob_get_contents();
-															$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-title', $cache_result);
-															ob_end_clean();
-														}
-														echo $cache_result;
-														?>
 
 														<?php
 														$current_page = 'http';
@@ -326,12 +302,7 @@ $vote_status = $campaign->campaign_status();
 													</div>
 												</div>
 
-												<?php
-												$cache_result = $WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-img');
-												if (false === $cache_result) {
-													ob_start();
-													
-													if ($can_modify) { ?>
+												<?php if ($can_modify) { ?>
 													<form id="image_upload" method="post" action="#" enctype="multipart/form-data" >
 													   <span class="btn_file"><input type="file" name="image" id="image"></span>
 													  <input type='hidden' value='<?php wp_create_nonce( 'upload' ); ?>' name='_nonce' />
@@ -372,13 +343,6 @@ $vote_status = $campaign->campaign_status();
 														?>
 														<img id="moved-img" class="cover-img" src="<?php echo $image_obj[0][0];; ?>" alt="Image du projet" />
 													</div>
-													<?php 
-													$cache_result = ob_get_contents();
-													$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-img', $cache_result);
-													ob_end_clean();
-												}
-												echo $cache_result;
-												?>
 
 												<?php 
 												global $can_modify;

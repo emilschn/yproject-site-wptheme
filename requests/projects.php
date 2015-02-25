@@ -158,7 +158,7 @@ class YPProjectLib {
 		);
 
 		wp_insert_post($blog, true);
-		do_action('wdg_delete_cache', array( 'project-'.$post_campaign->ID.'-header' ));
+		do_action('wdg_delete_cache', array( 'project-header-menu-'.$post_campaign->ID ));
 	}
 	
 	/**
@@ -372,6 +372,14 @@ class YPProjectLib {
 				$buffer = FALSE;
 			}
 		}
+		
+		do_action('wdg_delete_cache', array(
+			'project-header-image-' . $campaign_id, 
+			'project-content-summary-' . $campaign_id,
+			'project-content-about-' . $campaign_id,
+			'projects-current',
+			'projects-others'
+		));
 		
 		if ($buffer && isset($_POST['new_orga'])) {
 			$page_new_orga = get_page_by_path('creer-une-organisation');

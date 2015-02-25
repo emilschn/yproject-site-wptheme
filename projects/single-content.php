@@ -1,7 +1,4 @@
 <?php 
-$cache_result=$WDG_cache_plugin->get_cache('project-'.$campaign_id.'-content-first');
-if(false===$cache_result){
-	ob_start();
 $images_folder=get_stylesheet_directory_uri().'/images/';
 global $campaign; 
 $campaign_id_param = '?campaign_id=';
@@ -15,7 +12,15 @@ if (isset($_GET['campaign_id'])) {
 $vote_status = html_entity_decode($campaign->vote());
 ?>
 <div id="projects-top-desc">
-	<div id="projects-left-desc" class="left">
+	<div id="projects-left-desc" class="left">		    
+<?php
+//*******************
+//CACHE PROJECT CONTENT SUMMARY
+$cache_content_summary = $WDG_cache_plugin->get_cache('project-content-summary-' . $post_campaign->ID, 1);
+if ($cache_content_summary !== FALSE) { echo $cache_content_summary; }
+else {
+	ob_start();
+?>
 		<div id="project-summary-container">
 			<div id="projects-summary"><?php echo html_entity_decode($campaign->summary()); ?></div>
 		</div>
@@ -46,8 +51,25 @@ $vote_status = html_entity_decode($campaign->vote());
 		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>');"<?php } ?>>
 			<?php echo $video_element; ?>
 		</div>
+<?php
+	$cache_content_summary = ob_get_contents();
+	$WDG_cache_plugin->set_cache('project-content-summary-' . $post_campaign->ID, $cache_content_summary, 60*60*6, 1);
+	ob_end_clean();
+	echo $cache_content_summary;
+}
+//FIN CACHE PROJECT CONTENT SUMMARY
+//*******************
+?>
 	</div>
-	<div id="projects-right-desc" class="right" >
+	<div id="projects-right-desc" class="right">	    
+<?php
+//*******************
+//CACHE PROJECT CONTENT SUMMARY
+$cache_content_about = $WDG_cache_plugin->get_cache('project-content-about-' . $post_campaign->ID, 1);
+if ($cache_content_about !== FALSE) { echo $cache_content_about; }
+else {
+	ob_start();
+?>
 		<div id="project-owner">
 			<?php 
 			$owner_str = '';
@@ -79,14 +101,17 @@ $vote_status = html_entity_decode($campaign->vote());
 				<p><?php echo $campaign->location(); ?></p>
 			</div>
 		</div>
-		<?php
-		$cache_result=ob_get_contents();
-		$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-content-first',$cache_result);
-		ob_end_clean();
-		}
-		echo $cache_result;
+<?php
+	$cache_content_about = ob_get_contents();
+	$WDG_cache_plugin->set_cache('project-content-about-' . $post_campaign->ID, $cache_content_about, 60*60*6, 1);
+	ob_end_clean();
+	echo $cache_content_about;
+}
+//FIN CACHE PROJECT CONTENT SUMMARY
+//*******************
+?>
 			
-		if($can_modify){ ?>
+		<?php if($can_modify){ ?>
 			<div id="wdg-move-picture-location" class="move-button"></div>
 		<?php } ?>
 			
@@ -114,6 +139,15 @@ $vote_status = html_entity_decode($campaign->vote());
 </div>
 
 <?php
+//*******************
+//CACHE PROJECT CONTENT BOTTOM
+$cache_content_bottom = $WDG_cache_plugin->get_cache('project-content-bottom-' . $post_campaign->ID, 1);
+if ($cache_content_bottom !== FALSE) { echo $cache_content_bottom; }
+else {
+	ob_start();
+?>
+
+<?php
 $editor_params = array( 
 	'media_buttons' => true,
 	'quicktags'     => false,
@@ -131,15 +165,15 @@ $editor_params = array(
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle projet"/>
 		<div id="project-content-description" class="projects-desc-content">
 			<h2>En quoi consiste le projet ?</h2>
-			<div class="zone-content"><?php the_content(); ?></div>
-			<?php if ($can_modify): ?>
-				<div class="zone-edit hidden">
+			<div class="zone-content">
+				<?php the_content(); ?>
+			</div>
+			<div class="zone-edit hidden">
 				<?php 
 				$editor_description_content = str_replace( ']]>', ']]&gt;', apply_filters( 'the_content', $campaign->data->post_content ));
 				wp_editor( $editor_description_content, 'wdg-input-description', $editor_params );
 				?>
-				</div>
-			<?php endif; ?>
+			</div>
 		</div>
 	</div>
 
@@ -155,11 +189,9 @@ $editor_params = array(
 				echo apply_filters('the_content', $societal_challenge);
 				?>
 			</div>
-			<?php if ($can_modify): ?>
-				<div class="zone-edit hidden">
+			<div class="zone-edit hidden">
 				<?php wp_editor( $societal_challenge, 'wdg-input-societal_challenge', $editor_params ); ?>
-				</div>
-			<?php endif; ?>
+			</div>
 		</div>
 	</div>
 	
@@ -175,11 +207,9 @@ $editor_params = array(
 				echo apply_filters('the_content', $added_value);
 				?>
 			</div>
-			<?php if ($can_modify): ?>
-				<div class="zone-edit hidden">
+			<div class="zone-edit hidden">
 				<?php wp_editor( $added_value, 'wdg-input-added_value', $editor_params ); ?>
-				</div>
-			<?php endif; ?>
+			</div>
 		</div>
 	</div>
 	
@@ -194,11 +224,9 @@ $editor_params = array(
 				echo apply_filters('the_content', $economic_model);
 				?>
 			</div>
-			<?php if ($can_modify): ?>
-				<div class="zone-edit hidden">
+			<div class="zone-edit hidden">
 				<?php wp_editor( $economic_model, 'wdg-input-economic_model', $editor_params ); ?>
-				</div>
-			<?php endif; ?>
+			</div>
 		</div>
 	</div>
 	<?php endif; ?>
@@ -214,13 +242,20 @@ $editor_params = array(
 				echo apply_filters('the_content', $implementation);
 				?>
 			</div>
-			<?php if ($can_modify): ?>
-				<div class="zone-edit hidden">
+			<div class="zone-edit hidden">
 				<?php wp_editor( $implementation, 'wdg-input-implementation', $editor_params ); ?>
-				</div>
-			<?php endif; ?>
+			</div>
 		</div>
 	</div>
 </div>
+<?php
+	$cache_content_bottom = ob_get_contents();
+	$WDG_cache_plugin->set_cache('project-content-bottom-' . $post_campaign->ID, $cache_content_bottom, 60*60*6, 1);
+	ob_end_clean();
+	echo $cache_content_bottom;
+}
+//FIN CACHE PROJECT CONTENT SUMMARY
+//*******************
+?>
 </div>
 </div>

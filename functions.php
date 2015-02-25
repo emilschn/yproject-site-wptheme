@@ -310,7 +310,7 @@ add_action('comment_post','comment_blog_post');
 function set_cover_position(){
 	if (isset($_POST['top'])) {
 		update_post_meta($_POST['id_campaign'],'campaign_cover_position', $_POST['top']);
-		do_action('wdg_delete_cache',array('project-'.$_POST['id_campaign'].'-header-second'));
+		do_action('wdg_delete_cache', array('project-header-image-' . $_POST['id_campaign'], 'project-content-summary-' . $_POST['id_campaign']));
 	}
 }
 add_action( 'wp_ajax_setCoverPosition', 'set_cover_position' );
@@ -322,7 +322,7 @@ function set_cursor_position(){
 	if (isset($_POST['top'])) {
 		update_post_meta($_POST['id_campaign'],'campaign_cursor_top_position', $_POST['top']);
 		update_post_meta($_POST['id_campaign'],'campaign_cursor_left_position', $_POST['left']);
-		do_action('wdg_delete_cache',array('project-'.$_POST['id_campaign'].'-content'));
+		do_action('wdg_delete_cache', array('project-content-about-' . $_POST['id_campaign']));
 	}
 }
 add_action( 'wp_ajax_setCursorPosition', 'set_cursor_position' );
@@ -331,9 +331,12 @@ add_action( 'wp_ajax_setCursorPosition', 'set_cursor_position' );
 function update_jy_crois(){
 	global $post;
 
-	if (isset($_POST['id_campaign'])) $post = get_post($_POST['id_campaign']);
-	$campaign = atcf_get_campaign( $post );
-	return $campaign->manage_jycrois();
+	if (isset($_POST['id_campaign'])) {
+	    $post = get_post($_POST['id_campaign']);
+	    do_action('wdg_delete_cache', array( 'project-header-right-'.$_POST['id_campaign'] ));
+	    $campaign = atcf_get_campaign( $post );
+	    return $campaign->manage_jycrois();
+	}
 }
 add_action( 'wp_ajax_update_jy_crois', 'update_jy_crois' );
 
@@ -660,6 +663,14 @@ function yproject_save_edit_project() {
 			update_post_meta($_POST['id_campaign'], 'campaign_' . $_POST['property'], $_POST['value']);
 			break;
 	}
+	do_action('wdg_delete_cache', array( 
+		'project-header-menu-' . $_POST['id_campaign'], 
+		'project-content-summary-' . $_POST['id_campaign'],
+		'project-content-about-' . $_POST['id_campaign'],
+		'project-content-bottom-' . $_POST['id_campaign'],
+		'projects-current',
+		'projects-others'
+	));
 	echo $_POST['property'];
 	exit();
 }

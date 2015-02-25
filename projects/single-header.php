@@ -21,11 +21,16 @@ $vote_status = $campaign->campaign_status();
 <section id="projects-banner">
 	<div id="projects-stats" class="center">
 		<div id="projects-stats-content" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>>
-		<?php 
-		$cache_result = $WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-first');
-		if (false === $cache_result) {
-			ob_start();
-		?>
+		    
+		    
+<?php
+//*******************
+//CACHE PROJECT HEADER RIGHT
+$cache_header_right = $WDG_cache_plugin->get_cache('project-header-right-' . $_GET["campaign_id"], 1);
+if ($cache_header_right !== FALSE) { echo $cache_header_right; }
+else {
+	ob_start();
+?>
 			<div class="projects-description-separator" <?php if($vote_status=='preview')echo 'style="opacity:0;"'?>></div>
 
 			<?php
@@ -119,13 +124,16 @@ $vote_status = $campaign->campaign_status();
 				</div>
 				<div class="projects-description-separator" style="opacity:0"></div>
 
-			<?php } 
-			$cache_result=ob_get_contents();
-			$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-first',$cache_result);
-			ob_end_clean();
-		}
-		echo $cache_result;
-		?>
+			<?php } ?>
+<?php
+	$cache_header_right = ob_get_contents();
+	$WDG_cache_plugin->set_cache('project-header-right-' . $_GET["campaign_id"], $cache_header_right, 60*30, 1);
+	ob_end_clean();
+	echo $cache_header_right;
+}
+//FIN CACHE MENU
+//*******************
+?>
 			<div class="post_bottom_buttons">
 				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) { ?> 
 					<div id="invest-button">
@@ -232,24 +240,20 @@ $vote_status = $campaign->campaign_status();
 	<div id="head-image"<?php if ($can_modify) { echo ' style="margin-top: 46px"'; } ?>>
 		<div class="center">
 			<div id="head-content">
-				<?php
-				$cache_result = $WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-title');
-				if (false === $cache_result) {
-					ob_start();
-				?>
-					<div id="title">
-						<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/capital.png" alt="Picto Capital" /><br /><?php endif; ?>
-						<p><?php echo get_the_title(); ?></p>
-					</div>
-					<p id="subtitle"><?php echo $campaign->subtitle(); ?></p>
-					<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="fond projet" class="bg-project" />
-				<?php 
-					$cache_result = ob_get_contents();
-					$WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-title', $cache_result);
-					ob_end_clean();
-				}
-				echo $cache_result;
-				?>
+<?php
+//*******************
+//CACHE PROJECT HEADER MENU
+$cache_header_menu = $WDG_cache_plugin->get_cache('project-header-menu-' . $_GET["campaign_id"], 1);
+if ($cache_header_menu !== FALSE) { echo $cache_header_menu; }
+else {
+	ob_start();
+?>
+				<div id="title">
+					<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/capital.png" alt="Picto Capital" /><br /><?php endif; ?>
+					<p><?php echo get_the_title(); ?></p>
+				</div>
+				<p id="subtitle"><?php echo $campaign->subtitle(); ?></p>
+				<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="fond projet" class="bg-project" />
 				
 				<?php
 					$current_page = 'http';
@@ -295,14 +299,26 @@ $vote_status = $campaign->campaign_status();
 						<?php } ?>
 					</ul>
 				</nav>
+<?php
+	$cache_header_menu = ob_get_contents();
+	$WDG_cache_plugin->set_cache('project-header-menu-' . $_GET["campaign_id"], $cache_header_menu, 60*60, 1);
+	ob_end_clean();
+	echo $cache_header_menu;
+}
+//FIN CACHE PROJECT HEADER MENU
+//*******************
+?>
 			</div>
 		</div>
 	    
-		<?php
-		$cache_result = $WDG_cache_plugin->get_cache('project-'.$campaign_id.'-header-img');
-		if (false === $cache_result) {
-		ob_start();
-		?>
+<?php
+//*******************
+//CACHE PROJECT HEADER IMAGE
+$cache_header_image = $WDG_cache_plugin->get_cache('project-header-image-' . $_GET["campaign_id"], 1);
+if ($cache_header_image !== FALSE) { echo $cache_header_image; }
+else {
+	ob_start();
+?>
 		<div id='img-container' style="<?php echo $campaign->get_header_picture_position_style(); ?>">
 			<?php 
 			$img_src = $campaign->get_header_picture_src();
@@ -311,13 +327,15 @@ $vote_status = $campaign->campaign_status();
 			<img id="moved-img" src="<?php echo $img_src; ?>" alt="banniere <?php echo $post->post_title; ?>" />
 			<?php endif; ?>
 		</div>
-		<?php 
-		    $cache_result = ob_get_contents();
-		    $WDG_cache_plugin->set_cache('project-'.$campaign_id.'-header-img', $cache_result);
-		    ob_end_clean();
-		}
-		echo $cache_result;
-		?>
+<?php
+	$cache_header_image = ob_get_contents();
+	$WDG_cache_plugin->set_cache('project-header-image-' . $_GET["campaign_id"], $cache_header_image, 60*30, 1);
+	ob_end_clean();
+	echo $cache_header_image;
+}
+//FIN CACHE PROJECT HEADER IMAGE
+//*******************
+?>
 
 		<?php 
 		global $can_modify, $is_campaign_page;

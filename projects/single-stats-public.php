@@ -1,10 +1,17 @@
 <?php 
-global $disable_logs; $disable_logs = TRUE;
+global $disable_logs, $WDG_cache_plugin; 
+$disable_logs = TRUE;
 if (isset($_GET["campaign_id"])) { 
-	global $WDG_cache_plugin, $stylesheet_directory_uri;
-	$cache_result = $WDG_cache_plugin->get_cache('public-stats-' . $_GET["campaign_id"]);
-	if ($cache_result === false) {
-		ob_start();
+	global $stylesheet_directory_uri;
+?>
+
+<?php
+//*******************
+//CACHE PROJECT PUBLIC STATS
+$cache_stats = $WDG_cache_plugin->get_cache('project-stats-public-' . $_GET["campaign_id"], 1);
+if ($cache_stats !== FALSE) { echo $cache_stats; }
+else {
+	ob_start();
 ?>
 
 <h2 class="expandator" data-target="votes">Votes <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus"/></h2>
@@ -32,12 +39,16 @@ if (isset($_GET["campaign_id"])) {
 	print_investments($investments_list);
 ?>
 </div>
-    
-<?php 
-		$cache_result = ob_get_contents();
-		$WDG_cache_plugin->set_cache('public-stats-' . $_GET["campaign_id"], $cache_result, 60*30);
-		ob_end_clean();
-	}
-	echo $cache_result;
-} 
+
+<?php
+	$cache_stats = ob_get_contents();
+	$WDG_cache_plugin->set_cache('project-stats-public-' . $_GET["campaign_id"], $cache_stats, 60*30, 1);
+	ob_end_clean();
+	echo $cache_stats;
+}
+//FIN CACHE MENU
+//*******************
 ?>
+
+<?php 
+} 

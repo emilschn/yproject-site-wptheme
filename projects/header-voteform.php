@@ -100,6 +100,7 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 			)); 
 			if (!$vote_result) array_push($vote_errors, 'Probl&egrave;me de prise en compte du vote.');
 
+			do_action('wdg_delete_cache', array( 'project-header-right-'.$campaign_id ));
 
 			// Construction des urls utilisés dans les liens du fil d'actualité
 			// url d'une campagne précisée par son nom 
@@ -134,7 +135,7 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 	}
 
 }else if(!is_user_logged_in() && $campaign->end_vote_remaining() > 0){ 
-if (isset($_POST['submit_vote'])) {
+	if (isset($_POST['submit_vote'])) {
 	?>
 		<span class="errors">Vous devez vous connecter pour voter</span><br />
 	<?php

@@ -15,21 +15,25 @@
 		<title><?php wp_title( '|', true, 'right' ); bloginfo( 'name' ); ?></title>
 		<?php endif; ?>
 		
-		<?php
-			$cache_result = $WDG_cache_plugin->get_cache('header-content');
-			// START CACHE HEADER CONTENT
- 			if (false === $cache_result) {
-				ob_start();
-		?>
-		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
-		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
-		<meta name="description" content="Plateforme d'investissement participatif a impact positif" />
 		<!-- meta keywords -->
 		<?php if (is_single() || is_page() ) : if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>	
 		<?php csv_tags(); ?>
 		<?php endwhile; endif; elseif(is_home()) : ?>	
 		<?php endif; ?>
+		
+		<?php
+		//*******************
+		//CACHE HEAD
+		$cache_head = $WDG_cache_plugin->get_cache('html-head', 1);
+		if ($cache_head !== FALSE) { echo $cache_head; }
+		else {
+			ob_start();
+		?>
+		
+		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
+		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
+		<meta name="description" content="Plateforme d'investissement participatif a impact positif" />
 		<meta property="og:title" content="WEDOGOOD" />
 		<meta property="og:image" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
 		<meta property="og:image:secure_url" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
@@ -39,33 +43,51 @@
 		<![endif]-->
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?ver=1.1.011" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+		
+		<?php
+			$cache_head = ob_get_contents();
+			$WDG_cache_plugin->set_cache('html-head', $cache_head, 60*60*24, 1);
+			ob_end_clean();
+			echo $cache_head;
+		}
+		//FIN CACHE HEAD
+		//*******************
+		?>
 
 		<?php do_action( 'bp_head' ); ?>
-		<?php wp_head(); ?>
+		<?php wp_head(); ?>			
 	</head>
 
 	<body <?php body_class(); ?> id="bp-default">
-	    
-		<?php 
-		$menu_pages = array(
-			'les-projets' => 'Les projets',
-			'financement' => 'Financer son projet',
-			'descriptif' => 'Comment ca marche ?',
-			'blog' => 'Actualit&eacute;s'
-		);
-		?>
 
 		<nav id="navigation" role="navigation">
 			<div class="center">
 				<ul id="nav">
+				    
+				    
+					<?php
+					//*******************
+					//CACHE MENU
+					$cache_menu = $WDG_cache_plugin->get_cache('menu-items', 1);
+					if ($cache_menu !== FALSE) { echo $cache_menu; }
+					else {
+						ob_start();
+					?>
 					<?php /* Logo Accueil */ ?>
 					<li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>" style="padding-left: 0px; padding-right: 14px;">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo.png" width="160" height="100" alt="logo" />
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo_court.png" width="160" height="51" alt="logo court" style="display: none;" />
 					</a></li>
 				    
-					<?php global $post; ?>
-					<?php foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
+					<?php 
+					global $post;
+					$menu_pages = array(
+						'les-projets' => 'Les projets',
+						'financement' => 'Financer son projet',
+						'descriptif' => 'Comment ca marche ?',
+						'blog' => 'Actualit&eacute;s'
+					);
+					foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
 						<?php 
 							$menu_page_object = get_page_by_path($menu_page_key);
 							$selected = ($post->post_name == $menu_page_key) ? ' selected' : ''; 
@@ -77,13 +99,17 @@
 					<li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.png" width="20" height="20" alt="logo facebook" /></a></li>
 					<li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.png" width="20" height="20" alt="logo twitter" /></a></li>
 					<?php
-						$cache_result = ob_get_contents();
-						$WDG_cache_plugin->set_cache('header-content',$cache_result,60*60*24);
+						$cache_menu = ob_get_contents();
+						$WDG_cache_plugin->set_cache('menu-items', $cache_menu, 60*60*24, 1);
 						ob_end_clean();
+						echo $cache_menu;
 					}
-					// END CACHE HEADER CONTENT
-					echo $cache_result;
+					//FIN CACHE MENU
+					//*******************
+					?>
 					
+					
+					<?php
 					if (is_user_logged_in()) : 
 						// Menu Mon compte
 						$page_update_account = get_page_by_path('modifier-mon-compte'); 

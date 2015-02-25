@@ -3,6 +3,15 @@
 		<?php do_action( 'bp_after_container' ); ?>
 		<?php do_action( 'bp_before_footer'   ); ?>
 
+<?php
+//*******************
+//CACHE PROJECT CONTENT BOTTOM
+global $WDG_cache_plugin;
+$cache_footer = $WDG_cache_plugin->get_cache('footer', 1);
+if ($cache_footer !== FALSE) { echo $cache_footer; }
+else {
+	ob_start();
+?>
 		<footer>
 		    <div class="center">
 			<?php if ( is_active_sidebar( 'first-footer-widget-area' ) || is_active_sidebar( 'second-footer-widget-area' ) || is_active_sidebar( 'third-footer-widget-area' ) || is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>
@@ -20,6 +29,16 @@
 			
 		     </div>
 		</footer>
+
+<?php
+	$cache_footer = ob_get_contents();
+	$WDG_cache_plugin->set_cache('footer', $cache_footer, 60*60*24, 1);
+	ob_end_clean();
+	echo $cache_footer;
+}
+//FIN CACHE PROJECT CONTENT SUMMARY
+//*******************
+?>
 
 		<?php do_action( 'bp_after_footer' ); ?>
 
