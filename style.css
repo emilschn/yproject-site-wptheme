@@ -1854,8 +1854,8 @@ div#home_bottom h1 {
 }
 #projects-left-desc .video-zone{
     margin-top: 37px;
-    width: 580px;
-    height: 325px;
+    width: 610px;
+    height: 328px;
     min-height: 325px;
     text-align: center;
 }
@@ -1874,7 +1874,7 @@ div#home_bottom h1 {
     position: relative;
     overflow: hidden;
     display: block;
-    width: 580px;
+    width: 610px;
     height: 113px;
 }
 #projects-summary p {
