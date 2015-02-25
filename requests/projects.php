@@ -291,6 +291,10 @@ class YPProjectLib {
 				);
 			}
 		}
+		
+		$temp_blur = $_POST['image_header_blur'];
+		if (empty($temp_blur)) $temp_blur = 'FALSE';
+		update_post_meta($campaign_id, 'campaign_header_blur_active', $temp_blur);
 		/* FIN Gestion fichiers / images */
 		
 		
