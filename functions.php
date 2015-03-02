@@ -82,6 +82,7 @@ function varnish_safe_http_headers() {
 	header('X-UA-Compatible: IE=edge,chrome=1');
 	session_cache_limiter('');
 	header('Cache-Control: public, s-maxage=120');
+	header('Pragma: public');
 	if( !session_id() ) {
 		session_start();
 	}
