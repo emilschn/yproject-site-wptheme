@@ -138,14 +138,6 @@ else {
 	</span>
 </div>
 
-<?php
-//*******************
-//CACHE PROJECT CONTENT BOTTOM
-$cache_content_bottom = $WDG_cache_plugin->get_cache('project-content-bottom-' . $post_campaign->ID, 1);
-if ($cache_content_bottom !== FALSE) { echo $cache_content_bottom; }
-else {
-	ob_start();
-?>
 
 <?php
 $editor_params = array( 
@@ -168,12 +160,14 @@ $editor_params = array(
 			<div class="zone-content">
 				<?php the_content(); ?>
 			</div>
+			<?php if ($can_modify) { ?>
 			<div class="zone-edit hidden">
 				<?php 
 				$editor_description_content = str_replace( ']]>', ']]&gt;', apply_filters( 'the_content', $campaign->data->post_content ));
 				wp_editor( $editor_description_content, 'wdg-input-description', $editor_params );
 				?>
 			</div>
+			<?php } ?>
 		</div>
 	</div>
 
@@ -189,9 +183,11 @@ $editor_params = array(
 				echo apply_filters('the_content', $societal_challenge);
 				?>
 			</div>
+			<?php if ($can_modify) { ?>
 			<div class="zone-edit hidden">
 				<?php wp_editor( $societal_challenge, 'wdg-input-societal_challenge', $editor_params ); ?>
 			</div>
+			<?php } ?>
 		</div>
 	</div>
 	
@@ -207,9 +203,11 @@ $editor_params = array(
 				echo apply_filters('the_content', $added_value);
 				?>
 			</div>
+			<?php if ($can_modify) { ?>
 			<div class="zone-edit hidden">
 				<?php wp_editor( $added_value, 'wdg-input-added_value', $editor_params ); ?>
 			</div>
+			<?php } ?>
 		</div>
 	</div>
 	
@@ -224,9 +222,11 @@ $editor_params = array(
 				echo apply_filters('the_content', $economic_model);
 				?>
 			</div>
+			<?php if ($can_modify) { ?>
 			<div class="zone-edit hidden">
 				<?php wp_editor( $economic_model, 'wdg-input-economic_model', $editor_params ); ?>
 			</div>
+			<?php } ?>
 		</div>
 	</div>
 	<?php endif; ?>
@@ -242,20 +242,13 @@ $editor_params = array(
 				echo apply_filters('the_content', $implementation);
 				?>
 			</div>
+			<?php if ($can_modify) { ?>
 			<div class="zone-edit hidden">
 				<?php wp_editor( $implementation, 'wdg-input-implementation', $editor_params ); ?>
 			</div>
+			<?php } ?>
 		</div>
 	</div>
 </div>
-<?php
-	$cache_content_bottom = ob_get_contents();
-	$WDG_cache_plugin->set_cache('project-content-bottom-' . $post_campaign->ID, $cache_content_bottom, 60*60*6, 1);
-	ob_end_clean();
-	echo $cache_content_bottom;
-}
-//FIN CACHE PROJECT CONTENT SUMMARY
-//*******************
-?>
 </div>
 </div>
