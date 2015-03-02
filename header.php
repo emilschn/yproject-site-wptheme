@@ -88,11 +88,8 @@
 						'blog' => 'Actualit&eacute;s'
 					);
 					foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
-						<?php 
-							$menu_page_object = get_page_by_path($menu_page_key);
-							$selected = ($post->post_name == $menu_page_key) ? ' selected' : ''; 
-						?>
-						<li class="page_item<?php echo $selected; ?>"><span class="page_item_border"><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></span></li>
+						<?php $menu_page_object = get_page_by_path($menu_page_key); ?>
+						<li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></span></li>
 					<?php endforeach; ?>
 				    
 					<?php /* Logo FB / TW */ ?>

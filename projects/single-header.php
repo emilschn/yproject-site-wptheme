@@ -6,6 +6,7 @@ $campaign_id_param = '?campaign_id=';
 if (isset($_GET['campaign_id'])) {
 	$campaign_id_param .= $_GET['campaign_id'];
 	$post = get_post($_GET['campaign_id']);
+	$campaign_id = $_GET['campaign_id'];
 	
 } else if (isset($campaign_id)) {
 	$campaign_id_param .= $campaign_id;
@@ -26,7 +27,7 @@ $vote_status = $campaign->campaign_status();
 <?php
 //*******************
 //CACHE PROJECT HEADER RIGHT
-$cache_header_right = $WDG_cache_plugin->get_cache('project-header-right-' . $_GET["campaign_id"], 1);
+$cache_header_right = $WDG_cache_plugin->get_cache('project-header-right-' . $campaign_id, 1);
 if ($cache_header_right !== FALSE) { echo $cache_header_right; }
 else {
 	ob_start();
@@ -127,7 +128,7 @@ else {
 			<?php } ?>
 <?php
 	$cache_header_right = ob_get_contents();
-	$WDG_cache_plugin->set_cache('project-header-right-' . $_GET["campaign_id"], $cache_header_right, 60*30, 1);
+	$WDG_cache_plugin->set_cache('project-header-right-' . $campaign_id, $cache_header_right, 60*30, 1);
 	ob_end_clean();
 	echo $cache_header_right;
 }
@@ -243,7 +244,7 @@ else {
 <?php
 //*******************
 //CACHE PROJECT HEADER MENU
-$cache_header_menu = $WDG_cache_plugin->get_cache('project-header-menu-' . $_GET["campaign_id"], 1);
+$cache_header_menu = $WDG_cache_plugin->get_cache('project-header-menu-' . $campaign_id, 1);
 if ($cache_header_menu !== FALSE) { echo $cache_header_menu; }
 else {
 	ob_start();
@@ -301,7 +302,7 @@ else {
 				</nav>
 <?php
 	$cache_header_menu = ob_get_contents();
-	$WDG_cache_plugin->set_cache('project-header-menu-' . $_GET["campaign_id"], $cache_header_menu, 60*60, 1);
+	$WDG_cache_plugin->set_cache('project-header-menu-' . $campaign_id, $cache_header_menu, 60*60, 1);
 	ob_end_clean();
 	echo $cache_header_menu;
 }
@@ -314,7 +315,7 @@ else {
 <?php
 //*******************
 //CACHE PROJECT HEADER IMAGE
-$cache_header_image = $WDG_cache_plugin->get_cache('project-header-image-' . $_GET["campaign_id"], 1);
+$cache_header_image = $WDG_cache_plugin->get_cache('project-header-image-' . $campaign_id, 1);
 if ($cache_header_image !== FALSE) { echo $cache_header_image; }
 else {
 	ob_start();
@@ -329,7 +330,7 @@ else {
 		</div>
 <?php
 	$cache_header_image = ob_get_contents();
-	$WDG_cache_plugin->set_cache('project-header-image-' . $_GET["campaign_id"], $cache_header_image, 60*30, 1);
+	$WDG_cache_plugin->set_cache('project-header-image-' . $campaign_id, $cache_header_image, 60*30, 1);
 	ob_end_clean();
 	echo $cache_header_image;
 }
