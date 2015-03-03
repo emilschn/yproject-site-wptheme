@@ -251,7 +251,7 @@ else {
 ?>
 				<div id="title">
 					<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/capital.png" alt="Picto Capital" /><br /><?php endif; ?>
-					<p><?php echo get_the_title(); ?></p>
+					<p><?php $title = get_the_title(); if (strpos($title, 'span') === FALSE) { $title = '<span>' . $title . '</span>'; } echo $title; ?></p>
 				</div>
 				<p id="subtitle"><?php echo $campaign->subtitle(); ?></p>
 				<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="fond projet" class="bg-project" />
