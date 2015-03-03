@@ -77,8 +77,10 @@ $str_organisations = '';
 global $current_user;
 $api_user_id = BoppLibHelpers::get_api_user_id($current_user->ID);
 $organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
-foreach ($organisations_list as $organisation_item) {
-	$str_organisations .= '<li><a href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</a></li>';
+if (!empty($organisations_list)) {
+	foreach ($organisations_list as $organisation_item) {
+		$str_organisations .= '<li><a href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</a></li>';
+	}
 }
 if ($str_organisations != ''): ?>
 	<ul><?php echo $str_organisations; ?></ul>
