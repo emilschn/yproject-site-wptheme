@@ -35,9 +35,13 @@ class YPOrganisationLib {
 		}*/
 		
 		//Vérification du code postal
-		$org_postal_code = filter_input(INPUT_POST, 'org_postal_code', FILTER_VALIDATE_INT);
+		$org_postal_code = filter_input(INPUT_POST, 'org_postal_code');
+		if (substr($org_postal_code, 0, 1) === '0') { $org_postal_code = substr($org_postal_code, 1); }
+		$org_postal_code = filter_var($org_postal_code, FILTER_VALIDATE_INT);
 		if ($org_postal_code === FALSE) {
 			$errors_submit_new->add('postalcode-not-integer', __('Le code postal doit &ecirc;tre un nombre entier.', 'yproject'));
+		} else {
+			if (strlen($org_postal_code) === 4) { $org_postal_code = '0' . $org_postal_code; }
 		}
 		
 		//Vérification du capital
