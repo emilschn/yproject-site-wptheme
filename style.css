@@ -16,7 +16,7 @@
  *
  */
 
- /* @import url("_inc/css/responsive.css") (max-width: 480px); */
+ @import url("_inc/css/responsive.css") (max-width: 480px);
 
  /* FONTS TO LOAD */
  @font-face {
@@ -332,14 +332,14 @@ form.wdg-forms .small-margin {
     display: block;
     padding-top: 50px;
 }
+#nav li.only_on_mobile {
+    display: none;
+}
 #nav #menu_item_facebook, #nav #menu_item_twitter {
     padding-top: 47px;
 }
 #nav .page_item_border {
     border-left: 1px solid #FFF;
-}
-.page_item {
-    /*padding-bottom: 7px; */
 }
 .page_item_inverted {
     background-color: #FFF !important;
@@ -352,7 +352,6 @@ form.wdg-forms .small-margin {
     border-left: none !important;
 }
 .page_item_logo {
-    /*height: 100px !important;*/
     padding-top: 0px !important;
 }
 .page_item_out label {
@@ -455,6 +454,8 @@ form.wdg-forms .small-margin {
     border: 1px solid #000;
     background-color: #2B2C2C;
 }
+
+/***** MENU CONNECTION *****/
 #submenu_item_connection {
     position: absolute;
     font-family: Arial, sans-serif;
@@ -538,6 +539,11 @@ div#connexion_facebook_container {
 }
 div#connexion_facebook_container span {
     padding: 2px 10px 6px 3px;
+}
+
+/***** MENU MOBILE *****/
+#submenu-mobile {
+    display: none;
 }
 
 /***** UX HELPER *****/

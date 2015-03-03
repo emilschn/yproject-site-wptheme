@@ -59,11 +59,20 @@
 	</head>
 
 	<body <?php body_class(); ?> id="bp-default">
+				    
+		<?php
+		global $post;
+		$menu_pages = array(
+			'les-projets' => 'Les projets',
+			'financement' => 'Financer son projet',
+			'descriptif' => 'Comment ca marche ?',
+			'blog' => 'Actualit&eacute;s'
+		);
+		?>
 
 		<nav id="navigation" role="navigation">
 			<div class="center">
 				<ul id="nav">
-				    
 				    
 					<?php
 					//*******************
@@ -73,23 +82,21 @@
 					else {
 						ob_start();
 					?>
+				    
+					<li class="page_item only_on_mobile">
+						<span class="page_item_border"><a href="#" id="mobile-menu">Menu</a></span>
+					</li>
+				    
 					<?php /* Logo Accueil */ ?>
 					<li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>" style="padding-left: 0px; padding-right: 14px;">
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo.png" width="160" height="100" alt="logo" />
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo_court.png" width="160" height="51" alt="logo court" style="display: none;" />
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo.png" width="160" height="100" alt="logo" class="mobile_hidden" />
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo_court.png" width="160" height="51" alt="logo court" class="only_on_mobile" style="display: none;" />
 					</a></li>
 				    
 					<?php 
-					global $post;
-					$menu_pages = array(
-						'les-projets' => 'Les projets',
-						'financement' => 'Financer son projet',
-						'descriptif' => 'Comment ca marche ?',
-						'blog' => 'Actualit&eacute;s'
-					);
 					foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
 						<?php $menu_page_object = get_page_by_path($menu_page_key); ?>
-						<li class="page_item"><span class="page_item_border"><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></span></li>
+						<li class="page_item mobile_hidden"><span class="page_item_border"><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></span></li>
 					<?php endforeach; ?>
 				    
 					<?php /* Logo FB / TW */ ?>
@@ -111,7 +118,7 @@
 						// Menu Mon compte
 						$page_update_account = get_page_by_path('modifier-mon-compte'); 
 						?>
-						<li class="page_item_out page_item_inverted">
+						<li class="page_item_out page_item_inverted mobile_hidden">
 						<a class="page_item_inverted" href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a>
 						<ul>
 							<li style="border-bottom: 1px solid #FFF;" class="page_item_out"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Param&egrave;tres', 'yproject'); ?></a></li>
@@ -121,7 +128,7 @@
 						
 					<?php else : ?>
 						<?php /* Menu Connexion */ $page_connexion = get_page_by_path('connexion'); ?>
-						<li id="menu_item_connection" class="page_item_out page_item_inverted"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
+						<li id="menu_item_connection" class="page_item_out page_item_inverted mobile_hidden"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
 					<?php endif; ?>
 				</ul>
 			</div>
@@ -153,6 +160,29 @@
 					<label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" />&nbsp;<?php _e('Se souvenir de moi', 'yproject'); ?></label>
 					</form>
 				</li>
+			</ul>
+		</div>
+	    
+		<div id="submenu-mobile">
+			<ul>
+				<?php foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
+					<?php $menu_page_object = get_page_by_path($menu_page_key); ?>
+					<li class="page_item"><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></li>
+				<?php endforeach; ?>
+					
+				<?php if (is_user_logged_in()) : ?>
+					<?php /* Menu Mon compte */ ?>
+					<?php $page_update_account = get_page_by_path('modifier-mon-compte'); ?>
+					<li class="page_item"><a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a></li>
+					<li class="page_item"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Param&egrave;tres', 'yproject'); ?></a></li>
+					<li class="page_item"><a href="<?php echo wp_logout_url();echo '&page_id='.get_the_ID() ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
+					
+
+				<?php else : ?>
+					<?php /* Menu Connexion */ ?>
+					<?php $page_connexion = get_page_by_path('connexion'); ?>
+					<li class="page_item"><a href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
+				<?php endif; ?>
 			</ul>
 		</div>
 

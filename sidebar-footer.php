@@ -17,6 +17,7 @@
 				<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) : ?>
 
 					<div id="first" class="widget-area">
+						<span class="menutitle only_on_mobile"><?php echo __('Informations & questions', 'yproject'); ?></span>
 						<span class="menutitle"><?php echo __('Informations', 'yproject'); ?></span>
 						
 						<ul class="xoxo">
@@ -68,7 +69,7 @@
 								    global $facebook_infos, $twitter_infos;
 								    $page_community_blog = get_page_by_path('blog');
 								?>
-								<li class="menu-item">
+								<li class="menu-item center">
 								    <div class="social-icons">
 									<a href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_grenade.png" alt="compte facebook" /></a><br />
 									<?php if ($facebook_infos) echo $facebook_infos; ?>
@@ -77,9 +78,6 @@
 									<a href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter_grenade.png" alt="compte twitter" /></a><br />
 									<?php if ($twitter_infos) echo $twitter_infos; ?>
 								    </div>
-								    <?php /*<div class="social-icons">
-									<img border="0" src="<?php echo get_stylesheet_directory_uri(); ?>/images/viadeo_grenade.png" alt="logo viadeo" />
-								    </div>*/ ?>
 								    <div class="social-icons">
 									<a href="<?php echo get_permalink($page_community_blog->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/blog_grenade.png" alt="blog" /></a>
 								    </div>

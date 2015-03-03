@@ -347,6 +347,10 @@ YPMenuFunctions = (function($){
 		}, 650);
 		$("#menu_item_connection").data('timeoutId', timeoutId); 
 	    });
+	    
+	    $("#mobile-menu").click(function() {
+		$("#submenu-mobile").toggle();
+	    });
 	},
 	
 	refreshMenuBar: function() {

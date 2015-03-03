@@ -20,8 +20,9 @@
 		<section id="welcome_text">
 			<?php the_content();?>
 			<?php if ( is_user_logged_in() ) { ?>
-				<?php global $current_user; get_currentuserinfo(); ?>
+				<?php global $current_user; get_currentuserinfo(); $page_list_projects = get_page_by_path('les-projets'); ?>
 				<p class="hello">Bonjour <?php echo $current_user->user_firstname;?> !</p>
+				<p class="align-center only_on_mobile"><br /><a href="<?php echo get_permalink($page_list_projects->ID); ?>" class="button">D&eacute;couvrir les projets</a></p>
 			<?php } else {
 				$page_connexion_register = get_page_by_path('register');
 				$page_connexion = get_page_by_path('connexion');?>
@@ -49,7 +50,7 @@ $page_list_projects = get_page_by_path('les-projets');
 $page_finance = get_page_by_path('financement');
 $page_how = get_page_by_path('descriptif');
 ?>
-<div id="home_middle_top" class="center">
+<div id="home_middle_top" class="center mobile_hidden">
 	<div id="home_middle_top_left" class="home_middle_top_content">
 		<a href="<?php echo get_permalink($page_finance->ID); ?>" style="display: block;">
 			<div class="round_title">
@@ -109,7 +110,7 @@ $page_how = get_page_by_path('descriptif');
 	<div class="clear"></div>
 </div>
 
-<div id="home_bottom" class="center">
+<div id="home_bottom" class="center mobile_hidden">
 	<div class="padder">
 		<div class="part-title-separator">
 			<span class="part-title">Nos partenaires</span>
@@ -125,6 +126,40 @@ $page_how = get_page_by_path('descriptif');
 	$WDG_cache_plugin->set_cache('home', $cache_home, 60*60*24, 1);
 	ob_end_clean();
 	echo $cache_home;
+}
+//FIN CACHE HOME
+//*******************
+?>
+
+
+<?php
+//*******************
+//CACHE HOME RESPONSIVE
+$cache_home_responsive = $WDG_cache_plugin->get_cache('home-responsive', 1);
+if ($cache_home_responsive !== FALSE) { echo $cache_home_responsive; }
+else {
+	ob_start();
+?>
+<?php
+$page_finance = get_page_by_path('financement');
+$page_how = get_page_by_path('descriptif');
+?>
+<div id="home-responsive" class="only_on_mobile align-center">
+	<h2>Vous avez un projet ?</h2>
+	<p>Avec WEDOGOOD, b&eacute;n&eacute;ficiez d&apos;un financement souple et adapt&eacute; &agrave; vos besoins.</p>
+	<a href="<?php echo get_permalink($page_finance->ID); ?>" class="button red big">Financez votre projet</a>
+	<br /><br /><br />
+	<hr />
+	<h2>Comment investir dans un projet ?</h2>
+	<p>Soyez acteurs et influenceurs de la communaut&eacute; !</p>
+	<a href="<?php echo get_permalink($page_finance->ID); ?>" class="button red big">Comment &ccedil;a marche ?</a>
+	<br /><br /><br /><br />
+</div>
+<?php
+	$cache_home_responsive = ob_get_contents();
+	$WDG_cache_plugin->set_cache('home-responsive', $cache_home_responsive, 60*60*24, 1);
+	ob_end_clean();
+	echo $cache_home_responsive;
 }
 //FIN CACHE HOME
 //*******************
