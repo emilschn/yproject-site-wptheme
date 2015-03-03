@@ -43,64 +43,70 @@ else {
 	ob_start();
 ?>
 
-<div id="home_middle_top">
-	<div id="home_middle_content">
-		<div class="center">
-			<?php 
-			$page_list_projects = get_page_by_path('les-projets');
-			$page_finance = get_page_by_path('financement');
-			?>
-			<a href="<?php echo get_permalink($page_list_projects->ID); ?>" style="display: block;">
-				<div class="round_title_left">
-					<strong>Participer</strong><br/>&agrave; un projet
-				</div>
-			</a>
-			<a href="<?php echo get_permalink($page_finance->ID); ?>" style="display: block;">
-				<div class="round_title_right">
-					<strong>Financer</strong><br />son projet
-				</div>
-			</a>
-			<div class="clear"></div>
-		</div>
-	</div>
-</div>
-<div class="center">
-	<div id="home_middle_desc_left">
-		<p>
-			Soyez acteurs et influenceurs<br />
-			de la communaut&eacute;
-		</p>
-		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/main.jpg" alt="logo main" /><br />
-			Votez pour les projets les plus impactants
-		</p>
-		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/pieces.jpg" alt="logo piece monnaie" /><br />
-			Investissez &agrave; partir de 10&euro;
-		</p>
-		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/fusee.jpg" alt="logo fusee" /><br />
-			Boostez l&apos;&eacute;conomie positive
-		</p>
-	</div>
-	<div id="home_middle_desc_right">
+
+<?php 
+$page_list_projects = get_page_by_path('les-projets');
+$page_finance = get_page_by_path('financement');
+$page_how = get_page_by_path('descriptif');
+?>
+<div id="home_middle_top" class="center">
+	<div id="home_middle_top_left" class="home_middle_top_content">
+		<a href="<?php echo get_permalink($page_finance->ID); ?>" style="display: block;">
+			<div class="round_title">
+				<strong>Proposez</strong><br/>un projet
+			</div>
+		</a>
 		<p>
 			B&eacute;n&eacute;ficiez d'un financement souple<br />
 			et adapt&eacute; &agrave; vos besoins
 		</p>
 		<p>
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.jpg" alt="logo euro" /><br />
-			Trouvez un financement pour votre projet
+			Trouvez un <b>financement</b> pour votre projet
 		</p>
 		<p>
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/hp.jpg" alt="logo megaphone" /><br />
-			Faites conna&icirc;tre votre projet
+			<b>Faites conna&icirc;tre votre projet</b>
 		</p>
 		<p>
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/communaute.jpg" alt="logo communaute" /><br />
-			F&eacute;d&eacute;rez une communaut&eacute; sur la dur&eacute;e
+			F&eacute;d&eacute;rez une <b>communaut&eacute;</b> sur la dur&eacute;e
+		</p>
+		<p>
+			<br /><br />
+			<a href="<?php echo get_permalink($page_finance->ID); ?>" class="button red big">Financez votre projet</a>
+			<br /><br />
 		</p>
 	</div>
+	<div id="home_middle_top_right" class="home_middle_top_content">
+		<a href="<?php echo get_permalink($page_list_projects->ID); ?>" style="display: block;">
+			<div class="round_title">
+				<strong>Investissez</strong><br />sur un projet
+			</div>
+		</a>
+		<p>
+			Soyez acteurs et influenceurs<br />
+			de la communaut&eacute; !
+		</p>
+		<p>
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/pieces.jpg" alt="logo piece monnaie" /><br />
+			Investissez <b>&agrave; partir de 10&euro;</b>
+		</p>
+		<p>
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/main.jpg" alt="logo main" /><br />
+			<b>Participez &agrave; l&apos;aventure</b>
+		</p>
+		<p>
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/fusee.jpg" alt="logo fusee" /><br />
+			Boostez l&apos;<b>&eacute;conomie positive</b>
+		</p>
+		<p>
+			<br /><br />
+			<a href="<?php echo get_permalink($page_how->ID); ?>" class="button red big">Comment &ccedil;a marche ?</a>
+			<br /><br />
+		</p>
+	</div>
+	<div class="clear"></div>
 </div>
 
 <div id="home_bottom" class="center">
