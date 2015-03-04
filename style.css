@@ -122,7 +122,7 @@ tbody {
 .wp-list-table td { padding: 0px 5px; }
 #container { padding-top: 120px; }
 
-.button {
+.button, .wpcf7-submit {
     background: none repeat scroll 0 0 #333333;
     border: 1px solid #333333 !important;
     color: #FFFFFF;
@@ -132,7 +132,7 @@ tbody {
     font-weight: normal;
     font-size: 14px;
 }
-.button.red {
+.button.red, .wpcf7-submit {
     background: none repeat scroll 0 0 #FF494C;
     border: 1px solid #FF494C !important;
 }

@@ -1,5 +1,5 @@
 <?php 
-global $campaign_id_param, $campaign_id, $WDG_cache_plugin, $stylesheet_directory_uri, $can_modify; 
+global $campaign_id_param, $campaign_id, $WDG_cache_plugin, $stylesheet_directory_uri, $can_modify, $show_admin_bar; 
 $stylesheet_directory_uri = get_stylesheet_directory_uri();
 date_default_timezone_set("Europe/London");
 $campaign_id_param = '?campaign_id=';
@@ -238,7 +238,7 @@ else {
 		</div>
 	</div>
 	
-	<div id="head-image"<?php if ($can_modify) { echo ' style="margin-top: 46px"'; } ?>>
+	<div id="head-image"<?php if ($show_admin_bar) { echo ' style="margin-top: 46px"'; } ?>>
 		<div class="center">
 			<div id="head-content">
 <?php
