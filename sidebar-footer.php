@@ -69,7 +69,7 @@
 								    global $facebook_infos, $twitter_infos;
 								    $page_community_blog = get_page_by_path('blog');
 								?>
-								<li class="menu-item center">
+								<li class="menu-item">
 								    <div class="social-icons">
 									<a href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_grenade.png" alt="compte facebook" /></a><br />
 									<?php if ($facebook_infos) echo $facebook_infos; ?>

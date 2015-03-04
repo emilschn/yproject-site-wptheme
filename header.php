@@ -41,7 +41,7 @@
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?ver=1.1.011" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?ver=1.1.100" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		
 		<?php
@@ -88,10 +88,12 @@
 					</li>
 				    
 					<?php /* Logo Accueil */ ?>
-					<li class="page_item_out page_item_logo"><a href="<?php echo home_url(); ?>" style="padding-left: 0px; padding-right: 14px;">
+					<li class="page_item_out page_item_logo tablet_hidden"><a href="<?php echo home_url(); ?>" style="padding-left: 0px; padding-right: 14px;">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo.png" width="160" height="100" alt="logo" class="mobile_hidden" />
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo_court.png" width="160" height="51" alt="logo court" class="only_on_mobile" style="display: none;" />
 					</a></li>
+				    
+					<li class="page_item only_on_tablet" style="display: none;"><span><a href="<?php echo home_url(); ?>">WEDOGOOD.co</a></span></li>
 				    
 					<?php 
 					foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>

@@ -22,15 +22,15 @@
 			<?php if ( is_user_logged_in() ) { ?>
 				<?php global $current_user; get_currentuserinfo(); $page_list_projects = get_page_by_path('les-projets'); ?>
 				<p class="hello">Bonjour <?php echo $current_user->user_firstname;?> !</p>
-				<p class="align-center only_on_mobile"><br /><a href="<?php echo get_permalink($page_list_projects->ID); ?>" class="button">D&eacute;couvrir les projets</a></p>
 			<?php } else {
 				$page_connexion_register = get_page_by_path('register');
 				$page_connexion = get_page_by_path('connexion');?>
-			<div id="header_homepage_link">
-				<a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="button">Inscription</a>
-				<a href="<?php echo get_permalink($page_connexion->ID); ?>" class="button">Connexion</a>
-			</div>
+				<div id="header_homepage_link" class="mobile_hidden">
+					<a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="button">Inscription</a>
+					<a href="<?php echo get_permalink($page_connexion->ID); ?>" class="button">Connexion</a>
+				</div>
 			<?php } ?>
+			<p class="align-center only_on_mobile"><br /><a href="<?php echo get_permalink($page_list_projects->ID); ?>" class="button">D&eacute;couvrir les projets</a></p>
 		</section>
 	</div>
 </header>
@@ -107,7 +107,6 @@ $page_how = get_page_by_path('descriptif');
 			<br /><br />
 		</p>
 	</div>
-	<div class="clear"></div>
 </div>
 
 <div id="home_bottom" class="center mobile_hidden">

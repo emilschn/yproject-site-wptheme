@@ -15,7 +15,15 @@
 		min-width: 0px !important;
 	}
 	#navigation #nav { height: 50px !important; }
-	#navigation #nav .page_item { padding-top: 20px !important; }
+	#navigation #nav .page_item { 
+		padding-top: 25px !important; 
+		height: 25px !important; 
+	}
+	#navigation #nav .page_item_logo { 
+		padding-top: 5px !important; 
+		height: 45px !important; 
+		-webkit-margin-before: -15px !important;
+	}
 	#navigation #nav .only_on_mobile { display: block !important; }
 	#navigation #nav .only_on_mobile .page_item_border {
 		border-left: 0px;
@@ -74,7 +82,10 @@
 		font-size: 15px;
 		font-weight: bold;
 	}
-	footer #third #menu-footer-3 li:nth-child(1) { width: 213px !important; }
+	footer #third #menu-footer-3 li:nth-child(1) { 
+		width: 213px !important;
+		margin: auto;
+	}
 	footer #third #menu-footer-3 li:nth-child(2) { display: none; }
 
 /*******************************************************************************

@@ -17,6 +17,7 @@
  */
 
  @import url("_inc/css/responsive.css") (max-width: 480px);
+ @import url("_inc/css/responsive-medium.css") (min-width: 481px);
 
  /* FONTS TO LOAD */
  @font-face {
@@ -72,6 +73,7 @@ tbody {
 
 .hidden { display: none; }
 .only_on_mobile { display: none; }
+.only_on_tablet { display: none; }
 
 
 .errors, .invest_error {
