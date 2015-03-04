@@ -9,7 +9,7 @@
 locate_template( array("requests/organisations.php"), true );
 $organisation_obj = YPOrganisation::get_current();
 YPOrganisationLib::edit($organisation_obj);
-ypcf_init_mangopay_user($organisation_obj->get_wpref(), TRUE);
+ypcf_init_mangopay_user($organisation_obj->get_creator(), TRUE);
 get_header();
 ?>
 
