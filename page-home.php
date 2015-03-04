@@ -38,7 +38,7 @@
 <?php
 //*******************
 //CACHE HOME
-$cache_home = $WDG_cache_plugin->get_cache('home', 1);
+$cache_home = $WDG_cache_plugin->get_cache('home', 2);
 if ($cache_home !== FALSE) { echo $cache_home; }
 else {
 	ob_start();

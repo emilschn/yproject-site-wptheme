@@ -24,7 +24,7 @@
 		<?php
 		//*******************
 		//CACHE HEAD
-		$cache_head = $WDG_cache_plugin->get_cache('html-head', 1);
+		$cache_head = $WDG_cache_plugin->get_cache('html-head', 2);
 		if ($cache_head !== FALSE) { echo $cache_head; }
 		else {
 			ob_start();
@@ -77,7 +77,7 @@
 					<?php
 					//*******************
 					//CACHE MENU
-					$cache_menu = $WDG_cache_plugin->get_cache('menu-items', 1);
+					$cache_menu = $WDG_cache_plugin->get_cache('menu-items', 2);
 					if ($cache_menu !== FALSE) { echo $cache_menu; }
 					else {
 						ob_start();

@@ -7,7 +7,7 @@
 //*******************
 //CACHE PROJECT CONTENT BOTTOM
 global $WDG_cache_plugin;
-$cache_footer = $WDG_cache_plugin->get_cache('footer', 1);
+$cache_footer = $WDG_cache_plugin->get_cache('footer', 2);
 if ($cache_footer !== FALSE) { echo $cache_footer; }
 else {
 	ob_start();
