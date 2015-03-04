@@ -1,5 +1,5 @@
 <?php
-global $post, $campaign_id, $can_modify;
+global $post, $campaign_id, $can_modify, $show_admin_bar;
 if (!isset($campaign_id)) {
     if (isset($_GET['campaign_id'])) $campaign_id = $_GET['campaign_id'];
     else $campaign_id = get_the_ID();
@@ -9,6 +9,7 @@ $post_campaign = get_post($campaign_id);
 locate_template( array("requests/projects.php"), true );
 
 if ($can_modify) {
+	$show_admin_bar = TRUE;
 	$campaign = atcf_get_campaign($post_campaign);
         $params_full = ''; $params_partial = '';
         if (isset($_GET['preview']) && $_GET['preview'] = 'true') { $params_full = '?preview=true'; $params_partial = '&preview=true'; }
