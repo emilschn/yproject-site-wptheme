@@ -241,14 +241,6 @@ else {
 	<div id="head-image"<?php if ($show_admin_bar) { echo ' style="margin-top: 46px"'; } ?>>
 		<div class="center">
 			<div id="head-content">
-<?php
-//*******************
-//CACHE PROJECT HEADER MENU
-$cache_header_menu = $WDG_cache_plugin->get_cache('project-header-menu-' . $campaign_id, 1);
-if ($cache_header_menu !== FALSE) { echo $cache_header_menu; }
-else {
-	ob_start();
-?>
 				<div id="title">
 					<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/capital.png" alt="Picto Capital" /><br /><?php endif; ?>
 					<p><?php $title = get_the_title(); if (strpos($title, 'span') === FALSE) { $title = '<span>' . $title . '</span>'; } echo $title; ?></p>
@@ -300,15 +292,6 @@ else {
 						<?php } ?>
 					</ul>
 				</nav>
-<?php
-	$cache_header_menu = ob_get_contents();
-	$WDG_cache_plugin->set_cache('project-header-menu-' . $campaign_id, $cache_header_menu, 60*60, 1);
-	ob_end_clean();
-	echo $cache_header_menu;
-}
-//FIN CACHE PROJECT HEADER MENU
-//*******************
-?>
 			</div>
 		</div>
 	    

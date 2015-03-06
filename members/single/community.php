@@ -73,13 +73,17 @@ if ($str_groups != '') {
 
 <?php
 $page_edit_orga = get_page_by_path('editer-une-organisation');
-$str_organisations = '';
+$can_edit = (bp_displayed_user_id() == bp_loggedin_user_id() || current_user_can('manage_options'));
 global $current_user;
-$api_user_id = BoppLibHelpers::get_api_user_id($current_user->ID);
+$api_user_id = BoppLibHelpers::get_api_user_id(bp_displayed_user_id());
 $organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
 if (!empty($organisations_list)) {
 	foreach ($organisations_list as $organisation_item) {
-		$str_organisations .= '<li><a href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</a></li>';
+		$str_organisations .= '<li>';
+		if ($can_edit) { $str_organisations .= '<a href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$organisation_item->organisation_wpref.'">'; }
+		$str_organisations .= $organisation_item->organisation_name; 
+		if ($can_edit) { $str_organisations .= '</a>'; }
+		$str_organisations .= '</li>';
 	}
 }
 if ($str_organisations != ''): ?>

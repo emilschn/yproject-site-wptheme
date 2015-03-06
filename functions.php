@@ -50,8 +50,17 @@ remove_action("wp_head", "wp_generator");
 add_filter('login_errors',create_function('$a', "return null;"));
 
 function yproject_enqueue_script(){
-	global $post, $can_modify, $is_campaign_page;
-	$campaign_id = (isset($_GET['campaign_id'])) ? $_GET['campaign_id'] : $post->ID;
+	global $post, $can_modify, $is_campaign_page, $cat, $campaign_id;
+	if (is_category()) {
+		$this_category = get_category($cat);
+		$this_category_name = $this_category->name;
+		$name_exploded = explode('cat', $this_category_name);
+		if (count($name_exploded) > 1) {
+			$campaign_id = $name_exploded[1];
+		}
+	} else {
+		$campaign_id = (isset($_GET['campaign_id'])) ? $_GET['campaign_id'] : $post->ID;
+	}
 	$is_campaign = (get_post_meta($campaign_id, 'campaign_goal', TRUE) != '');
 	$is_campaign_page = $is_campaign && ($campaign_id == $post->ID);
 	$can_modify = ($is_campaign) && (YPProjectLib::current_user_can_edit($campaign_id));

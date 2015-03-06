@@ -1,15 +1,19 @@
 <?php 
+global $can_modify, $campaign_id;
 $this_category = get_category($cat);
 $this_category_name = $this_category->name;
-$name_exploted = explode('cat', $this_category_name);
-$campaign_post = get_post($name_exploted[1]);
-$campaign = atcf_get_campaign( $campaign_post );
-global $can_modify, $campaign_id;
-$campaign_id = $name_exploted[1];
+$name_exploded = explode('cat', $this_category_name);
+if (count($name_exploded) > 1) {
+	$campaign_id = $name_exploded[1];
+}
+if (isset($campaign_id)) {
+	$campaign_post = get_post($campaign_id);
+	$campaign = atcf_get_campaign($campaign_post);
+}
 $page_edit_news = get_page_by_path('editer-une-actu');
 locate_template( array("requests/projects.php"), true );
 if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
-	YPProjectLib::form_validate_news_add($campaign_post->ID);
+	YPProjectLib::form_validate_news_add($campaign_id);
 	//Afficher le nouvel article : relancer la requete de la page => wp_reset_query ?
 }
 ?>
@@ -109,7 +113,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 
 			<?php else : ?>
 
-			    <?php if ($campaign_post) : ?>
+			    <?php if (isset($campaign_post)) : ?>
 				Retrouvez bient&ocirc;t les actualit&eacute;s de ce projet !
 			    <?php else : ?>
 				<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
