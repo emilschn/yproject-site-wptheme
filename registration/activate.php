@@ -48,7 +48,7 @@
 
 			<?php else : ?>
 
-				<?php ypcf_debug_logg_log('Provide a valid activation key'); ?>
+				<?php ypcf_debug_log('Provide a valid activation key'); ?>
 				<p><?php _e( 'Please provide a valid activation key.', 'buddypress' ); ?></p>
 
 				<form action="" method="get" class="standard-form" id="activation-form">
