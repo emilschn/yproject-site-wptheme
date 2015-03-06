@@ -54,11 +54,13 @@ get_header();
 						<label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?>*</label>
 						<input type="text" name="org_legalform" value="<?php echo filter_input(INPUT_POST, 'org_legalform'); ?>" /><br />
 
-						<label for="org_idnumber"><?php _e('Num&eacute;ro d&apos;immatriculation', 'yproject'); ?>*</label>
+						<label for="org_idnumber"><?php _e('Num&eacute;ro SIREN', 'yproject'); ?>*</label>
 						<input type="text" name="org_idnumber" value="<?php echo filter_input(INPUT_POST, 'org_idnumber'); ?>" /><br />
 
+						<?php /*
 						<label for="org_rcs"><?php _e('RCS', 'yproject'); ?>*</label>
 						<input type="text" name="org_rcs" value="<?php echo filter_input(INPUT_POST, 'org_rcs'); ?>" /><br />
+						 */ ?>
 
 						<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?></label>
 						<input type="text" name="org_capital" value="<?php echo filter_input(INPUT_POST, 'org_capital'); ?>" /><br />

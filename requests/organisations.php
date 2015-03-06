@@ -51,7 +51,7 @@ class YPOrganisationLib {
 		}
 		
 		//Vérification des données obligatoires
-		$necessary_fields = array('org_name', 'org_address', 'org_city', 'org_nationality', 'org_legalform', 'org_idnumber', 'org_rcs', 'org_ape');
+		$necessary_fields = array('org_name', 'org_address', 'org_city', 'org_nationality', 'org_legalform', 'org_idnumber', 'org_ape');
 		$necessary_fields_full = TRUE;
 		foreach ($necessary_fields as $field) {
 			$value = filter_input(INPUT_POST, $field);
@@ -81,7 +81,7 @@ class YPOrganisationLib {
 		$org_object->set_legalform(filter_input(INPUT_POST, 'org_legalform'));
 		$org_object->set_capital($org_capital);
 		$org_object->set_idnumber(filter_input(INPUT_POST, 'org_idnumber'));
-		$org_object->set_rcs(filter_input(INPUT_POST, 'org_rcs'));
+		$org_object->set_rcs('---');
 		$org_object->set_ape(filter_input(INPUT_POST, 'org_ape'));
 		$org_object->set_bank_owner(filter_input(INPUT_POST, 'org_bankownername'));
 		$org_object->set_bank_address(filter_input(INPUT_POST, 'org_bankowneraddress'));
@@ -131,7 +131,7 @@ class YPOrganisationLib {
 		$org_object->set_legalform(filter_input(INPUT_POST, 'org_legalform'));
 		$org_object->set_capital(filter_input(INPUT_POST, 'org_capital'));
 		$org_object->set_idnumber(filter_input(INPUT_POST, 'org_idnumber'));
-		$org_object->set_rcs(filter_input(INPUT_POST, 'org_rcs'));
+//		$org_object->set_rcs(filter_input(INPUT_POST, 'org_rcs'));
 		$org_object->set_ape(filter_input(INPUT_POST, 'org_ape'));
 		$org_object->set_bank_owner(filter_input(INPUT_POST, 'org_bankownername'));
 		$org_object->set_bank_address(filter_input(INPUT_POST, 'org_bankowneraddress'));
@@ -145,5 +145,10 @@ class YPOrganisationLib {
 		$curl_result_extract = (isset($_FILES['org_file_extract']['tmp_name'])) ? ypcf_mangopay_send_strong_authentication($url_request, 'org_file_extract') : false;
 		if (isset($_FILES['org_file_declaration']['tmp_name'])) ypcf_mangopay_send_strong_authentication($url_request, 'org_file_declaration');
 		if ($curl_result_cni && $curl_result_status && $curl_result_extract) ypcf_mangopay_set_user_strong_authentication_doc_transmitted($wp_organisation_user->ID);
+		else {
+			if ($curl_result_cni || $curl_result_status || $curl_result_extract) {
+				$errors_edit->add('strongauthentication-incomplete', __('Les 3 fichiers d&apos;identification obligatoires doivent &ecirc;tre envoy&eacute;s en m&ecirc;me temps.', 'yproject'));
+			}
+		}
 	}
 }

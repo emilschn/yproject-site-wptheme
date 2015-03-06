@@ -63,11 +63,13 @@ get_header();
 							<label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?></label>
 							<input type="text" name="org_legalform" value="<?php echo $organisation_obj->get_legalform(); ?>" /><br />
 
-							<label for="org_idnumber"><?php _e('Num&eacute;ro d&apos;immatriculation', 'yproject'); ?></label>
+							<label for="org_idnumber"><?php _e('Num&eacute;ro SIREN', 'yproject'); ?></label>
 							<input type="text" name="org_idnumber" value="<?php echo $organisation_obj->get_idnumber(); ?>" /><br />
 
+							<?php /*
 							<label for="org_rcs"><?php _e('RCS', 'yproject'); ?></label>
 							<input type="text" name="org_rcs" value="<?php echo $organisation_obj->get_rcs(); ?>" /><br />
+							 */ ?>
 
 							<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?></label>
 							<input type="text" name="org_capital" value="<?php echo $organisation_obj->get_capital(); ?>" /><br />
@@ -136,13 +138,13 @@ get_header();
 								nous devons transmettre les pi&egrave;ces d&apos;identit&eacute; suivantes &agrave; notre partenaire Mangopay
 								(Les fichiers doivent &ecirc;tre de type jpeg, gif, png ou pdf et leur poids inf&eacute;rieur &agrave; 2 Mo) :<br /><br />
 
-								<label for="org_file_cni" class="large">Pi&egrave;ce d&apos;identit&eacute; recto-verso de la personne repr&eacute;sentant l'organisation</label>
+								<label for="org_file_cni" class="large">Pi&egrave;ce d&apos;identit&eacute; recto-verso de la personne repr&eacute;sentant l'organisation *</label>
 								<input type="file"name="org_file_cni" /> <br />
 
-								<label for="org_file_status" class="large">Statuts sign&eacute;s</label>
+								<label for="org_file_status" class="large">Statuts sign&eacute;s *</label>
 								<input type="file"name="org_file_status" /> <br />
 
-								<label for="org_file_extract" class="large">Extrait du registre de commerce datant de moins de 3 mois</label>
+								<label for="org_file_extract" class="large">Extrait du registre de commerce datant de moins de 3 mois *</label>
 								<input type="file"name="org_file_extract" /> <br />
 
 								<label for="org_file_declaration" class="large">D&eacute;claration de b&eacute;n&eacute;ficiaire &eacute;conomique (si aucun actionnaire personne physique n'est identifi&eacute; dans les statuts)</label>
