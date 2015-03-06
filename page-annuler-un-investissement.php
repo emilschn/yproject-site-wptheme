@@ -26,9 +26,7 @@
 			if ($valid_payment_access) {
 				if (isset($_POST["confirm"]) && $_POST["confirm"] == "confirmed") {
 					//On transfère la somme sur mangopay
-					$current_user = wp_get_current_user();
-					$amount = edd_get_payment_amount($payment_id);
-					$new_transfer = ypcf_mangopay_transfer_project_to_user($current_user, $download_id, $amount);
+					$new_transfer = ypcf_mangopay_refund_project_to_user($payment_id);
 					update_post_meta($payment_id, 'refund_transfer_id', $new_transfer->ID);
 
 					//On passe le statut du paiement en refund
@@ -51,29 +49,18 @@
 					//Affichage
 					_e( 'La somme est maintenant disponible dans votre porte-monnaie.', 'yproject' );
 					?>
-			<?php
-
-				} else {
-
-					if (have_posts()) : while (have_posts()) : the_post(); 
-			?>
+		    
+				<?php } else { ?>
 						<?php the_content(); ?>
 
-						<?php
-						$future_amount = $campaign->current_amount(false) - edd_get_payment_amount($payment_id);
-						?>
+						<?php $future_amount = $campaign->current_amount(false) - edd_get_payment_amount($payment_id); ?>
 						<a href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $post_campaign->post_title; ?></a><br />
 						<?php echo __("Sans vous, la somme atteinte sera de ", "yproject") . $future_amount . edd_get_currency(); ?><br /><br />
 						<form action="" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="confirm" value="confirmed" />
 							<input type="submit" value="<?php _e("Confirmer", "yproject"); ?>" class="button" />
 						</form>
-
-					<?php endwhile; else: ?>
-						<?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?>
-					<?php endif;
-				}
-			?>
+				<?php } ?>
 
 			<?php } else { ?>
 				<?php _e( 'Acc&egrave;s impossible', 'yproject' ); ?>
