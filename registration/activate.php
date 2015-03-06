@@ -20,8 +20,10 @@
 			<?php if ( bp_account_was_activated() ) : ?>
 
 				<?php if ( isset( $_GET['e'] ) ) : ?>
+					<?php ypcf_debug_log('Account activated + mail'); ?>
 					<p><?php _e( 'Your account was activated successfully! Your account details have been sent to you in a separate email.', 'buddypress' ); ?></p>
 				<?php else : ?>
+					<?php ypcf_debug_log('Account activated + form'); ?>
 					<p><?php printf( __( 'Your account was activated successfully! You can now <a href="%s">log in</a> with the username and password you provided when you signed up.', 'buddypress' ), wp_login_url( bp_get_root_domain() ) ); ?></p>
 
 					<form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
@@ -46,6 +48,7 @@
 
 			<?php else : ?>
 
+				<?php ypcf_debug_logg_log('Provide a valid activation key'); ?>
 				<p><?php _e( 'Please provide a valid activation key.', 'buddypress' ); ?></p>
 
 				<form action="" method="get" class="standard-form" id="activation-form">
