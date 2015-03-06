@@ -65,6 +65,15 @@ Votre projet a &eacute;t&eacute; vu<br />
 <?php if (current_user_can('manage_options')) { ?>
 <h2>[ADMIN] E-mails des utilisateurs qui croient ou qui ont vot&eacute;</h2>
 
+<form id="email-selector">
+Sélectionner :<br />
+<label><input type="checkbox" class="select-options" data-selection="believe" checked="checked" /> Y croit</label><br />
+<label><input type="checkbox" class="select-options" data-selection="vote" checked="checked" /> A voté</label><br />
+<label><input type="checkbox" class="select-options" data-selection="invest" checked="checked" /> A investi</label><br />
+<br />
+</form>
+
+<div id="email-selector-list">
 <?php 
 	$user_list = array();
 	global $wpdb;
@@ -72,16 +81,27 @@ Votre projet a &eacute;t&eacute; vu<br />
 	$table_jcrois = $wpdb->prefix . "jycrois";
 	$result_jcrois = $wpdb->get_results( "SELECT user_id FROM ".$table_jcrois." WHERE campaign_id = ".$_GET['campaign_id'] );
 	foreach ($result_jcrois as $item) {
-		$user_list[$item->user_id] = '1';
+		$user_list[$item->user_id] = 'believe';
 	}
 	//Récupération de la liste des votants
 	$table_votes = $wpdb->prefix . "ypcf_project_votes";
 	$result_votes = $wpdb->get_results( "SELECT user_id FROM ".$table_votes." WHERE post_id = ".$_GET['campaign_id'] );
 	foreach ($result_votes as $item) {
-		$user_list[$item->user_id] = '1';
+		if (!empty($user_list[$item->user_id])) $user_list[$item->user_id] .= ' vote';
+		else $user_list[$item->user_id] = 'vote';
 	}
+	//Récupération de la liste des investisseurs
+	$campaign = atcf_get_campaign( $post_camp );
+	$payments_data = $campaign->payments_data();
+	foreach ( $payments_data as $item ) {
+		if ($item['status'] == 'publish') {
+			if (!empty($user_list[$item['user']])) $user_list[$item['user']] .= ' invest';
+			else $user_list[$item['user']] = 'invest';
+		}
+	}
+	
 	//Affichage de la liste d'e-mails
-	foreach ($user_list as $user_id => $item) {
+	foreach ($user_list as $user_id => $classes) {
 		if (!empty($user_id)) {
 			if (YPOrganisation::is_user_organisation($user_id)) {
 				$organisation = new YPOrganisation($user_id);
@@ -90,11 +110,12 @@ Votre projet a &eacute;t&eacute; vu<br />
 				
 			} else {
 				$user_data = get_userdata($user_id);
-				if (!empty($user_data->user_email)) echo $user_data->user_email . ', ';
+				if (!empty($user_data->user_email)) echo '<span class="'.$classes.'">' . $user_data->user_email . ', </span>';
 			}
 		}
 	}
 ?>
+</div>
 
 <?php } ?>
 <br /><br />

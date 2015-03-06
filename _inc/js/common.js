@@ -172,6 +172,15 @@ YPUIFunctions = (function($) {
 					}
 				});
 			}
+			
+			if ($("#email-selector").length > 0) {
+				$(".select-options").change(function() {
+					$("#email-selector-list span").hide();
+					$(".select-options:checked").each(function() {
+						$("#email-selector-list span."+$(this).data("selection")).show();
+					});
+				});
+			}
 		},
 		
 		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué
