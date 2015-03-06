@@ -77,7 +77,27 @@ else {
 			$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
 			if (count($current_organisations) > 0) {
 				$current_organisation = $current_organisations[0];
-				$owner_str = $current_organisation->organisation_name . '<br />';
+				$owner_str = '<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation">' . $current_organisation->organisation_name . '</a><br />';
+				$owner_str .= '<div id="wdg-lightbox-project-organisation" class="wdg-lightbox hidden">
+		<div class="wdg-lightbox-click-catcher"></div>
+		<div class="wdg-lightbox-padder">
+		    <div class="wdg-lightbox-button-close">
+			<a href="#" class="button">X</a>
+		    </div>
+		    <div class="content align-center">'.$current_organisation->organisation_name.'</div>
+		    <div class="content align-left">
+		    <span>Forme l&eacute;gale :</span>'.$current_organisation->organisation_legalform.'<br />
+		    <span>SIREN :</span>'.$current_organisation->organisation_idnumber.'<br />
+		    <span>APE :</span>'.$current_organisation->organisation_ape.'<br />
+		    <span>Capital :</span>'.$current_organisation->organisation_capital.'<br /><br />
+		    </div>
+		    <div class="content align-left">
+		    <b>Si&egrave;ge social :</b><br />
+		    '.$current_organisation->organisation_address.'<br />
+		    '.$current_organisation->organisation_postalcode.' '.$current_organisation->organisation_city.'<br />
+		    </div>
+		</div>
+	    </div>';
 			} else {
 //				UIHelpers::print_user_avatar($author_id);
 				$author = get_userdata($post_campaign->post_author);

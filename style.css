@@ -68,6 +68,7 @@ tbody {
 .right { float: right; }
 .clear { clear: both; }
 .align-center { text-align: center; }
+.align-left { text-align: left; }
 .vert-align { vertical-align: middle; }
 
 .hidden { display: none; }
@@ -1543,11 +1544,10 @@ div#home_bottom h1 {
     border: 0px;
 }
 #head-content li {
- display: inline-block;
- padding: 13px 0px;
- margin-right: 10px;
- border: 0px;
-
+    display: inline-block;
+    padding: 13px 0px;
+    margin-right: 10px;
+    border: 0px;
 }
 #head-content li a{
     position: relative;
@@ -2082,6 +2082,21 @@ div#home_bottom h1 {
 }
 .ui-button-text {
     display: none;
+}
+
+/*****  *****/
+#wdg-lightbox-project-organisation div.content.align-center {
+    font-size: 18px;
+    font-weight: bold;
+}
+#wdg-lightbox-project-organisation div.content {
+    font-size: 16px;
+}
+#wdg-lightbox-project-organisation div.content span {
+    display: inline-block;
+    width: 125px;
+    font-weight: bold;
+    margin-right: 10px;
 }
 
 /***** EDITION *****/
