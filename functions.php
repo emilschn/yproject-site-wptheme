@@ -244,6 +244,15 @@ function yproject_page_template( $template ) {
 add_filter( 'template_include', 'yproject_page_template', 99 );
 /** FIN GESTION DES ROLES UTILISATEURS **/
 
+/** BACK-OFFICE USERS **/
+function yproject_user_contact_methods( $user_contact ) {
+	//Affichage du numéro de téléphone dans la fiche utilisateur
+	$user_contact['user_mobile_phone'] = __('Telephone');
+	return $user_contact;
+}
+add_filter( 'user_contactmethods', 'yproject_user_contact_methods' );
+/** FIN BACK-OFFICE USERS **/
+
 
 
 /**
