@@ -47,7 +47,7 @@
 					wp_update_post( array( 'ID' => $log_payment_id, 'post_status' => 'refunded' ) );
 
 					//Affichage
-					_e( 'La somme est maintenant disponible dans votre porte-monnaie.', 'yproject' );
+					_e( 'Votre remboursement est validé. Vous recevrez cet argent sur votre compte sous peu.', 'yproject' );
 					?>
 		    
 				<?php } else { ?>
