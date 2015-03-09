@@ -46,18 +46,23 @@
 ?>
 
 <?php 
+    global $campaign_id, $post;
     date_default_timezone_set("Europe/Paris");
     $this_category = get_the_category();
     $this_category = $this_category[0];
     $this_category_name = $this_category->name;
-    $name_exploted = explode('cat', $this_category_name);
-    $campaign_post = get_post($name_exploted[1]);
-    $campaign = atcf_get_campaign( $campaign_post );
+    $name_exploded = explode('cat', $this_category_name);
+    if (count($name_exploded) > 1) {
+	    $campaign_id = $name_exploded[1];
+    }
+    if (isset($campaign_id)) {
+	    $campaign_post = get_post($campaign_id);
+	    $campaign = atcf_get_campaign($campaign_post);
+    }
     $category_link = (!empty($this_category)) ? get_category_link($this_category->cat_ID) : '';
-    global $post;
     $post = $campaign_post;
 ?>
-	<div id="content">
+	<div id="content" style="margin-top: -15px;">
 		<div class="padder">
 
 			<?php do_action( 'bp_before_blog_single_post' ); ?>
