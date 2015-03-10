@@ -86,15 +86,14 @@ else {
 		    </div>
 		    <div class="content align-center">'.$current_organisation->organisation_name.'</div>
 		    <div class="content align-left">
-		    <span>Forme l&eacute;gale :</span>'.$current_organisation->organisation_legalform.'<br />
-		    <span>SIREN :</span>'.$current_organisation->organisation_idnumber.'<br />
-		    <span>APE :</span>'.$current_organisation->organisation_ape.'<br />
-		    <span>Capital :</span>'.$current_organisation->organisation_capital.'<br /><br />
+		    <span>Forme juridique :</span>'.$current_organisation->organisation_legalform.'<br />
+		    <span>Num&eacute;ro SIREN :</span>'.$current_organisation->organisation_idnumber.'<br />
+		    <span>Code APE :</span>'.$current_organisation->organisation_ape.'<br />
+		    <span>Capital social :</span>'.$current_organisation->organisation_capital.'<br /><br />
 		    </div>
 		    <div class="content align-left">
-		    <b>Si&egrave;ge social :</b><br />
-		    '.$current_organisation->organisation_address.'<br />
-		    '.$current_organisation->organisation_postalcode.' '.$current_organisation->organisation_city.'<br />
+		    <span>Si&egrave;ge social :</span>'.$current_organisation->organisation_address.'<br />
+		    <span></span>'.$current_organisation->organisation_postalcode.' '.$current_organisation->organisation_city.'<br />
 		    </div>
 		</div>
 	    </div>';
