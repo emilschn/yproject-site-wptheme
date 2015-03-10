@@ -54,7 +54,20 @@ else {
 				</div>
 				<div class="post_bottom_infos_item" <?php if($vote_status=='funded' || $vote_status == 'archive'){echo "style=opacity:0.5";}?>>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
-					Plus que <strong><?php echo $campaign->days_remaining(); ?></strong> jours !
+					<?php
+					$days_remaining = $campaign->days_remaining();
+					switch ($days_remaining) { 
+						case 1:
+							?>Plus que <strong>1</strong> jour !<?php
+							break;
+						case 0:
+							?>Collecte termin&eacute;e !<?php
+							break;
+						default:
+							?>Plus que <strong><?php echo $days_remaining; ?></strong> jours !<?php
+							break;
+					}
+					?>
 				</div>
 				<div class="post_bottom_infos_item">
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
@@ -65,7 +78,6 @@ else {
 			<?php 
 			} else if ($vote_status == 'vote') {
 				$nbvoters = $campaign->nb_voters();
-				$remaining_vote_days = $campaign->end_vote_remaining(); 
 			?>
 				<div class="post_bottom_infos_item">
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodvote.png" alt="logo vote" />
@@ -83,11 +95,20 @@ else {
 				</div>
 				<div class="post_bottom_infos_item">
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo personnes" />
-					<?php if ($remaining_vote_days > 0) : ?>
-					Il reste <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours pour voter
-					<?php else: ?>
-					Le vote est termin&eacute;
-					<?php endif; ?>
+					<?php
+					$remaining_vote_days = $campaign->end_vote_remaining(); 
+					switch ($remaining_vote_days) { 
+						case 1:
+							?>Il reste <strong>1</strong> jour pour voter !<?php
+							break;
+						case 0:
+							?>Vote termin&eacute; !<?php
+							break;
+						default:
+							?>Il reste <strong><?php echo $remaining_vote_days; ?></strong> jours pour voter !<?php
+							break;
+					}
+					?>
 				</div>
 				<div class="post_bottom_infos_item">
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
