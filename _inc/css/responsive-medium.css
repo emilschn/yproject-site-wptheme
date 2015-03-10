@@ -39,9 +39,9 @@
 * HOME PAGE
 *******************************************************************************/
 	#home_middle_top .home_middle_top_content { width: 365px !important; }
-	#home_middle_top #home_middle_top_left { margin: 100px 5px 0px 5px !important; }
-	#home_middle_top #home_middle_top_right { margin: 100px 5px 0px 5px !important; }
-	#home_middle_top .round_title { margin: -65px 110px 0px !important; }
+	#home_middle_top #home_middle_top_left { margin: 130px 5px 0px 5px !important; }
+	#home_middle_top #home_middle_top_right { margin: 130px 5px 0px 5px !important; }
+	#home_middle_top .round_title { margin: -105px 110px 0px !important; }
 	#home_middle_top .home_middle_top_content p:nth-child(2) { margin: 80px 15px 15px !important; }
 	#home_bottom .part-title-separator { width: 768px !important; }
 	#home_bottom .partners_zone { width: 768px !important; }

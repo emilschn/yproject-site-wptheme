@@ -1236,10 +1236,10 @@ header.header_home #welcome_text #header_homepage_link {
     background: #F0EFEF;
 }
 #home_middle_top #home_middle_top_left {
-    margin: 100px 17px 0px 50px;
+    margin: 130px 17px 0px 50px;
 }
 #home_middle_top #home_middle_top_right {
-    margin: 100px 50px 0px 17px;
+    margin: 130px 50px 0px 17px;
 }
 #home_middle_top .home_middle_top_content p {
     margin: 30px 0px;
@@ -1251,11 +1251,11 @@ header.header_home #welcome_text #header_homepage_link {
     text-transform: uppercase;
 }
 .round_title {
-    width: 140px;
-    height: 80px;
-    margin: -65px 135px 0px 135px;
-    padding-top: 50px;
-    background: #2B2C2C;
+    width: 157px;
+    height: 120px;
+    margin: -105px 125px 0px 135px;
+    padding-top: 80px;
+    background: url("images/grenade-noire.png") no-repeat;
     color: #FFF;
     font-size: 13pt;
     text-transform: uppercase;
