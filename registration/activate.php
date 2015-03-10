@@ -49,7 +49,10 @@
 			<?php else : ?>
 
 				<?php ypcf_debug_log('Provide a valid activation key'); ?>
-				<p><?php _e( 'Please provide a valid activation key.', 'buddypress' ); ?></p>
+				<p>
+					<?php _e( 'Please provide a valid activation key.', 'buddypress' ); ?><br />
+					<?php _e( 'Essayez en copiant directement le lien que vous avez re&ccedil;u dans votre navigateur.', 'yproject' ); ?>
+				</p>
 
 				<form action="" method="get" class="standard-form" id="activation-form">
 
