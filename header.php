@@ -84,7 +84,7 @@
 					?>
 				    
 					<li class="page_item only_on_mobile">
-						<span class="page_item_border"><a href="#" id="mobile-menu">Menu</a></span>
+						<span class="page_item_border"><a href="#" id="mobile-menu"><img src="<?php echo $stylesheet_directory_uri; ?>/images/menu-smartphone.png" /></a></span>
 					</li>
 				    
 					<?php /* Logo Accueil */ ?>

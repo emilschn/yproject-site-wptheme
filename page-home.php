@@ -30,7 +30,7 @@
 					<a href="<?php echo get_permalink($page_connexion->ID); ?>" class="button">Connexion</a>
 				</div>
 			<?php } ?>
-			<p class="align-center only_on_mobile"><br /><a href="<?php echo get_permalink($page_list_projects->ID); ?>" class="button">D&eacute;couvrir les projets</a></p>
+			<p class="align-center only_on_mobile"><br /><a href="<?php echo get_permalink($page_list_projects->ID); ?>" class="button big">D&eacute;couvrir les projets</a></p>
 		</section>
 	</div>
 </header>
@@ -62,15 +62,15 @@ $page_how = get_page_by_path('descriptif');
 			et adapt&eacute; &agrave; vos besoins
 		</p>
 		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.jpg" alt="logo euro" /><br />
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.png" alt="logo euro" /><br />
 			Trouvez un <b>financement</b> pour votre projet
 		</p>
 		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/hp.jpg" alt="logo megaphone" /><br />
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/hautparleur.png" alt="logo megaphone" /><br />
 			<b>Faites conna&icirc;tre votre projet</b>
 		</p>
 		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/communaute.jpg" alt="logo communaute" /><br />
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/communaute.png" alt="logo communaute" /><br />
 			F&eacute;d&eacute;rez une <b>communaut&eacute;</b> sur la dur&eacute;e
 		</p>
 		<p>
@@ -90,15 +90,15 @@ $page_how = get_page_by_path('descriptif');
 			de la communaut&eacute; !
 		</p>
 		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/pieces.jpg" alt="logo piece monnaie" /><br />
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.png" alt="logo piece monnaie" /><br />
 			Investissez <b>&agrave; partir de 10&euro;</b>
 		</p>
 		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/main.jpg" alt="logo main" /><br />
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/main.png" alt="logo main" /><br />
 			<b>Participez &agrave; l&apos;aventure</b>
 		</p>
 		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/fusee.jpg" alt="logo fusee" /><br />
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/fusee.png" alt="logo fusee" /><br />
 			Boostez l&apos;<b>&eacute;conomie positive</b>
 		</p>
 		<p>

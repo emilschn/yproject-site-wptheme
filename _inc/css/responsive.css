@@ -16,8 +16,8 @@
 	}
 	#navigation #nav { height: 50px !important; }
 	#navigation #nav .page_item { 
-		padding-top: 25px !important; 
-		height: 25px !important; 
+		padding-top: 23px !important; 
+		height: 27px !important; 
 	}
 	#navigation #nav .page_item_logo { 
 		padding-top: 5px !important; 
@@ -28,6 +28,7 @@
 	#navigation #nav .only_on_mobile .page_item_border {
 		border-left: 0px;
 		border-right: 1px solid #FFF;
+		display: inline-block;
 	}
 	#submenu-mobile {
 		position: absolute;
@@ -52,9 +53,10 @@
 * HEADER
 *******************************************************************************/
 	header { min-width: 0px !important; }
-	header.header_home #welcome_text { margin-top: 0px !important; }
+	header.header_home #welcome_text { margin-top: 40px !important; }
 	header.header_home #welcome_text p { margin: 5px 10px !important; }
 	header.header_home #welcome_text p.hello { margin: 15px 15px 0px 0px !important; }
+	header.header_home #welcome_text a.button.big { line-height: 50px; }
 	
 /*******************************************************************************
 * FOOTER
@@ -101,5 +103,10 @@
 	#home-responsive p {
 		padding: 5px 0px 10px 0px;
 		margin: 5px 0px 15px 0px;
+	}
+	header.header_home {
+		height: 640px !important;
+		background-image: url("../../images/header-home-480.jpg") !important;
+		background-position: center top;
 	}
 }
