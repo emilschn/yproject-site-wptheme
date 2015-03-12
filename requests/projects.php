@@ -79,6 +79,9 @@ class YPProjectLib {
 							//Ajout à l'API
 							BoppLib::link_user_to_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
 							$buffer = TRUE;
+							do_action('wdg_delete_cache', array(
+								'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
+							));
 						}
 					} else {
 						$buffer = 'Merci de renseigner un identifiant ou un email.';
@@ -95,6 +98,9 @@ class YPProjectLib {
 						//Supprimer dans l'API
 						BoppLib::unlink_user_from_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
 						$buffer = TRUE;
+						do_action('wdg_delete_cache', array(
+							'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
+						));
 					}
 					break;
 			}
