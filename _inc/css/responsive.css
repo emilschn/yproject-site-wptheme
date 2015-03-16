@@ -24,6 +24,10 @@
 		height: 45px !important; 
 		-webkit-margin-before: -15px !important;
 	}
+	#navigation #nav .page_item_logo a {
+		-webkit-margin-before: 15px;
+		display: inline-block;
+	}
 	#navigation #nav .only_on_mobile { display: block !important; }
 	#navigation #nav .only_on_mobile .page_item_border {
 		border-left: 0px;
