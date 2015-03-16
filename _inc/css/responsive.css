@@ -58,7 +58,14 @@
 *******************************************************************************/
 	header { min-width: 0px !important; }
 	header.header_home #welcome_text { margin-top: 40px !important; }
-	header.header_home #welcome_text p { margin: 5px 10px !important; }
+	header.header_home #welcome_text p {
+		margin: 5px 10px !important;
+		text-align: center !important;
+	}
+	header.header_home #welcome_text p:nth-child(1) { 
+		font-size: 20px !important;
+		margin-bottom: 30px !important;
+	}
 	header.header_home #welcome_text p.hello { margin: 15px 15px 0px 0px !important; }
 	header.header_home #welcome_text a.button.big { line-height: 50px; }
 	

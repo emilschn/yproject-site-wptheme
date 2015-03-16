@@ -1206,7 +1206,7 @@ header.header_home {
 }
 header.header_home #welcome_text {
     display: inline-block;
-    margin-top: 145px;
+    margin-top: 125px;
     vertical-align: middle;
 }
 header.header_home #welcome_text p {
