@@ -93,6 +93,24 @@ YPUIFunctions = (function($) {
 			if ($(".wp-editor-wrap")[0]) {
 			    setInterval(YPUIFunctions.onRemoveUploadInterval, 1000);
 			}
+			
+			if ($("#project-list-menu").length > 0) {
+			    $("#project-list-menu a").click(function() {
+				$(".home-large-project").hide();
+				$(".home-small-project").hide();
+				$(".status-" + $(this).data("status")).show();
+				$("#project-list-menu a").removeClass("selected");
+				$(this).addClass("selected");
+			    });
+			    if ($("#project-list-menu").is(":visible")) {
+				$(".home-large-project").hide();
+				$(".home-small-project").hide();
+				if ($(".status-collecte").length == 0) $("#project-list-menu [data-status='collecte']").remove();
+				if ($(".status-vote").length == 0) $("#project-list-menu [data-status='vote']").remove();
+				if ($(".status-preview").length == 0) $("#project-list-menu [data-status='preview']").remove();
+				$("#project-list-menu a").first().trigger("click");
+			    }
+			}
 
 			if ($(".home-large-project").length > 0) {
 			    $(".home-large-project").each(function() {

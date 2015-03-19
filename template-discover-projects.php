@@ -11,6 +11,12 @@
 
 <div id="content">
 	<div class="padder center">
+		<ul id="project-list-menu" class="only_on_mobile">
+			<li><a href="#" class="selected" data-status="collecte">En cours</a></li>
+			<li><a href="#" data-status="vote">En vote</a></li>
+			<li><a href="#" data-status="preview">Avant-premi&egrave;re</a></li>
+			<li><a href="#" data-status="funded">Termin&eacute;s</a></li>
+		</ul>
 <?php
 //*******************
 //CACHE PROJECTS CURRENT
@@ -23,7 +29,7 @@ else {
 		//PROJETS EN COURS
 		$nb_collecte_projects = count(query_projects_collecte()); 
 		if ($nb_collecte_projects > 0) { ?>
-			<div class="part-title-separator" >
+			<div class="part-title-separator">
 				<span class="part-title">En cours de financement</span>
 			</div>
 

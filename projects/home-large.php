@@ -23,7 +23,7 @@
 
 	<div class="home-large-project <?php echo $container_class; ?>">
 
-		<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" alt="signe plus" border="0" /></a></h2>
+		<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" class="mobile_hidden" alt="signe plus" border="0" /></a></h2>
 		
 		<?php 
 		$video_element = '';
@@ -52,7 +52,7 @@
 		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?>>
 			<?php echo $video_element;
 			if ($video_element == '' && $campaign_status== 'funded' ) { ?>
-					<div class="funded-banner"></div>
+					<div class="funded-banner mobile_hidden"></div>
 				<?php }
 			 ?>
 		</div>

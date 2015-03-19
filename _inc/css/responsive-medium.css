@@ -5,7 +5,7 @@
 	.tablet_hidden { display: none !important; }
 	.only_on_tablet { display: block !important; }
 	.center { width: 768px !important; }
-	#container { padding-top: 50px !important; }
+	#container { padding-top: 60px !important; }
 
 /*******************************************************************************
 * HEADER MENU
@@ -45,5 +45,21 @@
 	#home_middle_top .home_middle_top_content p:nth-child(2) { margin: 80px 15px 15px !important; }
 	#home_bottom .part-title-separator { width: 768px !important; }
 	#home_bottom .partners_zone { width: 768px !important; }
-	    
+	
+/*******************************************************************************
+* PROJECT SHORT - SEPARATOR
+*******************************************************************************/
+	.part-title-separator { width: 768px !important; }
+	
+/*******************************************************************************
+* PROJECT SHORT - SMALL
+*******************************************************************************/
+	.home-small-project { width: 370px !important; }
+	.home-small-project .video-zone { width: 370px !important; }
+	.home-small-project.status-vote .description-zone .description-logos-item { width: 45px !important; }
+	
+/*******************************************************************************
+* PROJECT SHORT - LARGE
+*******************************************************************************/
+	.home-large-project .video-zone { width: 415px !important; }
 }
