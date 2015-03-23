@@ -22,6 +22,8 @@ get_header();
 		if ( current_user_can('manage_options') ) :
 		?>
 		
+		    <h1>Stats Mangopay</h1>
+		
 		    <?php
 			/*
 			//Virement wallet milgoulle (mpid 2054791) vers matthieu (wpid 63 ; mpid 2054788) & vers wdg (wpid 60 ; mpid 3554029)
@@ -38,6 +40,7 @@ get_header();
 		    ?>
 		    
 		    <?php /*
+		    //Remboursements GdB
 		    $user = get_userdata(18);
 		    $download_id = 3268;
 		    $amount = 100;
@@ -47,7 +50,38 @@ get_header();
 		    print_r($new_transfer);
 		    */ ?>
 		
-		    <h1>Stats Mangopay</h1>
+		    <?php
+		    /*
+		    //Gestion MCB
+		    print_r("--------------");
+		    $id_wallet_old = 10350063;
+		    $mp_wallet_old = ypcf_mangopay_get_wallet_by_id(10350063);
+		    print_r($mp_wallet_old);
+		    
+		    $campaign_id = 3410;
+		    $amount = 2750;
+		    $api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
+		    echo '$api_project_id ' . $api_project_id . '<br />';
+		    $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+		    print_r($current_organisations);
+		    if (count($current_organisations) > 0) {
+			    echo 'hop<br />';
+			    $current_organisation = $current_organisations[0];
+			    print_r($current_organisation);
+			    $organisation_object = new YPOrganisation($current_organisation->organisation_wpref);
+			    $mangopay_new_user_id = ypcf_init_mangopay_user($organisation_object->get_creator(), TRUE);
+			    echo '$mangopay_new_user_id ' . $mangopay_new_user_id . '<br />';
+			    
+			    if (isset($mangopay_new_user_id)) {
+				    echo 'hop2<br />';
+				    $transfer = ypcf_mangopay_transfer_project_to_user($organisation_object->get_creator(), $campaign_id, $amount);
+				    print_r($transfer);
+			    }
+		    }
+		    print_r("--------------");
+		     * 
+		     */
+		    ?>
 		    
 		    <?php /* ?>
 		    <h2>Liste des utilisateurs</h2>
