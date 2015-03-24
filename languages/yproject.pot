@@ -1,0 +1,319 @@
+# Copyright (C) 2013 the WordPress team
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Y Project 0.1\n"
+"Report-Msgid-Bugs-To: https://code.google.com/p/yproject-site-wptheme\n"
+"POT-Creation-Date: 2013-05-01 00:19:44+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-06-14 10:46+0100\n"
+"Last-Translator: JOHN DOE <john.doe@address.com>\n"
+"Language-Team: FRENCH <LL@li.org>\n"
+
+msgid "Acc&egrave;s impossible"
+msgstr "Acc&egrave;s impossible"
+
+# page-home.php - Page d'accueil
+msgid "Votez !"
+msgstr "Votez !"
+
+msgid "Les projets en cours"
+msgstr "Les projets en cours"
+
+msgid "Soutenez le projet en votant !"
+msgstr "Soutenez le projet en votant !"
+
+msgid "voter"
+msgstr "voter"
+
+msgid "pour ce projet"
+msgstr "pour ce projet"
+
+msgid "en savoir"
+msgstr "en savoir"
+
+msgid "plus"
+msgstr "plus"
+
+msgid "Participez à un projet"
+msgstr "Participez à un projet"
+
+msgid "Proposez un projet"
+msgstr "Proposez un projet"
+
+msgid "Je connais un projet"
+msgstr "Je connais un projet"
+
+msgid "Actualites"
+msgstr "Actualit&eacute;s"
+
+msgid "Trouvez les projets"
+msgstr "Trouvez les projets"
+
+msgid "Nos partenaires"
+msgstr "Nos partenaires"
+
+# single-campaign.php - Page projet
+msgid "Investissez"
+msgstr "Investissez"
+
+msgid "Bient&ocirc;t !"
+msgstr "Bient&ocirc;t !"
+
+msgid "Participer autrement"
+msgstr "Participer autrement"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "Statistiques"
+msgstr "Statistiques"
+
+msgid "Jy crois"
+msgstr "J'y crois"
+
+msgid "Partager sur Facebook"
+msgstr "Partager sur Facebook"
+
+msgid "Partager sur Twitter"
+msgstr "Partager sur Twitter"
+
+msgid "Fermer"
+msgstr "Fermer"
+
+msgid "Page projet"
+msgstr "Page projet"
+
+msgid "G&eacute;rer vos informations"
+msgstr "G&eacute;rer vos informations"
+
+msgid "Ajouter une actualit&eacute;"
+msgstr "Ajouter une actualit&eacute;"
+
+# page-projects.php
+msgid "Les projets en cours de financement"
+msgstr "Les projets en cours de financement"
+
+msgid "Les projets en cours de vote"
+msgstr "Les projets en cours de vote"
+
+# register.php / page-modifier-mon-compte.php - S'inscrire/Modifier mon compte
+msgid "Inscription"
+msgstr "Inscription"
+
+msgid "Modifier mon compte"
+msgstr "Modifier mon compte"
+
+msgid "Informations de base"
+msgstr "Informations de base"
+
+msgid "Ces informations sont n&eacute;cessaires pour obtenir un compte."
+msgstr "Ces informations sont n&eacute;cessaires pour obtenir un compte."
+
+msgid "Adresse e-mail"
+msgstr "Adresse e-mail"
+
+msgid "Confirmation de l&apos;adresse e-mail"
+msgstr "Confirmation de l&apos;adresse e-mail"
+
+msgid "Les deux adresses ne sont pas identiques"
+msgstr "Les deux adresses ne sont pas identiques"
+
+msgid "Confirmation du mot de passe"
+msgstr "Confirmation du mot de passe"
+
+msgid "Les deux mots de passe ne sont pas identiques"
+msgstr "Les deux mots de passe ne sont pas identiques"
+
+msgid " (vide si pas de changement)"
+msgstr " (vide si pas de changement)"
+
+msgid "Informations compl&eacute;mentaires"
+msgstr "Informations compl&eacute;mentaires"
+
+msgid "Ces informations sont n&eacute;cessaires pour investir dans un projet."
+msgstr "Ces informations sont n&eacute;cessaires pour investir dans un projet."
+
+msgid "Pr&eacute;nom"
+msgstr "Pr&eacute;nom"
+
+msgid "Nom"
+msgstr "Nom"
+
+msgid "Date de naissance"
+msgstr "Date de naissance"
+
+msgid "Nationalit&eacute;"
+msgstr "Nationalit&eacute;"
+
+msgid "Type de personne"
+msgstr "Type de personne"
+
+msgid "Physique"
+msgstr "Physique"
+
+msgid "Morale"
+msgstr "Morale"
+
+msgid "Un e-mail de confirmation vous a &eacute;t&eacute; envoy&eacute;."
+msgstr "Un e-mail de confirmation vous a &eacute;t&eacute; envoy&eacute;."
+
+msgid "Votre compte est maintenant cr&eacute;&eacute;. Pour l&apos;utiliser, rendez-vous sur l&apos;e-mail que nous avons envoy&eacute;."
+msgstr "Votre compte est maintenant cr&eacute;&eacute;. Pour l&apos;utiliser, rendez-vous sur l&apos;e-mail que nous avons envoy&eacute;."
+
+msgid "Votre compte est maintenant cr&eacute;&eacute;. Vous pouvez &agrave; pr&eacute;sent vous identifier."
+msgstr "Votre compte est maintenant cr&eacute;&eacute;. Vous pouvez &agrave; pr&eacute;sent vous identifier."
+
+msgid "Erreur d&apos;identification"
+msgstr "Erreur d&apos;identification"
+
+# archive.php - Blog
+msgid "Revenir à la description du projet"
+msgstr "Revenir à la description du projet"
+
+msgid "Derni&egrave;res actualit&eacute;s du projet %1$s"
+msgstr "Derni&egrave;res actualit&eacute;s du projet %1$s"
+
+msgid "Foire aux questions"
+msgstr "Foire aux questions"
+
+msgid "Ici vous aurez acc&egrave;s &agrave; vos param&egrave;tres"
+msgstr "Ici vous aurez acc&egrave;s &agrave; vos param&egrave;tres"
+
+# page-communaute.php - Communauté
+msgid "Derniers inscrits"
+msgstr "Derniers inscrits"
+
+msgid "L&apos;&eacute;quipe"
+msgstr "L&apos;&eacute;quipe"
+
+msgid "Partenaires"
+msgstr "Partenaires"
+
+msgid " a rejoint WeDoGood - Il y a "
+msgstr " a rejoint WeDoGood - Il y a "
+
+# common.php - barre admin
+msgid "Mon profil"
+msgstr "Mon profil"
+
+msgid "Mes investissements"
+msgstr "Mes investissements"
+
+msgid "Param&egrave;tres"
+msgstr "Param&egrave;tres"
+
+msgid "Mes porte-monnaie"
+msgstr "Mes porte-monnaie"
+
+msgid "Paiement"
+msgstr "Paiement"
+
+msgid "Annuler mon investissement"
+msgstr "Annuler mon investissement"
+
+# home.php - mon compte
+msgid "Fil d&apos;activit&eacute;"
+msgstr "Fil d&apos;activit&eacute;"
+
+msgid "Abonnements"
+msgstr "Abonnements"
+
+msgid "Abonn&eacute;s"
+msgstr "Abonn&eacute;s"
+
+msgid "Projets"
+msgstr "Projets"
+
+# member-header.php - mon compte
+msgid "points"
+msgstr "points"
+
+msgid "projet(s) soutenu(s)"
+msgstr "projet(s) soutenu(s)"
+
+msgid "projet(s) lanc&eacute;(s)"
+msgstr "projet(s) lanc&eacute;(s)"
+
+# page-annuler-un-investissement.php
+msgid "Sans vous, la somme atteinte sera de "
+msgstr "Sans vous, la somme atteinte sera de "
+
+msgid "Confirmer"
+msgstr "Confirmer"
+
+msgid "La somme est maintenant disponible dans votre porte-monnaie."
+msgstr "La somme est maintenant disponible dans votre porte-monnaie."
+
+# header.php - menu
+msgid "Decouvrir les projets"
+msgstr "D&eacute;couvrir les projets"
+
+msgid "Proposer un projet"
+msgstr "Proposer un projet"
+
+msgid "Communaute"
+msgstr "Communaut&eacute;"
+
+msgid "Comment ca marche ?"
+msgstr "Comment &ccedil;a marche ?"
+
+msgid "Mon compte"
+msgstr "Mon compte"
+
+msgid "Se deconnecter"
+msgstr "Se d&eacute;connecter"
+
+msgid "Connexion"
+msgstr "Connexion"
+
+msgid "Identifiant"
+msgstr "Identifiant"
+
+msgid "Mot de passe"
+msgstr "Mot de passe"
+
+msgid "Se souvenir de moi"
+msgstr "Se souvenir de moi"
+
+msgid "Sinscrire"
+msgstr "S&apos;inscrire"
+
+msgid "Fil dactivite"
+msgstr "Fil d'activit&eacute;"
+
+msgid "Qui sommes-nous ?"
+msgstr "Qui sommes-nous ?"
+
+msgid "Terminer mon inscription"
+msgstr "Terminer mon inscription"
+
+msgid "Welcome Text 1"
+msgstr "Bienvenue dans la communauté WE DO GOOD !"
+
+msgid "Welcome Text 2"
+msgstr "Nous agissons positivement et selon les moyens de chacun en soutenant des projets utiles. Nous croyons que la valeur doit être partagée entre les entrepreneurs, ceux qui investissent, l’environnement et la société. Nous faisons du financement participatif ou crowdfunding (mais pas que) où tout le monde peut investir. Participez de la manière qui vous convient, recevez-en les bénéfices, et ayez de l’impact !"
+
+# footer.php - Creative Commons
+msgid "Informations"
+msgstr "Informations"
+
+msgid "Questions"
+msgstr "Questions"
+
+msgid "CREATIVE COMMONS PART 1"
+msgstr "Cette &oelig;uvre est mise à disposition selon les termes de la "
+
+msgid "CREATIVE COMMONS PART 2"
+msgstr "Licence Creative Commons Attribution - Partage dans les M&ecirc;mes Conditions 3.0 France"
+
+msgid "Merci"
+msgstr "Merci"
+
+msgid "Adresse non valide"
+msgstr "Adresse non valide"
