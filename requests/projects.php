@@ -109,48 +109,18 @@ class YPProjectLib {
 	}
 	
 	/**
-	 * Détermine si un utilisateur peut éditer la page d'un projet
-	 * @param int $campaign_id
-	 * @return boolean
-	 */
-	public static function current_user_can_edit($campaign_id) {
-		//Il faut que l'id de projet soit défini
-		if (!isset($campaign_id) || empty($campaign_id)) return FALSE;
-	    
-		//Il faut qu'il soit connecté
-		if (!is_user_logged_in()) return FALSE;
-		
-		//On autorise les admin
-		if (current_user_can('manage_options')) return TRUE;
-	    
-		//On autorise l'auteur
-		$post_campaign = get_post($campaign_id);
-		$current_user = wp_get_current_user();
-		$current_user_id = $current_user->ID;
-		if ($current_user_id == $post_campaign->post_author) return TRUE;
-		
-		//On autorise les personnes de l'équipe projet
-		$project_api_id = BoppLibHelpers::get_api_project_id($campaign_id);
-		$team_member_list = BoppLib::get_project_members_by_role($project_api_id, BoppLibHelpers::$project_team_member_role['slug']);
-		foreach ($team_member_list as $team_member) {
-			if ($current_user_id == $team_member->wp_user_id) return TRUE;
-		}
-		
-		return FALSE;
-	}
-	
-	/**
 	 * Gère le formulaire d'ajout d'actualité
 	 */
 	public static function form_validate_news_add($campaign_id) {
-		if (!YPProjectLib::current_user_can_edit($campaign_id) 
+		$post_campaign = get_post($campaign_id);
+		$campaign = atcf_get_campaign($post_campaign);
+		if (!$campaign->current_user_can_edit() 
 				|| !isset($_POST['action'])
 				|| $_POST['action'] != 'ypcf-campaign-add-news') {
 			return FALSE;
 		}
 
 		$current_user = wp_get_current_user();
-		$post_campaign = get_post($campaign_id);
 
 		$category_slug = $post_campaign->ID . '-blog-' . $post_campaign->post_name;
 		$category_obj = get_category_by_slug($category_slug);
@@ -176,8 +146,9 @@ class YPProjectLib {
 		if (!isset($_GET["campaign_id"])) { return FALSE; }
 		$campaign_id = $_GET["campaign_id"];
 		$post_campaign = get_post($campaign_id);
+		$campaign = atcf_get_campaign($post_campaign);
 		
-		if (!YPProjectLib::current_user_can_edit($campaign_id) 
+		if (!$campaign->current_user_can_edit() 
 				|| !isset($_POST['action'])
 				|| $_POST['action'] != 'edit-project-parameters') {
 			return FALSE;

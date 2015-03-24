@@ -1,7 +1,8 @@
 <?php 
 global $disable_logs; $disable_logs = TRUE;
+$campaign = atcf_get_current_campaign();
 
-if (YPProjectLib::current_user_can_edit($_GET['campaign_id'])) {
+if ($campaign->current_user_can_edit()) {
 	locate_template( array("requests/investments.php"), true );
 	locate_template( array("projects/stats-investments-public.php"), true ); 
 	$investments_list = wdg_get_project_investments($_GET['campaign_id'], TRUE);
