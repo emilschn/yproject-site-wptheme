@@ -1,5 +1,5 @@
 <?php 
-	global $WDG_cache_plugin, $stylesheet_directory_uri;
+	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign;
 	$stylesheet_directory_uri = get_stylesheet_directory_uri();
 	date_default_timezone_set("Europe/Paris");
 	UIHelpers::init_social_infos();
@@ -34,10 +34,7 @@
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
 		<meta name="description" content="Plateforme d'investissement participatif a impact positif" />
-		<meta property="og:title" content="WEDOGOOD" />
-		<meta property="og:image" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
-		<meta property="og:image:secure_url" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
-		<meta property="og:image:type" content="image/jpeg" />
+		
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
@@ -55,11 +52,25 @@
 		?>
 
 		<?php do_action( 'bp_head' ); ?>
-		<?php wp_head(); ?>			
+		<?php wp_head(); ?>	
+
+		<!-- Meta spécifiques à Facebook -->
+		<meta property="og:title" content="WEDOGOOD : <?php echo $campaign->data->post_title; ?>" />
+		<meta property="og:description" content="<?php echo $campaign->subtitle()." ".$campaign->summary(); ?>" />
+		<meta property="og:image:secure_url" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image" content=" 	
+		<?php 
+                    if($is_campaign_page === true){
+                            echo $campaign->get_header_picture_src();
+                    } else {
+                            echo $stylesheet_directory_uri .'/images/logo_entier.jpg';	
+                    }
+		?> 
+                "/>	
 	</head>
 
-	<body <?php body_class(); ?> id="bp-default">
-				    
+	<body <?php body_class(); ?> id="bp-default"> 
 		<?php
 		global $post;
 		$menu_pages = array(
