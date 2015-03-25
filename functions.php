@@ -50,20 +50,9 @@ remove_action("wp_head", "wp_generator");
 add_filter('login_errors',create_function('$a', "return null;"));
 
 function yproject_enqueue_script(){
-	global $post, $can_modify, $is_campaign_page, $cat, $campaign_id;
-	if (is_category()) {
-		$this_category = get_category($cat);
-		$this_category_name = $this_category->name;
-		$name_exploded = explode('cat', $this_category_name);
-		if (count($name_exploded) > 1) {
-			$campaign_id = $name_exploded[1];
-		}
-	} else {
-		$campaign_id = (isset($_GET['campaign_id'])) ? $_GET['campaign_id'] : $post->ID;
-	}
-	$is_campaign = (get_post_meta($campaign_id, 'campaign_goal', TRUE) != '');
-	$is_campaign_page = $is_campaign && ($campaign_id == $post->ID);
-	$can_modify = ($is_campaign) && (YPProjectLib::current_user_can_edit($campaign_id));
+	global $can_modify, $is_campaign, $is_campaign_page;
+	$campaign = atcf_get_current_campaign();
+	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -230,7 +219,7 @@ function yproject_page_template( $template ) {
 	global $post;
 	$campaign = atcf_get_campaign( $post );
 	$campaign_id = $post->ID;
-	if (!empty($campaign->ID) && is_object( $campaign ) && ($campaign->campaign_status() == 'preparing') && !YPProjectLib::current_user_can_edit($campaign_id)) {
+	if (!empty($campaign->ID) && is_object( $campaign ) && ($campaign->campaign_status() == 'preparing') && !$campaign->current_user_can_edit()) {
 		header("Status: 404 Not Found");
 		global $wp_query;
 		$wp_query->set_404();

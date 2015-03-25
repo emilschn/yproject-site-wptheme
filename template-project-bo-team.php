@@ -9,7 +9,7 @@ locate_template( array("requests/projects.php"), true );
 $feedback = '';
 if (isset($_REQUEST['action'])) $feedback = YPProjectLib::edit_team();
 
-$campaign_id = $_GET['campaign_id'];
+$campaign = atcf_get_current_campaign();
 ?>
 
 <?php get_header(); ?>
@@ -19,7 +19,7 @@ $campaign_id = $_GET['campaign_id'];
 
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 				
-				<?php if (YPProjectLib::current_user_can_edit($campaign_id)): ?>
+				<?php if ($campaign->current_user_can_edit()): ?>
 		    
 					<?php require_once('projects/single-admin-bar.php'); ?>
 
