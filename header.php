@@ -1,5 +1,5 @@
 <?php 
-	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign;
+	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post;
 	$stylesheet_directory_uri = get_stylesheet_directory_uri();
 	date_default_timezone_set("Europe/Paris");
 	UIHelpers::init_social_infos();
@@ -34,10 +34,6 @@
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
 		<meta name="description" content="Plateforme d'investissement participatif a impact positif" />
-		<meta property="og:title" content="WEDOGOOD" />
-		<meta property="og:image" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
-		<meta property="og:image:secure_url" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
-		<meta property="og:image:type" content="image/jpeg" />
 		
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
@@ -56,7 +52,31 @@
 		?>
 
 		<?php do_action( 'bp_head' ); ?>
-		<?php wp_head(); ?>	
+		<?php wp_head(); ?>
+
+		<!-- Meta spécifiques à Facebook -->
+		<meta property="og:title" content="WEDOGOOD<?php 
+                    if ($is_campaign_page === true) {
+			    echo " : ".$campaign->data->post_title; 
+                    } 
+                    ?>" />
+		<meta property="og:description" content="<?php 
+                    if($is_campaign_page === true){
+			    echo $campaign->subtitle()." ".$campaign->summary();
+                    } else {
+			    echo "Plateforme d'investissement participatif a impact positif";
+                    }
+                    ?>" />
+                <?php 
+                    if($is_campaign_page === true){
+			$imageFacebook = $campaign->get_home_picture_src();
+                    } else {
+			$imageFacebook = $stylesheet_directory_uri .'/images/logo_entier.jpg';	
+                    }
+		?> 
+		<meta property="og:image" content="<?php echo $imageFacebook ?>" />
+		<meta property="og:image:secure_url" content="<?php echo $imageFacebook ?>" />
+		<meta property="og:image:type" content="image/jpeg" />
 	</head>
 
 	<body <?php body_class(); ?> id="bp-default"> 
