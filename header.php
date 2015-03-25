@@ -1,5 +1,5 @@
 <?php 
-	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign;
+	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post;
 	$stylesheet_directory_uri = get_stylesheet_directory_uri();
 	date_default_timezone_set("Europe/Paris");
 	UIHelpers::init_social_infos();
@@ -55,19 +55,32 @@
 		<?php wp_head(); ?>	
 
 		<!-- Meta spécifiques à Facebook -->
-		<meta property="og:title" content="WEDOGOOD : <?php echo $campaign->data->post_title; ?>" />
-		<meta property="og:description" content="<?php echo $campaign->subtitle()." ".$campaign->summary(); ?>" />
-		<meta property="og:image:secure_url" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
-		<meta property="og:image:type" content="image/jpeg" />
-		<meta property="og:image" content=" 	
-		<?php 
+		<meta property="og:title" content="WEDOGOOD 
+                    <?php 
                     if($is_campaign_page === true){
-                            echo $campaign->get_header_picture_src();
+                        echo ": ".$campaign->data->post_title; 
+                    } 
+                    ?>"
+                    />
+		<meta property="og:description" content="
+                    <?php 
+                    if($is_campaign_page === true){
+                       echo $campaign->subtitle()." ".$campaign->summary();
                     } else {
-                            echo $stylesheet_directory_uri .'/images/logo_entier.jpg';	
+                        echo "Plateforme d'investissement participatif a impact positif";
+                    }
+                    ?>"
+                />
+                <?php 
+                    if($is_campaign_page === true){
+                        $imageFacbook = $campaign->get_home_picture_src();
+                    } else {
+                       $imageFacbook = $stylesheet_directory_uri .'/images/logo_entier.jpg';	
                     }
 		?> 
-                "/>	
+		<meta property="og:image:secure_url" content="<?php echo $imageFacbook ?>" />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image" content="<?php echo $imageFacbook ?>" />	
 	</head>
 
 	<body <?php body_class(); ?> id="bp-default"> 
