@@ -29,7 +29,7 @@
 		else {
 			ob_start();
 		?>
-		
+		<link href="https://plus.google.com/+WedogoodCo" rel="publisher" />
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
@@ -40,7 +40,6 @@
 		<![endif]-->
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?ver=1.1.101" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-		
 		<?php
 			$cache_head = ob_get_contents();
 			$WDG_cache_plugin->set_cache('html-head', $cache_head, 60*60*24, 1);
@@ -104,7 +103,7 @@
 					?>
 				    
 					<li class="page_item only_on_mobile">
-						<span class="page_item_border"><a href="#" id="mobile-menu"><img src="<?php echo $stylesheet_directory_uri; ?>/images/menu-smartphone.png" /></a></span>
+						<span class="page_item_border"><a href="#" id="mobile-menu"><img src="<?php echo $stylesheet_directory_uri; ?>/images/menu-smartphone.png" alt="bouton menu mobile" /></a></span>
 					</li>
 				    
 					<?php /* Logo Accueil */ ?>

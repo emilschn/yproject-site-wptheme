@@ -17,7 +17,7 @@
 
 <header class="header_home">
 	<div class="center">
-		<section id="welcome_text">
+		<div id="welcome_text">
 			<?php the_content();?>
 			<?php if ( is_user_logged_in() ) { ?>
 				<?php global $current_user; get_currentuserinfo(); $page_list_projects = get_page_by_path('les-projets'); ?>
@@ -31,7 +31,7 @@
 				</div>
 			<?php } ?>
 			<p class="align-center only_on_mobile"><br /><a href="<?php echo get_permalink($page_list_projects->ID); ?>" class="button big">D&eacute;couvrir les projets</a></p>
-		</section>
+		</div>
 	</div>
 </header>
 
