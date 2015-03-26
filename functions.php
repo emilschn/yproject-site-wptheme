@@ -103,6 +103,8 @@ add_action('wp_login_failed', 'yproject_front_end_login_fail');
 
 
 function yproject_redirect_login() {
+//	$current_user = wp_get_current_user();
+//	NotificationsSlack::send_to_dev('Connexion de ' . $current_user->first_name . ' ' . $current_user->last_name . ' (' . $current_user->ID . ')');
 	if (isset($_POST['redirect-page'])) {
 		$page_id = $_POST['redirect-page'];
 		$page = get_page($page_id);
