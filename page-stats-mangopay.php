@@ -59,7 +59,8 @@ get_header();
 		    print_r($mp_wallet_old);
 		    
 		    $campaign_id = 3410;
-		    $amount = 2750;
+		    $amount = 2500;
+		    $amount_fees = 250;
 		    $api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
 		    echo '$api_project_id ' . $api_project_id . '<br />';
 		    $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
@@ -74,13 +75,27 @@ get_header();
 			    
 			    if (isset($mangopay_new_user_id)) {
 				    echo 'hop2<br />';
-				    $transfer = ypcf_mangopay_transfer_project_to_user($organisation_object->get_creator(), $campaign_id, $amount);
+				    $transfer = ypcf_mangopay_transfer_project_to_user($organisation_object->get_creator(), $campaign_id, $amount, $amount_fees);
 				    print_r($transfer);
 			    }
 		    }
 		    print_r("--------------");
 		     * 
 		     */
+		    
+//					    "PayerID" : 10350060, 
+//					    "PayerWalletID" : 10350063,
+//					    "BeneficiaryID" : 15573055,
+//					    "BeneficiaryWalletID" : 0,
+		    /*$mangopay_newtransfer = request('transfers', 'POST', '{ 
+					"PayerID" : 10350060, 
+					"PayerWalletID" : 10350063,
+					"BeneficiaryID" : 15573055,
+					"BeneficiaryWalletID" : 0,
+					"Amount" : 250000,
+					"ClientFeeAmount" : 250
+				    }');*/
+		    
 		    ?>
 		    
 		    <?php /* ?>
