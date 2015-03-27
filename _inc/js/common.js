@@ -77,6 +77,7 @@ YPUIFunctions = (function($) {
 
 			    $("#link_validate_invest_amount").click(function() {
 				$("#validate_invest_amount_feedback").show();
+				$('html, body').animate({scrollTop: $('#link_validate_invest_amount').offset().top - $("#navigation").height()}, "slow"); 
 			    });
 
 			    $("#invest_form").submit(function() {
