@@ -1,5 +1,5 @@
 <?php 
-	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign;
+	global $WDG_cache_plugin, $stylesheet_directory_uri;
 	$stylesheet_directory_uri = get_stylesheet_directory_uri();
 	date_default_timezone_set("Europe/Paris");
 	UIHelpers::init_social_infos();
@@ -34,7 +34,10 @@
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
 		<meta name="description" content="Plateforme d'investissement participatif a impact positif" />
-		
+		<meta property="og:title" content="WEDOGOOD" />
+		<meta property="og:image" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
+		<meta property="og:image:secure_url" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
+		<meta property="og:image:type" content="image/jpeg" />
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
@@ -52,25 +55,11 @@
 		?>
 
 		<?php do_action( 'bp_head' ); ?>
-		<?php wp_head(); ?>	
-
-		<!-- Meta spécifiques à Facebook -->
-		<meta property="og:title" content="WEDOGOOD : <?php echo $campaign->data->post_title; ?>" />
-		<meta property="og:description" content="<?php echo $campaign->subtitle()." ".$campaign->summary(); ?>" />
-		<meta property="og:image:secure_url" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
-		<meta property="og:image:type" content="image/jpeg" />
-		<meta property="og:image" content=" 	
-		<?php 
-                    if($is_campaign_page === true){
-                            echo $campaign->get_header_picture_src();
-                    } else {
-                            echo $stylesheet_directory_uri .'/images/logo_entier.jpg';	
-                    }
-		?> 
-                "/>	
+		<?php wp_head(); ?>			
 	</head>
 
-	<body <?php body_class(); ?> id="bp-default"> 
+	<body <?php body_class(); ?> id="bp-default">
+				    
 		<?php
 		global $post;
 		$menu_pages = array(
@@ -146,12 +135,20 @@
 				</ul>
 			</div>
 		</nav>
-		
+		 
 		<div id="submenu_item_connection">
 			<?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
 			<ul>
 				<li class="page_item_out">
-					<div id="submenu_item_connection_register"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
+                                        <div id="submenu_item_connection_register">
+                                            
+                                       
+                                        <a href="#testBox" class="wdg-button-lightbox-open"  data-lightbox="testBox" style="padding:9px 12px;">TestBox</a>
+                                        <hr />
+                                       
+                                        </div>
+					<hr />
+                                        <div id="submenu_item_connection_register"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
 					<hr />
 					<div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook_connexion.jpg" width="25" height="25" alt="connexion facebook" /><span>&nbsp;Se connecter avec Facebook</span></a></div>
 					<div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
