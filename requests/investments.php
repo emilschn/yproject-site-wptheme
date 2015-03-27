@@ -50,7 +50,7 @@ function wdg_get_project_investments($camp_id, $include_pending = FALSE) {
         $filepath = dirname ( __FILE__ ) . '/pdf_files/' . $filename;
 	file_put_contents ($filepath, $csv_buffer);
 	
-	asort($buffer['amounts_array']);
+	sort($buffer['amounts_array']);
 	
 	if ($buffer['count_validate_investments'] > 0) {
 		$buffer['average_age'] = round($buffer['count_age'] / $buffer['count_average_age'], 1);
@@ -58,7 +58,10 @@ function wdg_get_project_investments($camp_id, $include_pending = FALSE) {
 		$buffer['percent_male'] = 100 - $buffer['percent_female'];
 		$buffer['average_invest'] = round($buffer['count_invest'] / $buffer['count_validate_investments'], 2);
 		$buffer['median_invest'] = $buffer['amounts_array'][0];
-		if ($buffer['count_validate_investments'] > 2) $buffer['median_invest'] = $buffer['amounts_array'][round(($buffer['count_validate_investments'] + 1) / 2) - 1];
+		if ($buffer['count_validate_investments'] > 2) {
+			$index = round(($buffer['count_validate_investments'] + 1) / 2) - 1;
+			$buffer['median_invest'] = $buffer['amounts_array'][$index];
+		}
 	}
 	
 	return $buffer;
