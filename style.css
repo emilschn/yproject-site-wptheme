@@ -1693,7 +1693,17 @@ div#home_bottom h1 {
 .projects-desc-content table td {
     border: 1px dashed #2B2C2C;
 }
- #project-description-title-padding {
+.projects-desc-content blockquote {
+    font-style: italic;
+    font-size: 16px;
+}
+#wp-link-wrap {
+    height: 250px !important;
+}
+#wp-link .howto, #wp-link #search-panel {
+    display: none !important;
+}
+#project-description-title-padding {
      clear: both;
  }
 .vertical-align-middle{

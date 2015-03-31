@@ -164,7 +164,7 @@ $editor_params = array(
 	'quicktags'     => false,
 	'editor_height' => 500,
 	'tinymce'       => array(
-		'plugins' => 'paste',
+		'plugins' => 'paste, wplink, textcolor',
 		'paste_remove_styles' => true
 	)
 );

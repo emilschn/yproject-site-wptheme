@@ -1,3 +1,6 @@
-html .mceContentBody {
-    background-color: #FFF;
+html .mce-content-body {
+    font-family: Arial, sans-serif !important;
+}
+html .mce-content-body ul {
+    margin-left: 10px;
 }
