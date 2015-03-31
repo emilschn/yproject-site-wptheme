@@ -80,6 +80,7 @@ class YPProjectLib {
 							BoppLib::link_user_to_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
 							$buffer = TRUE;
 							do_action('wdg_delete_cache', array(
+								'users/' . $user_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
 								'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
 							));
 						}
@@ -99,6 +100,7 @@ class YPProjectLib {
 						BoppLib::unlink_user_from_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
 						$buffer = TRUE;
 						do_action('wdg_delete_cache', array(
+							'users/' . $user_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
 							'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
 						));
 					}
