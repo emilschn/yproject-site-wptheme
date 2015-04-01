@@ -3006,3 +3006,15 @@ ul.invest-mean-payment li img {
     width: 310px;
     border: 0;
 }
+
+/*******************************************************************************
+* TEAM PAGE
+*******************************************************************************/
+.jeandavid, .marlene, .loeiza, .emilien, .suzanna , .adrien {
+   height:450px;
+}
+
+.separateur-h4 {
+   font-family: "BebasNeue";
+   font-size: 35px;
+}
