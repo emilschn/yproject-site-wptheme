@@ -142,15 +142,15 @@
 						<li class="page_item_out page_item_inverted mobile_hidden">
 						<a class="page_item_inverted" href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a>
 						<ul>
-							<li style="border-bottom: 1px solid #FFF;" class="page_item_out"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Param&egrave;tres', 'yproject'); ?></a></li>
+							<li class="page_item_out upper"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Param&egrave;tres', 'yproject'); ?></a></li>
 							<?php 
 							$project_list = LibUsers::get_projects_by_id(bp_loggedin_user_id(), TRUE); 
 							foreach ($project_list as $project_id) {
 							    $post_campaign = get_post($project_id);
 							?>
-							<li style="border-bottom: 1px solid #FFF;" class="page_item_out"><a href="<?php echo get_permalink($project_id); ?>"><?php echo $post_campaign->post_title; ?></a></li>
+							<li class="page_item_out"><a href="<?php echo get_permalink($project_id); ?>"><?php echo $post_campaign->post_title; ?></a></li>
 							<?php } ?>
-							<li class="page_item_out"><a href="<?php echo wp_logout_url();echo '&page_id='.get_the_ID() ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
+							<li class="page_item_out last upper"><a href="<?php echo wp_logout_url();echo '&page_id='.get_the_ID() ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
 						</ul>
 						</li>
 						
