@@ -1710,7 +1710,7 @@ div#home_bottom h1 {
 #wp-link-wrap {
     height: 250px !important;
 }
-#wp-link .howto, #wp-link #search-panel {
+#wp-link .howto, #wp-link #search-panel, #wp-link #wp-link-close .screen-reader-text {
     display: none !important;
 }
 #project-description-title-padding {
