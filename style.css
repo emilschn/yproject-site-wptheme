@@ -1691,7 +1691,7 @@ div#home_bottom h1 {
     margin: 5px 20px 20px 0;
 }
 .projects-desc-content p img.alignright {
-    float: left;
+    float: right;
     margin: 5px 0 20px 20px;
 }
 .projects-desc-content table {
