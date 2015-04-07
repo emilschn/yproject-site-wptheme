@@ -286,7 +286,7 @@ $vote_status = html_entity_decode($campaign->vote());
     ?>
 
     <div class="center">
-        <?php echo get_permalink();?>
+        
         <p>Vous devez être inscrit pour accéder à la totalité du projet</p>
         <div id="header_homepage_link" class="mobile_hidden">
             <a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="button">Inscription</a>
