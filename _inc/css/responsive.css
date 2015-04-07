@@ -120,4 +120,80 @@
 		background-image: url("../../images/header-home-480.jpg") !important;
 		background-position: center top;
 	}
+	
+/*******************************************************************************
+* PROJECT SHORT - MENU
+*******************************************************************************/
+	ul#project-list-menu {
+		padding: 0px;
+		padding-bottom: 6px;
+		margin: 10px 2% 5px;
+		border-bottom: 1px solid #2B2C2C;
+	}
+	
+	ul#project-list-menu li {
+		list-style-type: none;
+		display: inline-block;
+		padding: 0px 2px;
+	}
+	
+	ul#project-list-menu li a {
+		color: #2B2C2C;
+		font-size: 15px;
+		padding-bottom: 5px;
+	}
+	ul#project-list-menu li a.selected {
+		font-weight: bold;
+		border-bottom: 3px solid #2B2C2C;
+	}
+	ul#project-list-menu li a:hover {
+		color: #C7C6C6;
+		border-bottom: 3px solid #C7C6C6;
+	}
+	
+/*******************************************************************************
+* PROJECT SHORT - SEPARATOR
+*******************************************************************************/
+	.part-title-separator { display: none !important; }
+	
+/*******************************************************************************
+* PROJECT SHORT - SMALL
+*******************************************************************************/
+	.home-small-project { 
+		width: 96% !important;
+		min-height: 0px !important;
+		padding: 2% !important;
+		float: none !important;
+	}
+	.home-small-project h2 { font-size: 12pt !important; }
+	.home-small-project .description-separator { display: none !important; }
+	.home-small-project .description-zone { margin-top: 280px !important; }
+	.home-small-project .description-zone .description-logos { display: none !important; }
+	.home-small-project .description-zone .description-summary { width: 100% !important; }
+	.home-small-project .video-zone-container { 
+		position: absolute !important;
+		top: 50px !important;
+		width: 95% !important;
+	}
+	.home-small-project .video-zone { width: 100% !important; }
+	
+/*******************************************************************************
+* PROJECT SHORT - LARGE
+*******************************************************************************/
+	.home-large-project h2 { font-size: 12pt !important; }
+	.home-large-project .video-zone { 
+		width: 100% !important;
+		min-height: 250px !important;
+	}
+	.home-large-project .description-zone { 
+		margin-left: 0px !important;
+		width: 100% !important;
+		height: auto !important;
+	}
+	.home-large-project .description-zone .description-middle { display: none !important; }
+	.home-large-project .description-zone .description-summary { height: 80px !important; }
+	.home-large-project .description-zone .description-discover {
+		position: relative !important;
+		bottom: auto !important;
+	}
 }

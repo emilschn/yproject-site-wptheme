@@ -1,5 +1,5 @@
 <?php 
-	global $WDG_cache_plugin, $stylesheet_directory_uri;
+	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign;
 	$stylesheet_directory_uri = get_stylesheet_directory_uri();
 	date_default_timezone_set("Europe/Paris");
 	UIHelpers::init_social_infos();
@@ -38,10 +38,11 @@
 		<meta property="og:image" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
 		<meta property="og:image:secure_url" content="<?php echo $stylesheet_directory_uri; ?>/images/logo_entier.jpg" />
 		<meta property="og:image:type" content="image/jpeg" />
+		
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?ver=1.1.100" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?ver=1.1.101" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		
 		<?php
@@ -55,11 +56,10 @@
 		?>
 
 		<?php do_action( 'bp_head' ); ?>
-		<?php wp_head(); ?>			
+		<?php wp_head(); ?>	
 	</head>
 
-	<body <?php body_class(); ?> id="bp-default">
-				    
+	<body <?php body_class(); ?> id="bp-default"> 
 		<?php
 		global $post;
 		$menu_pages = array(
