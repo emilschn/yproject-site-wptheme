@@ -140,14 +140,8 @@
 			<?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
 			<ul>
 				<li class="page_item_out">
-                                        <div id="submenu_item_connection_register">
-                                            
-                                       
-                                        <a href="#testBox" class="wdg-button-lightbox-open"  data-lightbox="testBox" style="padding:9px 12px;">TestBox</a>
-                                        <hr />
-                                       
-                                        </div>
-					<hr />
+                                 
+					
                                         <div id="submenu_item_connection_register"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
 					<hr />
 					<div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook_connexion.jpg" width="25" height="25" alt="connexion facebook" /><span>&nbsp;Se connecter avec Facebook</span></a></div>
