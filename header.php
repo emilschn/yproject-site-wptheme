@@ -146,10 +146,11 @@
 							<?php 
 							$project_list = LibUsers::get_projects_by_id(bp_loggedin_user_id(), TRUE); 
 							foreach ($project_list as $project_id) {
+							    if (!empty($project_id)) {
 							    $post_campaign = get_post($project_id);
 							?>
 							<li class="page_item_out"><a href="<?php echo get_permalink($project_id); ?>"><?php echo $post_campaign->post_title; ?></a></li>
-							<?php } ?>
+							<?php } } ?>
 							<li class="page_item_out last upper"><a href="<?php echo wp_logout_url();echo '&page_id='.get_the_ID() ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
 						</ul>
 						</li>
