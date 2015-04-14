@@ -716,3 +716,12 @@ function yproject_shortcode_lightbox($atts, $content = '') {
 	    </div>';
 }
 add_shortcode('yproject_lightbox', 'yproject_shortcode_lightbox');
+
+function yproject_shortcode_connexion_lightbox($atts, $content = '') {
+	ob_start();
+	locate_template('common/connexion-lightbox.php', true);
+	$content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="connexion"]' . $content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_connexion_lightbox', 'yproject_shortcode_connexion_lightbox');

@@ -269,6 +269,9 @@ form.wdg-forms .small-margin {
 	overflow-y: auto;
 	z-index: 4002;
 }
+.wdg-lightbox .wdg-lightbox-padder > div {
+	background-color: #F2F2F2 !important;
+}
 
 .wdg-lightbox .button {
 	background-color: #FF494C !important;

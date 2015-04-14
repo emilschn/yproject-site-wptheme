@@ -23,12 +23,13 @@
 				<?php global $current_user; get_currentuserinfo(); $page_list_projects = get_page_by_path('les-projets'); ?>
 				<p class="hello">Bonjour <?php echo $current_user->user_firstname;?> !</p>
 			<?php } else {
-				$page_connexion_register = get_page_by_path('register');
-				$page_connexion = get_page_by_path('connexion');?>
+				$page_connexion_register = get_page_by_path('register'); ?>
 				<div id="header_homepage_link" class="mobile_hidden">
-					<a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="button">Inscription</a>
-					<a href="<?php echo get_permalink($page_connexion->ID); ?>" class="button">Connexion</a>
-				</div>
+				    <a href="<?php echo get_permalink($page_connexion_register->ID); ?>register/" class="button">Inscription</a>
+				    <a href="#connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">Connexion</a>
+		                    <?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
+		                </div>
+
 			<?php } ?>
 			<p class="align-center only_on_mobile"><br /><a href="<?php echo get_permalink($page_list_projects->ID); ?>" class="button big">D&eacute;couvrir les projets</a></p>
 		</div>

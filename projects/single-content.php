@@ -157,6 +157,8 @@ else {
 	</span>
 </div>
 
+<?php if (is_user_logged_in()) { ?>
+
 
 <?php
 $editor_params = array( 
@@ -268,6 +270,22 @@ $editor_params = array(
 			<?php } ?>
 		</div>
 	</div>
+	
+<?php
+} else {
+	$page_connexion_register = get_page_by_path('register');
+	$page_connexion = get_page_by_path('connexion');
+	?>
+
+	<div class="align-center">
+		<p>Vous devez &ecirc;tre inscrit pour acc&eacute;der à la totalit&eacute; du projet</p>
+		<a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="button">Inscription</a>
+		<a href="#connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">Connexion</a>
+		<?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
+		<br /><br />
+	</div>
+<?php } ?>
+	
 </div>
 </div>
 </div>
