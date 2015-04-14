@@ -18,9 +18,10 @@
 <header class="header_home">
 	<div class="center">
 		<div id="welcome_text">
-			<?php the_content();?>
+			<?php the_content(); ?>
+			<?php $page_list_projects = get_page_by_path('les-projets'); ?>
 			<?php if ( is_user_logged_in() ) { ?>
-				<?php global $current_user; get_currentuserinfo(); $page_list_projects = get_page_by_path('les-projets'); ?>
+				<?php global $current_user; get_currentuserinfo(); ?>
 				<p class="hello">Bonjour <?php echo $current_user->user_firstname;?> !</p>
 			<?php } else {
 				$page_connexion_register = get_page_by_path('register');

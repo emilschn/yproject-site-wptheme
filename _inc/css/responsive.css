@@ -38,6 +38,7 @@
 		position: absolute;
 		top: 35px;
 		background: #333333;
+		z-index: 1000;
 	}
 	#submenu-mobile ul {
 		margin: 10px 20px;
@@ -185,13 +186,18 @@
 		width: 100% !important;
 		min-height: 250px !important;
 	}
+	.home-large-project .video-zone iframe { 
+		width: 100%;
+	}
 	.home-large-project .description-zone { 
 		margin-left: 0px !important;
 		width: 100% !important;
 		height: auto !important;
 	}
 	.home-large-project .description-zone .description-middle { display: none !important; }
-	.home-large-project .description-zone .description-summary { height: 80px !important; }
+	.home-large-project .description-zone .description-summary { 
+		margin: 5px 0px !important;
+	}
 	.home-large-project .description-zone .description-discover {
 		position: relative !important;
 		bottom: auto !important;
