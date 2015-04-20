@@ -2268,6 +2268,16 @@ div#home_bottom h1 {
     height: 700px;
 }
 
+#dashboard .block {
+    float: left;
+    width: 50%;
+    max-width: 438px;
+    text-align: center;
+    padding: 10px 10px;
+    margin: 5px 10px;
+    border: 1px solid #FF494C;
+}
+
 
 /*******************************************************************************
 * NEW PROJECT PAGE
