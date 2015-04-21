@@ -173,6 +173,18 @@ YPUIFunctions = (function($) {
 					});
 				});
 			}
+                        
+                        if ($(".check-users-columns").length > 0) {
+                            $(".check-users-columns").click(function() {
+                                $selector = ".";
+                                $selector += this.value;
+                                if (this.checked===true) {
+                                    $($selector).removeAttr('hidden','');
+                                } else {
+                                    $($selector).attr('hidden','');
+                                }
+                            });
+                        }
 		},
 		
 		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué

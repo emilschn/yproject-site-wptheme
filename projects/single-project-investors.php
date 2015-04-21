@@ -11,34 +11,63 @@ if ($campaign->current_user_can_edit()) {
 		
 <h3>Liste des investisseurs</h3>
 <table class="wp-list-table" cellspacing="0">
+    <?php
+        $classcolonnes = array('coluname',
+                            'collname',
+                            'colfname',
+                            'colbrthday',
+                            'colbrthplace',
+                            'colnat',
+                            'colcity',
+                            'coladdr',
+                            'colpcode',
+                            'colcountry',
+                            'colemail',
+                            'colphone',
+                            'colinvesmontant',
+                            'colinvdate',
+                            'colinvpaytype',
+                            'colinvpaystate',
+                            'colinvsign');
+        if ($is_campaign_over) { $classcolonnes[]='colinvstate'; }
+        
+        $titrecolonnes = array('Utilisateur',
+                            'Nom',
+                            'Prénom',
+                            'Date de naissance',
+                            'Ville de naissance',
+                            'Nationalité',
+                            'Ville',
+                            'Adresse',
+                            'Code postal',
+                            'Pays',
+                            'Mail',
+                            'Téléphone',
+                            'Montant investi',
+                            'Date',
+                            'Type de paiement',
+                            'Etat du paiement',
+                            'Signature');
+        if ($is_campaign_over) { $titrecolonnes[]='Investissement'; }
+        
+        $colonnes = array_combine($classcolonnes, $titrecolonnes);
+        
+    ?>
     <thead style="background-color: #CCC;">
     <tr>
-        <?php $colonnes = '<td>Utilisateur</td>
-        <td>Nom</td>
-        <td>Prénom</td>
-        <td>Date de naissance</td>
-        <td>Ville de naissance</td>
-        <td>Nationalité</td>
-        <td>Ville</td>
-        <td>Adresse</td>
-        <td>Code postal</td>
-        <td>Pays</td>
-        <td>Mail</td>
-        <td>Téléphone</td>
-	<td>Montant investi</td>
-        <td>Date</td>
-	<td>Type de paiement</td>
-	<td>Etat du paiement</td>
-	<td>Signature</td>';
-        echo $colonnes;
-        if ($is_campaign_over) { ?><td>Investissement</td><?php } ?>
+        <?php foreach($colonnes as $class=>$titre){
+            //Ecriture des nom des colonnes en haut
+            echo '<td class="'.$class.'">'.$titre.'</td>';}?>
+        
     </tr>
     </thead>
 
     <tfoot style="background-color: #CCC;">
     <tr>
-	<?php echo $colonnes;
-        if ($is_campaign_over) { ?><td>Investissement</td><?php } ?>
+        <?php foreach($colonnes as $class=>$titre){
+            //Ecriture des nom des colonnes en bas
+            echo '<td class="'.$class.'">'.$titre.'</td>';}?>
+        
     </tr>
     </tfoot>
 
@@ -95,33 +124,52 @@ if ($campaign->current_user_can_edit()) {
 		
 		$user_data = get_userdata($item['user']);
                 
+                //Liste des données à afficher pour la ligne traitée
+                $datacolonnes= array(bp_core_get_userlink($item['user']),
+                    $user_data->last_name,
+                    $user_data->first_name,
+                    $user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,
+                    $user_data->user_birthplace,
+                    $user_data->user_nationality,
+                    $user_data->user_city,
+                    $user_data->user_address,
+                    $user_data->user_postal_code,
+                    $user_data->user_country,
+                    $user_data->user_email,
+                    $user_data->user_mobile_phone,
+                    $item['amount'].'€',
+                    date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
+                    $payment_type,
+                    $payment_state,
+                    $item['signsquid_status_text']
+                );
+                if ($is_campaign_over) { $datacolonnes[]=$investment_state; }
+                $affichedonnees = array_combine($classcolonnes, $datacolonnes);
+                ?>
+                
+                <tr style="background-color: <?php echo $bgcolor; ?>">
+                <?php
+                    //Ecriture de la ligne
+                    foreach($affichedonnees as $class=>$data){
+                        echo '<td class="'.$class.'">'.$data.'</td>';}
 		?>
-		<tr style="background-color: <?php echo $bgcolor; ?>">
-                    <td><?php echo bp_core_get_userlink($item['user']); ?></td>
-                    <td><?php echo $user_data->last_name;?></td>
-                    <td><?php echo $user_data->first_name;?></td>
-                    <td><?php echo $user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year;?></td>
-                    <td><?php echo $user_data->user_birthplace;?></td>
-                    <td><?php echo $user_data->user_nationality;?></td>
-                    <td><?php echo $user_data->user_city;?></td>
-                    <td><?php echo $user_data->user_address;?></td>
-                    <td><?php echo $user_data->user_postal_code;?></td>
-                    <td><?php echo $user_data->user_country;?></td>
-                    <td><?php echo $user_data->user_email; ?></td>
-                    <td><?php echo $user_data->user_mobile_phone;?></td>
-                    <td><?php echo $item['amount']; ?>&euro;</td>
-                    <td><?php echo date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ); ?></td>
-                    <td><?php echo $payment_type; ?></td>
-                    <td><?php echo $payment_state; ?></td>
-                    <td <?php if ($item['signsquid_status'] != 'Agreed') echo 'style="background-color: #EF876D"'; ?>><?php echo $item['signsquid_status_text']; ?></td>
-		    <?php if ($is_campaign_over) { ?><td><?php echo $investment_state; ?></td><?php } ?>
-		</tr>
-		<?php
+                </tr>
+                <?php
 //	    }
 	}
 	?>
     </tbody>
 </table>
+
+<form>
+    <?php foreach($colonnes as $class=>$titre){
+        //Affichage des colonnes : voir dans common.js
+            echo '<input type="checkbox" checked class="check-users-columns" name="affichage" value="'.$class.'" id="cb'.$class.'">'
+                    . '<label for="cb'.$class.'">'.$titre.'</label>';}
+                    ?>
+</form>
+
+
 
 <?php
 }
