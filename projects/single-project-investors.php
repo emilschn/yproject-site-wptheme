@@ -10,6 +10,7 @@ if ($campaign->current_user_can_edit()) {
 ?>
 		
 <h3>Liste des investisseurs</h3>
+<div id="tablescroll" >
 <table class="wp-list-table" cellspacing="0">
     <?php
         $classcolonnes = array('coluname',
@@ -50,14 +51,36 @@ if ($campaign->current_user_can_edit()) {
                             'Signature');
         if ($is_campaign_over) { $titrecolonnes[]='Investissement'; }
         
+        $selectiondefaut = array(true,
+                            true,
+                            true,
+                            false,
+                            false,
+                            false,
+                            true,
+                            false,
+                            false,
+                            false,
+                            true,
+                            true,
+                            true,
+                            false,
+                            false,
+                            false,
+                            false);
+        if ($is_campaign_over) { $selectiondefaut[]=true; }
+        
         $colonnes = array_combine($classcolonnes, $titrecolonnes);
+        $displaycolonnes = array_combine($classcolonnes,$selectiondefaut);
         
     ?>
     <thead style="background-color: #CCC;">
     <tr>
         <?php foreach($colonnes as $class=>$titre){
             //Ecriture des nom des colonnes en haut
-            echo '<td class="'.$class.'">'.$titre.'</td>';}?>
+            echo '<td class="'.$class.'" ';
+                    
+            echo '>'.$titre.'</td>';}?>
         
     </tr>
     </thead>
@@ -160,7 +183,7 @@ if ($campaign->current_user_can_edit()) {
 	?>
     </tbody>
 </table>
-
+</div>
 <form>
     <?php foreach($colonnes as $class=>$titre){
         //Affichage des colonnes : voir dans common.js
