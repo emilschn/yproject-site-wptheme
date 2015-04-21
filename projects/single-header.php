@@ -41,7 +41,7 @@ else {
 			?>
 				<div>
 					<div class="project_full_progressbg">
-						<div class="project_full_progressbar" style="width:<?php echo $width; ?>px">
+						<div class="project_full_progressbar" style="width:<?php echo $percent; ?>%">
 							&nbsp;
 						</div>
 					</div>
