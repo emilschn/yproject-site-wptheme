@@ -147,6 +147,12 @@ tbody {
     font-size: 15px;
     padding: 15px 30px;
 }
+.button.disabled {
+    background: #EEECED;
+    border: 1px solid #EEECED !important;
+    color: #333333;
+    cursor: default;
+}
 
 .wp-editor-container {
     border: 1px solid rgb(222, 222, 222);
