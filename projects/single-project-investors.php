@@ -72,16 +72,15 @@ if ($campaign->current_user_can_edit()) {
         
         $colonnes = array_combine($classcolonnes, $titrecolonnes);
         $displaycolonnes = array_combine($classcolonnes,$selectiondefaut);
-        
     ?>
+    
     <thead style="background-color: #CCC;">
     <tr>
         <?php foreach($colonnes as $class=>$titre){
             //Ecriture des nom des colonnes en haut
             echo '<td class="'.$class.'" ';
-                    
+            if (($displaycolonnes[$class]) == false){echo 'hidden=""';}
             echo '>'.$titre.'</td>';}?>
-        
     </tr>
     </thead>
 
@@ -89,8 +88,9 @@ if ($campaign->current_user_can_edit()) {
     <tr>
         <?php foreach($colonnes as $class=>$titre){
             //Ecriture des nom des colonnes en bas
-            echo '<td class="'.$class.'">'.$titre.'</td>';}?>
-        
+            echo '<td class="'.$class.'" ';
+            if (($displaycolonnes[$class]) == false){echo 'hidden=""';}
+            echo '>'.$titre.'</td>';}?>        
     </tr>
     </tfoot>
 
@@ -174,7 +174,11 @@ if ($campaign->current_user_can_edit()) {
                 <?php
                     //Ecriture de la ligne
                     foreach($affichedonnees as $class=>$data){
-                        echo '<td class="'.$class.'">'.$data.'</td>';}
+                        /*echo '<td class="'.$class.'">'.$data.'</td>';*/
+                        echo '<td class="'.$class.'" ';
+                        if (($displaycolonnes[$class]) == false){echo 'hidden=""';}
+                        echo '>'.$data.'</td>';
+                    }
 		?>
                 </tr>
                 <?php
@@ -187,9 +191,14 @@ if ($campaign->current_user_can_edit()) {
 <form>
     <?php foreach($colonnes as $class=>$titre){
         //Affichage des colonnes : voir dans common.js
-            echo '<input type="checkbox" checked class="check-users-columns" name="affichage" value="'.$class.'" id="cb'.$class.'">'
-                    . '<label for="cb'.$class.'">'.$titre.'</label>';}
-                    ?>
+            echo '<input type="checkbox" ';
+            if (($displaycolonnes[$class]) == true){echo 'checked ';}
+            echo 'class="check-users-columns" '
+                .'name="affichage" '
+                .'value="'.$class.'" '
+                .'id="cb'.$class.'">'
+                .'<label for="cb'.$class.'">'.$titre.'</label>';}
+    ?>
 </form>
 
 
