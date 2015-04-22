@@ -78,15 +78,18 @@ if ($campaign->current_user_can_edit()) {
     <form>
     <fieldset id="display-options-col-menu">
         <ul id="display-options-col-list">
+            <li id="cb-li-collall">
+                <input id="cbcolall" class="check-users-columns" type="checkbox" value="all">
+                </input><label for="cbcolall">Tout sélectionner</label>
+            </li>
         <?php foreach($colonnes as $class=>$titre){
-            //Affichage des colonnes : voir dans common.js
+            //Checkbox d'affichage des colonnes : voir dans common.js
                 echo '<li><input type="checkbox" ';
                 if (($displaycolonnes[$class]) == true){echo 'checked ';}
                 echo 'class="check-users-columns" '
-                    .'name="affichage" '
                     .'value="'.$class.'" '
                     .'id="cb'.$class.'">'
-                    .'<label for="cb'.$class.'">'.$titre.'</label></li>';}
+                    .' <label for="cb'.$class.'">'.$titre.'</label></li>';}
         ?>
         </ul>
     </fieldset>
@@ -96,7 +99,7 @@ if ($campaign->current_user_can_edit()) {
 <br/>
 
 <div id="tablescroll" >
-<table class="wp-list-table" cellspacing="0">
+<table class="wp-list-table" cellspacing="0" id="investors-table">
     
     <thead style="background-color: #CCC;">
     <tr>

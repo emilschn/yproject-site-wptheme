@@ -2893,8 +2893,15 @@ ul.invest-mean-payment li img {
    list-style-position: inside;
    list-style-type: none;
    padding-left: 0px;
-   font-size: 90%; color: white;
+   color: white;
    font-variant: small-caps;
+}
+
+#cb-li-collall {
+    background-color: #FF494C;
+    padding-bottom: 2px;
+    padding-right: 4px;
+    margin-bottom: 5px;
 }
 
 /*******************************************************************************

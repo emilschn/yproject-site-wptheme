@@ -175,11 +175,26 @@ YPUIFunctions = (function($) {
 			}
                         
                         if ($(".check-users-columns").length > 0) {
+                            //Page investisseurs/investors : Actions à la sélection des colonnes du tableau
                             $(".check-users-columns").click(function() {
+                                //Case "toutes les colonnes
+                                if(this.value==="all") {
+                                    if (this.checked===true) {
+                                        $('.check-users-columns').prop('checked', true);
+                                        $('#investors-table td').removeAttr('hidden');
+                                    } else {
+                                        $('.check-users-columns').prop('checked', false);
+                                        $('#investors-table td').attr('hidden','');
+                                        $('#cbcoluname').prop('checked', true);
+                                        $('.coluname').removeAttr('hidden');
+                                    }
+                                }
+                                
+                                //Autres cases
                                 $selector = ".";
                                 $selector += this.value;
                                 if (this.checked===true) {
-                                    $($selector).removeAttr('hidden','');
+                                    $($selector).removeAttr('hidden');
                                 } else {
                                     $($selector).attr('hidden','');
                                 }
