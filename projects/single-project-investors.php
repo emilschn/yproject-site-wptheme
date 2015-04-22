@@ -10,9 +10,8 @@ if ($campaign->current_user_can_edit()) {
 ?>
 		
 <h3>Liste des investisseurs</h3>
-<div id="tablescroll" >
-<table class="wp-list-table" cellspacing="0">
-    <?php
+
+<?php
         $classcolonnes = array('coluname',
                             'collname',
                             'colfname',
@@ -73,6 +72,31 @@ if ($campaign->current_user_can_edit()) {
         $colonnes = array_combine($classcolonnes, $titrecolonnes);
         $displaycolonnes = array_combine($classcolonnes,$selectiondefaut);
     ?>
+
+<div id="display-options-col-div">
+    <button>Colonnes &agrave; afficher &#9662;</button>
+    <form>
+    <fieldset id="display-options-col-menu">
+        <ul id="display-options-col-list">
+        <?php foreach($colonnes as $class=>$titre){
+            //Affichage des colonnes : voir dans common.js
+                echo '<li><input type="checkbox" ';
+                if (($displaycolonnes[$class]) == true){echo 'checked ';}
+                echo 'class="check-users-columns" '
+                    .'name="affichage" '
+                    .'value="'.$class.'" '
+                    .'id="cb'.$class.'">'
+                    .'<label for="cb'.$class.'">'.$titre.'</label></li>';}
+        ?>
+        </ul>
+    </fieldset>
+    </form>
+</div>
+
+<br/>
+
+<div id="tablescroll" >
+<table class="wp-list-table" cellspacing="0">
     
     <thead style="background-color: #CCC;">
     <tr>
@@ -83,16 +107,6 @@ if ($campaign->current_user_can_edit()) {
             echo '>'.$titre.'</td>';}?>
     </tr>
     </thead>
-
-    <tfoot style="background-color: #CCC;">
-    <tr>
-        <?php foreach($colonnes as $class=>$titre){
-            //Ecriture des nom des colonnes en bas
-            echo '<td class="'.$class.'" ';
-            if (($displaycolonnes[$class]) == false){echo 'hidden=""';}
-            echo '>'.$titre.'</td>';}?>        
-    </tr>
-    </tfoot>
 
     <tbody id="the-list">
 	<?php
@@ -186,21 +200,18 @@ if ($campaign->current_user_can_edit()) {
 	}
 	?>
     </tbody>
+    
+    <tfoot style="background-color: #CCC;">
+    <tr>
+        <?php foreach($colonnes as $class=>$titre){
+            //Ecriture des nom des colonnes en bas
+            echo '<td class="'.$class.'" ';
+            if (($displaycolonnes[$class]) == false){echo 'hidden=""';}
+            echo '>'.$titre.'</td>';}?>        
+    </tr>
+    </tfoot>
 </table>
 </div>
-<form>
-    <?php foreach($colonnes as $class=>$titre){
-        //Affichage des colonnes : voir dans common.js
-            echo '<input type="checkbox" ';
-            if (($displaycolonnes[$class]) == true){echo 'checked ';}
-            echo 'class="check-users-columns" '
-                .'name="affichage" '
-                .'value="'.$class.'" '
-                .'id="cb'.$class.'">'
-                .'<label for="cb'.$class.'">'.$titre.'</label>';}
-    ?>
-</form>
-
 
 
 <?php

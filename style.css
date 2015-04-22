@@ -2867,6 +2867,36 @@ ul.invest-mean-payment li img {
     overflow-y: hidden;
 }
 
+#display-options-col-menu {
+    display:none;
+    position: absolute;
+    background-color: #333;
+    border: 0px none;
+}
+
+#display-options-col-div {
+    display:inline;
+}
+
+#display-options-col-div button {
+    border: 1px solid #FF494C;
+    background-color: white;
+    color: #FF494C;
+    padding: 4px 8px 4px 8px;
+}
+
+#display-options-col-div:hover #display-options-col-menu {
+    display:inline;
+}
+
+#display-options-col-list {
+   list-style-position: inside;
+   list-style-type: none;
+   padding-left: 0px;
+   font-size: 90%; color: white;
+   font-variant: small-caps;
+}
+
 /*******************************************************************************
 * VOTE STATS PAGE
 *******************************************************************************/ 
