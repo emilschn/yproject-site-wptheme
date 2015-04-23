@@ -202,4 +202,54 @@
 		position: relative !important;
 		bottom: auto !important;
 	}
+	
+/*******************************************************************************
+* PROJECT PAGE
+*******************************************************************************/
+	#head-image {
+		top: 37px !important;
+		height: 150px !important;
+		background-image: url("../../images/header.jpg");
+	}
+	#head-content {
+		bottom: auto !important;
+		width: 100% !important;
+	}
+	#head-content #title, #head-content #subtitle {
+		position: relative !important;
+		bottom: auto !important;
+		width: 90% !important;
+		margin: 0% 5% !important;
+		color: #FFFFFF;
+	}
+	#head-content #title p { margin: 10px 0px !important; }
+	#projects-stats { margin-top: 150px; }
+	#projects-stats-content {
+		position: inherit !important;
+		padding-top: 15px;
+		width: 100% !important;
+		height: 170px !important;
+		background: #EEECED !important;
+		text-align: center;
+	}
+	#projects-stats-content .project_full_percent {
+		margin-top: 4px;
+		margin-left: -250px;
+		padding: 0px 10px 0px 5px !important;
+		background: #FF494C;
+		color: #FFFFFF;
+		font-size: 21px !important;
+	}
+	#projects-stats-content .progress_zone {
+		margin-top: 100px;
+	}
+	#projects-stats-content .project_full_progressbg {
+		margin-left: 0px !important;
+		background: #FFF;
+	}
+	#projects-stats-content .project_full_progressbar { background: #FF494C; }
+	#projects-stats-content .post_bottom_infos_item {
+		display: inline-block;
+		margin-top: -100px;
+	}
 }
