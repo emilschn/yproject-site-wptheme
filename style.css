@@ -2268,6 +2268,16 @@ div#home_bottom h1 {
     height: 700px;
 }
 
+#dashboard .block {
+    float: left;
+    width: 50%;
+    max-width: 438px;
+    text-align: center;
+    padding: 10px 10px;
+    margin: 5px 10px;
+    border: 1px solid #FF494C;
+}
+
 
 /*******************************************************************************
 * NEW PROJECT PAGE
@@ -2847,6 +2857,51 @@ ul.invest-mean-payment li img {
     width: 200px;
     font-weight: bold;
     margin-right: 10px;
+}
+
+/*******************************************************************************
+* INVESTORS PAGE
+*******************************************************************************/ 
+#tablescroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+#display-options-col-menu {
+    display:none;
+    position: absolute;
+    background-color: #333;
+    border: 0px none;
+}
+
+#display-options-col-div {
+    display:inline;
+}
+
+#display-options-col-div button {
+    border: 1px solid #FF494C;
+    background-color: white;
+    color: #FF494C;
+    padding: 4px 8px 4px 8px;
+}
+
+#display-options-col-div:hover #display-options-col-menu {
+    display:inline;
+}
+
+#display-options-col-list {
+   list-style-position: inside;
+   list-style-type: none;
+   padding-left: 0px;
+   color: white;
+   font-variant: small-caps;
+}
+
+#cb-li-collall {
+    background-color: #FF494C;
+    padding-bottom: 2px;
+    padding-right: 4px;
+    margin-bottom: 5px;
 }
 
 /*******************************************************************************

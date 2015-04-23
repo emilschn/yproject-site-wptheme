@@ -27,6 +27,17 @@ $campaign_id = $_GET['campaign_id'];
 					$category_obj = get_category_by_slug($category_slug);
 					$category_link = (!empty($category_obj)) ? get_category_link($category_obj->cat_ID) : '';
 					$news_link = esc_url($category_link);
+                                        
+                                        // Statistiques avancées
+                                        if (strtotime($post_campaign->post_date) < strtotime('2014-02')) {
+                                            $pages_stats = get_page_by_path('vote');
+                                        } else {
+                                            $pages_stats = get_page_by_path('statistiques-avancees');
+                                        }
+                                        
+                                        $pages_stats_investments = get_page_by_path('statistiques-avancees-investissements');
+                                        
+                                        $pages_invest = get_page_by_path('investisseurs');
 					?>
 
 					<?php if ($can_modify): ?>
@@ -41,16 +52,28 @@ $campaign_id = $_GET['campaign_id'];
 
 						<div class="button-help">
 							<a href="<?php echo get_permalink($page_particular_terms->ID); ?>" target="_blank"><?php _e('Conditions particuli&egrave;res', 'yproject'); ?></a>
-							<a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><?php _e('Guide de campagne', 'yproject'); ?></a>
+							
+                                                        <a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><?php _e('Guide de campagne', 'yproject'); ?></a>
 							
 							<?php if ($campaign->google_doc() != ''): ?>
 							<a href="<?php echo $campaign->google_doc(); ?>/edit" target="_blank" class="button"><?php _e('Ouvrir le document de gestion de campagne', 'yproject'); ?></a>
 							<?php endif; ?>
+                                                        
 							<a href="<?php echo $news_link; ?>" class="button"><?php _e('Publier une actualit&eacute;', 'yproject'); ?></a>
 							
-							<div class="clear"></div>
+                                                        <a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>" target="_blank"><?php _e('Statistiques avancées','yproject'); ?></a>
+                                                        
+                                                        <a href="<?php echo get_permalink($pages_invest->ID) . $campaign_id_param . $params_partial; ?>" target="_blank"><?php _e('Liste des investisseurs','yproject'); ?></a>
+                                                        
+                                                        <a href="<?php echo get_permalink($pages_stats_investments->ID) . $campaign_id_param . $params_partial; ?>" target="_blank"><?php _e('Stats investissements','yproject'); ?></a>
+                                                           
+                                                        <div class ="block">
+                                                            Bloc libre
+                                                        </div>
+                                                        
+                                                        <div class="clear"></div>
 						</div>
-
+                                    
 						<?php if ($campaign->google_doc() != ''): ?>
 						<div class="google-doc">
 							<?php if (strpos('spreadsheet', $campaign->google_doc()) !== FALSE) : ?>
