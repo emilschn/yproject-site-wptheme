@@ -228,28 +228,31 @@
 		position: inherit !important;
 		padding-top: 15px;
 		width: 100% !important;
-		height: 170px !important;
+		height: 125px !important;
 		background: #EEECED !important;
 		text-align: center;
 	}
 	#projects-stats-content .project_full_percent {
-		margin-top: 4px;
-		margin-left: -250px;
-		padding: 0px 10px 0px 5px !important;
-		background: #FF494C;
+		margin-top: -25px;
+		margin-left: -50%;
+		padding: 0px 10px 1px 5px !important;
 		color: #FFFFFF;
 		font-size: 21px !important;
 	}
 	#projects-stats-content .progress_zone {
-		margin-top: 100px;
+		margin-top: 70px !important;
+		width: 250px;
+		margin: auto;
 	}
 	#projects-stats-content .project_full_progressbg {
 		margin-left: 0px !important;
 		background: #FFF;
 	}
 	#projects-stats-content .project_full_progressbar { background: #FF494C; }
-	#projects-stats-content .post_bottom_infos_item {
-		display: inline-block;
+	#projects-stats-content .logos_zone {
 		margin-top: -100px;
+	}
+	#projects-stats-content .logos_zone .post_bottom_infos_item {
+		display: inline-block !important;
 	}
 }

@@ -44,39 +44,54 @@ else {
 						<div class="project_full_progressbar" style="width:<?php echo $percent; ?>%">
 							&nbsp;
 						</div>
+						<span class="project_full_percent" style="width:<?php echo $percent; ?>%"><?php echo $campaign->percent_minimum_completed(); ?></span>
 					</div>
-					<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
 				</div>
-				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
-					<?php $backers_count = $campaign->backers_count(); ?>
-					<span class="mobile_hidden"><?php echo $backers_count; ?> personne<?php if ($backers_count > 1) { echo 's ont'; } else { echo ' a'; } ?> d&eacute;j&agrave; financ&eacute; ce projet</span>
-					<span class="only_on_mobile"><?php echo $backers_count; ?></span>
+				<div class="logos_zone">
+					<div class="post_bottom_infos_item only_on_mobile">
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />
+						<?php 
+						$campaign_location = $campaign->location();
+						$exploded = explode(' ', $campaign_location);
+						if (count($exploded) > 1) $campaign_location = $exploded[0];
+						echo (($campaign_location != '') ? $campaign_location : 'France'); 
+						?>
+					</div>
+					<div class="post_bottom_infos_item">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
+						<?php $backers_count = $campaign->backers_count(); ?>
+						<span class="mobile_hidden"><?php echo $backers_count; ?> personne<?php if ($backers_count > 1) { echo 's ont'; } else { echo ' a'; } ?> d&eacute;j&agrave; financ&eacute; ce projet</span>
+						<span class="only_on_mobile"><?php echo $backers_count; ?></span>
+					</div>
+					<div class="post_bottom_infos_item" <?php if($vote_status=='funded' || $vote_status == 'archive'){echo "style=opacity:0.5";}?>>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
+						<span class="mobile_hidden"><?php
+						$days_remaining = $campaign->days_remaining();
+						switch ($days_remaining) { 
+							case 1:
+								?>Plus que <strong>1</strong> jour !<?php
+								break;
+							case 0:
+								?>Collecte termin&eacute;e !<?php
+								break;
+							default:
+								?>Plus que <strong><?php echo $days_remaining; ?></strong> jours !<?php
+								break;
+						}
+						?></span>
+						<span class="only_on_mobile"><?php echo $days_remaining; ?></span>
+					</div>
+					<div class="post_bottom_infos_item">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
+						<span class="mobile_hidden"><?php echo $campaign->current_amount() . ' financés sur ' . $campaign->minimum_goal(true); ?></span>
+						<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
+					</div>
+					<div class="post_bottom_infos_item only_on_mobile">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/good.png" alt="logo main" /><br />
+						<span><?php echo $campaign->get_jycrois_nb(); ?></span>
+					</div>
+					<div class="projects-description-separator mobile_hidden"></div>
 				</div>
-				<div class="post_bottom_infos_item" <?php if($vote_status=='funded' || $vote_status == 'archive'){echo "style=opacity:0.5";}?>>
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
-					<span class="mobile_hidden"><?php
-					$days_remaining = $campaign->days_remaining();
-					switch ($days_remaining) { 
-						case 1:
-							?>Plus que <strong>1</strong> jour !<?php
-							break;
-						case 0:
-							?>Collecte termin&eacute;e !<?php
-							break;
-						default:
-							?>Plus que <strong><?php echo $days_remaining; ?></strong> jours !<?php
-							break;
-					}
-					?></span>
-					<span class="only_on_mobile"><?php echo $days_remaining; ?></span>
-				</div>
-				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-					<span class="mobile_hidden"><?php echo $campaign->current_amount() . ' financés sur ' . $campaign->minimum_goal(true); ?></span>
-					<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
-				</div>
-				<div class="projects-description-separator mobile_hidden"></div>
 
 			<?php 
 			} else if ($vote_status == 'vote') {
