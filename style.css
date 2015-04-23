@@ -2268,16 +2268,44 @@ div#home_bottom h1 {
     height: 700px;
 }
 
+#dashboard .blocks-list {
+    margin: 15px 0px;
+}
+
 #dashboard .block {
     float: left;
     width: 50%;
     max-width: 438px;
-    text-align: center;
-    padding: 10px 10px;
     margin: 5px 10px;
     border: 1px solid #FF494C;
 }
 
+#dashboard .block .head {
+    font-size: 180%;
+    text-align: center;
+    color: #FFF;
+    background-color: #FF494C;
+    text-transform: uppercase;
+    padding: 12px 5px 5px 5px;
+}
+
+#dashboard .block .body {
+    padding: 10px;
+}
+
+#dashboard .block .foot {
+    text-align: center;
+    border-top: 1px solid rgb(255, 73, 76);
+    font-size: 120%;
+    padding: 5px;
+    color: #FF494C;
+}
+
+#dashboard #block-community p {
+    text-align: center;
+    font-size: 150%;
+    margin: 10px 0px;
+}
 
 /*******************************************************************************
 * NEW PROJECT PAGE

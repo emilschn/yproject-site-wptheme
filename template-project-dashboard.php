@@ -41,9 +41,40 @@ $campaign_id = $_GET['campaign_id'];
                         ?>
 
                         <?php if ($can_modify): ?>
-
                             <div class="part-title-separator">
                                 <span class="part-title"><?php echo $post_campaign->post_title; ?></span>
+                            </div>
+                            
+                            <div class="blocks-list">
+                                <div id ="block-community" class="block">
+                                    <?php
+                                    //Récupération du nombre des j'y crois
+                                        $table_jcrois = $wpdb->prefix . "jycrois";
+                                        $result_jcrois = $wpdb->get_results( "SELECT count(*) as nbbelieve FROM ".$table_jcrois." WHERE campaign_id = ".$_GET['campaign_id'] );
+                                        $nb_jcrois = ($result_jcrois[0]->nbbelieve);
+                                        
+                                    //Récupération de la liste des votants
+                                        $table_votes = $wpdb->prefix . "ypcf_project_votes";
+                                        $result_votes = $wpdb->get_results( "SELECT count(*) as nbvote FROM ".$table_votes." WHERE post_id = ".$_GET['campaign_id'] );
+                                        $nb_votes = ($result_votes[0]->nbvote);
+                                        
+                                    //Récupération de la liste des investisseurs
+                                        $campaign = atcf_get_campaign( $post_campaign );
+                                        $payments_data = $campaign->payments_data();
+                                        $nb_invests = count($payments_data);
+                                    ?>
+                                    <div class="head">Communauté</div>
+                                    <div class="body">
+                                    <p><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png"/>
+                                        <?php echo $nb_jcrois?> y croient</p>
+                                    <p><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png"/>
+                                        <?php echo $nb_votes?> ont voté</p>
+                                    <p><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png"/>
+                                        <?php echo $nb_invests?> ont investi</p>
+                                    </div>
+                                    <div class="foot">&#9993 Envoyer un message</div>
+                                </div>
+                                <div class="clear"></div>
                             </div>
 
                             <div class="currentstep">
@@ -76,9 +107,6 @@ $campaign_id = $_GET['campaign_id'];
                                 
                                 <a href="<?php echo get_permalink($pages_list_invest->ID) . $campaign_id_param . $params_partial; ?>"><?php _e('Liste des investisseurs', 'yproject'); ?></a>
 
-                                <!--div class ="block">
-                                     Bloc libre
-                                </div-->
                                 <div class="clear"></div>
                             </div>
 
