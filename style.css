@@ -259,10 +259,10 @@ form.wdg-forms .small-margin {
 }
 
 #sidebar-login-form input{
-   margin: 5px;
+    margin: 5px;
 }
 
-#sidebar-login-form #sidebar-wp-submit {
+#sidebar-login-form #submit-center {
     margin-left: 150px
 }
 

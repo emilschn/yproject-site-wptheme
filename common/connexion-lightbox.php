@@ -5,9 +5,6 @@
                 <?php _e('Erreur d&apos;identification', 'yproject'); ?>
             <?php } ?>
         </div>
-         
-        
-        
         <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url('wp-login.php', 'login_post'); ?>" method="post">
             <label for="identifiant" class="standard-label"><?php _e('Identifiant :', 'yproject'); ?></label>
             <input id="identifiant" type="text" name="log" class="input" placeholder="Identifiant" value="<?php if (isset($user_login)) echo esc_attr(stripslashes($user_login)); ?>" />
@@ -18,29 +15,27 @@
             
             <br />
             <div id="submit-center">
-            <input type="submit"  name="wp-submit" id="sidebar-wp-submit" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
-            <input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" />
-            <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
-            <br />
-            <input type="hidden" name="redirect-page-error" id="redirect-page-error" value="<?php echo get_permalink($page) ?>" />
-            <?php 
-                if( get_permalink($page) === home_url()."/"){
-                    $valeur = "home";
-                } else {
-                    $valeur = get_the_ID();
-                }
-                $redirect_value = "";
-                if (isset($_GET["redirect"]) && $_GET["redirect"] == "invest") $redirect_value = "true";
-            ?>
-            <input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo $valeur; ?>" />   
-            <input type="hidden" name="redirect-page-investir" id="redirect-page-investir" value="<?php echo $redirect_value; ?>" />
-             </div>
+                <input type="submit"  name="wp-submit" id="sidebar-wp-submit" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
+                <input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" />
+                <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
+                <br />
+                <input type="hidden" name="redirect-page-error" id="redirect-page-error" value="<?php echo get_permalink($page) ?>" />
+                <?php 
+                    if( get_permalink($page) === home_url()."/"){
+                        $valeur = "home";
+                    } else {
+                        $valeur = get_the_ID();
+                    }
+                    $redirect_value = "";
+                    if (isset($_GET["redirect"]) && $_GET["redirect"] == "invest") $redirect_value = "true";
+                ?>
+                <input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo $valeur; ?>" />   
+                <input type="hidden" name="redirect-page-investir" id="redirect-page-investir" value="<?php echo $redirect_value; ?>" />
+            </div>
           
             <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
             <a href="<?php echo get_permalink($page_forgotten->ID); ?>">(Mot de passe oubli&eacute;)</a>
-             <br />
-           
-
+            <br />
             <input type="hidden" name="testcookie" value="1" />
         </form>
 
@@ -63,9 +58,7 @@
                 </div>
             </div>
         </div>
-
         <br />
-
     </div>
     <div style="clear: both"></div>
 </div>

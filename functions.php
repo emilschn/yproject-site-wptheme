@@ -97,7 +97,7 @@ add_action( 'send_headers', 'varnish_safe_http_headers' );
 function yproject_front_end_login_fail($username){
         $page = $_POST['redirect-page-error']; 
         if($_POST['redirect-page-investir'] == "true"){
-            wp_redirect($page.'/?login=failed&redirect=invest#connexion_investir');
+            wp_redirect($page.'/?login=failed&redirect=invest#connexion');
         } else {
             wp_redirect($page.'/?login=failed#connexion');
         }
@@ -151,9 +151,12 @@ add_action('wp_logout', 'yproject_redirect_logout');
 // Rediriger une personne qui n'a rien rempli pour s'identifier 
 function _catch_empty_user( $username, $pwd ) {
 	if (empty($username)||empty($pwd)) {
-		$page = $_POST['redirect-page-error'];
-                wp_redirect($page.'?login=failed#connexion');
-		exit();
+		$page = $_POST['redirect-page-error']; 
+                if($_POST['redirect-page-investir'] == "true"){
+                    wp_redirect($page.'/?login=failed&redirect=invest#connexion');
+                } else {
+                    wp_redirect($page.'/?login=failed#connexion');
+                }
 	}
 }
 add_action( 'wp_authenticate', '_catch_empty_user', 1, 2 );
@@ -742,17 +745,11 @@ add_shortcode('yproject_lightbox', 'yproject_shortcode_lightbox');
 //Shortcodes lightbox Connexion 
 
 function yproject_shortcode_connexion_lightbox($atts, $content = '') {
-        $atts = shortcode_atts( array(
-            'redirect' => 'invest'
-        ), $atts );
 	ob_start();
-	locate_template('common/connexion-lightbox.php',true);
-	$content = ob_get_contents();
+            locate_template('common/connexion-lightbox.php',true);
+            $content = ob_get_contents();
 	ob_end_clean();
-        
 	echo do_shortcode('[yproject_lightbox id="connexion"]' .$content . '[/yproject_lightbox]');
-        echo do_shortcode('[yproject_lightbox id="connexion_investir"]' .$content . ' [/yproject_lightbox]');
-        
 }
 add_shortcode('yproject_connexion_lightbox', 'yproject_shortcode_connexion_lightbox');
 
