@@ -106,7 +106,7 @@ $campaign_id = $_GET['campaign_id'];
                             </div>
                             
                             <div class="button-help">
-                                <a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>"><?php _e('Statistiques généraux', 'yproject'); ?></a>
+                                <a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>"><?php _e('Statistiques générales', 'yproject'); ?></a>
 
                                 <a href="<?php echo get_permalink($pages_stats_votes->ID) . $campaign_id_param . $params_partial; ?>"><?php _e('Votes', 'yproject'); ?></a>
 
