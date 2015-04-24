@@ -183,7 +183,7 @@
 					<input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo get_the_ID();?>" />
 					<br />
 					<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-					(<a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)
+					<a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">(Mot de passe oubli&eacute;)</a>
 					<br /><br />
 
 					<label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" />&nbsp;<?php _e('Se souvenir de moi', 'yproject'); ?></label>

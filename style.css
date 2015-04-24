@@ -240,6 +240,32 @@ form.wdg-forms .small-margin {
 /*******************************************************************************
 * LIGHTBOX - CGU / DEJA CONNECTE
 *******************************************************************************/
+
+.login_fail{
+    margin-bottom: 10px;
+}
+#sidebar-login-form {
+    text-align: left;
+}
+
+#sidebar-login-form a{
+    color: #606060;
+    font-size: 11px;
+    font-style: italic;
+    margin-left: 150px
+}
+#sidebar-login-form label {
+    text-align: right;
+}
+
+#sidebar-login-form input{
+    margin: 5px;
+}
+
+#sidebar-login-form #submit-center {
+    margin-left: 150px
+}
+
 .wdg-lightbox {
 	background-color: rgba(0, 0, 0, 0.75);
 	top: 0px;
@@ -268,6 +294,9 @@ form.wdg-forms .small-margin {
 	background-color: #F2F2F2;
 	overflow-y: auto;
 	z-index: 4002;
+}
+.wdg-lightbox .wdg-lightbox-padder > div {
+	background-color: #F2F2F2 !important;
 }
 
 .wdg-lightbox .button {
