@@ -46,7 +46,7 @@ if (function_exists('bbp_get_forum_topic_count')) {
 }
 ?>
 
-<h2>Audience et int&eacute;ractions</h2>
+<h2>Audience et interactions</h2>
 Votre projet a &eacute;t&eacute; vu<br />
 <strong><?php echo $stats_views[0]['views']; ?></strong> fois en cette année, dont :<br />
 <strong><?php echo $stats_views_30days[0]['views']; ?></strong> fois sur les 30 derniers jours.<br />

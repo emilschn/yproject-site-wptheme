@@ -54,28 +54,10 @@ if ($can_modify) {
                         |
                         <a href="<?php echo get_permalink($page_manage_team->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'projet-gerer-equipe') { echo 'class="selected"'; } ?>><?php echo __('&Eacute;quipe', 'yproject'); ?></a>
                         |
-                        <a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'vote' || $current_page == 'statistiques-avancees') { echo 'class="selected"'; } ?>>Statistiques avanc&eacute;es</a>
                         <?php if ($group_link != '') : ?>
                         |
                         <a href="<?php echo $group_link; ?>" <?php if ($current_page == 'group') { echo 'class="selected"'; } ?>>Groupe d&apos;investisseurs</a>
                         <?php endif; ?>
                 </div>
-           
-                <?php
-                //Sous-menu avec statistiques avancées
-                if ($current_page == 'statistiques-avancees' || $current_page == 'statistiques-avancees-votes' || $current_page == 'statistiques-avancees-investissements') {
-                        $pages_stats_votes = get_page_by_path('statistiques-avancees-votes');
-                        $pages_stats_investments = get_page_by_path('statistiques-avancees-investissements');
-                ?>
-                        <div class="center" style="margin-top: 10px;">
-                                <a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'statistiques-avancees') { echo 'class="selected"'; } ?>>G&eacute;n&eacute;rales</a>
-                                |
-                                <a href="<?php echo get_permalink($pages_stats_votes->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'statistiques-avancees-votes') { echo 'class="selected"'; } ?>>Votes</a>
-                                |
-                                <a href="<?php echo get_permalink($pages_stats_investments->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'statistiques-avancees-investissements') { echo 'class="selected"'; } ?>>Investissements</a>
-                        </div>
-                <?php  
-                }
-                ?>
         </div>
 <?php }
