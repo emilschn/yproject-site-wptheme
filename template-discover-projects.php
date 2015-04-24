@@ -29,7 +29,7 @@ else {
 		//PROJETS EN COURS
 		$nb_collecte_projects = count(query_projects_collecte()); 
 		if ($nb_collecte_projects > 0) { ?>
-			<div class="part-title-separator">
+			<div class="part-title-separator mobile_hidden">
 				<span class="part-title">En cours de financement</span>
 			</div>
 
@@ -63,7 +63,7 @@ else {
 		$nb_preview_projects = count($preview_projects);
 		$nb_total_projects = $nb_vote_projects + $nb_preview_projects;
 		if ($nb_total_projects > 0) { ?>
-			<div class="part-title-separator">
+			<div class="part-title-separator mobile_hidden">
 				<span class="part-title">Prochainement</span>
 			</div>
 
@@ -96,7 +96,7 @@ else {
 
 		//PROJETS REUSSIS
 		?>
-		<div class="part-title-separator">
+		<div class="part-title-separator mobile_hidden">
 			<?php
 			$nb_funded_projects = count(query_projects_funded()); 
 			if ($nb_funded_projects > 0) { ?>
@@ -110,7 +110,7 @@ else {
 		<?php 
 		//PROJETS ECHOUES
 		?>
-		<div class="part-title-separator">
+		<div class="part-title-separator mobile_hidden">
 			<?php
 			$nb_archived_projects = count(query_projects_archive()); 
 			if ($nb_archived_projects > 0) { ?>

@@ -51,6 +51,17 @@ else {
 		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>');"<?php } ?>>
 			<?php echo $video_element; ?>
 		</div>
+		<div class="mobile-share only_on_mobile">
+			<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>" target="_blank">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.jpg" alt="logo facebook" />
+			</a>
+			<a href="http://twitter.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>&text='WEDOGOOD'" target="_blank">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.jpg" alt="logo twitter" />
+			</a>
+			<a href="https://plus.google.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>" target="_blank">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="logo google" />
+			</a>
+		</div>
 <?php
 	$cache_content_summary = ob_get_contents();
 	$WDG_cache_plugin->set_cache('project-content-summary-' . $post_campaign->ID, $cache_content_summary, 60*60*6, 1);
@@ -151,7 +162,7 @@ else {
 </div>
 <div id="project-description-title-padding"></div>
 
-<div class="part-title-separator">
+<div class="part-title-separator mobile_hidden">
 	<span class="part-title"> 
 		Description du projet
 	</span>
@@ -175,7 +186,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet.png" alt="logo projet" data-content="description"/>
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle projet"/>
 		<div id="project-content-description" class="projects-desc-content">
-			<h2>En quoi consiste le projet ?</h2>
+			<h2>En quoi consiste le projet&nbsp;?</h2>
 			<div class="zone-content">
 				<?php the_content(); ?>
 			</div>
@@ -195,7 +206,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>sociale.png" alt="logo social" data-content="societal_challenge" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris" />
 		<div id="project-content-societal_challenge" class="projects-desc-content">
-			<h2>Quelle est l&apos;utilit&eacute; soci&eacute;tale du projet ?</h2>
+			<h2>Quelle est l&apos;utilit&eacute; soci&eacute;tale du projet&nbsp;?</h2>
 			<div class="zone-content">
 				<?php 
 				$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
@@ -215,7 +226,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>economie.png" alt="logo economie" data-content="added_value" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-added_value" class="projects-desc-content">
-			<h2>Quelle est l&apos;opportunit&eacute; &eacute;conomique du projet ?</h2>
+			<h2>Quelle est l&apos;opportunit&eacute; &eacute;conomique du projet&nbsp;?</h2>
 			<div class="zone-content">
 				<?php 
 				$added_value = html_entity_decode($campaign->added_value()); 
@@ -234,7 +245,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>model.png" alt="logo modele" data-content="economic_model" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-economic_model" class="projects-desc-content">
-			<h2>Quel est le mod&egrave;le &eacute;conomique du projet ?</h2>
+			<h2>Quel est le mod&egrave;le &eacute;conomique du projet&nbsp;?</h2>
 			<div class="zone-content">
 				<?php 
 				$economic_model = html_entity_decode($campaign->economic_model()); 
@@ -254,7 +265,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>porteur.png" alt="logo porteur" data-content="implementation"/>
 		<img class="vertical-align-middle grey-triangle"src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-implementation" class="projects-desc-content">
-			<h2>Qui porte le projet ?</h2>
+			<h2>Qui porte le projet&nbsp;?</h2>
 			<div class="zone-content">
 				<?php 
 				$implementation = html_entity_decode($campaign->implementation()); 
@@ -269,5 +280,47 @@ $editor_params = array(
 		</div>
 	</div>
 </div>
+
+<div class="only_on_mobile">
+	<div class="reward-zone">
+		<div class="project-rewards">
+			<span>En &eacute;change de votre investissement</span>
+		</div>
+			
+		<div class="project-rewards">
+			<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?>
+			Vous recevrez une part de capital de cette entreprise.
+			<?php else: ?>
+			Vous recevrez une partie du chiffre d'affaires de ce projet.
+			<?php endif; ?>
+		</div>
+		
+		<?php if ($campaign->rewards() != ""): ?>
+		<div id="project-rewards-custom" class="project-rewards"><?php echo $campaign->rewards(); ?></div>
+		<?php endif; ?>
+		
+		<div id="invest-button">
+			<?php $page_invest = get_page_by_path('investir'); ?>
+			<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1" class="description-discover">Investir sur ce projet</a>
+		</div>
+	</div>
+	<div class="part-title-separator">
+		<span class="part-title"> 
+			Partager
+		</span>
+	</div>
+	<div class="mobile-share">
+		<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>" target="_blank">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.jpg" alt="logo facebook" />
+		</a>
+		<a href="http://twitter.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>&text='WEDOGOOD'" target="_blank">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.jpg" alt="logo twitter" />
+		</a>
+		<a href="https://plus.google.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>" target="_blank">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="logo google" />
+		</a>
+	</div>
+</div>
+
 </div>
 </div>

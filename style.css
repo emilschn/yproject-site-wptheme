@@ -1913,14 +1913,11 @@ div#home_bottom h1 {
 }
 
 .projects-more{
-    color: #FF494C;
+    background: url("images/responsive-plus.png") no-repeat center center;
     position: relative;
     cursor: pointer;
-    min-height: 20px;
-    line-height: 20px;
-    padding: 7px 7px 7px 0px;
-    font-weight: bold;
-    font-size: 13px;
+    width: 100%;
+    height: 28px;
 }
 #project-subtitle{
     position: absolute;
