@@ -14,7 +14,6 @@
 	</div>
 </div>
 <?php endif; ?>
-
 <header class="header_home">
 	<div class="center">
 		<div id="welcome_text">

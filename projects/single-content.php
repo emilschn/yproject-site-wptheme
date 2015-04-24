@@ -151,7 +151,7 @@ else {
 </div>
 <div id="project-description-title-padding"></div>
 
-<div class="part-title-separator">
+<div id="description_du_projet" class="part-title-separator">
 	<span class="part-title"> 
 		Description du projet
 	</span>
@@ -278,9 +278,9 @@ $editor_params = array(
 	?>
 
 	<div class="align-center">
-		<p>Vous devez &ecirc;tre inscrit pour acc&eacute;der à la totalit&eacute; du projet</p>
+		<p>Vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet.</p>
 		<a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="button">Inscription</a>
-		<a href="#connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">Connexion</a>
+		<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">Connexion</a>
 		<?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
 		<br /><br />
 	</div>
