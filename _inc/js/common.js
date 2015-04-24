@@ -180,6 +180,9 @@ YPUIFunctions = (function($) {
                         $("#connexion").click(function(){
                            $("#redirect-page-investir").attr("value","");
                         });
+                        $("#forum").click(function(){
+                           $("#redirect-page-investir").attr("value","forum");
+                        });
 		},
 		
 		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué

@@ -98,6 +98,8 @@ function yproject_front_end_login_fail($username){
         $page = $_POST['redirect-page-error']; 
         if($_POST['redirect-page-investir'] == "true"){
             wp_redirect($page.'/?login=failed&redirect=invest#connexion');
+        } else if($_POST['redirect-page-investir'] == "forum") {
+             wp_redirect($page.'/?login=failed&redirect=forum#connexion');
         } else {
             wp_redirect($page.'/?login=failed#connexion');
         }
@@ -121,6 +123,10 @@ function yproject_redirect_login() {
             if (isset($_POST['redirect-page'])) {
                     if( $page_id != "home" && $_POST['redirect-page-investir'] == "true"){
                         $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
+                        wp_redirect($page);
+                    } else if ($page_id != "home" && $_POST['redirect-page-investir'] == "forum"){
+                        $forum = get_page_by_path('forum');
+                        $page = get_permalink($forum->ID).'?campaign_id='.$page_id;   
                         wp_redirect($page);
                     } else if ($page_id == "home"){ 
                          wp_redirect(home_url());

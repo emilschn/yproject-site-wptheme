@@ -27,7 +27,14 @@
                         $valeur = get_the_ID();
                     }
                     $redirect_value = "";
-                    if (isset($_GET["redirect"]) && $_GET["redirect"] == "invest") $redirect_value = "true";
+                    if (isset($_GET["redirect"])){
+                        if($_GET["redirect"] == "invest"){
+                            $redirect_value = "true";
+                        } else {
+                            $redirect_value = "forum";    
+                        }
+                    }
+                         
                 ?>
                 <input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo $valeur; ?>" />   
                 <input type="hidden" name="redirect-page-investir" id="redirect-page-investir" value="<?php echo $redirect_value; ?>" />
