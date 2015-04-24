@@ -29,6 +29,7 @@ function wdg_get_project_vote_results($camp_id) {
 		'count_more_info_finance' => 0,
 		'count_more_info_other' => 0,
 		'string_more_info_other' => '',
+                'objective' => $campaign->minimum_goal(),
 		'list_advice' => array()
 	);
 	
