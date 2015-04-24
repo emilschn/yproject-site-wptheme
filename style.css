@@ -1615,8 +1615,10 @@ div#home_bottom h1 {
     margin-top: 4px;
 }
 #projects-stats-content .project_full_percent{
-    font-size: 26px;
+    margin-top: -28px;
+    margin-left: -20px;
     padding-top: 0px;
+    font-size: 26px;
 }
 .post_bottom_buttons #invest-button, .post_bottom_buttons #participate-button{
     position: absolute;
@@ -1799,7 +1801,7 @@ div#home_bottom h1 {
     vertical-align: top;
     width: 36px;
     height: 36px;
-    content: "";
+    content: "ï…˜";
 }
 
 .ui-button.ui-dialog-titlebar-close {
@@ -2197,7 +2199,7 @@ div#home_bottom h1 {
 }
 
 .video-zone.editable:before {
-    content: "Image d'aperçu / Vidéo";
+    content: "Image d'aperÃ§u / VidÃ©o";
 }
 .video-zone.editable {
     background-color: #F2F2F2;
@@ -2221,7 +2223,7 @@ div#home_bottom h1 {
     font-weight: bold;
 }
 #wdg-edit-project.edit-button:before {
-    content: "Mode édition";
+    content: "Mode Ã©dition";
 }
 #wdg-edit-project.edit-button-validate:before {
     content: "Mode normal";
@@ -2384,7 +2386,7 @@ div#home_bottom h1 {
 }
 
 /*******************************************************************************
-* ACTIVITY LIST  //TODO : voir ce qui peut être regroupé
+* ACTIVITY LIST  //TODO : voir ce qui peut Ãªtre regroupÃ©
 *******************************************************************************/  
 .com-activity-list, .home-activity-list {
     -webkit-padding-start: 0px;

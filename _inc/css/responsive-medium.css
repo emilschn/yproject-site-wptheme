@@ -77,13 +77,16 @@
 		width: 230px !important;
 	}
 	#projects-stats-content .project_full_percent {
-		margin-left: -230px;
+		position: relative;
+		display: block;
+		margin-top: 0px !important;
+		margin-left: 0px !important;
 		background-color: #333;
 		color: #FFF;
-		margin-top: 4px;
 		font-size: 21px !important;
-		padding: 0px 10px 0px 5px !important;
+		min-width: 45px !important;
 	}
+	#projects-stats-content .project_full_progressbar { display: none; }
 	#invest-button .description-discover { padding: 14px 0px !important; }
 	#projects-left-desc {
 		width: 420px !important;

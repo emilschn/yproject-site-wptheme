@@ -83,7 +83,7 @@ else {
 					</div>
 					<div class="post_bottom_infos_item">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-						<span class="mobile_hidden"><?php echo $campaign->current_amount() . ' financés sur ' . $campaign->minimum_goal(true); ?></span>
+						<span class="mobile_hidden"><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true); ?></span>
 						<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
 					</div>
 					<div class="post_bottom_infos_item only_on_mobile">
