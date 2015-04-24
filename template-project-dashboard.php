@@ -38,6 +38,14 @@ $campaign_id = $_GET['campaign_id'];
                         $pages_stats_investments = get_page_by_path('statistiques-avancees-investissements');
                         $pages_stats_votes = get_page_by_path('statistiques-avancees-votes');
                         $pages_list_invest = get_page_by_path('liste-investisseurs');
+                        
+                        /**************Données communauté**************/
+                        //Récupération du nombre de j'y crois
+                            $nb_jcrois = $campaign->get_jycrois_nb();
+                        //Récupération du nombre de votants
+                            $nb_votes = $campaign->nb_voters();
+                        //Récupération du nombre d'investisseurs
+                            $nb_invests = $campaign->backers_count();
                         ?>
 
                         <?php if ($can_modify): ?>
@@ -46,34 +54,33 @@ $campaign_id = $_GET['campaign_id'];
                             </div>
                             
                             <div class="blocks-list">
+                                
+                                <div id="block-investors" class="block">
+                                    <div class="head">Investisseurs</div>
+                                    <div class="body">
+                                    <p>
+                                        <img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
+                                        <?php echo $nb_invests?> investissement<?php if($nb_invests>1){echo 's';}?></p>
+                                    <p><?php echo $campaign->current_amount() . ' financés sur ' . $campaign->minimum_goal(true) ; ?></p>
+                                    </div>
+                                    <div class="foot">
+                                        <a href="<?php echo get_permalink($pages_list_invest->ID) . $campaign_id_param . $params_partial; ?>">&#x1f50e; Liste des investisseurs</a>
+                                    </div>
+                                </div>
+                                
                                 <div id ="block-community" class="block">
-                                    <?php
-                                    //Récupération du nombre des j'y crois
-                                        $table_jcrois = $wpdb->prefix . "jycrois";
-                                        $result_jcrois = $wpdb->get_results( "SELECT count(*) as nbbelieve FROM ".$table_jcrois." WHERE campaign_id = ".$_GET['campaign_id'] );
-                                        $nb_jcrois = ($result_jcrois[0]->nbbelieve);
-                                        
-                                    //Récupération de la liste des votants
-                                        $table_votes = $wpdb->prefix . "ypcf_project_votes";
-                                        $result_votes = $wpdb->get_results( "SELECT count(*) as nbvote FROM ".$table_votes." WHERE post_id = ".$_GET['campaign_id'] );
-                                        $nb_votes = ($result_votes[0]->nbvote);
-                                        
-                                    //Récupération de la liste des investisseurs
-                                        $campaign = atcf_get_campaign( $post_campaign );
-                                        $payments_data = $campaign->payments_data();
-                                        $nb_invests = count($payments_data);
-                                    ?>
                                     <div class="head">Communauté</div>
                                     <div class="body">
                                     <p><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png"/>
-                                        <?php echo $nb_jcrois?> y croient</p>
+                                        <strong><?php echo $nb_jcrois?></strong> y croi<?php if($nb_jcrois>1){echo 'en';}?>t</p>
                                     <p><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png"/>
-                                        <?php echo $nb_votes?> ont voté</p>
+                                        <strong><?php echo $nb_votes?></strong> <?php if($nb_votes>1){echo 'ont';} else {echo 'a';}?> voté</p>
                                     <p><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png"/>
-                                        <?php echo $nb_invests?> ont investi</p>
+                                        <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> investi</p>
                                     </div>
                                     <div class="foot">&#9993 Envoyer un message</div>
                                 </div>
+                                
                                 <div class="clear"></div>
                             </div>
 
