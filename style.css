@@ -2867,7 +2867,7 @@ ul.invest-mean-payment li img {
     overflow-y: hidden;
 }
 
-//Affichage permanent de la barre de scroll #StackOverflow
+/****Affichage permanent du scroll sur Mac et ios******/
 #tablescroll::-webkit-scrollbar {
     -webkit-appearance: none;
 }
@@ -2889,8 +2889,8 @@ ul.invest-mean-payment li img {
 #tablescroll::-webkit-scrollbar-track { 
     background-color: #fff; 
     border-radius: 8px; 
-}
-//////////////////////////
+} 
+/***************************************************/
 
 #display-options-col-menu {
     display:none;
