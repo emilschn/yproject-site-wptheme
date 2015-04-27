@@ -2246,9 +2246,6 @@ div#home_bottom h1 {
 /*******************************************************************************
 * DASHBOARD PAGE
 *******************************************************************************/
-#dashboard .currentstep span span {
-    font-weight: bold;
-}
 #dashboard .button-help {
     margin: 15px 0px;
 }
@@ -2278,32 +2275,53 @@ div#home_bottom h1 {
     max-width: 455px;
     margin: 5px 10px;
 }
-
-#dashboard .block .head {
-    text-align: center;
-    color: #FFF;
-    background-color: #FF494C;
-    text-transform: uppercase;
-    padding: 12px 5px 5px 5px;
-    font-family: "BebasNeue";
-    font-size: 30px;
+#dashboard .large-block {
+    float: left;
+    width: 100%;
+    max-width: 930px;
+    margin: 5px 10px;
 }
 
-#dashboard .block .body {
+#dashboard .block .head,
+#dashboard .large-block .head{
+    text-transform: uppercase;
+    font-family: "BebasNeue";
+    font-size: 30px;
+    color: #FF494C;
+    text-align: center;
+    padding: 15px 5px 2px 5px;
+}
+#dashboard .block .body,
+#dashboard .large-block .body{
     padding: 10px;
     background-color: #EEE
 }
-
-#dashboard .block .foot {
+#dashboard .block .foot,
+#dashboard .large-block .foot{
     text-align: center;
     padding: 5px;
     color: #FFF;
     background-color: #333;
 }
+    #dashboard .block .foot a,
+    #dashboard .large-block .foot a{
+        display: block;
+        color: #FFF;
+}
 
-#dashboard .block .foot a {
-    display: block;
-    color: #FFF
+#dashboard #block-summary .body .current-step {
+    text-align:center;
+}
+#dashboard #block-summary .body .current-step span {
+    opacity:0.5;
+    margin: 0px 10px;
+    display: inline-block;
+    min-width: 100px;
+}
+#dashboard #block-summary .body #current {
+    opacity: 1;
+    color: #FF494C;
+    font-weight: bold;
 }
 
 #dashboard #block-community p,
@@ -2311,6 +2329,13 @@ div#home_bottom h1 {
     text-align: center;
     font-size: 120%;
     margin: 10px 0px;
+}
+
+#dashboard .bloc-vote-indicator {
+    display: inline-block;
+    border: 1px solid;
+    padding: 5px;
+    margin: 2px
 }
 
 /*******************************************************************************
