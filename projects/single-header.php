@@ -32,48 +32,66 @@ if ($cache_header_right !== FALSE) { echo $cache_header_right; }
 else {
 	ob_start();
 ?>
-			<div class="projects-description-separator" <?php if($vote_status=='preview')echo 'style="opacity:0;"'?>></div>
+			<div class="projects-description-separator mobile_hidden" <?php if($vote_status=='preview')echo 'style="opacity:0;"'?>></div>
 
 			<?php
 			if ($vote_status == 'collecte' || $vote_status == 'funded' || $vote_status == 'archive') {
 				$percent = min(100, $campaign->percent_minimum_completed(false));
 				$width = 250 * $percent / 100;
 			?>
-				<div>
+				<div class="progress_zone">
 					<div class="project_full_progressbg">
-						<div class="project_full_progressbar" style="width:<?php echo $width; ?>px">
+						<div class="project_full_progressbar" style="width:<?php echo $percent; ?>%">
 							&nbsp;
 						</div>
+						<span class="project_full_percent" style="width:<?php echo $percent; ?>%"><?php echo $campaign->percent_minimum_completed(); ?></span>
 					</div>
-					<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
 				</div>
-				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
-					<?php $backers_count = $campaign->backers_count(); ?>
-					<?php echo $backers_count; ?> personne<?php if ($backers_count > 1) { echo 's ont'; } else { echo ' a'; } ?> d&eacute;j&agrave; financ&eacute; ce projet
+				<div class="logos_zone">
+					<div class="post_bottom_infos_item only_on_mobile">
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />
+						<?php 
+						$campaign_location = $campaign->location();
+						$exploded = explode(' ', $campaign_location);
+						if (count($exploded) > 1) $campaign_location = $exploded[0];
+						echo (($campaign_location != '') ? $campaign_location : 'France'); 
+						?>
+					</div>
+					<div class="post_bottom_infos_item">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
+						<?php $backers_count = $campaign->backers_count(); ?>
+						<span class="mobile_hidden"><?php echo $backers_count; ?> personne<?php if ($backers_count > 1) { echo 's ont'; } else { echo ' a'; } ?> d&eacute;j&agrave; financ&eacute; ce projet</span>
+						<span class="only_on_mobile"><?php echo $backers_count; ?></span>
+					</div>
+					<div class="post_bottom_infos_item" <?php if($vote_status=='funded' || $vote_status == 'archive'){echo "style=opacity:0.5";}?>>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
+						<span class="mobile_hidden"><?php
+						$days_remaining = $campaign->days_remaining();
+						switch ($days_remaining) { 
+							case 1:
+								?>Plus que <strong>1</strong> jour !<?php
+								break;
+							case 0:
+								?>Collecte termin&eacute;e !<?php
+								break;
+							default:
+								?>Plus que <strong><?php echo $days_remaining; ?></strong> jours !<?php
+								break;
+						}
+						?></span>
+						<span class="only_on_mobile"><?php echo $days_remaining; ?></span>
+					</div>
+					<div class="post_bottom_infos_item">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
+						<span class="mobile_hidden"><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true); ?></span>
+						<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
+					</div>
+					<div class="post_bottom_infos_item only_on_mobile">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/good.png" alt="logo main" /><br />
+						<span><?php echo $campaign->get_jycrois_nb(); ?></span>
+					</div>
+					<div class="projects-description-separator mobile_hidden"></div>
 				</div>
-				<div class="post_bottom_infos_item" <?php if($vote_status=='funded' || $vote_status == 'archive'){echo "style=opacity:0.5";}?>>
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
-					<?php
-					$days_remaining = $campaign->days_remaining();
-					switch ($days_remaining) { 
-						case 1:
-							?>Plus que <strong>1</strong> jour !<?php
-							break;
-						case 0:
-							?>Collecte termin&eacute;e !<?php
-							break;
-						default:
-							?>Plus que <strong><?php echo $days_remaining; ?></strong> jours !<?php
-							break;
-					}
-					?>
-				</div>
-				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-					<?php echo $campaign->current_amount() . ' financés sur ' . $campaign->minimum_goal(true) ; ?>
-				</div>
-				<div class="projects-description-separator"></div>
 
 			<?php 
 			} else if ($vote_status == 'vote') {
@@ -156,7 +174,7 @@ else {
 //FIN CACHE MENU
 //*******************
 ?>
-			<div class="post_bottom_buttons">
+			<div class="post_bottom_buttons mobile_hidden">
 				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) { ?> 
 					<div id="invest-button">
 						<?php if ( is_user_logged_in() ): ?> 
@@ -241,7 +259,7 @@ else {
 				<?php endif; ?>
 			</div>
 
-			<div id="white-background" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>></div>
+			<div id="white-background" class="mobile_hidden" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>></div>
 
 			<?php if ($vote_status == 'vote') { ?>
 			<div id="vote-form">
@@ -277,7 +295,7 @@ else {
 					<p><?php $title = get_the_title(); if (strpos($title, 'span') === FALSE) { $title = '<span>' . $title . '</span>'; } echo $title; ?></p>
 				</div>
 				<p id="subtitle"><?php echo $campaign->subtitle(); ?></p>
-				<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="fond projet" class="bg-project" />
+				<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="fond projet" class="bg-project mobile_hidden" />
 				
 				<?php
 					$current_page = 'http';
@@ -313,7 +331,7 @@ else {
 					}
 					
 				?>
-				<nav>
+				<nav class="mobile_hidden">
 					<ul>
 						<li><a href="<?php echo $project_link; ?>" <?php if($current_page==$project_link) echo 'class="current"'; ?>>Le projet</a></li>
 						<li><a href="<?php echo $news_link; ?>" <?php if($current_page==$news_link) echo 'class="current"'; ?>>Actualit&eacute;<?php echo $nb_cat; ?></a></li>

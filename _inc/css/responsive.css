@@ -6,6 +6,12 @@
 	.only_on_mobile { display: block !important; }
 	.center { width: 100% !important; }
 	#container { padding-top: 0px !important; }
+	.indent { margin-left: 0px !important; }
+	
+	.part-title-separator {
+		width: 90% !important;
+		margin: 0px 5% !important;
+	}
 
 /*******************************************************************************
 * HEADER MENU
@@ -153,11 +159,6 @@
 	}
 	
 /*******************************************************************************
-* PROJECT SHORT - SEPARATOR
-*******************************************************************************/
-	.part-title-separator { display: none !important; }
-	
-/*******************************************************************************
 * PROJECT SHORT - SMALL
 *******************************************************************************/
 	.home-small-project { 
@@ -201,5 +202,106 @@
 	.home-large-project .description-zone .description-discover {
 		position: relative !important;
 		bottom: auto !important;
+	}
+	
+/*******************************************************************************
+* PROJECT PAGE
+*******************************************************************************/
+	#head-image {
+		top: 37px !important;
+		height: 150px !important;
+		background-image: url("../../images/header.jpg");
+	}
+	#head-content {
+		bottom: auto !important;
+		width: 100% !important;
+	}
+	#head-content #title, #head-content #subtitle {
+		position: relative !important;
+		bottom: auto !important;
+		width: 90% !important;
+		margin: 0% 5% !important;
+		color: #FFFFFF;
+	}
+	#head-content #title p { margin: 10px 0px !important; }
+	#projects-stats { margin-top: 150px; }
+	#projects-stats-content {
+		position: inherit !important;
+		padding-top: 15px;
+		width: 100% !important;
+		height: 125px !important;
+		background: #EEECED !important;
+		text-align: center;
+	}
+	#projects-stats-content .project_full_percent {
+		position: relative;
+		display: block;
+		margin-top: 0px !important;
+		margin-left: 0px !important;
+		padding: 0px !important;
+		color: #FFFFFF;
+		font-size: 21px !important;
+		background: #FF494C;
+		min-width: 45px !important;
+	}
+	#projects-stats-content .progress_zone {
+		margin-top: 70px !important;
+		width: 250px;
+		margin: auto;
+	}
+	#projects-stats-content .project_full_progressbg {
+		margin-left: 0px !important;
+		background: #FFF;
+	}
+	#projects-stats-content .project_full_progressbar { display: none; }
+	#projects-stats-content .logos_zone { margin-top: -100px; }
+	#projects-stats-content .logos_zone .post_bottom_infos_item { display: inline-block !important; }
+	#projects-left-desc, #project-summary-container #projects-summary {
+		width: 100% !important;
+		height: auto !important;
+	}
+	#project-summary-container {
+		margin: 10px !important;
+		height: auto !important;
+	}
+	#projects-left-desc .video-zone {
+		margin: 10px 0px !important;
+		width: 100% !important;
+	}
+	#projects-right-desc { display: none; }
+	#post_bottom_content .projects-desc-item {
+		width: 90%;
+		margin: 25px 5%;
+	}
+	#post_bottom_content .projects-desc-item .project-content-icon, #post_bottom_content .projects-desc-item .grey-triangle { display: none; }
+	#post_bottom_content .projects-desc-item .projects-desc-content {
+		width: 100% !important;
+		left: 0px !important;
+		margin-bottom: 0px !important;
+	}
+	#post_bottom_content .projects-desc-item .projects-desc-content p { padding: 0px 10px !important; }
+	#post_bottom_content .projects-desc-item .projects-desc-content p .projects-more {
+		position: absolute;
+		margin-left: -10px;
+	}
+	#post_bottom_content .projects-desc-item .projects-desc-content h2 {
+		margin: 15px 10px !important;
+		text-align: center;
+		font-size: 18px;
+		text-transform: none;
+	}
+	.mobile-share { text-align: center; }
+	.reward-zone {
+		background-color: #EEECED;
+		padding: 20px;
+	}
+	.reward-zone .project-rewards {
+		text-align: center;
+		line-height: 1.3em;
+		padding-bottom: 5px;
+	}
+	.reward-zone #invest-button a {
+		font-size: 15px;
+		font-weight: bold;
 	}
 }
