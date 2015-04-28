@@ -49,38 +49,36 @@ $campaign_id = $_GET['campaign_id'];
                             <div class="currentstep">
                                 <span><span><?php _e('Etape en cours :', 'yproject'); ?></span> <?php _e(ATCF_Campaign::$status_list[$campaign->campaign_status()], 'yproject'); ?></span>
                             </div>
-
+                            
                             <div class="button-help">
-                                <a href="<?php echo get_permalink($page_particular_terms->ID); ?>" target="_blank"><?php _e('Conditions particuli&egrave;res', 'yproject'); ?></a>
+                                <div class="head-help"><?php _e('Statistiques','yproject'); ?></div>
+                                <ul>
+                                    <a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>"><li><?php _e('Statistiques générales', 'yproject'); ?></li></a>
 
-                                <a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><?php _e('Guide de campagne', 'yproject'); ?></a>
+                                    <a href="<?php echo get_permalink($pages_stats_votes->ID) . $campaign_id_param . $params_partial; ?>"><li><?php _e('Votes', 'yproject'); ?></li></a>
 
-                                <?php if ($campaign->google_doc() != ''): ?>
+                                    <a href="<?php echo get_permalink($pages_stats_investments->ID) . $campaign_id_param . $params_partial; ?>"><li><?php _e('Investissements', 'yproject'); ?></li></a>
+                                
+                                    <a href="<?php echo get_permalink($pages_list_invest->ID) . $campaign_id_param . $params_partial; ?>"><li><?php _e('Liste des investisseurs', 'yproject'); ?></li></a>
+                                </ul>
+                                <div class="clear"></div>
+                            </div>
+                           
+                            <div class="button-help">
+                                <div class="head-help"><?php _e('Informations','yproject'); ?></div>
+                                <ul>
+                                <a href="<?php echo get_permalink($page_particular_terms->ID); ?>" target="_blank"><li><?php _e('Conditions particuli&egrave;res', 'yproject'); ?></li></a>
+
+                                <a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><li><?php _e('Guide de campagne', 'yproject'); ?></li></a>
+                                </ul>
+                            </div>
+                        <div class="clear"></div>
+                        <?php if ($campaign->google_doc() != ''): ?>
                                     <a href="<?php echo $campaign->google_doc(); ?>/edit" target="_blank" class="button"><?php _e('Ouvrir le document de gestion de campagne', 'yproject'); ?></a>
                                 <?php endif; ?>
 
                                 <a href="<?php echo $news_link; ?>" class="button"><?php _e('Publier une actualit&eacute;', 'yproject'); ?></a>
                                 <div class="clear"></div>
-                            </div>
-                        
-                            <div class="part-title-separator">
-                                <span class="part-title"><?php _e('Statistiques','yproject'); ?></span>
-                            </div>
-                            
-                            <div class="button-help">
-                                <a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>"><?php _e('Statistiques généraux', 'yproject'); ?></a>
-
-                                <a href="<?php echo get_permalink($pages_stats_votes->ID) . $campaign_id_param . $params_partial; ?>"><?php _e('Votes', 'yproject'); ?></a>
-
-                                <a href="<?php echo get_permalink($pages_stats_investments->ID) . $campaign_id_param . $params_partial; ?>"><?php _e('Investissements', 'yproject'); ?></a>
-                                
-                                <a href="<?php echo get_permalink($pages_list_invest->ID) . $campaign_id_param . $params_partial; ?>"><?php _e('Liste des investisseurs', 'yproject'); ?></a>
-
-                                <!--div class ="block">
-                                     Bloc libre
-                                </div-->
-                                <div class="clear"></div>
-                            </div>
 
                             <?php if ($campaign->google_doc() != ''): ?>
                                 <div class="google-doc">
