@@ -6,19 +6,18 @@
             <?php } ?>
         </div>
         <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url('wp-login.php', 'login_post'); ?>" method="post">
-            <label for="identifiant" class="standard-label"><?php _e('Identifiant :', 'yproject'); ?></label>
-            <input id="identifiant" type="text" name="log" class="input" placeholder="Identifiant" value="<?php if (isset($user_login)) echo esc_attr(stripslashes($user_login)); ?>" />
+            <input id="identifiant" type="text" name="log" class="margin-left" placeholder="Identifiant ou e-mail" value="<?php if (isset($user_login)) echo esc_attr(stripslashes($user_login)); ?>" />
             <br />
 
-            <label for="password" class="standard-label"><?php _e('Mot de passe :', 'yproject'); ?></label>
-            <input id="password" type="password" name="pwd" class="input" value="" /> 
-            
+            <input id="password" type="password" name="pwd" class="margin-left" placeholder="Mot de passe" value="" />
             <br />
+	    
+	    <input id="sidebar-rememberme" type="checkbox" name="rememberme" class="margin-left" value="forever" />
+	    <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
+	    <br />
+            
             <div id="submit-center">
                 <input type="submit"  name="wp-submit" id="sidebar-wp-submit" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
-                <input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" />
-                <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
-                <br />
                 <input type="hidden" name="redirect-page-error" id="redirect-page-error" value="<?php echo get_permalink($page) ?>" />
                 <?php 
                     if( get_permalink($page) === home_url()."/"){
@@ -60,7 +59,7 @@
         
         <div id="connexion_facebook_container">
             <div class="post_bottom_buttons_connexion" >
-                <div id="submenu_item_connection_register" class="dark">
+                <div id="submenu_item_connection_register" class="dark" style="text-align: left; background-color: #3E3E40;">
                     <a href="<?php echo get_permalink($page_connexion_register->ID); ?>"><img width="25" height="25" src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" alt="triangle blanc"><span style="font-size: 9pt; vertical-align: 8px; color: #FFF; ">Cr&eacute;er un compte</span></a>
                 </div>
             </div>

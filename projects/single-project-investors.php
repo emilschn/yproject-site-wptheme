@@ -10,6 +10,7 @@ if ($campaign->current_user_can_edit()) {
 ?>
 		
 <h3>Liste des investisseurs</h3>
+<i>Si vous envoyez un mail group&eacute; &agrave; vos investisseurs, pensez &agrave; les mettre dans le champ CCI, pour qu&apos;ils n&apos;aient pas acc&egrave;s aux adresses des autres.</i><br /><br />
 
 <?php
         $classcolonnes = array('coluname',

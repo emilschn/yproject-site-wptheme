@@ -216,6 +216,7 @@ form.wdg-forms .small-margin {
 }
 .standard-form input[type=text] { margin-bottom: 5px; }
 .standard-form input[type=password] { margin-bottom: 3px; }
+.standard-form input.margin-left { margin-left: 140px !important; }
 .standard-form input[type=submit] {
     background: none repeat scroll 0 0 #333333;
     border: medium none;
