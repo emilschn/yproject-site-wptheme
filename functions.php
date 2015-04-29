@@ -448,7 +448,7 @@ function print_user_projects(){
 			  	$payment_status = ypcf_get_updated_payment_status($post->ID);
 				$contractid = ypcf_get_signsquidcontractid_from_invest($post->ID);
 				$signsquid_infos = signsquid_get_contract_infos_complete($contractid);
-				$signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
+				$signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos, edd_get_payment_amount( $post->ID ));
 				$payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
 
 				$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);

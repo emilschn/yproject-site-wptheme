@@ -115,7 +115,7 @@ get_header();
 				
 				$contractid = ypcf_get_signsquidcontractid_from_invest($item['ID']);
 				$signsquid_infos = signsquid_get_contract_infos_complete($contractid);
-				$signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
+				$signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos, edd_get_payment_amount( $item['ID'] ));
 				if ($contractid == '' && $mangopay_is_completed == 'Oui' && $mangopay_is_succeeded == 'Oui') {
 //					$contract_id = ypcf_create_contract($item['ID'], $download_id, $item['user']);
 				}
