@@ -200,6 +200,15 @@ YPUIFunctions = (function($) {
                                 }
                             });
                         }
+                        $("#investir").click(function(){
+                           $("#redirect-page-investir").attr("value","true");
+                        }); 
+                        $("#connexion").click(function(){
+                           $("#redirect-page-investir").attr("value","");
+                        });
+                        $("#forum").click(function(){
+                           $("#redirect-page-investir").attr("value","forum");
+                        });
 		},
 		
 		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué
@@ -527,7 +536,7 @@ WDGProjectPageFunctions=(function($) {
 					$(this).css("cursor", "pointer");
 					var sDisplay = '';
 					if (!WDGProjectPageFunctions.isInit && WDGProjectPageFunctions.currentDiv === 0) sDisplay = 'style="display:none"';
-					var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'>Lire plus !</div>';
+					var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'></div>';
 					$(this).find('div *:lt(1)').append(sProjectMore);
 					$(this).click(function(){
 						WDGProjectPageFunctions.clickItem($(this));
