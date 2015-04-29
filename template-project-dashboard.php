@@ -54,11 +54,28 @@ $campaign_id = $_GET['campaign_id'];
                         
                         //Recuperation donnees d'investissement
                         locate_template( array("requests/investments.php"), true );
-                        $investments_list = wdg_get_project_investments($campaign_id, TRUE);
-                        //print_r($investments_list);
-                        foreach ( $investments_list['payments_data'] as $item ) {
-                            
+                        $investments_list = $campaign->payments_data();
+                        
+                        /****Liste des montants cumulés triés par leur date****/
+                        /*
+                        $datesinvest = array();
+                        $amountinvest = array();
+                        
+                        foreach ( $investments_list as $item ) {
+                            $datesinvest[]=$item['date'];
+                            $amountinvest[]=$item['amount'];
                         }
+                        $cumulamount = array_combine($datesinvest, $amountinvest);
+                        
+                        sort($datesinvest);
+                        
+                        for($i=1; $i<count($datesinvest); $i++){
+                            $cumulamount[$datesinvest[$i]]=$cumulamount[$datesinvest[$i-1]]+$cumulamount[$datesinvest[$i]];
+                        }
+                        ksort($cumulamount);*/
+                        /******************************************************/
+                        
+                        
                         ?>
 
                         <?php if ($can_modify): ?>
@@ -67,47 +84,44 @@ $campaign_id = $_GET['campaign_id'];
                             </div>
                             
                             <div class="blocks-list">
-                                <div id="block-summary" class="large-block">
-                                    <div class="head">Avancement du projet</div>
-                                    <div class="body">
-                                        <div class="current-step">
-                                            <span <?php if($campaign->campaign_status()==='preparing'){echo 'id="current"';} ?>>Pr&eacute;paration </span>
-                                            <span <?php if($campaign->campaign_status()==='preview'){echo 'id="current"';} ?>>Avant-premi&egrave;re </span>
-                                            <span <?php if($campaign->campaign_status()==='vote'){echo 'id="current"';} ?>>Vote </span>
-                                            <span <?php if($campaign->campaign_status()==='collecte'){echo 'id="current"';} ?>>Collecte </span>
-                                            <span <?php if($campaign->campaign_status()==='funded'){echo 'id="current"';} ?>>R&eacute;alisation</span>
-                                        </div>
-                                        <a class="button" href="<?php echo get_permalink($page_parameters->ID) . $campaign_id_param . $params_partial; ?>" >Param&egrave;tres</a>
+                                <div id="block-summary" >
+                                    <div class="current-step">
+                                        <span <?php if($campaign->campaign_status()==='preparing'){echo 'id="current"';} ?>>Pr&eacute;paration </span>
+                                        <span <?php if($campaign->campaign_status()==='preview'){echo 'id="current"';} ?>>Avant-premi&egrave;re </span>
+                                        <span <?php if($campaign->campaign_status()==='vote'){echo 'id="current"';} ?>>Vote </span>
+                                        <span <?php if($campaign->campaign_status()==='collecte'){echo 'id="current"';} ?>>Collecte </span>
+                                        <span <?php if($campaign->campaign_status()==='funded'){echo 'id="current"';} ?>>R&eacute;alisation</span>
                                     </div>
                                 </div>
+                                <br/>
                                 
                                 <div id="block-stats" class="large-block">
                                     <div class="head">Statistiques</div>
                                     <div class="body">
-                                        <div id="vote-piechart"><canvas id="canvas-pie" width="400" height="200"></canvas></div>
-                                        <script type="text/javascript">
-                                            jQuery(document).ready( function($) {
-                                                    var ctxPie = $("#canvas-pie").get(0).getContext("2d");
-                                                    var dataPie = [
-                                                        {value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "Oui"}, 
-                                                        {value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: "Non"}
-                                                    ];
-                                                    var optionsPie = {
-                                                        legend: true,
-                                                        legendBorders: false,
-                                                        inGraphDataShow : true
-                                                    };
-                                                    var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
-                                            });
-                                        </script>
-                                        <div id="vote-indicator">
-                                            <div class="bloc-vote-indicator"><strong><?php echo $nb_votes?></strong> personnes</div>
-                                            <div class="bloc-vote-indicator">ValidÃ© par <strong><?php echo $vote_results['percent_project_validated']?>&percnt;</strong> des votants</div>
-                                            <div class="bloc-vote-indicator"><strong><?php echo $vote_results['sum_invest_ready']?></strong>&euro; de promesses de dons</div>
-                                            <div class="bloc-vote-indicator"<strong><?php echo $remaining_vote_days = $campaign->end_vote_remaining(); ?></strong> jours restants</div>
+                                        <div style="padding-bottom: 25px;">
+                                        <div class="vote-stat">
+                                            <div class="stat-big-number"><?php echo $nb_votes?></div>
+                                            <div class="stat-little-number">sur 50 requis</div>
+                                            <strong><?php echo $nb_votes?></strong> personnes</div>
+                                        <div class="vote-stat">
+                                            <canvas id="canvas-pie" width="180" height="200"></canvas><br/>
+                                            Valid&eacute; par <strong><?php echo $vote_results['percent_project_validated']?>&percnt;</strong> des votants</div>
+                                        <div class="vote-stat">
+                                            <div class="stat-big-number"><?php echo $vote_results['sum_invest_ready'].'&euro;'?></div>
+                                            <div class="stat-little-number">sur <?php echo $campaign->goal(false)/2 ?> &euro; requis</div>
+                                            <strong><?php echo $vote_results['sum_invest_ready']?></strong>&euro; de promesses de dons</div>
+                                        <div class="vote-stat">
+                                            <div class="stat-big-number"><?php echo $campaign->end_vote_remaining();?><br/></div>
+                                            <div class="stat-little-number">jour<?php if($campaign->end_vote_remaining()>1){echo 's';}?></div>
+                                            <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours restants</div>
                                         </div>
+                                        <!--div id="invest-linechart"><canvas id="canvas-line" width="400" height="700"></canvas></div-->
                                         <div class="clear"></div>
+                                        <div class="list-button">
+                                        <a href="<?php  ?>" class="button">&#x1f50e;  Statistiques détaillés</a>
+                                        </div>
                                     </div>
+                                    <div class="clear"></div>
                                 </div>
                                 
                                 <div id="block-investors" class="block">
@@ -137,36 +151,26 @@ $campaign_id = $_GET['campaign_id'];
                                 </div>
                                 
                                 <div class="clear"></div>
-                            </div>
-                            
-                            <div class="button-help">
-                                <div class="head-help"><?php _e('Statistiques','yproject'); ?></div>
-                                <ul>
-                                    <a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>"><li><?php _e('Statistiques générales', 'yproject'); ?></li></a>
-
-                                    <a href="<?php echo get_permalink($pages_stats_votes->ID) . $campaign_id_param . $params_partial; ?>"><li><?php _e('Votes', 'yproject'); ?></li></a>
-
-                                    <a href="<?php echo get_permalink($pages_stats_investments->ID) . $campaign_id_param . $params_partial; ?>"><li><?php _e('Investissements', 'yproject'); ?></li></a>
-                                
-                                    <a href="<?php echo get_permalink($pages_list_invest->ID) . $campaign_id_param . $params_partial; ?>"><li><?php _e('Liste des investisseurs', 'yproject'); ?></li></a>
-                                </ul>
-                                <div class="clear"></div>
-                            </div>
                            
-                            <div class="button-help">
-                                <a href="<?php echo get_permalink($pages_stats->ID) . $campaign_id_param . $params_partial; ?>"><?php _e('Statistiques g&eacute;n&eacute;rales', 'yproject'); ?></a>
+                                <div class="block">
+                                    <div class="head"><?php _e('Informations','yproject'); ?></div>
+                                    <div class="body">
+                                    <ul>
+                                    <a href="<?php echo get_permalink($page_particular_terms->ID); ?>" target="_blank"><li><?php _e('Conditions particuli&egrave;res', 'yproject'); ?></li></a>
 
-                                <a href="<?php echo get_permalink($pages_stats_votes->ID) . $campaign_id_param . $params_partial; ?>"><?php _e('Votes', 'yproject'); ?></a>
-
-                                <a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><li><?php _e('Guide de campagne', 'yproject'); ?></li></a>
-                                </ul>
-                            </div>
-                        <div class="clear"></div>
-                        <?php if ($campaign->google_doc() != ''): ?>
+                                    <a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><li><?php _e('Guide de campagne', 'yproject'); ?></li></a>
+                                    </ul>
+                                    </div>
+                                </div>
+                        
+                                <div class="button-help block">
+                                    <br/><br/>
+                                <?php if ($campaign->google_doc() != ''): ?>
                                     <a href="<?php echo $campaign->google_doc(); ?>/edit" target="_blank" class="button"><?php _e('Ouvrir le document de gestion de campagne', 'yproject'); ?></a>
-                                <?php endif; ?>
-                                <a href="<?php echo $news_link; ?>" class="button"><?php _e('Publier une actualit&eacute;', 'yproject'); ?></a>
+                                    <?php endif; ?>
+                                    <a href="<?php echo $news_link; ?>" class="button"><?php _e('Publier une actualit&eacute;', 'yproject'); ?></a>
                                 <div class="clear"></div>
+                                </div>
 
                             <?php if ($campaign->google_doc() != ''): ?>
                                 <div class="google-doc">
@@ -193,5 +197,51 @@ $campaign_id = $_GET['campaign_id'];
     </div><!-- .padder -->
 </div><!-- #content -->
 
+<script type="text/javascript">
+jQuery(document).ready( function($) {
+        var ctxPie = $("#canvas-pie").get(0).getContext("2d");
+        var dataPie = [
+            {value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "Oui"}, 
+            {value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: "Non"}
+        ];
+        var optionsPie = {
+            legend: true,
+            legendBorders: false,
+            inGraphDataShow : true,
+            inGraphDataTmpl : "<%=v6%>%",
+            inGraphDataFontFamily : "BebasNeue",
+            inGraphDataFontSize : 25,
+            inGraphDataFontColor : "#FFF",
+            inGraphDataAnglePosition : 2,
+            inGraphDataRadiusPosition : 2,
+            inGraphDataAlign : "center",
+            inGraphDataVAlign : "middle",
+        };
+        var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
+        
+        /*
+        var ctxLine = $("#canvas-line").get(0).getContext("2d");
+        var dataLine = {
+            labels : [new Date(<?php echo '"'.$datesinvest[0].'"' ?>),new Date(<?php echo '"'.$campaign->end_date().'"'?>)],
+            xBegin : new Date(<?php echo '"'.$datesinvest[0].'"' ?>),
+            xEnd : new Date(<?php echo '"'.$campaign->end_date().'"'?>),
+            datasets : [
+                {
+                fillColor : "rgba(220,220,220,0.5)",
+                strokeColor : "rgba(220,220,220,1)",
+                pointColor : "rgba(220,220,220,1)",
+                pointStrokeColor : "rgba(220,220,220,1)",
+                data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?>],
+                xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date("'.$date.'"),';}?>],
+                title : "Titre"
+                }
+            ]
+        };
+        var canvasLine = new Chart(ctxLine).Line(dataLine);*/
+});
+
+
+
+</script>
 
 <?php get_footer(); ?>

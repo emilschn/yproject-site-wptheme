@@ -2246,19 +2246,25 @@ div#home_bottom h1 {
 /*******************************************************************************
 * DASHBOARD PAGE
 *******************************************************************************/
-#dashboard .button-help {
-    margin: 5px 10px;
+#dashboard .button-help .button {
     float: left;
-    width: 45%;
-    background-color: #EEE;
+    text-align: center;
+    width: 100%;
+    margin: 5px 10px;
     padding: 10px;
+    max-width: 420px;
 }
 
-#dashboard .button-help .head-help {
-    font-family: "BebasNeue";
-    font-size: 35px;
-    text-transform: uppercase;
-    text-align: center;
+#dashboard .block .list-button,
+#dashboard .large-block .list-button{
+    text-align:center
+}
+
+#dashboard .block .list-button .button,
+#dashboard .large-block .list-button .button{
+    padding: 10px;
+    display: inline-block;
+    text-transform: none;
 }
 
 #dashboard .google-doc iframe {
@@ -2311,19 +2317,42 @@ div#home_bottom h1 {
         color: #FFF;
 }
 
-#dashboard #block-summary .body .current-step {
+#dashboard #block-summary .current-step {
     text-align:center;
 }
-#dashboard #block-summary .body .current-step span {
+#dashboard #block-summary .current-step span {
     opacity:0.5;
     margin: 0px 10px;
     display: inline-block;
     min-width: 100px;
 }
-#dashboard #block-summary .body #current {
+#dashboard #block-summary #current {
     opacity: 1;
     color: #FF494C;
     font-weight: bold;
+}
+
+#dashboard #block-stats .vote-stat {
+    display: inline-block;
+    width: 24%;
+    text-align: center;
+    padding: 10px 0px;
+    min-width: 220px;
+}
+
+#dashboard #block-stats .vote-stat .stat-big-number {
+    font-family: "BebasNeue";
+    font-size: 100px;
+    color: #FF494C;
+    padding-top: 30px;
+}
+
+#dashboard #block-stats .vote-stat .stat-little-number {
+    font-family: "BebasNeue";
+    font-size: 28px;
+    color: #FF494C;
+    margin-top: -12px;
+    padding-bottom: 30px;
 }
 
 #dashboard #block-community p,
@@ -2331,13 +2360,6 @@ div#home_bottom h1 {
     text-align: center;
     font-size: 120%;
     margin: 10px 0px;
-}
-
-#dashboard .bloc-vote-indicator {
-    display: inline-block;
-    border: 1px solid;
-    padding: 5px;
-    margin: 2px
 }
 
 /*******************************************************************************
