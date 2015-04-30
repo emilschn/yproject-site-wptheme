@@ -28,7 +28,7 @@ $campaign_id = $_GET['campaign_id'];
                         $category_link = (!empty($category_obj)) ? get_category_link($category_obj->cat_ID) : '';
                         $news_link = esc_url($category_link);
 
-                        // Statistiques avancées
+                        // Statistiques avancees
                         if (strtotime($post_campaign->post_date) < strtotime('2014-02')) {
                             $pages_stats = get_page_by_path('vote');
                         } else {
@@ -57,7 +57,7 @@ $campaign_id = $_GET['campaign_id'];
                         $investments_list = $campaign->payments_data();
                         
                         /****Liste des montants cumulés triés par leur date****/
-                        /*
+                        
                         $datesinvest = array();
                         $amountinvest = array();
                         
@@ -72,9 +72,8 @@ $campaign_id = $_GET['campaign_id'];
                         for($i=1; $i<count($datesinvest); $i++){
                             $cumulamount[$datesinvest[$i]]=$cumulamount[$datesinvest[$i-1]]+$cumulamount[$datesinvest[$i]];
                         }
-                        ksort($cumulamount);*/
+                        ksort($cumulamount);
                         /******************************************************/
-                        
                         
                         ?>
 
@@ -98,7 +97,7 @@ $campaign_id = $_GET['campaign_id'];
                                 <div id="block-stats" class="large-block">
                                     <div class="head">Statistiques</div>
                                     <div class="body">
-                                        <div style="padding-bottom: 25px;">
+                                        <div id="stats-vote" style="padding-bottom: 25px;" hidden="hidden">
                                         <div class="vote-stat">
                                             <div class="stat-big-number"><?php echo $nb_votes?></div>
                                             <div class="stat-little-number">sur 50 requis</div>
@@ -115,10 +114,12 @@ $campaign_id = $_GET['campaign_id'];
                                             <div class="stat-little-number">jour<?php if($campaign->end_vote_remaining()>1){echo 's';}?></div>
                                             <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours restants</div>
                                         </div>
-                                        <!--div id="invest-linechart"><canvas id="canvas-line" width="400" height="700"></canvas></div-->
+                                        
+                                        <div id="invest-linechart"><canvas id="canvas-line" width="400" height="400"></canvas></div>
+                                        
                                         <div class="clear"></div>
                                         <div class="list-button">
-                                        <a href="<?php  ?>" class="button">&#x1f50e;  Statistiques détaillés</a>
+                                            <a href="<?php  ?>" class="button">&#x1f50e;  Statistiques d&eacute;taill&eacute;s</a>
                                         </div>
                                     </div>
                                     <div class="clear"></div>
@@ -126,28 +127,37 @@ $campaign_id = $_GET['campaign_id'];
                                 
                                 <div id="block-investors" class="block">
                                     <div class="head">Investisseurs</div>
-                                    <div class="body">
+                                    <div class="body" style="text-align:center">
                                     <p>
                                         <img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
                                         <?php echo $nb_invests?> investissement<?php if($nb_invests>1){echo 's';}?></p>
                                     <p><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true) ; ?></p>
+                                    <div class="list-button">
+                                        <a class="button" href="<?php echo get_permalink($pages_list_invest->ID) . $campaign_id_param . $params_partial; ?>">&#x1f50e; Liste des investisseurs</a>
                                     </div>
-                                    <div class="foot">
-                                        <a href="<?php echo get_permalink($pages_list_invest->ID) . $campaign_id_param . $params_partial; ?>">&#x1f50e; Liste des investisseurs</a>
                                     </div>
                                 </div>
                                 
                                 <div id ="block-community" class="block">
                                     <div class="head">Communaut&eacute;</div>
-                                    <div class="body">
-                                    <p><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png"/>
-                                        <strong><?php echo $nb_jcrois?></strong> y croi<?php if($nb_jcrois>1){echo 'en';}?>t</p>
-                                    <p><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png"/>
-                                        <strong><?php echo $nb_votes?></strong> <?php if($nb_votes>1){echo 'ont';} else {echo 'a';}?> vot&eacute;</p>
-                                    <p><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png"/>
-                                        <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> investi</p>
+                                    <div class="body" style="text-align:center">
+                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png"/><br/>
+                                            <strong><?php echo $nb_jcrois?></strong> y croi<?php if($nb_jcrois>1){echo 'en';}?>t</div>
+                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png"/><br/>
+                                            <strong><?php echo $nb_votes?></strong> <?php if($nb_votes>1){echo 'ont';} else {echo 'a';}?> vot&eacute;</div>
+                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png"/><br/>
+                                            <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> investi</div>
+                                        <!--div class="list-button">
+                                            <div class="button">&#9993 Envoyer un message</div>
+                                        </div><div class="clear"></div-->
+                                        <!--div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.jpg"/><br/>
+                                            <strong><?php echo 'XXXX'?></strong> partage<?php if(2>1){echo 's';}?> Facebook</div>
+                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.jpg"/><br/>
+                                            <strong><?php echo 'XXXX'?></strong> partage<?php if(2>1){echo 's';}?> Twitter</div>
+                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/google+.jpg"/><br/>
+                                            <strong><?php echo 'XXXX'?></strong> partage<?php if(2>1){echo 's';}?> Google+</div-->
+                                        </div>
                                     </div>
-                                    <div class="foot">&#9993 Envoyer un message</div>
                                 </div>
                                 
                                 <div class="clear"></div>
@@ -215,29 +225,38 @@ jQuery(document).ready( function($) {
             inGraphDataAnglePosition : 2,
             inGraphDataRadiusPosition : 2,
             inGraphDataAlign : "center",
-            inGraphDataVAlign : "middle",
+            inGraphDataVAlign : "middle"
         };
         var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
         
-        /*
+        <?php 
+        function date_param($date) {
+		return date_format(new DateTime($date),'Y,n,j,G,i,s').',0';
+	}
+        ?>
+        
         var ctxLine = $("#canvas-line").get(0).getContext("2d");
         var dataLine = {
-            labels : [new Date(<?php echo '"'.$datesinvest[0].'"' ?>),new Date(<?php echo '"'.$campaign->end_date().'"'?>)],
-            xBegin : new Date(<?php echo '"'.$datesinvest[0].'"' ?>),
-            xEnd : new Date(<?php echo '"'.$campaign->end_date().'"'?>),
+            labels : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+            xBegin : new Date(<?php echo date_param($datesinvest[0]); ?>),
+            xEnd : new Date(<?php echo date_param($campaign->end_date()); ?>),
             datasets : [
                 {
-                fillColor : "rgba(220,220,220,0.5)",
-                strokeColor : "rgba(220,220,220,1)",
-                pointColor : "rgba(220,220,220,1)",
-                pointStrokeColor : "rgba(220,220,220,1)",
+                fillColor : "rgba(255,73,76,0.5)",
+                strokeColor : "rgba(255,73,76,1)",
+                pointColor : "rgba(255,73,76,1)",
+                pointStrokeColor : "rgba(199,46,49,1)",
                 data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?>],
-                xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date("'.$date.'"),';}?>],
+                xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
                 title : "Titre"
                 }
             ]
         };
-        var canvasLine = new Chart(ctxLine).Line(dataLine);*/
+        
+        var optionsLine = {
+            fmtXLabel : "fmtdatetime DD/MM"
+        };
+        var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
 });
 
 
