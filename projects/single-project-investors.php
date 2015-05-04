@@ -123,7 +123,7 @@ if ($campaign->current_user_can_edit()) {
 		$post_invest = get_post($item['ID']);
 		$mangopay_id = edd_get_payment_key($item['ID']);
 		$payment_type = 'Carte';
-		$payment_state = edd_get_payment_status( $post_invest, true );;
+		$payment_state = edd_get_payment_status( $post_invest, true );
 		if (strpos($mangopay_id, 'wire_') !== FALSE) {
 			$payment_type = 'Virement';
 			$contribution_id = substr($mangopay_id, 5);

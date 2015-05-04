@@ -2333,18 +2333,6 @@ div#home_bottom h1 {
     padding: 10px;
     background-color: #EEE
 }
-#dashboard .block .foot,
-#dashboard .large-block .foot{
-    text-align: center;
-    padding: 5px;
-    color: #FFF;
-    background-color: #333;
-}
-    #dashboard .block .foot a,
-    #dashboard .large-block .foot a{
-        display: block;
-        color: #FFF;
-}
 
 #dashboard #block-summary .current-step {
     text-align:center;
@@ -2361,27 +2349,48 @@ div#home_bottom h1 {
     font-weight: bold;
 }
 
-#dashboard #block-stats .vote-stat {
-    display: inline-block;
-    width: 24%;
+#dashboard #block-stats .quart-card {
+    float:left;
+    width: 25%;
     text-align: center;
     padding: 10px 0px;
     min-width: 220px;
 }
 
-#dashboard #block-stats .vote-stat .stat-big-number {
+#dashboard #block-stats .half-card {
+    float:left;
+    width: 50%;
+    text-align: center;
+    padding: 10px 0px;
+    min-width: 440px;
+}
+
+#dashboard #block-stats .stat-big-number {
     font-family: "BebasNeue";
     font-size: 100px;
     color: #FF494C;
     padding-top: 30px;
 }
 
-#dashboard #block-stats .vote-stat .stat-little-number {
+#dashboard #block-stats .stat-little-number {
     font-family: "BebasNeue";
     font-size: 28px;
     color: #FF494C;
     margin-top: -12px;
-    padding-bottom: 30px;
+    padding-bottom: 15px;
+}
+
+#dashboard #block-stats .details-card {
+    
+}
+
+#dashboard #block-stats .wdg-lightbox-padder {
+    text-align: initial
+}
+
+#dashboard .large-block .wdg-lightbox-button-close .button {
+    padding: 3px 8px;
+    display: initial;
 }
 
 #dashboard #block-community .card-com{

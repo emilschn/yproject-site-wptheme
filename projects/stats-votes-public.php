@@ -57,8 +57,8 @@ jQuery(document).ready( function($) {
     var dataVertical = {
 	labels: ["1", "2", "3", "4", "5"],
 	datasets: [{
-	    fillColor: "#F2F2F2",
-	    strokeColor: "#F2F2F2",
+	    fillColor: "#CCC",
+	    strokeColor: "#CCC",
 	    data: [<?php echo $vote_results['risk_list'][1] . ',' . $vote_results['risk_list'][2] . ',' . $vote_results['risk_list'][3] . ',' . $vote_results['risk_list'][4] . ',' . $vote_results['risk_list'][5]; ?>]
 	}]
     };
@@ -77,8 +77,8 @@ jQuery(document).ready( function($) {
     var dataHorizontal = {
 	labels: ["autres", "prévisionnel financier", "structuration de l'équipe", "produit / service", "impact sociétal"],
 	datasets: [{
-	    fillColor: "#F2F2F2",
-	    strokeColor: "#F2F2F2",
+	    fillColor: "#CCC",
+	    strokeColor: "#CCC",
 	    data: [<?php echo $vote_results['count_more_info_other'] .','. $vote_results['count_more_info_finance'] .','. $vote_results['count_more_info_team'] .','. $vote_results['count_more_info_service'] .','. $vote_results['count_more_info_impact']; ?>]
 	}]
     };

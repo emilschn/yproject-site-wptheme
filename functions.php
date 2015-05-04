@@ -759,4 +759,15 @@ function yproject_shortcode_connexion_lightbox($atts, $content = '') {
 }
 add_shortcode('yproject_connexion_lightbox', 'yproject_shortcode_connexion_lightbox');
 
+//Shortcode lightbox Stats Tableau de bord
+
+function yproject_shortcode_statsadvanced_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('common/statsadvanced-lightbox.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="statsadvanced"]' .$content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_statsadvanced_lightbox', 'yproject_shortcode_statsadvanced_lightbox');
+
 

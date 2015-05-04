@@ -85,11 +85,11 @@ $campaign_id = $_GET['campaign_id'];
                             <div class="blocks-list">
                                 <div id="block-summary" >
                                     <div class="current-step">
-                                        <span <?php if($campaign->campaign_status()==='preparing'){echo 'id="current"';} ?>>Pr&eacute;paration </span>
-                                        <span <?php if($campaign->campaign_status()==='preview'){echo 'id="current"';} ?>>Avant-premi&egrave;re </span>
-                                        <span <?php if($campaign->campaign_status()==='vote'){echo 'id="current"';} ?>>Vote </span>
-                                        <span <?php if($campaign->campaign_status()==='collecte'){echo 'id="current"';} ?>>Collecte </span>
-                                        <span <?php if($campaign->campaign_status()==='funded'){echo 'id="current"';} ?>>R&eacute;alisation</span>
+                                        <span <?php if($campaign->campaign_status()=='preparing'){echo 'id="current"';} ?>>Pr&eacute;paration </span>
+                                        <span <?php if($campaign->campaign_status()=='preview'){echo 'id="current"';} ?>>Avant-premi&egrave;re </span>
+                                        <span <?php if($campaign->campaign_status()=='vote'){echo 'id="current"';} ?>>Vote </span>
+                                        <span <?php if($campaign->campaign_status()=='collecte'){echo 'id="current"';} ?>>Collecte </span>
+                                        <span <?php if($campaign->campaign_status()=='funded'){echo 'id="current"';} ?>>R&eacute;alisation</span>
                                     </div>
                                 </div>
                                 <br/>
@@ -97,32 +97,70 @@ $campaign_id = $_GET['campaign_id'];
                                 <div id="block-stats" class="large-block">
                                     <div class="head">Statistiques</div>
                                     <div class="body">
-                                        <div id="stats-vote" style="padding-bottom: 25px;" hidden="hidden">
-                                        <div class="vote-stat">
-                                            <div class="stat-big-number"><?php echo $nb_votes?></div>
-                                            <div class="stat-little-number">sur 50 requis</div>
-                                            <strong><?php echo $nb_votes?></strong> personnes</div>
-                                        <div class="vote-stat">
-                                            <canvas id="canvas-pie" width="180" height="200"></canvas><br/>
-                                            Valid&eacute; par <strong><?php echo $vote_results['percent_project_validated']?>&percnt;</strong> des votants</div>
-                                        <div class="vote-stat">
-                                            <div class="stat-big-number"><?php echo $vote_results['sum_invest_ready'].'&euro;'?></div>
-                                            <div class="stat-little-number">sur <?php echo $campaign->goal(false)/2 ?> &euro; requis</div>
-                                            <strong><?php echo $vote_results['sum_invest_ready']?></strong>&euro; de promesses de dons</div>
-                                        <div class="vote-stat">
-                                            <div class="stat-big-number"><?php echo $campaign->end_vote_remaining();?><br/></div>
-                                            <div class="stat-little-number">jour<?php if($campaign->end_vote_remaining()>1){echo 's';}?></div>
-                                            <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours restants</div>
+                                        <div id="stats-prepare"
+                                             <?php if($campaign->campaign_status()!='vote'){echo 'hidden="hidden"';} ?>>
                                         </div>
                                         
-                                        <div id="invest-linechart"><canvas id="canvas-line" width="400" height="400"></canvas></div>
+                                        <div id="stats-vote" 
+                                            <?php if($campaign->campaign_status()!='vote'){echo 'hidden="hidden"';} ?>>
+                                            <div class="quart-card">
+                                                <div class="stat-big-number"><?php echo $nb_votes?></div>
+                                                <div class="stat-little-number">sur 50 requis</div>
+                                                <div class="details-card">
+                                                <strong><?php echo $nb_votes?></strong> personne<?php if($nb_votes>1){echo 's ont';}else{echo ' a';} echo ' voté';?>
+                                                </div>
+                                            </div>
+                                            <div class="quart-card">
+                                                <canvas id="canvas-pie-block" width="180" height="200"></canvas><br/>
+                                                <div class="details-card">
+                                                    Valid&eacute; par <strong><?php echo $vote_results['percent_project_validated']?>&percnt;</strong> des votants
+                                                </div>
+                                            </div>
+                                            <div class="quart-card">
+                                                <div class="stat-big-number"><?php echo $vote_results['sum_invest_ready'].'&euro;'?></div>
+                                                <div class="stat-little-number">sur <?php echo $campaign->goal(false)/2 ?> &euro; requis</div>
+                                                <div class="details-card">
+                                                    <strong><?php echo $vote_results['sum_invest_ready']?></strong>&euro; de promesses d'investissement
+                                                </div>
+                                            </div>
+                                            <div class="quart-card">
+                                                <div class="stat-big-number"><?php echo $campaign->end_vote_remaining();?><br/></div>
+                                                <div class="stat-little-number">jour<?php if($campaign->end_vote_remaining()>1){echo 's';}?></div>
+                                                <div class="details-card">
+                                                    <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jour<?php if($campaign->end_vote_remaining()>1){echo 's';}?> de vote restant<?php if($campaign->end_vote_remaining()>1){echo 's';}?>
+                                                </div>
+                                            </div>
+                                        </div>
                                         
+                                        <div id="stats-invest"
+                                             <?php if($campaign->campaign_status()!='collecte'){echo 'hidden="hidden"';} ?>>
+                                            <div class="quart-card">
+                                                <div class="stat-big-number"><?php echo $campaign->current_amount()?></div>
+                                                <div class="stat-little-number">sur <?php echo $campaign->goal(false)/1 ?> &euro; requis</div>
+                                                <div class="details-card">
+                                                    <strong><?php echo $campaign->current_amount()?></strong> investis par 
+                                                    <strong><?php echo $nb_invests?></strong> personne<?php if($nb_invests>1){echo 's';}?></p>
+                                                </div>
+                                            </div>
+                                            <div class="half-card">
+                                                <canvas id="canvas-line-block" width="420" height="200"></canvas>
+                                            </div>
+                                            <div class="quart-card">
+                                                <div class="stat-big-number"><?php echo $campaign->days_remaining();?><br/></div>
+                                                <div class="stat-little-number">jour<?php if($campaign->days_remaining()>1){echo 's';}?></div>
+                                                <div class="details-card">
+                                                    <strong><?php echo $campaign->days_remaining(); ?></strong> jour<?php if($campaign->days_remaining()>1){echo 's';}?> de collecte restant<?php if($campaign->days_remaining()>1){echo 's';}?>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="clear"></div>
+                                        
                                         <div class="list-button">
-                                            <a href="<?php  ?>" class="button">&#x1f50e;  Statistiques d&eacute;taill&eacute;s</a>
+                                            <a href="#statsadvanced" class="wdg-button-lightbox-open button" data-lightbox="statsadvanced">&#x1f50e;  Statistiques d&eacute;taill&eacute;s</a>
+		                    <?php echo do_shortcode('[yproject_statsadvanced_lightbox]'); ?>
                                         </div>
+                                        <div class="clear"></div>
                                     </div>
-                                    <div class="clear"></div>
                                 </div>
                                 
                                 <div id="block-investors" class="block">
@@ -209,7 +247,7 @@ $campaign_id = $_GET['campaign_id'];
 
 <script type="text/javascript">
 jQuery(document).ready( function($) {
-        var ctxPie = $("#canvas-pie").get(0).getContext("2d");
+        var ctxPie = $("#canvas-pie-block").get(0).getContext("2d");
         var dataPie = [
             {value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "Oui"}, 
             {value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: "Non"}
@@ -235,26 +273,38 @@ jQuery(document).ready( function($) {
 	}
         ?>
         
-        var ctxLine = $("#canvas-line").get(0).getContext("2d");
+        var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
         var dataLine = {
             labels : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
             xBegin : new Date(<?php echo date_param($datesinvest[0]); ?>),
             xEnd : new Date(<?php echo date_param($campaign->end_date()); ?>),
             datasets : [
                 {
-                fillColor : "rgba(255,73,76,0.5)",
-                strokeColor : "rgba(255,73,76,1)",
-                pointColor : "rgba(255,73,76,1)",
-                pointStrokeColor : "rgba(199,46,49,1)",
-                data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?>],
-                xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
-                title : "Titre"
+                    fillColor : "rgba(255,73,76,0.5)",
+                    strokeColor : "rgba(255,73,76,1)",
+                    pointColor : "rgba(255,73,76,1)",
+                    pointStrokeColor : "rgba(199,46,49,1)",
+                    data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?> ],
+                    xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
+                    title : "investissements"
+                },{
+                    fillColor : "rgba(204,204,204,0.25)",
+                    strokeColor : "rgba(180,180,180,0.5)",
+                    pointColor : "rgba(0,0,0,0)",
+                    pointStrokeColor : "rgba(0,0,0,0)",
+                    data : [0,<?php echo $campaign->minimum_goal(false);?>],
+                    xPos : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+                    title : "But"
                 }
             ]
         };
         
         var optionsLine = {
-            fmtXLabel : "fmtdatetime DD/MM"
+            xAxisBottom : false,
+            scaleOverride : true,
+            scaleStartValue : 0,
+            scaleSteps : 5,
+            scaleStepWidth :  <?php echo $campaign->goal(false)/5; ?>,
         };
         var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
 });

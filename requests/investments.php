@@ -23,8 +23,9 @@ function wdg_get_project_investments($camp_id, $include_pending = FALSE) {
 		'investors_string' => ''
 	);
 	foreach ( $payments_data as $item ) {
-		if (($item['status'] == 'publish' || ($include_pending && $item['status'] == 'pending')) && (isset($item['mangopay_contribution']->IsSucceeded) && $item['mangopay_contribution']->IsSucceeded) && $item['signsquid_status'] == 'Agreed') {
-			$invest_user = get_user_by('id', $item['user']);
+		if (($item['status'] == 'publish' || ($include_pending && $item['status'] == 'pending')) && (isset($item['mangopay_contribution']->IsSucceeded) && $item['mangopay_contribution']->IsSucceeded) /*&& $item['signsquid_status'] == 'Agreed'*/) {
+			
+                    $invest_user = get_user_by('id', $item['user']);
 			$buffer['count_validate_investments']++;
 			if (!isset($buffer['investors_list'][$item['user']])) {
 				$buffer['count_validate_investors']++;
