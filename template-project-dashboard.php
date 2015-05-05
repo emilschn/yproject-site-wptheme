@@ -220,6 +220,8 @@ $campaign_id = $_GET['campaign_id'];
                                     <a href="<?php echo $news_link; ?>" class="button"><?php _e('Publier une actualit&eacute;', 'yproject'); ?></a>
                                 <div class="clear"></div>
                                 </div>
+                                
+                                <div class="clear"></div>
 
                             <?php if ($campaign->google_doc() != ''): ?>
                                 <div class="google-doc">
