@@ -2380,17 +2380,23 @@ div#home_bottom h1 {
     padding-bottom: 15px;
 }
 
-#dashboard #block-stats .details-card {
-    
-}
-
-#dashboard #block-stats .wdg-lightbox-padder {
+#dashboard .wdg-lightbox-padder {
     text-align: initial
 }
 
-#dashboard .large-block .wdg-lightbox-button-close .button {
+#dashboard .large-block .wdg-lightbox-button-close .button,
+#dashboard .block .wdg-lightbox-button-close .button {
     padding: 3px 8px;
     display: initial;
+}
+
+#dashboard #block-investors .wdg-lightbox-padder {
+    min-height: ;
+}
+
+#dashboard #block-stats .wdg-lightbox-padder .expandable {
+    border-left: 1px solid #BBB;
+    padding-left: 20px;
 }
 
 #dashboard #block-community .card-com{
@@ -3047,6 +3053,13 @@ ul.invest-mean-payment li img {
    padding-left: 0px;
    color: white;
    font-variant: small-caps;
+}
+
+#display-options-col-list li {
+    float: left;
+    padding-bottom: 2px;
+    padding-right: 4px;
+    margin-bottom: 5px;
 }
 
 #cb-li-collall {

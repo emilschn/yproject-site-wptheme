@@ -171,7 +171,8 @@ $campaign_id = $_GET['campaign_id'];
                                         <?php echo $nb_invests?> investissement<?php if($nb_invests>1){echo 's';}?></p>
                                     <p><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true) ; ?></p>
                                     <div class="list-button">
-                                        <a class="button" href="<?php echo get_permalink($pages_list_invest->ID) . $campaign_id_param . $params_partial; ?>">&#x1f50e; Liste des investisseurs</a>
+                                        <a href="#listinvestors" class="wdg-button-lightbox-open button" data-lightbox="listinvestors">&#x1f50e; Liste des investisseurs</a>
+		                    <?php echo do_shortcode('[yproject_listinvestors_lightbox]'); ?>
                                     </div>
                                     </div>
                                 </div>
