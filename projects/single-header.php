@@ -60,7 +60,7 @@ else {
 					<div class="post_bottom_infos_item">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
 						<?php $backers_count = $campaign->backers_count(); ?>
-						<span class="mobile_hidden"><?php echo $backers_count; ?> personne<?php if ($backers_count > 1) { echo 's ont'; } else { echo ' a'; } ?> d&eacute;j&agrave; financ&eacute; ce projet</span>
+						<span class="mobile_hidden"><?php echo $backers_count; ?> personne<?php if ($backers_count > 1) { echo 's ont'; } else { echo ' a'; } ?> d&eacute;j&agrave; investi sur ce projet</span>
 						<span class="only_on_mobile"><?php echo $backers_count; ?></span>
 					</div>
 					<div class="post_bottom_infos_item" <?php if($vote_status=='funded' || $vote_status == 'archive'){echo "style=opacity:0.5";}?>>
