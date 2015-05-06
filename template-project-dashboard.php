@@ -34,10 +34,7 @@ $campaign_id = $_GET['campaign_id'];
                         } else {
                             $pages_stats = get_page_by_path('statistiques-avancees');
                         }
-
-                        $pages_stats_investments = get_page_by_path('statistiques-avancees-investissements');
-                        $pages_stats_votes = get_page_by_path('statistiques-avancees-votes');
-                        $pages_list_invest = get_page_by_path('liste-investisseurs');
+                        
                         $page_parameters = get_page_by_path('parametres-projet');
                         
                         /**************Donnees communaute**************/
@@ -57,7 +54,6 @@ $campaign_id = $_GET['campaign_id'];
                         $investments_list = $campaign->payments_data();
                         
                         /****Liste des montants cumulés triés par leur date****/
-                        
                         $datesinvest = array();
                         $amountinvest = array();
                         
@@ -66,7 +62,6 @@ $campaign_id = $_GET['campaign_id'];
                             $amountinvest[]=$item['amount'];
                         }
                         $cumulamount = array_combine($datesinvest, $amountinvest);
-                        
                         sort($datesinvest);
                         
                         for($i=1; $i<count($datesinvest); $i++){
@@ -75,22 +70,41 @@ $campaign_id = $_GET['campaign_id'];
                         ksort($cumulamount);
                         /******************************************************/
                         
+                        $can_go_next_step = $campaign->can_go_next_step();
+                        
+                        $status = $campaign->campaign_status();
                         ?>
 
                         <?php if ($can_modify): ?>
                             <div class="part-title-separator">
                                 <span class="part-title"><?php echo $post_campaign->post_title; ?></span>
                             </div>
-                            
                             <div class="blocks-list">
                                 <div id="block-summary" >
                                     <div class="current-step">
-                                        <span <?php if($campaign->campaign_status()=='preparing'){echo 'id="current"';} ?>>Pr&eacute;paration </span>
-                                        <span <?php if($campaign->campaign_status()=='preview'){echo 'id="current"';} ?>>Avant-premi&egrave;re </span>
-                                        <span <?php if($campaign->campaign_status()=='vote'){echo 'id="current"';} ?>>Vote </span>
-                                        <span <?php if($campaign->campaign_status()=='collecte'){echo 'id="current"';} ?>>Collecte </span>
-                                        <span <?php if($campaign->campaign_status()=='funded'){echo 'id="current"';} ?>>R&eacute;alisation</span>
+                                        <span <?php if($status=='preparing'){echo 'id="current"';} ?>>Pr&eacute;paration </span>
+                                        <span <?php if($status=='preview'){echo 'id="current"';} ?>>Avant-premi&egrave;re </span>
+                                        <span <?php if($status=='vote'){echo 'id="current"';} ?>>Vote </span>
+                                        <span <?php if($status=='collecte'){echo 'id="current"';} ?>>Collecte </span>
+                                        <span <?php if($status=='funded'){echo 'id="current"';} ?>>R&eacute;alisation</span>
                                     </div>
+                                    <?php if ($status=='preparing'||$status=='preview'||$status=='vote'){?>
+                                        <div class="list-button">   
+                                            <?php if (current_user_can('manage_options')) {
+                                                if(isset($_GET['validate_next_step'])){
+                                                    $campaign->set_validation_next_step($_GET['validate_next_step']);
+                                                }
+                                                if($can_go_next_step){?>
+                                                    <a href="?campaign_id=<?php echo $campaign_id?>&validate_next_step=0" class="button">&cross; Ne plus autoriser &agrave; passer &agrave; l'&eacute;tape suivante</a>
+                                                <?php } else {?>
+                                                    <a href="?campaign_id=<?php echo $campaign_id?>&validate_next_step=1" class="button">&check; Autoriser &agrave; passer &agrave; l'&eacute;tape suivante</a>
+                                                <?php }
+                                            }?>
+                                            <a href="#gonextstep" class="wdg-button-lightbox-open button" data-lightbox="gonextstep">&check; Passer &agrave; l'&eacute;tape suivante</a>
+                                            <?php echo do_shortcode('[yproject_gonextstep_lightbox]');
+                                            ?>
+                                        </div>
+                                    <?php }?>
                                 </div>
                                 <br/>
                                 
@@ -98,11 +112,11 @@ $campaign_id = $_GET['campaign_id'];
                                     <div class="head">Statistiques</div>
                                     <div class="body">
                                         <div id="stats-prepare"
-                                             <?php if($campaign->campaign_status()!='vote'){echo 'hidden="hidden"';} ?>>
+                                             <?php if($status!='vote'){echo 'hidden="hidden"';} ?>>
                                         </div>
                                         
                                         <div id="stats-vote" 
-                                            <?php if($campaign->campaign_status()!='vote'){echo 'hidden="hidden"';} ?>>
+                                            <?php if($status!='vote'){echo 'hidden="hidden"';} ?>>
                                             <div class="quart-card">
                                                 <div class="stat-big-number"><?php echo $nb_votes?></div>
                                                 <div class="stat-little-number">sur 50 requis</div>
@@ -133,7 +147,7 @@ $campaign_id = $_GET['campaign_id'];
                                         </div>
                                         
                                         <div id="stats-invest"
-                                             <?php if($campaign->campaign_status()!='collecte'){echo 'hidden="hidden"';} ?>>
+                                             <?php if($status!='collecte'){echo 'hidden="hidden"';} ?>>
                                             <div class="quart-card">
                                                 <div class="stat-big-number"><?php echo $campaign->current_amount()?></div>
                                                 <div class="stat-little-number">sur <?php echo $campaign->goal(false)/1 ?> &euro; requis</div>
@@ -157,7 +171,7 @@ $campaign_id = $_GET['campaign_id'];
                                         
                                         <div class="list-button">
                                             <a href="#statsadvanced" class="wdg-button-lightbox-open button" data-lightbox="statsadvanced">&#x1f50e;  Statistiques d&eacute;taill&eacute;s</a>
-		                    <?php echo do_shortcode('[yproject_statsadvanced_lightbox]'); ?>
+                                            <?php echo do_shortcode('[yproject_statsadvanced_lightbox]'); ?>
                                         </div>
                                         <div class="clear"></div>
                                     </div>
