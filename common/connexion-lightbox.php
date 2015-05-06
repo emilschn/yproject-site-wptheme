@@ -1,5 +1,5 @@
-<div  id="post_bottom_content" class="center_small">
-    <div  class="left post_bottom_desc_small">
+<div  style="width: 450px; " id="post_bottom_content" class="center_small">
+    <div  style="width: 450px; ">
         <div class="login_fail">
             <?php if (isset($_GET["login"]) && $_GET["login"] == "failed") { ?>
                 <?php _e('Erreur d&apos;identification', 'yproject'); ?>
@@ -19,7 +19,7 @@
 	    <br />
             
             <div id="submit-center">
-                <input type="submit"  name="wp-submit" id="sidebar-wp-submit" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
+                <input type="submit"  name="wp-submit" id="sidebar-wp-submit-lightbox" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
                 <input type="hidden" name="redirect-page-error" id="redirect-page-error" value="<?php echo get_permalink($page) ?>" />
                 <?php 
                 $redirect_value = "";
@@ -37,9 +37,10 @@
                 <input type="hidden" name="redirect-page-investir" id="redirect-page-investir" value="<?php echo $redirect_value; ?>" />
                
             </div>
-          
+            <div id="sidebar-login-form-lightbox">
             <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-            <a href="<?php echo get_permalink($page_forgotten->ID); ?>">(Mot de passe oubli&eacute;)</a>
+            <a href="<?php echo get_permalink($page_forgotten->ID); ?>" >(Mot de passe oubli&eacute;)</a>
+            </div>
             <br />
             <input type="hidden" name="testcookie" value="1" />
         </form>
