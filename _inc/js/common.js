@@ -173,6 +173,42 @@ YPUIFunctions = (function($) {
 					});
 				});
 			}
+                        
+                        if ($(".check-users-columns").length > 0) {
+                            //Page investisseurs/investors : Actions à la sélection des colonnes du tableau
+                            $(".check-users-columns").click(function() {
+                                //Case "toutes les colonnes
+                                if(this.value==="all") {
+                                    if (this.checked===true) {
+                                        $('.check-users-columns').prop('checked', true);
+                                        $('#investors-table td').removeAttr('hidden');
+                                    } else {
+                                        $('.check-users-columns').prop('checked', false);
+                                        $('#investors-table td').attr('hidden','');
+                                        $('#cbcoluname').prop('checked', true);
+                                        $('.coluname').removeAttr('hidden');
+                                    }
+                                }
+                                
+                                //Autres cases
+                                $selector = ".";
+                                $selector += this.value;
+                                if (this.checked===true) {
+                                    $($selector).removeAttr('hidden');
+                                } else {
+                                    $($selector).attr('hidden','');
+                                }
+                            });
+                        }
+                        $("#investir").click(function(){
+                           $("#redirect-page-investir").attr("value","true");
+                        }); 
+                        $("#connexion").click(function(){
+                           $("#redirect-page-investir").attr("value","");
+                        });
+                        $("#forum").click(function(){
+                           $("#redirect-page-investir").attr("value","forum");
+                        });
 		},
 		
 		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué
@@ -500,7 +536,7 @@ WDGProjectPageFunctions=(function($) {
 					$(this).css("cursor", "pointer");
 					var sDisplay = '';
 					if (!WDGProjectPageFunctions.isInit && WDGProjectPageFunctions.currentDiv === 0) sDisplay = 'style="display:none"';
-					var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'>Lire plus !</div>';
+					var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'></div>';
 					$(this).find('div *:lt(1)').append(sProjectMore);
 					$(this).click(function(){
 						WDGProjectPageFunctions.clickItem($(this));

@@ -162,12 +162,13 @@
 				</ul>
 			</div>
 		</nav>
-		
+            
+                <?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
 		<div id="submenu_item_connection">
 			<?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
 			<ul>
 				<li class="page_item_out">
-					<div id="submenu_item_connection_register"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
+					<div id="submenu_item_connection_register" style="background-color: #3E3E40;"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
 					<hr />
 					<div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook_connexion.jpg" width="25" height="25" alt="connexion facebook" /><span>&nbsp;Se connecter avec Facebook</span></a></div>
 					<div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
@@ -180,20 +181,25 @@
 
 					<input type="password" name="pwd" id="sidebar-user-pass" class="input" placeholder="<?php _e('Mot de passe', 'yproject'); ?>" />
 					<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="OK" />
-					<input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo get_the_ID();?>" />
+                                        
+                                        <input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo  get_the_ID();?>" />
+					<input type="hidden" name="type-page" id="type-page" value="<?php echo  get_post_type(get_the_ID());?>" />
+                                        <input type="hidden" name="redirect-page-error" id="redirect-page-error" value="<?php echo get_permalink($page) ?>" />
 					<br />
 					<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-					(<a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)
+					<a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">(Mot de passe oubli&eacute;)</a>
 					<br /><br />
 
 					<label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" />&nbsp;<?php _e('Se souvenir de moi', 'yproject'); ?></label>
 					</form>
 				</li>
 			</ul>
+                   
 		</div>
 	    
 		<div id="submenu-mobile">
-			<ul>
+                                
+			<ul>    
 				<?php foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
 					<?php $menu_page_object = get_page_by_path($menu_page_key); ?>
 					<li class="page_item"><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></li>

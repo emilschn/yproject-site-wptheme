@@ -12,7 +12,7 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 	<div class="padder">
 		<?php require_once('projects/single-admin-bar.php'); ?>
 
-		<div id="dashboard" class="center margin-height">
+		<div class="center margin-height">
 		    
 			<?php if ($feedback === TRUE): ?>
 		    

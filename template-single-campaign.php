@@ -45,6 +45,9 @@
 								case 'statistiques':
 								    locate_template( array("projects/single-stats-public.php"), true );
 								    break;
+                                                                case 'liste-investisseurs':
+                                                                    locate_template( array("projects/single-project-investors.php"), true );
+								    break;
 								default:
 								    the_content();
 								    break;

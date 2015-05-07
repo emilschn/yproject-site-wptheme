@@ -95,8 +95,16 @@ add_action( 'send_headers', 'varnish_safe_http_headers' );
  * @param type $username
  */
 function yproject_front_end_login_fail($username){
-	$page_connexion = get_page_by_path('connexion');
-	wp_redirect(get_permalink($page_connexion->ID) . '?login=failed');
+        $page = $_POST['redirect-page-error']; 
+        if($_POST['redirect-page-investir'] == "true"){
+            wp_redirect($page.'/?login=failed&redirect=invest#connexion');
+        } else if($_POST['redirect-page-investir'] == "forum") {
+             wp_redirect($page.'/?login=failed&redirect=forum#connexion');
+        } else {
+            wp_redirect($page.'/?login=failed#connexion');
+        }
+//	$page_connexion = get_page_by_path('connexion');
+//	wp_redirect(get_permalink($page_connexion->ID) . '?login=failed');
 	exit;
 }
 add_action('wp_login_failed', 'yproject_front_end_login_fail'); 
@@ -105,13 +113,40 @@ add_action('wp_login_failed', 'yproject_front_end_login_fail');
 function yproject_redirect_login() {
 //	$current_user = wp_get_current_user();
 //	NotificationsSlack::send_to_dev('Connexion de ' . $current_user->first_name . ' ' . $current_user->last_name . ' (' . $current_user->ID . ')');
-	if (isset($_POST['redirect-page'])) {
-		$page_id = $_POST['redirect-page'];
-		$page = get_page($page_id);
-		wp_redirect(get_permalink($page));
-	} else {
-		wp_redirect(home_url());
-	}
+        $page_invest = get_page_by_path('investir');
+        $page_id = $_POST['redirect-page'];
+        $page_type = $_POST['type-page']; 
+        $page_redirection = $_POST['redirect-page-investir'];
+        
+        if(isset($_GET['login'])){
+            $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
+                    wp_redirect($page);
+        }
+        else {
+            if (isset($page_id) && isset($page_type)){
+                if ($page_type == "download"){
+                    if( isset($page_redirection) && $page_redirection == "true"){
+                        
+                        $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
+                        wp_redirect($page);  
+                        
+                    } else if ( isset($page_redirection) && $page_redirection == "forum") {
+                        
+                        $forum = get_page_by_path('forum');
+                        $page = get_permalink($forum->ID).'?campaign_id='.$page_id;   
+                        wp_redirect($page);
+                        
+                    } else {
+                        $page = get_page($page_id);
+                        wp_redirect(get_permalink($page).'#description_du_projet');
+                    }
+                } 
+                else {
+                    $page = get_page($page_id);
+                    wp_redirect(get_permalink($page)); 
+                }
+            }   
+        }
 	exit;
 }
 add_action('wp_login', 'yproject_redirect_login');
@@ -128,11 +163,15 @@ function yproject_redirect_logout(){
 }
 add_action('wp_logout', 'yproject_redirect_logout');
 
+// Rediriger une personne qui n'a rien rempli pour s'identifier 
 function _catch_empty_user( $username, $pwd ) {
 	if (empty($username)||empty($pwd)) {
-		$page_connexion = get_page_by_path('connexion');
-		wp_redirect(get_permalink($page_connexion->ID) . '?login=failed');
-		exit();
+		$page = $_POST['redirect-page-error']; 
+                if($_POST['redirect-page-investir'] == "true"){
+                    wp_redirect($page.'/?login=failed&redirect=invest#connexion');
+                } else {
+                    wp_redirect($page.'/?login=failed#connexion');
+                }
 	}
 }
 add_action( 'wp_authenticate', '_catch_empty_user', 1, 2 );
@@ -704,7 +743,7 @@ add_shortcode('yproject_lightbox_button', 'yproject_shortcode_lightbox_button');
 
 function yproject_shortcode_lightbox($atts, $content = '') {
     $atts = shortcode_atts( array(
-	'id' => 'lightbox'
+	'id' => 'lightbox',
     ), $atts );
     return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox hidden">
 		<div class="wdg-lightbox-click-catcher"></div>
@@ -716,3 +755,17 @@ function yproject_shortcode_lightbox($atts, $content = '') {
 	    </div>';
 }
 add_shortcode('yproject_lightbox', 'yproject_shortcode_lightbox');
+
+
+//Shortcodes lightbox Connexion 
+
+function yproject_shortcode_connexion_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('common/connexion-lightbox.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="connexion"]' .$content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_connexion_lightbox', 'yproject_shortcode_connexion_lightbox');
+
+

@@ -17,10 +17,15 @@
 Les <strong><?php echo $vote_results['count_project_validated']; ?></strong> personnes qui ont vot&eacute; oui...<br />
 <ul>
 	<li>
-	    investiraient en moyenne <strong><?php echo $vote_results['average_invest_ready']; ?> &euro;</strong>
-	    (<strong><?php echo $vote_results['count_invest_ready']; ?></strong> personnes).
-	    La moiti&eacute; d&apos;entre elles investiraient plus de <strong><?php echo $vote_results['median_invest_ready']; ?> &euro;</strong>.
-	</li>
+          <?php
+                $total = $vote_results['count_invest_ready'] * $vote_results['average_invest_ready'];
+                $pourcentage = ($total*100)/$vote_results['objective'];
+            ?>
+      
+            Sur les <strong><?php echo $vote_results['count_voters']; ?></strong>  votants, <strong><?php echo $vote_results['count_invest_ready']; ?></strong> personnes ont déclaré qu'ils investiraient en moyenne <strong><?php echo round($vote_results['average_invest_ready'],2); ?> &euro;</strong>. 
+            Pour un total de <strong><?php echo round($total ,2); ?></strong> euros de promesse, soit <strong><?php echo round($pourcentage ,2).' %'; ?></strong> de l’objectif.
+        </li>
+        <br>
 	<li>
 	    ont &eacute;valu&eacute; le risque, en moyenne, &agrave; : <strong><?php echo round($vote_results['average_risk'], 2); ?></strong> / 5<br />
 	    <center><canvas id="canvas-vertical" width="400" height="250"></canvas></center>

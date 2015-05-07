@@ -2,7 +2,6 @@
     if (is_user_logged_in()) wp_redirect(home_url());
 ?>
 <?php get_header(); ?>
-
     <div id="content">
 	<div class="padder">
 	   <?php locate_template( array( 'basic/basic-header.php' ), true ); ?>
@@ -17,7 +16,8 @@
 		</div>
 
 		<div style="text-transform: uppercase; margin-bottom: 10px;" id="submenu_item_connection_login"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_noir_connexion.jpg" alt="logo triangle" class="vert-align" width="25" height="25" />&nbsp;Connexion</div>
-		<form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
+		
+                <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
 		    <label class="standard-label"><?php _e('Identifiant', 'yproject'); ?></label>
 		    <input style="margin-bottom: 5px; width: 254px;" type="text" name="log" class="input" value="<?php if ( isset( $user_login) ) echo esc_attr(stripslashes($user_login)); ?>" />
 		    <br />
