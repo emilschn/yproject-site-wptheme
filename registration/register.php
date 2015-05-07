@@ -54,20 +54,27 @@
 				<div class="register-section" id="basic-details-section">
 				    <?php /***** Basic Account Details ******/ ?>
 				    <?php do_action( 'bp_before_account_details_fields' ); ?>
-
-				    <label style="font-size: 13px;" class="medium-label" for="signup_username"><?php _e( 'Identifiant', 'yproject' ); ?> *</label>
-				    <input style="margin-bottom: 5px;" type="text" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" /><br />
-
-				    <label style="font-size: 13px;" class="medium-label" for="signup_email"><?php _e( 'Adresse e-mail', 'yproject' ); ?> *</label>
-				    <input style="margin-bottom: 5px;" type="text" name="signup_email" id="signup_email" value="<?php bp_signup_email_value(); ?>" /><br />
-
-				    <label style="font-size: 13px;" class="medium-label" for="signup_password"><?php _e( 'Mot de passe', 'yproject' ); ?> *</label>
-				    <input style="margin-bottom: 5px;" type="password" name="signup_password" id="signup_password" value="" /><br />
-
-				    <label style="font-size: 13px;" class="medium-label" for="signup_password_confirm"><?php _e( 'Confirmation du mot de passe', 'yproject' ); ?> *</label>
-				    
-				   <input style="margin-bottom: 5px;" type="password" name="signup_password_confirm" id="signup_password_confirm" value="" /><br />
-
+                                     	
+                                    <div class="on-focus clearfix" style="position: relative; padding: 0px; margin: 10px auto; display: block; ">
+                                    <input type="text" name="signup_username" placeholder="<?php _e( 'Identifiant', 'yproject' ); ?> *" id="signup_username" value="<?php bp_signup_username_value(); ?>" />
+                                    <div class="tool-tip slideIn right">Choisissez un Identifiant</div>
+                                    </div>
+                                  
+                                    <div class="on-focus clearfix" style="position: relative; padding: 0px; margin: 10px auto; display: block; ">
+                                    <input  style="margin-bottom: 5px;" type="text" name="signup_email" placeholder="<?php _e( 'Adresse e-mail', 'yproject' ); ?> *" id="signup_email" value="<?php bp_signup_email_value(); ?>" />
+                                    <div class="tool-tip slideIn right">Saisissez votre adresse e-mail </div>
+                                    </div>
+                                
+                                    <div class="on-focus clearfix" style="position: relative; padding: 0px; margin: 10px auto; display: block; ">
+                                    <input  style="margin-bottom: 5px;" type="password" name="signup_password" placeholder="<?php _e( 'Mot de passe', 'yproject' ); ?> *" id="signup_password" value="" />
+                                    <div class="tool-tip slideIn right">Saisissez un mot de passe</div>
+                                    </div>
+                                  
+                                    <div class="on-focus clearfix" style="position: relative; padding: 0px; margin: 10px auto; display: block; ">
+                                     <input  style="margin-bottom: 5px;" type="password" name="signup_password_confirm" placeholder="<?php _e( 'Confirmation du mot de passe', 'yproject' ); ?> *" id="signup_password_confirm" value="" />
+                                    <div class="tool-tip slideIn right">Confirmez votre mot de passe</div>
+                                    </div>
+                                   
 				    <?php do_action( 'bp_after_account_details_fields' ); ?>
 
 

@@ -61,7 +61,6 @@ tbody {
 }
 
 .center_small {
-    width: 960px;
     margin: auto;
     text-align: center; 
 }
@@ -242,27 +241,113 @@ form.wdg-forms .small-margin {
 /*******************************************************************************
 * LIGHTBOX - FORMULAIRE
 *******************************************************************************/
+/* tooltip */
+
+
+.tool-tip{
+	color: #fff;
+	background-color: rgba( 0, 0, 0, .7);
+	text-shadow: none;
+	font-size: .9em;
+	visibility: hidden;
+	-webkit-border-radius: 7px; 
+	-moz-border-radius: 7px; 
+	-o-border-radius: 7px; 
+	border-radius: 7px;	
+	text-align: center;	
+	opacity: 0;
+	z-index: 999;
+	padding: 3px 8px;	
+	position: absolute;
+	cursor: default;
+	-webkit-transition: all 240ms ease-in-out;
+	-moz-transition: all 240ms ease-in-out;
+	-ms-transition: all 240ms ease-in-out;
+	-o-transition: all 240ms ease-in-out;
+	transition: all 240ms ease-in-out;	
+}
+/* default heights, width and margin w/o Javscript */
+
+.tool-tip,
+.tool-tip.top{
+	width: 90px;
+	height: 30px;
+	margin-left: -43px;
+}
+
+/* tool tip position right */
+
+.tool-tip.right{
+	top: 50%;
+	right: auto;
+	left: 75%;
+	margin-top: -15px;
+	margin-right: auto;	
+	margin-left: auto;
+}
+
+.tool-tip.right:after{
+	left: -5px;
+	top: 50%;	
+	margin-top: -6px;
+	bottom: auto;
+	border-top-color: transparent;	
+    border-right-color: rgba( 0, 0, 0, .7);	
+}
+.on-focus input{
+        width:200px;
+}
+
+/* tooltip on focus left and right */
+
+.on-focus .tool-tip.left,
+.on-focus .tool-tip.right{
+	margin-top: -19px;
+}
+
+/* on hover of element containing tooltip default*/
+
+*:not(.on-focus):hover > .tool-tip,
+.on-focus input:focus + .tool-tip{
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition: all 240ms ease-in-out;
+	-moz-transition: all 240ms ease-in-out;
+	-ms-transition: all 240ms ease-in-out;
+	-o-transition: all 240ms ease-in-out;
+	transition: all 240ms ease-in-out;		
+}
+
+
+
+
+.colonne {
+   
+    margin-top: 10px;
+    width: 350px;
+    border: 1px solid;
+    display: inline-block;
+}
+
+.colonne p {
+    width: 300px;
+    text-align: left;
+}
 .login_fail{
     margin-bottom: 10px;
 }
-#sidebar-login-form {
-    text-align: left;
-}
-#sidebar-login-form-lightbox a{
+
+
+
+#sidebar-login-form a{
     color: #606060;
     font-size: 11px;
     font-style: italic;
-    margin: 170px;
 }
+
 #sidebar-login-form label {
     text-align: right;
     font-size: 14px;
-}
-
-
-#sidebar-wp-submit-lightbox{
-    margin-left:180px;
-    margin-top: 5px;
 }
 
 /*******************************************************************************
@@ -290,7 +375,7 @@ form.wdg-forms .small-margin {
 
 .wdg-lightbox .wdg-lightbox-padder {
 	position: relative;
-	max-width: 600px;
+	max-width: 800px;
 	max-height: 80vh;
 	margin: 5vh auto;
 	padding: 20px;
