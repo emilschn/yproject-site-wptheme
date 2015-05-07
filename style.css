@@ -61,6 +61,7 @@ tbody {
 }
 
 .center_small {
+    width: 960px;
     margin: auto;
     text-align: center; 
 }
@@ -375,7 +376,7 @@ form.wdg-forms .small-margin {
 
 .wdg-lightbox .wdg-lightbox-padder {
 	position: relative;
-	max-width: 800px;
+	max-width: 600px;
 	max-height: 80vh;
 	margin: 5vh auto;
 	padding: 20px;
