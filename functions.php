@@ -768,4 +768,23 @@ function yproject_shortcode_connexion_lightbox($atts, $content = '') {
 }
 add_shortcode('yproject_connexion_lightbox', 'yproject_shortcode_connexion_lightbox');
 
+//Shortcode lightbox Tableau de bord
+// ->TB Stats
+function yproject_shortcode_statsadvanced_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('common/statsadvanced-lightbox.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="statsadvanced"]' .$content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_statsadvanced_lightbox', 'yproject_shortcode_statsadvanced_lightbox');
 
+//->TB Liste investisseurs
+function yproject_shortcode_listinvestors_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('projects/single-project-investors.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="listinvestors"]' .$content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_listinvestors_lightbox', 'yproject_shortcode_listinvestors_lightbox');
