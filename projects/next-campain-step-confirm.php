@@ -21,5 +21,6 @@ Popup avant-première
 <br/>    ☑Bloquage (et alerte) si l'organisation n'a pas été déterminée
 <br/>
 <br/>Pour chaque :
-<br/>☑ L'équipe WeDoGood a validé pour passer à l'étape suivante
+<br/><input type="checkbox" id="cannext" disabled <?php if ($campaign->can_go_next_step()){echo 'checked ';}?>
+       <label for="cannext">L'équipe WeDoGood a validé pour passer à l'étape suivante</label>
 </div>
