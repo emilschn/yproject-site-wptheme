@@ -2338,10 +2338,10 @@ div#home_bottom h1 {
     font-weight: bold;
 }
 #wdg-edit-project.edit-button:before {
-    content: "Mode Ã©dition";
+    content: "Mode Edition";
 }
 #wdg-edit-project.edit-button-validate:before {
-    content: "Mode normal";
+    content: "Mode Normal";
 }
 
 /*******************************************************************************
