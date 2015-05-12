@@ -891,6 +891,8 @@ footer div.social-icons {
 }
 .home-large-project .description-zone .description-summary {
     text-align: justify;
+    max-height: 195px;
+    overflow-y: hidden;
 }
 .home-large-project .description-zone .description-summary p {
     margin-top: 0px;
