@@ -83,8 +83,14 @@ $campaign_id = $_GET['campaign_id'];
                                         $campaign->set_validation_next_step(0);
                                     }
                                 } else if ($status=='vote') {
+                                    $collecte_time = $_POST['innbday'];
                                     if($campaign->company_name()!=null&&$campaign->company_status()!=null
-                                            &&$campaign->is_validated_by_vote() && $campaign->end_vote_remaining()<=0){
+                                            &&$campaign->is_validated_by_vote() && $campaign->end_vote_remaining()<=0
+                                            && 1<=$collecte_time && $collecte_time<=60){
+                                        $diffCollectDay = new DateInterval('P'.$collecte_time.'D');
+                                        $CollectEndDate = (new DateTime())->add($diffCollectDay);
+                                        $campaign->set_end_date($CollectEndDate);
+                                        
                                         $campaign->set_status('collecte');
                                         $campaign->set_validation_next_step(0);
                                     }
@@ -92,6 +98,7 @@ $campaign_id = $_GET['campaign_id'];
                                 $status = $campaign->campaign_status();
                             }
                         }
+                        
                         
                         /******************************************************/
                         ?>
