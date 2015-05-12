@@ -233,7 +233,15 @@ get_header();
 									}
 								}
 							}
-						} ?>
+						
+							$args = array(
+							    'author'    => $organisation_obj->get_wpref(),
+							    'post_type' => 'withdrawal_order',
+							    'post_status'   => 'pending'
+							);
+							$pending_transfers = get_posts($args);
+						}
+						?>
 										
 							
 						<?php
@@ -249,7 +257,7 @@ get_header();
 						    Vous avez un transfert en cours.
 						<?php else :
 							if ($real_amount_invest > 0) { ?>
-						    <form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
+						    <form action="" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="mangopaytoaccount" value="1" />
 							<input type="submit" value="Reverser sur mon compte bancaire" class="button" />
 						    </form>
