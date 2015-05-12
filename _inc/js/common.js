@@ -200,6 +200,30 @@ YPUIFunctions = (function($) {
                                 }
                             });
                         }
+                        
+                        if ($("#submit-go-next-step").length > 0) {
+                            $("#submit-go-next-step").attr('disabled','');
+                            $("#submit-go-next-step").attr('style','background-color:#333 !important');
+                            
+                            $checkall = function() {
+                                $allcheck = true;
+                                $(".checkbox-next-step").each(function(index){
+                                    $allcheck = $allcheck && this.checked;
+                                });
+                                return $allcheck;
+                            };
+                            
+                            $(".checkbox-next-step").change(function() {
+                                if($checkall()){
+                                    $("#submit-go-next-step").removeAttr('disabled');
+                                    $("#submit-go-next-step").attr('style','background-color:#FF494C');
+                                } else {
+                                    $("#submit-go-next-step").attr('disabled','');
+                                    $("#submit-go-next-step").attr('style','background-color:#333 !important');
+                                };
+                            });
+                        }
+                        
                         $("#investir").click(function(){
                            $("#redirect-page-investir").attr("value","true");
                         }); 

@@ -22,6 +22,7 @@ $campaign_id = $_GET['campaign_id'];
                         $campaign = atcf_get_campaign($post_campaign);
                         $page_guide = get_page_by_path('guide');
                         $page_particular_terms = get_page_by_path('conditions-particulieres');
+                        $status = $campaign->campaign_status();
 
                         $category_slug = $post_campaign->ID . '-blog-' . $post_campaign->post_name;
                         $category_obj = get_category_by_slug($category_slug);
@@ -70,9 +71,29 @@ $campaign_id = $_GET['campaign_id'];
                         ksort($cumulamount);
                         /******************************************************/
                         
-                        $can_go_next_step = $campaign->can_go_next_step();
+                        /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
+                        if ($can_modify){
+                            if (isset($_POST['next_step'])&& $_POST['next_step']==1 && $campaign->can_go_next_step()){
+                                if ($status=='preparing'){
+                                    $campaign->set_status('preview');
+                                    $campaign->set_validation_next_step(0);
+                                } else if ($status=='preview') {
+                                    if(ypcf_check_user_is_complete($campaign->post_author())){
+                                        $campaign->set_status('vote');
+                                        $campaign->set_validation_next_step(0);
+                                    }
+                                } else if ($status=='vote') {
+                                    if($campaign->company_name()!=null&&$campaign->company_status()!=null
+                                            &&$campaign->is_validated_by_vote() && $campaign->end_vote_remaining()<=0){
+                                        $campaign->set_status('collecte');
+                                        $campaign->set_validation_next_step(0);
+                                    }
+                                }
+                                $status = $campaign->campaign_status();
+                            }
+                        }
                         
-                        $status = $campaign->campaign_status();
+                        /******************************************************/
                         ?>
 
                         <?php if ($can_modify): ?>
@@ -91,18 +112,19 @@ $campaign_id = $_GET['campaign_id'];
                                     <?php if ($status=='preparing'||$status=='preview'||$status=='vote'){?>
                                         <div class="list-button">   
                                             <?php if (current_user_can('manage_options')) {
+                                                //Visible uniquement par admins : autoriser le PP à passer à l'étape suivante
                                                 if(isset($_GET['validate_next_step'])){
                                                     $campaign->set_validation_next_step($_GET['validate_next_step']);
                                                 }
-                                                if($can_go_next_step){?>
+                                                if($campaign->can_go_next_step()){?>
                                                     <a href="?campaign_id=<?php echo $campaign_id?>&validate_next_step=0" class="button">&cross; Ne plus autoriser &agrave; passer &agrave; l'&eacute;tape suivante</a>
                                                 <?php } else {?>
                                                     <a href="?campaign_id=<?php echo $campaign_id?>&validate_next_step=1" class="button">&check; Autoriser &agrave; passer &agrave; l'&eacute;tape suivante</a>
                                                 <?php }
                                             }?>
                                             <a href="#gonextstep" class="wdg-button-lightbox-open button" data-lightbox="gonextstep">&check; Passer &agrave; l'&eacute;tape suivante</a>
-                                            <?php echo do_shortcode('[yproject_gonextstep_lightbox]');
-                                            ?>
+                                            <?php //Lightbox passage à l'étape suivante
+                                            echo do_shortcode('[yproject_gonextstep_lightbox]'); ?>
                                         </div>
                                     <?php }?>
                                 </div>
@@ -246,7 +268,72 @@ $campaign_id = $_GET['campaign_id'];
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
+                            
+                                <script type="text/javascript">
+                                jQuery(document).ready( function($) {
+                                        var ctxPie = $("#canvas-pie-block").get(0).getContext("2d");
+                                        var dataPie = [
+                                            {value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "Oui"}, 
+                                            {value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: "Non"}
+                                        ];
+                                        var optionsPie = {
+                                            legend: true,
+                                            legendBorders: false,
+                                            inGraphDataShow : true,
+                                            inGraphDataTmpl : "<%=v6%>%",
+                                            inGraphDataFontFamily : "BebasNeue",
+                                            inGraphDataFontSize : 25,
+                                            inGraphDataFontColor : "#FFF",
+                                            inGraphDataAnglePosition : 2,
+                                            inGraphDataRadiusPosition : 2,
+                                            inGraphDataMinimumAngle : 30,
+                                            inGraphDataAlign : "center",
+                                            inGraphDataVAlign : "middle"
+                                        };
+                                        var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
 
+                                        <?php 
+                                        function date_param($date) {
+                                                return date_format(new DateTime($date),'Y,n,j,G,i,s').',0';
+                                        }
+                                        ?>
+
+                                        var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
+                                        var dataLine = {
+                                            labels : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+                                            xBegin : new Date(<?php echo date_param($datesinvest[0]); ?>),
+                                            xEnd : new Date(<?php echo date_param($campaign->end_date()); ?>),
+                                            datasets : [
+                                                {
+                                                    fillColor : "rgba(255,73,76,0.5)",
+                                                    strokeColor : "rgba(255,73,76,1)",
+                                                    pointColor : "rgba(255,73,76,1)",
+                                                    pointStrokeColor : "rgba(199,46,49,1)",
+                                                    data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?> ],
+                                                    xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
+                                                    title : "investissements"
+                                                },{
+                                                    fillColor : "rgba(204,204,204,0.25)",
+                                                    strokeColor : "rgba(180,180,180,0.5)",
+                                                    pointColor : "rgba(0,0,0,0)",
+                                                    pointStrokeColor : "rgba(0,0,0,0)",
+                                                    data : [0,<?php echo $campaign->minimum_goal(false);?>],
+                                                    xPos : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+                                                    title : "But"
+                                                }
+                                            ]
+                                        };
+
+                                        var optionsLine = {
+                                            xAxisBottom : false,
+                                            scaleOverride : true,
+                                            scaleStartValue : 0,
+                                            scaleSteps : 5,
+                                            scaleStepWidth :  <?php echo $campaign->goal(false)/5; ?>,
+                                        };
+                                        var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
+                                });
+                                </script>
                         <?php else: ?>
 
                             <?php _e('Vous n&apos;avez pas la permission pour voir cette page.', 'yproject'); ?>
@@ -261,73 +348,5 @@ $campaign_id = $_GET['campaign_id'];
         </div>
     </div><!-- .padder -->
 </div><!-- #content -->
-
-<script type="text/javascript">
-jQuery(document).ready( function($) {
-        var ctxPie = $("#canvas-pie-block").get(0).getContext("2d");
-        var dataPie = [
-            {value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "Oui"}, 
-            {value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: "Non"}
-        ];
-        var optionsPie = {
-            legend: true,
-            legendBorders: false,
-            inGraphDataShow : true,
-            inGraphDataTmpl : "<%=v6%>%",
-            inGraphDataFontFamily : "BebasNeue",
-            inGraphDataFontSize : 25,
-            inGraphDataFontColor : "#FFF",
-            inGraphDataAnglePosition : 2,
-            inGraphDataRadiusPosition : 2,
-            inGraphDataAlign : "center",
-            inGraphDataVAlign : "middle"
-        };
-        var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
-        
-        <?php 
-        function date_param($date) {
-		return date_format(new DateTime($date),'Y,n,j,G,i,s').',0';
-	}
-        ?>
-        
-        var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
-        var dataLine = {
-            labels : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
-            xBegin : new Date(<?php echo date_param($datesinvest[0]); ?>),
-            xEnd : new Date(<?php echo date_param($campaign->end_date()); ?>),
-            datasets : [
-                {
-                    fillColor : "rgba(255,73,76,0.5)",
-                    strokeColor : "rgba(255,73,76,1)",
-                    pointColor : "rgba(255,73,76,1)",
-                    pointStrokeColor : "rgba(199,46,49,1)",
-                    data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?> ],
-                    xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
-                    title : "investissements"
-                },{
-                    fillColor : "rgba(204,204,204,0.25)",
-                    strokeColor : "rgba(180,180,180,0.5)",
-                    pointColor : "rgba(0,0,0,0)",
-                    pointStrokeColor : "rgba(0,0,0,0)",
-                    data : [0,<?php echo $campaign->minimum_goal(false);?>],
-                    xPos : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
-                    title : "But"
-                }
-            ]
-        };
-        
-        var optionsLine = {
-            xAxisBottom : false,
-            scaleOverride : true,
-            scaleStartValue : 0,
-            scaleSteps : 5,
-            scaleStepWidth :  <?php echo $campaign->goal(false)/5; ?>,
-        };
-        var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
-});
-
-
-
-</script>
 
 <?php get_footer(); ?>

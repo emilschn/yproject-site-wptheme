@@ -2348,6 +2348,16 @@ div#home_bottom h1 {
     font-weight: bold;
 }
 
+#dashboard #block-summary #wdg-lightbox-gonextstep ul {
+   list-style-position: inside;
+   list-style-type: none;
+   padding-left: 0px;
+}
+
+#dashboard #block-summary #wdg-lightbox-gonextstep ul li {
+    padding: 5px;
+}
+
 #dashboard #block-stats .quart-card {
     float:left;
     width: 25%;
