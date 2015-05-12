@@ -115,28 +115,37 @@ function yproject_redirect_login() {
 //	NotificationsSlack::send_to_dev('Connexion de ' . $current_user->first_name . ' ' . $current_user->last_name . ' (' . $current_user->ID . ')');
         $page_invest = get_page_by_path('investir');
         $page_id = $_POST['redirect-page'];
+        $page_type = $_POST['type-page']; 
+        $page_redirection = $_POST['redirect-page-investir'];
+        
         if(isset($_GET['login'])){
             $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
                     wp_redirect($page);
         }
         else {
-            if (isset($_POST['redirect-page'])) {
-                    if( $page_id != "home" && $_POST['redirect-page-investir'] == "true"){
+            if (isset($page_id) && isset($page_type)){
+                if ($page_type == "download"){
+                    if( isset($page_redirection) && $page_redirection == "true"){
+                        
                         $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
-                        wp_redirect($page);
-                    } else if ($page_id != "home" && $_POST['redirect-page-investir'] == "forum"){
+                        wp_redirect($page);  
+                        
+                    } else if ( isset($page_redirection) && $page_redirection == "forum") {
+                        
                         $forum = get_page_by_path('forum');
                         $page = get_permalink($forum->ID).'?campaign_id='.$page_id;   
                         wp_redirect($page);
-                    } else if ($page_id == "home"){ 
-                         wp_redirect(home_url());
+                        
                     } else {
                         $page = get_page($page_id);
-                        wp_redirect(get_permalink($page).'#description_du_projet'); 
+                        wp_redirect(get_permalink($page).'#description_du_projet');
                     }
-            } else {
-                wp_redirect(home_url());
-            }
+                } 
+                else {
+                    $page = get_page($page_id);
+                    wp_redirect(get_permalink($page)); 
+                }
+            }   
         }
 	exit;
 }
@@ -759,4 +768,23 @@ function yproject_shortcode_connexion_lightbox($atts, $content = '') {
 }
 add_shortcode('yproject_connexion_lightbox', 'yproject_shortcode_connexion_lightbox');
 
+//Shortcode lightbox Tableau de bord
+// ->TB Stats
+function yproject_shortcode_statsadvanced_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('common/statsadvanced-lightbox.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="statsadvanced"]' .$content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_statsadvanced_lightbox', 'yproject_shortcode_statsadvanced_lightbox');
 
+//->TB Liste investisseurs
+function yproject_shortcode_listinvestors_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('projects/single-project-investors.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="listinvestors"]' .$content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_listinvestors_lightbox', 'yproject_shortcode_listinvestors_lightbox');
