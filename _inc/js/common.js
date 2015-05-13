@@ -201,6 +201,7 @@ YPUIFunctions = (function($) {
                             });
                         }
                         
+                        //Lightbox de passage à l'étape suivante
                         if ($("#submit-go-next-step").length > 0) {
                             $("#submit-go-next-step").attr('disabled','');
                             $("#submit-go-next-step").attr('style','background-color:#333 !important');
@@ -221,6 +222,18 @@ YPUIFunctions = (function($) {
                                     $("#submit-go-next-step").attr('disabled','');
                                     $("#submit-go-next-step").attr('style','background-color:#333 !important');
                                 };
+                            });
+                        }
+                        
+                        if($("#innbday").length > 0) {
+                            $("#innbday").change(function() {
+                                $("#previewenddatecollecte").empty();
+                                if(this.value<=60 && this.value>=1){
+                                    var d = new Date();
+                                    var jsupp = this.value;
+                                    d.setDate(d.getDate()+parseInt(jsupp));
+                                    $("#previewenddatecollecte").prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+                                }
                             });
                         }
                         

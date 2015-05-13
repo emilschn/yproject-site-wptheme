@@ -30,7 +30,9 @@ $campaign = atcf_get_current_campaign();
 
         <?php } else if ($campaign->campaign_status() == 'vote') { ?>
             <li><label for="innbday">Nombre de jours de la collecte </label>
-                <input type="number" id="innbday" name="innbday" min="1" max="60" style="width: 60px;"></li>
+                <input type="number" id="innbday" name="innbday" min="1" max="60" value="30" style="width: 40px;">
+                Fin de la collecte : <span id="previewenddatecollecte"></span>
+            </li>
             <li><input type="checkbox" class="checkbox-next-step" id="cbman7">
                 <label for="cbman7">Ma carte bancaire est prête pour être le premier investisseur</label></li>
             <li><input type="checkbox" class="checkbox-next-step" id="cbman8">
