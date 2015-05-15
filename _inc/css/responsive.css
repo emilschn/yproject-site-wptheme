@@ -224,6 +224,7 @@
 		color: #FFFFFF;
 	}
 	#head-content #title p { margin: 10px 0px !important; }
+	#head-content #title img { width: 20px; height: 20px; }
 	#projects-stats { margin-top: 150px; }
 	#projects-stats-content {
 		position: inherit !important;
@@ -239,9 +240,8 @@
 		margin-top: 0px !important;
 		margin-left: 0px !important;
 		padding: 0px !important;
-		color: #FFFFFF;
 		font-size: 21px !important;
-		background: #FF494C;
+		background: #FF494C !important;
 		min-width: 45px !important;
 	}
 	#projects-stats-content .progress_zone {
@@ -261,12 +261,12 @@
 		height: auto !important;
 	}
 	#project-summary-container {
-		margin: 10px !important;
+		margin: 10px 2% !important;
 		height: auto !important;
 	}
 	#projects-left-desc .video-zone {
-		margin: 10px 0px !important;
-		width: 100% !important;
+		margin: 10px 2% !important;
+		width: 96% !important;
 	}
 	#projects-right-desc { display: none; }
 	#post_bottom_content .projects-desc-item {
@@ -291,6 +291,19 @@
 		text-transform: none;
 	}
 	.mobile-share { text-align: center; }
+	.mobile-share .jy-crois .stats_btn {
+		background-position-x: center;
+		vertical-align: top;
+		background-size: 75%;
+		height: 75px !important;
+		margin-right: 0px;
+	}
+	.mobile-share .jy-crois .stats_btn #jy-crois-txt {
+		top: 35px;
+	}
+	.mobile-share .jy-crois .stats_btn p {
+		top: 55px;
+	}
 	.reward-zone {
 		background-color: #EEECED;
 		padding: 20px;

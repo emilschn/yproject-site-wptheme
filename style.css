@@ -979,6 +979,8 @@ footer div.social-icons {
 }
 .home-large-project .description-zone .description-summary {
     text-align: justify;
+    max-height: 195px;
+    overflow-y: hidden;
 }
 .home-large-project .description-zone .description-summary p {
     margin-top: 0px;
@@ -1733,10 +1735,13 @@ div#home_bottom h1 {
     margin-top: 4px;
 }
 #projects-stats-content .project_full_percent{
-    margin-top: -28px;
-    margin-left: -20px;
+    margin-top: -25px;
     padding-top: 0px;
-    font-size: 26px;
+    height: 25px;
+    font-size: 21px;
+    background-color: #333;
+    color: #FFF;
+    min-width: 45px !important;
 }
 .post_bottom_buttons #invest-button, .post_bottom_buttons #participate-button{
     position: absolute;
@@ -2314,7 +2319,7 @@ div#home_bottom h1 {
 }
 
 .video-zone.editable:before {
-    content: "Image d'aperÃ§u / VidÃ©o";
+    content: "Image d'apercu / Video";
 }
 .video-zone.editable {
     background-color: #F2F2F2;
