@@ -52,6 +52,34 @@ else {
 			<?php echo $video_element; ?>
 		</div>
 		<div class="mobile-share only_on_mobile">
+			<?php if ($vote_status != 'vote' && $vote_status != 'preparing') : ?>
+			<?php if ( is_user_logged_in() ) { 
+				global $wpdb;
+				$user_id = wp_get_current_user()->ID;
+				$table_jcrois = $wpdb->prefix . "jycrois";
+				$users = $wpdb->get_results( 'SELECT * FROM '.$table_jcrois.' WHERE campaign_id = '.$campaign->ID.' AND user_id='.$user_id );
+				if ( !empty($users[0]->ID) ) { ?>
+					<a class="jy-crois" href="javascript:WDGProjectPageFunctions.update_jycrois(0,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
+					<div id="jy-crois-btn" style="background-image: url('<?php echo $stylesheet_directory_uri.'/images/jycrois_gris.png';?>')" class="stats_btn">
+					<p id="jy-crois-txt"><p>    
+					<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
+					</div></a>
+				<?php } else { ?>
+					<a class="jy-crois" href="javascript:WDGProjectPageFunctions.update_jycrois(1,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
+					<div id="jy-crois-btn" class="stats_btn">
+					<p id="jy-crois-txt">J'y crois<p>
+					<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
+					</div></a>
+
+				<?php }
+			} else { ?>
+				<a class="jy-crois wdg-button-lightbox-open" href="#connexion" data-lightbox="connexion">
+				<div id="jy-crois-btn" class="stats_btn">
+				<p id="jy-crois-txt">J'y crois<p>
+				<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
+				</div></a>
+			<?php } ?>
+			<?php endif; ?>
 			<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>" target="_blank">
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.jpg" alt="logo facebook" />
 			</a>
