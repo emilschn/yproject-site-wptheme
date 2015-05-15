@@ -219,8 +219,9 @@
 					<li class="page_item"><a href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
 				<?php endif; ?>
 			</ul>
+             
 		</div>
-
+             
 		<?php 
 		LibUsers::check_validate_general_terms();
 		if (LibUsers::must_show_general_terms_block()): 
@@ -239,6 +240,21 @@
 				</form>
 			</div>
 		</div>
-		<?php endif; ?>
-	    
-		<div id="container">
+		<?php endif; ?>   
+           
+                <?php 
+                    $check = yproject_check_user_warning(get_current_user_id());
+                    ob_start();
+                    locate_template('common/warning-lightbox.php',true);
+                    $content = ob_get_contents();
+                    ob_end_clean();
+                    if($check){ ?>	
+                        <div id="validate-terms" class="wdg-lightbox">
+                            <div class="wdg-lightbox-padder">
+                                <?php echo $content; ?>
+                            </div>
+                        </div>
+                <?php }?>
+            
+              
+                <div id="container"> 

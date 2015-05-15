@@ -235,6 +235,46 @@ function yproject_change_user_cap() {
 }
 add_action('init', 'yproject_change_user_cap');
 
+// Vérification de l'enregistrement des avertissements pour afficher la lightbox
+function yproject_check_user_warning($user_id){
+    
+    $warning1 = get_user_meta( $user_id, 'warning1', 'true' );
+    $warning2 = get_user_meta( $user_id, 'warning2', 'true' );
+    $warning3 = get_user_meta( $user_id, 'warning3', 'true' );
+    // Retunr true si l'utilisateur n'a pas répondu oui aux 3 questions
+    if($warning1 === 'false' || $warning2 === 'false' || $warning3 === 'false'){
+        return true;
+    }
+}
+
+//Permet d'enregistrer et de rediriger 
+function yproject_check_warning_lightbox(){    
+    $user_id = get_current_user_id(); 
+    $errors = "";
+    if(isset($_POST['submit_warning'])){
+            if(isset($_POST['warning3'])){
+                if( isset($_POST['warning1']) && isset($_POST['warning2'])){
+                    // On enregistre les valeurs
+                    $warning1 = update_user_meta( $user_id, 'warning1', $_POST['warning1'] );
+                    $warning2 = update_user_meta( $user_id, 'warning2', $_POST['warning2'] );
+                    $warning3 = update_user_meta( $user_id, 'warning3', $_POST['warning3'] ); 
+                    // ***
+                    // Redirection vers la lightbox -> profil
+                    // ***
+                }  
+                else {
+                    $errors = "Merci de répondre à toutes les questions pour continuer";
+                }
+            }
+            else {
+                $errors = "Merci de bien vouloir cocher la dernière case.";
+            }
+    }
+} 
+add_action('init', 'yproject_check_warning_lightbox');
+
+
+
 //Permet de n'afficher que les images uploadées par l'utilisateur en cours
 function yproject_my_files_only( $wp_query ) {
 	global $current_user, $pagenow;
@@ -767,5 +807,19 @@ function yproject_shortcode_connexion_lightbox($atts, $content = '') {
 	echo do_shortcode('[yproject_lightbox id="connexion"]' .$content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_connexion_lightbox', 'yproject_shortcode_connexion_lightbox');
+
+//Shortcodes lightbox d'inscription 
+function yproject_shortcode_inscription_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('common/inscription-lightbox.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="inscription"]' .$content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_inscription_lightbox', 'yproject_shortcode_inscription_lightbox');
+
+
+
+
 
 
