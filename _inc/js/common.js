@@ -206,16 +206,16 @@ YPUIFunctions = (function($) {
                             $("#submit-go-next-step").attr('disabled','');
                             $("#submit-go-next-step").attr('style','background-color:#333 !important');
                             
-                            $checkall = function() {
-                                $allcheck = true;
+                            checkall = function() {
+                                var allcheck = true;
                                 $(".checkbox-next-step").each(function(index){
-                                    $allcheck = $allcheck && this.checked;
+                                    allcheck = allcheck && this.checked;
                                 });
-                                return $allcheck;
+                                return allcheck;
                             };
                             
                             $(".checkbox-next-step").change(function() {
-                                if($checkall()){
+                                if(checkall()){
                                     $("#submit-go-next-step").removeAttr('disabled');
                                     $("#submit-go-next-step").attr('style','background-color:#FF494C');
                                 } else {

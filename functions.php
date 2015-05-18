@@ -783,7 +783,7 @@ add_shortcode('yproject_listinvestors_lightbox', 'yproject_shortcode_listinvesto
 //->TB Passer à l'étape suivante
 function yproject_shortcode_gonextstep_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('projects/next-campain-step-confirm.php',true);
+            locate_template('projects/dashboard-next-step.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
 	echo do_shortcode('[yproject_lightbox id="gonextstep"]' .$content . '[/yproject_lightbox]');

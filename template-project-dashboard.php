@@ -156,7 +156,7 @@ $campaign_id = $_GET['campaign_id'];
                                             <?php if($status!='vote'){echo 'hidden="hidden"';} ?>>
                                             <div class="quart-card">
                                                 <div class="stat-big-number"><?php echo $nb_votes?></div>
-                                                <div class="stat-little-number">sur 50 requis</div>
+                                                <div class="stat-little-number">sur <?php echo ATCF_Campaign::$voters_min_required?> requis</div>
                                                 <div class="details-card">
                                                 <strong><?php echo $nb_votes?></strong> personne<?php if($nb_votes>1){echo 's ont';}else{echo ' a';} echo ' voté';?>
                                                 </div>

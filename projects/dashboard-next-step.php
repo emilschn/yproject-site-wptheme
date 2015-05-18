@@ -55,7 +55,7 @@ $campaign = atcf_get_current_campaign();
             <?php if ($campaign->can_go_next_step()) {
             echo 'checked ';
         } ?>>
-            <label for="cbcannext">L'équipe We Do Good a validé pour passer à l'étape suivante</label></li>
+            <label for="cbcannext">L'équipe WE DO GOOD a validé pour passer à l'étape suivante</label></li>
     </ul>
     <div class="list-button">
         <input type="hidden" name="next_step" value="1">
