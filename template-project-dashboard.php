@@ -110,8 +110,6 @@ $campaign_id = $_GET['campaign_id'];
                             <div class="blocks-list">
                                 <div id="block-summary" >
                                     <div class="current-step">
-                                        <img src="<?php echo $stylesheet_directory_uri; ?>/images/frise-preview.png" alt="" />
-                                        <br>
                                         <span <?php if($status=='preparing'){echo 'id="current"';} ?>>Pr&eacute;paration </span>
                                         <span <?php if($status=='preview'){echo 'id="current"';} ?>>Avant-premi&egrave;re </span>
                                         <span <?php if($status=='vote'){echo 'id="current"';} ?>>Vote </span>
@@ -135,9 +133,9 @@ $campaign_id = $_GET['campaign_id'];
                                             <?php //Lightbox passage à l'étape suivante
                                             echo do_shortcode('[yproject_gonextstep_lightbox]'); ?>
                                         </div>
-                                        <?php }?>
-                                    <div class="clear"></div>
+                                    <?php }?>
                                 </div>
+                                <br/>
                                 
                                 <div id="block-stats" class="large-block">
                                     <div class="head">Statistiques</div>
@@ -224,23 +222,22 @@ $campaign_id = $_GET['campaign_id'];
                                 
                                 <div id ="block-community" class="block">
                                     <div class="head">Communaut&eacute;</div>
-                                        <div class="body" style="text-align:center">
-                                            <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png"/><br/>
-                                                <strong><?php echo $nb_jcrois?></strong> y croi<?php if($nb_jcrois>1){echo 'en';}?>t</div>
-                                            <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png"/><br/>
-                                                <strong><?php echo $nb_votes?></strong> <?php if($nb_votes>1){echo 'ont';} else {echo 'a';}?> vot&eacute;</div>
-                                            <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png"/><br/>
-                                                <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> investi</div>
-                                            <!--div class="list-button">
-                                                <div class="button">&#9993 Envoyer un message</div>
-                                            </div><div class="clear"></div-->
-                                            <!--div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.jpg"/><br/>
-                                                <strong><?php echo '&delta;'?></strong> partage<?php if(2>1){echo 's';}?> Facebook</div>
-                                            <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.jpg"/><br/>
-                                                <strong><?php echo '&omega;'?></strong> partage<?php if(2>1){echo 's';}?> Twitter</div>
-                                            <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/google+.jpg"/><br/>
-                                                <strong><?php echo '&lambda;'?></strong> partage<?php if(2>1){echo 's';}?> Google+</div-->
-                                        <div class="clear"></div>
+                                    <div class="body" style="text-align:center">
+                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png"/><br/>
+                                            <strong><?php echo $nb_jcrois?></strong> y croi<?php if($nb_jcrois>1){echo 'en';}?>t</div>
+                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png"/><br/>
+                                            <strong><?php echo $nb_votes?></strong> <?php if($nb_votes>1){echo 'ont';} else {echo 'a';}?> vot&eacute;</div>
+                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png"/><br/>
+                                            <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> investi</div>
+                                        <!--div class="list-button">
+                                            <div class="button">&#9993 Envoyer un message</div>
+                                        </div><div class="clear"></div-->
+                                        <!--div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.jpg"/><br/>
+                                            <strong><?php echo 'XXXX'?></strong> partage<?php if(2>1){echo 's';}?> Facebook</div>
+                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.jpg"/><br/>
+                                            <strong><?php echo 'XXXX'?></strong> partage<?php if(2>1){echo 's';}?> Twitter</div>
+                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/google+.jpg"/><br/>
+                                            <strong><?php echo 'XXXX'?></strong> partage<?php if(2>1){echo 's';}?> Google+</div-->
                                         </div>
                                     </div>
                                 </div>

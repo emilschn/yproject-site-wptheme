@@ -2338,7 +2338,7 @@ div#home_bottom h1 {
 }
 #dashboard #block-summary .current-step span {
     opacity:0.5;
-    margin: 0px 24px;
+    margin: 0px 10px;
     display: inline-block;
     min-width: 100px;
 }
@@ -2410,14 +2410,14 @@ div#home_bottom h1 {
 #dashboard #block-community .card-com{
     text-align: center;
     font-size: 120%;
-    float: left;
+    display: inline-block;
     width: 32%;
     padding: 30px 0px;
     min-width: 130px;
 }
 
 #dashboard #block-community .card-com img{
-    max-width: 40px;
+    max-width: 70px;
 }
 
 /*******************************************************************************
