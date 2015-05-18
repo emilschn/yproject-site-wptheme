@@ -20,8 +20,17 @@ $campaign_id = $_GET['campaign_id'];
                         global $can_modify, $campaign_id;
                         $post_campaign = get_post($campaign_id);
                         $campaign = atcf_get_campaign($post_campaign);
+                        $status = $campaign->campaign_status();
+                        
                         $page_guide = get_page_by_path('guide');
                         $page_particular_terms = get_page_by_path('conditions-particulieres');
+
+                        $page_parameters = get_page_by_path('parametres-projet');       // Paramètres
+                        $page_add_news = get_page_by_path('ajouter-une-actu');          // Ajouter une actualité
+                        $page_manage_team = get_page_by_path('projet-gerer-equipe');    // Editer l'équipe
+                        $pages_stats_investments = get_page_by_path('statistiques-avancees-investissements');
+                        $pages_stats_votes = get_page_by_path('statistiques-avancees-votes');
+                        $pages_list_invest = get_page_by_path('liste-investisseurs');
 
                         $category_slug = $post_campaign->ID . '-blog-' . $post_campaign->post_name;
                         $category_obj = get_category_by_slug($category_slug);
@@ -34,11 +43,6 @@ $campaign_id = $_GET['campaign_id'];
                         } else {
                             $pages_stats = get_page_by_path('statistiques-avancees');
                         }
-
-                        $pages_stats_investments = get_page_by_path('statistiques-avancees-investissements');
-                        $pages_stats_votes = get_page_by_path('statistiques-avancees-votes');
-                        $pages_list_invest = get_page_by_path('liste-investisseurs');
-                        $page_parameters = get_page_by_path('parametres-projet');
                         
                         /**************Donnees communaute**************/
                         //Recuperation du nombre de j'y crois
@@ -85,6 +89,7 @@ $campaign_id = $_GET['campaign_id'];
                             <div class="blocks-list">
                                 <div id="block-summary" >
                                     <div class="current-step">
+                                        <img src="<?php echo $stylesheet_directory_uri; ?>/images/frise-preview.png" alt="" /><br>
                                         <span <?php if($campaign->campaign_status()=='preparing'){echo 'id="current"';} ?>>Pr&eacute;paration </span>
                                         <span <?php if($campaign->campaign_status()=='preview'){echo 'id="current"';} ?>>Avant-premi&egrave;re </span>
                                         <span <?php if($campaign->campaign_status()=='vote'){echo 'id="current"';} ?>>Vote </span>
@@ -130,6 +135,7 @@ $campaign_id = $_GET['campaign_id'];
                                                     <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jour<?php if($campaign->end_vote_remaining()>1){echo 's';}?> de vote restant<?php if($campaign->end_vote_remaining()>1){echo 's';}?>
                                                 </div>
                                             </div>
+                                            <div class="clear"></div>
                                         </div>
                                         
                                         <div id="stats-invest"
@@ -190,14 +196,15 @@ $campaign_id = $_GET['campaign_id'];
                                             <div class="button">&#9993 Envoyer un message</div>
                                         </div><div class="clear"></div-->
                                         <!--div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.jpg"/><br/>
-                                            <strong><?php echo 'XXXX'?></strong> partage<?php if(2>1){echo 's';}?> Facebook</div>
+                                            <strong><?php echo '&delta;'?></strong> partage<?php if(2>1){echo 's';}?> Facebook</div>
                                         <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.jpg"/><br/>
-                                            <strong><?php echo 'XXXX'?></strong> partage<?php if(2>1){echo 's';}?> Twitter</div>
+                                            <strong><?php echo '&lambda;'?></strong> partage<?php if(2>1){echo 's';}?> Twitter</div>
                                         <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/google+.jpg"/><br/>
-                                            <strong><?php echo 'XXXX'?></strong> partage<?php if(2>1){echo 's';}?> Google+</div-->
-                                        </div>
+                                            <strong><?php echo '&omega;'?></strong> partage<?php if(2>1){echo 's';}?> Google+</div-->
+                                    <div class="clear"></div>
                                     </div>
                                 </div>
+                            </div>
                                 
                                 <div class="clear"></div>
                            
@@ -217,7 +224,9 @@ $campaign_id = $_GET['campaign_id'];
                                 <?php if ($campaign->google_doc() != ''): ?>
                                     <a href="<?php echo $campaign->google_doc(); ?>/edit" target="_blank" class="button"><?php _e('Ouvrir le document de gestion de campagne', 'yproject'); ?></a>
                                     <?php endif; ?>
-                                    <a href="<?php echo $news_link; ?>" class="button"><?php _e('Publier une actualit&eacute;', 'yproject'); ?></a>
+                                <a href="<?php echo $news_link; ?>" class="button"><?php _e('&#9999 Publier une actualit&eacute;', 'yproject'); ?></a>
+                                <a href="<?php echo get_permalink($page_parameters->ID) . $campaign_id_param . $params_partial; ?>" class="button"><?php _e('&#128295; Param&egrave;tres', 'yproject'); ?></a>
+                                <a href="<?php echo get_permalink($page_manage_team->ID) . $campaign_id_param . $params_partial; ?>" class="button"><?php _e('&Eacute;quipe', 'yproject'); ?></a>
                                 <div class="clear"></div>
                                 </div>
                                 
