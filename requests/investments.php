@@ -19,6 +19,7 @@ function wdg_get_project_investments($camp_id, $include_pending = FALSE) {
 		'percent_male' => 0,
 		'average_invest' => 0,
 		'median_invest' => 0,
+		'amount_check' => $campaign->current_amount_check(),
 		'investors_list' => array(),
 		'investors_string' => ''
 	);
