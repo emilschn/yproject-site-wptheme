@@ -366,6 +366,24 @@ $editor_params = array(
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="logo google" />
 		</a>
 	</div>
+    
+	<ul class="secondary-menu only_on_mobile">
+		<li><a href="<?php echo $news_link; ?>" <?php if($current_page==$news_link) echo 'class="current"'; ?>>Actualit&eacute;<?php echo $nb_cat; ?></a></li>
+
+		<?php if ( is_user_logged_in() ): ?> 
+			<?php $forum = get_page_by_path('forum');
+				$forum_link = get_permalink($forum->ID).$campaign_id_param;
+				$forum_link_2 = site_url('forums/forum') . '/' . $campaign_id . '-2/'; 
+			?>
+			<li><a href="<?php echo $forum_link; ?>" <?php if($current_page==$forum_link || $current_page==$forum_link_2) echo 'class="current"'; ?>>Forum</a></li>
+
+		<?php else: ?>
+			<li><a href="#connexion" id="forum" class="wdg-button-lightbox-open description-discover" data-lightbox="connexion">Forum</a></li>
+		<?php endif; ?>
+		<?php if ($show_stat_button) { ?>
+		<li><a href="<?php echo $stats_link; ?>" <?php if($current_page==$stats_link) echo 'class="current"'; ?>>Statistiques</a></li>
+		<?php } ?>
+	</ul>
 </div>
 
 </div>

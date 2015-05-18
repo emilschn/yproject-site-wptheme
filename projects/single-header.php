@@ -41,11 +41,9 @@ else {
 			?>
 				<div class="progress_zone">
 					<div class="project_full_progressbg">
-						<div class="project_full_progressbar" style="width:<?php echo $percent; ?>%">
-							&nbsp;
-						</div>
-						<span class="project_full_percent" style="width:<?php echo $percent; ?>%"><?php echo $campaign->percent_minimum_completed(); ?></span>
+						<span class="project_full_percent" style="min-width:<?php echo $width; ?>px"><?php echo $campaign->current_amount(); ?></span>
 					</div>
+					<span class="progress_percent tablet_hidden"><?php echo $campaign->percent_minimum_completed(); ?></span>
 				</div>
 				<div class="logos_zone">
 					<div class="post_bottom_infos_item only_on_mobile">

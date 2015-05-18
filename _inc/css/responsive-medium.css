@@ -70,21 +70,20 @@
 	#head-image { top: 47px !important; }
 	#head-content { width: 768px !important; }
 	#head-content #title, #head-content #subtitle { margin-left: 5px; }
-	#white-background { width: 240px !important; }
-	#projects-stats-content { width: 240px !important; }
+	#white-background { width: 260px !important; }
+	#projects-stats-content { width: 260px !important; }
 	#projects-stats-content .project_full_progressbg { 
 		margin-left: 5px !important;
-		width: 230px !important;
+		width: 250px !important;
 	}
 	#projects-stats-content .project_full_percent {
 		position: relative;
-		display: block;
+		display: inline-block;
 		margin-top: 0px !important;
 		margin-left: 0px !important;
 		background-color: #333;
 		color: #FFF;
 		font-size: 21px !important;
-		min-width: 45px !important;
 	}
 	#projects-stats-content .project_full_progressbar { display: none; }
 	#invest-button .description-discover { padding: 14px 0px !important; }
