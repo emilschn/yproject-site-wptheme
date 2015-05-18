@@ -49,10 +49,6 @@ if ($can_modify) {
                         <a href="<?php echo get_permalink($page_dashboard->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'tableau-de-bord') { echo 'class="selected"'; } ?>><?php echo __('Tableau de bord', 'yproject'); ?></a>
                         |
                         <a href="<?php echo get_permalink($campaign_id) . $params_full; ?>" <?php if ($current_page == $post_campaign->post_name) { echo 'class="selected"'; } ?>><?php echo __('Page projet', 'yproject'); ?></a>
-                        |
-                        <a href="<?php echo get_permalink($page_parameters->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'parametres-projet') { echo 'class="selected"'; } ?>>Param&egrave;tres</a>
-                        |
-                        <a href="<?php echo get_permalink($page_manage_team->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'projet-gerer-equipe') { echo 'class="selected"'; } ?>><?php echo __('&Eacute;quipe', 'yproject'); ?></a>
                         <?php if ($group_link != '') : ?>
                         |
                         <a href="<?php echo $group_link; ?>" <?php if ($current_page == 'group') { echo 'class="selected"'; } ?>>Groupe d&apos;investisseurs</a>

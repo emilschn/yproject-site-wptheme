@@ -20,9 +20,18 @@ $campaign_id = $_GET['campaign_id'];
                         global $can_modify, $campaign_id;
                         $post_campaign = get_post($campaign_id);
                         $campaign = atcf_get_campaign($post_campaign);
+                        $status = $campaign->campaign_status();
+                        
                         $page_guide = get_page_by_path('guide');
                         $page_particular_terms = get_page_by_path('conditions-particulieres');
                         $status = $campaign->campaign_status();
+
+                        $page_parameters = get_page_by_path('parametres-projet');       // Paramètres
+                        $page_add_news = get_page_by_path('ajouter-une-actu');          // Ajouter une actualité
+                        $page_manage_team = get_page_by_path('projet-gerer-equipe');    // Editer l'équipe
+                        $pages_stats_investments = get_page_by_path('statistiques-avancees-investissements');
+                        $pages_stats_votes = get_page_by_path('statistiques-avancees-votes');
+                        $pages_list_invest = get_page_by_path('liste-investisseurs');
 
                         $category_slug = $post_campaign->ID . '-blog-' . $post_campaign->post_name;
                         $category_obj = get_category_by_slug($category_slug);
@@ -35,8 +44,6 @@ $campaign_id = $_GET['campaign_id'];
                         } else {
                             $pages_stats = get_page_by_path('statistiques-avancees');
                         }
-                        
-                        $page_parameters = get_page_by_path('parametres-projet');
                         
                         /**************Donnees communaute**************/
                         //Recuperation du nombre de j'y crois
@@ -110,6 +117,7 @@ $campaign_id = $_GET['campaign_id'];
                             <div class="blocks-list">
                                 <div id="block-summary" >
                                     <div class="current-step">
+                                        <img src="<?php echo $stylesheet_directory_uri; ?>/images/frise-preview.png" alt="" /><br>
                                         <span <?php if($status=='preparing'){echo 'id="current"';} ?>>Pr&eacute;paration </span>
                                         <span <?php if($status=='preview'){echo 'id="current"';} ?>>Avant-premi&egrave;re </span>
                                         <span <?php if($status=='vote'){echo 'id="current"';} ?>>Vote </span>
@@ -161,7 +169,7 @@ $campaign_id = $_GET['campaign_id'];
                                             </div>
                                             <div class="quart-card">
                                                 <div class="stat-big-number"><?php echo $vote_results['sum_invest_ready'].'&euro;'?></div>
-                                                <div class="stat-little-number">sur <?php echo $campaign->goal(false)/2 ?> &euro; requis</div>
+                                                <div class="stat-little-number">sur <?php echo $campaign->minimum_goal(false)/2 ?> &euro; requis</div>
                                                 <div class="details-card">
                                                     <strong><?php echo $vote_results['sum_invest_ready']?></strong>&euro; de promesses d'investissement
                                                 </div>
@@ -173,13 +181,14 @@ $campaign_id = $_GET['campaign_id'];
                                                     <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jour<?php if($campaign->end_vote_remaining()>1){echo 's';}?> de vote restant<?php if($campaign->end_vote_remaining()>1){echo 's';}?>
                                                 </div>
                                             </div>
+                                            <div class="clear"></div>
                                         </div>
                                         
                                         <div id="stats-invest"
                                              <?php if($status!='collecte'){echo 'hidden="hidden"';} ?>>
                                             <div class="quart-card">
                                                 <div class="stat-big-number"><?php echo $campaign->current_amount()?></div>
-                                                <div class="stat-little-number">sur <?php echo $campaign->goal(false)/1 ?> &euro; requis</div>
+                                                <div class="stat-little-number">sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro; requis</div>
                                                 <div class="details-card">
                                                     <strong><?php echo $campaign->current_amount()?></strong> investis par 
                                                     <strong><?php echo $nb_invests?></strong> personne<?php if($nb_invests>1){echo 's';}?></p>
@@ -233,14 +242,15 @@ $campaign_id = $_GET['campaign_id'];
                                             <div class="button">&#9993 Envoyer un message</div>
                                         </div><div class="clear"></div-->
                                         <!--div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.jpg"/><br/>
-                                            <strong><?php echo 'XXXX'?></strong> partage<?php if(2>1){echo 's';}?> Facebook</div>
+                                            <strong><?php echo '&delta;'?></strong> partage<?php if(2>1){echo 's';}?> Facebook</div>
                                         <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.jpg"/><br/>
-                                            <strong><?php echo 'XXXX'?></strong> partage<?php if(2>1){echo 's';}?> Twitter</div>
+                                            <strong><?php echo '&lambda;'?></strong> partage<?php if(2>1){echo 's';}?> Twitter</div>
                                         <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/google+.jpg"/><br/>
-                                            <strong><?php echo 'XXXX'?></strong> partage<?php if(2>1){echo 's';}?> Google+</div-->
-                                        </div>
+                                            <strong><?php echo '&omega;'?></strong> partage<?php if(2>1){echo 's';}?> Google+</div-->
+                                    <div class="clear"></div>
                                     </div>
                                 </div>
+                            </div>
                                 
                                 <div class="clear"></div>
                            
@@ -260,7 +270,9 @@ $campaign_id = $_GET['campaign_id'];
                                 <?php if ($campaign->google_doc() != ''): ?>
                                     <a href="<?php echo $campaign->google_doc(); ?>/edit" target="_blank" class="button"><?php _e('Ouvrir le document de gestion de campagne', 'yproject'); ?></a>
                                     <?php endif; ?>
-                                    <a href="<?php echo $news_link; ?>" class="button"><?php _e('Publier une actualit&eacute;', 'yproject'); ?></a>
+                                <a href="<?php echo $news_link; ?>" class="button"><?php _e('&#9999 Publier une actualit&eacute;', 'yproject'); ?></a>
+                                <a href="<?php echo get_permalink($page_parameters->ID) . $campaign_id_param . $params_partial; ?>" class="button"><?php _e('&#128295; Param&egrave;tres', 'yproject'); ?></a>
+                                <a href="<?php echo get_permalink($page_manage_team->ID) . $campaign_id_param . $params_partial; ?>" class="button"><?php _e('&Eacute;quipe', 'yproject'); ?></a>
                                 <div class="clear"></div>
                                 </div>
                                 
@@ -277,69 +289,72 @@ $campaign_id = $_GET['campaign_id'];
                             <?php endif; ?>
                             
                                 <script type="text/javascript">
-                                jQuery(document).ready( function($) {
-                                        var ctxPie = $("#canvas-pie-block").get(0).getContext("2d");
-                                        var dataPie = [
-                                            {value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "Oui"}, 
-                                            {value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: "Non"}
-                                        ];
-                                        var optionsPie = {
-                                            legend: true,
-                                            legendBorders: false,
-                                            inGraphDataShow : true,
-                                            inGraphDataTmpl : "<%=v6%>%",
-                                            inGraphDataFontFamily : "BebasNeue",
-                                            inGraphDataFontSize : 25,
-                                            inGraphDataFontColor : "#FFF",
-                                            inGraphDataAnglePosition : 2,
-                                            inGraphDataRadiusPosition : 2,
-                                            inGraphDataMinimumAngle : 30,
-                                            inGraphDataAlign : "center",
-                                            inGraphDataVAlign : "middle"
-                                        };
-                                        var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
+                                    jQuery(document).ready( function($) {
+                                            var ctxPie = $("#canvas-pie-block").get(0).getContext("2d");
+                                            var dataPie = [
+                                                {value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "Oui"}, 
+                                                {value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: "Non"}
+                                            ];
+                                            var optionsPie = {
+                                                legend: true,
+                                                legendBorders: false,
+                                                inGraphDataShow : true,
+                                                inGraphDataTmpl : "<%=v6%>%",
+                                                inGraphDataFontFamily : "BebasNeue",
+                                                inGraphDataFontSize : 25,
+                                                inGraphDataFontColor : "#FFF",
+                                                inGraphDataAnglePosition : 2,
+                                                inGraphDataRadiusPosition : 2,
+                                                inGraphDataMinimumAngle : 30,
+                                                inGraphDataAlign : "center",
+                                                inGraphDataVAlign : "middle"
+                                            };
+                                            var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
 
-                                        <?php 
-                                        function date_param($date) {
-                                                return date_format(new DateTime($date),'Y,n,j,G,i,s').',0';
-                                        }
-                                        ?>
+                                            <?php 
+                                            function date_param($date) {
+                                                    return date_format(new DateTime($date),'Y,n,j,G,i,s').',0';
+                                            }
+                                            ?>
 
-                                        var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
-                                        var dataLine = {
-                                            labels : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
-                                            xBegin : new Date(<?php echo date_param($datesinvest[0]); ?>),
-                                            xEnd : new Date(<?php echo date_param($campaign->end_date()); ?>),
-                                            datasets : [
-                                                {
-                                                    fillColor : "rgba(255,73,76,0.5)",
-                                                    strokeColor : "rgba(255,73,76,1)",
-                                                    pointColor : "rgba(255,73,76,1)",
-                                                    pointStrokeColor : "rgba(199,46,49,1)",
-                                                    data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?> ],
-                                                    xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
-                                                    title : "investissements"
-                                                },{
-                                                    fillColor : "rgba(204,204,204,0.25)",
-                                                    strokeColor : "rgba(180,180,180,0.5)",
-                                                    pointColor : "rgba(0,0,0,0)",
-                                                    pointStrokeColor : "rgba(0,0,0,0)",
-                                                    data : [0,<?php echo $campaign->minimum_goal(false);?>],
-                                                    xPos : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
-                                                    title : "But"
-                                                }
-                                            ]
-                                        };
+                                            var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
+                                            var dataLine = {
+                                                labels : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+                                                xBegin : new Date(<?php echo date_param($datesinvest[0]); ?>),
+                                                xEnd : new Date(<?php echo date_param($campaign->end_date()); ?>),
+                                                datasets : [
+                                                    {
+                                                        fillColor : "rgba(255,73,76,0.5)",
+                                                        strokeColor : "rgba(255,73,76,1)",
+                                                        pointColor : "rgba(255,73,76,1)",
+                                                        pointStrokeColor : "rgba(199,46,49,1)",
+                                                        data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?> ],
+                                                        xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
+                                                        title : "investissements"
+                                                    },{
+                                                        fillColor : "rgba(204,204,204,0.25)",
+                                                        strokeColor : "rgba(180,180,180,0.5)",
+                                                        pointColor : "rgba(0,0,0,0)",
+                                                        pointStrokeColor : "rgba(0,0,0,0)",
+                                                        data : [0,<?php echo $campaign->minimum_goal(false);?>],
+                                                        xPos : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+                                                        title : "But"
+                                                    }
+                                                ]
+                                            };
 
-                                        var optionsLine = {
-                                            xAxisBottom : false,
-                                            scaleOverride : true,
-                                            scaleStartValue : 0,
-                                            scaleSteps : 5,
-                                            scaleStepWidth :  <?php echo $campaign->goal(false)/5; ?>,
-                                        };
-                                        var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
-                                });
+                                            var optionsLine = {
+                                                xAxisBottom : false,
+                                                scaleOverride : true,
+                                                scaleStartValue : 0,
+                                                scaleSteps : 5,
+                                                scaleStepWidth :  <?php
+                                                    if($campaign->is_funded()){$max= ($campaign->current_amount(false));}
+                                                    else{$max= ($campaign->minimumgoal(false));}
+                                                    echo (round($max,0,PHP_ROUND_HALF_UP)/5);?>
+                                            };
+                                            var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
+                                    });
                                 </script>
                         <?php else: ?>
 
@@ -355,5 +370,4 @@ $campaign_id = $_GET['campaign_id'];
         </div>
     </div><!-- .padder -->
 </div><!-- #content -->
-
 <?php get_footer(); ?>
