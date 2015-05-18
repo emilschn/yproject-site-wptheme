@@ -123,7 +123,7 @@ $campaign_id = $_GET['campaign_id'];
                                             </div>
                                             <div class="quart-card">
                                                 <div class="stat-big-number"><?php echo $vote_results['sum_invest_ready'].'&euro;'?></div>
-                                                <div class="stat-little-number">sur <?php echo $campaign->goal(false)/2 ?> &euro; requis</div>
+                                                <div class="stat-little-number">sur <?php echo $campaign->minimum_goal(false)/2 ?> &euro; requis</div>
                                                 <div class="details-card">
                                                     <strong><?php echo $vote_results['sum_invest_ready']?></strong>&euro; de promesses d'investissement
                                                 </div>
@@ -142,7 +142,7 @@ $campaign_id = $_GET['campaign_id'];
                                              <?php if($campaign->campaign_status()!='collecte'){echo 'hidden="hidden"';} ?>>
                                             <div class="quart-card">
                                                 <div class="stat-big-number"><?php echo $campaign->current_amount()?></div>
-                                                <div class="stat-little-number">sur <?php echo $campaign->goal(false)/1 ?> &euro; requis</div>
+                                                <div class="stat-little-number">sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro; requis</div>
                                                 <div class="details-card">
                                                     <strong><?php echo $campaign->current_amount()?></strong> investis par 
                                                     <strong><?php echo $nb_invests?></strong> personne<?php if($nb_invests>1){echo 's';}?></p>
@@ -274,6 +274,7 @@ jQuery(document).ready( function($) {
             inGraphDataFontColor : "#FFF",
             inGraphDataAnglePosition : 2,
             inGraphDataRadiusPosition : 2,
+            inGraphDataMinimumAngle : 30,
             inGraphDataAlign : "center",
             inGraphDataVAlign : "middle"
         };
@@ -316,7 +317,10 @@ jQuery(document).ready( function($) {
             scaleOverride : true,
             scaleStartValue : 0,
             scaleSteps : 5,
-            scaleStepWidth :  <?php echo $campaign->goal(false)/5; ?>,
+            scaleStepWidth :  <?php
+                if($campaign->is_funded()){$max= ($campaign->current_amount(false));}
+                else{$max= ($campaign->minimumgoal(false));}
+                echo (round($max,0,PHP_ROUND_HALF_UP)/5);?>
         };
         var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
 });
