@@ -146,10 +146,9 @@ $campaign_id = $_GET['campaign_id'];
                                                 <canvas id="canvas-line-block" width="420" height="200"></canvas>
                                             </div>
                                             <div class="quart-card">
-                                                <div class="stat-big-number"><?php echo $campaign->days_remaining();?><br/></div>
-                                                <div class="stat-little-number">jour<?php if($campaign->days_remaining()>1){echo 's';}?></div>
+                                                <div class="stat-big-number"><?php echo $campaign->time_remaining_str();?><br/></div>
                                                 <div class="details-card">
-                                                    <strong><?php echo $campaign->days_remaining(); ?></strong> jour<?php if($campaign->days_remaining()>1){echo 's';}?> de collecte restant<?php if($campaign->days_remaining()>1){echo 's';}?>
+                                                    <?php echo $campaign->time_remaining_fullstr(); ?>
                                                 </div>
                                             </div>
                                         </div>

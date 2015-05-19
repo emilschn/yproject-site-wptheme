@@ -381,7 +381,7 @@ function printUserInvest($post_invest, $post_campaign) {
 		<div class="project_preview_item_infos">
 		    <div class="project_preview_item_picto">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" />
-			<?php echo $campaign->days_remaining(); ?>
+			<?php echo $campaign->time_remaining_str(); ?>
 		    </div>
 		    <div class="project_preview_item_picto">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" />

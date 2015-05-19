@@ -1,14 +1,10 @@
 
 <?php while (have_posts()): the_post(); ?>
 	<?php 
+	date_default_timezone_set("Europe/London");
 	global $post;
 	$campaign = atcf_get_campaign( $post );
 	$campaign_status = $campaign->campaign_status();
-	
-	$days_remaining = $campaign->days_remaining();
-	if ($campaign_status == 'vote') {
-		$days_remaining = $campaign->end_vote_remaining();
-	}
 	
 	$percent = min(100, $campaign->percent_minimum_completed(false));
 	$width = 240 * $percent / 100;
@@ -82,7 +78,7 @@
 					</div>
 					<div class="description-logos-item">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="logo horloge" />
-						<?php echo $days_remaining; ?>
+						<?php echo $campaign->time_remaining_str(); ?>
 					</div>
 					<div class="description-logos-item" style="width: 60px;">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="logo cible" />

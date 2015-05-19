@@ -515,7 +515,7 @@ function print_user_projects(){
 				$project['title'] = $post_camp->post_title;
 				$project['width_min'] = $width_min;
 				$project['width'] = $width;
-				$project['days_remaining'] = $campaign->days_remaining();
+				$project['days_remaining'] = $campaign->time_remaining_str();
 				$project['percent_minimum_completed'] = $campaign->percent_minimum_completed();
 				$project['minimum_goal'] = $campaign->minimum_goal(true);
 			?>

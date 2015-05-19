@@ -4,7 +4,7 @@
 <strong><?php echo $investments_list['count_validate_investments']; ?></strong> investissements valid&eacute;s.<br />
 Les investisseurs ont <strong><?php echo $investments_list['average_age']; ?></strong> ans de moyenne.<br />
 Ce sont <strong><?php echo $investments_list['percent_female']; ?>%</strong> de femmes et <strong><?php echo $investments_list['percent_male']; ?>%</strong> d&apos;hommes.<br />
-<strong><?php echo $investments_list['campaign']->days_remaining(); ?></strong> jours restants.<br />
+<strong><?php echo $investments_list['campaign']->time_remaining_fullstr(); ?></strong>.<br />
 Investissement moyen par personne : <strong><?php echo $investments_list['average_invest']; ?></strong>&euro;<br />
 Investissement m&eacute;dian : <strong><?php echo $investments_list['median_invest']; ?></strong>&euro;
 
