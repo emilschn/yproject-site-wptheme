@@ -115,28 +115,37 @@ function yproject_redirect_login() {
 //	NotificationsSlack::send_to_dev('Connexion de ' . $current_user->first_name . ' ' . $current_user->last_name . ' (' . $current_user->ID . ')');
         $page_invest = get_page_by_path('investir');
         $page_id = $_POST['redirect-page'];
+        $page_type = $_POST['type-page']; 
+        $page_redirection = $_POST['redirect-page-investir'];
+        
         if(isset($_GET['login'])){
             $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
                     wp_redirect($page);
         }
         else {
-            if (isset($_POST['redirect-page'])) {
-                    if( $page_id != "home" && $_POST['redirect-page-investir'] == "true"){
+            if (isset($page_id) && isset($page_type)){
+                if ($page_type == "download"){
+                    if( isset($page_redirection) && $page_redirection == "true"){
+                        
                         $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
-                        wp_redirect($page);
-                    } else if ($page_id != "home" && $_POST['redirect-page-investir'] == "forum"){
+                        wp_redirect($page);  
+                        
+                    } else if ( isset($page_redirection) && $page_redirection == "forum") {
+                        
                         $forum = get_page_by_path('forum');
                         $page = get_permalink($forum->ID).'?campaign_id='.$page_id;   
                         wp_redirect($page);
-                    } else if ($page_id == "home"){ 
-                         wp_redirect(home_url());
+                        
                     } else {
                         $page = get_page($page_id);
-                        wp_redirect(get_permalink($page).'#description_du_projet'); 
+                        wp_redirect(get_permalink($page).'#description_du_projet');
                     }
-            } else {
-                wp_redirect(home_url());
-            }
+                } 
+                else {
+                    $page = get_page($page_id);
+                    wp_redirect(get_permalink($page)); 
+                }
+            }   
         }
 	exit;
 }
@@ -448,7 +457,7 @@ function print_user_projects(){
 			  	$payment_status = ypcf_get_updated_payment_status($post->ID);
 				$contractid = ypcf_get_signsquidcontractid_from_invest($post->ID);
 				$signsquid_infos = signsquid_get_contract_infos_complete($contractid);
-				$signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos);
+				$signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos, edd_get_payment_amount( $post->ID ));
 				$payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
 
 				$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);

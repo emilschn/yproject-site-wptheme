@@ -1,31 +1,27 @@
-<div style="width: 450px;" id="post_bottom_content" class="center_small">
-    <div style="width: 450px;" class="left post_bottom_desc_small">
+<div style="width: 450px !important;" id="post_bottom_content" class="center_small">
         <div class="login_fail">
             <?php if (isset($_GET["login"]) && $_GET["login"] == "failed") { ?>
                 <?php _e('Erreur d&apos;identification', 'yproject'); ?>
             <?php } ?>
         </div>
+        
+        
         <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url('wp-login.php', 'login_post'); ?>" method="post">
-            <input id="identifiant" type="text" name="log" class="margin-left" placeholder="Identifiant ou e-mail" value="<?php if (isset($user_login)) echo esc_attr(stripslashes($user_login)); ?>" />
+            <input id="identifiant" type="text" name="log" placeholder="Identifiant ou e-mail" value="<?php if (isset($user_login)) echo esc_attr(stripslashes($user_login)); ?>" />
             <br />
 
-            <input id="password" type="password" name="pwd" class="margin-left" placeholder="Mot de passe" value="" />
+            <input id="password" type="password" name="pwd" placeholder="Mot de passe" value="" style="margin: 5px;" />
             <br />
 	    
-	    <input id="sidebar-rememberme" type="checkbox" name="rememberme" class="margin-left" value="forever" />
+	    <input id="sidebar-rememberme" type="checkbox" name="rememberme" value="forever" />
 	    <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
 	    <br />
             
             <div id="submit-center">
-                <input type="submit"  name="wp-submit" id="sidebar-wp-submit" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
+                <input type="submit"  name="wp-submit" id="sidebar-wp-submit-lightbox" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" style="margin: 5px;" />
                 <input type="hidden" name="redirect-page-error" id="redirect-page-error" value="<?php echo get_permalink($page) ?>" />
                 <?php 
-                    if( get_permalink($page) === home_url()."/"){
-                        $valeur = "home";
-                    } else {
-                        $valeur = get_the_ID();
-                    }
-                    $redirect_value = "";
+                $redirect_value = "";
                     if (isset($_GET["redirect"])){
                         if($_GET["redirect"] == "invest"){
                             $redirect_value = "true";
@@ -35,16 +31,19 @@
                     }
                          
                 ?>
-                <input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo $valeur; ?>" />   
+                <input type="hidden" name="type-page" id="type-page" value="<?php echo  get_post_type(get_the_ID());?>" />
+                <input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo get_the_ID(); ?>" />   
                 <input type="hidden" name="redirect-page-investir" id="redirect-page-investir" value="<?php echo $redirect_value; ?>" />
+               
             </div>
-          
+            <div id="sidebar-login-form-lightbox">
             <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-            <a href="<?php echo get_permalink($page_forgotten->ID); ?>">(Mot de passe oubli&eacute;)</a>
+            <a href="<?php echo get_permalink($page_forgotten->ID); ?>" >(Mot de passe oubli&eacute;)</a>
+            </div>
             <br />
             <input type="hidden" name="testcookie" value="1" />
         </form>
-
+            
         <hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
 
         <div id="connexion_facebook_container">
@@ -65,7 +64,5 @@
             </div>
         </div>
         <br />
-    </div>
-    <div style="clear: both"></div>
 </div>
 

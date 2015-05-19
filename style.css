@@ -16,8 +16,8 @@
  *
  */
 
- @import url("_inc/css/responsive.css?ver=1.1.101") (max-width: 480px);
- @import url("_inc/css/responsive-medium.css?ver=1.1.101") (min-width: 481px);
+ @import url("_inc/css/responsive.css?d=20150518") (max-width: 480px);
+ @import url("_inc/css/responsive-medium.css?d=20150518") (min-width: 481px);
 
  /* FONTS TO LOAD */
  @font-face {
@@ -63,6 +63,7 @@ tbody {
 .center_small {
     width: 960px;
     margin: auto;
+    text-align: center; 
 }
 
 .left { float: left; }
@@ -239,33 +240,120 @@ form.wdg-forms .small-margin {
 }
 
 /*******************************************************************************
-* LIGHTBOX - CGU / DEJA CONNECTE
+* LIGHTBOX - FORMULAIRE
 *******************************************************************************/
+/* tooltip */
 
+
+.tool-tip{
+	color: #fff;
+	background-color: rgba( 0, 0, 0, .7);
+	text-shadow: none;
+	font-size: .9em;
+	visibility: hidden;
+	-webkit-border-radius: 7px; 
+	-moz-border-radius: 7px; 
+	-o-border-radius: 7px; 
+	border-radius: 7px;	
+	text-align: center;	
+	opacity: 0;
+	z-index: 999;
+	padding: 3px 8px;	
+	position: absolute;
+	cursor: default;
+	-webkit-transition: all 240ms ease-in-out;
+	-moz-transition: all 240ms ease-in-out;
+	-ms-transition: all 240ms ease-in-out;
+	-o-transition: all 240ms ease-in-out;
+	transition: all 240ms ease-in-out;	
+}
+/* default heights, width and margin w/o Javscript */
+
+.tool-tip,
+.tool-tip.top{
+	width: 90px;
+	height: 30px;
+	margin-left: -43px;
+}
+
+/* tool tip position right */
+
+.tool-tip.right{
+	top: 50%;
+	right: auto;
+	left: 75%;
+	margin-top: -15px;
+	margin-right: auto;	
+	margin-left: auto;
+}
+
+.tool-tip.right:after{
+	left: -5px;
+	top: 50%;	
+	margin-top: -6px;
+	bottom: auto;
+	border-top-color: transparent;	
+    border-right-color: rgba( 0, 0, 0, .7);	
+}
+.on-focus input{
+        width:200px;
+}
+
+/* tooltip on focus left and right */
+
+.on-focus .tool-tip.left,
+.on-focus .tool-tip.right{
+	margin-top: -19px;
+}
+
+/* on hover of element containing tooltip default*/
+
+*:not(.on-focus):hover > .tool-tip,
+.on-focus input:focus + .tool-tip{
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition: all 240ms ease-in-out;
+	-moz-transition: all 240ms ease-in-out;
+	-ms-transition: all 240ms ease-in-out;
+	-o-transition: all 240ms ease-in-out;
+	transition: all 240ms ease-in-out;		
+}
+
+
+
+
+.colonne {
+   
+    margin-top: 10px;
+    width: 350px;
+    border: 1px solid;
+    display: inline-block;
+}
+
+.colonne p {
+    width: 300px;
+    text-align: left;
+}
 .login_fail{
     margin-bottom: 10px;
 }
-#sidebar-login-form {
-    text-align: left;
-}
+
+
 
 #sidebar-login-form a{
     color: #606060;
     font-size: 11px;
     font-style: italic;
-    margin-left: 150px
 }
+
 #sidebar-login-form label {
     text-align: right;
+    font-size: 14px;
 }
 
-#sidebar-login-form input{
-    margin: 5px;
-}
-
-#sidebar-login-form #submit-center {
-    margin-left: 150px
-}
+/*******************************************************************************
+* LIGHTBOX - CGU / DEJA CONNECTE
+*******************************************************************************/
 
 .wdg-lightbox {
 	background-color: rgba(0, 0, 0, 0.75);
@@ -891,6 +979,8 @@ footer div.social-icons {
 }
 .home-large-project .description-zone .description-summary {
     text-align: justify;
+    max-height: 195px;
+    overflow-y: hidden;
 }
 .home-large-project .description-zone .description-summary p {
     margin-top: 0px;
@@ -1645,10 +1735,13 @@ div#home_bottom h1 {
     margin-top: 4px;
 }
 #projects-stats-content .project_full_percent{
-    margin-top: -28px;
-    margin-left: -20px;
     padding-top: 0px;
-    font-size: 26px;
+    height: 25px;
+    font-size: 21px;
+    background-color: #333;
+    color: #FFF;
+    width: auto;
+    max-width: 250px !important;
 }
 .post_bottom_buttons #invest-button, .post_bottom_buttons #participate-button{
     position: absolute;
@@ -2005,10 +2098,14 @@ div#home_bottom h1 {
     height: 25px;
 }
 .project_full_percent {
-    width: 49px;
     position: absolute;
     padding-top: 3px;
     text-align: right;
+}
+.progress_zone .progress_percent {
+    font-size: 21px;
+    position: relative;
+    top: -5px;
 }
 
 /* VOTE */
@@ -2226,7 +2323,7 @@ div#home_bottom h1 {
 }
 
 .video-zone.editable:before {
-    content: "Image d'aperÃ§u / VidÃ©o";
+    content: "Image d'apercu / Video";
 }
 .video-zone.editable {
     background-color: #F2F2F2;
@@ -2250,10 +2347,10 @@ div#home_bottom h1 {
     font-weight: bold;
 }
 #wdg-edit-project.edit-button:before {
-    content: "Mode Ã©dition";
+    content: "Mode Edition";
 }
 #wdg-edit-project.edit-button-validate:before {
-    content: "Mode normal";
+    content: "Mode Normal";
 }
 
 /*******************************************************************************
@@ -2397,10 +2494,6 @@ div#home_bottom h1 {
 #dashboard .block .wdg-lightbox-button-close .button {
     padding: 3px 8px;
     display: initial;
-}
-
-#dashboard #block-investors .wdg-lightbox-padder {
-    min-height: ;
 }
 
 #dashboard #block-stats .wdg-lightbox-padder .expandable {
