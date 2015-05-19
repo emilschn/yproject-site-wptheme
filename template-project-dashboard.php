@@ -332,6 +332,14 @@ jQuery(document).ready( function($) {
                     pointStrokeColor : "rgba(0,0,0,0)",
                     data : [0,<?php echo $campaign->minimum_goal(false);?>],
                     xPos : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+                    title : "But progression"
+                },{
+                    fillColor : "rgba(0,0,0,0)",
+                    strokeColor : "rgba(140,140,140,0.5)",
+                    pointColor : "rgba(0,0,0,0)",
+                    pointStrokeColor : "rgba(0,0,0,0)",
+                    data : [<?php echo $campaign->minimum_goal(false);?>,<?php echo $campaign->minimum_goal(false);?>],
+                    xPos : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
                     title : "But"
                 }
             ]
@@ -341,10 +349,10 @@ jQuery(document).ready( function($) {
             xAxisBottom : false,
             scaleOverride : true,
             scaleStartValue : 0,
-            scaleSteps : 5,
+            scaleSteps : 6,
             scaleStepWidth :  <?php
                 if($campaign->is_funded()){$max= ($campaign->current_amount(false));}
-                else{$max= ($campaign->minimumgoal(false));}
+                else{$max= ($campaign->minimum_goal(false));}
                 echo (round($max,0,PHP_ROUND_HALF_UP)/5);?>
         };
         var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
