@@ -2389,6 +2389,15 @@ div#home_bottom h1 {
     padding-bottom: 15px;
 }
 
+#dashboard #block-stats .stat-little-number-top {
+    font-family: "BebasNeue";
+    font-size: 28px;
+    color: #FF494C;
+    padding-bottom: 0px;
+    margin-bottom: -40px;
+    padding-top: 5px;
+}
+
 #dashboard .wdg-lightbox-padder {
     text-align: initial
 }
