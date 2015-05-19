@@ -37,11 +37,20 @@ $campaign_id = $_GET['campaign_id'];
                         $category_link = (!empty($category_obj)) ? get_category_link($category_obj->cat_ID) : '';
                         $news_link = esc_url($category_link);
 
-                        // Statistiques avancees
+                        // Page statistiques avancees
                         if (strtotime($post_campaign->post_date) < strtotime('2014-02')) {
                             $pages_stats = get_page_by_path('vote');
                         } else {
                             $pages_stats = get_page_by_path('statistiques-avancees');
+                        }
+                        
+                        /**************Stats Vues *********************/
+                        $stats_views = 0;
+                        $stats_views_today = 0;
+                        if (function_exists('stats_get_csv')) {
+                                global $wpdb;
+                                $stats_views = stats_get_csv( 'postviews', array( 'post_id' => $post_camp->ID, 'days' => 365 ) );
+                                $stats_views_today = stats_get_csv( 'postviews', array( 'post_id' => $post_camp->ID, 'days' => 1 ) );
                         }
                         
                         /**************Donnees communaute**************/
@@ -105,7 +114,16 @@ $campaign_id = $_GET['campaign_id'];
                                         
                                         <?php if($status=='preview'){ ?>
                                             <div id="stats-prepare">
-                                                
+                                                <div class="quart-card">
+                                                    <div class="stat-little-number-top">Votre projet a &eacute;t&eacute; vu</div>
+                                                    <div class="stat-big-number"><?php echo $stats_views[0]['views'];?></div>
+                                                    <div class="stat-little-number">fois au total</div>
+                                                </div>
+                                                <div class="quart-card">
+                                                    <div class="stat-little-number-top">Dont</div>
+                                                    <div class="stat-big-number"><?php echo $stats_views_today[0]['views'];?></div>
+                                                    <div class="stat-little-number">Vues aujourd'hui</div>
+                                                </div>
                                             </div>
                                         
                                         <?php }
