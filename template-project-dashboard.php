@@ -53,6 +53,7 @@ $campaign_id = $_GET['campaign_id'];
                                 $stats_views_today = stats_get_csv( 'postviews', array( 'post_id' => $post_camp->ID, 'days' => 1 ) );
                         }
                         
+                        
                         /**************Donnees communaute**************/
                         //Recuperation du nombre de j'y crois
                             $nb_jcrois = $campaign->get_jycrois_nb();
@@ -307,13 +308,18 @@ jQuery(document).ready( function($) {
     <?php } else if($status=='collecte'){ 
         
         function date_param($date) {
-		return date_format(new DateTime($date),'"D M d Y H:i:s O"');
+            return date_format(new DateTime($date),'"D M d Y H:i:s O"');
 	}
+        
+        function date_abs($date) {
+            return date_format(new DateTime($date),'"j/m/Y"');
+        }
         ?>
         
         var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
         var dataLine = {
-            labels : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+            labels : [<?php echo date_abs($datesinvest[0]); ?>,
+                <?php echo date_abs($campaign->end_date()); ?>],
             xBegin : new Date(<?php echo date_param($datesinvest[0]); ?>),
             xEnd : new Date(<?php echo date_param($campaign->end_date()); ?>),
             datasets : [
@@ -346,7 +352,6 @@ jQuery(document).ready( function($) {
         };
         
         var optionsLine = {
-            xAxisBottom : false,
             scaleOverride : true,
             scaleStartValue : 0,
             scaleSteps : 6,
