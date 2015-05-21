@@ -384,6 +384,18 @@ form.wdg-forms .small-margin {
 	overflow-y: auto;
 	z-index: 4002;
 }
+
+.wdg-lightbox .wdg-widelightbox-padder {
+	position: relative;
+	max-width: 90%;
+	max-height: 80vh;
+	margin: 5vh auto;
+	padding: 20px;
+	background-color: #F2F2F2;
+	overflow-y: auto;
+	z-index: 4002;
+}
+
 .wdg-lightbox .wdg-lightbox-padder > div {
 	background-color: #F2F2F2 !important;
 }
@@ -3102,51 +3114,32 @@ ul.invest-mean-payment li img {
     overflow-y: hidden;
 }
 
+//Barre de scroll en haut du tableau
+#tablescroll, #tablescroll table{
+    transform:rotateX(180deg);
+}
+
 /****Affichage permanent du scroll sur Mac et ios******/
 #tablescroll::-webkit-scrollbar {
     -webkit-appearance: none;
 }
-
-#tablescroll::-webkit-scrollbar:vertical {
-    width: 11px;
-}
-
 #tablescroll::-webkit-scrollbar:horizontal {
-    height: 11px;
+    height: 15px;
 }
-
 #tablescroll::-webkit-scrollbar-thumb {
     border-radius: 8px;
     border: 2px solid white;
     background-color: rgba(0, 0, 0, .5);
 }
-
 #tablescroll::-webkit-scrollbar-track { 
     background-color: #fff; 
     border-radius: 8px; 
-} 
+}
 /***************************************************/
 
 #display-options-col-menu {
-    display:none;
-    position: absolute;
     background-color: #333;
     border: 0px none;
-}
-
-#display-options-col-div {
-    display:inline;
-}
-
-#display-options-col-div button {
-    border: 1px solid #FF494C;
-    background-color: white;
-    color: #FF494C;
-    padding: 4px 8px 4px 8px;
-}
-
-#display-options-col-div:hover #display-options-col-menu {
-    display:inline;
 }
 
 #display-options-col-list {
@@ -3155,20 +3148,17 @@ ul.invest-mean-payment li img {
    padding-left: 0px;
    color: white;
    font-variant: small-caps;
+   margin-top: 5px;
+   margin-bottom: 0px;
 }
 
 #display-options-col-list li {
-    float: left;
-    padding-bottom: 2px;
-    padding-right: 4px;
-    margin-bottom: 5px;
+    display: inline-block;
+    min-width: 140px;
 }
 
 #cb-li-collall {
     background-color: #FF494C;
-    padding-bottom: 2px;
-    padding-right: 4px;
-    margin-bottom: 5px;
 }
 
 /*******************************************************************************
