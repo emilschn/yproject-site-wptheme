@@ -94,6 +94,14 @@ get_header();
 					"BeneficiaryWalletID" : 0,
 					"Amount" : 250000,
 					"ClientFeeAmount" : 250
+				    }');
+		    $mangopay_newtransfer = request('transfers', 'POST', '{ 
+					"PayerID" : 10350060, 
+					"PayerWalletID" : 10350063,
+					"BeneficiaryID" : 15573055,
+					"BeneficiaryWalletID" : 0,
+					"Amount" : 0,
+					"ClientFeeAmount" : 24750
 				    }');*/
 		    
 		    ?>

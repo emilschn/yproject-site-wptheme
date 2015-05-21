@@ -38,7 +38,7 @@
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?ver=1.1.101" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=20150518" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php
 			$cache_head = ob_get_contents();
@@ -162,7 +162,8 @@
 				</ul>
 			</div>
 		</nav>
-		
+            
+                <?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
 		<div id="submenu_item_connection">
 			<?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
 			<ul>
@@ -180,7 +181,10 @@
 
 					<input type="password" name="pwd" id="sidebar-user-pass" class="input" placeholder="<?php _e('Mot de passe', 'yproject'); ?>" />
 					<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="OK" />
-					<input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo get_the_ID();?>" />
+                                        
+                                        <input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo  get_the_ID();?>" />
+					<input type="hidden" name="type-page" id="type-page" value="<?php echo  get_post_type(get_the_ID());?>" />
+                                        <input type="hidden" name="redirect-page-error" id="redirect-page-error" value="<?php echo get_permalink($page) ?>" />
 					<br />
 					<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
 					<a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">(Mot de passe oubli&eacute;)</a>
@@ -190,10 +194,12 @@
 					</form>
 				</li>
 			</ul>
+                   
 		</div>
 	    
 		<div id="submenu-mobile">
-			<ul>
+                                
+			<ul>    
 				<?php foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
 					<?php $menu_page_object = get_page_by_path($menu_page_key); ?>
 					<li class="page_item"><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></li>

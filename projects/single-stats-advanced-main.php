@@ -44,6 +44,34 @@ if (function_exists('bbp_get_forum_topic_count')) {
 	    $nb_users = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(DISTINCT post_author) FROM {$wpdb->posts} WHERE post_parent IN ( " . join( ',', $topic_ids ) . " ) AND post_status = '%s' AND (post_type = 'topic' OR post_type = 'reply');", bbp_get_public_status_id() ) );
 	}
 }
+
+//Stats facebook 
+$fb_share_count = 0;
+$fb_like_count = 0;
+$ch = curl_init();
+
+$url_fb_stats = 'https://graph.facebook.com/fql?q=SELECT%20url,%20normalized_url,%20share_count,%20like_count,%20comment_count,%20total_count,commentsbox_count,%20comments_fbid,%20click_count%20FROM%20link_stat%20WHERE%20url=%27'
+        .get_permalink($_GET['campaign_id']).'%27';
+
+curl_setopt($ch, CURLOPT_URL, $url_fb_stats);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$json = curl_exec($ch);
+
+if(!curl_errno($ch)){
+        $json_fb = (json_decode($json));
+        if(isset($json_fb->data[0])){
+            $stats_fb = ($json_fb->data[0]);
+            if(isset($stats_fb->share_count)){
+                    $fb_share_count = $stats_fb->share_count;
+            }
+            if(isset($stats_fb->like_count)){
+                    $fb_like_count = $stats_fb->like_count;
+            }
+        }
+}
+curl_close($ch);
+
 ?>
 
 <h2>Audience et interactions</h2>
@@ -61,6 +89,11 @@ Votre projet a &eacute;t&eacute; vu<br />
 <a href="<?php echo $forum_last_reply_url; ?>">Derni&egrave;re r&eacute;ponse</a> par <?php echo $forum_last_user_name; ?>. <?php echo $forum_last_activity; ?>.
 <br /><br />
 <?php endif; ?>
+
+<h2>R&eacute;seaux sociaux</h2>
+<h3>Facebook</h3>
+La page projet a été partagée <strong><?php echo $fb_share_count?></strong> fois
+et a receuilli <strong><?php echo $fb_like_count ?> "J'aime"</strong> <br />
 
 <?php if (current_user_can('manage_options')) { ?>
 <h2>[ADMIN] E-mails des utilisateurs qui croient ou qui ont vot&eacute;</h2>
