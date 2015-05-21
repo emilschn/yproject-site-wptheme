@@ -89,26 +89,42 @@ $campaign_id = $_GET['campaign_id'];
                         
                         /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
                         if ($can_modify){
+                            /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
                             if (isset($_POST['next_step'])&& $_POST['next_step']==1 && $campaign->can_go_next_step()){
+
+                                //Préparation -> Avanat-premiere
                                 if ($status=='preparing'){
                                     $campaign->set_status('preview');
                                     $campaign->set_validation_next_step(0);
-                                } else if ($status=='preview') {
+
+                                } //Avant-premieère -> Vote
+                                else if ($status=='preview') {
                                     if(ypcf_check_user_is_complete($campaign->post_author())){
                                         $campaign->set_status('vote');
                                         $campaign->set_validation_next_step(0);
                                     }
-                                } else if ($status=='vote') {
-                                    $collecte_time = $_POST['innbday'];
-                                    if($campaign->company_name()!=null&&$campaign->company_status()!=null
-                                            &&$campaign->is_validated_by_vote() && $campaign->end_vote_remaining()<=0
-                                            && 1<=$collecte_time && $collecte_time<=60){
-                                        $diffCollectDay = new DateInterval('P'.$collecte_time.'D');
-                                        $CollectEndDate = (new DateTime())->add($diffCollectDay);
-                                        $campaign->set_end_date($CollectEndDate);
-                                        
-                                        $campaign->set_status('collecte');
-                                        $campaign->set_validation_next_step(0);
+
+                                } //Vote -> Collecte
+                                else if ($status=='vote') {
+                                    if(isset($_POST['innbday'])){
+                                        //Recupere nombre de jours et heure de fin de la collecte
+                                        $collecte_time = $_POST['innbday'];
+                                        $collecte_fin_heure = $_POST['inendh'];
+                                        $collecte_fin_minute = $_POST['inendm'];
+                                        if($campaign->company_name()!=null&&$campaign->company_status()!=null
+                                                &&$campaign->is_validated_by_vote() && $campaign->end_vote_remaining()<=0
+                                                && 1<=$collecte_time && $collecte_time<=60
+                                                && 0<=$collecte_fin_heure && $collecte_fin_heure<=23
+                                                && 0<=$collecte_fin_minute && $collecte_fin_minute<=59){
+                                            //Fixe la date de fin de collecte
+                                            $diffCollectDay = new DateInterval('P'.$collecte_time.'D');
+                                            $CollectEndDate = (new DateTime())->add($diffCollectDay);
+                                            $CollectEndDate->setTime($collecte_fin_heure,$collecte_fin_minute);
+                                            $campaign->set_end_date($CollectEndDate);
+
+                                            $campaign->set_status('collecte');
+                                            $campaign->set_validation_next_step(0);
+                                        }
                                     }
                                 }
                                 $status = $campaign->campaign_status();
