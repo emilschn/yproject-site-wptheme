@@ -741,6 +741,7 @@ function yproject_shortcode_lightbox_button($atts, $content = '') {
 }
 add_shortcode('yproject_lightbox_button', 'yproject_shortcode_lightbox_button');
 
+//Shortcode lightbox standard
 function yproject_shortcode_lightbox($atts, $content = '') {
     $atts = shortcode_atts( array(
 	'id' => 'lightbox',
@@ -755,6 +756,22 @@ function yproject_shortcode_lightbox($atts, $content = '') {
 	    </div>';
 }
 add_shortcode('yproject_lightbox', 'yproject_shortcode_lightbox');
+
+//Shortcode grande lightbox
+function yproject_shortcode_widelightbox($atts, $content = '') {
+    $atts = shortcode_atts( array(
+	'id' => 'lightbox',
+    ), $atts );
+    return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox hidden">
+		<div class="wdg-lightbox-click-catcher"></div>
+		<div class="wdg-lightbox-padder wdg-widelightbox-padder">
+		    <div class="wdg-lightbox-button-close">
+			<a href="#" class="button">X</a>
+		    </div>'.do_shortcode($content).'
+		</div>
+	    </div>';
+}
+add_shortcode('yproject_widelightbox', 'yproject_shortcode_widelightbox');
 
 
 //Shortcodes lightbox Connexion 
@@ -785,7 +802,7 @@ function yproject_shortcode_listinvestors_lightbox($atts, $content = '') {
             locate_template('projects/single-project-investors.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="listinvestors"]' .$content . '[/yproject_lightbox]');
+	echo do_shortcode('[yproject_widelightbox id="listinvestors"]' .$content . '[/yproject_widelightbox]');
 }
 add_shortcode('yproject_listinvestors_lightbox', 'yproject_shortcode_listinvestors_lightbox');
 

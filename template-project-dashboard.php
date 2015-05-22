@@ -80,12 +80,15 @@ $campaign_id = $_GET['campaign_id'];
                             $amountinvest[]=$item['amount'];
                         }
                         $cumulamount = array_combine($datesinvest, $amountinvest);
+                        $allamount = array_combine($datesinvest, $amountinvest);
+                        
                         sort($datesinvest);
                         
                         for($i=1; $i<count($datesinvest); $i++){
                             $cumulamount[$datesinvest[$i]]=$cumulamount[$datesinvest[$i-1]]+$cumulamount[$datesinvest[$i]];
                         }
                         ksort($cumulamount);
+                        ksort($allamount);
                         /******************************************************/
                         
                         /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
@@ -327,9 +330,10 @@ $campaign_id = $_GET['campaign_id'];
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
-                            
-                                <script type="text/javascript">
-                                jQuery(document).ready( function($) {
+
+                            <script type="text/javascript">
+                            jQuery(document).ready( function($) {
+
                                 <?php if($status=='vote'){ ?>
                                     var ctxPie = $("#canvas-pie-block").get(0).getContext("2d");
                                     var dataPie = [
@@ -371,6 +375,14 @@ $campaign_id = $_GET['campaign_id'];
                                         xEnd : new Date(<?php echo date_param($campaign->end_date()); ?>),
                                         datasets : [
                                             {
+                                                fillColor : "rgba(0,0,0,0)",
+                                                strokeColor : "rgba(0,0,0,0)",
+                                                pointColor : "rgba(0,0,0,0)",
+                                                pointStrokeColor : "rgba(0,0,0,0)",
+                                                data : [<?php foreach ($allamount as $date => $amount){echo $amount.',';}?> ],
+                                                xPos : [<?php foreach ($allamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
+                                                title : "inv"
+                                            },{
                                                 fillColor : "rgba(255,73,76,0.5)",
                                                 strokeColor : "rgba(255,73,76,1)",
                                                 pointColor : "rgba(255,73,76,1)",
@@ -398,7 +410,19 @@ $campaign_id = $_GET['campaign_id'];
                                         ]
                                     };
 
+                                    displayAnnot = function(cat, date, invest, investtotal){
+                                        if(cat === "investissements"){
+                                            return invest+ '€, le ' +date.getDate()+'/'+(date.getMonth()+1)+'/'+(date.getFullYear())+' à '+date.getHours()+'h'+date.getMinutes()+'. Total: '+investtotal+'€';
+                                        }
+                                    };
+
                                     var optionsLine = {
+                                        annotateDisplay: true,
+                                        annotateLabel: "<%=displayAnnot(v1,v2,v3-v4,v3)%>",
+                                        pointHitDetectionRadius: 7,
+
+                                        animation: true,
+
                                         scaleOverride : true,
                                         scaleStartValue : 0,
                                         scaleSteps : 6,
@@ -409,8 +433,8 @@ $campaign_id = $_GET['campaign_id'];
                                     };
                                     var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
                                 <?php } ?>
-                                });
-                                </script>
+                            });
+                            </script>
                         <?php else: ?>
 
                             <?php _e('Vous n&apos;avez pas la permission pour voir cette page.', 'yproject'); ?>

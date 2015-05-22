@@ -75,7 +75,6 @@ if ($campaign->current_user_can_edit()) {
     ?>
 
 <div id="display-options-col-div">
-    <button>Colonnes &agrave; afficher &#9662;</button>
     <form>
     <fieldset id="display-options-col-menu">
         <ul id="display-options-col-list">
@@ -90,7 +89,7 @@ if ($campaign->current_user_can_edit()) {
                 echo 'class="check-users-columns" '
                     .'value="'.$class.'" '
                     .'id="cb'.$class.'">'
-                    .' <label for="cb'.$class.'">'.$titre.'</label></li>';}
+                    .' <label for="cb'.$class.'">'.$titre.'</label></li> ';}
         ?>
         </ul>
     </fieldset>
