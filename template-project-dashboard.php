@@ -182,12 +182,14 @@ $campaign_id = $_GET['campaign_id'];
                                             <div id="stats-prepare">
                                                 <div class="quart-card">
                                                     <div class="stat-little-number-top">Votre projet a &eacute;t&eacute; vu</div>
-                                                    <div class="stat-big-number"><?php echo $stats_views[0]['views'];?></div>
+                                                    <div class="stat-big-number"><?php echo $stats_views[0]['views']; 
+                                                        if ($stats_views[0]['views']==null){echo "-";}?></div>
                                                     <div class="stat-little-number">fois au total</div>
                                                 </div>
                                                 <div class="quart-card">
                                                     <div class="stat-little-number-top">Dont</div>
-                                                    <div class="stat-big-number"><?php echo $stats_views_today[0]['views'];?></div>
+                                                    <div class="stat-big-number"><?php echo $stats_views_today[0]['views'];
+                                                        if ($stats_views_today[0]['views']==null){echo "-";}?></div>
                                                     <div class="stat-little-number">Vues aujourd'hui</div>
                                                 </div>
                                             </div>
@@ -245,6 +247,21 @@ $campaign_id = $_GET['campaign_id'];
                                                     <div class="details-card">
                                                         <strong><?php echo $campaign->days_remaining(); ?></strong> jour<?php if($campaign->days_remaining()>1){echo 's';}?> de collecte restant<?php if($campaign->days_remaining()>1){echo 's';}?>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        <?php } 
+                                        else if($status=='funded'){ ?>
+                                            <div id="stats-funded">
+                                                <div class="half-card">
+                                                    <div class="stat-big-number"><?php echo $campaign->current_amount()?></div>
+                                                    <div class="stat-little-number">récoltés sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro; requis</div>
+                                                    <div class="details-card">
+                                                        <strong><?php echo $campaign->current_amount()?></strong> investis par 
+                                                        <strong><?php echo $nb_invests?></strong> personne<?php if($nb_invests>1){echo 's';}?></p>
+                                                    </div>
+                                                </div>
+                                                <div class="half-card">
+                                                    <canvas id="canvas-line-block" width="420" height="200"></canvas>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -356,7 +373,7 @@ $campaign_id = $_GET['campaign_id'];
                                     };
                                     var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
 
-                                <?php } else if($status=='collecte'){ 
+                                <?php } else if($status=='collecte'||$status=='funded'){ 
 
                                     function date_param($date) {
                                         return date_format(new DateTime($date),'"D M d Y H:i:s O"');
@@ -371,26 +388,11 @@ $campaign_id = $_GET['campaign_id'];
                                     var dataLine = {
                                         labels : [<?php echo date_abs($datesinvest[0]); ?>,
                                             <?php echo date_abs($campaign->end_date()); ?>],
-                                        xBegin : new Date(<?php echo date_param($datesinvest[0]); ?>),
+                                        xBegin : new Date(<?php if(count($datesinvest)==0){echo date_param(null);}
+                                            else {echo date_param($datesinvest[0]);} ?>),
                                         xEnd : new Date(<?php echo date_param($campaign->end_date()); ?>),
                                         datasets : [
                                             {
-                                                fillColor : "rgba(0,0,0,0)",
-                                                strokeColor : "rgba(0,0,0,0)",
-                                                pointColor : "rgba(0,0,0,0)",
-                                                pointStrokeColor : "rgba(0,0,0,0)",
-                                                data : [<?php foreach ($allamount as $date => $amount){echo $amount.',';}?> ],
-                                                xPos : [<?php foreach ($allamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
-                                                title : "inv"
-                                            },{
-                                                fillColor : "rgba(255,73,76,0.5)",
-                                                strokeColor : "rgba(255,73,76,1)",
-                                                pointColor : "rgba(255,73,76,1)",
-                                                pointStrokeColor : "rgba(199,46,49,1)",
-                                                data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?> ],
-                                                xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
-                                                title : "investissements"
-                                            },{
                                                 fillColor : "rgba(204,204,204,0.25)",
                                                 strokeColor : "rgba(180,180,180,0.5)",
                                                 pointColor : "rgba(0,0,0,0)",
@@ -407,12 +409,52 @@ $campaign_id = $_GET['campaign_id'];
                                                 xPos : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
                                                 title : "But"
                                             }
+                                            <?php 
+                                            if (count($datesinvest)!=0){?>
+                                            ,{
+                                                fillColor : "rgba(0,0,0,0)",
+                                                strokeColor : "rgba(0,0,0,0)",
+                                                pointColor : "rgba(0,0,0,0)",
+                                                pointStrokeColor : "rgba(0,0,0,0)",
+                                                data : [<?php foreach ($allamount as $date => $amount){echo $amount.',';}?> ],
+                                                xPos : [<?php foreach ($allamount as $date => $amount){$lastdate = $date; echo 'new Date('.date_param($date).'),';}?>],
+                                                title : "inv"
+                                            },{
+                                                fillColor : "rgba(255,73,76,0.25)",
+                                                strokeColor : "rgba(255,73,76,0.5)",
+                                                pointColor : "rgba(0,0,0,0)",
+                                                pointStrokeColor : "rgba(0,0,0,0)",
+                                                data : [<?php echo $campaign->current_amount(false);?>,<?php echo $campaign->current_amount(false);?>],
+                                                xPos : [new Date(<?php echo date_param($lastdate); ?>),new Date(<?php echo date_param(null); ?>)],
+                                                title : "linetoday"
+                                            },{
+                                                fillColor : "rgba(255,73,76,0.5)",
+                                                strokeColor : "rgba(255,73,76,1)",
+                                                pointColor : "rgba(255,73,76,1)",
+                                                pointStrokeColor : "rgba(199,46,49,1)",
+                                                data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?> ],
+                                                xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
+                                                title : "investissements"
+                                            }<?php } 
+                                            if (new DateTime(null)< new DateTime($campaign->end_date())){?>
+                                            ,{
+                                                fillColor : "rgba(0,0,0,0)",
+                                                strokeColor : "rgba(0,0,0,0)",
+                                                pointColor : "rgba(110,110,110,1)",
+                                                pointStrokeColor : "rgba(55,55,55,1)",
+                                                data : [<?php echo ($campaign->current_amount(false));?>],
+                                                xPos : [new Date(<?php echo date_param(null); ?>)],
+                                                title : "aujourdhui"
+                                            }<?php }
+                                            ?>
                                         ]
                                     };
 
                                     displayAnnot = function(cat, date, invest, investtotal){
                                         if(cat === "investissements"){
                                             return invest+ '€, le ' +date.getDate()+'/'+(date.getMonth()+1)+'/'+(date.getFullYear())+' à '+date.getHours()+'h'+date.getMinutes()+'. Total: '+investtotal+'€';
+                                        } else if(cat=== "aujourdhui"){
+                                            return "Aujourd'hui vous en êtes à "+investtotal+'€'
                                         }
                                     };
 
