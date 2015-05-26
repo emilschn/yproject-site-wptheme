@@ -94,6 +94,26 @@ $campaign_id = $_GET['campaign_id'];
                         ?>
 
                         <?php if ($can_modify): ?>
+                            <?php 
+                            //Lightbox de bienvenue à la première visite
+                                if(!$campaign->get_has_been_welcomed()){
+                                    //Si le visiteur n'est pas admin, la LB n'apparaîtra plus
+                                    /*
+                                    if(!current_user_can('manage_options')){
+                                        $campaign->set_has_been_welcomed(true);
+                                    }*/
+                                    ob_start();
+                                    locate_template('common/dashboardwelcome-lightbox.php',true);
+                                    $content = ob_get_contents();
+                                    ob_end_clean();
+                                    ?>	
+                                    <div id="lightbox-welcome" class="wdg-lightbox">
+                                        <div class="wdg-lightbox-padder">
+                                            <?php echo $content; ?>
+                                        </div>
+                                    </div>
+                            <?php }?>
+                        
                             <div class="part-title-separator">
                                 <span class="part-title"><?php echo $post_campaign->post_title; ?></span>
                             </div>
@@ -191,7 +211,7 @@ $campaign_id = $_GET['campaign_id'];
                                             <div id="stats-funded">
                                                 <div class="half-card">
                                                     <div class="stat-big-number"><?php echo $campaign->current_amount()?></div>
-                                                    <div class="stat-little-number">récoltés sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro; requis</div>
+                                                    <div class="stat-little-number">récoltés sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro;</div>
                                                     <div class="details-card">
                                                         <strong><?php echo $campaign->current_amount()?></strong> investis par 
                                                         <strong><?php echo $nb_invests?></strong> personne<?php if($nb_invests>1){echo 's';}?></p>
@@ -206,7 +226,7 @@ $campaign_id = $_GET['campaign_id'];
                                         
                                         <div class="list-button">
                                             <a href="#statsadvanced" class="wdg-button-lightbox-open button" data-lightbox="statsadvanced">&#x1f50e;  Statistiques d&eacute;taill&eacute;s</a>
-		                    <?php echo do_shortcode('[yproject_statsadvanced_lightbox]'); ?>
+                                            <?php echo do_shortcode('[yproject_statsadvanced_lightbox]'); ?>
                                         </div>
                                         <div class="clear"></div>
                                     </div>

@@ -200,6 +200,10 @@ YPUIFunctions = (function($) {
                                 }
                             });
                         }
+                        $("#db-welcome-close").click(function(){
+                            $("#lightbox-welcome").attr("hidden","hidden");
+                        });
+                        
                         $("#investir").click(function(){
                            $("#redirect-page-investir").attr("value","true");
                         }); 
