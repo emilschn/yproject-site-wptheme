@@ -95,23 +95,19 @@ $campaign_id = $_GET['campaign_id'];
 
                         <?php if ($can_modify): ?>
                             <?php 
-                            //Lightbox de bienvenue à la première visite
-                                if(!$campaign->get_has_been_welcomed()){
-                                    //Si le visiteur n'est pas admin, la LB n'apparaîtra plus
-                                    /*
-                                    if(!current_user_can('manage_options')){
+                            //Lightbox de bienvenue à la première visite, Cache la LB pour les admins
+                                if(!$campaign->get_has_been_welcomed() && !current_user_can('manage_options')){
                                         $campaign->set_has_been_welcomed(true);
-                                    }*/
-                                    ob_start();
-                                    locate_template('common/dashboardwelcome-lightbox.php',true);
-                                    $content = ob_get_contents();
-                                    ob_end_clean();
-                                    ?>	
-                                    <div id="lightbox-welcome" class="wdg-lightbox">
-                                        <div class="wdg-lightbox-padder">
-                                            <?php echo $content; ?>
+                                        ob_start();
+                                        locate_template('common/dashboardwelcome-lightbox.php',true);
+                                        $content = ob_get_contents();
+                                        ob_end_clean();
+                                        ?>	
+                                        <div id="lightbox-welcome" class="wdg-lightbox">
+                                            <div class="wdg-lightbox-padder">
+                                                <?php echo $content; ?>
+                                            </div>
                                         </div>
-                                    </div>
                             <?php }?>
                         
                             <div class="part-title-separator">
