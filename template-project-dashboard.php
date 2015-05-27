@@ -117,13 +117,13 @@ $campaign_id = $_GET['campaign_id'];
                                         
                                         <?php if($status=='preview'){ ?>
                                             <div id="stats-prepare">
-                                                <div class="quart-card">
+                                                <div class="half-card">
                                                     <div class="stat-little-number-top">Votre projet a &eacute;t&eacute; vu</div>
                                                     <div class="stat-big-number"><?php echo $stats_views[0]['views']; 
                                                         if ($stats_views[0]['views']==null){echo "-";}?></div>
                                                     <div class="stat-little-number">fois au total</div>
                                                 </div>
-                                                <div class="quart-card">
+                                                <div class="half-card">
                                                     <div class="stat-little-number-top">Dont</div>
                                                     <div class="stat-big-number"><?php echo $stats_views_today[0]['views'];
                                                         if ($stats_views_today[0]['views']==null){echo "-";}?></div>
