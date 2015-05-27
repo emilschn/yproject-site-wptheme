@@ -174,8 +174,38 @@ YPUIFunctions = (function($) {
 				});
 			}
                         
+                        //Chargement liste des investisseurs
+                        if ($("#ajax-investors-load").length > 0) { 
+                            campain_id = $("#ajax-investors-load").attr('data-value');
+				YPUIFunctions.getInvestors(campain_id); 
+			}
+                        
+                        $("#investir").click(function(){
+                           $("#redirect-page-investir").attr("value","true");
+                        }); 
+                        $("#connexion").click(function(){
+                           $("#redirect-page-investir").attr("value","");
+                        });
+                        $("#forum").click(function(){
+                           $("#redirect-page-investir").attr("value","forum");
+                        });
+		},
+                
+		getInvestors: function(campain_id) {// Récupère les investisseurs d'un projet en Ajax
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_investors_list',
+                              'id_campaign' : campain_id
+                            }
+                    }).done(function(result){
+                        //Affiche resultat requete Ajax une fois reçue
+                        $('#ajax-investors-load').after(result);
+                        $('#ajax-loader-img').hide();//On cache la roue de chargement.
+                        
+                        //Ajoute les actions à la sélection des colonnes du tableau
                         if ($(".check-users-columns").length > 0) {
-                            //Page investisseurs/investors : Actions à la sélection des colonnes du tableau
                             $(".check-users-columns").click(function() {
                                 //Case "toutes les colonnes
                                 if(this.value==="all") {
@@ -200,17 +230,9 @@ YPUIFunctions = (function($) {
                                 }
                             });
                         }
-                        $("#investir").click(function(){
-                           $("#redirect-page-investir").attr("value","true");
-                        }); 
-                        $("#connexion").click(function(){
-                           $("#redirect-page-investir").attr("value","");
-                        });
-                        $("#forum").click(function(){
-                           $("#redirect-page-investir").attr("value","forum");
-                        });
-		},
-		
+                    });
+                },
+                
 		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué
 			var userID = $('#user-id').attr('data-value');
 
