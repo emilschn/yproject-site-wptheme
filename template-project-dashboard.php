@@ -97,7 +97,6 @@ $campaign_id = $_GET['campaign_id'];
                             <?php 
                             //Lightbox de bienvenue à la première visite, Cache la LB pour les admins
                                 if(!$campaign->get_has_been_welcomed() && !current_user_can('manage_options')){
-                                        $campaign->set_has_been_welcomed(true);
                                         ob_start();
                                         locate_template('common/dashboardwelcome-lightbox.php',true);
                                         $content = ob_get_contents();
@@ -108,7 +107,9 @@ $campaign_id = $_GET['campaign_id'];
                                                 <?php echo $content; ?>
                                             </div>
                                         </div>
-                            <?php }?>
+                                <?php 
+                                    $campaign->set_has_been_welcomed(1);
+                                }?>
                         
                             <div class="part-title-separator">
                                 <span class="part-title"><?php echo $post_campaign->post_title; ?></span>

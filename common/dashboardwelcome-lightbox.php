@@ -10,7 +10,7 @@
 <p>Pour éditer la présentation de votre projet, rendez vous sur votre "PAGE PROJET" et cliquez sur ce bouton : </p>
 <img src="<?php echo $stylesheet_directory_uri; ?>/images/mode-edition-button-help.png" alt="" />
 
-<p>L'équipe WDG va très bientôt entrer en contact avec vous, nous sommes impatients de discuter avec vous de votre projet.</p>
+<p>L'équipe WDG va très bientôt entrer en contact avec vous, nous sommes impatients de discuter de votre projet.</p>
 
 <a class="button" id="db-welcome-close">C'est parti !</a>
 <br/><br/>
