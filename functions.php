@@ -942,6 +942,144 @@ function get_investors_list() {
 add_action('wp_ajax_get_investors_list', 'get_investors_list');
 add_action('wp_ajax_nopriv_get_investors_list', 'get_investors_list');
 
+function get_invests_graph(){
+    $campaign = atcf_get_campaign($_POST['id_campaign']);
+    
+    //Recuperation donnees d'investissement
+    //locate_template( array("requests/investments.php"), true );
+    $investments_list = $campaign->payments_data();
+
+    /****Liste des montants cumulés triés par leur date****/
+
+    $datesinvest = array();
+    $amountinvest = array();
+
+    foreach ( $investments_list as $item ) {
+        $datesinvest[]=$item['date'];
+        $amountinvest[]=$item['amount'];
+    }
+    $cumulamount = array_combine($datesinvest, $amountinvest);
+    $allamount = array_combine($datesinvest, $amountinvest);
+
+    sort($datesinvest);
+
+    for($i=1; $i<count($datesinvest); $i++){
+        $cumulamount[$datesinvest[$i]]=$cumulamount[$datesinvest[$i-1]]+$cumulamount[$datesinvest[$i]];
+    }
+    ksort($cumulamount);
+    ksort($allamount);
+    /******************************************************/
+    
+    function date_param($date) {
+        return date_format(new DateTime($date),'"D M d Y H:i:s O"');
+    }
+
+    function date_abs($date) {
+        return date_format(new DateTime($date),'"j/m/Y"');
+    }
+    ?>
+    <script type="text/javascript">
+    jQuery(document).ready( function($) {
+            var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
+            var dataLine = {
+                labels : [<?php echo date_abs($datesinvest[0]); ?>,
+                    <?php echo date_abs($campaign->end_date()); ?>],
+                xBegin : new Date(<?php if(count($datesinvest)==0){echo date_param(null);}
+                    else {echo date_param($datesinvest[0]);} ?>),
+                xEnd : new Date(<?php echo date_param($campaign->end_date()); ?>),
+                datasets : [
+                    {
+                        fillColor : "rgba(204,204,204,0.25)",
+                        strokeColor : "rgba(180,180,180,0.5)",
+                        pointColor : "rgba(0,0,0,0)",
+                        pointStrokeColor : "rgba(0,0,0,0)",
+                        data : [0,<?php echo $campaign->minimum_goal(false);?>],
+                        xPos : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+                        title : "But progression"
+                    },{
+                        fillColor : "rgba(0,0,0,0)",
+                        strokeColor : "rgba(140,140,140,0.5)",
+                        pointColor : "rgba(0,0,0,0)",
+                        pointStrokeColor : "rgba(0,0,0,0)",
+                        data : [<?php echo $campaign->minimum_goal(false);?>,<?php echo $campaign->minimum_goal(false);?>],
+                        xPos : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+                        title : "But"
+                    }
+                    <?php 
+                    if (count($datesinvest)!=0){?>
+                    ,{
+                        fillColor : "rgba(0,0,0,0)",
+                        strokeColor : "rgba(0,0,0,0)",
+                        pointColor : "rgba(0,0,0,0)",
+                        pointStrokeColor : "rgba(0,0,0,0)",
+                        data : [<?php foreach ($allamount as $date => $amount){echo $amount.',';}?> ],
+                        xPos : [<?php foreach ($allamount as $date => $amount){$lastdate = $date; echo 'new Date('.date_param($date).'),';}?>],
+                        title : "inv"
+                    },{
+                        fillColor : "rgba(255,73,76,0.25)",
+                        strokeColor : "rgba(255,73,76,0.5)",
+                        pointColor : "rgba(0,0,0,0)",
+                        pointStrokeColor : "rgba(0,0,0,0)",
+                        data : [<?php echo $campaign->current_amount(false);?>,<?php echo $campaign->current_amount(false);?>],
+                        xPos : [new Date(<?php echo date_param($lastdate); ?>),new Date(<?php echo date_param(null); ?>)],
+                        title : "linetoday"
+                    },{
+                        fillColor : "rgba(255,73,76,0.5)",
+                        strokeColor : "rgba(255,73,76,1)",
+                        pointColor : "rgba(255,73,76,1)",
+                        pointStrokeColor : "rgba(199,46,49,1)",
+                        data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?> ],
+                        xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
+                        title : "investissements"
+                    }<?php } 
+                    if (new DateTime(null)< new DateTime($campaign->end_date())){?>
+                    ,{
+                        fillColor : "rgba(0,0,0,0)",
+                        strokeColor : "rgba(0,0,0,0)",
+                        pointColor : "rgba(110,110,110,1)",
+                        pointStrokeColor : "rgba(55,55,55,1)",
+                        data : [<?php echo ($campaign->current_amount(false));?>],
+                        xPos : [new Date(<?php echo date_param(null); ?>)],
+                        title : "aujourdhui"
+                    }<?php }
+                    ?>
+                ]
+            };
+
+            displayAnnot = function(cat, date, invest, investtotal){
+                if(cat === "investissements"){
+                    return invest+ '€, le ' +date.getDate()+'/'+(date.getMonth()+1)+'/'+(date.getFullYear())+' à '+date.getHours()+'h'+date.getMinutes()+'. Total: '+investtotal+'€';
+                } else if(cat=== "aujourdhui"){
+                    return "Aujourd'hui vous en êtes à "+investtotal+'€'
+                }
+            };
+
+            var optionsLine = {
+                annotateDisplay: true,
+                annotateLabel: "<%=displayAnnot(v1,v2,v3-v4,v3)%>",
+                pointHitDetectionRadius: 7,
+
+                animation: true,
+
+                scaleOverride : true,
+                scaleStartValue : 0,
+                scaleSteps : 6,
+                scaleStepWidth :  <?php
+                    if($campaign->is_funded()){$max= ($campaign->current_amount(false));}
+                    else{$max= ($campaign->minimum_goal(false));}
+                    echo (round($max,0,PHP_ROUND_HALF_UP)/5);?>
+            };
+            var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
+    });
+    </script>
+    
+    
+    <?php exit();
+}
+add_action('wp_ajax_get_invests_graph', 'get_invests_graph');
+add_action('wp_ajax_nopriv_get_invests_graph', 'get_invests_graph');
+
+
 /**
  * Shortcodes généraux
  */

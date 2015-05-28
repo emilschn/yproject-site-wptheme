@@ -180,6 +180,12 @@ YPUIFunctions = (function($) {
 				YPUIFunctions.getInvestors(campain_id); 
 			}
                         
+                        //Chargement graphe investissements
+                        if ($("#ajax-invests-graph-load").length > 0) { 
+                            campain_id = $("#ajax-invests-graph-load").attr('data-value');
+				YPUIFunctions.getInvestsGraph(campain_id); 
+			}
+                        
                         $("#investir").click(function(){
                            $("#redirect-page-investir").attr("value","true");
                         }); 
@@ -191,7 +197,7 @@ YPUIFunctions = (function($) {
                         });
 		},
                 
-		getInvestors: function(campain_id) {// Récupère les investisseurs d'un projet en Ajax
+		getInvestors: function(campain_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
                     $.ajax({
                         'type' : "POST",
                         'url' : ajax_object.ajax_url,
@@ -230,6 +236,21 @@ YPUIFunctions = (function($) {
                                 }
                             });
                         }
+                    });
+                },
+                
+                getInvestsGraph : function(campain_id) {
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_invests_graph',
+                              'id_campaign' : campain_id
+                            }
+                    }).done(function(result){
+                        $('#ajax-invests-graph-load').after(result);
+                        $('#ajax-graph-loader-img').hide();//On cache la roue de chargement.
+                        $('#canvas-line-block').slideDown();
                     });
                 },
                 
