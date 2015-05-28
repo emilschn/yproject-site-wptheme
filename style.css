@@ -1736,18 +1736,36 @@ div#home_bottom h1 {
     width: 30px;
     height: 19.5px;
 }
-#projects-stats-content .project_full_progressbg{
+.project_full_progressbg{
     margin-left: 20px;
     margin-top: 4px;
+    background-color: #EEECED;
+    width: 250px;
+    display: inline-block;
+    height: 25px;
 }
-#projects-stats-content .project_full_percent{
-    padding-top: 0px;
+.project_full_percent{
     height: 25px;
     font-size: 21px;
     background-color: #333;
     color: #FFF;
     width: auto;
     max-width: 250px !important;
+    position: absolute;
+    padding-top: 3px;
+    text-align: right;
+}
+.home-large-project .project_full_progressbg {
+    margin-left: 0px;
+    width: 240px;
+}
+.home-large-project .project_full_percent {
+    height: 22px;
+    font-size: 18px;
+}
+.home-large-project .progress_zone .progress_percent {
+    font-size: 18px;
+    top: -7px;
 }
 .post_bottom_buttons #invest-button, .post_bottom_buttons #participate-button{
     position: absolute;
@@ -2092,21 +2110,10 @@ div#home_bottom h1 {
     width: 25px;
 }
 
-.project_full_progressbg {
-    background-color: #EEECED;
-    width: 250px;
-    display: inline-block;
-    height: 25px;
-}
 .project_full_progressbar {
     background-color: #333333;
     height: 35px;
     height: 25px;
-}
-.project_full_percent {
-    position: absolute;
-    padding-top: 3px;
-    text-align: right;
 }
 .progress_zone .progress_percent {
     font-size: 21px;
