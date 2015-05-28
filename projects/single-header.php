@@ -68,7 +68,12 @@ else {
 					</div>
 					<div class="post_bottom_infos_item">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-						<span class="mobile_hidden"><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true); ?></span>
+						<span class="mobile_hidden"><?php 
+						    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
+						    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
+							echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
+						    }
+						?></span>
 						<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
 					</div>
 					<div class="post_bottom_infos_item only_on_mobile">
@@ -87,7 +92,7 @@ else {
 						<div class="project_full_progressbar" style="width:0%">
 							&nbsp;
 						</div>
-						<span class="project_full_percent">0%</span>
+						<span class="project_full_percent" style="margin-top: -25px;">0 &euro;</span>
 					</div>
 				</div>
 				<div class="logos_zone">
@@ -120,7 +125,12 @@ else {
 					</div>
 					<div class="post_bottom_infos_item">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-						<span class="mobile_hidden"><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true); ?></span>
+						<span class="mobile_hidden"><?php 
+						    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
+						    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
+							echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
+						    }
+						?></span>
 						<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
 					</div>
 					<div class="post_bottom_infos_item only_on_mobile">
@@ -149,7 +159,12 @@ else {
 					</div>
 					<div class="post_bottom_infos_item">
 	-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-	-					<span class="mobile_hidden"><?php echo 'Ce projet a besoin de '.$campaign->minimum_goal(true) ; ?></span>
+						<span class="mobile_hidden"><?php 
+						    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
+						    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
+							echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
+						    }
+						?></span>
 						<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
 					</div>
 					<div class="projects-description-separator mobile_hidden"></div>
