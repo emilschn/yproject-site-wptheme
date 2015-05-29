@@ -729,8 +729,9 @@ add_action('wp_ajax_nopriv_save_edit_project', 'yproject_save_edit_project');
 function get_investors_list() {
     
         locate_template( array("requests/investments.php"), true );
-        $campaign = atcf_get_campaign($_POST['id_campaign']);
-        $investments_list = wdg_get_project_investments($_POST['id_campaign'], TRUE);
+        $investments_list = (json_decode($_POST['data'],true));
+        $campaign = atcf_get_campaign($_POST['campaign_id']); 
+        
 	$is_campaign_over = ($campaign->campaign_status() == 'funded' || $campaign->campaign_status() == 'archive');
         
         $classcolonnes = array('coluname',

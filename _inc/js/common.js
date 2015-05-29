@@ -181,10 +181,11 @@ YPUIFunctions = (function($) {
 			}
                         
                         //Chargement liste des investisseurs
+                        /*
                         if ($("#ajax-investors-load").length > 0) { 
                             campaign_id = $("#ajax-investors-load").attr('data-value');
 				YPUIFunctions.getInvestors(campaign_id); 
-			}
+			}*/
                         
                         //Chargement graphe investissements
                         if ($("#ajax-invests-graph-load").length > 0) { 
@@ -203,32 +204,15 @@ YPUIFunctions = (function($) {
                         });
 		},
                 
-                getInvestments: function(campaign_id){
-                    $.ajax({
-                        'type' : "POST",
-                        'url' : ajax_object.ajax_url,
-                        'data': { 
-                              'action':'get_investments_data',
-                              'id_campaign' : campaign_id
-                            }
-                    }).done(function(result){
-                        inv_data = JSON.parse(result);
-                        $('.data-inv-count_validate_investments').html(inv_data.count_validate_investments);
-
-                        $.each(inv_data, function(key, value) {
-                            $('.data-inv-'+key).html(value);
-                        });
-                        $('.ajax-loader-img').slideUp();//On cache la roue de chargement.
-                    });
-                },
                 
-		getInvestors: function(campaign_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
+		getInvestors: function(inv_data, campaign_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
                     $.ajax({
                         'type' : "POST",
                         'url' : ajax_object.ajax_url,
                         'data': { 
                               'action':'get_investors_list',
-                              'id_campaign' : campaign_id
+                              'campaign_id':campaign_id,
+                              'data' : inv_data
                             }
                     }).done(function(result){
                         //Affiche resultat requete Ajax une fois reçue
@@ -236,31 +220,29 @@ YPUIFunctions = (function($) {
                         $('#ajax-loader-img').hide();//On cache la roue de chargement.
                         
                         //Ajoute les actions à la sélection des colonnes du tableau
-                        if ($(".check-users-columns").length > 0) {
-                            $(".check-users-columns").click(function() {
-                                //Case "toutes les colonnes
-                                if(this.value==="all") {
-                                    if (this.checked===true) {
-                                        $('.check-users-columns').prop('checked', true);
-                                        $('#investors-table td').removeAttr('hidden');
-                                    } else {
-                                        $('.check-users-columns').prop('checked', false);
-                                        $('#investors-table td').attr('hidden','');
-                                        $('#cbcoluname').prop('checked', true);
-                                        $('.coluname').removeAttr('hidden');
-                                    }
-                                }
-                                
-                                //Autres cases
-                                $selector = ".";
-                                $selector += this.value;
+                        $(".check-users-columns").click(function() {
+                            //Case "toutes les colonnes
+                            if(this.value==="all") {
                                 if (this.checked===true) {
-                                    $($selector).removeAttr('hidden');
+                                    $('.check-users-columns').prop('checked', true);
+                                    $('#investors-table td').removeAttr('hidden');
                                 } else {
-                                    $($selector).attr('hidden','');
+                                    $('.check-users-columns').prop('checked', false);
+                                    $('#investors-table td').attr('hidden','');
+                                    $('#cbcoluname').prop('checked', true);
+                                    $('.coluname').removeAttr('hidden');
                                 }
-                            });
-                        }
+                            }
+
+                            //Autres cases
+                            $selector = ".";
+                            $selector += this.value;
+                            if (this.checked===true) {
+                                $($selector).removeAttr('hidden');
+                            } else {
+                                $($selector).attr('hidden','');
+                            }
+                        });
                     });
                 },
                 
@@ -276,6 +258,30 @@ YPUIFunctions = (function($) {
                         $('#ajax-invests-graph-load').after(result);
                         $('#ajax-graph-loader-img').hide();//On cache la roue de chargement.
                         $('#canvas-line-block').slideDown();
+                    });
+                },
+                
+                getInvestments: function(campaign_id){
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_investments_data',
+                              'id_campaign' : campaign_id
+                            }
+                    }).done(function(result){
+                        inv_data = JSON.parse(result);
+                        
+                        //Injecte les données directement affichées dans leurs emplacements
+                        $.each(inv_data, function(key, value) {
+                            $('.data-inv-'+key).html(value);
+                        });
+                        $('.ajax-data-inv-loader-img').slideUp();
+                        
+                        // Crée le tableau des investisseurs si besoin
+                        if ($("#ajax-investors-load").length > 0) {
+                            YPUIFunctions.getInvestors(JSON.stringify(inv_data),campaign_id);
+			}
                     });
                 },
                 
