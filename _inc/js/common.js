@@ -174,16 +174,22 @@ YPUIFunctions = (function($) {
 				});
 			}
                         
+                        //Si chargement données investisseurs/investissements nécessaire
+                        if ($(".ajax-investments-load").length > 0) { 
+                            campaign_id = $(".ajax-investments-load").attr('data-value');
+                                YPUIFunctions.getInvestments(campaign_id); 
+			}
+                        
                         //Chargement liste des investisseurs
                         if ($("#ajax-investors-load").length > 0) { 
-                            campain_id = $("#ajax-investors-load").attr('data-value');
-				YPUIFunctions.getInvestors(campain_id); 
+                            campaign_id = $("#ajax-investors-load").attr('data-value');
+				YPUIFunctions.getInvestors(campaign_id); 
 			}
                         
                         //Chargement graphe investissements
                         if ($("#ajax-invests-graph-load").length > 0) { 
-                            campain_id = $("#ajax-invests-graph-load").attr('data-value');
-				YPUIFunctions.getInvestsGraph(campain_id); 
+                            campaign_id = $("#ajax-invests-graph-load").attr('data-value');
+				YPUIFunctions.getInvestsGraph(campaign_id); 
 			}
                         
                         $("#investir").click(function(){
@@ -197,13 +203,32 @@ YPUIFunctions = (function($) {
                         });
 		},
                 
-		getInvestors: function(campain_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
+                getInvestments: function(campaign_id){
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_investments_data',
+                              'id_campaign' : campaign_id
+                            }
+                    }).done(function(result){
+                        inv_data = JSON.parse(result);
+                        $('.data-inv-count_validate_investments').html(inv_data.count_validate_investments);
+
+                        $.each(inv_data, function(key, value) {
+                            $('.data-inv-'+key).html(value);
+                        });
+                        $('.ajax-loader-img').slideUp();//On cache la roue de chargement.
+                    });
+                },
+                
+		getInvestors: function(campaign_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
                     $.ajax({
                         'type' : "POST",
                         'url' : ajax_object.ajax_url,
                         'data': { 
                               'action':'get_investors_list',
-                              'id_campaign' : campain_id
+                              'id_campaign' : campaign_id
                             }
                     }).done(function(result){
                         //Affiche resultat requete Ajax une fois reçue
@@ -239,13 +264,13 @@ YPUIFunctions = (function($) {
                     });
                 },
                 
-                getInvestsGraph : function(campain_id) {
+                getInvestsGraph : function(campaign_id) {
                     $.ajax({
                         'type' : "POST",
                         'url' : ajax_object.ajax_url,
                         'data': { 
                               'action':'get_invests_graph',
-                              'id_campaign' : campain_id
+                              'id_campaign' : campaign_id
                             }
                     }).done(function(result){
                         $('#ajax-invests-graph-load').after(result);
