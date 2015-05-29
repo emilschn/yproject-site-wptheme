@@ -103,8 +103,6 @@ function yproject_front_end_login_fail($username){
         } else {
             wp_redirect($page.'/?login=failed#connexion');
         }
-//	$page_connexion = get_page_by_path('connexion');
-//	wp_redirect(get_permalink($page_connexion->ID) . '?login=failed');
 	exit;
 }
 add_action('wp_login_failed', 'yproject_front_end_login_fail'); 
@@ -118,20 +116,18 @@ function yproject_redirect_login() {
         $page_type = $_POST['type-page']; 
         $page_redirection = $_POST['redirect-page-investir'];
         
-        if(isset($_GET['login'])){
+        if (isset($_GET['login'])) {
             $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
-                    wp_redirect($page);
-        }
-        else {
-            if (isset($page_id) && isset($page_type)){
-                if ($page_type == "download"){
-                    if( isset($page_redirection) && $page_redirection == "true"){
-                        
+	    wp_redirect($page);
+	    
+        } else {
+            if (isset($page_id) && isset($page_type)) {
+                if ($page_type == "download") {
+                    if( isset($page_redirection) && $page_redirection == "true") {
                         $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
                         wp_redirect($page);  
                         
-                    } else if ( isset($page_redirection) && $page_redirection == "forum") {
-                        
+                    } else if (isset($page_redirection) && $page_redirection == "forum") {
                         $forum = get_page_by_path('forum');
                         $page = get_permalink($forum->ID).'?campaign_id='.$page_id;   
                         wp_redirect($page);
@@ -140,12 +136,14 @@ function yproject_redirect_login() {
                         $page = get_page($page_id);
                         wp_redirect(get_permalink($page).'#description_du_projet');
                     }
-                } 
-                else {
+                } else {
                     $page = get_page($page_id);
                     wp_redirect(get_permalink($page)); 
                 }
-            }   
+		
+            } else {
+		wp_redirect(home_url());
+	    }
         }
 	exit;
 }

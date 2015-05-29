@@ -1,4 +1,4 @@
-<div style="width: 450px !important;" id="post_bottom_content" class="center_small">
+<div style="width: 450px !important;" id="post_bottom_content" class="center_small align-center">
         <div class="login_fail">
             <?php if (isset($_GET["login"]) && $_GET["login"] == "failed") { ?>
                 <?php _e('Erreur d&apos;identification', 'yproject'); ?>
