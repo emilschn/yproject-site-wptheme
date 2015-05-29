@@ -21,17 +21,17 @@
 				    the_post();
 				    the_content();
 				}
+				//Init variables utiles
 				$keep_going = TRUE;
 				$display_rib = FALSE;
+				global $campaign_id, $current_user; 
+				$post_campaign = get_post($campaign_id);
+				$campaign = atcf_get_campaign($post_campaign);
 				?>
 		    
-				<h2><?php _e('Porte-monnaie', 'yproject'); ?></h2>
+				<h2><?php _e('Porte-monnaie de ', 'yproject'); echo $post_campaign->post_title; ?></h2>
 				<h3>1 - <?php _e('Associer une organisation &agrave; votre projet', 'yproject'); ?></h3>
 				<?php if ($keep_going) {
-					//Init variables utiles
-					global $campaign_id, $current_user; 
-					$post_campaign = get_post($campaign_id);
-					$campaign = atcf_get_campaign($post_campaign);
 					$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
 
 					//Vérification si une organisation a bien été définie
@@ -103,6 +103,7 @@
 							break;
 						case 5:
 							$keep_going = FALSE;
+							if (WP_IS_DEV_SITE) $keep_going = TRUE;
 							$display_rib = TRUE;
 							//Le message d'attente est affiché dans le statut de strong authentication.
 							break;
@@ -128,7 +129,7 @@
 						<input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" class="button" />
 					</form>
 				<?php }
-				if (($organisation_obj->get_bank_owner() == '') || ($organisation_obj->get_bank_address() == '') || ($organisation_obj->get_bank_iban() == '') || ($organisation_obj->get_bank_bic() == '')) {
+				if (!isset($current_organisation) || ($organisation_obj->get_bank_owner() == '') || ($organisation_obj->get_bank_address() == '') || ($organisation_obj->get_bank_iban() == '') || ($organisation_obj->get_bank_bic() == '')) {
 					$keep_going = FALSE;
 				}
 				?>
@@ -136,9 +137,13 @@
 				<h3 <?php if (!$keep_going) { ?>class="grey"<?php } ?>>4 - <?php _e('Dans votre porte-monnaie', 'yproject'); ?></h3>
 				<?php
 				if ($keep_going) { $organisation_obj->submit_transfer_wallet(); }
-				$current_wallet_amount = $organisation_obj->get_wallet_amount();
+				if (isset($organisation_obj)) { 
+				    $current_wallet_amount = $organisation_obj->get_wallet_amount();
+				} else {
+				    $current_wallet_amount = 0;
+				}
 				?>
-				<span <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php echo $current_wallet_amount; ?> &euro; !</span><br /><br />
+				<span <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php echo $current_wallet_amount; ?> &euro;</span><br /><br />
 				<?php if (!$keep_going || $current_wallet_amount == 0) { ?>
 				<span class="button disabled"><?php _e('Proc&eacute;der au virement', 'yproject'); ?></span>
 				<?php } else { ?>
@@ -150,6 +155,40 @@
 					
 				<h2 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php _e('Reverser aux investisseurs', 'yproject'); ?></h2>
 				<?php if ($keep_going) { ?>
+				<h3>Dates de vos versements :</h3>
+				    <?php
+				    $fp_date = $campaign->first_payment_date();
+				    $fp_dd = mysql2date( 'd', $fp_date, false );
+				    $fp_mm = mysql2date( 'm', $fp_date, false );
+				    $fp_yy = mysql2date( 'Y', $fp_date, false );
+				    $payment_list = $campaign->payment_list(); 
+				    if ($campaign->funding_duration() > 0 && !empty($fp_date)): ?>
+					<ul class="payment-list">
+					    <?php for ($i = $fp_yy; $i < $campaign->funding_duration() + $fp_yy; $i++): ?>
+						<?php YPProjectLib::form_submit_yearly_account($i); ?>
+						<li>
+						    <?php echo $fp_dd . ' / ' . $fp_mm . ' / ' . $i; ?> : <?php echo $payment_list[$i]; ?> &euro;<br />
+						    Comptes annuels :<br />
+						    <?php 
+						    $yearly_accounts = array();
+						    $yearly_accounts = $campaign->yearly_accounts_file($i);
+						    if (!empty($yearly_accounts)): ?>
+						    <ul>
+							<?php foreach ($yearly_accounts as $account_id => $yearly_account_file): ?>
+							    <li><a href="<?php echo $yearly_account_file["url"]; ?>" target="_blank"><?php echo $yearly_account_file["filename"][0]; ?></a></li>
+							<?php endforeach; ?>
+						    </ul>
+						    <?php endif; ?>
+						    <form action="" method="POST" enctype="multipart/form-data">
+							<input type="file" name="accounts_year_<?php echo $i; ?>" />
+							<input type="submit" class="button" value="<?php _e('Envoyer', 'yproject'); ?>" />
+						    </form>
+						</li>
+					    <?php endfor; ?>
+					</ul>
+				    <?php else: ?>
+					<span class="disabled">Il manque certains paramètres. Contactez-nous.</span>
+				    <?php endif; ?>
 				<?php } ?>
 				
 				

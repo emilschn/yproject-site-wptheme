@@ -367,4 +367,29 @@ class YPProjectLib {
 		    
 		return $buffer;
 	}
+	
+	/**
+	 * Gère le formulaire de paramètres projets
+	 */
+	public static function form_submit_yearly_account($year) {
+		if (!isset($_GET["campaign_id"])) { return FALSE; }
+		$campaign_id = $_GET["campaign_id"];
+		
+		$file = $_FILES[ 'accounts_year_' . $year ];
+		if (!empty($file)) {
+			$upload_overrides = array( 'test_form' => false );
+			$upload = wp_handle_upload( $file, $upload_overrides );
+			$file_name = $file['name'];
+			if (isset($upload[ 'url' ])) {
+				$attachment = array(
+					'guid'           => $upload[ 'url' ], 
+					'post_mime_type' => $upload[ 'type' ],
+					'post_title'     => 'Yearly Accounts ' . $year,
+					'post_content'   => '',
+					'post_status'    => 'inherit'
+				);
+				wp_insert_attachment( $attachment, $file_name, $campaign_id );
+			}
+		}
+	}
 }

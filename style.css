@@ -3147,3 +3147,11 @@ ul.invest-mean-payment li img {
    font-family: "BebasNeue";
    font-size: 35px;
 }
+
+/*******************************************************************************
+* WALLET MANAGEMENT
+*******************************************************************************/
+#project-wallet ul.payment-list > li {
+    margin-bottom: 30px;
+    list-style: none;
+}
