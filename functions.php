@@ -730,7 +730,7 @@ function get_investors_list() {
     
         locate_template( array("requests/investments.php"), true );
         $investments_list = (json_decode($_POST['data'],true));
-        $campaign = atcf_get_campaign($_POST['campaign_id']); 
+        $campaign = atcf_get_campaign($_POST['id_campaign']); 
         
 	$is_campaign_over = ($campaign->campaign_status() == 'funded' || $campaign->campaign_status() == 'archive');
         
@@ -948,7 +948,8 @@ function get_invests_graph(){
     
     //Recuperation donnees d'investissement
     //locate_template( array("requests/investments.php"), true );
-    $investments_list = $campaign->payments_data();
+    $data = (json_decode($_POST['data'],true));
+    $investments_list = $data['payments_data'];
 
     /****Liste des montants cumulés triés par leur date****/
 

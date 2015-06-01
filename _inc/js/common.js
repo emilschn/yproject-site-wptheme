@@ -180,19 +180,6 @@ YPUIFunctions = (function($) {
                                 YPUIFunctions.getInvestments(campaign_id); 
 			}
                         
-                        //Chargement liste des investisseurs
-                        /*
-                        if ($("#ajax-investors-load").length > 0) { 
-                            campaign_id = $("#ajax-investors-load").attr('data-value');
-				YPUIFunctions.getInvestors(campaign_id); 
-			}*/
-                        
-                        //Chargement graphe investissements
-                        if ($("#ajax-invests-graph-load").length > 0) { 
-                            campaign_id = $("#ajax-invests-graph-load").attr('data-value');
-				YPUIFunctions.getInvestsGraph(campaign_id); 
-			}
-                        
                         $("#investir").click(function(){
                            $("#redirect-page-investir").attr("value","true");
                         }); 
@@ -211,7 +198,7 @@ YPUIFunctions = (function($) {
                         'url' : ajax_object.ajax_url,
                         'data': { 
                               'action':'get_investors_list',
-                              'campaign_id':campaign_id,
+                              'id_campaign':campaign_id,
                               'data' : inv_data
                             }
                     }).done(function(result){
@@ -246,13 +233,14 @@ YPUIFunctions = (function($) {
                     });
                 },
                 
-                getInvestsGraph : function(campaign_id) {
+                getInvestsGraph : function(inv_data, campaign_id) {
                     $.ajax({
                         'type' : "POST",
                         'url' : ajax_object.ajax_url,
                         'data': { 
                               'action':'get_invests_graph',
-                              'id_campaign' : campaign_id
+                              'id_campaign' : campaign_id,
+                              'data' : inv_data
                             }
                     }).done(function(result){
                         $('#ajax-invests-graph-load').after(result);
@@ -282,6 +270,11 @@ YPUIFunctions = (function($) {
                         if ($("#ajax-investors-load").length > 0) {
                             YPUIFunctions.getInvestors(JSON.stringify(inv_data),campaign_id);
 			}
+                        
+                        // Crée le graphe des investissements si besoin
+                        if ($("#ajax-invests-graph-load").length > 0) {
+                            YPUIFunctions.getInvestsGraph(JSON.stringify(inv_data),campaign_id); 
+                        }
                     });
                 },
                 
