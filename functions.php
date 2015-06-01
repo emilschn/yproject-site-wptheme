@@ -1090,6 +1090,66 @@ function get_investments_data(){
 add_action('wp_ajax_get_investments_data', 'get_investments_data');
 add_action('wp_ajax_nopriv_get_investments_data', 'get_investments_data');
 
+function get_email_selector(){
+    $data = (json_decode($_POST['data'],true));
+    $payments_data = $data['payments_data'];
+    ?>
+    <form id="email-selector">
+Sélectionner :<br />
+<label><input type="checkbox" class="select-options" data-selection="believe" checked="checked" /> Y croit</label><br />
+<label><input type="checkbox" class="select-options" data-selection="vote" checked="checked" /> A voté</label><br />
+<label><input type="checkbox" class="select-options" data-selection="invest" checked="checked" /> A investi</label><br />
+<br />
+</form>
+
+<div id="email-selector-list">
+<?php 
+	$user_list = array();
+	global $wpdb;
+	
+//Récupération de la liste des j'y crois
+	$table_jcrois = $wpdb->prefix . "jycrois";
+	$result_jcrois = $wpdb->get_results( "SELECT user_id FROM ".$table_jcrois." WHERE campaign_id = ".$_POST['id_campaign'] );
+	foreach ($result_jcrois as $item) {
+		$user_list[$item->user_id] = 'believe';
+	}
+	//Récupération de la liste des votants
+	$table_votes = $wpdb->prefix . "ypcf_project_votes";
+	$result_votes = $wpdb->get_results( "SELECT user_id FROM ".$table_votes." WHERE post_id = ".$_POST['id_campaign'] );
+	foreach ($result_votes as $item) {
+		if (!empty($user_list[$item->user_id])) $user_list[$item->user_id] .= ' vote';
+		else $user_list[$item->user_id] = 'vote';
+	}
+	//Récupération de la liste des investisseurs
+	foreach ( $payments_data as $item ) {
+		if ($item['status'] == 'publish') {
+			if (!empty($user_list[$item['user']])) $user_list[$item['user']] .= ' invest';
+			else $user_list[$item['user']] = 'invest';
+		}
+	}
+	
+	//Affichage de la liste d'e-mails
+	foreach ($user_list as $user_id => $classes) {
+		if (!empty($user_id)) {
+			if (YPOrganisation::is_user_organisation($user_id)) {
+				$organisation = new YPOrganisation($user_id);
+				$user_data = $organisation->get_creator();
+				//TODO
+				
+			} else {
+				$user_data = get_userdata($user_id);
+				if (!empty($user_data->user_email)) echo '<span class="'.$classes.'">' . $user_data->user_email . ', </span>';
+			}
+		}
+	}
+?>
+</div>
+    <?php
+    exit();
+}
+add_action('wp_ajax_get_email_selector', 'get_email_selector');
+add_action('wp_ajax_nopriv_get_email_selector', 'get_email_selector');
+
 /**
  * Shortcodes généraux
  */

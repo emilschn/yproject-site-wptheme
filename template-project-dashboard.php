@@ -151,7 +151,7 @@ $campaign_id = $_GET['campaign_id'];
                                                     </div>
                                                 </div>
                                                 <div class="half-card">
-                                                    <div id="ajax-invests-graph-load" style="text-align: center;" data-value="<?php echo $campaign->ID?>">
+                                                    <div class="ajax-investments-load" id="ajax-invests-graph-load" style="text-align: center;" data-value="<?php echo $campaign->ID?>">
                                                         <img id="ajax-graph-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
                                                     <canvas id="canvas-line-block" width="420" height="200" style="display:none"></canvas>
                                                 </div>
@@ -175,7 +175,7 @@ $campaign_id = $_GET['campaign_id'];
                                                     </div>
                                                 </div>
                                                 <div class="half-card">
-                                                    <div id="ajax-invests-graph-load" style="text-align: center;" data-value="<?php echo $campaign->ID?>">
+                                                    <div class="ajax-investments-load" id="ajax-invests-graph-load" style="text-align: center;" data-value="<?php echo $campaign->ID?>">
                                                         <img id="ajax-graph-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
                                                     <canvas id="canvas-line-block" width="420" height="200" style="display:none"></canvas>
                                                 </div>

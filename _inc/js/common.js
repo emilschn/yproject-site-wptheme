@@ -164,15 +164,6 @@ YPUIFunctions = (function($) {
 					}
 				});
 			}
-			
-			if ($("#email-selector").length > 0) {
-				$(".select-options").change(function() {
-					$("#email-selector-list span").hide();
-					$(".select-options:checked").each(function() {
-						$("#email-selector-list span."+$(this).data("selection")).show();
-					});
-				});
-			}
                         
                         //Si chargement données investisseurs/investissements nécessaire
                         if ($(".ajax-investments-load").length > 0) { 
@@ -249,6 +240,29 @@ YPUIFunctions = (function($) {
                     });
                 },
                 
+                getEmailSelector : function(inv_data, campaign_id) {
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_email_selector',
+                              'id_campaign' : campaign_id,
+                              'data' : inv_data
+                            }
+                    }).done(function(result){
+                        $('#ajax-email-selector-load').after(result);
+                        //Actions des sélecteurs d'email
+                        $(".select-options").change(function() {
+					$("#email-selector-list span").hide();
+					$(".select-options:checked").each(function() {
+						$("#email-selector-list span."+$(this).data("selection")).show();
+					});
+				});
+                        $('#ajax-email-loader-img').hide();//On cache la roue de chargement.
+                    });
+                },
+                
+                
                 getInvestments: function(campaign_id){
                     $.ajax({
                         'type' : "POST",
@@ -274,6 +288,11 @@ YPUIFunctions = (function($) {
                         // Crée le graphe des investissements si besoin
                         if ($("#ajax-invests-graph-load").length > 0) {
                             YPUIFunctions.getInvestsGraph(JSON.stringify(inv_data),campaign_id); 
+                        }
+                        
+                        //Crée liste des emails si besoin
+                        if ($("#ajax-email-selector-load").length > 0) {
+                            YPUIFunctions.getEmailSelector(JSON.stringify(inv_data),campaign_id); 
                         }
                     });
                 },
