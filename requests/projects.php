@@ -50,8 +50,9 @@ function queryFinishedProjects($nb,$type) {
 				'value' => $type
 			)
 		),
-		'orderby' => 'post_date',
-		'order' => 'asc'
+		'meta_key' => 'campaign_end_date',
+		'orderby' => 'meta_value',
+		'order' => 'desc'
 	);
 	return query_posts( $query_options );
 }
