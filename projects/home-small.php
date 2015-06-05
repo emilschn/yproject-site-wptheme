@@ -3,6 +3,7 @@ function print_vote_post($vote_post, $is_right_project){
 	global $post;
 	$temp_post = $post;
 	$post = $vote_post;
+	date_default_timezone_set("Europe/London");
 	$campaign = atcf_get_campaign( $vote_post );
 	$position_str = ($is_right_project) ? 'right' : 'left';
 	$is_right_project = !$is_right_project;
@@ -52,7 +53,7 @@ function print_vote_post($vote_post, $is_right_project){
 				</div>
 				<div class="description-logos-item">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="logo horloge" /><br />
-					<?php echo $campaign->end_vote_remaining(); ?>
+					<?php echo $campaign->time_remaining_str(); ?>
 				</div>
 			</div>
 
@@ -95,6 +96,7 @@ function print_vote_post($vote_post, $is_right_project){
 	global $post;
 	$temp_post = $post;
 	$post = $preview_post;
+	date_default_timezone_set("Europe/London");
 	$campaign = atcf_get_campaign( $preview_post );
 	$position_str = ($is_right_project) ? 'right' : 'left';
 	$is_right_project = !$is_right_project;

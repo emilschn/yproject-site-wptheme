@@ -1,14 +1,10 @@
 
 <?php while (have_posts()): the_post(); ?>
 	<?php 
+	date_default_timezone_set("Europe/London");
 	global $post;
 	$campaign = atcf_get_campaign( $post );
 	$campaign_status = $campaign->campaign_status();
-	
-	$days_remaining = $campaign->days_remaining();
-	if ($campaign_status == 'vote') {
-		$days_remaining = $campaign->end_vote_remaining();
-	}
 	
 	$percent = min(100, $campaign->percent_minimum_completed(false));
 	$width = 240 * $percent / 100;
@@ -82,7 +78,7 @@
 					</div>
 					<div class="description-logos-item">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="logo horloge" />
-						<?php echo $days_remaining; ?>
+						<?php echo $campaign->time_remaining_str(); ?>
 					</div>
 					<div class="description-logos-item" style="width: 60px;">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="logo cible" />
@@ -92,17 +88,11 @@
 				</div>
 
 				<?php if ($campaign_status == 'collecte' || $campaign_status == 'funded' || $campaign_status == 'archive'): ?>
-				<div class="description-progress">
-					<div class="project_preview_item_progressbg">
-						<div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">
-							<?php if ($width_min > 0): ?>
-							<div style="width: <?php echo $width_min; ?>px; height: 25px; border: 0px; border-right: 1px solid white;">&nbsp;</div>
-							<?php else: ?>
-							&nbsp;
-							<?php endif; ?>
-						</div>
+				<div class="progress_zone">
+					<div class="project_full_progressbg">
+						<span class="project_full_percent" style="min-width:<?php echo $width; ?>px">&nbsp;<?php echo $campaign->current_amount(); ?>&nbsp;</span>
 					</div>
-					<span class="project_preview_item_progressprint"><?php echo $campaign->percent_minimum_completed(); ?></span>
+					<span class="progress_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
 				</div>
 				<?php endif; ?>
 				

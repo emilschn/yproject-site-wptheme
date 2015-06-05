@@ -20,7 +20,7 @@
 <?php
 //*******************
 //CACHE PROJECTS CURRENT
-$cache_projects_current = $WDG_cache_plugin->get_cache('projects-current', 1);
+$cache_projects_current = $WDG_cache_plugin->get_cache('projects-current', 2);
 if ($cache_projects_current !== FALSE) { echo $cache_projects_current; }
 else {
 	ob_start();
@@ -37,7 +37,7 @@ else {
 		<?php } ?>
 <?php
 	$cache_projects_current = ob_get_contents();
-	$WDG_cache_plugin->set_cache('projects-current', $cache_projects_current, 60*60, 1);
+	$WDG_cache_plugin->set_cache('projects-current', $cache_projects_current, 60*10, 2);
 	ob_end_clean();
 	echo $cache_projects_current;
 }
@@ -48,7 +48,7 @@ else {
 <?php
 //*******************
 //CACHE PROJECTS OTHERS
-$cache_projects_others = $WDG_cache_plugin->get_cache('projects-others', 1);
+$cache_projects_others = $WDG_cache_plugin->get_cache('projects-others', 2);
 if ($cache_projects_others !== FALSE) { echo $cache_projects_others; }
 else {
 	ob_start();
@@ -123,7 +123,7 @@ else {
 	    
 <?php
 	$cache_projects_others = ob_get_contents();
-	$WDG_cache_plugin->set_cache('projects-others', $cache_projects_others, 60*60, 1);
+	$WDG_cache_plugin->set_cache('projects-others', $cache_projects_others, 60*10, 2);
 	ob_end_clean();
 	echo $cache_projects_others;
 }
