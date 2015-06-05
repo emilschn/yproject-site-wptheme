@@ -5,12 +5,14 @@ $campaign = atcf_get_current_campaign();
 <form method="POST" action="?campaign_id=<?php echo $campaign->ID ?>">
     <ul>
         <?php if ($campaign->campaign_status() == 'preparing') { ?>
+        <p>L'avant premi&egrave;re permet d'&ecirc;tre visible sur le site wedogood.co avant le lancement de la campagne. 
+            Les internautes pourront d&eacute;couvrir une partie de votre projet.</p>
             <li><input type="checkbox" class="checkbox-next-step" id="cbman1">
-                <label for="cbman1">J'ai évalué l'intérêt de l'avant-première pour mon projet</label></li>
+                <label for="cbman1">J'ai compl&eacute;t&eacute; ma page projet</label></li>
             <li><input type="checkbox" class="checkbox-next-step" id="cbman2">
-                <label for="cbman2">J'ai préparé des animations pour cette phase</label></li>
+                <label for="cbman2">J'ai &eacute;tabli des actions de communication cibl&eacute;es pour informer du lancement de la campagne : r&eacute;seaux sociaux, mails, &eacute;venements ...</label></li>
             <li><input type="checkbox" class="checkbox-next-step" id="cbman3">
-                <label for="cbman3">Je suis prêt à passer en vote dans les 2 semaines qui viennent</label></li>
+                <label for="cbman3">Je suis pr&ecirc;t &agrave; passer en avant-premi&egrave;re</label></li>
 
         <?php } else if ($campaign->campaign_status() == 'preview') { ?>
             <li><input type="checkbox" class="checkbox-next-step" id="cbman4">
