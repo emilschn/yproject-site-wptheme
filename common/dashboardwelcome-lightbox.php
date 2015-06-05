@@ -12,6 +12,6 @@
 
 <p>L'équipe WDG va très bientôt entrer en contact avec vous, nous sommes impatients de discuter de votre projet.</p>
 
-<a class="button" id="db-welcome-close">C'est parti !</a>
+<a class="button" id="wdg-lightbox-welcome-close">C'est parti !</a>
 <br/><br/>
 </div>
