@@ -24,6 +24,7 @@
 				    <?php do_action( 'bp_signup_email_errors' ); ?>
 				    <?php do_action( 'bp_signup_password_errors' ); ?>
 				    <?php do_action( 'bp_signup_password_confirm_errors' ); ?>
+                                    <?php do_action( 'bp_validate_terms_check_errors' ); ?>
 				</div>
                                 <br>
 				
@@ -50,6 +51,12 @@
                                      <input  style="margin-bottom: 5px;" type="password" name="signup_password_confirm" placeholder="<?php _e( 'Confirmation du mot de passe', 'yproject' ); ?> *" id="signup_password_confirm" value="" />
                                     <div class="tool-tip slideIn right">Confirmez votre mot de passe</div>
                                     </div>
+                                    
+                                    
+					
+                                    <label for="validate-terms-check"><input type="checkbox" name="validate-terms-check" /> J&apos;accepte <a href="<?php echo home_url().'/cgu';  ?>"  target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
+                                    </br>
+                                   
                                    
 				    <?php do_action( 'bp_after_account_details_fields' ); ?>
 
@@ -264,7 +271,7 @@ function ypbp_core_screen_signup() {
 
 		if ( !empty( $account_details['errors']->errors['user_email'] ) )
 			$bp->signup->errors['signup_email'] = $account_details['errors']->errors['user_email'][0];
-
+           
 		// Check that both password fields are filled in
 		if ( empty( $_POST['signup_password'] ) || empty( $_POST['signup_password_confirm'] ) )
 			$bp->signup->errors['signup_password'] = __( 'Please make sure you enter your password twice', 'buddypress' );

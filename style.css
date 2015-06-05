@@ -215,6 +215,7 @@ form.wdg-forms .small-margin {
 .standard-form {
     font-family: Arial, sans-serif;
 }
+.standard-form select{ margin-bottom: 5px; }
 .standard-form input[type=text] { margin-bottom: 5px; }
 .standard-form input[type=password] { margin-bottom: 3px; }
 .standard-form input.margin-left { margin-left: 140px !important; }
@@ -238,31 +239,136 @@ form.wdg-forms .small-margin {
     display: inline-block;
     width: 500px;
 }
+/*******************************************************************************
+* LIGHTBOX - Avertisements
+*******************************************************************************/
+
+#warning {
+    text-align: justify;
+    text-justify: inter-word;
+    padding: 5px; 
+}
+#input-style {
+    margin-left : 300px; 
+    color: #FF494C;
+    padding-bottom: 10px;    
+}
+#warning input[type="checkbox"]{
+    margin-right : 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+#warning input[type="submit"]{
+    margin: 10px;
+}
 
 /*******************************************************************************
 * LIGHTBOX - FORMULAIRE
 *******************************************************************************/
+/* tooltip */
+
+
+.tool-tip{
+	color: #fff;
+	background-color: rgba( 0, 0, 0, .7);
+	text-shadow: none;
+	font-size: .9em;
+	visibility: hidden;
+	-webkit-border-radius: 7px; 
+	-moz-border-radius: 7px; 
+	-o-border-radius: 7px; 
+	border-radius: 7px;	
+	text-align: center;	
+	opacity: 0;
+	z-index: 999;
+	padding: 3px 8px;	
+	position: absolute;
+	cursor: default;
+	-webkit-transition: all 240ms ease-in-out;
+	-moz-transition: all 240ms ease-in-out;
+	-ms-transition: all 240ms ease-in-out;
+	-o-transition: all 240ms ease-in-out;
+	transition: all 240ms ease-in-out;	
+}
+/* default heights, width and margin w/o Javscript */
+
+.tool-tip,
+.tool-tip.top{
+	width: 90px;
+	height: 30px;
+	margin-left: -43px;
+}
+
+/* tool tip position right */
+
+.tool-tip.right{
+	top: 50%;
+	right: auto;
+	left: 75%;
+	margin-top: -15px;
+	margin-right: auto;	
+	margin-left: auto;
+}
+
+.tool-tip.right:after{
+	left: -5px;
+	top: 50%;	
+	margin-top: -6px;
+	bottom: auto;
+	border-top-color: transparent;	
+    border-right-color: rgba( 0, 0, 0, .7);	
+}
+.on-focus input{
+        width:200px;
+}
+
+/* tooltip on focus left and right */
+
+.on-focus .tool-tip.left,
+.on-focus .tool-tip.right{
+	margin-top: -19px;
+}
+
+/* on hover of element containing tooltip default*/
+
+*:not(.on-focus):hover > .tool-tip,
+.on-focus input:focus + .tool-tip{
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition: all 240ms ease-in-out;
+	-moz-transition: all 240ms ease-in-out;
+	-ms-transition: all 240ms ease-in-out;
+	-o-transition: all 240ms ease-in-out;
+	transition: all 240ms ease-in-out;		
+}
+
+.colonne {
+
+    width: 235px;
+    vertical-align: top; 
+    display: inline-block;
+}
+
+.colonne input {
+    width: 220px;
+    text-align: left;
+}
+
 .login_fail{
     margin-bottom: 10px;
 }
-#sidebar-login-form {
-    text-align: left;
-}
-#sidebar-login-form-lightbox a{
+
+
+
+#sidebar-login-form a{
     color: #606060;
     font-size: 11px;
     font-style: italic;
-    margin: 170px;
 }
+
 #sidebar-login-form label {
     text-align: right;
     font-size: 14px;
-}
-
-
-#sidebar-wp-submit-lightbox{
-    margin-left:180px;
-    margin-top: 5px;
 }
 
 /*******************************************************************************
@@ -2732,7 +2838,7 @@ table.mceLayout {
 #form_infoperso_projet {
     background:#F2F2F2;
     margin: 20px;
-    padding: 30px;
+    padding: 0 20px 0 40px;
 }
 
 /*******************************************************************************
