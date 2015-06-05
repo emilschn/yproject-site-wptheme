@@ -6,7 +6,7 @@
     <strong class="data-inv-count_validate_investments">&hellip;</strong> investissements valid&eacute;s.<br />
     Les investisseurs ont <strong class="data-inv-average_age">&hellip;</strong> ans de moyenne.<br />
     Ce sont <strong class="data-inv-percent_female">&hellip;</strong>% de femmes et <strong class="data-inv-percent_male">&hellip;</strong>% d&apos;hommes.<br />
-    <strong class="data-campaign_days_remaining"><?php echo atcf_get_campaign($id_campaign)->days_remaining()?></strong> jours restants.<br />
+    <strong class="data-campaign_days_remaining"><?php echo atcf_get_campaign($id_campaign)->time_remaining_fullstr()?></strong><br />
     Investissement moyen par personne : <strong class="data-inv-average_invest">&hellip;</strong>&euro;<br />
     Investissement m&eacute;dian : <strong class="data-inv-median_invest">&hellip;</strong>&euro;
 

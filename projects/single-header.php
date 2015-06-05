@@ -63,25 +63,17 @@ else {
 					</div>
 					<div class="post_bottom_infos_item" <?php if($vote_status=='funded' || $vote_status == 'archive'){echo "style=opacity:0.5";}?>>
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
-						<span class="mobile_hidden"><?php
-						$days_remaining = $campaign->days_remaining();
-						switch ($days_remaining) { 
-							case 1:
-								?>Plus que <strong>1</strong> jour !<?php
-								break;
-							case 0:
-								?>Collecte termin&eacute;e !<?php
-								break;
-							default:
-								?>Plus que <strong><?php echo $days_remaining; ?></strong> jours !<?php
-								break;
-						}
-						?></span>
-						<span class="only_on_mobile"><?php echo $days_remaining; ?></span>
+						<span class="mobile_hidden"><?php echo $campaign->time_remaining_fullstr(); ?></span>
+						<span class="only_on_mobile"><?php echo $campaign->time_remaining_str(); ?></span>
 					</div>
 					<div class="post_bottom_infos_item">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-						<span class="mobile_hidden"><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true); ?></span>
+						<span class="mobile_hidden"><?php 
+						    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
+						    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
+							echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
+						    }
+						?></span>
 						<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
 					</div>
 					<div class="post_bottom_infos_item only_on_mobile">
@@ -100,7 +92,7 @@ else {
 						<div class="project_full_progressbar" style="width:0%">
 							&nbsp;
 						</div>
-						<span class="project_full_percent">0%</span>
+						<span class="project_full_percent" style="margin-top: -25px;">0 &euro;</span>
 					</div>
 				</div>
 				<div class="logos_zone">
@@ -128,25 +120,17 @@ else {
 					</div>
 					<div class="post_bottom_infos_item">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
-						<span class="mobile_hidden"><?php
-						$remaining_vote_days = $campaign->end_vote_remaining(); 
-						switch ($remaining_vote_days) { 
-							case 1:
-								?>Il reste <strong>1</strong> jour pour voter !<?php
-								break;
-							case 0:
-								?>Vote termin&eacute; !<?php
-								break;
-							default:
-								?>Il reste <strong><?php echo $remaining_vote_days; ?></strong> jours pour voter !<?php
-								break;
-						}
-						?></span>
-						<span class="only_on_mobile"><?php echo $remaining_vote_days; ?></span>
+						<span class="mobile_hidden"><?php echo $campaign->time_remaining_fullstr(); ?></span>
+						<span class="only_on_mobile"><?php echo $campaign->time_remaining_str(); ?></span>
 					</div>
 					<div class="post_bottom_infos_item">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-						<span class="mobile_hidden"><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true); ?></span>
+						<span class="mobile_hidden"><?php 
+						    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
+						    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
+							echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
+						    }
+						?></span>
 						<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
 					</div>
 					<div class="post_bottom_infos_item only_on_mobile">
@@ -175,7 +159,12 @@ else {
 					</div>
 					<div class="post_bottom_infos_item">
 	-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-	-					<span class="mobile_hidden"><?php echo 'Ce projet a besoin de '.$campaign->minimum_goal(true) ; ?></span>
+						<span class="mobile_hidden"><?php 
+						    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
+						    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
+							echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
+						    }
+						?></span>
 						<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
 					</div>
 					<div class="projects-description-separator mobile_hidden"></div>
@@ -184,7 +173,7 @@ else {
 			<?php } ?>
 <?php
 	$cache_header_right = ob_get_contents();
-	$WDG_cache_plugin->set_cache('project-header-right-' . $campaign_id, $cache_header_right, 60*30, 1);
+	$WDG_cache_plugin->set_cache('project-header-right-' . $campaign_id, $cache_header_right, 60*10, 1);
 	ob_end_clean();
 	echo $cache_header_right;
 }
@@ -192,7 +181,7 @@ else {
 //*******************
 ?>
 			<div class="post_bottom_buttons mobile_hidden">
-				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) { ?> 
+				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->is_remaining_time() > 0) { ?> 
 					<div id="invest-button">
 						<?php if ( is_user_logged_in() ): ?> 
 							<?php $page_invest = get_page_by_path('investir'); ?>

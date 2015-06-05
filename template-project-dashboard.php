@@ -165,11 +165,9 @@ $campaign_id = $_GET['campaign_id'];
                                                     </div>
                                                 </div>
                                                 <div class="quart-card">
-                                                    <div class="stat-big-number"><?php echo $campaign->end_vote_remaining();?><br/></div>
-                                                    <div class="stat-little-number">jour<?php if($campaign->end_vote_remaining()>1){echo 's';}?></div>
-                                                    <div class="details-card">
-                                                        <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jour<?php if($campaign->end_vote_remaining()>1){echo 's';}?> de vote restant<?php if($campaign->end_vote_remaining()>1){echo 's';}?>
-                                                    </div>
+                                                    <div class="stat-big-number"><?php echo $campaign->time_remaining_str();?><br/></div>
+                                                    <div class="stat-little-number">Avant la fin du vote</div>
+                                                    <div class="details-card"><?php echo $campaign->time_remaining_fullstr()?></div>
                                                 </div>
                                                 <div class="clear"></div>
                                             </div>
@@ -191,13 +189,12 @@ $campaign_id = $_GET['campaign_id'];
                                                     <canvas id="canvas-line-block" width="420" height="200" style="display:none"></canvas>
                                                 </div>
                                                 <div class="quart-card">
-                                                    <div class="stat-big-number"><?php echo $campaign->days_remaining();?><br/></div>
-                                                    <div class="stat-little-number">jour<?php if($campaign->days_remaining()>1){echo 's';}?></div>
-                                                    <div class="details-card">
-                                                        <strong><?php echo $campaign->days_remaining(); ?></strong> jour<?php if($campaign->days_remaining()>1){echo 's';}?> de collecte restant<?php if($campaign->days_remaining()>1){echo 's';}?>
-                                                    </div>
+                                                    <div class="stat-big-number"><?php echo $campaign->time_remaining_str();?><br/></div>
+                                                    <div class="stat-little-number">Avant la fin de collecte</div>
+                                                    <div class="details-card"><?php echo $campaign->time_remaining_fullstr()?></div>
                                                 </div>
                                             </div>
+
                                         <?php } 
                                         else if($status=='funded'){ ?>
                                             <div id="stats-funded">
