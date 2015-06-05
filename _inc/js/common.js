@@ -145,6 +145,12 @@ YPUIFunctions = (function($) {
 				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function() {
 					$(".wdg-lightbox").hide();
 				});
+                                $(".wdg-lightbox #wdg-lightbox-welcome-close").click(function() {
+					$(".wdg-lightbox").hide();
+				});
+                                $(".wdg-lightbox .wdg-lightbox-button-close a").click(function() {
+					$(".wdg-lightbox").hide();
+				});
 				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function() {
 					$(".wdg-lightbox").hide();
 				});
@@ -164,79 +170,14 @@ YPUIFunctions = (function($) {
 					}
 				});
 			}
-			
-			if ($("#email-selector").length > 0) {
-				$(".select-options").change(function() {
-					$("#email-selector-list span").hide();
-					$(".select-options:checked").each(function() {
-						$("#email-selector-list span."+$(this).data("selection")).show();
-					});
-				});
+                        
+                        //Si chargement données investisseurs/investissements nécessaire
+                        if ($(".ajax-investments-load").length > 0) { 
+                            campaign_id = $(".ajax-investments-load").attr('data-value');
+                                YPUIFunctions.getInvestments(campaign_id); 
 			}
                         
-                        if ($(".check-users-columns").length > 0) {
-                            //Page investisseurs/investors : Actions à la sélection des colonnes du tableau
-                            $(".check-users-columns").click(function() {
-                                //Case "toutes les colonnes
-                                if(this.value==="all") {
-                                    if (this.checked===true) {
-                                        $('.check-users-columns').prop('checked', true);
-                                        $('#investors-table td').removeAttr('hidden');
-                                    } else {
-                                        $('.check-users-columns').prop('checked', false);
-                                        $('#investors-table td').attr('hidden','');
-                                        $('#cbcoluname').prop('checked', true);
-                                        $('.coluname').removeAttr('hidden');
-                                    }
-                                }
-                                
-                                //Autres cases
-                                $selector = ".";
-                                $selector += this.value;
-                                if (this.checked===true) {
-                                    $($selector).removeAttr('hidden');
-                                } else {
-                                    $($selector).attr('hidden','');
-                                }
-                            });
-                        }
-                        
-                        //Lightbox de passage à l'étape suivante
-                        if ($("#submit-go-next-step").length > 0) {
-                            $("#submit-go-next-step").attr('disabled','');
-                            $("#submit-go-next-step").attr('style','background-color:#333 !important');
-                            
-                            checkall = function() {
-                                var allcheck = true;
-                                $(".checkbox-next-step").each(function(index){
-                                    allcheck = allcheck && this.checked;
-                                });
-                                return allcheck;
-                            };
-                            
-                            $(".checkbox-next-step").change(function() {
-                                if(checkall()){
-                                    $("#submit-go-next-step").removeAttr('disabled');
-                                    $("#submit-go-next-step").attr('style','background-color:#FF494C');
-                                } else {
-                                    $("#submit-go-next-step").attr('disabled','');
-                                    $("#submit-go-next-step").attr('style','background-color:#333 !important');
-                                };
-                            });
-                        }
-                        
-                        if($("#innbday").length > 0) {
-                            $("#innbday").change(function() {
-                                $("#previewenddatecollecte").empty();
-                                if(this.value<=60 && this.value>=1){
-                                    var d = new Date();
-                                    var jsupp = this.value;
-                                    d.setDate(d.getDate()+parseInt(jsupp));
-                                    $("#previewenddatecollecte").prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
-                                }
-                            });
-                        }
-                        
+
                         $("#investir").click(function(){
                            $("#redirect-page-investir").attr("value","true");
                         }); 
@@ -247,7 +188,122 @@ YPUIFunctions = (function($) {
                            $("#redirect-page-investir").attr("value","forum");
                         });
 		},
-		
+                
+                
+		getInvestors: function(inv_data, campaign_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_investors_list',
+                              'id_campaign':campaign_id,
+                              'data' : inv_data
+                            }
+                    }).done(function(result){
+                        //Affiche resultat requete Ajax une fois reçue
+                        $('#ajax-investors-load').after(result);
+                        $('#ajax-loader-img').hide();//On cache la roue de chargement.
+                        
+                        //Ajoute les actions à la sélection des colonnes du tableau
+                        $(".check-users-columns").click(function() {
+                            //Case "toutes les colonnes
+                            if(this.value==="all") {
+                                if (this.checked===true) {
+                                    $('.check-users-columns').prop('checked', true);
+                                    $('#investors-table td').removeAttr('hidden');
+                                } else {
+                                    $('.check-users-columns').prop('checked', false);
+                                    $('#investors-table td').attr('hidden','');
+                                    $('#cbcoluname').prop('checked', true);
+                                    $('.coluname').removeAttr('hidden');
+                                }
+                            }
+
+                            //Autres cases
+                            $selector = ".";
+                            $selector += this.value;
+                            if (this.checked===true) {
+                                $($selector).removeAttr('hidden');
+                            } else {
+                                $($selector).attr('hidden','');
+                            }
+                        });
+                    });
+                },
+                
+                getInvestsGraph : function(inv_data, campaign_id) {
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_invests_graph',
+                              'id_campaign' : campaign_id,
+                              'data' : inv_data
+                            }
+                    }).done(function(result){
+                        $('#ajax-invests-graph-load').after(result);
+                        $('#ajax-graph-loader-img').hide();//On cache la roue de chargement.
+                        $('#canvas-line-block').slideDown();
+                    });
+                },
+                
+                getEmailSelector : function(inv_data, campaign_id) {
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_email_selector',
+                              'id_campaign' : campaign_id,
+                              'data' : inv_data
+                            }
+                    }).done(function(result){
+                        $('#ajax-email-selector-load').after(result);
+                        //Actions des sélecteurs d'email
+                        $(".select-options").change(function() {
+					$("#email-selector-list span").hide();
+					$(".select-options:checked").each(function() {
+						$("#email-selector-list span."+$(this).data("selection")).show();
+					});
+				});
+                        $('#ajax-email-loader-img').hide();//On cache la roue de chargement.
+                    });
+                },
+                
+                
+                getInvestments: function(campaign_id){
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_investments_data',
+                              'id_campaign' : campaign_id
+                            }
+                    }).done(function(result){
+                        inv_data = JSON.parse(result);
+                        
+                        //Injecte les données directement affichées dans leurs emplacements
+                        $.each(inv_data, function(key, value) {
+                            $('.data-inv-'+key).html(value);
+                        });
+                        $('.ajax-data-inv-loader-img').slideUp();
+                        
+                        // Crée le tableau des investisseurs si besoin
+                        if ($("#ajax-investors-load").length > 0) {
+                            YPUIFunctions.getInvestors(JSON.stringify(inv_data),campaign_id);
+			}
+                        
+                        // Crée le graphe des investissements si besoin
+                        if ($("#ajax-invests-graph-load").length > 0) {
+                            YPUIFunctions.getInvestsGraph(JSON.stringify(inv_data),campaign_id); 
+                        }
+                        
+                        //Crée liste des emails si besoin
+                        if ($("#ajax-email-selector-load").length > 0) {
+                            YPUIFunctions.getEmailSelector(JSON.stringify(inv_data),campaign_id); 
+                        }
+                    });
+                },
+                
 		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué
 			var userID = $('#user-id').attr('data-value');
 
