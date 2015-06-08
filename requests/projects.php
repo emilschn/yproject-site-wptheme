@@ -321,7 +321,7 @@ class YPProjectLib {
 		}
 		
 		if (isset($_POST['fundingtype'])) { 
-			if ($_POST['fundingtype'] == 'fundingdevelopment' || $_POST['fundingtype'] == 'fundingproject') {
+			if ($_POST['fundingtype'] == 'fundingdevelopment' || $_POST['fundingtype'] == 'fundingproject' || $_POST['fundingtype'] == 'fundingdonation') {
 				update_post_meta($campaign_id, 'campaign_funding_type', $_POST['fundingtype']); 
 			} else {
 				$buffer = FALSE;
