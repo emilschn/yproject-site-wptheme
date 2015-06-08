@@ -196,8 +196,23 @@ else {
 	</span>
 </div>
 
-<?php if (is_user_logged_in()) { ?>
+<?php if (is_user_logged_in()) { 
+    
+    $check = $check = yproject_check_user_warning(get_current_user_id());
+    if(!$check){
+        ob_start();
+            locate_template('common/warning-lightbox.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="warning"]' .$content . '[/yproject_lightbox]');
+        echo "<div class='align-center'>Il est nécessaire pour continuer que vous prenniez connaisances des risques liés à l'investissement <a href='#warning' class='wdg-button-lightbox-open button' data-lightbox='warning'>ici</a></div></br>";
 
+    } else {
+    
+    
+    ?>
+
+		                
 
 <?php
 $editor_params = array( 
@@ -311,6 +326,7 @@ $editor_params = array(
 	</div>
 	
 <?php
+    }
 } else {
 	$page_connexion_register = get_page_by_path('register');
 	$page_connexion = get_page_by_path('connexion');

@@ -184,10 +184,25 @@ else {
 				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->is_remaining_time() > 0) { ?> 
 					<div id="invest-button">
 						<?php if ( is_user_logged_in() ): ?> 
-							<?php $page_invest = get_page_by_path('investir'); ?>
+                                                        <?php 
+                                                         $check = yproject_check_user_warning(get_current_user_id());
+                                                         if($check){ 
+                                                             $page_invest = get_page_by_path('investir');
+                                                        ?>
 							<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />Investir sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
-						<?php else: ?>
-							<a href="#connexion" id="investir" class="wdg-button-lightbox-open description-discover" data-lightbox="connexion"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />Investir sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
+                                                         <?php  } else { 
+                                                             
+                                                        ?>
+                                                        //Mon boutton vers ma lightbox d'avertissement 
+                                                         <?php }?>
+                                                       
+                                                <?php else: ?>
+                                                        
+							<a href="#connexion" id="investir" class="wdg-button-lightbox-open description-discover" data-lightbox="connexion">
+                                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />
+                                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />Investir sur ce projet
+                                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" />
+                                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
 						<?php endif; ?>
 					</div>
 

@@ -214,6 +214,7 @@ form.wdg-forms .small-margin {
 .standard-form {
     font-family: Arial, sans-serif;
 }
+.standard-form select{ margin-bottom: 5px; }
 .standard-form input[type=text] { margin-bottom: 5px; }
 .standard-form input[type=password] { margin-bottom: 3px; }
 .standard-form input.margin-left { margin-left: 140px !important; }
@@ -236,6 +237,28 @@ form.wdg-forms .small-margin {
 .large-label {
     display: inline-block;
     width: 500px;
+}
+/*******************************************************************************
+* LIGHTBOX - Avertisements
+*******************************************************************************/
+
+#warning {
+    text-align: justify;
+    text-justify: inter-word;
+    padding: 5px; 
+}
+#input-style {
+    margin-left : 300px; 
+    color: #FF494C;
+    padding-bottom: 10px;    
+}
+#warning input[type="checkbox"]{
+    margin-right : 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+#warning input[type="submit"]{
+    margin: 10px;
 }
 
 /*******************************************************************************
@@ -315,29 +338,23 @@ form.wdg-forms .small-margin {
 	-moz-transition: all 240ms ease-in-out;
 	-ms-transition: all 240ms ease-in-out;
 	-o-transition: all 240ms ease-in-out;
-	transition: all 240ms ease-in-out;		
+	transition: all 240ms ease-in-out;
 }
 
-
-
-
 .colonne {
-   
-    margin-top: 10px;
-    width: 350px;
-    border: 1px solid;
+    width: 235px;
+    vertical-align: top; 
     display: inline-block;
 }
 
-.colonne p {
-    width: 300px;
+.colonne input {
+    width: 220px;
     text-align: left;
 }
+
 .login_fail{
     margin-bottom: 10px;
 }
-
-
 
 #sidebar-login-form a{
     color: #606060;
@@ -2939,7 +2956,7 @@ table.mceLayout {
 #form_infoperso_projet {
     background:#F2F2F2;
     margin: 20px;
-    padding: 30px;
+    padding: 0 20px 0 40px;
 }
 
 /*******************************************************************************
