@@ -15,8 +15,6 @@ $campaign = atcf_get_current_campaign();
                 <label for="cbman3">Je suis pr&ecirc;t &agrave; passer en avant-premi&egrave;re</label></li>
 
         <?php } else if ($campaign->campaign_status() == 'preview') { ?>
-            <li><input type="checkbox" class="checkbox-next-step" id="cbman4">
-                <label for="cbman4">J'ai bien compris les effets du vote sur la part de chiffre d'affaires que je devrai verser</label></li>
             <li><input type="checkbox" class="checkbox-next-step" id="cbman5">
                 <label for="cbman5">J'ai préparé des messages à envoyer par mail et à publier sur les réseaux sociaux dans l'heure</label></li>
             <li><input type="checkbox" class="checkbox-next-step" id="cbman6">
