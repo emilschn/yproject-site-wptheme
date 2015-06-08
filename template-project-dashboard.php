@@ -45,7 +45,7 @@ $campaign_id = $_GET['campaign_id'];
                             $pages_stats = get_page_by_path('statistiques-avancees');
                         }
                         
-                                                /******************************************************/
+                        /******************************************************/
                          
                          /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
                          if ($can_modify){
@@ -82,6 +82,7 @@ $campaign_id = $_GET['campaign_id'];
                                              $CollectEndDate = (new DateTime())->add($diffCollectDay);
                                              $CollectEndDate->setTime($collecte_fin_heure,$collecte_fin_minute);
                                              $campaign->set_end_date($CollectEndDate);
+                                             $campaign->set_begin_collecte_date(new DateTime());
 
                                              $campaign->set_status('collecte');
                                              $campaign->set_validation_next_step(0);
