@@ -13,7 +13,7 @@
 
 		    <?php if ( 'request-details' == ypbp_get_current_signup_step() ) : ?>
                      <div id="warning">
-                        La création d'un compte de Membre sur WEDOGOOD.co est exclusivement réservé aux personnes physique. Chaque Membre ne peut bénéficier que d'un seul compte à son nom.
+                        La création d'un compte de Membre sur WEDOGOOD.co est exclusivement réservée aux personnes physique. Chaque Membre ne peut bénéficier que d'un seul compte à son nom.
                         Si vous souhaitez investir ou porter un projet pour une organisation, vous pourrez l'indiquer au moment de l'investissement ou dans les paramètres du projet.
                         En m'inscrivant, je recevrai automatiquement la newsletter de WE DO GOOD. Je pourrai me désinscrire à tout moment.
                     </div>                   

@@ -257,31 +257,34 @@ function yproject_check_is_warning_meta_init($user_id){
         return true; 
     }
 }
-//Permet d'enregistrer et de rediriger 
-function yproject_check_warning_lightbox(){    
-    $user_id = get_current_user_id(); 
-    $errors = "";
-    if(isset($_POST['submit_warning'])){
-        if(isset($_POST['warning3'])){
-            if( isset($_POST['warning1']) && isset($_POST['warning2'])){
+//Gestion du formulaire de lightbox d'avertissements
+function yproject_submit_warning_lightbox() {
+    //Si le formulaire a été posté
+    if (isset($_POST['submit_warning'])) {
+	global $submit_warning_errors;
+	$user_id = get_current_user_id(); 
+	$submit_warning_errors = "";
+	
+	//Si la case de démarchage a été cochée
+        if (isset($_POST['warning3'])) {
+	    //On vérifie qu'une réponse a été donnée aux questions fermées
+            if (isset($_POST['warning1']) && isset($_POST['warning2'])) {
                 // On enregistre les valeurs
-                $warning1 = update_user_meta( $user_id, 'warning1', $_POST['warning1'] );
-                $warning2 = update_user_meta( $user_id, 'warning2', $_POST['warning2'] );
-                $warning3 = update_user_meta( $user_id, 'warning3', $_POST['warning3'] ); 
-                // ***
-                // Redirection vers la lightbox -> profil
-                // ***
-            }  
-            else {
-                $errors = "Merci de répondre à toutes les questions pour continuer";
+                update_user_meta( $user_id, 'warning1', $_POST['warning1'] );
+                update_user_meta( $user_id, 'warning2', $_POST['warning2'] );
+		update_user_meta( $user_id, 'warning3', $_POST['warning3'] );
+		
+            } else {
+                $submit_warning_errors = "Merci de répondre à toutes les questions pour continuer";
             }
-        }
-        else {
-            $errors = "Merci de bien vouloir cocher la dernière case.";
+	    
+	//Si la case de démarchage n'est pas cochée, on réaffiche la lightbox
+        } else {
+            $submit_warning_errors = "Merci de bien vouloir cocher la dernière case.";
         }
     }
 } 
-add_action('init', 'yproject_check_warning_lightbox');
+add_action('init', 'yproject_submit_warning_lightbox');
 
 
 //********
