@@ -53,7 +53,7 @@ else {
 		</div>
 		<div class="mobile-share only_on_mobile">
 			<?php if ($vote_status != 'vote' && $vote_status != 'preparing') : ?>
-			<?php if ( is_user_logged_in() ) { 
+    			<?php if ( is_user_logged_in() ) { 
 				global $wpdb;
 				$user_id = wp_get_current_user()->ID;
 				$table_jcrois = $wpdb->prefix . "jycrois";
@@ -216,7 +216,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet.png" alt="logo projet" data-content="description"/>
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle projet"/>
 		<div id="project-content-description" class="projects-desc-content">
-			<h2>En quoi consiste le projet&nbsp;?</h2>
+			<h2>Pitch</h2>
 			<div class="zone-content">
 				<?php the_content(); ?>
 			</div>
@@ -236,7 +236,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>sociale.png" alt="logo social" data-content="societal_challenge" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris" />
 		<div id="project-content-societal_challenge" class="projects-desc-content">
-			<h2>Quelle est l&apos;utilit&eacute; soci&eacute;tale du projet&nbsp;?</h2>
+			<h2>Impacts positifs</h2>
 			<div class="zone-content">
 				<?php 
 				$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
@@ -256,7 +256,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>economie.png" alt="logo economie" data-content="added_value" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-added_value" class="projects-desc-content">
-			<h2>Quelle est l&apos;opportunit&eacute; &eacute;conomique du projet&nbsp;?</h2>
+			<h2>Strat&eacute;gie</h2>
 			<div class="zone-content">
 				<?php 
 				$added_value = html_entity_decode($campaign->added_value()); 
@@ -275,7 +275,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>model.png" alt="logo modele" data-content="economic_model" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-economic_model" class="projects-desc-content">
-			<h2>Quel est le mod&egrave;le &eacute;conomique du projet&nbsp;?</h2>
+			<h2>Donn&eacute;es financi&egrave;res</h2>
 			<div class="zone-content">
 				<?php 
 				$economic_model = html_entity_decode($campaign->economic_model()); 
@@ -295,7 +295,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>porteur.png" alt="logo porteur" data-content="implementation"/>
 		<img class="vertical-align-middle grey-triangle"src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-implementation" class="projects-desc-content">
-			<h2>Qui porte le projet&nbsp;?</h2>
+			<h2>&Eacute;quipe</h2>
 			<div class="zone-content">
 				<?php 
 				$implementation = html_entity_decode($campaign->implementation()); 
@@ -366,7 +366,6 @@ $editor_params = array(
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="logo google" />
 		</a>
 	</div>
-    
 	<ul class="secondary-menu only_on_mobile">
 		<li><a href="<?php echo $news_link; ?>" <?php if($current_page==$news_link) echo 'class="current"'; ?>>Actualit&eacute;<?php echo $nb_cat; ?></a></li>
 

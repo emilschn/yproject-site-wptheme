@@ -61,11 +61,16 @@ YPUIFunctions = (function($) {
 			    });
 
 			    $(".radiofundingtype").change(function(){
+				$("#fundingdevelopment_param").show();
 				if ($('input[name=fundingtype]:checked').val() == "fundingproject") {
 				    $(".min_amount_value").text($("#min_amount_project").val());
 				}
 				if ($('input[name=fundingtype]:checked').val() == "fundingdevelopment") {
 				    $(".min_amount_value").text($("#min_amount_development").val());
+				}
+				if ($('input[name=fundingtype]:checked').val() == "fundingdonation") {
+				    $("#fundingdevelopment_param").hide();
+				    $(".min_amount_value").text($("#min_amount_donation").val());
 				}
 			    });
 			}

@@ -12,7 +12,7 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 	<div class="padder">
 		<?php require_once('projects/single-admin-bar.php'); ?>
 
-		<div id="dashboard" class="center margin-height">
+		<div class="center margin-height">
 		    
 			<?php if ($feedback === TRUE): ?>
 		    
@@ -99,13 +99,17 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 						<?php
 						$funding_project_selected = ($campaign->funding_type() == 'fundingproject') ? 'checked="checked"' : '';
 						$funding_dev_selected = ($campaign->funding_type() == 'fundingdevelopment') ? 'checked="checked"' : '';
+						$funding_donation_selected = ($campaign->funding_type() == 'fundingdonation') ? 'checked="checked"' : '';
 						?>
 						<input type="radio" name="fundingtype" class="radiofundingtype first" id="fundingproject" value="fundingproject" <?php echo $funding_project_selected; ?>>Financement d'un projet<br />
 						<input type="radio" name="fundingtype" class="radiofundingtype" id="fundingdevelopment" value="fundingdevelopment" <?php echo $funding_dev_selected; ?>>Capital (coop&eacute;ratives SA uniquement)<br />
+						<input type="radio" name="fundingtype" class="radiofundingtype" id="fundingdonation" value="fundingdonation" <?php echo $funding_donation_selected; ?>>Don avec contrepartie<br />
 
+						<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 						<label for="fundingduration">Dur&eacute;e du financement :</label>
 						<input type="text" name="fundingduration" value="<?php echo $campaign->funding_duration(); ?>"> ann&eacute;es.<br />
-
+						<?php endif; ?>
+						
 						<label>Montant demand&eacute; (seulement des chiffres) :</label>
 						<?php $goal = (int)$campaign->goal(false); ?>
 						Minimum : <input type="text" name="minimum_goal" size="10" value="<?php echo $campaign->minimum_goal(); ?>"> &euro; (Min. 500&euro;) - 

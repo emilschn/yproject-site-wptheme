@@ -25,7 +25,7 @@
 			<?php } else {
 				$page_connexion_register = get_page_by_path('register'); ?>
 				<div id="header_homepage_link" class="mobile_hidden">
-				    <a href="<?php echo get_permalink($page_connexion_register->ID); ?>register/" class="button">Inscription</a>
+				    <a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="button">Inscription</a>
 				    <a href="#connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">Connexion</a>
 		                    <?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
 		                </div>
