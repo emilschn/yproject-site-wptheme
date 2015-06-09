@@ -173,7 +173,9 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					<input type="submit" name="new_orga" value="Cr&eacute;er une organisation" class="small-margin button" />
 					<br />
 					<br />
-						
+					
+                                        <label for="phone">Num&eacute;ro de t&eacute;l&eacute;phone de contact : </label>
+                                        <input type="text" name="phone" value="<?php echo $campaign->contact_phone(); ?>" /><br />
 						
 					<?php $image_src_header = $campaign->get_header_picture_src(false); ?>
 					<label for="image_header">Image du bandeau :</label>

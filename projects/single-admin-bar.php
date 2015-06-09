@@ -27,6 +27,10 @@ if ($can_modify) {
             $pages_stats = get_page_by_path('statistiques-avancees');
         }
        
+        //Récupération de la page en cours
+        $current_page = 'project';
+        if (isset($post->post_name)) $current_page = $post->post_name;
+        if (bp_is_group()) $current_page = 'group';
        
         //Lien vers le groupe d'investisseurs du projet
         //Visible si le groupe existe et que l'utilisateur est bien dans ce groupe
@@ -38,11 +42,6 @@ if ($can_modify) {
             $group_obj = groups_get_group(array('group_id' => $investors_group_id));
             $group_link = bp_get_group_permalink($group_obj);
         }
-       
-        //Récupération de la page en cours
-        $current_page = 'project';
-        if (isset($post->post_name)) $current_page = $post->post_name;
-        if (bp_is_group()) $current_page = 'group';
 ?>
         <div id="single_project_admin_bar">
                 <div class="center">

@@ -150,6 +150,12 @@ YPUIFunctions = (function($) {
 				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function() {
 					$(".wdg-lightbox").hide();
 				});
+                                $(".wdg-lightbox #wdg-lightbox-welcome-close").click(function() {
+					$(".wdg-lightbox").hide();
+				});
+                                $(".wdg-lightbox .wdg-lightbox-button-close a").click(function() {
+					$(".wdg-lightbox").hide();
+				});
 				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function() {
 					$(".wdg-lightbox").hide();
 				});
