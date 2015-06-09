@@ -182,6 +182,43 @@ YPUIFunctions = (function($) {
                                 YPUIFunctions.getInvestments(campaign_id); 
 			}
                         
+                        //Lightbox de passage à l'étape suivante
+                        if ($("#submit-go-next-step").length > 0) {
+                            $("#submit-go-next-step").attr('disabled','');
+                            $("#submit-go-next-step").attr('style','background-color:#333 !important');
+                            
+                            checkall = function() {
+                                var allcheck = true;
+                                $(".checkbox-next-step").each(function(index){
+                                    allcheck = allcheck && this.checked;
+                                });
+                                return allcheck;
+                            };
+                            
+                            $(".checkbox-next-step").change(function() {
+                                if(checkall()){
+                                    $("#submit-go-next-step").removeAttr('disabled');
+                                    $("#submit-go-next-step").attr('style','background-color:#FF494C');
+                                } else {
+                                    $("#submit-go-next-step").attr('disabled','');
+                                    $("#submit-go-next-step").attr('style','background-color:#333 !important');
+                                };
+                            });
+                        }
+                        //Preview date fin collecte sur LB étape suivante
+                        if($("#innbday").length > 0) {
+                            $("#innbday").change(function() {
+                                $("#previewenddatecollecte").empty();
+                                if(this.value<=60 && this.value>=1){
+                                    var d = new Date();
+                                    var jsupp = this.value;
+                                    d.setDate(d.getDate()+parseInt(jsupp));
+                                    $("#previewenddatecollecte").prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+                                }
+                            });
+                        }
+                        
+
                         $("#investir").click(function(){
                            $("#redirect-page-investir").attr("value","true");
                         }); 

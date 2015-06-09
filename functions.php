@@ -969,7 +969,17 @@ function get_invests_graph(){
     ksort($cumulamount);
     ksort($allamount);
     /******************************************************/
+    //Date de début de collecte (1er investissement si l'information n'est pas enregistrée)
+    $datedebut = $campaign->begin_collecte_date();
+    if ($datedebut==null){
+        if(count($datesinvest)!=0){
+            $datedebut = $datesinvest[0];
+        } else {
+            $datedebut = null;
+        }
+    }
     
+    //Fonctions de formattage des dates pour JS
     function date_param($date) {
         return date_format(new DateTime($date),'"D M d Y H:i:s O"');
     }
@@ -982,10 +992,9 @@ function get_invests_graph(){
     jQuery(document).ready( function($) {
             var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
             var dataLine = {
-                labels : [<?php echo date_abs($datesinvest[0]); ?>,
+                labels : [<?php echo date_abs($datedebut); ?>,
                     <?php echo date_abs($campaign->end_date()); ?>],
-                xBegin : new Date(<?php if(count($datesinvest)==0){echo date_param(null);}
-                    else {echo date_param($datesinvest[0]);} ?>),
+                xBegin : new Date(<?php echo date_param($datedebut); ?>),
                 xEnd : new Date(<?php echo date_param($campaign->end_date()); ?>),
                 datasets : [
                     {
@@ -994,7 +1003,7 @@ function get_invests_graph(){
                         pointColor : "rgba(0,0,0,0)",
                         pointStrokeColor : "rgba(0,0,0,0)",
                         data : [0,<?php echo $campaign->minimum_goal(false);?>],
-                        xPos : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+                        xPos : [new Date(<?php echo date_param($datedebut); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
                         title : "But progression"
                     },{
                         fillColor : "rgba(0,0,0,0)",
@@ -1002,7 +1011,7 @@ function get_invests_graph(){
                         pointColor : "rgba(0,0,0,0)",
                         pointStrokeColor : "rgba(0,0,0,0)",
                         data : [<?php echo $campaign->minimum_goal(false);?>,<?php echo $campaign->minimum_goal(false);?>],
-                        xPos : [new Date(<?php echo date_param($datesinvest[0]); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+                        xPos : [new Date(<?php echo date_param($datedebut); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
                         title : "But"
                     }
                     <?php 
@@ -1226,3 +1235,13 @@ function yproject_shortcode_listinvestors_lightbox($atts, $content = '') {
 	echo do_shortcode('[yproject_widelightbox id="listinvestors"]' .$content . '[/yproject_widelightbox]');
 }
 add_shortcode('yproject_listinvestors_lightbox', 'yproject_shortcode_listinvestors_lightbox');
+
+//->TB Passer à l'étape suivante
+function yproject_shortcode_gonextstep_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('projects/dashboard-next-step.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="gonextstep"]' .$content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_gonextstep_lightbox', 'yproject_shortcode_gonextstep_lightbox');

@@ -24,6 +24,7 @@ $campaign_id = $_GET['campaign_id'];
                         
                         $page_guide = get_page_by_path('guide');
                         $page_particular_terms = get_page_by_path('conditions-particulieres');
+                        $status = $campaign->campaign_status();
 
                         $page_parameters = get_page_by_path('parametres-projet');       // Paramètres
                         $page_add_news = get_page_by_path('ajouter-une-actu');          // Ajouter une actualité
@@ -43,6 +44,57 @@ $campaign_id = $_GET['campaign_id'];
                         } else {
                             $pages_stats = get_page_by_path('statistiques-avancees');
                         }
+                        
+                        /******************************************************/
+                         
+                         /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
+                         if ($can_modify){
+                             /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
+                             if (isset($_POST['next_step'])&& $_POST['next_step']==1 && $campaign->can_go_next_step()){
+ 
+ 
+                                 //Préparation -> Avanat-premiere
+                                 if ($status=='preparing'){
+                                     $campaign->set_status('preview');
+                                     $campaign->set_validation_next_step(0);
+
+                                 } //Avant-premieère -> Vote
+                                 else if ($status=='preview') {
+                                     if(ypcf_check_user_is_complete($campaign->post_author())){
+                                         $campaign->set_status('vote');
+                                         $campaign->set_validation_next_step(0);
+                                     }
+
+                                 } //Vote -> Collecte
+                                 else if ($status=='vote') {
+                                     if(isset($_POST['innbday'])){
+                                         //Recupere nombre de jours et heure de fin de la collecte
+                                         $collecte_time = $_POST['innbday'];
+                                         $collecte_fin_heure = $_POST['inendh'];
+                                         $collecte_fin_minute = $_POST['inendm'];
+                                         if($campaign->company_name()!=null&&$campaign->company_status()!=null
+                                                 &&$campaign->is_validated_by_vote() && $campaign->end_vote_remaining()<=0
+                                                 && 1<=$collecte_time && $collecte_time<=60
+                                                 && 0<=$collecte_fin_heure && $collecte_fin_heure<=23
+                                                 && 0<=$collecte_fin_minute && $collecte_fin_minute<=59){
+                                             //Fixe la date de fin de collecte
+                                             $diffCollectDay = new DateInterval('P'.$collecte_time.'D');
+                                             $CollectEndDate = (new DateTime())->add($diffCollectDay);
+                                             $CollectEndDate->setTime($collecte_fin_heure,$collecte_fin_minute);
+                                             $campaign->set_end_date($CollectEndDate);
+                                             $campaign->set_begin_collecte_date(new DateTime());
+
+                                             $campaign->set_status('collecte');
+                                             $campaign->set_validation_next_step(0);
+                                         }
+                                     }
+                                 }
+                                 $status = $campaign->campaign_status();
+                             }
+                         }
+                         
+                         
+                         /******************************************************/
                         
                         /**************Stats Vues *********************/
                         $stats_views = 0;
@@ -65,7 +117,7 @@ $campaign_id = $_GET['campaign_id'];
                         //Recuperation donnees de votes
                         locate_template( array("requests/votes.php"), true );
                         $vote_results = wdg_get_project_vote_results($campaign_id);
-        
+
                         ?>
 
                         <?php if ($can_modify): ?>
@@ -89,7 +141,6 @@ $campaign_id = $_GET['campaign_id'];
                             <div class="part-title-separator">
                                 <span class="part-title"><?php echo $post_campaign->post_title; ?></span>
                             </div>
-                            
                             <div class="blocks-list">
                                 <div id="block-summary" >
                                     <div class="current-step">
@@ -100,6 +151,24 @@ $campaign_id = $_GET['campaign_id'];
                                         <span <?php if($status=='collecte'){echo 'id="current"';} ?>>Collecte </span>
                                         <span <?php if($status=='funded'){echo 'id="current"';} ?>>R&eacute;alisation</span>
                                     </div>
+                                    <?php if ($status=='preparing'||$status=='preview'||$status=='vote'){?>
+                                        <div class="list-button">   
+                                            <?php if (current_user_can('manage_options')) {
+                                                //Visible uniquement par admins : autoriser le PP à passer à l'étape suivante
+                                                if(isset($_GET['validate_next_step'])){
+                                                    $campaign->set_validation_next_step($_GET['validate_next_step']);
+                                                }
+                                                if($campaign->can_go_next_step()){?>
+                                                    <a href="?campaign_id=<?php echo $campaign_id?>&validate_next_step=0" class="button">&cross; Ne plus autoriser &agrave; passer &agrave; l'&eacute;tape suivante</a>
+                                                <?php } else {?>
+                                                    <a href="?campaign_id=<?php echo $campaign_id?>&validate_next_step=1" class="button">&check; Autoriser &agrave; passer &agrave; l'&eacute;tape suivante</a>
+                                                <?php }
+                                            }?>
+                                            <a href="#gonextstep" class="wdg-button-lightbox-open button" data-lightbox="gonextstep">&check; Passer &agrave; l'&eacute;tape suivante</a>
+                                            <?php //Lightbox passage à l'étape suivante
+                                            echo do_shortcode('[yproject_gonextstep_lightbox]'); ?>
+                                        </div>
+                                    <?php }?>
                                 </div>
                                 <br/>
                                 
@@ -277,9 +346,10 @@ $campaign_id = $_GET['campaign_id'];
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
-                                
+
                             <script type="text/javascript">
                             jQuery(document).ready( function($) {
+
                                 <?php if($status=='vote'){ ?>
                                     var ctxPie = $("#canvas-pie-block").get(0).getContext("2d");
                                     var dataPie = [
@@ -304,9 +374,7 @@ $campaign_id = $_GET['campaign_id'];
 
                                 <?php } ?>
                             });
-
                             </script>
-
                         <?php else: ?>
 
                             <?php _e('Vous n&apos;avez pas la permission pour voir cette page.', 'yproject'); ?>

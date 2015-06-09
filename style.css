@@ -2405,13 +2405,11 @@ div#home_bottom h1 {
     max-width: 420px;
 }
 
-#dashboard .block .list-button,
-#dashboard .large-block .list-button{
+#dashboard .list-button{
     text-align:center
 }
 
-#dashboard .block .list-button .button,
-#dashboard .large-block .list-button .button{
+#dashboard .list-button .button{
     padding: 10px;
     display: inline-block;
     text-transform: none;
@@ -2457,6 +2455,7 @@ div#home_bottom h1 {
 
 #dashboard #block-summary .current-step {
     text-align:center;
+    margin: 10px 0px;
 }
 #dashboard #block-summary .current-step span {
     opacity:0.5;
@@ -2468,6 +2467,16 @@ div#home_bottom h1 {
     opacity: 1;
     color: #FF494C;
     font-weight: bold;
+}
+
+#dashboard #block-summary #wdg-lightbox-gonextstep ul {
+   list-style-position: inside;
+   list-style-type: none;
+   padding-left: 0px;
+}
+
+#dashboard #block-summary #wdg-lightbox-gonextstep ul li {
+    padding: 5px;
 }
 
 #dashboard #block-stats .quart-card {
@@ -2514,8 +2523,7 @@ div#home_bottom h1 {
     text-align: initial
 }
 
-#dashboard .large-block .wdg-lightbox-button-close .button,
-#dashboard .block .wdg-lightbox-button-close .button {
+#dashboard .wdg-lightbox-button-close .button {
     padding: 3px 8px;
     display: initial;
 }
