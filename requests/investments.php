@@ -19,6 +19,8 @@ function wdg_get_project_investments($camp_id, $include_pending = FALSE) {
 		'percent_male' => 0,
 		'average_invest' => 0,
 		'median_invest' => 0,
+                'min_invest' => 0,
+                'max_invest' => 0,
 		'amount_check' => $campaign->current_amount_check(),
 		'investors_list' => array(),
 		'investors_string' => ''
@@ -56,6 +58,8 @@ function wdg_get_project_investments($camp_id, $include_pending = FALSE) {
 			$index = round(($buffer['count_validate_investments'] + 1) / 2) - 1;
 			$buffer['median_invest'] = $buffer['amounts_array'][$index];
 		}
+                $buffer['min_invest']= $buffer['amounts_array'][0];
+                $buffer['max_invest']= end($buffer['amounts_array']);
 	}
 	
 	return $buffer;
