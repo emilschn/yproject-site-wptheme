@@ -61,13 +61,19 @@ $campaign_id = $_GET['campaign_id'];
                                  } //Avant-premieère -> Vote
                                  else if ($status=='preview') {
                                      if(ypcf_check_user_is_complete($campaign->post_author())){
+                                         //Fixe date fin de vote
+                                         $diffVoteDay = new DateInterval('P60D');
+                                         $VoteEndDate = (new DateTime())->add($diffVoteDay);
+                                         //$VoteEndDate->setTime(23,59);
+                                         $campaign->set_end_vote_date($VoteEndDate);     
+                                         
                                          $campaign->set_status('vote');
                                          $campaign->set_validation_next_step(0);
                                      }
 
                                  } //Vote -> Collecte
                                  else if ($status=='vote') {
-                                     if(isset($_POST['innbday'])){
+                                     if(isset($_POST['innbday']) && isset($_POST['inendh']) && isset($_POST['inendm'])){
                                          //Recupere nombre de jours et heure de fin de la collecte
                                          $collecte_time = $_POST['innbday'];
                                          $collecte_fin_heure = $_POST['inendh'];
