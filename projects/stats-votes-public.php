@@ -14,22 +14,23 @@
 <em>Vos impacts sont-ils suffisants pour que votre projet soit en financement sur WEDOGOOD.co ?</em><br />
 <center><canvas id="canvas-pie" width="400" height="200"></canvas></center>
 
-Les <strong><?php echo $vote_results['count_project_validated']; ?></strong> personnes qui ont vot&eacute; oui...<br />
+<strong><?php echo $vote_results['count_project_validated']; ?></strong> personnes ont vot&eacute; oui...<br />
 <ul>
 	<li>
-          <?php
+	    <?php
                 $total = $vote_results['count_invest_ready'] * $vote_results['average_invest_ready'];
                 $pourcentage = ($total*100)/$vote_results['objective'];
             ?>
       
-            Sur les <strong><?php echo $vote_results['count_voters']; ?></strong>  votants, <strong><?php echo $vote_results['count_invest_ready']; ?></strong> personnes ont déclaré qu'ils investiraient en moyenne <strong><?php echo round($vote_results['average_invest_ready'],2); ?> &euro;</strong>. 
+            Sur ces <strong><?php echo $vote_results['count_project_validated']; ?></strong> votants, <strong><?php echo $vote_results['count_invest_ready']; ?></strong> personnes ont déclaré qu'ils investiraient en moyenne <strong><?php echo round($vote_results['average_invest_ready'],2); ?> &euro;</strong>. 
             Pour un total de <strong><?php echo round($total ,2); ?></strong> euros de promesse, soit <strong><?php echo round($pourcentage ,2).' %'; ?></strong> de l’objectif.
         </li>
-        <br>
+	<?php if ($vote_results['show_risk']): ?>
 	<li>
 	    ont &eacute;valu&eacute; le risque, en moyenne, &agrave; : <strong><?php echo round($vote_results['average_risk'], 2); ?></strong> / 5<br />
 	    <center><canvas id="canvas-vertical" width="300" height="200"></canvas></center>
 	</li>
+	<?php endif; ?>
 </ul>
 
 <h3>Remarques</h3>
