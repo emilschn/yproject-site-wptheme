@@ -783,7 +783,7 @@ footer span {
     color: #FFF;
     display: block;
     width: 100%;
-    text-align: center;
+    font-weight: bold;
 }
 footer span.menutitle {
     font-family: Arial, sans-serif;
