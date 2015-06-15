@@ -163,6 +163,13 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 							<option value=""></option>
 							<?php echo $str_organisations; ?>
 						</select>
+                                                <?php if ($current_organisation!=null){
+                                                    $page_edit_orga = get_page_by_path('editer-une-organisation');
+                                                    $edit_org .= '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
+                                                    $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
+                                                    echo $edit_org;
+                                                }
+                                                ?>
 
 					<?php else: ?>
 						<?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
