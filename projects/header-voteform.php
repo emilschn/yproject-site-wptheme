@@ -96,7 +96,8 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 				'more_info_team'          => $more_info_team, 
 				'more_info_finance'       => $more_info_finance, 
 				'more_info_other'         => $more_info_other, 
-				'advice'		  => $advice 
+				'advice'		  => $advice,
+                                'date'                    => date_format(new DateTime(), 'Y-m-d')
 			)); 
 			if (!$vote_result) array_push($vote_errors, 'Probl&egrave;me de prise en compte du vote.');
 
