@@ -2478,6 +2478,11 @@ div#home_bottom h1 {
    padding-left: 0px;
 }
 
+#dashboard #block-summary #wdg-lightbox-gonextstep #vote-goals {
+   list-style-type: square;
+   padding-bottom: 15px;
+}
+
 #dashboard #block-summary #wdg-lightbox-gonextstep ul li {
     padding: 5px;
 }
