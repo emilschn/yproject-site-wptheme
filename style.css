@@ -1934,7 +1934,8 @@ div#home_bottom h1 {
     margin: 0;
     padding : 0;
 }
-#projects-right-desc .project-rewards {
+#projects-right-desc .project-rewards,
+#projects-right-desc #project-owner{
     margin: 10px 15px 0px 15px;
     text-align: center;
 }

@@ -100,7 +100,8 @@ else {
 //*******************
 ?>
 	</div>
-	<div id="projects-right-desc" class="right">	    
+    
+        <div id="projects-right-desc" class="right" <?php echo 'data-link-project-settings="'.get_permalink(get_page_by_path('parametres-projet')->ID) . $campaign_id_param . $params_partial.'"'; ?>>
 <?php
 //*******************
 //CACHE PROJECT CONTENT SUMMARY
@@ -116,7 +117,19 @@ else {
 			$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
 			if (count($current_organisations) > 0) {
 				$current_organisation = $current_organisations[0];
-				$owner_str = '<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation">' . $current_organisation->organisation_name . '</a><br />';
+                                $page_edit_orga = get_page_by_path('editer-une-organisation');
+				$owner_str = '<div id="orga-edit" data-link-edit="'
+                                        .get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref
+                                        .'">'
+                                        . '<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation">' . $current_organisation->organisation_name
+                                        . '</a>'
+                                        . '</div><br />';
+                                /*
+                                $page_edit_orga = get_page_by_path('editer-une-organisation');
+                                $edit_org .= '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
+                                $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
+                                $owner_str .= $edit_org;
+                                */
 				$owner_str .= '<div id="wdg-lightbox-project-organisation" class="wdg-lightbox hidden">
 		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder">
@@ -139,11 +152,15 @@ else {
 			} else {
 //				UIHelpers::print_user_avatar($author_id);
 				$author = get_userdata($post_campaign->post_author);
-				$owner_str = $author->user_firstname . ' ' . $author->user_lastname . '<br />';
+				$owner_str = '<div id="orga-edit" data-link-edit="'
+                                        . get_permalink(get_page_by_path('parametres-projet')->ID) . $campaign_id_param . $params_partial
+                                        . '">'
+                                        .$author->user_firstname . ' ' . $author->user_lastname 
+                                        .'</div><br />';
 //				$owner_str .= '@' . $author->user_nickname;
 			}
 			?>
-			<div id="project-owner-desc" style="width: 100%; text-align: center;">
+			<div id="project-owner-desc">
 				<?php echo $owner_str; ?>
 			</div>
 		</div>

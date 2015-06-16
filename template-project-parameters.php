@@ -70,7 +70,7 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					    'name'        => 'categories'
 					) ); ?><br />
 					
-					<a id="picture-head"></a><a id="video-zone"></a><?php /* ancre déplacée pour cause de menu... */ ?>
+                                        <a id="picture-head"></a><a id="video-zone"></a><a id="project-owner"></a><?php /* ancres déplacées pour cause de menu... */ ?>
 					<label for="activities">Secteur d&apos;activit&eacute; :</label>
 					<?php wp_dropdown_categories( array( 
 					    'hide_empty'  => 0,

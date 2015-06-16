@@ -886,7 +886,6 @@ function get_investors_list() {
                 //Liste des données à afficher pour la ligne traitée
                 if(YPOrganisation::is_user_organisation($item['user'])){
                     $orga = new YPOrganisation($item['user']);
-                    var_dump($orga);
                     $datacolonnes= array(bp_core_get_userlink($item['user']),
                     $orga->get_name(),
                     $orga->get_name(),
