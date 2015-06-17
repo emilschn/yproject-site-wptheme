@@ -160,7 +160,7 @@ function print_vote_post($vote_post, $is_right_project){
 
 <?php             
 function print_empty_post() {
-        $page_propose_project = get_page_by_path('proposer-un-projet'); ?>
+        $page_propose_project = get_page_by_path('financement'); ?>
 	<a href="<?php echo get_permalink($page_propose_project->ID); ?>">	
 		<div class="home-small-project home-small-project-right home-small-project-empty"></div>
         </a>

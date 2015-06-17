@@ -174,13 +174,13 @@ else {
 		<?php } ?>
 			
 		<div class="project-rewards">
-			<span>En &eacute;change de votre investissement</span>
+			<span>En &eacute;change de votre <?php if ($campaign->funding_type() == 'fundingdonation') { ?>soutien<?php } else { ?>investissement<?php } ?></span>
 		</div>
 			
 		<div class="project-rewards">
 			<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?>
 			Vous recevrez une part de capital de cette entreprise.
-			<?php else: ?>
+			<?php elseif ($campaign->funding_type() == 'fundingproject'): ?>
 			Vous recevrez une partie du chiffre d'affaires de ce projet.
 			<?php endif; ?>
 		</div>
@@ -196,7 +196,7 @@ else {
 	</span>
 </div>
 
-<?php if (is_user_logged_in()) { ?>
+<?php if (is_user_logged_in() || $campaign->funding_type() == 'fundingdonation') { ?>
 
 
 <?php
