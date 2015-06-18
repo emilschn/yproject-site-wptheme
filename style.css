@@ -3383,5 +3383,15 @@ ul.invest-mean-payment li img {
 *******************************************************************************/
 #project-wallet ul.payment-list > li {
     margin-bottom: 30px;
+    padding: 5px 15px;
     list-style: none;
+    background: #EEECED;
+}
+#project-wallet ul.payment-list li h4 {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 5px 0px;
+}
+#project-wallet ul.payment-list li div {
+    margin: 10px 0px;
 }

@@ -3,6 +3,19 @@
  * Template Name: Projet Gestion financière
  *
  */
+global $campaign_id;
+$campaign_id = $_GET['campaign_id'];
+$post_campaign = get_post($campaign_id);
+$campaign = atcf_get_campaign($post_campaign);
+if (isset($_GET['ContributionID'])) {
+    YPProjectLib::form_proceed_roi_transfers($_GET['ContributionID']);
+} else {
+    $fp_date = $campaign->first_payment_date();
+    $fp_yy = mysql2date( 'Y', $fp_date, false );
+    for ($i = $fp_yy; $i < $campaign->funding_duration() + $fp_yy; $i++) {
+	YPProjectLib::form_proceed_roi($i);
+    }
+}
 ?>
 
 <?php get_header(); ?>
@@ -167,22 +180,35 @@
 					    <?php for ($i = $fp_yy; $i < $campaign->funding_duration() + $fp_yy; $i++): ?>
 						<?php YPProjectLib::form_submit_yearly_account($i); ?>
 						<li>
-						    <?php echo $fp_dd . ' / ' . $fp_mm . ' / ' . $i; ?> : <?php echo $payment_list[$i]; ?> &euro;<br />
-						    Comptes annuels :<br />
-						    <?php 
-						    $yearly_accounts = array();
-						    $yearly_accounts = $campaign->yearly_accounts_file($i);
-						    if (!empty($yearly_accounts)): ?>
-						    <ul>
-							<?php foreach ($yearly_accounts as $account_id => $yearly_account_file): ?>
-							    <li><a href="<?php echo $yearly_account_file["url"]; ?>" target="_blank"><?php echo $yearly_account_file["filename"][0]; ?></a></li>
-							<?php endforeach; ?>
-						    </ul>
-						    <?php endif; ?>
-						    <form action="" method="POST" enctype="multipart/form-data">
-							<input type="file" name="accounts_year_<?php echo $i; ?>" />
-							<input type="submit" class="button" value="<?php _e('Envoyer', 'yproject'); ?>" />
-						    </form>
+						    <h4><?php echo $fp_dd . ' / ' . $fp_mm . ' / ' . $i; ?></h4>
+						    <div>
+							<?php if ($payment_list[$i] > 0): ?>
+							<b>Montant à verser : </b><?php echo $payment_list[$i]; ?> &euro;<br />
+							<form action="" method="POST" enctype="">
+							    <input type="hidden" name="proceed_roi_<?php echo $i; ?>" value="<?php echo $fp_dd.'_'.$fp_mm.'_'.$i; ?>" />
+							    <input type="submit" class="button" value="<?php _e('Reverser', 'yproject'); ?>" />
+							</form>
+							<?php else: ?>
+							<span class="errors">Montant à définir</span>
+							<?php endif; ?>
+						    </div>
+						    <div>
+							<b>Comptes annuels :</b><br />
+							<?php 
+							$yearly_accounts = array();
+							$yearly_accounts = $campaign->yearly_accounts_file($i);
+							if (!empty($yearly_accounts)): ?>
+							<ul>
+							    <?php foreach ($yearly_accounts as $account_id => $yearly_account_file): ?>
+								<li><a href="<?php echo $yearly_account_file["url"]; ?>" target="_blank"><?php echo $yearly_account_file["filename"][0]; ?></a></li>
+							    <?php endforeach; ?>
+							</ul>
+							<?php endif; ?>
+							<form action="" method="POST" enctype="multipart/form-data">
+							    <input type="file" name="accounts_year_<?php echo $i; ?>" />
+							    <input type="submit" class="button" value="<?php _e('Envoyer', 'yproject'); ?>" />
+							</form>
+						    </div>
 						</li>
 					    <?php endfor; ?>
 					</ul>

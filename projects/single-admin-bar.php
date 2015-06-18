@@ -47,8 +47,11 @@ if ($can_modify) {
                         <a href="<?php echo get_permalink($page_dashboard->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'tableau-de-bord') { echo 'class="selected"'; } ?>><?php _e('Tableau de bord', 'yproject'); ?></a>
                         |
                         <a href="<?php echo get_permalink($campaign_id) . $params_full; ?>" <?php if ($current_page == $post_campaign->post_name) { echo 'class="selected"'; } ?>><?php _e('Page projet', 'yproject'); ?></a>
-                        |
+                        
+			<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
+			|
                         <a href="<?php echo get_permalink($page_wallet->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'gestion-financiere') { echo 'class="selected"'; } ?>><?php _e('Gestion financi&egrave;re', 'yproject'); ?></a>
+                        <?php endif; ?>
 			
                         <?php if ($group_link != '') : ?>
                         |
