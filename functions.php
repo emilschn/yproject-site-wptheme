@@ -60,8 +60,8 @@ function yproject_enqueue_script(){
 		wp_enqueue_script('jquery');
 	}
 	
-	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '1.1.011');
-	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '1.1.011'); }
+	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.06.18');
+	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.06.18'); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
@@ -884,6 +884,26 @@ function get_investors_list() {
 		$user_data = get_userdata($item['user']);
                 
                 //Liste des données à afficher pour la ligne traitée
+                if(YPOrganisation::is_user_organisation($item['user'])){
+                    $orga = new YPOrganisation($item['user']);
+                    $datacolonnes= array(bp_core_get_userlink($item['user']),
+                    $orga->get_name(),
+                    $orga->get_name(),
+                    '',
+                    '',
+                    $orga->get_nationality(),
+                    $orga->get_city(),
+                    $orga->get_address(),
+                    $orga->get_postal_code(),
+                    $orga->get_nationality(),
+                    $user_data->user_email,//A changer
+                    $user_data->user_mobile_phone,//A changer
+                    $item['amount'].'€',
+                    date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
+                    $payment_type,
+                    $payment_state,
+                    $item['signsquid_status_text']);
+                } else {
                 $datacolonnes= array(bp_core_get_userlink($item['user']),
                     $user_data->last_name,
                     $user_data->first_name,
@@ -900,8 +920,9 @@ function get_investors_list() {
                     date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
                     $payment_type,
                     $payment_state,
-                    $item['signsquid_status_text']
-                );
+                    $item['signsquid_status_text']);
+                }
+                
                 if ($is_campaign_over) { $datacolonnes[]=$investment_state; }
                 $affichedonnees = array_combine($classcolonnes, $datacolonnes);
                 ?>
