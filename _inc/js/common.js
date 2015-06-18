@@ -688,7 +688,6 @@ WDGProjectPageFunctions=(function($) {
 				WDGProjectPageFunctions.currentDiv++;
 			});
 			$('.projects-desc-content img').click(function() {
-			    console.log("click img");
 			    WDGProjectPageFunctions.isClickBlocked = true;
 			});
 			WDGProjectPageFunctions.refreshEditable();
@@ -697,7 +696,6 @@ WDGProjectPageFunctions=(function($) {
 		
 		//Clic sur une partie
 		clickItem: function(clickedElement) {
-			    console.log("click zone");
 			if (!WDGProjectPageFunctions.isEditing && !WDGProjectPageFunctions.isClickBlocked) {
 				//Si la balise "lire plus" de l'élément cliqué est affichée
 				var projectMore = clickedElement.find('.projects-more');
