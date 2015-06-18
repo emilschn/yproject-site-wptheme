@@ -974,10 +974,21 @@ function get_invests_graph(){
     if ($datedebut==null){
         if(count($datesinvest)!=0){
             $datedebut = $datesinvest[0];
-        } else {
-            $datedebut = null;
         }
     }
+    $datefin = $campaign->end_date();
+    
+    //Etiquettes de dates intermédiaires
+    $nbjourscampagne = date_diff(date_create($datedebut), date_create($datefin), true);
+
+    $datequart = date_add(date_create($datedebut), new DateInterval('P'.($nbjourscampagne->days/4).'D'));
+    $datemilieu = date_add(date_create($datedebut), new DateInterval('P'.($nbjourscampagne->days/2).'D'));
+    $datetroisquart = date_add(date_create($datedebut), new DateInterval('P'.(($nbjourscampagne->days/4)*3).'D'));
+    
+    $datequartstr = date_format($datequart,'"j/m/Y"');
+    $datemilieustr = date_format($datemilieu,'"j/m/Y"');
+    $datetroisquartstr = date_format($datetroisquart,'"j/m/Y"');
+
     
     //Fonctions de formattage des dates pour JS
     function date_param($date) {
@@ -993,9 +1004,12 @@ function get_invests_graph(){
             var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
             var dataLine = {
                 labels : [<?php echo date_abs($datedebut); ?>,
-                    <?php echo date_abs($campaign->end_date()); ?>],
+                    <?php echo $datequartstr; ?>,
+                    <?php echo $datemilieustr; ?>,
+                    <?php echo $datetroisquartstr; ?>,
+                    <?php echo date_abs($datefin); ?>],
                 xBegin : new Date(<?php echo date_param($datedebut); ?>),
-                xEnd : new Date(<?php echo date_param($campaign->end_date()); ?>),
+                xEnd : new Date(<?php echo date_param($datefin); ?>),
                 datasets : [
                     {
                         fillColor : "rgba(204,204,204,0.25)",
@@ -1003,7 +1017,7 @@ function get_invests_graph(){
                         pointColor : "rgba(0,0,0,0)",
                         pointStrokeColor : "rgba(0,0,0,0)",
                         data : [0,<?php echo $campaign->minimum_goal(false);?>],
-                        xPos : [new Date(<?php echo date_param($datedebut); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+                        xPos : [new Date(<?php echo date_param($datedebut); ?>),new Date(<?php echo date_param($datefin); ?>)],
                         title : "But progression"
                     },{
                         fillColor : "rgba(0,0,0,0)",
@@ -1011,7 +1025,7 @@ function get_invests_graph(){
                         pointColor : "rgba(0,0,0,0)",
                         pointStrokeColor : "rgba(0,0,0,0)",
                         data : [<?php echo $campaign->minimum_goal(false);?>,<?php echo $campaign->minimum_goal(false);?>],
-                        xPos : [new Date(<?php echo date_param($datedebut); ?>),new Date(<?php echo date_param($campaign->end_date()); ?>)],
+                        xPos : [new Date(<?php echo date_param($datedebut); ?>),new Date(<?php echo date_param($datefin); ?>)],
                         title : "But"
                     }
                     <?php 
@@ -1041,7 +1055,7 @@ function get_invests_graph(){
                         xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
                         title : "investissements"
                     }<?php } 
-                    if (new DateTime(null)< new DateTime($campaign->end_date())){?>
+                    if (new DateTime(null)< new DateTime($datefin)){?>
                     ,{
                         fillColor : "rgba(0,0,0,0)",
                         strokeColor : "rgba(0,0,0,0)",
