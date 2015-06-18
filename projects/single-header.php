@@ -41,11 +41,9 @@ else {
 			?>
 				<div class="progress_zone">
 					<div class="project_full_progressbg">
-						<div class="project_full_progressbar" style="width:<?php echo $percent; ?>%">
-							&nbsp;
-						</div>
-						<span class="project_full_percent" style="width:<?php echo $percent; ?>%"><?php echo $campaign->percent_minimum_completed(); ?></span>
+						<span class="project_full_percent" style="min-width:<?php echo $width; ?>px">&nbsp;<?php echo $campaign->current_amount(); ?>&nbsp;</span>
 					</div>
+					<span class="progress_percent tablet_hidden"><?php echo $campaign->percent_minimum_completed(); ?></span>
 				</div>
 				<div class="logos_zone">
 					<div class="post_bottom_infos_item only_on_mobile">
@@ -65,25 +63,17 @@ else {
 					</div>
 					<div class="post_bottom_infos_item" <?php if($vote_status=='funded' || $vote_status == 'archive'){echo "style=opacity:0.5";}?>>
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
-						<span class="mobile_hidden"><?php
-						$days_remaining = $campaign->days_remaining();
-						switch ($days_remaining) { 
-							case 1:
-								?>Plus que <strong>1</strong> jour !<?php
-								break;
-							case 0:
-								?>Collecte termin&eacute;e !<?php
-								break;
-							default:
-								?>Plus que <strong><?php echo $days_remaining; ?></strong> jours !<?php
-								break;
-						}
-						?></span>
-						<span class="only_on_mobile"><?php echo $days_remaining; ?></span>
+						<span class="mobile_hidden"><?php echo $campaign->time_remaining_fullstr(); ?></span>
+						<span class="only_on_mobile"><?php echo $campaign->time_remaining_str(); ?></span>
 					</div>
 					<div class="post_bottom_infos_item">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-						<span class="mobile_hidden"><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true); ?></span>
+						<span class="mobile_hidden"><?php 
+						    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
+						    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
+							echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
+						    }
+						?></span>
 						<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
 					</div>
 					<div class="post_bottom_infos_item only_on_mobile">
@@ -97,77 +87,93 @@ else {
 			} else if ($vote_status == 'vote') {
 				$nbvoters = $campaign->nb_voters();
 			?>
-				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodvote.png" alt="logo vote" />
-					Projet en vote
+				<div class="progress_zone">
+					<div class="project_full_progressbg">
+						<div class="project_full_progressbar" style="width:0%">
+							&nbsp;
+						</div>
+						<span class="project_full_percent" style="margin-top: -25px;">&nbsp;0 &euro;&nbsp;</span>
+					</div>
 				</div>
-				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
-					<?php if ($nbvoters == 1): ?>
-					1 personne a d&eacute;j&agrave; vot&eacute;
-					<?php elseif ($nbvoters > 1): echo $nbvoters; ?>
-					personnes ont d&eacute;j&agrave; vot&eacute;
-					<?php else: ?>
-					Personne n'a vot&eacute;. Soyez le premier !
-					<?php endif; ?>
+				<div class="logos_zone">
+					<div class="post_bottom_infos_item only_on_mobile">
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />
+						<?php 
+						$campaign_location = $campaign->location();
+						$exploded = explode(' ', $campaign_location);
+						if (count($exploded) > 1) $campaign_location = $exploded[0];
+						echo (($campaign_location != '') ? $campaign_location : 'France'); 
+						?>
+					</div>
+					<div class="post_bottom_infos_item">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
+						<span class="mobile_hidden">
+						    <?php if ($nbvoters == 1): ?>
+						    1 personne a d&eacute;j&agrave; vot&eacute;
+						    <?php elseif ($nbvoters > 1): echo $nbvoters; ?>
+						    personnes ont d&eacute;j&agrave; vot&eacute;
+						    <?php else: ?>
+						    Personne n'a vot&eacute;. Soyez le premier !
+						    <?php endif; ?>
+						</span>
+						<span class="only_on_mobile"><?php echo $nbvoters; ?></span>
+					</div>
+					<div class="post_bottom_infos_item">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
+						<span class="mobile_hidden"><?php echo $campaign->time_remaining_fullstr(); ?></span>
+						<span class="only_on_mobile"><?php echo $campaign->time_remaining_str(); ?></span>
+					</div>
+					<div class="post_bottom_infos_item">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
+						<span class="mobile_hidden"><?php 
+						    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
+						    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
+							echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
+						    }
+						?></span>
+						<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
+					</div>
+					<div class="post_bottom_infos_item only_on_mobile">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/good.png" alt="logo main" /><br />
+						<span><?php echo $campaign->get_jycrois_nb(); ?></span>
+					</div>
+					<div class="projects-description-separator mobile_hidden"></div>
 				</div>
-				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo personnes" />
-					<?php
-					$remaining_vote_days = $campaign->end_vote_remaining(); 
-					switch ($remaining_vote_days) { 
-						case 1:
-							?>Il reste <strong>1</strong> jour pour voter !<?php
-							break;
-						case 0:
-							?>Vote termin&eacute; !<?php
-							break;
-						default:
-							?>Il reste <strong><?php echo $remaining_vote_days; ?></strong> jours pour voter !<?php
-							break;
-					}
-					?>
-				</div>
-				<div class="post_bottom_infos_item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-					<?php echo 'Ce projet a besoin de '.$campaign->minimum_goal(true) ; ?>
-				</div>
-				<div class="projects-description-separator"></div>
 
 			<?php } else if ($vote_status== 'preview'){ ?>
 
-				<div style="opacity:0">
-					<div class="project_full_progressbg"></div>
-					<span class="project_full_percent"><?php echo $campaign->percent_minimum_completed(); ?></span>
+				<div class="progress_zone">
+					<div class="project_full_progressbg">
+						<span class="project_full_percent">0%</span>
+					</div>
 				</div>
-				<div class="post_bottom_infos_item" style="opacity:0">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
-					<?php if ($nbvoters == 1): ?>
-					1 personne a d&eacute;j&agrave; vot&eacute;
-					<?php elseif ($nbvoters > 1): echo $nbvoters; ?>
-					personnes ont d&eacute;j&agrave; vot&eacute;
-					<?php else: ?>
-					Personne n'a vot&eacute;. Soyez le premier !
-					<?php endif; ?>
+				<div class="logos_zone">
+					<div class="post_bottom_infos_item only_on_mobile">
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />
+						<?php 
+						$campaign_location = $campaign->location();
+						$exploded = explode(' ', $campaign_location);
+						if (count($exploded) > 1) $campaign_location = $exploded[0];
+						echo (($campaign_location != '') ? $campaign_location : 'France'); 
+						?>
+					</div>
+					<div class="post_bottom_infos_item">
+	-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
+						<span class="mobile_hidden"><?php 
+						    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
+						    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
+							echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
+						    }
+						?></span>
+						<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
+					</div>
+					<div class="projects-description-separator mobile_hidden"></div>
 				</div>
-				<div class="post_bottom_infos_item" style="opacity:0">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo personnes" />
-					<?php if ($remaining_vote_days > 0) : ?>
-					Il reste <strong><?php echo $campaign->end_vote_remaining(); ?></strong> jours pour voter
-					<?php else: ?>
-					Le vote est termin&eacute;
-					<?php endif; ?>
-				</div>
-				<div class="post_bottom_infos_item" style="opacity:0">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-					<?php echo 'Ce projet a besoin de '.$campaign->minimum_goal(true) ; ?>
-				</div>
-				<div class="projects-description-separator" style="opacity:0"></div>
 
 			<?php } ?>
 <?php
 	$cache_header_right = ob_get_contents();
-	$WDG_cache_plugin->set_cache('project-header-right-' . $campaign_id, $cache_header_right, 60*30, 1);
+	$WDG_cache_plugin->set_cache('project-header-right-' . $campaign_id, $cache_header_right, 60*10, 1);
 	ob_end_clean();
 	echo $cache_header_right;
 }
@@ -175,7 +181,7 @@ else {
 //*******************
 ?>
 			<div class="post_bottom_buttons mobile_hidden">
-				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->days_remaining() > 0) { ?> 
+				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->is_remaining_time() > 0) { ?> 
 					<div id="invest-button">
 						<?php if ( is_user_logged_in() ): ?> 
 							<?php $page_invest = get_page_by_path('investir'); ?>
@@ -362,12 +368,12 @@ if ($cache_header_image !== FALSE) { echo $cache_header_image; }
 else {
 	ob_start();
 ?>
-		<div id='img-container' style="<?php echo $campaign->get_header_picture_position_style(); ?>">
+		<div id="img-container" style="<?php echo $campaign->get_header_picture_position_style(); ?>">
 			<?php 
 			$img_src = $campaign->get_header_picture_src();
 			if ($img_src != ''):
 			?>
-			<img id="moved-img" src="<?php echo $img_src; ?>" alt="banniere <?php echo $post->post_title; ?>" />
+			<img id="moved-img" src="<?php echo $img_src; ?>" alt="banniere <?php echo $post->post_title; ?>" class="mobile_hidden" />
 			<?php endif; ?>
 		</div>
 <?php

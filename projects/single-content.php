@@ -52,6 +52,34 @@ else {
 			<?php echo $video_element; ?>
 		</div>
 		<div class="mobile-share only_on_mobile">
+			<?php if ($vote_status != 'vote' && $vote_status != 'preparing') : ?>
+    			<?php if ( is_user_logged_in() ) { 
+				global $wpdb;
+				$user_id = wp_get_current_user()->ID;
+				$table_jcrois = $wpdb->prefix . "jycrois";
+				$users = $wpdb->get_results( 'SELECT * FROM '.$table_jcrois.' WHERE campaign_id = '.$campaign->ID.' AND user_id='.$user_id );
+				if ( !empty($users[0]->ID) ) { ?>
+					<a class="jy-crois" href="javascript:WDGProjectPageFunctions.update_jycrois(0,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
+					<div id="jy-crois-btn" style="background-image: url('<?php echo $stylesheet_directory_uri.'/images/jycrois_gris.png';?>')" class="stats_btn">
+					<p id="jy-crois-txt"><p>    
+					<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
+					</div></a>
+				<?php } else { ?>
+					<a class="jy-crois" href="javascript:WDGProjectPageFunctions.update_jycrois(1,<?php global $post;echo($post->ID); ?>,'<?php echo $stylesheet_directory_uri; ?>')">
+					<div id="jy-crois-btn" class="stats_btn">
+					<p id="jy-crois-txt">J'y crois<p>
+					<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
+					</div></a>
+
+				<?php }
+			} else { ?>
+				<a class="jy-crois wdg-button-lightbox-open" href="#connexion" data-lightbox="connexion">
+				<div id="jy-crois-btn" class="stats_btn">
+				<p id="jy-crois-txt">J'y crois<p>
+				<p id="nb-jycrois"><?php echo $campaign->get_jycrois_nb(); ?></p>
+				</div></a>
+			<?php } ?>
+			<?php endif; ?>
 			<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>" target="_blank">
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.jpg" alt="logo facebook" />
 			</a>
@@ -72,7 +100,8 @@ else {
 //*******************
 ?>
 	</div>
-	<div id="projects-right-desc" class="right">	    
+    
+        <div id="projects-right-desc" class="right" <?php echo 'data-link-project-settings="'.get_permalink(get_page_by_path('parametres-projet')->ID) . $campaign_id_param . $params_partial.'"'; ?>>
 <?php
 //*******************
 //CACHE PROJECT CONTENT SUMMARY
@@ -88,7 +117,19 @@ else {
 			$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
 			if (count($current_organisations) > 0) {
 				$current_organisation = $current_organisations[0];
-				$owner_str = '<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation">' . $current_organisation->organisation_name . '</a><br />';
+                                $page_edit_orga = get_page_by_path('editer-une-organisation');
+				$owner_str = '<div id="orga-edit" data-link-edit="'
+                                        .get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref
+                                        .'">'
+                                        . '<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation">' . $current_organisation->organisation_name
+                                        . '</a>'
+                                        . '</div><br />';
+                                /*
+                                $page_edit_orga = get_page_by_path('editer-une-organisation');
+                                $edit_org .= '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
+                                $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
+                                $owner_str .= $edit_org;
+                                */
 				$owner_str .= '<div id="wdg-lightbox-project-organisation" class="wdg-lightbox hidden">
 		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder">
@@ -111,11 +152,15 @@ else {
 			} else {
 //				UIHelpers::print_user_avatar($author_id);
 				$author = get_userdata($post_campaign->post_author);
-				$owner_str = $author->user_firstname . ' ' . $author->user_lastname . '<br />';
+				$owner_str = '<div id="orga-edit" data-link-edit="'
+                                        . get_permalink(get_page_by_path('parametres-projet')->ID) . $campaign_id_param . $params_partial
+                                        . '">'
+                                        .$author->user_firstname . ' ' . $author->user_lastname 
+                                        .'</div><br />';
 //				$owner_str .= '@' . $author->user_nickname;
 			}
 			?>
-			<div id="project-owner-desc" style="width: 100%; text-align: center;">
+			<div id="project-owner-desc">
 				<?php echo $owner_str; ?>
 			</div>
 		</div>
@@ -146,13 +191,13 @@ else {
 		<?php } ?>
 			
 		<div class="project-rewards">
-			<span>En &eacute;change de votre investissement</span>
+			<span>En &eacute;change de votre <?php if ($campaign->funding_type() == 'fundingdonation') { ?>soutien<?php } else { ?>investissement<?php } ?></span>
 		</div>
 			
 		<div class="project-rewards">
 			<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?>
 			Vous recevrez une part de capital de cette entreprise.
-			<?php else: ?>
+			<?php elseif ($campaign->funding_type() == 'fundingproject'): ?>
 			Vous recevrez une partie du chiffre d'affaires de ce projet.
 			<?php endif; ?>
 		</div>
@@ -168,7 +213,7 @@ else {
 	</span>
 </div>
 
-<?php if (is_user_logged_in()) { ?>
+<?php if (is_user_logged_in() || $campaign->funding_type() == 'fundingdonation') { ?>
 
 
 <?php
@@ -188,7 +233,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet.png" alt="logo projet" data-content="description"/>
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle projet"/>
 		<div id="project-content-description" class="projects-desc-content">
-			<h2>En quoi consiste le projet&nbsp;?</h2>
+			<h2>Pitch</h2>
 			<div class="zone-content">
 				<?php the_content(); ?>
 			</div>
@@ -196,6 +241,7 @@ $editor_params = array(
 			<div class="zone-edit hidden">
 				<?php 
 				$editor_description_content = str_replace( ']]>', ']]&gt;', apply_filters( 'the_content', $campaign->data->post_content ));
+				global $post, $post_id; $post_ID = $post = 0;
 				wp_editor( $editor_description_content, 'wdg-input-description', $editor_params );
 				?>
 			</div>
@@ -208,7 +254,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>sociale.png" alt="logo social" data-content="societal_challenge" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris" />
 		<div id="project-content-societal_challenge" class="projects-desc-content">
-			<h2>Quelle est l&apos;utilit&eacute; soci&eacute;tale du projet&nbsp;?</h2>
+			<h2>Impacts positifs</h2>
 			<div class="zone-content">
 				<?php 
 				$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
@@ -228,7 +274,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>economie.png" alt="logo economie" data-content="added_value" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-added_value" class="projects-desc-content">
-			<h2>Quelle est l&apos;opportunit&eacute; &eacute;conomique du projet&nbsp;?</h2>
+			<h2>Strat&eacute;gie</h2>
 			<div class="zone-content">
 				<?php 
 				$added_value = html_entity_decode($campaign->added_value()); 
@@ -247,7 +293,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>model.png" alt="logo modele" data-content="economic_model" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-economic_model" class="projects-desc-content">
-			<h2>Quel est le mod&egrave;le &eacute;conomique du projet&nbsp;?</h2>
+			<h2>Donn&eacute;es financi&egrave;res</h2>
 			<div class="zone-content">
 				<?php 
 				$economic_model = html_entity_decode($campaign->economic_model()); 
@@ -267,7 +313,7 @@ $editor_params = array(
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>porteur.png" alt="logo porteur" data-content="implementation"/>
 		<img class="vertical-align-middle grey-triangle"src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-implementation" class="projects-desc-content">
-			<h2>Qui porte le projet&nbsp;?</h2>
+			<h2>&Eacute;quipe</h2>
 			<div class="zone-content">
 				<?php 
 				$implementation = html_entity_decode($campaign->implementation()); 
@@ -338,6 +384,23 @@ $editor_params = array(
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="logo google" />
 		</a>
 	</div>
+	<ul class="secondary-menu only_on_mobile">
+		<li><a href="<?php echo $news_link; ?>" <?php if($current_page==$news_link) echo 'class="current"'; ?>>Actualit&eacute;<?php echo $nb_cat; ?></a></li>
+
+		<?php if ( is_user_logged_in() ): ?> 
+			<?php $forum = get_page_by_path('forum');
+				$forum_link = get_permalink($forum->ID).$campaign_id_param;
+				$forum_link_2 = site_url('forums/forum') . '/' . $campaign_id . '-2/'; 
+			?>
+			<li><a href="<?php echo $forum_link; ?>" <?php if($current_page==$forum_link || $current_page==$forum_link_2) echo 'class="current"'; ?>>Forum</a></li>
+
+		<?php else: ?>
+			<li><a href="#connexion" id="forum" class="wdg-button-lightbox-open description-discover" data-lightbox="connexion">Forum</a></li>
+		<?php endif; ?>
+		<?php if ($show_stat_button) { ?>
+		<li><a href="<?php echo $stats_link; ?>" <?php if($current_page==$stats_link) echo 'class="current"'; ?>>Statistiques</a></li>
+		<?php } ?>
+	</ul>
 </div>
 
 </div>

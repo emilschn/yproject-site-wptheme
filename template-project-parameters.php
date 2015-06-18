@@ -70,7 +70,7 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					    'name'        => 'categories'
 					) ); ?><br />
 					
-					<a id="picture-head"></a><a id="video-zone"></a><?php /* ancre déplacée pour cause de menu... */ ?>
+                                        <a id="picture-head"></a><a id="video-zone"></a><a id="project-owner"></a><?php /* ancres déplacées pour cause de menu... */ ?>
 					<label for="activities">Secteur d&apos;activit&eacute; :</label>
 					<?php wp_dropdown_categories( array( 
 					    'hide_empty'  => 0,
@@ -99,13 +99,17 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 						<?php
 						$funding_project_selected = ($campaign->funding_type() == 'fundingproject') ? 'checked="checked"' : '';
 						$funding_dev_selected = ($campaign->funding_type() == 'fundingdevelopment') ? 'checked="checked"' : '';
+						$funding_donation_selected = ($campaign->funding_type() == 'fundingdonation') ? 'checked="checked"' : '';
 						?>
 						<input type="radio" name="fundingtype" class="radiofundingtype first" id="fundingproject" value="fundingproject" <?php echo $funding_project_selected; ?>>Financement d'un projet<br />
 						<input type="radio" name="fundingtype" class="radiofundingtype" id="fundingdevelopment" value="fundingdevelopment" <?php echo $funding_dev_selected; ?>>Capital (coop&eacute;ratives SA uniquement)<br />
+						<input type="radio" name="fundingtype" class="radiofundingtype" id="fundingdonation" value="fundingdonation" <?php echo $funding_donation_selected; ?>>Don avec contrepartie<br />
 
+						<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 						<label for="fundingduration">Dur&eacute;e du financement :</label>
 						<input type="text" name="fundingduration" value="<?php echo $campaign->funding_duration(); ?>"> ann&eacute;es.<br />
-
+						<?php endif; ?>
+						
 						<label>Montant demand&eacute; (seulement des chiffres) :</label>
 						<?php $goal = (int)$campaign->goal(false); ?>
 						Minimum : <input type="text" name="minimum_goal" size="10" value="<?php echo $campaign->minimum_goal(); ?>"> &euro; (Min. 500&euro;) - 
@@ -116,10 +120,13 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 						<?php 
 						switch ($campaign->funding_type()) {
 							case 'fundingproject':
-								echo 'Financement d&apos;un projet<br />';
+								echo 'Avance sur chiffre d&apos;affaires (royalties)<br />';
 								break;
 							case 'fundingdevelopment':
-								echo 'Capital (coop&eacute;ratives SA uniquement)<br />';
+								echo 'Capital pour les coop&eacute;ratives<br />';
+								break;
+							case 'fundingdonation':
+								echo 'Don avec contrepartie<br />';
 								break;
 						}
 						?>
@@ -159,6 +166,13 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 							<option value=""></option>
 							<?php echo $str_organisations; ?>
 						</select>
+                                                <?php if ($current_organisation!=null){
+                                                    $page_edit_orga = get_page_by_path('editer-une-organisation');
+                                                    $edit_org .= '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
+                                                    $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
+                                                    echo $edit_org;
+                                                }
+                                                ?>
 
 					<?php else: ?>
 						<?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
@@ -169,7 +183,9 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					<input type="submit" name="new_orga" value="Cr&eacute;er une organisation" class="small-margin button" />
 					<br />
 					<br />
-						
+					
+                                        <label for="phone">Num&eacute;ro de t&eacute;l&eacute;phone de contact : </label>
+                                        <input type="text" name="phone" value="<?php echo $campaign->contact_phone(); ?>" /><br />
 						
 					<?php $image_src_header = $campaign->get_header_picture_src(false); ?>
 					<label for="image_header">Image du bandeau :</label>

@@ -55,6 +55,7 @@ if ($campaign->end_vote_remaining() > 0) {
 					    Je serais pr&ecirc;t &agrave; investir :
 					    <input type="text" name="invest_sum" placeholder="0" size="10" value="<?php if ($invest_sum !== false) echo $invest_sum; ?>" />&euro;<br />
 					    
+					    <?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 					    Je pense que le risque est :
 					    <select name="invest_risk">
 						<option value="0"></option>
@@ -64,6 +65,7 @@ if ($campaign->end_vote_remaining() > 0) {
 						<option value="4" <?php if ($invest_risk == 4) echo 'selected'; ?>>(4) &eacute;lev&eacute;</option>
 						<option value="5" <?php if ($invest_risk == 5) echo 'selected'; ?>>(5) tr&egrave;s &eacute;lev&eacute;</option>
 					    </select>
+					    <?php endif; ?>
 					</p>
 					<input type="radio" id="btn-validate_project-false" name="validate_project" value="0" <?php if ($validate_project == 0) echo 'checked="checked"'; ?>>Non<br />
 					<p id="validate_project-false" <?php if ($validate_project != 0) echo 'style="display: none;"'; ?>>

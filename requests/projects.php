@@ -50,8 +50,9 @@ function queryFinishedProjects($nb,$type) {
 				'value' => $type
 			)
 		),
-		'orderby' => 'post_date',
-		'order' => 'asc'
+		'meta_key' => 'campaign_end_date',
+		'orderby' => 'meta_value',
+		'order' => 'desc'
 	);
 	return query_posts( $query_options );
 }
@@ -172,6 +173,12 @@ class YPProjectLib {
 		if ($cat_cat_id != -1 && $cat_act_id != -1) {
 			$cat_ids = array_map( 'intval', array($cat_cat_id, $cat_act_id) );
 			wp_set_object_terms($campaign_id, $cat_ids, 'download_category');
+		}
+                
+                if (isset($_POST['phone'])) {
+			update_post_meta($campaign_id, 'campaign_contact_phone', $_POST['phone']);
+		} else {
+			$buffer = FALSE;
 		}
 		
 		if (isset($_POST['project-location'])) {
@@ -320,7 +327,7 @@ class YPProjectLib {
 		}
 		
 		if (isset($_POST['fundingtype'])) { 
-			if ($_POST['fundingtype'] == 'fundingdevelopment' || $_POST['fundingtype'] == 'fundingproject') {
+			if ($_POST['fundingtype'] == 'fundingdevelopment' || $_POST['fundingtype'] == 'fundingproject' || $_POST['fundingtype'] == 'fundingdonation') {
 				update_post_meta($campaign_id, 'campaign_funding_type', $_POST['fundingtype']); 
 			} else {
 				$buffer = FALSE;

@@ -1,5 +1,4 @@
-<div  id="post_bottom_content" class="center_small">
-    <div  class="left post_bottom_desc_small">
+<div style="width: 450px !important;" id="post_bottom_content" class="center_small align-center">
         <div class="login_fail">
             <?php if (isset($_GET["login"]) && $_GET["login"] == "failed") { ?>
                 <?php _e('Erreur d&apos;identification', 'yproject'); ?>
@@ -8,18 +7,18 @@
         
         
         <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url('wp-login.php', 'login_post'); ?>" method="post">
-            <input id="identifiant" type="text" name="log" class="margin-left" placeholder="Identifiant ou e-mail" value="<?php if (isset($user_login)) echo esc_attr(stripslashes($user_login)); ?>" />
+            <input id="identifiant" type="text" name="log" placeholder="Identifiant ou e-mail" value="<?php if (isset($user_login)) echo esc_attr(stripslashes($user_login)); ?>" />
             <br />
 
-            <input id="password" type="password" name="pwd" class="margin-left" placeholder="Mot de passe" value="" />
+            <input id="password" type="password" name="pwd" placeholder="Mot de passe" value="" style="margin: 5px;" />
             <br />
 	    
-	    <input id="sidebar-rememberme" type="checkbox" name="rememberme" class="margin-left" value="forever" />
+	    <input id="sidebar-rememberme" type="checkbox" name="rememberme" value="forever" />
 	    <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
 	    <br />
             
             <div id="submit-center">
-                <input type="submit"  name="wp-submit" id="sidebar-wp-submit" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
+                <input type="submit"  name="wp-submit" id="sidebar-wp-submit-lightbox" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" style="margin: 5px;" />
                 <input type="hidden" name="redirect-page-error" id="redirect-page-error" value="<?php echo get_permalink($page) ?>" />
                 <?php 
                 $redirect_value = "";
@@ -37,9 +36,10 @@
                 <input type="hidden" name="redirect-page-investir" id="redirect-page-investir" value="<?php echo $redirect_value; ?>" />
                
             </div>
-          
+            <div id="sidebar-login-form-lightbox">
             <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-            <a href="<?php echo get_permalink($page_forgotten->ID); ?>">(Mot de passe oubli&eacute;)</a>
+            <a href="<?php echo get_permalink($page_forgotten->ID); ?>" >(Mot de passe oubli&eacute;)</a>
+            </div>
             <br />
             <input type="hidden" name="testcookie" value="1" />
         </form>
@@ -64,7 +64,5 @@
             </div>
         </div>
         <br />
-    </div>
-    <div style="clear: both"></div>
 </div>
 

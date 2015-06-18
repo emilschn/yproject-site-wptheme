@@ -73,7 +73,8 @@ var ProjectEditor = (function($) {
 			ProjectEditor.elements["economic_model"] = {elementId: "#post_bottom_content #project-content-economic_model .zone-content", contentId: "#post_bottom_content #project-content-economic_model .zone-edit"};
 			ProjectEditor.elements["implementation"] = {elementId: "#post_bottom_content #project-content-implementation .zone-content", contentId: "#post_bottom_content #project-content-implementation .zone-edit"};
 			ProjectEditor.elements["picture-head"] = {elementId: "#projects-banner #head-image #wdg-move-picture-head", contentId: "#single_project_admin_bar"};
-			ProjectEditor.elements["video-zone"] = {elementId: "#post_bottom_content #projects-left-desc .video-zone", contentId: "#single_project_admin_bar"};	
+			ProjectEditor.elements["video-zone"] = {elementId: "#post_bottom_content #projects-left-desc .video-zone", contentId: "#single_project_admin_bar"};
+                        ProjectEditor.elements["project-owner"] = {elementId: "#project-owner", contentId: "#project-owner a"};
 		},
 		
 		//Ajoute le bouton d'édition d'un élément en paramètre
@@ -139,7 +140,9 @@ var ProjectEditor = (function($) {
 						break;
 					case "picture-head":
 					case "video-zone":
-						ProjectEditor.redirectParams(sProperty);
+                                            ProjectEditor.redirectParams(sProperty);
+                                        case "project-owner":
+                                            ProjectEditor.redirectOrganisation(sProperty);
 						break;
 				}
 			});
@@ -170,6 +173,7 @@ var ProjectEditor = (function($) {
 				case "rewards":
 				case "description":
 				case "video-zone":
+                                case "project-owner":
 					$(ProjectEditor.elements[property].elementId).addClass("editable");
 					break;
 			}
@@ -255,11 +259,12 @@ var ProjectEditor = (function($) {
 		
 		//Redirige vers la page Paramètres
 		redirectParams: function(property) {
-			$(ProjectEditor.elements[property].contentId).children().children().each(function() {
-				if ($(this).text() === "Paramètres") {
-					window.location.href = $(this).attr("href") + "#" + property;
-				}
-			});
+			window.location.href = $("#projects-right-desc").attr("data-link-project-settings") + "#" + property;
+		},
+                
+                //Redirections pour l'édition de l'organisation
+		redirectOrganisation: function(property) {
+			window.location.href = $("#orga-edit").attr("data-link-edit") + "#" + property;
 		},
 		
 		//Enregistre le contenu d'un élément saisi

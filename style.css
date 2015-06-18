@@ -16,8 +16,8 @@
  *
  */
 
- @import url("_inc/css/responsive.css?ver=1.1.101") (max-width: 480px);
- @import url("_inc/css/responsive-medium.css?ver=1.1.101") (min-width: 481px);
+ @import url("_inc/css/responsive.css?d=20150618") (max-width: 480px);
+ @import url("_inc/css/responsive-medium.css?d=20150618") (min-width: 481px);
 
  /* FONTS TO LOAD */
  @font-face {
@@ -167,6 +167,9 @@ tbody {
 h2.grey, h3.grey {
     color: #EEECED;
 }
+#wpstats {
+    display: none;
+}
 
 /*******************************************************************************
 * STANDARD FORMS
@@ -249,33 +252,120 @@ form.wdg-forms .small-margin {
 }
 
 /*******************************************************************************
-* LIGHTBOX - CGU / DEJA CONNECTE
+* LIGHTBOX - FORMULAIRE
 *******************************************************************************/
+/* tooltip */
 
+
+.tool-tip{
+	color: #fff;
+	background-color: rgba( 0, 0, 0, .7);
+	text-shadow: none;
+	font-size: .9em;
+	visibility: hidden;
+	-webkit-border-radius: 7px; 
+	-moz-border-radius: 7px; 
+	-o-border-radius: 7px; 
+	border-radius: 7px;	
+	text-align: center;	
+	opacity: 0;
+	z-index: 999;
+	padding: 3px 8px;	
+	position: absolute;
+	cursor: default;
+	-webkit-transition: all 240ms ease-in-out;
+	-moz-transition: all 240ms ease-in-out;
+	-ms-transition: all 240ms ease-in-out;
+	-o-transition: all 240ms ease-in-out;
+	transition: all 240ms ease-in-out;	
+}
+/* default heights, width and margin w/o Javscript */
+
+.tool-tip,
+.tool-tip.top{
+	width: 90px;
+	height: 30px;
+	margin-left: -43px;
+}
+
+/* tool tip position right */
+
+.tool-tip.right{
+	top: 50%;
+	right: auto;
+	left: 75%;
+	margin-top: -15px;
+	margin-right: auto;	
+	margin-left: auto;
+}
+
+.tool-tip.right:after{
+	left: -5px;
+	top: 50%;	
+	margin-top: -6px;
+	bottom: auto;
+	border-top-color: transparent;	
+    border-right-color: rgba( 0, 0, 0, .7);	
+}
+.on-focus input{
+        width:200px;
+}
+
+/* tooltip on focus left and right */
+
+.on-focus .tool-tip.left,
+.on-focus .tool-tip.right{
+	margin-top: -19px;
+}
+
+/* on hover of element containing tooltip default*/
+
+*:not(.on-focus):hover > .tool-tip,
+.on-focus input:focus + .tool-tip{
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition: all 240ms ease-in-out;
+	-moz-transition: all 240ms ease-in-out;
+	-ms-transition: all 240ms ease-in-out;
+	-o-transition: all 240ms ease-in-out;
+	transition: all 240ms ease-in-out;		
+}
+
+
+
+
+.colonne {
+   
+    margin-top: 10px;
+    width: 350px;
+    border: 1px solid;
+    display: inline-block;
+}
+
+.colonne p {
+    width: 300px;
+    text-align: left;
+}
 .login_fail{
     margin-bottom: 10px;
 }
-#sidebar-login-form {
-    text-align: left;
-}
+
+
 
 #sidebar-login-form a{
     color: #606060;
     font-size: 11px;
     font-style: italic;
-    margin-left: 150px
 }
+
 #sidebar-login-form label {
     text-align: right;
+    font-size: 14px;
 }
 
-#sidebar-login-form input{
-    margin: 5px;
-}
-
-#sidebar-login-form #submit-center {
-    margin-left: 150px
-}
+/*******************************************************************************
+* LIGHTBOX - CGU / DEJA CONNECTE
+*******************************************************************************/
 
 .wdg-lightbox {
 	background-color: rgba(0, 0, 0, 0.75);
@@ -306,6 +396,18 @@ form.wdg-forms .small-margin {
 	overflow-y: auto;
 	z-index: 4002;
 }
+
+.wdg-lightbox .wdg-widelightbox-padder {
+	position: relative;
+	max-width: 90%;
+	max-height: 80vh;
+	margin: 5vh auto;
+	padding: 20px;
+	background-color: #F2F2F2;
+	overflow-y: auto;
+	z-index: 4002;
+}
+
 .wdg-lightbox .wdg-lightbox-padder > div {
 	background-color: #F2F2F2 !important;
 }
@@ -690,7 +792,7 @@ footer span {
     color: #FFF;
     display: block;
     width: 100%;
-    text-align: center;
+    font-weight: bold;
 }
 footer span.menutitle {
     font-family: Arial, sans-serif;
@@ -901,6 +1003,8 @@ footer div.social-icons {
 }
 .home-large-project .description-zone .description-summary {
     text-align: justify;
+    max-height: 195px;
+    overflow-y: hidden;
 }
 .home-large-project .description-zone .description-summary p {
     margin-top: 0px;
@@ -1327,6 +1431,12 @@ div#home_bottom h1 {
     font-size: 35pt;
 }
 
+/*BANDEAU EVENEMENT*/
+.bandeau-evenement {
+	width: 1400px;
+	margin: auto;
+}
+
 /* BLOG */
 .home-blog-list-container {
     overflow: hidden;
@@ -1650,15 +1760,35 @@ div#home_bottom h1 {
     width: 30px;
     height: 19.5px;
 }
-#projects-stats-content .project_full_progressbg{
+.project_full_progressbg{
     margin-left: 20px;
     margin-top: 4px;
+    background-color: #EEECED;
+    width: 250px;
+    display: inline-block;
+    height: 25px;
 }
-#projects-stats-content .project_full_percent{
-    margin-top: -28px;
-    margin-left: -20px;
-    padding-top: 0px;
-    font-size: 26px;
+.project_full_percent{
+    height: 25px;
+    font-size: 21px;
+    background-color: #333;
+    color: #FFF;
+    width: auto;
+    max-width: 250px !important;
+    position: absolute;
+    text-align: right;
+}
+.home-large-project .project_full_progressbg {
+    margin-left: 0px;
+    width: 240px;
+}
+.home-large-project .project_full_percent {
+    height: 22px;
+    font-size: 18px;
+}
+.home-large-project .progress_zone .progress_percent {
+    font-size: 18px;
+    top: -7px;
 }
 .post_bottom_buttons #invest-button, .post_bottom_buttons #participate-button{
     position: absolute;
@@ -1716,9 +1846,8 @@ div#home_bottom h1 {
     margin-top: 26px;
     margin-left: 25px;
 }
-.projects-desc-content p{
-    padding: 0px 25px;
-    padding-bottom: 10px;
+.projects-desc-content p, .projects-desc-content h4 {
+    padding: 0px 25px 10px;
 }
 .projects-desc-content p img {
     max-width: 750px;
@@ -1812,7 +1941,8 @@ div#home_bottom h1 {
     margin: 0;
     padding : 0;
 }
-#projects-right-desc .project-rewards {
+#projects-right-desc .project-rewards,
+#projects-right-desc #project-owner{
     margin: 10px 15px 0px 15px;
     text-align: center;
 }
@@ -2003,22 +2133,15 @@ div#home_bottom h1 {
     width: 25px;
 }
 
-.project_full_progressbg {
-    background-color: #EEECED;
-    width: 250px;
-    display: inline-block;
-    height: 25px;
-}
 .project_full_progressbar {
     background-color: #333333;
     height: 35px;
     height: 25px;
 }
-.project_full_percent {
-    width: 49px;
-    position: absolute;
-    padding-top: 3px;
-    text-align: right;
+.progress_zone .progress_percent {
+    font-size: 21px;
+    position: relative;
+    top: -5px;
 }
 
 /* VOTE */
@@ -2236,7 +2359,7 @@ div#home_bottom h1 {
 }
 
 .video-zone.editable:before {
-    content: "Image d'aperÃ§u / VidÃ©o";
+    content: "Image d'apercu / Video";
 }
 .video-zone.editable {
     background-color: #F2F2F2;
@@ -2260,10 +2383,10 @@ div#home_bottom h1 {
     font-weight: bold;
 }
 #wdg-edit-project.edit-button:before {
-    content: "Mode Ã©dition";
+    content: "Mode Edition";
 }
 #wdg-edit-project.edit-button-validate:before {
-    content: "Mode normal";
+    content: "Mode Normal";
 }
 
 /*******************************************************************************
@@ -2285,22 +2408,23 @@ div#home_bottom h1 {
 /*******************************************************************************
 * DASHBOARD PAGE
 *******************************************************************************/
-#dashboard .currentstep span span {
-    font-weight: bold;
-}
-#dashboard .button-help {
-    margin: 5px 10px;
+#dashboard .button-help .button {
     float: left;
-    width: 45%;
-    background-color: #EEE;
+    text-align: center;
+    width: 100%;
+    margin: 5px 10px;
     padding: 10px;
+    max-width: 420px;
 }
 
-#dashboard .button-help .head-help {
-    font-family: "BebasNeue";
-    font-size: 35px;
-    text-transform: uppercase;
-    text-align: center;
+#dashboard .list-button{
+    text-align:center
+}
+
+#dashboard .list-button .button{
+    padding: 10px;
+    display: inline-block;
+    text-transform: none;
 }
 
 #dashboard .google-doc iframe {
@@ -2309,14 +2433,135 @@ div#home_bottom h1 {
     height: 700px;
 }
 
-#dashboard .button {
-    margin: 5px 10px;
-    padding: 10px;
-    width: 45%;
-    float: left;
-    text-align: center;
+#dashboard .blocks-list {
+    margin: 15px 0px;
 }
 
+#dashboard .block {
+    float: left;
+    width: 50%;
+    max-width: 455px;
+    margin: 5px 10px;
+}
+#dashboard .large-block {
+    float: left;
+    width: 100%;
+    max-width: 930px;
+    margin: 5px 10px;
+}
+
+#dashboard .block .head,
+#dashboard .large-block .head{
+    text-transform: uppercase;
+    font-family: "BebasNeue";
+    font-size: 30px;
+    color: #FF494C;
+    text-align: center;
+    padding: 15px 5px 2px 5px;
+}
+#dashboard .block .body,
+#dashboard .large-block .body{
+    padding: 10px;
+    background-color: #EEE
+}
+
+#dashboard #block-summary .current-step {
+    text-align:center;
+    margin: 10px 0px;
+}
+#dashboard #block-summary .current-step span {
+    opacity:0.5;
+    margin: 0px 24px;
+    display: inline-block;
+    min-width: 100px;
+}
+#dashboard #block-summary #current {
+    opacity: 1;
+    color: #FF494C;
+    font-weight: bold;
+}
+
+#dashboard #block-summary #wdg-lightbox-gonextstep ul {
+   list-style-position: inside;
+   list-style-type: none;
+   padding-left: 0px;
+}
+
+#dashboard #block-summary #wdg-lightbox-gonextstep #vote-goals {
+   list-style-type: square;
+   padding-bottom: 15px;
+}
+
+#dashboard #block-summary #wdg-lightbox-gonextstep ul li {
+    padding: 5px;
+}
+
+#dashboard #block-stats .quart-card {
+    float:left;
+    width: 25%;
+    text-align: center;
+    padding: 10px 0px;
+    min-width: 220px;
+}
+
+#dashboard #block-stats .half-card {
+    float:left;
+    width: 50%;
+    text-align: center;
+    padding: 10px 0px;
+    min-width: 440px;
+}
+
+#dashboard #block-stats .stat-big-number {
+    font-family: "BebasNeue";
+    font-size: 100px;
+    color: #FF494C;
+    padding-top: 30px;
+}
+
+#dashboard #block-stats .stat-little-number {
+    font-family: "BebasNeue";
+    font-size: 28px;
+    color: #FF494C;
+    margin-top: -12px;
+    padding-bottom: 15px;
+}
+
+#dashboard #block-stats .stat-little-number-top {
+    font-family: "BebasNeue";
+    font-size: 28px;
+    color: #FF494C;
+    padding-bottom: 0px;
+    margin-bottom: -40px;
+    padding-top: 5px;
+}
+
+#dashboard .wdg-lightbox-padder {
+    text-align: initial
+}
+
+#dashboard .wdg-lightbox-button-close .button {
+    padding: 3px 8px;
+    display: initial;
+}
+
+#dashboard #block-stats .wdg-lightbox-padder .expandable {
+    border-left: 1px solid #BBB;
+    padding-left: 20px;
+}
+
+#dashboard #block-community .card-com{
+    text-align: center;
+    font-size: 120%;
+    float: left;
+    width: 32%;
+    padding: 30px 0px;
+    min-width: 130px;
+}
+
+#dashboard #block-community .card-com img{
+    max-width: 40px;
+}
 
 /*******************************************************************************
 * NEW PROJECT PAGE
@@ -2906,51 +3151,32 @@ ul.invest-mean-payment li img {
     overflow-y: hidden;
 }
 
+//Barre de scroll en haut du tableau
+#tablescroll, #tablescroll table{
+    transform:rotateX(180deg);
+}
+
 /****Affichage permanent du scroll sur Mac et ios******/
 #tablescroll::-webkit-scrollbar {
     -webkit-appearance: none;
 }
-
-#tablescroll::-webkit-scrollbar:vertical {
-    width: 11px;
-}
-
 #tablescroll::-webkit-scrollbar:horizontal {
-    height: 11px;
+    height: 15px;
 }
-
 #tablescroll::-webkit-scrollbar-thumb {
     border-radius: 8px;
     border: 2px solid white;
     background-color: rgba(0, 0, 0, .5);
 }
-
 #tablescroll::-webkit-scrollbar-track { 
     background-color: #fff; 
     border-radius: 8px; 
-} 
+}
 /***************************************************/
 
 #display-options-col-menu {
-    display:none;
-    position: absolute;
     background-color: #333;
     border: 0px none;
-}
-
-#display-options-col-div {
-    display:inline;
-}
-
-#display-options-col-div button {
-    border: 1px solid #FF494C;
-    background-color: white;
-    color: #FF494C;
-    padding: 4px 8px 4px 8px;
-}
-
-#display-options-col-div:hover #display-options-col-menu {
-    display:inline;
 }
 
 #display-options-col-list {
@@ -2959,13 +3185,17 @@ ul.invest-mean-payment li img {
    padding-left: 0px;
    color: white;
    font-variant: small-caps;
+   margin-top: 5px;
+   margin-bottom: 0px;
+}
+
+#display-options-col-list li {
+    display: inline-block;
+    min-width: 140px;
 }
 
 #cb-li-collall {
     background-color: #FF494C;
-    padding-bottom: 2px;
-    padding-right: 4px;
-    margin-bottom: 5px;
 }
 
 /*******************************************************************************

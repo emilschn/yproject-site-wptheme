@@ -14,27 +14,28 @@
 <em>Vos impacts sont-ils suffisants pour que votre projet soit en financement sur WEDOGOOD.co ?</em><br />
 <center><canvas id="canvas-pie" width="400" height="200"></canvas></center>
 
-Les <strong><?php echo $vote_results['count_project_validated']; ?></strong> personnes qui ont vot&eacute; oui...<br />
+<strong><?php echo $vote_results['count_project_validated']; ?></strong> personnes ont vot&eacute; oui...<br />
 <ul>
 	<li>
-          <?php
+	    <?php
                 $total = $vote_results['count_invest_ready'] * $vote_results['average_invest_ready'];
                 $pourcentage = ($total*100)/$vote_results['objective'];
             ?>
       
-            Sur les <strong><?php echo $vote_results['count_voters']; ?></strong>  votants, <strong><?php echo $vote_results['count_invest_ready']; ?></strong> personnes ont déclaré qu'ils investiraient en moyenne <strong><?php echo round($vote_results['average_invest_ready'],2); ?> &euro;</strong>. 
+            Sur ces <strong><?php echo $vote_results['count_project_validated']; ?></strong> votants, <strong><?php echo $vote_results['count_invest_ready']; ?></strong> personnes ont déclaré qu'ils investiraient en moyenne <strong><?php echo round($vote_results['average_invest_ready'],2); ?> &euro;</strong>. 
             Pour un total de <strong><?php echo round($total ,2); ?></strong> euros de promesse, soit <strong><?php echo round($pourcentage ,2).' %'; ?></strong> de l’objectif.
         </li>
-        <br>
+	<?php if ($vote_results['show_risk']): ?>
 	<li>
 	    ont &eacute;valu&eacute; le risque, en moyenne, &agrave; : <strong><?php echo round($vote_results['average_risk'], 2); ?></strong> / 5<br />
-	    <center><canvas id="canvas-vertical" width="400" height="250"></canvas></center>
+	    <center><canvas id="canvas-vertical" width="300" height="200"></canvas></center>
 	</li>
+	<?php endif; ?>
 </ul>
 
 <h3>Remarques</h3>
 Les internautes aimeraient avoir plus d’informations sur :<br />
-<center><canvas id="canvas-horizontal" width="590" height="400"></canvas></center><br />
+<center><canvas id="canvas-horizontal" width="400" height="200"></canvas></center><br />
 Autres informations : <strong><?php echo $vote_results['string_more_info_other']; ?></strong>
 
 
@@ -52,13 +53,13 @@ jQuery(document).ready( function($) {
     };
     var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
     
-    
+    <?php if ($vote_results['show_risk']): ?>
     var ctxVertical = $("#canvas-vertical").get(0).getContext("2d");
     var dataVertical = {
 	labels: ["1", "2", "3", "4", "5"],
 	datasets: [{
-	    fillColor: "#F2F2F2",
-	    strokeColor: "#F2F2F2",
+	    fillColor: "#CCC",
+	    strokeColor: "#CCC",
 	    data: [<?php echo $vote_results['risk_list'][1] . ',' . $vote_results['risk_list'][2] . ',' . $vote_results['risk_list'][3] . ',' . $vote_results['risk_list'][4] . ',' . $vote_results['risk_list'][5]; ?>]
 	}]
     };
@@ -71,14 +72,14 @@ jQuery(document).ready( function($) {
 	pointDot: false
     }
     var canvasVertical = new Chart(ctxVertical).Bar(dataVertical, optionsVertical);
-    
+    <?php endif; ?>
     
     var ctxHorizontal = $("#canvas-horizontal").get(0).getContext("2d");
     var dataHorizontal = {
 	labels: ["autres", "prévisionnel financier", "structuration de l'équipe", "produit / service", "impact sociétal"],
 	datasets: [{
-	    fillColor: "#F2F2F2",
-	    strokeColor: "#F2F2F2",
+	    fillColor: "#CCC",
+	    strokeColor: "#CCC",
 	    data: [<?php echo $vote_results['count_more_info_other'] .','. $vote_results['count_more_info_finance'] .','. $vote_results['count_more_info_team'] .','. $vote_results['count_more_info_service'] .','. $vote_results['count_more_info_impact']; ?>]
 	}]
     };
