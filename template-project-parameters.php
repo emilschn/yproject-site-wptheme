@@ -120,10 +120,13 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 						<?php 
 						switch ($campaign->funding_type()) {
 							case 'fundingproject':
-								echo 'Financement d&apos;un projet<br />';
+								echo 'Avance sur chiffre d&apos;affaires (royalties)<br />';
 								break;
 							case 'fundingdevelopment':
-								echo 'Capital (coop&eacute;ratives SA uniquement)<br />';
+								echo 'Capital pour les coop&eacute;ratives<br />';
+								break;
+							case 'fundingdonation':
+								echo 'Don avec contrepartie<br />';
 								break;
 						}
 						?>
