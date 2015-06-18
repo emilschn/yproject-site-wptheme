@@ -41,7 +41,7 @@ else {
 			?>
 				<div class="progress_zone">
 					<div class="project_full_progressbg">
-						<span class="project_full_percent" style="min-width:<?php echo $width; ?>px"><?php echo $campaign->current_amount(); ?></span>
+						<span class="project_full_percent" style="min-width:<?php echo $width; ?>px">&nbsp;<?php echo $campaign->current_amount(); ?>&nbsp;</span>
 					</div>
 					<span class="progress_percent tablet_hidden"><?php echo $campaign->percent_minimum_completed(); ?></span>
 				</div>
@@ -92,7 +92,7 @@ else {
 						<div class="project_full_progressbar" style="width:0%">
 							&nbsp;
 						</div>
-						<span class="project_full_percent" style="margin-top: -25px;">0 &euro;</span>
+						<span class="project_full_percent" style="margin-top: -25px;">&nbsp;0 &euro;&nbsp;</span>
 					</div>
 				</div>
 				<div class="logos_zone">

@@ -21,6 +21,7 @@ function wdg_get_project_vote_results($camp_id) {
 		'sum_invest_ready' => 0,
 		'average_invest_ready' => 0,
 		'median_invest_ready' => 0,
+		'show_risk' => ($campaign->funding_type() != 'fundingdonation'),
 		'average_risk' => 0,
 		'risk_list' => array(1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0),
 		'count_more_info_impact' => 0,

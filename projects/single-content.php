@@ -224,6 +224,7 @@ $editor_params = array(
 			<div class="zone-edit hidden">
 				<?php 
 				$editor_description_content = str_replace( ']]>', ']]&gt;', apply_filters( 'the_content', $campaign->data->post_content ));
+				global $post, $post_id; $post_ID = $post = 0;
 				wp_editor( $editor_description_content, 'wdg-input-description', $editor_params );
 				?>
 			</div>
