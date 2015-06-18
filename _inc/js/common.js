@@ -577,6 +577,7 @@ WDGProjectPageFunctions=(function($) {
 		currentDiv: 0,
 		isInit: false,
 		isEditing: false,
+		isClickBlocked: false,
 		initUI:function() {
 			WDGProjectPageFunctions.initClick();
 			$('.project-content-icon').click(function(){
@@ -686,13 +687,18 @@ WDGProjectPageFunctions=(function($) {
 				}
 				WDGProjectPageFunctions.currentDiv++;
 			});
+			$('.projects-desc-content img').click(function() {
+			    console.log("click img");
+			    WDGProjectPageFunctions.isClickBlocked = true;
+			});
 			WDGProjectPageFunctions.refreshEditable();
 			WDGProjectPageFunctions.isInit = true;
    		},
 		
 		//Clic sur une partie
 		clickItem: function(clickedElement) {
-			if (!WDGProjectPageFunctions.isEditing) {
+			    console.log("click zone");
+			if (!WDGProjectPageFunctions.isEditing && !WDGProjectPageFunctions.isClickBlocked) {
 				//Si la balise "lire plus" de l'élément cliqué est affichée
 				var projectMore = clickedElement.find('.projects-more');
 				if (projectMore.is(':visible')) {
@@ -710,6 +716,7 @@ WDGProjectPageFunctions=(function($) {
 					WDGProjectPageFunctions.refreshEditable();
 				}
 			}
+			WDGProjectPageFunctions.isClickBlocked = false;
 		},
 
 		//Masque des parties non utilisées
