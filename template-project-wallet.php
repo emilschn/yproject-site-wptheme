@@ -7,7 +7,7 @@ global $campaign_id;
 $campaign_id = $_GET['campaign_id'];
 $post_campaign = get_post($campaign_id);
 $campaign = atcf_get_campaign($post_campaign);
-if (isset($_GET['ContributionID'])) {
+if (isset($_GET['ContributionID']) && (!isset($_POST['action']))) {
     YPProjectLib::form_proceed_roi_transfers($_GET['ContributionID']);
 } else {
     $fp_date = $campaign->first_payment_date();
@@ -105,6 +105,7 @@ if (isset($_GET['ContributionID'])) {
 							    <label for="org_file_declaration" class="large">D&eacute;claration de b&eacute;n&eacute;ficiaire &eacute;conomique (si aucun actionnaire personne physique n'est identifi&eacute; dans les statuts)</label>
 							    <input type="file"name="org_file_declaration" /><br />
 
+							    <input type="hidden" name="action" value="add_authentication_file" />
 							    <input type="submit" value="<?php _e('Envoyer', 'yproject'); ?>" class="button" />
 							</form>
 							<?php
@@ -139,6 +140,7 @@ if (isset($_GET['ContributionID'])) {
 						<label for="org_bankownerbic"><?php _e('BIC', 'yproject'); ?></label>
 						<input type="text" name="org_bankownerbic" value="<?php echo $organisation_obj->get_bank_bic(); ?>" /> <br />
 							
+						<input type="hidden" name="action" value="save_iban_infos" />
 						<input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" class="button" />
 					</form>
 				<?php }
@@ -162,6 +164,7 @@ if (isset($_GET['ContributionID'])) {
 				<?php } else { ?>
 				<form action="" method="POST">
 					<input type="hidden" name="mangopaytoaccount" value="1" />
+					<input type="hidden" name="action" value="transfer_to_account" />
 					<input type="submit" class="button" value="<?php _e('Proc&eacute;der au virement', 'yproject'); ?>" />
 				</form>
 				<?php } ?>
@@ -178,18 +181,30 @@ if (isset($_GET['ContributionID'])) {
 				    if ($campaign->funding_duration() > 0 && !empty($fp_date)): ?>
 					<ul class="payment-list">
 					    <?php for ($i = $fp_yy; $i < $campaign->funding_duration() + $fp_yy; $i++): ?>
-						<?php YPProjectLib::form_submit_yearly_account($i); ?>
+						<?php
+						YPProjectLib::form_submit_yearly_account($i);
+						$payment_status = $campaign->payment_status_for_year($i);
+						if (isset($payment_status)) {
+						    $post_payment_status = get_post($payment_status);
+						    $payment_date = $post_payment_status->post_date;
+						}
+						?>
 						<li>
 						    <h4><?php echo $fp_dd . ' / ' . $fp_mm . ' / ' . $i; ?></h4>
 						    <div>
 							<?php if ($payment_list[$i] > 0): ?>
-							<b>Montant à verser : </b><?php echo $payment_list[$i]; ?> &euro;<br />
-							<form action="" method="POST" enctype="">
-							    <input type="hidden" name="proceed_roi_<?php echo $i; ?>" value="<?php echo $fp_dd.'_'.$fp_mm.'_'.$i; ?>" />
-							    <input type="submit" class="button" value="<?php _e('Reverser', 'yproject'); ?>" />
-							</form>
+							    <?php if (isset($payment_status)): ?>
+								<?php echo $payment_date; ?> - Le virement a été effectué auprès des investisseurs.
+							    <?php else: ?>
+								<b>Montant à verser : </b><?php echo $payment_list[$i]; ?> &euro;<br />
+								<form action="" method="POST" enctype="">
+								    <input type="hidden" name="action" value="proceed_roi" />
+								    <input type="hidden" name="proceed_roi_<?php echo $i; ?>" value="<?php echo $fp_dd.'_'.$fp_mm.'_'.$i; ?>" />
+								    <input type="submit" class="button" value="<?php _e('Reverser', 'yproject'); ?>" />
+								</form>
+							    <?php endif; ?>
 							<?php else: ?>
-							<span class="errors">Montant à définir</span>
+							    <span class="errors">Le montant n'est pas encore défini</span>
 							<?php endif; ?>
 						    </div>
 						    <div>
@@ -205,6 +220,7 @@ if (isset($_GET['ContributionID'])) {
 							</ul>
 							<?php endif; ?>
 							<form action="" method="POST" enctype="multipart/form-data">
+							    <input type="hidden" name="action" value="add_account_file" />
 							    <input type="file" name="accounts_year_<?php echo $i; ?>" />
 							    <input type="submit" class="button" value="<?php _e('Envoyer', 'yproject'); ?>" />
 							</form>
@@ -219,10 +235,11 @@ if (isset($_GET['ContributionID'])) {
 				
 				
 				<h2 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php _e('Liste des op&eacute;rations bancaires', 'yproject'); ?></h2>
-				<?php if ($keep_going) :
-					$transfers = $organisation_obj->get_transfers();
+				<?php if ($keep_going): ?>
+					<?php $transfers = $organisation_obj->get_transfers();
 					if ($transfers) : ?>
 				
+					<h3>Transferts vers votre compte :</h3>
 					<ul>
 					    <?php 
 						foreach ( $transfers as $transfer_post ) :
@@ -244,8 +261,8 @@ if (isset($_GET['ContributionID'])) {
 				
 					<?php else: ?>
 						Aucun transfert d&apos;argent.
-					<?php endif;
-				endif; ?>
+					<?php endif; ?>
+				<?php endif; ?>
 
 			<?php else: ?>
 

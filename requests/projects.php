@@ -471,7 +471,7 @@ class YPProjectLib {
 				//Enregistrement de la contribution
 				$roi_post = array(
 				    'post_author'   => $current_organisation->organisation_wpref,
-				    'post_title'    => $contribution_obj->Amount,
+				    'post_title'    => 'ROI ' . $contribution_obj->Amount,
 				    'post_content'  => $contribution_obj->ID,
 				    'post_status'   => 'published',
 				    'post_type'	    => 'roi_process'
@@ -482,12 +482,15 @@ class YPProjectLib {
 
 				//On parcourt la liste des investisseurs, on détermine la proportion, on enlève 1.80% en charges, et on fait un transfert sur le compte utilisateur
 				$total_amount = $campaign->current_amount(FALSE);
+				$roi_amount = $contribution_obj->Amount / 100;
 				$investments_list = $campaign->payments_data(TRUE);
-				foreach ($investments_list as $investement_item) {
-				    $investor_proportion_amount = floor($total_amount * 100 / $investement_item['amount']) / 100;
-				    $fees = $investor_proportion_amount * 1.8 / 100;
+				foreach ($investments_list as $investment_item) {
+				    $investor_proportion = $investment_item['amount'] / $total_amount;
+				    $investor_proportion_amount = floor($roi_amount * $investor_proportion * 100) / 100;
+				    $fees = floor($investor_proportion_amount * YP_ROI_FEES / 100);
 				    $investor_proportion_amount_remaining = $investor_proportion_amount - $fees;
 				    //Transfert vers utilisateur
+				    ypcf_mangopay_transfer_user_to_user($current_organisation->organisation_wpref, $investment_item['user'], $investor_proportion_amount_remaining, $fees);
 				}
 				
 			} else {
