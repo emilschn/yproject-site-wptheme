@@ -53,7 +53,7 @@ jQuery(document).ready( function($) {
     };
     var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
     
-    
+    <?php if ($vote_results['show_risk']): ?>
     var ctxVertical = $("#canvas-vertical").get(0).getContext("2d");
     var dataVertical = {
 	labels: ["1", "2", "3", "4", "5"],
@@ -72,7 +72,7 @@ jQuery(document).ready( function($) {
 	pointDot: false
     }
     var canvasVertical = new Chart(ctxVertical).Bar(dataVertical, optionsVertical);
-    
+    <?php endif; ?>
     
     var ctxHorizontal = $("#canvas-horizontal").get(0).getContext("2d");
     var dataHorizontal = {
