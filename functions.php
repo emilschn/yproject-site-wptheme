@@ -817,7 +817,7 @@ function get_investors_list() {
 
 <br/>
 
-<div id="tablescroll" >
+<div class="tablescroll" >
 <table class="wp-list-table" cellspacing="0" id="investors-table">
     
     <thead style="background-color: #CCC;">
@@ -1239,6 +1239,17 @@ function yproject_shortcode_statsadvanced_lightbox($atts, $content = '') {
 	echo do_shortcode('[yproject_lightbox id="statsadvanced"]' .$content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_statsadvanced_lightbox', 'yproject_shortcode_statsadvanced_lightbox');
+
+//->TB Liste votants
+
+function yproject_shortcode_votecontact_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('common/votecontact-lightbox.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="votecontact"]' .$content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_votecontact_lightbox', 'yproject_shortcode_votecontact_lightbox');
 
 //->TB Liste investisseurs
 function yproject_shortcode_listinvestors_lightbox($atts, $content = '') {

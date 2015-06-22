@@ -348,10 +348,11 @@ $campaign_id = $_GET['campaign_id'];
                                     <div class="body" style="text-align:center">
                                         <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png"/><br/>
                                             <strong><?php echo $nb_jcrois?></strong> y croi<?php if($nb_jcrois>1){echo 'en';}?>t</div>
-                                        <a href="#extendable-votes" class="wdg-button-lightbox-open expandator" data-target="votes" data-lightbox="statsadvanced">
+                                        <a href="#votecontact" class="wdg-button-lightbox-open" data-lightbox="votecontact">
                                         <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png"/><br/>
                                             <strong><?php echo $nb_votes?></strong> <?php if($nb_votes>1){echo 'ont';} else {echo 'a';}?> vot&eacute;</div>
                                             </a>
+                                                <?php echo do_shortcode('[yproject_votecontact_lightbox]'); ?>
                                         <a href="#listinvestors" class="wdg-button-lightbox-open" data-lightbox="listinvestors">
                                         <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png"/><br/>
                                             <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> investi</div>
