@@ -313,7 +313,7 @@ $campaign_id = $_GET['campaign_id'];
                                                         _e('Aucun membre dans l&apos;&eacute;quipe pour l&apos;instant.', 'yproject');
                                                 endif;
                                         ?>
-                                        <input type="text" id="new_team_member_string" style="width: 200px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
+                                        <input type="text" id="new_team_member_string" style="width: 295px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
                                         <a class="project-manage-team button" data-action="yproject-add-member">Ajouter</a>
                                     </div>
                                 </div>

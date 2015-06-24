@@ -249,10 +249,15 @@ YPUIFunctions = (function($) {
                     if(action==="yproject-add-member"){
                        //Test si le champ de texte est vide
                        if (data===""){
-                           //TODO : Affichage erreur : c'est vide
-                           console.log("Champ de nouveau membre vide");
+                           //Champ vide, ne rien faire
                        } else {
-                           //TODO : Affichage en attente
+                           //Blaque le champ de texte d'ajout
+                           $("#new_team_member_string").prop('disabled',true);
+                           $("#new_team_member_string").val('');
+                           tmpPlaceHolder = $("#new_team_member_string").prop('placeholder');
+                           $("#new_team_member_string").prop('placeholder',"Ajout de "+data+"...");
+                           $("#new_team_member_string").next().hide();
+                           
                            //Lance la requête Ajax
                            $.ajax({
                                 'type' : "POST",
@@ -263,9 +268,16 @@ YPUIFunctions = (function($) {
                                       'new_team_member' : data
                                     }
                             }).done(function(result){
+                                //Nettoie le champ de texte d'ajout
+                                $("#new_team_member_string").prop('disabled', false);
+                                $("#new_team_member_string").prop('placeholder',tmpPlaceHolder);
+                                $("#new_team_member_string").next().show();
+                                
                                 if(result==="FALSE"){
                                     //TODO : Message de ratage (user inexistant)
                                     console.log("raté");
+                                    $("#new_team_member_string").next().after("<div id=\"fail_add_team_indicator\"><br/><em>L'utilisateur "+data+" n'a pas été trouvé</em><div>");
+                                    $("#fail_add_team_indicator").delay(4000).fadeOut(400);
                                 } else {
                                     res = JSON.parse(result);
 
@@ -303,8 +315,11 @@ YPUIFunctions = (function($) {
 
                     //Clic pour supprimer un membre
                     else if(action==="yproject-remove-member") {
+                        //Affichage en attente de suppression
+                        $("a[data-user="+data+"]").closest("li").css("opacity",0.25);
+                        $("a[data-user="+data+"]").text("..");
+                        $("a[data-user="+data+"]").addClass("wait-delete");
 
-                        //TODO : Affichage attente
                         $.ajax({
                             'type' : "POST",
                             'url' : ajax_object.ajax_url,
