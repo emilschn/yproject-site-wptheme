@@ -659,6 +659,64 @@ function print_user_projects(){
 add_action( 'wp_ajax_print_user_projects', 'print_user_projects' );
 add_action( 'wp_ajax_nopriv_print_user_projects', 'print_user_projects' );
 
+/**
+ * Adds a member to a project team
+ * echo the ID of the member if it has been successfully added, echo FALSE if not
+ */
+function add_team_member(){
+    $campaign_id = intval($_POST['id_campaign']);
+    $user_by_login = get_user_by('login', $_POST['new_team_member']);
+    $user_by_mail = get_user_by('email', $_POST['new_team_member']);
+    if ($user_by_login === FALSE && $user_by_mail === FALSE) {
+            $buffer = "FALSE";
+    } else {
+            //Récupération du bon id wordpress
+            $user_wp_id = '';
+            if ($user_by_login !== FALSE) $user_wp_id = $user_by_login->ID;
+            else if ($user_by_mail !== FALSE) $user_wp_id = $user_by_mail->ID;
+            //Récupération des infos existantes sur l'API
+            $user_api_id = BoppLibHelpers::get_api_user_id($user_wp_id);
+            $project_api_id = BoppLibHelpers::get_api_project_id($campaign_id);
+            BoppLibHelpers::check_create_role(BoppLibHelpers::$project_team_member_role['slug'], BoppLibHelpers::$project_team_member_role['title']);
+            //Ajout à l'API
+            BoppLib::link_user_to_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
+            
+            do_action('wdg_delete_cache', array(
+                    'users/' . $user_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
+                    'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
+            ));
+            
+            $user = get_userdata($user_wp_id);
+            $data_new_member['id']=$user_wp_id;
+            $data_new_member['firstName']=$user->first_name;
+            $data_new_member['lastName']=$user->last_name;
+            $data_new_member['userLink']=bp_core_get_userlink($user_wp_id);
+            $buffer = json_encode($data_new_member);
+    }
+    echo $buffer;
+    exit();
+}
+add_action( 'wp_ajax_add_team_member', 'add_team_member' );
+add_action( 'wp_ajax_nopriv_add_team_member', 'add_team_member' );
+
+/**
+ * Removes a member from a project team
+ */
+function remove_team_member(){
+    //Récupération des infos existantes sur l'API
+    $user_api_id = BoppLibHelpers::get_api_user_id($_POST['user_to_remove']);
+    $project_api_id = BoppLibHelpers::get_api_project_id($_POST['id_campaign']);
+    //Supprimer dans l'API
+    BoppLib::unlink_user_from_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
+    do_action('wdg_delete_cache', array(
+            'users/' . $user_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
+            'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
+    ));
+    echo "TRUE";
+    exit();
+}
+add_action( 'wp_ajax_remove_team_member', 'remove_team_member' );
+add_action( 'wp_ajax_nopriv_remove_team_member', 'remove_team_member' );
 
 function yproject_get_current_projects() {
 	$nb = isset($_POST['nb']) ? $_POST['nb'] : -1;

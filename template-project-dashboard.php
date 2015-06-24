@@ -287,7 +287,7 @@ $campaign_id = $_GET['campaign_id'];
                                     </div>
                                 </div>
                                 
-                                <div id="block-team" class="block">
+                                <div id="block-team" class="block" data-campaign="<?php echo $campaign->ID?>">
                                     <div class="head">&Eacute;quipe</div>
                                     <div class="body" style="text-align:center">
                                         <h2><?php _e('Administrateur du projet', 'yproject'); ?></h2>
@@ -300,32 +300,21 @@ $campaign_id = $_GET['campaign_id'];
                                                 if (isset($project_api_id)) $team_member_list = BoppLib::get_project_members_by_role($project_api_id, BoppLibHelpers::$project_team_member_role['slug']);
                                                 if (count($team_member_list) > 0):
                                         ?>
-                                                <ul>
-                                        <?php
-                                                        foreach ($team_member_list as $team_member): ?>
-                                                                <li>
-                                                                        <?php echo $team_member->user_name . ' ' . $team_member->user_surname; ?>
-                                                                    <a class="button" data-action="yproject-remove-member" data_user="<?php echo $team_member->wp_user_id; ?>">x</a>
-                                                                    <!--form action="" method="POST" style="display: inline-block">
-                                                                            <input type="hidden" name="action" value="yproject-remove-member" />
-                                                                            <input type="hidden" name="user_to_remove" value="<?php echo $team_member->wp_user_id; ?>" />
-                                                                            <input type="submit" class="button" value="x" />
-                                                                    </form-->
-                                                                </li>
-                                                        <?php endforeach; ?>
+                                                <ul id="team-list">
+                                        <?php foreach ($team_member_list as $team_member): ?>
+                                                    <li>
+                                                        <?php echo $team_member->user_name . ' ' . $team_member->user_surname . ' (' . bp_core_get_userlink($team_member->wp_user_id).')'; ?>
+                                                        <a class="project-manage-team button" data-action="yproject-remove-member" data-user="<?php echo $team_member->wp_user_id; ?>">x</a>
+                                                    </li>
+                                        <?php endforeach; ?>
                                                 </ul>
                                         <?php	
                                                 else:
                                                         _e('Aucun membre dans l&apos;&eacute;quipe pour l&apos;instant.', 'yproject');
                                                 endif;
                                         ?>
-                                        <input type="text" name="new_team_member" style="width: 200px;" placeholder="<?php _e('Saisissez l&apos;e-mail ou l&apos;identifiant d&apos;un utilisateur inscrit sur WEDOGOOD.co', 'ypoject'); ?>" />
-                                        <a class="button" data-action="yproject-add-member">Ajouter</a>
-                                        <!--form action="" method="POST">
-                                            <input type="text" name="new_team_member" style="width: 200px;" placeholder="<?php _e('Saisissez l&apos;e-mail ou l&apos;identifiant d&apos;un utilisateur inscrit sur WEDOGOOD.co', 'ypoject'); ?>" />
-                                            <input type="hidden" name="action" value="yproject-add-member" />
-                                            <input type="submit" value="<?php _e('Ajouter', 'yproject'); ?>" />
-                                        </form-->
+                                        <input type="text" id="new_team_member_string" style="width: 200px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
+                                        <a class="project-manage-team button" data-action="yproject-add-member">Ajouter</a>
                                     </div>
                                 </div>
                                 

@@ -218,6 +218,20 @@ YPUIFunctions = (function($) {
                             });
                         }
                         
+                        //Gestion equipe depuis Tableau de bord
+                        $(".project-manage-team").click(function(){
+                            campaign_id = $("#block-team").attr('data-campaign');
+                            action = $(this).attr('data-action');
+                            if(action==="yproject-add-member"){
+                               data=($("#new_team_member_string")[0].value);
+                           }
+                           else if (action==="yproject-remove-member"){
+                               data=$(this).attr('data-user');
+                           }
+                           
+                           YPUIFunctions.manageTeam(action, data, campaign_id);
+                           
+                        });
 
                         $("#investir").click(function(){
                            $("#redirect-page-investir").attr("value","true");
@@ -230,6 +244,80 @@ YPUIFunctions = (function($) {
                         });
 		},
                 
+                manageTeam: function(action, data, campaign_id){
+                    //Clic pour ajouter un membre
+                    if(action==="yproject-add-member"){
+                       //Test si le champ de texte est vide
+                       if (data===""){
+                           //TODO : Affichage erreur : c'est vide
+                           console.log("Champ de nouveau membre vide");
+                       } else {
+                           //TODO : Affichage en attente
+                           //Lance la requête Ajax
+                           $.ajax({
+                                'type' : "POST",
+                                'url' : ajax_object.ajax_url,
+                                'data': { 
+                                      'action':'add_team_member',
+                                      'id_campaign':campaign_id,
+                                      'new_team_member' : data
+                                    }
+                            }).done(function(result){
+                                if(result==="FALSE"){
+                                    //TODO : Message de ratage (user inexistant)
+                                    console.log("raté");
+                                } else {
+                                    res = JSON.parse(result);
+
+                                    //Teste si l'user existait déjà
+                                    doublon = false;
+                                    $(".project-manage-team").each(function(){
+                                        doublon = doublon || (res.id == $(this).attr('data-user'));
+                                    });
+
+                                    if(!doublon){
+                                        newline ='<li style="display: none;">';
+                                        newline+=res.firstName+" "+res.lastName+" ("+res.userLink+") ";
+                                        newline+='<a class="project-manage-team button" data-action="yproject-remove-member" data-user="'+res.id+'">x</a>';
+                                        newline+="</li>";
+                                        $("#team-list").append(newline);
+                                        $("a[data-user="+res.id+"]").closest("li").slideDown();
+
+                                        //Recharge l'UI pour ajouter listener au nouveau button
+                                        $(".project-manage-team").click(function(){
+                                            campaign_id = $("#block-team").attr('data-campaign');
+                                            action = $(this).attr('data-action');
+                                            if(action==="yproject-add-member"){
+                                               data=($("#new_team_member_string")[0].value);
+                                           }
+                                           else if (action==="yproject-remove-member"){
+                                               data=$(this).attr('data-user');
+                                           }
+                                           YPUIFunctions.manageTeam(action, data, campaign_id);
+                                        });
+                                    }
+                                }
+                            });
+                       }
+                    }
+
+                    //Clic pour supprimer un membre
+                    else if(action==="yproject-remove-member") {
+
+                        //TODO : Affichage attente
+                        $.ajax({
+                            'type' : "POST",
+                            'url' : ajax_object.ajax_url,
+                            'data': { 
+                                  'action':'remove_team_member',
+                                  'id_campaign':campaign_id,
+                                  'user_to_remove' : data
+                                }
+                        }).done(function(result){
+                            $("a[data-user="+data+"]").closest("li").slideUp("slow",function(){ $(this).remove();});
+                        });
+                    }
+                },
                 
 		getInvestors: function(inv_data, campaign_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
                     $.ajax({
@@ -310,7 +398,6 @@ YPUIFunctions = (function($) {
                     });
                 },
                 
-                
                 getInvestments: function(campaign_id){
                     $.ajax({
                         'type' : "POST",
@@ -343,7 +430,7 @@ YPUIFunctions = (function($) {
                             YPUIFunctions.getEmailSelector(JSON.stringify(inv_data),campaign_id); 
                         }
                     });
-                },
+                },               
                 
 		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué
 			var userID = $('#user-id').attr('data-value');
