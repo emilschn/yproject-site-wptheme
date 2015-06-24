@@ -833,6 +833,9 @@ function get_investors_list() {
     <tbody id="the-list">
 	<?php
 	$i = -1;
+        require_once("country_list.php");
+        global $country_list;
+        
 	foreach ( $investments_list['payments_data'] as $item ) {
 //	    if ($item['status'] == 'publish' || $item['status'] == 'refunded') {
 		$i++;
@@ -889,7 +892,7 @@ function get_investors_list() {
                     $user_data->first_name,
                     $user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,
                     $user_data->user_birthplace,
-                    $user_data->user_nationality,
+                    ucfirst(strtolower($country_list[$user_data->user_nationality])),
                     $user_data->user_city,
                     $user_data->user_address,
                     $user_data->user_postal_code,
