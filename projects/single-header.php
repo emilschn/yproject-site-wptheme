@@ -87,14 +87,6 @@ else {
 			} else if ($vote_status == 'vote') {
 				$nbvoters = $campaign->nb_voters();
 			?>
-				<div class="progress_zone">
-					<div class="project_full_progressbg">
-						<div class="project_full_progressbar" style="width:0%">
-							&nbsp;
-						</div>
-						<span class="project_full_percent" style="margin-top: -25px;">&nbsp;0 &euro;&nbsp;</span>
-					</div>
-				</div>
 				<div class="logos_zone">
 					<div class="post_bottom_infos_item only_on_mobile">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />
@@ -142,11 +134,6 @@ else {
 
 			<?php } else if ($vote_status== 'preview'){ ?>
 
-				<div class="progress_zone">
-					<div class="project_full_progressbg">
-						<span class="project_full_percent">0%</span>
-					</div>
-				</div>
 				<div class="logos_zone">
 					<div class="post_bottom_infos_item only_on_mobile">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />

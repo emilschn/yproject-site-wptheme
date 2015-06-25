@@ -2399,15 +2399,6 @@ div#home_bottom h1 {
 /*******************************************************************************
 * DASHBOARD PAGE
 *******************************************************************************/
-#dashboard .button-help .button {
-    float: left;
-    text-align: center;
-    width: 100%;
-    margin: 5px 10px;
-    padding: 10px;
-    max-width: 420px;
-}
-
 #dashboard .list-button{
     text-align:center
 }
@@ -2429,16 +2420,19 @@ div#home_bottom h1 {
 }
 
 #dashboard .block {
-    float: left;
-    width: 50%;
-    max-width: 455px;
     margin: 5px 10px;
 }
 #dashboard .large-block {
     float: left;
     width: 100%;
-    max-width: 930px;
+    max-width: 940px;
     margin: 5px 10px;
+}
+
+#dashboard #col-left,
+#dashboard #col-right {
+    width: 50%;
+    float: left;
 }
 
 #dashboard .block .head,
@@ -2546,13 +2540,30 @@ div#home_bottom h1 {
     font-size: 120%;
     float: left;
     width: 32%;
-    padding: 30px 0px;
+    padding: 30px 0px 15px 0px;
     min-width: 130px;
 }
 
 #dashboard #block-community .card-com img{
     max-width: 40px;
 }
+
+#dashboard #block-team #team-list{
+    padding: 0px 25px;
+    list-style: none;
+    text-align: left;
+}
+
+#dashboard #block-team #team-list li{
+    padding: 7px 0px;
+    border-bottom: 1px solid #808080;
+    margin: 5px 0px;
+}
+
+#dashboard #block-team #team-list .wait-delete {
+    background: #333 url("images/chargement.gif") center no-repeat !important;
+}
+
 
 /*******************************************************************************
 * NEW PROJECT PAGE
@@ -3137,29 +3148,29 @@ ul.invest-mean-payment li img {
 /*******************************************************************************
 * INVESTORS PAGE
 *******************************************************************************/ 
-#tablescroll {
+.tablescroll {
     overflow-x: auto;
     overflow-y: hidden;
 }
 
 //Barre de scroll en haut du tableau
-#tablescroll, #tablescroll table{
+.tablescroll, .tablescroll table{
     transform:rotateX(180deg);
 }
 
 /****Affichage permanent du scroll sur Mac et ios******/
-#tablescroll::-webkit-scrollbar {
+.tablescroll::-webkit-scrollbar {
     -webkit-appearance: none;
 }
-#tablescroll::-webkit-scrollbar:horizontal {
+.tablescroll::-webkit-scrollbar:horizontal {
     height: 15px;
 }
-#tablescroll::-webkit-scrollbar-thumb {
+.tablescroll::-webkit-scrollbar-thumb {
     border-radius: 8px;
     border: 2px solid white;
     background-color: rgba(0, 0, 0, .5);
 }
-#tablescroll::-webkit-scrollbar-track { 
+.tablescroll::-webkit-scrollbar-track { 
     background-color: #fff; 
     border-radius: 8px; 
 }
