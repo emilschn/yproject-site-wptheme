@@ -9,6 +9,8 @@
     $colonnes = array('Utilisateur', 'Nom', 'Prénom', 'Ville', 'Mail', 'Montant promis');
 ?>
 <em>Seuls les personnes ayant voté "Oui" sont affich&eacute;es.</em><br/><br/>
+<em>Si vous envoyez un mail group&eacute; aux votants, pensez &agrave; les mettre dans le champ CCI, pour qu&apos;ils n&apos;aient pas acc&egrave;s aux adresses des autres.</em><br /><br />
+
 
 <div class="tablescroll" >
 <table class="wp-list-table" cellspacing="0">
