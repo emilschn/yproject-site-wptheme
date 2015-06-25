@@ -70,7 +70,7 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					    'name'        => 'categories'
 					) ); ?><br />
 					
-					<a id="picture-head"></a><a id="video-zone"></a><?php /* ancre déplacée pour cause de menu... */ ?>
+                                        <a id="picture-head"></a><a id="video-zone"></a><a id="project-owner"></a><?php /* ancres déplacées pour cause de menu... */ ?>
 					<label for="activities">Secteur d&apos;activit&eacute; :</label>
 					<?php wp_dropdown_categories( array( 
 					    'hide_empty'  => 0,
@@ -166,6 +166,13 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 							<option value=""></option>
 							<?php echo $str_organisations; ?>
 						</select>
+                                                <?php if ($current_organisation!=null){
+                                                    $page_edit_orga = get_page_by_path('editer-une-organisation');
+                                                    $edit_org .= '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
+                                                    $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
+                                                    echo $edit_org;
+                                                }
+                                                ?>
 
 					<?php else: ?>
 						<?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
