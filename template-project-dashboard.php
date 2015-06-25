@@ -158,8 +158,9 @@ $campaign_id = $_GET['campaign_id'];
                                         <span <?php if($status=='collecte'){echo 'id="current"';} ?>>Collecte </span>
                                         <span <?php if($status=='funded'){echo 'id="current"';} ?>>R&eacute;alisation</span>
                                     </div>
-                                    <?php if ($status=='preparing'||$status=='preview'||$status=='vote'){?>
-                                        <div class="list-button">   
+                                    
+                                    <div class="list-button">
+                                        <?php if ($status=='preparing'||$status=='preview'||$status=='vote'){?>
                                             <?php if (current_user_can('manage_options')) {
                                                 //Visible uniquement par admins : autoriser le PP à passer à l'étape suivante
                                                 if(isset($_GET['validate_next_step'])){
@@ -172,10 +173,11 @@ $campaign_id = $_GET['campaign_id'];
                                                 <?php }
                                             }?>
                                             <a href="#gonextstep" class="wdg-button-lightbox-open button" data-lightbox="gonextstep">&check; Passer &agrave; l'&eacute;tape suivante</a>
-                                            <?php //Lightbox passage à l'étape suivante
-                                            echo do_shortcode('[yproject_gonextstep_lightbox]'); ?>
-                                        </div>
-                                    <?php }?>
+                                            <?php /*Lightbox passage à l'étape suivante*/ echo do_shortcode('[yproject_gonextstep_lightbox]');
+                                        }?>
+                                            
+                                        <a href="<?php echo get_permalink($page_parameters->ID) . $campaign_id_param . $params_partial; ?>" class="button"><?php _e('&#128295; Param&egrave;tres', 'yproject'); ?></a>
+                                    </div>
                                 </div>
                                 <br/>
                                 
@@ -287,51 +289,7 @@ $campaign_id = $_GET['campaign_id'];
                                     </div>
                                 </div>
                                 
-                                <div id="block-team" class="block" data-campaign="<?php echo $campaign->ID?>">
-                                    <div class="head">&Eacute;quipe</div>
-                                    <div class="body" style="text-align:center">
-                                        <h2><?php _e('Administrateur du projet', 'yproject'); ?></h2>
-                                        <?php echo $author_data->first_name . ' ' . $author_data->last_name ?>
-                                        
-                                        <h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
-                                        <?php 
-                                                ypcf_debug_log('template-project-bo-team >> ' . $_GET['campaign_id']);
-                                                $project_api_id = BoppLibHelpers::get_api_project_id($_GET['campaign_id']);
-                                                if (isset($project_api_id)) $team_member_list = BoppLib::get_project_members_by_role($project_api_id, BoppLibHelpers::$project_team_member_role['slug']);
-                                                if (count($team_member_list) > 0):
-                                        ?>
-                                                <ul id="team-list">
-                                        <?php foreach ($team_member_list as $team_member): ?>
-                                                    <li>
-                                                        <?php echo $team_member->user_name . ' ' . $team_member->user_surname . ' (' . bp_core_get_userlink($team_member->wp_user_id).')'; ?>
-                                                        <a class="project-manage-team button" data-action="yproject-remove-member" data-user="<?php echo $team_member->wp_user_id; ?>">x</a>
-                                                    </li>
-                                        <?php endforeach; ?>
-                                                </ul>
-                                        <?php	
-                                                else:
-                                                        _e('Aucun membre dans l&apos;&eacute;quipe pour l&apos;instant.', 'yproject');
-                                                endif;
-                                        ?>
-                                        <input type="text" id="new_team_member_string" style="width: 295px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
-                                        <a class="project-manage-team button" data-action="yproject-add-member">Ajouter</a>
-                                    </div>
-                                </div>
-                                
-                                <div id="block-investors" class="block">
-                                    <div class="head">Investisseurs</div>
-                                    <div class="body" style="text-align:center">
-                                    <p>
-                                        <img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
-                                        <?php echo $nb_invests?> investissement<?php if($nb_invests>1){echo 's';}?></p>
-                                    <p><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true) ; ?></p>
-                                    <div class="list-button">
-                                        <a href="#listinvestors" class="wdg-button-lightbox-open button" data-lightbox="listinvestors">&#x1f50e; Liste des investisseurs</a>
-		                    <?php echo do_shortcode('[yproject_listinvestors_lightbox]'); ?>
-                                    </div>
-                                    </div>
-                                </div>
-                                
+                                <div id="col-left">
                                 <div id ="block-community" class="block">
                                     <div class="head">Communaut&eacute;</div>
                                     <div class="body" style="text-align:center">
@@ -356,35 +314,78 @@ $campaign_id = $_GET['campaign_id'];
                                         <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/google+.jpg"/><br/>
                                             <strong><?php echo '&omega;'?></strong> partage<?php if(2>1){echo 's';}?> Google+</div-->
                                     <div class="clear"></div>
+                                    <div class="list-button">
+                                        <a href="<?php echo $news_link; ?>" class="button"><?php _e('&#9999 Publier une actualit&eacute;', 'yproject'); ?></a>
+                                    </div>
                                     </div>
                                 </div>
-                            </div>
+                                    
+                                <div id="block-investors" class="block">
+                                    <div class="head">Investisseurs</div>
+                                    <div class="body" style="text-align:center">
+                                    <p>
+                                        <img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
+                                        <?php echo $nb_invests?> investissement<?php if($nb_invests>1){echo 's';}?></p>
+                                    <p><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true) ; ?></p>
+                                    <div class="list-button">
+                                        <a href="#listinvestors" class="wdg-button-lightbox-open button" data-lightbox="listinvestors">&#x1f50e; Liste des investisseurs</a>
+		                    <?php echo do_shortcode('[yproject_listinvestors_lightbox]'); ?>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
                                 
-                                <div class="clear"></div>
-                           
-                                <div class="block">
+                                <div id="col-right">
+                                <div id="block-team" class="block" data-campaign="<?php echo $campaign->ID?>">
+                                    <div class="head">&Eacute;quipe</div>
+                                    <div class="body" style="text-align:center">
+                                        <h2><?php _e('Administrateur du projet', 'yproject'); ?></h2>
+                                        <?php echo $author_data->first_name . ' ' . $author_data->last_name ?>
+                                        
+                                        <h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
+                                        <?php 
+                                                ypcf_debug_log('template-project-dashboard >> ' . $_GET['campaign_id']);
+                                                $project_api_id = BoppLibHelpers::get_api_project_id($_GET['campaign_id']);
+                                                if (isset($project_api_id)) $team_member_list = BoppLib::get_project_members_by_role($project_api_id, BoppLibHelpers::$project_team_member_role['slug']);
+                                                if (count($team_member_list) > 0):
+                                        ?>
+                                                <ul id="team-list">
+                                        <?php foreach ($team_member_list as $team_member): ?>
+                                                    <li>
+                                                        <?php echo $team_member->user_name . ' ' . $team_member->user_surname . ' (' . bp_core_get_userlink($team_member->wp_user_id).')'; ?>
+                                                        <a class="project-manage-team button" data-action="yproject-remove-member" data-user="<?php echo $team_member->wp_user_id; ?>">x</a>
+                                                    </li>
+                                        <?php endforeach; ?>
+                                                </ul>
+                                        <?php	
+                                                else:
+                                                        _e('Aucun membre dans l&apos;&eacute;quipe pour l&apos;instant.', 'yproject');
+                                                endif;
+                                        ?>
+                                        <input type="text" id="new_team_member_string" style="width: 295px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
+                                        <a class="project-manage-team button" data-action="yproject-add-member">Ajouter</a>
+                                    </div>
+                                </div>
+                                
+                                <div id="block-info" class="block">
                                     <div class="head"><?php _e('Informations','yproject'); ?></div>
                                     <div class="body">
-                                    <ul>
-                                    <a href="<?php echo get_permalink($page_particular_terms->ID); ?>" target="_blank"><li><?php _e('Conditions particuli&egrave;res', 'yproject'); ?></li></a>
+                                        <ul>
+                                        <a href="<?php echo get_permalink($page_particular_terms->ID); ?>" target="_blank"><li><?php _e('Conditions particuli&egrave;res', 'yproject'); ?></li></a>
 
-                                    <a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><li><?php _e('Guide de campagne', 'yproject'); ?></li></a>
-                                    </ul>
+                                        <a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><li><?php _e('Guide de campagne', 'yproject'); ?></li></a>
+                                        </ul>
+                                        <div class="list-button">
+                                            <?php if ($campaign->google_doc() != ''): ?>
+                                                <a href="<?php echo $campaign->google_doc(); ?>/edit" target="_blank" class="button"><?php _e('Ouvrir le document de gestion de campagne', 'yproject'); ?></a>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
                                 </div>
-                        
-                                <div class="button-help block">
-                                    <br/><br/>
-                                <?php if ($campaign->google_doc() != ''): ?>
-                                    <a href="<?php echo $campaign->google_doc(); ?>/edit" target="_blank" class="button"><?php _e('Ouvrir le document de gestion de campagne', 'yproject'); ?></a>
-                                    <?php endif; ?>
-                                <a href="<?php echo $news_link; ?>" class="button"><?php _e('&#9999 Publier une actualit&eacute;', 'yproject'); ?></a>
-                                <a href="<?php echo get_permalink($page_parameters->ID) . $campaign_id_param . $params_partial; ?>" class="button"><?php _e('&#128295; Param&egrave;tres', 'yproject'); ?></a>
-                                <a href="<?php echo get_permalink($page_manage_team->ID) . $campaign_id_param . $params_partial; ?>" class="button"><?php _e('&Eacute;quipe', 'yproject'); ?></a>
-                                <div class="clear"></div>
-                                </div>
                                 
+                                </div>
                                 <div class="clear"></div>
+                            </div>
 
                             <?php if ($campaign->google_doc() != ''): ?>
                                 <div class="google-doc">
@@ -395,6 +396,8 @@ $campaign_id = $_GET['campaign_id'];
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
+                        
+                            <div class="clear"></div>
 
                             <script type="text/javascript">
                             jQuery(document).ready( function($) {

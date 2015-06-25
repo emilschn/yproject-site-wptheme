@@ -2398,15 +2398,6 @@ div#home_bottom h1 {
 /*******************************************************************************
 * DASHBOARD PAGE
 *******************************************************************************/
-#dashboard .button-help .button {
-    float: left;
-    text-align: center;
-    width: 100%;
-    margin: 5px 10px;
-    padding: 10px;
-    max-width: 420px;
-}
-
 #dashboard .list-button{
     text-align:center
 }
@@ -2428,16 +2419,19 @@ div#home_bottom h1 {
 }
 
 #dashboard .block {
-    float: left;
-    width: 50%;
-    max-width: 455px;
     margin: 5px 10px;
 }
 #dashboard .large-block {
     float: left;
     width: 100%;
-    max-width: 930px;
+    max-width: 940px;
     margin: 5px 10px;
+}
+
+#dashboard #col-left,
+#dashboard #col-right {
+    width: 50%;
+    float: left;
 }
 
 #dashboard .block .head,
@@ -2545,7 +2539,7 @@ div#home_bottom h1 {
     font-size: 120%;
     float: left;
     width: 32%;
-    padding: 30px 0px;
+    padding: 30px 0px 15px 0px;
     min-width: 130px;
 }
 
