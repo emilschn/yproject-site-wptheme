@@ -255,6 +255,7 @@
 	}
 	#projects-stats-content .project_full_progressbar { display: none; }
 	#projects-stats-content .logos_zone { margin-top: -100px; }
+	#projects-stats-content .logos_zone.vote { margin-top: 0px; }
 	#projects-stats-content .logos_zone .post_bottom_infos_item { display: inline-block !important; }
 	#projects-left-desc, #project-summary-container #projects-summary {
 		width: 100% !important;
