@@ -817,7 +817,7 @@ function get_investors_list() {
 
 <br/>
 
-<div id="tablescroll" >
+<div class="tablescroll" >
 <table class="wp-list-table" cellspacing="0" id="investors-table">
     
     <thead style="background-color: #CCC;">
@@ -833,6 +833,9 @@ function get_investors_list() {
     <tbody id="the-list">
 	<?php
 	$i = -1;
+        require_once("country_list.php");
+        global $country_list;
+        
 	foreach ( $investments_list['payments_data'] as $item ) {
 //	    if ($item['status'] == 'publish' || $item['status'] == 'refunded') {
 		$i++;
@@ -909,7 +912,7 @@ function get_investors_list() {
                     $user_data->first_name,
                     $user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,
                     $user_data->user_birthplace,
-                    $user_data->user_nationality,
+                    ucfirst(strtolower($country_list[$user_data->user_nationality])),
                     $user_data->user_city,
                     $user_data->user_address,
                     $user_data->user_postal_code,
@@ -1260,6 +1263,17 @@ function yproject_shortcode_statsadvanced_lightbox($atts, $content = '') {
 	echo do_shortcode('[yproject_lightbox id="statsadvanced"]' .$content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_statsadvanced_lightbox', 'yproject_shortcode_statsadvanced_lightbox');
+
+//->TB Liste votants
+
+function yproject_shortcode_votecontact_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('common/votecontact-lightbox.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="votecontact"]' .$content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_votecontact_lightbox', 'yproject_shortcode_votecontact_lightbox');
 
 //->TB Liste investisseurs
 function yproject_shortcode_listinvestors_lightbox($atts, $content = '') {

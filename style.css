@@ -3137,29 +3137,29 @@ ul.invest-mean-payment li img {
 /*******************************************************************************
 * INVESTORS PAGE
 *******************************************************************************/ 
-#tablescroll {
+.tablescroll {
     overflow-x: auto;
     overflow-y: hidden;
 }
 
 //Barre de scroll en haut du tableau
-#tablescroll, #tablescroll table{
+.tablescroll, .tablescroll table{
     transform:rotateX(180deg);
 }
 
 /****Affichage permanent du scroll sur Mac et ios******/
-#tablescroll::-webkit-scrollbar {
+.tablescroll::-webkit-scrollbar {
     -webkit-appearance: none;
 }
-#tablescroll::-webkit-scrollbar:horizontal {
+.tablescroll::-webkit-scrollbar:horizontal {
     height: 15px;
 }
-#tablescroll::-webkit-scrollbar-thumb {
+.tablescroll::-webkit-scrollbar-thumb {
     border-radius: 8px;
     border: 2px solid white;
     background-color: rgba(0, 0, 0, .5);
 }
-#tablescroll::-webkit-scrollbar-track { 
+.tablescroll::-webkit-scrollbar-track { 
     background-color: #fff; 
     border-radius: 8px; 
 }
