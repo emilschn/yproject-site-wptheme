@@ -87,7 +87,7 @@ else {
 			} else if ($vote_status == 'vote') {
 				$nbvoters = $campaign->nb_voters();
 			?>
-				<div class="logos_zone">
+				<div class="logos_zone vote">
 					<div class="post_bottom_infos_item only_on_mobile">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />
 						<?php 

@@ -346,6 +346,7 @@ $editor_params = array(
 </div>
 
 <div class="only_on_mobile">
+	<?php if ($vote_status == 'collecte'): ?>
 	<div class="reward-zone">
 		<div class="project-rewards">
 			<span>En &eacute;change de votre investissement</span>
@@ -368,6 +369,7 @@ $editor_params = array(
 			<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1" class="description-discover">Investir sur ce projet</a>
 		</div>
 	</div>
+	<?php endif; ?>
 	<div class="part-title-separator">
 		<span class="part-title"> 
 			Partager

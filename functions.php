@@ -788,7 +788,7 @@ function get_investors_list() {
         $investments_list = (json_decode($_POST['data'],true));
         $campaign = atcf_get_campaign($_POST['id_campaign']); 
         
-	$is_campaign_over = ($campaign->campaign_status() == 'funded' || $campaign->campaign_status() == 'archive');
+	$is_campaign_over = ($campaign->campaign_status() == 'funded' || $campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing');
         
         $classcolonnes = array('coluname',
                             'collname',
@@ -919,7 +919,7 @@ function get_investors_list() {
 //			else if ($mangopay_is_completed) $payment_state = 'Echoué';
 		}
 		$investment_state = 'Validé';
-		if ($campaign->campaign_status() == 'archive') {
+		if ($campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing') {
 		    $investment_state = 'Annulé';
 			
 		    $refund_id = get_post_meta($item['ID'], 'refund_id', TRUE);

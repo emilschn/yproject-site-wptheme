@@ -1850,7 +1850,7 @@ div#home_bottom h1 {
     padding: 0px 25px 10px;
 }
 .projects-desc-content p img {
-    max-width: 750px;
+    max-width: 100%;
     height: auto;
  }
 .projects-desc-content p img.aligncenter {
