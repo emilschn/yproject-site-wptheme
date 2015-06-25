@@ -39,16 +39,10 @@ get_header();
 			 */
 		    ?>
 		    
-		    <?php /*
-		    //Remboursements GdB
-		    $user = get_userdata(18);
-		    $download_id = 3268;
-		    $amount = 100;
-		    $payment_id = 3433;
-		    $new_transfer = ypcf_mangopay_transfer_project_to_user($user, $download_id, $amount);
-		    update_post_meta($payment_id, 'refund_wire_id', $new_transfer->ID);
-		    print_r($new_transfer);
-		    */ ?>
+		    <?php
+		    //Remboursements MojitoIn
+//		    $refund = ypcf_mangopay_refund_project_to_user(5454);
+		    ?>
 		
 		    <?php
 		    /*
