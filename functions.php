@@ -659,6 +659,64 @@ function print_user_projects(){
 add_action( 'wp_ajax_print_user_projects', 'print_user_projects' );
 add_action( 'wp_ajax_nopriv_print_user_projects', 'print_user_projects' );
 
+/**
+ * Adds a member to a project team
+ * echo the ID of the member if it has been successfully added, echo FALSE if not
+ */
+function add_team_member(){
+    $campaign_id = intval($_POST['id_campaign']);
+    $user_by_login = get_user_by('login', $_POST['new_team_member']);
+    $user_by_mail = get_user_by('email', $_POST['new_team_member']);
+    if ($user_by_login === FALSE && $user_by_mail === FALSE) {
+            $buffer = "FALSE";
+    } else {
+            //Récupération du bon id wordpress
+            $user_wp_id = '';
+            if ($user_by_login !== FALSE) $user_wp_id = $user_by_login->ID;
+            else if ($user_by_mail !== FALSE) $user_wp_id = $user_by_mail->ID;
+            //Récupération des infos existantes sur l'API
+            $user_api_id = BoppLibHelpers::get_api_user_id($user_wp_id);
+            $project_api_id = BoppLibHelpers::get_api_project_id($campaign_id);
+            BoppLibHelpers::check_create_role(BoppLibHelpers::$project_team_member_role['slug'], BoppLibHelpers::$project_team_member_role['title']);
+            //Ajout à l'API
+            BoppLib::link_user_to_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
+            
+            do_action('wdg_delete_cache', array(
+                    'users/' . $user_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
+                    'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
+            ));
+            
+            $user = get_userdata($user_wp_id);
+            $data_new_member['id']=$user_wp_id;
+            $data_new_member['firstName']=$user->first_name;
+            $data_new_member['lastName']=$user->last_name;
+            $data_new_member['userLink']=bp_core_get_userlink($user_wp_id);
+            $buffer = json_encode($data_new_member);
+    }
+    echo $buffer;
+    exit();
+}
+add_action( 'wp_ajax_add_team_member', 'add_team_member' );
+add_action( 'wp_ajax_nopriv_add_team_member', 'add_team_member' );
+
+/**
+ * Removes a member from a project team
+ */
+function remove_team_member(){
+    //Récupération des infos existantes sur l'API
+    $user_api_id = BoppLibHelpers::get_api_user_id($_POST['user_to_remove']);
+    $project_api_id = BoppLibHelpers::get_api_project_id($_POST['id_campaign']);
+    //Supprimer dans l'API
+    BoppLib::unlink_user_from_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
+    do_action('wdg_delete_cache', array(
+            'users/' . $user_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
+            'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
+    ));
+    echo "TRUE";
+    exit();
+}
+add_action( 'wp_ajax_remove_team_member', 'remove_team_member' );
+add_action( 'wp_ajax_nopriv_remove_team_member', 'remove_team_member' );
 
 function yproject_get_current_projects() {
 	$nb = isset($_POST['nb']) ? $_POST['nb'] : -1;
@@ -994,24 +1052,24 @@ function get_invests_graph(){
     ksort($allamount);
     /******************************************************/
     //Date de début de collecte (1er investissement si l'information n'est pas enregistrée)
-    $datedebut = $campaign->begin_collecte_date();
-    if ($datedebut==null){
+    $date_collecte_start = $campaign->begin_collecte_date();
+    if ($date_collecte_start==null){
         if(count($datesinvest)!=0){
-            $datedebut = $datesinvest[0];
+            $date_collecte_start = $datesinvest[0];
         }
     }
-    $datefin = $campaign->end_date();
+    $date_collecte_end = $campaign->end_date();
     
     //Etiquettes de dates intermédiaires
-    $nbjourscampagne = date_diff(date_create($datedebut), date_create($datefin), true);
+    $number_campaign_days = date_diff(date_create($date_collecte_start), date_create($date_collecte_end), true);
 
-    $datequart = date_add(date_create($datedebut), new DateInterval('P'.($nbjourscampagne->days/4).'D'));
-    $datemilieu = date_add(date_create($datedebut), new DateInterval('P'.($nbjourscampagne->days/2).'D'));
-    $datetroisquart = date_add(date_create($datedebut), new DateInterval('P'.(($nbjourscampagne->days/4)*3).'D'));
+    $datequarter = date_add(date_create($date_collecte_start), new DateInterval('P'.($number_campaign_days->days/4).'D'));
+    $datehalf = date_add(date_create($date_collecte_start), new DateInterval('P'.($number_campaign_days->days/2).'D'));
+    $datethreequarter = date_add(date_create($date_collecte_start), new DateInterval('P'.(($number_campaign_days->days/4)*3).'D'));
     
-    $datequartstr = date_format($datequart,'"j/m/Y"');
-    $datemilieustr = date_format($datemilieu,'"j/m/Y"');
-    $datetroisquartstr = date_format($datetroisquart,'"j/m/Y"');
+    $datequarterstr = date_format($datequarter,'"j/m/Y"');
+    $datehalfstr = date_format($datehalf,'"j/m/Y"');
+    $datethreequarterstr = date_format($datethreequarter,'"j/m/Y"');
 
     
     //Fonctions de formattage des dates pour JS
@@ -1027,13 +1085,13 @@ function get_invests_graph(){
     jQuery(document).ready( function($) {
             var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
             var dataLine = {
-                labels : [<?php echo date_abs($datedebut); ?>,
-                    <?php echo $datequartstr; ?>,
-                    <?php echo $datemilieustr; ?>,
-                    <?php echo $datetroisquartstr; ?>,
-                    <?php echo date_abs($datefin); ?>],
-                xBegin : new Date(<?php echo date_param($datedebut); ?>),
-                xEnd : new Date(<?php echo date_param($datefin); ?>),
+                labels : [<?php echo date_abs($date_collecte_start); ?>,
+                    <?php echo $datequarterstr; ?>,
+                    <?php echo $datehalfstr; ?>,
+                    <?php echo $datethreequarterstr; ?>,
+                    <?php echo date_abs($date_collecte_end); ?>],
+                xBegin : new Date(<?php echo date_param($date_collecte_start); ?>),
+                xEnd : new Date(<?php echo date_param($date_collecte_end); ?>),
                 datasets : [
                     {
                         fillColor : "rgba(204,204,204,0.25)",
@@ -1041,7 +1099,7 @@ function get_invests_graph(){
                         pointColor : "rgba(0,0,0,0)",
                         pointStrokeColor : "rgba(0,0,0,0)",
                         data : [0,<?php echo $campaign->minimum_goal(false);?>],
-                        xPos : [new Date(<?php echo date_param($datedebut); ?>),new Date(<?php echo date_param($datefin); ?>)],
+                        xPos : [new Date(<?php echo date_param($date_collecte_start); ?>),new Date(<?php echo date_param($date_collecte_end); ?>)],
                         title : "But progression"
                     },{
                         fillColor : "rgba(0,0,0,0)",
@@ -1049,7 +1107,7 @@ function get_invests_graph(){
                         pointColor : "rgba(0,0,0,0)",
                         pointStrokeColor : "rgba(0,0,0,0)",
                         data : [<?php echo $campaign->minimum_goal(false);?>,<?php echo $campaign->minimum_goal(false);?>],
-                        xPos : [new Date(<?php echo date_param($datedebut); ?>),new Date(<?php echo date_param($datefin); ?>)],
+                        xPos : [new Date(<?php echo date_param($date_collecte_start); ?>),new Date(<?php echo date_param($date_collecte_end); ?>)],
                         title : "But"
                     }
                     <?php 
@@ -1079,7 +1137,7 @@ function get_invests_graph(){
                         xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
                         title : "investissements"
                     }<?php } 
-                    if (new DateTime(null)< new DateTime($datefin)){?>
+                    if (new DateTime(null)< new DateTime($date_collecte_end)){?>
                     ,{
                         fillColor : "rgba(0,0,0,0)",
                         strokeColor : "rgba(0,0,0,0)",
