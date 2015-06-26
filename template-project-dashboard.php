@@ -297,12 +297,14 @@ $campaign_id = $_GET['campaign_id'];
                                             <strong><?php echo $nb_jcrois?></strong> y croi<?php if($nb_jcrois>1){echo 'en';}?>t</div>
                                         <a href="#votecontact" class="wdg-button-lightbox-open" data-lightbox="votecontact">
                                         <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png"/><br/>
-                                            <strong><?php echo $nb_votes?></strong> <?php if($nb_votes>1){echo 'ont';} else {echo 'a';}?> vot&eacute;</div>
+                                            <strong><?php echo $nb_votes?></strong> <?php if($nb_votes>1){echo 'ont';} else {echo 'a';}?> vot&eacute;
+                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus"/></div>
                                             </a>
                                                 <?php echo do_shortcode('[yproject_votecontact_lightbox]'); ?>
                                         <a href="#listinvestors" class="wdg-button-lightbox-open" data-lightbox="listinvestors">
                                         <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png"/><br/>
-                                            <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> investi</div>
+                                            <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> investi
+                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus"/></div>
                                             </a>
                                         <!--div class="list-button">
                                             <div class="button">&#9993 Envoyer un message</div>
@@ -340,7 +342,8 @@ $campaign_id = $_GET['campaign_id'];
                                     <div class="head">&Eacute;quipe</div>
                                     <div class="body" style="text-align:center">
                                         <h2><?php _e('Administrateur du projet', 'yproject'); ?></h2>
-                                        <?php echo $author_data->first_name . ' ' . $author_data->last_name ?>
+                                        <?php echo $author_data->first_name . ' ' . $author_data->last_name.'<br/>'.
+                                                bp_core_get_userlink($author_data->ID)?>
                                         
                                         <h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
                                         <?php 

@@ -372,6 +372,9 @@ YPUIFunctions = (function($) {
                                 $($selector).attr('hidden','');
                             }
                         });
+                    }).fail(function(){
+                        $('#ajax-investors-load').after("<em>Le chargement du tableau a échoué</em>");
+                        $('#ajax-loader-img').hide();//On cache la roue de chargement.
                     });
                 },
                 
@@ -386,6 +389,10 @@ YPUIFunctions = (function($) {
                             }
                     }).done(function(result){
                         $('#ajax-invests-graph-load').after(result);
+                        $('#ajax-graph-loader-img').hide();//On cache la roue de chargement.
+                        $('#canvas-line-block').slideDown();
+                    }).fail(function(){
+                        $('#ajax-invests-graph-load').after("<em>Le chargement du graphe a échoué</em>");
                         $('#ajax-graph-loader-img').hide();//On cache la roue de chargement.
                         $('#canvas-line-block').slideDown();
                     });
@@ -409,6 +416,9 @@ YPUIFunctions = (function($) {
 						$("#email-selector-list span."+$(this).data("selection")).show();
 					});
 				});
+                        $('#ajax-email-loader-img').hide();//On cache la roue de chargement.
+                    }).fail(function(){
+                        $('#ajax-email-selector-load').after("<em>Le chargement de la liste des emails a échoué</em>");
                         $('#ajax-email-loader-img').hide();//On cache la roue de chargement.
                     });
                 },
@@ -444,7 +454,7 @@ YPUIFunctions = (function($) {
                         if ($("#ajax-email-selector-load").length > 0) {
                             YPUIFunctions.getEmailSelector(JSON.stringify(inv_data),campaign_id); 
                         }
-                    });
+                    }).fail(function(){});
                 },               
                 
 		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué

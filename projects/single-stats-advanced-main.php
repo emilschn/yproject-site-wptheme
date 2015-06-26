@@ -49,12 +49,14 @@ if (function_exists('bbp_get_forum_topic_count')) {
 }
 
 //Stats facebook 
+/*
 $fb_share_count = 0;
 $fb_like_count = 0;
 $ch = curl_init();
 
 $url_fb_stats = 'https://graph.facebook.com/fql?q=SELECT%20url,%20normalized_url,%20share_count,%20like_count,%20comment_count,%20total_count,commentsbox_count,%20comments_fbid,%20click_count%20FROM%20link_stat%20WHERE%20url=%27'
         .get_permalink($campaign_id).'%27';
+ 
 
 curl_setopt($ch, CURLOPT_URL, $url_fb_stats);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -74,7 +76,7 @@ if(!curl_errno($ch)){
         }
 }
 curl_close($ch);
-
+*/
 ?>
 
 <h2>Audience et interactions</h2>
@@ -91,14 +93,14 @@ Votre projet a &eacute;t&eacute; vu<br />
 <strong><?php echo $nb_users; ?></strong> personnes ont particip&eacute;.<br />
 <a href="<?php echo $forum_last_reply_url; ?>">Derni&egrave;re r&eacute;ponse</a> par <?php echo $forum_last_user_name; ?>. <?php echo $forum_last_activity; ?>.
 <br /><br />
-<?php endif; ?>
+<?php endif; /*?>
 
 <h2>R&eacute;seaux sociaux</h2>
 <h3>Facebook</h3>
 La page projet a été partagée <strong><?php echo $fb_share_count?></strong> fois
 et a receuilli <strong><?php echo $fb_like_count ?> "J'aime"</strong> <br />
 
-<?php if (current_user_can('manage_options')) { ?>
+<?php */ if (current_user_can('manage_options')) { ?>
 <h2>[ADMIN] E-mails des utilisateurs qui croient ou qui ont vot&eacute;</h2>
 
 <div id="ajax-email-selector-load" class="ajax-investments-load" style="text-align: center;" data-value="<?php echo $campaign_id ?>">
