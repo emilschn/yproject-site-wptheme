@@ -815,7 +815,7 @@ WDGProjectPageFunctions=(function($) {
 					//il faut la masquer puis afficher les éléments qui suivent
 					projectMore.hide(400, function(){
 						$('html, body').animate({scrollTop: clickedElement.offset().top - $("#navigation").height()}, "slow"); 
-						clickedElement.find('.zone-content > p, ul, table, blockquote').slideDown(400);
+						clickedElement.find('.zone-content > p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
 						WDGProjectPageFunctions.refreshEditable();
 					});
 					//on masque aussi toutes les autres parties
