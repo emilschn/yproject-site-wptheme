@@ -1329,7 +1329,7 @@ function yproject_shortcode_votecontact_lightbox($atts, $content = '') {
             locate_template('common/votecontact-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="votecontact"]' .$content . '[/yproject_lightbox]');
+	echo do_shortcode('[yproject_widelightbox id="votecontact"]' .$content . '[/yproject_widelightbox]');
 }
 add_shortcode('yproject_votecontact_lightbox', 'yproject_shortcode_votecontact_lightbox');
 
