@@ -2058,6 +2058,7 @@ div#home_bottom h1 {
     height: 328px;
     min-height: 325px;
     text-align: center;
+    background-size: 610px auto;
 }
 .projects-title{
     margin-top: 13px;

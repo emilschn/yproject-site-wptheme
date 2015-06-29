@@ -192,17 +192,20 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					<input type="file" name="image_header" /><br />
 					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 1366px de largeur * 370px de hauteur)</span><br />
 					<input type="checkbox" name="image_header_blur" <?php if ($campaign->is_header_blur()) { echo 'checked="checked"'; } ?> /> Appliquer un flou artistique<br />
-					<?php if ($image_src_header != '') { ?><img src="<?php echo $image_src_header; ?>" /><br /><?php } ?>
+					<?php if ($image_src_header != '') { ?><img style="width: 100%;" src="<?php echo $image_src_header; ?>" /><br /><?php } ?>
 					
 					<?php $image_src_home = $campaign->get_home_picture_src(false); ?>
 					<label for="image_home">Image d&apos;aper&ccedil;u :</label>
 					<input type="file" name="image_home" /><br />
 					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 610px de largeur * 330px de hauteur)</span><br />
-					<?php if ($image_src_home != '') { ?><img src="<?php echo $image_src_home; ?>" /><br /><?php } ?>
+					<?php if ($image_src_home != '') { ?><img style="width: 100%;" src="<?php echo $image_src_home; ?>" /><br /><?php } ?>
 					
 					<label for="video">Vid&eacute;o de pr&eacute;sentation :</label>
 					<input type="text" name="video" placeholder="URL de la vidéo" value="<?php echo $campaign->video(); ?>" /><br />
-						
+                                        <div class="video-zone">
+                                                <?php echo wp_oembed_get($campaign->video(), array('width' => 580, 'height' => 325)); ?>
+                                        </div>
+                                        
 					<input type="hidden" name="action" value="edit-project-parameters" />
 						
 					<input type="submit" value="Enregistrer" />
