@@ -1113,14 +1113,6 @@ function get_invests_graph(){
                     <?php 
                     if (count($datesinvest)!=0){?>
                     ,{
-                        fillColor : "rgba(0,0,0,0)",
-                        strokeColor : "rgba(0,0,0,0)",
-                        pointColor : "rgba(0,0,0,0)",
-                        pointStrokeColor : "rgba(0,0,0,0)",
-                        data : [<?php foreach ($allamount as $date => $amount){echo $amount.',';}?> ],
-                        xPos : [<?php foreach ($allamount as $date => $amount){$lastdate = $date; echo 'new Date('.date_param($date).'),';}?>],
-                        title : "inv"
-                    },{
                         fillColor : "rgba(255,73,76,0.25)",
                         strokeColor : "rgba(255,73,76,0.5)",
                         pointColor : "rgba(0,0,0,0)",
@@ -1128,6 +1120,14 @@ function get_invests_graph(){
                         data : [<?php echo $campaign->current_amount(false);?>,<?php echo $campaign->current_amount(false);?>],
                         xPos : [new Date(<?php echo date_param($lastdate); ?>),new Date(<?php echo date_format(min([new DateTime($date_collecte_end),new DateTime(null)]),'"D M d Y H:i:s O"'); ?>)],
                         title : "linetoday"
+                    },{
+                        fillColor : "rgba(0,0,0,0)",
+                        strokeColor : "rgba(0,0,0,0)",
+                        pointColor : "rgba(0,0,0,0)",
+                        pointStrokeColor : "rgba(0,0,0,0)",
+                        data : [<?php foreach ($allamount as $date => $amount){echo $amount.',';}?> ],
+                        xPos : [<?php foreach ($allamount as $date => $amount){$lastdate = $date; echo 'new Date('.date_param($date).'),';}?>],
+                        title : "inv"
                     },{
                         fillColor : "rgba(255,73,76,0.5)",
                         strokeColor : "rgba(255,73,76,1)",
