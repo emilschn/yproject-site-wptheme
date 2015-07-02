@@ -50,7 +50,7 @@ if ($campaign->end_vote_remaining() > 0) {
 					
 					
 					<em>Ces impacts sont-ils suffisants pour que ce projet soit en financement sur WEDOGOOD.co ?</em><br />
-					<input type="radio" id="btn-validate_project-true" name="validate_project" value="1" <?php if ($validate_project == 1) echo 'checked="checked"'; ?>>Oui<br />
+					<label><input type="radio" id="btn-validate_project-true" name="validate_project" value="1" <?php if ($validate_project == 1) echo 'checked="checked"'; ?>>Oui</label><br />
 					<p id="validate_project-true" <?php if ($validate_project != 1) echo 'style="display: none;"'; ?>>
 					    Je serais pr&ecirc;t &agrave; investir :
 					    <input type="text" name="invest_sum" placeholder="0" size="10" value="<?php if ($invest_sum !== false) echo $invest_sum; ?>" />&euro;<br />
@@ -67,7 +67,7 @@ if ($campaign->end_vote_remaining() > 0) {
 					    </select>
 					    <?php endif; ?>
 					</p>
-					<input type="radio" id="btn-validate_project-false" name="validate_project" value="0" <?php if ($validate_project == 0) echo 'checked="checked"'; ?>>Non<br />
+					<label><input type="radio" id="btn-validate_project-false" name="validate_project" value="0" <?php if ($validate_project == 0) echo 'checked="checked"'; ?>>Non</label><br />
 					<p id="validate_project-false" <?php if ($validate_project != 0) echo 'style="display: none;"'; ?>>
 					    <em>Si le projet recueille une majorit&eacute; de non, il ne pourra pas &ecirc;tre financ&eacute; sur le site et ne pourra se repr&eacute;senter au vote avant 3 mois.</em>
 					</p><br />

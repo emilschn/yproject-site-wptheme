@@ -251,6 +251,14 @@ else {
 				</a>
 				<?php endif; ?>
 			</div>
+			
+			<div id="invest-button" class="only_on_mobile responsive-fixed">
+				<?php if ($has_voted): ?>
+				<span class="description-discover" style="background-color:#333;">Merci pour votre vote</span>
+				<?php else : ?>
+				<a href="javascript:WDGProjectPageFunctions.print_vote_form();" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />Voter sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
+				<?php endif; ?>
+			</div>
 
 			<div id="white-background" class="mobile_hidden" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>></div>
 

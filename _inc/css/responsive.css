@@ -299,12 +299,8 @@
 		height: 75px !important;
 		margin-right: 0px;
 	}
-	.mobile-share .jy-crois .stats_btn #jy-crois-txt {
-		top: 35px;
-	}
-	.mobile-share .jy-crois .stats_btn p {
-		top: 55px;
-	}
+	.mobile-share .jy-crois .stats_btn #jy-crois-txt { top: 35px; }
+	.mobile-share .jy-crois .stats_btn p { top: 55px; }
 	.reward-zone {
 		background-color: #EEECED;
 		padding: 20px;
@@ -317,6 +313,17 @@
 	.reward-zone #invest-button a {
 		font-size: 15px;
 		font-weight: bold;
+	}
+	#invest-button.responsive-fixed.fixed {
+		position: fixed;
+		top: -22px;
+		width: 100%;
+		z-index: 20;
+	}
+	#invest-button .description-discover { margin-top: 22px !important; }
+	#vote-form.collapsed {
+		z-index: 10;
+		top: 325px !important;
 	}
 	ul.secondary-menu {
 		list-style: none;
