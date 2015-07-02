@@ -1840,6 +1840,14 @@ div#home_bottom h1 {
 .projects-desc-content p, .projects-desc-content h4 {
     padding: 0px 25px 10px;
 }
+
+.projects-desc-content h1,
+.projects-desc-content h3,
+.projects-desc-content h5,
+.projects-desc-content h6{
+    padding-left: 25px;
+}
+
 .projects-desc-content p img {
     max-width: 100%;
     height: auto;
@@ -2050,6 +2058,7 @@ div#home_bottom h1 {
     height: 328px;
     min-height: 325px;
     text-align: center;
+    background-size: 610px auto;
 }
 .projects-title{
     margin-top: 13px;
