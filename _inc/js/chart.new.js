@@ -747,7 +747,7 @@ function doMouseAction(config, ctx, event, data, action, funct) {
 		annotateDIV.style.fontFamily = (config.annotateClassName) ? '' : config.annotateFontFamily;
 		annotateDIV.style.fontSize = (config.annotateClassName) ? '' : config.annotateFontSize + "pt";
 		annotateDIV.style.fontStyle = (config.annotateClassName) ? '' : config.annotateFontStyle;
-		annotateDIV.style.zIndex = 999;
+		annotateDIV.style.zIndex = 9999;
 		ctx.save();
 		ctx.font= annotateDIV.style.fontStyle+" "+ annotateDIV.style.fontSize+" "+annotateDIV.style.fontFamily;
 		var rect = ctx.canvas.getBoundingClientRect();

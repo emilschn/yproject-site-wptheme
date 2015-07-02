@@ -1063,9 +1063,9 @@ function get_invests_graph(){
     //Etiquettes de dates intermédiaires
     $number_campaign_days = date_diff(date_create($date_collecte_start), date_create($date_collecte_end), true);
 
-    $datequarter = date_add(date_create($date_collecte_start), new DateInterval('P'.($number_campaign_days->days/4).'D'));
-    $datehalf = date_add(date_create($date_collecte_start), new DateInterval('P'.($number_campaign_days->days/2).'D'));
-    $datethreequarter = date_add(date_create($date_collecte_start), new DateInterval('P'.(($number_campaign_days->days/4)*3).'D'));
+    $datequarter = date_add(date_create($date_collecte_start), new DateInterval('P'.round($number_campaign_days->days/4).'D'));
+    $datehalf = date_add(date_create($date_collecte_start), new DateInterval('P'.round($number_campaign_days->days/2).'D'));
+    $datethreequarter = date_add(date_create($date_collecte_start), new DateInterval('P'.round(($number_campaign_days->days/4)*3).'D'));
     
     $datequarterstr = date_format($datequarter,'"j/m/Y"');
     $datehalfstr = date_format($datehalf,'"j/m/Y"');
@@ -1126,7 +1126,7 @@ function get_invests_graph(){
                         pointColor : "rgba(0,0,0,0)",
                         pointStrokeColor : "rgba(0,0,0,0)",
                         data : [<?php echo $campaign->current_amount(false);?>,<?php echo $campaign->current_amount(false);?>],
-                        xPos : [new Date(<?php echo date_param($lastdate); ?>),new Date(<?php echo date_param(null); ?>)],
+                        xPos : [new Date(<?php echo date_param($lastdate); ?>),new Date(<?php echo date_format(min([new DateTime($date_collecte_end),new DateTime(null)]),'"D M d Y H:i:s O"'); ?>)],
                         title : "linetoday"
                     },{
                         fillColor : "rgba(255,73,76,0.5)",
@@ -1329,7 +1329,7 @@ function yproject_shortcode_votecontact_lightbox($atts, $content = '') {
             locate_template('common/votecontact-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="votecontact"]' .$content . '[/yproject_lightbox]');
+	echo do_shortcode('[yproject_widelightbox id="votecontact"]' .$content . '[/yproject_widelightbox]');
 }
 add_shortcode('yproject_votecontact_lightbox', 'yproject_shortcode_votecontact_lightbox');
 

@@ -284,8 +284,14 @@ else {
 		<div class="center">
 			<div id="head-content">
 				<div id="title">
-					<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/capital.png" alt="Picto Capital" /><br /><?php endif; ?>
-					<p><?php $title = get_the_title(); if (strpos($title, 'span') === FALSE) { $title = '<span>' . $title . '</span>'; } echo $title; ?></p>
+                                    <a href="<?php echo get_permalink(get_page_by_path('descriptif')->ID)?>" target="_blank">
+                                    <?php 
+                                        if ($campaign->funding_type() == 'fundingproject'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/macarons/macaron-R.png" alt="Picto Royalties" /><br /><?php endif;
+					if ($campaign->funding_type() == 'fundingdevelopment'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/macarons/macaron-K.png" alt="Picto Capital" /><br /><?php endif;
+					if ($campaign->funding_type() == 'fundingdonation'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/macarons/macaron-D.png" alt="Picto Donc" /><br /><?php endif; 
+                                    ?>
+                                    </a>
+                                    <p><?php $title = get_the_title(); if (strpos($title, 'span') === FALSE) { $title = '<span>' . $title . '</span>'; } echo $title; ?></p>
 				</div>
 				<p id="subtitle"><?php echo $campaign->subtitle(); ?></p>
 				<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="fond projet" class="bg-project mobile_hidden" />
