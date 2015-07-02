@@ -92,6 +92,7 @@
 		width: 420px !important;
 		margin-left: 5px! important;
 	}
+	#projects-left-desc #projects-summary { width: 100% !important; }
 	#projects-left-desc .video-zone { width: 410px !important; }
 	.projects-desc-content { width: 635px !important; }
 }

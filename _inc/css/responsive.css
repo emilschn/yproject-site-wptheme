@@ -324,6 +324,7 @@
 	#vote-form.collapsed {
 		z-index: 10;
 		top: 325px !important;
+		width: 100%;
 	}
 	ul.secondary-menu {
 		list-style: none;
