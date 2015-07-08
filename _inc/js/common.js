@@ -33,6 +33,12 @@ YPUIFunctions = (function($) {
 					$(".page_item_logo").css("paddingTop", 0);
 					$(".page_item_inverted").css("paddingBottom", 7);
 				}
+				
+				if ($(document).scrollTop() > 250) {
+					$(".responsive-fixed").addClass("fixed");
+				} else {
+					$(".responsive-fixed").removeClass("fixed");
+				}
 			});
 			
 			$(".expandator").css("cursor", "pointer");
@@ -763,12 +769,23 @@ WDGProjectPageFunctions=(function($) {
 		},
 
 		print_vote_form:function(){
-		    $('html, body').animate({scrollTop: $("#invest-button").offset().top - $("#navigation").height()}, "fast"); 
-		    $("#vote-form").animate({ 
-	        	top: "370px"
-		    }, 500 );
-		    $(".description-discover").css('background-color', '#7B7B7B');
-		    $("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
+		    if ($("#vote-form").hasClass("collapsed")) {
+			$("#vote-form").removeClass("collapsed");
+			$(".description-discover").css('background-color', '#FF494C');
+			
+		    } else {
+			if ($(window).width() > 480) {
+			    $('html, body').animate({scrollTop: $("#invest-button").offset().top - $("#navigation").height()}, "fast"); 
+			} else {
+			    $('html, body').animate({scrollTop: $("#projects-stats-content").offset().top}, "fast"); 
+			}
+			$("#vote-form").animate({ 
+			    top: "370px"
+			}, 500 );
+			$(".description-discover").css('background-color', '#7B7B7B');
+			$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
+			$("#vote-form").addClass("collapsed");
+		    }
 		},
 		
 		
