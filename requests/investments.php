@@ -8,6 +8,7 @@ function wdg_get_project_investments($camp_id, $include_pending = FALSE) {
 		'campaign' => $campaign,
 		'payments_data' => $payments_data,
 		'count_validate_investments' => 0,
+                'count_not_validate_investments' => 0,
 		'count_validate_investors' => 0,
 		'count_age' => 0,
 		'count_average_age' => 0,
@@ -26,10 +27,10 @@ function wdg_get_project_investments($camp_id, $include_pending = FALSE) {
 		'investors_string' => ''
 	);
 	foreach ( $payments_data as $item ) {
-		if (($item['status'] == 'publish' || ($include_pending && $item['status'] == 'pending')) && (isset($item['mangopay_contribution']->IsSucceeded) && $item['mangopay_contribution']->IsSucceeded) /*&& $item['signsquid_status'] == 'Agreed'*/) {
+                //Prend en compte ou pas dans les stats les paiements non validés
+		if ($item['status'] == 'publish' || ($include_pending && $item['status'] == 'pending')) {
 			
                     $invest_user = get_user_by('id', $item['user']);
-			$buffer['count_validate_investments']++;
 			if (!isset($buffer['investors_list'][$item['user']])) {
 				$buffer['count_validate_investors']++;
 				$buffer['investors_list'][$item['user']] = $item['user'];
@@ -44,6 +45,11 @@ function wdg_get_project_investments($camp_id, $include_pending = FALSE) {
 			$buffer['count_invest'] += $item['amount'];
 			$buffer['amounts_array'][] = $item['amount'];
 		}
+                if ($item['status'] == 'publish') {
+                    $buffer['count_validate_investments']++;
+                } else if ($item['status'] == 'pending') {
+                    $buffer['count_not_validate_investments']++;
+                }
 	}
 	
 	sort($buffer['amounts_array']);

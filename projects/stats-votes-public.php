@@ -36,7 +36,7 @@
 <h3>Remarques</h3>
 Les internautes aimeraient avoir plus d’informations sur :<br />
 <center><canvas id="canvas-horizontal" width="400" height="200"></canvas></center><br />
-Autres informations : <strong><?php echo $vote_results['string_more_info_other']; ?></strong>
+Autres informations : <br /><strong><?php echo $vote_results['string_more_info_other']; ?></strong>
 
 
 <script type="text/javascript">
