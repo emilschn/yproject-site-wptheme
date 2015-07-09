@@ -60,8 +60,8 @@ function yproject_enqueue_script(){
 		wp_enqueue_script('jquery');
 	}
 	
-	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.06.18');
-	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.06.18'); }
+	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.07.02');
+	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.07.02'); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
@@ -1113,21 +1113,21 @@ function get_invests_graph(){
                     <?php 
                     if (count($datesinvest)!=0){?>
                     ,{
-                        fillColor : "rgba(0,0,0,0)",
-                        strokeColor : "rgba(0,0,0,0)",
-                        pointColor : "rgba(0,0,0,0)",
-                        pointStrokeColor : "rgba(0,0,0,0)",
-                        data : [<?php foreach ($allamount as $date => $amount){echo $amount.',';}?> ],
-                        xPos : [<?php foreach ($allamount as $date => $amount){$lastdate = $date; echo 'new Date('.date_param($date).'),';}?>],
-                        title : "inv"
-                    },{
                         fillColor : "rgba(255,73,76,0.25)",
                         strokeColor : "rgba(255,73,76,0.5)",
                         pointColor : "rgba(0,0,0,0)",
                         pointStrokeColor : "rgba(0,0,0,0)",
                         data : [<?php echo $campaign->current_amount(false);?>,<?php echo $campaign->current_amount(false);?>],
-                        xPos : [new Date(<?php echo date_param($lastdate); ?>),new Date(<?php echo date_format(min([new DateTime($date_collecte_end),new DateTime(null)]),'"D M d Y H:i:s O"'); ?>)],
+                        xPos : [new Date(<?php foreach ($allamount as $date => $amount){$lastdate = $date;} echo date_param($lastdate); ?>),new Date(<?php echo date_format(min([new DateTime($date_collecte_end),new DateTime(null)]),'"D M d Y H:i:s O"'); ?>)],
                         title : "linetoday"
+                    },{
+                        fillColor : "rgba(0,0,0,0)",
+                        strokeColor : "rgba(0,0,0,0)",
+                        pointColor : "rgba(0,0,0,0)",
+                        pointStrokeColor : "rgba(0,0,0,0)",
+                        data : [<?php foreach ($allamount as $date => $amount){echo $amount.',';}?> ],
+                        xPos : [<?php foreach ($allamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
+                        title : "inv"
                     },{
                         fillColor : "rgba(255,73,76,0.5)",
                         strokeColor : "rgba(255,73,76,1)",

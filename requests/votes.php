@@ -89,7 +89,7 @@ function wdg_get_project_vote_results($camp_id) {
 		$buffer['count_more_info_other'] = $wpdb->get_var( "SELECT count(user_id) FROM ".$table_name." WHERE post_id = ".$campaign_id." AND more_info_other <> ''" );
 		$buffer['more_info_other'] = $wpdb->get_results( "SELECT more_info_other FROM ".$table_name." WHERE post_id = ".$campaign_id." AND more_info_other <> ''" );
 		foreach ($buffer['more_info_other'] as $more_info_other_item) { 
-			if ($buffer['string_more_info_other'] != '') $buffer['string_more_info_other'] .= ', ';
+			if ($buffer['string_more_info_other'] != '') $buffer['string_more_info_other'] .= ', <br/>';
 			$buffer['string_more_info_other'] .= html_entity_decode($more_info_other_item->more_info_other, ENT_QUOTES | ENT_HTML401);
 		}
 
