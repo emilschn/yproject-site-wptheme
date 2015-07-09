@@ -3071,6 +3071,27 @@ table.mceLayout {
     font-size: 14px;
 }
 
+#reward-selector {
+    list-style: outside none none;
+    padding-left: 0px;
+}
+
+#reward-selector li {
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #EEE;
+}
+
+#reward-selector .selected {
+    background-color: #FF494C;
+    color: white;
+    font-weight: bold;
+}
+
+#reward-selector .unavailable-reward {
+    opacity: 0.5;
+}
+
 #invest_form {
     font-size: 13px;
     width: 37%;

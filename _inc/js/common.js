@@ -79,6 +79,13 @@ YPUIFunctions = (function($) {
 			    $("#input_invest_amount_part").change(function() {
 				YPUIFunctions.checkInvestInput();
 			    });
+                            
+                            if($("#reward-selector").length>0){
+                                $("#reward-selector input").click(function() {
+                                    YPUIFunctions.changeInvestInput();
+                                    YPUIFunctions.checkInvestInput();
+                                });
+                            }
 
 			    $("#link_validate_invest_amount").click(function() {
 				$("#validate_invest_amount_feedback").show();
@@ -523,7 +530,19 @@ YPUIFunctions = (function($) {
 
 			setTimeout(function() {YPUIFunctions.onSlideHomeActivity(); }, YPUIFunctions.homeslideInterval);
 		},
-
+                changeInvestInput: function(){
+                    //Change apparence élément sélectionné
+                    $("#reward-selector li").removeClass("selected");
+                    $("#reward-selector input:checked").parent().addClass("selected")
+                    
+                    //Si le montant est insuffisant pour la contrepartie, l'augmenter
+                    var rewardSelectedAmount = parseInt($("#reward-selector input:checked~.reward-amount").text());
+                    
+                    if (parseInt($("#input_invest_amount").text()) < rewardSelectedAmount){
+                        $("#input_invest_amount_part").val(rewardSelectedAmount);
+                    }
+                },
+                
 		checkInvestInput: function() {
 			$(".invest_error").hide();
 			$(".invest_success").hide();
@@ -552,6 +571,22 @@ YPUIFunctions = (function($) {
 				$("#invest_error_interval").show(); 		
 				bValidInput = false; 		
 			    }
+                            
+                            //Vérification Contreparties
+                            if($("#reward-selector").length>0){
+                                var rewardSelectedAmount = parseInt($("#reward-selector input:checked~.reward-amount").text());
+                                var rewardSelectedRemaining = parseInt($("#reward-selector input:checked~.reward-remaining").text());
+                                
+                                if(rewardSelectedRemaining <= 0) {
+                                    $("#invest_error_reward_remaining").show(); 		
+                                    bValidInput = false; 
+                                }
+                                
+                                if (parseInt($("#input_invest_amount").text()) < rewardSelectedAmount){
+                                    $("#invest_error_reward_insufficient").show(); 		
+                                    bValidInput = false; 
+                                }
+                            }
 			}
 			if (bValidInput) {
 			    $("#invest_success_amount").text( parseInt($("#input_invest_amount_total").val()) + parseInt($("#input_invest_amount").text()));
