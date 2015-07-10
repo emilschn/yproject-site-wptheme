@@ -146,6 +146,7 @@ else {
 		    <div class="content align-left">
 		    <span>Si&egrave;ge social :</span>'.$current_organisation->organisation_address.'<br />
 		    <span></span>'.$current_organisation->organisation_postalcode.' '.$current_organisation->organisation_city.'<br />
+		    <span></span>'.$current_organisation->organisation_country.'<br />
 		    </div>
 		</div>
 	    </div>';

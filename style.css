@@ -1774,7 +1774,8 @@ div#home_bottom h1 {
     width: 240px;
 }
 .home-large-project .project_full_percent {
-    height: 22px;
+    height: 24px;
+    line-height: 24px;
     font-size: 18px;
 }
 .home-large-project .progress_zone .progress_percent {

@@ -60,8 +60,8 @@ function yproject_enqueue_script(){
 		wp_enqueue_script('jquery');
 	}
 	
-	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.06.18');
-	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.06.18'); }
+	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.07.02');
+	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.07.02'); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
@@ -895,7 +895,6 @@ function get_investors_list() {
         global $country_list;
         
 	foreach ( $investments_list['payments_data'] as $item ) {
-//	    if ($item['status'] == 'publish' || $item['status'] == 'refunded') {
 		$i++;
 		$bgcolor = ($i % 2 == 0) ? "#FFF" : "#EEE";
 
@@ -905,18 +904,6 @@ function get_investors_list() {
 		$payment_state = edd_get_payment_status( $post_invest, true );
 		if (strpos($mangopay_id, 'wire_') !== FALSE) {
 			$payment_type = 'Virement';
-			$contribution_id = substr($mangopay_id, 5);
-			$mangopay_contribution = ypcf_mangopay_get_withdrawalcontribution_by_id($contribution_id);
-			$mangopay_is_completed = (isset($mangopay_contribution));
-			$mangopay_is_succeeded = (isset($mangopay_contribution) && $mangopay_contribution->Status == 'ACCEPTED');
-//			if ($mangopay_is_succeeded) $payment_state = 'Validé';
-//			else if ($mangopay_is_completed) $payment_state = 'Echoué';
-		} else {
-			$mangopay_contribution = ypcf_mangopay_get_contribution_by_id($mangopay_id);
-			$mangopay_is_completed = (isset($mangopay_contribution->IsCompleted) && $mangopay_contribution->IsCompleted);
-			$mangopay_is_succeeded = (isset($mangopay_contribution->IsSucceeded) && $mangopay_contribution->IsSucceeded);
-//			if ($mangopay_is_succeeded) $payment_state = 'Validé';
-//			else if ($mangopay_is_completed) $payment_state = 'Echoué';
 		}
 		$investment_state = 'Validé';
 		if ($campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing') {
@@ -946,42 +933,47 @@ function get_investors_list() {
                 
                 //Liste des données à afficher pour la ligne traitée
                 if(YPOrganisation::is_user_organisation($item['user'])){
-                    $orga = new YPOrganisation($item['user']);
-                    $datacolonnes= array(bp_core_get_userlink($item['user']),
-                    $orga->get_name(),
-                    $orga->get_name(),
-                    '',
-                    '',
-                    $orga->get_nationality(),
-                    $orga->get_city(),
-                    $orga->get_address(),
-                    $orga->get_postal_code(),
-                    $orga->get_nationality(),
-                    $user_data->user_email,//A changer
-                    $user_data->user_mobile_phone,//A changer
-                    $item['amount'].'€',
-                    date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
-                    $payment_type,
-                    $payment_state,
-                    $item['signsquid_status_text']);
+			$orga = new YPOrganisation($item['user']);
+			$orga_user = get_user_by('email', $item['email']);
+			$datacolonnes = array(
+				'ORG - ' . $orga->get_name(),
+				$orga_user->last_name,
+				$orga_user->first_name,
+				'',
+				'',
+				$orga->get_nationality(),
+				$orga->get_rcs() .' ('.$orga->get_idnumber().')',
+				$orga->get_address(),
+				$orga->get_postal_code(),
+				ucfirst(strtolower($country_list[$orga->get_nationality()])),
+				$item['email'],
+				$orga_user->user_mobile_phone,
+				$item['amount'].'€',
+				date_i18n( 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
+				$payment_type,
+				$payment_state,
+				$item['signsquid_status_text']
+			);
                 } else {
-                $datacolonnes= array(bp_core_get_userlink($item['user']),
-                    $user_data->last_name,
-                    $user_data->first_name,
-                    $user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,
-                    $user_data->user_birthplace,
-                    ucfirst(strtolower($country_list[$user_data->user_nationality])),
-                    $user_data->user_city,
-                    $user_data->user_address,
-                    $user_data->user_postal_code,
-                    $user_data->user_country,
-                    $user_data->user_email,
-                    $user_data->user_mobile_phone,
-                    $item['amount'].'€',
-                    date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
-                    $payment_type,
-                    $payment_state,
-                    $item['signsquid_status_text']);
+			$datacolonnes = array(
+				bp_core_get_userlink($item['user']),
+				$user_data->last_name,
+				$user_data->first_name,
+				$user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,
+				$user_data->user_birthplace,
+				ucfirst(strtolower($country_list[$user_data->user_nationality])),
+				$user_data->user_city,
+				$user_data->user_address,
+				$user_data->user_postal_code,
+				$user_data->user_country,
+				$user_data->user_email,
+				$user_data->user_mobile_phone,
+				$item['amount'].'€',
+				date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
+				$payment_type,
+				$payment_state,
+				$item['signsquid_status_text']
+			);
                 }
                 
                 if ($is_campaign_over) { $datacolonnes[]=$investment_state; }

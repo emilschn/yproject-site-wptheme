@@ -63,7 +63,7 @@ $campaign_id = $_GET['campaign_id'];
                                  else if ($status=='preview') {
                                      if(ypcf_check_user_is_complete($campaign->post_author())){
                                          //Fixe date fin de vote
-                                         $diffVoteDay = new DateInterval('P60D');
+                                         $diffVoteDay = new DateInterval('P'.ATCF_Campaign::$vote_duration.'D');
                                          $VoteEndDate = (new DateTime())->add($diffVoteDay);
                                          //$VoteEndDate->setTime(23,59);
                                          $campaign->set_end_vote_date($VoteEndDate);     

@@ -71,7 +71,8 @@
 	#head-content { width: 768px !important; }
 	#head-content #title, #head-content #subtitle { margin-left: 5px; }
 	#white-background { width: 260px !important; }
-	#projects-stats-content { width: 260px !important; }
+	#projects-stats-content, #vote-form { width: 260px !important; }
+	#project_vote_zone textarea { width: 100% !important; }
 	#projects-stats-content .project_full_progressbg { 
 		margin-left: 5px !important;
 		width: 250px !important;
@@ -91,6 +92,7 @@
 		width: 420px !important;
 		margin-left: 5px! important;
 	}
+	#projects-left-desc #projects-summary { width: 100% !important; }
 	#projects-left-desc .video-zone { width: 410px !important; }
 	.projects-desc-content { width: 635px !important; }
 }
