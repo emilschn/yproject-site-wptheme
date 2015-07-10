@@ -406,7 +406,7 @@ function print_user_projects(){
 		$str_not_vote = "N&apos;a pas vot&eacute;";
 		$str_not_investment = "N&apos;a pas investi";
 	}
-
+        
 	if(isset($_POST['user_id'])){
 		$payment_status = array("publish", "completed");
 //		if ($is_same_user) $payment_status = array("completed", "pending", "publish", "failed", "refunded");
@@ -416,7 +416,6 @@ function print_user_projects(){
 		$projects_jy_crois = $wpdb->get_results("SELECT campaign_id FROM $table WHERE user_id=$user_id");
 		$table = $wpdb->prefix.'ypcf_project_votes';
 		$projects_votes = $wpdb->get_results("SELECT post_id FROM $table WHERE user_id=$user_id");
-		
 		$check_investment = true;
 		$check_vote = false;
 		$check_believe = false;
@@ -499,7 +498,7 @@ function print_user_projects(){
 				if (isset($project['jy_crois']) && $project['jy_crois'] === 1) $data_jycrois = 1;
 				if (isset($project['has_voted']) && $project['has_voted'] === 1) $data_voted = 1;
 				if (count($project['payments']) > 0) $data_invested = 1;
-				
+                                
 				$post_camp = get_post($project['ID']);
 				$campaign = atcf_get_campaign($post_camp);
 				$percent = min(100, $campaign->percent_minimum_completed(false));
@@ -605,7 +604,9 @@ function print_user_projects(){
 						<div class="user-history-payments">
 							<table class="user-history-payments-list">
 							    
-								<?php foreach ($payments as $payment_id => $payment) : ?>
+								<?php foreach ($payments as $payment_id => $payment) { 
+                                                                    $reward = get_post_meta($payment_id,'_edd_payment_reward',true);
+                                                                    ?>
 							    
 								<tr class="user-payments-list-item">
 									<td class="user-payment-item user-payment-date">
@@ -638,8 +639,14 @@ function print_user_projects(){
 									<?php endif; ?>
 
 								</tr>
-								
-								<?php endforeach; ?>
+                                                                <?php if ($reward != null) { ?>
+                                                                    <tr>
+                                                                        <td colspan="4" class="user-payment-item user-payment-reward">
+                                                                            Contrepartie choisie : Palier de <?php echo $reward['amount'].' € - '.$reward['name']?>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php } 
+                                                                } ?>
 									
 							</table>
 						</div>
@@ -808,6 +815,10 @@ function get_investors_list() {
                             'colinvpaystate',
                             'colinvsign');
         if ($is_campaign_over) { $classcolonnes[]='colinvstate'; }
+        if ($campaign->funding_type()=='fundingdonation') {
+            $classcolonnes[]='colrewardprice';
+            $classcolonnes[]='colrewardtext';
+        }
         
         $titrecolonnes = array('Utilisateur',
                             'Nom',
@@ -827,6 +838,10 @@ function get_investors_list() {
                             'Etat du paiement',
                             'Signature');
         if ($is_campaign_over) { $titrecolonnes[]='Investissement'; }
+        if ($campaign->funding_type()=='fundingdonation') {
+            $titrecolonnes[]='Palier de contrepartie choisi';
+            $titrecolonnes[]='Description de la contrepartie';
+        }
         
         $selectiondefaut = array(true,
                             true,
@@ -846,7 +861,10 @@ function get_investors_list() {
                             false,
                             false);
         if ($is_campaign_over) { $selectiondefaut[]=true; }
-        
+        if ($campaign->funding_type()=='fundingdonation') {
+            $selectiondefaut[]=true;
+            $selectiondefaut[]=false;
+        }
         $colonnes = array_combine($classcolonnes, $titrecolonnes);
         $displaycolonnes = array_combine($classcolonnes,$selectiondefaut);
     ?>
@@ -977,6 +995,12 @@ function get_investors_list() {
                 }
                 
                 if ($is_campaign_over) { $datacolonnes[]=$investment_state; }
+                
+                if ($campaign->funding_type()=='fundingdonation') {
+                    $datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['amount'];
+                    $datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['name'];
+                }
+                
                 $affichedonnees = array_combine($classcolonnes, $datacolonnes);
                 ?>
                 
