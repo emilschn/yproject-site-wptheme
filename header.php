@@ -38,7 +38,7 @@
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=20150702" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=20150710" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php
 			$cache_head = ob_get_contents();
@@ -239,7 +239,7 @@
            
             
                 <?php 
-                if (is_user_logged_in()){
+                /*if (is_user_logged_in()){
                     $userId = get_current_user_id(); 
                     $check = yproject_check_is_warning_meta_init($userId);
                     if($check){ ?>
@@ -258,6 +258,6 @@
                             </div>
                         </div>
                     <?php }
-                }
+                }*/
                 ?>
                 <div id="container"> 

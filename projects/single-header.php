@@ -21,7 +21,7 @@ $vote_status = $campaign->campaign_status();
 
 <section id="projects-banner">
 	<div id="projects-stats" class="center">
-		<div id="projects-stats-content" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>>
+		<div id="projects-stats-content">
 		    
 		    
 <?php
@@ -145,7 +145,7 @@ else {
 						?>
 					</div>
 					<div class="post_bottom_infos_item">
-	-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
 						<span class="mobile_hidden"><?php 
 						    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
 						    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {

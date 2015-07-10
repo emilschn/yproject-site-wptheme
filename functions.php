@@ -60,8 +60,8 @@ function yproject_enqueue_script(){
 		wp_enqueue_script('jquery');
 	}
 	
-	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.07.02');
-	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.07.02'); }
+	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.07.10');
+	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.07.10'); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
@@ -258,8 +258,10 @@ function yproject_check_is_warning_meta_init($user_id){
     }
 }
 //Gestion du formulaire de lightbox d'avertissements
-function yproject_submit_warning_lightbox() {
-    //Si le formulaire a été posté
+function yproject_submit_lightbox() {
+    ypbp_core_screen_signup();
+
+/*    //Si le formulaire a été posté
     if (isset($_POST['submit_warning'])) {
 	global $submit_warning_errors;
 	$user_id = get_current_user_id(); 
@@ -282,9 +284,93 @@ function yproject_submit_warning_lightbox() {
         } else {
             $submit_warning_errors = "Merci de bien vouloir cocher la dernière case.";
         }
-    }
+    }*/
 } 
-add_action('init', 'yproject_submit_warning_lightbox');
+add_action('init', 'yproject_submit_lightbox');
+
+function ypbp_get_current_signup_step() {
+        global $bp;
+
+        return $bp->signup->step;
+}
+
+function ypbp_core_screen_signup() {
+	global $bp;
+
+	// Not a directory
+	bp_update_is_directory( false, 'register' );
+
+	if ( !isset( $bp->signup ) ) {
+		$bp->signup = new stdClass;
+	}
+
+	$bp->signup->step = 'request-details';
+
+	// If the signup page is submitted, validate and save
+	if ( isset( $_POST['signup_submit'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'register_form_posted' ) ) {
+
+		// Check the base account details for problems
+		$account_details = bp_core_validate_user_signup( $_POST['signup_username'], $_POST['signup_email'] );
+
+		// If there are errors with account details, set them for display
+		if ( !empty( $account_details['errors']->errors['user_name'] ) )
+			$bp->signup->errors['signup_username'] = $account_details['errors']->errors['user_name'][0];
+
+		if ( !empty( $account_details['errors']->errors['user_email'] ) )
+			$bp->signup->errors['signup_email'] = $account_details['errors']->errors['user_email'][0];
+           
+		// Check that both password fields are filled in
+		if ( empty( $_POST['signup_password'] ) || empty( $_POST['signup_password_confirm'] ) )
+			$bp->signup->errors['signup_password'] = __( 'Please make sure you enter your password twice', 'buddypress' );
+
+		// Check that the passwords match
+		if ( ( !empty( $_POST['signup_password'] ) && !empty( $_POST['signup_password_confirm'] ) ) && $_POST['signup_password'] != $_POST['signup_password_confirm'] )
+			$bp->signup->errors['signup_password'] = __( 'The passwords you entered do not match.', 'buddypress' );
+		
+		// Check that the cgu is checked
+		if ( empty($_POST['validate-terms-check']) )
+			$bp->signup->errors['validate_terms_check'] = __( 'Il faut accepter les conditions g&eacute;n&eacute;rales d&apos;utilisation.', 'yproject' );
+
+		$bp->signup->username = $_POST['signup_username'];
+		$bp->signup->email = $_POST['signup_email'];
+
+		// Add any errors to the action for the field in the template for display.
+		if ( !empty( $bp->signup->errors ) ) {
+			foreach ( (array) $bp->signup->errors as $fieldname => $error_message ) {
+				// addslashes() and stripslashes() to avoid create_function()
+				// syntax errors when the $error_message contains quotes
+				add_action( 'bp_' . $fieldname . '_errors', create_function( '', 'echo apply_filters(\'bp_members_signup_error_message\', "<div class=\"error\">" . stripslashes( \'' . addslashes( $error_message ) . '\' ) . "</div>" );' ) );
+			}
+		} else {
+			$bp->signup->step = 'save-details';
+
+			// Hash and store the password
+			$usermeta['password'] = wp_hash_password( $_POST['signup_password'] );
+
+			$usermeta = apply_filters( 'bp_signup_usermeta', $usermeta );
+
+			// Finally, sign up the user
+			$wp_user_id = bp_core_signup_user( $_POST['signup_username'], $_POST['signup_password'], $_POST['signup_email'], $usermeta );
+
+			if ( is_wp_error( $wp_user_id ) ) {
+				$bp->signup->step = 'request-details';
+				bp_core_add_message( $wp_user_id->get_error_message(), 'error' );
+			} else {
+				global $edd_options;
+				$bp->signup->step = 'completed-confirmation';
+				update_user_meta($wp_user_id, LibUsers::$key_validated_general_terms_version, $edd_options[LibUsers::$edd_general_terms_version]);
+				wp_set_auth_cookie( $wp_user_id, true, is_ssl() );
+				wp_redirect(wp_unslash( $_SERVER['REQUEST_URI'] ));
+				exit();
+			}
+
+			do_action( 'bp_complete_signup' );
+		}
+
+	}
+
+	do_action( 'bp_core_screen_signup' );
+}
 
 
 //********
@@ -1371,14 +1457,14 @@ function yproject_shortcode_connexion_lightbox($atts, $content = '') {
 add_shortcode('yproject_connexion_lightbox', 'yproject_shortcode_connexion_lightbox');
 
 //Shortcodes lightbox d'inscription 
-function yproject_shortcode_inscription_lightbox($atts, $content = '') {
+function yproject_shortcode_register_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('common/inscription-lightbox.php',true);
+            locate_template('common/register-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="inscription"]' .$content . '[/yproject_lightbox]');
+	echo do_shortcode('[yproject_lightbox id="register"]' .$content . '[/yproject_lightbox]');
 }
-add_shortcode('yproject_inscription_lightbox', 'yproject_shortcode_inscription_lightbox');
+add_shortcode('yproject_register_lightbox', 'yproject_shortcode_register_lightbox');
 
 //Shortcode lightbox Tableau de bord
 // ->TB Stats

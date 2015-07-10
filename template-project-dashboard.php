@@ -25,7 +25,6 @@ $campaign_id = $_GET['campaign_id'];
                         
                         $page_guide = get_page_by_path('guide');
                         $page_particular_terms = get_page_by_path('conditions-particulieres');
-                        $status = $campaign->campaign_status();
 
                         $page_parameters = get_page_by_path('parametres-projet');       // Paramètres
                         $page_add_news = get_page_by_path('ajouter-une-actu');          // Ajouter une actualité
@@ -108,8 +107,8 @@ $campaign_id = $_GET['campaign_id'];
                         $stats_views_today = 0;
                         if (function_exists('stats_get_csv')) {
                                 global $wpdb;
-                                $stats_views = stats_get_csv( 'postviews', array( 'post_id' => $post_camp->ID, 'days' => 365 ) );
-                                $stats_views_today = stats_get_csv( 'postviews', array( 'post_id' => $post_camp->ID, 'days' => 1 ) );
+                                $stats_views = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 365 ) );
+                                $stats_views_today = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 1 ) );
                         }
                         
                         

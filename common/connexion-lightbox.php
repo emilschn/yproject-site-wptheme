@@ -54,12 +54,10 @@
 
         <hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
 
-        <?php $page_connexion_register = get_page_by_path('register'); ?>
-        
         <div id="connexion_facebook_container">
             <div class="post_bottom_buttons_connexion" >
                 <div id="submenu_item_connection_register" class="dark" style="text-align: left; background-color: #3E3E40;">
-                    <a href="<?php echo get_permalink($page_connexion_register->ID); ?>"><img width="25" height="25" src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" alt="triangle blanc"><span style="font-size: 9pt; vertical-align: 8px; color: #FFF; ">Cr&eacute;er un compte</span></a>
+                    <a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><img width="25" height="25" src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" alt="triangle blanc"><span style="font-size: 9pt; vertical-align: 8px; color: #FFF; ">Cr&eacute;er un compte</span></a>
                 </div>
             </div>
         </div>
