@@ -251,6 +251,14 @@ else {
 				</a>
 				<?php endif; ?>
 			</div>
+			
+			<div id="invest-button" class="only_on_mobile responsive-fixed">
+				<?php if ($has_voted): ?>
+				<span class="description-discover" style="background-color:#333;">Merci pour votre vote</span>
+				<?php else : ?>
+				<a href="javascript:WDGProjectPageFunctions.print_vote_form();" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />Voter sur ce projet<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
+				<?php endif; ?>
+			</div>
 
 			<div id="white-background" class="mobile_hidden" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>></div>
 
@@ -284,8 +292,14 @@ else {
 		<div class="center">
 			<div id="head-content">
 				<div id="title">
-					<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/capital.png" alt="Picto Capital" /><br /><?php endif; ?>
-					<p><?php $title = get_the_title(); if (strpos($title, 'span') === FALSE) { $title = '<span>' . $title . '</span>'; } echo $title; ?></p>
+                                    <a href="<?php echo get_permalink(get_page_by_path('descriptif')->ID)?>" target="_blank">
+                                    <?php 
+                                        if ($campaign->funding_type() == 'fundingproject'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/macarons/macaron-R.png" alt="Picto Royalties" /><br /><?php endif;
+					if ($campaign->funding_type() == 'fundingdevelopment'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/macarons/macaron-K.png" alt="Picto Capital" /><br /><?php endif;
+					if ($campaign->funding_type() == 'fundingdonation'): ?><img src="<?php echo $stylesheet_directory_uri;?>/images/macarons/macaron-D.png" alt="Picto Donc" /><br /><?php endif; 
+                                    ?>
+                                    </a>
+                                    <p><?php $title = get_the_title(); if (strpos($title, 'span') === FALSE) { $title = '<span>' . $title . '</span>'; } echo $title; ?></p>
 				</div>
 				<p id="subtitle"><?php echo $campaign->subtitle(); ?></p>
 				<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="fond projet" class="bg-project mobile_hidden" />

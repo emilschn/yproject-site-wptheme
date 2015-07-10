@@ -33,6 +33,12 @@ YPUIFunctions = (function($) {
 					$(".page_item_logo").css("paddingTop", 0);
 					$(".page_item_inverted").css("paddingBottom", 7);
 				}
+				
+				if ($(document).scrollTop() > 250) {
+					$(".responsive-fixed").addClass("fixed");
+				} else {
+					$(".responsive-fixed").removeClass("fixed");
+				}
 			});
 			
 			$(".expandator").css("cursor", "pointer");
@@ -379,6 +385,9 @@ YPUIFunctions = (function($) {
                                 $($selector).attr('hidden','');
                             }
                         });
+                    }).fail(function(){
+                        $('#ajax-investors-load').after("<em>Le chargement du tableau a échoué</em>");
+                        $('#ajax-loader-img').hide();//On cache la roue de chargement.
                     });
                 },
                 
@@ -393,6 +402,10 @@ YPUIFunctions = (function($) {
                             }
                     }).done(function(result){
                         $('#ajax-invests-graph-load').after(result);
+                        $('#ajax-graph-loader-img').hide();//On cache la roue de chargement.
+                        $('#canvas-line-block').slideDown();
+                    }).fail(function(){
+                        $('#ajax-invests-graph-load').after("<em>Le chargement du graphe a échoué</em>");
                         $('#ajax-graph-loader-img').hide();//On cache la roue de chargement.
                         $('#canvas-line-block').slideDown();
                     });
@@ -416,6 +429,9 @@ YPUIFunctions = (function($) {
 						$("#email-selector-list span."+$(this).data("selection")).show();
 					});
 				});
+                        $('#ajax-email-loader-img').hide();//On cache la roue de chargement.
+                    }).fail(function(){
+                        $('#ajax-email-selector-load').after("<em>Le chargement de la liste des emails a échoué</em>");
                         $('#ajax-email-loader-img').hide();//On cache la roue de chargement.
                     });
                 },
@@ -451,7 +467,7 @@ YPUIFunctions = (function($) {
                         if ($("#ajax-email-selector-load").length > 0) {
                             YPUIFunctions.getEmailSelector(JSON.stringify(inv_data),campaign_id); 
                         }
-                    });
+                    }).fail(function(){});
                 },               
                 
 		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué
@@ -788,12 +804,23 @@ WDGProjectPageFunctions=(function($) {
 		},
 
 		print_vote_form:function(){
-		    $('html, body').animate({scrollTop: $("#invest-button").offset().top - $("#navigation").height()}, "fast"); 
-		    $("#vote-form").animate({ 
-	        	top: "370px"
-		    }, 500 );
-		    $(".description-discover").css('background-color', '#7B7B7B');
-		    $("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
+		    if ($("#vote-form").hasClass("collapsed")) {
+			$("#vote-form").removeClass("collapsed");
+			$(".description-discover").css('background-color', '#FF494C');
+			
+		    } else {
+			if ($(window).width() > 480) {
+			    $('html, body').animate({scrollTop: $("#invest-button").offset().top - $("#navigation").height()}, "fast"); 
+			} else {
+			    $('html, body').animate({scrollTop: $("#projects-stats-content").offset().top}, "fast"); 
+			}
+			$("#vote-form").animate({ 
+			    top: "370px"
+			}, 500 );
+			$(".description-discover").css('background-color', '#7B7B7B');
+			$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
+			$("#vote-form").addClass("collapsed");
+		    }
 		},
 		
 		
@@ -840,7 +867,7 @@ WDGProjectPageFunctions=(function($) {
 					//il faut la masquer puis afficher les éléments qui suivent
 					projectMore.hide(400, function(){
 						$('html, body').animate({scrollTop: clickedElement.offset().top - $("#navigation").height()}, "slow"); 
-						clickedElement.find('.zone-content > p, ul, table, blockquote').slideDown(400);
+						clickedElement.find('.zone-content > p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
 						WDGProjectPageFunctions.refreshEditable();
 					});
 					//on masque aussi toutes les autres parties
