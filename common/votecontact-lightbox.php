@@ -4,9 +4,9 @@
     $table_name = $wpdb->prefix . "ypcf_project_votes";
     $campaign_id = $_GET['campaign_id'];
     
-    $list_user_voters = $wpdb->get_results( "SELECT user_id, invest_sum FROM ".$table_name." WHERE post_id = ".$campaign_id." AND validate_project = 1" );
+    $list_user_voters = $wpdb->get_results( "SELECT user_id, invest_sum, date FROM ".$table_name." WHERE post_id = ".$campaign_id." AND validate_project = 1" );
     
-    $colonnes = array('Utilisateur', 'Nom', 'Prénom', 'Ville', 'Mail', 'Montant promis');
+    $colonnes = array('Utilisateur', 'Nom', 'Prénom', 'Ville', 'Mail', 'Montant promis','Date du vote');
 ?>
 <em>Seuls les personnes ayant voté "Oui" sont affich&eacute;es.</em><br/><br/>
 <em>Si vous envoyez un mail group&eacute; aux votants, pensez &agrave; les mettre dans le champ CCI, pour qu&apos;ils n&apos;aient pas acc&egrave;s aux adresses des autres.</em><br /><br />
@@ -39,7 +39,8 @@
                     $user_data->first_name,
                     $user_data->user_city,
                     $user_data->user_email,
-                    $item->invest_sum
+                    $item->invest_sum,
+                    $item->date
                 );
 
                 //Ecriture de la ligne
