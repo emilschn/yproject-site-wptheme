@@ -58,59 +58,6 @@ function queryFinishedProjects($nb,$type) {
 }
 
 class YPProjectLib {
-	public static function edit_team() {
-		$buffer = '';
-		if (isset($_REQUEST['action']) && isset($_GET['campaign_id'])) {
-			switch ($_REQUEST['action']) {
-				case 'yproject-add-member':
-					if (!empty($_POST['new_team_member'])) {
-						$user_by_login = get_user_by('login', $_POST['new_team_member']);
-						$user_by_mail = get_user_by('email', $_POST['new_team_member']);
-						if ($user_by_login === FALSE && $user_by_mail === FALSE) {
-							$buffer = 'Nous n&apos;avons pas trouv&eacute; d&apos;utilisateur correspondant.';
-						} else {
-							//Récupération du bon id wordpress
-							$user_wp_id = '';
-							if ($user_by_login !== FALSE) $user_wp_id = $user_by_login->ID;
-							else if ($user_by_mail !== FALSE) $user_wp_id = $user_by_mail->ID;
-							//Récupération des infos existantes sur l'API
-							$user_api_id = BoppLibHelpers::get_api_user_id($user_wp_id);
-							$project_api_id = BoppLibHelpers::get_api_project_id($_GET['campaign_id']);
-							BoppLibHelpers::check_create_role(BoppLibHelpers::$project_team_member_role['slug'], BoppLibHelpers::$project_team_member_role['title']);
-							//Ajout à l'API
-							BoppLib::link_user_to_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
-							$buffer = TRUE;
-							do_action('wdg_delete_cache', array(
-								'users/' . $user_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
-								'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
-							));
-						}
-					} else {
-						$buffer = 'Merci de renseigner un identifiant ou un email.';
-					}
-					break;
-				    
-				case 'yproject-remove-member':
-					if (!isset($_POST['user_to_remove'])) {
-						$buffer = 'BUMP';
-					} else {
-						//Récupération des infos existantes sur l'API
-						$user_api_id = BoppLibHelpers::get_api_user_id($_POST['user_to_remove']);
-						$project_api_id = BoppLibHelpers::get_api_project_id($_GET['campaign_id']);
-						//Supprimer dans l'API
-						BoppLib::unlink_user_from_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
-						$buffer = TRUE;
-						do_action('wdg_delete_cache', array(
-							'users/' . $user_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
-							'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
-						));
-					}
-					break;
-			}
-		}
-		return $buffer;
-	}
-	
 	/**
 	 * Gère le formulaire d'ajout d'actualité
 	 */
@@ -173,6 +120,12 @@ class YPProjectLib {
 		if ($cat_cat_id != -1 && $cat_act_id != -1) {
 			$cat_ids = array_map( 'intval', array($cat_cat_id, $cat_act_id) );
 			wp_set_object_terms($campaign_id, $cat_ids, 'download_category');
+		}
+                
+                if (isset($_POST['phone'])) {
+			update_post_meta($campaign_id, 'campaign_contact_phone', $_POST['phone']);
+		} else {
+			$buffer = FALSE;
 		}
 		
 		if (isset($_POST['project-location'])) {

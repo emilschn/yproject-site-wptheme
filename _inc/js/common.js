@@ -33,6 +33,12 @@ YPUIFunctions = (function($) {
 					$(".page_item_logo").css("paddingTop", 0);
 					$(".page_item_inverted").css("paddingBottom", 7);
 				}
+				
+				if ($(document).scrollTop() > 250) {
+					$(".responsive-fixed").addClass("fixed");
+				} else {
+					$(".responsive-fixed").removeClass("fixed");
+				}
 			});
 			
 			$(".expandator").css("cursor", "pointer");
@@ -150,6 +156,12 @@ YPUIFunctions = (function($) {
 				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function() {
 					$(".wdg-lightbox").hide();
 				});
+                                $(".wdg-lightbox #wdg-lightbox-welcome-close").click(function() {
+					$(".wdg-lightbox").hide();
+				});
+                                $(".wdg-lightbox .wdg-lightbox-button-close a").click(function() {
+					$(".wdg-lightbox").hide();
+				});
 				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function() {
 					$(".wdg-lightbox").hide();
 				});
@@ -169,42 +181,64 @@ YPUIFunctions = (function($) {
 					}
 				});
 			}
-			
-			if ($("#email-selector").length > 0) {
-				$(".select-options").change(function() {
-					$("#email-selector-list span").hide();
-					$(".select-options:checked").each(function() {
-						$("#email-selector-list span."+$(this).data("selection")).show();
-					});
-				});
+                        
+                        //Si chargement données investisseurs/investissements nécessaire
+                        if ($(".ajax-investments-load").length > 0) { 
+                            campaign_id = $(".ajax-investments-load").attr('data-value');
+                                YPUIFunctions.getInvestments(campaign_id); 
 			}
                         
-                        if ($(".check-users-columns").length > 0) {
-                            //Page investisseurs/investors : Actions à la sélection des colonnes du tableau
-                            $(".check-users-columns").click(function() {
-                                //Case "toutes les colonnes
-                                if(this.value==="all") {
-                                    if (this.checked===true) {
-                                        $('.check-users-columns').prop('checked', true);
-                                        $('#investors-table td').removeAttr('hidden');
-                                    } else {
-                                        $('.check-users-columns').prop('checked', false);
-                                        $('#investors-table td').attr('hidden','');
-                                        $('#cbcoluname').prop('checked', true);
-                                        $('.coluname').removeAttr('hidden');
-                                    }
-                                }
-                                
-                                //Autres cases
-                                $selector = ".";
-                                $selector += this.value;
-                                if (this.checked===true) {
-                                    $($selector).removeAttr('hidden');
+                        //Lightbox de passage à l'étape suivante
+                        if ($("#submit-go-next-step").length > 0) {
+                            $("#submit-go-next-step").attr('disabled','');
+                            $("#submit-go-next-step").attr('style','background-color:#333 !important');
+                            
+                            checkall = function() {
+                                var allcheck = true;
+                                $(".checkbox-next-step").each(function(index){
+                                    allcheck = allcheck && this.checked;
+                                });
+                                return allcheck;
+                            };
+                            
+                            $(".checkbox-next-step").change(function() {
+                                if(checkall()){
+                                    $("#submit-go-next-step").removeAttr('disabled');
+                                    $("#submit-go-next-step").attr('style','background-color:#FF494C');
                                 } else {
-                                    $($selector).attr('hidden','');
+                                    $("#submit-go-next-step").attr('disabled','');
+                                    $("#submit-go-next-step").attr('style','background-color:#333 !important');
+                                };
+                            });
+                        }
+                        //Preview date fin collecte sur LB étape suivante
+                        if($("#innbday").length > 0) {
+                            $("#innbday").change(function() {
+                                $("#previewenddatecollecte").empty();
+                                if(this.value<=60 && this.value>=1){
+                                    var d = new Date();
+                                    var jsupp = this.value;
+                                    d.setDate(d.getDate()+parseInt(jsupp));
+                                    $("#previewenddatecollecte").prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
                                 }
                             });
                         }
+                        
+                        //Gestion equipe depuis Tableau de bord
+                        $(".project-manage-team").click(function(){
+                            campaign_id = $("#block-team").attr('data-campaign');
+                            action = $(this).attr('data-action');
+                            if(action==="yproject-add-member"){
+                               data=($("#new_team_member_string")[0].value);
+                           }
+                           else if (action==="yproject-remove-member"){
+                               data=$(this).attr('data-user');
+                           }
+                           
+                           YPUIFunctions.manageTeam(action, data, campaign_id);
+                           
+                        });
+
                         $("#investir").click(function(){
                            $("#redirect-page-investir").attr("value","true");
                         }); 
@@ -215,7 +249,220 @@ YPUIFunctions = (function($) {
                            $("#redirect-page-investir").attr("value","forum");
                         });
 		},
-		
+                
+                manageTeam: function(action, data, campaign_id){
+                    //Clic pour ajouter un membre
+                    if(action==="yproject-add-member"){
+                       //Test si le champ de texte est vide
+                       if (data===""){
+                           //Champ vide, ne rien faire
+                       } else {
+                           //Blaque le champ de texte d'ajout
+                           $("#new_team_member_string").prop('disabled',true);
+                           $("#new_team_member_string").val('');
+                           tmpPlaceHolder = $("#new_team_member_string").prop('placeholder');
+                           $("#new_team_member_string").prop('placeholder',"Ajout de "+data+"...");
+                           $("#new_team_member_string").next().hide();
+                           
+                           //Lance la requête Ajax
+                           $.ajax({
+                                'type' : "POST",
+                                'url' : ajax_object.ajax_url,
+                                'data': { 
+                                      'action':'add_team_member',
+                                      'id_campaign':campaign_id,
+                                      'new_team_member' : data
+                                    }
+                            }).done(function(result){
+                                //Nettoie le champ de texte d'ajout
+                                $("#new_team_member_string").prop('disabled', false);
+                                $("#new_team_member_string").prop('placeholder',tmpPlaceHolder);
+                                $("#new_team_member_string").next().show();
+                                
+                                if(result==="FALSE"){
+                                    //TODO : Message de ratage (user inexistant)
+                                    console.log("raté");
+                                    $("#new_team_member_string").next().after("<div id=\"fail_add_team_indicator\"><br/><em>L'utilisateur "+data+" n'a pas été trouvé</em><div>");
+                                    $("#fail_add_team_indicator").delay(4000).fadeOut(400);
+                                } else {
+                                    res = JSON.parse(result);
+
+                                    //Teste si l'user existait déjà
+                                    doublon = false;
+                                    $(".project-manage-team").each(function(){
+                                        doublon = doublon || (res.id == $(this).attr('data-user'));
+                                    });
+
+                                    if(!doublon){
+                                        newline ='<li style="display: none;">';
+                                        newline+=res.firstName+" "+res.lastName+" ("+res.userLink+") ";
+                                        newline+='<a class="project-manage-team button" data-action="yproject-remove-member" data-user="'+res.id+'">x</a>';
+                                        newline+="</li>";
+                                        $("#team-list").append(newline);
+                                        $("a[data-user="+res.id+"]").closest("li").slideDown();
+
+                                        //Recharge l'UI pour ajouter listener au nouveau button
+                                        $(".project-manage-team").click(function(){
+                                            campaign_id = $("#block-team").attr('data-campaign');
+                                            action = $(this).attr('data-action');
+                                            if(action==="yproject-add-member"){
+                                               data=($("#new_team_member_string")[0].value);
+                                           }
+                                           else if (action==="yproject-remove-member"){
+                                               data=$(this).attr('data-user');
+                                           }
+                                           YPUIFunctions.manageTeam(action, data, campaign_id);
+                                        });
+                                    }
+                                }
+                            });
+                       }
+                    }
+
+                    //Clic pour supprimer un membre
+                    else if(action==="yproject-remove-member") {
+                        //Affichage en attente de suppression
+                        $("a[data-user="+data+"]").closest("li").css("opacity",0.25);
+                        $("a[data-user="+data+"]").text("..");
+                        $("a[data-user="+data+"]").addClass("wait-delete");
+
+                        $.ajax({
+                            'type' : "POST",
+                            'url' : ajax_object.ajax_url,
+                            'data': { 
+                                  'action':'remove_team_member',
+                                  'id_campaign':campaign_id,
+                                  'user_to_remove' : data
+                                }
+                        }).done(function(result){
+                            $("a[data-user="+data+"]").closest("li").slideUp("slow",function(){ $(this).remove();});
+                        });
+                    }
+                },
+                
+		getInvestors: function(inv_data, campaign_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_investors_list',
+                              'id_campaign':campaign_id,
+                              'data' : inv_data
+                            }
+                    }).done(function(result){
+                        //Affiche resultat requete Ajax une fois reçue
+                        $('#ajax-investors-load').after(result);
+                        $('#ajax-loader-img').hide();//On cache la roue de chargement.
+                        
+                        //Ajoute les actions à la sélection des colonnes du tableau
+                        $(".check-users-columns").click(function() {
+                            //Case "toutes les colonnes
+                            if(this.value==="all") {
+                                if (this.checked===true) {
+                                    $('.check-users-columns').prop('checked', true);
+                                    $('#investors-table td').removeAttr('hidden');
+                                } else {
+                                    $('.check-users-columns').prop('checked', false);
+                                    $('#investors-table td').attr('hidden','');
+                                    $('#cbcoluname').prop('checked', true);
+                                    $('.coluname').removeAttr('hidden');
+                                }
+                            }
+
+                            //Autres cases
+                            $selector = ".";
+                            $selector += this.value;
+                            if (this.checked===true) {
+                                $($selector).removeAttr('hidden');
+                            } else {
+                                $($selector).attr('hidden','');
+                            }
+                        });
+                    }).fail(function(){
+                        $('#ajax-investors-load').after("<em>Le chargement du tableau a échoué</em>");
+                        $('#ajax-loader-img').hide();//On cache la roue de chargement.
+                    });
+                },
+                
+                getInvestsGraph : function(inv_data, campaign_id) {
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_invests_graph',
+                              'id_campaign' : campaign_id,
+                              'data' : inv_data
+                            }
+                    }).done(function(result){
+                        $('#ajax-invests-graph-load').after(result);
+                        $('#ajax-graph-loader-img').hide();//On cache la roue de chargement.
+                        $('#canvas-line-block').slideDown();
+                    }).fail(function(){
+                        $('#ajax-invests-graph-load').after("<em>Le chargement du graphe a échoué</em>");
+                        $('#ajax-graph-loader-img').hide();//On cache la roue de chargement.
+                        $('#canvas-line-block').slideDown();
+                    });
+                },
+                
+                getEmailSelector : function(inv_data, campaign_id) {
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_email_selector',
+                              'id_campaign' : campaign_id,
+                              'data' : inv_data
+                            }
+                    }).done(function(result){
+                        $('#ajax-email-selector-load').after(result);
+                        //Actions des sélecteurs d'email
+                        $(".select-options").change(function() {
+					$("#email-selector-list span").hide();
+					$(".select-options:checked").each(function() {
+						$("#email-selector-list span."+$(this).data("selection")).show();
+					});
+				});
+                        $('#ajax-email-loader-img').hide();//On cache la roue de chargement.
+                    }).fail(function(){
+                        $('#ajax-email-selector-load').after("<em>Le chargement de la liste des emails a échoué</em>");
+                        $('#ajax-email-loader-img').hide();//On cache la roue de chargement.
+                    });
+                },
+                
+                getInvestments: function(campaign_id){
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': { 
+                              'action':'get_investments_data',
+                              'id_campaign' : campaign_id
+                            }
+                    }).done(function(result){
+                        inv_data = JSON.parse(result);
+                        
+                        //Injecte les données directement affichées dans leurs emplacements
+                        $.each(inv_data, function(key, value) {
+                            $('.data-inv-'+key).html(value);
+                        });
+                        $('.ajax-data-inv-loader-img').slideUp();
+                        
+                        // Crée le tableau des investisseurs si besoin
+                        if ($("#ajax-investors-load").length > 0) {
+                            YPUIFunctions.getInvestors(JSON.stringify(inv_data),campaign_id);
+			}
+                        
+                        // Crée le graphe des investissements si besoin
+                        if ($("#ajax-invests-graph-load").length > 0) {
+                            YPUIFunctions.getInvestsGraph(JSON.stringify(inv_data),campaign_id); 
+                        }
+                        
+                        //Crée liste des emails si besoin
+                        if ($("#ajax-email-selector-load").length > 0) {
+                            YPUIFunctions.getEmailSelector(JSON.stringify(inv_data),campaign_id); 
+                        }
+                    }).fail(function(){});
+                },               
+                
 		getProjects: function() {// Permet de récupérer tous les projets ou un utilisateur est impliqué
 			var userID = $('#user-id').attr('data-value');
 
@@ -448,6 +695,7 @@ WDGProjectPageFunctions=(function($) {
 		currentDiv: 0,
 		isInit: false,
 		isEditing: false,
+		isClickBlocked: false,
 		initUI:function() {
 			WDGProjectPageFunctions.initClick();
 			$('.project-content-icon').click(function(){
@@ -521,12 +769,23 @@ WDGProjectPageFunctions=(function($) {
 		},
 
 		print_vote_form:function(){
-		    $('html, body').animate({scrollTop: $("#invest-button").offset().top - $("#navigation").height()}, "fast"); 
-		    $("#vote-form").animate({ 
-	        	top: "370px"
-		    }, 500 );
-		    $(".description-discover").css('background-color', '#7B7B7B');
-		    $("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
+		    if ($("#vote-form").hasClass("collapsed")) {
+			$("#vote-form").removeClass("collapsed");
+			$(".description-discover").css('background-color', '#FF494C');
+			
+		    } else {
+			if ($(window).width() > 480) {
+			    $('html, body').animate({scrollTop: $("#invest-button").offset().top - $("#navigation").height()}, "fast"); 
+			} else {
+			    $('html, body').animate({scrollTop: $("#projects-stats-content").offset().top}, "fast"); 
+			}
+			$("#vote-form").animate({ 
+			    top: "370px"
+			}, 500 );
+			$(".description-discover").css('background-color', '#7B7B7B');
+			$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
+			$("#vote-form").addClass("collapsed");
+		    }
 		},
 		
 		
@@ -557,20 +816,23 @@ WDGProjectPageFunctions=(function($) {
 				}
 				WDGProjectPageFunctions.currentDiv++;
 			});
+			$('.projects-desc-content img').click(function() {
+			    WDGProjectPageFunctions.isClickBlocked = true;
+			});
 			WDGProjectPageFunctions.refreshEditable();
 			WDGProjectPageFunctions.isInit = true;
    		},
 		
 		//Clic sur une partie
 		clickItem: function(clickedElement) {
-			if (!WDGProjectPageFunctions.isEditing) {
+			if (!WDGProjectPageFunctions.isEditing && !WDGProjectPageFunctions.isClickBlocked) {
 				//Si la balise "lire plus" de l'élément cliqué est affichée
 				var projectMore = clickedElement.find('.projects-more');
 				if (projectMore.is(':visible')) {
 					//il faut la masquer puis afficher les éléments qui suivent
 					projectMore.hide(400, function(){
 						$('html, body').animate({scrollTop: clickedElement.offset().top - $("#navigation").height()}, "slow"); 
-						clickedElement.find('.zone-content > p, ul, table, blockquote').slideDown(400);
+						clickedElement.find('.zone-content > p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
 						WDGProjectPageFunctions.refreshEditable();
 					});
 					//on masque aussi toutes les autres parties
@@ -581,6 +843,7 @@ WDGProjectPageFunctions=(function($) {
 					WDGProjectPageFunctions.refreshEditable();
 				}
 			}
+			WDGProjectPageFunctions.isClickBlocked = false;
 		},
 
 		//Masque des parties non utilisées

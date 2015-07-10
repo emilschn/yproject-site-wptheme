@@ -21,6 +21,7 @@ function wdg_get_project_vote_results($camp_id) {
 		'sum_invest_ready' => 0,
 		'average_invest_ready' => 0,
 		'median_invest_ready' => 0,
+		'show_risk' => ($campaign->funding_type() != 'fundingdonation'),
 		'average_risk' => 0,
 		'risk_list' => array(1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0),
 		'count_more_info_impact' => 0,
@@ -30,7 +31,13 @@ function wdg_get_project_vote_results($camp_id) {
 		'count_more_info_other' => 0,
 		'string_more_info_other' => '',
                 'objective' => $campaign->minimum_goal(),
-		'list_advice' => array()
+		'list_advice' => array(),
+                'list_date' => array(),
+                'list_cumul_pos' => array(),
+                'list_cumul_neg' => array(),
+                'list_evo_pos' => array(),
+                'list_evo_neg' => array(),
+                
 	);
 	
 	if ($buffer['count_voters'] > 0) {
@@ -87,6 +94,35 @@ function wdg_get_project_vote_results($camp_id) {
 		}
 
 		$buffer['list_advice'] = $wpdb->get_results( "SELECT user_id, advice FROM ".$table_name." WHERE post_id = ".$campaign_id." AND advice <> ''" );
+                
+                $dates_votes = $wpdb->get_results( "SELECT validate_project, date FROM ".$table_name." WHERE post_id = ".$campaign_id." ORDER BY `date` ASC" );
+                
+                //Parcours des votes par date :
+                foreach ( $dates_votes as $vote ) {
+                    if (end($buffer['list_date']) != $vote->date){
+                        //Si on est sur un nouveau jour
+                        $buffer['list_date'][]= $vote->date;
+                        $buffer['list_evo_pos'][]=0;
+                        $buffer['list_evo_neg'][]=0;
+                        
+                        if(end($buffer['list_cumul_pos'])===false){
+                            $buffer['list_cumul_pos'][]=0;
+                            $buffer['list_cumul_neg'][]=0;
+
+                        } else {
+                            $buffer['list_cumul_pos'][]=end($buffer['list_cumul_pos']);
+                            $buffer['list_cumul_neg'][]=end($buffer['list_cumul_neg']);
+                        }
+                    }
+                    
+                    if ($vote->validate_project==1){
+                        $buffer['list_cumul_pos'][count($buffer['list_cumul_pos'])-1]++;
+                        $buffer['list_evo_pos'][count($buffer['list_evo_pos'])-1]++;
+                    } else {
+                        $buffer['list_cumul_neg'][count($buffer['list_cumul_neg'])-1]++;
+                        $buffer['list_evo_neg'][count($buffer['list_evo_neg'])-1]++;
+                    }
+                }
 	}
 	
 	return $buffer;

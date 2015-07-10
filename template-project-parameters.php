@@ -70,7 +70,7 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					    'name'        => 'categories'
 					) ); ?><br />
 					
-					<a id="picture-head"></a><a id="video-zone"></a><?php /* ancre déplacée pour cause de menu... */ ?>
+                                        <a id="picture-head"></a><a id="video-zone"></a><a id="project-owner"></a><?php /* ancres déplacées pour cause de menu... */ ?>
 					<label for="activities">Secteur d&apos;activit&eacute; :</label>
 					<?php wp_dropdown_categories( array( 
 					    'hide_empty'  => 0,
@@ -120,10 +120,13 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 						<?php 
 						switch ($campaign->funding_type()) {
 							case 'fundingproject':
-								echo 'Financement d&apos;un projet<br />';
+								echo 'Avance sur chiffre d&apos;affaires (royalties)<br />';
 								break;
 							case 'fundingdevelopment':
-								echo 'Capital (coop&eacute;ratives SA uniquement)<br />';
+								echo 'Capital pour les coop&eacute;ratives<br />';
+								break;
+							case 'fundingdonation':
+								echo 'Don avec contrepartie<br />';
 								break;
 						}
 						?>
@@ -163,6 +166,13 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 							<option value=""></option>
 							<?php echo $str_organisations; ?>
 						</select>
+                                                <?php if ($current_organisation!=null){
+                                                    $page_edit_orga = get_page_by_path('editer-une-organisation');
+                                                    $edit_org .= '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
+                                                    $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
+                                                    echo $edit_org;
+                                                }
+                                                ?>
 
 					<?php else: ?>
 						<?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
@@ -173,24 +183,29 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					<input type="submit" name="new_orga" value="Cr&eacute;er une organisation" class="small-margin button" />
 					<br />
 					<br />
-						
+					
+                                        <label for="phone">Num&eacute;ro de t&eacute;l&eacute;phone de contact : </label>
+                                        <input type="text" name="phone" value="<?php echo $campaign->contact_phone(); ?>" /><br />
 						
 					<?php $image_src_header = $campaign->get_header_picture_src(false); ?>
 					<label for="image_header">Image du bandeau :</label>
 					<input type="file" name="image_header" /><br />
 					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 1366px de largeur * 370px de hauteur)</span><br />
 					<input type="checkbox" name="image_header_blur" <?php if ($campaign->is_header_blur()) { echo 'checked="checked"'; } ?> /> Appliquer un flou artistique<br />
-					<?php if ($image_src_header != '') { ?><img src="<?php echo $image_src_header; ?>" /><br /><?php } ?>
+					<?php if ($image_src_header != '') { ?><img style="max-width: 100%;" src="<?php echo $image_src_header; ?>" /><br /><?php } ?>
 					
 					<?php $image_src_home = $campaign->get_home_picture_src(false); ?>
 					<label for="image_home">Image d&apos;aper&ccedil;u :</label>
 					<input type="file" name="image_home" /><br />
 					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 610px de largeur * 330px de hauteur)</span><br />
-					<?php if ($image_src_home != '') { ?><img src="<?php echo $image_src_home; ?>" /><br /><?php } ?>
+					<?php if ($image_src_home != '') { ?><img style="max-width: 100%;" src="<?php echo $image_src_home; ?>" /><br /><?php } ?>
 					
 					<label for="video">Vid&eacute;o de pr&eacute;sentation :</label>
 					<input type="text" name="video" placeholder="URL de la vidéo" value="<?php echo $campaign->video(); ?>" /><br />
-						
+                                        <?php if($campaign->video()!=''){ ?><div class="video-zone">
+                                                <?php echo wp_oembed_get($campaign->video(), array('width' => 580, 'height' => 325)); ?>
+                                        </div><?php } ?>
+                                        
 					<input type="hidden" name="action" value="edit-project-parameters" />
 						
 					<input type="submit" value="Enregistrer" />

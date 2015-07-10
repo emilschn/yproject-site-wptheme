@@ -25,85 +25,47 @@ get_header();
 		    <h1>Stats Mangopay</h1>
 		
 		    <?php
-			/*
-			//Virement wallet milgoulle (mpid 2054791) vers matthieu (wpid 63 ; mpid 2054788) & vers wdg (wpid 60 ; mpid 3554029)
-			//Pour Milgoulle : 5302 - 30 (existant) = 5272
-			//Pour WDG : 638
-			if (false) {
-			    $current_user = get_user_by('id', 60);
-			    $campaign_id = 1241;
-			    ypcf_mangopay_transfer_project_to_user($current_user, $campaign_id, 638);
-			    //TODO : faire autrement la prochaine fois - gérer les client amount fees
-			}
-			 * 
-			 */
-		    ?>
-		    
-		    <?php /*
-		    //Remboursements GdB
-		    $user = get_userdata(18);
-		    $download_id = 3268;
-		    $amount = 100;
-		    $payment_id = 3433;
-		    $new_transfer = ypcf_mangopay_transfer_project_to_user($user, $download_id, $amount);
-		    update_post_meta($payment_id, 'refund_wire_id', $new_transfer->ID);
-		    print_r($new_transfer);
-		    */ ?>
-		
-		    <?php
 		    /*
-		    //Gestion MCB
-		    print_r("--------------");
-		    $id_wallet_old = 10350063;
-		    $mp_wallet_old = ypcf_mangopay_get_wallet_by_id(10350063);
-		    print_r($mp_wallet_old);
-		    
-		    $campaign_id = 3410;
-		    $amount = 2500;
-		    $amount_fees = 250;
+		    //Gestion Hubmode
+		    $campaign_id = 4492;
+		    $amount = 9967.28;
+		    $amount_fees = 1232.72;
 		    $api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
 		    echo '$api_project_id ' . $api_project_id . '<br />';
 		    $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-		    print_r($current_organisations);
 		    if (count($current_organisations) > 0) {
-			    echo 'hop<br />';
 			    $current_organisation = $current_organisations[0];
 			    print_r($current_organisation);
 			    $organisation_object = new YPOrganisation($current_organisation->organisation_wpref);
 			    $mangopay_new_user_id = ypcf_init_mangopay_user($organisation_object->get_creator(), TRUE);
-			    echo '$mangopay_new_user_id ' . $mangopay_new_user_id . '<br />';
+			    echo '<br />$mangopay_new_user_id ' . $mangopay_new_user_id . '<br />';
 			    
 			    if (isset($mangopay_new_user_id)) {
-				    echo 'hop2<br />';
 				    $transfer = ypcf_mangopay_transfer_project_to_user($organisation_object->get_creator(), $campaign_id, $amount, $amount_fees);
 				    print_r($transfer);
 			    }
 		    }
-		    print_r("--------------");
-		     * 
+		     *
+		    //Gestion Navlab
+		    $campaign_id = 4171;
+		    $amount = 9950;
+		    $amount_fees = 1200;
+		    $api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
+		    echo '$api_project_id ' . $api_project_id . '<br />';
+		    $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+		    if (count($current_organisations) > 0) {
+			    $current_organisation = $current_organisations[0];
+			    print_r($current_organisation);
+			    $organisation_object = new YPOrganisation($current_organisation->organisation_wpref);
+			    $mangopay_new_user_id = ypcf_init_mangopay_user($organisation_object->get_creator(), TRUE);
+			    echo '<br />$mangopay_new_user_id ' . $mangopay_new_user_id . '<br />';
+			    
+			    if (isset($mangopay_new_user_id)) {
+				    $transfer = ypcf_mangopay_transfer_project_to_user($organisation_object->get_creator(), $campaign_id, $amount, $amount_fees);
+				    print_r($transfer);
+			    }
+		    }
 		     */
-		    
-//					    "PayerID" : 10350060, 
-//					    "PayerWalletID" : 10350063,
-//					    "BeneficiaryID" : 15573055,
-//					    "BeneficiaryWalletID" : 0,
-		    /*$mangopay_newtransfer = request('transfers', 'POST', '{ 
-					"PayerID" : 10350060, 
-					"PayerWalletID" : 10350063,
-					"BeneficiaryID" : 15573055,
-					"BeneficiaryWalletID" : 0,
-					"Amount" : 250000,
-					"ClientFeeAmount" : 250
-				    }');
-		    $mangopay_newtransfer = request('transfers', 'POST', '{ 
-					"PayerID" : 10350060, 
-					"PayerWalletID" : 10350063,
-					"BeneficiaryID" : 15573055,
-					"BeneficiaryWalletID" : 0,
-					"Amount" : 0,
-					"ClientFeeAmount" : 24750
-				    }');*/
-		    
 		    ?>
 		    
 		    <?php /* ?>

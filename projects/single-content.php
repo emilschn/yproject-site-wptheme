@@ -100,7 +100,8 @@ else {
 //*******************
 ?>
 	</div>
-	<div id="projects-right-desc" class="right">	    
+    
+        <div id="projects-right-desc" class="right" <?php echo 'data-link-project-settings="'.get_permalink(get_page_by_path('parametres-projet')->ID) . $campaign_id_param . $params_partial.'"'; ?>>
 <?php
 //*******************
 //CACHE PROJECT CONTENT SUMMARY
@@ -116,7 +117,19 @@ else {
 			$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
 			if (count($current_organisations) > 0) {
 				$current_organisation = $current_organisations[0];
-				$owner_str = '<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation">' . $current_organisation->organisation_name . '</a><br />';
+                                $page_edit_orga = get_page_by_path('editer-une-organisation');
+				$owner_str = '<div id="orga-edit" data-link-edit="'
+                                        .get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref
+                                        .'">'
+                                        . '<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation">' . $current_organisation->organisation_name
+                                        . '</a>'
+                                        . '</div><br />';
+                                /*
+                                $page_edit_orga = get_page_by_path('editer-une-organisation');
+                                $edit_org .= '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
+                                $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
+                                $owner_str .= $edit_org;
+                                */
 				$owner_str .= '<div id="wdg-lightbox-project-organisation" class="wdg-lightbox hidden">
 		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder">
@@ -133,17 +146,22 @@ else {
 		    <div class="content align-left">
 		    <span>Si&egrave;ge social :</span>'.$current_organisation->organisation_address.'<br />
 		    <span></span>'.$current_organisation->organisation_postalcode.' '.$current_organisation->organisation_city.'<br />
+		    <span></span>'.$current_organisation->organisation_country.'<br />
 		    </div>
 		</div>
 	    </div>';
 			} else {
 //				UIHelpers::print_user_avatar($author_id);
 				$author = get_userdata($post_campaign->post_author);
-				$owner_str = $author->user_firstname . ' ' . $author->user_lastname . '<br />';
+				$owner_str = '<div id="orga-edit" data-link-edit="'
+                                        . get_permalink(get_page_by_path('parametres-projet')->ID) . $campaign_id_param . $params_partial
+                                        . '">'
+                                        .$author->user_firstname . ' ' . $author->user_lastname 
+                                        .'</div><br />';
 //				$owner_str .= '@' . $author->user_nickname;
 			}
 			?>
-			<div id="project-owner-desc" style="width: 100%; text-align: center;">
+			<div id="project-owner-desc">
 				<?php echo $owner_str; ?>
 			</div>
 		</div>
@@ -174,13 +192,13 @@ else {
 		<?php } ?>
 			
 		<div class="project-rewards">
-			<span>En &eacute;change de votre investissement</span>
+			<span>En &eacute;change de votre <?php if ($campaign->funding_type() == 'fundingdonation') { ?>soutien<?php } else { ?>investissement<?php } ?></span>
 		</div>
 			
 		<div class="project-rewards">
 			<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?>
 			Vous recevrez une part de capital de cette entreprise.
-			<?php else: ?>
+			<?php elseif ($campaign->funding_type() == 'fundingproject'): ?>
 			Vous recevrez une partie du chiffre d'affaires de ce projet.
 			<?php endif; ?>
 		</div>
@@ -196,7 +214,7 @@ else {
 	</span>
 </div>
 
-<?php if (is_user_logged_in()) { 
+<?php if (is_user_logged_in() || $campaign->funding_type() == 'fundingdonation') {
     
     $check = $check = yproject_check_user_warning(get_current_user_id());
     if(!$check){
@@ -208,22 +226,16 @@ else {
         echo "<div class='align-center'>Il est nécessaire pour continuer que vous prenniez connaisances des risques liés à l'investissement <a href='#warning' class='wdg-button-lightbox-open button' data-lightbox='warning'>ici</a></div></br>";
 
     } else {
-    
-    
-    ?>
-
-		                
-
-<?php
-$editor_params = array( 
-	'media_buttons' => true,
-	'quicktags'     => false,
-	'editor_height' => 500,
-	'tinymce'       => array(
-		'plugins' => 'paste, wplink, textcolor',
-		'paste_remove_styles' => true
-	)
-);
+	
+	$editor_params = array( 
+		'media_buttons' => true,
+		'quicktags'     => false,
+		'editor_height' => 500,
+		'tinymce'       => array(
+			'plugins' => 'paste, wplink, textcolor',
+			'paste_remove_styles' => true
+		)
+	);
 ?>
 
 <div class="indent">
@@ -239,6 +251,7 @@ $editor_params = array(
 			<div class="zone-edit hidden">
 				<?php 
 				$editor_description_content = str_replace( ']]>', ']]&gt;', apply_filters( 'the_content', $campaign->data->post_content ));
+				global $post, $post_id; $post_ID = $post = 0;
 				wp_editor( $editor_description_content, 'wdg-input-description', $editor_params );
 				?>
 			</div>
@@ -344,6 +357,7 @@ $editor_params = array(
 </div>
 
 <div class="only_on_mobile">
+	<?php if ($vote_status == 'collecte'): ?>
 	<div class="reward-zone">
 		<div class="project-rewards">
 			<span>En &eacute;change de votre investissement</span>
@@ -366,6 +380,7 @@ $editor_params = array(
 			<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1" class="description-discover">Investir sur ce projet</a>
 		</div>
 	</div>
+	<?php endif; ?>
 	<div class="part-title-separator">
 		<span class="part-title"> 
 			Partager
