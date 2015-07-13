@@ -246,11 +246,53 @@ if (session_id() == '') session_start();
 			    <input type="hidden" name="invest_type" value="<?php echo $_SESSION['redirect_current_invest_type']; ?>" />
 			<?php } ?>
 			<input type="hidden" name="update_user_posted" value="posted" />
-			<input type="hidden" name="update_user_id" value="<?php echo $current_user->ID; ?>" /><br /><br />
+			<input type="hidden" name="update_user_id" value="<?php echo $current_user->ID; ?>" />
 		    </form>
-		<?php
+                    	<?php
 		
 		?>
+                     <h2 class="underlined"><?php _e( 'Avertissement', 'yproject' ); ?></h2>
+                    <div id="form_infoperso_projet">
+                   
+                    <div id="warning">
+                        <?php 
+                        $check = yproject_check_user_warning(get_current_user_id());
+                        if (!$check){ 
+                        ?>
+                        <p class="button red"> Il est important de répondre au formulaire pour avoir accès à l'ensemble des descriptions des différents projets.</p>
+                        <?php } else { ?>
+                        <p class="button"> Vous avez pris connaisances dees risques d'investissement : </p>
+                        <?php } ?>
+                         Avertissement : l’investissement dans les projets présentés sur WEDOGOOD.co comporte des risques spécifiques :
+                       <ul>
+                           <li>Risque de perte totale ou partielle du montant investi</li>
+                           <li>Risque d’illiquidiité : la revente des parts sociales ou des contrats financiers n’est pas garantie, elle peut être incertaine voire impossible</li>
+                           <li>Le retour sur investissement dépend de la réussite du projet financé</li>
+                       </ul> 
+                    <?php 
+                       
+                    if ($check){ ?>
+                       <form action="" name="" id="" class="standard-form"  method="post" >
+                           <b>Avez-vous conscience que vous pouvez perdre éventuellement la totalité de votre investissement ? </b><div id="input-style"><input type="radio" name="warning1" checked="checked"  value="true"> OUI <input type="radio" name="warning1" disabled="disabled" value="false"> NON</div>
+                            <b>Avez-vous conscience que vous aurez des difficultés ou l'impossibilité de revendre vos parts ou contrats ?</b><div id="input-style"><input type="radio" name="warning2" checked="checked" value="true"> OUI <input type="radio" name="warning2" disabled="disabled" value="false"> NON</div>
+
+                           <input type="checkbox" disabled="disabled" name="warning3" value="true">Je reconnais ne pas avoir fait l'objet de démarchage bancaire ou financier pour m'inscrire sur WEDOGOOD.co
+                          
+                       
+                    <?php
+                    } else { ?>
+                        <form action="" name="" id="" class="standard-form"  method="post" >
+                           <b>Avez-vous conscience que vous pouvez perdre éventuellement la totalité de votre investissement ? </b><div id="input-style"><input type="radio" name="warning1" value="true"> OUI <input type="radio" name="warning1" value="false"> NON</div>
+                           <b>Avez-vous conscience que vous aurez des difficultés ou l'impossibilité de revendre vos parts ou contrats ?</b><div id="input-style"><input type="radio" name="warning2" value="true"> OUI <input type="radio" name="warning2" value="false"> NON</div>
+
+                           <input type="checkbox" name="warning3" value="true">Je reconnais ne pas avoir fait l'objet de démarchage bancaire ou financier pour m'inscrire sur WEDOGOOD.co
+
+                       <br/>
+                       <center><input type="submit" name="submit_warning" value="valider les avertissements"></center>
+                    <?php } ?>
+                     </form>   
+                    </div>
+                    </div>
 	    </div>
 	</div>
     </div>

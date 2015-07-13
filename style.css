@@ -57,11 +57,9 @@ tbody {
 .center {
     width: 960px;
     margin: auto;
-    font-size: 14px;
 }
-
 .center_small {
-    width: 960px;
+    width: 480px;
     margin: auto;
 }
 
@@ -218,6 +216,7 @@ form.wdg-forms .small-margin {
 .standard-form {
     font-family: Arial, sans-serif;
 }
+.standard-form select{ margin-bottom: 5px; }
 .standard-form input[type=text] { margin-bottom: 5px; }
 .standard-form input[type=password] { margin-bottom: 3px; }
 .standard-form input.margin-left { margin-left: 140px !important; }
@@ -243,121 +242,8 @@ form.wdg-forms .small-margin {
 }
 
 /*******************************************************************************
-* LIGHTBOX - FORMULAIRE
+* LIGHTBOX
 *******************************************************************************/
-/* tooltip */
-
-
-.tool-tip{
-	color: #fff;
-	background-color: rgba( 0, 0, 0, .7);
-	text-shadow: none;
-	font-size: .9em;
-	visibility: hidden;
-	-webkit-border-radius: 7px; 
-	-moz-border-radius: 7px; 
-	-o-border-radius: 7px; 
-	border-radius: 7px;	
-	text-align: center;	
-	opacity: 0;
-	z-index: 999;
-	padding: 3px 8px;	
-	position: absolute;
-	cursor: default;
-	-webkit-transition: all 240ms ease-in-out;
-	-moz-transition: all 240ms ease-in-out;
-	-ms-transition: all 240ms ease-in-out;
-	-o-transition: all 240ms ease-in-out;
-	transition: all 240ms ease-in-out;	
-}
-/* default heights, width and margin w/o Javscript */
-
-.tool-tip,
-.tool-tip.top{
-	width: 90px;
-	height: 30px;
-	margin-left: -43px;
-}
-
-/* tool tip position right */
-
-.tool-tip.right{
-	top: 50%;
-	right: auto;
-	left: 75%;
-	margin-top: -15px;
-	margin-right: auto;	
-	margin-left: auto;
-}
-
-.tool-tip.right:after{
-	left: -5px;
-	top: 50%;	
-	margin-top: -6px;
-	bottom: auto;
-	border-top-color: transparent;	
-    border-right-color: rgba( 0, 0, 0, .7);	
-}
-.on-focus input{
-        width:200px;
-}
-
-/* tooltip on focus left and right */
-
-.on-focus .tool-tip.left,
-.on-focus .tool-tip.right{
-	margin-top: -19px;
-}
-
-/* on hover of element containing tooltip default*/
-
-*:not(.on-focus):hover > .tool-tip,
-.on-focus input:focus + .tool-tip{
-	visibility: visible;
-	opacity: 1;
-	-webkit-transition: all 240ms ease-in-out;
-	-moz-transition: all 240ms ease-in-out;
-	-ms-transition: all 240ms ease-in-out;
-	-o-transition: all 240ms ease-in-out;
-	transition: all 240ms ease-in-out;		
-}
-
-
-
-
-.colonne {
-   
-    margin-top: 10px;
-    width: 350px;
-    border: 1px solid;
-    display: inline-block;
-}
-
-.colonne p {
-    width: 300px;
-    text-align: left;
-}
-.login_fail{
-    margin-bottom: 10px;
-}
-
-
-
-#sidebar-login-form a{
-    color: #606060;
-    font-size: 11px;
-    font-style: italic;
-}
-
-#sidebar-login-form label {
-    text-align: right;
-    font-size: 14px;
-}
-
-/*******************************************************************************
-* LIGHTBOX - CGU / DEJA CONNECTE
-*******************************************************************************/
-
 .wdg-lightbox {
 	background-color: rgba(0, 0, 0, 0.75);
 	top: 0px;
@@ -437,6 +323,114 @@ form.wdg-forms .small-margin {
 
 #already-connected {
 	text-align: center;
+}
+
+.wdg-lightbox .warning {
+    text-align: justify;
+    margin: 10px 0px;
+}
+.wdg-lightbox .register-section {
+    margin: 20px 0px;
+    text-align: center;
+}
+.wdg-lightbox div.submit {
+    margin: 10px 0px;
+    text-align: center;
+}
+
+.wdg-lightbox.timeout-lightbox {
+	background-color: transparent;
+	margin-top: 88px;
+}
+.wdg-lightbox.timeout-lightbox .wdg-lightbox-padder {
+	background-color: #333333;
+	color: #FFFFFF;
+}
+
+/*******************************************************************************
+* LIGHTBOX - FORMULAIRE
+*******************************************************************************/
+/* tooltip */
+.tool-tip {
+    color: #fff;
+    background-color: rgba( 0, 0, 0, .7);
+    text-shadow: none;
+    font-size: .9em;
+    visibility: hidden;
+    -webkit-border-radius: 7px; 
+    -moz-border-radius: 7px; 
+    -o-border-radius: 7px; 
+    border-radius: 7px;	
+    text-align: center;	
+    opacity: 0;
+    z-index: 999;
+    padding: 3px 8px;	
+    position: relative;
+    cursor: default;
+    -webkit-transition: all 240ms ease-in-out;
+    -moz-transition: all 240ms ease-in-out;
+    -ms-transition: all 240ms ease-in-out;
+    -o-transition: all 240ms ease-in-out;
+    transition: all 240ms ease-in-out;	
+}
+
+/* default heights, width and margin w/o Javscript */
+.tool-tip, .tool-tip.top {
+    width: 90px;
+    margin-left: -90px;
+}
+
+/* tool tip position right */
+.tool-tip.right:after{
+    left: -5px;
+    top: 50%;	
+    margin-top: -6px;
+    bottom: auto;
+    border-top-color: transparent;	
+    border-right-color: rgba( 0, 0, 0, .7);	
+}
+
+/* tooltip on focus left and right */
+.on-focus input {
+    width:200px;
+}
+.on-focus .tool-tip.left, .on-focus .tool-tip.right{
+    margin-top: -30px;
+}
+/* on hover of element containing tooltip default*/
+*:not(.on-focus):hover > .tool-tip, .on-focus input:focus + .tool-tip{
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: all 240ms ease-in-out;
+    -moz-transition: all 240ms ease-in-out;
+    -ms-transition: all 240ms ease-in-out;
+    -o-transition: all 240ms ease-in-out;
+    transition: all 240ms ease-in-out;
+}
+
+.colonne {
+    width: 235px;
+    vertical-align: top; 
+    display: inline-block;
+}
+.colonne input {
+    width: 220px;
+    text-align: left;
+}
+
+.login_fail{
+    margin-bottom: 10px;
+}
+
+#sidebar-login-form a{
+    color: #606060;
+    font-size: 11px;
+    font-style: italic;
+}
+
+#sidebar-login-form label {
+    text-align: right;
+    font-size: 14px;
 }
 
 /*******************************************************************************
@@ -2653,13 +2647,45 @@ div#home_bottom h1 {
 .login_fail { color : red; }
 
 /*******************************************************************************
-* REGISTER PAGE
-*******************************************************************************/   
-.register_half_part {       
-    float: left;        
-    width: 440px;
-    padding: 0px 15px;
+* REGISTER PAGE / REGISTER LIGHTBOX
+*******************************************************************************/
+#wdg-lightbox-register .wdg-button-lightbox-open {
+    width: 174px;
+    padding: 5px 0px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.form-register .on-focus input { margin-left: 110px; }
+.form-register .on-focus .tool-tip { width: 110px; margin-top: -15px; }
+
+.form-register {
+    margin: 5px;
+}
+.form-register h2 {
     text-align: center;
+    margin: 5px 0px;
+}
+.form-register .warning {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+.form-register .register-section {
+    text-align: center;
+}
+.form-register .register-section div {
+    margin: 7px 0px;
+    text-align: center;
+}
+.form-register div#connexion_facebook_container {
+    display: block;
+    text-align: center;
+    background-color: transparent;
+}
+.form-register div#connexion_facebook_container a {
+    padding: 2px 0px 5px;
+    background-color: #526794;
+    border: 1px solid #526794;
 }
 
 #signup_submit {
@@ -2997,7 +3023,7 @@ table.mceLayout {
 #form_infoperso_projet {
     background:#F2F2F2;
     margin: 20px;
-    padding: 30px;
+    padding: 0 20px 0 40px;
 }
 
 /*******************************************************************************

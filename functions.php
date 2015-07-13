@@ -60,8 +60,8 @@ function yproject_enqueue_script(){
 		wp_enqueue_script('jquery');
 	}
 	
-	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.07.02');
-	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.07.02'); }
+	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.07.10');
+	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.07.10'); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
@@ -232,6 +232,165 @@ function yproject_change_user_cap() {
 	}
 }
 add_action('init', 'yproject_change_user_cap');
+
+//***********************
+// LIGHTBOX AVERTISSEMENT
+//***********************
+
+// Vérification de l'enregistrement des avertissements pour afficher la lightbox
+function yproject_check_user_warning($user_id){
+    
+    $warning1 = get_user_meta( $user_id, 'warning1', true);
+    $warning2 = get_user_meta( $user_id, 'warning2', true);
+    $warning3 = get_user_meta( $user_id, 'warning3', true);
+    // Retunr true si l'utilisateur n'a pas répondu oui aux 3 questions
+    if($warning1 == 'false' || $warning2 == 'false' || $warning3 == 'false'){
+        return false;
+    } else {
+        return true; 
+    }
+}
+// Vérifie si l'user possede l'user_meta 
+function yproject_check_is_warning_meta_init($user_id){
+    $warning = get_user_meta($user_id, 'warning1');
+    if($warning == null){
+        return true; 
+    }
+}
+//Gestion du formulaire de lightbox d'avertissements
+function yproject_submit_lightbox() {
+    ypbp_core_screen_signup();
+
+/*    //Si le formulaire a été posté
+    if (isset($_POST['submit_warning'])) {
+	global $submit_warning_errors;
+	$user_id = get_current_user_id(); 
+	$submit_warning_errors = "";
+	
+	//Si la case de démarchage a été cochée
+        if (isset($_POST['warning3'])) {
+	    //On vérifie qu'une réponse a été donnée aux questions fermées
+            if (isset($_POST['warning1']) && isset($_POST['warning2'])) {
+                // On enregistre les valeurs
+                update_user_meta( $user_id, 'warning1', $_POST['warning1'] );
+                update_user_meta( $user_id, 'warning2', $_POST['warning2'] );
+		update_user_meta( $user_id, 'warning3', $_POST['warning3'] );
+		
+            } else {
+                $submit_warning_errors = "Merci de répondre à toutes les questions pour continuer";
+            }
+	    
+	//Si la case de démarchage n'est pas cochée, on réaffiche la lightbox
+        } else {
+            $submit_warning_errors = "Merci de bien vouloir cocher la dernière case.";
+        }
+    }*/
+} 
+add_action('init', 'yproject_submit_lightbox');
+
+function ypbp_get_current_signup_step() {
+        global $bp;
+
+        return $bp->signup->step;
+}
+
+function ypbp_core_screen_signup() {
+	global $bp;
+
+	// Not a directory
+	bp_update_is_directory( false, 'register' );
+
+	if ( !isset( $bp->signup ) ) {
+		$bp->signup = new stdClass;
+	}
+
+	$bp->signup->step = 'request-details';
+
+	// If the signup page is submitted, validate and save
+	if ( isset( $_POST['signup_submit'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'register_form_posted' ) ) {
+
+		// Check the base account details for problems
+		$account_details = bp_core_validate_user_signup( $_POST['signup_username'], $_POST['signup_email'] );
+
+		// If there are errors with account details, set them for display
+		if ( !empty( $account_details['errors']->errors['user_name'] ) )
+			$bp->signup->errors['signup_username'] = $account_details['errors']->errors['user_name'][0];
+
+		if ( !empty( $account_details['errors']->errors['user_email'] ) )
+			$bp->signup->errors['signup_email'] = $account_details['errors']->errors['user_email'][0];
+           
+		// Check that both password fields are filled in
+		if ( empty( $_POST['signup_password'] ) || empty( $_POST['signup_password_confirm'] ) )
+			$bp->signup->errors['signup_password'] = __( 'Please make sure you enter your password twice', 'buddypress' );
+
+		// Check that the passwords match
+		if ( ( !empty( $_POST['signup_password'] ) && !empty( $_POST['signup_password_confirm'] ) ) && $_POST['signup_password'] != $_POST['signup_password_confirm'] )
+			$bp->signup->errors['signup_password'] = __( 'The passwords you entered do not match.', 'buddypress' );
+		
+		// Check that the cgu is checked
+		if ( empty($_POST['validate-terms-check']) )
+			$bp->signup->errors['validate_terms_check'] = __( 'Merci de cocher la case pour accepter les conditions g&eacute;n&eacute;rales d&apos;utilisation.', 'yproject' );
+
+		$bp->signup->username = $_POST['signup_username'];
+		$bp->signup->email = $_POST['signup_email'];
+
+		// Add any errors to the action for the field in the template for display.
+		if ( !empty( $bp->signup->errors ) ) {
+			foreach ( (array) $bp->signup->errors as $fieldname => $error_message ) {
+				// addslashes() and stripslashes() to avoid create_function()
+				// syntax errors when the $error_message contains quotes
+				add_action( 'bp_' . $fieldname . '_errors', create_function( '', 'echo apply_filters(\'bp_members_signup_error_message\', "<div class=\"error\">" . stripslashes( \'' . addslashes( $error_message ) . '\' ) . "</div>" );' ) );
+			}
+		} else {
+			$bp->signup->step = 'save-details';
+
+			// Hash and store the password
+			$usermeta['password'] = wp_hash_password( $_POST['signup_password'] );
+
+			$usermeta = apply_filters( 'bp_signup_usermeta', $usermeta );
+
+			// Finally, sign up the user
+			$wp_user_id = bp_core_signup_user( $_POST['signup_username'], $_POST['signup_password'], $_POST['signup_email'], $usermeta );
+
+			if ( is_wp_error( $wp_user_id ) ) {
+				$bp->signup->step = 'request-details';
+				bp_core_add_message( $wp_user_id->get_error_message(), 'error' );
+			} else {
+				global $wpdb, $edd_options;
+				$bp->signup->step = 'completed-confirmation';
+				$wpdb->update( $wpdb->users, array( sanitize_key( 'user_status' ) => 0 ), array( 'ID' => $wp_user_id ) );
+				update_user_meta($wp_user_id, LibUsers::$key_validated_general_terms_version, $edd_options[LibUsers::$edd_general_terms_version]);
+				wp_set_auth_cookie( $wp_user_id, false, is_ssl() );
+				if (isset($_POST['redirect-home'])) {
+					wp_redirect(home_url());
+				} else {
+					wp_redirect(wp_unslash( $_SERVER['REQUEST_URI'] ));
+				}
+				exit();
+			}
+
+			do_action( 'bp_complete_signup' );
+		}
+
+	}
+
+	do_action( 'bp_core_screen_signup' );
+}
+
+
+//********
+// Lightbox profil 
+//
+//*********
+
+
+// Vérifie si l'user possede l'user_meta 
+function yproject_check_is_profile_meta_init($user_id){
+    $profil = get_user_meta($user_id, 'first_visite_profil');
+    if($profil == null){
+        return true; 
+    }
+}
 
 //Permet de n'afficher que les images uploadées par l'utilisateur en cours
 function yproject_my_files_only( $wp_query ) {
@@ -895,7 +1054,6 @@ function get_investors_list() {
         global $country_list;
         
 	foreach ( $investments_list['payments_data'] as $item ) {
-//	    if ($item['status'] == 'publish' || $item['status'] == 'refunded') {
 		$i++;
 		$bgcolor = ($i % 2 == 0) ? "#FFF" : "#EEE";
 
@@ -905,18 +1063,6 @@ function get_investors_list() {
 		$payment_state = edd_get_payment_status( $post_invest, true );
 		if (strpos($mangopay_id, 'wire_') !== FALSE) {
 			$payment_type = 'Virement';
-			$contribution_id = substr($mangopay_id, 5);
-			$mangopay_contribution = ypcf_mangopay_get_withdrawalcontribution_by_id($contribution_id);
-			$mangopay_is_completed = (isset($mangopay_contribution));
-			$mangopay_is_succeeded = (isset($mangopay_contribution) && $mangopay_contribution->Status == 'ACCEPTED');
-//			if ($mangopay_is_succeeded) $payment_state = 'Validé';
-//			else if ($mangopay_is_completed) $payment_state = 'Echoué';
-		} else {
-			$mangopay_contribution = ypcf_mangopay_get_contribution_by_id($mangopay_id);
-			$mangopay_is_completed = (isset($mangopay_contribution->IsCompleted) && $mangopay_contribution->IsCompleted);
-			$mangopay_is_succeeded = (isset($mangopay_contribution->IsSucceeded) && $mangopay_contribution->IsSucceeded);
-//			if ($mangopay_is_succeeded) $payment_state = 'Validé';
-//			else if ($mangopay_is_completed) $payment_state = 'Echoué';
 		}
 		$investment_state = 'Validé';
 		if ($campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing') {
@@ -946,42 +1092,47 @@ function get_investors_list() {
                 
                 //Liste des données à afficher pour la ligne traitée
                 if(YPOrganisation::is_user_organisation($item['user'])){
-                    $orga = new YPOrganisation($item['user']);
-                    $datacolonnes= array(bp_core_get_userlink($item['user']),
-                    $orga->get_name(),
-                    $orga->get_name(),
-                    '',
-                    '',
-                    $orga->get_nationality(),
-                    $orga->get_city(),
-                    $orga->get_address(),
-                    $orga->get_postal_code(),
-                    $orga->get_nationality(),
-                    $user_data->user_email,//A changer
-                    $user_data->user_mobile_phone,//A changer
-                    $item['amount'].'€',
-                    date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
-                    $payment_type,
-                    $payment_state,
-                    $item['signsquid_status_text']);
+			$orga = new YPOrganisation($item['user']);
+			$orga_user = get_user_by('email', $item['email']);
+			$datacolonnes = array(
+				'ORG - ' . $orga->get_name(),
+				$orga_user->last_name,
+				$orga_user->first_name,
+				'',
+				'',
+				$orga->get_nationality(),
+				$orga->get_rcs() .' ('.$orga->get_idnumber().')',
+				$orga->get_address(),
+				$orga->get_postal_code(),
+				ucfirst(strtolower($country_list[$orga->get_nationality()])),
+				$item['email'],
+				$orga_user->user_mobile_phone,
+				$item['amount'].'€',
+				date_i18n( 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
+				$payment_type,
+				$payment_state,
+				$item['signsquid_status_text']
+			);
                 } else {
-                $datacolonnes= array(bp_core_get_userlink($item['user']),
-                    $user_data->last_name,
-                    $user_data->first_name,
-                    $user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,
-                    $user_data->user_birthplace,
-                    ucfirst(strtolower($country_list[$user_data->user_nationality])),
-                    $user_data->user_city,
-                    $user_data->user_address,
-                    $user_data->user_postal_code,
-                    $user_data->user_country,
-                    $user_data->user_email,
-                    $user_data->user_mobile_phone,
-                    $item['amount'].'€',
-                    date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
-                    $payment_type,
-                    $payment_state,
-                    $item['signsquid_status_text']);
+			$datacolonnes = array(
+				bp_core_get_userlink($item['user']),
+				$user_data->last_name,
+				$user_data->first_name,
+				$user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,
+				$user_data->user_birthplace,
+				ucfirst(strtolower($country_list[$user_data->user_nationality])),
+				$user_data->user_city,
+				$user_data->user_address,
+				$user_data->user_postal_code,
+				$user_data->user_country,
+				$user_data->user_email,
+				$user_data->user_mobile_phone,
+				$item['amount'].'€',
+				date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
+				$payment_type,
+				$payment_state,
+				$item['signsquid_status_text']
+			);
                 }
                 
                 if ($is_campaign_over) { $datacolonnes[]=$investment_state; }
@@ -1300,16 +1451,25 @@ function yproject_shortcode_widelightbox($atts, $content = '') {
 add_shortcode('yproject_widelightbox', 'yproject_shortcode_widelightbox');
 
 
-//Shortcodes lightbox Connexion 
-
+//Shortcodes lightbox Connexion
 function yproject_shortcode_connexion_lightbox($atts, $content = '') {
-	ob_start();
-            locate_template('common/connexion-lightbox.php',true);
-            $content = ob_get_contents();
-	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="connexion"]' .$content . '[/yproject_lightbox]');
+    ob_start();
+    locate_template('common/connexion-lightbox.php',true);
+    $lightbox_content = ob_get_contents();
+    ob_end_clean();
+    echo do_shortcode('[yproject_lightbox id="connexion"]' . $content . $lightbox_content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_connexion_lightbox', 'yproject_shortcode_connexion_lightbox');
+
+//Shortcodes lightbox d'inscription 
+function yproject_shortcode_register_lightbox($atts, $content = '') {
+    ob_start();
+    locate_template('common/register-lightbox.php',true);
+    $lightbox_content = ob_get_contents();
+    ob_end_clean();
+    echo do_shortcode('[yproject_lightbox id="register"]' . $content . $lightbox_content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_register_lightbox', 'yproject_shortcode_register_lightbox');
 
 //Shortcode lightbox Tableau de bord
 // ->TB Stats

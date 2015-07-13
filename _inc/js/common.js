@@ -150,6 +150,7 @@ YPUIFunctions = (function($) {
 			
 			if ($(".wdg-lightbox").length > 0) {
 				$(".wdg-button-lightbox-open").click(function() {
+					$(".wdg-lightbox").hide();
 					var target = $(this).data("lightbox");
 					$("#wdg-lightbox-" + target).show();
 				});
@@ -159,9 +160,6 @@ YPUIFunctions = (function($) {
                                 $(".wdg-lightbox #wdg-lightbox-welcome-close").click(function() {
 					$(".wdg-lightbox").hide();
 				});
-                                $(".wdg-lightbox .wdg-lightbox-button-close a").click(function() {
-					$(".wdg-lightbox").hide();
-				});
 				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function() {
 					$(".wdg-lightbox").hide();
 				});
@@ -169,6 +167,9 @@ YPUIFunctions = (function($) {
 				if ($("#wdg-lightbox-" + sHash).length > 0) {
 					$("#wdg-lightbox-" + sHash).show();
 				}
+			}
+			if ($(".timeout-lightbox").length > 0) {
+				setTimeout(function() { $(".timeout-lightbox").hide(); }, 2000);
 			}
 			
 			
