@@ -7,7 +7,7 @@
 	   <?php locate_template( array( 'basic/basic-header.php' ), true ); ?>
 	    
     <div id="post_bottom_bg">
-	<div style="width: 450px;" id="post_bottom_content" class="center_small">
+	<div id="post_bottom_content" class="center_small">
 	    <div style="width: 450px;" class="left post_bottom_desc_small">
 		<div class="login_fail">
 		<?php if (isset($_GET["login"]) && $_GET["login"] == "failed") {?>
