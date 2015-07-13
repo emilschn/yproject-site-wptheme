@@ -36,6 +36,11 @@ $suffix = ($campaign->edit_version() > 1) ? '-sf' : '';
 	</div><!-- .padder -->
 </div><!-- #content -->
 
+<?php if (!is_user_logged_in()): ?>
+	<?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
+	<?php echo do_shortcode('[yproject_register_lightbox]'); ?>
+<?php endif; ?>
+
 
 <?php endwhile; else: ?>
 <div id="content">

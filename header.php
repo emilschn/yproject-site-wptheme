@@ -1,7 +1,8 @@
 <?php 
-	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post;
+	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user;
 	$stylesheet_directory_uri = get_stylesheet_directory_uri();
 	date_default_timezone_set("Europe/Paris");
+	ypcf_session_start();
 	UIHelpers::init_social_infos();
 ?>
 
@@ -38,7 +39,7 @@
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=20150702" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=20150710" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php
 			$cache_head = ob_get_contents();
@@ -163,64 +164,58 @@
 			</div>
 		</nav>
             
-                <?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
 		<div id="submenu_item_connection">
-			<?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
-			<ul>
-				<li class="page_item_out">
-					<div id="submenu_item_connection_register" style="background-color: #3E3E40;"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
-					<hr />
-					<div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook_connexion.jpg" width="25" height="25" alt="connexion facebook" /><span>&nbsp;Se connecter avec Facebook</span></a></div>
-					<div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
-					<hr /> 
-				   
-					<div id="submenu_item_connection_login"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_noir_connexion.jpg" width="25" height="25" alt="triangle noir" />&nbsp;Connexion</div>
-					<form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
-					<input type="text" name="log" id="sidebar-user-login" class="input" placeholder="Identifiant ou e-mail" />
-					<br />
+                    <?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
+                    <ul>
+                        <li class="page_item_out">
+                                <div id="submenu_item_connection_register" style="background-color: #3E3E40;"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
+                                <hr />
+                                <div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook_connexion.jpg" width="25" height="25" alt="connexion facebook" /><span>&nbsp;Se connecter avec Facebook</span></a></div>
+                                <div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
+                                <hr /> 
 
-					<input type="password" name="pwd" id="sidebar-user-pass" class="input" placeholder="<?php _e('Mot de passe', 'yproject'); ?>" />
-					<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="OK" />
-                                        
-                                        <input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo  get_the_ID();?>" />
-					<input type="hidden" name="type-page" id="type-page" value="<?php echo  get_post_type(get_the_ID());?>" />
-                                        <input type="hidden" name="redirect-page-error" id="redirect-page-error" value="<?php echo get_permalink($page) ?>" />
-					<br />
-					<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-					<a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">(Mot de passe oubli&eacute;)</a>
-					<br /><br />
+                                <div id="submenu_item_connection_login"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_noir_connexion.jpg" width="25" height="25" alt="triangle noir" />&nbsp;Connexion</div>
+                                <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
+                                    <input type="text" name="log" id="sidebar-user-login" class="input" placeholder="Identifiant ou e-mail" />
+                                    <br />
 
-					<label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" />&nbsp;<?php _e('Se souvenir de moi', 'yproject'); ?></label>
-					</form>
-				</li>
-			</ul>
-                   
+                                    <input type="password" name="pwd" id="sidebar-user-pass" class="input" placeholder="<?php _e('Mot de passe', 'yproject'); ?>" />
+                                    <input type="submit" name="wp-submit" id="sidebar-wp-submit" value="OK" />
+
+                                    <input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo  get_the_ID();?>" />
+                                    <input type="hidden" name="type-page" id="type-page" value="<?php echo  get_post_type(get_the_ID());?>" />
+                                    <input type="hidden" name="redirect-page-error" id="redirect-page-error" value="<?php echo get_permalink($page) ?>" />
+                                    <br />
+                                    <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
+                                    <a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">(Mot de passe oubli&eacute;)</a>
+                                    <br /><br />
+                                    <label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" />&nbsp;<?php _e('Se souvenir de moi', 'yproject'); ?></label>
+                                </form>
+                        </li>
+                    </ul>                   
 		</div>
 	    
 		<div id="submenu-mobile">
-                                
-			<ul>    
-				<?php foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
-					<?php $menu_page_object = get_page_by_path($menu_page_key); ?>
-					<li class="page_item"><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></li>
-				<?php endforeach; ?>
-					
-				<?php if (is_user_logged_in()) : ?>
-					<?php /* Menu Mon compte */ ?>
-					<?php $page_update_account = get_page_by_path('modifier-mon-compte'); ?>
-					<li class="page_item"><a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a></li>
-					<li class="page_item"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Param&egrave;tres', 'yproject'); ?></a></li>
-					<li class="page_item"><a href="<?php echo wp_logout_url();echo '&page_id='.get_the_ID() ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
-					
+                    <ul>    
+                        <?php foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
+                                <?php $menu_page_object = get_page_by_path($menu_page_key); ?>
+                                <li class="page_item"><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></li>
+                        <?php endforeach; ?>
 
-				<?php else : ?>
-					<?php /* Menu Connexion */ ?>
-					<?php $page_connexion = get_page_by_path('connexion'); ?>
-					<li class="page_item"><a href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
-				<?php endif; ?>
-			</ul>
+                        <?php if (is_user_logged_in()) : ?>
+                                <?php /* Menu Mon compte */ ?>
+                                <?php $page_update_account = get_page_by_path('modifier-mon-compte'); ?>
+                                <li class="page_item"><a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a></li>
+                                <li class="page_item"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Param&egrave;tres', 'yproject'); ?></a></li>
+                                <li class="page_item"><a href="<?php echo wp_logout_url();echo '&page_id='.get_the_ID() ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
+                        <?php else : ?>
+                                <?php /* Menu Connexion */ ?>
+                                <?php $page_connexion = get_page_by_path('connexion'); ?>
+                                <li class="page_item"><a href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
+                        <?php endif; ?>
+                    </ul>             
 		</div>
-
+             
 		<?php 
 		LibUsers::check_validate_general_terms();
 		if (LibUsers::must_show_general_terms_block()): 
@@ -236,9 +231,53 @@
 					<input type="hidden" name="action" value="validate-terms" />
 					<label for="validate-terms-check"><input type="checkbox" name="validate-terms-check" /> J&apos;accepte les conditions g&eacute;n&eacute;rales d&apos;utilisation</label><br />
 					<div style="text-align: center;"><input type="submit" value="Valider" class="button" /></div>
-				</form>
+				</form> 
 			</div>
 		</div>
 		<?php endif; ?>
-	    
-		<div id="container">
+           
+		<?php 
+		if (is_user_logged_in() && (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID))): 
+			$_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; 
+		?>
+		<div class="timeout-lightbox wdg-lightbox">
+			<div class="wdg-lightbox-click-catcher"></div>
+			<?php 
+			get_currentuserinfo();
+			$user_name_str = $current_user->user_firstname;
+			if ($user_name_str == '') {
+				$user_name_str = $current_user->user_login;
+			}
+			?>
+			<div class="wdg-lightbox-padder">
+				<div class="wdg-lightbox-button-close">
+					<a href="#" class="button">X</a>
+				</div>
+				Bonjour <?php echo $user_name_str; ?>, bienvenue sur WE DO GOOD !
+			</div>
+		</div>
+		<?php endif; ?>
+            
+                <?php 
+                /*if (is_user_logged_in()){
+                    $userId = get_current_user_id(); 
+                    $check = yproject_check_is_warning_meta_init($userId);
+                    if($check){ ?>
+                        <?php 
+                            ob_start();
+                                locate_template('common/warning-lightbox.php',true);
+                                $content = ob_get_contents();
+                            ob_end_clean();
+                        ?>
+                        <div class="wdg-lightbox">
+                            <div class="wdg-lightbox-padder">
+                                <div class="validate-terms-excerpt">
+                                     <?php echo $content; ?>
+				</div>
+                                    
+                            </div>
+                        </div>
+                    <?php }
+                }*/
+                ?>
+                <div id="container"> 

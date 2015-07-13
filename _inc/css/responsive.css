@@ -4,7 +4,7 @@
 *******************************************************************************/
 	.mobile_hidden { display: none !important; }
 	.only_on_mobile { display: block !important; }
-	.center { width: 100% !important; }
+	.center, .center_small { width: 100% !important; }
 	#container { padding-top: 0px !important; }
 	.indent { margin-left: 0px !important; }
 	
@@ -344,4 +344,18 @@
 		text-transform: uppercase;
 		font-size: 20px;
 	}
+
+/*******************************************************************************
+* REGISTER PAGE / REGISTER LIGHTBOX
+*******************************************************************************/
+	.form-register .register-section, .form-register .register-section div.on-focus { text-align: left !important; }
+	.form-register .on-focus input {
+		margin-left: 0px !important;
+		width: 170px;
+		height: 25px;
+		font-size: 20px;
+	}
+	.form-register .tool-tip { width: 100px !important; margin-top: -35px !important; }
+	.form-register .on-focus:nth-child(1) .tool-tip { margin-top: 0px !important; }
+	.form-register .on-focus:nth-child(4) .tool-tip { margin-top: -55px !important; }
 }

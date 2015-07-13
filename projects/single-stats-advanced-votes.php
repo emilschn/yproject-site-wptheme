@@ -10,8 +10,11 @@ if (isset($_GET['campaign_id'])) {
             $status = $campaign->campaign_status();
             
             //N'affiche pas le graphe si les dates des votes n'ont pas été enregistrées ou le vote n'a pas été fait
-            $displayGraph = $status=='vote' || $status=='collecte' || $status=='funded';
-            $displayGraph = $displayGraph && $vote_results['list_date'][0]!='0000-00-00';
+            $displayGraph = ($status=='vote' || $status=='collecte' || $status=='funded')
+                    && $vote_results['count_voters'] != 0
+                    && $vote_results['list_date'][0] != 'NULL'
+                    && $vote_results['list_date'][0] != null
+                    && $vote_results['list_date'][0] != '0000-00-00';
             
             if ($displayGraph){ ?>
             <canvas id="canvas-line-vote" width="420" height="200"></canvas><br/>

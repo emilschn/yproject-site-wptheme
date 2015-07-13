@@ -1,6 +1,10 @@
 <?php date_default_timezone_set("Europe/Paris"); ?>
+<?php $page_list_projects = get_page_by_path('les-projets'); ?>
 
-<?php if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadyloggedin'] === '1'): ?>
+
+<?php 
+//Affichage utilisateur pour prévenir qu'il est déjà connecté (pour ne pas retourner sur la page de connexion)
+if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadyloggedin'] === '1'): ?>
 <div id="already-connected" class="wdg-lightbox">
 	<div class="wdg-lightbox-padder">
 		<div class="wdg-lightbox-button-close">
@@ -14,20 +18,27 @@
 	</div>
 </div>
 <?php endif; ?>
+
+
 <header class="header_home">
 	<div class="center">
 		<div id="welcome_text">
 			<?php the_content(); ?>
-			<?php $page_list_projects = get_page_by_path('les-projets'); ?>
 			<?php if ( is_user_logged_in() ) { ?>
-				<?php global $current_user; get_currentuserinfo(); ?>
-				<p class="hello">Bonjour <?php echo $current_user->user_firstname;?> !</p>
-			<?php } else {
-				$page_connexion_register = get_page_by_path('register'); ?>
+				<?php 
+				global $current_user;
+				get_currentuserinfo();
+				$user_name_str = $current_user->user_firstname;
+				if ($user_name_str == '') {
+					$user_name_str = $current_user->user_login;
+				}
+				?>
+				<p class="hello">Bonjour <?php echo $user_name_str; ?> !</p>
+			<?php } else { ?>
 				<div id="header_homepage_link" class="mobile_hidden">
-				    <a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="button">Inscription</a>
+				    <a href="#register" class="wdg-button-lightbox-open button" data-lightbox="register">Inscription</a>
 				    <a href="#connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">Connexion</a>
-		                    <?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
+                                   
 		                </div>
 
 			<?php } ?>
@@ -35,6 +46,13 @@
 		</div>
 	</div>
 </header>
+
+<?php 
+if ( !is_user_logged_in() ) {
+	echo do_shortcode('[yproject_register_lightbox]');
+	echo do_shortcode('[yproject_connexion_lightbox]');
+}
+?>
 
 <?php
 //*******************
@@ -47,7 +65,6 @@ else {
 
 
 <?php 
-$page_list_projects = get_page_by_path('les-projets');
 $page_finance = get_page_by_path('financement');
 $page_how = get_page_by_path('descriptif');
 ?>
