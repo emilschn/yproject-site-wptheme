@@ -159,6 +159,7 @@ tbody {
 #wpstats {
     display: none;
 }
+.wpb_single_image .vc_single_image-wrapper { max-width: 100%; }
 
 /*******************************************************************************
 * STANDARD FORMS
