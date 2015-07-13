@@ -87,6 +87,8 @@ YPUIFunctions = (function($) {
 			    });
                             
                             if($("#reward-selector").length>0){
+                                $("#reward-selector input:checked").parent().addClass("selected");
+                                
                                 $("#reward-selector input").click(function() {
                                     YPUIFunctions.changeInvestInput();
                                     YPUIFunctions.checkInvestInput();
@@ -549,7 +551,7 @@ YPUIFunctions = (function($) {
                 changeInvestInput: function(){
                     //Change apparence élément sélectionné
                     $("#reward-selector li").removeClass("selected");
-                    $("#reward-selector input:checked").parent().addClass("selected")
+                    $("#reward-selector input:checked").parent().addClass("selected");
                     
                     //Si le montant est insuffisant pour la contrepartie, l'augmenter
                     var rewardSelectedAmount = parseInt($("#reward-selector input:checked~.reward-amount").text());
