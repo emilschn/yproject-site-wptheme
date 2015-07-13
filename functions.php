@@ -377,6 +377,17 @@ function ypbp_core_screen_signup() {
 	do_action( 'bp_core_screen_signup' );
 }
 
+function ypbp_filter_validation_email_subject() {
+    return "Bienvenue chez WE DO GOOD !";
+}
+add_filter('bp_core_signup_send_validation_email_subject', 'ypbp_filter_validation_email_subject');
+function ypbp_filter_validation_email_message() {
+    $message = "Bienvenue sur <a href=\"".esc_url(home_url())."\">WEDOGOOD.co</a> !\n\n";
+    $message .= "Vous êtes prêt à soutenir des projets à impact positif !\n\n";
+    return $message;
+}
+add_filter('bp_core_signup_send_validation_email_message', 'ypbp_filter_validation_email_message');
+
 
 //********
 // Lightbox profil 
