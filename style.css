@@ -57,6 +57,7 @@ tbody {
 .center {
     width: 960px;
     margin: auto;
+    font-size: 14px;
 }
 .center_small {
     width: 480px;
