@@ -382,8 +382,9 @@ function ypbp_filter_validation_email_subject() {
 }
 add_filter('bp_core_signup_send_validation_email_subject', 'ypbp_filter_validation_email_subject');
 function ypbp_filter_validation_email_message() {
-    $message = "Bienvenue sur <a href=\"".esc_url(home_url())."\">WEDOGOOD.co</a> !\n\n";
+    $message = "Bienvenue sur WEDOGOOD.co !\n\n";
     $message .= "Vous êtes prêt à soutenir des projets à impact positif !\n\n";
+    $message .= "Rejoignez la communauté sur ".esc_url(home_url())."\n\n";
     return $message;
 }
 add_filter('bp_core_signup_send_validation_email_message', 'ypbp_filter_validation_email_message');
