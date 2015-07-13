@@ -2,6 +2,7 @@
 	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user;
 	$stylesheet_directory_uri = get_stylesheet_directory_uri();
 	date_default_timezone_set("Europe/Paris");
+	ypcf_session_start();
 	UIHelpers::init_social_infos();
 ?>
 
@@ -163,7 +164,6 @@
 			</div>
 		</nav>
             
-                <?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
 		<div id="submenu_item_connection">
                     <?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
                     <ul>
@@ -196,7 +196,6 @@
 		</div>
 	    
 		<div id="submenu-mobile">
-                                
                     <ul>    
                         <?php foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
                                 <?php $menu_page_object = get_page_by_path($menu_page_key); ?>
@@ -235,8 +234,29 @@
 				</form> 
 			</div>
 		</div>
-		<?php endif; ?>   
+		<?php endif; ?>
            
+		<?php 
+		if (is_user_logged_in() && (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID))): 
+			$_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; 
+		?>
+		<div class="timeout-lightbox wdg-lightbox">
+			<div class="wdg-lightbox-click-catcher"></div>
+			<?php 
+			get_currentuserinfo();
+			$user_name_str = $current_user->user_firstname;
+			if ($user_name_str == '') {
+				$user_name_str = $current_user->user_login;
+			}
+			?>
+			<div class="wdg-lightbox-padder">
+				<div class="wdg-lightbox-button-close">
+					<a href="#" class="button">X</a>
+				</div>
+				Bonjour <?php echo $user_name_str; ?>, bienvenue sur WE DO GOOD !
+			</div>
+		</div>
+		<?php endif; ?>
             
                 <?php 
                 /*if (is_user_logged_in()){

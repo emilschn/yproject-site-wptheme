@@ -329,7 +329,7 @@ function ypbp_core_screen_signup() {
 		
 		// Check that the cgu is checked
 		if ( empty($_POST['validate-terms-check']) )
-			$bp->signup->errors['validate_terms_check'] = __( 'Il faut accepter les conditions g&eacute;n&eacute;rales d&apos;utilisation.', 'yproject' );
+			$bp->signup->errors['validate_terms_check'] = __( 'Merci de cocher la case pour accepter les conditions g&eacute;n&eacute;rales d&apos;utilisation.', 'yproject' );
 
 		$bp->signup->username = $_POST['signup_username'];
 		$bp->signup->email = $_POST['signup_email'];
@@ -356,11 +356,16 @@ function ypbp_core_screen_signup() {
 				$bp->signup->step = 'request-details';
 				bp_core_add_message( $wp_user_id->get_error_message(), 'error' );
 			} else {
-				global $edd_options;
+				global $wpdb, $edd_options;
 				$bp->signup->step = 'completed-confirmation';
+				$wpdb->update( $wpdb->users, array( sanitize_key( 'user_status' ) => 0 ), array( 'ID' => $wp_user_id ) );
 				update_user_meta($wp_user_id, LibUsers::$key_validated_general_terms_version, $edd_options[LibUsers::$edd_general_terms_version]);
-				wp_set_auth_cookie( $wp_user_id, true, is_ssl() );
-				wp_redirect(wp_unslash( $_SERVER['REQUEST_URI'] ));
+				wp_set_auth_cookie( $wp_user_id, false, is_ssl() );
+				if (isset($_POST['redirect-home'])) {
+					wp_redirect(home_url());
+				} else {
+					wp_redirect(wp_unslash( $_SERVER['REQUEST_URI'] ));
+				}
 				exit();
 			}
 
@@ -1448,21 +1453,21 @@ add_shortcode('yproject_widelightbox', 'yproject_shortcode_widelightbox');
 
 //Shortcodes lightbox Connexion
 function yproject_shortcode_connexion_lightbox($atts, $content = '') {
-	ob_start();
-            locate_template('common/connexion-lightbox.php',true);
-            $content = ob_get_contents();
-	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="connexion"]' .$content . '[/yproject_lightbox]');
+    ob_start();
+    locate_template('common/connexion-lightbox.php',true);
+    $lightbox_content = ob_get_contents();
+    ob_end_clean();
+    echo do_shortcode('[yproject_lightbox id="connexion"]' . $content . $lightbox_content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_connexion_lightbox', 'yproject_shortcode_connexion_lightbox');
 
 //Shortcodes lightbox d'inscription 
 function yproject_shortcode_register_lightbox($atts, $content = '') {
-	ob_start();
-            locate_template('common/register-lightbox.php',true);
-            $content = ob_get_contents();
-	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="register"]' .$content . '[/yproject_lightbox]');
+    ob_start();
+    locate_template('common/register-lightbox.php',true);
+    $lightbox_content = ob_get_contents();
+    ob_end_clean();
+    echo do_shortcode('[yproject_lightbox id="register"]' . $content . $lightbox_content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_register_lightbox', 'yproject_shortcode_register_lightbox');
 

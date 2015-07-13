@@ -57,11 +57,9 @@ tbody {
 .center {
     width: 960px;
     margin: auto;
-    font-size: 14px;
 }
-
 .center_small {
-    width: 960px;
+    width: 480px;
     margin: auto;
 }
 
@@ -335,32 +333,18 @@ form.wdg-forms .small-margin {
     margin: 20px 0px;
     text-align: center;
 }
-.wdg-lightbox .register-section div {
-    margin-bottom: 5px;
-}
 .wdg-lightbox div.submit {
     margin: 10px 0px;
     text-align: center;
 }
 
-#wdg-lightbox-register h2 {
-    text-align: center;
-    margin: 5px 0px;
+.wdg-lightbox.timeout-lightbox {
+	background-color: transparent;
+	margin-top: 88px;
 }
-#wdg-lightbox-register .wdg-button-lightbox-open {
-    width: 174px;
-    padding: 5px 0px;
-    display: inline-block;
-    font-size: 12px;
-}
-#wdg-lightbox-register div#connexion_facebook_container {
-    display: block;
-    text-align: center;
-    background-color: transparent;
-}
-#wdg-lightbox-register div#connexion_facebook_container a {
-    background-color: #526794;
-    padding: 2px 0px 5px;
+.wdg-lightbox.timeout-lightbox .wdg-lightbox-padder {
+	background-color: #333333;
+	color: #FFFFFF;
 }
 
 /*******************************************************************************
@@ -411,7 +395,7 @@ form.wdg-forms .small-margin {
     width:200px;
 }
 .on-focus .tool-tip.left, .on-focus .tool-tip.right{
-    margin-top: -26px;
+    margin-top: -30px;
 }
 /* on hover of element containing tooltip default*/
 *:not(.on-focus):hover > .tool-tip, .on-focus input:focus + .tool-tip{
@@ -2663,13 +2647,45 @@ div#home_bottom h1 {
 .login_fail { color : red; }
 
 /*******************************************************************************
-* REGISTER PAGE
-*******************************************************************************/   
-.register_half_part {       
-    float: left;        
-    width: 440px;
-    padding: 0px 15px;
+* REGISTER PAGE / REGISTER LIGHTBOX
+*******************************************************************************/
+#wdg-lightbox-register .wdg-button-lightbox-open {
+    width: 174px;
+    padding: 5px 0px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.form-register .on-focus input { margin-left: 110px; }
+.form-register .on-focus .tool-tip { width: 110px; margin-top: -15px; }
+
+.form-register {
+    margin: 5px;
+}
+.form-register h2 {
     text-align: center;
+    margin: 5px 0px;
+}
+.form-register .warning {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+.form-register .register-section {
+    text-align: center;
+}
+.form-register .register-section div {
+    margin: 7px 0px;
+    text-align: center;
+}
+.form-register div#connexion_facebook_container {
+    display: block;
+    text-align: center;
+    background-color: transparent;
+}
+.form-register div#connexion_facebook_container a {
+    padding: 2px 0px 5px;
+    background-color: #526794;
+    border: 1px solid #526794;
 }
 
 #signup_submit {

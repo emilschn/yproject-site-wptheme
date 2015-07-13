@@ -168,6 +168,9 @@ YPUIFunctions = (function($) {
 					$("#wdg-lightbox-" + sHash).show();
 				}
 			}
+			if ($(".timeout-lightbox").length > 0) {
+				setTimeout(function() { $(".timeout-lightbox").hide(); }, 2000);
+			}
 			
 			
 			if ($("#blog-archives form#add-news").length > 0) {

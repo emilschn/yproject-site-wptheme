@@ -124,32 +124,26 @@ else {
                                         . '<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation">' . $current_organisation->organisation_name
                                         . '</a>'
                                         . '</div><br />';
-                                /*
-                                $page_edit_orga = get_page_by_path('editer-une-organisation');
-                                $edit_org .= '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
-                                $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
-                                $owner_str .= $edit_org;
-                                */
 				$owner_str .= '<div id="wdg-lightbox-project-organisation" class="wdg-lightbox hidden">
-		<div class="wdg-lightbox-click-catcher"></div>
-		<div class="wdg-lightbox-padder">
-		    <div class="wdg-lightbox-button-close">
-			<a href="#" class="button">X</a>
-		    </div>
-		    <div class="content align-center">'.$current_organisation->organisation_name.'</div>
-		    <div class="content align-left">
-		    <span>Forme juridique :</span>'.$current_organisation->organisation_legalform.'<br />
-		    <span>Num&eacute;ro SIREN :</span>'.$current_organisation->organisation_idnumber.'<br />
-		    <span>Code APE :</span>'.$current_organisation->organisation_ape.'<br />
-		    <span>Capital social :</span>'.$current_organisation->organisation_capital.'<br /><br />
-		    </div>
-		    <div class="content align-left">
-		    <span>Si&egrave;ge social :</span>'.$current_organisation->organisation_address.'<br />
-		    <span></span>'.$current_organisation->organisation_postalcode.' '.$current_organisation->organisation_city.'<br />
-		    <span></span>'.$current_organisation->organisation_country.'<br />
-		    </div>
-		</div>
-	    </div>';
+				    <div class="wdg-lightbox-click-catcher"></div>
+				    <div class="wdg-lightbox-padder">
+					<div class="wdg-lightbox-button-close">
+					    <a href="#" class="button">X</a>
+					</div>
+					<div class="content align-center">'.$current_organisation->organisation_name.'</div>
+					<div class="content align-left">
+					<span>Forme juridique :</span>'.$current_organisation->organisation_legalform.'<br />
+					<span>Num&eacute;ro SIREN :</span>'.$current_organisation->organisation_idnumber.'<br />
+					<span>Code APE :</span>'.$current_organisation->organisation_ape.'<br />
+					<span>Capital social :</span>'.$current_organisation->organisation_capital.'<br /><br />
+					</div>
+					<div class="content align-left">
+					<span>Si&egrave;ge social :</span>'.$current_organisation->organisation_address.'<br />
+					<span></span>'.$current_organisation->organisation_postalcode.' '.$current_organisation->organisation_city.'<br />
+					<span></span>'.$current_organisation->organisation_country.'<br />
+					</div>
+				    </div>
+				</div>';
 			} else {
 //				UIHelpers::print_user_avatar($author_id);
 				$author = get_userdata($post_campaign->post_author);
@@ -216,7 +210,7 @@ else {
 
 <?php if (is_user_logged_in() || $campaign->funding_type() == 'fundingdonation') {
     
-    $check = $check = yproject_check_user_warning(get_current_user_id());
+    /*$check = $check = yproject_check_user_warning(get_current_user_id());
     if(!$check){
         ob_start();
             locate_template('common/warning-lightbox.php',true);
@@ -225,7 +219,7 @@ else {
 	echo do_shortcode('[yproject_lightbox id="warning"]' .$content . '[/yproject_lightbox]');
         echo "<div class='align-center'>Il est nécessaire pour continuer que vous prenniez connaisances des risques liés à l'investissement <a href='#warning' class='wdg-button-lightbox-open button' data-lightbox='warning'>ici</a></div></br>";
 
-    } else {
+    } else {*/
 	
 	$editor_params = array( 
 		'media_buttons' => true,
@@ -339,7 +333,7 @@ else {
 	</div>
 	
 <?php
-    }
+//    }
 } else {
 	$page_connexion_register = get_page_by_path('register');
 	$page_connexion = get_page_by_path('connexion');
@@ -347,10 +341,8 @@ else {
 
 	<div class="align-center">
 		<p>Vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet.</p>
-		<a href="<?php echo get_permalink($page_connexion_register->ID); ?>" class="button">Inscription</a>
-		<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">Connexion</a>
-		<?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
-		<br /><br />
+		<a href="#register" id="register" class="wdg-button-lightbox-open button" data-lightbox="register">Inscription</a>
+		<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">Connexion</a><br /><br />
 	</div>
 <?php } ?>
 	

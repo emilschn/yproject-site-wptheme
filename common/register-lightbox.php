@@ -1,4 +1,6 @@
-<form action="<?php echo wp_unslash( $_SERVER['REQUEST_URI'] ); ?>#register" name="signup_form" id="signup_form" class="standard-form" method="post" enctype="multipart/form-data">
+<?php global $page_register; ?>
+
+<form action="<?php echo wp_unslash( $_SERVER['REQUEST_URI'] ); ?>#register" name="signup_form" id="signup_form" class="standard-form form-register" method="post" enctype="multipart/form-data">
 	<?php if ( 'request-details' == ypbp_get_current_signup_step() ) : ?>
 		<h2><?php _e('Inscription', 'yproject'); ?></h2>
     
@@ -41,6 +43,10 @@
 			<label for="validate-terms-check"><input type="checkbox" name="validate-terms-check" /> J&apos;accepte <a href="<?php echo home_url().'/cgu';  ?>"  target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
 			
 			<?php wp_nonce_field( 'register_form_posted' ); ?>
+			
+			<?php if (isset($page_register) && $page_register == TRUE): ?>
+			<input type="hidden" name="redirect-home" value="1" />
+			<?php endif; ?>
 				    
 			<div class="submit">
 				<input type="submit" name="signup_submit" id="signup_submit" value="Cr&eacute;er mon compte" />
@@ -65,9 +71,13 @@
 				    
 	<?php if ( 'completed-confirmation' == ypbp_get_current_signup_step() ) : ?>
 
-		<h2><?php _e( 'Votre compte est maintenant cr&eacute;&eacute;.', 'yproject' ); ?></h2>
+		<h2><?php _e( 'Bienvenue chez WE DO GOOD !', 'yproject' ); ?> :)</h2>
 
-		<?php _e( 'Bienvenue chez WE DO GOOD !', 'yproject' ); ?> :)
-
+		<?php _e( 'Votre compte est cr&eacute;&eacute; et vous bien connect&eacute;.', 'yproject' ); ?><br /><br />
+		
+		<?php if (isset($page_register) && $page_register == TRUE): ?>
+		<?php _e('Rendez-vous sur la page des projets en cliquant sur '); ?><a href="<?php $page_project_list = get_page_by_path('les-projets'); echo get_permalink($page_project_list->ID); ?>"><?php _e('ce lien'); ?></a>.
+		<?php endif; ?>
+		
 	<?php endif; // completed-confirmation signup step ?>
 </form>

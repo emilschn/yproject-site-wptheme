@@ -25,8 +25,15 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 		<div id="welcome_text">
 			<?php the_content(); ?>
 			<?php if ( is_user_logged_in() ) { ?>
-				<?php global $current_user; get_currentuserinfo(); ?>
-				<p class="hello">Bonjour <?php echo $current_user->user_firstname;?> !</p>
+				<?php 
+				global $current_user;
+				get_currentuserinfo();
+				$user_name_str = $current_user->user_firstname;
+				if ($user_name_str == '') {
+					$user_name_str = $current_user->user_login;
+				}
+				?>
+				<p class="hello">Bonjour <?php echo $user_name_str; ?> !</p>
 			<?php } else { ?>
 				<div id="header_homepage_link" class="mobile_hidden">
 				    <a href="#register" class="wdg-button-lightbox-open button" data-lightbox="register">Inscription</a>
