@@ -22,7 +22,7 @@
 							<?php require_once('projects/single-header.php'); ?>
 							<div class="center">
 								<?php 
-								if ($page_name == 'paiement') echo ypcf_print_invest_breadcrumb(3);
+								if ($page_name == 'paiement') echo ypcf_print_invest_breadcrumb(3, $campaign->funding_type());
 								
 								the_content();
 								
