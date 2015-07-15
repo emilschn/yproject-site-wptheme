@@ -96,6 +96,7 @@ YPUIFunctions = (function($) {
                             }
 
 			    $("#link_validate_invest_amount").click(function() {
+                                YPUIFunctions.checkInvestInput();
 				$("#validate_invest_amount_feedback").show();
 				$('html, body').animate({scrollTop: $('#link_validate_invest_amount').offset().top - $("#navigation").height()}, "slow"); 
 			    });
@@ -567,6 +568,8 @@ YPUIFunctions = (function($) {
 			$(".invest_success").hide();
 
 			var bValidInput = true;
+                        $("#input_invest_amount_part").val(($("#input_invest_amount_part").val()).replace(/,/g,"."));
+                        
 			if (!$.isNumeric($("#input_invest_amount_part").val())) {
 			    $("#invest_error_general").show();
 			    bValidInput = false;
@@ -609,7 +612,10 @@ YPUIFunctions = (function($) {
 			}
 			if (bValidInput) {
 			    $("#invest_success_amount").text( parseInt($("#input_invest_amount_total").val()) + parseInt($("#input_invest_amount").text()));
-			    $(".invest_success").show();
+			    $("#invest_show_amount").text( parseInt($("#input_invest_amount").text()));
+                            $("#invest_show_reward").text( ($("#reward-selector input:checked~.reward-name").text()));
+                            
+                            $(".invest_success").show();
 			}
 
 			$("#input_invest_amount_part").css("color", bValidInput ? "green" : "red");
