@@ -353,6 +353,7 @@
 	#invest-breadcrumb img, .mangopay-image img { width: 320px; height: auto; }
 	.invest_part { width: 94% !important; padding: 10px 3% !important; }
 	.invest_part .label { width: auto !important; }
+	.invest_step1_generalities, .invest_step1_currentproject { margin: 2% !important; }
 
 /*******************************************************************************
 * CONNECTION
