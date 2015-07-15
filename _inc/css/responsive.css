@@ -349,8 +349,10 @@
 * INVESTMENT
 *******************************************************************************/
 	#invest_form { width: 90% !important; }
-	#invest-breadcrumb { padding-left: 0px !important; }
+	#invest-breadcrumb { padding: 30px 0px !important; }
 	#invest-breadcrumb img, .mangopay-image img { width: 320px; height: auto; }
+	.invest_part { width: 94% !important; padding: 10px 3% !important; }
+	.invest_part .label { width: auto !important; }
 
 /*******************************************************************************
 * CONNECTION
