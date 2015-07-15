@@ -15,16 +15,16 @@
 
 		    <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
 			<label class="standard-label"><?php _e('Identifiant', 'yproject'); ?></label>
-			<input style="margin-bottom: 5px; width: 254px;" type="text" name="log" class="input" value="<?php if ( isset( $user_login) ) echo esc_attr(stripslashes($user_login)); ?>" />
+			<input style="margin-bottom: 5px; width: 254px;" type="text" name="log" class="input" value="<?php if ( isset( $user_login) ) echo esc_attr(stripslashes($user_login)); ?>" placeholder="<?php _e('Identifiant', 'yproject'); ?>" />
 			<br />
-
 
 			<label class="standard-label"><?php _e('Mot de passe', 'yproject'); ?></label>
 			<input type="password" name="pwd" class="input" value="" /> 
 			<input type="submit" name="wp-submit" id="sidebar-wp-submit" style="width: 100px; background: #FFF;" value="<?php _e('Connexion', 'yproject'); ?>" />
 			<br />
+			
 			<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-			<span class="link-forgotten">(<a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)</span>
+			<span class="link-forgotten">(<a href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)</span>
 
 			<p class="forgetmenot">
 			    <input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" /> <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
@@ -33,19 +33,21 @@
 			<input type="hidden" name="testcookie" value="1" />
 		    </form>
 
-		    <hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
+		    <hr class="form-separator" />
 
-		    <div id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><img style="border-right: 1px solid #FFFFFF; width:25px; height:25px;" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" alt="connexion facebook"class="vert-align"/><span style=" font-size:12px;">&nbsp;Se connecter avec Facebook</span></a></div>
+		    <div class="align-center"><div id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><img style="border-right: 1px solid #FFFFFF; width:25px; height:25px;" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" alt="connexion facebook"class="vert-align"/><span style=" font-size:12px;">&nbsp;Se connecter avec Facebook</span></a></div></div>
 
 		    <div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
 
-		    <hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
+		    <hr class="form-separator" />
 
 		    <?php $page_connexion_register = get_page_by_path('register'); ?>
 
-		    <div class="post_bottom_buttons_connexion" style="text-align: center;"><div style="display: inline-block; background-color: #3E3E40; text-align: left;" id="submenu_item_connection_register" class="dark">
-		    <a href="<?php echo get_permalink($page_connexion_register->ID); ?>"><img width="25" height="25" src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" alt="triangle blanc"><span style="font-size: 9pt; vertical-align: 8px; color: #FFF; ">Cr&eacute;er un compte</span></a>
-		    </div></div>
+		    <div class="post_bottom_buttons_connexion align-center">
+			<div style="display: inline-block; background-color: #3E3E40; text-align: left;" id="submenu_item_connection_register" class="dark">
+			<a href="<?php echo get_permalink($page_connexion_register->ID); ?>"><img width="25" height="25" src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" alt="triangle blanc"><span style="font-size: 9pt; vertical-align: 8px; color: #FFF; ">Cr&eacute;er un compte</span></a>
+			</div>
+		    </div>
 	    </div>
 	</div>
     </div>

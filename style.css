@@ -162,6 +162,8 @@ tbody {
 }
 .wpb_single_image .vc_single_image-wrapper { max-width: 100%; }
 
+hr.form-separator { -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0; }
+
 /*******************************************************************************
 * STANDARD FORMS
 *******************************************************************************/
@@ -435,6 +437,7 @@ form.wdg-forms .small-margin {
     font-size: 14px;
 }
 #sidebar-login-form .link-forgotten { margin-left: 140px; }
+#sidebar-login-form .link-forgotten a { color: #333333; text-align: right; font-size: 10px; font-style: italic; }
 
 /*******************************************************************************
 * HEADER MENU
