@@ -37,7 +37,7 @@ $suffix = ($campaign->edit_version() > 1) ? '-sf' : '';
 </div><!-- #content -->
 
 <?php if (!is_user_logged_in()): ?>
-	<?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
+	<?php echo do_shortcode('[yproject_connexion_lightbox]<p class="align-center">'.__('Afin de soutenir un projet, vous devez &ecirc;tre inscrit et connect&eacute;.', 'yproject').'</p>[/yproject_connexion_lightbox]'); ?>
 	<?php echo do_shortcode('[yproject_register_lightbox]'); ?>
 <?php endif; ?>
 

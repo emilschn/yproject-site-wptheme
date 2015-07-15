@@ -5,10 +5,10 @@
 		<h2><?php _e('Inscription', 'yproject'); ?></h2>
     
 		<div class="warning">
-			La cr&eacute;ation d&apos;un compte de Membre sur WEDOGOOD.co est exclusivement r&eacute;serv&eacute;e aux personnes physique.<br />
-			Chaque Membre ne peut b&eacute;n&eacute;ficier que d&apos;un seul compte &agrave; son nom.<br />
+			La cr&eacute;ation d&apos;un compte de Membre sur WEDOGOOD.co est exclusivement r&eacute;serv&eacute;e aux personnes physiques.<br />
+			Chaque membre ne peut b&eacute;n&eacute;ficier que d&apos;un seul compte &agrave; son nom.<br /><br />
 			Si vous souhaitez investir ou porter un projet pour une organisation, vous pourrez l&apos;indiquer au moment de l&apos;investissement ou dans les param&egrave;tres du projet.<br />
-			En m&apos;inscrivant, je recevrai automatiquement la newsletter de WE DO GOOD. Je pourrai me d&eacute;sinscrire &agrave; tout moment.
+			Vous recevrez automatiquement la newsletter de WE DO GOOD et pourrez vous en d&eacute;sinscrire &agrave; tout moment.
 		</div>
 
 		<div class="errors">
