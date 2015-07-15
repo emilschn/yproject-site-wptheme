@@ -4,7 +4,7 @@
  * Le reste de la page devrait être fait dans un shortcode. On verra ça plus tard.
  */ 
 if (!is_user_logged_in()) wp_redirect(site_url());
-if (session_id() == '') session_start();
+ypcf_session_start();
 get_header();
 ?>
 
@@ -17,23 +17,19 @@ get_header();
 		    <h2 class="underlined"><?php _e( 'Param&egrave;tres', 'yproject' ); ?></h2>
 		    
 		    <?php if (isset($_POST['update_user_posted'])){ 
-			    global $validate_email;
 			    $valid = true;
 			    if ( isset($_POST["update_password_current"]) && !wp_check_password( $_POST["update_password_current"], $current_user->data->user_pass, $current_user->ID)) :
+				$valid = false;
 			    ?>
 				<span class="errors"><?php _e( 'Le mot de passe renseign&eacute; ne correspond pas. Les modifications ne sont pas enregistr&eacute;es.', 'yproject' ); ?></span><br />
-			    <?php
-				$valid = false;
-			    endif;
+			    <?php endif;
 			    
+			    global $validate_email;
 			    if ($validate_email !== true):
+				$valid = false;
 			    ?>
 				<span class="errors"><?php _e( 'L&apos;adresse e-mail renseign&eacute;e est invalide ou d&eacute;j&agrave; utilis&eacute;e', 'yproject' ); ?></span><br />
-				
-			    <?php
-				$valid = false;
-			    endif;
-			    ?>
+			    <?php endif; ?>
 				
 			    <?php if ($valid) { ?>
 				
@@ -73,8 +69,7 @@ get_header();
 						    move_uploaded_file($_FILES['avatar_image']['tmp_name'],$avatar_path.'avatar'.$type);
 					    }
 				    }
-
-				    update_user_meta(bp_loggedin_user_id(), 'description', $_POST['user_description'] );
+				    
 				    if ($_POST['facebook_avatar'] || $_POST['reset_avatar']) {
 					    if(file_exists(BP_AVATAR_UPLOAD_PATH. '/avatars/'.bp_loggedin_user_id().'/avatar.png')){
 						    unlink(BP_AVATAR_UPLOAD_PATH. '/avatars/'.bp_loggedin_user_id().'/avatar.png');
@@ -97,40 +92,44 @@ get_header();
 				unset($_SESSION['error_invest']);
 			    }
 		    } ?>
+				
+		    <?php
+		    $is_campaign_investment_type = FALSE;
+		    if (isset($_SESSION['redirect_current_campaign_id'])) {
+			    $post_campaign = get_post($_SESSION['redirect_current_campaign_id']);
+			    $campaign = atcf_get_campaign($post_campaign);
+			    if ($campaign->funding_type() != 'fundingdonation') { $is_campaign_investment_type = TRUE; }
+		    }
+		    ?>
 
 		    <?php $page_update_account = get_page_by_path('modifier-mon-compte'); ?>
 		    <form name="update-form" class="standard-form" action="<?php echo get_permalink($page_update_account->ID); ?>" method="post" enctype="multipart/form-data" id='update-user-form'>
 
-			<h4 style="padding-left: 20px;"><?php _e('Ces informations sont n&eacute;cessaires pour investir dans un projet.', 'yproject'); ?></h4>
+			<h4 style="padding-left: 20px;">
+				<?php if ($is_campaign_investment_type): ?>
+					<?php _e('Les informations suivies d&apos;une &eacute;toile sont n&eacute;cessaires pour investir sur un projet.', 'yproject'); ?>
+				<?php else: ?>
+					<?php _e('Les informations suivies d&apos;une &eacute;toile sont n&eacute;cessaires pour soutenir un projet.', 'yproject'); ?>
+				<?php endif; ?>
+			</h4>
 
 			    <div id="form_infoperso_projet">
-				<label for="update_gender" class="standard-label">Vous &ecirc;tes</label>
+				<label for="update_gender" class="standard-label">Vous &ecirc;tes <?php if ($is_campaign_investment_type){ ?>*<?php } ?></label>
 				<select name="update_gender" id="update_gender">
 				    <option value="female"<?php if ($current_user->get('user_gender') == "female") echo ' selected="selected"';?>>une femme</option>
 				    <option value="male"<?php if ($current_user->get('user_gender') == "male") echo ' selected="selected"';?>>un homme</option>
 				</select><br />
 
-				<label for="update_firstname" class="standard-label"><?php _e( 'Pr&eacute;nom', 'yproject' ); ?></label>
+				<label for="update_firstname" class="standard-label"><?php _e( 'Pr&eacute;nom', 'yproject' ); ?> *</label>
 				<input type="text" name="update_firstname" id="update_firstname" value="<?php echo $current_user->user_firstname; ?>" /><br />
 
-				<label for="update_lastname" class="standard-label"><?php _e( 'Nom', 'yproject' ); ?></label>
+				<label for="update_lastname" class="standard-label"><?php _e( 'Nom', 'yproject' ); ?> *</label>
 				<input type="text" name="update_lastname" id="update_lastname" value="<?php echo $current_user->user_lastname; ?>" /><br />
 
 				<label for="update_publicname" class="standard-label">Nom public</label>
 				<input type="text" name="update_publicname" id="update_publicname" value="<?php echo $current_user->display_name; ?>" /><br />
 				
-				<label for="avatar_image" class="standard-label">Avatar</label>
-				<input type="file" name="avatar_image" id="avatar_image" />
-				<input type="checkbox" name="reset_avatar">Supprimer l'avatar actuel
-				<?php 
-				$facebook_meta = get_user_meta($current_user->ID, 'social_connect_facebook_id', true);
-				if (isset($facebook_meta) && $facebook_meta != "") : 
-				?>
-				<input type="checkbox" name="facebook_avatar">Utiliser l'avatar facebook
-				<?php endif; ?>
-				<br />
-
-				<label for="update_birthday_day" class="standard-label"><?php _e( 'Date de naissance', 'yproject' ); ?></label>
+				<label for="update_birthday_day" class="standard-label"><?php _e( 'Date de naissance', 'yproject' ); ?> *</label>
 				<select name="update_birthday_day" id="update_birthday_day">
 				    <?php for ($i = 1; $i <= 31; $i++) { ?>
 					    <option value="<?php echo $i; ?>"<?php if ($current_user->get('user_birthday_day') == $i) echo ' selected="selected"';?>><?php echo $i; ?></option>
@@ -151,11 +150,11 @@ get_header();
 				</select>
 				<br />
 
-				<label for="update_birthplace" class="standard-label">Ville de naissance</label>
+				<label for="update_birthplace" class="standard-label"><?php _e( 'Ville de naissance', 'yproject' ); ?> <?php if ($is_campaign_investment_type){ ?>*<?php } ?></label>
 				<input type="text" name="update_birthplace" id="update_birthplace" value="<?php echo $current_user->get('user_birthplace'); ?>" /><br />
 
 				<?php require_once("country_list.php"); ?>
-				<label for="update_nationality" class="standard-label"><?php _e( 'Nationalit&eacute;', 'yproject' ); ?></label>
+				<label for="update_nationality" class="standard-label"><?php _e( 'Nationalit&eacute;', 'yproject' ); ?> *</label>
 				<select name="update_nationality" id="update_nationality">
 				    <option value=""></option>
 				    <?php foreach ($country_list as $country_code => $country_name) : ?>
@@ -163,23 +162,38 @@ get_header();
 				    <?php endforeach; ?>
 				</select><br />
 
-				<label for="update_address" class="standard-label"><?php _e( 'Adresse', 'yproject' ); ?></label>
+				<label for="update_address" class="standard-label"><?php _e( 'Adresse', 'yproject' ); ?> <?php if ($is_campaign_investment_type){ ?>*<?php } ?></label>
 				<input type="text" name="update_address" id="update_address" value="<?php echo $current_user->get('user_address'); ?>" /><br />
 
-				<label for="update_postal_code" class="standard-label"><?php _e( 'Code postal', 'yproject' ); ?></label>
+				<label for="update_postal_code" class="standard-label"><?php _e( 'Code postal', 'yproject' ); ?> <?php if ($is_campaign_investment_type){ ?>*<?php } ?></label>
 				<input type="text" name="update_postal_code" id="update_postal_code" value="<?php echo $current_user->get('user_postal_code'); ?>" /><br />
 
-				<label for="update_city" class="standard-label"><?php _e( 'Ville', 'yproject' ); ?></label>
+				<label for="update_city" class="standard-label"><?php _e( 'Ville', 'yproject' ); ?> <?php if ($is_campaign_investment_type){ ?>*<?php } ?></label>
 				<input type="text" name="update_city" id="update_city" value="<?php echo $current_user->get('user_city'); ?>" /><br />
 
-				<label for="update_country" class="standard-label"><?php _e( 'Pays', 'yproject' ); ?></label>
+				<label for="update_country" class="standard-label"><?php _e( 'Pays', 'yproject' ); ?> <?php if ($is_campaign_investment_type){ ?>*<?php } ?></label>
 				<input type="text" name="update_country" id="update_country" value="<?php echo $current_user->get('user_country'); ?>" /><br />
 
 				<label for="update_mobile_phone" class="standard-label"><?php _e( 'T&eacute;l&eacute;phone mobile', 'yproject' ); ?></label>
 				<input type="text" name="update_mobile_phone" id="update_mobile_phone" value="<?php echo $current_user->get('user_mobile_phone'); ?>" /><br /><br />
 
-				<label for="user_description" class="standard-label">Description</label>
-				<textarea name="user_description"> <?php $user_meta = get_userdata(bp_loggedin_user_id()); echo($user_meta->description);?></textarea>
+				<?php 
+				//Champs avatar et description uniquement si on n'est pas redirigé depuis un investissement
+				if (!isset($_SESSION['redirect_current_campaign_id'])): ?>
+					<label for="avatar_image" class="standard-label">Avatar</label>
+					<input type="file" name="avatar_image" id="avatar_image" />
+					<input type="checkbox" name="reset_avatar">Supprimer l'avatar actuel
+					<?php 
+					$facebook_meta = get_user_meta($current_user->ID, 'social_connect_facebook_id', true);
+					if (isset($facebook_meta) && $facebook_meta != "") : 
+					?>
+					<input type="checkbox" name="facebook_avatar">Utiliser l'avatar facebook
+					<?php endif; ?>
+					<br />
+
+					<label for="user_description" class="standard-label">Description</label>
+					<textarea name="user_description"> <?php $user_meta = get_userdata(bp_loggedin_user_id()); echo($user_meta->description);?></textarea>
+				<?php endif; ?>
 			    </div>
 		
 
@@ -235,9 +249,7 @@ get_header();
 			<input type="hidden" name="update_user_posted" value="posted" />
 			<input type="hidden" name="update_user_id" value="<?php echo $current_user->ID; ?>" />
 		    </form>
-                    	<?php
-		
-		?>
+                    	<?php /* ?>
                      <h2 class="underlined"><?php _e( 'Avertissement', 'yproject' ); ?></h2>
                     <div id="form_infoperso_projet">
                    
@@ -279,7 +291,7 @@ get_header();
                     <?php } ?>
                      </form>   
                     </div>
-                    </div>
+                    </div> <?php */ ?>
 	    </div>
 	</div>
 </div>
