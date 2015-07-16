@@ -7,5 +7,8 @@ if ($campaign->current_user_can_edit()) {?>
     <?php
 	locate_template( array("projects/stats-investments-public.php"), true );
         print_investments($campaign->ID, true);
+        ?>
+            <a href="#listinvestors" class="wdg-button-lightbox-open button" data-lightbox="listinvestors">&#x1f50e; Liste des <?php echo $campaign->funding_type_vocabulary()['investor_name']?>s</a>
+        <?php 
 }
 ?>

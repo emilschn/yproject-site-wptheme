@@ -302,7 +302,7 @@ $campaign_id = $_GET['campaign_id'];
                                                 <?php echo do_shortcode('[yproject_votecontact_lightbox]'); ?>
                                         <a href="#listinvestors" class="wdg-button-lightbox-open" data-lightbox="listinvestors">
                                         <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png"/><br/>
-                                            <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> investi
+                                            <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> <?php echo $campaign->funding_type_vocabulary()['investor_verb'];?>
                                             <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus"/></div>
                                             </a>
                                         <!--div class="list-button">
@@ -322,14 +322,14 @@ $campaign_id = $_GET['campaign_id'];
                                 </div>
                                     
                                 <div id="block-investors" class="block">
-                                    <div class="head">Investisseurs</div>
+                                    <div class="head"><?php echo $campaign->funding_type_vocabulary()['investor_name'];?>s</div>
                                     <div class="body" style="text-align:center">
                                     <p>
                                         <img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
-                                        <?php echo $nb_invests?> investissement<?php if($nb_invests>1){echo 's';}?></p>
+                                        <?php echo $nb_invests?> <?php echo $campaign->funding_type_vocabulary()['investor_action']; if($nb_invests>1){echo 's';}?></p>
                                     <p><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true) ; ?></p>
                                     <div class="list-button">
-                                        <a href="#listinvestors" class="wdg-button-lightbox-open button" data-lightbox="listinvestors">&#x1f50e; Liste des investisseurs</a>
+                                        <a href="#listinvestors" class="wdg-button-lightbox-open button" data-lightbox="listinvestors">&#x1f50e; Liste des <?php echo $campaign->funding_type_vocabulary()['investor_name'];?>s</a>
 		                    <?php echo do_shortcode('[yproject_listinvestors_lightbox]'); ?>
                                     </div>
                                     </div>

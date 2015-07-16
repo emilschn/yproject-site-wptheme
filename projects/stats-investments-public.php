@@ -35,11 +35,8 @@
     <h3>Ils ont <?php echo $voc['investor_verb']?></h3>
     <p class="data-inv-investors_string">&hellip;</p>
     </div>
-
-    <?php if($is_advanced): ?>
-    <a href="#listinvestors" class="wdg-button-lightbox-open button" data-lightbox="listinvestors">&#x1f50e; Liste des investisseurs</a>
-    <?php endif; ?>
     
+    <?php if(edd_has_variable_prices($id_campaign)): ?>
     <script type="text/javascript">
         jQuery(document).ready( function($) {
             var ctxRewardHorizontal = $("#canvas-horizontal-rewards").get(0).getContext("2d");
@@ -112,5 +109,6 @@
             var canvasRewardHorizontal = new Chart(ctxRewardHorizontal).HorizontalStackedBar(dataRewardHorizontal, optionsRewardHorizontal);
         });
     </script>
-
+    <?php endif; ?>
+    
 <?php }?>
