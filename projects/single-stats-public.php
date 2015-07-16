@@ -30,12 +30,19 @@ else {
 	}
 ?>
 </div>
-
-<h2 class="expandator" data-target="investments">Investissements <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus" /></h2>
+<?php
+switch (atcf_get_campaign($campaign_id)->funding_type()) {
+        case 'fundingdonation' :
+            $investor_action = 'Contributions';
+            break;
+        default :
+            $investor_action = 'Investissements';
+    }?>
+<h2 class="expandator" data-target="investments"><?php echo $investor_action;?> <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus" /></h2>
 <div id="extendable-investments" class="expandable">
 <?php 
 	locate_template( array("projects/stats-investments-public.php"), true );
-        print_investments($campaign_id, true);
+        print_investments($campaign_id, false);
 ?>
 </div>
 
