@@ -91,6 +91,7 @@
 	footer .widget-area .menu-item a { 
 		font-size: 12px;
 	}
+	footer div.widget-area-large { width: 100% !important; }
 	footer .widget-area ul.xoxo { margin-bottom: 0px; }
 	footer #first { margin-left: 0px !important; }
 	footer #first span.only_on_mobile { 
@@ -293,13 +294,13 @@
 	}
 	.mobile-share { text-align: center; }
 	.mobile-share .jy-crois .stats_btn {
-		background-position-x: center;
+		background-position: 10px 0px;
 		vertical-align: top;
 		background-size: 75%;
 		height: 75px !important;
 		margin-right: 0px;
 	}
-	.mobile-share .jy-crois .stats_btn #jy-crois-txt { top: 35px; }
+	.mobile-share .jy-crois .stats_btn #jy-crois-txt { top: 35px; left: -10px; }
 	.mobile-share .jy-crois .stats_btn p { top: 55px; }
 	.reward-zone {
 		background-color: #EEECED;
