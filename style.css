@@ -3177,6 +3177,24 @@ table.mceLayout {
     font-weight: bold;
 }
 
+#reward-selector .reward-amount {
+    font-size: 16px;
+}
+
+#reward-selector .reward-not-null {
+    font-size: 16px;
+    margin: 7px 0px;
+}
+
+#reward-selector .reward-not-null {
+    font-size: 16px;
+    margin: 7px 0px;
+}
+
+#reward-selector li {
+    padding: 8px;
+}
+
 #reward-selector .unavailable-reward {
     opacity: 0.5;
 }

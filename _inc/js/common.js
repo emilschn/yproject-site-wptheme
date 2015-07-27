@@ -82,12 +82,12 @@ YPUIFunctions = (function($) {
 			}
 
 			if ($("#input_invest_amount_part").length > 0) {
-			    $("#input_invest_amount_part").change(function() {
+			    $("#input_invest_amount_part").on( 'keyup change', function () {
 				YPUIFunctions.checkInvestInput();
 			    });
                             
                             if($("#reward-selector").length>0){
-                                $("#reward-selector input:checked").parent().addClass("selected");
+                                $("#reward-selector input:checked").closest("li").addClass("selected");
                                 
                                 $("#reward-selector input").click(function() {
                                     YPUIFunctions.changeInvestInput();
@@ -531,7 +531,7 @@ YPUIFunctions = (function($) {
                 changeInvestInput: function(){
                     //Change apparence élément sélectionné
                     $("#reward-selector li").removeClass("selected");
-                    $("#reward-selector input:checked").parent().addClass("selected");
+                    $("#reward-selector input:checked").closest("li").addClass("selected");
                     
                     //Si le montant est insuffisant pour la contrepartie, l'augmenter
                     var rewardSelectedAmount = parseInt($("#reward-selector input:checked~.reward-amount").text());
@@ -591,8 +591,7 @@ YPUIFunctions = (function($) {
 			if (bValidInput) {
 			    $("#invest_success_amount").text( parseInt($("#input_invest_amount_total").val()) + parseInt($("#input_invest_amount").text()));
 			    $("#invest_show_amount").text( parseInt($("#input_invest_amount").text()));
-                            $("#invest_show_reward").text( ($("#reward-selector input:checked~.reward-name").text()));
-                            
+                            $("#invest_show_reward").text( ($("#reward-selector input:checked").closest("li").find(".reward-name").text()));
                             $(".invest_success").show();
 			}
 
