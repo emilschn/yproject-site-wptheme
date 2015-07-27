@@ -66,6 +66,17 @@ function yproject_enqueue_script(){
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
 //	wp_enqueue_script( 'wdg-ux-helper', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-ux-helper.js', array('wdg-script'));
+
+        //TODO : Ne charger que s'il y a des tableaux DataTable
+        wp_enqueue_script( 'datatable-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/jquery.dataTables.js', array('wdg-script'), true, true);
+        wp_enqueue_style('datatable-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/jquery.dataTables.css', null, false, 'all');
+	//wp_enqueue_script( 'datatable-resp-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.responsive.js', array('wdg-script'), true, true);
+        //wp_enqueue_style('datatable-resp-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.responsive.css', null, false, 'all');
+	wp_enqueue_script( 'datatable-colvis-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colVis.js', array('wdg-script'), true, true);
+        wp_enqueue_style('datatable-colvis-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.colVis.css', null, false, 'all');
+	wp_enqueue_script( 'datatable-colReorder-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colReorder.js', array('wdg-script'), true, true);
+        wp_enqueue_style('datatable-colReorder-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.colReorder.css', null, false, 'all');
+        
 	
 	wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.js', array('jquery'));
 	wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, 'all');
@@ -960,7 +971,7 @@ function yproject_save_edit_project() {
 add_action('wp_ajax_save_edit_project', 'yproject_save_edit_project');
 add_action('wp_ajax_nopriv_save_edit_project', 'yproject_save_edit_project');
 
-function get_investors_list() {
+function get_investors_table() {
     
         locate_template( array("requests/investments.php"), true );
         $investments_list = (json_decode($_POST['data'],true));
@@ -1010,7 +1021,7 @@ function get_investors_list() {
                             'Signature');
         if ($is_campaign_over) { $titrecolonnes[]='Investissement'; }
         if ($campaign->funding_type()=='fundingdonation') {
-            $titrecolonnes[]='Palier de contrepartie choisi';
+            $titrecolonnes[]='Palier de contrepartie';
             $titrecolonnes[]='Description de la contrepartie';
         }
         
@@ -1027,7 +1038,7 @@ function get_investors_list() {
                             true,
                             true,
                             true,
-                            false,
+                            true,
                             false,
                             false,
                             false);
@@ -1040,53 +1051,29 @@ function get_investors_list() {
         $displaycolonnes = array_combine($classcolonnes,$selectiondefaut);
     ?>
 
-<div id="display-options-col-div">
-    <form>
-    <fieldset id="display-options-col-menu">
-        <ul id="display-options-col-list">
-            <li id="cb-li-collall">
-                <input id="cbcolall" class="check-users-columns" type="checkbox" value="all">
-                </input><label for="cbcolall">Tout sélectionner</label>
-            </li>
-        <?php foreach($colonnes as $class=>$titre){
-            //Checkbox d'affichage des colonnes : voir dans common.js
-                echo '<li><input type="checkbox" ';
-                if (($displaycolonnes[$class]) == true){echo 'checked ';}
-                echo 'class="check-users-columns" '
-                    .'value="'.$class.'" '
-                    .'id="cb'.$class.'">'
-                    .' <label for="cb'.$class.'">'.$titre.'</label></li> ';}
-        ?>
-        </ul>
-    </fieldset>
-    </form>
-</div>
-
-<br/>
-
-<div class="tablescroll" >
-<table class="wp-list-table" cellspacing="0" id="investors-table">
+<div class="wdg-datatable" >
+<table id="investors-table" class="display" cellspacing="0" width="100%">
     
-    <thead style="background-color: #CCC;">
+    <thead>
     <tr>
         <?php foreach($colonnes as $class=>$titre){
             //Ecriture des nom des colonnes en haut
-            echo '<td class="'.$class.'" ';
-            if (($displaycolonnes[$class]) == false){echo 'hidden=""';}
+            echo '<td ';
+            if (($displaycolonnes[$class]) == false){
+                echo 'data-visibility="0"';
+            } else {
+                echo 'data-visibility="1"';
+            }
             echo '>'.$titre.'</td>';}?>
     </tr>
     </thead>
 
-    <tbody id="the-list">
+    <tbody>
 	<?php
-	$i = -1;
         require_once("country_list.php");
         global $country_list;
         
 	foreach ( $investments_list['payments_data'] as $item ) {
-		$i++;
-		$bgcolor = ($i % 2 == 0) ? "#FFF" : "#EEE";
-
 		$post_invest = get_post($item['ID']);
 		$mangopay_id = edd_get_payment_key($item['ID']);
 		$payment_type = 'Carte';
@@ -1175,14 +1162,11 @@ function get_investors_list() {
                 $affichedonnees = array_combine($classcolonnes, $datacolonnes);
                 ?>
                 
-                <tr style="background-color: <?php echo $bgcolor; ?>">
+                <tr>
                 <?php
                     //Ecriture de la ligne
                     foreach($affichedonnees as $class=>$data){
-                        /*echo '<td class="'.$class.'">'.$data.'</td>';*/
-                        echo '<td class="'.$class.'" ';
-                        if (($displaycolonnes[$class]) == false){echo 'hidden=""';}
-                        echo '>'.$data.'</td>';
+                        echo '<td>'.$data.'</td>';
                     }
 		?>
                 </tr>
@@ -1192,23 +1176,94 @@ function get_investors_list() {
 	?>
     </tbody>
     
-    <tfoot style="background-color: #CCC;">
+    <tfoot>
     <tr>
         <?php foreach($colonnes as $class=>$titre){
-            //Ecriture des nom des colonnes en bas
-            echo '<td class="'.$class.'" ';
-            if (($displaycolonnes[$class]) == false){echo 'hidden=""';}
-            echo '>'.$titre.'</td>';}?>        
+            //Ecriture des noms des colonnes en bas
+            echo '<td>'.$titre.'</td>';}?>        
     </tr>
     </tfoot>
 </table>
 </div>
+<br/>
+
+<script type="text/javascript">
+    jQuery(document).ready( function($) {
+        //Ajoute mise en page et interactions du tableau
+        // Ajoute un champ de filtre à chaque colonne dans le footer
+        $('#investors-table tfoot td').each( function () {
+            $(this).prepend( '<input type="text" placeholder="Filtrer par :" class="col-filter"/><br/>' );
+        } );
+
+        // Ajoute les actions de filtrage
+        $("#investors-table tfoot input").on( 'keyup change', function () {
+            table
+                .column( $(this).parent().index()+':visible' )
+                .search( this.value )
+                .draw();
+        } );
+        //Récupère les colonnes à afficher et le tri par défaut 
+        col_to_hide = [];
+        sortColumn = 0;
+        $('#investors-table thead td').each(function(index){
+            if($(this).attr('data-visibility')==="0"){col_to_hide.push(index);}
+            if($(this).text() === "Date"){sortColumn = index;};
+        });
+
+        //Initialise le tableau
+        var table = $('#investors-table').DataTable({
+            order: [[ sortColumn, "desc" ]], //Colonne à trier (date)
+
+            dom: 'RC<"clear">lfrtip',
+            lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "Tous"]], //nombre d'élements possibles
+            iDisplayLength: 10,//nombre d'éléments par défaut
+            //scrollX: true //scroll horizontal : completement buggué
+
+            columnDefs: [
+                {
+                    "targets": col_to_hide,
+                    "visible": false
+                }
+            ],
+            //Boutons de sélection de colonnes
+            colVis: {
+                buttonText: "Afficher/cacher colonnes",
+                restore: "Restaurer",
+                showAll: "Tout afficher",
+                showNone: "Tout cacher",
+                overlayFade: 100
+            },
+            language: {
+                    "sProcessing":     "Traitement en cours...",
+                    "sSearch":         "Rechercher&nbsp;:",
+                "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+                    "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    "sInfoPostFix":    "",
+                    "sLoadingRecords": "Chargement en cours...",
+                "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+                    "oPaginate": {
+                            "sFirst":      "Premier",
+                            "sPrevious":   "Pr&eacute;c&eacute;dent",
+                            "sNext":       "Suivant",
+                            "sLast":       "Dernier"
+                    },
+                    "oAria": {
+                            "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                            "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                    }
+            }
+        });
+    })
+</script>
     
     
     <?php exit();
 }
-add_action('wp_ajax_get_investors_list', 'get_investors_list');
-add_action('wp_ajax_nopriv_get_investors_list', 'get_investors_list');
+add_action('wp_ajax_get_investors_table', 'get_investors_table');
+add_action('wp_ajax_nopriv_get_investors_table', 'get_investors_table');
 
 function get_invests_graph(){
     $campaign = atcf_get_campaign($_POST['id_campaign']);

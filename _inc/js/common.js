@@ -351,12 +351,12 @@ YPUIFunctions = (function($) {
                     }
                 },
                 
-		getInvestors: function(inv_data, campaign_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
+		getInvestorsTable: function(inv_data, campaign_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
                     $.ajax({
                         'type' : "POST",
                         'url' : ajax_object.ajax_url,
                         'data': { 
-                              'action':'get_investors_list',
+                              'action':'get_investors_table',
                               'id_campaign':campaign_id,
                               'data' : inv_data
                             }
@@ -365,30 +365,8 @@ YPUIFunctions = (function($) {
                         $('#ajax-investors-load').after(result);
                         $('#ajax-loader-img').hide();//On cache la roue de chargement.
                         
-                        //Ajoute les actions à la sélection des colonnes du tableau
-                        $(".check-users-columns").click(function() {
-                            //Case "toutes les colonnes
-                            if(this.value==="all") {
-                                if (this.checked===true) {
-                                    $('.check-users-columns').prop('checked', true);
-                                    $('#investors-table td').removeAttr('hidden');
-                                } else {
-                                    $('.check-users-columns').prop('checked', false);
-                                    $('#investors-table td').attr('hidden','');
-                                    $('#cbcoluname').prop('checked', true);
-                                    $('.coluname').removeAttr('hidden');
-                                }
-                            }
-
-                            //Autres cases
-                            $selector = ".";
-                            $selector += this.value;
-                            if (this.checked===true) {
-                                $($selector).removeAttr('hidden');
-                            } else {
-                                $($selector).attr('hidden','');
-                            }
-                        });
+                        
+                            
                     }).fail(function(){
                         $('#ajax-investors-load').after("<em>Le chargement du tableau a échoué</em>");
                         $('#ajax-loader-img').hide();//On cache la roue de chargement.
@@ -459,7 +437,7 @@ YPUIFunctions = (function($) {
                         
                         // Crée le tableau des investisseurs si besoin
                         if ($("#ajax-investors-load").length > 0) {
-                            YPUIFunctions.getInvestors(JSON.stringify(inv_data),campaign_id);
+                            YPUIFunctions.getInvestorsTable(JSON.stringify(inv_data),campaign_id);
 			}
                         
                         // Crée le graphe des investissements si besoin
