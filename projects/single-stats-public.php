@@ -54,7 +54,21 @@ switch (atcf_get_campaign($campaign_id)->funding_type()) {
 }
 //FIN CACHE MENU
 //*******************
+
 ?>
+
+<script type="text/javascript">
+    jQuery(document).ready( function($) {
+        <?php
+        $status = (atcf_get_campaign($campaign_id)->campaign_status());
+        if ($status == 'vote'){
+            echo '$("#extendable-votes").show();';
+        } else if ($status == 'collecte' || $status =='funded') {
+            echo '$("#extendable-investments").show();';
+        }
+        ?>
+    });
+</script>
 
 <?php 
 } 
