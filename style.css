@@ -2581,6 +2581,31 @@ div#home_bottom h1 {
     overflow-x: auto;
     overflow-y: hidden;
 }
+
+.wdg-datatable table.dataTable thead th, 
+.wdg-datatable table.dataTable thead td {
+    padding: 5px 17px 5px 8px;
+    cursor: move;
+}
+
+.wdg-datatable table.dataTable tbody th, 
+.wdg-datatable table.dataTable tbody td {
+    padding: 5px 5px;
+}
+
+.wdg-datatable table.dataTable tfoot th, 
+.wdg-datatable table.dataTable tfoot td {
+    padding: 8px 8px 15px;
+}
+
+.wdg-datatable table.dataTable tfoot td {
+    vertical-align: top;
+}
+
+.wdg-datatable .col-filter {
+    width: 90%;
+}
+
 /****Affichage permanent du scroll sur Mac et ios******/
 .wdg-datatable::-webkit-scrollbar {
     -webkit-appearance: none;
@@ -2596,31 +2621,6 @@ div#home_bottom h1 {
 .wdg-datatable::-webkit-scrollbar-track { 
     background-color: #fff; 
     border-radius: 8px; 
-}
-////////////////////////////////////////////////////
-
-.wdg-datatable table.dataTable thead th,
-.wdg-datatable table.dataTable thead td {
-    padding: 5px 17px 5px 8px;
-    cursor: move;
-}
-
-.wdg-datatable table.dataTable tbody th,
-.wdg-datatable table.dataTable tbody td {
-    padding: 5px 5px;
-}
-
-.wdg-datatable table.dataTable tfoot th,
-.wdg-datatable table.dataTable tfoot td {
-    padding: 8px 8px 15px;
-}
-
-.wdg-datatable table.dataTable tfoot tr {
-    vertical-align: top;
-}
-
-.wdg-datatable .col-filter {
-    width: 90%;
 }
 /*******************************************************************************
 * NEW PROJECT PAGE
@@ -3178,17 +3178,15 @@ table.mceLayout {
 }
 
 #reward-selector .reward-amount {
-    font-size: 16px;
+    font-weight: bold;
+}
+
+#reward-selector .detail {
+    opacity: 0.7;
 }
 
 #reward-selector .reward-not-null {
-    font-size: 16px;
-    margin: 7px 0px;
-}
-
-#reward-selector .reward-not-null {
-    font-size: 16px;
-    margin: 7px 0px;
+    margin: 10px 15px 10px 20px ;
 }
 
 #reward-selector li {

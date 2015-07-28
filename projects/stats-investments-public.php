@@ -25,10 +25,10 @@
     <?php endif; ?>
     </p>
     <?php if(edd_has_variable_prices($id_campaign)): ?>
-    <h3>Choix des contreparties</h3>
+    <h3>Popularit&eacute; des contreparties</h3>
     <p><canvas id="canvas-horizontal-rewards" width="420" 
                height="<?php $rewards = atcf_get_rewards($id_campaign);
-                    echo ((count($rewards->rewards_list)+1)*40)+70?>">
+                    echo ((count($rewards->rewards_list)+1)*40)+50?>">
         </canvas></p>
     <?php endif; ?>
 
@@ -82,17 +82,43 @@
             };
             
             displayAnnotReward = function(cat, nom, val){
-                if(cat==="Achetés"){
-                    return ("Cette contrepartie a été choisie "+val+" fois.");
+                message = "";
+                if(cat ==="Achetés"){
+                    message+= ("Cette contrepartie a été choisie <b>"+val+"</b> fois.");
+                    //$("#investors-table tfoot td:contains('Palier de contrepartie')").find("input").val("20").change()
                 } else if(cat ==="Restants") {
-                    return ("Cette contrepartie est encore disponible "+val+" fois.");
+                    message+= ("Cette contrepartie est encore disponible <b>"+val+"</b> fois.");
                 } else {
-                    return "";
+                    return message;
                 }
+                <?php if ($is_advanced) {?> 
+                        if($("#investors-table tfoot td:contains('Palier de contrepartie')").find("input").length >0){
+                            message += "<br/><b>Cliquez pour voir les contributeurs l'ayant choisie.</b>";
+                        } else {
+                            message += "<br/><i>Chargement de la liste des contributeurs...</i>";
+                        }<?php } ?>
+                return message;
             };
+            
+            function seeDonaters(event,ctx,config,data,other){
+                <?php if ($is_advanced) {?> 
+                //Redirige vers le tableau des investisseurs
+                input = $("#investors-table tfoot td:contains('Palier de contrepartie')").find("input");
+                if ((typeof other != 'undefined') && ('v2' in other) && (input.length>0)){
+                    $(".wdg-lightbox").hide();
+                    $("divcursor").hide();
+                    $("#wdg-lightbox-listinvestors").show();
+                    filterval = (other.v2).substring(0,1+(other.v2).indexOf("€"));
+                    if (filterval ===""){filterval = "0€";}
+                    input.val("^"+filterval).change();
+                    input.css({ "background-color": '#FAFF91'}).click(function(){$(this).css("background-color", "")});
+                }
+                <?php } ?>
+            }
             
             var optionsRewardHorizontal = {
                 annotateDisplay: true,
+                mouseDownLeft : seeDonaters,
                 annotateLabel: "<%=displayAnnotReward(v1,v2,v3)%>",
                 inGraphDataShow : true,
                 inGraphDataPaddingX : -2,
@@ -104,7 +130,8 @@
                 scaleFontFamily: "Arial",
                 scaleFontStyle: "sans-serif",
                 legend : true,
-                legendBorders : false
+                legendBorders : false,
+                scaleShowLabels : false
             };
             var canvasRewardHorizontal = new Chart(ctxRewardHorizontal).HorizontalStackedBar(dataRewardHorizontal, optionsRewardHorizontal);
         });

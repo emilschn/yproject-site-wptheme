@@ -291,8 +291,6 @@ YPUIFunctions = (function($) {
                                 $("#new_team_member_string").next().show();
                                 
                                 if(result==="FALSE"){
-                                    //TODO : Message de ratage (user inexistant)
-                                    console.log("raté");
                                     $("#new_team_member_string").next().after("<div id=\"fail_add_team_indicator\"><br/><em>L'utilisateur "+data+" n'a pas été trouvé</em><div>");
                                     $("#fail_add_team_indicator").delay(4000).fadeOut(400);
                                 } else {

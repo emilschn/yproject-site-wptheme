@@ -1156,7 +1156,7 @@ function get_investors_table() {
                 if ($is_campaign_over) { $datacolonnes[]=$investment_state; }
                 
                 if ($campaign->funding_type()=='fundingdonation') {
-                    $datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['amount'];
+                    $datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['amount']."€";
                     $datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['name'];
                 }
                 
@@ -1200,7 +1200,7 @@ function get_investors_table() {
         $("#investors-table tfoot input").on( 'keyup change', function () {
             table
                 .column( $(this).parent().index()+':visible' )
-                .search( this.value )
+                .search( this.value, true)
                 .draw();
         } );
         //Récupère les colonnes à afficher et le tri par défaut 
@@ -1396,7 +1396,9 @@ function get_invests_graph(){
 
             displayAnnot = function(cat, date, invest, investtotal){
                 if(cat === "investissements"){
-                    return invest+ '€, le ' +date.getDate()+'/'+(date.getMonth()+1)+'/'+(date.getFullYear())+' à '+date.getHours()+'h'+date.getMinutes()+'. Total: '+investtotal+'€';
+                    min = date.getMinutes().toString();
+                    return '<b>'+invest+ '€</b>, le ' +date.getDate()+'/'+(date.getMonth()+1)+'/'+(date.getFullYear())+' à '+date.getHours()+'h'+(min[1]?min:"0"+min[0])
+                            +'.<br/><b>Total: '+investtotal+'€</b>';
                 } else if(cat=== "aujourdhui"){
                     return "Aujourd'hui vous en êtes à "+investtotal+'€'
                 }

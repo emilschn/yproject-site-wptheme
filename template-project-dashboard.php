@@ -218,7 +218,7 @@ $campaign_id = $_GET['campaign_id'];
                                                 </div>
                                                 <div class="quart-card">
                                                     <div class="stat-big-number"><?php echo $vote_results['sum_invest_ready'].'&euro;'?></div>
-                                                    <div class="stat-little-number">sur <?php echo $campaign->vote_invest_ready_min_required() ?> &euro; requis</div>
+                                                    <div class="stat-little-number">sur <?php echo $campaign->vote_invest_ready_min_required() ?> &euro; recommand&eacute;s</div>
                                                     <div class="details-card">
                                                         <strong><?php echo $vote_results['sum_invest_ready']?></strong>&euro; de promesses d'investissement
                                                     </div>
