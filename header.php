@@ -250,9 +250,6 @@
 			}
 			?>
 			<div class="wdg-lightbox-padder">
-				<div class="wdg-lightbox-button-close">
-					<a href="#" class="button">X</a>
-				</div>
 				Bonjour <?php echo $user_name_str; ?>, bienvenue sur WE DO GOOD !
 			</div>
 		</div>
