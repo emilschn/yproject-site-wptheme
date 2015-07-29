@@ -1,8 +1,5 @@
 <?php
 class YPOrganisationLib {
-	public static function get_list_by_user_id() {
-	}
-	
 	/**
 	 * Formulaire de nouvelle organisation
 	 */

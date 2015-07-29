@@ -83,6 +83,8 @@ tbody {
 .errors, .invest_error {
     color: #FE494C;
     text-transform: none !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .success, .invest_success {
     color: green;
@@ -421,10 +423,6 @@ form.wdg-forms .small-margin {
 .colonne input {
     width: 220px;
     text-align: left;
-}
-
-.login_fail{
-    margin-bottom: 10px;
 }
 
 #sidebar-login-form a{
@@ -2650,7 +2648,7 @@ div#home_bottom h1 {
     background-color: #333333;
 }
 
-.login_fail { color : red; }
+.login_fail { color : red; margin-bottom: 10px; }
 
 /*******************************************************************************
 * REGISTER PAGE / REGISTER LIGHTBOX

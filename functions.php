@@ -90,64 +90,12 @@ add_action( 'send_headers', 'varnish_safe_http_headers' );
 
 
 /** GESTION DU LOGIN **/
-/**
- * Redirige les erreurs de login
- * @param type $username
- */
-function yproject_front_end_login_fail($username){
-        $page = $_POST['redirect-page-error']; 
-        if($_POST['redirect-page-investir'] == "true"){
-            wp_redirect($page.'/?login=failed&redirect=invest#connexion');
-        } else if($_POST['redirect-page-investir'] == "forum") {
-             wp_redirect($page.'/?login=failed&redirect=forum#connexion');
-        } else {
-            wp_redirect($page.'/?login=failed#connexion');
-        }
-	exit;
+function yproject_init() {
+    locate_template( array("requests/users.php"), true );
+    YPUsersLib::login();
+    YPUsersLib::register();
 }
-add_action('wp_login_failed', 'yproject_front_end_login_fail'); 
-
-
-function yproject_redirect_login() {
-//	$current_user = wp_get_current_user();
-//	NotificationsSlack::send_to_dev('Connexion de ' . $current_user->first_name . ' ' . $current_user->last_name . ' (' . $current_user->ID . ')');
-        $page_invest = get_page_by_path('investir');
-        $page_id = $_POST['redirect-page'];
-        $page_type = $_POST['type-page']; 
-        $page_redirection = $_POST['redirect-page-investir'];
-        
-        if (isset($_GET['login'])) {
-            $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
-	    wp_redirect($page);
-	    
-        } else {
-            if (isset($page_id) && isset($page_type)) {
-                if ($page_type == "download") {
-                    if( isset($page_redirection) && $page_redirection == "true") {
-                        $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
-                        wp_redirect($page);  
-                        
-                    } else if (isset($page_redirection) && $page_redirection == "forum") {
-                        $forum = get_page_by_path('forum');
-                        $page = get_permalink($forum->ID).'?campaign_id='.$page_id;   
-                        wp_redirect($page);
-                        
-                    } else {
-                        $page = get_page($page_id);
-                        wp_redirect(get_permalink($page).'#description_du_projet');
-                    }
-                } else {
-                    $page = get_page($page_id);
-                    wp_redirect(get_permalink($page)); 
-                }
-		
-            } else {
-		wp_redirect(home_url());
-	    }
-        }
-	exit;
-}
-add_action('wp_login', 'yproject_redirect_login');
+add_action('init', 'yproject_init');
 
 function yproject_redirect_logout(){
 	if (isset($_GET['page_id'])) {
@@ -161,43 +109,10 @@ function yproject_redirect_logout(){
 }
 add_action('wp_logout', 'yproject_redirect_logout');
 
-// Rediriger une personne qui n'a rien rempli pour s'identifier 
-function _catch_empty_user( $username, $pwd ) {
-	if (empty($username)||empty($pwd)) {
-		$page = $_POST['redirect-page-error']; 
-                if($_POST['redirect-page-investir'] == "true"){
-                    wp_redirect($page.'/?login=failed&redirect=invest#connexion');
-                } else {
-                    wp_redirect($page.'/?login=failed#connexion');
-                }
-	}
-}
-add_action( 'wp_authenticate', '_catch_empty_user', 1, 2 );
-
 function catch_register_page_loggedin_users() {
 	return home_url() . '?alreadyloggedin=1';
 }
 add_filter( 'bp_loggedin_register_page_redirect_to', 'catch_register_page_loggedin_users');
-
-/**
- * permet de se loger avec son mail
- * @param type $username
- * @return type
- */
-function yproject_email_login_authenticate( $user, $username, $password ) {
-	if ( is_a( $user, 'WP_User' ) ) return $user;
-
-	if ( !empty( $username ) ) {
-		$username = str_replace( '&', '&amp;', stripslashes( $username ) );
-		$user = get_user_by( 'email', $username );
-		if ( isset( $user, $user->user_login, $user->user_status ) && 0 == (int) $user->user_status )
-			$username = $user->user_login;
-	}
-
-	return wp_authenticate_username_password( null, $username, $password );
-}
-remove_filter( 'authenticate', 'wp_authenticate_username_password', 20, 3 );
-add_filter( 'authenticate', 'yproject_email_login_authenticate', 20, 3 );
 /** FIN GESTION DU LOGIN **/
 
 
@@ -260,31 +175,6 @@ function yproject_check_is_warning_meta_init($user_id){
 //Gestion du formulaire de lightbox d'avertissements
 function yproject_submit_lightbox() {
     ypbp_core_screen_signup();
-
-/*    //Si le formulaire a été posté
-    if (isset($_POST['submit_warning'])) {
-	global $submit_warning_errors;
-	$user_id = get_current_user_id(); 
-	$submit_warning_errors = "";
-	
-	//Si la case de démarchage a été cochée
-        if (isset($_POST['warning3'])) {
-	    //On vérifie qu'une réponse a été donnée aux questions fermées
-            if (isset($_POST['warning1']) && isset($_POST['warning2'])) {
-                // On enregistre les valeurs
-                update_user_meta( $user_id, 'warning1', $_POST['warning1'] );
-                update_user_meta( $user_id, 'warning2', $_POST['warning2'] );
-		update_user_meta( $user_id, 'warning3', $_POST['warning3'] );
-		
-            } else {
-                $submit_warning_errors = "Merci de répondre à toutes les questions pour continuer";
-            }
-	    
-	//Si la case de démarchage n'est pas cochée, on réaffiche la lightbox
-        } else {
-            $submit_warning_errors = "Merci de bien vouloir cocher la dernière case.";
-        }
-    }*/
 } 
 add_action('init', 'yproject_submit_lightbox');
 

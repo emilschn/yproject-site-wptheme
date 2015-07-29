@@ -4,33 +4,39 @@
 <?php get_header(); ?>
     <div id="content">
 	<div class="padder">
-	    <div class="center_small">
-		    <div class="login_fail">
+	    <div class="center_small margin-height">
 		    <?php if (isset($_GET["login"]) && $_GET["login"] == "failed") {?>
-			<?php _e('Erreur d&apos;identification', 'yproject'); ?>
-		    <?php } ?>
+		    <div class="errors">
+			    <?php _e('Erreur d&apos;identification', 'yproject'); ?>
 		    </div>
+		    <?php } ?>
+		    <?php if (YPUsersLib::has_login_errors()): ?>
+		    <div class="errors">
+			    <?php echo YPUsersLib::display_login_errors(); ?>
+		    </div>
+		    <?php endif; ?>
 
 		    <div style="text-transform: uppercase; margin-bottom: 10px; text-align: left;" id="submenu_item_connection_login"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_noir_connexion.jpg" alt="logo triangle" class="vert-align" width="25" height="25" />&nbsp;Connexion</div>
 
-		    <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
-			<label class="standard-label"><?php _e('Identifiant', 'yproject'); ?></label>
-			<input style="margin-bottom: 5px; width: 254px;" type="text" name="log" class="input" value="<?php if ( isset( $user_login) ) echo esc_attr(stripslashes($user_login)); ?>" placeholder="<?php _e('Identifiant', 'yproject'); ?>" />
-			<br />
+		    <form method="post" action="" name="login-form" id="sidebar-login-form" class="standard-form">
+			    <label class="standard-label"><?php _e('Identifiant', 'yproject'); ?></label>
+			    <input style="margin-bottom: 5px; width: 254px;" type="text" name="log" class="input" value="<?php if ( isset( $user_login) ) echo esc_attr(stripslashes($user_login)); ?>" placeholder="<?php _e('Identifiant', 'yproject'); ?>" />
+			    <br />
 
-			<label class="standard-label"><?php _e('Mot de passe', 'yproject'); ?></label>
-			<input type="password" name="pwd" class="input" value="" /> 
-			<input type="submit" name="wp-submit" id="sidebar-wp-submit" style="width: 100px; background: #FFF;" value="<?php _e('Connexion', 'yproject'); ?>" />
-			<br />
-			
-			<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-			<span class="link-forgotten">(<a href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)</span>
+			    <label class="standard-label"><?php _e('Mot de passe', 'yproject'); ?></label>
+			    <input type="password" name="pwd" class="input" value="" /> 
+			    <input type="submit" name="wp-submit" id="sidebar-wp-submit" style="width: 100px; background: #FFF;" value="<?php _e('Connexion', 'yproject'); ?>" />
+			    <br />
 
-			<p class="forgetmenot">
-			    <input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" /> <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
-			</p>
+			    <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
+			    <span class="link-forgotten">(<a href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)</span>
 
-			<input type="hidden" name="testcookie" value="1" />
+			    <p class="forgetmenot">
+				    <input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" /> <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
+			    </p>
+
+			    <input type="hidden" name="redirect-page" value="<?php echo YPUsersLib::get_login_redirect_page(); ?>" />
+			    <input type="hidden" name="login-form" value="1" />
 		    </form>
 
 		    <hr class="form-separator" />
