@@ -1164,7 +1164,7 @@ footer div.social-icons {
     text-align: center;
     background-color: #2B2C2C;
     padding: 13px 0px;
-    display: block;
+    display: inline-block;
     font-size: 13px;
     width: 100%;
     margin-top: 15px;
