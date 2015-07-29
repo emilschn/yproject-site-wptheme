@@ -31,7 +31,7 @@ else {
 ?>
 </div>
 
-<h2 class="expandator" data-target="investments">Investissements <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus" /></h2>
+<h2 class="expandator" data-target="investments">Contributions <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus" /></h2>
 <div id="extendable-investments" class="expandable">
 <?php 
 	locate_template( array("projects/stats-investments-public.php"), true );
