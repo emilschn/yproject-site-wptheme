@@ -16,7 +16,7 @@ $vote_status = html_entity_decode($campaign->vote());
 <?php
 //*******************
 //CACHE PROJECT CONTENT SUMMARY
-$cache_content_summary = $WDG_cache_plugin->get_cache('project-content-summary-' . $post_campaign->ID, 1);
+$cache_content_summary = $WDG_cache_plugin->get_cache('project-content-summary-' . $post_campaign->ID, 2);
 if ($cache_content_summary !== FALSE) { echo $cache_content_summary; }
 else {
 	ob_start();
@@ -28,7 +28,7 @@ else {
 		$video_element = '';
 		$img_src = '';
 		//Si aucune vidéo n'est définie, ou si on est encore en mode preview, on affiche l'image
-		if ($campaign->video() == '' || $vote_status == 'preview') {
+		if ($campaign->video() == '') {
 			$attachments = get_posts( array(
 				'post_type' => 'attachment',
 				'post_parent' => $post_campaign->ID,
