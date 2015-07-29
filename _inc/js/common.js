@@ -42,7 +42,7 @@ YPUIFunctions = (function($) {
 			});
 			
 			$(".expandator").css("cursor", "pointer");
-			$(".expandable").hide();
+			$(".expandable").not(".default-expanded").hide();
 			$(".expandator").click(function() {
 				var targetId = $(this).data("target");
 				if ($("#extendable-" + targetId).is(":visible")) $("#extendable-" + targetId).hide();
