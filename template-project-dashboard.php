@@ -50,15 +50,30 @@ $campaign_id = $_GET['campaign_id'];
                          /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
                          if ($can_modify){
                              /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
-                             if (isset($_POST['next_step'])&& $_POST['next_step']==1 && $campaign->can_go_next_step()){
+                             if (isset($_POST['next_step'])&& ($_POST['next_step']==1 || $_POST['next_step']==2) && $campaign->can_go_next_step()){
  
  
-                                 //Préparation -> Avanat-premiere
+                                 
+                                 //Préparation -> Avant-premiere
                                  if ($status=='preparing'){
-                                     $campaign->set_status('preview');
-                                     $campaign->set_validation_next_step(0);
+                                     if($_POST['next_step']==1){
+                                         $campaign->set_status('preview');
+                                         $campaign->set_validation_next_step(0);
+                                     //Préparation -> Vote
+                                     } else if ($_POST['next_step']==2){
+                                         if(ypcf_check_user_is_complete($campaign->post_author())){
+                                             //Fixe date fin de vote
+                                             $diffVoteDay = new DateInterval('P'.ATCF_Campaign::$vote_duration.'D');
+                                             $VoteEndDate = (new DateTime())->add($diffVoteDay);
+                                             //$VoteEndDate->setTime(23,59);
+                                             $campaign->set_end_vote_date($VoteEndDate);     
 
-                                 } //Avant-premieère -> Vote
+                                             $campaign->set_status('vote');
+                                             $campaign->set_validation_next_step(0);
+                                         }
+                                     }
+
+                                 } //Avant-première -> Vote
                                  else if ($status=='preview') {
                                      if(ypcf_check_user_is_complete($campaign->post_author())){
                                          //Fixe date fin de vote
@@ -78,7 +93,14 @@ $campaign_id = $_GET['campaign_id'];
                                          $collecte_time = $_POST['innbday'];
                                          $collecte_fin_heure = $_POST['inendh'];
                                          $collecte_fin_minute = $_POST['inendm'];
-                                         if($campaign->company_name()!=null&&$campaign->company_status()!=null
+                                        
+                                         $orga_done=false;
+                                        $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+					$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+					if (isset($current_organisations) && count($current_organisations) > 0) {
+                                            $orga_done = true;
+					}
+                                         if( $orga_done
                                                  &&$campaign->is_validated_by_vote() && $campaign->end_vote_remaining()<=0
                                                  && 1<=$collecte_time && $collecte_time<=60
                                                  && 0<=$collecte_fin_heure && $collecte_fin_heure<=23

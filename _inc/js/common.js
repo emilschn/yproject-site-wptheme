@@ -206,7 +206,7 @@ YPUIFunctions = (function($) {
                             
                             checkall = function() {
                                 var allcheck = true;
-                                $(".checkbox-next-step").each(function(index){
+                                $(".checkbox-next-step:visible").each(function(index){
                                     allcheck = allcheck && this.checked;
                                 });
                                 return allcheck;
@@ -220,6 +220,15 @@ YPUIFunctions = (function($) {
                                     $("#submit-go-next-step").attr('disabled','');
                                     $("#submit-go-next-step").attr('style','background-color:#333 !important');
                                 };
+                            });
+                            
+                            //Changements du formulaire lorsque l'on veut passer de préparation à vote (sans A-P)
+                            $("#no-preview-button").click(function(){
+                                $("#cbman13").closest('li').slideUp();
+                                $("#desc-preview").slideUp();
+                                $("#vote-checklist").slideDown();
+                                $("#no-preview-button").slideUp();
+                                $("#next-step-choice").val("2");
                             });
                         }
                         //Preview date fin collecte sur LB étape suivante
