@@ -812,6 +812,11 @@ WDGProjectPageFunctions=(function($) {
 		    if ($("#vote-form").hasClass("collapsed")) {
 			$("#vote-form").removeClass("collapsed");
 			$(".description-discover").css('background-color', '#FF494C');
+			if ($(window).width() > 480) {
+			    $("#vote-form").animate({ 
+				top: "-350px"
+			    }, 500 );
+			}
 			
 		    } else {
 			if ($(window).width() > 480) {
