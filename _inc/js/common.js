@@ -206,7 +206,7 @@ YPUIFunctions = (function($) {
                             
                             checkall = function() {
                                 var allcheck = true;
-                                $(".checkbox-next-step").each(function(index){
+                                $(".checkbox-next-step:visible").each(function(index){
                                     allcheck = allcheck && this.checked;
                                 });
                                 return allcheck;
@@ -220,6 +220,15 @@ YPUIFunctions = (function($) {
                                     $("#submit-go-next-step").attr('disabled','');
                                     $("#submit-go-next-step").attr('style','background-color:#333 !important');
                                 };
+                            });
+                            
+                            //Changements du formulaire lorsque l'on veut passer de préparation à vote (sans A-P)
+                            $("#no-preview-button").click(function(){
+                                $("#cbman13").closest('li').slideUp();
+                                $("#desc-preview").slideUp();
+                                $("#vote-checklist").slideDown();
+                                $("#no-preview-button").slideUp();
+                                $("#next-step-choice").val("2");
                             });
                         }
                         //Preview date fin collecte sur LB étape suivante
@@ -250,15 +259,11 @@ YPUIFunctions = (function($) {
                            
                         });
 
-                        $("#investir").click(function(){
-                           $("#redirect-page-investir").attr("value","true");
-                        }); 
-                        $("#connexion").click(function(){
-                           $("#redirect-page-investir").attr("value","");
-                        });
-                        $("#forum").click(function(){
-                           $("#redirect-page-investir").attr("value","forum");
-                        });
+			if ($("#wdg-lightbox-connexion").length > 0) {
+			    $(".wdg-button-lightbox-open").click(function(){
+				$("#wdg-lightbox-connexion #redirect-page").attr("value", $(this).data("redirect"));
+			    });
+			}
 		},
                 
                 manageTeam: function(action, data, campaign_id){
@@ -791,6 +796,11 @@ WDGProjectPageFunctions=(function($) {
 		    if ($("#vote-form").hasClass("collapsed")) {
 			$("#vote-form").removeClass("collapsed");
 			$(".description-discover").css('background-color', '#FF494C');
+			if ($(window).width() > 480) {
+			    $("#vote-form").animate({ 
+				top: "-350px"
+			    }, 500 );
+			}
 			
 		    } else {
 			if ($(window).width() > 480) {

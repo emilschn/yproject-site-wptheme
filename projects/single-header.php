@@ -170,30 +170,17 @@ else {
 			<div class="post_bottom_buttons mobile_hidden">
 				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->is_remaining_time() > 0) { ?> 
 					<div id="invest-button">
-						<?php if ( is_user_logged_in() ): 
-                                                         $check = yproject_check_user_warning(get_current_user_id());
-                                                         if($check){ 
-                                                             $page_invest = get_page_by_path('investir');
-                                                        ?>
-							<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1" class="description-discover">
-                                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />
-                                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><?php if ($campaign->funding_type() == 'fundingdonation') { ?>Soutenir<?php } else { ?>Investir sur<?php } ?> ce projet
-                                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" />
-                                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
-                                                         <?php  } else { 
-                                                             
-                                                        ?>
-                                                        <!--//Mon boutton vers ma lightbox d'avertissement -->
-                                                         <?php }?>
-                                                       
+						<?php $page_invest = get_page_by_path('investir'); ?>
+						<?php if ( is_user_logged_in() ): ?>
+							<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start" class="description-discover">
                                                 <?php else: ?>
-                                                        
-							<a href="#connexion" id="investir" class="wdg-button-lightbox-open description-discover" data-lightbox="connexion">
-                                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />
-                                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><?php if ($campaign->funding_type() == 'fundingdonation') { ?>Soutenir<?php } else { ?>Investir sur<?php } ?> ce projet
-                                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" />
-                                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
+							<a href="#connexion" id="investir" class="wdg-button-lightbox-open description-discover" data-lightbox="connexion" data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start">
 						<?php endif; ?>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><?php if ($campaign->funding_type() == 'fundingdonation') { ?>Soutenir<?php } else { ?>Investir sur<?php } ?> ce projet
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" />
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" />
+						</a>
 					</div>
 
 				<?php } else if ($vote_status == 'preview'){ ?>
@@ -325,54 +312,50 @@ else {
 				<img src="<?php echo $stylesheet_directory_uri;?>/images/fond_projet.png" alt="fond projet" class="bg-project mobile_hidden" />
 				
 				<?php
-					$current_page = 'http';
-					if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {$current_page .= "s";}
-					$current_page .= "://";
-					$current_page .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-					
-					$project_link = get_permalink($campaign_id);
-					
-					$category_slug = $post->ID . '-blog-' . $post->post_name;
-					$category_obj = get_category_by_slug($category_slug);
-					if (!empty($category_obj)) {
-						$category_link = get_category_link($category_obj->cat_ID);
-						$posts_in_category = get_posts(array('category'=>$category_obj->cat_ID));
-					} else {
-						$category_link = '';
+				$current_page = 'http';
+				if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {$current_page .= "s";}
+				$current_page .= "://";
+				$current_page .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+
+				$project_link = get_permalink($campaign_id);
+
+				$category_slug = $post->ID . '-blog-' . $post->post_name;
+				$category_obj = get_category_by_slug($category_slug);
+				if (!empty($category_obj)) {
+					$category_link = get_category_link($category_obj->cat_ID);
+					$posts_in_category = get_posts(array('category'=>$category_obj->cat_ID));
+				} else {
+					$category_link = '';
+				}
+				$nb_cat = (isset($posts_in_category)) ? ' ('.count($posts_in_category).')' : '';
+				$news_link = esc_url($category_link);
+
+				$forum = get_page_by_path('forum');
+				$forum_link = get_permalink($forum->ID).$campaign_id_param;
+				$forum_link_2 = site_url('forums/forum') . '/' . $campaign_id . '-2/';
+
+				$stats_page = get_page_by_path('statistiques');
+				$stats_link = get_permalink($stats_page->ID).$campaign_id_param;
+
+				$show_stat_button = false;
+				if ($vote_status != 'preview') { 
+					if ($vote_status != 'vote' || $campaign->end_vote_remaining() <= 0) {
+						$show_stat_button = true;
 					}
-					$nb_cat = (isset($posts_in_category)) ? ' ('.count($posts_in_category).')' : '';
-					$news_link = esc_url($category_link);
-					
-					$forum = get_page_by_path('forum');
-					$forum_link = get_permalink($forum->ID).$campaign_id_param;
-					$forum_link_2 = site_url('forums/forum') . '/' . $campaign_id . '-2/';
-					
-					$stats_page = get_page_by_path('statistiques');
-					$stats_link = get_permalink($stats_page->ID).$campaign_id_param;
-					
-					$show_stat_button = false;
-					if ($vote_status != 'preview') { 
-						if ($vote_status != 'vote' || $campaign->end_vote_remaining() <= 0) {
-							$show_stat_button = true;
-						}
-					}
-					
+				}
 				?>
+				
 				<nav class="mobile_hidden">
 					<ul>
 						<li><a href="<?php echo $project_link; ?>" <?php if($current_page==$project_link) echo 'class="current"'; ?>>Le projet</a></li>
 						<li><a href="<?php echo $news_link; ?>" <?php if($current_page==$news_link) echo 'class="current"'; ?>>Actualit&eacute;<?php echo $nb_cat; ?></a></li>
 						
                                                 <?php if ( is_user_logged_in() ): ?> 
-							<?php $forum = get_page_by_path('forum');
-                                                                $forum_link = get_permalink($forum->ID).$campaign_id_param;
-                                                                $forum_link_2 = site_url('forums/forum') . '/' . $campaign_id . '-2/'; 
-                                                        ?>
 							<li><a href="<?php echo $forum_link; ?>" <?php if($current_page==$forum_link || $current_page==$forum_link_2) echo 'class="current"'; ?>>Forum</a></li>
-                  
                                                 <?php else: ?>
-                                                        <li><a href="#connexion" id="forum" class="wdg-button-lightbox-open description-discover" data-lightbox="connexion">Forum</a></li>
+                                                        <li><a href="#connexion" id="forum" class="wdg-button-lightbox-open description-discover" data-lightbox="connexion" data-redirect="<?php echo $forum_link; ?>">Forum</a></li>
 						<?php endif; ?>
+							
 						<?php if ($show_stat_button) { ?>
 						<li><a href="<?php echo $stats_link; ?>" <?php if($current_page==$stats_link) echo 'class="current"'; ?>>Statistiques</a></li>
 						<?php } ?>
