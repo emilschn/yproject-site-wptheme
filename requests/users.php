@@ -31,10 +31,18 @@ class YPUsersLib {
 				}
 			}
 			
-		//Sur les autres pages, on tente de choper l'ID de la page en cours
+		//Sur les autres pages
 		} else {
-			if (isset($post->ID)) {
-				$buffer = get_permalink($post->ID);
+			//On tente de voir si une redirection n'avait pas été demandée auparavant
+			$posted_redirect_page = filter_input(INPUT_POST, 'redirect-page');
+			if (!empty($posted_redirect_page)) {
+				$buffer = $posted_redirect_page;
+			
+			//Sinon, on récupère simplement la page en cours
+			} else {
+				if (isset($post->ID)) {
+					$buffer = get_permalink($post->ID);
+				}
 			}
 		}
 		
@@ -55,7 +63,7 @@ class YPUsersLib {
 		remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
 		add_filter('authenticate', 'YPUsersLib::filter_login_email', 20, 3);
 		add_action('wp_login', 'YPUsersLib::redirect_after_login');
-//		add_action('wp_login_failed', 'YPUsersLib::redirect_after_login_failed'); 
+		add_action('wp_login_failed', 'YPUsersLib::redirect_after_login_failed'); 
 		global $signon_errors;
 		$signon_result = wp_signon('', is_ssl());
 		if (is_wp_error($signon_result) && !isset($signon_errors)) {
@@ -77,6 +85,7 @@ class YPUsersLib {
 			global $signon_errors;
 			$signon_errors = new WP_Error();
 			$signon_errors->add('empty_authentication', __('Champs vides', 'yproject'));
+			YPUsersLib::redirect_after_login_failed();
 		}
 
 		if ( !empty( $username ) ) {
@@ -144,45 +153,6 @@ class YPUsersLib {
 			wp_safe_redirect($posted_redirect_page);
 		}
 		
-		/**
-		 * TODO : reprendre les modifs d'Alexandre
-		 * $page_invest = get_page_by_path('investir');
-        $page_id = $_POST['redirect-page'];
-        $page_type = $_POST['type-page']; 
-        $page_redirection = $_POST['redirect-page-investir'];
-        
-        if (isset($_GET['login'])) {
-            $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
-	    wp_redirect($page);
-	    
-        } else {
-            if (isset($page_id) && isset($page_type)) {
-                if ($page_type == "download") {
-                    if( isset($page_redirection) && $page_redirection == "true") {
-                        $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
-                        wp_redirect($page);  
-                        
-                    } else if (isset($page_redirection) && $page_redirection == "forum") {
-                        $forum = get_page_by_path('forum');
-                        $page = get_permalink($forum->ID).'?campaign_id='.$page_id;   
-                        wp_redirect($page);
-                        
-                    } else {
-                        $page = get_page($page_id);
-                        wp_redirect(get_permalink($page).'#description_du_projet');
-                    }
-                } else {
-                    $page = get_page($page_id);
-                    wp_redirect(get_permalink($page)); 
-                }
-		
-            } else {
-		wp_redirect(home_url());
-	    }
-        }
-	exit;
-		 */
-		
 		exit();
 	}
 	
@@ -190,16 +160,10 @@ class YPUsersLib {
 	 * Redirige après une connexion échouée
 	 */
 	public static function redirect_after_login_failed() {
-		/*
-		 * TODO : reprendre travail Alexandre sur lightbox
-		$page = $_POST['redirect-page-error']; 
-		if($_POST['redirect-page-investir'] == "true"){
-		    wp_redirect($page.'/?login=failed&redirect=invest#connexion');
-		} else if($_POST['redirect-page-investir'] == "forum") {
-		     wp_redirect($page.'/?login=failed&redirect=forum#connexion');
-		} else {
-		    wp_redirect($page.'/?login=failed#connexion');
+		$posted_redirect_error_page = filter_input(INPUT_POST, 'redirect-error');
+		if (!empty($posted_redirect_error_page)) {
+			wp_safe_redirect($posted_redirect_error_page);
+			exit();
 		}
-		 */
 	}
 }

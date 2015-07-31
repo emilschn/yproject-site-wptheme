@@ -20,7 +20,7 @@
 
 		    <form method="post" action="" name="login-form" id="sidebar-login-form" class="standard-form">
 			    <label class="standard-label"><?php _e('Identifiant', 'yproject'); ?></label>
-			    <input style="margin-bottom: 5px; width: 254px;" type="text" name="log" class="input" value="<?php if ( isset( $user_login) ) echo esc_attr(stripslashes($user_login)); ?>" placeholder="<?php _e('Identifiant', 'yproject'); ?>" />
+			    <input style="margin-bottom: 5px; width: 254px;" type="text" name="log" class="input" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" placeholder="<?php _e('Identifiant', 'yproject'); ?>" />
 			    <br />
 
 			    <label class="standard-label"><?php _e('Mot de passe', 'yproject'); ?></label>

@@ -175,16 +175,16 @@
                                 <hr /> 
 
                                 <div id="submenu_item_connection_login"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_noir_connexion.jpg" width="25" height="25" alt="triangle noir" />&nbsp;Connexion</div>
-                                <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
+                                <form method="post" action="" name="login-form" id="sidebar-login-form" class="standard-form" >
                                     <input type="text" name="log" id="sidebar-user-login" class="input" placeholder="Identifiant ou e-mail" />
                                     <br />
 
                                     <input type="password" name="pwd" id="sidebar-user-pass" class="input" placeholder="<?php _e('Mot de passe', 'yproject'); ?>" />
                                     <input type="submit" name="wp-submit" id="sidebar-wp-submit" value="OK" />
 
-                                    <input type="hidden" name="redirect-page" id="redirect-page" value="<?php echo  get_the_ID();?>" />
-                                    <input type="hidden" name="type-page" id="type-page" value="<?php echo  get_post_type(get_the_ID());?>" />
-                                    <input type="hidden" name="redirect-page-error" id="redirect-page-error" value="<?php echo get_permalink($page) ?>" />
+                                    <input type="hidden" name="redirect-page" value="<?php echo YPUsersLib::get_login_redirect_page(); ?>" />
+                                    <input type="hidden" name="redirect-error" value="<?php $page_connexion = get_page_by_path("connexion"); echo get_permalink($page_connexion->ID); ?>?login=failed" />
+				    <input type="hidden" name="login-form" value="1" />
                                     <br />
                                     <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
                                     <a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">(Mot de passe oubli&eacute;)</a>

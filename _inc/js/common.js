@@ -250,15 +250,11 @@ YPUIFunctions = (function($) {
                            
                         });
 
-                        $("#investir").click(function(){
-                           $("#redirect-page-investir").attr("value","true");
-                        }); 
-                        $("#connexion").click(function(){
-                           $("#redirect-page-investir").attr("value","");
-                        });
-                        $("#forum").click(function(){
-                           $("#redirect-page-investir").attr("value","forum");
-                        });
+			if ($("#wdg-lightbox-connexion").length > 0) {
+			    $(".wdg-button-lightbox-open").click(function(){
+				$("#wdg-lightbox-connexion #redirect-page").attr("value", $(this).data("redirect"));
+			    });
+			}
 		},
                 
                 manageTeam: function(action, data, campaign_id){
