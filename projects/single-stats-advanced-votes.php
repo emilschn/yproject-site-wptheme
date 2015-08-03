@@ -50,9 +50,7 @@ if (isset($_GET['campaign_id'])) {
         $liste_cumul_neg = $vote_results['list_cumul_neg'];
 
         //Choix la date de début du graphe
-        $beginvotedate1=date_sub(date_create($campaign->end_vote_date()),new DateInterval('P'.ATCF_Campaign::$vote_duration.'D'));
-        $beginvotedate2=date_create($list_date[0]);
-        $beginvotedate = min([$beginvotedate1,$beginvotedate2]);
+        $beginvotedate=date_create($list_date[0]);
 
         ?>
         <script type="text/javascript">

@@ -202,7 +202,7 @@ YPUIFunctions = (function($) {
                         //Lightbox de passage à l'étape suivante
                         if ($("#submit-go-next-step").length > 0) {
                             $("#submit-go-next-step").attr('disabled','');
-                            $("#submit-go-next-step").attr('style','background-color:#333 !important');
+                            $("#submit-go-next-step").attr('style','background-color:#333 !important; border: 0px !important; ');
                             
                             checkall = function() {
                                 var allcheck = true;
@@ -218,7 +218,7 @@ YPUIFunctions = (function($) {
                                     $("#submit-go-next-step").attr('style','background-color:#FF494C');
                                 } else {
                                     $("#submit-go-next-step").attr('disabled','');
-                                    $("#submit-go-next-step").attr('style','background-color:#333 !important');
+                                    $("#submit-go-next-step").attr('style','background-color:#333 !important; border: 0px !important;');
                                 };
                             });
                             
@@ -232,16 +232,28 @@ YPUIFunctions = (function($) {
                             });
                         }
                         //Preview date fin collecte sur LB étape suivante
-                        if($("#innbday").length > 0) {
-                            $("#innbday").change(function() {
-                                $("#previewenddatecollecte").empty();
-                                if(this.value<=60 && this.value>=1){
+                        if(($("#innbdayvote").length > 0)||($("#innbdaycollecte").length > 0)) {
+                            
+                            updateDate = function(idfieldinput, iddisplay) {
+                                $("#"+iddisplay).empty();
+                                if($("#"+idfieldinput).val()<=$("#"+idfieldinput).prop("max") && $("#"+idfieldinput).val()>=$("#"+idfieldinput).prop("min")){
                                     var d = new Date();
-                                    var jsupp = this.value;
+                                    var jsupp = $("#"+idfieldinput).val();
                                     d.setDate(d.getDate()+parseInt(jsupp));
-                                    $("#previewenddatecollecte").prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+                                    $("#"+iddisplay).prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+                                } else {
+                                    $("#"+iddisplay).prepend("La durée doit être comprise entre "+($("#"+idfieldinput).prop("min"))+" et "+($("#"+idfieldinput).prop("max"))+" jours");
                                 }
-                            });
+                            };
+                            
+                            updateDate("innbdaycollecte","previewenddatecollecte");
+                            updateDate("innbdayvote","previewenddatevote");
+                            
+                            $("#innbdaycollecte").on( 'keyup change', function () {
+                                updateDate("innbdaycollecte","previewenddatecollecte");});
+                            
+                            $("#innbdayvote").on( 'keyup change', function () {
+                                updateDate("innbdayvote","previewenddatevote");});
                         }
                         
                         //Gestion equipe depuis Tableau de bord

@@ -2415,6 +2415,8 @@ div#home_bottom h1 {
     padding: 10px;
     display: inline-block;
     text-transform: none;
+    background-color: #FF494C;
+    border: 1px solid #FF494C !important;
 }
 
 #dashboard .google-doc iframe {
@@ -2448,7 +2450,7 @@ div#home_bottom h1 {
     text-transform: uppercase;
     font-family: "BebasNeue";
     font-size: 30px;
-    color: #FF494C;
+    //color: #FF494C;
     text-align: center;
     padding: 15px 5px 2px 5px;
 }
@@ -2507,23 +2509,23 @@ div#home_bottom h1 {
 
 #dashboard #block-stats .stat-big-number {
     font-family: "BebasNeue";
-    font-size: 100px;
-    color: #FF494C;
+    font-size: 90px;
+    //color: #FF494C;
     padding-top: 30px;
 }
 
 #dashboard #block-stats .stat-little-number {
     font-family: "BebasNeue";
-    font-size: 28px;
-    color: #FF494C;
+    font-size: 26px;
+    //color: #FF494C;
     margin-top: -12px;
     padding-bottom: 15px;
 }
 
 #dashboard #block-stats .stat-little-number-top {
     font-family: "BebasNeue";
-    font-size: 28px;
-    color: #FF494C;
+    font-size: 26px;
+    //color: #FF494C;
     padding-bottom: 0px;
     margin-bottom: -40px;
     padding-top: 5px;
