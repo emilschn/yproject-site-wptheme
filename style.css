@@ -246,6 +246,41 @@ form.wdg-forms .small-margin {
     width: 500px;
 }
 
+form.wdg-forms .reward-table-param {
+    margin-left: 50px;
+}
+
+form.wdg-forms table {
+    border-collapse: collapse;
+}
+
+form.wdg-forms thead {
+    background-color: #EEE;
+}
+
+form.wdg-forms tbody {}
+form.wdg-forms tr {}
+
+form.wdg-forms th {
+    padding : 6px 10px;
+}
+
+form.wdg-forms td {
+    padding : 4px 10px;
+    border-top: 1px grey solid;
+}
+
+form.wdg-forms table input[type="number"]{
+    width: 60px;
+    margin: 0px;
+}
+
+form.wdg-forms table input[type="text"].reward-text{
+    max-width: 90%;
+    min-width: 500px;
+    margin: 0px;
+}
+
 /*******************************************************************************
 * LIGHTBOX
 *******************************************************************************/

@@ -117,7 +117,7 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 					
 					<?php else: ?>
 						<label>Type de financement :</label>
-						<?php 
+						<?php echo '<span>';
 						switch ($campaign->funding_type()) {
 							case 'fundingproject':
 								echo 'Avance sur chiffre d&apos;affaires (royalties)<br />';
@@ -129,19 +129,69 @@ if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parame
 								echo 'Don avec contrepartie<br />';
 								break;
 						}
+                                                echo '</span>';
 						?>
-
+                                                
+                                                <?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 						<label>Dur&eacute;e du financement :</label>
-						<?php echo $campaign->funding_duration(); ?> ann&eacute;es.<br />
-
+						<span><?php echo $campaign->funding_duration(); ?> ann&eacute;es.</span><br />
+                                                <?php endif; ?>
+                                                
 						<label>Montant demand&eacute; :</label>
 						<?php $goal = (int)$campaign->goal(false); ?>
-						Entre <?php echo $campaign->minimum_goal(); ?> &euro; et <?php echo $goal; ?> &euro;<br />
+						<span>Entre <?php echo $campaign->minimum_goal(); ?> &euro; et <?php echo $goal; ?> &euro;</span><br />
 					
-					<?php endif; ?>
+					<?php endif; 
+                                        
+                                        //Gestion des contreparties
+                                        if ($campaign->funding_type() == 'fundingdonation'):
+                                            $rewards = atcf_get_rewards($campaign_id);
+                                            $status = $campaign->campaign_status();
+                                            $can_edit = ( $status == "preparing" || $status == "preview" || $status == "vote");
+                                        ?>
 					
-						
+                                        <label for="project-rewards">Contreparties :</label><br/>
+                                        <div class="reward-table-param"><table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Nom de la contrepartie</th>
+                                                    <th>Montant</th>
+                                                    <th>Limite</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $i=0;
+                                                foreach ($rewards->rewards_list as $value) {
+                                                    if ($can_edit){
+                                                        $line = '<tr>'
+                                                            .'<td><input name="reward-name-'.$i.'" type="text" name="" value="'.$value['name'].'" placeholder="Nommez et d&eacute;crivez bri&egrave;vement la contrepartie" class="reward-text" />'
+                                                            .'<input name="reward-id-'.$i.'" type="hidden" value="'.$value['id'].'"/></td>'
+                                                            .'<td><input name="reward-amount-'.$i.'" type="number" min="0" name="" value="'.$value['amount'].'" placeholder="0"/>€</td>'
+                                                            .'<td><input name="reward-limit-'.$i.'" type="number" min="0" value="'.$value['limit'].'" placeholder="0"/></td>'
+                                                            .'</tr>';
+                                                    } else {
+                                                        $line = '<tr>'
+                                                            .'<td>'.$value['name'].'</td>'
+                                                            .'<td>'.$value['amount'].'</td>'
+                                                            .'<td>'.$value['limit'].'</td>'
+                                                            .'</tr>';
+                                                    }
+                                                    echo $line;
+                                                    $i++;
+                                                }
+                                                if ($can_edit) { for ($loop=0; $loop<=2; $loop++){ ?>
+                                                <tr>
+                                                    <td><input name="reward-name-<?php echo $i+$loop;?>" type="text" name="" value="" placeholder="Nommez et d&eacute;crivez bri&egrave;vement la contrepartie" class="reward-text"/></td>
+                                                    <td><input name="reward-amount-<?php echo $i+$loop;?>" type="number" min="0" name="" value="" placeholder=""/></td>
+                                                    <td><input name="reward-limit-<?php echo $i+$loop;?>" type="number" min="0" name="" value="" placeholder=""/></td>
+                                                </tr>
+                                                <?php } } ?>
+                                            </tbody>
+                                        </table></div>
+						<br/>
 					<?php
+                                        endif;
+                                        
 					// Gestion des organisations
 					$str_organisations = '';
 					global $current_user;
