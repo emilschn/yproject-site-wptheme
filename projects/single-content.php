@@ -200,6 +200,8 @@ else {
 		<div id="project-rewards-custom" class="project-rewards"><?php echo $campaign->rewards(); ?></div>
 	</div>
 </div>
+
+<a name="description"></a>
 <div id="project-description-title-padding"></div>
 
 <div id="description_du_projet" class="part-title-separator mobile_hidden">
@@ -273,7 +275,7 @@ else {
 		</div>
 	</div>
 	
-	<?php if ($vote_status != 'preview'): ?>
+	<?php if ($vote_status != 'preview' || $can_modify): ?>
 	<div class="projects-desc-item">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>economie.png" alt="logo economie" data-content="added_value" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
@@ -342,7 +344,7 @@ else {
 	<div class="align-center">
 		<p>Vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet.</p>
 		<a href="#register" id="register" class="wdg-button-lightbox-open button" data-lightbox="register">Inscription</a>
-		<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">Connexion</a><br /><br />
+		<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion" data-redirect="<?php echo get_permalink() . '#description'; ?>">Connexion</a><br /><br />
 	</div>
 <?php } ?>
 	

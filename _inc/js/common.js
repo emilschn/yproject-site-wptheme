@@ -202,11 +202,11 @@ YPUIFunctions = (function($) {
                         //Lightbox de passage à l'étape suivante
                         if ($("#submit-go-next-step").length > 0) {
                             $("#submit-go-next-step").attr('disabled','');
-                            $("#submit-go-next-step").attr('style','background-color:#333 !important');
+                            $("#submit-go-next-step").attr('style','background-color:#333 !important; border: 0px !important; ');
                             
                             checkall = function() {
                                 var allcheck = true;
-                                $(".checkbox-next-step").each(function(index){
+                                $(".checkbox-next-step:visible").each(function(index){
                                     allcheck = allcheck && this.checked;
                                 });
                                 return allcheck;
@@ -218,21 +218,42 @@ YPUIFunctions = (function($) {
                                     $("#submit-go-next-step").attr('style','background-color:#FF494C');
                                 } else {
                                     $("#submit-go-next-step").attr('disabled','');
-                                    $("#submit-go-next-step").attr('style','background-color:#333 !important');
+                                    $("#submit-go-next-step").attr('style','background-color:#333 !important; border: 0px !important;');
                                 };
+                            });
+                            
+                            //Changements du formulaire lorsque l'on veut passer de préparation à vote (sans A-P)
+                            $("#no-preview-button").click(function(){
+                                $("#cbman13").closest('li').slideUp();
+                                $("#desc-preview").slideUp();
+                                $("#vote-checklist").slideDown();
+                                $("#no-preview-button").slideUp();
+                                $("#next-step-choice").val("2");
                             });
                         }
                         //Preview date fin collecte sur LB étape suivante
-                        if($("#innbday").length > 0) {
-                            $("#innbday").change(function() {
-                                $("#previewenddatecollecte").empty();
-                                if(this.value<=60 && this.value>=1){
+                        if(($("#innbdayvote").length > 0)||($("#innbdaycollecte").length > 0)) {
+                            
+                            updateDate = function(idfieldinput, iddisplay) {
+                                $("#"+iddisplay).empty();
+                                if($("#"+idfieldinput).val()<=$("#"+idfieldinput).prop("max") && $("#"+idfieldinput).val()>=$("#"+idfieldinput).prop("min")){
                                     var d = new Date();
-                                    var jsupp = this.value;
+                                    var jsupp = $("#"+idfieldinput).val();
                                     d.setDate(d.getDate()+parseInt(jsupp));
-                                    $("#previewenddatecollecte").prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+                                    $("#"+iddisplay).prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+                                } else {
+                                    $("#"+iddisplay).prepend("La durée doit être comprise entre "+($("#"+idfieldinput).prop("min"))+" et "+($("#"+idfieldinput).prop("max"))+" jours");
                                 }
-                            });
+                            };
+                            
+                            updateDate("innbdaycollecte","previewenddatecollecte");
+                            updateDate("innbdayvote","previewenddatevote");
+                            
+                            $("#innbdaycollecte").on( 'keyup change', function () {
+                                updateDate("innbdaycollecte","previewenddatecollecte");});
+                            
+                            $("#innbdayvote").on( 'keyup change', function () {
+                                updateDate("innbdayvote","previewenddatevote");});
                         }
                         
                         //Gestion equipe depuis Tableau de bord
@@ -284,15 +305,11 @@ YPUIFunctions = (function($) {
                         }
                         
 
-                        $("#investir").click(function(){
-                           $("#redirect-page-investir").attr("value","true");
-                        }); 
-                        $("#connexion").click(function(){
-                           $("#redirect-page-investir").attr("value","");
-                        });
-                        $("#forum").click(function(){
-                           $("#redirect-page-investir").attr("value","forum");
-                        });
+			if ($("#wdg-lightbox-connexion").length > 0) {
+			    $(".wdg-button-lightbox-open").click(function(){
+				$("#wdg-lightbox-connexion #redirect-page").attr("value", $(this).data("redirect"));
+			    });
+			}
 		},
                 
                 manageTeam: function(action, data, campaign_id){
@@ -825,6 +842,11 @@ WDGProjectPageFunctions=(function($) {
 		    if ($("#vote-form").hasClass("collapsed")) {
 			$("#vote-form").removeClass("collapsed");
 			$(".description-discover").css('background-color', '#FF494C');
+			if ($(window).width() > 480) {
+			    $("#vote-form").animate({ 
+				top: "-350px"
+			    }, 500 );
+			}
 			
 		    } else {
 			if ($(window).width() > 480) {
