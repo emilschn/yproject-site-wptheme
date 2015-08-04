@@ -866,7 +866,9 @@ WDGProjectPageFunctions=(function($) {
 		
 		//Clic sur une partie
 		clickItem: function(clickedElement) {
-			if (!WDGProjectPageFunctions.isEditing && !WDGProjectPageFunctions.isClickBlocked) {
+                    //Ne déclenche pas d'action si l'utilisateur sélectionnait du texte
+                    var select = getSelection().toString();
+			if (!select && !WDGProjectPageFunctions.isEditing && !WDGProjectPageFunctions.isClickBlocked) {
 				//Si la balise "lire plus" de l'élément cliqué est affichée
 				var projectMore = clickedElement.find('.projects-more');
 				if (projectMore.is(':visible')) {
