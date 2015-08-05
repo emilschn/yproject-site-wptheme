@@ -61,7 +61,7 @@
                     ?>" />
 		<meta property="og:description" content="<?php 
                     if($is_campaign_page === true){
-			    echo $campaign->subtitle()." ".$campaign->summary();
+			    echo $campaign->subtitle();
                     } else {
 			    echo "Plateforme d'investissement participatif a impact positif";
                     }
