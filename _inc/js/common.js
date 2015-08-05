@@ -270,6 +270,40 @@ YPUIFunctions = (function($) {
                            YPUIFunctions.manageTeam(action, data, campaign_id);
                            
                         });
+                        
+                        //Modification des contreparties
+                        if ($(".reward-table-param").length > 0){
+                            
+                            checkNeedNewLines = function(){
+                                if ($(".reward-text").filter(function() { return $(this).val() == ""; }).length <= 1){
+                                        //Ajouter des lignes
+                                        i = parseInt($(".reward-text").last().prop("name").substring(12))+1;
+                                        newline = '<tr>'
+                                                    +'<td><input name="reward-name-'+i+'" type="text" name="" value="" placeholder="Nommez et d&eacute;crivez bri&egrave;vement la contrepartie" class="reward-text"/></td>'
+                                                    +'<td><input name="reward-amount-'+i+'" type="number" min="0" name="" value="" placeholder=""/></td>'
+                                                    +'<td><input name="reward-limit-'+i+'" type="number" min="0" name="" value="" placeholder=""/></td>'
+                                                    +'</tr>';
+                                        
+                                        $(".reward-table-param table tbody").append(newline);
+                                        addListeners();
+                                    }
+                            };
+                            addListeners = function(){
+                                $(".reward-text").off().on( 'keyup change', function(){
+                                    if(this.value===''){
+                                        $(this).closest("tr").find("input").css("background-color","#CCC");
+                                    } else {
+                                        $(this).closest("tr").find("input").css("background-color","");
+                                        //Si toutes les cases sont utilisées
+                                        checkNeedNewLines();
+                                    }
+                                }).trigger('change');
+                            };
+                            
+                            addListeners();
+                            
+                        }
+                        
 
 			if ($("#wdg-lightbox-connexion").length > 0) {
 			    $(".wdg-button-lightbox-open").click(function(){

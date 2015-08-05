@@ -6,9 +6,7 @@ if (isset($_GET["campaign_id"])) {
         $campaign = atcf_get_campaign($campaign_id);
         $status = $campaign->campaign_status();
 	global $stylesheet_directory_uri;
-?>
 
-<?php
 //*******************
 //CACHE PROJECT PUBLIC STATS
 $cache_stats = $WDG_cache_plugin->get_cache('project-stats-public-' . $campaign_id, 1);
