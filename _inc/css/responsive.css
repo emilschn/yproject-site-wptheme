@@ -4,7 +4,7 @@
 *******************************************************************************/
 	.mobile_hidden { display: none !important; }
 	.only_on_mobile { display: block !important; }
-	.center { width: 100% !important; }
+	.center, .center_small { width: 100% !important; }
 	#container { padding-top: 0px !important; }
 	.indent { margin-left: 0px !important; }
 	
@@ -91,6 +91,7 @@
 	footer .widget-area .menu-item a { 
 		font-size: 12px;
 	}
+	footer div.widget-area-large { width: 100% !important; }
 	footer .widget-area ul.xoxo { margin-bottom: 0px; }
 	footer #first { margin-left: 0px !important; }
 	footer #first span.only_on_mobile { 
@@ -293,13 +294,13 @@
 	}
 	.mobile-share { text-align: center; }
 	.mobile-share .jy-crois .stats_btn {
-		background-position-x: center;
+		background-position: 10px 0px;
 		vertical-align: top;
 		background-size: 75%;
 		height: 75px !important;
 		margin-right: 0px;
 	}
-	.mobile-share .jy-crois .stats_btn #jy-crois-txt { top: 35px; }
+	.mobile-share .jy-crois .stats_btn #jy-crois-txt { top: 35px; left: -10px; }
 	.mobile-share .jy-crois .stats_btn p { top: 55px; }
 	.reward-zone {
 		background-color: #EEECED;
@@ -344,4 +345,35 @@
 		text-transform: uppercase;
 		font-size: 20px;
 	}
+	
+/*******************************************************************************
+* INVESTMENT
+*******************************************************************************/
+	#invest_form { width: 90% !important; }
+	#invest-breadcrumb { padding: 30px 0px !important; }
+	#invest-breadcrumb img, .mangopay-image img { width: 320px; height: auto; }
+	.invest_part { width: 94% !important; padding: 10px 3% !important; }
+	.invest_part .label { width: auto !important; }
+	.invest_step1_generalities, .invest_step1_currentproject { margin: 2% !important; }
+
+/*******************************************************************************
+* CONNECTION
+*******************************************************************************/
+	#sidebar-login-form .standard-label { width: 90px !important; }
+	#sidebar-login-form input[type="text"] { width: 210px !important; }
+	#sidebar-login-form input[type="submit"], #sidebar-login-form .link-forgotten { margin-left: 94px !important; }
+	
+/*******************************************************************************
+* REGISTER PAGE / REGISTER LIGHTBOX
+*******************************************************************************/
+	.form-register .register-section, .form-register .register-section div.on-focus { text-align: left !important; }
+	.form-register .on-focus input {
+		margin-left: 0px !important;
+		width: 170px;
+		height: 25px;
+		font-size: 20px;
+	}
+	.form-register .tool-tip { width: 100px !important; margin-top: -35px !important; }
+	.form-register .on-focus:nth-child(1) .tool-tip { margin-top: 0px !important; }
+	.form-register .on-focus:nth-child(4) .tool-tip { margin-top: -55px !important; }
 }

@@ -123,7 +123,7 @@ class YPProjectLib {
 		}
                 
                 if (isset($_POST['phone'])) {
-			update_post_meta($campaign_id, 'campaign_contact_phone', $_POST['phone']);
+			update_post_meta($campaign_id, 'campaign_contact_phone', sanitize_text_field($_POST['phone']));
 		} else {
 			$buffer = FALSE;
 		}
@@ -275,7 +275,13 @@ class YPProjectLib {
 		
 		if (isset($_POST['fundingtype'])) { 
 			if ($_POST['fundingtype'] == 'fundingdevelopment' || $_POST['fundingtype'] == 'fundingproject' || $_POST['fundingtype'] == 'fundingdonation') {
-				update_post_meta($campaign_id, 'campaign_funding_type', $_POST['fundingtype']); 
+				update_post_meta($campaign_id, 'campaign_funding_type', $_POST['fundingtype']);
+                                if($_POST['fundingtype'] == 'fundingdonation'){
+                                    update_post_meta($campaign_id, '_variable_pricing', true );
+                                    update_post_meta($campaign_id, 'campaign_part_value', 1 );
+                                } else {
+                                    update_post_meta($campaign_id, '_variable_pricing', false );
+                                }
 			} else {
 				$buffer = FALSE;
 			}
@@ -306,6 +312,27 @@ class YPProjectLib {
 			}
 		}
 		
+                //Gestion des contreparties
+                if (isset($_POST['reward-name-0'])){
+                    $i = 0;
+                    $new_rewards = array();
+                    
+                    while (isset($_POST['reward-name-'.$i]) 
+                        && isset($_POST['reward-amount-'.$i]) 
+                        && isset($_POST['reward-limit-'.$i])){
+                        
+                        $new_rewards[$i]['name'] = sanitize_text_field($_POST['reward-name-'.$i]);
+                        $new_rewards[$i]['amount'] = abs(intval($_POST['reward-amount-'.$i]));
+                        $new_rewards[$i]['limit'] = abs(intval($_POST['reward-limit-'.$i]));
+                        
+                        if (isset($_POST['reward-id-'.$i])){
+                                $new_rewards[$i]['id'] = ($_POST['reward-id-'.$i]);
+                        }
+                        $i++;
+                    }
+                    atcf_get_rewards($campaign_id)->update_rewards_data($new_rewards);
+                }
+                
 		do_action('wdg_delete_cache', array(
 			'project-header-image-' . $campaign_id, 
 			'project-content-summary-' . $campaign_id,

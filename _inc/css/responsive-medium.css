@@ -7,6 +7,7 @@
 	.center { width: 768px !important; }
 	#container { padding-top: 60px !important; }
 	.indent { margin-left: 20px !important; }
+	.center { max-width: 100% !important }
 
 /*******************************************************************************
 * HEADER MENU
@@ -95,4 +96,9 @@
 	#projects-left-desc #projects-summary { width: 100% !important; }
 	#projects-left-desc .video-zone { width: 410px !important; }
 	.projects-desc-content { width: 635px !important; }
+	
+/*******************************************************************************
+* INVESTMENT
+*******************************************************************************/
+	.invest_step1_generalities, .invest_step1_currentproject { max-width: 96% !important; }
 }

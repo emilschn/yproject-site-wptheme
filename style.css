@@ -59,9 +59,8 @@ tbody {
     margin: auto;
     font-size: 14px;
 }
-
 .center_small {
-    width: 960px;
+    width: 480px;
     margin: auto;
 }
 
@@ -84,6 +83,8 @@ tbody {
 .errors, .invest_error {
     color: #FE494C;
     text-transform: none !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .success, .invest_success {
     color: green;
@@ -170,6 +171,9 @@ h2.grey, h3.grey {
 #wpstats {
     display: none;
 }
+.wpb_single_image .vc_single_image-wrapper { max-width: 100%; }
+
+hr.form-separator { -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0; }
 
 /*******************************************************************************
 * STANDARD FORMS
@@ -226,7 +230,9 @@ form.wdg-forms .small-margin {
 
 .standard-form {
     font-family: Arial, sans-serif;
+    margin: 5px 0px;
 }
+.standard-form select{ margin-bottom: 5px; }
 .standard-form input[type=text] { margin-bottom: 5px; }
 .standard-form input[type=password] { margin-bottom: 3px; }
 .standard-form input.margin-left { margin-left: 140px !important; }
@@ -251,122 +257,44 @@ form.wdg-forms .small-margin {
     width: 500px;
 }
 
-/*******************************************************************************
-* LIGHTBOX - FORMULAIRE
-*******************************************************************************/
-/* tooltip */
-
-
-.tool-tip{
-	color: #fff;
-	background-color: rgba( 0, 0, 0, .7);
-	text-shadow: none;
-	font-size: .9em;
-	visibility: hidden;
-	-webkit-border-radius: 7px; 
-	-moz-border-radius: 7px; 
-	-o-border-radius: 7px; 
-	border-radius: 7px;	
-	text-align: center;	
-	opacity: 0;
-	z-index: 999;
-	padding: 3px 8px;	
-	position: absolute;
-	cursor: default;
-	-webkit-transition: all 240ms ease-in-out;
-	-moz-transition: all 240ms ease-in-out;
-	-ms-transition: all 240ms ease-in-out;
-	-o-transition: all 240ms ease-in-out;
-	transition: all 240ms ease-in-out;	
-}
-/* default heights, width and margin w/o Javscript */
-
-.tool-tip,
-.tool-tip.top{
-	width: 90px;
-	height: 30px;
-	margin-left: -43px;
+form.wdg-forms .reward-table-param {
+    margin-left: 50px;
 }
 
-/* tool tip position right */
-
-.tool-tip.right{
-	top: 50%;
-	right: auto;
-	left: 75%;
-	margin-top: -15px;
-	margin-right: auto;	
-	margin-left: auto;
+form.wdg-forms table {
+    border-collapse: collapse;
 }
 
-.tool-tip.right:after{
-	left: -5px;
-	top: 50%;	
-	margin-top: -6px;
-	bottom: auto;
-	border-top-color: transparent;	
-    border-right-color: rgba( 0, 0, 0, .7);	
-}
-.on-focus input{
-        width:200px;
+form.wdg-forms thead {
+    background-color: #EEE;
 }
 
-/* tooltip on focus left and right */
+form.wdg-forms tbody {}
+form.wdg-forms tr {}
 
-.on-focus .tool-tip.left,
-.on-focus .tool-tip.right{
-	margin-top: -19px;
+form.wdg-forms th {
+    padding : 6px 10px;
 }
 
-/* on hover of element containing tooltip default*/
-
-*:not(.on-focus):hover > .tool-tip,
-.on-focus input:focus + .tool-tip{
-	visibility: visible;
-	opacity: 1;
-	-webkit-transition: all 240ms ease-in-out;
-	-moz-transition: all 240ms ease-in-out;
-	-ms-transition: all 240ms ease-in-out;
-	-o-transition: all 240ms ease-in-out;
-	transition: all 240ms ease-in-out;		
+form.wdg-forms td {
+    padding : 4px 10px;
+    border-top: 1px grey solid;
 }
 
-
-
-
-.colonne {
-   
-    margin-top: 10px;
-    width: 350px;
-    border: 1px solid;
-    display: inline-block;
+form.wdg-forms table input[type="number"]{
+    width: 60px;
+    margin: 0px;
 }
 
-.colonne p {
-    width: 300px;
-    text-align: left;
-}
-.login_fail{
-    margin-bottom: 10px;
-}
-
-
-
-#sidebar-login-form a{
-    color: #606060;
-    font-size: 11px;
-    font-style: italic;
-}
-
-#sidebar-login-form label {
-    text-align: right;
-    font-size: 14px;
+form.wdg-forms table input[type="text"].reward-text{
+    max-width: 90%;
+    min-width: 500px;
+    margin: 0px;
 }
 
 /*******************************************************************************
-* LIGHTBOX - CGU / DEJA CONNECTE
+* LIGHTBOX
 *******************************************************************************/
-
 .wdg-lightbox {
 	background-color: rgba(0, 0, 0, 0.75);
 	top: 0px;
@@ -447,6 +375,111 @@ form.wdg-forms .small-margin {
 #already-connected {
 	text-align: center;
 }
+
+.wdg-lightbox .warning {
+    text-align: justify;
+    margin: 10px 0px;
+}
+.wdg-lightbox .register-section {
+    margin: 20px 0px;
+    text-align: center;
+}
+.wdg-lightbox div.submit {
+    margin: 10px 0px;
+    text-align: center;
+}
+
+.wdg-lightbox.timeout-lightbox {
+	background-color: transparent;
+	margin-top: 88px;
+}
+.wdg-lightbox.timeout-lightbox .wdg-lightbox-padder {
+	background-color: #333333;
+	color: #FFFFFF;
+}
+
+/*******************************************************************************
+* LIGHTBOX - FORMULAIRE
+*******************************************************************************/
+/* tooltip */
+.tool-tip {
+    color: #fff;
+    background-color: rgba( 0, 0, 0, .7);
+    text-shadow: none;
+    font-size: .9em;
+    visibility: hidden;
+    -webkit-border-radius: 7px; 
+    -moz-border-radius: 7px; 
+    -o-border-radius: 7px; 
+    border-radius: 7px;	
+    text-align: center;	
+    opacity: 0;
+    z-index: 999;
+    padding: 3px 8px;	
+    position: relative;
+    cursor: default;
+    -webkit-transition: all 240ms ease-in-out;
+    -moz-transition: all 240ms ease-in-out;
+    -ms-transition: all 240ms ease-in-out;
+    -o-transition: all 240ms ease-in-out;
+    transition: all 240ms ease-in-out;	
+}
+
+/* default heights, width and margin w/o Javscript */
+.tool-tip, .tool-tip.top {
+    width: 90px;
+    margin-left: -90px;
+}
+
+/* tool tip position right */
+.tool-tip.right:after{
+    left: -5px;
+    top: 50%;	
+    margin-top: -6px;
+    bottom: auto;
+    border-top-color: transparent;	
+    border-right-color: rgba( 0, 0, 0, .7);	
+}
+
+/* tooltip on focus left and right */
+.on-focus input {
+    width:200px;
+}
+.on-focus .tool-tip.left, .on-focus .tool-tip.right{
+    margin-top: -30px;
+}
+/* on hover of element containing tooltip default*/
+*:not(.on-focus):hover > .tool-tip, .on-focus input:focus + .tool-tip{
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: all 240ms ease-in-out;
+    -moz-transition: all 240ms ease-in-out;
+    -ms-transition: all 240ms ease-in-out;
+    -o-transition: all 240ms ease-in-out;
+    transition: all 240ms ease-in-out;
+}
+
+.colonne {
+    width: 235px;
+    vertical-align: top; 
+    display: inline-block;
+}
+.colonne input {
+    width: 220px;
+    text-align: left;
+}
+
+#sidebar-login-form a{
+    color: #606060;
+    font-size: 11px;
+    font-style: italic;
+}
+#sidebar-login-form label {
+    text-align: right;
+    font-size: 14px;
+}
+#sidebar-login-form .link-forgotten { margin-left: 140px; }
+#sidebar-login-form .link-forgotten a { color: #333333; text-align: right; font-size: 10px; font-style: italic; }
 
 /*******************************************************************************
 * HEADER MENU
@@ -1173,7 +1206,7 @@ footer div.social-icons {
     text-align: center;
     background-color: #2B2C2C;
     padding: 13px 0px;
-    display: block;
+    display: inline-block;
     font-size: 13px;
     width: 100%;
     margin-top: 15px;
@@ -2426,6 +2459,8 @@ div#home_bottom h1 {
     padding: 10px;
     display: inline-block;
     text-transform: none;
+    background-color: #FF494C;
+    border: 1px solid #FF494C !important;
 }
 
 #dashboard .google-doc iframe {
@@ -2459,7 +2494,7 @@ div#home_bottom h1 {
     text-transform: uppercase;
     font-family: "BebasNeue";
     font-size: 30px;
-    color: #FF494C;
+    //color: #FF494C;
     text-align: center;
     padding: 15px 5px 2px 5px;
 }
@@ -2518,23 +2553,23 @@ div#home_bottom h1 {
 
 #dashboard #block-stats .stat-big-number {
     font-family: "BebasNeue";
-    font-size: 100px;
-    color: #FF494C;
+    font-size: 90px;
+    //color: #FF494C;
     padding-top: 30px;
 }
 
 #dashboard #block-stats .stat-little-number {
     font-family: "BebasNeue";
-    font-size: 28px;
-    color: #FF494C;
+    font-size: 26px;
+    //color: #FF494C;
     margin-top: -12px;
     padding-bottom: 15px;
 }
 
 #dashboard #block-stats .stat-little-number-top {
     font-family: "BebasNeue";
-    font-size: 28px;
-    color: #FF494C;
+    font-size: 26px;
+    //color: #FF494C;
     padding-bottom: 0px;
     margin-bottom: -40px;
     padding-top: 5px;
@@ -2583,7 +2618,54 @@ div#home_bottom h1 {
     background: #333 url("images/chargement.gif") center no-repeat !important;
 }
 
+/*******************************************************************************
+* TABLEAUX DYNAMIQUES : PERSONNALISATION DE DATATABLES
+*******************************************************************************/
+.wdg-datatable{
+    overflow-x: auto;
+    overflow-y: hidden;
+}
 
+.wdg-datatable table.dataTable thead th, 
+.wdg-datatable table.dataTable thead td {
+    padding: 5px 17px 5px 8px;
+    cursor: move;
+}
+
+.wdg-datatable table.dataTable tbody th, 
+.wdg-datatable table.dataTable tbody td {
+    padding: 5px 5px;
+}
+
+.wdg-datatable table.dataTable tfoot th, 
+.wdg-datatable table.dataTable tfoot td {
+    padding: 8px 8px 15px;
+}
+
+.wdg-datatable table.dataTable tfoot td {
+    vertical-align: top;
+}
+
+.wdg-datatable .col-filter {
+    width: 90%;
+}
+
+/****Affichage permanent du scroll sur Mac et ios******/
+.wdg-datatable::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+.wdg-datatable::-webkit-scrollbar:horizontal {
+    height: 15px;
+}
+.wdg-datatable::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(0, 0, 0, .5);
+}
+.wdg-datatable::-webkit-scrollbar-track { 
+    background-color: #fff; 
+    border-radius: 8px; 
+}
 /*******************************************************************************
 * NEW PROJECT PAGE
 *******************************************************************************/
@@ -2659,16 +2741,48 @@ div#home_bottom h1 {
     background-color: #333333;
 }
 
-.login_fail { color : red; }
+.login_fail { color : red; margin-bottom: 10px; }
 
 /*******************************************************************************
-* REGISTER PAGE
-*******************************************************************************/   
-.register_half_part {       
-    float: left;        
-    width: 440px;
-    padding: 0px 15px;
+* REGISTER PAGE / REGISTER LIGHTBOX
+*******************************************************************************/
+#wdg-lightbox-register .wdg-button-lightbox-open {
+    width: 174px;
+    padding: 5px 0px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.form-register .on-focus input { margin-left: 110px; }
+.form-register .on-focus .tool-tip { width: 110px; margin-top: -20px; }
+
+.form-register {
+    margin: 5px;
+}
+.form-register h2 {
     text-align: center;
+    margin: 5px 0px;
+}
+.form-register .warning {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+.form-register .register-section {
+    text-align: center;
+}
+.form-register .register-section div {
+    margin: 7px 0px;
+    text-align: center;
+}
+.form-register div#connexion_facebook_container {
+    display: block;
+    text-align: center;
+    background-color: transparent;
+}
+.form-register div#connexion_facebook_container a {
+    padding: 2px 0px 5px;
+    background-color: #526794;
+    border: 1px solid #526794;
 }
 
 #signup_submit {
@@ -3006,7 +3120,7 @@ table.mceLayout {
 #form_infoperso_projet {
     background:#F2F2F2;
     margin: 20px;
-    padding: 30px;
+    padding: 20px;
 }
 
 /*******************************************************************************
@@ -3090,6 +3204,43 @@ table.mceLayout {
     font-size: 14px;
 }
 
+#reward-selector {
+    list-style: outside none none;
+    padding-left: 0px;
+}
+
+#reward-selector li {
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #EEE;
+}
+
+#reward-selector .selected {
+    background-color: #FF494C;
+    color: white;
+    font-weight: bold;
+}
+
+#reward-selector .reward-amount {
+    font-weight: bold;
+}
+
+#reward-selector .detail {
+    opacity: 0.7;
+}
+
+#reward-selector .reward-not-null {
+    margin: 10px 15px 10px 20px ;
+}
+
+#reward-selector li {
+    padding: 8px;
+}
+
+#reward-selector .unavailable-reward {
+    opacity: 0.5;
+}
+
 #invest_form {
     font-size: 13px;
     width: 37%;
@@ -3167,34 +3318,6 @@ ul.invest-mean-payment li img {
 /*******************************************************************************
 * INVESTORS PAGE
 *******************************************************************************/ 
-.tablescroll {
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
-//Barre de scroll en haut du tableau
-.tablescroll, .tablescroll table{
-    transform:rotateX(180deg);
-}
-
-/****Affichage permanent du scroll sur Mac et ios******/
-.tablescroll::-webkit-scrollbar {
-    -webkit-appearance: none;
-}
-.tablescroll::-webkit-scrollbar:horizontal {
-    height: 15px;
-}
-.tablescroll::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    border: 2px solid white;
-    background-color: rgba(0, 0, 0, .5);
-}
-.tablescroll::-webkit-scrollbar-track { 
-    background-color: #fff; 
-    border-radius: 8px; 
-}
-/***************************************************/
-
 #display-options-col-menu {
     background-color: #333;
     border: 0px none;

@@ -37,7 +37,7 @@ get_header();
 
 					<form action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
 
-						<label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?></label>
+						<label for="org_name"><?php _e('D&eacute;nomination sociale*', 'yproject'); ?></label>
 						<input type="text" name="org_name" value="<?php echo filter_input(INPUT_POST, 'org_name'); ?>" /><br />
 
 						<?php /*

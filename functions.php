@@ -50,7 +50,7 @@ remove_action("wp_head", "wp_generator");
 add_filter('login_errors',create_function('$a', "return null;"));
 
 function yproject_enqueue_script(){
-	global $can_modify, $is_campaign, $is_campaign_page;
+	global $can_modify, $is_campaign, $is_campaign_page, $post;
 	$campaign = atcf_get_current_campaign();
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	
@@ -60,12 +60,24 @@ function yproject_enqueue_script(){
 		wp_enqueue_script('jquery');
 	}
 	
-	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.07.02');
-	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.07.02'); }
+	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.07.10');
+	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.07.10'); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
 //	wp_enqueue_script( 'wdg-ux-helper', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-ux-helper.js', array('wdg-script'));
+
+        //Ne charge les scripts de tableau que si tableau de bord
+        if($post->post_name=='tableau-de-bord'){
+            wp_enqueue_script( 'datatable-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/jquery.dataTables.js', array('wdg-script'), true, true);
+            wp_enqueue_style('datatable-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/jquery.dataTables.css', null, false, 'all');
+            //wp_enqueue_script( 'datatable-resp-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.responsive.js', array('wdg-script'), true, true);
+            //wp_enqueue_style('datatable-resp-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.responsive.css', null, false, 'all');
+            wp_enqueue_script( 'datatable-colvis-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colVis.js', array('wdg-script'), true, true);
+            wp_enqueue_style('datatable-colvis-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.colVis.css', null, false, 'all');
+            wp_enqueue_script( 'datatable-colReorder-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colReorder.js', array('wdg-script'), true, true);
+            wp_enqueue_style('datatable-colReorder-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.colReorder.css', null, false, 'all');
+        }
 	
 	wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.js', array('jquery'));
 	wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, 'all');
@@ -90,64 +102,12 @@ add_action( 'send_headers', 'varnish_safe_http_headers' );
 
 
 /** GESTION DU LOGIN **/
-/**
- * Redirige les erreurs de login
- * @param type $username
- */
-function yproject_front_end_login_fail($username){
-        $page = $_POST['redirect-page-error']; 
-        if($_POST['redirect-page-investir'] == "true"){
-            wp_redirect($page.'/?login=failed&redirect=invest#connexion');
-        } else if($_POST['redirect-page-investir'] == "forum") {
-             wp_redirect($page.'/?login=failed&redirect=forum#connexion');
-        } else {
-            wp_redirect($page.'/?login=failed#connexion');
-        }
-	exit;
+function yproject_init() {
+    locate_template( array("requests/users.php"), true );
+    YPUsersLib::login();
+    YPUsersLib::register();
 }
-add_action('wp_login_failed', 'yproject_front_end_login_fail'); 
-
-
-function yproject_redirect_login() {
-//	$current_user = wp_get_current_user();
-//	NotificationsSlack::send_to_dev('Connexion de ' . $current_user->first_name . ' ' . $current_user->last_name . ' (' . $current_user->ID . ')');
-        $page_invest = get_page_by_path('investir');
-        $page_id = $_POST['redirect-page'];
-        $page_type = $_POST['type-page']; 
-        $page_redirection = $_POST['redirect-page-investir'];
-        
-        if (isset($_GET['login'])) {
-            $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
-	    wp_redirect($page);
-	    
-        } else {
-            if (isset($page_id) && isset($page_type)) {
-                if ($page_type == "download") {
-                    if( isset($page_redirection) && $page_redirection == "true") {
-                        $page = get_permalink($page_invest->ID).'?campaign_id='.$page_id.'&invest_start=1';
-                        wp_redirect($page);  
-                        
-                    } else if (isset($page_redirection) && $page_redirection == "forum") {
-                        $forum = get_page_by_path('forum');
-                        $page = get_permalink($forum->ID).'?campaign_id='.$page_id;   
-                        wp_redirect($page);
-                        
-                    } else {
-                        $page = get_page($page_id);
-                        wp_redirect(get_permalink($page).'#description_du_projet');
-                    }
-                } else {
-                    $page = get_page($page_id);
-                    wp_redirect(get_permalink($page)); 
-                }
-		
-            } else {
-		wp_redirect(home_url());
-	    }
-        }
-	exit;
-}
-add_action('wp_login', 'yproject_redirect_login');
+add_action('init', 'yproject_init');
 
 function yproject_redirect_logout(){
 	if (isset($_GET['page_id'])) {
@@ -161,43 +121,10 @@ function yproject_redirect_logout(){
 }
 add_action('wp_logout', 'yproject_redirect_logout');
 
-// Rediriger une personne qui n'a rien rempli pour s'identifier 
-function _catch_empty_user( $username, $pwd ) {
-	if (empty($username)||empty($pwd)) {
-		$page = $_POST['redirect-page-error']; 
-                if($_POST['redirect-page-investir'] == "true"){
-                    wp_redirect($page.'/?login=failed&redirect=invest#connexion');
-                } else {
-                    wp_redirect($page.'/?login=failed#connexion');
-                }
-	}
-}
-add_action( 'wp_authenticate', '_catch_empty_user', 1, 2 );
-
 function catch_register_page_loggedin_users() {
 	return home_url() . '?alreadyloggedin=1';
 }
 add_filter( 'bp_loggedin_register_page_redirect_to', 'catch_register_page_loggedin_users');
-
-/**
- * permet de se loger avec son mail
- * @param type $username
- * @return type
- */
-function yproject_email_login_authenticate( $user, $username, $password ) {
-	if ( is_a( $user, 'WP_User' ) ) return $user;
-
-	if ( !empty( $username ) ) {
-		$username = str_replace( '&', '&amp;', stripslashes( $username ) );
-		$user = get_user_by( 'email', $username );
-		if ( isset( $user, $user->user_login, $user->user_status ) && 0 == (int) $user->user_status )
-			$username = $user->user_login;
-	}
-
-	return wp_authenticate_username_password( null, $username, $password );
-}
-remove_filter( 'authenticate', 'wp_authenticate_username_password', 20, 3 );
-add_filter( 'authenticate', 'yproject_email_login_authenticate', 20, 3 );
 /** FIN GESTION DU LOGIN **/
 
 
@@ -232,6 +159,152 @@ function yproject_change_user_cap() {
 	}
 }
 add_action('init', 'yproject_change_user_cap');
+
+//***********************
+// LIGHTBOX AVERTISSEMENT
+//***********************
+
+// Vérification de l'enregistrement des avertissements pour afficher la lightbox
+function yproject_check_user_warning($user_id){
+    
+    $warning1 = get_user_meta( $user_id, 'warning1', true);
+    $warning2 = get_user_meta( $user_id, 'warning2', true);
+    $warning3 = get_user_meta( $user_id, 'warning3', true);
+    // Retunr true si l'utilisateur n'a pas répondu oui aux 3 questions
+    if($warning1 == 'false' || $warning2 == 'false' || $warning3 == 'false'){
+        return false;
+    } else {
+        return true; 
+    }
+}
+// Vérifie si l'user possede l'user_meta 
+function yproject_check_is_warning_meta_init($user_id){
+    $warning = get_user_meta($user_id, 'warning1');
+    if($warning == null){
+        return true; 
+    }
+}
+//Gestion du formulaire de lightbox d'avertissements
+function yproject_submit_lightbox() {
+    ypbp_core_screen_signup();
+} 
+add_action('init', 'yproject_submit_lightbox');
+
+function ypbp_get_current_signup_step() {
+        global $bp;
+
+        return $bp->signup->step;
+}
+
+function ypbp_core_screen_signup() {
+	global $bp;
+
+	// Not a directory
+	bp_update_is_directory( false, 'register' );
+
+	if ( !isset( $bp->signup ) ) {
+		$bp->signup = new stdClass;
+	}
+
+	$bp->signup->step = 'request-details';
+
+	// If the signup page is submitted, validate and save
+	if ( isset( $_POST['signup_submit'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'register_form_posted' ) ) {
+
+		// Check the base account details for problems
+		$account_details = bp_core_validate_user_signup( $_POST['signup_username'], $_POST['signup_email'] );
+
+		// If there are errors with account details, set them for display
+		if ( !empty( $account_details['errors']->errors['user_name'] ) )
+			$bp->signup->errors['signup_username'] = $account_details['errors']->errors['user_name'][0];
+
+		if ( !empty( $account_details['errors']->errors['user_email'] ) )
+			$bp->signup->errors['signup_email'] = $account_details['errors']->errors['user_email'][0];
+           
+		// Check that both password fields are filled in
+		if ( empty( $_POST['signup_password'] ) || empty( $_POST['signup_password_confirm'] ) )
+			$bp->signup->errors['signup_password'] = __( 'Please make sure you enter your password twice', 'buddypress' );
+
+		// Check that the passwords match
+		if ( ( !empty( $_POST['signup_password'] ) && !empty( $_POST['signup_password_confirm'] ) ) && $_POST['signup_password'] != $_POST['signup_password_confirm'] )
+			$bp->signup->errors['signup_password'] = __( 'The passwords you entered do not match.', 'buddypress' );
+		
+		// Check that the cgu is checked
+		if ( empty($_POST['validate-terms-check']) )
+			$bp->signup->errors['validate_terms_check'] = __( 'Merci de cocher la case pour accepter les conditions g&eacute;n&eacute;rales d&apos;utilisation.', 'yproject' );
+
+		$bp->signup->username = $_POST['signup_username'];
+		$bp->signup->email = $_POST['signup_email'];
+
+		// Add any errors to the action for the field in the template for display.
+		if ( !empty( $bp->signup->errors ) ) {
+			foreach ( (array) $bp->signup->errors as $fieldname => $error_message ) {
+				// addslashes() and stripslashes() to avoid create_function()
+				// syntax errors when the $error_message contains quotes
+				add_action( 'bp_' . $fieldname . '_errors', create_function( '', 'echo apply_filters(\'bp_members_signup_error_message\', "<div class=\"error\">" . stripslashes( \'' . addslashes( $error_message ) . '\' ) . "</div>" );' ) );
+			}
+		} else {
+			$bp->signup->step = 'save-details';
+
+			// Hash and store the password
+			$usermeta['password'] = wp_hash_password( $_POST['signup_password'] );
+
+			$usermeta = apply_filters( 'bp_signup_usermeta', $usermeta );
+
+			// Finally, sign up the user
+			$wp_user_id = bp_core_signup_user( $_POST['signup_username'], $_POST['signup_password'], $_POST['signup_email'], $usermeta );
+
+			if ( is_wp_error( $wp_user_id ) ) {
+				$bp->signup->step = 'request-details';
+				bp_core_add_message( $wp_user_id->get_error_message(), 'error' );
+			} else {
+				global $wpdb, $edd_options;
+				$bp->signup->step = 'completed-confirmation';
+				$wpdb->update( $wpdb->users, array( sanitize_key( 'user_status' ) => 0 ), array( 'ID' => $wp_user_id ) );
+				update_user_meta($wp_user_id, LibUsers::$key_validated_general_terms_version, $edd_options[LibUsers::$edd_general_terms_version]);
+				wp_set_auth_cookie( $wp_user_id, false, is_ssl() );
+				if (isset($_POST['redirect-home'])) {
+					wp_redirect(home_url());
+				} else {
+					wp_redirect(wp_unslash( $_SERVER['REQUEST_URI'] ));
+				}
+				exit();
+			}
+
+			do_action( 'bp_complete_signup' );
+		}
+
+	}
+
+	do_action( 'bp_core_screen_signup' );
+}
+
+function ypbp_filter_validation_email_subject() {
+    return "Bienvenue chez WE DO GOOD !";
+}
+add_filter('bp_core_signup_send_validation_email_subject', 'ypbp_filter_validation_email_subject');
+function ypbp_filter_validation_email_message() {
+    $message = "Bienvenue sur WEDOGOOD.co !\n\n";
+    $message .= "Vous êtes prêt à soutenir des projets à impact positif !\n\n";
+    $message .= "Rejoignez la communauté sur ".esc_url(home_url())."\n\n";
+    return $message;
+}
+add_filter('bp_core_signup_send_validation_email_message', 'ypbp_filter_validation_email_message');
+
+
+//********
+// Lightbox profil 
+//
+//*********
+
+
+// Vérifie si l'user possede l'user_meta 
+function yproject_check_is_profile_meta_init($user_id){
+    $profil = get_user_meta($user_id, 'first_visite_profil');
+    if($profil == null){
+        return true; 
+    }
+}
 
 //Permet de n'afficher que les images uploadées par l'utilisateur en cours
 function yproject_my_files_only( $wp_query ) {
@@ -406,7 +479,7 @@ function print_user_projects(){
 		$str_not_vote = "N&apos;a pas vot&eacute;";
 		$str_not_investment = "N&apos;a pas investi";
 	}
-
+        
 	if(isset($_POST['user_id'])){
 		$payment_status = array("publish", "completed");
 //		if ($is_same_user) $payment_status = array("completed", "pending", "publish", "failed", "refunded");
@@ -416,7 +489,6 @@ function print_user_projects(){
 		$projects_jy_crois = $wpdb->get_results("SELECT campaign_id FROM $table WHERE user_id=$user_id");
 		$table = $wpdb->prefix.'ypcf_project_votes';
 		$projects_votes = $wpdb->get_results("SELECT post_id FROM $table WHERE user_id=$user_id");
-		
 		$check_investment = true;
 		$check_vote = false;
 		$check_believe = false;
@@ -499,7 +571,7 @@ function print_user_projects(){
 				if (isset($project['jy_crois']) && $project['jy_crois'] === 1) $data_jycrois = 1;
 				if (isset($project['has_voted']) && $project['has_voted'] === 1) $data_voted = 1;
 				if (count($project['payments']) > 0) $data_invested = 1;
-				
+                                
 				$post_camp = get_post($project['ID']);
 				$campaign = atcf_get_campaign($post_camp);
 				$percent = min(100, $campaign->percent_minimum_completed(false));
@@ -605,7 +677,9 @@ function print_user_projects(){
 						<div class="user-history-payments">
 							<table class="user-history-payments-list">
 							    
-								<?php foreach ($payments as $payment_id => $payment) : ?>
+								<?php foreach ($payments as $payment_id => $payment) { 
+                                                                    $reward = get_post_meta($payment_id,'_edd_payment_reward',true);
+                                                                    ?>
 							    
 								<tr class="user-payments-list-item">
 									<td class="user-payment-item user-payment-date">
@@ -638,8 +712,14 @@ function print_user_projects(){
 									<?php endif; ?>
 
 								</tr>
-								
-								<?php endforeach; ?>
+                                                                <?php if ($reward != null) { ?>
+                                                                    <tr>
+                                                                        <td colspan="4" class="user-payment-item user-payment-reward">
+                                                                            Contrepartie choisie : Palier de <?php echo $reward['amount'].' € - '.$reward['name']?>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php } 
+                                                                } ?>
 									
 							</table>
 						</div>
@@ -782,7 +862,7 @@ function yproject_save_edit_project() {
 add_action('wp_ajax_save_edit_project', 'yproject_save_edit_project');
 add_action('wp_ajax_nopriv_save_edit_project', 'yproject_save_edit_project');
 
-function get_investors_list() {
+function get_investors_table() {
     
         locate_template( array("requests/investments.php"), true );
         $investments_list = (json_decode($_POST['data'],true));
@@ -808,6 +888,10 @@ function get_investors_list() {
                             'colinvpaystate',
                             'colinvsign');
         if ($is_campaign_over) { $classcolonnes[]='colinvstate'; }
+        if ($campaign->funding_type()=='fundingdonation') {
+            $classcolonnes[]='colrewardprice';
+            $classcolonnes[]='colrewardtext';
+        }
         
         $titrecolonnes = array('Utilisateur',
                             'Nom',
@@ -827,6 +911,10 @@ function get_investors_list() {
                             'Etat du paiement',
                             'Signature');
         if ($is_campaign_over) { $titrecolonnes[]='Investissement'; }
+        if ($campaign->funding_type()=='fundingdonation') {
+            $titrecolonnes[]='Palier de contrepartie';
+            $titrecolonnes[]='Description de la contrepartie';
+        }
         
         $selectiondefaut = array(true,
                             true,
@@ -841,82 +929,48 @@ function get_investors_list() {
                             true,
                             true,
                             true,
-                            false,
+                            true,
                             false,
                             false,
                             false);
         if ($is_campaign_over) { $selectiondefaut[]=true; }
-        
+        if ($campaign->funding_type()=='fundingdonation') {
+            $selectiondefaut[]=true;
+            $selectiondefaut[]=false;
+        }
         $colonnes = array_combine($classcolonnes, $titrecolonnes);
         $displaycolonnes = array_combine($classcolonnes,$selectiondefaut);
     ?>
 
-<div id="display-options-col-div">
-    <form>
-    <fieldset id="display-options-col-menu">
-        <ul id="display-options-col-list">
-            <li id="cb-li-collall">
-                <input id="cbcolall" class="check-users-columns" type="checkbox" value="all">
-                </input><label for="cbcolall">Tout sélectionner</label>
-            </li>
-        <?php foreach($colonnes as $class=>$titre){
-            //Checkbox d'affichage des colonnes : voir dans common.js
-                echo '<li><input type="checkbox" ';
-                if (($displaycolonnes[$class]) == true){echo 'checked ';}
-                echo 'class="check-users-columns" '
-                    .'value="'.$class.'" '
-                    .'id="cb'.$class.'">'
-                    .' <label for="cb'.$class.'">'.$titre.'</label></li> ';}
-        ?>
-        </ul>
-    </fieldset>
-    </form>
-</div>
-
-<br/>
-
-<div class="tablescroll" >
-<table class="wp-list-table" cellspacing="0" id="investors-table">
+<div class="wdg-datatable" >
+<table id="investors-table" class="display" cellspacing="0" width="100%">
     
-    <thead style="background-color: #CCC;">
+    <thead>
     <tr>
         <?php foreach($colonnes as $class=>$titre){
             //Ecriture des nom des colonnes en haut
-            echo '<td class="'.$class.'" ';
-            if (($displaycolonnes[$class]) == false){echo 'hidden=""';}
+            echo '<td ';
+            if (($displaycolonnes[$class]) == false){
+                echo 'data-visibility="0"';
+            } else {
+                echo 'data-visibility="1"';
+            }
             echo '>'.$titre.'</td>';}?>
     </tr>
     </thead>
 
-    <tbody id="the-list">
+    <tbody>
 	<?php
-	$i = -1;
         require_once("country_list.php");
         global $country_list;
         
 	foreach ( $investments_list['payments_data'] as $item ) {
-//	    if ($item['status'] == 'publish' || $item['status'] == 'refunded') {
-		$i++;
-		$bgcolor = ($i % 2 == 0) ? "#FFF" : "#EEE";
-
 		$post_invest = get_post($item['ID']);
 		$mangopay_id = edd_get_payment_key($item['ID']);
 		$payment_type = 'Carte';
 		$payment_state = edd_get_payment_status( $post_invest, true );
 		if (strpos($mangopay_id, 'wire_') !== FALSE) {
 			$payment_type = 'Virement';
-			$contribution_id = substr($mangopay_id, 5);
-			$mangopay_contribution = ypcf_mangopay_get_withdrawalcontribution_by_id($contribution_id);
-			$mangopay_is_completed = (isset($mangopay_contribution));
-			$mangopay_is_succeeded = (isset($mangopay_contribution) && $mangopay_contribution->Status == 'ACCEPTED');
-//			if ($mangopay_is_succeeded) $payment_state = 'Validé';
-//			else if ($mangopay_is_completed) $payment_state = 'Echoué';
-		} else {
-			$mangopay_contribution = ypcf_mangopay_get_contribution_by_id($mangopay_id);
-			$mangopay_is_completed = (isset($mangopay_contribution->IsCompleted) && $mangopay_contribution->IsCompleted);
-			$mangopay_is_succeeded = (isset($mangopay_contribution->IsSucceeded) && $mangopay_contribution->IsSucceeded);
-//			if ($mangopay_is_succeeded) $payment_state = 'Validé';
-//			else if ($mangopay_is_completed) $payment_state = 'Echoué';
 		}
 		$investment_state = 'Validé';
 		if ($campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing') {
@@ -946,56 +1000,64 @@ function get_investors_list() {
                 
                 //Liste des données à afficher pour la ligne traitée
                 if(YPOrganisation::is_user_organisation($item['user'])){
-                    $orga = new YPOrganisation($item['user']);
-                    $datacolonnes= array(bp_core_get_userlink($item['user']),
-                    $orga->get_name(),
-                    $orga->get_name(),
-                    '',
-                    '',
-                    $orga->get_nationality(),
-                    $orga->get_city(),
-                    $orga->get_address(),
-                    $orga->get_postal_code(),
-                    $orga->get_nationality(),
-                    $user_data->user_email,//A changer
-                    $user_data->user_mobile_phone,//A changer
-                    $item['amount'].'€',
-                    date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
-                    $payment_type,
-                    $payment_state,
-                    $item['signsquid_status_text']);
+			$orga = new YPOrganisation($item['user']);
+			$orga_user = get_user_by('email', $item['email']);
+			$datacolonnes = array(
+				'ORG - ' . $orga->get_name(),
+				$orga_user->last_name,
+				$orga_user->first_name,
+				'',
+				'',
+				$orga->get_nationality(),
+				$orga->get_rcs() .' ('.$orga->get_idnumber().')',
+				$orga->get_address(),
+				$orga->get_postal_code(),
+				ucfirst(strtolower($country_list[$orga->get_nationality()])),
+				$item['email'],
+				$orga_user->user_mobile_phone,
+				$item['amount'].'€',
+				date_i18n( 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
+				$payment_type,
+				$payment_state,
+				$item['signsquid_status_text']
+			);
                 } else {
-                $datacolonnes= array(bp_core_get_userlink($item['user']),
-                    $user_data->last_name,
-                    $user_data->first_name,
-                    $user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,
-                    $user_data->user_birthplace,
-                    ucfirst(strtolower($country_list[$user_data->user_nationality])),
-                    $user_data->user_city,
-                    $user_data->user_address,
-                    $user_data->user_postal_code,
-                    $user_data->user_country,
-                    $user_data->user_email,
-                    $user_data->user_mobile_phone,
-                    $item['amount'].'€',
-                    date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
-                    $payment_type,
-                    $payment_state,
-                    $item['signsquid_status_text']);
+			$datacolonnes = array(
+				bp_core_get_userlink($item['user']),
+				$user_data->last_name,
+				$user_data->first_name,
+				$user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,
+				$user_data->user_birthplace,
+				ucfirst(strtolower($country_list[$user_data->user_nationality])),
+				$user_data->user_city,
+				$user_data->user_address,
+				$user_data->user_postal_code,
+				$user_data->user_country,
+				$user_data->user_email,
+				$user_data->user_mobile_phone,
+				$item['amount'].'€',
+				date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
+				$payment_type,
+				$payment_state,
+				$item['signsquid_status_text']
+			);
                 }
                 
                 if ($is_campaign_over) { $datacolonnes[]=$investment_state; }
+                
+                if ($campaign->funding_type()=='fundingdonation') {
+                    $datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['amount']."€";
+                    $datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['name'];
+                }
+                
                 $affichedonnees = array_combine($classcolonnes, $datacolonnes);
                 ?>
                 
-                <tr style="background-color: <?php echo $bgcolor; ?>">
+                <tr>
                 <?php
                     //Ecriture de la ligne
                     foreach($affichedonnees as $class=>$data){
-                        /*echo '<td class="'.$class.'">'.$data.'</td>';*/
-                        echo '<td class="'.$class.'" ';
-                        if (($displaycolonnes[$class]) == false){echo 'hidden=""';}
-                        echo '>'.$data.'</td>';
+                        echo '<td>'.$data.'</td>';
                     }
 		?>
                 </tr>
@@ -1005,23 +1067,94 @@ function get_investors_list() {
 	?>
     </tbody>
     
-    <tfoot style="background-color: #CCC;">
+    <tfoot>
     <tr>
         <?php foreach($colonnes as $class=>$titre){
-            //Ecriture des nom des colonnes en bas
-            echo '<td class="'.$class.'" ';
-            if (($displaycolonnes[$class]) == false){echo 'hidden=""';}
-            echo '>'.$titre.'</td>';}?>        
+            //Ecriture des noms des colonnes en bas
+            echo '<td>'.$titre.'</td>';}?>        
     </tr>
     </tfoot>
 </table>
 </div>
+<br/>
+
+<script type="text/javascript">
+    jQuery(document).ready( function($) {
+        //Ajoute mise en page et interactions du tableau
+        // Ajoute un champ de filtre à chaque colonne dans le footer
+        $('#investors-table tfoot td').each( function () {
+            $(this).prepend( '<input type="text" placeholder="Filtrer par :" class="col-filter"/><br/>' );
+        } );
+
+        // Ajoute les actions de filtrage
+        $("#investors-table tfoot input").on( 'keyup change', function () {
+            table
+                .column( $(this).parent().index()+':visible' )
+                .search( this.value, true)
+                .draw();
+        } );
+        //Récupère les colonnes à afficher et le tri par défaut 
+        col_to_hide = [];
+        sortColumn = 0;
+        $('#investors-table thead td').each(function(index){
+            if($(this).attr('data-visibility')==="0"){col_to_hide.push(index);}
+            if($(this).text() === "Date"){sortColumn = index;};
+        });
+
+        //Initialise le tableau
+        var table = $('#investors-table').DataTable({
+            order: [[ sortColumn, "desc" ]], //Colonne à trier (date)
+
+            dom: 'RC<"clear">lfrtip',
+            lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "Tous"]], //nombre d'élements possibles
+            iDisplayLength: 10,//nombre d'éléments par défaut
+            //scrollX: true //scroll horizontal : completement buggué
+
+            columnDefs: [
+                {
+                    "targets": col_to_hide,
+                    "visible": false
+                }
+            ],
+            //Boutons de sélection de colonnes
+            colVis: {
+                buttonText: "Afficher/cacher colonnes",
+                restore: "Restaurer",
+                showAll: "Tout afficher",
+                showNone: "Tout cacher",
+                overlayFade: 100
+            },
+            language: {
+                    "sProcessing":     "Traitement en cours...",
+                    "sSearch":         "Rechercher&nbsp;:",
+                "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+                    "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    "sInfoPostFix":    "",
+                    "sLoadingRecords": "Chargement en cours...",
+                "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+                    "oPaginate": {
+                            "sFirst":      "Premier",
+                            "sPrevious":   "Pr&eacute;c&eacute;dent",
+                            "sNext":       "Suivant",
+                            "sLast":       "Dernier"
+                    },
+                    "oAria": {
+                            "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                            "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                    }
+            }
+        });
+    })
+</script>
     
     
     <?php exit();
 }
-add_action('wp_ajax_get_investors_list', 'get_investors_list');
-add_action('wp_ajax_nopriv_get_investors_list', 'get_investors_list');
+add_action('wp_ajax_get_investors_table', 'get_investors_table');
+add_action('wp_ajax_nopriv_get_investors_table', 'get_investors_table');
 
 function get_invests_graph(){
     $campaign = atcf_get_campaign($_POST['id_campaign']);
@@ -1153,7 +1286,9 @@ function get_invests_graph(){
 
             displayAnnot = function(cat, date, invest, investtotal){
                 if(cat === "investissements"){
-                    return invest+ '€, le ' +date.getDate()+'/'+(date.getMonth()+1)+'/'+(date.getFullYear())+' à '+date.getHours()+'h'+date.getMinutes()+'. Total: '+investtotal+'€';
+                    min = date.getMinutes().toString();
+                    return '<b>'+invest+ '€</b>, le ' +date.getDate()+'/'+(date.getMonth()+1)+'/'+(date.getFullYear())+' à '+date.getHours()+'h'+(min[1]?min:"0"+min[0])
+                            +'.<br/><b>Total: '+investtotal+'€</b>';
                 } else if(cat=== "aujourdhui"){
                     return "Aujourd'hui vous en êtes à "+investtotal+'€'
                 }
@@ -1300,16 +1435,25 @@ function yproject_shortcode_widelightbox($atts, $content = '') {
 add_shortcode('yproject_widelightbox', 'yproject_shortcode_widelightbox');
 
 
-//Shortcodes lightbox Connexion 
-
+//Shortcodes lightbox Connexion
 function yproject_shortcode_connexion_lightbox($atts, $content = '') {
-	ob_start();
-            locate_template('common/connexion-lightbox.php',true);
-            $content = ob_get_contents();
-	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="connexion"]' .$content . '[/yproject_lightbox]');
+    ob_start();
+    locate_template('common/connexion-lightbox.php',true);
+    $lightbox_content = ob_get_contents();
+    ob_end_clean();
+    echo do_shortcode('[yproject_lightbox id="connexion"]' . $content . $lightbox_content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_connexion_lightbox', 'yproject_shortcode_connexion_lightbox');
+
+//Shortcodes lightbox d'inscription 
+function yproject_shortcode_register_lightbox($atts, $content = '') {
+    ob_start();
+    locate_template('common/register-lightbox.php',true);
+    $lightbox_content = ob_get_contents();
+    ob_end_clean();
+    echo do_shortcode('[yproject_lightbox id="register"]' . $content . $lightbox_content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_register_lightbox', 'yproject_shortcode_register_lightbox');
 
 //Shortcode lightbox Tableau de bord
 // ->TB Stats

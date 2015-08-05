@@ -135,7 +135,7 @@ function print_vote_post($vote_post, $is_right_project){
 		<?php $img_src = $campaign->get_home_picture_src(); ?>
 		
 		<?php if ($img_src != ''): ?>
-		<div class="video-zone" style="background-image: url('<?php echo $img_src; ?>')">
+		<div class="video-zone video-zone-container" style="background-image: url('<?php echo $img_src; ?>')">
 			<div class="preview-banner"></div>
 			<a href="<?php echo get_permalink($preview_post->ID); ?>">
 				<div class="preview-bubble-<?php echo $position_str; ?> only_on_large">

@@ -25,7 +25,6 @@ $campaign_id = $_GET['campaign_id'];
                         
                         $page_guide = get_page_by_path('guide');
                         $page_particular_terms = get_page_by_path('conditions-particulieres');
-                        $status = $campaign->campaign_status();
 
                         $page_parameters = get_page_by_path('parametres-projet');       // Paramètres
                         $page_add_news = get_page_by_path('ajouter-une-actu');          // Ajouter une actualité
@@ -51,35 +50,48 @@ $campaign_id = $_GET['campaign_id'];
                          /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
                          if ($can_modify){
                              /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
-                             if (isset($_POST['next_step'])&& $_POST['next_step']==1 && $campaign->can_go_next_step()){
+                             if (isset($_POST['next_step'])&& ($_POST['next_step']==1 || $_POST['next_step']==2) && $campaign->can_go_next_step()){
  
  
-                                 //Préparation -> Avanat-premiere
+                                 
+                                 //Préparation -> Avant-premiere
                                  if ($status=='preparing'){
-                                     $campaign->set_status('preview');
-                                     $campaign->set_validation_next_step(0);
-
-                                 } //Avant-premieère -> Vote
-                                 else if ($status=='preview') {
-                                     if(ypcf_check_user_is_complete($campaign->post_author())){
-                                         //Fixe date fin de vote
-                                         $diffVoteDay = new DateInterval('P'.ATCF_Campaign::$vote_duration.'D');
-                                         $VoteEndDate = (new DateTime())->add($diffVoteDay);
-                                         //$VoteEndDate->setTime(23,59);
-                                         $campaign->set_end_vote_date($VoteEndDate);     
-                                         
-                                         $campaign->set_status('vote');
+                                     if($_POST['next_step']==1){
+                                         $campaign->set_status('preview');
                                          $campaign->set_validation_next_step(0);
+                                     //Préparation -> Vote
+                                     }
+                                 } //Avant-première -> Vote
+                                 if (($status=='preview')||(($status=='preparing')&&($_POST['next_step']==2))) {
+                                     if(ypcf_check_user_is_complete($campaign->post_author())&& isset($_POST['innbdayvote'])){
+                                        $vote_time = $_POST['innbdayvote'];
+                                        if(2<=$vote_time && $vote_time<=30){
+                                            //Fixe date fin de vote
+                                            $diffVoteDay = new DateInterval('P'.$vote_time.'D');
+                                            $VoteEndDate = (new DateTime())->add($diffVoteDay);
+                                            //$VoteEndDate->setTime(23,59);
+                                            $campaign->set_end_vote_date($VoteEndDate);     
+
+                                            $campaign->set_status('vote');
+                                            $campaign->set_validation_next_step(0);
+                                        }
                                      }
 
                                  } //Vote -> Collecte
                                  else if ($status=='vote') {
-                                     if(isset($_POST['innbday']) && isset($_POST['inendh']) && isset($_POST['inendm'])){
-                                         //Recupere nombre de jours et heure de fin de la collecte
-                                         $collecte_time = $_POST['innbday'];
-                                         $collecte_fin_heure = $_POST['inendh'];
-                                         $collecte_fin_minute = $_POST['inendm'];
-                                         if($campaign->company_name()!=null&&$campaign->company_status()!=null
+                                     if(isset($_POST['innbdaycollecte']) && isset($_POST['inendh']) && isset($_POST['inendm'])){
+                                        //Recupere nombre de jours et heure de fin de la collecte
+                                        $collecte_time = $_POST['innbdaycollecte'];
+                                        $collecte_fin_heure = $_POST['inendh'];
+                                        $collecte_fin_minute = $_POST['inendm'];
+                                        
+                                        $orga_done=false;
+                                        $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+					$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+					if (isset($current_organisations) && count($current_organisations) > 0) {
+                                            $orga_done = true;
+					}
+                                         if( $orga_done
                                                  &&$campaign->is_validated_by_vote() && $campaign->end_vote_remaining()<=0
                                                  && 1<=$collecte_time && $collecte_time<=60
                                                  && 0<=$collecte_fin_heure && $collecte_fin_heure<=23
@@ -108,8 +120,8 @@ $campaign_id = $_GET['campaign_id'];
                         $stats_views_today = 0;
                         if (function_exists('stats_get_csv')) {
                                 global $wpdb;
-                                $stats_views = stats_get_csv( 'postviews', array( 'post_id' => $post_camp->ID, 'days' => 365 ) );
-                                $stats_views_today = stats_get_csv( 'postviews', array( 'post_id' => $post_camp->ID, 'days' => 1 ) );
+                                $stats_views = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 365 ) );
+                                $stats_views_today = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 1 ) );
                         }
                         
                         
@@ -212,14 +224,14 @@ $campaign_id = $_GET['campaign_id'];
                                                     </div>
                                                 </div>
                                                 <div class="quart-card">
-                                                    <canvas id="canvas-pie-block" width="180" height="200"></canvas><br/>
+                                                    <canvas id="canvas-pie-block" width="160" height="180"></canvas><br/>
                                                     <div class="details-card">
                                                         Valid&eacute; par <strong><?php echo $vote_results['percent_project_validated']?>&percnt;</strong> des votants
                                                     </div>
                                                 </div>
                                                 <div class="quart-card">
                                                     <div class="stat-big-number"><?php echo $vote_results['sum_invest_ready'].'&euro;'?></div>
-                                                    <div class="stat-little-number">sur <?php echo $campaign->vote_invest_ready_min_required() ?> &euro; requis</div>
+                                                    <div class="stat-little-number">sur <?php echo $campaign->vote_invest_ready_min_required() ?> &euro; recommand&eacute;s</div>
                                                     <div class="details-card">
                                                         <strong><?php echo $vote_results['sum_invest_ready']?></strong>&euro; de promesses d'investissement
                                                     </div>
@@ -303,38 +315,33 @@ $campaign_id = $_GET['campaign_id'];
                                                 <?php echo do_shortcode('[yproject_votecontact_lightbox]'); ?>
                                         <a href="#listinvestors" class="wdg-button-lightbox-open" data-lightbox="listinvestors">
                                         <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png"/><br/>
-                                            <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> investi
+                                            <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> <?php echo $campaign->funding_type_vocabulary()['investor_verb'];?>
                                             <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus"/></div>
                                             </a>
-                                        <!--div class="list-button">
-                                            <div class="button">&#9993 Envoyer un message</div>
-                                        </div><div class="clear"></div-->
-                                        <!--div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook.jpg"/><br/>
-                                            <strong><?php echo '&delta;'?></strong> partage<?php if(2>1){echo 's';}?> Facebook</div>
-                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter.jpg"/><br/>
-                                            <strong><?php echo '&lambda;'?></strong> partage<?php if(2>1){echo 's';}?> Twitter</div>
-                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/google+.jpg"/><br/>
-                                            <strong><?php echo '&omega;'?></strong> partage<?php if(2>1){echo 's';}?> Google+</div-->
+                                                <?php echo do_shortcode('[yproject_listinvestors_lightbox]'); ?>
                                     <div class="clear"></div>
                                     <div class="list-button">
                                         <a href="<?php echo $news_link; ?>" class="button"><?php _e('&#9999 Publier une actualit&eacute;', 'yproject'); ?></a>
                                     </div>
                                     </div>
                                 </div>
-                                    
-                                <div id="block-investors" class="block">
-                                    <div class="head">Investisseurs</div>
-                                    <div class="body" style="text-align:center">
-                                    <p>
-                                        <img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
-                                        <?php echo $nb_invests?> investissement<?php if($nb_invests>1){echo 's';}?></p>
-                                    <p><?php echo $campaign->current_amount() . ' financ&eacute;s sur ' . $campaign->minimum_goal(true) ; ?></p>
-                                    <div class="list-button">
-                                        <a href="#listinvestors" class="wdg-button-lightbox-open button" data-lightbox="listinvestors">&#x1f50e; Liste des investisseurs</a>
-		                    <?php echo do_shortcode('[yproject_listinvestors_lightbox]'); ?>
-                                    </div>
+                                
+                                <div id="block-info" class="block">
+                                    <div class="head"><?php _e('Informations','yproject'); ?></div>
+                                    <div class="body">
+                                        <ul>
+                                        <a href="<?php echo get_permalink($page_particular_terms->ID); ?>" target="_blank"><li><?php _e('Conditions particuli&egrave;res', 'yproject'); ?></li></a>
+
+                                        <a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><li><?php _e('Guide de campagne', 'yproject'); ?></li></a>
+                                        </ul>
+                                        <div class="list-button">
+                                            <?php if ($campaign->google_doc() != ''): ?>
+                                                <a href="<?php echo $campaign->google_doc(); ?>/edit" target="_blank" class="button"><?php _e('Ouvrir le document de gestion de campagne', 'yproject'); ?></a>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
                                 </div>
+                                
                                 </div>
                                 
                                 <div id="col-right">
@@ -369,23 +376,6 @@ $campaign_id = $_GET['campaign_id'];
                                         <a class="project-manage-team button" data-action="yproject-add-member">Ajouter</a>
                                     </div>
                                 </div>
-                                
-                                <div id="block-info" class="block">
-                                    <div class="head"><?php _e('Informations','yproject'); ?></div>
-                                    <div class="body">
-                                        <ul>
-                                        <a href="<?php echo get_permalink($page_particular_terms->ID); ?>" target="_blank"><li><?php _e('Conditions particuli&egrave;res', 'yproject'); ?></li></a>
-
-                                        <a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><li><?php _e('Guide de campagne', 'yproject'); ?></li></a>
-                                        </ul>
-                                        <div class="list-button">
-                                            <?php if ($campaign->google_doc() != ''): ?>
-                                                <a href="<?php echo $campaign->google_doc(); ?>/edit" target="_blank" class="button"><?php _e('Ouvrir le document de gestion de campagne', 'yproject'); ?></a>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                
                                 </div>
                                 <div class="clear"></div>
                             </div>

@@ -4,59 +4,57 @@
 <?php get_header(); ?>
     <div id="content">
 	<div class="padder">
-	   <?php locate_template( array( 'basic/basic-header.php' ), true ); ?>
-	    
-    <div id="post_bottom_bg">
-	<div style="width: 450px;" id="post_bottom_content" class="center_small">
-	    <div style="width: 450px;" class="left post_bottom_desc_small">
-		<div class="login_fail">
-		<?php if (isset($_GET["login"]) && $_GET["login"] == "failed") {?>
-		    <?php _e('Erreur d&apos;identification', 'yproject'); ?>
-		<?php } ?>
-		</div>
+	    <div class="center_small margin-height">
+		    <?php if (isset($_GET["login"]) && $_GET["login"] == "failed") {?>
+		    <div class="errors">
+			    <?php _e('Erreur d&apos;identification', 'yproject'); ?>
+		    </div>
+		    <?php } ?>
+		    <?php if (YPUsersLib::has_login_errors()): ?>
+		    <div class="errors">
+			    <?php echo YPUsersLib::display_login_errors(); ?>
+		    </div>
+		    <?php endif; ?>
 
-		<div style="text-transform: uppercase; margin-bottom: 10px; text-align: left;" id="submenu_item_connection_login"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_noir_connexion.jpg" alt="logo triangle" class="vert-align" width="25" height="25" />&nbsp;Connexion</div>
-		
-                <form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
-		    <label class="standard-label"><?php _e('Identifiant', 'yproject'); ?></label>
-		    <input style="margin-bottom: 5px; width: 254px;" type="text" name="log" class="input" value="<?php if ( isset( $user_login) ) echo esc_attr(stripslashes($user_login)); ?>" />
-		    <br />
+		    <div style="text-transform: uppercase; margin-bottom: 10px; text-align: left;" id="submenu_item_connection_login"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_noir_connexion.jpg" alt="logo triangle" class="vert-align" width="25" height="25" />&nbsp;Connexion</div>
 
+		    <form method="post" action="" name="login-form" id="sidebar-login-form" class="standard-form">
+			    <label class="standard-label"><?php _e('Identifiant', 'yproject'); ?></label>
+			    <input style="margin-bottom: 5px; width: 254px;" type="text" name="log" class="input" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" placeholder="<?php _e('Identifiant', 'yproject'); ?>" />
+			    <br />
 
-		    <label class="standard-label"><?php _e('Mot de passe', 'yproject'); ?></label>
-		    <input type="password" name="pwd" class="input" value="" /> 
-		    <input type="submit" name="wp-submit" id="sidebar-wp-submit" style="width: 100px; background: #FFF;" value="<?php _e('Connexion', 'yproject'); ?>" />
-		    <br />
-		    <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-		    <span style="margin-left: 140px;">(<a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)</span>
+			    <label class="standard-label"><?php _e('Mot de passe', 'yproject'); ?></label>
+			    <input type="password" name="pwd" class="input" value="" /> 
+			    <input type="submit" name="wp-submit" id="sidebar-wp-submit" style="width: 100px; background: #FFF;" value="<?php _e('Connexion', 'yproject'); ?>" />
+			    <br />
 
-		    <p class="forgetmenot">
-			<input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" /> <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
-		    </p>
+			    <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
+			    <span class="link-forgotten">(<a href="<?php echo get_permalink($page_forgotten->ID); ?>">Mot de passe oubli&eacute;</a>)</span>
 
-		    <input type="hidden" name="testcookie" value="1" />
-		</form>
+			    <p class="forgetmenot">
+				    <input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" /> <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
+			    </p>
 
-		<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
+			    <input type="hidden" name="redirect-page" value="<?php echo YPUsersLib::get_login_redirect_page(); ?>" />
+			    <input type="hidden" name="login-form" value="1" />
+		    </form>
 
-		<div id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><img style="border-right: 1px solid #FFFFFF; width:25px; height:25px;" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" alt="connexion facebook"class="vert-align"/><span style=" font-size:12px;">&nbsp;Se connecter avec Facebook</span></a></div>
+		    <hr class="form-separator" />
 
-		<div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
+		    <div class="align-center"><div id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><img style="border-right: 1px solid #FFFFFF; width:25px; height:25px;" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" alt="connexion facebook"class="vert-align"/><span style=" font-size:12px;">&nbsp;Se connecter avec Facebook</span></a></div></div>
 
-		<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
-			    
-		<?php $page_connexion_register = get_page_by_path('register'); ?>
+		    <div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
 
-		<div class="post_bottom_buttons_connexion" style="text-align: center;"><div style="display: inline-block; background-color: #3E3E40; text-align: left;" id="submenu_item_connection_register" class="dark">
-		<a href="<?php echo get_permalink($page_connexion_register->ID); ?>"><img width="25" height="25" src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" alt="triangle blanc"><span style="font-size: 9pt; vertical-align: 8px; color: #FFF; ">Cr&eacute;er un compte</span></a>
-		</div></div>
+		    <hr class="form-separator" />
 
-		<br />
+		    <?php $page_connexion_register = get_page_by_path('register'); ?>
+
+		    <div class="post_bottom_buttons_connexion align-center">
+			<div style="display: inline-block; background-color: #3E3E40; text-align: left;" id="submenu_item_connection_register" class="dark">
+			<a href="<?php echo get_permalink($page_connexion_register->ID); ?>"><img width="25" height="25" src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" alt="triangle blanc"><span style="font-size: 9pt; vertical-align: 8px; color: #FFF; ">Cr&eacute;er un compte</span></a>
+			</div>
+		    </div>
 	    </div>
-
-	    <div style="clear: both"></div>
-	</div>
-    </div>
 	</div>
     </div>
 

@@ -42,7 +42,7 @@ YPUIFunctions = (function($) {
 			});
 			
 			$(".expandator").css("cursor", "pointer");
-			$(".expandable").hide();
+			$(".expandable").not(".default-expanded").hide();
 			$(".expandator").click(function() {
 				var targetId = $(this).data("target");
 				if ($("#extendable-" + targetId).is(":visible")) $("#extendable-" + targetId).hide();
@@ -82,11 +82,21 @@ YPUIFunctions = (function($) {
 			}
 
 			if ($("#input_invest_amount_part").length > 0) {
-			    $("#input_invest_amount_part").change(function() {
+			    $("#input_invest_amount_part").on( 'keyup change', function () {
 				YPUIFunctions.checkInvestInput();
 			    });
+                            
+                            if($("#reward-selector").length>0){
+                                $("#reward-selector input:checked").closest("li").addClass("selected");
+                                
+                                $("#reward-selector input").click(function() {
+                                    YPUIFunctions.changeInvestInput();
+                                    YPUIFunctions.checkInvestInput();
+                                });
+                            }
 
 			    $("#link_validate_invest_amount").click(function() {
+                                YPUIFunctions.checkInvestInput();
 				$("#validate_invest_amount_feedback").show();
 				$('html, body').animate({scrollTop: $('#link_validate_invest_amount').offset().top - $("#navigation").height()}, "slow"); 
 			    });
@@ -150,6 +160,7 @@ YPUIFunctions = (function($) {
 			
 			if ($(".wdg-lightbox").length > 0) {
 				$(".wdg-button-lightbox-open").click(function() {
+					$(".wdg-lightbox").hide();
 					var target = $(this).data("lightbox");
 					$("#wdg-lightbox-" + target).show();
 				});
@@ -159,9 +170,6 @@ YPUIFunctions = (function($) {
                                 $(".wdg-lightbox #wdg-lightbox-welcome-close").click(function() {
 					$(".wdg-lightbox").hide();
 				});
-                                $(".wdg-lightbox .wdg-lightbox-button-close a").click(function() {
-					$(".wdg-lightbox").hide();
-				});
 				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function() {
 					$(".wdg-lightbox").hide();
 				});
@@ -169,6 +177,9 @@ YPUIFunctions = (function($) {
 				if ($("#wdg-lightbox-" + sHash).length > 0) {
 					$("#wdg-lightbox-" + sHash).show();
 				}
+			}
+			if ($(".timeout-lightbox").length > 0) {
+				setTimeout(function() { $(".timeout-lightbox").hide(); }, 2000);
 			}
 			
 			
@@ -191,11 +202,11 @@ YPUIFunctions = (function($) {
                         //Lightbox de passage à l'étape suivante
                         if ($("#submit-go-next-step").length > 0) {
                             $("#submit-go-next-step").attr('disabled','');
-                            $("#submit-go-next-step").attr('style','background-color:#333 !important');
+                            $("#submit-go-next-step").attr('style','background-color:#333 !important; border: 0px !important; ');
                             
                             checkall = function() {
                                 var allcheck = true;
-                                $(".checkbox-next-step").each(function(index){
+                                $(".checkbox-next-step:visible").each(function(index){
                                     allcheck = allcheck && this.checked;
                                 });
                                 return allcheck;
@@ -207,21 +218,42 @@ YPUIFunctions = (function($) {
                                     $("#submit-go-next-step").attr('style','background-color:#FF494C');
                                 } else {
                                     $("#submit-go-next-step").attr('disabled','');
-                                    $("#submit-go-next-step").attr('style','background-color:#333 !important');
+                                    $("#submit-go-next-step").attr('style','background-color:#333 !important; border: 0px !important;');
                                 };
+                            });
+                            
+                            //Changements du formulaire lorsque l'on veut passer de préparation à vote (sans A-P)
+                            $("#no-preview-button").click(function(){
+                                $("#cbman13").closest('li').slideUp();
+                                $("#desc-preview").slideUp();
+                                $("#vote-checklist").slideDown();
+                                $("#no-preview-button").slideUp();
+                                $("#next-step-choice").val("2");
                             });
                         }
                         //Preview date fin collecte sur LB étape suivante
-                        if($("#innbday").length > 0) {
-                            $("#innbday").change(function() {
-                                $("#previewenddatecollecte").empty();
-                                if(this.value<=60 && this.value>=1){
+                        if(($("#innbdayvote").length > 0)||($("#innbdaycollecte").length > 0)) {
+                            
+                            updateDate = function(idfieldinput, iddisplay) {
+                                $("#"+iddisplay).empty();
+                                if($("#"+idfieldinput).val()<=$("#"+idfieldinput).prop("max") && $("#"+idfieldinput).val()>=$("#"+idfieldinput).prop("min")){
                                     var d = new Date();
-                                    var jsupp = this.value;
+                                    var jsupp = $("#"+idfieldinput).val();
                                     d.setDate(d.getDate()+parseInt(jsupp));
-                                    $("#previewenddatecollecte").prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+                                    $("#"+iddisplay).prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+                                } else {
+                                    $("#"+iddisplay).prepend("La durée doit être comprise entre "+($("#"+idfieldinput).prop("min"))+" et "+($("#"+idfieldinput).prop("max"))+" jours");
                                 }
-                            });
+                            };
+                            
+                            updateDate("innbdaycollecte","previewenddatecollecte");
+                            updateDate("innbdayvote","previewenddatevote");
+                            
+                            $("#innbdaycollecte").on( 'keyup change', function () {
+                                updateDate("innbdaycollecte","previewenddatecollecte");});
+                            
+                            $("#innbdayvote").on( 'keyup change', function () {
+                                updateDate("innbdayvote","previewenddatevote");});
                         }
                         
                         //Gestion equipe depuis Tableau de bord
@@ -238,16 +270,46 @@ YPUIFunctions = (function($) {
                            YPUIFunctions.manageTeam(action, data, campaign_id);
                            
                         });
+                        
+                        //Modification des contreparties
+                        if ($(".reward-table-param").length > 0){
+                            
+                            checkNeedNewLines = function(){
+                                if ($(".reward-text").filter(function() { return $(this).val() == ""; }).length <= 1){
+                                        //Ajouter des lignes
+                                        i = parseInt($(".reward-text").last().prop("name").substring(12))+1;
+                                        newline = '<tr>'
+                                                    +'<td><input name="reward-name-'+i+'" type="text" name="" value="" placeholder="Nommez et d&eacute;crivez bri&egrave;vement la contrepartie" class="reward-text"/></td>'
+                                                    +'<td><input name="reward-amount-'+i+'" type="number" min="0" name="" value="" placeholder=""/></td>'
+                                                    +'<td><input name="reward-limit-'+i+'" type="number" min="0" name="" value="" placeholder=""/></td>'
+                                                    +'</tr>';
+                                        
+                                        $(".reward-table-param table tbody").append(newline);
+                                        addListeners();
+                                    }
+                            };
+                            addListeners = function(){
+                                $(".reward-text").off().on( 'keyup change', function(){
+                                    if(this.value===''){
+                                        $(this).closest("tr").find("input").css("background-color","#CCC");
+                                    } else {
+                                        $(this).closest("tr").find("input").css("background-color","");
+                                        //Si toutes les cases sont utilisées
+                                        checkNeedNewLines();
+                                    }
+                                }).trigger('change');
+                            };
+                            
+                            addListeners();
+                            
+                        }
+                        
 
-                        $("#investir").click(function(){
-                           $("#redirect-page-investir").attr("value","true");
-                        }); 
-                        $("#connexion").click(function(){
-                           $("#redirect-page-investir").attr("value","");
-                        });
-                        $("#forum").click(function(){
-                           $("#redirect-page-investir").attr("value","forum");
-                        });
+			if ($("#wdg-lightbox-connexion").length > 0) {
+			    $(".wdg-button-lightbox-open").click(function(){
+				$("#wdg-lightbox-connexion #redirect-page").attr("value", $(this).data("redirect"));
+			    });
+			}
 		},
                 
                 manageTeam: function(action, data, campaign_id){
@@ -280,8 +342,6 @@ YPUIFunctions = (function($) {
                                 $("#new_team_member_string").next().show();
                                 
                                 if(result==="FALSE"){
-                                    //TODO : Message de ratage (user inexistant)
-                                    console.log("raté");
                                     $("#new_team_member_string").next().after("<div id=\"fail_add_team_indicator\"><br/><em>L'utilisateur "+data+" n'a pas été trouvé</em><div>");
                                     $("#fail_add_team_indicator").delay(4000).fadeOut(400);
                                 } else {
@@ -340,12 +400,12 @@ YPUIFunctions = (function($) {
                     }
                 },
                 
-		getInvestors: function(inv_data, campaign_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
+		getInvestorsTable: function(inv_data, campaign_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
                     $.ajax({
                         'type' : "POST",
                         'url' : ajax_object.ajax_url,
                         'data': { 
-                              'action':'get_investors_list',
+                              'action':'get_investors_table',
                               'id_campaign':campaign_id,
                               'data' : inv_data
                             }
@@ -354,30 +414,8 @@ YPUIFunctions = (function($) {
                         $('#ajax-investors-load').after(result);
                         $('#ajax-loader-img').hide();//On cache la roue de chargement.
                         
-                        //Ajoute les actions à la sélection des colonnes du tableau
-                        $(".check-users-columns").click(function() {
-                            //Case "toutes les colonnes
-                            if(this.value==="all") {
-                                if (this.checked===true) {
-                                    $('.check-users-columns').prop('checked', true);
-                                    $('#investors-table td').removeAttr('hidden');
-                                } else {
-                                    $('.check-users-columns').prop('checked', false);
-                                    $('#investors-table td').attr('hidden','');
-                                    $('#cbcoluname').prop('checked', true);
-                                    $('.coluname').removeAttr('hidden');
-                                }
-                            }
-
-                            //Autres cases
-                            $selector = ".";
-                            $selector += this.value;
-                            if (this.checked===true) {
-                                $($selector).removeAttr('hidden');
-                            } else {
-                                $($selector).attr('hidden','');
-                            }
-                        });
+                        
+                            
                     }).fail(function(){
                         $('#ajax-investors-load').after("<em>Le chargement du tableau a échoué</em>");
                         $('#ajax-loader-img').hide();//On cache la roue de chargement.
@@ -448,7 +486,7 @@ YPUIFunctions = (function($) {
                         
                         // Crée le tableau des investisseurs si besoin
                         if ($("#ajax-investors-load").length > 0) {
-                            YPUIFunctions.getInvestors(JSON.stringify(inv_data),campaign_id);
+                            YPUIFunctions.getInvestorsTable(JSON.stringify(inv_data),campaign_id);
 			}
                         
                         // Crée le graphe des investissements si besoin
@@ -539,12 +577,26 @@ YPUIFunctions = (function($) {
 
 			setTimeout(function() {YPUIFunctions.onSlideHomeActivity(); }, YPUIFunctions.homeslideInterval);
 		},
-
+                changeInvestInput: function(){
+                    //Change apparence élément sélectionné
+                    $("#reward-selector li").removeClass("selected");
+                    $("#reward-selector input:checked").closest("li").addClass("selected");
+                    
+                    //Si le montant est insuffisant pour la contrepartie, l'augmenter
+                    var rewardSelectedAmount = parseInt($("#reward-selector input:checked~.reward-amount").text());
+                    
+                    if (parseInt($("#input_invest_amount").text()) < rewardSelectedAmount){
+                        $("#input_invest_amount_part").val(rewardSelectedAmount);
+                    }
+                },
+                
 		checkInvestInput: function() {
 			$(".invest_error").hide();
 			$(".invest_success").hide();
 
 			var bValidInput = true;
+                        $("#input_invest_amount_part").val(($("#input_invest_amount_part").val()).replace(/,/g,"."));
+                        
 			if (!$.isNumeric($("#input_invest_amount_part").val())) {
 			    $("#invest_error_general").show();
 			    bValidInput = false;
@@ -568,10 +620,28 @@ YPUIFunctions = (function($) {
 				$("#invest_error_interval").show(); 		
 				bValidInput = false; 		
 			    }
+                            
+                            //Vérification Contreparties
+                            if($("#reward-selector").length>0){
+                                var rewardSelectedAmount = parseInt($("#reward-selector input:checked~.reward-amount").text());
+                                var rewardSelectedRemaining = parseInt($("#reward-selector input:checked~.reward-remaining").text());
+                                
+                                if(rewardSelectedRemaining <= 0) {
+                                    $("#invest_error_reward_remaining").show(); 		
+                                    bValidInput = false; 
+                                }
+                                
+                                if (parseInt($("#input_invest_amount").text()) < rewardSelectedAmount){
+                                    $("#invest_error_reward_insufficient").show(); 		
+                                    bValidInput = false; 
+                                }
+                            }
 			}
 			if (bValidInput) {
 			    $("#invest_success_amount").text( parseInt($("#input_invest_amount_total").val()) + parseInt($("#input_invest_amount").text()));
-			    $(".invest_success").show();
+			    $("#invest_show_amount").text( parseInt($("#input_invest_amount").text()));
+                            $("#invest_show_reward").text( ($("#reward-selector input:checked").closest("li").find(".reward-name").text()));
+                            $(".invest_success").show();
 			}
 
 			$("#input_invest_amount_part").css("color", bValidInput ? "green" : "red");
@@ -772,6 +842,11 @@ WDGProjectPageFunctions=(function($) {
 		    if ($("#vote-form").hasClass("collapsed")) {
 			$("#vote-form").removeClass("collapsed");
 			$(".description-discover").css('background-color', '#FF494C');
+			if ($(window).width() > 480) {
+			    $("#vote-form").animate({ 
+				top: "-350px"
+			    }, 500 );
+			}
 			
 		    } else {
 			if ($(window).width() > 480) {
@@ -825,7 +900,9 @@ WDGProjectPageFunctions=(function($) {
 		
 		//Clic sur une partie
 		clickItem: function(clickedElement) {
-			if (!WDGProjectPageFunctions.isEditing && !WDGProjectPageFunctions.isClickBlocked) {
+                    //Ne déclenche pas d'action si l'utilisateur sélectionnait du texte
+                    var select = getSelection().toString();
+			if (!select && !WDGProjectPageFunctions.isEditing && !WDGProjectPageFunctions.isClickBlocked) {
 				//Si la balise "lire plus" de l'élément cliqué est affichée
 				var projectMore = clickedElement.find('.projects-more');
 				if (projectMore.is(':visible')) {

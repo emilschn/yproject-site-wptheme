@@ -337,7 +337,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 	<?php endif; ?>
 <?php endif; ?>
 			
-<div style="text-align: center;"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="logo mangopay" /></div>
+<div class="align-center mangopay-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="logo mangopay" /></div>
 
 
 

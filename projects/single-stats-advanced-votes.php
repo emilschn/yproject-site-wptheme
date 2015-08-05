@@ -10,8 +10,11 @@ if (isset($_GET['campaign_id'])) {
             $status = $campaign->campaign_status();
             
             //N'affiche pas le graphe si les dates des votes n'ont pas été enregistrées ou le vote n'a pas été fait
-            $displayGraph = $status=='vote' || $status=='collecte' || $status=='funded';
-            $displayGraph = $displayGraph && $vote_results['list_date'][0]!='0000-00-00';
+            $displayGraph = ($status=='vote' || $status=='collecte' || $status=='funded')
+                    && $vote_results['count_voters'] != 0
+                    && $vote_results['list_date'][0] != 'NULL'
+                    && $vote_results['list_date'][0] != null
+                    && $vote_results['list_date'][0] != '0000-00-00';
             
             if ($displayGraph){ ?>
             <canvas id="canvas-line-vote" width="420" height="200"></canvas><br/>
@@ -47,9 +50,7 @@ if (isset($_GET['campaign_id'])) {
         $liste_cumul_neg = $vote_results['list_cumul_neg'];
 
         //Choix la date de début du graphe
-        $beginvotedate1=date_sub(date_create($campaign->end_vote_date()),new DateInterval('P'.ATCF_Campaign::$vote_duration.'D'));
-        $beginvotedate2=date_create($list_date[0]);
-        $beginvotedate = min([$beginvotedate1,$beginvotedate2]);
+        $beginvotedate=date_create($list_date[0]);
 
         ?>
         <script type="text/javascript">
