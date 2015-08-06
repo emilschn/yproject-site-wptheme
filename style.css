@@ -2593,6 +2593,27 @@ div#home_bottom h1 {
     max-width: 40px;
 }
 
+#dashboard #block-news ul{
+    text-align: left;
+}
+
+#dashboard #block-news li{
+    padding: 5px;
+}
+
+#dashboard #block-news li em{
+    font-size: 12px;
+}
+
+#dashboard #block-news .news-item-tools {
+    float:right;
+    margin-right: 20px;
+}
+
+#dashboard #block-news .nb-comments-widget{
+    padding: 4px;
+}
+
 #dashboard #block-team #team-list{
     padding: 0px 25px;
     list-style: none;
