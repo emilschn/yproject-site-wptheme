@@ -668,7 +668,7 @@ YPUIFunctions = (function($) {
 						campaign_id=$(this).attr('data-value');
 						$('.history-projects').each(function(){
 							if($(this).attr('data-value')===campaign_id){
-								$(this).find('.user-history-payments-list').show(400);
+								$(this).find('.user-history-payments-list').toggle(400);
 							}
 							else{
 								$(this).find('.user-history-payments-list').hide(400);
@@ -676,6 +676,34 @@ YPUIFunctions = (function($) {
 						});
 					});
 				});
+                                
+                                $(this).find('.user-subscribe-news input').each(function(){
+                                    $(this).click(function(){
+                                        checkbox = $(this);
+                                        
+                                        $(this).prop('disabled',true);
+                                        if(this.checked){
+                                            value = 1;
+                                        } else {
+                                            value = 0;
+                                        };
+                                        campaign_id = $(this).closest(".history-projects").attr("data-value");
+                                        
+                                        $.ajax({
+                                            'type' : "POST",
+                                            'url' : ajax_object.ajax_url,
+                                            'context' : checkbox,
+                                            'data': { 
+                                                  'action':'update_subscription_mail',
+                                                  'subscribe' : value,
+                                                  'id_campaign' : campaign_id
+                                                },
+                                        }).done(function(){
+                                            console.log($(this));
+                                            $(this).prop('disabled',false);
+                                        });
+                                    });
+                                });
 			});
 		},
 		

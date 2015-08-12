@@ -3055,6 +3055,7 @@ ul.activity-list p {
 .history-projects{
     background-color: #E1E3E2;
     margin-bottom: 12px;
+    padding-bottom: 10px;
 }
 .history-projects h3{
     display: block;
@@ -3093,18 +3094,20 @@ ul.activity-list p {
 }
 .history-projects .user-history-payments{
     margin-left: 60px;
-    position: relative;
-    bottom: 10px;
 }
 .history-projects .user-history-pictos{
     position: relative;
     bottom: 26px;
 }
 .history-projects .show-payments{
-    position: relative;
-    bottom: 21px;
     margin-left: 15px;
     font-weight: bold;
+}
+
+.history-projects .user-subscribe-news{
+    margin-left: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 .history-projects .user-payments-list-item td{
     width: 150px;
