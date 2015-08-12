@@ -359,7 +359,8 @@ $campaign_id = $_GET['campaign_id'];
                                         ?>
 								
                                     <div class="list-button">
-                                        <a href="<?php echo $news_link; ?>" class="button"><?php _e('&#9999 Publier une nouvelle actualit&eacute;', 'yproject'); ?></a>
+                                        <a href="<?php echo $news_link; ?>" class="button"><?php _e('Voir plus', 'yproject'); ?></a>
+                                        <a href="<?php echo $news_link; ?>" class="button"><?php _e('Publier une nouvelle actualit&eacute;', 'yproject'); ?></a>
                                     </div>
                                     </div>
                                 </div>

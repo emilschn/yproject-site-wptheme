@@ -179,7 +179,7 @@ YPUIFunctions = (function($) {
 				}
 			}
 			if ($(".timeout-lightbox").length > 0) {
-				setTimeout(function() { $(".timeout-lightbox").hide(); }, 2000);
+				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, 2000);
 			}
 			
 			

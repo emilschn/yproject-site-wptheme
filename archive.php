@@ -17,6 +17,28 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 	//Afficher le nouvel article
 	header('Location: '.$_SERVER['REQUEST_URI']);
 }
+
+//Supprime un article (le place dans la corbeille de WP)
+if (isset($_GET['delete_post_id'])){
+    //Test pour vérifier que le post de blog appartient à la campagne
+    $category_slug = $campaign_post->ID . '-blog-' . $campaign_post->post_name;
+    $category_obj = get_category_by_slug($category_slug);
+    $posts_blog = get_posts(array('category'=>$category_obj->cat_ID));
+    $delete_post_id = ($_GET['delete_post_id']);
+    $post_belong_campaign = false;
+    foreach ($posts_blog as $post_blog) {
+        if ($post_blog->ID == $delete_post_id){
+            $post_belong_campaign = true;
+            $title = $post_blog->post_title;
+        }
+    }
+    if ($post_belong_campaign && $campaign->current_user_can_edit()){
+        wp_trash_post($delete_post_id);
+
+        //Rafraichit la liste des posts
+        header('Location: '.$_SERVER['REQUEST_URI']);
+    }
+}
 ?>
 
 <?php get_header(); ?>
@@ -29,7 +51,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 	<div class="page" id="blog-archives" role="main">
 
 		<?php locate_template( array("projects/single-admin-bar.php"), true ); ?>
-
+                
 		<?php locate_template( array("projects/single-header.php"), true ); ?>
 
 		<div id="post_bottom_content" class="center margin-height">
@@ -61,7 +83,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 
 					<input type="hidden" name="action" value="ypcf-campaign-add-news" />
 					<?php wp_nonce_field('ypcf-campaign-add-news'); ?>
-					
+                                        <label><input type="checkbox" name="send_mail" /> Envoyer par mail cette actualité aux utilisateurs qui croient au projet. <em>Les utilisateurs qui se sont désabonnés de vos actualités ne les recevront pas.</em></label> <br/><br/>
 					<?php _e('Relayez cette actualit&eacute; sur vos r&eacute;seaux sociaux et pr&eacute;venez WE DO GOOD pour une communication d&eacute;cupl&eacute;e !', 'yproject'); ?><br /><br />
 					
 					<input type="submit" value="<?php _e('Publier', 'yproject'); ?>" class="button" /><br /><br />
