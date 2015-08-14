@@ -183,7 +183,7 @@ YPUIFunctions = (function($) {
 			}
 			
 			
-			if ($("#blog-archives form#add-news").length > 0) {
+			/*if ($("#blog-archives form#add-news").length > 0) {
 				$("#blog-archives #add-news-opener").click(function() {
 					if ($("#blog-archives form#add-news").is(":visible")) {
 						$("#blog-archives form#add-news").hide();
@@ -191,7 +191,7 @@ YPUIFunctions = (function($) {
 						$("#blog-archives form#add-news").show();
 					}
 				});
-			}
+			}*/
                         
                         //Si chargement données investisseurs/investissements nécessaire
                         if ($(".ajax-investments-load").length > 0) { 
@@ -687,7 +687,7 @@ YPUIFunctions = (function($) {
                                         } else {
                                             value = 0;
                                         };
-                                        campaign_id = $(this).closest(".history-projects").attr("data-value");
+                                        campaign_id = $(this).closest(".history-projects").data("value");
                                         
                                         $.ajax({
                                             'type' : "POST",

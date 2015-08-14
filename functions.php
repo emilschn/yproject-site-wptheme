@@ -1499,7 +1499,6 @@ function yproject_shortcode_statsadvanced_lightbox($atts, $content = '') {
 add_shortcode('yproject_statsadvanced_lightbox', 'yproject_shortcode_statsadvanced_lightbox');
 
 //->TB Liste votants
-
 function yproject_shortcode_votecontact_lightbox($atts, $content = '') {
 	ob_start();
             locate_template('common/votecontact-lightbox.php',true);
@@ -1528,3 +1527,13 @@ function yproject_shortcode_gonextstep_lightbox($atts, $content = '') {
 	echo do_shortcode('[yproject_lightbox id="gonextstep"]' .$content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_gonextstep_lightbox', 'yproject_shortcode_gonextstep_lightbox');
+
+//->TB Envoi de mail 
+function yproject_shortcode_dashboardmail_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('common/dashboardmail-lightbox.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="dashboardmail"]' .$content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_dashboardmail_lightbox', 'yproject_shortcode_dashboardmail_lightbox');

@@ -58,9 +58,9 @@ if (isset($_GET['delete_post_id'])){
 
 			<?php if ($can_modify): ?>
 
-				<h2><a href="javascript:void();" id="add-news-opener"><?php _e('Publier une actualit&eacute;', 'yproject'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" alt="signe plus"/></a></h2>
+				<h2><a class="expandator" data-target="add-news" id="add-news-opener"><?php _e('Publier une actualit&eacute;', 'yproject'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" alt="signe plus"/></a></h2>
 
-				<form action="" method="post" enctype="multipart/form-data" id="add-news">
+                                <form action="" method="post" enctype="multipart/form-data" id="extendable-add-news" class="expandable <?php if(isset($_GET['new-topic'])){echo 'default-expanded';}?>">
 
 					<label for="posttitle"><?php _e( 'Titre', 'ypcf' ); ?></label>
 					<input type="text" name="posttitle" style="width: 250px;"><br />
