@@ -73,7 +73,7 @@ function print_welcome_lightbox(){
     global $campaign;
     if(!$campaign->get_has_been_welcomed() && !current_user_can('manage_options')){
             ob_start();
-            locate_template('common/dashboardwelcome-lightbox.php',true);
+            locate_template('common/dashboard-welcome-lightbox.php',true);
             $content = ob_get_contents();
             ob_end_clean();
             ?>	

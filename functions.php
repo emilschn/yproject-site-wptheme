@@ -1491,7 +1491,7 @@ add_shortcode('yproject_register_lightbox', 'yproject_shortcode_register_lightbo
 // ->TB Stats
 function yproject_shortcode_statsadvanced_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('common/statsadvanced-lightbox.php',true);
+            locate_template('common/dashboard-statsadvanced-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
 	echo do_shortcode('[yproject_lightbox id="statsadvanced"]' .$content . '[/yproject_lightbox]');
@@ -1501,7 +1501,7 @@ add_shortcode('yproject_statsadvanced_lightbox', 'yproject_shortcode_statsadvanc
 //->TB Liste votants
 function yproject_shortcode_votecontact_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('common/votecontact-lightbox.php',true);
+            locate_template('common/dashboard-votecontact-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
 	echo do_shortcode('[yproject_widelightbox id="votecontact"]' .$content . '[/yproject_widelightbox]');
@@ -1511,7 +1511,7 @@ add_shortcode('yproject_votecontact_lightbox', 'yproject_shortcode_votecontact_l
 //->TB Liste investisseurs
 function yproject_shortcode_listinvestors_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('projects/single-project-investors.php',true);
+            locate_template('common/dashboard-project-investors.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
 	echo do_shortcode('[yproject_widelightbox id="listinvestors"]' .$content . '[/yproject_widelightbox]');
@@ -1521,7 +1521,7 @@ add_shortcode('yproject_listinvestors_lightbox', 'yproject_shortcode_listinvesto
 //->TB Passer à l'étape suivante
 function yproject_shortcode_gonextstep_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('projects/dashboard-next-step.php',true);
+            locate_template('common/dashboard-next-step-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
 	echo do_shortcode('[yproject_lightbox id="gonextstep"]' .$content . '[/yproject_lightbox]');
@@ -1531,7 +1531,7 @@ add_shortcode('yproject_gonextstep_lightbox', 'yproject_shortcode_gonextstep_lig
 //->TB Envoi de mail 
 function yproject_shortcode_dashboardmail_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('common/dashboardmail-lightbox.php',true);
+            locate_template('common/dashboard-mail-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
 	echo do_shortcode('[yproject_lightbox id="dashboardmail"]' .$content . '[/yproject_lightbox]');
