@@ -1,12 +1,16 @@
 <?php function print_block_news() { 
-    global $category_obj,
-           $campaign_id,
-           $news_link; ?>
+    global $post_campaign,
+        $campaign_id; ?>
 <div id ="block-news" class="block">
     <div class="head">Actualit&eacute;s</div>
     <div class="body" style="text-align:center">
         <?php 
         /***************Donnees blog ******************/
+        $category_slug = $post_campaign->ID . '-blog-' . $post_campaign->post_name;
+        $category_obj = get_category_by_slug($category_slug);
+        $category_link = (!empty($category_obj)) ? get_category_link($category_obj->cat_ID) : '';
+        $news_link = esc_url($category_link);
+        
         $posts_blog = get_posts(array('category'=>$category_obj->cat_ID));
         //var_dump($posts_blog);
         $nbposts_blog = count($posts_blog);

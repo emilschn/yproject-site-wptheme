@@ -23,6 +23,10 @@ function block_stats_data(){
     $vote_results = wdg_get_project_vote_results($campaign_id);
 }
 
+function block_stats_lightbox(){
+    echo do_shortcode('[yproject_statsadvanced_lightbox]');
+}
+
 function print_block_stats() { 
     global $campaign,
             $status,
@@ -134,7 +138,6 @@ function print_block_stats() {
 
         <div class="list-button">
             <a href="#statsadvanced" class="wdg-button-lightbox-open button" data-lightbox="statsadvanced">&#x1f50e;  Statistiques d&eacute;taill&eacute;s</a>
-            <?php echo do_shortcode('[yproject_statsadvanced_lightbox]'); ?>
         </div>
         <div class="clear"></div>
     </div>

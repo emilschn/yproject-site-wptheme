@@ -132,7 +132,7 @@ tbody {
 
 .button, .wpcf7-submit {
     background: none repeat scroll 0 0 #333333;
-    border: 1px solid #333333 !important;
+    border: 1px solid #333333;
     color: #FFFFFF;
     padding: 3px 8px;
     text-transform: uppercase;
@@ -332,8 +332,8 @@ form.wdg-forms table input[type="text"].reward-text{
 }
 
 .wdg-lightbox .button {
-	background-color: #FF494C !important;
-	border: none !important;
+	background-color: #FF494C;
+	border: none;
 }
 
 .wdg-lightbox .wdg-lightbox-button-close {
@@ -2511,18 +2511,18 @@ div#home_bottom h1 {
     font-weight: bold;
 }
 
-#dashboard #block-summary #wdg-lightbox-gonextstep ul {
+#dashboard #wdg-lightbox-gonextstep ul {
    list-style-position: inside;
    list-style-type: none;
    padding-left: 0px;
 }
 
-#dashboard #block-summary #wdg-lightbox-gonextstep #vote-goals {
+#dashboard #wdg-lightbox-gonextstep #vote-goals {
    list-style-type: square;
    padding-bottom: 15px;
 }
 
-#dashboard #block-summary #wdg-lightbox-gonextstep ul li {
+#dashboard #wdg-lightbox-gonextstep ul li {
     padding: 5px;
 }
 
@@ -2575,7 +2575,7 @@ div#home_bottom h1 {
     display: initial;
 }
 
-#dashboard #block-stats .wdg-lightbox-padder .expandable {
+#dashboard .wdg-lightbox-padder .expandable {
     border-left: 1px solid #BBB;
     padding-left: 20px;
 }
@@ -2591,6 +2591,17 @@ div#home_bottom h1 {
 
 #dashboard #block-community .card-com img{
     max-width: 40px;
+}
+
+#dashboard #wdg-lightbox-dashboardmail .selector {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#dashboard #wdg-lightbox-dashboardmail .selection {
+    text-align: center;
+    display: inline-block;
+    width: 32%;
 }
 
 #dashboard #block-news ul{

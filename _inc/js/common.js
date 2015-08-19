@@ -193,6 +193,7 @@ YPUIFunctions = (function($) {
 				});
 			}*/
                         
+                        
                         //Si chargement données investisseurs/investissements nécessaire
                         if ($(".ajax-investments-load").length > 0) { 
                             campaign_id = $(".ajax-investments-load").attr('data-value');
@@ -255,6 +256,19 @@ YPUIFunctions = (function($) {
                             $("#innbdayvote").on( 'keyup change', function () {
                                 updateDate("innbdayvote","previewenddatevote");});
                         }
+                        
+                        //Formulaire envoi mail
+                        $("#jycrois-send-mail-selector").change(function(){
+                            if(this.checked){
+                                $("#voted-send-mail-selector").prop('disabled',true);
+                                $("#invested-send-mail-selector").prop('disabled',true);
+                                $("#voted-send-mail-selector").prop('checked',true);
+                                $("#invested-send-mail-selector").prop('checked',true);
+                            } else {
+                                $("#voted-send-mail-selector").prop('disabled',false);
+                                $("#invested-send-mail-selector").prop('disabled',false);
+                            }
+                        });                        
                         
                         //Gestion equipe depuis Tableau de bord
                         $(".project-manage-team").click(function(){

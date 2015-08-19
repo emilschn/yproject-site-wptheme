@@ -19,7 +19,7 @@ function check_next_step(){
          if (($status=='preview')||(($status=='preparing')&&($_POST['next_step']==2))) {
              if(ypcf_check_user_is_complete($campaign->post_author())&& isset($_POST['innbdayvote'])){
                 $vote_time = $_POST['innbdayvote'];
-                if(2<=$vote_time && $vote_time<=30){
+                if(10<=$vote_time && $vote_time<=30){
                     //Fixe date fin de vote
                     $diffVoteDay = new DateInterval('P'.$vote_time.'D');
                     $VoteEndDate = (new DateTime())->add($diffVoteDay);
@@ -87,14 +87,19 @@ function print_welcome_lightbox(){
     }
 }
 
+function  block_summary_lightbox(){
+    echo do_shortcode('[yproject_gonextstep_lightbox]');
+}
+
 function print_block_summary() { 
     global $campaign,
             $campaign_id,
             $status,
             $stylesheet_directory_uri,
-            $page_parameters,
             $campaign_id_param,
-            $params_partial;?>
+            $params_partial;
+    
+    $page_parameters = get_page_by_path('parametres-projet'); ?>
 <div id="block-summary" >
     <div class="current-step">
         <img src="<?php echo $stylesheet_directory_uri; ?>/images/frise-preview.png" alt="" /><br>
@@ -119,8 +124,7 @@ function print_block_summary() {
                 <?php }
             }?>
             <a href="#gonextstep" class="wdg-button-lightbox-open button" data-lightbox="gonextstep">&check; Passer &agrave; l'&eacute;tape suivante</a>
-            <?php /*Lightbox passage à l'étape suivante*/ echo do_shortcode('[yproject_gonextstep_lightbox]');
-        }?>
+            <?php }?>
 
         <a href="<?php echo get_permalink($page_parameters->ID) . $campaign_id_param . $params_partial; ?>" class="button"><?php _e('&#128295; Param&egrave;tres', 'yproject'); ?></a>
     </div>

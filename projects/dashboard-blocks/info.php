@@ -1,7 +1,8 @@
-<?php function print_block_info() { 
-    global $campaign,
-            $page_particular_terms,
-            $page_guide; ?>
+<?php function print_block_info() {
+    global $campaign;
+    $page_guide = get_page_by_path('guide');
+    $page_particular_terms = get_page_by_path('conditions-particulieres');
+    ?>
 
 <div id="block-info" class="block">
     <div class="head"><?php _e('Informations','yproject'); ?></div>

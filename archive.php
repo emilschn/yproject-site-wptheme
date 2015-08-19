@@ -74,7 +74,7 @@ if (isset($_GET['delete_post_id'])){
 							'media_buttons' => true,
 							'quicktags'     => false,
 							'tinymce'       => array(
-							    'plugins'		    => 'paste',
+							    'plugins'		    => 'paste, wplink, textcolor',
 							    'paste_remove_styles'   => true
 							)
 						) 
