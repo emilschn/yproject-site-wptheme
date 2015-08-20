@@ -2436,7 +2436,9 @@ div#home_bottom h1 {
 	display: none;
 }
 #blog-archives .post-content {
-	margin-bottom: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
 }
 
 /*******************************************************************************
@@ -2578,6 +2580,12 @@ div#home_bottom h1 {
 #dashboard .wdg-lightbox-padder .expandable {
     border-left: 1px solid #BBB;
     padding-left: 20px;
+}
+
+#dashboard #wdg-lightbox-dashboardmail .feedback {
+    background-color: #333 !important;
+    color: white;
+    padding: 12px;
 }
 
 #dashboard #block-community .card-com{

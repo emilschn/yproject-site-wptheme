@@ -498,6 +498,13 @@ YPUIFunctions = (function($) {
                         });
                         $('.ajax-data-inv-loader-img').slideUp();
                         
+                        //Liste des ID pour l'envoi de mail
+                        if ($("#ajax-id-investors-load").length > 0) {
+                            $('#ajax-id-investors-load #img-investors').slideDown();
+                            $('#ajax-id-investors-load #invested-send-mail-selector').slideDown();
+                            list_id_inv = Object.keys(inv_data.investors_list).map(function (key) {return inv_data.investors_list[key];});
+                            $('#ajax-id-investors-load #invested-send-mail-list').val(list_id_inv);
+                        }
                         // Crée le tableau des investisseurs si besoin
                         if ($("#ajax-investors-load").length > 0) {
                             YPUIFunctions.getInvestorsTable(JSON.stringify(inv_data),campaign_id);
@@ -512,6 +519,7 @@ YPUIFunctions = (function($) {
                         if ($("#ajax-email-selector-load").length > 0) {
                             YPUIFunctions.getEmailSelector(JSON.stringify(inv_data),campaign_id); 
                         }
+                        
                     }).fail(function(){});
                 },               
                 

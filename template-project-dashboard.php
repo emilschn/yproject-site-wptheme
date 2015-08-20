@@ -37,6 +37,8 @@ $campaign_id = $_GET['campaign_id'];
                         
                         /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
                         check_next_step();
+                        /*Vérifie si l'utilisateur essaie d'envoyer un mail **/
+                        check_send_mail();
                         /*Affiche s'il le faut la LB de bienvenue*/
                         print_welcome_lightbox(); 
                         
