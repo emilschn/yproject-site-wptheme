@@ -229,6 +229,9 @@ var ProjectEditor = (function($) {
 			$("#wdg-input-"+property).width(width);
 			$("#wdg-input-"+property).height($(ProjectEditor.elements[property].elementId).height());
 			
+                        $("#wdg-input-"+property).css("font-family","Arial,sans-serif");
+                        $("#wdg-input-"+property).css("font-size","14px");
+                        
 			var buttonValidate = '<div id="wdg-validate-'+property+'" class="edit-button-validate" data-property="'+property+'"></div>';
 			$("#wdg-input-"+property).after(buttonValidate);
 			$("#wdg-validate-"+property).css("left", $("#wdg-input-"+property).position().left + $("#wdg-input-"+property).outerWidth());
