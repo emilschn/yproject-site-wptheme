@@ -2427,11 +2427,26 @@ div#home_bottom h1 {
 * PROJECT NEWS PAGES
 *******************************************************************************/
 #blog-archives h2 {
-	font-size: 1.17em;
+	font-size: 1.20em;
 }
 #blog-archives h2 a {
 	color: #2B2C2C;
 }
+
+#blog-archives h3 {
+	font-size: 1.10em;
+}
+
+#blog-archives .preview{
+    margin: 0px 20px;
+}
+
+#blog-archives .preview-frame{
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border: 1px dotted black;
+}
+
 #blog-archives form#add-news {
 	display: none;
 }

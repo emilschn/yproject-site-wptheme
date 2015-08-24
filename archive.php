@@ -49,7 +49,6 @@ if (isset($_GET['delete_post_id'])){
 	<?php do_action( 'bp_before_archive' ); ?>
 
 	<div class="page" id="blog-archives" role="main">
-
 		<?php locate_template( array("projects/single-admin-bar.php"), true ); ?>
                 
 		<?php locate_template( array("projects/single-header.php"), true ); ?>
@@ -59,17 +58,39 @@ if (isset($_GET['delete_post_id'])){
 			<?php if ($can_modify): ?>
 
 				<h2><a class="expandator" data-target="add-news" id="add-news-opener"><?php _e('Publier une actualit&eacute;', 'yproject'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" alt="signe plus"/></a></h2>
-
-                                <form action="" method="post" enctype="multipart/form-data" id="extendable-add-news" class="expandable <?php if(isset($_GET['new-topic'])){echo 'default-expanded';}?>">
-
+                                
+                                <form action="" method="post" enctype="multipart/form-data" id="extendable-add-news" class="expandable 
+                                    <?php if(isset($_GET['new-topic']) || (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-preview-news')){echo 'default-expanded';}?>">
+                                    
+                                    <?php if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-preview-news') { ?>
+                                    <div class="preview">
+                                        <h3>Pr&eacute;visualisation de l'actu</h3>
+                                        <div class="preview-frame">
+                                            <div class="post-content">
+                                                <?php echo '<h3 class="posttitle">'.$_POST['posttitle'].'</h3>';
+                                                    echo '<p class="date">'.mysql2date( get_option( 'date_format' ), date_format(new DateTime(), 'Y-m-d H:i:s')).'</p>';
+                                                    echo '<div class="entry">'.$_POST['postcontent'].'</div>';?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php }?>
+                                    
 					<label for="posttitle"><?php _e( 'Titre', 'ypcf' ); ?></label>
-					<input type="text" name="posttitle" style="width: 250px;"><br />
+					<input type="text" name="posttitle" style="width: 250px;" 
+                                               value="<?php if (isset($_POST['posttitle'])){echo $_POST['posttitle'];}?>"><br />
 
 					<label for="postcontent"><?php _e( 'Contenu', 'ypcf' ); ?></label>
 					<?php
 					global $post_ID, $post;
 					$post_ID = $post = 0;
-					wp_editor( '', 'postcontent', 
+                                        
+                                        if (isset($_POST['postcontent'])){
+                                            $previous_content = $_POST['postcontent'];
+                                        } else {
+                                            $previous_content = '';
+                                        }
+                                        
+					wp_editor( $previous_content, 'postcontent', 
 						array(
 							'media_buttons' => true,
 							'quicktags'     => false,
@@ -81,13 +102,16 @@ if (isset($_GET['delete_post_id'])){
 					);
 					?><br /><br />
 
-					<input type="hidden" name="action" value="ypcf-campaign-add-news" />
+					<label><input type="checkbox" name="send_mail" <?php if (isset($_POST['send_mail'])){echo 'checked';}?>/>
+                                            Envoyer par mail cette actualité aux utilisateurs qui croient au projet. <em>Les utilisateurs qui se sont désabonnés de vos actualités ne les recevront pas.</em></label> <br/><br/>
+					
+                                        <?php _e('Relayez cette actualit&eacute; sur vos r&eacute;seaux sociaux et pr&eacute;venez WE DO GOOD pour une communication d&eacute;cupl&eacute;e !', 'yproject'); ?><br /><br />
+					
+                                        <button type="submit" name="action" value="ypcf-campaign-preview-news" class="button"><?php _e('Prévisualisation', 'yproject'); ?></button>
+					<button type="submit" name="action" value="ypcf-campaign-add-news" class="button"><?php _e('Publier', 'yproject'); ?></button><br /><br />
 					<?php wp_nonce_field('ypcf-campaign-add-news'); ?>
-                                        <label><input type="checkbox" name="send_mail" /> Envoyer par mail cette actualité aux utilisateurs qui croient au projet. <em>Les utilisateurs qui se sont désabonnés de vos actualités ne les recevront pas.</em></label> <br/><br/>
-					<?php _e('Relayez cette actualit&eacute; sur vos r&eacute;seaux sociaux et pr&eacute;venez WE DO GOOD pour une communication d&eacute;cupl&eacute;e !', 'yproject'); ?><br /><br />
-					
-					<input type="submit" value="<?php _e('Publier', 'yproject'); ?>" class="button" /><br /><br />
-					
+                                        <?php wp_nonce_field('ypcf-campaign-preview-news'); ?>
+                                        
 					<hr>
 
 				</form>
