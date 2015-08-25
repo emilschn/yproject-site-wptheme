@@ -1,8 +1,15 @@
-<?php global $campaign, $feedback; ?>
+<?php global $campaign, $feedback, $preview; ?>
 <h1>Envoyer un message à votre communauté</h1>
-<?php if ($feedback!=''){
+<?php 
+    if ($preview!=''){
+        echo '<h3>Aperçu du message</h3><div class="preview">'.$preview.'</div>';
+    }
+
+    if ($feedback!=''){
         echo '<div class="feedback">'.$feedback.'</div>';
     }
+    
+    
 ?>
 <p> Vous pouvez envoyer ici un mail aux différents groupes de la communaut&eacute; de votre projet.<br/></p>
 <p><em>Les utilisateurs qui se sont d&eacute;sabonn&eacute;s de vos actualit&eacute;s 
@@ -63,6 +70,7 @@ wp_editor( $previous_content, 'mail_content',
 );
 ?>
     <br/>
-    <input type="hidden" name="send_mail" value="1">
-    <input type="submit" value="<?php _e('Envoyer le message', 'yproject'); ?>" class="button" />
+    <button type="submit" name="send_mail" value="preview" class="button"><?php _e('Prévisualisation', 'yproject'); ?></button>
+    <button type="submit" name="send_mail" value="send" class="button"><?php _e('Envoyer le message', 'yproject'); ?></button><br />
+
 </form>

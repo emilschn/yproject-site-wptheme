@@ -4,8 +4,8 @@
  * Vérifie si l'utilisateur essaie d'envoyer des mails via la lightbox dashboard-mail
  */
 function check_send_mail(){
-    if (isset($_POST['send_mail'])&& ($_POST['send_mail']==1)){
-        global $campaign_id, $feedback;
+    if (isset($_POST['send_mail'])){
+        global $campaign_id, $feedback, $preview;
         $feedback = "";
         if ((isset($_POST['mail_title']) && isset($_POST['mail_content']))
                 &&($_POST['mail_title']!='' && $_POST['mail_content']!='')){
@@ -13,27 +13,42 @@ function check_send_mail(){
             $voted = isset($_POST['voted']) && ($_POST['voted']=='on');
             $invested = isset($_POST['invested']) && ($_POST['invested']=='on');
             $id_investors_list = explode(",", $_POST['investors_id']);
-            //Au moins une catégorie sélectionnée
-            if ($jycrois || $voted || $invested){
-                $feedback_email = NotificationsEmails::project_mail($campaign_id, 
-                        $_POST['mail_title'], 
-                        $_POST['mail_content'], 
-                        $jycrois, 
-                        $voted, 
-                        $invested,
-                        $id_investors_list);
-                
-                $nb_try = count($feedback_email);
-                $nb_errors = $nb_try - count(array_filter($feedback_email));
-                if ($nb_errors <= 0){
-                    $feedback .= "Les messages ont &eacute;t&eacute; correctement envoy&eacute;s !";
-                } else {
-                    $feedback .= "Les messages ont &eacute;t&eacute; envoy&eacute;s mais des erreurs ont eu lieu.";
+            
+                if ($_POST['send_mail']=='send'){
+                    //Au moins une catégorie sélectionnée
+                    if ($jycrois || $voted || $invested){
+                        $feedback_email = NotificationsEmails::project_mail($campaign_id, 
+                            $_POST['mail_title'], 
+                            $_POST['mail_content'], 
+                            $jycrois, 
+                            $voted, 
+                            $invested,
+                            $id_investors_list);
+                        
+                        $nb_try = count($feedback_email);
+                        $nb_errors = $nb_try - count(array_filter($feedback_email));
+                        if ($nb_errors <= 0){
+                            $feedback .= "Les messages ont &eacute;t&eacute; correctement envoy&eacute;s !";
+                        } else {
+                            $feedback .= "Les messages ont &eacute;t&eacute; envoy&eacute;s mais des erreurs ont eu lieu.";
+                        }
+                        
+                    } else {
+                        $feedback .= "Vous n'avez pas s&eacute;lectionn&eacute; de groupe &agrave; qui envoyer le message. ";
+                    }
                 }
-                
-            } else {
-                $feedback .= "Vous n'avez pas s&eacute;lectionn&eacute; de groupe &agrave; qui envoyer le message. ";
-            }
+                else if ($_POST['send_mail']=='preview'){
+                    unset($feedback);
+                    $preview = NotificationsEmails::project_mail($campaign_id, 
+                            $_POST['mail_title'], 
+                            $_POST['mail_content'], 
+                            false, 
+                            false, 
+                            false,
+                            array(),
+                            true);
+                }
+            
         } else {
             $feedback .= "Il faut donner un objet et un contenu &agrave; votre mail. ";
         }
