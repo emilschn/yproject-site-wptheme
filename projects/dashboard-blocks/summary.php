@@ -46,7 +46,6 @@ function check_next_step(){
                     $orga_done = true;
                 }
                  if( $orga_done
-                         &&$campaign->is_validated_by_vote() && $campaign->end_vote_remaining()<=0
                          && 1<=$collecte_time && $collecte_time<=60
                          && 0<=$collecte_fin_heure && $collecte_fin_heure<=23
                          && 0<=$collecte_fin_minute && $collecte_fin_minute<=59){
@@ -66,6 +65,11 @@ function check_next_step(){
      }
  }
 
+function is_validated_by_vote($cmp){
+    return $cmp->nb_voters()>=  ATCF_Campaign::$voters_min_required
+            && wdg_get_project_vote_results($cmp->ID)['percent_project_validated']>= ATCF_Campaign::$vote_score_min_required
+            && wdg_get_project_vote_results($cmp->ID)['sum_invest_ready']>=$cmp->vote_invest_ready_min_required;
+}
  /**
   * Lightbox de bienvenue à la première visite, Cache la LB pour les admins
   */
