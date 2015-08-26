@@ -81,30 +81,35 @@ YPUIFunctions = (function($) {
 			    });
 			}
 
+			//Interactions choix de contrepartie
 			if ($("#input_invest_amount_part").length > 0) {
+                            //Changement de montant
 			    $("#input_invest_amount_part").on( 'keyup change', function () {
+                                $("#validate_invest_amount_feedback").slideUp();
+                                $("#link_validate_invest_amount").slideDown();
 				YPUIFunctions.checkInvestInput();
 			    });
                             
+                            //Changement de contrepartie
                             if($("#reward-selector").length>0){
                                 $("#reward-selector input:checked").closest("li").addClass("selected");
                                 
                                 $("#reward-selector input").click(function() {
+                                    $("#validate_invest_amount_feedback").slideUp();
+                                    $("#link_validate_invest_amount").slideDown();
                                     YPUIFunctions.changeInvestInput();
                                     YPUIFunctions.checkInvestInput();
                                 });
                             }
-
+                            
+                            //Clic sur valider
 			    $("#link_validate_invest_amount").click(function() {
                                 YPUIFunctions.checkInvestInput();
+                                $("#link_validate_invest_amount").slideUp();
 				$("#validate_invest_amount_feedback").show();
 				$('html, body').animate({scrollTop: $('#link_validate_invest_amount').offset().top - $("#navigation").height()}, "slow"); 
 			    });
-
-			    $("#invest_form").submit(function() {
-				return YPUIFunctions.checkInvestInput();
-			    });
-			}
+                        }
 
 			if ($("#company_status").length > 0) {
 			    $("#company_status").change(function() { 
@@ -582,12 +587,9 @@ YPUIFunctions = (function($) {
                     $("#reward-selector li").removeClass("selected");
                     $("#reward-selector input:checked").closest("li").addClass("selected");
                     
-                    //Si le montant est insuffisant pour la contrepartie, l'augmenter
+                    //Ajuster le champ de montant choisi à la contrepartie selectionnee
                     var rewardSelectedAmount = parseInt($("#reward-selector input:checked~.reward-amount").text());
-                    
-                    if (parseInt($("#input_invest_amount").text()) < rewardSelectedAmount){
-                        $("#input_invest_amount_part").val(rewardSelectedAmount);
-                    }
+                    $("#input_invest_amount_part").val(rewardSelectedAmount);
                 },
                 
 		checkInvestInput: function() {
