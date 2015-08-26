@@ -52,7 +52,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 							'media_buttons' => true,
 							'quicktags'     => false,
 							'tinymce'       => array(
-							    'plugins'		    => 'paste',
+							    'plugins'		    => 'paste, wplink, textcolor',
 							    'paste_remove_styles'   => true
 							)
 						) 
