@@ -132,7 +132,7 @@ tbody {
 
 .button, .wpcf7-submit {
     background: none repeat scroll 0 0 #333333;
-    border: 1px solid #333333 !important;
+    border: 1px solid #333333;
     color: #FFFFFF;
     padding: 3px 8px;
     text-transform: uppercase;
@@ -341,8 +341,8 @@ form.wdg-forms table input[type="text"].reward-text{
 }
 
 .wdg-lightbox .button {
-	background-color: #FF494C !important;
-	border: none !important;
+	background-color: #FF494C;
+	border: none;
 }
 
 .wdg-lightbox .wdg-lightbox-button-close {
@@ -2436,16 +2436,33 @@ div#home_bottom h1 {
 * PROJECT NEWS PAGES
 *******************************************************************************/
 #blog-archives h2 {
-	font-size: 1.17em;
+	font-size: 1.20em;
 }
 #blog-archives h2 a {
 	color: #2B2C2C;
 }
+
+#blog-archives h3 {
+	font-size: 1.10em;
+}
+
+#blog-archives .preview{
+    margin: 0px 20px;
+}
+
+#blog-archives .preview-frame{
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border: 1px dotted black;
+}
+
 #blog-archives form#add-news {
 	display: none;
 }
 #blog-archives .post-content {
-	margin-bottom: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
 }
 
 /*******************************************************************************
@@ -2520,18 +2537,18 @@ div#home_bottom h1 {
     font-weight: bold;
 }
 
-#dashboard #block-summary #wdg-lightbox-gonextstep ul {
+#dashboard #wdg-lightbox-gonextstep ul {
    list-style-position: inside;
    list-style-type: none;
    padding-left: 0px;
 }
 
-#dashboard #block-summary #wdg-lightbox-gonextstep #vote-goals {
+#dashboard #wdg-lightbox-gonextstep #vote-goals {
    list-style-type: square;
    padding-bottom: 15px;
 }
 
-#dashboard #block-summary #wdg-lightbox-gonextstep ul li {
+#dashboard #wdg-lightbox-gonextstep ul li {
     padding: 5px;
 }
 
@@ -2584,9 +2601,20 @@ div#home_bottom h1 {
     display: initial;
 }
 
-#dashboard #block-stats .wdg-lightbox-padder .expandable {
+#dashboard .wdg-lightbox-padder .expandable {
     border-left: 1px solid #BBB;
     padding-left: 20px;
+}
+
+#dashboard #wdg-lightbox-dashboardmail .feedback {
+    background-color: #333 !important;
+    color: white;
+    padding: 12px;
+}
+
+#dashboard #wdg-lightbox-dashboardmail .preview {
+    border: 1px dotted black;
+    background-color: #FFF !important;
 }
 
 #dashboard #block-community .card-com{
@@ -2600,6 +2628,38 @@ div#home_bottom h1 {
 
 #dashboard #block-community .card-com img{
     max-width: 40px;
+}
+
+#dashboard #wdg-lightbox-dashboardmail .selector {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#dashboard #wdg-lightbox-dashboardmail .selection {
+    text-align: center;
+    display: inline-block;
+    width: 32%;
+}
+
+#dashboard #block-news ul{
+    text-align: left;
+}
+
+#dashboard #block-news li{
+    padding: 5px;
+}
+
+#dashboard #block-news li em{
+    font-size: 12px;
+}
+
+#dashboard #block-news .news-item-tools {
+    float:right;
+    margin-right: 20px;
+}
+
+#dashboard #block-news .nb-comments-widget{
+    padding: 4px;
 }
 
 #dashboard #block-team #team-list{
@@ -3043,6 +3103,7 @@ ul.activity-list p {
 .history-projects{
     background-color: #E1E3E2;
     margin-bottom: 12px;
+    padding-bottom: 10px;
 }
 .history-projects h3{
     display: block;
@@ -3081,18 +3142,20 @@ ul.activity-list p {
 }
 .history-projects .user-history-payments{
     margin-left: 60px;
-    position: relative;
-    bottom: 10px;
 }
 .history-projects .user-history-pictos{
     position: relative;
     bottom: 26px;
 }
 .history-projects .show-payments{
-    position: relative;
-    bottom: 21px;
     margin-left: 15px;
     font-weight: bold;
+}
+
+.history-projects .user-subscribe-news{
+    margin-left: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 .history-projects .user-payments-list-item td{
     width: 150px;

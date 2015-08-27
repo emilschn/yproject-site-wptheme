@@ -83,8 +83,13 @@ class YPProjectLib {
 			'post_category' => array($category_obj->cat_ID)
 		);
 
-		wp_insert_post($blog, true);
+		$post_id = wp_insert_post($blog, true);
 		do_action('wdg_delete_cache', array( 'project-header-menu-'.$post_campaign->ID ));
+                
+                //Envoi de notifications mails
+                if (isset($_POST['send_mail']) && ($_POST['send_mail'])=='on'){
+                    NotificationsEmails::new_project_post_posted($campaign_id, $post_id);
+                }
 	}
 	
 	/**

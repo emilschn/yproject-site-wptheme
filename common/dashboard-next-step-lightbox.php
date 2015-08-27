@@ -22,7 +22,7 @@ $campaign = atcf_get_current_campaign();
                 <li>Avoir au moins <strong>50%</strong> de promesses d'investissement de l'objectif de collecte (recommand&eacute;)</li>
             </ul>
             <li><label>Nombre de jours du vote : 
-                <input type="number" id="innbdayvote" name="innbdayvote" min="2" max="30" value="30" style="width: 40px;"></label>
+                <input type="number" id="innbdayvote" name="innbdayvote" min="10" max="30" value="30" style="width: 40px;"></label>
                  Fin du vote : <span id="previewenddatevote"></span>
             </li>
             <li><label><input type="checkbox" class="checkbox-next-step" id="cbman21">
@@ -67,7 +67,7 @@ $campaign = atcf_get_current_campaign();
                 }?>>
                 J'ai d&eacute;termin&eacute; <a href="<?php echo get_permalink(get_page_by_path('parametres-projet')->ID) . '?campaign_id='.$_GET['campaign_id'] . $params_partial; ?>">l'organisation du projet</a></label></li>
             <li><label><input type="checkbox" class="checkbox-next-step" id="cbvotefin" disabled
-                <?php if(($campaign->is_validated_by_vote() && $campaign->end_vote_remaining()<=0)|| $campaign->can_go_next_step()){echo "checked";}
+                <?php if((is_validated_by_vote($campaign) && $campaign->end_vote_remaining()<=0)|| $campaign->can_go_next_step()){echo "checked";}
                 ?>>
                 Le vote est termin&eacute; et le projet a &eacute;t&eacute; valid&eacute;</label></li>
 

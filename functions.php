@@ -460,6 +460,30 @@ function update_jy_crois(){
 }
 add_action( 'wp_ajax_update_jy_crois', 'update_jy_crois' );
 
+function update_subscription_mail(){
+	global $wpdb;
+        
+	if (isset($_POST['id_campaign']) && isset($_POST['subscribe'])) {
+            $table_jcrois = $wpdb->prefix . "jycrois";
+            $user_item = wp_get_current_user();
+            //var_dump($user_item);
+            $user_id = $user_item->ID;
+            
+            $feed = $wpdb->update( $table_jcrois,
+                    array(
+                        'subscribe_news' => $_POST['subscribe']
+                    ),
+                    array(
+                        'campaign_id' => $_POST['id_campaign'],
+                        'user_id' => $user_id
+                    ));
+            if ($feed !== false){
+                echo $_POST['subscribe'];
+            }
+	}
+}
+add_action( 'wp_ajax_update_subscription_mail', 'update_subscription_mail' );
+
 
 function print_user_projects(){
     
@@ -486,12 +510,12 @@ function print_user_projects(){
 		$purchases = edd_get_users_purchases(bp_displayed_user_id(), -1, false, $payment_status);
 		$table = $wpdb->prefix.'jycrois';
 		$user_id = bp_displayed_user_id();
-		$projects_jy_crois = $wpdb->get_results("SELECT campaign_id FROM $table WHERE user_id=$user_id");
-		$table = $wpdb->prefix.'ypcf_project_votes';
+		$projects_jy_crois = $wpdb->get_results("SELECT campaign_id, subscribe_news FROM $table WHERE user_id=$user_id");
+                $table = $wpdb->prefix.'ypcf_project_votes';
 		$projects_votes = $wpdb->get_results("SELECT post_id FROM $table WHERE user_id=$user_id");
 		$check_investment = true;
 		$check_vote = false;
-		$check_believe = false;
+		$check_believe = true;
 		if (empty($purchases) && count($projects_votes) > 0) { $check_investment = false; $check_vote = true; }
 		if (empty($purchases) && count($projects_votes) == 0 && count($projects_jy_crois) == 0) { $check_investment = false; $check_believe = true; }
 		
@@ -554,6 +578,7 @@ function print_user_projects(){
 
 			foreach ($projects_jy_crois as $project) {
 				$user_projects[$project->campaign_id]['jy_crois'] = 1;
+                                $user_projects[$project->campaign_id]['subscribe_news'] = intval($project->subscribe_news);
 				$user_projects[$project->campaign_id]['ID'] = $project->campaign_id;
 			}
 			foreach ($projects_votes as $project) {
@@ -668,6 +693,13 @@ function print_user_projects(){
 							<div style="clear: both"></div>
 						</div>
 					</div>
+                                        
+                                        <?php if(($project['jy_crois'] === 1) && $is_same_user) {?>
+                                        <div class="user-subscribe-news">
+                                                <label><input type="checkbox" <?php if ($project['subscribe_news']===1){echo 'checked="checked"';}?>/>
+                                                    Recevoir par mail les actualit&eacute;s du projet</label>
+                                        </div>
+                                        <?php } ?>
 					
 					<?php if(count($payments) > 0 && $is_same_user) {?>
 						<div class="show-payments"  data-value="<?php echo $project['ID'];?>">
@@ -714,7 +746,7 @@ function print_user_projects(){
 								</tr>
                                                                 <?php if ($reward != null) { ?>
                                                                     <tr>
-                                                                        <td colspan="4" class="user-payment-item user-payment-reward">
+                                                                        <td colspan="4" class="user-payment-item user-payment-reward" style="margin-bottom: 10px;">
                                                                             Contrepartie choisie : Palier de <?php echo $reward['amount'].' € - '.$reward['name']?>
                                                                         </td>
                                                                     </tr>
@@ -1459,7 +1491,7 @@ add_shortcode('yproject_register_lightbox', 'yproject_shortcode_register_lightbo
 // ->TB Stats
 function yproject_shortcode_statsadvanced_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('common/statsadvanced-lightbox.php',true);
+            locate_template('common/dashboard-statsadvanced-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
 	echo do_shortcode('[yproject_lightbox id="statsadvanced"]' .$content . '[/yproject_lightbox]');
@@ -1467,10 +1499,9 @@ function yproject_shortcode_statsadvanced_lightbox($atts, $content = '') {
 add_shortcode('yproject_statsadvanced_lightbox', 'yproject_shortcode_statsadvanced_lightbox');
 
 //->TB Liste votants
-
 function yproject_shortcode_votecontact_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('common/votecontact-lightbox.php',true);
+            locate_template('common/dashboard-votecontact-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
 	echo do_shortcode('[yproject_widelightbox id="votecontact"]' .$content . '[/yproject_widelightbox]');
@@ -1480,7 +1511,7 @@ add_shortcode('yproject_votecontact_lightbox', 'yproject_shortcode_votecontact_l
 //->TB Liste investisseurs
 function yproject_shortcode_listinvestors_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('projects/single-project-investors.php',true);
+            locate_template('common/dashboard-project-investors.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
 	echo do_shortcode('[yproject_widelightbox id="listinvestors"]' .$content . '[/yproject_widelightbox]');
@@ -1490,9 +1521,19 @@ add_shortcode('yproject_listinvestors_lightbox', 'yproject_shortcode_listinvesto
 //->TB Passer à l'étape suivante
 function yproject_shortcode_gonextstep_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('projects/dashboard-next-step.php',true);
+            locate_template('common/dashboard-next-step-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
 	echo do_shortcode('[yproject_lightbox id="gonextstep"]' .$content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_gonextstep_lightbox', 'yproject_shortcode_gonextstep_lightbox');
+
+//->TB Envoi de mail 
+function yproject_shortcode_dashboardmail_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('common/dashboard-mail-lightbox.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="dashboardmail"]' .$content . '[/yproject_lightbox]');
+}
+add_shortcode('yproject_dashboardmail_lightbox', 'yproject_shortcode_dashboardmail_lightbox');

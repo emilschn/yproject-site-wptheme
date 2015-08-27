@@ -168,7 +168,7 @@ else {
 //*******************
 ?>
 			<div class="post_bottom_buttons mobile_hidden">
-				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->is_remaining_time() > 0) { ?> 
+				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->is_remaining_time()) { ?> 
 					<div id="invest-button">
 						<?php $page_invest = get_page_by_path('investir'); ?>
 						<?php if ( is_user_logged_in() ): ?>

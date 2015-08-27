@@ -81,30 +81,35 @@ YPUIFunctions = (function($) {
 			    });
 			}
 
+			//Interactions choix de contrepartie
 			if ($("#input_invest_amount_part").length > 0) {
+                            //Changement de montant
 			    $("#input_invest_amount_part").on( 'keyup change', function () {
+                                $("#validate_invest_amount_feedback").slideUp();
+                                $("#link_validate_invest_amount").slideDown();
 				YPUIFunctions.checkInvestInput();
 			    });
                             
+                            //Changement de contrepartie
                             if($("#reward-selector").length>0){
                                 $("#reward-selector input:checked").closest("li").addClass("selected");
                                 
                                 $("#reward-selector input").click(function() {
+                                    $("#validate_invest_amount_feedback").slideUp();
+                                    $("#link_validate_invest_amount").slideDown();
                                     YPUIFunctions.changeInvestInput();
                                     YPUIFunctions.checkInvestInput();
                                 });
                             }
-
+                            
+                            //Clic sur valider
 			    $("#link_validate_invest_amount").click(function() {
                                 YPUIFunctions.checkInvestInput();
+                                $("#link_validate_invest_amount").slideUp();
 				$("#validate_invest_amount_feedback").show();
 				$('html, body').animate({scrollTop: $('#link_validate_invest_amount').offset().top - $("#navigation").height()}, "slow"); 
 			    });
-
-			    $("#invest_form").submit(function() {
-				return YPUIFunctions.checkInvestInput();
-			    });
-			}
+                        }
 
 			if ($("#company_status").length > 0) {
 			    $("#company_status").change(function() { 
@@ -179,11 +184,11 @@ YPUIFunctions = (function($) {
 				}
 			}
 			if ($(".timeout-lightbox").length > 0) {
-				setTimeout(function() { $(".timeout-lightbox").hide(); }, 2000);
+				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, 2000);
 			}
 			
 			
-			if ($("#blog-archives form#add-news").length > 0) {
+			/*if ($("#blog-archives form#add-news").length > 0) {
 				$("#blog-archives #add-news-opener").click(function() {
 					if ($("#blog-archives form#add-news").is(":visible")) {
 						$("#blog-archives form#add-news").hide();
@@ -191,7 +196,8 @@ YPUIFunctions = (function($) {
 						$("#blog-archives form#add-news").show();
 					}
 				});
-			}
+			}*/
+                        
                         
                         //Si chargement données investisseurs/investissements nécessaire
                         if ($(".ajax-investments-load").length > 0) { 
@@ -255,6 +261,19 @@ YPUIFunctions = (function($) {
                             $("#innbdayvote").on( 'keyup change', function () {
                                 updateDate("innbdayvote","previewenddatevote");});
                         }
+                        
+                        //Formulaire envoi mail
+                        $("#jycrois-send-mail-selector").change(function(){
+                            if(this.checked){
+                                $("#voted-send-mail-selector").prop('disabled',true);
+                                $("#invested-send-mail-selector").prop('disabled',true);
+                                $("#voted-send-mail-selector").prop('checked',true);
+                                $("#invested-send-mail-selector").prop('checked',true);
+                            } else {
+                                $("#voted-send-mail-selector").prop('disabled',false);
+                                $("#invested-send-mail-selector").prop('disabled',false);
+                            }
+                        });                        
                         
                         //Gestion equipe depuis Tableau de bord
                         $(".project-manage-team").click(function(){
@@ -484,6 +503,13 @@ YPUIFunctions = (function($) {
                         });
                         $('.ajax-data-inv-loader-img').slideUp();
                         
+                        //Liste des ID pour l'envoi de mail
+                        if ($("#ajax-id-investors-load").length > 0) {
+                            $('#ajax-id-investors-load #img-investors').slideDown();
+                            $('#ajax-id-investors-load #invested-send-mail-selector').slideDown();
+                            list_id_inv = Object.keys(inv_data.investors_list).map(function (key) {return inv_data.investors_list[key];});
+                            $('#ajax-id-investors-load #invested-send-mail-list').val(list_id_inv);
+                        }
                         // Crée le tableau des investisseurs si besoin
                         if ($("#ajax-investors-load").length > 0) {
                             YPUIFunctions.getInvestorsTable(JSON.stringify(inv_data),campaign_id);
@@ -498,6 +524,7 @@ YPUIFunctions = (function($) {
                         if ($("#ajax-email-selector-load").length > 0) {
                             YPUIFunctions.getEmailSelector(JSON.stringify(inv_data),campaign_id); 
                         }
+                        
                     }).fail(function(){});
                 },               
                 
@@ -582,12 +609,9 @@ YPUIFunctions = (function($) {
                     $("#reward-selector li").removeClass("selected");
                     $("#reward-selector input:checked").closest("li").addClass("selected");
                     
-                    //Si le montant est insuffisant pour la contrepartie, l'augmenter
+                    //Ajuster le champ de montant choisi à la contrepartie selectionnee
                     var rewardSelectedAmount = parseInt($("#reward-selector input:checked~.reward-amount").text());
-                    
-                    if (parseInt($("#input_invest_amount").text()) < rewardSelectedAmount){
-                        $("#input_invest_amount_part").val(rewardSelectedAmount);
-                    }
+                    $("#input_invest_amount_part").val(rewardSelectedAmount);
                 },
                 
 		checkInvestInput: function() {
@@ -668,7 +692,7 @@ YPUIFunctions = (function($) {
 						campaign_id=$(this).attr('data-value');
 						$('.history-projects').each(function(){
 							if($(this).attr('data-value')===campaign_id){
-								$(this).find('.user-history-payments-list').show(400);
+								$(this).find('.user-history-payments-list').toggle(400);
 							}
 							else{
 								$(this).find('.user-history-payments-list').hide(400);
@@ -676,6 +700,34 @@ YPUIFunctions = (function($) {
 						});
 					});
 				});
+                                
+                                $(this).find('.user-subscribe-news input').each(function(){
+                                    $(this).click(function(){
+                                        checkbox = $(this);
+                                        
+                                        $(this).prop('disabled',true);
+                                        if(this.checked){
+                                            value = 1;
+                                        } else {
+                                            value = 0;
+                                        };
+                                        campaign_id = $(this).closest(".history-projects").data("value");
+                                        
+                                        $.ajax({
+                                            'type' : "POST",
+                                            'url' : ajax_object.ajax_url,
+                                            'context' : checkbox,
+                                            'data': { 
+                                                  'action':'update_subscription_mail',
+                                                  'subscribe' : value,
+                                                  'id_campaign' : campaign_id
+                                                },
+                                        }).done(function(){
+                                            console.log($(this));
+                                            $(this).prop('disabled',false);
+                                        });
+                                    });
+                                });
 			});
 		},
 		

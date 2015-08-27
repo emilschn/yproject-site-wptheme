@@ -17,6 +17,28 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 	//Afficher le nouvel article
 	header('Location: '.$_SERVER['REQUEST_URI']);
 }
+
+//Supprime un article (le place dans la corbeille de WP)
+if (isset($_GET['delete_post_id'])){
+    //Test pour vérifier que le post de blog appartient à la campagne
+    $category_slug = $campaign_post->ID . '-blog-' . $campaign_post->post_name;
+    $category_obj = get_category_by_slug($category_slug);
+    $posts_blog = get_posts(array('category'=>$category_obj->cat_ID));
+    $delete_post_id = ($_GET['delete_post_id']);
+    $post_belong_campaign = false;
+    foreach ($posts_blog as $post_blog) {
+        if ($post_blog->ID == $delete_post_id){
+            $post_belong_campaign = true;
+            $title = $post_blog->post_title;
+        }
+    }
+    if ($post_belong_campaign && $campaign->current_user_can_edit()){
+        wp_trash_post($delete_post_id);
+
+        //Rafraichit la liste des posts
+        header('Location: '.$_SERVER['REQUEST_URI']);
+    }
+}
 ?>
 
 <?php get_header(); ?>
@@ -27,45 +49,69 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 	<?php do_action( 'bp_before_archive' ); ?>
 
 	<div class="page" id="blog-archives" role="main">
-
 		<?php locate_template( array("projects/single-admin-bar.php"), true ); ?>
-
+                
 		<?php locate_template( array("projects/single-header.php"), true ); ?>
 
 		<div id="post_bottom_content" class="center margin-height">
 
 			<?php if ($can_modify): ?>
 
-				<h2><a href="javascript:void();" id="add-news-opener"><?php _e('Publier une actualit&eacute;', 'yproject'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" alt="signe plus"/></a></h2>
-
-				<form action="" method="post" enctype="multipart/form-data" id="add-news">
-
+				<h2><a class="expandator" data-target="add-news" id="add-news-opener"><?php _e('Publier une actualit&eacute;', 'yproject'); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" alt="signe plus"/></a></h2>
+                                
+                                <form action="" method="post" enctype="multipart/form-data" id="extendable-add-news" class="expandable 
+                                    <?php if(isset($_GET['new-topic']) || (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-preview-news')){echo 'default-expanded';}?>">
+                                    
+                                    <?php if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-preview-news') { ?>
+                                    <div class="preview">
+                                        <h3>Pr&eacute;visualisation de l'actu</h3>
+                                        <div class="preview-frame">
+                                            <div class="post-content">
+                                                <?php echo '<h3 class="posttitle">'.$_POST['posttitle'].'</h3>';
+                                                    echo '<p class="date">'.mysql2date( get_option( 'date_format' ), date_format(new DateTime(), 'Y-m-d H:i:s')).'</p>';
+                                                    echo '<div class="entry">'.$_POST['postcontent'].'</div>';?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php }?>
+                                    
 					<label for="posttitle"><?php _e( 'Titre', 'ypcf' ); ?></label>
-					<input type="text" name="posttitle" style="width: 250px;"><br />
+					<input type="text" name="posttitle" style="width: 250px;" 
+                                               value="<?php if (isset($_POST['posttitle'])){echo $_POST['posttitle'];}?>"><br />
 
 					<label for="postcontent"><?php _e( 'Contenu', 'ypcf' ); ?></label>
 					<?php
 					global $post_ID, $post;
 					$post_ID = $post = 0;
-					wp_editor( '', 'postcontent', 
+                                        
+                                        if (isset($_POST['postcontent'])){
+                                            $previous_content = $_POST['postcontent'];
+                                        } else {
+                                            $previous_content = '';
+                                        }
+                                        
+					wp_editor( $previous_content, 'postcontent', 
 						array(
 							'media_buttons' => true,
 							'quicktags'     => false,
 							'tinymce'       => array(
-							    'plugins'		    => 'paste',
+							    'plugins'		    => 'paste, wplink, textcolor',
 							    'paste_remove_styles'   => true
 							)
 						) 
 					);
 					?><br /><br />
 
-					<input type="hidden" name="action" value="ypcf-campaign-add-news" />
+					<label><input type="checkbox" name="send_mail" <?php if (isset($_POST['send_mail'])){echo 'checked';}?>/>
+                                            Envoyer par mail cette actualité aux utilisateurs qui croient au projet. <em>Les utilisateurs qui se sont désabonnés de vos actualités ne les recevront pas.</em></label> <br/><br/>
+					
+                                        <?php _e('Relayez cette actualit&eacute; sur vos r&eacute;seaux sociaux et pr&eacute;venez WE DO GOOD pour une communication d&eacute;cupl&eacute;e !', 'yproject'); ?><br /><br />
+					
+                                        <button type="submit" name="action" value="ypcf-campaign-preview-news" class="button"><?php _e('Prévisualisation', 'yproject'); ?></button>
+					<button type="submit" name="action" value="ypcf-campaign-add-news" class="button"><?php _e('Publier', 'yproject'); ?></button><br /><br />
 					<?php wp_nonce_field('ypcf-campaign-add-news'); ?>
-					
-					<?php _e('Relayez cette actualit&eacute; sur vos r&eacute;seaux sociaux et pr&eacute;venez WE DO GOOD pour une communication d&eacute;cupl&eacute;e !', 'yproject'); ?><br /><br />
-					
-					<input type="submit" value="<?php _e('Publier', 'yproject'); ?>" class="button" /><br /><br />
-					
+                                        <?php wp_nonce_field('ypcf-campaign-preview-news'); ?>
+                                        
 					<hr>
 
 				</form>

@@ -11,420 +11,96 @@ $campaign_id = $_GET['campaign_id'];
     <div class="padder">
         <div class="page" id="blog-single" role="main">
 
-            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-
-                    <?php require_once('projects/single-admin-bar.php'); ?>
-
-                    <div id="dashboard" class="center margin-height">
-                        <?php
+            <?php if (have_posts()) : while (have_posts()) : the_post();
+                require_once('projects/single-admin-bar.php'); ?>
+                <div id="dashboard" class="center margin-height">
+                <?php
+                if ($can_modify){
                         global $can_modify, $campaign_id;
                         $post_campaign = get_post($campaign_id);
                         $author_data = get_userdata($post_campaign->post_author);
                         $campaign = atcf_get_campaign($post_campaign);
                         $status = $campaign->campaign_status();
                         
-                        $page_guide = get_page_by_path('guide');
-                        $page_particular_terms = get_page_by_path('conditions-particulieres');
-
-                        $page_parameters = get_page_by_path('parametres-projet');       // Paramètres
-                        $page_add_news = get_page_by_path('ajouter-une-actu');          // Ajouter une actualité
-                        $page_manage_team = get_page_by_path('projet-gerer-equipe');    // Editer l'équipe
-                        $pages_stats_investments = get_page_by_path('statistiques-avancees-investissements');
-                        $pages_stats_votes = get_page_by_path('statistiques-avancees-votes');
-                        $pages_list_invest = get_page_by_path('liste-investisseurs');
-
-                        $category_slug = $post_campaign->ID . '-blog-' . $post_campaign->post_name;
-                        $category_obj = get_category_by_slug($category_slug);
-                        $category_link = (!empty($category_obj)) ? get_category_link($category_obj->cat_ID) : '';
-                        $news_link = esc_url($category_link);
-
-                        // Page statistiques avancees
-                        if (strtotime($post_campaign->post_date) < strtotime('2014-02')) {
-                            $pages_stats = get_page_by_path('vote');
-                        } else {
-                            $pages_stats = get_page_by_path('statistiques-avancees');
-                        }
+                        /*Import fonctions PHP des blocs*/
+                        locate_template( array("projects/dashboard-blocks/summary.php"), true );
+                        locate_template( array("projects/dashboard-blocks/stats.php"), true );
+                        locate_template( array("projects/dashboard-blocks/community.php"), true );
+                        locate_template( array("projects/dashboard-blocks/news.php"), true );
+                        locate_template( array("projects/dashboard-blocks/info.php"), true );
+                        locate_template( array("projects/dashboard-blocks/team.php"), true );
                         
-                        /******************************************************/
-                         
-                         /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
-                         if ($can_modify){
-                             /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
-                             if (isset($_POST['next_step'])&& ($_POST['next_step']==1 || $_POST['next_step']==2) && $campaign->can_go_next_step()){
- 
- 
-                                 
-                                 //Préparation -> Avant-premiere
-                                 if ($status=='preparing'){
-                                     if($_POST['next_step']==1){
-                                         $campaign->set_status('preview');
-                                         $campaign->set_validation_next_step(0);
-                                     //Préparation -> Vote
-                                     }
-                                 } //Avant-première -> Vote
-                                 if (($status=='preview')||(($status=='preparing')&&($_POST['next_step']==2))) {
-                                     if(ypcf_check_user_is_complete($campaign->post_author())&& isset($_POST['innbdayvote'])){
-                                        $vote_time = $_POST['innbdayvote'];
-                                        if(2<=$vote_time && $vote_time<=30){
-                                            //Fixe date fin de vote
-                                            $diffVoteDay = new DateInterval('P'.$vote_time.'D');
-                                            $VoteEndDate = (new DateTime())->add($diffVoteDay);
-                                            //$VoteEndDate->setTime(23,59);
-                                            $campaign->set_end_vote_date($VoteEndDate);     
-
-                                            $campaign->set_status('vote');
-                                            $campaign->set_validation_next_step(0);
-                                        }
-                                     }
-
-                                 } //Vote -> Collecte
-                                 else if ($status=='vote') {
-                                     if(isset($_POST['innbdaycollecte']) && isset($_POST['inendh']) && isset($_POST['inendm'])){
-                                        //Recupere nombre de jours et heure de fin de la collecte
-                                        $collecte_time = $_POST['innbdaycollecte'];
-                                        $collecte_fin_heure = $_POST['inendh'];
-                                        $collecte_fin_minute = $_POST['inendm'];
-                                        
-                                        $orga_done=false;
-                                        $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
-					$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-					if (isset($current_organisations) && count($current_organisations) > 0) {
-                                            $orga_done = true;
-					}
-                                         if( $orga_done
-                                                 &&$campaign->is_validated_by_vote() && $campaign->end_vote_remaining()<=0
-                                                 && 1<=$collecte_time && $collecte_time<=60
-                                                 && 0<=$collecte_fin_heure && $collecte_fin_heure<=23
-                                                 && 0<=$collecte_fin_minute && $collecte_fin_minute<=59){
-                                             //Fixe la date de fin de collecte
-                                             $diffCollectDay = new DateInterval('P'.$collecte_time.'D');
-                                             $CollectEndDate = (new DateTime())->add($diffCollectDay);
-                                             $CollectEndDate->setTime($collecte_fin_heure,$collecte_fin_minute);
-                                             $campaign->set_end_date($CollectEndDate);
-                                             $campaign->set_begin_collecte_date(new DateTime());
-
-                                             $campaign->set_status('collecte');
-                                             $campaign->set_validation_next_step(0);
-                                         }
-                                     }
-                                 }
-                                 $status = $campaign->campaign_status();
-                             }
-                         }
-                         
-                         
-                         /******************************************************/
+                        /*Données de statistiques */
+                        block_stats_data();
+                        /*Données de communauté*/
+                        block_community_data();
                         
-                        /**************Stats Vues *********************/
-                        $stats_views = 0;
-                        $stats_views_today = 0;
-                        if (function_exists('stats_get_csv')) {
-                                global $wpdb;
-                                $stats_views = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 365 ) );
-                                $stats_views_today = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 1 ) );
-                        }
+                        /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
+                        check_next_step();
+                        /*Vérifie si l'utilisateur essaie d'envoyer un mail **/
+                        check_send_mail();
+                        /*Affiche s'il le faut la LB de bienvenue*/
+                        print_welcome_lightbox(); 
                         
-                        
-                        /**************Donnees communaute**************/
-                        //Recuperation du nombre de j'y crois
-                            $nb_jcrois = $campaign->get_jycrois_nb();
-                        //Recuperation du nombre de votants
-                            $nb_votes = $campaign->nb_voters();
-                        //Recuperation du nombre d'investisseurs
-                            $nb_invests = $campaign->backers_count();
-                        
-                        //Recuperation donnees de votes
-                        locate_template( array("requests/votes.php"), true );
-                        $vote_results = wdg_get_project_vote_results($campaign_id);
-
+                        /*Charge les lightbox en début de page pour éviter les problèmes de CSS*/
+                        block_summary_lightbox();
+                        block_stats_lightbox();
+                        block_community_lightbox();
                         ?>
 
-                        <?php if ($can_modify): ?>
+                        <div class="part-title-separator">
+                            <span class="part-title"><?php echo $post_campaign->post_title; ?></span>
+                        </div>
+                        
+                        <div class="blocks-list">
                             <?php 
-                            //Lightbox de bienvenue à la première visite, Cache la LB pour les admins
-                                if(!$campaign->get_has_been_welcomed() && !current_user_can('manage_options')){
-                                        ob_start();
-                                        locate_template('common/dashboardwelcome-lightbox.php',true);
-                                        $content = ob_get_contents();
-                                        ob_end_clean();
-                                        ?>	
-                                        <div id="lightbox-welcome" class="wdg-lightbox">
-                                            <div class="wdg-lightbox-padder">
-                                                <?php echo $content; ?>
-                                            </div>
-                                        </div>
-                                <?php 
-                                    $campaign->set_has_been_welcomed(1);
-                                }?>
-                        
-                            <div class="part-title-separator">
-                                <span class="part-title"><?php echo $post_campaign->post_title; ?></span>
-                            </div>
-                            <div class="blocks-list">
-                                <div id="block-summary" >
-                                    <div class="current-step">
-                                        <img src="<?php echo $stylesheet_directory_uri; ?>/images/frise-preview.png" alt="" /><br>
-                                        <span <?php if($status=='preparing'){echo 'id="current"';} ?>>Pr&eacute;paration </span>
-                                        <span <?php if($status=='preview'){echo 'id="current"';} ?>>Avant-premi&egrave;re </span>
-                                        <span <?php if($status=='vote'){echo 'id="current"';} ?>>Vote </span>
-                                        <span <?php if($status=='collecte'){echo 'id="current"';} ?>>Collecte </span>
-                                        <span <?php if($status=='funded'){echo 'id="current"';} ?>>R&eacute;alisation</span>
-                                    </div>
-                                    
-                                    <div class="list-button">
-                                        <?php if ($status=='preparing'||$status=='preview'||$status=='vote'){?>
-                                            <?php if (current_user_can('manage_options')) {
-                                                //Visible uniquement par admins : autoriser le PP à passer à l'étape suivante
-                                                if(isset($_GET['validate_next_step'])){
-                                                    $campaign->set_validation_next_step($_GET['validate_next_step']);
-                                                }
-                                                if($campaign->can_go_next_step()){?>
-                                                    <a href="?campaign_id=<?php echo $campaign_id?>&validate_next_step=0" class="button">&cross; Ne plus autoriser &agrave; passer &agrave; l'&eacute;tape suivante</a>
-                                                <?php } else {?>
-                                                    <a href="?campaign_id=<?php echo $campaign_id?>&validate_next_step=1" class="button">&check; Autoriser &agrave; passer &agrave; l'&eacute;tape suivante</a>
-                                                <?php }
-                                            }?>
-                                            <a href="#gonextstep" class="wdg-button-lightbox-open button" data-lightbox="gonextstep">&check; Passer &agrave; l'&eacute;tape suivante</a>
-                                            <?php /*Lightbox passage à l'étape suivante*/ echo do_shortcode('[yproject_gonextstep_lightbox]');
-                                        }?>
-                                            
-                                        <a href="<?php echo get_permalink($page_parameters->ID) . $campaign_id_param . $params_partial; ?>" class="button"><?php _e('&#128295; Param&egrave;tres', 'yproject'); ?></a>
-                                    </div>
-                                </div>
-                                <br/>
-                                
-                                <div id="block-stats" class="large-block">
-                                    <div class="head">Statistiques</div>
-                                    <div class="body">
-                                        
-                                        <?php if($status=='preview'){ ?>
-                                            <div id="stats-prepare">
-                                                <div class="half-card">
-                                                    <div class="stat-little-number-top">Votre projet a &eacute;t&eacute; vu</div>
-                                                    <div class="stat-big-number"><?php echo $stats_views[0]['views']; 
-                                                        if ($stats_views[0]['views']==null){echo "-";}?></div>
-                                                    <div class="stat-little-number">fois au total</div>
-                                                </div>
-                                                <div class="half-card">
-                                                    <div class="stat-little-number-top">Dont</div>
-                                                    <div class="stat-big-number"><?php echo $stats_views_today[0]['views'];
-                                                        if ($stats_views_today[0]['views']==null){echo "-";}?></div>
-                                                    <div class="stat-little-number">Vues aujourd'hui</div>
-                                                </div>
-                                            </div>
-                                        
-                                        <?php }
-                                        else if($status=='vote'){ ?>
-                                            <div id="stats-vote">
-                                                <div class="quart-card">
-                                                    <div class="stat-big-number"><?php echo $nb_votes?></div>
-                                                    <div class="stat-little-number">sur <?php echo ATCF_Campaign::$voters_min_required?> requis</div>
-                                                    <div class="details-card">
-                                                    <strong><?php echo $nb_votes?></strong> personne<?php if($nb_votes>1){echo 's ont';}else{echo ' a';} echo ' voté';?>
-                                                    </div>
-                                                </div>
-                                                <div class="quart-card">
-                                                    <canvas id="canvas-pie-block" width="160" height="180"></canvas><br/>
-                                                    <div class="details-card">
-                                                        Valid&eacute; par <strong><?php echo $vote_results['percent_project_validated']?>&percnt;</strong> des votants
-                                                    </div>
-                                                </div>
-                                                <div class="quart-card">
-                                                    <div class="stat-big-number"><?php echo $vote_results['sum_invest_ready'].'&euro;'?></div>
-                                                    <div class="stat-little-number">sur <?php echo $campaign->vote_invest_ready_min_required() ?> &euro; recommand&eacute;s</div>
-                                                    <div class="details-card">
-                                                        <strong><?php echo $vote_results['sum_invest_ready']?></strong>&euro; de promesses d'investissement
-                                                    </div>
-                                                </div>
-                                                <div class="quart-card">
-                                                    <div class="stat-big-number"><?php echo $campaign->time_remaining_str();?><br/></div>
-                                                    <div class="stat-little-number">Avant la fin du vote</div>
-                                                    <div class="details-card"><?php echo $campaign->time_remaining_fullstr()?></div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
+                                print_block_summary();
+                            ?>
+                            <br/>
 
-                                        <?php } 
-                                        else if($status=='collecte'){ ?>
-                                            <div id="stats-invest">
-                                                <div class="quart-card">
-                                                    <div class="stat-big-number"><?php echo $campaign->current_amount()?></div>
-                                                    <div class="stat-little-number">sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro; requis</div>
-                                                    <div class="details-card">
-                                                        <strong><?php echo $campaign->current_amount()?></strong> investis par 
-                                                        <strong><?php echo $nb_invests?></strong> personne<?php if($nb_invests>1){echo 's';}?></p>
-                                                    </div>
-                                                </div>
-                                                <div class="half-card">
-                                                    <div class="ajax-investments-load" id="ajax-invests-graph-load" style="text-align: center;" data-value="<?php echo $campaign->ID?>">
-                                                        <div id="ajax-graph-loader-img" >
-                                                            <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />
-                                                            <p style="font-style:italic">Chargement des donn&eacute;es d'investissement,<br/>cela peut prendre un peu de temps</p></div>
-                                                    </div>
-                                                    <canvas id="canvas-line-block" width="420" height="200" style="display:none"></canvas>
-                                                </div>
-                                                <div class="quart-card">
-                                                    <div class="stat-big-number"><?php echo $campaign->time_remaining_str();?><br/></div>
-                                                    <div class="stat-little-number">Avant la fin de collecte</div>
-                                                    <div class="details-card"><?php echo $campaign->time_remaining_fullstr()?></div>
-                                                </div>
-                                            </div>
+                            <?php
+                                print_block_stats();
+                            ?>
 
-                                        <?php } 
-                                        else if($status=='funded'){ ?>
-                                            <div id="stats-funded">
-                                                <div class="half-card">
-                                                    <div class="stat-big-number"><?php echo $campaign->current_amount()?></div>
-                                                    <div class="stat-little-number">récoltés sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro;</div>
-                                                    <div class="details-card">
-                                                        <strong><?php echo $campaign->current_amount()?></strong> investis par 
-                                                        <strong><?php echo $nb_invests?></strong> personne<?php if($nb_invests>1){echo 's';}?></p>
-                                                    </div>
-                                                </div>
-                                                <div class="half-card">
-                                                    <div class="ajax-investments-load" id="ajax-invests-graph-load" style="text-align: center;" data-value="<?php echo $campaign->ID?>">
-                                                        <div id="ajax-graph-loader-img" >
-                                                            <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />
-                                                            <p style="font-style:italic">Chargement des donn&eacute;es d'investissement,<br/>cela peut prendre un peu de temps</p></div>
-                                                    </div>
-                                                    <canvas id="canvas-line-block" width="420" height="200" style="display:none"></canvas>
-                                                </div>
-                                            </div>
-                                        <?php } ?>
-                                        <div class="clear"></div>
-                                        
-                                        <div class="list-button">
-                                            <a href="#statsadvanced" class="wdg-button-lightbox-open button" data-lightbox="statsadvanced">&#x1f50e;  Statistiques d&eacute;taill&eacute;s</a>
-                                            <?php echo do_shortcode('[yproject_statsadvanced_lightbox]'); ?>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                </div>
-                                
-                                <div id="col-left">
-                                <div id ="block-community" class="block">
-                                    <div class="head">Communaut&eacute;</div>
-                                    <div class="body" style="text-align:center">
-                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png"/><br/>
-                                            <strong><?php echo $nb_jcrois?></strong> y croi<?php if($nb_jcrois>1){echo 'en';}?>t</div>
-                                        <a href="#votecontact" class="wdg-button-lightbox-open" data-lightbox="votecontact">
-                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png"/><br/>
-                                            <strong><?php echo $nb_votes?></strong> <?php if($nb_votes>1){echo 'ont';} else {echo 'a';}?> vot&eacute;
-                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus"/></div>
-                                            </a>
-                                                <?php echo do_shortcode('[yproject_votecontact_lightbox]'); ?>
-                                        <a href="#listinvestors" class="wdg-button-lightbox-open" data-lightbox="listinvestors">
-                                        <div class="card-com"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png"/><br/>
-                                            <strong><?php echo $nb_invests?></strong> <?php if($nb_invests>1){echo 'ont';} else {echo 'a';}?> <?php echo $campaign->funding_type_vocabulary()['investor_verb'];?>
-                                            <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus"/></div>
-                                            </a>
-                                                <?php echo do_shortcode('[yproject_listinvestors_lightbox]'); ?>
-                                    <div class="clear"></div>
-                                    <div class="list-button">
-                                        <a href="<?php echo $news_link; ?>" class="button"><?php _e('&#9999 Publier une actualit&eacute;', 'yproject'); ?></a>
-                                    </div>
-                                    </div>
-                                </div>
-                                
-                                <div id="block-info" class="block">
-                                    <div class="head"><?php _e('Informations','yproject'); ?></div>
-                                    <div class="body">
-                                        <ul>
-                                        <a href="<?php echo get_permalink($page_particular_terms->ID); ?>" target="_blank"><li><?php _e('Conditions particuli&egrave;res', 'yproject'); ?></li></a>
+                            <div id="col-left">
+                            <?php
+                                print_block_community();
+                            ?>
 
-                                        <a href="<?php echo get_permalink($page_guide->ID); ?>" target="_blank"><li><?php _e('Guide de campagne', 'yproject'); ?></li></a>
-                                        </ul>
-                                        <div class="list-button">
-                                            <?php if ($campaign->google_doc() != ''): ?>
-                                                <a href="<?php echo $campaign->google_doc(); ?>/edit" target="_blank" class="button"><?php _e('Ouvrir le document de gestion de campagne', 'yproject'); ?></a>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                </div>
-                                
-                                <div id="col-right">
-                                <div id="block-team" class="block" data-campaign="<?php echo $campaign->ID?>">
-                                    <div class="head">&Eacute;quipe</div>
-                                    <div class="body" style="text-align:center">
-                                        <h2><?php _e('Administrateur du projet', 'yproject'); ?></h2>
-                                        <?php echo $author_data->first_name . ' ' . $author_data->last_name.'<br/>'.
-                                                bp_core_get_userlink($author_data->ID)?>
-                                        
-                                        <h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
-                                        <?php 
-                                                ypcf_debug_log('template-project-dashboard >> ' . $_GET['campaign_id']);
-                                                $project_api_id = BoppLibHelpers::get_api_project_id($_GET['campaign_id']);
-                                                if (isset($project_api_id)) $team_member_list = BoppLib::get_project_members_by_role($project_api_id, BoppLibHelpers::$project_team_member_role['slug']);
-                                                if (count($team_member_list) > 0):
-                                        ?>
-                                                <ul id="team-list">
-                                        <?php foreach ($team_member_list as $team_member): ?>
-                                                    <li>
-                                                        <?php echo $team_member->user_name . ' ' . $team_member->user_surname . ' (' . bp_core_get_userlink($team_member->wp_user_id).')'; ?>
-                                                        <a class="project-manage-team button" data-action="yproject-remove-member" data-user="<?php echo $team_member->wp_user_id; ?>">x</a>
-                                                    </li>
-                                        <?php endforeach; ?>
-                                                </ul>
-                                        <?php	
-                                                else:
-                                                        _e('Aucun membre dans l&apos;&eacute;quipe pour l&apos;instant.', 'yproject');
-                                                endif;
-                                        ?>
-                                        <input type="text" id="new_team_member_string" style="width: 295px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
-                                        <a class="project-manage-team button" data-action="yproject-add-member">Ajouter</a>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="clear"></div>
+                            <?php
+                                print_block_news();
+                            ?>
+
+                            <?php
+                                print_block_info();
+                            ?>
+
                             </div>
 
-                            <?php if ($campaign->google_doc() != ''): ?>
-                                <div class="google-doc">
-                                    <?php if (strpos('spreadsheet', $campaign->google_doc()) !== FALSE) : ?>
-                                        <iframe src="<?php echo $campaign->google_doc(); ?>/edit?usp=sharing&embed=true" width="100%" height="800"></iframe>
-                                    <?php else : ?>
-                                        <iframe src="<?php echo $campaign->google_doc(); ?>/pub?embedded=true"></iframe>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endif; ?>
-                        
+                            <div id="col-right">
+                            <?php
+                                print_block_team();
+                            ?>
+                            </div>
                             <div class="clear"></div>
+                        </div>
 
-                            <script type="text/javascript">
-                            jQuery(document).ready( function($) {
+                        <?php if ($campaign->google_doc() != ''){ ?>
+                            <div class="google-doc">
+                                <?php if (strpos('spreadsheet', $campaign->google_doc()) !== FALSE) : ?>
+                                    <iframe src="<?php echo $campaign->google_doc(); ?>/edit?usp=sharing&embed=true" width="100%" height="800"></iframe>
+                                <?php else : ?>
+                                    <iframe src="<?php echo $campaign->google_doc(); ?>/pub?embedded=true"></iframe>
+                                <?php endif; ?>
+                            </div>
+                        <?php } ?>
 
-                                <?php if($status=='vote'){ ?>
-                                    var ctxPie = $("#canvas-pie-block").get(0).getContext("2d");
-                                    var dataPie = [
-                                        {value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "Oui"}, 
-                                        {value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: "Non"}
-                                    ];
-                                    var optionsPie = {
-                                        legend: true,
-                                        legendBorders: false,
-                                        inGraphDataShow : true,
-                                        inGraphDataTmpl : "<%=v6%>%",
-                                        inGraphDataFontFamily : "BebasNeue",
-                                        inGraphDataFontSize : 25,
-                                        inGraphDataFontColor : "#FFF",
-                                        inGraphDataAnglePosition : 2,
-                                        inGraphDataRadiusPosition : 2,
-                                        inGraphDataMinimumAngle : 30,
-                                        inGraphDataAlign : "center",
-                                        inGraphDataVAlign : "middle"
-                                    };
-                                    var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
+                        <div class="clear"></div>
+                        
+                <?php } else { ?>
+                        <?php _e('Vous n&apos;avez pas la permission pour voir cette page.', 'yproject'); ?>
 
-                                <?php } ?>
-                            });
-                            </script>
-                        <?php else: ?>
-
-                            <?php _e('Vous n&apos;avez pas la permission pour voir cette page.', 'yproject'); ?>
-
-                        <?php endif; ?>
+                <?php } ?>
 
                     </div>
 
