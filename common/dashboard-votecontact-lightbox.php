@@ -4,16 +4,18 @@
     $table_name = $wpdb->prefix . "ypcf_project_votes";
     $campaign_id = $_GET['campaign_id'];
     
-    $list_user_voters = $wpdb->get_results( "SELECT user_id, invest_sum, date FROM ".$table_name." WHERE post_id = ".$campaign_id." AND validate_project = 1" );
+    $list_user_voters = $wpdb->get_results( "SELECT user_id, invest_sum, date, validate_project FROM ".$table_name." WHERE post_id = ".$campaign_id );
     
     $colonnes = array('Utilisateur', 
         'Nom', 
         'Prénom', 
         'Ville',
-        'Montant promis',
+        'Adresse mail',
+        'Montant envisagé',
+        'A valid&eacute; le projet',
         'Date du vote');
 ?>
-<em>Seules les personnes ayant voté "Oui" sont affich&eacute;es.</em><br/><br/>
+
 <em>Si vous envoyez un mail group&eacute; aux votants, pensez &agrave; les mettre dans le champ CCI, pour qu&apos;ils n&apos;aient pas acc&egrave;s aux adresses des autres.</em><br /><br />
 
 
@@ -31,7 +33,20 @@
     <tbody>
 	<?php
 	foreach ( $list_user_voters as $item ) {
-            $user_data = get_userdata($item->user_id);?>
+            $user_data = get_userdata($item->user_id);
+            $validate = "";
+            $invest_sum = "";
+            switch ($item->validate_project) {
+                    case '0' : 
+                        $validate = "Non";
+                        break;
+                    case '1':
+                        $validate = "Oui";
+                        $invest_sum = $item->invest_sum;
+                        break;
+                        
+            }
+            ?>
             <tr>
             <?php
                 $colonnesres = array(
@@ -39,7 +54,9 @@
                     $user_data->last_name,
                     $user_data->first_name,
                     $user_data->user_city,
-                    $item->invest_sum,
+                    $user_data->user_email,
+                    $invest_sum,
+                    $validate,
                     $item->date
                 );
 
