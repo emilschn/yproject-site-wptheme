@@ -39,7 +39,6 @@
                     $user_data->last_name,
                     $user_data->first_name,
                     $user_data->user_city,
-                    $user_data->user_email,
                     $item->invest_sum,
                     $item->date
                 );
