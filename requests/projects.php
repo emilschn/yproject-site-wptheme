@@ -1,21 +1,21 @@
 <?php
-function query_projects_preview($nb=0){
-	return queryHomeProjects($nb,'preview');
+function query_projects_preview($nb = 0, $client = ''){
+	return queryHomeProjects($nb, 'preview', 'asc', $client);
 }
-function query_projects_vote($nb=0){
-	return queryHomeProjects($nb,'vote','desc');
+function query_projects_vote($nb = 0, $client = ''){
+	return queryHomeProjects($nb, 'vote', 'desc', $client);
 }
-function query_projects_collecte($nb=0){
-	return queryHomeProjects($nb,'collecte');
+function query_projects_collecte($nb = 0, $client = ''){
+	return queryHomeProjects($nb, 'collecte', 'asc', $client);
 }
-function query_projects_funded($nb=0){
-	return queryFinishedProjects($nb,'funded');
+function query_projects_funded($nb = 0, $client = ''){
+	return queryFinishedProjects($nb, 'funded', 'asc', $client);
 }
-function query_projects_archive($nb=0){
-	return queryFinishedProjects($nb,'archive');
+function query_projects_archive($nb = 0, $client = ''){
+	return queryFinishedProjects($nb, 'archive', 'asc', $client);
 }
 
-function queryHomeProjects($nb,$type,$order = 'asc') {
+function queryHomeProjects($nb, $type, $order, $client) {
 	$query_options = array(
 		'showposts' => $nb,
 		'post_type' => 'download',
@@ -39,7 +39,7 @@ function queryHomeProjects($nb,$type,$order = 'asc') {
 
 }
 
-function queryFinishedProjects($nb,$type) {
+function queryFinishedProjects($nb, $type, $client) {
 	$query_options = array(
 		'showposts' => $nb,
 		'post_type' => 'download',

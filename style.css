@@ -3575,3 +3575,17 @@ ul.invest-mean-payment li img {
    font-family: "BebasNeue";
    font-size: 35px;
 }
+
+/*******************************************************************************
+* THEME PHOTOREPORTER
+*******************************************************************************/
+#content.theme-photoreporter .client-header { margin-top: -14px; height: 340px; }
+#content.theme-photoreporter .client-header .center { margin-left: 50%; }
+#content.theme-photoreporter .home-large-project h2 a, .home-large-project h2 a:hover { color: #189AB4; }
+#content.theme-photoreporter .home-large-project h2 img { display: none; }
+#content.theme-photoreporter .home-large-project .description-zone .description-discover,
+#content.theme-photoreporter .home-small-project.status-vote .description-discover { background-color: #189AB4; }
+#content.theme-photoreporter nav.menu-client { width: 100%; height: 40px; background-color: #189AB4; color: #FFF; padding-top: 20px; text-transform: uppercase; }
+#content.theme-photoreporter nav.menu-client a { color: #FFF; text-decoration: none; padding: 15px; }
+#content.theme-photoreporter nav.menu-client a img { vertical-align: middle; }
+#content.theme-photoreporter nav.menu-client strong { padding: 15px; }

@@ -13,25 +13,39 @@ YPUIFunctions = (function($) {
 			YPUIFunctions.refreshProjectList();
 			
 			$(document).scroll(function() {
-				if ($(document).scrollTop() > 110) {
-					$(".page_item_logo a").children().eq(0).hide();
-					$(".page_item_logo a").children().eq(1).show();
-					$(".page_item_logo").height(51);
-					$("#nav").height(50);
-					$("#nav > li").css("paddingTop", 20);
-					$("#nav > li").height(30);
-					$("#nav #menu_item_facebook, #nav #menu_item_twitter").css("paddingTop", 17);
-					$(".page_item_inverted").css("paddingBottom", 0);
+				if ($(".menu-client").length > 0) {
+					if ($(document).scrollTop() > 110) {
+						$("#nav").hide();
+						$(".menu-client").css("position", "fixed");
+						$(".menu-client").css("top", 0);
+					} else {
+						$("#nav").show();
+						$(".menu-client").css("position", "relative");
+						
+					}
+					
+					
 				} else {
-					$(".page_item_logo a").children().eq(0).show();
-					$(".page_item_logo a").children().eq(1).hide();
-					$(".page_item_logo").height(100);
-					$("#nav").height(100);
-					$("#nav > li").css("paddingTop", 50);
-					$("#nav > li").height(50);
-					$("#nav #menu_item_facebook, #nav #menu_item_twitter").css("paddingTop", 47);
-					$(".page_item_logo").css("paddingTop", 0);
-					$(".page_item_inverted").css("paddingBottom", 7);
+					if ($(document).scrollTop() > 110) {
+						$(".page_item_logo a").children().eq(0).hide();
+						$(".page_item_logo a").children().eq(1).show();
+						$(".page_item_logo").height(51);
+						$("#nav").height(50);
+						$("#nav > li").css("paddingTop", 20);
+						$("#nav > li").height(30);
+						$("#nav #menu_item_facebook, #nav #menu_item_twitter").css("paddingTop", 17);
+						$(".page_item_inverted").css("paddingBottom", 0);
+					} else {
+						$(".page_item_logo a").children().eq(0).show();
+						$(".page_item_logo a").children().eq(1).hide();
+						$(".page_item_logo").height(100);
+						$("#nav").height(100);
+						$("#nav > li").css("paddingTop", 50);
+						$("#nav > li").height(50);
+						$("#nav #menu_item_facebook, #nav #menu_item_twitter").css("paddingTop", 47);
+						$(".page_item_logo").css("paddingTop", 0);
+						$(".page_item_inverted").css("paddingBottom", 7);
+					}
 				}
 				
 				if ($(document).scrollTop() > 250) {
