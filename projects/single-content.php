@@ -186,7 +186,7 @@ else {
 		<?php } ?>
 			
 		<div class="project-rewards">
-			<span>En &eacute;change de votre <?php if ($campaign->funding_type() == 'fundingdonation') { ?>soutien<?php } else { ?>investissement<?php } ?></span>
+			<span>En &eacute;change de votre <?php echo $campaign->funding_type_vocabulary()['investor_action'];?></span>
 		</div>
 			
 		<div class="project-rewards">
@@ -354,13 +354,13 @@ else {
 	<?php if ($vote_status == 'collecte'): ?>
 	<div class="reward-zone">
 		<div class="project-rewards">
-			<span>En &eacute;change de votre investissement</span>
+			<span>En &eacute;change de votre <?php echo $campaign->funding_type_vocabulary()['investor_action'];?></span>
 		</div>
 			
 		<div class="project-rewards">
 			<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?>
 			Vous recevrez une part de capital de cette entreprise.
-			<?php else: ?>
+			<?php elseif ($campaign->funding_type() == 'fundingproject') : ?>
 			Vous recevrez une partie du chiffre d'affaires de ce projet.
 			<?php endif; ?>
 		</div>
@@ -371,7 +371,13 @@ else {
 		
 		<div id="invest-button">
 			<?php $page_invest = get_page_by_path('investir'); ?>
-			<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1" class="description-discover">Investir sur ce projet</a>
+			<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1" class="description-discover">
+                            <?php if (($campaign->funding_type() == 'fundingdevelopment')||($campaign->funding_type() == 'fundingproject')): ?>
+                            Investir sur ce projet
+                            <?php elseif ($campaign->funding_type() == 'fundingdonation') : ?>
+                            Soutenir ce projet
+                            <?php endif; ?>
+                            </a>
 		</div>
 	</div>
 	<?php endif; ?>
