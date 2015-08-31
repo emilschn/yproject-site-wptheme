@@ -54,25 +54,14 @@
 		<?php wp_head(); ?>
 
 		<!-- Meta spécifiques à Facebook -->
-		<meta property="og:title" content="WEDOGOOD<?php 
-                    if ($is_campaign_page === true) {
-			    echo " : ".$campaign->data->post_title; 
-                    } 
-                    ?>" />
+		<meta property="og:title" content="WEDOGOOD<?php if ($is_campaign_page === true) { echo " : ".$campaign->data->post_title; } ?>" />
 		<meta property="og:description" content="<?php 
-                    if($is_campaign_page === true){
-			    echo $campaign->subtitle();
+                    if ($is_campaign_page === true) {
+			    echo ($campaign->subtitle() != '') ? $campaign->subtitle() : $campaign->data->post_title;
                     } else {
-			    echo "Plateforme d'investissement participatif a impact positif";
-                    }
-                    ?>" />
-                <?php 
-                    if($is_campaign_page === true){
-			$imageFacebook = $campaign->get_home_picture_src();
-                    } else {
-			$imageFacebook = $stylesheet_directory_uri .'/images/logo_entier.jpg';	
-                    }
-		?> 
+			    echo "Plateforme d'investissement participatif à impact positif";
+                    } ?>" />
+                <?php $imageFacebook = ($is_campaign_page === true) ? $campaign->get_home_picture_src() : $stylesheet_directory_uri .'/images/logo_entier.jpg'; ?> 
 		<meta property="og:image" content="<?php echo $imageFacebook ?>" />
 		<meta property="og:image:secure_url" content="<?php echo $imageFacebook ?>" />
 		<meta property="og:image:type" content="image/jpeg" />
