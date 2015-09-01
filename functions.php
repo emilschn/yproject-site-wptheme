@@ -545,34 +545,33 @@ function print_user_projects(){
 				$downloads = edd_get_payment_meta_downloads($post->ID); 
 				$download_id = '';
 				if (!is_array($downloads[0])){
-				$download_id = $downloads[0];
-				$post_camp = get_post($download_id);
-				$campaign = atcf_get_campaign($post_camp);
-			  	$payment_status = ypcf_get_updated_payment_status($post->ID);
-				$contractid = ypcf_get_signsquidcontractid_from_invest($post->ID);
-				$signsquid_infos = signsquid_get_contract_infos_complete($contractid);
-				$signsquid_status = ypcf_get_signsquidstatus_from_infos($signsquid_infos, edd_get_payment_amount( $post->ID ));
-				$payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
+				    $download_id = $downloads[0];
+				    $post_camp = get_post($download_id);
+				    $campaign = atcf_get_campaign($post_camp);
+				    ypcf_get_updated_payment_status($post->ID);
+				    $signsquid_contract = new SignsquidContract($post->ID);
+				    $payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
 
-				$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
-				$group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-				$is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
-				$group_link = '';
-				if ($group_exists && $is_user_group_member){
-					$group_obj = groups_get_group(array('group_id' => $investors_group_id));
-					$group_link = bp_get_group_permalink($group_obj);
-				}
-				
-				//Infos relatives au projet
-				$user_projects[$campaign->ID]['ID'] = $campaign->ID;
-				//Infos relatives à l'investissement de l'utilisateur.
-				$user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_infos'] = $signsquid_infos;
-				$user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status'] = $signsquid_status;
-				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_date'] = $payment_date;
-				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount'] = edd_get_payment_amount( $post->ID );
-				$user_projects[$campaign->ID]['payments'][$post->ID]['payment_status'] = edd_get_payment_status( $post, true );
-				//Lien vers le groupe d'investisseur
-				$user_projects[$campaign->ID]['group_link']=$group_link;
+				    $investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
+				    $group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
+				    $is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
+				    $group_link = '';
+				    if ($group_exists && $is_user_group_member){
+					    $group_obj = groups_get_group(array('group_id' => $investors_group_id));
+					    $group_link = bp_get_group_permalink($group_obj);
+				    }
+
+				    //Infos relatives au projet
+				    $user_projects[$campaign->ID]['ID'] = $campaign->ID;
+				    //Infos relatives à l'investissement de l'utilisateur
+				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_contract_id'] = $signsquid_contract->get_contract_id();
+				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status'] = $signsquid_contract->get_status_code();
+				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status_str'] = $signsquid_contract->get_status_str();
+				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_date'] = $payment_date;
+				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount'] = edd_get_payment_amount( $post->ID );
+				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_status'] = edd_get_payment_status( $post, true );
+				    //Lien vers le groupe d'investisseur
+				    $user_projects[$campaign->ID]['group_link']=$group_link;
 				}
 			endforeach;
 
@@ -724,18 +723,18 @@ function print_user_projects(){
 										<?php echo $payment['payment_status']; ?>
 									</td>
 									<td class="user-payment-item user-payment-signsquid-status">
-										<?php echo $payment['signsquid_status']; ?>
+										<?php echo $payment['signsquid_status_str']; ?>
 									</td>
 
 									<?php
 									//Boutons pour Annuler l'investissement | Recevoir le code à nouveau
 									//Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
-									if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && is_object($payment['signsquid_infos']) && $payment['signsquid_status'] != 'Agreed') :
+									if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && $payment['signsquid_status'] != 'Agreed') :
 									?>
 									<td style="width: 220px;">
-										<?php if ($payment['signsquid_infos'] != '' && is_object($payment['signsquid_infos'])): ?>
+										<?php if (!empty($payment['signsquid_contract_id'])): ?>
 											<?php $page_my_investments = get_page_by_path('mes-investissements'); ?>
-										<a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $payment_id; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
+											<a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $payment_id; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
 										<?php endif; ?>
 										
 										<?php $page_cancel_invest = get_page_by_path('annuler-un-investissement'); ?>
