@@ -461,12 +461,18 @@ class YPProjectLib {
 
 				//On parcourt la liste des investisseurs, on détermine la proportion, on enlève 1.80% en charges, et on fait un transfert sur le compte utilisateur
 				$total_amount = $campaign->current_amount(FALSE);
-				$roi_amount = $contribution_obj->Amount / 100;
+				$roi_amount = $contribution_obj->Amount / 100; //100
 				$investments_list = $campaign->payments_data(TRUE);
 				foreach ($investments_list as $investment_item) {
-				    $investor_proportion = $investment_item['amount'] / $total_amount;
-				    $investor_proportion_amount = floor($roi_amount * $investor_proportion * 100) / 100;
-				    $fees = floor($investor_proportion_amount * YP_ROI_FEES / 100);
+				    //Calcul de la part de l'investisseur dans le total
+				    $investor_proportion = $investment_item['amount'] / $total_amount; //0.105
+				    //Calcul du montant à récupérer en roi
+				    $investor_proportion_amount = floor($roi_amount * $investor_proportion * 100) / 100; //10.50
+				    //Calcul de la commission sur le roi de l'utilisateur
+				    $fees = $investor_proportion_amount * YP_ROI_FEES / 100; //10.50 * 1.8 / 100 = 0.189
+				    //Et arrondi
+				    $fees = round($fees * 100) / 100; //0.189 * 100 = 18.9 = 19 = 0.19
+				    //Reste à verser pour l'investisseur
 				    $investor_proportion_amount_remaining = $investor_proportion_amount - $fees;
 				    //Transfert vers utilisateur
 				    ypcf_mangopay_transfer_user_to_user($current_organisation->organisation_wpref, $investment_item['user'], $investor_proportion_amount_remaining, $fees);
