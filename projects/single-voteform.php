@@ -28,19 +28,15 @@ if ($campaign->end_vote_remaining() > 0) {
 			<div class="light">
 				<?php
 				global $vote_errors;
-				if (isset($vote_errors)) {
-				foreach ($vote_errors as $vote_error_message) {
+				if (isset($vote_errors)) { foreach ($vote_errors as $vote_error_message) {
 				?>
 					<span class="errors"><?php echo $vote_error_message; ?></span><br />
-				<?php
-				}
-				}
-				?>
+				<?php } } ?>
 					
 				<form name="ypvote" action="<?php echo get_permalink($post->ID); ?>" method="POST" class="ypvote-form" enctype="multipart/form-data">
 
 					<strong>Impacts et coh&eacute;rence du projet</strong><br />
-					<em>Comment &eacute;valuez-vous les <a id="scroll-to-utilite-societale" href="javascript:void(0);">impacts soci&eacute;taux</a> de ce projet ?</em><br />
+					<em>Comment &eacute;valuez-vous les <a id="scroll-to-utilite-societale" href="javascript:void(0);">impacts soci&eacute;taux</a> de ce projet (5 &eacute;tant la meilleure note) ?</em><br />
 					<ul class="impact-list">
 					    <li><span>Economie</span> <?php ypcf_display_impact_select('impact_economy', $impact_economy); ?></li>
 					    <li><span>Environnement</span> <?php ypcf_display_impact_select('impact_environment', $impact_environment); ?></li>
@@ -52,7 +48,7 @@ if ($campaign->end_vote_remaining() > 0) {
 					<em>Ces impacts sont-ils suffisants pour que ce projet soit en financement sur WEDOGOOD.co ?</em><br />
 					<label><input type="radio" id="btn-validate_project-true" name="validate_project" value="1" <?php if ($validate_project == 1) echo 'checked="checked"'; ?>>Oui</label><br />
 					<p id="validate_project-true" <?php if ($validate_project != 1) echo 'style="display: none;"'; ?>>
-					    Je serais pr&ecirc;t &agrave; investir :
+					    Je serais int&eacute;ress&eacute; pour investir :
 					    <input type="text" name="invest_sum" placeholder="0" size="10" value="<?php if ($invest_sum !== false) echo $invest_sum; ?>" />&euro;<br />
 					    
 					    <?php if ($campaign->funding_type() != 'fundingdonation'): ?>
