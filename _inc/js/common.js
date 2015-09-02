@@ -142,7 +142,7 @@ YPUIFunctions = (function($) {
 
 			if ($("#scroll-to-utilite-societale").length > 0) {
 			    $("#scroll-to-utilite-societale").click(function() {
-			       $('html, body').animate({scrollTop: $('#anchor-social').offset().top - $("#navigation").height()}, "slow"); 
+			       $('html, body').animate({scrollTop: $('#anchor-societal_challenge').offset().top - $("#navigation").height()}, "slow"); 
 			    });
 			}
  	
