@@ -184,7 +184,9 @@ YPUIFunctions = (function($) {
 				}
 			}
 			if ($(".timeout-lightbox").length > 0) {
-				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, 2000);
+				var nTimeout = 2000;
+				if ($(".timeout-lightbox").data("duration") > 0) nTimeout = $(".timeout-lightbox").data("duration");
+				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, nTimeout);
 			}
 			
 			
