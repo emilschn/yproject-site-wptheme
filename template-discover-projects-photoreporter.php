@@ -7,7 +7,7 @@
 
 <?php get_header(); ?>
 
-<?php global $WDG_cache_plugin; ?>
+<?php global $WDG_cache_plugin, $client_context; $client_context = "photoreporter" ?>
 
 <div id="content" class="theme-photoreporter">
 	<?php locate_template( array("clients/photoreporter/menu.php"), true ); display_photoreporter_menu('projectlist'); ?>
