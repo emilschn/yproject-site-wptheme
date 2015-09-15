@@ -105,6 +105,7 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
                                 'date'                    => date_format(new DateTime(), 'Y-m-d')
 			)); 
 			if (!$vote_result) array_push($vote_errors, 'Probl&egrave;me de prise en compte du vote.');
+			global $vote_success; $vote_success = TRUE;
 
 			do_action('wdg_delete_cache', array( 'project-header-right-'.$campaign_id ));
 
