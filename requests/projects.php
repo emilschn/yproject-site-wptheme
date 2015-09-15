@@ -35,6 +35,13 @@ function queryHomeProjects($nb, $type, $order, $client) {
 		'orderby' => 'post_date',
 		'order' => $order
 	);
+	if (!empty($client)) {
+		$query_options['tax_query'] = array( array( 
+			'taxonomy' => 'download_tag',
+			'field' => 'slug', 
+			'terms' => array($client) 
+		) );
+	}
 	return query_posts( $query_options );
 
 }
@@ -54,6 +61,13 @@ function queryFinishedProjects($nb, $type, $client) {
 		'orderby' => 'meta_value',
 		'order' => 'desc'
 	);
+	if (!empty($client)) {
+		$query_options['tax_query'] = array( array( 
+			'taxonomy' => 'download_tag',
+			'field' => 'slug', 
+			'terms' => array($client) 
+		) );
+	}
 	return query_posts( $query_options );
 }
 

@@ -7,10 +7,10 @@
 
 <?php get_header(); ?>
 
-<?php global $WDG_cache_plugin, $client_context; $client_context = "photoreporter" ?>
+<?php global $WDG_cache_plugin, $client_context; $client_context = "myphotoreporter" ?>
 
-<div id="content" class="theme-photoreporter">
-	<?php locate_template( array("clients/photoreporter/menu.php"), true ); display_photoreporter_menu('projectlist'); ?>
+<div id="content" class="theme-myphotoreporter">
+	<?php locate_template( array("clients/myphotoreporter/menu.php"), true ); display_photoreporter_menu('projectlist'); ?>
 
 	<?php $url = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()) ); ?>
 	<div class="client-header" style="background: url('<?php echo $url; ?>') center center;">
@@ -64,8 +64,8 @@ else {
 		//PROJETS A VENIR
 		require('projects/home-small.php');
 		$is_right_project = TRUE;
-		$preview_projects = query_projects_preview();
-		$vote_projects = query_projects_vote();
+		$preview_projects = query_projects_preview(0, 'myphotoreporter');
+		$vote_projects = query_projects_vote(0, 'myphotoreporter');
 		$nb_vote_projects = count($vote_projects);
 		$nb_preview_projects = count($preview_projects);
 		$nb_total_projects = $nb_vote_projects + $nb_preview_projects;
@@ -102,28 +102,24 @@ else {
 		}
 
 		//PROJETS REUSSIS
-		?>
-		<div class="part-title-separator mobile_hidden">
-			<?php
-			$nb_funded_projects = count(query_projects_funded()); 
-			if ($nb_funded_projects > 0) { ?>
-				<span class="part-title">D&eacute;j&agrave; financ&eacute;</span>	
-			<?php } ?>
-		</div>
+		$nb_funded_projects = count(query_projects_funded(0, 'myphotoreporter')); 
+		if ($nb_funded_projects > 0) { ?>
+			<div class="part-title-separator mobile_hidden">
+				<span class="part-title">D&eacute;j&agrave; financ&eacute;</span>
+			</div>	
+		<?php } ?>
 		<?php if ($nb_funded_projects > 0) { ?>
 			<?php require('projects/home-large.php'); ?>
 		<?php } ?>
 	    
 		<?php 
 		//PROJETS ECHOUES
-		?>
-		<div class="part-title-separator mobile_hidden">
-			<?php
-			$nb_archived_projects = count(query_projects_archive()); 
-			if ($nb_archived_projects > 0) { ?>
+		$nb_archived_projects = count(query_projects_archive(0, 'myphotoreporter')); 
+		if ($nb_archived_projects > 0) { ?>
+			<div class="part-title-separator mobile_hidden">
 				<span class="part-title">Projets termin&eacute;s</span>	
-			<?php } ?>
-		</div>
+			</div>
+		<?php } ?>
 		<?php if ($nb_archived_projects > 0) { ?>
 			<?php require('projects/home-large.php'); ?>
 		<?php } ?>

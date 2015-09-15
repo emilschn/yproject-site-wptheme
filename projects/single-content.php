@@ -1,6 +1,6 @@
 <?php 
 $images_folder=get_stylesheet_directory_uri().'/images/';
-global $campaign; 
+global $campaign, $client_context; 
 $campaign_id_param = '?campaign_id=';
 if (isset($_GET['campaign_id'])) {
 	$campaign_id_param .= $_GET['campaign_id'];
@@ -212,6 +212,9 @@ else {
 
 <?php if (is_user_logged_in() || $campaign->funding_type() == 'fundingdonation') {
     
+    $file_complement = '';
+    if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
+    
     /*$check = $check = yproject_check_user_warning(get_current_user_id());
     if(!$check){
         ob_start();
@@ -236,7 +239,7 @@ else {
 
 <div class="indent">
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet.png" alt="logo projet" data-content="description"/>
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet<?php echo $file_complement; ?>.png" alt="logo projet" data-content="description"/>
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle projet"/>
 		<div id="project-content-description" class="projects-desc-content">
 			<h2>Pitch</h2>
@@ -257,7 +260,7 @@ else {
 
 	<a id="anchor-societal_challenge"></a>
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>sociale.png" alt="logo social" data-content="societal_challenge" />
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>sociale<?php echo $file_complement; ?>.png" alt="logo social" data-content="societal_challenge" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris" />
 		<div id="project-content-societal_challenge" class="projects-desc-content">
 			<h2>Impacts positifs</h2>
@@ -277,7 +280,7 @@ else {
 	
 	<?php if ($vote_status != 'preview' || $can_modify): ?>
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>economie.png" alt="logo economie" data-content="added_value" />
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>economie<?php echo $file_complement; ?>.png" alt="logo economie" data-content="added_value" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-added_value" class="projects-desc-content">
 			<h2>Strat&eacute;gie</h2>
@@ -296,7 +299,7 @@ else {
 	</div>
 	
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>model.png" alt="logo modele" data-content="economic_model" />
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>model<?php echo $file_complement; ?>.png" alt="logo modele" data-content="economic_model" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-economic_model" class="projects-desc-content">
 			<h2>Donn&eacute;es financi&egrave;res</h2>
@@ -316,7 +319,7 @@ else {
 	<?php endif; ?>
     
 	<div class="projects-desc-item">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>porteur.png" alt="logo porteur" data-content="implementation"/>
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>porteur<?php echo $file_complement; ?>.png" alt="logo porteur" data-content="implementation"/>
 		<img class="vertical-align-middle grey-triangle"src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
 		<div id="project-content-implementation" class="projects-desc-content">
 			<h2>&Eacute;quipe</h2>

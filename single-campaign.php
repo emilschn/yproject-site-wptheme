@@ -1,9 +1,16 @@
 <?php date_default_timezone_set("Europe/Paris"); ?>
   
 <?php 
-global $campaign, $post, $campaign_id;
+global $campaign, $post, $campaign_id, $client_context;
 $campaign_id = $post->ID;
 if ( ! is_object( $campaign ) ) { $campaign = atcf_get_campaign($post); }
+$tag_list = wp_get_post_terms($campaign_id, 'download_tag');
+$classes = '';
+foreach ($tag_list as $tag) {
+	if ($classes != '') { $classes .= ' '; }
+	$classes .= 'theme-' . $tag->slug;
+	$client_context = $tag->slug;
+}
 if ($campaign->campaign_status() == "vote") { require_once('projects/header-voteform.php'); }
 $suffix = ($campaign->edit_version() > 1) ? '-sf' : '';
 ?>
@@ -11,7 +18,7 @@ $suffix = ($campaign->edit_version() > 1) ? '-sf' : '';
 <?php get_header(); ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-<div id="content" data-campaignid="<?php the_ID(); ?>">
+<div id="content" data-campaignid="<?php the_ID(); ?>" <?php echo 'class="'.$classes.'"'; ?>>
 	<div class="padder">
 
 		<?php require_once('projects/single-admin-bar.php'); ?>
