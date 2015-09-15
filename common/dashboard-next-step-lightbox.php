@@ -19,7 +19,7 @@ $campaign = atcf_get_current_campaign();
             <ul id="vote-goals">
                 <li>R&eacute;unir au moins <strong><?php echo ATCF_Campaign::$voters_min_required?></strong> votants</li>
                 <li>Avoir au moins <strong><?php echo ATCF_Campaign::$vote_score_min_required;?>%</strong> de vote positif</li>
-                <li>Avoir au moins <strong>50%</strong> d'intention d'investissement de l'objectif de collecte (recommand&eacute;)</li>
+                <li>Avoir au moins <strong>50%</strong> d'intentions d'investissement de l'objectif de collecte (recommand&eacute;)</li>
             </ul>
             <li><label>Nombre de jours du vote : 
                 <input type="number" id="innbdayvote" name="innbdayvote" min="10" max="30" value="30" style="width: 40px;"></label>

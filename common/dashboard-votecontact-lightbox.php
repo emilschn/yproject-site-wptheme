@@ -10,6 +10,7 @@
         'Nom', 
         'Prénom', 
         'Ville',
+        'e-mail',
         'Montant promis',
         'Date du vote');
 ?>
