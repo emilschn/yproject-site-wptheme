@@ -17,11 +17,11 @@ YPUIFunctions = (function($) {
 					if ($(document).scrollTop() > 110) {
 						$("#nav").hide();
 						$(".menu-client").css("position", "fixed");
-						$(".menu-client").css("top", 0);
+						$("#content.theme-myphotoreporter #projects-stats-content").css("top", 60);
 					} else {
 						$("#nav").show();
 						$(".menu-client").css("position", "relative");
-						
+						$("#content.theme-myphotoreporter #projects-stats-content").css("top", 0);
 					}
 					
 					

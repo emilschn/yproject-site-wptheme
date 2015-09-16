@@ -19,6 +19,12 @@ $suffix = ($campaign->edit_version() > 1) ? '-sf' : '';
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 <div id="content" data-campaignid="<?php the_ID(); ?>" <?php echo 'class="'.$classes.'"'; ?>>
+    
+	<?php if ($classes != '') {
+	locate_template( array("clients/myphotoreporter/menu.php"), true ); 
+	display_photoreporter_menu();
+	} ?>
+    
 	<div class="padder">
 
 		<?php require_once('projects/single-admin-bar.php'); ?>
