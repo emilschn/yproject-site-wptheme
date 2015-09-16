@@ -3593,7 +3593,8 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 #content.theme-myphotoreporter .home-large-project .description-zone .description-discover,
 #content.theme-myphotoreporter .home-small-project.status-vote .description-discover { background-color: #189AB4; }
 #content.theme-myphotoreporter .vote-bubble-left { background-image:url('images/bulle-gauche-myphotoreporter.png'); }
-#content.theme-myphotoreporter .vote-bubble-right{ background-image:url('images/bulle-droite-myphotoreporter.png'); }
+#content.theme-myphotoreporter .vote-bubble-right { background-image:url('images/bulle-droite-myphotoreporter.png'); }
+#content.theme-myphotoreporter .vote-banner { background:url('images/bandeau_vote-myphotoreporter.png') no-repeat; }
 /** Page Projet **/
 #content.theme-myphotoreporter #invest-button .description-discover { background-color: #189AB4; }
 #content.theme-myphotoreporter #map-cursor { background-image: url("images/curseur-myphotoreporter.png"); }

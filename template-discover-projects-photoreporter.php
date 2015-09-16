@@ -100,6 +100,8 @@ else {
 				if ($is_last_post) print_empty_post();
 			}
 		}
+		
+		?><div class="clear"></div><?php
 
 		//PROJETS REUSSIS
 		$nb_funded_projects = count(query_projects_funded(0, 'myphotoreporter')); 
