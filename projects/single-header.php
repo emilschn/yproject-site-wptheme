@@ -274,7 +274,7 @@ else {
 			global $vote_errors, $vote_success; 
 			if (!empty($vote_errors) || isset($vote_success)): 
 			?>
-			<div class="timeout-lightbox wdg-lightbox">
+			<div class="timeout-lightbox wdg-lightbox" data-duration="5000">
 				<div class="wdg-lightbox-click-catcher"></div>
 				<div class="wdg-lightbox-padder align-center">
 				    <?php if (!empty($vote_errors)): ?>

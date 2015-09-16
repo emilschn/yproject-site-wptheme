@@ -3602,3 +3602,26 @@ ul.invest-mean-payment li img {
 #project-wallet ul.payment-list li div {
     margin: 10px 0px;
 }
+
+/*******************************************************************************
+* THEME PHOTOREPORTER
+*******************************************************************************/
+/** Footer **/
+footer.theme-myphotoreporter { background-color: #189AB4; background-image: url("images/footer-myphotoreporter.jpg"); }
+/** Page Liste des projets **/
+#content.theme-myphotoreporter nav.menu-client { width: 100%; height: 40px; background-color: #189AB4; color: #FFF; padding-top: 20px; text-transform: uppercase; z-index: 1; }
+#content.theme-myphotoreporter nav.menu-client a { color: #FFF; text-decoration: none; padding: 15px; }
+#content.theme-myphotoreporter nav.menu-client a img { vertical-align: middle; }
+#content.theme-myphotoreporter nav.menu-client strong { padding: 15px; }
+#content.theme-myphotoreporter .client-header { margin-top: 0px; height: 360px; }
+#content.theme-myphotoreporter .client-header .center { margin-left: 50%; width: 480px; padding-top: 40px; color: #FFFFFF; font-size: 17px; text-align: right; }
+#content.theme-myphotoreporter .home-large-project h2 a, .home-large-project h2 a:hover { color: #189AB4; }
+#content.theme-myphotoreporter .home-large-project h2 img { display: none; }
+#content.theme-myphotoreporter .home-large-project .description-zone .description-discover,
+#content.theme-myphotoreporter .home-small-project.status-vote .description-discover { background-color: #189AB4; }
+#content.theme-myphotoreporter .vote-bubble-left { background-image:url('images/bulle-gauche-myphotoreporter.png'); }
+#content.theme-myphotoreporter .vote-bubble-right { background-image:url('images/bulle-droite-myphotoreporter.png'); }
+#content.theme-myphotoreporter .vote-banner { background:url('images/bandeau_vote-myphotoreporter.png') no-repeat; }
+/** Page Projet **/
+#content.theme-myphotoreporter #invest-button .description-discover { background-color: #189AB4; }
+#content.theme-myphotoreporter #map-cursor { background-image: url("images/curseur-myphotoreporter.png"); }

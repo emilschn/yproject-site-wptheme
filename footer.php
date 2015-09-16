@@ -6,13 +6,13 @@
 <?php
 //*******************
 //CACHE PROJECT CONTENT BOTTOM
-global $WDG_cache_plugin;
+global $WDG_cache_plugin, $client_context;
 $cache_footer = $WDG_cache_plugin->get_cache('footer', 2);
-if ($cache_footer !== FALSE) { echo $cache_footer; }
+if ($cache_footer !== FALSE && empty($client_context)) { echo $cache_footer; }
 else {
 	ob_start();
 ?>
-		<footer>
+		<footer <?php if (!empty($client_context)) { ?>class="theme-<?php echo $client_context; ?>"<?php } ?>>
 		    <div class="center">
 			<?php if ( is_active_sidebar( 'first-footer-widget-area' ) || is_active_sidebar( 'second-footer-widget-area' ) || is_active_sidebar( 'third-footer-widget-area' ) || is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>
 				<?php get_sidebar( 'footer' ); ?>

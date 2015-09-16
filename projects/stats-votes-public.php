@@ -23,7 +23,7 @@
             ?>
       
             Sur ces <strong><?php echo $vote_results['count_project_validated']; ?></strong> votants, <strong><?php echo $vote_results['count_invest_ready']; ?></strong> personnes ont déclaré qu'ils investiraient en moyenne <strong><?php echo round($vote_results['average_invest_ready'],2); ?> &euro;</strong>. 
-            Pour un total de <strong><?php echo round($total ,2); ?></strong> euros d'intention d'investissement, soit <strong><?php echo round($pourcentage ,2).' %'; ?></strong> de l’objectif.
+            Pour un total de <strong><?php echo round($total ,2); ?></strong> euros d'intentions d'investissement, soit <strong><?php echo round($pourcentage ,2).' %'; ?></strong> de l’objectif.
         </li>
 	<?php if ($vote_results['show_risk']): ?>
 	<li>
