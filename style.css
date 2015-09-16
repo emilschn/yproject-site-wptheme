@@ -1840,6 +1840,9 @@ div#home_bottom h1 {
     width: 100%;
     margin-top: 15px;
 }
+#invest-button .description-discover.clicked {
+    background-color: #7B7B7B !important;
+}
 .post_bottom_buttons #funded-button{
     position: absolute;
     padding: 0;
@@ -3624,4 +3627,6 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 #content.theme-myphotoreporter .vote-banner { background:url('images/bandeau_vote-myphotoreporter.png') no-repeat; }
 /** Page Projet **/
 #content.theme-myphotoreporter #invest-button .description-discover { background-color: #189AB4; }
+#content.theme-myphotoreporter #participate-button .description-discover { background-color: #189AB4; }
 #content.theme-myphotoreporter #map-cursor { background-image: url("images/curseur-myphotoreporter.png"); }
+#content.theme-myphotoreporter .projects-more { background-image: url("images/responsive-plus-myphotoreporter.png"); }
