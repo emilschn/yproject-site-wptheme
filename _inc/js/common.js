@@ -909,7 +909,7 @@ WDGProjectPageFunctions=(function($) {
 		print_vote_form:function(){
 		    if ($("#vote-form").hasClass("collapsed")) {
 			$("#vote-form").removeClass("collapsed");
-			$(".description-discover").addClass('clicked');
+			$(".description-discover").removeClass('clicked');
 			if ($(window).width() > 480) {
 			    $("#vote-form").animate({ 
 				top: "-350px"
@@ -925,7 +925,7 @@ WDGProjectPageFunctions=(function($) {
 			$("#vote-form").animate({ 
 			    top: "370px"
 			}, 500 );
-			$(".description-discover").removeClass('clicked');
+			$(".description-discover").addClass('clicked');
 			$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 			$("#vote-form").addClass("collapsed");
 		    }
