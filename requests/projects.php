@@ -394,23 +394,37 @@ class YPProjectLib {
 	}
 	
 	/**
+	 * Teste si le formulaire de ROI est posté
+	 * @param type $campaign
+	 * @return boolean
+	 */
+	public static function form_proceed_roi_list($campaign) {
+		if (!isset($_POST['action']) || $_POST['action'] != 'proceed_roi') {
+			return FALSE;
+		}
+		
+		$fp_date = $campaign->first_payment_date();
+		$fp_yy = mysql2date( 'Y', $fp_date, false );
+		for ($i = $fp_yy; $i < $campaign->funding_duration() + $fp_yy; $i++) {
+		    YPProjectLib::form_proceed_roi($campaign, $i);
+		}
+	}
+	
+	/**
 	 * Lance la redirection vers la page de paiement
 	 * @param type $year
 	 */
-	public static function form_proceed_roi($year) {
+	public static function form_proceed_roi($campaign, $year) {
 		//Il faut avoir un id de projet et que l'année soit bien renseignée
 		if (!isset($_GET["campaign_id"])) { return FALSE; }
 		if (!isset($_POST["proceed_roi_" . $year ])) { return FALSE; }
-		$campaign_id = $_GET["campaign_id"];
-		$post_campaign = get_post($campaign_id);
-		$campaign = atcf_get_campaign($post_campaign);
 		
 		//Si il y a bien un montant à reverser
 		$payment_amount = $campaign->payment_amount_for_year($year);
 		if ($payment_amount > 0) {
 		    
 			//Récupération de l'organisation
-			$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+			$api_project_id = BoppLibHelpers::get_api_project_id($campaign->ID);
 			$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
 			if (isset($current_organisations) && count($current_organisations) > 0) {
 				$current_organisation = $current_organisations[0];
@@ -419,8 +433,8 @@ class YPProjectLib {
 			//Si il y a bien une organisation
 			if (isset($current_organisation)) {
 				$page_wallet_management = get_page_by_path('gestion-financiere');
-				$page_return = get_permalink($page_wallet_management->ID) . '?campaign_id=' . $campaign_id . '&roi_date='.$_POST["proceed_roi_" . $year ].'&roi_year='.$year;
-				$mangopay_newcontribution = ypcf_mangopay_contribution_user_to_account($campaign_id, $current_organisation->organisation_wpref, $payment_amount, $page_return);
+				$page_return = get_permalink($page_wallet_management->ID) . '?campaign_id=' . $campaign->ID . '&roi_date='.$_POST["proceed_roi_" . $year ].'&roi_year='.$year;
+				$mangopay_newcontribution = ypcf_mangopay_contribution_user_to_account($campaign->ID, $current_organisation->organisation_wpref, $payment_amount, $page_return);
 				if (isset($mangopay_newcontribution->ID)) {
 					wp_redirect($mangopay_newcontribution->PaymentURL);
 					exit();
@@ -436,69 +450,77 @@ class YPProjectLib {
 	}
 	
 	/**
-	 * Lance les transferts d'argent vers les différents investisseurs
+	 * Valide le transfert d'argent vers le compte de l'organisation
 	 */
-	public static function form_proceed_roi_transfers($contribution_id) {
+	public static function form_proceed_roi_return() {
 		//Vérification qu'on a les bonnes données pour procéder aux transferts
-		if (!isset($_GET["campaign_id"])) { return FALSE; }
-		if (!isset($contribution_id)) { return FALSE; }
-		if (!isset($_GET["roi_date"])) { return FALSE; }
-		if (!isset($_GET["roi_year"])) { return FALSE; }
-		$campaign_id = $_GET["campaign_id"];
-		$post_campaign = get_post($campaign_id);
-		$campaign = atcf_get_campaign($post_campaign);
-		
-		$contribution_obj = ypcf_mangopay_get_contribution_by_id($contribution_id);
-		//Si la contribution est validée
-		if ($contribution_obj->IsSucceeded && $contribution_obj->IsCompleted) {
-		    
-			//Récupération de l'organisation
-			$api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
-			$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-			if (isset($current_organisations) && count($current_organisations) > 0) {
-				$current_organisation = $current_organisations[0];
-			}
-			
-			//On enregistre le versement comme effectué (le virement est au moins effectif jusqu'au compte utilisateur
-			if (isset($current_organisation)) {
-				//Enregistrement de la contribution
-				$roi_post = array(
-				    'post_author'   => $current_organisation->organisation_wpref,
-				    'post_title'    => 'ROI ' . $contribution_obj->Amount,
-				    'post_content'  => $contribution_obj->ID,
-				    'post_status'   => 'published',
-				    'post_type'	    => 'roi_process'
-				);
-				$new_post_id = wp_insert_post( $roi_post );
-				//Liaison du versement avec la contribution
-				$campaign->update_payment_status($_GET["roi_date"], $_GET["roi_year"], $new_post_id);
+		if (isset($_GET['ContributionID']) && (!isset($_POST['action']))) {
+			if (!isset($_GET["campaign_id"])) { return FALSE; }
+			$contribution_id = $_GET['ContributionID'];
+			if (!isset($contribution_id)) { return FALSE; }
+			if (!isset($_GET["roi_date"])) { return FALSE; }
+			if (!isset($_GET["roi_year"])) { return FALSE; }
+			$campaign_id = $_GET["campaign_id"];
+			$post_campaign = get_post($campaign_id);
+			$campaign = atcf_get_campaign($post_campaign);
 
-				//On parcourt la liste des investisseurs, on détermine la proportion, on enlève 1.80% en charges, et on fait un transfert sur le compte utilisateur
-				$total_amount = $campaign->current_amount(FALSE);
-				$roi_amount = $contribution_obj->Amount / 100; //100
-				$investments_list = $campaign->payments_data(TRUE);
-				foreach ($investments_list as $investment_item) {
-				    //Calcul de la part de l'investisseur dans le total
-				    $investor_proportion = $investment_item['amount'] / $total_amount; //0.105
-				    //Calcul du montant à récupérer en roi
-				    $investor_proportion_amount = floor($roi_amount * $investor_proportion * 100) / 100; //10.50
-				    //Calcul de la commission sur le roi de l'utilisateur
-				    $fees = $investor_proportion_amount * YP_ROI_FEES / 100; //10.50 * 1.8 / 100 = 0.189
-				    //Et arrondi
-				    $fees = round($fees * 100) / 100; //0.189 * 100 = 18.9 = 19 = 0.19
-				    //Reste à verser pour l'investisseur
-				    $investor_proportion_amount_remaining = $investor_proportion_amount - $fees;
-				    //Transfert vers utilisateur
-				    ypcf_mangopay_transfer_user_to_user($current_organisation->organisation_wpref, $investment_item['user'], $investor_proportion_amount_remaining, $fees);
+			//Si la contribution est validée
+			$contribution_obj = ypcf_mangopay_get_contribution_by_id($contribution_id);
+			if ($contribution_obj->IsSucceeded && $contribution_obj->IsCompleted) {
+
+				//Récupération de l'organisation
+				$api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
+				$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+				if (isset($current_organisations) && count($current_organisations) > 0) {
+					$current_organisation = $current_organisations[0];
 				}
+
+				//On enregistre le versement comme effectué (le virement est au moins effectif jusqu'au compte utilisateur
+				if (isset($current_organisation)) {
+					//Enregistrement de la contribution
+					$roi_post = array(
+					    'post_author'   => $current_organisation->organisation_wpref,
+					    'post_title'    => 'ROI ' . $contribution_obj->Amount,
+					    'post_content'  => $contribution_obj->ID,
+					    'post_status'   => 'published',
+					    'post_type'	    => 'roi_process'
+					);
+					$new_post_id = wp_insert_post( $roi_post );
+					//Liaison du versement avec la contribution
+					$campaign->update_payment_status($_GET["roi_date"], $_GET["roi_year"], $new_post_id);
 				
+				} else {
+					return FALSE;
+				}
+
+
 			} else {
 				return FALSE;
 			}
-			
-		    
-		} else {
-			return FALSE;
 		}
+	}
+	
+	/**
+	 * Lance les transferts d'argent vers les différents investisseurs
+	 */
+	public static function form_proceed_roi_transfers($contribution_id) {
+		    //On parcourt la liste des investisseurs, on détermine la proportion, on enlève 1.80% en charges, et on fait un transfert sur le compte utilisateur
+		    $total_amount = $campaign->current_amount(FALSE);
+		    $roi_amount = $contribution_obj->Amount / 100; //100
+		    $investments_list = $campaign->payments_data(TRUE);
+		    foreach ($investments_list as $investment_item) {
+			//Calcul de la part de l'investisseur dans le total
+			$investor_proportion = $investment_item['amount'] / $total_amount; //0.105
+			//Calcul du montant à récupérer en roi
+			$investor_proportion_amount = floor($roi_amount * $investor_proportion * 100) / 100; //10.50
+			//Calcul de la commission sur le roi de l'utilisateur
+			$fees = $investor_proportion_amount * YP_ROI_FEES / 100; //10.50 * 1.8 / 100 = 0.189
+			//Et arrondi
+			$fees = round($fees * 100) / 100; //0.189 * 100 = 18.9 = 19 = 0.19
+			//Reste à verser pour l'investisseur
+			$investor_proportion_amount_remaining = $investor_proportion_amount - $fees;
+			//Transfert vers utilisateur
+			ypcf_mangopay_transfer_user_to_user($current_organisation->organisation_wpref, $investment_item['user'], $investor_proportion_amount_remaining, $fees);
+		    }
 	}
 }

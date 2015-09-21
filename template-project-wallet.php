@@ -7,15 +7,8 @@ global $campaign_id;
 $campaign_id = $_GET['campaign_id'];
 $post_campaign = get_post($campaign_id);
 $campaign = atcf_get_campaign($post_campaign);
-if (isset($_GET['ContributionID']) && (!isset($_POST['action']))) {
-    YPProjectLib::form_proceed_roi_transfers($_GET['ContributionID']);
-} else {
-    $fp_date = $campaign->first_payment_date();
-    $fp_yy = mysql2date( 'Y', $fp_date, false );
-    for ($i = $fp_yy; $i < $campaign->funding_duration() + $fp_yy; $i++) {
-	YPProjectLib::form_proceed_roi($i);
-    }
-}
+YPProjectLib::form_proceed_roi_list($campaign);
+YPProjectLib::form_proceed_roi_return();
 ?>
 
 <?php get_header(); ?>
