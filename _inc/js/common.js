@@ -13,25 +13,39 @@ YPUIFunctions = (function($) {
 			YPUIFunctions.refreshProjectList();
 			
 			$(document).scroll(function() {
-				if ($(document).scrollTop() > 110) {
-					$(".page_item_logo a").children().eq(0).hide();
-					$(".page_item_logo a").children().eq(1).show();
-					$(".page_item_logo").height(51);
-					$("#nav").height(50);
-					$("#nav > li").css("paddingTop", 20);
-					$("#nav > li").height(30);
-					$("#nav #menu_item_facebook, #nav #menu_item_twitter").css("paddingTop", 17);
-					$(".page_item_inverted").css("paddingBottom", 0);
+				if ($(".menu-client").length > 0) {
+					if ($(document).scrollTop() > 110) {
+						$("#nav").hide();
+						$(".menu-client").css("position", "fixed");
+						$("#content.theme-myphotoreporter #projects-stats-content").css("top", 60);
+					} else {
+						$("#nav").show();
+						$(".menu-client").css("position", "relative");
+						$("#content.theme-myphotoreporter #projects-stats-content").css("top", 0);
+					}
+					
+					
 				} else {
-					$(".page_item_logo a").children().eq(0).show();
-					$(".page_item_logo a").children().eq(1).hide();
-					$(".page_item_logo").height(100);
-					$("#nav").height(100);
-					$("#nav > li").css("paddingTop", 50);
-					$("#nav > li").height(50);
-					$("#nav #menu_item_facebook, #nav #menu_item_twitter").css("paddingTop", 47);
-					$(".page_item_logo").css("paddingTop", 0);
-					$(".page_item_inverted").css("paddingBottom", 7);
+					if ($(document).scrollTop() > 110) {
+						$(".page_item_logo a").children().eq(0).hide();
+						$(".page_item_logo a").children().eq(1).show();
+						$(".page_item_logo").height(51);
+						$("#nav").height(50);
+						$("#nav > li").css("paddingTop", 20);
+						$("#nav > li").height(30);
+						$("#nav #menu_item_facebook, #nav #menu_item_twitter").css("paddingTop", 17);
+						$(".page_item_inverted").css("paddingBottom", 0);
+					} else {
+						$(".page_item_logo a").children().eq(0).show();
+						$(".page_item_logo a").children().eq(1).hide();
+						$(".page_item_logo").height(100);
+						$("#nav").height(100);
+						$("#nav > li").css("paddingTop", 50);
+						$("#nav > li").height(50);
+						$("#nav #menu_item_facebook, #nav #menu_item_twitter").css("paddingTop", 47);
+						$(".page_item_logo").css("paddingTop", 0);
+						$(".page_item_inverted").css("paddingBottom", 7);
+					}
 				}
 				
 				if ($(document).scrollTop() > 250) {
@@ -142,7 +156,7 @@ YPUIFunctions = (function($) {
 
 			if ($("#scroll-to-utilite-societale").length > 0) {
 			    $("#scroll-to-utilite-societale").click(function() {
-			       $('html, body').animate({scrollTop: $('#anchor-social').offset().top - $("#navigation").height()}, "slow"); 
+			       $('html, body').animate({scrollTop: $('#anchor-societal_challenge').offset().top - $("#navigation").height()}, "slow"); 
 			    });
 			}
  	
@@ -184,7 +198,9 @@ YPUIFunctions = (function($) {
 				}
 			}
 			if ($(".timeout-lightbox").length > 0) {
-				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, 2000);
+				var nTimeout = 2000;
+				if ($(".timeout-lightbox").data("duration") > 0) nTimeout = $(".timeout-lightbox").data("duration");
+				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, nTimeout);
 			}
 			
 			
@@ -893,7 +909,7 @@ WDGProjectPageFunctions=(function($) {
 		print_vote_form:function(){
 		    if ($("#vote-form").hasClass("collapsed")) {
 			$("#vote-form").removeClass("collapsed");
-			$(".description-discover").css('background-color', '#FF494C');
+			$(".description-discover").removeClass('clicked');
 			if ($(window).width() > 480) {
 			    $("#vote-form").animate({ 
 				top: "-350px"
@@ -909,7 +925,7 @@ WDGProjectPageFunctions=(function($) {
 			$("#vote-form").animate({ 
 			    top: "370px"
 			}, 500 );
-			$(".description-discover").css('background-color', '#7B7B7B');
+			$(".description-discover").addClass('clicked');
 			$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 			$("#vote-form").addClass("collapsed");
 		    }

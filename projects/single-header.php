@@ -269,11 +269,30 @@ else {
 
 			<div id="white-background" class="mobile_hidden" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>></div>
 
-			<?php if ($vote_status == 'vote') { ?>
-			<div id="vote-form">
+			<?php if ($vote_status == 'vote'): ?>
+			<?php 
+			global $vote_errors, $vote_success; 
+			if (!empty($vote_errors) || isset($vote_success)): 
+			?>
+			<div class="timeout-lightbox wdg-lightbox" data-duration="5000">
+				<div class="wdg-lightbox-click-catcher"></div>
+				<div class="wdg-lightbox-padder align-center">
+				    <?php if (!empty($vote_errors)): ?>
+				    Votre vote n&apos;est pas valide, merci de le compl&eacute;ter !
+				    <?php endif; ?>
+				    <?php if (isset($vote_success)): ?>
+				    Merci pour votre vote !<br />
+				    Prochaine &eacute;tape : le financement du projet.<br />
+				    L&apos;aventure ne fait que commencer : parlez-en autour de vous !
+				    <?php endif; ?>
+				</div>
+			</div>
+			<?php endif; ?>
+			
+			<div id="vote-form" <?php if (!empty($vote_errors)) { ?>style="top: 370px;"<?php } ?>>
 				<?php require_once('single-voteform.php'); ?>
 			</div> 
-			<?php } ?>
+			<?php endif; ?>
 		</div>
 				    
 		<div id="dialog" title="Partager ce projet">
