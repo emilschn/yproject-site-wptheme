@@ -1,7 +1,7 @@
 <?php function display_photoreporter_menu($page = 'project') { ?>
 <nav class="menu-client">
     <div class="center align-center">
-	<a href="#">Festival Photo-Reporter</a> |
+	<a href="#">My Photo-Reporter</a> |
 	
 	<?php if ($page == 'projectlist'): ?>
 		<strong>Financer un reportage</strong>

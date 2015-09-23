@@ -2,6 +2,7 @@
 global $wpdb, $campaign, $post;
 if ( ! is_object( $campaign ) ) $campaign = atcf_get_campaign( $post );
 
+$classes = '';
 $post_camp = get_post($_GET['campaign_id']);
 $post = $post_camp;
 $name = $post_camp->ID.'-2';
@@ -9,6 +10,13 @@ $name = $post_camp->ID.'-2';
 if ($name!='') {
 	$table_name = $wpdb->prefix . "posts";
 	$query="SELECT ID FROM $table_name WHERE post_type='forum' AND post_name= $post_camp->ID";
+
+	$tag_list = wp_get_post_terms($post_camp->ID, 'download_tag');
+	foreach ($tag_list as $tag) {
+		if ($classes != '') { $classes .= ' '; }
+		$classes .= 'theme-' . $tag->slug;
+		$client_context = $tag->slug;
+	}
 
 	$results=$wpdb->get_results($query);
 
@@ -21,7 +29,13 @@ if ($name!='') {
 <?php get_header(); ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-	<div id="content">
+	<div id="content" <?php echo 'class="'.$classes.'"'; ?>>
+    
+		<?php if ($classes != '') {
+		locate_template( array("clients/myphotoreporter/menu.php"), true ); 
+		display_photoreporter_menu();
+		} ?>
+
 		<div class="padder">
 
 			<div class="page" id="blog-single" role="main">

@@ -6,9 +6,17 @@ $name_exploded = explode('cat', $this_category_name);
 if (count($name_exploded) > 1) {
 	$campaign_id = $name_exploded[1];
 }
+$classes = '';
 if (isset($campaign_id)) {
 	$campaign_post = get_post($campaign_id);
 	$campaign = atcf_get_campaign($campaign_post);
+	
+	$tag_list = wp_get_post_terms($campaign_id, 'download_tag');
+	foreach ($tag_list as $tag) {
+		if ($classes != '') { $classes .= ' '; }
+		$classes .= 'theme-' . $tag->slug;
+		$client_context = $tag->slug;
+	}
 }
 $page_edit_news = get_page_by_path('editer-une-actu');
 locate_template( array("requests/projects.php"), true );
@@ -43,7 +51,13 @@ if (isset($_GET['delete_post_id'])){
 
 <?php get_header(); ?>
 
-<div id="content">
+<div id="content" <?php echo 'class="'.$classes.'"'; ?>>
+    
+	<?php if ($classes != '') {
+	locate_template( array("clients/myphotoreporter/menu.php"), true ); 
+	display_photoreporter_menu();
+	} ?>
+    
 	<div class="padder">
 
 	<?php do_action( 'bp_before_archive' ); ?>

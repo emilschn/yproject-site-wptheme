@@ -57,6 +57,30 @@ get_header();
 		     */
 		    ?>
 		    
+		    <?php 
+		    //Gestion PFDO
+		    //Remboursement
+		    /*$operations = ypcf_mangopay_get_operations_by_wallet_id(25892474); 
+		    echo 'operations : <br />';
+		    print_r($operations);*/
+		    /*$contrib1 = ypcf_mangopay_get_contribution_by_id(27296848);
+		    echo 'contrib1 : <br />';
+		    print_r($contrib1);
+		    $contrib2 = ypcf_mangopay_get_contribution_by_id(27297516);
+		    echo 'contrib2 : <br />';
+		    print_r($contrib2);
+		    $mangopay_newrefund1 = request('refunds', 'POST', '{
+					    "ContributionID" : 27296848,
+					    "UserID" : 27296832
+					}');
+		    print_r($mangopay_newrefund1);
+		    $mangopay_newrefund2 = request('refunds', 'POST', '{
+					    "ContributionID" : 27297516,
+					    "UserID" : 27296832
+					}');
+		    print_r($mangopay_newrefund2);*/
+		    ?>
+		    
 		    <?php /* ?>
 		    <h2>Liste des utilisateurs</h2>
 		    <ul>
