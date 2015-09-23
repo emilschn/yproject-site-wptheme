@@ -16,6 +16,7 @@ var WDGProjectDashboard = (function($) {
 						WDGProjectDashboard.currentOpenedROI = $(this).data('paymentitem');
 						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-content").html("");
 						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-image").show();
+						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").hide();
 							
 						//Lancement de la requête pour récupérer les utilisateurs et les sommes associées
 						$.ajax({
@@ -33,6 +34,9 @@ var WDGProjectDashboard = (function($) {
 							content += '</table>';
 							$("#wdg-lightbox-transfer-roi #lightbox-content .loading-content").html(content);
 							$("#wdg-lightbox-transfer-roi #lightbox-content .loading-image").hide();
+							$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-roi-id").val(WDGProjectDashboard.currentOpenedROI);
+							$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").show();
+							console.log(WDGProjectDashboard.currentOpenedROI);
 						});
 					}
 				});

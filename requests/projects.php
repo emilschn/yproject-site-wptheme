@@ -482,7 +482,7 @@ class YPProjectLib {
 					    'post_author'   => $current_organisation->organisation_wpref,
 					    'post_title'    => 'ROI ' . $contribution_obj->Amount,
 					    'post_content'  => $contribution_obj->ID,
-					    'post_status'   => 'published',
+					    'post_status'   => 'pending',
 					    'post_type'	    => 'roi_process'
 					);
 					$new_post_id = wp_insert_post( $roi_post );
@@ -503,24 +503,30 @@ class YPProjectLib {
 	/**
 	 * Lance les transferts d'argent vers les différents investisseurs
 	 */
-	public static function form_proceed_roi_transfers($contribution_id) {
-		    //On parcourt la liste des investisseurs, on détermine la proportion, on enlève 1.80% en charges, et on fait un transfert sur le compte utilisateur
-		    $total_amount = $campaign->current_amount(FALSE);
-		    $roi_amount = $contribution_obj->Amount / 100; //100
-		    $investments_list = $campaign->payments_data(TRUE);
-		    foreach ($investments_list as $investment_item) {
-			//Calcul de la part de l'investisseur dans le total
-			$investor_proportion = $investment_item['amount'] / $total_amount; //0.105
-			//Calcul du montant à récupérer en roi
-			$investor_proportion_amount = floor($roi_amount * $investor_proportion * 100) / 100; //10.50
-			//Calcul de la commission sur le roi de l'utilisateur
-			$fees = $investor_proportion_amount * YP_ROI_FEES / 100; //10.50 * 1.8 / 100 = 0.189
-			//Et arrondi
-			$fees = round($fees * 100) / 100; //0.189 * 100 = 18.9 = 19 = 0.19
-			//Reste à verser pour l'investisseur
-			$investor_proportion_amount_remaining = $investor_proportion_amount - $fees;
-			//Transfert vers utilisateur
-			ypcf_mangopay_transfer_user_to_user($current_organisation->organisation_wpref, $investment_item['user'], $investor_proportion_amount_remaining, $fees);
-		    }
+	public static function form_proceed_roi_transfers() {
+		$campaign_id = filter_input(INPUT_GET, 'campaign_id');
+		$payment_item_id = filter_input(INPUT_POST, 'roi_id');
+		if (current_user_can('manage_options') && !empty($campaign_id) && !empty($payment_item_id)) {
+			//Récupération des éléments à traiter
+			$campaign = new ATCF_Campaign($campaign_id);
+			$investments_list = $campaign->roi_payments_data($payment_item_id);
+			//Récupération de l'organisation du projet
+			$api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
+			$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+			if (isset($current_organisations) && count($current_organisations) > 0) {
+				$current_organisation = $current_organisations[0];
+			}
+			//Transfert à tous les utilisateurs
+			if (isset($current_organisation)) {
+				foreach ($investments_list as $investment_item) {
+					ypcf_mangopay_transfer_user_to_user($current_organisation->organisation_wpref, $investment_item['user'], $investment_item['roi_amount'], $investment_item['roi_fees']);
+				}
+			}
+			$payment_post_id = $campaign->payment_status_for_year($payment_item_id);
+			wp_update_post( array(
+				'ID'		=> $payment_post_id,
+				'post_status'	=> 'published'
+			));
+		}
 	}
 }

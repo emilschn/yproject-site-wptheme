@@ -9,6 +9,7 @@ $post_campaign = get_post($campaign_id);
 $campaign = atcf_get_campaign($post_campaign);
 YPProjectLib::form_proceed_roi_list($campaign);
 YPProjectLib::form_proceed_roi_return();
+YPProjectLib::form_proceed_roi_transfers();
 ?>
 
 <?php get_header(); ?>
@@ -187,11 +188,16 @@ YPProjectLib::form_proceed_roi_return();
 						    <div>
 							<?php if ($payment_list[$i] > 0): ?>
 							    <?php if (isset($payment_status)): ?>
-								    <?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Virement effectué sur le porte-monnaie.
-								    
-								    <?php if (current_user_can('manage_options')): ?>
-									    <br /><br />
-									    <a href="#transfer-roi" class="button wdg-button-lightbox-open transfert-roi-open" data-lightbox="transfer-roi" data-campaignid="<?php echo $campaign->ID; ?>" data-paymentitem="<?php echo $i; ?>">Transférer le retour sur investissement</a> [Visible uniquement des administrateurs]
+								    <?php if ($post_payment_status->post_status == "pending"): ?>
+									    <?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Virement effectué sur le porte-monnaie.
+
+									    <?php if (current_user_can('manage_options')): ?>
+										    <br /><br />
+										    <a href="#transfer-roi" class="button wdg-button-lightbox-open transfert-roi-open" data-lightbox="transfer-roi" data-campaignid="<?php echo $campaign->ID; ?>" data-paymentitem="<?php echo $i; ?>">Transférer le retour sur investissement</a> [Visible uniquement des administrateurs]
+									    <?php endif; ?>
+								    <?php elseif ($post_payment_status->post_status == "published"): ?>
+									    <?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Versement effectué auprès des investisseurs.
+    
 								    <?php endif; ?>
 								
 							    <?php else: ?>
@@ -230,7 +236,15 @@ YPProjectLib::form_proceed_roi_return();
 					</ul>
 					<?php 
 					$lightbox_content = '<h3>' . __('Reverser aux utilisateurs', 'yproject') . '</h3>';
-					$lightbox_content .= '<div id="lightbox-content"><div class="loading-image align-center"><img id="ajax-email-loader-img" src="'.get_stylesheet_directory_uri().'/images/loading.gif" alt="chargement" /></div><div class="loading-content"></div></div>';
+					$lightbox_content .= '<div id="lightbox-content">';
+					$lightbox_content .= '<div class="loading-image align-center"><img id="ajax-email-loader-img" src="'.get_stylesheet_directory_uri().'/images/loading.gif" alt="chargement" /></div>';
+					$lightbox_content .= '<div class="loading-content"></div>';
+					$lightbox_content .= '<div class="loading-form align-center hidden"><form action="" method="POST">';
+					$lightbox_content .= '<input type="hidden" name="action" value="proceed_roi_transfers" />';
+					$lightbox_content .= '<input type="hidden" id="hidden-roi-id" name="roi_id" value="" />';
+					$lightbox_content .= '<input type="submit" class="button" value="Transférer" />';
+					$lightbox_content .= '</form></div>';
+					$lightbox_content .= '</div>';
 					echo do_shortcode('[yproject_lightbox id="transfer-roi"]' . $lightbox_content . '[/yproject_lightbox]');
 					?>
 				    <?php else: ?>
