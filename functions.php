@@ -53,6 +53,7 @@ function yproject_enqueue_script(){
 	global $can_modify, $is_campaign, $is_campaign_page, $post;
 	$campaign = atcf_get_current_campaign();
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
+	$is_dashboard_page = ($post->post_name == 'gestion-financiere');
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -62,6 +63,7 @@ function yproject_enqueue_script(){
 	
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.07.10');
 	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.07.10'); }
+	if ($is_dashboard_page && $can_modify) { wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery', 'jquery-ui-dialog'), '15.09.23'); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
@@ -1418,6 +1420,10 @@ Sélectionner :<br />
 }
 add_action('wp_ajax_get_email_selector', 'get_email_selector');
 add_action('wp_ajax_nopriv_get_email_selector', 'get_email_selector');
+
+
+require_once("requests/ajax.php");
+YPAjaxLib::add_action('display_roi_user_list');
 
 /**
  * Shortcodes généraux

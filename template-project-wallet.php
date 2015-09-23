@@ -155,11 +155,11 @@ YPProjectLib::form_proceed_roi_return();
 				<?php if (!$keep_going || $current_wallet_amount == 0) { ?>
 				<span class="button disabled"><?php _e('Proc&eacute;der au virement', 'yproject'); ?></span>
 				<?php } else { ?>
-				<form action="" method="POST">
-					<input type="hidden" name="mangopaytoaccount" value="1" />
-					<input type="hidden" name="action" value="transfer_to_account" />
-					<input type="submit" class="button" value="<?php _e('Proc&eacute;der au virement', 'yproject'); ?>" />
-				</form>
+					<form action="" method="POST">
+						<input type="hidden" name="mangopaytoaccount" value="1" />
+						<input type="hidden" name="action" value="transfer_to_account" />
+						<input type="submit" class="button" value="<?php _e('Proc&eacute;der au virement', 'yproject'); ?>" />
+					</form>
 				<?php } ?>
 					
 				<h2 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php _e('Reverser aux investisseurs', 'yproject'); ?></h2>
@@ -187,15 +187,22 @@ YPProjectLib::form_proceed_roi_return();
 						    <div>
 							<?php if ($payment_list[$i] > 0): ?>
 							    <?php if (isset($payment_status)): ?>
-								<?php echo $payment_date; ?> - Le virement a été effectué auprès des investisseurs.
+								    <?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Virement effectué sur le porte-monnaie.
+								    
+								    <?php if (current_user_can('manage_options')): ?>
+									    <br /><br />
+									    <a href="#transfer-roi" class="button wdg-button-lightbox-open transfert-roi-open" data-lightbox="transfer-roi" data-campaignid="<?php echo $campaign->ID; ?>" data-paymentitem="<?php echo $i; ?>">Transférer le retour sur investissement</a> [Visible uniquement des administrateurs]
+								    <?php endif; ?>
+								
 							    <?php else: ?>
-								<b>Montant à verser : </b><?php echo $payment_list[$i]; ?> &euro;<br />
-								<form action="" method="POST" enctype="">
-								    <input type="hidden" name="action" value="proceed_roi" />
-								    <input type="hidden" name="proceed_roi_<?php echo $i; ?>" value="<?php echo $fp_dd.'_'.$fp_mm.'_'.$i; ?>" />
-								    <input type="submit" class="button" value="<?php _e('Reverser', 'yproject'); ?>" />
-								</form>
+								    <b>Montant à verser : </b><?php echo $payment_list[$i]; ?> &euro;<br />
+								    <form action="" method="POST" enctype="">
+									<input type="hidden" name="action" value="proceed_roi" />
+									<input type="hidden" name="proceed_roi_<?php echo $i; ?>" value="<?php echo $fp_dd.'_'.$fp_mm.'_'.$i; ?>" />
+									<input type="submit" class="button" value="<?php _e('Reverser', 'yproject'); ?>" />
+								    </form>
 							    <?php endif; ?>
+								    
 							<?php else: ?>
 							    <span class="errors">Le montant n'est pas encore défini</span>
 							<?php endif; ?>
@@ -221,6 +228,11 @@ YPProjectLib::form_proceed_roi_return();
 						</li>
 					    <?php endfor; ?>
 					</ul>
+					<?php 
+					$lightbox_content = '<h3>' . __('Reverser aux utilisateurs', 'yproject') . '</h3>';
+					$lightbox_content .= '<div id="lightbox-content"><div class="loading-image align-center"><img id="ajax-email-loader-img" src="'.get_stylesheet_directory_uri().'/images/loading.gif" alt="chargement" /></div><div class="loading-content"></div></div>';
+					echo do_shortcode('[yproject_lightbox id="transfer-roi"]' . $lightbox_content . '[/yproject_lightbox]');
+					?>
 				    <?php else: ?>
 					<span class="disabled">Il manque certains paramètres. Contactez-nous.</span>
 				    <?php endif; ?>
