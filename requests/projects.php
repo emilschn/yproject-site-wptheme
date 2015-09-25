@@ -9,10 +9,10 @@ function query_projects_collecte($nb = 0, $client = ''){
 	return queryHomeProjects($nb, 'collecte', 'asc', $client);
 }
 function query_projects_funded($nb = 0, $client = ''){
-	return queryFinishedProjects($nb, 'funded', 'asc', $client);
+	return queryFinishedProjects($nb, 'funded', $client);
 }
 function query_projects_archive($nb = 0, $client = ''){
-	return queryFinishedProjects($nb, 'archive', 'asc', $client);
+	return queryFinishedProjects($nb, 'archive', $client);
 }
 
 function queryHomeProjects($nb, $type, $order, $client) {
