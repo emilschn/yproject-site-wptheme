@@ -31,14 +31,16 @@ get_header();
 		    $amount = 9967.28;
 		    $amount_fees = 1232.72;
 		    //Gestion Navlab
-//		    $campaign_id = 4171;
-//		    $amount = 9950;
-//		    $amount_fees = 1200;
-		     *
+		    $campaign_id = 4171;
+		    $amount = 9950;
+		    $amount_fees = 1200;
 		    //Gestion Nkita
 		    $campaign_id = 2825;
 		    $amount = 1358.18;
 		    $amount_fees = 291.82;
+		    $campaign_id = 6011;
+		    $amount = 3429.46;
+		    $amount_fees = 150.54;
 		    $api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
 		    echo '$api_project_id ' . $api_project_id . '<br />';
 		    $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
@@ -50,7 +52,7 @@ get_header();
 			    echo '<br />$mangopay_new_user_id ' . $mangopay_new_user_id . '<br />';
 			    
 			    if (isset($mangopay_new_user_id)) {
-				    $transfer = ypcf_mangopay_transfer_project_to_user($organisation_object->get_creator(), $campaign_id, $amount, $amount_fees);
+				    $transfer = ypcf_mangopay_transfer_project_organisation_to_user($organisation_object->get_creator(), $campaign_id, $amount, $amount_fees);
 				    print_r($transfer);
 			    }
 		    }
