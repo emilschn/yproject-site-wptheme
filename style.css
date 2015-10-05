@@ -3617,7 +3617,7 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 #content.theme-myphotoreporter nav.menu-client a img { vertical-align: middle; }
 #content.theme-myphotoreporter nav.menu-client strong { padding: 15px; }
 #content.theme-myphotoreporter .client-header { margin-top: 0px; height: 360px; }
-#content.theme-myphotoreporter .client-header .center { margin-left: 50%; width: 480px; padding-top: 40px; color: #FFFFFF; font-size: 17px; text-align: right; }
+#content.theme-myphotoreporter .client-header .center { margin-left: 850px; width: 300px; padding-top: 40px; color: #FFFFFF; font-size: 17px; text-align: right; }
 #content.theme-myphotoreporter .home-large-project h2 a, .home-large-project h2 a:hover { color: #189AB4; }
 #content.theme-myphotoreporter .home-large-project h2 img { display: none; }
 #content.theme-myphotoreporter .home-large-project .description-zone .description-discover,

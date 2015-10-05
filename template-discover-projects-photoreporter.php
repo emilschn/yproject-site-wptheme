@@ -13,7 +13,7 @@
 	<?php locate_template( array("clients/myphotoreporter/menu.php"), true ); display_photoreporter_menu('projectlist'); ?>
 
 	<?php $url = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()) ); ?>
-	<div class="client-header" style="background: url('<?php echo $url; ?>') center center;">
+	<div class="client-header" style="background: url('<?php echo $url; ?>') no-repeat center center;">
 		<div class="center"><?php the_content(); ?></div>
 	</div>
     
