@@ -105,9 +105,8 @@ add_action( 'send_headers', 'varnish_safe_http_headers' );
 
 /** GESTION DU LOGIN **/
 function yproject_init() {
-    locate_template( array("requests/users.php"), true );
-    YPUsersLib::login();
-    YPUsersLib::register();
+    WDGUser::login();
+    WDGUser::register();
 }
 add_action('init', 'yproject_init');
 
@@ -263,7 +262,7 @@ function ypbp_core_screen_signup() {
 				global $wpdb, $edd_options;
 				$bp->signup->step = 'completed-confirmation';
 				$wpdb->update( $wpdb->users, array( sanitize_key( 'user_status' ) => 0 ), array( 'ID' => $wp_user_id ) );
-				update_user_meta($wp_user_id, LibUsers::$key_validated_general_terms_version, $edd_options[LibUsers::$edd_general_terms_version]);
+				update_user_meta($wp_user_id, WDGUser::$key_validated_general_terms_version, $edd_options[WDGUser::$edd_general_terms_version]);
 				wp_set_auth_cookie( $wp_user_id, false, is_ssl() );
 				if (isset($_POST['redirect-home'])) {
 					wp_redirect(home_url());

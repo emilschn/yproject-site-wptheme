@@ -133,7 +133,7 @@
 						<ul>
 							<li class="page_item_out upper"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Param&egrave;tres', 'yproject'); ?></a></li>
 							<?php 
-							$project_list = LibUsers::get_projects_by_id(bp_loggedin_user_id(), TRUE); 
+							$project_list = WDGUser::get_projects_by_id(bp_loggedin_user_id(), TRUE); 
 							foreach ($project_list as $project_id) {
 							    if (!empty($project_id)) {
 							    $post_campaign = get_post($project_id);
@@ -170,7 +170,7 @@
                                     <input type="password" name="pwd" id="sidebar-user-pass" class="input" placeholder="<?php _e('Mot de passe', 'yproject'); ?>" />
                                     <input type="submit" name="wp-submit" id="sidebar-wp-submit" value="OK" />
 
-                                    <input type="hidden" name="redirect-page" value="<?php echo YPUsersLib::get_login_redirect_page(); ?>" />
+                                    <input type="hidden" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
                                     <input type="hidden" name="redirect-error" value="<?php $page_connexion = get_page_by_path("connexion"); echo get_permalink($page_connexion->ID); ?>?login=failed" />
 				    <input type="hidden" name="login-form" value="1" />
                                     <br />
@@ -205,15 +205,15 @@
 		</div>
              
 		<?php 
-		LibUsers::check_validate_general_terms();
-		if (LibUsers::must_show_general_terms_block()): 
+		WDGUser::check_validate_general_terms();
+		if (WDGUser::must_show_general_terms_block()): 
 			global $edd_options;
 		?>
 		<div id="validate-terms" class="wdg-lightbox">
 			<div class="wdg-lightbox-padder">
 				<span>Mise &agrave; jour des conditions g&eacute;n&eacute;rales d&apos;utilisation</span>
 				<div class="validate-terms-excerpt">
-					<?php echo wpautop( stripslashes( $edd_options[LibUsers::$edd_general_terms_excerpt])); ?>
+					<?php echo wpautop( stripslashes( $edd_options[WDGUser::$edd_general_terms_excerpt])); ?>
 				</div>
 				<form action="" method="POST">
 					<input type="hidden" name="action" value="validate-terms" />

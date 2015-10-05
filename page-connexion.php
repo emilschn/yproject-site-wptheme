@@ -10,9 +10,9 @@
 			    <?php _e('Erreur d&apos;identification', 'yproject'); ?>
 		    </div>
 		    <?php } ?>
-		    <?php if (YPUsersLib::has_login_errors()): ?>
+		    <?php if (WDGUser::has_login_errors()): ?>
 		    <div class="errors">
-			    <?php echo YPUsersLib::display_login_errors(); ?>
+			    <?php echo WDGUser::display_login_errors(); ?>
 		    </div>
 		    <?php endif; ?>
 
@@ -35,7 +35,7 @@
 				    <input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" /> <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
 			    </p>
 
-			    <input type="hidden" name="redirect-page" value="<?php echo YPUsersLib::get_login_redirect_page(); ?>" />
+			    <input type="hidden" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 			    <input type="hidden" name="login-form" value="1" />
 		    </form>
 

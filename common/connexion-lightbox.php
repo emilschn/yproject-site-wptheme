@@ -1,7 +1,7 @@
 <div id="post_bottom_content" class="center_small align-center">
-	<?php if (YPUsersLib::has_login_errors()): ?>
+	<?php if (WDGUser::has_login_errors()): ?>
 	<div class="errors">
-		<?php echo YPUsersLib::display_login_errors(); ?>
+		<?php echo WDGUser::display_login_errors(); ?>
 	</div>
 	<?php endif; ?>
     
@@ -18,7 +18,7 @@
             
             <div id="submit-center">
                 <input type="submit"  name="wp-submit" id="sidebar-wp-submit-lightbox" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" style="margin: 5px;" />
-                <input type="hidden" id="redirect-page" name="redirect-page" value="<?php echo YPUsersLib::get_login_redirect_page(); ?>" />
+                <input type="hidden" id="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 		<input type="hidden" name="login-form" value="1" />
             </div>
 	    
