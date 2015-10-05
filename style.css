@@ -3619,7 +3619,7 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 #content.theme-myphotoreporter .client-header { margin-top: 0px; height: 360px; }
 #content.theme-myphotoreporter .client-header .center { padding-top: 40px; color: #FFFFFF; font-size: 17px; text-align: right; }
 #content.theme-myphotoreporter .client-header .center p { margin-left: 70%; }
-#content.theme-myphotoreporter .home-large-project h2 a, .home-large-project h2 a:hover { color: #189AB4; }
+#content.theme-myphotoreporter .home-large-project h2 a, #content.theme-myphotoreporter .home-large-project h2 a:hover { color: #189AB4; }
 #content.theme-myphotoreporter .home-large-project h2 img { display: none; }
 #content.theme-myphotoreporter .home-large-project .description-zone .description-discover,
 #content.theme-myphotoreporter .home-small-project.status-vote .description-discover { background-color: #189AB4; }
