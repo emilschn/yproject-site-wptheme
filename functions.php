@@ -1543,3 +1543,29 @@ function yproject_shortcode_dashboardmail_lightbox($atts, $content = '') {
 	echo do_shortcode('[yproject_lightbox id="dashboardmail"]' .$content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_dashboardmail_lightbox', 'yproject_shortcode_dashboardmail_lightbox');
+
+function yproject_shortcode_project_vote_count($atts, $content = '') {
+    $atts = shortcode_atts( array(
+	    'project' => '',
+    ), $atts );
+    
+    if (isset($atts['project']) && is_numeric($atts['project'])) {
+	    $post_campaign = get_post($atts['project']);
+	    $campaign = atcf_get_campaign($post_campaign);
+	    return $campaign->nb_voters();
+    }
+}
+add_shortcode('wdg_project_vote_count', 'yproject_shortcode_project_vote_count');
+
+function yproject_shortcode_project_amount_count($atts, $content = '') {
+    $atts = shortcode_atts( array(
+	    'project' => '',
+    ), $atts );
+    
+    if (isset($atts['project']) && is_numeric($atts['project'])) {
+	    $post_campaign = get_post($atts['project']);
+	    $campaign = atcf_get_campaign($post_campaign);
+	    return $campaign->current_amount();
+    }
+}
+add_shortcode('wdg_project_amount_count', 'yproject_shortcode_project_amount_count');
