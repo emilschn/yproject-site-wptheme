@@ -962,7 +962,7 @@ function get_investors_table() {
                             true,
                             true,
                             true,
-                            false,
+                            true,
                             false,
                             false);
         if ($is_campaign_over) { $selectiondefaut[]=true; }
@@ -1003,6 +1003,8 @@ function get_investors_table() {
 		$payment_state = edd_get_payment_status( $post_invest, true );
 		if (strpos($mangopay_id, 'wire_') !== FALSE) {
 			$payment_type = 'Virement';
+		} else if ($mangopay_id == 'check') {
+			$payment_type = 'Ch&egrave;que';
 		}
 		$investment_state = 'Validé';
 		if ($campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing') {

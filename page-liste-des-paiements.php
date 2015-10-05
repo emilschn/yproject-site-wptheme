@@ -102,7 +102,11 @@ get_header();
 				ypcf_get_updated_payment_status($item['ID']);
 				
 				$mangopay_id = edd_get_payment_key($item['ID']);
-				if (strpos($mangopay_id, 'wire_') !== FALSE) {
+				if ($mangopay_id == 'check') {
+					$mangopay_is_completed = 'Oui';
+					$mangopay_is_succeeded = 'Oui';
+				    
+				} else if (strpos($mangopay_id, 'wire_') !== FALSE) {
 					$contribution_id = substr($mangopay_id, 5);
 					$mangopay_contribution = ypcf_mangopay_get_withdrawalcontribution_by_id($contribution_id);
 					$mangopay_is_completed = (isset($mangopay_contribution)) ? 'Oui' : 'Non';
