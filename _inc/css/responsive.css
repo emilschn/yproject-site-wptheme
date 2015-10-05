@@ -382,4 +382,5 @@
 *******************************************************************************/
 	#content.theme-myphotoreporter nav.menu-client { padding-top: 5px !important; height: 55px !important; }
 	#content.theme-myphotoreporter .client-header { height: 180px !important; background-size: 250% !important; }
+	#content.theme-myphotoreporter .client-header .center { display: none; }
 }
