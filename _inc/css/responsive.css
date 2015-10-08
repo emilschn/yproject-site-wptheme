@@ -270,6 +270,9 @@
 		margin: 10px 2% !important;
 		width: 96% !important;
 	}
+	#projects-left-desc .video-zone iframe {
+		max-width: 100%;
+	}
 	#projects-right-desc { display: none; }
 	#post_bottom_content .projects-desc-item {
 		width: 90%;
