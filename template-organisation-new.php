@@ -17,7 +17,7 @@ get_header();
 	    
 		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 	    
-			<?php locate_template( array("basic/basic-header.php"), true ); ?>
+			<?php locate_template( array("common/basic-header.php"), true ); ?>
 	    
 			<div class="center margin-height">
 	    

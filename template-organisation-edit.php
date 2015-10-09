@@ -21,7 +21,7 @@ get_header();
 	    
 			<?php $post->post_title = 'Organisation ' . $organisation_obj->get_name(); ?>
 	    
-			<?php locate_template( array("basic/basic-header.php"), true ); ?>
+			<?php locate_template( array("common/basic-header.php"), true ); ?>
 	    
 			<div class="center margin-height">
 	    

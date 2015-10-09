@@ -3,7 +3,7 @@
 <div id="content">
 	<div class="padder">
 		
-		<?php locate_template( array("basic/basic-header.php"), true ); ?>
+		<?php locate_template( array("common/basic-header.php"), true ); ?>
 	    
 		<div class="center padding-top">
 

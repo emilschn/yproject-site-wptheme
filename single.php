@@ -13,7 +13,7 @@
 	<div class="padder">
 	    <?php 
 	    $page_title = ($category[0]->slug == 'wedogood') ? "Blog" : "Espace presse";
-	    locate_template( array( 'basic/basic-header.php' ), true );
+	    locate_template( array( 'common/basic-header.php' ), true );
 	    ?>
 	    
 	    <div id="post_bottom_bg">
