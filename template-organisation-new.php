@@ -5,9 +5,8 @@
  */
 ?>
 
-<?php 
-locate_template( array("requests/organisations.php"), true );
-YPOrganisationLib::submit_new();
+<?php
+YPOrganisation::submit_new();
 get_header();
 ?>
 

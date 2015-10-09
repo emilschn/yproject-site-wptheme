@@ -18,7 +18,6 @@ function block_stats_data(){
     }
     
     //Donnees de votes
-    locate_template( array("requests/votes.php"), true );
     global $vote_results;
     $vote_results = WDGCampaignVotes::get_results($campaign_id);
 }

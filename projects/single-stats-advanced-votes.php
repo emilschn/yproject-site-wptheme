@@ -1,6 +1,5 @@
 <?php
 if (isset($_GET['campaign_id'])) {
-	locate_template( array("requests/votes.php"), true );
         $campaign = atcf_get_campaign($_GET['campaign_id']); ?>
 
 	<h2>Statistiques des votes</h2>

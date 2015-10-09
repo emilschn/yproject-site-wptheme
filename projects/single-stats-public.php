@@ -23,7 +23,6 @@ else {
             if (file_exists($upload_dir['basedir'] . '/projets/' . $post_campaign->post_name . '-stats.jpg')) { 
                     echo '<img src="'.$upload_dir['baseurl'] . '/projets/' . $post_campaign->post_name . '-stats.jpg" alt="Statistiques du projet" />';
             } else {
-                    locate_template( array("requests/votes.php"), true );
                     locate_template( array("projects/stats-votes-public.php"), true );
                     $vote_results = WDGCampaignVotes::get_results($_GET['campaign_id']);
                     print_vote_results($vote_results);

@@ -59,7 +59,6 @@ YPProjectLib::form_proceed_roi_transfers();
 				
 				<h3 <?php if (!$keep_going) { ?>class="grey"<?php } ?>>2 - <?php _e('Documents d&apos;authentification', 'yproject'); ?></h3>
 				<?php if ($keep_going) {
-					locate_template( array("requests/organisations.php"), true );
 					$organisation_obj = new YPOrganisation($current_organisation->organisation_wpref);
 					$organisation_obj->submit_strong_authentication();
 					
