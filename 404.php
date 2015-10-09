@@ -1,20 +1,22 @@
 <?php get_header(); ?>
 
-	<div id="content">
-		<div class="padder one-column">
-		    <div class="center">
-			<?php do_action( 'bp_before_404' ); ?>
+<div id="content">
+	<div class="padder one-column">
+		<div class="center">
+
 			<div id="post-0" class="post page-404 error404 not-found" role="main">
-				<h2 class="posttitle"><?php _e( "Page not found", 'buddypress' ); ?></h2>
+				<h2 class="posttitle"><?php _e( "Vous &ecirc;tes perdu ?", 'yproject' ); ?></h2>
 
-				<p><?php _e( "We're sorry, but we can't find the page that you're looking for. Perhaps searching will help.", 'buddypress' ); ?></p>
-
-				<?php do_action( 'bp_404' ); ?>
+				<p><?php _e( "N&apos;h&eacute;sitez pas &agrave; nous le signaler &agrave; l&apos;adresse", 'yproject' ); ?> bonjour@wedogood.co</p>
+				
+				<p>
+					<?php $page_discover_projects = get_page_by_path('les-projets'); ?>
+					<?php _e( "En attendant, allez donc", 'yproject' ); ?> <a href="<?php echo get_permalink($page_discover_projects->ID); ?>"><?php _e('d&eacute;couvrir les projets', 'yproject'); ?></a>.
+				</p>
 			</div>
 
-			<?php do_action( 'bp_after_404' ); ?>
-		    </div>
-		</div><!-- .padder -->
-	</div><!-- #content -->
+		</div>
+	</div><!-- .padder -->
+</div><!-- #content -->
 
 <?php get_footer(); ?>
