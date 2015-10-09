@@ -7,9 +7,9 @@ global $campaign_id;
 $campaign_id = $_GET['campaign_id'];
 $post_campaign = get_post($campaign_id);
 $campaign = atcf_get_campaign($post_campaign);
-YPProjectLib::form_proceed_roi_list($campaign);
-YPProjectLib::form_proceed_roi_return();
-YPProjectLib::form_proceed_roi_transfers();
+WDGFormProjects::form_proceed_roi_list($campaign);
+WDGFormProjects::form_proceed_roi_return();
+WDGFormProjects::form_proceed_roi_transfers();
 ?>
 
 <?php get_header(); ?>
@@ -175,7 +175,7 @@ YPProjectLib::form_proceed_roi_transfers();
 					<ul class="payment-list">
 					    <?php for ($i = $fp_yy; $i < $campaign->funding_duration() + $fp_yy; $i++): ?>
 						<?php
-						YPProjectLib::form_submit_yearly_account($i);
+						WDGFormProjects::form_submit_yearly_account($i);
 						$payment_status = $campaign->payment_status_for_year($i);
 						if (isset($payment_status)) {
 						    $post_payment_status = get_post($payment_status);

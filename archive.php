@@ -19,9 +19,8 @@ if (isset($campaign_id)) {
 	}
 }
 $page_edit_news = get_page_by_path('editer-une-actu');
-locate_template( array("requests/projects.php"), true );
 if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
-	YPProjectLib::form_validate_news_add($campaign_id);
+	WDGFormProjects::form_validate_news_add($campaign_id);
 	//Afficher le nouvel article
 	header('Location: '.$_SERVER['REQUEST_URI']);
 }

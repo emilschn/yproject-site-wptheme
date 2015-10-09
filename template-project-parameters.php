@@ -4,7 +4,7 @@
  *
  */
 BoppLibHelpers::check_create_role(BoppLibHelpers::$project_organisation_manager_role['slug'], BoppLibHelpers::$project_organisation_manager_role['title']);
-if (isset($_POST['action'])) $feedback = YPProjectLib::form_validate_edit_parameters();
+if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_parameters();
 ?>
 
 <?php get_header(); ?>

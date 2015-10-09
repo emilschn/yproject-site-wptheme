@@ -328,7 +328,6 @@ function yproject_admin_init() {
 //add_action( 'admin_init', 'yproject_admin_init' );
 
 function yproject_page_template( $template ) {
-	locate_template( array("requests/projects.php"), true );
 	global $post;
 	$campaign = atcf_get_campaign( $post );
 	$campaign_id = $post->ID;

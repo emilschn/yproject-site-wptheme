@@ -6,8 +6,6 @@ if (!isset($campaign_id)) {
 }
 $post_campaign = get_post($campaign_id);
 
-locate_template( array("requests/projects.php"), true );
-
 if ($can_modify) {
 	$show_admin_bar = TRUE;
 	$campaign = atcf_get_campaign($post_campaign);

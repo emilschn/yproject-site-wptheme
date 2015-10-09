@@ -27,7 +27,7 @@ else {
 ?>
 		<?php 
 		//PROJETS EN COURS
-		$nb_collecte_projects = count(query_projects_collecte()); 
+		$nb_collecte_projects = count(ATCF_Campaigns::list_projects_funding()); 
 		if ($nb_collecte_projects > 0) { ?>
 			<div class="part-title-separator mobile_hidden">
 				<span class="part-title">En cours de financement</span>
@@ -57,8 +57,8 @@ else {
 		//PROJETS A VENIR
 		require('projects/home-small.php');
 		$is_right_project = TRUE;
-		$preview_projects = query_projects_preview();
-		$vote_projects = query_projects_vote();
+		$preview_projects = ATCF_Campaigns::list_projects_preview();
+		$vote_projects = ATCF_Campaigns::list_projects_vote();
 		$nb_vote_projects = count($vote_projects);
 		$nb_preview_projects = count($preview_projects);
 		$nb_total_projects = $nb_vote_projects + $nb_preview_projects;
@@ -98,7 +98,7 @@ else {
 		?>
 		<div class="part-title-separator mobile_hidden">
 			<?php
-			$nb_funded_projects = count(query_projects_funded()); 
+			$nb_funded_projects = count(ATCF_Campaigns::list_projects_funded()); 
 			if ($nb_funded_projects > 0) { ?>
 				<span class="part-title">D&eacute;j&agrave; financ&eacute;</span>	
 			<?php } ?>
@@ -112,7 +112,7 @@ else {
 		?>
 		<div class="part-title-separator mobile_hidden">
 			<?php
-			$nb_archived_projects = count(query_projects_archive()); 
+			$nb_archived_projects = count(ATCF_Campaigns::list_projects_archive()); 
 			if ($nb_archived_projects > 0) { ?>
 				<span class="part-title">Projets termin&eacute;s</span>	
 			<?php } ?>

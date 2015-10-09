@@ -34,7 +34,7 @@ else {
 ?>
 		<?php 
 		//PROJETS EN COURS
-		$nb_collecte_projects = count(query_projects_collecte(0, 'myphotoreporter')); 
+		$nb_collecte_projects = count(ATCF_Campaigns::list_projects_funding(0, 'myphotoreporter')); 
 		if ($nb_collecte_projects > 0) { ?>
 			<div class="part-title-separator mobile_hidden">
 				<span class="part-title">Financez les projets !</span>
@@ -64,8 +64,8 @@ else {
 		//PROJETS A VENIR
 		require('projects/home-small.php');
 		$is_right_project = TRUE;
-		$preview_projects = query_projects_preview(0, 'myphotoreporter');
-		$vote_projects = query_projects_vote(0, 'myphotoreporter');
+		$preview_projects = ATCF_Campaigns::list_projects_preview(0, 'myphotoreporter');
+		$vote_projects = ATCF_Campaigns::list_projects_vote(0, 'myphotoreporter');
 		$nb_vote_projects = count($vote_projects);
 		$nb_preview_projects = count($preview_projects);
 		$nb_total_projects = $nb_vote_projects + $nb_preview_projects;
@@ -104,7 +104,7 @@ else {
 		?><div class="clear"></div><?php
 
 		//PROJETS REUSSIS
-		$nb_funded_projects = count(query_projects_funded(0, 'myphotoreporter')); 
+		$nb_funded_projects = count(ATCF_Campaigns::list_projects_funded(0, 'myphotoreporter')); 
 		if ($nb_funded_projects > 0) { ?>
 			<div class="part-title-separator mobile_hidden">
 				<span class="part-title">D&eacute;j&agrave; financ&eacute;</span>
@@ -116,7 +116,7 @@ else {
 	    
 		<?php 
 		//PROJETS ECHOUES
-		$nb_archived_projects = count(query_projects_archive(0, 'myphotoreporter')); 
+		$nb_archived_projects = count(ATCF_Campaigns::list_projects_archive(0, 'myphotoreporter')); 
 		if ($nb_archived_projects > 0) { ?>
 			<div class="part-title-separator mobile_hidden">
 				<span class="part-title">Projets termin&eacute;s</span>	
