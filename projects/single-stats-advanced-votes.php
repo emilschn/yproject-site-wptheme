@@ -6,7 +6,7 @@ if (isset($_GET['campaign_id'])) {
 	<h2>Statistiques des votes</h2>
 	<?php
             locate_template( array("projects/stats-votes-public.php"), true );
-            $vote_results = wdg_get_project_vote_results($_GET['campaign_id']); 
+            $vote_results = WDGCampaignVotes::get_results($_GET['campaign_id']); 
             $status = $campaign->campaign_status();
             
             //N'affiche pas le graphe si les dates des votes n'ont pas été enregistrées ou le vote n'a pas été fait

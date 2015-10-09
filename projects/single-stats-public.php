@@ -25,7 +25,7 @@ else {
             } else {
                     locate_template( array("requests/votes.php"), true );
                     locate_template( array("projects/stats-votes-public.php"), true );
-                    $vote_results = wdg_get_project_vote_results($_GET['campaign_id']);
+                    $vote_results = WDGCampaignVotes::get_results($_GET['campaign_id']);
                     print_vote_results($vote_results);
             }
     ?>

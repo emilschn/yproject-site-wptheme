@@ -67,7 +67,7 @@ $campaign = atcf_get_current_campaign();
                 }?>>
                 J'ai d&eacute;termin&eacute; <a href="<?php echo get_permalink(get_page_by_path('parametres-projet')->ID) . '?campaign_id='.$_GET['campaign_id'] . $params_partial; ?>">l'organisation du projet</a></label></li>
             <li><label><input type="checkbox" class="checkbox-next-step" id="cbvotefin" disabled
-                <?php if((is_validated_by_vote($campaign) && $campaign->end_vote_remaining()<=0)|| $campaign->can_go_next_step()){echo "checked";}
+                <?php if(($campaign->is_vote_validated() && $campaign->end_vote_remaining()<=0)|| $campaign->can_go_next_step()){echo "checked";}
                 ?>>
                 Le vote est termin&eacute; et le projet a &eacute;t&eacute; valid&eacute;</label></li>
 
