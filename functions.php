@@ -1422,10 +1422,6 @@ Sélectionner :<br />
 add_action('wp_ajax_get_email_selector', 'get_email_selector');
 add_action('wp_ajax_nopriv_get_email_selector', 'get_email_selector');
 
-
-require_once("requests/ajax.php");
-YPAjaxLib::add_action('display_roi_user_list');
-
 /**
  * Shortcodes généraux
  */
