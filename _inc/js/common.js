@@ -203,19 +203,7 @@ YPUIFunctions = (function($) {
 				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, nTimeout);
 			}
 			
-			
-			/*if ($("#blog-archives form#add-news").length > 0) {
-				$("#blog-archives #add-news-opener").click(function() {
-					if ($("#blog-archives form#add-news").is(":visible")) {
-						$("#blog-archives form#add-news").hide();
-					} else {
-						$("#blog-archives form#add-news").show();
-					}
-				});
-			}*/
-                        
-                        
-                        //Si chargement données investisseurs/investissements nécessaire
+			//Si chargement données investisseurs/investissements nécessaire
                         if ($(".ajax-investments-load").length > 0) { 
                             campaign_id = $(".ajax-investments-load").attr('data-value');
                                 YPUIFunctions.getInvestments(campaign_id); 

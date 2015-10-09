@@ -1355,7 +1355,7 @@ add_action('wp_ajax_nopriv_get_invests_graph', 'get_invests_graph');
 
 function get_investments_data(){
     	locate_template( array("requests/investments.php"), true );
-	$investments_list = wdg_get_project_investments($_POST['id_campaign']);
+	$investments_list = WDGCampaignInvestments::get_list($_POST['id_campaign']);
         echo json_encode($investments_list);
         exit();
 }
