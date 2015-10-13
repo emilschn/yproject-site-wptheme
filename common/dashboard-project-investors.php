@@ -29,17 +29,17 @@ if ($campaign->current_user_can_edit()) {
 	} ?>
 	
 	<form method="POST" action="">
-		<label for="email"><?php _e('E-mail :', 'yproject'); ?>*</label> <input type="text" name="email" /><br />
-		<label for="value"><?php _e('Somme :', 'yproject'); ?>*</label> <input type="text" name="value" /><br />
-		<label for="username"><?php _e('Login :', 'yproject'); ?></label> <input type="text" name="username" /><br />
-		<label for="password"><?php _e('Mot de passe :', 'yproject'); ?></label> <input type="text" name="password" /><br />
+		<label for="email"><?php _e('E-mail :', 'yproject'); ?>*</label> <input type="text" name="email" <?php if (isset($_POST['email']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['email']; ?>"<?php } ?> /><br />
+		<label for="value"><?php _e('Somme :', 'yproject'); ?>*</label> <input type="text" name="value" <?php if (isset($_POST['value']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['value']; ?>"<?php } ?> /><br />
+		<label for="username"><?php _e('Login :', 'yproject'); ?></label> <input type="text" name="username" <?php if (isset($_POST['username']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['username']; ?>"<?php } ?> /><br />
+		<label for="password"><?php _e('Mot de passe :', 'yproject'); ?></label> <input type="text" name="password" <?php if (isset($_POST['password']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['password']; ?>"<?php } ?> /><br />
 		<label for="gender"><?php _e('Genre :', 'yproject'); ?></label> 
 			<select name="gender">
-			    <option value="female">Mme</option>
-			    <option value="male">Mr</option>
+			    <option value="female" <?php if (isset($_POST['gender']) && $_POST['gender'] == "female" && $add_check_result === FALSE) { ?>selected="selected"<?php } ?>>Mme</option>
+			    <option value="male" <?php if (isset($_POST['gender']) && $_POST['gender'] == "male" && $add_check_result === FALSE) { ?>selected="selected"<?php } ?>>Mr</option>
 			</select><br />
-		<label for="firstname"><?php _e('Pr&eacute;nom :', 'yproject'); ?></label> <input type="text" name="firstname" /><br />
-		<label for="lastname"><?php _e('Nom :', 'yproject'); ?></label> <input type="text" name="lastname" /><br />
+		<label for="firstname"><?php _e('Pr&eacute;nom :', 'yproject'); ?></label> <input type="text" name="firstname" <?php if (isset($_POST['firstname']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['firstname']; ?>"<?php } ?> /><br />
+		<label for="lastname"><?php _e('Nom :', 'yproject'); ?></label> <input type="text" name="lastname" <?php if (isset($_POST['lastname']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['lastname']; ?>"<?php } ?> /><br />
 		<button type="submit"><?php _e('Ajouter', 'yproject'); ?></button>
 		<input type="hidden" name="action" value="add-check-investment" />
 	</form>
