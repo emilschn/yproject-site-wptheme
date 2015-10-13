@@ -389,7 +389,7 @@ add_filter('bbp_get_forum_title', 'yproject_bbp_get_forum_title');
  * @return type
  */
 function remove_related_videos($embed) {
-    if (strstr($embed,'http://www.youtube.com/embed/')) {
+    if (strstr($embed,'http://www.youtube.com/embed/') || strstr($embed,'https://www.youtube.com/embed/')) {
 	return str_replace('feature=oembed','feature=oembed&rel=0',$embed);
     } else {
 	return $embed;

@@ -1425,7 +1425,12 @@ header.header_home #welcome_text #header_homepage_link {
     text-align: center;
 }
 
-
+.home_video h1 {
+    width: 50%; min-width: 320px; margin: 15px auto; font-size: 15pt;
+}
+.home_video iframe {
+    max-width: 96%;
+}
 #home_middle_top {
     margin-bottom: 30px;
 }

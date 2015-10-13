@@ -63,8 +63,8 @@ else {
 	ob_start();
 ?>
 
-<div class="center align-center padder_more">
-	<h1 style="width: 60%; margin: 15px auto;">Comment faire pour que mon argent serve &agrave; financer des projets qui ont du sens ?</h1>
+<div class="home_video center align-center padder_more">
+	<h1>Comment faire pour que mon argent serve &agrave; financer des projets qui ont du sens ?</h1>
 	<?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU'); ?>
 </div>
 
