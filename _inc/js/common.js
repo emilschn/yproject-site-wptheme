@@ -18,10 +18,12 @@ YPUIFunctions = (function($) {
 						$("#nav").hide();
 						$(".menu-client").css("position", "fixed");
 						$("#content.theme-myphotoreporter #projects-stats-content").css("top", 60);
+						$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 60);
 					} else {
 						$("#nav").show();
 						$(".menu-client").css("position", "relative");
 						$("#content.theme-myphotoreporter #projects-stats-content").css("top", 0);
+						$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 0);
 					}
 					
 					
