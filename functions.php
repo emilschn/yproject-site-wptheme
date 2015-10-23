@@ -54,6 +54,7 @@ function yproject_enqueue_script(){
 	$campaign = atcf_get_current_campaign();
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere');
+	$is_admin_page = ($post->post_name == 'liste-des-paiements');
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -62,15 +63,16 @@ function yproject_enqueue_script(){
 	}
 	
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '15.07.10');
-	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '15.07.10'); }
-	if ($is_dashboard_page && $can_modify) { wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery', 'jquery-ui-dialog'), '15.09.23'); }
+	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '20151022'); }
+	if ($is_dashboard_page && $can_modify) { wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery', 'jquery-ui-dialog'), '20151022'); }
+	if ($is_admin_page) { wp_enqueue_script( 'wdg-admin-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-admin-dashboard.js', array('jquery', 'jquery-ui-dialog'), '20151022'); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
 //	wp_enqueue_script( 'wdg-ux-helper', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-ux-helper.js', array('wdg-script'));
 
         //Ne charge les scripts de tableau que si tableau de bord
-        if($post->post_name=='tableau-de-bord'){
+        if($post->post_name=='tableau-de-bord' || $is_admin_page){
             wp_enqueue_script( 'datatable-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/jquery.dataTables.js', array('wdg-script'), true, true);
             wp_enqueue_style('datatable-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/jquery.dataTables.css', null, false, 'all');
             //wp_enqueue_script( 'datatable-resp-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.responsive.js', array('wdg-script'), true, true);

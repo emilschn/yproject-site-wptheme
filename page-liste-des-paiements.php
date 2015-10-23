@@ -18,9 +18,9 @@ get_header(); ?>
 	<h1>Flux mon&eacute;taires - Tableau de bord</h1>
 	
 	<div>
-	    <ul>
-		<li>
-		    <h2 class="expandator" data-target="1">+ WE DO GOOD</h2>
+	    <ul class="no-style">
+		<?php /*<li>
+		    <h2 class="expandator" data-target="1">WE DO GOOD +</h2>
 		    <div id="extendable-1" class="expandable">
 			<h3>Etat du porte-monnaie sur Mangopay :</h3>
 			<?php // $wdg_mp_user = ypcf_mangopay_get_user_by_id(1); print_r($wdg_mp_user); ?>
@@ -49,12 +49,12 @@ get_header(); ?>
 			    </table>
 			</div>
 		    </div>
-		</li>
+		</li> */ ?>
 		
 		<?php $project_list = ATCF_Campaigns::list_projects_started(); ?>
 		<?php foreach ($project_list as $project_post): ?>
-		<li>
-		    <h2 class="expandator" data-target="<?php echo $project_post->ID; ?>">+ <?php echo $project_post->post_title; ?></h2>
+		<li class="db-money-flow-item">
+		    <h2 class="expandator" data-target="<?php echo $project_post->ID; ?>"><?php echo $project_post->post_title; ?> +</h2>
 		    <div id="extendable-<?php echo $project_post->ID; ?>" class="expandable"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
 		</li>
 		<?php endforeach; ?>

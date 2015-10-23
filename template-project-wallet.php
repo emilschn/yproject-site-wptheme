@@ -39,13 +39,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 				<h2><?php _e('Porte-monnaie de ', 'yproject'); echo $post_campaign->post_title; ?></h2>
 				<h3>1 - <?php _e('Associer une organisation &agrave; votre projet', 'yproject'); ?></h3>
 				<?php if ($keep_going) {
-					$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
-
-					//Vérification si une organisation a bien été définie
-					$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-					if (isset($current_organisations) && count($current_organisations) > 0) {
-						$current_organisation = $current_organisations[0];
-					}
+					$current_organisation = $campaign->get_organisation();
 					if (isset($current_organisation)) {
 						$page_edit_orga = get_page_by_path('editer-une-organisation');
 						echo __('Organisation d&eacute;finie :', 'yproject') . ' ' . $current_organisation->organisation_name . ' <a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">' . __('Editer', 'yproject') . '</a>';
