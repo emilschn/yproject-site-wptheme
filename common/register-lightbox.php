@@ -73,7 +73,7 @@
 
 		<h2><?php _e( 'Bienvenue chez WE DO GOOD !', 'yproject' ); ?> :)</h2>
 
-		<?php _e( 'Votre compte est cr&eacute;&eacute; et vous bien connect&eacute;.', 'yproject' ); ?><br /><br />
+		<?php _e( 'Votre compte est cr&eacute;&eacute; et vous &ecirc;tes connect&eacute;.', 'yproject' ); ?><br /><br />
 		
 		<?php if (isset($page_register) && $page_register == TRUE): ?>
 		<?php _e('Rendez-vous sur la page des projets en cliquant sur '); ?><a href="<?php $page_project_list = get_page_by_path('les-projets'); echo get_permalink($page_project_list->ID); ?>"><?php _e('ce lien'); ?></a>.
