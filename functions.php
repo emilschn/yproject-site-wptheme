@@ -265,8 +265,7 @@ function ypbp_core_screen_signup() {
 				$bp->signup->step = 'completed-confirmation';
 				$wpdb->update( $wpdb->users, array( sanitize_key( 'user_status' ) => 0 ), array( 'ID' => $wp_user_id ) );
 				update_user_meta($wp_user_id, WDGUser::$key_validated_general_terms_version, $edd_options[WDGUser::$edd_general_terms_version]);
-				NotificationsEmails::new_user_admin($wp_user_id);
-				NotificationsEmails::new_user_user($wp_user_id);
+				NotificationsEmails::new_user_admin($wp_user_id); //Envoi mail à l'admin (celui pour l'utilisateur est envoyé par buddypress)
 				wp_set_auth_cookie( $wp_user_id, false, is_ssl() );
 				if (isset($_POST['redirect-home'])) {
 					wp_redirect(home_url());
@@ -292,6 +291,9 @@ function ypbp_filter_validation_email_message() {
     $message = "Bienvenue sur WEDOGOOD.co !\n\n";
     $message .= "Vous êtes prêt à soutenir des projets à impact positif !\n\n";
     $message .= "Rejoignez la communauté sur ".esc_url(home_url())."\n\n";
+    global $edd_options;
+    $message = wpautop( $edd_options['header_global_mail'] ) . $message . wpautop( $edd_options['footer_global_mail'] );
+	    
     return $message;
 }
 add_filter('bp_core_signup_send_validation_email_message', 'ypbp_filter_validation_email_message');
