@@ -8,6 +8,10 @@ if ( !current_user_can('manage_options') ) {
     status_header( 404 );
     get_template_part( 404 ); exit();
 }
+if (isset($_POST["id-cancel-payment"])) {
+    WDGCampaignInvestments::cancel($_POST["id-cancel-payment"]);
+    $feedback = 'Paiement annulé';
+}
 global $disable_logs;
 $disable_logs = TRUE;
 
@@ -60,6 +64,28 @@ get_header(); ?>
 		<?php endforeach; ?>
 	    </ul>
 	</div>
+	
+	<hr />
+	
+	<div>
+		<h2>Fonctions supplémentaires</h2>
+		
+		<a id="action-feedback"></a>
+		<?php echo $feedback; ?>
+		
+		<?php $page_payment_dashboard = get_page_by_path('liste-des-paiements'); ?>
+		<form method="POST" action="<?php echo get_permalink($page_payment_dashboard->ID); ?>#action-feedback">
+		    <h3>Annuler un paiement en attente</h3>
+		    Id du paiement : <input type="text" name="id-cancel-payment" /> <input type="submit" class="button" value="Annuler" />
+		</form>
+		
+		<?php /* <form method="POST" action="">
+		    <h3>Annuler un virement en attente</h3>
+		    Id du paiement : <input type="text" name="id-payment" /> <input type="submit" class="button" value="Annuler" />
+		</form> */ ?>
+	</div>
+	
+	<hr />
 	
     </div>
 </div>

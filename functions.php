@@ -897,7 +897,7 @@ add_action('wp_ajax_nopriv_save_edit_project', 'yproject_save_edit_project');
 
 function get_investors_table() {
     
-        locate_template( array("requests/investments.php"), true );
+//        locate_template( array("requests/investments.php"), true );
         $investments_list = (json_decode($_POST['data'],true));
         $campaign = atcf_get_campaign($_POST['id_campaign']); 
         
@@ -1088,7 +1088,7 @@ function get_investors_table() {
                 $affichedonnees = array_combine($classcolonnes, $datacolonnes);
                 ?>
                 
-                <tr>
+                <tr data-payment="<?php echo $item['ID']; ?>">
                 <?php
                     //Ecriture de la ligne
                     foreach($affichedonnees as $class=>$data){
@@ -1355,7 +1355,7 @@ add_action('wp_ajax_get_invests_graph', 'get_invests_graph');
 add_action('wp_ajax_nopriv_get_invests_graph', 'get_invests_graph');
 
 function get_investments_data(){
-    	locate_template( array("requests/investments.php"), true );
+//    	locate_template( array("requests/investments.php"), true );
 	$investments_list = WDGCampaignInvestments::get_list($_POST['id_campaign']);
         echo json_encode($investments_list);
         exit();
