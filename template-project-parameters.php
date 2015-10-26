@@ -236,6 +236,12 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 					
                                         <label for="phone">Num&eacute;ro de t&eacute;l&eacute;phone de contact : </label>
                                         <input type="text" name="phone" value="<?php echo $campaign->contact_phone(); ?>" /><br />
+					
+					<label for="video">Vid&eacute;o de pr&eacute;sentation :</label>
+					<input type="text" name="video" placeholder="URL de la vidéo" value="<?php echo $campaign->video(); ?>" /><br />
+                                        <?php if($campaign->video()!=''){ ?><div class="video-zone">
+                                                <?php echo wp_oembed_get($campaign->video(), array('width' => 580, 'height' => 325)); ?>
+                                        </div><?php } ?><br />
 						
 					<?php $image_src_header = $campaign->get_header_picture_src(false); ?>
 					<label for="image_header">Image du bandeau :</label>
@@ -249,12 +255,6 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 					<input type="file" name="image_home" /><br />
 					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 610px de largeur * 330px de hauteur)</span><br />
 					<?php if ($image_src_home != '') { ?><img style="max-width: 100%;" src="<?php echo $image_src_home; ?>" /><br /><?php } ?>
-					
-					<label for="video">Vid&eacute;o de pr&eacute;sentation :</label>
-					<input type="text" name="video" placeholder="URL de la vidéo" value="<?php echo $campaign->video(); ?>" /><br />
-                                        <?php if($campaign->video()!=''){ ?><div class="video-zone">
-                                                <?php echo wp_oembed_get($campaign->video(), array('width' => 580, 'height' => 325)); ?>
-                                        </div><?php } ?>
                                         
 					<input type="hidden" name="action" value="edit-project-parameters" />
 						

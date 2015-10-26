@@ -6,7 +6,7 @@
 ?>
 
 <?php 
-$organisation_obj = YPOrganisation::get_current();
+$organisation_obj = YPOrganisation::current();
 YPOrganisation::edit($organisation_obj);
 ypcf_init_mangopay_user($organisation_obj->get_creator(), TRUE);
 get_header();

@@ -140,9 +140,10 @@ var ProjectEditor = (function($) {
 						break;
 					case "picture-head":
 					case "video-zone":
-                                            ProjectEditor.redirectParams(sProperty);
+						ProjectEditor.redirectParams(sProperty);
+						break;
                                         case "project-owner":
-                                            ProjectEditor.redirectOrganisation(sProperty);
+						ProjectEditor.redirectOrganisation(sProperty);
 						break;
 				}
 			});
@@ -262,12 +263,12 @@ var ProjectEditor = (function($) {
 		
 		//Redirige vers la page Paramètres
 		redirectParams: function(property) {
-			window.location.href = $("#projects-right-desc").attr("data-link-project-settings") + "#" + property;
+			window.location.href = $("#projects-right-desc").data("link-project-settings") + "#" + property;
 		},
                 
                 //Redirections pour l'édition de l'organisation
 		redirectOrganisation: function(property) {
-			window.location.href = $("#orga-edit").attr("data-link-edit") + "#" + property;
+			window.location.href = $("#orga-edit").data("link-edit") + "#" + property;
 		},
 		
 		//Enregistre le contenu d'un élément saisi
