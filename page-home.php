@@ -60,7 +60,7 @@ if ( !is_user_logged_in() ) {
 $cache_home = $WDG_cache_plugin->get_cache('home', 2);
 if ($cache_home !== FALSE) { echo $cache_home; }
 else {
-	ob_start();
+	ob_start(); /*
 ?>
 
 <div class="home_video center align-center padder_more">
@@ -69,7 +69,7 @@ else {
 </div>
 
 
-<?php 
+<?php */
 $page_finance = get_page_by_path('financement');
 $page_how = get_page_by_path('descriptif');
 ?>
