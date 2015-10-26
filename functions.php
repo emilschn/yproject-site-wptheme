@@ -283,21 +283,10 @@ function ypbp_core_screen_signup() {
 	do_action( 'bp_core_screen_signup' );
 }
 
-function ypbp_filter_validation_email_subject() {
-    return "Bienvenue chez WE DO GOOD !";
+function ypbp_filter_send_activation_key() {
+    return false;
 }
-add_filter('bp_core_signup_send_validation_email_subject', 'ypbp_filter_validation_email_subject');
-function ypbp_filter_validation_email_message() {
-    $message = "Bienvenue sur WEDOGOOD.co !\n\n";
-    $message .= "Vous êtes prêt à soutenir des projets à impact positif !\n\n";
-    $message .= "Rejoignez la communauté sur ".esc_url(home_url())."\n\n";
-    global $edd_options;
-    $message = wpautop( $edd_options['header_global_mail'] ) . $message . wpautop( $edd_options['footer_global_mail'] );
-	    
-    return $message;
-}
-add_filter('bp_core_signup_send_validation_email_message', 'ypbp_filter_validation_email_message');
-
+add_filter('bp_core_signup_send_activation_key', 'ypbp_filter_send_activation_key');
 
 //********
 // Lightbox profil 
