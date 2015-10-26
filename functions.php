@@ -1051,7 +1051,7 @@ function get_investors_table() {
 				$item['email'],
 				$orga_user->user_mobile_phone,
 				$item['amount'].'€',
-				date_i18n( 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
+				date_i18n( 'Y-m-d', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
 				$payment_type,
 				$payment_state,
 				$item['signsquid_status_text']
@@ -1071,7 +1071,7 @@ function get_investors_table() {
 				$user_data->user_email,
 				$user_data->user_mobile_phone,
 				$item['amount'].'€',
-				date_i18n( /*get_option('date_format')*/ 'd/m/Y', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
+				date_i18n( 'Y-m-d', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
 				$payment_type,
 				$payment_state,
 				$item['signsquid_status_text']
