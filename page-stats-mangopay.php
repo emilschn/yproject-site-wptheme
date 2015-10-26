@@ -38,9 +38,14 @@ get_header();
 		    $campaign_id = 2825;
 		    $amount = 1358.18;
 		    $amount_fees = 291.82;
+		    //PFDO
 		    $campaign_id = 6011;
 		    $amount = 3429.46;
 		    $amount_fees = 150.54;
+		    //Matin gourmand
+		    $campaign_id = 6143;
+		    $amount = 3769.46;
+		    $amount_fees = 210.54;
 		    $api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
 		    echo '$api_project_id ' . $api_project_id . '<br />';
 		    $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
