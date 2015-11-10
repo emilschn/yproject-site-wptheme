@@ -1,0 +1,43 @@
+/*******************************************************************************
+* NAVIGATION
+*******************************************************************************/
+nav#navigation { display: none; }
+#container { padding-top: 0px; }
+
+nav.project-navigation {
+    background-color: #333333;
+    height: 80px;
+}
+nav.project-navigation ul {
+    float: left;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+nav.project-navigation ul li {
+    list-style: none;
+    height: 80px;
+    vertical-align: middle;
+    display: table-cell;
+    padding-right: 10px;
+}
+nav.project-navigation ul li a {
+    color: #FFF;
+}
+
+nav.project-navigation ul.menu-hamburger li:last-child { display: none; }
+nav.project-navigation ul.menu-actions {
+    float: right;
+    width: 300px; 
+}
+nav.project-navigation ul.menu-actions li {
+    width: 100px;
+    height: 60px;
+}
+nav.project-navigation ul.menu-actions li:first-child {
+    display: block;
+    width: 100%;
+    height: 20px;
+    text-align: center;
+}

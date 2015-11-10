@@ -1,61 +1,66 @@
-<?php date_default_timezone_set("Europe/Paris"); ?>
-  
 <?php 
 global $campaign, $post, $campaign_id, $client_context;
-$campaign_id = $post->ID;
-if ( ! is_object( $campaign ) ) { $campaign = atcf_get_campaign($post); }
-$tag_list = wp_get_post_terms($campaign_id, 'download_tag');
-$classes = '';
-foreach ($tag_list as $tag) {
-	if ($classes != '') { $classes .= ' '; }
-	$classes .= 'theme-' . $tag->slug;
-	$client_context = $tag->slug;
-}
+$campaign = atcf_get_current_campaign();
+
+$tag_list = $campaign->get_keywords();
+$client_context = $campaign->get_client_context();
+$classes = ($client_context != '') ? 'theme-' . $client_context . ' ' : '';
+
 if ($campaign->campaign_status() == "vote") { require_once('projects/header-voteform.php'); }
-$suffix = ($campaign->edit_version() > 1) ? '-sf' : '';
+$edit_version = $campaign->edit_version();
+$classes .= 'version-' . $edit_version;
 ?>
 			
 <?php get_header(); ?>
 
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-<div id="content" data-campaignid="<?php the_ID(); ?>" <?php echo 'class="'.$classes.'"'; ?>>
-    
-	<?php if ($classes != '') {
-	locate_template( array("clients/myphotoreporter/menu.php"), true ); 
-	display_photoreporter_menu();
-	} ?>
-    
-	<div class="padder">
+<?php if (isset($campaign)) : ?>
+<div id="content" data-campaignid="<?php echo $campaign->ID; ?>" class="<?php echo $classes; ?>">
 
-		<?php require_once('projects/single-admin-bar.php'); ?>
+	<?php if ($edit_version < 3): ?>
+		
+		<?php if ($classes != '') {
+		locate_template( array("clients/myphotoreporter/menu.php"), true ); 
+		display_photoreporter_menu();
+		} ?>
 
-		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<div class="padder">
 
-			<?php require_once('projects/single-header'.$suffix.'.php'); ?>
+			<?php require_once('projects/single-admin-bar'.$suffix.'.php'); ?>
 
-			<div id="post_bottom_bg">
+			<div id="post-<?php echo $campaign->ID; ?>" <?php post_class(); ?>>
 
-				<div id="post_bottom_content" class="center">
+				<?php require_once('projects/single-header'.$suffix.'.php'); ?>
 
-					<?php require_once('projects/single-content'.$suffix.'.php'); ?>
+				<div id="post_bottom_bg">
 
-					<div style="clear: both"></div>
+					<div id="post_bottom_content" class="center">
 
+						<?php require_once('projects/single-content'.$suffix.'.php'); ?>
+
+						<div style="clear: both"></div>
+
+					</div>
 				</div>
+
 			</div>
 
-		</div>
-		    
-	</div><!-- .padder -->
+		</div><!-- .padder -->
+
+	<?php else: ?>
+		<?php locate_template( array("projects/single/template.php"), true ); ?>
+		
+	<?php endif; ?>
+
 </div><!-- #content -->
 
 
-<?php endwhile; else: ?>
+<?php else: ?>
 <div id="content">
 	<div class="padder center">
 		Aucun projet ne correspond &agrave; cette page.
 	</div><!-- .padder -->
 </div><!-- #content -->
+
 <?php endif; ?>
 	
 <?php get_footer();
