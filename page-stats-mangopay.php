@@ -26,26 +26,10 @@ get_header();
 		
 		    <?php
 		    /*
-		    //Gestion Hubmode
-		    $campaign_id = 4492;
-		    $amount = 9967.28;
-		    $amount_fees = 1232.72;
-		    //Gestion Navlab
-		    $campaign_id = 4171;
-		    $amount = 9950;
-		    $amount_fees = 1200;
-		    //Gestion Nkita
-		    $campaign_id = 2825;
-		    $amount = 1358.18;
-		    $amount_fees = 291.82;
-		    //PFDO
-		    $campaign_id = 6011;
-		    $amount = 3429.46;
-		    $amount_fees = 150.54;
-		    //Matin gourmand
-		    $campaign_id = 6143;
-		    $amount = 3769.46;
-		    $amount_fees = 210.54;
+		    //Plongée libre
+		    $campaign_id = 6412;
+		    $amount = 585.63;
+		    $amount_fees = 4.37;
 		    $api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
 		    echo '$api_project_id ' . $api_project_id . '<br />';
 		    $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
