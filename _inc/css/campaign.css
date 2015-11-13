@@ -3,15 +3,20 @@
 *******************************************************************************/
 nav#navigation { display: none; }
 #container { padding-top: 0px; }
+.padder { margin-top: 100px; }
 
 nav.project-navigation {
-    background-color: #333333;
+    position: fixed;
+    top: 0px;
+    width: 100%;
     height: 80px;
+    background-color: #333333;
 }
 nav.project-navigation ul {
     float: left;
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
+    margin-top: 0px;
     margin-bottom: 0px;
     padding-left: 0px;
 }
@@ -24,20 +29,49 @@ nav.project-navigation ul li {
 }
 nav.project-navigation ul li a {
     color: #FFF;
+    text-transform: uppercase;
 }
 
-nav.project-navigation ul.menu-hamburger li:last-child { display: none; }
+nav.project-navigation ul li.triggered-menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    height: auto;
+    background-color: #333333;
+}
+nav.project-navigation ul li.triggered-menu.triggered {
+    display: block;
+}
+nav.project-navigation ul li.triggered-menu ul li {
+    display: list-item;
+    height: auto;
+    padding: 5px;
+}
+
 nav.project-navigation ul.menu-actions {
     float: right;
-    width: 300px; 
+    width: 300px;
+    margin-top: 7px;
 }
 nav.project-navigation ul.menu-actions li {
     width: 100px;
-    height: 60px;
+    height: 53px;
+    text-align: center;
 }
-nav.project-navigation ul.menu-actions li:first-child {
+nav.project-navigation ul.menu-actions li a {
+    display: inline-block;
+}
+nav.project-navigation ul.menu-actions li a img {
+    display: block;
+    margin: auto;
+}
+nav.project-navigation ul.menu-actions li.login-item {
     display: block;
     width: 100%;
-    height: 20px;
+    height: auto;
     text-align: center;
+}
+nav.project-navigation ul.menu-actions li.login-item a {
+    height: 20px;
+    text-transform: none;
 }

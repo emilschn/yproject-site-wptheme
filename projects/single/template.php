@@ -9,7 +9,7 @@ $client_context = $campaign->get_client_context();
 
 <?php locate_template( array("projects/single/header.php"), true ); ?>
 
-<div class="padder">
+<div class="padder center">
     
 	<?php locate_template( array("projects/single/banner.php"), true ); ?>
     

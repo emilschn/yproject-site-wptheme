@@ -85,6 +85,7 @@ function yproject_enqueue_script(){
 	
 	if ($is_campaign) {
 	    wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, false, 'all');
+	    wp_enqueue_script( 'wdg-campaign', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign.js', array('jquery', 'jquery-ui-dialog'), '20151113');
 	}
 	
 	wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.js', array('jquery'));

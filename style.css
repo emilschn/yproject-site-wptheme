@@ -67,7 +67,7 @@ tbody {
 .left { float: left; }
 .right { float: right; }
 .clear { clear: both; }
-.clearfix { overflow: auto; }
+.clearfix { overflow: auto; overflow-x: hidden; }
 .align-center { text-align: center; }
 .align-left { text-align: left; }
 .vert-align { vertical-align: middle; }
