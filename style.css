@@ -934,6 +934,30 @@ footer div.social-icons {
     color: #FFF;
 }
 
+/*******************************************************************************
+* PROGRESS BAR
+*******************************************************************************/
+.progressbar {
+    margin-left: 5px;
+}
+.progressbar .progressbar-bg {
+    display: inline-block;
+    width: 250px;
+    background-color: #EEECED;
+}
+.progressbar .progressbar-complete {
+    display: inline-block;
+    width: auto;
+    max-width: 250px !important;
+    text-align: right;
+    font-size: 21px;
+    background-color: #333;
+    color: #FFF;
+}
+.progressbar .progressbar-percent {
+    display: inline-block;
+    font-size: 18px;
+}
 
 /*******************************************************************************
 * PROJECTS - COMMON

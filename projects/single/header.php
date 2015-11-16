@@ -1,5 +1,5 @@
 <?php
-global $campaign, $stylesheet_directory_uri;
+global $campaign, $stylesheet_directory_uri, $current_user;
 $menu_hamburger_pages = array(
 	'les-projets'	=> 'Les projets',
 	'financement'	=> 'Financer son projet',
@@ -12,12 +12,23 @@ $menu_project_parts = array (
 	'description'	=> 'Pr&eacute;sentation',
 	'news'		=> 'Actualit&eacute;s'
 );
+
+$user_name_str = '';
+if (is_user_logged_in()) {
+	get_currentuserinfo();
+	$user_name_str = $current_user->user_firstname;
+	if ($user_name_str == '') {
+		$user_name_str = $current_user->user_login;
+	}
+}
 ?>
 
 <nav class="project-navigation">
 	<div class="center clearfix">
 		<ul class="menu-hamburger">
-			<li><a href="#" class="trigger-menu" data-target="hamburger">HAM</a></li>
+			<li>
+				<a href="#" class="trigger-menu" data-target="hamburger"><img src="<?php echo $stylesheet_directory_uri; ?>/images/menu-smartphone.png" title="Burger" /></a>
+			</li>
 
 			<li id="triggered-menu-hamburger" class="triggered-menu">
 				<ul>
@@ -44,15 +55,7 @@ $menu_project_parts = array (
 
 		<ul class="menu-actions">
 			<li class="login-item">
-			<?php if (is_user_logged_in()): ?>
-				<?php 
-				global $current_user;
-				get_currentuserinfo();
-				$user_name_str = $current_user->user_firstname;
-				if ($user_name_str == '') {
-					$user_name_str = $current_user->user_login;
-				}
-				?>
+			<?php if (!empty($user_name_str)): ?>
 			<a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Bonjour', 'yproject'); ?> <?php echo $user_name_str; ?></a>
 			<?php endif; ?>
 			</li>

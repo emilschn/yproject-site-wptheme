@@ -3,16 +3,22 @@
 *******************************************************************************/
 nav#navigation { display: none; }
 #container { padding-top: 0px; }
-.padder { margin-top: 100px; }
+div#content.version-3 .padder { margin-top: 93px; }
+div#content.version-3 .separator {
+    background: url("../../images/tiret_noir.png");
+    height: 6px;
+    margin: 15px 0px;
+}
 
-nav.project-navigation {
+div#content.version-3 nav.project-navigation {
     position: fixed;
+    z-index: 100;
     top: 0px;
     width: 100%;
     height: 80px;
     background-color: #333333;
 }
-nav.project-navigation ul {
+div#content.version-3 nav.project-navigation ul {
     float: left;
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
@@ -20,58 +26,113 @@ nav.project-navigation ul {
     margin-bottom: 0px;
     padding-left: 0px;
 }
-nav.project-navigation ul li {
+div#content.version-3 nav.project-navigation ul li {
     list-style: none;
     height: 80px;
     vertical-align: middle;
     display: table-cell;
     padding-right: 10px;
 }
-nav.project-navigation ul li a {
+div#content.version-3 nav.project-navigation ul li a {
     color: #FFF;
     text-transform: uppercase;
 }
 
-nav.project-navigation ul li.triggered-menu {
+div#content.version-3 nav.project-navigation ul li.triggered-menu {
     display: none;
     position: fixed;
     top: 60px;
     height: auto;
     background-color: #333333;
 }
-nav.project-navigation ul li.triggered-menu.triggered {
+div#content.version-3 nav.project-navigation ul li.triggered-menu.triggered {
     display: block;
 }
-nav.project-navigation ul li.triggered-menu ul li {
+div#content.version-3 nav.project-navigation ul li.triggered-menu ul li {
     display: list-item;
     height: auto;
     padding: 5px;
 }
 
-nav.project-navigation ul.menu-actions {
+div#content.version-3 nav.project-navigation ul.menu-actions {
     float: right;
     width: 300px;
     margin-top: 7px;
 }
-nav.project-navigation ul.menu-actions li {
+div#content.version-3 nav.project-navigation ul.menu-actions li {
     width: 100px;
     height: 53px;
     text-align: center;
 }
-nav.project-navigation ul.menu-actions li a {
+div#content.version-3 nav.project-navigation ul.menu-actions li a {
     display: inline-block;
 }
-nav.project-navigation ul.menu-actions li a img {
+div#content.version-3 nav.project-navigation ul.menu-actions li a img {
     display: block;
     margin: auto;
 }
-nav.project-navigation ul.menu-actions li.login-item {
+div#content.version-3 nav.project-navigation ul.menu-actions li.login-item {
     display: block;
     width: 100%;
     height: auto;
     text-align: center;
 }
-nav.project-navigation ul.menu-actions li.login-item a {
+div#content.version-3 nav.project-navigation ul.menu-actions li.login-item a {
     height: 20px;
     text-transform: none;
+}
+
+/*******************************************************************************
+* BANNER
+*******************************************************************************/
+div#content.version-3 div.project-banner {
+    height: 370px;
+    overflow: hidden;
+    position: relative;
+}
+
+div#content.version-3 div.project-banner div.project-banner-img, div.project-banner div.project-banner-deco, div.project-banner div.project-banner-content {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+div#content.version-3 div.project-banner div.project-banner-deco div.center img {
+    margin-left: -70px;
+}
+
+div#content.version-3 div.project-banner div.project-banner-content div.left h1 {
+    display: block;
+    position: absolute;
+    bottom: 40px;
+}
+div#content.version-3 div.project-banner div.project-banner-content div.left div.subtitle {
+    position: absolute;
+    bottom: 10px;
+}
+
+div#content.version-3 div.project-banner div.project-banner-content div.right {
+    background-color: #F2F2F2;
+    width: 320px;
+    height: 370px;
+}
+div#content.version-3 div.project-banner div.project-banner-content div.right > div:first-child {
+    margin-top: 25px;
+}
+
+div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item {
+    margin: 10px 5px;
+}
+div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item img {
+    display: table-cell;
+    vertical-align: middle;
+    width: 30px;
+}
+div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item span {
+    vertical-align: middle;
+}
+
+div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item.author-info {
+    margin-top: 30px;
 }
