@@ -19,10 +19,10 @@
     <?php echo ucfirst($voc['investor_action'])?> m&eacute;dian<?php if ($voc['action_feminin']){echo 'e';}?> : <strong class="data-inv-median_invest">&hellip;</strong>&euro;<br />
     <?php echo ucfirst($voc['investor_action'])?> maximal<?php if ($voc['action_feminin']){echo 'e';}?> : <strong class="data-inv-max_invest">&hellip;</strong>&euro;<br />
     
-    <?php if ($is_advanced === TRUE): ?>
+    <?php /*if ($is_advanced === TRUE): ?>
     <br />
     Total des <?php echo $voc['investor_action']?>s par ch&egrave;que : <strong class="data-inv-amount_check">&hellip;</strong><br />
-    <?php endif; ?>
+    <?php endif;*/ ?>
     </p>
     <?php if(edd_has_variable_prices($id_campaign)): ?>
     <h3>Popularit&eacute; des contreparties</h3>
