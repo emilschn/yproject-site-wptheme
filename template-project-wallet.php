@@ -31,18 +31,20 @@ WDGFormProjects::form_proceed_roi_transfers();
 				//Init variables utiles
 				$keep_going = TRUE;
 				$display_rib = FALSE;
+				$current_index = 1;
 				global $campaign_id, $current_user; 
 				$post_campaign = get_post($campaign_id);
 				$campaign = atcf_get_campaign($post_campaign);
 				?>
 		    
 				<h2><?php _e('Porte-monnaie de ', 'yproject'); echo $post_campaign->post_title; ?></h2>
-				<h3>1 - <?php _e('Associer une organisation &agrave; votre projet', 'yproject'); ?></h3>
+				<h3><?php echo $current_index; $current_index++; ?> - <?php _e('Associer une organisation &agrave; votre projet', 'yproject'); ?></h3>
 				<?php if ($keep_going) {
 					$current_organisation = $campaign->get_organisation();
 					if (isset($current_organisation)) {
 						$page_edit_orga = get_page_by_path('editer-une-organisation');
 						echo __('Organisation d&eacute;finie :', 'yproject') . ' ' . $current_organisation->organisation_name . ' <a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">' . __('Editer', 'yproject') . '</a>';
+						$organisation_obj = new YPOrganisation($current_organisation->organisation_wpref);
 					} else {
 						$keep_going = FALSE;
 						_e('Pas encore d&eacute;fini', 'yproject');
@@ -51,9 +53,9 @@ WDGFormProjects::form_proceed_roi_transfers();
 					}
 				} ?>
 				
-				<h3 <?php if (!$keep_going) { ?>class="grey"<?php } ?>>2 - <?php _e('Documents d&apos;authentification', 'yproject'); ?></h3>
+				<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
+				<h3 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php echo $current_index; $current_index++; ?> - <?php _e('Documents d&apos;authentification', 'yproject'); ?></h3>
 				<?php if ($keep_going) {
-					$organisation_obj = new YPOrganisation($current_organisation->organisation_wpref);
 					$organisation_obj->submit_strong_authentication();
 					
 					global $errors_submit;
@@ -110,8 +112,10 @@ WDGFormProjects::form_proceed_roi_transfers();
 							break;
 					}
 				} ?>
+				<?php else: $display_rib = TRUE; ?>
+				<?php endif; ?>
 						
-				<h3 <?php if (!$display_rib) { ?>class="grey"<?php } ?>>3 - <?php _e('RIB', 'yproject'); ?></h3>
+				<h3 <?php if (!$display_rib) { ?>class="grey"<?php } ?>><?php echo $current_index; $current_index++; ?> - <?php _e('RIB', 'yproject'); ?></h3>
 				<?php if ($display_rib) { ?>
 					<?php $organisation_obj->submit_bank_info(); ?>
 					<form action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
@@ -136,7 +140,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 				}
 				?>
 						
-				<h3 <?php if (!$keep_going) { ?>class="grey"<?php } ?>>4 - <?php _e('Dans votre porte-monnaie', 'yproject'); ?></h3>
+				<h3 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php echo $current_index; $current_index++; ?> - <?php _e('Dans votre porte-monnaie', 'yproject'); ?></h3>
 				<?php
 				if ($keep_going) { $organisation_obj->submit_transfer_wallet(); }
 				if (isset($organisation_obj)) { 
@@ -156,6 +160,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 					</form>
 				<?php } ?>
 					
+				<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 				<h2 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php _e('Reverser aux investisseurs', 'yproject'); ?></h2>
 				<?php if ($keep_going) { ?>
 				<h3>Dates de vos versements :</h3>
@@ -274,6 +279,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 					<?php else: ?>
 						Aucun transfert d&apos;argent.
 					<?php endif; ?>
+				<?php endif; ?>
 				<?php endif; ?>
 
 			<?php else: ?>
