@@ -154,3 +154,35 @@ div#content.version-3 div.project-timeline ul li {
 div#content.version-3 div.project-timeline ul li.selected {
     font-weight: bold;
 }
+
+/*******************************************************************************
+* PITCH
+*******************************************************************************/
+div#content.version-3 div.project-pitch-title {
+    height: 43px;
+    padding-top: 18px;
+    padding-bottom: 13px;
+    background-image: url('../../images/traits.jpg');
+    background-repeat: repeat-x;
+    background-position: center;
+    text-align: center;
+}
+
+div#content.version-3 div.project-pitch-title span {
+    background: #FFFFFF;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-family: 'BebasNeue';
+    font-size: 35px;
+    text-transform: uppercase;
+}
+div#content.version-3 div.project-pitch-text {
+    float: left;
+    width: 345px;
+    height: 325px;
+}
+div#content.version-3 div.project-pitch-video {
+    float: right;
+    width: 580px;
+    height: 325px;
+}
