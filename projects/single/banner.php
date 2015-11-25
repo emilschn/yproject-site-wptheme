@@ -2,10 +2,9 @@
 global $campaign, $stylesheet_directory_uri;
 $img_src = $campaign->get_header_picture_src();
 
-
 $owner_str = '';
 $lightbox_content = '';
-$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+$api_project_id = BoppLibHelpers::get_api_project_id($campaign->ID);
 $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
 if (count($current_organisations) > 0) {
 	$current_organisation = $current_organisations[0];
@@ -25,8 +24,9 @@ if (count($current_organisations) > 0) {
 		<span></span>'.$current_organisation->organisation_country.'<br />
 		</div>';
 } else {
-	$author = get_userdata($post_campaign->post_author);
+	$author = get_userdata($campaign->data->post_author);
 	$owner_str = $author->user_firstname . ' ' . $author->user_lastname;
+	if ($owner_str == ' ') { $owner_str = $author->user_login; }
 }
 ?>
 
@@ -94,7 +94,7 @@ if (count($current_organisations) > 0) {
 				<div class="separator"></div>
 				
 				<div class="project-banner-info-item align-center author-info">
-					<p><?php echo $owner_str; ?></p>
+					<p><?php _e("Un projet port&eacute; par"); ?> <?php echo $owner_str; ?></p>
 					<p>(<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation"><?php _e('Voir les informations', 'yproject'); ?></a>)</p>
 					<?php echo do_shortcode('[yproject_lightbox id="project-organisation"]'.$lightbox_content.'[/yproject_lightbox]'); ?>
 				</div>
