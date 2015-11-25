@@ -1402,18 +1402,32 @@ footer div.social-icons {
 * HOME PAGE
 *******************************************************************************/
 header.header_home {
-    background-image: url("images/header.jpg");
     height: 350px;
+    background-image: url("images/header-video.jpg");
 }
 header.header_home #welcome_text {
-    display: inline-block;
-    margin-top: 125px;
-    vertical-align: middle;
+    float: left;
+    width: 340px;
+    height: 280px;
+    padding: 35px 10px 0px;
+    background: #FFF;
+}
+header.header_home #welcome_text hr {
+    margin: 0px;
+    border: 1px solid #000000;
 }
 header.header_home #welcome_text p {
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
-    margin: 0px 50px 0px 550px;
+}
+header.header_home #welcome_text p.welcome {
+    width: 240px;
+    margin: -15px auto 0px;
+    background: #FFFFFF;
+    font-size: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 header.header_home #welcome_text p.hello {
     margin-top: 20px;
@@ -1422,15 +1436,26 @@ header.header_home #welcome_text p.hello {
     font-weight: bold;
 }
 header.header_home #welcome_text #header_homepage_link {
-    margin: 20px 50px 0px 550px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.home_video {
+    width: 580px;
+    margin-top: 10px;
     text-align: center;
 }
-
-.home_video h1 {
-    width: 50%; min-width: 320px; margin: 15px auto; font-size: 15pt;
+.home_video .button-video {
+    cursor: pointer;
+    padding-top: 2px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5) inset, 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
-.home_video iframe {
-    max-width: 96%;
+.home_video .button-video-shadows {
+    margin-top: -125px;
+    text-align: left;
+    cursor: pointer;
+}
+.home_video .button-video-shadows img:last-child {
+    margin-left: 300px;
 }
 #home_middle_top {
     margin-bottom: 30px;
