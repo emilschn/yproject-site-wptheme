@@ -1,9 +1,10 @@
 jQuery(document).ready( function($) {
-    ProjectViewer.init();
+    WDGProjectViewer.init();
+    WDGProjectDescription.init();
 });
 
 
-var ProjectViewer = (function($) {
+var WDGProjectViewer = (function($) {
 	return {
 		init: function() {
 			$("a.trigger-menu").click(function(e) {
@@ -37,7 +38,25 @@ var ProjectViewer = (function($) {
 				var amountOfGoalRound = Math.round(amountOfGoal * 10000) / 10000;
 				$("span.roi_amount_user").text(amountOfGoalRound);
 			});
-		},
+		}
+	};
+    
+})(jQuery);
+
+var WDGProjectDescription = (function($) {
+	return {
+		isClickBlocked: false,
+		
+		init: function() {
+			$(".project-description-item .project-content-icon, .project-description-item .projects-desc-content").click(function() {
+				var idDivClicked = $(this).parent().data("content");
+				console.log("idDivClicked : " + idDivClicked);
+			});
+			
+			$('.projects-desc-content img').click(function() {
+				WDGProjectDescription.isClickBlocked = true;
+			});
+		}
 	};
     
 })(jQuery);
