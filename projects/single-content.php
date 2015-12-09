@@ -161,7 +161,7 @@ else {
 		</div>
 
 		<div id="project-about">
-			<p>A propos de<p>
+			<p>A propos de</p>
 			<p><?php echo get_the_title(); ?></p>
 		</div>
 		<div id="project-map">
@@ -210,6 +210,7 @@ else {
 	</span>
 </div>
 
+<div class="indent">
 <?php if (is_user_logged_in() || $campaign->funding_type() == 'fundingdonation') {
     
     $file_complement = '';
@@ -237,7 +238,6 @@ else {
 	);
 ?>
 
-<div class="indent">
 	<div class="projects-desc-item">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>projet<?php echo $file_complement; ?>.png" alt="logo projet" data-content="description"/>
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle projet"/>
@@ -420,7 +420,4 @@ else {
 		<li><a href="<?php echo $stats_link; ?>" <?php if($current_page==$stats_link) echo 'class="current"'; ?>>Statistiques</a></li>
 		<?php } ?>
 	</ul>
-</div>
-
-</div>
 </div>
