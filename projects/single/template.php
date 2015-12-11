@@ -1,5 +1,5 @@
 <?php 
-global $campaign;
+global $campaign, $can_modify;
 $client_context = $campaign->get_client_context();
 ?>
 
@@ -8,6 +8,10 @@ $client_context = $campaign->get_client_context();
 <?php endif; ?>
 
 <?php locate_template( array("projects/single/header.php"), true ); ?>
+
+<?php if ($can_modify): ?>
+<?php locate_template( array("projects/single/admin.php"), true ); ?>
+<?php endif; ?>
 
 <div class="padder">
     

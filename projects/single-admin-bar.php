@@ -14,9 +14,7 @@ if ($can_modify) {
         $campaign_id_param = '?campaign_id=';
         $campaign_id_param .= $campaign_id;                             // Page projet
         $page_dashboard = get_page_by_path('tableau-de-bord');          // Tableau de bord
-        $page_parameters = get_page_by_path('parametres-projet');       // Paramètres
-        $page_manage_team = get_page_by_path('projet-gerer-equipe');    // Editer l'équipe
-	$page_wallet = get_page_by_path('gestion-financiere');		// Gestion financière
+		$page_wallet = get_page_by_path('gestion-financiere');		// Gestion financière
         // Statistiques avancées
         if (strtotime($post_campaign->post_date) < strtotime('2014-02')) {
             $pages_stats = get_page_by_path('vote');

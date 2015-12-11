@@ -43,19 +43,10 @@ var WDGProjectViewer = (function($) {
     
 })(jQuery);
 
+//TODO : utiliser pour supprimer de common.js à terme
 var WDGProjectDescription = (function($) {
 	return {
-		isClickBlocked: false,
-		
 		init: function() {
-			$(".project-description-item .project-content-icon, .project-description-item .projects-desc-content").click(function() {
-				var idDivClicked = $(this).parent().data("content");
-				console.log("idDivClicked : " + idDivClicked);
-			});
-			
-			$('.projects-desc-content img').click(function() {
-				WDGProjectDescription.isClickBlocked = true;
-			});
 		}
 	};
     

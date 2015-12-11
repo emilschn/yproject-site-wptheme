@@ -824,7 +824,9 @@ WDGProjectPageFunctions=(function($) {
 		isInit: false,
 		isEditing: false,
 		isClickBlocked: false,
+		navigationHeight: 0,
 		initUI:function() {
+			WDGProjectPageFunctions.navigationHeight = ($("nav.project-navigation").height() > 0) ? $("nav.project-navigation").height() : $("#navigation").height();
 			WDGProjectPageFunctions.initClick();
 			$('.project-content-icon').click(function(){
 				var contentDiv = $("#project-content-" + $(this).data("content"));
@@ -908,7 +910,7 @@ WDGProjectPageFunctions=(function($) {
 			
 		    } else {
 			if ($(window).width() > 480) {
-			    $('html, body').animate({scrollTop: $("#invest-button").offset().top - $("#navigation").height()}, "fast"); 
+			    $('html, body').animate({scrollTop: $("#invest-button").offset().top - WDGProjectPageFunctions.navigationHeight}, "fast"); 
 			} else {
 			    $('html, body').animate({scrollTop: $("#projects-stats-content").offset().top}, "fast"); 
 			}
@@ -958,15 +960,15 @@ WDGProjectPageFunctions=(function($) {
 		
 		//Clic sur une partie
 		clickItem: function(clickedElement) {
-                    //Ne déclenche pas d'action si l'utilisateur sélectionnait du texte
-                    var select = getSelection().toString();
+			//Ne déclenche pas d'action si l'utilisateur sélectionnait du texte
+			var select = getSelection().toString();
 			if (!select && !WDGProjectPageFunctions.isEditing && !WDGProjectPageFunctions.isClickBlocked) {
 				//Si la balise "lire plus" de l'élément cliqué est affichée
 				var projectMore = clickedElement.find('.projects-more');
 				if (projectMore.is(':visible')) {
 					//il faut la masquer puis afficher les éléments qui suivent
 					projectMore.hide(400, function(){
-						$('html, body').animate({scrollTop: clickedElement.offset().top - $("#navigation").height()}, "slow"); 
+						$('html, body').animate({scrollTop: clickedElement.offset().top - WDGProjectPageFunctions.navigationHeight}, "slow"); 
 						clickedElement.find('.zone-content > p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
 						WDGProjectPageFunctions.refreshEditable();
 					});

@@ -19,10 +19,7 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 			<h2><?php _e('Pitch', 'yproject'); ?></h2>
 			<div class="zone-content">
 				<?php the_content(); ?>
-			    <p>Contenu<br />
-				Bla</p>
 			</div>
-			<div class="project-expander hidden"></div>
 		</div>
 	</div>
 
@@ -36,10 +33,7 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 				$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
 				echo apply_filters('the_content', $societal_challenge);
 				?>
-			    <p>Contenu<br />
-				Bla</p>
 			</div>
-			<div class="project-expander"></div>
 		</div>
 	</div>
 	
@@ -55,7 +49,6 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 				echo apply_filters('the_content', $added_value);
 				?>
 			</div>
-			<div class="project-expander"></div>
 		</div>
 	</div>
 	
@@ -70,7 +63,6 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 				echo apply_filters('the_content', $economic_model);
 				?>
 			</div>
-			<div class="project-expander"></div>
 		</div>
 	</div>
 	<?php endif; ?>
@@ -85,10 +77,7 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 				$implementation = html_entity_decode($campaign->implementation()); 
 				echo apply_filters('the_content', $implementation);
 				?>
-			    <p>Contenu<br />
-				Bla</p>
 			</div>
-			<div class="project-expander"></div>
 		</div>
 	</div>
     
@@ -101,40 +90,7 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 			<div class="zone-content">
 				TODO
 			</div>
-			<div class="project-expander"></div>
 		</div>
 	</div>
 	<?php endif; ?>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 </div>
