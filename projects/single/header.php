@@ -4,13 +4,13 @@ $menu_hamburger_pages = array(
 	'les-projets'	=> 'Les projets',
 	'financement'	=> 'Financer son projet',
 	'descriptif'	=> 'Comment ca marche ?',
-	'blog'		=> 'Actualit&eacute;s'
+	'blog'			=> 'Actualit&eacute;s'
 );
 $menu_project_parts = array (
-	'pitch'		=> 'R&eacute;sum&eacute;',
-	'rewards'	=> 'Contreparties',
+	'banner'		=> 'R&eacute;sum&eacute;',
+	'rewards'		=> 'Contreparties',
 	'description'	=> 'Pr&eacute;sentation',
-	'news'		=> 'Actualit&eacute;s'
+	'news'			=> 'Actualit&eacute;s'
 );
 
 $user_name_str = '';
@@ -41,7 +41,7 @@ if (is_user_logged_in()) {
 					<?php if (is_user_logged_in()): ?>
 						<li><a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a></li>
 					<?php else: $page_connexion = get_page_by_path('connexion'); ?>
-						<li><a href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
+						<li><a href="#connexion" class="wdg-button-lightbox-open" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
 					<?php endif; ?>
 				</ul>
 			</li>

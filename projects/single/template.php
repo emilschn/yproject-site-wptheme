@@ -30,3 +30,6 @@ $client_context = $campaign->get_client_context();
 	<?php locate_template( array("projects/single/comments.php"), true ); ?>
     
 </div>
+
+<?php echo do_shortcode('[yproject_connexion_lightbox]<p class="align-center">'.__('Afin de soutenir un projet, vous devez &ecirc;tre inscrit et connect&eacute;.', 'yproject').'</p>[/yproject_connexion_lightbox]'); ?>
+<?php echo do_shortcode('[yproject_register_lightbox]'); ?>

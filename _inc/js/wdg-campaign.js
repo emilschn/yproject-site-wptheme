@@ -17,6 +17,23 @@ var WDGProjectViewer = (function($) {
 				}
 			});
 			
+			$("ul.menu-project li a").click(function(e) {
+				e.preventDefault();
+				var target = $(this).data("target");
+				$('html, body').animate(
+					{ scrollTop: $("div.project-" + target).offset().top - $("nav.project-navigation").height() },
+					"slow"
+				); 
+			});
+			
+			$(document).scroll(function() {
+				if ($(document).scrollTop() > 100) {
+					$("#content").addClass("scrolled");
+				} else {
+					$("#content").removeClass("scrolled");
+				}
+			});
+			
 			$("input.init_invest").change(function() {
 				var inputVal = Number($(this).val());
 				var percentProject = Number($("span.roi_percent_project").text());

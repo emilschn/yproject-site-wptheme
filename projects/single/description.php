@@ -12,6 +12,8 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 		</span>
 	</div>
     
+	<?php if (is_user_logged_in() || $campaign->funding_type() == 'fundingdonation') : ?>
+	
 	<div class="project-description-item" data-content="description">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $stylesheet_directory_uri; ?>/images/projet<?php echo $file_complement; ?>.png" alt="project" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_gris_projet.png" alt="grey triangle"/>
@@ -92,5 +94,17 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 			</div>
 		</div>
 	</div>
+	<?php endif; ?>
+	
+	<?php else: ?>
+	
+	<div class="align-center">
+		<p>
+		    Afin de r&eacute;pondre aux recommandations des autorit&eacute;s financi&egrave;res sur la pr&eacute;vention du risque repr&eacute;sent&eacute; par l&apos;investissement participatif,<br />
+		    vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet.
+		</p>
+		<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>">Connexion</a>
+	</div>
+	
 	<?php endif; ?>
 </div>
