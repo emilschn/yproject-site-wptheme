@@ -7,6 +7,14 @@ jQuery(document).ready( function($) {
 var WDGProjectViewer = (function($) {
 	return {
 		init: function() {
+			$(document).scroll(function() {
+				if ($(document).scrollTop() > 100) {
+					$("#content").addClass("scrolled");
+				} else {
+					$("#content").removeClass("scrolled");
+				}
+			});
+			
 			$("a.trigger-menu").click(function(e) {
 				e.preventDefault();
 				var target = $(this).data("target");
@@ -16,7 +24,6 @@ var WDGProjectViewer = (function($) {
 					$("#triggered-menu-" + target).addClass("triggered");
 				}
 			});
-			
 			$("ul.menu-project li a").click(function(e) {
 				e.preventDefault();
 				var target = $(this).data("target");
@@ -25,14 +32,26 @@ var WDGProjectViewer = (function($) {
 					"slow"
 				); 
 			});
-			
-			$(document).scroll(function() {
-				if ($(document).scrollTop() > 100) {
-					$("#content").addClass("scrolled");
+			$("a.update-follow").click(function(e) {
+				e.preventDefault();
+				if ($(this).data("following") === '1') {
+					$(this).data("following", '0');
+					$("a.update-follow span").text($(this).data("textfollow"));
 				} else {
-					$("#content").removeClass("scrolled");
+					$(this).data("following", '1');
+					$("a.update-follow span").text($(this).data("textfollowed"));
 				}
+	   			$.ajax({
+					'type' : "POST",
+					'url' : ajax_object.ajax_url,
+					'data': { 
+						  'action':'update_jy_crois',
+						  'jy_crois' : $(this).data("following"),
+						  'id_campaign' : $("#content").data("campaignid")
+						}
+				}).done(function(){});
 			});
+			
 			
 			$("input.init_invest").change(function() {
 				var inputVal = Number($(this).val());

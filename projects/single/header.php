@@ -14,12 +14,29 @@ $menu_project_parts = array (
 );
 
 $user_name_str = '';
+$btn_follow_href = '#';
+$btn_follow_classes = '';
+$btn_follow_data_lightbox = '';
+$btn_follow_text = __('Suivre', 'yproject');
+$btn_follow_following = '0';
 if (is_user_logged_in()) {
 	get_currentuserinfo();
 	$user_name_str = $current_user->user_firstname;
 	if ($user_name_str == '') {
 		$user_name_str = $current_user->user_login;
 	}
+	$btn_follow_classes = 'update-follow';
+	$btn_follow_data_lightbox = $campaign->ID;
+	
+	global $wpdb;
+	$table_jcrois = $wpdb->prefix . "jycrois";
+	$users = $wpdb->get_results( 'SELECT * FROM '.$table_jcrois.' WHERE campaign_id = '.$campaign->ID.' AND user_id='.$current_user->ID );
+	$btn_follow_following = (!empty($users[0]->ID)) ? '1' : '0';
+	$btn_follow_text = (!empty($users[0]->ID)) ? __('Suivi', 'yproject') : __('Suivre', 'yproject');
+} else {
+	$btn_follow_classes = 'wdg-button-lightbox-open';
+	$btn_follow_href = '#connexion';
+	$btn_follow_data_lightbox = 'connexion';
 }
 ?>
 
@@ -60,10 +77,12 @@ if (is_user_logged_in()) {
 			<?php endif; ?>
 			</li>
 
-			<li><a href="">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/good_gris.png" alt="<?php _e('Suivre', 'yproject'); ?>" title="<?php _e('Suivre', 'yproject'); ?>" />
-				<?php _e('Suivre', 'yproject'); ?>
-			</a></li>
+			<li>
+				<a href="<?php echo $btn_follow_href; ?>" class="<?php echo $btn_follow_classes; ?>" data-lightbox="<?php echo $btn_follow_data_lightbox; ?>" data-textfollow="<?php _e('Suivre', 'yproject'); ?>" data-textfollowed="<?php _e('Suivi', 'yproject'); ?>" data-following="<?php echo $btn_follow_following; ?>">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/good_gris.png" alt="<?php echo $btn_follow_text; ?>" title="<?php echo $btn_follow_text; ?>" />
+					<span><?php echo $btn_follow_text; ?></span>
+				</a>
+			</li>
 
 			<li>
 			<?php
