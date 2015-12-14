@@ -74,9 +74,12 @@ $estimated_turnover = $campaign->estimated_turnover();
 				</div>
 
 			<?php if ($campaign_status == "collecte"): ?>
-				<input type="submit" value="<?php _e("Investir", "yproject"); ?>" class="button" />
-				<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
-				<input type="hidden" name="invest_start" value="1" />
+				<div class="align-center">
+					<br /><br />
+					<input type="submit" value="<?php _e("Investir", "yproject"); ?>" class="button" />
+					<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+					<input type="hidden" name="invest_start" value="1" />
+				</div>
 			</form>
 			<?php endif; ?>
 		    

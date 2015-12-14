@@ -13,6 +13,9 @@ $menu_project_parts = array (
 	'news'			=> 'Actualit&eacute;s'
 );
 
+$page_invest = get_page_by_path('investir');
+$campaign_id_param = '?campaign_id=' . $campaign->ID;
+$class_loggedin = '';
 $user_name_str = '';
 $btn_follow_href = '#';
 $btn_follow_classes = '';
@@ -27,6 +30,7 @@ if (is_user_logged_in()) {
 	}
 	$btn_follow_classes = 'update-follow';
 	$btn_follow_data_lightbox = $campaign->ID;
+	$class_loggedin = 'loggedin';
 	
 	global $wpdb;
 	$table_jcrois = $wpdb->prefix . "jycrois";
@@ -70,7 +74,7 @@ if (is_user_logged_in()) {
 			<?php endforeach; ?>
 		</ul>
 
-		<ul class="menu-actions">
+		<ul class="menu-actions <?php echo $class_loggedin; ?>">
 			<li class="login-item">
 			<?php if (!empty($user_name_str)): ?>
 			<a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Bonjour', 'yproject'); ?> <?php echo $user_name_str; ?></a>
@@ -79,7 +83,7 @@ if (is_user_logged_in()) {
 
 			<li>
 				<a href="<?php echo $btn_follow_href; ?>" class="<?php echo $btn_follow_classes; ?>" data-lightbox="<?php echo $btn_follow_data_lightbox; ?>" data-textfollow="<?php _e('Suivre', 'yproject'); ?>" data-textfollowed="<?php _e('Suivi', 'yproject'); ?>" data-following="<?php echo $btn_follow_following; ?>">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/good_gris.png" alt="<?php echo $btn_follow_text; ?>" title="<?php echo $btn_follow_text; ?>" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/good.png" alt="<?php echo $btn_follow_text; ?>" title="<?php echo $btn_follow_text; ?>" />
 					<span><?php echo $btn_follow_text; ?></span>
 				</a>
 			</li>
@@ -89,8 +93,8 @@ if (is_user_logged_in()) {
 			$campaign_status = $campaign->campaign_status();
 			switch ($campaign_status) {
 				case 'vote': ?>
-			<a href="">
-				<img src="" alt="<?php _e('Voter', 'yproject'); ?>" title="<?php _e('Voter', 'yproject'); ?>" />
+			<a href="#">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodvote.png" alt="<?php _e('Voter', 'yproject'); ?>" title="<?php _e('Voter', 'yproject'); ?>" />
 				<?php _e('Voter', 'yproject'); ?>
 			</a>
 
@@ -98,8 +102,8 @@ if (is_user_logged_in()) {
 				break;
 				case 'collecte':
 				?>
-			<a href="">
-				<img src="" alt="<?php _e('Contribuer', 'yproject'); ?>" title="<?php _e('Contribuer', 'yproject'); ?>" />
+			<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.png" alt="<?php _e('Contribuer', 'yproject'); ?>" title="<?php _e('Contribuer', 'yproject'); ?>" />
 				<?php if ($campaign->funding_type() == 'fundingdonation'): ?>
 				<?php _e('Soutenir', 'yproject'); ?>
 				<?php else: ?>
@@ -110,10 +114,24 @@ if (is_user_logged_in()) {
 			} ?>
 			</li>
 
-			<li><a href="">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodmains_gris.png" alt="<?php _e('Partager', 'yproject'); ?>" title="<?php _e('Partager', 'yproject'); ?>" />
+			<li><a href="#" class="trigger-menu" data-target="share">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodmains.png" alt="<?php _e('Partager', 'yproject'); ?>" title="<?php _e('Partager', 'yproject'); ?>" />
 				<?php _e('Partager', 'yproject'); ?>
 			</a></li>
 		</ul>
+
+		<div id="triggered-menu-share" class="triggered-menu">
+			<span>
+				<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>" target="_blank">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.jpg" alt="logo facebook" />
+				</a>
+				<a href="http://twitter.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>&text='WEDOGOOD'" target="_blank">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.jpg" alt="logo twitter" />
+				</a>
+				<a href="https://plus.google.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>" target="_blank">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="logo google" />
+				</a>
+			</span>
+		</div>
 	</div>
 </nav>

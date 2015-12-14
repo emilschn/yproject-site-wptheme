@@ -58,18 +58,17 @@ div#content.version-3 nav.project-navigation ul li a {
     color: #FFF;
     text-transform: uppercase;
 }
-
-div#content.version-3 nav.project-navigation ul li.triggered-menu {
+div#content.version-3 nav.project-navigation ul li#triggered-menu-hamburger {
     display: none;
     position: fixed;
     top: 60px;
     height: auto;
     background-color: #333333;
 }
-div#content.version-3 nav.project-navigation ul li.triggered-menu.triggered {
+div#content.version-3 nav.project-navigation ul li#triggered-menu-hamburger.triggered {
     display: block;
 }
-div#content.version-3 nav.project-navigation ul li.triggered-menu ul li {
+div#content.version-3 nav.project-navigation ul li#triggered-menu-hamburger ul li {
     display: list-item;
     height: auto;
     padding: 5px;
@@ -77,20 +76,27 @@ div#content.version-3 nav.project-navigation ul li.triggered-menu ul li {
 
 div#content.version-3 nav.project-navigation ul.menu-actions {
     float: right;
-    width: 300px;
-    margin-top: 7px;
+    width: 320px;
+    padding-top: 7px;
+	background: #FFF;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li {
     width: 100px;
-    height: 53px;
+	height: 73px;
     text-align: center;
+}
+div#content.version-3 nav.project-navigation ul.menu-actions.loggedin li {
+    height: 53px;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li a {
     display: inline-block;
+	color: #333333;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li a img {
     display: block;
     margin: auto;
+	width: 40px;
+	height: 26px;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li.login-item {
     display: block;
@@ -103,12 +109,32 @@ div#content.version-3 nav.project-navigation ul.menu-actions li.login-item a {
     text-transform: none;
 }
 
+div#content.version-3 nav.project-navigation div#triggered-menu-share {
+	display: none;
+    position: fixed;
+    top: 80px;
+}
+div#content.version-3 nav.project-navigation div#triggered-menu-share.triggered {
+    display: block;
+	width: 960px;
+	text-align: right;
+}
+div#content.version-3 nav.project-navigation div#triggered-menu-share.triggered span {
+	background: #FFFFFF;
+	display: inline-block;
+	padding: 5px 10px;
+}
+div#content.version-3 nav.project-navigation div#triggered-menu-share.triggered img {
+	width: 40px;
+}
+
 div#content.version-3.scrolled .padder { margin-top: 63px; }
 div#content.version-3.scrolled nav.project-navigation { height: 50px; }
 div#content.version-3.scrolled nav.project-navigation ul.menu-actions { margin-top: 1px; }
 div#content.version-3.scrolled nav.project-navigation ul li { height: 50px; }
 div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.login-item { display: none; }
-div#content.version-3.scrolled nav.project-navigation ul li.triggered-menu { height: auto; top: 50px; }
+div#content.version-3.scrolled nav.project-navigation ul li#triggered-menu-hamburger { height: auto; top: 50px; }
+div#content.version-3.scrolled nav.project-navigation div#triggered-menu-share { top: 58px; }
 
 /*******************************************************************************
 * ADMIN BUTTON
