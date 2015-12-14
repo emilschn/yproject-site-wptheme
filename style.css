@@ -80,6 +80,7 @@ tbody {
     .only_on_large { display: block; }
 }
 
+.text-white { color: #FFFFFF; }
 
 .errors, .invest_error {
     color: #FE494C;
@@ -135,11 +136,11 @@ tbody {
     background: none repeat scroll 0 0 #333333;
     border: 1px solid #333333;
     color: #FFFFFF;
-    padding: 3px 8px;
+    padding: 5px 15px;
     text-transform: uppercase;
     cursor: pointer;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
 }
 .button.red, .wpcf7-submit {
     background: none repeat scroll 0 0 #FF494C;
@@ -1427,18 +1428,29 @@ footer div.social-icons {
 * HOME PAGE
 *******************************************************************************/
 header.header_home {
-    background-image: url("images/header.jpg");
     height: 350px;
+    background-color: transparent;
+    background-image: url("images/header-video.jpg");
 }
 header.header_home #welcome_text {
-    display: inline-block;
-    margin-top: 125px;
-    vertical-align: middle;
+    float: left;
+    width: 300px;
+    height: 290px;
+    padding: 35px 20px 0px;
+    background: #FFF;
 }
-header.header_home #welcome_text p {
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
-    margin: 0px 50px 0px 550px;
+header.header_home #welcome_text hr {
+    margin: 0px;
+    border: 1px solid #000000;
+}
+header.header_home #welcome_text p.welcome {
+    width: 240px;
+    margin: -15px auto 0px;
+    background: #FFFFFF;
+    font-size: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 header.header_home #welcome_text p.hello {
     margin-top: 20px;
@@ -1447,15 +1459,38 @@ header.header_home #welcome_text p.hello {
     font-weight: bold;
 }
 header.header_home #welcome_text #header_homepage_link {
-    margin: 20px 50px 0px 550px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+header.header_home #welcome_text #header_homepage_link .button:first-child {
+    background: #FF494C;
+    border: 1px solid #FF494C;
+}
+.home_video {
+    margin-top: 10px;
     text-align: center;
 }
-
-.home_video h1 {
-    width: 50%; min-width: 320px; margin: 15px auto; font-size: 15pt;
+.home_video .video-container {
+    height: 321px;
 }
-.home_video iframe {
-    max-width: 96%;
+.home_video .button-video {
+    cursor: pointer;
+    height: 324px;
+}
+.home_video .video-container, .home_video .button-video {
+    -moz-box-shadow: 0px 5px 10px 0px #656565;
+    -webkit-box-shadow: 0px 5px 10px 0px #656565;
+    -o-box-shadow: 0px 5px 10px 0px #656565;
+    box-shadow: 0px 5px 10px 0px #656565;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=10);
+}
+.home_video .button-video-shadows {
+    margin-top: -119px;
+    text-align: left;
+    cursor: pointer;
+}
+.home_video .button-video-shadows img:last-child {
+    margin-left: 300px;
 }
 #home_middle_top {
     margin-bottom: 30px;

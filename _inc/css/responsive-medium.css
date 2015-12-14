@@ -25,7 +25,8 @@
 * HEADER
 *******************************************************************************/
 	header { min-width: 768px !important; }
-	header.header_home #welcome_text { margin: 120px 10px 0px 440px !important; }
+	header.header_home #welcome_text { position: absolute; }
+	header.header_home #welcome_text hr { display: none; }
 	header.header_home #welcome_text p { margin: 5px 10px !important; }
 	header.header_home #welcome_text p.hello { margin: 15px 15px 0px 0px !important; }
 	header.header_home #welcome_text #header_homepage_link { margin: 10px 0px !important; }
