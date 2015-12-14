@@ -7,7 +7,7 @@ global $campaign_id;
 $campaign_id = $_GET['campaign_id'];
 $post_campaign = get_post($campaign_id);
 $campaign = atcf_get_campaign($post_campaign);
-WDGFormProjects::form_proceed_roi_list($campaign);
+$result_proceed_roi_list = WDGFormProjects::form_proceed_roi_list($campaign);
 WDGFormProjects::form_proceed_roi_return();
 WDGFormProjects::form_proceed_roi_transfers();
 ?>
@@ -28,6 +28,16 @@ WDGFormProjects::form_proceed_roi_transfers();
 				    the_post();
 				    the_content();
 				}
+				
+				if ($result_proceed_roi_list != FALSE) { ?>
+					Le virement en attente de réception par notre partenaire Mangopay. Rappel du virement à effectuer :<br />
+					- Propriétaire du compte : <?php echo $result_proceed_roi_list->BankAccountOwner; ?><br />
+					- IBAN : <?php echo $result_proceed_roi_list->BankAccountIBAN; ?><br />
+					- BIC : <?php echo $result_proceed_roi_list->BankAccountBIC; ?><br />
+					- Code de référence : <?php echo $result_proceed_roi_list->GeneratedReference; ?><br />
+					- Montant : <?php echo ($result_proceed_roi_list->Amount / 100); ?> &euro;<br />
+				<?php }
+				
 				//Init variables utiles
 				$keep_going = TRUE;
 				$display_rib = FALSE;
@@ -187,12 +197,27 @@ WDGFormProjects::form_proceed_roi_transfers();
 							<?php if ($payment_list[$i] > 0): ?>
 							    <?php if (isset($payment_status)): ?>
 								    <?php if ($post_payment_status->post_status == "pending"): ?>
-									    <?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Virement effectué sur le porte-monnaie.
+									    <?php $withdrawal_obj = ypcf_mangopay_get_withdrawalcontribution_by_id($post_payment_status->post_content); ?>
+									    <?php if ($withdrawal_obj->Status == "ACCEPTED"): ?>
+										    <?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Virement effectué sur le porte-monnaie.
 
-									    <?php if (current_user_can('manage_options')): ?>
-										    <br /><br />
-										    <a href="#transfer-roi" class="button wdg-button-lightbox-open transfert-roi-open" data-lightbox="transfer-roi" data-campaignid="<?php echo $campaign->ID; ?>" data-paymentitem="<?php echo $i; ?>">Transférer le retour sur investissement</a> [Visible uniquement des administrateurs]
+										    <?php if (current_user_can('manage_options')): ?>
+											    <br /><br />
+											    <a href="#transfer-roi" class="button wdg-button-lightbox-open transfert-roi-open" data-lightbox="transfer-roi" data-campaignid="<?php echo $campaign->ID; ?>" data-paymentitem="<?php echo $i; ?>">Transférer le retour sur investissement</a> [Visible uniquement des administrateurs]
+										    <?php endif; ?>
+											    
+									    <?php elseif ($withdrawal_obj->Status == "CREATED"): ?>
+										    Virement en attente de réception par notre partenaire Mangopay. Rappel du virement à effectuer :<br />
+										    - Propriétaire du compte : <?php echo $withdrawal_obj->BankAccountOwner; ?><br />
+										    - IBAN : <?php echo $withdrawal_obj->BankAccountIBAN; ?><br />
+										    - BIC : <?php echo $withdrawal_obj->BankAccountBIC; ?><br />
+										    - Code de référence : <?php echo $withdrawal_obj->GeneratedReference; ?><br />
+										    - Montant : <?php echo $payment_list[$i]; ?> &euro;<br />
+											    
+									    <?php else: ?>
+										    Problème de virement
 									    <?php endif; ?>
+											    
 								    <?php elseif ($post_payment_status->post_status == "published"): ?>
 									    <?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Versement effectué auprès des investisseurs.
     

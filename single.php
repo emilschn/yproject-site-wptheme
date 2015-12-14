@@ -12,17 +12,17 @@
     <div id="content">
 	<div class="padder">
 	    <?php 
-	    $page_title = ($category[0]->slug == 'wedogood') ? "Blog" : "Espace presse";
-	    locate_template( array( 'common/basic-header.php' ), true );
+	    $page_title = ($category[0]->slug == 'wedogood') ? "Actualit&eacute;s" : "Espace presse";
+//	    locate_template( array( 'common/basic-header.php' ), true );
 	    ?>
 	    
 	    <div id="post_bottom_bg">
 		<div id="post_bottom_content" class="center">
-		    <div class="left <?php if ($category[0]->slug == 'wedogood') echo 'two-thirds'; ?>">
+		    <div class="left two-thirds" style="margin-left: 175px;">
 
 			<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			    <div class="post-content">
-				<div>&lt;&lt; <a href="<?php echo get_permalink($page_blog->ID); ?>"><?php _e($page_title, 'yproject'); ?></a></div>
+				<div><br />&lt;&lt; <a href="<?php echo get_permalink($page_blog->ID); ?>"><?php _e($page_title, 'yproject'); ?></a></div>
 				<h2 class="posttitle"><?php the_title(); ?></h2>
 				<p class="date"><?php echo get_the_date(); ?></p>
 				<?php the_content(); ?>
@@ -31,7 +31,6 @@
 			</div>
 
 		    </div>
-		    <?php if ($category[0]->slug == 'wedogood') locate_template( array("community/community-menu.php"), true ); ?>
 		</div>
 		<div style="clear: both"></div>
 	    </div>

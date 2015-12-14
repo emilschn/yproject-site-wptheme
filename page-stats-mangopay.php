@@ -26,10 +26,10 @@ get_header();
 		
 		    <?php
 		    /*
-		    //Plongée libre
-		    $campaign_id = 6412;
-		    $amount = 585.63;
-		    $amount_fees = 4.37;
+		    //Naoden
+		    $campaign_id = 6100;
+		    $amount = 56541.82;
+		    $amount_fees = 9818.18;
 		    $api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
 		    echo '$api_project_id ' . $api_project_id . '<br />';
 		    $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
@@ -129,13 +129,13 @@ get_header();
 		    <ul>
 		    <?php 
 			global $wpdb;
-			$posts = $wpdb->get_results( $wpdb->prepare("SELECT `meta_value` FROM ".$wpdb->postmeta." WHERE `meta_key` = 'mangopay_wallet_id'", "" ) );
+			$posts = $wpdb->get_results( $wpdb->prepare("SELECT * FROM ".$wpdb->postmeta." WHERE `meta_key` = 'mangopay_wallet_id'", "" ) );
 			foreach ($posts as $post) {
 			    $mp_wallet = ypcf_mangopay_get_wallet_by_id($post->meta_value);
 			    ?>
 			    <li>
 				<?php 
-				    echo 'wp' . $post->ID . ' - ' . $mp_wallet->ID . ' - ' . $mp_wallet->Name . ' - ' . $mp_wallet->Amount . ' sur ' . $mp_wallet->RaisingGoalAmount;
+				    echo 'wp' . $post->post_id . ' - ' . $mp_wallet->ID . ' - ' . $mp_wallet->Name . ' - ' . $mp_wallet->Amount . ' sur ' . $mp_wallet->RaisingGoalAmount;
 				    echo ' - appartient à ' . $mp_wallet->Owners[0];
 				?>
 			    </li>

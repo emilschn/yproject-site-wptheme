@@ -23,6 +23,8 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 <header class="header_home">
 	<div class="center">
 		<div id="welcome_text">
+			<hr class="mobile_hidden" />
+			<p class="mobile_hidden welcome">Bienvenue<br />sur WEDOGOOD !</p>
 			<?php the_content(); ?>
 			<?php if ( is_user_logged_in() ) { ?>
 				<?php 
@@ -42,7 +44,17 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 		                </div>
 
 			<?php } ?>
+			<hr class="mobile_hidden" />
 			<p class="align-center only_on_mobile"><br /><a href="<?php echo get_permalink($page_list_projects->ID); ?>" class="button big">D&eacute;couvrir les projets</a></p>
+		</div>
+
+		<div class="home_video right mobile_hidden">
+			<div class="video-container hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 570)); ?></div>
+			<div class="button-video"><img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button.jpg" /></div>
+			<div class="button-video-shadows">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow2.png" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow1.png" />
+			</div>
 		</div>
 	</div>
 </header>
@@ -60,16 +72,7 @@ if ( !is_user_logged_in() ) {
 $cache_home = $WDG_cache_plugin->get_cache('home', 2);
 if ($cache_home !== FALSE) { echo $cache_home; }
 else {
-	ob_start(); /*
-?>
-
-<div class="home_video center align-center padder_more">
-	<h1>Comment faire pour que mon argent serve &agrave; financer des projets qui ont du sens ?</h1>
-	<?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU'); ?>
-</div>
-
-
-<?php */
+	ob_start();
 $page_finance = get_page_by_path('financement');
 $page_how = get_page_by_path('descriptif');
 ?>
