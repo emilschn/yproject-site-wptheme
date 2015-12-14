@@ -79,6 +79,7 @@ tbody {
     .only_on_large { display: block; }
 }
 
+.text-white { color: #FFFFFF; }
 
 .errors, .invest_error {
     color: #FE494C;
