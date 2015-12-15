@@ -15,19 +15,31 @@ $menu_project_parts = array (
 
 $page_invest = get_page_by_path('investir');
 $campaign_id_param = '?campaign_id=' . $campaign->ID;
+$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1#invest-start';
+$invest_url_href = "#connexion";
+$btn_invest_classes = 'wdg-button-lightbox-open';
+$btn_invest_data_lightbox = 'connexion';
+$btn_invest_text = ($campaign->funding_type() == 'fundingdonation') ? __('Soutenir', 'yproject') : __('Investir', 'yproject');
+
 $class_loggedin = '';
 $user_name_str = '';
-$btn_follow_href = '#';
-$btn_follow_classes = '';
-$btn_follow_data_lightbox = '';
+$btn_follow_href = '#connexion';
+$btn_follow_classes = 'wdg-button-lightbox-open';
+$btn_follow_data_lightbox = 'connexion';
 $btn_follow_text = __('Suivre', 'yproject');
 $btn_follow_following = '0';
+
 if (is_user_logged_in()) {
 	get_currentuserinfo();
 	$user_name_str = $current_user->user_firstname;
 	if ($user_name_str == '') {
 		$user_name_str = $current_user->user_login;
 	}
+	
+	$invest_url_href = $invest_url;
+	
+	$btn_invest_classes = '';
+	$btn_invest_data_lightbox = '';
 	$btn_follow_classes = 'update-follow';
 	$btn_follow_data_lightbox = $campaign->ID;
 	$class_loggedin = 'loggedin';
@@ -35,12 +47,8 @@ if (is_user_logged_in()) {
 	global $wpdb;
 	$table_jcrois = $wpdb->prefix . "jycrois";
 	$users = $wpdb->get_results( 'SELECT * FROM '.$table_jcrois.' WHERE campaign_id = '.$campaign->ID.' AND user_id='.$current_user->ID );
-	$btn_follow_following = (!empty($users[0]->ID)) ? '1' : '0';
 	$btn_follow_text = (!empty($users[0]->ID)) ? __('Suivi', 'yproject') : __('Suivre', 'yproject');
-} else {
-	$btn_follow_classes = 'wdg-button-lightbox-open';
-	$btn_follow_href = '#connexion';
-	$btn_follow_data_lightbox = 'connexion';
+	$btn_follow_following = (!empty($users[0]->ID)) ? '1' : '0';
 }
 ?>
 
@@ -76,9 +84,10 @@ if (is_user_logged_in()) {
 
 		<ul class="menu-actions <?php echo $class_loggedin; ?>">
 			<li class="login-item">
-			<?php if (!empty($user_name_str)): ?>
-			<a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Bonjour', 'yproject'); ?> <?php echo $user_name_str; ?></a>
-			<?php endif; ?>
+				<?php if (!empty($user_name_str)): ?>
+				<a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Bonjour', 'yproject'); ?> <?php echo $user_name_str; ?></a>
+				[<a href="<?php echo wp_logout_url(); echo '&page_id='.get_the_ID(); ?>">x</a>]
+				<?php endif; ?>
 			</li>
 
 			<li>
@@ -93,23 +102,19 @@ if (is_user_logged_in()) {
 			$campaign_status = $campaign->campaign_status();
 			switch ($campaign_status) {
 				case 'vote': ?>
-			<a href="#">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodvote.png" alt="<?php _e('Voter', 'yproject'); ?>" title="<?php _e('Voter', 'yproject'); ?>" />
-				<?php _e('Voter', 'yproject'); ?>
-			</a>
+				<a href="#">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodvote.png" alt="<?php _e('Voter', 'yproject'); ?>" title="<?php _e('Voter', 'yproject'); ?>" />
+					<?php _e('Voter', 'yproject'); ?>
+				</a>
 
 				<?php
 				break;
 				case 'collecte':
 				?>
-			<a href="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.png" alt="<?php _e('Contribuer', 'yproject'); ?>" title="<?php _e('Contribuer', 'yproject'); ?>" />
-				<?php if ($campaign->funding_type() == 'fundingdonation'): ?>
-				<?php _e('Soutenir', 'yproject'); ?>
-				<?php else: ?>
-				<?php _e('Investir', 'yproject'); ?>
-				<?php endif; ?>
-			</a>
+				<a href="<?php echo $invest_url_href; ?>" class="<?php echo $btn_invest_classes; ?>" data-lightbox="<?php echo $btn_invest_data_lightbox; ?>" data-redirect="<?php echo $invest_url; ?>">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.png" alt="<?php echo $btn_invest_text; ?>" title="<?php echo $btn_invest_text; ?>" />
+					<?php echo $btn_invest_text; ?>
+				</a>
 				<?php break;
 			} ?>
 			</li>

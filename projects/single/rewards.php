@@ -45,7 +45,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 				(<span class="roi_percent_project"><?php echo $campaign->roi_percent(); ?></span>% <?php _e("du CA pour", "yproject"); ?> <span class="roi_goal_project"><?php echo $campaign->minimum_goal(); ?></span>&euro; <?php _e("collect&eacute;s", "yproject"); ?>).<br /><br />
 
 				<?php _e("Si j'investis :"); ?>
-				<input type="text" name="init_invest" class="init_invest" /> &euro; <button><?php _e('Calculer', 'yproject'); ?></button><br /><br />
+				<input type="text" name="init_invest" class="init_invest" /> &euro; <button class="init_invest_count"><?php _e('Calculer', 'yproject'); ?></button><br /><br />
 				
 				<?php _e("Je percevrai :"); ?>
 				<span class="roi_percent_user">0</span>% <?php _e("du CA, soit :", "yproject"); ?><br />

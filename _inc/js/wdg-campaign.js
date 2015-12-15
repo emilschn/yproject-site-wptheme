@@ -52,7 +52,9 @@ var WDGProjectViewer = (function($) {
 				}).done(function(){});
 			});
 			
-			
+			$("button.init_invest_count").click(function(e) {
+				e.preventDefault();
+			});
 			$("input.init_invest").change(function() {
 				var inputVal = Number($(this).val());
 				var percentProject = Number($("span.roi_percent_project").text());
