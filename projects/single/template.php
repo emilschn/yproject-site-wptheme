@@ -35,3 +35,5 @@ $client_context = $campaign->get_client_context();
 	<?php locate_template( array("projects/single/comments.php"), true ); ?>
     
 </div>
+    
+<?php locate_template( array("projects/single/responsive-buttons.php"), true ); ?>

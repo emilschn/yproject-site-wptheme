@@ -121,7 +121,7 @@ if (is_user_logged_in()) {
 
 			<li>
 				<a href="#" class="trigger-menu" data-target="share">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodmains.png" alt="<?php _e('Partager', 'yproject'); ?>" title="<?php _e('Partager', 'yproject'); ?>" />
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/hautparleur.png" alt="<?php _e('Partager', 'yproject'); ?>" title="<?php _e('Partager', 'yproject'); ?>" />
 					<?php _e('Partager', 'yproject'); ?>
 				</a>
 			</li>

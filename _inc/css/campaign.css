@@ -446,4 +446,11 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	div#content.version-3 div.project-comments li { margin: 0px 0px 10px 5px; }
 	div#content.version-3 div.project-comments div.comment-respond { width: 96%; }
 	div#content.version-3 div.project-comments div.comment-respond textarea { width: 98%; }
+	div#content.version-3 div.project-responsive-buttons { display: block; position: fixed; bottom: 0px; width: 100%; }
+	div#content.version-3 div.project-responsive-buttons a { display: inline-block; background: #FFFFFF; }
+	div#content.version-3 div.project-responsive-buttons a.button-action { float: left; }
+	div#content.version-3 div.project-responsive-buttons a.button-share { float: right; }
+	div#content.version-3 div.project-responsive-buttons a img { width: 80px; }
+	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered { position: fixed; display: block; bottom: 50px; right: 0px; padding: 5px; background: #FFFFFF; }
+	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered a img { width: 50px; }
 }
