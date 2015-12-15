@@ -1,11 +1,13 @@
 <?php 
-global $disable_logs, $WDG_cache_plugin; 
+global $disable_logs, $WDG_cache_plugin, $campaign, $stylesheet_directory_uri; 
 $disable_logs = TRUE;
 if (isset($_GET["campaign_id"])) {
-        $campaign_id = $_GET["campaign_id"];
-        $campaign = atcf_get_campaign($campaign_id);
-        $status = $campaign->campaign_status();
-	global $stylesheet_directory_uri;
+	$campaign_id = $_GET["campaign_id"];
+	$campaign = atcf_get_campaign($campaign_id);
+}
+
+if (!empty($campaign)) {
+	$status = $campaign->campaign_status();
 
 //*******************
 //CACHE PROJECT PUBLIC STATS
@@ -23,7 +25,7 @@ else {
             if (file_exists($upload_dir['basedir'] . '/projets/' . $post_campaign->post_name . '-stats.jpg')) { 
                     echo '<img src="'.$upload_dir['baseurl'] . '/projets/' . $post_campaign->post_name . '-stats.jpg" alt="Statistiques du projet" />';
             } else {
-                    locate_template( array("projects/stats-votes-public.php"), true );
+                    locate_template( array("projects/common/stats-public-votes.php"), true );
                     $vote_results = WDGCampaignVotes::get_results($_GET['campaign_id']);
                     print_vote_results($vote_results);
             }
@@ -34,7 +36,7 @@ else {
 <h2 class="expandator" data-target="investments"><?php echo ucfirst($campaign->funding_type_vocabulary()['investor_action']);?>s  <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus" /></h2>
     <div id="extendable-investments" class="expandable default-expanded">
     <?php 
-            locate_template( array("projects/stats-investments-public.php"), true );
+            locate_template( array("projects/common/stats-public-investments.php"), true );
             print_investments($campaign_id, false);
     ?>
     </div>

@@ -1,5 +1,6 @@
 <?php function print_vote_results($vote_results) { ?>
 
+<?php if ($vote_results['count_voters'] > 0): ?>
 <strong><?php echo $vote_results['count_voters']; ?></strong> personnes ont vot&eacute; sur votre projet.<br />
 
 <h3>Impact et cohérence du projet</h3>
@@ -94,4 +95,7 @@ jQuery(document).ready( function($) {
 });
 </script>
 
+<?php else: ?>
+Il n'y a pas encore eu de vote sur ce projet.
+<?php endif; ?>
 <?php } ?>

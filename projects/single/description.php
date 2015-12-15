@@ -119,7 +119,8 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 		<div id="project-content-statistics" class="projects-desc-content">
 			<h2><?php _e('Statistiques', 'yproject'); ?></h2>
 			<div class="zone-content">
-				TODO
+				<p><?php _e('Les statistiques de vote et d&apos;investissement du projet'); ?></p>
+				<?php locate_template( array("projects/common/stats-public.php"), true ); ?>
 			</div>
 		</div>
 	</div>

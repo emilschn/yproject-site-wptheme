@@ -4,7 +4,7 @@ if (isset($_GET['campaign_id'])) {
 
 	<h2>Statistiques des votes</h2>
 	<?php
-            locate_template( array("projects/stats-votes-public.php"), true );
+            locate_template( array("projects/common/stats-public-votes.php"), true );
             $vote_results = WDGCampaignVotes::get_results($_GET['campaign_id']); 
             $status = $campaign->campaign_status();
             

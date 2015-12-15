@@ -51,10 +51,10 @@
 								    do_shortcode('[yproject_crowdfunding_edit_news]');
 								    break;
 								case 'statistiques':
-								    locate_template( array("projects/single-stats-public.php"), true );
+								    locate_template( array("projects/common/stats-public.php"), true );
 								    break;
-                                                                case 'liste-investisseurs':
-                                                                    locate_template( array("projects/single-project-investors.php"), true );
+								case 'liste-investisseurs':
+									locate_template( array("projects/single-project-investors.php"), true );
 								    break;
 								default:
 								    the_content();

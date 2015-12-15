@@ -960,7 +960,7 @@ WDGProjectPageFunctions=(function($) {
 				}
 				WDGProjectPageFunctions.currentDiv++;
 			});
-			$('.projects-desc-content img').click(function() {
+			$('.projects-desc-content img, .projects-desc-content .expandator').click(function() {
 			    WDGProjectPageFunctions.isClickBlocked = true;
 			});
 			WDGProjectPageFunctions.refreshEditable();
