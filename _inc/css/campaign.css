@@ -241,10 +241,10 @@ div#content.version-3 div.project-pitch-video {
 /*******************************************************************************
 * REWARDS
 *******************************************************************************/
-div#content.version-3 div.project-rewards-content div:first-child {
+div#content.version-3 div.project-rewards-content > div:first-child {
     width: 140px;
 }
-div#content.version-3 div.project-rewards-content div:last-child {
+div#content.version-3 div.project-rewards-content > div:last-child {
     width: 810px;
 }
 div#content.version-3 div.project-rewards-content span.roi_percent_user {
@@ -367,4 +367,23 @@ div#content.version-3 .project-comments ul {
 div#content.version-3 .project-comments li {
 	list-style: none;
 	margin-bottom: 5px;
+}
+div#content.version-3 .project-comments .comment-respond {
+	margin: auto;
+	width: 500px;
+}
+
+/*******************************************************************************
+* RESPONSIVE MEDIUM
+*******************************************************************************/
+@media screen and (min-width: 768px) and (max-width: 959px) {
+	div#content.version-3 .padder { margin-top: 33px; }
+	div#content.version-3 div.project-banner div.project-banner-content div.left h1,
+	div#content.version-3 div.project-banner div.project-banner-content div.left div.subtitle { margin-left: 5px; }
+	div#content.version-3 nav.project-navigation div#triggered-menu-share.triggered { width: 95%; }
+	div#content.version-3 div.project-pitch-text { width: 36%; margin: 0% 1%; }
+	div#content.version-3 div.project-pitch-video { width: 60%; }
+	div#content.version-3 div.project-rewards-content { margin: 0px 5px; }
+	div#content.version-3 div.project-rewards-content > div:first-child, div#content.version-3 div.project-rewards-content > div:first-child img { width: 100px; }
+	div#content.version-3 div.project-rewards-content > div:last-child { width: 630px; margin-left: 10px; }
 }
