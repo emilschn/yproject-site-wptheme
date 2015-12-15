@@ -44,7 +44,7 @@ if ($can_modify) {
                         |
                         <a href="<?php echo get_permalink($campaign_id) . $params_full; ?>" <?php if ($current_page == $post_campaign->post_name) { echo 'class="selected"'; } ?>><?php _e('Page projet', 'yproject'); ?></a>
                         
-			|
+						|
                         <a href="<?php echo get_permalink($page_wallet->ID) . $campaign_id_param . $params_partial; ?>" <?php if ($current_page == 'gestion-financiere') { echo 'class="selected"'; } ?>><?php _e('Gestion financi&egrave;re', 'yproject'); ?></a>
                         
                         <?php if ($group_link != '') : ?>

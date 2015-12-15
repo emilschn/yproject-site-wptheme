@@ -33,7 +33,7 @@ div#content.version-3 .separator {
 
 div#content.version-3 nav.project-navigation {
     position: fixed;
-    z-index: 100;
+    z-index: 2001;
     top: 0px;
     width: 100%;
     height: 80px;
@@ -140,7 +140,10 @@ div#content.version-3 div.project-admin {
 	background: #74BF43;
 }
 div#content.version-3 div.project-admin a {
+	display: block;
+	width: 139px;
 	color: #FFFFFF;
+	font-weight: bold;
 }
 
 /*******************************************************************************
@@ -171,6 +174,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.left h1 
 div#content.version-3 div.project-banner div.project-banner-content div.left div.subtitle {
     position: absolute;
     bottom: 10px;
+	height: 20px;
 }
 
 div#content.version-3 div.project-banner div.project-banner-content div.right {

@@ -1,5 +1,5 @@
 <?php
-global $campaign, $stylesheet_directory_uri;
+global $campaign, $can_modify, $stylesheet_directory_uri;
 $campaign_status = $campaign->campaign_status();
 $file_complement = '';
 if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
@@ -22,6 +22,15 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 			<div class="zone-content">
 				<?php the_content(); ?>
 			</div>
+			<?php if ($can_modify) { ?>
+			<div class="zone-edit hidden">
+				<?php 
+				$editor_description_content = str_replace( ']]>', ']]&gt;', apply_filters( 'the_content', $campaign->data->post_content ));
+				global $post, $post_id; $post_ID = $post = 0;
+				wp_editor( $editor_description_content, 'wdg-input-description', $editor_params );
+				?>
+			</div>
+			<?php } ?>
 		</div>
 	</div>
 
@@ -36,6 +45,11 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 				echo apply_filters('the_content', $societal_challenge);
 				?>
 			</div>
+			<?php if ($can_modify) { ?>
+			<div class="zone-edit hidden">
+				<?php wp_editor( $societal_challenge, 'wdg-input-societal_challenge', $editor_params ); ?>
+			</div>
+			<?php } ?>
 		</div>
 	</div>
 	
@@ -51,6 +65,11 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 				echo apply_filters('the_content', $added_value);
 				?>
 			</div>
+			<?php if ($can_modify) { ?>
+			<div class="zone-edit hidden">
+				<?php wp_editor( $added_value, 'wdg-input-added_value', $editor_params ); ?>
+			</div>
+			<?php } ?>
 		</div>
 	</div>
 	
@@ -65,6 +84,11 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 				echo apply_filters('the_content', $economic_model);
 				?>
 			</div>
+			<?php if ($can_modify) { ?>
+			<div class="zone-edit hidden">
+				<?php wp_editor( $economic_model, 'wdg-input-economic_model', $editor_params ); ?>
+			</div>
+			<?php } ?>
 		</div>
 	</div>
 	<?php endif; ?>
@@ -80,6 +104,11 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 				echo apply_filters('the_content', $implementation);
 				?>
 			</div>
+			<?php if ($can_modify) { ?>
+			<div class="zone-edit hidden">
+				<?php wp_editor( $implementation, 'wdg-input-implementation', $editor_params ); ?>
+			</div>
+			<?php } ?>
 		</div>
 	</div>
     
@@ -87,7 +116,7 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 	<div class="project-description-item" data-content="statistics">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $stylesheet_directory_uri; ?>/images/porteur<?php echo $file_complement; ?>.png" alt="stats" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_gris_projet.png" alt="grey triangle"/>
-		<div id="project-content-implementation" class="projects-desc-content">
+		<div id="project-content-statistics" class="projects-desc-content">
 			<h2><?php _e('Statistiques', 'yproject'); ?></h2>
 			<div class="zone-content">
 				TODO

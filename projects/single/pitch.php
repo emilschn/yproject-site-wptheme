@@ -19,9 +19,7 @@ if ($campaign->video() == '') {
 	</div>
     
 	<div class="clearfix">
-		<div class="project-pitch-text">
-			<?php echo html_entity_decode($campaign->summary()); ?>
-		</div>
+		<div class="project-pitch-text"><?php echo html_entity_decode($campaign->summary()); ?></div>
 
 		<div class="project-pitch-video" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>');"<?php } ?>>
 			<?php echo $video_element; ?>
