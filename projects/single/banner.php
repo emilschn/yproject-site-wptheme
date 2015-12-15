@@ -55,40 +55,43 @@ if (count($current_organisations) > 0) {
 				
 				<?php locate_template( array("projects/common/progressbar.php"), true ); ?>
 				
-				<div class="project-banner-info-item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-					<span class="mobile_hidden"><?php 
-					    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
-					    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
-						echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
-					    }
-					?></span>
-				</div>
-				
-				<div class="project-banner-info-item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
-					<?php $backers_count = $campaign->backers_count(); ?>
-					<span>
-						<?php
-						echo $backers_count . ' ';
-						if ($backers_count > 1) {
-							_e('personnes ont d&eacute;j&agrave;', 'yproject');
-						} else {
-							_e('personne a d&eacute;j&agrave;', 'yproject');
-						}
-						echo ' ';
-						if ($campaign->funding_type() == 'fundingdonation') { 
-							_e('soutenu ce projet', 'yproject');
-						} else {
-							_e('investi sur ce projet', 'yproject');
-						}
-						?>
-					</span>
-				</div>
-				
-				<div class="project-banner-info-item">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
-					<span><?php echo $campaign->time_remaining_fullstr(); ?></span>
+				<div class="project-banner-logos">
+					<div class="project-banner-info-item">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
+						<span class="campaign-mobile-hidden"><?php 
+							echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
+							if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
+							echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
+							}
+						?></span>
+						<span class="hidden"><?php echo $campaign->minimum_goal(true); ?></span>
+					</div>
+
+					<div class="project-banner-info-item">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
+						<?php $backers_count = $campaign->backers_count(); ?>
+						<span class="campaign-mobile-hidden"><?php
+							echo $backers_count . ' ';
+							if ($backers_count > 1) {
+								_e('personnes ont d&eacute;j&agrave;', 'yproject');
+							} else {
+								_e('personne a d&eacute;j&agrave;', 'yproject');
+							}
+							echo ' ';
+							if ($campaign->funding_type() == 'fundingdonation') { 
+								_e('soutenu ce projet', 'yproject');
+							} else {
+								_e('investi sur ce projet', 'yproject');
+							}
+						?></span>
+						<span class="hidden"><?php echo $backers_count; ?></span>
+					</div>
+
+					<div class="project-banner-info-item">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
+						<span class="campaign-mobile-hidden"><?php echo $campaign->time_remaining_fullstr(); ?></span>
+						<span class="hidden"><?php echo $campaign->time_remaining_str(); ?></span>
+					</div>
 				</div>
 				
 				<div class="separator"></div>

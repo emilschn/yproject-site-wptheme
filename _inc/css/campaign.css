@@ -128,14 +128,6 @@ div#content.version-3 nav.project-navigation div#triggered-menu-share.triggered 
 	width: 40px;
 }
 
-div#content.version-3.scrolled .padder { margin-top: 63px; }
-div#content.version-3.scrolled nav.project-navigation { height: 50px; }
-div#content.version-3.scrolled nav.project-navigation ul.menu-actions { margin-top: -10px; }
-div#content.version-3.scrolled nav.project-navigation ul li { height: 50px; }
-div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.login-item { display: none; }
-div#content.version-3.scrolled nav.project-navigation ul li#triggered-menu-hamburger { height: auto; top: 50px; }
-div#content.version-3.scrolled nav.project-navigation div#triggered-menu-share { top: 50px; }
-
 /*******************************************************************************
 * ADMIN BUTTON
 *******************************************************************************/
@@ -372,6 +364,23 @@ div#content.version-3 .project-comments .comment-respond {
 	margin: auto;
 	width: 500px;
 }
+div#content.version-3 div.project-comments div.comment-respond p.form-submit {
+	text-align: right;
+}
+
+
+/*******************************************************************************
+* WIDE SCREENS
+*******************************************************************************/
+@media screen and (min-width: 768px) {
+	div#content.version-3.scrolled .padder { margin-top: 63px; }
+	div#content.version-3.scrolled nav.project-navigation { height: 50px; }
+	div#content.version-3.scrolled nav.project-navigation ul.menu-actions { margin-top: -10px; }
+	div#content.version-3.scrolled nav.project-navigation ul li { height: 50px; }
+	div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.login-item { display: none; }
+	div#content.version-3.scrolled nav.project-navigation ul li#triggered-menu-hamburger { height: auto; top: 50px; }
+	div#content.version-3.scrolled nav.project-navigation div#triggered-menu-share { top: 50px; }
+}
 
 /*******************************************************************************
 * RESPONSIVE MEDIUM
@@ -386,4 +395,47 @@ div#content.version-3 .project-comments .comment-respond {
 	div#content.version-3 div.project-rewards-content { margin: 0px 5px; }
 	div#content.version-3 div.project-rewards-content > div:first-child, div#content.version-3 div.project-rewards-content > div:first-child img { width: 100px; }
 	div#content.version-3 div.project-rewards-content > div:last-child { width: 630px; margin-left: 10px; }
+}
+
+/*******************************************************************************
+* RESPONSIVE SMALL
+*******************************************************************************/
+@media screen and (max-width: 767px) {
+	.campaign-mobile-hidden { display: none; }
+	nav#navigation { display: block; }
+	div#content.version-3 .padder { margin-top: 0px; }
+	div#content.version-3 nav.project-navigation { display: none; }
+	div#content.version-3 div.project-banner-img, div#content.version-3 div.project-banner-deco { display: none; }
+	div#content.version-3 div.project-timeline { display: none; }
+	div#content.version-3 div.project-banner { height: 330px; }
+	div#content.version-3 div.project-banner div.project-banner-content div.left { float: none; padding: 15px 10px; height: 120px; background-image: url("../../images/footer.png"); }
+	div#content.version-3 div.project-banner div.project-banner-content div.left h1 { position: relative; margin: 20px 0px; bottom: auto; color: #FFFFFF; font-size: 30px; font-weight: normal; text-transform: uppercase; }
+	div#content.version-3 div.project-banner div.project-banner-content div.left div.subtitle { position: relative; bottom: auto; color: #FFFFFF; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right { width: 100%; height: 180px; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.separator { display: none; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.progressbar-bg { background: #FFFFFF; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.progressbar-bg div.progressbar-complete { background: #FF494C; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.progressbar { margin: 80px auto 0px; width: 310px; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-logos { margin: -100px auto 0px; width: 160px; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-logos div.project-banner-info-item { display: inline-block; width: 40px; text-align: center; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item.author-info { margin-top: 65px; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item.author-info p { margin: 2px 0px; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item span.hidden { display: inline; }
+	div#content.version-3 div.project-pitch div.project-pitch-title { display: none; }
+	div#content.version-3 div.project-pitch div.project-pitch-text { margin: 5px 1%; width: 98%; height: auto; }
+	div#content.version-3 div.project-pitch div.project-pitch-video { margin: 5px 1%; width: 98%; }
+	div#content.version-3 div.project-rewards div.project-rewards-content { margin: 0% 1%; width: 98%; }
+	div#content.version-3 div.project-rewards div.project-rewards-content > div:first-child { width: 50px; }
+	div#content.version-3 div.project-rewards div.project-rewards-content > div:first-child img { width: 50px; }
+	div#content.version-3 div.project-rewards div.project-rewards-content > div:last-child { width: 100%; }
+	div#content.version-3 div.project-rewards div.project-rewards-content > div:last-child div.project-rewards-intro { margin: -50px 0px 0px 55px; }
+	div#content.version-3 div.project-rewards div.project-rewards-content table tr td { min-width: 40px; }
+	div#content.version-3 div.project-description div.project-description-item { width: 96%; margin: 25px 2%; }
+	div#content.version-3 div.project-description div.project-description-item img.project-content-icon { display: none; }
+	div#content.version-3 div.project-description div.project-description-item img.grey-triangle { display: none; }
+	div#content.version-3 div.project-description div.projects-desc-content { width: 100% !important; margin: 0px; left: 0px; }
+	div#content.version-3 div.project-description div.projects-desc-content h2 { margin: 15px 10px; font-size: 18px; text-align: center; text-transform: none; }
+	div#content.version-3 div.project-comments li { margin: 0px 0px 10px 5px; }
+	div#content.version-3 div.project-comments div.comment-respond { width: 96%; }
+	div#content.version-3 div.project-comments div.comment-respond textarea { width: 98%; }
 }

@@ -16,8 +16,8 @@
  *
  */
 
- @import url("_inc/css/responsive.css?d=20150618") (max-width: 480px);
- @import url("_inc/css/responsive-medium.css?d=20150618") (min-width: 481px);
+ @import url("_inc/css/responsive.css?d=20151215") (max-width: 767px);
+ @import url("_inc/css/responsive-medium.css?d=20151215") (min-width: 768px);
 
  /* FONTS TO LOAD */
  @font-face {

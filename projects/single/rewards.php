@@ -41,9 +41,11 @@ $estimated_turnover = $campaign->estimated_turnover();
 			<form method="GET" action="<?php echo get_permalink($page_invest->ID); ?>">
 			<?php endif; ?>
 			    
+				<div class="project-rewards-intro">
 				<?php echo __("Recevez tous les trimestres une part du chiffre d&apos;affaires pendant", "yproject"). ' ' .$funding_duration. ' ' .__("ans", "yproject"); ?>
 				(<span class="roi_percent_project"><?php echo $campaign->roi_percent(); ?></span>% <?php _e("du CA pour", "yproject"); ?> <span class="roi_goal_project"><?php echo $campaign->minimum_goal(); ?></span>&euro; <?php _e("collect&eacute;s", "yproject"); ?>).<br /><br />
-
+				</div>
+				
 				<?php _e("Si j'investis :"); ?>
 				<input type="text" name="init_invest" class="init_invest" /> &euro; <button class="init_invest_count"><?php _e('Calculer', 'yproject'); ?></button><br /><br />
 				

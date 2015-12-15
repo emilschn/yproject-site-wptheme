@@ -76,7 +76,7 @@ if (is_user_logged_in()) {
 			</li>
 		</ul>
 
-		<ul class="menu-project">
+		<ul class="menu-project campaign-mobile-hidden">
 			<?php foreach ($menu_project_parts as $menu_part_key => $menu_part_label): ?>
 				<li><a href="#" data-target="<?php echo $menu_part_key; ?>"><?php _e($menu_part_label, 'yproject'); ?></a></li>
 			<?php endforeach; ?>
@@ -119,10 +119,12 @@ if (is_user_logged_in()) {
 			} ?>
 			</li>
 
-			<li><a href="#" class="trigger-menu" data-target="share">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodmains.png" alt="<?php _e('Partager', 'yproject'); ?>" title="<?php _e('Partager', 'yproject'); ?>" />
-				<?php _e('Partager', 'yproject'); ?>
-			</a></li>
+			<li>
+				<a href="#" class="trigger-menu" data-target="share">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodmains.png" alt="<?php _e('Partager', 'yproject'); ?>" title="<?php _e('Partager', 'yproject'); ?>" />
+					<?php _e('Partager', 'yproject'); ?>
+				</a>
+			</li>
 		</ul>
 
 		<div id="triggered-menu-share" class="triggered-menu">
