@@ -27,7 +27,7 @@ var ProjectEditor = (function($) {
 				$(clickedElement).removeClass("edit-button");
 				$(clickedElement).addClass("edit-button-validate");
 			} else {
-				if (WDGProjectPageFunctions.isEditing) {
+				if (WDGProjectPageFunctions.isEditing !== "") {
 					alert("Vous ne pouvez pas valider si un champ est en cours d'édition");
 				} else {
 					$("#content").removeClass("editing");
@@ -117,11 +117,11 @@ var ProjectEditor = (function($) {
 		//Définit les événements de clicks sur les différents boutons d'édition
 		initClick: function() {
 			$(".edit-button").click(function() {
+				var sProperty = $(this).data("property");
 				if ($(this).attr("id") !== "wdg-edit-project") {
-					WDGProjectPageFunctions.isEditing = true;
+					WDGProjectPageFunctions.isEditing = sProperty;
 				}
 				
-				var sProperty = $(this).data("property");
 				switch (sProperty) {
 					case "title":
 					case "subtitle":
@@ -330,7 +330,7 @@ var ProjectEditor = (function($) {
 					break;
 			}
 			WDGProjectPageFunctions.initClick();
-			WDGProjectPageFunctions.isEditing = false;
+			WDGProjectPageFunctions.isEditing = "";
 		},
 		
 		//Mise à jour du texte dans l'affichage

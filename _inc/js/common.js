@@ -831,7 +831,7 @@ WDGProjectPageFunctions=(function($) {
 	return {
 		currentDiv: 0,
 		isInit: false,
-		isEditing: false,
+		isEditing: "",
 		isClickBlocked: false,
 		navigationHeight: 0,
 		initUI:function() {
@@ -943,16 +943,17 @@ WDGProjectPageFunctions=(function($) {
 				if ($(this).find('p').length > 1) {
 					$(this).css("cursor", "pointer");
 					var sDisplay = '';
-					if (!WDGProjectPageFunctions.isInit && WDGProjectPageFunctions.currentDiv === 0) sDisplay = 'style="display:none"';
+					if ((!WDGProjectPageFunctions.isInit && WDGProjectPageFunctions.currentDiv === 0) || $(this).attr("id") === "project-content-" + WDGProjectPageFunctions.isEditing) sDisplay = 'style="display:none"';
 					var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'></div>';
 					$(this).find('div *:lt(1)').append(sProjectMore);
+					$(this).unbind("click");
 					$(this).click(function(){
 						WDGProjectPageFunctions.clickItem($(this));
 					});
 				}
 
 				//Rétractation des parties qui ne sont pas la description
-				if (WDGProjectPageFunctions.isInit || WDGProjectPageFunctions.currentDiv > 0) {
+				if ((WDGProjectPageFunctions.isInit || WDGProjectPageFunctions.currentDiv > 0) && $(this).attr("id") !== "project-content-" + WDGProjectPageFunctions.isEditing) {
 					//On prend toutes les balises de la description
 					var children = $(this).children().children();
 					//On les masque sauf la première
@@ -960,7 +961,7 @@ WDGProjectPageFunctions=(function($) {
 				}
 				WDGProjectPageFunctions.currentDiv++;
 			});
-			$('.projects-desc-content img, .projects-desc-content .expandator').click(function() {
+			$('.projects-desc-content img, .projects-desc-content .expandator, .projects-desc-content .edit-button, .projects-desc-content .edit-button-validate').click(function() {
 			    WDGProjectPageFunctions.isClickBlocked = true;
 			});
 			WDGProjectPageFunctions.refreshEditable();
@@ -971,7 +972,7 @@ WDGProjectPageFunctions=(function($) {
 		clickItem: function(clickedElement) {
 			//Ne déclenche pas d'action si l'utilisateur sélectionnait du texte
 			var select = getSelection().toString();
-			if (!select && !WDGProjectPageFunctions.isEditing && !WDGProjectPageFunctions.isClickBlocked) {
+			if (!select && WDGProjectPageFunctions.isEditing === "" && !WDGProjectPageFunctions.isClickBlocked) {
 				//Si la balise "lire plus" de l'élément cliqué est affichée
 				var projectMore = clickedElement.find('.projects-more');
 				if (projectMore.is(':visible')) {
@@ -1016,7 +1017,7 @@ WDGProjectPageFunctions=(function($) {
 				if (projectMore.is(':visible')) {
 					WDGProjectPageFunctions.hideEditButton(property);
 				//Si le Lire plus n'est pas visible & si la page est en cours d'édition, la zone est éditable
-				} else if ($("#content").hasClass("editing")) {
+				} else if ($("#content").hasClass("editing") && property !== "statistics") {
 					$(this).children(".zone-content").addClass("editable");
 					WDGProjectPageFunctions.showEditButton(property);
 				//Sinon, la zone n'est pas éditable
