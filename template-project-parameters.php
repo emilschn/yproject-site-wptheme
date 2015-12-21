@@ -129,13 +129,13 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 								echo 'Don avec contrepartie<br />';
 								break;
 						}
-                                                echo '</span>';
+						echo '</span>';
 						?>
                                                 
-                                                <?php if ($campaign->funding_type() != 'fundingdonation'): ?>
+						<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 						<label>Dur&eacute;e du financement :</label>
 						<span><?php echo $campaign->funding_duration(); ?> ann&eacute;es.</span><br />
-                                                <?php endif; ?>
+						<?php endif; ?>
                                                 
 						<label>Montant demand&eacute; :</label>
 						<?php $goal = (int)$campaign->goal(false); ?>
@@ -143,54 +143,54 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 					
 					<?php endif; 
                                         
-                                        //Gestion des contreparties
-                                        if ($campaign->funding_type() == 'fundingdonation'):
-                                            $rewards = atcf_get_rewards($campaign_id);
-                                            $status = $campaign->campaign_status();
-                                            $can_edit = ( $status == "preparing" || $status == "preview" || $status == "vote");
-                                        ?>
+					//Gestion des contreparties
+					if ($campaign->funding_type() == 'fundingdonation'):
+						$rewards = atcf_get_rewards($campaign_id);
+						$status = $campaign->campaign_status();
+						$can_edit = ( $status == "preparing" || $status == "preview" || $status == "vote");
+					?>
 					
-                                        <label for="project-rewards">Contreparties :</label><br/>
-                                        <div class="reward-table-param"><table>
-                                            <thead>
-                                                <tr>
-                                                    <th>Nom de la contrepartie</th>
-                                                    <th>Montant</th>
-                                                    <th>Limite</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $i=0;
-                                                foreach ($rewards->rewards_list as $value) {
-                                                    if ($can_edit){
-                                                        $line = '<tr>'
-                                                            .'<td><input name="reward-name-'.$i.'" type="text" name="" value="'.$value['name'].'" placeholder="Nommez et d&eacute;crivez bri&egrave;vement la contrepartie" class="reward-text" />'
-                                                            .'<input name="reward-id-'.$i.'" type="hidden" value="'.$value['id'].'"/></td>'
-                                                            .'<td><input name="reward-amount-'.$i.'" type="number" min="0" name="" value="'.$value['amount'].'" placeholder="0"/>€</td>'
-                                                            .'<td><input name="reward-limit-'.$i.'" type="number" min="0" value="'.$value['limit'].'" placeholder="0"/></td>'
-                                                            .'</tr>';
-                                                    } else {
-                                                        $line = '<tr>'
-                                                            .'<td>'.$value['name'].'</td>'
-                                                            .'<td>'.$value['amount'].'</td>'
-                                                            .'<td>'.$value['limit'].'</td>'
-                                                            .'</tr>';
-                                                    }
-                                                    echo $line;
-                                                    $i++;
-                                                }
-                                                if ($can_edit) { for ($loop=0; $loop<=2; $loop++){ ?>
-                                                <tr>
-                                                    <td><input name="reward-name-<?php echo $i+$loop;?>" type="text" name="" value="" placeholder="Nommez et d&eacute;crivez bri&egrave;vement la contrepartie" class="reward-text"/></td>
-                                                    <td><input name="reward-amount-<?php echo $i+$loop;?>" type="number" min="0" name="" value="" placeholder=""/></td>
-                                                    <td><input name="reward-limit-<?php echo $i+$loop;?>" type="number" min="0" name="" value="" placeholder=""/></td>
-                                                </tr>
-                                                <?php } } ?>
-                                            </tbody>
-                                        </table></div>
+						<label for="project-rewards">Contreparties :</label><br/>
+						<div class="reward-table-param"><table>
+							<thead>
+								<tr>
+									<th>Nom de la contrepartie</th>
+									<th>Montant</th>
+									<th>Limite</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php $i=0;
+								foreach ($rewards->rewards_list as $value) {
+									if ($can_edit){
+										$line = '<tr>'
+											.'<td><input name="reward-name-'.$i.'" type="text" name="" value="'.$value['name'].'" placeholder="Nommez et d&eacute;crivez bri&egrave;vement la contrepartie" class="reward-text" />'
+											.'<input name="reward-id-'.$i.'" type="hidden" value="'.$value['id'].'"/></td>'
+											.'<td><input name="reward-amount-'.$i.'" type="number" min="0" name="" value="'.$value['amount'].'" placeholder="0"/>€</td>'
+											.'<td><input name="reward-limit-'.$i.'" type="number" min="0" value="'.$value['limit'].'" placeholder="0"/></td>'
+											.'</tr>';
+									} else {
+										$line = '<tr>'
+											.'<td>'.$value['name'].'</td>'
+											.'<td>'.$value['amount'].'</td>'
+											.'<td>'.$value['limit'].'</td>'
+											.'</tr>';
+									}
+									echo $line;
+									$i++;
+								}
+								if ($can_edit) { for ($loop=0; $loop<=2; $loop++){ ?>
+								<tr>
+									<td><input name="reward-name-<?php echo $i+$loop;?>" type="text" name="" value="" placeholder="Nommez et d&eacute;crivez bri&egrave;vement la contrepartie" class="reward-text"/></td>
+									<td><input name="reward-amount-<?php echo $i+$loop;?>" type="number" min="0" name="" value="" placeholder=""/></td>
+									<td><input name="reward-limit-<?php echo $i+$loop;?>" type="number" min="0" name="" value="" placeholder=""/></td>
+								</tr>
+								<?php } } ?>
+							</tbody>
+						</table></div>
 						<br/>
 					<?php
-                                        endif;
+					endif;
                                         
 					// Gestion des organisations
 					$str_organisations = '';
@@ -216,13 +216,12 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 							<option value=""></option>
 							<?php echo $str_organisations; ?>
 						</select>
-                                                <?php if ($current_organisation!=null){
-                                                    $page_edit_orga = get_page_by_path('editer-une-organisation');
-                                                    $edit_org .= '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
-                                                    $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
-                                                    echo $edit_org;
-                                                }
-                                                ?>
+						<?php if ($current_organisation!=null){
+							$page_edit_orga = get_page_by_path('editer-une-organisation');
+							$edit_org .= '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
+							$edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
+							echo $edit_org;
+						} ?>
 
 					<?php else: ?>
 						<?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
@@ -234,26 +233,26 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 					<br />
 					<br />
 					
-                                        <label for="phone">Num&eacute;ro de t&eacute;l&eacute;phone de contact : </label>
-                                        <input type="text" name="phone" value="<?php echo $campaign->contact_phone(); ?>" /><br />
+					<label for="phone">Num&eacute;ro de t&eacute;l&eacute;phone de contact : </label>
+					<input type="text" name="phone" value="<?php echo $campaign->contact_phone(); ?>" /><br />
 					
 					<label for="video">Vid&eacute;o de pr&eacute;sentation :</label>
 					<input type="text" name="video" placeholder="URL de la vidéo" value="<?php echo $campaign->video(); ?>" /><br />
-                                        <?php if($campaign->video()!=''){ ?><div class="video-zone">
-                                                <?php echo wp_oembed_get($campaign->video(), array('width' => 580, 'height' => 325)); ?>
-                                        </div><?php } ?><br />
+					<?php if($campaign->video()!=''){ ?><div class="video-zone">
+							<?php echo wp_oembed_get($campaign->video(), array('width' => 580, 'height' => 325)); ?>
+					</div><?php } ?><br />
 						
 					<?php $image_src_header = $campaign->get_header_picture_src(false); ?>
 					<label for="image_header">Image du bandeau :</label>
 					<input type="file" name="image_header" /><br />
-					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 1366px de largeur * 370px de hauteur)</span><br />
+					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 370px de hauteur et au minimum 960px de largeur)</span><br />
 					<input type="checkbox" name="image_header_blur" <?php if ($campaign->is_header_blur()) { echo 'checked="checked"'; } ?> /> Appliquer un flou artistique<br />
 					<?php if ($image_src_header != '') { ?><img style="max-width: 100%;" src="<?php echo $image_src_header; ?>" /><br /><?php } ?>
 					
 					<?php $image_src_home = $campaign->get_home_picture_src(false); ?>
 					<label for="image_home">Image d&apos;aper&ccedil;u :</label>
 					<input type="file" name="image_home" /><br />
-					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 610px de largeur * 330px de hauteur)</span><br />
+					<span class="extra-field">(Max. 2Mo ; id&eacute;alement 615px de largeur * 330px de hauteur)</span><br />
 					<?php if ($image_src_home != '') { ?><img style="max-width: 100%;" src="<?php echo $image_src_home; ?>" /><br /><?php } ?>
                                         
 					<input type="hidden" name="action" value="edit-project-parameters" />

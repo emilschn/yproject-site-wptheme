@@ -227,15 +227,17 @@ else {
 
     } else {*/
 	
-	$editor_params = array( 
-		'media_buttons' => true,
-		'quicktags'     => false,
-		'editor_height' => 500,
-		'tinymce'       => array(
-			'plugins' => 'paste, wplink, textcolor',
-			'paste_remove_styles' => true
-		)
-	);
+	if ($can_modify) { 
+		$editor_params = array( 
+			'media_buttons' => true,
+			'quicktags'     => false,
+			'editor_height' => 500,
+			'tinymce'       => array(
+				'plugins' => 'paste, wplink, textcolor',
+				'paste_remove_styles' => true
+			)
+		);
+	}
 ?>
 
 	<div class="projects-desc-item">
