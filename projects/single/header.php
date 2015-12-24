@@ -1,5 +1,5 @@
 <?php
-global $campaign, $stylesheet_directory_uri, $current_user;
+global $campaign, $stylesheet_directory_uri, $current_user, $language_list;
 $menu_hamburger_pages = array(
 	'les-projets'	=> 'Les projets',
 	'financement'	=> 'Financer son projet',
@@ -28,6 +28,10 @@ $btn_follow_classes = 'wdg-button-lightbox-open';
 $btn_follow_data_lightbox = 'connexion';
 $btn_follow_text = __('Suivre', 'yproject');
 $btn_follow_following = '0';
+
+$current_lang = get_locale();
+$campaign->set_current_lang($current_lang);
+$lang_list = $campaign->get_lang_list();
 
 if (is_user_logged_in()) {
 	get_currentuserinfo();
@@ -87,6 +91,17 @@ if (is_user_logged_in()) {
 				<?php if (!empty($user_name_str)): ?>
 				<a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Bonjour', 'yproject'); ?> <?php echo $user_name_str; ?></a>
 				[<a href="<?php echo wp_logout_url(); echo '&page_id='.get_the_ID(); ?>">x</a>]
+				<?php endif; ?>
+				
+				<?php if (!empty($lang_list)): ?>
+				<form method="GET" action="<?php the_permalink(); ?>">
+					<select name="lang">
+						<option value="fr_FR" <?php selected($current_lang , "fr_FR"); ?>>Fran&ccedil;ais</option>
+						<?php foreach ($lang_list as $lang): ?>
+						<option value="<?php echo $lang; ?>" <?php selected($current_lang, $lang); ?>><?php echo $language_list[$lang]; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</form>
 				<?php endif; ?>
 			</li>
 

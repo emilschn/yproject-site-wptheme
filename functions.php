@@ -55,6 +55,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
+	$current_version = '20151224';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -62,10 +63,9 @@ function yproject_enqueue_script(){
 		wp_enqueue_script('jquery');
 	}
 	
-	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), '20151221');
-	if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), '20151221'); }
-	if ($is_dashboard_page && $can_modify) { wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery', 'jquery-ui-dialog'), '20151221'); }
-	if ($is_admin_page) { wp_enqueue_script( 'wdg-admin-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-admin-dashboard.js', array('jquery', 'jquery-ui-dialog'), '20151221'); }
+	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), $current_version);
+	if ($is_dashboard_page && $can_modify) { wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
+	if ($is_admin_page) { wp_enqueue_script( 'wdg-admin-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-admin-dashboard.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
 	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
@@ -84,8 +84,11 @@ function yproject_enqueue_script(){
         }
 	
 	if ($is_campaign_page && $campaign->edit_version() >= 3) {
-	    wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, false, 'all');
-	    wp_enqueue_script( 'wdg-campaign', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign.js', array('jquery', 'jquery-ui-dialog'), '20151113');
+	    wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, $current_version, 'all');
+	    wp_enqueue_script( 'wdg-campaign', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign.js', array('jquery', 'jquery-ui-dialog'), $current_version);
+		if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
+	} else {
+		if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor-v2.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
 	}
 	
 	wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.js', array('jquery'));
@@ -932,6 +935,10 @@ add_action('wp_ajax_nopriv_get_current_projects', 'yproject_get_current_projects
 
 
 function yproject_save_edit_project() {
+	$current_lang = get_locale();
+	if ($current_lang == 'fr_FR') { $current_lang = ''; }
+	else { $current_lang = '_' . $current_lang; }
+	
 	switch ($_POST['property']) {
 		case "title":
 			wp_update_post(array(
@@ -940,13 +947,17 @@ function yproject_save_edit_project() {
 			));
 			break;
 		case "description":
-			wp_update_post(array(
-				'ID' => $_POST['id_campaign'],
-				'post_content' => $_POST['value']
-			));
+			if (empty($current_lang)) {
+				wp_update_post(array(
+					'ID' => $_POST['id_campaign'],
+					'post_content' => $_POST['value']
+				));
+			} else {
+				update_post_meta($_POST['id_campaign'], 'campaign_description' . $current_lang, $_POST['value']);
+			}
 			break;
 		default: 
-			update_post_meta($_POST['id_campaign'], 'campaign_' . $_POST['property'], $_POST['value']);
+			update_post_meta($_POST['id_campaign'], 'campaign_' . $_POST['property'] . $current_lang, $_POST['value']);
 			break;
 	}
 	do_action('wdg_delete_cache', array( 

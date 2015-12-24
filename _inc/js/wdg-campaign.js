@@ -32,6 +32,9 @@ var WDGProjectViewer = (function($) {
 					"slow"
 				); 
 			});
+			$("div#content.version-3 nav.project-navigation ul.menu-actions li.login-item form select").change(function() {
+				$(this).parent().submit();
+			});
 			$("a.update-follow").click(function(e) {
 				e.preventDefault();
 				if ($(this).data("following") === '1') {

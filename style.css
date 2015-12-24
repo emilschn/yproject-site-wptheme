@@ -2498,21 +2498,47 @@ div#home_bottom h1 {
 }
 
 #wdg-edit-project {
-    color: #FFFFFF;
-    padding: 6px 6px 0px 33px;
+	display: none;
+    position: fixed;
+    top: 218px;
+    right: 0px;
     width: 110px;
     height: 22px;
-    background-position: 2px 2px;
-    position: fixed;
-    top: 150px;
-    right: 0px;
+    padding: 6px 6px 0px 33px;
     font-weight: bold;
+    color: #FFFFFF;
+    background-position: 2px 2px;
 }
 #wdg-edit-project.edit-button:before {
     content: "Mode Edition";
 }
 #wdg-edit-project.edit-button-validate:before {
     content: "Mode Normal";
+}
+
+#wdg-edit-project-add-lang {
+	display: none;
+    position: fixed;
+    top: 250px;
+    right: 0px;
+	width: 149px;
+	color: #74BF43;
+	cursor: pointer;
+}
+#wdg-edit-project-add-lang select, #wdg-edit-project-add-lang button.add-button {
+	display: none;
+}
+#wdg-edit-project-add-lang select {
+	width: 120px;
+}
+#wdg-edit-project-add-lang button.add-button {
+	padding: 0px 4px;
+	border: 0px;
+	font-size: 16px;
+    font-weight: bold;
+    color: #FFFFFF;
+	background: #74BF43;
+	cursor: pointer;
 }
 
 /*******************************************************************************

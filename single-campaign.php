@@ -1,6 +1,9 @@
-<?php 
+<?php
 global $campaign, $post, $campaign_id, $client_context;
 $campaign = atcf_get_current_campaign();
+if ($campaign->current_user_can_edit()) {
+WDGFormProjects::form_validate_lang_add();
+}
 
 $tag_list = $campaign->get_keywords();
 $client_context = $campaign->get_client_context();
