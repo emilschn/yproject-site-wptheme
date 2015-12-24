@@ -6,7 +6,7 @@
  */
     global $campaign, $post;
     $page_name = get_post($post)->post_name;
-    if ( ! is_object( $campaign ) ) $campaign = atcf_get_campaign( $post );
+    $campaign = atcf_get_current_campaign();
 ?>
 
 <?php get_header(); ?>
@@ -15,11 +15,13 @@
 	<div id="content">
 		<div class="padder">
 
-			<div class="page" id="blog-single" role="main">
+			<div id="template-single-campaign-invest" class="page" role="main">
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<div class="post-content">
 						<div class="entry">
-							<?php require_once('projects/single-header.php'); ?>
+							
+							<h1><?php _e('Investir sur le projet'); ?> <?php echo $campaign->data->post_title; ?></h1>
+							
 							<div class="center">
 								<?php 
 								if ($page_name == 'paiement') echo ypcf_print_invest_breadcrumb(3, $campaign->funding_type());

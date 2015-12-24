@@ -2504,7 +2504,7 @@ div#home_bottom h1 {
     height: 22px;
     background-position: 2px 2px;
     position: fixed;
-    top: 185px;
+    top: 150px;
     right: 0px;
     font-weight: bold;
 }
@@ -3333,6 +3333,8 @@ table.mceLayout {
 /*******************************************************************************
 * INVEST PAGE
 *******************************************************************************/
+/***** COMMON *****/
+#template-single-campaign-invest h1 { text-align: center; }
 /***** STEP 1 *****/
 .invest_step1_generalities {
     width: 800px;

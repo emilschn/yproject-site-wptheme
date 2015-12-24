@@ -15,7 +15,7 @@ $menu_project_parts = array (
 
 $page_invest = get_page_by_path('investir');
 $campaign_id_param = '?campaign_id=' . $campaign->ID;
-$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1#invest-start';
+$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
 $invest_url_href = "#connexion";
 $btn_invest_classes = 'wdg-button-lightbox-open';
 $btn_invest_data_lightbox = 'connexion';

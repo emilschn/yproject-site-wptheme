@@ -15,12 +15,6 @@ if ($can_modify) {
         $campaign_id_param .= $campaign_id;                             // Page projet
         $page_dashboard = get_page_by_path('tableau-de-bord');          // Tableau de bord
 		$page_wallet = get_page_by_path('gestion-financiere');		// Gestion financière
-        // Statistiques avancées
-        if (strtotime($post_campaign->post_date) < strtotime('2014-02')) {
-            $pages_stats = get_page_by_path('vote');
-        } else {
-            $pages_stats = get_page_by_path('statistiques-avancees');
-        }
        
         //Récupération de la page en cours
         $current_page = 'project';

@@ -134,16 +134,18 @@ div#content.version-3 nav.project-navigation div#triggered-menu-share.triggered 
 div#content.version-3 div.project-admin {
 	position: fixed;
 	right: 0px;
-	top: 150px;
+	top: 185px;
 	z-index: 2;
-	padding: 5px;
-	background: #74BF43;
 }
 div#content.version-3 div.project-admin a {
 	display: block;
 	width: 139px;
-	color: #FFFFFF;
+	margin-bottom: 7px;
+	padding: 5px;
+	font-size: 14px;
 	font-weight: bold;
+	background: #74BF43;
+	color: #FFFFFF;
 }
 
 /*******************************************************************************
