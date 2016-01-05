@@ -16,7 +16,7 @@ $vote_status = html_entity_decode($campaign->vote());
 <?php
 //*******************
 //CACHE PROJECT CONTENT SUMMARY
-$cache_content_summary = $WDG_cache_plugin->get_cache('project-content-summary-' . $post_campaign->ID, 2);
+$cache_content_summary = $WDG_cache_plugin->get_cache('project-content-summary-' . $post_campaign->ID, 3);
 if ($cache_content_summary !== FALSE) { echo $cache_content_summary; }
 else {
 	ob_start();
@@ -92,7 +92,7 @@ else {
 		</div>
 <?php
 	$cache_content_summary = ob_get_contents();
-	$WDG_cache_plugin->set_cache('project-content-summary-' . $post_campaign->ID, $cache_content_summary, 60*60*6, 1);
+	$WDG_cache_plugin->set_cache('project-content-summary-' . $post_campaign->ID, $cache_content_summary, 60*60*6, 3);
 	ob_end_clean();
 	echo $cache_content_summary;
 }

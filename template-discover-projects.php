@@ -48,8 +48,8 @@ else {
 <?php
 //*******************
 //CACHE PROJECTS OTHERS
-$cache_projects_others = $WDG_cache_plugin->get_cache('projects-others', 2);
-if ($cache_projects_others !== FALSE) { echo $cache_projects_others; }
+$cache_projects_next = $WDG_cache_plugin->get_cache('projects-next', 3);
+if ($cache_projects_next !== FALSE) { echo $cache_projects_next; }
 else {
 	ob_start();
 ?>
@@ -92,13 +92,30 @@ else {
 				}
 				if ($is_last_post) print_empty_post();
 			}
-		}
+		} ?>
+	    
+<?php
+	$cache_projects_next = ob_get_contents();
+	$WDG_cache_plugin->set_cache('projects-next', $cache_projects_next, 60*10, 3);
+	ob_end_clean();
+	echo $cache_projects_next;
+}
+//FIN CACHE PROJECTS NEXT
+//*******************
+?>
 
+<?php
+//*******************
+//CACHE PROJECTS OVER
+$cache_projects_others = $WDG_cache_plugin->get_cache('projects-over', 3);
+if ($cache_projects_others !== FALSE) { echo $cache_projects_others; }
+else {
+	ob_start();
 		//PROJETS REUSSIS
 		?>
 		<div class="part-title-separator mobile_hidden">
 			<?php
-			$nb_funded_projects = count(ATCF_Campaigns::list_projects_funded()); 
+			$nb_funded_projects = count(ATCF_Campaigns::list_projects_funded(-1)); 
 			if ($nb_funded_projects > 0) { ?>
 				<span class="part-title">D&eacute;j&agrave; financ&eacute;</span>	
 			<?php } ?>
@@ -123,11 +140,11 @@ else {
 	    
 <?php
 	$cache_projects_others = ob_get_contents();
-	$WDG_cache_plugin->set_cache('projects-others', $cache_projects_others, 60*10, 2);
+	$WDG_cache_plugin->set_cache('projects-over', $cache_projects_others, 60*60, 3);
 	ob_end_clean();
 	echo $cache_projects_others;
 }
-//FIN CACHE PROJECTS CURRENT
+//FIN CACHE PROJECTS OVER
 //*******************
 ?>
 	    
