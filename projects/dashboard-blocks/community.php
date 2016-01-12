@@ -1,82 +1,30 @@
 <?php 
 
 /**
- * Vérifie si l'utilisateur essaie d'envoyer des mails via la lightbox dashboard-mail
- */
-function check_send_mail(){
-    if (isset($_POST['send_mail'])){
-        global $campaign_id, $feedback, $preview;
-        $feedback = "";
-        if ((isset($_POST['mail_title']) && isset($_POST['mail_content']))
-                &&($_POST['mail_title']!='' && $_POST['mail_content']!='')){
-            $jycrois = isset($_POST['jycrois']) && ($_POST['jycrois']=='on');
-            $voted = isset($_POST['voted']) && ($_POST['voted']=='on');
-            $invested = isset($_POST['invested']) && ($_POST['invested']=='on');
-            $id_investors_list = explode(",", $_POST['investors_id']);
-            
-                if ($_POST['send_mail']=='send'){
-                    //Au moins une catégorie sélectionnée
-                    if ($jycrois || $voted || $invested){
-                        $feedback_email = NotificationsEmails::project_mail($campaign_id, 
-                            $_POST['mail_title'], 
-                            $_POST['mail_content'], 
-                            $jycrois, 
-                            $voted, 
-                            $invested,
-                            $id_investors_list);
-                        
-                        $nb_try = count($feedback_email);
-                        $nb_errors = $nb_try - count(array_filter($feedback_email));
-                        if ($nb_errors <= 0){
-                            $feedback .= "Les messages ont &eacute;t&eacute; correctement envoy&eacute;s !";
-                        } else {
-                            $feedback .= "Les messages ont &eacute;t&eacute; envoy&eacute;s mais des erreurs ont eu lieu.";
-                        }
-                        
-                    } else {
-                        $feedback .= "Vous n'avez pas s&eacute;lectionn&eacute; de groupe &agrave; qui envoyer le message. ";
-                    }
-                }
-                else if ($_POST['send_mail']=='preview'){
-                    unset($feedback);
-                    $preview = NotificationsEmails::project_mail($campaign_id, 
-                            $_POST['mail_title'], 
-                            $_POST['mail_content'], 
-                            false, 
-                            false, 
-                            false,
-                            array(),
-                            true);
-                }
-            
-        } else {
-            $feedback .= "Il faut donner un objet et un contenu &agrave; votre mail. ";
-        }
-    }
-    return $feedback;
-}
-
-/**
  * Charge des données : nombre de j'y crois, de votes et d'investissements
  * @global type $nb_jcrois
  * @global type $nb_votes
  * @global type $nb_invests
  */
 function block_community_data(){
-    global $campaign, 
-            $nb_jcrois, $nb_votes, $nb_invests;
+    global $campaign, $nb_jcrois, $nb_votes, $nb_invests;
     //Recuperation du nombre de j'y crois
-        $nb_jcrois = $campaign->get_jycrois_nb();
+	$nb_jcrois = $campaign->get_jycrois_nb();
     //Recuperation du nombre de votants
-        $nb_votes = $campaign->nb_voters();
+	$nb_votes = $campaign->nb_voters();
     //Recuperation du nombre d'investisseurs
-        $nb_invests = $campaign->backers_count();
+	$nb_invests = $campaign->backers_count();
 }
 
 function block_community_lightbox(){
     echo do_shortcode('[yproject_votecontact_lightbox]');
     echo do_shortcode('[yproject_listinvestors_lightbox]');
-    echo do_shortcode('[yproject_dashboardmail_lightbox]');
+	
+	ob_start();
+	locate_template('common/dashboard-mail-lightbox.php', true);
+	$content_dashboard_mail_lightbox = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="dashboardmail"]' .$content_dashboard_mail_lightbox . '[/yproject_lightbox]');
 }
 
 function print_block_community() { 

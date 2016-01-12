@@ -1543,8 +1543,11 @@ div#home_bottom h1 {
 
 /*BANDEAU EVENEMENT*/
 .bandeau-evenement {
-	width: 1400px;
+	width: 960px;
 	margin: auto;
+}
+.bandeau-evenement-img {
+	margin-top: -5px;
 }
 
 /* BLOG */

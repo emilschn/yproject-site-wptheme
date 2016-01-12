@@ -463,9 +463,9 @@ add_filter('bbp_get_forum_title', 'yproject_bbp_get_forum_title');
  */
 function remove_related_videos($embed) {
     if (strstr($embed,'http://www.youtube.com/embed/') || strstr($embed,'https://www.youtube.com/embed/')) {
-	return str_replace('feature=oembed','feature=oembed&rel=0',$embed);
+		return str_replace('feature=oembed','feature=oembed&rel=0&wmode=transparent',$embed);
     } else {
-	return $embed;
+		return $embed;
     }
 }
 add_filter('oembed_result', 'remove_related_videos', 1, true);
@@ -1609,16 +1609,6 @@ function yproject_shortcode_gonextstep_lightbox($atts, $content = '') {
 	echo do_shortcode('[yproject_lightbox id="gonextstep"]' .$content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_gonextstep_lightbox', 'yproject_shortcode_gonextstep_lightbox');
-
-//->TB Envoi de mail 
-function yproject_shortcode_dashboardmail_lightbox($atts, $content = '') {
-	ob_start();
-            locate_template('common/dashboard-mail-lightbox.php',true);
-            $content = ob_get_contents();
-	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="dashboardmail"]' .$content . '[/yproject_lightbox]');
-}
-add_shortcode('yproject_dashboardmail_lightbox', 'yproject_shortcode_dashboardmail_lightbox');
 
 function yproject_shortcode_project_vote_count($atts, $content = '') {
     $atts = shortcode_atts( array(
