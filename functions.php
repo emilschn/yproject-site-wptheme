@@ -1594,16 +1594,6 @@ function yproject_shortcode_gonextstep_lightbox($atts, $content = '') {
 }
 add_shortcode('yproject_gonextstep_lightbox', 'yproject_shortcode_gonextstep_lightbox');
 
-//->TB Envoi de mail 
-function yproject_shortcode_dashboardmail_lightbox($atts, $content = '') {
-	ob_start();
-            locate_template('common/dashboard-mail-lightbox.php',true);
-            $content = ob_get_contents();
-	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="dashboardmail"]' .$content . '[/yproject_lightbox]');
-}
-add_shortcode('yproject_dashboardmail_lightbox', 'yproject_shortcode_dashboardmail_lightbox');
-
 function yproject_shortcode_project_vote_count($atts, $content = '') {
     $atts = shortcode_atts( array(
 	    'project' => '',
