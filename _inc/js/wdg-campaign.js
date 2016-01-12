@@ -66,17 +66,17 @@ var WDGProjectViewer = (function($) {
 				var ratioOfGoal = inputVal / goalProject;
 				var amountOfGoal = 0;
 				var ratioOfPercent = ratioOfGoal * percentProject;
-				var ratioOfPercentRound = Math.round(ratioOfPercent * 10000) / 10000;
+				var ratioOfPercentRound = Math.round(ratioOfPercent * 1000) / 1000;
 				
 				$("span.roi_percent_user").text(ratioOfPercentRound);
 				$("div.project-rewards-content table tr:first-child td span.hidden").each(function(index) {
 					var estTO = Number($(this).text());
 					var amountOfTO = estTO * ratioOfPercent / 100;
 					amountOfGoal += amountOfTO;
-					var amountOfTORound = Math.round(amountOfTO * 10000) / 10000;
+					var amountOfTORound = Math.round(amountOfTO * 1000) / 1000;
 					$("div.project-rewards-content table tr:last-child td span.roi_amount_user" + index).text(amountOfTORound);
 				});
-				var amountOfGoalRound = Math.round(amountOfGoal * 10000) / 10000;
+				var amountOfGoalRound = Math.round(amountOfGoal * 1000) / 1000;
 				$("span.roi_amount_user").text(amountOfGoalRound);
 			});
 		}

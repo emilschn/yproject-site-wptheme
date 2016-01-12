@@ -11,7 +11,12 @@ $estimated_turnover = $campaign->estimated_turnover();
 <div class="project-rewards center">
 	<div class="project-rewards-title separator-title">
 		<span> 
-			<?php _e('Contreparties', 'yproject'); ?>
+			<?php // CAPITAL // ?>
+			<?php if ($campaign->funding_type() == 'fundingproject'): ?>
+				<?php _e('Retour sur investissement', 'yproject'); ?>
+			<?php else: ?>
+				<?php _e('Contreparties', 'yproject'); ?>
+			<?php endif; ?>
 		</span>
 	</div>
     
@@ -47,7 +52,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 				</div>
 				
 				<?php _e("Si j'investis :"); ?>
-				<input type="text" name="init_invest" class="init_invest" /> &euro; <button class="init_invest_count"><?php _e('Calculer', 'yproject'); ?></button><br /><br />
+				<input type="text" name="init_invest" class="init_invest" /> &euro; <button class="init_invest_count button"><?php _e('Calculer', 'yproject'); ?></button><br /><br />
 				
 				<?php _e("Je percevrai :"); ?>
 				<span class="roi_percent_user">0</span>% <?php _e("du CA, soit :", "yproject"); ?><br />
@@ -78,7 +83,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 			<?php if ($campaign_status == "collecte"): ?>
 				<div class="align-center">
 					<br /><br />
-					<input type="submit" value="<?php _e("Investir", "yproject"); ?>" class="button" />
+					<input type="submit" value="<?php _e("Investir", "yproject"); ?>" class="button red" />
 					<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
 					<input type="hidden" name="invest_start" value="1" />
 				</div>

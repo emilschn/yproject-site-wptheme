@@ -4,17 +4,22 @@
 	date_default_timezone_set("Europe/Paris");
 	ypcf_session_start();
 	UIHelpers::init_social_infos();
+	$title_str = UIHelpers::current_page_title();
 ?>
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<head>
-		<?php $title_str = UIHelpers::current_page_title();
-		if ($title_str) : ?>
-		<title><?php echo $title_str; ?></title>
-		<?php else : ?>
-		<title><?php wp_title( '|', true, 'right' ); bloginfo( 'name' ); ?></title>
-		<?php endif; ?>
+		<title><?php if ($title_str) { echo $title_str; } else { wp_title( '|', true, 'right' ); bloginfo( 'name' ); } ?></title>
+		
+		<link rel="alternate" href="<?php echo get_permalink($campaign->ID); ?>?lang=fr_FR" hreflang="fr" />
+		<?php if ($is_campaign_page): 
+			$lang_list = $campaign->get_lang_list();
+			if (!empty($lang_list)):
+				foreach ($lang_list as $lang): $short_lang_str = substr($lang, 0, 2); ?>
+		<link rel="alternate" href="<?php echo get_permalink($campaign->ID); ?>?lang=<?php echo $lang; ?>" hreflang="<?php echo $short_lang_str; ?>" />
+				<?php endforeach;
+			endif;
+		endif; ?>
 		
 		<!-- meta keywords -->
 		<?php if (is_single() || is_page() ) : if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>	

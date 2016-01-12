@@ -1,5 +1,5 @@
 <?php 
-global $campaign, $stylesheet_directory_uri;
+global $campaign, $stylesheet_directory_uri, $can_modify;
 $img_src = $campaign->get_header_picture_src();
 
 $owner_str = '';
@@ -30,7 +30,10 @@ if (count($current_organisations) > 0) {
 	if ($owner_str == ' ') { $owner_str = $author->user_login; }
 }
 ?>
-
+<?php if ($can_modify): ?>
+	<div id="wdg-move-picture-head" class="move-button"></div>
+<?php endif; ?>
+	
 <div class="project-banner">
 	<div class="project-banner-img" style="<?php echo $campaign->get_header_picture_position_style(); ?>">
 		<?php if ($img_src != ''): ?>
