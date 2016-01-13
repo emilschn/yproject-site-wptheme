@@ -13,9 +13,7 @@ if ($campaign->video() == '') {
 ?>
 <div class="project-pitch center">
 	<div class="project-pitch-title separator-title">
-		<span>
-			<?php _e('R&eacute;sum&eacute;', 'yproject'); ?>
-		</span>
+		<span><?php _e('R&eacute;sum&eacute;', 'yproject'); ?></span>
 	</div>
     
 	<div class="clearfix">
