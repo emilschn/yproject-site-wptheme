@@ -75,7 +75,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 						</div>
 
 						<?php _e("Je recevrai"); ?> <span class="roi_amount_user">0</span> &euro;* <br />
-						soit <span class="roi_percent_user">0</span>% <?php _e("du chiffre d'affaire vers&eacute; tous les trimestres.", "yproject"); ?><br />
+						soit <span class="roi_percent_user">0</span>% <?php _e("du chiffre d'affaire vers&eacute; tous les trimestres.", 'yproject'); ?><br />
 
 
 
@@ -85,7 +85,10 @@ $estimated_turnover = $campaign->estimated_turnover();
 			</div>
 
 			<div class="project-rewards-alert">
-				<?php _e("Rendement vis&eacute; :", "yproject"); ?> <span class="info-user"><?php echo 'X% par an en moyenne* (soit X.X en ' .$funding_duration. ' ' .__("ans", "yproject"). ')'; ?></span><br />
+				<?php _e("Rendement vis&eacute; :", "yproject"); ?> 
+				<span class="info-user">
+					<span class="roi_percent_average">0</span><?php _e("% par an en moyenne*", 'yproject'); ?>
+					(<?php _e("soit", 'yproject'); ?> <span class="roi_ratio_on_total">0</span> <?php echo __("en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>)</span><br />
 				
 				<span class="small-alert">* <?php _e("Ces valeurs sont estim&eacute;es selon les pr&eacute;visions du porteur de projet. Risque de perte int&eacute;grale de l&apos;investissement. Gain maximum : x2.", "yproject"); ?></span>
 			</div>
