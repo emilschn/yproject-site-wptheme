@@ -78,7 +78,7 @@ $page_how = get_page_by_path('descriptif');
 ?>
 <div id="home_middle_top" class="center mobile_hidden">
 
-<div class="bandeau-evenement"><a href="/goodpower"><img class="bandeau-evenement-img" src="https://www.wedogood.co/wp-content/uploads/2016/01/site-bandeau-goodpower-gris.jpg"/></a></div>
+<div class="bandeau-evenement"><a href="/goodpower"><img class="bandeau-evenement-img" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-goodpower.png"/></a></div>
 
 	<div id="home_middle_top_left" class="home_middle_top_content">
 		<a href="<?php echo get_permalink($page_finance->ID); ?>" style="display: block;">
