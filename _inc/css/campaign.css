@@ -82,11 +82,8 @@ div#content.version-3 nav.project-navigation ul.menu-actions {
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li {
     width: 100px;
-	height: 73px;
+	height: 53px;
     text-align: center;
-}
-div#content.version-3 nav.project-navigation ul.menu-actions.loggedin li {
-    height: 53px;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li a {
     display: inline-block;
@@ -256,17 +253,16 @@ div#content.version-3 div.project-pitch-video {
 /*******************************************************************************
 * REWARDS
 *******************************************************************************/
-div#content.version-3 div.project-rewards-content > div:first-child {
-    width: 140px;
+div#content.version-3 div.project-rewards-content div.project-rewards-padder {
+	margin: 0px auto 10px;
+	width: 600px;
 }
-div#content.version-3 div.project-rewards-content > div:last-child {
-    width: 810px;
-}
-div#content.version-3 div.project-rewards-content span.roi_percent_user {
+div#content.version-3 div.project-rewards-content span.roi_percent_user, div#content.version-3 div.project-rewards-content span.roi_amount_user {
     font-weight: bold;
+	color: #74BF43;
 }
 div#content.version-3 div.project-rewards-content table {
-    margin: 10px auto;
+    margin: 15px auto;
 }
 div#content.version-3 div.project-rewards-content table tr:first-child {
     font-weight: bold;
@@ -274,6 +270,25 @@ div#content.version-3 div.project-rewards-content table tr:first-child {
 div#content.version-3 div.project-rewards-content table tr td {
     min-width: 100px;
     text-align: center;
+}
+div#content.version-3 div.project-rewards-content table tr td > div {
+	margin: auto;
+	width: 20px;
+	height: 50px;
+	background: #74BF43;
+}
+div#content.version-3 div.project-rewards-content table tr td > div > div {
+	background: #FFF;
+}
+div#content.version-3 div.project-rewards-content div.project-rewards-alert {
+	text-align: center;
+}
+div#content.version-3 div.project-rewards-content div.project-rewards-alert span.info-user {
+	color: #74BF43;
+}
+div#content.version-3 div.project-rewards-content div.project-rewards-alert span.small-alert {
+	font-style: italic;
+	font-size: 11px;
 }
 
 /*******************************************************************************
@@ -399,7 +414,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 @media screen and (min-width: 768px) {
 	div#content.version-3.scrolled .padder { margin-top: 63px; }
 	div#content.version-3.scrolled nav.project-navigation { height: 50px; }
-	div#content.version-3.scrolled nav.project-navigation ul.menu-actions { margin-top: -10px; }
+	div#content.version-3.scrolled nav.project-navigation ul.menu-actions { margin-top: -7px; }
 	div#content.version-3.scrolled nav.project-navigation ul li { height: 50px; }
 	div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.login-item { display: none; }
 	div#content.version-3.scrolled nav.project-navigation ul li#triggered-menu-hamburger { height: auto; top: 50px; }

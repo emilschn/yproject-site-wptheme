@@ -60,13 +60,16 @@ var WDGProjectViewer = (function($) {
 			});
 			$("input.init_invest").change(function() {
 				var inputVal = Number($(this).val());
-				var percentProject = Number($("span.roi_percent_project").text());
-				var goalProject = Number($("span.roi_goal_project").text());
+				var percentProject = Number($("input#roi_percent_project").val());
+				var goalProject = Number($("input#roi_goal_project").val());
 				
 				var ratioOfGoal = inputVal / goalProject;
+				console.log("ratioOfGoal : " + ratioOfGoal);
 				var amountOfGoal = 0;
 				var ratioOfPercent = ratioOfGoal * percentProject;
+				console.log("ratioOfPercent : " + ratioOfPercent);
 				var ratioOfPercentRound = Math.round(ratioOfPercent * 1000) / 1000;
+				console.log("ratioOfPercentRound : " + ratioOfPercentRound);
 				
 				$("span.roi_percent_user").text(ratioOfPercentRound);
 				$("div.project-rewards-content table tr:first-child td span.hidden").each(function(index) {
@@ -74,7 +77,7 @@ var WDGProjectViewer = (function($) {
 					var amountOfTO = estTO * ratioOfPercent / 100;
 					amountOfGoal += amountOfTO;
 					var amountOfTORound = Math.round(amountOfTO * 1000) / 1000;
-					$("div.project-rewards-content table tr:last-child td span.roi_amount_user" + index).text(amountOfTORound);
+					$("span.roi_amount_user" + index).text(amountOfTORound);
 				});
 				var amountOfGoalRound = Math.round(amountOfGoal * 1000) / 1000;
 				$("span.roi_amount_user").text(amountOfGoalRound);
