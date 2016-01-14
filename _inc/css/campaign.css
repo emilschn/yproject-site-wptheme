@@ -57,12 +57,14 @@ div#content.version-3 nav.project-navigation ul li {
 div#content.version-3 nav.project-navigation ul li a {
     color: #FFF;
     text-transform: uppercase;
+	font-size: 12px;
 }
 div#content.version-3 nav.project-navigation ul li#triggered-menu-hamburger {
     display: none;
     position: fixed;
     top: 60px;
     height: auto;
+	padding-left: 8px;
     background-color: #333333;
 }
 div#content.version-3 nav.project-navigation ul li#triggered-menu-hamburger.triggered {
@@ -71,64 +73,64 @@ div#content.version-3 nav.project-navigation ul li#triggered-menu-hamburger.trig
 div#content.version-3 nav.project-navigation ul li#triggered-menu-hamburger ul li {
     display: list-item;
     height: auto;
-    padding: 5px;
+    padding: 10px 5px;
+	border-bottom: 1px solid #FFF;
+}
+div#content.version-3 nav.project-navigation ul li#triggered-menu-hamburger ul li:last-child {
+	border: none;
 }
 
+div#content.version-3 nav.project-navigation ul.menu-project {
+	margin-left: 30px;
+}
+div#content.version-3 nav.project-navigation ul.menu-project li:after {
+	content: "/";
+	color: #FFF;
+	padding-left: 10px;
+}
+div#content.version-3 nav.project-navigation ul.menu-project li:last-child:after {
+	content: "";
+}
 div#content.version-3 nav.project-navigation ul.menu-actions {
     float: right;
     width: 320px;
-    padding-top: 7px;
-	background: #FFF;
+	margin: 10px 0px;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li {
-    width: 100px;
-	height: 73px;
+    width: 159px;
+	height: 60px;
+	padding-right: 0px;
     text-align: center;
 }
-div#content.version-3 nav.project-navigation ul.menu-actions.loggedin li {
-    height: 53px;
-}
-div#content.version-3 nav.project-navigation ul.menu-actions li a {
-    display: inline-block;
-	color: #333333;
-}
-div#content.version-3 nav.project-navigation ul.menu-actions li a img {
-    display: block;
-    margin: auto;
-	width: 40px;
-	height: 26px;
-}
-div#content.version-3 nav.project-navigation ul.menu-actions li.login-item {
-    display: block;
-    width: 100%;
-    height: auto;
-    text-align: center;
-}
-div#content.version-3 nav.project-navigation ul.menu-actions li.login-item a {
-    height: 20px;
-    text-transform: none;
-}
-div#content.version-3 nav.project-navigation ul.menu-actions li.login-item form {
+div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a {
+	position: relative;
 	display: inline-block;
+	padding: 10px 15px;
+    color: #FFF;
+	background: #74BF43;
+}
+div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a:after {
+	position: absolute;
+	top: 100%; left: 50%;
+	width: 0; height: 0;
+	margin-left: -10px;
+	border: solid transparent; border-color: rgba(136, 183, 213, 0); border-top-color: #74BF43; border-width: 10px;
+	content: " ";
+	pointer-events: none;
 }
 
-div#content.version-3 nav.project-navigation div#triggered-menu-share {
-	display: none;
-    position: fixed;
-    top: 80px;
-}
-div#content.version-3 nav.project-navigation div#triggered-menu-share.triggered {
-    display: block;
-	width: 960px;
+div#content.version-3 nav.project-navigation ul.menu-actions li.login-item {
 	text-align: right;
+	border-left: 1px solid #FFF;
+	color: #FFF;
 }
-div#content.version-3 nav.project-navigation div#triggered-menu-share.triggered span {
-	background: #FFFFFF;
-	display: inline-block;
-	padding: 5px 10px;
+div#content.version-3 nav.project-navigation ul.menu-actions li.login-item a.button-quit {
+	padding: 3px 4px;
+	color: #333333;
+	background: #FFF;
 }
-div#content.version-3 nav.project-navigation div#triggered-menu-share.triggered img {
-	width: 40px;
+div#content.version-3 nav.project-navigation ul.menu-actions li.login-item form {
+	margin-top: 5px;
 }
 
 /*******************************************************************************
@@ -167,6 +169,9 @@ div#content.version-3 div.project-banner div.project-banner-img, div.project-ban
     width: 100%;
 }
 
+div#content.version-3 div.project-banner div.project-banner-deco {
+	background: #F2F2F2;
+}
 div#content.version-3 div.project-banner div.project-banner-deco div.center img {
     margin-left: -70px;
 }
@@ -183,7 +188,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.left div
 }
 
 div#content.version-3 div.project-banner div.project-banner-content div.right {
-    background-color: #F2F2F2;
+    background-color: #FFF;
     width: 320px;
     height: 370px;
 }
@@ -194,6 +199,12 @@ div#content.version-3 div.project-banner div.project-banner-content div.right > 
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item {
     margin: 10px 5px;
 }
+div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item b {
+	color: #74BF43;
+}
+div#content.version-3 div.project-banner div.project-banner-content div.right .progressbar .progressbar-complete {
+	background: #74BF43;
+}
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item img {
     display: table-cell;
     vertical-align: middle;
@@ -202,27 +213,70 @@ div#content.version-3 div.project-banner div.project-banner-content div.right di
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item span {
     vertical-align: middle;
 }
+div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-actions {
+	margin-top: 40px;
+}
+div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-actions div {
+	display: inline-block;
+	width: 158px;
+	text-align: center;
+}
+div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-actions div a {
+	padding: 10px 20px;
+	text-transform: uppercase;
+	background: #A4DBDE;
+	color: #FFF;
+}
 
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item.author-info {
     margin-top: 30px;
 }
 
+div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share {
+	display: none;
+    position: absolute;
+    top: 320px;
+}
+div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered {
+    display: block;
+	width: 960px;
+	text-align: right;
+}
+div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered span {
+	background: #FFFFFF;
+	display: inline-block;
+	padding: 5px 10px;
+}
+div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered img {
+	width: 40px;
+}
+
+div#content.version-3 #wdg-move-picture-head {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 40px;
+    z-index: 150;
+}
+div#content.version-3.editing #wdg-move-picture-head {
+    display: block;
+}
+
 /*******************************************************************************
 * TIMELINE
 *******************************************************************************/
-div#content.version-3 div.project-timeline ul {
-    padding: 0px;
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
-    margin-left: -50px;
+div#content.version-3 div.project-timeline {
+	margin: 10px auto;
 }
-div#content.version-3 div.project-timeline ul li {
-    list-style: none;
-    display: inline-block;
-    margin: 0px 40px;
+div#content.version-3 div.project-timeline span {
+	font-weight: bold;
+	text-transform: uppercase;
 }
-div#content.version-3 div.project-timeline ul li.selected {
-    font-weight: bold;
+div#content.version-3 div.project-timeline span.selected {
+    color: #74BF43;
+}
+div#content.version-3 div.project-timeline span.greater {
+	padding: 5px;
 }
 
 /*******************************************************************************
@@ -242,17 +296,16 @@ div#content.version-3 div.project-pitch-video {
 /*******************************************************************************
 * REWARDS
 *******************************************************************************/
-div#content.version-3 div.project-rewards-content > div:first-child {
-    width: 140px;
+div#content.version-3 div.project-rewards-content div.project-rewards-padder {
+	margin: 0px auto 10px;
+	width: 600px;
 }
-div#content.version-3 div.project-rewards-content > div:last-child {
-    width: 810px;
-}
-div#content.version-3 div.project-rewards-content span.roi_percent_user {
+div#content.version-3 div.project-rewards-content span.roi_percent_user, div#content.version-3 div.project-rewards-content span.roi_amount_user {
     font-weight: bold;
+	color: #74BF43;
 }
 div#content.version-3 div.project-rewards-content table {
-    margin: 10px auto;
+    margin: 15px auto;
 }
 div#content.version-3 div.project-rewards-content table tr:first-child {
     font-weight: bold;
@@ -260,6 +313,25 @@ div#content.version-3 div.project-rewards-content table tr:first-child {
 div#content.version-3 div.project-rewards-content table tr td {
     min-width: 100px;
     text-align: center;
+}
+div#content.version-3 div.project-rewards-content table tr td > div {
+	margin: auto;
+	width: 20px;
+	height: 50px;
+	background: #74BF43;
+}
+div#content.version-3 div.project-rewards-content table tr td > div > div {
+	background: #FFF;
+}
+div#content.version-3 div.project-rewards-content div.project-rewards-alert {
+	text-align: center;
+}
+div#content.version-3 div.project-rewards-content div.project-rewards-alert span.info-user {
+	color: #74BF43;
+}
+div#content.version-3 div.project-rewards-content div.project-rewards-alert span.small-alert {
+	font-style: italic;
+	font-size: 11px;
 }
 
 /*******************************************************************************
@@ -385,11 +457,12 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 @media screen and (min-width: 768px) {
 	div#content.version-3.scrolled .padder { margin-top: 63px; }
 	div#content.version-3.scrolled nav.project-navigation { height: 50px; }
-	div#content.version-3.scrolled nav.project-navigation ul.menu-actions { margin-top: -10px; }
+	div#content.version-3.scrolled nav.project-navigation ul.menu-actions { margin-top: -7px; }
 	div#content.version-3.scrolled nav.project-navigation ul li { height: 50px; }
-	div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.login-item { display: none; }
 	div#content.version-3.scrolled nav.project-navigation ul li#triggered-menu-hamburger { height: auto; top: 50px; }
-	div#content.version-3.scrolled nav.project-navigation div#triggered-menu-share { top: 50px; }
+	div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.action-item { padding-top: 7px; }
+	div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.action-item a:after { border-width: 0px; }
+	div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.login-item { padding-top: 7px; }
 }
 
 /*******************************************************************************
@@ -397,9 +470,10 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 *******************************************************************************/
 @media screen and (min-width: 768px) and (max-width: 959px) {
 	div#content.version-3 .padder { margin-top: 33px; }
+	div#content.version-3 nav.project-navigation ul.menu-project { margin-left: 0px; }
 	div#content.version-3 div.project-banner div.project-banner-content div.left h1,
 	div#content.version-3 div.project-banner div.project-banner-content div.left div.subtitle { margin-left: 5px; }
-	div#content.version-3 nav.project-navigation div#triggered-menu-share.triggered { width: 95%; }
+	div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered { width: 768px; }
 	div#content.version-3 div.project-pitch-text { width: 36%; margin: 0% 1%; }
 	div#content.version-3 div.project-pitch-video { width: 60%; }
 	div#content.version-3 div.project-rewards-content { margin: 0px 5px; }
@@ -417,6 +491,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	div#content.version-3 nav.project-navigation { display: none; }
 	div#content.version-3 div.project-admin { top: 37px; }
 	div#content.version-3 div.project-admin #wdg-edit-project { top: 105px; }
+	div#content.version-3 div.separator-title span { font-size: 28px; }
 	div#content.version-3 div.project-banner-img, div#content.version-3 div.project-banner-deco { display: none; }
 	div#content.version-3 div.project-timeline { display: none; }
 	div#content.version-3 div.project-banner { height: 330px; }
@@ -436,12 +511,13 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	div#content.version-3 div.project-pitch div.project-pitch-title { display: none; }
 	div#content.version-3 div.project-pitch div.project-pitch-text { margin: 5px 1%; width: 98%; height: auto; }
 	div#content.version-3 div.project-pitch div.project-pitch-video { margin: 5px 1%; width: 98%; }
-	div#content.version-3 div.project-rewards div.project-rewards-content { margin: 0% 1%; width: 98%; }
-	div#content.version-3 div.project-rewards div.project-rewards-content > div:first-child { width: 50px; }
-	div#content.version-3 div.project-rewards div.project-rewards-content > div:first-child img { width: 50px; }
-	div#content.version-3 div.project-rewards div.project-rewards-content > div:last-child { width: 100%; }
-	div#content.version-3 div.project-rewards div.project-rewards-content > div:last-child div.project-rewards-intro { margin: -50px 0px 0px 55px; }
-	div#content.version-3 div.project-rewards div.project-rewards-content table tr td { min-width: 40px; }
+	div#content.version-3 div.project-rewards-content { margin: 0% 1%; width: 98%; }
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder { width: 100%; }
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div { float: none; }
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div:first-child { width: 100%; text-align: center; }
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div:first-child img { width: 50px; }
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder button.init_invest_count { display: block; margin: 7px auto; }
+	div#content.version-3 div.project-rewards-content table tr td { min-width: 40px; padding: 0px 3px; }
 	div#content.version-3 div.project-description div.project-description-item { width: 96%; margin: 25px 2%; }
 	div#content.version-3 div.project-description div.project-description-item img.project-content-icon { display: none; }
 	div#content.version-3 div.project-description div.project-description-item img.grey-triangle { display: none; }

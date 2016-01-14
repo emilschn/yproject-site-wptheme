@@ -15,7 +15,7 @@ $comment_list = get_comments(array(
 		<ul>
 		<?php foreach ($comment_list as $comment): ?>
 			<li id="comment-<?php echo $comment->comment_ID; ?>">
-				<strong><?php echo $comment->comment_author . ' ('.get_date_from_gmt($comment->comment_date, get_option( 'date_format' )).') : '; ?></strong>
+				<strong><?php echo $comment->comment_author. ' (' .get_comment_date('', $comment->comment_ID). ') : '; ?></strong>
 				<?php echo $comment->comment_content; ?>
 			</li>
 		<?php endforeach; ?>

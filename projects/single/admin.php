@@ -12,7 +12,7 @@ $campaign_id_param = '?campaign_id=' . $campaign->ID;
 	<form id="wdg-edit-project-add-lang" method="POST" action="<?php echo get_permalink($campaign->ID); ?>">
 		<span>+ <?php _e('Nouvelle langue', 'yproject'); ?></span>
 		<select name="selected-language">
-			<?php foreach ($language_list as $language_key => $language_label): if ($language_key != 'FR'): ?>
+			<?php foreach ($language_list as $language_key => $language_label): if ($language_key != 'fr_FR'): ?>
 			<option value="<?php echo $language_key; ?>"><?php echo $language_label; ?></option>
 			<?php endif; endforeach; ?>
 		</select>

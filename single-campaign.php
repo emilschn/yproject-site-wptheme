@@ -21,7 +21,7 @@ $classes .= 'version-' . $edit_version;
 
 	<?php if ($edit_version < 3): ?>
 		
-		<?php if ($classes != '') {
+		<?php if ($client_context != '') {
 		locate_template( array("clients/myphotoreporter/menu.php"), true ); 
 		display_photoreporter_menu();
 		} ?>

@@ -376,28 +376,32 @@ var ProjectEditor = (function($) {
 		
 		//Déplacement de l'image dans le header
 		moveHeaderPicture:function() {
-			$('#img-container').draggable({ axis: "y" });
-			$('#img-container').draggable('enable');
+			$('.project-banner-img').draggable({ axis: "y" });
+			$('.project-banner-img').draggable('enable');
 			$('#wdg-move-picture-head').addClass("edit-button-validate");
 			$('#wdg-move-picture-head').removeClass('move-button');
-			$("#head-content").css({ opacity: 0 });
-			$("#head-content").css({ 'z-index': -1 });
+			$(".project-banner-content").css({ opacity: 0 });
+			$(".project-banner-content").css({ 'z-index': -1 });
+			$(".project-banner-deco").css({ opacity: 0 });
+			$(".project-banner-deco").css({ 'z-index': -1 });
 		},
 
 		//Enregistrement de la position de l'image dans le header
 		saveHeaderPicturePosition:function(){
-			$('#img-container').draggable('disable');
+			$('.project-banner-img').draggable('disable');
 			$('#wdg-move-picture-head').addClass('wait-button');
 			$('#wdg-move-picture-head').removeClass("edit-button-validate");
-			$("#head-content").css({ opacity: 1 });
-			$("#head-content").css({ 'z-index': 2 });
+			$(".project-banner-content").css({ opacity: 1 });
+			$(".project-banner-content").css({ 'z-index': 2 });
+			$(".project-banner-deco").css({ opacity: 1 });
+			$(".project-banner-deco").css({ 'z-index': 2 });
 
 			$.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,
 				'data': { 
 					'action':   'setCoverPosition',
-					'top':	    $('#img-container').css('top'),
+					'top':	    $('.project-banner-img').css('top'),
 					'id_campaign': $("#content").data("campaignid")
 				}
 			}).done(function() {
