@@ -238,19 +238,18 @@ div#content.version-3.editing #wdg-move-picture-head {
 /*******************************************************************************
 * TIMELINE
 *******************************************************************************/
-div#content.version-3 div.project-timeline ul {
-    padding: 0px;
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
-    margin-left: -50px;
+div#content.version-3 div.project-timeline {
+	margin: 10px auto;
 }
-div#content.version-3 div.project-timeline ul li {
-    list-style: none;
-    display: inline-block;
-    margin: 0px 40px;
+div#content.version-3 div.project-timeline span {
+	font-weight: bold;
+	text-transform: uppercase;
 }
-div#content.version-3 div.project-timeline ul li.selected {
-    font-weight: bold;
+div#content.version-3 div.project-timeline span.selected {
+    color: #74BF43;
+}
+div#content.version-3 div.project-timeline span.greater {
+	padding: 5px;
 }
 
 /*******************************************************************************

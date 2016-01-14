@@ -43,7 +43,7 @@ if (count($current_organisations) > 0) {
     
 	<div class="project-banner-deco">
 		<div class="center">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/fond_projet.png" alt="bg decoration" />
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/fond_projet3.png" alt="bg decoration" />
 		</div>
 	</div>
 
