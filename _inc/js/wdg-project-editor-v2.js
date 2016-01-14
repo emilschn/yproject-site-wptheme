@@ -14,6 +14,7 @@ var ProjectEditor = (function($) {
 			var linkElementId = "#single_project_admin_bar div a.selected";
 			$(linkElementId).after(buttonEdit);
 			
+			$("#wdg-edit-project").show();
 			$("#wdg-edit-project").click(function() {
 				ProjectEditor.clickEditProject(this);
 			});

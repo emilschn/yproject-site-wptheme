@@ -203,7 +203,6 @@ div#content.version-3 div.project-banner div.project-banner-content div.right .p
 	background: #74BF43;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item img {
-    display: table-cell;
     vertical-align: middle;
     width: 30px;
 }
