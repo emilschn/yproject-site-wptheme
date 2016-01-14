@@ -305,12 +305,12 @@ div#content.version-3 div.project-rewards-content table tr:first-child {
     font-weight: bold;
 }
 div#content.version-3 div.project-rewards-content table tr td {
-    min-width: 100px;
+    min-width: 75px;
     text-align: center;
 }
 div#content.version-3 div.project-rewards-content table tr td > div {
 	margin: auto;
-	width: 20px;
+	width: 30px;
 	height: 50px;
 	background: #74BF43;
 }

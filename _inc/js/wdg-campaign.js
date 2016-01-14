@@ -77,10 +77,10 @@ var WDGProjectViewer = (function($) {
 					totalTurnover += estTO;
 					var amountOfTO = estTO * ratioOfPercent / 100;
 					amountOfGoal += amountOfTO;
-					var amountOfTORound = Math.round(amountOfTO * 1000) / 1000;
+					var amountOfTORound = Math.round(amountOfTO * 100) / 100;
 					$("span.roi_amount_user" + index).text(amountOfTORound);
 				});
-				var amountOfGoalRound = Math.round(amountOfGoal * 1000) / 1000;
+				var amountOfGoalRound = Math.round(amountOfGoal * 100) / 100;
 				$("span.roi_amount_user").text(amountOfGoalRound);
 				var ratioOnInput = Math.round(amountOfGoalRound / inputVal * 100) / 100;
 				$("span.roi_ratio_on_total").text(ratioOnInput);
