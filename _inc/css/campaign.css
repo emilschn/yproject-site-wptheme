@@ -160,6 +160,7 @@ div#content.version-3 div.project-banner {
     height: 370px;
     overflow: hidden;
     position: relative;
+	background: #F2F2F2;
 }
 
 div#content.version-3 div.project-banner div.project-banner-img, div.project-banner div.project-banner-deco, div.project-banner div.project-banner-content {
@@ -167,10 +168,6 @@ div#content.version-3 div.project-banner div.project-banner-img, div.project-ban
     top: 0px;
     left: 0px;
     width: 100%;
-}
-
-div#content.version-3 div.project-banner div.project-banner-deco {
-	background: #F2F2F2;
 }
 div#content.version-3 div.project-banner div.project-banner-deco div.center img {
     margin-left: -70px;
@@ -285,12 +282,10 @@ div#content.version-3 div.project-timeline span.greater {
 div#content.version-3 div.project-pitch-text {
     float: left;
     width: 345px;
-    height: 325px;
 }
 div#content.version-3 div.project-pitch-video {
     float: right;
     width: 580px;
-    height: 325px;
 }
 
 /*******************************************************************************
