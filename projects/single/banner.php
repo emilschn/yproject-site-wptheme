@@ -1,6 +1,22 @@
 <?php 
-global $campaign, $stylesheet_directory_uri, $can_modify;
+global $campaign, $current_user, $stylesheet_directory_uri, $can_modify;
 $img_src = $campaign->get_header_picture_src();
+
+$btn_follow_href = '#connexion';
+$btn_follow_classes = 'wdg-button-lightbox-open';
+$btn_follow_data_lightbox = 'connexion';
+$btn_follow_text = __('Suivre', 'yproject');
+$btn_follow_following = '0';
+if (is_user_logged_in()) {
+	$btn_follow_classes = 'update-follow';
+	$btn_follow_data_lightbox = $campaign->ID;
+	global $wpdb;
+	$table_jcrois = $wpdb->prefix . "jycrois";
+	$users = $wpdb->get_results( 'SELECT * FROM '.$table_jcrois.' WHERE campaign_id = '.$campaign->ID.' AND user_id='.$current_user->ID );
+	$btn_follow_text = (!empty($users[0]->ID)) ? __('Suivi !', 'yproject') : __('Suivre', 'yproject');
+	$btn_follow_following = (!empty($users[0]->ID)) ? '1' : '0';
+	if (!empty($users[0]->ID)) { $btn_follow_href = '#'; }
+}
 
 $owner_str = '';
 $lightbox_content = '';
@@ -62,20 +78,19 @@ if (count($current_organisations) > 0) {
 				<div class="project-banner-logos">
 					<div class="project-banner-info-item">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-						<span class="campaign-mobile-hidden"><?php 
-							echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
-							if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
-							echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
-							}
-						?></span>
-						<span class="hidden"><?php echo $campaign->minimum_goal(true); ?></span>
+						<span class="campaign-mobile-hidden"><?php _e('Objectif :', 'yproject'); ?>
+							<b><?php echo $campaign->minimum_goal(true); ?></b>
+							<?php if ($campaign->minimum_goal(false) < $campaign->goal(false)): ?>
+								<?php _e('&agrave;', 'yproject'); ?> <b><?php echo $campaign->goal(true); ?></b>
+							<?php endif; ?>
+						</span>
+						<span class="hidden"><b><?php echo $campaign->minimum_goal(true); ?></b></span>
 					</div>
 
 					<div class="project-banner-info-item">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
 						<?php $backers_count = $campaign->backers_count(); ?>
-						<span class="campaign-mobile-hidden"><?php
-							echo $backers_count . ' ';
+						<span class="campaign-mobile-hidden"><b><?php echo $backers_count; ?></b> <?php
 							if ($backers_count > 1) {
 								_e('personnes ont d&eacute;j&agrave;', 'yproject');
 							} else {
@@ -88,7 +103,7 @@ if (count($current_organisations) > 0) {
 								_e('investi sur ce projet', 'yproject');
 							}
 						?></span>
-						<span class="hidden"><?php echo $backers_count; ?></span>
+						<span class="hidden"><b><?php echo $backers_count; ?></b></span>
 					</div>
 
 					<div class="project-banner-info-item">
@@ -98,13 +113,40 @@ if (count($current_organisations) > 0) {
 					</div>
 				</div>
 				
-				<div class="separator"></div>
-				
 				<div class="project-banner-info-item align-center author-info" data-link-edit="<?php echo $page_edit_orga; ?>">
 					<p><?php _e("Un projet port&eacute; par"); ?> <?php echo $owner_str; ?></p>
 					<p>(<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation"><?php _e('Voir les informations', 'yproject'); ?></a>)</p>
 					<?php echo do_shortcode('[yproject_lightbox id="project-organisation"]'.$lightbox_content.'[/yproject_lightbox]'); ?>
 				</div>
+				
+				<div class="separator"></div>
+				
+				<div class="project-banner-info-actions">
+					<div>
+						<a href="<?php echo $btn_follow_href; ?>" class="<?php echo $btn_follow_classes; ?>" data-lightbox="<?php echo $btn_follow_data_lightbox; ?>" data-textfollow="<?php _e('Suivre', 'yproject'); ?>" data-textfollowed="<?php _e('Suivi', 'yproject'); ?>" data-following="<?php echo $btn_follow_following; ?>">
+							<?php echo $btn_follow_text; ?>
+						</a>
+					</div>
+					<div>
+						<a href="#" class="trigger-menu" data-target="share">
+							<?php _e('Partager', 'yproject'); ?>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div id="triggered-menu-share" class="triggered-menu">
+				<span>
+					<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>" target="_blank">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.jpg" alt="logo facebook" />
+					</a>
+					<a href="http://twitter.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>&text='WEDOGOOD'" target="_blank">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.jpg" alt="logo twitter" />
+					</a>
+					<a href="https://plus.google.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>" target="_blank">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="logo google" />
+					</a>
+				</span>
 			</div>
 		</div>
 	</div>

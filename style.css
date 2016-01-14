@@ -82,6 +82,7 @@ tbody {
 }
 
 .text-white { color: #FFFFFF; }
+.text-green { color: #74BF43; }
 
 .errors, .invest_error {
     color: #FE494C;
