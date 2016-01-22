@@ -39,7 +39,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 		
 		<?php if ($campaign_status == "collecte"): ?>
 		<input type="hidden" id="roi_percent_project" value="<?php echo $campaign->roi_percent(); ?>" />
-		<input type="hidden" id="roi_goal_project" value="<?php echo $campaign->minimum_goal(); ?>" />
+		<input type="hidden" id="roi_goal_project" value="<?php echo $campaign->goal(false); ?>" />
 		<form method="GET" action="<?php echo get_permalink($page_invest->ID); ?>">
 		<?php endif; ?>
 			
