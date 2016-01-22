@@ -95,11 +95,6 @@ if (is_user_logged_in()) {
 			</li>
 			
 			<li class="login-item">
-				<?php if (!empty($user_name_str)): ?>
-				<?php _e('Bonjour', 'yproject'); ?> <a href="<?php echo bp_loggedin_user_domain(); ?>"><?php echo $user_name_str; ?></a>
-				<a class="button-quit" href="<?php echo wp_logout_url(); echo '&page_id='.get_the_ID(); ?>">X</a>
-				<?php endif; ?>
-				
 				<?php if (!empty($lang_list)): ?>
 				<form method="GET" action="<?php the_permalink(); ?>">
 					<select name="lang">

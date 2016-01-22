@@ -215,9 +215,9 @@ YPUIFunctions = (function($) {
 			}
 			
 			//Si chargement données investisseurs/investissements nécessaire
-                        if ($(".ajax-investments-load").length > 0) { 
-                            campaign_id = $(".ajax-investments-load").attr('data-value');
-                                YPUIFunctions.getInvestments(campaign_id); 
+			if ($(".ajax-investments-load").length > 0) { 
+				campaign_id = $(".ajax-investments-load").attr('data-value');
+				YPUIFunctions.getInvestments(campaign_id); 
 			}
                         
                         //Lightbox de passage à l'étape suivante

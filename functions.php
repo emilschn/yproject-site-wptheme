@@ -142,6 +142,7 @@ add_filter( 'bp_loggedin_register_page_redirect_to', 'catch_register_page_logged
 /** GESTION DES ROLES UTILISATEURS **/
 //Permet à tous les utilisateurs inscrits d'insérer des images
 function yproject_change_user_cap() {
+	show_admin_bar(false);
 	if ( is_user_logged_in() ) {
 		//Redéfinit le style de tinymce
 		global $editor_styles;
@@ -488,7 +489,7 @@ function comment_blog_post(){
 	bp_activity_add(array (
 		'component' => 'profile',
 		'type'      => 'jycrois',
-		'action'    => $user_avatar.' '.$url_profile.' a commentÃƒÂ© '.$url_blog
+		'action'    => $user_avatar.' '.$url_profile.' a commenté '.$url_blog
 	    ));
 }
 add_action('comment_post','comment_blog_post');
@@ -1434,10 +1435,17 @@ add_action('wp_ajax_get_invests_graph', 'get_invests_graph');
 add_action('wp_ajax_nopriv_get_invests_graph', 'get_invests_graph');
 
 function get_investments_data(){
-//    	locate_template( array("requests/investments.php"), true );
-	$investments_list = WDGCampaignInvestments::get_list($_POST['id_campaign']);
-        echo json_encode($investments_list);
-        exit();
+	global $WDG_cache_plugin;
+	$campaign_id = filter_input(INPUT_POST, 'id_campaign');
+	
+	$cache_stats = $WDG_cache_plugin->get_cache('project-investments-data-' . $campaign_id, 1);
+	if ($cache_stats === false) {
+		$investments_list = WDGCampaignInvestments::get_list($campaign_id);
+		$cache_stats = json_encode($investments_list);
+		$WDG_cache_plugin->set_cache('project-investments-data-' . $campaign_id, $cache_stats, 60*60*3, 1);
+	}
+	echo $cache_stats;
+	exit();
 }
 add_action('wp_ajax_get_investments_data', 'get_investments_data');
 add_action('wp_ajax_nopriv_get_investments_data', 'get_investments_data');

@@ -107,14 +107,14 @@ div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a {
 	display: inline-block;
 	padding: 10px 15px;
     color: #FFF;
-	background: #74BF43;
+	background: #FF494C;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a:after {
 	position: absolute;
 	top: 100%; left: 50%;
 	width: 0; height: 0;
 	margin-left: -10px;
-	border: solid transparent; border-color: rgba(136, 183, 213, 0); border-top-color: #74BF43; border-width: 10px;
+	border: solid transparent; border-color: rgba(0, 0, 0, 0); border-top-color: #FF494C; border-width: 10px;
 	content: " ";
 	pointer-events: none;
 }
@@ -144,13 +144,17 @@ div#content.version-3 div.project-admin {
 }
 div#content.version-3 div.project-admin > a {
 	display: block;
-	width: 139px;
+	width: 142px;
 	margin-bottom: 7px;
 	padding: 5px;
-	font-size: 14px;
 	font-weight: bold;
-	background: #74BF43;
+	background: #A4DBDE;
 	color: #FFFFFF;
+}
+div#content.version-3 div.project-admin div.edit-button {
+	background-color: #A4DBDE;
+	width: 113px;
+	top: 224px;
 }
 
 /*******************************************************************************
@@ -160,6 +164,7 @@ div#content.version-3 div.project-banner {
     height: 370px;
     overflow: hidden;
     position: relative;
+	background: #F2F2F2;
 }
 
 div#content.version-3 div.project-banner div.project-banner-img, div.project-banner div.project-banner-deco, div.project-banner div.project-banner-content {
@@ -167,10 +172,6 @@ div#content.version-3 div.project-banner div.project-banner-img, div.project-ban
     top: 0px;
     left: 0px;
     width: 100%;
-}
-
-div#content.version-3 div.project-banner div.project-banner-deco {
-	background: #F2F2F2;
 }
 div#content.version-3 div.project-banner div.project-banner-deco div.center img {
     margin-left: -70px;
@@ -206,7 +207,6 @@ div#content.version-3 div.project-banner div.project-banner-content div.right .p
 	background: #74BF43;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item img {
-    display: table-cell;
     vertical-align: middle;
     width: 30px;
 }
@@ -285,12 +285,10 @@ div#content.version-3 div.project-timeline span.greater {
 div#content.version-3 div.project-pitch-text {
     float: left;
     width: 345px;
-    height: 325px;
 }
 div#content.version-3 div.project-pitch-video {
     float: right;
     width: 580px;
-    height: 325px;
 }
 
 /*******************************************************************************
@@ -311,12 +309,12 @@ div#content.version-3 div.project-rewards-content table tr:first-child {
     font-weight: bold;
 }
 div#content.version-3 div.project-rewards-content table tr td {
-    min-width: 100px;
+    min-width: 75px;
     text-align: center;
 }
 div#content.version-3 div.project-rewards-content table tr td > div {
 	margin: auto;
-	width: 20px;
+	width: 30px;
 	height: 50px;
 	background: #74BF43;
 }
