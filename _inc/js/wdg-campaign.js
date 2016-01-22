@@ -6,6 +6,9 @@ jQuery(document).ready( function($) {
 
 var WDGProjectViewer = (function($) {
 	return {
+		aProjectParts: ["news", "description", "rewards", "banner"],
+		nProjectParts: 4,
+		
 		init: function() {
 			$(document).scroll(function() {
 				if ($(document).scrollTop() > 100) {
@@ -13,7 +16,9 @@ var WDGProjectViewer = (function($) {
 				} else {
 					$("#content").removeClass("scrolled");
 				}
+				WDGProjectViewer.refreshScroll();
 			});
+			WDGProjectViewer.refreshScroll();
 			
 			$("a.trigger-menu").click(function(e) {
 				e.preventDefault();
@@ -69,8 +74,9 @@ var WDGProjectViewer = (function($) {
 				var nbYears = 0;
 				var ratioOfPercent = ratioOfGoal * percentProject;
 				var ratioOfPercentRound = Math.round(ratioOfPercent * 1000) / 1000;
+				var ratioOfPercentRoundStr = ratioOfPercentRound.toString().replace('.', ',');
+				$("span.roi_percent_user").text(ratioOfPercentRoundStr);
 				
-				$("span.roi_percent_user").text(ratioOfPercentRound);
 				$("div.project-rewards-content table tr:first-child td span.hidden").each(function(index) {
 					nbYears++;
 					var estTO = Number($(this).text());
@@ -78,15 +84,29 @@ var WDGProjectViewer = (function($) {
 					var amountOfTO = estTO * ratioOfPercent / 100;
 					amountOfGoal += amountOfTO;
 					var amountOfTORound = Math.round(amountOfTO * 100) / 100;
-					$("span.roi_amount_user" + index).text(amountOfTORound);
+					var amountOfTORoundStr = amountOfTORound.toString().replace('.', ',');
+					$("span.roi_amount_user" + index).text(amountOfTORoundStr);
 				});
 				var amountOfGoalRound = Math.round(amountOfGoal * 100) / 100;
-				$("span.roi_amount_user").text(amountOfGoalRound);
+				var amountOfGoalRoundStr = amountOfGoalRound.toString().replace('.', ',');
+				$("span.roi_amount_user").text(amountOfGoalRoundStr);
 				var ratioOnInput = Math.round(amountOfGoalRound / inputVal * 100) / 100;
-				$("span.roi_ratio_on_total").text(ratioOnInput);
+				var ratioOnInputStr = ratioOnInput.toString().replace('.', ',');
+				$("span.roi_ratio_on_total").text(ratioOnInputStr);
 				var averageROI = Math.round((Math.pow(( (percentProject / 100) * totalTurnover / goalProject), (1 / nbYears)) - 1) * 100 * 100) / 100;
-				$("span.roi_percent_average").text(averageROI);
+				var averageROIStr = averageROI.toString().replace('.', ',');
+				$("span.roi_percent_average").text(averageROIStr);
 			});
+		},
+		
+		refreshScroll: function() {
+			$("div#content.version-3 nav.project-navigation ul li a").removeClass("selected");
+			for (i = 0; i < WDGProjectViewer.nProjectParts; i++) {
+				if ($(document).scrollTop() >= $("div.project-" + WDGProjectViewer.aProjectParts[i]).offset().top - $("nav.project-navigation").height()) {
+					$("div#content.version-3 nav.project-navigation ul li a#target-" + WDGProjectViewer.aProjectParts[i]).addClass("selected");
+					break;
+				}
+			}
 		}
 	};
     

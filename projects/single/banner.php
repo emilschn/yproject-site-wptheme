@@ -71,6 +71,8 @@ if (count($current_organisations) > 0) {
 			</div>
 
 			<div class="right">
+				<?php locate_template( array("projects/single/timeline.php"), true ); ?>
+				
 				<div class="separator"></div>
 				
 				<?php locate_template( array("projects/common/progressbar.php"), true ); ?>

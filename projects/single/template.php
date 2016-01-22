@@ -22,8 +22,6 @@ $client_context = $campaign->get_client_context();
     
 	<?php locate_template( array("projects/single/banner.php"), true ); ?>
     
-	<?php locate_template( array("projects/single/timeline.php"), true ); ?>
-    
 	<?php locate_template( array("projects/single/pitch.php"), true ); ?>
     
 	<?php locate_template( array("projects/single/rewards.php"), true ); ?>

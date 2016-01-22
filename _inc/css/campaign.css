@@ -3,7 +3,7 @@
 *******************************************************************************/
 div#content.version-3 div.separator-title {
     height: 43px;
-    padding-top: 18px;
+    padding-top: 30px;
     padding-bottom: 13px;
     background-image: url('../../images/traits.jpg');
     background-repeat: repeat-x;
@@ -59,6 +59,9 @@ div#content.version-3 nav.project-navigation ul li a {
     text-transform: uppercase;
 	font-size: 12px;
 }
+div#content.version-3 nav.project-navigation ul li a.selected {
+	font-weight: bold;
+}
 div#content.version-3 nav.project-navigation ul li#triggered-menu-hamburger {
     display: none;
     position: fixed;
@@ -97,10 +100,13 @@ div#content.version-3 nav.project-navigation ul.menu-actions {
 	margin: 10px 0px;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li {
-    width: 159px;
+	width: 320px;
 	height: 60px;
 	padding-right: 0px;
     text-align: center;
+}
+div#content.version-3 nav.project-navigation ul.menu-actions.haslangs li {
+    width: 159px;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a {
 	position: relative;
@@ -119,17 +125,14 @@ div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a:af
 	pointer-events: none;
 }
 
-div#content.version-3 nav.project-navigation ul.menu-actions li.login-item {
+div#content.version-3 nav.project-navigation ul.menu-actions li.lang-item {
 	text-align: right;
-	border-left: 1px solid #FFF;
 	color: #FFF;
 }
-div#content.version-3 nav.project-navigation ul.menu-actions li.login-item a.button-quit {
-	padding: 3px 4px;
-	color: #333333;
-	background: #FFF;
+div#content.version-3 nav.project-navigation ul.menu-actions.haslangs li.lang-item {
+	border-left: 1px solid #FFF;
 }
-div#content.version-3 nav.project-navigation ul.menu-actions li.login-item form {
+div#content.version-3 nav.project-navigation ul.menu-actions li.lang-item form {
 	margin-top: 5px;
 }
 
@@ -174,6 +177,7 @@ div#content.version-3 div.project-banner div.project-banner-img, div.project-ban
     width: 100%;
 }
 div#content.version-3 div.project-banner div.project-banner-deco div.center img {
+	margin-top: 70px;
     margin-left: -70px;
 }
 
@@ -193,28 +197,22 @@ div#content.version-3 div.project-banner div.project-banner-content div.right {
     width: 320px;
     height: 370px;
 }
-div#content.version-3 div.project-banner div.project-banner-content div.right > div:first-child {
-    margin-top: 25px;
-}
 
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item {
     margin: 10px 5px;
 }
-div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item b {
-	color: #74BF43;
-}
 div#content.version-3 div.project-banner div.project-banner-content div.right .progressbar .progressbar-complete {
-	background: #74BF43;
+	background: #FF494C;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item img {
     vertical-align: middle;
-    width: 30px;
+    width: 40px;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item span {
     vertical-align: middle;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-actions {
-	margin-top: 40px;
+	margin-top: 25px;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-actions div {
 	display: inline-block;
@@ -222,10 +220,12 @@ div#content.version-3 div.project-banner div.project-banner-content div.right di
 	text-align: center;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-actions div a {
+	display: inline-block;
+	width: 85px;
 	padding: 10px 20px;
 	text-transform: uppercase;
-	background: #A4DBDE;
-	color: #FFF;
+	background: #EEECED;
+	color: #333333;
 }
 
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item.author-info {
@@ -266,17 +266,14 @@ div#content.version-3.editing #wdg-move-picture-head {
 * TIMELINE
 *******************************************************************************/
 div#content.version-3 div.project-timeline {
-	margin: 10px auto;
-}
-div#content.version-3 div.project-timeline span {
-	font-weight: bold;
-	text-transform: uppercase;
-}
-div#content.version-3 div.project-timeline span.selected {
-    color: #74BF43;
+	margin: 15px 5px 20px 5px;
+	text-align: center;
 }
 div#content.version-3 div.project-timeline span.greater {
 	padding: 5px;
+}
+div#content.version-3 div.project-timeline span.selected {
+	font-weight: bold;
 }
 
 /*******************************************************************************
@@ -285,10 +282,14 @@ div#content.version-3 div.project-timeline span.greater {
 div#content.version-3 div.project-pitch-text {
     float: left;
     width: 345px;
+	text-align: justify;
 }
 div#content.version-3 div.project-pitch-video {
     float: right;
     width: 580px;
+}
+div#content.version-3 div.project-pitch-video iframe {
+	max-width: 100%;
 }
 
 /*******************************************************************************
@@ -321,6 +322,9 @@ div#content.version-3 div.project-rewards-content table tr td > div {
 div#content.version-3 div.project-rewards-content table tr td > div > div {
 	background: #FFF;
 }
+div#content.version-3 div.project-rewards-content table tr:last-child td {
+	color: #74BF43;
+}
 div#content.version-3 div.project-rewards-content div.project-rewards-alert {
 	text-align: center;
 }
@@ -352,6 +356,9 @@ div#content.version-3 .projects-desc-content {
     background-color: #F2F2F2;
     cursor: pointer;
 }
+div#content.version-3 div.project-description div.projects-desc-content .projects-more {
+	margin-top: 20px;
+}
 div#content.version-3 .projects-desc-content h2{
     margin-top: 26px;
     margin-left: 25px;
@@ -359,7 +366,7 @@ div#content.version-3 .projects-desc-content h2{
     font-size: 15px;
     font-style: normal;
 }
-div#content.version-3 .projects-desc-content p, .projects-desc-content h4 {
+div#content.version-3 .projects-desc-content p, div#content.version-3 .projects-desc-content h4 {
     padding: 0px 25px 10px;
 }
 div#content.version-3 .projects-desc-content div.expandable,
@@ -496,13 +503,13 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	div#content.version-3 div.project-banner div.project-banner-content div.left { float: none; padding: 15px 10px; height: 120px; background-image: url("../../images/footer.png"); }
 	div#content.version-3 div.project-banner div.project-banner-content div.left h1 { position: relative; margin: 20px 0px; bottom: auto; color: #FFFFFF; font-size: 30px; font-weight: normal; text-transform: uppercase; }
 	div#content.version-3 div.project-banner div.project-banner-content div.left div.subtitle { position: relative; bottom: auto; color: #FFFFFF; }
-	div#content.version-3 div.project-banner div.project-banner-content div.right { width: 100%; height: 180px; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right { width: 100%; height: 180px; background: #EEECED; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.separator { display: none; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.progressbar-bg { background: #FFFFFF; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.progressbar-bg div.progressbar-complete { background: #FF494C; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.progressbar { margin: 80px auto 0px; width: 310px; }
-	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-logos { margin: -100px auto 0px; width: 160px; }
-	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-logos div.project-banner-info-item { display: inline-block; width: 40px; text-align: center; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-logos { margin: -100px auto 0px; width: 230px; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-logos div.project-banner-info-item { display: inline-block; width: 60px; text-align: center; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item.author-info { margin-top: 65px; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item.author-info p { margin: 2px 0px; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item span.hidden { display: inline; }

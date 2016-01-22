@@ -8,7 +8,7 @@ $menu_hamburger_pages = array(
 );
 $menu_project_parts = array (
 	'banner'		=> 'R&eacute;sum&eacute;',
-	'rewards'		=> 'Contreparties',
+	'rewards'		=> 'Investissement',
 	'description'	=> 'Pr&eacute;sentation',
 	'news'			=> 'Actualit&eacute;s'
 );
@@ -21,7 +21,6 @@ $btn_invest_classes = 'wdg-button-lightbox-open';
 $btn_invest_data_lightbox = 'connexion';
 $btn_invest_text = ($campaign->funding_type() == 'fundingdonation') ? __('Soutenir', 'yproject') : __('Investir', 'yproject');
 
-$class_loggedin = '';
 $user_name_str = '';
 
 $current_lang = get_locale();
@@ -39,7 +38,6 @@ if (is_user_logged_in()) {
 	
 	$btn_invest_classes = '';
 	$btn_invest_data_lightbox = '';
-	$class_loggedin = 'loggedin';
 }
 ?>
 
@@ -47,12 +45,12 @@ if (is_user_logged_in()) {
 	<div class="center clearfix">
 		<ul class="menu-hamburger">
 			<li>
-				<a href="#" class="trigger-menu" data-target="hamburger"><img src="<?php echo $stylesheet_directory_uri; ?>/images/menu-smartphone.png" title="Burger" /></a>
+				<a href="#" class="trigger-menu" data-target="hamburger"><img src="<?php echo $stylesheet_directory_uri; ?>/images/menu-smartphone.png" title="Menu" /></a>
 			</li>
 
 			<li id="triggered-menu-hamburger" class="triggered-menu">
 				<ul>
-					<li><a href="<?php echo home_url(); ?>"><?php _e('Accueil', 'yproject'); ?></a></li>
+					<li><a href="<?php echo home_url(); ?>"><?php _e('Accueil WEDOGOOD.co', 'yproject'); ?></a></li>
 
 					<?php foreach ($menu_hamburger_pages as $menu_page_key => $menu_page_label): $menu_page_object = get_page_by_path($menu_page_key); ?>
 						<li><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></li>
@@ -69,11 +67,11 @@ if (is_user_logged_in()) {
 
 		<ul class="menu-project campaign-mobile-hidden">
 			<?php foreach ($menu_project_parts as $menu_part_key => $menu_part_label): ?>
-				<li><a href="#" data-target="<?php echo $menu_part_key; ?>"><?php _e($menu_part_label, 'yproject'); ?></a></li>
+				<li><a href="#" id="target-<?php echo $menu_part_key; ?>" data-target="<?php echo $menu_part_key; ?>"><?php _e($menu_part_label, 'yproject'); ?></a></li>
 			<?php endforeach; ?>
 		</ul>
 
-		<ul class="menu-actions <?php echo $class_loggedin; ?>">
+		<ul class="menu-actions <?php if (!empty($lang_list)): ?>haslangs<?php endif;?>">
 			<li class="action-item">
 			<?php
 			$campaign_status = $campaign->campaign_status();
@@ -94,8 +92,8 @@ if (is_user_logged_in()) {
 			} ?>
 			</li>
 			
-			<li class="login-item">
-				<?php if (!empty($lang_list)): ?>
+			<?php if (!empty($lang_list)): ?>
+			<li class="lang-item">
 				<form method="GET" action="<?php the_permalink(); ?>">
 					<select name="lang">
 						<option value="fr_FR" <?php selected($current_lang , "fr_FR"); ?>>Fran&ccedil;ais</option>
@@ -104,8 +102,8 @@ if (is_user_logged_in()) {
 						<?php endforeach; ?>
 					</select>
 				</form>
-				<?php endif; ?>
 			</li>
+			<?php endif; ?>
 		</ul>
 	</div>
 </nav>

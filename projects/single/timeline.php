@@ -4,11 +4,11 @@ $campaign_status = $campaign->campaign_status();
 $status_list = array(
     "vote"		=> __("En vote", "yproject"),
     "collecte"	=> __("En financement", "yproject"),
-    "funded"	=> __("R&eacute;alisation", "yproject"),
-    "archive"	=> __("Collecte termin&eacute;e", "yproject"),
+    "funded"	=> __("Financ&eacute;", "yproject"),
+    "archive"	=> __("Termin&eacute;", "yproject"),
 );
 ?>
-<div class="project-timeline center">
+<div class="project-timeline">
 	<?php foreach ($status_list as $status_key => $status_label): ?>
 		<?php if (
 			($status_key != 'archive' && $status_key != 'funded')
