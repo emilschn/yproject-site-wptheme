@@ -206,7 +206,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.right .p
 }
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item img {
     vertical-align: middle;
-    width: 40px;
+    width: 30px;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item span {
     vertical-align: middle;
@@ -513,6 +513,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item.author-info { margin-top: 65px; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item.author-info p { margin: 2px 0px; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item span.hidden { display: inline; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item img { width: 25px; }
 	div#content.version-3 div.project-pitch div.project-pitch-title { display: none; }
 	div#content.version-3 div.project-pitch div.project-pitch-text { margin: 5px 1%; width: 98%; height: auto; }
 	div#content.version-3 div.project-pitch div.project-pitch-video { margin: 5px 1%; width: 98%; }
