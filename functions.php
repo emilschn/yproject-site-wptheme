@@ -1434,17 +1434,10 @@ function get_invests_graph(){
 add_action('wp_ajax_get_invests_graph', 'get_invests_graph');
 add_action('wp_ajax_nopriv_get_invests_graph', 'get_invests_graph');
 
-function get_investments_data(){
-	global $WDG_cache_plugin;
+function get_investments_data() {
 	$campaign_id = filter_input(INPUT_POST, 'id_campaign');
-	
-	$cache_stats = $WDG_cache_plugin->get_cache('project-investments-data-' . $campaign_id, 1);
-	if ($cache_stats === false) {
-		$investments_list = WDGCampaignInvestments::get_list($campaign_id);
-		$cache_stats = json_encode($investments_list);
-		$WDG_cache_plugin->set_cache('project-investments-data-' . $campaign_id, $cache_stats, 60*60*3, 1);
-	}
-	echo $cache_stats;
+	$investments_list = WDGCampaignInvestments::get_list($campaign_id);
+	echo json_encode($investments_list);
 	exit();
 }
 add_action('wp_ajax_get_investments_data', 'get_investments_data');
