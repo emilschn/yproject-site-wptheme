@@ -43,28 +43,6 @@ if (is_user_logged_in()) {
 
 <nav class="project-navigation">
 	<div class="center clearfix">
-		<ul class="menu-hamburger">
-			<li>
-				<a href="#" class="trigger-menu" data-target="hamburger"><img src="<?php echo $stylesheet_directory_uri; ?>/images/menu-smartphone.png" title="Menu" /></a>
-			</li>
-
-			<li id="triggered-menu-hamburger" class="triggered-menu">
-				<ul>
-					<li><a href="<?php echo home_url(); ?>"><?php _e('Accueil WEDOGOOD.co', 'yproject'); ?></a></li>
-
-					<?php foreach ($menu_hamburger_pages as $menu_page_key => $menu_page_label): $menu_page_object = get_page_by_path($menu_page_key); ?>
-						<li><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></li>
-					<?php endforeach; ?>
-
-					<?php if (is_user_logged_in()): ?>
-						<li><a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a></li>
-					<?php else: $page_connexion = get_page_by_path('connexion'); ?>
-						<li><a href="#connexion" class="wdg-button-lightbox-open" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
-					<?php endif; ?>
-				</ul>
-			</li>
-		</ul>
-
 		<ul class="menu-project campaign-mobile-hidden">
 			<?php foreach ($menu_project_parts as $menu_part_key => $menu_part_label): ?>
 				<li><a href="#" id="target-<?php echo $menu_part_key; ?>" data-target="<?php echo $menu_part_key; ?>"><?php _e($menu_part_label, 'yproject'); ?></a></li>

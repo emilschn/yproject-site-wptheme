@@ -12,9 +12,9 @@ var WDGProjectViewer = (function($) {
 		init: function() {
 			$(document).scroll(function() {
 				if ($(document).scrollTop() > 100) {
-					$("#content").addClass("scrolled");
+					$("#content, #navigation").addClass("scrolled");
 				} else {
-					$("#content").removeClass("scrolled");
+					$("#content, #navigation").removeClass("scrolled");
 				}
 				WDGProjectViewer.refreshScroll();
 			});
@@ -65,6 +65,7 @@ var WDGProjectViewer = (function($) {
 			});
 			$("input.init_invest").change(function() {
 				var inputVal = Number($(this).val());
+				if (isNaN(inputVal) || inputVal < 0) inputVal = 0;
 				var percentProject = Number($("input#roi_percent_project").val());
 				var goalProject = Number($("input#roi_goal_project").val());
 				
@@ -91,7 +92,7 @@ var WDGProjectViewer = (function($) {
 				var amountOfGoalRoundStr = amountOfGoalRound.toString().replace('.', ',');
 				$("span.roi_amount_user").text(amountOfGoalRoundStr);
 				var ratioOnInput = Math.round(amountOfGoalRound / inputVal * 100) / 100;
-				var ratioOnInputStr = ratioOnInput.toString().replace('.', ',');
+				var ratioOnInputStr = isNaN(ratioOnInput) ? '...' : ratioOnInput.toString().replace('.', ',');
 				$("span.roi_ratio_on_total").text(ratioOnInputStr);
 				var averageROI = Math.round((Math.pow(( (percentProject / 100) * totalTurnover / goalProject), (1 / nbYears)) - 1) * 100 * 100) / 100;
 				var averageROIStr = averageROI.toString().replace('.', ',');
@@ -102,7 +103,7 @@ var WDGProjectViewer = (function($) {
 		refreshScroll: function() {
 			$("div#content.version-3 nav.project-navigation ul li a").removeClass("selected");
 			for (i = 0; i < WDGProjectViewer.nProjectParts; i++) {
-				if ($(document).scrollTop() >= $("div.project-" + WDGProjectViewer.aProjectParts[i]).offset().top - $("nav.project-navigation").height()) {
+				if ($(document).scrollTop() >= $("div.project-" + WDGProjectViewer.aProjectParts[i]).offset().top - $("nav#navigation").height() - $("nav.project-navigation").height()) {
 					$("div#content.version-3 nav.project-navigation ul li a#target-" + WDGProjectViewer.aProjectParts[i]).addClass("selected");
 					break;
 				}

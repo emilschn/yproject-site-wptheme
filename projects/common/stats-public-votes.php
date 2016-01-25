@@ -29,14 +29,14 @@
 	<?php if ($vote_results['show_risk']): ?>
 	<li>
 	    ont &eacute;valu&eacute; le risque, en moyenne, &agrave; : <strong><?php echo round($vote_results['average_risk'], 2); ?></strong> / 5<br />
-	    <center><canvas id="canvas-vertical" width="300" height="200"></canvas></center>
+	    <center><canvas id="canvas-vertical" width="600" height="300"></canvas></center>
 	</li>
 	<?php endif; ?>
 </ul>
 
 <h3>Remarques</h3>
 Les internautes aimeraient avoir plus d’informations sur :<br />
-<center><canvas id="canvas-horizontal" width="400" height="200"></canvas></center><br />
+<center><canvas id="canvas-horizontal" width="600" height="300"></canvas></center><br />
 Autres informations : <br /><strong><?php echo $vote_results['string_more_info_other']; ?></strong>
 
 
