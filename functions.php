@@ -55,7 +55,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
-	$current_version = '20160114';
+	$current_version = '20160125';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -224,7 +224,7 @@ function yproject_mce4_options($init) {
 						"99CCFF", "Light sky blue",
 						"CC99FF", "Plum"';
 
-	$custom_colours =  '"FF494C", "WE DO GOOD"';
+	$custom_colours =  '"EA4F51", "WE DO GOOD"';
 
 	// build colour grid default+custom colors
 	$init['textcolor_map'] = '['.$default_colours.','.$custom_colours.']';

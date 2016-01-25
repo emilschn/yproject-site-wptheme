@@ -89,14 +89,14 @@ div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a {
 	display: inline-block;
 	padding: 10px 15px;
     color: #FFF;
-	background: #FF494C;
+	background: #EA4F51;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a:after {
 	position: absolute;
 	top: 100%; left: 50%;
 	width: 0; height: 0;
 	margin-left: -10px;
-	border: solid transparent; border-color: rgba(0, 0, 0, 0); border-top-color: #FF494C; border-width: 10px;
+	border: solid transparent; border-color: rgba(0, 0, 0, 0); border-top-color: #EA4F51; border-width: 10px;
 	content: " ";
 	pointer-events: none;
 }
@@ -186,7 +186,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.right di
     margin: 10px 5px;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.right .progressbar .progressbar-complete {
-	background: #FF494C;
+	background: #EA4F51;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item img {
     vertical-align: middle;
@@ -349,7 +349,7 @@ div#content.version-3 .projects-desc-content h2{
     text-transform: uppercase;
     font-size: 15px;
     font-style: normal;
-	color: #FF494C;
+	color: #EA4F51;
 }
 div#content.version-3 .projects-desc-content p, div#content.version-3 .projects-desc-content h4 {
     padding: 0px 25px 10px;
@@ -493,7 +493,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	div#content.version-3 div.project-banner div.project-banner-content div.right { width: 100%; height: 180px; background: #EEECED; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.separator { display: none; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.progressbar-bg { background: #FFFFFF; }
-	div#content.version-3 div.project-banner div.project-banner-content div.right div.progressbar-bg div.progressbar-complete { background: #FF494C; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.progressbar-bg div.progressbar-complete { background: #EA4F51; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.progressbar { margin: 80px auto 0px; width: 310px; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-logos { margin: -100px auto 0px; width: 230px; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-logos div.project-banner-info-item { display: inline-block; width: 60px; text-align: center; }

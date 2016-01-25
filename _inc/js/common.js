@@ -236,7 +236,7 @@ YPUIFunctions = (function($) {
                             $(".checkbox-next-step").change(function() {
                                 if(checkall()){
                                     $("#submit-go-next-step").removeAttr('disabled');
-                                    $("#submit-go-next-step").attr('style','background-color:#FF494C');
+                                    $("#submit-go-next-step").attr('style','background-color:#EA4F51');
                                 } else {
                                     $("#submit-go-next-step").attr('disabled','');
                                     $("#submit-go-next-step").attr('style','background-color:#333 !important; border: 0px !important;');
