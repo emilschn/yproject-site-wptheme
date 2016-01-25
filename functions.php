@@ -169,6 +169,10 @@ function yproject_change_user_cap() {
 		$role_subscriber->add_cap( 'edit_published_posts' );
 		$role_subscriber->add_cap( 'edit_others_posts' );
 	}
+	
+	
+	locate_template( 'functions/shortcode-manager.php', true );
+	YPShortcodeManager::register_shortcodes();
 }
 add_action('init', 'yproject_change_user_cap');
 
