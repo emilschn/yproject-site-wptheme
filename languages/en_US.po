@@ -1,0 +1,390 @@
+# Copyright (C) 2013 the WordPress team
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: yproject 0.1\n"
+"Report-Msgid-Bugs-To: https://code.google.com/p/yproject-site-wptheme\n"
+"POT-Creation-Date: 2013-05-01 00:19:44+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-01-27 18:38+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.5.5\n"
+
+# ################################ PROJECT COMMON #################################
+# THEME - projects/common/stats-public.php
+msgid "Votes"
+msgstr "Votes"
+
+# THEME - projects/common/stats-public-votes.php
+msgid "personnes ont vot&eacute; sur ce projet."
+msgstr "persons have voted on this project"
+
+msgid "Impact et coh&eacute;rence du projet"
+msgstr "Impact and consistency of the project"
+
+msgid "Economie :"
+msgstr "Economy:"
+
+msgid "Environnement :"
+msgstr "Environment:"
+
+msgid "Social :"
+msgstr "Social:"
+
+msgid "Autres :"
+msgstr "Others:"
+
+msgid ""
+"Ces impacts sont-ils suffisants pour que ce projet soit en financement sur "
+"WEDOGOOD.co ?"
+msgstr ""
+"Are these impacts sufficient for this project being funded on WEDOGOOD.co?"
+
+msgid "personnes ont vot&eacute; oui"
+msgstr "persons have voted yes"
+
+msgid "Sur ces"
+msgstr "Among these"
+
+msgid "votants"
+msgstr "voters"
+
+msgid "personnes ont d&eacute;clar&eacute; qu'ils investiraient en moyenne"
+msgstr "persons have declared they would invest on average"
+
+msgid "Pour un total de"
+msgstr "For a total of"
+
+msgid "euros d'intentions d'investissement, soit"
+msgstr "euros of investment intention, ie"
+
+msgid "de l’objectif"
+msgstr "of the goal"
+
+msgid "ont &eacute;valu&eacute; le risque, en moyenne, &agrave; :"
+msgstr "have rated the risk, in average, to:"
+
+msgid "Remarques"
+msgstr "Remarks"
+
+msgid "Les internautes aimeraient avoir plus d’informations sur :"
+msgstr "Users would like to have more information on:"
+
+msgid "Autres informations :"
+msgstr "Other information:"
+
+msgid "Oui"
+msgstr "Yes"
+
+msgid "Non"
+msgstr "No"
+
+msgid "autres"
+msgstr "others"
+
+msgid "previsionnel financier"
+msgstr "financial previsions"
+
+msgid "structuration de l'equipe"
+msgstr "team"
+
+msgid "produit / service"
+msgstr "product / service"
+
+msgid "impact societal"
+msgstr "impacts"
+
+msgid "Il n'y a pas encore eu de vote sur ce projet."
+msgstr "There has not been any vote yet on this project."
+
+# THEME - projects/common/stats-public-investments.php
+msgid "G&eacute;n&eacute;ral"
+msgstr "General"
+
+msgid "valid&eacute;"
+msgstr "validated"
+
+msgid "non-valid&eacute;"
+msgstr "unvalidated"
+
+msgid "distincts"
+msgstr "separate"
+
+msgid "Les"
+msgstr "The"
+
+msgid "ont"
+msgstr "are"
+
+msgid "ans de moyenne"
+msgstr "years old in average"
+
+msgid "Ce sont"
+msgstr "They are"
+
+msgid "% de femmes et"
+msgstr "% of women and"
+
+msgid "% d&apos;hommes"
+msgstr "% of men"
+
+msgid "moyen"
+msgstr "in average"
+
+msgid "par personne :"
+msgstr "per person"
+
+msgid "minimal"
+msgstr "minimal"
+
+msgid "m&eacute;dian"
+msgstr "median"
+
+msgid "maximal"
+msgstr "maximal"
+
+msgid "Ils ont"
+msgstr "They have"
+
+# PLUGIN - includes/data/campaign.php
+msgid "Vote termin&eacute;"
+msgstr "Vote closed"
+
+msgid "Collecte termin&eacute;e"
+msgstr "The campaign is closed"
+
+msgid "Plus que"
+msgstr "Hey!"
+
+msgid "jour"
+msgstr "day"
+
+msgid "heure"
+msgstr "hour"
+
+msgid "minute"
+msgstr "minute"
+
+msgid " pour voter !"
+msgstr "remaining to vote!"
+
+msgid " !"
+msgstr " remaining!"
+
+msgid "contributeur"
+msgstr "contributor"
+
+msgid "contribution"
+msgstr "contribution"
+
+msgid "contribu&eacute;"
+msgstr "contributed"
+
+msgid "investisseur"
+msgstr "investor"
+
+msgid "investissement"
+msgstr "investment"
+
+msgid "investi"
+msgstr "invested"
+
+# ################################ PROJECT PAGE #################################
+# THEME - projects/single/header.php
+msgid "R&eacute;sum&eacute;"
+msgstr "Summary"
+
+msgid "Investissement"
+msgstr "Investment"
+
+msgid "Pr&eacute;sentation"
+msgstr "Presentation"
+
+msgid "Actualit&eacute;s"
+msgstr "News"
+
+msgid "Soutenir"
+msgstr "Contribute"
+
+msgid "Investir"
+msgstr "Invest"
+
+msgid "Voter"
+msgstr "Vote"
+
+# THEME - projects/single/admin.php
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+msgid "Gestion financi&egrave;re"
+msgstr "Finance"
+
+msgid "Nouvelle langue"
+msgstr "New language"
+
+# THEME - projects/single/banner.php
+msgid "Suivre"
+msgstr "Follow"
+
+msgid "Suivi !"
+msgstr "Followed!"
+
+msgid "Forme juridique :"
+msgstr "Legal form:"
+
+msgid "Num&eacute;ro SIREN :"
+msgstr "SIREN Number:"
+
+msgid "Code APE :"
+msgstr "APE Code:"
+
+msgid "Capital social :"
+msgstr "Share capital:"
+
+msgid "Si&egrave;ge social :"
+msgstr "Headquarters:"
+
+msgid "Objectif :"
+msgstr "Goal:"
+
+msgid "&agrave;"
+msgstr "to"
+
+msgid "personnes ont d&eacute;j&agrave;"
+msgstr "persons have already"
+
+msgid "personne a d&eacute;j&agrave;"
+msgstr "person has already"
+
+msgid "soutenu ce projet"
+msgstr "contributed to this project"
+
+msgid "investi sur ce projet"
+msgstr "invested to this project"
+
+msgid "Un projet port&eacute; par"
+msgstr "This project is handled by"
+
+msgid "Voir les informations"
+msgstr "More information"
+
+msgid "Partager"
+msgstr "Share"
+
+# THEME - projects/single/timeline.php
+msgid "En vote"
+msgstr "Voting"
+
+msgid "En financement"
+msgstr "Crowdfunding"
+
+msgid "Financ&eacute;"
+msgstr "Completed"
+
+msgid "Termin&eacute;"
+msgstr "Finished"
+
+# THEME - projects/single/pitch.php
+msgid "R&eacute;sum&eacute; du projet"
+msgstr "Summary of the project"
+
+# THEME - projects/single/rewards.php
+msgid "Retour sur investissement"
+msgstr "Return on investment"
+
+msgid "Contreparties"
+msgstr "Rewards"
+
+msgid "Si j'investis :"
+msgstr "If I invest:"
+
+msgid "Calculer"
+msgstr "Calculate"
+
+msgid "Je recevrai"
+msgstr "I will receive"
+
+msgid "du chiffre d'affaire vers&eacute; tous les trimestres."
+msgstr "of the turnover paid quarterly."
+
+msgid "Rendement vis&eacute; :"
+msgstr "Aimed yield :"
+
+msgid "% par an en moyenne*"
+msgstr "% per year on average"
+
+msgid "soit"
+msgstr "ie"
+
+msgid "en"
+msgstr "in"
+
+msgid "ans"
+msgstr "years"
+
+msgid ""
+"Ces valeurs sont estim&eacute;es selon les pr&eacute;visions du porteur de "
+"projet. Risque de perte int&eacute;grale de l&apos;investissement. Gain "
+"maximum : x2."
+msgstr ""
+"These values are estimated according to the project's handler previsions. "
+"Risk of integral loss of the investment. Maximum gain: x2."
+
+# THEME - projects/single/description.php
+msgid "Pitch"
+msgstr "Pitch"
+
+msgid "Impacts positifs"
+msgstr "Positive impacts"
+
+msgid "Strat&eacute;gie"
+msgstr "Strategy"
+
+msgid "Donn&eacute;es financi&egrave;res"
+msgstr "Financial data"
+
+msgid "&Eacute;quipe"
+msgstr "Team"
+
+msgid "Statistiques"
+msgstr "Statistics"
+
+msgid "Les statistiques de vote et d&apos;investissement du projet"
+msgstr "The project vote and investment statistics"
+
+msgid ""
+"Afin de r&eacute;pondre aux recommandations des autorit&eacute;s "
+"financi&egrave;res sur la pr&eacute;vention du risque repr&eacute;"
+"sent&eacute; par l&apos;investissement participatif,"
+msgstr ""
+"In order to meet the financial authorities recommandations on the prevention "
+"of the risk of the crowdfunding,"
+
+msgid ""
+"vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la "
+"totalit&eacute; du projet."
+msgstr ""
+"you need to be registered and logged in to access the complete project."
+
+# THEME - projects/single/news.php
+msgid "Aucune actualit&eacute; pour le moment."
+msgstr "No news at the moment."
+
+# THEME - projects/single/comments.php
+msgid "Commentaires"
+msgstr "Comments"
+
+msgid "Aucun commentaire pour l&apos;instant"
+msgstr "No comment at the moment"
+
+msgid "Vous devez &ecirc;tre connect&eacute; pour poster un commentaire."
+msgstr "You need to be logged in to post a comment."
+
+msgid "Les commentaires ne sont pas ouverts pour l&apos;instant."
+msgstr "Comments are closed for now."
+
+msgid "Poster un commentaire"
+msgstr "Post a comment"

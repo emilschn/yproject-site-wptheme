@@ -1,51 +1,51 @@
 <?php function print_vote_results($vote_results) { ?>
 
 <?php if ($vote_results['count_voters'] > 0): ?>
-<strong><?php echo $vote_results['count_voters']; ?></strong> personnes ont vot&eacute; sur votre projet.<br />
+<strong><?php echo $vote_results['count_voters']; ?></strong> <?php _e('personnes ont vot&eacute; sur ce projet.', 'yproject'); ?><br />
 
-<h3>Impact et cohérence du projet</h3>
+<h3><?php _e('Impact et coh&eacute;rence du projet', 'yproject'); ?></h3>
 <?php //TODO : grenades ?>
 <ul class="vote-results-impacts">
-	<li><span>Economie :</span> <?php echo round($vote_results['average_impact_economy'], 1); ?></li>
-	<li><span>Environnement :</span> <?php echo round($vote_results['average_impact_environment'], 1); ?></li>
-	<li><span>Social :</span> <?php echo round($vote_results['average_impact_social'], 1); ?></li>
-	<li><span>Autres :</span> <?php echo $vote_results['list_impact_others_string']; ?>
+	<li><span><?php _e('Economie :', 'yproject'); ?></span> <?php echo round($vote_results['average_impact_economy'], 1); ?></li>
+	<li><span><?php _e('Environnement :', 'yproject'); ?></span> <?php echo round($vote_results['average_impact_environment'], 1); ?></li>
+	<li><span><?php _e('Social :', 'yproject'); ?></span> <?php echo round($vote_results['average_impact_social'], 1); ?></li>
+	<li><span><?php _e('Autres :', 'yproject'); ?></span> <?php echo $vote_results['list_impact_others_string']; ?>
 </ul>
 
-<em>Vos impacts sont-ils suffisants pour que votre projet soit en financement sur WEDOGOOD.co ?</em><br />
+<em><?php _e('Ces impacts sont-ils suffisants pour que ce projet soit en financement sur WEDOGOOD.co ?', 'yproject'); ?></em><br />
 <center><canvas id="canvas-pie" width="400" height="200"></canvas></center>
 
-<strong><?php echo $vote_results['count_project_validated']; ?></strong> personnes ont vot&eacute; oui...<br />
+<strong><?php echo $vote_results['count_project_validated']; ?></strong> <?php _e('personnes ont vot&eacute; oui', 'yproject'); ?>...<br />
 <ul>
 	<li>
-	    <?php
-                $total = $vote_results['count_invest_ready'] * $vote_results['average_invest_ready'];
-                $pourcentage = ($total*100)/$vote_results['objective'];
+			<?php
+			$total = $vote_results['count_invest_ready'] * $vote_results['average_invest_ready'];
+			$pourcentage = ($total*100)/$vote_results['objective'];
             ?>
       
-            Sur ces <strong><?php echo $vote_results['count_project_validated']; ?></strong> votants, <strong><?php echo $vote_results['count_invest_ready']; ?></strong> personnes ont déclaré qu'ils investiraient en moyenne <strong><?php echo round($vote_results['average_invest_ready'],2); ?> &euro;</strong>. 
-            Pour un total de <strong><?php echo round($total ,2); ?></strong> euros d'intentions d'investissement, soit <strong><?php echo round($pourcentage ,2).' %'; ?></strong> de l’objectif.
+            <?php _e('Sur ces', 'yproject'); ?> <strong><?php echo $vote_results['count_project_validated']; ?></strong> <?php _e('votants', 'yproject'); ?>, <strong><?php echo $vote_results['count_invest_ready']; ?></strong> <?php _e("personnes ont d&eacute;clar&eacute; qu'ils investiraient en moyenne", 'yproject'); ?> <strong><?php echo round($vote_results["average_invest_ready"],2); ?> &euro;</strong>. 
+            <?php _e('Pour un total de', 'yproject'); ?> <strong><?php echo round($total ,2); ?></strong> <?php _e("euros d'intentions d'investissement, soit", 'yproject'); ?> <strong><?php echo round($pourcentage ,2).' %'; ?></strong> <?php _e("de l’objectif", 'yproject'); ?>.
         </li>
 	<?php if ($vote_results['show_risk']): ?>
 	<li>
-	    ont &eacute;valu&eacute; le risque, en moyenne, &agrave; : <strong><?php echo round($vote_results['average_risk'], 2); ?></strong> / 5<br />
+	    <?php _e("ont &eacute;valu&eacute; le risque, en moyenne, &agrave; :", 'yproject'); ?> <strong><?php echo round($vote_results['average_risk'], 2); ?></strong> / 5<br />
 	    <center><canvas id="canvas-vertical" width="600" height="300"></canvas></center>
 	</li>
 	<?php endif; ?>
 </ul>
 
-<h3>Remarques</h3>
-Les internautes aimeraient avoir plus d’informations sur :<br />
+<h3><?php _e("Remarques", 'yproject'); ?></h3>
+<?php _e("Les internautes aimeraient avoir plus d’informations sur :", 'yproject'); ?><br />
 <center><canvas id="canvas-horizontal" width="600" height="300"></canvas></center><br />
-Autres informations : <br /><strong><?php echo $vote_results['string_more_info_other']; ?></strong>
+<?php _e("Autres informations :", 'yproject'); ?> <br /><strong><?php echo $vote_results['string_more_info_other']; ?></strong>
 
 
 <script type="text/javascript">
 jQuery(document).ready( function($) {
     var ctxPie = $("#canvas-pie").get(0).getContext("2d");
     var dataPie = [
-	{value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "Oui"}, 
-	{value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: "Non"}
+	{value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: <?php _e("Oui", 'yproject'); ?>}, 
+	{value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: <?php _e("Non", 'yproject'); ?>}
     ];
     var optionsPie = {
 	legend: true,
@@ -77,7 +77,7 @@ jQuery(document).ready( function($) {
     
     var ctxHorizontal = $("#canvas-horizontal").get(0).getContext("2d");
     var dataHorizontal = {
-	labels: ["autres", "prévisionnel financier", "structuration de l'équipe", "produit / service", "impact sociétal"],
+	labels: [<?php _e("autres", 'yproject'); ?>, <?php _e("previsionnel financier", 'yproject'); ?>, <?php _e("structuration de l'equipe", 'yproject'); ?>, <?php _e("produit / service", 'yproject'); ?>, <?php _e("impact societal", 'yproject'); ?>],
 	datasets: [{
 	    fillColor: "#CCC",
 	    strokeColor: "#CCC",
@@ -96,6 +96,6 @@ jQuery(document).ready( function($) {
 </script>
 
 <?php else: ?>
-Il n'y a pas encore eu de vote sur ce projet.
+<?php _e("Il n'y a pas encore eu de vote sur ce projet.", 'yproject'); ?>
 <?php endif; ?>
 <?php } ?>

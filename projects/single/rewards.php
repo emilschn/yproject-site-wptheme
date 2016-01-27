@@ -51,7 +51,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 				<div class="left align-center">
 					<?php if ($campaign->funding_duration() > 0 && $campaign->roi_percent() > 0 && $firstpayment_year > 2014): ?>
 
-						<?php _e("Si j'investis :"); ?>
+						<?php _e("Si j'investis :", 'yproject'); ?>
 						<input type="text" name="init_invest" class="init_invest" /> &euro; <button class="init_invest_count button"><?php _e('Calculer', 'yproject'); ?></button><br />
 
 						<div>
@@ -74,8 +74,8 @@ $estimated_turnover = $campaign->estimated_turnover();
 							</table>
 						</div>
 
-						<?php _e("Je recevrai"); ?> <span class="roi_amount_user">0</span> &euro;* <br />
-						soit <span class="roi_percent_user">0</span>% <?php _e("du chiffre d'affaire vers&eacute; tous les trimestres.", 'yproject'); ?><br />
+						<?php _e("Je recevrai", 'yproject'); ?> <span class="roi_amount_user">0</span> &euro;* <br />
+						<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span>% <?php _e("du chiffre d'affaire vers&eacute; tous les trimestres.", 'yproject'); ?><br />
 
 
 

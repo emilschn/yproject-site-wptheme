@@ -29,13 +29,13 @@ if (count($current_organisations) > 0) {
 	$owner_str = $current_organisation->organisation_name;
 	$lightbox_content = '<div class="content align-center">'.$current_organisation->organisation_name.'</div>
 		<div class="content align-left">
-		<span>Forme juridique :</span>'.$current_organisation->organisation_legalform.'<br />
-		<span>Num&eacute;ro SIREN :</span>'.$current_organisation->organisation_idnumber.'<br />
-		<span>Code APE :</span>'.$current_organisation->organisation_ape.'<br />
-		<span>Capital social :</span>'.$current_organisation->organisation_capital.'<br /><br />
+		<span>'._('Forme juridique :', 'yproject').'</span>'.$current_organisation->organisation_legalform.'<br />
+		<span>'._('Num&eacute;ro SIREN :', 'yproject').'</span>'.$current_organisation->organisation_idnumber.'<br />
+		<span>'._('Code APE :', 'yproject').'</span>'.$current_organisation->organisation_ape.'<br />
+		<span>'._('Capital social :', 'yproject').'</span>'.$current_organisation->organisation_capital.'<br /><br />
 		</div>
 		<div class="content align-left">
-		<span>Si&egrave;ge social :</span>'.$current_organisation->organisation_address.'<br />
+		<span>'._('Si&egrave;ge social :', 'yproject').'</span>'.$current_organisation->organisation_address.'<br />
 		<span></span>'.$current_organisation->organisation_postalcode.' '.$current_organisation->organisation_city.'<br />
 		<span></span>'.$current_organisation->organisation_country.'<br />
 		</div>';
@@ -116,7 +116,7 @@ if (count($current_organisations) > 0) {
 				</div>
 				
 				<div class="project-banner-info-item align-center author-info" data-link-edit="<?php echo $page_edit_orga; ?>">
-					<p><?php _e("Un projet port&eacute; par"); ?> <?php echo $owner_str; ?></p>
+					<p><?php _e("Un projet port&eacute; par", 'yproject'); ?> <?php echo $owner_str; ?></p>
 					<p>(<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation"><?php _e('Voir les informations', 'yproject'); ?></a>)</p>
 					<?php echo do_shortcode('[yproject_lightbox id="project-organisation"]'.$lightbox_content.'[/yproject_lightbox]'); ?>
 				</div>

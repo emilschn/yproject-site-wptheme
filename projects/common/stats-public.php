@@ -8,7 +8,7 @@ if (!empty($campaign)):
 	$status = $campaign->campaign_status();
 ?>
 
-	<h2 class="expandator" data-target="votes">Votes <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus"/></h2>
+	<h2 class="expandator" data-target="votes"><?php _e('Votes', 'yproject'); ?> <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus"/></h2>
 	
     <div id="extendable-votes" class="expandable <?php if ($status=='vote'){echo 'default-expanded';} ?>">
     <?php

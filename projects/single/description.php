@@ -119,7 +119,7 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 		<div id="project-content-statistics" class="projects-desc-content">
 			<h2><?php _e('Statistiques', 'yproject'); ?></h2>
 			<div class="zone-content">
-				<p><?php _e('Les statistiques de vote et d&apos;investissement du projet'); ?></p>
+				<p><?php _e('Les statistiques de vote et d&apos;investissement du projet', 'yproject'); ?></p>
 				<?php locate_template( array("projects/common/stats-public.php"), true ); ?>
 			</div>
 		</div>
@@ -130,8 +130,8 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 	
 	<div class="align-center">
 		<p>
-		    Afin de r&eacute;pondre aux recommandations des autorit&eacute;s financi&egrave;res sur la pr&eacute;vention du risque repr&eacute;sent&eacute; par l&apos;investissement participatif,<br />
-		    vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet.
+		    <?php _e("Afin de r&eacute;pondre aux recommandations des autorit&eacute;s financi&egrave;res sur la pr&eacute;vention du risque repr&eacute;sent&eacute; par l&apos;investissement participatif,", 'yproject'); ?><br />
+		    <?php _e("vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet.", 'yproject'); ?>
 		</p>
 		<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>">Connexion</a>
 	</div>

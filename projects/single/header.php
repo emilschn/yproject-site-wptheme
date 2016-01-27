@@ -1,11 +1,5 @@
 <?php
 global $campaign, $stylesheet_directory_uri, $current_user, $language_list;
-$menu_hamburger_pages = array(
-	'les-projets'	=> 'Les projets',
-	'financement'	=> 'Financer son projet',
-	'descriptif'	=> 'Comment ca marche ?',
-	'blog'			=> 'Actualit&eacute;s'
-);
 $menu_project_parts = array (
 	'banner'		=> 'R&eacute;sum&eacute;',
 	'rewards'		=> 'Investissement',
