@@ -2982,6 +2982,10 @@ div#home_bottom h1 {
     text-transform: uppercase;
 }
 
+.category-wedogood iframe.youtube-player {
+	max-width: 100%;
+}
+
 /*******************************************************************************
 * ACTIVITY LIST  //TODO : voir ce qui peut Ãªtre regroupÃ©
 *******************************************************************************/  
