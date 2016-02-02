@@ -8,12 +8,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-01-27 18:48+0100\n"
+"PO-Revision-Date: 2016-02-02 15:31+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "X-Generator: Poedit 1.5.5\n"
 
-# ################################ PROJECT COMMON #################################
+# ############################## PROJECT COMMON ################################
 # THEME - projects/common/stats-public.php
 msgid "Votes"
 msgstr "Votes"
@@ -192,7 +192,7 @@ msgstr "investment"
 msgid "investi"
 msgstr "invested"
 
-# ################################ PROJECT PAGE #################################
+# ################################ PROJECT PAGE ################################
 # THEME - projects/single/header.php
 msgid "R&eacute;sum&eacute;"
 msgstr "Summary"
@@ -388,3 +388,113 @@ msgstr "Comments are closed for now."
 
 msgid "Poster un commentaire"
 msgstr "Post a comment"
+
+# ################################ INVEST PAGES ################################
+# THEME - template-single-campaign-invest.php
+msgid "Investir sur le projet"
+msgstr "Invest on the project"
+
+msgid "retour au projet"
+msgstr "back to the project"
+
+# THEME - invest/invest-input.php
+msgid "Votre pi&egrave;ce d&apos;identit&eacute; est en cours de validation."
+msgstr "Your ID is being validated."
+
+msgid ""
+"Un d&eacute;lai maximum de 24h est n&eacute;cessaire &agrave; cette "
+"validation."
+msgstr "A maximum delay of 24h is necessary for the validation."
+
+msgid "Merci de votre compr&eacute;hension."
+msgstr "Thank you for your understanding."
+
+msgid "Choisissez votre contrepartie :"
+msgstr "Choose your reward:"
+
+msgid "Je ne souhaite pas de contrepartie"
+msgstr "I don't want any reward"
+
+msgid "ou plus"
+msgstr "or more"
+
+msgid "Contrepartie limit&eacute;e :"
+msgstr "Limited reward"
+
+msgid "restant"
+msgstr "remaining"
+
+msgid "restants"
+msgstr "remaining"
+
+msgid "sur"
+msgstr "on"
+
+msgid "Je souhaite donner"
+msgstr "I wish to give"
+
+msgid "Valider"
+msgstr "Validate"
+
+msgid "Vous devez investir au moins"
+msgstr "You must invest at least"
+
+msgid "Vous ne pouvez pas investir plus de"
+msgstr "You cannot invest more than"
+
+msgid "Le montant minimal de soutien est de"
+msgstr "The minimal amount for contributing is"
+
+msgid "Vous ne pouvez pas soutenir avec plus de"
+msgstr "You cannot give more than"
+
+msgid "La contrepartie que vous avez choisi n'est plus disponible."
+msgstr "The reward you've chosen is not available anymore."
+
+msgid "Vous devez donner plus pour obtenir cette contrepartie."
+msgstr "You need to give more to obtain the selected reward."
+
+msgid "Merci de ne pas laisser moins de"
+msgstr "Thank you for not letting less than"
+
+msgid "&agrave; investir."
+msgstr "to invest."
+
+msgid "Le montant que vous pouvez investir doit &ecirc;tre entier."
+msgstr "The amount that you are about to invest should be an integer."
+
+msgid "Le montant saisi semble comporter une erreur."
+msgstr "The typed amount seems to be an error."
+
+msgid "Vous vous appr&ecirc;tez &agrave; donner"
+msgstr "You are about to give"
+
+msgid "en &eacute;change de :"
+msgstr "in exchange of:"
+
+msgid "Gr&acirc;ce à vous, nous serons"
+msgstr "Thanks to your, we will be"
+
+msgid "&agrave; soutenir le projet. La somme atteinte sera de"
+msgstr "to support the project. The reached amount will be"
+
+msgid "Confirmer mon don"
+msgstr "Contribute"
+
+msgid "En mon nom (personne physique)"
+msgstr "In my name (natural person)"
+
+msgid "Pour"
+msgstr "For"
+
+msgid "Pour une nouvelle organisation (personne morale)..."
+msgstr "For a new organization (corporation)..."
+
+msgid "Pour une organisation (personne morale)..."
+msgstr "For an organization (corporation)..."
+
+msgid "Il n&apos;est plus possible d&apos;investir sur ce"
+msgstr "Investment is not possible anymore on this"
+
+msgid "projet"
+msgstr "project"

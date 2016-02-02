@@ -20,10 +20,10 @@
 					<div class="post-content">
 						<div class="entry">
 							
-							<h1><?php _e('Investir sur le projet'); ?> <?php echo $campaign->data->post_title; ?></h1>
+							<h1><?php _e('Investir sur le projet', 'yproject'); ?> <?php echo $campaign->data->post_title; ?></h1>
 							
 							<div class="center">
-								<div class="align-center">(<a href="<?php echo get_permalink($campaign->ID); ?>">retour au projet</a>)</div>
+								<div class="align-center">(<a href="<?php echo get_permalink($campaign->ID); ?>"><?php _e("retour au projet", 'yproject'); ?></a>)</div>
 								
 								<?php 
 								if ($page_name == 'paiement') echo ypcf_print_invest_breadcrumb(3, $campaign->funding_type());
