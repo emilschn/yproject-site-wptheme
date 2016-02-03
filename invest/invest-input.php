@@ -22,10 +22,10 @@ if (isset($campaign)) {
 		<div class="invest_step1_generalities">
 		<?php switch ($campaign->funding_type()) {
 			case "fundingdonation":
-				echo wpautop( $edd_options['donation_generalities'] );
+				echo wpautop( ATCF_CrowdFunding::get_translated_setting('donation_generalities') );
 				break;
 		    default:
-				echo wpautop( $edd_options['investment_generalities'] );
+				echo wpautop( ATCF_CrowdFunding::get_translated_setting('investment_generalities') );
 				break;
 		} ?>
 		</div>
@@ -134,10 +134,10 @@ if (isset($campaign)) {
 				<div class="invest_step1_conditions">
 				<?php switch ($campaign->funding_type()) {
 					case "fundingdonation":
-						echo wpautop( $edd_options['message_before_donation'] );
+						echo wpautop( ATCF_CrowdFunding::get_translated_setting('message_before_donation') );
 					break;
 					default:
-						echo wpautop( $edd_options['contract'] );
+						echo wpautop( ATCF_CrowdFunding::get_translated_setting('contract') );
 					break;
 				} ?>
 				</div>
