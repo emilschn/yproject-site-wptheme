@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-02-02 15:31+0100\n"
+"PO-Revision-Date: 2016-02-03 18:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "X-Generator: Poedit 1.5.5\n"
@@ -498,3 +498,149 @@ msgstr "Investment is not possible anymore on this"
 
 msgid "projet"
 msgstr "project"
+
+# THEME - invest/invest-confirm.php
+msgid "Il y a eu une erreur pendant l&apos;envoi"
+msgstr "There was an error while sending"
+
+msgid "Pour investir une somme sup&eacute;rieure &agrave;"
+msgstr "To invest an amount greater than"
+
+msgid "sur une ann&eacute;e, merci de vous rendre dans"
+msgstr "on a single year, please go to"
+
+msgid "l&apos;administration de votre entreprise"
+msgstr "your company parameters"
+
+msgid ""
+"sur une ann&eacute;e, vous devez fournir une pi&egrave;ce d&apos;"
+"identit&eacute;."
+msgstr "on a single year, please provide us with your ID."
+
+msgid ""
+"Si il s&apos;agit d&apos;une carte nationale d&apos;identit&eacute;, veillez "
+"&agrave; ce que le fichier contienne le recto et le verso de votre carte."
+msgstr ""
+"If this is an national ID, please check that the file contains the recto and "
+"the verso."
+
+msgid ""
+"Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf et son poids "
+"inf&eacute;rieur &agrave; 2 Mo."
+msgstr ""
+"The type of the file must be jpeg, gif, png or pdf. It should weigh less "
+"than 2Mb."
+
+msgid "Envoyer"
+msgstr "Send"
+
+msgid "Probl&egrave;me de cr&eacute;ation de projet"
+msgstr "Project creation problem"
+
+msgid "Merci de valider vos informations."
+msgstr "Thank you for checking your information."
+
+msgid ""
+"Merci de saisir 'Bon pour souscription' (sans guillemets) dans le champ "
+"pr&eacute;vu &agrave; cet effet."
+msgstr ""
+"Thank you for typing 'Bon pour souscription' (without the quotes) in the "
+"corresponding field."
+
+msgid "Merci de cocher la case de validation de contrat."
+msgstr "Thank you for checking the contract validation box."
+
+msgid "Vous vous appr&ecirc;tez &agrave; investir"
+msgstr "You are about to invest"
+
+msgid "sur le projet"
+msgstr "on the project"
+
+msgid "Modifier mon investissement"
+msgstr "Modify my investment"
+
+msgid "Modifier mon don"
+msgstr "Modify my contribution"
+
+msgid ""
+"En &eacute;change de ce don, vous avez choisi la contrepartie suivante :"
+msgstr ""
+"In exchange of your contribution, you have chosen the following reward:"
+
+msgid ""
+"Veuillez v&eacute;rifier ces informations avant de passer &agrave; l&apos;"
+"&eacute;tape suivante."
+msgstr "Please check your parameters before going through the next step."
+
+msgid ""
+"Si vous choisissez une contrepartie, pensez &agrave; indiquer votre adresse."
+msgstr "If you choose a reward, please check that your address is filled."
+
+msgid "Informations personnelles"
+msgstr "Personal parameters"
+
+msgid "Monsieur"
+msgstr "Mr"
+
+msgid "Madame"
+msgstr "Mrs"
+
+msgid "Identit&eacute; :"
+msgstr "Identity:"
+
+msgid "E-mail :"
+msgstr "E-mail:"
+
+msgid "Date de naissance :"
+msgstr "Birthday:"
+
+msgid "Nationalit&eacute; :"
+msgstr "Nationality:"
+
+msgid "Adresse :"
+msgstr "Address:"
+
+msgid "Num&eacute;ro de t&eacute;l&eacute;phone :"
+msgstr "Phone number:"
+
+msgid ""
+"Le num&eacute;ro de t&eacute;l&eacute;phone ne correspond pas &agrave; un "
+"num&eacute;ro fran&ccedil;ais."
+msgstr "The phone number should be input in the french format."
+
+msgid "Informations de l&apos;organisation"
+msgstr "Informations of the organization"
+
+msgid "Num&eacute;ro d&apos;immatriculation :"
+msgstr "ID number:"
+
+msgid "RCS :"
+msgstr "RCS:"
+
+msgid "Modifier ces informations"
+msgstr "Edit this information"
+
+msgid "Je d&eacute;clare que ces informations sont exactes."
+msgstr "I confirm that this informations is correct."
+
+msgid "Merci de prendre connaissance du contrat que vous allez accepter :"
+msgstr "Please the contract that you are about to accept:"
+
+msgid ""
+"Voici le pouvoir que vous allez signer pour valider l&apos;investissement :"
+msgstr "Please read the power you will sign to validate your investment:"
+
+msgid "Je donne pouvoir à la société WE DO GOOD :"
+msgstr "I commission the company WE DO GOOD:"
+
+msgid "Ecrire"
+msgstr "Type"
+
+msgid "dans la zone de texte ci-contre :"
+msgstr "in the following field:"
+
+msgid "J&apos;ai bien compris les termes du contrat, que je valide."
+msgstr "I understood the contract terms, which I validate."
+
+msgid "Confirmer le don"
+msgstr "Contribute"
