@@ -263,7 +263,7 @@ if (isset($campaign)):
 						if ($amount <= 1500): ?>
 							<br />
 							<label for="confirm_signing">
-								<input type="checkbox" name="confirm_signing" /> <?php _e("J&apos;ai bien compris les termes du contrat, que je valide.", 'yproject'); ?>
+								<input type="checkbox" id="confirm_signing" name="confirm_signing" /> <?php _e("J&apos;ai bien compris les termes du contrat, que je valide.", 'yproject'); ?>
 							</label><br /><br />
 						<?php endif; ?>
 					<?php endif; ?>
