@@ -5,7 +5,8 @@ class YPShortcodeManager {
 		'yproject_crowdfunding_invest_confirm',
 		'yproject_crowdfunding_invest_mean_payment',
 		'yproject_crowdfunding_invest_payment_check',
-		'yproject_crowdfunding_invest_payment_wire'
+		'yproject_crowdfunding_invest_payment_wire',
+		'yproject_crowdfunding_invest_return'
 	);
 	
 	public static function register_shortcodes() {
@@ -49,5 +50,9 @@ class YPShortcodeManager {
 	
 	function yproject_crowdfunding_invest_payment_wire($atts, $content = '') {
 		return YPShortcodeManager::include_template('invest/payment-wire.php');
+	}
+	
+	function yproject_crowdfunding_invest_return($atts, $content = '') {
+		return YPShortcodeManager::include_template('invest/return.php');
 	}
 }

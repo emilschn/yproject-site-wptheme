@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-02-04 15:07+0100\n"
+"PO-Revision-Date: 2016-02-04 16:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "X-Generator: Poedit 1.5.5\n"
@@ -747,3 +747,92 @@ msgstr "Page problem."
 
 msgid "Exemple de saisie du code destinataire sur diff&eacute;rentes banques :"
 msgstr "Recipient code input example on different banks:"
+
+# THEME - invest/return.php
+msgid ""
+"Le paiement a d&eacute;j&agrave; &eacute;t&eacute; pris en compte. Merci de "
+"vous rendre sur la page"
+msgstr "The payment has already been validated. Please go the page"
+
+msgid "Mes investissements"
+msgstr "My investments"
+
+msgid "Nous attendons votre virement."
+msgstr "We are waiting for your bank transfer."
+
+msgid "Une fois valid&eacute;, vous recevrez deux e-mails :"
+msgstr "Once validated, you will receive two e-mails:"
+
+msgid ""
+"un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement. "
+"Cet e-mail contient votre code pour signer le pouvoir"
+msgstr ""
+"an e-mail sent by WEDOGOOD to confirm your payment. This e-mail contains "
+"your unique code to sign the power"
+
+msgid ""
+"un e-mail envoy&eacute; par notre partenaire Signsquid. Cet e-mail contient "
+"un lien vous permettant de signer le pouvoir pour le contrat d&apos;"
+"investissement"
+msgstr ""
+"an e-mail sent by our partner Signsquid. This e-mail contains a link which "
+"will let you sign the power for the investment contract"
+
+msgid ""
+"Une fois valid&eacute;, vous recevrez un e-mail confirmant votre paiement. "
+"Votre contrat d&apos;investissement sera joint &agrave; cet e-mail."
+msgstr ""
+"Once validated, you will receive an e-mail confirming your payment. Your "
+"investment contract will be enclosed to that e-mail."
+
+msgid "Transaction en cours."
+msgstr "Pending transaction."
+
+msgid "Merci de vous rendre sur la page"
+msgstr "Please go the page"
+
+msgid "pour suivre l&apos;&eacute;volution de votre paiement."
+msgstr "to know the status of your payment."
+
+msgid "Suivant"
+msgstr "Next"
+
+msgid ""
+"Vous allez recevoir deux e-mails cons&eacute;cutifs &agrave; l&apos;adresse"
+msgstr "You are about to receive two consecutive e-mails to the address"
+
+msgid ""
+"pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable"
+msgstr "please look in the Spam folder of your inbox"
+
+msgid ""
+"Vous allez aussi recevoir un sms contenant le code au num&eacute;ro que vous "
+"nous avez indiqu&eacute; :"
+msgstr ""
+"You will also get an SMS containing the code to the number that was set:"
+
+msgid "Vous allez recevoir un e-mail de confirmation de paiement."
+msgstr "You are about to receive a payment confirmation e-mail."
+
+msgid ""
+"Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration "
+"du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de "
+"ce probl&egrave;me."
+msgstr ""
+"However, there was a proble while generating the contract. Our support teams "
+"are working to know what the problem was."
+
+msgid "Votre investissement est valid&eacute;."
+msgstr "Your investment is validated."
+
+msgid "Votre paiement est valid&eacute;."
+msgstr "Your payment is validated."
+
+msgid "Vous allez recevoir un e-mail &agrave; l&apos;adresse"
+msgstr "You are about to receive an e-mail to the address"
+
+msgid "Votre contrat d&apos;investissement sera joint &agrave; cet e-mail."
+msgstr "Your investment contract will be enclosed to this e-mail."
+
+msgid "Il y a eu une erreur pendant la transacton."
+msgstr "There was an error during the transaction."
