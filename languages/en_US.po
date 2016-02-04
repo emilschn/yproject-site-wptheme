@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-02-04 10:41+0100\n"
+"PO-Revision-Date: 2016-02-04 15:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "X-Generator: Poedit 1.5.5\n"
@@ -663,4 +663,87 @@ msgid "Virement bancaire"
 msgstr "Bank transfer"
 
 msgid "Ch&egrave;que"
-msgstr "Check"
+msgstr "Cheque"
+
+# THEME - invest/payment-check.php
+msgid ""
+"Pour investir par ch&egrave;que, merci de suivre les &eacute;tapes "
+"suivantes :"
+msgstr "To invest with a cheque, please follow the following steps:"
+
+msgid "Imprimez le contrat accessible en cliquant sur le lien suivant :"
+msgstr "Print the contract by clicking on the following link:"
+
+msgid "Contrat"
+msgstr "Contract"
+
+msgid "Pr&eacute;parez un courrier contenant :"
+msgstr "Prepare an envelope containing:"
+
+msgid "le contrat imprim&eacute; et rempli"
+msgstr "the contract printed and filled"
+
+msgid "un ch&egrave;que &agrave; l&apos;ordre de"
+msgstr "a cheque payable to"
+
+msgid "Envoyez-le &agrave; l&apos;adresse suivante :"
+msgstr "Send it to the following address:"
+
+msgid ""
+"Le montant de votre ch&egrave;que sera pris en compte d&egrave;s r&eacute;"
+"ception."
+msgstr ""
+"The amount of your cheque will be included to the campaign when received."
+
+msgid "Le montant total atteint sera alors de"
+msgstr "The total amount reached will be"
+
+msgid ""
+"Votre ch&egrave;que ne sera transmis au Porteur de Projet qu&apos;en cas de "
+"r&eacute;ussite de la collecte."
+msgstr ""
+"Your cheque will be transmitted to the Project Leader if the campaign "
+"succeeds."
+
+msgid "Dans le cas contraire, il vous sera retourn&eacute;."
+msgstr "Otherwise, we will send it back to you."
+
+msgid "Pour toute question, contactez-nous &agrave; l&apos;adresse"
+msgstr "If you have any questions, please contact us to the address"
+
+msgid ""
+"Afin d&apos;investir par ch&egrave;que, contactez-nous &agrave; l&apos;"
+"adresse"
+msgstr "To invest with a cheque, please contact us to the address"
+
+# THEME - invest/payment-wire.php
+msgid ""
+"Afin de proc&eacute;der au virement, voici les informations bancaires dont "
+"vous aurez besoin :"
+msgstr ""
+"To proceed with the bank transfer, these are the bank details you will need:"
+
+msgid "Titulaire du compte :"
+msgstr "Account owner:"
+
+msgid "Code unique (pour identifier votre paiement) :"
+msgstr "Unique code (to identify your payment):"
+
+msgid ""
+"Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;"
+"n&eacute;ficiaire' ou 'code destinataire' au moment du virement !"
+msgstr ""
+"You need to specify this code as 'beneficiary label' or 'recipient code' "
+"when you will order the bank transfer!"
+
+msgid "Une fois le virement effectu&eacute;, cliquez sur"
+msgstr "Once the bank wire is ordered, please click on"
+
+msgid "SUIVANT"
+msgstr "NEXT"
+
+msgid "Probl&egrave;me de page."
+msgstr "Page problem."
+
+msgid "Exemple de saisie du code destinataire sur diff&eacute;rentes banques :"
+msgstr "Recipient code input example on different banks:"

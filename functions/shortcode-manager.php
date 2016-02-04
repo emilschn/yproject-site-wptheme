@@ -3,7 +3,9 @@ class YPShortcodeManager {
 	public static $shortcode_list = array(
 		'yproject_crowdfunding_invest_form',
 		'yproject_crowdfunding_invest_confirm',
-		'yproject_crowdfunding_invest_mean_payment'
+		'yproject_crowdfunding_invest_mean_payment',
+		'yproject_crowdfunding_invest_payment_check',
+		'yproject_crowdfunding_invest_payment_wire'
 	);
 	
 	public static function register_shortcodes() {
@@ -12,14 +14,19 @@ class YPShortcodeManager {
 		}
 	}
 	
+	public static function include_template($path) {
+		ob_start();
+		locate_template( $path, true );
+		$form = ob_get_contents();
+		ob_end_clean();
+		return $form;
+	}
+	
 	
 	function yproject_crowdfunding_invest_form($atts, $content = '') {
 		$form = '';
 		if (ypcf_get_current_step() == 1) {
-			ob_start();
-			locate_template( 'invest/input.php', true );
-			$form = ob_get_contents();
-			ob_end_clean();
+			$form = YPShortcodeManager::include_template('invest/input.php');
 		}
 		return $form;
 	}
@@ -27,19 +34,20 @@ class YPShortcodeManager {
 	function yproject_crowdfunding_invest_confirm($atts, $content = '') {
 		$form = '';
 		if (ypcf_get_current_step() == 2) {
-			ob_start();
-			locate_template( 'invest/confirm.php', true );
-			$form = ob_get_contents();
-			ob_end_clean();
+			$form = YPShortcodeManager::include_template('invest/confirm.php');
 		}
 		return $form;
 	}
 	
 	function yproject_crowdfunding_invest_mean_payment($atts, $content = '') {
-		ob_start();
-		locate_template( 'invest/mean-payment.php', true );
-		$form = ob_get_contents();
-		ob_end_clean();
-		return $form;
+		return YPShortcodeManager::include_template('invest/mean-payment.php');
+	}
+	
+	function yproject_crowdfunding_invest_payment_check($atts, $content = '') {
+		return YPShortcodeManager::include_template('invest/payment-check.php');
+	}
+	
+	function yproject_crowdfunding_invest_payment_wire($atts, $content = '') {
+		return YPShortcodeManager::include_template('invest/payment-wire.php');
 	}
 }
