@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-02-04 16:29+0100\n"
+"PO-Revision-Date: 2016-02-04 16:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "X-Generator: Poedit 1.5.5\n"
@@ -836,3 +836,10 @@ msgstr "Your investment contract will be enclosed to this e-mail."
 
 msgid "Il y a eu une erreur pendant la transacton."
 msgstr "There was an error during the transaction."
+
+# THEME - invest/share.php
+msgid "Le service de partage est momentan&eacute;ment d&eacute;sactiv&eacute;."
+msgstr "The sharing service is currently unavailable."
+
+msgid "Retour au projet"
+msgstr "Back to the project"
