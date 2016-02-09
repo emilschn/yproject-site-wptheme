@@ -114,7 +114,7 @@ if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
     
 	<?php if ($campaign_status != 'preview'): ?>
 	<div class="project-description-item" data-content="statistics">
-		<img class="project-content-icon vertical-align-middle" src="<?php echo $stylesheet_directory_uri; ?>/images/porteur<?php echo $file_complement; ?>.png" alt="stats" />
+		<img class="project-content-icon vertical-align-middle" src="<?php echo $stylesheet_directory_uri; ?>/images/statistiques<?php echo $file_complement; ?>.png" alt="stats" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_gris_projet.png" alt="grey triangle"/>
 		<div id="project-content-statistics" class="projects-desc-content">
 			<h2><?php _e('Statistiques', 'yproject'); ?></h2>

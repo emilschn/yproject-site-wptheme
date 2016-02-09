@@ -23,7 +23,7 @@ div#content.version-3 div.separator-title span {
 * NAVIGATION
 *******************************************************************************/
 #container { padding-top: 0px; }
-div#content.version-3 .padder { margin-top: 200px; }
+div#content.version-3 .padder { margin-top: 180px; }
 div#content.version-3 .separator {
     background: url("../../images/tiret_noir.png");
     height: 6px;
@@ -32,23 +32,22 @@ div#content.version-3 .separator {
 
 div#content.version-3 nav.project-navigation {
     position: fixed;
-    z-index: 2001;
+    z-index: 998;
     top: 107px;
     width: 100%;
-    height: 80px;
+    height: 60px;
     background-color: #D9D9D9;
 }
 div#content.version-3 nav.project-navigation ul {
     float: left;
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
-    margin-top: 0px;
-    margin-bottom: 0px;
+	margin: 0px 0px 0px 190px;
     padding-left: 0px;
 }
 div#content.version-3 nav.project-navigation ul li {
     list-style: none;
-    height: 80px;
+    height: 60px;
     vertical-align: middle;
     display: table-cell;
     padding-right: 10px;
@@ -63,7 +62,7 @@ div#content.version-3 nav.project-navigation ul li a.selected {
 }
 
 div#content.version-3 nav.project-navigation ul.menu-project li:after {
-	content: "/";
+	content: "|";
 	color: #333333;
 	padding-left: 10px;
 }
@@ -73,11 +72,11 @@ div#content.version-3 nav.project-navigation ul.menu-project li:last-child:after
 div#content.version-3 nav.project-navigation ul.menu-actions {
     float: right;
     width: 320px;
-	margin: 10px 0px;
+	margin: 11px 0px;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li {
 	width: 320px;
-	height: 60px;
+	height: 35px;
 	padding-right: 0px;
     text-align: center;
 }
@@ -95,8 +94,8 @@ div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a:af
 	position: absolute;
 	top: 100%; left: 50%;
 	width: 0; height: 0;
-	margin-left: -10px;
-	border: solid transparent; border-color: rgba(0, 0, 0, 0); border-top-color: #EA4F51; border-width: 10px;
+	margin-left: -7px;
+	border: solid transparent; border-color: rgba(0, 0, 0, 0); border-top-color: #EA4F51; border-width: 7px;
 	content: " ";
 	pointer-events: none;
 }
@@ -123,15 +122,20 @@ div#content.version-3 div.project-admin {
 }
 div#content.version-3 div.project-admin > a {
 	display: block;
-	width: 142px;
+	width: 140px;
 	margin-bottom: 7px;
-	padding: 5px;
+	padding: 5px 5px 5px 30px;
 	font-weight: bold;
-	background: #A4DBDE;
 	color: #FFFFFF;
 }
+div#content.version-3 div.project-admin > a.btn-dashboard {
+	background: #A4DBDE url("../../images/tableau-de-bord.png") no-repeat scroll center left;
+}
+div#content.version-3 div.project-admin > a.btn-wallet {
+	background: #A4DBDE url("../../images/gestion-financiere.png") no-repeat scroll center left;
+}
 div#content.version-3 div.project-admin div.edit-button, div#content.version-3 div.project-admin div.edit-button-validate {
-	width: 113px;
+	width: 136px;
 	top: 264px;
 }
 .edit-button, .move-button, .wait-button, #wdg-edit-project-add-lang button.add-button {
@@ -185,9 +189,6 @@ div#content.version-3 div.project-banner div.project-banner-content div.right {
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item {
     margin: 10px 5px;
 }
-div#content.version-3 div.project-banner div.project-banner-content div.right .progressbar .progressbar-complete {
-	background: #EA4F51;
-}
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item img {
     vertical-align: middle;
     width: 30px;
@@ -207,10 +208,13 @@ div#content.version-3 div.project-banner div.project-banner-content div.right di
 	display: inline-block;
 	width: 85px;
 	padding: 10px 20px;
-	text-transform: uppercase;
-	background: #EEECED;
-	color: #333333;
 }
+div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-actions div a.btn-followed {
+	background: #EEECED;
+	border: #EEECED;
+	color: #333;
+}
+
 
 div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item.author-info {
     margin-top: 30px;
@@ -219,12 +223,12 @@ div#content.version-3 div.project-banner div.project-banner-content div.right di
 div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share {
 	display: none;
     position: absolute;
-    top: 320px;
+    top: 335px;
+	width: 960px;
+	text-align: right;
 }
 div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered {
     display: block;
-	width: 960px;
-	text-align: right;
 }
 div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered span {
 	background: #FFFFFF;
@@ -448,8 +452,9 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	nav#navigation.scrolled { display: none; }
 	div#content.version-3.scrolled .padder { margin-top: 63px; }
 	div#content.version-3.scrolled nav.project-navigation { top: 0px; height: 50px; }
+	div#content.version-3.scrolled nav.project-navigation > div { margin-top: 5px; }
 	div#content.version-3.scrolled nav.project-navigation ul.menu-actions { margin-top: -7px; }
-	div#content.version-3.scrolled nav.project-navigation ul li { height: 50px; }
+	div#content.version-3.scrolled nav.project-navigation ul li { height: 40px; }
 	div#content.version-3.scrolled nav.project-navigation ul li#triggered-menu-hamburger { height: auto; top: 50px; }
 	div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.action-item { padding-top: 7px; }
 	div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.action-item a:after { border-width: 0px; }

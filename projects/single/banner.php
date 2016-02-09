@@ -15,6 +15,7 @@ if (is_user_logged_in()) {
 	$users = $wpdb->get_results( 'SELECT * FROM '.$table_jcrois.' WHERE campaign_id = '.$campaign->ID.' AND user_id='.$current_user->ID );
 	$btn_follow_text = (!empty($users[0]->ID)) ? __('Suivi !', 'yproject') : __('Suivre', 'yproject');
 	$btn_follow_following = (!empty($users[0]->ID)) ? '1' : '0';
+	if ($btn_follow_following == '1') { $btn_follow_classes .= ' btn-followed'; }
 	if (!empty($users[0]->ID)) { $btn_follow_href = '#'; }
 }
 
@@ -116,8 +117,10 @@ if (count($current_organisations) > 0) {
 				</div>
 				
 				<div class="project-banner-info-item align-center author-info" data-link-edit="<?php echo $page_edit_orga; ?>">
-					<p><?php _e("Un projet port&eacute; par", 'yproject'); ?> <?php echo $owner_str; ?></p>
-					<p>(<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation"><?php _e('Voir les informations', 'yproject'); ?></a>)</p>
+					<p>
+						<?php _e("Un projet port&eacute; par", 'yproject'); ?> <?php echo $owner_str; ?><br />
+						(<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation"><?php _e('Voir les informations', 'yproject'); ?></a>)
+					</p>
 					<?php echo do_shortcode('[yproject_lightbox id="project-organisation"]'.$lightbox_content.'[/yproject_lightbox]'); ?>
 				</div>
 				
@@ -125,12 +128,12 @@ if (count($current_organisations) > 0) {
 				
 				<div class="project-banner-info-actions">
 					<div>
-						<a href="<?php echo $btn_follow_href; ?>" class="<?php echo $btn_follow_classes; ?>" data-lightbox="<?php echo $btn_follow_data_lightbox; ?>" data-textfollow="<?php _e('Suivre', 'yproject'); ?>" data-textfollowed="<?php _e('Suivi', 'yproject'); ?>" data-following="<?php echo $btn_follow_following; ?>">
+						<a href="<?php echo $btn_follow_href; ?>" class="button <?php echo $btn_follow_classes; ?>" data-lightbox="<?php echo $btn_follow_data_lightbox; ?>" data-textfollow="<?php _e('Suivre', 'yproject'); ?>" data-textfollowed="<?php _e('Suivi', 'yproject'); ?>" data-following="<?php echo $btn_follow_following; ?>">
 							<?php echo $btn_follow_text; ?>
 						</a>
 					</div>
 					<div>
-						<a href="#" class="trigger-menu" data-target="share">
+						<a href="#" class="button trigger-menu" data-target="share">
 							<?php _e('Partager', 'yproject'); ?>
 						</a>
 					</div>
