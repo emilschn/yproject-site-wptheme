@@ -125,8 +125,11 @@ if (isset($campaign)):
                 global $country_list;
                 $_SESSION['redirect_current_campaign_id'] = $campaign->ID;
 				?>
-
-				<?php echo ypcf_print_invest_breadcrumb(2, $campaign->funding_type()); ?>
+						
+				<?php
+				global $current_breadcrumb_step; $current_breadcrumb_step = 2;
+				locate_template( 'invest/breadcrumb.php', true );
+				?>
 				
 				<?php if (isset($_POST['confirmed']) && !isset($_POST['information_confirmed'])): ?>
 					<span class="errors"><?php _e("Merci de valider vos informations.", 'yproject'); ?></span><br />

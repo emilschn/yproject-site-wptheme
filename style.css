@@ -3478,6 +3478,56 @@ ul.invest-mean-payment li img {
     padding: 30px;
     text-align: center;
 }
+#invest-breadcrumb div.invest-breadcrumb-item {
+	display: inline-block;
+	width: 100px;
+	padding-top: 60px;
+	background: url("images/invest-breadcrumb-pictos.jpg") -37px top no-repeat;
+	text-align: center;
+}
+#invest-breadcrumb > div#input {
+	background-position: -37px top;
+}
+#invest-breadcrumb.breadcrumb-step-1 > div#input {
+	background-position: -37px -63px;
+	color: #EA4F51;
+}
+#invest-breadcrumb > div#confirm {
+	background-position: -145px top;
+}
+#invest-breadcrumb.breadcrumb-step-2 > div#confirm {
+	background-position: -145px -63px;
+	color: #EA4F51;
+}
+#invest-breadcrumb > div#mean-payment {
+	background-position: -246px top;
+}
+#invest-breadcrumb.breadcrumb-step-3 > div#mean-payment {
+	background-position: -246px -63px;
+	color: #EA4F51;
+}
+#invest-breadcrumb > div#return {
+	background-position: -364px top;
+}
+#invest-breadcrumb.breadcrumb-step-4 > div#return {
+	background-position: -364px -63px;
+	color: #EA4F51;
+}
+#invest-breadcrumb > div#share {
+	background-position: -472px top;
+}
+#invest-breadcrumb.breadcrumb-step-5 > div#share {
+	background-position: -472px -63px;
+	color: #EA4F51;
+}
+#invest-breadcrumb > div span {
+	background: #FFF;
+}
+
+#invest-breadcrumb div.separator {
+	display: inline-block;
+	font-weight: bold;
+}
 .invest_part {
     padding: 15px 30px;
     background: #EEEEEE;

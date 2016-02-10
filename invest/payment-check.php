@@ -10,8 +10,11 @@ if (isset($campaign)): ?>
     $filename = dirname ( __FILE__ ) . '/../../pdf_files/contract-'.$campaign->ID.'.docx';
     $url = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/pdf_files/contract-'.$campaign->ID.'.docx';
 	?>
-    
-    <?php echo ypcf_print_invest_breadcrumb(3, $campaign->funding_type()); ?>
+    		
+	<?php
+	global $current_breadcrumb_step; $current_breadcrumb_step = 3;
+	locate_template( 'invest/breadcrumb.php', true );
+	?>
 	
     <?php if (file_exists($filename)): ?>
 

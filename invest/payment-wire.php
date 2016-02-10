@@ -12,8 +12,10 @@ if (isset($campaign)): ?>
 		$page_payment_done = get_page_by_path('paiement-effectue');
 		?>
 
-		<?php echo ypcf_print_invest_breadcrumb(3, $campaign->funding_type()); ?>
-
+		<?php
+		global $current_breadcrumb_step; $current_breadcrumb_step = 3;
+		locate_template( 'invest/breadcrumb.php', true );
+		?>
 
 		<?php _e("Afin de proc&eacute;der au virement, voici les informations bancaires dont vous aurez besoin :", 'yproject'); ?><br />
 		<ul>

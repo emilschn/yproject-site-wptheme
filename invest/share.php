@@ -7,8 +7,11 @@ if (!isset($campaign)) {
 if (isset($campaign) && is_user_logged_in()):
 	$campaign_url  = get_permalink($campaign->ID);
 	?>
-
-	<?php echo ypcf_print_invest_breadcrumb(5, $campaign->funding_type()); ?>
+		
+	<?php
+	global $current_breadcrumb_step; $current_breadcrumb_step = 5;
+	locate_template( 'invest/breadcrumb.php', true );
+	?>
 	
 	<div class="projects_preview projects_current projects_current_temp" style="margin-left: 370px;">
 	    <div class="preview_item_<?php echo $campaign->ID; ?> project_preview_item" style="width: 220px;">

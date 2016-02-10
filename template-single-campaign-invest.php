@@ -26,7 +26,10 @@
 								<div class="align-center">(<a href="<?php echo get_permalink($campaign->ID); ?>"><?php _e("retour au projet", 'yproject'); ?></a>)</div>
 								
 								<?php 
-								if ($page_name == 'paiement') echo ypcf_print_invest_breadcrumb(3, $campaign->funding_type());
+								if ($page_name == 'paiement') {
+									global $current_breadcrumb_step; $current_breadcrumb_step = 3;
+									locate_template( 'invest/breadcrumb.php', true );
+								}
 								
 								the_content();
 								

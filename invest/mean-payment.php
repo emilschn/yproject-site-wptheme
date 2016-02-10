@@ -13,8 +13,11 @@ if (isset($campaign)):
 	//Possible de régler par chèque ?
 	$can_use_check = ($campaign->can_use_check($_SESSION['redirect_current_amount_part']));
 	?>
-
-	<?php echo ypcf_print_invest_breadcrumb(3, $campaign->funding_type()); ?>
+						
+	<?php
+	global $current_breadcrumb_step; $current_breadcrumb_step = 3;
+	locate_template( 'invest/breadcrumb.php', true );
+	?>
 
 	<?php if (!empty($payment_url)): ?>
 		<?php _e("La redirection automatique ayant &eacute;chou&eacute;, veuillez cliquer sur", 'yproject'); ?> <a href="<?php echo $payment_url; ?>"><?php _e("ce lien", 'yproject'); ?></a>.<br /><br />

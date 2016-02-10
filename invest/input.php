@@ -17,7 +17,10 @@ if (isset($campaign)) {
 		$page_invest_link .= '?campaign_id=' . $_GET['campaign_id'];
 ?>
     
-		<?php echo ypcf_print_invest_breadcrumb(1, $campaign->funding_type()); ?>
+		<?php
+		global $current_breadcrumb_step; $current_breadcrumb_step = 1;
+		locate_template( 'invest/breadcrumb.php', true );
+		?>
 		
 		<div class="invest_step1_generalities">
 		<?php switch ($campaign->funding_type()) {

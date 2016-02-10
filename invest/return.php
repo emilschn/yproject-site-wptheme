@@ -126,7 +126,11 @@ if (isset($campaign) && is_user_logged_in()):
 					$invest_page = get_page_by_path('mes_investissements');
 					$share_page = get_page_by_path('paiement-partager');
 					?>
-					<?php echo ypcf_print_invest_breadcrumb(4, $campaign->funding_type()); ?>
+						
+					<?php
+					global $current_breadcrumb_step; $current_breadcrumb_step = 4;
+					locate_template( 'invest/breadcrumb.php', true );
+					?>
 				
 					<?php if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wire'): ?>
 						<?php _e("Nous attendons votre virement.", 'yproject'); ?><br /><br />
@@ -162,7 +166,11 @@ if (isset($campaign) && is_user_logged_in()):
 					
 					//On affiche que tout s'est bien passé
 					?>
-					<?php echo ypcf_print_invest_breadcrumb(4, $campaign->funding_type()); ?>
+						
+					<?php
+					global $current_breadcrumb_step; $current_breadcrumb_step = 4;
+					locate_template( 'invest/breadcrumb.php', true );
+					?>
 
 					<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 						<?php if ($amount > 1500): ?>
