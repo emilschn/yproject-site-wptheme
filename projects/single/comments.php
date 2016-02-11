@@ -27,7 +27,8 @@ $comment_list = get_comments(array(
 	<?php if (!is_user_logged_in()): ?>
 		<div class="align-center">
 			<?php _e('Vous devez &ecirc;tre connect&eacute; pour poster un commentaire.', 'yproject'); ?><br /><br />
-			<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>">Connexion</a>
+			<a href="#register" id="register" class="wdg-button-lightbox-open button" data-lightbox="register" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Inscription", 'yproject'); ?></a>
+			<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Connexion", 'yproject'); ?></a>
 		</div>
 	<?php elseif (!comments_open()): ?>
 		<div class="align-center"><?php _e('Les commentaires ne sont pas ouverts pour l&apos;instant.', 'yproject'); ?></div>

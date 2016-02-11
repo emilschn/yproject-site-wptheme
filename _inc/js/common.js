@@ -194,13 +194,16 @@ YPUIFunctions = (function($) {
 					var target = $(this).data("lightbox");
 					$("#wdg-lightbox-" + target).show();
 				});
-				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function() {
+				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function(e) {
+					e.preventDefault();
 					$(".wdg-lightbox").hide();
 				});
-                                $(".wdg-lightbox #wdg-lightbox-welcome-close").click(function() {
+				$(".wdg-lightbox #wdg-lightbox-welcome-close").click(function(e) {
+					e.preventDefault();
 					$(".wdg-lightbox").hide();
 				});
-				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function() {
+				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function(e) {
+					e.preventDefault();
 					$(".wdg-lightbox").hide();
 				});
 				var sHash = window.location.hash.substring(1);

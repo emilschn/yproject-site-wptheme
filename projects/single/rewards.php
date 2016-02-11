@@ -54,53 +54,66 @@ $estimated_turnover = $campaign->estimated_turnover();
 						<?php _e("Si j'investis :", 'yproject'); ?>
 						<input type="text" name="init_invest" class="init_invest" /> &euro; <button class="init_invest_count button"><?php _e('Calculer', 'yproject'); ?></button><br />
 
-						<div>
-							<table>
-								<tr>
-									<?php $max_turnover = max($estimated_turnover); ?>
-									<?php for ($i = $firstpayment_year; $i < $firstpayment_year + $funding_duration; $i++) : ?>
-									<?php $height = 100 - round($estimated_turnover[$i] / $max_turnover * 100); ?>
-									<td>
-										<div><div style="height: <?php echo $height; ?>%;"></div></div>
-										<?php echo $i; ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $estimated_turnover[$i]; ?></span>
-									</td>
-									<?php endfor; ?>
-								</tr>
-								<tr>
-									<?php for ($i = 0; $i < $funding_duration; $i++) : ?>
-									<td><span class="roi_amount_user<?php echo $i; ?>">0</span>&euro;</td>
-									<?php endfor; ?>
-								</tr>
-							</table>
-						</div>
+						<?php if (is_user_logged_in()): ?>
+							<div>
+								<table>
+									<tr>
+										<?php $max_turnover = max($estimated_turnover); ?>
+										<?php for ($i = $firstpayment_year; $i < $firstpayment_year + $funding_duration; $i++) : ?>
+										<?php $height = 100 - round($estimated_turnover[$i] / $max_turnover * 100); ?>
+										<td>
+											<div><div style="height: <?php echo $height; ?>%;"></div></div>
+											<?php echo $i; ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $estimated_turnover[$i]; ?></span>
+										</td>
+										<?php endfor; ?>
+									</tr>
+									<tr>
+										<?php for ($i = 0; $i < $funding_duration; $i++) : ?>
+										<td><span class="roi_amount_user<?php echo $i; ?>">0</span>&euro;</td>
+										<?php endfor; ?>
+									</tr>
+								</table>
+							</div>
 
-						<?php _e("Je recevrai", 'yproject'); ?> <span class="roi_amount_user">0</span> &euro;* <br />
-						<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span>% <?php _e("du chiffre d'affaire vers&eacute; tous les trimestres.", 'yproject'); ?><br />
-
-
+							<?php _e("Je recevrai", 'yproject'); ?> <span class="roi_amount_user">0</span> &euro;* <br />
+							<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span>% <?php _e("du chiffre d'affaire vers&eacute; tous les trimestres.", 'yproject'); ?><br />
+						
+						<?php else: ?>
+							<div class="hidden">
+								<p>
+									<?php _e("Afin de r&eacute;pondre aux recommandations des autorit&eacute;s financi&egrave;res sur la pr&eacute;vention du risque repr&eacute;sent&eacute; par l&apos;investissement participatif,", 'yproject'); ?><br />
+									<?php _e("vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet.", 'yproject'); ?>
+								</p>
+								<a href="#register" id="register" class="wdg-button-lightbox-open button" data-lightbox="register" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Inscription", 'yproject'); ?></a>
+								<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Connexion", 'yproject'); ?></a>
+							</div>
+						
+						<?php endif; ?>
 
 					<?php endif; ?>
 				</div>
 				<div class="clear"></div>
 			</div>
 
+		<?php if (is_user_logged_in()): ?>
 			<div class="project-rewards-alert">
 				<?php _e("Rendement vis&eacute; :", "yproject"); ?> 
 				<span class="info-user">
 					<span class="roi_percent_average">...</span><?php _e("% par an en moyenne*", 'yproject'); ?>
 					(<?php _e("soit", 'yproject'); ?> <span class="roi_ratio_on_total">...</span> <?php echo __("en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>)</span><br />
-				
+
 				<span class="small-alert">* <?php _e("Ces valeurs sont estim&eacute;es selon les pr&eacute;visions du porteur de projet. Risque de perte int&eacute;grale de l&apos;investissement. Gain maximum : x2.", "yproject"); ?></span>
 			</div>
 
-		<?php if ($campaign_status == "collecte"): ?>
-			<div class="align-center">
-				<br /><br />
-				<input type="submit" value="<?php _e("Investir", "yproject"); ?>" class="button red" />
-				<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
-				<input type="hidden" name="invest_start" value="1" />
-			</div>
-		</form>
+			<?php if ($campaign_status == "collecte"): ?>
+				<div class="align-center">
+					<br /><br />
+					<input type="submit" value="<?php _e("Investir", "yproject"); ?>" class="button red" />
+					<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+					<input type="hidden" name="invest_start" value="1" />
+				</div>
+			</form>
+			<?php endif; ?>
 		<?php endif; ?>
 	    
 	    
