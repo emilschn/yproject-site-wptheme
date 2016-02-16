@@ -18,6 +18,10 @@ if (isset($campaign)):
 			$amount_part = $_POST['amount_part'];
 			$_SESSION['redirect_current_amount_part'] = $amount_part;
 		}
+		if (isset($_SESSION['redirect_current_amount_part'])) {
+			$amount_part = $_SESSION['redirect_current_amount_part'];
+		}
+		ypcf_debug_log('shortcode::invest/confirm.php > $amount_part : ' . $amount_part);
         
         if (isset($_POST['selected_reward'])) {
 			$_SESSION['redirect_current_selected_reward'] = $_POST['selected_reward'];
@@ -35,6 +39,9 @@ if (isset($campaign)):
             if (isset($_POST['invest_type'])) {
 				$invest_type = $_POST['invest_type'];
 				$_SESSION['redirect_current_invest_type'] = $invest_type;
+			}
+			if (isset($_SESSION['redirect_current_invest_type'])) {
+				$invest_type = $_SESSION['redirect_current_invest_type'];
 			}
             if ($invest_type != 'user') {
                 $organisation = new YPOrganisation($invest_type);
@@ -293,7 +300,7 @@ if (isset($campaign)):
             if ($amount > $max_value) $error = 'max';
             if ($remaining_amount > 0 && $remaining_amount < $part_value) $error = 'interval';
             unset($amount_part);
-            locate_template( 'invest/invest-input.php', true );
+            locate_template( 'invest/input.php', true );
         endif; ?>
 
 

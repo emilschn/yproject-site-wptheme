@@ -980,6 +980,8 @@ add_action('wp_ajax_save_edit_project', 'yproject_save_edit_project');
 add_action('wp_ajax_nopriv_save_edit_project', 'yproject_save_edit_project');
 
 function get_investors_table() {
+	global $disable_logs;
+	$disable_logs = TRUE;
     
 //        locate_template( array("requests/investments.php"), true );
         $investments_list = (json_decode($_POST['data'],true));
@@ -1276,6 +1278,9 @@ add_action('wp_ajax_get_investors_table', 'get_investors_table');
 add_action('wp_ajax_nopriv_get_investors_table', 'get_investors_table');
 
 function get_invests_graph(){
+	global $disable_logs;
+	$disable_logs = TRUE;
+
     $campaign = atcf_get_campaign($_POST['id_campaign']);
     
     //Recuperation donnees d'investissement

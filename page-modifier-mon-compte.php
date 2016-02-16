@@ -82,16 +82,15 @@ get_header();
 					    }
 				    }
 			    }
+		    }
 		    
-			    if (isset($_SESSION['error_invest'])) {
-				for ($i = 0; $i < count($_SESSION['error_invest']); $i++) {
-				?>
+			if (isset($_SESSION['error_invest'])) {
+				for ($i = 0; $i < count($_SESSION['error_invest']); $i++) { ?>
 				<span class="errors"><?php echo $_SESSION['error_invest'][$i]; ?></span><br />
-				<?php
-				}
+				<?php }
 				unset($_SESSION['error_invest']);
-			    }
-		    } ?>
+			}
+			?>
 				
 		    <?php
 		    $is_campaign_investment_type = FALSE;
