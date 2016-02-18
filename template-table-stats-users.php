@@ -19,7 +19,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 ?>
 
 <div id="content">
-    <div class="padder center">
+    <div class="padder">
 		<h1>Tableau complet de la liste des utilisateurs</h1>
 		
 		<div class="wdg-datatable">
@@ -28,6 +28,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 					<tr>
 						<td>Prénom Nom</td>
 						<td>e-mail</td>
+						<td>Sexe</td>
 						<td>Date de naissance</td>
 						<td>CP</td>
 						<td>Ville</td>
@@ -41,6 +42,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 					<tr>
 						<td>Prénom Nom</td>
 						<td>e-mail</td>
+						<td>Sexe</td>
 						<td>Date de naissance</td>
 						<td>CP</td>
 						<td>Ville</td>
@@ -69,6 +71,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 						<tr>
 							<td><?php echo $user->user_firstname . ' ' . $user->user_lastname; ?></td>
 							<td><?php echo $user->user_email; ?></td>
+							<td><?php if ($user->get('user_gender') == "female") { echo 'F'; } elseif ($user->get('user_gender') == "male") { echo 'M'; } ?></td>
 							<td><?php echo $user->get('user_birthday_year') . '-' . $user->get('user_birthday_month') . '-' . $user->get('user_birthday_day'); ?></td>
 							<td><?php echo $user->get('user_postal_code'); ?></td>
 							<td><?php echo $user->get('user_city'); ?></td>
