@@ -370,6 +370,9 @@ div#content.version-3 .projects-desc-content h5,
 div#content.version-3 .projects-desc-content h6{
     padding-left: 25px;
 }
+div#content.version-3 .projects-desc-content iframe {
+	max-width: 100%;
+}
 
 div#content.version-3 .projects-desc-content p img {
     max-width: 100%;
