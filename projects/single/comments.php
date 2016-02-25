@@ -21,7 +21,7 @@ $comment_list = get_comments(array(
 		<?php endforeach; ?>
 		</ul>
 	<?php else: ?>
-		<div class="align-center"><?php _e('Aucun commentaire pour l&apos;instant', 'yproject'); ?></div>
+		<div class="align-center"><?php _e('Aucun commentaire pour l&apos;instant.', 'yproject'); ?></div>
 	<?php endif; ?>
 	
 	<?php if (!is_user_logged_in()): ?>
@@ -31,7 +31,7 @@ $comment_list = get_comments(array(
 			<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Connexion", 'yproject'); ?></a>
 		</div>
 	<?php elseif (!comments_open()): ?>
-		<div class="align-center"><?php _e('Les commentaires ne sont pas ouverts pour l&apos;instant.', 'yproject'); ?></div>
+		<div class="align-center"><?php _e('Les commentaires ne sont pas ouverts.', 'yproject'); ?></div>
 	<?php else: ?>
 		<?php comment_form( array(
 				"title_reply"			=> __('Poster un commentaire', 'yproject'),

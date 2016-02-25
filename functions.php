@@ -177,6 +177,17 @@ function yproject_change_user_cap() {
 add_action('init', 'yproject_change_user_cap');
 
 
+function yproject_campaign_open_comments( $open, $post_id ) {
+	$post_campaign = get_post($post_id);
+	$campaign = new ATCF_Campaign( $post_campaign );
+	if ($campaign->campaign_status() == "vote" || $campaign->campaign_status() == "collecte") {
+		$open = TRUE;
+	}
+	return $open;
+}
+add_filter( 'comments_open', 'yproject_campaign_open_comments', 11, 2 );
+
+
 //***********************
 // Modification TINYMCE
 //***********************
@@ -1444,6 +1455,8 @@ add_action('wp_ajax_get_invests_graph', 'get_invests_graph');
 add_action('wp_ajax_nopriv_get_invests_graph', 'get_invests_graph');
 
 function get_investments_data() {
+	global $disable_logs;
+	$disable_logs = TRUE;
 	$campaign_id = filter_input(INPUT_POST, 'id_campaign');
 	$investments_list = WDGCampaignInvestments::get_list($campaign_id);
 	echo json_encode($investments_list);
