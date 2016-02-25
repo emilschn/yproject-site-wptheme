@@ -3,7 +3,10 @@ global $campaign;
 $category_slug = $campaign->ID . '-blog-' . $campaign->data->post_name;
 $category_obj = get_category_by_slug($category_slug);
 if (!empty($category_obj)) {
-	$posts_in_category = get_posts(array('category'=>$category_obj->cat_ID));
+	$posts_in_category = get_posts( array(
+		'category'	=> $category_obj->cat_ID,
+		'showposts'	=> -1
+	) );
 }
 ?>
 <div class="project-news center">
