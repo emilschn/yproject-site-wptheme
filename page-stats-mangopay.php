@@ -49,9 +49,42 @@ get_header();
 		    ?>
 		    
 		    <?php 
-		    //Gestion Yearn : remboursement
+		    //Gestion Yearn : remboursement de projet loupé
 //			ypcf_mangopay_refund_project_to_user(8267);
 		    ?>
+			
+			<?php
+			/*
+			//Annulation d'investissement
+			$payment_id = 10077;
+			$downloads = edd_get_payment_meta_downloads($payment_id); 
+			$download_id = '';
+			if (is_array($downloads[0])) $download_id = $downloads[0]["id"]; 
+			else $download_id = $downloads[0];
+			
+			//On transfère la somme sur mangopay
+			$new_transfer = ypcf_mangopay_refund_project_to_user($payment_id);
+			update_post_meta($payment_id, 'refund_transfer_id', $new_transfer->ID);
+
+			//On passe le statut du paiement en refund
+			edd_undo_purchase( $download_id, $payment_id );
+			wp_update_post( array( 'ID' => $payment_id, 'post_status' => 'refunded' ) );
+
+			//On passe le log à refunded pour que ce soit bien pris en compte au niveau du décompte en cours du projet
+			$log_payment_id = 0;
+			query_posts( array(
+				'post_type'  => 'edd_log',
+				'meta_query' => array (array(
+				'key'   => '_edd_log_payment_id',
+				'value' => $payment_id
+				))
+			)); 
+			if (have_posts()) : while (have_posts()) : the_post(); $log_payment_id = get_the_ID(); endwhile; endif;
+			wp_reset_query();
+			wp_update_post( array( 'ID' => $log_payment_id, 'post_status' => 'refunded' ) );
+			 * 
+			 */
+			?>
 		    
 		    <?php /* ?>
 		    <h2>Liste des utilisateurs</h2>
