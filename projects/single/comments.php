@@ -36,6 +36,6 @@ $comment_list = get_comments(array(
 		<?php comment_form( array(
 				"title_reply"			=> __('Poster un commentaire', 'yproject'),
 				"comment_notes_after"	=> ""
-		)); ?>
+		), $campaign->ID ); ?>
 	<?php endif; ?>
 </div>

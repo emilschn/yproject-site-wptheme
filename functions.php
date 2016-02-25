@@ -178,8 +178,12 @@ add_action('init', 'yproject_change_user_cap');
 
 
 function yproject_campaign_open_comments( $open, $post_id ) {
-	$post_campaign = get_post($post_id);
-	$campaign = new ATCF_Campaign( $post_campaign );
+	if (empty($post_id)) {
+		global $campaign;
+	} else {
+		$post_campaign = get_post($post_id);
+		$campaign = new ATCF_Campaign( $post_campaign );
+	}
 	if ($campaign->campaign_status() == "vote" || $campaign->campaign_status() == "collecte") {
 		$open = TRUE;
 	}
