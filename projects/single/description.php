@@ -3,6 +3,17 @@ global $campaign, $can_modify, $stylesheet_directory_uri;
 $campaign_status = $campaign->campaign_status();
 $file_complement = '';
 if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
+if ($can_modify) { 
+	$editor_params = array( 
+		'media_buttons' => true,
+		'quicktags'     => false,
+		'editor_height' => 500,
+		'tinymce'       => array(
+			'plugins' => 'paste, wplink, textcolor',
+			'paste_remove_styles' => true
+		)
+	);
+}
 ?>
 
 <div class="project-description center">
