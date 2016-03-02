@@ -101,10 +101,9 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 						$funding_dev_selected = ($campaign->funding_type() == 'fundingdevelopment') ? 'checked="checked"' : '';
 						$funding_donation_selected = ($campaign->funding_type() == 'fundingdonation') ? 'checked="checked"' : '';
 						?>
-						<input type="radio" name="fundingtype" class="radiofundingtype first" id="fundingproject" value="fundingproject" <?php echo $funding_project_selected; ?>>Financement d'un projet<br />
+						<input type="radio" name="fundingtype" class="radiofundingtype first" id="fundingproject" value="fundingproject" <?php echo $funding_project_selected; ?>>Royalties (Avance sur chiffre d&apos;affaires)<br />
 						<input type="radio" name="fundingtype" class="radiofundingtype" id="fundingdevelopment" value="fundingdevelopment" <?php echo $funding_dev_selected; ?>>Capital (coop&eacute;ratives SA uniquement)<br />
-						<input type="radio" name="fundingtype" class="radiofundingtype" id="fundingdonation" value="fundingdonation" <?php echo $funding_donation_selected; ?>>Don avec contrepartie<br />
-
+						
 						<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 						<label for="fundingduration">Dur&eacute;e du financement :</label>
 						<input type="text" name="fundingduration" value="<?php echo $campaign->funding_duration(); ?>"> ann&eacute;es.<br />
@@ -120,7 +119,7 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 						<?php echo '<span>';
 						switch ($campaign->funding_type()) {
 							case 'fundingproject':
-								echo 'Avance sur chiffre d&apos;affaires (royalties)<br />';
+								echo 'Royalties (Avance sur chiffre d&apos;affaires)<br />';
 								break;
 							case 'fundingdevelopment':
 								echo 'Capital pour les coop&eacute;ratives<br />';
