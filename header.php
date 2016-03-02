@@ -72,7 +72,7 @@
 		<meta property="og:image:type" content="image/jpeg" />
 	</head>
 
-	<body <?php body_class(); ?> id="bp-default"> 
+	<body <?php body_class(get_locale()); ?> id="bp-default"> 
 		<?php
 		global $post;
 		$menu_pages = array(

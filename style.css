@@ -2520,6 +2520,12 @@ div#home_bottom h1 {
 #wdg-edit-project.edit-button-validate:before {
     content: "Mode Normal";
 }
+.en_US #wdg-edit-project.edit-button:before {
+    content: "Edition Mode";
+}
+.en_US #wdg-edit-project.edit-button-validate:before {
+    content: "Normal Mode";
+}
 
 #wdg-edit-project-add-lang {
 	display: none;
