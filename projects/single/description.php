@@ -31,7 +31,10 @@ if ($can_modify) {
 		<div id="project-content-description" class="projects-desc-content">
 			<h2><?php _e('Pitch', 'yproject'); ?></h2>
 			<div class="zone-content">
-				<?php the_content(); ?>
+				<?php 
+				$description = html_entity_decode($campaign->description());
+				echo apply_filters('the_content', $description);
+				?>
 			</div>
 			<?php if ($can_modify) { ?>
 			<div class="zone-edit hidden">
@@ -52,7 +55,7 @@ if ($can_modify) {
 			<h2><?php _e('Impacts positifs', 'yproject'); ?></h2>
 			<div class="zone-content">
 				<?php 
-				$societal_challenge = html_entity_decode($campaign->societal_challenge()); 
+				$societal_challenge = html_entity_decode($campaign->societal_challenge());
 				echo apply_filters('the_content', $societal_challenge);
 				?>
 			</div>

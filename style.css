@@ -2440,7 +2440,7 @@ div#home_bottom h1 {
     background: url("images/position.png") #74BF43 center no-repeat;
 }
 .wait-button {
-    background: url("images/chargement.gif") #74BF43 center no-repeat !important;
+    background: url("images/chargement.gif") #74BF43 center no-repeat;
 }
 .edit-input {
     position: absolute;
