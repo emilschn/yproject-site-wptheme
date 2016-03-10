@@ -30,10 +30,17 @@ get_header();
 
 						<?php the_content(); ?>
 
-						<?php global $errors_edit; ?>
+						<?php global $errors_edit, $errors_submit; ?>
 						<?php if (count($errors_edit->errors) > 0): ?>
 						<ul class="errors">
 							<?php $error_messages = $errors_edit->get_error_messages(); ?>
+							<?php foreach ($error_messages as $error_message): ?>
+								<li><?php echo $error_message; ?></li>
+							<?php endforeach; ?>
+						</ul>
+						<?php elseif (count($errors_submit->errors) > 0): ?>
+						<ul class="errors">
+							<?php $error_messages = $errors_submit->get_error_messages(); ?>
 							<?php foreach ($error_messages as $error_message): ?>
 								<li><?php echo $error_message; ?></li>
 							<?php endforeach; ?>
@@ -123,31 +130,71 @@ get_header();
 							 */
 							?>
 							<h3><?php _e('Documents', 'yproject'); ?></h3>
+							<?php _e("Afin de lutter contre le blanchiment d'argent, les organisations doivent transmettre des documents d'identification.", 'yproject'); ?><br />
+							<?php _e("Ces fichiers doivent avoir un poids inf&eacute;rieur &agrave; 4Mo et doivent &ecirc;tre dans l'un des formats suivants :", 'yproject'); ?> 
+							<?php foreach (WDGKYCFile::$authorized_format_list as $format_str) {
+								echo $format_str . ', ';
+							} ?>
+							<br /><br />
+							
+							<strong><?php _e("K-BIS ou &eacute;quivalent &agrave; un registre du commerce", 'yproject'); ?></strong><br />
+							<?php
+							$current_filelist_kbis = WDGKYCFile::get_list_by_owner_id($organisation_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_kbis);
+							$current_file_kbis = $current_filelist_kbis[0];
+							if ( isset($current_file_kbis) ):
+							?>
+							<a target="_blank" href="<?php echo $current_file_kbis->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_kbis->date_uploaded; ?></a><br />
+							<?php endif; ?>
+							<input type="file" name="org_doc_kbis" /> <br /><br />
+							
+							<strong><?php _e("Statuts de la soci&eacute;t&eacute;, certifi&eacute;s conformes à l'original par le g&eacute;rant", 'yproject'); ?></strong><br />
+							<?php
+							$current_filelist_status = WDGKYCFile::get_list_by_owner_id($organisation_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_status);
+							$current_file_status = $current_filelist_status[0];
+							if ( isset($current_file_status) ):
+							?>
+							<a target="_blank" href="<?php echo $current_file_status->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_status->date_uploaded; ?></a><br />
+							<?php endif; ?>
+							<input type="file" name="org_doc_status" /> <br /><br />
+							
+							<strong><?php _e("Justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident", 'yproject'); ?></strong><br />
+							<?php _e("Pour une personne fran&ccedil;aise : carte d'identit&eacute; recto-verso ou passeport fran&ccedil;ais.", 'yproject'); ?><br />
+							<?php _e("Sinon : le titre de s&eacute;jour et le passeport d'origine.", 'yproject'); ?><br />
+							<?php
+							$current_filelist_id = WDGKYCFile::get_list_by_owner_id($organisation_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_id);
+							$current_file_id = $current_filelist_id[0];
+							if ( isset($current_file_id) ):
+							?>
+							<a target="_blank" href="<?php echo $current_file_id->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_id->date_uploaded; ?></a><br />
+							<?php endif; ?>
+							<input type="file" name="org_doc_id" /> <br /><br />
+							
+							<strong><?php _e("Justificatif de domicile du g&eacute;rant ou du pr&eacute;sident", 'yproject'); ?></strong><br />
+							<?php _e("Datant de moins de 3 mois, provenant d'un fournisseur d'&eacute;nergie (&eacute;lectricit&eacute;, gaz, eau) ou d'un bailleur, ou un relev&eacute; d'imp&ocirc;t datant de moins de 3 mois", 'yproject'); ?><br />
+							<?php
+							$current_filelist_home = WDGKYCFile::get_list_by_owner_id($organisation_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_home);
+							$current_file_home = $current_filelist_home[0];
+							if ( isset($current_file_home) ):
+							?>
+							<a target="_blank" href="<?php echo $current_file_home->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_home->date_uploaded; ?></a><br />
+							<?php endif; ?>
+							<input type="file" name="org_doc_home" /> <br /><br />
+							
+							
+							<input type="hidden" name="action" value="edit-organisation" />
+
+							<input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" />
+						</form>
+						
+						<form action="" method="POST" enctype="multipart/form-data">
+							<h3><?php _e('Mangopay', 'yproject'); ?></h3>
 							
 							<?php 
 							$organisation_obj->check_strong_authentication();
-							$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status($organisation_obj->get_wpref());
-							if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
-							
 							switch ($organisation_obj->get_strong_authentication()) {
 								case 0:
 							?>
-								Afin de lutter contre le blanchiment d&apos;argent, pour tout investissement de plus de <strong><?php echo YP_STRONGAUTH_AMOUNT_LIMIT; ?>&euro;</strong> sur l&apos;ann&eacute;e,
-								ou pour retirer plus de <strong><?php echo YP_STRONGAUTH_REFUND_LIMIT; ?>&euro;</strong>,
-								nous devons transmettre les pi&egrave;ces d&apos;identit&eacute; suivantes &agrave; notre partenaire Mangopay
-								(Les fichiers doivent &ecirc;tre de type jpeg, gif, png ou pdf et leur poids inf&eacute;rieur &agrave; 2 Mo) :<br /><br />
-
-								<label for="org_file_cni" class="large">Pi&egrave;ce d&apos;identit&eacute; recto-verso de la personne repr&eacute;sentant l'organisation *</label>
-								<input type="file"name="org_file_cni" /> <br />
-
-								<label for="org_file_status" class="large">Statuts sign&eacute;s *</label>
-								<input type="file"name="org_file_status" /> <br />
-
-								<label for="org_file_extract" class="large">Extrait du registre de commerce datant de moins de 3 mois *</label>
-								<input type="file"name="org_file_extract" /> <br />
-
-								<label for="org_file_declaration" class="large">D&eacute;claration de b&eacute;n&eacute;ficiaire &eacute;conomique (si aucun actionnaire personne physique n'est identifi&eacute; dans les statuts)</label>
-								<input type="file"name="org_file_declaration" /><br />
+									<input type="submit" name="authentify_mp" value="Authentifier auprès de Mangopay" />
 							<?php
 								    break;
 								case 1:
@@ -157,14 +204,11 @@ get_header();
 								    break;
 								case 5:
 								    //Le message d'attente est affiché dans le statut de strong authentication.
+									$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status($organisation_obj->get_wpref());
+									if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
 								    break;
 							}
 							?>
-							
-							
-							<input type="hidden" name="action" value="edit-organisation" />
-
-							<input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" />
 						</form>
 							
 								

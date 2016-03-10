@@ -66,47 +66,13 @@ WDGFormProjects::form_proceed_roi_transfers();
 				<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 				<h3 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php echo $current_index; $current_index++; ?> - <?php _e('Documents d&apos;authentification', 'yproject'); ?></h3>
 				<?php if ($keep_going) {
-					$organisation_obj->submit_strong_authentication();
-					
-					global $errors_submit;
-					if (count($errors_submit->errors) > 0) { ?>
-					<ul class="errors">
-						<?php $error_messages = $errors_submit->get_error_messages();
-						foreach ($error_messages as $error_message): ?>
-							<li><?php echo $error_message; ?></li>
-						<?php endforeach; ?>
-					</ul>
-					<?php }
-					
 					$organisation_obj->check_strong_authentication();
-					$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status($organisation_obj->get_wpref());
-					if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
-
 					switch ($organisation_obj->get_strong_authentication()) {
 						case 0:
 							$keep_going = FALSE;
 							?>
-							Afin de lutter contre le blanchiment d&apos;argent, pour tout investissement de plus de <strong><?php echo YP_STRONGAUTH_AMOUNT_LIMIT; ?>&euro;</strong> sur l&apos;ann&eacute;e,
-							ou pour retirer plus de <strong><?php echo YP_STRONGAUTH_REFUND_LIMIT; ?>&euro;</strong>,
-							nous devons transmettre les pi&egrave;ces d&apos;identit&eacute; suivantes &agrave; notre partenaire Mangopay
-							(Les fichiers doivent &ecirc;tre de type jpeg, gif, png ou pdf et leur poids inf&eacute;rieur &agrave; 2 Mo) :<br /><br />
-
-							<form action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
-							    <label for="org_file_cni" class="large">Pi&egrave;ce d&apos;identit&eacute; recto-verso de la personne repr&eacute;sentant l'organisation *</label>
-							    <input type="file"name="org_file_cni" /> <br />
-
-							    <label for="org_file_status" class="large">Statuts sign&eacute;s *</label>
-							    <input type="file"name="org_file_status" /> <br />
-
-							    <label for="org_file_extract" class="large">Extrait du registre de commerce datant de moins de 3 mois *</label>
-							    <input type="file"name="org_file_extract" /> <br />
-
-							    <label for="org_file_declaration" class="large">D&eacute;claration de b&eacute;n&eacute;ficiaire &eacute;conomique (si aucun actionnaire personne physique n'est identifi&eacute; dans les statuts)</label>
-							    <input type="file"name="org_file_declaration" /><br />
-
-							    <input type="hidden" name="action" value="add_authentication_file" />
-							    <input type="submit" value="<?php _e('Envoyer', 'yproject'); ?>" class="button" />
-							</form>
+							Afin de lutter contre le blanchiment d&apos;argent, vous devez vous authentifier auprès de notre partenaire de paiement.<br />
+							Rendez-vous sur la <a href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref; ?>">page de votre organisation</a>.
 							<?php
 							break;
 						case 1:
@@ -118,7 +84,8 @@ WDGFormProjects::form_proceed_roi_transfers();
 							$keep_going = FALSE;
 							if (WP_IS_DEV_SITE) $keep_going = TRUE;
 							$display_rib = TRUE;
-							//Le message d'attente est affiché dans le statut de strong authentication.
+							$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status($organisation_obj->get_wpref());
+							if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
 							break;
 					}
 				} ?>
