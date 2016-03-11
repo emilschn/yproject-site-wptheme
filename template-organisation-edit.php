@@ -8,6 +8,7 @@
 <?php 
 $organisation_obj = YPOrganisation::current();
 YPOrganisation::edit($organisation_obj);
+$organisation_obj->send_kyc();
 ypcf_init_mangopay_user($organisation_obj->get_creator(), TRUE);
 get_header();
 ?>
@@ -60,6 +61,12 @@ get_header();
 							?>
 							<label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?></label>
 							<em><?php echo $organisation_obj->get_name(); ?></em><br />
+							
+							<label for="org_email"><?php _e('E-mail de contact', 'yproject'); ?></label>
+							<input type="text" name="org_email" value="<?php echo $organisation_obj->get_email(); ?>" /><br />
+							
+							<label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?></label>
+							<input type="text" name="org_description" value="<?php echo $organisation_obj->get_description(); ?>" /><br />
 
 							<?php /*
 							<label for="org_type"><?php _e('Type d&apos;organisation', 'yproject'); ?></label>
@@ -186,15 +193,34 @@ get_header();
 							<input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" />
 						</form>
 						
+						
+						<h3><?php _e('Lemonway', 'yproject'); ?></h3>
+						
+						<?php $organisation_lemonway_authentication_status = $organisation_obj->get_lemonway_status(); ?>
+						<?php if ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_blocked): ?>
+							<?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIREN. Ainsi que les 4 documents ci-dessus.", 'yproject'); ?><br />
+						<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_ready): ?>
+							<form action="" method="POST" enctype="multipart/form-data">
+								<input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
+							</form>
+						<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_waiting): ?>
+							<?php _e("L'organisation est en cours d'authentification aupr&egrave;s de notre partenaire.", 'yproject'); ?>
+						<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_registered): ?>
+							<?php _e("L'organisation est bien authentifi&eacute;e aupr&egrave;s de notre partenaire.", 'yproject'); ?>
+						<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_rejected): ?>
+							<?php _e("L'organisation a &eacute;t&eacute; refus&eacute;e par notre partenaire.", 'yproject'); ?>
+						<?php endif; ?>
+						
+						
+						<h3><?php _e('Mangopay', 'yproject'); ?></h3>
 						<form action="" method="POST" enctype="multipart/form-data">
-							<h3><?php _e('Mangopay', 'yproject'); ?></h3>
 							
 							<?php 
 							$organisation_obj->check_strong_authentication();
 							switch ($organisation_obj->get_strong_authentication()) {
 								case 0:
 							?>
-									<input type="submit" name="authentify_mp" value="Authentifier auprès de Mangopay" />
+									<input type="submit" class="button" name="authentify_mp" value="Authentifier chez Mangopay" />
 							<?php
 								    break;
 								case 1:

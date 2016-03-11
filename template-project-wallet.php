@@ -65,30 +65,42 @@ WDGFormProjects::form_proceed_roi_transfers();
 				
 				<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 				<h3 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php echo $current_index; $current_index++; ?> - <?php _e('Documents d&apos;authentification', 'yproject'); ?></h3>
-				<?php if ($keep_going) {
-					$organisation_obj->check_strong_authentication();
-					switch ($organisation_obj->get_strong_authentication()) {
-						case 0:
-							$keep_going = FALSE;
-							?>
-							Afin de lutter contre le blanchiment d&apos;argent, vous devez vous authentifier auprès de notre partenaire de paiement.<br />
-							Rendez-vous sur la <a href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref; ?>">page de votre organisation</a>.
+					<?php if ($keep_going): ?>
+						<?php if ($campaign->get_payment_provider() == "mangopay"): ?>
 							<?php
-							break;
-						case 1:
-							$display_rib = TRUE;
-							_e('Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Mangopay.', 'yproject');
-							?><br /><br /><?php
-							break;
-						case 5:
-							$keep_going = FALSE;
-							if (WP_IS_DEV_SITE) $keep_going = TRUE;
-							$display_rib = TRUE;
-							$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status($organisation_obj->get_wpref());
-							if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
-							break;
-					}
-				} ?>
+							$organisation_obj->check_strong_authentication();
+							switch ($organisation_obj->get_strong_authentication()) {
+								case 0:
+									$keep_going = FALSE;
+									?>
+									Afin de lutter contre le blanchiment d&apos;argent, vous devez vous authentifier auprès de notre partenaire de paiement.<br />
+									Rendez-vous sur la <a href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref; ?>">page de votre organisation</a>.
+									<?php
+									break;
+								case 1:
+									$display_rib = TRUE;
+									_e('Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Mangopay.', 'yproject');
+									?><br /><br /><?php
+									break;
+								case 5:
+									$keep_going = FALSE;
+									if (WP_IS_DEV_SITE) $keep_going = TRUE;
+									$display_rib = TRUE;
+									$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status($organisation_obj->get_wpref());
+									if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
+									break;
+							} ?>
+
+						<?php elseif ($campaign->get_payment_provider() == "lemonway"): ?>
+							<?php if ($organisation_obj->get_lemonway_status() == YPOrganisation::$lemonway_status_registered): $display_rib = TRUE; ?>
+								<?php _e('Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Lemonway.', 'yproject'); ?>
+							<?php else: $keep_going = FALSE; ?>
+								Votre organisation n'est pas encore identifi&eacute;e par notre partenaire Lemonway.<br />
+								Rendez-vous sur la <a href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref; ?>">page de votre organisation</a>.
+							<?php endif; ?>
+									
+						<?php endif; ?>
+					<?php endif; ?>
 				<?php else: $display_rib = TRUE; ?>
 				<?php endif; ?>
 						
