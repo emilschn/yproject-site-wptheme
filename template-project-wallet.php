@@ -7,6 +7,7 @@ global $campaign_id;
 $campaign_id = $_GET['campaign_id'];
 $post_campaign = get_post($campaign_id);
 $campaign = atcf_get_campaign($post_campaign);
+WDGFormProjects::form_submit_account_files();
 $result_proceed_roi_list = WDGFormProjects::form_proceed_roi_list($campaign);
 WDGFormProjects::form_proceed_roi_return();
 WDGFormProjects::form_proceed_roi_transfers();
@@ -94,7 +95,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 						<?php elseif ($campaign->get_payment_provider() == "lemonway"): ?>
 							<?php if ($organisation_obj->get_lemonway_status() == YPOrganisation::$lemonway_status_registered): $display_rib = TRUE; ?>
 								<?php _e('Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Lemonway.', 'yproject'); ?>
-							<?php else: $keep_going = FALSE; ?>
+							<?php else: if (!WP_IS_DEV_SITE) { $keep_going = FALSE; } ?>
 								Votre organisation n'est pas encore identifi&eacute;e par notre partenaire Lemonway.<br />
 								Rendez-vous sur la <a href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref; ?>">page de votre organisation</a>.
 							<?php endif; ?>
@@ -129,6 +130,8 @@ WDGFormProjects::form_proceed_roi_transfers();
 				}
 				?>
 						
+				
+				
 				<h3 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php echo $current_index; $current_index++; ?> - <?php _e('Dans votre porte-monnaie', 'yproject'); ?></h3>
 				<?php
 				if ($keep_going) { $organisation_obj->submit_transfer_wallet(); }
@@ -149,10 +152,89 @@ WDGFormProjects::form_proceed_roi_transfers();
 					</form>
 				<?php } ?>
 					
+				
+				
 				<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 				<h2 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php _e('Reverser aux investisseurs', 'yproject'); ?></h2>
 				<?php if ($keep_going) { ?>
 				<h3>Dates de vos versements :</h3>
+				
+				<?php $declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $campaign->ID ); ?>
+				<?php if ($declaration_list): ?>
+					<ul class="payment-list">
+					<?php foreach ( $declaration_list as $declaration ): ?>
+						<li>
+						    <h4><?php echo $declaration->get_formatted_date(); ?></h4>
+							<div>
+								<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration ): ?>
+									<span class="errors">Le montant n'est pas encore défini</span>
+
+								<?php else: ?>
+									<?php if (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
+										<b>Montant à verser : </b><?php echo $declaration->amount; ?> &euro;<br />
+										<form action="" method="POST" enctype="">
+										<input type="hidden" name="action" value="proceed_roi" />
+										<input type="hidden" name="proceed_roi_<?php echo $declaration->id; ?>" value="<?php echo $declaration->id; ?>" />
+										<input type="submit" class="button" value="<?php _e('Reverser', 'yproject'); ?>" />
+										</form>
+
+									<?php else: ?>
+										<?php /*if ($post_payment_status->post_status == "pending"): ?>
+											<?php $withdrawal_obj = ypcf_mangopay_get_withdrawalcontribution_by_id($post_payment_status->post_content); ?>
+											<?php if ($withdrawal_obj->Status == "ACCEPTED"): ?>
+												<?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Virement effectué sur le porte-monnaie.
+
+												<?php if (current_user_can('manage_options')): ?>
+													<br /><br />
+													<a href="#transfer-roi" class="button wdg-button-lightbox-open transfert-roi-open" data-lightbox="transfer-roi" data-campaignid="<?php echo $campaign->ID; ?>" data-paymentitem="<?php echo $i; ?>">Transférer le retour sur investissement</a> [Visible uniquement des administrateurs]
+												<?php endif; ?>
+
+											<?php elseif ($withdrawal_obj->Status == "CREATED"): ?>
+												Virement en attente de réception par notre partenaire Mangopay. Rappel du virement à effectuer :<br />
+												- Propriétaire du compte : <?php echo $withdrawal_obj->BankAccountOwner; ?><br />
+												- IBAN : <?php echo $withdrawal_obj->BankAccountIBAN; ?><br />
+												- BIC : <?php echo $withdrawal_obj->BankAccountBIC; ?><br />
+												- Code de référence : <?php echo $withdrawal_obj->GeneratedReference; ?><br />
+												- Montant : <?php echo $payment_list[$i]; ?> &euro;<br />
+
+											<?php else: ?>
+												Problème de virement
+											<?php endif; ?>
+
+										<?php elseif ($post_payment_status->post_status == "published"): ?>
+											<?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Versement effectué auprès des investisseurs.
+
+										<?php endif; */ ?>
+									<?php endif; ?>
+								<?php endif; ?>
+									
+									
+								<div>
+									<b>Comptes annuels :</b><br />
+									<?php $declaration_file_list = $declaration->get_file_list(); ?>
+									<?php if ( empty( $declaration_file_list ) ): ?>
+										Aucun fichier pour l'instant<br />
+									<?php else: ?>
+										<ul>
+											<?php $i = 0; foreach ($declaration_file_list as $declaration_file): $i++; ?>
+											<li><a href="<?php echo $declaration_file; ?>" target="_blank">Fichier <?php echo $i; ?></a></li>
+											<?php endforeach; ?>
+										</ul>
+									<?php endif; ?>
+									
+									<form action="" method="POST" enctype="multipart/form-data">
+										<input type="file" name="accounts_file_<?php echo $declaration->id; ?>" />
+										<input type="submit" class="button" value="<?php _e('Envoyer', 'yproject'); ?>" />
+									</form>
+								</div>
+							</div>
+						</li>
+					<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
+				
+				
+				<?php /*
 				    <?php
 				    $fp_date = $campaign->first_payment_date();
 				    $fp_dd = mysql2date( 'd', $fp_date, false );
@@ -252,6 +334,8 @@ WDGFormProjects::form_proceed_roi_transfers();
 				    <?php else: ?>
 					<span class="disabled">Il manque certains paramètres. Contactez-nous.</span>
 				    <?php endif; ?>
+				 * 
+				 */ ?>
 				<?php } ?>
 				
 				

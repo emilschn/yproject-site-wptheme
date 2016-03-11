@@ -213,29 +213,22 @@ get_header();
 						
 						
 						<h3><?php _e('Mangopay', 'yproject'); ?></h3>
-						<form action="" method="POST" enctype="multipart/form-data">
-							
-							<?php 
-							$organisation_obj->check_strong_authentication();
-							switch ($organisation_obj->get_strong_authentication()) {
-								case 0:
-							?>
-									<input type="submit" class="button" name="authentify_mp" value="Authentifier chez Mangopay" />
+						<?php $organisation_obj->check_strong_authentication(); ?>
+						<?php switch ($organisation_obj->get_strong_authentication()) {
+							case 0: ?>
+								Nous contacter
 							<?php
-								    break;
-								case 1:
-							?>
+								break;
+							case 1: ?>
 								Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Mangopay. Vous pouvez maintenant investir les sommes que vous souhaitez.<br /><br />
 							<?php
-								    break;
-								case 5:
-								    //Le message d'attente est affiché dans le statut de strong authentication.
-									$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status($organisation_obj->get_wpref());
-									if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
-								    break;
-							}
-							?>
-						</form>
+								break;
+							case 5:
+								//Le message d'attente est affiché dans le statut de strong authentication.
+								$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status($organisation_obj->get_wpref());
+								if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
+								break;
+						} ?>
 							
 								
 						<?php
