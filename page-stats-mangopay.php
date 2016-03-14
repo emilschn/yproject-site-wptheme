@@ -23,6 +23,66 @@ get_header();
 		?>
 		
 		    <h1>Stats Mangopay</h1>
+			
+			<?php /* $result = ypcf_mangopay_get_operations_by_wallet_id(36782013); print_r($result); */ ?>
+			
+			<?php /*
+    $mangopay_newrefund = request('refunds', 'POST', '{
+					    "ContributionID" : 42559862,
+					    "UserID" : 42559571
+					}'); */
+			?>
+			
+			<?php /*
+			// Validation investissement échoué
+			$post_campaign = get_post(8435);
+			$campaign = new ATCF_Campaign($post_campaign);
+			$purchase_key = 42574232;
+			$mangopay_contribution = ypcf_mangopay_get_contribution_by_id($purchase_key);
+			$amount = $mangopay_contribution->Amount / 100;
+			$save_user_id = 3580;
+			$current_user = get_user_by('id', $save_user_id);
+			$save_display_name = $current_user->display_name;
+			
+			$user_info = array(
+				'id'			=> $save_user_id,
+				'gender'		=> $current_user->get('user_gender'),
+				'email'			=> $current_user->user_email,
+				'first_name'	=> $current_user->user_firstname,
+				'last_name'		=> $current_user->user_lastname,
+				'discount'		=> '',
+				'address'		=> array()
+			);
+
+			$cart_details = array(
+				array(
+					'name'			=> $campaign->data->post_title,
+					'id'			=> $campaign->ID,
+					'item_number'	=> array(
+						'id'			=> $campaign->ID,
+						'options'		=> $options_cart
+					),
+					'price'			=> 1,
+					'quantity'		=> $amount
+				)
+			);
+
+			$payment_data = array( 
+				'price'			=> $amount, 
+				'date'			=> date('Y-m-d H:i:s'), 
+				'user_email'	=> $current_user->user_email,
+				'purchase_key'	=> $purchase_key,
+				'currency'		=> edd_get_currency(),
+				'downloads'		=> array($campaign->ID),
+				'user_info'		=> $user_info,
+				'cart_details'	=> $cart_details,
+				'status'		=> 'pending'
+			);
+			$payment_id = edd_insert_payment( $payment_data );
+			update_post_meta( $payment_id, '_edd_payment_ip', $_SERVER['REMOTE_ADDR'] );
+			edd_record_sale_in_log($campaign->ID, $payment_id);
+			ypcf_get_updated_payment_status($payment_id); */
+			?>
 		
 		    <?php
 		    /*
