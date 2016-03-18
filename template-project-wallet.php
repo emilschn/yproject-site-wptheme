@@ -8,8 +8,9 @@ $campaign_id = $_GET['campaign_id'];
 $post_campaign = get_post($campaign_id);
 $campaign = atcf_get_campaign($post_campaign);
 WDGFormProjects::form_submit_account_files();
-$result_proceed_roi_list = WDGFormProjects::form_proceed_roi_list($campaign);
-WDGFormProjects::form_proceed_roi_return();
+WDGFormProjects::form_submit_roi_payment();
+//$result_proceed_roi_list = WDGFormProjects::form_proceed_roi_list($campaign);
+//WDGFormProjects::form_proceed_roi_return();
 WDGFormProjects::form_proceed_roi_transfers();
 ?>
 
@@ -171,11 +172,13 @@ WDGFormProjects::form_proceed_roi_transfers();
 
 								<?php else: ?>
 									<?php if (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
-										<b>Montant à verser : </b><?php echo $declaration->amount; ?> &euro;<br />
+										<b>Montant à verser : </b><?php echo $declaration->get_amount_to_pay(); ?> &euro;<br />
+										
 										<form action="" method="POST" enctype="">
 										<input type="hidden" name="action" value="proceed_roi" />
-										<input type="hidden" name="proceed_roi_<?php echo $declaration->id; ?>" value="<?php echo $declaration->id; ?>" />
-										<input type="submit" class="button" value="<?php _e('Reverser', 'yproject'); ?>" />
+										<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
+										<input type="submit" name="payment_card" class="button" value="<?php _e('Payer par carte', 'yproject'); ?>" />
+										<input type="submit" name="payment_wire" class="button" value="<?php _e('Payer par virement', 'yproject'); ?>" />
 										</form>
 
 									<?php else: ?>
