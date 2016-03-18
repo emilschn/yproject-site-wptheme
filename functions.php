@@ -1,4 +1,13 @@
-<?php 
+<?php
+function yproject_init() {
+	//possibilité de mettre tag aux pages
+	register_taxonomy_for_object_type('post_tag', 'page');
+	WDGCronActions::init_actions();
+    WDGUser::login();
+    WDGUser::register();
+}
+add_action('init', 'yproject_init');
+
 // Transforme un tag en meta keyword
 function csv_tags(){
 		$posttags = get_the_tags();
@@ -9,11 +18,6 @@ function csv_tags(){
 		echo '<meta name="keywords" content="'.$csv_tags.'" />';
 	}
 }
-//possibilité de mettre tag aux pages
-function tags_support_all(){
-	register_taxonomy_for_object_type('post_tag', 'page');
-}
-add_action('init', 'tags_support_all');
 
 //assure que les tags sont inclus dans les requetes
 function tags_support_query($wp_query){
@@ -113,13 +117,8 @@ add_action( 'send_headers', 'varnish_safe_http_headers' );
 
 
 
-/** GESTION DU LOGIN **/
-function yproject_init() {
-    WDGUser::login();
-    WDGUser::register();
-}
-add_action('init', 'yproject_init');
 
+/** GESTION DU LOGIN **/
 function yproject_redirect_logout(){
 	if (isset($_GET['page_id'])) {
 		$page_id = $_GET['page_id'];
