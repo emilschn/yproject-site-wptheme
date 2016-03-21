@@ -9,6 +9,7 @@ $post_campaign = get_post($campaign_id);
 $campaign = atcf_get_campaign($post_campaign);
 WDGFormProjects::form_submit_account_files();
 WDGFormProjects::form_submit_roi_payment();
+$return_lemonway_card = WDGFormProjects::return_lemonway_card();
 //$result_proceed_roi_list = WDGFormProjects::form_proceed_roi_list($campaign);
 //WDGFormProjects::form_proceed_roi_return();
 WDGFormProjects::form_proceed_roi_transfers();
@@ -30,16 +31,24 @@ WDGFormProjects::form_proceed_roi_transfers();
 				    the_post();
 				    the_content();
 				}
+				?>
+			
+				<?php if ( $return_lemonway_card == TRUE ): ?>
+					<span class="success">Paiement effectué</span>
+				<?php elseif ( $return_lemonway_card !== FALSE ): ?>
+					<span class="errors">Il y a eu une erreur au cours de votre paiement.</span>
+				<?php endif; ?>
 				
-				if ($result_proceed_roi_list != FALSE) { ?>
+				<?php if ($result_proceed_roi_list != FALSE): ?>
 					Le virement en attente de réception par notre partenaire Mangopay. Rappel du virement à effectuer :<br />
 					- Propriétaire du compte : <?php echo $result_proceed_roi_list->BankAccountOwner; ?><br />
 					- IBAN : <?php echo $result_proceed_roi_list->BankAccountIBAN; ?><br />
 					- BIC : <?php echo $result_proceed_roi_list->BankAccountBIC; ?><br />
 					- Code de référence : <?php echo $result_proceed_roi_list->GeneratedReference; ?><br />
 					- Montant : <?php echo ($result_proceed_roi_list->Amount / 100); ?> &euro;<br />
-				<?php }
+				<?php endif; ?>
 				
+				<?php
 				//Init variables utiles
 				$keep_going = TRUE;
 				$display_rib = FALSE;
@@ -170,45 +179,24 @@ WDGFormProjects::form_proceed_roi_transfers();
 								<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration ): ?>
 									<span class="errors">Le montant n'est pas encore défini</span>
 
-								<?php else: ?>
-									<?php if (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
-										<b>Montant à verser : </b><?php echo $declaration->get_amount_to_pay(); ?> &euro;<br />
-										
-										<form action="" method="POST" enctype="">
+								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
+									<b>Montant à verser : </b><?php echo $declaration->get_amount_to_pay(); ?> &euro;<br />
+
+									<form action="" method="POST" enctype="">
 										<input type="hidden" name="action" value="proceed_roi" />
 										<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
 										<input type="submit" name="payment_card" class="button" value="<?php _e('Payer par carte', 'yproject'); ?>" />
 										<input type="submit" name="payment_wire" class="button" value="<?php _e('Payer par virement', 'yproject'); ?>" />
-										</form>
+									</form>
 
-									<?php else: ?>
-										<?php /*if ($post_payment_status->post_status == "pending"): ?>
-											<?php $withdrawal_obj = ypcf_mangopay_get_withdrawalcontribution_by_id($post_payment_status->post_content); ?>
-											<?php if ($withdrawal_obj->Status == "ACCEPTED"): ?>
-												<?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Virement effectué sur le porte-monnaie.
+								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
+									Votre paiement de <?php echo $declaration->get_amount_to_pay(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+									Le reversement vers vos investisseurs est en cours.
 
-												<?php if (current_user_can('manage_options')): ?>
-													<br /><br />
-													<a href="#transfer-roi" class="button wdg-button-lightbox-open transfert-roi-open" data-lightbox="transfer-roi" data-campaignid="<?php echo $campaign->ID; ?>" data-paymentitem="<?php echo $i; ?>">Transférer le retour sur investissement</a> [Visible uniquement des administrateurs]
-												<?php endif; ?>
+								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_finished ): ?>
+									Votre paiement de <?php echo $declaration->get_amount_to_pay(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+									Vos investisseurs ont bien reçu leur retour sur investissement.
 
-											<?php elseif ($withdrawal_obj->Status == "CREATED"): ?>
-												Virement en attente de réception par notre partenaire Mangopay. Rappel du virement à effectuer :<br />
-												- Propriétaire du compte : <?php echo $withdrawal_obj->BankAccountOwner; ?><br />
-												- IBAN : <?php echo $withdrawal_obj->BankAccountIBAN; ?><br />
-												- BIC : <?php echo $withdrawal_obj->BankAccountBIC; ?><br />
-												- Code de référence : <?php echo $withdrawal_obj->GeneratedReference; ?><br />
-												- Montant : <?php echo $payment_list[$i]; ?> &euro;<br />
-
-											<?php else: ?>
-												Problème de virement
-											<?php endif; ?>
-
-										<?php elseif ($post_payment_status->post_status == "published"): ?>
-											<?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Versement effectué auprès des investisseurs.
-
-										<?php endif; */ ?>
-									<?php endif; ?>
 								<?php endif; ?>
 									
 									
