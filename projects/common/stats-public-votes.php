@@ -44,8 +44,8 @@
 jQuery(document).ready( function($) {
     var ctxPie = $("#canvas-pie").get(0).getContext("2d");
     var dataPie = [
-	{value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: <?php _e("Oui", 'yproject'); ?>}, 
-	{value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: <?php _e("Non", 'yproject'); ?>}
+	{value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "<?php _e("Oui", 'yproject'); ?>"}, 
+	{value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: "<?php _e("Non", 'yproject'); ?>"}
     ];
     var optionsPie = {
 	legend: true,
@@ -77,7 +77,7 @@ jQuery(document).ready( function($) {
     
     var ctxHorizontal = $("#canvas-horizontal").get(0).getContext("2d");
     var dataHorizontal = {
-	labels: [<?php _e("autres", 'yproject'); ?>, <?php _e("previsionnel financier", 'yproject'); ?>, <?php _e("structuration de l'equipe", 'yproject'); ?>, <?php _e("produit / service", 'yproject'); ?>, <?php _e("impact societal", 'yproject'); ?>],
+	labels: ["<?php _e("autres", 'yproject'); ?>", "<?php _e("previsionnel financier", 'yproject'); ?>", "<?php _e("structuration de l'equipe", 'yproject'); ?>", "<?php _e("produit / service", 'yproject'); ?>", "<?php _e("impact societal", 'yproject'); ?>"],
 	datasets: [{
 	    fillColor: "#CCC",
 	    strokeColor: "#CCC",

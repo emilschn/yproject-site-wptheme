@@ -79,10 +79,8 @@ get_header();
 							<label for="org_idnumber"><?php _e('Num&eacute;ro SIREN', 'yproject'); ?></label>
 							<input type="text" name="org_idnumber" value="<?php echo $organisation_obj->get_idnumber(); ?>" /><br />
 
-							<?php /*
 							<label for="org_rcs"><?php _e('RCS', 'yproject'); ?></label>
 							<input type="text" name="org_rcs" value="<?php echo $organisation_obj->get_rcs(); ?>" /><br />
-							 */ ?>
 
 							<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?></label>
 							<input type="text" name="org_capital" value="<?php echo $organisation_obj->get_capital(); ?>" /><br />
