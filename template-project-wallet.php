@@ -7,6 +7,7 @@ global $campaign_id;
 $campaign_id = $_GET['campaign_id'];
 $post_campaign = get_post($campaign_id);
 $campaign = atcf_get_campaign($post_campaign);
+$wdg_user = WDGUser::current();
 WDGFormProjects::form_submit_turnover();
 WDGFormProjects::form_submit_account_files();
 WDGFormProjects::form_submit_roi_payment();
@@ -54,9 +55,6 @@ WDGFormProjects::form_proceed_roi_transfers();
 				$keep_going = TRUE;
 				$display_rib = FALSE;
 				$current_index = 1;
-				global $campaign_id, $current_user; 
-				$post_campaign = get_post($campaign_id);
-				$campaign = atcf_get_campaign($post_campaign);
 				?>
 		    
 				<h2><?php _e('Porte-monnaie de ', 'yproject'); echo $post_campaign->post_title; ?></h2>
@@ -208,7 +206,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 											<button type="submit" class="button">Enregistrer la déclaration</button>
 										</form>
 
-									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
+									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_payment ):/* ?>
 										<b>Montant à verser : </b><?php echo $declaration->amount; ?> &euro;<br />
 
 										<form action="" method="POST" enctype="">
@@ -217,9 +215,34 @@ WDGFormProjects::form_proceed_roi_transfers();
 											<input type="submit" name="payment_card" class="button" value="<?php _e('Payer par carte', 'yproject'); ?>" />
 										</form>
 
-									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
+									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ):*/ ?>
 										Votre paiement de <?php echo $declaration->amount; ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
-										Le reversement vers vos investisseurs est en cours.
+										Le versement vers vos investisseurs est en cours.
+										
+										<?php if ($wdg_user->is_admin()): ?>
+											<br /><br />
+											<a href="#transfer-roi" class="button transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>">Procéder aux versements</a>
+											
+											<?php ob_start(); ?>
+											<h3><?php _e('Reverser aux utilisateurs', 'yproject'); ?></h3>
+											<div id="lightbox-content">
+												<div class="loading-image align-center"><img id="ajax-email-loader-img" src="<?php echo get_stylesheet_directory_uri(); ?>/images/loading.gif" alt="chargement" /></div>
+												<div class="loading-content"></div>
+												<div class="loading-form align-center hidden">
+													<form action="" method="POST">
+														<input type="hidden" name="action" value="proceed_roi_transfers" />
+														<input type="hidden" id="hidden-roi-id" name="roi_id" value="" />
+														<input type="submit" class="button" value="Transférer" />
+													</form>
+												</div>
+											</div>
+											<?php
+											$lightbox_content = ob_get_contents();
+											ob_end_clean();
+											echo do_shortcode('[yproject_lightbox id="transfer-roi"]' . $lightbox_content . '[/yproject_lightbox]');
+											?>
+										
+										<?php endif; ?>
 
 									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_finished ): ?>
 										Votre paiement de <?php echo $declaration->amount; ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
@@ -254,27 +277,6 @@ WDGFormProjects::form_proceed_roi_transfers();
 						</ul>
 					<?php endif; ?>
 
-
-					<?php /*
-						<?php
-						<?php 
-						$lightbox_content = '<h3>' . __('Reverser aux utilisateurs', 'yproject') . '</h3>';
-						$lightbox_content .= '<div id="lightbox-content">';
-						$lightbox_content .= '<div class="loading-image align-center"><img id="ajax-email-loader-img" src="'.get_stylesheet_directory_uri().'/images/loading.gif" alt="chargement" /></div>';
-						$lightbox_content .= '<div class="loading-content"></div>';
-						$lightbox_content .= '<div class="loading-form align-center hidden"><form action="" method="POST">';
-						$lightbox_content .= '<input type="hidden" name="action" value="proceed_roi_transfers" />';
-						$lightbox_content .= '<input type="hidden" id="hidden-roi-id" name="roi_id" value="" />';
-						$lightbox_content .= '<input type="submit" class="button" value="Transférer" />';
-						$lightbox_content .= '</form></div>';
-						$lightbox_content .= '</div>';
-						echo do_shortcode('[yproject_lightbox id="transfer-roi"]' . $lightbox_content . '[/yproject_lightbox]');
-						?>
-						<?php else: ?>
-						<span class="disabled">Il manque certains paramètres. Contactez-nous.</span>
-						<?php endif; ?>
-					 * 
-					 */ ?>
 				<?php } ?>
 				
 				

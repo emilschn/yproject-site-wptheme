@@ -11,9 +11,9 @@ var WDGProjectDashboard = (function($) {
 			//Gestion de l'AJAX pour la lightbox de ROI
 			if ($(".transfert-roi-open").length > 0) {
 				$(".transfert-roi-open").click(function() {
-					if ($(this).data('paymentitem') !== WDGProjectDashboard.currentOpenedROI) {
+					if ($(this).data('roideclaration-id') !== WDGProjectDashboard.currentOpenedROI) {
 						//Affichage
-						WDGProjectDashboard.currentOpenedROI = $(this).data('paymentitem');
+						WDGProjectDashboard.currentOpenedROI = $(this).data('roideclaration-id');
 						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-content").html("");
 						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-image").show();
 						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").hide();
@@ -24,8 +24,7 @@ var WDGProjectDashboard = (function($) {
 							'url' : ajax_object.ajax_url,
 							'data': { 
 							      'action': 'display_roi_user_list',
-							      'campaign_id' : $(this).data('campaignid'),
-							      'payment_item' : $(this).data('paymentitem')
+							      'roideclaration_id' : $(this).data('roideclaration-id')
 							}
 						}).done(function(result){
 							var content = '<table>';

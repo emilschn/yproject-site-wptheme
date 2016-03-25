@@ -3774,6 +3774,12 @@ ul.invest-mean-payment li img {
 #project-wallet ul.payment-list li div {
     margin: 10px 0px;
 }
+#project-wallet ul.payment-list li div.wdg-lightbox, #project-wallet ul.payment-list li div.wdg-lightbox-click-catcher {
+	margin: 0px;
+}
+#project-wallet ul.payment-list li div.wdg-lightbox-padder {
+	margin: 5vh auto;
+}
 
 /*******************************************************************************
 * THEME PHOTOREPORTER
