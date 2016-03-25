@@ -192,6 +192,7 @@ get_header();
 						</form>
 						
 						
+						<?php if (current_user_can('manage_options')): ?>
 						<h3><?php _e('Lemonway', 'yproject'); ?></h3>
 						
 						<?php $organisation_lemonway_authentication_status = $organisation_obj->get_lemonway_status(); ?>
@@ -227,6 +228,7 @@ get_header();
 								if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
 								break;
 						} ?>
+						<?php endif; ?>
 							
 								
 						<?php

@@ -7,6 +7,7 @@ global $campaign_id;
 $campaign_id = $_GET['campaign_id'];
 $post_campaign = get_post($campaign_id);
 $campaign = atcf_get_campaign($post_campaign);
+WDGFormProjects::form_submit_turnover();
 WDGFormProjects::form_submit_account_files();
 WDGFormProjects::form_submit_roi_payment();
 $return_lemonway_card = WDGFormProjects::return_lemonway_card();
@@ -152,181 +153,128 @@ WDGFormProjects::form_proceed_roi_transfers();
 				}
 				?>
 				<span <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php echo $current_wallet_amount; ?> &euro;</span><br /><br />
-				<?php if (!$keep_going || $current_wallet_amount == 0) { ?>
+				<?php if (!$keep_going || $current_wallet_amount == 0): ?>
 				<span class="button disabled"><?php _e('Proc&eacute;der au virement', 'yproject'); ?></span>
-				<?php } else { ?>
+				<?php else: ?>
 					<form action="" method="POST">
 						<input type="hidden" name="mangopaytoaccount" value="1" />
 						<input type="hidden" name="action" value="transfer_to_account" />
 						<input type="submit" class="button" value="<?php _e('Proc&eacute;der au virement', 'yproject'); ?>" />
 					</form>
-				<?php } ?>
+				<?php endif; ?>
 					
 				
 				
 				<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 				<h2 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php _e('Reverser aux investisseurs', 'yproject'); ?></h2>
 				<?php if ($keep_going) { ?>
-				<h3>Dates de vos versements :</h3>
-				
-				<?php $declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $campaign->ID ); ?>
-				<?php if ($declaration_list): ?>
-					<ul class="payment-list">
-					<?php foreach ( $declaration_list as $declaration ): ?>
-						<li>
-						    <h4><?php echo $declaration->get_formatted_date(); ?></h4>
-							<div>
-								<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration ): ?>
-									<span class="errors">Le montant n'est pas encore défini</span>
+					<h3>Dates de vos versements :</h3>
 
-								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
-									<b>Montant à verser : </b><?php echo $declaration->get_amount_to_pay(); ?> &euro;<br />
-
-									<form action="" method="POST" enctype="">
-										<input type="hidden" name="action" value="proceed_roi" />
-										<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
-										<input type="submit" name="payment_card" class="button" value="<?php _e('Payer par carte', 'yproject'); ?>" />
-										<input type="submit" name="payment_wire" class="button" value="<?php _e('Payer par virement', 'yproject'); ?>" />
-									</form>
-
-								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
-									Votre paiement de <?php echo $declaration->get_amount_to_pay(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
-									Le reversement vers vos investisseurs est en cours.
-
-								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_finished ): ?>
-									Votre paiement de <?php echo $declaration->get_amount_to_pay(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
-									Vos investisseurs ont bien reçu leur retour sur investissement.
-
-								<?php endif; ?>
-									
-									
-								<div>
-									<b>Comptes annuels :</b><br />
-									<?php $declaration_file_list = $declaration->get_file_list(); ?>
-									<?php if ( empty( $declaration_file_list ) ): ?>
-										Aucun fichier pour l'instant<br />
-									<?php else: ?>
-										<ul>
-											<?php $i = 0; foreach ($declaration_file_list as $declaration_file): $i++; ?>
-											<li><a href="<?php echo $declaration_file; ?>" target="_blank">Fichier <?php echo $i; ?></a></li>
-											<?php endforeach; ?>
-										</ul>
-									<?php endif; ?>
-									
-									<form action="" method="POST" enctype="multipart/form-data">
-										<input type="file" name="accounts_file_<?php echo $declaration->id; ?>" />
-										<input type="submit" class="button" value="<?php _e('Envoyer', 'yproject'); ?>" />
-									</form>
-								</div>
-							</div>
-						</li>
-					<?php endforeach; ?>
-					</ul>
-				<?php endif; ?>
-				
-				
-				<?php /*
-				    <?php
-				    $fp_date = $campaign->first_payment_date();
-				    $fp_dd = mysql2date( 'd', $fp_date, false );
-				    $fp_mm = mysql2date( 'm', $fp_date, false );
-				    $fp_yy = mysql2date( 'Y', $fp_date, false );
-				    $payment_list = $campaign->payment_list(); 
-				    if ($campaign->funding_duration() > 0 && !empty($fp_date)): ?>
-					<ul class="payment-list">
-					    <?php for ($i = $fp_yy; $i < $campaign->funding_duration() + $fp_yy; $i++): ?>
-						<?php
-						WDGFormProjects::form_submit_yearly_account($i);
-						$payment_status = $campaign->payment_status_for_year($i);
-						if (isset($payment_status)) {
-						    $post_payment_status = get_post($payment_status);
-						    $payment_date = $post_payment_status->post_date;
-						}
-						?>
-						<li>
-						    <h4><?php echo $fp_dd . ' / ' . $fp_mm . ' / ' . $i; ?></h4>
-						    <div>
-							<?php if ($payment_list[$i] > 0): ?>
-							    <?php if (isset($payment_status)): ?>
-								    <?php if ($post_payment_status->post_status == "pending"): ?>
-									    <?php $withdrawal_obj = ypcf_mangopay_get_withdrawalcontribution_by_id($post_payment_status->post_content); ?>
-									    <?php if ($withdrawal_obj->Status == "ACCEPTED"): ?>
-										    <?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Virement effectué sur le porte-monnaie.
-
-										    <?php if (current_user_can('manage_options')): ?>
-											    <br /><br />
-											    <a href="#transfer-roi" class="button wdg-button-lightbox-open transfert-roi-open" data-lightbox="transfer-roi" data-campaignid="<?php echo $campaign->ID; ?>" data-paymentitem="<?php echo $i; ?>">Transférer le retour sur investissement</a> [Visible uniquement des administrateurs]
-										    <?php endif; ?>
-											    
-									    <?php elseif ($withdrawal_obj->Status == "CREATED"): ?>
-										    Virement en attente de réception par notre partenaire Mangopay. Rappel du virement à effectuer :<br />
-										    - Propriétaire du compte : <?php echo $withdrawal_obj->BankAccountOwner; ?><br />
-										    - IBAN : <?php echo $withdrawal_obj->BankAccountIBAN; ?><br />
-										    - BIC : <?php echo $withdrawal_obj->BankAccountBIC; ?><br />
-										    - Code de référence : <?php echo $withdrawal_obj->GeneratedReference; ?><br />
-										    - Montant : <?php echo $payment_list[$i]; ?> &euro;<br />
-											    
-									    <?php else: ?>
-										    Problème de virement
-									    <?php endif; ?>
-											    
-								    <?php elseif ($post_payment_status->post_status == "published"): ?>
-									    <?php echo $payment_date; ?> - <?php echo $payment_list[$i]; ?> &euro; - Versement effectué auprès des investisseurs.
-    
-								    <?php endif; ?>
-								
-							    <?php else: ?>
-								    <b>Montant à verser : </b><?php echo $payment_list[$i]; ?> &euro;<br />
-								    <form action="" method="POST" enctype="">
-									<input type="hidden" name="action" value="proceed_roi" />
-									<input type="hidden" name="proceed_roi_<?php echo $i; ?>" value="<?php echo $fp_dd.'_'.$fp_mm.'_'.$i; ?>" />
-									<input type="submit" class="button" value="<?php _e('Reverser', 'yproject'); ?>" />
-								    </form>
-							    <?php endif; ?>
-								    
-							<?php else: ?>
-							    <span class="errors">Le montant n'est pas encore défini</span>
-							<?php endif; ?>
-						    </div>
-						    <div>
-							<b>Comptes annuels :</b><br />
-							<?php 
-							$yearly_accounts = array();
-							$yearly_accounts = $campaign->yearly_accounts_file($i);
-							if (!empty($yearly_accounts)): ?>
-							<ul>
-							    <?php foreach ($yearly_accounts as $account_id => $yearly_account_file): ?>
-								<li><a href="<?php echo $yearly_account_file["url"]; ?>" target="_blank"><?php echo $yearly_account_file["filename"][0]; ?></a></li>
-							    <?php endforeach; ?>
-							</ul>
-							<?php endif; ?>
-							<form action="" method="POST" enctype="multipart/form-data">
-							    <input type="hidden" name="action" value="add_account_file" />
-							    <input type="file" name="accounts_year_<?php echo $i; ?>" />
-							    <input type="submit" class="button" value="<?php _e('Envoyer', 'yproject'); ?>" />
-							</form>
-						    </div>
-						</li>
-					    <?php endfor; ?>
-					</ul>
-					<?php 
-					$lightbox_content = '<h3>' . __('Reverser aux utilisateurs', 'yproject') . '</h3>';
-					$lightbox_content .= '<div id="lightbox-content">';
-					$lightbox_content .= '<div class="loading-image align-center"><img id="ajax-email-loader-img" src="'.get_stylesheet_directory_uri().'/images/loading.gif" alt="chargement" /></div>';
-					$lightbox_content .= '<div class="loading-content"></div>';
-					$lightbox_content .= '<div class="loading-form align-center hidden"><form action="" method="POST">';
-					$lightbox_content .= '<input type="hidden" name="action" value="proceed_roi_transfers" />';
-					$lightbox_content .= '<input type="hidden" id="hidden-roi-id" name="roi_id" value="" />';
-					$lightbox_content .= '<input type="submit" class="button" value="Transférer" />';
-					$lightbox_content .= '</form></div>';
-					$lightbox_content .= '</div>';
-					echo do_shortcode('[yproject_lightbox id="transfer-roi"]' . $lightbox_content . '[/yproject_lightbox]');
+					<?php
+					$declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $campaign->ID );
+					$nb_fields = $campaign->get_turnover_per_declaration();
 					?>
-				    <?php else: ?>
-					<span class="disabled">Il manque certains paramètres. Contactez-nous.</span>
-				    <?php endif; ?>
-				 * 
-				 */ ?>
+					<?php if ($declaration_list): ?>
+						<ul class="payment-list">
+						<?php foreach ( $declaration_list as $declaration ): ?>
+							<li>
+								<h4><?php echo $declaration->get_formatted_date(); ?></h4>
+								<div>
+									<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration ): ?>
+										<form action="" method="POST" id="turnover-declaration" data-roi-percent="<?php echo $campaign->roi_percent(); ?>" data-costs-orga="<?php echo $campaign->get_costs_to_organization(); ?>">
+											<?php if ($nb_fields > 0): ?>
+											<?php $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); ?>
+											<ul>
+												<?php
+												$date_due = new DateTime($declaration->date_due);
+												$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
+												?>
+												<?php for ($i = 0; $i < $nb_fields; $i++): ?>
+												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <input type="text" name="turnover-<?php echo $i; ?>" id="turnover-<?php echo $i; ?>" /></li>
+												<?php $date_due->add(new DateInterval('P1M')); ?>
+												<?php endfor; ?>
+											</ul>
+
+											<?php else: ?>
+											<input type="text" name="turnover-total" id="turnover-total" />
+											<?php endif; ?>
+
+											<br /><br />
+											Somme à verser : <span class="amount-to-pay">0</span> €.
+											<br /><br />
+
+											<input type="hidden" name="action" value="save-turnover-declaration" />
+											<input type="hidden" name="declaration-id" value="<?php echo $declaration->id; ?>" />
+											<button type="submit" class="button">Enregistrer la déclaration</button>
+										</form>
+
+									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
+										<b>Montant à verser : </b><?php echo $declaration->amount; ?> &euro;<br />
+
+										<form action="" method="POST" enctype="">
+											<input type="hidden" name="action" value="proceed_roi" />
+											<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
+											<input type="submit" name="payment_card" class="button" value="<?php _e('Payer par carte', 'yproject'); ?>" />
+										</form>
+
+									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
+										Votre paiement de <?php echo $declaration->amount; ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+										Le reversement vers vos investisseurs est en cours.
+
+									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_finished ): ?>
+										Votre paiement de <?php echo $declaration->amount; ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+										Vos investisseurs ont bien reçu leur retour sur investissement.
+
+									<?php endif; ?>
+
+
+									<?php if ($declaration->file_list != ""): ?>
+									<div>
+										<b>Comptes annuels :</b><br />
+										<?php $declaration_file_list = $declaration->get_file_list(); ?>
+										<?php if ( empty( $declaration_file_list ) ): ?>
+											Aucun fichier pour l'instant<br />
+										<?php else: ?>
+											<ul>
+												<?php $i = 0; foreach ($declaration_file_list as $declaration_file): $i++; ?>
+												<li><a href="<?php echo $declaration_file; ?>" target="_blank">Fichier <?php echo $i; ?></a></li>
+												<?php endforeach; ?>
+											</ul>
+										<?php endif; ?>
+
+										<form action="" method="POST" enctype="multipart/form-data">
+											<input type="file" name="accounts_file_<?php echo $declaration->id; ?>" />
+											<input type="submit" class="button" value="<?php _e('Envoyer', 'yproject'); ?>" />
+										</form>
+									</div>
+									<?php endif; ?>
+								</div>
+							</li>
+						<?php endforeach; ?>
+						</ul>
+					<?php endif; ?>
+
+
+					<?php /*
+						<?php
+						<?php 
+						$lightbox_content = '<h3>' . __('Reverser aux utilisateurs', 'yproject') . '</h3>';
+						$lightbox_content .= '<div id="lightbox-content">';
+						$lightbox_content .= '<div class="loading-image align-center"><img id="ajax-email-loader-img" src="'.get_stylesheet_directory_uri().'/images/loading.gif" alt="chargement" /></div>';
+						$lightbox_content .= '<div class="loading-content"></div>';
+						$lightbox_content .= '<div class="loading-form align-center hidden"><form action="" method="POST">';
+						$lightbox_content .= '<input type="hidden" name="action" value="proceed_roi_transfers" />';
+						$lightbox_content .= '<input type="hidden" id="hidden-roi-id" name="roi_id" value="" />';
+						$lightbox_content .= '<input type="submit" class="button" value="Transférer" />';
+						$lightbox_content .= '</form></div>';
+						$lightbox_content .= '</div>';
+						echo do_shortcode('[yproject_lightbox id="transfer-roi"]' . $lightbox_content . '[/yproject_lightbox]');
+						?>
+						<?php else: ?>
+						<span class="disabled">Il manque certains paramètres. Contactez-nous.</span>
+						<?php endif; ?>
+					 * 
+					 */ ?>
 				<?php } ?>
 				
 				
