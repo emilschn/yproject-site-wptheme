@@ -10,7 +10,7 @@ $campaign = atcf_get_campaign($post_campaign);
 $wdg_user = WDGUser::current();
 WDGFormProjects::form_submit_turnover();
 WDGFormProjects::form_submit_account_files();
-WDGFormProjects::form_submit_roi_payment();
+$return_roi_payment = WDGFormProjects::form_submit_roi_payment();
 $return_lemonway_card = WDGFormProjects::return_lemonway_card();
 //$result_proceed_roi_list = WDGFormProjects::form_proceed_roi_list($campaign);
 //WDGFormProjects::form_proceed_roi_return();
@@ -34,6 +34,10 @@ WDGFormProjects::form_proceed_roi_transfers();
 				    the_content();
 				}
 				?>
+			
+				<?php if ( $return_roi_payment == 'error_lw_payment' ): ?>
+					<span class="errors">Erreur LWROI001 : Erreur de paiement vers votre porte-monnaie.</span>
+				<?php endif; ?>
 			
 				<?php if ( $return_lemonway_card == TRUE ): ?>
 					<span class="success">Paiement effectué</span>
@@ -206,8 +210,8 @@ WDGFormProjects::form_proceed_roi_transfers();
 											<button type="submit" class="button">Enregistrer la déclaration</button>
 										</form>
 
-									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_payment ):/* ?>
-										<b>Montant à verser : </b><?php echo $declaration->amount; ?> &euro;<br />
+									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
+										<b>Montant à verser : </b><?php echo $declaration->get_amount_with_commission(); ?> &euro;<br />
 
 										<form action="" method="POST" enctype="">
 											<input type="hidden" name="action" value="proceed_roi" />
@@ -215,7 +219,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 											<input type="submit" name="payment_card" class="button" value="<?php _e('Payer par carte', 'yproject'); ?>" />
 										</form>
 
-									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ):*/ ?>
+									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
 										Votre paiement de <?php echo $declaration->amount; ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
 										Le versement vers vos investisseurs est en cours.
 										
