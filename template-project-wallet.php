@@ -220,7 +220,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 										</form>
 
 									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
-										Votre paiement de <?php echo $declaration->amount; ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+										Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
 										Le versement vers vos investisseurs est en cours.
 										
 										<?php if ($wdg_user->is_admin()): ?>
