@@ -109,8 +109,12 @@ WDGFormProjects::form_proceed_roi_transfers();
 							<?php if ($organisation_obj->get_lemonway_status() == YPOrganisation::$lemonway_status_registered): $display_rib = TRUE; ?>
 								<?php _e('Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Lemonway.', 'yproject'); ?>
 							<?php else: if (!WP_IS_DEV_SITE) { $keep_going = FALSE; } ?>
+								Organisation en cours d'identification.
+									<?php /* plus tard :
 								Votre organisation n'est pas encore identifi&eacute;e par notre partenaire Lemonway.<br />
 								Rendez-vous sur la <a href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref; ?>">page de votre organisation</a>.
+									 * 
+									 */ ?>
 							<?php endif; ?>
 									
 						<?php endif; ?>
@@ -184,7 +188,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 								<div>
 									<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration ): ?>
 										<form action="" method="POST" id="turnover-declaration" data-roi-percent="<?php echo $campaign->roi_percent(); ?>" data-costs-orga="<?php echo $campaign->get_costs_to_organization(); ?>">
-											<?php if ($nb_fields > 0): ?>
+											<?php if ($nb_fields > 1): ?>
 											<?php $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); ?>
 											<ul>
 												<?php
@@ -211,7 +215,26 @@ WDGFormProjects::form_proceed_roi_transfers();
 										</form>
 
 									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
-										<b>Montant à verser : </b><?php echo $declaration->get_amount_with_commission(); ?> &euro;<br />
+										Chiffre d'affaires déclaré : 
+										<?php $declaration_turnover = $declaration->get_turnover(); ?>
+										<?php if ($nb_fields > 1): ?>
+											<?php $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); ?>
+											<ul>
+												<?php
+												$date_due = new DateTime($declaration->date_due);
+												$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
+												?>
+												<?php for ($i = 0; $i < $nb_fields; $i++): ?>
+												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
+												<?php $date_due->add(new DateInterval('P1M')); ?>
+												<?php endfor; ?>
+											</ul><br /><br />
+
+										<?php else: ?>
+										<?php echo $declaration_turnover[0]; ?> &euro;<br /><br />
+										<?php endif; ?>
+									
+										<b>Montant à verser : </b><?php echo $declaration->get_amount_with_commission(); ?> &euro;<br /><br />
 
 										<form action="" method="POST" enctype="">
 											<input type="hidden" name="action" value="proceed_roi" />

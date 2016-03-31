@@ -35,7 +35,6 @@ var WDGProjectDashboard = (function($) {
 							$("#wdg-lightbox-transfer-roi #lightbox-content .loading-image").hide();
 							$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-roi-id").val(WDGProjectDashboard.currentOpenedROI);
 							$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").show();
-							console.log(WDGProjectDashboard.currentOpenedROI);
 						});
 					}
 				});
