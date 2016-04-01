@@ -1,11 +1,22 @@
 <?php
 get_header( 'buddypress' );
 $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
+if ($display_loggedin_user) {
+	$result_form = WDGFormUsers::wallet_to_bankaccount();
+}
 $page_modify = get_page_by_path('modifier-mon-compte');
 ?>
 
 <div id="content">
 	<div class="padder">
+		
+		<?php if ($result_form != FALSE): ?>
+			<?php if ($result_form == "success"): ?>
+				<div class="success">Transfert effectué</div>
+			<?php else: ?>
+				<div class="errors center"><?php echo $result_form; ?></div>
+			<?php endif; ?>
+		<?php endif; ?>
 
 		<header id="item-header">
 		    

@@ -6,6 +6,7 @@
 if (!is_user_logged_in()) wp_redirect(site_url());
 ypcf_session_start();
 get_header();
+$WDGUser_current = WDGUser::current();
 ?>
 
 <div id="content">
@@ -191,7 +192,20 @@ get_header();
 						<br />
 
 						<label for="user_description" class="standard-label">Description</label>
-						<textarea name="user_description"> <?php $user_meta = get_userdata(bp_loggedin_user_id()); echo($user_meta->description);?></textarea>
+						<textarea name="user_description"> <?php $user_meta = get_userdata(bp_loggedin_user_id()); echo($user_meta->description);?></textarea> <br /> <br />
+						
+						<strong>RIB enregistré</strong><br />
+						<label for="holdername" class="standard-label" style="width: 220px;">Nom du propri&eacute;taire du compte : </label>
+						<?php echo $WDGUser_current->get_iban_info("holdername"); ?> <br />
+							
+						<label for="address" class="standard-label" style="width: 220px;">Adresse du compte : </label>
+						<?php echo $WDGUser_current->get_iban_info("address1"); ?> <br />
+						
+						<label for="iban" class="standard-label" style="width: 220px;">IBAN : </label>
+						<?php echo $WDGUser_current->get_iban_info("iban"); ?> <br />
+						
+						<label for="bic" class="standard-label" style="width: 220px;">BIC : </label>
+						<?php echo $WDGUser_current->get_iban_info("bic"); ?> <br />
 					<?php endif; ?>
 				</div>
 		
@@ -212,7 +226,7 @@ get_header();
 						<label for="update_password_confirm" class="large-label"><?php _e( 'Confirmer le nouveau mot de passe', 'yproject' ); ?><?php _e(' (vide si pas de changement)', 'yproject'); ?></label>
 						<input type="password" name="update_password_confirm" id="update_password_confirm" value="" /><br /><br />
 
-						<label for="update_password_current" class="standard-label"><?php _e( 'Mot de passe', 'yproject' ); ?>*</label>
+						<label for="update_password_current" class="large-label"><?php _e( 'Mot de passe actuel', 'yproject' ); ?>*</label>
 						<input type="password" name="update_password_current" id="update_password_current" value="" />
 					</div>
 				<?php } elseif (strpos($current_user->user_url, 'facebook.com') !== false) { ?>

@@ -2,6 +2,7 @@
 $page_publish = get_page_by_path('financement');
 $page_mes_investissements = get_page_by_path('mes-investissements');
 $display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
+$WDGUser_displayed = new WDGUser(bp_displayed_user_id());
 ?>
 
 <h2 class="underlined">Projets</h2>
@@ -237,32 +238,36 @@ if (is_user_logged_in() && $display_loggedin_user) :
 	    }
 	else: ?>
 		<h2 class="underlined">Mon porte-monnaie électronique</h2>
-		<?php
-		    $real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid(get_current_user_id()) / 100;
-		?>
-		    Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br /><br />
+		
+		<?php $amount = $WDGUser_displayed->get_lemonway_wallet_amount(); ?>
+		Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.<br /><br />
 
-		<?php
-		    if ($pending_transfers) :
-		?>
-		    Vous avez un transfert en cours.
-		<?php
-		    else :
-			if ($real_amount_invest > 0) {
-		?>
-		    <form action="<?php echo get_permalink($page_mes_investissements->ID); ?>" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="mangopaytoaccount" value="1" />
-			<input type="submit" value="Reverser sur mon compte bancaire" class="button" />
-		    </form>
-		    <br /><br />
-		<?php
-			}
-		    endif;
-		?>
+		<?php if ($amount > 0): ?>
+			<form action="" method="POST" enctype="multipart/form-data">
+				<?php if ($WDGUser_displayed->has_registered_iban()): ?>
+				<input type="submit" class="button" value="Reverser sur mon compte bancaire" />
+				
+				<?php else: ?>
+				<label for="holdername" class="large-label">Nom du propri&eacute;taire du compte : </label>
+					<input type="text" id="holdername" name="holdername" value="<?php echo $WDGUser_displayed->get_iban_info("holdername"); ?>" /> <br />
+				<label for="address" class="large-label">Adresse du compte : </label>
+					<input type="text" id="address" name="address" value="<?php echo $WDGUser_displayed->get_iban_info("address1"); ?>" /> <br />
+				<label for="iban" class="large-label">IBAN : </label>
+					<input type="text" id="iban" name="iban" value="<?php echo $WDGUser_displayed->get_iban_info("iban"); ?>" /> <br />
+				<label for="bic" class="large-label">BIC : </label>
+					<input type="text" id="bic" name="bic" value="<?php echo $WDGUser_displayed->get_iban_info("bic"); ?>" /> <br />
+					
+				<input type="submit" class="button" value="Enregistrer et reverser sur mon compte bancaire" />
+				<?php endif; ?>
+					
+				<input type="hidden" name="action" value="user_wallet_to_bankaccount" />
+				<input type="hidden" name="user_id" value="<?php echo bp_displayed_user_id(); ?>" />
+			</form>
+		<?php endif; ?>
 
 		<?php 
 		    $show_strong_auth_form = false;
-		    if ($mp_user->PersonalWalletAmount > 0 && !$mp_user->IsStrongAuthenticated) $show_strong_auth_form = true;
+//		    if ($mp_user->PersonalWalletAmount > 0 && !$mp_user->IsStrongAuthenticated) $show_strong_auth_form = true;
 		    if ($show_strong_auth_form):
 			    $strongauth_status = ypcf_mangopay_get_user_strong_authentication_status(get_current_user_id());
 			    if ($strongauth_status['status'] != ''): ?>
@@ -336,5 +341,3 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		<?php endif; ?>
 	<?php endif; ?>
 <?php endif; ?>
-			
-<div class="align-center mangopay-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="logo mangopay" /></div>
