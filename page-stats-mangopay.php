@@ -1,4 +1,18 @@
 <?php 
+if ( current_user_can('manage_options') ) {
+	/*$param_list = array( 
+		'wallet' => 'SC', 
+		'amountTot' => '5.00', 
+		'amountCom' => '0.00',
+		'comment' => 'Pour gerer les commissions',
+		'cardType' => '',
+		'cardNumber' => '',
+		'cardCrypto' => '',
+		'cardDate' => ''
+	);
+
+	$return_lw = LemonwayLib::call('MoneyIn', $param_list);*/
+}
 /**
  * Affichage de la liste des paiements : seulement aux utilisateurs admin
  */ 
@@ -22,6 +36,9 @@ get_header();
 		if ( current_user_can('manage_options') ) :
 		?>
 		
+		    <h1>Infos LW</h1>
+			<?php print_r($return_lw); ?>
+			
 		    <h1>Stats Mangopay</h1>
 			
 			<?php /* $result = ypcf_mangopay_get_operations_by_wallet_id(36782013); print_r($result); */ ?>
