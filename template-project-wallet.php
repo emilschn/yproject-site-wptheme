@@ -108,7 +108,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 						<?php elseif ($campaign->get_payment_provider() == "lemonway"): ?>
 							<?php if ($organisation_obj->get_lemonway_status() == YPOrganisation::$lemonway_status_registered): $display_rib = TRUE; ?>
 								<?php _e('Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Lemonway.', 'yproject'); ?>
-							<?php else: if (!WP_IS_DEV_SITE) { $keep_going = FALSE; } ?>
+							<?php else: ?>
 								Organisation en cours d'identification.
 									<?php /* plus tard :
 								Votre organisation n'est pas encore identifi&eacute;e par notre partenaire Lemonway.<br />
@@ -142,24 +142,25 @@ WDGFormProjects::form_proceed_roi_transfers();
 						<input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" class="button" />
 					</form>
 				<?php }
+				$can_transfer_to_account = $keep_going;
 				if (!isset($current_organisation) || ($organisation_obj->get_bank_owner() == '') || ($organisation_obj->get_bank_address() == '') || ($organisation_obj->get_bank_iban() == '') || ($organisation_obj->get_bank_bic() == '')) {
-					$keep_going = FALSE;
+					$can_transfer_to_account = FALSE;
 				}
 				?>
 						
 				
 				
-				<h3 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php echo $current_index; $current_index++; ?> - <?php _e('Dans votre porte-monnaie', 'yproject'); ?></h3>
+				<h3 <?php if (!$can_transfer_to_account) { ?>class="grey"<?php } ?>><?php echo $current_index; $current_index++; ?> - <?php _e('Dans votre porte-monnaie', 'yproject'); ?></h3>
 				<?php
-				if ($keep_going) { $organisation_obj->submit_transfer_wallet(); }
+				if ($can_transfer_to_account) { $organisation_obj->submit_transfer_wallet(); }
 				if (isset($organisation_obj)) { 
 				    $current_wallet_amount = $organisation_obj->get_wallet_amount();
 				} else {
 				    $current_wallet_amount = 0;
 				}
 				?>
-				<span <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php echo $current_wallet_amount; ?> &euro;</span><br /><br />
-				<?php if (!$keep_going || $current_wallet_amount == 0): ?>
+				<span <?php if (!$can_transfer_to_account) { ?>class="grey"<?php } ?>><?php echo $current_wallet_amount; ?> &euro;</span><br /><br />
+				<?php if (!$can_transfer_to_account || $current_wallet_amount == 0): ?>
 				<span class="button disabled"><?php _e('Proc&eacute;der au virement', 'yproject'); ?></span>
 				<?php else: ?>
 					<form action="" method="POST">
