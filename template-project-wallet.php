@@ -228,12 +228,16 @@ WDGFormProjects::form_proceed_roi_transfers();
 												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
 												<?php $date_due->add(new DateInterval('P1M')); ?>
 												<?php endfor; ?>
-											</ul><br /><br />
+											</ul><br />
 
 										<?php else: ?>
-										<?php echo $declaration_turnover[0]; ?> &euro;<br /><br />
+										<?php echo $declaration_turnover[0]; ?> &euro;<br />
 										<?php endif; ?>
-									
+										
+										<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro;<br /><br />
+										
+										<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
+										<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br />
 										<b>Montant à verser : </b><?php echo $declaration->get_amount_with_commission(); ?> &euro;<br /><br />
 
 										<form action="" method="POST" enctype="">

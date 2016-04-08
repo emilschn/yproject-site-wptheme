@@ -38,7 +38,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 		<?php elseif ($campaign->funding_type() == 'fundingproject'): ?>
 		
 		<?php if ($campaign_status == "collecte"): ?>
-		<input type="hidden" id="roi_percent_project" value="<?php echo $campaign->roi_percent(); ?>" />
+		<input type="hidden" id="roi_percent_project" value="<?php echo $campaign->roi_percent_estimated(); ?>" />
 		<input type="hidden" id="roi_goal_project" value="<?php echo $campaign->goal(false); ?>" />
 		<form method="GET" action="<?php echo get_permalink($page_invest->ID); ?>">
 		<?php endif; ?>
@@ -49,7 +49,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 				</div>
 
 				<div class="left align-center">
-					<?php if ($campaign->funding_duration() > 0 && $campaign->roi_percent() > 0 && $firstpayment_year > 2014): ?>
+					<?php if ($campaign->funding_duration() > 0 && $campaign->roi_percent_estimated() > 0 && $firstpayment_year > 2014): ?>
 
 						<?php _e("Si j'investis :", 'yproject'); ?>
 						<input type="text" name="init_invest" class="init_invest" /> &euro; <button class="init_invest_count button"><?php _e('Calculer', 'yproject'); ?></button><br />
