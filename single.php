@@ -58,7 +58,11 @@
 	    $campaign_post = get_post($campaign_id);
 	    $campaign = atcf_get_campaign($campaign_post);
     }
-    $category_link = (!empty($this_category)) ? get_category_link($this_category->cat_ID) : '';
+	if ($campaign->edit_version() > 2) {
+		$postlist_link = get_permalink($campaign->ID);
+	} else {
+		$postlist_link = (!empty($this_category)) ? get_category_link($this_category->cat_ID) : '';
+	}
     $post = $campaign_post;
 ?>
 	<div id="content" style="margin-top: -15px;">
@@ -72,7 +76,7 @@
 
 				<div id="post_bottom_bg">
 					<div id="post_bottom_content" class="center margin-height">
-						<a href="<?php echo esc_url($category_link); ?>">&lt;&lt; Revenir &agrave; la liste des actualit&eacute;s</a>
+						<a href="<?php echo esc_url($postlist_link); ?>">&lt;&lt; Revenir &agrave; la liste des actualit&eacute;s</a>
 
 						<?php wp_reset_query(); ?>
 						

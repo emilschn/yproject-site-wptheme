@@ -347,6 +347,9 @@ else {
 					$category_link = '';
 				}
 				$nb_cat = (isset($posts_in_category)) ? ' ('.count($posts_in_category).')' : '';
+				if ($campaign->edit_version() > 2) {
+					$category_link = get_permalink($campaign->ID);
+				}
 				$news_link = esc_url($category_link);
 
 				$forum = get_page_by_path('forum');
