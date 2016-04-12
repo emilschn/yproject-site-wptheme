@@ -187,10 +187,11 @@ WDGFormProjects::form_proceed_roi_transfers();
 							<li>
 								<h4><?php echo $declaration->get_formatted_date(); ?></h4>
 								<div>
+									<?php $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); ?>
+
 									<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration ): ?>
 										<form action="" method="POST" id="turnover-declaration" data-roi-percent="<?php echo $campaign->roi_percent(); ?>" data-costs-orga="<?php echo $campaign->get_costs_to_organization(); ?>">
 											<?php if ($nb_fields > 1): ?>
-											<?php $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); ?>
 											<ul>
 												<?php
 												$date_due = new DateTime($declaration->date_due);
@@ -219,7 +220,6 @@ WDGFormProjects::form_proceed_roi_transfers();
 										Chiffre d'affaires déclaré : 
 										<?php $declaration_turnover = $declaration->get_turnover(); ?>
 										<?php if ($nb_fields > 1): ?>
-											<?php $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); ?>
 											<ul>
 												<?php
 												$date_due = new DateTime($declaration->date_due);
@@ -248,6 +248,29 @@ WDGFormProjects::form_proceed_roi_transfers();
 										</form>
 
 									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
+										Chiffre d'affaires déclaré : 
+										<?php $declaration_turnover = $declaration->get_turnover(); ?>
+										<?php if ($nb_fields > 1): ?>
+											<ul>
+												<?php
+												$date_due = new DateTime($declaration->date_due);
+												$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
+												?>
+												<?php for ($i = 0; $i < $nb_fields; $i++): ?>
+												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
+												<?php $date_due->add(new DateInterval('P1M')); ?>
+												<?php endfor; ?>
+											</ul><br />
+
+										<?php else: ?>
+										<?php echo $declaration_turnover[0]; ?> &euro;<br />
+										<?php endif; ?>
+										
+										<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro;<br /><br />
+										
+										<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
+										<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br /><br />
+										
 										Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
 										Le versement vers vos investisseurs est en cours.
 										
@@ -277,7 +300,30 @@ WDGFormProjects::form_proceed_roi_transfers();
 										<?php endif; ?>
 
 									<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_finished ): ?>
-										Votre paiement de <?php echo $declaration->amount; ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+										Chiffre d'affaires déclaré : 
+										<?php $declaration_turnover = $declaration->get_turnover(); ?>
+										<?php if ($nb_fields > 1): ?>
+											<ul>
+												<?php
+												$date_due = new DateTime($declaration->date_due);
+												$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
+												?>
+												<?php for ($i = 0; $i < $nb_fields; $i++): ?>
+												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
+												<?php $date_due->add(new DateInterval('P1M')); ?>
+												<?php endfor; ?>
+											</ul><br />
+
+										<?php else: ?>
+										<?php echo $declaration_turnover[0]; ?> &euro;<br />
+										<?php endif; ?>
+										
+										<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro;<br /><br />
+										
+										<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
+										<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br /><br />
+										
+										Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
 										Vos investisseurs ont bien reçu leur retour sur investissement.
 
 									<?php endif; ?>
