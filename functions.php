@@ -2,7 +2,7 @@
 function yproject_init() {
 	//possibilité de mettre tag aux pages
 	register_taxonomy_for_object_type('post_tag', 'page');
-	WDGCronActions::init_actions();
+//	WDGCronActions::init_actions();
     WDGUser::login();
     WDGUser::register();
 }

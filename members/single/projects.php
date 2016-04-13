@@ -292,7 +292,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		<?php
 		$args = array(
 		    'author'    => get_current_user_id(),
-		    'post_type' => 'withdrawal_order',
+		    'post_type' => 'withdrawal_order_lw',
 		    'post_status' => 'any',
 		    'orderby'   => 'post_date',
 		    'order'     =>  'ASC'
@@ -303,36 +303,17 @@ if (is_user_logged_in() && $display_loggedin_user) :
 		<ul class="user_history">
 		    <?php 
 			foreach ( $transfers as $post ) :
-			    $widthdrawal_obj = ypcf_mangopay_get_withdrawal_by_id($post->post_content);
-			    if ($widthdrawal_obj->Error != "" && $widthdrawal_obj->Error != NULL) {
-				$args = array(
-				    'ID'	=>  $post->ID,
-				    'post_status'	=> 'draft'
-				);
-				wp_update_post($args);
-
-			    } else if ($widthdrawal_obj->IsSucceeded && $widthdrawal_obj->IsCompleted && $post->post_status != 'publish') {
-				$args = array(
-				    'ID'	=>  $post->ID,
-				    'post_status'	=> 'publish'
-				);
-				wp_update_post($args);
-			    }
 			    $post = get_post($post);
-			    $post_amount = $post->post_title / 100;
-			    if ($post->post_status == 'publish') {
+			    $post_amount = $post->post_title;
 				?>
+			    <?php if ($post->post_status == 'publish'): ?>
 				<li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Termin&eacute;</li>
-				<?php
-			    } else if ($post->post_status == 'draft') {
-				?>
+				<?php elseif ($post->post_status == 'draft'): ?>
 				<li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Annul&eacute;</li>
-				<?php
-			    } else {
-				?>
+				<?php else: ?>
 				<li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- En cours</li>
-				<?php
-			    }
+				<?php endif; ?>
+			<?php
 			endforeach;
 		    ?>
 		</ul>
