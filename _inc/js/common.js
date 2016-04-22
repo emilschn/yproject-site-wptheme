@@ -987,6 +987,7 @@ WDGProjectPageFunctions=(function($) {
 
 WDGInvestPageFunctions=(function($) {
 	return {
+		forceInvestSubmit: false,
 		initUI:function() {
 			//Interactions choix de contrepartie
 			if ($("#invest_form").length > 0) {
@@ -1020,7 +1021,7 @@ WDGInvestPageFunctions=(function($) {
 				//Validation du formulaire
 				$("#invest_form").submit(function(e) {
 					var formSelf = this;
-					if ($(formSelf).data("hasfilledinfos") != "1" || $("#invest_type").val() != "user") {
+					if (!WDGInvestPageFunctions.forceInvestSubmit && ($(formSelf).data("hasfilledinfos") != "1" || $("#invest_type").val() != "user" || Number($("#input_invest_amount_part").val()) > 250)) {
 						e.preventDefault();
 						$("#invest_form_button").hide();
 						$("#invest_form_loading").show();
@@ -1112,6 +1113,7 @@ WDGInvestPageFunctions=(function($) {
 		
 		isUserInfosFormDisplayed: false,
 		showUserInfosForm: function(jsonInfos) {
+			$("#wdg-lightbox-userkyc").hide();
 			$("#wdg-lightbox-userinfos").show();
 			$("#lightbox_userinfo_form_button").show();
 			$("#lightbox_userinfo_form_loading").hide();
@@ -1150,7 +1152,56 @@ WDGInvestPageFunctions=(function($) {
 						WDGInvestPageFunctions.formInvestReturnEvent(result);
 					});
 				});
+				
+				$("#wdg-lightbox-userinfos .wdg-lightbox-button-close").click(function(e) {
+					WDGInvestPageFunctions.closeInvestLightbox();
+				});
 			}
+		},
+		
+		isUserKycFormDisplayed: false,
+		showUserKycForm: function(jsonInfos) {
+			$("#wdg-lightbox-userinfos").hide();
+			$("#wdg-lightbox-userkyc").show();
+			$("#lightbox_userkyc_form_button").show();
+			$("#lightbox_userkyc_form_loading").hide();
+			$("#lightbox_userkyc_form_errors").empty();
+			for (var i = 0; i < jsonInfos.errors.length; i++) {
+				$("#lightbox_userkyc_form_errors").append("<li>"+jsonInfos.errors[i]+"</li>");
+			}
+			
+			if (!WDGInvestPageFunctions.isUserKycFormDisplayed) {
+				WDGInvestPageFunctions.isUserKycFormDisplayed = true;
+				$("#lightbox_userkyc_form").submit(function(e) {
+					e.preventDefault();
+					$("#lightbox_userkyc_form_button").hide();
+					$("#lightbox_userkyc_form_loading").show();
+					var formData = new FormData();
+					formData.append('action', 'save_user_docs');
+					formData.append('campaign_id', $("#invest_form").data("campaignid"));
+					formData.append('user_doc_id', $('#user_doc_id')[0].files[0]);
+					formData.append('user_doc_home', $('#user_doc_home')[0].files[0]);
+					formData.append('user_doc_bank', $('#user_doc_bank')[0].files[0]);
+					$.ajax({
+						'type' : "POST",
+						'url' : ajax_object.ajax_url,
+						'processData': false,
+						'contentType': false,
+						'data': formData
+					}).done(function(result){
+						WDGInvestPageFunctions.formInvestReturnEvent(result);
+					});
+				});
+				
+				$("#wdg-lightbox-userkyc .wdg-lightbox-button-close").click(function(e) {
+					WDGInvestPageFunctions.closeInvestLightbox();
+				});
+			}
+		},
+		
+		closeInvestLightbox: function() {
+			$("#invest_form_button").show();
+			$("#invest_form_loading").hide();
 		},
 		
 		formInvestReturnEvent: function(result) {
@@ -1168,9 +1219,10 @@ WDGInvestPageFunctions=(function($) {
 				case "edit_organization":
 					break;
 				case "kyc":
+					WDGInvestPageFunctions.showUserKycForm(jsonResult);
 					break;
 				default:
-					$("#invest_form").data("hasfilledinfos", "1");
+					WDGInvestPageFunctions.forceInvestSubmit = true;
 					$("#invest_form").submit();
 					break;
 			}

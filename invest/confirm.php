@@ -32,7 +32,9 @@ if (isset($campaign)):
         if (is_numeric($amount_part) && intval($amount_part) == $amount_part && $amount_part >= 1 && $amount >= $min_value && $amount_part <= $max_part_value && ($remaining_amount == 0 || $remaining_amount >= $part_value)):
 
             $current_user = wp_get_current_user();
-            ypcf_init_mangopay_user($current_user);
+			if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay) {
+				ypcf_init_mangopay_user($current_user);
+			}
             $current_user_organisation = false;
             $organisation = false;
             $invest_type = '';
@@ -46,25 +48,29 @@ if (isset($campaign)):
             if ($invest_type != 'user') {
                 $organisation = new YPOrganisation($invest_type);
                 $current_user_organisation = $organisation->get_creator();
-                ypcf_init_mangopay_user($current_user_organisation, true);
-            }
-
-            if (isset($_POST['document_submited'])) {
-                $url_request = ypcf_init_mangopay_user_strongauthentification($current_user);
-                $curl_result = ypcf_mangopay_send_strong_authentication($url_request, 'StrongValidationDtoPicture');
-                if ($curl_result) {
-					ypcf_mangopay_set_user_strong_authentication_doc_transmitted($current_user->ID);
-				} else {
-					_e("Il y a eu une erreur pendant l&apos;envoi", 'yproject'); ?><br /><?php
+				if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay) {
+					ypcf_init_mangopay_user($current_user_organisation, true);
 				}
             }
+
+			if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay) {
+				if (isset($_POST['document_submited'])) {
+					$url_request = ypcf_init_mangopay_user_strongauthentification($current_user);
+					$curl_result = ypcf_mangopay_send_strong_authentication($url_request, 'StrongValidationDtoPicture');
+					if ($curl_result) {
+						ypcf_mangopay_set_user_strong_authentication_doc_transmitted($current_user->ID);
+					} else {
+						_e("Il y a eu une erreur pendant l&apos;envoi", 'yproject'); ?><br /><?php
+					}
+				}
+			}
 
             //Si le montant transmis est supérieur à ce que mangopay accepte sans identification
             $test_user = $current_user;
             if ($invest_type != 'user') $test_user = $current_user_organisation;
             $annual_amount = $amount + ypcf_get_annual_amount_invested($test_user->ID);
 			
-			if ($annual_amount > YP_STRONGAUTH_AMOUNT_LIMIT && !ypcf_mangopay_is_user_strong_authenticated($test_user->ID)):
+			if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay && $annual_amount > YP_STRONGAUTH_AMOUNT_LIMIT && !ypcf_mangopay_is_user_strong_authenticated($test_user->ID)):
 				if (ypcf_mangopay_is_user_strong_authentication_sent($test_user->ID)): ?>
 					<?php _e("Votre pi&egrave;ce d&apos;identit&eacute; est en cours de validation.", "yproject"); ?><br />
 					<?php _e("Un d&eacute;lai maximum de 24h est n&eacute;cessaire &agrave; cette validation.", "yproject"); ?><br />
@@ -98,10 +104,12 @@ if (isset($campaign)):
 
             <?php else: ?>
 				<?php
-                $mangopay_project_id = ypcf_init_mangopay_project();
-                if ($mangopay_project_id === FALSE)  {
-                    _e("Probl&egrave;me de cr&eacute;ation de projet", 'yproject');
-                }
+				if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay) {
+					$mangopay_project_id = ypcf_init_mangopay_project();
+					if ($mangopay_project_id === FALSE)  {
+						_e("Probl&egrave;me de cr&eacute;ation de projet", 'yproject');
+					}
+				}
 
                 //Procédure modifiée d'ajout au panier (on ajoute x items de 1 euros => le montant se retrouve en tant que quantité)
                 edd_empty_cart();
@@ -289,7 +297,9 @@ if (isset($campaign)):
 					<center><input type="submit" value="<?php echo $button_title; ?>" class="button"></center>
 				</form>
 				<br /><br />
+				<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
 				<div class="align-center mangopay-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" /></div>
+				<?php endif; ?>
 				<?php
             endif;
 
