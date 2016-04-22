@@ -114,7 +114,7 @@ $WDGUser_current = WDGUser::current();
 				</h4>
 
 				<div id="form_infoperso_projet">
-					<label for="update_gender" class="standard-label">Vous &ecirc;tes <?php if ($is_campaign_investment_type){ ?>*<?php } ?></label>
+					<label for="update_gender" class="standard-label"><?php _e("Vous &ecirc;tes", 'yproject'); ?> <?php if ($is_campaign_investment_type){ ?>*<?php } ?></label>
 					<select name="update_gender" id="update_gender">
 						<option value="female"<?php if ($current_user->get('user_gender') == "female") echo ' selected="selected"';?>>une femme</option>
 						<option value="male"<?php if ($current_user->get('user_gender') == "male") echo ' selected="selected"';?>>un homme</option>

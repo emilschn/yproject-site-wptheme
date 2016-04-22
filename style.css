@@ -414,6 +414,12 @@ form.wdg-forms table input[type="text"].reward-text{
 .wdg-lightbox .wdg-lightbox-padder > div.admin-block h3 { margin: 5px auto; }
 .wdg-lightbox .wdg-lightbox-padder > div.admin-block label { display: inline-block; width: 80px; }
 
+.wdg-lightbox ul.errors {
+	list-style: none;
+	padding-left: 10px;
+	margin: 20px 0px;
+}
+
 /*******************************************************************************
 * LIGHTBOX - FORMULAIRE
 *******************************************************************************/

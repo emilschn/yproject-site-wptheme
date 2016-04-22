@@ -3,8 +3,9 @@ global $campaign, $current_error;
 if (!isset($campaign)) {
 	$campaign = atcf_get_current_campaign();
 }
+$WDGUser_current = WDGUser::current();
 
-if (isset($campaign)) {
+if (isset($campaign)):
 	$min_value = ypcf_get_min_value_to_invest();
 	$max_value = ypcf_get_max_value_to_invest();
 	$part_value = ypcf_get_part_value();
@@ -35,16 +36,18 @@ if (isset($campaign)) {
 		
 		<div class="invest_step1_currentproject"><?php echo html_entity_decode( $campaign->investment_terms() ); ?></div>
 			
-		<?php if (!ypcf_mangopay_is_user_strong_authenticated($test_user->ID) && ypcf_mangopay_is_user_strong_authentication_sent($test_user->ID)): ?>
-			<div class="invest_step1_currentproject" style="text-align: center; font-weight: bold;">
-				<?php _e("Votre pi&egrave;ce d&apos;identit&eacute; est en cours de validation.", "yproject"); ?><br />
-				<?php _e("Un d&eacute;lai maximum de 24h est n&eacute;cessaire &agrave; cette validation.", "yproject"); ?><br />
-				<?php _e("Merci de votre compr&eacute;hension.", "yproject"); ?></div>
+		<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
+			<?php if (!ypcf_mangopay_is_user_strong_authenticated($test_user->ID) && ypcf_mangopay_is_user_strong_authentication_sent($test_user->ID)): ?>
+				<div class="invest_step1_currentproject" style="text-align: center; font-weight: bold;">
+					<?php _e("Votre pi&egrave;ce d&apos;identit&eacute; est en cours de validation.", "yproject"); ?><br />
+					<?php _e("Un d&eacute;lai maximum de 24h est n&eacute;cessaire &agrave; cette validation.", "yproject"); ?><br />
+					<?php _e("Merci de votre compr&eacute;hension.", "yproject"); ?></div>
+			<?php endif; ?>
 		<?php endif; ?>
 			
-		<?php ?>
+		<?php locate_template( 'invest/input-lightbox-user-infos.php', true ); ?>
 		
-		<form id="invest_form" action="<?php echo $page_invest_link; ?>" method="post" enctype="multipart/form-data">
+		<form id="invest_form" action="<?php echo $page_invest_link; ?>" method="post" enctype="multipart/form-data" data-campaignid="<?php echo $campaign->ID; ?>" data-hasfilledinfos="<?php echo ($WDGUser_current->has_filled_invest_infos($campaign->funding_type()) ? "1" : "0"); ?>">
 			<input type="hidden" id="input_invest_min_value" name="old_min_value" value="<?php echo $min_value; ?>">
 			<input type="hidden" id="input_invest_max_value" name="old_max_value" value="<?php echo $max_value; ?>">
 			<input type="hidden" id="input_invest_part_value" name="part_value" value="<?php echo $part_value; ?>">
@@ -147,7 +150,7 @@ if (isset($campaign)) {
 		
 				<br />
 
-				<center>
+				<p id="invest_form_button" class="align-center">
 					<?php switch ($campaign->funding_type()) {
 						case "fundingdonation": ?>
 							<input type="hidden" name="invest_type" value="user" />
@@ -161,7 +164,7 @@ if (isset($campaign)) {
 							$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
 							?>
 							<input type="submit" value="<?php _e("Investir", 'yproject'); ?>" class="button" />
-							<select name="invest_type">
+							<select id="invest_type" name="invest_type">
 								<option value="user"><?php _e("En mon nom (personne physique)", 'yproject'); ?></option>
 								<?php if (count($organisations_list) > 0): ?>
 									<?php foreach ($organisations_list as $organisation_item): ?>
@@ -175,16 +178,22 @@ if (isset($campaign)) {
 						<?php
 						break;
 					} ?>
-				</center>
+				</p>
+				<p id="invest_form_loading" class="align-center hidden">
+					<img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />
+				</p>
 			</div>
 		
 		</form>
 		<br /><br />
+		
+		<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
 		<div class="align-center mangopay-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="Mangopay" /></div>
+		<?php endif; ?>
 	    
 		
 	<?php else: ?>
 		<?php _e("Il n&apos;est plus possible d&apos;investir sur ce", 'yproject'); ?> <a href="<?php echo get_permalink($campaign->ID); ?>"><?php _e("projet", 'yproject'); ?></a> !
 	<?php endif; ?>
 	
-<?php }
+<?php endif;
