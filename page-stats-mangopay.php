@@ -37,7 +37,7 @@ get_header();
 		?>
 		
 		    <h1>Infos LW</h1>
-			<?php print_r($return_lw); ?>
+			<?php // $roi_declaration = new WDGROIDeclaration(1); $roi_declaration->redo_transfers(); ?>
 			
 		    <h1>Stats Mangopay</h1>
 			
