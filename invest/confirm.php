@@ -109,8 +109,14 @@ if (isset($campaign)):
 					if ($mangopay_project_id === FALSE)  {
 						_e("Probl&egrave;me de cr&eacute;ation de projet", 'yproject');
 					}
+				} else if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway) {
+					$campaign_organization = $campaign->get_organisation();
+					$organization_lemonway_status = $campaign_organization->get_lemonway_status();
+					if ($organization_lemonway_status != YPOrganisation::$lemonway_status_registered) {
+						_e("Probl&egrave;me de porte-monnaie projet (ERRLWPW01)", 'yproject');
+					}
 				}
-
+				
                 //Procédure modifiée d'ajout au panier (on ajoute x items de 1 euros => le montant se retrouve en tant que quantité)
                 edd_empty_cart();
                 
