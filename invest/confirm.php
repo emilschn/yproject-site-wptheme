@@ -104,19 +104,25 @@ if (isset($campaign)):
 
             <?php else: ?>
 				<?php
+				$continue = TRUE;
 				if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay) {
 					$mangopay_project_id = ypcf_init_mangopay_project();
 					if ($mangopay_project_id === FALSE)  {
-						_e("Probl&egrave;me de cr&eacute;ation de projet", 'yproject');
+						$continue = FALSE;
+						_e("Probl&egrave;me de cr&eacute;ation de projet", 'yproject'); ?><br /><br /><?php
 					}
 				} else if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway) {
 					$campaign_organization = $campaign->get_organisation();
-					$organization_lemonway_status = $campaign_organization->get_lemonway_status();
+					$organization_obj = new YPOrganisation($campaign_organization->organisation_wpref);
+					$organization_lemonway_status = $organization_obj->get_lemonway_status();
 					if ($organization_lemonway_status != YPOrganisation::$lemonway_status_registered) {
-						_e("Probl&egrave;me de porte-monnaie projet (ERRLWPW01)", 'yproject');
+						$continue = FALSE;
+						_e("Probl&egrave;me de porte-monnaie projet (ERRLWPW01)", 'yproject'); ?><br /><br /><?php
 					}
 				}
 				
+				
+				if ($continue):
                 //Procédure modifiée d'ajout au panier (on ajoute x items de 1 euros => le montant se retrouve en tant que quantité)
                 edd_empty_cart();
                 
@@ -307,6 +313,7 @@ if (isset($campaign)):
 				<div class="align-center mangopay-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" /></div>
 				<?php endif; ?>
 				<?php
+				endif;
             endif;
 
         else:

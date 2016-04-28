@@ -8,7 +8,7 @@ if (isset($campaign) && is_user_logged_in()):
     ypcf_session_start();
     ypcf_check_is_project_investable();
 	
-    if (isset($_REQUEST["ContributionID"]) || isset($_REQUEST["moneyInToken"])): ?>
+    if (isset($_REQUEST["ContributionID"]) || isset($_REQUEST["response_wkToken"])): ?>
 	
 		<?php
 		$purchase_key = '';
@@ -23,7 +23,7 @@ if (isset($campaign) && is_user_logged_in()):
 				$amount = $mangopay_contribution->Amount / 100;
 			}
 		} else if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway) {
-			$purchase_key = $_REQUEST["moneyInToken"];
+			$purchase_key = $_REQUEST["response_wkToken"];
 			if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wire') {
 				//TODO
 			} else {
@@ -266,5 +266,7 @@ if (isset($campaign) && is_user_logged_in()):
 			_e("Il y a eu une erreur pendant la transacton.", 'yproject');
 		endif;
 	
+	else:
+		_e("Erreur d'affichage (ERRPAYRET01).", 'yproject');
     endif;
 endif;
