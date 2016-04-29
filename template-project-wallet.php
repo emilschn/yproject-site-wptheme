@@ -149,6 +149,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 				?>
 						
 				
+				<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
 				
 				<h3 <?php if (!$can_transfer_to_account) { ?>class="grey"<?php } ?>><?php echo $current_index; $current_index++; ?> - <?php _e('Dans votre porte-monnaie', 'yproject'); ?></h3>
 				<?php
@@ -168,6 +169,8 @@ WDGFormProjects::form_proceed_roi_transfers();
 						<input type="hidden" name="action" value="transfer_to_account" />
 						<input type="submit" class="button" value="<?php _e('Proc&eacute;der au virement', 'yproject'); ?>" />
 					</form>
+				<?php endif; ?>
+				
 				<?php endif; ?>
 					
 				

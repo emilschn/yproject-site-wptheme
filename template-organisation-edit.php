@@ -9,7 +9,7 @@
 $organisation_obj = YPOrganisation::current();
 YPOrganisation::edit($organisation_obj);
 $organisation_obj->send_kyc();
-ypcf_init_mangopay_user($organisation_obj->get_creator(), TRUE);
+ypcf_init_mangopay_user($organisation_obj->get_creator(), TRUE); //TODO : supprimer apres Prospare
 get_header();
 ?>
 
