@@ -8,7 +8,7 @@ if (isset($campaign) && is_user_logged_in()):
     ypcf_session_start();
     ypcf_check_is_project_investable();
 	
-    if (isset($_REQUEST["ContributionID"]) || isset($_REQUEST["response_wkToken"])): ?>
+    if (isset($_REQUEST["ContributionID"]) || isset($_REQUEST["response_wkToken"]) || ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway && $_GET['meanofpayment'] == 'wire')): ?>
 	
 		<?php
 		$purchase_key = '';
@@ -23,10 +23,12 @@ if (isset($campaign) && is_user_logged_in()):
 				$amount = $mangopay_contribution->Amount / 100;
 			}
 		} else if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway) {
-			$purchase_key = $_REQUEST["response_wkToken"];
 			if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wire') {
-				//TODO
+				$random = rand(10000, 99999);
+				$purchase_key = 'wire_TEMP_' . $random;
+				$amount = $_SESSION['amount_to_save'];
 			} else {
+				$purchase_key = $_REQUEST["response_wkToken"];
 				$lw_transaction_result = LemonwayLib::get_transaction_by_id( $purchase_key );
 				$amount = $lw_transaction_result->CRED;
 			}
