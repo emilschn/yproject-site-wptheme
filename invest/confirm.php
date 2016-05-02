@@ -37,14 +37,21 @@ if (isset($campaign)):
 			}
             $current_user_organisation = false;
             $organisation = false;
+			
             $invest_type = '';
-            if (isset($_POST['invest_type'])) {
-				$invest_type = $_POST['invest_type'];
+			if (isset($_SESSION['new_orga_just_created']) && !empty($_SESSION['new_orga_just_created'])) {
+				$invest_type = $_SESSION['new_orga_just_created'];
 				$_SESSION['redirect_current_invest_type'] = $invest_type;
+			} else {
+				if (isset($_POST['invest_type'])) {
+					$invest_type = $_POST['invest_type'];
+					$_SESSION['redirect_current_invest_type'] = $invest_type;
+				}
 			}
 			if (isset($_SESSION['redirect_current_invest_type'])) {
 				$invest_type = $_SESSION['redirect_current_invest_type'];
 			}
+			
             if ($invest_type != 'user') {
                 $organisation = new YPOrganisation($invest_type);
                 $current_user_organisation = $organisation->get_creator();
