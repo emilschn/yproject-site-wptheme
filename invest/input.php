@@ -169,7 +169,7 @@ if (isset($campaign)):
 								<option value="user"><?php _e("En mon nom (personne physique)", 'yproject'); ?></option>
 								<?php if (count($organisations_list) > 0): ?>
 									<?php foreach ($organisations_list as $organisation_item): ?>
-										<option value="<?php echo $organisation_item->organisation_wpref; ?>"><?php _e("Pour", 'yproject'); ?> <?php echo $organisation_item->organisation_name; ?></option>
+										<option value="<?php echo $organisation_item->organisation_wpref; ?>"><?php _e("Pour l'organisation", 'yproject'); ?> <?php echo $organisation_item->organisation_name; ?></option>
 									<?php endforeach; ?>
 									<option value="new_organisation"><?php _e("Pour une nouvelle organisation (personne morale)...", 'yproject'); ?></option>
 								<?php else: ?>

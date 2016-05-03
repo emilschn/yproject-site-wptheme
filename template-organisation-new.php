@@ -39,10 +39,10 @@ get_header();
 
 					<form action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
 
-						<label for="org_name"><?php _e('D&eacute;nomination sociale*', 'yproject'); ?></label>
+						<label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?>*</label>
 						<input type="text" name="org_name" value="<?php echo filter_input(INPUT_POST, 'org_name'); ?>" /><br />
 
-						<label for="org_email"><?php _e('e-mail de contact', 'yproject'); ?></label>
+						<label for="org_email"><?php _e('e-mail de contact', 'yproject'); ?>*</label>
 						<input type="text" name="org_email" value="<?php echo filter_input(INPUT_POST, 'org_email'); ?>" /><br />
 
 						<?php /*
@@ -59,7 +59,7 @@ get_header();
 						<label for="org_rcs"><?php _e('RCS', 'yproject'); ?>*</label>
 						<input type="text" name="org_rcs" value="<?php echo filter_input(INPUT_POST, 'org_rcs'); ?>" /><br />
 
-						<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?></label>
+						<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?>*</label>
 						<input type="text" name="org_capital" value="<?php echo filter_input(INPUT_POST, 'org_capital'); ?>" /><br />
 
 						<label for="org_ape"><?php _e('Code APE', 'yproject'); ?>*</label>
