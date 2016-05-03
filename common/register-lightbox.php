@@ -20,22 +20,22 @@
 		</div>
     
 		<div class="register-section" id="basic-details-section">
-			<div class="on-focus clearfix">
+			<div class="on-focus">
 				<input type="text" name="signup_username" placeholder="<?php _e( 'Identifiant', 'yproject' ); ?> *" id="signup_username" value="<?php if (!empty($_POST['signup_username'])) { echo $_POST['signup_username']; } ?>" />
 				<div class="tool-tip slideIn right">Choisissez un Identifiant</div>
 			</div>
 
-			<div class="on-focus clearfix">
+			<div class="on-focus">
 				<input type="text" name="signup_email" placeholder="<?php _e( 'Adresse e-mail', 'yproject' ); ?> *" id="signup_email" value="<?php if (!empty($_POST['signup_email'])) { echo $_POST['signup_email']; } ?>" />
 				<div class="tool-tip slideIn right">Saisissez votre adresse e-mail </div>
 			</div>
 
-			<div class="on-focus clearfix">
+			<div class="on-focus">
 				<input type="password" name="signup_password" placeholder="<?php _e( 'Mot de passe', 'yproject' ); ?> *" id="signup_password" value="" />
 				<div class="tool-tip slideIn right">Saisissez un mot de passe</div>
 			</div>
 
-			<div class="on-focus clearfix">
+			<div class="on-focus">
 				<input type="password" name="signup_password_confirm" placeholder="<?php _e( 'Confirmation du mot de passe', 'yproject' ); ?> *" id="signup_password_confirm" value="" />
 				<div class="tool-tip slideIn right">Confirmez votre mot de passe</div>
 			</div>
