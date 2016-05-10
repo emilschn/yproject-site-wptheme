@@ -127,6 +127,7 @@ else {
 		<?php 
 		//PROJETS ECHOUES
 		?>
+		<div class="mobile_hidden">
 		<div class="part-title-separator mobile_hidden">
 			<?php
 			$nb_archived_projects = count(ATCF_Campaigns::list_projects_archive()); 
@@ -137,6 +138,7 @@ else {
 		<?php if ($nb_archived_projects > 0) { ?>
 			<?php require('projects/home-large.php'); ?>
 		<?php } ?>
+		</div>
 	    
 <?php
 	$cache_projects_others = ob_get_contents();
