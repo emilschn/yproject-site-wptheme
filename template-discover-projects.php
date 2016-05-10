@@ -10,9 +10,9 @@
 <?php global $WDG_cache_plugin; ?>
 
 <div id="content">
-	<div class="padder center">
-		<ul id="project-list-menu" class="only_on_mobile">
-			<li><a href="#" class="selected" data-status="collecte">En cours</a></li>
+	<div class="padder center project-list">
+		<ul id="project-list-menu" class="hidden">
+			<li><a href="#" data-status="collecte">En cours</a></li>
 			<li><a href="#" data-status="vote">En vote</a></li>
 			<li><a href="#" data-status="preview">Avant-premi&egrave;re</a></li>
 			<li><a href="#" data-status="funded">Termin&eacute;s</a></li>
@@ -29,7 +29,7 @@ else {
 		//PROJETS EN COURS
 		$nb_collecte_projects = count(ATCF_Campaigns::list_projects_funding()); 
 		if ($nb_collecte_projects > 0) { ?>
-			<div class="part-title-separator mobile_hidden">
+			<div class="part-title-separator">
 				<span class="part-title">En cours de financement</span>
 			</div>
 
@@ -63,7 +63,7 @@ else {
 		$nb_preview_projects = count($preview_projects);
 		$nb_total_projects = $nb_vote_projects + $nb_preview_projects;
 		if ($nb_total_projects > 0) { ?>
-			<div class="part-title-separator mobile_hidden">
+			<div class="part-title-separator">
 				<span class="part-title">Prochainement</span>
 			</div>
 
@@ -113,7 +113,7 @@ else {
 	ob_start();
 		//PROJETS REUSSIS
 		?>
-		<div class="part-title-separator mobile_hidden">
+		<div class="part-title-separator">
 			<?php
 			$nb_funded_projects = count(ATCF_Campaigns::list_projects_funded(-1)); 
 			if ($nb_funded_projects > 0) { ?>
