@@ -1020,7 +1020,7 @@ WDGInvestPageFunctions=(function($) {
 				//Validation du formulaire
 				$("#invest_form").submit(function(e) {
 					var formSelf = this;
-					if ($(formSelf).data("hasfilledinfos") != "1" || $("#invest_type").val() != "user") {
+					if ($(formSelf).data("hasfilledinfos") != "1" && $("#invest_type").val() == "user") {
 						e.preventDefault();
 						$("#invest_form_button").hide();
 						$("#invest_form_loading").show();
