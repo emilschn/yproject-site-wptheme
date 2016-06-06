@@ -59,7 +59,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
-	$current_version = '20160420';
+	$current_version = '20160502';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -68,6 +68,7 @@ function yproject_enqueue_script(){
 	}
 	
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), $current_version);
+	if ($is_campaign) { wp_enqueue_script( 'wdg-project-invest', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign-invest.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
 	if ($is_dashboard_page && $can_modify) { wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
 	if ($is_admin_page) { wp_enqueue_script( 'wdg-admin-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-admin-dashboard.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));

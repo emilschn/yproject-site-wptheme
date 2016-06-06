@@ -10,7 +10,6 @@ YPUIFunctions = (function($) {
 		initUI: function() {
 			YPMenuFunctions.initMenuBar();
 			WDGProjectPageFunctions.initUI();
-			WDGInvestPageFunctions.initUI();
 			YPUIFunctions.refreshProjectList();
 			
 			$(document).scroll(function() {

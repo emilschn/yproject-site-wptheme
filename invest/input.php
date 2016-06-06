@@ -46,6 +46,7 @@ if (isset($campaign)):
 		<?php endif; ?>
 			
 		<?php locate_template( 'invest/input-lightbox-user-infos.php', true ); ?>
+		<?php locate_template( 'invest/input-lightbox-orga-infos.php', true ); ?>
 		
 		<form id="invest_form" action="<?php echo $page_invest_link; ?>" method="post" enctype="multipart/form-data" data-campaignid="<?php echo $campaign->ID; ?>" data-hasfilledinfos="<?php echo ($WDGUser_current->has_filled_invest_infos($campaign->funding_type()) ? "1" : "0"); ?>">
 			<input type="hidden" id="input_invest_min_value" name="old_min_value" value="<?php echo $min_value; ?>">
@@ -168,7 +169,7 @@ if (isset($campaign)):
 								<option value="user"><?php _e("En mon nom (personne physique)", 'yproject'); ?></option>
 								<?php if (count($organisations_list) > 0): ?>
 									<?php foreach ($organisations_list as $organisation_item): ?>
-										<option value="<?php echo $organisation_item->organisation_wpref; ?>"><?php _e("Pour", 'yproject'); ?> <?php echo $organisation_item->organisation_name; ?></option>
+										<option value="<?php echo $organisation_item->organisation_wpref; ?>"><?php _e("Pour l'organisation", 'yproject'); ?> <?php echo $organisation_item->organisation_name; ?></option>
 									<?php endforeach; ?>
 									<option value="new_organisation"><?php _e("Pour une nouvelle organisation (personne morale)...", 'yproject'); ?></option>
 								<?php else: ?>

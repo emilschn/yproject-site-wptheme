@@ -52,6 +52,8 @@ if (isset($campaign)):
 		</ul>
 	<?php endif; ?>
 
+	<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
 	<div class="align-center mangopay-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="Bandeau Mangopay" /></div>
+	<?php endif; ?>
 
 <?php endif;

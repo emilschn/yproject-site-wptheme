@@ -9,7 +9,7 @@
 $organisation_obj = YPOrganisation::current();
 YPOrganisation::edit($organisation_obj);
 $organisation_obj->send_kyc();
-ypcf_init_mangopay_user($organisation_obj->get_creator(), TRUE);
+ypcf_init_mangopay_user($organisation_obj->get_creator(), TRUE); //TODO : supprimer apres Prospare
 get_header();
 ?>
 
@@ -142,6 +142,16 @@ get_header();
 							} ?>
 							<br /><br />
 							
+							<strong><?php _e("Scan ou copie d'un RIB", 'yproject'); ?></strong><br />
+							<?php
+							$current_filelist_bank = WDGKYCFile::get_list_by_owner_id($organisation_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_bank);
+							$current_file_bank = $current_filelist_bank[0];
+							if ( isset($current_file_bank) ):
+							?>
+							<a target="_blank" href="<?php echo $current_file_bank->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_bank->date_uploaded; ?></a><br />
+							<?php endif; ?>
+							<input type="file" name="org_doc_bank" /> <br /><br />
+							
 							<strong><?php _e("K-BIS ou &eacute;quivalent &agrave; un registre du commerce", 'yproject'); ?></strong><br />
 							<?php
 							$current_filelist_kbis = WDGKYCFile::get_list_by_owner_id($organisation_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_kbis);
@@ -197,13 +207,16 @@ get_header();
 						
 						<?php $organisation_lemonway_authentication_status = $organisation_obj->get_lemonway_status(); ?>
 						<?php if ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_blocked): ?>
-							<?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIREN. Ainsi que les 4 documents ci-dessus.", 'yproject'); ?><br />
+							<?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIREN. Ainsi que les 5 documents ci-dessus.", 'yproject'); ?><br />
 						<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_ready): ?>
 							<form action="" method="POST" enctype="multipart/form-data">
 								<input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
 							</form>
 						<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_waiting): ?>
 							<?php _e("L'organisation est en cours d'authentification aupr&egrave;s de notre partenaire.", 'yproject'); ?>
+							<form action="" method="POST" enctype="multipart/form-data">
+								<input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
+							</form>
 						<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_registered): ?>
 							<?php _e("L'organisation est bien authentifi&eacute;e aupr&egrave;s de notre partenaire.", 'yproject'); ?>
 						<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_rejected): ?>
@@ -312,7 +325,7 @@ get_header();
 						 */
 						?>
 						<h2 class="underlined"><?php _e( 'Porte-monnaie', 'yproject' ); ?></h2>
-						<?php $real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid($organisation_obj->get_wpref()) / 100; ?>
+						<?php /* $real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid($organisation_obj->get_wpref()) / 100; ?>
 						Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br /><br />
 
 						<?php if ($pending_transfers) : ?>
@@ -325,7 +338,9 @@ get_header();
 						    </form>
 						    <br /><br />
 						<?php	}
-						endif; ?>
+						endif; */ ?>
+						<?php //porte monnaie LW ?>
+						Vous disposez de <?php echo $organisation_obj->get_lemonway_balance(); ?>&euro; dans votre porte-monnaie.<br /><br />
 	
 						    
 						<?php

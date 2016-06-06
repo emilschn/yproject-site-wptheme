@@ -24,26 +24,26 @@ get_header();
 			    
 					<?php the_content(); ?>
 
-					<?php global $errors_submit_new; ?>
-					<?php if (count($errors_submit_new->errors) > 0): ?>
+					<?php global $errors_submit_new, $errors_create_orga; ?>
+					<?php if (count($errors_submit_new->errors) > 0 || count($errors_create_orga) > 0): ?>
 					<ul class="errors">
 						<?php $error_messages = $errors_submit_new->get_error_messages(); ?>
 						<?php foreach ($error_messages as $error_message): ?>
 							<li><?php echo $error_message; ?></li>
+						<?php endforeach; ?>
+						<?php foreach ($errors_create_orga as $error_create_orga): ?>
+							<li><?php echo $error_create_orga; ?></li>
 						<?php endforeach; ?>
 					</ul>
 					<?php endif; ?>
 
 					<form action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
 
-						<label for="org_name"><?php _e('D&eacute;nomination sociale*', 'yproject'); ?></label>
+						<label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?>*</label>
 						<input type="text" name="org_name" value="<?php echo filter_input(INPUT_POST, 'org_name'); ?>" /><br />
 
-						<?php /*
-						<label for="org_email"><?php _e('e-mail de contact', 'yproject'); ?></label>
+						<label for="org_email"><?php _e('e-mail de contact', 'yproject'); ?>*</label>
 						<input type="text" name="org_email" value="<?php echo filter_input(INPUT_POST, 'org_email'); ?>" /><br />
-						 * 
-						 */ ?>
 
 						<?php /*
 						<label for="org_type"><?php _e('Type d&apos;organisation', 'yproject'); ?></label>
@@ -56,12 +56,10 @@ get_header();
 						<label for="org_idnumber"><?php _e('Num&eacute;ro SIREN', 'yproject'); ?>*</label>
 						<input type="text" name="org_idnumber" value="<?php echo filter_input(INPUT_POST, 'org_idnumber'); ?>" /><br />
 
-						<?php /*
 						<label for="org_rcs"><?php _e('RCS', 'yproject'); ?>*</label>
 						<input type="text" name="org_rcs" value="<?php echo filter_input(INPUT_POST, 'org_rcs'); ?>" /><br />
-						 */ ?>
 
-						<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?></label>
+						<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?>*</label>
 						<input type="text" name="org_capital" value="<?php echo filter_input(INPUT_POST, 'org_capital'); ?>" /><br />
 
 						<label for="org_ape"><?php _e('Code APE', 'yproject'); ?>*</label>

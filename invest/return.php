@@ -8,17 +8,30 @@ if (isset($campaign) && is_user_logged_in()):
     ypcf_session_start();
     ypcf_check_is_project_investable();
 	
-    if (isset($_REQUEST["ContributionID"])): ?>
+    if (isset($_REQUEST["ContributionID"]) || isset($_REQUEST["response_wkToken"]) || ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway && $_GET['meanofpayment'] == 'wire')): ?>
 	
 		<?php
-		$purchase_key = $_REQUEST["ContributionID"];
-		if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wire') {
-			$mangopay_contribution = ypcf_mangopay_get_withdrawalcontribution_by_id($purchase_key);
-			$purchase_key = 'wire_' . $purchase_key;
-			$amount = $mangopay_contribution->AmountDeclared / 100;
-		} else {
-			$mangopay_contribution = ypcf_mangopay_get_contribution_by_id($purchase_key);
-			$amount = $mangopay_contribution->Amount / 100;
+		$purchase_key = '';
+		if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay) {
+			$purchase_key = $_REQUEST["ContributionID"];
+			if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wire') {
+				$mangopay_contribution = ypcf_mangopay_get_withdrawalcontribution_by_id($purchase_key);
+				$purchase_key = 'wire_' . $purchase_key;
+				$amount = $mangopay_contribution->AmountDeclared / 100;
+			} else {
+				$mangopay_contribution = ypcf_mangopay_get_contribution_by_id($purchase_key);
+				$amount = $mangopay_contribution->Amount / 100;
+			}
+		} else if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway) {
+			if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wire') {
+				$random = rand(10000, 99999);
+				$purchase_key = 'wire_TEMP_' . $random;
+				$amount = $_SESSION['amount_to_save'];
+			} else {
+				$purchase_key = $_REQUEST["response_wkToken"];
+				$lw_transaction_result = LemonwayLib::get_transaction_by_id( $purchase_key );
+				$amount = $lw_transaction_result->CRED;
+			}
 		}
 
 		$paymentlist = edd_get_payments();
@@ -41,7 +54,9 @@ if (isset($campaign) && is_user_logged_in()):
 				$organisation = new YPOrganisation($invest_type);
 				if ($organisation) {
 					$current_user_organisation = $organisation->get_creator();
-					ypcf_init_mangopay_user($current_user_organisation, true);
+					if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay) {
+						ypcf_init_mangopay_user($current_user_organisation, true);
+					}
 					$save_user_id = $current_user_organisation->ID;
 					$save_display_name = $organisation->get_name();
 				}
@@ -238,7 +253,12 @@ if (isset($campaign) && is_user_logged_in()):
 
 				case 'failed' :
 					_e("Il y a eu une erreur pendant la transacton.", 'yproject'); ?><br />
-					<?php echo $mangopay_contribution->AnswerMessage . ' (' . $mangopay_contribution->AnswerCode . ')';
+					<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
+						<?php echo $mangopay_contribution->AnswerMessage . ' (' . $mangopay_contribution->AnswerCode . ')'; ?>
+					<?php elseif ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway): ?>
+						<?php echo $lw_transaction_result->MSG; ?>
+					<?php endif; ?>
+					<?php
 					break;
 			}
 
@@ -248,5 +268,7 @@ if (isset($campaign) && is_user_logged_in()):
 			_e("Il y a eu une erreur pendant la transacton.", 'yproject');
 		endif;
 	
+	else:
+		_e("Erreur d'affichage (ERRPAYRET01).", 'yproject');
     endif;
 endif;
