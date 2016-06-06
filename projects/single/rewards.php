@@ -37,9 +37,9 @@ $estimated_turnover = $campaign->estimated_turnover();
 		<?php // ROYALTIES // ?>
 		<?php elseif ($campaign->funding_type() == 'fundingproject'): ?>
 		
-		<?php if ($campaign_status == "collecte"): ?>
 		<input type="hidden" id="roi_percent_project" value="<?php echo $campaign->roi_percent_estimated(); ?>" />
 		<input type="hidden" id="roi_goal_project" value="<?php echo $campaign->goal(false); ?>" />
+		<?php if ($campaign_status == "collecte"): ?>
 		<form method="GET" action="<?php echo get_permalink($page_invest->ID); ?>">
 		<?php endif; ?>
 			
@@ -59,13 +59,13 @@ $estimated_turnover = $campaign->estimated_turnover();
 								<table>
 									<tr>
 										<?php $max_turnover = max($estimated_turnover); ?>
-										<?php for ($i = $firstpayment_year; $i < $firstpayment_year + $funding_duration; $i++) : ?>
-										<?php $height = 100 - round($estimated_turnover[$i] / $max_turnover * 100); ?>
+										<?php foreach ($estimated_turnover as $i => $value) ://for ($i = $firstpayment_year; $i < $firstpayment_year + $funding_duration; $i++) : ?>
+										<?php $height = 100 - round($value / $max_turnover * 100); ?>
 										<td>
 											<div><div style="height: <?php echo $height; ?>%;"></div></div>
-											<?php echo $i; ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $estimated_turnover[$i]; ?></span>
+											<?php echo $i; ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $value; ?></span>
 										</td>
-										<?php endfor; ?>
+										<?php endforeach; ?>
 									</tr>
 									<tr>
 										<?php for ($i = 0; $i < $funding_duration; $i++) : ?>
