@@ -153,6 +153,7 @@ get_header();
 							<input type="file" name="org_doc_bank" /> <br /><br />
 							
 							<strong><?php _e("K-BIS ou &eacute;quivalent &agrave; un registre du commerce", 'yproject'); ?></strong><br />
+							<?php _e("Datant de moins de 3 mois", 'yproject'); ?><br />
 							<?php
 							$current_filelist_kbis = WDGKYCFile::get_list_by_owner_id($organisation_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_kbis);
 							$current_file_kbis = $current_filelist_kbis[0];
