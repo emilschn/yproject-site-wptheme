@@ -324,8 +324,8 @@ form.wdg-forms table input[type="text"].reward-text{
 .wdg-lightbox .wdg-lightbox-padder {
 	position: relative;
 	max-width: 600px;
-	max-height: 80vh;
-	margin: 5vh auto;
+	max-height: 65vh;
+	margin: 25vh auto;
 	padding: 20px;
 	background-color: #F2F2F2;
 	overflow-y: auto;
@@ -2320,11 +2320,10 @@ div#home_bottom h1 {
 
 #vote-form{
     position: absolute;
-    top: -350px;
+    top: -150px;
     width: 340px;
-    min-height: 500px;
+    min-height: 100px;
     background-color: #F2F2F2;
-    z-index: -11;
     text-align: center;
 }
 .ypvote-form {
@@ -2353,10 +2352,12 @@ div#home_bottom h1 {
 }
 .ypvote-form ul.impact-list li, .ypvote-form ul.more-info-list li {
     list-style-type: none;
+    margin:5px;
 }
 .ypvote-form ul.impact-list span {
     width: 100px;
     display: inline-block;
+    margin:auto;
 }
 .ypvote-form ul.impact-list select {
     width: 40px;
@@ -3813,3 +3814,95 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 #content.theme-myphotoreporter #map-cursor { background-image: url("images/curseur-myphotoreporter.png"); }
 #content.theme-myphotoreporter .projects-more { background-image: url("images/responsive-plus-myphotoreporter.png"); }
 #content.theme-myphotoreporter #head-image { top: 167px; }
+
+
+
+.ypvote-form input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid white;
+    /*required for proper track sizing in FF*/
+    width: 200px;
+    background: none !important;
+}
+.ypvote-form input[type=range]::-webkit-slider-runnable-track {
+    width: 200px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+.ypvote-form input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #EA4F51;
+    margin-top: -4px;
+}
+.ypvote-form input[type=range]:focus {
+    outline: none;
+}
+.ypvote-form input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+.ypvote-form input[type=range]::-moz-range-track {
+    width: 200px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+.ypvote-form input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #EA4F51;
+}
+
+/*hide the outline behind the border*/
+.ypvote-form input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+.ypvote-form input[type=range]::-ms-track {
+    width: 200px;
+    height: 5px;
+    
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+    
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+
+    /*remove default tick marks*/
+    color: transparent;
+}
+.ypvote-form input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+.ypvote-form input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+}
+.ypvote-form input[type=range]::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #EA4F51;
+}
+.ypvote-form input[type=range]:focus::-ms-fill-lower {
+    background: #EA4F51;
+}
+.ypvote-form input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
