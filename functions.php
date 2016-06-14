@@ -1000,221 +1000,219 @@ function get_investors_table() {
 	global $disable_logs;
 	$disable_logs = TRUE;
     
-//        locate_template( array("requests/investments.php"), true );
-        $investments_list = (json_decode($_POST['data'],true));
-        $campaign = atcf_get_campaign($_POST['id_campaign']); 
+	$current_wdg_user = WDGUser::current();
+	require_once("country_list.php");
+	global $country_list;
+	$investments_list = (json_decode($_POST['data'],true));
+	$campaign = atcf_get_campaign($_POST['id_campaign']);
+	$page_dashboard = get_page_by_path('tableau-de-bord');
+	$campaign_id_param = '?campaign_id=' . $campaign->ID;
         
 	$is_campaign_over = ($campaign->campaign_status() == 'funded' || $campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing');
         
-        $classcolonnes = array('coluname',
-                            'collname',
-                            'colfname',
-                            'colbrthday',
-                            'colbrthplace',
-                            'colnat',
-                            'colcity',
-                            'coladdr',
-                            'colpcode',
-                            'colcountry',
-                            'colemail',
-                            'colphone',
-                            'colinvesmontant',
-                            'colinvdate',
-                            'colinvpaytype',
-                            'colinvpaystate',
-                            'colinvsign');
-        if ($is_campaign_over) { $classcolonnes[]='colinvstate'; }
-        if ($campaign->funding_type()=='fundingdonation') {
-            $classcolonnes[]='colrewardprice';
-            $classcolonnes[]='colrewardtext';
-        }
+	$classcolonnes = array('coluname',
+					'collname',
+					'colfname',
+					'colbrthday',
+					'colbrthplace',
+					'colnat',
+					'colcity',
+					'coladdr',
+					'colpcode',
+					'colcountry',
+					'colemail',
+					'colphone',
+					'colinvesmontant',
+					'colinvdate',
+					'colinvpaytype',
+					'colinvpaystate',
+					'colinvsign');
+	
+	if ($is_campaign_over) { $classcolonnes[]='colinvstate'; }
+	if ($campaign->funding_type()=='fundingdonation') {
+		$classcolonnes[]='colrewardprice';
+		$classcolonnes[]='colrewardtext';
+	}
         
-        $titrecolonnes = array('Utilisateur',
-                            'Nom',
-                            'Prénom',
-                            'Date de naissance',
-                            'Ville de naissance',
-                            'Nationalité',
-                            'Ville',
-                            'Adresse',
-                            'Code postal',
-                            'Pays',
-                            'Mail',
-                            'Téléphone',
-                            'Montant investi',
-                            'Date',
-                            'Type de paiement',
-                            'Etat du paiement',
-                            'Signature');
-        if ($is_campaign_over) { $titrecolonnes[]='Investissement'; }
-        if ($campaign->funding_type()=='fundingdonation') {
-            $titrecolonnes[]='Palier de contrepartie';
-            $titrecolonnes[]='Description de la contrepartie';
-        }
+	$titrecolonnes = array('Utilisateur',
+					'Nom',
+					'Prénom',
+					'Date de naissance',
+					'Ville de naissance',
+					'Nationalité',
+					'Ville',
+					'Adresse',
+					'Code postal',
+					'Pays',
+					'Mail',
+					'Téléphone',
+					'Montant investi',
+					'Date',
+					'Type de paiement',
+					'Etat du paiement',
+					'Signature');
+	if ($is_campaign_over) { $titrecolonnes[]='Investissement'; }
+	if ($campaign->funding_type()=='fundingdonation') {
+		$titrecolonnes[]='Palier de contrepartie';
+		$titrecolonnes[]='Description de la contrepartie';
+	}
         
-        $selectiondefaut = array(true,
-                            true,
-                            true,
-                            false,
-                            false,
-                            false,
-                            true,
-                            false,
-                            false,
-                            false,
-                            true,
-                            true,
-                            true,
-                            true,
-                            true,
-                            false,
-                            false);
-        if ($is_campaign_over) { $selectiondefaut[]=true; }
-        if ($campaign->funding_type()=='fundingdonation') {
-            $selectiondefaut[]=true;
-            $selectiondefaut[]=false;
-        }
-        $colonnes = array_combine($classcolonnes, $titrecolonnes);
-        $displaycolonnes = array_combine($classcolonnes,$selectiondefaut);
-    ?>
+	$selectiondefaut = array(true,
+					true,
+					true,
+					false,
+					false,
+					false,
+					true,
+					false,
+					false,
+					false,
+					true,
+					true,
+					true,
+					true,
+					true,
+					false,
+					false);
+	if ($is_campaign_over) { $selectiondefaut[]=true; }
+	if ($campaign->funding_type()=='fundingdonation') {
+		$selectiondefaut[]=true;
+		$selectiondefaut[]=false;
+	}
+	$colonnes = array_combine($classcolonnes, $titrecolonnes);
+	$displaycolonnes = array_combine($classcolonnes,$selectiondefaut);
+?>
 
 <div class="wdg-datatable" >
-<table id="investors-table" class="display" cellspacing="0" width="100%">
+	<table id="investors-table" class="display" cellspacing="0" width="100%">
     
-    <thead>
-    <tr>
-        <?php foreach($colonnes as $class=>$titre){
-            //Ecriture des nom des colonnes en haut
-            echo '<td ';
-            if (($displaycolonnes[$class]) == false){
-                echo 'data-visibility="0"';
-            } else {
-                echo 'data-visibility="1"';
-            }
-            echo '>'.$titre.'</td>';}?>
-    </tr>
-    </thead>
+		<?php //Ecriture des nom des colonnes en haut ?>
+		<thead>
+		<tr>
+			<?php foreach($colonnes as $class => $titre) { ?>
+				<td data-visibility="<?php if (($displaycolonnes[$class]) == false){ echo '0'; } else { echo '1'; } ?>"><?php echo $titre; ?></td>
+			<?php }?>
+		</tr>
+		</thead>
 
-    <tbody>
-	<?php
-        require_once("country_list.php");
-        global $country_list;
-        
-	foreach ( $investments_list['payments_data'] as $item ) {
-		$post_invest = get_post($item['ID']);
-		$mangopay_id = edd_get_payment_key($item['ID']);
-		$payment_type = 'Carte';
-		$payment_state = edd_get_payment_status( $post_invest, true );
-		if (strpos($mangopay_id, 'wire_') !== FALSE) {
-			$payment_type = 'Virement';
-		} else if ($mangopay_id == 'check') {
-			$payment_type = 'Ch&egrave;que';
-		}
-		$investment_state = 'Validé';
-		if ($campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing') {
-		    $investment_state = 'Annulé';
+		<tbody>
 			
-		    $refund_id = get_post_meta($item['ID'], 'refund_id', TRUE);
-		    if (isset($refund_id) && !empty($refund_id)) {
-			$refund_obj = ypcf_mangopay_get_refund_by_id($refund_id);
-			$investment_state = 'Remboursement en cours';
-			if ($refund_obj->IsCompleted) {
-			    if ($refund_obj->IsSucceeded) {
-				$investment_state = 'Remboursé';
-			    } else {
-				$investment_state = 'Remboursement échoué';
-			    }
+		<?php foreach ( $investments_list['payments_data'] as $item ) {
+			$post_invest = get_post($item['ID']);
+			$mangopay_id = edd_get_payment_key($item['ID']);
+			$payment_type = 'Carte';
+			$payment_state = edd_get_payment_status( $post_invest, true );
+			if ($payment_state == "En attente" && $current_wdg_user->is_admin()) {
+				$payment_state .= '<br /><a href="' .get_permalink($page_dashboard->ID) . $campaign_id_param. '&approve_payment='.$item['ID'].'" style="font-size: 10pt;">[Confirmer]</a>';
 			}
+			if (strpos($mangopay_id, 'wire_') !== FALSE) {
+				$payment_type = 'Virement';
+			} else if ($mangopay_id == 'check') {
+				$payment_type = 'Ch&egrave;que';
+			}
+			$investment_state = 'Validé';
+			if ($campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing') {
+				$investment_state = 'Annulé';
+
+				$refund_id = get_post_meta($item['ID'], 'refund_id', TRUE);
+				if (isset($refund_id) && !empty($refund_id)) {
+					$refund_obj = ypcf_mangopay_get_refund_by_id($refund_id);
+					$investment_state = 'Remboursement en cours';
+					if ($refund_obj->IsCompleted) {
+						if ($refund_obj->IsSucceeded) {
+							$investment_state = 'Remboursé';
+						} else {
+							$investment_state = 'Remboursement échoué';
+						}
+					}
+
+				} else {
+					$refund_id = get_post_meta($item['ID'], 'refund_wire_id', TRUE);
+					if (isset($refund_id) && !empty($refund_id)) {
+						$investment_state = 'Remboursé';
+					}
+				}
+			}
+
+			$user_data = get_userdata($item['user']);
+
+			//Liste des données à afficher pour la ligne traitée
+			if(YPOrganisation::is_user_organisation($item['user'])){
+				$orga = new YPOrganisation($item['user']);
+				$orga_user = get_user_by('email', $item['email']);
+				$datacolonnes = array(
+					'ORG - ' . $orga->get_name(),
+					$orga_user->last_name,
+					$orga_user->first_name,
+					'',
+					'',
+					$orga->get_nationality(),
+					$orga->get_rcs() .' ('.$orga->get_idnumber().')',
+					$orga->get_address(),
+					$orga->get_postal_code(),
+					ucfirst(strtolower($country_list[$orga->get_nationality()])),
+					$item['email'],
+					$orga_user->user_mobile_phone,
+					$item['amount'].'€',
+					date_i18n( 'Y-m-d', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
+					$payment_type,
+					$payment_state,
+					$item['signsquid_status_text']
+				);
+			} else {
+				$datacolonnes = array(
+					bp_core_get_userlink($item['user']),
+					$user_data->last_name,
+					$user_data->first_name,
+					$user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,
+					$user_data->user_birthplace,
+					ucfirst(strtolower($country_list[$user_data->user_nationality])),
+					$user_data->user_city,
+					$user_data->user_address,
+					$user_data->user_postal_code,
+					$user_data->user_country,
+					$user_data->user_email,
+					$user_data->user_mobile_phone,
+					$item['amount'].'€',
+					date_i18n( 'Y-m-d', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
+					$payment_type,
+					$payment_state,
+					$item['signsquid_status_text']
+				);
+			}
+
+			if ($is_campaign_over) { $datacolonnes[]=$investment_state; }
+
+			if ($campaign->funding_type()=='fundingdonation') {
+				$datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['amount']."€";
+				$datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['name'];
+			}
+
+			$affichedonnees = array_combine($classcolonnes, $datacolonnes);
+			?>
+
+			<tr data-payment="<?php echo $item['ID']; ?>">
+				<?php
+				//Ecriture de la ligne
+				foreach($affichedonnees as $class=>$data){
+					echo '<td>'.$data.'</td>';
+				}
+				?>
+			</tr>
 			
-		    } else {
-			$refund_id = get_post_meta($item['ID'], 'refund_wire_id', TRUE);
-			if (isset($refund_id) && !empty($refund_id)) {
-			    $investment_state = 'Remboursé';
-			}
-		    }
-		}
-		
-		$user_data = get_userdata($item['user']);
-                
-                //Liste des données à afficher pour la ligne traitée
-                if(YPOrganisation::is_user_organisation($item['user'])){
-			$orga = new YPOrganisation($item['user']);
-			$orga_user = get_user_by('email', $item['email']);
-			$datacolonnes = array(
-				'ORG - ' . $orga->get_name(),
-				$orga_user->last_name,
-				$orga_user->first_name,
-				'',
-				'',
-				$orga->get_nationality(),
-				$orga->get_rcs() .' ('.$orga->get_idnumber().')',
-				$orga->get_address(),
-				$orga->get_postal_code(),
-				ucfirst(strtolower($country_list[$orga->get_nationality()])),
-				$item['email'],
-				$orga_user->user_mobile_phone,
-				$item['amount'].'€',
-				date_i18n( 'Y-m-d', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
-				$payment_type,
-				$payment_state,
-				$item['signsquid_status_text']
-			);
-                } else {
-			$datacolonnes = array(
-				bp_core_get_userlink($item['user']),
-				$user_data->last_name,
-				$user_data->first_name,
-				$user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,
-				$user_data->user_birthplace,
-				ucfirst(strtolower($country_list[$user_data->user_nationality])),
-				$user_data->user_city,
-				$user_data->user_address,
-				$user_data->user_postal_code,
-				$user_data->user_country,
-				$user_data->user_email,
-				$user_data->user_mobile_phone,
-				$item['amount'].'€',
-				date_i18n( 'Y-m-d', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
-				$payment_type,
-				$payment_state,
-				$item['signsquid_status_text']
-			);
-                }
-                
-                if ($is_campaign_over) { $datacolonnes[]=$investment_state; }
-                
-                if ($campaign->funding_type()=='fundingdonation') {
-                    $datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['amount']."€";
-                    $datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['name'];
-                }
-                
-                $affichedonnees = array_combine($classcolonnes, $datacolonnes);
-                ?>
-                
-                <tr data-payment="<?php echo $item['ID']; ?>">
-                <?php
-                    //Ecriture de la ligne
-                    foreach($affichedonnees as $class=>$data){
-                        echo '<td>'.$data.'</td>';
-                    }
-		?>
-                </tr>
-                <?php
-//	    }
-	}
-	?>
-    </tbody>
+		<?php } ?>
+		</tbody>
     
-    <tfoot>
-    <tr>
-        <?php foreach($colonnes as $class=>$titre){
-            //Ecriture des noms des colonnes en bas
-            echo '<td>'.$titre.'</td>';}?>        
-    </tr>
-    </tfoot>
-</table>
-</div>
-<br/>
+		<tfoot>
+		<tr>
+			<?php foreach($colonnes as $class=>$titre){
+				//Ecriture des noms des colonnes en bas
+				echo '<td>'.$titre.'</td>';}?>        
+		</tr>
+		</tfoot>
+	</table>
+	
+</div> <br/>
 
 <script type="text/javascript">
     jQuery(document).ready( function($) {

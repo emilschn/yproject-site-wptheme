@@ -3,12 +3,33 @@
  * Template Name: Projet Tableau de bord
  *
  */
-$campaign_id = $_GET['campaign_id'];
+$campaign_id = filter_input(INPUT_GET, 'campaign_id');
+$success_msg = filter_input(INPUT_GET, 'success_msg');
 global $feedback_sendautomail;
 $feedback_sendautomail = WDGFormProjects::form_validate_send_automail();
+WDGFormProjects::form_approve_payment();
 ?>
 
 <?php get_header(); ?>
+
+<?php if ( isset($success_msg) && !empty($success_msg) ): ?>
+	<div id="lightbox-successmsg" class="wdg-lightbox">
+		<div class="wdg-lightbox-click-catcher"></div>
+		<div class="wdg-lightbox-padder">
+		    <div class="wdg-lightbox-button-close">
+			<a href="#" class="button">X</a>
+		    </div>
+			<?php
+			switch ($success_msg) {
+				case 'approvepayment':
+					_e("Le paiement a &eacute;t&eacute; valid&eacute;.", 'yproject');
+					break;
+			}
+			?>
+		</div>
+	</div>
+<?php endif; ?>
+
 <div id="content">
     <div class="padder">
         <div class="page" id="blog-single" role="main">
