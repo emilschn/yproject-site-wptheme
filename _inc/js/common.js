@@ -1131,6 +1131,7 @@ WDGInvestPageFunctions=(function($) {
 						'data': { 
 							'action': 'save_user_infos',
 							'campaign_id': $("#invest_form").data("campaignid"),
+							'invest_type': $("#invest_type").val(),
 							'gender': $("#update_gender").val(),
 							'firstname': $("#update_firstname").val(),
 							'lastname': $("#update_lastname").val(),
