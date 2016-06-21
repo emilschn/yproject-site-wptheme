@@ -112,6 +112,10 @@ if (isset($campaign) && is_user_logged_in()):
 				)
 			);
 
+			$status = 'pending';
+			if (isset($_GET['cancel']) && $_GET['cancel'] == '1') {
+				$status = 'failed';
+			}
 			$payment_data = array( 
 				'price'			=> $amount, 
 				'date'			=> date('Y-m-d H:i:s'), 
@@ -121,7 +125,7 @@ if (isset($campaign) && is_user_logged_in()):
 				'downloads'		=> array($campaign->ID),
 				'user_info'		=> $user_info,
 				'cart_details'	=> $cart_details,
-				'status'		=> 'pending'
+				'status'		=> $status
 			);
 			$payment_id = edd_insert_payment( $payment_data );
 			

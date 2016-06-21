@@ -39,6 +39,8 @@ get_header();
 		    <h1>Infos LW</h1>
 			<?php // $roi_declaration = new WDGROIDeclaration(1); $roi_declaration->redo_transfers(); ?>
 			
+			<?php $lw_transaction_result = LemonwayLib::get_transaction_by_id( 'INVU7C11182TS39068' ); print_r($lw_transaction_result); ?>
+			
 		    <h1>Stats Mangopay</h1>
 			
 			<?php /* $result = ypcf_mangopay_get_operations_by_wallet_id(36782013); print_r($result); */ ?>
@@ -102,11 +104,11 @@ get_header();
 			?>
 		
 		    <?php
-		    /*
-		    //Naoden
-		    $campaign_id = 6100;
-		    $amount = 56541.82;
-		    $amount_fees = 9818.18;
+			/*
+		    //Prospare
+		    $campaign_id = 9924;
+		    $amount = 33583.02;
+		    $amount_fees = 6750.98;
 		    $api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
 		    echo '$api_project_id ' . $api_project_id . '<br />';
 		    $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
@@ -122,7 +124,8 @@ get_header();
 				    print_r($transfer);
 			    }
 		    }
-		     */
+			 * 
+			 */
 		    ?>
 		    
 		    <?php 
@@ -216,6 +219,7 @@ get_header();
 		    </ul>
 		    <?php */ ?>
 		    
+		    <?php /* ?>
 		    <h2>Liste des porte-monnaie projets</h2>
 		    <ul>
 		    <?php 
@@ -234,6 +238,7 @@ get_header();
 			}
 		    ?>
 		    </ul>
+		    <?php */ ?>
 		    
 		    <?php /* ?>
 		    <h2>Liste des contributions</h2>
