@@ -8,6 +8,7 @@ $success_msg = filter_input(INPUT_GET, 'success_msg');
 global $feedback_sendautomail;
 $feedback_sendautomail = WDGFormProjects::form_validate_send_automail();
 WDGFormProjects::form_approve_payment();
+WDGFormProjects::form_cancel_payment();
 ?>
 
 <?php get_header(); ?>
@@ -23,6 +24,9 @@ WDGFormProjects::form_approve_payment();
 			switch ($success_msg) {
 				case 'approvepayment':
 					_e("Le paiement a &eacute;t&eacute; valid&eacute;.", 'yproject');
+					break;
+				case 'cancelpayment':
+					_e("Le paiement a &eacute;t&eacute; annul&eacute;.", 'yproject');
 					break;
 			}
 			?>

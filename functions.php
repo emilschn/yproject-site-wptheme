@@ -1104,6 +1104,7 @@ function get_investors_table() {
 			$payment_state = edd_get_payment_status( $post_invest, true );
 			if ($payment_state == "En attente" && $current_wdg_user->is_admin()) {
 				$payment_state .= '<br /><a href="' .get_permalink($page_dashboard->ID) . $campaign_id_param. '&approve_payment='.$item['ID'].'" style="font-size: 10pt;">[Confirmer]</a>';
+				$payment_state .= '<br /><br /><a href="' .get_permalink($page_dashboard->ID) . $campaign_id_param. '&cancel_payment='.$item['ID'].'" style="font-size: 10pt;">[Annuler]</a>';
 			}
 			if (strpos($mangopay_id, 'wire_') !== FALSE) {
 				$payment_type = 'Virement';
