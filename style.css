@@ -2349,7 +2349,7 @@ div#home_bottom h1 {
 }
 
 .ypvote-form ul.impact-list, .ypvote-form ul.more-info-list {
-    padding-left: 5px;
+    padding-left: 0px;
 }
 .ypvote-form ul.impact-list li, .ypvote-form ul.more-info-list li {
     list-style-type: none;
@@ -3919,11 +3919,10 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 
 .retour, .suivant{
     width: 10%;
+    display: inline-block;
 }
 .ypvote-form_v3 img{
-    width: auto;
-    height: 65px;
-    margin: 0px 20% 25% 20%;
+    height: 60px;
 }
 
 .ypvote-form_v3 img:hover {
@@ -4109,7 +4108,8 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 
 .smiley {
     margin: 0px !important;
-    height: 25px !important;
+    width: 8% !important;
+    height: 8% !important;
 }
 
 .voter {
@@ -4325,4 +4325,13 @@ div#content.version-3.scrolled nav.project-navigation ul li {
 
 #vote-form-v3-button{
     float: left;
+}
+
+#impact_span{
+    width: 100px;
+    display: inline-block;
+}
+
+.block2 ul{
+    padding-left: 25%;
 }
