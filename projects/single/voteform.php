@@ -30,101 +30,6 @@ if ($campaign->end_vote_remaining() > 0) {
 
 		<?php else: ?>
 
-			<script type="text/javascript">
-			  	var phase=0;
-				function masquer_div(idok,id1,id2)
-				{
-					if(idok=='phase1'){
-		  				if (1>phase)
-		  				{
-							document.getElementById(idok).className = "left";
-		  				}else{
-							document.getElementById(idok).className = "right";
-		  				}
-		  				phase=1;
-					}
-					if(idok=='phase2'){
-		  				if (2>phase)
-		  				{
-							document.getElementById(idok).className = "left";
-		  				}else{
-							document.getElementById(idok).className = "right";
-		  				}
-		  				phase=2;
-					}
-					if(idok=='phase3'){
-		  				if (3>phase)
-		  				{
-							document.getElementById(idok).className = "left";
-		  				}else{
-							document.getElementById(idok).className = "right";
-		  				}
-		  				phase=3;		  				
-					}
-			       document.getElementById(idok).style.display = 'block';
-			       document.getElementById(id1).style.display = 'none';
-			       document.getElementById(id2).style.display = 'none';
-
-				}
-				function masquer_sauf_div1()
-				{
-					masquer_div('phase1','phase2','phase3');
-				}
-				function masquer_sauf_div2()
-				{
-					masquer_div('phase2','phase1','phase3');
-				}
-				function masquer_sauf_div3()
-				{
-					masquer_div('phase3','phase1','phase2');
-				}
-				function afficher_div_true()
-				{
-					document.getElementById('validate_project-true').style.display = 'block';
-					document.getElementById('validate_project-false').style.display = 'none';
-
-				}
-				function afficher_div_false()
-				{
-					document.getElementById('validate_project-true').style.display = 'block';
-					document.getElementById('validate_project-false').style.display = 'none';
-
-				}
-
-				document.getElementById('aCliquer').get(0).onClick();
-			
-			function AfficheRange1(newVal){
- 				document.getElementById('valBox1').innerHTML=newVal+" / 5";
- 			}
-
-			function AfficheRange2(newVal){
- 				document.getElementById('valBox2').innerHTML=""+newVal+" / 5";
- 			}
-
-
-			function AfficheRange3(newVal){
- 				document.getElementById('valBox3').innerHTML=""+newVal+" / 5";
- 			}
-
-			function AfficheRange4(newVal){
-				if (newVal == 1){
-					var resultat = 'tr&egrave;s faible';
-				}
-				if (newVal == 2){
-					var resultat = 'plut&ocirc;t faible';
-				}					
-				if (newVal == 3){
-					var resultat = 'mod&eacute;r&eacute;';
-				}	
-				if (newVal == 4){
-					var resultat = '&eacute;lev&eacute;';
-				}
-				if (newVal == 5){
-					var resultat = 'tr&egrave;s &eacute;lev&eacute;';
-				}
-				document.getElementById('valBox4').innerHTML=resultat;
-  			}
- 			</script>
 				<div id="lightbox">
 					<?php 
 					$perma = get_permalink($post->ID);
@@ -133,13 +38,12 @@ if ($campaign->end_vote_remaining() > 0) {
 					<!-- phase 1 -->
 					<form name='ypvote' action='".$perma."' method='POST' class='ypvote-form_v3' enctype='multipart/form-data'>
 					<main class='container'>
-						<div id='phase1' onchange='avancement(".'1,"phase1"'.")'>
+						<div id='phase1'>
 							<div class='block1'>
 								<strong>Impacts et coh&eacute;rence du projet</strong><br />
 								<em>Comment &eacute;valuez-vous les impacts soci&eacute;taux de ce projet ?</em><br />
 								<ul class='impact-list' style='list-style-type:none;'>
 								    <li><span id='impact_span'>Economie</span>
-								    </br>
 							    		<input id='note_eco' type='range' min='1' max='5' step='1' id='impact_economy_v3' name='impact_economy' value='3'
 											 onkeyup='AfficheRange1(this.value)'
 											 onchange='AfficheRange1(this.value)'
@@ -147,7 +51,6 @@ if ($campaign->end_vote_remaining() > 0) {
 							    		<span id='valBox1' class='range-slider__value' >3 / 5</span>
 									</li>
 								    <li><span id='impact_span' >Environnement</span>
-							    		</br>
 							    		<input id='note_environnement' type='range'min='1' max='5' step='1' id='impact_environment_v3' name='impact_environment' value='3'
 								    		 onchange='AfficheRange2(this.value)'
 	  										 onkeyup='AfficheRange2(this.value)'
@@ -156,7 +59,6 @@ if ($campaign->end_vote_remaining() > 0) {
 								    </li>
 
 								    <li><span id='impact_span'>Social</span>
-							    		</br>
 							    		<input id='note_social' type='range'min='1' max='5' step='1' id='impact_social_v3' name='impact_social' value='3'
 								    		 onchange='AfficheRange3(this.value)'
 	  										 onkeyup='AfficheRange3(this.value)'
@@ -166,7 +68,6 @@ if ($campaign->end_vote_remaining() > 0) {
 								   </li>
 
 								    <li><span id='impact_span'>Autre</span>
-									</br>
 								     <input type='text' name='impact_other' placeholder='Pr&eacute;ciser...' value=''/></li>
 								</ul>
 								</br>
@@ -174,26 +75,26 @@ if ($campaign->end_vote_remaining() > 0) {
 								<em>Ces impacts sont-ils suffisants pour que ce projet soit en financement sur WEDOGOOD.co ?</em><br />
 								</div>
 								<div class='radio_validate'>
-									<label><input type='radio' id='btn-validate_project-true' id='validate_project_v3' name='validate_project' checked='checked' value='1' onclick='afficher_div_true();'>
+									<label><input type='radio' id='btn-validate_project-true' name='validate_project' checked='checked' value='1' onclick='afficher_div_true();'>
 									<span>
 									Oui
 									</span>
 									</label><br />
-									<label><input type='radio' id='btn-validate_project-false' id='validate_project_v3' name='validate_project' value='0' onclick='afficher_div_false();'>
+									<label><input type='radio' id='btn-validate_project-false' name='validate_project' value='0' onclick='afficher_div_false();'>
 									<span>
 									Non
 									</span>
 									</label><br />
 								</div>
 							</div>
-							<div class='suivant'>
-								<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png' onclick='masquer_sauf_div2();' style='cursor:pointer;'/>
+							<div class='suivant' onclick='masquer_sauf_div2();' style='cursor:pointer;'>
+								<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png'/>
 							</div>
 							</br>
 						</div>
 							<!-- phase 2 -->
 
-						<div id='phase2'  onchange='avancement(".'1,"phase1"'.")'>
+						<div id='phase2'>
 							<div class='retour'>
 								<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png' onclick='masquer_sauf_div1();' style='transform: rotate(180deg); cursor:pointer;'/>
 							</div>
@@ -217,7 +118,7 @@ if ($campaign->end_vote_remaining() > 0) {
 
 							<!-- phase 3 -->
 
-						<div id='phase3'  onchange='avancement(".'1,"phase1"'.")' >
+						<div id='phase3' >
 							<div class='retour'>
 								<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png' onclick='masquer_sauf_div2();' style='transform:rotate(180deg); cursor:pointer;'/>
 							</div>
