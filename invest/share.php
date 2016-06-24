@@ -40,47 +40,29 @@ if (isset($campaign) && is_user_logged_in()):
 					</div>
 					<div style="clear: both"></div>
 				</div>
-
-
-				<div class="project_preview_item_progress">
-					<?php
-					$percent = min(100, $campaign->percent_minimum_completed(false));
-					$width = 150 * $percent / 100;
-					$width_min = 0;
-					if ($percent >= 100 && $campaign->is_flexible()) {
-						$percent_min = $campaign->percent_minimum_to_total();
-						$width_min = 150 * $percent_min / 100;
-					}
-					?>
-					<a href="<?php echo $campaign_url; ?>">
-						<div class="project_preview_item_progressbg" style="margin-top: 14px;">
-							<div class="project_preview_item_progressbar" style="width:<?php echo $width; ?>px">
-								<?php if ($width_min > 0): ?>
-								<div style="width: <?php echo $width_min; ?>px; height: 20px; border: 0px; border-right: 1px solid white;">&nbsp;</div>
-								<?php else: ?>
-								&nbsp;
-								<?php endif; ?>
-							</div>
-						</div>
-						<span class="project_preview_item_progressprint"><?php echo $campaign->percent_minimum_completed(); ?></span>
-						<span class="project_preview_item_progressprint"><?php echo $campaign->current_amount(true)?></span>
-					</a>
-				</div>
 			</div>
 		</div>
 		<div style="clear: both"></div>
 	</div>
 	<div style="clear: both"></div>
-		
 
-	<center>
-	<?php if (class_exists('Sharing_Service')) {
-	    //Liens pour partager
-	    echo ypcf_fake_sharing_display();
-	} else {
-	    _e("Le service de partage est momentan&eacute;ment d&eacute;sactiv&eacute;.", 'yproject');
-	} ?>
-	</center><br /><br />
+	<div class="align-center">
+		<?php locate_template( 'projects/common/progressbar.php', true ); ?>
+	</div>
+	<br /><br /><br />
+		
+	<div class="align-center">
+		<?php _e("Partager", 'yproject'); ?><br /><br />
+		<button class="sharer button" data-sharer="twitter" data-title="<?php _e("Je viens d'investir sur le projet", 'yproject'); ?> <?php echo $campaign->data->post_title ?>" data-hashtags="crowdfunding" data-url="<?php echo $campaign_url; ?>"><?php _e("Twitter", 'yproject'); ?></button>
+		<button class="sharer button" data-sharer="facebook" data-url="<?php echo $campaign_url; ?>"><?php _e("Facebook", 'yproject'); ?></button>
+		<button class="sharer button" data-sharer="linkedin" data-url="<?php echo $campaign_url; ?>"><?php _e("Linkedin", 'yproject'); ?></button>
+		<button class="sharer button" data-sharer="googleplus" data-url="<?php echo $campaign_url; ?>"><?php _e("Google+", 'yproject'); ?></button>
+		<button class="sharer button" data-sharer="email" data-title="<?php _e("Je viens d'investir sur le projet", 'yproject'); ?> <?php echo $campaign->data->post_title ?>" data-url="<?php echo $campaign_url; ?>" data-subject="<?php _e("Vous devriez aller voir &ccedil;a !", 'yproject'); ?>" data-to=""><?php _e("E-mail", 'yproject'); ?></button>
+		<button class="sharer button" data-sharer="whatsapp" data-title="<?php _e("Je viens d'investir sur le projet", 'yproject'); ?> <?php echo $campaign->data->post_title ?>" data-url="<?php echo $campaign_url; ?>"><?php _e("Whatsapp", 'yproject'); ?></button>
+	</div>
+	<br /><br />
+	
+	
 	&lt;&lt; <a href="<?php echo $campaign_url; ?>"><?php _e("Retour au projet", 'yproject'); ?></a><br /><br />
 	
 <?php

@@ -953,6 +953,7 @@ footer div.social-icons {
 }
 .progressbar .progressbar-bg {
     display: inline-block;
+	text-align: left;
     width: 250px;
     background-color: #EEECED;
 }
