@@ -13,7 +13,7 @@ if (isset($campaign) && is_user_logged_in()):
 	locate_template( 'invest/breadcrumb.php', true );
 	?>
 	
-	<div class="projects_preview projects_current projects_current_temp" style="margin-left: 370px;">
+	<div class="projects_preview projects_current projects_current_temp">
 	    <div class="preview_item_<?php echo $campaign->ID; ?> project_preview_item" style="width: 220px;">
 			<div class="project_preview_item_part">
 				<div class="project_preview_item_pictos">

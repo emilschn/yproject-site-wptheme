@@ -1454,6 +1454,16 @@ footer div.social-icons {
 .projects_current .project_preview_item_progressbg { background-color: #E1E3E2; }
 .projects_current .project_preview_item_progressbar { background-color: #333333; }
 
+#template-single-campaign-invest .projects_preview.projects_current.projects_current_temp {
+	width: 100% !important;
+	text-align: center;
+}
+
+#template-single-campaign-invest .projects_preview.projects_current.projects_current_temp .project_preview_item {
+	float: none;
+	margin: auto;
+}
+
 /*******************************************************************************
 * HOME PAGE
 *******************************************************************************/
