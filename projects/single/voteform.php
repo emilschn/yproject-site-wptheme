@@ -48,14 +48,14 @@ if ($campaign->end_vote_remaining() > 0) {
 											 onkeyup='AfficheRange1(this.value)'
 											 onchange='AfficheRange1(this.value)'
 							    		>
-							    		<span id='valBox1' class='range-slider__value' >3 / 5</span>
+							    		<span id='valBox1' class='range-slider__value' >Moyen</span>
 									</li>
 								    <li><span id='impact_span' >Environnement</span>
 							    		<input id='note_environnement' type='range'min='1' max='5' step='1' id='impact_environment_v3' name='impact_environment' value='3'
 								    		 onchange='AfficheRange2(this.value)'
 	  										 onkeyup='AfficheRange2(this.value)'
 								    	>
-								    	<span id='valBox2' class='range-slider__value' >3 / 5</span>
+								    	<span id='valBox2' class='range-slider__value' >Moyen</span>
 								    </li>
 
 								    <li><span id='impact_span'>Social</span>
@@ -63,7 +63,7 @@ if ($campaign->end_vote_remaining() > 0) {
 								    		 onchange='AfficheRange3(this.value)'
 	  										 onkeyup='AfficheRange3(this.value)'
 								    	>
-							    		<span id='valBox3' class='range-slider__value' >3 / 5</span>
+							    		<span id='valBox3' class='range-slider__value' >Moyen</span>
 
 								   </li>
 
@@ -128,12 +128,12 @@ if ($campaign->end_vote_remaining() > 0) {
 								    <?php if (".$campaign->funding_type()." != 'fundingdonation'): ?>
 								    Je pense que le risque est : <span id='valBox4' class='range-slider__value' >mod&eacute;r&eacute;</span>
 								    </br>
-									<img class='smiley' src='".get_stylesheet_directory_uri()."/images/bonhomme_content.png' />
+								  	faible -
 								  	<input id='note_risque' type='range'min='1' max='5' step='1'  id='invest_risk_v3' name='invest_risk' value='3'
 								    		 onchange='AfficheRange4(this.value)'
 	  										 onkeyup='AfficheRange4(this.value)'
 								    >
-									<img class='smiley' src='".get_stylesheet_directory_uri()."/images/bonhomme_pas_content.png' />
+								    - très élevé
 								    <?php endif; ?>
 									</br>
 									<div id='investir_sum_v3'>
@@ -147,7 +147,7 @@ if ($campaign->end_vote_remaining() > 0) {
 									<em>Quels conseils ou encouragements souhaitez-vous donner au(x) porteur(s) de ce projet ?</em><br />
 									<textarea id='area_conseil' id='advice_v3' type='text' name='advice'></textarea><br/><br/>
 									<ul class='more-info-list' style='list-style-type:none;'>
-									    <li><label><input type='checkbox' name='share_conseil' value='1'><span>Cliquez ICI si vous voulez publier vos conseils en commentaire du projet.</span></label></li>
+									    <li><label><input type='checkbox' name='share_conseil' value='0'><span>Je veux que mes conseils soient publiés en commentaires.</span></label></li>
 									</ul>
 								</br>
 								<div class='voter'>

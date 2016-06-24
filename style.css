@@ -355,6 +355,7 @@ form.wdg-forms table input[type="text"].reward-text{
 .wdg-lightbox .wdg-lightbox-button-close {
 	float: right;
 	margin-top: -17px;
+    background-color: #333333 !important;
 }
 .wdg-lightbox .wdg-lightbox-button-close a {
 	font-size: 16px;
@@ -3839,7 +3840,7 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: #EA4F51;
+    background: #333333;
     margin-top: -4px;
 }
 .ypvote-form_v3 input[type=range]:focus {
@@ -3861,7 +3862,7 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: #EA4F51;
+    background: #333333;
 }
 
 /*hide the outline behind the border*/
@@ -3897,17 +3898,17 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: #EA4F51;
+    background: #333333;
 }
 .ypvote-form_v3 input[type=range]:focus::-ms-fill-lower {
-    background: #EA4F51;
+    background: #333333;
 }
 .ypvote-form_v3 input[type=range]:focus::-ms-fill-upper {
     background: #ccc;
 }
 
 .ypvote-form_v3 input[type=range]::-moz-range-progress {
-    background: #EA4F51;
+    background: #333333;
 }
 
 
@@ -4055,50 +4056,12 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     color:white !important;
     border-radius: 10px;
     text-transform: uppercase;
-    animation-name: pulse;
-    -webkit-animation-name: pulse;  
-
-    animation-duration: 1.5s;   
-    -webkit-animation-duration: 1.5s;
-
-    animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(0.9);
-        opacity: 0.7;       
-    }
-    50% {
-        transform: scale(1);
-        opacity: 1; 
-    }   
-    100% {
-        transform: scale(0.9);
-        opacity: 0.7;   
-    }           
-}
-
-@-webkit-keyframes pulse {
-    0% {
-        -webkit-transform: scale(0.95);
-        opacity: 0.7;       
-    }
-    50% {
-        -webkit-transform: scale(1);
-        opacity: 1; 
-    }   
-    100% {
-        -webkit-transform: scale(0.95);
-        opacity: 0.7;   
-    }           
 }
 
 .range-slider__value{
     color: white;
-    background: #EA4F51;
-    border-radius: 100px 50px 50px 100px;
+    background: #333333;
+    border-radius: 30px 30px 30px 30px;
     text-align: left;
     padding-left: 5px;
     padding-right: 5px;
@@ -4113,7 +4076,7 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 }
 
 .voter {
-    text-align: right;
+    text-align: center;
     padding-right: 10%;
 }
 
@@ -4123,7 +4086,8 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 
 #btn-validate_project-false:checked+span,
 #btn-validate_project-true:checked+span{
-    color:#EA4F51 !important;
+    color: #333333 !important;
+    font-weight: bold;
 }
 
 #btn-validate_project-false,
@@ -4137,7 +4101,7 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     display: inline-block;
     width: 12px;
     height: 12px;
-    border: 2px solid #EA4F51;
+    border: 2px solid #333333;
     margin-right: 5px;
     margin-bottom: -2px;
     border-radius: 20px;
@@ -4149,11 +4113,11 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     display: inline-block;
     width: 12px;
     height: 12px;
-    border: 2px solid #EA4F51;
+    border: 2px solid #333333;
     margin-right: 5px;
     margin-bottom: -2px;
     border-radius: 20px;
-    background: #EA4F51;
+    background: #333333;
 }
 
 .radio_validate input, .radio_validate span {
@@ -4177,7 +4141,8 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 #more_info_team_v3:checked+span,
 #more_info_finance_v3:checked+span,
 input[name='share_conseil']:checked+span{
-    color:#EA4F51 !important;
+    color:#333333 !important;
+    font-weight: bold;
 }
 
 #more_info_service_v3,
@@ -4193,15 +4158,14 @@ input[name='share_conseil']{
 #more_info_team_v3+span:before,
 #more_info_finance_v3+span:before,
 input[name='share_conseil']+span:before{
-    content: "Non";
-    color:#EA4F51;
+    content: "";
+    color:#333333;
     display: inline-block;
-    width: 27px;
-    height: 15px;
-    border: 2px solid #EA4F51;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #333333;
     margin-right: 5px;
     margin-bottom: -2px;
-    border-radius: 0px !important;
     text-align: center;
 }
 
@@ -4211,16 +4175,15 @@ input[name='share_conseil']+span:before{
 #more_info_finance_v3:checked+span:before,
 input[name='share_conseil']:checked+span:before
 {
-    content: "Oui";
+    content: "";
     color:white;
     display: inline-block;
-    width: 27px;
-    height: 15px;
-    border: 2px solid #EA4F51;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #333333;
     margin-right: 5px;
     margin-bottom: -2px;
-    background: #EA4F51;
-    border-radius: 0px !important;
+    background: #333333;
     text-align: center;
 }
 
@@ -4334,4 +4297,8 @@ div#content.version-3.scrolled nav.project-navigation ul li {
 
 .block2 ul{
     padding-left: 25%;
+}
+
+.wdg-lightbox .wdg-lightbox-button-close a {
+    background: #333333;
 }

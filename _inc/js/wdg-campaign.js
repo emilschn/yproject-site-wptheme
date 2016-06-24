@@ -169,18 +169,48 @@ var WDGProjectViewer = (function($) {
 			};
 			
 			AfficheRange1 = function (newVal){
-				val=newVal+' / 5';
+				val='';
+				if(newVal==1)
+					val='Très peu';
+				if(newVal==2)
+					val='Peu';
+				if(newVal==3)
+					val='Moyen';
+				if(newVal==4)
+					val='Bon';
+				if(newVal==5)
+					val='Très bon';
 	 			$('span#valBox1').html(val);
 			};
 
 			AfficheRange2 = function (newVal){
-				val=newVal+' / 5';
+				val='';
+				if(newVal==1)
+					val='Très peu';
+				if(newVal==2)
+					val='Peu';
+				if(newVal==3)
+					val='Moyen';
+				if(newVal==4)
+					val='Bon';
+				if(newVal==5)
+					val='Très bon';
 	 			$('span#valBox2').html(val);
 			};
 
 
 			AfficheRange3 = function(newVal){
-				val=newVal+' / 5';
+				val='';
+				if(newVal==1)
+					val='Très peu';
+				if(newVal==2)
+					val='Peu';
+				if(newVal==3)
+					val='Moyen';
+				if(newVal==4)
+					val='Bon';
+				if(newVal==5)
+					val='Très bon';
 				$('#valBox3').html(val);
 			};
 
