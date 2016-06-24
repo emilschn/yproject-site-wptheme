@@ -18,10 +18,36 @@ if (is_user_logged_in()) {
 	$campaign_status = $campaign->campaign_status();
 	switch ($campaign_status) {
 		case 'vote': ?>
-		<a href="#" class="button-action">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodvote.png" alt="<?php _e('Voter', 'yproject'); ?>" title="<?php _e('Voter', 'yproject'); ?>" />
-			<?php _e('Voter', 'yproject'); ?>
-		</a>
+
+		<?php if(!is_user_logged_in()){ ?>
+		<div id="vote-form-v3-button">
+		    <a href="#connexion" id="aCliquer" class="button-action" data-lightbox="connexion" 
+				data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start"
+	 					>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodvote.png" alt="<?php _e('Voter', 'yproject'); ?>" title="<?php _e('Voter', 'yproject'); ?>" />
+			</a>
+		</div>
+		<?php }else	{
+			$table_name = $wpdb->prefix . "ypcf_project_votes";
+			$campaign_id=$campaign->ID;
+			$user_id = wp_get_current_user()->ID;
+
+			$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign_id.' AND user_id = '.$user_id );
+			$has_voted = false;
+			if ( !empty($hasvoted_results[0]->id) ) $has_voted = true;
+			if (!$has_voted){ ?>
+			<div id="vote-form-v3-button">
+				<a href="#lightbox_voter" id="aCliquer" class="wdg-button-lightbox-open" data-lightbox="vote" 
+					style=""
+					onclick="masquer_sauf_div1();"
+					>		
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodvote.png" alt="<?php _e('Voter', 'yproject'); ?>" title="<?php _e('Voter', 'yproject'); ?>" />
+				</a>
+			</div>
+			<?php } 
+		}
+		?>
+
 
 		<?php
 		break;

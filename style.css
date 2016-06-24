@@ -2307,7 +2307,7 @@ div#home_bottom h1 {
     background: none repeat scroll 0 0 #FFF;
     color: #2B2C2C;
     border: medium none;
-    padding: 3px 8px;
+    padding: 3px 0px;
 }
 
 #project_vote_zone .light {
@@ -3813,3 +3813,516 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 #content.theme-myphotoreporter #map-cursor { background-image: url("images/curseur-myphotoreporter.png"); }
 #content.theme-myphotoreporter .projects-more { background-image: url("images/responsive-plus-myphotoreporter.png"); }
 #content.theme-myphotoreporter #head-image { top: 167px; }
+
+
+.ypvote-form_v3 input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid white;
+    /*required for proper track sizing in FF*/
+    width: 150px;
+    background: none !important;
+    margin-bottom: -5px;
+}
+.ypvote-form_v3 input[type=range]::-webkit-slider-runnable-track {
+    width: 150px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+.ypvote-form_v3 input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #EA4F51;
+    margin-top: -4px;
+}
+.ypvote-form_v3 input[type=range]:focus {
+    outline: none;
+}
+.ypvote-form_v3 input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+.ypvote-form_v3 input[type=range]::-moz-range-track {
+    width: 150px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+.ypvote-form_v3 input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #EA4F51;
+}
+
+/*hide the outline behind the border*/
+.ypvote-form_v3 input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+.ypvote-form_v3 input[type=range]::-ms-track {
+    width: 150px;
+    height: 5px;
+    
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+    
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+
+    /*remove default tick marks*/
+    color: transparent;
+}
+.ypvote-form_v3 input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+.ypvote-form_v3 input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+}
+.ypvote-form_v3 input[type=range]::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #EA4F51;
+}
+.ypvote-form_v3 input[type=range]:focus::-ms-fill-lower {
+    background: #EA4F51;
+}
+.ypvote-form_v3 input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
+
+.ypvote-form_v3 input[type=range]::-moz-range-progress {
+    background: #EA4F51;
+}
+
+
+.retour, .suivant, .block1, .block2, .block3{
+    display:inline-block;
+    vertical-align:middle;
+    margin: 3px;
+}
+
+.retour, .suivant{
+    width: 10%;
+}
+.ypvote-form_v3 img{
+    width: auto;
+    height: 65px;
+    margin: 0px 20% 25% 20%;
+}
+
+.ypvote-form_v3 img:hover {
+    filter: grayscale(50%);
+    -webkit-filter: grayscale(50%);
+    -moz-filter: grayscale(50%);
+    -ms-filter: grayscale(50%);
+    -o-filter: grayscale(50%);
+}   
+
+#phase1{
+        margin-left: 8%;
+        width: 
+}
+#phase1, #phase2, #phase3{
+    overflow : hidden !important;
+}
+
+#phase1.left, #phase2.left, #phase3.left{
+    animation-name: slideLeft;
+    -webkit-animation-name: slideLeft;  
+
+    animation-duration: 1s; 
+    -webkit-animation-duration: 1s;
+
+    animation-timing-function: ease-in-out; 
+    -webkit-animation-timing-function: ease-in-out;     
+}
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(150%);
+    }
+    65%{
+        transform: translateX(4%);
+    }
+    80%{
+        transform: translateX(-4%);
+    }
+    95%{
+        transform: translateX(2%);
+    }           
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@-webkit-keyframes slideLeft {
+    0% {
+        -webkit-transform: translateX(150%);
+    }
+    65%{
+        -webkit-transform: translateX(4%);
+    }
+    80%{
+        -webkit-transform: translateX(-4%);
+    }
+    95%{
+        -webkit-transform: translateX(2%);
+    }           
+    100% {
+        -webkit-transform: translateX(0%);
+    }
+}
+
+#phase1.right, #phase2.right, #phase3.right{
+    animation-name: slideRight;
+    -webkit-animation-name: slideRight; 
+
+    animation-duration: 1s; 
+    -webkit-animation-duration: 1s;
+
+    animation-timing-function: ease-in-out; 
+    -webkit-animation-timing-function: ease-in-out;     
+}
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(-150%);
+    }
+    50%{
+        transform: translateX(8%);
+    }
+    80%{
+        transform: translateX(4%);
+    }
+    95%{
+        transform: translateX(-2%);
+    }           
+    100% {
+        transform: translateX(0%);
+    }   
+}
+
+@-webkit-keyframes slideRight {
+    0% {
+        -webkit-transform: translateX(-150%);
+    }
+    50%{
+        -webkit-transform: translateX(8%);
+    }
+    80%{
+        -webkit-transform: translateX(4%);
+    }
+    95%{
+        -webkit-transform: translateX(-2%);
+    }           
+    100% {
+        -webkit-transform: translateX(0%);
+    }
+}
+
+.ypvote-form_v3{
+    overflow: hidden !important;
+    display: block;
+}
+
+.ypvote-form_v3 em{
+    font-style: normal;
+    font-size: 14px !important;
+}
+
+#phase2 li{
+    text-align: left !important;
+}
+
+.voter_submit_v3{
+    background:#EA4F51 !important;
+    padding: 15px !important;
+    color:white !important;
+    border-radius: 10px;
+    text-transform: uppercase;
+    animation-name: pulse;
+    -webkit-animation-name: pulse;  
+
+    animation-duration: 1.5s;   
+    -webkit-animation-duration: 1.5s;
+
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.7;       
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1; 
+    }   
+    100% {
+        transform: scale(0.9);
+        opacity: 0.7;   
+    }           
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(0.95);
+        opacity: 0.7;       
+    }
+    50% {
+        -webkit-transform: scale(1);
+        opacity: 1; 
+    }   
+    100% {
+        -webkit-transform: scale(0.95);
+        opacity: 0.7;   
+    }           
+}
+
+.range-slider__value{
+    color: white;
+    background: #EA4F51;
+    border-radius: 100px 50px 50px 100px;
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: auto !important;
+    display: inline-block;
+}
+
+.smiley {
+    margin: 0px !important;
+    height: 25px !important;
+}
+
+.voter {
+    text-align: right;
+    padding-right: 10%;
+}
+
+#note_risque{
+    margin-bottom: 4px;
+}
+
+#btn-validate_project-false:checked+span,
+#btn-validate_project-true:checked+span{
+    color:#EA4F51 !important;
+}
+
+#btn-validate_project-false,
+#btn-validate_project-true{
+    display: none;
+}
+
+#btn-validate_project-false+span:before,
+#btn-validate_project-true+span:before{
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #EA4F51;
+    margin-right: 5px;
+    margin-bottom: -2px;
+    border-radius: 20px;
+}
+
+#btn-validate_project-true:checked+span:before,
+#btn-validate_project-false:checked+span:before{
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #EA4F51;
+    margin-right: 5px;
+    margin-bottom: -2px;
+    border-radius: 20px;
+    background: #EA4F51;
+}
+
+.radio_validate input, .radio_validate span {
+    cursor:pointer;
+}
+
+.radio_validate {
+    text-align: left;
+    padding-left: 45%;
+    padding-top: 10px;
+}
+#more_info_service_v3,
+#more_info_impact_v3,
+#more_info_team_v3,
+#more_info_finance_v3{
+    margin-left: 60px !important;
+}
+
+#more_info_service_v3:checked+span,
+#more_info_impact_v3:checked+span,
+#more_info_team_v3:checked+span,
+#more_info_finance_v3:checked+span,
+input[name='share_conseil']:checked+span{
+    color:#EA4F51 !important;
+}
+
+#more_info_service_v3,
+#more_info_impact_v3,
+#more_info_team_v3,
+#more_info_finance_v3,
+input[name='share_conseil']{
+    display: none;
+}
+
+#more_info_service_v3+span:before,
+#more_info_impact_v3+span:before,
+#more_info_team_v3+span:before,
+#more_info_finance_v3+span:before,
+input[name='share_conseil']+span:before{
+    content: "Non";
+    color:#EA4F51;
+    display: inline-block;
+    width: 27px;
+    height: 15px;
+    border: 2px solid #EA4F51;
+    margin-right: 5px;
+    margin-bottom: -2px;
+    border-radius: 0px !important;
+    text-align: center;
+}
+
+#more_info_service_v3:checked+span:before,
+#more_info_impact_v3:checked+span:before,
+#more_info_team_v3:checked+span:before,
+#more_info_finance_v3:checked+span:before,
+input[name='share_conseil']:checked+span:before
+{
+    content: "Oui";
+    color:white;
+    display: inline-block;
+    width: 27px;
+    height: 15px;
+    border: 2px solid #EA4F51;
+    margin-right: 5px;
+    margin-bottom: -2px;
+    background: #EA4F51;
+    border-radius: 0px !important;
+    text-align: center;
+}
+
+.more-info-list_v3 span, input{
+    cursor:pointer;
+}
+
+
+#impact_other_v3{
+    width: 40%;
+    margin-right: 20%;
+}
+
+#investir_sum_v3{
+    margin-top: 10px;
+}
+
+#vote-form-v3{
+    background: none;
+    text-align: center;
+}
+
+.action-item{
+    height: 0px;
+}
+
+.block1 ul li, .block2 ul li, .block3 ul li{
+    display:block !important;
+    margin:0px !important;
+    height: auto !important;
+    margin-top: 10px !important;
+    margin-bottom: 5px !important;
+}
+
+.block1 ul, .block2 ul, .block3 ul{
+    margin:0px !important;
+}
+
+.block1, .block2, .block3 {
+    font-size: 14px !important;
+    margin-bottom: 10px !important;
+    text-align: center;
+}
+
+.block2{
+    width: 70%;
+}
+
+.block1, .block3{
+    width: 80%;
+}
+
+.block em, #area_conseil{
+    font-size: 13.5px !important;
+}
+
+.smiley{
+    margin-top: 5px !important;
+}
+
+
+#aCliquer_fait {
+    position: relative;
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #333333;
+    color: white;
+    text-transform: uppercase;
+}
+
+
+#wdg-lightbox-vote {
+}
+
+div#content.version-3 nav.project-navigation ul.menu-actions li {
+    text-align: left;
+}
+
+div#content.version-3.scrolled nav.project-navigation ul li {
+    text-align: left;
+}
+
+#phase1 input[type=text]{
+    margin:5px;
+}
+
+.more-info-list{
+    text-align: center !important;
+}
+
+#remerciement{
+    text-align: center;
+}
+
+#remerciement img{
+    margin-top: 20px;
+}
+
+#remerciement img:hover{
+    opacity: 0.7;
+}
+
+#vote-form-v3-button{
+    float: left;
+}
