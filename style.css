@@ -1049,6 +1049,25 @@ footer div.social-icons {
     text-transform: uppercase;
 }
 
+.part-title-grey{
+    background: #f2f2f1;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-family: 'BebasNeue';
+    font-size: 35px;
+    text-transform: uppercase;
+}
+
+.part-title-blue{
+    background: #3b827f;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-family: 'BebasNeue';
+    font-size: 25px;
+    text-transform: uppercase;
+    color:#fff;
+}
+
 /*******************************************************************************
 * PROJECT SHORT - LARGE
 *******************************************************************************/
