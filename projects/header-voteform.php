@@ -15,6 +15,11 @@ $more_info_team = false;
 $more_info_finance = false;
 $more_info_other = '';
 $advice = '';
+
+$check_impacts=true;
+$check_somme = true;
+$check_risque = true;
+
 global $vote_errors;
 $vote_errors = array();
 
@@ -34,8 +39,10 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 		if ($validate_project === -1) {
 			array_push($vote_errors, 'Vous n&apos;avez pas r&eacute;pondu si les impacts sont suffisants.');
 			$is_vote_valid = false;
+			$check_impacts = false;
 		}
-		if ($validate_project == 1) {
+		echo "rentré !! ".$validate_project."</br>";
+		if ($validate_project == 1 || $validate_project="on") {
 			//Projet validé + Somme pret à investir
 			if (isset($_POST[ 'invest_sum' ])) {
 				//Si on n'a rien rempli, on considère que c'est 0
@@ -46,7 +53,7 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 				} elseif (!is_numeric($_POST[ 'invest_sum' ]) || $_POST[ 'invest_sum' ] < 0) {
 					array_push($vote_errors, 'La somme &agrave; investir n&apos;est pas valide.');
 					$is_vote_valid = false;
-					
+					$check_somme=false;
 				//Sinon c'est ok (on arrondit quand même)
 				} else {
 					$invest_sum = round($_POST[ 'invest_sum' ]);
@@ -59,6 +66,7 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 			    if ($invest_risk <= 0) {
 				    array_push($vote_errors, 'Vous n&apos;avez pas s&eacute;lectionn&eacute; de risque d&apos;investissement.');
 				    $is_vote_valid = false;
+				    $check_risque=false;
 			    }
 			} else {
 			    $invest_risk = 1;
@@ -83,17 +91,13 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 		// Vérifie si l'utilisateur a deja voté
 		$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign_id.' AND user_id = '.$user_id );
 		
-
-
+		$share_conseil =(isset($_POST[ 'share_conseil' ])) ? $_POST[ 'share_conseil' ] : false;
 
 		if ( !empty($hasvoted_results[0]->id) ) {
 			array_push($vote_errors, 'D&eacutesol&eacute vous avez d&egraveja vot&eacute, merci !');
 			
 		} else if ($is_vote_valid) {
 			
-
-			//share conseils -> commentaire
-			$share_conseil= (isset($_POST[ 'share_conseil' ])) ? stripslashes(htmlentities($_POST[ 'share_conseil' ], ENT_QUOTES | ENT_HTML401)) : 0;
 			if($share_conseil)
 			{
 				// procédure pour mettre ce conseil en commentaire du projet
@@ -183,11 +187,28 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 			}
 
 			$campaign_url = get_permalink($post->ID);
-			$link=$campaign_url."&?vote_check=1";
+			$link=$campaign_url."&vote_check=1";
 			wp_redirect($link);
 		}else{
 			$campaign_url = get_permalink($post->ID);
-			$link=$campaign_url."&?vote_check=0";
+			$link=$campaign_url."&vote_check=0
+			&impact_economy=".$impact_economy."
+			&impact_environment=".$impact_environment."
+			&impact_social=".$impact_social."
+			&impact_other=".$impact_other."
+			&validate_project=".$validate_project."
+			&invest_sum=".$invest_sum."
+			&more_info_impact=".$more_info_impact."
+			&more_info_service=".$more_info_service."
+			&more_info_team=".$more_info_team."
+			&more_info_finance=".$more_info_finance."
+			&more_info_other=".$more_info_other."
+			&advice=".$advice."
+			&check_risque=".$check_risque."
+			&check_somme=".$check_somme."
+			&check_impacts=".$check_impacts."
+			&share_conseil=".$share_conseil."
+			&invest_risk=".$invest_risk;
 			wp_redirect($link);
 		}
 	}

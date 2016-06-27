@@ -22,20 +22,19 @@ $campaign_status = $campaign->campaign_status();
 <?php endif; ?>
 
 <?php
-global $wp;
-$current_url = add_query_arg( $wp->query_string, home_url( $wp->request ) );
-$vote_check_bool=strstr( $current_url,'vote_check=1');
-if($vote_check_bool){
+if(isset($_GET['vote_check'])&&($_GET['vote_check']==1)){
 	locate_template( array("projects/single/check_vote_1.php"), true );
 }
 ?>
 
 <?php
-global $wp;
-$current_url = add_query_arg( $wp->query_string, home_url( $wp->request ) );
-$vote_check_bool=strstr( $current_url,'vote_check=0');
-if($vote_check_bool){
-	locate_template( array("projects/single/check_vote_0.php"), true );
+if(isset($_GET['vote_check'])&&($_GET['vote_check']==0))
+{
+	?>
+	<script type="text/javascript">
+		check_vote_0();
+	</script>
+<?php
 }
 ?>
 

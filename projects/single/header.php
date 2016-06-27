@@ -67,8 +67,8 @@ if (is_user_logged_in()) {
 			 			<?php _e('Voter', 'yproject'); ?>
 					</a>
 				<?php }else	if ($has_voted){ ?>
-					<div id="vote-form-v3"  >
-						<a><?php _e('Merci pour votre vote', 'yproject'); ?></a>
+					<div style="-webkit-filter: grayscale(100%);" id="vote-form-v3" >
+						<a ><?php _e('Merci pour votre vote', 'yproject'); ?></a>
 					</div>
 				<?php }else{ ?>
 				<div id="vote-form-v3">
