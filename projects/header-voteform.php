@@ -41,7 +41,6 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 			$is_vote_valid = false;
 			$check_impacts = false;
 		}
-		echo "rentré !! ".$validate_project."</br>";
 		if ($validate_project == 1 || $validate_project="on") {
 			//Projet validé + Somme pret à investir
 			if (isset($_POST[ 'invest_sum' ])) {
