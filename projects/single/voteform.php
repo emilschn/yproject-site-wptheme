@@ -31,7 +31,7 @@ $message_erreur='';
 
 if (isset($_GET['vote_check'])&&$_GET['vote_check']==0){
 	$style_erreurs='';
-	if(isset($impacttt))
+	if(isset($_GET['impact_economy']))
 		$impact_economy_before=$_GET['impact_economy'];
 
 	if(isset($_GET['impact_environment']))
@@ -45,7 +45,6 @@ if (isset($_GET['vote_check'])&&$_GET['vote_check']==0){
 
 	if(isset($_GET['validate_project']))
 		$validate_project_before=$_GET['validate_project'];
-
 
 	if(isset($_GET['invest_sum']))
 		$invest_sum_before=$_GET['invest_sum'];
@@ -199,10 +198,10 @@ if ($campaign->end_vote_remaining() > 0) {
 								<strong>Remarques</strong><br />
 								<em>Avez-vous besoin de plus d&apos;informations concernant l&apos;un des aspects suivants ?</em><br />
 								<ul class='more-info-list_v3' style='list-style-type:none;'>
-								    <li><label><input type='checkbox' id='more_info_service_v3' name='more_info_service' ".$more_info_service_before."><span>Le produit / service</span></label></li>
-								    <li><label><input type='checkbox' id='more_info_impact_v3' name='more_info_impact' ".$more_info_impact_before."><span>L&apos;impact soci&eacute;tal</span></label></li>
-								    <li><label><input type='checkbox' id='more_info_team_v3' name='more_info_team' ".$more_info_team_before."><span>La structuration de l&apos;&eacute;quipe</span></label></li>
-								    <li><label><input type='checkbox' id='more_info_finance_v3' name='more_info_finance' ".$more_info_finance_before."><span>Le pr&eacute;visionnel financier</span></label></li>
+								    <li><label><input type='checkbox' id='more_info_service_v3' name='more_info_service' ".$more_info_service_before." value='1'><span>Le produit / service</span></label></li>
+								    <li><label><input type='checkbox' id='more_info_impact_v3' name='more_info_impact' ".$more_info_impact_before." value='1'><span>L&apos;impact soci&eacute;tal</span></label></li>
+								    <li><label><input type='checkbox' id='more_info_team_v3' name='more_info_team' ".$more_info_team_before." value='1'><span>La structuration de l&apos;&eacute;quipe</span></label></li>
+								    <li><label><input type='checkbox' id='more_info_finance_v3' name='more_info_finance' ".$more_info_finance_before." value='1'><span>Le pr&eacute;visionnel financier</span></label></li>
 
 								    <li>Autre : <input type='text' id='more_info_other_v3' name='more_info_other' placeholder='Pr&eacute;ciser...' value='".$more_info_other_before."' /> </li>
 								</ul>
@@ -243,7 +242,7 @@ if ($campaign->end_vote_remaining() > 0) {
 								</div>
 								    <strong>Conseils</strong><br />
 									<em>Quels conseils ou encouragements souhaitez-vous donner au(x) porteur(s) de ce projet ?</em><br />
-									<textarea id='area_conseil' id='advice_v3' type='text' name='advice'>".$advice_before."</textarea><br/><br/>
+									<textarea id='advice_v3' type='text' name='advice'>".$advice_before."</textarea><br/><br/>
 									<ul class='more-info-list' style='list-style-type:none;'>
 									    <li><label><input type='checkbox' name='share_conseil' ".$share_conseil_before."><span>Je veux que mes conseils soient publiés en commentaires.</span></label></li>
 									</ul>

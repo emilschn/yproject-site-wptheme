@@ -31,8 +31,10 @@ if(isset($_GET['vote_check'])&&($_GET['vote_check']==1)){
 if(isset($_GET['vote_check'])&&($_GET['vote_check']==0))
 {
 	?>
-	<script type="text/javascript">
-		check_vote_0();
+	<script LANGUAGE="javascript">
+		$('#phase2').attr('style','display:none;');
+		$('#phase3').attr('style','display:none;');
+		$('#wdg-lightbox-vote').attr('style','display:block;');
 	</script>
 <?php
 }

@@ -3934,10 +3934,6 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     -o-filter: grayscale(50%);
 }   
 
-#phase1{
-        margin-left: 8%;
-        width: 
-}
 #phase1, #phase2, #phase3{
     overflow : hidden !important;
 }
@@ -4044,10 +4040,6 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 .ypvote-form_v3 em{
     font-style: normal;
     font-size: 14px !important;
-}
-
-#phase2 li{
-    text-align: left !important;
 }
 
 .voter_submit_v3{
@@ -4308,4 +4300,21 @@ div#content.version-3.scrolled nav.project-navigation ul li {
     color:#EA4F51;
     text-align: center;
     font-size: 10pt;
+}
+
+.block2, .block3{
+    width: 60%;
+}
+
+.block1 ul ,.block2 ul ,.block3 ul {
+    -webkit-padding-start: initial;
+}
+
+ul.more-info-list_v3{
+    text-align: left;
+    margin-left: 20% !important;
+}
+
+textarea#advice_v3, input#more_info_other_v3{
+    width: 100%;
 }

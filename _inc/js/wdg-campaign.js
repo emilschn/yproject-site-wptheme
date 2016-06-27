@@ -234,11 +234,6 @@ var WDGProjectViewer = (function($) {
 				$("span#valBox4").html(resultat);
 			};
 
-			check_vote_0 = function(){
-				$('#phase2').attr('style','display:none;');
-				$('#phase3').attr('style','display:none;');
-				$('#wdg-lightbox-vote').attr('style','display:block;');
-			}
 		},
 		
 		refreshScroll: function() {

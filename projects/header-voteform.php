@@ -80,6 +80,7 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 		$more_info_finance = (isset($_POST[ 'more_info_finance' ])) ? $_POST[ 'more_info_finance' ] : false;
 		$more_info_other = (isset($_POST[ 'more_info_other' ])) ? stripslashes(htmlentities($_POST[ 'more_info_other' ], ENT_QUOTES | ENT_HTML401)) : '';
 		
+
 		//Conseils
 		$advice = (isset($_POST[ 'advice' ])) ? stripslashes(htmlentities($_POST[ 'advice' ], ENT_QUOTES | ENT_HTML401)) : '';
 
