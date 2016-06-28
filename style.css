@@ -4316,5 +4316,5 @@ ul.more-info-list_v3{
 }
 
 textarea#advice_v3, input#more_info_other_v3{
-    width: 100%;
+    max-width: 95%;
 }
