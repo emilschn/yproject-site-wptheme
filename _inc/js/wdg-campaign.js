@@ -164,8 +164,8 @@ var WDGProjectViewer = (function($) {
 
 			afficher_div_false = function ()
 			{
-				$('#validate_project-true').attr('style','display:block;');
-				$('#validate_project-false').attr('style','display:none;');
+				$('#validate_project-true').attr('style','display:none;');
+				$('#validate_project-false').attr('style','display:block;');
 			};
 			
 			AfficheRange1 = function (newVal){
