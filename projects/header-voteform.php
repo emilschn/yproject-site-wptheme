@@ -41,7 +41,7 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 			$is_vote_valid = false;
 			$check_impacts = false;
 		}
-		if ($validate_project == 1 || $validate_project="on") {
+		if ($validate_project == 1) {
 			//Projet validé + Somme pret à investir
 			if (isset($_POST[ 'invest_sum' ])) {
 				//Si on n'a rien rempli, on considère que c'est 0
@@ -61,7 +61,9 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 			
 			if ($campaign->funding_type() != 'fundingdonation') {
 			    //Projet validé + Risque d'investissement
+
 			    $invest_risk = (isset($_POST[ 'invest_risk' ])) ? $_POST[ 'invest_risk' ] : 0;
+			    
 			    if ($invest_risk <= 0) {
 				    array_push($vote_errors, 'Vous n&apos;avez pas s&eacute;lectionn&eacute; de risque d&apos;investissement.');
 				    $is_vote_valid = false;
@@ -185,7 +187,6 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 					);
 				}
 			}
-
 			$campaign_url = get_permalink($post->ID);
 			$link=$campaign_url."?vote_check=1";
 			wp_redirect($link);
