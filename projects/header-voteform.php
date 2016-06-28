@@ -187,11 +187,11 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 			}
 
 			$campaign_url = get_permalink($post->ID);
-			$link=$campaign_url."&vote_check=1";
+			$link=$campaign_url."?vote_check=1";
 			wp_redirect($link);
 		}else{
 			$campaign_url = get_permalink($post->ID);
-			$link=$campaign_url."&vote_check=0
+			$link=$campaign_url."?vote_check=0
 			&impact_economy=".$impact_economy."
 			&impact_environment=".$impact_environment."
 			&impact_social=".$impact_social."

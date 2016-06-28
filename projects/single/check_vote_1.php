@@ -18,7 +18,7 @@
 	echo do_shortcode('
 		[yproject_lightbox id="vote_check_1"]'."
 		<div id='remerciement'> 
-			<span>Nous vous remercions d'avoir voter pour ce projet.</span>
+			<span>Nous vous remercions d'avoir voté pour ce projet.</span>
 			</br>
 			<span> Pensez à partager ce projet ! </span>
 			</br>
