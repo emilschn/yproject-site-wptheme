@@ -171,7 +171,7 @@ var WDGProjectViewer = (function($) {
 			AfficheRange1 = function (newVal){
 				val='';
 				if(newVal==1)
-					val='Inexistant';
+					val='Très faible';
 				if(newVal==2)
 					val='Faible';
 				if(newVal==3)
@@ -186,7 +186,7 @@ var WDGProjectViewer = (function($) {
 			AfficheRange2 = function (newVal){
 				val='';
 				if(newVal==1)
-					val='Inexistant';
+					val='Très faible';
 				if(newVal==2)
 					val='Faible';
 				if(newVal==3)
@@ -202,7 +202,7 @@ var WDGProjectViewer = (function($) {
 			AfficheRange3 = function(newVal){
 				val='';
 				if(newVal==1)
-					val='Inexistant';
+					val='Très faible';
 				if(newVal==2)
 					val='Faible';
 				if(newVal==3)
@@ -226,10 +226,10 @@ var WDGProjectViewer = (function($) {
 					resultat = 'mod&eacute;r&eacute;';
 				};	
 				if (newVal == 4){
-					resultat = '&eacute;lev&eacute;';
+					resultat = 'élevé';
 				};
 				if (newVal == 5){
-					resultat = 'tr&egrave;s &eacute;lev&eacute;';
+					resultat = 'très élevé';
 				};
 				$("span#valBox4").html(resultat);
 			};
