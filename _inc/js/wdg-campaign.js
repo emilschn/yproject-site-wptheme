@@ -171,30 +171,30 @@ var WDGProjectViewer = (function($) {
 			AfficheRange1 = function (newVal){
 				val='';
 				if(newVal==1)
-					val='Très peu';
+					val='Inexistant';
 				if(newVal==2)
-					val='Peu';
+					val='Faible';
 				if(newVal==3)
-					val='Moyen';
+					val='Modéré';
 				if(newVal==4)
-					val='Bon';
+					val='Fort';
 				if(newVal==5)
-					val='Très bon';
+					val='Très fort';
 	 			$('span#valBox1').html(val);
 			};
 
 			AfficheRange2 = function (newVal){
 				val='';
 				if(newVal==1)
-					val='Très peu';
+					val='Inexistant';
 				if(newVal==2)
-					val='Peu';
+					val='Faible';
 				if(newVal==3)
-					val='Moyen';
+					val='Modéré';
 				if(newVal==4)
-					val='Bon';
+					val='Fort';
 				if(newVal==5)
-					val='Très bon';
+					val='Très fort';
 	 			$('span#valBox2').html(val);
 			};
 
@@ -202,15 +202,15 @@ var WDGProjectViewer = (function($) {
 			AfficheRange3 = function(newVal){
 				val='';
 				if(newVal==1)
-					val='Très peu';
+					val='Inexistant';
 				if(newVal==2)
-					val='Peu';
+					val='Faible';
 				if(newVal==3)
-					val='Moyen';
+					val='Modéré';
 				if(newVal==4)
-					val='Bon';
+					val='Fort';
 				if(newVal==5)
-					val='Très bon';
+					val='Très fort';
 				$('#valBox3').html(val);
 			};
 
