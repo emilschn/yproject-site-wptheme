@@ -3815,14 +3815,72 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 #content.theme-myphotoreporter .projects-more { background-image: url("images/responsive-plus-myphotoreporter.png"); }
 #content.theme-myphotoreporter #head-image { top: 167px; }
 
+/*******************************************************************************
+* APPARENCE vote form V3 (lightbox)
+*******************************************************************************/
+
+
+/******************style blocks & retour & suivant ****************************/
+
+.retour, .suivant, .block1, .block2, .block3{
+    display:inline-block;
+    vertical-align:middle;
+    margin: 3px;
+}
+
+.retour, .suivant{
+    width: 10%;
+    display: inline-block;
+}
+
+.block1 ul li, .block2 ul li, .block3 ul li{
+    display:block !important;
+    margin:0px !important;
+    height: auto !important;
+    margin-top: 10px !important;
+    margin-bottom: 5px !important;
+}
+
+.block1 ul, .block2 ul, .block3 ul{
+    margin:0px !important;
+}
+
+.block1, .block2, .block3 {
+    font-size: 14px !important;
+    margin-bottom: 10px !important;
+    text-align: center;
+}
+
+.block2{
+    width: 70%;
+}
+
+.block1, .block3{
+    width: 80%;
+}
+
+.block em, #area_conseil{
+    font-size: 13.5px !important;
+}
+
+.block2 ul{
+    padding-left: 25%;
+}
+
+.block2, .block3{
+    width: 60%;
+}
+
+.block1 ul ,.block2 ul ,.block3 ul {
+    -webkit-padding-start: initial;
+}
+
+
+/****************** style vote form v3 ****************************/
 
 .ypvote-form_v3 input[type=range] {
-    /*removes default webkit styles*/
     -webkit-appearance: none;
-    
-    /*fix for FF unable to apply focus style bug */
     border: 1px solid white;
-    /*required for proper track sizing in FF*/
     width: 150px;
     background: none !important;
     margin-bottom: -5px;
@@ -3865,7 +3923,6 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     background: #333333;
 }
 
-/*hide the outline behind the border*/
 .ypvote-form_v3 input[type=range]:-moz-focusring{
     outline: 1px solid white;
     outline-offset: -1px;
@@ -3874,17 +3931,12 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 .ypvote-form_v3 input[type=range]::-ms-track {
     width: 150px;
     height: 5px;
-    
-    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
     background: transparent;
-    
-    /*leave room for the larger thumb to overflow with a transparent border */
     border-color: transparent;
     border-width: 6px 0;
-
-    /*remove default tick marks*/
     color: transparent;
 }
+
 .ypvote-form_v3 input[type=range]::-ms-fill-lower {
     background: #777;
     border-radius: 10px;
@@ -3912,16 +3964,7 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 }
 
 
-.retour, .suivant, .block1, .block2, .block3{
-    display:inline-block;
-    vertical-align:middle;
-    margin: 3px;
-}
 
-.retour, .suivant{
-    width: 10%;
-    display: inline-block;
-}
 .ypvote-form_v3 img{
     height: 60px;
 }
@@ -3933,104 +3976,6 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     -ms-filter: grayscale(50%);
     -o-filter: grayscale(50%);
 }   
-
-#phase1, #phase2, #phase3{
-    overflow : hidden !important;
-}
-
-#phase1.left, #phase2.left, #phase3.left{
-    animation-name: slideLeft;
-    -webkit-animation-name: slideLeft;  
-
-    animation-duration: 1s; 
-    -webkit-animation-duration: 1s;
-
-    animation-timing-function: ease-in-out; 
-    -webkit-animation-timing-function: ease-in-out;     
-}
-
-@keyframes slideLeft {
-    0% {
-        transform: translateX(150%);
-    }
-    65%{
-        transform: translateX(4%);
-    }
-    80%{
-        transform: translateX(-4%);
-    }
-    95%{
-        transform: translateX(2%);
-    }           
-    100% {
-        transform: translateX(0%);
-    }
-}
-
-@-webkit-keyframes slideLeft {
-    0% {
-        -webkit-transform: translateX(150%);
-    }
-    65%{
-        -webkit-transform: translateX(4%);
-    }
-    80%{
-        -webkit-transform: translateX(-4%);
-    }
-    95%{
-        -webkit-transform: translateX(2%);
-    }           
-    100% {
-        -webkit-transform: translateX(0%);
-    }
-}
-
-#phase1.right, #phase2.right, #phase3.right{
-    animation-name: slideRight;
-    -webkit-animation-name: slideRight; 
-
-    animation-duration: 1s; 
-    -webkit-animation-duration: 1s;
-
-    animation-timing-function: ease-in-out; 
-    -webkit-animation-timing-function: ease-in-out;     
-}
-
-@keyframes slideRight {
-    0% {
-        transform: translateX(-150%);
-    }
-    50%{
-        transform: translateX(8%);
-    }
-    80%{
-        transform: translateX(4%);
-    }
-    95%{
-        transform: translateX(-2%);
-    }           
-    100% {
-        transform: translateX(0%);
-    }   
-}
-
-@-webkit-keyframes slideRight {
-    0% {
-        -webkit-transform: translateX(-150%);
-    }
-    50%{
-        -webkit-transform: translateX(8%);
-    }
-    80%{
-        -webkit-transform: translateX(4%);
-    }
-    95%{
-        -webkit-transform: translateX(-2%);
-    }           
-    100% {
-        -webkit-transform: translateX(0%);
-    }
-}
 
 .ypvote-form_v3{
     overflow: hidden !important;
@@ -4050,6 +3995,9 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     text-transform: uppercase;
 }
 
+
+
+
 .range-slider__value{
     color: white;
     background: #333333;
@@ -4061,12 +4009,6 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     display: inline-block;
 }
 
-.smiley {
-    margin: 0px !important;
-    width: 8% !important;
-    height: 8% !important;
-}
-
 .voter {
     text-align: center;
     padding-right: 10%;
@@ -4076,19 +4018,19 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     margin-bottom: 4px;
 }
 
-#btn-validate_project-false:checked+span,
-#btn-validate_project-true:checked+span{
+#btn-validate_project-false-v3:checked+span,
+#btn-validate_project-true-v3:checked+span{
     color: #333333 !important;
     font-weight: bold;
 }
 
-#btn-validate_project-false,
-#btn-validate_project-true{
+#btn-validate_project-false-v3,
+#btn-validate_project-true-v3{
     display: none;
 }
 
-#btn-validate_project-false+span:before,
-#btn-validate_project-true+span:before{
+#btn-validate_project-false-v3+span:before,
+#btn-validate_project-true-v3+span:before{
     content: "";
     display: inline-block;
     width: 12px;
@@ -4099,8 +4041,8 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     border-radius: 20px;
 }
 
-#btn-validate_project-true:checked+span:before,
-#btn-validate_project-false:checked+span:before{
+#btn-validate_project-true-v3:checked+span:before,
+#btn-validate_project-false-v3:checked+span:before{
     content: "";
     display: inline-block;
     width: 12px;
@@ -4202,39 +4144,6 @@ input[name='share_conseil']:checked+span:before
     height: 0px;
 }
 
-.block1 ul li, .block2 ul li, .block3 ul li{
-    display:block !important;
-    margin:0px !important;
-    height: auto !important;
-    margin-top: 10px !important;
-    margin-bottom: 5px !important;
-}
-
-.block1 ul, .block2 ul, .block3 ul{
-    margin:0px !important;
-}
-
-.block1, .block2, .block3 {
-    font-size: 14px !important;
-    margin-bottom: 10px !important;
-    text-align: center;
-}
-
-.block2{
-    width: 70%;
-}
-
-.block1, .block3{
-    width: 80%;
-}
-
-.block em, #area_conseil{
-    font-size: 13.5px !important;
-}
-
-.smiley{
-    margin-top: 5px !important;
-}
 
 
 #aCliquer_fait {
@@ -4284,9 +4193,6 @@ div#content.version-3.scrolled nav.project-navigation ul li {
     display: inline-block;
 }
 
-.block2 ul{
-    padding-left: 25%;
-}
 
 .wdg-lightbox .wdg-lightbox-button-close a {
     background: #333333;
@@ -4302,13 +4208,6 @@ div#content.version-3.scrolled nav.project-navigation ul li {
     font-size: 10pt;
 }
 
-.block2, .block3{
-    width: 60%;
-}
-
-.block1 ul ,.block2 ul ,.block3 ul {
-    -webkit-padding-start: initial;
-}
 
 ul.more-info-list_v3{
     text-align: left;
@@ -4318,3 +4217,108 @@ ul.more-info-list_v3{
 textarea#advice_v3, input#more_info_other_v3{
     max-width: 95%;
 }
+
+
+
+
+/************ style animation phase1, phase2, phase3 ************/
+
+
+#phase1, #phase2, #phase3{
+    overflow : hidden !important;
+}
+
+#phase1.left, #phase2.left, #phase3.left{
+    animation-name: slideLeft;
+    -webkit-animation-name: slideLeft;  
+
+    animation-duration: 1s; 
+    -webkit-animation-duration: 1s;
+
+    animation-timing-function: ease-in-out; 
+    -webkit-animation-timing-function: ease-in-out;     
+}
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(150%);
+    }
+    65%{
+        transform: translateX(4%);
+    }
+    80%{
+        transform: translateX(-4%);
+    }
+    95%{
+        transform: translateX(2%);
+    }           
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@-webkit-keyframes slideLeft {
+    0% {
+        -webkit-transform: translateX(150%);
+    }
+    65%{
+        -webkit-transform: translateX(4%);
+    }
+    80%{
+        -webkit-transform: translateX(-4%);
+    }
+    95%{
+        -webkit-transform: translateX(2%);
+    }           
+    100% {
+        -webkit-transform: translateX(0%);
+    }
+}
+
+#phase1.right, #phase2.right, #phase3.right{
+    animation-name: slideRight;
+    -webkit-animation-name: slideRight; 
+
+    animation-duration: 1s; 
+    -webkit-animation-duration: 1s;
+
+    animation-timing-function: ease-in-out; 
+    -webkit-animation-timing-function: ease-in-out;     
+}
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(-150%);
+    }
+    50%{
+        transform: translateX(8%);
+    }
+    80%{
+        transform: translateX(4%);
+    }
+    95%{
+        transform: translateX(-2%);
+    }           
+    100% {
+        transform: translateX(0%);
+    }   
+}
+
+@-webkit-keyframes slideRight {
+    0% {
+        -webkit-transform: translateX(-150%);
+    }
+    50%{
+        -webkit-transform: translateX(8%);
+    }
+    80%{
+        -webkit-transform: translateX(4%);
+    }
+    95%{
+        -webkit-transform: translateX(-2%);
+    }           
+    100% {
+        -webkit-transform: translateX(0%);
+    }
+}
+

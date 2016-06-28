@@ -28,6 +28,10 @@ $style_erreurs='style="display:none;"';
 
 $message_erreur='';
 
+$terme_economie='Moyen';
+$terme_environment='Moyen';
+$terme_social='Moyen';
+
 
 if (isset($_GET['vote_check'])&&$_GET['vote_check']==0){
 	$style_erreurs='';
@@ -90,6 +94,34 @@ if (isset($_GET['vote_check'])&&$_GET['vote_check']==0){
 	}
 	$message_erreur=$message_erreur."Veuillez corriger les champs en rouge.";
 
+	if($impact_economy_before==1)
+		$terme_economie='Très faible';
+	else if($impact_economy_before==2)
+		$terme_economie='Faible';
+	else if($impact_economy_before==4)
+		$terme_economie='Fort';
+	else if($impact_economy_before==5)
+		$terme_economie='Très Fort';
+
+
+	if($impact_environment_before==1)
+		$terme_environment='Très faible';
+	else if($impact_environment_before==2)
+		$terme_environment='Faible';
+	else if($impact_environment_before==4)
+		$terme_environment='Fort';
+	else if($impact_environment_before==5)
+		$terme_environment='Très Fort';
+
+	if($impact_social_before==1)
+		$terme_social='Très faible';
+	else if($impact_social_before==2)
+		$terme_social='Faible';
+	else if($impact_social_before==4)
+		$terme_social='Fort';
+	else if($impact_social_before==5)
+		$terme_social='Très Fort';
+
 }
 
 ?>
@@ -132,7 +164,6 @@ if ($campaign->end_vote_remaining() > 0) {
 						</div>
 						<div id='phase1'>
 							<div class='block1'>
-								</br>
 								<strong>Impacts et coh&eacute;rence du projet</strong><br />
 								<em>Comment &eacute;valuez-vous les impacts soci&eacute;taux de ce projet ?</em><br />
 								<ul class='impact-list' style='list-style-type:none;'>
@@ -142,7 +173,7 @@ if ($campaign->end_vote_remaining() > 0) {
 											 onchange='AfficheRange1(this.value)'
 							    			".$style_impacts."
 							    		>
-							    		<span id='valBox1' class='range-slider__value' >Moyen</span>
+							    		<span id='valBox1' class='range-slider__value' >".$terme_economie."</span>
 									</li>
 								    <li><span id='impact_span' >Environnement</span>
 							    		<input id='note_environnement' type='range'min='1' max='5' step='1' id='impact_environment_v3' name='impact_environment' value='".$impact_environment_before."'
@@ -150,7 +181,7 @@ if ($campaign->end_vote_remaining() > 0) {
 	  										 onkeyup='AfficheRange2(this.value)'
 	  										 ".$style_impacts."
 								    	>
-								    	<span id='valBox2' class='range-slider__value' >Moyen</span>
+								    	<span id='valBox2' class='range-slider__value' >".$terme_environment."</span>
 								    </li>
 
 								    <li><span id='impact_span'>Social</span>
@@ -159,7 +190,7 @@ if ($campaign->end_vote_remaining() > 0) {
 	  										 onkeyup='AfficheRange3(this.value)'
 	  										 ".$style_impacts."
 								    	>
-							    		<span id='valBox3' class='range-slider__value' >Moyen</span>
+							    		<span id='valBox3' class='range-slider__value' >".$terme_social."</span>
 
 								   </li>
 
@@ -171,12 +202,12 @@ if ($campaign->end_vote_remaining() > 0) {
 								<em>Ces impacts sont-ils suffisants pour que ce projet soit en financement sur WEDOGOOD.co ?</em><br />
 								</div>
 								<div class='radio_validate'>
-									<label><input type='radio' id='btn-validate_project-true' name='validate_project' checked='checked' onclick='afficher_div_true();'>
+									<label><input type='radio' id='btn-validate_project-true-v3' name='validate_project' checked='checked' onclick='afficher_div_true();'>
 									<span>
 									Oui
 									</span>
 									</label><br />
-									<label><input type='radio' id='btn-validate_project-false' name='validate_project' onclick='afficher_div_false();'>
+									<label><input type='radio' id='btn-validate_project-false-v3' name='validate_project' onclick='afficher_div_false();'>
 									<span>
 									Non
 									</span>
