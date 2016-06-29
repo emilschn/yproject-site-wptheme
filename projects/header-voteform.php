@@ -20,6 +20,10 @@ $check_impacts=true;
 $check_somme = true;
 $check_risque = true;
 
+$version=$campaign->campaign_edit_version;
+if(isset($_GET['display']))
+	$version=$_GET['display'];
+
 global $vote_errors;
 $vote_errors = array();
 
@@ -187,30 +191,36 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 					);
 				}
 			}
-			$campaign_url = get_permalink($post->ID);
-			$link=$campaign_url."?vote_check=1";
-			wp_redirect($link);
+			if($version==3)
+			{
+				$campaign_url = get_permalink($post->ID);
+				$link=$campaign_url."?vote_check=1";
+				wp_redirect($link);
+			}
 		}else{
-			$campaign_url = get_permalink($post->ID);
-			$link=$campaign_url."?vote_check=0
-			&impact_economy=".$impact_economy."
-			&impact_environment=".$impact_environment."
-			&impact_social=".$impact_social."
-			&impact_other=".$impact_other."
-			&validate_project=".$validate_project."
-			&invest_sum=".$invest_sum."
-			&more_info_impact=".$more_info_impact."
-			&more_info_service=".$more_info_service."
-			&more_info_team=".$more_info_team."
-			&more_info_finance=".$more_info_finance."
-			&more_info_other=".$more_info_other."
-			&advice=".$advice."
-			&check_risque=".$check_risque."
-			&check_somme=".$check_somme."
-			&check_impacts=".$check_impacts."
-			&share_conseil=".$share_conseil."
-			&invest_risk=".$invest_risk;
-			wp_redirect($link);
+			if($version==3)
+			{
+				$campaign_url = get_permalink($post->ID);
+				$link=$campaign_url."?vote_check=0
+				&impact_economy=".$impact_economy."
+				&impact_environment=".$impact_environment."
+				&impact_social=".$impact_social."
+				&impact_other=".$impact_other."
+				&validate_project=".$validate_project."
+				&invest_sum=".$invest_sum."
+				&more_info_impact=".$more_info_impact."
+				&more_info_service=".$more_info_service."
+				&more_info_team=".$more_info_team."
+				&more_info_finance=".$more_info_finance."
+				&more_info_other=".$more_info_other."
+				&advice=".$advice."
+				&check_risque=".$check_risque."
+				&check_somme=".$check_somme."
+				&check_impacts=".$check_impacts."
+				&share_conseil=".$share_conseil."
+				&invest_risk=".$invest_risk;
+				wp_redirect($link);
+			}
 		}
 	}
 }else if(!is_user_logged_in() && $campaign->end_vote_remaining() > 0){ 
