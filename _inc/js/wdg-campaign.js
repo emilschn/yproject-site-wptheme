@@ -103,6 +103,137 @@ var WDGProjectViewer = (function($) {
 					$("span.roi_percent_average").text(averageROIStr);
 				}
 			});
+
+		 	var phase=0;
+
+			masquer_div = function(idok,id1,id2)
+			{
+				if(idok=='#phase1'){
+	  				if (1>phase)
+	  				{
+						$(idok).attr('class','left');
+	  				}else{
+						$(idok).attr('class','right');
+	  				}
+	  				phase=1;
+				};
+				if(idok=='#phase2'){
+	  				if (2>phase)
+	  				{
+						$(idok).attr('class','left');
+	  				}else{
+						$(idok).attr('class','right');
+	  				}
+	  				phase=2;
+				};
+				if(idok=='#phase3'){
+	  				if (3>phase)
+	  				{
+						$(idok).attr('class','left');
+	  				}else{
+						$(idok).attr('class','right');
+	  				}
+	  				phase=3;		  				
+				};
+		       $(idok).attr('style','display:block;');
+		       $(id1).attr('style','display:none;');
+		       $(id2).attr('style','display:none;');
+
+			};
+
+			masquer_sauf_div1 = function()
+			{
+				masquer_div('#phase1','#phase2','#phase3');
+			};
+
+			masquer_sauf_div2 = function()
+			{
+				masquer_div('#phase2','#phase1','#phase3');
+			};
+
+			masquer_sauf_div3 = function()
+			{
+				masquer_div('#phase3','#phase1','#phase2');
+			};
+
+			afficher_div_true = function()
+			{
+				$('#validate_project-true').attr('style','display:block;');
+				$('#validate_project-false').attr('style','display:none;');
+			};
+
+			afficher_div_false = function ()
+			{
+				$('#validate_project-true').attr('style','display:none;');
+				$('#validate_project-false').attr('style','display:block;');
+			};
+			
+			AfficheRange1 = function (newVal){
+				val='';
+				if(newVal==1)
+					val='Très faible';
+				if(newVal==2)
+					val='Faible';
+				if(newVal==3)
+					val='Modéré';
+				if(newVal==4)
+					val='Fort';
+				if(newVal==5)
+					val='Très fort';
+	 			$('span#valBox1').html(val);
+			};
+
+			AfficheRange2 = function (newVal){
+				val='';
+				if(newVal==1)
+					val='Très faible';
+				if(newVal==2)
+					val='Faible';
+				if(newVal==3)
+					val='Modéré';
+				if(newVal==4)
+					val='Fort';
+				if(newVal==5)
+					val='Très fort';
+	 			$('span#valBox2').html(val);
+			};
+
+
+			AfficheRange3 = function(newVal){
+				val='';
+				if(newVal==1)
+					val='Très faible';
+				if(newVal==2)
+					val='Faible';
+				if(newVal==3)
+					val='Modéré';
+				if(newVal==4)
+					val='Fort';
+				if(newVal==5)
+					val='Très fort';
+				$('#valBox3').html(val);
+			};
+
+			AfficheRange4 = function(newVal){
+				var resultat='';
+				if (newVal == 1){
+					resultat = 'tr&egrave;s faible';
+				};
+				if (newVal == 2){
+					resultat = 'plut&ocirc;t faible';
+				};					
+				if (newVal == 3){
+					resultat = 'mod&eacute;r&eacute;';
+				};	
+				if (newVal == 4){
+					resultat = 'élevé';
+				};
+				if (newVal == 5){
+					resultat = 'très élevé';
+				};
+				$("span#valBox4").html(resultat);
+			};
+
 		},
 		
 		refreshScroll: function() {

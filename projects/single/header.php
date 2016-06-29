@@ -7,6 +7,7 @@ $menu_project_parts = array (
 	'news'			=> 'Actualit&eacute;s'
 );
 
+
 $page_invest = get_page_by_path('investir');
 $campaign_id_param = '?campaign_id=' . $campaign->ID;
 $invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
@@ -49,9 +50,37 @@ if (is_user_logged_in()) {
 			$campaign_status = $campaign->campaign_status();
 			switch ($campaign_status) {
 				case 'vote': ?>
-				<a href="#voteform">
-					<?php _e('Voter', 'yproject'); ?>
-				</a>
+				<?php
+					$table_name = $wpdb->prefix . "ypcf_project_votes";
+					$campaign_id=$campaign->ID;
+					$user_id = wp_get_current_user()->ID;
+
+					$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign_id.' AND user_id = '.$user_id );
+					$has_voted = false;
+					if ( !empty($hasvoted_results[0]->id) ) $has_voted = true;
+				?>
+
+				<?php if(!is_user_logged_in()){ ?>
+				    <a href="#connexion" id="aCliquer" class="wdg-button-lightbox-open" data-lightbox="connexion" 
+						data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start"
+			 					>
+			 			<?php _e('Voter', 'yproject'); ?>
+					</a>
+				<?php }else	if ($has_voted){ ?>
+					<div style="-webkit-filter: grayscale(100%);" id="vote-form-v3" >
+						<a ><?php _e('Merci pour votre vote', 'yproject'); ?></a>
+					</div>
+				<?php }else{ ?>
+				<div id="vote-form-v3">
+					<a href="#lightbox_voter" id="aCliquer_v3" class="wdg-button-lightbox-open" data-lightbox="vote" 
+					style=""
+					onclick="masquer_sauf_div1();"
+					>
+						<?php _e('Voter', 'yproject'); ?>
+					</a>
+				</div>
+				<?php } ?>
+				
 
 				<?php
 				break;
