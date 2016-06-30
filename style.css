@@ -412,7 +412,7 @@ form.wdg-forms table input[type="text"].reward-text{
 	margin-bottom: 5px;
 }
 .wdg-lightbox .wdg-lightbox-padder > div.admin-block h3 { margin: 5px auto; }
-.wdg-lightbox .wdg-lightbox-padder > div.admin-block label { display: inline-block; width: 80px; }
+.wdg-lightbox .wdg-lightbox-padder > div.admin-block label { display: inline-block; width: 140px; }
 
 .wdg-lightbox ul.errors {
 	list-style: none;
