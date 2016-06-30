@@ -1,5 +1,5 @@
 <?php
-global $campaign, $payment_url;
+global $campaign, $payment_url, $error_session;
 if (!isset($campaign)) {
 	$campaign = atcf_get_current_campaign();
 }
@@ -19,7 +19,15 @@ if (isset($campaign)):
 	locate_template( 'invest/breadcrumb.php', true );
 	?>
 
-	<?php if (!empty($payment_url)): ?>
+	<?php if (isset($error_session) && $error_session == '1'): ?>
+		<?php
+			$page_invest_link = get_permalink($page_invest->ID);
+			$page_invest_link .= '?campaign_id=' . $campaign->ID . '&invest_start=1';
+		?>
+		<?php _e("La session de paiement n'existe plus. Peut-&ecirc;tre avez-vous choisi un autre moyen de paiement ?", 'yproject'); ?><br />
+		<a href="<?php echo $page_invest_link; ?>"><?php _e("Merci de recommencer le processus de paiement.", 'yproject'); ?></a><br /><br />
+
+	<?php elseif (!empty($payment_url)): ?>
 		<?php _e("La redirection automatique ayant &eacute;chou&eacute;, veuillez cliquer sur", 'yproject'); ?> <a href="<?php echo $payment_url; ?>"><?php _e("ce lien", 'yproject'); ?></a>.<br /><br />
 
 	<?php else: ?>
