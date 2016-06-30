@@ -20,9 +20,7 @@ $check_impacts=true;
 $check_somme = true;
 $check_risque = true;
 
-$version=$campaign->campaign_edit_version;
-if(isset($_GET['display']))
-	$version=$_GET['display'];
+$version=$campaign->edit_version();
 
 global $vote_errors;
 $vote_errors = array();

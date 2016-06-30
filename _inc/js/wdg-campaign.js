@@ -169,69 +169,83 @@ var WDGProjectViewer = (function($) {
 			};
 			
 			AfficheRange1 = function (newVal){
-				val='';
+				$('span#valBox1_1').attr('style','display:none;');
+				$('span#valBox1_2').attr('style','display:none;');
+				$('span#valBox1_3').attr('style','display:none;');
+				$('span#valBox1_4').attr('style','display:none;');
+				$('span#valBox1_5').attr('style','display:none;');
 				if(newVal==1)
-					val='Très faible';
+					$('span#valBox1_1').attr('style','display:inline-block;');
 				if(newVal==2)
-					val='Faible';
+					$('span#valBox1_2').attr('style','display:inline-block;');
 				if(newVal==3)
-					val='Modéré';
+					$('span#valBox1_3').attr('style','display:inline-block;');
 				if(newVal==4)
-					val='Fort';
+					$('span#valBox1_4').attr('style','display:inline-block;');
 				if(newVal==5)
-					val='Très fort';
-	 			$('span#valBox1').html(val);
+					$('span#valBox1_5').attr('style','display:inline-block;');
 			};
 
+
 			AfficheRange2 = function (newVal){
-				val='';
+				$('span#valBox2_1').attr('style','display:none;');
+				$('span#valBox2_2').attr('style','display:none;');
+				$('span#valBox2_3').attr('style','display:none;');
+				$('span#valBox2_4').attr('style','display:none;');
+				$('span#valBox2_5').attr('style','display:none;');
 				if(newVal==1)
-					val='Très faible';
+					$('span#valBox2_1').attr('style','display:inline-block;');
 				if(newVal==2)
-					val='Faible';
+					$('span#valBox2_2').attr('style','display:inline-block;');
 				if(newVal==3)
-					val='Modéré';
+					$('span#valBox2_3').attr('style','display:inline-block;');
 				if(newVal==4)
-					val='Fort';
+					$('span#valBox2_4').attr('style','display:inline-block;');
 				if(newVal==5)
-					val='Très fort';
-	 			$('span#valBox2').html(val);
+					$('span#valBox2_5').attr('style','display:inline-block;');
 			};
 
 
 			AfficheRange3 = function(newVal){
-				val='';
+				$('span#valBox3_1').attr('style','display:none;');
+				$('span#valBox3_2').attr('style','display:none;');
+				$('span#valBox3_3').attr('style','display:none;');
+				$('span#valBox3_4').attr('style','display:none;');
+				$('span#valBox3_5').attr('style','display:none;');
 				if(newVal==1)
-					val='Très faible';
+					$('span#valBox3_1').attr('style','display:inline-block;');
 				if(newVal==2)
-					val='Faible';
+					$('span#valBox3_2').attr('style','display:inline-block;');
 				if(newVal==3)
-					val='Modéré';
+					$('span#valBox3_3').attr('style','display:inline-block;');
 				if(newVal==4)
-					val='Fort';
+					$('span#valBox3_4').attr('style','display:inline-block;');
 				if(newVal==5)
-					val='Très fort';
-				$('#valBox3').html(val);
+					$('span#valBox3_5').attr('style','display:inline-block;');
 			};
 
+
 			AfficheRange4 = function(newVal){
-				var resultat='';
+				$('span#valBox4_1').attr('style','display:none;');
+				$('span#valBox4_2').attr('style','display:none;');
+				$('span#valBox4_3').attr('style','display:none;');
+				$('span#valBox4_4').attr('style','display:none;');
+				$('span#valBox4_5').attr('style','display:none;');
 				if (newVal == 1){
-					resultat = 'tr&egrave;s faible';
+					$('span#valBox4_1').attr('style','display:inline-block;');
 				};
 				if (newVal == 2){
-					resultat = 'plut&ocirc;t faible';
+					$('span#valBox4_2').attr('style','display:inline-block;');
 				};					
 				if (newVal == 3){
-					resultat = 'mod&eacute;r&eacute;';
+					$('span#valBox4_3').attr('style','display:inline-block;');
 				};	
 				if (newVal == 4){
-					resultat = 'élevé';
+					$('span#valBox4_4').attr('style','display:inline-block;');
 				};
 				if (newVal == 5){
-					resultat = 'très élevé';
+					$('span#valBox4_5').attr('style','display:inline-block;');
 				};
-				$("span#valBox4").html(resultat);
 			};
 
 		},

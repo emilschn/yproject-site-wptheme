@@ -3852,7 +3852,7 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 }
 
 .block2{
-    width: 70%;
+    width: 60%;
 }
 
 .block1, .block3{
@@ -3865,10 +3865,6 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
 
 .block2 ul{
     padding-left: 25%;
-}
-
-.block2, .block3{
-    width: 60%;
 }
 
 .block1 ul ,.block2 ul ,.block3 ul {
@@ -3991,7 +3987,6 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     background:#EA4F51 !important;
     padding: 15px !important;
     color:white !important;
-    border-radius: 10px;
     text-transform: uppercase;
 }
 
@@ -4007,6 +4002,8 @@ footer.theme-myphotoreporter { background-color: #189AB4; background-image: url(
     padding-right: 5px;
     width: auto !important;
     display: inline-block;
+    width: 70px !important;
+    text-align: center;
 }
 
 .voter {
@@ -4211,13 +4208,17 @@ div#content.version-3.scrolled nav.project-navigation ul li {
 
 ul.more-info-list_v3{
     text-align: left;
-    margin-left: 20% !important;
+    margin-left: 25% !important;
 }
 
 textarea#advice_v3, input#more_info_other_v3{
     max-width: 95%;
+    font-size: 14px;
 }
 
+#impact_other_v3{
+    font-size: 14px;
+}
 
 
 
@@ -4226,6 +4227,7 @@ textarea#advice_v3, input#more_info_other_v3{
 
 #phase1, #phase2, #phase3{
     overflow : hidden !important;
+    width: 100%;
 }
 
 #phase1.left, #phase2.left, #phase3.left{
