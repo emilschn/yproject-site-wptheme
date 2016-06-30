@@ -20,11 +20,11 @@ if ($campaign->current_user_can_edit()) {
 	<h3>[ADMIN] <?php _e('Ajouter un paiement par ch&egrave;que', 'yproject'); ?></h3>
 	
 	<?php if (isset($_POST['action']) && $_POST['action'] == 'add-check-investment') {
-		$add_check_result = $campaign->add_investment('check', $_POST['email'], $_POST['value'], $_POST['username'], $_POST['password'], $_POST['gender'], $_POST['firstname'], $_POST['lastname']);
+		$add_check_result = $campaign->add_investment('check', $_POST['email'], $_POST['value'], $_POST['username'], $_POST['password'], $_POST['gender'], $_POST['firstname'], $_POST['lastname'], $_POST['orga_email'], $_POST['orga_name']);
 		if ($add_check_result !== FALSE) { ?>
 			<span class="success">Investissement ajouté</span>
 		<?php } else { ?>
-			<span class="errors">Erreur lors de l'ajout</span>
+			<span class="errors" style="color: black;">Erreur lors de l'ajout</span>
 		<?php }
 	} ?>
 	
@@ -39,7 +39,12 @@ if ($campaign->current_user_can_edit()) {
 			    <option value="male" <?php if (isset($_POST['gender']) && $_POST['gender'] == "male" && $add_check_result === FALSE) { ?>selected="selected"<?php } ?>>Mr</option>
 			</select><br />
 		<label for="firstname"><?php _e('Pr&eacute;nom :', 'yproject'); ?></label> <input type="text" name="firstname" <?php if (isset($_POST['firstname']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['firstname']; ?>"<?php } ?> /><br />
-		<label for="lastname"><?php _e('Nom :', 'yproject'); ?></label> <input type="text" name="lastname" <?php if (isset($_POST['lastname']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['lastname']; ?>"<?php } ?> /><br />
+		<label for="lastname"><?php _e('Nom :', 'yproject'); ?></label> <input type="text" name="lastname" <?php if (isset($_POST['lastname']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['lastname']; ?>"<?php } ?> /><br /><br />
+		
+		-- <?php _e("Si il s'agit d'une organisation :", 'yproject'); ?><br />
+		-- <label for="orga_email"><?php _e("E-mail de l'organisation :", 'yproject'); ?></label> <input type="text" name="orga_email" <?php if (isset($_POST['orga_email']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['orga_email']; ?>"<?php } ?> /><br />
+		-- <label for="orga_name"><?php _e("Nom de l'organisation (si n'existe pas d&eacute;j&agrave;) :", 'yproject'); ?></label> <input type="text" name="orga_name" <?php if (isset($_POST['orga_name']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['orga_name']; ?>"<?php } ?> /><br /><br />
+		
 		<button type="submit"><?php _e('Ajouter', 'yproject'); ?></button>
 		<input type="hidden" name="action" value="add-check-investment" />
 	</form>

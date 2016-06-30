@@ -1,0 +1,51 @@
+body {
+	margin: 20px 100px;
+	font-family: Arial,sans-serif;
+	font-size: 16px;
+	color: #2B2C2C;
+}
+@media screen and (max-width: 767px) {
+	margin: 5px;
+}
+
+
+form { margin:0; padding:5px 2px 0 2px; }
+table.sips_trans_ref_table tr td:last-child { padding-left: 20px; }
+table.sips_trans_ref_table tr td:last-child b { font-weight: normal; }
+table.sips_cryptogram_table { border: none; }
+table.sips_cryptogram_table td.sips_cryptogram_message { border: none; }
+table.sips_cryptogram_table td.sips_cryptogram_message a { display: block; }
+.sips_submit_button { margin: 10px; padding:7px 30px 7px 30px; background-color:#B5C338; color:white; border:none; -webkit-appearance: none; cursor: pointer; }
+.sips_submit_button:active { background-color: white; color: #B5C338; }
+.sips_customer_return_button { margin:0 0 20px 0; padding:7px 10px 7px 10px; background-color:#de4343; color: white; border:none; -webkit-appearance: none; cursor: pointer; }
+.sips_customer_return_button:active { background-color:white; color:#de4343; }
+
+/*
+.sips_body_page {
+	background-color:white;
+	width:auto;
+	margin:auto;
+	text-align:center;
+}
+.sips_shop_name_table{display:none;}
+.sips_logo{display:none;}
+.sips_trans_ref_table{margin:auto;background-color:#fff;padding:10px;border:none;color:#777;font-size:0.8em;}
+.sips_trans_ref_table tr + tr +tr{color:#B5C338;font-size:1.2em;}
+.sips_secure_message{color:grey;display:none;text-align:center;width:auto;margin:auto;font-weight:normal;}
+img{margin-top:-15px;}
+.sips_card_number_title{color:#B5C338;font-size:1.2em;}
+.sips_card_number_input{border-radius:5px;border-color:rgb(227,227,227);border-style:solid;border-width:1px;padding:9px 5px 9px 5px;}
+.sips_expiry_month_card_input{border-radius:5px;border-color:rgb(227,227,227);border-style:solid;border-width:1px;padding:9px 5px 9px 5px;}
+.sips_expiry_year_card_input{border-radius:5px;border-color:rgb(227,227,227);border-style:solid;border-width:1px;padding:9px 5px 9px 5px;}
+.sips_expiry_date_card_title{margin-left:10px;color:#B5C338;font-size:1.2em;}
+.sips_cryptogram_table{border:none;max-width:590px;text-align:center;color:#B5C338;margin:auto;padding-top:5px;}
+.sips_cryptogram_message{border:none;font-size:1em;}
+.sips_cvvkey_mandatory_text_input{border-radius:5px;border-color:#d7d7d7;border-style:solid;border-width:1px;	padding:9px 5px 9px 5px;min-width:40px;}
+.sips_card_cvv2_message{color:#B5C338;}
+.sips_threeD_info_message{color:white;display:none;text-align:center;width:50%;margin:auto;font-size:0.8em;}
+.sips_cryptogram_example{display:none;}
+.sips_submit_message{color:#B5C338;font-size:1.2em;display:none;}
+.sips_error_code{color:#de4343;}
+.sips_error{color:#de4343;}
+.sips_footer_message{display:none;}
+*/

@@ -113,7 +113,7 @@ if (isset($campaign) && is_user_logged_in()):
 			);
 
 			$status = 'pending';
-			if (isset($_GET['cancel']) && $_GET['cancel'] == '1') {
+			if ( (isset($_GET['cancel']) && $_GET['cancel'] == '1') || (isset($_GET['error']) && $_GET['error'] == '1') ) {
 				$status = 'failed';
 			}
 			$payment_data = array( 
@@ -257,11 +257,14 @@ if (isset($campaign) && is_user_logged_in()):
 
 				case 'failed' :
 					_e("Il y a eu une erreur pendant la transacton.", 'yproject'); ?><br />
+					
 					<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
 						<?php echo $mangopay_contribution->AnswerMessage . ' (' . $mangopay_contribution->AnswerCode . ')'; ?>
 					<?php elseif ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway): ?>
-						<?php echo $lw_transaction_result->MSG; ?>
-					<?php endif; ?>
+						<?php echo $lw_transaction_result->MSG . ' (' .$lw_transaction_result->INT_MSG. ')'; ?>
+					<?php endif; ?><br />
+					
+					<?php _e("Si vous souhaitez de l'aide relative &agrave; ce probl&egrave;me, merci de nous contacter sur investir@wedogood.co en pr&eacute;cisant les informations ci-dessus.", 'yproject'); ?>
 					<?php
 					break;
 			}

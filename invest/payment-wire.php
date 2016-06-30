@@ -29,7 +29,7 @@ if (isset($campaign)): ?>
 				
 			<?php elseif ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway): ?>
 				<?php
-				$organisation = $campaign->get_organisation();
+				$organization = $campaign->get_organisation();
 				$organization_obj = new YPOrganisation($organization->organisation_wpref);
 				?>
 				<li><strong><?php _e("Titulaire du compte :", 'yproject'); ?></strong> LEMON WAY</li>
