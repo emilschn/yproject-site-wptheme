@@ -21,7 +21,7 @@ if (is_user_logged_in()) {
 
 		<?php if(!is_user_logged_in()){ ?>
 		<div id="vote-form-v3-button">
-		    <a href="#connexion" id="aCliquer" class="button-action" data-lightbox="connexion" 
+		    <a href="#connexion" class="button-action" data-lightbox="connexion" 
 				data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start"
 	 					>
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodvote.png" alt="<?php _e('Voter', 'yproject'); ?>" title="<?php _e('Voter', 'yproject'); ?>" />
@@ -37,9 +37,9 @@ if (is_user_logged_in()) {
 			if ( !empty($hasvoted_results[0]->id) ) $has_voted = true;
 			if (!$has_voted){ ?>
 			<div id="vote-form-v3-button">
-				<a href="#lightbox_voter" id="aCliquer" class="wdg-button-lightbox-open" data-lightbox="vote" 
+				<a href="#lightbox_voter" class="wdg-button-lightbox-open" data-lightbox="vote" 
 					style=""
-					onclick="masquer_sauf_div1();"
+					id="vote-form-v3-link-responsive"
 					>		
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/goodvote.png" alt="<?php _e('Voter', 'yproject'); ?>" title="<?php _e('Voter', 'yproject'); ?>" />
 				</a>

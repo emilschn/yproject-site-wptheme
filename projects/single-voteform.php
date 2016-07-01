@@ -3,6 +3,7 @@ if (isset($_GET['campaign_id'])) {
 	$post = get_post($_GET['campaign_id']);
 	$campaign = atcf_get_campaign( $post );
 }
+
 ?>
 
 <div id="project_vote_zone">

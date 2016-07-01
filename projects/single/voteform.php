@@ -19,12 +19,12 @@ $more_info_finance_before=0;
 $more_info_other_before='';
 $invest_risk_before=3;
 $advice_before='';
-$share_conseil_before='';
+$share_advice_before='';
 
-$style_somme='';
-$style_risque='';
+$style_sum='';
+$style_risk='';
 $style_impacts='';
-$style_erreurs="style='display:none;'";
+$style_errors="style='display:none;'";
 
 $style_valBox1_1_before="display:none !important;";
 $style_valBox1_2_before="display:none !important;";
@@ -52,26 +52,26 @@ $style_valBox4_4_before="display:none !important;";
 $style_valBox4_5_before="display:none !important;";
 
 
-$message_erreur='';
+$message_errors='';
 
-$terme_1="Très faible";
-$terme_2="Faible";
-$terme_3="Modéré";
-$terme_4="Fort";
-$terme_5="Très fort";
+$term_impact_1="Très faible";
+$term_impact_2="Faible";
+$term_impact_3="Modéré";
+$term_impact_4="Fort";
+$term_impact_5="Très fort";
 
-$terme2_1="très faible";
-$terme2_2="faible";
-$terme2_3="modéré";
-$terme2_4="élevé";
-$terme2_5="très élevé";
+$term_risk_1="très faible";
+$term_risk_2="faible";
+$term_risk_3="modéré";
+$term_risk_4="élevé";
+$term_risk_5="très élevé";
 
-$terme_economie=$terme_3;
-$terme_environment=$terme_3;
-$terme_social=$terme_3;
+$validate_project_checked_true=" checked='checked' ";
+$validate_project_checked_false="";
+$style_lightbox='';
 
 if (isset($_GET['vote_check'])&&$_GET['vote_check']==0){
-	$style_erreurs='';
+	$style_errors='';
 	if(isset($_GET['impact_economy']))
 		$impact_economy_before=$_GET['impact_economy'];
 
@@ -87,6 +87,11 @@ if (isset($_GET['vote_check'])&&$_GET['vote_check']==0){
 	if(isset($_GET['validate_project']))
 		$validate_project_before=$_GET['validate_project'];
 
+	if($validate_project_before==0)
+	{
+		$validate_project_checked_false=" checked='checked' ";
+		$validate_project_checked_true="";
+	}
 	if(isset($_GET['invest_sum']))
 		$invest_sum_before=$_GET['invest_sum'];
 
@@ -111,25 +116,26 @@ if (isset($_GET['vote_check'])&&$_GET['vote_check']==0){
 	if(isset($_GET['advice']))
 		$advice_before=$_GET['advice'];
 
-	if(isset($_GET['share_conseil'])&&($_GET['share_conseil']))
-		$share_conseil_before=" checked='checked' ";
 
-	$message_erreur="Saisie(s) incorrecte(s) : </br>";
-	if(isset($_GET['check_risque'])&&($_GET['check_risque']=='')){
-		$message_erreur=$message_erreur.'- Le risque est mal indiqué.</br>';
-		$style_risque="style='border-style: groove !important; border-color:#EA4F51; border-radius: 5px;'";
+	if(isset($_GET['share_advice'])&&($_GET['share_advice']))
+		$share_advice_before=" checked='checked' ";
+
+	$message_errors="Saisie(s) incorrecte(s) : </br>";
+	if(isset($_GET['check_risk'])&&($_GET['check_risk']=='')){
+		$message_errors=$message_errors.'- Le risque est mal indiqué.</br>';
+		$style_risk="style='border-style: groove !important; border-color:#EA4F51; border-radius: 5px;'";
 	}
-	if(isset($_GET['check_somme'])&&($_GET['check_somme']==''))
+	if(isset($_GET['check_sum'])&&($_GET['check_sum']==''))
 	{
-		$message_erreur=$message_erreur.'- La somme que vous serez prêt à investir est incorrecte.</br>';
-		$style_somme="style='border-style: groove !important; border-color:#EA4F51; border-radius: 5px;'";
+		$message_errors=$message_errors.'- La somme que vous serez prêt à investir est incorrecte.</br>';
+		$style_sum="style='border-style: groove !important; border-color:#EA4F51; border-radius: 5px;'";
 	}
 	if(isset($_GET['check_impacts'])&&($_GET['check_impacts']==''))
 	{
-		$message_erreur=$message_erreur.'- Les impacts sociaux de ce projet ont été mal remplis.</br>';
+		$message_errors=$message_errors.'- Les impacts sociaux de ce projet ont été mal remplis.</br>';
 		$style_impacts="style='border-style: groove !important; border-color:#EA4F51; border-radius: 5px;'";
 	}
-	$message_erreur=$message_erreur."Veuillez corriger les champs en rouge.";
+	$message_errors=$message_errors."Veuillez corriger les champs en rouge.";
 
 
 	$style_valBox1_3_before="display:none;";
@@ -148,13 +154,13 @@ if (isset($_GET['vote_check'])&&$_GET['vote_check']==0){
 
 	$style_valBox2_3_before="display:none !important;";
 
-	if($impact_economy_before==1)
+	if($impact_environment_before==1)
 		$style_valBox2_1_before="display:inline-block !important;";
-	else if($impact_economy_before==2)
+	else if($impact_environment_before==2)
 		$style_valBox2_2_before="display:inline-block !important;";
-	else if($impact_economy_before==4)
+	else if($impact_environment_before==4)
 		$style_valBox2_4_before="display:inline-block !important;";
-	else if($impact_economy_before==5)
+	else if($impact_environment_before==5)
 		$style_valBox2_5_before="display:inline-block !important;";
 	else
 		$style_valBox2_3_before="display:inline-block !important;";
@@ -162,17 +168,31 @@ if (isset($_GET['vote_check'])&&$_GET['vote_check']==0){
 
 	$style_valBox3_3_before="display:none !important;";
 
-	if($impact_economy_before==1)
+	if($impact_social_before==1)
 		$style_valBox3_1_before="display:inline-block !important;";
-	else if($impact_economy_before==2)
+	else if($impact_social_before==2)
 		$style_valBox3_2_before="display:inline-block !important;";
-	else if($impact_economy_before==4)
+	else if($impact_social_before==4)
 		$style_valBox3_4_before="display:inline-block !important;";
-	else if($impact_economy_before==5)
+	else if($impact_social_before==5)
 		$style_valBox3_5_before="display:inline-block !important;";
 	else
 		$style_valBox3_3_before="display:inline-block !important;";
 
+	$style_valBox4_3_before="display:none !important;";
+
+	if($invest_risk_before==1)
+		$style_valBox4_1_before="display:inline-block !important;";
+	else if($invest_risk_before==2)
+		$style_valBox4_2_before="display:inline-block !important;";
+	else if($invest_risk_before==4)
+		$style_valBox4_4_before="display:inline-block !important;";
+	else if($invest_risk_before==5)
+		$style_valBox4_5_before="display:inline-block !important;";
+	else
+		$style_valBox4_3_before="display:inline-block !important;";
+
+	$style_lightbox="style='display:block !important;'";
 }
 
 
@@ -186,13 +206,14 @@ if ($campaign->end_vote_remaining() > 0) {
 <div id="lightbox">
 	<?php 
 	$perma = get_permalink($post->ID);
-	echo do_shortcode('
-	[yproject_lightbox id="vote"]'."
+	$atts=array();
+	$atts['id']='vote';
+	echo yproject_shortcode_lightbox($atts,"
 		<!-- phase 1 -->
 		<form name='ypvote' action='".$perma."' method='POST' class='ypvote-form_v3' enctype='multipart/form-data'>
 		<main class='container'>
-			<div id='erreurs' ".$style_erreurs." >
-				<span>".$message_erreur."</span>
+			<div id='errors' ".$style_errors." >
+				<span>".$message_errors."</span>
 				<hr color='#EA4F51'>
 			</div>
 			<div id='phase1'>
@@ -200,66 +221,75 @@ if ($campaign->end_vote_remaining() > 0) {
 					<strong>Impacts et coh&eacute;rence du projet</strong><br />
 					<em>Comment &eacute;valuez-vous les impacts soci&eacute;taux de ce projet ?</em><br />
 					<ul class='impact-list' style='list-style-type:none;'>
-					    <li><span id='impact_span'>Economie</span>
+					    <li><span class='impact_span'>Economie</span>
 				    		<input id='note_eco' type='range' min='1' max='5' step='1' id='impact_economy_v3' name='impact_economy' value='".$impact_economy_before."'
 								 onkeyup='AfficheRange1(this.value)'
 								 onchange='AfficheRange1(this.value)'
 				    			".$style_impacts."
 				    		>
-				    		<span id='valBox1_1' class='range-slider__value' style='".$style_valBox1_1_before."'>".$terme_1."</span>
-				    		<span id='valBox1_2' class='range-slider__value' style='".$style_valBox1_2_before."'>".$terme_2."</span>
-				    		<span id='valBox1_3' class='range-slider__value' style='".$style_valBox1_3_before."'>".$terme_3."</span>
-				    		<span id='valBox1_4' class='range-slider__value' style='".$style_valBox1_4_before."'>".$terme_4."</span>
-				    		<span id='valBox1_5' class='range-slider__value' style='".$style_valBox1_5_before."'>".$terme_5."</span>
-
+				    		<div class='result_box'>
+				    			<span id='valBox1_1' class='range-slider__value' style='".$style_valBox1_1_before."'>".$term_impact_1."</span>
+				    			<span id='valBox1_2' class='range-slider__value' style='".$style_valBox1_2_before."'>".$term_impact_2."</span>
+				    			<span id='valBox1_3' class='range-slider__value' style='".$style_valBox1_3_before."'>".$term_impact_3."</span>
+				    			<span id='valBox1_4' class='range-slider__value' style='".$style_valBox1_4_before."'>".$term_impact_4."</span>
+				    			<span id='valBox1_5' class='range-slider__value' style='".$style_valBox1_5_before."'>".$term_impact_5."</span>
+				    		</div>
 						</li>
-					    <li><span id='impact_span' >Environnement</span>
-				    		<input id='note_environnement' type='range'min='1' max='5' step='1' id='impact_environment_v3' name='impact_environment' value='".$impact_environment_before."'
+					    <li><span class='impact_span' >Environnement</span>
+				    		<input id='note_environment' type='range'min='1' max='5' step='1' id='impact_environment_v3' name='impact_environment' value='".$impact_environment_before."'
 					    		 onchange='AfficheRange2(this.value)'
 									 onkeyup='AfficheRange2(this.value)'
 									 ".$style_impacts."
 					    	>
-				    		<span id='valBox2_1' class='range-slider__value' style='".$style_valBox2_1_before."'>".$terme_1."</span>
-				    		<span id='valBox2_2' class='range-slider__value' style='".$style_valBox2_2_before."'>".$terme_2."</span>
-				    		<span id='valBox2_3' class='range-slider__value' style='".$style_valBox2_3_before."'>".$terme_3."</span>
-				    		<span id='valBox2_4' class='range-slider__value' style='".$style_valBox2_4_before."'>".$terme_4."</span>
-				    		<span id='valBox2_5' class='range-slider__value' style='".$style_valBox2_5_before."'>".$terme_5."</span>
+						    <div class='result_box'>
+					    		<span id='valBox2_1' class='range-slider__value' style='".$style_valBox2_1_before."'>".$term_impact_1."</span>
+					    		<span id='valBox2_2' class='range-slider__value' style='".$style_valBox2_2_before."'>".$term_impact_2."</span>
+					    		<span id='valBox2_3' class='range-slider__value' style='".$style_valBox2_3_before."'>".$term_impact_3."</span>
+					    		<span id='valBox2_4' class='range-slider__value' style='".$style_valBox2_4_before."'>".$term_impact_4."</span>
+					    		<span id='valBox2_5' class='range-slider__value' style='".$style_valBox2_5_before."'>".$term_impact_5."</span>
+					    	</div>
 					    </li>
 
-					    <li><span id='impact_span'>Social</span>
+					    <li><span class='impact_span'>Social</span>
 				    		<input id='note_social' type='range'min='1' max='5' step='1' id='impact_social_v3' name='impact_social' value='".$impact_social_before."'
 					    		 onchange='AfficheRange3(this.value)'
 									 onkeyup='AfficheRange3(this.value)'
 									 ".$style_impacts."
 					    	>
-				    		<span id='valBox3_1' class='range-slider__value' style='".$style_valBox3_1_before."'>".$terme_1."</span>
-				    		<span id='valBox3_2' class='range-slider__value' style='".$style_valBox3_2_before."'>".$terme_2."</span>
-				    		<span id='valBox3_3' class='range-slider__value' style='".$style_valBox3_3_before."'>".$terme_3."</span>
-				    		<span id='valBox3_4' class='range-slider__value' style='".$style_valBox3_4_before."'>".$terme_4."</span>
-				    		<span id='valBox3_5' class='range-slider__value' style='".$style_valBox3_5_before."'>".$terme_5."</span>
+					    	<div class='result_box'>
+					    		<span id='valBox3_1' class='range-slider__value' style='".$style_valBox3_1_before."'>".$term_impact_1."</span>
+					    		<span id='valBox3_2' class='range-slider__value' style='".$style_valBox3_2_before."'>".$term_impact_2."</span>
+					    		<span id='valBox3_3' class='range-slider__value' style='".$style_valBox3_3_before."'>".$term_impact_3."</span>
+					    		<span id='valBox3_4' class='range-slider__value' style='".$style_valBox3_4_before."'>".$term_impact_4."</span>
+					    		<span id='valBox3_5' class='range-slider__value' style='".$style_valBox3_5_before."'>".$term_impact_5."</span>
+					   		</div>
 					   </li>
 
-					    <li><span id='impact_span'>Autre</span>
-					     <input type='text' ".$style_impacts." name='impact_other' id='impact_other_v3' value='".$impact_other_before."'/></li>
+					    <li>
+					    	<span class='impact_span'>Autre</span>
+					    	<input type='text' ".$style_impacts." name='impact_other' id='impact_other_v3' value='".$impact_other_before."'/>
+							<div class='result_box'/>
+					    </li>
+					
 					</ul>
 					</br>
 					<div id='em_impact'>
 					<em>Ces impacts sont-ils suffisants pour que ce projet soit en financement sur WEDOGOOD.co ?</em><br />
 					</div>
 					<div class='radio_validate'>
-						<label><input type='radio' id='btn-validate_project-true-v3' name='validate_project' checked='checked' onclick='afficher_div_true();'>
-						<span>
+						<label><input type='radio' id='btn-validate_project-true-v3' name='validate_project' value='1' ".$validate_project_checked_true.">
+						<span class='span_validate_project'>
 						Oui
 						</span>
 						</label><br />
-						<label><input type='radio' id='btn-validate_project-false-v3' name='validate_project' onclick='afficher_div_false();'>
-						<span>
+						<label><input type='radio' id='btn-validate_project-false-v3' name='validate_project' value='0' ".$validate_project_checked_false.">
+						<span class='span_validate_project'>
 						Non
 						</span>
 						</label><br />
 					</div>
 				</div>
-				<div class='suivant' onclick='masquer_sauf_div2();' style='cursor:pointer;'>
+				<div class='next' id='hide_except_div2_phase1' style='cursor:pointer;'>
 					<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png'/>
 				</div>
 				</br>
@@ -267,23 +297,23 @@ if ($campaign->end_vote_remaining() > 0) {
 				<!-- phase 2 -->
 
 			<div id='phase2'>
-				<div class='retour'>
-					<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png' onclick='masquer_sauf_div1();' style='transform: rotate(180deg); cursor:pointer;'/>
+				<div class='return' id='hide_except_div1'>
+					<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png' style='transform: rotate(180deg); cursor:pointer;'/>
 				</div>
 				<div class='block2'>
 					<strong>Remarques</strong><br />
 					<em>Avez-vous besoin de plus d&apos;informations concernant l&apos;un des aspects suivants ?</em><br />
 					<ul class='more-info-list_v3' style='list-style-type:none;'>
-					    <li><label><input type='checkbox' id='more_info_service_v3' name='more_info_service' ".$more_info_service_before." value='1'><span>Le produit / service</span></label></li>
-					    <li><label><input type='checkbox' id='more_info_impact_v3' name='more_info_impact' ".$more_info_impact_before." value='1'><span>L&apos;impact soci&eacute;tal</span></label></li>
-					    <li><label><input type='checkbox' id='more_info_team_v3' name='more_info_team' ".$more_info_team_before." value='1'><span>La structuration de l&apos;&eacute;quipe</span></label></li>
-					    <li><label><input type='checkbox' id='more_info_finance_v3' name='more_info_finance' ".$more_info_finance_before." value='1'><span>Le pr&eacute;visionnel financier</span></label></li>
+					    <li><label><input type='checkbox' id='more_info_service_v3' name='more_info_service' ".$more_info_service_before." value='1'><span class='span_more_info'>Le produit / service</span></label></li>
+					    <li><label><input type='checkbox' id='more_info_impact_v3' name='more_info_impact' ".$more_info_impact_before." value='1'><span class='span_more_info'>L&apos;impact soci&eacute;tal</span></label></li>
+					    <li><label><input type='checkbox' id='more_info_team_v3' name='more_info_team' ".$more_info_team_before." value='1'><span class='span_more_info' >La structuration de l&apos;&eacute;quipe</span></label></li>
+					    <li><label><input type='checkbox' id='more_info_finance_v3' name='more_info_finance' ".$more_info_finance_before." value='1'><span class='span_more_info'>Le pr&eacute;visionnel financier</span></label></li>
 
-					    <li>Autre : <input type='text' id='more_info_other_v3' name='more_info_other' placeholder='Pr&eacute;ciser...' value='".$more_info_other_before."' /> </li>
+					    <li>Autre : <input type='text' id='more_info_other_v3' name='more_info_other' class='span_more_info' placeholder='Pr&eacute;ciser...' value='".$more_info_other_before."' /> </li>
 					</ul>
 				</div>
-				<div class='suivant'>
-					<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png' onclick='masquer_sauf_div3()' style='cursor:pointer;'/>
+				<div class='next' id='hide_except_div3'>
+					<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png' style='cursor:pointer;'/>
 				</div>
 			</br>
 			</div>
@@ -291,33 +321,35 @@ if ($campaign->end_vote_remaining() > 0) {
 				<!-- phase 3 -->
 
 			<div id='phase3' >
-				<div class='retour'>
-					<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png' onclick='masquer_sauf_div2();' style='transform:rotate(180deg); cursor:pointer;'/>
+				<div class='return' id='hide_except_div2_phase3' >
+					<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png' style='transform:rotate(180deg); cursor:pointer;'/>
 				</div>
 				<div class='block3'>
 					<div id='validate_project-true'>
 
 					    <?php if (".$campaign->funding_type()." != 'fundingdonation'): ?>
 					    Je pense que le risque est :
-				    		<span id='valBox4_1' class='range-slider__value' style='".$style_valBox4_1_before."'>".$terme2_1."</span>
-				    		<span id='valBox4_2' class='range-slider__value' style='".$style_valBox4_2_before."'>".$terme2_2."</span>
-				    		<span id='valBox4_3' class='range-slider__value' style='".$style_valBox4_3_before."'>".$terme2_3."</span>
-				    		<span id='valBox4_4' class='range-slider__value' style='".$style_valBox4_4_before."'>".$terme2_4."</span>
-				    		<span id='valBox4_5' class='range-slider__value' style='".$style_valBox4_5_before."'>".$terme2_5."</span>
+				    		<span id='valBox4_1' class='range-slider__value' style='".$style_valBox4_1_before."'>".$term_risk_1."</span>
+				    		<span id='valBox4_2' class='range-slider__value' style='".$style_valBox4_2_before."'>".$term_risk_2."</span>
+				    		<span id='valBox4_3' class='range-slider__value' style='".$style_valBox4_3_before."'>".$term_risk_3."</span>
+				    		<span id='valBox4_4' class='range-slider__value' style='".$style_valBox4_4_before."'>".$term_risk_4."</span>
+				    		<span id='valBox4_5' class='range-slider__value' style='".$style_valBox4_5_before."'>".$term_risk_5."</span>
 					    </br>
-					  	<span> Très faible </span>
-					  	<input id='note_risque' type='range'min='1' max='5' step='1'  id='invest_risk_v3' name='invest_risk' value='".$invest_risk_before."'
-					    		 onchange='AfficheRange4(this.value)'
-									 onkeyup='AfficheRange4(this.value)'
-									 ".$style_risque."
-					    >
-					    <span> Très élevé </span>
+					    <div id='choice_risk'>
+						  	<span class='span_risk'> Très faible </span>
+						  	<input id='note_risk' type='range'min='1' max='5' step='1'  id='invest_risk_v3' name='invest_risk' value='".$invest_risk_before."'
+						    		 onchange='AfficheRange4(this.value)'
+										 onkeyup='AfficheRange4(this.value)'
+										 ".$style_risk."
+						    >
+						    <span class='span_risk'> Très élevé </span>
+					    </div>
 					    <?php endif; ?>
 						</br>
 						<div id='investir_sum_v3'>
 						    Je serais int&eacute;ress&eacute; pour investir :
 							</br>
-						    <input type='text' id='invest_sum_v3' name='invest_sum' value='".$invest_sum_before."' size='10' ".$style_somme." />&euro;<br />
+						    <input type='text' id='invest_sum_v3' name='invest_sum' value='".$invest_sum_before."' size='10' ".$style_sum." />&euro;<br />
 					    </div>
 					<br />
 					</div>
@@ -325,18 +357,18 @@ if ($campaign->end_vote_remaining() > 0) {
 						<em>Quels conseils ou encouragements souhaitez-vous donner au(x) porteur(s) de ce projet ?</em><br />
 						<textarea id='advice_v3' type='text' name='advice'>".$advice_before."</textarea><br/><br/>
 						<ul class='more-info-list' style='list-style-type:none;'>
-						    <li><label><input type='checkbox' name='share_conseil' ".$share_conseil_before."><span>Je veux que mes conseils soient publiés en commentaires.</span></label></li>
+						    <li><label><input type='checkbox' name='share_advice' ".$share_advice_before."><span class='span_share_advice'>Je veux que mes conseils soient publiés en commentaires.</span></label></li>
 						</ul>
 					</br>
-					<div class='voter'>
-						<input type='submit' name='submit_vote' value='Voter' class='voter_submit_v3'/>
+					<div class='vote'>
+						<input type='submit' name='submit_vote' value='Voter' class='vote_submit_v3'/>
 					</div>
 				</div>
 
 				</br>
 			</div>
 		</form>	
-	".'[/yproject_lightbox]'); 
+	",$style_lightbox); 
 ?>
 </div>
 <?php
@@ -344,3 +376,5 @@ if ($campaign->end_vote_remaining() > 0) {
 ?>
     
 </div>
+
+

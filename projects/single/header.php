@@ -61,7 +61,7 @@ if (is_user_logged_in()) {
 				?>
 
 				<?php if(!is_user_logged_in()){ ?>
-				    <a href="#connexion" id="aCliquer" class="wdg-button-lightbox-open" data-lightbox="connexion" 
+				    <a href="#connexion" class="wdg-button-lightbox-open" data-lightbox="connexion" 
 						data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start"
 			 					>
 			 			<?php _e('Voter', 'yproject'); ?>
@@ -72,9 +72,8 @@ if (is_user_logged_in()) {
 					</div>
 				<?php }else{ ?>
 				<div id="vote-form-v3">
-					<a href="#lightbox_voter" id="aCliquer_v3" class="wdg-button-lightbox-open" data-lightbox="vote" 
-					style=""
-					onclick="masquer_sauf_div1();"
+					<a href="#lightbox_voter" class="wdg-button-lightbox-open" data-lightbox="vote" 
+					id="vote-form-v3-link"
 					>
 						<?php _e('Voter', 'yproject'); ?>
 					</a>

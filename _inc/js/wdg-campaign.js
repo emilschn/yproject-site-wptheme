@@ -103,9 +103,25 @@ var WDGProjectViewer = (function($) {
 					$("span.roi_percent_average").text(averageROIStr);
 				}
 			});
+	
+			// Initialisation des divs
+	        $("#phase1").attr('style','display:block;');
+	        $("#phase2").attr('style','display:none;');
+		    $("#phase3").attr('style','display:none;');
+
+			$("#wdg-lightbox-voteform-validated").attr('style','display:block !important;');
 
 		 	var phase=0;
 
+			$("#hide_except_div1").attr("onclick","masquer_sauf_div1()");
+			$("#hide_except_div2_phase1").attr("onclick","masquer_sauf_div2()");
+			$("#hide_except_div2_phase3").attr("onclick","masquer_sauf_div2()");
+			$("#hide_except_div3").attr("onclick","masquer_sauf_div3()");
+			$("#btn-validate_project-true-v3").attr("onclick","afficher_div_true()");
+			$("#btn-validate_project-false-v3").attr("onclick","afficher_div_false()");
+			$("#vote-form-v3-link").attr("onclick","see_div1()");
+			$("#vote-form-v3-link-responsive").attr("onclick","see_div1()");
+			
 			masquer_div = function(idok,id1,id2)
 			{
 				if(idok=='#phase1'){
@@ -141,19 +157,40 @@ var WDGProjectViewer = (function($) {
 
 			};
 
-			masquer_sauf_div1 = function()
+			see_div1 = function()
 			{
 				masquer_div('#phase1','#phase2','#phase3');
 			};
 
+
+			masquer_sauf_div1 = function()
+			{
+				function wait(){
+					masquer_div('#phase1','#phase2','#phase3');
+			   	};
+				$("#phase2").attr('class','left_disappearance')
+			   	window.setTimeout( wait, 800 ); 
+			};
+
 			masquer_sauf_div2 = function()
 			{
-				masquer_div('#phase2','#phase1','#phase3');
+				function wait(){
+					masquer_div('#phase2','#phase1','#phase3');
+			   	};
+			   	if(phase==3)
+			  	 	$("#phase3").attr('class','left_disappearance')
+			   	if(phase==1)
+			  	 	$("#phase1").attr('class','right_disappearance')
+			   window.setTimeout( wait, 800 ); 
 			};
 
 			masquer_sauf_div3 = function()
 			{
-				masquer_div('#phase3','#phase1','#phase2');
+				function wait(){
+					masquer_div('#phase3','#phase1','#phase2');
+			   	};
+			   	$("#phase2").attr('class','right_disappearance')
+			   window.setTimeout( wait, 800 ); 
 			};
 
 			afficher_div_true = function()
@@ -167,6 +204,8 @@ var WDGProjectViewer = (function($) {
 				$('#validate_project-true').attr('style','display:none;');
 				$('#validate_project-false').attr('style','display:block;');
 			};
+
+
 			
 			AfficheRange1 = function (newVal){
 				$('span#valBox1_1').attr('style','display:none;');

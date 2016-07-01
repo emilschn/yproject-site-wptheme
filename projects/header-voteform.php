@@ -17,8 +17,8 @@ $more_info_other = '';
 $advice = '';
 
 $check_impacts=true;
-$check_somme = true;
-$check_risque = true;
+$check_sum = true;
+$check_risk = true;
 
 $version=$campaign->edit_version();
 
@@ -54,7 +54,7 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 				} elseif (!is_numeric($_POST[ 'invest_sum' ]) || $_POST[ 'invest_sum' ] < 0) {
 					array_push($vote_errors, 'La somme &agrave; investir n&apos;est pas valide.');
 					$is_vote_valid = false;
-					$check_somme=false;
+					$check_sum=false;
 				//Sinon c'est ok (on arrondit quand même)
 				} else {
 					$invest_sum = round($_POST[ 'invest_sum' ]);
@@ -69,7 +69,7 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 			    if ($invest_risk <= 0) {
 				    array_push($vote_errors, 'Vous n&apos;avez pas s&eacute;lectionn&eacute; de risque d&apos;investissement.');
 				    $is_vote_valid = false;
-				    $check_risque=false;
+				    $check_risk=false;
 			    }
 			} else {
 			    $invest_risk = 1;
@@ -95,14 +95,14 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 		// Vérifie si l'utilisateur a deja voté
 		$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign_id.' AND user_id = '.$user_id );
 		
-		$share_conseil =(isset($_POST[ 'share_conseil' ])) ? $_POST[ 'share_conseil' ] : false;
+		$share_advice =(isset($_POST[ 'share_advice' ])) ? $_POST[ 'share_advice' ] : false;
 
 		if ( !empty($hasvoted_results[0]->id) ) {
 			array_push($vote_errors, 'D&eacutesol&eacute vous avez d&egraveja vot&eacute, merci !');
 			
 		} else if ($is_vote_valid) {
 			
-			if($share_conseil)
+			if($share_advice)
 			{
 				// procédure pour mettre ce conseil en commentaire du projet
 				if(!($advice==''))
@@ -212,10 +212,10 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 				&more_info_finance=".$more_info_finance."
 				&more_info_other=".$more_info_other."
 				&advice=".$advice."
-				&check_risque=".$check_risque."
-				&check_somme=".$check_somme."
+				&check_risk=".$check_risk."
+				&check_sum=".$check_sum."
 				&check_impacts=".$check_impacts."
-				&share_conseil=".$share_conseil."
+				&share_advice=".$share_advice."
 				&invest_risk=".$invest_risk;
 				wp_redirect($link);
 			}
