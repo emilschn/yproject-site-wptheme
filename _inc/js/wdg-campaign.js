@@ -125,7 +125,10 @@ var WDGProjectViewer = (function($) {
 			hide_div = function(idok,id1,id2)
 			{
 				if(idok=='#phase1'){
-	  				if (1>phase)
+ 					if($("#phase2").css('display') == 'none'){
+						phase=0;
+					}
+	  				if (1 > phase)
 	  				{
 						$(idok).attr('class','left');
 	  				}else{
@@ -133,23 +136,23 @@ var WDGProjectViewer = (function($) {
 	  				}
 	  				phase=1;
 				};
-				if(idok=='#phase2'){
-	  				if (2>phase)
+				if(idok == '#phase2'){
+	  				if (2 > phase)
 	  				{
 						$(idok).attr('class','left');
 	  				}else{
 						$(idok).attr('class','right');
 	  				}
-	  				phase=2;
+	  				phase = 2;
 				};
-				if(idok=='#phase3'){
-	  				if (3>phase)
+				if(idok == '#phase3'){
+	  				if (3 > phase)
 	  				{
 						$(idok).attr('class','left');
 	  				}else{
 						$(idok).attr('class','right');
 	  				}
-	  				phase=3;		  				
+	  				phase = 3;		  				
 				};
 		       $(idok).attr('style','display:block;');
 		       $(id1).attr('style','display:none;');

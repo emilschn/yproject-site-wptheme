@@ -995,7 +995,7 @@ span.span_risk{
 }
 
 #wdg-lightbox-vote .wdg-lightbox-padder {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 /************ style animation phase1, phase2, phase3 ************/
@@ -1004,6 +1004,7 @@ span.span_risk{
 #phase1, #phase2, #phase3{
     overflow : hidden !important;
     width: 100%;
+	text-align: center;
 }
 
 #phase1.left, #phase2.left, #phase3.left{
