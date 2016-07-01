@@ -562,11 +562,32 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 }
 
 .return, .next{
+	cursor:pointer;
     width: 10%;
     display: inline-block;
     text-align: center;
+    height: 200px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
+.return {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.return:hover, .next:hover{
+	background-size: 90%;
+    filter: grayscale(50%);
+    -webkit-filter: grayscale(50%);
+    -moz-filter: grayscale(50%);
+    -ms-filter: grayscale(50%);
+    -o-filter: grayscale(50%);
+}
 .block1 ul li, .block2 ul li, .block3 ul li{
     display:block !important;
     margin:0px !important;
@@ -712,22 +733,8 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 
 
 
-
-.ypvote-form_v3 img{
-    height: 60px;
-}
-
-.ypvote-form_v3 img:hover {
-    filter: grayscale(50%);
-    -webkit-filter: grayscale(50%);
-    -moz-filter: grayscale(50%);
-    -ms-filter: grayscale(50%);
-    -o-filter: grayscale(50%);
-}   
-
 .ypvote-form_v3{
-    overflow: hidden !important;
-    display: block;
+	display: inline;
 }
 
 .ypvote-form_v3 em{
@@ -985,6 +992,10 @@ span.span_risk{
 
 #choice_risk{
 	margin-top: 5px;
+}
+
+#wdg-lightbox-vote .wdg-lightbox-padder {
+    overflow: hidden;
 }
 
 /************ style animation phase1, phase2, phase3 ************/

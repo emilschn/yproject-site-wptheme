@@ -289,16 +289,14 @@ if ($campaign->end_vote_remaining() > 0) {
 						</label><br />
 					</div>
 				</div>
-				<div class='next' id='hide_except_div2_phase1' style='cursor:pointer;'>
-					<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png'/>
+				<div class='next' id='hide_except_div2_phase1' style='background-image: url(".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png);' >
 				</div>
 				</br>
 			</div>
 				<!-- phase 2 -->
 
 			<div id='phase2'>
-				<div class='return' id='hide_except_div1'>
-					<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png' style='transform: rotate(180deg); cursor:pointer;'/>
+				<div class='return' style='background-image: url(".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png);' id='hide_except_div1'>
 				</div>
 				<div class='block2'>
 					<strong>Remarques</strong><br />
@@ -312,8 +310,7 @@ if ($campaign->end_vote_remaining() > 0) {
 					    <li>Autre : <input type='text' id='more_info_other_v3' name='more_info_other' class='span_more_info' placeholder='Pr&eacute;ciser...' value='".$more_info_other_before."' /> </li>
 					</ul>
 				</div>
-				<div class='next' id='hide_except_div3'>
-					<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png' style='cursor:pointer;'/>
+				<div class='next' id='hide_except_div3' style='background-image: url(".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png);'>
 				</div>
 			</br>
 			</div>
@@ -321,8 +318,7 @@ if ($campaign->end_vote_remaining() > 0) {
 				<!-- phase 3 -->
 
 			<div id='phase3' >
-				<div class='return' id='hide_except_div2_phase3' >
-					<img src='".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png' style='transform:rotate(180deg); cursor:pointer;'/>
+				<div class='return' style='background-image: url(".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png);' id='hide_except_div2_phase3' >
 				</div>
 				<div class='block3'>
 					<div id='validate_project-true'>
