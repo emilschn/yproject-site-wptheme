@@ -223,8 +223,8 @@ if ($campaign->end_vote_remaining() > 0) {
 					<ul class='impact-list' style='list-style-type:none;'>
 					    <li><span class='impact_span'>Economie</span>
 				    		<input id='note_eco' type='range' min='1' max='5' step='1' id='impact_economy_v3' name='impact_economy' value='".$impact_economy_before."'
-								 onkeyup='AfficheRange1(this.value)'
-								 onchange='AfficheRange1(this.value)'
+								 onkeyup='display_range1(this.value)'
+								 onchange='display_range1(this.value)'
 				    			".$style_impacts."
 				    		>
 				    		<div class='result_box'>
@@ -237,8 +237,8 @@ if ($campaign->end_vote_remaining() > 0) {
 						</li>
 					    <li><span class='impact_span' >Environnement</span>
 				    		<input id='note_environment' type='range'min='1' max='5' step='1' id='impact_environment_v3' name='impact_environment' value='".$impact_environment_before."'
-					    		 onchange='AfficheRange2(this.value)'
-									 onkeyup='AfficheRange2(this.value)'
+					    		 onchange='display_range2(this.value)'
+									 onkeyup='display_range2(this.value)'
 									 ".$style_impacts."
 					    	>
 						    <div class='result_box'>
@@ -252,8 +252,8 @@ if ($campaign->end_vote_remaining() > 0) {
 
 					    <li><span class='impact_span'>Social</span>
 				    		<input id='note_social' type='range'min='1' max='5' step='1' id='impact_social_v3' name='impact_social' value='".$impact_social_before."'
-					    		 onchange='AfficheRange3(this.value)'
-									 onkeyup='AfficheRange3(this.value)'
+					    		 onchange='display_range3(this.value)'
+									 onkeyup='display_range3(this.value)'
 									 ".$style_impacts."
 					    	>
 					    	<div class='result_box'>
@@ -334,8 +334,8 @@ if ($campaign->end_vote_remaining() > 0) {
 					    <div id='choice_risk'>
 						  	<span class='span_risk'> Très faible </span>
 						  	<input id='note_risk' type='range'min='1' max='5' step='1'  id='invest_risk_v3' name='invest_risk' value='".$invest_risk_before."'
-						    		 onchange='AfficheRange4(this.value)'
-										 onkeyup='AfficheRange4(this.value)'
+						    		 onchange='display_range4(this.value)'
+										 onkeyup='display_range4(this.value)'
 										 ".$style_risk."
 						    >
 						    <span class='span_risk'> Très élevé </span>

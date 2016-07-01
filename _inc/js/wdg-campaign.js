@@ -113,16 +113,16 @@ var WDGProjectViewer = (function($) {
 
 		 	var phase=0;
 
-			$("#hide_except_div1").attr("onclick","masquer_sauf_div1()");
-			$("#hide_except_div2_phase1").attr("onclick","masquer_sauf_div2()");
-			$("#hide_except_div2_phase3").attr("onclick","masquer_sauf_div2()");
-			$("#hide_except_div3").attr("onclick","masquer_sauf_div3()");
-			$("#btn-validate_project-true-v3").attr("onclick","afficher_div_true()");
-			$("#btn-validate_project-false-v3").attr("onclick","afficher_div_false()");
+			$("#hide_except_div1").attr("onclick","hide_except_div1()");
+			$("#hide_except_div2_phase1").attr("onclick","hide_except_div2()");
+			$("#hide_except_div2_phase3").attr("onclick","hide_except_div2()");
+			$("#hide_except_div3").attr("onclick","hide_except_div3()");
+			$("#btn-validate_project-true-v3").attr("onclick","see_dev_true()");
+			$("#btn-validate_project-false-v3").attr("onclick","see_dev_false()");
 			$("#vote-form-v3-link").attr("onclick","see_div1()");
 			$("#vote-form-v3-link-responsive").attr("onclick","see_div1()");
 			
-			masquer_div = function(idok,id1,id2)
+			hide_div = function(idok,id1,id2)
 			{
 				if(idok=='#phase1'){
 	  				if (1>phase)
@@ -159,23 +159,23 @@ var WDGProjectViewer = (function($) {
 
 			see_div1 = function()
 			{
-				masquer_div('#phase1','#phase2','#phase3');
+				hide_div('#phase1','#phase2','#phase3');
 			};
 
 
-			masquer_sauf_div1 = function()
+			hide_except_div1 = function()
 			{
 				function wait(){
-					masquer_div('#phase1','#phase2','#phase3');
+					hide_div('#phase1','#phase2','#phase3');
 			   	};
 				$("#phase2").attr('class','left_disappearance')
 			   	window.setTimeout( wait, 800 ); 
 			};
 
-			masquer_sauf_div2 = function()
+			hide_except_div2 = function()
 			{
 				function wait(){
-					masquer_div('#phase2','#phase1','#phase3');
+					hide_div('#phase2','#phase1','#phase3');
 			   	};
 			   	if(phase==3)
 			  	 	$("#phase3").attr('class','left_disappearance')
@@ -184,22 +184,22 @@ var WDGProjectViewer = (function($) {
 			   window.setTimeout( wait, 800 ); 
 			};
 
-			masquer_sauf_div3 = function()
+			hide_except_div3 = function()
 			{
 				function wait(){
-					masquer_div('#phase3','#phase1','#phase2');
+					hide_div('#phase3','#phase1','#phase2');
 			   	};
 			   	$("#phase2").attr('class','right_disappearance')
 			   window.setTimeout( wait, 800 ); 
 			};
 
-			afficher_div_true = function()
+			see_dev_true = function()
 			{
 				$('#validate_project-true').attr('style','display:block;');
 				$('#validate_project-false').attr('style','display:none;');
 			};
 
-			afficher_div_false = function ()
+			see_dev_false = function ()
 			{
 				$('#validate_project-true').attr('style','display:none;');
 				$('#validate_project-false').attr('style','display:block;');
@@ -207,7 +207,7 @@ var WDGProjectViewer = (function($) {
 
 
 			
-			AfficheRange1 = function (newVal){
+			display_range1 = function (newVal){
 				$('span#valBox1_1').attr('style','display:none;');
 				$('span#valBox1_2').attr('style','display:none;');
 				$('span#valBox1_3').attr('style','display:none;');
@@ -226,7 +226,7 @@ var WDGProjectViewer = (function($) {
 			};
 
 
-			AfficheRange2 = function (newVal){
+			display_range2 = function (newVal){
 				$('span#valBox2_1').attr('style','display:none;');
 				$('span#valBox2_2').attr('style','display:none;');
 				$('span#valBox2_3').attr('style','display:none;');
@@ -245,7 +245,7 @@ var WDGProjectViewer = (function($) {
 			};
 
 
-			AfficheRange3 = function(newVal){
+			display_range3 = function(newVal){
 				$('span#valBox3_1').attr('style','display:none;');
 				$('span#valBox3_2').attr('style','display:none;');
 				$('span#valBox3_3').attr('style','display:none;');
@@ -264,7 +264,7 @@ var WDGProjectViewer = (function($) {
 			};
 
 
-			AfficheRange4 = function(newVal){
+			display_range4 = function(newVal){
 				$('span#valBox4_1').attr('style','display:none;');
 				$('span#valBox4_2').attr('style','display:none;');
 				$('span#valBox4_3').attr('style','display:none;');
