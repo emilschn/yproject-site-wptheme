@@ -53,7 +53,7 @@ $user_investments = $WDGUser_current->get_validated_investments();
 				
 					<ul>
 					<?php foreach ($roi_list as $roi): ?>
-						<?php $roi_date = date_i18n( get_option('date_format'), strtotime( get_post_field( 'post_date', $roi->date_transfer ) ) ); ?>
+						<?php $roi_date = date_i18n( get_option('date_format'), strtotime( $roi->date_transfer ) ); ?>
 						<li><?php echo $roi_date; ?> : <?php echo $roi->amount; ?> &euro;</li>
 					<?php endforeach; ?>
 					</ul>
