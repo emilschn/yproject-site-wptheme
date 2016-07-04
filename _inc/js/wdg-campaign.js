@@ -103,13 +103,32 @@ var WDGProjectViewer = (function($) {
 					$("span.roi_percent_average").text(averageROIStr);
 				}
 			});
+	
+			// Initialisation des divs
+	        $("#phase1").attr('style','display:block;');
+	        $("#phase2").attr('style','display:none;');
+		    $("#phase3").attr('style','display:none;');
+
+			$("#wdg-lightbox-voteform-validated").attr('style','display:block !important;');
 
 		 	var phase=0;
 
-			masquer_div = function(idok,id1,id2)
+			$("#hide_except_div1").attr("onclick","hide_except_div1()");
+			$("#hide_except_div2_phase1").attr("onclick","hide_except_div2()");
+			$("#hide_except_div2_phase3").attr("onclick","hide_except_div2()");
+			$("#hide_except_div3").attr("onclick","hide_except_div3()");
+			$("#btn-validate_project-true-v3").attr("onclick","see_dev_true()");
+			$("#btn-validate_project-false-v3").attr("onclick","see_dev_false()");
+			$("#vote-form-v3-link").attr("onclick","see_div1()");
+			$("#vote-form-v3-link-responsive").attr("onclick","see_div1()");
+			
+			hide_div = function(idok,id1,id2)
 			{
 				if(idok=='#phase1'){
-	  				if (1>phase)
+ 					if($("#phase2").css('display') == 'none'){
+						phase=0;
+					}
+	  				if (1 > phase)
 	  				{
 						$(idok).attr('class','left');
 	  				}else{
@@ -117,23 +136,23 @@ var WDGProjectViewer = (function($) {
 	  				}
 	  				phase=1;
 				};
-				if(idok=='#phase2'){
-	  				if (2>phase)
+				if(idok == '#phase2'){
+	  				if (2 > phase)
 	  				{
 						$(idok).attr('class','left');
 	  				}else{
 						$(idok).attr('class','right');
 	  				}
-	  				phase=2;
+	  				phase = 2;
 				};
-				if(idok=='#phase3'){
-	  				if (3>phase)
+				if(idok == '#phase3'){
+	  				if (3 > phase)
 	  				{
 						$(idok).attr('class','left');
 	  				}else{
 						$(idok).attr('class','right');
 	  				}
-	  				phase=3;		  				
+	  				phase = 3;		  				
 				};
 		       $(idok).attr('style','display:block;');
 		       $(id1).attr('style','display:none;');
@@ -141,97 +160,134 @@ var WDGProjectViewer = (function($) {
 
 			};
 
-			masquer_sauf_div1 = function()
+			see_div1 = function()
 			{
-				masquer_div('#phase1','#phase2','#phase3');
+				hide_div('#phase1','#phase2','#phase3');
 			};
 
-			masquer_sauf_div2 = function()
+
+			hide_except_div1 = function()
 			{
-				masquer_div('#phase2','#phase1','#phase3');
+				function wait(){
+					hide_div('#phase1','#phase2','#phase3');
+			   	};
+				$("#phase2").attr('class','left_disappearance')
+			   	window.setTimeout( wait, 800 ); 
 			};
 
-			masquer_sauf_div3 = function()
+			hide_except_div2 = function()
 			{
-				masquer_div('#phase3','#phase1','#phase2');
+				function wait(){
+					hide_div('#phase2','#phase1','#phase3');
+			   	};
+			   	if(phase==3)
+			  	 	$("#phase3").attr('class','left_disappearance')
+			   	if(phase==1)
+			  	 	$("#phase1").attr('class','right_disappearance')
+			   window.setTimeout( wait, 800 ); 
 			};
 
-			afficher_div_true = function()
+			hide_except_div3 = function()
+			{
+				function wait(){
+					hide_div('#phase3','#phase1','#phase2');
+			   	};
+			   	$("#phase2").attr('class','right_disappearance')
+			   window.setTimeout( wait, 800 ); 
+			};
+
+			see_dev_true = function()
 			{
 				$('#validate_project-true').attr('style','display:block;');
 				$('#validate_project-false').attr('style','display:none;');
 			};
 
-			afficher_div_false = function ()
+			see_dev_false = function ()
 			{
 				$('#validate_project-true').attr('style','display:none;');
 				$('#validate_project-false').attr('style','display:block;');
 			};
+
+
 			
-			AfficheRange1 = function (newVal){
-				val='';
+			display_range1 = function (newVal){
+				$('span#valBox1_1').attr('style','display:none;');
+				$('span#valBox1_2').attr('style','display:none;');
+				$('span#valBox1_3').attr('style','display:none;');
+				$('span#valBox1_4').attr('style','display:none;');
+				$('span#valBox1_5').attr('style','display:none;');
 				if(newVal==1)
-					val='Très faible';
+					$('span#valBox1_1').attr('style','display:inline-block;');
 				if(newVal==2)
-					val='Faible';
+					$('span#valBox1_2').attr('style','display:inline-block;');
 				if(newVal==3)
-					val='Modéré';
+					$('span#valBox1_3').attr('style','display:inline-block;');
 				if(newVal==4)
-					val='Fort';
+					$('span#valBox1_4').attr('style','display:inline-block;');
 				if(newVal==5)
-					val='Très fort';
-	 			$('span#valBox1').html(val);
-			};
-
-			AfficheRange2 = function (newVal){
-				val='';
-				if(newVal==1)
-					val='Très faible';
-				if(newVal==2)
-					val='Faible';
-				if(newVal==3)
-					val='Modéré';
-				if(newVal==4)
-					val='Fort';
-				if(newVal==5)
-					val='Très fort';
-	 			$('span#valBox2').html(val);
+					$('span#valBox1_5').attr('style','display:inline-block;');
 			};
 
 
-			AfficheRange3 = function(newVal){
-				val='';
+			display_range2 = function (newVal){
+				$('span#valBox2_1').attr('style','display:none;');
+				$('span#valBox2_2').attr('style','display:none;');
+				$('span#valBox2_3').attr('style','display:none;');
+				$('span#valBox2_4').attr('style','display:none;');
+				$('span#valBox2_5').attr('style','display:none;');
 				if(newVal==1)
-					val='Très faible';
+					$('span#valBox2_1').attr('style','display:inline-block;');
 				if(newVal==2)
-					val='Faible';
+					$('span#valBox2_2').attr('style','display:inline-block;');
 				if(newVal==3)
-					val='Modéré';
+					$('span#valBox2_3').attr('style','display:inline-block;');
 				if(newVal==4)
-					val='Fort';
+					$('span#valBox2_4').attr('style','display:inline-block;');
 				if(newVal==5)
-					val='Très fort';
-				$('#valBox3').html(val);
+					$('span#valBox2_5').attr('style','display:inline-block;');
 			};
 
-			AfficheRange4 = function(newVal){
-				var resultat='';
+
+			display_range3 = function(newVal){
+				$('span#valBox3_1').attr('style','display:none;');
+				$('span#valBox3_2').attr('style','display:none;');
+				$('span#valBox3_3').attr('style','display:none;');
+				$('span#valBox3_4').attr('style','display:none;');
+				$('span#valBox3_5').attr('style','display:none;');
+				if(newVal==1)
+					$('span#valBox3_1').attr('style','display:inline-block;');
+				if(newVal==2)
+					$('span#valBox3_2').attr('style','display:inline-block;');
+				if(newVal==3)
+					$('span#valBox3_3').attr('style','display:inline-block;');
+				if(newVal==4)
+					$('span#valBox3_4').attr('style','display:inline-block;');
+				if(newVal==5)
+					$('span#valBox3_5').attr('style','display:inline-block;');
+			};
+
+
+			display_range4 = function(newVal){
+				$('span#valBox4_1').attr('style','display:none;');
+				$('span#valBox4_2').attr('style','display:none;');
+				$('span#valBox4_3').attr('style','display:none;');
+				$('span#valBox4_4').attr('style','display:none;');
+				$('span#valBox4_5').attr('style','display:none;');
 				if (newVal == 1){
-					resultat = 'tr&egrave;s faible';
+					$('span#valBox4_1').attr('style','display:inline-block;');
 				};
 				if (newVal == 2){
-					resultat = 'plut&ocirc;t faible';
+					$('span#valBox4_2').attr('style','display:inline-block;');
 				};					
 				if (newVal == 3){
-					resultat = 'mod&eacute;r&eacute;';
+					$('span#valBox4_3').attr('style','display:inline-block;');
 				};	
 				if (newVal == 4){
-					resultat = 'élevé';
+					$('span#valBox4_4').attr('style','display:inline-block;');
 				};
 				if (newVal == 5){
-					resultat = 'très élevé';
+					$('span#valBox4_5').attr('style','display:inline-block;');
 				};
-				$("span#valBox4").html(resultat);
 			};
 
 		},

@@ -13,15 +13,15 @@
 	$directory_twitter=$stylesheet_directory_uri."/images/twitter.jpg";
 	$directory_google=$stylesheet_directory_uri."/images/google+.jpg";
 
-
-
-	echo do_shortcode('
-		[yproject_lightbox id="vote_check_1"]'."
-		<div id='remerciement'> 
-			<span>Nous vous remercions d'avoir voté pour ce projet.</span>
+	$atts=array();
+	$atts['id']='voteform-validated';
+	echo yproject_shortcode_lightbox($atts,"
+		<div id='thanks'> 
+			<span>Merci d'avoir voté sur ce projet !</span>
 			</br>
-			<span> Pensez à partager ce projet ! </span>
+			<span>Pensez à en parler autour de vous !</span>
 			</br>
+			
 			<span>
 							
 				<a style='background:none !important;' href='https://www.facebook.com/sharer/sharer.php?u=".get_permalink($post->ID)."' target='_blank'>
@@ -36,9 +36,6 @@
 			</span>
 
 		</div>
-	".'[/yproject_lightbox]'); 
+	","style='display:block !important;'"); 
 ?>
-<script type="text/javascript">
-	document.getElementById('wdg-lightbox-vote_check_1').style.display = 'block';
-</script>
 
