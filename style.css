@@ -3131,10 +3131,16 @@ ul.activity-list p {
     background-color: #FFF;
     padding: 20px 0px;
 }
+.short #item-header-container {
+	padding: 10px 0px;
+}
 
 #item-header-avatar {
     width: 151px;
     padding: 0px 5px;
+}
+.short #item-header-avatar img {
+	max-width: 50%;
 }
 
 #item-header-content {
@@ -3147,6 +3153,9 @@ ul.activity-list p {
     font-weight: normal;
     font-size: 13pt;
     margin-bottom: 5px;
+}
+.short #item-header-content h1 {
+	font-size: 20pt;
 }
 #item-header-content .user-nicename {
     font-size: 10pt;
@@ -3815,6 +3824,20 @@ ul.invest-mean-payment li img {
 }
 #project-wallet ul.payment-list li div.wdg-lightbox-padder {
 	margin: 5vh auto;
+}
+
+/*******************************************************************************
+* USER ROI LIST
+*******************************************************************************/
+#page-single-user-roi div.user-roi-item {
+	margin-bottom: 30px;
+    padding: 5px 15px;
+    background: #EEECED;
+}
+#page-single-user-roi div.user-roi-item h4 {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 5px 0px;
 }
 
 /*******************************************************************************

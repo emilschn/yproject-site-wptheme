@@ -167,6 +167,9 @@ div#content.version-3 div.project-banner div.project-banner-img, div.project-ban
 div#content.version-3 div.project-banner div.project-banner-img {
 	text-align: center;
 }
+div#content.version-3 div.project-banner div.project-banner-img img {
+	min-width: 100%;
+}
 div#content.version-3 div.project-banner div.project-banner-deco div.center img {
 	margin-top: 70px;
     margin-left: -70px;
