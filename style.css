@@ -3835,9 +3835,23 @@ ul.invest-mean-payment li img {
     background: #EEECED;
 }
 #page-single-user-roi div.user-roi-item h4 {
-    font-weight: bold;
-    font-size: 1.1em;
     margin: 5px 0px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+#page-single-user-roi div.user-roi-item h4.margin-top {
+	margin-top: 20px;
+}
+#page-single-user-roi div.user-roi-item .percent33 {
+	min-width: 310px;
+	float: left;
+}
+#page-single-user-roi div.user-roi-item table thead tr td {
+	font-weight: bold;
+	text-align: center;
+}
+#page-single-user-roi div.user-roi-item table tr td {
+	padding: 3px 10px;
 }
 
 /*******************************************************************************
