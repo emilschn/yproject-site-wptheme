@@ -1014,6 +1014,10 @@ span.block_thanks_1, span.block_thanks_2, span.block_thanks_3 {
 	text-align: left;
     margin-left: 9px !important;
 }
+
+.ypvote-form_v3 ul{
+	padding:0px;
+}
 /************ style animation phase1, phase2, phase3 ************/
 
 
