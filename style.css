@@ -3603,7 +3603,10 @@ ul.invest-mean-payment li img {
         margin:1%;
     }
     #invest-breadcrumb > div#mean-payment {
-        background-position: 49.1%top;
+        background-position: 49.1% top;
+    }
+    #invest-breadcrumb.breadcrumb-step-3 > div#mean-payment {
+        background-position: 49.1% 114%;
     }
 }
 
@@ -3611,18 +3614,29 @@ ul.invest-mean-payment li img {
     .invest-breadcrumb-item {
         font-size: 8px !important;
     }
-
+    #invest-breadcrumb > div#input {
+        background-position: 12.1% top;
+    }
     #invest-breadcrumb.breadcrumb-step-1 > div#input {
         background-position: 12.1% 114%;
+    }
+    #invest-breadcrumb > div#confirm {
+        background-position: 31.5% top;
+    }
+    #invest-breadcrumb.breadcrumb-step-2 > div#confirm {
+        background-position: 31.5% 114%;
+    }
+    #invest-breadcrumb > div#return {
+        background-position: 70.7% top;
+    }
+    #invest-breadcrumb.breadcrumb-step-4 > div#return {
+        background-position: 70.7% 114%;
     }
     #invest-breadcrumb > div#share {
         background-position: 89% top;
     }
-    #invest-breadcrumb > div#return {
-        background-position: 70.7% top;
-    }   
-    #invest-breadcrumb > div#confirm {
-        background-position: 31.5% top;
+    #invest-breadcrumb.breadcrumb-step-5 > div#share {
+        background-position: 89% 114%;
     }
 }
 
@@ -3631,17 +3645,29 @@ ul.invest-mean-payment li img {
     .invest-breadcrumb-item {
         font-size: 10px !important;
     }
+    #invest-breadcrumb > div#input {
+        background-position: 8% top;
+    }
     #invest-breadcrumb.breadcrumb-step-1 > div#input {
         background-position: 8% 114%;
     }
     #invest-breadcrumb > div#confirm {
         background-position: 30% top;
     }
+    #invest-breadcrumb.breadcrumb-step-2 > div#confirm {
+        background-position: 30% 114%;
+    }
     #invest-breadcrumb > div#return {
         background-position: 70.8% top;
-    }   
+    }
+    #invest-breadcrumb.breadcrumb-step-4 > div#return {
+        background-position: 70.8% 114%;
+    }
     #invest-breadcrumb > div#share {
         background-position: 92% top;
+    }
+    #invest-breadcrumb.breadcrumb-step-5 > div#share {
+        background-position: 92% 114%;
     }
 }
 /*******************************************************************************
