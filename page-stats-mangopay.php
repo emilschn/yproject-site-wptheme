@@ -37,9 +37,35 @@ get_header();
 		?>
 		
 		    <h1>Infos LW</h1>
-			<?php // $roi_declaration = new WDGROIDeclaration(1); $roi_declaration->redo_transfers(); ?>
 			
-			<?php // $lw_transaction_result = LemonwayLib::get_transaction_by_id( 'INVU7C11182TS39068' ); print_r($lw_transaction_result); ?>
+			<?php // Refaire des transferts de ROI
+			//$roi_declaration = new WDGROIDeclaration(1); $roi_declaration->redo_transfers(); 
+			?>
+			
+			<?php // Infos sur une transaction
+			//$lw_transaction_result = LemonwayLib::get_transaction_by_id( 'INVU7C11182TS39068' ); print_r($lw_transaction_result); 
+			?>
+			
+			<?php // Init user sur LW
+			//$wdgUser = new WDGUser(4155); $wdgUser->register_lemonway(); 
+			?>
+			
+			<?php // Virements reçus depuis 10 jours
+			/*
+			$date = new DateTime();
+			$date->sub( new DateInterval('P10D') );
+			$transactions_list = LemonwayLib::get_transactions_wire_since( $date->getTimestamp() );
+			print_r($transactions_list);
+			 *
+			 */
+			?>
+			
+			<?php // Regénération d'un contrat d'investissement
+//			getNewPdfToSign($project_id, $payment_id, $user_id);
+//			getNewPdfToSign(11182, 11943, 4298);
+//			getNewPdfToSign(11182, 11740, 4246);
+//			getNewPdfToSign(11182, 11595, 4055);
+			?>
 		    
 		<?php
 		endif;
