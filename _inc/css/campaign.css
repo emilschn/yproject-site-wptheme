@@ -747,13 +747,14 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 
 .vote_submit_v3{
     background:#EA4F51 !important;
-    padding: 15px !important;
     color:white !important;
     text-transform: uppercase;
 }
 
 
-
+.vote_submit_v3:hover{
+	opacity: 0.8;
+}
 
 .range-slider__value{
     color: white;
@@ -924,13 +925,18 @@ div#content.version-3.scrolled nav.project-navigation ul li {
 
 #thanks{
     text-align: center;
+    line-height: 0.8;
 }
 
-#thanks img{
-    margin-top: 20px;
+#thanks a{
+	padding-top: 20%;
+    background-repeat: no-repeat;
+    width: 20%;
+    display: inline-block;
+    background-position: center;
+    margin: 5px;
 }
-
-#thanks img:hover{
+#thanks a:hover{
     opacity: 0.7;
 }
 
@@ -1001,6 +1007,16 @@ span.span_risk{
     overflow-x: hidden;
 }
 
+span.block_thanks_1, span.block_thanks_2, span.block_thanks_3 {
+    display: block;
+    width: 90%;
+    text-align: center;
+}
+
+#more-info-share{
+	text-align: left;
+    margin-left: 9px !important;
+}
 /************ style animation phase1, phase2, phase3 ************/
 
 
