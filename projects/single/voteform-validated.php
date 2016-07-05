@@ -13,29 +13,24 @@
 	$directory_twitter=$stylesheet_directory_uri."/images/twitter.jpg";
 	$directory_google=$stylesheet_directory_uri."/images/google+.jpg";
 
-	$atts=array();
-	$atts['id']='voteform-validated';
-	echo yproject_shortcode_lightbox($atts,"
+	$style_lightbox="style='display:block !important;'";
+
+	echo do_shortcode('[yproject_lightbox id="voteform-validated" style="'.$style_lightbox.'"]'."
 		<div id='thanks'> 
-			<span>Merci d'avoir voté sur ce projet !</span>
+			<span class='block_thanks_1'>Merci d'avoir voté sur ce projet !</span>
 			</br>
-			<span>Pensez à en parler autour de vous !</span>
+			<span class='block_thanks_2'>Pensez à en parler autour de vous !</span>
 			</br>
 			
-			<span>
-							
-				<a style='background:none !important;' href='https://www.facebook.com/sharer/sharer.php?u=".get_permalink($post->ID)."' target='_blank'>
-					<img src='".$directory_facebook."' alt='logo facebook' />
+			<span class='block_thanks_3'>		
+				<a style='background: url(".$directory_facebook."); background-repeat:no-repeat; background-position:center; background-size: cover;' alt='logo facebook' href='https://www.facebook.com/sharer/sharer.php?u=".get_permalink($post->ID)."' target='_blank'>
 				</a>
-				<a style='background:none !important;' href='http://twitter.com/share?url=".get_permalink($post->ID)."&text=".'"WEDOGOOD"'." target='_blank'>
-					<img src='".$directory_twitter."' alt='logo twitter' />
+				<a style='background: url(".$directory_twitter."); background-repeat:no-repeat; background-position:center; background-size: cover;' alt='logo twitter' href='http://twitter.com/share?url=".get_permalink($post->ID)."&text=".'"WEDOGOOD"'." target='_blank'>
 				</a>
-				<a style='background:none !important;' href='https://plus.google.com/share?url=".get_permalink($post->ID)."' target='_blank'>
-					<img src='".$directory_google."' alt='logo google' />
+				<a style='background: url(".$directory_google."); background-repeat:no-repeat; background-position:center; background-size: cover;' alt='logo google' href='https://plus.google.com/share?url=".get_permalink($post->ID)."' target='_blank'>
 				</a>
 			</span>
-
 		</div>
-	","style='display:block !important;'"); 
+	".'[/yproject_lightbox]');
 ?>
 

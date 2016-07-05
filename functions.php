@@ -1545,11 +1545,12 @@ function yproject_shortcode_lightbox_button($atts, $content = '') {
 add_shortcode('yproject_lightbox_button', 'yproject_shortcode_lightbox_button');
 
 //Shortcode lightbox standard
-function yproject_shortcode_lightbox($atts, $content = '', $style='') {
+function yproject_shortcode_lightbox($atts, $content = '') {
     $atts = shortcode_atts( array(
 	'id' => 'lightbox',
+	'style' => '',
     ), $atts );
-    return '<div id="wdg-lightbox-'.$atts['id'].'" '.$style.' class="wdg-lightbox hidden">
+    return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox hidden">
 		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder">
 		    <div class="wdg-lightbox-button-close">

@@ -195,7 +195,6 @@ if (isset($_GET['vote_check'])&&$_GET['vote_check']==0){
 	$style_lightbox="style='display:block !important;'";
 }
 
-
 ?>
 
 
@@ -206,9 +205,7 @@ if ($campaign->end_vote_remaining() > 0) {
 <div id="lightbox">
 	<?php 
 	$perma = get_permalink($post->ID);
-	$atts=array();
-	$atts['id']='vote';
-	echo yproject_shortcode_lightbox($atts,"
+	echo do_shortcode('[yproject_lightbox id="vote" style="'.$style_lightbox.'"]'."
 		<!-- phase 1 -->
 		<form name='ypvote' action='".$perma."' method='POST' class='ypvote-form_v3' enctype='multipart/form-data'>
 		<main class='container'>
@@ -352,7 +349,7 @@ if ($campaign->end_vote_remaining() > 0) {
 					    <strong>Conseils</strong><br />
 						<em>Quels conseils ou encouragements souhaitez-vous donner au(x) porteur(s) de ce projet ?</em><br />
 						<textarea id='advice_v3' type='text' name='advice'>".$advice_before."</textarea><br/><br/>
-						<ul class='more-info-list' style='list-style-type:none;'>
+						<ul class='more-info-list' id='more-info-share' style='list-style-type:none;'>
 						    <li><label><input type='checkbox' name='share_advice' ".$share_advice_before."><span class='span_share_advice'>Je veux que mes conseils soient publiés en commentaires.</span></label></li>
 						</ul>
 					</br>
@@ -363,8 +360,7 @@ if ($campaign->end_vote_remaining() > 0) {
 
 				</br>
 			</div>
-		</form>	
-	",$style_lightbox); 
+		</form>".'[/yproject_lightbox]'); 
 ?>
 </div>
 <?php
