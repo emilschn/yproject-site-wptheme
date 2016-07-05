@@ -3595,36 +3595,53 @@ ul.invest-mean-payment li img {
     margin-right: 10px;
 }
 
+@media screen and (max-width: 767px){
 
- @media screen and (max-width: 767px) {
-    .invest-breadcrumb-item:before{
-        content:'';
-    }
     .invest-breadcrumb-item {
         display: inline-block;
         width: 12% !important;
-        font-size: 10px !important;
         margin:1%;
+    }
+    #invest-breadcrumb > div#mean-payment {
+        background-position: 49.1%top;
+    }
+}
+
+ @media screen and (max-width: 563px) {
+    .invest-breadcrumb-item {
+        font-size: 8px !important;
     }
 
     #invest-breadcrumb.breadcrumb-step-1 > div#input {
-        background-position: 11% 114%;
+        background-position: 12.1% 114%;
     }
-
-    #invest-breadcrumb > div#confirm {
-        background-position: 30% top !important;
-    }
-
-    #invest-breadcrumb > div#mean-payment {
-        background-position: 49%top !important;
-    }
-
-    #invest-breadcrumb > div#return {
-        background-position: 70.8% top !important;
-    }
-
     #invest-breadcrumb > div#share {
-        background-position: 90% top !important;
+        background-position: 89% top;
+    }
+    #invest-breadcrumb > div#return {
+        background-position: 70.7% top;
+    }   
+    #invest-breadcrumb > div#confirm {
+        background-position: 31.5% top;
+    }
+}
+
+
+ @media screen and (max-width: 767px) and (min-width: 563px) {
+    .invest-breadcrumb-item {
+        font-size: 10px !important;
+    }
+    #invest-breadcrumb.breadcrumb-step-1 > div#input {
+        background-position: 8% 114%;
+    }
+    #invest-breadcrumb > div#confirm {
+        background-position: 30% top;
+    }
+    #invest-breadcrumb > div#return {
+        background-position: 70.8% top;
+    }   
+    #invest-breadcrumb > div#share {
+        background-position: 92% top;
     }
 }
 /*******************************************************************************
