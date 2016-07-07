@@ -172,6 +172,7 @@ function yproject_change_user_cap() {
 	}
 	
 	
+	locate_template( 'functions/ui-helpers.php', true );
 	locate_template( 'functions/shortcode-manager.php', true );
 	YPShortcodeManager::register_shortcodes();
 }
