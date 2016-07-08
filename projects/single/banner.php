@@ -31,13 +31,13 @@ if (count($current_organisations) > 0) {
 	$owner_str = $current_organisation->organisation_name;
 	$lightbox_content = '<div class="content align-center">'.$current_organisation->organisation_name.'</div>
 		<div class="content align-left">
-		<span>'._('Forme juridique :').'</span>'.$current_organisation->organisation_legalform.'<br />
-		<span>'._('Num&eacute;ro SIREN :').'</span>'.$current_organisation->organisation_idnumber.'<br />
-		<span>'._('Code APE :').'</span>'.$current_organisation->organisation_ape.'<br />
-		<span>'._('Capital social :').'</span>'.$current_organisation->organisation_capital.'<br /><br />
+		<span>'.__('Forme juridique :', 'yproject').'</span>'.$current_organisation->organisation_legalform.'<br />
+		<span>'.__('Num&eacute;ro SIREN :', 'yproject').'</span>'.$current_organisation->organisation_idnumber.'<br />
+		<span>'.__('Code APE :', 'yproject').'</span>'.$current_organisation->organisation_ape.'<br />
+		<span>'.__('Capital social :', 'yproject').'</span>'.$current_organisation->organisation_capital.'<br /><br />
 		</div>
 		<div class="content align-left">
-		<span>'._('Si&egrave;ge social :').'</span>'.$current_organisation->organisation_address.'<br />
+		<span>'.__('Si&egrave;ge social :', 'yproject').'</span>'.$current_organisation->organisation_address.'<br />
 		<span></span>'.$current_organisation->organisation_postalcode.' '.$current_organisation->organisation_city.'<br />
 		<span></span>'.$current_organisation->organisation_country.'<br />
 		</div>';
