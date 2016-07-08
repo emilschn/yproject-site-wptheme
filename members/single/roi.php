@@ -25,9 +25,9 @@ $user_investments = $WDGUser_current->get_validated_investments();
 
 				<a href="<?php echo get_permalink( $campaign_id ); ?>"><h3><?php echo $campaign->data->post_title; ?></h3></a>
 				
-				<div class="percent33"><strong><?php _e("Montant lev&eacute; :", 'yproject'); ?></strong> <?php echo $campaign_amount; ?> &euro;</div>
+				<div class="percent33"><strong><?php _e("Montant lev&eacute; :", 'yproject'); ?></strong> <?php echo YPUIHelpers::display_number( $campaign_amount, TRUE ); ?> &euro;</div>
 				<div class="percent33"><strong><?php _e("Dur&eacute;e du versement :", 'yproject'); ?></strong> <?php echo $campaign->funding_duration(); ?> <?php _e("ans", 'yproject'); ?></div>
-				<div class="percent33"><strong><?php _e("Pourcentage du versement :", 'yproject'); ?></strong> <?php echo $campaign->roi_percent(); ?>%</div>
+				<div class="percent33"><strong><?php _e("Pourcentage du versement :", 'yproject'); ?></strong> <?php echo YPUIHelpers::display_number( $campaign->roi_percent() ); ?> %</div>
 				
 				<div class="clear"></div>
 				
@@ -59,8 +59,8 @@ $user_investments = $WDGUser_current->get_validated_investments();
 							?>
 							<tr>
 								<td><?php echo $payment_date; ?></td>
-								<td><?php echo $payment_amount; ?> &euro;</td>
-								<td><?php echo $roi_percent_display; ?>%</td>
+								<td><?php echo YPUIHelpers::display_number( $payment_amount, TRUE ); ?> &euro;</td>
+								<td><?php echo YPUIHelpers::display_number( $roi_percent_display ); ?> %</td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>
@@ -91,7 +91,7 @@ $user_investments = $WDGUser_current->get_validated_investments();
 							<?php $roi_date = date_i18n( get_option('date_format'), strtotime( $roi->date_transfer ) ); ?>
 							<tr>
 								<td><?php echo $roi_date; ?></td>
-								<td><?php echo $roi->amount; ?> &euro;</td>
+								<td><?php echo YPUIHelpers::display_number( $roi->amount, TRUE ); ?> &euro;</td>
 							</tr>
 						<?php endforeach; ?>
 							

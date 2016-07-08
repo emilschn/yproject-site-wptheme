@@ -172,6 +172,7 @@ function yproject_change_user_cap() {
 	}
 	
 	
+	locate_template( 'functions/ui-helpers.php', true );
 	locate_template( 'functions/shortcode-manager.php', true );
 	YPShortcodeManager::register_shortcodes();
 }
@@ -1111,6 +1112,8 @@ function get_investors_table() {
 				$payment_type = 'Virement';
 			} else if ($mangopay_id == 'check') {
 				$payment_type = 'Ch&egrave;que';
+			} else if (strpos($mangopay_id, 'wallet_') !== FALSE) {
+				$payment_type = 'Porte-monnaie';
 			}
 			$investment_state = 'Validé';
 			if ($campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing') {
