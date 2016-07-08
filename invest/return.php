@@ -41,16 +41,14 @@ if (isset($campaign) && is_user_logged_in()):
 				$organization_obj = new YPOrganisation($organization->organisation_wpref);
 				if ($_SESSION['redirect_current_invest_type'] == 'user') {
 					$WDGUser_current = WDGUser::current();
-					$lemonway_amount = $WDGUser_current->get_lemonway_wallet_amount();
-					if ($lemonway_amount > 0 && $lemonway_amount > $amount) {
+					if ($WDGUser_current->can_pay_with_wallet($amount, $campaign)) {
 						$transfer_funds_result = LemonwayLib::ask_transfer_funds($WDGUser_current->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount);
 					}
 					
 				} else {
 					$invest_type = $_SESSION['redirect_current_invest_type'];
 					$organisation_debit = new YPOrganisation($invest_type);
-					$lemonway_amount = $organisation_debit->get_lemonway_balance();
-					if ($lemonway_amount > 0 && $lemonway_amount > $amount) {
+					if ($organisation_debit->can_pay_with_wallet($amount, $campaign)) {
 						$transfer_funds_result = LemonwayLib::ask_transfer_funds($organisation_debit->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount);
 					}
 				}
@@ -145,9 +143,6 @@ if (isset($campaign) && is_user_logged_in()):
 			$status = 'pending';
 			if ( (isset($_GET['cancel']) && $_GET['cancel'] == '1') || (isset($_GET['error']) && $_GET['error'] == '1') ) {
 				$status = 'failed';
-			}
-			if ($_GET['meanofpayment'] == 'wallet') {
-				$status = 'publish';
 			}
 			$payment_data = array( 
 				'price'			=> $amount, 

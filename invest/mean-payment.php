@@ -13,16 +13,15 @@ if (isset($campaign)):
 	//Gestion wallet
 	$WDGUser_current = WDGUser::current();
 	$amount = $_SESSION['redirect_current_amount_part'] * $campaign->part_value();
-	$lemonway_amount = 0;
+	$can_use_wallet = false;
 	if ($_SESSION['redirect_current_invest_type'] == 'user') {
-		$lemonway_amount = $WDGUser_current->get_lemonway_wallet_amount();
+		$can_use_wallet = $WDGUser_current->can_pay_with_wallet($amount, $campaign);
 	} else {
 		$invest_type = $_SESSION['redirect_current_invest_type'];
 		$organisation = new YPOrganisation($invest_type);
-		$lemonway_amount = $organisation->get_lemonway_balance();
+		$can_use_wallet = $organisation->can_pay_with_wallet($amount, $campaign);
 	}
-	$can_use_wallet = ($lemonway_amount > 0 && $lemonway_amount > $amount && $campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway);
-	$can_use_card_and_wallet = ($lemonway_amount > 0 && FALSE);
+	$can_use_card_and_wallet = FALSE;
 	
 	//Possible de régler par virement ?
 	$can_use_wire = ($campaign->can_use_wire($_SESSION['redirect_current_amount_part']));
