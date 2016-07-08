@@ -1112,6 +1112,8 @@ function get_investors_table() {
 				$payment_type = 'Virement';
 			} else if ($mangopay_id == 'check') {
 				$payment_type = 'Ch&egrave;que';
+			} else if (strpos($mangopay_id, 'wallet_') !== FALSE) {
+				$payment_type = 'Porte-monnaie';
 			}
 			$investment_state = 'Validé';
 			if ($campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing') {

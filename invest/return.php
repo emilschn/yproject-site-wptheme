@@ -8,7 +8,10 @@ if (isset($campaign) && is_user_logged_in()):
     ypcf_session_start();
     ypcf_check_is_project_investable();
 	
-    if (isset($_REQUEST["ContributionID"]) || isset($_REQUEST["response_wkToken"]) || ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway && $_GET['meanofpayment'] == 'wire')): ?>
+    if (	isset($_REQUEST["ContributionID"]) || isset($_REQUEST["response_wkToken"])
+			|| ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway && $_GET['meanofpayment'] == 'wire')
+			|| ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway && $_GET['meanofpayment'] == 'wallet')
+			): ?>
 	
 		<?php
 		$purchase_key = '';
@@ -22,11 +25,38 @@ if (isset($campaign) && is_user_logged_in()):
 				$mangopay_contribution = ypcf_mangopay_get_contribution_by_id($purchase_key);
 				$amount = $mangopay_contribution->Amount / 100;
 			}
+			
+		//Gestion des paiements par LW
 		} else if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway) {
+			//Paiement par virement
 			if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wire') {
 				$random = rand(10000, 99999);
 				$purchase_key = 'wire_TEMP_' . $random;
 				$amount = $_SESSION['amount_to_save'];
+				
+			//Paiement par porte-monnaie
+			} else if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wallet') {
+				$amount = $_SESSION['amount_to_save'];
+				$organization = $campaign->get_organisation();
+				$organization_obj = new YPOrganisation($organization->organisation_wpref);
+				if ($_SESSION['redirect_current_invest_type'] == 'user') {
+					$WDGUser_current = WDGUser::current();
+					$lemonway_amount = $WDGUser_current->get_lemonway_wallet_amount();
+					if ($lemonway_amount > 0 && $lemonway_amount > $amount) {
+						$transfer_funds_result = LemonwayLib::ask_transfer_funds($WDGUser_current->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount);
+					}
+					
+				} else {
+					$invest_type = $_SESSION['redirect_current_invest_type'];
+					$organisation_debit = new YPOrganisation($invest_type);
+					$lemonway_amount = $organisation_debit->get_lemonway_balance();
+					if ($lemonway_amount > 0 && $lemonway_amount > $amount) {
+						$transfer_funds_result = LemonwayLib::ask_transfer_funds($organisation_debit->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount);
+					}
+				}
+				$purchase_key = 'wallet_'. $transfer_funds_result->ID;
+				
+			//Paiement par carte
 			} else {
 				$purchase_key = $_REQUEST["response_wkToken"];
 				$lw_transaction_result = LemonwayLib::get_transaction_by_id( $purchase_key );
@@ -115,6 +145,9 @@ if (isset($campaign) && is_user_logged_in()):
 			$status = 'pending';
 			if ( (isset($_GET['cancel']) && $_GET['cancel'] == '1') || (isset($_GET['error']) && $_GET['error'] == '1') ) {
 				$status = 'failed';
+			}
+			if ($_GET['meanofpayment'] == 'wallet') {
+				$status = 'publish';
 			}
 			$payment_data = array( 
 				'price'			=> $amount, 
