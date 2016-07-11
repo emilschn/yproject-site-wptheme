@@ -80,7 +80,7 @@
 		}
 	}
 	 
-	@media screen and (max-width: 563px) {
+	@media screen and (max-width: 562px) {
 		.invest-breadcrumb-item {
 			 font-size: 8px !important;
 		}
@@ -117,7 +117,7 @@
 		}
 	}
 	
-	@media screen and (max-width: 767px) and (min-width: 563px) {
+	@media screen and  (min-width: 562px) and (max-width: 767px){
 		.invest-breadcrumb-item {
 			font-size: 10px !important;
 		}
@@ -135,8 +135,7 @@
 		}
 		#invest-breadcrumb > div#return {
 			background-position: 70.8% top !important;
-		}   
-		}
+		} 
 		#invest-breadcrumb.breadcrumb-step-4 > div#return {
 			background-position: 70.8% 114% !important;
 		}
