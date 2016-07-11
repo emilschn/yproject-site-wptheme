@@ -555,7 +555,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 
 /******************style blocks & return & next ****************************/
 
-.return, .next, .block1, .block2, .block3{
+.return, .next, .block1, .block2, .block3, .frise{
     display:inline-block;
     vertical-align:middle;
     margin: 3px;
@@ -600,10 +600,11 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
     margin:0px !important;
 }
 
-.block1, .block2, .block3 {
+.block1, .block2, .block3{
     font-size: 14px !important;
     margin-bottom: 10px !important;
     text-align: center;
+    margin-top: 15px;
 }
 
 .block2{
@@ -980,7 +981,7 @@ span.span_more_info {
 }
 
 span.span_risk{
-	width: 110px;
+	width: 90px;
 	display: inline-block;
 }
 #note_risk {
@@ -1009,6 +1010,35 @@ span.block_thanks_1, span.block_thanks_2, span.block_thanks_3 {
 
 .ypvote-form_v3 ul{
 	padding:0px;
+}
+
+.frise{
+	width: 100%;
+    text-align: center;
+    border-top: solid;
+    padding-top: 5px;
+    border-color: #333333;
+	border-width: 0.1px;
+}
+
+.frise_input {
+	display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 30px;
+    border: solid !important;
+    border-width: 0.1px !important;
+    background: none !important;
+}
+
+#go-block1{
+	background-color: #333333 !important;
+}
+.hr_block_vs_frise{
+	border: 0 !important;
+    height: 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+
 }
 /************ style animation phase1, phase2, phase3 ************/
 
