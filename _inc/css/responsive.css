@@ -63,21 +63,17 @@
 /*******************************************************************************
 * FRISE
 *******************************************************************************/
-
-	@media screen and (max-width: 767px){
-
-		.invest-breadcrumb-item {
-			display: inline-block !important;
-			width: 12% !important;
-			margin:1% !important;
-		}
-		#invest-breadcrumb > div#mean-payment {
-			background-position: 49.1%top !important;
-			background-position: 49.1% top !important;
-		}
-		#invest-breadcrumb.breadcrumb-step-3 > div#mean-payment {
-			background-position: 49.1% 114% !important;
-		}
+	.invest-breadcrumb-item {
+		display: inline-block !important;
+		width: 12% !important;
+		margin:1% !important;
+	}
+	#invest-breadcrumb > div#mean-payment {
+		background-position: 49.1%top !important;
+		background-position: 49.1% top !important;
+	}
+	#invest-breadcrumb.breadcrumb-step-3 > div#mean-payment {
+		background-position: 49.1% 114% !important;
 	}
 	 
 	@media screen and (max-width: 562px) {
