@@ -2624,6 +2624,50 @@ div#home_bottom h1 {
 /*******************************************************************************
 * DASHBOARD PAGE
 *******************************************************************************/
+#ndashboard{
+    display: table;
+    width: 100%;
+}
+
+#ndashboard-navbar{
+    display: table-cell;
+    vertical-align: top;
+    min-width: 240px;
+    width: 240px;
+}
+#ndashboard-navbar .nav-padding {
+    padding: 20px 0px 50px ;
+    background-color: #EEECED;
+}
+
+#ndashboard-navbar ul{
+    list-style: none;
+    padding-left: 0px;
+}
+#ndashboard-navbar li{
+    padding: 10px 0px 10px 20px;
+}
+
+#ndashboard-navbar li:hover{
+    background-color:grey;
+    color:white;
+}
+
+#ndashboard-navbar li.active{
+    background-color:#EA4F51;
+    color:white;
+    font-weight: bold;
+}
+
+#ndashboard-content{
+    display: table-cell;
+    vertical-align: top;
+}
+
+#ndashboard-content .content-padding {
+    padding: 20px;
+}
+
 #dashboard .list-button{
     text-align:center
 }

@@ -39,6 +39,13 @@ var WDGProjectDashboard = (function($) {
 					}
 				});
 			}
+
+			if ($("#ndashboard-navbar li").length > 0) {
+                $("#ndashboard-navbar li").click(function(){
+                    $("#ndashboard-navbar li").removeClass("active");
+                    $(this).addClass("active");
+                })
+            }
 		}
 	};
     

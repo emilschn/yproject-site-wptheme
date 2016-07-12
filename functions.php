@@ -57,7 +57,7 @@ function yproject_enqueue_script(){
 	global $can_modify, $is_campaign, $is_campaign_page, $post;
 	$campaign = atcf_get_current_campaign();
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
-	$is_dashboard_page = ($post->post_name == 'gestion-financiere');
+	$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
 	$current_version = '20160704';
 	
