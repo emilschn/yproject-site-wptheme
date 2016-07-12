@@ -835,13 +835,6 @@ footer {
     background-image: url("images/footer.png");
     min-width: 960px;
 }
-footer a {
-    font-family: Arial, sans-serif;
-    color: #FFF;
-    font-size: 8pt;
-    text-decoration: none;
-}
-
 footer span {
     padding: 10px 0px;
     color: #FFF;
@@ -852,28 +845,23 @@ footer span {
 footer span.menutitle {
     font-family: Arial, sans-serif;
     color: #FFF;
-    font-size: 8pt;
+    font-size: 11pt;
     text-transform: uppercase;
 }
-
-footer div#first {
-    margin-left: 20px;
+footer a {
+    font-family: Arial, sans-serif;
+    color: #FFF;
+    font-size: 10pt;
+    text-decoration: none;
 }
+
 footer div.widget-area {
     padding-top: 10px;
     float: left;
-    width: 280px;
+    width: 25%;
     font-family: Arial, sans-serif;
     color: #FFF;
-    font-size: 8pt;
-}
-footer div.widget-area-large {
-    padding-top: 10px;
-    float: left;
-    width: 350px;
-    font-family: Arial, sans-serif;
-    color: #FFF;
-    font-size: 8pt;
+    font-size: 10pt;
 }
 
 footer ul.xoxo {
@@ -889,14 +877,8 @@ footer li.menu-item {
     padding-bottom: 10px;
 }
 
-footer div.social-icons {
-    float: left; 
-    width: 71px; 
-    text-align: center;
-}
-
 .newsletter-input-text {
-    width: 150px !important;
+    width: 140px !important;
     display: inline-block !important;
     border: none;
     padding: 4px;
@@ -907,6 +889,39 @@ footer div.social-icons {
    border: medium none;
    padding: 3px 8px;
    text-transform: uppercase;
+}
+
+footer div.lemonway {
+	padding: 5px;
+	text-align: justify;
+	margin-right: 32px;
+	font-size: 8pt;
+	border-top: 1px solid #FFFFFF;
+	border-bottom: 1px solid #FFFFFF;
+}
+
+footer ul#footer-menu-horizontal {
+	margin-top: 45px;
+	padding-left: 0px;
+	padding-top: 15px;
+	list-style: none;
+	text-align: center;
+	background: #111111;
+	margin-bottom: 0px;
+}
+footer ul#footer-menu-horizontal li div ul li {
+	display: inline-block;
+	margin: 0px 15px;
+}
+footer ul#footer-menu-horizontal li div ul li a {
+	font-size: 10pt;
+}
+footer #site-generator {
+	padding-top: 10px;
+	font-size: 12px;
+	text-align: center;
+	color: #FFFFFF;
+	background: #111111;
 }
 
 /*******************************************************************************
