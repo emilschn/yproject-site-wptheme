@@ -121,7 +121,12 @@ var WDGProjectViewer = (function($) {
 			$("#btn-validate_project-false-v3").attr("onclick","see_dev_false()");
 			$("#vote-form-v3-link").attr("onclick","see_div1()");
 			$("#vote-form-v3-link-responsive").attr("onclick","see_div1()");
-			
+			$("#hide_except_div1").attr("onclick","hide_except_div1()");
+			$("#hide_except_div1").attr("onclick","hide_except_div1()");
+			$("#go-block1").attr("onclick","hide_except_div1()");
+			$("#go-block2").attr("onclick","hide_except_div2()");
+			$("#go-block3").attr("onclick","hide_except_div3()");
+
 			hide_div = function(idok,id1,id2)
 			{
 				if(idok=='#phase1'){
@@ -134,7 +139,10 @@ var WDGProjectViewer = (function($) {
 	  				}else{
 						$(idok).attr('class','right');
 	  				}
-	  				phase=1;
+	  				phase=1;    
+			       $('#go-block1').attr('style','background-color: #333333 !important;');
+			       $('#go-block2').attr('style','background-color: none !important;');
+			       $('#go-block3').attr('style','background-color: none !important;');
 				};
 				if(idok == '#phase2'){
 	  				if (2 > phase)
@@ -144,6 +152,9 @@ var WDGProjectViewer = (function($) {
 						$(idok).attr('class','right');
 	  				}
 	  				phase = 2;
+			       $('#go-block1').attr('style','background-color: #333333 !important;');
+			       $('#go-block2').attr('style','background-color: #333333 !important;');
+			       $('#go-block3').attr('style','background-color: none !important;');
 				};
 				if(idok == '#phase3'){
 	  				if (3 > phase)
@@ -153,10 +164,13 @@ var WDGProjectViewer = (function($) {
 						$(idok).attr('class','right');
 	  				}
 	  				phase = 3;		  				
+			       $('#go-block1').attr('style','background-color: #333333 !important;');
+			       $('#go-block2').attr('style','background-color: #333333 !important;');
+			       $('#go-block3').attr('style','background-color: #333333 !important;');
 				};
-		       $(idok).attr('style','display:block;');
-		       $(id1).attr('style','display:none;');
-		       $(id2).attr('style','display:none;');
+		    	$(idok).attr('style','display:block;');
+		    	$(id1).attr('style','display:none;');
+		    	$(id2).attr('style','display:none;');
 
 			};
 
