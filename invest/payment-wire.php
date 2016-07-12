@@ -29,14 +29,14 @@ if (isset($campaign)): ?>
 				
 			<?php elseif ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway): ?>
 				<?php
-				$organization = $campaign->get_organisation();
-				$organization_obj = new YPOrganisation($organization->organisation_wpref);
+				$WDGUser_current = WDGUser::current();
+				$WDGUser_current->register_lemonway();
 				?>
 				<li><strong><?php _e("Titulaire du compte :", 'yproject'); ?></strong> LEMON WAY</li>
 				<li><strong>IBAN :</strong> FR76 3000 4025 1100 0111 8625 268</li>
 				<li><strong>BIC :</strong> BNPAFRPPIFE</li>
 				<li>
-					<strong><?php _e("Code &agrave; indiquer (pour identifier votre paiement) :", 'yproject'); ?></strong> wedogood-<?php echo $organization_obj->get_lemonway_id(); ?><br />
+					<strong><?php _e("Code &agrave; indiquer (pour identifier votre paiement) :", 'yproject'); ?></strong> wedogood-<?php echo $WDGUser_current->get_lemonway_id(); ?><br />
 					<ul>
 						<li><?php _e("Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !", 'yproject'); ?></li>
 					</ul>
