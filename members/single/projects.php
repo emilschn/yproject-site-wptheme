@@ -105,8 +105,11 @@ if (is_user_logged_in() && $display_loggedin_user) :
 	?>
 	<h2 class="underlined">Mon porte-monnaie électronique</h2>
 
+	<?php $post_details = get_page_by_path("details-des-investissements"); ?>
 	<?php $amount = $WDGUser_displayed->get_lemonway_wallet_amount(); ?>
-	Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.<br /><br />
+	Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.
+	<a href="<?php echo get_permalink($post_details->ID); ?>">Voir le d&eacute;tail de mes royalties</a><br /><br />
+	
 
 	<?php if ($amount > 0): ?>
 		<form action="" method="POST" enctype="multipart/form-data">
