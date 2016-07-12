@@ -59,7 +59,7 @@
 		color: #FFF;
 		font-size: 14px;
 	}
-	
+
 /*******************************************************************************
 * HEADER
 *******************************************************************************/
@@ -163,13 +163,13 @@
 /*******************************************************************************
 * PROJECT SHORT - SEPARATOR
 *******************************************************************************/
-.project-list .part-title-separator {
-	min-height: 32px !important;
-}
-.project-list .part-title {
-	padding: 0px 20px !important;
-	font-size: 25px !important;
-}
+	.project-list .part-title-separator {
+		min-height: 32px !important;
+	}
+	.project-list .part-title {
+		padding: 0px 20px !important;
+		font-size: 25px !important;
+	}
 	
 /*******************************************************************************
 * PROJECT SHORT - SMALL
@@ -372,6 +372,18 @@
 	.invest_part .label { width: auto !important; }
 	.invest_step1_generalities, .invest_step1_currentproject { margin: 2% !important; max-width: 98%; }
 
+	/* FRISE */
+	.invest-breadcrumb-item {
+		display: inline-block !important;
+		width: 12% !important;
+		margin:1% !important;
+	}
+	#invest-breadcrumb > div#mean-payment {
+		background-position: 49.1%top !important;
+		background-position: 49.1% top !important;
+	}
+	#invest-breadcrumb.breadcrumb-step-3 > div#mean-payment { background-position: 49.1% 114% !important; }
+
 /*******************************************************************************
 * CONNECTION
 *******************************************************************************/
@@ -399,4 +411,80 @@
 	#content.theme-myphotoreporter nav.menu-client { padding-top: 5px !important; height: 55px !important; }
 	#content.theme-myphotoreporter .client-header { height: 180px !important; background-size: 250% !important; }
 	#content.theme-myphotoreporter .client-header .center { display: none; }
+}
+
+
+@media screen and  (min-width: 562px) and  (max-width: 767px){
+/*******************************************************************************
+* INVESTMENT
+*******************************************************************************/
+	/* FRISE */
+	.invest-breadcrumb-item {
+		font-size: 10px !important;
+	}
+	#invest-breadcrumb > div#input {
+		background-position: 8% top !important;
+	}
+	#invest-breadcrumb.breadcrumb-step-1 > div#input {
+		background-position: 8% 114% !important;
+	}
+	#invest-breadcrumb > div#confirm {
+		background-position: 30% top !important;
+	}
+	#invest-breadcrumb.breadcrumb-step-2 > div#confirm {
+		background-position: 30% 114% !important;
+	}
+	#invest-breadcrumb > div#return {
+		background-position: 70.8% top !important;
+	} 
+	#invest-breadcrumb.breadcrumb-step-4 > div#return {
+		background-position: 70.8% 114% !important;
+	}
+	#invest-breadcrumb > div#share {
+		background-position: 92% top !important;
+	}
+	#invest-breadcrumb.breadcrumb-step-5 > div#share {
+		background-position: 92% 114% !important;
+	}
+}
+
+
+@media screen and (max-width: 562px) {
+/*******************************************************************************
+* INVESTMENT
+*******************************************************************************/
+	/* FRISE */
+	.invest-breadcrumb-item {
+		font-size: 8px !important;
+	}
+	#invest-breadcrumb > div#input {
+		background-position: 12.1% top !important;
+	}
+	#invest-breadcrumb.breadcrumb-step-1 > div#input {
+		background-position: 12.1% 114% !important;
+	}
+	#invest-breadcrumb > div#share {
+		background-position: 89% top !important;
+	}
+	#invest-breadcrumb > div#confirm {
+		background-position: 31.5% top !important;
+	}
+	#invest-breadcrumb.breadcrumb-step-2 > div#confirm {
+		background-position: 31.5% 114% !important;
+	}
+	#invest-breadcrumb > div#return {
+		background-position: 70.7% top !important;
+	}   
+	#invest-breadcrumb > div#confirm {
+		background-position: 31.5% top !important;
+	}
+	#invest-breadcrumb.breadcrumb-step-4 > div#return {
+		background-position: 70.7% 114% !important;
+	}
+	#invest-breadcrumb > div#share {
+		background-position: 89% top !important;
+	}
+	#invest-breadcrumb.breadcrumb-step-5 > div#share {
+		background-position: 89% 114% !important;
+	}
 }

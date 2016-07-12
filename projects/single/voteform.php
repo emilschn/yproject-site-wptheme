@@ -296,28 +296,6 @@ if ($campaign->end_vote_remaining() > 0) {
 				<div class='return' style='background-image: url(".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png);' id='hide_except_div1'>
 				</div>
 				<div class='block2'>
-					<strong>Remarques</strong><br />
-					<em>Avez-vous besoin de plus d&apos;informations concernant l&apos;un des aspects suivants ?</em><br />
-					<ul class='more-info-list_v3' style='list-style-type:none;'>
-					    <li><label><input type='checkbox' id='more_info_service_v3' name='more_info_service' ".$more_info_service_before." value='1'><span class='span_more_info'>Le produit / service</span></label></li>
-					    <li><label><input type='checkbox' id='more_info_impact_v3' name='more_info_impact' ".$more_info_impact_before." value='1'><span class='span_more_info'>L&apos;impact soci&eacute;tal</span></label></li>
-					    <li><label><input type='checkbox' id='more_info_team_v3' name='more_info_team' ".$more_info_team_before." value='1'><span class='span_more_info' >La structuration de l&apos;&eacute;quipe</span></label></li>
-					    <li><label><input type='checkbox' id='more_info_finance_v3' name='more_info_finance' ".$more_info_finance_before." value='1'><span class='span_more_info'>Le pr&eacute;visionnel financier</span></label></li>
-
-					    <li>Autre : <input type='text' id='more_info_other_v3' name='more_info_other' class='span_more_info' placeholder='Pr&eacute;ciser...' value='".$more_info_other_before."' /> </li>
-					</ul>
-				</div>
-				<div class='next' id='hide_except_div3' style='background-image: url(".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png);'>
-				</div>
-			</br>
-			</div>
-
-				<!-- phase 3 -->
-
-			<div id='phase3' >
-				<div class='return' style='background-image: url(".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png);' id='hide_except_div2_phase3' >
-				</div>
-				<div class='block3'>
 					<div id='validate_project-true'>
 
 					    <?php if (".$campaign->funding_type()." != 'fundingdonation'): ?>
@@ -344,8 +322,30 @@ if ($campaign->end_vote_remaining() > 0) {
 							</br>
 						    <input type='text' id='invest_sum_v3' name='invest_sum' value='".$invest_sum_before."' size='10' ".$style_sum." />&euro;<br />
 					    </div>
-					<br />
+						<br />
 					</div>
+					<strong>Remarques</strong><br />
+					<em>Avez-vous besoin de plus d&apos;informations concernant l&apos;un des aspects suivants ?</em><br />
+					<ul class='more-info-list_v3' style='list-style-type:none;'>
+					    <li><label><input type='checkbox' id='more_info_service_v3' name='more_info_service' ".$more_info_service_before." value='1'><span class='span_more_info'>Le produit / service</span></label></li>
+					    <li><label><input type='checkbox' id='more_info_impact_v3' name='more_info_impact' ".$more_info_impact_before." value='1'><span class='span_more_info'>L&apos;impact soci&eacute;tal</span></label></li>
+					    <li><label><input type='checkbox' id='more_info_team_v3' name='more_info_team' ".$more_info_team_before." value='1'><span class='span_more_info' >La structuration de l&apos;&eacute;quipe</span></label></li>
+					    <li><label><input type='checkbox' id='more_info_finance_v3' name='more_info_finance' ".$more_info_finance_before." value='1'><span class='span_more_info'>Le pr&eacute;visionnel financier</span></label></li>
+
+					    <li>Autre : <input type='text' id='more_info_other_v3' name='more_info_other' class='span_more_info' placeholder='Pr&eacute;ciser...' value='".$more_info_other_before."' /> </li>
+					</ul>
+				</div>
+				<div class='next' id='hide_except_div3' style='background-image: url(".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png);'>
+				</div>
+				</br>
+			</div>
+
+				<!-- phase 3 -->
+
+			<div id='phase3' >
+				<div class='return' style='background-image: url(".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png);' id='hide_except_div2_phase3' >
+				</div>
+				<div class='block3'>
 					    <strong>Conseils</strong><br />
 						<em>Quels conseils ou encouragements souhaitez-vous donner au(x) porteur(s) de ce projet ?</em><br />
 						<textarea id='advice_v3' type='text' name='advice'>".$advice_before."</textarea><br/><br/>
@@ -357,8 +357,12 @@ if ($campaign->end_vote_remaining() > 0) {
 						<input type='submit' name='submit_vote' value='Voter' class='vote_submit_v3'/>
 					</div>
 				</div>
-
 				</br>
+			</div>
+			<div class='frise'>
+				<input type='button' id='go-block1' class='frise_input'/>
+				<input type='button' id='go-block2' class='frise_input'/>
+				<input type='button' id='go-block3' class='frise_input'/>
 			</div>
 		</form>".'[/yproject_lightbox]'); 
 ?>

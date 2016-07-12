@@ -59,7 +59,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
-	$current_version = '20160704';
+	$current_version = '20160712';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -172,6 +172,7 @@ function yproject_change_user_cap() {
 	}
 	
 	
+	locate_template( 'functions/ui-helpers.php', true );
 	locate_template( 'functions/shortcode-manager.php', true );
 	YPShortcodeManager::register_shortcodes();
 }
