@@ -771,11 +771,6 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
     margin-top: 5px;
 }
 
-.vote {
-    text-align: center;
-    padding-right: 10%;
-}
-
 #btn-validate_project-false-v3:checked+span,
 #btn-validate_project-true-v3:checked+span{
     color: #333333 !important;
