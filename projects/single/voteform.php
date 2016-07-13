@@ -316,12 +316,6 @@ if ($campaign->end_vote_remaining() > 0) {
 						    <span class='span_risk'> Très élevé </span>
 					    </div>
 					    <?php endif; ?>
-						</br>
-						<div id='investir_sum_v3'>
-						    Je serais int&eacute;ress&eacute; pour investir :
-							</br>
-						    <input type='text' id='invest_sum_v3' name='invest_sum' value='".$invest_sum_before."' size='10' ".$style_sum." />&euro;<br />
-					    </div>
 						<br />
 					</div>
 					<strong>Remarques</strong><br />
@@ -346,6 +340,14 @@ if ($campaign->end_vote_remaining() > 0) {
 				<div class='return' style='background-image: url(".get_stylesheet_directory_uri()."/images/fleche_suivant_possible.png);' id='hide_except_div2_phase3' >
 				</div>
 				<div class='block3'>
+						<div id='validate_project-true_sum'>
+							</br>
+							<div id='investir_sum_v3'>
+							    Je serais int&eacute;ress&eacute; pour investir :
+							    <input type='text' id='invest_sum_v3' name='invest_sum' value='".$invest_sum_before."' size='10' ".$style_sum." />&euro;<br />
+						    </div>
+							<br />
+						</div>
 					    <strong>Conseils</strong><br />
 						<em>Quels conseils ou encouragements souhaitez-vous donner au(x) porteur(s) de ce projet ?</em><br />
 						<textarea id='advice_v3' type='text' name='advice'>".$advice_before."</textarea><br/><br/>
@@ -360,9 +362,9 @@ if ($campaign->end_vote_remaining() > 0) {
 				</br>
 			</div>
 			<div class='frise'>
-				<input type='button' id='go-block1' class='frise_input'/>
-				<input type='button' id='go-block2' class='frise_input'/>
-				<input type='button' id='go-block3' class='frise_input'/>
+				<input type='button' id='go-block1' class='frise_input' value='1'/>
+				<input type='button' id='go-block2' class='frise_input' value='2'/>
+				<input type='button' id='go-block3' class='frise_input' value='3'/>
 			</div>
 		</form>".'[/yproject_lightbox]'); 
 ?>
