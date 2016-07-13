@@ -12,17 +12,18 @@ if (isset($campaign)):
 	
 	//Gestion wallet
 	$WDGUser_current = WDGUser::current();
+	$lemonway_amount = $WDGUser_current->get_lemonway_wallet_amount();
 	$amount = $_SESSION['redirect_current_amount_part'] * $campaign->part_value();
 	$can_use_wallet = FALSE;
 	$can_use_card_and_wallet = FALSE;
 	if ($_SESSION['redirect_current_invest_type'] == 'user') {
-		$can_use_wallet = $WDGUser_current->can_pay_with_wallet($amount, $campaign);
-		$can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $campaign );
+		$can_use_wallet = $WDGUser_current->can_pay_with_wallet( $amount, $campaign );
+		$can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $amount, $campaign );
 	} else {
 		$invest_type = $_SESSION['redirect_current_invest_type'];
 		$organisation = new YPOrganisation($invest_type);
-		$can_use_wallet = $organisation->can_pay_with_wallet($amount, $campaign);
-		$can_use_card_and_wallet = $organisation->can_pay_with_card_and_wallet( $campaign );
+		$can_use_wallet = $organisation->can_pay_with_wallet( $amount, $campaign );
+		$can_use_card_and_wallet = $organisation->can_pay_with_card_and_wallet( $amount, $campaign );
 	}
 	
 	//Possible de régler par virement ?
@@ -77,7 +78,7 @@ if (isset($campaign)):
 			
 			<?php if ($can_use_wire): ?>
 			<li>
-				<a href="<?php echo $page_mean_payment_link; ?>wire">
+				<a href="<?php echo $page_mean_payment_link; ?>wire" class="alert-confirm" data-alertconfirm="<?php _e("Vous allez acc&eacute;der aux informations pour proc&eacute;der &agrave; un virement bancaire.", 'yproject'); ?>">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-virement.jpg" alt="<?php _e("Virement bancaire", 'yproject'); ?>" />
 					<?php _e("Virement bancaire", 'yproject'); ?>
 				</a>
