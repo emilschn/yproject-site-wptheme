@@ -9,7 +9,9 @@ if (isset($_GET['campaign_id'])) {
             $status = $campaign->campaign_status();
             
             //N'affiche pas le graphe si les dates des votes n'ont pas été enregistrées ou le vote n'a pas été fait
-            $displayGraph = ($status=='vote' || $status=='collecte' || $status=='funded')
+            $displayGraph = ($status==ATCF_Campaign::$campaign_status_vote 
+                    || $status==ATCF_Campaign::$campaign_status_collecte 
+                    || $status==ATCF_Campaign::$campaign_status_funded)
                     && $vote_results['count_voters'] != 0
                     && $vote_results['list_date'][0] != 'NULL'
                     && $vote_results['list_date'][0] != null

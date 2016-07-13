@@ -187,7 +187,8 @@ function yproject_campaign_open_comments( $open, $post_id ) {
 		$campaign = new ATCF_Campaign( $post_campaign );
 	}
 	if (!empty($campaign)) {
-		if ($campaign->campaign_status() == "vote" || $campaign->campaign_status() == "collecte") {
+		if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote 
+			|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte) {
 			$open = TRUE;
 		}
 	}
@@ -428,7 +429,7 @@ function yproject_page_template( $template ) {
 	global $post;
 	$campaign = atcf_get_campaign( $post );
 	$campaign_id = $post->ID;
-	if (!empty($campaign->ID) && is_object( $campaign ) && ($campaign->campaign_status() == 'preparing') && !$campaign->current_user_can_edit()) {
+	if (!empty($campaign->ID) && is_object( $campaign ) && ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing) && !$campaign->current_user_can_edit()) {
 		header("Status: 404 Not Found");
 		global $wp_query;
 		$wp_query->set_404();
@@ -936,7 +937,7 @@ function yproject_get_current_projects() {
 
 			array (
 				'key' => 'campaign_vote',
-				'value' => 'collecte'
+				'value' => ATCF_Campaign::$campaign_status_collecte
 				),
 			array (
 				'key' => 'campaign_end_date',
@@ -1010,7 +1011,9 @@ function get_investors_table() {
 	$page_dashboard = get_page_by_path('tableau-de-bord');
 	$campaign_id_param = '?campaign_id=' . $campaign->ID;
         
-	$is_campaign_over = ($campaign->campaign_status() == 'funded' || $campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing');
+	$is_campaign_over = ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded 
+		|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive
+		|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing);
         
 	$classcolonnes = array('coluname',
 					'collname',
@@ -1114,7 +1117,7 @@ function get_investors_table() {
 				$payment_type = 'Ch&egrave;que';
 			}
 			$investment_state = 'Validé';
-			if ($campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing') {
+			if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing) {
 				$investment_state = 'Annulé';
 
 				$refund_id = get_post_meta($item['ID'], 'refund_id', TRUE);
@@ -1500,7 +1503,7 @@ Sélectionner :<br />
 	$result_votes = $wpdb->get_results( "SELECT user_id FROM ".$table_votes." WHERE post_id = ".$_POST['id_campaign'] );
 	foreach ($result_votes as $item) {
 		if (!empty($user_list[$item->user_id])) $user_list[$item->user_id] .= ' vote';
-		else $user_list[$item->user_id] = 'vote';
+		else $user_list[$item->user_id] = ATCF_Campaign::$campaign_status_vote;
 	}
 	//Récupération de la liste des investisseurs
 	foreach ( $payments_data as $item ) {

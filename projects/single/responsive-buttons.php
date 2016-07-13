@@ -17,7 +17,7 @@ if (is_user_logged_in()) {
 	<?php
 	$campaign_status = $campaign->campaign_status();
 	switch ($campaign_status) {
-		case 'vote': ?>
+		case ATCF_Campaign::$campaign_status_vote: ?>
 
 		<?php if(!is_user_logged_in()){ ?>
 		<div id="vote-form-v3-button">
@@ -51,7 +51,7 @@ if (is_user_logged_in()) {
 
 		<?php
 		break;
-		case 'collecte':
+		case ATCF_Campaign::$campaign_status_collecte:
 		?>
 		<a href="<?php echo $invest_url_href; ?>" class="button-action <?php echo $btn_invest_classes; ?>" data-lightbox="<?php echo $btn_invest_data_lightbox; ?>" data-redirect="<?php echo $invest_url; ?>">
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.png" alt="<?php echo $btn_invest_text; ?>" title="<?php echo $btn_invest_text; ?>" />

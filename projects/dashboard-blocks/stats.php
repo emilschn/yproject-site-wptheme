@@ -39,7 +39,7 @@ function print_block_stats() {
 
     <div class="body">
 
-        <?php if($status=='preview'){ ?>
+        <?php if($status==ATCF_Campaign::$campaign_status_vote){ ?>
             <div id="stats-prepare">
                 <div class="half-card">
                     <div class="stat-little-number-top">Votre projet a &eacute;t&eacute; vu</div>
@@ -56,7 +56,7 @@ function print_block_stats() {
             </div>
 
         <?php }
-        else if($status=='vote'){ ?>
+        else if($status==ATCF_Campaign::$campaign_status_vote){ ?>
             <div id="stats-vote">
                 <div class="quart-card">
                     <div class="stat-big-number"><?php echo $nb_votes?></div>
@@ -87,7 +87,7 @@ function print_block_stats() {
             </div>
 
         <?php } 
-        else if($status=='collecte'){ ?>
+        else if($status==ATCF_Campaign::$campaign_status_collecte){ ?>
             <div id="stats-invest">
                 <div class="quart-card">
                     <div class="stat-big-number"><?php echo $campaign->current_amount()?></div>
@@ -113,7 +113,7 @@ function print_block_stats() {
             </div>
 
         <?php } 
-        else if($status=='funded'){ ?>
+        else if($status==ATCF_Campaign::$campaign_status_funded){ ?>
             <div id="stats-funded">
                 <div class="half-card">
                     <div class="stat-big-number"><?php echo $campaign->current_amount()?></div>
@@ -144,7 +144,7 @@ function print_block_stats() {
     <script type="text/javascript">
     jQuery(document).ready( function($) {
 
-        <?php if($status=='vote'){ ?>
+        <?php if($status==ATCF_Campaign::$campaign_status_vote){ ?>
             var ctxPie = $("#canvas-pie-block").get(0).getContext("2d");
             var dataPie = [
                 {value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "Oui"}, 

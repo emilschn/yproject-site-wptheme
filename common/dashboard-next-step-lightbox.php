@@ -4,7 +4,7 @@ $campaign = atcf_get_current_campaign();
 <h2 style='text-align:center'>Pr&ecirc;t pour la suite ?</h2>
 <form method="POST" action="?campaign_id=<?php echo $campaign->ID ?>">
     <ul>
-        <?php if ($campaign->campaign_status() == 'preparing') { ?>
+        <?php if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing) { ?>
         <p id="desc-preview">L'avant premi&egrave;re permet d'&ecirc;tre visible sur le site wedogood.co avant le lancement de la campagne. 
             Les internautes pourront d&eacute;couvrir une partie de votre projet.</p>
             <li><label><input type="checkbox" class="checkbox-next-step" id="cbman11">
@@ -15,8 +15,8 @@ $campaign = atcf_get_current_campaign();
                 Je suis pr&ecirc;t &agrave; passer en avant-premi&egrave;re</label></li>
 
 
-        <?php } if (($campaign->campaign_status() == 'preview') || ($campaign->campaign_status() == 'preparing')) { ?>
-            <div id="vote-checklist"<?php if ($campaign->campaign_status() == 'preparing') { echo 'hidden=""'; } ?>>
+        <?php } if (($campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote) || ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing)) { ?>
+            <div id="vote-checklist"<?php if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing) { echo 'hidden=""'; } ?>>
             <p>Pour r&eacute;ussir la phase de vote, je dois :</p>
             <ul id="vote-goals">
                 <li>R&eacute;unir au moins <strong><?php echo ATCF_Campaign::$voters_min_required?></strong> votants</li>
@@ -56,7 +56,7 @@ $campaign = atcf_get_current_campaign();
             </div>
 
 
-        <?php } else if ($campaign->campaign_status() == 'vote') { ?>
+        <?php } else if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote) { ?>
             <p>Le moment de la collecte est arriv&eacute; !</p>
             <li><label>Nombre de jours de la collecte : 
                 <input type="number" id="innbdaycollecte" name="innbdaycollecte" min="1" max="60" value="30" style="width: 40px;"></label>
@@ -86,7 +86,7 @@ $campaign = atcf_get_current_campaign();
     <div class="list-button">
         <input type="hidden" name="next_step" value="1" id="next-step-choice">
         <input type="submit" value="C'est parti !" class="button" id="submit-go-next-step"><br/><br/>
-        <?php if ($campaign->campaign_status() == 'preparing') { ?>
+        <?php if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing) { ?>
             <a class="button" id="no-preview-button">Je ne souhaite pas d'avant-première, passons le projet en vote.</a>
         <?php }  ?>
     </div>

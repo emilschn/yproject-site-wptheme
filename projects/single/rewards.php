@@ -39,7 +39,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 		
 		<input type="hidden" id="roi_percent_project" value="<?php echo $campaign->roi_percent_estimated(); ?>" />
 		<input type="hidden" id="roi_goal_project" value="<?php echo $campaign->goal(false); ?>" />
-		<?php if ($campaign_status == "collecte"): ?>
+		<?php if ($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
 		<form method="GET" action="<?php echo get_permalink($page_invest->ID); ?>">
 		<?php endif; ?>
 			
@@ -105,7 +105,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 				<span class="small-alert">* <?php _e("Ces valeurs sont estim&eacute;es selon les pr&eacute;visions du porteur de projet. Risque de perte int&eacute;grale de l&apos;investissement. Gain maximum : x2.", "yproject"); ?></span>
 			</div>
 
-			<?php if ($campaign_status == "collecte"): ?>
+			<?php if ($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
 				<div class="align-center">
 					<br /><br />
 					<input type="submit" value="<?php _e("Investir", "yproject"); ?>" class="button red" />

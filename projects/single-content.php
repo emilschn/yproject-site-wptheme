@@ -52,7 +52,7 @@ else {
 			<?php echo $video_element; ?>
 		</div>
 		<div class="mobile-share only_on_mobile">
-			<?php if ($vote_status != 'vote' && $vote_status != 'preparing') : ?>
+			<?php if ($vote_status != ATCF_Campaign::$campaign_status_vote && $vote_status != ATCF_Campaign::$campaign_status_preparing) : ?>
     			<?php if ( is_user_logged_in() ) { 
 				global $wpdb;
 				$user_id = wp_get_current_user()->ID;
@@ -280,7 +280,7 @@ else {
 		</div>
 	</div>
 	
-	<?php if ($vote_status != 'preview' || $can_modify): ?>
+	<?php if ($vote_status != ATCF_Campaign::$campaign_status_vote || $can_modify): ?>
 	<div class="projects-desc-item">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $images_folder;?>economie<?php echo $file_complement; ?>.png" alt="logo economie" data-content="added_value" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $images_folder;?>triangle_gris_projet.png" alt="triangle gris"/>
@@ -359,7 +359,7 @@ else {
 </div>
 
 <div class="only_on_mobile">
-	<?php if ($vote_status == 'collecte'): ?>
+	<?php if ($vote_status == ATCF_Campaign::$campaign_status_collecte): ?>
 	<div class="reward-zone">
 		<div class="project-rewards">
 			<span>En &eacute;change de votre <?php echo $campaign->funding_type_vocabulary()['investor_action'];?></span>

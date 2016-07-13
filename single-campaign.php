@@ -9,7 +9,7 @@ $tag_list = $campaign->get_keywords();
 $client_context = $campaign->get_client_context();
 $classes = ($client_context != '') ? 'theme-' . $client_context . ' ' : '';
 
-if ($campaign->campaign_status() == "vote") { require_once('projects/header-voteform.php'); }
+if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote) { require_once('projects/header-voteform.php'); }
 $edit_version = $campaign->edit_version();
 $classes .= 'version-' . $edit_version;
 ?>

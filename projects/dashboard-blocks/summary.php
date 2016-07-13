@@ -9,14 +9,14 @@ function check_next_step(){
      if (isset($_POST['next_step'])&& ($_POST['next_step']==1 || $_POST['next_step']==2) && $campaign->can_go_next_step()){
 
          //Préparation -> Avant-premiere
-         if ($status=='preparing'){
+         if ($status==ATCF_Campaign::$campaign_status_preparing){
              if($_POST['next_step']==1){
-                 $campaign->set_status('preview');
+                 $campaign->set_status(ATCF_Campaign::$campaign_status_vote);
                  $campaign->set_validation_next_step(0);
              //Préparation -> Vote
              }
          } //Avant-première -> Vote
-         if (($status=='preview')||(($status=='preparing')&&($_POST['next_step']==2))) {
+         if (($status==ATCF_Campaign::$campaign_status_vote)||(($status==ATCF_Campaign::$campaign_status_preparing)&&($_POST['next_step']==2))) {
              $orga_done=false;
              $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
              $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
@@ -38,13 +38,13 @@ function check_next_step(){
                     //$VoteEndDate->setTime(23,59);
                     $campaign->set_end_vote_date($VoteEndDate);     
 
-                    $campaign->set_status('vote');
+                    $campaign->set_status(ATCF_Campaign::$campaign_status_vote);
                     $campaign->set_validation_next_step(0);
                 }
              }
 
          } //Vote -> Collecte
-         else if ($status=='vote') {
+         else if ($status==ATCF_Campaign::$campaign_status_vote) {
              if(isset($_POST['innbdaycollecte']) && isset($_POST['inendh']) && isset($_POST['inendm'])){
                 //Recupere nombre de jours et heure de fin de la collecte
                 $collecte_time = $_POST['innbdaycollecte'];
@@ -64,7 +64,7 @@ function check_next_step(){
                      $campaign->set_end_date($CollectEndDate);
                      $campaign->set_begin_collecte_date(new DateTime());
 
-                     $campaign->set_status('collecte');
+                     $campaign->set_status(ATCF_Campaign::$campaign_status_collecte);
                      $campaign->set_validation_next_step(0);
                  }
              }
@@ -110,15 +110,17 @@ function print_block_summary() {
 <div id="block-summary" >
     <div class="current-step">
         <img src="<?php echo $stylesheet_directory_uri; ?>/images/frise-preview.png" alt="" /><br>
-        <span <?php if($status=='preparing'){echo 'id="current"';} ?>>Pr&eacute;paration </span>
-        <span <?php if($status=='preview'){echo 'id="current"';} ?>>Avant-premi&egrave;re </span>
-        <span <?php if($status=='vote'){echo 'id="current"';} ?>>Vote </span>
-        <span <?php if($status=='collecte'){echo 'id="current"';} ?>>Collecte </span>
-        <span <?php if($status=='funded'){echo 'id="current"';} ?>>R&eacute;alisation</span>
+        <span <?php if($status==ATCF_Campaign::$campaign_status_preparing){echo 'id="current"';} ?>>Pr&eacute;paration </span>
+        <span <?php if($status==ATCF_Campaign::$campaign_status_vote){echo 'id="current"';} ?>>Avant-premi&egrave;re </span>
+        <span <?php if($status==ATCF_Campaign::$campaign_status_vote){echo 'id="current"';} ?>>Vote </span>
+        <span <?php if($status==ATCF_Campaign::$campaign_status_collecte){echo 'id="current"';} ?>>Collecte </span>
+        <span <?php if($status==ATCF_Campaign::$campaign_status_funded){echo 'id="current"';} ?>>R&eacute;alisation</span>
     </div>
 
     <div class="list-button">
-        <?php if ($status=='preparing'||$status=='preview'||$status=='vote'){?>
+        <?php if ($status==ATCF_Campaign::$campaign_status_preparing
+            ||$status==ATCF_Campaign::$campaign_status_vote
+            ||$status==ATCF_Campaign::$campaign_status_vote){?>
             <?php if (current_user_can('manage_options')) {
                 //Visible uniquement par admins : autoriser le PP à passer à l'étape suivante
                 if(isset($_GET['validate_next_step'])){

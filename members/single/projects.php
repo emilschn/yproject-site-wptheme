@@ -22,7 +22,7 @@ $WDGUser_displayed = new WDGUser(bp_displayed_user_id());
 			if (!$display_loggedin_user) {
 				$args['meta_key'] = 'campaign_vote';
 				$args['meta_compare'] = '!='; 
-				$args['meta_value'] = 'preparing';
+				$args['meta_value'] = ATCF_Campaign::$campaign_status_preparing;
 			}
 			query_posts($args);
 			$has_projects = false;

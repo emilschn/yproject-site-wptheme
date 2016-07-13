@@ -2648,9 +2648,13 @@ div#home_bottom h1 {
     padding: 10px 0px 10px 20px;
 }
 
-#ndashboard-navbar li:hover{
+#ndashboard-navbar li:not(.disabled):not(.active):hover{
     background-color:grey;
     color:white;
+}
+
+#ndashboard-navbar li:hover{
+    cursor:pointer;
 }
 
 #ndashboard-navbar li.active{
@@ -2658,6 +2662,11 @@ div#home_bottom h1 {
     color:white;
     font-weight: bold;
 }
+
+#ndashboard-navbar li.disabled{
+    color: grey;
+}
+
 
 #ndashboard-content{
     display: table-cell;

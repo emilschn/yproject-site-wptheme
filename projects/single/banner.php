@@ -77,7 +77,9 @@ if (count($current_organisations) > 0) {
 				
 				<div class="separator"></div>
 				<?php
-				if ($vote_status == 'collecte' || $vote_status == 'funded' || $vote_status == 'archive') {
+				if ($vote_status == ATCF_Campaign::$campaign_status_collecte 
+					|| $vote_status == ATCF_Campaign::$campaign_status_funded 
+					|| $vote_status == ATCF_Campaign::$campaign_status_archive) {
 					$percent = min(100, $campaign->percent_minimum_completed(false));
 					$width = 250 * $percent / 100;
 				?>	
@@ -121,7 +123,7 @@ if (count($current_organisations) > 0) {
 					</div>
 				</div>
 				<?php 
-				} else if ($vote_status == 'vote') {
+				} else if ($vote_status == ATCF_Campaign::$campaign_status_vote) {
 					$nbvoters = $campaign->nb_voters();
 				?>
 					<div class="logos_zone vote">
@@ -169,7 +171,7 @@ if (count($current_organisations) > 0) {
 						<div class="projects-description-separator mobile_hidden"></div>
 					</div>
 
-				<?php } else if ($vote_status== 'preview'){ ?>
+				<?php } else if ($vote_status== ATCF_Campaign::$campaign_status_vote){ ?>
 
 					<div class="logos_zone">
 						<div class="post_bottom_infos_item only_on_mobile">
