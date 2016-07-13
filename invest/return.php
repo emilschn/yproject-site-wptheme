@@ -62,8 +62,8 @@ if (isset($campaign) && is_user_logged_in()):
 				$amount = $lw_transaction_result->CRED;
 					
 				//Compléter avec Wallet
-				if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == "cardwallet" && ($lw_transaction_result->STATUS == 3 || $lw_transaction_result->STATUS == 0)) {
-					$amount_wallet = $amount_total - $amount;
+				if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == "cardwallet" && ($lw_transaction_result->STATUS == 3 || $lw_transaction_result->STATUS == 0) && isset($_SESSION['need_wallet_completion']) && $_SESSION['need_wallet_completion'] > 0) {
+					$amount_wallet = $_SESSION['need_wallet_completion'];
 					$organization = $campaign->get_organisation();
 					$organization_obj = new YPOrganisation($organization->organisation_wpref);
 					if ($invest_type == 'user') {
@@ -78,7 +78,12 @@ if (isset($campaign) && is_user_logged_in()):
 							$transfer_funds_result = LemonwayLib::ask_transfer_funds($organisation_debit->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount_wallet);
 						}
 					}
-					$purchase_key .= '_wallet_'. $transfer_funds_result->ID;
+					
+					
+					if ( $transfer_funds_result != FALSE ) {
+						$purchase_key .= '_wallet_'. $transfer_funds_result->ID;
+						$amount += $amount_wallet;
+					}
 				}
 			}
 		}
