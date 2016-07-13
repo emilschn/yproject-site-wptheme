@@ -828,12 +828,13 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 #more_info_service_v3:checked+span,
 #more_info_impact_v3:checked+span,
 #more_info_team_v3:checked+span,
-#more_info_finance_v3:checked+span,
-input[name='share_advice']:checked+span{
+#more_info_finance_v3:checked+span{
     color:#333333 !important;
     font-weight: bold;
 }
-
+input[name='share_advice']:checked+span{
+    color:#333333 !important;
+}
 #more_info_service_v3,
 #more_info_impact_v3,
 #more_info_team_v3,
@@ -1013,30 +1014,33 @@ span.block_thanks_1, span.block_thanks_2, span.block_thanks_3 {
 .frise{
 	width: 100%;
     text-align: center;
-    border-top: solid;
     padding-top: 5px;
-    border-color: #333333;
-	border-width: 0.1px;
 }
 
 .frise_input {
 	display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 30px;
-    border: solid !important;
-    border-width: 0.1px !important;
+    width: 35px;
+    height: 35px;
     background: none !important;
 }
 
-#go-block1{
-	background-color: #333333 !important;
-}
 .hr_block_vs_frise{
 	border: 0 !important;
     height: 0 !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
 
+}
+
+div#hide_except_div1, div#hide_except_div2_phase3 {
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+}
+
+.frise_input {
+    margin-right: 8%;
 }
 /************ style animation phase1, phase2, phase3 ************/
 
