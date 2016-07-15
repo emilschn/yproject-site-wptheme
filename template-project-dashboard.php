@@ -42,45 +42,52 @@ if ($can_modify){
     $post_campaign = get_post($campaign_id);
     $author_data = get_userdata($post_campaign->post_author);
     $campaign = atcf_get_campaign($post_campaign);
-    $status = $campaign->campaign_status(); ?>
+    $status = $campaign->campaign_status();
+
+    locate_template( array("projects/dashboard-pages/informations.php"), true );
+
+    function check_enabled_tab($status){
+        if($status==ATCF_Campaign::$campaign_status_preparing)echo 'class="disabled"';
+    }?>
 
         <div id="ndashboard">
             <nav id="ndashboard-navbar">
                 <div class="nav-padding">
+                    <div  class="title"><?php echo $post_campaign->post_title; ?></div>
                     <ul>
-                        <li class="active">Résumé</li>
-                        <li>Présentation</li>
-                        <li>Informations</li>
-                        <li>Gestion financière</li>
-                        <li>Campagne</li>
-                        <li>Contacts</li>
-                        <li>Actualités</li>
-                        <li>Accompagnement</li>
+                        <li data-page-target="page-resume">Résumé</li>
+                        <li data-page-target="page-presentation" <?php check_enabled_tab($status) ?>>Présentation</li>
+                        <li data-page-target="page-informations" >Informations</li>
+                        <li data-page-target="page-wallet" <?php check_enabled_tab($status) ?>>Gestion financière</li>
+                        <li data-page-target="page-campaign" <?php check_enabled_tab($status) ?>>Campagne</li>
+                        <li data-page-target="page-contacts" <?php check_enabled_tab($status) ?>>Contacts</li>
+                        <li data-page-target="page-news" <?php check_enabled_tab($status) ?>>Actualités</li>
+                        <li data-page-target="page-support" >Accompagnement</li>
                     </ul>
                 </div>
             </nav>
 
             <div id="ndashboard-content">
                 <div class="content-padding">
-                    <div class="part-title-separator">
-                        <span class="part-title"><?php echo $post_campaign->post_title; ?></span>
-                    </div>
-                    <h3>Projet</h3>
-                    <ul>
-                        <li>aodnaozn</li>
-                        <li>ozenfnezi</li>
-                        <li>ncoxnoozen</li>
-                    </ul>
+                    <div class="page-dashboard page-resume">1</div>
+                    <div class="page-dashboard page-presentation">2</div>
+                    <div class="page-dashboard page-informations"><?php print_informations_page() ?></div>
+                    <div class="page-dashboard page-wallet">4</div>
+                    <div class="page-dashboard page-campaign">5</div>
+                    <div class="page-dashboard page-contacts">6</div>
+                    <div class="page-dashboard page-news">7</div>
+                    <div class="page-dashboard page-support">8</div>
+
                 </div>
             </div>
         </div>
     <?php } ?>
 
 
-        <div class="page" id="blog-single" role="main">
+        <div class="page" style="display:none" id="blog-single" role="main">
 
             <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-                <div id="dashboard" class="margin-height">
+                <div id="dashboard" class="">
                 <?php
                 if ($can_modify){
                         global $can_modify, $campaign_id;

@@ -2627,6 +2627,7 @@ div#home_bottom h1 {
 #ndashboard{
     display: table;
     width: 100%;
+    font-size: 14px;
 }
 
 #ndashboard-navbar{
@@ -2634,15 +2635,25 @@ div#home_bottom h1 {
     vertical-align: top;
     min-width: 240px;
     width: 240px;
+    background-color: #EEECED;
 }
 #ndashboard-navbar .nav-padding {
-    padding: 20px 0px 50px ;
-    background-color: #EEECED;
+    text-align: center;
+    padding: 30px 0px 50px;
+}
+
+#ndashboard-navbar .title {
+    font-family: 'BebasNeue';
+    font-size: 34px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
 }
 
 #ndashboard-navbar ul{
+    text-align: left;
     list-style: none;
-    padding-left: 0px;
+    padding: 0px;
+    margin: 0px;
 }
 #ndashboard-navbar li{
     padding: 10px 0px 10px 20px;
@@ -2664,7 +2675,7 @@ div#home_bottom h1 {
 }
 
 #ndashboard-navbar li.disabled{
-    color: grey;
+    color: #b6b6b6;
 }
 
 
@@ -2676,6 +2687,31 @@ div#home_bottom h1 {
 #ndashboard-content .content-padding {
     padding: 20px;
 }
+
+#ndashboard-content .page-dashboard {
+    display:none;
+}
+
+#ndashboard-content .page-informations .bloc-grid{
+    text-align: center;
+}
+
+#ndashboard-content .page-informations .display-bloc{
+    width: 250px;
+    height: 140px;
+    display: inline-block;
+    margin: 10px;
+    background-color: #EEECED;
+    padding: 20px;
+    vertical-align: top;
+}
+
+#ndashboard-content .page-informations .display-bloc .infobloc-title{
+    display:inline-block;
+    vertical-align:bottom;
+    text-align: center;
+}
+
 
 #dashboard .list-button{
     text-align:center
