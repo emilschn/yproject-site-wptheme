@@ -1,0 +1,147 @@
+/*******************************************************************************
+* DASHBOARD PAGE
+*******************************************************************************/
+
+#ndashboard{
+    display: table;
+    width: 100%;
+    font-size: 14px;
+}
+
+#ndashboard-navbar{
+    display: table-cell;
+    vertical-align: top;
+    min-width: 240px;
+    width: 240px;
+    background-color: #EEECED;
+}
+
+#ndashboard-navbar .badge-notif{
+    display: inline-block;
+    padding: 3px 7px;
+    margin-left: 5px;
+    min-width: 10px;
+    line-height: 1;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #EA4F51;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+#ndashboard-navbar .badge-notif:empty{
+    display:none;
+}
+
+#ndashboard-navbar a.active .badge-notif{
+    color: #EA4F51;
+    background-color: #fff;
+}
+
+#ndashboard-navbar a:not(.disabled):not(.active):hover .badge-notif{
+    color: grey;
+    background-color: #fff;
+}
+
+#ndashboard-navbar .nav-padding {
+    text-align: center;
+    padding: 30px 0px 50px;
+}
+
+#ndashboard-navbar .title {
+    font-family: 'BebasNeue';
+    font-size: 34px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+#ndashboard-navbar ul{
+    text-align: left;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+#ndashboard-navbar li a{
+    padding: 10px 0px 0px 20px;
+    color: #2B2C2C;
+    display:block;
+    min-height: 28px;
+}
+
+#ndashboard-navbar li a:not(.disabled):not(.active):hover{
+    background-color:grey;
+    color:white;
+}
+
+#ndashboard-navbar li a:hover{
+    cursor:pointer;
+}
+
+#ndashboard-navbar li a.active{
+    background-color:#EA4F51;
+    color:white;
+    font-weight: bold;
+}
+
+#ndashboard-navbar li a.disabled{
+    color: #b6b6b6;
+}
+
+
+#ndashboard-content{
+    display: table-cell;
+    vertical-align: top;
+}
+
+#ndashboard-content .content-padding {
+    padding: 20px;
+}
+
+#ndashboard-content .page-dashboard {
+    display:none;
+}
+
+#page-informations .bloc-grid{
+    text-align: center;
+}
+
+#page-informations .display-bloc{
+    width: 140px;
+    height: 40px;
+    display: inline-block;
+    margin: 10px;
+    background-color: #EEECED;
+    padding: 20px 20px 20px 20px;
+    vertical-align: top;
+    cursor:pointer;
+}
+
+#page-informations .display-bloc:hover{
+    background-color:grey;
+    color:white;
+}
+
+#page-informations .display-bloc.active{
+    background-color:#EA4F51;
+    color:white;
+}
+
+#page-informations .display-bloc .reduced{
+    width: 140px;
+    height: 140px;
+    display: inline-block;
+    margin: 10px;
+    background-color: #EEECED;
+    padding: 20px;
+    vertical-align: top;
+}
+
+#page-informations .display-bloc .infobloc-title{
+    display:inline-block;
+    vertical-align:bottom;
+    text-align: center;
+}

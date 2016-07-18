@@ -42,18 +42,37 @@ var WDGProjectDashboard = (function ($) {
             }
 
             //Onglets dashboard
-            if ($("#ndashboard-navbar li").length > 0) {
-                $("#ndashboard-navbar li:not(.disabled)").click(function () {
-                    $("#ndashboard-navbar li").removeClass("active");
+            if ($("#ndashboard-navbar li a").length > 0) {
+                $("#ndashboard-navbar li a:not(.disabled)").click(function (e) {
+
+                    $("#ndashboard-navbar li a").removeClass("active");
                     $(this).addClass("active");
 
                     $("#ndashboard-content .page-dashboard").hide();
-                    $("#ndashboard-content ." + $(this).data("page-target")).show();
+                    $("#ndashboard-content " + $(this).attr("href")).show();
+                    e.preventDefault;
+                    return false; //Empêche le défilement automatique lorsqu'on clique sur un lien avec un #
                 });
-                $("#ndashboard-navbar li:not(.disabled)").first().trigger("click");
+                $("#ndashboard-navbar li a:not(.disabled)").first().trigger("click");
             }
 
+            //Onglets information
+            if ($(".bloc-grid").length > 0) {
+                $(".bloc-grid .display-bloc").click(function () {
+                    $(".bloc-grid .display-bloc").removeClass("active");
+                    $(this).addClass("active");
+
+                    $("#tab-container .tab-content").hide();
+                    $("#tab-container #" + $(this).data("tab-target")).show();
+                });
+
+                $("#tab-container .tab-content").hide();
+            }
+
+
             //Informations
+
+            //Infos personnelles
             if ($("#userinfo_form").length > 0) {
                 $("#userinfo_form").submit(function (e) {
                     e.preventDefault();
@@ -86,6 +105,8 @@ var WDGProjectDashboard = (function ($) {
                     });
                 });
             }
+
+
         },
 
         formInvestReturnEvent: function (result) {
