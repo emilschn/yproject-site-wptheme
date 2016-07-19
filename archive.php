@@ -28,9 +28,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'ypcf-campaign-add-news') {
 //Supprime un article (le place dans la corbeille de WP)
 if (isset($_GET['delete_post_id'])){
     //Test pour vérifier que le post de blog appartient à la campagne
-    $category_slug = $campaign_post->ID . '-blog-' . $campaign_post->post_name;
-    $category_obj = get_category_by_slug($category_slug);
-    $posts_blog = get_posts(array('category'=>$category_obj->cat_ID));
+    $posts_blog = get_posts( array(
+		'category' => $campaign->get_news_category_id()
+	));
     $delete_post_id = ($_GET['delete_post_id']);
     $post_belong_campaign = false;
     foreach ($posts_blog as $post_blog) {
