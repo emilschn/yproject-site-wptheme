@@ -217,17 +217,13 @@ var ProjectEditor = (function($) {
 
 		//Création d'un champ input file pour le picture head
 		createfile: function(property){
-			var url_image_start=$("project-banner-src").src;
+			var url_image_start=$(".project-banner-img img").attr('src');
 
-			var newElement_1 = '<input id="wdg-edit-picture-head-next" type="file" class="input_image_home" name="image_header"/>';
+			var newElement_1 = '<form id="upload-img-form" enctype="multipart/form-data"> <input type="hidden" name="action" value="save_image_head" /> <input name="image_header_blur" type="hidden"/> <input type="hidden" name="campaign_id" value="'+$("#content").data("campaignid")+'" /> <input id="wdg-edit-picture-head-next" type="file" class="input_image_home" name="image_header"/> </form>';
 			$(ProjectEditor.elements[property].elementId).after(newElement_1);
-			// $("#wdg-edit-picture-head-next").css("left", $(ProjectEditor.elements[property].elementId).position().left);
-			// $("#wdg-edit-picture-head-next").css("top", $(ProjectEditor.elements[property].elementId).position().top);
-			// $("#wdg-edit-picture-head-next").css("z-index", "1");
-   //  		$("#wdg-edit-picture-head-next").css("position","absolute");
     		$("#wdg-edit-picture-head-next").css("display","none");
 
-			var newElement_1_input = '<input type="submit" id="wdg-edit-picture-head-next_update" value="Télécharger une image"/>';
+			var newElement_1_input = '<input type="input" id="wdg-edit-picture-head-next_update" value="Télécharger une image"/>';
 			$(ProjectEditor.elements[property].elementId).after(newElement_1_input);
 			$("#wdg-edit-picture-head-next_update").css("left", $(ProjectEditor.elements[property].elementId).position().left);
 			$("#wdg-edit-picture-head-next_update").css("top", $(ProjectEditor.elements[property].elementId).position().top);
@@ -240,22 +236,40 @@ var ProjectEditor = (function($) {
 			$("#wdg-edit-picture-head-next_valid").css("top", $(ProjectEditor.elements[property].elementId).position().top);
 			$("#wdg-edit-picture-head-next_valid").css("z-index", "2");
     		$("#wdg-edit-picture-head-next_valid").css("position","absolute");
-			
+
+
 			var newElement_3 = '<input type="submit" id="wdg-edit-picture-head-next_cancel" value="Annuler"/>';
 			$(ProjectEditor.elements[property].elementId).after(newElement_3);
 			$("#wdg-edit-picture-head-next_cancel").css("left", $(ProjectEditor.elements[property].elementId).position().left + $("#wdg-edit-picture-head-next_update").outerWidth() + $("#wdg-edit-picture-head-next_valid").outerWidth());
 			$("#wdg-edit-picture-head-next_cancel").css("top", $(ProjectEditor.elements[property].elementId).position().top);
 			$("#wdg-edit-picture-head-next_cancel").css("z-index", "2");
-    		$("#wdg-edit-picture-head-next_cancel").css("position","absolute")
+    		$("#wdg-edit-picture-head-next_cancel").css("position","absolute");
 			
+
+			var wait_button = '<input type="submit" id="wdg-validate-picture-wait"/>';
+			$(ProjectEditor.elements[property].elementId).after(wait_button);
+			$("#wdg-validate-picture-wait").addClass("wait-button");
+			$("#wdg-validate-picture-wait").unbind("click");
+			$("#wdg-validate-picture-wait").attr('style','display:none; ');
+			$("#wdg-validate-picture-wait").innerHTML = ""
+
+			// var newElement_4 = '<input type="checkbox" name ="wdg-edit-picture-head_blur" id="wdg-edit-picture-head_blur"></input>';
+			// $(ProjectEditor.elements[property].elementId).after(newElement_4);
+			// $("#wdg-edit-picture-head_blur").css("left", $(ProjectEditor.elements[property].elementId).position().left + $("#wdg-edit-picture-head-next_update").outerWidth() + $("#wdg-edit-picture-head-next_valid").outerWidth() +  $("#wdg-edit-picture-head-next_cancel").outerWidth());
+			// $("#wdg-edit-picture-head_blur").css("top", $(ProjectEditor.elements[property].elementId).position().top);
+			// $("#wdg-edit-picture-head_blur").css("z-index", "2");
+   //  		$("#wdg-edit-picture-head_blur").css("position","absolute");
+
+
 			$("#wdg-edit-picture-head-next_cancel").click(function() {
+				ProjectEditor.validateInputDone(true);
 				$("#wdg-edit-"+property).show();
 				$("#wdg-edit-picture-head-next").remove();
 				$("#wdg-edit-picture-head-next_update").remove();
 				$("#wdg-edit-picture-head-next_valid").remove();
 				$("#wdg-edit-picture-head-next_cancel").remove();
 				$("#project-banner-src").remove();
-				$('.project-banner-img').append('<img id="project-banner-src" url=('+url_image_start+')>');
+				$('.project-banner-img').append('<img id="project-banner-src" src="'+url_image_start+'">');
 				$(".project-banner-content").css("background", "none");
 			});
 			
@@ -264,23 +278,33 @@ var ProjectEditor = (function($) {
 			});
 
 			$("#wdg-edit-picture-head-next_valid").click(function() {
-		        var value = $("#wdg-edit-picture-head-next").val();
-		        $.ajax({
-						'type' : "POST",
-						'url' : ajax_object.ajax_url,
-		            data: {
-		          		'action': 'save_image_head',
-		          		'image_header' : value
-		            },
-		        }).done(function(result) {
-				ProjectEditor.validateInputDone(result);
-				});
-
-				$("#wdg-edit-"+property).show();
-				$("#wdg-edit-picture-head-next").remove();
+			
+				// var value = $('#wdg-edit-picture-head_blur').val();
+				// $('#image_header_blur').val(value);
+				
+  				var formData = new FormData($('form#upload-img-form')[0]);
+  				$("#wdg-edit-picture-head-next").remove();
 				$("#wdg-edit-picture-head-next_update").remove();
 				$("#wdg-edit-picture-head-next_valid").remove();
 				$("#wdg-edit-picture-head-next_cancel").remove();
+				$("#wdg-validate-picture-wait").attr('style','font-size: 0px; display:block; z-index:2001;');
+
+  				$.ajax({
+					'type' : "POST",
+					'url' :ajax_object.ajax_url,
+					'data': formData,
+		            'cache': false,
+		            'contentType': false,
+		            'processData': false
+				}).done(function(result) {
+					// console.log(result);
+					$("#wdg-edit-"+property).show();
+					$("#wdg-validate-picture-wait").attr('style','display:none;');
+					ProjectEditor.validateInputDone(result);
+
+				});
+
+
 			});
 
 			$(".input_image_home").change(function(){
@@ -305,7 +329,6 @@ var ProjectEditor = (function($) {
 				}
 			});
 			$("#wdg-edit-"+property).hide();
-
 		},
 	 
 			
