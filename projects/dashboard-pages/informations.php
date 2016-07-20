@@ -3,7 +3,10 @@
 function print_informations_page()
 {
     locate_template('country_list.php', true);
-    global $country_list, $campaign, $campaign_id, $WDGAuthor, $WDGUser_current;
+    global $country_list;
+    global $can_modify,
+           $campaign_id, $campaign, $post_campaign,
+           $WDGAuthor, $WDGUser_current;
 
     $user_is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
 
@@ -51,7 +54,7 @@ function print_informations_page()
 
             <form id="userinfo_form" data-campaignid="<?php echo $campaign->ID; ?>" class="wdg-forms">
                 <?php if ($user_is_author) ?><input type="hidden" id="input_is_project_holder" name="is_project_holder"
-                                                    value="1"><?php ; ?>
+                                                    value="1"/><?php ; ?>
                 <ul id="userinfo_form_errors" class="errors">
 
                 </ul>
@@ -112,10 +115,12 @@ function print_informations_page()
 
                 <label for="update_birthplace"
                        class="standard-label"><?php _e('Ville de naissance', 'yproject'); ?></label>
-    <?php if ($user_is_author) { ?>
-                <input type="text" name="update_birthplace" id="update_birthplace"
-                       value="<?php echo $WDGAuthor->wp_user->get('user_birthplace'); ?>"/>
-<?php } else { echo $WDGAuthor->wp_user->get('user_birthplace'); } ?>
+                <?php if ($user_is_author) { ?>
+                    <input type="text" name="update_birthplace" id="update_birthplace"
+                           value="<?php echo $WDGAuthor->wp_user->get('user_birthplace'); ?>"/>
+                <?php } else {
+                    echo $WDGAuthor->wp_user->get('user_birthplace');
+                } ?>
                 <br/>
 
                 <label for="update_nationality"
@@ -134,7 +139,9 @@ function print_informations_page()
                 <?php if ($user_is_author) { ?>
                     <input type="text" name="update_address" id="update_address"
                            value="<?php echo $WDGAuthor->wp_user->get('user_address'); ?>"/>
-                <?php } else { echo $WDGAuthor->wp_user->get('user_address'); } ?>
+                <?php } else {
+                    echo $WDGAuthor->wp_user->get('user_address');
+                } ?>
                 <br/>
 
 
@@ -142,7 +149,9 @@ function print_informations_page()
                 <?php if ($user_is_author) { ?>
                     <input type="text" name="update_postal_code" id="update_postal_code"
                            value="<?php echo $WDGAuthor->wp_user->get('user_postal_code'); ?>"/>
-                <?php } else { echo $WDGAuthor->wp_user->get('user_postal_code'); } ?>
+                <?php } else {
+                    echo $WDGAuthor->wp_user->get('user_postal_code');
+                } ?>
                 <br/>
 
 
@@ -150,7 +159,9 @@ function print_informations_page()
                 <?php if ($user_is_author) { ?>
                     <input type="text" name="update_city" id="update_city"
                            value="<?php echo $WDGAuthor->wp_user->get('user_city'); ?>"/>
-                <?php } else { echo $WDGAuthor->wp_user->get('user_city'); } ?>
+                <?php } else {
+                    echo $WDGAuthor->wp_user->get('user_city');
+                } ?>
                 <br/>
 
 
@@ -158,7 +169,9 @@ function print_informations_page()
                 <?php if ($user_is_author) { ?>
                     <input type="text" name="update_country" id="update_country"
                            value="<?php echo $WDGAuthor->wp_user->get('user_country'); ?>"/>
-                <?php } else { echo $WDGAuthor->wp_user->get('user_country'); } ?>
+                <?php } else {
+                    echo $WDGAuthor->wp_user->get('user_country');
+                } ?>
                 <br/>
 
 
@@ -167,7 +180,9 @@ function print_informations_page()
                 <?php if ($user_is_author) { ?>
                     <input type="text" name="update_mobile_phone" id="update_mobile_phone"
                            value="<?php echo $WDGAuthor->wp_user->get('user_mobile_phone'); ?>"/>
-                <?php } else { echo $WDGAuthor->wp_user->get('user_mobile_phone'); } ?>
+                <?php } else {
+                    echo $WDGAuthor->wp_user->get('user_mobile_phone');
+                } ?>
                 <br/><br/>
 
 
@@ -190,9 +205,9 @@ function print_informations_page()
             $campaign_categories = get_the_terms($campaign_id, 'download_category');
             $selected_category = 0;
             $selected_activity = 0;
-            $terms_category = get_terms( 'download_category', array('slug' => 'categories', 'hide_empty' => false));
+            $terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
             $term_category_id = $terms_category[0]->term_id;
-            $terms_activity = get_terms( 'download_category', array('slug' => 'activities', 'hide_empty' => false));
+            $terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
             $term_activity_id = $terms_activity[0]->term_id;
             if ($campaign_categories) {
                 foreach ($campaign_categories as $campaign_category) {
@@ -205,33 +220,41 @@ function print_informations_page()
                 }
             }
             ?>
-            <form action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
+            <form id="projectinfo_form" action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
+                <ul id="projectinfo_form_errors" class="errors">
+
+                </ul>
+
                 <label for="project-name">Nom du projet :</label>
-                <input type="text" name="project-name" value="<?php echo $post_campaign->post_title; ?>" /><br />
+                <input type="text" name="project-name" id="update_project_name"
+                       value="<?php echo $post_campaign->post_title; ?>"/><br/>
 
                 <label for="categories">Cat&eacute;gorie :</label>
-                <?php wp_dropdown_categories( array(
-                    'hide_empty'  => 0,
-                    'taxonomy'    => 'download_category',
-                    'selected'    => $selected_category,
-                    'echo'        => 1,
-                    'child_of'    => $term_category_id,
-                    'name'        => 'categories'
-                ) ); ?><br />
+                <?php wp_dropdown_categories(array(
+                    'hide_empty' => 0,
+                    'taxonomy' => 'download_category',
+                    'selected' => $selected_category,
+                    'echo' => 1,
+                    'child_of' => $term_category_id,
+                    'name' => 'categories',
+                    'id' => 'update_project_category'
+                )); ?><br/>
 
-                <a id="picture-head"></a><a id="video-zone"></a><a id="project-owner"></a><?php /* ancres déplacées pour cause de menu... */ ?>
-                <label for="activities">Secteur d&apos;activit&eacute; :</label>
-                <?php wp_dropdown_categories( array(
-                    'hide_empty'  => 0,
-                    'taxonomy'    => 'download_category',
-                    'selected'    => $selected_activity,
-                    'echo'        => 1,
-                    'child_of'    => $term_activity_id,
-                    'name'        => 'activities'
-                ) ); ?><br />
+                <a id="picture-head"></a><a id="video-zone"></a><a
+                    id="project-owner"></a><?php /* ancres déplacées pour cause de menu... */ ?>
+                <label for="activities">Secteur d&apos;activit&eacute;:</label>
+                <?php wp_dropdown_categories(array(
+                    'hide_empty' => 0,
+                    'taxonomy' => 'download_category',
+                    'selected' => $selected_activity,
+                    'echo' => 1,
+                    'child_of' => $term_activity_id,
+                    'name' => 'activities',
+                    'id' => 'update_project_activity'
+                )); ?><br/>
 
                 <label for="project-location">Localisation :</label>
-                <select name="project-location">
+                <select name="project-location" id="update_project_location">
                     <?php
                     $locations = atcf_get_locations();
                     $location_str = '';
@@ -241,26 +264,65 @@ function print_informations_page()
                     }
                     echo $location_str;
                     ?>
-                </select><br />
-
-
+                </select><br/>
+                <p id="projectinfo_form_button" class="align-center">
+                    <input type="submit" value="<?php _e("Enregistrer", 'yproject'); ?>" class="button"/>
+                </p>
+                <p id="projectinfo_form_loading" class="align-center" hidden>
+                    <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement"/>
+                </p>
             </form>
         </div>
 
         <div class="tab-content" id="tab-funding">
-            <form action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
-                <label for="fundingduration">Dur&eacute;e du financement :</label>
-                <input type="text" name="fundingduration" value="<?php echo $campaign->funding_duration(); ?>"> ann&eacute;es.<br />
+            <ul id="projectfunding_form_errors" class="errors">
 
-                <label>Pourcentage de reversement estim&eacute; : </label>
-                <input type="text" name="fundingduration" value="<?php echo $campaign->roi_percent_estimated(); ?>"> ann&eacute;es.<br />
+            </ul>
+            <form action="" id="projectfunding_form" method="POST" enctype="multipart/form-data" class="wdg-forms">
+                <label>Montant demand&eacute; :</label>
+                Minimum : <input type="text" name="minimum_goal" id="update_minimum_goal" size="10"
+                                 value="<?php echo $campaign->minimum_goal(); ?>"/> &euro; (Min. 500&euro;) -
+                Maximum : <input type="text" name="maximum_goal" id="update_maximum_goal" size="10"
+                                 value="<?php echo $campaign->goal(false); ?>"/> &euro; <br/>
+
+                <label for="fundingduration">Dur&eacute;e du financement :</label>
+                <input type="number" min="1" max="100" name="fundingduration" id="update_funding_duration" value="<?php echo $campaign->funding_duration(); ?>"/> ann&eacute;es.<br/>
+
+                <label for="roi_percent_estimated">Pourcentage de reversement estim&eacute; : </label>
+                <input type="number" min="0" max="100" step="0.01" id="update_roi_percent_estimated" name="roi_percent_estimated" value="<?php echo $campaign->roi_percent_estimated(); ?>"/>%<br/><br/>
+
+                <label>Première date de versement :</label>
+                <?php
+                $fp_date = $campaign->first_payment_date();
+                $fp_d = mysql2date( 'd', $fp_date, false );
+                $fp_m = mysql2date( 'm', $fp_date, false );
+                $fp_y = mysql2date( 'Y', $fp_date, false );
+                ?>
+                <input type="text" name="first-payment-d" id="first-payment-d" value="<?php echo esc_attr( $fp_d ); ?>" size="2" maxlength="2" autocomplete="off" />
+                <select name="first-payment-m" id="first-payment-m">
+                    <?php for ( $i = 1; $i < 13; $i = $i + 1 ) : $monthnum = zeroise($i, 2); ?>
+                        <option value="<?php echo $monthnum; ?>" <?php selected( $monthnum, $fp_m ); ?>>
+                            <?php printf(_e($months[$i-1])); ?>
+                        </option>
+                    <?php endfor; ?>
+                </select>
+                <input type="text" name="first-payment-y" id="first-payment-y" value="<?php echo esc_attr( $fp_y ); ?>" size="4" maxlength="4" autocomplete="off" />
+                <br/>
 
                 <label>CA pr&eacute;visionnel</label>
+                <ul id="estimated-turnover">
+                    <?php foreach (($campaign->estimated_turnover()) as $year => $turnover) : ?>
+                        <li><label>Année <span class="year"><?php echo $year?></span></label><input type="text" value="<?php echo $turnover?>"/>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
 
-                <label>Montant demand&eacute; :</label>
-                Minimum : <input type="text" name="minimum_goal" size="10" value="<?php echo $campaign->minimum_goal(); ?>"> &euro; (Min. 500&euro;) -
-                Maximum : <input type="text" name="maximum_goal" size="10" value="<?php echo $campaign->goal(false); ?>"> &euro;
-
+                <p id="projectfunding_form_button" class="align-center">
+                    <input type="submit" value="<?php _e("Enregistrer", 'yproject'); ?>" class="button"/>
+                </p>
+                <p id="projectfunding_form_loading" class="align-center" hidden>
+                    <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement"/>
+                </p>
             </form>
         </div>
 

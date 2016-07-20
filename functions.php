@@ -77,7 +77,7 @@ function yproject_enqueue_script(){
 	wp_enqueue_script( 'sharer-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/sharer.min.js', array(), true, true);
 //	wp_enqueue_script( 'wdg-ux-helper', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-ux-helper.js', array('wdg-script'));
 
-	//Ne charge les scripts de tableau que si tableau de bord
+	//Fichiers du tableau de bord (CSS, Fonctions Ajax et scripts de Datatable)
 	if($post->post_name=='tableau-de-bord' || $is_admin_page){
 		wp_enqueue_style( 'dashboard-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dashboard.css', null, $current_version, 'all');
 

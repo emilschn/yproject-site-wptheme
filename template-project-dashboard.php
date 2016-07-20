@@ -38,7 +38,9 @@ WDGFormProjects::form_cancel_payment();
     <div class="padder">
 <?php
 if ($can_modify){
-    global $can_modify, $campaign_id, $WDGAuthor, $WDGUser_current;
+    global $can_modify,
+           $campaign_id, $campaign, $post_campaign,
+           $WDGAuthor, $WDGUser_current;
 
     $post_campaign = get_post($campaign_id);
     $WDGAuthor = new WDGUser(get_userdata($post_campaign->post_author));
