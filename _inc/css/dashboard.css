@@ -105,6 +105,28 @@
     display:none;
 }
 
+/*******************************************************************************
+* Page resume
+*******************************************************************************/
+#page-resume #block-summary .current-step {
+    text-align:center;
+    margin: 10px 0px;
+}
+#page-resume #block-summary .current-step span {
+    opacity:0.5;
+    margin: 0px 24px;
+    display: inline-block;
+    min-width: 100px;
+}
+#page-resume #block-summary #current {
+    opacity: 1;
+    color: #EA4F51;
+    font-weight: bold;
+}
+
+/*******************************************************************************
+* Page informations
+*******************************************************************************/
 #page-informations .bloc-grid{
     text-align: center;
 }

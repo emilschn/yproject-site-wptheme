@@ -49,6 +49,7 @@ if ($can_modify){
     $status = $campaign->campaign_status();
 
     locate_template( array("projects/dashboard-pages/informations.php"), true );
+    locate_template( array("projects/dashboard-pages/resume.php"), true );
 
     function is_preparing($status){
         return $status==ATCF_Campaign::$campaign_status_preparing;
@@ -63,7 +64,7 @@ if ($can_modify){
                     <div  class="title"><?php echo $post_campaign->post_title; ?></div>
                     <ul>
                         <li>
-                            <a href="#page-informations">Résumé</a>
+                            <a href="#page-resume">Résumé</a>
                         </li>
                         <li>
                             <a <?php if (!is_preparing($status)) {print('href="'.get_permalink($campaign_id).'" ');}
@@ -94,8 +95,8 @@ if ($can_modify){
 
             <div id="ndashboard-content">
                 <div class="content-padding">
-                    <div class="page-dashboard" id="page-resume">1</div>
-                    <div class="page-dashboard" id="page-presentation">2</div>
+                    <div class="page-dashboard" id="page-resume"><?php print_resume_page() ?></div>
+                    <div class="page-dashboard" id="page-presentation"></div>
                     <div class="page-dashboard" id="page-informations"><?php print_informations_page() ?></div>
                     <div class="page-dashboard" id="page-wallet">4</div>
                     <div class="page-dashboard" id="page-campaign">5</div>

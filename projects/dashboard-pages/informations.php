@@ -4,8 +4,7 @@ function print_informations_page()
 {
     locate_template('country_list.php', true);
     global $country_list;
-    global $can_modify,
-           $campaign_id, $campaign, $post_campaign,
+    global $campaign_id, $campaign, $post_campaign,
            $WDGAuthor, $WDGUser_current;
 
     $user_is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
@@ -196,7 +195,47 @@ function print_informations_page()
         </div>
 
         <div class="tab-content" id="tab-organization">
-            Orga
+            <form id="orgainfo_form" class="wdg-forms">
+                <?php
+                // Gestion des organisations
+                $str_organisations = '';
+                global $current_user;
+                $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+                $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+                if (isset($current_organisations) && count($current_organisations) > 0) {
+                    $current_organisation = $current_organisations[0];
+                }
+                $api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
+                $organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
+                if ($organisations_list) {
+                    foreach ($organisations_list as $organisation_item) {
+                        $selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
+                        $str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
+                    }
+                }
+                ?>
+                <label for="project-organisation">Organisation :</label>
+                <?php if ($str_organisations != ''): ?>
+                    <select name="project-organisation">
+                        <option value=""></option>
+                        <?php echo $str_organisations; ?>
+                    </select>
+                    <?php if ($current_organisation!=null){
+                        $page_edit_orga = get_page_by_path('editer-une-organisation');
+                        $edit_org = '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
+                        $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
+                        echo $edit_org;
+                    } ?>
+
+                <?php else: ?>
+                    <?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
+                    <input type="hidden" name="project-organisation" value="" />
+
+                <?php endif; ?>
+
+                <input type="submit" name="new_orga" value="Cr&eacute;er une organisation" class="small-margin button" />
+                <br />
+            </form>
         </div>
 
         <div class="tab-content" id="tab-project">
@@ -327,7 +366,26 @@ function print_informations_page()
         </div>
 
         <div class="tab-content" id="tab-communication">
-            Communication
+            <ul id="communication_form_errors" class="errors">
+
+            </ul>
+            <form action="" id="communication_form" method="POST" enctype="multipart/form-data" class="wdg-forms">
+                <label for="update_website">Site web</label>
+                <input type="text" name="update_website" id="update_website"
+                       value="<?php echo $campaign->campaign_external_website()?>"/><br/>
+                <label for="update_facebook">Page Facebook</label>
+                www.facebook.com/<input type="text" name="update_facebook" id="update_facebook" placeholder="PageFacebook"
+                       value="<?php echo $campaign->facebook_name()?>"/><br/>
+                <label for="update_twitter">Twitter</label>
+                @<input type="text" name="update_twitter" id="update_twitter" placeholder="CompteTwitter"
+                       value="<?php echo $campaign->twitter_name()?>"/><br/>
+                <p id="communication_form_button" class="align-center">
+                    <input type="submit" value="<?php _e("Enregistrer", 'yproject'); ?>" class="button"/>
+                </p>
+                <p id="communication_form_loading" class="align-center" hidden>
+                    <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement"/>
+                </p>
+            </form>
         </div>
 
         <div class="tab-content" id="tab-contract">
