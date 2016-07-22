@@ -9,6 +9,19 @@ function print_informations_page()
 
     $user_is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
 
+    function is_necessary_now($critical_status){
+        global $campaign;
+        $priorities = ATCF_Campaign::get_campaign_status_priority();
+
+        return($priorities[$campaign->campaign_status()] >= $priorities[$critical_status]);
+    }
+
+    function necessary_class($critical_status){
+        if (is_necessary_now($critical_status)){
+            echo ' necessary ';
+        }
+    }
+
     ?>
     <div class="bloc-grid">
         <div class="display-bloc" data-tab-target="tab-user-infos">
@@ -196,6 +209,10 @@ function print_informations_page()
 
         <div class="tab-content" id="tab-organization">
             <form id="orgainfo_form" class="wdg-forms">
+                <ul id="orgainfo_form_errors" class="errors">
+
+                </ul>
+
                 <?php
                 // Gestion des organisations
                 $str_organisations = '';
@@ -216,13 +233,15 @@ function print_informations_page()
                 ?>
                 <label for="project-organisation">Organisation :</label>
                 <?php if ($str_organisations != ''): ?>
-                    <select name="project-organisation">
+                    <select name="project-organisation" id="update_project_organisation">
                         <option value=""></option>
                         <?php echo $str_organisations; ?>
                     </select>
                     <?php if ($current_organisation!=null){
                         $page_edit_orga = get_page_by_path('editer-une-organisation');
-                        $edit_org = '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
+                        $edit_org = '<a id="edit-orga-button" class="button" 
+                            data-url-edit="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.'" 
+                            href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
                         $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
                         echo $edit_org;
                     } ?>
@@ -230,11 +249,18 @@ function print_informations_page()
                 <?php else: ?>
                     <?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
                     <input type="hidden" name="project-organisation" value="" />
+                <?php endif;
 
-                <?php endif; ?>
+                $page_new_orga = get_page_by_path('creer-une-organisation'); ?>
+                <a href="<?php echo get_permalink($page_new_orga->ID); ?>" class="button">Cr&eacute;er une organisation</a>
 
-                <input type="submit" name="new_orga" value="Cr&eacute;er une organisation" class="small-margin button" />
                 <br />
+                <p id="orgainfo_form_button" class="align-center">
+                    <input type="submit" value="<?php _e("Enregistrer", 'yproject'); ?>" class="button"/>
+                </p>
+                <p id="orgainfo_form_loading" class="align-center" hidden>
+                    <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement"/>
+                </p>
             </form>
         </div>
 
@@ -266,7 +292,23 @@ function print_informations_page()
 
                 <label for="project-name">Nom du projet :</label>
                 <input type="text" name="project-name" id="update_project_name"
-                       value="<?php echo $post_campaign->post_title; ?>"/><br/>
+                       value="<?php echo $post_campaign->post_title; ?>"/>
+                <ul></ul><br/>
+
+                <label for"resume">R&eacute;sum&eacute; du projet <i class="infobutton" title="Décrivez-nous votre projet. Les informations sont traitées de façon confidentielles"></i></label>
+
+                <?php
+                wp_editor( $campaign->backoffice_summary(), 'update_backoffice_summary',
+                    array(
+                        'media_buttons' => true,
+                        'quicktags'     => false,
+                        'tinymce'       => array(
+                            'plugins'				=> 'paste, wplink, textcolor',
+                            'paste_remove_styles'   => true
+                        )
+                    )
+                );
+                ?><br/>
 
                 <label for="categories">Cat&eacute;gorie :</label>
                 <?php wp_dropdown_categories(array(

@@ -62,6 +62,17 @@ var WDGProjectDashboard = (function ($) {
                 }
             }
 
+            //Infobulles
+            $('#ndashboard .infobutton[title!=""]').qtip({
+                position: {
+                    my: 'bottom center',
+                    at: 'top center',
+                },
+                style: {
+                    classes: 'qtip-tipsy qtip-shadow'
+                }
+            });
+
             //Onglets information
             if ($(".bloc-grid").length > 0) {
                 $(".bloc-grid .display-bloc").click(function () {
@@ -86,6 +97,8 @@ var WDGProjectDashboard = (function ($) {
                 $("#"+form_button_id).hide();
                 $("#"+form_loading_id).show();
                 $("#"+form_id+" input, #"+form_id+" select").prop('disabled', true);
+
+                data_to_update.campaign_id= $("#userinfo_form").data("campaignid");
                 $.ajax({
                     'type': "POST",
                     'url': ajax_object.ajax_url,
@@ -111,7 +124,6 @@ var WDGProjectDashboard = (function ($) {
                     e.preventDefault();
                     var data_to_update = {
                         'action': 'save_user_infos',
-                        'campaign_id': $("#userinfo_form").data("campaignid"),
                         'invest_type': $("#invest_type").val(),
                         'gender': $("#update_gender").val(),
                         'firstname': $("#update_firstname").val(),
@@ -132,14 +144,42 @@ var WDGProjectDashboard = (function ($) {
                 });
             }
 
+            //Infos organisation
+            if ($("#tab-organization").length > 0) {
+                $("#orgainfo_form").submit(function (e) {
+                    e.preventDefault();
+                    var data_to_update = {
+                        'action': 'save_project_organisation',
+                        'project-organisation': $("#update_project_organisation").val()
+                    }
+                    update_tab(data_to_update, "orgainfo_form", "orgainfo_form_button", "orgainfo_form_loading", "orgainfo_form_errors");
+
+                });
+
+                $("#update_project_organisation").change(function(e){
+                    var newval = $("#update_project_organisation").val();
+
+                    if(newval!=''){
+                        $("#edit-orga-button").show();
+                        var newname = $("#update_project_organisation").find('option:selected').text();
+                        $("#edit-orga-button").attr("href",$("#edit-orga-button").data("url-edit")+newval);
+
+                        $("#edit-orga-button").text("Editer "+newname);
+                    } else {
+                        $("#edit-orga-button").hide();
+                    }
+
+                });
+            }
+
             //Infos projet
             if ($("#tab-project").length > 0) {
                 $("#projectinfo_form").submit(function (e) {
                     e.preventDefault();
                     var data_to_update = {
                         'action': 'save_project_infos',
-                        'campaign_id': $("#userinfo_form").data("campaignid"),
                         'project_name': $("#update_project_name").val(),
+                        'backoffice_summary' : tinyMCE.get('update_backoffice_summary').getContent(),
                         'project_category': $("#update_project_category").val(),
                         'project_activity': $("#update_project_activity").val(),
                         'project_location': $("#update_project_location").val()
@@ -196,7 +236,6 @@ var WDGProjectDashboard = (function ($) {
                     });
                     var data_to_update = {
                         'action': 'save_project_funding',
-                        'campaign_id': $("#userinfo_form").data("campaignid"),
                         'minimum_goal': $("#update_minimum_goal").val(),
                         'maximum_goal': $("#update_maximum_goal").val(),
                         'funding_duration': $("#update_funding_duration").val(),
@@ -215,7 +254,6 @@ var WDGProjectDashboard = (function ($) {
                     e.preventDefault();
                     var data_to_update = {
                         'action': 'save_project_communication',
-                        'campaign_id': $("#userinfo_form").data("campaignid"),
                         'website': $("#update_website").val(),
                         'facebook': $("#update_facebook").val(),
                         'twitter': $("#update_twitter").val()

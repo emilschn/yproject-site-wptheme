@@ -8,6 +8,32 @@
     font-size: 14px;
 }
 
+#ndashboard .infobutton{
+    cursor: help;
+    border-radius: 10px;
+    background-color: grey;
+    width: 18px;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    height: 18px;
+    margin: 0px 10px;
+}
+
+#ndashboard .infobutton:hover{
+    background-color:#2B2C2C;
+}
+
+#ndashboard .infobutton::before{
+    content : '?'
+}
+
+
+/*******************************************************************************
+* NAVIGATION BAR
+*******************************************************************************/
 #ndashboard-navbar{
     display: table-cell;
     vertical-align: top;
@@ -84,7 +110,6 @@
 #ndashboard-navbar li a.active{
     background-color:#EA4F51;
     color:white;
-    font-weight: bold;
 }
 
 #ndashboard-navbar li a.disabled{
