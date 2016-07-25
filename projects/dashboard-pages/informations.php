@@ -22,6 +22,15 @@ function print_informations_page()
         }
     }
 
+    function create_text_field($id, $label, $initial_value, $only_for_author = false){
+        $text_field = '<label for="'.$id.'">'.$label.'</label>'.
+            '<input type="text"
+            name="'.$id.'" 
+            id="update_'.$id.'"
+            value="'.$initial_value.'"/><br/>';
+        print $text_field;
+    }
+
     ?>
     <div class="bloc-grid">
         <div class="display-bloc" data-tab-target="tab-user-infos">
@@ -97,32 +106,22 @@ function print_informations_page()
                 <?php } else echo $WDGAuthor->wp_user->user_lastname; ?>
                 <br/>
 
-                <label for="update_birthday_day"
-                       class="standard-label"><?php _e('Date de naissance', 'yproject'); ?></label>
-                <select name="update_birthday_day"
-                        id="update_birthday_day" <?php if (!$user_is_author) echo "disabled"; ?>>
-                    <?php for ($i = 1; $i <= 31; $i++) { ?>
-                        <option
-                            value="<?php echo $i; ?>"<?php if ($WDGAuthor->wp_user->get('user_birthday_day') == $i) echo ' selected="selected"'; ?>><?php echo $i; ?></option>
-                    <?php } ?>
-                </select>
-                <select name="update_birthday_month"
-                        id="update_birthday_month" <?php if (!$user_is_author) echo "disabled"; ?>>
-                    <?php
-                    $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-                    for ($i = 1; $i <= 12; $i++) { ?>
-                        <option
-                            value="<?php echo $i; ?>"<?php if ($WDGAuthor->wp_user->get('user_birthday_month') == $i) echo ' selected="selected"'; ?>><?php _e($months[$i - 1]); ?></option>
-                    <?php }
-                    ?>
-                </select>
-                <select name="update_birthday_year"
-                        id="update_birthday_year" <?php if (!$user_is_author) echo "disabled"; ?>>
-                    <?php for ($i = date("Y"); $i >= 1900; $i--) { ?>
-                        <option
-                            value="<?php echo $i; ?>"<?php if ($WDGAuthor->wp_user->get('user_birthday_year') == $i) echo ' selected="selected"'; ?>><?php echo $i; ?></option>
-                    <?php } ?>
-                </select>
+                <label for="birthday"><?php _e('Date de naissance', 'yproject'); ?></label>
+                <?php
+                $bd = new DateTime();
+
+                if(!empty($WDGAuthor->wp_user->get('user_birthday_year'))){
+                    $bd->setDate(intval($WDGAuthor->wp_user->get('user_birthday_year')),
+                        intval($WDGAuthor->wp_user->get('user_birthday_month')),
+                        intval($WDGAuthor->wp_user->get('user_birthday_day')));
+                }
+
+                if ($user_is_author) { ?>
+                    <input type="text" name="update_birthday" id="update_birthday"  class="adddatepicker"
+                           value="<?php echo $bd->format('Y-m-d') ?>"/>
+                <?php } else {
+                    echo $bd->format('Y-m-d');
+                } ?>
                 <br/>
 
                 <label for="update_birthplace"
@@ -290,10 +289,7 @@ function print_informations_page()
 
                 </ul>
 
-                <label for="project-name">Nom du projet :</label>
-                <input type="text" name="project-name" id="update_project_name"
-                       value="<?php echo $post_campaign->post_title; ?>"/>
-                <ul></ul><br/>
+                <?php create_text_field("project_name", "Nom du projet", $post_campaign->post_title) ?>
 
                 <label for"resume">R&eacute;sum&eacute; du projet <i class="infobutton" title="Décrivez-nous votre projet. Les informations sont traitées de façon confidentielles"></i></label>
 
@@ -372,22 +368,9 @@ function print_informations_page()
                 <label for="roi_percent_estimated">Pourcentage de reversement estim&eacute; : </label>
                 <input type="number" min="0" max="100" step="0.01" id="update_roi_percent_estimated" name="roi_percent_estimated" value="<?php echo $campaign->roi_percent_estimated(); ?>"/>%<br/><br/>
 
-                <label>Première date de versement :</label>
-                <?php
-                $fp_date = $campaign->first_payment_date();
-                $fp_d = mysql2date( 'd', $fp_date, false );
-                $fp_m = mysql2date( 'm', $fp_date, false );
-                $fp_y = mysql2date( 'Y', $fp_date, false );
-                ?>
-                <input type="text" name="first-payment-d" id="first-payment-d" value="<?php echo esc_attr( $fp_d ); ?>" size="2" maxlength="2" autocomplete="off" />
-                <select name="first-payment-m" id="first-payment-m">
-                    <?php for ( $i = 1; $i < 13; $i = $i + 1 ) : $monthnum = zeroise($i, 2); ?>
-                        <option value="<?php echo $monthnum; ?>" <?php selected( $monthnum, $fp_m ); ?>>
-                            <?php printf(_e($months[$i-1])); ?>
-                        </option>
-                    <?php endfor; ?>
-                </select>
-                <input type="text" name="first-payment-y" id="first-payment-y" value="<?php echo esc_attr( $fp_y ); ?>" size="4" maxlength="4" autocomplete="off" />
+                <label for="firstpayment">Première date de versement :</label>
+                <input type="text" name="firstpayment" id="update_first_payment" class="adddatepicker"
+                       value="<?php echo mysql2date("Y-m-d",$campaign->first_payment_date(),false); ?>" size="2" maxlength="2" autocomplete="off" />
                 <br/>
 
                 <label>CA pr&eacute;visionnel</label>

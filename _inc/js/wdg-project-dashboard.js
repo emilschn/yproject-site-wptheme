@@ -53,10 +53,15 @@ var WDGProjectDashboard = (function ($) {
                     history.pushState(null, null, $(this).attr("href"));
                     return false; //Empêche le défilement automatique lorsqu'on clique sur un lien avec un #
                 });
+
                 var hash = window.location.hash
                 var tabsaved = $('#ndashboard-navbar li a[href="'+window.location.hash+'"]')
                 if(hash != '' && !tabsaved.hasClass("disabled")){
+                    window.scrollTo(0, 0);
                     tabsaved.trigger("click");
+                    setTimeout(function() {
+                        window.scrollTo(0, 0);
+                    }, 1);
                 } else {
                     $("#ndashboard-navbar li a:not(.disabled)").first().trigger("click");
                 }
@@ -78,13 +83,13 @@ var WDGProjectDashboard = (function ($) {
                 $(".bloc-grid .display-bloc").click(function () {
                     if($(this).hasClass("active")){
                         $(".bloc-grid .display-bloc").removeClass("active");
-                        $("#tab-container .tab-content").hide();
+                        $("#tab-container .tab-content").slideUp();
 
                     } else {
                         $(".bloc-grid .display-bloc").removeClass("active");
-                        $("#tab-container .tab-content").hide();
+                        $("#tab-container .tab-content").slideUp();
                         $(this).addClass("active");
-                        $("#tab-container #" + $(this).data("tab-target")).show();
+                        $("#tab-container #" + $(this).data("tab-target")).slideDown();
                     }
                 });
 
@@ -118,19 +123,28 @@ var WDGProjectDashboard = (function ($) {
                 });
             };
 
+            $("input.adddatepicker").datepicker({
+                dateFormat: "yy-mm-dd",
+                regional: "fr",
+                changeMonth: true,
+                changeYear: true
+            });
+
             //Infos personnelles
             if ($("#tab-user-infos").length > 0) {
                 $("#userinfo_form").submit(function (e) {
                     e.preventDefault();
+                    var birthday = Date.parse($("#update_birthday").val());
+
                     var data_to_update = {
                         'action': 'save_user_infos',
                         'invest_type': $("#invest_type").val(),
                         'gender': $("#update_gender").val(),
                         'firstname': $("#update_firstname").val(),
                         'lastname': $("#update_lastname").val(),
-                        'birthday_day': $("#update_birthday_day").val(),
-                        'birthday_month': $("#update_birthday_month").val(),
-                        'birthday_year': $("#update_birthday_year").val(),
+                        'birthday_day': birthday.getDate(),
+                        'birthday_month': birthday.getMonth()+1,
+                        'birthday_year': birthday.getFullYear(),
                         'birthplace': $("#update_birthplace").val(),
                         'nationality': $("#update_nationality").val(),
                         'address': $("#update_address").val(),
@@ -191,14 +205,14 @@ var WDGProjectDashboard = (function ($) {
             //Infos financement
             if ($("#tab-funding").length > 0) {
                 var nb_years_li_existing = ($("#estimated-turnover li").length);
-
+/*
                 //Etiquettes de numéros d'années pour le CA prévisionnel
                 $("#first-payment-y").change(function(){
                     var start_year = $("#first-payment-y").val();
                     $("#estimated-turnover li .year").each(function(index){
                         $(this).html((parseInt(start_year)+index));
                     });
-                });
+                });*/
 
                 //Cases pour le CA prévisionnel
                 $("#update_funding_duration").change(function() {
@@ -240,7 +254,7 @@ var WDGProjectDashboard = (function ($) {
                         'maximum_goal': $("#update_maximum_goal").val(),
                         'funding_duration': $("#update_funding_duration").val(),
                         'roi_percent_estimated': $("#update_roi_percent_estimated").val(),
-                        'first_payment_date': $("#first-payment-y").val()+"-"+($("#first-payment-m").prop("value"))+"-"+$("#first-payment-d").val(),
+                        'first_payment_date': $("#update_first_payment").val(),
                         'list_turnover': JSON.stringify(list_turnover)
                     }
                     update_tab(data_to_update, "projectfunding_form", "projectfunding_form_button", "projectfunding_form_loading", "projectfunding_form_errors");
