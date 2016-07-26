@@ -8,6 +8,14 @@
  */
 class DashboardUtility
 {
+    public static function get_infobutton($hovertext){
+        if(!empty($hovertext)) {
+            return '<i class="fa fa-question-circle infobutton" title="' . translate($hovertext, 'yproject') . '"></i>';
+        } else {
+            return "";
+        }
+    }
+
     /**
      * Crée un champ de formulaire texte standardisé
      * @param $id Id du champ de formulaire
@@ -20,9 +28,7 @@ class DashboardUtility
      */
     public static function create_text_field($id, $label, $initial_value, $infobubble="", $editable = true, $prefix="", $placeholder=""){
         $text_field = '<div class="field"><label for="'.$id.'">'.translate($label,'yproject');
-        if(!empty($infobubble)){
-            $text_field .= ' <i class="infobutton" title="'.translate($infobubble,'yproject').'"></i>';
-        }
+        $text_field .= DashboardUtility::get_infobutton($infobubble);
         $text_field .= '</label>';
         if($editable){
             $text_field .= $prefix.'<input type="text"
@@ -31,7 +37,7 @@ class DashboardUtility
             placeholder="'.$placeholder.'"
             value="'.$initial_value.'"/>';
         } else {
-            $text_field .= $initial_value;
+            $text_field .= '<span>'.$initial_value.'</span>';
         }
         $text_field .= '</div>';
         print($text_field);
@@ -51,9 +57,7 @@ class DashboardUtility
      */
     public static function create_number_field($id, $label, $initial_value, $min=null, $max=null, $step=1, $unit="", $infobubble="", $editable = true){
         $text_field = '<div class="field"><label for="'.$id.'">'.translate($label,'yproject');
-        if(!empty($infobubble)){
-            $text_field .= ' <i class="infobutton" title="'.translate($infobubble,'yproject').'"></i>';
-        }
+        $text_field .= DashboardUtility::get_infobutton($infobubble);
         $text_field .= '</label><span class="field-value">';
         if($editable){
             $text_field .= '<input type="number"
@@ -65,7 +69,7 @@ class DashboardUtility
             if(!empty($min)){$text_field .= 'max="'.$max.'"';}
             $text_field .='/> '.$unit;
         } else {
-            $text_field .= $initial_value;
+            $text_field .= '<span>'.$initial_value.'</span>';;
         }
         $text_field .= '</span></div>';
         print($text_field);
@@ -82,9 +86,7 @@ class DashboardUtility
      */
     public static function create_wpeditor_field($id, $label, $initial_value, $infobubble="", $editable = true){
         $text_field = '<div class="field"><label for="'.$id.'">'.translate($label,'yproject');
-        if(!empty($infobubble)){
-            $text_field .= ' <i class="infobutton" title="'.translate($infobubble,'yproject').'"></i>';
-        }
+        $text_field .= DashboardUtility::get_infobutton($infobubble);
         $text_field .= '</label><br/>';
         print($text_field);
         if($editable){
@@ -99,7 +101,7 @@ class DashboardUtility
                 )
             );
         } else {
-            echo $initial_value;
+            echo '<span>'.$initial_value.'</span>';
         }
         echo '</div>';
     }
@@ -114,9 +116,7 @@ class DashboardUtility
      */
     public static function create_date_field($id, $label, $initial_value, $infobubble="", $editable = true){
         $text_field = '<div class="field"><label for="'.$id.'">'.translate($label,'yproject');
-        if(!empty($infobubble)){
-            $text_field .= ' <i class="infobutton" title="'.translate($infobubble,'yproject').'"></i>';
-        }
+        $text_field .= DashboardUtility::get_infobutton($infobubble);
         $text_field .= '</label>';
         if($editable){
             $text_field .= '<input type="text"
@@ -125,7 +125,7 @@ class DashboardUtility
             class="adddatepicker"
             value="'.$initial_value->format('Y-m-d').'"/>';
         } else {
-            $text_field .= $initial_value->format('Y-m-d');
+            $text_field .= '<span>'.$initial_value->format('Y-m-d').'</span>';
         }
         $text_field .= '</div>';
         print($text_field);
@@ -143,9 +143,7 @@ class DashboardUtility
      */
     public static function create_select_field($id, $label, $options_names, $options_id, $initial_value="", $infobubble="", $editable = true){
         $text_field = '<div class="field"><label for="'.$id.'">'.translate($label,'yproject');
-        if(!empty($infobubble)){
-            $text_field .= ' <i class="infobutton" title="'.translate($infobubble,'yproject').'"></i>';
-        }
+        $text_field .= DashboardUtility::get_infobutton($infobubble);
         $text_field .= '</label>';
 
         if(!empty($options_id)){
@@ -168,7 +166,7 @@ class DashboardUtility
 
             $text_field .= '</select>';
         } else {
-            $text_field .=translate($options_list[$initial_value],'yproject');
+            $text_field .= '<span>'.translate($options_list[$initial_value],'yproject').'</span>';
         }
         $text_field .= '</div>';
         print($text_field);

@@ -49,8 +49,9 @@ if ($can_modify){
     $status = $campaign->campaign_status();
 
     locate_template( array("projects/dashboard/dashboardutility.php"), true );
-    locate_template( array("projects/dashboard/informations.php"), true );
     locate_template( array("projects/dashboard/resume.php"), true );
+    locate_template( array("projects/dashboard/informations.php"), true );
+    locate_template( array("projects/dashboard/news.php"), true );
 
     function is_preparing($status){
         return $status==ATCF_Campaign::$campaign_status_preparing;
@@ -70,7 +71,7 @@ if ($can_modify){
                         <li>
                             <a <?php if (!is_preparing($status)) {print('href="'.get_permalink($campaign_id).'" ');}
                                 check_enabled_tab($status) ?>>
-                                Présentation</a>
+                                Présentation&nbsp;&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
                         </li>
                         <li>
                             <a href="#page-informations">Informations<div class="badge-notif">0</div></a>
@@ -96,13 +97,13 @@ if ($can_modify){
 
             <div id="ndashboard-content">
                 <div class="content-padding">
-                    <div class="page-dashboard" id="page-resume"><?php print_resume_page() ?></div>
+                    <div class="page-dashboard" id="page-resume"><?php print_resume_page(); ?></div>
                     <div class="page-dashboard" id="page-presentation"></div>
-                    <div class="page-dashboard" id="page-informations"><?php print_informations_page() ?></div>
+                    <div class="page-dashboard" id="page-informations"><?php print_informations_page(); ?></div>
                     <div class="page-dashboard" id="page-wallet">4</div>
                     <div class="page-dashboard" id="page-campaign">5</div>
                     <div class="page-dashboard" id="page-contacts">6</div>
-                    <div class="page-dashboard" id="page-news">7</div>
+                    <div class="page-dashboard" id="page-news"><?php print_news_page(); ?></div>
                     <div class="page-dashboard" id="page-support">8</div>
 
                 </div>

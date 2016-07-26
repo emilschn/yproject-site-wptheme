@@ -24,39 +24,40 @@ function print_informations_page()
 
     ?>
 
+    <div class="head">Informations</div>
     <div class="bloc-grid">
         <div class="display-bloc" data-tab-target="tab-user-infos">
-            <i class="fa fa-user fa-4x"></i>
+            <i class="fa fa-user fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
                 Infos personnelles
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-organization">
-            <i class="fa fa-building fa-4x"></i>
+            <i class="fa fa-building fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
                 L'organisation
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-project">
-            <i class="fa fa-lightbulb-o fa-4x"></i>
+            <i class="fa fa-lightbulb-o fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
                 Le projet
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-funding">
-            <i class="fa fa-bar-chart fa-4x"></i>
+            <i class="fa fa-bar-chart fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
                 Besoin de financement
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-communication">
-            <i class="fa fa-bullhorn fa-4x"></i>
+            <i class="fa fa-bullhorn fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
                 Votre communication
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-contract">
-            <i class="fa fa-calculator fa-4x"></i>
+            <i class="fa fa-calculator fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
                 Contractualisation
             </div>
@@ -212,7 +213,7 @@ function print_informations_page()
                 DashboardUtility::create_text_field("project_name", "Nom du projet", $post_campaign->post_title);
 
                 DashboardUtility::create_wpeditor_field('backoffice_summary', 'R&eacute;sum&eacute; du projet', $campaign->backoffice_summary(),
-                    $infobubble="Décrivez-nous votre projet. Les informations sont traitées de façon confidentielles");?>
+                    "Décrivez-nous votre projet. Les informations sont traitées de façon confidentielles");?>
 
                 <label for="categories">Cat&eacute;gorie :</label>
                 <?php wp_dropdown_categories(array(

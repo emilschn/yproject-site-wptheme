@@ -1,5 +1,7 @@
 /*******************************************************************************
 * DASHBOARD PAGE
+*
+* Commons
 *******************************************************************************/
 
 #ndashboard{
@@ -10,25 +12,25 @@
 
 #ndashboard .infobutton{
     cursor: help;
-    border-radius: 10px;
-    background-color: grey;
-    width: 18px;
+    color: grey;
     display: inline-block;
-    color: white;
-    text-align: center;
-    font-style: normal;
-    font-weight: bold;
-    height: 18px;
     margin-left: 5px;
+    vertical-align: baseline;
+    font-size: 18px;
 }
+
 
 #ndashboard .infobutton:hover{
-    background-color:#2B2C2C;
+    color:#2B2C2C;
 }
 
-#ndashboard .infobutton::before{
-    content : '?'
+#ndashboard .page-dashboard .head {
+    font-family: 'BebasNeue';
+    font-size: 35px;
+    text-transform: uppercase;
+    text-align: center;
 }
+
 
 
 /*******************************************************************************
@@ -129,6 +131,15 @@
     display:none;
 }
 
+#ndashboard-content .tab-content {
+    display: block;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #F2F2F2;
+    padding: 20px 30px;
+    border-bottom: 1px solid grey;
+}
+
 /*******************************************************************************
 * Page resume
 *******************************************************************************/
@@ -146,6 +157,7 @@
     opacity: 1;
     color: #EA4F51;
     font-weight: bold;
+    position:relative
 }
 
 /*******************************************************************************
@@ -164,6 +176,7 @@
     cursor: pointer;
     border-bottom: 1px solid grey;
     padding-top: 10px;
+    position:relative;
 }
 
 #page-informations .display-bloc:hover{
@@ -184,18 +197,13 @@
     padding: 10px 0px;
 }
 
-#page-informations .tab-content {
-    display: block;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #F2F2F2;
-    padding: 20px 30px;
-    border-bottom: 1px solid grey;
-}
-
 #page-informations .tab-content .field {
     display: block;
     margin: 20px 0px;
+}
+
+#page-informations .tab-content .field span {
+    vertical-align: middle;
 }
 
 #page-informations .tab-content label {
@@ -224,4 +232,33 @@
 #page-informations #estimated-turnover li {
     border-bottom: 1px solid grey;
     padding-top: 6px;
+}
+
+/*******************************************************************************
+* Page actualités
+*******************************************************************************/
+#page-news ul{
+    text-align: left;
+    list-style: none;
+    padding-left: initial;
+}
+
+#page-news li{
+    padding: 5px;
+    border-bottom: 1px solid grey;
+    margin-bottom: 5px;
+    display: block;
+}
+
+#page-news li em{
+    font-size: 12px;
+}
+
+#page-news .news-item-tools {
+    float:right;
+    margin-right: 20px;
+}
+
+#page-news .nb-comments-widget{
+    padding: 4px;
 }

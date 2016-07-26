@@ -79,13 +79,19 @@ var WDGProjectDashboard = (function ($) {
             if ($(".bloc-grid").length > 0) {
                 $(".bloc-grid .display-bloc").click(function () {
                     if($(this).hasClass("active")){
-                        $(".bloc-grid .display-bloc").removeClass("active");
+                        $(".bloc-grid .display-bloc").removeClass("active").animate({
+                            top: "0px"
+                        }, { duration: 500, queue: false });
                         $("#tab-container .tab-content").slideUp();
 
                     } else {
-                        $(".bloc-grid .display-bloc").removeClass("active");
+                        $(".bloc-grid .display-bloc").removeClass("active").animate({
+                            top: "0px"
+                        }, { duration: 500, queue: false });
                         $("#tab-container .tab-content").slideUp();
-                        $(this).addClass("active");
+                        $(this).addClass("active").animate({
+                            top: "20px"
+                        }, { duration: 500, queue: false });
                         $("#tab-container #" + $(this).data("tab-target")).slideDown();
                     }
                 });
