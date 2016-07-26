@@ -59,7 +59,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
-	$current_version = '20160704';
+	$current_version = '20160712';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -1550,8 +1550,9 @@ add_shortcode('yproject_lightbox_button', 'yproject_shortcode_lightbox_button');
 function yproject_shortcode_lightbox($atts, $content = '') {
     $atts = shortcode_atts( array(
 	'id' => 'lightbox',
+	'style' => '',
     ), $atts );
-    return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox hidden">
+    return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox hidden">
 		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder">
 		    <div class="wdg-lightbox-button-close">

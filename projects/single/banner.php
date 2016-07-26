@@ -1,6 +1,7 @@
 <?php 
 global $campaign, $current_user, $stylesheet_directory_uri, $can_modify;
 $img_src = $campaign->get_header_picture_src();
+$vote_status = $campaign->campaign_status(); 
 
 $btn_follow_href = '#connexion';
 $btn_follow_classes = 'wdg-button-lightbox-open';
@@ -30,13 +31,13 @@ if (count($current_organisations) > 0) {
 	$owner_str = $current_organisation->organisation_name;
 	$lightbox_content = '<div class="content align-center">'.$current_organisation->organisation_name.'</div>
 		<div class="content align-left">
-		<span>'._('Forme juridique :', 'yproject').'</span>'.$current_organisation->organisation_legalform.'<br />
-		<span>'._('Num&eacute;ro SIREN :', 'yproject').'</span>'.$current_organisation->organisation_idnumber.'<br />
-		<span>'._('Code APE :', 'yproject').'</span>'.$current_organisation->organisation_ape.'<br />
-		<span>'._('Capital social :', 'yproject').'</span>'.$current_organisation->organisation_capital.'<br /><br />
+		<span>'.__('Forme juridique :', 'yproject').'</span>'.$current_organisation->organisation_legalform.'<br />
+		<span>'.__('Num&eacute;ro SIREN :', 'yproject').'</span>'.$current_organisation->organisation_idnumber.'<br />
+		<span>'.__('Code APE :', 'yproject').'</span>'.$current_organisation->organisation_ape.'<br />
+		<span>'.__('Capital social :', 'yproject').'</span>'.$current_organisation->organisation_capital.'<br /><br />
 		</div>
 		<div class="content align-left">
-		<span>'._('Si&egrave;ge social :', 'yproject').'</span>'.$current_organisation->organisation_address.'<br />
+		<span>'.__('Si&egrave;ge social :', 'yproject').'</span>'.$current_organisation->organisation_address.'<br />
 		<span></span>'.$current_organisation->organisation_postalcode.' '.$current_organisation->organisation_city.'<br />
 		<span></span>'.$current_organisation->organisation_country.'<br />
 		</div>';
@@ -75,9 +76,13 @@ if (count($current_organisations) > 0) {
 				<?php locate_template( array("projects/single/timeline.php"), true ); ?>
 				
 				<div class="separator"></div>
-				
+				<?php
+				if ($vote_status == 'collecte' || $vote_status == 'funded' || $vote_status == 'archive') {
+					$percent = min(100, $campaign->percent_minimum_completed(false));
+					$width = 250 * $percent / 100;
+				?>	
 				<?php locate_template( array("projects/common/progressbar.php"), true ); ?>
-				
+
 				<div class="project-banner-logos">
 					<div class="project-banner-info-item">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
@@ -115,7 +120,81 @@ if (count($current_organisations) > 0) {
 						<span class="hidden"><?php echo $campaign->time_remaining_str(); ?></span>
 					</div>
 				</div>
-				
+				<?php 
+				} else if ($vote_status == 'vote') {
+					$nbvoters = $campaign->nb_voters();
+				?>
+					<div class="logos_zone vote">
+						<div class="post_bottom_infos_item only_on_mobile">
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />
+							<?php 
+							$campaign_location = $campaign->location();
+							$exploded = explode(' ', $campaign_location);
+							if (count($exploded) > 1) $campaign_location = $exploded[0];
+							echo (($campaign_location != '') ? $campaign_location : 'France'); 
+							?>
+						</div>
+						<div class="post_bottom_infos_item">
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
+							<span class="mobile_hidden">
+							    <?php if ($nbvoters == 1): ?>
+							    1 personne a d&eacute;j&agrave; vot&eacute;
+							    <?php elseif ($nbvoters > 1): echo $nbvoters; ?>
+							    personnes ont d&eacute;j&agrave; vot&eacute;
+							    <?php else: ?>
+							    Personne n'a vot&eacute;. Soyez le premier !
+							    <?php endif; ?>
+							</span>
+							<span class="only_on_mobile"><?php echo $nbvoters; ?></span>
+						</div>
+						<div class="post_bottom_infos_item">
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
+							<span class="mobile_hidden"><?php echo $campaign->time_remaining_fullstr(); ?></span>
+							<span class="only_on_mobile"><?php echo $campaign->time_remaining_str(); ?></span>
+						</div>
+						<div class="post_bottom_infos_item">
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
+							<span class="mobile_hidden"><?php 
+							    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
+							    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
+								echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
+							    }
+							?></span>
+							<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
+						</div>
+						<div class="post_bottom_infos_item only_on_mobile">
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/good.png" alt="logo main" /><br />
+							<span><?php echo $campaign->get_jycrois_nb(); ?></span>
+						</div>
+						<div class="projects-description-separator mobile_hidden"></div>
+					</div>
+
+				<?php } else if ($vote_status== 'preview'){ ?>
+
+					<div class="logos_zone">
+						<div class="post_bottom_infos_item only_on_mobile">
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />
+							<?php 
+							$campaign_location = $campaign->location();
+							$exploded = explode(' ', $campaign_location);
+							if (count($exploded) > 1) $campaign_location = $exploded[0];
+							echo (($campaign_location != '') ? $campaign_location : 'France'); 
+							?>
+						</div>
+						<div class="post_bottom_infos_item">
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
+							<span class="mobile_hidden"><?php 
+							    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
+							    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
+								echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
+							    }
+							?></span>
+							<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
+						</div>
+						<div class="projects-description-separator mobile_hidden"></div>
+					</div>
+
+				<?php } ?>
 				<div class="project-banner-info-item align-center author-info" data-link-edit="<?php echo $page_edit_orga; ?>">
 					<p>
 						<?php _e("Un projet port&eacute; par", 'yproject'); ?> <?php echo $owner_str; ?><br />
