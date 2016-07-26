@@ -37,8 +37,7 @@
 #ndashboard-navbar{
     display: table-cell;
     vertical-align: top;
-    min-width: 240px;
-    width: 240px;
+    width: 220px;
     background-color: #EEECED;
 }
 
@@ -157,14 +156,14 @@
 }
 
 #page-informations .display-bloc{
-    width: 140px;
-    height: 40px;
+    width: 160px;
     display: inline-block;
     margin: 10px;
     background-color: #EEECED;
-    padding: 20px 20px 20px 20px;
     vertical-align: top;
-    cursor:pointer;
+    cursor: pointer;
+    border-bottom: 1px solid grey;
+    padding-top: 10px;
 }
 
 #page-informations .display-bloc:hover{
@@ -177,20 +176,12 @@
     color:white;
 }
 
-#page-informations .display-bloc .reduced{
-    width: 140px;
-    height: 140px;
-    display: inline-block;
-    margin: 10px;
-    background-color: #EEECED;
-    padding: 20px;
-    vertical-align: top;
+#page-informations .display-bloc .fa{
+    display: block;
 }
 
 #page-informations .display-bloc .infobloc-title{
-    display:inline-block;
-    vertical-align:bottom;
-    text-align: center;
+    padding: 10px 0px;
 }
 
 #page-informations .tab-content {
@@ -224,4 +215,13 @@
 
 #page-informations .field-value {
     white-space: nowrap;
+}
+
+#page-informations #estimated-turnover {
+    list-style: none;
+}
+
+#page-informations #estimated-turnover li {
+    border-bottom: 1px solid grey;
+    padding-top: 6px;
 }

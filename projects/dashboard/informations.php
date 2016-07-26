@@ -26,31 +26,37 @@ function print_informations_page()
 
     <div class="bloc-grid">
         <div class="display-bloc" data-tab-target="tab-user-infos">
+            <i class="fa fa-user fa-4x"></i>
             <div class="infobloc-title">
                 Infos personnelles
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-organization">
+            <i class="fa fa-building fa-4x"></i>
             <div class="infobloc-title">
                 L'organisation
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-project">
+            <i class="fa fa-lightbulb-o fa-4x"></i>
             <div class="infobloc-title">
                 Le projet
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-funding">
+            <i class="fa fa-bar-chart fa-4x"></i>
             <div class="infobloc-title">
                 Besoin de financement
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-communication">
+            <i class="fa fa-bullhorn fa-4x"></i>
             <div class="infobloc-title">
                 Votre communication
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-contract">
+            <i class="fa fa-calculator fa-4x"></i>
             <div class="infobloc-title">
                 Contractualisation
             </div>
