@@ -48,8 +48,9 @@ if ($can_modify){
     $campaign = atcf_get_campaign($post_campaign);
     $status = $campaign->campaign_status();
 
-    locate_template( array("projects/dashboard-pages/informations.php"), true );
-    locate_template( array("projects/dashboard-pages/resume.php"), true );
+    locate_template( array("projects/dashboard/dashboardutility.php"), true );
+    locate_template( array("projects/dashboard/informations.php"), true );
+    locate_template( array("projects/dashboard/resume.php"), true );
 
     function is_preparing($status){
         return $status==ATCF_Campaign::$campaign_status_preparing;

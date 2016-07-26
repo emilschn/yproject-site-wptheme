@@ -57,14 +57,11 @@ var WDGProjectDashboard = (function ($) {
                 var hash = window.location.hash
                 var tabsaved = $('#ndashboard-navbar li a[href="'+window.location.hash+'"]')
                 if(hash != '' && !tabsaved.hasClass("disabled")){
-                    window.scrollTo(0, 0);
                     tabsaved.trigger("click");
-                    setTimeout(function() {
-                        window.scrollTo(0, 0);
-                    }, 1);
                 } else {
                     $("#ndashboard-navbar li a:not(.disabled)").first().trigger("click");
                 }
+                window.scrollTo(0, 0);
             }
 
             //Infobulles
@@ -134,7 +131,7 @@ var WDGProjectDashboard = (function ($) {
             if ($("#tab-user-infos").length > 0) {
                 $("#userinfo_form").submit(function (e) {
                     e.preventDefault();
-                    var birthday = Date.parse($("#update_birthday").val());
+                    var birthday = new Date($("#update_birthday").val());
 
                     var data_to_update = {
                         'action': 'save_user_infos',
@@ -205,14 +202,14 @@ var WDGProjectDashboard = (function ($) {
             //Infos financement
             if ($("#tab-funding").length > 0) {
                 var nb_years_li_existing = ($("#estimated-turnover li").length);
-/*
+
                 //Etiquettes de numéros d'années pour le CA prévisionnel
-                $("#first-payment-y").change(function(){
-                    var start_year = $("#first-payment-y").val();
+                $("#update_first_payment").change(function(){
+                    var start_year = new Date($("#update_first_payment").val()).getFullYear();
                     $("#estimated-turnover li .year").each(function(index){
                         $(this).html((parseInt(start_year)+index));
                     });
-                });*/
+                });
 
                 //Cases pour le CA prévisionnel
                 $("#update_funding_duration").change(function() {
@@ -230,7 +227,7 @@ var WDGProjectDashboard = (function ($) {
                         $("#estimated-turnover").html(newlines);
 
                         //MAJ des étiquettes "Année XXXX"
-                        $("#first-payment-y").trigger("change");
+                        $("#update_first_payment").trigger("change");
                         nb_years_li_existing = new_nb_years;
                     } else {
                         //N'affiche que les boites nécessaires

@@ -19,7 +19,7 @@
     font-style: normal;
     font-weight: bold;
     height: 18px;
-    margin: 0px 10px;
+    margin-left: 5px;
 }
 
 #ndashboard .infobutton:hover{
@@ -191,4 +191,37 @@
     display:inline-block;
     vertical-align:bottom;
     text-align: center;
+}
+
+#page-informations .tab-content {
+    display: block;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #F2F2F2;
+    padding: 20px 30px;
+    border-bottom: 1px solid grey;
+}
+
+#page-informations .tab-content .field {
+    display: block;
+    margin: 20px 0px;
+}
+
+#page-informations .tab-content label {
+    display: inline-block;
+    width: 210px;
+    margin: 3px 10px 3px 0px;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+#page-informations .tab-content input,
+#page-informations .tab-content select{
+    display: inline-block;
+    width: 180px;
+    margin: 3px 0px;
+}
+
+#page-informations .field-value {
+    white-space: nowrap;
 }
