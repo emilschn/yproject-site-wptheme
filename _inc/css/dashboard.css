@@ -78,6 +78,13 @@
     padding: 30px 0px 50px;
 }
 
+#ndashboard-navbar .authorization{
+    padding: 15px 0px;
+    background-color: mediumturquoise;
+    font-style: italic;
+    color: white;
+}
+
 #ndashboard-navbar .title {
     font-family: 'BebasNeue';
     font-size: 34px;
@@ -97,6 +104,7 @@
     color: #2B2C2C;
     display:block;
     min-height: 28px;
+    outline: 0;
 }
 
 #ndashboard-navbar li a:not(.disabled):not(.active):hover{
@@ -261,4 +269,20 @@
 
 #page-news .nb-comments-widget{
     padding: 4px;
+}
+
+
+/*******************************************************************************
+* Page campagne
+*******************************************************************************/
+#page-campaign #team-list{
+    padding: 0px 25px;
+    list-style: none;
+    text-align: left;
+}
+
+#page-campaign #team-list li{
+    padding: 7px 0px;
+    border-bottom: 1px solid #808080;
+    margin: 5px 0px;
 }

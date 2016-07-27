@@ -5,9 +5,8 @@ function print_informations_page()
     locate_template('country_list.php', true);
     global $country_list;
     global $campaign_id, $campaign, $post_campaign,
-           $WDGAuthor, $WDGUser_current;
-
-    $user_is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
+           $WDGAuthor, $WDGUser_current,
+           $is_admin, $is_author;
 
     function is_necessary_now($critical_status){
         global $campaign;
@@ -45,7 +44,7 @@ function print_informations_page()
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-funding">
-            <i class="fa fa-bar-chart fa-4x aria-hidden="true""></i>
+            <i class="fa fa-money fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
                 Besoin de financement
             </div>
@@ -66,8 +65,8 @@ function print_informations_page()
 
     <div id="tab-container">
         <div class="tab-content" id="tab-user-infos">
-            <form id="userinfo_form" data-campaignid="<?php echo $campaign->ID; ?>">
-                <?php if ($user_is_author) {
+            <form id="userinfo_form">
+                <?php if ($is_author) {
                     ?><p>Complétez vos informations personnelles de porteur de projet</p>
                     <input type="hidden" id="input_is_project_holder" name="is_project_holder" value="1"/><?php
                 } else {
@@ -80,11 +79,11 @@ function print_informations_page()
 
                 <?php
                 DashboardUtility::create_select_field(gender, "Vous &ecirc;tes",
-                    array("une femme", "un homme"), array("female", "male"), $WDGAuthor->wp_user->get('user_gender'), null, $user_is_author);
+                    array("une femme", "un homme"), array("female", "male"), $WDGAuthor->wp_user->get('user_gender'), null, $is_author);
 
-                DashboardUtility::create_text_field("firstname", "Prénom", $WDGAuthor->wp_user->user_firstname, null, $user_is_author);
+                DashboardUtility::create_text_field("firstname", "Prénom", $WDGAuthor->wp_user->user_firstname, null, $is_author);
 
-                DashboardUtility::create_text_field("lastname", "Nom", $WDGAuthor->wp_user->user_lastname, null, $user_is_author);
+                DashboardUtility::create_text_field("lastname", "Nom", $WDGAuthor->wp_user->user_lastname, null, $is_author);
 
                 $bd = new DateTime();
                 if(!empty($WDGAuthor->wp_user->get('user_birthday_year'))){
@@ -93,31 +92,31 @@ function print_informations_page()
                         intval($WDGAuthor->wp_user->get('user_birthday_day')));
                 }
 
-                DashboardUtility::create_date_field("birthday", "Date de naissance", $bd, null, $user_is_author);
+                DashboardUtility::create_date_field("birthday", "Date de naissance", $bd, null, $is_author);
 
-                DashboardUtility::create_text_field("birthplace", "Ville de naissance", $WDGAuthor->wp_user->get('user_birthplace'), null, $user_is_author);
+                DashboardUtility::create_text_field("birthplace", "Ville de naissance", $WDGAuthor->wp_user->get('user_birthplace'), null, $is_author);
 
                 DashboardUtility::create_select_field('nationality', "Nationalit&eacute;",
-                    array_values($country_list), array_keys($country_list), $WDGAuthor->wp_user->get('user_nationality'), null, $user_is_author);
+                    array_values($country_list), array_keys($country_list), $WDGAuthor->wp_user->get('user_nationality'), null, $is_author);
 
                 DashboardUtility::create_text_field("mobile_phone", "T&eacute;l&eacute;phone mobile", $WDGAuthor->wp_user->get('user_mobile_phone'),
-                    "Ce num&eacute;ro sera celui utilis&eacute; pour vous contacter &agrave; propos de votre projet" , $user_is_author);
+                    "Ce num&eacute;ro sera celui utilis&eacute; pour vous contacter &agrave; propos de votre projet" , $is_author);
 
                 DashboardUtility::create_text_field('email', "Adresse &eacute;lectronique", $WDGAuthor->wp_user->user_email,
                     "Pour modifier votre adresse e-mail de contact, rendez-vous dans vos param&egrave;tres de compte", false);
 
-                DashboardUtility::create_text_field("address", "Adresse", $WDGAuthor->wp_user->get('user_address'), null, $user_is_author);
+                DashboardUtility::create_text_field("address", "Adresse", $WDGAuthor->wp_user->get('user_address'), null, $is_author);
 
-                DashboardUtility::create_text_field("postal_code", "Code postal", $WDGAuthor->wp_user->get('user_postal_code'), null, $user_is_author);
+                DashboardUtility::create_text_field("postal_code", "Code postal", $WDGAuthor->wp_user->get('user_postal_code'), null, $is_author);
 
-                DashboardUtility::create_text_field("city", "Ville", $WDGAuthor->wp_user->get('user_city'), null, $user_is_author);
+                DashboardUtility::create_text_field("city", "Ville", $WDGAuthor->wp_user->get('user_city'), null, $is_author);
 
-                DashboardUtility::create_text_field("country", "Pays", $WDGAuthor->wp_user->get('user_country'), null, $user_is_author) ?>
+                DashboardUtility::create_text_field("country", "Pays", $WDGAuthor->wp_user->get('user_country'), null, $is_author) ?>
 
                 <br/>
 
 
-                <?php if ($user_is_author) { ?><p id="userinfo_form_button" class="align-center">
+                <?php if ($is_author) { ?><p id="userinfo_form_button" class="align-center">
                     <input type="submit" value="<?php _e("Enregistrer", 'yproject'); ?>" class="button"/>
                     </p>
                     <p id="userinfo_form_loading" class="align-center" hidden>

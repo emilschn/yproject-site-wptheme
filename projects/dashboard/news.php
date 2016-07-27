@@ -1,4 +1,6 @@
-<?php function print_news_page() {
+<?php
+
+function print_news_page() {
     global $campaign_id, $campaign, $post_campaign,
            $WDGAuthor, $WDGUser_current;
     $category_link = get_category_link($campaign->get_news_category_id());

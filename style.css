@@ -2724,7 +2724,7 @@ div#home_bottom h1 {
     display: inline-block;
     width: 32%;
 }
-
+/*
 #dashboard #block-news ul{
     text-align: left;
 }
@@ -2760,7 +2760,7 @@ div#home_bottom h1 {
 
 #dashboard #block-team #team-list .wait-delete {
     background: #333 url("images/chargement.gif") center no-repeat !important;
-}
+}*/
 
 /*******************************************************************************
 * TABLEAUX DYNAMIQUES : PERSONNALISATION DE DATATABLES

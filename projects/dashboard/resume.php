@@ -11,6 +11,8 @@ function print_resume_page()
     ?>
     <div id="block-summary" >
         <div class="current-step">
+            <?php ?>
+            <img src="<?php echo $stylesheet_directory_uri; ?>/images/frise-preview.png" alt="" /><br>
             <?php
             foreach (ATCF_Campaign::get_campaign_status_list() as $step => $name){
                 $step_to_write = '<span ';

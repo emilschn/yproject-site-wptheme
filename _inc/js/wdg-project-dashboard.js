@@ -9,6 +9,8 @@ var WDGProjectDashboard = (function ($) {
         currentOpenedROI: 0,
 
         init: function () {
+            var campaign_id = $("#ndashboard").data("campaign-id");
+
             //Gestion de l'AJAX pour la lightbox de ROI
             if ($(".transfert-roi-open").length > 0) {
                 $(".transfert-roi-open").click(function () {
@@ -75,57 +77,7 @@ var WDGProjectDashboard = (function ($) {
                 }
             });
 
-            //Onglets information
-            if ($(".bloc-grid").length > 0) {
-                $(".bloc-grid .display-bloc").click(function () {
-                    if($(this).hasClass("active")){
-                        $(".bloc-grid .display-bloc").removeClass("active").animate({
-                            top: "0px"
-                        }, { duration: 500, queue: false });
-                        $("#tab-container .tab-content").slideUp();
-
-                    } else {
-                        $(".bloc-grid .display-bloc").removeClass("active").animate({
-                            top: "0px"
-                        }, { duration: 500, queue: false });
-                        $("#tab-container .tab-content").slideUp();
-                        $(this).addClass("active").animate({
-                            top: "20px"
-                        }, { duration: 500, queue: false });
-                        $("#tab-container #" + $(this).data("tab-target")).slideDown();
-                    }
-                });
-
-                $("#tab-container .tab-content").hide();
-            }
-
-
-            //Informations
-            var update_tab = function(data_to_update, form_id, form_button_id, form_loading_id, form_errors_id){
-                $("#"+form_button_id).hide();
-                $("#"+form_loading_id).show();
-                $("#"+form_id+" input, #"+form_id+" select").prop('disabled', true);
-
-                data_to_update.campaign_id= $("#userinfo_form").data("campaignid");
-                $.ajax({
-                    'type': "POST",
-                    'url': ajax_object.ajax_url,
-                    'data': data_to_update
-                }).done(function (result) {
-                    if (result != "") {
-                        var jsonResult = JSON.parse(result);
-                        response = jsonResult.response;
-                        $("#"+form_button_id).show();
-                        $("#"+form_loading_id).hide();
-                        $("#"+form_id+" input, #"+form_id+" select").prop('disabled', false);
-                        $("#"+form_errors_id).empty();
-                        for (var i = 0; i < jsonResult.errors.length; i++) {
-                            $("#"+form_errors_id).append("<li>" + jsonResult.errors[i] + "</li>");
-                        }
-                    }
-                });
-            };
-
+            //Datepickers
             $("input.adddatepicker").datepicker({
                 dateFormat: "yy-mm-dd",
                 regional: "fr",
@@ -133,153 +85,308 @@ var WDGProjectDashboard = (function ($) {
                 changeYear: true
             });
 
-            //Infos personnelles
-            if ($("#tab-user-infos").length > 0) {
-                $("#userinfo_form").submit(function (e) {
-                    e.preventDefault();
-                    var birthday = new Date($("#update_birthday").val());
+            //Page Informations
+            if($("#page-informations").length > 0){
+                //Onglets information
+                if ($(".bloc-grid").length > 0) {
+                    $(".bloc-grid .display-bloc").click(function () {
+                        if($(this).hasClass("active")){
+                            $(".bloc-grid .display-bloc").removeClass("active").animate({
+                                top: "0px"
+                            }, { duration: 500, queue: false });
+                            $("#tab-container .tab-content").slideUp();
 
-                    var data_to_update = {
-                        'action': 'save_user_infos',
-                        'invest_type': $("#invest_type").val(),
-                        'gender': $("#update_gender").val(),
-                        'firstname': $("#update_firstname").val(),
-                        'lastname': $("#update_lastname").val(),
-                        'birthday_day': birthday.getDate(),
-                        'birthday_month': birthday.getMonth()+1,
-                        'birthday_year': birthday.getFullYear(),
-                        'birthplace': $("#update_birthplace").val(),
-                        'nationality': $("#update_nationality").val(),
-                        'address': $("#update_address").val(),
-                        'postal_code': $("#update_postal_code").val(),
-                        'city': $("#update_city").val(),
-                        'country': $("#update_country").val(),
-                        'telephone': $("#update_mobile_phone").val(),
-                        'is_project_holder': $("#input_is_project_holder").val(),
-                    }
-                    update_tab(data_to_update, "userinfo_form", "userinfo_form_button", "userinfo_form_loading", "userinfo_form_errors")
-                });
-            }
-
-            //Infos organisation
-            if ($("#tab-organization").length > 0) {
-                $("#orgainfo_form").submit(function (e) {
-                    e.preventDefault();
-                    var data_to_update = {
-                        'action': 'save_project_organisation',
-                        'project-organisation': $("#update_project_organisation").val()
-                    }
-                    update_tab(data_to_update, "orgainfo_form", "orgainfo_form_button", "orgainfo_form_loading", "orgainfo_form_errors");
-
-                });
-
-                $("#update_project_organisation").change(function(e){
-                    var newval = $("#update_project_organisation").val();
-
-                    if(newval!=''){
-                        $("#edit-orga-button").show();
-                        var newname = $("#update_project_organisation").find('option:selected').text();
-                        $("#edit-orga-button").attr("href",$("#edit-orga-button").data("url-edit")+newval);
-
-                        $("#edit-orga-button").text("Editer "+newname);
-                    } else {
-                        $("#edit-orga-button").hide();
-                    }
-
-                });
-            }
-
-            //Infos projet
-            if ($("#tab-project").length > 0) {
-                $("#projectinfo_form").submit(function (e) {
-                    e.preventDefault();
-                    var data_to_update = {
-                        'action': 'save_project_infos',
-                        'project_name': $("#update_project_name").val(),
-                        'backoffice_summary' : tinyMCE.get('update_backoffice_summary').getContent(),
-                        'project_category': $("#update_project_category").val(),
-                        'project_activity': $("#update_project_activity").val(),
-                        'project_location': $("#update_project_location").val()
-                    }
-                    update_tab(data_to_update, "projectinfo_form", "projectinfo_form_button", "projectinfo_form_loading", "projectinfo_form_errors");
-                });
-            }
-
-            //Infos financement
-            if ($("#tab-funding").length > 0) {
-                var nb_years_li_existing = ($("#estimated-turnover li").length);
-
-                //Etiquettes de numéros d'années pour le CA prévisionnel
-                $("#update_first_payment").change(function(){
-                    var start_year = new Date($("#update_first_payment").val()).getFullYear();
-                    $("#estimated-turnover li .year").each(function(index){
-                        $(this).html((parseInt(start_year)+index));
-                    });
-                });
-
-                //Cases pour le CA prévisionnel
-                $("#update_funding_duration").change(function() {
-                    var new_nb_years = parseInt($("#update_funding_duration").val());
-
-                    //Ajoute des boîtes au besoin
-                    if(new_nb_years > nb_years_li_existing){
-                        var newlines = $("#estimated-turnover").html();
-
-                        for(i=0; i<new_nb_years-nb_years_li_existing;i++){
-                            newlines = newlines+
-                                '<li><label>Année <span class="year"></span></label>'+
-                                '<input type="text" value="0"/></li>'
+                        } else {
+                            $(".bloc-grid .display-bloc").removeClass("active").animate({
+                                top: "0px"
+                            }, { duration: 500, queue: false });
+                            $("#tab-container .tab-content").slideUp();
+                            $(this).addClass("active").animate({
+                                top: "20px"
+                            }, { duration: 500, queue: false });
+                            $("#tab-container #" + $(this).data("tab-target")).slideDown();
                         }
-                        $("#estimated-turnover").html(newlines);
-
-                        //MAJ des étiquettes "Année XXXX"
-                        $("#update_first_payment").trigger("change");
-                        nb_years_li_existing = new_nb_years;
-                    } else {
-                        //N'affiche que les boites nécessaires
-                        $("#estimated-turnover li").hide();
-                        $("#estimated-turnover li").slice(0,new_nb_years).show();
-                    }
-                    nb_years_li_existing = Math.max(new_nb_years,nb_years_li_existing);
-                });
-                $("#update_funding_duration").trigger('change');
-
-                $("#projectfunding_form").submit(function (e) {
-                    e.preventDefault();
-
-                    var list_turnover = {};
-                    $("#estimated-turnover li:visible").each(function(){
-                        list_turnover[$(this).find('.year').html().toString()] = $(this).find('input').val();
                     });
-                    var data_to_update = {
-                        'action': 'save_project_funding',
-                        'minimum_goal': $("#update_minimum_goal").val(),
-                        'maximum_goal': $("#update_maximum_goal").val(),
-                        'funding_duration': $("#update_funding_duration").val(),
-                        'roi_percent_estimated': $("#update_roi_percent_estimated").val(),
-                        'first_payment_date': $("#update_first_payment").val(),
-                        'list_turnover': JSON.stringify(list_turnover)
-                    }
-                    update_tab(data_to_update, "projectfunding_form", "projectfunding_form_button", "projectfunding_form_loading", "projectfunding_form_errors");
 
-                });
+                    $("#tab-container .tab-content").hide();
+                }
+
+                //Fonction d'envoi de mise à jour d'informations
+                var update_tab = function(data_to_update, form_id, form_button_id, form_loading_id, form_errors_id){
+                    $("#"+form_button_id).hide();
+                    $("#"+form_loading_id).show();
+                    $("#"+form_id+" input, #"+form_id+" select").prop('disabled', true);
+
+                    data_to_update.campaign_id= campaign_id;
+                    $.ajax({
+                        'type': "POST",
+                        'url': ajax_object.ajax_url,
+                        'data': data_to_update
+                    }).done(function (result) {
+                        if (result != "") {
+                            var jsonResult = JSON.parse(result);
+                            response = jsonResult.response;
+                            $("#"+form_button_id).show();
+                            $("#"+form_loading_id).hide();
+                            $("#"+form_id+" input, #"+form_id+" select").prop('disabled', false);
+                            $("#"+form_errors_id).empty();
+                            for (var i = 0; i < jsonResult.errors.length; i++) {
+                                $("#"+form_errors_id).append("<li>" + jsonResult.errors[i] + "</li>");
+                            }
+                        }
+                    });
+                };
+                
+                //Infos personnelles
+                if ($("#tab-user-infos").length > 0) {
+                    $("#userinfo_form").submit(function (e) {
+                        e.preventDefault();
+                        var birthday = new Date($("#update_birthday").val());
+
+                        var data_to_update = {
+                            'action': 'save_user_infos',
+                            'invest_type': $("#invest_type").val(),
+                            'gender': $("#update_gender").val(),
+                            'firstname': $("#update_firstname").val(),
+                            'lastname': $("#update_lastname").val(),
+                            'birthday_day': birthday.getDate(),
+                            'birthday_month': birthday.getMonth()+1,
+                            'birthday_year': birthday.getFullYear(),
+                            'birthplace': $("#update_birthplace").val(),
+                            'nationality': $("#update_nationality").val(),
+                            'address': $("#update_address").val(),
+                            'postal_code': $("#update_postal_code").val(),
+                            'city': $("#update_city").val(),
+                            'country': $("#update_country").val(),
+                            'telephone': $("#update_mobile_phone").val(),
+                            'is_project_holder': $("#input_is_project_holder").val(),
+                        }
+                        update_tab(data_to_update, "userinfo_form", "userinfo_form_button", "userinfo_form_loading", "userinfo_form_errors")
+                    });
+                }
+
+                //Infos organisation
+                if ($("#tab-organization").length > 0) {
+                    $("#orgainfo_form").submit(function (e) {
+                        e.preventDefault();
+                        var data_to_update = {
+                            'action': 'save_project_organisation',
+                            'project-organisation': $("#update_project_organisation").val()
+                        }
+                        update_tab(data_to_update, "orgainfo_form", "orgainfo_form_button", "orgainfo_form_loading", "orgainfo_form_errors");
+
+                    });
+
+                    $("#update_project_organisation").change(function(e){
+                        var newval = $("#update_project_organisation").val();
+
+                        if(newval!=''){
+                            $("#edit-orga-button").show();
+                            var newname = $("#update_project_organisation").find('option:selected').text();
+                            $("#edit-orga-button").attr("href",$("#edit-orga-button").data("url-edit")+newval);
+
+                            $("#edit-orga-button").text("Editer "+newname);
+                        } else {
+                            $("#edit-orga-button").hide();
+                        }
+
+                    });
+                }
+
+                //Infos projet
+                if ($("#tab-project").length > 0) {
+                    $("#projectinfo_form").submit(function (e) {
+                        e.preventDefault();
+                        var data_to_update = {
+                            'action': 'save_project_infos',
+                            'project_name': $("#update_project_name").val(),
+                            'backoffice_summary' : tinyMCE.get('update_backoffice_summary').getContent(),
+                            'project_category': $("#update_project_category").val(),
+                            'project_activity': $("#update_project_activity").val(),
+                            'project_location': $("#update_project_location").val()
+                        }
+                        update_tab(data_to_update, "projectinfo_form", "projectinfo_form_button", "projectinfo_form_loading", "projectinfo_form_errors");
+                    });
+                }
+
+                //Infos financement
+                if ($("#tab-funding").length > 0) {
+                    var nb_years_li_existing = ($("#estimated-turnover li").length);
+
+                    //Etiquettes de numéros d'années pour le CA prévisionnel
+                    $("#update_first_payment").change(function(){
+                        var start_year = new Date($("#update_first_payment").val()).getFullYear();
+                        $("#estimated-turnover li .year").each(function(index){
+                            $(this).html((parseInt(start_year)+index));
+                        });
+                    });
+
+                    //Cases pour le CA prévisionnel
+                    $("#update_funding_duration").change(function() {
+                        var new_nb_years = parseInt($("#update_funding_duration").val());
+
+                        //Ajoute des boîtes au besoin
+                        if(new_nb_years > nb_years_li_existing){
+                            var newlines = $("#estimated-turnover").html();
+
+                            for(i=0; i<new_nb_years-nb_years_li_existing;i++){
+                                newlines = newlines+
+                                    '<li><label>Année <span class="year"></span></label>'+
+                                    '<input type="text" value="0"/></li>'
+                            }
+                            $("#estimated-turnover").html(newlines);
+
+                            //MAJ des étiquettes "Année XXXX"
+                            $("#update_first_payment").trigger("change");
+                            nb_years_li_existing = new_nb_years;
+                        } else {
+                            //N'affiche que les boites nécessaires
+                            $("#estimated-turnover li").hide();
+                            $("#estimated-turnover li").slice(0,new_nb_years).show();
+                        }
+                        nb_years_li_existing = Math.max(new_nb_years,nb_years_li_existing);
+                    });
+                    $("#update_funding_duration").trigger('change');
+
+                    $("#projectfunding_form").submit(function (e) {
+                        e.preventDefault();
+
+                        var list_turnover = {};
+                        $("#estimated-turnover li:visible").each(function(){
+                            list_turnover[$(this).find('.year').html().toString()] = $(this).find('input').val();
+                        });
+                        var data_to_update = {
+                            'action': 'save_project_funding',
+                            'minimum_goal': $("#update_minimum_goal").val(),
+                            'maximum_goal': $("#update_maximum_goal").val(),
+                            'funding_duration': $("#update_funding_duration").val(),
+                            'roi_percent_estimated': $("#update_roi_percent_estimated").val(),
+                            'first_payment_date': $("#update_first_payment").val(),
+                            'list_turnover': JSON.stringify(list_turnover)
+                        }
+                        update_tab(data_to_update, "projectfunding_form", "projectfunding_form_button", "projectfunding_form_loading", "projectfunding_form_errors");
+
+                    });
+                }
+
+                //Infos communication
+                if ($("#tab-communication").length > 0) {
+                    $("#communication_form").submit(function (e) {
+                        e.preventDefault();
+                        var data_to_update = {
+                            'action': 'save_project_communication',
+                            'website': $("#update_website").val(),
+                            'facebook': $("#update_facebook").val(),
+                            'twitter': $("#update_twitter").val()
+                        }
+                        update_tab(data_to_update, "communication_form", "communication_form_button", "communication_form_loading", "communication_form_errors");
+                    });
+                }
             }
 
-            //Infos communication
-            if ($("#tab-communication").length > 0) {
-                $("#communication_form").submit(function (e) {
-                    e.preventDefault();
-                    var data_to_update = {
-                        'action': 'save_project_communication',
-                        'website': $("#update_website").val(),
-                        'facebook': $("#update_facebook").val(),
-                        'twitter': $("#update_twitter").val()
+            if($("#page-campaign").length > 0){
+                //Gestion equipe depuis Tableau de bord
+                $(".project-manage-team").click(function(){
+                    action = $(this).attr('data-action');
+                    if(action==="yproject-add-member"){
+                        data=($("#new_team_member_string")[0].value);
                     }
-                    update_tab(data_to_update, "communication_form", "communication_form_button", "communication_form_loading", "communication_form_errors");
+                    else if (action==="yproject-remove-member"){
+                        data=$(this).attr('data-user');
+                    }
+
+                    WDGProjectDashboard.manageTeam(action, data, campaign_id);
                 });
             }
+        },
 
-        }
+
+        manageTeam: function(action, data, campaign_id){
+            //Clic pour ajouter un membre
+            if(action==="yproject-add-member"){
+                //Test si le champ de texte est vide
+                if (data===""){
+                    //Champ vide, ne rien faire
+                } else {
+                    //Bloque le champ de texte d'ajout
+                    $("#new_team_member_string").prop('disabled',true);
+                    $("#new_team_member_string").val('');
+                    tmpPlaceHolder = $("#new_team_member_string").prop('placeholder');
+                    $("#new_team_member_string").prop('placeholder',"Ajout de "+data+"...");
+                    $("#new_team_member_string").next().hide();
+
+                    //Lance la requête Ajax
+                    $.ajax({
+                        'type' : "POST",
+                        'url' : ajax_object.ajax_url,
+                        'data': {
+                            'action':'add_team_member',
+                            'id_campaign':campaign_id,
+                            'new_team_member' : data
+                        }
+                    }).done(function(result){
+                        //Nettoie le champ de texte d'ajout
+                        $("#new_team_member_string").prop('disabled', false);
+                        $("#new_team_member_string").prop('placeholder',tmpPlaceHolder);
+                        $("#new_team_member_string").next().show();
+
+                        if(result==="FALSE"){
+                            $("#new_team_member_string").next().after("<div id=\"fail_add_team_indicator\"><br/><em>L'utilisateur "+data+" n'a pas été trouvé</em><div>");
+                            $("#fail_add_team_indicator").delay(4000).fadeOut(400);
+                        } else {
+                            res = JSON.parse(result);
+
+                            //Teste si l'user existait déjà
+                            doublon = false;
+                            $(".project-manage-team").each(function(){
+                                doublon = doublon || (res.id == $(this).attr('data-user'));
+                            });
+
+                            if(!doublon){
+                                newline ='<li style="display: none;">';
+                                newline+=res.firstName+" "+res.lastName+" ("+res.userLink+") ";
+                                newline+='<a class="project-manage-team button" data-action="yproject-remove-member" data-user="'+res.id+'">x</a>';
+                                newline+="</li>";
+                                $("#team-list").append(newline);
+                                $("a[data-user="+res.id+"]").closest("li").slideDown();
+
+                                //Recharge l'UI pour ajouter listener au nouveau button
+                                $(".project-manage-team").click(function(){
+                                    action = $(this).attr('data-action');
+                                    if(action==="yproject-add-member"){
+                                        data=($("#new_team_member_string")[0].value);
+                                    }
+                                    else if (action==="yproject-remove-member"){
+                                        data=$(this).attr('data-user');
+                                    }
+                                    WDGProjectDashboard.manageTeam(action, data, campaign_id);
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+
+            //Clic pour supprimer un membre
+            else if(action==="yproject-remove-member") {
+                //Affichage en attente de suppression
+                $("a[data-user="+data+"]").closest("li").css("opacity",0.25);
+                $("a[data-user="+data+"]").text("..");
+                $("a[data-user="+data+"]").addClass("wait-delete");
+
+                $.ajax({
+                    'type' : "POST",
+                    'url' : ajax_object.ajax_url,
+                    'data': {
+                        'action':'remove_team_member',
+                        'id_campaign':campaign_id,
+                        'user_to_remove' : data
+                    }
+                }).done(function(result){
+                    $("a[data-user="+data+"]").closest("li").slideUp("slow",function(){ $(this).remove();});
+                });
+            }
+        },
     };
 
 })(jQuery);

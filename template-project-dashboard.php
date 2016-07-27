@@ -40,17 +40,24 @@ WDGFormProjects::form_cancel_payment();
 if ($can_modify){
     global $can_modify,
            $campaign_id, $campaign, $post_campaign,
-           $WDGAuthor, $WDGUser_current;
+           $WDGAuthor, $WDGUser_current,
+           $is_admin, $is_author;
 
     $post_campaign = get_post($campaign_id);
-    $WDGAuthor = new WDGUser(get_userdata($post_campaign->post_author));
-    $WDGUser_current = WDGUser::current();
     $campaign = atcf_get_campaign($post_campaign);
     $status = $campaign->campaign_status();
+
+    $WDGAuthor = new WDGUser(get_userdata($post_campaign->post_author));
+    $WDGUser_current = WDGUser::current();
+    $is_admin = (current_user_can('manage_options'));
+    $is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
+
+
 
     locate_template( array("projects/dashboard/dashboardutility.php"), true );
     locate_template( array("projects/dashboard/resume.php"), true );
     locate_template( array("projects/dashboard/informations.php"), true );
+    locate_template( array("projects/dashboard/campaign.php"), true );
     locate_template( array("projects/dashboard/news.php"), true );
 
     function is_preparing($status){
@@ -60,10 +67,23 @@ if ($can_modify){
         if(is_preparing($status)) echo 'class="disabled"';
     }?>
 
-        <div id="ndashboard">
+        <div id="ndashboard"
+        data-campaign-id="<?php echo $campaign_id?>">
             <nav id="ndashboard-navbar">
                 <div class="nav-padding">
-                    <div  class="title"><?php echo $post_campaign->post_title; ?></div>
+                    <div class="title"><?php echo $post_campaign->post_title; ?></div>
+                    <div class="authorization">
+                        <i class="fa fa-user" aria-hidden="true"></i><span>&nbsp;&nbsp;
+                        <?php
+                            if ($is_admin){
+                                echo 'Mode Administrateur';
+                            } else if ($is_author) {
+                                echo 'Porteur du projet';
+                            } else {
+                                echo 'Membre du projet';
+                            }
+                        ?>
+                    </span></div>
                     <ul>
                         <li>
                             <a href="#page-resume">Résumé</a>
@@ -101,7 +121,7 @@ if ($can_modify){
                     <div class="page-dashboard" id="page-presentation"></div>
                     <div class="page-dashboard" id="page-informations"><?php print_informations_page(); ?></div>
                     <div class="page-dashboard" id="page-wallet">4</div>
-                    <div class="page-dashboard" id="page-campaign">5</div>
+                    <div class="page-dashboard" id="page-campaign"><?php print_campaign_page(); ?></div>
                     <div class="page-dashboard" id="page-contacts">6</div>
                     <div class="page-dashboard" id="page-news"><?php print_news_page(); ?></div>
                     <div class="page-dashboard" id="page-support">8</div>
