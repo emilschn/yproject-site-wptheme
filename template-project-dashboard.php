@@ -91,13 +91,17 @@ if ($can_modify){
                         <li>
                             <a <?php if (!is_preparing($status)) {print('href="'.get_permalink($campaign_id).'" ');}
                                 check_enabled_tab($status) ?>>
-                                Présentation&nbsp;&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
+                                Présentation&nbsp;&nbsp;
+                                <i class="fa fa-external-link" aria-hidden="true"></i></a>
                         </li>
                         <li>
                             <a href="#page-informations">Informations<div class="badge-notif">0</div></a>
                         </li>
                         <li>
-                            <a href="#page-wallet" <?php check_enabled_tab($status) ?>>Gestion financière</a>
+                            <a <?php if (!is_preparing($status)) {print('href="'.get_permalink(get_page_by_path('gestion-financiere')->ID) . '?campaign_id=' .$campaign_id.'" ');}
+                                check_enabled_tab($status) ?>>
+                                Gestion financière&nbsp;&nbsp;
+                                <i class="fa fa-external-link" aria-hidden="true"></i></a>
                         </li>
                         <li>
                             <a href="#page-campaign" <?php check_enabled_tab($status) ?>>Campagne</a>
@@ -120,11 +124,15 @@ if ($can_modify){
                     <div class="page-dashboard" id="page-resume"><?php print_resume_page(); ?></div>
                     <div class="page-dashboard" id="page-presentation"></div>
                     <div class="page-dashboard" id="page-informations"><?php print_informations_page(); ?></div>
-                    <div class="page-dashboard" id="page-wallet">4</div>
+                    <div class="page-dashboard" id="page-wallet"></div>
                     <div class="page-dashboard" id="page-campaign"><?php print_campaign_page(); ?></div>
                     <div class="page-dashboard" id="page-contacts">6</div>
                     <div class="page-dashboard" id="page-news"><?php print_news_page(); ?></div>
                     <div class="page-dashboard" id="page-support">8</div>
+                    <div class="page-dashboard" id="page-loading">
+                        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
+                    </div>
 
                 </div>
             </div>

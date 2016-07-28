@@ -10,6 +10,7 @@ function print_resume_page()
 
     ?>
     <div id="block-summary" >
+        <div class="head"><?php _e('R&eacute;sum&eacute; du projet', 'yproject'); ?></div>
         <div class="current-step">
             <?php ?>
             <img src="<?php echo $stylesheet_directory_uri; ?>/images/frise-preview.png" alt="" /><br>

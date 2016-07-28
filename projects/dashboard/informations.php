@@ -78,12 +78,31 @@ function print_informations_page()
                 </ul>
 
                 <?php
-                DashboardUtility::create_select_field(gender, "Vous &ecirc;tes",
-                    array("une femme", "un homme"), array("female", "male"), $WDGAuthor->wp_user->get('user_gender'), null, $is_author);
+                DashboardUtility::create_field(array(
+                    "id"=>"gender",
+                    "type"=>"select",
+                    "label"=>"Vous &ecirc;tes",
+                    "value"=>$WDGAuthor->wp_user->get('user_gender'),
+                    "editable"=>$is_author,
+                    "options_id"=>array("female", "male"),
+                    "options_names"=>array("une femme", "un homme")
+                ));
 
-                DashboardUtility::create_text_field("firstname", "Prénom", $WDGAuthor->wp_user->user_firstname, null, $is_author);
+                DashboardUtility::create_field(array(
+                    "id"=>"firstname",
+                    "type"=>"text",
+                    "label"=>"Pr&eacute;nom",
+                    "value"=>$WDGAuthor->wp_user->user_firstname,
+                    "editable"=>$is_author
+                ));
 
-                DashboardUtility::create_text_field("lastname", "Nom", $WDGAuthor->wp_user->user_lastname, null, $is_author);
+                DashboardUtility::create_field(array(
+                    "id"=>"lastname",
+                    "type"=>"text",
+                    "label"=>"Nom",
+                    "value"=>$WDGAuthor->wp_user->user_lastname,
+                    "editable"=>$is_author
+                ));
 
                 $bd = new DateTime();
                 if(!empty($WDGAuthor->wp_user->get('user_birthday_year'))){
@@ -92,26 +111,82 @@ function print_informations_page()
                         intval($WDGAuthor->wp_user->get('user_birthday_day')));
                 }
 
-                DashboardUtility::create_date_field("birthday", "Date de naissance", $bd, null, $is_author);
+                DashboardUtility::create_field(array(
+                    "id"=>"birthday",
+                    "type"=>"date",
+                    "label"=>"Date de naissance",
+                    "value"=>$bd,
+                    "editable"=>$is_author
+                ));
 
-                DashboardUtility::create_text_field("birthplace", "Ville de naissance", $WDGAuthor->wp_user->get('user_birthplace'), null, $is_author);
+                DashboardUtility::create_field(array(
+                    "id"=>"birthplace",
+                    "type"=>"text",
+                    "label"=>"Ville de naissance",
+                    "value"=>$WDGAuthor->wp_user->get('user_birthplace'),
+                    "editable"=>$is_author
+                ));
 
-                DashboardUtility::create_select_field('nationality', "Nationalit&eacute;",
-                    array_values($country_list), array_keys($country_list), $WDGAuthor->wp_user->get('user_nationality'), null, $is_author);
+                DashboardUtility::create_field(array(
+                    "id"=>"nationality",
+                    "type"=>"select",
+                    "label"=>"Nationalit&eacute;",
+                    "value"=>$WDGAuthor->wp_user->get('user_nationality'),
+                    "editable"=>$is_author,
+                    "options_id"=>array_keys($country_list),
+                    "options_names"=>array_values($country_list)
+                ));
 
-                DashboardUtility::create_text_field("mobile_phone", "T&eacute;l&eacute;phone mobile", $WDGAuthor->wp_user->get('user_mobile_phone'),
-                    "Ce num&eacute;ro sera celui utilis&eacute; pour vous contacter &agrave; propos de votre projet" , $is_author);
+                DashboardUtility::create_field(array(
+                    "id"=>"mobile_phone",
+                    "type"=>"text",
+                    "label"=>"T&eacute;l&eacute;phone mobile",
+                    "value"=>$WDGAuthor->wp_user->get('user_mobile_phone'),
+                    "infobubble"=>"Ce num&eacute;ro sera celui utilis&eacute; pour vous contacter &agrave; propos de votre projet",
+                    "editable"=>$is_author,
+                    "left_icon"=>"mobile-phone"
+                ));
 
-                DashboardUtility::create_text_field('email', "Adresse &eacute;lectronique", $WDGAuthor->wp_user->user_email,
-                    "Pour modifier votre adresse e-mail de contact, rendez-vous dans vos param&egrave;tres de compte", false);
+                DashboardUtility::create_field(array(
+                    "id"=>"email",
+                    "type"=>"text",
+                    "label"=>"Adresse &eacute;lectronique",
+                    "value"=>$WDGAuthor->wp_user->user_email,
+                    "infobubble"=>"Pour modifier votre adresse e-mail de contact, rendez-vous dans vos param&egrave;tres de compte",
+                    "editable"=>false
+                ));
 
-                DashboardUtility::create_text_field("address", "Adresse", $WDGAuthor->wp_user->get('user_address'), null, $is_author);
+                DashboardUtility::create_field(array(
+                    "id"=>"address",
+                    "type"=>"text",
+                    "label"=>"Adresse",
+                    "value"=>$WDGAuthor->wp_user->get('user_address'),
+                    "editable"=>$is_author
+                ));
 
-                DashboardUtility::create_text_field("postal_code", "Code postal", $WDGAuthor->wp_user->get('user_postal_code'), null, $is_author);
+                DashboardUtility::create_field(array(
+                    "id"=>"postal_code",
+                    "type"=>"text",
+                    "label"=>"Code postal",
+                    "value"=>$WDGAuthor->wp_user->get('user_postal_code'),
+                    "editable"=>$is_author
+                ));
 
-                DashboardUtility::create_text_field("city", "Ville", $WDGAuthor->wp_user->get('user_city'), null, $is_author);
+                DashboardUtility::create_field(array(
+                    "id"=>"city",
+                    "type"=>"text",
+                    "label"=>"Ville",
+                    "value"=>$WDGAuthor->wp_user->get('user_city'),
+                    "editable"=>$is_author
+                ));
 
-                DashboardUtility::create_text_field("country", "Pays", $WDGAuthor->wp_user->get('user_country'), null, $is_author) ?>
+                DashboardUtility::create_field(array(
+                    "id"=>"country",
+                    "type"=>"text",
+                    "label"=>"Pays",
+                    "value"=>$WDGAuthor->wp_user->get('user_country'),
+                    "editable"=>$is_author
+                ));?>
 
                 <br/>
 
@@ -209,12 +284,21 @@ function print_informations_page()
                 </ul>
 
                 <?php
-                DashboardUtility::create_text_field("project_name", "Nom du projet", $post_campaign->post_title);
+                DashboardUtility::create_field(array(
+                    "id"=>"project_name",
+                    "type"=>"text",
+                    "label"=>"Nom du projet",
+                    "value"=>$post_campaign->post_title
+                ));
 
-                DashboardUtility::create_wpeditor_field('backoffice_summary', 'R&eacute;sum&eacute; du projet', $campaign->backoffice_summary(),
-                    "Décrivez-nous votre projet. Les informations sont traitées de façon confidentielles");?>
-
-                <label for="categories">Cat&eacute;gorie :</label>
+                DashboardUtility::create_field(array(
+                "id"=>"backoffice_summary",
+                "type"=>"editor",
+                "label"=>"R&eacute;sum&eacute; du projet",
+                "value"=>$campaign->backoffice_summary()
+                ));
+                ?>
+                <div class="field"><label for="categories">Cat&eacute;gorie</label>
                 <?php wp_dropdown_categories(array(
                     'hide_empty' => 0,
                     'taxonomy' => 'download_category',
@@ -223,9 +307,9 @@ function print_informations_page()
                     'child_of' => $term_category_id,
                     'name' => 'categories',
                     'id' => 'update_project_category'
-                )); ?><br/>
+                )); ?></div>
 
-                <label for="activities">Secteur d&apos;activit&eacute;:</label>
+                <div class="field"><label for="activities">Secteur d&apos;activit&eacute;</label>
                 <?php wp_dropdown_categories(array(
                     'hide_empty' => 0,
                     'taxonomy' => 'download_category',
@@ -234,12 +318,19 @@ function print_informations_page()
                     'child_of' => $term_activity_id,
                     'name' => 'activities',
                     'id' => 'update_project_activity'
-                )); ?><br/>
+                )); ?></div>
 
                 <?php
                 $locations = atcf_get_locations();
-                DashboardUtility::create_select_field('project_location', "Localisation", $locations, $locations, $campaign->location());
 
+                DashboardUtility::create_field(array(
+                    "id"=>"project_location",
+                    "type"=>"select",
+                    "label"=>"Localisation",
+                    "value"=>$campaign->location(),
+                    "options_id"=>array_keys($locations),
+                    "options_names"=>array_values($locations)
+                ));
                 ?>
 
                 <p id="projectinfo_form_button" class="align-center">
@@ -257,16 +348,53 @@ function print_informations_page()
             </ul>
             <form action="" id="projectfunding_form">
                 <?php
-                DashboardUtility::create_number_field("maximum_goal", "Montant maximal demand&eacute;", $campaign->goal(false), 0, null, 1, "&euro;");
+                DashboardUtility::create_field(array(
+                    "id"=>"maximum_goal",
+                    "type"=>"number",
+                    "label"=>"Montant maximal demand&eacute;",
+                    "value"=>$campaign->goal(false),
+                    "right_icon"=>"eur",
+                    "min"=>500
+                ));
 
-                DashboardUtility::create_number_field("minimm_goal", "Palier minimal", $campaign->minimum_goal(false), 0, null, 1, "&euro;",
-                    "Au-del&agrave; de ce palier, la collecte sera valid&eacute; mais rien n'emp&ecirc;che d'avoir un objectif plus ambitieux !");
+                DashboardUtility::create_field(array(
+                    "id"=>"minimum_goal",
+                    "type"=>"number",
+                    "label"=>"Palier minimal",
+                    "infobubble"=>"Au-del&agrave; de ce palier, la collecte sera valid&eacute; mais rien n'emp&ecirc;che d'avoir un objectif plus ambitieux !",
+                    "value"=>$campaign->minimum_goal(false),
+                    "right_icon"=>"eur",
+                    "min"=>500
+                ));
 
-                DashboardUtility::create_number_field("funding_duration", "Dur&eacute;e du financement", $campaign->funding_duration(), 1, 100, 1, "ann&eacute;es");
 
-                DashboardUtility::create_number_field("roi_percent_estimated", "Pourcentage de reversement estim&eacute;", $campaign->roi_percent_estimated(), 0, 100, 0.01, "% du CA");
+                DashboardUtility::create_field(array(
+                    "id"=>"funding_duration",
+                    "type"=>"number",
+                    "label"=>"Dur&eacute;e du financement",
+                    "value"=>$campaign->funding_duration(),
+                    "suffix"=>" ann&eacute;es",
+                    "min"=>1,
+                    "max"=>10
+                ));
 
-                DashboardUtility::create_date_field("first_payment", "Première date de versement", new DateTime($campaign->first_payment_date()),false);
+                DashboardUtility::create_field(array(
+                    "id"=>"roi_percent_estimated",
+                    "type"=>"number",
+                    "label"=>"Pourcentage de reversement estim&eacute;",
+                    "value"=>$campaign->funding_duration(),
+                    "suffix"=>"&nbsp;% du CA",
+                    "min"=>0,
+                    "max"=>100,
+                    "step"=>0.01
+                ));
+
+                DashboardUtility::create_field(array(
+                    "id"=>"first_payment",
+                    "type"=>"date",
+                    "label"=>"Première date de versement",
+                    "value"=>new DateTime($campaign->first_payment_date())
+                ));
 
                 ?>
 
@@ -293,11 +421,33 @@ function print_informations_page()
             </ul>
             <form action="" id="communication_form">
                 <?php
-                DashboardUtility::create_text_field('website', 'Site web', $campaign->campaign_external_website());
+                DashboardUtility::create_field(array(
+                    "id"=>"website",
+                    "type"=>"text",
+                    "label"=>'Site web',
+                    "value"=> $campaign->campaign_external_website(),
+                    "right_icon"=>"share-alt",
+                ));
 
-                DashboardUtility::create_text_field('facebook', 'Page Facebook', $campaign->facebook_name(),"",true,"www.facebook.com/","PageFacebook");
+                DashboardUtility::create_field(array(
+                    "id"=>"facebook",
+                    "type"=>"text",
+                    "label"=>'Page Facebook',
+                    "value"=> $campaign->facebook_name(),
+                    "prefix"=>"www.facebook.com/",
+                    "placeholder"=>"PageFacebook",
+                    "right_icon"=>"facebook",
+                ));
 
-                DashboardUtility::create_text_field('twitter', 'Twitter', $campaign->twitter_name(),"",true,"@","CompteTwitter");
+                DashboardUtility::create_field(array(
+                    "id"=>"twitter",
+                    "type"=>"text",
+                    "label"=>'Twitter',
+                    "value"=> $campaign->twitter_name(),
+                    "prefix"=>"@",
+                    "placeholder"=>"CompteTwitter",
+                    "right_icon"=>"twitter",
+                ));
 
                 ?>
                 <p id="communication_form_button" class="align-center">

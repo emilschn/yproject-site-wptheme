@@ -5,7 +5,7 @@ function print_campaign_page()
     global $campaign_id, $campaign, $post_campaign,
            $WDGAuthor, $WDGUser_current;
     ?>
-    <div class="head">Organisation de la campagne</div>
+    <div class="head"><?php _e('Organisation de la campagne', 'yproject'); ?></div>
     <div class="tab-content" style="text-align:center">
         <h2><?php _e('Administrateur du projet', 'yproject'); ?></h2>
         <span><?php echo $WDGAuthor->wp_user->user_firstname . ' ' . $WDGAuthor->wp_user->user_lastname.'</span><br/><span>'.
@@ -35,6 +35,10 @@ function print_campaign_page()
         <input type="text" id="new_team_member_string" style="width: 295px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
         <a class="project-manage-team button" data-action="yproject-add-member">Ajouter</a>
         <?php echo DashboardUtility::get_infobutton("Les membres de l'&eacute;quipe peuvent acc&eacute;der au tableau de bord et modifier les param&egrave;tres et la page de projet"); ?>
+    </div>
+
+    <div class="tab-content">
+        <h2><?php _e('Planning', 'yproject'); ?></h2>
     </div>
 <?php
 }

@@ -50,9 +50,10 @@ var WDGProjectDashboard = (function ($) {
                     $("#ndashboard-navbar li a").removeClass("active");
                     $(this).addClass("active");
 
+                    var target = $(this).attr("href");
                     $("#ndashboard-content .page-dashboard").hide();
-                    $("#ndashboard-content " + $(this).attr("href")).show();
-                    history.pushState(null, null, $(this).attr("href"));
+                    $("#ndashboard-content " + target).show();
+                    history.pushState(null, null, target);
                     return false; //Empêche le défilement automatique lorsqu'on clique sur un lien avec un #
                 });
 
@@ -136,7 +137,7 @@ var WDGProjectDashboard = (function ($) {
                         }
                     });
                 };
-                
+
                 //Infos personnelles
                 if ($("#tab-user-infos").length > 0) {
                     $("#userinfo_form").submit(function (e) {
