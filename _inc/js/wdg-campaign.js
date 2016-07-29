@@ -187,7 +187,7 @@ var WDGProjectViewer = (function($) {
 			   	};
 				$("#phase2").attr('class','left_disappearance')
 				$("#phase3").attr('class','left_disappearance')
-			   	window.setTimeout( wait, 800 ); 
+			   	window.setTimeout( wait, 400 ); 
 			};
 
 			hide_except_div2 = function()
@@ -199,7 +199,7 @@ var WDGProjectViewer = (function($) {
 			  	 	$("#phase3").attr('class','left_disappearance')
 			   	if(phase==1)
 			  	 	$("#phase1").attr('class','right_disappearance')
-			   window.setTimeout( wait, 800 ); 
+			   window.setTimeout( wait, 400 ); 
 			};
 
 			hide_except_div3 = function()
@@ -209,7 +209,7 @@ var WDGProjectViewer = (function($) {
 			   	};
 			   	$("#phase2").attr('class','right_disappearance')
 			   	$("#phase1").attr('class','right_disappearance')
-			   window.setTimeout( wait, 800 ); 
+			   window.setTimeout( wait, 400 ); 
 			};
 
 			see_dev_true = function()

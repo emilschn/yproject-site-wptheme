@@ -967,6 +967,10 @@ textarea#advice_v3, input#more_info_other_v3{
     font-size: 14px;
 }
 
+textarea#advice_v3{
+	padding-top: 0px;
+}
+
 #impact_other_v3{
     font-size: 14px;
 }
@@ -1055,8 +1059,8 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
     animation-name: slideLeft;
     -webkit-animation-name: slideLeft;  
 
-    animation-duration: 1s; 
-    -webkit-animation-duration: 1s;
+    animation-duration: 0.5s; 
+    -webkit-animation-duration: 0.5s;
 
     animation-timing-function: ease-in-out; 
     -webkit-animation-timing-function: ease-in-out;     
@@ -1103,8 +1107,8 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
     animation-name: slideLeft_disp;
     -webkit-animation-name: slideLeft_disp;  
 
-    animation-duration: 1s; 
-    -webkit-animation-duration: 1s;
+    animation-duration: 0.5s; 
+    -webkit-animation-duration: 0.5s;
 
     animation-timing-function: ease-in-out; 
     -webkit-animation-timing-function: ease-in-out;     
@@ -1132,8 +1136,8 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
     animation-name: slideRight;
     -webkit-animation-name: slideRight; 
 
-    animation-duration: 1s; 
-    -webkit-animation-duration: 1s;
+    animation-duration: 0.5s; 
+    -webkit-animation-duration: 0.5s;
 
     animation-timing-function: ease-in-out; 
     -webkit-animation-timing-function: ease-in-out;     
@@ -1180,8 +1184,8 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
     animation-name: slideRight_dis;
     -webkit-animation-name: slideRight_dis; 
 
-    animation-duration: 1s; 
-    -webkit-animation-duration: 1s;
+    animation-duration: 0.5s; 
+    -webkit-animation-duration: 0.5s;
 
     animation-timing-function: ease-in-out; 
     -webkit-animation-timing-function: ease-in-out;     
