@@ -338,14 +338,8 @@ else {
 
 				$project_link = get_permalink($campaign_id);
 
-				$category_slug = $post->ID . '-blog-' . $post->post_name;
-				$category_obj = get_category_by_slug($category_slug);
-				if (!empty($category_obj)) {
-					$category_link = get_category_link($category_obj->cat_ID);
-					$posts_in_category = get_posts(array('category'=>$category_obj->cat_ID));
-				} else {
-					$category_link = '';
-				}
+				$category_link = get_category_link($campaign->get_news_category_id());
+				$posts_in_category = get_posts(array('category'=>$campaign->get_news_category_id()));
 				$nb_cat = (isset($posts_in_category)) ? ' ('.count($posts_in_category).')' : '';
 				if ($campaign->edit_version() > 2) {
 					$category_link = get_permalink($campaign->ID);

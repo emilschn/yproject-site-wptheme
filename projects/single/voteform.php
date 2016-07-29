@@ -300,20 +300,20 @@ if ($campaign->end_vote_remaining() > 0) {
 
 					    <?php if (".$campaign->funding_type()." != 'fundingdonation'): ?>
 					    Je pense que le risque est :
-				    		<span id='valBox4_1' class='range-slider__value' style='".$style_valBox4_1_before."'>".$term_risk_1."</span>
-				    		<span id='valBox4_2' class='range-slider__value' style='".$style_valBox4_2_before."'>".$term_risk_2."</span>
-				    		<span id='valBox4_3' class='range-slider__value' style='".$style_valBox4_3_before."'>".$term_risk_3."</span>
-				    		<span id='valBox4_4' class='range-slider__value' style='".$style_valBox4_4_before."'>".$term_risk_4."</span>
-				    		<span id='valBox4_5' class='range-slider__value' style='".$style_valBox4_5_before."'>".$term_risk_5."</span>
 					    </br>
 					    <div id='choice_risk'>
-						  	<span class='span_risk'> Très faible </span>
 						  	<input id='note_risk' type='range'min='1' max='5' step='1'  id='invest_risk_v3' name='invest_risk' value='".$invest_risk_before."'
 						    		 onchange='display_range4(this.value)'
 										 onkeyup='display_range4(this.value)'
 										 ".$style_risk."
 						    >
-						    <span class='span_risk'> Très élevé </span>
+						    <div class='result_box'>
+					    		<span id='valBox4_1' class='range-slider__value' style='".$style_valBox4_1_before."'>".$term_risk_1."</span>
+					    		<span id='valBox4_2' class='range-slider__value' style='".$style_valBox4_2_before."'>".$term_risk_2."</span>
+					    		<span id='valBox4_3' class='range-slider__value' style='".$style_valBox4_3_before."'>".$term_risk_3."</span>
+					    		<span id='valBox4_4' class='range-slider__value' style='".$style_valBox4_4_before."'>".$term_risk_4."</span>
+					    		<span id='valBox4_5' class='range-slider__value' style='".$style_valBox4_5_before."'>".$term_risk_5."</span>
+						  	</div>
 					    </div>
 					    <?php endif; ?>
 						<br />

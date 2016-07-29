@@ -1,10 +1,9 @@
 <?php function print_block_news() { 
     global $post_campaign, $campaign_id;
-	$category_slug = $post_campaign->ID . '-blog-' . $post_campaign->post_name;
-	$category_obj = get_category_by_slug($category_slug);
-	$category_link = (!empty($category_obj)) ? get_category_link($category_obj->cat_ID) : '';
+	$campaign = atcf_get_campaign($post_campaign);
+	$category_link = get_category_link($campaign->get_news_category_id());
 	$news_link = esc_url($category_link);
-	$posts_blog = get_posts(array('category'=>$category_obj->cat_ID));
+	$posts_blog = get_posts(array('category'=>$campaign->get_news_category_id()));
 	$nbposts_blog = count($posts_blog);
 	$page_edit_news = get_page_by_path('editer-une-actu');
 ?>
