@@ -40,8 +40,15 @@ class DashboardUtility
      *          ['admin_theme'] boolean Si vrai, ajoute le thème admin sur le champ, faux par défaut
      *          ['warning']boolean Si vrai, ajoute une infobulle invitant à la prudence si le champ est éditable, faux par défaut
      *
+     *          ['type']        string Type de formulaire disponible à choisir parmi :
+     *              "text"      champ de texte classique
+     *              "number"    champ de nombre
+     *              "select"    sélecteur
+     *              "editor"    éditeur de texte wordpress
+     *              "date"      champ de texte avec plugin pour choisir une date
+     *              "datetime"  champs pour choisir une date et une heure
+     *              "link"      champ de texte spécialement pour une URL
      *          ['value']       string Valeur initiale du champ
-     *          ['type']        string Type de formulaire disponible à choisir parmi : "text", "number", "select", "editor", "date"
      *          ['placeholder'] string placeholder du champ
      *          ['prefix']      string texte affiché juste avant le champ
      *          ['suffix']      string texte affiché juste après le champ
@@ -78,12 +85,15 @@ class DashboardUtility
         $prefix=$params["prefix"];
         $suffix=$params["suffix"];
 
+        $left_icon = $right_icon = "";
         if(isset($params["left_icon"])){
             $left_icon=$params["left_icon"];
         }else if(isset($params["right_icon"])){
             $right_icon=$params["right_icon"];
         }else if($type=='date' || $type=='datetime'){
             $left_icon="calendar";
+        }else if($type=='link'){
+            $right_icon="link";
         }
 
 
@@ -107,18 +117,18 @@ class DashboardUtility
         $text_field = '<div class="field ';
         if($admin_theme){$text_field .='admin-theme';}
         $text_field .='">'
-            .'<label for="'.$id.'">'
-            .translate($label,'yproject')
-            .DashboardUtility::get_infobutton($infobubble);
+            .'<label for="'.$id.'">';
         if($admin_theme){
             $text_field .='<i class="fa fa-unlock-alt infobutton" aria-hidden="true" 
             title="' . translate("Vous pouvez modifier ce champ en tant qu'administrateur WDG", 'yproject') . '"></i>';}
+        $text_field .= translate($label,'yproject')
+            .DashboardUtility::get_infobutton($infobubble);
         if($warning && $editable){
             $text_field .='<i class="fa fa-exclamation-triangle infobutton" aria-hidden="true" 
             title="' . translate("Attention ce champ est normalement géré automatiquement, manipulez-le avec prudence", 'yproject') . '"></i>';}
         $text_field .='</label>'
 
-            .'<span class="field-container">'.$prefix.'<span class="field-value">';
+            .'<span class="field-container">'.$prefix.'<span class="field-value" data-type="'.$type.'">';
         if($editable){
             //Add the icon inside input
             if(!empty($left_icon)){
@@ -213,6 +223,15 @@ class DashboardUtility
                     }
                     $text_field .= '</select>';
                     break;
+                case 'link':
+                    $text_field .= '<input type="text" '
+                        .'name="'.$id.'" '
+                        .'id="update_'.$id.'" '
+                        .'placeholder="'.$placeholder.'" '
+                        .'value="'.$initial_value.'" ';
+                    $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
+                    $text_field .= '" />';
+                    break;
                 default:
                     $text_field .= $initial_value;
             }
@@ -226,6 +245,12 @@ class DashboardUtility
                     break;
                 case 'datetime':
                     $text_field .= translate($initial_value->format('l')).' '.$initial_value->format('d-m-Y, G\hi');
+                    break;
+                case 'link':
+                    if(!empty($initial_value)){
+                        $text_field .= '<a target="_blank" href="'.$initial_value.'">'.$initial_value.
+                            '&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>';
+                    }
                     break;
                 default:
                     $text_field .= $initial_value;

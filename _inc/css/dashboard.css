@@ -153,6 +153,10 @@
     border-bottom: 1px solid grey;
 }
 
+#ndashboard-content .tab-content h2{
+    text-align: center;
+}
+
 /*******************************************************************************
 * Formulaires
 *******************************************************************************/
@@ -167,8 +171,9 @@
     background-color: lightgray;
 }
 
-#ndashboard .tab-content .field.admin-theme label i.fa {
+#ndashboard .tab-content .field.admin-theme label i.fa-unlock-alt {
     color:mediumturquoise;
+    margin: 0px 5px 0px 0px;
 }
 
 #ndashboard .tab-content label {
@@ -221,11 +226,20 @@
 #ndashboard .tab-content .field-container {
     white-space: nowrap;
     vertical-align: middle;
+
 }
 
 #ndashboard .tab-content .field-container .field-value {
     position: relative;
 }
+
+#ndashboard .tab-content .field-container .field-value a {
+    display: inline-block;
+    overflow: hidden;
+    max-width: 250px;
+    text-overflow: ellipsis;
+}
+
 
 #ndashboard .tab-content .field-container i.fa.left{
     position: absolute;

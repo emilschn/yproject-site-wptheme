@@ -437,7 +437,24 @@ function print_informations_page()
         </div>
 
         <div class="tab-content" id="tab-contract">
-            Contract
+            <ul id="contract_form_errors" class="errors">
+
+            </ul>
+            <form action="" id="contract_form">
+                <?php
+
+                DashboardUtility::create_field(array(
+                    "id"=>"contract_url",
+                    "type"=>"link",
+                    "label"=>"Lien du contrat",
+                    "value"=> $campaign->contract_doc_url(),
+                    "editable"=> $is_admin,
+                    "admin_theme"=>$is_admin,
+                    "placeholder"=>"http://....."
+                ));
+
+                DashboardUtility::create_save_button("contract_form");?>
+            </form>
         </div>
     </div>
     <?php

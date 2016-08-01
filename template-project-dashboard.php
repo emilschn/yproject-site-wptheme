@@ -57,7 +57,7 @@ if ($can_modify){
     locate_template( array("projects/dashboard/dashboardutility.php"), true );
     locate_template( array("projects/dashboard/resume.php"), true );
     locate_template( array("projects/dashboard/informations.php"), true );
-    locate_template( array("projects/dashboard/campaign.php"), true );
+    locate_template( array("projects/dashboard/campaign-tab.php"), true );
     locate_template( array("projects/dashboard/news.php"), true );
 
     function is_preparing($status){
@@ -86,12 +86,14 @@ if ($can_modify){
                     </span></div>
                     <ul>
                         <li>
-                            <a href="#page-resume">Résumé</a>
+                            <a href="#page-resume">
+                                <?php _e("R&eacute;sum&eacute;", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </a>
                         </li>
                         <li>
                             <a <?php if (!is_preparing($status)) {print('href="'.get_permalink($campaign_id).'" ');}
                                 check_enabled_tab($status) ?>>
-                                Présentation&nbsp;&nbsp;
+                                <?php _e("Pr&eacute;sentation", 'yproject');?>&nbsp;&nbsp;
                                 <i class="fa fa-external-link" aria-hidden="true"></i></a>
                         </li>
                         <li>
@@ -100,21 +102,27 @@ if ($can_modify){
                         <li>
                             <a <?php if (!is_preparing($status)) {print('href="'.get_permalink(get_page_by_path('gestion-financiere')->ID) . '?campaign_id=' .$campaign_id.'" ');}
                                 check_enabled_tab($status) ?>>
-                                Gestion financière&nbsp;&nbsp;
+                                <?php _e("Gestion financi&egrave;re", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <i class="fa fa-external-link" aria-hidden="true"></i></a>
                         </li>
                         <li>
-                            <a href="#page-campaign" <?php check_enabled_tab($status) ?>>Campagne</a>
+                            <a href="#page-campaign" <?php check_enabled_tab($status) ?>>
+                                <?php _e("Campagne", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </a>
                         </li>
                         <li>
-                            <a href="#page-contacts" <?php check_enabled_tab($status) ?>>Contacts</a>
+                            <a href="#page-contacts" <?php check_enabled_tab($status) ?>>
+                                <?php _e("Contacts", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </a>
                         </li>
                         <li>
-                            <a href="#page-news" <?php check_enabled_tab($status) ?>>Actualités</a>
+                            <a href="#page-news" <?php check_enabled_tab($status) ?>>
+                                <?php _e("Actualit&eacute;s", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </a>
                         </li>
-                        <li>
+                        <!--li>
                             <a href="#page-support">Accompagnement</a>
-                        </li>
+                        </li-->
                     </ul>
                 </div>
             </nav>
@@ -128,7 +136,7 @@ if ($can_modify){
                     <div class="page-dashboard" id="page-campaign"><?php print_campaign_page(); ?></div>
                     <div class="page-dashboard" id="page-contacts">6</div>
                     <div class="page-dashboard" id="page-news"><?php print_news_page(); ?></div>
-                    <div class="page-dashboard" id="page-support">8</div>
+                    <!--div class="page-dashboard" id="page-support">8</div-->
                     <div class="page-dashboard" id="page-loading">
                         <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
                         <span class="sr-only">Loading...</span>
