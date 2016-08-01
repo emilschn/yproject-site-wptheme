@@ -50,9 +50,22 @@ var WDGProjectDashboard = (function ($) {
                     $("#ndashboard-navbar li a").removeClass("active");
                     $(this).addClass("active");
 
+                    //Arrête chargement des iframes
+                    $("#ndashboard-content .google-doc iframe").not(".isloaded").prop('src','');
+
+                    //Change le contenu de la page
                     var target = $(this).attr("href");
+
                     $("#ndashboard-content .page-dashboard").hide();
                     $("#ndashboard-content " + target).show();
+
+                    //Charge les iframe
+                    var iframetoload = $("#ndashboard-content " + target+" .google-doc iframe");
+                    iframetoload.prop('src',iframetoload.data('src'));
+                    iframetoload.on('load', function(){
+                        $(this).addClass('isloaded');
+                    });
+
                     history.pushState(null, null, target);
                     return false; //Empêche le défilement automatique lorsqu'on clique sur un lien avec un #
                 });
@@ -75,6 +88,10 @@ var WDGProjectDashboard = (function ($) {
                 },
                 style: {
                     classes: 'qtip-tipsy qtip-shadow'
+                },
+                hide: {
+                    fixed: true,
+                    delay: 300
                 }
             });
 
@@ -212,8 +229,6 @@ var WDGProjectDashboard = (function ($) {
 
                 //Infos financement
                 if ($("#tab-funding").length > 0) {
-                    var nb_years_li_existing = ($("#estimated-turnover li").length);
-
                     //Etiquettes de numéros d'années pour le CA prévisionnel
                     $("#update_first_payment").change(function(){
                         var start_year = new Date($("#update_first_payment").val()).getFullYear();
@@ -224,13 +239,15 @@ var WDGProjectDashboard = (function ($) {
 
                     //Cases pour le CA prévisionnel
                     $("#update_funding_duration").change(function() {
+                        var nb_years_li_existing = ($("#estimated-turnover li").length);
                         var new_nb_years = parseInt($("#update_funding_duration").val());
+                        "change nb year trigger "+new_nb_years+"(exist : "+nb_years_li_existing+")";
 
                         //Ajoute des boîtes au besoin
                         if(new_nb_years > nb_years_li_existing){
                             var newlines = $("#estimated-turnover").html();
 
-                            for(i=0; i<new_nb_years-nb_years_li_existing;i++){
+                            for(var i=0; i<new_nb_years-nb_years_li_existing;i++){
                                 newlines = newlines+
                                     '<li><label>Année <span class="year"></span></label>'+
                                     '<input type="text" value="0"/></li>'
@@ -285,8 +302,9 @@ var WDGProjectDashboard = (function ($) {
                 }
             }
 
+            //Page campagne
             if($("#page-campaign").length > 0){
-                //Gestion equipe depuis Tableau de bord
+                //Gestion equipe
                 $(".project-manage-team").click(function(){
                     action = $(this).attr('data-action');
                     if(action==="yproject-add-member"){
@@ -298,6 +316,37 @@ var WDGProjectDashboard = (function ($) {
 
                     WDGProjectDashboard.manageTeam(action, data, campaign_id);
                 });
+
+                //Formulaire
+                //Infos organisation
+                if ($("#campaign_form").length > 0) {
+                    $("#campaign_form").submit(function (e) {
+                        e.preventDefault();
+                        var data_to_update = {
+                            'action': 'save_project_campaigntab',
+                            'google_doc': $("#update_planning_gdrive").val(),
+                            'end_vote_date': $("#update_end_vote_date").val()+"\ "+$("#update_h_end_vote_date").val()+':'+$("#update_m_end_vote_date").val(),
+                            'end_collecte_date': $("#update_end_collecte_date").val()+"\ "+$("#update_h_end_collecte_date").val()+':'+$("#update_m_end_collecte_date").val()
+                        }
+                        update_tab(data_to_update, "campaign_form", "campaign_form_button", "campaign_form_loading", "campaign_form_errors");
+
+                    });
+
+                    $("#update_project_organisation").change(function(e){
+                        var newval = $("#update_project_organisation").val();
+
+                        if(newval!=''){
+                            $("#edit-orga-button").show();
+                            var newname = $("#update_project_organisation").find('option:selected').text();
+                            $("#edit-orga-button").attr("href",$("#edit-orga-button").data("url-edit")+newval);
+
+                            $("#edit-orga-button").text("Editer "+newname);
+                        } else {
+                            $("#edit-orga-button").hide();
+                        }
+
+                    });
+                }
             }
         },
 

@@ -3,13 +3,14 @@
 function print_campaign_page()
 {
     global $campaign_id, $campaign, $post_campaign,
-           $WDGAuthor, $WDGUser_current;
+           $WDGAuthor, $WDGUser_current,
+           $is_admin, $is_author;
     ?>
     <div class="head"><?php _e('Organisation de la campagne', 'yproject'); ?></div>
     <div class="tab-content" style="text-align:center">
         <h2><?php _e('Administrateur du projet', 'yproject'); ?></h2>
         <span><?php echo $WDGAuthor->wp_user->user_firstname . ' ' . $WDGAuthor->wp_user->user_lastname.'</span><br/><span>'.
-            bp_core_get_userlink($WDGAuthor->wp_user->ID)?></span>
+                bp_core_get_userlink($WDGAuthor->wp_user->ID)?></span>
 
         <h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
         <?php
@@ -39,6 +40,67 @@ function print_campaign_page()
 
     <div class="tab-content">
         <h2><?php _e('Planning', 'yproject'); ?></h2>
+
+        <form id="campaign_form">
+            <ul id="campaign_form_errors" class="errors">
+
+            </ul>
+            <?php
+            DashboardUtility::create_field(array(
+                "id"=>"end_vote_date",
+                "type"=>"datetime",
+                "label"=>"Date de fin de vote",
+                "value"=>new DateTime($campaign->end_vote_date()),
+                "editable"=>$is_admin,
+                "admin_theme"=>$is_admin,
+                "warning"=>true
+            ));
+
+            DashboardUtility::create_field(array(
+                "id"=>"begin_collecte_date",
+                "type"=>"datetime",
+                "label"=>"Date de d&eacute;but de collecte",
+                "value"=>new DateTime($campaign->begin_collecte_date()),
+                "editable"=>false,
+                "admin_theme"=>false
+            ));
+
+            DashboardUtility::create_field(array(
+                "id"=>"end_collecte_date",
+                "type"=>"datetime",
+                "label"=>"Date de fin de collecte",
+                "value"=>new DateTime($campaign->end_date()),
+                "admin_theme"=>$is_admin,
+                "editable"=>$is_admin,
+                "warning"=>true
+            ));
+
+            DashboardUtility::create_field(array(
+                "id"=>"planning_gdrive",
+                "type"=>"text",
+                "label"=>"Lien du google drive planning",
+                "value"=> $campaign->google_doc(),
+                "editable"=> $is_admin,
+                "right_icon"=>"link",
+                "admin_theme"=>$is_admin,
+                "placeholder"=>"https://docs.google.com/document/d/....."
+            ));
+
+            DashboardUtility::create_save_button("campaign_form",$is_admin);
+            ?>
+        </form>
+
+        <?php
+
+        if ($campaign->google_doc() != ''){ ?>
+            <div class="google-doc">
+                <?php if (strpos('spreadsheet', $campaign->google_doc()) !== FALSE) : ?>
+                    <iframe data-src="<?php echo $campaign->google_doc(); ?>/edit?usp=sharing&embedded=true"></iframe>
+                <?php else : ?>
+                    <iframe data-src="<?php echo $campaign->google_doc(); ?>/pub?embedded=true"></iframe>
+                <?php endif; ?>
+            </div>
+        <?php } ?>
     </div>
-<?php
+    <?php
 }

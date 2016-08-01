@@ -23,42 +23,42 @@ function print_informations_page()
 
     ?>
 
-    <div class="head">Informations</div>
+    <div class="head"><?php _e("Informations","yproject");?></div>
     <div class="bloc-grid">
         <div class="display-bloc" data-tab-target="tab-user-infos">
             <i class="fa fa-user fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
-                Infos personnelles
+                <?php _e("Infos personnelles","yproject");?>
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-organization">
             <i class="fa fa-building fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
-                L'organisation
+                <?php _e("L'organisation","yproject");?>
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-project">
             <i class="fa fa-lightbulb-o fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
-                Le projet
+                <?php _e("Le projet","yproject");?>
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-funding">
             <i class="fa fa-money fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
-                Besoin de financement
+                <?php _e("Besoin de financement","yproject");?>
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-communication">
             <i class="fa fa-bullhorn fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
-                Votre communication
+                <?php _e("Votre communication","yproject");?>
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-contract">
             <i class="fa fa-calculator fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
-                Contractualisation
+                <?php _e("Contractualisation","yproject");?>
             </div>
         </div>
     </div>
@@ -67,10 +67,10 @@ function print_informations_page()
         <div class="tab-content" id="tab-user-infos">
             <form id="userinfo_form">
                 <?php if ($is_author) {
-                    ?><p>Complétez vos informations personnelles de porteur de projet</p>
+                    ?><p><?php _e("Complétez vos informations personnelles de porteur de projet","yproject");?></p>
                     <input type="hidden" id="input_is_project_holder" name="is_project_holder" value="1"/><?php
                 } else {
-                    ?><p>Seul le créateur du projet peut compléter ses informations personnelles</p><?php
+                    ?><p><?php _e("Seul le créateur du projet peut compléter ses informations personnelles","yproject");?></p><?php
                 }?>
 
                 <ul id="userinfo_form_errors" class="errors">
@@ -187,16 +187,10 @@ function print_informations_page()
                     "value"=>$WDGAuthor->wp_user->get('user_country'),
                     "editable"=>$is_author
                 ));?>
-
                 <br/>
 
-
-                <?php if ($is_author) { ?><p id="userinfo_form_button" class="align-center">
-                    <input type="submit" value="<?php _e("Enregistrer", 'yproject'); ?>" class="button"/>
-                    </p>
-                    <p id="userinfo_form_loading" class="align-center" hidden>
-                    <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement"/>
-                    </p><?php } ?>
+                <?php
+                DashboardUtility::create_save_button("userinfo_form",$is_author); ?>
             </form>
         </div>
 
@@ -248,12 +242,7 @@ function print_informations_page()
                 <a href="<?php echo get_permalink($page_new_orga->ID); ?>" class="button">Cr&eacute;er une organisation</a>
 
                 <br />
-                <p id="orgainfo_form_button" class="align-center">
-                    <input type="submit" value="<?php _e("Enregistrer", 'yproject'); ?>" class="button"/>
-                </p>
-                <p id="orgainfo_form_loading" class="align-center" hidden>
-                    <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement"/>
-                </p>
+                <?php DashboardUtility::create_save_button("orgainfo_form"); ?>
             </form>
         </div>
 
@@ -292,10 +281,11 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                "id"=>"backoffice_summary",
-                "type"=>"editor",
-                "label"=>"R&eacute;sum&eacute; du projet",
-                "value"=>$campaign->backoffice_summary()
+                    "id"=>"backoffice_summary",
+                    "type"=>"editor",
+                    "label"=>"R&eacute;sum&eacute; du projet",
+                    "infobubble"=>"Ces informations seront traitées de manière confidentielle",
+                    "value"=>$campaign->backoffice_summary()
                 ));
                 ?>
                 <div class="field"><label for="categories">Cat&eacute;gorie</label>
@@ -331,14 +321,8 @@ function print_informations_page()
                     "options_id"=>array_keys($locations),
                     "options_names"=>array_values($locations)
                 ));
-                ?>
 
-                <p id="projectinfo_form_button" class="align-center">
-                    <input type="submit" value="<?php _e("Enregistrer", 'yproject'); ?>" class="button"/>
-                </p>
-                <p id="projectinfo_form_loading" class="align-center" hidden>
-                    <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement"/>
-                </p>
+                DashboardUtility::create_save_button("projectinfo_form"); ?>
             </form>
         </div>
 
@@ -400,18 +384,17 @@ function print_informations_page()
 
                 <label>CA pr&eacute;visionnel</label>
                 <ul id="estimated-turnover">
-                    <?php foreach (($campaign->estimated_turnover()) as $year => $turnover) : ?>
-                        <li><label>Année <span class="year"><?php echo $year?></span></label><input type="text" value="<?php echo $turnover?>"/>
-                        </li>
-                    <?php endforeach; ?>
+                    <?php
+                    if(!empty($campaign->estimated_turnover())){
+                        foreach (($campaign->estimated_turnover()) as $year => $turnover) : ?>
+                            <li><label>Année <span class="year"><?php echo $year?></span></label><input type="text" value="<?php echo $turnover?>"/>
+                            </li>
+                        <?php endforeach;
+                    }
+                     ?>
                 </ul>
 
-                <p id="projectfunding_form_button" class="align-center">
-                    <input type="submit" value="<?php _e("Enregistrer", 'yproject'); ?>" class="button"/>
-                </p>
-                <p id="projectfunding_form_loading" class="align-center" hidden>
-                    <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement"/>
-                </p>
+                <?php DashboardUtility::create_save_button("projectfunding_form"); ?>
             </form>
         </div>
 
@@ -426,7 +409,7 @@ function print_informations_page()
                     "type"=>"text",
                     "label"=>'Site web',
                     "value"=> $campaign->campaign_external_website(),
-                    "right_icon"=>"share-alt",
+                    "right_icon"=>"link",
                 ));
 
                 DashboardUtility::create_field(array(
@@ -449,13 +432,7 @@ function print_informations_page()
                     "right_icon"=>"twitter",
                 ));
 
-                ?>
-                <p id="communication_form_button" class="align-center">
-                    <input type="submit" value="<?php _e("Enregistrer", 'yproject'); ?>" class="button"/>
-                </p>
-                <p id="communication_form_loading" class="align-center" hidden>
-                    <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement"/>
-                </p>
+                DashboardUtility::create_save_button("communication_form");?>
             </form>
         </div>
 

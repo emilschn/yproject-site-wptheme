@@ -32,7 +32,10 @@
     margin-bottom: 15px;
 }
 
-
+#ndashboard .google-doc iframe {
+    width: 100%;
+    height: 800px;
+}
 
 /*******************************************************************************
 * NAVIGATION BAR
@@ -151,6 +154,96 @@
 }
 
 /*******************************************************************************
+* Formulaires
+*******************************************************************************/
+#ndashboard .tab-content .field {
+    display: block;
+    margin: 10px 0px;
+    padding: 5px;
+}
+
+#ndashboard .tab-content .field.admin-theme {
+    border-left: 3px solid mediumturquoise;
+    background-color: lightgray;
+}
+
+#ndashboard .tab-content .field.admin-theme label i.fa {
+    color:mediumturquoise;
+}
+
+#ndashboard .tab-content label {
+    display: inline-block;
+    width: 220px;
+    margin: 3px 10px 3px 0px;
+    font-weight: bold;
+}
+
+#ndashboard .tab-content .field-container input{
+    display: inline-block;
+    width: 200px;
+}
+#ndashboard .tab-content .field-container select{
+    display: inline-block;
+    width: 220px;
+}
+
+#ndashboard .tab-content .field-container select.timepicker {
+    padding: 3px 2px;
+    width: 52px;
+    margin-left: 3px;
+}
+
+#ndashboard .tab-content  input:not([type='submit']),
+#ndashboard .tab-content  select{
+    margin: 3px 0px;
+    background: none repeat scroll 0 0 #FFF;
+    border: medium none;
+    padding: 3px 8px;
+}
+
+#ndashboard .tab-content .field-container input.left-icon{
+    padding-left: 24px;
+    width: 188px;
+}
+
+
+#ndashboard .tab-content .field-container input.right-icon{
+    padding-right: 24px;
+    width: 188px;
+}
+
+#ndashboard .tab-content .field-container input.left-icon.datetime,
+#ndashboard .tab-content .field-container input.right-icon.datetime{
+    width: 78px;
+}
+
+
+#ndashboard .tab-content .field-container {
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+#ndashboard .tab-content .field-container .field-value {
+    position: relative;
+}
+
+#ndashboard .tab-content .field-container i.fa.left{
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    width: 14px;
+    text-align: center;
+}
+#ndashboard .tab-content .field-container i.fa.right{
+    position: absolute;
+    top: 1px;
+    right: 5px;
+    width: 14px;
+    text-align: center;
+}
+
+
+/*******************************************************************************
 * Page resume
 *******************************************************************************/
 #page-resume #block-summary .current-step {
@@ -205,67 +298,6 @@
 
 #page-informations .display-bloc .infobloc-title{
     padding: 10px 0px;
-}
-
-#page-informations .tab-content .field {
-    display: block;
-    margin: 20px 0px;
-}
-
-#page-informations .tab-content label {
-    display: inline-block;
-    width: 210px;
-    margin: 3px 10px 3px 0px;
-    font-weight: bold;
-    vertical-align: top;
-}
-
-#page-informations .tab-content .field-container input,
-#page-informations .tab-content .field-container select{
-    display: inline-block;
-    width: 180px;
-}
-
-#page-informations .tab-content  input:not([type='submit']),
-#page-informations .tab-content  select{
-    margin: 3px 0px;
-    background: none repeat scroll 0 0 #FFF;
-    border: medium none;
-    padding: 3px 8px;
-}
-
-#page-informations .tab-content .field-container input.left-icon{
-    padding-left: 24px;
-    width: 166px;
-}
-
-#page-informations .tab-content .field-container input.right-icon{
-    padding-right: 24px;
-    width: 166px;
-}
-
-#page-informations .tab-content .field-container {
-    white-space: nowrap;
-    vertical-align: middle;
-}
-
-#page-informations .tab-content .field-container .field-value {
-    position: relative;
-}
-
-#page-informations .tab-content .field-container i.fa.left{
-    position: absolute;
-    top: 1px;
-    left: 5px;
-    width: 14px;
-    text-align: center;
-}
-#page-informations .tab-content .field-container i.fa.right{
-    position: absolute;
-    top: 1px;
-    right: 5px;
-    width: 14px;
-    text-align: center;
 }
 
 #page-informations #estimated-turnover {
