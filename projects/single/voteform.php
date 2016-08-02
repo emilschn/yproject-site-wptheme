@@ -198,7 +198,7 @@ if (isset($_GET['vote_check'])&&$_GET['vote_check']==0){
 ?>
 
 
-<div id="project_vote_zone">
+<span id="project_vote_zone">
 <?php
 if ($campaign->end_vote_remaining() > 0) {
 ?>
@@ -371,6 +371,6 @@ if ($campaign->end_vote_remaining() > 0) {
 }
 ?>
     
-</div>
+</span>
 
 
