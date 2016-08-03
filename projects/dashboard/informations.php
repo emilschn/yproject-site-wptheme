@@ -65,7 +65,7 @@ function print_informations_page()
 
     <div id="tab-container">
         <div class="tab-content" id="tab-user-infos">
-            <form id="userinfo_form">
+            <form id="userinfo_form" class="db-form">
                 <?php if ($is_author) {
                     ?><p><?php _e("Complétez vos informations personnelles de porteur de projet","yproject");?></p>
                     <input type="hidden" id="input_is_project_holder" name="is_project_holder" value="1"/><?php
@@ -195,7 +195,7 @@ function print_informations_page()
         </div>
 
         <div class="tab-content" id="tab-organization">
-            <form id="orgainfo_form">
+            <form id="orgainfo_form" class="db-form">
                 <ul id="orgainfo_form_errors" class="errors">
 
                 </ul>
@@ -267,7 +267,7 @@ function print_informations_page()
                 }
             }
             ?>
-            <form id="projectinfo_form">
+            <form id="projectinfo_form" class="db-form">
                 <ul id="projectinfo_form_errors" class="errors">
 
                 </ul>
@@ -330,7 +330,7 @@ function print_informations_page()
             <ul id="projectfunding_form_errors" class="errors">
 
             </ul>
-            <form action="" id="projectfunding_form">
+            <form action="" id="projectfunding_form"  class="db-form">
                 <?php
                 DashboardUtility::create_field(array(
                     "id"=>"maximum_goal",
@@ -402,7 +402,7 @@ function print_informations_page()
             <ul id="communication_form_errors" class="errors">
 
             </ul>
-            <form action="" id="communication_form">
+            <form action="" id="communication_form" class="db-form">
                 <?php
                 DashboardUtility::create_field(array(
                     "id"=>"website",
@@ -440,7 +440,7 @@ function print_informations_page()
             <ul id="contract_form_errors" class="errors">
 
             </ul>
-            <form action="" id="contract_form">
+            <form action="" id="contract_form" class="db-form">
                 <?php
 
                 DashboardUtility::create_field(array(

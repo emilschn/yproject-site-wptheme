@@ -64,9 +64,11 @@ var WDGProjectDashboard = (function ($) {
 
                     //Charge les iframe
                     var iframetoload = $("#ndashboard-content " + target+" .google-doc iframe");
-                    iframetoload.prop('src',iframetoload.data('src'));
-                    iframetoload.on('load', function(){
-                        $(this).addClass('isloaded');
+                    iframetoload.each(function(){
+                        $(this).prop('src',$(this).data('src'));
+                        $(this).on('load', function(){
+                            $(this).addClass('isloaded');
+                        });
                     });
 
                     history.pushState(null, null, target);
@@ -135,6 +137,80 @@ var WDGProjectDashboard = (function ($) {
             /**
              * DASHBOARD TABS
              */
+            //Page Résumé
+            if($("#page-resume").length > 0){
+                //Ajax infos d'étape
+                $("#statusmanage_form").submit(function (e) {
+                    e.preventDefault();
+                    var data_to_update = {
+                        'action': 'save_project_status',
+                        'can_go_next': $("#update_can_go_next_status").is(':checked'),
+                        'campaign_status': $("#update_campaign_status").val()
+                    }
+                    update_tab(data_to_update, "statusmanage_form", "statusmanage-form_button", "statusmanage-form_loading", "statusmanage-form_errors")
+                });
+
+                //Passage à l'étape suivante
+                if ($("#submit-go-next-status").length > 0) {
+                    $("#submit-go-next-status").attr('disabled','');
+                    //$("#submit-go-next-status").attr('style','background-color:#333 !important; border: 0px !important; ');
+
+                    checkall = function() {
+                        var allcheck = true;
+                        $(".checkbox-next-status:visible").each(function(){
+                            allcheck = allcheck && this.checked;
+                        });
+                        return allcheck;
+                    };
+
+                    //Actions des cases à cocher
+                    $(".checkbox-next-status").change(function() {
+                        if(checkall()){
+                            $("#submit-go-next-status").removeAttr('disabled');
+                            //$("#submit-go-next-status").attr('style','background-color:#EA4F51');
+                        } else {
+                            $("#submit-go-next-status").attr('disabled','');
+                            //$("#submit-go-next-status").attr('style','background-color:#333 !important; border: 0px !important;');
+                        };
+                    });
+                    $(".checkbox-next-status").trigger('change');
+
+                    //Changements du formulaire lorsque l'on veut passer de validé à vote (sans Avant-premiere)
+                    $("#no-preview-button").click(function(){
+                        $("#cb-go-preview").slideUp();
+                        $("#desc-preview").slideUp();
+                        $("#vote-checklist").slideDown();
+                        $("#no-preview-button").slideUp();
+                        $("#next-status-choice").val("2");
+                    });
+                }
+
+                //Preview date fin collecte sur LB étape suivante
+                if(($("#innbdayvote").length > 0)||($("#innbdaycollecte").length > 0)) {
+
+                    updateDate = function(idfieldinput, iddisplay) {
+                        $("#"+iddisplay).empty();
+                        if($("#"+idfieldinput).val()<=$("#"+idfieldinput).prop("max") && $("#"+idfieldinput).val()>=$("#"+idfieldinput).prop("min")){
+                            var d = new Date();
+                            var jsupp = $("#"+idfieldinput).val();
+                            d.setDate(d.getDate()+parseInt(jsupp));
+                            $("#"+iddisplay).prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+                        } else {
+                            $("#"+iddisplay).prepend("La durée doit être comprise entre "+($("#"+idfieldinput).prop("min"))+" et "+($("#"+idfieldinput).prop("max"))+" jours");
+                        }
+                    };
+
+                    updateDate("innbdaycollecte","previewenddatecollecte");
+                    updateDate("innbdayvote","previewenddatevote");
+
+                    $("#innbdaycollecte").on( 'keyup change', function () {
+                        updateDate("innbdaycollecte","previewenddatecollecte");});
+
+                    $("#innbdayvote").on( 'keyup change', function () {
+                        updateDate("innbdayvote","previewenddatevote");});
+                }
+            }
+
             //Page Informations
             if($("#page-informations").length > 0){
                 //Onglets information

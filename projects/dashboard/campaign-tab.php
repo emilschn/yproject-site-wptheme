@@ -35,7 +35,7 @@ function print_campaign_page()
             </div>
         <?php }?>
 
-        <form id="campaign_form">
+        <form id="campaign_form" class="db-form">
             <ul id="campaign_form_errors" class="errors">
 
             </ul>
@@ -99,8 +99,10 @@ function print_campaign_page()
     <div class="tab-content">
 
         <h2><?php _e('Administrateur du projet', 'yproject'); ?></h2>
-        <span style="text-align:center"><?php echo $WDGAuthor->wp_user->user_firstname . ' ' . $WDGAuthor->wp_user->user_lastname.'</span><br/><span>'.
+        <div style="text-align:center">
+            <span><?php echo $WDGAuthor->wp_user->user_firstname . ' ' . $WDGAuthor->wp_user->user_lastname.'</span><br/><span>'.
                 bp_core_get_userlink($WDGAuthor->wp_user->ID)?></span>
+        </div>
 
         <h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
         <?php
@@ -125,7 +127,7 @@ function print_campaign_page()
         ?>
         <input type="text" id="new_team_member_string" style="width: 295px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
         <a class="project-manage-team button" data-action="yproject-add-member">Ajouter</a>
-        <?php echo DashboardUtility::get_infobutton("Les membres de l'&eacute;quipe peuvent acc&eacute;der au tableau de bord et modifier les param&egrave;tres et la page de projet"); ?>
+        <?php DashboardUtility::get_infobutton("Les membres de l'&eacute;quipe peuvent acc&eacute;der au tableau de bord et modifier les param&egrave;tres et la page de projet",true); ?>
     </div>
 
     <?php

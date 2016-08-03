@@ -8,12 +8,22 @@
  */
 class DashboardUtility
 {
-    public static function get_infobutton($hovertext){
+    public static function get_infobutton($hovertext, $display=false){
         if(!empty($hovertext)) {
-            return '<i class="fa fa-question-circle infobutton" title="' . translate($hovertext, 'yproject') . '"></i>';
+            $text = '<i class="fa fa-question-circle infobutton" title="' . translate($hovertext, 'yproject') . '"></i>';
+            if($display){
+                print $text;
+            }
+            return $text;
         } else {
             return "";
         }
+    }
+
+    public static function get_admin_infobutton(){
+        return '<i class="fa fa-unlock-alt infobutton '
+        .'" aria-hidden="true" '
+        .' title="' . translate("Vous pouvez modifier ce champ en tant qu'administrateur WDG", 'yproject') . '"></i>';
     }
 
     private static function has_class_icon($left_icon, $right_icon, $include_class_attr=true){
@@ -48,6 +58,7 @@ class DashboardUtility
      *              "date"      champ de texte avec plugin pour choisir une date
      *              "datetime"  champs pour choisir une date et une heure
      *              "link"      champ de texte spécialement pour une URL
+     *              "check"     case à cocher
      *          ['value']       string Valeur initiale du champ
      *          ['placeholder'] string placeholder du champ
      *          ['prefix']      string texte affiché juste avant le champ
@@ -113,152 +124,178 @@ class DashboardUtility
             }
         }
 
-        //Create the label
+
         $text_field = '<div class="field ';
         if($admin_theme){$text_field .='admin-theme';}
-        $text_field .='">'
-            .'<label for="'.$id.'">';
+        $text_field .='">';
+
+        //Is this a checkbox
+        if($type=='check'){
+            $text_field .='<span class="field-container">'.$prefix.'<span class="field-value" data-type="'.$type.'">
+            <input type="checkbox" id="update_'.$id.'" ';
+            if($initial_value){$text_field .='checked ';}
+            if(!$editable){$text_field .='disabled ';}
+            $text_field .= "></span>$suffix</span>";
+        }
+
+        //Create the label
+        $text_field .='<label for="update_'.$id.'"';
+            if($type=='check'){$text_field.='class="long-label"';}
+        $text_field .='>';
         if($admin_theme){
-            $text_field .='<i class="fa fa-unlock-alt infobutton" aria-hidden="true" 
-            title="' . translate("Vous pouvez modifier ce champ en tant qu'administrateur WDG", 'yproject') . '"></i>';}
+            $text_field .= self::get_admin_infobutton();}
         $text_field .= translate($label,'yproject')
             .DashboardUtility::get_infobutton($infobubble);
         if($warning && $editable){
             $text_field .='<i class="fa fa-exclamation-triangle infobutton" aria-hidden="true" 
             title="' . translate("Attention ce champ est normalement géré automatiquement, manipulez-le avec prudence", 'yproject') . '"></i>';}
-        $text_field .='</label>'
+        $text_field .='</label>';
 
-            .'<span class="field-container">'.$prefix.'<span class="field-value" data-type="'.$type.'">';
-        if($editable){
-            //Add the icon inside input
-            if(!empty($left_icon)){
-                $text_field .= '<i class="left fa fa-'.$left_icon.'" aria-hidden="true"></i>';
-            } else if(!empty($right_icon)){
-                $text_field .= '<i class="right fa fa-'.$right_icon.'" aria-hidden="true"></i>';
-            }
+        if($type!='check') {
+            $text_field .= '<span class="field-container">' . $prefix . '<span class="field-value" data-type="' . $type . '">';
 
-            switch ($type){
-                case 'text':
-                    $text_field .= '<input type="text" '
-                        .'name="'.$id.'" '
-                        .'id="update_'.$id.'" '
-                        .'placeholder="'.$placeholder.'" '
-                        .'value="'.$initial_value.'" ';
-                    $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
-                    $text_field .= '" />';
-                    break;
-                case 'number':
-                    $text_field .= '<input type="number" '
-                        .'name="'.$id.'" '
-                        .'id="update_'.$id.'" '
-                        .'placeholder="'.$placeholder.'" '
-                        .'step="'.$step.'" '
-                        .'value="'.$initial_value.'" ';
-                    if(isset($max)){$text_field .= 'max="'.$max.'" ';}
-                    if(isset($min)){$text_field .= 'min="'.$min.'" ';}
-                    $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
-                    $text_field .= '" />';
-                    break;
-                case 'select':
-                    $text_field .= '<select type="text" '
-                        .'name="'.$id.'" '
-                        .'id="update_'.$id.'" ';
-                    $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
-                    $text_field .= '" >';
-                        foreach($options_list as $index=>$name){
-                            $text_field .='<option value="'.$index.'" ';
-                            if($index==$initial_value){
+            if ($editable) {
+                //Add the icon inside input
+                if (!empty($left_icon)) {
+                    $text_field .= '<i class="left fa fa-' . $left_icon . '" aria-hidden="true"></i>';
+                } else if (!empty($right_icon)) {
+                    $text_field .= '<i class="right fa fa-' . $right_icon . '" aria-hidden="true"></i>';
+                }
+
+                switch ($type) {
+                    case 'text':
+                        $text_field .= '<input type="text" '
+                            . 'name="' . $id . '" '
+                            . 'id="update_' . $id . '" '
+                            . 'placeholder="' . $placeholder . '" '
+                            . 'value="' . $initial_value . '" ';
+                        $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
+                        $text_field .= '" />';
+                        break;
+                    case 'number':
+                        $text_field .= '<input type="number" '
+                            . 'name="' . $id . '" '
+                            . 'id="update_' . $id . '" '
+                            . 'placeholder="' . $placeholder . '" '
+                            . 'step="' . $step . '" '
+                            . 'value="' . $initial_value . '" ';
+                        if (isset($max)) {
+                            $text_field .= 'max="' . $max . '" ';
+                        }
+                        if (isset($min)) {
+                            $text_field .= 'min="' . $min . '" ';
+                        }
+                        $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
+                        $text_field .= '" />';
+                        break;
+                    case 'select':
+                        $text_field .= '<select type="text" '
+                            . 'name="' . $id . '" '
+                            . 'id="update_' . $id . '" ';
+                        $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
+                        $text_field .= '" >';
+                        foreach ($options_list as $index => $name) {
+                            $text_field .= '<option value="' . $index . '" ';
+                            if ($index == $initial_value) {
                                 $text_field .= ' selected="selected" ';
                             }
-                            $text_field .='>'.translate($name,'yproject').'</option>';
+                            $text_field .= '>' . translate($name, 'yproject') . '</option>';
                         }
                         $text_field .= '</select>';
 
-                    break;
-                case 'editor':
-                    echo $text_field;
-                    $text_field = "";
-                    wp_editor( $initial_value, 'update_'.$id,
-                        array(
-                            'media_buttons' => true,
-                            'quicktags'     => false,
-                            'tinymce'       => array(
-                                'plugins'				=> 'paste, wplink, textcolor',
-                                'paste_remove_styles'   => true
+                        break;
+                    case 'editor':
+                        echo $text_field;
+                        $text_field = "";
+                        wp_editor($initial_value, 'update_' . $id,
+                            array(
+                                'media_buttons' => true,
+                                'quicktags' => false,
+                                'tinymce' => array(
+                                    'plugins' => 'paste, wplink, textcolor',
+                                    'paste_remove_styles' => true
+                                )
                             )
-                        )
-                    );
-                    break;
-                case 'date':
-                    $text_field .= '<input type="text"'
-                        .'name="'.$id.'" '
-                        .'class="adddatepicker '.DashboardUtility::has_class_icon($left_icon, $right_icon, false).'" '
-                        .'id="update_'.$id.'" '
-                        .'placeholder="'.$placeholder.'" '
-                        .'value="'.$initial_value->format('Y-m-d').'" '
-                        .'" />';
-                    break;
-                case 'datetime':
-                    $text_field .= '<input type="text"'
-                        .'name="'.$id.'" '
-                        .'class="adddatepicker datetime '.DashboardUtility::has_class_icon($left_icon, $right_icon, false).'" '
-                        .'id="update_'.$id.'" '
-                        .'placeholder="'.$placeholder.'" '
-                        .'value="'.$initial_value->format('Y-m-d').'" '
-                        .'" />';
+                        );
+                        break;
+                    case 'date':
+                        $text_field .= '<input type="text"'
+                            . 'name="' . $id . '" '
+                            . 'class="adddatepicker ' . DashboardUtility::has_class_icon($left_icon, $right_icon, false) . '" '
+                            . 'id="update_' . $id . '" '
+                            . 'placeholder="' . $placeholder . '" '
+                            . 'value="' . $initial_value->format('Y-m-d') . '" '
+                            . '" />';
+                        break;
+                    case 'datetime':
+                        $text_field .= '<input type="text"'
+                            . 'name="' . $id . '" '
+                            . 'class="adddatepicker datetime ' . DashboardUtility::has_class_icon($left_icon, $right_icon, false) . '" '
+                            . 'id="update_' . $id . '" '
+                            . 'placeholder="' . $placeholder . '" '
+                            . 'value="' . $initial_value->format('Y-m-d') . '" '
+                            . '" />';
 
-                    $text_field .= '<select class="timepicker" '.'id="update_h_'.$id.'">';
-                    for($i=0;$i<=23;$i++){
-                        $text_field .= '<option value="'.$i.'" ';
-                        if($initial_value->format('G')==$i){$text_field .= ' selected="selected" ';}
-                        $text_field .='>'.$i.'h</option>';
-                    }
-                    $text_field .= '</select>';
+                        $text_field .= '<select class="timepicker" ' . 'id="update_h_' . $id . '">';
+                        for ($i = 0; $i <= 23; $i++) {
+                            $text_field .= '<option value="' . $i . '" ';
+                            if ($initial_value->format('G') == $i) {
+                                $text_field .= ' selected="selected" ';
+                            }
+                            $text_field .= '>' . $i . 'h</option>';
+                        }
+                        $text_field .= '</select>';
 
-                    $text_field .= '<select class="timepicker" '.'id="update_m_'.$id.'">';
-                    for($i=0;$i<=59;$i++){
-                        $text_field .= '<option value="'.$i.'" ';
-                        if(intval($initial_value->format('i'))==$i){$text_field .= ' selected="selected" ';}
-                        $text_field .='>'.sprintf('%02d', $i).'</option>';
-                    }
-                    $text_field .= '</select>';
-                    break;
-                case 'link':
-                    $text_field .= '<input type="text" '
-                        .'name="'.$id.'" '
-                        .'id="update_'.$id.'" '
-                        .'placeholder="'.$placeholder.'" '
-                        .'value="'.$initial_value.'" ';
-                    $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
-                    $text_field .= '" />';
-                    break;
-                default:
-                    $text_field .= $initial_value;
+                        $text_field .= '<select class="timepicker" ' . 'id="update_m_' . $id . '">';
+                        for ($i = 0; $i <= 59; $i++) {
+                            $text_field .= '<option value="' . $i . '" ';
+                            if (intval($initial_value->format('i')) == $i) {
+                                $text_field .= ' selected="selected" ';
+                            }
+                            $text_field .= '>' . sprintf('%02d', $i) . '</option>';
+                        }
+                        $text_field .= '</select>';
+                        break;
+                    case 'link':
+                        $text_field .= '<input type="text" '
+                            . 'name="' . $id . '" '
+                            . 'id="update_' . $id . '" '
+                            . 'placeholder="' . $placeholder . '" '
+                            . 'value="' . $initial_value . '" ';
+                        $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
+                        $text_field .= '" />';
+                        break;
+                    default:
+                        $text_field .= $initial_value;
+                }
+            } else {
+                switch ($type) {
+                    case 'text':
+                    case 'number':
+                    case 'editor':
+                        $text_field .= $initial_value;
+                        break;
+                    case 'select':
+                        $text_field .= translate($options_list[$initial_value], 'yproject');
+                        break;
+                    case 'date':
+                        $text_field .= translate($initial_value->format('l')) . ' ' . $initial_value->format('d-m-Y');
+                        break;
+                    case 'datetime':
+                        $text_field .= translate($initial_value->format('l')) . ' ' . $initial_value->format('d-m-Y, G\hi');
+                        break;
+                    case 'link':
+                        if (!empty($initial_value)) {
+                            $text_field .= '<a target="_blank" href="' . $initial_value . '">' . $initial_value .
+                                '&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>';
+                        }
+                        break;
+                }
+
             }
-        } else {
-            switch ($type){
-                case 'select':
-                    $text_field .= translate($options_list[$initial_value],'yproject');
-                    break;
-                case 'date':
-                    $text_field .= translate($initial_value->format('l')).' '.$initial_value->format('d-m-Y');
-                    break;
-                case 'datetime':
-                    $text_field .= translate($initial_value->format('l')).' '.$initial_value->format('d-m-Y, G\hi');
-                    break;
-                case 'link':
-                    if(!empty($initial_value)){
-                        $text_field .= '<a target="_blank" href="'.$initial_value.'">'.$initial_value.
-                            '&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>';
-                    }
-                    break;
-                default:
-                    $text_field .= $initial_value;
+            $text_field .= '</span>' . $suffix . '</span>';
             }
-
-        }
-        $text_field .= '</span>'.$suffix.'</span>'
-            .'</div>';
+        $text_field .='</div>';
 
         if($display){
             echo $text_field;

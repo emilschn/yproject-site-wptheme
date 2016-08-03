@@ -2623,7 +2623,7 @@ div#home_bottom h1 {
     color: #EA4F51;
     font-weight: bold;
 }
-
+/*
 #dashboard #wdg-lightbox-gonextstep ul {
    list-style-position: inside;
    list-style-type: none;
@@ -2638,7 +2638,7 @@ div#home_bottom h1 {
 #dashboard #wdg-lightbox-gonextstep ul li {
     padding: 5px;
 }
-
+*/
 #dashboard #block-stats .quart-card {
     float:left;
     width: 25%;

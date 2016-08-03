@@ -60,6 +60,8 @@ if ($can_modify){
     locate_template( array("projects/dashboard/campaign-tab.php"), true );
     locate_template( array("projects/dashboard/news.php"), true );
 
+    check_change_status();
+
     function is_preparing($status){
         return $status==ATCF_Campaign::$campaign_status_preparing;
     }

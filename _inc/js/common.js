@@ -189,64 +189,6 @@ YPUIFunctions = (function($) {
 				campaign_id = $(".ajax-investments-load").attr('data-value');
 				YPUIFunctions.getInvestments(campaign_id); 
 			}
-                        
-                        //Lightbox de passage à l'étape suivante
-                        if ($("#submit-go-next-step").length > 0) {
-                            $("#submit-go-next-step").attr('disabled','');
-                            $("#submit-go-next-step").attr('style','background-color:#333 !important; border: 0px !important; ');
-                            
-                            checkall = function() {
-                                var allcheck = true;
-                                $(".checkbox-next-step:visible").each(function(index){
-                                    allcheck = allcheck && this.checked;
-                                });
-                                return allcheck;
-                            };
-                            
-                            $(".checkbox-next-step").change(function() {
-                                if(checkall()){
-                                    $("#submit-go-next-step").removeAttr('disabled');
-                                    $("#submit-go-next-step").attr('style','background-color:#EA4F51');
-                                } else {
-                                    $("#submit-go-next-step").attr('disabled','');
-                                    $("#submit-go-next-step").attr('style','background-color:#333 !important; border: 0px !important;');
-                                };
-                            });
-                            
-                            //Changements du formulaire lorsque l'on veut passer de préparation à vote (sans A-P)
-                            $("#no-preview-button").click(function(){
-                                $("#cbman13").closest('li').slideUp();
-                                $("#desc-preview").slideUp();
-                                $("#vote-checklist").slideDown();
-                                $("#no-preview-button").slideUp();
-                                $("#next-step-choice").val("2");
-                            });
-                        }
-                        //Preview date fin collecte sur LB étape suivante
-                        if(($("#innbdayvote").length > 0)||($("#innbdaycollecte").length > 0)) {
-                            
-                            updateDate = function(idfieldinput, iddisplay) {
-                                $("#"+iddisplay).empty();
-                                if($("#"+idfieldinput).val()<=$("#"+idfieldinput).prop("max") && $("#"+idfieldinput).val()>=$("#"+idfieldinput).prop("min")){
-                                    var d = new Date();
-                                    var jsupp = $("#"+idfieldinput).val();
-                                    d.setDate(d.getDate()+parseInt(jsupp));
-                                    $("#"+iddisplay).prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
-                                } else {
-                                    $("#"+iddisplay).prepend("La durée doit être comprise entre "+($("#"+idfieldinput).prop("min"))+" et "+($("#"+idfieldinput).prop("max"))+" jours");
-                                }
-                            };
-                            
-                            updateDate("innbdaycollecte","previewenddatecollecte");
-                            updateDate("innbdayvote","previewenddatevote");
-                            
-                            $("#innbdaycollecte").on( 'keyup change', function () {
-                                updateDate("innbdaycollecte","previewenddatecollecte");});
-                            
-                            $("#innbdayvote").on( 'keyup change', function () {
-                                updateDate("innbdayvote","previewenddatevote");});
-                        }
-                        
                         //Formulaire envoi mail
                         $("#jycrois-send-mail-selector").change(function(){
                             if(this.checked){
