@@ -86,18 +86,21 @@ var WDGProjectDashboard = (function ($) {
             }
 
             //Infobulles
-            $('#ndashboard .infobutton[title!=""]').qtip({
-                position: {
-                    my: 'bottom center',
-                    at: 'top center',
-                },
-                style: {
-                    classes: 'qtip-tipsy qtip-shadow'
-                },
-                hide: {
-                    fixed: true,
-                    delay: 300
-                }
+            $('#ndashboard .infobutton').each(function () {
+                $(this).qtip({
+                    content: $(this).next('.tooltiptext'),
+                    position: {
+                        my: 'bottom center',
+                        at: 'top center',
+                    },
+                    style: {
+                        classes: 'qtip-tipsy qtip-shadow'
+                    },
+                    hide: {
+                        fixed: true,
+                        delay: 300
+                    }
+                });
             });
 
             //Datepickers

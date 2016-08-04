@@ -8,11 +8,17 @@
  */
 class DashboardUtility
 {
-    public static function get_infobutton($hovertext, $display=false, $margin=true){
+    public static function get_infobutton($hovertext, $display=false, $margin=true, $other_icon=""){
         if(!empty($hovertext)) {
-            $text = '<i class="fa fa-question-circle infobutton" title="' . translate($hovertext, 'yproject') . '"';
+            if(empty($other_icon)){
+                $text = '<i class="fa fa-question-circle infobutton"';
+            } else {
+                $text = '<i class="fa fa-'.$other_icon.' infobutton"';
+            }
+
             if(!$margin){$text.= 'style="margin:0px"';}
-            $text.='></i>';
+            $text.=' aria-hidden="true"></i>';
+            $text .= '<div class="tooltiptext">'.translate($hovertext, 'yproject').'</div>';
             if($display){
                 print $text;
             }
@@ -23,9 +29,7 @@ class DashboardUtility
     }
 
     public static function get_admin_infobutton(){
-        return '<i class="fa fa-unlock-alt infobutton '
-        .'" aria-hidden="true" '
-        .' title="' . translate("Vous pouvez modifier ce champ en tant qu'administrateur WDG", 'yproject') . '"></i>';
+        return self::get_infobutton("Vous pouvez modifier ce champ en tant qu'administrateur WDG",false,true,"unlock-alt");
     }
 
     private static function has_class_icon($left_icon, $right_icon, $include_class_attr=true){
@@ -149,8 +153,7 @@ class DashboardUtility
         $text_field .= translate($label,'yproject')
             .DashboardUtility::get_infobutton($infobubble);
         if($warning && $editable){
-            $text_field .='<i class="fa fa-exclamation-triangle infobutton" aria-hidden="true" 
-            title="' . translate("Attention ce champ est normalement géré automatiquement, manipulez-le avec prudence", 'yproject') . '"></i>';}
+            $text_field .= self::get_infobutton("Attention ce champ est normalement géré automatiquement, manipulez-le avec prudence",false,true,"exclamation-triangle");}
         $text_field .='</label>';
 
         if($type!='check') {

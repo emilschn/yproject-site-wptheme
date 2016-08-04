@@ -23,6 +23,9 @@
 #ndashboard .infobutton:hover{
     color:#2B2C2C;
 }
+#ndashboard .tooltiptext{
+    display: none;
+}
 
 #ndashboard .page-dashboard .head {
     font-family: 'BebasNeue';
@@ -408,7 +411,53 @@
     background: url(images/frise-db/golf-drapeau-rouge.png) no-repeat calc(50% + 6px) 100%;
     background-size: 32px 80px;
 }
-/*Fenêtre changement d'étape*/
+
+
+
+/* Statistiques */
+#ndashboard .data-blocks .quart-card {
+    display:inline-block;
+    width: 25%;
+    text-align: center;
+    padding: 10px 0px;
+    min-width: 200px;
+}
+
+#ndashboard .data-blocks .half-card {
+    display:inline-block;
+    width: 50%;
+    text-align: center;
+    padding: 10px 0px;
+    min-width: 400px;
+}
+
+#ndashboard .data-blocks .stat-big-number {
+    font-family: "BebasNeue";
+    font-size: 80px;
+    padding-top: 30px;
+}
+
+#ndashboard .data-blocks .stat-little-number {
+    font-family: "BebasNeue";
+    font-size: 22px;
+    margin-top: -12px;
+    padding-bottom: 15px;
+}
+
+#ndashboard .data-blocks .stat-little-number-top {
+    font-family: "BebasNeue";
+    font-size: 26px;
+    padding-bottom: 0px;
+    margin-bottom: -40px;
+    padding-top: 5px;
+}
+.details-card {
+    height: 40px;
+    vertical-align:bottom;
+}
+
+
+/* Changement d'étape*/
 #page-resume #next-status-tab ul {
     list-style-position: inside;
     list-style-type: none;

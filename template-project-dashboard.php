@@ -52,7 +52,26 @@ if ($can_modify){
     $is_admin = (current_user_can('manage_options'));
     $is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
 
+    //Stats vues
+    global $stats_views, $stats_views_today;
+    $stats_views = 0;
+    $stats_views_today = 0;
+    if (function_exists('stats_get_csv')) {
+        global $wpdb, $stats_views, $stats_views_today;
+        $stats_views = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 365 ) );
+        $stats_views_today = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 1 ) );
+    }
 
+    //Donnees de votes
+    global $vote_results, $nb_jcrois, $nb_votes, $nb_invests;
+    $vote_results = WDGCampaignVotes::get_results($campaign_id);
+
+    //Recuperation du nombre de j'y crois
+    $nb_jcrois = $campaign->get_jycrois_nb();
+    //Recuperation du nombre de votants
+    $nb_votes = $campaign->nb_voters();
+    //Recuperation du nombre d'investisseurs
+    $nb_invests = $campaign->backers_count();
 
     locate_template( array("projects/dashboard/dashboardutility.php"), true );
     locate_template( array("projects/dashboard/resume.php"), true );
@@ -61,6 +80,7 @@ if ($can_modify){
     locate_template( array("projects/dashboard/news.php"), true );
 
     check_change_status();
+    page_resume_lightboxes();
 
     function is_preparing($status){
         return $status==ATCF_Campaign::$campaign_status_preparing;
