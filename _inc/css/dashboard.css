@@ -289,38 +289,125 @@
 *******************************************************************************/
 
 /* Frise étapes*/
-#page-resume #summary .status {
-    text-align:center;
-    margin: 10px 0px;
+#ndashboard #status-list{
+    margin: 0px auto;
+    max-width: 1100px;
+    text-align: center;
+    position:relative;
 }
-#page-resume #summary .status span {
-    margin: 0px 10px;
-    display: inline-block;
-    width: 100px;
-    padding-top: 140px;
-    background-image: url("images/frise-db/golf-etape.png");
-    background-position: 50% calc(100% - 20px);
+
+#ndashboard #status-list .perso{
+    background: url(images/frise-db/golf-perso2.png);
+    background-size: 56px;
+    background-position: 80%;
     background-repeat: no-repeat;
-    background-size: 20px 20px;
+    position:absolute;
+    width: calc(40px + ((100% - 50px)/7)/2);
+    height: 105px;
 }
-#page-resume #summary .status #current {
+
+#ndashboard #status-list .perso.preparing{
+    background: url(images/frise-db/golf-perso1.png);
+    background-size: 56px;
+    background-position: 80%;
+    background-repeat: no-repeat;
+}
+
+#ndashboard #status-list .status{
+    display: inline-block;
+    width: calc((100% - 40px)/7);
+    height: 170px;
+    position: relative;
+}
+
+#ndashboard #status-list .status.begin {
+    margin-left: 40px;
+}
+
+#ndashboard #status-list .line{
+    height: 90px;
+    border-bottom: 3px solid black;
+    position: absolute;
+    width: 100%;
+}
+#ndashboard #status-list .line.begin{
+    width:50%;
+    margin-left:50%;
+}
+#ndashboard #status-list .line.end{
+    width:50%;
+    margin-right:50%;
+}
+#ndashboard #status-list .line.none{
+    width:0%;
+    margin-left:50%;
+    margin-right:50%;
+}
+#ndashboard #status-list .linetoright{
+    height: 45px;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    position: absolute;
+    width: 50%;
+    margin-left: 50%;
+    margin-top: 45px;
+}
+
+#ndashboard #status-list .linetoleft{
+    height: 45px;
+    border-top: 3px solid black;
+    border-right: 3px solid black;
+    position: absolute;
+    width: 50%;
+    margin-right:50%;
+    margin-top: 45px;
+}
+#ndashboard #status-list .linetoboth{
+    height: 45px;
+    border-top: 3px solid black;
+    position: absolute;
+    width: 100%;
+    margin-top: 45px;
+}
+
+#ndashboard #status-list .name{
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 0px 10px;
+    top: 110px;
+    overflow: hidden;
+}
+
+#ndashboard #status-list .status#current .name{
     color: #EA4F51;
     font-weight: bold;
-    background-image: url("images/frise-db/golf-etape-rouge.png");
 }
 
-#page-resume #summary .status #current.end {
-    background-image: url("images/frise-db/golf-drapeau-rouge.png");
+#ndashboard #status-list .icon-etape{
+    background: url(images/frise-db/golf-etape.png);
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    background-size: 20px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+#ndashboard #status-list .status#current .icon-etape{
+    background: url(images/frise-db/golf-etape-rouge.png);
+    background-size: 20px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+#ndashboard #status-list .status.end .icon-etape{
+    background: url(images/frise-db/golf-drapeau.png) no-repeat calc(50% + 6px) 100%;
     background-size: 32px 80px;
-    background-position: calc(50% + 6px) calc(100% - 20px);
 }
-
-#page-resume #summary .status .end {
-    background-image: url("images/frise-db/golf-drapeau.png");
+#ndashboard #status-list .status#current.end .icon-etape{
+    background: url(images/frise-db/golf-drapeau-rouge.png) no-repeat calc(50% + 6px) 100%;
     background-size: 32px 80px;
-    background-position: calc(50% + 6px) calc(100% - 20px);
 }
-
 /*Fenêtre changement d'étape*/
 #page-resume #next-status-tab ul {
     list-style-position: inside;

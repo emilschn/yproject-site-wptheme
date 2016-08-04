@@ -96,26 +96,66 @@ function print_resume_page()
 
     ?>
     <div class="head"><?php _e('R&eacute;sum&eacute; du projet', 'yproject'); ?></div>
-    <div id="summary" >
-        <div class="status">
-            <?php
-            $status_list = ATCF_Campaign::get_campaign_status_list();
-            $nb_status = count($status_list)-1;
-            $i=1;
-            foreach ($status_list as $status_key => $name){
-                $status_to_write = '<span ';
-                if($status_key==$status){$status_to_write.= 'id="current"';}
-                $status_to_write .= 'class="';
-                if($nb_status==1){$status_to_write .= "begin";}
-                if($nb_status==$i){$status_to_write .= "end";}
+    <div id="status-list">
+        <?php
+        $status_list = ATCF_Campaign::get_campaign_status_list();
+        $nb_status = count($status_list)-1;
+        $i=1; ?>
+        <div class="perso <?php if($status==ATCF_Campaign::$campaign_status_preparing){echo ' preparing ';}?>"></div>
+        <?php foreach ($status_list as $status_key => $name) {
+            ?><div class="status
+                    <?php   if($i==1){echo "begin ";}
+                            if($i==$nb_status){echo "end ";}?>"
+                   <?php if($status_key==$status){echo 'id="current"';}?>>
+                <div class="line
+                    <?php   if($i==1){echo "begin ";}
+                            if($i==$nb_status){echo "end ";}
+                            if($i>$nb_status){echo "none ";}?>">
 
-                $status_to_write .= '">'.$name.'</span>';
-                echo $status_to_write;
-                $i++;
-            }
-            ?>
-        </div>
+                </div>
+                <?php
+                switch ($status_key){
+                    case ATCF_Campaign::$campaign_status_validated:
+                        echo '<div class="linetoright"></div>';
+                        break;
+                    case ATCF_Campaign::$campaign_status_preview:
+                        echo '<div class="linetoboth"></div>';
+                        break;
+                    case ATCF_Campaign::$campaign_status_vote:
+                        echo '<div class="linetoleft"></div>';
+                        break;
+                }
+                ?>
+                <div class="icon-etape">
+
+                </div>
+                <div class="name">
+                    <?php echo $name.'<br/>';
+                    switch ($status_key){
+                        case ATCF_Campaign::$campaign_status_preparing:
+                            DashboardUtility::get_infobutton("Pendant la pr&eacute;paration, pr&eacute;sentez votre projet à WDG.",true,false);
+                            break;
+                        case ATCF_Campaign::$campaign_status_validated:
+                            DashboardUtility::get_infobutton("Une fois validé, créez la page du projet qui sera visible sur le site.",true,false);
+                            break;
+                        case ATCF_Campaign::$campaign_status_preview:
+                            DashboardUtility::get_infobutton("L'avant-première fait découvrir votre projet sur le site. Cette étape est facultative",true,false);
+                            break;
+                        case ATCF_Campaign::$campaign_status_vote:
+                            DashboardUtility::get_infobutton("Le vote sert à confirmer votre capacité à fédérer vos cercles d'investisseurs",true,false);
+                            break;
+                        case ATCF_Campaign::$campaign_status_collecte:
+                            DashboardUtility::get_infobutton("Ici, on récolte les sous",true,false);
+                            break;
+                        case ATCF_Campaign::$campaign_status_funded:
+                            DashboardUtility::get_infobutton("TOUS LES SOUS!!!!",true,false);
+                            break;
+                    }
+                    ?>
+                </div>
+            </div><?php $i++; } ?>
     </div>
+
     <div class="tab-content" id="next-status-tab">
         <?php if($status == ATCF_Campaign::$campaign_status_preparing
             || $status == ATCF_Campaign::$campaign_status_validated
@@ -249,9 +289,9 @@ function print_resume_page()
             <div class="list-button">
                 <?php if ($status == ATCF_Campaign::$campaign_status_preparing && $is_admin){
                     echo DashboardUtility::get_admin_infobutton()?>
-                    <input type="submit" value="Valider le projet" class="button admin" id="submit-go-next-status" disabled>
+                    <input type="submit" value="Valider le projet" class="button admin" id="submit-go-next-status-admin">
                 <?php } else if ($status != ATCF_Campaign::$campaign_status_preparing) { ?>
-                    <input type="submit" value="C'est parti !" class="button" id="submit-go-next-status" disabled>
+                    <input type="submit" value="C'est parti !" class="button" id="submit-go-next-status">
                 <?php }
                 if ($status == ATCF_Campaign::$campaign_status_validated) { ?>
                     <br/><br/><a class="button" id="no-preview-button">Je ne souhaite pas d'avant-première, passons le projet en vote.</a>

@@ -8,9 +8,11 @@
  */
 class DashboardUtility
 {
-    public static function get_infobutton($hovertext, $display=false){
+    public static function get_infobutton($hovertext, $display=false, $margin=true){
         if(!empty($hovertext)) {
-            $text = '<i class="fa fa-question-circle infobutton" title="' . translate($hovertext, 'yproject') . '"></i>';
+            $text = '<i class="fa fa-question-circle infobutton" title="' . translate($hovertext, 'yproject') . '"';
+            if(!$margin){$text.= 'style="margin:0px"';}
+            $text.='></i>';
             if($display){
                 print $text;
             }

@@ -143,7 +143,7 @@
 							    if (!empty($project_id)) {
 							    $post_campaign = get_post($project_id);
 							?>
-							<li class="page_item_out"><a href="<?php echo get_permalink($project_id); ?>"><?php echo $post_campaign->post_title; ?></a></li>
+							<li class="page_item_out"><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' .$project_id; ?>"><?php echo $post_campaign->post_title; ?></a></li>
 							<?php } } ?>
 							<li class="page_item_out last upper"><a href="<?php echo wp_logout_url();echo '&page_id='.get_the_ID() ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
 						</ul>
