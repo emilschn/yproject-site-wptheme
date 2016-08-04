@@ -97,6 +97,64 @@ get_header();
 			 * 
 			 */
 			?>
+			
+			<?php
+			/*
+			//Validation de paiement
+			$save_user_id = 4440;
+			$current_user = new WP_User($save_user_id);
+			$post_campaign = get_post(11082);
+			$campaign = atcf_get_campaign($post_campaign);
+			$options_cart = array();
+			$amount = 10;
+			$purchase_key = '111532635G9gi3pCWSTL1nfC9JQJkBgolSZq';
+			$user_info = array(
+				'id'			=> $save_user_id,
+				'gender'		=> $current_user->get('user_gender'),
+				'email'			=> $current_user->user_email,
+				'first_name'	=> $current_user->user_firstname,
+				'last_name'		=> $current_user->user_lastname,
+				'discount'		=> '',
+				'address'		=> array()
+			);
+
+			$cart_details = array(
+				array(
+					'name'			=> $campaign->data->post_title,
+					'id'			=> $campaign->ID,
+					'item_number'	=> array(
+						'id'			=> $campaign->ID,
+						'options'		=> $options_cart
+					),
+					'price'			=> 1,
+					'quantity'		=> $amount
+				)
+			);
+			
+			$status = 'publish';
+			$payment_data = array( 
+				'price'			=> $amount, 
+				'date'			=> '2016-07-14 23:18:18', 
+				'user_email'	=> $current_user->user_email,
+				'purchase_key'	=> $purchase_key,
+				'currency'		=> edd_get_currency(),
+				'downloads'		=> array($campaign->ID),
+				'user_info'		=> $user_info,
+				'cart_details'	=> $cart_details,
+				'status'		=> $status
+			);
+			$payment_id = edd_insert_payment( $payment_data );
+			
+			update_post_meta( $payment_id, '_edd_payment_ip', $_SERVER['REMOTE_ADDR'] );
+			if ( isset($save_reward) ) {
+				update_post_meta( $payment_id, '_edd_payment_reward', $save_reward );
+			}
+			edd_record_sale_in_log($campaign->ID, $payment_id);
+			$new_contract_pdf_file = getNewPdfToSign($campaign->ID, $payment_id, $current_user->ID);
+			NotificationsEmails::new_purchase_user_success_nocontract($payment_id, $new_contract_pdf_file);
+			 * 
+			 */
+			?>
 		    
 		<?php
 		endif;
