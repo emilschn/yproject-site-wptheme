@@ -38,10 +38,7 @@ WDGFormProjects::form_cancel_payment();
     <div class="padder">
 <?php
 if ($can_modify){
-    global $can_modify,
-           $campaign_id, $campaign, $post_campaign,
-           $WDGAuthor, $WDGUser_current,
-           $is_admin, $is_author;
+
 
     $post_campaign = get_post($campaign_id);
     $campaign = atcf_get_campaign($post_campaign);
@@ -77,6 +74,7 @@ if ($can_modify){
     locate_template( array("projects/dashboard/resume.php"), true );
     locate_template( array("projects/dashboard/informations.php"), true );
     locate_template( array("projects/dashboard/campaign-tab.php"), true );
+    locate_template( array("projects/dashboard/wallet.php"), true );
     locate_template( array("projects/dashboard/news.php"), true );
 
     check_change_status();
@@ -122,10 +120,9 @@ if ($can_modify){
                             <a href="#page-informations">Informations<div class="badge-notif">0</div></a>
                         </li>
                         <li>
-                            <a <?php if (!is_preparing($status)) {print('href="'.get_permalink(get_page_by_path('gestion-financiere')->ID) . '?campaign_id=' .$campaign_id.'" ');}
-                                check_enabled_tab($status) ?>>
+                            <a href="#page-wallet" <?php check_enabled_tab($status) ?>>
                                 <?php _e("Gestion financi&egrave;re", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-external-link" aria-hidden="true"></i></a>
+                            </a>
                         </li>
                         <li>
                             <a href="#page-campaign" <?php check_enabled_tab($status) ?>>
@@ -154,7 +151,7 @@ if ($can_modify){
                     <div class="page-dashboard" id="page-resume"><?php print_resume_page(); ?></div>
                     <div class="page-dashboard" id="page-presentation"></div>
                     <div class="page-dashboard" id="page-informations"><?php print_informations_page(); ?></div>
-                    <div class="page-dashboard" id="page-wallet"></div>
+                    <div class="page-dashboard" id="page-wallet"><?php print_wallet_page(); ?></div>
                     <div class="page-dashboard" id="page-campaign"><?php print_campaign_page(); ?></div>
                     <div class="page-dashboard" id="page-contacts">6</div>
                     <div class="page-dashboard" id="page-news"><?php print_news_page(); ?></div>

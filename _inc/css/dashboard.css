@@ -415,10 +415,13 @@
 
 
 /* Statistiques */
+#ndashboard .data-blocks
+{
+    text-align: center;
+}
 #ndashboard .data-blocks .quart-card {
     display:inline-block;
     width: 25%;
-    text-align: center;
     padding: 10px 0px;
     min-width: 200px;
 }
@@ -426,7 +429,6 @@
 #ndashboard .data-blocks .half-card {
     display:inline-block;
     width: 50%;
-    text-align: center;
     padding: 10px 0px;
     min-width: 400px;
 }

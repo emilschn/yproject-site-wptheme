@@ -66,7 +66,7 @@ var WDGProjectDashboard = (function ($) {
                     var iframetoload = $("#ndashboard-content " + target+" .google-doc iframe");
                     iframetoload.each(function(){
                         $(this).prop('src',$(this).data('src'));
-                        $(this).on('load', function(){
+                        $(this).load(function(){
                             $(this).addClass('isloaded');
                         });
                     });
@@ -77,7 +77,7 @@ var WDGProjectDashboard = (function ($) {
 
                 var hash = window.location.hash
                 var tabsaved = $('#ndashboard-navbar li a[href="'+window.location.hash+'"]')
-                if(hash != '' && !tabsaved.hasClass("disabled")){
+                if(tabsaved.length >0 && !tabsaved.hasClass("disabled")){
                     tabsaved.trigger("click");
                 } else {
                     $("#ndashboard-navbar li a:not(.disabled)").first().trigger("click");
