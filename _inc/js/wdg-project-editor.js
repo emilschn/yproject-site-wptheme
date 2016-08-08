@@ -215,7 +215,6 @@ var ProjectEditor = (function($) {
 		},
 
 
-		//Création d'un champ input file pour le picture head
 		createfile: function(property){
 			var url_image_start=$(".project-banner-img img").attr('src');
 
