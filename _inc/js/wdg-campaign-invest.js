@@ -49,7 +49,7 @@ WDGInvestPageFunctions = (function($) {
 								'action': 'check_invest_input',
 								'campaign_id': $(formSelf).data("campaignid"),
 								'invest_value': $("#input_invest_amount_part").val(),
-								'invest_type' : $("#invest_type").html(data)
+								'invest_type' : $("#invest_type").val()
 							}
 						}).done(function(result){
 							WDGInvestPageFunctions.formInvestReturnEvent(result);

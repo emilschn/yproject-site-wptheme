@@ -253,13 +253,6 @@ var ProjectEditor = (function($) {
 			$("#wdg-validate-picture-wait").attr('style','display:none; ');
 			$("#wdg-validate-picture-wait").innerHTML = ""
 
-			// var newElement_4 = '<input type="checkbox" name ="wdg-edit-picture-head_blur" id="wdg-edit-picture-head_blur"></input>';
-			// $(ProjectEditor.elements[property].elementId).after(newElement_4);
-			// $("#wdg-edit-picture-head_blur").css("left", $(ProjectEditor.elements[property].elementId).position().left + $("#wdg-edit-picture-head-next_update").outerWidth() + $("#wdg-edit-picture-head-next_valid").outerWidth() +  $("#wdg-edit-picture-head-next_cancel").outerWidth());
-			// $("#wdg-edit-picture-head_blur").css("top", $(ProjectEditor.elements[property].elementId).position().top);
-			// $("#wdg-edit-picture-head_blur").css("z-index", "2");
-   //  		$("#wdg-edit-picture-head_blur").css("position","absolute");
-
 
 			$("#wdg-edit-picture-head-next_cancel").click(function() {
 				ProjectEditor.validateInputDone(true);
@@ -278,10 +271,7 @@ var ProjectEditor = (function($) {
 			});
 
 			$("#wdg-edit-picture-head-next_valid").click(function() {
-			
-				// var value = $('#wdg-edit-picture-head_blur').val();
-				// $('#image_header_blur').val(value);
-				
+
   				var formData = new FormData($('form#upload-img-form')[0]);
   				$("#wdg-edit-picture-head-next").remove();
 				$("#wdg-edit-picture-head-next_update").remove();
@@ -297,7 +287,6 @@ var ProjectEditor = (function($) {
 		            'contentType': false,
 		            'processData': false
 				}).done(function(result) {
-					// console.log(result);
 					$("#wdg-edit-"+property).show();
 					$("#wdg-validate-picture-wait").attr('style','display:none;');
 					ProjectEditor.validateInputDone(result);
