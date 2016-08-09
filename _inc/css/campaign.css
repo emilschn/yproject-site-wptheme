@@ -550,7 +550,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered a img { width: 50px; }
 }
 
-#wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel, #wdg-edit-picture-head-next_update{
+#wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel, #wdg-edit-picture-head-next_update, #wdg-edit-video-image_update{
 	background: #A4DBDE;
     height: 25px;
     color: white;

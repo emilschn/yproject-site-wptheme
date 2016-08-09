@@ -158,7 +158,7 @@ var ProjectEditor = (function($) {
 						ProjectEditor.createfile(sProperty);
 						break;
 					case "video-zone":
-						ProjectEditor.redirectParams(sProperty);
+						ProjectEditor.update_image_url(sProperty);
 						break;
 					case "project-owner":
 						ProjectEditor.redirectOrganisation(sProperty);
@@ -214,7 +214,7 @@ var ProjectEditor = (function($) {
 			return buffer;
 		},
 
-
+		//Enregistre la bannière
 		createfile: function(property){
 			var url_image_start=$(".project-banner-img img").attr('src');
 
@@ -319,7 +319,102 @@ var ProjectEditor = (function($) {
 			$("#wdg-edit-"+property).hide();
 		},
 	 
+		// Enregistre l'image et/ou l'url de la vidéo
+		update_image_url: function(property){
+			$("#wdg-edit-"+property).hide();
+			$(".project-pitch-video").attr('style','display:none;');
+
+			var div_test = "<div class='project-pitch-video project-pitch-video-bis'> <div class='contenu_image_url'></div></div>";
+			$(".project-pitch-text").after(div_test);
+
+			var newElement_1 = '<form id="upload-img-form" enctype="multipart/form-data"> <input type="hidden" name="action" value="save_image_url_video" /> <input type="hidden" name="campaign_id" value="'+$("#content").data("campaignid")+'" /> <input type="text" name="url_video" id="text_url_video" placeholder="Saissisez l\'url de votre vidéo"> <input style="display:none;"id="wdg-edit-video-image" type="file" class="image_video_zone" name="image_video_zone"/> </form>';
+			$(".contenu_image_url").after(newElement_1);
+
+			var newElement_1_input = '<input type="input" id="wdg-edit-video-image_update" value="Télécharger une image"/>';
+			$(".contenu_image_url").after(newElement_1_input);
 			
+
+			$("#wdg-edit-video-image_update").click(function() {
+				$("#wdg-edit-video-image").click();
+			});
+			
+			$(".image_video_zone").change(function(){
+				if (this.files) {
+					$.each(this.files, function(index, file) {
+						switch (file.type) {
+						case "image/jpeg":
+						case "image/jpg":
+						case "image/png":
+						case "image/gif":
+						var reader = new FileReader();
+						reader.onload = function (e) {
+							var Element_image_view = '<p id="apercu_image"> Aperçu : <img style="margin:10px; border-radius:10px; box-shadow:0 0 15px 2px; width:25%;" id="video-zone-image" src="'+e.target.result+'"></p>';
+							$("#wdg-edit-video-image_update").after(Element_image_view);
+						}
+						reader.readAsDataURL(file);
+						default:
+						break;
+						}
+					});
+				}
+			});
+			var newElement_2 = '<input type="submit" id="wdg-edit-video-zone-next_valid" value="Valider"/>';
+			$("#upload-img-form").after(newElement_2);
+
+			var newElement_3 = '<input type="submit" id="wdg-edit-video-zone-next_cancel" value="Annuler"/>';
+			$("#upload-img-form").after(newElement_3);
+
+
+			$("#wdg-edit-video-zone-next_cancel").click(function() {
+				ProjectEditor.validateInputDone(true);
+				$("#upload-img-form").remove();
+				$("#wdg-edit-video-image_update").remove();
+				$("#wdg-edit-video-zone-next_valid").remove();
+				$("#wdg-edit-video-zone-next_cancel").remove();
+				$(".project-pitch-video-bis").remove();
+				$(".project-pitch-video").attr('style','display:block;');
+				$("#wdg-edit-"+property).show();
+			});
+
+			$("#wdg-edit-video-zone-next_valid").click(function() {
+				var wait_button = '<input type="submit" id="wdg-validate-picture-wait"/>';
+				$(".contenu_image_url").after(wait_button);
+				$("#wdg-validate-picture-wait").addClass("wait-button");
+				$("#wdg-validate-picture-wait").unbind("click");
+				$("#wdg-validate-picture-wait").innerHTML = ""
+				$("#wdg-validate-picture-wait").attr('style','display:none;');
+  				var formData = new FormData($('form#upload-img-form')[0]);
+				$("#wdg-edit-video-image_update").remove();
+				$("#wdg-edit-video-zone-next_valid").remove();
+				$("#wdg-edit-video-zone-next_cancel").remove();
+				$("#apercu_image").remove();
+				$("#text_url_video").attr('style','display:none;');
+				$("#wdg-validate-picture-wait").attr('style','font-size: 0px; display:inline-block; z-index:2001;');
+  				$.ajax({
+					'type' : "POST",
+					'url' :ajax_object.ajax_url,
+					'data': formData,
+		            'cache': false,
+		            'contentType': false,
+		            'processData': false
+				}).done(function(result) {
+					$(".project-pitch-video").remove();
+					// if($('#elemId').length>0){
+					// 	var url_image_start=$("#video-zone-image").attr('src');
+					// 	var newElement_video = 'div class="project-pitch-video" style="background-image: url(';
+					// }
+					ProjectEditor.validateInputDone(result);
+					$("#wdg-validate-picture-wait").remove();
+					$("#upload-img-form").remove();
+					$(".project-pitch-video-bis").remove();
+					$("#wdg-edit-"+property).show();
+				});
+			});
+
+		},
+
+
+
 		//Création d'un champ input pour certaines valeurs
 		createInput: function(property) {
 			var initValue = ProjectEditor.getInitValue(property);
