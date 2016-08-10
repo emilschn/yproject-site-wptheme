@@ -24,6 +24,7 @@ div#content.version-3 div.separator-title span {
 *******************************************************************************/
 #container { padding-top: 0px; }
 div#content.version-3 .padder { margin-top: 180px; }
+body.single-post div#content.version-3 .padder { margin-top: 122px; }
 div#content.version-3 .separator {
     background: url("../../images/tiret_noir.png");
     height: 6px;
