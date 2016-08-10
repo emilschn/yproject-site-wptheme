@@ -40,22 +40,34 @@ if (isset($campaign)):
 					<?php _e("Carte bancaire", 'yproject'); ?>
 				</a>
 			</li>
-			<?php if ($can_use_wire) { ?>
+			
+			<?php if ($can_use_wire): ?>
 			<li>
 				<a href="<?php echo $page_mean_payment_link; ?>wire">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-virement.jpg" alt="<?php _e("Virement bancaire", 'yproject'); ?>" />
 					<?php _e("Virement bancaire", 'yproject'); ?>
 				</a>
 			</li>
-			<?php } ?>
-			<?php if ($can_use_check) { ?>
+			<?php elseif ($campaign->can_use_wire_remaining_time() && !$campaign->can_use_wire_amount($_SESSION['redirect_current_amount_part'])): ?>
+			<li>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-virement.jpg" alt="<?php _e("Virement bancaire", 'yproject'); ?>" />
+				<?php echo sprintf( __("Les virements bancaires sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement", 'yproject'), ATCF_Campaign::$invest_amount_min_wire); ?>
+			</li>
+			<?php endif; ?>
+			
+			<?php if ($can_use_check): ?>
 			<li>
 				<a href="<?php echo $page_mean_payment_link; ?>check">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-cheque.jpg" alt="<?php _e("Ch&egrave;que", 'yproject'); ?>" />
 					<?php _e("Ch&egrave;que", 'yproject'); ?>
 				</a>
 			</li>
-			<?php } ?>
+			<?php else: ?>
+			<li>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-cheque.jpg" alt="<?php _e("Ch&egrave;que", 'yproject'); ?>" />
+				<?php echo sprintf( __("Les paiements par ch&egrave;ques sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement", 'yproject'), ATCF_Campaign::$invest_amount_min_check); ?>
+			</li>
+			<?php endif; ?>
 			<div class="clear"></div>
 		</ul>
 	<?php endif; ?>
