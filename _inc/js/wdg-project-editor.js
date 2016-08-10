@@ -356,7 +356,7 @@ var ProjectEditor = (function($) {
 						case "image/gif":
 						var reader = new FileReader();
 						reader.onload = function (e) {
-							var Element_image_view = '<div id="apercu_image"><img style="margin:10px; border-radius:10px; box-shadow:0 0 15px 2px; width:25%;" id="video-zone-image" src="'+e.target.result+'"></div>';
+							var Element_image_view = '<div id="apercu_image"><img style="margin:10px; border-radius:10px; box-shadow:0 0 15px 2px;" width="300" height="200" id="video-zone-image" src="'+e.target.result+'"></div>';
 							$("#wdg-edit-video-image_update").after(Element_image_view);
 							image_src = e.target.result;
 						}
