@@ -23,7 +23,7 @@ if ($can_modify) {
 		</span>
 	</div>
     
-	<?php if (is_user_logged_in() || $campaign->funding_type() == 'fundingdonation') : ?>
+<?php if (is_user_logged_in() || $campaign->funding_type() == 'fundingdonation') : ?>
 	
 	<div class="project-description-item" data-content="description">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $stylesheet_directory_uri; ?>/images/projet<?php echo $file_complement; ?>.png" alt="project" />
@@ -126,7 +126,7 @@ if ($can_modify) {
 		</div>
 	</div>
     
-	<?php if ($campaign_status != 'preview'): ?>
+	<?php if ($campaign_status != 'preparing' && $campaign_status != 'preview' && $campaign_status != 'vote'): ?>
 	<div class="project-description-item" data-content="statistics">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $stylesheet_directory_uri; ?>/images/statistiques<?php echo $file_complement; ?>.png" alt="stats" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_gris_projet.png" alt="grey triangle"/>
@@ -140,16 +140,16 @@ if ($can_modify) {
 	</div>
 	<?php endif; ?>
 	
-	<?php else: ?>
-	
+<?php else: ?>
+
 	<div class="align-center">
 		<p>
-		    <?php _e("Afin de r&eacute;pondre aux recommandations des autorit&eacute;s financi&egrave;res sur la pr&eacute;vention du risque repr&eacute;sent&eacute; par l&apos;investissement participatif,", 'yproject'); ?><br />
-		    <?php _e("vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet.", 'yproject'); ?>
+			<?php _e("Afin de r&eacute;pondre aux recommandations des autorit&eacute;s financi&egrave;res sur la pr&eacute;vention du risque repr&eacute;sent&eacute; par l&apos;investissement participatif,", 'yproject'); ?><br />
+			<?php _e("vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet.", 'yproject'); ?>
 		</p>
 		<a href="#register" id="register" class="wdg-button-lightbox-open button" data-lightbox="register" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Inscription", 'yproject'); ?></a>
 		<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Connexion", 'yproject'); ?></a>
 	</div>
-	
-	<?php endif; ?>
+
+<?php endif; ?>
 </div>
