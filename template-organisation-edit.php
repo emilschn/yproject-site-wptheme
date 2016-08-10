@@ -6,10 +6,11 @@
 ?>
 
 <?php 
+$WDGUser_current = WDGUser::current();
 $organisation_obj = YPOrganisation::current();
 YPOrganisation::edit($organisation_obj);
 $organisation_obj->send_kyc();
-ypcf_init_mangopay_user($organisation_obj->get_creator(), TRUE); //TODO : supprimer apres Prospare
+$organisation_obj->submit_transfer_wallet_lemonway();
 get_header();
 ?>
 
@@ -67,11 +68,6 @@ get_header();
 							
 							<label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?></label>
 							<input type="text" name="org_description" value="<?php echo $organisation_obj->get_description(); ?>" /><br />
-
-							<?php /*
-							<label for="org_type"><?php _e('Type d&apos;organisation', 'yproject'); ?></label>
-							<em><?php if ($organisation_obj->get_type() == "society") { echo "Société"; } ?></em><br />
-							 */ ?>
 
 							<label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?></label>
 							<input type="text" name="org_legalform" value="<?php echo $organisation_obj->get_legalform(); ?>" /><br />
@@ -203,122 +199,30 @@ get_header();
 						</form>
 						
 						
-						<?php if (current_user_can('manage_options')): ?>
-						<h3><?php _e('Lemonway', 'yproject'); ?></h3>
-						
-						<?php $organisation_lemonway_authentication_status = $organisation_obj->get_lemonway_status(); ?>
-						<?php if ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_blocked): ?>
-							<?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIREN. Ainsi que les 5 documents ci-dessus.", 'yproject'); ?><br />
-						<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_ready): ?>
-							<form action="" method="POST" enctype="multipart/form-data">
-								<input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
-							</form>
-						<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_waiting): ?>
-							<?php _e("L'organisation est en cours d'authentification aupr&egrave;s de notre partenaire.", 'yproject'); ?>
-							<form action="" method="POST" enctype="multipart/form-data">
-								<input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
-							</form>
-						<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_registered): ?>
-							<?php _e("L'organisation est bien authentifi&eacute;e aupr&egrave;s de notre partenaire.", 'yproject'); ?>
-						<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_rejected): ?>
-							<?php _e("L'organisation a &eacute;t&eacute; refus&eacute;e par notre partenaire.", 'yproject'); ?>
-						<?php endif; ?>
-						
-						
-						<h3><?php _e('Mangopay', 'yproject'); ?></h3>
-						<?php $organisation_obj->check_strong_authentication(); ?>
-						<?php switch ($organisation_obj->get_strong_authentication()) {
-							case 0: ?>
-								Nous contacter
-							<?php
-								break;
-							case 1: ?>
-								Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Mangopay. Vous pouvez maintenant investir les sommes que vous souhaitez.<br /><br />
-							<?php
-								break;
-							case 5:
-								//Le message d'attente est affiché dans le statut de strong authentication.
-								$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status($organisation_obj->get_wpref());
-								if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
-								break;
-						} ?>
-						<?php endif; ?>
+						<?php if ( $WDGUser_current->is_admin() ): ?>
+							<h3><?php _e('Lemonway', 'yproject'); ?></h3>
+
+							<?php $organisation_lemonway_authentication_status = $organisation_obj->get_lemonway_status(); ?>
+							<?php if ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_blocked): ?>
+								<?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIREN. Ainsi que les 5 documents ci-dessus.", 'yproject'); ?><br />
+							<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_ready): ?>
+								<form action="" method="POST" enctype="multipart/form-data">
+									<input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
+								</form>
+							<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_waiting): ?>
+								<?php _e("L'organisation est en cours d'authentification aupr&egrave;s de notre partenaire.", 'yproject'); ?>
+								<form action="" method="POST" enctype="multipart/form-data">
+									<input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
+								</form>
+							<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_registered): ?>
+								<?php _e("L'organisation est bien authentifi&eacute;e aupr&egrave;s de notre partenaire.", 'yproject'); ?>
+							<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_rejected): ?>
+								<?php _e("L'organisation a &eacute;t&eacute; refus&eacute;e par notre partenaire.", 'yproject'); ?>
+							<?php endif; ?>
 							
-								
-						<?php
-						/**
-						 * Demande de transfert
-						 */
-						?>
-						<?php
-						$args = array(
-						    'author'    => $organisation_obj->get_wpref(),
-						    'post_type' => 'withdrawal_order',
-						    'post_status'   => 'pending'
-						);
-						$pending_transfers = get_posts($args);
-
-						if (!$pending_transfers && isset($_POST['mangopaytoaccount'])) {
-							//Teste d'abord de la somme qu'on tente de retirer : si plus de 1000€, on doit mettre en place une strong auth sur cet utilisateur
-							$mp_amount = ypcf_mangopay_get_user_personalamount_by_wpid($organisation_obj->get_wpref());
-							$real_amount_invest = $mp_amount / 100;
-							if ($real_amount_invest < YP_STRONGAUTH_REFUND_LIMIT || $organisation_obj->get_strong_authentication() == '1') {
-								//Crée le beneficiary
-								$errors = '';
-
-								//Teste si il existe un beneficiary correspondant à l'utilisateur, sinon tente de le créer
-								$beneficiary_id = ypcf_mangopay_get_mp_user_beneficiary_id($organisation_obj->get_wpref());
-								if ($beneficiary_id == "") {
-									$beneficiary_id = ypcf_init_mangopay_beneficiary(
-										$organisation_obj->get_wpref(), 
-										$organisation_obj->get_bank_owner(), 
-										$organisation_obj->get_bank_address(), 
-										$organisation_obj->get_bank_iban(), 
-										$organisation_obj->get_bank_bic()
-									);
-								}
-
-								if ($beneficiary_id == "") {
-									global $mp_errors;
-									$errors = 'Erreur lors du transfert : ' . $mp_errors;
-									echo '<span class="error">' . $errors . '</span><br />';
-
-								} else {
-									//Faire un withdrawal avec le userid, le beneficiaryid et $mp_amount
-									$withdrawal_obj = ypcf_mangopay_make_withdrawal($organisation_obj->get_wpref(), $beneficiary_id, $mp_amount);
-
-									//Enregistrer le withdrawal pour garder une trace
-									if (is_string($withdrawal_obj)) {
-										echo '<span class="error">Erreur durant la transaction : ' . $withdrawal_obj . '</span>';
-
-									} else {
-										//Enregistrement de l'id du withdrawal (en tant que post wp)
-										$withdrawal_post = array(
-											'post_author'   => $organisation_obj->get_wpref(),
-											'post_title'    => $mp_amount,
-											'post_content'  => $withdrawal_obj->ID,
-											'post_status'   => 'pending',
-											'post_type'	=> 'withdrawal_order'
-										);
-										wp_insert_post( $withdrawal_post );
-
-										//Affichage message état
-										?>
-										La transaction est en cours..
-										<?php
-									}
-								}
-							}
+						<?php endif; ?>
 						
-							$args = array(
-							    'author'    => $organisation_obj->get_wpref(),
-							    'post_type' => 'withdrawal_order',
-							    'post_status'   => 'pending'
-							);
-							$pending_transfers = get_posts($args);
-						}
-						?>
-										
+									
 							
 						<?php
 						/**
@@ -326,22 +230,27 @@ get_header();
 						 */
 						?>
 						<h2 class="underlined"><?php _e( 'Porte-monnaie', 'yproject' ); ?></h2>
-						<?php /* $real_amount_invest = ypcf_mangopay_get_user_personalamount_by_wpid($organisation_obj->get_wpref()) / 100; ?>
-						Vous disposez de <?php echo $real_amount_invest; ?>&euro; dans votre porte-monnaie.<br /><br />
-
-						<?php if ($pending_transfers) : ?>
-						    Vous avez un transfert en cours.
-						<?php else :
-							if ($real_amount_invest > 0) { ?>
-						    <form action="" method="post" enctype="multipart/form-data">
-							<input type="hidden" name="mangopaytoaccount" value="1" />
-							<input type="submit" value="Reverser sur mon compte bancaire" class="button" />
-						    </form>
-						    <br /><br />
-						<?php	}
-						endif; */ ?>
-						<?php //porte monnaie LW ?>
-						Vous disposez de <?php echo $organisation_obj->get_lemonway_balance(); ?>&euro; dans votre porte-monnaie.<br /><br />
+						<?php // Porte-monnaie LW ?>
+						<?php $lemonway_balance = $organisation_obj->get_lemonway_balance(); ?>
+						Vous disposez de <?php echo $lemonway_balance; ?>&euro; dans votre porte-monnaie.<br /><br />
+						
+						<?php if ( $WDGUser_current->is_admin() ): ?>
+						
+							<?php if ( $lemonway_balance > 0 ): ?>
+								
+								<div style="background: #DDD">
+									Ce formulaire n'est accessible qu'en administration :<br />
+									<form action="" method="POST">
+										<input type="hidden" name="submit_transfer_wallet_lemonway" value="1" />
+										Somme à verser au porteur de projet : <input type="text" name="transfer_amount" value="0" /><br />
+										Somme à prendre en commission : <input type="text" name="transfer_commission" value="0" /><br />
+										<input type="submit" value="Verser" />
+									</form>
+								</div>
+						
+							<?php endif; ?>
+						
+						<?php endif; ?>
 	
 						    
 						<?php
@@ -356,30 +265,17 @@ get_header();
 						    'post_type'	    => 'withdrawal_order',
 						    'post_status'   => 'any',
 						    'orderby'	    => 'post_date',
-						    'order'	    =>  'ASC'
+						    'order'			=>  'ASC'
 						);
 						$transfers = get_posts($args);
 						if ($transfers) :
 						?>
 						<ul class="user_history">
 							<?php foreach ( $transfers as $post ) :
-								$widthdrawal_obj = ypcf_mangopay_get_withdrawal_by_id($post->post_content);
-								if ($widthdrawal_obj->Error != "" && $widthdrawal_obj->Error != NULL) {
-								    $args = array(
-									'ID'	=>  $post->ID,
-									'post_status'	=> 'draft'
-								    );
-								    wp_update_post($args);
-
-								} else if ($widthdrawal_obj->IsSucceeded && $widthdrawal_obj->IsCompleted && $post->post_status != 'publish') {
-								    $args = array(
-									'ID'	=>  $post->ID,
-									'post_status'	=> 'publish'
-								    );
-								    wp_update_post($args);
-								}
 								$post = get_post($post);
-								$post_amount = $post->post_title / 100;
+								$date_lemonway = new DateTime( '2016-08-03' );
+								$date_transfer = new DateTime( $post->post_date );
+								$post_amount = ($date_transfer > $date_lemonway) ? $post->post_title : $post->post_title / 100;
 								if ($post->post_status == 'publish') {
 								    ?>
 								    <li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Termin&eacute;</li>
