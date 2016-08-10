@@ -50,6 +50,13 @@ var ProjectEditor = (function($) {
 					$(clickedElement).addClass("edit-button");
 					$(clickedElement).removeClass("edit-button-validate");
 					$("#wdg-edit-project-add-lang").hide();
+					var background = $(".project-pitch-video").css('background-image');
+					if(background){
+						$(".project-pitch-video").attr('style','display:inline-block; left: 387px; top: 506px; background-image:'+background+'; background-repeat:no-repeat;');
+					}else{
+						$(".project-pitch-video").css('background-image', 'none');
+						$(".project-pitch-video").attr('style','display:inline-block; left: 387px; top: 506px;');
+					}
 				}
 			}
 		},
@@ -322,12 +329,12 @@ var ProjectEditor = (function($) {
 		// Enregistre l'image et/ou l'url de la vidéo
 		update_image_url: function(property){
 			$("#wdg-edit-"+property).hide();
-			$(".project-pitch-video").attr('style','display:none;');
+			$(".project-pitch-video").hide();
 
 			var div_test = "<div class='project-pitch-video project-pitch-video-bis'> <div class='contenu_image_url'></div></div>";
 			$(".project-pitch-text").after(div_test);
 
-			var newElement_1 = '<form id="upload-img-form" enctype="multipart/form-data"> <input type="hidden" name="action" value="save_image_url_video" /> <input type="hidden" name="campaign_id" value="'+$("#content").data("campaignid")+'" /> <input type="text" name="url_video" id="text_url_video" placeholder="Saissisez l\'url de votre vidéo"> <input style="display:none;"id="wdg-edit-video-image" type="file" class="image_video_zone" name="image_video_zone"/> </form>';
+			var newElement_1 = '<form id="upload-img-form" enctype="multipart/form-data"> <input type="hidden" name="action" value="save_image_url_video" /> <input type="hidden" name="campaign_id" value="'+$("#content").data("campaignid")+'" /> <input type="text" class="url_video" name="url_video" id="text_url_video" placeholder="Saissisez l\'url de votre vidéo"> <input style="display:none;"id="wdg-edit-video-image" type="file" class="image_video_zone" name="image_video_zone"/> </form>';
 			$(".contenu_image_url").after(newElement_1);
 
 			var newElement_1_input = '<input type="input" id="wdg-edit-video-image_update" value="Télécharger une image"/>';
@@ -337,7 +344,8 @@ var ProjectEditor = (function($) {
 			$("#wdg-edit-video-image_update").click(function() {
 				$("#wdg-edit-video-image").click();
 			});
-			
+			var check_image = 'False';
+			var src_image = '';
 			$(".image_video_zone").change(function(){
 				if (this.files) {
 					$.each(this.files, function(index, file) {
@@ -350,14 +358,28 @@ var ProjectEditor = (function($) {
 						reader.onload = function (e) {
 							var Element_image_view = '<p id="apercu_image"> Aperçu : <img style="margin:10px; border-radius:10px; box-shadow:0 0 15px 2px; width:25%;" id="video-zone-image" src="'+e.target.result+'"></p>';
 							$("#wdg-edit-video-image_update").after(Element_image_view);
+							src_image = e.target.result;
 						}
 						reader.readAsDataURL(file);
 						default:
 						break;
 						}
 					});
+					check_image = 'True';
 				}
 			});
+
+			var check_video ='False'; 
+			var number_video = '';
+			$(".url_video").change(function(){
+				$("#apercu_video").remove();
+				number_video = $("#text_url_video").val().split('watch?v=')[1];
+				var link = "https://www.youtube.com/embed/"+number_video+"?feature=oembed&rel=0&wmode=transparent";
+				var apercu_video = "<p  id='apercu_video'> Aperçu : <iframe width='300' height='200' src='"+link+"' frameborder='0' id='myFrame' allowfullscreen></p>";
+				$("#text_url_video").after(apercu_video);
+				check_video = 'True';
+			});
+
 			var newElement_2 = '<input type="submit" id="wdg-edit-video-zone-next_valid" value="Valider"/>';
 			$("#upload-img-form").after(newElement_2);
 
@@ -372,7 +394,11 @@ var ProjectEditor = (function($) {
 				$("#wdg-edit-video-zone-next_valid").remove();
 				$("#wdg-edit-video-zone-next_cancel").remove();
 				$(".project-pitch-video-bis").remove();
-				$(".project-pitch-video").attr('style','display:block;');
+				var background = $(".project-pitch-video").css('background-image');
+				if(background)
+					$(".project-pitch-video").attr('style','display:inline-block; background-image:'+background+'; background-repeat:no-repeat;');
+				else
+					$(".project-pitch-video").attr('style','display:inline-block;');
 				$("#wdg-edit-"+property).show();
 			});
 
@@ -388,6 +414,7 @@ var ProjectEditor = (function($) {
 				$("#wdg-edit-video-zone-next_valid").remove();
 				$("#wdg-edit-video-zone-next_cancel").remove();
 				$("#apercu_image").remove();
+				$("#apercu_video").remove();
 				$("#text_url_video").attr('style','display:none;');
 				$("#wdg-validate-picture-wait").attr('style','font-size: 0px; display:inline-block; z-index:2001;');
   				$.ajax({
@@ -398,12 +425,25 @@ var ProjectEditor = (function($) {
 		            'contentType': false,
 		            'processData': false
 				}).done(function(result) {
-					$(".project-pitch-video").remove();
-					// if($('#elemId').length>0){
-					// 	var url_image_start=$("#video-zone-image").attr('src');
-					// 	var newElement_video = 'div class="project-pitch-video" style="background-image: url(';
-					// }
 					ProjectEditor.validateInputDone(result);
+					if(check_video=='True'){
+						$(".project-pitch-video").remove();
+						var link_final = "https://www.youtube.com/embed/"+number_video+"?feature=oembed&rel=0&wmode=transparent";
+						var div_video = '<div class="project-pitch-video"><iframe width="578" height="325" src="'+link_final+'" frameborder="0" allowfullscreen></iframe></div>';
+						$(".project-pitch-text").after(div_video);
+					}else{
+						if(check_image=='True'){
+							var background = $(".project-pitch-video").css('background-image');
+							if(background&&background!='none'){
+								$(".project-pitch-video").remove();
+								var div_video='<div class="project-pitch-video" style="display:inline-block; background-image:url('+src_image+'); background-repeat:no-repeat;"></div>';
+								$(".project-pitch-video").remove();
+								$(".project-pitch-text").after(div_video);
+							}else{
+								$(".project-pitch-video").attr('style','display:inline-block;');
+							}
+						}
+					}
 					$("#wdg-validate-picture-wait").remove();
 					$("#upload-img-form").remove();
 					$(".project-pitch-video-bis").remove();
