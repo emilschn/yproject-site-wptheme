@@ -66,7 +66,7 @@ var WDGProjectDashboard = (function ($) {
                     var iframetoload = $("#ndashboard-content " + target+" .google-doc iframe");
                     iframetoload.each(function(){
                         $(this).prop('src',$(this).data('src'));
-                        $(this).load(function(){
+                        $(this).ready(function(){
                             $(this).addClass('isloaded');
                         });
                     });
@@ -86,22 +86,7 @@ var WDGProjectDashboard = (function ($) {
             }
 
             //Infobulles
-            $('#ndashboard .infobutton').each(function () {
-                $(this).qtip({
-                    content: $(this).next('.tooltiptext'),
-                    position: {
-                        my: 'bottom center',
-                        at: 'top center',
-                    },
-                    style: {
-                        classes: 'qtip-tipsy qtip-shadow'
-                    },
-                    hide: {
-                        fixed: true,
-                        delay: 300
-                    }
-                });
-            });
+            WDGProjectDashboard.initQtip();
 
             //Datepickers
             $("input.adddatepicker").datepicker({
@@ -448,6 +433,24 @@ var WDGProjectDashboard = (function ($) {
             }
         },
 
+        initQtip: function(){
+            $('#ndashboard .infobutton').each(function () {
+                $(this).qtip({
+                    content: $(this).next('.tooltiptext'),
+                    position: {
+                        my: 'bottom center',
+                        at: 'top center',
+                    },
+                    style: {
+                        classes: 'qtip-tipsy qtip-shadow'
+                    },
+                    hide: {
+                        fixed: true,
+                        delay: 300
+                    }
+                });
+            });
+        },
 
         manageTeam: function(action, data, campaign_id){
             //Clic pour ajouter un membre
@@ -534,6 +537,196 @@ var WDGProjectDashboard = (function ($) {
                     $("a[data-user="+data+"]").closest("li").slideUp("slow",function(){ $(this).remove();});
                 });
             }
+        },
+
+        getContactsTable: function(inv_data, campaign_id) {
+            $.ajax({
+                'type' : "POST",
+                'url' : ajax_object.ajax_url,
+                'data': {
+                    'action':'create_contacts_table',
+                    'id_campaign':campaign_id,
+                    'data' : inv_data
+                }
+            }).done(function(result){
+                //Affiche resultat requete Ajax une fois reçue
+                $('#ajax-contacts-load').after(result);
+                $('#ajax-loader-img').hide();//On cache la roue de chargement.
+
+                WDGProjectDashboard.initQtip();
+
+                //Création du tableau dynamique dataTable
+                WDGProjectDashboard.table = $('#contacts-table').DataTable({
+                    scrollX: true,
+                    scrollY: '70vh', //Taille max du tableau : 70% de l'écran
+                    scrollCollapse: true, //Diminue taille du tableau si peu d'éléments*/
+
+                    paging: false, //Pas de pagination, affiche tous les éléments yolo
+                    order: [[result_contacts_table['default_sort'],"desc"]],
+
+                    colReorder: { //On peut réorganiser les colonnes
+                        fixedColumnsLeft: result_contacts_table['id_column_index']+1 //Les 5 colonnes à gauche sont fixes
+                    },
+                    fixedColumns : {
+                        leftColumns: result_contacts_table['id_column_index']+1
+                    },
+
+
+                    columnDefs: [
+                        {
+                            targets: result_contacts_table['array_hidden'], //Cache colonnes par défaut
+                            visible: false
+                        },{
+                            targets: [result_contacts_table['id_column_index']], //Cache colonnes par défaut
+                            visible: false
+                        },{
+                            className: 'select-checkbox',
+                            targets : 0,
+                            orderable: false,
+                        }
+                    ],
+
+                    //Permet la sélection de lignes
+                    select: {
+                        style: 'os', //Sélection multiple
+                        selector: 'td:first-child'
+                    },
+
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            text: '<i class="fa fa-check-square-o" aria-hidden="true"></i> Sélectionner les éléments filtrés',
+                            action: function () {
+                                WDGProjectDashboard.table.rows( { search: 'applied' } ).select();
+                            }
+                        },{
+                            //Bouton envoi de mail
+                            extend: 'selected',
+                            text: '<i class="fa fa-envelope" aria-hidden="true"></i> Envoyer un mail',
+                            action: function ( e, dt, button, config ) {
+                                alert( dt.rows( { selected: true } ).indexes().length +' contacts sélectionnés' );
+                            }
+                        },
+
+
+                        {
+                            extend: 'collection',
+                            text: '<i class="fa fa-eye" aria-hidden="true"></i> Informations à afficher',
+                            buttons: [{
+                                //Bouton d'affichage de colonnes
+                                extend: 'colvis',
+                                text: '<i class="fa fa-columns" aria-hidden="true"></i> Colonnes à afficher',
+                                columns: ':gt('+result_contacts_table['id_column_index']+')', //On ne peut pas cacher les 5 premières colonnes
+                                collectionLayout: 'two-column'
+                            },{
+                                extend: 'colvisGroup',
+                                text: 'Tout afficher',
+                                show: ':gt('+result_contacts_table['id_column_index']+'):hidden'
+                            },{
+                                extend: 'colvisGroup',
+                                text: 'Tout masquer',
+                                hide: ':gt('+result_contacts_table['id_column_index']+')'
+                            },{
+                                extend: 'colvisRestore',
+                                text: '<i class="fa fa-refresh" aria-hidden="true"></i> Rétablir colonnes par défaut'
+                            }]
+                        },
+
+                        //Menu d'export
+                        {
+                            extend: 'collection',
+                            text: '<i class="fa fa-download" aria-hidden="true"></i> Exporter',
+                            buttons: [ {
+                                //Bouton d'export excel
+                                extend: 'excel',
+                                text: '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Fichier Excel',
+                                exportOptions: {
+                                    modifier: {
+                                        columns: ':visible'
+                                    }
+                                }
+                            },{
+                                //Bouton d'export impression
+                                extend: 'print',
+                                text: '<i class="fa fa-print" aria-hidden="true"></i> Imprimer',
+                                exportOptions: {
+                                    modifier: {
+                                        columns: ':visible'
+                                    }
+                                }
+                            } ]
+                        }
+                    ],
+
+                    language : {
+                        "sProcessing":     "Traitement en cours...",
+                        "sSearch":         "Rechercher&nbsp;:",
+                        "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+                        "sInfo":           "Affichage de _TOTAL_ &eacute;l&eacute;ments",
+                        "sInfoEmpty":      "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                        "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                        "sInfoPostFix":    "",
+                        "sLoadingRecords": "Chargement en cours...",
+                        "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                        "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+                        "oPaginate": {
+                            "sFirst":      "Premier",
+                            "sPrevious":   "Pr&eacute;c&eacute;dent",
+                            "sNext":       "Suivant",
+                            "sLast":       "Dernier"
+                        },
+                        "oAria": {
+                            "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                            "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                        },
+                        select: {
+                            rows: {
+                                _: "<b>%d</b> contacts sélectionnés",
+                                0: 'Cliquez sur un élément pour le sélectionner',
+                                1: "<b>1</b> contact sélectionné"
+                            }
+                        }
+                    }
+                });
+
+                WDGProjectDashboard.table.on( 'select', function ( e, dt, type, indexes ) {
+                    console.log("Go go "+type);
+                    if ( type === 'row' ) {
+                        WDGProjectDashboard.table.rows( indexes ).every(function(){
+                            this.data[result_contacts_table['id_column_index']];
+                        });
+
+                        // do something with the ID of the selected items
+                    }
+                } );
+
+                // Champs de filtrage
+                $( WDGProjectDashboard.table.table().container() ).on( 'keyup', 'tfoot .text input', function () {
+                    WDGProjectDashboard.table
+                        .column( $(this).data('index') )
+                        .search( this.value )
+                        .draw();
+                } );
+                $( WDGProjectDashboard.table.table().container() ).on( 'change', 'tfoot .check input', function () {
+                    if($(this).is(":checked")){
+                        WDGProjectDashboard.table
+                            .column( $(this).data('index') )
+                            .search("1")
+                            .draw();
+                    }
+                    else {
+                        WDGProjectDashboard.table
+                            .column( $(this).data('index') )
+                            .search("")
+                            .draw();
+                    }
+                } );
+
+
+            }).fail(function(){
+                $('#ajax-contacts-load').after("<em>Le chargement du tableau a échoué</em>");
+                $('#ajax-loader-img').hide();//On cache la roue de chargement.
+            });
         },
     };
 

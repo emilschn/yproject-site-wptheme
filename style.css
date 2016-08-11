@@ -2762,55 +2762,6 @@ div#home_bottom h1 {
     background: #333 url("images/chargement.gif") center no-repeat !important;
 }*/
 
-/*******************************************************************************
-* TABLEAUX DYNAMIQUES : PERSONNALISATION DE DATATABLES
-*******************************************************************************/
-.wdg-datatable{
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
-.wdg-datatable table.dataTable thead th, 
-.wdg-datatable table.dataTable thead td {
-    padding: 5px 17px 5px 8px;
-    cursor: move;
-}
-
-.wdg-datatable table.dataTable tbody th, 
-.wdg-datatable table.dataTable tbody td {
-    padding: 5px 5px;
-}
-
-.wdg-datatable table.dataTable tfoot th, 
-.wdg-datatable table.dataTable tfoot td {
-    padding: 8px 8px 15px;
-}
-
-.wdg-datatable table.dataTable tfoot td {
-    vertical-align: top;
-}
-
-.wdg-datatable .col-filter {
-    width: 90%;
-}
-
-/****Affichage permanent du scroll sur Mac et ios******/
-.wdg-datatable::-webkit-scrollbar {
-    -webkit-appearance: none;
-}
-.wdg-datatable::-webkit-scrollbar:horizontal {
-    height: 15px;
-}
-.wdg-datatable::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    border: 2px solid white;
-    background-color: rgba(0, 0, 0, .5);
-}
-.wdg-datatable::-webkit-scrollbar-track { 
-    background-color: #fff; 
-    border-radius: 8px; 
-}
-
 .wpb_content_element .wpb_accordion_wrapper .wpb_accordion_header, .wpb_content_element.wpb_tabs .wpb_tour_tabs_wrapper .wpb_tab {
     background-color: #f2f2f2 !important;
 }

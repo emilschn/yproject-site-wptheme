@@ -8,6 +8,7 @@
     display: table;
     width: 100%;
     font-size: 14px;
+    table-layout: fixed;
 }
 
 #ndashboard .infobutton{
@@ -164,6 +165,14 @@
 
 #ndashboard-content .tab-content h2{
     text-align: center;
+}
+
+#ndashboard-content .tab-content-large {
+    display: block;
+    margin: 0px auto 10px auto;
+    background-color: #F2F2F2;
+    padding: 20px 30px;
+    border-bottom: 1px solid grey;
 }
 
 /*******************************************************************************
@@ -564,4 +573,50 @@
     padding: 7px 0px;
     border-bottom: 1px solid #808080;
     margin: 5px 0px;
+}
+
+/*******************************************************************************
+* Page contacts
+*******************************************************************************/
+
+/*******************************************************************************
+* TABLEAUX DYNAMIQUES : PERSONNALISATION DE DATATABLES
+*******************************************************************************/
+
+#page-contacts .wdg-datatable table.dataTable thead th,
+#page-contacts .wdg-datatable table.dataTable thead td {
+    padding: 5px 17px 5px 8px;
+    cursor: move;
+}
+
+#page-contacts .wdg-datatable table.dataTable tbody th,
+#page-contacts .wdg-datatable table.dataTable tbody td {
+    padding: 5px 5px;
+}
+
+#page-contacts .wdg-datatable table.dataTable tfoot th,
+#page-contacts .wdg-datatable table.dataTable tfoot td {
+    padding: 8px 8px 15px;
+}
+
+#page-contacts .wdg-datatable table.dataTable tfoot tr{
+    vertical-align: top;
+}
+
+#page-contacts .wdg-datatable #contacts-table{
+    margin: 0;
+}
+
+#page-contacts .wdg-datatable tfoot th input{
+    width: 100%;
+}
+
+#page-contacts .wdg-datatable table .dirty-hide{
+    width: 0px;
+    overflow: hidden;
+    height: 0px;
+}
+
+div.dt-button-collection{
+    width: auto !important;
 }

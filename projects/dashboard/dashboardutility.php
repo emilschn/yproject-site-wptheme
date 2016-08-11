@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Théo
- * Date: 26/07/2016
- * Time: 00:07
- */
 class DashboardUtility
 {
     public static function get_infobutton($hovertext, $display=false, $margin=true, $other_icon=""){

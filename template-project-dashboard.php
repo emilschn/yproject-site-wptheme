@@ -46,7 +46,7 @@ if ($can_modify){
 
     $WDGAuthor = new WDGUser(get_userdata($post_campaign->post_author));
     $WDGUser_current = WDGUser::current();
-    $is_admin = (current_user_can('manage_options'));
+    $is_admin = $WDGUser_current->is_admin();
     $is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
 
     //Stats vues
@@ -75,7 +75,9 @@ if ($can_modify){
     locate_template( array("projects/dashboard/informations.php"), true );
     locate_template( array("projects/dashboard/campaign-tab.php"), true );
     locate_template( array("projects/dashboard/wallet.php"), true );
+    locate_template( array("projects/dashboard/contacts.php"), true );
     locate_template( array("projects/dashboard/news.php"), true );
+
 
     check_change_status();
     page_resume_lightboxes();
@@ -117,7 +119,7 @@ if ($can_modify){
                                 <i class="fa fa-external-link" aria-hidden="true"></i></a>
                         </li>
                         <li>
-                            <a href="#page-informations">Informations<div class="badge-notif">0</div></a>
+                            <a href="#page-informations">Informations<div class="badge-notif"></div></a>
                         </li>
                         <li>
                             <a href="#page-wallet" <?php check_enabled_tab($status) ?>>
@@ -153,7 +155,7 @@ if ($can_modify){
                     <div class="page-dashboard" id="page-informations"><?php print_informations_page(); ?></div>
                     <div class="page-dashboard" id="page-wallet"><?php print_wallet_page(); ?></div>
                     <div class="page-dashboard" id="page-campaign"><?php print_campaign_page(); ?></div>
-                    <div class="page-dashboard" id="page-contacts">6</div>
+                    <div class="page-dashboard" id="page-contacts"><?php print_contacts_page()?></div>
                     <div class="page-dashboard" id="page-news"><?php print_news_page(); ?></div>
                     <!--div class="page-dashboard" id="page-support">8</div-->
                     <div class="page-dashboard" id="page-loading">

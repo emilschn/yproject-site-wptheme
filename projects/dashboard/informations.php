@@ -151,7 +151,7 @@ function print_informations_page()
                     "id"=>"email",
                     "type"=>"text",
                     "label"=>"Adresse &eacute;lectronique",
-                    "value"=>$WDGAuthor->wp_user->user_email,
+                    "value"=>$WDGAuthor->wp_user->get('user_email'),
                     "infobubble"=>"Pour modifier votre adresse e-mail de contact, rendez-vous dans vos param&egrave;tres de compte",
                     "editable"=>false
                 ));

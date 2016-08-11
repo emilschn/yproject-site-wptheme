@@ -82,14 +82,21 @@ function yproject_enqueue_script(){
 		wp_enqueue_style( 'dashboard-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dashboard.css', null, $current_version, 'all');
 
 
-		wp_enqueue_script( 'datatable-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/jquery.dataTables.js', array('wdg-script'), true, true);
-		wp_enqueue_style('datatable-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/jquery.dataTables.css', null, false, 'all');
-		//wp_enqueue_script( 'datatable-resp-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.responsive.js', array('wdg-script'), true, true);
-		//wp_enqueue_style('datatable-resp-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.responsive.css', null, false, 'all');
-		wp_enqueue_script( 'datatable-colvis-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colVis.js', array('wdg-script'), true, true);
-		wp_enqueue_style('datatable-colvis-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.colVis.css', null, false, 'all');
-		wp_enqueue_script( 'datatable-colReorder-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colReorder.js', array('wdg-script'), true, true);
-		wp_enqueue_style('datatable-colReorder-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.colReorder.css', null, false, 'all');
+		wp_enqueue_script( 'datatable-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/jquery.dataTables.min.js', array('jquery', 'wdg-script'), true, true);
+		wp_enqueue_style('datatable-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/jquery.dataTables.min.css', null, false, 'all');
+
+		wp_enqueue_script( 'datatable-colreorder-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colReorder.min.js', array('datatable-script'), true, true);
+		wp_enqueue_style('datatable-colreorder-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/colReorder.dataTables.min.css', null, false, 'all');
+
+		wp_enqueue_script( 'datatable-select-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.select.min.js', array('datatable-script'), true, true);
+		wp_enqueue_style('datatable-select-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/select.dataTables.min.css', null, false, 'all');
+		
+		wp_enqueue_script( 'datatable-buttons-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.buttons.min.js', array('datatable-script'), true, true);
+		wp_enqueue_script( 'datatable-buttons-colvis-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/buttons.colVis.min.js', array('datatable-script'), true, true);
+		wp_enqueue_script( 'datatable-buttons-html5-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/buttons.html5.min.js', array('datatable-script'), true, true);
+		wp_enqueue_script( 'datatable-buttons-print-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/buttons.print.min.js', array('datatable-script'), true, true);
+		wp_enqueue_script( 'datatable-jszip-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/jszip.min.js', array('datatable-script'), true, true);
+		wp_enqueue_style('datatable-buttons-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/buttons.dataTables.min.css', null, false, 'all');
 
 	}
 	if ($is_admin_page) { wp_enqueue_script( 'wdg-admin-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-admin-dashboard.js', array('jquery'), $current_version); }
@@ -1038,13 +1045,14 @@ function get_investors_table() {
 					'colcountry',
 					'colemail',
 					'colphone',
+
 					'colinvesmontant',
 					'colinvdate',
 					'colinvpaytype',
 					'colinvpaystate',
-					'colinvsign');
-	
-	if ($is_campaign_over) { $classcolonnes[]='colinvstate'; }
+					'colinvsign',
+					'colinvstate');
+
 	if ($campaign->funding_type()=='fundingdonation') {
 		$classcolonnes[]='colrewardprice';
 		$classcolonnes[]='colrewardtext';
@@ -1066,8 +1074,8 @@ function get_investors_table() {
 					'Date',
 					'Type de paiement',
 					'Etat du paiement',
-					'Signature');
-	if ($is_campaign_over) { $titrecolonnes[]='Investissement'; }
+					'Signature',
+					'Investissement');
 	if ($campaign->funding_type()=='fundingdonation') {
 		$titrecolonnes[]='Palier de contrepartie';
 		$titrecolonnes[]='Description de la contrepartie';
@@ -1089,8 +1097,8 @@ function get_investors_table() {
 					true,
 					true,
 					false,
+					false,
 					false);
-	if ($is_campaign_over) { $selectiondefaut[]=true; }
 	if ($campaign->funding_type()=='fundingdonation') {
 		$selectiondefaut[]=true;
 		$selectiondefaut[]=false;
@@ -1116,12 +1124,13 @@ function get_investors_table() {
 		<?php foreach ( $investments_list['payments_data'] as $item ) {
 			$post_invest = get_post($item['ID']);
 			$mangopay_id = edd_get_payment_key($item['ID']);
-			$payment_type = 'Carte';
+
 			$payment_state = edd_get_payment_status( $post_invest, true );
 			if ($payment_state == "En attente" && $current_wdg_user->is_admin()) {
 				$payment_state .= '<br /><a href="' .get_permalink($page_dashboard->ID) . $campaign_id_param. '&approve_payment='.$item['ID'].'" style="font-size: 10pt;">[Confirmer]</a>';
 				$payment_state .= '<br /><br /><a href="' .get_permalink($page_dashboard->ID) . $campaign_id_param. '&cancel_payment='.$item['ID'].'" style="font-size: 10pt;">[Annuler]</a>';
 			}
+			$payment_type = 'Carte';
 			if (strpos($mangopay_id, 'wire_') !== FALSE) {
 				$payment_type = 'Virement';
 			} else if ($mangopay_id == 'check') {
@@ -1174,7 +1183,8 @@ function get_investors_table() {
 					date_i18n( 'Y-m-d', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
 					$payment_type,
 					$payment_state,
-					$item['signsquid_status_text']
+					$item['signsquid_status_text'],
+					$investment_state
 				);
 			} else {
 				$datacolonnes = array(
@@ -1194,11 +1204,10 @@ function get_investors_table() {
 					date_i18n( 'Y-m-d', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
 					$payment_type,
 					$payment_state,
-					$item['signsquid_status_text']
+					$item['signsquid_status_text'],
+					$investment_state
 				);
 			}
-
-			if ($is_campaign_over) { $datacolonnes[]=$investment_state; }
 
 			if ($campaign->funding_type()=='fundingdonation') {
 				$datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['amount']."€";

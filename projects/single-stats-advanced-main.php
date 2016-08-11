@@ -100,11 +100,5 @@ Votre projet a &eacute;t&eacute; vu<br />
 La page projet a été partagée <strong><?php echo $fb_share_count?></strong> fois
 et a receuilli <strong><?php echo $fb_like_count ?> "J'aime"</strong> <br />
 
-<?php */ if (current_user_can('manage_options')) { ?>
-<h2>[ADMIN] E-mails des utilisateurs qui croient ou qui ont vot&eacute;</h2>
-
-<div id="ajax-email-selector-load" class="ajax-investments-load" style="text-align: center;" data-value="<?php echo $campaign_id ?>">
-    <img id="ajax-email-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
-
-<?php } ?>
+<?php */ ?>
 <br /><br />
