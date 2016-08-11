@@ -58,25 +58,34 @@
 	    $campaign_post = get_post($campaign_id);
 	    $campaign = atcf_get_campaign($campaign_post);
     }
-	if ($campaign->edit_version() > 2) {
-		$postlist_link = get_permalink($campaign->ID);
-	} else {
-		$postlist_link = (!empty($this_category)) ? get_category_link($this_category->cat_ID) : '';
-	}
+	$edit_version = $campaign->edit_version();
+	$classes = 'version-' . $edit_version;
     $post = $campaign_post;
 ?>
-	<div id="content" style="margin-top: -15px;">
+	<div id="content" style="margin-top: -15px;" class="<?php echo $classes; ?>">
 		<div class="padder">
 
 			<?php do_action( 'bp_before_blog_single_post' ); ?>
 
 			<div class="page" id="blog-archives" role="main">
-				<?php require_once('projects/single-admin-bar.php'); ?>
-				<?php require_once('projects/single-header.php'); ?>
+				
+				<?php if ($edit_version < 3): ?>
+					<?php require_once('projects/single-admin-bar.php'); ?>
+					<?php require_once('projects/single-header.php'); ?>
+				<?php else: ?>
+					<?php locate_template( array("projects/single/banner.php"), true ); ?>
+				<?php endif; ?>
 
 				<div id="post_bottom_bg">
 					<div id="post_bottom_content" class="center margin-height">
-						<a href="<?php echo esc_url($postlist_link); ?>">&lt;&lt; Revenir &agrave; la liste des actualit&eacute;s</a>
+						<?php if ($campaign->edit_version() < 3): ?>
+							<?php $postlist_link = (!empty($this_category)) ? get_category_link($this_category->cat_ID) : ''; ?>
+							<a href="<?php echo esc_url($postlist_link); ?>">&lt;&lt; Revenir &agrave; la liste des actualit&eacute;s</a>
+						<?php else: ?>
+							<?php $postlist_link = get_permalink($campaign->ID); ?>
+							<a href="<?php echo esc_url($postlist_link); ?>">&lt;&lt; Revenir &agrave; la page du projet</a>
+						<?php endif; ?>
+						
 
 						<?php wp_reset_query(); ?>
 						

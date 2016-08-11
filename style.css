@@ -2283,10 +2283,6 @@ div#home_bottom h1 {
 }
 
 /* VOTE */
-#project_vote_zone {
-    padding-top: 10px;
-}
-
 #project_vote_zone strong {
     font-size: 15px;
     line-height: 30px;

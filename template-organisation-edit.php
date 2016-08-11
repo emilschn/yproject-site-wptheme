@@ -242,8 +242,8 @@ get_header();
 									Ce formulaire n'est accessible qu'en administration :<br />
 									<form action="" method="POST">
 										<input type="hidden" name="submit_transfer_wallet_lemonway" value="1" />
-										Somme à verser au porteur de projet : <input type="text" name="transfer_amount" value="" /><br />
-										Somme à prendre en commission : <input type="text" name="transfer_commission" value="" /><br />
+										Somme à verser au porteur de projet : <input type="text" name="transfer_amount" value="0" /><br />
+										Somme à prendre en commission : <input type="text" name="transfer_commission" value="0" /><br />
 										<input type="submit" value="Verser" />
 									</form>
 								</div>
