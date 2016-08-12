@@ -333,7 +333,7 @@ var ProjectEditor = (function($) {
 			var div_test = "<div class='project-pitch-video project-pitch-video-bis'> <div class='contenu_image_url'></div></div>";
 			$(".project-pitch-text").after(div_test);
 
-			var newElement = '<form id="upload-img-form" enctype="multipart/form-data"> <input type="hidden" name="action" value="save_image_url_video" /> <input type="hidden" name="campaign_id" value="'+$("#content").data("campaignid")+'" /> <input type="text" class="url_video" name="url_video" id="text_url_video" placeholder="Saissisez l\'url de votre vidéo"> <input style="display:none;"id="wdg-edit-video-image" type="file" class="image_video_zone" name="image_video_zone"/> </form>';
+			var newElement = '<form id="upload-video-form" enctype="multipart/form-data"> <input type="hidden" name="action" value="save_image_url_video" /> <input type="hidden" name="campaign_id" value="'+$("#content").data("campaignid")+'" /> <input type="text" class="url_video" name="url_video" id="text_url_video" placeholder="Saissisez l\'url de votre vidéo"> <input style="display:none;"id="wdg-edit-video-image" type="file" class="image_video_zone" name="image_video_zone"/> </form>';
 			$(".contenu_image_url").after(newElement);
 
 			newElement = '<input type="button" id="wdg-edit-video-image_update" value="Télécharger une image d\'aperçu ..."/>';
@@ -382,15 +382,15 @@ var ProjectEditor = (function($) {
 			});
 
 			newElement = '<input type="submit" id="wdg-edit-video-zone-next_valid" value="Valider"/>';
-			$("#upload-img-form").after(newElement);
+			$("#upload-video-form").after(newElement);
 
 			newElement = '<input type="submit" id="wdg-edit-video-zone-next_cancel" value="Annuler"/>';
-			$("#upload-img-form").after(newElement);
+			$("#upload-video-form").after(newElement);
 
 
 			$("#wdg-edit-video-zone-next_cancel").click(function() {
 				ProjectEditor.validateInputDone(true);
-				$("#upload-img-form").remove();
+				$("#upload-video-form").remove();
 				$("#wdg-edit-video-image_update").remove();
 				$("#wdg-edit-video-zone-next_valid").remove();
 				$("#wdg-edit-video-zone-next_cancel").remove();
@@ -404,15 +404,15 @@ var ProjectEditor = (function($) {
 			});
 
 			$("#wdg-edit-video-zone-next_valid").click(function() {
+				$("#wdg-edit-video-zone-next_valid").remove();
 				var button_waiting = '<input type="submit" id="wdg-validate-picture-wait"/>';
 				$(".contenu_image_url").after(button_waiting);
 				$("#wdg-validate-picture-wait").addClass("wait-button");
 				$("#wdg-validate-picture-wait").unbind("click");
 				$("#wdg-validate-picture-wait").innerHTML = ""
 				$("#wdg-validate-picture-wait").attr('style','display:none;');
-  				var formData = new FormData($('form#upload-img-form')[0]);
+  				var formData = new FormData($('form#video-img-form')[0]);
 				$("#wdg-edit-video-image_update").remove();
-				$("#wdg-edit-video-zone-next_valid").remove();
 				$("#wdg-edit-video-zone-next_cancel").remove();
 				$("#apercu_image").remove();
 				$("#apercu_video").remove();
@@ -434,19 +434,18 @@ var ProjectEditor = (function($) {
 						$(".project-pitch-text").after(div_video);
 					}else{
 						if(image_check=='True'){
-							var background = $(".project-pitch-video").css('background-image');
-							if(background&&background!='none'){
+							var background = $(".project-pitch-video").css('background-image')
+                            if(background){
 								$(".project-pitch-video").remove();
 								var div_video='<div class="project-pitch-video" style="display:inline-block; background-image:url('+image_src+'); background-repeat:no-repeat;"></div>';
-								$(".project-pitch-video").remove();
 								$(".project-pitch-text").after(div_video);
 							}else{
-								$(".project-pitch-video").attr('style','display:inline-block;');
+								(".project-pitch-video").attr('style','display:inline-block;');
 							}
 						}
 					}
 					$("#wdg-validate-picture-wait").remove();
-					$("#upload-img-form").remove();
+					$("#upload-video-form").remove();
 					$(".project-pitch-video-bis").remove();
 					$("#wdg-edit-"+property).show();
 				});
