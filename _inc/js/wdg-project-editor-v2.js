@@ -143,7 +143,7 @@ var ProjectEditor = (function($) {
 					case "video-zone":
 						ProjectEditor.redirectParams(sProperty);
 						break;
-                                        case "project-owner":
+                    case "project-owner":
 						ProjectEditor.redirectOrganisation(sProperty);
 						break;
 				}

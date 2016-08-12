@@ -550,7 +550,6 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered a img { width: 50px; }
 }
 
-
 /*******************************************************************************
 * APPARENCE vote form V3 (lightbox)
 *******************************************************************************/
@@ -1208,4 +1207,29 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
     100% {
         -webkit-transform: translateX(-150%);
     }
+}
+
+#wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel, #wdg-edit-picture-head-next_update, #wdg-edit-video-image_update, #wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid{
+	background: #A4DBDE;
+    height: 25px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+#wdg-edit-picture-head-next_valid{
+	margin-left: 5px;
+}
+
+#wdg-edit-picture-head-next_cancel{
+	margin-left: 10px;
+}
+
+#wdg-edit-video-image_update, #apercu_image, #text_url_video, #apercu_video, #wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid {
+    display: inline;
+    margin: 5px;
+}
+#wdg-edit-video-image_update, #text_url_video{
+    width: 220px;
 }

@@ -50,6 +50,13 @@ var ProjectEditor = (function($) {
 					$(clickedElement).addClass("edit-button");
 					$(clickedElement).removeClass("edit-button-validate");
 					$("#wdg-edit-project-add-lang").hide();
+					var background = $(".project-pitch-video").css('background-image');
+					if(background){
+						$(".project-pitch-video").attr('style','display:inline-block; left: 387px; top: 506px; background-image:'+background+'; background-repeat:no-repeat;');
+					}else{
+						$(".project-pitch-video").css('background-image', 'none');
+						$(".project-pitch-video").attr('style','display:inline-block; left: 387px; top: 506px;');
+					}
 				}
 			}
 		},
@@ -155,8 +162,10 @@ var ProjectEditor = (function($) {
 						ProjectEditor.showEditableZone(sProperty);
 						break;
 					case "picture-head":
+						ProjectEditor.createfile(sProperty);
+						break;
 					case "video-zone":
-						ProjectEditor.redirectParams(sProperty);
+						ProjectEditor.update_image_url(sProperty);
 						break;
 					case "project-owner":
 						ProjectEditor.redirectOrganisation(sProperty);
@@ -211,7 +220,241 @@ var ProjectEditor = (function($) {
 			
 			return buffer;
 		},
-		
+
+		//Enregistre la bannière
+		createfile: function(property){
+			var url_image_start=$(".project-banner-img img").attr('src');
+
+			var newElement_1 = '<form id="upload-img-form" enctype="multipart/form-data"> <input type="hidden" name="action" value="save_image_head" /> <input name="image_header_blur" type="hidden"/> <input type="hidden" name="campaign_id" value="'+$("#content").data("campaignid")+'" /> <input id="wdg-edit-picture-head-next" type="file" class="input_image_home" name="image_header"/> </form>';
+			$(ProjectEditor.elements[property].elementId).after(newElement_1);
+    		$("#wdg-edit-picture-head-next").css("display","none");
+
+			var newElement_1_input = '<input type="input" id="wdg-edit-picture-head-next_update" value="Télécharger une image"/>';
+			$(ProjectEditor.elements[property].elementId).after(newElement_1_input);
+			$("#wdg-edit-picture-head-next_update").css("left", $(ProjectEditor.elements[property].elementId).position().left);
+			$("#wdg-edit-picture-head-next_update").css("top", $(ProjectEditor.elements[property].elementId).position().top);
+			$("#wdg-edit-picture-head-next_update").css("z-index", "1");
+    		$("#wdg-edit-picture-head-next_update").css("position","absolute");
+
+			var newElement_2 = '<input type="submit" id="wdg-edit-picture-head-next_valid" value="Valider"/>';
+			$(ProjectEditor.elements[property].elementId).after(newElement_2);
+			$("#wdg-edit-picture-head-next_valid").css("left", $(ProjectEditor.elements[property].elementId).position().left + $("#wdg-edit-picture-head-next_update").outerWidth());
+			$("#wdg-edit-picture-head-next_valid").css("top", $(ProjectEditor.elements[property].elementId).position().top);
+			$("#wdg-edit-picture-head-next_valid").css("z-index", "2");
+    		$("#wdg-edit-picture-head-next_valid").css("position","absolute");
+
+
+			var newElement_3 = '<input type="submit" id="wdg-edit-picture-head-next_cancel" value="Annuler"/>';
+			$(ProjectEditor.elements[property].elementId).after(newElement_3);
+			$("#wdg-edit-picture-head-next_cancel").css("left", $(ProjectEditor.elements[property].elementId).position().left + $("#wdg-edit-picture-head-next_update").outerWidth() + $("#wdg-edit-picture-head-next_valid").outerWidth());
+			$("#wdg-edit-picture-head-next_cancel").css("top", $(ProjectEditor.elements[property].elementId).position().top);
+			$("#wdg-edit-picture-head-next_cancel").css("z-index", "2");
+    		$("#wdg-edit-picture-head-next_cancel").css("position","absolute");
+			
+
+			var button_waiting = '<input type="submit" id="wdg-validate-picture-wait"/>';
+			$(ProjectEditor.elements[property].elementId).after(button_waiting);
+			$("#wdg-validate-picture-wait").addClass("wait-button");
+			$("#wdg-validate-picture-wait").unbind("click");
+			$("#wdg-validate-picture-wait").attr('style','display:none; ');
+			$("#wdg-validate-picture-wait").innerHTML = ""
+
+
+			$("#wdg-edit-picture-head-next_cancel").click(function() {
+				ProjectEditor.validateInputDone(true);
+				$("#wdg-edit-"+property).show();
+				$("#wdg-edit-picture-head-next").remove();
+				$("#wdg-edit-picture-head-next_update").remove();
+				$("#wdg-edit-picture-head-next_valid").remove();
+				$("#wdg-edit-picture-head-next_cancel").remove();
+				$("#project-banner-src").remove();
+				$('.project-banner-img').append('<img id="project-banner-src" src="'+url_image_start+'">');
+				$(".project-banner-content").css("background", "none");
+			});
+			
+			$("#wdg-edit-picture-head-next_update").click(function() {
+				$("#wdg-edit-picture-head-next").click();
+			});
+
+			$("#wdg-edit-picture-head-next_valid").click(function() {
+
+  				var formData = new FormData($('form#upload-img-form')[0]);
+  				$("#wdg-edit-picture-head-next").remove();
+				$("#wdg-edit-picture-head-next_update").remove();
+				$("#wdg-edit-picture-head-next_valid").remove();
+				$("#wdg-edit-picture-head-next_cancel").remove();
+				$("#wdg-validate-picture-wait").attr('style','font-size: 0px; display:block; z-index:2001;');
+
+  				$.ajax({
+					'type' : "POST",
+					'url' :ajax_object.ajax_url,
+					'data': formData,
+		            'cache': false,
+		            'contentType': false,
+		            'processData': false
+				}).done(function(result) {
+					$("#wdg-edit-"+property).show();
+					$("#wdg-validate-picture-wait").attr('style','display:none;');
+					ProjectEditor.validateInputDone(result);
+
+				});
+
+
+			});
+
+			$(".input_image_home").change(function(){
+				$("#project-banner-src").remove();
+				if (this.files) {
+					$.each(this.files, function(index, file) {
+						switch (file.type) {
+						case "image/jpeg":
+						case "image/jpg":
+						case "image/png":
+						case "image/gif":
+						var reader = new FileReader();
+						reader.onload = function (e) {
+							$('.project-banner-img').append('<img id="project-banner-src" src="'+e.target.result+'">');
+						}
+
+						reader.readAsDataURL(file);
+						default:
+						break;
+						}
+					});
+				}
+			});
+			$("#wdg-edit-"+property).hide();
+		},
+	 
+		// Enregistre l'image et/ou l'url de la vidéo
+		update_image_url: function(property){
+			$("#wdg-edit-"+property).hide();
+			$(".project-pitch-video").hide();
+
+			var div_test = "<div class='project-pitch-video project-pitch-video-bis'> <div class='contenu_image_url'></div></div>";
+			$(".project-pitch-text").after(div_test);
+
+			var newElement = '<form id="upload-img-form" enctype="multipart/form-data"> <input type="hidden" name="action" value="save_image_url_video" /> <input type="hidden" name="campaign_id" value="'+$("#content").data("campaignid")+'" /> <input type="text" class="url_video" name="url_video" id="text_url_video" placeholder="Saissisez l\'url de votre vidéo"> <input style="display:none;"id="wdg-edit-video-image" type="file" class="image_video_zone" name="image_video_zone"/> </form>';
+			$(".contenu_image_url").after(newElement);
+
+			newElement = '<input type="input" id="wdg-edit-video-image_update" value="Télécharger une image d\'aperçu ..."/>';
+			$(".contenu_image_url").after(newElement);
+			
+
+			$("#wdg-edit-video-image_update").click(function() {
+				$("#wdg-edit-video-image").click();
+			});
+			var image_check = 'False';
+			var image_src = '';
+			$(".image_video_zone").change(function(){
+				if (this.files) {
+					$.each(this.files, function(index, file) {
+						switch (file.type) {
+						case "image/jpeg":
+						case "image/jpg":
+						case "image/png":
+						case "image/gif":
+						var reader = new FileReader();
+						reader.onload = function (e) {
+							var Element_image_view = '<div id="apercu_image"><img style="margin:10px; border-radius:10px; box-shadow:0 0 15px 2px;" width="300" height="200" id="video-zone-image" src="'+e.target.result+'"></div>';
+							$("#wdg-edit-video-image_update").after(Element_image_view);
+							image_src = e.target.result;
+						}
+						reader.readAsDataURL(file);
+						default:
+						break;
+						}
+					});
+					image_check = 'True';
+				}
+			});
+
+			var video_check ='False'; 
+			var video_number = '';
+			$(".url_video").change(function(){
+				$("#apercu_video").remove();
+				video_number = $("#text_url_video").val().split('watch?v=')[1];
+				var link = "https://www.youtube.com/embed/"+video_number+"?feature=oembed&rel=0&wmode=transparent";
+				var video_preview = "<div  id='apercu_video' ><iframe style=' border-radius:10px; box-shadow:0 0 15px 2px;' width='300' height='200' src='"+link+"' frameborder='0' id='myFrame' allowfullscreen></div>";
+				$("#text_url_video").after(video_preview);
+				video_check = 'True';
+			});
+
+			newElement = '<input type="submit" id="wdg-edit-video-zone-next_valid" value="Valider"/>';
+			$("#upload-img-form").after(newElement);
+
+			newElement = '<input type="submit" id="wdg-edit-video-zone-next_cancel" value="Annuler"/>';
+			$("#upload-img-form").after(newElement);
+
+
+			$("#wdg-edit-video-zone-next_cancel").click(function() {
+				ProjectEditor.validateInputDone(true);
+				$("#upload-img-form").remove();
+				$("#wdg-edit-video-image_update").remove();
+				$("#wdg-edit-video-zone-next_valid").remove();
+				$("#wdg-edit-video-zone-next_cancel").remove();
+				$(".project-pitch-video-bis").remove();
+				var background = $(".project-pitch-video").css('background-image');
+				if(background)
+					$(".project-pitch-video").attr('style','display:inline-block; background-image:'+background+'; background-repeat:no-repeat;');
+				else
+					$(".project-pitch-video").attr('style','display:inline-block;');
+				$("#wdg-edit-"+property).show();
+			});
+
+			$("#wdg-edit-video-zone-next_valid").click(function() {
+				var button_waiting = '<input type="submit" id="wdg-validate-picture-wait"/>';
+				$(".contenu_image_url").after(button_waiting);
+				$("#wdg-validate-picture-wait").addClass("wait-button");
+				$("#wdg-validate-picture-wait").unbind("click");
+				$("#wdg-validate-picture-wait").innerHTML = ""
+				$("#wdg-validate-picture-wait").attr('style','display:none;');
+  				var formData = new FormData($('form#upload-img-form')[0]);
+				$("#wdg-edit-video-image_update").remove();
+				$("#wdg-edit-video-zone-next_valid").remove();
+				$("#wdg-edit-video-zone-next_cancel").remove();
+				$("#apercu_image").remove();
+				$("#apercu_video").remove();
+				$("#text_url_video").attr('style','display:none;');
+				$("#wdg-validate-picture-wait").attr('style','font-size: 0px; display:inline-block; z-index:2001;');
+  				$.ajax({
+					'type' : "POST",
+					'url' :ajax_object.ajax_url,
+					'data': formData,
+		            'cache': false,
+		            'contentType': false,
+		            'processData': false
+				}).done(function(result) {
+					ProjectEditor.validateInputDone(result);
+					if(video_check=='True'){
+						$(".project-pitch-video").remove();
+						var link_final = "https://www.youtube.com/embed/"+video_number+"?feature=oembed&rel=0&wmode=transparent";
+						var div_video = '<div class="project-pitch-video"><iframe width="578" height="325" src="'+link_final+'" frameborder="0" allowfullscreen></iframe></div>';
+						$(".project-pitch-text").after(div_video);
+					}else{
+						if(image_check=='True'){
+							var background = $(".project-pitch-video").css('background-image');
+							if(background&&background!='none'){
+								$(".project-pitch-video").remove();
+								var div_video='<div class="project-pitch-video" style="display:inline-block; background-image:url('+image_src+'); background-repeat:no-repeat;"></div>';
+								$(".project-pitch-video").remove();
+								$(".project-pitch-text").after(div_video);
+							}else{
+								$(".project-pitch-video").attr('style','display:inline-block;');
+							}
+						}
+					}
+					$("#wdg-validate-picture-wait").remove();
+					$("#upload-img-form").remove();
+					$(".project-pitch-video-bis").remove();
+					$("#wdg-edit-"+property).show();
+				});
+			});
+
+		},
+
+
+
 		//Création d'un champ input pour certaines valeurs
 		createInput: function(property) {
 			var initValue = ProjectEditor.getInitValue(property);
