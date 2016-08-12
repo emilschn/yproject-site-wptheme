@@ -572,5 +572,14 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
     margin: 5px;
 }
 #wdg-edit-video-image_update, #text_url_video{
-    width: 220px;
+    width: 240px;
+	height: 35px;
+}
+#wdg-edit-video-image_update{
+	height: 35px;
+    width: 255px;
+}
+#wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid{
+	height: 37px;
+	width: 65px;
 }
