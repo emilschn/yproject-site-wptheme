@@ -1231,5 +1231,29 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
     margin: 5px;
 }
 #wdg-edit-video-image_update, #text_url_video{
-    width: 220px;
+    width: 240px;
+	height: 35px;
+}
+#wdg-edit-video-image_update, #wdg-edit-picture-head-next_update{
+	height: 35px;
+	text-align: center;
+}
+#wdg-edit-picture-head-next_update{
+    width: 180px;
+}
+#wdg-edit-video-image_update{
+    width: 255px;
+}
+#wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid, #wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel{
+	height: 37px;
+	width: 65px;
+}
+.project-pitch-video {
+    height: 325px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.project-pitch-video-bis{
+	height: auto;
 }
