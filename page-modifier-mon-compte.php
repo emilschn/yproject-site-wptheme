@@ -263,7 +263,8 @@ $WDGUser_current = WDGUser::current();
 					$page_edit_orga = get_page_by_path('editer-une-organisation');
 					$can_edit = true;
 					global $current_user;
-					$api_user_id = BoppLibHelpers::get_api_user_id($current_user->ID);
+					$wdg_current_user = new WDGUser( $current_user->ID );
+					$api_user_id = $wdg_current_user->get_api_id();
 					$organisations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
 					if (!empty($organisations_list)) {
 						foreach ($organisations_list as $organisation_item) {

@@ -75,7 +75,8 @@ if ($str_groups != '') {
 $page_edit_orga = get_page_by_path('editer-une-organisation');
 $can_edit = (bp_displayed_user_id() == bp_loggedin_user_id() || current_user_can('manage_options'));
 global $current_user;
-$api_user_id = BoppLibHelpers::get_api_user_id(bp_displayed_user_id());
+$wdg_current_user = new WDGUser( bp_displayed_user_id() );
+$api_user_id = $wdg_current_user->get_api_id();
 $organisations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
 if (!empty($organisations_list)) {
 	foreach ($organisations_list as $organisation_item) {

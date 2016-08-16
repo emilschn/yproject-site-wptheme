@@ -199,7 +199,8 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 					if (isset($current_organisations) && count($current_organisations) > 0) {
 						$current_organisation = $current_organisations[0];
 					}
-					$api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
+					$wdg_current_user = new WDGUser( $post_campaign->post_author );
+					$api_user_id = $wdg_current_user->get_api_id();
 					$organisations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
 					if ($organisations_list) {
 						foreach ($organisations_list as $organisation_item) {

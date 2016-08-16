@@ -45,7 +45,8 @@ $WDGUser_displayed = new WDGUser(bp_displayed_user_id());
 			?>
 					
 			<?php
-			$api_user_id = BoppLibHelpers::get_api_user_id(bp_displayed_user_id());
+			$wdg_current_user = new WDGUser( bp_displayed_user_id() );
+			$api_user_id = $wdg_current_user->get_api_id();
 			$project_list = BoppUsers::get_projects_by_role($api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
 			if (!empty($project_list)) {
 				$has_projects = true;

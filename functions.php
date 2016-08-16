@@ -883,14 +883,15 @@ function add_team_member(){
             if ($user_by_login !== FALSE) $user_wp_id = $user_by_login->ID;
             else if ($user_by_mail !== FALSE) $user_wp_id = $user_by_mail->ID;
             //Récupération des infos existantes sur l'API
-            $user_api_id = BoppLibHelpers::get_api_user_id($user_wp_id);
+			$wdg_user = new WDGUser( $user_wp_id );
+			$api_user_id = $wdg_user->get_api_id();
             $project_api_id = BoppLibHelpers::get_api_project_id($campaign_id);
             BoppLibHelpers::check_create_role(BoppLibHelpers::$project_team_member_role['slug'], BoppLibHelpers::$project_team_member_role['title']);
             //Ajout à l'API
-            BoppLib::link_user_to_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
+            BoppLib::link_user_to_project($project_api_id, $api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
             
             do_action('wdg_delete_cache', array(
-                    'users/' . $user_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
+                    'users/' . $api_user_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
                     'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
             ));
             
@@ -912,12 +913,13 @@ add_action( 'wp_ajax_nopriv_add_team_member', 'add_team_member' );
  */
 function remove_team_member(){
     //Récupération des infos existantes sur l'API
-    $user_api_id = BoppLibHelpers::get_api_user_id($_POST['user_to_remove']);
+	$wdg_user = new WDGUser( $_POST['user_to_remove'] );
+	$api_user_id = $wdg_user->get_api_id();
     $project_api_id = BoppLibHelpers::get_api_project_id($_POST['id_campaign']);
     //Supprimer dans l'API
-    BoppLib::unlink_user_from_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
+    BoppLib::unlink_user_from_project($project_api_id, $api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
     do_action('wdg_delete_cache', array(
-            'users/' . $user_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
+            'users/' . $api_user_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
             'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
     ));
     echo "TRUE";
