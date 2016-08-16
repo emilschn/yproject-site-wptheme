@@ -3,11 +3,29 @@ global $campaign, $payment_url, $error_session;
 if (!isset($campaign)) {
 	$campaign = atcf_get_current_campaign();
 }
+ypcf_session_start();
 
 if (isset($campaign)):
 	//Lien
 	$page_mean_payment = get_page_by_path('moyen-de-paiement');
 	$page_mean_payment_link = get_permalink($page_mean_payment->ID) . '?campaign_id=' . $campaign->ID . '&meanofpayment=';
+	
+	//Gestion wallet
+	$WDGUser_current = WDGUser::current();
+	$lemonway_amount = $WDGUser_current->get_lemonway_wallet_amount();
+	$amount = $_SESSION['redirect_current_amount_part'] * $campaign->part_value();
+	$can_use_wallet = FALSE;
+	$can_use_card_and_wallet = FALSE;
+	if ($_SESSION['redirect_current_invest_type'] == 'user') {
+		$can_use_wallet = $WDGUser_current->can_pay_with_wallet( $amount, $campaign );
+		$can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $amount, $campaign );
+	} else {
+		$invest_type = $_SESSION['redirect_current_invest_type'];
+		$organisation = new YPOrganisation($invest_type);
+		$can_use_wallet = $organisation->can_pay_with_wallet( $amount, $campaign );
+		$can_use_card_and_wallet = $organisation->can_pay_with_card_and_wallet( $amount, $campaign );
+	}
+	
 	//Possible de régler par virement ?
 	$can_use_wire = ($campaign->can_use_wire($_SESSION['redirect_current_amount_part']));
 	//Possible de régler par chèque ?
@@ -40,22 +58,42 @@ if (isset($campaign)):
 					<?php _e("Carte bancaire", 'yproject'); ?>
 				</a>
 			</li>
-			<?php if ($can_use_wire) { ?>
+			
+			<?php if ($can_use_wallet): ?>
 			<li>
-				<a href="<?php echo $page_mean_payment_link; ?>wire">
+				<a href="<?php echo $page_mean_payment_link; ?>wallet" class="alert-confirm" data-alertconfirm="<?php _e("Vous allez valider le transfert d'argent de votre porte-monnaie vers celui du projet.", 'yproject'); ?>">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-portemonnaie.jpg" alt="<?php _e("Porte-monnaie WEDOGOOD", 'yproject'); ?>" />
+					<?php echo sprintf( __( 'Porte-monnaie WEDOGOOD (Vous disposez actuellement de %s &euro;)', 'yproject' ), $lemonway_amount ); ?>
+				</a>
+			</li>
+			
+			<?php elseif ($can_use_card_and_wallet): ?>
+			<li>
+				<a href="<?php echo $page_mean_payment_link; ?>cardwallet">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-carte-portemonnaie.jpg" alt="<?php _e("Carte bancaire et porte-monnaie WEDOGOOD", 'yproject'); ?>" />
+					<?php echo sprintf( __( 'Porte-monnaie WEDOGOOD (Vous disposez actuellement de %s &euro;) compl&eacute;t&eacute; par carte', 'yproject' ), $lemonway_amount ); ?>
+				</a>
+			</li>
+			<?php endif; ?>
+			
+			<?php if ($can_use_wire): ?>
+			<li>
+				<a href="<?php echo $page_mean_payment_link; ?>wire" class="alert-confirm" data-alertconfirm="<?php _e("Vous allez acc&eacute;der aux informations pour proc&eacute;der &agrave; un virement bancaire.", 'yproject'); ?>">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-virement.jpg" alt="<?php _e("Virement bancaire", 'yproject'); ?>" />
 					<?php _e("Virement bancaire", 'yproject'); ?>
 				</a>
 			</li>
-			<?php } ?>
-			<?php if ($can_use_check) { ?>
+			<?php endif; ?>
+			
+			<?php if ($can_use_check): ?>
 			<li>
 				<a href="<?php echo $page_mean_payment_link; ?>check">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-cheque.jpg" alt="<?php _e("Ch&egrave;que", 'yproject'); ?>" />
 					<?php _e("Ch&egrave;que", 'yproject'); ?>
 				</a>
 			</li>
-			<?php } ?>
+			<?php endif; ?>
+			
 			<div class="clear"></div>
 		</ul>
 	<?php endif; ?>

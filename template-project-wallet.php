@@ -380,7 +380,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 								$status_str = 'Annul&eacute;';
 							}
 							?>
-							<li id="<?php echo $transfer_post->post_content; ?>"><?php echo $transfer_post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Termin&eacute;</li>
+							<li id="<?php echo $transfer_post->post_content; ?>"><?php echo $transfer_post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- <?php echo $status_str; ?></li>
 							<?php
 						endforeach;
 					    ?>

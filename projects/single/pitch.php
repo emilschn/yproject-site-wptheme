@@ -10,6 +10,7 @@ if ($campaign->video() == '') {
 } else {
 	$video_element = wp_oembed_get($campaign->video(), array('width' => 580, 'height' => 325));
 }
+
 ?>
 <div class="project-pitch center">
 	<div class="project-pitch-title separator-title">

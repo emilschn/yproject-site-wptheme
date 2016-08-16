@@ -551,7 +551,6 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered a img { width: 50px; }
 }
 
-
 /*******************************************************************************
 * APPARENCE vote form V3 (lightbox)
 *******************************************************************************/
@@ -1209,4 +1208,53 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
     100% {
         -webkit-transform: translateX(-150%);
     }
+}
+
+#wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel, #wdg-edit-picture-head-next_update, #wdg-edit-video-image_update, #wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid{
+	background: #A4DBDE;
+    height: 25px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+#wdg-edit-picture-head-next_valid{
+	margin-left: 5px;
+}
+
+#wdg-edit-picture-head-next_cancel{
+	margin-left: 10px;
+}
+
+#wdg-edit-video-image_update, #apercu_image, #text_url_video, #apercu_video, #wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid {
+    display: inline;
+    margin: 5px;
+}
+#wdg-edit-video-image_update, #text_url_video{
+    width: 240px;
+	height: 35px;
+}
+#wdg-edit-video-image_update, #wdg-edit-picture-head-next_update{
+	height: 35px;
+	text-align: center;
+}
+#wdg-edit-picture-head-next_update{
+    width: 180px;
+}
+#wdg-edit-video-image_update{
+    width: 255px;
+}
+#wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid, #wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel{
+	height: 37px;
+	width: 65px;
+}
+.project-pitch-video {
+    height: 325px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.project-pitch-video-bis{
+	height: auto;
 }

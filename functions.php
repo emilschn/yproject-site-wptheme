@@ -1135,6 +1135,10 @@ function get_investors_table() {
 				$payment_type = 'Virement';
 			} else if ($mangopay_id == 'check') {
 				$payment_type = 'Ch&egrave;que';
+			} else if (strpos($mangopay_id, '_wallet_') !== FALSE) {
+				$payment_type = 'Carte et Porte-monnaie';
+			} else if (strpos($mangopay_id, 'wallet_') !== FALSE) {
+				$payment_type = 'Porte-monnaie';
 			}
 			$investment_state = 'Validé';
 			if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing) {

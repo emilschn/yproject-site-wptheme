@@ -156,7 +156,13 @@ YPUIFunctions = (function($) {
 					});
 				});
 			}
-
+			
+			$(".alert-confirm").click( function(e) {
+				e.preventDefault();
+				if ( confirm( $(this).data("alertconfirm") ) ) {
+					window.location.href = $(this).attr("href");
+				}
+			});
 
 			if ($(".wdg-lightbox").length > 0) {
 				$(".wdg-button-lightbox-open").click(function() {

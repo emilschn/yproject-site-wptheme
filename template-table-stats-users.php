@@ -60,13 +60,13 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 						$count_follow = $wpdb->get_var( "SELECT count(campaign_id) FROM ".$table_jcrois." WHERE user_id = ".$user->ID );
 						$count_votes = $wpdb->get_var( "SELECT count(post_id) FROM ".$table_vote." WHERE user_id = ".$user->ID );
 						$count_invest = $wpdb->get_var( "SELECT count(p.ID) FROM ".$wpdb->posts." p LEFT JOIN ".$wpdb->postmeta." pm ON p.ID = pm.post_id WHERE p.post_type='edd_payment' AND p.post_status='publish' AND pm.meta_key = '_edd_payment_user_id' AND pm.meta_value = ".$user->ID );
-						$request = "SELECT sum(pm2.meta_value) "
+						/*$request = "SELECT sum(pm2.meta_value) "
 									. "FROM ".$wpdb->postmeta." pm2 "
 									. "LEFT JOIN ".$wpdb->posts." p ON p.ID = pm2.post_id "
 									. "LEFT JOIN ".$wpdb->postmeta." pm ON pm2.post_id = pm.post_id "
 									. "WHERE p.post_type='edd_payment' AND p.post_status='publish' AND pm2.meta_key = '_edd_payment_total' "
 									. "AND pm.meta_key = '_edd_payment_user_id' AND pm.meta_value = " . $user->ID;
-						$amount_invest = $wpdb->get_var( $request );
+						$amount_invest = $wpdb->get_var( $request );*/
 						?>
 						<tr>
 							<td><?php echo $user->user_firstname . ' ' . $user->user_lastname; ?></td>
@@ -78,7 +78,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 							<td><?php echo $count_follow; ?></td>
 							<td><?php echo $count_votes; ?></td>
 							<td><?php echo $count_invest; ?></td>
-							<td><?php echo $amount_invest; ?></td>
+							<td><?php /*echo $amount_invest;*/ ?></td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>
