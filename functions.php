@@ -89,10 +89,8 @@ function yproject_enqueue_script(){
 		wp_enqueue_style('datatable-colReorder-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.colReorder.css', null, false, 'all');
 	}
 	
-	if ($is_campaign && $campaign->edit_version() >= 3) {
-	    wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, $current_version, 'all');
-	}
 	if ($is_campaign_page && $campaign->edit_version() >= 3) {
+	    wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, $current_version, 'all');
 	    wp_enqueue_script( 'wdg-campaign', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign.js', array('jquery', 'jquery-ui-dialog'), $current_version);
 		if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
 	} else {
