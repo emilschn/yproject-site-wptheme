@@ -113,7 +113,7 @@ else {
 		<div id="project-owner">
 			<?php 
 			$owner_str = '';
-			$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+			$api_project_id = $campaign->get_api_id();
 			$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
 			if (count($current_organisations) > 0) {
 				$current_organisation = $current_organisations[0];

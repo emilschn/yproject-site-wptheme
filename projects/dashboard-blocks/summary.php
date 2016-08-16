@@ -18,7 +18,7 @@ function check_next_step(){
          } //Avant-première -> Vote
          if (($status=='preview')||(($status=='preparing')&&($_POST['next_step']==2))) {
              $orga_done=false;
-             $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+             $api_project_id = $campaign->get_api_id();
              $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
 
              //Vérifiation organisation complète
@@ -51,7 +51,7 @@ function check_next_step(){
                 $collecte_fin_heure = $_POST['inendh'];
                 $collecte_fin_minute = $_POST['inendm'];
 
-                $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+                $api_project_id = $campaign->get_api_id();
                 $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
                 
                  if( 1<=$collecte_time && $collecte_time<=60

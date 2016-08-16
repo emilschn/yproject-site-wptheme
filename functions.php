@@ -873,6 +873,8 @@ add_action( 'wp_ajax_nopriv_print_user_projects', 'print_user_projects' );
  */
 function add_team_member(){
     $campaign_id = intval($_POST['id_campaign']);
+	$post_campaign = get_post($campaign_id);
+	$campaign = new ATCF_Campaign($post_campaign);
     $user_by_login = get_user_by('login', $_POST['new_team_member']);
     $user_by_mail = get_user_by('email', $_POST['new_team_member']);
     if ($user_by_login === FALSE && $user_by_mail === FALSE) {
@@ -885,7 +887,7 @@ function add_team_member(){
             //Récupération des infos existantes sur l'API
 			$wdg_user = new WDGUser( $user_wp_id );
 			$api_user_id = $wdg_user->get_api_id();
-            $project_api_id = BoppLibHelpers::get_api_project_id($campaign_id);
+            $project_api_id = $campaign->get_api_id();
             BoppLibHelpers::check_create_role(BoppLibHelpers::$project_team_member_role['slug'], BoppLibHelpers::$project_team_member_role['title']);
             //Ajout à l'API
             BoppLib::link_user_to_project($project_api_id, $api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
@@ -915,7 +917,9 @@ function remove_team_member(){
     //Récupération des infos existantes sur l'API
 	$wdg_user = new WDGUser( $_POST['user_to_remove'] );
 	$api_user_id = $wdg_user->get_api_id();
-    $project_api_id = BoppLibHelpers::get_api_project_id($_POST['id_campaign']);
+	$post_campaign = get_post($_POST['id_campaign']);
+	$campaign = new ATCF_Campaign($post_campaign);
+    $project_api_id = $campaign->get_api_id();
     //Supprimer dans l'API
     BoppLib::unlink_user_from_project($project_api_id, $api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
     do_action('wdg_delete_cache', array(

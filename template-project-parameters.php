@@ -194,7 +194,7 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 					// Gestion des organisations
 					$str_organisations = '';
 					global $current_user;
-					$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
+					$api_project_id = $campaign->get_api_id();
 					$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
 					if (isset($current_organisations) && count($current_organisations) > 0) {
 						$current_organisation = $current_organisations[0];
