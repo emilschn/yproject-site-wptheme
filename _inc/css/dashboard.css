@@ -89,7 +89,7 @@
 
 #ndashboard-navbar .authorization{
     padding: 15px 0px;
-    background-color: mediumturquoise;
+    background-color: #A4DBDE;
     font-style: italic;
     color: white;
 }
@@ -185,12 +185,12 @@
 }
 
 #ndashboard .db-form .field.admin-theme {
-    border-left: 3px solid mediumturquoise;
+    border-left: 3px solid #A4DBDE;
     background-color: lightgray;
 }
 
 #ndashboard .db-form .field.admin-theme label i.fa-unlock-alt {
-    color:mediumturquoise;
+    color:#A4DBDE;
     margin: 0px 5px 0px 0px;
 }
 
@@ -221,12 +221,18 @@
     width: 200px;
 }
 
-#ndashboard .db-form .field-container input:not([type='submit']),
-#ndashboard .db-form .field-container select{
+#ndashboard input:not([type='submit']),
+#ndashboard select{
     margin: 3px 0px;
     background: none repeat scroll 0 0 #FFF;
     border: medium none;
     padding: 3px 8px;
+}
+
+#ndashboard input:not([type='submit']).error,
+#ndashboard select.error{
+    border: 1px solid red;
+    padding: 2px 7px;
 }
 
 #ndashboard .db-form .field-container input[type='checkbox']{
@@ -287,8 +293,8 @@
 }
 
 #ndashboard input.button.admin{
-    background-color: mediumturquoise;
-    border-color:mediumturquoise;
+    background-color: #A4DBDE;
+    border-color:#A4DBDE;
 }
 
 #ndashboard .button[disabled] {
@@ -578,6 +584,18 @@
 /*******************************************************************************
 * Page contacts
 *******************************************************************************/
+#page-contacts #direct-mail .preview {
+    border: 1px dotted black;
+    background-color: #FFF !important;
+    padding: 10px;
+}
+
+#page-contacts #direct-mail .preview-title {
+    padding: 10px;
+    font-weight: bold;
+    border: 1px dotted;
+    border-bottom: 0px;
+}
 
 /*******************************************************************************
 * TABLEAUX DYNAMIQUES : PERSONNALISATION DE DATATABLES
@@ -608,7 +626,7 @@
 }
 
 #page-contacts .wdg-datatable tfoot th input{
-    width: 100%;
+    width: 90%;
 }
 
 #page-contacts .wdg-datatable table .dirty-hide{
@@ -619,4 +637,8 @@
 
 div.dt-button-collection{
     width: auto !important;
+}
+
+table.dataTable td.select-checkbox::before {
+    border-radius: 1px;
 }

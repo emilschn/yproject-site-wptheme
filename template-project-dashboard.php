@@ -5,8 +5,6 @@
  */
 $campaign_id = filter_input(INPUT_GET, 'campaign_id');
 $success_msg = filter_input(INPUT_GET, 'success_msg');
-global $feedback_sendautomail;
-$feedback_sendautomail = WDGFormProjects::form_validate_send_automail();
 WDGFormProjects::form_approve_payment();
 WDGFormProjects::form_cancel_payment();
 ?>

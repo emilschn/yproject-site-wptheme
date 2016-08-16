@@ -105,7 +105,7 @@ function yproject_enqueue_script(){
 	wp_enqueue_script( 'sharer-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/sharer.min.js', array(), true, true);
 //	wp_enqueue_script( 'wdg-ux-helper', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-ux-helper.js', array('wdg-script'));
 
-	if ($is_campaign && $campaign->edit_version() >= 3) {
+	if ($is_campaign && $campaign->edit_version() >= 3 && !$is_dashboard_page) {
 	    wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, $current_version, 'all');
 	}
 	if ($is_campaign_page && $campaign->edit_version() >= 3) {

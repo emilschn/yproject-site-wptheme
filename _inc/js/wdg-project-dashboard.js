@@ -59,8 +59,16 @@ var WDGProjectDashboard = (function ($) {
                     //Change le contenu de la page
                     var target = $(this).attr("href");
 
+                    //Cache les infobulles ouvertes
+                    $(".qtip").hide()
+
                     $("#ndashboard-content .page-dashboard").hide();
                     $("#ndashboard-content " + target).show();
+
+                    //Redessine le tableau si besoin en fonction de la taille de la fenêtre
+                    if(target=="#page-contacts" && (typeof WDGProjectDashboard.table !== 'undefined')){
+                        WDGProjectDashboard.table.draw();
+                    }
 
                     //Charge les iframe
                     var iframetoload = $("#ndashboard-content " + target+" .google-doc iframe");
@@ -431,10 +439,52 @@ var WDGProjectDashboard = (function ($) {
                     });
                 }
             }
+
+            //Page contacts
+            if($("#page-contacts").length > 0){
+
+                var mail_content, mail_title, originalText;
+                $("#direct-mail #mail-preview-button").click(function () {
+                    mail_content = tinyMCE.get('mail_content').getContent();
+                    mail_title = $("#direct-mail #mail-title").val();
+
+                    if (mail_title == ""){
+                        WDGProjectDashboard.fieldError($("#direct-mail #mail-title"),"L'objet du mail ne peut être vide");
+                    } else {
+                        WDGProjectDashboard.removeFieldError($("#direct-mail #mail-title"));
+                        originalText = $(this).html();
+                        $(this).html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>');
+
+                        $.ajax({
+                            'type' : "POST",
+                            'url' : ajax_object.ajax_url,
+                            'data': {
+                                'action':'preview_mail_message',
+                                'id_campaign':campaign_id,
+                                'mail_content' : mail_content,
+                                'mail_title' : mail_title
+                            }
+                        }).done(function(result){
+                            var res = JSON.parse(result);
+
+                            $("#direct-mail .preview-title").html('<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;'+res.content.title);
+                            $("#direct-mail .preview").html(res.content.body);
+                            $("#direct-mail .step-write").slideUp();
+                            $("#direct-mail .step-confirm").slideDown();
+                            $("#direct-mail #mail-preview-button").html(originalText);
+                        })
+                    }
+                });
+
+                $("#direct-mail #mail-back-button").click(function () {
+                    $("#direct-mail .step-confirm").slideUp();
+                    $("#direct-mail .step-write").slideDown();
+                });
+            }
         },
 
         initQtip: function(){
-            $('#ndashboard .infobutton').each(function () {
+            $('#ndashboard .infobutton, #ndashboard .qtip-element').each(function () {
                 $(this).qtip({
                     content: $(this).next('.tooltiptext'),
                     position: {
@@ -442,7 +492,7 @@ var WDGProjectDashboard = (function ($) {
                         at: 'top center',
                     },
                     style: {
-                        classes: 'qtip-tipsy qtip-shadow'
+                        classes: 'qtip-dark qtip-rounded qtip-shadow'
                     },
                     hide: {
                         fixed: true,
@@ -450,6 +500,29 @@ var WDGProjectDashboard = (function ($) {
                     }
                 });
             });
+        },
+
+        fieldError: function($param, errorText){
+            $param.addClass("error");
+            $param.qtip({
+                content: errorText,
+                position: {
+                    my: 'left center',
+                    at: 'right center',
+                },
+                style: {
+                    classes: 'qtip-red qtip-rounded qtip-shadow'
+                },
+                show: 'focus',
+                hide: 'blur'
+            });
+        },
+
+        removeFieldError: function($param){
+            if($param.hasClass("error")){
+                $param.removeClass("error");
+                $param.qtip().destroy();
+            }
         },
 
         manageTeam: function(action, data, campaign_id){
@@ -557,7 +630,7 @@ var WDGProjectDashboard = (function ($) {
 
                 //Création du tableau dynamique dataTable
                 WDGProjectDashboard.table = $('#contacts-table').DataTable({
-                    scrollX: true,
+                    scrollX: '100%',
                     scrollY: '70vh', //Taille max du tableau : 70% de l'écran
                     scrollCollapse: true, //Diminue taille du tableau si peu d'éléments*/
 
@@ -583,19 +656,22 @@ var WDGProjectDashboard = (function ($) {
                             className: 'select-checkbox',
                             targets : 0,
                             orderable: false,
+                        },{
+                            width: "30px",
+                            targets: [2,3,4]
                         }
                     ],
 
                     //Permet la sélection de lignes
                     select: {
-                        style: 'os', //Sélection multiple
+                        style: 'multi', //Sélection multiple
                         selector: 'td:first-child'
                     },
 
                     dom: 'Bfrtip',
                     buttons: [
                         {
-                            text: '<i class="fa fa-check-square-o" aria-hidden="true"></i> Sélectionner les éléments filtrés',
+                            text: '<i class="fa fa-square-o" aria-hidden="true"></i> Sélectionner les éléments affichés',
                             action: function () {
                                 WDGProjectDashboard.table.rows( { search: 'applied' } ).select();
                             }
@@ -604,8 +680,9 @@ var WDGProjectDashboard = (function ($) {
                             extend: 'selected',
                             text: '<i class="fa fa-envelope" aria-hidden="true"></i> Envoyer un mail',
                             action: function ( e, dt, button, config ) {
-                                alert( dt.rows( { selected: true } ).indexes().length +' contacts sélectionnés' );
+                                $("#send-mail-tab").slideDown();
                             }
+                            //TODO : Scroller jusqu'au panneau
                         },
 
 
@@ -667,7 +744,7 @@ var WDGProjectDashboard = (function ($) {
                         "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
                         "sInfoPostFix":    "",
                         "sLoadingRecords": "Chargement en cours...",
-                        "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                        "sZeroRecords":    "Aucun &eacute;l&eacute;ment",
                         "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
                         "oPaginate": {
                             "sFirst":      "Premier",
@@ -682,22 +759,54 @@ var WDGProjectDashboard = (function ($) {
                         select: {
                             rows: {
                                 _: "<b>%d</b> contacts sélectionnés",
-                                0: 'Cliquez sur un élément pour le sélectionner',
+                                0: 'Cliquez sur un contact pour le sélectionner',
                                 1: "<b>1</b> contact sélectionné"
                             }
                         }
                     }
                 });
 
-                WDGProjectDashboard.table.on( 'select', function ( e, dt, type, indexes ) {
-                    console.log("Go go "+type);
-                    if ( type === 'row' ) {
-                        WDGProjectDashboard.table.rows( indexes ).every(function(){
-                            this.data[result_contacts_table['id_column_index']];
-                        });
-
-                        // do something with the ID of the selected items
+                var mailButtonDefault = WDGProjectDashboard.table.button(1).text()
+                WDGProjectDashboard.table.on("select.dt deselect.dt", function ( e, dt, type, indexes ) {
+                    //Maj Bouton de Mail
+                    var selectedCount = WDGProjectDashboard.table.rows({ selected: true }).count();
+                    if(selectedCount==0){
+                        WDGProjectDashboard.table.button(1).text(mailButtonDefault);
+                        $("#send-mail-tab").slideUp();
+                    } else {
+                        WDGProjectDashboard.table.button(1).text(mailButtonDefault+" ("+selectedCount+")");
                     }
+
+
+                    //Maj Bouton de sélection
+                    var allContained = true;
+                    WDGProjectDashboard.table.rows( { search:'applied' } ).every( function ( rowIdx, tableLoop, rowLoop ) {
+                        if($.inArray(rowIdx, WDGProjectDashboard.table.rows({ selected: true }).indexes())==-1){
+                            allContained= false;
+                        }
+                    } );
+
+                    if(allContained){
+                        WDGProjectDashboard.table.button(0).text('<i class="fa fa-check-square-o" aria-hidden="true"></i> Déselectionner les éléments affichés');
+                        WDGProjectDashboard.table.button(0).action(function () {
+                            WDGProjectDashboard.table.rows( { search: 'applied' } ).deselect();
+                        });
+                    } else {
+                        WDGProjectDashboard.table.button(0).text('<i class="fa fa-square-o" aria-hidden="true"></i> Sélectionner les éléments affichés');
+                        WDGProjectDashboard.table.button(0).action(function () {
+                            WDGProjectDashboard.table.rows( { search: 'applied' } ).select();
+                        });
+                    }
+
+                    //Maj Champs de Mail
+                    $("#nb-mailed-contacts").text(selectedCount);
+
+                    //Maj liste des identifiants à mailer
+                    var recipients_array = [];
+                    $.each(WDGProjectDashboard.table.rows({ selected: true }).data(), function(index, element){
+                        recipients_array.push(element[result_contacts_table['id_column_index']]);
+                    });
+                    $("#mail_recipients").val(recipients_array);
                 } );
 
                 // Champs de filtrage

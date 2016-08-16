@@ -72,6 +72,9 @@
 	
 	<p class="align-center">
 		<button type="submit" name="send_mail" value="preview" class="button"><?php _e('Prévisualisation', 'yproject'); ?></button>
+	</p>
+
+	<p class="align-center">
 		<button type="submit" name="send_mail" value="send" class="button"><?php _e('Envoyer le message', 'yproject'); ?></button>
 	</p>
 </form>

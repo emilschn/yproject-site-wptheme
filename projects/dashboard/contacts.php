@@ -9,12 +9,69 @@ function print_contacts_page() {
 
         ?>
         <div class="head"><?php _e('Contacts', 'yproject'); ?></div>
-    <div class="tab-content-large">
-        <div id="ajax-contacts-load" class="ajax-investments-load" style="text-align: center;" data-value="<?php echo $campaign->ID?>">
-            <img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />
+        <div class="tab-content-large">
+            <div id="ajax-contacts-load" class="ajax-investments-load" style="text-align: center;" data-value="<?php echo $campaign->ID?>">
+                <img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />
+            </div>
         </div>
-    </div>
 
+        <div class="tab-content" id="send-mail-tab" style="display: none;">
+            <h2><?php _e("Envoyer un mail", 'yproject')?></h2>
+            <form id="direct-mail" method="POST" action="<?php echo admin_url( 'admin-post.php?action=send_project_mail'); ?>" target="_blank">
+                <p><?php _e("Le message sera envoyé &agrave", 'yproject')?> <strong id="nb-mailed-contacts">0</strong> personnes</p>
+                <input type="hidden" id="mail_recipients" name="mail_recipients"/>
+                <input type="hidden" name="campaign_id" value="<?php echo $campaign_id?>"/>
+                <div class="step-write">
+                    <strong><?php _e("Vous pouvez utiliser les variables suivantes :", 'yproject'); ?></strong>
+                    <ul>
+                        <li><i>%projectname%</i> : Nom du projet</li>
+                        <li><i>%projecturl%</i> : Adresse du projet</li>
+                        <li><i>%projectauthor%</i> : Nom du porteur de projet</li>
+                        <li><i>%username%</i> : Nom de l'utilisateur</li>
+                        <li><i>%investwish%</i> : Intention d'investissement</li>
+                    </ul>
+                    <label><strong>Objet du mail : </strong>
+                        <input typ="text" name="mail_title" id="mail-title" value=""></label>
+                    <br/><br/>
+
+                    <?php
+                    $previous_content = filter_input(INPUT_POST, 'mail_content');
+                    if (empty($previous_content)) {
+                        $previous_content = __("Bonjour ", 'yproject') . "%username%,<br />";
+                        $previous_content .= __("Nous vous donnons rendez-vous &agrave; l'adresse ", 'yproject') . "%projecturl%" . __(" pour suivre la campagne !", 'yproject') ."<br />";
+                        $previous_content .= __("A bient&ocirc;t !", 'yproject') ."<br />";
+                        $previous_content .= "%projectauthor%";
+                    }
+                    wp_editor( $previous_content, 'mail_content',
+                        array(
+                            'media_buttons' => true,
+                            'quicktags'     => false,
+                            'tinymce'       => array(
+                                'plugins'				=> 'paste, wplink, textcolor',
+                                'paste_remove_styles'   => true
+                            )
+                        )
+                    );
+                    ?>
+                    <br/>
+
+                    <p class="align-center">
+                        <a id="mail-preview-button" class="button"><?php _e('Prévisualisation', 'yproject'); ?></a>
+                    </p>
+                </div>
+                <div class="step-confirm" hidden>
+                    <h3>Aperçu du message</h3>
+                    <div class="preview-title"></div>
+                    <div class="preview"></div>
+
+                    <p class="align-center">
+                        <a id="mail-back-button" class="button"><?php _e('Editer', 'yproject'); ?></a>
+                        <input type="submit" id="mail-send-button" class="button" value="
+                            <?php _e('Envoyer le message', 'yproject'); ?>"/>
+                    </p>
+                </div>
+            </form>
+        </div>
 
         <?php if ($is_admin): ?>
         <div class="tab-content">
