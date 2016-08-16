@@ -264,7 +264,7 @@ $WDGUser_current = WDGUser::current();
 					$can_edit = true;
 					global $current_user;
 					$api_user_id = BoppLibHelpers::get_api_user_id($current_user->ID);
-					$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
+					$organisations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
 					if (!empty($organisations_list)) {
 						foreach ($organisations_list as $organisation_item) {
 							$str_organisations .= '<li>';

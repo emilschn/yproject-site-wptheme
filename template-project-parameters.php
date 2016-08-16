@@ -200,11 +200,11 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 						$current_organisation = $current_organisations[0];
 					}
 					$api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
-					$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
+					$organisations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
 					if ($organisations_list) {
 						foreach ($organisations_list as $organisation_item) {
 							$selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
-							$str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
+							$str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->wpref.'">' .$organisation_item->name. '</option>';
 						}
 					}
 					?>

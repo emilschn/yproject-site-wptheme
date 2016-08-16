@@ -162,7 +162,7 @@ if (isset($campaign)):
 						default: 
 							$current_user = wp_get_current_user();
 							$api_user_id = BoppLibHelpers::get_api_user_id($current_user->ID);
-							$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
+							$organisations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
 							?>
 							<input type="submit" value="<?php _e("Investir", 'yproject'); ?>" class="button" />
 							<select id="invest_type" name="invest_type">
