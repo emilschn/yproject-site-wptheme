@@ -50,7 +50,8 @@ if (is_user_logged_in()) {
 			$campaign_status = $campaign->campaign_status();
 			switch ($campaign_status) {
 				case 'vote': ?>
-				<?php
+					<?php if ($campaign->time_remaining_str() != '-'): ?>
+					<?php
 					$table_name = $wpdb->prefix . "ypcf_project_votes";
 					$campaign_id=$campaign->ID;
 					$user_id = wp_get_current_user()->ID;
@@ -58,28 +59,28 @@ if (is_user_logged_in()) {
 					$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign_id.' AND user_id = '.$user_id );
 					$has_voted = false;
 					if ( !empty($hasvoted_results[0]->id) ) $has_voted = true;
-				?>
+					?>
 
-				<?php if(!is_user_logged_in()){ ?>
-				    <a href="#connexion" class="wdg-button-lightbox-open" data-lightbox="connexion" 
-						data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start"
-			 					>
-			 			<?php _e('Voter', 'yproject'); ?>
-					</a>
-				<?php }else	if ($has_voted){ ?>
-					<div style="-webkit-filter: grayscale(100%);" id="vote-form-v3" >
-						<a ><?php _e('Merci pour votre vote', 'yproject'); ?></a>
-					</div>
-				<?php }else{ ?>
-				<div id="vote-form-v3">
-					<a href="#lightbox_voter" class="wdg-button-lightbox-open" data-lightbox="vote" 
-					id="vote-form-v3-link"
-					>
-						<?php _e('Voter', 'yproject'); ?>
-					</a>
-				</div>
-				<?php } ?>
+					<?php if (!is_user_logged_in()): ?>
+						<a href="#connexion" class="wdg-button-lightbox-open" data-lightbox="connexion" 
+							data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start">
+							<?php _e('Voter', 'yproject'); ?>
+						</a>
 				
+					<?php elseif ($has_voted): ?>
+						<div style="-webkit-filter: grayscale(100%); text-transform: uppercase;">
+							<?php _e('Merci pour votre vote !', 'yproject'); ?>
+						</div>
+				
+					<?php else: ?>
+					<div id="vote-form-v3">
+						<a href="#lightbox_voter" id="vote-form-v3-link" class="wdg-button-lightbox-open" data-lightbox="vote">
+							<?php _e('Voter', 'yproject'); ?>
+						</a>
+					</div>
+					<?php endif; ?>
+				
+					<?php endif; ?>
 
 				<?php
 				break;
