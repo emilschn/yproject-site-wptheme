@@ -567,14 +567,12 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	margin-left: 10px;
 }
 
-#wdg-edit-video-image_update, #apercu_image, #text_url_video, #apercu_video, #wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid {
-    display: inline;
-    margin: 5px;
-}
+
 #wdg-edit-video-image_update, #text_url_video{
-    width: 240px;
-	height: 35px;
+	width: 100%;
+	height: 40px;
 }
+
 #wdg-edit-video-image_update, #wdg-edit-picture-head-next_update{
 	height: 35px;
 	text-align: center;
@@ -597,4 +595,41 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 
 .project-pitch-video-bis{
 	height: auto;
+}
+
+
+.input_text_error{
+    border:solid 0.5px red; 
+    border-radius:5px;
+}
+
+.input_text_good{
+    border:solid 0.5px green; 
+    border-radius:5px;
+}
+
+#apercu_image, #apercu_video, #wdg-edit-video-image_update, #upload-video-form {
+	width: 48%;
+	display: inline-block;
+	float: left;
+	margin: 0 1% 1% 0;
+	text-align: center;
+}
+
+#apercu_image, #apercu_video{
+	height: 228px;
+}
+
+#wdg-edit-video-image_update, #upload-video-form {
+	height: 50px;
+}
+
+#video-zone-image{
+	width: 90%;
+}
+
+#wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
