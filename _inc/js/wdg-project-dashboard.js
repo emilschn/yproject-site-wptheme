@@ -68,6 +68,7 @@ var WDGProjectDashboard = (function ($) {
                     //Redessine le tableau si besoin en fonction de la taille de la fenêtre
                     if(target=="#page-contacts" && (typeof WDGProjectDashboard.table !== 'undefined')){
                         WDGProjectDashboard.table.draw();
+                        WDGProjectDashboard.table.columns.adjust();
                     }
 
                     //Charge les iframe
@@ -396,6 +397,7 @@ var WDGProjectDashboard = (function ($) {
             if($("#page-campaign").length > 0){
                 //Gestion equipe
                 $(".project-manage-team").click(function(){
+                    var action, data
                     action = $(this).attr('data-action');
                     if(action==="yproject-add-member"){
                         data=($("#new_team_member_string")[0].value);
@@ -403,7 +405,6 @@ var WDGProjectDashboard = (function ($) {
                     else if (action==="yproject-remove-member"){
                         data=$(this).attr('data-user');
                     }
-
                     WDGProjectDashboard.manageTeam(action, data, campaign_id);
                 });
 
@@ -485,6 +486,7 @@ var WDGProjectDashboard = (function ($) {
 
         initQtip: function(){
             $('#ndashboard .infobutton, #ndashboard .qtip-element').each(function () {
+
                 $(this).qtip({
                     content: $(this).next('.tooltiptext'),
                     position: {
@@ -492,7 +494,7 @@ var WDGProjectDashboard = (function ($) {
                         at: 'top center',
                     },
                     style: {
-                        classes: 'qtip-dark qtip-rounded qtip-shadow'
+                        classes: 'wdgQtip qtip-dark qtip-rounded qtip-shadow'
                     },
                     hide: {
                         fixed: true,
@@ -507,11 +509,11 @@ var WDGProjectDashboard = (function ($) {
             $param.qtip({
                 content: errorText,
                 position: {
-                    my: 'left center',
-                    at: 'right center',
+                    my: 'bottom center',
+                    at: 'top center',
                 },
                 style: {
-                    classes: 'qtip-red qtip-rounded qtip-shadow'
+                    classes: 'wdgQtip qtip-red qtip-rounded qtip-shadow'
                 },
                 show: 'focus',
                 hide: 'blur'
@@ -555,7 +557,7 @@ var WDGProjectDashboard = (function ($) {
                         $("#new_team_member_string").next().show();
 
                         if(result==="FALSE"){
-                            $("#new_team_member_string").next().after("<div id=\"fail_add_team_indicator\"><br/><em>L'utilisateur "+data+" n'a pas été trouvé</em><div>");
+                            $("#new_team_member_string").next().next().after("<div id=\"fail_add_team_indicator\"><br/><em>L'utilisateur "+data+" n'a pas été trouvé</em><div>");
                             $("#fail_add_team_indicator").delay(4000).fadeOut(400);
                         } else {
                             res = JSON.parse(result);
@@ -567,9 +569,12 @@ var WDGProjectDashboard = (function ($) {
                             });
 
                             if(!doublon){
+                                if($("#team-list li").length==0){
+                                    $("#team-list").html("");
+                                }
                                 newline ='<li style="display: none;">';
                                 newline+=res.firstName+" "+res.lastName+" ("+res.userLink+") ";
-                                newline+='<a class="project-manage-team button" data-action="yproject-remove-member" data-user="'+res.id+'">x</a>';
+                                newline+='<a class="project-manage-team button" data-action="yproject-remove-member" data-user="'+res.id+'"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>';
                                 newline+="</li>";
                                 $("#team-list").append(newline);
                                 $("a[data-user="+res.id+"]").closest("li").slideDown();
@@ -594,9 +599,8 @@ var WDGProjectDashboard = (function ($) {
             //Clic pour supprimer un membre
             else if(action==="yproject-remove-member") {
                 //Affichage en attente de suppression
-                $("a[data-user="+data+"]").closest("li").css("opacity",0.25);
-                $("a[data-user="+data+"]").text("..");
-                $("a[data-user="+data+"]").addClass("wait-delete");
+                $("a[data-user="+data+"]").closest("li").css("opacity",0.5);
+                $("a[data-user="+data+"]").html('<i class="fa fa-spinner fa-spin fa-fw"></i>');
 
                 $.ajax({
                     'type' : "POST",

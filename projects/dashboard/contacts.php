@@ -66,8 +66,7 @@ function print_contacts_page() {
 
                     <p class="align-center">
                         <a id="mail-back-button" class="button"><?php _e('Editer', 'yproject'); ?></a>
-                        <input type="submit" id="mail-send-button" class="button" value="
-                            <?php _e('Envoyer le message', 'yproject'); ?>"/>
+                        <button type="submit" id="mail-send-button" class="button"><?php _e('Envoyer le message', 'yproject'); ?></button>
                     </p>
                 </div>
             </form>
@@ -75,8 +74,9 @@ function print_contacts_page() {
 
         <?php if ($is_admin): ?>
         <div class="tab-content">
-            <div class="admin-block">
-                <h3>[ADMIN] <?php _e('Ajouter un paiement par ch&egrave;que', 'yproject'); ?></h3>
+            <div class="admin-theme-block">
+                <h3><?php DashboardUtility::get_admin_infobutton(true); echo '&nbsp;';
+                    _e('Ajouter un paiement par ch&egrave;que', 'yproject'); ?></h3>
 
                 <?php if (isset($_POST['action']) && $_POST['action'] == 'add-check-investment') {
                     $add_check_result = $campaign->add_investment('check', $_POST['email'], $_POST['value'], $_POST['username'], $_POST['password'], $_POST['gender'], $_POST['firstname'], $_POST['lastname'], $_POST['orga_email'], $_POST['orga_name']);
@@ -87,7 +87,7 @@ function print_contacts_page() {
                     <?php }
                 } ?>
 
-                <form method="POST" action="">
+                <form method="POST" action="" class="db-form">
                     <label for="email"><?php _e('E-mail :', 'yproject'); ?>*</label> <input type="text" name="email" <?php if (isset($_POST['email']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['email']; ?>"<?php } ?> /><br />
                     <label for="value"><?php _e('Somme :', 'yproject'); ?>*</label> <input type="text" name="value" <?php if (isset($_POST['value']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['value']; ?>"<?php } ?> /><br />
                     <label for="username"><?php _e('Login :', 'yproject'); ?></label> <input type="text" name="username" <?php if (isset($_POST['username']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['username']; ?>"<?php } ?> /><br />
@@ -104,7 +104,7 @@ function print_contacts_page() {
                     -- <label for="orga_email"><?php _e("E-mail de l'organisation :", 'yproject'); ?></label> <input type="text" name="orga_email" <?php if (isset($_POST['orga_email']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['orga_email']; ?>"<?php } ?> /><br />
                     -- <label for="orga_name"><?php _e("Nom de l'organisation (si n'existe pas d&eacute;j&agrave;) :", 'yproject'); ?></label> <input type="text" name="orga_name" <?php if (isset($_POST['orga_name']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['orga_name']; ?>"<?php } ?> /><br /><br />
 
-                    <button type="submit" class="button"><?php _e('Ajouter', 'yproject'); ?></button>
+                    <button type="submit" class="button admin-theme"><?php _e('Ajouter', 'yproject'); ?></button>
                     <input type="hidden" name="action" value="add-check-investment" />
                 </form>
             </div>

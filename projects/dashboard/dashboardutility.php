@@ -22,8 +22,12 @@ class DashboardUtility
         }
     }
 
-    public static function get_admin_infobutton(){
-        return self::get_infobutton("Vous pouvez modifier ce champ en tant qu'administrateur WDG",false,true,"unlock-alt");
+    public static function get_admin_infobutton($display=false){
+        $infobutton = self::get_infobutton("Vous pouvez modifier ce champ en tant qu'administrateur WDG",false,true,"unlock-alt");
+        if ($display) {
+            echo $infobutton;
+        }
+        return $infobutton;
     }
 
     private static function has_class_icon($left_icon, $right_icon, $include_class_attr=true){

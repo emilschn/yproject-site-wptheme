@@ -36,11 +36,10 @@ WDGFormProjects::form_cancel_payment();
     <div class="padder">
 <?php
 if ($can_modify){
-
-
     $post_campaign = get_post($campaign_id);
     $campaign = atcf_get_campaign($post_campaign);
     $status = $campaign->campaign_status();
+    $is_preparing = $status==ATCF_Campaign::$campaign_status_preparing;
 
     $WDGAuthor = new WDGUser(get_userdata($post_campaign->post_author));
     $WDGUser_current = WDGUser::current();
@@ -48,17 +47,14 @@ if ($can_modify){
     $is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
 
     //Stats vues
-    global $stats_views, $stats_views_today;
     $stats_views = 0;
     $stats_views_today = 0;
     if (function_exists('stats_get_csv')) {
-        global $wpdb, $stats_views, $stats_views_today;
         $stats_views = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 365 ) );
         $stats_views_today = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 1 ) );
     }
 
     //Donnees de votes
-    global $vote_results, $nb_jcrois, $nb_votes, $nb_invests;
     $vote_results = WDGCampaignVotes::get_results($campaign_id);
 
     //Recuperation du nombre de j'y crois
@@ -76,15 +72,12 @@ if ($can_modify){
     locate_template( array("projects/dashboard/contacts.php"), true );
     locate_template( array("projects/dashboard/news.php"), true );
 
-
     check_change_status();
     page_resume_lightboxes();
 
-    function is_preparing($status){
-        return $status==ATCF_Campaign::$campaign_status_preparing;
-    }
     function check_enabled_tab($status){
-        if(is_preparing($status)) echo 'class="disabled"';
+        global $is_preparing;
+        if($is_preparing) echo 'class="disabled"';
     }?>
 
         <div id="ndashboard"
@@ -111,7 +104,7 @@ if ($can_modify){
                             </a>
                         </li>
                         <li>
-                            <a <?php if (!is_preparing($status)) {print('href="'.get_permalink($campaign_id).'" ');}
+                            <a <?php if (!$is_preparing) {print('href="'.get_permalink($campaign_id).'" ');}
                                 check_enabled_tab($status) ?>>
                                 <?php _e("Pr&eacute;sentation", 'yproject');?>&nbsp;&nbsp;
                                 <i class="fa fa-external-link" aria-hidden="true"></i></a>
