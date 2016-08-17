@@ -57,6 +57,10 @@ WDGInvestPageFunctions = (function($) {
 					}
 				});
 			}
+			
+			if ($("#userkyc_form").length > 0) {
+				WDGInvestPageFunctions.initKycForm();
+			}
 		},
 		
 		checkInvestInput: function() {
@@ -251,41 +255,56 @@ WDGInvestPageFunctions = (function($) {
 			$("#wdg-lightbox-userinfos").hide();
 			$("#wdg-lightbox-orgainfos").hide();
 			$("#wdg-lightbox-userkyc").show();
-			$("#lightbox_userkyc_form_button").show();
-			$("#lightbox_userkyc_form_loading").hide();
-			$("#lightbox_userkyc_form_errors").empty();
+			$("#userkyc_form_button").show();
+			$("#userkyc_form_loading").hide();
+			$("#userkyc_form_errors").empty();
 			for (var i = 0; i < jsonInfos.errors.length; i++) {
-				$("#lightbox_userkyc_form_errors").append("<li>"+jsonInfos.errors[i]+"</li>");
+				$("#userkyc_form_errors").append("<li>"+jsonInfos.errors[i]+"</li>");
 			}
 			
 			if (!WDGInvestPageFunctions.isUserKycFormDisplayed) {
 				WDGInvestPageFunctions.isUserKycFormDisplayed = true;
-				$("#lightbox_userkyc_form").submit(function(e) {
-					e.preventDefault();
-					$("#lightbox_userkyc_form_button").hide();
-					$("#lightbox_userkyc_form_loading").show();
-					var formData = new FormData();
-					formData.append('action', 'save_user_docs');
-					formData.append('campaign_id', $("#invest_form").data("campaignid"));
-					formData.append('user_doc_id', $('#user_doc_id')[0].files[0]);
-					formData.append('user_doc_home', $('#user_doc_home')[0].files[0]);
-					formData.append('user_doc_bank', $('#user_doc_bank')[0].files[0]);
-					$.ajax({
-						'type' : "POST",
-						'url' : ajax_object.ajax_url,
-						'processData': false,
-						'contentType': false,
-						'data': formData
-					}).done(function(result){
-						WDGInvestPageFunctions.formInvestReturnEvent(result);
-					});
-				});
+				WDGInvestPageFunctions.initKycForm();
 				
 				$("#wdg-lightbox-userkyc .wdg-lightbox-button-close").click(function(e) {
 					WDGInvestPageFunctions.isUserKycFormDisplayed = false;
 					WDGInvestPageFunctions.closeInvestLightbox();
 				});
 			}
+		},
+		
+		initKycForm: function() {
+			$("#userkyc_form").submit(function(e) {
+				e.preventDefault();
+				$("#userkyc_form_button").hide();
+				$("#userkyc_form_loading").show();
+				var formData = new FormData();
+				formData.append('action', 'save_user_docs');
+				formData.append('campaign_id', $("#invest_form").data("campaignid"));
+				formData.append('user_doc_id', $('#user_doc_id')[0].files[0]);
+				formData.append('user_doc_home', $('#user_doc_home')[0].files[0]);
+				$.ajax({
+					'type' : "POST",
+					'url' : ajax_object.ajax_url,
+					'processData': false,
+					'contentType': false,
+					'data': formData
+				}).done(function(result){
+					var jsonResult = JSON.parse(result);
+					response = jsonResult.response;
+					$("#userkyc_form_loading").hide();
+					if ( response == "kyc" ) {
+						$("#userkyc_form_button").show();
+						$("#userkyc_form_errors").empty();
+						for (var i = 0; i < jsonResult.errors.length; i++) {
+							$("#userkyc_form_errors").append("<li>"+jsonResult.errors[i]+"</li>");
+						}
+					} else {
+						$("#userkyc_form_success").show();
+					}
+					
+				});
+			});
 		},
 		
 		closeInvestLightbox: function() {
