@@ -231,23 +231,23 @@ var ProjectEditor = (function($) {
 
 			var newElement_1_input = '<input type="input" id="wdg-edit-picture-head-next_update" value="Télécharger une image"/>';
 			$(ProjectEditor.elements[property].elementId).after(newElement_1_input);
-			$("#wdg-edit-picture-head-next_update").css("left", $(ProjectEditor.elements[property].elementId).position().left);
-			$("#wdg-edit-picture-head-next_update").css("top", $(ProjectEditor.elements[property].elementId).position().top);
+			$("#wdg-edit-picture-head-next_update").css("left", $(".project-banner-content").position().left);
+			$("#wdg-edit-picture-head-next_update").css("top", $(".project-banner-content").position().top);
 			$("#wdg-edit-picture-head-next_update").css("z-index", "1");
     		$("#wdg-edit-picture-head-next_update").css("position","absolute");
 
 			var newElement_2 = '<input type="submit" id="wdg-edit-picture-head-next_valid" value="Valider"/>';
 			$(ProjectEditor.elements[property].elementId).after(newElement_2);
-			$("#wdg-edit-picture-head-next_valid").css("left", $(ProjectEditor.elements[property].elementId).position().left + $("#wdg-edit-picture-head-next_update").outerWidth());
-			$("#wdg-edit-picture-head-next_valid").css("top", $(ProjectEditor.elements[property].elementId).position().top);
+			$("#wdg-edit-picture-head-next_valid").css("left", $(".project-banner-content").position().left + $("#wdg-edit-picture-head-next_update").outerWidth());
+			$("#wdg-edit-picture-head-next_valid").css("top", $(".project-banner-content").position().top);
 			$("#wdg-edit-picture-head-next_valid").css("z-index", "2");
     		$("#wdg-edit-picture-head-next_valid").css("position","absolute");
 
 
 			var newElement_3 = '<input type="submit" id="wdg-edit-picture-head-next_cancel" value="Annuler"/>';
 			$(ProjectEditor.elements[property].elementId).after(newElement_3);
-			$("#wdg-edit-picture-head-next_cancel").css("left", $(ProjectEditor.elements[property].elementId).position().left + $("#wdg-edit-picture-head-next_update").outerWidth() + $("#wdg-edit-picture-head-next_valid").outerWidth());
-			$("#wdg-edit-picture-head-next_cancel").css("top", $(ProjectEditor.elements[property].elementId).position().top);
+			$("#wdg-edit-picture-head-next_cancel").css("left", $(".project-banner-content").position().left + $("#wdg-edit-picture-head-next_update").outerWidth() + $("#wdg-edit-picture-head-next_valid").outerWidth());
+			$("#wdg-edit-picture-head-next_cancel").css("top", $(".project-banner-content").position().top);
 			$("#wdg-edit-picture-head-next_cancel").css("z-index", "2");
     		$("#wdg-edit-picture-head-next_cancel").css("position","absolute");
 			
