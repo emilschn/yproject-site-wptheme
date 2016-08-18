@@ -76,7 +76,10 @@ function yproject_enqueue_script(){
 
 	//Fichiers du tableau de bord (CSS, Fonctions Ajax et scripts de Datatable)
 	if ($is_dashboard_page && $can_modify) {
-		wp_enqueue_style( 'font-awesome' );
+		wp_deregister_style( 'font-awesome' );
+		wp_register_style('font-awesome', (dirname( get_bloginfo('stylesheet_url')).'/_inc/css/font-awesome.min.css'));
+		wp_enqueue_style('font-awesome');
+
 		wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery'), $current_version);
 		wp_enqueue_script('wdg-project-dashboard-i18n-fr', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/i18n/datepicker-fr.js', array('jquery', 'jquery-ui-datepicker'), $current_version);
 		wp_enqueue_style( 'dashboard-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dashboard.css', null, $current_version, 'all');

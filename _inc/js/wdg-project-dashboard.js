@@ -214,11 +214,11 @@ var WDGProjectDashboard = (function ($) {
                 if ($(".bloc-grid").length > 0) {
                     $(".bloc-grid .display-bloc").click(function () {
                         if($(this).hasClass("active")){
+                            /* Replie le bloc actif, désactivé pour l'instant
                             $(".bloc-grid .display-bloc").removeClass("active").animate({
                                 top: "0px"
                             }, { duration: 500, queue: false });
-                            $("#tab-container .tab-content").slideUp();
-
+                            $("#tab-container .tab-content").slideUp();*/
                         } else {
                             $(".bloc-grid .display-bloc").removeClass("active").animate({
                                 top: "0px"
@@ -232,6 +232,7 @@ var WDGProjectDashboard = (function ($) {
                     });
 
                     $("#tab-container .tab-content").hide();
+                    $(".bloc-grid .display-bloc").first().trigger("click");
                 }
 
                 //Ajax Infos personnelles

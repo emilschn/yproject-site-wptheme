@@ -97,7 +97,7 @@ function print_resume_page()
     global $stats_views, $stats_views_today;
     global $vote_results, $nb_jcrois, $nb_votes, $nb_invests;
 
-    $status = $campaign->campaign_status();
+    global $status, $collecte_or_after, $vote_or_after, $preview_or_after, $validated_or_after ;
 
     ?>
     <div class="head"><?php _e('R&eacute;sum&eacute; du projet', 'yproject'); ?></div>
@@ -161,6 +161,7 @@ function print_resume_page()
             </div><?php $i++; } ?>
     </div>
 
+    <?php if($preview_or_after){ ?>
     <div class="tab-content" id="stats-tab">
         <div id="block-stats" class="large-block">
             <h2>Avancement du projet</h2>
@@ -296,6 +297,7 @@ function print_resume_page()
             </script>
         </div>
     </div>
+    <?php } ?>
 
     <div class="tab-content" id="next-status-tab">
         <?php if($status == ATCF_Campaign::$campaign_status_preparing
@@ -466,9 +468,7 @@ function print_resume_page()
                 "value"=> $campaign->can_go_next_status(),
                 "editable"=> $is_admin,
                 "admin_theme"=>$is_admin,
-                "visible"=>$is_admin && ($status==ATCF_Campaign::$campaign_status_validated ||
-                        $status==ATCF_Campaign::$campaign_status_preview ||
-                        $status==ATCF_Campaign::$campaign_status_vote ),
+                "visible"=>$is_admin && $validated_or_after,
                 "placeholder"=>"http://....."
             ));
 

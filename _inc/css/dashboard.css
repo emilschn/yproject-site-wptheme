@@ -450,6 +450,7 @@
     width: 25%;
     padding: 10px 0px;
     min-width: 200px;
+    vertical-align: middle;
 }
 
 #ndashboard .data-blocks .half-card {
@@ -457,12 +458,13 @@
     width: 50%;
     padding: 10px 0px;
     min-width: 400px;
+    vertical-align: middle;
 }
 
 #ndashboard .data-blocks .stat-big-number {
     font-family: "BebasNeue";
     font-size: 80px;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 #ndashboard .data-blocks .stat-little-number {

@@ -3,15 +3,17 @@
  * Template Name: Projet Tableau de bord
  *
  */
-$campaign_id = filter_input(INPUT_GET, 'campaign_id');
-$success_msg = filter_input(INPUT_GET, 'success_msg');
-WDGFormProjects::form_approve_payment();
-WDGFormProjects::form_cancel_payment();
 ?>
 
 <?php get_header(); ?>
 
-<?php if ( isset($success_msg) && !empty($success_msg) ): ?>
+<?php
+$campaign_id = filter_input(INPUT_GET, 'campaign_id');
+$success_msg = filter_input(INPUT_GET, 'success_msg');
+WDGFormProjects::form_approve_payment();
+WDGFormProjects::form_cancel_payment();
+
+if ( isset($success_msg) && !empty($success_msg) ): ?>
 	<div id="lightbox-successmsg" class="wdg-lightbox">
 		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder">
@@ -39,7 +41,11 @@ if ($can_modify){
     $post_campaign = get_post($campaign_id);
     $campaign = atcf_get_campaign($post_campaign);
     $status = $campaign->campaign_status();
-    $is_preparing = $status==ATCF_Campaign::$campaign_status_preparing;
+
+    $collecte_or_after = $status==ATCF_Campaign::$campaign_status_collecte || $status==ATCF_Campaign::$campaign_status_funded ;
+    $vote_or_after = $collecte_or_after || $status==ATCF_Campaign::$campaign_status_vote;
+    $preview_or_after = $vote_or_after || $status==ATCF_Campaign::$campaign_status_preview;
+    $validated_or_after = $preview_or_after || $status==ATCF_Campaign::$campaign_status_validated;
 
     $WDGAuthor = new WDGUser(get_userdata($post_campaign->post_author));
     $WDGUser_current = WDGUser::current();
@@ -75,9 +81,9 @@ if ($can_modify){
     check_change_status();
     page_resume_lightboxes();
 
-    function check_enabled_tab($status){
-        global $is_preparing;
-        if($is_preparing) echo 'class="disabled"';
+    function check_enabled_tab(){
+        global $validated_or_after;
+        if(!$validated_or_after) echo 'class="disabled"';
     }?>
 
         <div id="ndashboard"
@@ -104,7 +110,7 @@ if ($can_modify){
                             </a>
                         </li>
                         <li>
-                            <a <?php if (!$is_preparing) {print('href="'.get_permalink($campaign_id).'" ');}
+                            <a <?php if ($validated_or_after) {print('href="'.get_permalink($campaign_id).'" ');}
                                 check_enabled_tab($status) ?>>
                                 <?php _e("Pr&eacute;sentation", 'yproject');?>&nbsp;&nbsp;
                                 <i class="fa fa-external-link" aria-hidden="true"></i></a>

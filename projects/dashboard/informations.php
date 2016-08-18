@@ -25,6 +25,12 @@ function print_informations_page()
 
     <div class="head"><?php _e("Informations","yproject");?></div>
     <div class="bloc-grid">
+        <div class="display-bloc" data-tab-target="tab-project">
+            <i class="fa fa-lightbulb-o fa-4x aria-hidden="true""></i>
+            <div class="infobloc-title">
+                <?php _e("Le projet","yproject");?>
+            </div>
+        </div>
         <div class="display-bloc" data-tab-target="tab-user-infos">
             <i class="fa fa-user fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
@@ -35,12 +41,6 @@ function print_informations_page()
             <i class="fa fa-building fa-4x aria-hidden="true""></i>
             <div class="infobloc-title">
                 <?php _e("L'organisation","yproject");?>
-            </div>
-        </div>
-        <div class="display-bloc" data-tab-target="tab-project">
-            <i class="fa fa-lightbulb-o fa-4x aria-hidden="true""></i>
-            <div class="infobloc-title">
-                <?php _e("Le projet","yproject");?>
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-funding">
@@ -64,6 +64,86 @@ function print_informations_page()
     </div>
 
     <div id="tab-container">
+        <div class="tab-content" id="tab-project">
+            <?php
+            //Gestion des catégories
+            $campaign_categories = get_the_terms($campaign_id, 'download_category');
+            $selected_category = 0;
+            $selected_activity = 0;
+            $terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
+            $term_category_id = $terms_category[0]->term_id;
+            $terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
+            $term_activity_id = $terms_activity[0]->term_id;
+            if ($campaign_categories) {
+                foreach ($campaign_categories as $campaign_category) {
+                    if ($campaign_category->parent == $term_category_id) {
+                        $selected_category = $campaign_category->term_id;
+                    }
+                    if ($campaign_category->parent == $term_activity_id) {
+                        $selected_activity = $campaign_category->term_id;
+                    }
+                }
+            }
+            ?>
+            <form id="projectinfo_form" class="db-form">
+                <ul id="projectinfo_form_errors" class="errors">
+
+                </ul>
+
+                <?php
+                DashboardUtility::create_field(array(
+                    "id"=>"project_name",
+                    "type"=>"text",
+                    "label"=>"Nom du projet",
+                    "value"=>$post_campaign->post_title
+                ));
+
+                DashboardUtility::create_field(array(
+                    "id"=>"backoffice_summary",
+                    "type"=>"editor",
+                    "label"=>"R&eacute;sum&eacute; du projet",
+                    "infobubble"=>"Ces informations seront traitées de manière confidentielle",
+                    "value"=>$campaign->backoffice_summary()
+                ));
+                ?>
+                <div class="field"><label for="categories">Cat&eacute;gorie</label>
+                    <?php wp_dropdown_categories(array(
+                        'hide_empty' => 0,
+                        'taxonomy' => 'download_category',
+                        'selected' => $selected_category,
+                        'echo' => 1,
+                        'child_of' => $term_category_id,
+                        'name' => 'categories',
+                        'id' => 'update_project_category'
+                    )); ?></div>
+
+                <div class="field"><label for="activities">Secteur d&apos;activit&eacute;</label>
+                    <?php wp_dropdown_categories(array(
+                        'hide_empty' => 0,
+                        'taxonomy' => 'download_category',
+                        'selected' => $selected_activity,
+                        'echo' => 1,
+                        'child_of' => $term_activity_id,
+                        'name' => 'activities',
+                        'id' => 'update_project_activity'
+                    )); ?></div>
+
+                <?php
+                $locations = atcf_get_locations();
+
+                DashboardUtility::create_field(array(
+                    "id"=>"project_location",
+                    "type"=>"select",
+                    "label"=>"Localisation",
+                    "value"=>$campaign->location(),
+                    "options_id"=>array_keys($locations),
+                    "options_names"=>array_values($locations)
+                ));
+
+                DashboardUtility::create_save_button("projectinfo_form"); ?>
+            </form>
+        </div>
+
         <div class="tab-content" id="tab-user-infos">
             <form id="userinfo_form" class="db-form">
                 <?php if ($is_author) {
@@ -243,86 +323,6 @@ function print_informations_page()
 
                 <br />
                 <?php DashboardUtility::create_save_button("orgainfo_form"); ?>
-            </form>
-        </div>
-
-        <div class="tab-content" id="tab-project">
-            <?php
-            //Gestion des catégories
-            $campaign_categories = get_the_terms($campaign_id, 'download_category');
-            $selected_category = 0;
-            $selected_activity = 0;
-            $terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
-            $term_category_id = $terms_category[0]->term_id;
-            $terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
-            $term_activity_id = $terms_activity[0]->term_id;
-            if ($campaign_categories) {
-                foreach ($campaign_categories as $campaign_category) {
-                    if ($campaign_category->parent == $term_category_id) {
-                        $selected_category = $campaign_category->term_id;
-                    }
-                    if ($campaign_category->parent == $term_activity_id) {
-                        $selected_activity = $campaign_category->term_id;
-                    }
-                }
-            }
-            ?>
-            <form id="projectinfo_form" class="db-form">
-                <ul id="projectinfo_form_errors" class="errors">
-
-                </ul>
-
-                <?php
-                DashboardUtility::create_field(array(
-                    "id"=>"project_name",
-                    "type"=>"text",
-                    "label"=>"Nom du projet",
-                    "value"=>$post_campaign->post_title
-                ));
-
-                DashboardUtility::create_field(array(
-                    "id"=>"backoffice_summary",
-                    "type"=>"editor",
-                    "label"=>"R&eacute;sum&eacute; du projet",
-                    "infobubble"=>"Ces informations seront traitées de manière confidentielle",
-                    "value"=>$campaign->backoffice_summary()
-                ));
-                ?>
-                <div class="field"><label for="categories">Cat&eacute;gorie</label>
-                <?php wp_dropdown_categories(array(
-                    'hide_empty' => 0,
-                    'taxonomy' => 'download_category',
-                    'selected' => $selected_category,
-                    'echo' => 1,
-                    'child_of' => $term_category_id,
-                    'name' => 'categories',
-                    'id' => 'update_project_category'
-                )); ?></div>
-
-                <div class="field"><label for="activities">Secteur d&apos;activit&eacute;</label>
-                <?php wp_dropdown_categories(array(
-                    'hide_empty' => 0,
-                    'taxonomy' => 'download_category',
-                    'selected' => $selected_activity,
-                    'echo' => 1,
-                    'child_of' => $term_activity_id,
-                    'name' => 'activities',
-                    'id' => 'update_project_activity'
-                )); ?></div>
-
-                <?php
-                $locations = atcf_get_locations();
-
-                DashboardUtility::create_field(array(
-                    "id"=>"project_location",
-                    "type"=>"select",
-                    "label"=>"Localisation",
-                    "value"=>$campaign->location(),
-                    "options_id"=>array_keys($locations),
-                    "options_names"=>array_values($locations)
-                ));
-
-                DashboardUtility::create_save_button("projectinfo_form"); ?>
             </form>
         </div>
 
