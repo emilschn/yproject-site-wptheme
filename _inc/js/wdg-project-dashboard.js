@@ -56,17 +56,25 @@ var WDGProjectDashboard = (function ($) {
                     //Arrête chargement des iframes
                     $("#ndashboard-content .google-doc iframe").not(".isloaded").prop('src','');
 
-                    //Change le contenu de la page
-                    var target = $(this).attr("href");
-
                     //Cache les infobulles ouvertes
                     $(".qtip").hide()
 
+                    //Change le contenu de la page
+                    var target = $(this).data("target");
+                    console.log(target);
+
                     $("#ndashboard-content .page-dashboard").hide();
-                    $("#ndashboard-content " + target).show();
+
+                    //Montre nouvelle page ou celle de chargement
+                    if(target==undefined){
+                        $("#ndashboard-navbar li a").addClass("disabled").unbind( "click" );
+                        $("#ndashboard-content #page-redirect").show();
+                    } else {
+                        $("#ndashboard-content #" + target).show();
+                    }
 
                     //Redessine le tableau si besoin en fonction de la taille de la fenêtre
-                    if(target=="#page-contacts" && (typeof WDGProjectDashboard.table !== 'undefined')){
+                    if(target=="page-contacts" && (typeof WDGProjectDashboard.table !== 'undefined')){
                         WDGProjectDashboard.table.draw();
                         WDGProjectDashboard.table.columns.adjust();
                     }
@@ -79,19 +87,14 @@ var WDGProjectDashboard = (function ($) {
                             $(this).addClass('isloaded');
                         });
                     });
-
-                    history.pushState(null, null, target);
-                    return false; //Empêche le défilement automatique lorsqu'on clique sur un lien avec un #
                 });
 
-                var hash = window.location.hash
-                var tabsaved = $('#ndashboard-navbar li a[href="'+window.location.hash+'"]')
-                if(tabsaved.length >0 && !tabsaved.hasClass("disabled")){
-                    tabsaved.trigger("click");
+                var pagesaved = $('#ndashboard-navbar li a[href="'+window.location.hash+'"]')
+                if(pagesaved.length >0 && !pagesaved.hasClass("disabled")){
+                    pagesaved.trigger("click");
                 } else {
                     $("#ndashboard-navbar li a:not(.disabled)").first().trigger("click");
                 }
-                window.scrollTo(0, 0);
             }
 
             //Infobulles

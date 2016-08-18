@@ -73,7 +73,7 @@ if ($can_modify){
     locate_template( array("projects/dashboard/dashboardutility.php"), true );
     locate_template( array("projects/dashboard/resume.php"), true );
     locate_template( array("projects/dashboard/informations.php"), true );
-    locate_template( array("projects/dashboard/campaign-tab.php"), true );
+    locate_template( array("projects/dashboard/campaign-dbpage.php"), true );
     locate_template( array("projects/dashboard/wallet.php"), true );
     locate_template( array("projects/dashboard/contacts.php"), true );
     locate_template( array("projects/dashboard/news.php"), true );
@@ -81,7 +81,7 @@ if ($can_modify){
     check_change_status();
     page_resume_lightboxes();
 
-    function check_enabled_tab(){
+    function check_enabled_page(){
         global $validated_or_after;
         if(!$validated_or_after) echo 'class="disabled"';
     }?>
@@ -105,36 +105,45 @@ if ($can_modify){
                     </span></div>
                     <ul>
                         <li>
-                            <a href="#page-resume">
+                            <a href="#resume"
+                               data-target="page-resume">
                                 <?php _e("R&eacute;sum&eacute;", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a <?php if ($validated_or_after) {print('href="'.get_permalink($campaign_id).'" ');}
-                                check_enabled_tab($status) ?>>
+                            <a <?php if ($validated_or_after) {echo ('href="'.get_permalink($campaign_id).'" ');} ?>
+                                <?php check_enabled_page() ?>>
                                 <?php _e("Pr&eacute;sentation", 'yproject');?>&nbsp;&nbsp;
-                                <i class="fa fa-external-link" aria-hidden="true"></i></a>
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                            </a>
                         </li>
                         <li>
-                            <a href="#page-informations">Informations<div class="badge-notif"></div></a>
+                            <a href="#informations"
+                               data-target="page-informations">
+                                <?php _e("Informations", 'yproject');?><div class="badge-notif"></div>
+                            </a>
                         </li>
                         <li>
-                            <a href="#page-wallet" <?php check_enabled_tab($status) ?>>
+                            <a href="#wallet"
+                                data-target="page-wallet" <?php check_enabled_page() ?>>
                                 <?php _e("Gestion financi&egrave;re", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a href="#page-campaign" <?php check_enabled_tab($status) ?>>
+                            <a href="#campaign"
+                                data-target="page-campaign" <?php check_enabled_page() ?>>
                                 <?php _e("Campagne", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a href="#page-contacts" <?php check_enabled_tab($status) ?>>
+                            <a href="#contacts"
+                                data-target="page-contacts" <?php check_enabled_page() ?>>
                                 <?php _e("Contacts", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a href="#page-news" <?php check_enabled_tab($status) ?>>
+                            <a href="#news"
+                                data-target="page-news" <?php check_enabled_page() ?>>
                                 <?php _e("Actualit&eacute;s", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
@@ -150,14 +159,20 @@ if ($can_modify){
                     <div class="page-dashboard" id="page-resume"><?php print_resume_page(); ?></div>
                     <div class="page-dashboard" id="page-presentation"></div>
                     <div class="page-dashboard" id="page-informations"><?php print_informations_page(); ?></div>
-                    <div class="page-dashboard" id="page-wallet"><?php print_wallet_page(); ?></div>
+                    <div class="page-dashboard" id="page-wallet"  ><?php print_wallet_page(); ?></div>
                     <div class="page-dashboard" id="page-campaign"><?php print_campaign_page(); ?></div>
                     <div class="page-dashboard" id="page-contacts"><?php print_contacts_page()?></div>
                     <div class="page-dashboard" id="page-news"><?php print_news_page(); ?></div>
                     <!--div class="page-dashboard" id="page-support">8</div-->
-                    <div class="page-dashboard" id="page-loading">
-                        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-                        <span class="sr-only">Loading...</span>
+                    <div class="page-dashboard" id="page-loading" style="display:block">
+                        <div class="tab-content">
+                            <h2><i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;Chargement...</h2>
+                        </div>
+                    </div>
+                    <div class="page-dashboard" id="page-redirect">
+                        <div class="tab-content">
+                            <h2><i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;Redirection vers la page projet...</h2>
+                        </div>
                     </div>
 
                 </div>
