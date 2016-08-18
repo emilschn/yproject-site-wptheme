@@ -10,6 +10,8 @@ $classes = '';
 if (isset($campaign_id)) {
 	$campaign_post = get_post($campaign_id);
 	$campaign = atcf_get_campaign($campaign_post);
+	$edit_version = $campaign->edit_version();
+	$classes = 'version-' . $edit_version;
 	
 	$tag_list = wp_get_post_terms($campaign_id, 'download_tag');
 	foreach ($tag_list as $tag) {
@@ -52,9 +54,9 @@ if (isset($_GET['delete_post_id'])){
 
 <div id="content" <?php echo 'class="'.$classes.'"'; ?>>
     
-	<?php if ($classes != '') {
-	locate_template( array("clients/myphotoreporter/menu.php"), true ); 
-	display_photoreporter_menu();
+	<?php if ($client_context != '') {
+		locate_template( array("clients/myphotoreporter/menu.php"), true ); 
+		display_photoreporter_menu();
 	} ?>
     
 	<div class="padder">
@@ -62,9 +64,13 @@ if (isset($_GET['delete_post_id'])){
 	<?php do_action( 'bp_before_archive' ); ?>
 
 	<div class="page" id="blog-archives" role="main">
-		<?php locate_template( array("projects/single-admin-bar.php"), true ); ?>
-                
-		<?php locate_template( array("projects/single-header.php"), true ); ?>
+		
+		<?php if ($edit_version < 3): ?>
+			<?php require_once('projects/single-admin-bar.php'); ?>
+			<?php require_once('projects/single-header.php'); ?>
+		<?php else: ?>
+			<?php locate_template( array("projects/single/banner.php"), true ); ?>
+		<?php endif; ?>
 
 		<div id="post_bottom_content" class="center margin-height">
 

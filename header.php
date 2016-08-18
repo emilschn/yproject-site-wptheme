@@ -66,7 +66,7 @@
                     } else {
 			    echo "Plateforme d'investissement participatif à impact positif";
                     } ?>" />*/ ?>
-                <?php $imageFacebook = ($is_campaign_page === true) ? $campaign->get_home_picture_src() : $stylesheet_directory_uri .'/images/logo_entier.jpg'; ?> 
+                <?php $imageFacebook = (isset($campaign) && $is_campaign_page === true) ? $campaign->get_home_picture_src() : $stylesheet_directory_uri .'/images/logo_entier.jpg'; ?> 
 		<?php /* <meta property="og:image" content="<?php echo $imageFacebook ?>" /> */ ?>
 		<meta property="og:image:secure_url" content="<?php echo $imageFacebook ?>" />
 		<meta property="og:image:type" content="image/jpeg" />
@@ -132,6 +132,7 @@
 					if (is_user_logged_in()) : 
 						// Menu Mon compte
 						$page_update_account = get_page_by_path('modifier-mon-compte'); 
+						$page_dashboard = get_page_by_path('tableau-de-bord'); 
 						?>
 						<li class="page_item_out page_item_inverted mobile_hidden">
 						<a class="page_item_inverted" href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a>

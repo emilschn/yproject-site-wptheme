@@ -26,37 +26,37 @@ function print_informations_page()
     <div class="head"><?php _e("Informations","yproject");?></div>
     <div class="bloc-grid">
         <div class="display-bloc" data-tab-target="tab-project">
-            <i class="fa fa-lightbulb-o fa-4x aria-hidden="true""></i>
+            <i class="fa fa-lightbulb-o fa-4x aria-hidden="true"></i>
             <div class="infobloc-title">
                 <?php _e("Le projet","yproject");?>
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-user-infos">
-            <i class="fa fa-user fa-4x aria-hidden="true""></i>
+            <i class="fa fa-user fa-4x aria-hidden="true"></i>
             <div class="infobloc-title">
                 <?php _e("Infos personnelles","yproject");?>
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-organization">
-            <i class="fa fa-building fa-4x aria-hidden="true""></i>
+            <i class="fa fa-building fa-4x aria-hidden="true"></i>
             <div class="infobloc-title">
                 <?php _e("L'organisation","yproject");?>
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-funding">
-            <i class="fa fa-money fa-4x aria-hidden="true""></i>
+            <i class="fa fa-money fa-4x aria-hidden="true"></i>
             <div class="infobloc-title">
                 <?php _e("Besoin de financement","yproject");?>
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-communication">
-            <i class="fa fa-bullhorn fa-4x aria-hidden="true""></i>
+            <i class="fa fa-bullhorn fa-4x aria-hidden="true"></i>
             <div class="infobloc-title">
                 <?php _e("Votre communication","yproject");?>
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-contract">
-            <i class="fa fa-calculator fa-4x aria-hidden="true""></i>
+            <i class="fa fa-calculator fa-4x aria-hidden="true"></i>
             <div class="infobloc-title">
                 <?php _e("Contractualisation","yproject");?>
             </div>
@@ -185,7 +185,8 @@ function print_informations_page()
                 ));
 
                 $bd = new DateTime();
-                if(!empty($WDGAuthor->wp_user->get('user_birthday_year'))){
+				$user_birthday_year = $WDGAuthor->wp_user->get('user_birthday_year');
+                if(!empty($user_birthday_year)){
                     $bd->setDate(intval($WDGAuthor->wp_user->get('user_birthday_year')),
                         intval($WDGAuthor->wp_user->get('user_birthday_month')),
                         intval($WDGAuthor->wp_user->get('user_birthday_day')));
@@ -385,7 +386,8 @@ function print_informations_page()
                 <label>CA pr&eacute;visionnel</label>
                 <ul id="estimated-turnover">
                     <?php
-                    if(!empty($campaign->estimated_turnover())){
+					$estimated_turnover = $campaign->estimated_turnover();
+                    if(!empty($estimated_turnover)){
                         foreach (($campaign->estimated_turnover()) as $year => $turnover) : ?>
                             <li><label>Année <span class="year"><?php echo $year?></span></label><input type="text" value="<?php echo $turnover?>"/>
                             </li>

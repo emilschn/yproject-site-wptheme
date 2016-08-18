@@ -62,7 +62,7 @@ if (isset($campaign)):
 			<?php if ($can_use_wallet): ?>
 			<li>
 				<a href="<?php echo $page_mean_payment_link; ?>wallet" class="alert-confirm" data-alertconfirm="<?php _e("Vous allez valider le transfert d'argent de votre porte-monnaie vers celui du projet.", 'yproject'); ?>">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-portemonnaie.jpg" alt="<?php _e("Porte-monnaie WEDOGOOD", 'yproject'); ?>" />
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-portemonnaie.png" alt="<?php _e("Porte-monnaie WEDOGOOD", 'yproject'); ?>" />
 					<?php echo sprintf( __( 'Porte-monnaie WEDOGOOD (Vous disposez actuellement de %s &euro;)', 'yproject' ), $lemonway_amount ); ?>
 				</a>
 			</li>
@@ -70,7 +70,7 @@ if (isset($campaign)):
 			<?php elseif ($can_use_card_and_wallet): ?>
 			<li>
 				<a href="<?php echo $page_mean_payment_link; ?>cardwallet">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-carte-portemonnaie.jpg" alt="<?php _e("Carte bancaire et porte-monnaie WEDOGOOD", 'yproject'); ?>" />
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-carte-portemonnaie.png" alt="<?php _e("Carte bancaire et porte-monnaie WEDOGOOD", 'yproject'); ?>" />
 					<?php echo sprintf( __( 'Porte-monnaie WEDOGOOD (Vous disposez actuellement de %s &euro;) compl&eacute;t&eacute; par carte', 'yproject' ), $lemonway_amount ); ?>
 				</a>
 			</li>
@@ -83,6 +83,11 @@ if (isset($campaign)):
 					<?php _e("Virement bancaire", 'yproject'); ?>
 				</a>
 			</li>
+			<?php elseif ($campaign->can_use_wire_remaining_time() && !$campaign->can_use_wire_amount($_SESSION['redirect_current_amount_part'])): ?>
+			<li>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-virement.jpg" alt="<?php _e("Virement bancaire", 'yproject'); ?>" />
+				<?php echo sprintf( __("Les virements bancaires sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement", 'yproject'), ATCF_Campaign::$invest_amount_min_wire); ?>
+			</li>
 			<?php endif; ?>
 			
 			<?php if ($can_use_check): ?>
@@ -92,8 +97,12 @@ if (isset($campaign)):
 					<?php _e("Ch&egrave;que", 'yproject'); ?>
 				</a>
 			</li>
+			<?php else: ?>
+			<li>
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-cheque.jpg" alt="<?php _e("Ch&egrave;que", 'yproject'); ?>" />
+				<?php echo sprintf( __("Les paiements par ch&egrave;ques sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement", 'yproject'), ATCF_Campaign::$invest_amount_min_check); ?>
+			</li>
 			<?php endif; ?>
-			
 			<div class="clear"></div>
 		</ul>
 	<?php endif; ?>
