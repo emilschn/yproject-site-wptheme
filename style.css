@@ -158,6 +158,11 @@ tbody {
     color: #333333;
     cursor: default;
 }
+.button.sharer {
+	padding: 0px;
+	border: 0px;
+	background: #FFFFFF;
+}
 
 .wp-editor-container {
     border: 1px solid rgb(222, 222, 222);

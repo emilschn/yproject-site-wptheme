@@ -229,23 +229,16 @@ div#content.version-3 div.project-banner div.project-banner-content div.right di
 	margin-bottom: 20px;
 }
 
-div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share {
+div#content.version-3 div#triggered-menu-share {
 	display: none;
     position: absolute;
-    top: 335px;
 	width: 960px;
 	text-align: right;
+	margin-top: -20px;
+	margin-left: -14px;
 }
-div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered {
+div#content.version-3 div#triggered-menu-share.triggered {
     display: block;
-}
-div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered span {
-	background: #FFFFFF;
-	display: inline-block;
-	padding: 5px 10px;
-}
-div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered img {
-	width: 40px;
 }
 
 div#content.version-3 #wdg-move-picture-head {
