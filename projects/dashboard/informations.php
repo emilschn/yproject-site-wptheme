@@ -381,7 +381,10 @@ function print_informations_page()
                     "id"=>"first_payment",
                     "type"=>"date",
                     "label"=>"Première date de versement",
-                    "value"=>new DateTime($campaign->first_payment_date())
+                    "value"=>new DateTime($campaign->first_payment_date()),
+                    "editable"=> $is_admin,
+                    "admin_theme"=>$is_admin,
+                    "visible"=>$is_admin || ($campaign->first_payment_date()!="")
                 ));
 
                 ?>

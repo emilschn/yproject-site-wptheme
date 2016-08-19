@@ -12,7 +12,7 @@ class DashboardUtility
 
             if(!$margin){$text.= 'style="margin:0px"';}
             $text.=' aria-hidden="true"></i>';
-            $text .= '<div class="tooltiptext">'.translate($hovertext, 'yproject').'</div>';
+            $text .= '<span class="tooltiptext">'.translate($hovertext, 'yproject').'</span>';
             if($display){
                 print $text;
             }

@@ -313,7 +313,7 @@ var WDGProjectDashboard = (function ($) {
                 if ($("#tab-funding").length > 0) {
                     //Etiquettes de numéros d'années pour le CA prévisionnel
                     $("#update_first_payment").change(function(){
-                        var start_year = new Date($("#update_first_payment").val()).getFullYear();
+                        var start_year = 1;
                         $("#estimated-turnover li .year").each(function(index){
                             $(this).html((parseInt(start_year)+index));
                         });
@@ -488,29 +488,34 @@ var WDGProjectDashboard = (function ($) {
         },
 
         initQtip: function(){
+            var i=0;
             $('#ndashboard .infobutton, #ndashboard .qtip-element').each(function () {
-                var contentTip;
-                if($(this).attr("title")!=undefined){
-                    contentTip = $(this).attr("title");
-                } else {
-                    contentTip = $(this).next('.tooltiptext');
-                }
-
-                $(this).qtip({
-                    content: contentTip,
-                    position: {
-                        my: 'bottom center',
-                        at: 'top center',
-                    },
-                    style: {
-                        classes: 'wdgQtip qtip-dark qtip-rounded qtip-shadow'
-                    },
-                    hide: {
-                        fixed: true,
-                        delay: 300
+                if($(this).data("hasqtip")==undefined){
+                    var contentTip;
+                    if($(this).attr("title")!=undefined){
+                        contentTip = $(this).attr("title");
+                    } else {
+                        contentTip = $(this).next('.tooltiptext');
                     }
-                });
+
+                    $(this).qtip({
+                        content: contentTip,
+                        position: {
+                            my: 'bottom center',
+                            at: 'top center',
+                        },
+                        style: {
+                            classes: 'wdgQtip qtip-dark qtip-rounded qtip-shadow'
+                        },
+                        hide: {
+                            fixed: true,
+                            delay: 300
+                        }
+                    });
+                    i++;
+                }
             });
+            return i;
         },
 
         fieldError: function($param, errorText){

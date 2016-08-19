@@ -633,9 +633,14 @@
 
 #page-contacts .wdg-datatable table.dataTable thead th.nopadding,
 #page-contacts .wdg-datatable table.dataTable thead td.nopadding {
-    padding: 5px 5px 5px 5px;
+    padding: 5px 2px;
     cursor: default;
     background-image: none;
+}
+
+#page-contacts .wdg-datatable table.dataTable tbody th.nopadding,
+#page-contacts .wdg-datatable table.dataTable tbody td.nopadding {
+    padding: 5px 2px;
 }
 
 #page-contacts .wdg-datatable table.dataTable tfoot th.nopadding,

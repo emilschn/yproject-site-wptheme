@@ -15,19 +15,21 @@ function print_contacts_page() {
             </div>
         </div>
 
-        <div class="tab-content" id="send-mail-tab" hidden>
+        <div class="tab-content" id="send-mail-tab" >
             <h2><?php _e("Envoyer un mail", 'yproject')?></h2>
             <form id="direct-mail" method="POST" action="<?php echo admin_url( 'admin-post.php?action=send_project_mail'); ?>" target="_blank">
                 <p><?php _e("Le message sera envoyé &agrave", 'yproject')?> <strong id="nb-mailed-contacts">0</strong> personnes</p>
                 <input type="hidden" id="mail_recipients" name="mail_recipients"/>
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id?>"/>
                 <div class="step-write">
-                    <strong><?php _e("Vous pouvez utiliser les variables suivantes :", 'yproject'); ?></strong>
+                    <p><strong><?php _e("Vous pouvez utiliser les variables suivantes : ", 'yproject'); ?></strong>
+                    <?php DashboardUtility::get_infobutton('Au moment de l\'envoi, les variables seront remplacées par les valeurs correspondantes.<br/><br/>
+                        Ainsi, par exemple, <b>%username%</b> sera remplacé par le nom de l\'utilisateur qui recevra le message.',true)?></p>
                     <ul>
                         <li><i>%projectname%</i> : Nom du projet</li>
                         <li><i>%projecturl%</i> : Adresse du projet</li>
                         <li><i>%projectauthor%</i> : Nom du porteur de projet</li>
-                        <li><i>%username%</i> : Nom de l'utilisateur</li>
+                        <li><i>%username%</i> : Nom de l'utilisateur destinataire</li>
                         <li><i>%investwish%</i> : Intention d'investissement</li>
                     </ul>
                     <label><strong>Objet du mail : </strong>
