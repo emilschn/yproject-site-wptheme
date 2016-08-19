@@ -233,14 +233,14 @@ var ProjectEditor = (function($) {
 			$(ProjectEditor.elements[property].elementId).after(newElement_1_input);
 			$("#wdg-edit-picture-head-next_update").css("left", $(".project-banner-content").position().left);
 			$("#wdg-edit-picture-head-next_update").css("top", $(".project-banner-content").position().top);
-			$("#wdg-edit-picture-head-next_update").css("z-index", "1");
+			$("#wdg-edit-picture-head-next_update").css("z-index", "150");
     		$("#wdg-edit-picture-head-next_update").css("position","absolute");
 
 			var newElement_2 = '<input type="submit" id="wdg-edit-picture-head-next_valid" value="Valider"/>';
 			$(ProjectEditor.elements[property].elementId).after(newElement_2);
 			$("#wdg-edit-picture-head-next_valid").css("left", $(".project-banner-content").position().left + $("#wdg-edit-picture-head-next_update").outerWidth());
 			$("#wdg-edit-picture-head-next_valid").css("top", $(".project-banner-content").position().top);
-			$("#wdg-edit-picture-head-next_valid").css("z-index", "2");
+			$("#wdg-edit-picture-head-next_valid").css("z-index", "150");
     		$("#wdg-edit-picture-head-next_valid").css("position","absolute");
 
 
@@ -248,7 +248,7 @@ var ProjectEditor = (function($) {
 			$(ProjectEditor.elements[property].elementId).after(newElement_3);
 			$("#wdg-edit-picture-head-next_cancel").css("left", $(".project-banner-content").position().left + $("#wdg-edit-picture-head-next_update").outerWidth() + $("#wdg-edit-picture-head-next_valid").outerWidth());
 			$("#wdg-edit-picture-head-next_cancel").css("top", $(".project-banner-content").position().top);
-			$("#wdg-edit-picture-head-next_cancel").css("z-index", "2");
+			$("#wdg-edit-picture-head-next_cancel").css("z-index", "150");
     		$("#wdg-edit-picture-head-next_cancel").css("position","absolute");
 			
 
@@ -259,6 +259,16 @@ var ProjectEditor = (function($) {
 			$("#wdg-validate-picture-wait").attr('style','display:none; ');
 			$("#wdg-validate-picture-wait").innerHTML = "";
 
+			var newElement_span = '<span id="extra-comment">(Max. 2Mo ; idéalement 370px de hauteur et au minimum 960px de largeur)</span>';
+			$(ProjectEditor.elements[property].elementId).after(newElement_span);
+			$("#extra-comment").css("left", $(".project-banner-content").position().left);
+			$("#extra-comment").css("top", $(".project-banner-content").position().top + $("#wdg-edit-picture-head-next_update").outerHeight(true));
+			$("#extra-comment").css("z-index", "150");
+    		$("#extra-comment").css("position","absolute");
+
+
+			$("#wdg-move-picture-head").css("left", 0);
+			$("#wdg-move-picture-head").css("top", $("#extra-comment").position().top + $("#extra-comment").outerHeight(true));
 
 			$("#wdg-edit-picture-head-next_cancel").click(function() {
 				ProjectEditor.validateInputDone(true);
@@ -267,7 +277,10 @@ var ProjectEditor = (function($) {
 				$("#wdg-edit-picture-head-next_update").remove();
 				$("#wdg-edit-picture-head-next_valid").remove();
 				$("#wdg-edit-picture-head-next_cancel").remove();
+				$("#extra-comment").remove();
 				$("#project-banner-src").remove();
+				$("#wdg-move-picture-head").css("left", $("#wdg-edit-picture-head").outerWidth(true));
+				$("#wdg-move-picture-head").css("top", 0);
 				$('.project-banner-img').append('<img id="project-banner-src" src="'+url_image_start+'">');
 				$(".project-banner-content").css("background", "none");
 			});
@@ -283,8 +296,12 @@ var ProjectEditor = (function($) {
 				$("#wdg-edit-picture-head-next_update").remove();
 				$("#wdg-edit-picture-head-next_valid").remove();
 				$("#wdg-edit-picture-head-next_cancel").remove();
+				$("#extra-comment").remove();
+				$("#wdg-move-picture-head").css("left", $("#wdg-edit-picture-head").outerWidth(true));
+				$("#wdg-move-picture-head").css("top", 0);
 				$("#wdg-validate-picture-wait").attr('style',' border: medium none; background-color:#41ACB1; font-size: 0px; display:inline-block; z-index:2001;');
-
+				if($("#wdg-move-picture-head").hasClass("edit-button-validate"))
+					$("#wdg-move-picture-head").click();
   				$.ajax({
 					'type' : "POST",
 					'url' :ajax_object.ajax_url,
@@ -328,15 +345,15 @@ var ProjectEditor = (function($) {
 	 
 		// Enregistre l'image et/ou l'url de la vidéo
 		update_image_url: function(property){
-			var button_waiting = '<input type="submit" id="wdg-validate-picture-wait"/>';
+			var button_waiting = '<input type="submit" id="wdg-validate-video-wait"/>';
 			$("#wdg-edit-video-zone").after(button_waiting);
-			$("#wdg-validate-picture-wait").addClass("wait-button");
-			$("#wdg-validate-picture-wait").unbind("click");
-			$("#wdg-validate-picture-wait").innerHTML = "";
-			$("#wdg-validate-picture-wait").css("left", $("#wdg-edit-video-zone").position().left +  $("#clearfix").outerWidth());
-			$("#wdg-validate-picture-wait").css("top", $("#wdg-edit-video-zone").position().top);
-			$("#wdg-validate-picture-wait").val("");
-			$("#wdg-validate-picture-wait").hide();
+			$("#wdg-validate-video-wait").addClass("wait-button");
+			$("#wdg-validate-video-wait").unbind("click");
+			$("#wdg-validate-video-wait").innerHTML = "";
+			$("#wdg-validate-video-wait").css("left", $("#wdg-edit-video-zone").position().left +  $("#clearfix").outerWidth());
+			$("#wdg-validate-video-wait").css("top", $("#wdg-edit-video-zone").position().top);
+			$("#wdg-validate-video-wait").val("");
+			$("#wdg-validate-video-wait").hide();
 			$("#wdg-edit-"+property).hide();
 
 			var div_test = "<div class='project-pitch-video project-pitch-video-bis'><div class='block_overview_image'></div><div class='block_overview_video'></div> <div class='block_url_image'></div> <div class='block_url_video'></div> <div class='block_boutons'></div> </div>";
@@ -359,7 +376,10 @@ var ProjectEditor = (function($) {
 			
 			$(".block_url_image").after(newElement);
 			
+			var span_image = '<span id="extra-comment-image">(Max. 2Mo ; idéalement 615px de largeur * 330px de hauteur)</span>';
+			$("#upload-video-form").after(span_image);
 
+			
 
 			$("#wdg-edit-video-image_update").click(function() {
 				$("#wdg-edit-video-image").click();
@@ -435,6 +455,7 @@ var ProjectEditor = (function($) {
 				$("#wdg-edit-video-zone-next_valid").remove();
 				$("#wdg-edit-video-zone-next_cancel").remove();
 				$(".project-pitch-video-bis").remove();
+				$("#extra-comment-image").remove();
 				var background = $(".project-pitch-video").css('background-image');
 				if(background)
 					$(".project-pitch-video").attr('style','display:inline-block; background-image:'+background+'; background-repeat:no-repeat;');
@@ -445,8 +466,8 @@ var ProjectEditor = (function($) {
 
 			$("#wdg-edit-video-zone-next_valid").click(function() {
 				$("#wdg-edit-video-zone-next_valid").remove();
-				$("#wdg-validate-picture-wait").show();
-
+				$("#wdg-validate-video-wait").show();
+				$("#extra-comment-image").remove();
 
   				var formData = new FormData($('form#upload-video-form')[0]);
 				$("#wdg-edit-video-image_update").remove();
@@ -485,8 +506,8 @@ var ProjectEditor = (function($) {
 							}
 						}
 					}
-					$("#wdg-validate-picture-wait").hide();
-					$("#wdg-validate-picture-wait").remove();
+					$("#wdg-validate-video-wait").hide();
+					$("#wdg-validate-video-wait").remove();
 					$("#upload-video-form").remove();
 					$(".project-pitch-video-bis").remove();
 					$("#wdg-edit-"+property).show();
@@ -680,7 +701,7 @@ var ProjectEditor = (function($) {
 			$(".project-banner-content").css({ 'z-index': 2 });
 			$(".project-banner-deco").css({ opacity: 1 });
 			$(".project-banner-deco").css({ 'z-index': 2 });
-
+			$("#wdg-edit-picture-head-next_valid").click();
 			$.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,

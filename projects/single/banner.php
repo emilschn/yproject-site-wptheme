@@ -48,9 +48,6 @@ if (count($current_organisations) > 0) {
 	if ($owner_str == ' ') { $owner_str = $author->user_login; }
 }
 ?>
-<?php if ($can_modify): ?>
-	<div id="wdg-move-picture-head" class="move-button"></div>
-<?php endif; ?>
 	
 <div class="project-banner">
 	<div class="project-banner-img" style="<?php echo $campaign->get_header_picture_position_style(); ?>">
@@ -59,6 +56,10 @@ if (count($current_organisations) > 0) {
 		<?php endif; ?>
 	</div>
     
+	<?php if ($can_modify): ?>
+		<div id="wdg-move-picture-head" class="move-button"></div>
+	<?php endif; ?>
+
 	<div class="project-banner-deco">
 		<div class="center">
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/fond_projet3.png" alt="bg decoration" />
