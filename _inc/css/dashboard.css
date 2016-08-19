@@ -142,6 +142,7 @@
 
 #ndashboard-navbar li a.disabled{
     color: #b6b6b6;
+    cursor: default;
 }
 
 
@@ -309,7 +310,7 @@
 }
 
 #ndashboard .button[disabled] {
-    opacity: 0.2;
+    opacity: 0.5;
     cursor: initial;
 }
 
@@ -628,6 +629,18 @@
 #page-contacts .wdg-datatable table.dataTable tfoot th,
 #page-contacts .wdg-datatable table.dataTable tfoot td {
     padding: 8px 8px 15px;
+}
+
+#page-contacts .wdg-datatable table.dataTable thead th.nopadding,
+#page-contacts .wdg-datatable table.dataTable thead td.nopadding {
+    padding: 5px 5px 5px 5px;
+    cursor: default;
+    background-image: none;
+}
+
+#page-contacts .wdg-datatable table.dataTable tfoot th.nopadding,
+#page-contacts .wdg-datatable table.dataTable tfoot td.nopadding {
+    padding: 8px 0px 15px;
 }
 
 #page-contacts .wdg-datatable table.dataTable tfoot tr{

@@ -56,7 +56,10 @@ function print_informations_page()
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-contract">
-            <i class="fa fa-calculator fa-4x aria-hidden="true"></i>
+            <span class="fa-stack fa-2x">
+                <i class="fa fa-file-o fa-stack-2x"></i>
+                <i class="fa fa-check-circle-o fa-stack-1x"></i>
+            </span>
             <div class="infobloc-title">
                 <?php _e("Contractualisation","yproject");?>
             </div>
@@ -86,7 +89,7 @@ function print_informations_page()
             }
             ?>
             <form id="projectinfo_form" class="db-form">
-                <ul id="projectinfo_form_errors" class="errors">
+                <ul class="errors">
 
                 </ul>
 
@@ -153,7 +156,7 @@ function print_informations_page()
                     ?><p><?php _e("Seul le créateur du projet peut compléter ses informations personnelles","yproject");?></p><?php
                 }?>
 
-                <ul id="userinfo_form_errors" class="errors">
+                <ul class="errors">
 
                 </ul>
 
@@ -277,7 +280,7 @@ function print_informations_page()
 
         <div class="tab-content" id="tab-organization">
             <form id="orgainfo_form" class="db-form">
-                <ul id="orgainfo_form_errors" class="errors">
+                <ul class="errors">
 
                 </ul>
 
@@ -328,7 +331,7 @@ function print_informations_page()
         </div>
 
         <div class="tab-content" id="tab-funding">
-            <ul id="projectfunding_form_errors" class="errors">
+            <ul class="errors">
 
             </ul>
             <form action="" id="projectfunding_form"  class="db-form">
@@ -401,7 +404,7 @@ function print_informations_page()
         </div>
 
         <div class="tab-content" id="tab-communication">
-            <ul id="communication_form_errors" class="errors">
+            <ul class="errors">
 
             </ul>
             <form action="" id="communication_form" class="db-form">
@@ -439,7 +442,7 @@ function print_informations_page()
         </div>
 
         <div class="tab-content" id="tab-contract">
-            <ul id="contract_form_errors" class="errors">
+            <ul class="errors">
 
             </ul>
             <form action="" id="contract_form" class="db-form">

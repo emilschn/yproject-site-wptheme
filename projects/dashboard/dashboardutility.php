@@ -314,9 +314,16 @@ class DashboardUtility
     public static function create_save_button($id, $display=true){
         //Style/classes à retravailler....
 
-        $text_field ='<p id="'.$id.'_button" class="align-center">
-            <input type="submit" value="'.__("Enregistrer", 'yproject').'" class="button"/>
-            </p>
+        $text_field ='<p class="align-center" id="'.$id.'_button">'
+            .'<button type="submit" class="button">'
+                .'<span class="button-text">'
+                    .__("Enregistrer", 'yproject')
+                .'</span>'
+                .'<span class="button-waiting" hidden>'
+                    .'<i class="fa fa-spinner fa-spin fa-fw"></i>'.__("Enregistrement", 'yproject')
+                .'</span>'
+            .'</button>'
+            .'</p>
             <p id="'.$id.'_loading" class="align-center" hidden>
             <img src="'.get_stylesheet_directory_uri().'/images/loading.gif" alt="chargement"/>
             </p>';

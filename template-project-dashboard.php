@@ -32,11 +32,9 @@ if ( isset($success_msg) && !empty($success_msg) ): ?>
 			?>
 		</div>
 	</div>
-<?php endif; ?>
+<?php endif;
 
-<div id="content">
-    <div class="padder">
-<?php
+
 if ($can_modify){
     $post_campaign = get_post($campaign_id);
     $campaign = atcf_get_campaign($post_campaign);
@@ -86,6 +84,8 @@ if ($can_modify){
         if(!$validated_or_after) echo 'class="disabled"';
     }?>
 
+<div id="content">
+    <div class="padder">
         <div id="ndashboard"
         data-campaign-id="<?php echo $campaign_id?>">
             <nav id="ndashboard-navbar">
@@ -107,7 +107,7 @@ if ($can_modify){
                         <li>
                             <a href="#resume"
                                data-target="page-resume">
-                                <?php _e("R&eacute;sum&eacute;", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <?php _e("Vue d'ensemble", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
@@ -178,7 +178,9 @@ if ($can_modify){
                 </div>
             </div>
         </div>
-    <?php } ?>
+    <?php } else {
+        _e('Vous n&apos;avez pas la permission pour voir cette page.', 'yproject');
+    }?>
     </div><!-- .padder -->
 </div><!-- #content -->
 

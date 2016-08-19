@@ -36,7 +36,7 @@ function print_campaign_page()
         <?php }?>
 
         <form id="campaign_form" class="db-form">
-            <ul id="campaign_form_errors" class="errors">
+            <ul class="errors">
 
             </ul>
             <?php

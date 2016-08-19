@@ -61,7 +61,6 @@ var WDGProjectDashboard = (function ($) {
 
                     //Change le contenu de la page
                     var target = $(this).data("target");
-                    console.log(target);
 
                     $("#ndashboard-content .page-dashboard").hide();
 
@@ -109,10 +108,10 @@ var WDGProjectDashboard = (function ($) {
             });
 
             //Fonction d'envoi de mise à jour d'informations
-            var update_tab = function(data_to_update, form_id, form_button_id, form_loading_id, form_errors_id){
-                $("#"+form_button_id).hide();
-                $("#"+form_loading_id).show();
-                $("#"+form_id+" input, #"+form_id+" select").prop('disabled', true);
+            var update_tab = function(data_to_update, form_id, form_button_id){
+                $("#"+form_button_id+" .button-text").hide();
+                $("#"+form_button_id+" .button-waiting").show();
+                $("input, select, button", "#"+form_id).prop('disabled', true);
 
                 data_to_update.campaign_id= campaign_id;
                 $.ajax({
@@ -123,12 +122,12 @@ var WDGProjectDashboard = (function ($) {
                     if (result != "") {
                         var jsonResult = JSON.parse(result);
                         response = jsonResult.response;
-                        $("#"+form_button_id).show();
-                        $("#"+form_loading_id).hide();
-                        $("#"+form_id+" input, #"+form_id+" select").prop('disabled', false);
-                        $("#"+form_errors_id).empty();
+                        $("#"+form_button_id+" .button-waiting").hide();
+                        $("#"+form_button_id+" .button-text").show();
+                        $("input, select, button", "#"+form_id).prop('disabled', false);
+                        $(".errors", "#"+form_id).empty();
                         for (var i = 0; i < jsonResult.errors.length; i++) {
-                            $("#"+form_errors_id).append("<li>" + jsonResult.errors[i] + "</li>");
+                            $("ul.errors", "#"+form_id).append("<li>" + jsonResult.errors[i] + "</li>");
                         }
                     }
                 });
@@ -147,7 +146,7 @@ var WDGProjectDashboard = (function ($) {
                         'can_go_next': $("#update_can_go_next_status").is(':checked'),
                         'campaign_status': $("#update_campaign_status").val()
                     }
-                    update_tab(data_to_update, "statusmanage_form", "statusmanage-form_button", "statusmanage-form_loading", "statusmanage-form_errors")
+                    update_tab(data_to_update, "statusmanage_form", "statusmanage-form_button")
                 });
 
                 //Passage à l'étape suivante
@@ -262,7 +261,7 @@ var WDGProjectDashboard = (function ($) {
                             'telephone': $("#update_mobile_phone").val(),
                             'is_project_holder': $("#input_is_project_holder").val(),
                         }
-                        update_tab(data_to_update, "userinfo_form", "userinfo_form_button", "userinfo_form_loading", "userinfo_form_errors")
+                        update_tab(data_to_update, "userinfo_form", "userinfo_form_button")
                     });
                 }
 
@@ -274,7 +273,7 @@ var WDGProjectDashboard = (function ($) {
                             'action': 'save_project_organisation',
                             'project-organisation': $("#update_project_organisation").val()
                         }
-                        update_tab(data_to_update, "orgainfo_form", "orgainfo_form_button", "orgainfo_form_loading", "orgainfo_form_errors");
+                        update_tab(data_to_update, "orgainfo_form", "orgainfo_form_button");
 
                     });
 
@@ -306,7 +305,7 @@ var WDGProjectDashboard = (function ($) {
                             'project_activity': $("#update_project_activity").val(),
                             'project_location': $("#update_project_location").val()
                         }
-                        update_tab(data_to_update, "projectinfo_form", "projectinfo_form_button", "projectinfo_form_loading", "projectinfo_form_errors");
+                        update_tab(data_to_update, "projectinfo_form", "projectinfo_form_button");
                     });
                 }
 
@@ -365,7 +364,7 @@ var WDGProjectDashboard = (function ($) {
                             'first_payment_date': $("#update_first_payment").val(),
                             'list_turnover': JSON.stringify(list_turnover)
                         }
-                        update_tab(data_to_update, "projectfunding_form", "projectfunding_form_button", "projectfunding_form_loading", "projectfunding_form_errors");
+                        update_tab(data_to_update, "projectfunding_form", "projectfunding_form_button");
 
                     });
                 }
@@ -380,7 +379,7 @@ var WDGProjectDashboard = (function ($) {
                             'facebook': $("#update_facebook").val(),
                             'twitter': $("#update_twitter").val()
                         }
-                        update_tab(data_to_update, "communication_form", "communication_form_button", "communication_form_loading", "communication_form_errors");
+                        update_tab(data_to_update, "communication_form", "communication_form_button");
                     });
                 }
 
@@ -392,7 +391,7 @@ var WDGProjectDashboard = (function ($) {
                             'action': 'save_project_contract',
                             'contract_url': $("#update_contract_url").val()
                         }
-                        update_tab(data_to_update, "contract_form", "contract_form_button", "contract_form_loading", "contract_form_errors");
+                        update_tab(data_to_update, "contract_form", "contract_form_button");
                     });
                 }
             }
@@ -424,7 +423,7 @@ var WDGProjectDashboard = (function ($) {
                             'end_vote_date': $("#update_end_vote_date").val()+"\ "+$("#update_h_end_vote_date").val()+':'+$("#update_m_end_vote_date").val(),
                             'end_collecte_date': $("#update_end_collecte_date").val()+"\ "+$("#update_h_end_collecte_date").val()+':'+$("#update_m_end_collecte_date").val()
                         }
-                        update_tab(data_to_update, "campaign_form", "campaign_form_button", "campaign_form_loading", "campaign_form_errors");
+                        update_tab(data_to_update, "campaign_form", "campaign_form_button");
 
                     });
 
@@ -490,9 +489,15 @@ var WDGProjectDashboard = (function ($) {
 
         initQtip: function(){
             $('#ndashboard .infobutton, #ndashboard .qtip-element').each(function () {
+                var contentTip;
+                if($(this).attr("title")!=undefined){
+                    contentTip = $(this).attr("title");
+                } else {
+                    contentTip = $(this).next('.tooltiptext');
+                }
 
                 $(this).qtip({
-                    content: $(this).next('.tooltiptext'),
+                    content: contentTip,
                     position: {
                         my: 'bottom center',
                         at: 'top center',
@@ -666,6 +671,8 @@ var WDGProjectDashboard = (function ($) {
                             orderable: false,
                         },{
                             width: "30px",
+                            searchable: false,
+                            className: "dt-body-center nopadding",
                             targets: [2,3,4]
                         }
                     ],
@@ -773,6 +780,7 @@ var WDGProjectDashboard = (function ($) {
                         }
                     }
                 });
+                WDGProjectDashboard.table.columns.adjust();
 
                 var mailButtonDefault = WDGProjectDashboard.table.button(1).text()
                 WDGProjectDashboard.table.on("select.dt deselect.dt", function ( e, dt, type, indexes ) {
