@@ -383,6 +383,7 @@ function print_resume_page()
 
                         <li><label><input type="checkbox" class="checkbox-next-status" disabled
                                     <?php
+                                    $campaign_organisation = $campaign->get_organisation();
                                     $organization_obj = new YPOrganisation($campaign_organisation->organisation_wpref);
                                     if ($organization_obj->is_registered_lemonway_wallet()) { echo "checked"; }
                                     ?>>

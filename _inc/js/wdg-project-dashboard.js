@@ -498,24 +498,33 @@ var WDGProjectDashboard = (function ($) {
                         contentTip = $(this).next('.tooltiptext');
                     }
 
-                    $(this).qtip({
-                        content: contentTip,
-                        position: {
-                            my: 'bottom center',
-                            at: 'top center',
-                        },
-                        style: {
-                            classes: 'wdgQtip qtip-dark qtip-rounded qtip-shadow'
-                        },
-                        hide: {
-                            fixed: true,
-                            delay: 300
-                        }
-                    });
-                    i++;
+                    if (contentTip != ""){
+                        $(this).qtip({
+                            content: contentTip,
+                            position: {
+                                my: 'bottom center',
+                                at: 'top center',
+                            },
+                            style: {
+                                classes: 'wdgQtip qtip-dark qtip-rounded qtip-shadow'
+                            },
+                            hide: {
+                                fixed: true,
+                                delay: 300
+                            }
+                        });
+                        i++;
+                    }
                 }
             });
             return i;
+        },
+
+        scrollTo: function(target){
+            $('html, body').animate(
+                { scrollTop: target.offset().top - 75 },
+                "slow"
+            );
         },
 
         fieldError: function($param, errorText){
@@ -700,6 +709,8 @@ var WDGProjectDashboard = (function ($) {
                             text: '<i class="fa fa-envelope" aria-hidden="true"></i> Envoyer un mail',
                             action: function ( e, dt, button, config ) {
                                 $("#send-mail-tab").slideDown();
+                                var target = $(this).data("target");
+                                WDGProjectDashboard.scrollTo($("#send-mail-tab"));
                             }
                             //TODO : Scroller jusqu'au panneau
                         },

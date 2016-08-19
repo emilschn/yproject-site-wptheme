@@ -15,7 +15,7 @@ function print_contacts_page() {
             </div>
         </div>
 
-        <div class="tab-content" id="send-mail-tab" >
+        <div class="tab-content" id="send-mail-tab" style="display: none">
             <h2><?php _e("Envoyer un mail", 'yproject')?></h2>
             <form id="direct-mail" method="POST" action="<?php echo admin_url( 'admin-post.php?action=send_project_mail'); ?>" target="_blank">
                 <p><?php _e("Le message sera envoyé &agrave", 'yproject')?> <strong id="nb-mailed-contacts">0</strong> personnes</p>
@@ -25,7 +25,7 @@ function print_contacts_page() {
                     <p><strong><?php _e("Vous pouvez utiliser les variables suivantes : ", 'yproject'); ?></strong>
                     <?php DashboardUtility::get_infobutton('Au moment de l\'envoi, les variables seront remplacées par les valeurs correspondantes.<br/><br/>
                         Ainsi, par exemple, <b>%username%</b> sera remplacé par le nom de l\'utilisateur qui recevra le message.',true)?></p>
-                    <ul>
+                    <ul style="list-style-type: square;">
                         <li><i>%projectname%</i> : Nom du projet</li>
                         <li><i>%projecturl%</i> : Adresse du projet</li>
                         <li><i>%projectauthor%</i> : Nom du porteur de projet</li>

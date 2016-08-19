@@ -810,13 +810,13 @@ div#connexion_facebook_container span {
 *******************************************************************************/
 header {
     background-color: #EA4F51;
-    background-position: center;
-    min-width: 960px;
+    min-height: 960px;
+    background-image: url('images/footer.png');;
 }
 
 #site_name {
-    padding-top: 90px;
-    height: 150px;
+    padding-top: 35px;
+    height-min: 100px;
     vertical-align: middle;
     display: inline-block;
 }
