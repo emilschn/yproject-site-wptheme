@@ -62,10 +62,9 @@
     background-color: #EEECED;
 }
 
-#ndashboard-navbar .badge-notif{
+.badge-notif{
     display: inline-block;
-    padding: 3px 7px;
-    margin-left: 5px;
+    padding: 3px 6px;
     min-width: 10px;
     line-height: 1;
     font-size: 12px;

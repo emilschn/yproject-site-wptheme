@@ -676,7 +676,6 @@ var WDGProjectDashboard = (function ($) {
                             orderable: false,
                         },{
                             width: "30px",
-                            searchable: false,
                             className: "dt-body-center nopadding",
                             targets: [2,3,4]
                         }
