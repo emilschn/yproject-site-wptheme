@@ -1286,7 +1286,10 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
 }
 
 #video-zone-image{
-	width: 90%;
+	width: auto;
+	height: auto;
+	max-height: 90%;
+	max-width: 90%;
 }
 
 #wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid {
