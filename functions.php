@@ -888,9 +888,8 @@ function add_team_member(){
 			$wdg_user = new WDGUser( $user_wp_id );
 			$api_user_id = $wdg_user->get_api_id();
             $project_api_id = $campaign->get_api_id();
-            BoppLibHelpers::check_create_role(BoppLibHelpers::$project_team_member_role['slug'], BoppLibHelpers::$project_team_member_role['title']);
             //Ajout à l'API
-            BoppLib::link_user_to_project($project_api_id, $api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
+			WDGWPREST_Entity_Project::link_user( $project_api_id, $api_user_id, WDGWPREST_Entity_Project::$link_user_type_member );
             
             do_action('wdg_delete_cache', array(
                     'users/' . $api_user_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
@@ -921,7 +920,8 @@ function remove_team_member(){
 	$campaign = new ATCF_Campaign($post_campaign);
     $project_api_id = $campaign->get_api_id();
     //Supprimer dans l'API
-    BoppLib::unlink_user_from_project($project_api_id, $api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
+	WDGWPREST_Entity_Project::unlink_user( $project_api_id, $api_user_id, WDGWPREST_Entity_Project::$link_user_type_member );
+//    BoppLib::unlink_user_from_project($project_api_id, $api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
     do_action('wdg_delete_cache', array(
             'users/' . $api_user_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
             'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'

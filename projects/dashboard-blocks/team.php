@@ -13,7 +13,7 @@
         <h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
         <?php 
                 $project_api_id = $campaign->get_api_id();
-                if (isset($project_api_id)) $team_member_list = BoppLib::get_project_members_by_role($project_api_id, BoppLibHelpers::$project_team_member_role['slug']);
+                if (isset($project_api_id)) $team_member_list = WDGWPREST_Entity_Project::get_users_by_role( $project_api_id, WDGWPREST_Entity_Project::$link_user_type_member );
                 if (count($team_member_list) > 0):
         ?>
                 <ul id="team-list">
