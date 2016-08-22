@@ -15,19 +15,21 @@ function print_contacts_page() {
             </div>
         </div>
 
-        <div class="tab-content" id="send-mail-tab" style="display: none;">
+        <div class="tab-content" id="send-mail-tab" >
             <h2><?php _e("Envoyer un mail", 'yproject')?></h2>
             <form id="direct-mail" method="POST" action="<?php echo admin_url( 'admin-post.php?action=send_project_mail'); ?>" target="_blank">
                 <p><?php _e("Le message sera envoyé &agrave", 'yproject')?> <strong id="nb-mailed-contacts">0</strong> personnes</p>
                 <input type="hidden" id="mail_recipients" name="mail_recipients"/>
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id?>"/>
                 <div class="step-write">
-                    <strong><?php _e("Vous pouvez utiliser les variables suivantes :", 'yproject'); ?></strong>
+                    <p><strong><?php _e("Vous pouvez utiliser les variables suivantes : ", 'yproject'); ?></strong>
+                    <?php DashboardUtility::get_infobutton('Au moment de l\'envoi, les variables seront remplacées par les valeurs correspondantes.<br/><br/>
+                        Ainsi, par exemple, <b>%username%</b> sera remplacé par le nom de l\'utilisateur qui recevra le message.',true)?></p>
                     <ul>
                         <li><i>%projectname%</i> : Nom du projet</li>
                         <li><i>%projecturl%</i> : Adresse du projet</li>
                         <li><i>%projectauthor%</i> : Nom du porteur de projet</li>
-                        <li><i>%username%</i> : Nom de l'utilisateur</li>
+                        <li><i>%username%</i> : Nom de l'utilisateur destinataire</li>
                         <li><i>%investwish%</i> : Intention d'investissement</li>
                     </ul>
                     <label><strong>Objet du mail : </strong>
@@ -66,8 +68,7 @@ function print_contacts_page() {
 
                     <p class="align-center">
                         <a id="mail-back-button" class="button"><?php _e('Editer', 'yproject'); ?></a>
-                        <input type="submit" id="mail-send-button" class="button" value="
-                            <?php _e('Envoyer le message', 'yproject'); ?>"/>
+                        <button type="submit" id="mail-send-button" class="button"><?php _e('Envoyer le message', 'yproject'); ?></button>
                     </p>
                 </div>
             </form>
@@ -75,8 +76,9 @@ function print_contacts_page() {
 
         <?php if ($is_admin): ?>
         <div class="tab-content">
-            <div class="admin-block">
-                <h3>[ADMIN] <?php _e('Ajouter un paiement par ch&egrave;que', 'yproject'); ?></h3>
+            <div class="admin-theme-block">
+                <h3><?php DashboardUtility::get_admin_infobutton(true); echo '&nbsp;';
+                    _e('Ajouter un paiement par ch&egrave;que', 'yproject'); ?></h3>
 
                 <?php if (isset($_POST['action']) && $_POST['action'] == 'add-check-investment') {
                     $add_check_result = $campaign->add_investment('check', $_POST['email'], $_POST['value'], $_POST['username'], $_POST['password'], $_POST['gender'], $_POST['firstname'], $_POST['lastname'], $_POST['orga_email'], $_POST['orga_name']);
@@ -87,7 +89,7 @@ function print_contacts_page() {
                     <?php }
                 } ?>
 
-                <form method="POST" action="">
+                <form method="POST" action="" class="db-form">
                     <label for="email"><?php _e('E-mail :', 'yproject'); ?>*</label> <input type="text" name="email" <?php if (isset($_POST['email']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['email']; ?>"<?php } ?> /><br />
                     <label for="value"><?php _e('Somme :', 'yproject'); ?>*</label> <input type="text" name="value" <?php if (isset($_POST['value']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['value']; ?>"<?php } ?> /><br />
                     <label for="username"><?php _e('Login :', 'yproject'); ?></label> <input type="text" name="username" <?php if (isset($_POST['username']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['username']; ?>"<?php } ?> /><br />
@@ -104,7 +106,7 @@ function print_contacts_page() {
                     -- <label for="orga_email"><?php _e("E-mail de l'organisation :", 'yproject'); ?></label> <input type="text" name="orga_email" <?php if (isset($_POST['orga_email']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['orga_email']; ?>"<?php } ?> /><br />
                     -- <label for="orga_name"><?php _e("Nom de l'organisation (si n'existe pas d&eacute;j&agrave;) :", 'yproject'); ?></label> <input type="text" name="orga_name" <?php if (isset($_POST['orga_name']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['orga_name']; ?>"<?php } ?> /><br /><br />
 
-                    <button type="submit" class="button"><?php _e('Ajouter', 'yproject'); ?></button>
+                    <button type="submit" class="button admin-theme"><?php _e('Ajouter', 'yproject'); ?></button>
                     <input type="hidden" name="action" value="add-check-investment" />
                 </form>
             </div>

@@ -20,12 +20,16 @@
     font-size: 18px;
 }
 
-
 #ndashboard .infobutton:hover{
     color:#2B2C2C;
 }
 #ndashboard .tooltiptext{
     display: none;
+}
+
+.wdgQtip .qtip-content{
+    font-size: 13px;
+    line-height: normal;
 }
 
 #ndashboard .page-dashboard .head {
@@ -41,6 +45,12 @@
     height: 600px;
 }
 
+#ndashboard .admin-theme-block {
+    border-left: 3px solid darkturquoise;
+    background-color: lightgray;
+    padding: 10px;
+}
+
 /*******************************************************************************
 * NAVIGATION BAR
 *******************************************************************************/
@@ -52,10 +62,9 @@
     background-color: #EEECED;
 }
 
-#ndashboard-navbar .badge-notif{
+.badge-notif{
     display: inline-block;
-    padding: 3px 7px;
-    margin-left: 5px;
+    padding: 3px 6px;
     min-width: 10px;
     line-height: 1;
     font-size: 12px;
@@ -89,7 +98,7 @@
 
 #ndashboard-navbar .authorization{
     padding: 15px 0px;
-    background-color: #A4DBDE;
+    background-color: darkturquoise;
     font-style: italic;
     color: white;
 }
@@ -132,6 +141,7 @@
 
 #ndashboard-navbar li a.disabled{
     color: #b6b6b6;
+    cursor: default;
 }
 
 
@@ -151,7 +161,7 @@
 #ndashboard-content .tab-content {
     display: block;
     max-width: 800px;
-    margin: 0px auto 10px auto;
+    margin: 0px auto 30px auto;
     background-color: #F2F2F2;
     padding: 20px 30px;
     border-bottom: 1px solid grey;
@@ -161,15 +171,13 @@
     text-align: center;
 }
 
-
-
 #ndashboard-content .tab-content h2{
     text-align: center;
 }
 
 #ndashboard-content .tab-content-large {
     display: block;
-    margin: 0px auto 10px auto;
+    margin: 0px auto 30px auto;
     background-color: #F2F2F2;
     padding: 20px 30px;
     border-bottom: 1px solid grey;
@@ -185,12 +193,13 @@
 }
 
 #ndashboard .db-form .field.admin-theme {
-    border-left: 3px solid #A4DBDE;
+    border-left: 3px solid darkturquoise;
     background-color: lightgray;
 }
 
-#ndashboard .db-form .field.admin-theme label i.fa-unlock-alt {
-    color:#A4DBDE;
+#ndashboard .db-form .field.admin-theme label i.fa-unlock-alt,
+#ndashboard .admin-theme-block i.fa-unlock-alt {
+    color:darkturquoise;
     margin: 0px 5px 0px 0px;
 }
 
@@ -211,7 +220,7 @@
 }
 
 #ndashboard .db-form .field-container select.timepicker {
-    padding: 3px 2px;
+    padding: 2px 2px;
     width: 52px;
     margin-left: 3px;
 }
@@ -292,13 +301,15 @@
     text-align: center;
 }
 
-#ndashboard input.button.admin{
-    background-color: #A4DBDE;
-    border-color:#A4DBDE;
+#ndashboard input.button.admin-theme,
+#ndashboard a.button.admin-theme,
+#ndashboard button.button.admin-theme{
+    background-color: darkturquoise;
+    border-color:darkturquoise;
 }
 
 #ndashboard .button[disabled] {
-    opacity: 0.2;
+    opacity: 0.5;
     cursor: initial;
 }
 
@@ -439,6 +450,7 @@
     width: 25%;
     padding: 10px 0px;
     min-width: 200px;
+    vertical-align: middle;
 }
 
 #ndashboard .data-blocks .half-card {
@@ -446,12 +458,13 @@
     width: 50%;
     padding: 10px 0px;
     min-width: 400px;
+    vertical-align: middle;
 }
 
 #ndashboard .data-blocks .stat-big-number {
     font-family: "BebasNeue";
     font-size: 80px;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 #ndashboard .data-blocks .stat-little-number {
@@ -615,6 +628,23 @@
 #page-contacts .wdg-datatable table.dataTable tfoot th,
 #page-contacts .wdg-datatable table.dataTable tfoot td {
     padding: 8px 8px 15px;
+}
+
+#page-contacts .wdg-datatable table.dataTable thead th.nopadding,
+#page-contacts .wdg-datatable table.dataTable thead td.nopadding {
+    padding: 5px 2px;
+    cursor: default;
+    background-image: none;
+}
+
+#page-contacts .wdg-datatable table.dataTable tbody th.nopadding,
+#page-contacts .wdg-datatable table.dataTable tbody td.nopadding {
+    padding: 5px 2px;
+}
+
+#page-contacts .wdg-datatable table.dataTable tfoot th.nopadding,
+#page-contacts .wdg-datatable table.dataTable tfoot td.nopadding {
+    padding: 8px 0px 15px;
 }
 
 #page-contacts .wdg-datatable table.dataTable tfoot tr{

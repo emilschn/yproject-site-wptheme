@@ -3,15 +3,17 @@
  * Template Name: Projet Tableau de bord
  *
  */
-$campaign_id = filter_input(INPUT_GET, 'campaign_id');
-$success_msg = filter_input(INPUT_GET, 'success_msg');
-WDGFormProjects::form_approve_payment();
-WDGFormProjects::form_cancel_payment();
 ?>
 
 <?php get_header(); ?>
 
-<?php if ( isset($success_msg) && !empty($success_msg) ): ?>
+<?php
+$campaign_id = filter_input(INPUT_GET, 'campaign_id');
+$success_msg = filter_input(INPUT_GET, 'success_msg');
+WDGFormProjects::form_approve_payment();
+WDGFormProjects::form_cancel_payment();
+
+if ( isset($success_msg) && !empty($success_msg) ): ?>
 	<div id="lightbox-successmsg" class="wdg-lightbox">
 		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder">
@@ -30,17 +32,18 @@ WDGFormProjects::form_cancel_payment();
 			?>
 		</div>
 	</div>
-<?php endif; ?>
+<?php endif;
 
-<div id="content">
-    <div class="padder">
-<?php
+
 if ($can_modify){
-
-
     $post_campaign = get_post($campaign_id);
     $campaign = atcf_get_campaign($post_campaign);
     $status = $campaign->campaign_status();
+
+    $collecte_or_after = $status==ATCF_Campaign::$campaign_status_collecte || $status==ATCF_Campaign::$campaign_status_funded ;
+    $vote_or_after = $collecte_or_after || $status==ATCF_Campaign::$campaign_status_vote;
+    $preview_or_after = $vote_or_after || $status==ATCF_Campaign::$campaign_status_preview;
+    $validated_or_after = $preview_or_after || $status==ATCF_Campaign::$campaign_status_validated;
 
     $WDGAuthor = new WDGUser(get_userdata($post_campaign->post_author));
     $WDGUser_current = WDGUser::current();
@@ -48,17 +51,14 @@ if ($can_modify){
     $is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
 
     //Stats vues
-    global $stats_views, $stats_views_today;
     $stats_views = 0;
     $stats_views_today = 0;
     if (function_exists('stats_get_csv')) {
-        global $wpdb, $stats_views, $stats_views_today;
         $stats_views = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 365 ) );
         $stats_views_today = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 1 ) );
     }
 
     //Donnees de votes
-    global $vote_results, $nb_jcrois, $nb_votes, $nb_invests;
     $vote_results = WDGCampaignVotes::get_results($campaign_id);
 
     //Recuperation du nombre de j'y crois
@@ -71,22 +71,21 @@ if ($can_modify){
     locate_template( array("projects/dashboard/dashboardutility.php"), true );
     locate_template( array("projects/dashboard/resume.php"), true );
     locate_template( array("projects/dashboard/informations.php"), true );
-    locate_template( array("projects/dashboard/campaign-tab.php"), true );
+    locate_template( array("projects/dashboard/campaign-dbpage.php"), true );
     locate_template( array("projects/dashboard/wallet.php"), true );
     locate_template( array("projects/dashboard/contacts.php"), true );
     locate_template( array("projects/dashboard/news.php"), true );
 
-
     check_change_status();
     page_resume_lightboxes();
 
-    function is_preparing($status){
-        return $status==ATCF_Campaign::$campaign_status_preparing;
-    }
-    function check_enabled_tab($status){
-        if(is_preparing($status)) echo 'class="disabled"';
+    function check_enabled_page(){
+        global $validated_or_after;
+        if(!$validated_or_after) echo 'class="disabled"';
     }?>
 
+<div id="content">
+    <div class="padder">
         <div id="ndashboard"
         data-campaign-id="<?php echo $campaign_id?>">
             <nav id="ndashboard-navbar">
@@ -106,36 +105,45 @@ if ($can_modify){
                     </span></div>
                     <ul>
                         <li>
-                            <a href="#page-resume">
-                                <?php _e("R&eacute;sum&eacute;", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="#resume"
+                               data-target="page-resume">
+                                <?php _e("Vue d'ensemble", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a <?php if (!is_preparing($status)) {print('href="'.get_permalink($campaign_id).'" ');}
-                                check_enabled_tab($status) ?>>
+                            <a <?php if ($validated_or_after) {echo ('href="'.get_permalink($campaign_id).'" ');} ?>
+                                <?php check_enabled_page() ?>>
                                 <?php _e("Pr&eacute;sentation", 'yproject');?>&nbsp;&nbsp;
-                                <i class="fa fa-external-link" aria-hidden="true"></i></a>
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                            </a>
                         </li>
                         <li>
-                            <a href="#page-informations">Informations<div class="badge-notif"></div></a>
+                            <a href="#informations"
+                               data-target="page-informations">
+                                <?php _e("Informations", 'yproject');?><div class="badge-notif"></div>
+                            </a>
                         </li>
                         <li>
-                            <a href="#page-wallet" <?php check_enabled_tab($status) ?>>
+                            <a href="#wallet"
+                                data-target="page-wallet" <?php check_enabled_page() ?>>
                                 <?php _e("Gestion financi&egrave;re", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a href="#page-campaign" <?php check_enabled_tab($status) ?>>
+                            <a href="#campaign"
+                                data-target="page-campaign" <?php check_enabled_page() ?>>
                                 <?php _e("Campagne", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a href="#page-contacts" <?php check_enabled_tab($status) ?>>
+                            <a href="#contacts"
+                                data-target="page-contacts" <?php check_enabled_page() ?>>
                                 <?php _e("Contacts", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a href="#page-news" <?php check_enabled_tab($status) ?>>
+                            <a href="#news"
+                                data-target="page-news" <?php check_enabled_page() ?>>
                                 <?php _e("Actualit&eacute;s", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
@@ -151,20 +159,28 @@ if ($can_modify){
                     <div class="page-dashboard" id="page-resume"><?php print_resume_page(); ?></div>
                     <div class="page-dashboard" id="page-presentation"></div>
                     <div class="page-dashboard" id="page-informations"><?php print_informations_page(); ?></div>
-                    <div class="page-dashboard" id="page-wallet"><?php print_wallet_page(); ?></div>
+                    <div class="page-dashboard" id="page-wallet"  ><?php print_wallet_page(); ?></div>
                     <div class="page-dashboard" id="page-campaign"><?php print_campaign_page(); ?></div>
                     <div class="page-dashboard" id="page-contacts"><?php print_contacts_page()?></div>
                     <div class="page-dashboard" id="page-news"><?php print_news_page(); ?></div>
                     <!--div class="page-dashboard" id="page-support">8</div-->
-                    <div class="page-dashboard" id="page-loading">
-                        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-                        <span class="sr-only">Loading...</span>
+                    <div class="page-dashboard" id="page-loading" style="display:block">
+                        <div class="tab-content">
+                            <h2><i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;Chargement...</h2>
+                        </div>
+                    </div>
+                    <div class="page-dashboard" id="page-redirect">
+                        <div class="tab-content">
+                            <h2><i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;Redirection vers la page projet...</h2>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
-    <?php } ?>
+    <?php } else {
+        _e('Vous n&apos;avez pas la permission pour voir cette page.', 'yproject');
+    }?>
     </div><!-- .padder -->
 </div><!-- #content -->
 

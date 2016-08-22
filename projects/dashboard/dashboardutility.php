@@ -12,7 +12,7 @@ class DashboardUtility
 
             if(!$margin){$text.= 'style="margin:0px"';}
             $text.=' aria-hidden="true"></i>';
-            $text .= '<div class="tooltiptext">'.translate($hovertext, 'yproject').'</div>';
+            $text .= '<span class="tooltiptext">'.translate($hovertext, 'yproject').'</span>';
             if($display){
                 print $text;
             }
@@ -22,8 +22,12 @@ class DashboardUtility
         }
     }
 
-    public static function get_admin_infobutton(){
-        return self::get_infobutton("Vous pouvez modifier ce champ en tant qu'administrateur WDG",false,true,"unlock-alt");
+    public static function get_admin_infobutton($display=false){
+        $infobutton = self::get_infobutton("Vous pouvez modifier ce champ en tant qu'administrateur WDG",false,true,"unlock-alt");
+        if ($display) {
+            echo $infobutton;
+        }
+        return $infobutton;
     }
 
     private static function has_class_icon($left_icon, $right_icon, $include_class_attr=true){
@@ -310,9 +314,16 @@ class DashboardUtility
     public static function create_save_button($id, $display=true){
         //Style/classes à retravailler....
 
-        $text_field ='<p id="'.$id.'_button" class="align-center">
-            <input type="submit" value="'.__("Enregistrer", 'yproject').'" class="button"/>
-            </p>
+        $text_field ='<p class="align-center" id="'.$id.'_button">'
+            .'<button type="submit" class="button">'
+                .'<span class="button-text">'
+                    .__("Enregistrer", 'yproject')
+                .'</span>'
+                .'<span class="button-waiting" hidden>'
+                    .'<i class="fa fa-spinner fa-spin fa-fw"></i>'.__("Enregistrement", 'yproject')
+                .'</span>'
+            .'</button>'
+            .'</p>
             <p id="'.$id.'_loading" class="align-center" hidden>
             <img src="'.get_stylesheet_directory_uri().'/images/loading.gif" alt="chargement"/>
             </p>';

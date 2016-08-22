@@ -97,10 +97,10 @@ function print_resume_page()
     global $stats_views, $stats_views_today;
     global $vote_results, $nb_jcrois, $nb_votes, $nb_invests;
 
-    $status = $campaign->campaign_status();
+    global $status, $collecte_or_after, $vote_or_after, $preview_or_after, $validated_or_after ;
 
     ?>
-    <div class="head"><?php _e('R&eacute;sum&eacute; du projet', 'yproject'); ?></div>
+    <div class="head"><?php _e('Vue d\'ensemble', 'yproject'); ?></div>
     <div id="status-list">
         <?php
         $status_list = ATCF_Campaign::get_campaign_status_list();
@@ -161,10 +161,9 @@ function print_resume_page()
             </div><?php $i++; } ?>
     </div>
 
+    <?php if($preview_or_after){ ?>
     <div class="tab-content" id="stats-tab">
         <div id="block-stats" class="large-block">
-            <h2>Avancement du projet</h2>
-
             <div class="data-blocks">
 
                 <?php if($status==ATCF_Campaign::$campaign_status_preview){ ?>
@@ -230,7 +229,7 @@ function print_resume_page()
                                     <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />
                                     <p style="font-style:italic">Chargement des donn&eacute;es d'investissement,<br/>cela peut prendre un peu de temps</p></div>
                             </div>
-                            <canvas id="canvas-line-block" width="400" height="200" style="display:none"></canvas>
+                            <canvas id="canvas-line-block" width="400" height="200" hidden></canvas>
                         </div><!--
                         --><div class="quart-card">
                             <div class="stat-big-number"><?php echo $campaign->time_remaining_str();?><br/></div>
@@ -256,7 +255,7 @@ function print_resume_page()
                                     <img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />
                                     <p style="font-style:italic">Chargement des donn&eacute;es d'investissement,<br/>cela peut prendre un peu de temps</p></div>
                             </div>
-                            <canvas id="canvas-line-block" width="400" height="200" style="display:none"></canvas>
+                            <canvas id="canvas-line-block" width="400" height="200" hidden></canvas>
                         </div>
                     </div>
                 <?php } ?>
@@ -296,6 +295,7 @@ function print_resume_page()
             </script>
         </div>
     </div>
+    <?php } ?>
 
     <div class="tab-content" id="next-status-tab">
         <?php if($status == ATCF_Campaign::$campaign_status_preparing
@@ -466,9 +466,7 @@ function print_resume_page()
                 "value"=> $campaign->can_go_next_status(),
                 "editable"=> $is_admin,
                 "admin_theme"=>$is_admin,
-                "visible"=>$is_admin && ($status==ATCF_Campaign::$campaign_status_validated ||
-                        $status==ATCF_Campaign::$campaign_status_preview ||
-                        $status==ATCF_Campaign::$campaign_status_vote ),
+                "visible"=>$is_admin && $validated_or_after,
                 "placeholder"=>"http://....."
             ));
 

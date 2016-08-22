@@ -2758,21 +2758,6 @@ span#extra-comment-image{
 #dashboard #block-news .nb-comments-widget{
     padding: 4px;
 }
-
-#dashboard #block-team #team-list{
-    padding: 0px 25px;
-    list-style: none;
-    text-align: left;
-}
-
-#dashboard #block-team #team-list li{
-    padding: 7px 0px;
-    border-bottom: 1px solid #808080;
-    margin: 5px 0px;
-}
-
-#dashboard #block-team #team-list .wait-delete {
-    background: #333 url("images/chargement.gif") center no-repeat !important;
 }*/
 
 .wpb_content_element .wpb_accordion_wrapper .wpb_accordion_header, .wpb_content_element.wpb_tabs .wpb_tour_tabs_wrapper .wpb_tab {

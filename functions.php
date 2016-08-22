@@ -76,7 +76,10 @@ function yproject_enqueue_script(){
 
 	//Fichiers du tableau de bord (CSS, Fonctions Ajax et scripts de Datatable)
 	if ($is_dashboard_page && $can_modify) {
-		wp_enqueue_style( 'font-awesome' );
+		wp_deregister_style( 'font-awesome' );
+		wp_register_style('font-awesome', (dirname( get_bloginfo('stylesheet_url')).'/_inc/css/font-awesome.min.css'));
+		wp_enqueue_style('font-awesome');
+
 		wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery'), $current_version);
 		wp_enqueue_script('wdg-project-dashboard-i18n-fr', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/i18n/datepicker-fr.js', array('jquery', 'jquery-ui-datepicker'), $current_version);
 		wp_enqueue_style( 'dashboard-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dashboard.css', null, $current_version, 'all');
@@ -104,18 +107,6 @@ function yproject_enqueue_script(){
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
 	wp_enqueue_script( 'sharer-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/sharer.min.js', array(), true, true);
 //	wp_enqueue_script( 'wdg-ux-helper', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-ux-helper.js', array('wdg-script'));
-
-	//Ne charge les scripts de tableau que si tableau de bord
-	if($post->post_name=='tableau-de-bord' || $is_admin_page){
-		wp_enqueue_script( 'datatable-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/jquery.dataTables.js', array('wdg-script'), true, true);
-		wp_enqueue_style('datatable-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/jquery.dataTables.css', null, false, 'all');
-		//wp_enqueue_script( 'datatable-resp-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.responsive.js', array('wdg-script'), true, true);
-		//wp_enqueue_style('datatable-resp-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.responsive.css', null, false, 'all');
-		wp_enqueue_script( 'datatable-colvis-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colVis.js', array('wdg-script'), true, true);
-		wp_enqueue_style('datatable-colvis-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.colVis.css', null, false, 'all');
-		wp_enqueue_script( 'datatable-colReorder-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colReorder.js', array('wdg-script'), true, true);
-		wp_enqueue_style('datatable-colReorder-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.colReorder.css', null, false, 'all');
-	}
 	
 	if ($is_campaign_page && $campaign->edit_version() >= 3) {
 		if ($is_campaign && $campaign->edit_version() >= 3 && !$is_dashboard_page) {
