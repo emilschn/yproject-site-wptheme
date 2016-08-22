@@ -289,6 +289,9 @@ div#content.version-3 div.project-pitch-video {
 div#content.version-3 div.project-pitch-video iframe {
 	max-width: 100%;
 }
+div#content.version-3.editing.scrolled div#wdg-edit-summary, div#content.version-3.editing.scrolled div#wdg-edit-video-zone {
+	margin-top: -117px;
+}
 
 /*******************************************************************************
 * REWARDS

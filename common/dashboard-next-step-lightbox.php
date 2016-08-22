@@ -74,13 +74,13 @@ $campaign = atcf_get_current_campaign();
             <li><label><input type="checkbox" class="checkbox-next-step" id="cbman33">
                 Je suis prêt &agrave; faire chauffer mon t&eacute;l&eacute;phone dans les minutes qui viennent</label></li>
 			<li><label><input type="checkbox" class="checkbox-next-step" id="cbvotefin" disabled
-                <?php if(($campaign->is_vote_validated() && $campaign->end_vote_remaining()<=0)|| $campaign->can_go_next_step()){echo "checked";}
+                <?php if(($campaign->is_vote_validated() && $campaign->end_vote_remaining()<=0)|| $campaign->can_go_next_status()){echo "checked";}
                 ?>>
                 Le vote est termin&eacute; et le projet a &eacute;t&eacute; valid&eacute;</label></li>
 
         <?php } ?>
         <li><label><input type="checkbox" class="checkbox-next-step" id="cbcannext" disabled 
-            <?php if ($campaign->can_go_next_step()) {echo 'checked ';} ?>>
+            <?php if ($campaign->can_go_next_status()) {echo 'checked ';} ?>>
             L'&eacute;quipe WE DO GOOD a valid&eacute; pour passer &agrave; l'&eacute;tape suivante</label></li>
     </ul>
     <div class="list-button">

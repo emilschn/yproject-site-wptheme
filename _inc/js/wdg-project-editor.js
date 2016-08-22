@@ -229,7 +229,7 @@ var ProjectEditor = (function($) {
 			$(ProjectEditor.elements[property].elementId).after(newElement_1);
     		$("#wdg-edit-picture-head-next").css("display","none");
 
-			var newElement_1_input = '<input type="input" id="wdg-edit-picture-head-next_update" value="Télécharger une image"/>';
+			var newElement_1_input = '<button id="wdg-edit-picture-head-next_update">Télécharger une image</button>';
 			$(ProjectEditor.elements[property].elementId).after(newElement_1_input);
 			$("#wdg-edit-picture-head-next_update").css("left", $(".project-banner-content").position().left);
 			$("#wdg-edit-picture-head-next_update").css("top", $(".project-banner-content").position().top);

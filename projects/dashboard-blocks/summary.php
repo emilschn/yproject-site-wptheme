@@ -6,7 +6,7 @@ function check_next_step(){
     global $status,
              $campaign,
              $post_campaign;
-     if (isset($_POST['next_step'])&& ($_POST['next_step']==1 || $_POST['next_step']==2) && $campaign->can_go_next_step()){
+     if (isset($_POST['next_step'])&& ($_POST['next_step']==1 || $_POST['next_step']==2) && $campaign->can_go_next_status()){
 
          //Préparation -> Avant-premiere
          if ($status==ATCF_Campaign::$campaign_status_preparing){
@@ -126,7 +126,7 @@ function print_block_summary() {
                 if(isset($_GET['validate_next_step'])){
                     $campaign->set_validation_next_step($_GET['validate_next_step']);
                 }
-                if($campaign->can_go_next_step()){?>
+                if($campaign->can_go_next_status()){?>
                     <a href="?campaign_id=<?php echo $campaign_id?>&validate_next_step=0" class="button">&cross; Ne plus autoriser &agrave; passer &agrave; l'&eacute;tape suivante</a>
                 <?php } else {?>
                     <a href="?campaign_id=<?php echo $campaign_id?>&validate_next_step=1" class="button">&check; Autoriser &agrave; passer &agrave; l'&eacute;tape suivante</a>
