@@ -266,9 +266,7 @@ var ProjectEditor = (function($) {
 			$("#extra-comment").css("z-index", "150");
     		$("#extra-comment").css("position","absolute");
 
-
-			$("#wdg-move-picture-head").css("left", 0);
-			$("#wdg-move-picture-head").css("top", $("#extra-comment").position().top + $("#extra-comment").outerHeight(true));
+			$("#wdg-move-picture-head").hide();
 
 			$("#wdg-edit-picture-head-next_cancel").click(function() {
 				ProjectEditor.validateInputDone(true);
@@ -277,10 +275,9 @@ var ProjectEditor = (function($) {
 				$("#wdg-edit-picture-head-next_update").remove();
 				$("#wdg-edit-picture-head-next_valid").remove();
 				$("#wdg-edit-picture-head-next_cancel").remove();
+				$("#wdg-move-picture-head").show();
 				$("#extra-comment").remove();
 				$("#project-banner-src").remove();
-				$("#wdg-move-picture-head").css("left", $("#wdg-edit-picture-head").outerWidth(true));
-				$("#wdg-move-picture-head").css("top", 0);
 				$('.project-banner-img').append('<img id="project-banner-src" src="'+url_image_start+'">');
 				$(".project-banner-content").css("background", "none");
 			});
@@ -296,13 +293,13 @@ var ProjectEditor = (function($) {
 				$("#wdg-edit-picture-head-next_update").remove();
 				$("#wdg-edit-picture-head-next_valid").remove();
 				$("#wdg-edit-picture-head-next_cancel").remove();
-				$("#extra-comment").remove();
 				$("#wdg-move-picture-head").css("left", $("#wdg-edit-picture-head").outerWidth(true));
 				$("#wdg-move-picture-head").css("top", 0);
+				$('.project-banner-img').css("top", 0);
+				$("#extra-comment").remove();
 				$("#wdg-validate-picture-wait").attr('style',' border: medium none; background-color:#41ACB1; font-size: 0px; display:inline-block; z-index:2001;');
-				if($("#wdg-move-picture-head").hasClass("edit-button-validate"))
-					$("#wdg-move-picture-head").click();
-  				$.ajax({
+				
+				$.ajax({
 					'type' : "POST",
 					'url' :ajax_object.ajax_url,
 					'data': formData,
@@ -312,6 +309,7 @@ var ProjectEditor = (function($) {
 				}).done(function(result) {
 					$("#wdg-edit-"+property).show();
 					$("#wdg-validate-picture-wait").attr('style','display:none;');
+					$("#wdg-move-picture-head").show();
 					ProjectEditor.validateInputDone(result);
 
 				});
@@ -552,8 +550,8 @@ var ProjectEditor = (function($) {
 			$("#wdg-input-"+property).width(width);
 			$("#wdg-input-"+property).height($(ProjectEditor.elements[property].elementId).height());
 			
-                        $("#wdg-input-"+property).css("font-family","Arial,sans-serif");
-                        $("#wdg-input-"+property).css("font-size","14px");
+			$("#wdg-input-"+property).css("font-family","Arial,sans-serif");
+			$("#wdg-input-"+property).css("font-size","14px");
                         
 			var buttonValidate = '<div id="wdg-validate-'+property+'" class="edit-button-validate" data-property="'+property+'"></div>';
 			$("#wdg-input-"+property).after(buttonValidate);
@@ -684,6 +682,7 @@ var ProjectEditor = (function($) {
 		moveHeaderPicture:function() {
 			$('.project-banner-img').draggable({ axis: "y" });
 			$('.project-banner-img').draggable('enable');
+			$('#wdg-edit-picture-head').hide();
 			$('#wdg-move-picture-head').addClass("edit-button-validate");
 			$('#wdg-move-picture-head').removeClass('move-button');
 			$(".project-banner-content").css({ opacity: 0 });
@@ -694,14 +693,13 @@ var ProjectEditor = (function($) {
 
 		//Enregistrement de la position de l'image dans le header
 		saveHeaderPicturePosition:function(){
-			$('.project-banner-img').draggable('disable');
+//			$('.project-banner-img').draggable('disable');
 			$('#wdg-move-picture-head').addClass('wait-button');
 			$('#wdg-move-picture-head').removeClass("edit-button-validate");
 			$(".project-banner-content").css({ opacity: 1 });
-			$(".project-banner-content").css({ 'z-index': 2 });
+			$(".project-banner-content").css({ 'z-index': "auto" });
 			$(".project-banner-deco").css({ opacity: 1 });
-			$(".project-banner-deco").css({ 'z-index': 2 });
-			$("#wdg-edit-picture-head-next_valid").click();
+			$(".project-banner-deco").css({ 'z-index': "auto" });
 			$.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,
@@ -713,6 +711,7 @@ var ProjectEditor = (function($) {
 			}).done(function() {
 				$('#wdg-move-picture-head').addClass('move-button');
 				$('#wdg-move-picture-head').removeClass('wait-button');
+				$('#wdg-edit-picture-head').show();
 			});
 		},
 
