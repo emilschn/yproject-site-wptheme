@@ -34,7 +34,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 						<td>Ville</td>
 						<td>Nb projets suivis</td>
 						<td>Nb projets votés</td>
-						<td>Nb projets investis</td>
+						<td>Nb investissements</td>
 						<td>Montants investis</td>
 					</tr>
 				</thead>
@@ -48,7 +48,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 						<td>Ville</td>
 						<td>Nb projets suivis</td>
 						<td>Nb projets votés</td>
-						<td>Nb projets investis</td>
+						<td>Nb investissements</td>
 						<td>Montants investis</td>
 					</tr>
 				</tfoot>
@@ -56,17 +56,18 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 				<tbody>
 					<?php $user_list = get_users(); ?>
 					<?php foreach ($user_list as $user): ?>
-						<?php 
-						$count_follow = $wpdb->get_var( "SELECT count(campaign_id) FROM ".$table_jcrois." WHERE user_id = ".$user->ID );
-						$count_votes = $wpdb->get_var( "SELECT count(post_id) FROM ".$table_vote." WHERE user_id = ".$user->ID );
-						$count_invest = $wpdb->get_var( "SELECT count(p.ID) FROM ".$wpdb->posts." p LEFT JOIN ".$wpdb->postmeta." pm ON p.ID = pm.post_id WHERE p.post_type='edd_payment' AND p.post_status='publish' AND pm.meta_key = '_edd_payment_user_id' AND pm.meta_value = ".$user->ID );
-						$request = "SELECT sum(pm2.meta_value) "
-									. "FROM ".$wpdb->postmeta." pm2 "
-									. "LEFT JOIN ".$wpdb->posts." p ON p.ID = pm2.post_id "
-									. "LEFT JOIN ".$wpdb->postmeta." pm ON pm2.post_id = pm.post_id "
-									. "WHERE p.post_type='edd_payment' AND p.post_status='publish' AND pm2.meta_key = '_edd_payment_total' "
-									. "AND pm.meta_key = '_edd_payment_user_id' AND pm.meta_value = " . $user->ID;
-						$amount_invest = $wpdb->get_var( $request );
+						<?php
+						$sql = "SELECT COUNT(post_meta.meta_value) AS nb_invest, SUM(post_meta.meta_value) AS sum_invest, ";
+							$sql .= "(SELECT COUNT(jycrois.campaign_id) FROM ".$table_jcrois." jycrois WHERE jycrois.user_id = " .$user->ID. ") AS nb_follow, ";
+							$sql .= "(SELECT COUNT(vote.post_id) FROM ".$table_vote." vote WHERE vote.user_id = " .$user->ID. ") AS nb_votes ";
+						$sql .= "FROM ".$wpdb->postmeta." post_meta ";
+						$sql .= "LEFT JOIN ".$wpdb->posts." post ON post.ID = post_meta.post_id ";
+						$sql .= "LEFT JOIN ".$wpdb->postmeta." post_meta2 ON post_meta.post_id = post_meta2.post_id ";
+						$sql .= "WHERE post.post_type='edd_payment' AND post.post_status='publish' AND post_meta.meta_key = '_edd_payment_total' ";
+						$sql .= "AND post_meta2.meta_key = '_edd_payment_user_id' AND post_meta2.meta_value = " . $user->ID;
+						
+						$user_results = $wpdb->get_results( $sql );
+						$user_result = $user_results[0];
 						?>
 						<tr>
 							<td><?php echo $user->user_firstname . ' ' . $user->user_lastname; ?></td>
@@ -75,10 +76,10 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 							<td><?php echo $user->get('user_birthday_year') . '-' . $user->get('user_birthday_month') . '-' . $user->get('user_birthday_day'); ?></td>
 							<td><?php echo $user->get('user_postal_code'); ?></td>
 							<td><?php echo $user->get('user_city'); ?></td>
-							<td><?php echo $count_follow; ?></td>
-							<td><?php echo $count_votes; ?></td>
-							<td><?php echo $count_invest; ?></td>
-							<td><?php echo $amount_invest; ?></td>
+							<td><?php echo $user_result->nb_follow; ?></td>
+							<td><?php echo $user_result->nb_votes; ?></td>
+							<td><?php echo $user_result->nb_invest; ?></td>
+							<td><?php echo $user_result->sum_invest; ?></td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>
