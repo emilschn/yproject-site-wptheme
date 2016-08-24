@@ -2,15 +2,14 @@
 
 class DashboardUtility
 {
-    public static function get_infobutton($hovertext, $display=false, $margin=true, $other_icon=""){
+    public static function get_infobutton($hovertext, $display=false, $other_icon=""){
         if(!empty($hovertext)) {
             if(empty($other_icon)){
-                $text = '<i class="fa fa-question-circle infobutton"';
+                $text = '<i class="fa fa-fw fa-question-circle infobutton"';
             } else {
-                $text = '<i class="fa fa-'.$other_icon.' infobutton"';
+                $text = '<i class="fa fa-fw fa-'.$other_icon.' infobutton"';
             }
 
-            if(!$margin){$text.= 'style="margin:0px"';}
             $text.=' aria-hidden="true"></i>';
             $text .= '<span class="tooltiptext">'.translate($hovertext, 'yproject').'</span>';
             if($display){
@@ -23,7 +22,7 @@ class DashboardUtility
     }
 
     public static function get_admin_infobutton($display=false){
-        $infobutton = self::get_infobutton("Vous pouvez modifier ce champ en tant qu'administrateur WDG",false,true,"unlock-alt");
+        $infobutton = self::get_infobutton("Vous pouvez voir ce champ en tant qu'administrateur WDG",false,"unlock-alt");
         if ($display) {
             echo $infobutton;
         }
@@ -63,7 +62,10 @@ class DashboardUtility
      *              "datetime"  champs pour choisir une date et une heure
      *              "link"      champ de texte spécialement pour une URL
      *              "check"     case à cocher
+     *              "textarea"  champ de texte étendu
      *          ['value']       string Valeur initiale du champ
+     *          ['default_display'] string Valeur affichée par défaut (si non-éditable)
+     *
      *          ['placeholder'] string placeholder du champ
      *          ['prefix']      string texte affiché juste avant le champ
      *          ['suffix']      string texte affiché juste après le champ
@@ -94,12 +96,15 @@ class DashboardUtility
         if(isset($params["warning"])){$warning=$params["warning"];}else{$warning=false;};
 
         $initial_value = $params["value"];
+        $default_initial_value = $params["default_display"];
+
         $type = $params["type"];
         $placeholder=$params["placeholder"];
         if(empty($placeholder) && ($type=='date' || $type=='datetime' )){$placeholder="aaaa-mm-jj";}
         $prefix=$params["prefix"];
         $suffix=$params["suffix"];
 
+        //Icone (or default icon according to the input type)
         $left_icon = $right_icon = "";
         if(isset($params["left_icon"])){
             $left_icon=$params["left_icon"];
@@ -151,7 +156,7 @@ class DashboardUtility
         $text_field .= translate($label,'yproject')
             .DashboardUtility::get_infobutton($infobubble);
         if($warning && $editable){
-            $text_field .= self::get_infobutton("Attention ce champ est normalement géré automatiquement, manipulez-le avec prudence",false,true,"exclamation-triangle");}
+            $text_field .= self::get_infobutton("Attention ce champ est normalement géré automatiquement, manipulez-le avec prudence",false,"exclamation-triangle");}
         $text_field .='</label>';
 
         if($type!='check') {
@@ -173,7 +178,16 @@ class DashboardUtility
                             . 'placeholder="' . $placeholder . '" '
                             . 'value="' . $initial_value . '" ';
                         $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
-                        $text_field .= '" />';
+                        $text_field .= '">';
+                        break;
+                    case 'textarea':
+                        $text_field .= '<textarea rows="3" '
+                            . 'name="' . $id . '" '
+                            . 'id="update_' . $id . '" '
+                            . 'placeholder="' . $placeholder . '" ';
+                        $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon)
+                            .'">'
+                            .$initial_value.'</textarea>';
                         break;
                     case 'number':
                         $text_field .= '<input type="number" '
@@ -272,11 +286,17 @@ class DashboardUtility
                         $text_field .= $initial_value;
                 }
             } else {
+                $text_field .= '<span class="non-editable">';
                 switch ($type) {
                     case 'text':
                     case 'number':
                     case 'editor':
-                        $text_field .= $initial_value;
+                    case 'textarea':
+                        if(empty($initial_value)){
+                            $text_field .= $default_initial_value;
+                        } else {
+                            $text_field .= $initial_value;
+                        }
                         break;
                     case 'select':
                         $text_field .= translate($options_list[$initial_value], 'yproject');
@@ -290,11 +310,13 @@ class DashboardUtility
                     case 'link':
                         if (!empty($initial_value)) {
                             $text_field .= '<a target="_blank" href="' . $initial_value . '">' . $initial_value .
-                                '&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>';
+                                '&nbsp;<i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>';
+                        } else {
+                            $text_field .= $default_initial_value;
                         }
                         break;
                 }
-
+                $text_field .= '</span>';
             }
             $text_field .= '</span>' . $suffix . '</span>';
             }
@@ -312,21 +334,16 @@ class DashboardUtility
      * @return string le code HTML du bouton
      */
     public static function create_save_button($id, $display=true){
-        //Style/classes à retravailler....
-
         $text_field ='<p class="align-center" id="'.$id.'_button">'
             .'<button type="submit" class="button">'
                 .'<span class="button-text">'
                     .__("Enregistrer", 'yproject')
                 .'</span>'
                 .'<span class="button-waiting" hidden>'
-                    .'<i class="fa fa-spinner fa-spin fa-fw"></i>'.__("Enregistrement", 'yproject')
+                    .'<i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;'.__("Enregistrement", 'yproject')
                 .'</span>'
             .'</button>'
-            .'</p>
-            <p id="'.$id.'_loading" class="align-center" hidden>
-            <img src="'.get_stylesheet_directory_uri().'/images/loading.gif" alt="chargement"/>
-            </p>';
+            .'</p>';
 
         if($display){
             echo $text_field;

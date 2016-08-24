@@ -4,7 +4,10 @@ function print_campaign_page()
 {
     global $campaign_id, $campaign, $post_campaign,
            $WDGAuthor, $WDGUser_current,
-           $is_admin, $is_author;
+           $is_admin, $is_author,
+
+            $status, $collecte_or_after, $vote_or_after, $preview_or_after, $validated_or_after ;
+
     ?>
 
     <div class="head"><?php _e('Organisation de la campagne', 'yproject'); ?></div>
@@ -47,7 +50,8 @@ function print_campaign_page()
                 "value"=>new DateTime($campaign->end_vote_date()),
                 "editable"=>$is_admin,
                 "admin_theme"=>$is_admin,
-                "warning"=>true
+                "warning"=>true,
+                "visible"=>$is_admin || $vote_or_after
             ));
 
             DashboardUtility::create_field(array(
@@ -58,7 +62,8 @@ function print_campaign_page()
                 "editable"=>false,
                 "admin_theme"=>$is_admin,
                 "editable"=>$is_admin,
-                "warning"=>true
+                "warning"=>true,
+                "visible"=>$is_admin || $collecte_or_after
             ));
 
             DashboardUtility::create_field(array(
@@ -68,7 +73,8 @@ function print_campaign_page()
                 "value"=>new DateTime($campaign->end_date()),
                 "admin_theme"=>$is_admin,
                 "editable"=>$is_admin,
-                "warning"=>true
+                "warning"=>true,
+                "visible"=>$is_admin || $collecte_or_after
             ));
 
             DashboardUtility::create_field(array(
@@ -79,7 +85,7 @@ function print_campaign_page()
                 "editable"=> $is_admin,
                 "admin_theme"=>$is_admin,
                 "placeholder"=>"https://docs.google.com/document/d/.....",
-                "visible"=> $is_admin || $campaign->google_doc()!=''
+                "default_display"=>'Le planning n`\'a pas encore été défini'
             ));
 
             DashboardUtility::create_field(array(
@@ -90,7 +96,7 @@ function print_campaign_page()
                 "editable"=> $is_admin,
                 "admin_theme"=>$is_admin,
                 "placeholder"=>"https://docs.google.com/document/d/.....",
-                "visible"=> $is_admin || $campaign->logbook_google_doc()!=''
+                "default_display"=>'Le journal de bord n`\'a pas encore été défini'
             ));
 
             DashboardUtility::create_save_button("campaign_form",$is_admin);

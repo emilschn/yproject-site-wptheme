@@ -21,7 +21,7 @@
     
 		<div class="register-section" id="basic-details-section">
 			<div class="on-focus">
-				<input type="text" name="signup_username" placeholder="<?php _e( 'Identifiant', 'yproject' ); ?> *" id="signup_username" value="<?php if (!empty($_POST['signup_username'])) { echo $_POST['signup_username']; } ?>" />
+				<input type="text" name="signup_username" placeholder="<?php _e( 'Identifiant', 'yproject' ); ?> *" id="signup_username" value="<?php if (!empty($_POST['signup_username'])) { echo $_POST['signup_username']; } ?>" autofocus />
 				<div class="tool-tip slideIn right">Choisissez un Identifiant</div>
 			</div>
 

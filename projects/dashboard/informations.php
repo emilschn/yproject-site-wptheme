@@ -8,19 +8,6 @@ function print_informations_page()
            $WDGAuthor, $WDGUser_current,
            $is_admin, $is_author;
 
-    function is_necessary_now($critical_status){
-        global $campaign;
-        $priorities = ATCF_Campaign::get_campaign_status_priority();
-
-        return($priorities[$campaign->campaign_status()] >= $priorities[$critical_status]);
-    }
-
-    function necessary_class($critical_status){
-        if (is_necessary_now($critical_status)){
-            echo ' necessary ';
-        }
-    }
-
     ?>
 
     <div class="head"><?php _e("Informations","yproject");?></div>
@@ -141,6 +128,17 @@ function print_informations_page()
                     "value"=>$campaign->location(),
                     "options_id"=>array_keys($locations),
                     "options_names"=>array_values($locations)
+                ));
+
+
+                DashboardUtility::create_field(array(
+                    "id"=>"project_WDG_notoriety",
+                    "type"=>"textarea",
+                    "label"=>'"Comment avez-vous connu WDG ?"',
+                    "value"=>$campaign->backoffice_WDG_notoriety(),
+                    "visible"=>$is_admin,
+                    "admin_theme"=>$is_admin,
+                    "editable"=>false
                 ));
 
                 DashboardUtility::create_save_button("projectinfo_form"); ?>
@@ -389,7 +387,7 @@ function print_informations_page()
 
                 ?>
 
-                <label>CA pr&eacute;visionnel</label>
+                <div class="field"><label>CA pr&eacute;visionnel</label></div>
                 <ul id="estimated-turnover">
                     <?php
 					$estimated_turnover = $campaign->estimated_turnover();
@@ -458,10 +456,11 @@ function print_informations_page()
                     "value"=> $campaign->contract_doc_url(),
                     "editable"=> $is_admin,
                     "admin_theme"=>$is_admin,
-                    "placeholder"=>"http://....."
+                    "placeholder"=>"http://.....",
+                    "default_display"=>"Le contrat n'est pas encore écrit"
                 ));
 
-                DashboardUtility::create_save_button("contract_form");?>
+                DashboardUtility::create_save_button("contract_form", $is_admin);?>
             </form>
         </div>
     </div>

@@ -11,27 +11,6 @@
     table-layout: fixed;
 }
 
-#ndashboard .infobutton{
-    cursor: help;
-    color: grey;
-    display: inline-block;
-    margin-left: 5px;
-    vertical-align: baseline;
-    font-size: 18px;
-}
-
-#ndashboard .infobutton:hover{
-    color:#2B2C2C;
-}
-#ndashboard .tooltiptext{
-    display: none;
-}
-
-.wdgQtip .qtip-content{
-    font-size: 13px;
-    line-height: normal;
-}
-
 #ndashboard .page-dashboard .head {
     font-family: 'BebasNeue';
     font-size: 35px;
@@ -84,6 +63,20 @@
 #ndashboard-navbar a.active .badge-notif{
     color: #EA4F51;
     background-color: #fff;
+}
+
+#ndashboard-navbar a.admin-theme:before{
+    font-family: FontAwesome;
+    content: "\f023 ";
+    color: darkturquoise;
+    width: 16px;
+    display: inline-block;
+}
+
+#ndashboard-navbar a.active.admin-theme:before{
+    font-family: FontAwesome;
+    content: "\f13e ";
+    color: #fff;
 }
 
 #ndashboard-navbar a:not(.disabled):not(.active):hover .badge-notif{
@@ -181,136 +174,6 @@
     background-color: #F2F2F2;
     padding: 20px 30px;
     border-bottom: 1px solid grey;
-}
-
-/*******************************************************************************
-* Formulaires
-*******************************************************************************/
-#ndashboard .db-form .field {
-    display: block;
-    margin: 10px 0px;
-    padding: 5px;
-}
-
-#ndashboard .db-form .field.admin-theme {
-    border-left: 3px solid darkturquoise;
-    background-color: lightgray;
-}
-
-#ndashboard .db-form .field.admin-theme label i.fa-unlock-alt,
-#ndashboard .admin-theme-block i.fa-unlock-alt {
-    color:darkturquoise;
-    margin: 0px 5px 0px 0px;
-}
-
-#ndashboard .db-form label {
-    display: inline-block;
-    width: 220px;
-    margin: 3px 10px 3px 0px;
-    font-weight: bold;
-}
-
-#ndashboard .db-form label.long-label {
-    width: auto;
-}
-
-#ndashboard .db-form .field-container select{
-    display: inline-block;
-    width: 220px;
-}
-
-#ndashboard .db-form .field-container select.timepicker {
-    padding: 2px 2px;
-    width: 52px;
-    margin-left: 3px;
-}
-
-#ndashboard .db-form .field-container input{
-    display: inline-block;
-    width: 200px;
-}
-
-#ndashboard input:not([type='submit']),
-#ndashboard select{
-    margin: 3px 0px;
-    background: none repeat scroll 0 0 #FFF;
-    border: medium none;
-    padding: 3px 8px;
-}
-
-#ndashboard input:not([type='submit']).error,
-#ndashboard select.error{
-    border: 1px solid red;
-    padding: 2px 7px;
-}
-
-#ndashboard .db-form .field-container input[type='checkbox']{
-    vertical-align: top;
-    margin: 5px 10px 0px 5px;
-    width: initial;
-}
-
-
-#ndashboard .db-form .field-container input.left-icon{
-    padding-left: 24px;
-    width: 188px;
-}
-
-
-#ndashboard .db-form .field-container input.right-icon{
-    padding-right: 24px;
-    width: 188px;
-}
-
-#ndashboard .db-form .field-container input.left-icon.datetime,
-#ndashboard .db-form .field-container input.right-icon.datetime{
-    width: 78px;
-}
-
-
-#ndashboard .db-form .field-container {
-    white-space: nowrap;
-    vertical-align: top;
-
-}
-
-#ndashboard .db-form .field-container .field-value {
-    position: relative;
-}
-
-#ndashboard .db-form .field-container .field-value a {
-    display: inline-block;
-    overflow: hidden;
-    max-width: 250px;
-    text-overflow: ellipsis;
-}
-
-
-#ndashboard .db-form .field-container i.fa.left{
-    position: absolute;
-    top: 1px;
-    left: 5px;
-    width: 14px;
-    text-align: center;
-}
-#ndashboard .db-form .field-container i.fa.right{
-    position: absolute;
-    top: 1px;
-    right: 5px;
-    width: 14px;
-    text-align: center;
-}
-
-#ndashboard input.button.admin-theme,
-#ndashboard a.button.admin-theme,
-#ndashboard button.button.admin-theme{
-    background-color: darkturquoise;
-    border-color:darkturquoise;
-}
-
-#ndashboard .button[disabled] {
-    opacity: 0.5;
-    cursor: initial;
 }
 
 /*******************************************************************************

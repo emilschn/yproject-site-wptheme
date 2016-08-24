@@ -40,15 +40,16 @@ if ($can_modify){
     $campaign = atcf_get_campaign($post_campaign);
     $status = $campaign->campaign_status();
 
-    $collecte_or_after = $status==ATCF_Campaign::$campaign_status_collecte || $status==ATCF_Campaign::$campaign_status_funded ;
-    $vote_or_after = $collecte_or_after || $status==ATCF_Campaign::$campaign_status_vote;
-    $preview_or_after = $vote_or_after || $status==ATCF_Campaign::$campaign_status_preview;
-    $validated_or_after = $preview_or_after || $status==ATCF_Campaign::$campaign_status_validated;
-
     $WDGAuthor = new WDGUser(get_userdata($post_campaign->post_author));
     $WDGUser_current = WDGUser::current();
     $is_admin = $WDGUser_current->is_admin();
     $is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
+
+    $status = $campaign->campaign_status();
+    $collecte_or_after = $status==ATCF_Campaign::$campaign_status_collecte || $status==ATCF_Campaign::$campaign_status_funded ;
+    $vote_or_after = $collecte_or_after || $status==ATCF_Campaign::$campaign_status_vote;
+    $preview_or_after = $vote_or_after || $status==ATCF_Campaign::$campaign_status_preview;
+    $validated_or_after = $preview_or_after || $status==ATCF_Campaign::$campaign_status_validated;
 
     //Stats vues
     $stats_views = 0;
@@ -76,13 +77,24 @@ if ($can_modify){
     locate_template( array("projects/dashboard/contacts.php"), true );
     locate_template( array("projects/dashboard/news.php"), true );
 
-    check_change_status();
+
     page_resume_lightboxes();
 
     function check_enabled_page(){
-        global $validated_or_after;
-        if(!$validated_or_after) echo 'class="disabled"';
-    }?>
+        global $validated_or_after, $is_admin;
+        if($is_admin && !$validated_or_after){
+            echo 'class=admin-theme';
+        } else if(!$validated_or_after) {
+            echo 'class="disabled"';
+        }
+    }
+    function admin_icon_page(){
+        global $validated_or_after, $is_admin;
+        if($is_admin && !$validated_or_after){
+            DashboardUtility::get_admin_infobutton(true);
+        }
+    }
+    ?>
 
 <div id="content">
     <div class="padder">
@@ -92,9 +104,9 @@ if ($can_modify){
                 <div class="nav-padding">
                     <div class="title"><?php echo $post_campaign->post_title; ?></div>
                     <div class="authorization">
-                        <i class="fa fa-user" aria-hidden="true"></i><span>&nbsp;&nbsp;
+                        <i class="fa fa-user" aria-hidden="true"></i><span>&nbsp;&nbsp
                         <?php
-                            if ($is_admin){
+                        if ($is_admin){
                                 echo 'Mode Administrateur';
                             } else if ($is_author) {
                                 echo 'Porteur du projet';
@@ -111,8 +123,8 @@ if ($can_modify){
                             </a>
                         </li>
                         <li>
-                            <a <?php if ($validated_or_after) {echo ('href="'.get_permalink($campaign_id).'" ');} ?>
-                                <?php check_enabled_page() ?>>
+                            <a <?php if ($validated_or_after || $is_admin) {echo ('href="'.get_permalink($campaign_id).'" ');} ?>
+                                <?php check_enabled_page(); ?>>
                                 <?php _e("Pr&eacute;sentation", 'yproject');?>&nbsp;&nbsp;
                                 <i class="fa fa-external-link" aria-hidden="true"></i>
                             </a>
@@ -125,25 +137,29 @@ if ($can_modify){
                         </li>
                         <li>
                             <a href="#wallet"
-                                data-target="page-wallet" <?php check_enabled_page() ?>>
+                                data-target="page-wallet"
+                                <?php check_enabled_page(); ?>>
                                 <?php _e("Gestion financi&egrave;re", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
                             <a href="#campaign"
-                                data-target="page-campaign" <?php check_enabled_page() ?>>
+                                data-target="page-campaign"
+                                <?php check_enabled_page(); ?>>
                                 <?php _e("Campagne", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
                             <a href="#contacts"
-                                data-target="page-contacts" <?php check_enabled_page() ?>>
+                                data-target="page-contacts"
+                                <?php check_enabled_page(); ?>>
                                 <?php _e("Contacts", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
                             <a href="#news"
-                                data-target="page-news" <?php check_enabled_page() ?>>
+                                data-target="page-news"
+                                <?php check_enabled_page(); ?>>
                                 <?php _e("Actualit&eacute;s", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
@@ -154,7 +170,7 @@ if ($can_modify){
                 </div>
             </nav>
 
-            <div id="ndashboard-content">
+            <div id="ndashboard-content" class="db-form">
                 <div class="content-padding">
                     <div class="page-dashboard" id="page-resume"><?php print_resume_page(); ?></div>
                     <div class="page-dashboard" id="page-presentation"></div>
@@ -179,7 +195,9 @@ if ($can_modify){
             </div>
         </div>
     <?php } else {
+        echo '<div class="center margin-height">';
         _e('Vous n&apos;avez pas la permission pour voir cette page.', 'yproject');
+        echo '</div>';
     }?>
     </div><!-- .padder -->
 </div><!-- #content -->

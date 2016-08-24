@@ -20,7 +20,7 @@
 				else $download_id = $downloads[0];
 				$post_campaign = get_post($download_id);
 				$campaign = atcf_get_campaign( $post_campaign );
-				$valid_payment_access = ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish");
+				$valid_payment_access = ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $payment_status == "publish");
 			}
 
 			if ($valid_payment_access) {

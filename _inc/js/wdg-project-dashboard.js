@@ -96,9 +96,6 @@ var WDGProjectDashboard = (function ($) {
                 }
             }
 
-            //Infobulles
-            WDGProjectDashboard.initQtip();
-
             //Datepickers
             $("input.adddatepicker").datepicker({
                 dateFormat: "yy-mm-dd",
@@ -487,39 +484,6 @@ var WDGProjectDashboard = (function ($) {
             }
         },
 
-        initQtip: function(){
-            var i=0;
-            $('#ndashboard .infobutton, #ndashboard .qtip-element').each(function () {
-                if($(this).data("hasqtip")==undefined){
-                    var contentTip;
-                    if($(this).attr("title")!=undefined){
-                        contentTip = $(this).attr("title");
-                    } else {
-                        contentTip = $(this).next('.tooltiptext');
-                    }
-
-                    if (contentTip != ""){
-                        $(this).qtip({
-                            content: contentTip,
-                            position: {
-                                my: 'bottom center',
-                                at: 'top center',
-                            },
-                            style: {
-                                classes: 'wdgQtip qtip-dark qtip-rounded qtip-shadow'
-                            },
-                            hide: {
-                                fixed: true,
-                                delay: 300
-                            }
-                        });
-                        i++;
-                    }
-                }
-            });
-            return i;
-        },
-
         scrollTo: function(target){
             $('html, body').animate(
                 { scrollTop: target.offset().top - 75 },
@@ -653,7 +617,7 @@ var WDGProjectDashboard = (function ($) {
                 $('#ajax-contacts-load').after(result);
                 $('#ajax-loader-img').hide();//On cache la roue de chargement.
 
-                WDGProjectDashboard.initQtip();
+                YPUIFunctions.initQtip();
 
                 //Création du tableau dynamique dataTable
                 WDGProjectDashboard.table = $('#contacts-table').DataTable({

@@ -1,5 +1,5 @@
 <?php
-
+/*
 function check_change_status(){
     global $can_modify,
            $campaign_id, $campaign, $post_campaign,
@@ -82,8 +82,9 @@ function check_change_status(){
             }
         }
     }
+    return $campaign->campaign_status();
 }
-
+*/
 function page_resume_lightboxes(){
     echo do_shortcode('[yproject_statsadvanced_lightbox]');
 }
@@ -138,22 +139,22 @@ function print_resume_page()
                     <?php echo $name.'<br/>';
                     switch ($status_key){
                         case ATCF_Campaign::$campaign_status_preparing:
-                            DashboardUtility::get_infobutton("Pendant la pr&eacute;paration, pr&eacute;sentez votre projet à WDG.",true,false);
+                            DashboardUtility::get_infobutton("Pendant la pr&eacute;paration, pr&eacute;sentez votre projet à WDG.",true);
                             break;
                         case ATCF_Campaign::$campaign_status_validated:
-                            DashboardUtility::get_infobutton("Une fois validé, créez la page du projet qui sera visible sur le site.",true,false);
+                            DashboardUtility::get_infobutton("Une fois validé, créez la page du projet qui sera visible sur le site.",true);
                             break;
                         case ATCF_Campaign::$campaign_status_preview:
-                            DashboardUtility::get_infobutton("L'avant-première fait découvrir votre projet sur le site. Cette étape est facultative",true,false);
+                            DashboardUtility::get_infobutton("L'avant-première fait découvrir votre projet sur le site. Cette étape est facultative",true);
                             break;
                         case ATCF_Campaign::$campaign_status_vote:
-                            DashboardUtility::get_infobutton("Le vote sert à confirmer votre capacité à fédérer vos cercles d'investisseurs",true,false);
+                            DashboardUtility::get_infobutton("Le vote sert à confirmer votre capacité à fédérer vos cercles d'investisseurs",true);
                             break;
                         case ATCF_Campaign::$campaign_status_collecte:
-                            DashboardUtility::get_infobutton("Ici, on récolte les sous",true,false);
+                            DashboardUtility::get_infobutton("Ici, on récolte les sous",true);
                             break;
                         case ATCF_Campaign::$campaign_status_funded:
-                            DashboardUtility::get_infobutton("TOUS LES SOUS!!!!",true,false);
+                            DashboardUtility::get_infobutton("TOUS LES SOUS!!!!",true);
                             break;
                     }
                     ?>
@@ -304,7 +305,8 @@ function print_resume_page()
             || ($status == ATCF_Campaign::$campaign_status_vote && $campaign->end_vote_remaining()<=0)){ ?>
         <h2 style='text-align:center'>Pr&ecirc;t pour la suite ?</h2>
 
-        <form method="POST" action="">
+        <form method="POST" action="<?php echo admin_url( 'admin-post.php?action=change_project_status'); ?>">
+            <input type="hidden" name="campaign_id" value="<?php echo $campaign_id;?>">
             <ul>
                 <?php if ($status == ATCF_Campaign::$campaign_status_preparing) { ?>
                     <p id="desc-preview">(texte à peut-être changer) Pour savoir si votre projet il est bien ou bien
@@ -431,7 +433,7 @@ function print_resume_page()
             <div class="list-button">
                 <?php if ($status == ATCF_Campaign::$campaign_status_preparing && $is_admin){
                     echo DashboardUtility::get_admin_infobutton()?>
-                    <input type="submit" value="Valider le projet" class="button admin" id="submit-go-next-status-admin">
+                    <input type="submit" value="Valider le projet" class="button admin-theme" id="submit-go-next-status-admin">
                 <?php } else if ($status != ATCF_Campaign::$campaign_status_preparing) { ?>
                     <input type="submit" value="C'est parti !" class="button" id="submit-go-next-status">
                 <?php }
@@ -444,8 +446,9 @@ function print_resume_page()
         </form>
         <?php } ?>
 
-
+        <?php if ($is_admin){ ?>
         <form action="" id="statusmanage_form" class="db-form">
+            <hr class="form-separator"/>
             <?php
             DashboardUtility::create_field(array(
                 "id"=>"campaign_status",
@@ -474,6 +477,7 @@ function print_resume_page()
             DashboardUtility::create_save_button("statusmanage-form",$is_admin);
             ?>
         </form>
+    <?php } ?>
     </div>
     <?php
 

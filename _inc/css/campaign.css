@@ -943,10 +943,6 @@ div#content.version-3.scrolled nav.project-navigation ul li {
     right:0px;
 }
 
-.wdg-lightbox .wdg-lightbox-button-close a {
-    background: #333333;
-}
-
 #more_info_other_v3, #invest_sum_v3{
     cursor: text;
 }

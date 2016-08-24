@@ -71,15 +71,15 @@ function yproject_enqueue_script(){
 
     wp_enqueue_style('jquery-ui-wdg',dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery-ui-wdg.css', null, false, 'all');
 
+	wp_deregister_style( 'font-awesome' );
+	wp_register_style('font-awesome', (dirname( get_bloginfo('stylesheet_url')).'/_inc/css/font-awesome.min.css'));
+	wp_enqueue_style('font-awesome');
+
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery'), $current_version);
 	if ($is_campaign) { wp_enqueue_script( 'wdg-project-invest', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign-invest.js', array('jquery'), $current_version); }
 
 	//Fichiers du tableau de bord (CSS, Fonctions Ajax et scripts de Datatable)
 	if ($is_dashboard_page && $can_modify) {
-		wp_deregister_style( 'font-awesome' );
-		wp_register_style('font-awesome', (dirname( get_bloginfo('stylesheet_url')).'/_inc/css/font-awesome.min.css'));
-		wp_enqueue_style('font-awesome');
-
 		wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery'), $current_version);
 		wp_enqueue_script('wdg-project-dashboard-i18n-fr', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/i18n/datepicker-fr.js', array('jquery', 'jquery-ui-datepicker'), $current_version);
 		wp_enqueue_style( 'dashboard-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dashboard.css', null, $current_version, 'all');
@@ -848,7 +848,7 @@ function print_user_projects(){
 									<?php
 									//Boutons pour Annuler l'investissement | Recevoir le code à nouveau
 									//Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
-									if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && $payment['signsquid_status'] != 'Agreed') :
+									if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $payment_status == "publish" && $payment['signsquid_status'] != 'Agreed') :
 									?>
 									<td style="width: 220px;">
 										<?php if (!empty($payment['signsquid_contract_id'])): ?>
@@ -1670,6 +1670,17 @@ function yproject_shortcode_gonextstep_lightbox($atts, $content = '') {
 	echo do_shortcode('[yproject_lightbox id="gonextstep"]' .$content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_gonextstep_lightbox', 'yproject_shortcode_gonextstep_lightbox');
+
+//Shortcode pour Lightbox de création de projet
+function yproject_shortcode_newproject_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('common/newproject-lightbox.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="newproject"]' .$content . '[/yproject_lightbox]');
+	echo do_shortcode('[yproject_register_lightbox]');
+}
+add_shortcode('yproject_newproject_lightbox', 'yproject_shortcode_newproject_lightbox');
 
 function yproject_shortcode_project_vote_count($atts, $content = '') {
     $atts = shortcode_atts( array(
