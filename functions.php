@@ -889,11 +889,11 @@ function add_team_member(){
 			$api_user_id = $wdg_user->get_api_id();
             $project_api_id = $campaign->get_api_id();
             //Ajout à l'API
-			WDGWPREST_Entity_Project::link_user( $project_api_id, $api_user_id, WDGWPREST_Entity_Project::$link_user_type_member );
+			WDGWPREST_Entity_Project::link_user( $project_api_id, $api_user_id, WDGWPREST_Entity_Project::$link_user_type_team );
             
             do_action('wdg_delete_cache', array(
-                    'users/' . $api_user_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_member . '/projects',
-                    'projects/' . $project_api_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_member . '/members'
+                    'users/' . $api_user_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_team . '/projects',
+                    'projects/' . $project_api_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_team . '/members'
             ));
             
             $user = get_userdata($user_wp_id);
@@ -920,10 +920,10 @@ function remove_team_member(){
 	$campaign = new ATCF_Campaign($post_campaign);
     $project_api_id = $campaign->get_api_id();
     //Supprimer dans l'API
-	WDGWPREST_Entity_Project::unlink_user( $project_api_id, $api_user_id, WDGWPREST_Entity_Project::$link_user_type_member );
+	WDGWPREST_Entity_Project::unlink_user( $project_api_id, $api_user_id, WDGWPREST_Entity_Project::$link_user_type_team );
     do_action('wdg_delete_cache', array(
-            'users/' . $api_user_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_member . '/projects',
-            'projects/' . $project_api_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_member . '/members'
+            'users/' . $api_user_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_team . '/projects',
+            'projects/' . $project_api_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_team . '/members'
     ));
     echo "TRUE";
     exit();

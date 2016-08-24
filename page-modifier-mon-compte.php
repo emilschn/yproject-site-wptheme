@@ -264,8 +264,7 @@ $WDGUser_current = WDGUser::current();
 					$can_edit = true;
 					global $current_user;
 					$wdg_current_user = new WDGUser( $current_user->ID );
-					$api_user_id = $wdg_current_user->get_api_id();
-					$organizations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, WDGWPREST_Entity_Organization::$link_user_type_creator);
+					$organizations_list = $wdg_current_user->get_organizations_list();
 					if (!empty($organizations_list)) {
 						foreach ($organizations_list as $organization_item) {
 							$str_organizations .= '<li>';

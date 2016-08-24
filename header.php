@@ -138,7 +138,8 @@
 						<ul>
 							<li class="page_item_out upper"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Param&egrave;tres', 'yproject'); ?></a></li>
 							<?php 
-							$project_list = WDGUser::get_projects_by_id(bp_loggedin_user_id(), TRUE); 
+							$wdg_current_user = WDGUser::current();
+							$project_list = $wdg_current_user->get_projects_list();
 							foreach ($project_list as $project_id) {
 							    if (!empty($project_id)) {
 							    $post_campaign = get_post($project_id);

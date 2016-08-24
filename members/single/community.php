@@ -76,8 +76,7 @@ $page_edit_orga = get_page_by_path('editer-une-organisation');
 $can_edit = (bp_displayed_user_id() == bp_loggedin_user_id() || current_user_can('manage_options'));
 global $current_user;
 $wdg_current_user = new WDGUser( bp_displayed_user_id() );
-$api_user_id = $wdg_current_user->get_api_id();
-$organizations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, WDGWPREST_Entity_Organization::$link_user_type_creator);
+$organizations_list = $wdg_current_user->get_organizations_list();
 if (!empty($organizations_list)) {
 	foreach ($organizations_list as $organization_item) {
 		$str_organizations .= '<li>';

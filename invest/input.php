@@ -153,8 +153,7 @@ if (isset($campaign)):
 						default: 
 							$current_user = wp_get_current_user();
 							$wdg_current_user = new WDGUser( $current_user->ID );
-							$api_user_id = $wdg_current_user->get_api_id();
-							$organizations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, WDGWPREST_Entity_Organization::$link_user_type_creator);
+							$organizations_list = $wdg_current_user->get_organizations_list();
 							?>
 							<input type="submit" value="<?php _e("Investir", 'yproject'); ?>" class="button" />
 							<select id="invest_type" name="invest_type">

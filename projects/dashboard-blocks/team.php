@@ -7,27 +7,26 @@
     <div class="head">&Eacute;quipe</div>
     <div class="body" style="text-align:center">
         <h2><?php _e('Administrateur du projet', 'yproject'); ?></h2>
-        <?php echo $author_data->first_name . ' ' . $author_data->last_name.'<br/>'.
-                bp_core_get_userlink($author_data->ID)?>
+        <?php echo $author_data->first_name . ' ' . $author_data->last_name.'<br/>'. bp_core_get_userlink($author_data->ID); ?>
 
         <h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
         <?php 
-                $project_api_id = $campaign->get_api_id();
-                if (isset($project_api_id)) $team_member_list = WDGWPREST_Entity_Project::get_users_by_role( $project_api_id, WDGWPREST_Entity_Project::$link_user_type_member );
-                if (count($team_member_list) > 0):
+		$project_api_id = $campaign->get_api_id();
+		if (isset($project_api_id)) $team_member_list = WDGWPREST_Entity_Project::get_users_by_role( $project_api_id, WDGWPREST_Entity_Project::$link_user_type_team );
+		if (count($team_member_list) > 0):
         ?>
-                <ul id="team-list">
-        <?php foreach ($team_member_list as $team_member): ?>
-                    <li>
-                        <?php echo $team_member->user_name . ' ' . $team_member->user_surname . ' (' . bp_core_get_userlink($team_member->wp_user_id).')'; ?>
-                        <a class="project-manage-team button" data-action="yproject-remove-member" data-user="<?php echo $team_member->wp_user_id; ?>">x</a>
-                    </li>
-        <?php endforeach; ?>
-                </ul>
+			<ul id="team-list">
+			<?php foreach ($team_member_list as $team_member): ?>
+				<li>
+					<?php echo $team_member->name . ' ' . $team_member->surname . ' (' . bp_core_get_userlink($team_member->wpref).')'; ?>
+					<a class="project-manage-team button" data-action="yproject-remove-member" data-user="<?php echo $team_member->wpref; ?>">x</a>
+				</li>
+			<?php endforeach; ?>
+			</ul>
         <?php	
-                else:
-                        _e('Aucun membre dans l&apos;&eacute;quipe pour l&apos;instant.', 'yproject');
-                endif;
+			else:
+				_e('Aucun membre dans l&apos;&eacute;quipe pour l&apos;instant.', 'yproject');
+			endif;
         ?>
         <input type="text" id="new_team_member_string" style="width: 295px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
         <a class="project-manage-team button" data-action="yproject-add-member">Ajouter</a>

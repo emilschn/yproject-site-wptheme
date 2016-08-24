@@ -195,8 +195,7 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 					global $current_user;
 					$current_organization = $campaign->get_organization();
 					$wdg_current_user = new WDGUser( $post_campaign->post_author );
-					$api_user_id = $wdg_current_user->get_api_id();
-					$organizations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, WDGWPREST_Entity_Organization::$link_user_type_creator);
+					$organizations_list = $wdg_current_user->get_organizations_list();
 					if ($organizations_list) {
 						foreach ($organizations_list as $organization_item) {
 							$selected_str = ($organization_item->id == $current_organization->id) ? 'selected="selected"' : '';

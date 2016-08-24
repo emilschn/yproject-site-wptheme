@@ -46,7 +46,7 @@ $WDGUser_displayed = new WDGUser(bp_displayed_user_id());
 			<?php
 			$wdg_current_user = new WDGUser( bp_displayed_user_id() );
 			$api_user_id = $wdg_current_user->get_api_id();
-			$project_list = WDGWPREST_Entity_User::get_projects_by_role( $api_user_id, WDGWPREST_Entity_Project::$link_user_type_member );
+			$project_list = WDGWPREST_Entity_User::get_projects_by_role( $api_user_id, WDGWPREST_Entity_Project::$link_user_type_team );
 			if (!empty($project_list)) {
 				$has_projects = true;
 				foreach ($project_list as $project) {	    
