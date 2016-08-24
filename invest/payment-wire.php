@@ -15,19 +15,7 @@ if (isset($campaign)): ?>
 
 		<?php _e("Afin de proc&eacute;der au virement, voici les informations bancaires dont vous aurez besoin :", 'yproject'); ?><br />
 		<ul>
-			<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
-				<?php $mangopay_contribution = ypcf_mangopay_get_withdrawalcontribution_by_id($_REQUEST["ContributionID"]); ?>
-				<li><strong><?php _e("Titulaire du compte :", 'yproject'); ?></strong> <?php echo $mangopay_contribution->BankAccountOwner; ?></li>
-				<li><strong>IBAN :</strong> <?php echo $mangopay_contribution->BankAccountIBAN; ?></li>
-				<li><strong>BIC :</strong> <?php echo $mangopay_contribution->BankAccountBIC; ?></li>
-				<li>
-					<strong><?php _e("Code unique (pour identifier votre paiement) :", 'yproject'); ?></strong> <?php echo $mangopay_contribution->GeneratedReference; ?><br />
-					<ul>
-						<li><?php _e("Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !", 'yproject'); ?></li>
-					</ul>
-				</li>
-				
-			<?php elseif ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway): ?>
+			<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway): ?>
 				<?php
 				$WDGUser_current = WDGUser::current();
 				$WDGUser_current->register_lemonway();
@@ -47,11 +35,7 @@ if (isset($campaign)): ?>
 		<br /><br />
 	
 		<?php _e("Une fois le virement effectu&eacute;, cliquez sur", 'yproject'); ?><br /><br />
-		<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
-			<a href="<?php echo get_permalink($page_payment_done->ID) . '?ContributionID=' . $_REQUEST["ContributionID"] . '&campaign_id=' . $campaign->ID . '&meanofpayment=wire'; ?>" class="button"><?php _e("SUIVANT", 'yproject'); ?></a><br /><br />
-			<div class="align-center mangopay-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="Bandeau Mangopay" /></div>
-		
-		<?php elseif ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway): ?>
+		<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway): ?>
 			<a href="<?php echo get_permalink($page_payment_done->ID) . '?campaign_id=' . $campaign->ID . '&meanofpayment=wire'; ?>" class="button"><?php _e("SUIVANT", 'yproject'); ?></a><br /><br />
 
 		<?php endif; ?>

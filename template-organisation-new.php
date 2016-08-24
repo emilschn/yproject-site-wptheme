@@ -6,7 +6,7 @@
 ?>
 
 <?php
-YPOrganisation::submit_new();
+WDGOrganization::submit_new();
 get_header();
 ?>
 

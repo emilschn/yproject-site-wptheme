@@ -77,18 +77,18 @@ $can_edit = (bp_displayed_user_id() == bp_loggedin_user_id() || current_user_can
 global $current_user;
 $wdg_current_user = new WDGUser( bp_displayed_user_id() );
 $api_user_id = $wdg_current_user->get_api_id();
-$organisations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, WDGWPREST_Entity_Organization::$link_user_type_creator);
-if (!empty($organisations_list)) {
-	foreach ($organisations_list as $organisation_item) {
-		$str_organisations .= '<li>';
-		if ($can_edit) { $str_organisations .= '<a href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$organisation_item->organisation_wpref.'">'; }
-		$str_organisations .= $organisation_item->organisation_name; 
-		if ($can_edit) { $str_organisations .= '</a>'; }
-		$str_organisations .= '</li>';
+$organizations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, WDGWPREST_Entity_Organization::$link_user_type_creator);
+if (!empty($organizations_list)) {
+	foreach ($organizations_list as $organization_item) {
+		$str_organizations .= '<li>';
+		if ($can_edit) { $str_organizations .= '<a href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$organization_item->wpref.'">'; }
+		$str_organizations .= $organization_item->name; 
+		if ($can_edit) { $str_organizations .= '</a>'; }
+		$str_organizations .= '</li>';
 	}
 }
-if ($str_organisations != ''): ?>
-	<ul><?php echo $str_organisations; ?></ul>
+if ($str_organizations != ''): ?>
+	<ul><?php echo $str_organizations; ?></ul>
 
 <?php else: ?>
 	<?php _e('Aucune organisation.', 'yproject'); ?>

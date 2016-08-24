@@ -22,24 +22,23 @@ if (is_user_logged_in()) {
 
 $owner_str = '';
 $lightbox_content = '';
-$api_project_id = $campaign->get_api_id();
-$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-if (count($current_organisations) > 0) {
-	$current_organisation = $current_organisations[0];
-	$page_edit_orga = get_permalink(get_page_by_path('editer-une-organisation')->ID) .'?orga_id='.$current_organisation->organisation_wpref;
+$current_organization = $campaign->get_organization();
+if (!empty($current_organization)) {
+	$wdg_organization = new WDGOrganization( $current_organization->wpref );
+	$page_edit_orga = get_permalink(get_page_by_path('editer-une-organisation')->ID) .'?orga_id='.$current_organization->wpref;
 	
-	$owner_str = $current_organisation->organisation_name;
-	$lightbox_content = '<div class="content align-center">'.$current_organisation->organisation_name.'</div>
+	$owner_str = $wdg_organization->get_name();
+	$lightbox_content = '<div class="content align-center">'.$wdg_organization->get_name().'</div>
 		<div class="content align-left">
-		<span>'.__('Forme juridique :', 'yproject').'</span>'.$current_organisation->organisation_legalform.'<br />
-		<span>'.__('Num&eacute;ro SIREN :', 'yproject').'</span>'.$current_organisation->organisation_idnumber.'<br />
-		<span>'.__('Code APE :', 'yproject').'</span>'.$current_organisation->organisation_ape.'<br />
-		<span>'.__('Capital social :', 'yproject').'</span>'.$current_organisation->organisation_capital.'<br /><br />
+		<span>'.__('Forme juridique :', 'yproject').'</span>'.$wdg_organization->get_legalform().'<br />
+		<span>'.__('Num&eacute;ro SIREN :', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
+		<span>'.__('Code APE :', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />
+		<span>'.__('Capital social :', 'yproject').'</span>'.$wdg_organization->get_capital().'<br /><br />
 		</div>
 		<div class="content align-left">
-		<span>'.__('Si&egrave;ge social :', 'yproject').'</span>'.$current_organisation->organisation_address.'<br />
-		<span></span>'.$current_organisation->organisation_postalcode.' '.$current_organisation->organisation_city.'<br />
-		<span></span>'.$current_organisation->organisation_country.'<br />
+		<span>'.__('Si&egrave;ge social :', 'yproject').'</span>'.$wdg_organization->get_address().'<br />
+		<span></span>'.$wdg_organization->get_postal_code().' '.$wdg_organization->get_city().'<br />
+		<span></span>'.$wdg_organization->get_nationality().'<br />
 		</div>';
 } else {
 	$page_edit_orga = get_permalink(get_page_by_path('parametres-projet')->ID) . '?campaign_id=' . $campaign->ID;

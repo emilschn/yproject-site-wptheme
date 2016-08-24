@@ -42,15 +42,15 @@ $campaign = atcf_get_current_campaign();
                     a rempli <a href="<?php echo get_permalink(get_page_by_path('modifier-mon-compte')->ID); ?>">ses informations personnelles</a></label></li>
                 <li><label><input type="checkbox" class="checkbox-next-step" id="cbinfosorga" disabled
                             <?php
-                            $campaign_organisation = $campaign->get_organisation();
-                            if ($campaign_organisation) {
+                            $campaign_organization = $campaign->get_organization();
+                            if ($campaign_organization) {
                                 echo "checked";
                             }?>>
                         J'ai d&eacute;termin&eacute; <a href="<?php echo get_permalink(get_page_by_path('parametres-projet')->ID) . '?campaign_id='.$_GET['campaign_id'] . $params_partial; ?>">l'organisation du projet</a></label></li>
                 <li><label><input type="checkbox" class="checkbox-next-step" id="cborgaauth" disabled
                             <?php
-                            $organization_obj = new YPOrganisation($campaign_organisation->organisation_wpref);
-                            if ($organization_obj->get_lemonway_status() == YPOrganisation::$lemonway_status_registered) { echo "checked"; }
+                            $organization_obj = new WDGOrganization($campaign_organization->wpref);
+                            if ($organization_obj->get_lemonway_status() == WDGOrganization::$lemonway_status_registered) { echo "checked"; }
                             ?>>
                         L'organisation est authentifi&eacute;e.</label></li>
             </div>

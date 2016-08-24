@@ -829,10 +829,10 @@ function print_user_projects(){
 									if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && $payment['signsquid_status'] != 'Agreed') :
 									?>
 									<td style="width: 220px;">
-										<?php if (!empty($payment['signsquid_contract_id'])): ?>
+										<?php /*if (!empty($payment['signsquid_contract_id'])): ?>
 											<?php $page_my_investments = get_page_by_path('mes-investissements'); ?>
 											<a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $payment_id; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
-										<?php endif; ?>
+										<?php endif;*/ ?>
 										
 										<?php $page_cancel_invest = get_page_by_path('annuler-un-investissement'); ?>
 										<a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $payment_id; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
@@ -892,8 +892,8 @@ function add_team_member(){
 			WDGWPREST_Entity_Project::link_user( $project_api_id, $api_user_id, WDGWPREST_Entity_Project::$link_user_type_member );
             
             do_action('wdg_delete_cache', array(
-                    'users/' . $api_user_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
-                    'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
+                    'users/' . $api_user_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_member . '/projects',
+                    'projects/' . $project_api_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_member . '/members'
             ));
             
             $user = get_userdata($user_wp_id);
@@ -921,10 +921,9 @@ function remove_team_member(){
     $project_api_id = $campaign->get_api_id();
     //Supprimer dans l'API
 	WDGWPREST_Entity_Project::unlink_user( $project_api_id, $api_user_id, WDGWPREST_Entity_Project::$link_user_type_member );
-//    BoppLib::unlink_user_from_project($project_api_id, $api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
     do_action('wdg_delete_cache', array(
-            'users/' . $api_user_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
-            'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
+            'users/' . $api_user_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_member . '/projects',
+            'projects/' . $project_api_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_member . '/members'
     ));
     echo "TRUE";
     exit();
@@ -1107,16 +1106,16 @@ function get_investors_table() {
 			
 		<?php foreach ( $investments_list['payments_data'] as $item ) {
 			$post_invest = get_post($item['ID']);
-			$mangopay_id = edd_get_payment_key($item['ID']);
+			$payment_id = edd_get_payment_key($item['ID']);
 			$payment_type = 'Carte';
 			$payment_state = edd_get_payment_status( $post_invest, true );
 			if ($payment_state == "En attente" && $current_wdg_user->is_admin()) {
 				$payment_state .= '<br /><a href="' .get_permalink($page_dashboard->ID) . $campaign_id_param. '&approve_payment='.$item['ID'].'" style="font-size: 10pt;">[Confirmer]</a>';
 				$payment_state .= '<br /><br /><a href="' .get_permalink($page_dashboard->ID) . $campaign_id_param. '&cancel_payment='.$item['ID'].'" style="font-size: 10pt;">[Annuler]</a>';
 			}
-			if (strpos($mangopay_id, 'wire_') !== FALSE) {
+			if (strpos($payment_id, 'wire_') !== FALSE) {
 				$payment_type = 'Virement';
-			} else if ($mangopay_id == 'check') {
+			} else if ($payment_id == 'check') {
 				$payment_type = 'Ch&egrave;que';
 			}
 			$investment_state = 'Validé';
@@ -1125,15 +1124,7 @@ function get_investors_table() {
 
 				$refund_id = get_post_meta($item['ID'], 'refund_id', TRUE);
 				if (isset($refund_id) && !empty($refund_id)) {
-					$refund_obj = ypcf_mangopay_get_refund_by_id($refund_id);
-					$investment_state = 'Remboursement en cours';
-					if ($refund_obj->IsCompleted) {
-						if ($refund_obj->IsSucceeded) {
-							$investment_state = 'Remboursé';
-						} else {
-							$investment_state = 'Remboursement échoué';
-						}
-					}
+					$investment_state = 'Remboursé';
 
 				} else {
 					$refund_id = get_post_meta($item['ID'], 'refund_wire_id', TRUE);
@@ -1146,8 +1137,8 @@ function get_investors_table() {
 			$user_data = get_userdata($item['user']);
 
 			//Liste des données à afficher pour la ligne traitée
-			if(YPOrganisation::is_user_organisation($item['user'])){
-				$orga = new YPOrganisation($item['user']);
+			if(WDGOrganization::is_user_organization($item['user'])){
+				$orga = new WDGOrganization($item['user']);
 				$orga_user = get_user_by('email', $item['email']);
 				$datacolonnes = array(
 					'ORG - ' . $orga->get_name(),
@@ -1519,9 +1510,9 @@ Sélectionner :<br />
 	//Affichage de la liste d'e-mails
 	foreach ($user_list as $user_id => $classes) {
 		if (!empty($user_id)) {
-			if (YPOrganisation::is_user_organisation($user_id)) {
-				$organisation = new YPOrganisation($user_id);
-				$user_data = $organisation->get_creator();
+			if (WDGOrganization::is_user_organization($user_id)) {
+				$organization = new WDGOrganization($user_id);
+				$user_data = $organization->get_creator();
 				//TODO
 				
 			} else {

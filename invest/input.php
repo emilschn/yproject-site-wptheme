@@ -36,15 +36,6 @@ if (isset($campaign)):
 		
 		<div class="invest_step1_currentproject"><?php echo html_entity_decode( $campaign->investment_terms() ); ?></div>
 			
-		<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
-			<?php if (!ypcf_mangopay_is_user_strong_authenticated($test_user->ID) && ypcf_mangopay_is_user_strong_authentication_sent($test_user->ID)): ?>
-				<div class="invest_step1_currentproject" style="text-align: center; font-weight: bold;">
-					<?php _e("Votre pi&egrave;ce d&apos;identit&eacute; est en cours de validation.", "yproject"); ?><br />
-					<?php _e("Un d&eacute;lai maximum de 24h est n&eacute;cessaire &agrave; cette validation.", "yproject"); ?><br />
-					<?php _e("Merci de votre compr&eacute;hension.", "yproject"); ?></div>
-			<?php endif; ?>
-		<?php endif; ?>
-			
 		<?php locate_template( 'invest/input-lightbox-user-infos.php', true ); ?>
 		<?php locate_template( 'invest/input-lightbox-orga-infos.php', true ); ?>
 		
@@ -163,14 +154,14 @@ if (isset($campaign)):
 							$current_user = wp_get_current_user();
 							$wdg_current_user = new WDGUser( $current_user->ID );
 							$api_user_id = $wdg_current_user->get_api_id();
-							$organisations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, WDGWPREST_Entity_Organization::$link_user_type_creator);
+							$organizations_list = WDGWPREST_Entity_User::get_organizations_by_role($api_user_id, WDGWPREST_Entity_Organization::$link_user_type_creator);
 							?>
 							<input type="submit" value="<?php _e("Investir", 'yproject'); ?>" class="button" />
 							<select id="invest_type" name="invest_type">
 								<option value="user"><?php _e("En mon nom (personne physique)", 'yproject'); ?></option>
-								<?php if (count($organisations_list) > 0): ?>
-									<?php foreach ($organisations_list as $organisation_item): ?>
-										<option value="<?php echo $organisation_item->organisation_wpref; ?>"><?php _e("Pour l'organisation", 'yproject'); ?> <?php echo $organisation_item->organisation_name; ?></option>
+								<?php if (count($organizations_list) > 0): ?>
+									<?php foreach ($organizations_list as $organization_item): ?>
+										<option value="<?php echo $organization_item->wpref; ?>"><?php _e("Pour l'organisation", 'yproject'); ?> <?php echo $organization_item->name; ?></option>
 									<?php endforeach; ?>
 									<option value="new_organisation"><?php _e("Pour une nouvelle organisation (personne morale)...", 'yproject'); ?></option>
 								<?php else: ?>
@@ -188,10 +179,6 @@ if (isset($campaign)):
 		
 		</form>
 		<br /><br />
-		
-		<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
-		<div class="align-center mangopay-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="Mangopay" /></div>
-		<?php endif; ?>
 	    
 		
 	<?php else: ?>

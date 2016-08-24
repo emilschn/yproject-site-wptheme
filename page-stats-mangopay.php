@@ -78,10 +78,10 @@ get_header();
 			$debit_orga = 2408;
 			$credit_user = 3090;
 			$amount = 0.22;
-			$organisation_obj = new YPOrganisation($debit_orga);
+			$organization_obj = new WDGOrganization($debit_orga);
 			$WDGUser = new WDGUser($credit_user);
 			$WDGUser->register_lemonway();
-			$transfer = LemonwayLib::ask_transfer_funds( $organisation_obj->get_lemonway_id(), $WDGUser->get_lemonway_id(), $amount );
+			$transfer = LemonwayLib::ask_transfer_funds( $organization_obj->get_lemonway_id(), $WDGUser->get_lemonway_id(), $amount );
 			if ($transfer != FALSE) {
 //				$roi = new WDGROI(1011);
 //				$roi->status = WDGROI::$status_transferred;

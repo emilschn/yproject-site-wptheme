@@ -12,8 +12,6 @@ WDGFormProjects::form_submit_turnover();
 WDGFormProjects::form_submit_account_files();
 $return_roi_payment = WDGFormProjects::form_submit_roi_payment();
 $return_lemonway_card = WDGFormProjects::return_lemonway_card();
-//$result_proceed_roi_list = WDGFormProjects::form_proceed_roi_list($campaign);
-//WDGFormProjects::form_proceed_roi_return();
 WDGFormProjects::form_proceed_roi_transfers();
 ?>
 
@@ -45,15 +43,6 @@ WDGFormProjects::form_proceed_roi_transfers();
 					<span class="errors">Il y a eu une erreur au cours de votre paiement.</span>
 				<?php endif; ?>
 				
-				<?php if ($result_proceed_roi_list != FALSE): ?>
-					Le virement en attente de réception par notre partenaire Mangopay. Rappel du virement à effectuer :<br />
-					- Propriétaire du compte : <?php echo $result_proceed_roi_list->BankAccountOwner; ?><br />
-					- IBAN : <?php echo $result_proceed_roi_list->BankAccountIBAN; ?><br />
-					- BIC : <?php echo $result_proceed_roi_list->BankAccountBIC; ?><br />
-					- Code de référence : <?php echo $result_proceed_roi_list->GeneratedReference; ?><br />
-					- Montant : <?php echo ($result_proceed_roi_list->Amount / 100); ?> &euro;<br />
-				<?php endif; ?>
-				
 				<?php
 				//Init variables utiles
 				$keep_going = TRUE;
@@ -64,11 +53,11 @@ WDGFormProjects::form_proceed_roi_transfers();
 				<h2><?php _e('Porte-monnaie de ', 'yproject'); echo $post_campaign->post_title; ?></h2>
 				<h3><?php echo $current_index; $current_index++; ?> - <?php _e('Associer une organisation &agrave; votre projet', 'yproject'); ?></h3>
 				<?php if ($keep_going) {
-					$current_organisation = $campaign->get_organisation();
-					if (isset($current_organisation)) {
+					$current_organization = $campaign->get_organization();
+					if (isset($current_organization)) {
 						$page_edit_orga = get_page_by_path('editer-une-organisation');
-						echo __('Organisation d&eacute;finie :', 'yproject') . ' ' . $current_organisation->organisation_name . ' <a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">' . __('Editer', 'yproject') . '</a>';
-						$organisation_obj = new YPOrganisation($current_organisation->organisation_wpref);
+						echo __('Organisation d&eacute;finie :', 'yproject') . ' ' . $current_organization->name . ' <a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organization->wpref.'">' . __('Editer', 'yproject') . '</a>';
+						$organization_obj = new WDGOrganization($current_organization->wpref);
 					} else {
 						$keep_going = FALSE;
 						_e('Pas encore d&eacute;fini', 'yproject');
@@ -80,41 +69,11 @@ WDGFormProjects::form_proceed_roi_transfers();
 				<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 				<h3 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php echo $current_index; $current_index++; ?> - <?php _e('Documents d&apos;authentification', 'yproject'); ?></h3>
 					<?php if ($keep_going): ?>
-						<?php if ($campaign->get_payment_provider() == "mangopay"): ?>
-							<?php
-							$organisation_obj->check_strong_authentication();
-							switch ($organisation_obj->get_strong_authentication()) {
-								case 0:
-									$keep_going = FALSE;
-									?>
-									Afin de lutter contre le blanchiment d&apos;argent, vous devez vous authentifier auprès de notre partenaire de paiement.<br />
-									Rendez-vous sur la <a href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref; ?>">page de votre organisation</a>.
-									<?php
-									break;
-								case 1:
-									$display_rib = TRUE;
-									_e('Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Mangopay.', 'yproject');
-									?><br /><br /><?php
-									break;
-								case 5:
-									$keep_going = FALSE;
-									if (WP_IS_DEV_SITE) $keep_going = TRUE;
-									$display_rib = TRUE;
-									$strongauth_status = ypcf_mangopay_get_user_strong_authentication_status($organisation_obj->get_wpref());
-									if ($strongauth_status['message'] != '') { echo $strongauth_status['message'] . '<br />'; }
-									break;
-							} ?>
-
-						<?php elseif ($campaign->get_payment_provider() == "lemonway"): ?>
-							<?php if ($organisation_obj->get_lemonway_status() == YPOrganisation::$lemonway_status_registered): $display_rib = TRUE; ?>
+						<?php if ($campaign->get_payment_provider() == "lemonway"): ?>
+							<?php if ($organization_obj->get_lemonway_status() == WDGOrganization::$lemonway_status_registered): $display_rib = TRUE; ?>
 								<?php _e('Cette organisation est identifi&eacute;e et valid&eacute;e par notre partenaire Lemonway.', 'yproject'); ?>
 							<?php else: ?>
 								Organisation en cours d'identification.
-									<?php /* plus tard :
-								Votre organisation n'est pas encore identifi&eacute;e par notre partenaire Lemonway.<br />
-								Rendez-vous sur la <a href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref; ?>">page de votre organisation</a>.
-									 * 
-									 */ ?>
 							<?php endif; ?>
 									
 						<?php endif; ?>
@@ -124,54 +83,29 @@ WDGFormProjects::form_proceed_roi_transfers();
 						
 				<h3 <?php if (!$display_rib) { ?>class="grey"<?php } ?>><?php echo $current_index; $current_index++; ?> - <?php _e('RIB', 'yproject'); ?></h3>
 				<?php if ($display_rib) { ?>
-					<?php $organisation_obj->submit_bank_info(); ?>
+					<?php $organization_obj->submit_bank_info(); ?>
 					<form action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
 						<label for="org_bankownername"><?php _e('Nom du propri&eacute;taire du compte', 'yproject'); ?></label>
-						<input type="text" name="org_bankownername" value="<?php echo $organisation_obj->get_bank_owner(); ?>" /> <br />
+						<input type="text" name="org_bankownername" value="<?php echo $organization_obj->get_bank_owner(); ?>" /> <br />
 
 						<label for="org_bankowneraddress"><?php _e('Adresse du compte', 'yproject'); ?></label>
-						<input type="text" name="org_bankowneraddress" value="<?php echo $organisation_obj->get_bank_address(); ?>" /> <br />
+						<input type="text" name="org_bankowneraddress" value="<?php echo $organization_obj->get_bank_address(); ?>" /> <br />
 
 						<label for="org_bankowneriban"><?php _e('IBAN', 'yproject'); ?></label>
-						<input type="text" name="org_bankowneriban" value="<?php echo $organisation_obj->get_bank_iban(); ?>" /> <br />
+						<input type="text" name="org_bankowneriban" value="<?php echo $organization_obj->get_bank_iban(); ?>" /> <br />
 
 						<label for="org_bankownerbic"><?php _e('BIC', 'yproject'); ?></label>
-						<input type="text" name="org_bankownerbic" value="<?php echo $organisation_obj->get_bank_bic(); ?>" /> <br />
+						<input type="text" name="org_bankownerbic" value="<?php echo $organization_obj->get_bank_bic(); ?>" /> <br />
 							
 						<input type="hidden" name="action" value="save_iban_infos" />
 						<input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" class="button" />
 					</form>
 				<?php }
 				$can_transfer_to_account = $keep_going;
-				if (!isset($current_organisation) || ($organisation_obj->get_bank_owner() == '') || ($organisation_obj->get_bank_address() == '') || ($organisation_obj->get_bank_iban() == '') || ($organisation_obj->get_bank_bic() == '')) {
+				if (!isset($current_organization) || ($organization_obj->get_bank_owner() == '') || ($organization_obj->get_bank_address() == '') || ($organization_obj->get_bank_iban() == '') || ($organization_obj->get_bank_bic() == '')) {
 					$can_transfer_to_account = FALSE;
 				}
 				?>
-						
-				
-				<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
-				
-				<h3 <?php if (!$can_transfer_to_account) { ?>class="grey"<?php } ?>><?php echo $current_index; $current_index++; ?> - <?php _e('Dans votre porte-monnaie', 'yproject'); ?></h3>
-				<?php
-				if ($can_transfer_to_account) { $organisation_obj->submit_transfer_wallet(); }
-				if (isset($organisation_obj)) { 
-				    $current_wallet_amount = $organisation_obj->get_wallet_amount();
-				} else {
-				    $current_wallet_amount = 0;
-				}
-				?>
-				<span <?php if (!$can_transfer_to_account) { ?>class="grey"<?php } ?>><?php echo $current_wallet_amount; ?> &euro;</span><br /><br />
-				<?php if (!$can_transfer_to_account || $current_wallet_amount == 0): ?>
-				<span class="button disabled"><?php _e('Proc&eacute;der au virement', 'yproject'); ?></span>
-				<?php else: ?>
-					<form action="" method="POST">
-						<input type="hidden" name="mangopaytoaccount" value="1" />
-						<input type="hidden" name="action" value="transfer_to_account" />
-						<input type="submit" class="button" value="<?php _e('Proc&eacute;der au virement', 'yproject'); ?>" />
-					</form>
-				<?php endif; ?>
-				
-				<?php endif; ?>
 					
 				
 				
@@ -363,7 +297,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 				
 				<h2 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php _e('Liste des op&eacute;rations bancaires', 'yproject'); ?></h2>
 				<?php if ($keep_going): ?>
-					<?php $transfers = $organisation_obj->get_transfers();
+					<?php $transfers = $organization_obj->get_transfers();
 					if ($transfers) : ?>
 				
 					<h3>Transferts vers votre compte :</h3>

@@ -26,9 +26,6 @@
 			if ($valid_payment_access) {
 				if (isset($_POST["confirm"]) && $_POST["confirm"] == "confirmed") {
 					//On transfère la somme sur mangopay
-					$new_transfer = ypcf_mangopay_refund_project_to_user($payment_id);
-					update_post_meta($payment_id, 'refund_transfer_id', $new_transfer->ID);
-
 					//On passe le statut du paiement en refund
 					edd_undo_purchase( $download_id, $payment_id );
 					wp_update_post( array( 'ID' => $payment_id, 'post_status' => 'refunded' ) );
@@ -69,8 +66,6 @@
 			<br /><br />
 			
 			&lt;&lt; <a href="<?php bp_loggedin_user_link(); ?>#projects">Mon compte</a><br /><br />
-			
-			<div class="align-center mangopay-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="logo mangopay"/></div><br /><br />
 			
 		</div>
 	</div><!-- .padder -->

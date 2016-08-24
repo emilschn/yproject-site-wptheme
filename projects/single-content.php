@@ -113,15 +113,14 @@ else {
 		<div id="project-owner">
 			<?php 
 			$owner_str = '';
-			$api_project_id = $campaign->get_api_id();
-			$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-			if (count($current_organisations) > 0) {
-				$current_organisation = $current_organisations[0];
-                                $page_edit_orga = get_page_by_path('editer-une-organisation');
+			$current_organization = $campaign->get_organization();
+			if ( !empty( $current_organization ) ) {
+				$wdg_organization = new WDGOrganization( $current_organization->wpref );
+				$page_edit_orga = get_page_by_path('editer-une-organisation');
 				$owner_str = '<div id="orga-edit" data-link-edit="'
-                                        .get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref
+                                        .get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organization->wpref
                                         .'">'
-                                        . '<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation">' . $current_organisation->organisation_name
+                                        . '<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation">' . $wdg_organization->get_name()
                                         . '</a>'
                                         . '</div><br />';
 				$owner_str .= '<div id="wdg-lightbox-project-organisation" class="wdg-lightbox hidden">
@@ -130,17 +129,17 @@ else {
 					<div class="wdg-lightbox-button-close">
 					    <a href="#" class="button">X</a>
 					</div>
-					<div class="content align-center">'.$current_organisation->organisation_name.'</div>
+					<div class="content align-center">'.$wdg_organization->get_name().'</div>
 					<div class="content align-left">
-					<span>Forme juridique :</span>'.$current_organisation->organisation_legalform.'<br />
-					<span>Num&eacute;ro SIREN :</span>'.$current_organisation->organisation_idnumber.'<br />
-					<span>Code APE :</span>'.$current_organisation->organisation_ape.'<br />
-					<span>Capital social :</span>'.$current_organisation->organisation_capital.'<br /><br />
+					<span>Forme juridique :</span>'.$wdg_organization->get_legalform().'<br />
+					<span>Num&eacute;ro SIREN :</span>'.$wdg_organization->get_idnumber().'<br />
+					<span>Code APE :</span>'.$wdg_organization->get_ape().'<br />
+					<span>Capital social :</span>'.$wdg_organization->get_capital().'<br /><br />
 					</div>
 					<div class="content align-left">
-					<span>Si&egrave;ge social :</span>'.$current_organisation->organisation_address.'<br />
-					<span></span>'.$current_organisation->organisation_postalcode.' '.$current_organisation->organisation_city.'<br />
-					<span></span>'.$current_organisation->organisation_country.'<br />
+					<span>Si&egrave;ge social :</span>'.$wdg_organization->get_address().'<br />
+					<span></span>'.$wdg_organization->get_postal_code().' '.$wdg_organization->get_city().'<br />
+					<span></span>'.$wdg_organization->get_nationality().'<br />
 					</div>
 				    </div>
 				</div>';
