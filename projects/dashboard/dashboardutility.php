@@ -333,14 +333,14 @@ class DashboardUtility
      * @param bool $display Affiche ou non le bouton à la fin, affiche par défaut
      * @return string le code HTML du bouton
      */
-    public static function create_save_button($id, $display=true){
+    public static function create_save_button($id, $display=true, $initialText= 'Enregistrer', $waitingText = 'Enregistrement'){
         $text_field ='<p class="align-center" id="'.$id.'_button">'
             .'<button type="submit" class="button">'
                 .'<span class="button-text">'
-                    .__("Enregistrer", 'yproject')
+                    .__($initialText, 'yproject')
                 .'</span>'
                 .'<span class="button-waiting" hidden>'
-                    .'<i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;'.__("Enregistrement", 'yproject')
+                    .'<i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;'.__($waitingText, 'yproject')
                 .'</span>'
             .'</button>'
             .'</p>';
@@ -349,5 +349,14 @@ class DashboardUtility
             echo $text_field;
         }
         return $text_field;
+    }
+
+    public static function check_enabled_page(){
+        global $validated_or_after, $is_admin;
+        if($is_admin && !$validated_or_after){
+            echo 'class=admin-theme';
+        } else if(!$validated_or_after) {
+            echo 'class="disabled"';
+        }
     }
 }

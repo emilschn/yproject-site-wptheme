@@ -78,7 +78,7 @@ if (!is_user_logged_in()){
         "value"=> '',
     ));
 
-    DashboardUtility::create_save_button('newProject');
+    DashboardUtility::create_save_button('newProject', true, "Créer le projet", "Création du projet");
 
     ?></form>
 <?php } ?>

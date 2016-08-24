@@ -1634,7 +1634,7 @@ add_shortcode('yproject_register_lightbox', 'yproject_shortcode_register_lightbo
 // ->TB Stats
 function yproject_shortcode_statsadvanced_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('common/dashboard-statsadvanced-lightbox.php',true);
+            locate_template('projects/dashboard/dashboard-statsadvanced-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
 	echo do_shortcode('[yproject_lightbox id="statsadvanced"]' .$content . '[/yproject_lightbox]');

@@ -11,12 +11,12 @@
                 $status = $campaign->campaign_status();
 
                 /*Import fonctions PHP des blocs*/
-                locate_template( array("projects/dashboard-blocks/summary.php"), true );
-                locate_template( array("projects/dashboard-blocks/stats.php"), true );
-                locate_template( array("projects/dashboard-blocks/community.php"), true );
-                locate_template( array("projects/dashboard-blocks/news.php"), true );
-                locate_template( array("projects/dashboard-blocks/info.php"), true );
-                locate_template( array("projects/dashboard-blocks/team.php"), true );
+                locate_template( array("projects/old-dashboard/summary.php"), true );
+                locate_template( array("projects/old-dashboard/stats.php"), true );
+                locate_template( array("projects/old-dashboard/community.php"), true );
+                locate_template( array("projects/old-dashboard/news.php"), true );
+                locate_template( array("projects/old-dashboard/info.php"), true );
+                locate_template( array("projects/old-dashboard/team.php"), true );
 
                 /*Données de statistiques */
                 block_stats_data();
