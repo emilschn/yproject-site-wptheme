@@ -38,13 +38,13 @@ function print_campaign_page()
             <br/><br/>
         <?php }?>
 
-        <form id="campaign_form" class="db-form">
+        <form id="campaign_form" class="db-form" data-action="save_project_campaigntab">
             <ul class="errors">
 
             </ul>
             <?php
             DashboardUtility::create_field(array(
-                "id"=>"end_vote_date",
+                "id"=>"new_end_vote_date",
                 "type"=>"datetime",
                 "label"=>"Date de fin de vote",
                 "value"=>new DateTime($campaign->end_vote_date()),
@@ -55,7 +55,7 @@ function print_campaign_page()
             ));
 
             DashboardUtility::create_field(array(
-                "id"=>"begin_collecte_date",
+                "id"=>"new_begin_collecte_date",
                 "type"=>"datetime",
                 "label"=>"Date de d&eacute;but de collecte",
                 "value"=>new DateTime($campaign->begin_collecte_date()),
@@ -67,7 +67,7 @@ function print_campaign_page()
             ));
 
             DashboardUtility::create_field(array(
-                "id"=>"end_collecte_date",
+                "id"=>"new_end_collecte_date",
                 "type"=>"datetime",
                 "label"=>"Date de fin de collecte",
                 "value"=>new DateTime($campaign->end_date()),
@@ -78,7 +78,7 @@ function print_campaign_page()
             ));
 
             DashboardUtility::create_field(array(
-                "id"=>"planning_gdrive",
+                "id"=>"new_planning_gdrive",
                 "type"=>"link",
                 "label"=>"Lien du google drive planning",
                 "value"=> $campaign->google_doc(),
@@ -89,7 +89,7 @@ function print_campaign_page()
             ));
 
             DashboardUtility::create_field(array(
-                "id"=>"logbook_gdrive",
+                "id"=>"new_logbook_gdrive",
                 "type"=>"link",
                 "label"=>"Lien du google drive journal de bord",
                 "value"=> $campaign->logbook_google_doc(),
@@ -138,7 +138,7 @@ function print_campaign_page()
         <div style="text-align:center">
             <input type="text" id="new_team_member_string" style="width: 295px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
             <a class="project-manage-team button" data-action="yproject-add-member"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;<?php _e('Ajouter', 'ypoject'); ?></a>
-            <?php DashboardUtility::get_infobutton("Les membres de l'&eacute;quipe peuvent acc&eacute;der au tableau de bord et modifier les param&egrave;tres et la page de projet",true); ?>
+            <?php DashboardUtility::get_infobutton("Les membres de l'&eacute;quipe peuvent acc&eacute;der au tableau de bord, modifier les param&egrave;tres et la page de projet",true); ?>
         </div>
     </div>
 

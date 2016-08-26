@@ -55,74 +55,77 @@ function print_informations_page()
 
     <div id="tab-container">
         <div class="tab-content" id="tab-project">
-            <?php
-            //Gestion des catégories
-            $campaign_categories = get_the_terms($campaign_id, 'download_category');
-            $selected_category = 0;
-            $selected_activity = 0;
-            $terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
-            $term_category_id = $terms_category[0]->term_id;
-            $terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
-            $term_activity_id = $terms_activity[0]->term_id;
-            if ($campaign_categories) {
-                foreach ($campaign_categories as $campaign_category) {
-                    if ($campaign_category->parent == $term_category_id) {
-                        $selected_category = $campaign_category->term_id;
-                    }
-                    if ($campaign_category->parent == $term_activity_id) {
-                        $selected_activity = $campaign_category->term_id;
-                    }
-                }
-            }
-            ?>
-            <form id="projectinfo_form" class="db-form">
+            <form id="projectinfo_form" class="db-form" data-action="save_project_infos">
                 <ul class="errors">
 
                 </ul>
 
                 <?php
                 DashboardUtility::create_field(array(
-                    "id"=>"project_name",
+                    "id"=>"new_project_name",
                     "type"=>"text",
                     "label"=>"Nom du projet",
                     "value"=>$post_campaign->post_title
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"backoffice_summary",
+                    "id"=>"new_backoffice_summary",
                     "type"=>"editor",
-                    "label"=>"R&eacute;sum&eacute; du projet",
+                    "label"=>"D&eacute;crivez-nous votre projet : ",
                     "infobubble"=>"Ces informations seront traitées de manière confidentielle",
                     "value"=>$campaign->backoffice_summary()
                 ));
+
+
+                //Gestion des catégories
+                $campaign_categories = get_the_terms($campaign_id, 'download_category');
+                $selected_category = 0;
+                $selected_activity = 0;
+                $terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
+                $term_category_id = $terms_category[0]->term_id;
+                $terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
+                $term_activity_id = $terms_activity[0]->term_id;
+                if ($campaign_categories) {
+                    foreach ($campaign_categories as $campaign_category) {
+                        if ($campaign_category->parent == $term_category_id) {
+                            $selected_category = $campaign_category->term_id;
+                        }
+                        if ($campaign_category->parent == $term_activity_id) {
+                            $selected_activity = $campaign_category->term_id;
+                        }
+                    }
+                }
                 ?>
-                <div class="field"><label for="categories">Cat&eacute;gorie</label>
-                    <?php wp_dropdown_categories(array(
+
+                <div class="field"><label for="categories">Cat&eacute;gorie</label><!--
+                    --><span class="field-value" data-type="select" data-id="new_project_category"><?php
+                        wp_dropdown_categories(array(
                         'hide_empty' => 0,
                         'taxonomy' => 'download_category',
                         'selected' => $selected_category,
                         'echo' => 1,
                         'child_of' => $term_category_id,
                         'name' => 'categories',
-                        'id' => 'update_project_category'
-                    )); ?></div>
+                        'id' => 'new_project_category'
+                    )); ?></span></div>
 
-                <div class="field"><label for="activities">Secteur d&apos;activit&eacute;</label>
-                    <?php wp_dropdown_categories(array(
+                <div class="field"><label for="activities">Secteur d&apos;activit&eacute;</label><!--
+                    --><span class="field-value" data-type="select" data-id="new_project_activity"><?php
+                        wp_dropdown_categories(array(
                         'hide_empty' => 0,
                         'taxonomy' => 'download_category',
                         'selected' => $selected_activity,
                         'echo' => 1,
                         'child_of' => $term_activity_id,
                         'name' => 'activities',
-                        'id' => 'update_project_activity'
-                    )); ?></div>
+                        'id' => 'new_project_activity'
+                    )); ?></span></div>
 
                 <?php
                 $locations = atcf_get_locations();
 
                 DashboardUtility::create_field(array(
-                    "id"=>"project_location",
+                    "id"=>"new_project_location",
                     "type"=>"select",
                     "label"=>"Localisation",
                     "value"=>$campaign->location(),
@@ -132,7 +135,7 @@ function print_informations_page()
 
 
                 DashboardUtility::create_field(array(
-                    "id"=>"project_WDG_notoriety",
+                    "id"=>"new_project_WDG_notoriety",
                     "type"=>"textarea",
                     "label"=>'"Comment avez-vous connu WDG ?"',
                     "value"=>$campaign->backoffice_WDG_notoriety(),
@@ -146,7 +149,7 @@ function print_informations_page()
         </div>
 
         <div class="tab-content" id="tab-user-infos">
-            <form id="userinfo_form" class="db-form">
+            <form id="userinfo_form" class="db-form" data-action="save_user_infos_dashboard">
                 <?php if ($is_author) {
                     ?><p><?php _e("Complétez vos informations personnelles de porteur de projet","yproject");?></p>
                     <input type="hidden" id="input_is_project_holder" name="is_project_holder" value="1"/><?php
@@ -160,7 +163,7 @@ function print_informations_page()
 
                 <?php
                 DashboardUtility::create_field(array(
-                    "id"=>"gender",
+                    "id"=>"new_gender",
                     "type"=>"select",
                     "label"=>"Vous &ecirc;tes",
                     "value"=>$WDGAuthor->wp_user->get('user_gender'),
@@ -170,19 +173,21 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"firstname",
+                    "id"=>"new_firstname",
                     "type"=>"text",
                     "label"=>"Pr&eacute;nom",
                     "value"=>$WDGAuthor->wp_user->user_firstname,
-                    "editable"=>$is_author
+                    "editable"=>$is_author,
+                    "left_icon"=>"user",
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"lastname",
+                    "id"=>"new_lastname",
                     "type"=>"text",
                     "label"=>"Nom",
                     "value"=>$WDGAuthor->wp_user->user_lastname,
-                    "editable"=>$is_author
+                    "editable"=>$is_author,
+                    "left_icon"=>"user",
                 ));
 
                 $bd = new DateTime();
@@ -194,7 +199,7 @@ function print_informations_page()
                 }
 
                 DashboardUtility::create_field(array(
-                    "id"=>"birthday",
+                    "id"=>"new_birthday",
                     "type"=>"date",
                     "label"=>"Date de naissance",
                     "value"=>$bd,
@@ -202,7 +207,7 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"birthplace",
+                    "id"=>"new_birthplace",
                     "type"=>"text",
                     "label"=>"Ville de naissance",
                     "value"=>$WDGAuthor->wp_user->get('user_birthplace'),
@@ -210,7 +215,7 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"nationality",
+                    "id"=>"new_nationality",
                     "type"=>"select",
                     "label"=>"Nationalit&eacute;",
                     "value"=>$WDGAuthor->wp_user->get('user_nationality'),
@@ -220,7 +225,7 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"mobile_phone",
+                    "id"=>"new_mobile_phone",
                     "type"=>"text",
                     "label"=>"T&eacute;l&eacute;phone mobile",
                     "value"=>$WDGAuthor->wp_user->get('user_mobile_phone'),
@@ -230,16 +235,16 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"email",
+                    "id"=>"new_mail",
                     "type"=>"text",
                     "label"=>"Adresse &eacute;lectronique",
                     "value"=>$WDGAuthor->wp_user->get('user_email'),
                     "infobubble"=>"Pour modifier votre adresse e-mail de contact, rendez-vous dans vos param&egrave;tres de compte",
-                    "editable"=>false
+                    "left_icon"=>"at"
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"address",
+                    "id"=>"new_address",
                     "type"=>"text",
                     "label"=>"Adresse",
                     "value"=>$WDGAuthor->wp_user->get('user_address'),
@@ -247,7 +252,7 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"postal_code",
+                    "id"=>"new_postal_code",
                     "type"=>"text",
                     "label"=>"Code postal",
                     "value"=>$WDGAuthor->wp_user->get('user_postal_code'),
@@ -255,7 +260,7 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"city",
+                    "id"=>"new_city",
                     "type"=>"text",
                     "label"=>"Ville",
                     "value"=>$WDGAuthor->wp_user->get('user_city'),
@@ -263,7 +268,7 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"country",
+                    "id"=>"new_country",
                     "type"=>"text",
                     "label"=>"Pays",
                     "value"=>$WDGAuthor->wp_user->get('user_country'),
@@ -277,7 +282,7 @@ function print_informations_page()
         </div>
 
         <div class="tab-content" id="tab-organization">
-            <form id="orgainfo_form" class="db-form">
+            <form id="orgainfo_form" class="db-form" data-action="save_project_organisation">
                 <ul class="errors">
 
                 </ul>
@@ -302,10 +307,12 @@ function print_informations_page()
                 ?>
                 <label for="project-organisation">Organisation :</label>
                 <?php if ($str_organisations != ''): ?>
-                    <select name="project-organisation" id="update_project_organisation">
-                        <option value=""></option>
-                        <?php echo $str_organisations; ?>
-                    </select>
+                    <span class="field-value" data-type="select" data-id="new_project_organisation">
+                        <select name="project-organisation" id="new_project_organisation">
+                            <option value=""></option>
+                            <?php echo $str_organisations; ?>
+                        </select>
+                    </span>
                     <?php if ($current_organisation!=null){
                         $page_edit_orga = get_page_by_path('editer-une-organisation');
                         $edit_org = '<a id="edit-orga-button" class="button" 
@@ -332,10 +339,10 @@ function print_informations_page()
             <ul class="errors">
 
             </ul>
-            <form action="" id="projectfunding_form"  class="db-form">
+            <form id="projectfunding_form"  class="db-form" data-action="save_project_funding">
                 <?php
                 DashboardUtility::create_field(array(
-                    "id"=>"maximum_goal",
+                    "id"=>"new_maximum_goal",
                     "type"=>"number",
                     "label"=>"Montant maximal demand&eacute;",
                     "value"=>$campaign->goal(false),
@@ -344,7 +351,7 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"minimum_goal",
+                    "id"=>"new_minimum_goal",
                     "type"=>"number",
                     "label"=>"Palier minimal",
                     "infobubble"=>"Au-del&agrave; de ce palier, la collecte sera valid&eacute; mais rien n'emp&ecirc;che d'avoir un objectif plus ambitieux !",
@@ -355,7 +362,7 @@ function print_informations_page()
 
 
                 DashboardUtility::create_field(array(
-                    "id"=>"funding_duration",
+                    "id"=>"new_funding_duration",
                     "type"=>"number",
                     "label"=>"Dur&eacute;e du financement",
                     "value"=>$campaign->funding_duration(),
@@ -365,7 +372,7 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"roi_percent_estimated",
+                    "id"=>"new_roi_percent_estimated",
                     "type"=>"number",
                     "label"=>"Pourcentage de reversement estim&eacute;",
                     "value"=>$campaign->funding_duration(),
@@ -376,7 +383,7 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"first_payment",
+                    "id"=>"new_first_payment",
                     "type"=>"date",
                     "label"=>"Première date de versement",
                     "value"=>new DateTime($campaign->first_payment_date()),
@@ -392,10 +399,17 @@ function print_informations_page()
                     <?php
 					$estimated_turnover = $campaign->estimated_turnover();
                     if(!empty($estimated_turnover)){
-                        foreach (($campaign->estimated_turnover()) as $year => $turnover) : ?>
-                            <li><label>Année <span class="year"><?php echo $year?></span></label><input type="text" value="<?php echo $turnover?>"/>
+                        $i=0;
+                        foreach (($campaign->estimated_turnover()) as $year => $turnover) :?>
+                            <li class="field">
+                                <label>Année <span class="year"><?php echo $year?></span></label>
+                                <span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
+                                    <input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>"/>
+                                </span>
                             </li>
-                        <?php endforeach;
+                        <?php
+                            $i++;
+                        endforeach;
                     }
                      ?>
                 </ul>
@@ -408,10 +422,10 @@ function print_informations_page()
             <ul class="errors">
 
             </ul>
-            <form action="" id="communication_form" class="db-form">
+            <form id="communication_form" class="db-form" data-action="save_project_communication">
                 <?php
                 DashboardUtility::create_field(array(
-                    "id"=>"website",
+                    "id"=>"new_website",
                     "type"=>"text",
                     "label"=>'Site web',
                     "value"=> $campaign->campaign_external_website(),
@@ -419,7 +433,7 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"facebook",
+                    "id"=>"new_facebook",
                     "type"=>"text",
                     "label"=>'Page Facebook',
                     "value"=> $campaign->facebook_name(),
@@ -429,7 +443,7 @@ function print_informations_page()
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"twitter",
+                    "id"=>"new_twitter",
                     "type"=>"text",
                     "label"=>'Twitter',
                     "value"=> $campaign->twitter_name(),
@@ -446,11 +460,11 @@ function print_informations_page()
             <ul class="errors">
 
             </ul>
-            <form action="" id="contract_form" class="db-form">
+            <form id="contract_form" class="db-form" data-action="save_project_contract">
                 <?php
 
                 DashboardUtility::create_field(array(
-                    "id"=>"contract_url",
+                    "id"=>"new_contract_url",
                     "type"=>"link",
                     "label"=>"Lien du contrat",
                     "value"=> $campaign->contract_doc_url(),

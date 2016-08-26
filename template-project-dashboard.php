@@ -133,8 +133,8 @@ if ($can_modify){
                             <a href="#informations"
                                data-target="page-informations">
                                 <?php _e("Informations", 'yproject');?>
-                                <div class="badge-notif">
-                                    <?php if(filter_input(INPUT_GET,'lightbox')=='newproject'){echo '<i class="fa fa-exclamation" aria-hidden="true"></i>';}?></div>
+                                <div class="badge-notif"><?php
+                                    if(filter_input(INPUT_GET,'lightbox')=='newproject'){echo '<i class="fa fa-exclamation" aria-hidden="true"></i>';}?></div>
                             </a>
                         </li>
                         <li>

@@ -447,11 +447,11 @@ function print_resume_page()
         <?php } ?>
 
         <?php if ($is_admin){ ?>
-        <form action="" id="statusmanage_form" class="db-form">
+        <form action="" id="statusmanage_form" class="db-form" data-action="save_project_status">
             <hr class="form-separator"/>
             <?php
             DashboardUtility::create_field(array(
-                "id"=>"campaign_status",
+                "id"=>"new_campaign_status",
                 "type"=>"select",
                 "label"=>"Changer l'&eacute;tape actuelle de la campagne",
                 "value"=>$status,
@@ -464,7 +464,7 @@ function print_resume_page()
             ));
 
             DashboardUtility::create_field(array(
-                "id"=>"can_go_next_status",
+                "id"=>"new_can_go_next_status",
                 "type"=>"check",
                 "label"=>"Autoriser &agrave; passer &agrave; l'&eacute;tape suivante",
                 "value"=> $campaign->can_go_next_status(),
