@@ -4,6 +4,7 @@
 *******************************************************************************/
 	.mobile_hidden { display: none !important; }
 	.only_on_mobile { display: block !important; }
+	.only_on_mobile.inline { display: inline !important; }
 	.center, .center_small { width: 100% !important; }
 	#container { padding-top: 0px !important; }
 	.indent { margin-left: 0px !important; }

@@ -52,16 +52,6 @@ get_header();
 			//$wdgUser = new WDGUser(4155); $wdgUser->register_lemonway(); 
 			?>
 			
-			<?php // Virements reçus depuis 10 jours
-			/*
-			$date = new DateTime();
-			$date->sub( new DateInterval('P10D') );
-			$transactions_list = LemonwayLib::get_transactions_wire_since( $date->getTimestamp() );
-			print_r($transactions_list);
-			 *
-			 */
-			?>
-			
 			<?php // Regénération d'un contrat d'investissement
 //			getNewPdfToSign($project_id, $payment_id, $user_id);
 //			getNewPdfToSign(11182, 11943, 4298);
@@ -94,6 +84,19 @@ get_header();
 				$date_now_formatted = $date_now->format( 'Y-m-d' );
 				WDGROI::insert( $invest_id, $project_id, $debit_orga, $credit_user, $decla_id, $date_now_formatted, $amount, $transfer->ID, WDGROI::$status_transferred);
 			}
+			 * 
+			 */
+			?>
+			
+			<?php //Transférer de wallet à wallet
+			/*
+			$orga_id = 3857;
+			$user_id = 4246;
+			$amount = 300;
+			$organisation_obj = new YPOrganisation($orga_id);
+			$WDGUser = new WDGUser($user_id);
+			$WDGUser->register_lemonway();
+			$transfer = LemonwayLib::ask_transfer_funds( $WDGUser->get_lemonway_id(), $organisation_obj->get_lemonway_id(), $amount );
 			 * 
 			 */
 			?>

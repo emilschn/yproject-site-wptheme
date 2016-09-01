@@ -5,7 +5,7 @@ if (!isset($campaign)) {
 }
 
 if (isset($campaign) && is_user_logged_in()):
-	$campaign_url  = get_permalink($campaign->ID);
+	$campaign_url = get_permalink($campaign->ID);
 	?>
 		
 	<?php
@@ -53,12 +53,7 @@ if (isset($campaign) && is_user_logged_in()):
 		
 	<div class="align-center">
 		<?php _e("Partager", 'yproject'); ?><br /><br />
-		<button class="sharer button" data-sharer="twitter" data-title="<?php _e("Je viens d'investir sur le projet", 'yproject'); ?> <?php echo $campaign->data->post_title ?>" data-hashtags="crowdfunding" data-url="<?php echo $campaign_url; ?>"><?php _e("Twitter", 'yproject'); ?></button>
-		<button class="sharer button" data-sharer="facebook" data-url="<?php echo $campaign_url; ?>"><?php _e("Facebook", 'yproject'); ?></button>
-		<button class="sharer button" data-sharer="linkedin" data-url="<?php echo $campaign_url; ?>"><?php _e("Linkedin", 'yproject'); ?></button>
-		<button class="sharer button" data-sharer="googleplus" data-url="<?php echo $campaign_url; ?>"><?php _e("Google+", 'yproject'); ?></button>
-		<button class="sharer button" data-sharer="email" data-title="<?php _e("Je viens d'investir sur le projet", 'yproject'); ?> <?php echo $campaign->data->post_title ?>" data-url="<?php echo $campaign_url; ?>" data-subject="<?php _e("Vous devriez aller voir &ccedil;a !", 'yproject'); ?>" data-to=""><?php _e("E-mail", 'yproject'); ?></button>
-		<button class="sharer button" data-sharer="whatsapp" data-title="<?php _e("Je viens d'investir sur le projet", 'yproject'); ?> <?php echo $campaign->data->post_title ?>" data-url="<?php echo $campaign_url; ?>"><?php _e("Whatsapp", 'yproject'); ?></button>
+		<?php locate_template( 'projects/common/share-buttons.php', true ); ?>
 	</div>
 	<br /><br />
 	
