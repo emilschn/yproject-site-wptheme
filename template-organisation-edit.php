@@ -214,7 +214,7 @@ get_header();
 								<form action="" method="POST" enctype="multipart/form-data">
 									<input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
 								</form>
-							<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_registered): ?>
+							<?php elseif ($organisation_obj->is_registered_lemonway_wallet()): ?>
 								<?php _e("L'organisation est bien authentifi&eacute;e aupr&egrave;s de notre partenaire.", 'yproject'); ?>
 							<?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_rejected): ?>
 								<?php _e("L'organisation a &eacute;t&eacute; refus&eacute;e par notre partenaire.", 'yproject'); ?>

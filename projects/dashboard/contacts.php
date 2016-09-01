@@ -15,9 +15,9 @@ function print_contacts_page() {
             </div>
         </div>
 
-        <div class="tab-content" id="send-mail-tab" >
+        <div class="tab-content" id="send-mail-tab" style="display: none">
             <h2><?php _e("Envoyer un mail", 'yproject')?></h2>
-            <form id="direct-mail" method="POST" action="<?php echo admin_url( 'admin-post.php?action=send_project_mail'); ?>" target="_blank">
+            <form id="direct-mail" method="POST" action="<?php echo admin_url( 'admin-post.php?action=send_project_mail'); ?>">
                 <p><?php _e("Le message sera envoyé &agrave", 'yproject')?> <strong id="nb-mailed-contacts">0</strong> personnes</p>
                 <input type="hidden" id="mail_recipients" name="mail_recipients"/>
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id?>"/>
@@ -25,7 +25,7 @@ function print_contacts_page() {
                     <p><strong><?php _e("Vous pouvez utiliser les variables suivantes : ", 'yproject'); ?></strong>
                     <?php DashboardUtility::get_infobutton('Au moment de l\'envoi, les variables seront remplacées par les valeurs correspondantes.<br/><br/>
                         Ainsi, par exemple, <b>%username%</b> sera remplacé par le nom de l\'utilisateur qui recevra le message.',true)?></p>
-                    <ul>
+                    <ul style="list-style-type: square;">
                         <li><i>%projectname%</i> : Nom du projet</li>
                         <li><i>%projecturl%</i> : Adresse du projet</li>
                         <li><i>%projectauthor%</i> : Nom du porteur de projet</li>
@@ -90,23 +90,32 @@ function print_contacts_page() {
                 } ?>
 
                 <form method="POST" action="" class="db-form">
-                    <label for="email"><?php _e('E-mail :', 'yproject'); ?>*</label> <input type="text" name="email" <?php if (isset($_POST['email']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['email']; ?>"<?php } ?> /><br />
-                    <label for="value"><?php _e('Somme :', 'yproject'); ?>*</label> <input type="text" name="value" <?php if (isset($_POST['value']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['value']; ?>"<?php } ?> /><br />
-                    <label for="username"><?php _e('Login :', 'yproject'); ?></label> <input type="text" name="username" <?php if (isset($_POST['username']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['username']; ?>"<?php } ?> /><br />
-                    <label for="password"><?php _e('Mot de passe :', 'yproject'); ?></label> <input type="text" name="password" <?php if (isset($_POST['password']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['password']; ?>"<?php } ?> /><br />
-                    <label for="gender"><?php _e('Genre :', 'yproject'); ?></label>
+                    <div class="field"><label for="email"><?php _e('E-mail :', 'yproject'); ?>*</label>
+                        <input type="text" name="email" <?php if (isset($_POST['email']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['email']; ?>"<?php } ?> /></div>
+                    <div class="field"><label for="value"><?php _e('Somme :', 'yproject'); ?>*</label>
+                        <input type="text" name="value" <?php if (isset($_POST['value']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['value']; ?>"<?php } ?> /></div>
+                    <div class="field"><label for="username"><?php _e('Login :', 'yproject'); ?></label>
+                        <input type="text" name="username" <?php if (isset($_POST['username']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['username']; ?>"<?php } ?> /></div>
+                    <div class="field"><label for="password"><?php _e('Mot de passe :', 'yproject'); ?></label>
+                        <input type="text" name="password" <?php if (isset($_POST['password']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['password']; ?>"<?php } ?> /></div>
+                    <div class="field"><label for="gender"><?php _e('Genre :', 'yproject'); ?></label>
                     <select name="gender">
                         <option value="female" <?php if (isset($_POST['gender']) && $_POST['gender'] == "female" && $add_check_result === FALSE) { ?>selected="selected"<?php } ?>>Mme</option>
                         <option value="male" <?php if (isset($_POST['gender']) && $_POST['gender'] == "male" && $add_check_result === FALSE) { ?>selected="selected"<?php } ?>>Mr</option>
-                    </select><br />
-                    <label for="firstname"><?php _e('Pr&eacute;nom :', 'yproject'); ?></label> <input type="text" name="firstname" <?php if (isset($_POST['firstname']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['firstname']; ?>"<?php } ?> /><br />
-                    <label for="lastname"><?php _e('Nom :', 'yproject'); ?></label> <input type="text" name="lastname" <?php if (isset($_POST['lastname']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['lastname']; ?>"<?php } ?> /><br /><br />
+                    </select></div>
+                    <div class="field"><label for="firstname"><?php _e('Pr&eacute;nom :', 'yproject'); ?></label> <input type="text" name="firstname" <?php if (isset($_POST['firstname']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['firstname']; ?>"<?php } ?> /></div>
+                    <div class="field"><label for="lastname"><?php _e('Nom :', 'yproject'); ?></label> <input type="text" name="lastname" <?php if (isset($_POST['lastname']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['lastname']; ?>"<?php } ?> /><br /><br /></div>
+                    <hr class="form-separator"/>
+                    <h3><?php _e("Si il s'agit d'une organisation :", 'yproject'); ?></h3>
+                    <div class="field">
+                        <label for="orga_email"><?php _e("E-mail de l'organisation :", 'yproject'); ?></label>
+                        <input type="text" name="orga_email" <?php if (isset($_POST['orga_email']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['orga_email']; ?>"<?php } ?> /></div>
+                    <div class="field"><label for="orga_name"><?php _e("Nom de l'organisation (si n'existe pas d&eacute;j&agrave;) :", 'yproject'); ?></label>
+                        <input type="text" name="orga_name" <?php if (isset($_POST['orga_name']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['orga_name']; ?>"<?php } ?> /></div>
 
-                    -- <?php _e("Si il s'agit d'une organisation :", 'yproject'); ?><br />
-                    -- <label for="orga_email"><?php _e("E-mail de l'organisation :", 'yproject'); ?></label> <input type="text" name="orga_email" <?php if (isset($_POST['orga_email']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['orga_email']; ?>"<?php } ?> /><br />
-                    -- <label for="orga_name"><?php _e("Nom de l'organisation (si n'existe pas d&eacute;j&agrave;) :", 'yproject'); ?></label> <input type="text" name="orga_name" <?php if (isset($_POST['orga_name']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['orga_name']; ?>"<?php } ?> /><br /><br />
-
-                    <button type="submit" class="button admin-theme"><?php _e('Ajouter', 'yproject'); ?></button>
+                    <p class="align-center">
+                        <button type="submit" class="button admin-theme"><?php _e('Ajouter', 'yproject'); ?></button>
+                    </p>
                     <input type="hidden" name="action" value="add-check-investment" />
                 </form>
             </div>

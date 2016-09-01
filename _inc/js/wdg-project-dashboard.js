@@ -96,9 +96,6 @@ var WDGProjectDashboard = (function ($) {
                 }
             }
 
-            //Infobulles
-            WDGProjectDashboard.initQtip();
-
             //Datepickers
             $("input.adddatepicker").datepicker({
                 dateFormat: "yy-mm-dd",
@@ -107,48 +104,11 @@ var WDGProjectDashboard = (function ($) {
                 changeYear: true
             });
 
-            //Fonction d'envoi de mise à jour d'informations
-            var update_tab = function(data_to_update, form_id, form_button_id){
-                $("#"+form_button_id+" .button-text").hide();
-                $("#"+form_button_id+" .button-waiting").show();
-                $("input, select, button", "#"+form_id).prop('disabled', true);
-
-                data_to_update.campaign_id= campaign_id;
-                $.ajax({
-                    'type': "POST",
-                    'url': ajax_object.ajax_url,
-                    'data': data_to_update
-                }).done(function (result) {
-                    if (result != "") {
-                        var jsonResult = JSON.parse(result);
-                        response = jsonResult.response;
-                        $("#"+form_button_id+" .button-waiting").hide();
-                        $("#"+form_button_id+" .button-text").show();
-                        $("input, select, button", "#"+form_id).prop('disabled', false);
-                        $(".errors", "#"+form_id).empty();
-                        for (var i = 0; i < jsonResult.errors.length; i++) {
-                            $("ul.errors", "#"+form_id).append("<li>" + jsonResult.errors[i] + "</li>");
-                        }
-                    }
-                });
-            };
-
             /**
              * DASHBOARD TABS
              */
             //Page Résumé
             if($("#page-resume").length > 0){
-                //Ajax infos d'étape
-                $("#statusmanage_form").submit(function (e) {
-                    e.preventDefault();
-                    var data_to_update = {
-                        'action': 'save_project_status',
-                        'can_go_next': $("#update_can_go_next_status").is(':checked'),
-                        'campaign_status': $("#update_campaign_status").val()
-                    }
-                    update_tab(data_to_update, "statusmanage_form", "statusmanage-form_button")
-                });
-
                 //Passage à l'étape suivante
                 if ($("#submit-go-next-status").length > 0) {
                     $("#submit-go-next-status").attr('disabled','');
@@ -237,45 +197,9 @@ var WDGProjectDashboard = (function ($) {
                     $(".bloc-grid .display-bloc").first().trigger("click");
                 }
 
-                //Ajax Infos personnelles
-                if ($("#tab-user-infos").length > 0) {
-                    $("#userinfo_form").submit(function (e) {
-                        e.preventDefault();
-                        var birthday = new Date($("#update_birthday").val());
 
-                        var data_to_update = {
-                            'action': 'save_user_infos',
-                            'invest_type': $("#invest_type").val(),
-                            'gender': $("#update_gender").val(),
-                            'firstname': $("#update_firstname").val(),
-                            'lastname': $("#update_lastname").val(),
-                            'birthday_day': birthday.getDate(),
-                            'birthday_month': birthday.getMonth()+1,
-                            'birthday_year': birthday.getFullYear(),
-                            'birthplace': $("#update_birthplace").val(),
-                            'nationality': $("#update_nationality").val(),
-                            'address': $("#update_address").val(),
-                            'postal_code': $("#update_postal_code").val(),
-                            'city': $("#update_city").val(),
-                            'country': $("#update_country").val(),
-                            'telephone': $("#update_mobile_phone").val(),
-                            'is_project_holder': $("#input_is_project_holder").val(),
-                        }
-                        update_tab(data_to_update, "userinfo_form", "userinfo_form_button")
-                    });
-                }
-
-                //Ajax Infos organisation
+                //Infos organisation
                 if ($("#tab-organization").length > 0) {
-                    $("#orgainfo_form").submit(function (e) {
-                        e.preventDefault();
-                        var data_to_update = {
-                            'action': 'save_project_organisation',
-                            'project-organisation': $("#update_project_organisation").val()
-                        }
-                        update_tab(data_to_update, "orgainfo_form", "orgainfo_form_button");
-
-                    });
 
                     $("#update_project_organisation").change(function(e){
                         var newval = $("#update_project_organisation").val();
@@ -293,26 +217,10 @@ var WDGProjectDashboard = (function ($) {
                     });
                 }
 
-                //Ajax Infos projet
-                if ($("#tab-project").length > 0) {
-                    $("#projectinfo_form").submit(function (e) {
-                        e.preventDefault();
-                        var data_to_update = {
-                            'action': 'save_project_infos',
-                            'project_name': $("#update_project_name").val(),
-                            'backoffice_summary' : tinyMCE.get('update_backoffice_summary').getContent(),
-                            'project_category': $("#update_project_category").val(),
-                            'project_activity': $("#update_project_activity").val(),
-                            'project_location': $("#update_project_location").val()
-                        }
-                        update_tab(data_to_update, "projectinfo_form", "projectinfo_form_button");
-                    });
-                }
-
                 //Ajax Infos financement
                 if ($("#tab-funding").length > 0) {
                     //Etiquettes de numéros d'années pour le CA prévisionnel
-                    $("#update_first_payment").change(function(){
+                    $("#new_first_payment").change(function(){
                         var start_year = 1;
                         $("#estimated-turnover li .year").each(function(index){
                             $(this).html((parseInt(start_year)+index));
@@ -320,9 +228,9 @@ var WDGProjectDashboard = (function ($) {
                     });
 
                     //Cases pour le CA prévisionnel
-                    $("#update_funding_duration").change(function() {
+                    $("#new_funding_duration").change(function() {
                         var nb_years_li_existing = ($("#estimated-turnover li").length);
-                        var new_nb_years = parseInt($("#update_funding_duration").val());
+                        var new_nb_years = parseInt($("#new_funding_duration").val());
                         "change nb year trigger "+new_nb_years+"(exist : "+nb_years_li_existing+")";
 
                         //Ajoute des boîtes au besoin
@@ -331,13 +239,17 @@ var WDGProjectDashboard = (function ($) {
 
                             for(var i=0; i<new_nb_years-nb_years_li_existing;i++){
                                 newlines = newlines+
-                                    '<li><label>Année <span class="year"></span></label>'+
-                                    '<input type="text" value="0"/></li>'
+                                    '<li class="field">' +
+                                    '<label>Année <span class="year"></span></label>'+
+                                    '&nbsp;<span class="field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
+                                    '<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'"/>' +
+                                    '</span>'+
+                                    '</li>'
                             }
                             $("#estimated-turnover").html(newlines);
 
                             //MAJ des étiquettes "Année XXXX"
-                            $("#update_first_payment").trigger("change");
+                            $("#new_first_payment").trigger("change");
                             nb_years_li_existing = new_nb_years;
                         } else {
                             //N'affiche que les boites nécessaires
@@ -346,53 +258,7 @@ var WDGProjectDashboard = (function ($) {
                         }
                         nb_years_li_existing = Math.max(new_nb_years,nb_years_li_existing);
                     });
-                    $("#update_funding_duration").trigger('change');
-
-                    $("#projectfunding_form").submit(function (e) {
-                        e.preventDefault();
-
-                        var list_turnover = {};
-                        $("#estimated-turnover li:visible").each(function(){
-                            list_turnover[$(this).find('.year').html().toString()] = $(this).find('input').val();
-                        });
-                        var data_to_update = {
-                            'action': 'save_project_funding',
-                            'minimum_goal': $("#update_minimum_goal").val(),
-                            'maximum_goal': $("#update_maximum_goal").val(),
-                            'funding_duration': $("#update_funding_duration").val(),
-                            'roi_percent_estimated': $("#update_roi_percent_estimated").val(),
-                            'first_payment_date': $("#update_first_payment").val(),
-                            'list_turnover': JSON.stringify(list_turnover)
-                        }
-                        update_tab(data_to_update, "projectfunding_form", "projectfunding_form_button");
-
-                    });
-                }
-
-                //Ajax Infos communication
-                if ($("#tab-communication").length > 0) {
-                    $("#communication_form").submit(function (e) {
-                        e.preventDefault();
-                        var data_to_update = {
-                            'action': 'save_project_communication',
-                            'website': $("#update_website").val(),
-                            'facebook': $("#update_facebook").val(),
-                            'twitter': $("#update_twitter").val()
-                        }
-                        update_tab(data_to_update, "communication_form", "communication_form_button");
-                    });
-                }
-
-                //Ajax Infos contractualisation
-                if ($("#tab-contract").length > 0) {
-                    $("#contract_form").submit(function (e) {
-                        e.preventDefault();
-                        var data_to_update = {
-                            'action': 'save_project_contract',
-                            'contract_url': $("#update_contract_url").val()
-                        }
-                        update_tab(data_to_update, "contract_form", "contract_form_button");
-                    });
+                    $("#new_funding_duration").trigger('change');
                 }
             }
 
@@ -414,19 +280,6 @@ var WDGProjectDashboard = (function ($) {
                 //Formulaire
                 //Infos organisation
                 if ($("#campaign_form").length > 0) {
-                    $("#campaign_form").submit(function (e) {
-                        e.preventDefault();
-                        var data_to_update = {
-                            'action': 'save_project_campaigntab',
-                            'google_doc': $("#update_planning_gdrive").val(),
-                            'logbook_google_doc': $("#update_logbook_gdrive").val(),
-                            'end_vote_date': $("#update_end_vote_date").val()+"\ "+$("#update_h_end_vote_date").val()+':'+$("#update_m_end_vote_date").val(),
-                            'end_collecte_date': $("#update_end_collecte_date").val()+"\ "+$("#update_h_end_collecte_date").val()+':'+$("#update_m_end_collecte_date").val()
-                        }
-                        update_tab(data_to_update, "campaign_form", "campaign_form_button");
-
-                    });
-
                     $("#update_project_organisation").change(function(e){
                         var newval = $("#update_project_organisation").val();
 
@@ -485,41 +338,114 @@ var WDGProjectDashboard = (function ($) {
                     $("#direct-mail .step-write").slideDown();
                 });
             }
+
+
+            //Fonction globale d'update d'informations
+           $("#ndashboard form.db-form").submit(function(e){
+               e.preventDefault();
+               if ($(this).data("action")==undefined) return false;
+               var thisForm = $(this);
+
+               //Receuillir informations du formulaire
+               var data_to_update = {
+                   'action': $(this).data("action"),
+                   'campaign_id': campaign_id
+               };
+
+               $(this).find(".field-value").each(function(index){
+                    var id = $(this).data('id');
+                    switch ($(this).data("type")){
+                        case 'datetime':
+                            data_to_update[id] = $(this).find("input:eq(0)").val()+"\ "
+                                + $(this).find("select:eq(0)").val() +':'
+                                + $(this).find("select:eq(1)").val();
+                            break;
+                        case 'editor':
+                            data_to_update[id] = tinyMCE.get(id).getContent();
+                            break;
+                        case 'check':
+                            data_to_update[id] = $("#"+id).is(':checked')
+                            break;
+                        case 'text':
+                        case 'number':
+                        case 'date':
+                        case 'link':
+                        case 'textarea':
+                        case 'select':
+                        default:
+                            data_to_update[id] = $(':input', this).val();
+                            break;
+                    }
+                    if(data_to_update[id] == undefined){
+                        delete data_to_update[id];
+                    }
+                });
+
+               //Désactive les champs
+               var save_button = $("#"+$(this).attr("id")+"_button");
+               save_button.find(".button-text").hide();
+               save_button.find(".button-waiting").show();
+               $(":input", this).prop('disabled', true);
+
+               thisForm.find('.feedback_save span').fadeOut();
+
+               //Envoi de requête Ajax
+               $.ajax({
+                   'type': "POST",
+                   'url': ajax_object.ajax_url,
+                   'data': data_to_update
+               }).done(function (result) {
+                   if (result != "") {
+                       var jsonResult = JSON.parse(result);
+                       feedback = jsonResult;
+
+                       //Affiche les erreurs
+                       for(var input in feedback.errors){
+                           WDGProjectDashboard.fieldError(thisForm.find('#'+input), feedback.errors[input])
+                       }
+
+                       for(var input in feedback.success){
+                           var thisinput = thisForm.find('#'+input)
+                           WDGProjectDashboard.removeFieldError(thisinput);
+                           thisinput.closest(".field-value").parent().find('i.fa.validation').remove();
+                           thisinput.addClass("validation");
+                           thisinput.closest(".field-value").after('<i class="fa fa-check validation" aria-hidden="true"></i>');
+                       }
+
+                       //Scrolle jusqu'à la 1ère erreur et la sélectionne
+                       var firsterror = thisForm.find(".error").first();
+                       if(firsterror.length == 1){
+                           WDGProjectDashboard.scrollTo(firsterror);
+                           //La sélection (ci-dessous) Ne fonctione ne marche pas
+                           firsterror.focus();
+                           thisForm.find('.save_errors').fadeIn();
+                       } else {
+                           thisForm.find('.save_ok').fadeIn();
+                       }
+
+
+                   }
+               }).fail(function() {
+                   thisForm.find('.save_fail').fadeIn();
+               }).always(function() {
+                   //Réactive les champs
+                   save_button.find(".button-waiting").hide();
+                   save_button.find(".button-text").show();
+                   thisForm. find(":input").prop('disabled', false);
+               });;
+            });
         },
 
-        initQtip: function(){
-            var i=0;
-            $('#ndashboard .infobutton, #ndashboard .qtip-element').each(function () {
-                if($(this).data("hasqtip")==undefined){
-                    var contentTip;
-                    if($(this).attr("title")!=undefined){
-                        contentTip = $(this).attr("title");
-                    } else {
-                        contentTip = $(this).next('.tooltiptext');
-                    }
-
-                    $(this).qtip({
-                        content: contentTip,
-                        position: {
-                            my: 'bottom center',
-                            at: 'top center',
-                        },
-                        style: {
-                            classes: 'wdgQtip qtip-dark qtip-rounded qtip-shadow'
-                        },
-                        hide: {
-                            fixed: true,
-                            delay: 300
-                        }
-                    });
-                    i++;
-                }
-            });
-            return i;
+        scrollTo: function(target){
+            $('html, body').animate(
+                { scrollTop: target.offset().top - 75 },
+                "slow"
+            );
         },
 
         fieldError: function($param, errorText){
             $param.addClass("error");
+            $param.removeClass("validation");
             $param.qtip({
                 content: errorText,
                 position: {
@@ -532,6 +458,7 @@ var WDGProjectDashboard = (function ($) {
                 show: 'focus',
                 hide: 'blur'
             });
+            $param.closest(".field-value").parent().find('i.fa.validation').remove();
         },
 
         removeFieldError: function($param){
@@ -644,7 +571,7 @@ var WDGProjectDashboard = (function ($) {
                 $('#ajax-contacts-load').after(result);
                 $('#ajax-loader-img').hide();//On cache la roue de chargement.
 
-                WDGProjectDashboard.initQtip();
+                YPUIFunctions.initQtip();
 
                 //Création du tableau dynamique dataTable
                 WDGProjectDashboard.table = $('#contacts-table').DataTable({
@@ -700,6 +627,8 @@ var WDGProjectDashboard = (function ($) {
                             text: '<i class="fa fa-envelope" aria-hidden="true"></i> Envoyer un mail',
                             action: function ( e, dt, button, config ) {
                                 $("#send-mail-tab").slideDown();
+                                var target = $(this).data("target");
+                                WDGProjectDashboard.scrollTo($("#send-mail-tab"));
                             }
                             //TODO : Scroller jusqu'au panneau
                         },
@@ -860,40 +789,3 @@ var WDGProjectDashboard = (function ($) {
     };
 
 })(jQuery);
-
-
-/*
-//Fonction globale d'update d'informations
-$("#ndashboard form").submit(function(e){
-    e.preventDefault();
-    var data_to_update = {
-        'action': $(this).data("action")
-    }
-    $(this).find(".field-value").each(function(index){
-        var id;
-        switch ($(this).data("type")){
-            case 'text':
-            case 'number':
-            case 'date':
-            case 'link':
-                data_to_update[$(this).find("input").attr('id')] = $(this).find("input").val();
-                break;
-            case 'datetime':
-                id = data_to_update[$(this).find("input:eq(0)").attr('id')];// = $(this).find("input").val();
-                data_to_update[id] = $(this).find("input:eq(0)").val()+"\ "
-                    + $(this).find("input:eq(1)").val() +':'
-                    + $(this).find("input:eq(2)").val();
-
-                //$("#update_end_vote_date").val()+"\ "+$("#update_h_end_vote_date").val()+':'+$("#update_m_end_vote_date").val()
-                break;
-            case 'select':
-                data_to_update[$(this).find("select").attr('id')] = $(this).find("select").val();
-                break;
-            case 'editor':
-                id = data_to_update[$(this).find("textarea").attr('id')];
-                data_to_update[id] = "later";//.get(id).getContent();
-                break;
-        }
-    });
-    console.log(data_to_update);
-});*/

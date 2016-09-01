@@ -11,6 +11,7 @@ YPUIFunctions = (function($) {
 			YPMenuFunctions.initMenuBar();
 			WDGProjectPageFunctions.initUI();
 			YPUIFunctions.refreshProjectList();
+			YPUIFunctions.initQtip();
 
 			$(document).scroll(function() {
 				if ($(".menu-client").length > 0) {
@@ -190,6 +191,31 @@ YPUIFunctions = (function($) {
 				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, nTimeout);
 			}
 
+			//Lightbox de nouveau projet
+			if( $("#newproject_form").length > 0){
+				$('#newproject_form #company-name').keyup(function() {
+					var val = $(this).val();
+					if(val!=''){
+						$('#newproject_form #project-name').val("Projet de "+val);
+					} else {
+						$('#newproject_form #project-name').val('');
+					}
+				});
+
+				//Désactive bouton si champs incomplets
+				$("input, textarea","#newproject_form").keyup(function(){
+					$("#newProject_button").find("button").prop('disabled', $("input, textarea","#newproject_form").filter(function() { return $(this).val() == ""; }).length >0);
+				});
+				$("input, textarea","#newproject_form").trigger('keyup')
+
+				$("#newproject_form").submit(function(){
+					$("#newProject_button").find(".button-text").hide();
+					$("#newProject_button").find(".button-waiting").show();
+					$("#newProject_button").prop('disabled', true);
+				});
+
+			}
+
 			//Si chargement données investisseurs/investissements nécessaire
 			if ($(".ajax-investments-load").length > 0) {
 				campaign_id = $(".ajax-investments-load").attr('data-value');
@@ -284,28 +310,6 @@ YPUIFunctions = (function($) {
 			$(".amount-to-pay").text(amount_with_fees);
 		},
 
-		getInvestorsTable: function(inv_data, campaign_id) {// Récupère le tableau d'investisseurs d'un projet en Ajax
-			$.ajax({
-				'type' : "POST",
-				'url' : ajax_object.ajax_url,
-				'data': {
-					'action':'get_investors_table',
-					'id_campaign':campaign_id,
-					'data' : inv_data
-				}
-			}).done(function(result){
-				//Affiche resultat requete Ajax une fois reçue
-				$('#ajax-investors-load').after(result);
-				$('#ajax-loader-img').hide();//On cache la roue de chargement.
-
-
-
-			}).fail(function(){
-				$('#ajax-investors-load').after("<em>Le chargement du tableau a échoué</em>");
-				$('#ajax-loader-img').hide();//On cache la roue de chargement.
-			});
-		},
-
 		getInvestsGraph : function(inv_data, campaign_id) {
 			$.ajax({
 				'type' : "POST",
@@ -349,10 +353,6 @@ YPUIFunctions = (function($) {
 					$('#ajax-id-investors-load #invested-send-mail-selector').slideDown();
 					list_id_inv = Object.keys(inv_data.investors_list).map(function (key) {return inv_data.investors_list[key];});
 					$('#ajax-id-investors-load #invested-send-mail-list').val(list_id_inv);
-				}
-				// Crée le tableau des investisseurs si besoin
-				if ($("#ajax-investors-load").length > 0) {
-					YPUIFunctions.getInvestorsTable(JSON.stringify(inv_data),campaign_id);
 				}
 
 				// Crée le graphe des investissements si besoin
@@ -423,6 +423,53 @@ YPUIFunctions = (function($) {
 					filterProjects();
 				});
 			});
+		},
+
+		initQtip: function(){
+			var i=0;
+			$('.infobutton, .qtip-element').each(function () {
+				//Check if doesn't exist yet
+				if($(this).data("hasqtip")==undefined){
+					var contentTip;
+					if($(this).attr("title")!=undefined){
+						contentTip = $(this).attr("title");
+					} else {
+						contentTip = $(this).next('.tooltiptext');
+					}
+
+					var settings = {
+						content: contentTip,
+						position: {
+							my: 'bottom center',
+							at: 'top center',
+						},
+						style: {
+							classes: 'wdgQtip qtip-dark qtip-rounded qtip-shadow'
+						},
+						hide: {
+							fixed: true,
+							delay: 300
+						}
+					};
+
+					if($(this).is("input[type=text], input[type=number], textarea")){
+						settings['show']='focus'
+						settings['hide']='blur'
+					}
+
+					var personnalised_settings = $(this).data("tooltip");
+					if(personnalised_settings!=undefined){
+						var data_settings = JSON.parse(personnalised_settings);
+						for (var attrname in data_settings) { settings[attrname] = data_settings[attrname]; }
+					}
+
+					if (contentTip != ""){
+						$(this).qtip(settings);
+						i++;
+					}
+				}
+			});
+			return i;
 		},
 
 		onRemoveUploadInterval: function() {

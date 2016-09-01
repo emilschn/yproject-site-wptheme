@@ -5,7 +5,7 @@ function print_news_page() {
            $WDGAuthor, $WDGUser_current;
     $category_link = get_category_link($campaign->get_news_category_id());
     $news_link = esc_url($category_link);
-    $posts_blog = get_posts(array('category'=>$campaign->get_news_category_id()));
+    $posts_blog = $campaign->get_news_posts();
     $nbposts_blog = count($posts_blog);
     $page_edit_news = get_page_by_path('editer-une-actu');
     ?>

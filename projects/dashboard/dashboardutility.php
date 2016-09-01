@@ -2,15 +2,14 @@
 
 class DashboardUtility
 {
-    public static function get_infobutton($hovertext, $display=false, $margin=true, $other_icon=""){
+    public static function get_infobutton($hovertext, $display=false, $other_icon=""){
         if(!empty($hovertext)) {
             if(empty($other_icon)){
-                $text = '<i class="fa fa-question-circle infobutton"';
+                $text = '<i class="fa fa-fw fa-question-circle infobutton"';
             } else {
-                $text = '<i class="fa fa-'.$other_icon.' infobutton"';
+                $text = '<i class="fa fa-fw fa-'.$other_icon.' infobutton"';
             }
 
-            if(!$margin){$text.= 'style="margin:0px"';}
             $text.=' aria-hidden="true"></i>';
             $text .= '<span class="tooltiptext">'.translate($hovertext, 'yproject').'</span>';
             if($display){
@@ -23,22 +22,11 @@ class DashboardUtility
     }
 
     public static function get_admin_infobutton($display=false){
-        $infobutton = self::get_infobutton("Vous pouvez modifier ce champ en tant qu'administrateur WDG",false,true,"unlock-alt");
+        $infobutton = self::get_infobutton("Vous pouvez voir ce champ en tant qu'administrateur WDG",false,"unlock-alt");
         if ($display) {
             echo $infobutton;
         }
         return $infobutton;
-    }
-
-    private static function has_class_icon($left_icon, $right_icon, $include_class_attr=true){
-        $t = "";
-        if($include_class_attr){
-            if(!empty($left_icon)){$t .= 'class="left-icon" ';} else if(!empty($right_icon)){$t .= 'class="right-icon" ';}
-        } else {
-            if(!empty($left_icon)){$t .= ' left-icon ';} else if(!empty($right_icon)){$t .= ' right-icon ';}
-
-        }
-        return $t;
     }
 
     /**
@@ -48,6 +36,7 @@ class DashboardUtility
      *          ['id']          string Id du champ de formulaire
      *          ['label']       string Titre affiché à côté du champ
      *          ['infobubble']  string Si non vide, un élément d'infobulle apparaît à côté du titre du champ
+     *          ['fillbubble']  string Si non vide, une bulle avec ce contenu apparaît lorsqu'on survole/sélectionne le champ
      *
      *          ['editable']    boolean Si Faux, le champ n'est pas éditable, la valeur est juste affichée, vrai par défaut
      *          ['visible']     boolean Si faux, le champ n'est pas affiché, vrai par défaut
@@ -63,7 +52,11 @@ class DashboardUtility
      *              "datetime"  champs pour choisir une date et une heure
      *              "link"      champ de texte spécialement pour une URL
      *              "check"     case à cocher
+     *              "textarea"  champ de texte étendu
+     *              "hidden"    valeur cachée
      *          ['value']       string Valeur initiale du champ
+     *          ['default_display'] string Valeur affichée par défaut (si non-éditable)
+     *
      *          ['placeholder'] string placeholder du champ
      *          ['prefix']      string texte affiché juste avant le champ
      *          ['suffix']      string texte affiché juste après le champ
@@ -87,6 +80,12 @@ class DashboardUtility
         $label = $params["label"];
         $infobubble = $params["infobubble"];
 
+        $fillbubble = $params["fillbubble"];
+        $fillbubble_class = " ";
+        if(!empty($fillbubble)){
+            $fillbubble_class = 'qtip-element ';
+        }
+
         //All input options
         if(isset($params["editable"])){$editable=$params["editable"];}else{$editable=true;};
         if(isset($params["visible"]) && ($params["visible"])==false){return "";};
@@ -94,12 +93,15 @@ class DashboardUtility
         if(isset($params["warning"])){$warning=$params["warning"];}else{$warning=false;};
 
         $initial_value = $params["value"];
+        $default_initial_value = $params["default_display"];
+
         $type = $params["type"];
         $placeholder=$params["placeholder"];
         if(empty($placeholder) && ($type=='date' || $type=='datetime' )){$placeholder="aaaa-mm-jj";}
         $prefix=$params["prefix"];
         $suffix=$params["suffix"];
 
+        //Icone (or default icon according to the input type)
         $left_icon = $right_icon = "";
         if(isset($params["left_icon"])){
             $left_icon=$params["left_icon"];
@@ -111,6 +113,8 @@ class DashboardUtility
             $right_icon="link";
         }
 
+        $icon_class = "";
+        if(!empty($left_icon)){$icon_class .= ' left-icon ';} else if(!empty($right_icon)){$icon_class .= ' right-icon ';}
 
         //Number input options
         if(isset($params["max"])){$max=$params["max"];};
@@ -128,6 +132,18 @@ class DashboardUtility
             }
         }
 
+        //Is this an hidden input
+        if($type=='hidden'){
+            $text_field = '<span class="field-container">'.$prefix.'<span class="field-value" data-type="'.$type.'" data-id="'.$id.'">';
+            $text_field .= '<input type="hidden" '
+                . 'name="' . $id . '" '
+                . 'id="' . $id . '" '
+                . 'value="' . $initial_value . '">';
+            $text_field .= '</span></span>';
+            if($display) echo $text_field;
+            return $text_field;
+        }
+
 
         $text_field = '<div class="field ';
         if($admin_theme){$text_field .='admin-theme';}
@@ -135,11 +151,15 @@ class DashboardUtility
 
         //Is this a checkbox
         if($type=='check'){
-            $text_field .='<span class="field-container">'.$prefix.'<span class="field-value" data-type="'.$type.'">
-            <input type="checkbox" id="update_'.$id.'" ';
-            if($initial_value){$text_field .='checked ';}
-            if(!$editable){$text_field .='disabled ';}
-            $text_field .= "></span>$suffix</span>";
+            $text_field .='<span class="field-container">'.$prefix.'<span class="field-value" data-type="'.$type.'" data-id="'.$id.'">
+            <input type="checkbox"
+                class="'.$fillbubble_class.'"';
+                if($initial_value){$text_field .='checked ';}
+                if(!$editable){$text_field .='disabled ';}
+                if($editable){$text_field .='id="'.$id.'"';}
+            $text_field .= ">";
+            if(!empty($fillbubble)){$text_field .= '<span class="tooltiptext">'.translate($fillbubble, 'yproject').'</span>';}
+            $text_field .= "</span>$suffix</span>";
         }
 
         //Create the label
@@ -151,11 +171,11 @@ class DashboardUtility
         $text_field .= translate($label,'yproject')
             .DashboardUtility::get_infobutton($infobubble);
         if($warning && $editable){
-            $text_field .= self::get_infobutton("Attention ce champ est normalement géré automatiquement, manipulez-le avec prudence",false,true,"exclamation-triangle");}
+            $text_field .= self::get_infobutton("Attention ce champ est normalement géré automatiquement, manipulez-le avec prudence",false,"exclamation-triangle");}
         $text_field .='</label>';
 
         if($type!='check') {
-            $text_field .= '<span class="field-container">' . $prefix . '<span class="field-value" data-type="' . $type . '">';
+            $text_field .= '<span class="field-container">' . $prefix . '<span class="field-value" data-type="' . $type . '" data-id="'.$id.'">';
 
             if ($editable) {
                 //Add the icon inside input
@@ -169,34 +189,43 @@ class DashboardUtility
                     case 'text':
                         $text_field .= '<input type="text" '
                             . 'name="' . $id . '" '
-                            . 'id="update_' . $id . '" '
+                            . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
-                            . 'value="' . $initial_value . '" ';
-                        $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
-                        $text_field .= '" />';
+                            . 'value="' . $initial_value . '" '
+                            . 'class="'.$fillbubble_class.$icon_class.'"';
+                        $text_field .= '">';
+                        break;
+                    case 'textarea':
+                        $text_field .= '<textarea rows="3" '
+                            . 'name="' . $id . '" '
+                            . 'id="' . $id . '" '
+                            . 'placeholder="' . $placeholder . '" '
+                            . 'class="'.$fillbubble_class.$icon_class.'"'
+                            .'">'
+                            .$initial_value.'</textarea>';
                         break;
                     case 'number':
                         $text_field .= '<input type="number" '
                             . 'name="' . $id . '" '
-                            . 'id="update_' . $id . '" '
+                            . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
                             . 'step="' . $step . '" '
-                            . 'value="' . $initial_value . '" ';
+                            . 'value="' . $initial_value . '" '
+                            . 'class="'.$fillbubble_class.$icon_class.'"';
                         if (isset($max)) {
                             $text_field .= 'max="' . $max . '" ';
                         }
                         if (isset($min)) {
                             $text_field .= 'min="' . $min . '" ';
                         }
-                        $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
                         $text_field .= '" />';
                         break;
                     case 'select':
                         $text_field .= '<select type="text" '
                             . 'name="' . $id . '" '
-                            . 'id="update_' . $id . '" ';
-                        $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
-                        $text_field .= '" >';
+                            . 'id="' . $id . '" '
+                            . 'class="'.$fillbubble_class.$icon_class.'"'
+                            . '" >';
                         foreach ($options_list as $index => $name) {
                             $text_field .= '<option value="' . $index . '" ';
                             if ($index == $initial_value) {
@@ -210,7 +239,7 @@ class DashboardUtility
                     case 'editor':
                         echo $text_field;
                         $text_field = "";
-                        wp_editor($initial_value, 'update_' . $id,
+                        wp_editor($initial_value, $id,
                             array(
                                 'media_buttons' => true,
                                 'quicktags' => false,
@@ -224,22 +253,22 @@ class DashboardUtility
                     case 'date':
                         $text_field .= '<input type="text"'
                             . 'name="' . $id . '" '
-                            . 'class="adddatepicker ' . DashboardUtility::has_class_icon($left_icon, $right_icon, false) . '" '
-                            . 'id="update_' . $id . '" '
+                            . 'class="adddatepicker ' .$fillbubble_class.$icon_class. '" '
+                            . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
                             . 'value="' . $initial_value->format('Y-m-d') . '" '
-                            . '" />';
+                            . '/>';
                         break;
                     case 'datetime':
                         $text_field .= '<input type="text"'
                             . 'name="' . $id . '" '
-                            . 'class="adddatepicker datetime ' . DashboardUtility::has_class_icon($left_icon, $right_icon, false) . '" '
-                            . 'id="update_' . $id . '" '
+                            . 'class="adddatepicker datetime ' .$fillbubble_class.$icon_class. '" '
+                            . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
                             . 'value="' . $initial_value->format('Y-m-d') . '" '
-                            . '" />';
+                            . '/>';
 
-                        $text_field .= '<select class="timepicker" ' . 'id="update_h_' . $id . '">';
+                        $text_field .= '<select class="timepicker" ' . 'id="' . $id . '_h">';
                         for ($i = 0; $i <= 23; $i++) {
                             $text_field .= '<option value="' . $i . '" ';
                             if ($initial_value->format('G') == $i) {
@@ -249,7 +278,7 @@ class DashboardUtility
                         }
                         $text_field .= '</select>';
 
-                        $text_field .= '<select class="timepicker" ' . 'id="update_m_' . $id . '">';
+                        $text_field .= '<select class="timepicker" ' . 'id="' . $id . '_m">';
                         for ($i = 0; $i <= 59; $i++) {
                             $text_field .= '<option value="' . $i . '" ';
                             if (intval($initial_value->format('i')) == $i) {
@@ -262,21 +291,29 @@ class DashboardUtility
                     case 'link':
                         $text_field .= '<input type="text" '
                             . 'name="' . $id . '" '
-                            . 'id="update_' . $id . '" '
+                            . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
-                            . 'value="' . $initial_value . '" ';
-                        $text_field .= DashboardUtility::has_class_icon($left_icon, $right_icon);
-                        $text_field .= '" />';
+                            . 'value="' . $initial_value . '" '
+                            . 'class="'.$fillbubble_class.$icon_class.'"/>';
                         break;
                     default:
                         $text_field .= $initial_value;
                 }
-            } else {
+
+                if(!empty($fillbubble)){$text_field .= '<span class="tooltiptext">'.translate($fillbubble, 'yproject').'</span>';}
+            }
+            else {
+                $text_field .= '<span class="non-editable">';
                 switch ($type) {
                     case 'text':
                     case 'number':
                     case 'editor':
-                        $text_field .= $initial_value;
+                    case 'textarea':
+                        if(empty($initial_value)){
+                            $text_field .= $default_initial_value;
+                        } else {
+                            $text_field .= $initial_value;
+                        }
                         break;
                     case 'select':
                         $text_field .= translate($options_list[$initial_value], 'yproject');
@@ -290,11 +327,13 @@ class DashboardUtility
                     case 'link':
                         if (!empty($initial_value)) {
                             $text_field .= '<a target="_blank" href="' . $initial_value . '">' . $initial_value .
-                                '&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>';
+                                '&nbsp;<i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>';
+                        } else {
+                            $text_field .= $default_initial_value;
                         }
                         break;
                 }
-
+                $text_field .= '</span>';
             }
             $text_field .= '</span>' . $suffix . '</span>';
             }
@@ -311,26 +350,35 @@ class DashboardUtility
      * @param bool $display Affiche ou non le bouton à la fin, affiche par défaut
      * @return string le code HTML du bouton
      */
-    public static function create_save_button($id, $display=true){
-        //Style/classes à retravailler....
-
-        $text_field ='<p class="align-center" id="'.$id.'_button">'
-            .'<button type="submit" class="button">'
+    public static function create_save_button($id, $display=true, $initialText= 'Enregistrer', $waitingText = 'Enregistrement'){
+        $text_field ='<p class="align-center" id="'.$id.'_button">';
+        $text_field .='<button type="submit" class="button">'
                 .'<span class="button-text">'
-                    .__("Enregistrer", 'yproject')
+                    .__($initialText, 'yproject')
                 .'</span>'
                 .'<span class="button-waiting" hidden>'
-                    .'<i class="fa fa-spinner fa-spin fa-fw"></i>'.__("Enregistrement", 'yproject')
+                    .'<i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;'.__($waitingText, 'yproject')
                 .'</span>'
             .'</button>'
-            .'</p>
-            <p id="'.$id.'_loading" class="align-center" hidden>
-            <img src="'.get_stylesheet_directory_uri().'/images/loading.gif" alt="chargement"/>
-            </p>';
+            .'</p>'
+            .'<div class="feedback_save">'
+                .'<span class="save_ok">Enregistré</span>'
+                .'<span class="save_errors">Certaines informations sont invalides</span>'
+                .'<span class="save_fail">Erreur de communication, réessayez plus tard</span>'
+            .'</div>';
 
         if($display){
             echo $text_field;
         }
         return $text_field;
+    }
+
+    public static function check_enabled_page(){
+        global $validated_or_after, $is_admin;
+        if($is_admin && !$validated_or_after){
+            echo 'class=admin-theme';
+        } else if(!$validated_or_after) {
+            echo 'class="disabled"';
+        }
     }
 }

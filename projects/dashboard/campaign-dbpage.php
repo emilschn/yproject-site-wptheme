@@ -4,7 +4,10 @@ function print_campaign_page()
 {
     global $campaign_id, $campaign, $post_campaign,
            $WDGAuthor, $WDGUser_current,
-           $is_admin, $is_author;
+           $is_admin, $is_author,
+
+            $status, $collecte_or_after, $vote_or_after, $preview_or_after, $validated_or_after ;
+
     ?>
 
     <div class="head"><?php _e('Organisation de la campagne', 'yproject'); ?></div>
@@ -35,62 +38,65 @@ function print_campaign_page()
             <br/><br/>
         <?php }?>
 
-        <form id="campaign_form" class="db-form">
+        <form id="campaign_form" class="db-form" data-action="save_project_campaigntab">
             <ul class="errors">
 
             </ul>
             <?php
             DashboardUtility::create_field(array(
-                "id"=>"end_vote_date",
+                "id"=>"new_end_vote_date",
                 "type"=>"datetime",
                 "label"=>"Date de fin de vote",
                 "value"=>new DateTime($campaign->end_vote_date()),
                 "editable"=>$is_admin,
                 "admin_theme"=>$is_admin,
-                "warning"=>true
+                "warning"=>true,
+                "visible"=>$is_admin || $vote_or_after
             ));
 
             DashboardUtility::create_field(array(
-                "id"=>"begin_collecte_date",
+                "id"=>"new_begin_collecte_date",
                 "type"=>"datetime",
                 "label"=>"Date de d&eacute;but de collecte",
                 "value"=>new DateTime($campaign->begin_collecte_date()),
                 "editable"=>false,
                 "admin_theme"=>$is_admin,
                 "editable"=>$is_admin,
-                "warning"=>true
+                "warning"=>true,
+                "visible"=>$is_admin || $collecte_or_after
             ));
 
             DashboardUtility::create_field(array(
-                "id"=>"end_collecte_date",
+                "id"=>"new_end_collecte_date",
                 "type"=>"datetime",
                 "label"=>"Date de fin de collecte",
                 "value"=>new DateTime($campaign->end_date()),
                 "admin_theme"=>$is_admin,
                 "editable"=>$is_admin,
-                "warning"=>true
+                "warning"=>true,
+                "visible"=>$is_admin || $collecte_or_after
             ));
 
             DashboardUtility::create_field(array(
-                "id"=>"planning_gdrive",
+                "id"=>"new_planning_gdrive",
                 "type"=>"link",
                 "label"=>"Lien du google drive planning",
                 "value"=> $campaign->google_doc(),
                 "editable"=> $is_admin,
                 "admin_theme"=>$is_admin,
                 "placeholder"=>"https://docs.google.com/document/d/.....",
-                "visible"=> $is_admin || $campaign->google_doc()!=''
+                "default_display"=>'Le planning n`\'a pas encore été défini'
             ));
 
             DashboardUtility::create_field(array(
-                "id"=>"logbook_gdrive",
+                "id"=>"new_logbook_gdrive",
                 "type"=>"link",
                 "label"=>"Lien du google drive journal de bord",
                 "value"=> $campaign->logbook_google_doc(),
                 "editable"=> $is_admin,
                 "admin_theme"=>$is_admin,
                 "placeholder"=>"https://docs.google.com/document/d/.....",
-                "visible"=> $is_admin || $campaign->logbook_google_doc()!=''
+                "default_display"=>'Le journal de bord n`\'a pas encore été défini'
             ));
 
             DashboardUtility::create_save_button("campaign_form",$is_admin);
@@ -132,7 +138,7 @@ function print_campaign_page()
         <div style="text-align:center">
             <input type="text" id="new_team_member_string" style="width: 295px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
             <a class="project-manage-team button" data-action="yproject-add-member"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;<?php _e('Ajouter', 'ypoject'); ?></a>
-            <?php DashboardUtility::get_infobutton("Les membres de l'&eacute;quipe peuvent acc&eacute;der au tableau de bord et modifier les param&egrave;tres et la page de projet",true); ?>
+            <?php DashboardUtility::get_infobutton("Les membres de l'&eacute;quipe peuvent acc&eacute;der au tableau de bord, modifier les param&egrave;tres et la page de projet",true); ?>
         </div>
     </div>
 
