@@ -1,15 +1,16 @@
 <?php global $stylesheet_directory_uri, $campaign ?>
-<div style="text-align:center">
-    <h1>Bienvenue !</h1>
-    <p>Votre projet a bien été créé, nous sommes ravis de vous accueillir ! Notre équipe va vous contacter dans les 72h.</p>
+<div>
+    <h1 style="text-align:center">Bienvenue !</h1>
+    <p>Vos informations ont bien été enregistrées.</p>
 
-    <p>Voici votre tableau de bord. Vous pouvez plus tard y accéder en survolant le bouton "MON COMPTE" dans le menu principal du site.</p>
+    <p>Accédez à tout moment à votre projet via le bouton "MON COMPTE" dans le menu principal du site :</p>
     <img style="max-width: 100%;" src="<?php echo $stylesheet_directory_uri; ?>/images/apercu-mon-compte.png" alt="" />
 
-    <p>Vous pouvez dès maintenant y compléter les informations* de votre projet dans l'onglet "Informations".</p>
+    <p>Complétez dès maintenant votre dossier. Notre équipe vous contactera prochainement.</p>
+	
+    <p>Toutes les informations communiquées à WE DO GOOD sont gardées confidentielles.</p>
 
-    <a class="button" id="wdg-lightbox-welcome-close">C'est parti !</a>
-    <br/><br/>
-    <em style="font-size:0.9em">* Toutes les informations communiquées à WE DO GOOD sont gardées confidentielles.</em>
+	<p style="text-align:center"><a class="button" id="wdg-lightbox-welcome-close">J'y vais</a></p>
+    
     <br/>
 </div>
