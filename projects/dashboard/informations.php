@@ -342,54 +342,53 @@ function print_informations_page()
             <form id="projectfunding_form"  class="db-form" data-action="save_project_funding">
                 <?php
                 DashboardUtility::create_field(array(
-                    "id"=>"new_maximum_goal",
-                    "type"=>"number",
-                    "label"=>"Montant maximal demand&eacute;",
-                    "value"=>$campaign->goal(false),
-                    "right_icon"=>"eur",
-                    "min"=>500
+                    "id"			=> "new_maximum_goal",
+                    "type"			=> "number",
+                    "label"			=> "Montant maximal demand&eacute;",
+                    "value"			=> $campaign->goal(false),
+                    "right_icon"	=> "eur",
+                    "min"			=> 500
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"new_minimum_goal",
-                    "type"=>"number",
-                    "label"=>"Palier minimal",
-                    "infobubble"=>"Au-del&agrave; de ce palier, la collecte sera valid&eacute; mais rien n'emp&ecirc;che d'avoir un objectif plus ambitieux !",
-                    "value"=>$campaign->minimum_goal(false),
-                    "right_icon"=>"eur",
-                    "min"=>500
-                ));
-
-
-                DashboardUtility::create_field(array(
-                    "id"=>"new_funding_duration",
-                    "type"=>"number",
-                    "label"=>"Dur&eacute;e du financement",
-                    "value"=>$campaign->funding_duration(),
-                    "suffix"=>" ann&eacute;es",
-                    "min"=>1,
-                    "max"=>10
+                    "id"			=> "new_minimum_goal",
+                    "type"			=> "number",
+                    "label"			=> "Palier minimal",
+                    "infobubble"	=> "Au-del&agrave; de ce palier, la collecte sera valid&eacute; mais rien n'emp&ecirc;che d'avoir un objectif plus ambitieux !",
+                    "value"			=> $campaign->minimum_goal(false),
+                    "right_icon"	=> "eur",
+                    "min"			=> 500
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"new_roi_percent_estimated",
-                    "type"=>"number",
-                    "label"=>"Pourcentage de reversement estim&eacute;",
-                    "value"=>$campaign->funding_duration(),
-                    "suffix"=>"&nbsp;% du CA",
-                    "min"=>0,
-                    "max"=>100,
-                    "step"=>0.01
+                    "id"			=> "new_funding_duration",
+                    "type"			=> "number",
+                    "label"			=> "Dur&eacute;e du financement",
+                    "value"			=> $campaign->funding_duration(),
+                    "suffix"		=> " ann&eacute;es",
+                    "min"			=> 1,
+                    "max"			=> 10
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"new_first_payment",
-                    "type"=>"date",
-                    "label"=>"Première date de versement",
-                    "value"=>new DateTime($campaign->first_payment_date()),
-                    "editable"=> $is_admin,
-                    "admin_theme"=>$is_admin,
-                    "visible"=>$is_admin || ($campaign->first_payment_date()!="")
+                    "id"			=> "new_roi_percent_estimated",
+                    "type"			=> "number",
+                    "label"			=> "Pourcentage de reversement estim&eacute;",
+                    "value"			=> $campaign->funding_duration(),
+                    "suffix"		=> "&nbsp;% du CA",
+                    "min"			=> 0,
+                    "max"			=> 100,
+                    "step"			=> 0.01
+                ));
+
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_first_payment",
+                    "type"			=> "date",
+                    "label"			=> "Première date de versement",
+                    "value"			=> new DateTime($campaign->first_payment_date()),
+                    "editable"		=> $is_admin,
+                    "admin_theme"	=> $is_admin,
+                    "visible"		=> $is_admin || ($campaign->first_payment_date()!="")
                 ));
 
                 ?>

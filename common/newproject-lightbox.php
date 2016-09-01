@@ -11,7 +11,7 @@ if (!is_user_logged_in()){
 
 
 <form id="newproject_form" class="db-form" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>">
-    <h2 style="text-align: center;"><?php _e('Créer un projet','yproject');?></h2><?php
+    <h2 style="text-align: center;"><?php _e('D&eacute;pot de dossier','yproject');?></h2><?php
 
     DashboardUtility::create_field(array(
         "id"=>"firstname",
@@ -24,7 +24,7 @@ if (!is_user_logged_in()){
     DashboardUtility::create_field(array(
         "id"=>"lastname",
         "type"=>"text",
-        "label"=>'Votre nom',
+        "label"=>'Nom',
         "value"=> $WDGUser_current->wp_user->user_lastname,
         "left_icon"=>"user",
     ));
@@ -78,7 +78,7 @@ if (!is_user_logged_in()){
         "value"=> '',
     ));
 
-    DashboardUtility::create_save_button('newProject', true, "Créer le projet", "Création du projet");
+    DashboardUtility::create_save_button('newProject', true, "Enregistrer", "Création du projet");
 
     ?></form>
 <?php } ?>

@@ -6,13 +6,17 @@ function page_resume_lightboxes(){
 function print_resume_page()
 {
     global $campaign_id, $campaign, $post_campaign,
-           $WDGAuthor, $WDGUser_current,
+           $WDGAuthor,
            $is_admin, $is_author;
 
     global $stats_views, $stats_views_today;
     global $vote_results, $nb_jcrois, $nb_votes, $nb_invests;
 
-    global $status, $collecte_or_after, $vote_or_after, $preview_or_after, $validated_or_after ;
+    global $status, $collecte_or_after, $vote_or_after, $preview_or_after, $validated_or_after;
+	
+	$WDGUser_current = WDGUser::current();
+	$campaign_organisation = $campaign->get_organisation();
+	$wdg_organisation = new YPOrganisation($campaign_organisation->organisation_wpref);
 
     ?>
     <div class="head"><?php _e("Vue d'ensemble", 'yproject'); ?></div>
@@ -218,147 +222,232 @@ function print_resume_page()
     <?php } ?>
 
     <div class="tab-content" id="next-status-tab">
-        <?php if($status == ATCF_Campaign::$campaign_status_preparing
-            || $status == ATCF_Campaign::$campaign_status_validated
-            || $status == ATCF_Campaign::$campaign_status_preview
-            || ($status == ATCF_Campaign::$campaign_status_vote && $campaign->end_vote_remaining()<=0)){ ?>
-        <h2 style='text-align:center'>Pr&ecirc;t pour la suite ?</h2>
+        <?php if (	$status == ATCF_Campaign::$campaign_status_preparing
+					|| $status == ATCF_Campaign::$campaign_status_validated
+					|| $status == ATCF_Campaign::$campaign_status_preview
+					|| ($status == ATCF_Campaign::$campaign_status_vote && $campaign->end_vote_remaining()<=0)) { ?>
+        <h2 style='text-align:center'><?php _e("On continue ?", 'yproject'); ?></h2>
 
         <form method="POST" action="<?php echo admin_url( 'admin-post.php?action=change_project_status'); ?>">
             <input type="hidden" name="campaign_id" value="<?php echo $campaign_id;?>">
             <ul>
-                <?php if ($status == ATCF_Campaign::$campaign_status_preparing) { ?>
-                    <p id="desc-preview">(texte à peut-être changer) Pour savoir si votre projet il est bien ou bien
-                        il est pas bien il va &ecirc;tre examin&eacute; par le conseil de s&eacute;lection,
-                        il va falloir remplir des informations avant!!!!</p>
+                <?php if ($status == ATCF_Campaign::$campaign_status_preparing): ?>
+					<p id="desc-preview">
+						<?php _e("Votre projet doit maintenant &ecirc;tre valid&eacute; par le Comit&eacute; de s&eacute;lection.", 'yproject'); ?><br />
+						<?php _e("&Ecirc;tes-vous pr&ecirc;t &agrave; le pr&eacute;senter ?", 'yproject'); ?>
+					</p>
 
-                    <li><label><input type="checkbox" class="checkbox-next-status" disabled
-                                <?php if(ypcf_check_user_is_complete($campaign->post_author())){
-                                    echo "checked";
-                                }?>>
-                            L'auteur du projet, <?php print_r(get_user_by('id', $campaign->post_author())->get('display_name'));?>,
-                            a rempli ses informations personnelles</label>
+                    <li>
+						<label>
+							<?php
+							$preparing_has_filled_desc = TRUE;
+							$is_waiting_for_comitee = TRUE;
+							?>
+							<input type="checkbox" class="checkbox-next-status" disabled <?php checked( $preparing_has_filled_desc ); ?>>
+                            J'ai compl&eacute;t&eacute; la description de mon projet et de ses impacts
+						</label>
                     </li>
-                    <li><label><input type="checkbox" class="checkbox-next-status" disabled
-                                <?php
-                                $campaign_organisation = $campaign->get_organisation();
-                                if ($campaign_organisation) {
-                                    echo "checked";
-                                }?>>
-                            J'ai d&eacute;termin&eacute; l'organisation du projet</label>
+                    <li>
+						<label>
+							<?php
+							$preparing_user_is_complete = ypcf_check_user_is_complete($campaign->post_author());
+							$is_waiting_for_comitee &= $preparing_user_is_complete;
+							?>
+							<input type="checkbox" class="checkbox-next-status" disabled <?php checked( $preparing_user_is_complete ); ?>>
+                            L'auteur du projet, <?php print_r(get_user_by('id', $campaign->post_author())->get('display_name')); ?>, a rempli ses informations personnelles
+						</label>
                     </li>
+                    <li>
+						<label>
+							<?php
+							$preparing_org_is_complete = $wdg_organisation->has_filled_invest_infos();
+							$is_waiting_for_comitee &= $preparing_org_is_complete;
+							?>
+							<input type="checkbox" class="checkbox-next-status" disabled <?php checked( $preparing_org_is_complete ); ?>>
+                            J'ai compl&eacute;t&eacute; les informations sur l'organisation qui porte le projet
+						</label>
+                    </li>
+                    <li>
+						<label>
+							<?php
+							$preparing_finance_ready = ($campaign->funding_duration() > 0 && $campaign->goal(false) > 0 && $campaign->minimum_goal(false) > 0);
+							$is_waiting_for_comitee &= $preparing_finance_ready;
+							?>
+							<input type="checkbox" class="checkbox-next-status" disabled <?php checked( $preparing_finance_ready ); ?>>
+                            J'ai pr&eacute;cis&eacute; mon besoin de financement
+						</label>
+                    </li>
+                    <li>
+						<label>
+							<?php
+							$preparing_parameters_validated = TRUE;
+							$is_waiting_for_comitee &= $preparing_parameters_validated;
+							?>
+							<input type="checkbox" class="checkbox-next-status" disabled <?php checked( $preparing_parameters_validated ); ?>>
+                            J'ai valid&eacute; les param&egrave;tres de ma lev&eacute;e de fonds avec un membre de l'équipe WE DO GOOD
+						</label>
+                    </li>
+                    <li>
+						<label>
+							<?php
+							$preparing_signed_order = TRUE;
+							$is_waiting_for_comitee &= $preparing_signed_order;
+							?>
+							<input type="checkbox" class="checkbox-next-status" disabled <?php checked( $preparing_signed_order ); ?>>
+                            J'ai exprim&eacute; mon engagement en renvoyant le bon de commande sign&eacute;
+						</label>
+                    </li>
+					
+					
+                <?php elseif ($status == ATCF_Campaign::$campaign_status_validated): ?>
+                    <p id="desc-preview">
+						<?php _e("Il est temps maintenant de pr&eacute;parer la publication de votre projet.", 'yproject'); ?><br />
+						<?php _e("Vous devrez r&eacute;unir au moins :", 'yproject'); ?><br />
+						<?php _e("- 50 votants avec des intentions d'investissement", 'yproject'); ?><br />
+						<?php _e("- 50% de votes positifs", 'yproject'); ?><br />
+						<?php _e("- 50% d'intentions d'investissement par rapport &agrave; votre objectif", 'yproject'); ?><br />
+						<br />
+						<?php _e("&Ecirc;tes-vous pr&ecirc;t &agrave; le publier ?", 'yproject'); ?><br />
+					</p>
+					
+                    <li>
+						<label>
+							<?php
+							$validated_documents_sent = $wdg_organisation->has_sent_all_documents();
+							?>
+							<input type="checkbox" class="checkbox-next-status" disabled <?php checked($validated_documents_sent); ?>>
+                            J'ai transmis les documents d'authentification de mon organisation
+						</label>
+                    </li>
+                    <li>
+						<label>
+							<?php
+							$validated_org_authentified = $wdg_organisation->is_registered_lemonway_wallet();
+							?>
+							<input type="checkbox" class="checkbox-next-status" disabled <?php checked($validated_org_authentified); ?>>
+                            L'organisation est authentifiée par le prestataire de paiement
+							<?php DashboardUtility::get_infobutton("Le prestataire de paiement s&eacute;curis&eacute; doit valider votre compte. Cela peut prendre quelques jours.", true); ?>
+						</label>
+                    </li>
+                    <li>
+						<label>
+							<?php
+							$validated_presentation_complete = TRUE;
+							?>
+							<input type="checkbox" class="checkbox-next-status" disabled <?php checked($validated_presentation_complete); ?>>
+                            J'ai compl&eacute;t&eacute; la pr&eacute;sentation de mon projet
+						</label>
+                    </li>
+                    <li>
+						<label>
+							<?php
+							$validated_vote_authorized = $campaign->can_go_next_status();
+							?>
+							<input type="checkbox" class="checkbox-next-status" disabled <?php checked($validated_vote_authorized); ?>>
+                            L'&eacute;quipe de WE DO GOOD a autoris&eacute; la publication de mon projet en vote
+						</label>
+                    </li>
+					
+                    <li>
+						<label>
+							<input type="checkbox" class="checkbox-next-status">
+                            J'ai list&eacute; tous les contacts mobilisables pour ma lev&eacute;e de fonds avec toute mon &eacute;quipe
+						</label>
+                    </li>
+                    <li>
+						<label>
+							<input type="checkbox" class="checkbox-next-status">
+                            J'ai pr&eacute;par&eacute; des mails &agrave; envoyer à l'ensemble de mes contacts et des publications pour les r&eacute;seaux sociaux
+						</label>
+                    </li>
+                    <li>
+						<label>
+							<input type="checkbox" class="checkbox-next-status">
+                            J'ai planifi&eacute; des rencontres et des prises de contact pour parler de mon projet et de ma campagne &agrave; mes proches et &agrave; mon r&eacute;seau
+						</label>
+                    </li>
+					
+					<li>
+						<label>
+							Nombre de jours du vote :
+							<input type="number" id="innbdayvote" name="innbdayvote" min="10" max="30" value="30" style="width: 40px;">
+						</label>
+						Fin du vote : <span id="previewenddatevote"></span>
+						<?php //TODO : choisir l'heure de fin de vote ?>
+					</li>
 
-                <?php }
-                if ($status == ATCF_Campaign::$campaign_status_validated) { ?>
-                    <p id="desc-preview">L'avant premi&egrave;re permet d'&ecirc;tre visible sur le site wedogood.co avant le lancement de la campagne.
-                        Les internautes pourront d&eacute;couvrir une partie de votre projet.</p>
-                    <li><label><input type="checkbox" class="checkbox-next-status" disabled
-                                <?php if(ypcf_check_user_is_complete($campaign->post_author())){
-                                    echo "checked";
-                                }?>>
-                            L'auteur du projet, <?php print_r(get_user_by('id', $campaign->post_author())->get('display_name'));?>,
-                            a rempli ses informations personnelles</label>
-                    </li>
-                    <li><label><input type="checkbox" class="checkbox-next-status" disabled
-                                <?php
-                                $campaign_organisation = $campaign->get_organisation();
-                                if ($campaign_organisation) {
-                                    echo "checked";
-                                }?>>
-                            J'ai d&eacute;termin&eacute; l'organisation du projet</label>
-                    </li>
-                    <li><label><input type="checkbox" class="checkbox-next-status">
-                            J'ai compl&eacute;t&eacute; ma page projet</label>
-                    </li>
-                    <li><label><input type="checkbox" class="checkbox-next-status">
-                            J'ai &eacute;tabli des actions de communication cibl&eacute;es pour informer du lancement de la campagne : r&eacute;seaux sociaux, mails, &eacute;venements ...</label>
-                    </li>
-                    <li id="cb-go-preview"><label><input type="checkbox" class="checkbox-next-status">
-                            Je suis pr&ecirc;t &agrave; passer en avant-premi&egrave;re</label>
-                    </li>
 
-
-                <?php }
-                if (($status == ATCF_Campaign::$campaign_status_preview)
-                    || ($status == ATCF_Campaign::$campaign_status_validated)) { ?>
-                    <div id="vote-checklist"<?php if ($status == ATCF_Campaign::$campaign_status_validated) { echo 'hidden=""'; } ?>>
-                        <p>Pour r&eacute;ussir la phase de vote, je dois :</p>
-                        <ul id="vote-goals">
-                            <li>R&eacute;unir au moins <strong><?php echo ATCF_Campaign::$voters_min_required?></strong> votants</li>
-                            <li>Avoir au moins <strong><?php echo ATCF_Campaign::$vote_score_min_required;?>%</strong> de vote positif</li>
-                            <li>Avoir au moins <strong>50%</strong> d'intentions d'investissement de l'objectif de collecte (recommand&eacute;)</li>
-                        </ul>
-                        <li><label>Nombre de jours du vote :
-                                <input type="number" id="innbdayvote" name="innbdayvote" min="10" max="30" value="30" style="width: 40px;"></label>
-                            Fin du vote : <span id="previewenddatevote"></span>
-                        </li>
-                        <li><label><input type="checkbox" class="checkbox-next-status">
-                                J'ai pr&eacute;par&eacute; des messages &agrave; envoyer par mail et &agrave; publier sur les r&eacute;seaux sociaux dans l'heure</label>
-                        </li>
-                        <li><label><input type="checkbox" class="checkbox-next-status">
-                                J'ai planifi&eacute; des rencontres et des prises de contact pour parler de mon projet et de ma campagne</label>
-                        </li>
-                        <li><label><input type="checkbox" class="checkbox-next-status">
-                                Je suis prêt &agrave; parler de ma campagne &agrave; tout moment et en tout lieu (pr&eacute;sence &agrave; des &eacute;v&egrave;nements, discussions avec mes proches et mes partenaires...)</label>
-                        </li>
-
-                        <li><label><input type="checkbox" class="checkbox-next-status" disabled
-                                    <?php
-                                    $campaign_organisation = $campaign->get_organisation();
-                                    $organization_obj = new YPOrganisation($campaign_organisation->organisation_wpref);
-                                    if ($organization_obj->is_registered_lemonway_wallet()) { echo "checked"; }
-                                    ?>>
-                                L'organisation est authentifi&eacute;e par le prestataire de paiement.
-                                <?php DashboardUtility::get_infobutton("Une fois les documents transmis dans la partie &quot;entreprise&quot;, le prestataire de paiement sécurisé doit valider votre compte. Cela peut prendre quelques jours.",true)?></label>
-                        </li>
-                    </div>
-
-
-                <?php }
-                else if ($status == ATCF_Campaign::$campaign_status_vote) { ?>
-                    <p>Le moment de la collecte est arriv&eacute; !</p>
-                    <li><label>Nombre de jours de la collecte :
-                            <input type="number" id="innbdaycollecte" name="innbdaycollecte" min="1" max="60" value="30" style="width: 40px;"></label>
+                <?php elseif ($status == ATCF_Campaign::$campaign_status_vote): ?>
+                    <p id="desc-preview">
+						<?php _e("Il est temps maintenant de passer aux choses s&eacute;rieuses.", 'yproject'); ?>
+						<?php _e("&Ecirc;tes-vous pr&ecirc;t &agrave; lancer votre lev&eacute;e de fonds ?", 'yproject'); ?>
+					</p>
+					<li>
+						<label>
+							<?php
+							$vote_can_go_next = $campaign->can_go_next_status();
+							?>
+							<input type="checkbox" class="checkbox-next-status" id="cbcannext" disabled <?php checked( $vote_can_go_next ); ?>>
+							L'&eacute;quipe WE DO GOOD a autoris&eacute; mon passage en lev&eacute;e de fonds
+						</label>
+					</li>
+					<li>
+						<label>
+							<?php
+							$vote_has_been_validated = $campaign->is_vote_validated();
+							?>
+							<input type="checkbox" class="checkbox-next-status" id="cbcannext" disabled <?php checked( $vote_has_been_validated ); ?>>
+							Mon projet a &eacute;t&eacute; valid&eacute; pendant la phase de vote
+						</label>
+					</li>
+                    <li>
+						<label>
+							<input type="checkbox" class="checkbox-next-status">
+                            Je suis pr&ecirc;t &agrave; devenir le premier investisseur de mon projet 
+						</label>
+                    </li>
+                    <li>
+						<label>
+							<input type="checkbox" class="checkbox-next-status">
+                            J'ai pr&eacute;par&eacute; des mails &agrave; envoyer &agrave; l'ensemble de mes contacts et des publications pour les r&eacute;seaux sociaux
+						</label>
+                    </li>
+                    <li>
+						<label>
+							<input type="checkbox" class="checkbox-next-status">
+                            J'ai planifi&eacute; des rencontres et des prises de contact pour parler de mon projet et de ma campagne &agrave; mes proches et &agrave; mon r&eacute;seau
+						</label>
+                    </li>
+                    <li>
+						<label>
+							Nombre de jours de la collecte :
+                            <input type="number" id="innbdaycollecte" name="innbdaycollecte" min="1" max="60" value="30" style="width: 40px;">
+						</label>
                         Fin de la collecte : <span id="previewenddatecollecte"></span>
                     </li>
                     <li>
-                        <label>Heure de fin de collecte :
+                        <label>
+							La lev&eacute;e de fonds se terminera &agrave; :
                             <input type="number" id="inendh" name="inendh" min="0" max="23" value="12" style="width: 40px;">h
-                            <input type="number" id="inendm" name="inendm" min="0" max="59" value="00" style="width: 40px;"> </label>
+                            <input type="number" id="inendm" name="inendm" min="0" max="59" value="00" style="width: 40px;">
+						</label>
+						<?php DashboardUtility::get_infobutton("Veillez &agrave; d&eacute;finir l'heure de fin &agrave; un moment o&ugrave; vous pourrez toucher des investisseurs et encore mener des action de communication. Nous vous conseillons 22h.",true); ?>
                     </li>
-                    <li><label><input type="checkbox" class="checkbox-next-status">
-                            Ma carte bancaire est prête pour être le premier investisseur</label>
-                    </li>
-                    <li><label><input type="checkbox" class="checkbox-next-status">
-                            J'ai pr&eacute;par&eacute; un mail prêt &agrave; être envoy&eacute; &agrave; un nombre significatif de personnes</label>
-                    </li>
-                    <li><label><input type="checkbox" class="checkbox-next-status">
-                            Je suis prêt &agrave; faire chauffer mon t&eacute;l&eacute;phone dans les minutes qui viennent</label>
-                    </li>
-                    <li><label><input type="checkbox" class="checkbox-next-status" id="cbvotefin" disabled
-                                <?php if(($campaign->is_vote_validated() && $campaign->end_vote_remaining()<=0)|| $campaign->can_go_next_status()){echo "checked";}
-                                ?>>
-                            Le vote est termin&eacute; et le projet a &eacute;t&eacute; valid&eacute;</label>
-                    </li>
-
-                <?php } if ($status != ATCF_Campaign::$campaign_status_preparing) { ?>
-                <li><label><input type="checkbox" class="checkbox-next-status" id="cbcannext" disabled
-                            <?php if ($campaign->can_go_next_status()) {echo 'checked ';} ?>>
-                        L'&eacute;quipe WE DO GOOD a valid&eacute; pour passer &agrave; l'&eacute;tape suivante</label>
-                </li>
-                <?php } ?>
+				<?php endif; ?>
             </ul>
 
             <div class="list-button">
-                <?php if ($status == ATCF_Campaign::$campaign_status_preparing && $is_admin){
-                    echo DashboardUtility::get_admin_infobutton()?>
-                    <input type="submit" value="Valider le projet" class="button admin-theme" id="submit-go-next-status-admin">
-                <?php } else if ($status != ATCF_Campaign::$campaign_status_preparing) { ?>
-                    <input type="submit" value="C'est parti !" class="button" id="submit-go-next-status">
-                <?php }
-                if ($status == ATCF_Campaign::$campaign_status_validated) { ?>
-                    <br/><br/><a class="button" id="no-preview-button">Je ne souhaite pas d'avant-première, passons le projet en vote.</a>
-                <?php }  ?>
+				<?php if ($status == ATCF_Campaign::$campaign_status_preparing && $is_waiting_for_comitee): ?>
+					Dossier en attente de validation par le Comit&eacute; de s&eacute;lection.<br />
+					<?php if ( $WDGUser_current->is_admin() ): ?>
+						<?php DashboardUtility::get_admin_infobutton( TRUE ); ?>
+						<input type="submit" value="Valider le projet" class="button admin-theme" id="submit-go-next-status-admin">
+					<?php endif; ?>
+				<?php elseif ($status == ATCF_Campaign::$campaign_status_validated): ?>
+                    <input type="submit" value="Publier mon projet en vote !" class="button" id="submit-go-next-status">
+                <?php elseif ($status == ATCF_Campaign::$campaign_status_vote): ?>
+                    <input type="submit" value="Lancer ma lev&eacute;e de fonds !" class="button" id="submit-go-next-status">
+                <?php endif; ?>
             </div>
 
             <input type="hidden" name="next_status" value="1" id="next-status-choice">
@@ -370,27 +459,27 @@ function print_resume_page()
             <hr class="form-separator"/>
             <?php
             DashboardUtility::create_field(array(
-                "id"=>"new_campaign_status",
-                "type"=>"select",
-                "label"=>"Changer l'&eacute;tape actuelle de la campagne",
-                "value"=>$status,
-                "editable"=> $is_admin,
-                "admin_theme"=>$is_admin,
-                "visible"=>$is_admin,
-                "options_id"=>array_keys($status_list),
-                "options_names"=>array_values($status_list),
-                "warning"=>true
+                "id"			=> "new_campaign_status",
+                "type"			=> "select",
+                "label"			=> "Changer l'&eacute;tape actuelle de la campagne",
+                "value"			=> $status,
+                "editable"		=> $is_admin,
+                "admin_theme"	=> $is_admin,
+                "visible"		=> $is_admin,
+                "options_id"	=> array_keys($status_list),
+                "options_names"	=> array_values($status_list),
+                "warning"		=> true
             ));
 
             DashboardUtility::create_field(array(
-                "id"=>"new_can_go_next_status",
-                "type"=>"check",
-                "label"=>"Autoriser &agrave; passer &agrave; l'&eacute;tape suivante",
-                "value"=> $campaign->can_go_next_status(),
-                "editable"=> $is_admin,
-                "admin_theme"=>$is_admin,
-                "visible"=>$is_admin && $validated_or_after,
-                "placeholder"=>"http://....."
+                "id"			=> "new_can_go_next_status",
+                "type"			=> "check",
+                "label"			=> "Autoriser &agrave; passer &agrave; l'&eacute;tape suivante",
+                "value"			=> $campaign->can_go_next_status(),
+                "editable"		=> $is_admin,
+                "admin_theme"	=> $is_admin,
+                "visible"		=> $is_admin && $validated_or_after,
+                "placeholder"	=> "http://....."
             ));
 
             DashboardUtility::create_save_button("statusmanage-form",$is_admin);
