@@ -278,6 +278,7 @@ div#content.version-3 div.project-pitch-video {
     float: right;
 	text-align: right;
     width: 580px;
+	min-height: 330px;
 }
 div#content.version-3 div.project-pitch-video iframe {
 	max-width: 100%;
