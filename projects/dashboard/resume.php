@@ -1,90 +1,4 @@
 <?php
-/*
-function check_change_status(){
-    global $can_modify,
-           $campaign_id, $campaign, $post_campaign,
-           $WDGAuthor, $WDGUser_current,
-           $is_admin, $is_author;
-    $status = $campaign->campaign_status();
-
-    if ($can_modify
-        && isset($_POST['next_status'])
-        && ($_POST['next_status']==1 || $_POST['next_status']==2)){
-
-        if ($status==ATCF_Campaign::$campaign_status_preparing && $is_admin){
-            //Préparation -> Validé (pour les admin seulement)
-            $campaign->set_status(ATCF_Campaign::$campaign_status_validated);
-            $campaign->set_validation_next_status(0);
-
-        } else if ($campaign->can_go_next_status()){
-            if ($status==ATCF_Campaign::$campaign_status_validated && ($_POST['next_status']==1)){
-                //Validé -> Avant-première
-                $campaign->set_status(ATCF_Campaign::$campaign_status_preview);
-                $campaign->set_validation_next_status(0);
-
-            } else if ($status==ATCF_Campaign::$campaign_status_preview
-                || ($status==ATCF_Campaign::$campaign_status_validated &&($_POST['next_status']==2))){
-                //Validé/Avant-première -> Vote
-
-                //Vérifiation organisation complète
-                $orga_done=false;
-                $api_project_id = BoppLibHelpers::get_api_project_id($campaign_id);
-                $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-
-                if (isset($current_organisations) && count($current_organisations) > 0) {
-                    $campaign_organisation = $campaign->get_organisation();
-
-                    //Vérification validation lemonway
-                    $organization_obj = new YPOrganisation($campaign_organisation->organisation_wpref);
-                    if ($organization_obj->is_registered_lemonway_wallet()) { $orga_done = true; }
-                }
-
-                //Validation données
-                if($orga_done && ypcf_check_user_is_complete($campaign->post_author())&& isset($_POST['innbdayvote'])){
-                    $vote_time = $_POST['innbdayvote'];
-                    if(10<=$vote_time && $vote_time<=30){
-                        //Fixe date fin de vote
-                        $diffVoteDay = new DateInterval('P'.$vote_time.'D');
-                        $VoteEndDate = (new DateTime())->add($diffVoteDay);
-                        //$VoteEndDate->setTime(23,59);
-                        $campaign->set_end_vote_date($VoteEndDate);
-
-                        $campaign->set_status(ATCF_Campaign::$campaign_status_vote);
-                        $campaign->set_validation_next_status(0);
-                    }
-                }
-
-
-            } else if ($status==ATCF_Campaign::$campaign_status_vote){
-                //Vote -> Collecte
-                if(isset($_POST['innbdaycollecte'])
-                    && isset($_POST['inendh'])
-                    && isset($_POST['inendm'])){
-                    //Recupere nombre de jours et heure de fin de la collecte
-                    $collecte_time = $_POST['innbdaycollecte'];
-                    $collecte_fin_heure = $_POST['inendh'];
-                    $collecte_fin_minute = $_POST['inendm'];
-
-                    if( 1<=$collecte_time && $collecte_time<=60
-                        && 0<=$collecte_fin_heure && $collecte_fin_heure<=23
-                        && 0<=$collecte_fin_minute && $collecte_fin_minute<=59){
-                        //Fixe la date de fin de collecte
-                        $diffCollectDay = new DateInterval('P'.$collecte_time.'D');
-                        $CollectEndDate = (new DateTime())->add($diffCollectDay);
-                        $CollectEndDate->setTime($collecte_fin_heure,$collecte_fin_minute);
-                        $campaign->set_end_date($CollectEndDate);
-                        $campaign->set_begin_collecte_date(new DateTime());
-
-                        $campaign->set_status(ATCF_Campaign::$campaign_status_collecte);
-                        $campaign->set_validation_next_status(0);
-                    }
-                }
-            }
-        }
-    }
-    return $campaign->campaign_status();
-}
-*/
 function page_resume_lightboxes(){
     echo do_shortcode('[yproject_statsadvanced_lightbox]');
 }
@@ -101,15 +15,15 @@ function print_resume_page()
     global $status, $collecte_or_after, $vote_or_after, $preview_or_after, $validated_or_after ;
 
     ?>
-    <div class="head"><?php _e('Vue d\'ensemble', 'yproject'); ?></div>
+    <div class="head"><?php _e("Vue d'ensemble", 'yproject'); ?></div>
     <div id="status-list">
         <?php
         $status_list = ATCF_Campaign::get_campaign_status_list();
         $nb_status = count($status_list)-1;
         $i=1; ?>
         <div class="perso <?php if($status==ATCF_Campaign::$campaign_status_preparing){echo ' preparing ';}?>"></div>
-        <?php foreach ($status_list as $status_key => $name) {
-            ?><div class="status
+        <?php foreach ($status_list as $status_key => $name): if ($status_key != ATCF_Campaign::$campaign_status_preview): ?>
+            <div class="status
                     <?php   if($i==1){echo "begin ";}
                             if($i==$nb_status){echo "end ";}?>"
                    <?php if($status_key==$status){echo 'id="current"';}?>>
@@ -139,27 +53,32 @@ function print_resume_page()
                     <?php echo $name.'<br/>';
                     switch ($status_key){
                         case ATCF_Campaign::$campaign_status_preparing:
-                            DashboardUtility::get_infobutton("Pendant la pr&eacute;paration, pr&eacute;sentez votre projet à WDG.",true);
+                            DashboardUtility::get_infobutton("R&eacute;sumez votre projet et transmettez les informations n&eacute;cessaires au comit&eacute; de s&eacute;lection.",true);
                             break;
                         case ATCF_Campaign::$campaign_status_validated:
-                            DashboardUtility::get_infobutton("Une fois validé, créez la page du projet qui sera visible sur le site.",true);
+                            DashboardUtility::get_infobutton("Nous vous conseillons sur votre campagne de communication et la pr&eacute;sentation de votre projet.",true);
                             break;
                         case ATCF_Campaign::$campaign_status_preview:
-                            DashboardUtility::get_infobutton("L'avant-première fait découvrir votre projet sur le site. Cette étape est facultative",true);
+                            DashboardUtility::get_infobutton("L'avant-première permet de faire d&eacute;couvrir votre projet sur le site. Cette &eacute;tape est facultative",true);
                             break;
                         case ATCF_Campaign::$campaign_status_vote:
-                            DashboardUtility::get_infobutton("Le vote sert à confirmer votre capacité à fédérer vos cercles d'investisseurs",true);
+                            DashboardUtility::get_infobutton("Testez votre communication et &eacute;valuez votre capacit&eacute; à f&eacute;d&eacute;rer vos cercles d'investisseurs.",true);
                             break;
                         case ATCF_Campaign::$campaign_status_collecte:
-                            DashboardUtility::get_infobutton("Ici, on récolte les sous",true);
+                            DashboardUtility::get_infobutton("Mobilisez des investisseurs pour atteindre votre seuil de validation de campagne et le d&eacute;passer !",true);
                             break;
                         case ATCF_Campaign::$campaign_status_funded:
-                            DashboardUtility::get_infobutton("TOUS LES SOUS!!!!",true);
+                            DashboardUtility::get_infobutton("Versez les royalties &agrave; vos investisseurs en fonction de votre chiffre d'affaires et tenez-les inform&eacute;s des avanc&eacute;es de votre projet.",true);
+                            break;
+                        case ATCF_Campaign::$campaign_status_archive:
+                            DashboardUtility::get_infobutton("Votre contrat est arriv&eacute; &agrave; son terme.",true);
                             break;
                     }
                     ?>
                 </div>
-            </div><?php $i++; } ?>
+            </div>
+			<?php $i++; ?>
+		<?php endif; endforeach; ?>
     </div>
 
     <?php if($preview_or_after){ ?>

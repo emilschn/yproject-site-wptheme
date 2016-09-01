@@ -210,6 +210,7 @@
     width: calc((100% - 40px)/7);
     height: 170px;
     position: relative;
+	margin-left: -4px;
 }
 
 #ndashboard #status-list .status.begin {
@@ -236,6 +237,7 @@
     margin-right:50%;
 }
 #ndashboard #status-list .linetoright{
+	display: none;
     height: 45px;
     border-top: 3px solid black;
     border-left: 3px solid black;
@@ -246,6 +248,7 @@
 }
 
 #ndashboard #status-list .linetoleft{
+	display: none;
     height: 45px;
     border-top: 3px solid black;
     border-right: 3px solid black;
