@@ -26,7 +26,7 @@ function check_next_step(){
                  $campaign_organisation = $campaign->get_organisation();
                  $organization_obj = new YPOrganisation($campaign_organisation->organisation_wpref);
 
-                 if ($organization_obj->is_registered_lemonway_wallet()) { $orga_done = true; }
+                 if ($organization_obj->get_lemonway_status() == YPOrganisation::$lemonway_status_registered) { $orga_done = true; }
              }
 
              if($orga_done && ypcf_check_user_is_complete($campaign->post_author())&& isset($_POST['innbdayvote'])){
