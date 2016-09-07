@@ -95,23 +95,4 @@ if ($str_organisations != ''): ?>
 <?php endif; ?>
 <div class="clear"></div>
 
-<?php 
-/*
-$default_query = array(
-    'author'         => $user_id,
-    'show_stickies'  => false,
-    'order'          => 'DESC',
-);
-
-// Try to get the topics
-	$query = bbp_has_topics( array(
-		'author' => bp_displayed_user_id()
-	) );
-
-print_r( $query);
-//print_r(bbp_get_user_topics_started(bp_displayed_user_id()));
- * 
- */
-?>
-
 <br /><br />

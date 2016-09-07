@@ -102,7 +102,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 					<span class="roi_percent_average">...</span><?php _e("% par an en moyenne*", 'yproject'); ?>
 					(<?php _e("soit", 'yproject'); ?> <span class="roi_ratio_on_total">...</span> <?php echo __("en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>)</span><br />
 
-				<span class="small-alert">* <?php _e("Ces valeurs sont estim&eacute;es selon les pr&eacute;visions du porteur de projet. Risque de perte int&eacute;grale de l&apos;investissement. Gain maximum : x2.", "yproject"); ?></span>
+				<span class="small-alert">* <?php echo sprintf( __("Ces valeurs sont estim&eacute;es selon les pr&eacute;visions du porteur de projet. Risque de perte int&eacute;grale de l&apos;investissement. Gain maximum : x%s.", "yproject"), $campaign->maximum_profit() ); ?></span>
 			</div>
 
 			<?php if ($campaign_status == "collecte"): ?>

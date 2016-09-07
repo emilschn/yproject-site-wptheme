@@ -65,16 +65,6 @@ if (is_user_logged_in()) {
 	
 	
 	<div id="triggered-menu-shareresponsive" class="triggered-menu hidden">
-		<span>
-			<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>" target="_blank">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.jpg" alt="logo facebook" />
-			</a>
-			<a href="http://twitter.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>&text='WEDOGOOD'" target="_blank">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.jpg" alt="logo twitter" />
-			</a>
-			<a href="https://plus.google.com/share?url=<?php echo $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ?>" target="_blank">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/google+.jpg" alt="logo google" />
-			</a>
-		</span>
+		<?php locate_template( 'projects/common/share-buttons.php', true, false ); ?>
 	</div>
 </div>

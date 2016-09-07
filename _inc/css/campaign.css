@@ -25,6 +25,7 @@ div#content.version-3 div.separator-title span {
 #container { padding-top: 0px; }
 div#content.version-3 .padder { margin-top: 180px; }
 body.single-post div#content.version-3 .padder { margin-top: 122px; }
+body.archive.category div#content.version-3 .padder { margin-top: 120px; }
 div#content.version-3 .separator {
     background: url("../../images/tiret_noir.png");
     height: 6px;
@@ -228,23 +229,16 @@ div#content.version-3 div.project-banner div.project-banner-content div.right di
 	margin-bottom: 20px;
 }
 
-div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share {
+div#content.version-3 div#triggered-menu-share {
 	display: none;
     position: absolute;
-    top: 335px;
 	width: 960px;
 	text-align: right;
+	margin-top: -20px;
+	margin-left: -14px;
 }
-div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered {
+div#content.version-3 div#triggered-menu-share.triggered {
     display: block;
-}
-div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered span {
-	background: #FFFFFF;
-	display: inline-block;
-	padding: 5px 10px;
-}
-div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered img {
-	width: 40px;
 }
 
 div#content.version-3 #wdg-move-picture-head {
@@ -284,6 +278,7 @@ div#content.version-3 div.project-pitch-video {
     float: right;
 	text-align: right;
     width: 580px;
+	min-height: 330px;
 }
 div#content.version-3 div.project-pitch-video iframe {
 	max-width: 100%;

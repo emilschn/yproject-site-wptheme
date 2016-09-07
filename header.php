@@ -66,7 +66,7 @@
                     } else {
 			    echo "Plateforme d'investissement participatif à impact positif";
                     } ?>" />*/ ?>
-                <?php $imageFacebook = ($is_campaign_page === true) ? $campaign->get_home_picture_src() : $stylesheet_directory_uri .'/images/logo_entier.jpg'; ?> 
+                <?php $imageFacebook = (isset($campaign) && $is_campaign_page === true) ? $campaign->get_home_picture_src() : $stylesheet_directory_uri .'/images/logo_entier.jpg'; ?> 
 		<?php /* <meta property="og:image" content="<?php echo $imageFacebook ?>" /> */ ?>
 		<meta property="og:image:secure_url" content="<?php echo $imageFacebook ?>" />
 		<meta property="og:image:type" content="image/jpeg" />

@@ -22,32 +22,6 @@ if (function_exists('stats_get_csv')) {
 	
 }
 
-$forum_topic_count = 0;
-$forum_post_count = 0;
-$forum_last_reply_url = '';
-$forum_last_reply_author = '';
-$forum_last_user = '';
-$forum_last_user_name = '';
-$forum_last_activity = '';
-$nb_users = 0;
-if (function_exists('bbp_get_forum_topic_count')) {
-	//Forum
-	$table_name = $wpdb->prefix . "posts";
-	$forum_results = $wpdb->get_results("SELECT ID FROM ".$table_name." WHERE post_type='forum' AND post_name=".$campaign_id."");
-	if (isset($forum_results)) $project_forum_id = $forum_results[0]->ID;
-	$forum_topic_count = bbp_get_forum_topic_count($project_forum_id);
-	$forum_post_count = bbp_get_forum_post_count($project_forum_id);
-	$forum_last_reply_url = bbp_get_forum_last_reply_url($project_forum_id);
-	$forum_last_reply_author = bbp_get_forum_last_reply_author_id($project_forum_id);
-	$forum_last_user = get_user_by('id', $forum_last_reply_author);
-	$forum_last_user_name = $forum_last_user->display_name;
-	$forum_last_activity = bbp_get_forum_last_active_time($project_forum_id);
-	$topic_ids = bbp_forum_query_topic_ids( $project_forum_id );
-	if ( !empty( $topic_ids ) ) {
-	    $nb_users = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(DISTINCT post_author) FROM {$wpdb->posts} WHERE post_parent IN ( " . join( ',', $topic_ids ) . " ) AND post_status = '%s' AND (post_type = 'topic' OR post_type = 'reply');", bbp_get_public_status_id() ) );
-	}
-}
-
 //Stats facebook 
 /*
 $fb_share_count = 0;
@@ -86,14 +60,7 @@ Votre projet a &eacute;t&eacute; vu<br />
 <strong><?php echo $stats_views_7days[0]['views']; ?></strong> fois sur les 7 derniers jours.<br />
 <strong><?php echo $stats_views_today[0]['views']; ?></strong> fois aujourd&apos;hui.<br />
 
-<h2>Forum</h2>
-<strong><?php echo $forum_topic_count; ?></strong> sujets ont &eacute;t&eacute; ouverts.<br />
-<?php if ($forum_topic_count > 0): ?>
-<strong><?php echo $forum_post_count; ?></strong> messages ont &eacute;t&eacute; post&eacute;s.<br />
-<strong><?php echo $nb_users; ?></strong> personnes ont particip&eacute;.<br />
-<a href="<?php echo $forum_last_reply_url; ?>">Derni&egrave;re r&eacute;ponse</a> par <?php echo $forum_last_user_name; ?>. <?php echo $forum_last_activity; ?>.
-<br /><br />
-<?php endif; /*?>
+<?php /*?>
 
 <h2>R&eacute;seaux sociaux</h2>
 <h3>Facebook</h3>

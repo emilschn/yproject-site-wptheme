@@ -47,7 +47,6 @@ function yproject_setup() {
 add_action( 'after_setup_theme', 'yproject_setup', 15 );
 
 add_action('wp_insert_comment', array('NotificationsEmails', 'new_comment'), 99 ,2);
-add_action('bbp_new_topic', array('NotificationsEmails', 'new_topic'), 99 ,2);
 
 //Sécurité
 remove_action("wp_head", "wp_generator");
@@ -59,7 +58,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
-	$current_version = '20160712';
+	$current_version = '20160831';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -89,10 +88,8 @@ function yproject_enqueue_script(){
 		wp_enqueue_style('datatable-colReorder-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.colReorder.css', null, false, 'all');
 	}
 	
-	if ($is_campaign && $campaign->edit_version() >= 3) {
-	    wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, $current_version, 'all');
-	}
 	if ($is_campaign_page && $campaign->edit_version() >= 3) {
+	    wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, $current_version, 'all');
 	    wp_enqueue_script( 'wdg-campaign', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign.js', array('jquery', 'jquery-ui-dialog'), $current_version);
 		if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
 	} else {
@@ -471,16 +468,6 @@ function yproject_check_user_can_see_project_page() {
 		exit();
 	}
 }
-
-
-/**
- * Filtres pour modification de contenu
- */
-function yproject_bbp_get_forum_title($title) {
-    $campaign_post = get_post($title);
-    return  $campaign_post->post_title;
-}
-add_filter('bbp_get_forum_title', 'yproject_bbp_get_forum_title');
 
 /**
  * Ajoute rel=0 à la fin de l'url de la vidéo
