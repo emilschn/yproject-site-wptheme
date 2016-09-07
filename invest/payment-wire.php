@@ -73,7 +73,7 @@ if (isset($campaign)): ?>
 		<?php endif; ?>
 		
 		
-		<?php _e("Une fois le virement effectu&eacute;, cliquez sur", 'yproject'); ?><br /><br />
+		<?php _e("Une fois le virement effectu&eacute;, cliquez sur", 'yproject'); ?>
 		<a href="<?php echo get_permalink($page_payment_done->ID) . '?campaign_id=' . $campaign->ID . '&meanofpayment=wire'; ?>" class="button"><?php _e("SUIVANT", 'yproject'); ?></a><br /><br />
 
 		
