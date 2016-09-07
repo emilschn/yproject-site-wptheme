@@ -18,27 +18,10 @@ if (is_home() or is_front_page()) {
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 					<?php 
-					ob_start(); 
-					$is_single_forum = false;
-					if ( bbp_is_topic(get_the_ID()) && !bbp_is_forum_category() ) : 
-					    $temp = ob_get_clean(); 
-					    $is_single_forum = true;
-					else: 
-					    $temp = ob_get_clean(); 
-					endif; 
+					ob_start();
+					$temp = ob_get_clean(); 
 					?>
-
-					<?php if ($is_single_forum === true):
-						global $campaign_id;
-						$temp_post = get_post(get_the_ID());
-						$campaign_id = $temp_post->post_title;
-						require_once('projects/single-admin-bar.php');
-						require_once('projects/single-header.php');
-					?>
-					<div class="entry">
-					<?php else: ?>
 					<div class="entry center">
-					<?php endif; ?>
 					    
 						<?php the_content( __( '<p class="serif">Read the rest of this page &rarr;</p>', 'buddypress' ) ); ?>
 
