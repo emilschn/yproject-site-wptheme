@@ -3384,6 +3384,7 @@ ul.invest-mean-payment li img {
 	display: inline-block;
 	width: 100px;
 	padding-top: 60px;
+	height: 16px;
 	background: url("images/invest-breadcrumb-pictos.jpg") -37px top no-repeat;
 	text-align: center;
 }

@@ -30,6 +30,11 @@ if (isset($campaign)):
 	$can_use_wire = ($campaign->can_use_wire($_SESSION['redirect_current_amount_part']));
 	//Possible de régler par chèque ?
 	$can_use_check = ($campaign->can_use_check($_SESSION['redirect_current_amount_part']));
+	$user_is_lemonway_registered = FALSE;
+	if ($can_use_wire) {
+		$wdg_current_user = WDGUser::current();
+		$user_is_lemonway_registered = $wdg_current_user->is_lemonway_registered();
+	}
 	?>
 						
 	<?php
@@ -78,9 +83,9 @@ if (isset($campaign)):
 			
 			<?php if ($can_use_wire): ?>
 			<li>
-				<a href="<?php echo $page_mean_payment_link; ?>wire" class="alert-confirm" data-alertconfirm="<?php _e("Vous allez acc&eacute;der aux informations pour proc&eacute;der &agrave; un virement bancaire.", 'yproject'); ?>">
+				<a href="<?php echo $page_mean_payment_link; ?>wire" <?php if (!$user_is_lemonway_registered): ?>class="alert-confirm" data-alertconfirm="<?php _e("Attention : pour investir via un virement bancaire, vous devrez nous fournir une copie de votre pi&egrave;ce d'identit&eacute; et un justificatif de domicile.", 'yproject'); ?>"<?php endif; ?>>
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-virement.jpg" alt="<?php _e("Virement bancaire", 'yproject'); ?>" />
-					<?php _e("Virement bancaire", 'yproject'); ?>
+					<?php _e("Virement bancaire", 'yproject'); ?> <?php _e("(une copie de votre pi&egrave;ce d'identit&eacute; et un justificatif de domicile seront n&eacute;cessaires)", 'yproject'); ?>
 				</a>
 			</li>
 			<?php elseif ($campaign->can_use_wire_remaining_time() && !$campaign->can_use_wire_amount($_SESSION['redirect_current_amount_part'])): ?>
@@ -105,10 +110,6 @@ if (isset($campaign)):
 			<?php endif; ?>
 			<div class="clear"></div>
 		</ul>
-	<?php endif; ?>
-
-	<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
-	<div class="align-center mangopay-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="Bandeau Mangopay" /></div>
 	<?php endif; ?>
 
 <?php endif;
