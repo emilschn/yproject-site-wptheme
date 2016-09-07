@@ -152,7 +152,8 @@ if (isset($campaign) && is_user_logged_in()):
 					?>
 				
 					<?php if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wire'): ?>
-						<?php _e("Nous attendons votre virement.", 'yproject'); ?><br /><br />
+						<?php NotificationsEmails::new_purchase_pending_wire_user( $payment_id ); ?>
+						<?php _e("Dans l'attente de votre virement, vous recevrez un e-mail rappelant les informations &agrave; nous fournir.", 'yproject'); ?><br /><br />
 						
 						<?php if ($campaign->funding_type() != 'fundingdonation' && $amount > 1500): ?>
 							<?php _e("Une fois valid&eacute;, vous recevrez deux e-mails :", 'yproject'); ?><br /><br />
