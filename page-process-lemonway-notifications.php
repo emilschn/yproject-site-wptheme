@@ -19,7 +19,7 @@ $lemonway_posted_date = filter_input( INPUT_POST, 'NotifDate' );
 $lemonway_posted_id_internal = filter_input( INPUT_POST, 'IntId' );
 /**
  * ExtId : Identifiant externe du wallet
- * Ex : jkdc
+ * Ex : USERW3987
  */
 $lemonway_posted_id_external = filter_input( INPUT_POST, 'ExtId' );
 /**
@@ -54,10 +54,54 @@ if ( !empty( $lemonway_posted_category ) ) {
 		
 		// Algo à faire :
 		// - Trouver l'utilisateur à partir de son identifiant externe
-		// - Parcourir ses paiements et trouver un investissement en attente correspondant au montant et de type virement
-		// - Faire le transfert vers le porte-monnaie du porteur de projet
-		// - Créer le contrat pdf
-		// - Envoyer validation d'investissement par mail
+		$WDGUser_invest_author = WDGUser::get_by_lemonway_id( $lemonway_posted_id_external );
+		if ( $WDGUser_invest_author !== FALSE ) {
+			// - Parcourir ses paiements et trouver un investissement en attente correspondant au montant et de type virement
+			$investment_id = FALSE;
+			$investment_campaign_id = FALSE;
+			$investments_by_campaign = $WDGUser_invest_author->get_pending_investments();
+			foreach ( $investments_by_campaign as $campaign_id => $campaign_investments ) {
+				foreach ($campaign_investments as $$campaign_investment_id) {
+					$payment_key = edd_get_payment_key( $campaign_investment_id );
+					if ( strpos( $payment_key, 'wire_' ) ) {
+						$payment_amount = edd_get_payment_amount( $campaign_investment_id );
+						if ( $payment_amount == $lemonway_posted_amount ) {
+							$investment_campaign_id = $campaign_id;
+							$investment_id = $campaign_investment_id;
+						}
+					}
+				}
+			}
+			
+			if ( $investment_id != FALSE && $investment_campaign_id != FALSE ) {
+				// - Faire le transfert vers le porte-monnaie du porteur de projet
+				$post_campaign = get_post( $investment_campaign_id );
+				$campaign = new ATCF_Campaign( $post_campaign );
+				$campaign_organization = $campaign->get_organisation();
+				$organization_obj = new YPOrganisation( $campaign_organization->organisation_wpref );
+				LemonwayLib::ask_transfer_funds( $WDGUser_invest_author->get_lemonway_id(), $organisation_obj->get_lemonway_id(), $lemonway_posted_amount );
+				
+				// - Créer le contrat pdf
+				// - Envoyer validation d'investissement par mail
+				if ( $lemonway_posted_amount > 1500 ) {
+					$contract_id = ypcf_create_contract( $investment_id, $investment_campaign_id, $WDGUser_invest_author->wp_user->ID );
+					if ($contract_id != '') {
+						$contract_infos = signsquid_get_contract_infos( $contract_id );
+						NotificationsEmails::new_purchase_user_success( $investment_id, $contract_infos->{'signatories'}[0]->{'code'}, FALSE );
+						NotificationsEmails::new_purchase_admin_success( $investment_id );
+					} else {
+						global $contract_errors;
+						$contract_errors = 'contract_failed';
+						NotificationsEmails::new_purchase_user_error_contract( $investment_id );
+						NotificationsEmails::new_purchase_admin_error_contract( $investment_id );
+					}
+				} else {
+					$new_contract_pdf_file = getNewPdfToSign( $investment_campaign_id, $investment_id, $WDGUser_invest_author->wp_user->ID );
+					NotificationsEmails::new_purchase_user_success_nocontract( $investment_id, $new_contract_pdf_file, FALSE );
+					NotificationsEmails::new_purchase_admin_success_nocontract( $investment_id, $new_contract_pdf_file );
+				}
+			}
+		}
 		
 	}
 	
