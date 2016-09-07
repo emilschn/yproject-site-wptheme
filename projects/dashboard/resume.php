@@ -15,6 +15,7 @@ function print_resume_page()
     global $status, $collecte_or_after, $vote_or_after, $preview_or_after, $validated_or_after;
 	
 	$WDGUser_current = WDGUser::current();
+	$WDGUser_author = new WDGUser( $campaign->post_author() );
 	$campaign_organisation = $campaign->get_organisation();
 	$wdg_organisation = new YPOrganisation($campaign_organisation->organisation_wpref);
 
@@ -254,7 +255,7 @@ function print_resume_page()
 							$is_waiting_for_comitee &= $preparing_user_is_complete;
 							?>
 							<input type="checkbox" class="checkbox-next-status" disabled <?php checked( $preparing_user_is_complete ); ?>>
-                            L'auteur du projet, <?php print_r(get_user_by('id', $campaign->post_author())->get('display_name')); ?>, a rempli ses informations personnelles
+                            L'auteur du projet, <?php echo $WDGUser_author->wp_user->get('display_name'); ?>, a rempli ses informations personnelles
 						</label>
                     </li>
                     <li>
@@ -332,7 +333,7 @@ function print_resume_page()
                     <li>
 						<label>
 							<?php
-							$validated_presentation_complete = TRUE;
+							$validated_presentation_complete = $campaign->can_go_next_status();
 							?>
 							<input type="checkbox" class="checkbox-next-status" disabled <?php checked($validated_presentation_complete); ?>>
                             J'ai compl&eacute;t&eacute; la pr&eacute;sentation de mon projet
@@ -344,7 +345,7 @@ function print_resume_page()
 							$validated_vote_authorized = $campaign->can_go_next_status();
 							?>
 							<input type="checkbox" class="checkbox-next-status" disabled <?php checked($validated_vote_authorized); ?>>
-                            L'&eacute;quipe de WE DO GOOD a autoris&eacute; la publication de mon projet en vote
+                            WE DO GOOD a autoris&eacute; la publication de mon projet en vote
 						</label>
                     </li>
 					
@@ -388,16 +389,7 @@ function print_resume_page()
 							$vote_can_go_next = $campaign->can_go_next_status();
 							?>
 							<input type="checkbox" class="checkbox-next-status" id="cbcannext" disabled <?php checked( $vote_can_go_next ); ?>>
-							L'&eacute;quipe WE DO GOOD a autoris&eacute; mon passage en lev&eacute;e de fonds
-						</label>
-					</li>
-					<li>
-						<label>
-							<?php
-							$vote_has_been_validated = $campaign->is_vote_validated();
-							?>
-							<input type="checkbox" class="checkbox-next-status" id="cbcannext" disabled <?php checked( $vote_has_been_validated ); ?>>
-							Mon projet a &eacute;t&eacute; valid&eacute; pendant la phase de vote
+							WE DO GOOD a autoris&eacute; mon passage en lev&eacute;e de fonds
 						</label>
 					</li>
                     <li>
