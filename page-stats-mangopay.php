@@ -63,6 +63,10 @@ get_header();
 //			WDGROI::cancel_list( 1173 );
 			?>
 			
+			<?php
+			LemonwayLib::wallet_register_iban( 'SC', 'WE DO GOOD', 'FR7614445202000800123435043', 'CEPAFRPP444', '51 RUE SAINT HELIER 35000 RENNES' );
+			?>
+			
 			<?php // Gérer des virements individuels
 			/*
 			$debit_orga = 2408;
