@@ -1,5 +1,5 @@
 <?php 
-global $can_modify, $campaign_id;
+global $can_modify, $campaign_id, $is_campaign_page;
 $this_category = get_category($cat);
 $this_category_name = $this_category->name;
 $name_exploded = explode('cat', $this_category_name);
@@ -12,6 +12,7 @@ if (isset($campaign_id)) {
 	$campaign = atcf_get_campaign($campaign_post);
 	$edit_version = $campaign->edit_version();
 	$classes = 'version-' . $edit_version;
+	$is_campaign_page = TRUE;
 	
 	$tag_list = wp_get_post_terms($campaign_id, 'download_tag');
 	foreach ($tag_list as $tag) {
