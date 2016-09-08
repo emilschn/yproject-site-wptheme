@@ -91,9 +91,6 @@ if (count($current_organisations) > 0) {
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
 						<span class="campaign-mobile-hidden"><?php _e('Objectif :', 'yproject'); ?>
 							<b><?php echo $campaign->minimum_goal(true); ?></b>
-							<?php if ($campaign->minimum_goal(false) < $campaign->goal(false)): ?>
-								<?php _e('&agrave;', 'yproject'); ?> <b><?php echo $campaign->goal(true); ?></b>
-							<?php endif; ?>
 						</span>
 						<span class="hidden"><b><?php echo $campaign->minimum_goal(true); ?></b></span>
 					</div>
