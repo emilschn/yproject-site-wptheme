@@ -241,10 +241,10 @@ function print_resume_page()
                     <li>
 						<label>
 							<?php
-							$preparing_has_filled_desc = TRUE;
-							$is_waiting_for_comitee = TRUE;
+							$preparing_has_filled_desc = ( $campaign->get_validation_step_status( 'has_filled_desc' ) == "on" );
+							$is_waiting_for_comitee = $preparing_has_filled_desc;
 							?>
-							<input type="checkbox" class="checkbox-next-status" disabled <?php checked( $preparing_has_filled_desc ); ?>>
+							<input type="checkbox" class="checkbox-next-status" name="validation-step-has-filled-desc" <?php if (!$WDGUser_current->is_admin()) { ?>disabled<?php } ?> <?php checked( $preparing_has_filled_desc ); ?>>
                             J'ai compl&eacute;t&eacute; la description de mon projet et de ses impacts
 						</label>
                     </li>
@@ -271,30 +271,30 @@ function print_resume_page()
                     <li>
 						<label>
 							<?php
-							$preparing_finance_ready = ($campaign->funding_duration() > 0 && $campaign->goal(false) > 0 && $campaign->minimum_goal(false) > 0);
+							$preparing_finance_ready = ( $campaign->get_validation_step_status( 'has_filled_finance' ) == "on" );
 							$is_waiting_for_comitee &= $preparing_finance_ready;
 							?>
-							<input type="checkbox" class="checkbox-next-status" disabled <?php checked( $preparing_finance_ready ); ?>>
+							<input type="checkbox" class="checkbox-next-status" name="validation-step-has-filled-finance" <?php if (!$WDGUser_current->is_admin()) { ?>disabled<?php } ?> <?php checked( $preparing_finance_ready ); ?>>
                             J'ai pr&eacute;cis&eacute; mon besoin de financement
 						</label>
                     </li>
                     <li>
 						<label>
 							<?php
-							$preparing_parameters_validated = TRUE;
+							$preparing_parameters_validated = ( $campaign->get_validation_step_status( 'has_filled_parameters' ) == "on" );
 							$is_waiting_for_comitee &= $preparing_parameters_validated;
 							?>
-							<input type="checkbox" class="checkbox-next-status" disabled <?php checked( $preparing_parameters_validated ); ?>>
+							<input type="checkbox" class="checkbox-next-status" name="validation-step-has-filled-parameters" <?php if (!$WDGUser_current->is_admin()) { ?>disabled<?php } ?> <?php checked( $preparing_parameters_validated ); ?>>
                             J'ai valid&eacute; les param&egrave;tres de ma lev&eacute;e de fonds avec un membre de l'équipe WE DO GOOD
 						</label>
                     </li>
                     <li>
 						<label>
 							<?php
-							$preparing_signed_order = TRUE;
+							$preparing_signed_order = ( $campaign->get_validation_step_status( 'has_signed_order' ) == "on" );
 							$is_waiting_for_comitee &= $preparing_signed_order;
 							?>
-							<input type="checkbox" class="checkbox-next-status" disabled <?php checked( $preparing_signed_order ); ?>>
+							<input type="checkbox" class="checkbox-next-status" name="validation-step-has-signed-order" <?php if (!$WDGUser_current->is_admin()) { ?>disabled<?php } ?> <?php checked( $preparing_signed_order ); ?>>
                             J'ai exprim&eacute; mon engagement en renvoyant le bon de commande sign&eacute;
 						</label>
                     </li>
@@ -333,9 +333,9 @@ function print_resume_page()
                     <li>
 						<label>
 							<?php
-							$validated_presentation_complete = $campaign->can_go_next_status();
+							$validated_presentation_complete = ( $campaign->get_validation_step_status( 'has_filled_presentation' ) == "on" );
 							?>
-							<input type="checkbox" class="checkbox-next-status" disabled <?php checked($validated_presentation_complete); ?>>
+							<input type="checkbox" class="checkbox-next-status" name="validation-step-has-filled-presentation" <?php if (!$WDGUser_current->is_admin()) { ?>disabled<?php } ?> <?php checked($validated_presentation_complete); ?>>
                             J'ai compl&eacute;t&eacute; la pr&eacute;sentation de mon projet
 						</label>
                     </li>
@@ -429,14 +429,28 @@ function print_resume_page()
             </ul>
 
             <div class="list-button">
-				<?php if ($status == ATCF_Campaign::$campaign_status_preparing && $is_waiting_for_comitee): ?>
-					Dossier en attente de validation par le Comit&eacute; de s&eacute;lection.<br />
+				<?php if ($status == ATCF_Campaign::$campaign_status_preparing): ?>
 					<?php if ( $WDGUser_current->is_admin() ): ?>
-						<?php DashboardUtility::get_admin_infobutton( TRUE ); ?>
-						<input type="submit" value="Valider le projet" class="button admin-theme" id="submit-go-next-status-admin">
+					<?php DashboardUtility::get_admin_infobutton( TRUE ); ?>
+					<button type="submit" name="validation-next-save" value="1" id="submit-go-next-status-admin" class="button admin-theme">Enregistrer le statut</button><br /><br />
 					<?php endif; ?>
+					
+					<?php if ( $is_waiting_for_comitee ): ?>
+						Dossier en attente de validation par le Comit&eacute; de s&eacute;lection.<br />
+						<?php if ( $WDGUser_current->is_admin() ): ?>
+							<?php DashboardUtility::get_admin_infobutton( TRUE ); ?>
+							<button type="submit" name="validation-next-validate" value="1" id="submit-go-next-status-admin" class="button admin-theme">Valider le projet</button>
+						<?php endif; ?>
+					<?php endif; ?>
+							
 				<?php elseif ($status == ATCF_Campaign::$campaign_status_validated): ?>
+					<?php if ( $WDGUser_current->is_admin() ): ?>
+					<?php DashboardUtility::get_admin_infobutton( TRUE ); ?>
+					<button type="submit" name="validation-next-save" value="1" id="submit-go-next-status-admin" class="button admin-theme">Enregistrer le statut</button><br /><br />
+					<?php endif; ?>
+					
                     <input type="submit" value="Publier mon projet en vote !" class="button" id="submit-go-next-status">
+					
                 <?php elseif ($status == ATCF_Campaign::$campaign_status_vote): ?>
                     <input type="submit" value="Lancer ma lev&eacute;e de fonds !" class="button" id="submit-go-next-status">
                 <?php endif; ?>
