@@ -517,6 +517,8 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item.author-info p { margin: 2px 0px; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item span.hidden { display: inline; }
 	div#content.version-3 div.project-banner div.project-banner-content div.right div.project-banner-info-item img { width: 40px; display: block; margin: auto; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.logos_zone.vote { margin: 15px auto 0px; width: 320px; }
+	div#content.version-3 div.project-banner div.project-banner-content div.right div.logos_zone.vote div.post_bottom_infos_item { display: inline-block !important; width: 50px; margin: 0px 5px; text-align: center; }
 	div#content.version-3 div.project-pitch div.project-pitch-title { display: none; }
 	div#content.version-3 div.project-pitch div.project-pitch-text { margin: 5px 1%; width: 98%; height: auto; }
 	div#content.version-3 div.project-pitch div.project-pitch-video { margin: 5px 1%; width: 98%; }
@@ -873,7 +875,7 @@ input[name='share_advice']:checked+span:before
     text-align: center;
 }
 
-.more-info-list_v3 span, input{
+.more-info-list_v3 span, .more-info-list_v3 input{
     cursor:pointer;
 }
 
