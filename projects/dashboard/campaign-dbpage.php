@@ -15,11 +15,7 @@ function print_campaign_page()
         <?php if ($campaign->google_doc() != ''): ?>
             <h2><?php _e("Planning", 'yproject'); ?></h2>
             <div class="google-doc">
-                <?php if (strpos($campaign->google_doc(), 'spreadsheets') !== FALSE) : ?>
-                    <iframe data-src="<?php echo $campaign->google_doc(); ?>/edit?usp=sharing&embedded=true"></iframe>
-                <?php else : ?>
-                    <iframe data-src="<?php echo $campaign->google_doc(); ?>/pub?embedded=true"></iframe>
-                <?php endif; ?>
+                <iframe data-src="<?php echo $campaign->google_doc(); ?>/edit?usp=sharing&embedded=true"></iframe>
             </div>
             <br/><br/>
         <?php endif; ?>
@@ -27,11 +23,7 @@ function print_campaign_page()
         <?php if ($campaign->logbook_google_doc() != ''): ?>
             <h2><?php _e("Journal de bord", 'yproject'); ?></h2>
             <div class="google-doc">
-                <?php if (strpos($campaign->logbook_google_doc(), 'spreadsheets') !== FALSE) : ?>
-                    <iframe data-src="<?php echo $campaign->logbook_google_doc(); ?>/edit?usp=sharing&embedded=true"></iframe>
-                <?php else : ?>
-                    <iframe data-src="<?php echo $campaign->logbook_google_doc(); ?>/pub?embedded=true"></iframe>
-                <?php endif; ?>
+                <iframe data-src="<?php echo $campaign->logbook_google_doc(); ?>/edit?usp=sharing&embedded=true"></iframe>
             </div>
             <br/><br/>
         <?php endif; ?>
