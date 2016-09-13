@@ -706,9 +706,9 @@ var WDGProjectDashboard = (function ($) {
                         },
                         select: {
                             rows: {
-                                _: "<b>%d</b> contacts sélectionnés",
-                                0: 'Cliquez sur un contact pour le sélectionner',
-                                1: "<b>1</b> contact sélectionné"
+                                _: "<br /><b>%d</b> contacts sélectionnés",
+                                0: '<br />Cliquez sur un contact pour le sélectionner',
+                                1: "<br /><b>1</b> contact sélectionné"
                             }
                         }
                     }

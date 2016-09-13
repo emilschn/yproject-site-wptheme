@@ -456,7 +456,7 @@ function print_resume_page()
                 <?php endif; ?>
             </div>
 
-            <input type="hidden" name="next_status" value="1" id="next-status-choice">
+            <input type="hidden" name="next_status" value="2" id="next-status-choice">
         </form>
         <?php } ?>
 

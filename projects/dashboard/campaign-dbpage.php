@@ -12,31 +12,29 @@ function print_campaign_page()
 
     <div class="head"><?php _e('Organisation de la campagne', 'yproject'); ?></div>
     <div class="tab-content">
-        <?php
-        if ($campaign->google_doc() != ''){ ?>
-            <h2><?php _e('Planning', 'yproject'); ?></h2>
+        <?php if ($campaign->google_doc() != ''): ?>
+            <h2><?php _e("Planning", 'yproject'); ?></h2>
             <div class="google-doc">
-                <?php if (strpos('spreadsheet', $campaign->google_doc()) !== FALSE) : ?>
+                <?php if (strpos($campaign->google_doc(), 'spreadsheets') !== FALSE) : ?>
                     <iframe data-src="<?php echo $campaign->google_doc(); ?>/edit?usp=sharing&embedded=true"></iframe>
                 <?php else : ?>
                     <iframe data-src="<?php echo $campaign->google_doc(); ?>/pub?embedded=true"></iframe>
                 <?php endif; ?>
             </div>
             <br/><br/>
-        <?php } ?>
+        <?php endif; ?>
 
-        <?php
-        if ($campaign->logbook_google_doc() != ''){ ?>
-            <h2>Journal de bord</h2>
+        <?php if ($campaign->logbook_google_doc() != ''): ?>
+            <h2><?php _e("Journal de bord", 'yproject'); ?></h2>
             <div class="google-doc">
-                <?php if (strpos('spreadsheet', $campaign->logbook_google_doc()) !== FALSE) : ?>
+                <?php if (strpos($campaign->logbook_google_doc(), 'spreadsheets') !== FALSE) : ?>
                     <iframe data-src="<?php echo $campaign->logbook_google_doc(); ?>/edit?usp=sharing&embedded=true"></iframe>
                 <?php else : ?>
                     <iframe data-src="<?php echo $campaign->logbook_google_doc(); ?>/pub?embedded=true"></iframe>
                 <?php endif; ?>
             </div>
             <br/><br/>
-        <?php }?>
+        <?php endif; ?>
 
         <form id="campaign_form" class="db-form" data-action="save_project_campaigntab">
             <ul class="errors">
@@ -78,25 +76,27 @@ function print_campaign_page()
             ));
 
             DashboardUtility::create_field(array(
-                "id"=>"new_planning_gdrive",
-                "type"=>"link",
-                "label"=>"Lien du google drive planning",
-                "value"=> $campaign->google_doc(),
-                "editable"=> $is_admin,
-                "admin_theme"=>$is_admin,
-                "placeholder"=>"https://docs.google.com/document/d/.....",
-                "default_display"=>'Le planning n`\'a pas encore été défini'
+                "id"				=> "new_planning_gdrive",
+                "type"				=> "link",
+                "label"				=> "Lien du google drive planning",
+				"infobubble"		=> "Copier le lien jusqu'&apos; avant /edit",
+                "value"				=> $campaign->google_doc(),
+                "editable"			=> $is_admin,
+                "admin_theme"		=> $is_admin,
+                "placeholder"		=> "https://docs.google.com/document/d/.....",
+                "default_display"	=> "Le planning n'a pas encore été défini"
             ));
 
             DashboardUtility::create_field(array(
-                "id"=>"new_logbook_gdrive",
-                "type"=>"link",
-                "label"=>"Lien du google drive journal de bord",
-                "value"=> $campaign->logbook_google_doc(),
-                "editable"=> $is_admin,
-                "admin_theme"=>$is_admin,
-                "placeholder"=>"https://docs.google.com/document/d/.....",
-                "default_display"=>'Le journal de bord n`\'a pas encore été défini'
+                "id"				=> "new_logbook_gdrive",
+                "type"				=> "link",
+                "label"				=> "Lien du google drive journal de bord",
+				"infobubble"		=> "Copier le lien jusqu'&apos; avant /edit",
+                "value"				=> $campaign->logbook_google_doc(),
+                "editable"			=> $is_admin,
+                "admin_theme"		=> $is_admin,
+                "placeholder"		=> "https://docs.google.com/document/d/.....",
+                "default_display"	=> "Le journal de bord n'a pas encore été défini"
             ));
 
             DashboardUtility::create_save_button("campaign_form",$is_admin);
