@@ -79,13 +79,17 @@ var WDGProjectDashboard = (function ($) {
                     }
 
                     //Charge les iframe
-                    var iframetoload = $("#ndashboard-content " + target+" .google-doc iframe");
-                    iframetoload.each(function(){
-                        $(this).prop('src',$(this).data('src'));
-                        $(this).ready(function(){
-                            $(this).addClass('isloaded');
-                        });
-                    });
+                    if (target=="page-campaign") {
+						console.log("LOAD IFRAMES");
+						var iframetoload = $("#ndashboard-content #" +target+ " .google-doc iframe");
+						iframetoload.each(function(){
+							console.log("- src : " + $(this).data('src'));
+							$(this).prop('src',$(this).data('src'));
+							$(this).ready(function(){
+								$(this).addClass('isloaded');
+							});
+						});
+					}
                 });
 
                 var pagesaved = $('#ndashboard-navbar li a[href="'+window.location.hash+'"]')

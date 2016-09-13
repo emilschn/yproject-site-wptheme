@@ -347,7 +347,8 @@ function print_informations_page()
                     "infobubble"	=> "C'est le seuil de validation de votre lev&eacute;e de fonds, vous pourrez ensuite viser le montant maximum !",
                     "value"			=> $campaign->minimum_goal(false),
                     "right_icon"	=> "eur",
-                    "min"			=> 500
+                    "min"			=> 500,
+					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
 
                 DashboardUtility::create_field(array(
@@ -356,7 +357,8 @@ function print_informations_page()
                     "label"			=> "Montant maximum",
                     "value"			=> $campaign->goal(false),
                     "right_icon"	=> "eur",
-                    "min"			=> 500
+                    "min"			=> 500,
+					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
 
                 DashboardUtility::create_field(array(
@@ -366,7 +368,8 @@ function print_informations_page()
                     "value"			=> $campaign->funding_duration(),
                     "suffix"		=> " ann&eacute;es",
                     "min"			=> 1,
-                    "max"			=> 10
+                    "max"			=> 10,
+					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
 
                 DashboardUtility::create_field(array(
@@ -378,7 +381,8 @@ function print_informations_page()
                     "suffix"		=> "&nbsp;% du chiffre d'affaires",
                     "min"			=> 0,
                     "max"			=> 100,
-                    "step"			=> 0.01
+                    "step"			=> 0.01,
+					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
 
                 DashboardUtility::create_field(array(
@@ -404,8 +408,12 @@ function print_informations_page()
                                 <label>Année <span class="year"><?php echo ($i+1); ?></span></label>
 								<span class="field-container">
 									<span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
+										<?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
 										<i class="right fa fa-eur" aria-hidden="true"></i>
 										<input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />
+										<?php else: ?>
+										<?php echo $turnover; ?> &euro;
+										<?php endif; ?>
 									</span>
 								</span>
                             </li>
