@@ -113,15 +113,22 @@
 			$last_mandate_status = $last_mandate[ "S" ];
 			?>
 			<?php if ( $last_mandate_status == 0 ): //Si 0, proposer de signer ?>
+				<?php $phone_number = $WDGUser_current->wp_user->get('user_mobile_phone'); ?>
+			
 				<?php 
 				//Indication pour rappeler qu'ils se sont engagés dans le contrat à autoriser les prélévements automatiques
 				?>
 				<?php if ( $campaign->is_forced_mandate() ): ?>
 					<?php _e( "Selon votre contrat, vous vous &ecirc;tes engag&eacute; &agrave; signer l'autorisation de pr&eacute;l&egrave;vement automatique.", 'yproject' ); ?><br /><br />
 				<?php endif; ?>
-				<?php $phone_number = $WDGUser_current->wp_user->get('user_mobile_phone'); ?>
+					
+					
 				<?php if ( empty( $phone_number ) ): ?>
 					<?php _e( "Afin de signer l'autorisation de pr&eacute;l&eacute;vement automatique, merci de renseigner votre num&eacute;ro de t&eacute;l&eacute;phone mobile dans votre compte utilisateur.", 'yproject' ); ?><br /><br />
+				
+				<?php elseif ( !$organization_obj->is_registered_lemonway_wallet() ): ?>
+					<?php _e( "L'organisation doit &ecirc;tre authentifi&eacute;e par notre prestataire de paiement afin de pouvoir signer l'autorisation de pr&eacute;l&egrave;vement automatique.", 'yproject' ); ?><br /><br />
+						
 				<?php else: ?>
 				<form action="<?php echo admin_url( 'admin-post.php?action=organization_sign_mandate'); ?>" method="post" class="align-center">
 					<input type="hidden" name="organization_id" value="<?php echo $organization_obj->get_wpref(); ?>" />
