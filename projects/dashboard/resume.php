@@ -227,7 +227,7 @@ function print_resume_page()
 					|| $status == ATCF_Campaign::$campaign_status_validated
 					|| $status == ATCF_Campaign::$campaign_status_preview
 					|| ($status == ATCF_Campaign::$campaign_status_vote && $campaign->end_vote_remaining()<=0)) { ?>
-        <h2 style='text-align:center'><?php _e("On continue ?", 'yproject'); ?></h2>
+        <h2 style='text-align:center'><?php _e("Pr&ecirc;t(e) pour la suite ?", 'yproject'); ?></h2>
 
         <form method="POST" action="<?php echo admin_url( 'admin-post.php?action=change_project_status'); ?>">
             <input type="hidden" name="campaign_id" value="<?php echo $campaign_id;?>">
@@ -235,7 +235,7 @@ function print_resume_page()
                 <?php if ($status == ATCF_Campaign::$campaign_status_preparing): ?>
 					<p id="desc-preview">
 						<?php _e("Votre projet doit maintenant &ecirc;tre valid&eacute; par le Comit&eacute; de s&eacute;lection.", 'yproject'); ?><br />
-						<?php _e("&Ecirc;tes-vous pr&ecirc;t &agrave; le pr&eacute;senter ?", 'yproject'); ?>
+						<?php _e("&Ecirc;tes-vous pr&ecirc;t(e) &agrave; le pr&eacute;senter ?", 'yproject'); ?>
 					</p>
 
                     <li>
