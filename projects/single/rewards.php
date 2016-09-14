@@ -58,7 +58,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 							<div>
 								<table>
 									<tr>
-										<?php $max_turnover = max($estimated_turnover); ?>
+										<?php $max_turnover = max( max($estimated_turnover), 1 ); ?>
 										<?php foreach ($estimated_turnover as $i => $value) ://for ($i = $firstpayment_year; $i < $firstpayment_year + $funding_duration; $i++) : ?>
 										<?php $height = 100 - round($value / $max_turnover * 100); ?>
 										<td>

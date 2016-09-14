@@ -21,7 +21,7 @@ function print_informations_page()
         <div class="display-bloc" data-tab-target="tab-user-infos">
             <i class="fa fa-user fa-4x aria-hidden="true"></i>
             <div class="infobloc-title">
-                <?php _e("Infos personnelles","yproject");?>
+                <?php _e("Informations personnelles","yproject");?>
             </div>
         </div>
         <div class="display-bloc" data-tab-target="tab-organization">
@@ -151,8 +151,7 @@ function print_informations_page()
         <div class="tab-content" id="tab-user-infos">
             <form id="userinfo_form" class="db-form" data-action="save_user_infos_dashboard">
                 <?php if ($is_author) {
-                    ?><p><?php _e("Complétez vos informations personnelles de porteur de projet","yproject");?></p>
-                    <input type="hidden" id="input_is_project_holder" name="is_project_holder" value="1"/><?php
+                    ?><input type="hidden" id="input_is_project_holder" name="is_project_holder" value="1"/><?php
                 } else {
                     ?><p><?php _e("Seul le créateur du projet peut compléter ses informations personnelles","yproject");?></p><?php
                 }?>
@@ -342,22 +341,24 @@ function print_informations_page()
             <form id="projectfunding_form"  class="db-form" data-action="save_project_funding">
                 <?php
                 DashboardUtility::create_field(array(
-                    "id"			=> "new_maximum_goal",
+                    "id"			=> "new_minimum_goal",
                     "type"			=> "number",
-                    "label"			=> "Montant maximal demand&eacute;",
-                    "value"			=> $campaign->goal(false),
+                    "label"			=> "Objectif",
+                    "infobubble"	=> "C'est le seuil de validation de votre lev&eacute;e de fonds, vous pourrez ensuite viser le montant maximum !",
+                    "value"			=> $campaign->minimum_goal(false),
                     "right_icon"	=> "eur",
-                    "min"			=> 500
+                    "min"			=> 500,
+					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"			=> "new_minimum_goal",
+                    "id"			=> "new_maximum_goal",
                     "type"			=> "number",
-                    "label"			=> "Palier minimal",
-                    "infobubble"	=> "Au-del&agrave; de ce palier, la collecte sera valid&eacute; mais rien n'emp&ecirc;che d'avoir un objectif plus ambitieux !",
-                    "value"			=> $campaign->minimum_goal(false),
+                    "label"			=> "Montant maximum",
+                    "value"			=> $campaign->goal(false),
                     "right_icon"	=> "eur",
-                    "min"			=> 500
+                    "min"			=> 500,
+					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
 
                 DashboardUtility::create_field(array(
@@ -367,18 +368,21 @@ function print_informations_page()
                     "value"			=> $campaign->funding_duration(),
                     "suffix"		=> " ann&eacute;es",
                     "min"			=> 1,
-                    "max"			=> 10
+                    "max"			=> 10,
+					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
 
                 DashboardUtility::create_field(array(
                     "id"			=> "new_roi_percent_estimated",
                     "type"			=> "number",
-                    "label"			=> "Pourcentage de reversement estim&eacute;",
+                    "label"			=> "Royalties",
+                    "infobubble"	=> "Pourcentage de chiffre d'affaires correspondant au montant maximum.",
                     "value"			=> $campaign->funding_duration(),
-                    "suffix"		=> "&nbsp;% du CA",
+                    "suffix"		=> "&nbsp;% du chiffre d'affaires",
                     "min"			=> 0,
                     "max"			=> 100,
-                    "step"			=> 0.01
+                    "step"			=> 0.01,
+					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
 
                 DashboardUtility::create_field(array(
@@ -393,7 +397,7 @@ function print_informations_page()
 
                 ?>
 
-                <div class="field"><label>CA pr&eacute;visionnel</label></div>
+                <div class="field"><label>Chiffre d'affaires pr&eacute;visionnel</label></div>
                 <ul id="estimated-turnover">
                     <?php
 					$estimated_turnover = $campaign->estimated_turnover();
@@ -401,10 +405,17 @@ function print_informations_page()
                         $i=0;
                         foreach (($campaign->estimated_turnover()) as $year => $turnover) :?>
                             <li class="field">
-                                <label>Année <span class="year"><?php echo $year?></span></label>
-                                <span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
-                                    <input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>"/>
-                                </span>
+                                <label>Année <span class="year"><?php echo ($i+1); ?></span></label>
+								<span class="field-container">
+									<span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
+										<?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
+										<i class="right fa fa-eur" aria-hidden="true"></i>
+										<input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />
+										<?php else: ?>
+										<?php echo $turnover; ?> &euro;
+										<?php endif; ?>
+									</span>
+								</span>
                             </li>
                         <?php
                             $i++;
@@ -463,14 +474,14 @@ function print_informations_page()
                 <?php
 
                 DashboardUtility::create_field(array(
-                    "id"=>"new_contract_url",
-                    "type"=>"link",
-                    "label"=>"Lien du contrat",
-                    "value"=> $campaign->contract_doc_url(),
-                    "editable"=> $is_admin,
-                    "admin_theme"=>$is_admin,
-                    "placeholder"=>"http://.....",
-                    "default_display"=>"Le contrat n'est pas encore écrit"
+                    "id"				=> "new_contract_url",
+                    "type"				=> "link",
+                    "label"				=> "Lien du contrat",
+                    "value"				=> $campaign->contract_doc_url(),
+                    "editable"			=> $is_admin,
+                    "admin_theme"		=> $is_admin,
+                    "placeholder"		=> "http://.....",
+                    "default_display"	=> "Le contrat n'a pas encore &eacute;t&eacute; g&eacute;n&eacute;r&eacute;."
                 ));
 
                 DashboardUtility::create_save_button("contract_form", $is_admin);?>

@@ -77,7 +77,7 @@ $WDGUser_current = WDGUser::current();
         "value"		=> "",
     ));
 
-    DashboardUtility::create_save_button('newProject', true, "Enregistrer", "Création du projet");
+    DashboardUtility::create_save_button('newProject', true, "Enregistrer", "Enregistrement en cours");
 
     ?></form>
 <?php endif;

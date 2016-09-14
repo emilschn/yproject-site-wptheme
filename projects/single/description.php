@@ -67,7 +67,7 @@ if ($can_modify) {
 		</div>
 	</div>
 	
-	<?php if ($campaign_status != ATCF_Campaign::$campaign_status_vote): ?>
+	<?php if ($campaign_status != ATCF_Campaign::$campaign_status_preview): ?>
 	<div class="project-description-item" data-content="added_value">
 		<img class="project-content-icon vertical-align-middle" src="<?php echo $stylesheet_directory_uri; ?>/images/economie<?php echo $file_complement; ?>.png" alt="strategy" />
 		<img class="vertical-align-middle grey-triangle" src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_gris_projet.png" alt="grey triangle"/>
