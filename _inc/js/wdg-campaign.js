@@ -311,11 +311,13 @@ var WDGProjectViewer = (function($) {
 		},
 		
 		refreshScroll: function() {
-			$("div#content.version-3 nav.project-navigation ul li a").removeClass("selected");
-			for (i = 0; i < WDGProjectViewer.nProjectParts; i++) {
-				if ($(document).scrollTop() >= $("div.project-" + WDGProjectViewer.aProjectParts[i]).offset().top - $("nav#navigation").height() - $("nav.project-navigation").height()) {
-					$("div#content.version-3 nav.project-navigation ul li a#target-" + WDGProjectViewer.aProjectParts[i]).addClass("selected");
-					break;
+			if ($("div#content.version-3 nav.project-navigation").length > 0) {
+				$("div#content.version-3 nav.project-navigation ul li a").removeClass("selected");
+				for (i = 0; i < WDGProjectViewer.nProjectParts; i++) {
+					if ($(document).scrollTop() >= $("div.project-" + WDGProjectViewer.aProjectParts[i]).offset().top - $("nav#navigation").height() - $("nav.project-navigation").height()) {
+						$("div#content.version-3 nav.project-navigation ul li a#target-" + WDGProjectViewer.aProjectParts[i]).addClass("selected");
+						break;
+					}
 				}
 			}
 		}
