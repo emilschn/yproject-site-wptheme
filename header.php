@@ -132,6 +132,7 @@
 					if (is_user_logged_in()) : 
 						// Menu Mon compte
 						$page_update_account = get_page_by_path('modifier-mon-compte'); 
+						$page_dashboard = get_page_by_path('tableau-de-bord'); 
 						?>
 						<li class="page_item_out page_item_inverted mobile_hidden">
 						<a class="page_item_inverted" href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a>
@@ -143,7 +144,7 @@
 							    if (!empty($project_id)) {
 							    $post_campaign = get_post($project_id);
 							?>
-							<li class="page_item_out"><a href="<?php echo get_permalink($project_id); ?>"><?php echo $post_campaign->post_title; ?></a></li>
+							<li class="page_item_out"><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' .$project_id; ?>"><?php echo $post_campaign->post_title; ?></a></li>
 							<?php } } ?>
 							<li class="page_item_out last upper"><a href="<?php echo wp_logout_url();echo '&page_id='.get_the_ID() ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
 						</ul>

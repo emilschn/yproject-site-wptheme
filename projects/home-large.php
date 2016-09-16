@@ -25,7 +25,7 @@
 		$video_element = '';
 		$img_src = '';
 		//Si aucune vidéo n'est définie, ou si on est encore en mode preview, on affiche l'image
-		if ($campaign->video() == '' || $campaign_status == 'preview' || ($campaign->days_remaining() == 0 && $campaign->is_funded())) {
+		if ($campaign->video() == '' || $campaign_status == ATCF_Campaign::$campaign_status_vote || ($campaign->days_remaining() == 0 && $campaign->is_funded())) {
 			$attachments = get_posts( array(
 							    'post_type' => 'attachment',
 							    'post_parent' => $post->ID,
@@ -47,7 +47,7 @@
 		?>
 		<div class="video-zone" <?php if ($img_src != '') { ?>style="background-image: url('<?php echo $img_src; ?>')"<?php } ?>>
 			<?php echo $video_element;
-			if ($video_element == '' && $campaign_status== 'funded' ) { ?>
+			if ($video_element == '' && $campaign_status== ATCF_Campaign::$campaign_status_funded ) { ?>
 					<div class="funded-banner mobile_hidden"></div>
 				<?php }
 			 ?>
@@ -87,7 +87,9 @@
 					
 				</div>
 
-				<?php if ($campaign_status == 'collecte' || $campaign_status == 'funded' || $campaign_status == 'archive'): ?>
+				<?php if ($campaign_status == ATCF_Campaign::$campaign_status_collecte 
+					|| $campaign_status == ATCF_Campaign::$campaign_status_funded 
+					|| $campaign_status == ATCF_Campaign::$campaign_status_archive): ?>
 				<div class="progress_zone">
 					<div class="project_full_progressbg">
 						<span class="project_full_percent" style="min-width:<?php echo $width; ?>px">&nbsp;<?php echo $campaign->current_amount(); ?>&nbsp;</span>
@@ -97,8 +99,8 @@
 				<?php endif; ?>
 				
 				<div class="description-status"><a href="<?php the_permalink(); ?>">
-				<?php if ($campaign_status == 'preview'): ?>D&eacute;couvrez ce projet et participez &agrave; sa pr&eacute;paration.<?php endif; ?>
-				<?php if ($campaign_status == 'vote'): ?>&Eacute;valuez l&apos;impact du projet et d&eacute;cidez de sa pr&eacute;sence sur WEDOGOOD.co.<?php endif; ?>
+				<?php if ($campaign_status == ATCF_Campaign::$campaign_status_vote): ?>D&eacute;couvrez ce projet et participez &agrave; sa pr&eacute;paration.<?php endif; ?>
+				<?php if ($campaign_status == ATCF_Campaign::$campaign_status_vote): ?>&Eacute;valuez l&apos;impact du projet et d&eacute;cidez de sa pr&eacute;sence sur WEDOGOOD.co.<?php endif; ?>
 				</a></div>
 
 				<div class="description-separator"></div>

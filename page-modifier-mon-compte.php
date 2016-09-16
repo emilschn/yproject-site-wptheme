@@ -238,7 +238,7 @@ $WDGUser_current = WDGUser::current();
 					</div>
 				<?php } ?>
 		   
-				<center><input type="submit" value="Enregistrer les modifications" /></center>
+				<div style="text-align: center;"><input type="submit" value="Enregistrer les modifications" /></div>
 
 				<?php if (isset($_SESSION['redirect_current_amount_part'])) { ?>
 					<input type="hidden" name="amount_part" value="<?php echo $_SESSION['redirect_current_amount_part']; ?>" />

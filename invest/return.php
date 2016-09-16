@@ -8,10 +8,15 @@ if (isset($campaign) && is_user_logged_in()):
     ypcf_session_start();
     ypcf_check_is_project_investable();
 	
-    if (isset($_REQUEST["ContributionID"]) || isset($_REQUEST["response_wkToken"]) || ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway && $_GET['meanofpayment'] == 'wire')): ?>
+    if (	isset($_REQUEST["ContributionID"]) || isset($_REQUEST["response_wkToken"])
+			|| ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway && $_GET['meanofpayment'] == 'wire')
+			|| ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway && $_GET['meanofpayment'] == 'wallet')
+			): ?>
 	
 		<?php
 		$purchase_key = '';
+		$invest_type = $_SESSION['redirect_current_invest_type'];
+		$amount_total = $_SESSION['redirect_current_amount_part'];
 		if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay) {
 			$purchase_key = $_REQUEST["ContributionID"];
 			if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wire') {
@@ -22,15 +27,64 @@ if (isset($campaign) && is_user_logged_in()):
 				$mangopay_contribution = ypcf_mangopay_get_contribution_by_id($purchase_key);
 				$amount = $mangopay_contribution->Amount / 100;
 			}
+			
+		//Gestion des paiements par LW
 		} else if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway) {
+			//Paiement par virement
 			if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wire') {
 				$random = rand(10000, 99999);
 				$purchase_key = 'wire_TEMP_' . $random;
 				$amount = $_SESSION['amount_to_save'];
+				
+			//Paiement par porte-monnaie
+			} else if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wallet') {
+				$amount = $_SESSION['amount_to_save'];
+				$organization = $campaign->get_organisation();
+				$organization_obj = new YPOrganisation($organization->organisation_wpref);
+				if ($invest_type == 'user') {
+					$WDGUser_current = WDGUser::current();
+					if ($WDGUser_current->can_pay_with_wallet($amount, $campaign)) {
+						$transfer_funds_result = LemonwayLib::ask_transfer_funds($WDGUser_current->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount);
+					}
+					
+				} else {
+					$organisation_debit = new YPOrganisation($invest_type);
+					if ($organisation_debit->can_pay_with_wallet($amount, $campaign)) {
+						$transfer_funds_result = LemonwayLib::ask_transfer_funds($organisation_debit->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount);
+					}
+				}
+				$purchase_key = 'wallet_'. $transfer_funds_result->ID;
+				
+			//Paiement par carte
 			} else {
 				$purchase_key = $_REQUEST["response_wkToken"];
 				$lw_transaction_result = LemonwayLib::get_transaction_by_id( $purchase_key );
 				$amount = $lw_transaction_result->CRED;
+					
+				//Compléter avec Wallet
+				if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == "cardwallet" && ($lw_transaction_result->STATUS == 3 || $lw_transaction_result->STATUS == 0) && isset($_SESSION['need_wallet_completion']) && $_SESSION['need_wallet_completion'] > 0) {
+					$amount_wallet = $_SESSION['need_wallet_completion'];
+					$organization = $campaign->get_organisation();
+					$organization_obj = new YPOrganisation($organization->organisation_wpref);
+					if ($invest_type == 'user') {
+						$WDGUser_current = WDGUser::current();
+						if ($WDGUser_current->can_pay_with_wallet($amount_wallet, $campaign)) {
+							$transfer_funds_result = LemonwayLib::ask_transfer_funds($WDGUser_current->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount_wallet);
+						}
+
+					} else {
+						$organisation_debit = new YPOrganisation($invest_type);
+						if ($organisation_debit->can_pay_with_wallet($amount_wallet, $campaign)) {
+							$transfer_funds_result = LemonwayLib::ask_transfer_funds($organisation_debit->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount_wallet);
+						}
+					}
+					
+					
+					if ( $transfer_funds_result != FALSE ) {
+						$purchase_key .= '_wallet_'. $transfer_funds_result->ID;
+						$amount += $amount_wallet;
+					}
+				}
 			}
 		}
 

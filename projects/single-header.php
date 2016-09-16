@@ -32,10 +32,12 @@ if ($cache_header_right !== FALSE) { echo $cache_header_right; }
 else {
 	ob_start();
 ?>
-			<div class="projects-description-separator mobile_hidden" <?php if($vote_status=='preview')echo 'style="opacity:0;"'?>></div>
+			<div class="projects-description-separator mobile_hidden" <?php if($vote_status==ATCF_Campaign::$campaign_status_vote)echo 'style="opacity:0;"'?>></div>
 
 			<?php
-			if ($vote_status == 'collecte' || $vote_status == 'funded' || $vote_status == 'archive') {
+			if ($vote_status == ATCF_Campaign::$campaign_status_collecte 
+				|| $vote_status == ATCF_Campaign::$campaign_status_funded 
+				|| $vote_status == ATCF_Campaign::$campaign_status_archive) {
 				$percent = min(100, $campaign->percent_minimum_completed(false));
 				$width = 250 * $percent / 100;
 			?>
@@ -61,7 +63,7 @@ else {
 						<span class="mobile_hidden"><?php echo $backers_count; ?> personne<?php if ($backers_count > 1) { echo 's ont'; } else { echo ' a'; } ?> d&eacute;j&agrave; <?php if ($campaign->funding_type() == 'fundingdonation') { ?>soutenu<?php } else { ?>investi sur<?php } ?> ce projet</span>
 						<span class="only_on_mobile"><?php echo $backers_count; ?></span>
 					</div>
-					<div class="post_bottom_infos_item" <?php if($vote_status=='funded' || $vote_status == 'archive'){echo "style=opacity:0.5";}?>>
+					<div class="post_bottom_infos_item" <?php if($vote_status==ATCF_Campaign::$campaign_status_funded || $vote_status == ATCF_Campaign::$campaign_status_archive){echo "style=opacity:0.5";}?>>
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
 						<span class="mobile_hidden"><?php echo $campaign->time_remaining_fullstr(); ?></span>
 						<span class="only_on_mobile"><?php echo $campaign->time_remaining_str(); ?></span>
@@ -84,7 +86,7 @@ else {
 				</div>
 
 			<?php 
-			} else if ($vote_status == 'vote') {
+			} else if ($vote_status == ATCF_Campaign::$campaign_status_vote) {
 				$nbvoters = $campaign->nb_voters();
 			?>
 				<div class="logos_zone vote">
@@ -132,7 +134,7 @@ else {
 					<div class="projects-description-separator mobile_hidden"></div>
 				</div>
 
-			<?php } else if ($vote_status== 'preview'){ ?>
+			<?php } else if ($vote_status== ATCF_Campaign::$campaign_status_vote){ ?>
 
 				<div class="logos_zone">
 					<div class="post_bottom_infos_item only_on_mobile">
@@ -168,7 +170,7 @@ else {
 //*******************
 ?>
 			<div class="post_bottom_buttons mobile_hidden">
-				<?php if ($vote_status == 'collecte' && ypcf_check_user_is_complete($post->post_author) && $campaign->is_remaining_time()) { ?> 
+				<?php if ($vote_status == ATCF_Campaign::$campaign_status_collecte && ypcf_check_user_is_complete($post->post_author) && $campaign->is_remaining_time()) { ?> 
 					<div id="invest-button">
 						<?php $page_invest = get_page_by_path('investir'); ?>
 						<?php if ( is_user_logged_in() ): ?>
@@ -183,13 +185,13 @@ else {
 						</a>
 					</div>
 
-				<?php } else if ($vote_status == 'preview'){ ?>
+				<?php } else if ($vote_status == ATCF_Campaign::$campaign_status_vote){ ?>
 						<div id="participate-button">
 						<?php $page_forum = get_page_by_path('forum'); ?>
 						<a href="<?php echo get_permalink($page_forum->ID) . $campaign_id_param; ?>" class="description-discover"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_droite.png" alt="triangle" />Participer au forum<img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blanc_vers_gauche.png" alt="triangle" /></a>
 					</div>
 
-				<?php } else if ($vote_status == 'vote') { ?>
+				<?php } else if ($vote_status == ATCF_Campaign::$campaign_status_vote) { ?>
 					<?php if ( is_user_logged_in() ): ?> 
 						<?php 
 						global $wpdb;
@@ -211,7 +213,7 @@ else {
 						</div>
 					<?php endif; ?>
 
-				<?php } else if($vote_status=='funded') { ?>
+				<?php } else if($vote_status==ATCF_Campaign::$campaign_status_funded) { ?>
 					<div id="funded-button">
 						<a class="description-discover">Projet financ&eacute;</a>
 					</div>
@@ -219,7 +221,7 @@ else {
 				<?php } ?>
 
 
-				<?php if ($vote_status != 'vote' && $vote_status != 'preparing') : ?>
+				<?php if ($vote_status != ATCF_Campaign::$campaign_status_vote && $vote_status != ATCF_Campaign::$campaign_status_preparing) : ?>
 				<?php if ( is_user_logged_in() ) { 
 					global $wpdb;
 					$user_id = wp_get_current_user()->ID;
@@ -248,7 +250,7 @@ else {
 				<?php } ?>
 				<?php endif; ?>
 
-				<?php if ($vote_status != 'preparing') : ?>
+				<?php if ($vote_status != ATCF_Campaign::$campaign_status_preparing) : ?>
 				<a id="share-btn-a" href="javascript:WDGProjectPageFunctions.share_btn_click();">
 				<div id="share-btn-div" class="stats_btn">
 					<p id="share-txt">Partager</p>	
@@ -257,7 +259,7 @@ else {
 				<?php endif; ?>
 			</div>
 			
-			<?php if ($vote_status == 'vote'): ?>
+			<?php if ($vote_status == ATCF_Campaign::$campaign_status_vote): ?>
 			<div id="invest-button" class="only_on_mobile responsive-fixed">
 				<?php if ($has_voted): ?>
 				<span class="description-discover" style="background-color:#333;">Merci pour votre vote</span>
@@ -267,9 +269,9 @@ else {
 			</div>
 			<?php endif; ?>
 
-			<div id="white-background" class="mobile_hidden" <?php if($vote_status=='preview')echo 'style="background:transparent !important;"'?>></div>
+			<div id="white-background" class="mobile_hidden" <?php if($vote_status==ATCF_Campaign::$campaign_status_vote)echo 'style="background:transparent !important;"'?>></div>
 
-			<?php if ($vote_status == 'vote'): ?>
+			<?php if ($vote_status == ATCF_Campaign::$campaign_status_vote): ?>
 			<?php 
 			global $vote_errors, $vote_success; 
 			if (!empty($vote_errors) || isset($vote_success)): 
@@ -354,8 +356,8 @@ else {
 				$stats_link = get_permalink($stats_page->ID).$campaign_id_param;
 
 				$show_stat_button = false;
-				if ($vote_status != 'preview') { 
-					if ($vote_status != 'vote' || $campaign->end_vote_remaining() <= 0) {
+				if ($vote_status != ATCF_Campaign::$campaign_status_vote) { 
+					if ($vote_status != ATCF_Campaign::$campaign_status_vote || $campaign->end_vote_remaining() <= 0) {
 						$show_stat_button = true;
 					}
 				}

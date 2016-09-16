@@ -17,7 +17,7 @@
 	    $classes .= 'theme-' . $tag->slug;
 	    $client_context = $tag->slug;
     }
-    if ($page_name == 'vote') {
+    if ($page_name == ATCF_Campaign::$campaign_status_vote) {
 	global $disable_logs;
 	$disable_logs = TRUE;
 	ypcf_shortcode_vote_results_header();

@@ -49,7 +49,7 @@ if (is_user_logged_in()) {
 			<?php
 			$campaign_status = $campaign->campaign_status();
 			switch ($campaign_status) {
-				case 'vote': ?>
+				case ATCF_Campaign::$campaign_status_vote: ?>
 					<?php if ($campaign->time_remaining_str() != '-'): ?>
 					<?php
 					$table_name = $wpdb->prefix . "ypcf_project_votes";
@@ -84,7 +84,7 @@ if (is_user_logged_in()) {
 
 				<?php
 				break;
-				case 'collecte':
+				case ATCF_Campaign::$campaign_status_collecte:
 				?>
 				<a href="<?php echo $invest_url_href; ?>" class="<?php echo $btn_invest_classes; ?>" data-lightbox="<?php echo $btn_invest_data_lightbox; ?>" data-redirect="<?php echo $invest_url; ?>">
 					<?php echo $btn_invest_text; ?>

@@ -3,17 +3,18 @@
  * Template Name: Projet Tableau de bord
  *
  */
-$campaign_id = filter_input(INPUT_GET, 'campaign_id');
-$success_msg = filter_input(INPUT_GET, 'success_msg');
-global $feedback_sendautomail;
-$feedback_sendautomail = WDGFormProjects::form_validate_send_automail();
-WDGFormProjects::form_approve_payment();
-WDGFormProjects::form_cancel_payment();
 ?>
 
 <?php get_header(); ?>
 
-<?php if ( isset($success_msg) && !empty($success_msg) ): ?>
+<?php
+$campaign_id = filter_input(INPUT_GET, 'campaign_id');
+
+//TODO: Unification des feedbacks
+$success_msg = filter_input(INPUT_GET, 'success_msg');
+WDGFormProjects::form_approve_payment();
+WDGFormProjects::form_cancel_payment();
+if ( isset($success_msg) && !empty($success_msg) ): ?>
 	<div id="lightbox-successmsg" class="wdg-lightbox">
 		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder">
@@ -32,109 +33,176 @@ WDGFormProjects::form_cancel_payment();
 			?>
 		</div>
 	</div>
-<?php endif; ?>
+<?php endif;
+
+
+if ($can_modify){
+    //Données générales
+    $post_campaign = get_post($campaign_id);
+    $campaign = atcf_get_campaign($post_campaign);
+    $status = $campaign->campaign_status();
+
+    $WDGAuthor = new WDGUser(get_userdata($post_campaign->post_author));
+    $WDGUser_current = WDGUser::current();
+    $is_admin = $WDGUser_current->is_admin();
+    $is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
+
+    $status = $campaign->campaign_status();
+    $collecte_or_after = $status==ATCF_Campaign::$campaign_status_collecte || $status==ATCF_Campaign::$campaign_status_funded ;
+    $vote_or_after = $collecte_or_after || $status==ATCF_Campaign::$campaign_status_vote;
+    $preview_or_after = $vote_or_after || $status==ATCF_Campaign::$campaign_status_preview;
+    $validated_or_after = $preview_or_after || $status==ATCF_Campaign::$campaign_status_validated;
+
+    //Stats vues
+    $stats_views = 0;
+    $stats_views_today = 0;
+    if (function_exists('stats_get_csv')) {
+        $stats_views = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 365 ) );
+        $stats_views_today = stats_get_csv( 'postviews', array( 'post_id' => $campaign_id, 'days' => 1 ) );
+    }
+
+    //Donnees de votes
+    $vote_results = WDGCampaignVotes::get_results($campaign_id);
+
+    //Recuperation du nombre de j'y crois
+    $nb_jcrois = $campaign->get_jycrois_nb();
+    //Recuperation du nombre de votants
+    $nb_votes = $campaign->nb_voters();
+    //Recuperation du nombre d'investisseurs
+    $nb_invests = $campaign->backers_count();
+
+    locate_template( array("projects/dashboard/dashboardutility.php"), true );
+    locate_template( array("projects/dashboard/resume.php"), true );
+    locate_template( array("projects/dashboard/informations.php"), true );
+    locate_template( array("projects/dashboard/campaign-dbpage.php"), true );
+    locate_template( array("projects/dashboard/wallet.php"), true );
+    locate_template( array("projects/dashboard/contacts.php"), true );
+    locate_template( array("projects/dashboard/news.php"), true );
+
+    page_resume_lightboxes();
+
+    if(filter_input(INPUT_GET,'lightbox')=='newproject'){
+    //if(true/*!$campaign->get_has_been_welcomed() && !current_user_can('manage_options')*/){
+        ob_start();
+        locate_template('projects/dashboard/dashboard-welcome-lightbox.php',true);
+        $content = ob_get_contents();
+        ob_end_clean();
+        ?>
+        <div id="lightbox-welcome" class="wdg-lightbox">
+            <div class="wdg-lightbox-padder">
+                <?php echo $content; ?>
+            </div>
+        </div>
+        <?php
+    } ?>
 
 <div id="content">
     <div class="padder">
-        <div class="page" id="blog-single" role="main">
-
-            <?php if (have_posts()) : while (have_posts()) : the_post();
-                require_once('projects/single-admin-bar.php'); ?>
-                <div id="dashboard" class="center margin-height">
-                <?php
-                if ($can_modify){
-                        global $can_modify, $campaign_id;
-                        $post_campaign = get_post($campaign_id);
-                        $author_data = get_userdata($post_campaign->post_author);
-                        $campaign = atcf_get_campaign($post_campaign);
-                        $status = $campaign->campaign_status();
-                        
-                        /*Import fonctions PHP des blocs*/
-                        locate_template( array("projects/dashboard-blocks/summary.php"), true );
-                        locate_template( array("projects/dashboard-blocks/stats.php"), true );
-                        locate_template( array("projects/dashboard-blocks/community.php"), true );
-                        locate_template( array("projects/dashboard-blocks/news.php"), true );
-                        locate_template( array("projects/dashboard-blocks/info.php"), true );
-                        locate_template( array("projects/dashboard-blocks/team.php"), true );
-                        
-                        /*Données de statistiques */
-                        block_stats_data();
-                        /*Données de communauté*/
-                        block_community_data();
-                        
-                        /*Vérifie si l'utilisateur essaie de passer à l'étape suivante **/
-                        check_next_step();
-                        /*Vérifie si l'utilisateur essaie d'envoyer un mail **/
-                        $feedback_sendmail = WDGFormProjects::form_validate_send_mail();
-                        /*Affiche s'il le faut la LB de bienvenue*/
-                        print_welcome_lightbox(); 
-                        
-                        /*Charge les lightbox en début de page pour éviter les problèmes de CSS*/
-                        block_summary_lightbox();
-                        block_stats_lightbox();
-                        block_community_lightbox();
+        <div id="ndashboard"
+        data-campaign-id="<?php echo $campaign_id?>">
+            <nav id="ndashboard-navbar">
+                <div class="nav-padding">
+                    <div class="title"><?php echo $post_campaign->post_title; ?></div>
+                    <div class="authorization">
+                        <i class="fa fa-user" aria-hidden="true"></i><span>&nbsp;&nbsp
+                        <?php
+                        if ($is_admin){
+                                echo 'Mode Administrateur';
+                            } else if ($is_author) {
+                                echo 'Porteur du projet';
+                            } else {
+                                echo 'Membre du projet';
+                            }
                         ?>
+                    </span></div>
+                    <ul>
+                        <li>
+                            <a href="#resume"
+                               data-target="page-resume">
+                                <?php _e("Vue d'ensemble", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </a>
+                        </li>
+                        <li>
+                            <a <?php if ($validated_or_after || $is_admin) {echo ('href="'.get_permalink($campaign_id).'" ');} ?>
+                                <?php DashboardUtility::check_enabled_page(); ?>>
+                                <?php _e("Pr&eacute;sentation", 'yproject');?>&nbsp;&nbsp;
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#informations"
+                               data-target="page-informations">
+                                <?php _e("Informations", 'yproject');?>
+                                <div class="badge-notif"><?php
+                                    if(filter_input(INPUT_GET,'lightbox')=='newproject'){echo '<i class="fa fa-exclamation" aria-hidden="true"></i>';}?></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#wallet"
+                                data-target="page-wallet"
+                                <?php DashboardUtility::check_enabled_page(); ?>>
+                                <?php _e("Gestion financi&egrave;re", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#campaign"
+                                data-target="page-campaign"
+                                <?php DashboardUtility::check_enabled_page(); ?>>
+                                <?php _e("Campagne", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contacts"
+                                data-target="page-contacts"
+                                <?php DashboardUtility::check_enabled_page(); ?>>
+                                <?php _e("Contacts", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#news"
+                                data-target="page-news"
+                                <?php DashboardUtility::check_enabled_page(); ?>>
+                                <?php _e("Actualit&eacute;s", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </a>
+                        </li>
+                        <!--li>
+                            <a href="#page-support">Accompagnement</a>
+                        </li-->
+                    </ul>
+                </div>
+            </nav>
 
-                        <div class="part-title-separator">
-                            <span class="part-title"><?php echo $post_campaign->post_title; ?></span>
+            <div id="ndashboard-content" class="db-form">
+                <div class="content-padding">
+                    <div class="page-dashboard" id="page-resume"><?php print_resume_page(); ?></div>
+                    <div class="page-dashboard" id="page-presentation"></div>
+                    <div class="page-dashboard" id="page-informations"><?php print_informations_page(); ?></div>
+                    <?php if ($validated_or_after || $is_admin){?>
+                    <div class="page-dashboard" id="page-wallet"  ><?php print_wallet_page(); ?></div>
+                    <div class="page-dashboard" id="page-campaign"><?php print_campaign_page(); ?></div>
+                    <div class="page-dashboard" id="page-contacts"><?php print_contacts_page()?></div>
+                    <div class="page-dashboard" id="page-news"><?php print_news_page(); ?></div>
+                    <!--div class="page-dashboard" id="page-support">8</div-->
+                    <?php }?>
+                    <div class="page-dashboard" id="page-loading" style="display:block">
+                        <div class="tab-content">
+                            <h2><i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;Chargement...</h2>
                         </div>
-                        
-                        <div class="blocks-list">
-                            <?php 
-                                print_block_summary();
-                            ?>
-                            <br/>
-
-                            <?php
-                                print_block_stats();
-                            ?>
-
-                            <div id="col-left">
-                            <?php
-                                print_block_community();
-                            ?>
-
-                            <?php
-                                print_block_news();
-                            ?>
-
-                            <?php
-                                print_block_info();
-                            ?>
-
-                            </div>
-
-                            <div id="col-right">
-                            <?php
-                                print_block_team();
-                            ?>
-                            </div>
-                            <div class="clear"></div>
+                    </div>
+                    <div class="page-dashboard" id="page-redirect">
+                        <div class="tab-content">
+                            <h2><i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;Redirection vers la page projet...</h2>
                         </div>
-
-                        <?php if ($campaign->google_doc() != ''){ ?>
-                            <div class="google-doc">
-                                <?php if (strpos('spreadsheet', $campaign->google_doc()) !== FALSE) : ?>
-                                    <iframe src="<?php echo $campaign->google_doc(); ?>/edit?usp=sharing&embed=true" width="100%" height="800"></iframe>
-                                <?php else : ?>
-                                    <iframe src="<?php echo $campaign->google_doc(); ?>/pub?embedded=true"></iframe>
-                                <?php endif; ?>
-                            </div>
-                        <?php } ?>
-
-                        <div class="clear"></div>
-                        
-                <?php } else { ?>
-                        <?php _e('Vous n&apos;avez pas la permission pour voir cette page.', 'yproject'); ?>
-
-                <?php } ?>
-
                     </div>
 
-                <?php endwhile;
-            endif; ?>
-
+                </div>
+            </div>
         </div>
+    <?php } else {
+        echo '<div class="center margin-height">';
+        _e('Vous n&apos;avez pas la permission pour voir cette page.', 'yproject');
+        echo '</div>';
+    }?>
     </div><!-- .padder -->
 </div><!-- #content -->
 

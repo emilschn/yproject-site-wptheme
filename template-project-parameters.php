@@ -94,7 +94,7 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 						?>
 					</select><br />
 					
-					<?php if ($campaign->campaign_status() == "preparing") : ?>
+					<?php if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing) : ?>
 						<label for="fundingtype">Type de financement :</label>
 						<?php
 						$funding_project_selected = ($campaign->funding_type() == 'fundingproject') ? 'checked="checked"' : '';
@@ -146,7 +146,9 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 					if ($campaign->funding_type() == 'fundingdonation'):
 						$rewards = atcf_get_rewards($campaign_id);
 						$status = $campaign->campaign_status();
-						$can_edit = ( $status == "preparing" || $status == "preview" || $status == "vote");
+						$can_edit = ( $status == ATCF_Campaign::$campaign_status_preparing
+							|| $status == ATCF_Campaign::$campaign_status_preparing
+							|| $status == ATCF_Campaign::$campaign_status_vote);
 					?>
 					
 						<label for="project-rewards">Contreparties :</label><br/>

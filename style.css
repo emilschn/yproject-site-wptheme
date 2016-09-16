@@ -67,7 +67,7 @@ tbody {
 .left { float: left; }
 .right { float: right; }
 .clear { clear: both; }
-.clearfix { overflow: auto; overflow-x: hidden; }
+.clearfix { overflow-x: hidden; overflow-y: hidden; }
 .margin-auto { margin: auto; }
 .align-center { text-align: center; }
 .align-left { text-align: left; }
@@ -143,6 +143,7 @@ tbody {
     cursor: pointer;
     font-weight: normal;
     font-size: 12px;
+    white-space: nowrap;
 }
 .button.red, .wpcf7-submit {
     background: none repeat scroll 0 0 #EA4F51;
@@ -304,6 +305,181 @@ form.wdg-forms table input[type="text"].reward-text{
     margin: 0px;
 }
 
+
+/*******************************************************************************
+* Formulaires
+*******************************************************************************/
+.db-form .field {
+    display: block;
+    margin: 10px 0px;
+    padding: 5px;
+}
+
+.db-form .field.admin-theme {
+    border-left: 3px solid darkturquoise;
+    background-color: lightgray;
+    padding: 10px;
+    margin: 0px;
+}
+
+.db-form .field.admin-theme label i.fa-unlock-alt,
+.db-form .admin-theme-block i.fa-unlock-alt {
+    color:darkturquoise;
+}
+
+.db-form .field label {
+    display: inline-block;
+    width: 220px;
+    margin: 3px 10px 3px 0px;
+    font-weight: bold;
+}
+
+.db-form .field label.long-label {
+    width: auto;
+}
+
+.db-form .field-container select{
+    display: inline-block;
+    width: 220px;
+}
+
+.db-form .field-container select.timepicker {
+    padding: 1px 2px;
+    width: 52px;
+    margin-left: 3px;
+}
+
+.db-form .field-container input,
+.db-form .field-container textarea{
+    display: inline-block;
+    width: 200px;
+}
+
+.db-form input:not([type="submit"]),
+.db-form select,
+.db-form textarea{
+    margin: 3px 0px;
+    background: none repeat scroll 0 0 #FFF;
+    border: 1px solid #FFF;
+    padding: 2px 7px;
+}
+
+.db-form textarea{
+    font-family: Arial, sans-serif;
+    font-size: 0.9em;
+    vertical-align: initial;
+    resize: vertical;
+}
+
+.db-form input:not([type='submit']):hover,
+.db-form select:hover,
+.db-form textarea:hover,
+.db-form input:not([type='submit']):focus,
+.db-form select:focus,
+.db-form textarea:focus{
+    background-color: #FCFCFC;
+    border: 1px solid #DDD;
+}
+
+
+
+.db-form input:not([type='submit']).error,
+.db-form select.error{
+    border: 1px solid red;
+    background-color: rgb(255, 200, 200)
+}
+
+.db-form input:not([type='submit']).validation,
+.db-form select.validation{
+    border: 1px solid #6db26c;
+}
+
+.fa.fa-check.validation{
+    color: #6db26c;
+}
+
+.db-form .field-container input[type='checkbox']{
+    vertical-align: top;
+    margin: 5px 10px 0px 5px;
+    width: initial;
+}
+
+
+.db-form .field-container .left-icon{
+    padding-left: 24px;
+    width: 183px;
+}
+
+
+.db-form .field-container .right-icon{
+    padding-right: 24px;
+    width: 188px;
+}
+
+.db-form .field-container .left-icon.datetime,
+.db-form .field-container .right-icon.datetime{
+    width: 78px;
+}
+
+
+.db-form .field-container {
+    white-space: nowrap;
+    vertical-align: top;
+
+}
+
+.db-form .field-container .field-value {
+    position: relative;
+}
+
+.db-form .field-container .field-value .non-editable{
+    white-space: normal;
+    display: inline-block;
+    margin: 3px 0px;
+}
+
+.db-form .field-container .field-value a {
+    display: inline-block;
+    overflow: hidden;
+    max-width: 250px;
+    text-overflow: ellipsis;
+}
+
+
+.db-form .field-container i.fa.left{
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    width: 14px;
+    text-align: center;
+}
+.db-form .field-container i.fa.right{
+    position: absolute;
+    top: 1px;
+    right: 5px;
+    width: 14px;
+    text-align: center;
+}
+
+.db-form .button.admin-theme{
+    background-color: darkturquoise;
+    border-color:darkturquoise;
+}
+
+.db-form .button[disabled] {
+    opacity: 0.5;
+    cursor: initial;
+}
+
+.db-form .feedback_save{
+    text-align: center;
+    font-style: italic;
+    min-height: 25px;
+}
+.db-form .feedback_save span{
+    display:none;
+}
+
 /*******************************************************************************
 * LIGHTBOX
 *******************************************************************************/
@@ -350,11 +526,6 @@ form.wdg-forms table input[type="text"].reward-text{
 
 .wdg-lightbox .wdg-lightbox-padder > div {
 	background-color: #F2F2F2 !important;
-}
-
-.wdg-lightbox .button {
-	background-color: #EA4F51;
-	border: none;
 }
 
 .wdg-lightbox .wdg-lightbox-button-close {
@@ -507,6 +678,26 @@ form.wdg-forms table input[type="text"].reward-text{
 }
 #sidebar-login-form .link-forgotten { margin-left: 140px; }
 #sidebar-login-form .link-forgotten a { color: #333333; text-align: right; font-size: 10px; font-style: italic; }
+
+.infobutton, .fa.infobutton{
+    cursor: help;
+    color: grey;
+    display: inline-block;
+    vertical-align: baseline;
+    font-size: 18px;
+}
+
+.infobutton:hover{
+    color:#2B2C2C;
+}
+.tooltiptext{
+    display: none;
+}
+
+.wdgQtip .qtip-content{
+    font-size: 13px;
+    line-height: normal;
+}
 
 /*******************************************************************************
 * HEADER MENU
@@ -814,13 +1005,13 @@ div#connexion_facebook_container span {
 *******************************************************************************/
 header {
     background-color: #EA4F51;
-    background-position: center;
     min-width: 960px;
+    background-image: url('images/footer.png');;
 }
 
 #site_name {
-    padding-top: 90px;
-    height: 150px;
+    padding-top: 35px;
+    min-height: 100px;
     vertical-align: middle;
     display: inline-block;
 }
@@ -1826,9 +2017,6 @@ div#home_bottom h1 {
 #head-image #img-container img{
     min-width: 100%;
 }
-.ui-state-disabled{
-    opacity: 1 !important;
-}
 
 
 #head-content{
@@ -2152,50 +2340,8 @@ div#home_bottom h1 {
     margin-right: 15px;
     vertical-align: middle;
 }
-.ui-dialog-titlebar-close:before {
-    font: 400 20px/36px dashicons;
-    vertical-align: top;
-    width: 36px;
-    height: 36px;
-    content: "ï…˜";
-}
 
-.ui-button.ui-dialog-titlebar-close {
-    background: none repeat scroll 0px 0px transparent;
-    border: 0px none;
-    box-shadow: none;
-    color: #666;
-    cursor: pointer;
-    display: block;
-    padding: 0px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 36px;
-    height: 36px;
-    text-align: center;
-}
 
-.ui-button {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 13px;
-    line-height: 26px;
-    height: 28px;
-    margin: 0px;
-    padding: 0px 10px 1px;
-    cursor: pointer;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 3px;
-    white-space: nowrap;
-    box-sizing: border-box;
-    color: #555;
-    border-color: #CCC;
-    background: none repeat scroll 0% 0% #F7F7F7;
-    box-shadow: 0px 1px 0px #FFF inset, 0px 1px 0px rgba(0, 0, 0, 0.08);
-    vertical-align: top;
-}
 .su-spoiler-content.su-clearfix{
     padding-right: 27px !important;
 }
@@ -2414,45 +2560,6 @@ div#home_bottom h1 {
     text-decoration: blink; 
 }
 
-/***** SHARING DIALOG *****/
-#dialog{
-    display: none;
-    text-align: center;
-}
-.ui-dialog{
-    background-color: white;
-}
-.ui-widget-header{
-    background: transparent;
-    color: #333;
-    border: 0px;
-    border-radius: 0;
-}
-.ui-widget-header .ui-icon{
-    background-image: url('http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/ui-lightness/images/ui-icons_222222_256x240.png');
-}
-.ui-dialog-titlebar-close:before {
-    font: 400 20px/18px dashicons;
-}
-.ui-dialog-titlebar-close.ui-corner-all.ui-state-hover{
-    border: none;
-}
-.ui-dialog.ui-widget.ui-widget-content.ui-corner-all{
-    padding: 0;
-    border : 0;
-}
-#ui-dialog-title-dialog{
-    display: block;
-    margin: auto;
-    width: 100%;
-    text-align: center;
-}
-.ui-widget-overlay {
-    z-index: 3 !important;
-}
-.ui-button-text {
-    display: none;
-}
 
 /*****  *****/
 #wdg-lightbox-project-organisation div.content.align-center {
@@ -2480,7 +2587,7 @@ div#home_bottom h1 {
     width: 30px;
     height: 30px;
     margin-left: 5px;
-    z-index: 2000;
+    z-index: 150;
 }
 .edit-button {
     background: url("images/editer.png") #74BF43 center no-repeat;
@@ -2604,6 +2711,23 @@ div#home_bottom h1 {
 	cursor: pointer;
 }
 
+span#extra-comment {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12px; 
+}
+
+span#extra-comment-image{
+    padding: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    float: left;
+    font-size: 10px; 
+}
+
 /*******************************************************************************
 * PROJECT NEWS PAGES
 *******************************************************************************/
@@ -2637,282 +2761,6 @@ div#home_bottom h1 {
     border-bottom: 1px solid black;
 }
 
-/*******************************************************************************
-* DASHBOARD PAGE
-*******************************************************************************/
-#dashboard .list-button{
-    text-align:center
-}
-
-#dashboard .list-button .button{
-    padding: 10px;
-    display: inline-block;
-    text-transform: none;
-    background-color: #EA4F51;
-    border: 1px solid #EA4F51 !important;
-}
-
-#dashboard .google-doc iframe {
-    margin-top: 15px;
-    width: 100%;
-    height: 700px;
-}
-
-#dashboard .blocks-list {
-    margin: 15px 0px;
-}
-
-#dashboard .block {
-    margin: 5px 10px;
-}
-#dashboard .large-block {
-    float: left;
-    width: 100%;
-    max-width: 940px;
-    margin: 5px 10px;
-}
-
-#dashboard #col-left,
-#dashboard #col-right {
-    width: 50%;
-    float: left;
-}
-
-#dashboard .block .head,
-#dashboard .large-block .head{
-    text-transform: uppercase;
-    font-family: "BebasNeue";
-    font-size: 30px;
-    text-align: center;
-    padding: 15px 5px 2px 5px;
-}
-#dashboard .block .body,
-#dashboard .large-block .body{
-    padding: 10px;
-    background-color: #EEE
-}
-
-#dashboard #block-summary .current-step {
-    text-align:center;
-    margin: 10px 0px;
-}
-#dashboard #block-summary .current-step span {
-    opacity:0.5;
-    margin: 0px 24px;
-    display: inline-block;
-    min-width: 100px;
-}
-#dashboard #block-summary #current {
-    opacity: 1;
-    color: #EA4F51;
-    font-weight: bold;
-}
-
-#dashboard #wdg-lightbox-gonextstep ul {
-   list-style-position: inside;
-   list-style-type: none;
-   padding-left: 0px;
-}
-
-#dashboard #wdg-lightbox-gonextstep #vote-goals {
-   list-style-type: square;
-   padding-bottom: 15px;
-}
-
-#dashboard #wdg-lightbox-gonextstep ul li {
-    padding: 5px;
-}
-
-#dashboard #block-stats .quart-card {
-    float:left;
-    width: 25%;
-    text-align: center;
-    padding: 10px 0px;
-    min-width: 220px;
-}
-
-#dashboard #block-stats .half-card {
-    float:left;
-    width: 50%;
-    text-align: center;
-    padding: 10px 0px;
-    min-width: 440px;
-}
-
-#dashboard #block-stats .stat-big-number {
-    font-family: "BebasNeue";
-    font-size: 90px;
-    padding-top: 30px;
-}
-
-#dashboard #block-stats .stat-little-number {
-    font-family: "BebasNeue";
-    font-size: 26px;
-    margin-top: -12px;
-    padding-bottom: 15px;
-}
-
-#dashboard #block-stats .stat-little-number-top {
-    font-family: "BebasNeue";
-    font-size: 26px;
-    padding-bottom: 0px;
-    margin-bottom: -40px;
-    padding-top: 5px;
-}
-
-#dashboard .wdg-lightbox-padder {
-    text-align: initial
-}
-
-#dashboard .wdg-lightbox-button-close .button {
-    padding: 3px 8px;
-    display: initial;
-}
-
-#dashboard .wdg-lightbox-padder .expandable {
-    border-left: 1px solid #BBB;
-    padding-left: 20px;
-}
-
-#dashboard #wdg-lightbox-dashboardmail .feedback {
-    background-color: #333 !important;
-    color: white;
-    padding: 12px;
-}
-
-#dashboard #wdg-lightbox-dashboardmail .preview {
-    border: 1px dotted black;
-    background-color: #FFF !important;
-}
-
-#dashboard #block-community .card-com{
-    text-align: center;
-    font-size: 120%;
-    float: left;
-    width: 32%;
-    padding: 30px 0px 15px 0px;
-    min-width: 130px;
-}
-
-#dashboard #block-community .card-com img{
-    max-width: 40px;
-}
-
-#dashboard #wdg-lightbox-dashboardmail .selector {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-#dashboard #wdg-lightbox-dashboardmail .selection {
-    text-align: center;
-    display: inline-block;
-    width: 32%;
-}
-
-#dashboard #block-news ul{
-    text-align: left;
-}
-
-#dashboard #block-news li{
-    padding: 5px;
-}
-
-#dashboard #block-news li em{
-    font-size: 12px;
-}
-
-#dashboard #block-news .news-item-tools {
-    float:right;
-    margin-right: 20px;
-}
-
-#dashboard #block-news .nb-comments-widget{
-    padding: 4px;
-}
-
-#dashboard #block-team #team-list{
-    padding: 0px 25px;
-    list-style: none;
-    text-align: left;
-}
-
-#dashboard #block-team #team-list li{
-    padding: 7px 0px;
-    border-bottom: 1px solid #808080;
-    margin: 5px 0px;
-}
-
-#dashboard #block-team #team-list .wait-delete {
-    background: #333 url("images/chargement.gif") center no-repeat !important;
-}
-
-/*******************************************************************************
-* TABLEAUX DYNAMIQUES : PERSONNALISATION DE DATATABLES
-*******************************************************************************/
-.wdg-datatable{
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
-.wdg-datatable table.dataTable thead th, 
-.wdg-datatable table.dataTable thead td {
-    padding: 5px 17px 5px 8px;
-    cursor: move;
-}
-
-.wdg-datatable table.dataTable tbody th, 
-.wdg-datatable table.dataTable tbody td {
-    padding: 5px 5px;
-}
-
-.wdg-datatable table.dataTable tfoot th, 
-.wdg-datatable table.dataTable tfoot td {
-    padding: 8px 8px 15px;
-}
-
-.wdg-datatable table.dataTable tfoot td {
-    vertical-align: top;
-}
-
-.wdg-datatable .col-filter {
-    width: 90%;
-}
-
-/****Affichage permanent du scroll sur Mac et ios******/
-.wdg-datatable::-webkit-scrollbar {
-    -webkit-appearance: none;
-}
-.wdg-datatable::-webkit-scrollbar:horizontal {
-    height: 15px;
-}
-.wdg-datatable::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    border: 2px solid white;
-    background-color: rgba(0, 0, 0, .5);
-}
-.wdg-datatable::-webkit-scrollbar-track { 
-    background-color: #fff; 
-    border-radius: 8px; 
-}
-/*******************************************************************************
-* NEW PROJECT PAGE
-*******************************************************************************/
-.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
-    border-bottom-right-radius: 0px !important;
-}
-.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
-    border-bottom-left-radius: 0px !important;
-}
-.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
-    border-top-right-radius: 0px !important;
-}
-.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
-    border-top-left-radius: 0px !important;
-}
-
-.ui-widget-content {
-    background: none !important;
-}
 
 .wpb_content_element .wpb_accordion_wrapper .wpb_accordion_header, .wpb_content_element.wpb_tabs .wpb_tour_tabs_wrapper .wpb_tab {
     background-color: #f2f2f2 !important;
@@ -2924,21 +2772,8 @@ div#home_bottom h1 {
     color:#222222 !important;
 }
 
-.ui-accordion-header-active ui-state-active {
-    font-weight:400px !important;
-}
-
-.ui-state-default, .ui-widget-content, .ui-state-default, .ui-widget-header, .ui-state-default {
-    background: none !important;
-}
-
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
-    font-weight:bold !important;
-    background: #ffffff !important;
-}
-
-.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
-    background: none repeat scroll 0 0 #ffffff !important;
+.wpb_accordion .ui-icon {
+    background-position: 0px;
 }
 
 #wdg-lightbox-creerprojet .wdg-forms input[type=radio] {

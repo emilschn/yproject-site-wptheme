@@ -10,7 +10,7 @@ if (!empty($campaign)):
 
 	<h2 class="expandator" data-target="votes"><?php _e('Votes', 'yproject'); ?> <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus"/></h2>
 	
-    <div id="extendable-votes" class="expandable <?php if ($status=='vote'){echo 'default-expanded';} ?>">
+    <div id="extendable-votes" class="expandable <?php if ($status==ATCF_Campaign::$campaign_status_vote){echo 'default-expanded';} ?>">
     <?php
             $post_campaign = get_post($campaign_id);
             $upload_dir = wp_upload_dir();
@@ -34,7 +34,9 @@ if (!empty($campaign)):
     ?>
     </div>
 
-	<?php if ( $status == 'collecte' || $status == 'funded' || $status == 'archive'): ?>
+	<?php if ( $status == ATCF_Campaign::$campaign_status_collecte 
+	|| $status == ATCF_Campaign::$campaign_status_funded 
+	|| $status == ATCF_Campaign::$campaign_status_archive): ?>
 	<h2 class="expandator" data-target="investments"><?php echo ucfirst($campaign->funding_type_vocabulary()['investor_action']);?>s  <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus" /></h2>
 	<div id="extendable-investments" class="expandable default-expanded">
 	<?php 

@@ -12,10 +12,10 @@
 <div id="content">
 	<div class="padder center project-list">
 		<ul id="project-list-menu" class="hidden">
-			<li><a href="#" data-status="collecte">En cours</a></li>
-			<li><a href="#" data-status="vote">En vote</a></li>
-			<li><a href="#" data-status="preview">Avant-premi&egrave;re</a></li>
-			<li><a href="#" data-status="funded">Termin&eacute;s</a></li>
+			<li><a href="#" data-status=<?php echo ATCF_Campaign::$campaign_status_collecte ; ?>>En cours</a></li>
+			<li><a href="#" data-status=<?php echo ATCF_Campaign::$campaign_status_vote ; ?>>En vote</a></li>
+			<li><a href="#" data-status=<?php echo ATCF_Campaign::$campaign_status_preview ; ?>>Avant-premi&egrave;re</a></li>
+			<li><a href="#" data-status=<?php echo ATCF_Campaign::$campaign_status_funded ; ?>>Termin&eacute;s</a></li>
 		</ul>
 <?php
 //*******************

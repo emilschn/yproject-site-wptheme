@@ -56,7 +56,7 @@ function yproject_enqueue_script(){
 	global $can_modify, $is_campaign, $is_campaign_page, $post;
 	$campaign = atcf_get_current_campaign();
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
-	$is_dashboard_page = ($post->post_name == 'gestion-financiere');
+	$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
 	$current_version = '20160915';
 	
@@ -65,38 +65,59 @@ function yproject_enqueue_script(){
 		wp_register_script('jquery', (dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.min.js'), false);
 		wp_enqueue_script('jquery');
 	}
-	
-	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery', 'jquery-ui-dialog'), $current_version);
-	if ($is_campaign) { wp_enqueue_script( 'wdg-project-invest', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign-invest.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
-	if ($is_dashboard_page && $can_modify) { wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
-	if ($is_admin_page) { wp_enqueue_script( 'wdg-admin-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-admin-dashboard.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
+	wp_enqueue_script('jquery-ui-dialog');
+    wp_enqueue_script('jquery-ui-datepicker');
+
+    wp_enqueue_style('jquery-ui-wdg',dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery-ui-wdg.css', null, false, 'all');
+
+	wp_deregister_style( 'font-awesome' );
+	wp_register_style('font-awesome', (dirname( get_bloginfo('stylesheet_url')).'/_inc/css/font-awesome.min.css'));
+	wp_enqueue_style('font-awesome');
+
+	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery'), $current_version);
+	if ($is_campaign) { wp_enqueue_script( 'wdg-project-invest', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign-invest.js', array('jquery'), $current_version); }
+
+	//Fichiers du tableau de bord (CSS, Fonctions Ajax et scripts de Datatable)
+	if ($is_dashboard_page && $can_modify) {
+		wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery'), $current_version);
+		wp_enqueue_script('wdg-project-dashboard-i18n-fr', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/i18n/datepicker-fr.js', array('jquery', 'jquery-ui-datepicker'), $current_version);
+		wp_enqueue_style( 'dashboard-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dashboard.css', null, $current_version, 'all');
+
+
+		wp_enqueue_script( 'datatable-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/jquery.dataTables.min.js', array('jquery', 'wdg-script'), true, true);
+		wp_enqueue_style('datatable-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/jquery.dataTables.min.css', null, false, 'all');
+
+		wp_enqueue_script( 'datatable-colreorder-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colReorder.min.js', array('datatable-script'), true, true);
+		wp_enqueue_style('datatable-colreorder-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/colReorder.dataTables.min.css', null, false, 'all');
+
+		wp_enqueue_script( 'datatable-select-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.select.min.js', array('datatable-script'), true, true);
+		wp_enqueue_style('datatable-select-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/select.dataTables.min.css', null, false, 'all');
+		
+		wp_enqueue_script( 'datatable-buttons-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.buttons.min.js', array('datatable-script'), true, true);
+		wp_enqueue_script( 'datatable-buttons-colvis-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/buttons.colVis.min.js', array('datatable-script'), true, true);
+		wp_enqueue_script( 'datatable-buttons-html5-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/buttons.html5.min.js', array('datatable-script'), true, true);
+		wp_enqueue_script( 'datatable-buttons-print-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/buttons.print.min.js', array('datatable-script'), true, true);
+		wp_enqueue_script( 'datatable-jszip-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/jszip.min.js', array('datatable-script'), true, true);
+		wp_enqueue_style('datatable-buttons-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/buttons.dataTables.min.css', null, false, 'all');
+
+	}
+	if ($is_admin_page) { wp_enqueue_script( 'wdg-admin-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-admin-dashboard.js', array('jquery'), $current_version); }
 	wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
-	wp_enqueue_script( 'jquery-ui-wdg', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery-ui.min.js', array('jquery'));
 	wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
 	wp_enqueue_script( 'sharer-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/sharer.min.js', array(), true, true);
 //	wp_enqueue_script( 'wdg-ux-helper', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-ux-helper.js', array('wdg-script'));
-
-	//Ne charge les scripts de tableau que si tableau de bord
-	if($post->post_name=='tableau-de-bord' || $is_admin_page){
-		wp_enqueue_script( 'datatable-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/jquery.dataTables.js', array('wdg-script'), true, true);
-		wp_enqueue_style('datatable-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/jquery.dataTables.css', null, false, 'all');
-		//wp_enqueue_script( 'datatable-resp-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.responsive.js', array('wdg-script'), true, true);
-		//wp_enqueue_style('datatable-resp-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.responsive.css', null, false, 'all');
-		wp_enqueue_script( 'datatable-colvis-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colVis.js', array('wdg-script'), true, true);
-		wp_enqueue_style('datatable-colvis-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.colVis.css', null, false, 'all');
-		wp_enqueue_script( 'datatable-colReorder-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colReorder.js', array('wdg-script'), true, true);
-		wp_enqueue_style('datatable-colReorder-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/dataTables.colReorder.css', null, false, 'all');
-	}
 	
 	if ($is_campaign_page && $campaign->edit_version() >= 3) {
-	    wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, $current_version, 'all');
+		if ($is_campaign && $campaign->edit_version() >= 3 && !$is_dashboard_page) {
+			wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, $current_version, 'all');
+		}
 	    wp_enqueue_script( 'wdg-campaign', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign.js', array('jquery', 'jquery-ui-dialog'), $current_version);
 		if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
 	} else {
-		if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor-v2.js', array('jquery', 'jquery-ui-dialog'), $current_version); }
+		if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor-v2.js', array('jquery'), $current_version); }
 	}
 	
-	wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.js', array('jquery'));
+	wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.min.js', array('jquery'));
 	wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, 'all');
 	
 	wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
@@ -186,7 +207,8 @@ function yproject_campaign_open_comments( $open, $post_id ) {
 		$campaign = new ATCF_Campaign( $post_campaign );
 	}
 	if (!empty($campaign)) {
-		if ($campaign->campaign_status() == "vote" || $campaign->campaign_status() == "collecte") {
+		if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote 
+			|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte) {
 			$open = TRUE;
 		}
 	}
@@ -427,7 +449,7 @@ function yproject_page_template( $template ) {
 	global $post;
 	$campaign = atcf_get_campaign( $post );
 	$campaign_id = $post->ID;
-	if (!empty($campaign->ID) && is_object( $campaign ) && ($campaign->campaign_status() == 'preparing') && !$campaign->current_user_can_edit()) {
+	if (!empty($campaign->ID) && is_object( $campaign ) && ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing) && !$campaign->current_user_can_edit()) {
 		header("Status: 404 Not Found");
 		global $wp_query;
 		$wp_query->set_404();
@@ -815,7 +837,7 @@ function print_user_projects(){
 									<?php
 									//Boutons pour Annuler l'investissement | Recevoir le code à nouveau
 									//Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
-									if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->vote() == "collecte" && $payment_status == "publish" && $payment['signsquid_status'] != 'Agreed') :
+									if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $payment_status == "publish" && $payment['signsquid_status'] != 'Agreed') :
 									?>
 									<td style="width: 220px;">
 										<?php if (!empty($payment['signsquid_contract_id'])): ?>
@@ -925,7 +947,7 @@ function yproject_get_current_projects() {
 
 			array (
 				'key' => 'campaign_vote',
-				'value' => 'collecte'
+				'value' => ATCF_Campaign::$campaign_status_collecte
 				),
 			array (
 				'key' => 'campaign_end_date',
@@ -999,7 +1021,9 @@ function get_investors_table() {
 	$page_dashboard = get_page_by_path('tableau-de-bord');
 	$campaign_id_param = '?campaign_id=' . $campaign->ID;
         
-	$is_campaign_over = ($campaign->campaign_status() == 'funded' || $campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing');
+	$is_campaign_over = ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded 
+		|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive
+		|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing);
         
 	$classcolonnes = array('coluname',
 					'collname',
@@ -1013,13 +1037,14 @@ function get_investors_table() {
 					'colcountry',
 					'colemail',
 					'colphone',
+
 					'colinvesmontant',
 					'colinvdate',
 					'colinvpaytype',
 					'colinvpaystate',
-					'colinvsign');
-	
-	if ($is_campaign_over) { $classcolonnes[]='colinvstate'; }
+					'colinvsign',
+					'colinvstate');
+
 	if ($campaign->funding_type()=='fundingdonation') {
 		$classcolonnes[]='colrewardprice';
 		$classcolonnes[]='colrewardtext';
@@ -1041,8 +1066,8 @@ function get_investors_table() {
 					'Date',
 					'Type de paiement',
 					'Etat du paiement',
-					'Signature');
-	if ($is_campaign_over) { $titrecolonnes[]='Investissement'; }
+					'Signature',
+					'Investissement');
 	if ($campaign->funding_type()=='fundingdonation') {
 		$titrecolonnes[]='Palier de contrepartie';
 		$titrecolonnes[]='Description de la contrepartie';
@@ -1064,8 +1089,8 @@ function get_investors_table() {
 					true,
 					true,
 					false,
+					false,
 					false);
-	if ($is_campaign_over) { $selectiondefaut[]=true; }
 	if ($campaign->funding_type()=='fundingdonation') {
 		$selectiondefaut[]=true;
 		$selectiondefaut[]=false;
@@ -1091,19 +1116,24 @@ function get_investors_table() {
 		<?php foreach ( $investments_list['payments_data'] as $item ) {
 			$post_invest = get_post($item['ID']);
 			$mangopay_id = edd_get_payment_key($item['ID']);
-			$payment_type = 'Carte';
+
 			$payment_state = edd_get_payment_status( $post_invest, true );
 			if ($payment_state == "En attente" && $current_wdg_user->is_admin()) {
 				$payment_state .= '<br /><a href="' .get_permalink($page_dashboard->ID) . $campaign_id_param. '&approve_payment='.$item['ID'].'" style="font-size: 10pt;">[Confirmer]</a>';
 				$payment_state .= '<br /><br /><a href="' .get_permalink($page_dashboard->ID) . $campaign_id_param. '&cancel_payment='.$item['ID'].'" style="font-size: 10pt;">[Annuler]</a>';
 			}
+			$payment_type = 'Carte';
 			if (strpos($mangopay_id, 'wire_') !== FALSE) {
 				$payment_type = 'Virement';
 			} else if ($mangopay_id == 'check') {
 				$payment_type = 'Ch&egrave;que';
+			} else if (strpos($mangopay_id, '_wallet_') !== FALSE) {
+				$payment_type = 'Carte et Porte-monnaie';
+			} else if (strpos($mangopay_id, 'wallet_') !== FALSE) {
+				$payment_type = 'Porte-monnaie';
 			}
 			$investment_state = 'Validé';
-			if ($campaign->campaign_status() == 'archive' || $campaign->campaign_status() == 'preparing') {
+			if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing) {
 				$investment_state = 'Annulé';
 
 				$refund_id = get_post_meta($item['ID'], 'refund_id', TRUE);
@@ -1149,7 +1179,8 @@ function get_investors_table() {
 					date_i18n( 'Y-m-d', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
 					$payment_type,
 					$payment_state,
-					$item['signsquid_status_text']
+					$item['signsquid_status_text'],
+					$investment_state
 				);
 			} else {
 				$datacolonnes = array(
@@ -1169,11 +1200,10 @@ function get_investors_table() {
 					date_i18n( 'Y-m-d', strtotime( get_post_field( 'post_date', $item['ID'] ) ) ),
 					$payment_type,
 					$payment_state,
-					$item['signsquid_status_text']
+					$item['signsquid_status_text'],
+					$investment_state
 				);
 			}
-
-			if ($is_campaign_over) { $datacolonnes[]=$investment_state; }
 
 			if ($campaign->funding_type()=='fundingdonation') {
 				$datacolonnes[]=$item['products'][0]['item_number']['options']['reward']['amount']."€";
@@ -1489,7 +1519,7 @@ Sélectionner :<br />
 	$result_votes = $wpdb->get_results( "SELECT user_id FROM ".$table_votes." WHERE post_id = ".$_POST['id_campaign'] );
 	foreach ($result_votes as $item) {
 		if (!empty($user_list[$item->user_id])) $user_list[$item->user_id] .= ' vote';
-		else $user_list[$item->user_id] = 'vote';
+		else $user_list[$item->user_id] = ATCF_Campaign::$campaign_status_vote;
 	}
 	//Récupération de la liste des investisseurs
 	foreach ( $payments_data as $item ) {
@@ -1593,7 +1623,7 @@ add_shortcode('yproject_register_lightbox', 'yproject_shortcode_register_lightbo
 // ->TB Stats
 function yproject_shortcode_statsadvanced_lightbox($atts, $content = '') {
 	ob_start();
-            locate_template('common/dashboard-statsadvanced-lightbox.php',true);
+            locate_template('projects/dashboard/dashboard-statsadvanced-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
 	echo do_shortcode('[yproject_lightbox id="statsadvanced"]' .$content . '[/yproject_lightbox]');
@@ -1629,6 +1659,17 @@ function yproject_shortcode_gonextstep_lightbox($atts, $content = '') {
 	echo do_shortcode('[yproject_lightbox id="gonextstep"]' .$content . '[/yproject_lightbox]');
 }
 add_shortcode('yproject_gonextstep_lightbox', 'yproject_shortcode_gonextstep_lightbox');
+
+//Shortcode pour Lightbox de création de projet
+function yproject_shortcode_newproject_lightbox($atts, $content = '') {
+	ob_start();
+            locate_template('common/newproject-lightbox.php',true);
+            $content = ob_get_contents();
+	ob_end_clean();
+	echo do_shortcode('[yproject_lightbox id="newproject"]' .$content . '[/yproject_lightbox]');
+	echo do_shortcode('[yproject_register_lightbox]');
+}
+add_shortcode('yproject_newproject_lightbox', 'yproject_shortcode_newproject_lightbox');
 
 function yproject_shortcode_project_vote_count($atts, $content = '') {
     $atts = shortcode_atts( array(

@@ -65,7 +65,7 @@
 			case "download":
 				$campaign = atcf_get_campaign($post->ID);
 			    
-				if ($campaign->campaign_status() !== "preparing") {
+				if ($campaign->campaign_status() !== ATCF_Campaign::$campaign_status_preparing) {
 					$campaign_id_param = '?campaign_id='.$post->ID;
 
 					$category_slug = $post->ID . '-blog-' . $post->post_name;
