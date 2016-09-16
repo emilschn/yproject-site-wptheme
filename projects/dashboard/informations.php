@@ -377,7 +377,7 @@ function print_informations_page()
                     "type"			=> "number",
                     "label"			=> "Royalties",
                     "infobubble"	=> "Pourcentage de chiffre d'affaires correspondant au montant maximum.",
-                    "value"			=> $campaign->funding_duration(),
+                    "value"			=> $campaign->roi_percent_estimated(),
                     "suffix"		=> "&nbsp;% du chiffre d'affaires",
                     "min"			=> 0,
                     "max"			=> 100,
