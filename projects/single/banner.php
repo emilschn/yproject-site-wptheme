@@ -156,9 +156,6 @@ if (count($current_organisations) > 0) {
 							<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
 							<span class="mobile_hidden"><?php 
 							    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
-							    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
-								echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
-							    }
 							?></span>
 							<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
 						</div>
@@ -185,9 +182,6 @@ if (count($current_organisations) > 0) {
 							<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
 							<span class="mobile_hidden"><?php 
 							    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
-							    if ($campaign->minimum_goal(false) < $campaign->goal(false)) {
-								echo __(' &agrave; ', 'yproject') . $campaign->goal(true);
-							    }
 							?></span>
 							<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
 						</div>
