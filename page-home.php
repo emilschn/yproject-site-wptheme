@@ -30,7 +30,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
         <div class="slider-item">
             <img class="slide" id="slide-3" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_nature.jpg" alt=""/>          
         </div>
-        
+    
     </div>
     
 </header>
@@ -161,6 +161,7 @@ $page_how = get_page_by_path('descriptif');
 		</div>
 	</div>
 </div>
+
 <?php
 	$cache_home = ob_get_contents();
 	$WDG_cache_plugin->set_cache('home', $cache_home, 60*60*24, 1);
