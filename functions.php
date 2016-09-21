@@ -75,6 +75,7 @@ function yproject_enqueue_script(){
 	wp_enqueue_style('font-awesome');
 
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery'), $current_version);
+        if (is_home() or is_front_page()) { wp_enqueue_script('wdg-slider', dirname(get_bloginfo('stylesheet_url')).'/_inc/js/slideshow.js', array('jquery'), $current_version); }       
 	if ($is_campaign) { wp_enqueue_script( 'wdg-project-invest', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign-invest.js', array('jquery'), $current_version); }
 
 	//Fichiers du tableau de bord (CSS, Fonctions Ajax et scripts de Datatable)

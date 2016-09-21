@@ -1003,11 +1003,11 @@ div#connexion_facebook_container span {
 /*******************************************************************************
 * HEADER
 *******************************************************************************/
-header {
+/*header {
     background-color: #EA4F51;
     min-width: 960px;
     background-image: url('images/footer.png');;
-}
+}*/
 
 #site_name {
     padding-top: 35px;
@@ -1678,6 +1678,42 @@ footer #site-generator {
 /*******************************************************************************
 * HOME PAGE
 *******************************************************************************/
+
+/*---------  REFONTE GRAPHIQUE - SLIDER  ---------*/
+
+
+/*@media screen and (min-width: 800px) {
+    header.hearder_home_ref {
+        background-color: #cc0000;revoir choix couleur
+    }
+}*/
+
+.slider-container {
+  max-width: 750px;
+  background-color: black;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+.slider-item {
+  background-color: white;
+  width: 100%;
+  display: inline-block;
+  display: none;  /*pour empêcher affichage des img */
+}
+.slider-container img {
+  width: 100%;
+  height: auto;
+}
+
+/*------------------------------------------------*/
+
+
+
+header.header_home_ref{
+    height: 450px;
+}
+
 header.header_home {
     height: 350px;
     background-color: transparent;

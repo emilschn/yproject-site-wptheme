@@ -19,8 +19,22 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 </div>
 <?php endif; ?>
 
-
-<header class="header_home">
+<header class="header_home_ref">
+    <div class="slider-container">
+        <div class="slider-item" style="display: inline-block;">
+            <img class="slide" id="slide-1" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_equipe.jpg" alt=""/>          
+        </div>
+        <div class="slider-item">
+            <img class="slide" id="slide-2" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_abeille.jpg" alt=""/>          
+        </div>
+        <div class="slider-item">
+            <img class="slide" id="slide-3" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_nature.jpg" alt=""/>          
+        </div>
+        
+    </div>
+    
+</header>
+<!--<header class="header_home">
 	<div class="center">
 		<div id="welcome_text">
 			<hr class="mobile_hidden" />
@@ -57,7 +71,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 			</div>
 		</div>
 	</div>
-</header>
+</header>-->
 
 <?php 
 if ( !is_user_logged_in() ) {
