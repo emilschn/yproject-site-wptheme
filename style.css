@@ -1688,24 +1688,43 @@ footer #site-generator {
     }
 }*/
 
-.slider-container {
-  max-width: 750px;
-  background-color: black;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
+.slider-container { 
+    max-width: 950px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
 }
 .slider-item {
-  background-color: white;
-  width: 100%;
-  display: inline-block;
-  display: none;  /*pour empêcher affichage des img */
+    background-color: white;
+    width: 100%;
+    display: inline-block;
+    display: none;  /*pour empêcher affichage des img */
 }
 .slider-container img {
-  width: 100%;
-  height: auto;
+    width: 100%;
+    height: auto;
 }
 
+.slider-choice{
+    display: flex;
+    justify-content: space-around;   
+    width: 8%;
+    position: absolute;
+    left: 45%;
+    top: 90%;
+}
+.num-slide{
+    display: table-cell;
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+}
+.active-slide{
+    background-color: #19889B;
+}
+.inactive-slide{
+    background-color: #fff;
+}
 /*------------------------------------------------*/
 
 
