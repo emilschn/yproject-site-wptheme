@@ -24,7 +24,7 @@ class YPUIHelpers {
 		//Si c'est de la monnaie, on voit pour ajouter un 0 pour les centimes, éventuellement
 		if ( $money && strpos($buffer, ',') ) {
 			$buffer_comma_exploded = explode( ',', $buffer );
-			if ($buffer_comma_exploded[1] < 10) {
+			if (count($buffer_comma_exploded) < 2) {
 				$buffer .= '0';
 			}
 		}

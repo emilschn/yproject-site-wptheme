@@ -18,6 +18,9 @@ $user_investments = $WDGUser_current->get_validated_investments();
 			<?php
 			$campaign = atcf_get_campaign( $campaign_id );
 			$campaign_amount = $campaign->current_amount( false );
+			$invest_index = 0;
+			$exp = dirname( __FILE__ ). '/../../../../plugins/appthemer-crowdfunding/includes/pdf_files/' .$campaign_id. '_' .$WDGUser_current->wp_user->ID. '_*.pdf';
+			$files = glob( $exp );
 			?>
 
 			<?php if ( !empty ($campaign) && !empty ( $campaign->data ) ): ?>
@@ -45,6 +48,7 @@ $user_investments = $WDGUser_current->get_validated_investments();
 							<td><?php _e("Date", 'yproject'); ?></td>
 							<td><?php _e("Montant", 'yproject'); ?></td>
 							<td><?php _e("Pourcentage du CA &agrave; percevoir", 'yproject'); ?></td>
+							<td><?php _e("Contrat d'investissement", 'yproject'); ?></td>
 						</tr>
 					</thead>
 					
@@ -56,11 +60,16 @@ $user_investments = $WDGUser_current->get_validated_investments();
 							$investor_proportion = $payment_amount / $campaign_amount;
 							$roi_percent_full = ($campaign->roi_percent() * $investor_proportion);
 							$roi_percent_display = round($roi_percent_full * 10000) / 10000;
+							$filelist_extract = explode( '/', $files[$invest_index] );
+							$contract_filename = $filelist_extract[count($filelist_extract) - 1];
+							$invest_index++;
+							$download_filename = __( "contrat-investissement-", 'yproject' ) .$campaign->data->post_name. '-'  .$invest_index. '.pdf';
 							?>
 							<tr>
 								<td><?php echo $payment_date; ?></td>
 								<td><?php echo YPUIHelpers::display_number( $payment_amount, TRUE ); ?> &euro;</td>
 								<td><?php echo YPUIHelpers::display_number( $roi_percent_display ); ?> %</td>
+								<td><a href="<?php echo home_url('/wp-content/plugins/appthemer-crowdfunding/includes/pdf_files/') . $contract_filename; ?>" download="<?php echo $download_filename; ?>"><?php _e("T&eacute;l&eacute;charger", 'yproject'); ?></a></td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>
