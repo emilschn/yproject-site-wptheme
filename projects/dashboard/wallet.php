@@ -171,7 +171,7 @@ function print_wallet_page(){
 
 
 
-        <?php if ($campaign->funding_type() != 'fundingdonation'): ?>
+        <?php if ($campaign->funding_type() != 'fundingdonation' && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded): ?>
             <h2 <?php if (!$keep_going) { ?>class="grey"<?php } ?>><?php _e('Reverser aux investisseurs', 'yproject'); ?></h2>
             <?php if ($keep_going) { ?>
                 <h3>Dates de vos versements :</h3>
