@@ -7,10 +7,9 @@
    
 function Slideshow(){
     this.currentIndex = 0;      
-    this.timeInterval = 2500;
+    this.timeInterval = 3000;
     this.startSlider();  
     this.imgListenner();
-//    this.pointSlide();
 }
 
 /**
@@ -22,23 +21,23 @@ Slideshow.prototype.cycleItems = function(){
     this.item.css('display','inline-block');
 };
 
-Slideshow.prototype.startSlider = function(){
+Slideshow.prototype.transition = function(){
     
-    this.items = $('.slider-item');
-    this.itemsNb = this.items.length;
-    if(!this.interval){
-        this.interval = setInterval(function() { //interval id             
-            this.currentIndex += 1;
-            
-            if (this.currentIndex > this.itemsNb - 1) {
-                this.currentIndex = 0;
-            }
-            
-            console.log(this.currentIndex);
-            this.cycleItems();//affiche les images une à une
-            this.pointSlide();//modifie apparence des points        
-        }.bind(this), this.timeInterval);
-    }
+};
+
+Slideshow.prototype.startSlider = function(){   
+//    this.items = $('.slider-item');
+//    this.itemsNb = this.items.length;
+//    if(!this.interval){
+//        this.interval = setInterval(function() { //interval id             
+//            this.currentIndex += 1;       
+//            if (this.currentIndex > this.itemsNb - 1) {
+//                this.currentIndex = 0;
+//            }
+//            this.cycleItems();//affiche les images une à une
+//            this.pointSlide();//modifie apparence des points        
+//        }.bind(this), this.timeInterval);
+//    }
 };
 
 /**

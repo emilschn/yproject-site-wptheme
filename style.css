@@ -1682,41 +1682,90 @@ footer #site-generator {
 /*---------  REFONTE GRAPHIQUE - SLIDER  ---------*/
 
 
-/*@media screen and (min-width: 800px) {
-    header.hearder_home_ref {
-        background-color: #cc0000;revoir choix couleur
-    }
-}*/
-
-.slider-container { 
-    max-width: 950px;
+#slideshow{
+    position: relative;
+    width: 100%;
+    height: 500px;
+    margin: 0 auto;
+}
+#slideshow .slider-container { 
+/*    max-width: 100%; 
     margin: 0 auto;
     text-align: center;
     position: relative;
+    overflow: hidden;*/
+    position:relative;
+    width: 100%;
+    height: 500px;/*à fixer ultérieurement*/
+    overflow: hidden;
 }
 .slider-item {
-    background-color: white;
-    width: 100%;
+    width: 33.2%;
+    margin: 0;
+    padding : 0;
+    /*max-height: 500px; à fixer ultérieurement*/
     display: inline-block;
-    display: none;  /*pour empêcher affichage des img */
+    /*display: none;  pour empêcher affichage des img */   
 }
-.slider-container img {
+
+#slideshow .slider {
+    position: absolute;
+    left:0; top:0;
+    width: 300%;
+    height: 500px;
+}
+.slider img {
     width: 100%;
     height: auto;
+}
+
+/* Animation pour le défilement progressif des slides */
+@keyframes slider {
+    from,16.6%,to { left: 0% }
+    33.3%,49.9% { left: -100% }
+    66.6%,83.2% { left: -200% }
+    99.9% { left: 0% } 
+}
+@-webkit-keyframes slider{
+    from,16.6%,to { left: 0% }
+    33.3%,49.9% { left: -100% }
+    66.6%,83.2% { left: -200% }
+    99.9% { left: 0% }
+    
+}
+@-moz-keyframes slider{
+    from,16.6%,to { left: 0% }
+    33.3%,49.9% { left: -100% }
+    66.6%,83.2% { left: -200% }
+    99.9% { left: 0% }
+}
+@-o-keyframes slider{
+    from,16.6%,to { left: 0% }
+    33.3%,49.9% { left: -100% }
+    66.6%,83.2% { left: -200% }
+    99.9% { left: 0% } 
+}
+#slideshow .slider {
+    -webkit-animation: slider 9s ease 1s infinite;
+        -moz-animation: slider 9s ease 1s infinite;
+        -ms-animation: slider 9s ease 1s infinite;
+            -o-animation: slider 9s ease 1s infinite;
+                animation: slider 9s ease 1s infinite;
 }
 
 .slider-choice{
     display: flex;
     justify-content: space-around;   
-    width: 8%;
+    width: 5%;
     position: absolute;
-    left: 45%;
+    z-index: 3;
+    left: 47.5%;
     top: 90%;
 }
 .num-slide{
     display: table-cell;
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     background-color: #fff;
 }
 .active-slide{
