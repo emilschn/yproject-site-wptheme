@@ -21,23 +21,20 @@ Slideshow.prototype.cycleItems = function(){
     this.item.css('display','inline-block');
 };
 
-Slideshow.prototype.transition = function(){
-    
-};
 
 Slideshow.prototype.startSlider = function(){   
-//    this.items = $('.slider-item');
-//    this.itemsNb = this.items.length;
-//    if(!this.interval){
-//        this.interval = setInterval(function() { //interval id             
-//            this.currentIndex += 1;       
-//            if (this.currentIndex > this.itemsNb - 1) {
-//                this.currentIndex = 0;
-//            }
-//            this.cycleItems();//affiche les images une à une
-//            this.pointSlide();//modifie apparence des points        
-//        }.bind(this), this.timeInterval);
-//    }
+    this.items = $('.slider-item');
+    this.itemsNb = this.items.length;
+    if(!this.interval){
+        this.interval = setInterval(function() { //interval id             
+            this.currentIndex += 1;       
+            if (this.currentIndex > this.itemsNb - 1) {
+                this.currentIndex = 0;
+            }
+            this.cycleItems();//affiche les images une à une
+            this.pointSlide();//modifie apparence des points        
+        }.bind(this), this.timeInterval);
+    }
 };
 
 /**
@@ -47,6 +44,8 @@ Slideshow.prototype.stopSlider = function(){
     clearInterval(this.interval);
     this.interval = null;
 };
+
+
 
 /**
  * Fonction start/stop sur click slide
