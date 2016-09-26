@@ -8,8 +8,10 @@
 function Slideshow(){
     this.currentIndex = 0;      
     this.timeInterval = 3000;
+    this.init($('.slider-container'));
     this.startSlider();  
     this.imgListenner();
+    
 }
 
 /**
@@ -23,18 +25,18 @@ Slideshow.prototype.cycleItems = function(){
 
 
 Slideshow.prototype.startSlider = function(){   
-    this.items = $('.slider-item');
-    this.itemsNb = this.items.length;
-    if(!this.interval){
-        this.interval = setInterval(function() { //interval id             
-            this.currentIndex += 1;       
-            if (this.currentIndex > this.itemsNb - 1) {
-                this.currentIndex = 0;
-            }
-            this.cycleItems();//affiche les images une à une
-            this.pointSlide();//modifie apparence des points        
-        }.bind(this), this.timeInterval);
-    }
+//    this.items = $('.slider-item');
+//    this.itemsNb = this.items.length;
+//    if(!this.interval){
+//        this.interval = setInterval(function() { //interval id             
+//            this.currentIndex += 1;       
+//            if (this.currentIndex > this.itemsNb - 1) {
+//                this.currentIndex = 0;
+//            }
+//            this.cycleItems();//affiche les images une à une
+//            this.pointSlide();//modifie apparence des points        
+//        }.bind(this), this.timeInterval);
+//    }
 };
 
 /**
@@ -45,7 +47,26 @@ Slideshow.prototype.stopSlider = function(){
     this.interval = null;
 };
 
+Slideshow.prototype.init = function(){
+    
+    $('.slider-choice span').click(function(e){
+        this.gotoSlide($(e.currentTarget).text());
+    }.bind(this));
+    //initialisation
+    elem = $('#slider');
+    elem.find('.slider-item').hide();
+    elem.find('.slider-item:first').show();
+    this.elemCurrent = elem.find('.slider-item:first');
+};
 
+Slideshow.prototype.gotoSlide = function(num){
+    this.currentIndex = num-1;
+    this.elemCurrent.fadeOut();//enlève la slide courante
+    elem.find('#slide-'+num).fadeIn();//affiche la slide sélectionnée
+    
+    this.pointSlide();
+    this.elemCurrent = $('#slider').find('#slide-'+num);
+};
 
 /**
  * Fonction start/stop sur click slide
@@ -62,15 +83,18 @@ Slideshow.prototype.imgListenner = function(){
 Slideshow.prototype.pointSlide = function(){
     if(this.currentIndex === 0){
         $('#slide-1').removeClass('inactive-slide').addClass('active-slide'); 
-        $('#slide-3').removeClass('active-slide').addClass('inactive-slide'); 
+        $('#slide-3').removeClass('active-slide').addClass('inactive-slide');
+        $('#slide-2').removeClass('active-slide').addClass('inactive-slide'); 
     }
     else if(this.currentIndex === 1){
         $('#slide-2').removeClass('inactive-slide').addClass('active-slide'); 
         $('#slide-1').removeClass('active-slide').addClass('inactive-slide'); 
+        $('#slide-3').removeClass('active-slide').addClass('inactive-slide'); 
     }
     else if(this.currentIndex === 2){
         $('#slide-3').removeClass('inactive-slide').addClass('active-slide');
-        $('#slide-2').removeClass('active-slide').addClass('inactive-slide'); 
+        $('#slide-2').removeClass('active-slide').addClass('inactive-slide');
+        $('#slide-1').removeClass('active-slide').addClass('inactive-slide'); 
     }
 };
     

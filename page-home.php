@@ -22,19 +22,24 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 <header class="header_home_ref">
     <div class="slider-container"> 
         <div class="slider-choice">
-            <a href="#"><div class="num-slide active-slide" id="slide-1"></div></a>
-            <a href="#"><div class="num-slide inactive-slide" id="slide-2"></div></a>   
-            <a href="#"><div class="num-slide inactive-slide" id="slide-3"></div></a>
-        </div>           
-        <div class="slider-item" id="slide-1" style="display: inline-block;">
-            <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_equipe.jpg" alt=""/> 
+<!--            <div class="num-slide active-slide" id="slide-1"><p>1</p></div>
+            <div class="num-slide inactive-slide" id="slide-2"><p>2</p></div>  
+            <div class="num-slide inactive-slide" id="slide-3"><p>3</p></div>-->
+            <span class="num-slide active-slide" id="slide-1">1</span>
+            <span class="num-slide inactive-slide" id="slide-2">2</span>  
+            <span class="num-slide inactive-slide" id="slide-3">3</span>
+        </div>  
+        <div id="slider">
+            <div class="slider-item" id="slide-1" style="display: inline-block;">
+                <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_equipe.jpg" alt=""/> 
+            </div>
+            <div class="slider-item" id="slide-2" style="display: inline-block;">
+                <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_abeille.jpg" alt=""/>          
+            </div>
+            <div class="slider-item" id="slide-3" style="display: inline-block;">
+                <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_nature.jpg" alt=""/>          
+            </div>
         </div>
-        <div class="slider-item" id="slide-2">
-            <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_abeille.jpg" alt=""/>          
-        </div>
-        <div class="slider-item" id="slide-3">
-            <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_nature.jpg" alt=""/>          
-        </div>         
     </div>
     
 </header>

@@ -1692,7 +1692,7 @@ footer #site-generator {
 .slider-item{
     width: 100%;
     display: inline-block;
-    display: none; 
+    /*display: none;*/ 
 }
 .slider-container img {
     width: 100%;
@@ -1713,6 +1713,10 @@ footer #site-generator {
     width: 10px;
     height: 10px;
     background-color: #fff;
+    cursor: pointer;
+}
+.num-slide {
+    color: rgba(0, 0, 0, 0);
 }
 .active-slide{
     background-color: #19889B;
