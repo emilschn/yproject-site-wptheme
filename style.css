@@ -1679,40 +1679,47 @@ footer #site-generator {
 * HOME PAGE
 *******************************************************************************/
 
-/*---------  REFONTE GRAPHIQUE - SLIDER  ---------*/
+/*-----------------------  REFONTE GRAPHIQUE - SLIDER  -----------------------*/
+
+header.header_home_ref{
+    height: 550px;
+}
 
 .slider-container { 
     max-width: 100%;
-    height: 400px;
+    height: 550px;
     margin: 0 auto;
     text-align: center;
-    position: relative;
+    position: relative;/*élément de référence*/
     overflow: hidden;
 }
 .slider-item{
     width: 100%;
+    height: 550px;
     position: absolute;
+    z-index: 1;
     display: inline-block;
-    /*display: none;*/ 
 }
-.slider-container img {
+.slider-item img {
     width: 100%;
     height: auto;
 }
 
 .slider-choice{
     display: flex;
-    justify-content: space-around;   
-    width: 5%;
+    justify-content: space-around; 
+    align-items: center;
+    width: 10%;
+    height: 10%;
     position: absolute;
-    z-index: 3;
-    left: 47.5%;
-    top: 90%;
+    z-index: 2;
+    left: 45.1%;
+    top: 86%;
 }
 .num-slide{
     display: table-cell;
-    width: 10px;
-    height: 10px;
+    width: 15px;/* revoir pour mettre en % *******************/
+    height: 15px;
     background-color: #fff;
     cursor: pointer;
 }
@@ -1720,20 +1727,87 @@ footer #site-generator {
     color: rgba(0, 0, 0, 0);
 }
 .active-slide{
-    background-color: #19889B;
+    background-color: #00879B;
 }
 .inactive-slide{
     background-color: #fff;
 }
 
-
-/*------------------------------------------------*/
-
-
-
-header.header_home_ref{
-    height: 450px;
+/*  Slide 1 */
+#bandeau-message{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 3;
+    top: 20%;
+    width: 100%;
+    padding: 1.5% 0% 1.5% 0%;
+    background-color: #00879B;
+    opacity: 0.4;
 }
+#bandeau-message p{
+    width: 45%;
+    left: 30%;
+    margin: 0%;
+    position: relative;
+    text-align: left;
+    font-family: Arial, sans serif; /* ajouter la nouvelle font *************/
+    font-variant-caps: all-small-caps;
+    font-size: 2.3em;
+    font-weight: bold;
+    color: #FFFFFF;
+
+}
+#button-container{
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    width: 45%;
+    height: 30%;
+    position: absolute;
+    z-index: 3;
+    left: 27.7%;
+    top: 60%;   
+}
+.button-action{
+    padding: 15px 30px;
+    width: 230px;
+/*    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    height: 30%;*/
+    background-color: #EA4F51;
+    color: #FFFFFF;
+    font-family: Trebuchet MS, sans serif;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+.button-action p{
+    margin: 0;
+}
+
+/* Partie projets*/
+
+#home-projets-ref{
+    width: 100%;
+/*    background-color: #D9D9D9;*/
+    height: 550px;
+    top: 550px;   
+}
+
+#home-projets-ref h1{
+    font-family: Trebuchet MS, sans serif; /* mettre la bonne font */
+    font-variant-caps: all-small-caps;
+    text-align: center;
+    margin: 0;
+    padding-top: 2%;
+    font-size: 2.8em;
+    
+}
+
+
+/*----------------------------------------------------------------------------*/
 
 header.header_home {
     height: 350px;

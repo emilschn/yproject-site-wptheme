@@ -8,22 +8,20 @@
 function Slideshow(){
     this.currentIndex = 0;      
     this.timeInterval = 3500;
-    this.init();
-    this.imgListenner();
-    
+    this.init();  
 }
 
 Slideshow.prototype.init = function(){  
     $('.slider-choice span').click(function(e){
         this.gotoSlide($(e.currentTarget).text());
     }.bind(this));
+    
     //initialisation
     this.elem = $('#slider');
     this.elem.find('.slider-item').hide();
     this.elem.find('.slider-item:first').show();
     this.elemCurrent = this.elem.find('.slider-item:first');
-    
-    
+   
     //Play slider
     this.items = $('.slider-item');//tous les slides
     this.itemsNb = this.items.length;//nb de slides
@@ -32,8 +30,7 @@ Slideshow.prototype.init = function(){
     //Passage souris sur le slider
     $('.slider-container').mouseover(this.stopSlider.bind(this));
     $('.slider-container').mouseout(this.playSlider.bind(this));
-    
-   
+       
 };
 
 /**
@@ -82,13 +79,13 @@ Slideshow.prototype.next = function(){
     this.gotoSlide(parseInt(num)+1);
 };
 
-Slideshow.prototype.prev = function(){
-    var num = this.currentIndex -1;
-    if(num < 1){
-        num = this.itemsNb -1;
-    }
-    this.gotoSlide(parseInt(num)-1);
-};
+//Slideshow.prototype.prev = function(){
+//    var num = this.currentIndex -1;
+//    if(num < 1){
+//        num = this.itemsNb -1;
+//    }
+//    this.gotoSlide(parseInt(num)-1);
+//};
 
 
 Slideshow.prototype.gotoSlide = function(num){
@@ -101,8 +98,12 @@ Slideshow.prototype.gotoSlide = function(num){
 
     //animation en slide
     var sens = 1; //sens droite vers gauche
-    if((parseInt(num)-1) < this.currentIndex ){ sens = -1; }
+    if((parseInt(num)-1) < this.currentIndex && (parseInt(num)-1) - this.currentIndex === -1){ sens = -1; }
 
+    if((parseInt(num)-1) === 0 && this.currentIndex === 2) {sens = 1; }
+    else if((parseInt(num)-1) === 2 && this.currentIndex === 0) {sens = -1; }
+    
+    
     var cssDeb = {"left" : sens*this.elem.width()};
     var cssFin = {"left" : -sens*this.elem.width()};
     this.elem.find('#slide-'+num).show().css(cssDeb);//élément qui va arriver

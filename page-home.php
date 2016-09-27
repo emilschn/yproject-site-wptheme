@@ -28,7 +28,14 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
         </div>  
         <div id="slider">
             <div class="slider-item" id="slide-1" >
-                <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_equipe.jpg" alt=""/> 
+                <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_equipe_nb.jpg" alt=""/> 
+                <div id="bandeau-message">
+                    <p>Nous activons </br>une finance à impact positif</br> en développant<br/> les levées de fonds en royalties</p>
+                </div>
+                <div id="button-container">
+                    <a class="button-action" href=""><p>FINANCER SON PROJET</p></a>
+                    <a class="button-action" href=""><p>INVESTIR SUR UN PROJET</p></a>
+                </div>
             </div>
             <div class="slider-item" id="slide-2" >
                 <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_abeille.jpg" alt=""/>          
@@ -96,7 +103,18 @@ else {
 $page_finance = get_page_by_path('financement');
 $page_how = get_page_by_path('descriptif');
 ?>
-<div id="home_middle_top" class="center mobile_hidden">
+
+<section id="home-projets-ref">
+    <h1>/ Nos derniers projets /</h1>
+    
+    <div id="bloc-projets">
+        <div class="projets-inline projet-container" id="projet-1"></div>
+        <div class="projets-inline projet-container" id="projet-2"></div>
+        <div class="projets-inline projet-container" id="projet-3"></div>
+    </div>
+</section>
+
+<!--<div id="home_middle_top" class="center mobile_hidden">
 
 	<div id="home_middle_top_left" class="home_middle_top_content">
 		<a href="<?php echo get_permalink($page_finance->ID); ?>" style="display: block;">
@@ -154,7 +172,7 @@ $page_how = get_page_by_path('descriptif');
 			<br /><br />
 		</p>
 	</div>
-</div>
+</div>-->
 
 <div id="home_bottom" class="center mobile_hidden">
 	<div class="padder">

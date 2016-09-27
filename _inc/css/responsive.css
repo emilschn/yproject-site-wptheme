@@ -130,6 +130,10 @@
 		background-position: center top;
 	}
 	header.header_home > div { text-align: center; }
+        
+        #button-container{
+            flex-flow: column wrap;
+        }
 	
 /*******************************************************************************
 * PROJECT SHORT - MENU
