@@ -7,24 +7,51 @@
    
 function Slideshow(){
     this.currentIndex = 0;      
-    this.timeInterval = 3000;
-    this.init($('.slider-container'));
-    this.startSlider();  
+    this.timeInterval = 3500;
+    this.init();
     this.imgListenner();
     
 }
 
+Slideshow.prototype.init = function(){  
+    $('.slider-choice span').click(function(e){
+        this.gotoSlide($(e.currentTarget).text());
+    }.bind(this));
+    //initialisation
+    this.elem = $('#slider');
+    this.elem.find('.slider-item').hide();
+    this.elem.find('.slider-item:first').show();
+    this.elemCurrent = this.elem.find('.slider-item:first');
+    
+    
+    //Play slider
+    this.items = $('.slider-item');//tous les slides
+    this.itemsNb = this.items.length;//nb de slides
+    this.playSlider();
+   
+    //Passage souris sur le slider
+    $('.slider-container').mouseover(this.stopSlider.bind(this));
+    $('.slider-container').mouseout(this.playSlider.bind(this));
+    
+   
+};
+
 /**
  * Affiche l'image en modifiant son display
  */
-Slideshow.prototype.cycleItems = function(){
-    this.item = $('.slider-item').eq(this.currentIndex);
-    this.items.hide();
-    this.item.css('display','inline-block');
-};
+//Slideshow.prototype.cycleItems = function(){
+//    this.item = $('.slider-item').eq(this.currentIndex);
+//    this.items.hide();
+//    this.item.css('display','inline-block');
+//};
 
 
-Slideshow.prototype.startSlider = function(){   
+Slideshow.prototype.playSlider = function(){  
+    intervalId = setInterval(this.next.bind(this), this.timeInterval);
+
+    
+    
+//    
 //    this.items = $('.slider-item');
 //    this.itemsNb = this.items.length;
 //    if(!this.interval){
@@ -43,38 +70,49 @@ Slideshow.prototype.startSlider = function(){
  * Fonction d'arrêt du slider
  */
 Slideshow.prototype.stopSlider = function(){
-    clearInterval(this.interval);
-    this.interval = null;
+    clearInterval(intervalId);  
+    intervalId = null;
 };
 
-Slideshow.prototype.init = function(){
-    
-    $('.slider-choice span').click(function(e){
-        this.gotoSlide($(e.currentTarget).text());
-    }.bind(this));
-    //initialisation
-    elem = $('#slider');
-    elem.find('.slider-item').hide();
-    elem.find('.slider-item:first').show();
-    this.elemCurrent = elem.find('.slider-item:first');
+Slideshow.prototype.next = function(){ 
+    var num = (parseInt(this.currentIndex)) +1;
+    if(num > this.itemsNb -1){
+        num = 0;
+    }
+    this.gotoSlide(parseInt(num)+1);
 };
+
+Slideshow.prototype.prev = function(){
+    var num = this.currentIndex -1;
+    if(num < 1){
+        num = this.itemsNb -1;
+    }
+    this.gotoSlide(parseInt(num)-1);
+};
+
 
 Slideshow.prototype.gotoSlide = function(num){
-    this.currentIndex = num-1;
-    this.elemCurrent.fadeOut();//enlève la slide courante
-    elem.find('#slide-'+num).fadeIn();//affiche la slide sélectionnée
     
+    if((parseInt(num)-1) === this.currentIndex){ return false; }//évite de déclencher animation si clic sur repère slide courante
+    
+    //animation fadeIn/fadeOut
+//    this.elemCurrent.fadeOut();//enlève la slide courante
+//    this.elem.find('#slide-'+num).fadeIn();//affiche la slide sélectionnée  
+
+    //animation en slide
+    var sens = 1; //sens droite vers gauche
+    if((parseInt(num)-1) < this.currentIndex ){ sens = -1; }
+
+    var cssDeb = {"left" : sens*this.elem.width()};
+    var cssFin = {"left" : -sens*this.elem.width()};
+    this.elem.find('#slide-'+num).show().css(cssDeb);//élément qui va arriver
+    this.elem.find('#slide-'+num).animate({"top": 0, "left": 0}, 1000);
+    this.elemCurrent.animate(cssFin, 1000);
+    
+    this.currentIndex = (parseInt(num))-1;
     this.pointSlide();
     this.elemCurrent = $('#slider').find('#slide-'+num);
-};
-
-/**
- * Fonction start/stop sur click slide
- */
-Slideshow.prototype.imgListenner = function(){
-    this.items.on('click', function(){
-        this.interval !== null ? this.stopSlider() : this.startSlider();
-    }.bind(this));    
+    
 };
 
 /**
@@ -82,19 +120,19 @@ Slideshow.prototype.imgListenner = function(){
  */
 Slideshow.prototype.pointSlide = function(){
     if(this.currentIndex === 0){
-        $('#slide-1').removeClass('inactive-slide').addClass('active-slide'); 
-        $('#slide-3').removeClass('active-slide').addClass('inactive-slide');
-        $('#slide-2').removeClass('active-slide').addClass('inactive-slide'); 
+        $('#span-1').removeClass('inactive-slide').addClass('active-slide'); 
+        $('#span-3').removeClass('active-slide').addClass('inactive-slide');
+        $('#span-2').removeClass('active-slide').addClass('inactive-slide'); 
     }
     else if(this.currentIndex === 1){
-        $('#slide-2').removeClass('inactive-slide').addClass('active-slide'); 
-        $('#slide-1').removeClass('active-slide').addClass('inactive-slide'); 
-        $('#slide-3').removeClass('active-slide').addClass('inactive-slide'); 
+        $('#span-2').removeClass('inactive-slide').addClass('active-slide'); 
+        $('#span-1').removeClass('active-slide').addClass('inactive-slide'); 
+        $('#span-3').removeClass('active-slide').addClass('inactive-slide'); 
     }
     else if(this.currentIndex === 2){
-        $('#slide-3').removeClass('inactive-slide').addClass('active-slide');
-        $('#slide-2').removeClass('active-slide').addClass('inactive-slide');
-        $('#slide-1').removeClass('active-slide').addClass('inactive-slide'); 
+        $('#span-3').removeClass('inactive-slide').addClass('active-slide');
+        $('#span-2').removeClass('active-slide').addClass('inactive-slide');
+        $('#span-1').removeClass('active-slide').addClass('inactive-slide'); 
     }
 };
     

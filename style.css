@@ -1691,6 +1691,7 @@ footer #site-generator {
 }
 .slider-item{
     width: 100%;
+    position: absolute;
     display: inline-block;
     /*display: none;*/ 
 }
