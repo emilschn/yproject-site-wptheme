@@ -33,34 +33,9 @@ Slideshow.prototype.init = function(){
        
 };
 
-/**
- * Affiche l'image en modifiant son display
- */
-//Slideshow.prototype.cycleItems = function(){
-//    this.item = $('.slider-item').eq(this.currentIndex);
-//    this.items.hide();
-//    this.item.css('display','inline-block');
-//};
-
 
 Slideshow.prototype.playSlider = function(){  
     intervalId = setInterval(this.next.bind(this), this.timeInterval);
-
-    
-    
-//    
-//    this.items = $('.slider-item');
-//    this.itemsNb = this.items.length;
-//    if(!this.interval){
-//        this.interval = setInterval(function() { //interval id             
-//            this.currentIndex += 1;       
-//            if (this.currentIndex > this.itemsNb - 1) {
-//                this.currentIndex = 0;
-//            }
-//            this.cycleItems();//affiche les images une à une
-//            this.pointSlide();//modifie apparence des points        
-//        }.bind(this), this.timeInterval);
-//    }
 };
 
 /**
@@ -79,23 +54,11 @@ Slideshow.prototype.next = function(){
     this.gotoSlide(parseInt(num)+1);
 };
 
-//Slideshow.prototype.prev = function(){
-//    var num = this.currentIndex -1;
-//    if(num < 1){
-//        num = this.itemsNb -1;
-//    }
-//    this.gotoSlide(parseInt(num)-1);
-//};
-
 
 Slideshow.prototype.gotoSlide = function(num){
     
     if((parseInt(num)-1) === this.currentIndex){ return false; }//évite de déclencher animation si clic sur repère slide courante
     
-    //animation fadeIn/fadeOut
-//    this.elemCurrent.fadeOut();//enlève la slide courante
-//    this.elem.find('#slide-'+num).fadeIn();//affiche la slide sélectionnée  
-
     //animation en slide
     var sens = 1; //sens droite vers gauche
     if((parseInt(num)-1) < this.currentIndex && (parseInt(num)-1) - this.currentIndex === -1){ sens = -1; }
@@ -136,57 +99,3 @@ Slideshow.prototype.pointSlide = function(){
         $('#span-1').removeClass('active-slide').addClass('inactive-slide'); 
     }
 };
-    
-
-
-
-
-//////////////
-
-//$( document ).ready(function() {
-//
-//var currentIndex = 0,
-//    items = $('.slider-item'),
-//    itemsNb = items.length,
-//    timeInterval = 3000;
-//
-//// Slider en mode automatique dès l'arrivée sur la page
-//startSlider();
-//
-///**
-// * Pour afficher l'image courante selon son index
-// */
-//function cycleItems(){
-//    var item = $('.slider-container div').eq(currentIndex);
-//    items.hide();
-//    item.css('display','inline-block');
-//}
-//
-////Fonction autoSlide pour slider en mode automatique
-//
-//
-////Fonction arrêt slider automatique
-//function stopSlider(){
-//    clearInterval(interval);
-//    interval = null;
-//}
-////Fonction démarrage slider automatique
-//function startSlider(){
-//    interval = setInterval(function() { //interval id
-//        currentIndex += 1;
-//        if (currentIndex > itemsNb - 1) {
-//          currentIndex = 0;
-//        }
-//        cycleItems();
-//    }, timeInterval);
-//}
-//
-//
-//items.on('click', function(){
-//    interval !== null ? stopSlider() : startSlider();
-//    console.log(currentIndex);
-//});
-//
-//});
-
-
