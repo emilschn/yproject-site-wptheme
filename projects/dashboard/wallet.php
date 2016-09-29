@@ -150,23 +150,51 @@
 		
 
 		<?php if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded): ?>
-		<h2><?php _e('Reverser aux investisseurs', 'yproject'); ?></h2>
+			<h2><?php _e('Reverser aux investisseurs', 'yproject'); ?></h2>
 
-		<h3>Dates de vos versements :</h3>
-		<?php
-		$declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $campaign->ID );
-		$nb_fields = $campaign->get_turnover_per_declaration();
-		?>
-		<?php if ($declaration_list): ?>
-			<ul class="payment-list">
-				<?php foreach ( $declaration_list as $declaration ): ?>
-					<li>
-						<h4><?php echo $declaration->get_formatted_date(); ?></h4>
-						<div>
-							<?php $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); ?>
+			<h3>Dates de vos versements :</h3>
+			<?php
+			$declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $campaign->ID );
+			$nb_fields = $campaign->get_turnover_per_declaration();
+			?>
+			<?php if ($declaration_list): ?>
+				<ul class="payment-list">
+					<?php foreach ( $declaration_list as $declaration ): ?>
+						<li>
+							<h4><?php echo $declaration->get_formatted_date(); ?></h4>
+							<div>
+								<?php $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); ?>
 
-							<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration ): ?>
-								<form action="" method="POST" id="turnover-declaration" data-roi-percent="<?php echo $campaign->roi_percent(); ?>" data-costs-orga="<?php echo $campaign->get_costs_to_organization(); ?>">
+								<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration ): ?>
+									<form action="" method="POST" id="turnover-declaration" data-roi-percent="<?php echo $campaign->roi_percent(); ?>" data-costs-orga="<?php echo $campaign->get_costs_to_organization(); ?>">
+										<?php if ($nb_fields > 1): ?>
+											<ul>
+												<?php
+												$date_due = new DateTime($declaration->date_due);
+												$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
+												?>
+												<?php for ($i = 0; $i < $nb_fields; $i++): ?>
+													<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <input type="text" name="turnover-<?php echo $i; ?>" id="turnover-<?php echo $i; ?>" /></li>
+													<?php $date_due->add(new DateInterval('P1M')); ?>
+												<?php endfor; ?>
+											</ul>
+
+										<?php else: ?>
+											<input type="text" name="turnover-total" id="turnover-total" />
+										<?php endif; ?>
+
+										<br /><br />
+										Somme à verser : <span class="amount-to-pay">0</span> €.
+										<br /><br />
+
+										<input type="hidden" name="action" value="save-turnover-declaration" />
+										<input type="hidden" name="declaration-id" value="<?php echo $declaration->id; ?>" />
+										<button type="submit" class="button">Enregistrer la déclaration</button>
+									</form>
+
+								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
+									Chiffre d'affaires déclaré :
+									<?php $declaration_turnover = $declaration->get_turnover(); ?>
 									<?php if ($nb_fields > 1): ?>
 										<ul>
 											<?php
@@ -174,169 +202,141 @@
 											$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
 											?>
 											<?php for ($i = 0; $i < $nb_fields; $i++): ?>
-												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <input type="text" name="turnover-<?php echo $i; ?>" id="turnover-<?php echo $i; ?>" /></li>
+												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
 												<?php $date_due->add(new DateInterval('P1M')); ?>
 											<?php endfor; ?>
-										</ul>
+										</ul><br />
 
 									<?php else: ?>
-										<input type="text" name="turnover-total" id="turnover-total" />
+										<?php echo $declaration_turnover[0]; ?> &euro;<br />
 									<?php endif; ?>
 
-									<br /><br />
-									Somme à verser : <span class="amount-to-pay">0</span> €.
-									<br /><br />
+									<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro;<br /><br />
 
-									<input type="hidden" name="action" value="save-turnover-declaration" />
-									<input type="hidden" name="declaration-id" value="<?php echo $declaration->id; ?>" />
-									<button type="submit" class="button">Enregistrer la déclaration</button>
-								</form>
+									<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
+									<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br />
+									<b>Montant à verser : </b><?php echo $declaration->get_amount_with_commission(); ?> &euro;<br /><br />
 
-							<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
-								Chiffre d'affaires déclaré :
-								<?php $declaration_turnover = $declaration->get_turnover(); ?>
-								<?php if ($nb_fields > 1): ?>
-									<ul>
-										<?php
-										$date_due = new DateTime($declaration->date_due);
-										$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
-										?>
-										<?php for ($i = 0; $i < $nb_fields; $i++): ?>
-											<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
-											<?php $date_due->add(new DateInterval('P1M')); ?>
-										<?php endfor; ?>
-									</ul><br />
-
-								<?php else: ?>
-									<?php echo $declaration_turnover[0]; ?> &euro;<br />
-								<?php endif; ?>
-
-								<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro;<br /><br />
-
-								<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
-								<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br />
-								<b>Montant à verser : </b><?php echo $declaration->get_amount_with_commission(); ?> &euro;<br /><br />
-
-								<form action="" method="POST" enctype="">
-									<input type="hidden" name="action" value="proceed_roi" />
-									<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
-									<input type="submit" name="payment_card" class="button" value="<?php _e('Payer par carte', 'yproject'); ?>" />
-								</form>
-
-							<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
-								Chiffre d'affaires déclaré :
-								<?php $declaration_turnover = $declaration->get_turnover(); ?>
-								<?php if ($nb_fields > 1): ?>
-									<ul>
-										<?php
-										$date_due = new DateTime($declaration->date_due);
-										$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
-										?>
-										<?php for ($i = 0; $i < $nb_fields; $i++): ?>
-											<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
-											<?php $date_due->add(new DateInterval('P1M')); ?>
-										<?php endfor; ?>
-									</ul><br />
-
-								<?php else: ?>
-									<?php echo $declaration_turnover[0]; ?> &euro;<br />
-								<?php endif; ?>
-
-								<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro;<br /><br />
-
-								<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
-								<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br /><br />
-
-								Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
-								Le versement vers vos investisseurs est en cours.
-
-								<?php if ($is_admin): ?>
-									<br /><br />
-									<a href="#transfer-roi" class="button transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>">Procéder aux versements</a>
-
-									<?php ob_start(); ?>
-									<h3><?php _e('Reverser aux utilisateurs', 'yproject'); ?></h3>
-									<div id="lightbox-content">
-										<div class="loading-image align-center"><img id="ajax-email-loader-img" src="<?php echo get_stylesheet_directory_uri(); ?>/images/loading.gif" alt="chargement" /></div>
-										<div class="loading-content"></div>
-										<div class="loading-form align-center hidden">
-											<form action="" method="POST">
-												<input type="hidden" name="action" value="proceed_roi_transfers" />
-												<input type="hidden" id="hidden-roi-id" name="roi_id" value="" />
-												<input type="submit" class="button" value="Transférer" />
-											</form>
-										</div>
-									</div>
-									<?php
-									$lightbox_content = ob_get_contents();
-									ob_end_clean();
-									echo do_shortcode('[yproject_lightbox id="transfer-roi"]' . $lightbox_content . '[/yproject_lightbox]');
-									?>
-
-								<?php endif; ?>
-
-							<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_finished ): ?>
-								Chiffre d'affaires déclaré :
-								<?php $declaration_turnover = $declaration->get_turnover(); ?>
-								<?php if ($nb_fields > 1): ?>
-									<ul>
-										<?php
-										$date_due = new DateTime($declaration->date_due);
-										$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
-										?>
-										<?php for ($i = 0; $i < $nb_fields; $i++): ?>
-											<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
-											<?php $date_due->add(new DateInterval('P1M')); ?>
-										<?php endfor; ?>
-									</ul><br />
-
-								<?php else: ?>
-									<?php echo $declaration_turnover[0]; ?> &euro;<br />
-								<?php endif; ?>
-
-								<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro;<br /><br />
-
-								<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
-								<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br /><br />
-
-								Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
-								Vos investisseurs ont bien reçu leur retour sur investissement.
-
-							<?php endif; ?>
-
-
-							<?php if ($declaration->file_list != ""): ?>
-								<div>
-									<b>Comptes annuels :</b><br />
-									<?php $declaration_file_list = $declaration->get_file_list(); ?>
-									<?php if ( empty( $declaration_file_list ) ): ?>
-										Aucun fichier pour l'instant<br />
-									<?php else: ?>
-										<ul>
-											<?php $i = 0; foreach ($declaration_file_list as $declaration_file): $i++; ?>
-												<li><a href="<?php echo $declaration_file; ?>" target="_blank">Fichier <?php echo $i; ?></a></li>
-											<?php endforeach; ?>
-										</ul>
-									<?php endif; ?>
-
-									<form action="" method="POST" enctype="multipart/form-data">
-										<input type="file" name="accounts_file_<?php echo $declaration->id; ?>" />
-										<input type="submit" class="button" value="<?php _e('Envoyer', 'yproject'); ?>" />
+									<form action="" method="POST" enctype="">
+										<input type="hidden" name="action" value="proceed_roi" />
+										<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
+										<input type="submit" name="payment_card" class="button" value="<?php _e('Payer par carte', 'yproject'); ?>" />
 									</form>
-								</div>
-							<?php endif; ?>
-						</div>
-					</li>
-				<?php endforeach; ?>
-			</ul>
-		<?php endif; ?>
+
+								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
+									Chiffre d'affaires déclaré :
+									<?php $declaration_turnover = $declaration->get_turnover(); ?>
+									<?php if ($nb_fields > 1): ?>
+										<ul>
+											<?php
+											$date_due = new DateTime($declaration->date_due);
+											$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
+											?>
+											<?php for ($i = 0; $i < $nb_fields; $i++): ?>
+												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
+												<?php $date_due->add(new DateInterval('P1M')); ?>
+											<?php endfor; ?>
+										</ul><br />
+
+									<?php else: ?>
+										<?php echo $declaration_turnover[0]; ?> &euro;<br />
+									<?php endif; ?>
+
+									<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro;<br /><br />
+
+									<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
+									<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br /><br />
+
+									Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+									Le versement vers vos investisseurs est en cours.
+
+									<?php if ($is_admin): ?>
+										<br /><br />
+										<a href="#transfer-roi" class="button transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>">Procéder aux versements</a>
+
+										<?php ob_start(); ?>
+										<h3><?php _e('Reverser aux utilisateurs', 'yproject'); ?></h3>
+										<div id="lightbox-content">
+											<div class="loading-image align-center"><img id="ajax-email-loader-img" src="<?php echo get_stylesheet_directory_uri(); ?>/images/loading.gif" alt="chargement" /></div>
+											<div class="loading-content"></div>
+											<div class="loading-form align-center hidden">
+												<form action="" method="POST">
+													<input type="hidden" name="action" value="proceed_roi_transfers" />
+													<input type="hidden" id="hidden-roi-id" name="roi_id" value="" />
+													<input type="submit" class="button" value="Transférer" />
+												</form>
+											</div>
+										</div>
+										<?php
+										$lightbox_content = ob_get_contents();
+										ob_end_clean();
+										echo do_shortcode('[yproject_lightbox id="transfer-roi"]' . $lightbox_content . '[/yproject_lightbox]');
+										?>
+
+									<?php endif; ?>
+
+								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_finished ): ?>
+									Chiffre d'affaires déclaré :
+									<?php $declaration_turnover = $declaration->get_turnover(); ?>
+									<?php if ($nb_fields > 1): ?>
+										<ul>
+											<?php
+											$date_due = new DateTime($declaration->date_due);
+											$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
+											?>
+											<?php for ($i = 0; $i < $nb_fields; $i++): ?>
+												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
+												<?php $date_due->add(new DateInterval('P1M')); ?>
+											<?php endfor; ?>
+										</ul><br />
+
+									<?php else: ?>
+										<?php echo $declaration_turnover[0]; ?> &euro;<br />
+									<?php endif; ?>
+
+									<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro;<br /><br />
+
+									<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
+									<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br /><br />
+
+									Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+									Vos investisseurs ont bien reçu leur retour sur investissement.
+
+								<?php endif; ?>
+
+
+								<?php if ($declaration->file_list != ""): ?>
+									<div>
+										<b>Comptes annuels :</b><br />
+										<?php $declaration_file_list = $declaration->get_file_list(); ?>
+										<?php if ( empty( $declaration_file_list ) ): ?>
+											Aucun fichier pour l'instant<br />
+										<?php else: ?>
+											<ul>
+												<?php $i = 0; foreach ($declaration_file_list as $declaration_file): $i++; ?>
+													<li><a href="<?php echo $declaration_file; ?>" target="_blank">Fichier <?php echo $i; ?></a></li>
+												<?php endforeach; ?>
+											</ul>
+										<?php endif; ?>
+
+										<form action="" method="POST" enctype="multipart/form-data">
+											<input type="file" name="accounts_file_<?php echo $declaration->id; ?>" />
+											<input type="submit" class="button" value="<?php _e('Envoyer', 'yproject'); ?>" />
+										</form>
+									</div>
+								<?php endif; ?>
+							</div>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
 		<?php endif; ?>
 		
 	<?php endif; ?>
 
 
 	<h2><?php _e('Liste des op&eacute;rations bancaires', 'yproject'); ?></h2>
-	<?php $transfers = $organisation_obj->get_transfers();
+	<?php $transfers = $organization_obj->get_transfers();
 	if ($transfers) : ?>
 
 		<h3>Transferts vers votre compte :</h3>
