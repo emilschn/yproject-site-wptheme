@@ -89,7 +89,7 @@ function print_contacts_page() {
                     <?php }
                 } ?>
 
-                <form method="POST" action="" class="db-form">
+                <form method="POST" action="">
                     <div class="field"><label for="email"><?php _e('E-mail :', 'yproject'); ?>*</label>
                         <input type="text" name="email" <?php if (isset($_POST['email']) && $add_check_result === FALSE) { ?>value="<?php echo $_POST['email']; ?>"<?php } ?> /></div>
                     <div class="field"><label for="value"><?php _e('Somme :', 'yproject'); ?>*</label>
