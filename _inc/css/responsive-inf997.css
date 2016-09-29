@@ -1,0 +1,5 @@
+@media screen and (max-width: 997px) {
+	.hidden-inf997 { display: none; }
+	.only-inf997 { display: block; }
+	.only-inf997.inline { display: inline; }
+}
