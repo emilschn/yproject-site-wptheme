@@ -33,7 +33,7 @@
 	<?php endif; ?>
 		
 
-	<?php if ($campaign->funding_type() != 'fundingdonation' && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded): ?>
+	<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
 		<h2><?php _e('Autorisation de pr&eacute;l&egrave;vement', 'yproject'); ?></h2>
 		
 		
@@ -149,7 +149,7 @@
 		<?php endif; ?>
 		
 
-
+		<?php if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded): ?>
 		<h2><?php _e('Reverser aux investisseurs', 'yproject'); ?></h2>
 
 		<h3>Dates de vos versements :</h3>
@@ -329,6 +329,7 @@
 					</li>
 				<?php endforeach; ?>
 			</ul>
+		<?php endif; ?>
 		<?php endif; ?>
 		
 	<?php endif; ?>
