@@ -1681,61 +1681,64 @@ footer #site-generator {
 
 /*-----------------------  REFONTE GRAPHIQUE - SLIDER  -----------------------*/
 
-header.header_home_ref{
-    height: 550px;
-}
 
-.slider-container { 
-    max-width: 100%;
-    height: 550px;
+#header_home_ref .slider-container { 
+    min-width: 100%;
+    min-height: 550px;
     margin: 0 auto;
     text-align: center;
     position: relative;/*élément de référence*/
     overflow: hidden;
 }
-.slider-item{
+
+
+#header_home_ref .slider-container #slider .slider-item{
     width: 100%;
     height: 550px;
     position: absolute;
     z-index: 1;
     display: inline-block;
 }
-.slider-item img {
-    width: 100%;
-    height: auto;
+#header_home_ref .slider-container #slider .slider-item img {
+    min-width: 100%;
+    min-height: 550px;
+    position: relative;
+/*    top: -400px;
+    left: -200px;*/
 }
 
-.slider-choice{
+#header_home_ref .slider-container .slider-choice{
     display: flex;
     justify-content: space-around; 
     align-items: center;
-    width: 6%;
+    width: 100px; /*6%*/
     height: 10%;
     position: absolute;
     z-index: 2;
-    left: 45.1%;
+    left: 44.9%;
     top: 86%;
 }
-.num-slide{
+#header_home_ref .slider-container .slider-choice .num-slide{
     width: 15px;/* revoir pour mettre en % *******************/
     height: 15px;
     background-color: #fff;
     cursor: pointer;
 }
-.num-slide {
+#header_home_ref .slider-container .slider-choice .num-slide {
     color: rgba(0, 0, 0, 0);
 }
-.active-slide{
+#header_home_ref .slider-container .slider-choice .active-slide{
     background-color: #00879B;
 }
-.inactive-slide{
+#header_home_ref .slider-container .slider-choice .inactive-slide{
     background-color: #fff;
 }
 
 /*  Slide 1 */
-#bandeau-message{
+#header_home_ref .slider-container #slider #slide-1 #message-banner{
     display: flex;
     align-items: center;
+    justify-content: center;
     position: absolute;
     z-index: 3;
     top: 25%;
@@ -1743,10 +1746,11 @@ header.header_home_ref{
     padding: 1.5% 0% 1.5% 0%;
     background: rgba(0, 135, 155, 0.4);
 }
-#bandeau-message p{
-    width: 41%;
-    left: 27.5%;
+/*message pour bannière sur screen*/
+#header_home_ref .slider-container #slider #slide-1 #message-banner .screen-message{
+    width: 650px;/*45%*/
     margin: 0%;
+    left: -1%;
     position: relative;
     text-align: left;
     font-family: Arial, sans serif; /* ajouter la nouvelle font *************/
@@ -1755,49 +1759,243 @@ header.header_home_ref{
     color: #FFFFFF;
     text-transform: uppercase;
 }
-#button-container{
+#header_home_ref .slider-container #slider #slide-1 #message-banner .mobile-message{
+    display: none;
+}
+
+#header_home_ref .slider-container #slider #slide-1 #button-container{
     display: flex;
-    justify-content: space-around; 
-    align-items: center;
-    width: 45%;
-    height: 30%;
+    justify-content: center;
+    /*width: 760px;*/
     position: absolute;
     z-index: 3;
-    left: 25.6%;
-    top: 65%;   
+    left: 25.5%;
+    top: 75%;   
 }
-.button-action{
-    padding: 15px 30px;
-    width: 230px;
-    background-color: #EA4F51;
-    color: #FFFFFF;
+
+#header_home_ref .slider-container #slider #slide-1 #button-container button{
+    margin: 0% 2%;
+    width: 330px;
+    font-size: 0.938em;
     font-family: Trebuchet MS, sans serif;
-    font-size: 0.9em;
-    cursor: pointer;
-}
-.button-action p{
-    margin: 0;
 }
 
-/* Partie projets*/
+/*------------ Partie projets --------------*/
 
-#home-projets-ref{
+#home-projects-ref{
     width: 100%;
-    height: 550px;
+    height: 700px;
     top: 550px;   
 }
 
-#home-projets-ref h1{
-    font-family: Trebuchet MS, sans serif; /* mettre la bonne font */
-    font-variant-caps: all-small-caps;
+#home-projects-ref h1{  
     text-align: center;
     margin: 0;
     padding-top: 2%;
-    font-size: 2.8em;
-    
+    font-family: Trebuchet MS, sans serif;
+    text-transform: uppercase;
+    font-size: 2.93em; 
+    font-weight: bold;
+    letter-spacing: 0.125em;
+}
+/* Bloc avec les 3 projets présentés*/
+#home-projects-ref #bloc-projects{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    min-width: 100%;
+    min-height: 650px;
+    position: absolute; /* élément de référence pour les div projets*/
+    z-index: 0; 
+    padding-top: 2%; 
 }
 
+#home-projects-ref .project-container{ 
+    display: flex;
+    justify-content: center;
+    min-width: 33%;
+    position: relative;
+    font-family: Trebuchet MS, sans serif;
+}
+#home-projects-ref .project-container .project-framed{ 
+    min-width: 85%;
+    height: 90%;
+    background-color: rgba(51, 51, 51, 0.05);
+    position: relative;
+    top: 6%;
+}
 
+#home-projects-ref .project-container .project-framed::before { 
+    border-top: 60px solid #FFFFFF; 
+    border-right: 60px solid transparent;   
+    content: ""; 
+    height: 0; 
+    left: 0; 
+    position: absolute; 
+    top: 0px; 
+    width: 0; 
+}
+#home-projects-ref .project-container .impacts-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 43%;
+    min-height: 12%;
+    position: absolute;
+    z-index: 2;
+    left: 28%;    
+}
+#home-projects-ref .project-container .impacts-container .impact-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24%;
+    height: 20%;
+    border-radius: 100%;
+    background-color: #0F8216;  
+    color: #FFFFFF;
+    transition: all .2s linear;
+}
+/* Dégradés de couleurs pour les impacts */
+#home-projects-ref .project-container .impacts-container .impact-ecologic{
+    background: linear-gradient(45deg, #8BC79C, #00879B);
+}
+#home-projects-ref .project-container .impacts-container .impact-social{
+    background: linear-gradient(45deg, #E2C80D, #EA4F51);
+}
+#home-projects-ref .project-container .impacts-container .impact-economic{
+    background: linear-gradient(45deg, #00879B, #005663);
+}
+
+#home-projects-ref .project-container .impacts-container .impact-logo:hover{  /*A revoir *****************/
+    transform: scale(1.2);
+    border: 0.25em #FFFFFF solid;
+}
+
+#home-projects-ref .project-container .project-framed .project-title{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 4%;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#home-projects-ref .project-container .project-framed .project-img{
+    width: 100%;
+    height: 33%;
+    background-size: 120%;
+    position: absolute;
+    top: 15%;
+}
+
+#home-projects-ref .project-container .project-framed .project-summary{
+    max-width: 100%;
+    text-align: left;
+    position: absolute;
+    padding: 4%;
+    top: 49%;
+    font-size: 1.2em; /* à revoir si bonne taille **************************************************** */
+}
+#home-projects-ref .project-container .project-framed .progress-bar{
+    min-width: 100%;
+    position: absolute;
+    top: 63%;
+    height: 9%;
+    background-color: #E1E3E2;
+}
+#home-projects-ref .project-container .project-framed .progress-bar .current-amount{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    height: 100%;
+    /*background-color: #00879B;*/ 
+    font-size: 1.3em;
+    letter-spacing: 0.12em;
+    color: #FFFFFF;
+    background: repeating-linear-gradient(
+    -45deg,
+    #00879B,
+    #00879B 7px,
+    #D3EAE9 0.5px,
+    #00879B 7.5px);
+}
+#home-projects-ref .project-container .project-framed .progress-bar .progress-percent{ 
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    right: 3%;
+    font-size: 1.5em;
+    letter-spacing: 0.12em;
+    font-weight: bold;
+    text-align: right;
+}
+#home-projects-ref .project-container .project-framed .progress-bar .vote-status{ 
+    display: flex;
+    align-items: center;  
+    justify-content: space-around;
+    height: 100%; 
+    text-transform: uppercase;
+    font-style: italic;
+    background: repeating-linear-gradient(
+        -45deg,
+        #E1E3E2,
+        #E1E3E2 7px,
+        #F5F5F5 1px,
+        #E1E3E2 8px);
+}
+
+#home-projects-ref .project-container .project-framed .progress-info{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content: center;
+    top: 72%;
+    width: 100%;
+    margin-top: 5%;
+    letter-spacing: 0.125em;
+}
+#home-projects-ref .project-container .project-framed .progress-info .progress-pers{
+    border-right: 2px solid black;
+}
+#home-projects-ref .project-container .project-framed .progress-info .progress-pers,
+#home-projects-ref .project-container .project-framed .progress-info .progress-days,
+#home-projects-ref .project-container .project-framed .progress-info .progress-status{
+    width: 50%;
+    padding: 2% 4% 2% 4%;
+}
+
+#home-projects-ref .project-container .project-framed .progress-info .info-nb{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    
+
+}
+#home-projects-ref .project-container .project-framed .progress-info .info-action{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 0.8em;
+    margin: 0;
+}
+#home-projects-ref .project-container .project-framed .project-button{
+    width: 100%;
+    height: 15%;
+    position: absolute; 
+    top: 85%;
+    background-color: #00879B;
+    border: none;
+}
+#home-projects-ref .project-container .project-framed .see-project{
+    background-color: #D3EAE9;
+    color: #000000;
+    font-size: 0.938em;
+}
 /*----------------------------------------------------------------------------*/
 
 header.header_home {

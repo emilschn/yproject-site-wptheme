@@ -19,7 +19,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 </div>
 <?php endif; ?>
 
-<header class="header_home_ref">
+<header id="header_home_ref">
     <div class="slider-container"> 
         <div class="slider-choice">
             <span class="num-slide active-slide" id="span-1">1</span>
@@ -28,13 +28,14 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
         </div>  
         <div id="slider">
             <div class="slider-item" id="slide-1" >
-                <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_equipe_nb.jpg" alt=""/> 
-                <div id="bandeau-message">
-                    <p>Nous activons </br>une finance à impact positif</br> en développant<br/> les levées de fonds en royalties</p>
+                <img class="slide" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_equipe_nb.jpg" alt=""/> 
+                <div id="message-banner">
+                    <p class="mobile_hidden screen-message">Nous activons</br>une finance à impact positif</br>en développant<br/>les levées de fonds en royalties</p>
+                    <p class="only_on_mobile inline mobile-message">Nous activons</br>une finance<br/>à impact positif</br>en développant<br/>les levées</br>de fonds</br>en royalties</p>
                 </div>
                 <div id="button-container">
-                    <a class="button-action" href=""><p>FINANCER SON PROJET</p></a>
-                    <a class="button-action" href=""><p>INVESTIR SUR UN PROJET</p></a>
+                    <button class="button red big">Financer son projet<a href=""></a></button>
+                    <button class="button red big">Investir sur un projet<a href=""></a></button>
                 </div>
             </div>
             <div class="slider-item" id="slide-2" >
@@ -104,15 +105,187 @@ $page_finance = get_page_by_path('financement');
 $page_how = get_page_by_path('descriptif');
 ?>
 
-<section id="home-projets-ref">
-    <h1>/ Nos derniers projets /</h1>
+<!--Section nos derniers projets-->
+
+<?php
+global $WDG_cache_plugin;
+date_default_timezone_set("Europe/London");
+?>
+
+<?php
+//*******************
+//CACHE PROJECTS 
+
+//CACHE PROJECTS CURRENTS
+$cache_projects_current = $WDG_cache_plugin->get_cache('projects-current', 2);
+if ($cache_projects_current !== FALSE) { echo $cache_projects_current; }
+else {
+	ob_start();
+
+		// Les 3 PROJETS EN COURS
+                $current_projects = ATCF_Campaigns::list_projects_funding(3);
+		$nb_collecte_projects = count($current_projects);
+//                var_dump("en cours :" .$nb_collecte_projects);
+
+?>
+<?php
+	$cache_projects_current = ob_get_contents();
+	$WDG_cache_plugin->set_cache('projects-current', $cache_projects_current, 60*10, 2);
+	ob_end_clean();
+	echo $cache_projects_current;
+}
+?>
+
     
-    <div id="bloc-projets">
-        <div class="projets-inline projet-container" id="projet-1"></div>
-        <div class="projets-inline projet-container" id="projet-2"></div>
-        <div class="projets-inline projet-container" id="projet-3"></div>
-    </div>
-</section>
+<?php
+//Si on a moins de 3 projets en cours à afficher, on va chercher les projets en vote
+if($nb_collecte_projects < 3){
+    //*******************
+    //CACHE PROJECTS OTHERS
+    $cache_projects_next = $WDG_cache_plugin->get_cache('projects-next', 3);
+    if ($cache_projects_next !== FALSE) { echo $cache_projects_next; }
+    else {
+            ob_start();
+                    //PROJETS EN VOTE
+                    $vote_projects = ATCF_Campaigns::list_projects_vote(3);
+                    $nb_vote_projects = count($vote_projects);
+//                    var_dump("vote :" .$nb_vote_projects);
+    ?>
+    <?php
+            $cache_projects_next = ob_get_contents();
+            $WDG_cache_plugin->set_cache('projects-next', $cache_projects_next, 60*10, 3);
+            ob_end_clean();
+            echo $cache_projects_next;
+        }
+
+}
+
+?>
+
+<?php
+//Si on a moins de 3 projets en vote à afficher, on va chercher les projets financés réussis
+if($nb_vote_projects < 3){
+    //*******************
+    //CACHE PROJECTS OVER
+    $cache_projects_others = $WDG_cache_plugin->get_cache('projects-over', 3);
+    if ($cache_projects_others !== FALSE) { echo $cache_projects_others; }
+    else {
+            ob_start();
+                    //PROJETS REUSSIS
+                    $funded_projects = ATCF_Campaigns::list_projects_funded(3);
+                    $nb_funded_projects = count($funded_projects); ;
+    ?>												
+    <?php
+            $cache_projects_others = ob_get_contents();
+            $WDG_cache_plugin->set_cache('projects-over', $cache_projects_others, 60*60, 3);
+            ob_end_clean();
+            echo $cache_projects_others;
+    }
+}
+?>
+<?php
+
+// Affichage de la section s'il y a au moins un projet en cours/en vote/financé    ************************ revoir les conditions
+if($nb_collecte_projects > 0 || $nb_vote_projects > 0 || $nb_funded_projects > 0){
+    if($nb_collecte_projects === 3){
+        $all_projects = $current_projects;
+    }
+    else if($nb_collecte_projects > 0 && $nb_collecte_projects < 3 && $nb_vote_projects > 0 ){
+        $all_projects = array_merge($current_projects, $vote_projects);
+    }
+    if($all_projects && count($all_projects) < 3 || !$all_projects){
+        $more_projects = $funded_projects; //impossible de merger car clés différentes entre current/vote et funded
+    }
+}
+
+?>
+<?php
+
+?>
+<section id="home-projects-ref">
+    <h1>/ Nos derniers projets /</h1>
+    <div id="bloc-projects">
+<?php
+// Affichage des projets en cours et en vote existants  
+    if($all_projects){
+        $ii = 1;        
+        foreach ($all_projects as $one_project){
+            // Gestion de la récupération des images des projets
+
+            $attachment =  get_posts(array(
+                                    'post_type' => 'attachment',
+                                    'post_parent' => $one_project->ID,
+                                    'post_mime_type' => 'image'
+                            ));
+            //Si on en trouve bien une avec le titre "image_home" on prend celle-là
+            $image_obj = '';
+            if ($attachment->post_title == 'image_home') $image_obj = wp_get_attachment_image_src($attachment[0]->ID, "full");
+
+            //Sinon on prend la première image rattachée à l'article
+            $img_src = '';    
+            if ($image_obj == '') {$image_obj = wp_get_attachment_image_src($attachment[0]->ID, "full");}
+            if ($image_obj != '') {$img_src = $image_obj[0];}
+
+?>
+            <div class="project-container" id="project-<?=$ii?>">
+                <div class= "impacts-container" id="impacts-<?=$ii?>">
+                    <span class="impact-logo impact-ecologic" id="impact-ecologic-<?=$ii?>"><p>ecl</p></span> <!-- impacts à modifier selon nvl données et nvl fonctions à créer -->
+                    <span class="impact-logo impact-social" id="impact-social-<?=$ii?>"><p>soc</p></span>
+                    <span class="impact-logo impact-economic" id="impact-economic-<?=$ii?>"><p>ecn</p></span>                   
+                </div>
+<?php
+            require('projects/preview.php');//insère html de la page preview
+            if ($ii++ == 3) {break;} //$all_projects peut avoir une longueur > 3
+?>
+            </div>
+<?php  
+        }    
+        
+    }
+    //Si moins de 3 projets (en cours+en vote), on affiche les projets financés réussis
+    if ($more_projects){
+        if($all_projects){ $missing_projects = 3 - count($all_projects); }else { $missing_projects = 3;}
+        $ii = 1;        
+        foreach ($more_projects as $one_project){
+            // Gestion de la récupération des images des projets
+
+            $attachment =  get_posts(array(
+                                    'post_type' => 'attachment',
+                                    'post_parent' => $one_project->ID,
+                                    'post_mime_type' => 'image'
+                            ));
+            //Si on en trouve bien une avec le titre "image_home" on prend celle-là
+            $image_obj = '';
+            if ($attachment->post_title == 'image_home') $image_obj = wp_get_attachment_image_src($attachment[0]->ID, "full");
+
+            //Sinon on prend la première image rattachée à l'article
+            $img_src = '';    
+            if ($image_obj == '') {$image_obj = wp_get_attachment_image_src($attachment[0]->ID, "full");}
+            if ($image_obj != '') {$img_src = $image_obj[0];}
+
+?>
+            <div class="project-container" id="project-<?=$ii?>">
+                <div class= "impacts-container" id="impacts-<?=$ii?>">
+                    <span class="impact-logo impact-ecologic" id="impact-ecologic-<?=$ii?>"><p>ecl</p></span> <!-- impacts à modifier selon nvl données et nvl fonctions à créer -->
+                    <span class="impact-logo impact-social" id="impact-social-<?=$ii?>"><p>soc</p></span>
+                    <span class="impact-logo impact-economic" id="impact-economic-<?=$ii?>"><p>ecn</p></span>                   
+                </div>
+<?php
+            require('projects/preview.php');//insère html de la page preview
+            if ($ii++ == $missing_projects) {break;} //$all_projects peut avoir une longueur > 3
+?>
+            </div>
+<?php  
+        }    
+    }
+
+         
+//FIN CACHE PROJECTS
+//*******************
+?>
+            </div> <!-- #bloc-projects --> 
+        </section> <!-- #home-projects-ref -->
+
 
 <!--<div id="home_middle_top" class="center mobile_hidden">
 

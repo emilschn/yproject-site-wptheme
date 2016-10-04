@@ -39,7 +39,7 @@
 			//Sinon on prend la première image rattachée à l'article
 			if ($image_obj == '') $image_obj = wp_get_attachment_image_src($attachments[0]->ID, "full");
 			if ($image_obj != '') $img_src = $image_obj[0];
-			
+                        
 		//Sinon on utilise l'objet vidéo fourni par wordpress
 		} else {
 			$video_element = wp_oembed_get($campaign->video(), array('width' => 610));
@@ -54,7 +54,7 @@
 		</div>
 		
 		<div class="description-zone">
-			<div class="description-summary">
+			<div class="description-summary">                          
 				<?php echo html_entity_decode($campaign->summary()); ?>
 			</div>
 		    
