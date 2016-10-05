@@ -61,8 +61,6 @@ tbody {
 .clear { clear: both; }
 .clearfix { overflow-x: hidden; overflow-y: hidden; }
 .margin-auto { margin: auto; }
-.align-center { text-align: center; }
-.align-left { text-align: left; }
 .vert-align { vertical-align: middle; }
 
 .hidden { display: none; }
@@ -712,103 +710,6 @@ header {
 }
 #site_name h1 {
     color: #FFF;
-}
-
-/*******************************************************************************
-* FOOTER
-*******************************************************************************/
-footer {
-    background-color: #EA4F51;
-    background-image: url("images/footer.png");
-    min-width: 960px;
-}
-footer span {
-    padding: 10px 0px;
-    color: #FFF;
-    display: block;
-    width: 100%;
-    font-weight: bold;
-}
-footer span.menutitle {
-    font-family: Arial, sans-serif;
-    color: #FFF;
-    font-size: 11pt;
-    text-transform: uppercase;
-}
-footer a {
-    font-family: Arial, sans-serif;
-    color: #FFF;
-    font-size: 10pt;
-    text-decoration: none;
-}
-
-footer div.widget-area {
-    padding-top: 10px;
-    float: left;
-    width: 25%;
-    font-family: Arial, sans-serif;
-    color: #FFF;
-    font-size: 10pt;
-}
-
-footer ul.xoxo {
-    list-style: none;
-    padding-left: 0px !important;
-    margin-top: 0px !important;
-}
-footer ul.menu {
-    padding-left: 0px !important;
-}
-footer li.menu-item {
-    list-style: none;
-    padding-bottom: 10px;
-}
-
-.newsletter-input-text {
-    width: 140px !important;
-    display: inline-block !important;
-    border: none;
-    padding: 4px;
-}
-.newsletter-submit-button {
-   background: #333333;
-   color: #FFF;
-   border: medium none;
-   padding: 3px 8px;
-   text-transform: uppercase;
-}
-
-footer div.lemonway {
-	padding: 5px;
-	text-align: justify;
-	margin-right: 32px;
-	font-size: 8pt;
-	border-top: 1px solid #FFFFFF;
-	border-bottom: 1px solid #FFFFFF;
-}
-
-footer ul#footer-menu-horizontal {
-	margin-top: 45px;
-	padding-left: 0px;
-	padding-top: 15px;
-	list-style: none;
-	text-align: center;
-	background: #111111;
-	margin-bottom: 0px;
-}
-footer ul#footer-menu-horizontal li div ul li {
-	display: inline-block;
-	margin: 0px 15px;
-}
-footer ul#footer-menu-horizontal li div ul li a {
-	font-size: 10pt;
-}
-footer #site-generator {
-	padding-top: 10px;
-	font-size: 12px;
-	text-align: center;
-	color: #FFFFFF;
-	background: #111111;
 }
 
 /*******************************************************************************

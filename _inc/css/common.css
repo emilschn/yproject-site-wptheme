@@ -13,11 +13,16 @@ body a {
 /*******************************************************************************
 * COMMON
 *******************************************************************************/
+.aligncenter, .align-center { text-align: center; }
+.alignleft, .align-left { text-align: left; }
+
 .center-lg {
 	width: 1300px;
 	margin: auto;
 }
 .only-inf997 { display: none; }
+
+.bg-dark-gray { background: #333333; }
 
 /*******************************************************************************
 * NAV BAR
@@ -89,4 +94,39 @@ nav#main > div > a.lines.current::before, nav#main > div > a.lines.current::afte
     transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
+}
+
+/*******************************************************************************
+* FOOTER
+*******************************************************************************/
+footer > section:first-child { padding: 25px 0px 35px; }
+footer > section:nth-child(2) { background: #FFFFFF; }
+footer h3 {
+	font-size: 13pt;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #E1E2E2;
+}
+footer ul {
+	padding-left: 0px;
+}
+footer li {
+	list-style: none;
+}
+footer a::before {
+	content: "/";
+	margin-right: 20px;
+}
+footer a {
+	font-weight: normal;
+	text-transform: uppercase;
+	color: #E1E2E2;
+}
+footer > section > div {
+	float: left;
+	width: 33%;
+}
+footer > section > div.clear, footer > section > div.aligncenter {
+	float: none;
+	width: auto;
 }
