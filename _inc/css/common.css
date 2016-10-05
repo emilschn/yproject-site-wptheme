@@ -29,6 +29,7 @@ body a {
 *******************************************************************************/
 nav#main {
 	position: fixed;
+	z-index: 2;
 	top: 0px;
 	margin: 10px;
 	width: calc(100% - 20px);
