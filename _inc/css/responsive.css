@@ -130,7 +130,28 @@
 		background-position: center top;
 	}
 	header.header_home > div { text-align: center; }
-	
+        
+        /***** REFONTE GRAPHIQUE *****/
+        
+        #header_home_ref .slider-container #slider #slide-1 #message-banner .mobile-message{
+            margin: 0%;
+            text-align: left;
+            font-family: Arial, sans serif; /* ajouter la nouvelle font *************/
+            font-size: 2em;
+            font-weight: bold;
+            color: #FFFFFF;
+            text-transform: uppercase;
+        }
+        #header_home_ref .slider-container #slider #slide-1 #message-banner .screen-message{
+            display: none;
+        }
+        
+        
+        #header_home_ref .slider-container #slider #slide-1 #button-container{
+            flex-flow: column wrap;
+        }
+	/*****************************/
+        
 /*******************************************************************************
 * PROJECT SHORT - MENU
 *******************************************************************************/
