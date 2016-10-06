@@ -1281,7 +1281,7 @@ form.wdg-forms table input[type="text"].reward-text{
 
 
 
-#header_home_ref .slider-container { 
+.wdg-component-slider .slider-container { 
     min-width: 100%;
     min-height: 550px;
     margin: 0 auto;
@@ -1291,22 +1291,20 @@ form.wdg-forms table input[type="text"].reward-text{
 }
 
 
-#header_home_ref .slider-container #slider .slider-item{
+.wdg-component-slider .slider-container #slider .slider-item{
     width: 100%;
     height: 550px;
     position: absolute;
     z-index: 1;
     display: inline-block;
 }
-#header_home_ref .slider-container #slider .slider-item img {
+.wdg-component-slider .slider-container #slider .slider-item img {
     min-width: 100%;
     min-height: 550px;
     position: relative;
-/*    top: -400px;
-    left: -200px;*/
 }
 
-#header_home_ref .slider-container .slider-choice{
+.wdg-component-slider .slider-container .slider-choice{
     display: flex;
     justify-content: space-around; 
     align-items: center;
@@ -1317,24 +1315,24 @@ form.wdg-forms table input[type="text"].reward-text{
     left: 44.9%;
     top: 86%;
 }
-#header_home_ref .slider-container .slider-choice .num-slide{
+.wdg-component-slider .slider-container .slider-choice .num-slide{
     width: 15px;/* revoir pour mettre en % *******************/
     height: 15px;
     background-color: #fff;
     cursor: pointer;
 }
-#header_home_ref .slider-container .slider-choice .num-slide {
+.wdg-component-slider .slider-container .slider-choice .num-slide {
     color: rgba(0, 0, 0, 0);
 }
-#header_home_ref .slider-container .slider-choice .active-slide{
+.wdg-component-slider .slider-container .slider-choice .active-slide{
     background-color: #00879B;
 }
-#header_home_ref .slider-container .slider-choice .inactive-slide{
+.wdg-component-slider .slider-container .slider-choice .inactive-slide{
     background-color: #fff;
 }
 
 /*  Slide 1 */
-#header_home_ref .slider-container #slider .slider-item .message-banner{
+.wdg-component-slider .slider-container #slider .slider-item .message-banner{
     
     display: flex;
     align-items: center;
@@ -1352,7 +1350,7 @@ form.wdg-forms table input[type="text"].reward-text{
 }
    
 /*message pour bannière sur screen*/
-#header_home_ref .slider-container #slider #slide-1 .message-banner .screen-message{
+.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message{
     width: 650px;/*45%*/
     margin: 0%;
     left: 14%;
@@ -1365,11 +1363,11 @@ form.wdg-forms table input[type="text"].reward-text{
     text-transform: uppercase;
     transform: skew(45deg);
 }
-#header_home_ref .slider-container #slider #slide-1 .message-banner .mobile-message{
+.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .mobile-message{
     display: none;
 }
 
-#header_home_ref .slider-container #slider #slide-1 #button-container{
+.wdg-component-slider .slider-container #slider .slide-2buttons #button-container{
     display: flex;
     justify-content: center;
     /*width: 760px;*/
@@ -1379,7 +1377,7 @@ form.wdg-forms table input[type="text"].reward-text{
     top: 75%;   
 }
 
-#header_home_ref .slider-container #slider #slide-1 #button-container button{
+.wdg-component-slider .slider-container #slider .slide-2buttons #button-container button{
     margin: 0% 2%;
     width: 320px;
     font-size: 0.938em;
@@ -1388,14 +1386,14 @@ form.wdg-forms table input[type="text"].reward-text{
 
 /*------------ Partie projets --------------*/
 
-#home-projects-ref{
+.wdg-component-projects-preview{
     width: 100%;
     height: 900px;
     position: relative;  
 }
 
 /* titres page d'accueil */
-#home-projects-ref h1, #home-video-ref h1{  
+.wdg-component-projects-preview h1, #home-video-ref h1{  
     text-align: center;
     margin: 0;
     padding-top: 2%;
@@ -1406,7 +1404,7 @@ form.wdg-forms table input[type="text"].reward-text{
     letter-spacing: 0.125em;
 }
 /* Bloc avec les 3 projets présentés*/
-#home-projects-ref #bloc-projects{
+.wdg-component-projects-preview #bloc-projects{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -1417,14 +1415,14 @@ form.wdg-forms table input[type="text"].reward-text{
     padding-top: 2%; 
 }
 
-#home-projects-ref .project-container{ 
+.wdg-component-projects-preview .project-container{ 
     display: flex;
     justify-content: center;
     min-width: 33%;
     position: relative;
     font-family: Trebuchet MS, sans-serif;
 }
-#home-projects-ref .project-container .project-framed{ 
+.wdg-component-projects-preview .project-container .project-framed{ 
     min-width: 85%;
     height: 90%;
     background-color: rgba(51, 51, 51, 0.05);
@@ -1432,7 +1430,7 @@ form.wdg-forms table input[type="text"].reward-text{
     top: 6%;
 }
 
-#home-projects-ref .project-container .project-framed::before { 
+.wdg-component-projects-preview .project-container .project-framed::before { 
     border-top: 60px solid #FFFFFF; 
     border-right: 60px solid transparent;   
     content: ""; 
@@ -1442,7 +1440,7 @@ form.wdg-forms table input[type="text"].reward-text{
     top: 0px; 
     width: 0; 
 }
-#home-projects-ref .project-container .impacts-container{
+.wdg-component-projects-preview .project-container .impacts-container{
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -1452,7 +1450,7 @@ form.wdg-forms table input[type="text"].reward-text{
     z-index: 2;
     left: 28%;    
 }
-#home-projects-ref .project-container .impacts-container .impact-logo{
+.wdg-component-projects-preview .project-container .impacts-container .impact-logo{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1465,22 +1463,22 @@ form.wdg-forms table input[type="text"].reward-text{
     cursor: pointer;
 }
 /* Dégradés de couleurs pour les impacts */
-#home-projects-ref .project-container .impacts-container .impact-ecologic{
+.wdg-component-projects-preview .project-container .impacts-container .impact-ecologic{
     background: linear-gradient(45deg, #8BC79C, #00879B);
 }
-#home-projects-ref .project-container .impacts-container .impact-social{
+.wdg-component-projects-preview .project-container .impacts-container .impact-social{
     background: linear-gradient(45deg, #E2C80D, #EA4F51);
 }
-#home-projects-ref .project-container .impacts-container .impact-economic{
+.wdg-component-projects-preview .project-container .impacts-container .impact-economic{
     background: linear-gradient(45deg, #00879B, #005663);
 }
 
-#home-projects-ref .project-container .impacts-container .impact-logo:hover{  /* à revoir : empecher le déplacement des impacts au survol ***********/
+.wdg-component-projects-preview .project-container .impacts-container .impact-logo:hover{  /* à revoir : empecher le déplacement des impacts au survol ***********/
     transform: scale(1.3);
     border: 0.25em #FFFFFF solid;
 }
 
-#home-projects-ref .project-container .project-framed .project-title{
+.wdg-component-projects-preview .project-container .project-framed .project-title{
     width: 100%;
     text-align: center;
     position: absolute;
@@ -1490,7 +1488,7 @@ form.wdg-forms table input[type="text"].reward-text{
     font-weight: bold;
 }
 
-#home-projects-ref .project-container .project-framed .project-img{
+.wdg-component-projects-preview .project-container .project-framed .project-img{
     width: 100%;
     height: 33%;
     background-size: 120%;
@@ -1498,7 +1496,7 @@ form.wdg-forms table input[type="text"].reward-text{
     top: 15%;
 }
 
-#home-projects-ref .project-container .project-framed .project-summary{
+.wdg-component-projects-preview .project-container .project-framed .project-summary{
     max-width: 100%;
     text-align: left;
     position: absolute;
@@ -1506,14 +1504,14 @@ form.wdg-forms table input[type="text"].reward-text{
     top: 49%;
     font-size: 1.2em; /* à revoir si bonne taille **************************************************** */
 }
-#home-projects-ref .project-container .project-framed .progress-bar{
+.wdg-component-projects-preview .project-container .project-framed .progress-bar{
     min-width: 100%;
     position: absolute;
     top: 63%;
     height: 9%;
     background-color: #E1E3E2;
 }
-#home-projects-ref .project-container .project-framed .progress-bar .current-amount{
+.wdg-component-projects-preview .project-container .project-framed .progress-bar .current-amount{
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -1529,7 +1527,7 @@ form.wdg-forms table input[type="text"].reward-text{
     #D3EAE9 0.5px,
     #00879B 7.5px);
 }
-#home-projects-ref .project-container .project-framed .progress-bar .progress-percent{ 
+.wdg-component-projects-preview .project-container .project-framed .progress-bar .progress-percent{ 
     display: flex;
     align-items: center;
     position: absolute;
@@ -1540,7 +1538,7 @@ form.wdg-forms table input[type="text"].reward-text{
     font-weight: bold;
     text-align: right;
 }
-#home-projects-ref .project-container .project-framed .progress-bar .vote-status{ 
+.wdg-component-projects-preview .project-container .project-framed .progress-bar .vote-status{ 
     display: flex;
     align-items: center;  
     justify-content: space-around;
@@ -1555,7 +1553,7 @@ form.wdg-forms table input[type="text"].reward-text{
         #E1E3E2 8px);
 }
 
-#home-projects-ref .project-container .project-framed .progress-info{
+.wdg-component-projects-preview .project-container .project-framed .progress-info{
     display: flex;
     align-items: center;
     position: absolute;
@@ -1565,17 +1563,17 @@ form.wdg-forms table input[type="text"].reward-text{
     margin-top: 5%;
     letter-spacing: 0.125em;
 }
-#home-projects-ref .project-container .project-framed .progress-info .progress-pers{
+.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers{
     border-right: 2px solid black;
 }
-#home-projects-ref .project-container .project-framed .progress-info .progress-pers,
-#home-projects-ref .project-container .project-framed .progress-info .progress-days,
-#home-projects-ref .project-container .project-framed .progress-info .progress-status{
+.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers,
+.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-days,
+.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-status{
     width: 50%;
     padding: 2% 4% 2% 4%;
 }
 
-#home-projects-ref .project-container .project-framed .progress-info .info-nb{
+.wdg-component-projects-preview .project-container .project-framed .progress-info .info-nb{
     text-transform: uppercase;
     text-align: center;
     font-size: 1.2em;
@@ -1584,7 +1582,7 @@ form.wdg-forms table input[type="text"].reward-text{
     
 
 }
-#home-projects-ref .project-container .project-framed .progress-info .info-action{
+.wdg-component-projects-preview .project-container .project-framed .progress-info .info-action{
     text-transform: uppercase;
     text-align: center;
     font-size: 0.8em;
@@ -1593,7 +1591,7 @@ form.wdg-forms table input[type="text"].reward-text{
 
 /*    font-size: 15px;
     padding: 15px 30px;*/
-#home-projects-ref .home-button-project{
+.wdg-component-projects-preview .home-button-project{
     display: inline-block;
     position: absolute; 
     text-align: center;
@@ -1603,18 +1601,18 @@ form.wdg-forms table input[type="text"].reward-text{
     padding: 8% 0%;
     bottom: 0%;
 }
-#home-projects-ref .project-container .project-framed .project-button{
+.wdg-component-projects-preview .project-container .project-framed .project-button{
     width: 100%;  
     top: 85%;
     background-color: #00879B;
     color: #FFFFFF;
     /*border: none;*/
 }
-#home-projects-ref .project-container .project-framed .see-project{
+.wdg-component-projects-preview .project-container .project-framed .see-project{
     background-color: #D3EAE9;
     color: #000000;
 }
-#home-projects-ref .see-more{
+.wdg-component-projects-preview .see-more{
     width: 337px;
     bottom: 7%;
     left: 37.5%;

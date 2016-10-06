@@ -19,7 +19,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 </div>
 <?php endif; ?>
 
-<header id="header_home_ref">
+<header class="wdg-component-slider">
     <div class="slider-container"> 
         <div class="slider-choice">
             <span class="num-slide active-slide" id="span-1">1</span>
@@ -34,7 +34,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
                             );
             for ($ii = 1; $ii <= count($tabImg); $ii++):
                 ?>
-                <div class="slider-item" id="slide-<?php echo $ii?>" >
+                <div class="slider-item slide-2buttons" id="slide-<?php echo $ii?>" >
                     <img class="slide" src="<?php echo $stylesheet_directory_uri; ?><?php echo $tabImg[$ii] ?>"/> 
 
                     <?php
@@ -57,7 +57,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
         </div>
     </div>
     
-</header>
+</header> <!-- .wdg-component-slider -->
 <!--<header class="header_home">
 	<div class="center">
 		<div id="welcome_text">
@@ -122,7 +122,7 @@ global $WDG_cache_plugin;
 date_default_timezone_set("Europe/London");
 ?>
 
-<section id="home-projects-ref">
+<section class="wdg-component-projects-preview">
     <h1><?php _e("/ Nos derniers projets /", "yproject") ?></h1>
     <div id="bloc-projects">
 
@@ -140,7 +140,7 @@ date_default_timezone_set("Europe/London");
         ?>
     </div>  <!-- #bloc-projects --> 
     <a class="home-button-project see-more red" href=""><?php _e("voir plus de projets","yproject" ) ?></a>
-</section> <!-- #home-projects-ref -->
+</section> <!-- .wdg-component-projects-preview -->
 
 <!-- fin de SECTION NOS DERNIERS PROJETS -->
 

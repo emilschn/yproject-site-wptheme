@@ -133,7 +133,7 @@
         
         /***** REFONTE GRAPHIQUE *****/
         
-        #header_home_ref .slider-container #slider #slide-1 .message-banner .mobile-message{
+        .wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .mobile-message{
             margin: 0%;
             text-align: left;
             font-family: Arial, sans serif; /* ajouter la nouvelle font *************/
@@ -143,12 +143,12 @@
             text-transform: uppercase;
             transform: skew(-45deg);
         }
-        #header_home_ref .slider-container #slider #slide-1 .message-banner .screen-message{
+        .wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message{
             display: none;
         }
         
         
-        #header_home_ref .slider-container #slider #slide-1 #button-container{
+        .wdg-component-slider .slider-container #slider .slide-2buttons #button-container{
             flex-flow: column wrap;
         }
 	/*****************************/
