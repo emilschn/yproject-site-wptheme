@@ -142,58 +142,14 @@ $nb_projects = 3;
 ?>
 
 <?php
-// PROJETS EN COURS DE COLLECTE
-$current_projects = ATCF_Campaigns::list_projects_funding($nb_projects);
-$current_projects ? $nb_collecte_projects = count($current_projects) : $nb_collecte_projects = 0;
-?>
-   
-<?php
-//Si on a moins de 3 projets en cours à afficher, on va chercher les projets en vote
-if($nb_collecte_projects < $nb_projects):   
-    //PROJETS EN VOTE
-    $vote_projects = ATCF_Campaigns::list_projects_vote($nb_projects - $nb_collecte_projects);
-    $vote_projects ? $nb_vote_projects = count($vote_projects) : $nb_vote_projects = 0;
-endif;
-?>
-
-<?php 
-//Si on a moins de 3 projets (en cours+en vote) à afficher, on va chercher les projets financés réussis
-if (($nb_collecte_projects + $nb_vote_projects) < $nb_projects):
-    $funded_projects = ATCF_Campaigns::list_projects_funded($nb_projects - ($nb_collecte_projects + $nb_vote_projects));
-    $funded_projects ? $nb_funded_projects = count($funded_projects) : $nb_funded_projects = 0;
-endif;
-?>
-
-<?php
-// Affichage de la section s'il y a au moins un projet en cours/en vote/financé  
-if($nb_collecte_projects === 3):
-    $all_projects = $current_projects;
-else:
-    if ($current_projects && $vote_projects ):
-        $all_projects = array_merge($current_projects, $vote_projects);
-    endif;
-    if ($current_projects && !$vote_projects):
-        $all_projects = $current_projects;
-    endif;
-    if (count($all_projects) < 3):
-        $more_projects = $funded_projects;
-    endif;
-endif;
-
-
-
-//if($nb_collecte_projects > 0 || $nb_vote_projects > 0 || $nb_funded_projects > 0){
-//    if($nb_collecte_projects === 3){
-//        $all_projects = $current_projects;
-//    }
-//    else if($nb_collecte_projects > 0 && $nb_collecte_projects < 3 && $nb_vote_projects > 0 ){
-//        $all_projects = array_merge($current_projects, $vote_projects);
-//    }
-//    if($all_projects && count($all_projects) < 3 || !$all_projects){
-//        $more_projects = $funded_projects; //impossible de merger car clés différentes entre current/vote et funded
-//    }
-//}
-
+//Remplace toutes les lignes ci-dessus, $test devrait devenir $all_projects qui sera un tableau d'id de campagnes
+$test = ATCF_Campaign::get_list_most_recent( 3 );
+print_r($test); echo '<br>';
+//Exemple de parcours
+foreach ($test as $project_id) {
+	$one_project = new ATCF_Campaign( $project_id );
+	print_r($one_project); echo '<br>';
+}
 ?>
 
 

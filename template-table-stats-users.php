@@ -11,6 +11,8 @@ if ( !current_user_can('manage_options') ) {
 }
 global $disable_logs;
 $disable_logs = TRUE;
+$number = 4000;
+$offset = (isset($_GET['offset'])) ? $_GET['offset'] * $number : 0;
 
 get_header();
 global $stylesheet_directory_uri, $wpdb;
@@ -54,7 +56,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 				</tfoot>
 				
 				<tbody>
-					<?php $user_list = get_users(); ?>
+					<?php $user_list = get_users( array('number' => $number, 'offset' => $offset) ); ?>
 					<?php foreach ($user_list as $user): ?>
 						<?php
 						$sql = "SELECT COUNT(post_meta.meta_value) AS nb_invest, SUM(post_meta.meta_value) AS sum_invest, ";
@@ -87,15 +89,29 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 			</table>
 		</div>
 	
+		<a href="https://www.wedogood.co/statistiques-utilisateurs">Voir la première partie</a><br />
+		<a href="https://www.wedogood.co/statistiques-utilisateurs?offset=1">Voir la deuxième partie</a>
+		
     </div>
 </div>
 
-<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/dataTables/jquery.dataTables.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/dataTables/dataTables.colVis.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/dataTables/dataTables.colReorder.css" type="text/css" media="screen" />
-<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/jquery.dataTables.js"></script>
-<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/dataTables.colVis.js"></script>
-<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/dataTables.colReorder.js"></script>
+<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/dataTables/jquery.dataTables.min.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/dataTables.colReorder.min.js"></script>
+<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/dataTables/colReorder.dataTables.min.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/dataTables.select.min.js"></script>
+<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/dataTables/select.dataTables.min.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/dataTables.buttons.min.js"></script>
+<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/dataTables/buttons.dataTables.min.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/buttons.colVis.min.js"></script>
+<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/buttons.html5.min.js"></script>
+<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/buttons.print.min.js"></script>
+<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/jszip.min.js"></script>
+		
 <script type="text/javascript">
 	jQuery(document).ready( function($) {
 		// Ajoute mise en page et interactions du tableau

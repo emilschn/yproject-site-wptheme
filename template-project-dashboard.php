@@ -75,7 +75,6 @@ if ($can_modify){
     locate_template( array("projects/dashboard/resume.php"), true );
     locate_template( array("projects/dashboard/informations.php"), true );
     locate_template( array("projects/dashboard/campaign-dbpage.php"), true );
-    locate_template( array("projects/dashboard/wallet.php"), true );
     locate_template( array("projects/dashboard/contacts.php"), true );
     locate_template( array("projects/dashboard/news.php"), true );
 
@@ -178,7 +177,7 @@ if ($can_modify){
                     <div class="page-dashboard" id="page-presentation"></div>
                     <div class="page-dashboard" id="page-informations"><?php print_informations_page(); ?></div>
                     <?php if ($validated_or_after || $is_admin){?>
-                    <div class="page-dashboard" id="page-wallet"  ><?php print_wallet_page(); ?></div>
+                    <div class="page-dashboard" id="page-wallet"  ><?php locate_template( array("projects/dashboard/wallet.php"), true ); ?></div>
                     <div class="page-dashboard" id="page-campaign"><?php print_campaign_page(); ?></div>
                     <div class="page-dashboard" id="page-contacts"><?php print_contacts_page()?></div>
                     <div class="page-dashboard" id="page-news"><?php print_news_page(); ?></div>
