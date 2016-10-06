@@ -28,49 +28,32 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
         </div>  
         <div id="slider">
             <?php
-                $tabImg = array(1 => '/images/slider/fotolia_equipe_nb.jpg" alt=""',
-                                2 => '/images/slider/fotolia_abeille.jpg" alt=""',
-                                3 => '/images/slider/fotolia_nature.jpg" alt=""'
-                                );
-                for ($ii = 1; $ii <= count($tabImg); $ii++):
-                    ?>
-                    <div class="slider-item" id="slide-<?=$ii?>" >
-                        <img class="slide" src="<?php echo $stylesheet_directory_uri; ?><?php echo $tabImg[$ii] ?>"/> 
-                        
-                        <?php
-                        if($ii === 1):?>
-                            <div class="message-banner">
-                                    <p class="mobile_hidden screen-message">Nous activons</br>une finance à impact positif</br>en développant<br/>les levées de fonds en royalties</p>
-                                    <p class="only_on_mobile inline mobile-message">Nous activons</br>une finance<br/>à impact positif</br>en développant<br/>les levées</br>de fonds</br>en royalties</p>                                                 
-                            </div>
-                            <div id="button-container">
-                                <button class="button red big">Financer son projet<a href=""></a></button>
-                                <button class="button red big">Investir sur un projet<a href=""></a></button>
-                            </div>
-                        <?php endif;?>                         
-                        <?php if($ii !== 1): ?> 
-                            <div class="message-banner">
-                            </div>
-                        <?php endif; ?>
-                    </div>
+            $tabImg = array(1 => '/images/slider/fotolia_equipe_nb.jpg" alt=""',
+                            2 => '/images/slider/fotolia_abeille.jpg" alt=""',
+                            3 => '/images/slider/fotolia_nature.jpg" alt=""'
+                            );
+            for ($ii = 1; $ii <= count($tabImg); $ii++):
+                ?>
+                <div class="slider-item" id="slide-<?php echo $ii?>" >
+                    <img class="slide" src="<?php echo $stylesheet_directory_uri; ?><?php echo $tabImg[$ii] ?>"/> 
+
+                    <?php
+                    if($ii === 1):?>
+                        <div class="message-banner">
+                                <p class="mobile_hidden screen-message">Nous activons</br>une finance à impact positif</br>en développant<br/>les levées de fonds en royalties</p>
+                                <p class="only_on_mobile inline mobile-message">Nous activons</br>une finance<br/>à impact positif</br>en développant<br/>les levées</br>de fonds</br>en royalties</p>                                                 
+                        </div>
+                        <div id="button-container">
+                            <button class="button red big"><?php _e("Financer son projet", "yproject") ?><a href=""></a></button>
+                            <button class="button red big"><?php _e("Investir sur un projet", "yproject") ?><a href=""></a></button>
+                        </div>
+                    <?php endif;?>                         
+                    <?php if($ii !== 1): ?> 
+                        <div class="message-banner">
+                        </div>
+                    <?php endif; ?>
+                </div>
             <?php endfor; ?>
-<!--            <div class="slider-item" id="slide-1" >
-                <img class="slide" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_equipe_nb.jpg" alt=""/> 
-                <div id="message-banner">
-                    <p class="mobile_hidden screen-message">Nous activons</br>une finance à impact positif</br>en développant<br/>les levées de fonds en royalties</p>
-                    <p class="only_on_mobile inline mobile-message">Nous activons</br>une finance<br/>à impact positif</br>en développant<br/>les levées</br>de fonds</br>en royalties</p>
-                </div>
-                <div id="button-container">
-                    <button class="button red big">Financer son projet<a href=""></a></button>
-                    <button class="button red big">Investir sur un projet<a href=""></a></button>
-                </div>
-            </div>
-            <div class="slider-item" id="slide-2" >
-                <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_abeille.jpg" alt=""/>          
-            </div>
-            <div class="slider-item" id="slide-3" >
-                <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_nature.jpg" alt=""/>          
-            </div>-->
         </div>
     </div>
     
@@ -137,112 +120,37 @@ $page_how = get_page_by_path('descriptif');
 <?php
 global $WDG_cache_plugin;
 date_default_timezone_set("Europe/London");
-
-$nb_projects = 3;
 ?>
-
-<?php
-//Remplace toutes les lignes ci-dessus, $test devrait devenir $all_projects qui sera un tableau d'id de campagnes
-$test = ATCF_Campaign::get_list_most_recent( 3 );
-print_r($test); echo '<br>';
-//Exemple de parcours
-foreach ($test as $project_id) {
-	$one_project = new ATCF_Campaign( $project_id );
-	print_r($one_project); echo '<br>';
-}
-?>
-
 
 <section id="home-projects-ref">
-    <h1>/ Nos derniers projets /</h1>
+    <h1><?php _e("/ Nos derniers projets /", "yproject") ?></h1>
     <div id="bloc-projects">
-<?php
-// Affichage des projets en cours et en vote existants  
-    if($all_projects){
-        $ii = 1;        
-        foreach ($all_projects as $one_project){
-            // Gestion de la récupération des images des projets
 
-            $attachment =  get_posts(array(
-                                    'post_type' => 'attachment',
-                                    'post_parent' => $one_project->ID,
-                                    'post_mime_type' => 'image'
-                            ));
-            //Si on en trouve bien une avec le titre "image_home" on prend celle-là
-            $image_obj = '';
-            if ($attachment->post_title == 'image_home') $image_obj = wp_get_attachment_image_src($attachment[0]->ID, "full");
+        <?php
+        $nb_projects = 3;
+        // Affiche les 3 projets les plus récents entre ceux en cours, en vote et financés
+        $all_projects = ATCF_Campaign::get_list_most_recent( $nb_projects );
 
-            //Sinon on prend la première image rattachée à l'article
-            $img_src = '';    
-            if ($image_obj == '') {$image_obj = wp_get_attachment_image_src($attachment[0]->ID, "full");}
-            if ($image_obj != '') {$img_src = $image_obj[0];}
+        foreach ($all_projects as $project_id) {
+                $one_project = new ATCF_Campaign( $project_id );
+                $img = $one_project->get_home_picture_src();
 
-?>
-            <div class="project-container" id="project-<?=$ii?>">
-                <div class= "impacts-container" id="impacts-<?=$ii?>">
-                    <span class="impact-logo impact-ecologic" id="impact-ecologic-<?=$ii?>"><p>ecl</p></span> <!-- impacts à modifier selon nvl données et nvl fonctions à créer -->
-                    <span class="impact-logo impact-social" id="impact-social-<?=$ii?>"><p>soc</p></span>
-                    <span class="impact-logo impact-economic" id="impact-economic-<?=$ii?>"><p>ecn</p></span>                   
-                </div>
-<?php
-            require('projects/preview.php');//insère html de la page preview
-            
-?>
-            </div> <!-- project-container -->
-            <?php
-            if ($ii++ == 3) {break;} //$all_projects peut avoir une longueur > 3
-            ?>
-<?php  
-        }    
-        
-    }
-    //Si moins de 3 projets (en cours+en vote), on affiche les projets financés réussis
-    if ($more_projects){
-        if($all_projects){ $missing_projects = 3 - count($all_projects); }else { $missing_projects = 3;}
-        $ii = 1;        
-        foreach ($more_projects as $one_project){
-            // Gestion de la récupération des images des projets
-
-            $attachment =  get_posts(array(
-                                    'post_type' => 'attachment',
-                                    'post_parent' => $one_project->ID,
-                                    'post_mime_type' => 'image'
-                            ));
-            //Si on en trouve bien une avec le titre "image_home" on prend celle-là
-            $image_obj = '';
-            if ($attachment->post_title == 'image_home') $image_obj = wp_get_attachment_image_src($attachment[0]->ID, "full");
-
-            //Sinon on prend la première image rattachée à l'article
-            $img_src = '';    
-            if ($image_obj == '') {$image_obj = wp_get_attachment_image_src($attachment[0]->ID, "full");}
-            if ($image_obj != '') {$img_src = $image_obj[0];}
-
-?>
-            <div class="project-container" id="project-<?=$ii+10?>">
-                <div class= "impacts-container" id="impacts-<?=$ii+10?>">
-                    <span class="impact-logo impact-ecologic" id="impact-ecologic-<?=$ii+10?>"><p>ecl</p></span> <!-- impacts à modifier selon nvl données et nvl fonctions à créer -->
-                    <span class="impact-logo impact-social" id="impact-social-<?=$ii+10?>"><p>soc</p></span>
-                    <span class="impact-logo impact-economic" id="impact-economic-<?=$ii+10?>"><p>ecn</p></span>                   
-                </div>
-<?php
-            require('projects/preview.php');//insère html de la page preview
-            
-?>
-            </div> <!-- .project-container-->
-<?php  
-        if ($ii++ == $missing_projects) {break;} //$all_projects peut avoir une longueur > 3
-        }    
-    }
-
-?>
+            require('projects/preview.php');//insère html de la page preview 
+        }
+        ?>
     </div>  <!-- #bloc-projects --> 
-    <button class="button big red see-more">voir plus de projets<a href=""></a></button>
+    <a class="home-button-project see-more red" href=""><?php _e("voir plus de projets","yproject" ) ?></a>
 </section> <!-- #home-projects-ref -->
+
+<!-- fin de SECTION NOS DERNIERS PROJETS -->
+
+
+<!-- SECTION VIDEO -->
 
 <section id="home-video-ref">
     <div id="video-titles">
-        <h1>/ wedogood, c'est quoi ? /</h1>
-        <h2>découvrez notre vidéo</h2>
+        <h1><?php _e("/ wedogood, c'est quoi ? /", "yproject")?></h1>
+        <h2><?php _e("découvrez notre vidéo", "yproject")?></h2>
     </div>
     <div id="video-content">
         <div class="home_video mobile_hidden">
@@ -256,65 +164,7 @@ foreach ($test as $project_id) {
     </div>
 </section>
 
-<!--<div id="home_middle_top" class="center mobile_hidden">
-
-	<div id="home_middle_top_left" class="home_middle_top_content">
-		<a href="<?php echo get_permalink($page_finance->ID); ?>" style="display: block;">
-			<div class="round_title">
-				<strong>Proposez</strong><br/>un projet
-			</div>
-		</a>
-		<p>
-			B&eacute;n&eacute;ficiez d'un financement souple<br />
-			et adapt&eacute; &agrave; vos besoins
-		</p>
-		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.png" alt="logo euro" /><br />
-			Trouvez un <b>financement</b> pour votre projet
-		</p>
-		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/hautparleur.png" alt="logo megaphone" /><br />
-			<b>Faites conna&icirc;tre votre projet</b>
-		</p>
-		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/communaute.png" alt="logo communaute" /><br />
-			F&eacute;d&eacute;rez une <b>communaut&eacute;</b> sur la dur&eacute;e
-		</p>
-		<p>
-			<br /><br />
-			<a href="<?php echo get_permalink($page_finance->ID); ?>" class="button red big">Financez votre projet</a>
-			<br /><br />
-		</p>
-	</div>
-	<div id="home_middle_top_right" class="home_middle_top_content">
-		<a href="<?php echo get_permalink($page_list_projects->ID); ?>" style="display: block;">
-			<div class="round_title">
-				<strong>Investissez</strong><br />sur un projet
-			</div>
-		</a>
-		<p>
-			Soyez acteurs et influenceurs<br />
-			de la communaut&eacute; !
-		</p>
-		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/sous.png" alt="logo piece monnaie" /><br />
-			Investissez <b>&agrave; partir de 10&euro;</b>
-		</p>
-		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/main.png" alt="logo main" /><br />
-			<b>Participez &agrave; l&apos;aventure</b>
-		</p>
-		<p>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/fusee.png" alt="logo fusee" /><br />
-			Boostez l&apos;<b>&eacute;conomie positive</b>
-		</p>
-		<p>
-			<br /><br />
-			<a href="<?php echo get_permalink($page_how->ID); ?>" class="button red big">Comment &ccedil;a marche ?</a>
-			<br /><br />
-		</p>
-	</div>
-</div>-->
+<!-- fin de SECTION VIDEO -->
 
 <div id="home_bottom" class="center mobile_hidden">
 	<div class="padder">

@@ -1462,6 +1462,7 @@ form.wdg-forms table input[type="text"].reward-text{
     background-color: #0F8216;  
     color: #FFFFFF;
     transition: all .2s linear;
+    cursor: pointer;
 }
 /* Dégradés de couleurs pour les impacts */
 #home-projects-ref .project-container .impacts-container .impact-ecologic{
@@ -1474,8 +1475,8 @@ form.wdg-forms table input[type="text"].reward-text{
     background: linear-gradient(45deg, #00879B, #005663);
 }
 
-#home-projects-ref .project-container .impacts-container .impact-logo:hover{  /*A revoir *****************/
-    transform: scale(1.2);
+#home-projects-ref .project-container .impacts-container .impact-logo:hover{  /* à revoir : empecher le déplacement des impacts au survol ***********/
+    transform: scale(1.3);
     border: 0.25em #FFFFFF solid;
 }
 
@@ -1518,7 +1519,6 @@ form.wdg-forms table input[type="text"].reward-text{
     justify-content: space-around;
     position: absolute;
     height: 100%;
-    /*background-color: #00879B;*/ 
     font-size: 1.3em;
     letter-spacing: 0.12em;
     color: #FFFFFF;
@@ -1590,24 +1590,37 @@ form.wdg-forms table input[type="text"].reward-text{
     font-size: 0.8em;
     margin: 0;
 }
-#home-projects-ref .project-container .project-framed .project-button{
-    width: 100%;
-    height: 15%;
+
+/*    font-size: 15px;
+    padding: 15px 30px;*/
+#home-projects-ref .home-button-project{
+    display: inline-block;
     position: absolute; 
+    text-align: center;
+    font-size: 0.938em;
+    letter-spacing: 0.063em;
+    text-transform: uppercase;   
+    padding: 8% 0%;
+    bottom: 0%;
+}
+#home-projects-ref .project-container .project-framed .project-button{
+    width: 100%;  
     top: 85%;
     background-color: #00879B;
-    border: none;
+    color: #FFFFFF;
+    /*border: none;*/
 }
 #home-projects-ref .project-container .project-framed .see-project{
     background-color: #D3EAE9;
     color: #000000;
-    font-size: 0.938em;
 }
 #home-projects-ref .see-more{
-    position: absolute;
-    width: 320px;
+    width: 337px;
     bottom: 7%;
-    left: 39.5%;
+    left: 37.5%;
+    color: #FFFFFF;
+    background-color: #EA4F51;
+    padding: 1.5%;
 }
 
 /*------------ Partie vidéo --------------*/
