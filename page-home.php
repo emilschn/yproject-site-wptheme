@@ -123,7 +123,7 @@ else {
 	ob_start();
 
 		// Les 3 PROJETS EN COURS
-                $current_projects = ATCF_Campaigns::list_projects_funding(3);
+                $current_projects = ATCF_Campaign::list_projects_funding(3);
 		$nb_collecte_projects = count($current_projects);
 //                var_dump("en cours :" .$nb_collecte_projects);
 
@@ -147,7 +147,7 @@ if($nb_collecte_projects < 3){
     else {
             ob_start();
                     //PROJETS EN VOTE
-                    $vote_projects = ATCF_Campaigns::list_projects_vote(3);
+                    $vote_projects = ATCF_Campaign::list_projects_vote(3);
                     $nb_vote_projects = count($vote_projects);
 //                    var_dump("vote :" .$nb_vote_projects);
     ?>
@@ -172,7 +172,7 @@ if($nb_vote_projects < 3){
     else {
             ob_start();
                     //PROJETS REUSSIS
-                    $funded_projects = ATCF_Campaigns::list_projects_funded(3);
+                    $funded_projects = ATCF_Campaign::list_projects_funded(3);
                     $nb_funded_projects = count($funded_projects); ;
     ?>												
     <?php
@@ -198,6 +198,14 @@ if($nb_collecte_projects > 0 || $nb_vote_projects > 0 || $nb_funded_projects > 0
     }
 }
 
+//Remplace toutes les lignes ci-dessus, $test devrait devenir $all_projects qui sera un tableau d'id de campagnes
+$test = ATCF_Campaign::get_list_most_recent( 3 );
+print_r($test); echo '<br>';
+//Exemple de parcours
+foreach ($test as $project_id) {
+	$one_project = new ATCF_Campaign( $project_id );
+	print_r($one_project); echo '<br>';
+}
 ?>
 <?php
 
