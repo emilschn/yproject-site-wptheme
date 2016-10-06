@@ -33,7 +33,9 @@
 @font-face{
     font-family: "wedogood";
     src: url('fonts/wedogoodregular-2.ttf') format('truetype');
-    src: url('fonts/wedogoodregular-2.otf')format("opentype");   
+    src: url('fonts/wedogoodregular-2.otf') format("opentype"); 
+    src: url('fonts/wedogoodregular-webfont.woff') format('woff');
+    src: url('fonts/wedogoodregular-webfont.woff2') format('woff');
 }
 
 /*******************************************************************************
