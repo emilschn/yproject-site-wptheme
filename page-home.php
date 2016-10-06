@@ -132,103 +132,71 @@ $page_finance = get_page_by_path('financement');
 $page_how = get_page_by_path('descriptif');
 ?>
 
-<!--Section nos derniers projets-->
+<!-- SECTION NOS DERNIERS PROJETS -->
 
 <?php
 global $WDG_cache_plugin;
 date_default_timezone_set("Europe/London");
+
+$nb_projects = 3;
 ?>
 
 <?php
-//*******************
-//CACHE PROJECTS 
-
-//CACHE PROJECTS CURRENTS
-$cache_projects_current = $WDG_cache_plugin->get_cache('projects-current', 2);
-if ($cache_projects_current !== FALSE) { echo $cache_projects_current; }
-else {
-	ob_start();
-
-		// Les 3 PROJETS EN COURS
-                $current_projects = ATCF_Campaigns::list_projects_funding(3);
-		$nb_collecte_projects = count($current_projects);
-//                var_dump("en cours :" .$nb_collecte_projects);
-
+// PROJETS EN COURS DE COLLECTE
+$current_projects = ATCF_Campaigns::list_projects_funding($nb_projects);
+$current_projects ? $nb_collecte_projects = count($current_projects) : $nb_collecte_projects = 0;
 ?>
-<?php
-	$cache_projects_current = ob_get_contents();
-	$WDG_cache_plugin->set_cache('projects-current', $cache_projects_current, 60*10, 2);
-	ob_end_clean();
-	echo $cache_projects_current;
-}
-?>
-
-    
+   
 <?php
 //Si on a moins de 3 projets en cours à afficher, on va chercher les projets en vote
-if($nb_collecte_projects < 3){
-    //*******************
-    //CACHE PROJECTS OTHERS
-    $cache_projects_next = $WDG_cache_plugin->get_cache('projects-next', 3);
-    if ($cache_projects_next !== FALSE) { echo $cache_projects_next; }
-    else {
-            ob_start();
-                    //PROJETS EN VOTE
-                    $vote_projects = ATCF_Campaigns::list_projects_vote(3);
-                    $nb_vote_projects = count($vote_projects);
-//                    var_dump("vote :" .$nb_vote_projects);
-    ?>
-    <?php
-            $cache_projects_next = ob_get_contents();
-            $WDG_cache_plugin->set_cache('projects-next', $cache_projects_next, 60*10, 3);
-            ob_end_clean();
-            echo $cache_projects_next;
-        }
+if($nb_collecte_projects < $nb_projects):   
+    //PROJETS EN VOTE
+    $vote_projects = ATCF_Campaigns::list_projects_vote($nb_projects - $nb_collecte_projects);
+    $vote_projects ? $nb_vote_projects = count($vote_projects) : $nb_vote_projects = 0;
+endif;
+?>
 
-}
-
+<?php 
+//Si on a moins de 3 projets (en cours+en vote) à afficher, on va chercher les projets financés réussis
+if (($nb_collecte_projects + $nb_vote_projects) < $nb_projects):
+    $funded_projects = ATCF_Campaigns::list_projects_funded($nb_projects - ($nb_collecte_projects + $nb_vote_projects));
+    $funded_projects ? $nb_funded_projects = count($funded_projects) : $nb_funded_projects = 0;
+endif;
 ?>
 
 <?php
-//Si on a moins de 3 projets en vote à afficher, on va chercher les projets financés réussis
-if($nb_vote_projects < 3){
-    //*******************
-    //CACHE PROJECTS OVER
-    $cache_projects_others = $WDG_cache_plugin->get_cache('projects-over', 3);
-    if ($cache_projects_others !== FALSE) { echo $cache_projects_others; }
-    else {
-            ob_start();
-                    //PROJETS REUSSIS
-                    $funded_projects = ATCF_Campaigns::list_projects_funded(3);
-                    $nb_funded_projects = count($funded_projects); ;
-    ?>												
-    <?php
-            $cache_projects_others = ob_get_contents();
-            $WDG_cache_plugin->set_cache('projects-over', $cache_projects_others, 60*60, 3);
-            ob_end_clean();
-            echo $cache_projects_others;
-    }
-}
-?>
-<?php
-
-// Affichage de la section s'il y a au moins un projet en cours/en vote/financé    ************************ revoir les conditions
-if($nb_collecte_projects > 0 || $nb_vote_projects > 0 || $nb_funded_projects > 0){
-    if($nb_collecte_projects === 3){
-        $all_projects = $current_projects;
-    }
-    else if($nb_collecte_projects > 0 && $nb_collecte_projects < 3 && $nb_vote_projects > 0 ){
+// Affichage de la section s'il y a au moins un projet en cours/en vote/financé  
+if($nb_collecte_projects === 3):
+    $all_projects = $current_projects;
+else:
+    if ($current_projects && $vote_projects ):
         $all_projects = array_merge($current_projects, $vote_projects);
-    }
-    if($all_projects && count($all_projects) < 3 || !$all_projects){
-        $more_projects = $funded_projects; //impossible de merger car clés différentes entre current/vote et funded
-    }
-}
+    endif;
+    if ($current_projects && !$vote_projects):
+        $all_projects = $current_projects;
+    endif;
+    if (count($all_projects) < 3):
+        $more_projects = $funded_projects;
+    endif;
+endif;
+
+
+
+//if($nb_collecte_projects > 0 || $nb_vote_projects > 0 || $nb_funded_projects > 0){
+//    if($nb_collecte_projects === 3){
+//        $all_projects = $current_projects;
+//    }
+//    else if($nb_collecte_projects > 0 && $nb_collecte_projects < 3 && $nb_vote_projects > 0 ){
+//        $all_projects = array_merge($current_projects, $vote_projects);
+//    }
+//    if($all_projects && count($all_projects) < 3 || !$all_projects){
+//        $more_projects = $funded_projects; //impossible de merger car clés différentes entre current/vote et funded
+//    }
+//}
 
 ?>
-<?php
 
-?>
+
 <section id="home-projects-ref">
     <h1>/ Nos derniers projets /</h1>
     <div id="bloc-projects">
@@ -310,9 +278,6 @@ if($nb_collecte_projects > 0 || $nb_vote_projects > 0 || $nb_funded_projects > 0
         }    
     }
 
-         
-//FIN CACHE PROJECTS
-//*******************
 ?>
     </div>  <!-- #bloc-projects --> 
     <button class="button big red see-more">voir plus de projets<a href=""></a></button>
