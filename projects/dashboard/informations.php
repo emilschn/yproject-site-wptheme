@@ -62,18 +62,18 @@ function print_informations_page()
 
                 <?php
                 DashboardUtility::create_field(array(
-                    "id"=>"new_project_name",
-                    "type"=>"text",
-                    "label"=>"Nom du projet",
-                    "value"=>$post_campaign->post_title
+                    "id"	=> "new_project_name",
+                    "type"	=> "text",
+                    "label"	=> "Nom du projet",
+                    "value"	=> $post_campaign->post_title
                 ));
 
                 DashboardUtility::create_field(array(
-                    "id"=>"new_backoffice_summary",
-                    "type"=>"editor",
-                    "label"=>"D&eacute;crivez-nous votre projet : ",
-                    "infobubble"=>"Ces informations seront traitées de manière confidentielle",
-                    "value"=>$campaign->backoffice_summary()
+                    "id"	=> "new_backoffice_summary",
+                    "type"	=> "editor",
+                    "label"	=> "D&eacute;crivez-nous votre projet : ",
+                    "infobubble"	=> "Ces informations seront traitées de manière confidentielle",
+                    "value"	=> $campaign->backoffice_summary()
                 ));
 
 
@@ -146,6 +146,32 @@ function print_informations_page()
 
                 DashboardUtility::create_save_button("projectinfo_form"); ?>
             </form>
+			
+			<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
+				la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>
+			
+            <form action="<?php echo admin_url( 'admin-post.php?action=upload_information_files'); ?>" method="post" id="projectinfo_form" enctype="multipart/form-data">
+                <ul class="errors">
+
+                </ul>
+
+				<?php
+				$file_name = $campaign->backoffice_businessplan();
+				$file_name_exploded = explode('.', $file_name);
+				$ext = $file_name_exploded[count($file_name_exploded) - 1];
+                DashboardUtility::create_field(array(
+                    "id"				=> "new_backoffice_businessplan",
+                    "type"				=> "upload",
+                    "label"				=> "Votre business plan",
+                    "infobubble"		=> "Ces informations seront traitées de manière confidentielle",
+                    "value"				=> home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/kyc/' . $campaign->backoffice_businessplan(),
+					"download_label"	=> $post_campaign->post_title . " - BP." . $ext
+                ));
+				
+                DashboardUtility::create_save_button("projectinfo_form"); ?>
+				
+				<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+			</form>
         </div>
 
         <div class="tab-content" id="tab-user-infos">

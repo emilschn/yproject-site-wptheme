@@ -296,13 +296,25 @@ class DashboardUtility
                             . 'value="' . $initial_value . '" '
                             . 'class="'.$fillbubble_class.$icon_class.'"/>';
                         break;
+					case 'upload':
+						$download_label = $params["download_label"];
+                        $text_field .= '<input type="file" '
+                            . 'name="' . $id . '" '
+                            . 'id="' . $id . '" '
+                            . 'class="'.$fillbubble_class.$icon_class.'" /> ';
+						if ( !empty($initial_value) ) {
+							$text_field .= '<a href="'.$initial_value.'" download="'.$download_label.'">' .__("T&eacute;l&eacute;charger", 'yproject'). '</a>';
+						} else {
+							$text_field .= __("En attente d'envoi", 'yproject');
+						}
+						break;
                     default:
                         $text_field .= $initial_value;
                 }
 
                 if(!empty($fillbubble)){$text_field .= '<span class="tooltiptext">'.translate($fillbubble, 'yproject').'</span>';}
-            }
-            else {
+				
+            } else {
                 $text_field .= '<span class="non-editable">';
                 switch ($type) {
                     case 'text':
@@ -332,6 +344,13 @@ class DashboardUtility
                             $text_field .= $default_initial_value;
                         }
                         break;
+					case 'upload':
+						if ( !empty($value) ) {
+							$text_field .= '<a href="'.$value.'">' .__("T&eacute;l&eacute;charger", 'yproject'). '</a>';
+						} else {
+							$text_field .= __("En attente d'envoi", 'yproject');
+						}
+						break;
                 }
                 $text_field .= '</span>';
             }
