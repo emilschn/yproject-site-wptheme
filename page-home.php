@@ -27,7 +27,34 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
             <span class="num-slide inactive-slide" id="span-3">3</span>
         </div>  
         <div id="slider">
-            <div class="slider-item" id="slide-1" >
+            <?php
+                $tabImg = array(1 => '/images/slider/fotolia_equipe_nb.jpg" alt=""',
+                                2 => '/images/slider/fotolia_abeille.jpg" alt=""',
+                                3 => '/images/slider/fotolia_nature.jpg" alt=""'
+                                );
+                for ($ii = 1; $ii <= count($tabImg); $ii++):
+                    ?>
+                    <div class="slider-item" id="slide-<?=$ii?>" >
+                        <img class="slide" src="<?php echo $stylesheet_directory_uri; ?><?php echo $tabImg[$ii] ?>"/> 
+                        
+                        <?php
+                        if($ii === 1):?>
+                            <div class="message-banner">
+                                    <p class="mobile_hidden screen-message">Nous activons</br>une finance à impact positif</br>en développant<br/>les levées de fonds en royalties</p>
+                                    <p class="only_on_mobile inline mobile-message">Nous activons</br>une finance<br/>à impact positif</br>en développant<br/>les levées</br>de fonds</br>en royalties</p>                                                 
+                            </div>
+                            <div id="button-container">
+                                <button class="button red big">Financer son projet<a href=""></a></button>
+                                <button class="button red big">Investir sur un projet<a href=""></a></button>
+                            </div>
+                        <?php endif;?>                         
+                        <?php if($ii !== 1): ?> 
+                            <div class="message-banner">
+                            </div>
+                        <?php endif; ?>
+                    </div>
+            <?php endfor; ?>
+<!--            <div class="slider-item" id="slide-1" >
                 <img class="slide" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_equipe_nb.jpg" alt=""/> 
                 <div id="message-banner">
                     <p class="mobile_hidden screen-message">Nous activons</br>une finance à impact positif</br>en développant<br/>les levées de fonds en royalties</p>
@@ -43,7 +70,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
             </div>
             <div class="slider-item" id="slide-3" >
                 <img class="slide"  src="<?php echo $stylesheet_directory_uri; ?>/images/slider/fotolia_nature.jpg" alt=""/>          
-            </div>
+            </div>-->
         </div>
     </div>
     
@@ -235,9 +262,12 @@ if($nb_collecte_projects > 0 || $nb_vote_projects > 0 || $nb_funded_projects > 0
                 </div>
 <?php
             require('projects/preview.php');//insère html de la page preview
-            if ($ii++ == 3) {break;} //$all_projects peut avoir une longueur > 3
+            
 ?>
-            </div>
+            </div> <!-- project-container -->
+            <?php
+            if ($ii++ == 3) {break;} //$all_projects peut avoir une longueur > 3
+            ?>
 <?php  
         }    
         
@@ -264,18 +294,19 @@ if($nb_collecte_projects > 0 || $nb_vote_projects > 0 || $nb_funded_projects > 0
             if ($image_obj != '') {$img_src = $image_obj[0];}
 
 ?>
-            <div class="project-container" id="project-<?=$ii?>">
-                <div class= "impacts-container" id="impacts-<?=$ii?>">
-                    <span class="impact-logo impact-ecologic" id="impact-ecologic-<?=$ii?>"><p>ecl</p></span> <!-- impacts à modifier selon nvl données et nvl fonctions à créer -->
-                    <span class="impact-logo impact-social" id="impact-social-<?=$ii?>"><p>soc</p></span>
-                    <span class="impact-logo impact-economic" id="impact-economic-<?=$ii?>"><p>ecn</p></span>                   
+            <div class="project-container" id="project-<?=$ii+10?>">
+                <div class= "impacts-container" id="impacts-<?=$ii+10?>">
+                    <span class="impact-logo impact-ecologic" id="impact-ecologic-<?=$ii+10?>"><p>ecl</p></span> <!-- impacts à modifier selon nvl données et nvl fonctions à créer -->
+                    <span class="impact-logo impact-social" id="impact-social-<?=$ii+10?>"><p>soc</p></span>
+                    <span class="impact-logo impact-economic" id="impact-economic-<?=$ii+10?>"><p>ecn</p></span>                   
                 </div>
 <?php
             require('projects/preview.php');//insère html de la page preview
-            if ($ii++ == $missing_projects) {break;} //$all_projects peut avoir une longueur > 3
+            
 ?>
-            </div>
+            </div> <!-- .project-container-->
 <?php  
+        if ($ii++ == $missing_projects) {break;} //$all_projects peut avoir une longueur > 3
         }    
     }
 
@@ -283,9 +314,26 @@ if($nb_collecte_projects > 0 || $nb_vote_projects > 0 || $nb_funded_projects > 0
 //FIN CACHE PROJECTS
 //*******************
 ?>
-            </div> <!-- #bloc-projects --> 
-        </section> <!-- #home-projects-ref -->
+    </div>  <!-- #bloc-projects --> 
+    <button class="button big red see-more">voir plus de projets<a href=""></a></button>
+</section> <!-- #home-projects-ref -->
 
+<section id="home-video-ref">
+    <div id="video-titles">
+        <h1>/ wedogood, c'est quoi ? /</h1>
+        <h2>découvrez notre vidéo</h2>
+    </div>
+    <div id="video-content">
+        <div class="home_video mobile_hidden">
+            <div class="video-container hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 570)); ?></div>
+            <div class="button-video"><img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button.jpg" /></div>
+            <div class="button-video-shadows">
+                    <img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow2.png" />
+                    <img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow1.png" />
+            </div>
+        </div>
+    </div>
+</section>
 
 <!--<div id="home_middle_top" class="center mobile_hidden">
 

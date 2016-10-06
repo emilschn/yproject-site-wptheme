@@ -133,7 +133,7 @@
         
         /***** REFONTE GRAPHIQUE *****/
         
-        #header_home_ref .slider-container #slider #slide-1 #message-banner .mobile-message{
+        #header_home_ref .slider-container #slider #slide-1 .message-banner .mobile-message{
             margin: 0%;
             text-align: left;
             font-family: Arial, sans serif; /* ajouter la nouvelle font *************/
@@ -141,8 +141,9 @@
             font-weight: bold;
             color: #FFFFFF;
             text-transform: uppercase;
+            transform: skew(-45deg);
         }
-        #header_home_ref .slider-container #slider #slide-1 #message-banner .screen-message{
+        #header_home_ref .slider-container #slider #slide-1 .message-banner .screen-message{
             display: none;
         }
         
