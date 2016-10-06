@@ -83,12 +83,5 @@ $width = 100 * $percent / 100; /* taille maxi de la barre est à 100% */
 <?php
     }
 ?>
-    
-    
-    
-
-
-    
-    <?php // var_dump($img_src); ?>
-        
-</div>
+           
+</div> <!-- .project-framed -->
