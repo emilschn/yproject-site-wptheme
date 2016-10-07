@@ -28,15 +28,16 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
         </div>  
         <div id="slider">
             <?php
-            $tabImg = array(1 => '/images/slider/fotolia_equipe_nb.jpg" alt=""',
-                            2 => '/images/slider/fotolia_abeille.jpg" alt=""',
-                            3 => '/images/slider/fotolia_nature.jpg" alt=""'
+            $tabImg = array(1 => '/images/slider/Small-business-start-up-team-briefing-with-notes.jpg',
+                            2 => '/images/slider/fotolia_abeille.jpg',
+                            3 => '/images/slider/fotolia_nature.jpg'
                             );
             for ($ii = 1; $ii <= count($tabImg); $ii++):
                 ?>
                 <div class="slider-item slide-2buttons" id="slide-<?php echo $ii?>" >
-                    <img class="slide" src="<?php echo $stylesheet_directory_uri; ?><?php echo $tabImg[$ii] ?>"/> 
-
+                    <img class="slider-motif-left" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-motif-trame-gauche.png"/>
+                    <img class="slide" id="img-slide-<?php echo $ii?>" src="<?php echo $stylesheet_directory_uri; ?><?php echo $tabImg[$ii] ?>"/> 
+                    <img class="slider-motif-right" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-motif-trame-droite.png"/>
                     <?php
                     if($ii === 1):?>
                         <div class="message-banner">
@@ -44,8 +45,8 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
                                 <p class="only_on_mobile inline mobile-message">Nous activons</br>une finance<br/>à impact positif</br>en développant<br/>les levées</br>de fonds</br>en royalties</p>                                                 
                         </div>
                         <div id="button-container">
-                            <button class="button red big"><?php _e("Financer son projet", "yproject") ?><a href=""></a></button>
-                            <button class="button red big"><?php _e("Investir sur un projet", "yproject") ?><a href=""></a></button>
+                            <a class="button-slide" href=""><?php _e("Financer son projet", "yproject") ?></a>
+                            <a class="button-slide" href=""><?php _e("Investir sur un projet", "yproject") ?></a>
                         </div>
                     <?php endif;?>                         
                     <?php if($ii !== 1): ?> 
@@ -123,7 +124,7 @@ date_default_timezone_set("Europe/London");
 ?>
 
 <section class="wdg-component-projects-preview">
-    <h1><?php _e("/ Nos derniers projets /", "yproject") ?></h1>
+    <h1><?php _e("/ les projets /", "yproject") ?></h1>
     <div id="bloc-projects">
 
         <?php
@@ -139,7 +140,7 @@ date_default_timezone_set("Europe/London");
         }
         ?>
     </div>  <!-- #bloc-projects --> 
-    <a class="home-button-project see-more red" href=""><?php _e("voir plus de projets","yproject" ) ?></a>
+    <a class="home-button-project see-more red" href=""><?php _e("découvrir tous les projets","yproject" ) ?></a>
 </section> <!-- .wdg-component-projects-preview -->
 
 <!-- fin de SECTION NOS DERNIERS PROJETS -->
@@ -149,13 +150,13 @@ date_default_timezone_set("Europe/London");
 
 <section id="home-video-ref">
     <div id="video-titles">
-        <h1><?php _e("/ wedogood, c'est quoi ? /", "yproject")?></h1>
-        <h2><?php _e("découvrez notre vidéo", "yproject")?></h2>
+        <h1><?php _e("/ comment ça marche ? /", "yproject")?></h1>
+        <!--<h2><?php _e("découvrez notre vidéo", "yproject")?></h2>-->
     </div>
     <div id="video-content">
         <div class="home_video mobile_hidden">
             <div class="video-container hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 570)); ?></div>
-            <div class="button-video"><img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button.jpg" /></div>
+            <div class="button-video"><img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-nb.jpg" /></div>
             <div class="button-video-shadows">
                     <img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow2.png" />
                     <img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow1.png" />
@@ -163,7 +164,6 @@ date_default_timezone_set("Europe/London");
         </div>
     </div>
 </section>
-
 <!-- fin de SECTION VIDEO -->
 
 <div id="home_bottom" class="center mobile_hidden">

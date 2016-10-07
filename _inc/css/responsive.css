@@ -133,22 +133,20 @@
         
         /***** REFONTE GRAPHIQUE *****/
         
-        .wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .mobile-message{
+        .wdg-component-slider .slider-container #slider #slide-1 .message-banner .mobile-message{
             margin: 0%;
             text-align: left;
-            font-family: Arial, sans serif; /* ajouter la nouvelle font *************/
-            font-size: 2em;
+            font-family: wedogood;
+            font-size: 1.8em;
             font-weight: bold;
             color: #FFFFFF;
-            text-transform: uppercase;
-            transform: skew(-45deg);
         }
-        .wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message{
+        .wdg-component-slider .slider-container #slider #slide-1 .message-banner .screen-message{
             display: none;
         }
         
         
-        .wdg-component-slider .slider-container #slider .slide-2buttons #button-container{
+        .wdg-component-slider .slider-container #slider #slide-1 #button-container .button-slide{
             flex-flow: column wrap;
         }
 	/*****************************/

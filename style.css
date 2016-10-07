@@ -1285,7 +1285,7 @@ form.wdg-forms table input[type="text"].reward-text{
 
 .wdg-component-slider .slider-container { 
     min-width: 100%;
-    min-height: 550px;
+    min-height: 700px;
     margin: 0 auto;
     text-align: center;
     position: relative;/*élément de référence*/
@@ -1295,16 +1295,33 @@ form.wdg-forms table input[type="text"].reward-text{
 
 .wdg-component-slider .slider-container #slider .slider-item{
     width: 100%;
-    height: 550px;
+    height: 100%;
     position: absolute;
     z-index: 1;
     display: inline-block;
 }
-.wdg-component-slider .slider-container #slider .slider-item img {
+.wdg-component-slider .slider-container #slider .slider-item .slide { /* image de slide */
     min-width: 100%;
-    min-height: 550px;
     position: relative;
+    top: -10%;
 }
+
+.wdg-component-slider .slider-container #slider .slider-item .slider-motif-left{
+    position: absolute;
+    z-index: 3;
+    left: 0%;
+    top: 0%;
+    width: 36.2%;
+}
+.wdg-component-slider .slider-container #slider .slider-item .slider-motif-right{
+    position: absolute;
+    z-index: 2;
+    right: 0%;
+    bottom: -0.6%;
+    width: 72%;
+
+}
+
 
 .wdg-component-slider .slider-container .slider-choice{
     display: flex;
@@ -1314,7 +1331,7 @@ form.wdg-forms table input[type="text"].reward-text{
     height: 10%;
     position: absolute;
     z-index: 2;
-    left: 44.9%;
+    left: 46.5%;
     top: 86%;
 }
 .wdg-component-slider .slider-container .slider-choice .num-slide{
@@ -1334,36 +1351,38 @@ form.wdg-forms table input[type="text"].reward-text{
 }
 
 /*  Slide 1 */
-.wdg-component-slider .slider-container #slider .slider-item .message-banner{
-    
+.wdg-component-slider .slider-container #slider .slider-item .message-banner{   
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    z-index: 3;
-    top: 15%; 
-    left: -15%;
-    width: 100%;
-    height: 43.5%;  /*240px*/
-    padding: 1.5% 0% 1.5% 0%;
+    z-index: 2;
+    top: 26.7%;
+    left: 0%;
+    width: 76.5%;
+    height: 34%;
+    padding: 2% 0% 2% 0%;
     background: rgba(0, 86, 99, 0.7);
-    transform: skew(-45deg);
-
 }
-   
+.wdg-component-slider .slider-container #slider .slider-item .message-banner::after{ 
+    border-top: 298px solid rgba(0, 86, 99, 0.7);
+    border-right: 293px solid transparent;
+    content: "";
+    position: absolute;
+    top: 0px;
+    width: 0;
+    left: 100%;
+}   
 /*message pour bannière sur screen*/
 .wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message{
-    width: 650px;/*45%*/
     margin: 0%;
-    left: 14%;
     position: relative;
     text-align: left;
-    font-family: wedogood; /* ajouter la nouvelle font *************/
-    font-size: 2.5em;
+    font-family: wedogood; 
+    font-size: 3.8em;
     font-weight: bold;
     color: #FFFFFF;
-    text-transform: uppercase;
-    transform: skew(45deg);
+    left: 15%;
 }
 .wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .mobile-message{
     display: none;
@@ -1372,18 +1391,24 @@ form.wdg-forms table input[type="text"].reward-text{
 .wdg-component-slider .slider-container #slider .slide-2buttons #button-container{
     display: flex;
     justify-content: center;
-    /*width: 760px;*/
+    width: 80%;
+    height: 9%;
     position: absolute;
     z-index: 3;
-    left: 25.5%;
-    top: 75%;   
+    top: 75%; 
+    left: 10%;
 }
 
-.wdg-component-slider .slider-container #slider .slide-2buttons #button-container button{
-    margin: 0% 2%;
-    width: 320px;
+.wdg-component-slider .slider-container #slider .slide-2buttons #button-container .button-slide{
+    width: 32%; /* px si on veut une taille fixe de bouton sous tablette et pc */
+    text-align: center;
     font-size: 0.938em;
-    font-family: Trebuchet MS, sans-serif;
+    letter-spacing: 0.063em;
+    text-transform: uppercase;   
+    padding: 38% 0%;
+    margin: 0% 1.5%;
+    background-color: #EA4F51;
+    color: #FFFFFF;
 }
 
 /*------------ Partie projets --------------*/
@@ -1398,7 +1423,7 @@ form.wdg-forms table input[type="text"].reward-text{
 .wdg-component-projects-preview h1, #home-video-ref h1{  
     text-align: center;
     margin: 0;
-    padding-top: 2%;
+    padding: 2%;
     font-family: Trebuchet MS, sans-serif;
     text-transform: uppercase;
     font-size: 2.93em; 
@@ -1591,8 +1616,6 @@ form.wdg-forms table input[type="text"].reward-text{
     margin: 0;
 }
 
-/*    font-size: 15px;
-    padding: 15px 30px;*/
 .wdg-component-projects-preview .home-button-project{
     display: inline-block;
     position: absolute; 
@@ -1616,7 +1639,7 @@ form.wdg-forms table input[type="text"].reward-text{
 }
 .wdg-component-projects-preview .see-more{
     width: 337px;
-    bottom: 7%;
+    bottom: 2%;
     left: 37.5%;
     color: #FFFFFF;
     background-color: #EA4F51;
@@ -1626,18 +1649,18 @@ form.wdg-forms table input[type="text"].reward-text{
 /*------------ Partie vidéo --------------*/
 #home-video-ref #video-titles{
     width: 100%;
-    height: 150px;
     display: block;
     background-color: #E1E3E2;
+    margin-top: 3%;
 }
-#home-video-ref h2{
+/*#home-video-ref h2{
     text-align: center;
     margin: 0;
     padding-top: 1%;
     text-transform: uppercase;
     font-family: Trebuchet MS, sans-serif;
     font-size: 1.5em;
-}
+}*/
 #home-video-ref #video-content{
     height: 380px;
     margin-top: 0;
@@ -1651,7 +1674,17 @@ form.wdg-forms table input[type="text"].reward-text{
     position: absolute;
     left: 31%;
 }
-
+#home-video-ref #video-content .home_video .button-video-shadows{
+    margin-top: -15.6%;
+    cursor: pointer;
+}
+#home-video-ref #video-content .home_video .button-video-shadows img{
+    width: 30%;
+    display: inline;
+}
+.home_video .button-video-shadows img:last-child {
+    margin-left: 35%;
+}
 
 /*----------------------------------------------------------------------------*/
 
@@ -1712,14 +1745,14 @@ header.header_home #welcome_text #header_homepage_link .button:first-child {
     box-shadow: 0px 5px 10px 0px #656565;
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=10);
 }
-.home_video .button-video-shadows {
+/*.home_video .button-video-shadows {
     margin-top: -119px;
-    /*text-align: left;*/
+    text-align: left;
     cursor: pointer;
-}
-.home_video .button-video-shadows img:last-child {
+}*/
+/*.home_video .button-video-shadows img:last-child {
     margin-left: 300px;
-}
+}*/
 #home_middle_top {
     margin-bottom: 30px;
 }
