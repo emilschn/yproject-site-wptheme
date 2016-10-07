@@ -166,17 +166,13 @@ date_default_timezone_set("Europe/London");
 </section>
 <!-- fin de SECTION VIDEO -->
 
-<div id="home_bottom" class="center mobile_hidden">
-	<div class="padder">
-		<div class="part-title-separator">
-			<span class="part-title">Nos partenaires</span>
-		</div>
-		<?php $page_partners = get_page_by_path('partenaires'); ?>
-		<div class="partners_zone">
-			<a href="<?php echo get_permalink($page_partners->ID); ?>"><img src="<?php echo $stylesheet_directory_uri; ?>/images/frise_partenaires_wedogood.png" width="3135" height="150" alt="logos partenaires" /></a>
-		</div>
-	</div>
-</div>
+<!-- SECTION PRESSE -->
+<section id="home-presse">
+    <img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse.jpg"/>   
+</section>   
+<!-- fin de SECTION PRESSE -->
+
+
 
 <?php
 	$cache_home = ob_get_contents();
