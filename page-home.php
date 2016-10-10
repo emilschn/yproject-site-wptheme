@@ -149,15 +149,12 @@ date_default_timezone_set("Europe/London");
 <!-- SECTION VIDEO -->
 
 <section id="home-video-ref">
-    <div id="video-titles">
-        <h1><?php _e("/ comment ça marche ? /", "yproject")?></h1>
-        <!--<h2><?php _e("découvrez notre vidéo", "yproject")?></h2>-->
-    </div>
     <div id="video-content">
-        <div class="home_video mobile_hidden">
+        <h1><?php _e("/ comment ça marche ? /", "yproject")?></h1>
+        <div class="home_video">
             <div class="video-container hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 570)); ?></div>
             <div class="button-video"><img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-nb.jpg" /></div>
-            <div class="button-video-shadows">
+            <div class="button-video-shadows mobile_hidden">
                     <img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow2.png" />
                     <img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow1.png" />
             </div>
@@ -167,7 +164,7 @@ date_default_timezone_set("Europe/London");
 <!-- fin de SECTION VIDEO -->
 
 <!-- SECTION PRESSE -->
-<section id="home-presse">
+<section class="mobile_hidden" id="home-press">
     <img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse.jpg"/>   
 </section>   
 <!-- fin de SECTION PRESSE -->

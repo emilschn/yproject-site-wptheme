@@ -1420,7 +1420,7 @@ form.wdg-forms table input[type="text"].reward-text{
 }
 
 /* titres page d'accueil */
-.wdg-component-projects-preview h1, #home-video-ref h1{  
+.wdg-component-projects-preview h1, #home-video-ref #video-content h1{
     text-align: center;
     margin: 0;
     padding: 2%;
@@ -1647,49 +1647,45 @@ form.wdg-forms table input[type="text"].reward-text{
 }
 
 /*------------ Partie vidéo --------------*/
-#home-video-ref #video-titles{
+#home-video-ref{
     width: 100%;
-    display: block;
+    margin-left: 0;
+    margin-right: 0;
+}
+#home-video-ref #video-content{
+    display: inline-block;
     background-color: #E1E3E2;
     margin-top: 3%;
-}
-/*#home-video-ref h2{
-    text-align: center;
-    margin: 0;
-    padding-top: 1%;
-    text-transform: uppercase;
-    font-family: Trebuchet MS, sans-serif;
-    font-size: 1.5em;
-}*/
-#home-video-ref #video-content{
-    height: 380px;
-    margin-top: 0;
-    background-color: #E1E3E2;
+    min-width: 100%;
+    height: 500px;
     background-image: url("images/header-video-nb.png");
-    background-position: center top;
+    background-size: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
     padding: 2%;
+    text-align: center;
 }
 .home_video{        /* attention réutilisation d'une classe existante mais modifiée ici'*/
-    text-align: center;
-    position: absolute;
-    left: 31%;
+    display: inline-block;
+    width: 570px;
+    
 }
 #home-video-ref #video-content .home_video .button-video-shadows{
-    margin-top: -15.6%;
+    margin-top: -20%;
     cursor: pointer;
 }
 #home-video-ref #video-content .home_video .button-video-shadows img{
-    width: 30%;
+    width: 35%;
     display: inline;
 }
 .home_video .button-video-shadows img:last-child {
-    margin-left: 35%;
+    margin-left: 29%;
 }
 
 /*------------ Partie presse --------------*/
 
-#home-presse{
-    text-align: center;
+#home-press #press-banner{
+    width: 100%;
 }
 /*----------------------------------------------------------------------------*/
 
