@@ -1301,24 +1301,31 @@ form.wdg-forms table input[type="text"].reward-text{
     display: inline-block;
 }
 .wdg-component-slider .slider-container #slider .slider-item .slide { /* image de slide */
-    min-width: 100%;
+    width: 100%;
     position: relative;
-    top: -10%;
+    top: -8%;
 }
 
-.wdg-component-slider .slider-container #slider .slider-item .slider-motif-left{
+.wdg-component-slider .slider-container #slider .slider-item .slider-motif-left-haut{
     position: absolute;
     z-index: 3;
     left: 0%;
     top: 0%;
-    width: 36.2%;
+    width: 545px;
+}
+.wdg-component-slider .slider-container #slider .slider-item .message-banner .slider-motif-left-bas{
+    position: absolute;
+    z-index: 3;
+    left: 0%;
+    top: 100%;
+    width: 60px;
 }
 .wdg-component-slider .slider-container #slider .slider-item .slider-motif-right{
     position: absolute;
     z-index: 2;
     right: 0%;
     bottom: -0.6%;
-    width: 72%;
+    width: 77%;
 
 }
 
@@ -1359,30 +1366,31 @@ form.wdg-forms table input[type="text"].reward-text{
     z-index: 2;
     top: 26.7%;
     left: 0%;
-    width: 76.5%;
-    height: 34%;
+    width: 74.5%;
+    /*height: 36.8%;258px*/
     padding: 2% 0% 2% 0%;
     background: rgba(0, 86, 99, 0.7);
 }
 .wdg-component-slider .slider-container #slider .slider-item .message-banner::after{ 
-    border-top: 298px solid rgba(0, 86, 99, 0.7);
-    border-right: 293px solid transparent;
+    border-top: 284px solid rgba(0, 86, 99, 0.7);
+    border-right: 278px solid transparent;
     content: "";
     position: absolute;
     top: 0px;
-    width: 0;
+    width: 1%;
     left: 100%;
 }   
 /*message pour bannière sur screen*/
 .wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message{
-    margin: 0%;
     position: relative;
     text-align: left;
+    line-height: 100%;
     font-family: wedogood; 
-    font-size: 3.8em;
+    font-size: 3.5em;
     font-weight: bold;
     color: #FFFFFF;
-    left: 15%;
+    padding-left: 30%;
+    margin: 0;
 }
 .wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .mobile-message{
     display: none;
@@ -1631,7 +1639,6 @@ form.wdg-forms table input[type="text"].reward-text{
     top: 85%;
     background-color: #00879B;
     color: #FFFFFF;
-    /*border: none;*/
 }
 .wdg-component-projects-preview .project-container .project-framed .see-project{
     background-color: #D3EAE9;
@@ -1648,15 +1655,14 @@ form.wdg-forms table input[type="text"].reward-text{
 
 /*------------ Partie vidéo --------------*/
 #home-video-ref{
-    width: 100%;
+    max-width: 100%;
     margin-left: 0;
     margin-right: 0;
 }
 #home-video-ref #video-content{
-    display: inline-block;
     background-color: #E1E3E2;
     margin-top: 3%;
-    min-width: 100%;
+    max-width: 100%;
     height: 500px;
     background-image: url("images/header-video-nb.png");
     background-size: 100%;

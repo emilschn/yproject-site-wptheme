@@ -48,6 +48,14 @@
 	#home_bottom .part-title-separator { width: 768px !important; }
 	#home_bottom .partners_zone { width: 768px !important; }
 	
+        .wdg-component-slider .slider-container #slider #slide-1 .message-banner .screen-message{
+            margin: 0%;
+            text-align: left;
+            font-family: wedogood;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #FFFFFF;
+        }      
 /*******************************************************************************
 * PROJECT SHORT - SEPARATOR
 *******************************************************************************/

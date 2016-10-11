@@ -35,18 +35,22 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
             for ($ii = 1; $ii <= count($tabImg); $ii++):
                 ?>
                 <div class="slider-item slide-2buttons" id="slide-<?php echo $ii?>" >
-                    <img class="slider-motif-left" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-motif-trame-gauche.png"/>
-                    <img class="slide" id="img-slide-<?php echo $ii?>" src="<?php echo $stylesheet_directory_uri; ?><?php echo $tabImg[$ii] ?>"/> 
+                    <img class="slider-motif-left-haut" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-trame-haut-gauche-01.png"/>
                     <img class="slider-motif-right" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-motif-trame-droite.png"/>
+                    <img class="slide" id="img-slide-<?php echo $ii?>" src="<?php echo $stylesheet_directory_uri; ?><?php echo $tabImg[$ii] ?>"/> 
+                    
                     <?php
                     if($ii === 1):?>
                         <div class="message-banner">
                                 <p class="mobile_hidden screen-message">Nous activons</br>une finance à impact positif</br>en développant<br/>les levées de fonds en royalties</p>
                                 <p class="only_on_mobile inline mobile-message">Nous activons</br>une finance<br/>à impact positif</br>en développant<br/>les levées</br>de fonds</br>en royalties</p>                                                 
+                        <img class="slider-motif-left-bas" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-trame-bas-gauche-01.png"/>
                         </div>
+                        
+                        
                         <div id="button-container">
-                            <a class="button-slide" href=""><?php _e("Financer son projet", "yproject") ?></a>
-                            <a class="button-slide" href=""><?php _e("Investir sur un projet", "yproject") ?></a>
+                            <a class="button-slide" href="<?php echo home_url( '/financement' ); ?>"><?php _e("Financer son projet", "yproject") ?></a>
+                            <a class="button-slide" href="<?php echo home_url( '/investissement' ); ?>"><?php _e("Investir sur un projet", "yproject") ?></a>
                         </div>
                     <?php endif;?>                         
                     <?php if($ii !== 1): ?> 

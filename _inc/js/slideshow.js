@@ -7,7 +7,7 @@
    
 function Slideshow(){
     this.currentIndex = 0;      
-    this.timeInterval = 3500;
+    this.timeInterval = 4500;
     this.init();  
 }
 
@@ -15,24 +15,24 @@ Slideshow.prototype.init = function(){
     $('.slider-choice span').click(function(e){
         this.gotoSlide($(e.currentTarget).text());
     }.bind(this));
-    
+      
     //initialisation
     this.elem = $('#slider');
-    this.elem.find('.slider-item').hide();
+    this.elem.find('.slider-item').hide();   
     this.elem.find('.slider-item:first').show();
     this.elemCurrent = this.elem.find('.slider-item:first');
-   
+     
     //Play slider
     this.items = $('.slider-item');//tous les slides
     this.itemsNb = this.items.length;//nb de slides
     
-    var widthDevice = screen.width;   
-    if (widthDevice > 360){
+
+//    if (widthDevice > 360){
 //        this.playSlider();
         //Passage souris sur le slider
 //        $('.slider-container').mouseover(this.stopSlider.bind(this));
 //        $('.slider-container').mouseout(this.playSlider.bind(this));
-    }   
+//    }   
 };
 
 
