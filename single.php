@@ -1,3 +1,17 @@
+<?php
+//Redirection vers nouveau blog wedogood
+global $post;
+$post_category_list = get_the_category($post->ID);
+$post_category = $post_category_list[0]->slug;
+if ($post_category == "wedogood") {
+	$post_name = $post->post_name;
+	$post_date = get_the_date( 'Y/m/d', $post->ID );
+	$new_url = 'http://blog.wedogood.co/' . $post_date . '/' . $post_name;
+	wp_redirect($new_url);
+	exit();
+}
+?>
+
 <?php get_header(); ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>

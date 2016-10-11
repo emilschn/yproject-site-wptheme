@@ -70,8 +70,9 @@
 			$keep_going = false;
 			$page_edit_orga = get_page_by_path('editer-une-organisation');
 			?>
-			<?php _e( "Vous devez renseigner le RIB de l'organisation.", 'yproject' ); ?><br />
-			<a class="button" href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$organization_obj->organisation_wpref; ?>"><?php __('Editer', 'yproject'); ?></a>
+			<?php _e( "Afin de signer votre autorisation de pr&eacute;l&egrave;vement, vous devez au pr&eacute;alable renseigner le RIB de l'organisation.", 'yproject' ); ?><br />
+			<a class="button" href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$organization_obj->organisation_wpref; ?>"><?php _e('Editer', 'yproject'); ?></a><br /><br />
+			<button class="button disabled"><?php _e( "Signer l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
 			
 		<?php endif; ?>
 		
@@ -89,7 +90,10 @@
 			if ( empty( $saved_mandates_list ) ) {
 				$keep_going = false;
 				if ( !$organization_obj->add_lemonway_mandate() ) {
-					echo LemonwayLib::get_last_error_message();
+					echo LemonwayLib::get_last_error_message(); ?>
+					<a class="button" href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$organization_obj->organisation_wpref; ?>"><?php _e('Editer', 'yproject'); ?></a><br /><br />
+					<button class="button disabled"><?php _e( "Signer l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
+					<?php
 				} else {
 					_e( "Cr&eacute;ation de mandat en cours", 'yproject' );
 				}
