@@ -64,7 +64,7 @@ get_header();
 			?>
 			
 			<?php
-			LemonwayLib::wallet_register_iban( 'SC', 'WE DO GOOD', 'FR7614445202000800123435043', 'CEPAFRPP444', '51 RUE SAINT HELIER 35000 RENNES' );
+//			LemonwayLib::wallet_register_iban( 'SC', 'WE DO GOOD', 'FR7614445202000800123435043', 'CEPAFRPP444', '51 RUE SAINT HELIER 35000 RENNES' );
 			?>
 			
 			<?php // Gérer des virements individuels
