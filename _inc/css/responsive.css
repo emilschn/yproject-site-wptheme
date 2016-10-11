@@ -157,6 +157,19 @@
         #home-video-ref #video-content{
             background: none !important;
         }
+        .home_video{
+            width: 350px !important;
+        }
+        .home_video .video-container{
+            height: 0 !important;
+        }
+        .button-video{
+            width: 350px !important;
+            height: 0 !important;        
+        }
+        .button-video img{
+            width: 360px !important;
+        }
 	/*****************************/
         
 /*******************************************************************************

@@ -1299,11 +1299,13 @@ form.wdg-forms table input[type="text"].reward-text{
     position: absolute;
     z-index: 1;
     display: inline-block;
+    overflow: hidden;
 }
 .wdg-component-slider .slider-container #slider .slider-item .slide { /* image de slide */
-    width: 100%;
+    width: 2000px;
     position: relative;
-    top: -8%;
+    top: -19%;
+    left: -19%;
 }
 
 .wdg-component-slider .slider-container #slider .slider-item .slider-motif-left-haut{
@@ -1325,7 +1327,7 @@ form.wdg-forms table input[type="text"].reward-text{
     z-index: 2;
     right: 0%;
     bottom: -0.6%;
-    width: 77%;
+    width: 76%;
 
 }
 
@@ -1334,7 +1336,7 @@ form.wdg-forms table input[type="text"].reward-text{
     display: flex;
     justify-content: space-around; 
     align-items: center;
-    width: 100px; /*6%*/
+    width: 100px;
     height: 10%;
     position: absolute;
     z-index: 2;
@@ -1367,7 +1369,6 @@ form.wdg-forms table input[type="text"].reward-text{
     top: 26.7%;
     left: 0%;
     width: 74.5%;
-    /*height: 36.8%;258px*/
     padding: 2% 0% 2% 0%;
     background: rgba(0, 86, 99, 0.7);
 }
@@ -1635,6 +1636,9 @@ form.wdg-forms table input[type="text"].reward-text{
     bottom: 0%;
 }
 .wdg-component-projects-preview .project-container .project-framed .project-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;  
     top: 85%;
     background-color: #00879B;

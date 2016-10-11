@@ -156,7 +156,9 @@ date_default_timezone_set("Europe/London");
     <div id="video-content">
         <h1><?php _e("/ comment ça marche ? /", "yproject")?></h1>
         <div class="home_video">
-            <div class="video-container hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 570)); ?></div>
+            <div class="video-container hidden mobile_hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 570)); ?></div>
+            <div class="video-container hidden only_on_mobile"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 350)); ?></div>
+
             <div class="button-video"><img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-nb.jpg" /></div>
             <div class="button-video-shadows mobile_hidden">
                     <img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow2.png" />
@@ -189,31 +191,31 @@ date_default_timezone_set("Europe/London");
 <?php
 //*******************
 //CACHE HOME RESPONSIVE
-$cache_home_responsive = $WDG_cache_plugin->get_cache('home-responsive', 1);
-if ($cache_home_responsive !== FALSE) { echo $cache_home_responsive; }
-else {
-	ob_start();
-?>
+//$cache_home_responsive = $WDG_cache_plugin->get_cache('home-responsive', 1);
+//if ($cache_home_responsive !== FALSE) { echo $cache_home_responsive; }
+//else {
+//	ob_start();
+//?>
 <?php
-$page_finance = get_page_by_path('financement');
-$page_how = get_page_by_path('descriptif');
-?>
-<div id="home-responsive" class="only_on_mobile align-center">
+//$page_finance = get_page_by_path('financement');
+//$page_how = get_page_by_path('descriptif');
+//?>
+<!--<div id="home-responsive" class="only_on_mobile align-center">
 	<h2>Vous avez un projet ?</h2>
 	<p>Avec WEDOGOOD, b&eacute;n&eacute;ficiez d&apos;un financement souple et adapt&eacute; &agrave; vos besoins.</p>
-	<a href="<?php echo get_permalink($page_finance->ID); ?>" class="button red big">Financez votre projet</a>
+	<a href="//<?php echo get_permalink($page_finance->ID); ?>" class="button red big">Financez votre projet</a>
 	<br /><br /><br />
 	<hr />
 	<h2>Comment investir dans un projet ?</h2>
 	<p>Soyez acteurs et influenceurs de la communaut&eacute; !</p>
-	<a href="<?php echo get_permalink($page_finance->ID); ?>" class="button red big">Comment &ccedil;a marche ?</a>
+	<a href="//<?php echo get_permalink($page_finance->ID); ?>" class="button red big">Comment &ccedil;a marche ?</a>
 	<br /><br /><br /><br />
-</div>
+</div>-->
 <?php
-	$cache_home_responsive = ob_get_contents();
-	$WDG_cache_plugin->set_cache('home-responsive', $cache_home_responsive, 60*60*24, 1);
-	ob_end_clean();
-	echo $cache_home_responsive;
-}
+//	$cache_home_responsive = ob_get_contents();
+//	$WDG_cache_plugin->set_cache('home-responsive', $cache_home_responsive, 60*60*24, 1);
+//	ob_end_clean();
+//	echo $cache_home_responsive;
+//}
 //FIN CACHE HOME
 //*******************
