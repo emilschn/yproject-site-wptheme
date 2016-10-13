@@ -16,20 +16,6 @@
  *
  */
 
- @import url("_inc/css/common.css?d=20160929");
- @import url("_inc/css/responsive-inf997.css?d=20160929") (max-width: 997px);
- @import url("_inc/css/responsive.css?d=20160929") (max-width: 767px);
- @import url("_inc/css/responsive-medium.css?d=20160929") (min-width: 768px);
-
- /* FONTS TO LOAD */
- @font-face {
-    font-family: BebasNeue;
-    src: url("fonts/BebasNeue.otf") format("opentype");
-    src: url('fonts/BebasNeue.eot');
-    src: url('fonts/BebasNeue.woff') format('woff'), url('fonts/BebasNeue.ttf') format('truetype'), url('fonts/BebasNeue.svg') format('svg');
-
-}
-
 @font-face{
     font-family: "wedogood";
     src: url('fonts/wedogoodregular-2.ttf') format('truetype');
@@ -856,7 +842,6 @@ form.wdg-forms table input[type="text"].reward-text{
     background: #FFFFFF;
     padding-left: 25px;
     padding-right: 25px;
-    font-family: 'BebasNeue';
     font-size: 35px;
     text-transform: uppercase;
 }
@@ -865,7 +850,6 @@ form.wdg-forms table input[type="text"].reward-text{
     background: #f2f2f1;
     padding-left: 25px;
     padding-right: 25px;
-    font-family: 'BebasNeue';
     font-size: 35px;
     text-transform: uppercase;
 }
@@ -874,7 +858,6 @@ form.wdg-forms table input[type="text"].reward-text{
     background: #3b827f;
     padding-left: 25px;
     padding-right: 25px;
-    font-family: 'BebasNeue';
     font-size: 25px;
     text-transform: uppercase;
     color:#fff;
@@ -1136,7 +1119,6 @@ form.wdg-forms table input[type="text"].reward-text{
     color: #FFF;
     position: absolute;
     text-transform: uppercase;
-    font-family: 'BebasNeue';
     font-size: 32px;
     text-align: center;
 }
@@ -1278,147 +1260,6 @@ form.wdg-forms table input[type="text"].reward-text{
 /*******************************************************************************
 * HOME PAGE
 *******************************************************************************/
-
-/*-----------------------  REFONTE GRAPHIQUE - SLIDER  -----------------------*/
-
-
-
-.wdg-component-slider .slider-container { 
-    min-width: 100%;
-    min-height: 700px;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;/*élément de référence*/
-    overflow: hidden;
-}
-
-
-.wdg-component-slider .slider-container #slider .slider-item{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 1;
-    display: inline-block;
-    overflow: hidden;
-}
-.wdg-component-slider .slider-container #slider .slider-item .slide { /* image de slide */
-    width: 2000px;
-    position: relative;
-    top: -19%;
-    left: -19%;
-}
-
-.wdg-component-slider .slider-container #slider .slider-item .slider-motif-left-haut{
-    position: absolute;
-    z-index: 3;
-    left: 0%;
-    top: 0%;
-    width: 545px;
-}
-.wdg-component-slider .slider-container #slider .slider-item .message-banner .slider-motif-left-bas{
-    position: absolute;
-    z-index: 3;
-    left: 0%;
-    top: 100%;
-    width: 60px;
-}
-.wdg-component-slider .slider-container #slider .slider-item .slider-motif-right{
-    position: absolute;
-    z-index: 2;
-    right: 0%;
-    bottom: -0.6%;
-    width: 76%;
-
-}
-
-
-.wdg-component-slider .slider-container .slider-choice{
-    display: flex;
-    justify-content: space-around; 
-    align-items: center;
-    width: 100px;
-    height: 10%;
-    position: absolute;
-    z-index: 2;
-    left: 46.5%;
-    top: 86%;
-}
-.wdg-component-slider .slider-container .slider-choice .num-slide{
-    width: 15px;/* revoir pour mettre en % *******************/
-    height: 15px;
-    background-color: #fff;
-    cursor: pointer;
-}
-.wdg-component-slider .slider-container .slider-choice .num-slide {
-    color: rgba(0, 0, 0, 0);
-}
-.wdg-component-slider .slider-container .slider-choice .active-slide{
-    background-color: #00879B;
-}
-.wdg-component-slider .slider-container .slider-choice .inactive-slide{
-    background-color: #fff;
-}
-
-/*  Slide 1 */
-.wdg-component-slider .slider-container #slider .slider-item .message-banner{   
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    z-index: 2;
-    top: 26.7%;
-    left: 0%;
-    width: 74.5%;
-    padding: 2% 0% 2% 0%;
-    background: rgba(0, 86, 99, 0.7);
-}
-.wdg-component-slider .slider-container #slider .slider-item .message-banner::after{ 
-    border-top: 284px solid rgba(0, 86, 99, 0.7);
-    border-right: 278px solid transparent;
-    content: "";
-    position: absolute;
-    top: 0px;
-    width: 1%;
-    left: 100%;
-}   
-/*message pour bannière sur screen*/
-.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message{
-    position: relative;
-    text-align: left;
-    line-height: 100%;
-    font-family: wedogood; 
-    font-size: 3.5em;
-    font-weight: bold;
-    color: #FFFFFF;
-    padding-left: 30%;
-    margin: 0;
-}
-.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .mobile-message{
-    display: none;
-}
-
-.wdg-component-slider .slider-container #slider .slide-2buttons #button-container{
-    display: flex;
-    justify-content: center;
-    width: 80%;
-    height: 9%;
-    position: absolute;
-    z-index: 3;
-    top: 75%; 
-    left: 10%;
-}
-
-.wdg-component-slider .slider-container #slider .slide-2buttons #button-container .button-slide{
-    width: 32%; /* px si on veut une taille fixe de bouton sous tablette et pc */
-    text-align: center;
-    font-size: 0.938em;
-    letter-spacing: 0.063em;
-    text-transform: uppercase;   
-    padding: 38% 0%;
-    margin: 0% 1.5%;
-    background-color: #EA4F51;
-    color: #FFFFFF;
-}
 
 /*------------ Partie projets --------------*/
 
@@ -3582,7 +3423,6 @@ ul.invest-mean-payment li img {
 }
 
 .separateur-h4 {
-   font-family: "BebasNeue";
    font-size: 35px;
 }
 

@@ -19,7 +19,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 </div>
 <?php endif; ?>
 
-<header class="wdg-component-slider">
+<header class="wdg-component-slider home-slider">
     <div class="slider-container"> 
         <div class="slider-choice">
             <span class="num-slide active-slide" id="span-1">1</span>
@@ -34,7 +34,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
                             );
             for ($ii = 1; $ii <= count($tabImg); $ii++):
                 ?>
-                <div class="slider-item slide-2buttons" id="slide-<?php echo $ii?>" >
+				<div class="slider-item slide-2buttons" id="slide-<?php echo $ii?>" style="<?php if ($ii > 1){ ?>display: none;<?php } else { ?>left: 0px;<?php } ?>">
                     <img class="slider-motif-left-haut" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-trame-haut-gauche-01.png"/>
                     <img class="slider-motif-right" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-motif-trame-droite.png"/>
                     <img class="slide" id="img-slide-<?php echo $ii?>" src="<?php echo $stylesheet_directory_uri; ?><?php echo $tabImg[$ii] ?>"/> 
@@ -42,9 +42,8 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
                     <?php
                     if($ii === 1):?>
                         <div class="message-banner">
-                                <p class="mobile_hidden screen-message">Nous activons</br>une finance à impact positif</br>en développant<br/>les levées de fonds en royalties</p>
-                                <p class="only_on_mobile inline mobile-message">Nous activons</br>une finance<br/>à impact positif</br>en développant<br/>les levées</br>de fonds</br>en royalties</p>                                                 
-                        <img class="slider-motif-left-bas" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-trame-bas-gauche-01.png"/>
+							<p class="screen-message">Nous activons</br>une finance à impact positif</br>en développant<br/>les levées de fonds en royalties</p>
+							<img class="slider-motif-left-bas" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-trame-bas-gauche-01.png"/>
                         </div>
                         
                         

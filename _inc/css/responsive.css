@@ -131,46 +131,22 @@
 	}
 	header.header_home > div { text-align: center; }
         
-        /***** REFONTE GRAPHIQUE *****/
-        .wdg-component-slider .slider-container #slider .slider-item .message-banner{   
-            height: 80%;
-            width: 100%;
-            left: 0%;
-            top: 15%;
-        }
-        .wdg-component-slider .slider-container #slider .slider-item .message-banner::after{   
-            display: none !important;
-        }
-        .wdg-component-slider .slider-container #slider #slide-1 .message-banner .mobile-message{
-            margin: 0%;
-            text-align: left;
-            font-family: wedogood;
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #FFFFFF;
-        }      
-        
-        .wdg-component-slider .slider-container #slider #slide-1 #button-container .button-slide{
-            flex-flow: column wrap;
-        }
-        
-        #home-video-ref #video-content{
-            background: none !important;
-        }
-        .home_video{
-            width: 350px !important;
-        }
-        .home_video .video-container{
-            height: 0 !important;
-        }
-        .button-video{
-            width: 350px !important;
-            height: 0 !important;        
-        }
-        .button-video img{
-            width: 360px !important;
-        }
-	/*****************************/
+	#home-video-ref #video-content{
+		background: none !important;
+	}
+	.home_video{
+		width: 350px !important;
+	}
+	.home_video .video-container{
+		height: 0 !important;
+	}
+	.button-video{
+		width: 350px !important;
+		height: 0 !important;        
+	}
+	.button-video img{
+		width: 360px !important;
+	}
         
 /*******************************************************************************
 * PROJECT SHORT - MENU

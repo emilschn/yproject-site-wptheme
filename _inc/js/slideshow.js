@@ -8,6 +8,7 @@
 function Slideshow(){
     this.currentIndex = 0;      
     this.timeInterval = 4500;
+	this.intervalId = null;
     this.init();  
 }
 
@@ -27,25 +28,25 @@ Slideshow.prototype.init = function(){
     this.itemsNb = this.items.length;//nb de slides
     
 
-//    if (widthDevice > 360){
-//        this.playSlider();
+    if ($(window).width() > 997){
+        this.playSlider();
         //Passage souris sur le slider
-//        $('.slider-container').mouseover(this.stopSlider.bind(this));
-//        $('.slider-container').mouseout(this.playSlider.bind(this));
-//    }   
+        $('.slider-container').mouseover(this.stopSlider.bind(this));
+        $('.slider-container').mouseout(this.playSlider.bind(this));
+    }
 };
 
 
 Slideshow.prototype.playSlider = function(){  
-    intervalId = setInterval(this.next.bind(this), this.timeInterval);
+    this.intervalId = setInterval(this.next.bind(this), this.timeInterval);
 };
 
 /**
  * Fonction d'arrêt du slider
  */
 Slideshow.prototype.stopSlider = function(){
-    clearInterval(intervalId);  
-    intervalId = null;
+    clearInterval(this.intervalId);  
+    this.intervalId = null;
 };
 
 Slideshow.prototype.next = function(){ 

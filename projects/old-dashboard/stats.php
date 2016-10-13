@@ -155,7 +155,6 @@ function print_block_stats() {
                 legendBorders: false,
                 inGraphDataShow : true,
                 inGraphDataTmpl : "<%=v6%>%",
-                inGraphDataFontFamily : "BebasNeue",
                 inGraphDataFontSize : 25,
                 inGraphDataFontColor : "#FFF",
                 inGraphDataAnglePosition : 2,
