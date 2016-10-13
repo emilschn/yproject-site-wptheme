@@ -65,6 +65,9 @@ nav#main > div > a.lines {
 nav#main > div > a.lines.current, nav#main > div > a.lines:hover, nav#main > div > a.lines:focus {
 	color: #000000;
 }
+nav#main > div > a.lines.select-nav{ /* à faire appliquer dans le JS */
+    color: #000000;
+}
 
 nav#main > div > a.lines::before, nav#main > div > a.lines::after {
     content: '';
@@ -96,7 +99,79 @@ nav#main > div > a.lines.current::before, nav#main > div > a.lines.current::afte
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
 }
+nav#main img#logo_wdg{
+    padding-top: 5px;
+}
+nav#main .search.inactive {
+    border-right: 2px solid #333333;
+    padding-right: 15px;
+}
+nav#main .profil_button{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    margin: 0;
+    text-align: center;
+}
+nav#main .active{
+    background-color: #000000;
+}
+nav#main .profil_button .inactive{
+    background: none;
+}
+/*--------------------------  Box de connexion  ------------------------------*/
 
+#box_connection{
+    padding: 7px;
+}
+#box_connection, #box_connection span, #box_connection h2, #box_connection .model-form #rememberme label, .model-form .input_submit{
+    color: #FFF;
+    font-size: 0.95em; 
+}
+
+#box_connection{
+    position: fixed;
+    z-index: 3;
+    top: 70px;
+    right: 120px;
+    height: 370px;
+    background-color: #000000; /* à modifier avec couleur validée */   
+}
+
+#box_connection .box_connection_buttons{   
+    width: 225px;
+    text-align: center;
+    padding: 15px;
+    margin: 15px;
+}
+#box_connection div.red {
+    background-color: #EA4F51;   
+}
+#box_connection div.blue {
+    background-color: #003cb3;  /* mettre le code couleur validé */
+}
+
+#box_connection span, #box_connection h2{
+    text-transform: uppercase;  
+}
+.model-form .input_connection{
+    margin: 7px 15px; 
+    width: 250px;
+    height: 47px; 
+    border: none;
+}
+.model-form .pwd_submit{
+    width: 212px;
+    margin-right: 0;
+}
+
+.model-form .ok_valid{
+    height: 47px;
+    background-color: #EA4F51;
+    border: none;
+}    
+    
+    
 /*******************************************************************************
 * FOOTER
 *******************************************************************************/

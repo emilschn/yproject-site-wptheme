@@ -74,21 +74,71 @@
 	<body <?php body_class(get_locale()); ?>> 
 		<nav id="main">
 			<div class="center-lg">
-				<a href="<?php echo home_url(); ?>">LOGO</a>
+                            <a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="logo we do good"/></a>
 				<a href="<?php echo home_url( '/vision' ); ?>" class="hidden-inf997 lines"><?php _e( "Vision", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/financement' ); ?>" class="hidden-inf997 lines"><?php _e( "Financer son projet", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/investissement' ); ?>" class="hidden-inf997 lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/les-projets' ); ?>" class="hidden-inf997 lines"><?php _e( "Les projets", 'yproject' ); ?></a>
-				<!--<a href="#">R</a>-->
+                                
+                                <a href="#box_search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png"/></a>
 				<?php if (is_user_logged_in()): ?>
-				<a href="#" class="hidden-inf997">MC</a>
+                                <a href="page-modifier-mon-compte.php" id="avatar" class="hidden-inf997"><img src="<?php //echo WDGUser::get_avatar()?>"/></a> <!-- photo du user à récupérer ici, début de fonction créée dans user.php  -->
 				<?php else: ?>
-				<a href="#" class="hidden-inf997">Co</a>
+				<a href="#box_connection" class="profil_button inactive"><img id="profil_logo" class="hidden-inf997" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png"/></a>
 				<?php endif; ?>
 				<a href="#" class="only-inf997">Burg</a>
 			</div>
 		</nav>
-             
+                <!-- Sur click mon compte, afficher menu connexion -->
+                <div id="box_connection" style="display: none">
+                    <?php if (WDGUser::has_login_errors()): ?>
+                    <div class="errors">
+                            <?php echo WDGUser::display_login_errors(); ?>
+                    </div>
+                    <?php endif; ?>
+
+                    <div id="connexion_facebook_container">                     
+                        <div id="submenu_item_connection_register" class="box_connection_buttons red">
+                            <a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><span><?php _e('Cr&eacute;er un compte', 'yproject'); ?></span></a>
+                        </div>                       
+                    </div>
+                                       
+                    <div id="connexion_facebook_container" class="box_connection_buttons blue">
+                        <a href="javascript:void(0);" class="social_connect_login_facebook"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
+                    </div>
+                                        
+                    <div class="hidden"><?php dynamic_sidebar('sidebar-1'); ?></div>
+
+                    <hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 1px 0 0; color: #FFFFFF; margin: 5% 5%;"/>
+                                      
+                    <form method="post" action="" name="login-form" id="sidebar-login-form" class="model-form">
+                        <h2 style="margin: 5% 5%;"><?php _e('connexion', 'yproject'); ?></h2>
+                        <input class="input_connection" id="identifiant" type="text" name="log" placeholder="Identifiant ou e-mail" value="" />
+                        <br />
+
+                        <input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
+                        <div id="submit-center" style="display: none;">
+                            <input type="submit"  name="wp-submit" class="input_submit" id="connect" value="OK" />
+                            <input type="hidden" id="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
+                            <input type="hidden" name="login-form" value="1" />
+                        </div>   
+                        
+                        <div id="sidebar-login-form-lightbox">
+                            <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
+                            <a href="<?php echo get_permalink($page_forgotten->ID); ?>" style="margin: 0% 5%;"><?php _e('(Mot de passe oubli&eacute)', 'yproject');?></a>
+                        </div>
+
+                        <input id="rememberme" type="checkbox" name="rememberme" value="forever" style="margin: 2% 0% 0% 5%; cursor: pointer;" />
+                        <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
+                        <br />
+
+                                           
+                        <br />
+                    </form>   
+                    
+                    
+                </div>
+                
 		<?php 
 		WDGUser::check_validate_general_terms();
 		if (WDGUser::must_show_general_terms_block()): 
