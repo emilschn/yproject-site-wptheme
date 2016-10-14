@@ -102,7 +102,8 @@ nav#main > div > a.lines.current::before, nav#main > div > a.lines.current::afte
 nav#main img#logo_wdg{
     padding-top: 5px;
 }
-nav#main .search.inactive {
+nav#main img.search {
+    vertical-align:  middle;
     border-right: 2px solid #333333;
     padding-right: 15px;
 }
@@ -113,29 +114,53 @@ nav#main .profil_button{
     margin: 0;
     text-align: center;
 }
+nav#main img#profil_logo{
+    vertical-align: middle;
+}
 nav#main .active{
-    background-color: #000000;
+    background-color: #E1E3E2;
 }
 nav#main .profil_button .inactive{
     background: none;
 }
-/*--------------------------  Box de connexion  ------------------------------*/
 
-#box_connection{
-    padding: 7px;
+
+
+.box-style{
+    background-color: #FFFFFF; 
+    border: 4px solid #E1E3E2;
 }
-#box_connection, #box_connection span, #box_connection h2, #box_connection .model-form #rememberme label, .model-form .input_submit{
-    color: #FFF;
-    font-size: 0.95em; 
+/*--------------------------  Box de recherche  ------------------------------*/
+#box_search{
+    position: fixed;
+    z-index: 3;
+    top: 70px;   
+    right: 200px;
+    width: 250px;
+    height: 50px;
+    font-size: 8pt;
 }
+
+/*--------------------------  Box de connexion  ------------------------------*/
 
 #box_connection{
     position: fixed;
     z-index: 3;
     top: 70px;
     right: 120px;
-    height: 370px;
-    background-color: #000000; /* à modifier avec couleur validée */   
+    height: 360px; 
+    font-size: 8pt;
+}
+
+#box_connection span, .model-form .input_submit{
+    color: #FFF;
+}
+#box_connection h2, #box_connection .model-form label{
+    color: #000000;
+}
+#box_connection .model-form label{
+    font-size: 10pt;
+    margin-left: 5px;
 }
 
 #box_connection .box_connection_buttons{   
@@ -143,32 +168,40 @@ nav#main .profil_button .inactive{
     text-align: center;
     padding: 15px;
     margin: 15px;
+    font-size: 11pt;
 }
 #box_connection div.red {
     background-color: #EA4F51;   
 }
 #box_connection div.blue {
-    background-color: #003cb3;  /* mettre le code couleur validé */
+    background-color: #3B5998;  /* code couleur facebook */
 }
 
-#box_connection span, #box_connection h2{
+#box_connection span, #box_connection h2, #box_connection .model-form label{
     text-transform: uppercase;  
 }
 .model-form .input_connection{
     margin: 7px 15px; 
     width: 250px;
-    height: 47px; 
+    height: 40px; 
     border: none;
+    background-color: #E1E3E2;
+    color: #6F777D;
+    letter-spacing: 1px;
+    font-family: Trebuchet MS, sans-serif;
+    padding: 5px;
 }
 .model-form .pwd_submit{
-    width: 212px;
+    width: 200px;
     margin-right: 0;
 }
 
 .model-form .ok_valid{
-    height: 47px;
+    width: 50px;
+    height: 50px;
     background-color: #EA4F51;
     border: none;
+    cursor: pointer;
 }    
     
     

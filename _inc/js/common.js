@@ -52,18 +52,17 @@ YPUIFunctions = (function($) {
                         $('.profil_button').click(function(e){
                             if($('.profil_button').hasClass('inactive')){
                                 $('.profil_button').addClass('active').removeClass('inactive');
-                                $('#profil_logo').attr('src', 'http://localhost/wdg/wp-content/themes/yproject/images/navbar/profil-icon-blanc.png');
                                 $('#box_connection').css('display', 'inline-block');
                             }
                             else if($('.profil_button').hasClass('active')){                           
                                 $('.profil_button').removeClass('active').addClass('inactive');
-                                $('#profil_logo').attr('src', 'http://localhost/wdg/wp-content/themes/yproject/images/navbar/profil-icon-noir.png');
                                 $('#box_connection').css('display', 'none');
                             }
                         });
+                        //Bouton recherche de la navbar
+                        ///// à coder
+
                         //Apparition bouton OK pour connexion
-//                        $('.model-form input#password').removeClass('pwd_submit');
-//                        $('.model-form input#connect').removeClass('ok_valid');
                         $('.model-form #password').keypress(function(){
                             $('.model-form #submit-center').css('display', 'inline');
                             $('.model-form input#password').addClass('pwd_submit');

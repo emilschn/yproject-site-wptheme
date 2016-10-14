@@ -81,7 +81,7 @@
 				<a href="<?php echo home_url( '/les-projets' ); ?>" class="hidden-inf997 lines"><?php _e( "Les projets", 'yproject' ); ?></a>
                                 
                                 <a href="#box_search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png"/></a>
-				<?php if (is_user_logged_in()): ?>
+                                <?php if (is_user_logged_in()): ?>
                                 <a href="page-modifier-mon-compte.php" id="avatar" class="hidden-inf997"><img src="<?php //echo WDGUser::get_avatar()?>"/></a> <!-- photo du user à récupérer ici, début de fonction créée dans user.php  -->
 				<?php else: ?>
 				<a href="#box_connection" class="profil_button inactive"><img id="profil_logo" class="hidden-inf997" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png"/></a>
@@ -89,8 +89,15 @@
 				<a href="#" class="only-inf997">Burg</a>
 			</div>
 		</nav>
+                
+                <!-- Sur click mon recherche, afficher champ de recherche -->
+                <div id="box_search" class="box-style" style="display: inline-block;">
+                    
+                </div>
+            
+            
                 <!-- Sur click mon compte, afficher menu connexion -->
-                <div id="box_connection" style="display: none">
+                <div id="box_connection" class="box-style" style="display: none">
                     <?php if (WDGUser::has_login_errors()): ?>
                     <div class="errors">
                             <?php echo WDGUser::display_login_errors(); ?>
@@ -109,16 +116,16 @@
                                         
                     <div class="hidden"><?php dynamic_sidebar('sidebar-1'); ?></div>
 
-                    <hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 1px 0 0; color: #FFFFFF; margin: 5% 5%;"/>
+                    <hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 2px 0 0; color: #000000; margin: 5% 5%;"/>
                                       
                     <form method="post" action="" name="login-form" id="sidebar-login-form" class="model-form">
-                        <h2 style="margin: 5% 5%;"><?php _e('connexion', 'yproject'); ?></h2>
+                        <h2 style="margin: 0% 5%;"><?php _e('connexion', 'yproject'); ?></h2>
                         <input class="input_connection" id="identifiant" type="text" name="log" placeholder="Identifiant ou e-mail" value="" />
                         <br />
 
                         <input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
-                        <div id="submit-center" style="display: none;">
-                            <input type="submit"  name="wp-submit" class="input_submit" id="connect" value="OK" />
+                        <div id="submit-center" style="display: none;">             
+                            <input type="submit"  name="wp-submit" class="input_submit" id="connect" value="OK"/>
                             <input type="hidden" id="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
                             <input type="hidden" name="login-form" value="1" />
                         </div>   
