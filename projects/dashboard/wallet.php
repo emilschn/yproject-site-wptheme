@@ -16,6 +16,7 @@
 	WDGFormProjects::form_proceed_roi_transfers();
 	$campaign_organization = $campaign->get_organisation();
 	$organization_obj = new YPOrganisation( $campaign_organization->organisation_wpref );
+	$mandate_conditions = $campaign->mandate_conditions();
 
 	$params_full = ''; $params_partial = '';
 	if (isset($_GET['preview']) && $_GET['preview'] = 'true') { $params_full = '?preview=true'; $params_partial = '&preview=true'; }
@@ -54,9 +55,23 @@
 					)
 				) ); ?>
 
+				<?php DashboardUtility::create_field(array(
+					"id"			=> "new_mandate_conditions",
+					"type"			=> "editor",
+					"label"			=> __( "Conditions contractuelles", 'yproject' ),
+					"value"			=> $mandate_conditions,
+					"editable"		=> $is_admin,
+					"admin_theme"	=> $is_admin,
+					"visible"		=> $is_admin,
+				)); ?>
+
 				<?php DashboardUtility::create_save_button( "forcemandate-form", $is_admin ); ?>
-				
 			</form>
+		<?php elseif ( !empty( $mandate_conditions ) ) : ?>
+		
+			<strong><?php _e( "Conditions contractuelles pour la signature du mandat de pr&eacute;l&egrave;vement", 'yproject' ) ?></strong><br />
+			<?php echo $mandate_conditions; ?><br /><br />
+		
 		<?php endif; ?>
 		
 		
