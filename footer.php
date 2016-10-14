@@ -3,13 +3,13 @@
 <?php
 //*******************
 //CACHE FOOTER
-global $WDG_cache_plugin, $client_context;
+global $WDG_cache_plugin, $client_context, $stylesheet_directory_uri;
 $cache_footer = $WDG_cache_plugin->get_cache('footer', 3);
 if ($cache_footer !== FALSE && empty($client_context)) { echo $cache_footer; }
 else {
 	ob_start();
 ?>
-		<footer class="bg-dark-gray<?php if (!empty($client_context)) { ?> theme-<?php echo $client_context; ?><?php } ?>">
+		<footer class="bg-dark-gray<?php if (!empty($client_context)) { ?> theme-<?php echo $client_context; ?><?php } ?>" style="background-image: url(<?php echo $stylesheet_directory_uri; ?>/images/footer/trame-footer.png)">
 		    <section class="center-lg">
 
 				<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) : ?>
@@ -43,15 +43,15 @@ else {
 								<?php echo do_shortcode('[mc4wp_form]'); ?>
 							<?php endif; ?>
 						</div>
-
-						<a href="https://www.facebook.com/wedogood.co" target="_blank">Facebook</a>
-						<a href="https://twitter.com/wedogood_co" target="_blank">Twitter</a>
-						<a href="https://www.linkedin.com/company/3171289" target="_blank">LinkedIn</a>
-						<a href="https://www.wedogood.co/rss.xml" target="_blank"><?php _e("Flux RSS", 'yproject'); ?></a>
-
+                                                <div style="margin: 30px 0px;">
+                                                        <a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook"/></a>
+                                                        <a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter"/></a>
+                                                        <a class="social_network" href="https://www.linkedin.com/company/3171289" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin"/></a>
+                                                        <a class="social_network" href="https://www.wedogood.co/rss.xml" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-rss.jpg" alt="<?php _e("Flux RSS", 'yproject'); ?>"/></a>
+                                                </div>
 
 						<div>
-							<a href="<?php echo home_url('/contact'); ?>"><?php _e( "Nous contacter", 'yproject' ); ?></a>
+							<a class="link" href="<?php echo home_url('/contact'); ?>"><?php _e( "Contactez-nous", 'yproject' ); ?></a>
 						</div>
 					</div>
 				<?php endif; ?>
@@ -60,12 +60,20 @@ else {
 				
 			</section>
 			
-			<section class="center-lg">
-				<div>
-					<a href="http://www.lemonway.fr" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-lemonway.png" alt="logo Lemonway" /></a><br />
-					Partenaire de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l’ACPR en France le 24/12/2012 sous le num&eacute;ro 16568J.
-				</div>
+			<section class="center-lg">							
+                                <div>
+                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/membre-FPF.png" alt="logo membre financement participatif France" width="150px"/>
+                                </div>
 
+                                <div class="lines" id="finance_innovation">
+                                    <p class="label"><?php _e("Agréée par", 'yproject')?></p>
+                                    <a href="http://www.finance-innovation.org/"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/finance-innovation-logo.png" alt="logo finance innovation" width="180px"/></a>
+                                </div>
+
+                                <div id="lemonway">
+					<a href="http://www.lemonway.fr" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/lemonway-gris.png" alt="logo Lemonway" width="278px"/></a><br />
+                                        <p class="lines">Partenaire de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l’ACPR en France le 24/12/2012 sous le num&eacute;ro 16568J.</p>
+				</div>
 				<?php if ( is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>
 				<div>
 					<ul>
@@ -74,19 +82,14 @@ else {
 				</div>
 				<?php endif; ?>
 
-				<div>
-					<a href="http://www.lemonway.fr" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-lemonway.png" alt="logo Lemonway" /></a><br />
-					Partenaire de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l’ACPR en France le 24/12/2012 sous le num&eacute;ro 16568J.
-				</div>
-
 				<div class="clear"></div>
 
 				<div class="aligncenter" role="contentinfo">
 					<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/">
-						<img alt="Licence Creative Commons" width="25" height="25" style="vertical-align: middle" src="<?php echo get_stylesheet_directory_uri(); ?>/images/cc_logo.png" /> Some rights reserved
+						<img alt="Licence Creative Commons" width="20" height="20" style="vertical-align: middle" src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/cc_logo_noir.jpg" /> Some rights reserved
 					</a>
-					<span>Plateforme d&apos;investissement participatif &agrave; impact positif.</span>
 				</div>
+                                
 			</section>
 		</footer>
 

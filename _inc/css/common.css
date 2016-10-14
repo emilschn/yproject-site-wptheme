@@ -175,10 +175,16 @@ nav#main .profil_button .inactive{
 /*******************************************************************************
 * FOOTER
 *******************************************************************************/
+
+footer.bg-dark-gray {
+    background-repeat: no-repeat;
+    background-size: 66%;
+}
+
 footer > section:first-child { padding: 25px 0px 35px; }
 footer > section:nth-child(2) { background: #FFFFFF; }
 footer h3 {
-	font-size: 13pt;
+	font-size: 18pt;
 	font-weight: bold;
 	text-transform: uppercase;
 	color: #E1E2E2;
@@ -188,10 +194,21 @@ footer ul {
 }
 footer li {
 	list-style: none;
+        margin: 8px 0px;
+        
+}
+footer a{
+        font-size: 15pt;
 }
 footer a::before {
 	content: "/";
-	margin-right: 20px;
+	margin-right: 30px;
+}
+footer a.social_network::before{
+        display: none;
+}
+footer a.social_network{
+        margin-right: 20px;
 }
 footer a {
 	font-weight: normal;
@@ -202,7 +219,93 @@ footer > section > div {
 	float: left;
 	width: 33%;
 }
+
+/* Footer 2nd partie*/
+footer > section:nth-child(2) > div > a::before {
+        display: none;
+}
+footer > section:nth-child(2) > div {
+        margin: 30px 20px;
+
+}
+footer > section:nth-child(2) > div:nth-child(1){
+        width: 12%;
+        margin-left: 5%;
+}
+footer > section:nth-child(2) > div:nth-child(2){
+        position: relative;
+        width: 14%;
+        margin-top: 6%;
+        margin-left: 6%;
+}
+footer > section:nth-child(2) > div:nth-child(3){
+        width: 20%;
+        margin: 2% 0% 0% 8%;
+}
+footer > section:nth-child(2) > div:nth-child(4){
+        width: 20%;
+        margin-left: 5%;
+}
+footer p.label {
+        position: absolute;
+        background-color: #FFFFFF;
+        padding: 0 10px;
+        margin-left: 3.5%;
+        top: -30px;
+        left: 18%;
+        letter-spacing: 2px;
+}
+footer > section div#lemonway p {
+        font-size: 10pt;       
+}
+footer > section div#lemonway p.lines, footer div.lines {
+        border-top: 2px solid #333333;
+        border-bottom: 2px solid #333333;
+        padding: 2% 0%;
+        text-align: justify;
+        color: #333333;
+        line-height: 150%;
+        margin-left: 12px;
+}
+footer div.lines{
+        padding: 1% 0%;
+}
+footer > section:nth-child(2) > div:nth-child(4) a {
+        text-transform: none;
+        font-size: 10pt;   
+        font-style: italic;
+        letter-spacing: 1px;
+        color: #333333;
+}
+footer > section:nth-child(2) > div:nth-child(4) li {
+        text-align: right;   
+        margin: 0;
+}
+footer > section:nth-child(2) > div:nth-child(4) h3 {
+        display: none;
+}
+footer > section:nth-child(2) > div:nth-child(4) a::before {
+        display: none;
+}
+footer > section:nth-child(2) > div:nth-child(4) a::after {
+        content: "/";
+        margin-left: 2%;
+}
+
 footer > section > div.clear, footer > section > div.aligncenter {
 	float: none;
 	width: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+}
+footer > section > div.clear {
+        border-top: 2px solid #333333;
+        width: 60%;
+        margin: auto;
+}
+footer > section:nth-child(2) > div:last-child a{
+        text-transform: none;
+        font-size: 12pt;   
+        color: #333333;
+        margin: 2%;
 }
