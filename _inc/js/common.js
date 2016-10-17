@@ -44,9 +44,33 @@ YPUIFunctions = (function($) {
 			});
 			$("nav#main a.lines").click(function(e) {
 				$("nav#main a.lines").removeClass("current");
-				$(this).addClass("current");
+				$(this).addClass("current"); 
+                                $(this).addClass("select-nav");
 			});
+                        
+                        // Bouton connection de la nav bar
+                        $('.profil_button').click(function(e){
+                            if($('.profil_button').hasClass('inactive')){
+                                $('.profil_button').addClass('active').removeClass('inactive');
+                                $('#box_connection').css('display', 'inline-block');
+                            }
+                            else if($('.profil_button').hasClass('active')){                           
+                                $('.profil_button').removeClass('active').addClass('inactive');
+                                $('#box_connection').css('display', 'none');
+                            }
+                        });
+                        //Bouton recherche de la navbar
+                        ///// à coder
 
+                        //Apparition bouton OK pour connexion
+                        $('.model-form #password').keypress(function(){
+                            $('.model-form #submit-center').css('display', 'inline');
+                            $('.model-form input#password').addClass('pwd_submit');
+                            $('.model-form input#connect').addClass('ok_valid');
+                        });
+                        
+                        
+                        
 			$(".expandator").css("cursor", "pointer");
 			$(".expandable").not(".default-expanded").hide();
 			$(".expandator").click(function() {
