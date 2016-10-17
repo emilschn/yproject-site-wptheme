@@ -42,35 +42,42 @@ YPUIFunctions = (function($) {
 					$(".responsive-fixed").removeClass("fixed");
 				}
 			});
+			
+			
 			$("nav#main a.lines").click(function(e) {
 				$("nav#main a.lines").removeClass("current");
 				$(this).addClass("current"); 
                                 $(this).addClass("select-nav");
 			});
-                        
-                        // Bouton connection de la nav bar
-                        $('.profil_button').click(function(e){
-                            if($('.profil_button').hasClass('inactive')){
-                                $('.profil_button').addClass('active').removeClass('inactive');
-                                $('#box_connection').css('display', 'inline-block');
-                            }
-                            else if($('.profil_button').hasClass('active')){                           
-                                $('.profil_button').removeClass('active').addClass('inactive');
-                                $('#box_connection').css('display', 'none');
-                            }
-                        });
-                        //Bouton recherche de la navbar
-                        ///// à coder
+            
+			// Bouton connection de la nav bar
+			$('#btn-profile').click(function(e){
+				e.preventDefault();
+				if ($('#btn-profile').hasClass('inactive')) {
+					$('#btn-profile').addClass('active').removeClass('inactive');
+					$('#box-connection').show();
+				} else if ($('#btn-profile').hasClass('active')) {                           
+					$('#btn-profile').removeClass('active').addClass('inactive');
+					$('#box-connection').hide();
+				}
+			});
+			//Apparition bouton OK pour connexion
+			if ($('.model-form #password').val() !== "" && $('.model-form #password').val() !== undefined) {
+				$('.model-form #submit-center').css('display', 'inline');
+				$('.model-form input#password').addClass('pwd_submit');
+				$('.model-form input#connect').addClass('ok_valid');
+				
+			} else {
+				$('.model-form #password').keypress(function(){
+					$('.model-form #submit-center').css('display', 'inline');
+					$('.model-form input#password').addClass('pwd_submit');
+					$('.model-form input#connect').addClass('ok_valid');
+				});
+			}
+			
+			//Bouton recherche de la navbar
+			///// à coder
 
-                        //Apparition bouton OK pour connexion
-                        $('.model-form #password').keypress(function(){
-                            $('.model-form #submit-center').css('display', 'inline');
-                            $('.model-form input#password').addClass('pwd_submit');
-                            $('.model-form input#connect').addClass('ok_valid');
-                        });
-                        
-                        
-                        
 			$(".expandator").css("cursor", "pointer");
 			$(".expandable").not(".default-expanded").hide();
 			$(".expandator").click(function() {

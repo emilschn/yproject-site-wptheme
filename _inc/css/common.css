@@ -36,7 +36,7 @@ nav#main {
 	height: 60px;
 }
 
-nav#main > div {
+nav#main > div#menu {
 	background: #FFFFFF;
 	text-align: right;
 	width: calc(100% - 40px);
@@ -45,9 +45,12 @@ nav#main > div {
 	padding: 10px;
 }
 
-nav#main > div > a {
+nav#main > div#menu > a {
+	display: inline-block;
 	margin: 0px 7px;
 	line-height: 40px;
+	height: 40px;
+	vertical-align: middle;
 	font-size: 13pt;
 	letter-spacing: 2px;
 	text-transform: uppercase;
@@ -55,21 +58,25 @@ nav#main > div > a {
 	-webkit-transition: color 0.4s;
 	transition: color 0.4s;
 }
-nav#main > div > a:nth-child(1) {
-	float: left;
+nav#main > div#menu > a.only-inf997 {
+	display: none;
 }
-nav#main > div > a.lines {
+nav#main > div#menu > a:nth-child(1) {
+	float: left;
+	height: 40px;
+}
+nav#main > div#menu > a.lines {
 	display: inline-block;
 	position: relative;
 }
-nav#main > div > a.lines.current, nav#main > div > a.lines:hover, nav#main > div > a.lines:focus {
+nav#main > div#menu > a.lines.current, nav#main > div#menu > a.lines:hover, nav#main > div#menu > a.lines:focus {
 	color: #000000;
 }
-nav#main > div > a.lines.select-nav{ /* à faire appliquer dans le JS */
+nav#main > div#menu > a.lines.select-nav{ /* à faire appliquer dans le JS */
     color: #000000;
 }
 
-nav#main > div > a.lines::before, nav#main > div > a.lines::after {
+nav#main > div#menu > a.lines::before, nav#main > div#menu > a.lines::after {
     content: '';
     position: absolute;
     left: 0;
@@ -81,17 +88,17 @@ nav#main > div > a.lines::before, nav#main > div > a.lines::after {
     -webkit-transition: -webkit-transform 0.2s;
     transition: transform 0.2s;
 }
-nav#main > div > a.lines::before {
+nav#main > div#menu > a.lines::before {
     top: 0;
     -webkit-transform-origin: 0 50%;
     transform-origin: 0 50%;
 }
-nav#main > div > a.lines::after {
+nav#main > div#menu > a.lines::after {
     bottom: 0;
     -webkit-transform-origin: 100% 50%;
     transform-origin: 100% 50%;
 }
-nav#main > div > a.lines.current::before, nav#main > div > a.lines.current::after {
+nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.current::after {
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
     -webkit-transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -99,29 +106,33 @@ nav#main > div > a.lines.current::before, nav#main > div > a.lines.current::afte
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
 }
-nav#main img#logo_wdg{
-    padding-top: 5px;
-}
-nav#main img.search {
+nav#main > div#menu > a#btn-search > img {
     vertical-align:  middle;
-    border-right: 2px solid #333333;
-    padding-right: 15px;
+    padding-right: 5px;
 }
-nav#main .profil_button{
+nav#main > div#menu > a#btn-profile {
     display: inline-block;
-    width: 60px;
-    height: 60px;
     margin: 0;
     text-align: center;
+	border-left: 2px solid #333333;
+	padding-left: 15px;
+	padding-right: 5px;
+    background: none;
 }
-nav#main img#profil_logo{
+nav#main > div#menu > a#btn-profile > img {
     vertical-align: middle;
 }
-nav#main .active{
+nav#main > div#menu > a#btn-profile.active {
+	border-left: 2px solid #E1E3E2;;
     background-color: #E1E3E2;
+	margin-top: -10px;
+	height: 60px;
+	padding-right: 15px;
+	margin-right: -10px;
+	margin-bottom: -10px;
 }
-nav#main .profil_button .inactive{
-    background: none;
+nav#main > div#menu > a#btn-profile.active > img {
+	margin-top: 15px;
 }
 
 
@@ -131,7 +142,7 @@ nav#main .profil_button .inactive{
     border: 4px solid #E1E3E2;
 }
 /*--------------------------  Box de recherche  ------------------------------*/
-#box_search{
+#box-search{
     position: fixed;
     z-index: 3;
     top: 70px;   
@@ -142,47 +153,52 @@ nav#main .profil_button .inactive{
 }
 
 /*--------------------------  Box de connexion  ------------------------------*/
-
-#box_connection{
-    position: fixed;
-    z-index: 3;
-    top: 70px;
-    right: 120px;
-    height: 360px; 
+#box-connection {
+	position: relative;
+	float: right;
+    top: 10px;
+    right: -10px;
+	width: 285px;
+    height: 360px;
     font-size: 8pt;
 }
-
-#box_connection span, .model-form .input_submit{
-    color: #FFF;
-}
-#box_connection h2, #box_connection .model-form label{
-    color: #000000;
-}
-#box_connection .model-form label{
-    font-size: 10pt;
-    margin-left: 5px;
+#box-connection span {
+    text-transform: uppercase;  
 }
 
-#box_connection .box_connection_buttons{   
+#box-connection div.box_connection_buttons {   
     width: 225px;
     text-align: center;
     padding: 15px;
     margin: 15px;
     font-size: 11pt;
 }
-#box_connection div.red {
-    background-color: #EA4F51;   
+#box-connection div.box_connection_buttons.red { background-color: #EA4F51; }
+#box-connection div.box_connection_buttons.blue { background-color: #3B5998; }
+#box-connection div.box_connection_buttons span { color: #FFF; }
+
+#box-connection form#sidebar-login-form {
+	text-align: left;
 }
-#box_connection div.blue {
-    background-color: #3B5998;  /* code couleur facebook */
+#box-connection form#sidebar-login-form span#title-connection {
+	font-size: 11pt;
+	padding-left: 15px;
+}
+#box-connection form#sidebar-login-form label {
+    font-size: 10pt;
+    margin-left: 5px;
+    text-transform: uppercase;
+}
+#box-connection form#sidebar-login-form input#rememberme {
+	margin-left: 15px;
 }
 
-#box_connection span, #box_connection h2, #box_connection .model-form label{
-    text-transform: uppercase;  
+#box-connection form#sidebar-login-form .input_submit {
+    color: #FFF;
 }
-.model-form .input_connection{
+#box-connection form#sidebar-login-form .input_connection {
     margin: 7px 15px; 
-    width: 250px;
+    width: 246px;
     height: 40px; 
     border: none;
     background-color: #E1E3E2;
@@ -191,12 +207,12 @@ nav#main .profil_button .inactive{
     font-family: Trebuchet MS, sans-serif;
     padding: 5px;
 }
-.model-form .pwd_submit{
-    width: 200px;
-    margin-right: 0;
+#box-connection form#sidebar-login-form .pwd_submit {
+    width: 193px;
+    margin-right: 0px;
 }
 
-.model-form .ok_valid{
+#box-connection form#sidebar-login-form .ok_valid {
     width: 50px;
     height: 50px;
     background-color: #EA4F51;
