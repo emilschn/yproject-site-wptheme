@@ -11,6 +11,9 @@ ob_start();
 	<ul id="lightbox_userinfo_form_errors" class="errors">
 		
 	</ul>
+
+	<label for="update_email" class="standard-label"><?php _e( 'E-mail', 'yproject' ); ?> *</label>
+	<input type="text" name="update_email" id="update_email" value="<?php echo $WDGUser_current->wp_user->user_email; ?>" /><br />
 	
 	<label for="update_gender" class="standard-label"><?php _e("Vous &ecirc;tes", 'yproject'); ?> *</label>
 	<select name="update_gender" id="update_gender">
