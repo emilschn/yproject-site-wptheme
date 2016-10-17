@@ -12,7 +12,6 @@
 }
 
 #ndashboard .page-dashboard .head {
-    font-family: 'BebasNeue';
     font-size: 35px;
     text-transform: uppercase;
     text-align: center;
@@ -97,7 +96,6 @@
 }
 
 #ndashboard-navbar .title {
-    font-family: 'BebasNeue';
     font-size: 34px;
     text-transform: uppercase;
     margin-bottom: 10px;
@@ -328,20 +326,17 @@
 }
 
 #ndashboard .data-blocks .stat-big-number {
-    font-family: "BebasNeue";
     font-size: 80px;
     padding-top: 10px;
 }
 
 #ndashboard .data-blocks .stat-little-number {
-    font-family: "BebasNeue";
     font-size: 22px;
     margin-top: -12px;
     padding-bottom: 15px;
 }
 
 #ndashboard .data-blocks .stat-little-number-top {
-    font-family: "BebasNeue";
     font-size: 26px;
     padding-bottom: 0px;
     margin-bottom: -40px;

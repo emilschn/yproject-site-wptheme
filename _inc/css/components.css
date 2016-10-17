@@ -1,0 +1,186 @@
+/*******************************************************************************
+* WDG SLIDER - HOME
+*******************************************************************************/
+.wdg-component-slider .slider-container { 
+    width: 100%;
+    height: 601px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.wdg-component-slider .slider-container #slider .slider-item {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    display: inline-block;
+    overflow: hidden;
+}
+.wdg-component-slider .slider-container #slider .slider-item .slide {
+    width: 2000px;
+    position: relative;
+    top: -19%;
+    left: -19%;
+}
+
+.wdg-component-slider .slider-container #slider .slider-item .slider-motif-left-haut {
+    position: absolute;
+    z-index: 3;
+    left: 0%;
+    top: 0%;
+}
+.wdg-component-slider .slider-container #slider .slider-item .message-banner .slider-motif-left-bas {
+    position: absolute;
+    z-index: 3;
+    left: 0%;
+    top: 100%;
+    width: 60px;
+}
+.wdg-component-slider .slider-container #slider .slider-item .slider-motif-right {
+    position: absolute;
+    z-index: 2;
+    right: 0px;
+    bottom: -4px;
+}
+
+
+.wdg-component-slider .slider-container #slider .slider-item .message-banner {
+    position: absolute;
+    z-index: 2;
+    top: 148px;
+    left: 0px;
+    width: calc(100% - 282px);
+	height: 280px;
+    background: rgba(0, 86, 99, 0.7);
+}
+.wdg-component-slider .slider-container #slider .slider-item .message-banner::after{ 
+    border-top: 280px solid rgba(0, 86, 99, 0.7);
+    border-right: 274px solid transparent;
+    content: "";
+    position: absolute;
+    top: 0px;
+    width: 0%;
+    left: 100%;
+}
+
+/*message pour bannière sur screen*/
+.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message{
+	margin: 42px 0px;
+    padding-left: 30%;
+    position: relative;
+    line-height: 100%;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: wedogood;
+    text-align: left;
+    color: #FFFFFF;
+}
+.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .mobile-message{
+    display: none;
+}
+
+.wdg-component-slider .slider-container #slider .slide-2buttons #button-container{
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    height: 9%;
+    position: absolute;
+    z-index: 3;
+    top: 450px; 
+    left: 10%;
+}
+.wdg-component-slider .slider-container #slider .slide-2buttons #button-container .button-slide{
+    width: 32%;
+    text-align: center;
+    font-size: 0.938em;
+    letter-spacing: 0.063em;
+    text-transform: uppercase;   
+    padding: 38% 0%;
+    margin: 0% 1.5%;
+    background-color: #EA4F51;
+    color: #FFFFFF;
+}
+
+
+.wdg-component-slider .slider-container .slider-choice {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    width: 100px;
+    height: 10%;
+    position: absolute;
+    z-index: 2;
+    left: 46.5%;
+    top: 86%;
+}
+.wdg-component-slider .slider-container .slider-choice .num-slide{
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    cursor: pointer;
+}
+.wdg-component-slider .slider-container .slider-choice .num-slide {
+    color: rgba(0, 0, 0, 0);
+}
+.wdg-component-slider .slider-container .slider-choice .active-slide{
+    background-color: #00879B;
+}
+.wdg-component-slider .slider-container .slider-choice .inactive-slide{
+    background-color: #fff;
+}
+
+/* RESPONSIVE - Cas spécifique affichage slider home */
+@media screen and (max-width: 1220px) {
+	.wdg-component-slider.home-slider .slider-container #slider .slide-2buttons .message-banner .screen-message {
+		padding-left: 20%;
+	}
+}
+@media screen and (max-width: 1100px) {
+	.wdg-component-slider.home-slider .slider-container #slider .slide-2buttons .message-banner .screen-message {
+		padding-left: 15%;
+		font-size: 46px;
+		margin: 48px 0px;
+	}
+}
+@media screen and (max-width: 997px) {
+	.wdg-component-slider.home-slider .slider-container .slider-choice,
+	.wdg-component-slider.home-slider .slider-container #slider .slider-item .message-banner .slider-motif-left-bas,
+	.wdg-component-slider.home-slider .slider-container #slider .slider-item .slider-motif-right,
+	.wdg-component-slider.home-slider .slider-container #slider .slider-item .message-banner::after { display: none; }
+	.wdg-component-slider.home-slider .slider-container #slider .slider-item .message-banner {
+		width: 100%;
+		display: flex;
+		align-items: center;
+	}
+	.wdg-component-slider.home-slider .slider-container #slider .slide-2buttons .message-banner .screen-message {
+		margin: 0px;
+	}
+	.wdg-component-slider.home-slider .slider-container #slider .slide-2buttons #button-container {
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.wdg-component-slider.home-slider .slider-container #slider #slide-1 #button-container .button-slide {
+		flex-flow: column wrap;
+		margin-bottom: 10px;
+		width: 50%;
+		min-width: 250px;
+	}
+}
+@media screen and (max-width: 620px) {
+	.wdg-component-slider.home-slider .slider-container #slider .slider-item .message-banner {
+		top: 100px;
+	}
+	.wdg-component-slider.home-slider .slider-container #slider .slider-item .slider-motif-left-haut {
+		display: none;
+	}
+	.wdg-component-slider.home-slider .slider-container #slider .slide-2buttons .message-banner .screen-message {
+		font-size: 40px;
+		padding-left: 10%;
+	}
+	.wdg-component-slider.home-slider .slider-container #slider .slide-2buttons #button-container {
+		top: 415px;
+	}
+}
