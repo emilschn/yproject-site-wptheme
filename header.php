@@ -88,9 +88,9 @@
                                 
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
 				<?php if (is_user_logged_in()): ?>
-				<a href="page-modifier-mon-compte.php" id="avatar" class="hidden-inf997"><img src="<?php //echo WDGUser::get_avatar()?>"/></a> <!-- photo du user à récupérer ici, début de fonction créée dans user.php  -->
+				<a href="#" class="btn-user hidden-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-par-defaut.png" alt="USER" /></a>
 				<?php else: ?>
-				<a href="#" id="btn-profile" class="inactive"><img class="hidden-inf997" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="MENU" /></a>
+				<a href="#" class="btn-user hidden-inf997 inactive"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
 				<?php endif; ?>
 				<a href="#" class="only-inf997">Burg</a>
 				
@@ -100,14 +100,17 @@
 
 				</div>
 
-				<?php /* Sur click mon compte, afficher menu connexion */ ?>
-				<div id="box-connection" class="box-style hidden">
-					<?php if (WDGUser::has_login_errors()): ?>
-					<div class="errors">
-						<?php echo WDGUser::display_login_errors(); ?>
-					</div>
-					<?php endif; ?>
-                
+				<div id="submenu-user" class="box-style hidden">
+				<?php if (is_user_logged_in()): ?>
+					<?php /* Au clic picto Compte, afficher menu utilisateur */ ?>
+					<?php global $current_user; get_currentuserinfo();
+					$user_name_str = ($current_user->user_firstname != '') ? $current_user->user_firstname : $current_user->user_login;
+					?>
+					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
+				
+				
+				<?php else: ?>
+					<?php /* Au clic picto Compte, afficher menu connexion */ ?>
 					<div class="box_connection_buttons red">
 						<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><span><?php _e('Cr&eacute;er un compte', 'yproject'); ?></span></a>
 					</div>
@@ -142,6 +145,7 @@
 						<br />
 						<br />
 					</form>
+				<?php endif; ?>
 				</div>
 				
 			</div>

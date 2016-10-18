@@ -110,7 +110,7 @@ nav#main > div#menu > a#btn-search > img {
     vertical-align:  middle;
     padding-right: 5px;
 }
-nav#main > div#menu > a#btn-profile {
+nav#main > div#menu > a.btn-user {
     display: inline-block;
     margin: 0;
     text-align: center;
@@ -119,10 +119,10 @@ nav#main > div#menu > a#btn-profile {
 	padding-right: 5px;
     background: none;
 }
-nav#main > div#menu > a#btn-profile > img {
+nav#main > div#menu > a.btn-user > img {
     vertical-align: middle;
 }
-nav#main > div#menu > a#btn-profile.active {
+nav#main > div#menu > a.btn-user.active {
 	border-left: 2px solid #E1E3E2;;
     background-color: #E1E3E2;
 	margin-top: -10px;
@@ -131,7 +131,7 @@ nav#main > div#menu > a#btn-profile.active {
 	margin-right: -10px;
 	margin-bottom: -10px;
 }
-nav#main > div#menu > a#btn-profile.active > img {
+nav#main > div#menu > a.btn-user.active > img {
 	margin-top: 15px;
 }
 
@@ -153,7 +153,7 @@ nav#main > div#menu > a#btn-profile.active > img {
 }
 
 /*--------------------------  Box de connexion  ------------------------------*/
-#box-connection {
+#submenu-user {
 	position: relative;
 	float: right;
     top: 10px;
@@ -161,42 +161,43 @@ nav#main > div#menu > a#btn-profile.active > img {
 	width: 285px;
     height: 360px;
     font-size: 8pt;
+	text-align: left;
 }
-#box-connection span {
+#submenu-user span {
     text-transform: uppercase;  
 }
 
-#box-connection div.box_connection_buttons {   
+#submenu-user div.box_connection_buttons {   
     width: 225px;
     text-align: center;
     padding: 15px;
     margin: 15px;
     font-size: 11pt;
 }
-#box-connection div.box_connection_buttons.red { background-color: #EA4F51; }
-#box-connection div.box_connection_buttons.blue { background-color: #3B5998; }
-#box-connection div.box_connection_buttons span { color: #FFF; }
+#submenu-user div.box_connection_buttons.red { background-color: #EA4F51; }
+#submenu-user div.box_connection_buttons.blue { background-color: #3B5998; }
+#submenu-user div.box_connection_buttons span { color: #FFF; }
 
-#box-connection form#sidebar-login-form {
+#submenu-user form#sidebar-login-form {
 	text-align: left;
 }
-#box-connection form#sidebar-login-form span#title-connection {
+#submenu-user form#sidebar-login-form span#title-connection {
 	font-size: 11pt;
 	padding-left: 15px;
 }
-#box-connection form#sidebar-login-form label {
+#submenu-user form#sidebar-login-form label {
     font-size: 10pt;
     margin-left: 5px;
     text-transform: uppercase;
 }
-#box-connection form#sidebar-login-form input#rememberme {
+#submenu-user form#sidebar-login-form input#rememberme {
 	margin-left: 15px;
 }
 
-#box-connection form#sidebar-login-form .input_submit {
+#submenu-user form#sidebar-login-form .input_submit {
     color: #FFF;
 }
-#box-connection form#sidebar-login-form .input_connection {
+#submenu-user form#sidebar-login-form .input_connection {
     margin: 7px 15px; 
     width: 246px;
     height: 40px; 
@@ -207,20 +208,25 @@ nav#main > div#menu > a#btn-profile.active > img {
     font-family: Trebuchet MS, sans-serif;
     padding: 5px;
 }
-#box-connection form#sidebar-login-form .pwd_submit {
+#submenu-user form#sidebar-login-form .pwd_submit {
     width: 193px;
     margin-right: 0px;
 }
 
-#box-connection form#sidebar-login-form .ok_valid {
+#submenu-user form#sidebar-login-form .ok_valid {
     width: 50px;
     height: 50px;
     background-color: #EA4F51;
     border: none;
     cursor: pointer;
 }    
-    
-    
+
+#submenu-user span#submenu-user-hello {
+	text-transform: none;
+	font-size: 10pt;
+	margin: 10px;
+}
+
 /*******************************************************************************
 * FOOTER
 *******************************************************************************/

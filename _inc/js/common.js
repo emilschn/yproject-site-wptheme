@@ -51,14 +51,14 @@ YPUIFunctions = (function($) {
 			});
             
 			// Bouton connection de la nav bar
-			$('#btn-profile').click(function(e){
+			$('.btn-user').click(function(e){
 				e.preventDefault();
-				if ($('#btn-profile').hasClass('inactive')) {
-					$('#btn-profile').addClass('active').removeClass('inactive');
-					$('#box-connection').show();
-				} else if ($('#btn-profile').hasClass('active')) {                           
-					$('#btn-profile').removeClass('active').addClass('inactive');
-					$('#box-connection').hide();
+				if ($('.btn-user').hasClass('active')) {                           
+					$('.btn-user').removeClass('active').addClass('inactive');
+					$('#submenu-user').hide();
+				} else {
+					$('.btn-user').addClass('active').removeClass('inactive');
+					$('#submenu-user').show();
 				}
 			});
 			//Apparition bouton OK pour connexion
