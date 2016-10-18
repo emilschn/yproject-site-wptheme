@@ -4,6 +4,7 @@
 	date_default_timezone_set("Europe/Paris");
 	ypcf_session_start();
 	$title_str = UIHelpers::current_page_title();
+	$project_list = WDGUser::get_projects_by_id(bp_loggedin_user_id(), TRUE);
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
@@ -88,9 +89,9 @@
                                 
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
 				<?php if (is_user_logged_in()): ?>
-				<a href="#" class="btn-user hidden-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-par-defaut.png" alt="USER" /></a>
+				<a href="#" class="btn-user hidden-inf997 connected"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-par-defaut.png" alt="USER" /></a>
 				<?php else: ?>
-				<a href="#" class="btn-user hidden-inf997 inactive"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
+				<a href="#" class="btn-user hidden-inf997 not-connected inactive"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
 				<?php endif; ?>
 				<a href="#" class="only-inf997">Burg</a>
 				
@@ -100,16 +101,31 @@
 
 				</div>
 
-				<div id="submenu-user" class="box-style hidden">
 				<?php if (is_user_logged_in()): ?>
+				<div id="submenu-user" class="connected box-style hidden">
 					<?php /* Au clic picto Compte, afficher menu utilisateur */ ?>
 					<?php global $current_user; get_currentuserinfo();
 					$user_name_str = ($current_user->user_firstname != '') ? $current_user->user_firstname : $current_user->user_login;
 					?>
 					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
+					<ul id="submenu-list">
+						<li><a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e("Mon compte", 'yproject'); ?></a></li>
+						<li><a href="<?php echo home_url( '/modifier-mon-compte' ); ?>"><?php _e("Mes informations", 'yproject'); ?></a></li>
+						<li><a href="<?php echo bp_loggedin_user_domain(); ?>settings/notifications/"><?php _e("Mes alertes mails", 'yproject'); ?></a></li>
+						
+						<?php foreach ($project_list as $project_id): if (!empty($project_id)): $post_campaign = get_post($project_id); if (isset($post_campaign)): ?>
+							<li><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' .$project_id; ?>"><?php echo $post_campaign->post_title; ?></a></li>
+						<?php endif; endif; endforeach; ?>
+					</ul>
+					
+					<div id="button-logout" class="box_connection_buttons red">
+						<a href="<?php echo wp_logout_url(); echo '&page_id='.get_the_ID() ?>"><span><?php _e("Me d&eacute;connecter", 'yproject'); ?></span></a>
+					</div>
+				</div>
 				
 				
 				<?php else: ?>
+				<div id="submenu-user" class="not-connected box-style hidden">
 					<?php /* Au clic picto Compte, afficher menu connexion */ ?>
 					<div class="box_connection_buttons red">
 						<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><span><?php _e('Cr&eacute;er un compte', 'yproject'); ?></span></a>
@@ -145,8 +161,8 @@
 						<br />
 						<br />
 					</form>
-				<?php endif; ?>
 				</div>
+				<?php endif; ?>
 				
 			</div>
 		</nav>

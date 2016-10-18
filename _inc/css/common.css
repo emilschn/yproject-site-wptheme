@@ -132,7 +132,10 @@ nav#main > div#menu > a.btn-user.active {
 	margin-bottom: -10px;
 }
 nav#main > div#menu > a.btn-user.active > img {
-	margin-top: 15px;
+	margin-top: 17px;
+}
+nav#main > div#menu > a.btn-user.active.connected > img {
+	margin-top: 13px;
 }
 
 
@@ -162,6 +165,9 @@ nav#main > div#menu > a.btn-user.active > img {
     height: 360px;
     font-size: 8pt;
 	text-align: left;
+}
+#submenu-user.connected {
+    height: 295px;
 }
 #submenu-user span {
     text-transform: uppercase;  
@@ -222,9 +228,35 @@ nav#main > div#menu > a.btn-user.active > img {
 }    
 
 #submenu-user span#submenu-user-hello {
-	text-transform: none;
-	font-size: 10pt;
+	display: inline-block;
 	margin: 10px;
+	font-size: 10pt;
+	font-weight: bold;
+	text-transform: none;
+}
+
+#submenu-user ul#submenu-list {
+	padding-left: 0px;
+}
+#submenu-user ul#submenu-list {
+	padding-left: 0px;
+	list-style: none;
+	font-size: 10pt;
+	text-transform: uppercase;
+	border-top: 2px solid #E1E3E2;
+}
+#submenu-user ul#submenu-list li a {
+	display: block;
+	color: #333333;
+	padding: 5px 10px;
+	border-bottom: 2px solid #E1E3E2;
+}
+#submenu-user ul#submenu-list li a:hover {
+	background: #E1E3E2;
+}
+#submenu-user div#button-logout {
+	position: relative;
+	bottom: 0px;
 }
 
 /*******************************************************************************
