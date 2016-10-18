@@ -11,7 +11,7 @@ if ( !current_user_can('manage_options') ) {
 }
 global $disable_logs;
 $disable_logs = TRUE;
-$number = 4000;
+$number = 1000;
 $offset = (isset($_GET['offset'])) ? $_GET['offset'] * $number : 0;
 
 get_header();
@@ -89,8 +89,12 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 			</table>
 		</div>
 	
-		<a href="https://www.wedogood.co/statistiques-utilisateurs">Voir la première partie</a><br />
-		<a href="https://www.wedogood.co/statistiques-utilisateurs?offset=1">Voir la deuxième partie</a>
+		<a href="https://www.wedogood.co/statistiques-utilisateurs">Page 1</a> |
+		<a href="https://www.wedogood.co/statistiques-utilisateurs?offset=1">Page 2</a> |
+		<a href="https://www.wedogood.co/statistiques-utilisateurs?offset=2">Page 3</a> |
+		<a href="https://www.wedogood.co/statistiques-utilisateurs?offset=3">Page 4</a> |
+		<a href="https://www.wedogood.co/statistiques-utilisateurs?offset=4">Page 5</a> |
+		<a href="https://www.wedogood.co/statistiques-utilisateurs?offset=5">Page 6</a>
 		
     </div>
 </div>
