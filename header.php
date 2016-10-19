@@ -5,6 +5,7 @@
 	ypcf_session_start();
 	$title_str = UIHelpers::current_page_title();
 	$project_list = WDGUser::get_projects_by_id(bp_loggedin_user_id(), TRUE);
+	$projects_searchable = ATCF_Campaign::list_projects_searchable();
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
@@ -97,18 +98,23 @@
 				
 				
 				<?php /* Affichage quand clic sur Rerchercher */ ?>
-				<div id="box-search" class="box-style hidden">
-
+				<div id="submenu-search" class="submenu-style hidden">
+					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher", 'yproject'); ?>" />
+					<ul class="submenu-list">
+						<?php foreach ($projects_searchable as $project_post): ?>
+						<li class="hidden"><a href="<?php echo get_permalink( $project_post->ID ); ?>"><?php echo $project_post->post_title; ?></a></li>
+						<?php endforeach; ?>
+					</ul>
 				</div>
 
 				<?php if (is_user_logged_in()): ?>
-				<div id="submenu-user" class="connected box-style hidden">
+				<div id="submenu-user" class="connected submenu-style hidden">
 					<?php /* Au clic picto Compte, afficher menu utilisateur */ ?>
 					<?php global $current_user; get_currentuserinfo();
 					$user_name_str = ($current_user->user_firstname != '') ? $current_user->user_firstname : $current_user->user_login;
 					?>
 					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
-					<ul id="submenu-list">
+					<ul class="submenu-list">
 						<li><a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e("Mon compte", 'yproject'); ?></a></li>
 						<li><a href="<?php echo home_url( '/modifier-mon-compte' ); ?>"><?php _e("Mes informations", 'yproject'); ?></a></li>
 						<li><a href="<?php echo bp_loggedin_user_domain(); ?>settings/notifications/"><?php _e("Mes alertes mails", 'yproject'); ?></a></li>
@@ -125,7 +131,7 @@
 				
 				
 				<?php else: ?>
-				<div id="submenu-user" class="not-connected box-style hidden">
+				<div id="submenu-user" class="not-connected submenu-style hidden">
 					<?php /* Au clic picto Compte, afficher menu connexion */ ?>
 					<div class="box_connection_buttons red">
 						<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><span><?php _e('Cr&eacute;er un compte', 'yproject'); ?></span></a>

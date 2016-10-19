@@ -28,7 +28,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
         </div>  
         <div id="slider">
             <?php
-            $tabImg = array(1 => '/images/slider/Small-business-start-up-team-briefing-with-notes.jpg',
+            $tabImg = array(1 => '/images/slider/slider-01.jpg',
                             2 => '/images/slider/fotolia_abeille.jpg',
                             3 => '/images/slider/fotolia_nature.jpg'
                             );

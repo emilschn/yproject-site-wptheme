@@ -50,7 +50,7 @@ YPUIFunctions = (function($) {
                                 $(this).addClass("select-nav");
 			});
             
-			// Bouton connection de la nav bar
+			// Navbar : bouton compte utilisateur
 			$('.btn-user').click(function(e){
 				e.preventDefault();
 				if ($('.btn-user').hasClass('active')) {                           
@@ -61,6 +61,33 @@ YPUIFunctions = (function($) {
 					$('#submenu-user').show();
 				}
 			});
+			// Navbar : bouton recherche
+			$('#btn-search').click(function(e){
+				e.preventDefault();
+				if ($('#btn-search').hasClass('active')) {                           
+					$('#btn-search').removeClass('active').addClass('inactive');
+					$('#submenu-search').hide();
+				} else {
+					$('#btn-search').addClass('active').removeClass('inactive');
+					$('#submenu-search').show();
+				}
+			});
+			$("#submenu-search-input").keyup(function() {
+				var search = $("#submenu-search-input").val().toLowerCase();
+				$("#submenu-search .submenu-list li").addClass("hidden");
+				
+				if (search != "") {
+					$("#submenu-search .submenu-list li").each(function() {
+						var itemText = $(this).find('a').text().toLowerCase();
+						if (itemText.indexOf(search) > -1) {
+							$(this).removeClass("hidden");
+						}
+					});
+				}
+				$("#submenu-search").height("auto");
+			});
+			
+			
 			//Apparition bouton OK pour connexion
 			if ($('.model-form #password').val() !== "" && $('.model-form #password').val() !== undefined) {
 				$('.model-form #submit-center').css('display', 'inline');
