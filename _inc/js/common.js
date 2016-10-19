@@ -102,8 +102,10 @@ YPUIFunctions = (function($) {
 				});
 			}
 			
-			//Bouton recherche de la navbar
-			///// à coder
+			$("#subscribe-nl-mail").keypress(function() {
+				$("#subscribe-nl-mail").addClass("retracted");
+				$("#subscribe-nl-submit").show();
+			});
 
 			$(".expandator").css("cursor", "pointer");
 			$(".expandable").not(".default-expanded").hide();

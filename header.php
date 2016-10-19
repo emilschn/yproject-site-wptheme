@@ -152,7 +152,7 @@
 
 						<input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
 						<div id="submit-center" style="display: none;">             
-							<input type="submit"  name="wp-submit" class="input_submit" id="connect" value="OK"/>
+							<input type="submit" name="wp-submit" class="input_submit" id="connect" value="OK"/>
 							<input type="hidden" id="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 							<input type="hidden" name="login-form" value="1" />
 						</div>   
@@ -213,5 +213,12 @@
 			</div>
 		</div>
 		<?php endif; ?>
+
+		<?php 
+		if ( !is_user_logged_in() ) {
+			echo do_shortcode('[yproject_register_lightbox]');
+			echo do_shortcode('[yproject_connexion_lightbox]');
+		}
+		?>
 		
 		<div id="container"> 

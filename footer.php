@@ -38,17 +38,20 @@ else {
 				<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) : ?>
 					<div>
 						<h3 class="aligncenter"><?php _e('Nous suivre', 'yproject'); ?></h3>
-						<div>
-							<?php if (shortcode_exists('mc4wp_form')): ?>
-								<?php echo do_shortcode('[mc4wp_form]'); ?>
-							<?php endif; ?>
+						
+						<form action="" method="POST">
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/mail.jpg" alt="MAIL" width="48" height="48" />
+							<input type="text" id="subscribe-nl-mail" name="subscribe-nl-mail" placeholder="<?php _e("Inscrivez-vous &agrave; notre newsletter", 'yproject'); ?>" />
+							<input type="submit" id="subscribe-nl-submit" value="OK" class="hidden" />
+							<input type="hidden" name="action" value="subscribe_newsletter_sendinblue" />
+						</form>
+						
+						<div style="margin: 30px 0px;">
+								<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook"/></a>
+								<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter"/></a>
+								<a class="social_network" href="https://www.linkedin.com/company/3171289" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin"/></a>
+								<a class="social_network" href="https://www.wedogood.co/rss.xml" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-rss.jpg" alt="<?php _e("Flux RSS", 'yproject'); ?>"/></a>
 						</div>
-                                                <div style="margin: 30px 0px;">
-                                                        <a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook"/></a>
-                                                        <a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter"/></a>
-                                                        <a class="social_network" href="https://www.linkedin.com/company/3171289" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin"/></a>
-                                                        <a class="social_network" href="https://www.wedogood.co/rss.xml" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-rss.jpg" alt="<?php _e("Flux RSS", 'yproject'); ?>"/></a>
-                                                </div>
 
 						<div>
 							<a class="link" href="<?php echo home_url('/contact'); ?>"><?php _e( "Contactez-nous", 'yproject' ); ?></a>

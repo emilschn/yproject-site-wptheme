@@ -18,12 +18,6 @@
     display: inline-block;
     overflow: hidden;
 }
-.wdg-component-slider .slider-container #slider .slider-item .slide {
-    width: 2000px;
-    position: relative;
-    top: -19%;
-    left: -19%;
-}
 
 .wdg-component-slider .slider-container #slider .slider-item .slider-motif-left-haut {
     position: absolute;

@@ -5,6 +5,7 @@ function yproject_init() {
 	WDGCronActions::init_actions();
     WDGUser::login();
     WDGUser::register();
+	WDGPostActions::subscribe_newsletter_sendinblue();
 }
 add_action('init', 'yproject_init');
 
@@ -414,12 +415,16 @@ function ypbp_filter_send_activation_key() {
 }
 add_filter('bp_core_signup_send_activation_key', 'ypbp_filter_send_activation_key');
 
+function yproject_user_register( $user_id ) {
+	$user = get_userdata( $user_id );
+	WDGPostActions::subscribe_newsletter_sendinblue( $user->user_email );
+}
+add_action('user_register', 'yproject_user_register', 10, 1 );
+
 //********
 // Lightbox profil 
 //
 //*********
-
-
 // Vérifie si l'user possede l'user_meta 
 function yproject_check_is_profile_meta_init($user_id){
     $profil = get_user_meta($user_id, 'first_visite_profil');
