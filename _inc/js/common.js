@@ -211,7 +211,7 @@ YPUIFunctions = (function($) {
 				$("#newproject_form").submit(function(){
 					$("#newProject_button").find(".button-text").hide();
 					$("#newProject_button").find(".button-waiting").show();
-					$("#newProject_button").prop('disabled', true);
+					$("#newProject_button button").prop('disabled', true);
 				});
 
 			}
