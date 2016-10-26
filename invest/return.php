@@ -169,6 +169,11 @@ if (isset($campaign) && is_user_logged_in()):
 			$status = 'pending';
 			if ( (isset($_GET['cancel']) && $_GET['cancel'] == '1') || (isset($_GET['error']) && $_GET['error'] == '1') ) {
 				$status = 'failed';
+				try {
+					NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG );
+				} catch (Exception $e) {
+					
+				}
 			}
 			$payment_data = array( 
 				'price'			=> $amount, 
