@@ -94,11 +94,18 @@
 				<?php else: ?>
 				<a href="#" class="btn-user not-connected inactive"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
 				<?php endif; ?>
-				<a href="#" class="only-inf997">Burg</a>
+				<a href="#" id="btn-burger" class="only-inf997">Burg</a>
 				
 				
 				<?php /* Affichage quand clic sur Rerchercher */ ?>
 				<div id="submenu-search" class="submenu-style hidden">
+					<div class="only-inf997">
+						<a href="<?php echo home_url( '/vision' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/financement' ); ?>"><?php _e( "Financer son projet", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/investissement' ); ?>"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/les-projets' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
+					</div>
+					
 					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher", 'yproject'); ?>" />
 					<ul class="submenu-list">
 						<?php foreach ($projects_searchable as $project_post): ?>

@@ -15,7 +15,33 @@
 		margin-right: 0px;
 		border-right: 2px solid #E1E3E2;
 	}
-	#submenu-user { float: none; left: calc(100% - 283px); }
+	
+	nav#main > div#menu > a#btn-burger.active {
+		position: relative;
+		height: 40px;
+		margin: -10px -10px -10px -10px;
+		padding: 10px 15px;
+		background-color: #E1E3E2;
+	}
+	
+	
+	#submenu-user, #submenu-search { float: none; left: calc(100% - 283px); }
+	#submenu-search {
+		height: 165px;
+	}
+	#submenu-search a {
+		display: block;
+		color: #333333;
+		padding: 5px 10px;
+		border-bottom: 2px solid #E1E3E2;
+		text-transform: uppercase;
+		font-size: 10pt;
+	}
+	#submenu-search a:hover {
+		background: #E1E3E2;
+	}
+	#submenu-search-input { height: calc(100% - 150px); }
+	
 	
 	footer.bg-dark-gray { background-image: none; }
 	footer > section:nth-child(1) > div {

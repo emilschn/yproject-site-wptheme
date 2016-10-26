@@ -62,13 +62,13 @@ YPUIFunctions = (function($) {
 				}
 			});
 			// Navbar : bouton recherche
-			$('#btn-search').click(function(e){
+			$('#btn-search, #btn-burger').click(function(e){
 				e.preventDefault();
-				if ($('#btn-search').hasClass('active')) {                           
-					$('#btn-search').removeClass('active').addClass('inactive');
+				if ($('#btn-search, #btn-burger').hasClass('active')) {                           
+					$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
 					$('#submenu-search').hide();
 				} else {
-					$('#btn-search').addClass('active').removeClass('inactive');
+					$('#btn-search, #btn-burger').addClass('active').removeClass('inactive');
 					$('#submenu-search').show();
 				}
 			});
