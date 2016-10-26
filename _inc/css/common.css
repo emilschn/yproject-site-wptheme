@@ -44,7 +44,7 @@ h2.standard {
 *******************************************************************************/
 nav#main {
 	position: fixed;
-	z-index: 2;
+	z-index: 3;
 	top: 0px;
 	margin: 10px;
 	width: calc(100% - 20px);
@@ -507,4 +507,9 @@ footer > section:nth-child(2) > div:last-child a{
     box-shadow: 0px 5px 10px 0px #656565;
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=10);
 	height: 321px;
+}
+
+
+#home-press #press-banner{
+    width: 100%;
 }

@@ -65,43 +65,33 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 <?php
 //*******************
 //CACHE HOME
-$cache_home = $WDG_cache_plugin->get_cache('home', 2);
+$cache_home = $WDG_cache_plugin->get_cache('home', 3);
 if ($cache_home !== FALSE) { echo $cache_home; }
 else {
 	ob_start();
-$page_finance = get_page_by_path('financement');
-$page_how = get_page_by_path('descriptif');
-?>
-
-<!-- SECTION NOS DERNIERS PROJETS -->
-
-<?php
-global $WDG_cache_plugin;
-date_default_timezone_set("Europe/London");
+	date_default_timezone_set("Europe/London");
 ?>
 
 <section class="wdg-component-projects-preview">
     <h2 class="standard"><?php _e("/ les projets /", "yproject") ?></h2>
-    <div id="bloc-projects">
+    <div class="block-projects">
         <?php
         $nb_projects = 3;
         // Affiche les 3 projets les plus récents entre ceux en cours, en vote et financés
         $all_projects = ATCF_Campaign::get_list_most_recent( $nb_projects );
 
         foreach ($all_projects as $project_id) {
-                $one_project = new ATCF_Campaign( $project_id );
-                $img = $one_project->get_home_picture_src();
-
-            require('projects/preview.php');//insère html de la page preview 
+			$one_project = new ATCF_Campaign( $project_id );
+			$img = $one_project->get_home_picture_src();
+			//insère html de la page preview 
+            require('projects/preview.php');
         }
         ?>
-    </div>  <!-- #bloc-projects --> 
+    </div>
     <a class="home-button-project see-more red" href=""><?php _e("découvrir tous les projets","yproject" ) ?></a>
-</section> <!-- .wdg-component-projects-preview -->
-<!-- fin de SECTION NOS DERNIERS PROJETS -->
+</section> <!-- section.wdg-component-projects-preview -->
 
 
-<!-- SECTION VIDEO -->
 <section id="home-video">
     <div id="video-content">
         <h2 class="standard"><?php _e("/ comment ça marche ? /", "yproject")?></h2>
@@ -116,15 +106,13 @@ date_default_timezone_set("Europe/London");
             </div>
         </div>
     </div>
-</section>
-<!-- fin de SECTION VIDEO -->
+</section> <!-- section#home-video -->
 
 
-<!-- SECTION PRESSE -->
 <section id="home-press" class="hidden-inf997">
 	<img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse.jpg"/>
-</section>
-<!-- fin de SECTION PRESSE -->
+</section> <!-- section#home-press -->
+
 <?php
 	$cache_home = ob_get_contents();
 	$WDG_cache_plugin->set_cache('home', $cache_home, 60*60*24, 1);
@@ -133,4 +121,3 @@ date_default_timezone_set("Europe/London");
 }
 //FIN CACHE HOME
 //*******************
-?>

@@ -178,3 +178,229 @@
 		top: 415px;
 	}
 }
+
+
+
+
+
+/*******************************************************************************
+* WDG PROJECTS - HOME
+*******************************************************************************/
+.wdg-component-projects-preview {
+	text-align: center;
+}
+
+.wdg-component-projects-preview .block-projects {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 10px;
+    min-height: 650px;
+    z-index: 0;
+}
+
+.wdg-component-projects-preview .project-container{ 
+    position: relative;
+    display: flex;
+    min-width: 320px;
+	width: 100%;
+    justify-content: center;
+    font-family: Trebuchet MS, sans-serif;
+}
+.wdg-component-projects-preview .project-container .project-framed{ 
+    width: 90%;
+    height: 90%;
+    background-color: rgba(51, 51, 51, 0.05);
+    position: relative;
+    top: 6%;
+}
+
+.wdg-component-projects-preview .project-container .project-framed::before { 
+    border-top: 60px solid #FFFFFF; 
+    border-right: 60px solid transparent;   
+    content: ""; 
+    height: 0; 
+    left: 0; 
+    position: absolute; 
+    top: 0px; 
+    width: 0; 
+}
+.wdg-component-projects-preview .project-container .impacts-container{
+    position: absolute;
+    display: flex;
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+	width: 90%;
+	height: 12%;
+}
+.wdg-component-projects-preview .project-container .impacts-container .impact-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    background-color: #0F8216;  
+    color: #FFFFFF;
+    transition: all .2s linear;
+    cursor: pointer;
+	margin: 0px 3px;
+}
+/* Dégradés de couleurs pour les impacts */
+.wdg-component-projects-preview .project-container .impacts-container .impact-ecologic{
+    background: linear-gradient(45deg, #8BC79C, #00879B);
+}
+.wdg-component-projects-preview .project-container .impacts-container .impact-social{
+    background: linear-gradient(45deg, #E2C80D, #EA4F51);
+}
+.wdg-component-projects-preview .project-container .impacts-container .impact-economic{
+    background: linear-gradient(45deg, #00879B, #005663);
+}
+
+.wdg-component-projects-preview .project-container .impacts-container .impact-logo:hover{  /* à revoir : empecher le déplacement des impacts au survol ***********/
+    transform: scale(1.3);
+    border: 0.25em #FFFFFF solid;
+}
+
+.wdg-component-projects-preview .project-container .project-framed .project-title{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 4%;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.wdg-component-projects-preview .project-container .project-framed .project-img{
+    width: 100%;
+    height: 33%;
+    background-size: 120%;
+    position: absolute;
+    top: 15%;
+}
+
+.wdg-component-projects-preview .project-container .project-framed .project-summary{
+    max-width: 100%;
+    text-align: left;
+    position: absolute;
+    padding: 4%;
+    top: 49%;
+    font-size: 1.2em; /* à revoir si bonne taille **************************************************** */
+}
+.wdg-component-projects-preview .project-container .project-framed .progress-bar{
+    min-width: 100%;
+    position: absolute;
+    top: 63%;
+    height: 9%;
+    background-color: #E1E3E2;
+}
+.wdg-component-projects-preview .project-container .project-framed .progress-bar .current-amount{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    height: 100%;
+    font-size: 1.3em;
+    letter-spacing: 0.12em;
+    color: #FFFFFF;
+    background: repeating-linear-gradient(
+    -45deg,
+    #00879B,
+    #00879B 7px,
+    #D3EAE9 0.5px,
+    #00879B 7.5px);
+}
+.wdg-component-projects-preview .project-container .project-framed .progress-bar .progress-percent{ 
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    right: 3%;
+    font-size: 1.5em;
+    letter-spacing: 0.12em;
+    font-weight: bold;
+    text-align: right;
+}
+.wdg-component-projects-preview .project-container .project-framed .progress-bar .vote-status{ 
+    display: flex;
+    align-items: center;  
+    justify-content: space-around;
+    height: 100%; 
+    text-transform: uppercase;
+    font-style: italic;
+    background: repeating-linear-gradient(
+        -45deg,
+        #E1E3E2,
+        #E1E3E2 7px,
+        #F5F5F5 1px,
+        #E1E3E2 8px);
+}
+
+.wdg-component-projects-preview .project-container .project-framed .progress-info{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content: center;
+    top: 72%;
+    width: 100%;
+    margin-top: 5%;
+    letter-spacing: 0.125em;
+}
+.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers{
+    border-right: 2px solid black;
+}
+.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers,
+.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-days,
+.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-status{
+    width: 50%;
+    padding: 2% 4% 2% 4%;
+}
+
+.wdg-component-projects-preview .project-container .project-framed .progress-info .info-nb{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    
+
+}
+.wdg-component-projects-preview .project-container .project-framed .progress-info .info-action{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 0.8em;
+    margin: 0;
+}
+
+.wdg-component-projects-preview .home-button-project{
+    display: inline-block;
+    text-align: center;
+    font-size: 0.938em;
+    letter-spacing: 0.063em;
+    text-transform: uppercase;   
+    padding: 8% 0%;
+    bottom: 0%;
+}
+.wdg-component-projects-preview .project-container .project-framed .project-button{
+	position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;  
+    top: 85%;
+    background-color: #00879B;
+    color: #FFFFFF;
+}
+.wdg-component-projects-preview .project-container .project-framed .see-project{
+    background-color: #D3EAE9;
+    color: #000000;
+}
+.wdg-component-projects-preview .see-more {
+	position: relative;
+    width: 250px;
+    padding: 20px 30px;
+    background-color: #EA4F51;
+    color: #FFFFFF;
+}
