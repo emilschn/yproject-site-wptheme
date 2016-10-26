@@ -208,10 +208,10 @@ nav#main > div#menu > a.btn-user.active {
 	margin-bottom: -10px;
 }
 nav#main > div#menu > a.btn-user.active > img {
-	margin-top: 17px;
+	margin-top: 16px;
 }
 nav#main > div#menu > a.btn-user.active.connected > img {
-	margin-top: 13px;
+	margin-top: 12px;
 }
 
 #submenu-user {

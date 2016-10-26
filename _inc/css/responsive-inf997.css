@@ -4,6 +4,19 @@
 	.only-inf997.inline { display: inline; }
 	h2.standard { font-size: 24pt; }
 	
+	nav#main > div#menu > a, nav#main > div#menu > a.lines { display: none; }
+	nav#main > div#menu > a:first-child, nav#main > div#menu > a.btn-user, nav#main > div#menu > a.only-inf997 { display: inline-block; }
+	nav#main > div#menu > a.btn-user {
+		border-left: 0px;
+		border-right: 2px solid #333333;
+		padding-right: 15px;
+	}
+	nav#main > div#menu > a.btn-user.active {
+		margin-right: 0px;
+		border-right: 2px solid #E1E3E2;
+	}
+	#submenu-user { float: none; left: calc(100% - 283px); }
+	
 	footer.bg-dark-gray { background-image: none; }
 	footer > section:nth-child(1) > div {
 		float: none;

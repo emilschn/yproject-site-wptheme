@@ -83,16 +83,16 @@
 		<nav id="main">
 			<div id="menu" class="center-lg">
 				<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
-				<a href="<?php echo home_url( '/vision' ); ?>" class="hidden-inf997 lines"><?php _e( "Vision", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/financement' ); ?>" class="hidden-inf997 lines"><?php _e( "Financer son projet", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/investissement' ); ?>" class="hidden-inf997 lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/les-projets' ); ?>" class="hidden-inf997 lines"><?php _e( "Les projets", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/vision' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/financement' ); ?>" class="lines"><?php _e( "Financer son projet", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/investissement' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/les-projets' ); ?>" class="lines"><?php _e( "Les projets", 'yproject' ); ?></a>
                                 
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
 				<?php if (is_user_logged_in()): ?>
-				<a href="#" class="btn-user hidden-inf997 connected"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-par-defaut.png" alt="USER" /></a>
+				<a href="#" class="btn-user connected"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-par-defaut.png" alt="USER" /></a>
 				<?php else: ?>
-				<a href="#" class="btn-user hidden-inf997 not-connected inactive"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
+				<a href="#" class="btn-user not-connected inactive"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
 				<?php endif; ?>
 				<a href="#" class="only-inf997">Burg</a>
 				
