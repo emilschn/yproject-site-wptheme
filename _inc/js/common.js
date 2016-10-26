@@ -114,6 +114,18 @@ YPUIFunctions = (function($) {
 				if ($("#extendable-" + targetId).is(":visible")) $("#extendable-" + targetId).hide();
 				else $("#extendable-" + targetId).show();
 			});
+			
+			$("footer h3.clickable").click(function() {
+				if ($(window).width() < 998) {
+					if ($(this).next().is(":visible")) {
+						$(this).removeClass("expanded");
+						$(this).next().hide();
+					} else {
+						$(this).addClass("expanded");
+						$(this).next().show()
+					}
+				}
+			});
 
 			$(".home_video .button-video, .home_video .button-video-shadows").click(function() {
 				$(".home_video .button-video").hide();

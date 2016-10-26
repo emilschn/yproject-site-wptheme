@@ -20,7 +20,7 @@ body input {
 .alignleft, .align-left { text-align: left; }
 
 .center-lg {
-	width: 1300px;
+	max-width: 1300px;
 	margin: auto;
 }
 .only-inf997 { display: none; }
@@ -289,8 +289,8 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 * FOOTER
 *******************************************************************************/
 footer.bg-dark-gray {
+	background-image: url("../../images/footer/trame-footer.png");
     background-repeat: no-repeat;
-    background-size: 66%;
 }
 
 footer > section:first-child { padding: 25px 0px 35px; }
@@ -310,6 +310,9 @@ footer li {
 }
 footer a{
 	font-size: 15pt;
+	font-weight: normal;
+	text-transform: uppercase;
+	color: #E1E2E2;
 }
 footer a::before {
 	content: "/";
@@ -321,21 +324,17 @@ footer a.social_network::before{
 footer a.social_network{
 	margin-right: 20px;
 }
-footer a {
-	font-weight: normal;
-	text-transform: uppercase;
-	color: #E1E2E2;
-}
 footer > section > div {
 	float: left;
-	width: 33%;
+	width: 32%;
+	margin: 0% 0.5%;
 }
 
 footer form img {
 	vertical-align: top;
 }
 footer form input#subscribe-nl-mail {
-	width: calc(100% - 65px);
+	width: calc(100% - 60px);
 	height: 38px;
 	padding: 5px;
 	margin-left: -4px;

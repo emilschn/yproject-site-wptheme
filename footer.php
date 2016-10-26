@@ -9,12 +9,12 @@ if ($cache_footer !== FALSE && empty($client_context)) { echo $cache_footer; }
 else {
 	ob_start();
 ?>
-		<footer class="bg-dark-gray<?php if (!empty($client_context)) { ?> theme-<?php echo $client_context; ?><?php } ?>" style="background-image: url(<?php echo $stylesheet_directory_uri; ?>/images/footer/trame-footer.png)">
+		<footer class="bg-dark-gray<?php if (!empty($client_context)) { ?> theme-<?php echo $client_context; ?><?php } ?>">
 		    <section class="center-lg">
 
 				<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) : ?>
 					<div>
-						<h3><?php _e('Qui sommes-nous ?', 'yproject'); ?></h3>
+						<h3 class="clickable border-hidden"><?php _e('Qui sommes-nous ?', 'yproject'); ?></h3>
 						<ul>
 							<?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
 						</ul>
@@ -23,12 +23,12 @@ else {
 
 				<?php if ( is_active_sidebar( 'second-footer-widget-area' ) ) : ?>
 					<div>
-						<h3><?php _e('Entrepreneurs', 'yproject'); ?></h3>
+						<h3 class="clickable"><?php _e('Entrepreneurs', 'yproject'); ?></h3>
 						<ul>
 							<?php dynamic_sidebar( 'second-footer-widget-area' ); ?>
 						</ul>
 
-						<h3><?php _e('Investisseurs', 'yproject'); ?></h3>
+						<h3 class="clickable"><?php _e('Investisseurs', 'yproject'); ?></h3>
 						<ul>
 							<?php dynamic_sidebar( 'third-footer-widget-area' ); ?>
 						</ul>
@@ -37,7 +37,7 @@ else {
 
 				<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) : ?>
 					<div>
-						<h3 class="aligncenter"><?php _e('Nous suivre', 'yproject'); ?></h3>
+						<h3><?php _e('Nous suivre', 'yproject'); ?></h3>
 						
 						<form action="" method="POST">
 							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/mail.jpg" alt="MAIL" width="48" height="48" />
