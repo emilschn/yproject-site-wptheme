@@ -2,10 +2,9 @@
 	.hidden-inf997 { display: none; }
 	.only-inf997 { display: block; }
 	.only-inf997.inline { display: inline; }
+	h2.standard { font-size: 25pt; }
 	
-	footer.bg-dark-gray {
-		background-image: none;
-	}
+	footer.bg-dark-gray { background-image: none; }
 	footer > section:nth-child(1) > div {
 		float: none;
 		width: 98%;
@@ -88,5 +87,14 @@
 		width: 100%;
 		height: 35px;
 		background: #FFF;
+	}
+	
+	#home-video .home_video .video-container, .home_video .button-video {
+		-moz-box-shadow: 0px 0px;
+		-webkit-box-shadow: 0px 0px;
+		-o-box-shadow: 0px 0px;
+		box-shadow: 0px 0px;
+		filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=0, Strength=0);
+		height: auto;
 	}
 }

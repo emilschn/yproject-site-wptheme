@@ -81,9 +81,8 @@ date_default_timezone_set("Europe/London");
 ?>
 
 <section class="wdg-component-projects-preview">
-    <h1><?php _e("/ les projets /", "yproject") ?></h1>
+    <h2 class="standard"><?php _e("/ les projets /", "yproject") ?></h2>
     <div id="bloc-projects">
-
         <?php
         $nb_projects = 3;
         // Affiche les 3 projets les plus récents entre ceux en cours, en vote et financés
@@ -99,37 +98,33 @@ date_default_timezone_set("Europe/London");
     </div>  <!-- #bloc-projects --> 
     <a class="home-button-project see-more red" href=""><?php _e("découvrir tous les projets","yproject" ) ?></a>
 </section> <!-- .wdg-component-projects-preview -->
-
 <!-- fin de SECTION NOS DERNIERS PROJETS -->
 
 
 <!-- SECTION VIDEO -->
-
-<section id="home-video-ref">
+<section id="home-video">
     <div id="video-content">
-        <h1><?php _e("/ comment ça marche ? /", "yproject")?></h1>
+        <h2 class="standard"><?php _e("/ comment ça marche ? /", "yproject")?></h2>
         <div class="home_video">
-            <div class="video-container hidden mobile_hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 570)); ?></div>
-            <div class="video-container hidden only_on_mobile"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 350)); ?></div>
+            <div class="video-container w570 hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 570)); ?></div>
+            <div class="video-container w320 hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 320)); ?></div>
 
             <div class="button-video"><img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-nb.jpg" /></div>
-            <div class="button-video-shadows mobile_hidden">
-                    <img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow2.png" />
-                    <img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow1.png" />
+            <div class="button-video-shadows hidden-inf997">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow2.png" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow1.png" />
             </div>
         </div>
     </div>
 </section>
 <!-- fin de SECTION VIDEO -->
 
+
 <!-- SECTION PRESSE -->
-<section class="mobile_hidden" id="home-press">
-    <img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse.jpg"/>   
-</section>   
+<section id="home-press" class="hidden-inf997">
+	<img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse.jpg"/>
+</section>
 <!-- fin de SECTION PRESSE -->
-
-
-
 <?php
 	$cache_home = ob_get_contents();
 	$WDG_cache_plugin->set_cache('home', $cache_home, 60*60*24, 1);
@@ -139,36 +134,3 @@ date_default_timezone_set("Europe/London");
 //FIN CACHE HOME
 //*******************
 ?>
-
-
-<?php
-//*******************
-//CACHE HOME RESPONSIVE
-//$cache_home_responsive = $WDG_cache_plugin->get_cache('home-responsive', 1);
-//if ($cache_home_responsive !== FALSE) { echo $cache_home_responsive; }
-//else {
-//	ob_start();
-//?>
-<?php
-//$page_finance = get_page_by_path('financement');
-//$page_how = get_page_by_path('descriptif');
-//?>
-<!--<div id="home-responsive" class="only_on_mobile align-center">
-	<h2>Vous avez un projet ?</h2>
-	<p>Avec WEDOGOOD, b&eacute;n&eacute;ficiez d&apos;un financement souple et adapt&eacute; &agrave; vos besoins.</p>
-	<a href="//<?php echo get_permalink($page_finance->ID); ?>" class="button red big">Financez votre projet</a>
-	<br /><br /><br />
-	<hr />
-	<h2>Comment investir dans un projet ?</h2>
-	<p>Soyez acteurs et influenceurs de la communaut&eacute; !</p>
-	<a href="//<?php echo get_permalink($page_finance->ID); ?>" class="button red big">Comment &ccedil;a marche ?</a>
-	<br /><br /><br /><br />
-</div>-->
-<?php
-//	$cache_home_responsive = ob_get_contents();
-//	$WDG_cache_plugin->set_cache('home-responsive', $cache_home_responsive, 60*60*24, 1);
-//	ob_end_clean();
-//	echo $cache_home_responsive;
-//}
-//FIN CACHE HOME
-//*******************

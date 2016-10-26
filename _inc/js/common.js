@@ -128,12 +128,17 @@ YPUIFunctions = (function($) {
 			});
 
 			$(".home_video .button-video, .home_video .button-video-shadows").click(function() {
-				$(".home_video .button-video").hide();
-				$(".home_video .button-video-shadows").hide();
-				$(".home_video .video-container").show();
-				var src = $(".home_video .video-container iframe").attr("src");
+				$(".home_video .button-video, .home_video .button-video-shadows").hide();
+				var sContainer = ".home_video .video-container";
+				if ($(window).width() > 570) {
+					sContainer += ".w570";
+				} else {
+					sContainer += ".w320";
+				}
+				$(sContainer).show();
+				var src = $(sContainer + " iframe").attr("src");
 				src += '&autoplay=1';
-				$(".home_video .video-container iframe").attr("src", src);
+				$(sContainer + " iframe").attr("src", src);
 			});
 
 			if ($("#fundingproject").val()) {

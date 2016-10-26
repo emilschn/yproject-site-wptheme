@@ -27,6 +27,18 @@ body input {
 
 .bg-dark-gray { background: #333333; }
 
+
+h2.standard {
+    text-align: center;
+    margin: 0;
+    padding: 2%;
+    font-family: Trebuchet MS, sans-serif;
+    text-transform: uppercase;
+    font-size: 35pt; 
+    font-weight: bold;
+    letter-spacing: 0.125em;
+}
+
 /*******************************************************************************
 * NAV BAR
 *******************************************************************************/
@@ -441,4 +453,58 @@ footer > section:nth-child(2) > div:last-child a{
 	font-size: 12pt;   
 	color: #333333;
 	margin: 2%;
+}
+
+
+
+/*******************************************************************************
+* HOME - VIDEO
+*******************************************************************************/
+#home-video{
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+#home-video #video-content{
+    background-color: #E1E3E2;
+    margin-top: 3%;
+    max-width: 100%;
+    background-image: url("../../images/header-video-nb.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding: 2%;
+    text-align: center;
+}
+@media screen and (max-width: 580px) {
+	#home-video #video-content{
+		background-image: none;
+	}
+}
+#home-video .home_video{
+    display: inline-block;
+}
+#home-video #video-content .home_video .button-video-shadows{
+    margin-top: -20%;
+    cursor: pointer;
+}
+#home-video #video-content .home_video .button-video-shadows img{
+    width: 35%;
+    display: inline;
+}
+#home-video .home_video .button-video {
+    cursor: pointer;
+}
+#home-video .home_video .button-video img {
+	width: 100%;
+}
+#home-video .home_video .button-video-shadows img:last-child {
+    margin-left: 29%;
+}
+#home-video .home_video .video-container, .home_video .button-video {
+    -moz-box-shadow: 0px 5px 10px 0px #656565;
+    -webkit-box-shadow: 0px 5px 10px 0px #656565;
+    -o-box-shadow: 0px 5px 10px 0px #656565;
+    box-shadow: 0px 5px 10px 0px #656565;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=10);
+	height: 321px;
 }
