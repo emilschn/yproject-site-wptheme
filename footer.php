@@ -95,6 +95,14 @@ else {
                                 
 			</section>
 		</footer>
+		
+		<?php $hidecookiealert = filter_input( INPUT_COOKIE, 'hidecookiealert' ); ?>
+		<?php if ( empty( $hidecookiealert ) ): ?>
+		<div id="cookies-alert" class="bg-dark-gray aligncenter">
+			<?php _e( "En poursuivant votre navigation sur WE DO GOOD.co, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
+			<button id="cookies-alert-close" class="red"><?php _e( "OK", 'yproject' ); ?></button>
+		</div>
+		<?php endif; ?>
 
 <?php
 	$cache_footer = ob_get_contents();

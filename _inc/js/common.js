@@ -8,7 +8,6 @@ YPUIFunctions = (function($) {
 		memberTabs: ["activity", "projects", "community"],
 
 		initUI: function() {
-			YPMenuFunctions.initMenuBar();
 			WDGProjectPageFunctions.initUI();
 			YPUIFunctions.refreshProjectList();
 			YPUIFunctions.initQtip();
@@ -140,6 +139,13 @@ YPUIFunctions = (function($) {
 				src += '&autoplay=1';
 				$(sContainer + " iframe").attr("src", src);
 			});
+			
+			if ($("#cookies-alert").length > 0) {
+				$("#cookies-alert-close").click(function() {
+					$("#cookies-alert").hide();
+					document.cookie = "hidecookiealert=1";
+				});
+			}
 
 			if ($("#fundingproject").val()) {
 				$("#goalsum_fixe").click(function() { $("#goalsum_flexible_param").hide(); $("#goalsum_fixe_param").show();});
@@ -656,45 +662,24 @@ YPUIFunctions = (function($) {
 				}
 			}
 			YPUIFunctions.refreshProjectPreview();
-		}
-	}
-
-})(jQuery);
-
-YPMenuFunctions = (function($){
-	return {
-		initMenuBar: function() {
-			$("#menu_item_connection").mouseenter(function(){
-				$("#submenu_item_connection").css("top", $(document).scrollTop() + $("#navigation").height());
-				$("#submenu_item_connection").css("left", $("#menu_item_connection").position().left + $("#menu_item_connection").width() - $("#submenu_item_connection").width() - 1);
-				clearTimeout($("#menu_item_connection").data('timeoutId'));
-				$("#submenu_item_connection").fadeIn("slow");
-			}).mouseleave(function(){
-				var timeoutId = setTimeout(function(){
-					$("#submenu_item_connection").fadeOut("slow");
-				}, 650);
-				$("#menu_item_connection").data('timeoutId', timeoutId);
-			});
-
-			$("#submenu_item_connection").mouseenter(function(){
-				clearTimeout($("#menu_item_connection").data('timeoutId'));
-				$("#submenu_item_connection").fadeIn("slow");
-			}).mouseleave(function(){
-				var timeoutId = setTimeout(function(){
-					$("#submenu_item_connection").fadeOut("slow");
-				}, 650);
-				$("#menu_item_connection").data('timeoutId', timeoutId);
-			});
-
-			$("#mobile-menu").click(function() {
-				$("#submenu-mobile").toggle();
-			});
 		},
-
-		refreshMenuBar: function() {
-			$("#navigation").css("top", $(window).scrollTop());
+		
+		getCookie: function(cookieName) {
+			var name = cookieName + "=";
+			var ca = document.cookie.split(';');
+			for(var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					return c.substring(name.length,c.length);
+				}
+			}
+			return "";
 		}
 	}
+
 })(jQuery);
 
 /* Projet */

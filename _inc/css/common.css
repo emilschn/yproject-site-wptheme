@@ -25,7 +25,7 @@ body input {
 }
 .only-inf997 { display: none; }
 
-.bg-dark-gray { background: #333333; }
+.bg-dark-gray { background: #333333; color: #FFF; }
 
 
 h2.standard {
@@ -37,6 +37,13 @@ h2.standard {
     font-size: 35pt; 
     font-weight: bold;
     letter-spacing: 0.125em;
+}
+
+button.red {
+	background-color: #EA4F51;
+	color: #FFFFFF;
+	border: 0px;
+	cursor: pointer;
 }
 
 /*******************************************************************************
@@ -448,6 +455,10 @@ footer > section > div.clear {
 	width: 60%;
 	margin: auto;
 }
+footer > section > div.aligncenter {
+	margin-bottom: 0px;
+	padding-bottom: 20px;
+}
 footer > section:nth-child(2) > div:last-child a{
 	text-transform: none;
 	font-size: 12pt;   
@@ -455,6 +466,17 @@ footer > section:nth-child(2) > div:last-child a{
 	margin: 2%;
 }
 
+/* BANDEAU COOKIES */
+#cookies-alert {
+	position: fixed;
+	z-index: 3;
+	bottom: 0px;
+	width: 100%;
+	padding: 10px 0px;
+}
+#cookies-alert-close {
+	padding: 5px;
+}
 
 
 /*******************************************************************************
