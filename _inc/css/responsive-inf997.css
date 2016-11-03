@@ -5,7 +5,7 @@
 	h2.standard { font-size: 24pt; }
 	
 	nav#main > div#menu > a, nav#main > div#menu > a.lines { display: none; }
-	nav#main > div#menu > a:first-child, nav#main > div#menu > a.btn-user, nav#main > div#menu > a.only-inf997 { display: inline-block; }
+	nav#main > div#menu > a:first-child, nav#main > div#menu > a.btn-user, nav#main > div#menu > a#btn-burger { display: inline-block; }
 	nav#main > div#menu > a.btn-user {
 		border-left: 0px;
 		border-right: 2px solid #333333;
@@ -20,8 +20,11 @@
 		position: relative;
 		height: 40px;
 		margin: -10px -10px -10px -10px;
-		padding: 10px 15px;
+		padding: 10px 17px;
 		background-color: #E1E3E2;
+	}
+	nav#main > div#menu > a#btn-burger img {
+		vertical-align: middle;
 	}
 	
 	

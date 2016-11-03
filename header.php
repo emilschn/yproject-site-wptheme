@@ -94,7 +94,7 @@
 				<?php else: ?>
 				<a href="#" class="btn-user not-connected inactive"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
 				<?php endif; ?>
-				<a href="#" id="btn-burger" class="only-inf997">Burg</a>
+				<a href="#" id="btn-burger" class="only-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/menu-burger.png" alt="MENU" /></a>
 				
 				
 				<?php /* Affichage quand clic sur Rerchercher */ ?>
@@ -123,8 +123,6 @@
 					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
 					<ul class="submenu-list">
 						<li><a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e("Mon compte", 'yproject'); ?></a></li>
-						<li><a href="<?php echo home_url( '/modifier-mon-compte' ); ?>"><?php _e("Mes informations", 'yproject'); ?></a></li>
-						<li><a href="<?php echo bp_loggedin_user_domain(); ?>settings/notifications/"><?php _e("Mes alertes mails", 'yproject'); ?></a></li>
 						
 						<?php foreach ($project_list as $project_id): if (!empty($project_id)): $post_campaign = get_post($project_id); if (isset($post_campaign)): ?>
 							<li><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' .$project_id; ?>"><?php echo $post_campaign->post_title; ?></a></li>
