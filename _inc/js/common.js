@@ -360,6 +360,45 @@ YPUIFunctions = (function($) {
 					i++;
 				}
 			}
+			
+			if ($(".wdg-component-projects-preview .block-projects").length > 0) {
+				YPUIFunctions.initTouchX = 0;
+				YPUIFunctions.initMarginLeft = 0;
+				YPUIFunctions.totalWidth = 0;
+				$(".wdg-component-projects-preview .block-projects .project-container").each(function(){
+					YPUIFunctions.totalWidth += parseInt($(this).width());
+				});
+				
+				$(".wdg-component-projects-preview .block-projects").on("touchstart", function(e) {
+					var touchobj = e.changedTouches[0];
+					YPUIFunctions.initTouchX = parseInt(touchobj.clientX);
+					YPUIFunctions.initMarginLeft = parseInt($(".wdg-component-projects-preview .block-projects").css( "marginLeft" ));
+				});
+				$(".wdg-component-projects-preview .block-projects").on("touchmove", function(e) {
+					var touchobj = e.changedTouches[0];
+					var currentX = parseInt(touchobj.clientX) - YPUIFunctions.initTouchX;
+					var containerW = parseInt($(".wdg-component-projects-preview").width());
+					var newMarginLeft = Math.min( YPUIFunctions.initMarginLeft + currentX - YPUIFunctions.initTouchX, YPUIFunctions.totalWidth - containerW + 10 );
+					newMarginLeft = Math.max( newMarginLeft, containerW - YPUIFunctions.totalWidth - 20 );
+					$(".wdg-component-projects-preview .block-projects").css( "marginLeft", newMarginLeft );
+				});
+				$(".wdg-component-projects-preview .block-projects").on("mousedown", function(e) {
+					YPUIFunctions.initTouchX = parseInt(e.clientX);
+					YPUIFunctions.initMarginLeft = parseInt($(".wdg-component-projects-preview .block-projects").css( "marginLeft" ));
+				});
+				$(".wdg-component-projects-preview .block-projects").on("mousemove", function(e) {
+					if (YPUIFunctions.initTouchX > 0) {
+						var currentX = parseInt(e.clientX);
+						var containerW = parseInt($(".wdg-component-projects-preview").width());
+						var newMarginLeft = Math.min( YPUIFunctions.initMarginLeft + currentX - YPUIFunctions.initTouchX, YPUIFunctions.totalWidth - containerW + 10 );
+						newMarginLeft = Math.max( newMarginLeft, containerW - YPUIFunctions.totalWidth - 20 );
+						$(".wdg-component-projects-preview .block-projects").css( "marginLeft", newMarginLeft );
+					}
+				});
+				$(document).on("mouseup", function(e) {
+					YPUIFunctions.initTouchX = 0;
+				});
+			}
 		},
 
 		refreshTurnoverAmountToPay: function() {
@@ -667,18 +706,18 @@ YPUIFunctions = (function($) {
 		getCookie: function(cookieName) {
 			var name = cookieName + "=";
 			var ca = document.cookie.split(';');
-			for(var i = 0; i <ca.length; i++) {
+			for (var i = 0; i <ca.length; i++) {
 				var c = ca[i];
-				while (c.charAt(0)==' ') {
+				while (c.charAt(0)===' ') {
 					c = c.substring(1);
 				}
-				if (c.indexOf(name) == 0) {
+				if (c.indexOf(name) === 0) {
 					return c.substring(name.length,c.length);
 				}
 			}
 			return "";
 		}
-	}
+	};
 
 })(jQuery);
 

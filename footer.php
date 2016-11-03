@@ -41,7 +41,7 @@ else {
 						
 						<form action="" method="POST">
 							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/mail.jpg" alt="MAIL" width="48" height="48" />
-							<input type="text" id="subscribe-nl-mail" name="subscribe-nl-mail" placeholder="<?php _e("Inscrivez-vous &agrave; notre newsletter", 'yproject'); ?>" />
+							<input type="text" id="subscribe-nl-mail" name="subscribe-nl-mail" placeholder="<?php _e("Je m'inscris à la newsletter", 'yproject'); ?>" />
 							<input type="submit" id="subscribe-nl-submit" value="OK" class="hidden" />
 							<input type="hidden" name="action" value="subscribe_newsletter_sendinblue" />
 						</form>
@@ -64,18 +64,18 @@ else {
 			</section>
 			
 			<section class="center-lg">							
-                                <div>
-                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/membre-FPF.png" alt="logo membre financement participatif France" width="150px"/>
-                                </div>
+				<div>
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/membre-FPF.png" alt="logo membre financement participatif France" width="150px"/>
+				</div>
 
-                                <div class="lines" id="finance_innovation">
-                                    <p class="label"><?php _e("Agréée par", 'yproject')?></p>
-                                    <a href="http://www.finance-innovation.org/"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/finance-innovation-logo.png" alt="logo finance innovation" width="180px"/></a>
-                                </div>
+				<div class="lines" id="finance_innovation">
+					<p class="label"><?php _e("Agréée par", 'yproject')?></p>
+					<a href="http://www.finance-innovation.org/"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/finance-innovation-logo.png" alt="logo finance innovation" width="180px"/></a>
+				</div>
 
-                                <div id="lemonway">
+				<div id="lemonway">
 					<a href="http://www.lemonway.fr" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/lemonway-gris.png" alt="logo Lemonway" width="278px"/></a><br />
-                                        <p class="lines">Partenaire de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l’ACPR en France le 24/12/2012 sous le num&eacute;ro 16568J.</p>
+					<p class="lines">Partenaire de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l’ACPR en France le 24/12/2012 sous le num&eacute;ro 16568J.</p>
 				</div>
 				<?php if ( is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>
 				<div>
