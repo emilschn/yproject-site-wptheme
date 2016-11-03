@@ -23,7 +23,7 @@ gulp.task('concat', function () {
                         source + '_inc/css/responsive-inf997.css',
                         source + '/_inc/css/responsive.css',
                         source + '/_inc/css/responsive-medium.css',
-                        source + 'styles.css'
+                        source + 'style.css'
                     ]) // CSS files ordered
     .pipe(concat('concatStyles.css'))
     .pipe(gulp.dest(destination));
