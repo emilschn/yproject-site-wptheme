@@ -6,7 +6,7 @@ body {
     font-family: Trebuchet MS, sans-serif;
 }
 body a {
-    color: #00879B;
+    color: #EA4F51;
     text-decoration: none;
 }
 body input {
@@ -34,7 +34,7 @@ h2.standard {
     padding: 2%;
     font-family: Trebuchet MS, sans-serif;
     text-transform: uppercase;
-    font-size: 35pt; 
+    font-size: 25pt;
     font-weight: bold;
     letter-spacing: 0.125em;
 }
@@ -53,8 +53,8 @@ nav#main {
 	position: fixed;
 	z-index: 3;
 	top: 0px;
-	margin: 10px;
-	width: calc(100% - 20px);
+	margin: 10px 0px;
+	width: 100%;
 	height: 60px;
 }
 
@@ -73,7 +73,7 @@ nav#main > div#menu > a {
 	line-height: 40px;
 	height: 40px;
 	vertical-align: middle;
-	font-size: 13pt;
+	font-size: 11pt;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	color: #333333;
@@ -172,10 +172,9 @@ nav#main > div#menu > a#btn-search.active > img {
 }
 
 #submenu-search {
-	position: relative;
-	float: right;
-    top: 10px;
-    right: 55px;
+	position: absolute;
+    top: 60px;
+    right: calc(62px + (100% - 1280px) / 2);
 	width: 285px;
     height: 50px;
     font-size: 8pt;
@@ -215,17 +214,16 @@ nav#main > div#menu > a.btn-user.active {
 	margin-bottom: -10px;
 }
 nav#main > div#menu > a.btn-user.active > img {
-	margin-top: 16px;
+	margin-top: 17px;
 }
 nav#main > div#menu > a.btn-user.active.connected > img {
 	margin-top: 13px;
 }
 
 #submenu-user {
-	position: relative;
-	float: right;
-    top: 10px;
-    right: -10px;
+	position: absolute;
+    top: 60px;
+    right: calc((100% - 1280px) / 2);
 	width: 285px;
     height: 360px;
     font-size: 8pt;
@@ -303,6 +301,10 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 	position: absolute;
 	bottom: 0px;
 }
+@media screen and (max-width: 1300px) {
+	#submenu-user { right: 10px; }
+	#submenu-search { right: 72px }
+}
 
 /*******************************************************************************
 * FOOTER
@@ -318,7 +320,7 @@ footer h3 {
 	font-size: 18pt;
 	font-weight: bold;
 	text-transform: uppercase;
-	color: #E1E2E2;
+	color: #FFF;
 }
 footer ul {
 	padding-left: 0px;
@@ -331,7 +333,7 @@ footer a{
 	font-size: 15pt;
 	font-weight: normal;
 	text-transform: uppercase;
-	color: #E1E2E2;
+	color: #FFF;
 }
 footer a::before {
 	content: "/";
@@ -382,21 +384,21 @@ footer > section:nth-child(2) > div {
 }
 footer > section:nth-child(2) > div:nth-child(1){
 	width: 12%;
-	margin-left: 5%;
+	margin-left: 3%;
 }
 footer > section:nth-child(2) > div:nth-child(2){
 	position: relative;
-	width: 14%;
+	width: 180px;
 	margin-top: 6%;
-	margin-left: 6%;
+	margin-left: 4%;
 }
 footer > section:nth-child(2) > div:nth-child(3){
-	width: 20%;
-	margin: 2% 0% 0% 8%;
+	width: 278px;
+	margin: 2% 0% 0% 4%;
 }
 footer > section:nth-child(2) > div:nth-child(4){
-	width: 20%;
-	margin-left: 5%;
+	width: 22%;
+	margin-left: 3%;
 }
 footer p.label {
 	position: absolute;
