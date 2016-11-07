@@ -130,23 +130,23 @@
 
 /* RESPONSIVE - Cas spécifique affichage slider home */
 @media screen and (max-width: 1220px) {
-	.wdg-component-slider.home-slider .slider-container #slider .slide-2buttons .message-banner .screen-message {
+	.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message {
 		padding-left: 20%;
 	}
 }
 @media screen and (max-width: 1100px) {
-	.wdg-component-slider.home-slider .slider-container #slider .slide-2buttons .message-banner .screen-message {
+	.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message {
 		padding-left: 15%;
 		font-size: 46px;
 		margin: 48px 0px;
 	}
 }
 @media screen and (max-width: 997px) {
-	.wdg-component-slider.home-slider .slider-container .slider-choice,
-	.wdg-component-slider.home-slider .slider-container #slider .slider-item .message-banner .slider-motif-left-bas,
-	.wdg-component-slider.home-slider .slider-container #slider .slider-item .slider-motif-right,
-	.wdg-component-slider.home-slider .slider-container #slider .slider-item .message-banner::after { display: none; }
-	.wdg-component-slider.home-slider .slider-container #slider .slider-item .message-banner {
+	.wdg-component-slider .slider-container .slider-choice,
+	.wdg-component-slider .slider-container #slider .slider-item .message-banner .slider-motif-left-bas,
+	.wdg-component-slider .slider-container #slider .slider-item .slider-motif-right,
+	.wdg-component-slider .slider-container #slider .slider-item .message-banner::after { display: none; }
+	.wdg-component-slider .slider-container #slider .slider-item .message-banner {
 		width: 100%;
 		display: flex;
 		align-items: center;
@@ -154,15 +154,15 @@
 	.wdg-component-slider .slider-container #slider .slider-item img.slide {
 		width: auto;
 	}
-	.wdg-component-slider.home-slider .slider-container #slider .slide-2buttons .message-banner .screen-message {
+	.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message {
 		margin: 0px;
 	}
-	.wdg-component-slider.home-slider .slider-container #slider .slide-2buttons #button-container {
+	.wdg-component-slider .slider-container #slider .slide-2buttons #button-container {
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
 	}
-	.wdg-component-slider.home-slider .slider-container #slider #slide-1 #button-container .button-slide {
+	.wdg-component-slider .slider-container #slider #slide-1 #button-container .button-slide {
 		flex-flow: column wrap;
 		margin-bottom: 10px;
 		width: 50%;
@@ -170,21 +170,20 @@
 	}
 }
 @media screen and (max-width: 620px) {
-	.wdg-component-slider.home-slider .slider-container #slider .slider-item .message-banner {
+	.wdg-component-slider .slider-container #slider .slider-item .message-banner {
 		top: 100px;
 	}
-	.wdg-component-slider.home-slider .slider-container #slider .slider-item .slider-motif-left-haut {
+	.wdg-component-slider .slider-container #slider .slider-item .slider-motif-left-haut {
 		display: none;
 	}
-	.wdg-component-slider.home-slider .slider-container #slider .slide-2buttons .message-banner .screen-message {
+	.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message {
 		font-size: 40px;
 		padding-left: 10%;
 	}
-	.wdg-component-slider.home-slider .slider-container #slider .slide-2buttons #button-container {
+	.wdg-component-slider .slider-container #slider .slide-2buttons #button-container {
 		top: 415px;
 	}
 }
-
 
 
 

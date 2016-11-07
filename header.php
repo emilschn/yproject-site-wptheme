@@ -6,6 +6,7 @@
 	$title_str = UIHelpers::current_page_title();
 	$project_list = WDGUser::get_projects_by_id(bp_loggedin_user_id(), TRUE);
 	$projects_searchable = ATCF_Campaign::list_projects_searchable();
+	wp_reset_query();
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>

@@ -4,7 +4,8 @@
  * Page pour la section des projets à afficher en page d'accueil
  *
  */
-$campaign = atcf_get_campaign($one_project);
+$campaign = atcf_get_campaign( $project_id );
+$img = $campaign->get_home_picture_src();
 $campaign_status = $campaign->campaign_status();
 
 $percent = min(100, $campaign->percent_minimum_completed(false));

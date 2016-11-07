@@ -137,4 +137,8 @@
 		filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=0, Strength=0);
 		height: auto;
 	}
+
+	body.page-template-template-discover-projects-php header {
+		display: none;
+	}
 }

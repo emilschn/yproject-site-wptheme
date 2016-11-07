@@ -480,6 +480,17 @@ footer > section:nth-child(2) > div:last-child a{
 	padding: 5px;
 }
 
+/*******************************************************************************
+* PAGES - COMMON
+*******************************************************************************/
+#content {
+	width: 100%;
+}
+#content .padder {
+	width: calc(100% - 40px);
+	max-width: 1260px;
+	margin: auto;
+}
 
 /*******************************************************************************
 * HOME - VIDEO
@@ -532,8 +543,67 @@ footer > section:nth-child(2) > div:last-child a{
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=10);
 	height: 321px;
 }
-
-
 #home-press #press-banner{
     width: 100%;
+}
+
+
+/*******************************************************************************
+* TEMPLATE - PROJECT LIST
+*******************************************************************************/
+body.page-template-template-discover-projects-php header {
+	background: rgba(51, 51, 51, 0.05);
+	background-image: url(../../images/common-background.png);
+	background-repeat: no-repeat;
+	padding-top: 100px;
+}
+body.page-template-template-discover-projects-php header > div > div {
+	display: inline-block;
+	height: 460px;
+}
+
+body.page-template-template-discover-projects-php header > div > div.wdg-component-slider.project-list-slider {
+	width: 69%;
+}
+body.page-template-template-discover-projects-php header > div > div.wdg-component-slider.project-list-slider .slider-container {
+	height: 460px;
+}
+
+body.page-template-template-discover-projects-php header > div > div:last-child {
+	vertical-align: top;
+	width: 30%;
+}
+
+body.page-template-template-discover-projects-php header > div > div:last-child p {
+	width: 95%;
+	height: 80px;
+	margin: 0px 0px 5px;
+	padding: 20px 5%;
+	font-size: 22pt;
+	background: #FFFFFF;
+	color: #000000;
+}
+body.page-template-template-discover-projects-php header > div > div:last-child p:first-child {
+	height: 40px;
+	background: #000000;
+	color: #FFFFFF;
+	line-height: 40px;
+}
+
+body.page-template-template-discover-projects-php header > div > div:last-child p img {
+	float: left;
+	margin-right: 20px;
+}
+body.page-template-template-discover-projects-php header > div > div:last-child p span span {
+	font-size: 30pt;
+	letter-spacing: 2px;
+	font-weight: bold;
+}
+
+
+nav#project-filter {
+	height: 80px;
+	text-transform: uppercase;
+	background: #333333;
+	color: #FFFFFF;
 }

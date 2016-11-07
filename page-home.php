@@ -79,11 +79,7 @@ else {
         $nb_projects = 3;
         // Affiche les 3 projets les plus récents entre ceux en cours, en vote et financés
         $all_projects = ATCF_Campaign::get_list_most_recent( $nb_projects );
-
         foreach ($all_projects as $project_id) {
-			$one_project = new ATCF_Campaign( $project_id );
-			$img = $one_project->get_home_picture_src();
-			//insère html de la page preview 
             require('projects/preview.php');
         }
         ?>
