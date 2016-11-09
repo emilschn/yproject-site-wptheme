@@ -47,26 +47,38 @@
 				</div>
 			</div> <!-- .wdg-component-slider -->
 
+			<?php
+			$project_list_funded = ATCF_Campaign::get_list_funded( );
+			$count_amount = 0;
+			$count_people = 0;
+			$count_projects = 0;
+			foreach ( $project_list_funded as $project_post ) {
+				$count_projects++;
+				$campaign = atcf_get_campaign( $project_post->ID );
+				$count_people += $campaign->backers_count();
+				$count_amount += $campaign->current_amount( false );
+			}
+			?>
 			<div id="wdg-project-stats" class="right">
 				<p><?php _e( "WE DO GOOD c'est :" ); ?></p>
 				<p>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="money" />
 					<span>
-						<span>300 000 &euro;</span>
+						<span><?php echo number_format( $count_amount, 0, '', ' ' ); ?> &euro;</span>
 						<?php _e( "lev&eacute;s" ); ?>
 					</span>
 				</p>
 				<p>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-people.png" alt="people" />
 					<span>
-						<span>6 000</span>
+						<span><?php echo number_format( $count_people, 0, '', ' ' ); ?></span>
 						<?php _e( "investisseurs" ); ?>
 					</span>
 				</p>
 				<p>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-arrows.png" alt="arrows" />
 					<span>
-						<span>59</span>
+						<span><?php echo count($project_list_funded); ?></span>
 						<?php _e( "projets propuls&eacute;s" ); ?>
 					</span>
 				</p>
@@ -75,11 +87,14 @@
 			<div class="clear"></div>
 		</div>
 	</header>
-		
+	
+	
+	<h2 class="standard only-inf997">/ <?php _e("les projets", "yproject") ?> /</h2>
+	
 		
 	<div class="padder projects-current">
 		<nav id="project-filter">
-			<span><?php _e( "Filtres", 'yproject' ); ?></span>
+			<span><?php _e( "Filtres", 'yproject' ); ?> <span class="only-inf997 inline"><?php _e( "projets", 'yproject' ); ?></span></span>
 			<select>
 				<option value="all" selected="selected"><?php _e( "Tous les impacts", 'yproject' ); ?></option>
 			</select>
@@ -110,7 +125,7 @@
 				$project_id = $project_post->ID;
 				require('projects/preview.php');
 			}
-			foreach ( $project_list_funding as $project_post ) {
+			foreach ( $project_list_vote as $project_post ) {
 				$project_id = $project_post->ID;
 				require('projects/preview.php');
 			}
@@ -128,7 +143,6 @@
 
 				<div class="block-projects">
 				<?php
-				$project_list_funded = ATCF_Campaign::get_list_funded( );
 				$count = 0;
 				foreach ( $project_list_funded as $project_post ) {
 					$count++;

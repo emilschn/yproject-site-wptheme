@@ -396,6 +396,15 @@ YPUIFunctions = (function($) {
 			}
 			
 			if ($("#project-filter").length > 0) {
+				$("#project-filter > span").click(function() {
+					if ($("#project-filter span").hasClass("show")) {
+						$("#project-filter span").removeClass("show");
+					} else {
+						$("#project-filter span").addClass("show");
+					}
+					$("#project-filter select").toggle();
+				});
+				
 				$("#project-filter .project-filter-select").click(function() {
 					var step = $("#project-filter-step").val();
 					var location = $("#project-filter-location").val();
