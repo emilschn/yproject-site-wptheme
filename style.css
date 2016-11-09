@@ -50,10 +50,6 @@ tbody {
     margin: auto;
 }
 
-.left { float: left; }
-.right { float: right; }
-.clear { clear: both; }
-.clearfix { overflow-x: hidden; overflow-y: hidden; }
 .margin-auto { margin: auto; }
 .vert-align { vertical-align: middle; }
 

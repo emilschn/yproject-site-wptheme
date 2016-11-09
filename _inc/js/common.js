@@ -9,7 +9,6 @@ YPUIFunctions = (function($) {
 
 		initUI: function() {
 			WDGProjectPageFunctions.initUI();
-			YPUIFunctions.refreshProjectList();
 			YPUIFunctions.initQtip();
 
 			$(document).scroll(function() {
@@ -189,10 +188,6 @@ YPUIFunctions = (function($) {
 			if ($(".wp-editor-wrap")[0]) {
 				setInterval(YPUIFunctions.onRemoveUploadInterval, 1000);
 			}
-
-			$( window ).resize(function() {
-				YPUIFunctions.refreshProjectList();
-			});
 
 			if ($(".home-activity-list").length > 0) {
 				setTimeout(function() {YPUIFunctions.onSlideHomeActivity(); }, YPUIFunctions.homeslideInterval);
@@ -397,6 +392,24 @@ YPUIFunctions = (function($) {
 				});
 				$(document).on("mouseup", function(e) {
 					YPUIFunctions.initTouchX = 0;
+				});
+			}
+			
+			if ($("#project-filter").length > 0) {
+				$("#project-filter .project-filter-select").click(function() {
+					var step = $("#project-filter-step").val();
+					var location = $("#project-filter-location").val();
+					YPUIFunctions.refreshProjectList( step, location );
+				});
+				
+				$("div.padder.projects-funded button").click(function() {
+					var lineHeight = 620;
+					var height = $("div.padder.projects-funded .block-projects").height() + lineHeight;
+					$("div.padder.projects-funded .block-projects").css( 'max-height', height );
+					var maxLines = Math.ceil($("div.padder.projects-funded .block-projects .project-container").length / 4);
+					if (height >= maxLines * lineHeight) {
+						$("div.padder.projects-funded button").hide();
+					}
 				});
 			}
 		},
@@ -679,28 +692,17 @@ YPUIFunctions = (function($) {
 			}
 		},
 
-		refreshProjectList: function() {
-			if ($("#project-list-menu").length > 0) {
-				$("#project-list-menu a").click(function() {
-					$(".home-large-project").hide();
-					$(".home-small-project").hide();
-					$(".status-" + $(this).data("status")).show();
-					$("#project-list-menu a").removeClass("selected");
-					$(this).addClass("selected");
-				});
-				if ($("#project-list-menu").is(":visible")) {
-					$(".home-large-project").hide();
-					$(".home-small-project").hide();
-					if ($(".status-collecte").length == 0) $("#project-list-menu [data-status='collecte']").remove();
-					if ($(".status-vote").length == 0) $("#project-list-menu [data-status='vote']").remove();
-					if ($(".status-preview").length == 0) $("#project-list-menu [data-status='preview']").remove();
-					$("#project-list-menu a").first().trigger("click");
-				} else {
-					$(".home-large-project").show();
-					$(".home-small-project").show();
+		refreshProjectList: function( step, location ) {
+			var locationList = location.split(',');
+			$(".wdg-component-projects-preview .block-projects .project-container").show();
+			$(".wdg-component-projects-preview .block-projects .project-container").each(function() {
+				if ( step !== "all" && $(this).data("step") !== step ) {
+					$(this).hide();
 				}
-			}
-			YPUIFunctions.refreshProjectPreview();
+				if ( location !== "all" && locationList.indexOf( $(this).data("location").toString() ) === -1 ) {
+					$(this).hide();
+				}
+			});
 		},
 		
 		getCookie: function(cookieName) {

@@ -15,7 +15,7 @@ $width = 100 * $percent / 100; /* taille maxi de la barre est à 100% */
 
 
 <!-- Container du projet--> 
-<div class="project-container" id="project-<?php echo $project_id ?>">
+<div class="project-container" id="project-<?php echo $project_id ?>" data-step="<?php echo $campaign_status; ?>" data-location="<?php echo $campaign->get_location_number(); ?>">
     <div class= "impacts-container" id="impacts-<?php echo $project_id ?>">
         <span class="impact-logo impact-ecologic" id="impact-ecologic-<?php echo $project_id ?>"><p>ecl</p></span> <!-- impacts à modifier selon nvl données et nvl fonctions à créer -->
         <span class="impact-logo impact-social" id="impact-social-<?php echo $project_id ?>"><p>soc</p></span>

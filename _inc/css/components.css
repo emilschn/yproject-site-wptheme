@@ -63,7 +63,7 @@
 }
 
 /*message pour bannière sur screen*/
-.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message{
+.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .screen-message, .wdg-component-slider .slider-container #slider .slide-1button .message-banner .screen-message{
 	margin: 42px 0px;
     padding-left: 30%;
     position: relative;
@@ -74,11 +74,11 @@
     text-align: left;
     color: #FFFFFF;
 }
-.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .mobile-message{
+.wdg-component-slider .slider-container #slider .slide-2buttons .message-banner .mobile-message, .wdg-component-slider .slider-container #slider .slide-1button .message-banner .mobile-message{
     display: none;
 }
 
-.wdg-component-slider .slider-container #slider .slide-2buttons #button-container{
+.wdg-component-slider .slider-container #slider .slide-2buttons #button-container, .wdg-component-slider .slider-container #slider .slide-1button #button-container{
     position: absolute;
     z-index: 3;
     display: flex;
@@ -88,7 +88,7 @@
     top: 450px; 
     left: 10%;
 }
-.wdg-component-slider .slider-container #slider .slide-2buttons #button-container .button-slide{
+.wdg-component-slider .slider-container #slider .slide-2buttons #button-container .button-slide, .wdg-component-slider .slider-container #slider .slide-1button #button-container .button-slide{
     width: 32%; 
     margin: 0% 1.5%;
     text-align: center;
@@ -199,6 +199,7 @@
     z-index: 0;
     display: flex;
     justify-content: space-around;
+	flex-wrap: wrap;
 	height: 620px;
 	margin: 0% 5%;
 }

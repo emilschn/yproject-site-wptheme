@@ -16,6 +16,11 @@ body input {
 /*******************************************************************************
 * COMMON
 *******************************************************************************/
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; }
+.clearfix { overflow-x: hidden; overflow-y: hidden; }
+
 .aligncenter, .align-center { text-align: center; }
 .alignleft, .align-left { text-align: left; }
 
@@ -487,8 +492,8 @@ footer > section:nth-child(2) > div:last-child a{
 	width: 100%;
 }
 #content .padder {
-	width: calc(100% - 40px);
-	max-width: 1260px;
+	width: calc(100% - 20px);
+	max-width: 1280px;
 	margin: auto;
 }
 
@@ -560,50 +565,112 @@ body.page-template-template-discover-projects-php header {
 body.page-template-template-discover-projects-php header > div > div {
 	display: inline-block;
 	height: 460px;
+	padding-bottom: 20px;
 }
 
 body.page-template-template-discover-projects-php header > div > div.wdg-component-slider.project-list-slider {
-	width: 69%;
+	width: 68%;
 }
 body.page-template-template-discover-projects-php header > div > div.wdg-component-slider.project-list-slider .slider-container {
 	height: 460px;
 }
+body.page-template-template-discover-projects-php header > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner {
+	width: calc(100% - 275px);
+	height: 312px;
+	background: rgba(0, 0, 0, 0.4);
+}
+body.page-template-template-discover-projects-php header > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner:after {
+	border-top: 315px solid rgba(0, 0, 0, 0.4);
+}
+body.page-template-template-discover-projects-php header > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner .screen-message {
+	min-height: 100px;
+	margin: 25px 20px;
+	padding: 0px 0px 20px;
+	border-bottom: 1px solid #FFFFFF;
+	font-size: 35pt;
+    font-family: Trebuchet MS, sans-serif;
+	text-transform: uppercase;
+	text-align: left;
+	color: #FFF;
+}
+body.page-template-template-discover-projects-php header > div > div.wdg-component-slider .slider-container #slider #button-container {
+	display: block;
+	width: auto;
+	left: 0px;
+	top: 330px;
+}
+body.page-template-template-discover-projects-php header > div > div.wdg-component-slider .slider-container #slider #button-container .button-slide {
+	width: auto;
+	margin-left: 20px;
+	padding: 20px 60px;
+}
 
-body.page-template-template-discover-projects-php header > div > div:last-child {
+body.page-template-template-discover-projects-php header > div > div#wdg-project-stats {
 	vertical-align: top;
 	width: 30%;
 }
 
-body.page-template-template-discover-projects-php header > div > div:last-child p {
-	width: 95%;
+body.page-template-template-discover-projects-php header > div > div#wdg-project-stats p {
+	width: 90%;
 	height: 80px;
-	margin: 0px 0px 5px;
+	margin: 0px 0px 6.5px;
 	padding: 20px 5%;
 	font-size: 22pt;
 	background: #FFFFFF;
 	color: #000000;
 }
-body.page-template-template-discover-projects-php header > div > div:last-child p:first-child {
+body.page-template-template-discover-projects-php header > div > div#wdg-project-stats p:first-child {
 	height: 40px;
 	background: #000000;
 	color: #FFFFFF;
 	line-height: 40px;
 }
 
-body.page-template-template-discover-projects-php header > div > div:last-child p img {
+body.page-template-template-discover-projects-php header > div > div#wdg-project-stats p img {
 	float: left;
 	margin-right: 20px;
 }
-body.page-template-template-discover-projects-php header > div > div:last-child p span span {
+body.page-template-template-discover-projects-php header > div > div#wdg-project-stats p span span {
 	font-size: 30pt;
 	letter-spacing: 2px;
 	font-weight: bold;
 }
 
-
-nav#project-filter {
-	height: 80px;
+body.page-template-template-discover-projects-php nav#project-filter {
+	display: flex;
+    justify-content: space-around;
+	height: 40px;
+	line-height: 40px;
+	margin-bottom: 30px;
+	padding: 20px;
 	text-transform: uppercase;
 	background: #333333;
 	color: #FFFFFF;
+	font-size: 15pt;
+}
+
+body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container {
+	width: 320px;
+	height: 620px;
+}
+body.page-template-template-discover-projects-php .wdg-component-projects-preview .block-projects {
+	height: auto;
+	max-height: 1240px;
+	margin: 0px;
+	overflow-y: hidden;
+}
+
+body.page-template-template-discover-projects-php div#content > div:last-child {
+	margin-top: 20px;
+	padding-bottom: 30px;
+	background-color: rgba(51, 51, 51, 0.05);
+}
+body.page-template-template-discover-projects-php div#content > div:last-child .wdg-component-projects-preview .block-projects {
+	max-height: 620px;
+}
+body.page-template-template-discover-projects-php div#content > div:last-child .wdg-component-projects-preview .project-container .project-framed {
+	background-color: #FFFFFF;
+}
+body.page-template-template-discover-projects-php div#content > div:last-child .wdg-component-projects-preview .project-container .project-framed::before {
+	border-top: 60px solid rgba(51, 51, 51, 0.05);
 }

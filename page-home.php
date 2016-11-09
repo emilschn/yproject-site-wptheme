@@ -51,8 +51,8 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
                             <a class="button-slide" href="<?php echo home_url( '/financement' ); ?>"><?php _e("Financer son projet", "yproject") ?></a>
                             <a class="button-slide" href="<?php echo home_url( '/investissement' ); ?>"><?php _e("Investir sur un projet", "yproject") ?></a>
                         </div>
-                    <?php endif;?>                         
-                    <?php if($ii !== 1): ?> 
+                    <?php endif; ?>
+                    <?php if($ii !== 1): ?>
                         <div class="message-banner">
                         </div>
                     <?php endif; ?>
@@ -73,7 +73,7 @@ else {
 ?>
 
 <section class="wdg-component-projects-preview">
-    <h2 class="standard"><?php _e("/ les projets /", "yproject") ?></h2>
+    <h2 class="standard">/ <?php _e("les projets", "yproject") ?> /</h2>
     <div class="block-projects">
         <?php
         $nb_projects = 3;
@@ -90,7 +90,7 @@ else {
 
 <section id="home-video">
     <div id="video-content">
-        <h2 class="standard"><?php _e("/ comment ça marche ? /", "yproject")?></h2>
+        <h2 class="standard">/ <?php _e("comment ça marche ?", "yproject")?> /</h2>
         <div class="home_video">
             <div class="video-container w570 hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 570)); ?></div>
             <div class="video-container w320 hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 320)); ?></div>
