@@ -356,43 +356,17 @@ YPUIFunctions = (function($) {
 				}
 			}
 			
-			if ($(".wdg-component-projects-preview .block-projects").length > 0) {
-				YPUIFunctions.initTouchX = 0;
-				YPUIFunctions.initMarginLeft = 0;
-				YPUIFunctions.totalWidth = 0;
-				$(".wdg-component-projects-preview .block-projects .project-container").each(function(){
-					YPUIFunctions.totalWidth += parseInt($(this).width());
-				});
+			
+			if ($(".projects-current .wdg-component-projects-preview .project-slider").length > 0) {
+				$(".projects-current .wdg-component-projects-preview .block-projects").width( ($(".projects-current .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-current .wdg-component-projects-preview .project-container").length );
+				$(".projects-current .wdg-component-projects-preview .project-slider").scrollLeft( ($(".projects-current .wdg-component-projects-preview .block-projects").width() - $(".projects-current .wdg-component-projects-preview .project-slider").width()) / 2 );
 				
-				$(".wdg-component-projects-preview .block-projects").on("touchstart", function(e) {
-					var touchobj = e.changedTouches[0];
-					YPUIFunctions.initTouchX = parseInt(touchobj.clientX);
-					YPUIFunctions.initMarginLeft = parseInt($(".wdg-component-projects-preview .block-projects").css( "marginLeft" ));
-				});
-				$(".wdg-component-projects-preview .block-projects").on("touchmove", function(e) {
-					var touchobj = e.changedTouches[0];
-					var currentX = parseInt(touchobj.clientX) - YPUIFunctions.initTouchX;
-					var containerW = parseInt($(".wdg-component-projects-preview").width());
-					var newMarginLeft = Math.min( YPUIFunctions.initMarginLeft + currentX - YPUIFunctions.initTouchX, YPUIFunctions.totalWidth - containerW + 10 );
-					newMarginLeft = Math.max( newMarginLeft, containerW - YPUIFunctions.totalWidth - 20 );
-					$(".wdg-component-projects-preview .block-projects").css( "marginLeft", newMarginLeft );
-				});
-				$(".wdg-component-projects-preview .block-projects").on("mousedown", function(e) {
-					YPUIFunctions.initTouchX = parseInt(e.clientX);
-					YPUIFunctions.initMarginLeft = parseInt($(".wdg-component-projects-preview .block-projects").css( "marginLeft" ));
-				});
-				$(".wdg-component-projects-preview .block-projects").on("mousemove", function(e) {
-					if (YPUIFunctions.initTouchX > 0) {
-						var currentX = parseInt(e.clientX);
-						var containerW = parseInt($(".wdg-component-projects-preview").width());
-						var newMarginLeft = Math.min( YPUIFunctions.initMarginLeft + currentX - YPUIFunctions.initTouchX, YPUIFunctions.totalWidth - containerW + 10 );
-						newMarginLeft = Math.max( newMarginLeft, containerW - YPUIFunctions.totalWidth - 20 );
-						$(".wdg-component-projects-preview .block-projects").css( "marginLeft", newMarginLeft );
-					}
-				});
-				$(document).on("mouseup", function(e) {
-					YPUIFunctions.initTouchX = 0;
-				});
+				$(".projects-funded .wdg-component-projects-preview .block-projects").width( ($(".projects-funded .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-funded .wdg-component-projects-preview .project-container").length );
+				$(".projects-funded .wdg-component-projects-preview .project-slider").scrollLeft( ($(".projects-funded .wdg-component-projects-preview .block-projects").width() - $(".projects-funded .wdg-component-projects-preview .project-slider").width()) / 2 );
+			
+			} else if ($(".wdg-component-projects-preview .project-slider").length > 0) {
+				$(".wdg-component-projects-preview .block-projects").width( ($(".wdg-component-projects-preview .project-container").width() + 5) * $(".wdg-component-projects-preview .project-container").length );
+				$(".wdg-component-projects-preview .project-slider").scrollLeft( ($(".wdg-component-projects-preview .block-projects").width() - $(".wdg-component-projects-preview .project-slider").width()) / 2 );
 			}
 			
 			if ($("#project-filter").length > 0) {

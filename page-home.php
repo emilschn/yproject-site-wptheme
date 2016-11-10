@@ -74,16 +74,18 @@ else {
 
 <section class="wdg-component-projects-preview">
     <h2 class="standard">/ <?php _e("les projets", "yproject") ?> /</h2>
-    <div class="block-projects">
-        <?php
-        $nb_projects = 3;
-        // Affiche les 3 projets les plus récents entre ceux en cours, en vote et financés
-        $all_projects = ATCF_Campaign::get_list_most_recent( $nb_projects );
-        foreach ($all_projects as $project_id) {
-            require('projects/preview.php');
-        }
-        ?>
-    </div>
+	<div class="project-slider">
+		<div class="block-projects">
+			<?php
+			$nb_projects = 3;
+			// Affiche les 3 projets les plus récents entre ceux en cours, en vote et financés
+			$all_projects = ATCF_Campaign::get_list_most_recent( $nb_projects );
+			foreach ($all_projects as $project_id) {
+				require('projects/preview.php');
+			}
+			?>
+		</div>
+	</div>
     <a class="home-button-project see-more red" href=""><?php _e("découvrir tous les projets","yproject" ) ?></a>
 </section> <!-- section.wdg-component-projects-preview -->
 

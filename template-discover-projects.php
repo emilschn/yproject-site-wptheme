@@ -117,19 +117,21 @@
 		</nav>
 		
 		<section class="wdg-component-projects-preview">
-			<div class="block-projects">
-			<?php
-			$project_list_funding = ATCF_Campaign::get_list_funding( );
-			$project_list_vote = ATCF_Campaign::get_list_vote( );
-			foreach ( $project_list_funding as $project_post ) {
-				$project_id = $project_post->ID;
-				require('projects/preview.php');
-			}
-			foreach ( $project_list_vote as $project_post ) {
-				$project_id = $project_post->ID;
-				require('projects/preview.php');
-			}
-			?>
+			<div class="project-slider">
+				<div class="block-projects">
+				<?php
+				$project_list_funding = ATCF_Campaign::get_list_funding( );
+				$project_list_vote = ATCF_Campaign::get_list_vote( );
+				foreach ( $project_list_funding as $project_post ) {
+					$project_id = $project_post->ID;
+					require('projects/preview.php');
+				}
+				foreach ( $project_list_vote as $project_post ) {
+					$project_id = $project_post->ID;
+					require('projects/preview.php');
+				}
+				?>
+				</div>
 			</div>
 		</section>
 	    
@@ -141,15 +143,17 @@
 			<section class="wdg-component-projects-preview">
 				<h2 class="standard">/ <?php _e("projets financ&eacute;s", "yproject") ?> /</h2>
 
-				<div class="block-projects">
-				<?php
-				$count = 0;
-				foreach ( $project_list_funded as $project_post ) {
-					$count++;
-					$project_id = $project_post->ID;
-					require('projects/preview.php');
-				}
-				?>
+				<div class="project-slider">
+					<div class="block-projects">
+					<?php
+					$count = 0;
+					foreach ( $project_list_funded as $project_post ) {
+						$count++;
+						$project_id = $project_post->ID;
+						require('projects/preview.php');
+					}
+					?>
+					</div>
 				</div>
 			</section>
 			

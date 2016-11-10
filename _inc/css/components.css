@@ -195,21 +195,30 @@
 	text-align: center;
 }
 
+.wdg-component-projects-preview .project-slider {
+	width: 100%;
+	overflow-x: scroll;
+}
 .wdg-component-projects-preview .block-projects {
     z-index: 0;
     display: flex;
     justify-content: space-around;
 	flex-wrap: wrap;
 	height: 620px;
-	margin: 0% 5%;
+}
+@media screen and (min-width: 1200px) {
+	.wdg-component-projects-preview .block-projects {
+		margin: 0% 5%;
+	}
 }
 
 .wdg-component-projects-preview .project-container{ 
     position: relative;
     display: flex;
-	width: 100%;
+	width: 33%;
     min-width: 320px;
     max-width: 400px;
+	height: 620px;
     justify-content: center;
     font-family: Trebuchet MS, sans-serif;
 }
@@ -219,6 +228,7 @@
     background-color: rgba(51, 51, 51, 0.05);
     position: relative;
     top: 25px;
+	margin: 0% 5%;
 }
 
 .wdg-component-projects-preview .project-container .project-framed::before { 
@@ -239,6 +249,7 @@
     align-items: center;
 	width: 90%;
 	height: 50px;
+	margin: 0% 5%;
 }
 .wdg-component-projects-preview .project-container .impacts-container .impact-logo{
     display: flex;
@@ -289,13 +300,15 @@
 }
 
 .wdg-component-projects-preview .project-container .project-framed .project-summary{
-    max-width: 100%;
-    text-align: left;
     position: absolute;
-    padding: 0px 4%;
     top: 255px;
-    font-size: 11pt;
+    max-width: 100%;
+	height: 85px;
+	overflow: hidden;
 	margin: 0px;
+    padding: 0px 4%;
+    font-size: 11pt;
+    text-align: left;
 }
 .wdg-component-projects-preview .project-container .project-framed .progress-bar{
     min-width: 100%;
@@ -411,5 +424,8 @@
 @media screen and (max-width: 997px) {
 	.wdg-component-projects-preview .see-more {
 		width: 288px;
+	}
+	.wdg-component-projects-preview .project-container {
+		width: 320px;
 	}
 }

@@ -3,17 +3,31 @@
 	.only-inf997 { display: block; }
 	.only-inf997.inline { display: inline; }
 	h2.standard { font-size: 24pt; }
+	#content .padder { width: 100%; }
 	
 	nav#main > div#menu > a, nav#main > div#menu > a.lines { display: none; }
 	nav#main > div#menu > a:first-child, nav#main > div#menu > a.btn-user, nav#main > div#menu > a#btn-burger { display: inline-block; }
 	nav#main > div#menu > a.btn-user {
+		padding-right: 0px;
+	}
+	nav#main > div#menu > a.btn-user::before {
 		border-left: 0px;
+	}
+	nav#main > div#menu > a.btn-user::after {
+		content: "";
 		border-right: 2px solid #333333;
-		padding-right: 15px;
+		margin-left: 15px;
+		height: 30px;
+		padding-top: 3px;
+		padding-bottom: 3px;
 	}
 	nav#main > div#menu > a.btn-user.active {
 		margin-right: 0px;
 		border-right: 2px solid #E1E3E2;
+	}
+	nav#main > div#menu > a.btn-user.active::after {
+		margin-left: 0px;
+		border-right: 0px;
 	}
 	
 	nav#main > div#menu > a#btn-burger.active {
@@ -129,6 +143,13 @@
 		background: #FFF;
 	}
 	
+	body.home-page .wdg-component-projects-preview .block-projects {
+		width: 960px;
+	}
+	body.home-page .wdg-component-projects-preview .block-projects .project-container {
+		display: inline-block;
+	}
+	
 	#home-video .home_video .video-container, .home_video .button-video {
 		-moz-box-shadow: 0px 0px;
 		-webkit-box-shadow: 0px 0px;
@@ -167,5 +188,13 @@
 	}
 	body.page-template-template-discover-projects-php nav#project-filter > span.show:after {
 		content: "-";
+	}
+	body.page-template-template-discover-projects-php .wdg-component-projects-preview .block-projects {
+		display: block;
+		max-height: 620px;
+	}
+	body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container {
+		display: inline-block;
+		height: 620px;
 	}
 }

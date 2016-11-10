@@ -201,10 +201,16 @@ nav#main > div#menu > a.btn-user {
     display: inline-block;
     margin: 0;
     text-align: center;
-	border-left: 2px solid #333333;
-	padding-left: 15px;
 	padding-right: 5px;
     background: none;
+}
+nav#main > div#menu > a.btn-user:before {
+	content: "";
+	border-left: 2px solid #333333;
+	margin-right: 15px;
+	height: 30px;
+	padding-top: 3px;
+	padding-bottom: 3px;
 }
 nav#main > div#menu > a.btn-user > img {
     vertical-align: middle;
@@ -218,8 +224,11 @@ nav#main > div#menu > a.btn-user.active {
 	margin-right: -10px;
 	margin-bottom: -10px;
 }
+nav#main > div#menu > a.btn-user.active:before {
+	border-left: 0px;
+}
 nav#main > div#menu > a.btn-user.active > img {
-	margin-top: 17px;
+	margin-top: 16px;
 }
 nav#main > div#menu > a.btn-user.active.connected > img {
 	margin-top: 13px;
@@ -655,8 +664,9 @@ body.page-template-template-discover-projects-php nav#project-filter {
 }
 
 body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container {
-	width: 320px;
+	width: 25%;
 	height: 620px;
+	min-width: 240px;
 }
 body.page-template-template-discover-projects-php .wdg-component-projects-preview .block-projects {
 	height: auto;
@@ -672,6 +682,7 @@ body.page-template-template-discover-projects-php div#content > div:last-child {
 }
 body.page-template-template-discover-projects-php div#content > div:last-child .wdg-component-projects-preview .block-projects {
 	max-height: 620px;
+	margin: auto;
 }
 body.page-template-template-discover-projects-php div#content > div:last-child .wdg-component-projects-preview .project-container .project-framed {
 	background-color: #FFFFFF;
