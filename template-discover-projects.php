@@ -95,8 +95,19 @@
 	<div class="padder projects-current">
 		<nav id="project-filter">
 			<span><?php _e( "Filtres", 'yproject' ); ?> <span class="only-inf997 inline"><?php _e( "projets", 'yproject' ); ?></span></span>
-			<select>
+			<select id="project-filter-impact" class="project-filter-select">
 				<option value="all" selected="selected"><?php _e( "Tous les impacts", 'yproject' ); ?></option>
+				<?php
+                $terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
+                $term_category_id = $terms_category[0]->term_id;
+				$impacts_list = get_terms( 'download_category', array(
+					'child_of' => $term_category_id,
+					'hierarchical' => false,
+					'hide_empty' => false
+				) );
+				foreach ( $impacts_list as $impact ): ?>
+				<option value="<?php echo $impact->slug; ?>"><?php echo $impact->name; ?></option>
+				<?php endforeach; ?>
 			</select>
 			<select id="project-filter-location" class="project-filter-select">
 				<?php $region_list = atcf_get_regions(); ?>
@@ -111,8 +122,19 @@
 				<option value="funded"><?php _e( "Financ&eacute;", 'yproject' ); ?></option>
 				<option value="all" selected="selected"><?php _e( "Toutes les &eacute;tapes de campagne", 'yproject' ); ?></option>
 			</select>
-			<select>
+			<select id="project-filter-activity" class="project-filter-select">
 				<option value="all" selected="selected"><?php _e( "Tous les secteurs d'activit&eacute;", 'yproject' ); ?></option>
+				<?php
+                $terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
+                $term_activity_id = $terms_activity[0]->term_id;
+				$activities_list = get_terms( 'download_category', array(
+					'child_of' => $term_activity_id,
+					'hierarchical' => false,
+					'hide_empty' => false
+				) );
+				foreach ( $activities_list as $activity ): ?>
+				<option value="<?php echo $activity->slug; ?>"><?php echo $activity->name; ?></option>
+				<?php endforeach; ?>
 			</select>
 		</nav>
 		

@@ -382,7 +382,9 @@ YPUIFunctions = (function($) {
 				$("#project-filter .project-filter-select").click(function() {
 					var step = $("#project-filter-step").val();
 					var location = $("#project-filter-location").val();
-					YPUIFunctions.refreshProjectList( step, location );
+					var activity = $("#project-filter-activity").val();
+					var impact = $("#project-filter-impact").val();
+					YPUIFunctions.refreshProjectList( step, location, activity, impact );
 				});
 				
 				$("div.padder.projects-funded button").click(function() {
@@ -675,14 +677,21 @@ YPUIFunctions = (function($) {
 			}
 		},
 
-		refreshProjectList: function( step, location ) {
+		refreshProjectList: function( step, location, activity, impact ) {
 			var locationList = location.split(',');
 			$(".wdg-component-projects-preview .block-projects .project-container").show();
 			$(".wdg-component-projects-preview .block-projects .project-container").each(function() {
+				var categoryList = $(this).data("categories");
 				if ( step !== "all" && $(this).data("step") !== step ) {
 					$(this).hide();
 				}
 				if ( location !== "all" && locationList.indexOf( $(this).data("location").toString() ) === -1 ) {
+					$(this).hide();
+				}
+				if ( activity !== "all" && categoryList.indexOf( activity ) === -1 ) {
+					$(this).hide();
+				}
+				if ( impact !== "all" && categoryList.indexOf( impact ) === -1 ) {
 					$(this).hide();
 				}
 			});

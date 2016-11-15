@@ -7,17 +7,24 @@
 $campaign = atcf_get_campaign( $project_id );
 $img = $campaign->get_home_picture_src();
 $campaign_status = $campaign->campaign_status();
+$campaign_categories_str = $campaign->get_categories_str();
 
 $percent = min(100, $campaign->percent_minimum_completed(false));
 $width = 100 * $percent / 100; /* taille maxi de la barre est à 100% */
 ?>
 
 
-<div class="project-container" id="project-<?php echo $project_id ?>" data-step="<?php echo $campaign_status; ?>" data-location="<?php echo $campaign->get_location_number(); ?>">
+<div class="project-container" id="project-<?php echo $project_id ?>" data-step="<?php echo $campaign_status; ?>" data-location="<?php echo $campaign->get_location_number(); ?>" data-categories="<?php echo $campaign_categories_str; ?>">
     <div class= "impacts-container" id="impacts-<?php echo $project_id ?>">
-        <span class="impact-logo impact-ecologic" id="impact-ecologic-<?php echo $project_id ?>"><p>ecl</p></span> <!-- impacts à modifier selon nvl données et nvl fonctions à créer -->
+		<?php if (strpos($campaign_categories_str, 'environnemental') != FALSE): ?>
+        <span class="impact-logo impact-ecologic" id="impact-ecologic-<?php echo $project_id ?>"><p>ecl</p></span>
+		<?php endif; ?>
+		<?php if (strpos($campaign_categories_str, 'social') != FALSE): ?>
         <span class="impact-logo impact-social" id="impact-social-<?php echo $project_id ?>"><p>soc</p></span>
-        <span class="impact-logo impact-economic" id="impact-economic-<?php echo $project_id ?>"><p>ecn</p></span>                   
+		<?php endif; ?>
+		<?php if (strpos($campaign_categories_str, 'economique') != FALSE): ?>
+        <span class="impact-logo impact-economic" id="impact-economic-<?php echo $project_id ?>"><p>ecn</p></span>
+		<?php endif; ?>
     </div>
 	
     <div class="project-framed">
