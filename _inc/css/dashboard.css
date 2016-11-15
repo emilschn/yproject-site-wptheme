@@ -409,6 +409,21 @@
     border-bottom: 1px solid grey;
 }
 
+#page-informations div.field > label {
+	vertical-align: top;
+}
+#page-informations div.field > span.field-value {
+	display: inline-block;
+}
+#page-informations div.field ul, #page-informations div.field li {
+	margin: 0px;
+	padding-left: 0px;
+	list-style: none;
+}
+#page-informations div.field > span > li > label {
+	display: none;
+}
+
 /*******************************************************************************
 * Page actualités
 *******************************************************************************/

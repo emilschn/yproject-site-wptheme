@@ -34,7 +34,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
                             );
             for ($ii = 1; $ii <= count($tabImg); $ii++):
                 ?>
-				<div class="slider-item slide-2buttons" id="slide-<?php echo $ii?>" style="<?php if ($ii > 1){ ?>display: none;<?php } else { ?>left: 0px;<?php } ?>">
+				<div class="slider-item" id="slide-<?php echo $ii?>" style="<?php if ($ii > 1){ ?>display: none;<?php } else { ?>left: 0px;<?php } ?>">
                     <img class="slider-motif-left-haut" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-trame-haut-gauche-01.png"/>
                     <img class="slider-motif-right" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-motif-trame-droite.png"/>
                     <img class="slide" id="img-slide-<?php echo $ii?>" src="<?php echo $stylesheet_directory_uri; ?><?php echo $tabImg[$ii] ?>"/> 
@@ -45,12 +45,6 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 							<p class="screen-message">Nous activons</br>une finance à impact positif</br>en développant<br/>les levées de fonds en royalties</p>
 							<img class="slider-motif-left-bas" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-trame-bas-gauche-01.png"/>
                         </div>
-                        
-                        
-                        <div id="button-container">
-                            <a class="button-slide" href="<?php echo home_url( '/financement' ); ?>"><?php _e("Financer son projet", "yproject") ?></a>
-                            <a class="button-slide" href="<?php echo home_url( '/investissement' ); ?>"><?php _e("Investir sur un projet", "yproject") ?></a>
-                        </div>
                     <?php endif; ?>
                     <?php if($ii !== 1): ?>
                         <div class="message-banner">
@@ -60,6 +54,11 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
             <?php endfor; ?>
         </div>
     </div>
+	
+	<div id="button-container">
+		<a class="button-slide" href="<?php echo home_url( '/financement' ); ?>"><?php _e("Financer son projet", "yproject") ?></a>
+		<a class="button-slide" href="<?php echo home_url( '/investissement' ); ?>"><?php _e("Investir sur un projet", "yproject") ?></a>
+	</div>
 </header> <!-- .wdg-component-slider -->
 
 <?php
