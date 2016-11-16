@@ -77,7 +77,7 @@ $width = 100 * $percent / 100; /* taille maxi de la barre est à 100% */
                 <span class="progress-pers"><?php if($jycrois): ?><p class="info-nb"><?php echo $jycrois; ?>&nbsp;pers.</p><?php endif; ?><p class="info-action"><?php echo $persStatus ?></p></span>
                 <span class="progress-days"><p class="info-nb"><?php echo $timeRemaining; echo $days ?></p><p class="info-action"><?php echo $projectAction ?></p></span>
             </div>
-            <a class="home-button-project project-button"href=""><?php echo $buttonAction ?></a>
+			<a class="home-button-project project-button" href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $buttonAction ?></a>
     <?php
           
         //Projets déja financés
@@ -94,7 +94,7 @@ $width = 100 * $percent / 100; /* taille maxi de la barre est à 100% */
                 <span class="progress-pers"><p class="info-nb"><?php echo $campaign->get_jycrois_nb(); ?>&nbsp;<?php _e("pers.", "yproject") ?></p><p class="info-action"><?php echo $persStatus ?></p></span>
                 <span class="progress-status"><p class="info-nb"><?php echo $projectStatus ?></p></span>
             </div>
-            <a class="home-button-project project-button see-project"href=""><?php echo $buttonAction ?></a>  
+            <a class="home-button-project project-button see-project" href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $buttonAction ?></a>  
     <?php endif; ?>
 
     </div> <!-- .project-framed -->
