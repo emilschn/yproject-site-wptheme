@@ -53,7 +53,7 @@ function print_informations_page()
         </div>
     </div>
 
-    <div id="tab-container">
+    <div id="tab-container">      
         <div class="tab-content" id="tab-project">
             <form id="projectinfo_form" class="db-form" data-action="save_project_infos">
                 <ul class="errors">
@@ -318,15 +318,18 @@ function print_informations_page()
                 <?php
                 // Gestion des organisations
                 $str_organisations = '';
-                global $current_user;
+                global $current_user, $current_organisation;
+                
                 $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
                 $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
+//                var_dump($current_organisations);
                 if (isset($current_organisations) && count($current_organisations) > 0) {
                     $current_organisation = $current_organisations[0];
-                }
+                }              
                 $api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
                 $organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
                 if ($organisations_list) {
+//                    var_dump($organisations_list);
                     foreach ($organisations_list as $organisation_item) {
                         $selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
                         $str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
@@ -342,25 +345,38 @@ function print_informations_page()
                         </select>
                     </span>
                     <?php if ($current_organisation!=null){
-                        $page_edit_orga = get_page_by_path('editer-une-organisation');
-                        $edit_org = '<a id="edit-orga-button" class="button" 
-                            data-url-edit="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.'" 
-                            href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
-                        $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
-                        echo $edit_org;
-                    } ?>
+
+                        ?>
+                        <!--bouton d'édition de l'organisation-->
+                        <a href="#" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga">
+                            <?php _e("Editer", "yproject"); echo '&nbsp;'.$current_organisation->organisation_name ?></a>
+                
+                    <?php } ?>
 
                 <?php else: ?>
                     <?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
                     <input type="hidden" name="project-organisation" value="" />
-                <?php endif;
+                <?php endif; ?>
 
-                $page_new_orga = get_page_by_path('creer-une-organisation'); ?>
-                <a href="<?php echo get_permalink($page_new_orga->ID); ?>" class="button">Cr&eacute;er une organisation</a>
-
+                <!--bouton de création de l'organisation visible dans tous les cas -->
+                <a href="#" id="btn-new-orga" class="wdg-button-lightbox-open button" data-lightbox="newOrga"><?php _e("Cr&eacute;er une organisation","yproject") ?></a>               
                 <br />
-                <?php DashboardUtility::create_save_button("orgainfo_form"); ?>
-            </form>
+                <?php 
+                DashboardUtility::create_save_button("orgainfo_form"); ?>
+                
+            </form> 
+            <?php           
+                ob_start();
+                locate_template( array("projects/dashboard/informations/organisation-edit.php"), true );                  
+                $lightbox_content = ob_get_clean();
+                echo do_shortcode('[yproject_widelightbox id="editOrga"]'.$lightbox_content.'[/yproject_widelightbox]'); 
+            ?>
+            <?php 
+                ob_start();
+		locate_template( array("projects/dashboard/informations/organisation-new.php"), true );
+                $lightbox_content = ob_get_clean();
+                echo do_shortcode('[yproject_lightbox id="newOrga"]'.$lightbox_content.'[/yproject_lightbox]');
+            ?>
         </div>
 
         <div class="tab-content" id="tab-funding">

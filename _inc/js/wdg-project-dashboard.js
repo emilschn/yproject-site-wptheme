@@ -204,20 +204,8 @@ var WDGProjectDashboard = (function ($) {
 
                 //Infos organisation
                 if ($("#tab-organization").length > 0) {
-
-                    $("#update_project_organisation").change(function(e){
-                        var newval = $("#update_project_organisation").val();
-
-                        if(newval!=''){
-                            $("#edit-orga-button").show();
-                            var newname = $("#update_project_organisation").find('option:selected').text();
-                            $("#edit-orga-button").attr("href",$("#edit-orga-button").data("url-edit")+newval);
-
-                            $("#edit-orga-button").text("Editer "+newname);
-                        } else {
-                            $("#edit-orga-button").hide();
-                        }
-
+                    $("#new_project_organisation").change(function(e){                       
+                        $("#edit-orga-button").hide();
                     });
                 }
 
@@ -424,10 +412,16 @@ var WDGProjectDashboard = (function ($) {
                            firsterror.focus();
                            thisForm.find('.save_errors').fadeIn();
                        } else {
-                           thisForm.find('.save_ok').fadeIn();
+                           thisForm.find('.save_ok').fadeIn();                          
                        }
-
-
+                        
+                        // Save organisation in tab-organization
+                        if (($("#ndashboard #orgainfo_form.db-form").data("action")) == "save_project_organisation"){
+                            //Show button edit organisation after save 
+                            WDGProjectDashboard.updateEditOrgaBtn(thisForm);
+                            //Update edition form after changing and save organization 
+                            WDGProjectDashboard.updateOrgaForm(feedback);
+                        }                      
                    }
                }).fail(function() {
                    thisForm.find('.save_fail').fadeIn();
@@ -790,6 +784,43 @@ var WDGProjectDashboard = (function ($) {
                 $('#ajax-loader-img').hide();//On cache la roue de chargement.
             });
         },
+        
+        //Show button edit organisation after save 
+        updateEditOrgaBtn: function(form){       
+            var newval = $("#new_project_organisation").val();
+            if(newval!== ''){
+                var edit_btn = form.find($("#edit-orga-button")).show();
+
+                var newname = $("#new_project_organisation").find('option:selected').text();
+                edit_btn.attr("href","#");
+                edit_btn.text("Editer "+newname);
+            } else {
+                edit_btn.hide();
+            }
+                    
+        },
+        
+        //Update organization edition form (after saving a new orga)
+        updateOrgaForm: function(feedback){
+//            console.log(feedback.organisation);
+
+            $("#tab-organization #org_name").html(feedback.organisation.name);
+            $("#tab-organization input[name=org_email]").val(feedback.organisation.email);
+            $("#tab-organization input[name=org_description]").val(feedback.organisation.description);
+            $("#tab-organization input[name=org_legalform]").val(feedback.organisation.legalForm);
+            $("#tab-organization input[name=org_idnumber]").val(feedback.organisation.idNumber);
+            $("#tab-organization input[name=org_rcs]").val(feedback.organisation.rcs);
+            $("#tab-organization input[name=org_capital]").val(feedback.organisation.capital);           
+            $("#tab-organization input[name=org_ape]").val(feedback.organisation.ape);
+            $("#tab-organization input[name=org_address]").val(feedback.organisation.address);
+            $("#tab-organization input[name=org_postal_code]").val(feedback.organisation.postal_code);
+            $("#tab-organization input[name=org_city]").val(feedback.organisation.city);
+            $("#tab-organization input[name=org_nationality]").val(feedback.organisation.nationality);
+            $("#tab-organization input[name=org_bankownername]").val(feedback.organisation.bankownername);
+            $("#tab-organization input[name=org_bankowneraddress]").val(feedback.organisation.bankowneraddress);
+            $("#tab-organization input[name=org_bankowneriban]").val(feedback.organisation.bankowneriban);
+            $("#tab-organization input[name=org_bankownerbic]").val(feedback.organisation.bankownerbic);
+        }
     };
 
 })(jQuery);
