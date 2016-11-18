@@ -32,8 +32,6 @@ $campaign_status = $campaign->campaign_status();
 
 <div class="padder">
     
-	<?php locate_template( array("projects/single/pitch.php"), true ); ?>
-    
 	<?php locate_template( array("projects/single/rewards.php"), true ); ?>
     
 	<?php locate_template( array("projects/single/description.php"), true ); ?>

@@ -11,7 +11,7 @@ var WDGProjectViewer = (function($) {
 		
 		init: function() {
 			$(document).scroll(function() {
-				if ($(document).scrollTop() > 100) {
+				if ($(document).scrollTop() > 600) {
 					$("#content, nav#main").addClass("scrolled");
 				} else {
 					$("#content, nav#main").removeClass("scrolled");
@@ -33,7 +33,7 @@ var WDGProjectViewer = (function($) {
 				e.preventDefault();
 				var target = $(this).data("target");
 				$('html, body').animate(
-					{ scrollTop: $("div.project-" + target).offset().top - $("nav.project-navigation").height() },
+					{ scrollTop: $("div.project-" + target).offset().top - 100 },
 					"slow"
 				); 
 			});

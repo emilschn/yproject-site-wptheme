@@ -30,9 +30,11 @@ if (is_user_logged_in()) {
 	if ($btn_follow_following == '1') { $btn_follow_classes .= ' btn-followed'; }
 	if (!empty($users[0]->ID)) { $btn_follow_href = '#'; }
 	
-	$table_name = $wpdb->prefix . "ypcf_project_votes";
-	$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign->ID.'. AND user_id = '.$current_user->ID );
-	if ( !empty($hasvoted_results[0]->id) ) $has_voted = true;
+	if ($campaign_status == "vote") {
+		$table_name = $wpdb->prefix . "ypcf_project_votes";
+		$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign->ID.'. AND user_id = '.$current_user->ID );
+		if ( !empty($hasvoted_results[0]->id) ) $has_voted = true;
+	}
 }
 
 $owner_str = '';

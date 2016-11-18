@@ -46,80 +46,65 @@ div#content.version-3 .separator {
 }
 
 div#content.version-3 nav.project-navigation {
-    height: 60px;
-    background-color: #FFFFFF;
+	height: 60px;
+	background-color: #FFFFFF;
+	border-bottom: 2px solid;
 }
 div#content.version-3 nav.project-navigation ul {
     float: left;
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
-	margin: 0px 0px 0px 190px;
-    padding-left: 0px;
+	margin: 0px;
+	padding: 0px;
 }
 div#content.version-3 nav.project-navigation ul li {
     list-style: none;
     height: 60px;
     vertical-align: middle;
     display: table-cell;
-    padding-right: 10px;
+    padding-right: 15px;
 }
 div#content.version-3 nav.project-navigation ul li a {
-    color: #333333;
-    text-transform: uppercase;
-	font-size: 12px;
-}
-div#content.version-3 nav.project-navigation ul li a.selected {
-	font-weight: bold;
+	color: #000000;
+	text-transform: uppercase;
+	font-size: 11pt;
 }
 
-div#content.version-3 nav.project-navigation ul.menu-project li:after {
-	content: "|";
-	color: #333333;
-	padding-left: 10px;
-}
-div#content.version-3 nav.project-navigation ul.menu-project li:last-child:after {
-	content: "";
-}
-div#content.version-3 nav.project-navigation ul.menu-actions {
-    float: right;
-    width: 320px;
-	margin: 11px 0px;
-}
-div#content.version-3 nav.project-navigation ul.menu-actions li {
-	width: 320px;
-	height: 35px;
-	padding-right: 0px;
-    text-align: center;
-}
-div#content.version-3 nav.project-navigation ul.menu-actions.haslangs li {
-    width: 159px;
-}
-div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a {
+div#content.version-3 nav.project-navigation ul.menu-project li.project-navigation-logo:after {
 	position: relative;
 	display: inline-block;
-	padding: 10px 15px;
-    color: #FFF;
-	background: #EA4F51;
+	top: -5px;
+	height: 20px;
+	padding-left: 15px;
+	border-right: 1px solid;
+	color: #000000;
+	content: "";
 }
-div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a:after {
-	position: absolute;
-	top: 100%; left: 50%;
-	width: 0; height: 0;
-	margin-left: -7px;
-	border: solid transparent; border-color: rgba(0, 0, 0, 0); border-top-color: #EA4F51; border-width: 7px;
-	content: " ";
-	pointer-events: none;
+div#content.version-3 nav.project-navigation ul.menu-project li.project-navigation-title {
+	font-size: 12pt;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	padding-right: 50px;
+}
+div#content.version-3 nav.project-navigation ul.menu-project li.slashed:after {
+	content: "/";
+	padding-left: 15px;
+}
+div#content.version-3 nav.project-navigation ul.menu-project li.slashed:last-child:after {
+	content: "";
 }
 
-div#content.version-3 nav.project-navigation ul.menu-actions li.lang-item {
-	text-align: right;
-	color: #FFF;
+
+div#content.version-3 nav.project-navigation ul.menu-actions {
+    float: right;
 }
-div#content.version-3 nav.project-navigation ul.menu-actions.haslangs li.lang-item {
-	border-left: 1px solid #333333;
+div#content.version-3 nav.project-navigation ul.menu-actions li.action-item {
+	padding-right: 0px;
 }
-div#content.version-3 nav.project-navigation ul.menu-actions li.lang-item form {
-	margin-top: 5px;
+div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a {
+	height: 40px;
+	padding: 10px 40px;
+	font-weight: bold;
+	color: #FFFFFF;
 }
 
 /*******************************************************************************
@@ -506,14 +491,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 *******************************************************************************/
 @media screen and (min-width: 768px) {
 	nav#main.scrolled { display: none; }
-	div#content.version-3.scrolled nav.project-navigation { top: 0px; height: 50px; }
-	div#content.version-3.scrolled nav.project-navigation > div { margin-top: 5px; }
-	div#content.version-3.scrolled nav.project-navigation ul.menu-actions { margin-top: -7px; }
-	div#content.version-3.scrolled nav.project-navigation ul li { height: 40px; }
-	div#content.version-3.scrolled nav.project-navigation ul li#triggered-menu-hamburger { height: auto; top: 50px; }
-	div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.action-item { padding-top: 7px; }
-	div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.action-item a:after { border-width: 0px; }
-	div#content.version-3.scrolled nav.project-navigation ul.menu-actions li.login-item { padding-top: 7px; }
+	div#content.version-3.scrolled nav.project-navigation { position:fixed; width: 100%; top: 0px; }
 }
 
 /*******************************************************************************
@@ -932,11 +910,6 @@ input[name='share_advice']:checked+span:before
     margin-top: 10px;
 }
 
-#vote-form-v3{
-    background: none;
-    text-align: center;
-}
-
 .action-item{
     height: 0px;
 }
@@ -968,10 +941,6 @@ div#content.version-3.scrolled nav.project-navigation ul li {
 }
 #thanks a:hover{
     opacity: 0.7;
-}
-
-#vote-form-v3-button{
-    float: left;
 }
 
 .impact_span, .result_box{
