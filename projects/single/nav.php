@@ -36,7 +36,7 @@ if (is_user_logged_in()) {
 }
 ?>
 
-<nav class="project-navigation">
+<nav class="project-navigation padder">
 	<div class="center clearfix">
 		<ul class="menu-project campaign-mobile-hidden">
 			<?php foreach ($menu_project_parts as $menu_part_key => $menu_part_label): ?>
@@ -92,19 +92,6 @@ if (is_user_logged_in()) {
 				<?php break;
 			} ?>
 			</li>
-			
-			<?php if (!empty($lang_list)): ?>
-			<li class="lang-item">
-				<form method="GET" action="<?php the_permalink(); ?>">
-					<select name="lang">
-						<option value="fr_FR" <?php selected($current_lang , "fr_FR"); ?>>Fran&ccedil;ais</option>
-						<?php foreach ($lang_list as $lang): ?>
-						<option value="<?php echo $lang; ?>" <?php selected($current_lang, $lang); ?>><?php echo $language_list[$lang]; ?></option>
-						<?php endforeach; ?>
-					</select>
-				</form>
-			</li>
-			<?php endif; ?>
 		</ul>
 	</div>
 </nav>

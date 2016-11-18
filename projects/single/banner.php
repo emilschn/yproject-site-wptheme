@@ -1,13 +1,24 @@
 <?php 
 global $campaign, $current_user, $stylesheet_directory_uri, $can_modify;
-$img_src = $campaign->get_header_picture_src();
-$vote_status = $campaign->campaign_status(); 
+$video_element = '';
+$img_src = '';
+//Si aucune vidéo n'est définie, on affiche l'image
+if ($campaign->video() == '') {
+	$img_src = $campaign->get_home_picture_src();
+
+//Sinon on utilise l'objet vidéo fourni par wordpress
+} else {
+	$video_element = wp_oembed_get($campaign->video(), array('width' => 580, 'height' => 325));
+}
+$campaign_status = $campaign->campaign_status();
+$campaign_categories_str = $campaign->get_categories_str();
 
 $btn_follow_href = '#connexion';
 $btn_follow_classes = 'wdg-button-lightbox-open';
 $btn_follow_data_lightbox = 'connexion';
 $btn_follow_text = __('Suivre', 'yproject');
 $btn_follow_following = '0';
+$has_voted = false;
 if (is_user_logged_in()) {
 	$btn_follow_classes = 'update-follow';
 	$btn_follow_data_lightbox = $campaign->ID;
@@ -18,6 +29,10 @@ if (is_user_logged_in()) {
 	$btn_follow_following = (!empty($users[0]->ID)) ? '1' : '0';
 	if ($btn_follow_following == '1') { $btn_follow_classes .= ' btn-followed'; }
 	if (!empty($users[0]->ID)) { $btn_follow_href = '#'; }
+	
+	$table_name = $wpdb->prefix . "ypcf_project_votes";
+	$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign->ID.'. AND user_id = '.$current_user->ID );
+	if ( !empty($hasvoted_results[0]->id) ) $has_voted = true;
 }
 
 $owner_str = '';
@@ -50,171 +65,179 @@ if (count($current_organisations) > 0) {
 ?>
 	
 <div class="project-banner">
-	<div class="project-banner-img" style="<?php echo $campaign->get_header_picture_position_style(); ?>">
-		<?php if ($img_src != ''): ?>
-		<img id="project-banner-src" src="<?php echo $img_src; ?>" alt="banner <?php echo $post->post_title; ?>" />
+	<div class="project-banner-title">
+		<?php if (!empty($lang_list)): ?>
+			<form method="GET" action="<?php the_permalink(); ?>">
+				<select name="lang">
+					<option value="fr_FR" <?php selected($current_lang , "fr_FR"); ?>>Fran&ccedil;ais</option>
+					<?php foreach ($lang_list as $lang): ?>
+					<option value="<?php echo $lang; ?>" <?php selected($current_lang, $lang); ?>><?php echo $language_list[$lang]; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</form>
 		<?php endif; ?>
+		
+		<h1><?php echo $campaign->data->post_title; ?></h1>
+		
+		<div class="project-banner-info-item align-center author-info" data-link-edit="<?php echo $page_edit_orga; ?>">
+			<p>
+				<?php _e("Un projet port&eacute; par", 'yproject'); ?> <?php echo $owner_str; ?>
+				(<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation"><?php _e('Voir les informations', 'yproject'); ?></a>)
+			</p>
+			<?php echo do_shortcode('[yproject_lightbox id="project-organisation"]'.$lightbox_content.'[/yproject_lightbox]'); ?>
+		</div>
 	</div>
     
 	<?php if ($can_modify): ?>
 		<div id="wdg-move-picture-head" class="move-button"></div>
 	<?php endif; ?>
 
-	<div class="project-banner-deco">
-		<div class="center">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/fond_projet3.png" alt="bg decoration" />
-		</div>
-	</div>
-
 	<div class="project-banner-content">
-		<div class="center">
-			<div class="left">
-				<h1><?php echo $campaign->data->post_title; ?></h1>
-				<div class="subtitle"><?php echo $campaign->subtitle(); ?></div>
+		<div class="padder">
+			
+			<div class="banner-half left">
+				<?php if ($img_src != ''): ?>
+				<img id="project-banner-src" src="<?php echo $img_src; ?>" alt="banner <?php echo $post->post_title; ?>" />
+				<?php else: ?>
+				<?php echo $video_element; ?>
+				<?php endif; ?>
 			</div>
-
-			<div class="right">
-				<?php locate_template( array("projects/single/timeline.php"), true ); ?>
-				
-				<div class="separator"></div>
-				<?php
-				if ($vote_status == ATCF_Campaign::$campaign_status_collecte 
-					|| $vote_status == ATCF_Campaign::$campaign_status_funded 
-					|| $vote_status == ATCF_Campaign::$campaign_status_archive) {
-					$percent = min(100, $campaign->percent_minimum_completed(false));
-					$width = 250 * $percent / 100;
-				?>	
-				<?php locate_template( array("projects/common/progressbar.php"), true ); ?>
-
-				<div class="project-banner-logos">
-					<div class="project-banner-info-item">
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-						<span class="campaign-mobile-hidden"><?php _e('Objectif :', 'yproject'); ?>
-							<b><?php echo $campaign->minimum_goal(true); ?></b>
-						</span>
-						<span class="hidden"><b><?php echo $campaign->minimum_goal(true); ?></b></span>
-					</div>
-
-					<div class="project-banner-info-item">
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
-						<?php $backers_count = $campaign->backers_count(); ?>
-						<span class="campaign-mobile-hidden"><b><?php echo $backers_count; ?></b> <?php
-							if ($backers_count > 1) {
-								_e('personnes ont d&eacute;j&agrave;', 'yproject');
-							} else {
-								_e('personne a d&eacute;j&agrave;', 'yproject');
-							}
-							echo ' ';
-							if ($campaign->funding_type() == 'fundingdonation') { 
-								_e('soutenu ce projet', 'yproject');
-							} else {
-								_e('investi sur ce projet', 'yproject');
-							}
-						?></span>
-						<span class="hidden"><b><?php echo $backers_count; ?></b></span>
-					</div>
-
-					<div class="project-banner-info-item">
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
-						<span class="campaign-mobile-hidden"><?php echo $campaign->time_remaining_fullstr(); ?></span>
-						<span class="hidden"><?php echo $campaign->time_remaining_str(); ?></span>
-					</div>
-				</div>
-				<?php 
-				} else if ($vote_status == ATCF_Campaign::$campaign_status_vote) {
-					$nbvoters = $campaign->nb_voters();
-				?>
-					<div class="logos_zone vote">
-						<div class="post_bottom_infos_item only_on_mobile">
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />
-							<?php 
-							$campaign_location = $campaign->location();
-							$exploded = explode(' ', $campaign_location);
-							if (count($exploded) > 1) $campaign_location = $exploded[0];
-							echo (($campaign_location != '') ? $campaign_location : 'France'); 
-							?>
-						</div>
-						<div class="post_bottom_infos_item">
-							<img src="<?php echo $stylesheet_directory_uri; ?>/images/personnes.png" alt="logo personnes" />
-							<span class="mobile_hidden">
-							    <?php if ($nbvoters == 1): ?>
-							    1 personne a d&eacute;j&agrave; vot&eacute;
-							    <?php elseif ($nbvoters > 1): echo $nbvoters; ?>
-							    personnes ont d&eacute;j&agrave; vot&eacute;
-							    <?php else: ?>
-							    Personne n'a vot&eacute;. Soyez le premier !
-							    <?php endif; ?>
-							</span>
-							<span class="only_on_mobile"><?php echo $nbvoters; ?></span>
-						</div>
-						<div class="post_bottom_infos_item">
-							<img src="<?php echo $stylesheet_directory_uri; ?>/images/horloge.png" alt="logo horloge" />
-							<span class="mobile_hidden"><?php echo $campaign->time_remaining_fullstr(); ?></span>
-							<span class="only_on_mobile"><?php echo $campaign->time_remaining_str(); ?></span>
-						</div>
-						<div class="post_bottom_infos_item">
-							<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-							<span class="mobile_hidden"><?php 
-							    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
-							?></span>
-							<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
-						</div>
-						<div class="post_bottom_infos_item only_on_mobile">
-							<img src="<?php echo $stylesheet_directory_uri; ?>/images/good.png" alt="logo main" /><br />
-							<span><?php echo $campaign->get_jycrois_nb(); ?></span>
-						</div>
-						<div class="projects-description-separator mobile_hidden"></div>
-					</div>
-
-				<?php } else if ($vote_status== ATCF_Campaign::$campaign_status_vote){ ?>
-
-					<div class="logos_zone">
-						<div class="post_bottom_infos_item only_on_mobile">
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/france.png" alt="logo france" /><br />
-							<?php 
-							$campaign_location = $campaign->location();
-							$exploded = explode(' ', $campaign_location);
-							if (count($exploded) > 1) $campaign_location = $exploded[0];
-							echo (($campaign_location != '') ? $campaign_location : 'France'); 
-							?>
-						</div>
-						<div class="post_bottom_infos_item">
-							<img src="<?php echo $stylesheet_directory_uri; ?>/images/cible.png" alt="logo cible" />
-							<span class="mobile_hidden"><?php 
-							    echo __('Objectif : ', 'yproject') . $campaign->minimum_goal(true);
-							?></span>
-							<span class="only_on_mobile"><?php echo $campaign->minimum_goal(true); ?></span>
-						</div>
-						<div class="projects-description-separator mobile_hidden"></div>
-					</div>
-
-				<?php } ?>
-				<div class="project-banner-info-item align-center author-info" data-link-edit="<?php echo $page_edit_orga; ?>">
-					<p>
-						<?php _e("Un projet port&eacute; par", 'yproject'); ?> <?php echo $owner_str; ?><br />
-						(<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation"><?php _e('Voir les informations', 'yproject'); ?></a>)
-					</p>
-					<?php echo do_shortcode('[yproject_lightbox id="project-organisation"]'.$lightbox_content.'[/yproject_lightbox]'); ?>
-				</div>
-				
-				<div class="separator"></div>
+			
+			<div class="banner-half right">
 				
 				<div class="project-banner-info-actions">
-					<div>
-						<a href="<?php echo $btn_follow_href; ?>" class="button <?php echo $btn_follow_classes; ?>" data-lightbox="<?php echo $btn_follow_data_lightbox; ?>" data-textfollow="<?php _e('Suivre', 'yproject'); ?>" data-textfollowed="<?php _e('Suivi', 'yproject'); ?>" data-following="<?php echo $btn_follow_following; ?>">
-							<?php echo $btn_follow_text; ?>
-						</a>
+					<div class="impacts-container" id="impacts-<?php echo $project_id ?>">
+						<?php if (strpos($campaign_categories_str, 'environnemental') != FALSE): ?>
+						<span class="impact-logo impact-ecologic" id="impact-ecologic-<?php echo $project_id ?>"><p>ecl</p></span>
+						<?php endif; ?>
+						<?php if (strpos($campaign_categories_str, 'social') != FALSE): ?>
+						<span class="impact-logo impact-social" id="impact-social-<?php echo $project_id ?>"><p>soc</p></span>
+						<?php endif; ?>
+						<?php if (strpos($campaign_categories_str, 'economique') != FALSE): ?>
+						<span class="impact-logo impact-economic" id="impact-economic-<?php echo $project_id ?>"><p>ecn</p></span>
+						<?php endif; ?>
 					</div>
-					<div>
-						<a href="#" class="button trigger-menu" data-target="share">
-							<?php _e('Partager', 'yproject'); ?>
-						</a>
-					</div>
+
+					<a href="<?php echo $btn_follow_href; ?>" class="button blue <?php echo $btn_follow_classes; ?>" data-lightbox="<?php echo $btn_follow_data_lightbox; ?>" data-textfollow="<?php _e('Suivre', 'yproject'); ?>" data-textfollowed="<?php _e('Suivi', 'yproject'); ?>" data-following="<?php echo $btn_follow_following; ?>">
+						<?php echo $btn_follow_text; ?>
+					</a>
+					<a href="#" class="button blue trigger-menu" data-target="share">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/partage/picto-partage.png" alt="Partager" />
+					</a>
 				</div>
+				
+				<div class="project-pitch-text"><?php echo html_entity_decode($campaign->summary()); ?></div>
+				
+				<?php locate_template( array("projects/common/progressbar.php"), true ); ?>
+				
+				
+				<?php // cas d'un projet en cours de vote ?>
+				<?php if ($campaign_status == ATCF_Campaign::$campaign_status_vote): ?>
+					<?php $nbvoters = $campaign->nb_voters(); ?>
+				
+					<div class="left">
+						<?php
+						$number = $nbvoters;
+						$text = __("votant", 'yproject');
+						if ($nbvoters == 0) {
+							$number = __("aucun", 'yproject');
+						} elseif ($nbvoters > 1) {
+							$text = __("votants", 'yproject');
+						}
+						?>
+						<span><?php echo $number; ?></span><br />
+						<span><?php echo $text; ?></span>
+					</div>
+					<div class="left bordered">
+						<span><?php echo $campaign->minimum_goal(true); ?></span><br />
+						<span><?php _e('Objectif', 'yproject'); ?></span>
+					</div>
+					<div class="left">
+						<span><?php echo $campaign->time_remaining_str(); ?></span><br />
+						<span><?php _e('Restants', 'yproject'); ?></span>
+					</div>
+				
+				
+					<div class="clear">
+						
+						<?php if ($campaign->time_remaining_str() != '-'): ?>
+						<?php if (!is_user_logged_in()): ?>
+							<a href="#connexion" class="button red wdg-button-lightbox-open" data-lightbox="connexion" 
+								data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start">
+								<?php _e('Voter', 'yproject'); ?>
+							</a>
+
+						<?php elseif ($has_voted): ?>
+							<div style="-webkit-filter: grayscale(100%); text-transform: uppercase;">
+								<?php _e('Merci pour votre vote !', 'yproject'); ?>
+							</div>
+
+						<?php else: ?>
+							<a href="#lightbox_voter" class="button red wdg-button-lightbox-open" data-lightbox="vote">
+								<?php _e('Voter', 'yproject'); ?>
+							</a>
+						<?php endif; ?>
+
+						<?php endif; ?>
+						
+					</div>
+				
+				
+				<?php // cas d'un projet en financement ?>
+				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
+					<?php
+					$nbinvestors = $campaign->backers_count();
+					$page_invest = get_page_by_path('investir');
+					$campaign_id_param = '?campaign_id=' . $campaign->ID;
+					$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
+					$invest_url_href = "#connexion";
+					$btn_invest_classes = 'button red wdg-button-lightbox-open';
+					$btn_invest_data_lightbox = 'connexion';
+					$btn_invest_text = ($campaign->funding_type() == 'fundingdonation') ? __('Soutenir', 'yproject') : __('Investir', 'yproject');
+					if (is_user_logged_in()) {
+						$invest_url_href = $invest_url;
+						$btn_invest_classes = 'button red';
+						$btn_invest_data_lightbox = '';
+					}
+					?>
+				
+					<div class="left">
+						<?php
+						$number = $nbinvestors;
+						$text = __("investisseur", 'yproject');
+						if ($nbinvestors == 0) {
+							$number = __("aucun", 'yproject');
+						} elseif ($nbinvestors > 1) {
+							$text = __("investisseurs", 'yproject');
+						}
+						?>
+						<span><?php echo $number; ?></span><br />
+						<span><?php echo $text; ?></span>
+					</div>
+					<div class="left bordered">
+						<span><?php echo $campaign->minimum_goal(true); ?></span><br />
+						<span><?php _e('Objectif', 'yproject'); ?></span>
+					</div>
+					<div class="left">
+						<span><?php echo $campaign->time_remaining_str(); ?></span><br />
+						<span><?php _e('Restants', 'yproject'); ?></span>
+					</div>
+
+					<a href="<?php echo $invest_url_href; ?>" class="<?php echo $btn_invest_classes; ?>" data-lightbox="<?php echo $btn_invest_data_lightbox; ?>" data-redirect="<?php echo $invest_url; ?>">
+						<?php echo $btn_invest_text; ?>
+					</a>
+				
+				
+				<?php // cas d'un projet terminé ?>
+				<?php else: ?>
+				
+				<?php endif; ?>
+				
 			</div>
 
 		</div>
 	</div>
+	<div class="subtitle clear padder"><?php echo $campaign->subtitle(); ?></div>
 </div>
 	
 <div class="center">

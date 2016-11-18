@@ -1,5 +1,5 @@
 /*******************************************************************************
-* WDG SLIDER - HOME
+* SLIDER - HOME
 *******************************************************************************/
 .wdg-component-slider .slider-container { 
     width: 100%;
@@ -189,7 +189,7 @@
 
 
 /*******************************************************************************
-* WDG PROJECTS - HOME
+* PROJECTS - HOME
 *******************************************************************************/
 .wdg-component-projects-preview {
 	text-align: center;
@@ -197,7 +197,7 @@
 
 .wdg-component-projects-preview .project-slider {
 	width: 100%;
-	overflow-x: scroll;
+	overflow-x: auto;
 }
 .wdg-component-projects-preview .block-projects {
     z-index: 0;
@@ -241,44 +241,6 @@
     top: 0px; 
     width: 0; 
 }
-.wdg-component-projects-preview .project-container .impacts-container{
-    position: absolute;
-    display: flex;
-    z-index: 2;
-    justify-content: center;
-    align-items: center;
-	width: 90%;
-	height: 50px;
-	margin: 0% 5%;
-}
-.wdg-component-projects-preview .project-container .impacts-container .impact-logo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 100%;
-    background-color: #0F8216;  
-    color: #FFFFFF;
-    transition: all .2s linear;
-    cursor: pointer;
-	margin: 0px 5px;
-}
-/* Dégradés de couleurs pour les impacts */
-.wdg-component-projects-preview .project-container .impacts-container .impact-ecologic{
-    background: linear-gradient(45deg, #8BC79C, #00879B);
-}
-.wdg-component-projects-preview .project-container .impacts-container .impact-social{
-    background: linear-gradient(45deg, #E2C80D, #EA4F51);
-}
-.wdg-component-projects-preview .project-container .impacts-container .impact-economic{
-    background: linear-gradient(45deg, #00879B, #005663);
-}
-
-.wdg-component-projects-preview .project-container .impacts-container .impact-logo:hover{  /* à revoir : empecher le déplacement des impacts au survol ***********/
-    transform: scale(1.15);
-    border: 0.25em #FFFFFF solid;
-}
 
 .wdg-component-projects-preview .project-container .project-framed .project-title{
     width: 100%;
@@ -309,54 +271,6 @@
     padding: 0px 4%;
     font-size: 11pt;
     text-align: left;
-}
-.wdg-component-projects-preview .project-container .project-framed .progress-bar{
-    min-width: 100%;
-    position: absolute;
-    top: 355px;
-    height: 50px;
-    background-color: #E1E3E2;
-}
-.wdg-component-projects-preview .project-container .project-framed .progress-bar .current-amount{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    position: absolute;
-    height: 100%;
-    font-size: 15pt;
-    letter-spacing: 0.12em;
-    color: #FFFFFF;
-    background: repeating-linear-gradient(
-    -45deg,
-    #00879B,
-    #00879B 7px,
-    #D3EAE9 0.5px,
-    #00879B 7.5px);
-}
-.wdg-component-projects-preview .project-container .project-framed .progress-bar .progress-percent{ 
-    display: flex;
-    align-items: center;
-    position: absolute;
-    height: 100%;
-    right: 3%;
-    font-size: 15pt;
-    letter-spacing: 0.12em;
-    font-weight: bold;
-    text-align: right;
-}
-.wdg-component-projects-preview .project-container .project-framed .progress-bar .vote-status{ 
-    display: flex;
-    align-items: center;  
-    justify-content: space-around;
-    height: 100%; 
-    text-transform: uppercase;
-    font-style: italic;
-    background: repeating-linear-gradient(
-        -45deg,
-        #E1E3E2,
-        #E1E3E2 7px,
-        #F5F5F5 1px,
-        #E1E3E2 8px);
 }
 
 .wdg-component-projects-preview .project-container .project-framed .progress-info{
@@ -428,4 +342,100 @@
 	.wdg-component-projects-preview .project-container {
 		width: 320px;
 	}
+}
+
+
+/*******************************************************************************
+* IMPACTS
+*******************************************************************************/
+.impacts-container{
+    position: absolute;
+    display: flex;
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+	width: 90%;
+	height: 50px;
+	margin: 0% 5%;
+}
+.impacts-container .impact-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    background-color: #0F8216;  
+    color: #FFFFFF;
+    transition: all .2s linear;
+    cursor: pointer;
+	margin: 0px 5px;
+}
+/* Dégradés de couleurs pour les impacts */
+.impacts-container .impact-ecologic{
+    background: linear-gradient(45deg, #8BC79C, #00879B);
+}
+.impacts-container .impact-social{
+    background: linear-gradient(45deg, #E2C80D, #EA4F51);
+}
+.impacts-container .impact-economic{
+    background: linear-gradient(45deg, #00879B, #005663);
+}
+
+.impacts-container .impact-logo:hover{  /* à revoir : empecher le déplacement des impacts au survol ***********/
+    transform: scale(1.15);
+    border: 0.25em #FFFFFF solid;
+}
+
+
+/*******************************************************************************
+* PROGRESS BAR
+*******************************************************************************/
+.progress-bar {
+    min-width: 100%;
+    position: absolute;
+    top: 355px;
+    height: 50px;
+    background-color: #E1E3E2;
+}
+.progress-bar .current-amount {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    height: 100%;
+    font-size: 15pt;
+    letter-spacing: 0.12em;
+    color: #FFFFFF;
+    background: repeating-linear-gradient(
+    -45deg,
+    #00879B,
+    #00879B 7px,
+    #D3EAE9 0.5px,
+    #00879B 7.5px);
+}
+.progress-bar .progress-percent { 
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    right: 3%;
+    font-size: 15pt;
+    letter-spacing: 0.12em;
+    font-weight: bold;
+    text-align: right;
+}
+.progress-bar .vote-status { 
+    display: flex;
+    align-items: center;  
+    justify-content: space-around;
+    height: 100%; 
+    text-transform: uppercase;
+    font-style: italic;
+    background: repeating-linear-gradient(
+        -45deg,
+        #E1E3E2,
+        #E1E3E2 7px,
+        #F5F5F5 1px,
+        #E1E3E2 8px);
 }

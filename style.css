@@ -112,36 +112,6 @@ tbody {
 
 .wp-list-table td { padding: 0px 5px; }
 
-.button, .wpcf7-submit {
-    background: none repeat scroll 0 0 #333333;
-    border: 1px solid #333333;
-    color: #FFFFFF;
-    padding: 5px 15px;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-weight: normal;
-    font-size: 12px;
-    white-space: nowrap;
-}
-.button.red, .wpcf7-submit {
-    background: none repeat scroll 0 0 #EA4F51;
-    border: 1px solid #EA4F51 !important;
-}
-.button.big {
-    font-size: 15px;
-    padding: 15px 30px;
-}
-.button.disabled {
-    background: #EEECED;
-    border: 1px solid #EEECED !important;
-    color: #333333;
-    cursor: default;
-}
-.button.sharer {
-	padding: 0px;
-	border: 0px;
-	background: #FFFFFF;
-}
 
 .wp-editor-container {
     border: 1px solid rgb(222, 222, 222);

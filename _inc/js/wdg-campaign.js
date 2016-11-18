@@ -12,9 +12,9 @@ var WDGProjectViewer = (function($) {
 		init: function() {
 			$(document).scroll(function() {
 				if ($(document).scrollTop() > 100) {
-					$("#content, #navigation").addClass("scrolled");
+					$("#content, nav#main").addClass("scrolled");
 				} else {
-					$("#content, #navigation").removeClass("scrolled");
+					$("#content, nav#main").removeClass("scrolled");
 				}
 				WDGProjectViewer.refreshScroll();
 			});

@@ -4,12 +4,6 @@ $client_context = $campaign->get_client_context();
 $campaign_status = $campaign->campaign_status();
 ?>
 
-<?php if (!empty($client_context)): ?>
-<?php locate_template( array("projects/" .$client_context. "/header.php"), true ); ?>
-<?php endif; ?>
-
-<?php locate_template( array("projects/single/header.php"), true ); ?>
-
 <?php if (!is_user_logged_in()){ ?>
 <?php echo do_shortcode('[yproject_connexion_lightbox]<p class="align-center">'.__('Afin de soutenir un projet, vous devez &ecirc;tre inscrit et connect&eacute;.', 'yproject').'</p>[/yproject_connexion_lightbox]'); ?>
 <?php echo do_shortcode('[yproject_register_lightbox]'); ?>
@@ -26,10 +20,17 @@ $campaign_status = $campaign->campaign_status();
 <?php locate_template( array("projects/single/admin.php"), true ); ?>
 <?php endif; ?>
 
+<header>
+	<?php locate_template( array("projects/single/banner.php"), true ); ?>
+	
+	<?php if (!empty($client_context)): ?>
+	<?php locate_template( array("projects/" .$client_context. "/header.php"), true ); ?>
+	<?php endif; ?>
+</header>
+
+<?php locate_template( array("projects/single/nav.php"), true ); ?>
 
 <div class="padder">
-    
-	<?php locate_template( array("projects/single/banner.php"), true ); ?>
     
 	<?php locate_template( array("projects/single/pitch.php"), true ); ?>
     
