@@ -46,7 +46,7 @@ if (is_user_logged_in()) {
 			<?php endforeach; ?>
 		</ul>
 
-		<ul class="menu-actions <?php if (!empty($lang_list)): ?>haslangs<?php endif;?>">
+		<ul class="menu-actions">
 			<li class="action-item">
 			<?php
 			$campaign_status = $campaign->campaign_status();

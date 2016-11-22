@@ -31,6 +31,7 @@ body input {
 .only-inf997 { display: none; }
 
 .bg-dark-gray { background: #333333; color: #FFF; }
+.uppercase { text-transform: uppercase; }
 
 
 h2.standard {
