@@ -67,7 +67,7 @@ if (count($current_organisations) > 0) {
 ?>
 	
 <div class="project-banner">
-	<div class="project-banner-title">
+	<div class="project-banner-title padder">
 		<?php if (!empty($lang_list)): ?>
 			<form method="GET" action="<?php the_permalink(); ?>">
 				<select name="lang">
@@ -89,10 +89,6 @@ if (count($current_organisations) > 0) {
 			<?php echo do_shortcode('[yproject_lightbox id="project-organisation"]'.$lightbox_content.'[/yproject_lightbox]'); ?>
 		</div>
 	</div>
-    
-	<?php if ($can_modify): ?>
-		<div id="wdg-move-picture-head" class="move-button"></div>
-	<?php endif; ?>
 
 	<div class="project-banner-content">
 		<div class="padder">
@@ -239,7 +235,7 @@ if (count($current_organisations) > 0) {
 
 		</div>
 	</div>
-	<div class="subtitle clear padder"><?php echo $campaign->subtitle(); ?></div>
+	<div class="clear padder"><div class="subtitle"><?php echo $campaign->subtitle(); ?></div></div>
 </div>
 	
 <div class="center">

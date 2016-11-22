@@ -35,11 +35,10 @@ var ProjectEditor = (function($) {
 		
 		//Permet de switcher du mode édition au mode prévisualisation
 		clickEditProject: function(clickedElement) {
-			if ($(clickedElement).hasClass("edit-button")) {
+			if (!$(clickedElement).hasClass("btn-edit-validate")) {
 				$("#content").addClass("editing");
 				ProjectEditor.initEdition();
-				$(clickedElement).removeClass("edit-button");
-				$(clickedElement).addClass("edit-button-validate");
+				$(clickedElement).addClass("btn-edit-validate");
 				$("#wdg-edit-project-add-lang").show();
 			} else {
 				if (WDGProjectPageFunctions.isEditing !== "") {
@@ -47,8 +46,7 @@ var ProjectEditor = (function($) {
 				} else {
 					$("#content").removeClass("editing");
 					ProjectEditor.stopEdition();
-					$(clickedElement).addClass("edit-button");
-					$(clickedElement).removeClass("edit-button-validate");
+					$(clickedElement).removeClass("btn-edit-validate");
 					$("#wdg-edit-project-add-lang").hide();
 					var background = $(".project-pitch-video").css('background-image');
 					if(background){
@@ -86,18 +84,18 @@ var ProjectEditor = (function($) {
 		//Liste tous les éléments qui peuvent être édités
 		//Un élément contient une référence à son conteneur et à son contenu
 		initElements: function() {
-			ProjectEditor.elements["title"] = {elementId: ".project-banner .project-banner-content h1", contentId: ".project-banner .project-banner-content h1"};
-			ProjectEditor.elements["subtitle"] = {elementId: ".project-banner .project-banner-content .subtitle", contentId: ".project-banner .project-banner-content .subtitle"};
-			ProjectEditor.elements["summary"] = {elementId: ".project-pitch .project-pitch-text", contentId: ".project-pitch .project-pitch-text"};
+			ProjectEditor.elements["title"] = {elementId: ".project-banner .project-banner-title h1", contentId: ".project-banner .project-banner-title h1"};
+			ProjectEditor.elements["subtitle"] = {elementId: ".project-banner .subtitle", contentId: ".project-banner .subtitle"};
+			ProjectEditor.elements["summary"] = {elementId: ".project-banner .project-banner-content .project-pitch-text", contentId: ".project-banner .project-banner-content .project-pitch-text"};
 //			ProjectEditor.elements["rewards"] = {elementId: "#projects-right-desc #project-rewards-custom", contentId: "#projects-right-desc #project-rewards-custom"};
 			ProjectEditor.elements["description"] = {elementId: ".project-description #project-content-description .zone-content", contentId: ".project-description #project-content-description .zone-edit"};
 			ProjectEditor.elements["societal_challenge"] = {elementId: ".project-description #project-content-societal_challenge .zone-content", contentId: ".project-description #project-content-societal_challenge .zone-edit"};
 			ProjectEditor.elements["added_value"] = {elementId: ".project-description #project-content-added_value .zone-content", contentId: ".project-description #project-content-added_value .zone-edit"};
 			ProjectEditor.elements["economic_model"] = {elementId: ".project-description #project-content-economic_model .zone-content", contentId: ".project-description #project-content-economic_model .zone-edit"};
 			ProjectEditor.elements["implementation"] = {elementId: ".project-description #project-content-implementation .zone-content", contentId: ".project-description #project-content-implementation .zone-edit"};
-			ProjectEditor.elements["picture-head"] = {elementId: ".project-banner .project-banner-img", contentId: ".project-admin"};
-			ProjectEditor.elements["video-zone"] = {elementId: ".project-pitch .project-pitch-video", contentId: ".project-admin"};
-			ProjectEditor.elements["project-owner"] = {elementId: ".project-banner-content .author-info", contentId: ".project-admin"};
+//			ProjectEditor.elements["picture-head"] = {elementId: ".project-banner .project-banner-img", contentId: ".project-admin"};
+//			ProjectEditor.elements["video-zone"] = {elementId: ".project-pitch .project-pitch-video", contentId: ".project-admin"};
+//			ProjectEditor.elements["project-owner"] = {elementId: ".project-banner-content .author-info", contentId: ".project-admin"};
 		},
 		
 		//Ajoute le bouton d'édition d'un élément en paramètre
@@ -522,13 +520,11 @@ var ProjectEditor = (function($) {
 			var placeholder = (property === "subtitle") ? 'Slogan de la campagne' : '';
 			var newElement = '<input type="text" id="wdg-input-'+property+'" class="edit-input" value="'+initValue+'" placeholder="'+placeholder+'" />';
 			$(ProjectEditor.elements[property].elementId).after(newElement);
-			$("#wdg-input-"+property).css("left", $(ProjectEditor.elements[property].elementId).position().left);
-			$("#wdg-input-"+property).css("top", $(ProjectEditor.elements[property].elementId).position().top);
 			
 			var buttonValidate = '<div id="wdg-validate-'+property+'" class="edit-button-validate" data-property="'+property+'"></div>';
 			$("#wdg-input-"+property).after(buttonValidate);
 			$("#wdg-validate-"+property).css("left", $("#wdg-input-"+property).position().left + $("#wdg-input-"+property).outerWidth());
-			$("#wdg-validate-"+property).css("top", $("#wdg-input-"+property).position().top);
+			$("#wdg-validate-"+property).css("top", $("#wdg-input-"+property).position().top - $("#wdg-input-"+property).outerHeight());
 			$("#wdg-validate-"+property).click(function() {
 				ProjectEditor.validateInput($(this).data("property"));
 			});
@@ -556,7 +552,7 @@ var ProjectEditor = (function($) {
 			var buttonValidate = '<div id="wdg-validate-'+property+'" class="edit-button-validate" data-property="'+property+'"></div>';
 			$("#wdg-input-"+property).after(buttonValidate);
 			$("#wdg-validate-"+property).css("left", $("#wdg-input-"+property).position().left + $("#wdg-input-"+property).outerWidth());
-			$("#wdg-validate-"+property).css("top", $("#wdg-input-"+property).position().top);
+			$("#wdg-validate-"+property).css("top", $("#wdg-input-"+property).position().top - $("#wdg-input-"+property).outerHeight());
 			$("#wdg-validate-"+property).click(function() {
 				ProjectEditor.validateInput($(this).data("property"));
 			});

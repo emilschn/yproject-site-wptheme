@@ -6,7 +6,7 @@ $campaign_id_param = '?campaign_id=' . $campaign->ID;
 ?>
 <div class="project-admin" data-link-project-settings="<?php echo get_permalink(get_page_by_path('parametres-projet')->ID) . $campaign_id_param; ?>">
 	<a href="<?php echo get_permalink($page_dashboard->ID) . $campaign_id_param; ?>" class="btn-dashboard"><?php _e('Tableau de bord', 'yproject'); ?></a>
-	<div id="wdg-edit-project" class="edit-button"></div>
+	<div id="wdg-edit-project" class="btn-edit"></div>
 	<form id="wdg-edit-project-add-lang" method="POST" action="<?php echo get_permalink($campaign->ID); ?>">
 		<span>+ <?php _e('Nouvelle langue', 'yproject'); ?></span>
 		<select name="selected-language">
