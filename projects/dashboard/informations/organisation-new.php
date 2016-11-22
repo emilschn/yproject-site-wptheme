@@ -4,8 +4,8 @@
  * 
  */
 
-YPOrganisation::submit_new();
-
+//YPOrganisation::submit_new(FALSE);
+global $campaign_id
 ?>
 
 <div id="content">
@@ -18,7 +18,7 @@ YPOrganisation::submit_new();
                         <?php global $errors_submit_new, $errors_create_orga; ?>
                         <?php if (count($errors_submit_new->errors) > 0 || count($errors_create_orga) > 0): ?>
                         <ul class="errors">
-                                <?php $error_messages = $errors_submit_new->get_error_messages(); ?>
+                                <?php $error_messages = $errors_submit_new->get_error_messages(); var_dump($error_messages); ?>
                                 <?php foreach ($error_messages as $error_message): ?>
                                         <li><?php echo $error_message; ?></li>
                                 <?php endforeach; ?>
@@ -28,7 +28,7 @@ YPOrganisation::submit_new();
                         </ul>
                         <?php endif; ?>
                         <h1><?php _e('Cr&eacute;er une organisation','yproject')?></h1>
-                        <form action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
+                        <form action="" method="POST" enctype="multipart/form-data" class="wdg-forms" data-action="save_new_organisation">
 
                                 <label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?>*</label>
                                 <input type="text" name="org_name" value="<?php echo filter_input(INPUT_POST, 'org_name'); ?>" /><br />
@@ -94,8 +94,8 @@ YPOrganisation::submit_new();
 
                                 <input type="checkbox" name="org_capable" /><?php _e('Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette organisation.', 'yproject'); ?><br />
 
-                                <input type="hidden" name="action" value="submit-new-organisation" />
 
+                                <input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
                                 <input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" />
 
                         </form>

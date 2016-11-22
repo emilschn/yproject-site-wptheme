@@ -322,7 +322,7 @@ function print_informations_page()
                 
                 $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
                 $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-//                var_dump($current_organisations);
+                var_dump($current_organisations);
                 if (isset($current_organisations) && count($current_organisations) > 0) {
                     $current_organisation = $current_organisations[0];
                 }              
@@ -348,8 +348,8 @@ function print_informations_page()
 
                         ?>
                         <!--bouton d'édition de l'organisation-->
-                        <a href="#" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga">
-                            <?php _e("Editer", "yproject"); echo '&nbsp;'.$current_organisation->organisation_name ?></a>
+                        <a href="#informations" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga">
+                            <?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organisation->organisation_name ?></a>
                 
                     <?php } ?>
 
@@ -359,7 +359,7 @@ function print_informations_page()
                 <?php endif; ?>
 
                 <!--bouton de création de l'organisation visible dans tous les cas -->
-                <a href="#" id="btn-new-orga" class="wdg-button-lightbox-open button" data-lightbox="newOrga"><?php _e("Cr&eacute;er une organisation","yproject") ?></a>               
+                <a href="#informations" id="btn-new-orga" class="wdg-button-lightbox-open button" data-lightbox="newOrga"><?php _e("Cr&eacute;er une organisation","yproject") ?></a>               
                 <br />
                 <?php 
                 DashboardUtility::create_save_button("orgainfo_form"); ?>
