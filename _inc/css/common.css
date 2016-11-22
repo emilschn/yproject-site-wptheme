@@ -61,7 +61,7 @@ button.red {
     text-transform: uppercase;
     cursor: pointer;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 10pt;
     white-space: nowrap;
 }
 .button.red, .wpcf7-submit {
@@ -71,6 +71,11 @@ button.red {
 .button.blue {
     background: none repeat scroll 0 0 #00879B;
     border: 1px solid #00879B;
+}
+.button.blue-pale {
+    background: none repeat scroll 0 0 #D3EAE9;
+    border: 1px solid #D3EAE9;
+	color: #000000;
 }
 .button.big {
     font-size: 15px;

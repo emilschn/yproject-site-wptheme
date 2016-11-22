@@ -19,40 +19,7 @@ $classes .= 'version-' . $edit_version;
 <?php if (isset($campaign)) : ?>
 <div id="content" data-campaignid="<?php echo $campaign->ID; ?>" class="<?php echo $classes; ?>">
 
-	<?php if ($edit_version < 3): ?>
-		
-		<?php if ($client_context != '') {
-		locate_template( array("clients/myphotoreporter/menu.php"), true ); 
-		display_photoreporter_menu();
-		} ?>
-
-		<div class="padder">
-
-			<?php require_once('projects/single-admin-bar'.$suffix.'.php'); ?>
-
-			<div id="post-<?php echo $campaign->ID; ?>" <?php post_class(); ?>>
-
-				<?php require_once('projects/single-header'.$suffix.'.php'); ?>
-
-				<div id="post_bottom_bg">
-
-					<div id="post_bottom_content" class="center">
-
-						<?php require_once('projects/single-content'.$suffix.'.php'); ?>
-
-						<div style="clear: both"></div>
-
-					</div>
-				</div>
-
-			</div>
-
-		</div><!-- .padder -->
-
-	<?php else: ?>
-		<?php locate_template( array("projects/single/template.php"), true ); ?>
-		
-	<?php endif; ?>
+	<?php locate_template( array("projects/single/template.php"), true ); ?>
 
 </div><!-- #content -->
 

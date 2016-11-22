@@ -43,7 +43,6 @@ tbody {
 .center {
     width: 960px;
     margin: auto;
-    font-size: 14px;
 }
 .center_small {
     width: 480px;
@@ -1628,65 +1627,6 @@ form.wdg-forms table input[type="text"].reward-text{
 #projects-bottom-desc img{
     display: inline-block;
 }
-.projects-desc-content{
-    display: inline-block;
-    background-color: #F2F2F2;
-    width: 805px;
-    position: relative;
-    left: -9px;
-    vertical-align: top;
-    margin-bottom: 40px;
-}
-.projects-desc-content > h2{
-    text-transform: uppercase;
-    font-size: 15px;
-    font-style: normal;
-    margin-top: 26px;
-}
-.projects-desc-content p, .projects-desc-content h4 {
-    padding: 0px 25px 10px;
-}
-.projects-desc-content ul {
-    padding: 0px 25px 0px 40px;
-}
-
-.projects-desc-content h1,
-.projects-desc-content h2,
-.projects-desc-content h3,
-.projects-desc-content h5,
-.projects-desc-content h6{
-    padding-left: 25px;
-}
-
-.projects-desc-content p img {
-    max-width: 100%;
-    height: auto;
- }
-.projects-desc-content p img.aligncenter {
-    display: block !important;
-    margin: 0px auto;
-}
-.projects-desc-content p img.alignleft {
-    float: left;
-    margin: 5px 20px 20px 0;
-}
-.projects-desc-content p img.alignright {
-    float: right;
-    margin: 5px 0 20px 20px;
-}
-.projects-desc-content table {
-    border-spacing: 0px;
-    border-collapse: collapse;
-    margin: 0px 25px;
-    width: 755px;
-}
-.projects-desc-content table td {
-    border: 1px dashed #2B2C2C;
-}
-.projects-desc-content blockquote {
-    font-style: italic;
-    font-size: 16px;
-}
 #wp-link-wrap {
     height: 250px !important;
 }
@@ -1695,10 +1635,6 @@ form.wdg-forms table input[type="text"].reward-text{
 }
 #project-description-title-padding {
      clear: both;
- }
-.vertical-align-middle{
-    display: inline-block;
-    vertical-align: middle;
 }
 .grey-triangle {
     position: relative;
@@ -1850,13 +1786,6 @@ form.wdg-forms table input[type="text"].reward-text{
     margin: 0px;
 }
 
-.projects-more{
-    background: url("images/responsive-plus.png") no-repeat center center;
-    position: relative;
-    cursor: pointer;
-    width: 100%;
-    height: 28px;
-}
 #project-subtitle{
     position: absolute;
     bottom: 51px;

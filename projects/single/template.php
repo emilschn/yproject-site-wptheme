@@ -30,16 +30,13 @@ $campaign_status = $campaign->campaign_status();
 
 <?php locate_template( array("projects/single/nav.php"), true ); ?>
 
-<div class="padder">
+<?php locate_template( array("projects/single/rewards.php"), true ); ?>
+
+<?php locate_template( array("projects/single/description.php"), true ); ?>
+
+<?php locate_template( array("projects/single/news.php"), true ); ?>
+
+<?php locate_template( array("projects/single/comments.php"), true ); ?>
     
-	<?php locate_template( array("projects/single/rewards.php"), true ); ?>
-    
-	<?php locate_template( array("projects/single/description.php"), true ); ?>
-    
-	<?php locate_template( array("projects/single/news.php"), true ); ?>
-    
-	<?php locate_template( array("projects/single/comments.php"), true ); ?>
-    
-</div>
     
 <?php locate_template( array("projects/single/responsive-buttons.php"), true ); ?>

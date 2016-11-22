@@ -318,7 +318,8 @@ div#content.version-3 div.project-pitch-video iframe {
 /*******************************************************************************
 * REWARDS
 *******************************************************************************/
-div#content.version-3 div.project-rewards-content div.project-rewards-padder {
+div#content.version-3 div.project-rewards-content {
+	padding: 40px 0px;
 }
 
 div#content.version-3 div.project-rewards-content div.project-rewards-padder p.half-form-count input {
@@ -403,36 +404,56 @@ div#content.version-3 div.project-expander {
     background: url("../../images/responsive-plus.png") no-repeat center center;
 }
 
+div#content.version-3 div.project-description-item div.projects-desc-content-picto {
+	display: inline-block;
+	width: 90px;
+	text-align: center;
+}
+
 div#content.version-3 .projects-desc-content {
     position: relative;
     display: inline-block;
-    width: 805px;
-    margin-bottom: 40px;
-    left: -9px;
-    vertical-align: top;
-    background-color: #F2F2F2;
+	width: 805px;
+	margin-bottom: 40px;
+	padding-left: 25px;
+	vertical-align: top;
+    background-color: #FFF;
     cursor: pointer;
 }
-div#content.version-3 div.project-description div.projects-desc-content .projects-more {
-	margin-top: 20px;
+div#content.version-3 div.project-description {
+	background: rgba(51, 51, 51, 0.05);
+	padding-bottom: 40px;
 }
-div#content.version-3 .projects-desc-content h2{
-    margin-top: 26px;
-    margin-left: 25px;
+div#content.version-3 div.project-description div.projects-desc-content .projects-more {
+    position: relative;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+	margin-top: 20px;
+	border: 1px solid #000;
+}
+div#content.version-3 div.project-description div.projects-desc-content .projects-more:after {
+	content: "+";
+}
+
+div#content.version-3 .projects-desc-content h3{
+    margin-top: 25px;
     text-transform: uppercase;
-    font-size: 15px;
+    font-size: 13pt;
     font-style: normal;
-	color: #EA4F51;
+	text-align: center;
+	color: #333333;
 }
 div#content.version-3 .projects-desc-content p, div#content.version-3 .projects-desc-content h4 {
-    padding: 0px 25px 10px;
+    padding: 0px 0px 10px;
 }
 div#content.version-3 .projects-desc-content div.expandable,
 div#content.version-3 .projects-desc-content h1,
+div#content.version-3 .projects-desc-content h2,
 div#content.version-3 .projects-desc-content h3,
 div#content.version-3 .projects-desc-content h5,
 div#content.version-3 .projects-desc-content h6{
-    padding-left: 25px;
+    padding-left: 0px;
 }
 div#content.version-3 .projects-desc-content iframe {
 	max-width: 100%;
@@ -468,7 +489,6 @@ div#content.version-3 .projects-desc-content blockquote {
     font-size: 16px;
 }
 div#content.version-3 .vertical-align-middle {
-    display: inline-block;
     vertical-align: middle;
 }
 div#content.version-3 .grey-triangle {
@@ -485,11 +505,26 @@ div#content.version-3 .grey-triangle {
 /*******************************************************************************
 * NEWS
 *******************************************************************************/
-div#content.version-3 .project-news-item {
-	margin: 0px 20px 20px;
+div#content.version-3 .project-news {
+	border-bottom: 2px solid #000000;
 }
-div#content.version-3 .project-news-item a {
+div#content.version-3 .project-news .project-news-item {
+	padding: 20px;
+	border-top: 2px solid #000000;
+}
+div#content.version-3 .project-news .project-news-item a {
 	text-transform: uppercase;
+	color: #00879B;
+	font-size: 14pt;
+}
+div#content.version-3 .project-news .project-news-item span.project-news-item-date {
+	font-size: 10pt;
+}
+div#content.version-3 .project-news .project-news-item a.button {
+	display: inline-block;
+	margin: 15px 0px;
+	padding: 10px 60px;
+	color: #000000;
 }
 
 /*******************************************************************************
@@ -515,6 +550,12 @@ div#content.version-3 .project-comments .comment-respond {
 div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	text-align: right;
 }
+div#content.version-3 div.project-comments div.comment-respond p.form-submit input[type="submit"] {
+	padding: 10px 40px;
+	font-size: 13pt;
+	background: #D3EAE9;
+	color: #000;
+}
 
 
 /*******************************************************************************
@@ -522,7 +563,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 *******************************************************************************/
 @media screen and (min-width: 768px) {
 	nav#main.scrolled { display: none; }
-	div#content.version-3.scrolled nav.project-navigation { position:fixed; width: 100%; top: 0px; }
+	div#content.version-3.scrolled nav.project-navigation { position:fixed; z-index: 2; width: 100%; top: 0px; }
 }
 
 /*******************************************************************************
