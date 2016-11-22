@@ -2498,12 +2498,14 @@ table.mceLayout {
 * INVEST PAGE
 *******************************************************************************/
 /***** COMMON *****/
+#template-single-campaign-invest { padding-top: 100px; }
 #template-single-campaign-invest h1 { text-align: center; }
+
 /***** STEP 1 *****/
 .invest_step1_generalities {
     width: 800px;
     margin:auto;
-    font-size: 12px;
+    font-size: 12pt;
 }
 
 .invest_step1_generalities ol li{
@@ -2513,7 +2515,7 @@ table.mceLayout {
 .invest_step1_currentproject {
     width: 600px;
     margin:auto;
-    font-size: 14px;
+    font-size: 13pt;
 }
 
 #reward-selector {
