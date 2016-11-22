@@ -83,7 +83,9 @@
 .wdg-component-slider #button-container, .wdg-component-slider .slider-container #slider .slide-1button #button-container{
     position: absolute;
     z-index: 2;
+    display: -webkit-flex;
     display: flex;
+    -webkit-justify-content: center;
     justify-content: center;
     width: 80%;
     height: 55px;
@@ -104,8 +106,11 @@
 
 
 .wdg-component-slider .slider-container .slider-choice {
+    display: -webkit-flex;
     display: flex;
+    -webkit-justify-content: space-around; 
     justify-content: space-around; 
+    -webkit-align-items: center;
     align-items: center;
     width: 100px;
     height: 10%;
@@ -150,7 +155,9 @@
 	.wdg-component-slider .slider-container #slider .slider-item .message-banner::after { display: none; }
 	.wdg-component-slider .slider-container #slider .slider-item .message-banner {
 		width: 100%;
+		display: -webkit-flex;
 		display: flex;
+		-webkit-align-items: center;
 		align-items: center;
 	}
 	.wdg-component-slider .slider-container #slider .slider-item img.slide {
@@ -160,11 +167,15 @@
 		margin: 0px;
 	}
 	.wdg-component-slider #button-container {
+		-webkit-flex-direction: column;
 		flex-direction: column;
+		-webkit-align-items: center;
 		align-items: center;
+		-webkit-justify-content: space-between;
 		justify-content: space-between;
 	}
 	.wdg-component-slider #button-container .button-slide {
+		-webkit-flex-flow: column wrap;
 		flex-flow: column wrap;
 		margin-bottom: 10px;
 		width: 50%;
@@ -203,8 +214,11 @@
 }
 .wdg-component-projects-preview .block-projects {
     z-index: 0;
+    display: -webkit-flex;
     display: flex;
+    -webkit-justify-content: space-around;
     justify-content: space-around;
+	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
 	height: 620px;
 }
@@ -216,11 +230,13 @@
 
 .wdg-component-projects-preview .project-container{ 
     position: relative;
+    display: -webkit-flex;
     display: flex;
 	width: 33%;
     min-width: 320px;
     max-width: 400px;
 	height: 620px;
+    -webkit-justify-content: center;
     justify-content: center;
     font-family: Trebuchet MS, sans-serif;
 }
@@ -276,9 +292,12 @@
 }
 
 .wdg-component-projects-preview .project-container .project-framed .progress-info{
+    display: -webkit-flex;
     display: flex;
+    -webkit-align-items: center;
     align-items: center;
     position: absolute;
+    -webkit-justify-content: center;
     justify-content: center;
     top: 405px;
     width: 100%;
@@ -319,8 +338,11 @@
 }
 .wdg-component-projects-preview .project-container .project-framed .project-button{
 	position: absolute;
+    display: -webkit-flex;
     display: flex;
+    -webkit-align-items: center;
     align-items: center;
+    -webkit-justify-content: center;
     justify-content: center;
     width: 100%;
     background-color: #00879B;
@@ -352,17 +374,23 @@
 *******************************************************************************/
 .impacts-container{
     position: absolute;
+    display: -webkit-flex;
     display: flex;
     z-index: 2;
+    -webkit-justify-content: center;
     justify-content: center;
+    -webkit-align-items: center;
     align-items: center;
 	width: 90%;
 	height: 50px;
 	margin: 0% 5%;
 }
 .impacts-container .impact-logo{
+    display: -webkit-flex;
     display: flex;
+    -webkit-justify-content: center;
     justify-content: center;
+    -webkit-align-items: center;
     align-items: center;
     width: 42px;
     height: 42px;
@@ -401,8 +429,11 @@
     background-color: #E1E3E2;
 }
 .progress-bar .current-amount {
+    display: -webkit-flex;
     display: flex;
+    -webkit-align-items: center;
     align-items: center;
+    -webkit-justify-content: space-around;
     justify-content: space-around;
     position: absolute;
     height: 100%;
@@ -417,7 +448,9 @@
     #00879B 7.5px);
 }
 .progress-bar .progress-percent { 
+    display: -webkit-flex;
     display: flex;
+    -webkit-align-items: center;
     align-items: center;
     position: absolute;
     height: 100%;
@@ -428,8 +461,11 @@
     text-align: right;
 }
 .progress-bar .vote-status { 
+    display: -webkit-flex;
     display: flex;
-    align-items: center;  
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: space-around;
     justify-content: space-around;
     height: 100%; 
     text-transform: uppercase;
