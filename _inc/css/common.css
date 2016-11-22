@@ -108,6 +108,8 @@ nav#main {
 nav#main > div#menu {
 	background: #FFFFFF;
 	text-align: right;
+	width: -webkit-calc(100% - 40px);
+	width: -moz-calc(100% - 40px);
 	width: calc(100% - 40px);
 	max-width: 1260px;
 	height: 40px;
@@ -221,6 +223,8 @@ nav#main > div#menu > a#btn-search.active > img {
 #submenu-search {
 	position: absolute;
     top: 60px;
+	width: -webkit-calc(62px + (100% - 1280px) / 2);
+	width: -moz-calc(62px + (100% - 1280px) / 2);
     right: calc(62px + (100% - 1280px) / 2);
 	width: 285px;
     height: 50px;
@@ -231,7 +235,11 @@ nav#main > div#menu > a#btn-search.active > img {
 	border: 0px;
 	background: #E1E3E2;
 	margin: 10px;
+	width: -webkit-calc(100% - 30px);
+	width: -moz-calc(100% - 30px);
 	width: calc(100% - 30px);
+	height: -webkit-calc(100% - 30px);
+	height: -moz-calc(100% - 30px);
 	height: calc(100% - 30px);
 	padding: 5px;
 }
@@ -279,6 +287,8 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 #submenu-user {
 	position: absolute;
     top: 60px;
+	width: -webkit-calc((100% - 1280px) / 2);
+	width: -moz-calc((100% - 1280px) / 2);
     right: calc((100% - 1280px) / 2);
 	width: 285px;
     height: 360px;
@@ -411,6 +421,8 @@ footer form img {
 	vertical-align: top;
 }
 footer form input#subscribe-nl-mail {
+	width: -webkit-calc(100% - 60px);
+	width: -moz-calc(100% - 60px);
 	width: calc(100% - 60px);
 	height: 38px;
 	padding: 5px;
@@ -418,6 +430,8 @@ footer form input#subscribe-nl-mail {
 	border: 0px;
 }
 footer form input#subscribe-nl-mail.retracted {
+	width: -webkit-calc(100% - 115px);
+	width: -moz-calc(100% - 115px);
 	width: calc(100% - 115px);
 }
 footer form input#subscribe-nl-submit {
@@ -543,6 +557,8 @@ footer > section:nth-child(2) > div:last-child a{
 	width: 100%;
 }
 #content .padder {
+	width: -webkit-calc(100% - 20px);
+	width: -moz-calc(100% - 20px);
 	width: calc(100% - 20px);
 	max-width: 1280px;
 	margin: auto;
@@ -626,6 +642,8 @@ body.page-template-template-discover-projects-php header > div > div.wdg-compone
 	height: 460px;
 }
 body.page-template-template-discover-projects-php header > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner {
+	width: -webkit-calc(100% - 275px);
+	width: -moz-calc(100% - 275px);
 	width: calc(100% - 275px);
 	height: 312px;
 	background: rgba(0, 0, 0, 0.4);

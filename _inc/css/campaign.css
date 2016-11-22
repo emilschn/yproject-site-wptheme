@@ -348,6 +348,8 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	text-transform: uppercase;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left.bordered {
+	width: -webkit-calc(33.33% - 4px);
+	width: -moz-calc(33.33% - 4px);
 	width: calc(33.33% - 4px);
 	border-left: 2px solid;
 	border-right: 2px solid;
@@ -359,6 +361,8 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right a.button.red {
 	display: inline-block;
+	width: -webkit-calc(100% - 32px);
+	width: -moz-calc(100% - 32px);
 	width: calc(100% - 32px);
 	padding: 15px;
 	font-size: 12pt;
@@ -1433,8 +1437,15 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
 	div#content.version-3 div.separator-title span { font-size: 28px; }
 	div#content.version-3 div.project-banner-img, div#content.version-3 div.project-banner-deco { display: none; }
 	div#content.version-3 div.project-timeline { display: none; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.left { float: none; width: calc(100% - 20px); padding: 10px; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right { float: none; width: calc(100% - 20px); padding: 10px; height: auto;  }
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.left,
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right {
+		float: none;
+		width: -webkit-calc(100% - 20px);
+		width: -moz-calc(100% - 20px);
+		width: calc(100% - 20px);
+		padding: 10px;
+	}
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right { height: auto; }
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.separator { display: none; }
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.progressbar-bg { background: #FFFFFF; }
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.progressbar-bg div.progressbar-complete { background: #EA4F51; }

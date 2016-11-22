@@ -5,7 +5,12 @@
 	h2.standard { font-size: 24pt; }
 	#content .padder { width: 100%; }
 	
-	nav#main > div#menu { width: calc(100% - 10px); padding: 5px; }
+	nav#main > div#menu {
+		width: -webkit-calc(100% - 10px);
+		width: -moz-calc(100% - 10px);
+		width: calc(100% - 10px);
+		padding: 5px;
+	}
 	nav#main > div#menu > a, nav#main > div#menu > a.lines { display: none; }
 	nav#main > div#menu > a:first-child, nav#main > div#menu > a.btn-user, nav#main > div#menu > a#btn-burger { display: inline-block; }
 	nav#main > div#menu > a.btn-user {
@@ -58,7 +63,11 @@
 	#submenu-search a:hover {
 		background: #E1E3E2;
 	}
-	#submenu-search-input { height: calc(100% - 150px); }
+	#submenu-search-input {
+		height: -webkit-calc(100% - 150px);
+		height: -moz-calc(100% - 150px);
+		height: calc(100% - 150px);
+	}
 	
 	
 	footer.bg-dark-gray { background-image: none; }
