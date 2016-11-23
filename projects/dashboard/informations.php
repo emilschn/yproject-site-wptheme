@@ -364,13 +364,13 @@ function print_informations_page()
             </form> 
             <?php           
                 ob_start();
-                locate_template( array("projects/dashboard/informations/organisation-edit.php"), true );                  
+                locate_template( array("projects/dashboard/informations/lightbox-organisation-edit.php"), true );                  
                 $lightbox_content = ob_get_clean();
                 echo do_shortcode('[yproject_widelightbox id="editOrga"]'.$lightbox_content.'[/yproject_widelightbox]'); 
             ?>
             <?php 
                 ob_start();
-		locate_template( array("projects/dashboard/informations/organisation-new.php"), true );
+		locate_template( array("projects/dashboard/informations/lightbox-organisation-new.php"), true );
                 $lightbox_content = ob_get_clean();
                 echo do_shortcode('[yproject_lightbox id="newOrga"]'.$lightbox_content.'[/yproject_lightbox]');
             ?>
