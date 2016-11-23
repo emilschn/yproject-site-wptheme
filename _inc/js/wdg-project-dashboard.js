@@ -204,49 +204,46 @@ var WDGProjectDashboard = (function ($) {
 
                 //Infos organisation
                 if ($("#tab-organization").length > 0) {
-                    $("#new_project_organisation").change(function(e){ 
+                    $("#new_project_organisation").change(function(e){
                         e.preventDefault();
                         $("#edit-orga-button").hide();
                     });
-                    //close lightbox after saving organization infos
+                    //fermeture de la lightbox d'édition après enregistrement des infos
                     $("#wdg-lightbox-editOrga form.wdg-forms").submit(function(e){
                         e.preventDefault();
                         $("#wdg-lightbox-editOrga").hide();
-                        
                     });
-                    //close lightbox after saving new organization
+                    //fermeture de la lightbox de création d'organisation après enregistrement
                     $("#wdg-lightbox-newOrga form.wdg-forms").submit(function(e){
                         e.preventDefault();
-                        var thisForm = $(this);
-                        console.log("submit du js");
+                        $("#wdg-lightbox-newOrga").hide();
                         
-                        var campaign_id, org_name, org_email, org_legalform, 
+                        var campaign_id, org_name, org_email, org_legalform,
                         org_idnumber, org_rcs,org_capital, org_ape, org_address, org_postal_code,
                         org_city, org_nationality, org_bankownername, org_bankowneraddress,
                         org_bankowneriban, org_bankownerbic, org_capable;
-                        
+
                         campaign_id = $('#tab-organization #wdg-lightbox-newOrga input[name=campaign_id]').val();
                         org_name = $('#tab-organization #wdg-lightbox-newOrga input[name=org_name]').val();
                         org_email = $('#tab-organization #wdg-lightbox-newOrga input[name=org_email]').val();
                         org_legalform = $('#tab-organization #wdg-lightbox-newOrga input[name=org_legalform]').val();
                         org_idnumber = $('#tab-organization #wdg-lightbox-newOrga input[name=org_idnumber]').val();
-                        org_rcs = $('#tab-organization #wdg-lightbox-newOrga input[name=org_rcs]').val();                        
+                        org_rcs = $('#tab-organization #wdg-lightbox-newOrga input[name=org_rcs]').val();
                         org_capital = $('#tab-organization #wdg-lightbox-newOrga input[name=org_capital]').val();
                         org_ape = $('#tab-organization #wdg-lightbox-newOrga input[name=org_ape]').val();
                         org_address = $('#tab-organization #wdg-lightbox-newOrga input[name=org_address]').val();
                         org_postal_code = $('#tab-organization #wdg-lightbox-newOrga input[name=org_postal_code]').val();
-                        org_city = $('#tab-organization #wdg-lightbox-newOrga input[name=org_city]').val();                       
+                        org_city = $('#tab-organization #wdg-lightbox-newOrga input[name=org_city]').val();
                         org_nationality = $('#tab-organization #wdg-lightbox-newOrga #org_nationality option:selected').text();
                         org_bankownername = $('#tab-organization #wdg-lightbox-newOrga input[name=org_bankownername]').val();
-                        org_bankowneraddress = $('#tab-organization #wdg-lightbox-newOrga input[name=org_bankowneraddress]').val();                       
+                        org_bankowneraddress = $('#tab-organization #wdg-lightbox-newOrga input[name=org_bankowneraddress]').val();
                         org_bankowneriban = $('#tab-organization #wdg-lightbox-newOrga input[name=org_bankowneriban]').val();
                         org_bankownerbic = $('#tab-organization #wdg-lightbox-newOrga input[name=org_bankownerbic]').val();
                         org_capable = $('#tab-organization #wdg-lightbox-newOrga input[name=org_capable]').is(':checked');
 
-                        
-                        $.ajax({   
+                        $.ajax({  
                             'type': "POST",
-                            'url': ajax_object.ajax_url,                           
+                            'url': ajax_object.ajax_url,
                             'data': {
                                 'action': 'save_new_organisation',
                                 'campaign_id': campaign_id,
@@ -267,23 +264,23 @@ var WDGProjectDashboard = (function ($) {
                                 'org_bankownerbic': org_bankownerbic,
                                 'org_capable': org_capable
                             }
-                         
-                        }).done(function(result){                         
-                            var jsonResult = JSON.parse(result);                          
-                            feedback = jsonResult;                         
+
+                        }).done(function(result){
+                            var jsonResult = JSON.parse(result);
+                            feedback = jsonResult;
                             $("#wdg-lightbox-newOrga").hide();
-                            
-                            //select organization updated here 
+
+                            //Mise à jour de l'input select
                             WDGProjectDashboard.updateOrgaSelectInput(feedback);
 
-                            //edit button updated here
+                            //Mise à jour du bouton d'édition
 //                            var newname = $("#new_project_organisation").find('option:selected').text();
 //                            var edit_btn = $('#tab-organization #wdg-lightbox-newOrga').find($("#edit-orga-button"));
 //                            edit_btn.attr("href","#");
 //                            edit_btn.text("Editer "+newname);
 
                         });
-                        
+
                     });
                 }
 
@@ -492,14 +489,14 @@ var WDGProjectDashboard = (function ($) {
                        } else {
                            thisForm.find('.save_ok').fadeIn();                          
                        }
-                        
-                        // Save organisation in tab-organization
-                        if ($("#tab-organization").css("display") == "block" && ($("#ndashboard #orgainfo_form.db-form").data("action")) == "save_project_organisation"){
-                            //Show button edit organisation after save 
+
+                        // Enregistrer l'organisation liée au projet dans tab-organization
+                        if ($("#tab-organization").is(":visible") && ($("#ndashboard #orgainfo_form.db-form").data("action")) == "save_project_organisation"){
+                            //Afficher le bouton d'édition de l'organisation après enregistrement de la liaison
                             WDGProjectDashboard.updateEditOrgaBtn(thisForm);
-                            //Update edition form after changing and save organization 
+                            //Mise à jour du formulaire d'édition après enregistrement de la liaison
                             WDGProjectDashboard.updateOrgaForm(feedback);
-                        }                      
+                        }
                    }
                }).fail(function() {
                    thisForm.find('.save_fail').fadeIn();
@@ -862,9 +859,13 @@ var WDGProjectDashboard = (function ($) {
                 $('#ajax-loader-img').hide();//On cache la roue de chargement.
             });
         },
-        
-        //Show button edit organisation after save 
-        updateEditOrgaBtn: function(form){       
+
+        /**
+         * Fonction de mise à jour du bouton d'édition d'une organisation
+         * une fois l'organisation sélectionnée et enregistrée
+         * @param {type} form : formulaire de saisie
+         */
+        updateEditOrgaBtn: function(form){
             var newval = $("#new_project_organisation").val();
             if(newval!== ''){
                 var edit_btn = form.find($("#edit-orga-button")).show();
@@ -875,10 +876,13 @@ var WDGProjectDashboard = (function ($) {
             } else {
                 edit_btn.hide();
             }
-                    
         },
-        
-        //Update organization edition form (after saving a new orga)
+
+        /**
+         * Fonction de mise à jour du formulaire d'édition d'une organisation
+         * une fois l'organisation sélectionnée et enregistrée
+         * @param {objet} feedback : retour ajax
+         */
         updateOrgaForm: function(feedback){
             $("#tab-organization #wdg-lightbox-editOrga #org_name").html(feedback.organisation.name);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_email]").val(feedback.organisation.email);
@@ -886,7 +890,7 @@ var WDGProjectDashboard = (function ($) {
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_legalform]").val(feedback.organisation.legalForm);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_idnumber]").val(feedback.organisation.idNumber);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_rcs]").val(feedback.organisation.rcs);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_capital]").val(feedback.organisation.capital);           
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_capital]").val(feedback.organisation.capital);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_ape]").val(feedback.organisation.ape);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_address]").val(feedback.organisation.address);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_postal_code]").val(feedback.organisation.postal_code);
@@ -897,20 +901,22 @@ var WDGProjectDashboard = (function ($) {
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneriban]").val(feedback.organisation.bankowneriban);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]").val(feedback.organisation.bankownerbic);
         },
-        
+
+        /**
+         * Fonction de mise à jour du select pour le choix de l'organisation
+         * après la création d'une organisation depuis le tableau de bord
+         * @param {objet} feedback : retour ajax
+         */
         updateOrgaSelectInput: function(feedback){
             var orgaName = feedback.organisation.name;
             var orgaWpref = feedback.organisation.wpref;
-            
-            // select à mettre à jour           
+
+            // select à mettre à jour
             $("#tab-organization #orgainfo_form #new-project-organisation").append(new Option(orgaWpref,orgaName));
             $("#tab-organization #orgainfo_form #new-project-organisation option:selected").removeAttr('selected');
             $("#tab-organization #orgainfo_form #new-project-organisation option[value="+orgaWpref+"]").attr("selected", "selected");
-            //var newname = $("#tab-organization #orgainfo_form #new_project_organisation option[value="+orgaWpref+"]").text();
-
-            
         },
-        
+
     };
 
 })(jQuery);

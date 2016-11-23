@@ -322,14 +322,12 @@ function print_informations_page()
                 
                 $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
                 $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-                var_dump($current_organisations);
                 if (isset($current_organisations) && count($current_organisations) > 0) {
                     $current_organisation = $current_organisations[0];
                 }              
                 $api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
                 $organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
                 if ($organisations_list) {
-//                    var_dump($organisations_list);
                     foreach ($organisations_list as $organisation_item) {
                         $selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
                         $str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
@@ -350,7 +348,6 @@ function print_informations_page()
                         <!--bouton d'édition de l'organisation-->
                         <a href="#informations" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga">
                             <?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organisation->organisation_name ?></a>
-                
                     <?php } ?>
 
                 <?php else: ?>
@@ -363,7 +360,7 @@ function print_informations_page()
                 <br />
                 <?php 
                 DashboardUtility::create_save_button("orgainfo_form"); ?>
-                
+
             </form> 
             <?php           
                 ob_start();

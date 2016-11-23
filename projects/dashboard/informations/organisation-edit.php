@@ -1,7 +1,7 @@
 <?php
 
 /* 
- * Lightbox content for organization edition
+ * Lightbox d'édition d'une organisation
  * 
  */
 
