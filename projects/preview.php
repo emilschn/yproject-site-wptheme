@@ -44,7 +44,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
         }
         else if ($jycrois == 0){ // voir si utile, car si 0 backers, on a tout de même 1 pers qui s'affiche
             $jycrois = false;
-            $persStatus = __("Soyez le 1er à suivre le projet", "yproject");
+            $persStatus = __("Soyez le 1er", "yproject") . '<br />' . __("&agrave; suivre le projet", "yproject");
         }
         
         //Projets en cours de collecte ou en vote

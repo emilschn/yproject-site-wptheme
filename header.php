@@ -82,7 +82,7 @@
 
 	<body <?php body_class(get_locale()); ?>> 
 		<nav id="main">
-			<div id="menu" class="center-lg">
+			<div id="menu">
 				<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
 				<a href="<?php echo home_url( '/vision' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/financement' ); ?>" class="lines"><?php _e( "Financer son projet", 'yproject' ); ?></a>
@@ -219,12 +219,5 @@
 			</div>
 		</div>
 		<?php endif; ?>
-
-		<?php 
-		if ( !is_user_logged_in() ) {
-			echo do_shortcode('[yproject_register_lightbox]');
-			echo do_shortcode('[yproject_connexion_lightbox]');
-		}
-		?>
 		
 		<div id="container"> 

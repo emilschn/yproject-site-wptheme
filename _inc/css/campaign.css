@@ -383,11 +383,9 @@ div#content.version-3 div.project-banner div.subtitle {
 
 div#content.version-3 div#triggered-menu-share {
 	display: none;
-    position: absolute;
-	width: 960px;
+    position: relative;
+	top: -400px;
 	text-align: right;
-	margin-top: -20px;
-	margin-left: -14px;
 }
 div#content.version-3 div#triggered-menu-share.triggered {
     display: block;
@@ -676,14 +674,9 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 }
 
 
-
 /*******************************************************************************
 * APPARENCE vote form V3 (lightbox)
 *******************************************************************************/
-
-
-/******************style blocks & return & next ****************************/
-
 .return, .next, .block1, .block2, .block3, .frise{
     display:inline-block;
     vertical-align:middle;

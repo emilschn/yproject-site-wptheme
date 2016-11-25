@@ -116,8 +116,8 @@ if (count($current_organisations) > 0) {
 						<?php endif; ?>
 					</div>
 
-					<a href="<?php echo $btn_follow_href; ?>" class="button blue <?php echo $btn_follow_classes; ?>" data-lightbox="<?php echo $btn_follow_data_lightbox; ?>" data-textfollow="<?php _e('Suivre', 'yproject'); ?>" data-textfollowed="<?php _e('Suivi', 'yproject'); ?>" data-following="<?php echo $btn_follow_following; ?>">
-						<?php echo $btn_follow_text; ?>
+					<a href="<?php echo $btn_follow_href; ?>" class="button blue <?php echo $btn_follow_classes; ?>" data-lightbox="<?php echo $btn_follow_data_lightbox; ?>" data-textfollow="<?php _e('Suivre', 'yproject'); ?>" data-textfollowed="<?php _e('Suivi !', 'yproject'); ?>" data-following="<?php echo $btn_follow_following; ?>">
+						<span><?php echo $btn_follow_text; ?></span>
 					</a>
 					<a href="#" class="button blue trigger-menu" data-target="share">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/partage/picto-partage.png" alt="Partager" />
@@ -151,8 +151,31 @@ if (count($current_organisations) > 0) {
 						<span><?php _e('Objectif', 'yproject'); ?></span>
 					</div>
 					<div class="left">
-						<span><?php echo $campaign->time_remaining_str(); ?></span><br />
-						<span><?php _e('Restants', 'yproject'); ?></span>
+						<?php
+						$time_remaining_str = $campaign->time_remaining_str();
+						if ($time_remaining_str != '-'):
+							$time_remaining_str_split = explode('-', $time_remaining_str);
+							$time_remaining_str = $time_remaining_str_split[1] . ' ';
+							$time_remaining_str_unit = $time_remaining_str_split[0];
+							switch ($time_remaining_str_split[0]) {
+								case 'J': $time_remaining_str .= 'jours'; break;
+								case 'H': $time_remaining_str .= 'heures'; break;
+								case 'M': $time_remaining_str .= 'minutes'; break;
+							}
+						?>
+							<span><?php echo $time_remaining_str; ?></span><br />
+							<?php if ($time_remaining_str_unit == 'J'): ?>
+							<span><?php _e('Restants', 'yproject'); ?></span>
+							<?php else: ?>
+							<span><?php _e('Restantes', 'yproject'); ?></span>
+							<?php endif; ?>
+						<?php
+						else:
+						?>
+							<span><?php echo $time_remaining_str; ?></span>
+						<?php	
+						endif;
+						?>
 					</div>
 				
 				
@@ -217,8 +240,31 @@ if (count($current_organisations) > 0) {
 						<span><?php _e('Objectif', 'yproject'); ?></span>
 					</div>
 					<div class="left">
-						<span><?php echo $campaign->time_remaining_str(); ?></span><br />
-						<span><?php _e('Restants', 'yproject'); ?></span>
+						<?php
+						$time_remaining_str = $campaign->time_remaining_str();
+						if ($time_remaining_str != '-'):
+							$time_remaining_str_split = explode('-', $time_remaining_str);
+							$time_remaining_str = $time_remaining_str_split[1] . ' ';
+							$time_remaining_str_unit = $time_remaining_str_split[0];
+							switch ($time_remaining_str_split[0]) {
+								case 'J': $time_remaining_str .= 'jours'; break;
+								case 'H': $time_remaining_str .= 'heures'; break;
+								case 'M': $time_remaining_str .= 'minutes'; break;
+							}
+						?>
+							<span><?php echo $time_remaining_str; ?></span><br />
+							<?php if ($time_remaining_str_unit == 'J'): ?>
+							<span><?php _e('Restants', 'yproject'); ?></span>
+							<?php else: ?>
+							<span><?php _e('Restantes', 'yproject'); ?></span>
+							<?php endif; ?>
+						<?php
+						else:
+						?>
+							<span><?php echo $time_remaining_str; ?></span>
+						<?php	
+						endif;
+						?>
 					</div>
 
 					<a href="<?php echo $invest_url_href; ?>" class="<?php echo $btn_invest_classes; ?>" data-lightbox="<?php echo $btn_invest_data_lightbox; ?>" data-redirect="<?php echo $invest_url; ?>">
@@ -238,7 +284,7 @@ if (count($current_organisations) > 0) {
 	<div class="clear padder"><div class="subtitle"><?php echo $campaign->subtitle(); ?></div></div>
 </div>
 	
-<div class="center">
+<div class="padder">
 	<div id="triggered-menu-share" class="triggered-menu">
 		<?php locate_template( 'projects/common/share-buttons.php', true, false ); ?>
 	</div>

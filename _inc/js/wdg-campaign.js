@@ -42,7 +42,7 @@ var WDGProjectViewer = (function($) {
 			});
 			$("a.update-follow").click(function(e) {
 				e.preventDefault();
-				if ($(this).data("following") === '1') {
+				if ($(this).data("following") == '1') {
 					$(this).data("following", '0');
 					$("a.update-follow span").text($(this).data("textfollow"));
 				} else {

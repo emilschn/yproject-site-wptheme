@@ -110,17 +110,17 @@
 				<?php endforeach; ?>
 			</select>
 			<select id="project-filter-location" class="project-filter-select">
+				<option value="all" selected="selected"><?php _e( "Toutes les r&eacute;gions", 'yproject' ); ?></option>
 				<?php $region_list = atcf_get_regions(); ?>
 				<?php foreach ( $region_list as $region => $dpt_list ): ?>
 				<option value="<?php echo implode($dpt_list, ','); ?>"><?php echo $region ?></option>
 				<?php endforeach; ?>
-				<option value="all" selected="selected"><?php _e( "Toutes les r&eacute;gions", 'yproject' ); ?></option>
 			</select>
 			<select id="project-filter-step" class="project-filter-select">
+				<option value="all" selected="selected"><?php _e( "Toutes les &eacute;tapes de campagne", 'yproject' ); ?></option>
 				<option value="vote"><?php _e( "En vote", 'yproject' ); ?></option>
 				<option value="collecte"><?php _e( "En financement", 'yproject' ); ?></option>
 				<option value="funded"><?php _e( "Financ&eacute;", 'yproject' ); ?></option>
-				<option value="all" selected="selected"><?php _e( "Toutes les &eacute;tapes de campagne", 'yproject' ); ?></option>
 			</select>
 			<select id="project-filter-activity" class="project-filter-select">
 				<option value="all" selected="selected"><?php _e( "Tous les secteurs d'activit&eacute;", 'yproject' ); ?></option>

@@ -701,7 +701,7 @@ function print_user_projects(){
 			}
 		 
 			?>
-			<div class="center">
+			<div>
 			<?php
 			foreach ($user_projects as $project) {
 				$payments = $project['payments'];

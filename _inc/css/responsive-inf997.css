@@ -29,6 +29,7 @@
 		padding-bottom: 3px;
 	}
 	nav#main > div#menu > a.btn-user.active {
+		height: 50px;
 		margin-right: 0px;
 		border-right: 2px solid #E1E3E2;
 		padding-right: 5px;
@@ -37,12 +38,15 @@
 		margin-left: 0px;
 		border-right: 0px;
 	}
+	nav#main > div#menu > a.btn-user.active img {
+		margin-top: 9px;
+	}
 	
 	nav#main > div#menu > a#btn-burger.active {
 		position: relative;
 		height: 40px;
 		margin: -10px -10px -10px -10px;
-		padding: 10px 17px;
+		padding: 5px 17px;
 		background-color: #E1E3E2;
 	}
 	nav#main > div#menu > a#btn-burger img {
@@ -50,8 +54,8 @@
 	}
 	
 	
-	#submenu-user { top: 51px; }
-	#submenu-search { right: 10px; height: 165px; }
+	#submenu-user { top: 50px; }
+	#submenu-search { top: 50px; right: 0px; height: 165px; }
 	#submenu-search a {
 		display: block;
 		color: #333333;

@@ -10,7 +10,7 @@ else {
 	ob_start();
 ?>
 		<footer class="bg-dark-gray<?php if (!empty($client_context)) { ?> theme-<?php echo $client_context; ?><?php } ?>">
-		    <section class="center-lg">
+		    <section>
 
 				<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) : ?>
 					<div>
@@ -63,7 +63,7 @@ else {
 				
 			</section>
 			
-			<section class="center-lg">							
+			<section>
 				<div>
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/membre-FPF.png" alt="logo membre financement participatif France" width="150px"/>
 				</div>
@@ -89,7 +89,7 @@ else {
 
 				<div class="aligncenter" role="contentinfo">
 					<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/">
-						<img alt="Licence Creative Commons" width="20" height="20" style="vertical-align: middle" src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/cc_logo_noir.jpg" /> Some rights reserved
+						<img alt="Licence Creative Commons" width="25" height="25" style="vertical-align: middle" src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/cc-01.png" /> Some rights reserved
 					</a>
 				</div>
                                 

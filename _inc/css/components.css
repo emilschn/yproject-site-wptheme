@@ -216,15 +216,15 @@
     z-index: 0;
     display: -webkit-flex;
     display: flex;
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
+    -webkit-justify-content: center;
+    justify-content: center;
 	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
 	height: 620px;
 }
 @media screen and (min-width: 1200px) {
 	.wdg-component-projects-preview .block-projects {
-		margin: 0% 5%;
+		margin: auto;
 	}
 }
 
@@ -476,4 +476,15 @@
         #E1E3E2 7px,
         #F5F5F5 1px,
         #E1E3E2 8px);
+}
+
+
+/*******************************************************************************
+* LIGHTBOX CONNECTION
+*******************************************************************************/
+#wdg-lightbox-register #connexion_facebook_container a.social_connect_login_facebook, #wdg-lightbox-connexion #connexion_facebook_container a.social_connect_login_facebook {
+	padding: 4px 5px 5px;
+    background-color: #526794;
+    border: 1px solid #526794;
+	color: #FFFFFF;
 }

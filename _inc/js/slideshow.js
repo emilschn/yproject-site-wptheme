@@ -28,12 +28,12 @@ Slideshow.prototype.init = function(){
     this.itemsNb = this.items.length;//nb de slides
     
 
-    /*if ($(window).width() > 997){
+    if ($(window).width() > 997){
         this.playSlider();
         //Passage souris sur le slider
         $('.slider-container').mouseover(this.stopSlider.bind(this));
         $('.slider-container').mouseout(this.playSlider.bind(this));
-    }*/
+    }
 };
 
 

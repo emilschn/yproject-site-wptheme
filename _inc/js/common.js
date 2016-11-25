@@ -51,23 +51,27 @@ YPUIFunctions = (function($) {
 			// Navbar : bouton compte utilisateur
 			$('.btn-user').click(function(e){
 				e.preventDefault();
-				if ($('.btn-user').hasClass('active')) {                           
+				if ($('.btn-user').hasClass('active')) {
 					$('.btn-user').removeClass('active').addClass('inactive');
 					$('#submenu-user').hide();
 				} else {
 					$('.btn-user').addClass('active').removeClass('inactive');
 					$('#submenu-user').show();
+					$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
+					$('#submenu-search').hide();
 				}
 			});
 			// Navbar : bouton recherche
 			$('#btn-search, #btn-burger').click(function(e){
 				e.preventDefault();
-				if ($('#btn-search, #btn-burger').hasClass('active')) {                           
+				if ($('#btn-search, #btn-burger').hasClass('active')) {
 					$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
 					$('#submenu-search').hide();
 				} else {
 					$('#btn-search, #btn-burger').addClass('active').removeClass('inactive');
 					$('#submenu-search').show();
+					$('.btn-user').removeClass('active').addClass('inactive');
+					$('#submenu-user').hide();
 				}
 			});
 			$("#submenu-search-input").keyup(function() {

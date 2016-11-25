@@ -85,13 +85,13 @@ else {
 			?>
 		</div>
 	</div>
-    <a class="home-button-project see-more red" href=""><?php _e("découvrir tous les projets","yproject" ) ?></a>
+    <a class="home-button-project see-more red" href="<?php echo home_url( '/les-projets' ); ?>"><?php _e("D&eacute;couvrir tous les projets","yproject" ) ?></a>
 </section> <!-- section.wdg-component-projects-preview -->
 
 
 <section id="home-video">
     <div id="video-content">
-        <h2 class="standard">/ <?php _e("comment ça marche ?", "yproject")?> /</h2>
+        <h2 class="standard">/ <?php _e("Comment &ccedil;a marche ?", "yproject")?> /</h2>
         <div class="home_video">
             <div class="video-container w570 hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 570)); ?></div>
             <div class="video-container w320 hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 320)); ?></div>
@@ -107,7 +107,7 @@ else {
 
 
 <section id="home-press" class="hidden-inf997">
-	<img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse.jpg"/>
+	<a href="<?php echo home_url( '/espace-presse' ); ?>"><img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse.jpg" alt="presse" /></a>
 </section> <!-- section#home-press -->
 
 <?php
