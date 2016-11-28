@@ -162,6 +162,15 @@ get_header();
 			 * 
 			 */
 			?>
+			
+			<?php
+			//refund
+			/*
+			$campaign = new ATCF_Campaign(11833);
+			$campaign->refund();
+			 *
+			 */
+			?>
 		    
 		<?php
 		endif;

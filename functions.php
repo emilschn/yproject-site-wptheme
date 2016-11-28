@@ -1138,15 +1138,7 @@ function get_investors_table() {
 
 				$refund_id = get_post_meta($item['ID'], 'refund_id', TRUE);
 				if (isset($refund_id) && !empty($refund_id)) {
-					$refund_obj = ypcf_mangopay_get_refund_by_id($refund_id);
-					$investment_state = 'Remboursement en cours';
-					if ($refund_obj->IsCompleted) {
-						if ($refund_obj->IsSucceeded) {
-							$investment_state = 'Remboursé';
-						} else {
-							$investment_state = 'Remboursement échoué';
-						}
-					}
+					$investment_state = 'Remboursé';
 
 				} else {
 					$refund_id = get_post_meta($item['ID'], 'refund_wire_id', TRUE);
