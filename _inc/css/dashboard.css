@@ -414,6 +414,26 @@
     border-bottom: 1px solid grey;
 }
 
+#page-informations .like-input-center{
+    padding: 3px 0;
+    margin-left: 55px;
+    background-color: #FFFFFF;
+    text-align: center;
+}
+#page-informations .like-input-center p{
+    display: inline-block;
+    width: 200px;
+}
+#page-informations .calc-result{
+    text-align: center;
+}
+#page-informations #annual-gain > .uppercase{
+    text-transform: uppercase;
+}
+#page-informations #annual-gain > .lowercase{
+    text-transform: lowercase;
+}
+
 /*******************************************************************************
 * Page actualités
 *******************************************************************************/
