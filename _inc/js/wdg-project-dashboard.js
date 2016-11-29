@@ -275,8 +275,8 @@ var WDGProjectDashboard = (function ($) {
                     //Calculs de tous les élements et rattachement du keyup/click sur changement de CA 
                     WDGProjectDashboard.calculAndShowResult();
                     
-                    //Recalcul du rendement si modification de l'objectif max
-                    $("#new_maximum_goal").keyup(function(){
+                    //Recalcul du rendement si modification de l'objectif max / % royalties / durée financement
+                    $("#new_maximum_goal, #new_roi_percent_estimated, #new_funding_duration").bind('keyup click', function(){
                         if($("#new_maximum_goal").val()!=="" && ($("#new_minimum_goal").val()!=="" && $("#new_funding_duration").val()!==""
                             && $("#new_roi_percent_estimated").val()!=="" && $("#new_estimated_turnover_0").val()!=="")){
                             WDGProjectDashboard.simuProcess();
@@ -285,26 +285,6 @@ var WDGProjectDashboard = (function ($) {
                             WDGProjectDashboard.initResultCalcul();
                         }
                     });
-                    //Recalcul du rendement si modification du % de royalties
-                    $("#new_roi_percent_estimated").keyup(function(){
-                        if($("#new_roi_percent_estimated").val()!=="" && ($("#new_minimum_goal").val()!=="" && $("#new_maximum_goal").val()!=="" 
-                            && $("#new_funding_duration").val()!=="" && $("#new_estimated_turnover_0").val()!=="")){
-                            WDGProjectDashboard.simuProcess();
-                        }
-                        else{
-                            WDGProjectDashboard.initResultCalcul();
-                        }
-                    });
-                    //Recalcul du rendement si modification de la durée de financement
-                    $("#new_funding_duration").keyup(function(){
-                        if($("#new_funding_duration").val()!=="" && $("#new_maximum_goal").val()!==""
-                            && $("#new_roi_percent_estimated").val()!=="" && $("#new_estimated_turnover_0").val()!==""){
-                            WDGProjectDashboard.simuProcess();
-                        }
-                        else{
-                            WDGProjectDashboard.initResultCalcul();
-                        }
-                    });   
                 }
             }
 
