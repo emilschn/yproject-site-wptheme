@@ -227,7 +227,7 @@ var WDGProjectDashboard = (function ($) {
                     $("#new_first_payment").change(function(){
                         var start_year = 1;
                         $("#estimated-turnover li .year").each(function(index){
-                            $(this).html((parseInt(start_year)+index));
+                            $(this).html((parseInt(start_year)+index));//le n° d'année est déjà renseigné par le reste du code => pour admin, on a année 11, année 22...(ne vois pas le rapport avec new_first_payment)
                         });
                     });
                     
@@ -273,7 +273,7 @@ var WDGProjectDashboard = (function ($) {
                     $("#new_funding_duration").keyup(function(){
                         if($("#new_funding_duration").val()!==""){
                                  $("#new_funding_duration").trigger('change');
-                         }
+                        }
                     });
 
                     //A l'ouverture de l'onglet besoin de financement
@@ -822,15 +822,16 @@ var WDGProjectDashboard = (function ($) {
          * Récupération de tous les CA en fonction de la durée de financement
          * @returns {Array} tableau avec le montant des CA pour chaque année
          */
-        createCaTab: function(){
-            if($("#new_funding_duration").val()!== "0"){
-                var nbYears = parseInt($("#new_funding_duration").val());
+        createCaTab: function(){           
+            if(new_funding_duration!== "0"){
+                var nbYears = parseInt(new_funding_duration);
                 var caTab = new Array;
                 for (var ii=0; ii < nbYears; ii++){
-                    caTab.push(parseFloat($("#new_estimated_turnover_"+ii).val()));
+                    var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? ($.trim($("span[data-id=new_estimated_turnover_"+ii+"]").text())) : $("#new_estimated_turnover_"+ii).val();
+                    caTab.push(parseFloat(new_estimated_turnover));
                 }
                 return caTab;
-            } 
+            }
         },
         /**
          * Calcul du CA total sur les années de CA renseignées
@@ -852,9 +853,9 @@ var WDGProjectDashboard = (function ($) {
         /**
          * Calcul des royalties reversés par année de CA renseignée
          */
-        calculRoiPerYear: function(){
-            if($("#new_roi_percent_estimated").val() !== ""){
-                percent = parseFloat($("#new_roi_percent_estimated").val())/100;
+        calculRoiPerYear: function(){           
+            if(new_roi_percent_estimated !== ""){
+                percent = parseFloat(new_roi_percent_estimated)/100;
             }
             else{ percent = false; }
             for (var ii=0; ii < caTab.length; ii++ ) {
@@ -883,8 +884,7 @@ var WDGProjectDashboard = (function ($) {
         /**
          * Calcul du montant total de la collecte incluant la comission WDG
          */
-        calculCollect: function (){
-            need = $('#new_maximum_goal').val();
+        calculCollect: function (){                     
             if (need!==""){
                 collect = need*1.1;
                 remb = collect*1.1;
@@ -932,6 +932,7 @@ var WDGProjectDashboard = (function ($) {
          * et mise à jour des résultats dans l'interface
          */
         simuProcess: function(){
+            WDGProjectDashboard.getFixedData();
             WDGProjectDashboard.calculTotalCa();
             WDGProjectDashboard.calculRoiPerYear();
             WDGProjectDashboard.calculReturn();
@@ -955,13 +956,14 @@ var WDGProjectDashboard = (function ($) {
          * Calcul des royalties reversés par année et du rendement (si données déjà renseignées)
          * et rattachement des events sur la modif du CA
          */
-        calculAndShowResult: function(){          
-            if($("#new_minimum_goal").val()!=="" && $("#new_maximum_goal").val()!=="" && $("#new_funding_duration").val()!==""
-                && $("#new_roi_percent_estimated").val()!==""){
+        calculAndShowResult: function(){
+            WDGProjectDashboard.getFixedData();
+            if(new_minimum_goal!="" && need!="" && new_funding_duration!="" && new_roi_percent_estimated!=""){
                 WDGProjectDashboard.simuProcess();
                 //Recalcul à la modification des montants de CA
-                for(var ii = 0; ii < parseInt($("#new_funding_duration").val()); ii++){                   
-                    $("#new_estimated_turnover_"+ii).bind('click keyup',function(){                               
+                for(var ii = 0; ii < parseInt(new_funding_duration); ii++){ 
+                    var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? $("span[data-id=new_estimated_turnover_"+ii+"]") : $("#new_estimated_turnover_"+ii);
+                    $(new_estimated_turnover).bind('click keyup',function(){                               
                         WDGProjectDashboard.simuProcess();
                     });
                 }
@@ -969,7 +971,16 @@ var WDGProjectDashboard = (function ($) {
             else{
                 WDGProjectDashboard.initResultCalcul();
             }
+            
         },
+        
+        getFixedData: function(){
+            new_minimum_goal = $("#new_minimum_goal").val() == null ? $.trim($("span[data-id=new_minimum_goal]").text()) : $("#new_minimum_goal").val();
+            need = $("#new_maximum_goal").val() == null ? $.trim($("span[data-id=new_maximum_goal]").text()) : $("#new_maximum_goal").val();
+            new_roi_percent_estimated = $("#new_roi_percent_estimated").val() == null ? $.trim($("span[data-id=new_roi_percent_estimated]").text()) : $("#new_roi_percent_estimated").val();
+            new_funding_duration = ($("#new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration]").text()) : $("#new_funding_duration").val();
+        },
+        
         /**
          * Formate les nombres en groupant les chiffres par 3 et affiche au maximum 2 décimales
          * @param {number} number

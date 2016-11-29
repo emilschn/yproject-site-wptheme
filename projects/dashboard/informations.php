@@ -444,9 +444,12 @@ function print_informations_page()
                                                 <i class="right fa fa-eur" aria-hidden="true"></i>
                                                 <input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />                                         
                                                 <?php else: ?>
-                                                <?php echo $turnover; ?> &euro;
+                                                <?php echo $turnover; ?> 
                                                 <?php endif; ?>
                                         </span>
+                                        <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?>
+                                        &euro;
+                                        <?php endif; ?>
                                         <!--montant des royalties reversés par année-->
                                         <span class="like-input-center">
                                             <p id="roi-amount-<?php echo $i;?>">0 €</p>
