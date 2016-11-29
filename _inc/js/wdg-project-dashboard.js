@@ -244,7 +244,7 @@ var WDGProjectDashboard = (function ($) {
                             for(var i=0; i<new_nb_years-nb_years_li_existing;i++){
                                 newlines = newlines+
                                     '<li class="field">' +
-                                    '<label>Année '+(nb_years_li_existing+1)+'<span class="year"></span></label>'+
+                                    '<label>Année '+(i+1+nb_years_li_existing)+'<span class="year"></span></label>'+
                                     '<span class="field-container">'+
                                     '&nbsp;<span class="field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
                                     '<i class="right fa fa-eur" aria-hidden="true"></i>'+
@@ -270,7 +270,12 @@ var WDGProjectDashboard = (function ($) {
                         WDGProjectDashboard.calculAndShowResult();
                     });
                     $("#new_funding_duration").trigger('change');
-                    
+                    $("#new_funding_duration").keyup(function(){
+                        if($("#new_funding_duration").val()!==""){
+                                 $("#new_funding_duration").trigger('change');
+                         }
+                    });
+
                     //A l'ouverture de l'onglet besoin de financement
                     //Calculs de tous les élements et rattachement du keyup/click sur changement de CA 
                     WDGProjectDashboard.calculAndShowResult();
@@ -856,7 +861,7 @@ var WDGProjectDashboard = (function ($) {
                 if (caTab[ii] > 0) {
                     if(percent){
                         var roi_amount = percent * caTab[ii];
-                        $("#roi-amount-"+ii).html(roi_amount+" €");
+                        $("#roi-amount-"+ii).html(roi_amount.toFixed(2)+" €");
                     }else{ $("#roi-amount-"+ii).html("0 €"); }
                 }else{ $("#roi-amount-"+ii).html("0 €"); }
             }
@@ -894,9 +899,15 @@ var WDGProjectDashboard = (function ($) {
                     nbYears++;
                 }
             }
-            mediumRend = (Math.pow((percent*totalca/collect),(1/nbYears))-1)*100;
-            $("#medium-rend").html(mediumRend.toFixed(2)+' %');
-            $("#nb-years").html(nbYears);
+            // Ecarter les dénominateurs à zéro
+            if(collect != "0" && nbYears != 0){
+                mediumRend = (Math.pow((percent*totalca/collect),(1/nbYears))-1)*100;
+                $("#medium-rend").html(mediumRend.toFixed(2)+' %');
+                $("#nb-years").html(nbYears);
+            }
+            else if(collect == "0" || nbYears == 0){
+                WDGProjectDashboard.initResultCalcul();
+            }
         },
         /**
          * Vérification d'un rendement minimum supérieur à 3%
@@ -936,8 +947,10 @@ var WDGProjectDashboard = (function ($) {
                 $("#roi-amount-"+ii).html("0 €");
             }
         },
-        //Calcul des royalties reversés par année et du rendement (si données déjà renseignées)
-        // et rattachement des events sur la modif du CA
+        /**
+         * Calcul des royalties reversés par année et du rendement (si données déjà renseignées)
+         * et rattachement des events sur la modif du CA
+         */
         calculAndShowResult: function(){          
             if($("#new_minimum_goal").val()!=="" && $("#new_maximum_goal").val()!=="" && $("#new_funding_duration").val()!==""
                 && $("#new_roi_percent_estimated").val()!==""){
