@@ -467,17 +467,17 @@ function print_informations_page()
             <div class="field" id="calc-funding">
                 <p id="info-roi-project" class="calc-result">
                     <?php _e('Avec ce pourcentage, mes investisseurs auront retrouvé','yproject');?>
-                    <span id="total-roi">xxx</span> &euro; 
+                    <span id="total-roi">---</span> &euro; 
                     <?php _e('dans', 'yproject');?>
-                    <span id="nb-years">xxx</span>&nbsp;ans,
+                    <span id="nb-years">---</span>&nbsp;ans,
                     <?php _e('pour' , 'yproject');?>
-                    <span id="total-funding">xxx</span>&nbsp;&euro;*
+                    <span id="total-funding">---</span>&nbsp;&euro;*
                     <?php _e('investis', 'yproject');?>
                 </p>
                 <p id="annual-gain" class="calc-result">
                     <?php ?>
                     <strong class="uppercase"><?php _e('rendement annuel pour investisseur','yproject'); ?>&nbsp;:&nbsp;</strong>
-                    <span id="medium-rend" class="lowercase" >xxx&nbsp;%</span>
+                    <span id="medium-rend" class="lowercase" >---&nbsp;%</span>
                 </p>
                 <p class="calc-result">*<?php _e('montant de la collecte, incluant la commission de WE DO GOOD', 'yproject') ?></p>
             </div>

@@ -230,7 +230,7 @@ var WDGProjectDashboard = (function ($) {
                             $(this).html((parseInt(start_year)+index));
                         });
                     });
-
+                    
                     //Cases pour le CA prévisionnel
                     $("#new_funding_duration").change(function() {
                         var nb_years_li_existing = ($("#estimated-turnover li").length);
@@ -254,7 +254,7 @@ var WDGProjectDashboard = (function ($) {
                                     '</span>'+
                                     '</li>';
                             }
-                            
+
                             $("#estimated-turnover").html(newlines);
                                                       
                             //MAJ des étiquettes "Année XXXX"
@@ -861,7 +861,8 @@ var WDGProjectDashboard = (function ($) {
                 if (caTab[ii] > 0) {
                     if(percent){
                         var roi_amount = percent * caTab[ii];
-                        $("#roi-amount-"+ii).html(roi_amount.toFixed(2)+" €");
+                        var roi_amount_format = WDGProjectDashboard.numberFormat(roi_amount);
+                        $("#roi-amount-"+ii).html(roi_amount_format+" €");
                     }else{ $("#roi-amount-"+ii).html("0 €"); }
                 }else{ $("#roi-amount-"+ii).html("0 €"); }
             }
@@ -874,7 +875,8 @@ var WDGProjectDashboard = (function ($) {
             if(percent){
                 totalRoi = percent * totalca;
                 if(totalRoi){
-                    $("#total-roi").html(totalRoi.toFixed(2));
+                    var totalRoi_format = WDGProjectDashboard.numberFormat(totalRoi);
+                    $("#total-roi").html(totalRoi_format);
                 }
             }
 	},
@@ -886,7 +888,8 @@ var WDGProjectDashboard = (function ($) {
             if (need!==""){
                 collect = need*1.1;
                 remb = collect*1.1;
-                $("#total-funding").html(collect.toFixed(2));
+                var collect_format = WDGProjectDashboard.numberFormat(collect);
+                $("#total-funding").html(collect_format);
             }
         },
         /**
@@ -902,7 +905,8 @@ var WDGProjectDashboard = (function ($) {
             // Ecarter les dénominateurs à zéro
             if(collect != "0" && nbYears != 0){
                 mediumRend = (Math.pow((percent*totalca/collect),(1/nbYears))-1)*100;
-                $("#medium-rend").html(mediumRend.toFixed(2)+' %');
+                var mediumRend_format = WDGProjectDashboard.numberFormat(mediumRend);
+                $("#medium-rend").html(mediumRend_format+' %');
                 $("#nb-years").html(nbYears);
             }
             else if(collect == "0" || nbYears == 0){
@@ -937,10 +941,10 @@ var WDGProjectDashboard = (function ($) {
         },
         
         initResultCalcul: function(){
-            $("#total-roi").html("xxx");
-            $("#nb-years").html("xx");
-            $("#total-funding").html("xxx");
-            $("#medium-rend").html("xxx %").css('color','#2B2C2C');
+            $("#total-roi").html("---");
+            $("#nb-years").html("--");
+            $("#total-funding").html("---");
+            $("#medium-rend").html("--- %").css('color','#2B2C2C');
             
             caTab = WDGProjectDashboard.createCaTab();
             for (var ii=0; ii < caTab.length; ii++ ) {
@@ -966,6 +970,16 @@ var WDGProjectDashboard = (function ($) {
                 WDGProjectDashboard.initResultCalcul();
             }
         },
+        /**
+         * Formate les nombres en groupant les chiffres par 3 et affiche au maximum 2 décimales
+         * @param {number} number
+         * @returns {number}
+         */
+        numberFormat: function(number){
+            numberFormat = new Intl.NumberFormat({useGrouping: true, maximumSignificantDigits : 2}).format(number);
+            return numberFormat;
+        }
+        
     };
 
 })(jQuery);
