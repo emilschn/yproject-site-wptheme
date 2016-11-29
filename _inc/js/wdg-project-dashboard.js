@@ -236,7 +236,7 @@ var WDGProjectDashboard = (function ($) {
                         var nb_years_li_existing = ($("#estimated-turnover li").length);
                         var new_nb_years = parseInt($("#new_funding_duration").val());
                         "change nb year trigger "+new_nb_years+"(exist : "+nb_years_li_existing+")";
-
+                        
                         //Ajoute des boîtes au besoin
                         if(new_nb_years > nb_years_li_existing){
                             var newlines = $("#estimated-turnover").html();
@@ -266,25 +266,14 @@ var WDGProjectDashboard = (function ($) {
                             $("#estimated-turnover li").slice(0,new_nb_years).show();
                         }
                         nb_years_li_existing = Math.max(new_nb_years,nb_years_li_existing);
+                        //Calculs de tous les élements et rattachement du keyup/click sur changement de CA
+                        WDGProjectDashboard.calculAndShowResult();
                     });
                     $("#new_funding_duration").trigger('change');
-                    $("#new_funding_duration").keyup(function(){
-                        if($("#new_funding_duration").val()!==""){
-                            $("#new_funding_duration").trigger('change');
-                        }
-                    });
-                    //Calcul des royalties reversés par année et du rendement à l'ouverture
-                    //de l'onglet "Besoin de financement" (si données déjà renseignées)
-                    if($("#new_minimum_goal").val()!=="" && $("#new_maximum_goal").val()!=="" && $("#new_funding_duration").val()!==""
-                        && $("#new_roi_percent_estimated").val()!=="" && $("#new_estimated_turnover_0").val()!==""){
-                        WDGProjectDashboard.simuProcess();
-                        //Recalcul à la modification des montants de CA
-                        for(var ii = 0; ii < parseInt($("#new_funding_duration").val()); ii++){
-                            $("#new_estimated_turnover_"+ii).keyup(function(){
-                                WDGProjectDashboard.simuProcess();
-                            });
-                        }
-                    }
+                    
+                    //A l'ouverture de l'onglet besoin de financement
+                    //Calculs de tous les élements et rattachement du keyup/click sur changement de CA 
+                    WDGProjectDashboard.calculAndShowResult();
                     
                     //Recalcul du rendement si modification de l'objectif max
                     $("#new_maximum_goal").keyup(function(){
@@ -965,6 +954,23 @@ var WDGProjectDashboard = (function ($) {
             caTab = WDGProjectDashboard.createCaTab();
             for (var ii=0; ii < caTab.length; ii++ ) {
                 $("#roi-amount-"+ii).html("0 €");
+            }
+        },
+        //Calcul des royalties reversés par année et du rendement (si données déjà renseignées)
+        // et rattachement des events sur la modif du CA
+        calculAndShowResult: function(){          
+            if($("#new_minimum_goal").val()!=="" && $("#new_maximum_goal").val()!=="" && $("#new_funding_duration").val()!==""
+                && $("#new_roi_percent_estimated").val()!==""){
+                WDGProjectDashboard.simuProcess();
+                //Recalcul à la modification des montants de CA
+                for(var ii = 0; ii < parseInt($("#new_funding_duration").val()); ii++){                   
+                    $("#new_estimated_turnover_"+ii).bind('click keyup',function(){                               
+                        WDGProjectDashboard.simuProcess();
+                    });
+                }
+            }
+            else{
+                WDGProjectDashboard.initResultCalcul();
             }
         },
     };
