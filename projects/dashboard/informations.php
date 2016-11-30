@@ -342,7 +342,7 @@ function print_informations_page()
                             <?php echo $str_organisations; ?>
                         </select>
                     </span>
-                    <?php if ($current_organisation!=null): ?>
+                    <?php if ($current_organisation!=null): ?>                      
                         <!--bouton d'édition de l'organisation-->
                         <a href="#informations" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga">
                             <?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organisation->organisation_name ?></a>
@@ -356,15 +356,17 @@ function print_informations_page()
                 <!--bouton de création de l'organisation visible dans tous les cas -->
                 <a href="#informations" id="btn-new-orga" class="wdg-button-lightbox-open button" data-lightbox="newOrga"><?php _e("Cr&eacute;er une organisation","yproject") ?></a>               
                 <br />
-                <?php 
+                <?php
                 DashboardUtility::create_save_button("orgainfo_form"); ?>
 
             </form> 
-            <?php           
-                ob_start();
-                locate_template( array("projects/dashboard/informations/lightbox-organisation-edit.php"), true );                  
-                $lightbox_content = ob_get_clean();
-                echo do_shortcode('[yproject_widelightbox id="editOrga"]'.$lightbox_content.'[/yproject_widelightbox]'); 
+            <?php
+                if ($current_organisation!=null){
+                    ob_start();
+                    locate_template( array("projects/dashboard/informations/lightbox-organisation-edit.php"), true );                  
+                    $lightbox_content = ob_get_clean();
+                    echo do_shortcode('[yproject_widelightbox id="editOrga"]'.$lightbox_content.'[/yproject_widelightbox]'); 
+                }
             ?>
             <?php 
                 ob_start();
