@@ -42,6 +42,9 @@ h2.standard {
     letter-spacing: 0.125em;
 }
 
+a.hidden-link {
+    color: #000000;
+}
 
 button.red {
 	background-color: #EA4F51;
