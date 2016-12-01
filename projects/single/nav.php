@@ -39,7 +39,7 @@ if (is_user_logged_in()) {
 <nav class="project-navigation">
 	<div class="padder">
 		<ul class="menu-project campaign-mobile-hidden">
-			<li class="project-navigation-logo"><a href="#" data-target="banner"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/grenade-noire.png" alt="logo noir" /></a></li>
+			<li class="project-navigation-logo"><a href="#" data-target="banner"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/grenade-gris-fonce.png" alt="logo noir" style="width: 36px"/></a></li>
 			<li class="project-navigation-title"><?php echo $campaign->data->post_title; ?></li>
 			<?php foreach ($menu_project_parts as $menu_part_key => $menu_part_label): ?>
 				<li class="slashed"><a href="#" id="target-<?php echo $menu_part_key; ?>" data-target="<?php echo $menu_part_key; ?>"><?php _e($menu_part_label, 'yproject'); ?></a></li>
