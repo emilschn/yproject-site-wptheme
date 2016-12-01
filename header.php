@@ -4,8 +4,24 @@
 	date_default_timezone_set("Europe/Paris");
 	ypcf_session_start();
 	$title_str = UIHelpers::current_page_title();
-	$project_list = WDGUser::get_projects_by_id(bp_loggedin_user_id(), TRUE);
-	$projects_searchable = ATCF_Campaign::list_projects_searchable();
+	
+	$project_list = array();
+	if (is_user_logged_in()) {
+		$cache_project_list = $WDG_cache_plugin->get_cache('WDGUser::get_projects_by_id('.bp_loggedin_user_id().', TRUE)', 1);
+		if ($cache_project_list !== FALSE) { $project_list = json_decode($cache_project_list); }
+		else {
+			$project_list = WDGUser::get_projects_by_id(bp_loggedin_user_id(), TRUE);
+			$WDG_cache_plugin->set_cache('WDGUser::get_projects_by_id('.bp_loggedin_user_id().', TRUE)', json_encode($project_list), 60*10, 1); //MAJ 10min
+		}
+	}
+	
+	$cache_projects_searchable = $WDG_cache_plugin->get_cache('ATCF_Campaign::list_projects_searchable', 1);
+	if ($cache_projects_searchable !== FALSE) { $projects_searchable = json_decode($cache_projects_searchable); }
+	else {
+		$projects_searchable = ATCF_Campaign::list_projects_searchable();
+		$WDG_cache_plugin->set_cache('ATCF_Campaign::list_projects_searchable', json_encode($projects_searchable), 60*60*3, 1); //MAJ 3h
+	}
+	
 	wp_reset_query();
 ?>
 <!DOCTYPE html>

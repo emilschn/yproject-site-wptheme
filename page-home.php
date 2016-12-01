@@ -64,7 +64,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 <?php
 //*******************
 //CACHE HOME
-$cache_home = $WDG_cache_plugin->get_cache('home', 3);
+$cache_home = $WDG_cache_plugin->get_cache('home-projects', 1);
 if ($cache_home !== FALSE) { echo $cache_home; }
 else {
 	ob_start();
@@ -88,6 +88,16 @@ else {
     <a class="home-button-project see-more red" href="<?php echo home_url( '/les-projets' ); ?>"><?php _e("D&eacute;couvrir tous les projets","yproject" ) ?></a>
 </section> <!-- section.wdg-component-projects-preview -->
 
+<?php
+	$cache_home = ob_get_contents();
+	$WDG_cache_plugin->set_cache('home-projects', $cache_home, 60*2, 1);  //MAJ 2min
+	ob_end_clean();
+	echo $cache_home;
+}
+//FIN CACHE HOME
+//*******************
+?>
+
 
 <section id="home-video">
     <div id="video-content">
@@ -109,12 +119,3 @@ else {
 <section id="home-press" class="hidden-inf997">
 	<a href="<?php echo home_url( '/espace-presse' ); ?>"><img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse.jpg" alt="presse" /></a>
 </section> <!-- section#home-press -->
-
-<?php
-	$cache_home = ob_get_contents();
-	$WDG_cache_plugin->set_cache('home', $cache_home, 60*60*24, 1);
-	ob_end_clean();
-	echo $cache_home;
-}
-//FIN CACHE HOME
-//*******************

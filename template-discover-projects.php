@@ -48,6 +48,12 @@
 			</div> <!-- .wdg-component-slider -->
 
 			<?php
+//*******************
+//CACHE STATS PROJETS
+$cache_project_stats = $WDG_cache_plugin->get_cache('list-projects-stats', 1);
+if ($cache_project_stats !== FALSE) { echo $cache_project_stats; }
+else {
+	ob_start();
 			$project_list_funded = ATCF_Campaign::get_list_funded( );
 			$count_amount = 0;
 			$count_people = 0;
@@ -83,6 +89,15 @@
 					</span>
 				</p>
 			</div>
+<?php
+	$cache_project_stats = ob_get_contents();
+	$WDG_cache_plugin->set_cache('list-projects-stats', $cache_project_stats, 60*60*24, 1);  //MAJ 24h
+	ob_end_clean();
+	echo $cache_project_stats;
+}
+//FIN CACHE STATS PROJETS
+//*******************
+?>
 			
 			<div class="clear"></div>
 		</div>
@@ -93,6 +108,14 @@
 	
 		
 	<div class="padder projects-current">
+<?php
+//*******************
+//CACHE PROJECT FILTERS
+$cache_project_filters = $WDG_cache_plugin->get_cache('list-project-filters', 1);
+if ($cache_project_filters !== FALSE) { echo $cache_project_filters; }
+else {
+	ob_start();
+?>
 		<nav id="project-filter">
 			<span><?php _e( "Filtres", 'yproject' ); ?> <span class="only-inf997 inline"><?php _e( "projets", 'yproject' ); ?></span></span>
 			<select id="project-filter-impact" class="project-filter-select">
@@ -137,10 +160,27 @@
 				<?php endforeach; ?>
 			</select>
 		</nav>
+<?php
+	$cache_project_filters = ob_get_contents();
+	$WDG_cache_plugin->set_cache('list-project-filters', $cache_project_filters, 60*60*24, 1);  //MAJ 24h
+	ob_end_clean();
+	echo $cache_project_filters;
+}
+//FIN CACHE PROJECT FILTERS
+//*******************
+?>
 		
 		<section class="wdg-component-projects-preview">
 			<div class="project-slider">
 				<div class="block-projects">
+<?php
+//*******************
+//CACHE PROJECT CURRENT
+$cache_project_current = $WDG_cache_plugin->get_cache('list-project-current', 1);
+if ($cache_project_current !== FALSE) { echo $cache_project_current; }
+else {
+	ob_start();
+?>
 				<?php
 				$project_list_funding = ATCF_Campaign::get_list_funding( );
 				$project_list_vote = ATCF_Campaign::get_list_vote( );
@@ -153,6 +193,15 @@
 					require('projects/preview.php');
 				}
 				?>
+<?php
+	$cache_project_current = ob_get_contents();
+	$WDG_cache_plugin->set_cache('list-project-current', $cache_project_current, 60*2, 1);  //MAJ 2min
+	ob_end_clean();
+	echo $cache_project_current;
+}
+//FIN CACHE PROJECT FILTERS
+//*******************
+?>
 				</div>
 			</div>
 		</section>
@@ -167,14 +216,32 @@
 
 				<div class="project-slider">
 					<div class="block-projects">
+<?php		
+//*******************
+//CACHE STATS PROJETS
+$cache_project_funded = $WDG_cache_plugin->get_cache('list-projects-funded', 1);
+if ($cache_project_funded !== FALSE) { echo $cache_project_funded; }
+else {
+	ob_start();
+?>
 					<?php
 					$count = 0;
+					$project_list_funded = ATCF_Campaign::get_list_funded( );
 					foreach ( $project_list_funded as $project_post ) {
 						$count++;
 						$project_id = $project_post->ID;
 						require('projects/preview.php');
 					}
 					?>
+<?php
+	$cache_project_funded = ob_get_contents();
+	$WDG_cache_plugin->set_cache('list-projects-funded', $cache_project_funded, 60*60*2, 1);  //MAJ 2h
+	ob_end_clean();
+	echo $cache_project_funded;
+}
+//FIN CACHE STATS PROJETS
+//*******************
+?>
 					</div>
 				</div>
 			</section>
