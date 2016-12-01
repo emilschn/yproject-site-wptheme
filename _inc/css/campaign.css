@@ -280,7 +280,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 }
 
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right {
-    width: 33%;
+    width: 32%;
 	height: 470px;
 	padding: 15px 1%;
 	background-color: #FFF;
@@ -414,19 +414,6 @@ div#content.version-3 div.project-timeline span.greater {
 }
 div#content.version-3 div.project-timeline span.selected {
 	font-weight: bold;
-}
-
-/*******************************************************************************
-* PITCH
-*******************************************************************************/
-div#content.version-3 div.project-pitch-video {
-    float: right;
-	text-align: right;
-    width: 580px;
-	min-height: 330px;
-}
-div#content.version-3 div.project-pitch-video iframe {
-	max-width: 100%;
 }
 
 /*******************************************************************************
@@ -1319,10 +1306,11 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
 #wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel, #wdg-edit-picture-head-next_update, #wdg-edit-video-image_update, #wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid{
 	background: #A4DBDE;
     height: 25px;
-    color: white;
+    color: #000000;
     font-weight: bold;
     border: none;
     cursor: pointer;
+	text-transform: uppercase;
 }
 
 #wdg-edit-picture-head-next_valid{
@@ -1336,7 +1324,7 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
 
 #wdg-edit-video-image_update, #text_url_video{
 	width: 100%;
-	height: 40px;
+	height: 44px;
 }
 
 #wdg-edit-video-image_update, #wdg-edit-picture-head-next_update{
@@ -1352,15 +1340,6 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
 #wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid, #wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel{
 	height: 37px;
 	width: 65px;
-}
-.project-pitch-video {
-    height: 325px;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-}
-
-.project-pitch-video-bis{
-	height: auto;
 }
 
 

@@ -94,11 +94,15 @@ if (count($current_organisations) > 0) {
 		<div class="padder">
 			
 			<div class="banner-half left">
-				<?php if ($img_src != ''): ?>
-				<img id="project-banner-src" src="<?php echo $img_src; ?>" alt="banner <?php echo $post->post_title; ?>" />
-				<?php else: ?>
-				<?php echo $video_element; ?>
-				<?php endif; ?>
+				<div id="project-banner-picture">
+					<?php if ($img_src != ''): ?>
+					<img id="project-banner-src" src="<?php echo $img_src; ?>" alt="banner <?php echo $post->post_title; ?>" />
+					<?php else: ?>
+					<?php echo $video_element; ?>
+					<?php endif; ?>
+				</div>
+				<input type="hidden" id="url_image_link" href="<?php echo $campaign->get_home_picture_src(); ?>" />
+				<input type="hidden" id="url_video_link" href="<?php echo $campaign->video(); ?>" />
 			</div>
 			
 			<div class="banner-half right">
