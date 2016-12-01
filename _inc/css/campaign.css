@@ -543,7 +543,7 @@ div#content.version-3 div.project-description div.projects-desc-content .project
     width: 30px;
     height: 30px;
 	margin: 20px auto 0px;
-	border: 2px solid #000;
+	border: 2px solid #333;
 	font-size: 17pt;
 	text-align: center;
     cursor: pointer;
@@ -622,7 +622,7 @@ div#content.version-3 .grey-triangle {
 * NEWS
 *******************************************************************************/
 div#content.version-3 .project-news {
-	border-bottom: 2px solid #000000;
+	border-bottom: 2px solid #333333;
 }
 div#content.version-3 .project-news .project-news-item {
 	padding: 20px;
