@@ -53,7 +53,7 @@ div#content.version-3 nav.project-navigation {
 div#content.version-3 nav.project-navigation ul {
     float: left;
 	margin: 0px;
-	padding: 0px;
+	padding: 0px 0px 0px 15px;
 }
 div#content.version-3 nav.project-navigation ul li {
     list-style: none;
