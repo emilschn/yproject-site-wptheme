@@ -83,8 +83,7 @@ if (count($current_organisations) > 0) {
 		
 		<div class="project-banner-info-item align-center author-info" data-link-edit="<?php echo $page_edit_orga; ?>">
 			<p>
-				<?php _e("Un projet port&eacute; par", 'yproject'); ?> <?php echo $owner_str; ?>
-				(<a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation"><?php _e('Voir les informations', 'yproject'); ?></a>)
+				<?php _e("Un projet port&eacute; par", 'yproject'); ?> <a href="#project-organisation" class="wdg-button-lightbox-open" data-lightbox="project-organisation"><?php echo $owner_str; ?></a>
 			</p>
 			<?php echo do_shortcode('[yproject_lightbox id="project-organisation"]'.$lightbox_content.'[/yproject_lightbox]'); ?>
 		</div>
