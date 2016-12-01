@@ -380,13 +380,15 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 /*******************************************************************************
 * FOOTER
 *******************************************************************************/
-footer.bg-dark-gray {
-	background-image: url("../../images/footer/trame-footer.png");
-    background-repeat: no-repeat;
+footer > .footer-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        background-image: url("../../images/footer/trame-footer.png");
+        background-repeat: no-repeat;
 }
 
-footer > section:first-child { padding: 25px 0px 35px; }
-footer > section:nth-child(2) { background: #FFFFFF; }
+footer > .footer-container > section:first-child { padding: 25px 0px 35px; }
+footer > .footer-container > section:nth-child(2) { background: #FFFFFF; }
 footer h3 {
 	font-size: 18pt;
 	font-weight: bold;
@@ -416,7 +418,7 @@ footer a.social_network::before{
 footer a.social_network{
 	margin-right: 20px;
 }
-footer > section > div {
+footer > .footer-container > section > div {
 	float: left;
 	width: 32%;
 	margin: 0% 0.5%;
@@ -450,28 +452,28 @@ footer form input#subscribe-nl-submit {
 }
 
 /* Footer 2nd partie*/
-footer > section:nth-child(2) > div > a::before {
+footer > .footer-container > section:nth-child(2) > div > a::before {
 	display: none;
 }
-footer > section:nth-child(2) > div {
+footer > .footer-container > section:nth-child(2) > div {
 	margin: 30px 20px;
 
 }
-footer > section:nth-child(2) > div:nth-child(1){
+footer > .footer-container > section:nth-child(2) > div:nth-child(1){
 	width: 12%;
 	padding-left: calc((100% - 48% - 458px) / 2);
 }
-footer > section:nth-child(2) > div:nth-child(2){
+footer > .footer-container > section:nth-child(2) > div:nth-child(2){
 	position: relative;
 	width: 180px;
 	margin-top: 55px;
 	margin-left: 4%;
 }
-footer > section:nth-child(2) > div:nth-child(3){
+footer > .footer-container > section:nth-child(2) > div:nth-child(3){
 	width: 278px;
 	margin: 2% 0% 0% 4%;
 }
-footer > section:nth-child(2) > div:nth-child(4){
+footer > .footer-container > section:nth-child(2) > div:nth-child(4){
 	width: 22%;
 	margin-left: 3%;
 }
@@ -484,10 +486,10 @@ footer p.label {
 	left: 18%;
 	letter-spacing: 2px;
 }
-footer > section div#lemonway p {
+footer > .footer-container > section div#lemonway p {
 	font-size: 10pt;       
 }
-footer > section div#lemonway p.lines, footer div.lines {
+footer > .footer-container > section div#lemonway p.lines, footer div.lines {
 	border-top: 2px solid #333333;
 	border-bottom: 2px solid #333333;
 	padding: 2% 0%;
@@ -499,44 +501,44 @@ footer > section div#lemonway p.lines, footer div.lines {
 footer div.lines{
 	padding: 1% 0%;
 }
-footer > section:nth-child(2) > div:nth-child(4) a {
+footer > .footer-container > section:nth-child(2) > div:nth-child(4) a {
 	text-transform: none;
 	font-size: 10pt;   
 	font-style: italic;
 	letter-spacing: 1px;
 	color: #333333;
 }
-footer > section:nth-child(2) > div:nth-child(4) li {
+footer > .footer-container > section:nth-child(2) > div:nth-child(4) li {
 	text-align: right;   
 	margin: 0;
 }
-footer > section:nth-child(2) > div:nth-child(4) h3 {
+footer > .footer-container > section:nth-child(2) > div:nth-child(4) h3 {
 	display: none;
 }
-footer > section:nth-child(2) > div:nth-child(4) a::before {
+footer > .footer-container > section:nth-child(2) > div:nth-child(4) a::before {
 	display: none;
 }
-footer > section:nth-child(2) > div:nth-child(4) a::after {
+footer > .footer-container > section:nth-child(2) > div:nth-child(4) a::after {
 	content: "/";
 	margin-left: 2%;
 }
 
-footer > section > div.clear, footer > section > div.aligncenter {
+footer > .footer-container > section > div.clear, footer > .footer-container > section > div.aligncenter {
 	float: none;
 	width: auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-footer > section > div.clear {
+footer > .footer-container > section > div.clear {
 	border-top: 2px solid #333333;
 	width: 60%;
 	margin: auto;
 }
-footer > section > div.aligncenter {
+footer > .footer-container > section > div.aligncenter {
 	margin-bottom: 0px;
 	padding-bottom: 20px;
 }
-footer > section:nth-child(2) > div:last-child a{
+footer > .footer-container > section:nth-child(2) > div:last-child a{
 	text-transform: none;
 	font-size: 12pt;   
 	color: #333333;

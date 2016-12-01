@@ -10,7 +10,8 @@ else {
 	ob_start();
 ?>
 		<footer class="bg-dark-gray<?php if (!empty($client_context)) { ?> theme-<?php echo $client_context; ?><?php } ?>">
-		    <section>
+                    <div class="footer-container">
+                        <section>
 
 				<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) : ?>
 					<div>
@@ -94,6 +95,7 @@ else {
 				</div>
                                 
 			</section>
+                    </div>
 		</footer>
 		
 		<?php $hidecookiealert = filter_input( INPUT_COOKIE, 'hidecookiealert' ); ?>
