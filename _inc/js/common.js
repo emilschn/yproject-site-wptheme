@@ -146,7 +146,11 @@ YPUIFunctions = (function($) {
 			if ($("#cookies-alert").length > 0) {
 				$("#cookies-alert-close").click(function() {
 					$("#cookies-alert").hide();
-					document.cookie = "hidecookiealert=1";
+					var date = new Date();
+					var days = 100;
+					date.setTime(date.getTime()+(days*24*60*60*1000));
+					var expires = "; expires="+date.toGMTString();
+					document.cookie = "hidecookiealert=1"+expires+"; path=/";
 				});
 			}
 
