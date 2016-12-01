@@ -200,24 +200,24 @@
 			</div>
 		</div>
 		<?php endif; ?>
-           
-		<?php 
-		if (is_user_logged_in() && (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID))): 
-			$_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; 
-		?>
-		<div class="timeout-lightbox wdg-lightbox">
-			<div class="wdg-lightbox-click-catcher"></div>
-			<?php 
-			get_currentuserinfo();
-			$user_name_str = $current_user->user_firstname;
-			if ($user_name_str == '') {
-				$user_name_str = $current_user->user_login;
-			}
-			?>
-			<div class="wdg-lightbox-padder">
-				Bonjour <?php echo $user_name_str; ?>, bienvenue sur WE DO GOOD !
+
+		<?php if (!is_user_logged_in()): ?>
+			<?php echo do_shortcode('[yproject_register_lightbox]'); ?>
+		<?php elseif (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)): ?>
+			<?php $_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; ?>
+			<div class="timeout-lightbox wdg-lightbox">
+				<div class="wdg-lightbox-click-catcher"></div>
+				<?php 
+				get_currentuserinfo();
+				$user_name_str = $current_user->user_firstname;
+				if ($user_name_str == '') {
+					$user_name_str = $current_user->user_login;
+				}
+				?>
+				<div class="wdg-lightbox-padder">
+					Bonjour <?php echo $user_name_str; ?>, bienvenue sur WE DO GOOD !
+				</div>
 			</div>
-		</div>
 		<?php endif; ?>
 		
 		<div id="container"> 

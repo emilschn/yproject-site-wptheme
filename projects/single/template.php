@@ -6,7 +6,6 @@ $campaign_status = $campaign->campaign_status();
 
 <?php if (!is_user_logged_in()){ ?>
 <?php echo do_shortcode('[yproject_connexion_lightbox]<p class="align-center">'.__('Afin de soutenir un projet, vous devez &ecirc;tre inscrit et connect&eacute;.', 'yproject').'</p>[/yproject_connexion_lightbox]'); ?>
-<?php echo do_shortcode('[yproject_register_lightbox]'); ?>
 <?php }else if($campaign_status==ATCF_Campaign::$campaign_status_vote){
 			if(isset($_GET['vote_check'])&&($_GET['vote_check']==1)){
 				locate_template( array("projects/single/voteform-validated.php"), true );
