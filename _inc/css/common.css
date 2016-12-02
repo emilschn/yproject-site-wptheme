@@ -639,11 +639,11 @@ body.page-template-template-discover-projects-php header {
 	background: rgba(51, 51, 51, 0.05);
 }
 body.page-template-template-discover-projects-php header .header-container {
-        max-width: 1280px;
+        max-width: 1300px;
         margin: 0 auto;
         background-image: url("../../images/common-background.png");
         background-repeat: no-repeat;
-        padding: 0% 1.1%;
+        padding: 0% 0.5%;
         padding-top: 100px;
 }
 body.page-template-template-discover-projects-php header .header-container > div > div {
