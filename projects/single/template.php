@@ -21,11 +21,13 @@ $campaign_status = $campaign->campaign_status();
 <?php endif; ?>
 
 <header>
+    <div class="header-container">
 	<?php locate_template( array("projects/single/banner.php"), true ); ?>
 	
 	<?php if (!empty($client_context)): ?>
 	<?php locate_template( array("projects/" .$client_context. "/header.php"), true ); ?>
 	<?php endif; ?>
+    </div>
 </header>
 
 <?php locate_template( array("projects/single/nav.php"), true ); ?>

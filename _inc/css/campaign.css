@@ -23,8 +23,13 @@ div#content.version-3 div.separator-title span {
 *******************************************************************************/
 div#content.version-3 header {
 	background: rgba(51, 51, 51, 0.05);
-	background-image: url(../../images/common-background.png);
+}
+div#content.version-3 header .header-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        background-image: url(../../images/common-background.png);
 	background-repeat: no-repeat;
+        padding: 0% 1.1%;
 	padding-top: 100px;
 }
 
