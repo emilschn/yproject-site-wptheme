@@ -669,7 +669,7 @@ div#content.version-3 .project-comments .comment-respond {
 	width: 500px;
 }
 div#content.version-3 div.project-comments div.comment-respond p.form-submit {
-	text-align: right;
+	text-align: center;
 }
 div#content.version-3 div.project-comments div.comment-respond p.form-submit input[type="submit"] {
 	padding: 10px 40px;
