@@ -136,6 +136,7 @@
 					<?php /* Au clic picto Compte, afficher menu utilisateur */ ?>
 					<?php global $current_user; get_currentuserinfo();
 					$user_name_str = ($current_user->user_firstname != '') ? $current_user->user_firstname : $current_user->user_login;
+					$page_dashboard = home_url( '/tableau-de-bord' );
 					?>
 					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
 					<ul class="submenu-list">
