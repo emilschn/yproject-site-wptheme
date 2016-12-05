@@ -12,6 +12,7 @@
 <div id="content">
 		
 	<header>
+            <div class="header-container">
 		<div class="padder">
 			<div class="wdg-component-slider project-list-slider left">
 				<div class="slider-container">
@@ -101,6 +102,7 @@ else {
 			
 			<div class="clear"></div>
 		</div>
+            </div>
 	</header>
 	
 	
