@@ -316,7 +316,7 @@ if (isset($campaign) && is_user_logged_in()):
 					break;
 
 				case 'failed' :
-					_e("Il y a eu une erreur pendant la transacton.", 'yproject'); ?><br />
+					_e("Il y a eu une erreur pendant la transaction.", 'yproject'); ?><br />
 					
 					<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
 						<?php echo $mangopay_contribution->AnswerMessage . ' (' . $mangopay_contribution->AnswerCode . ')'; ?>

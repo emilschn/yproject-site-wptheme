@@ -45,10 +45,10 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 							<p class="screen-message">Nous activons<br />une finance à impact positif<br />en développant<br />les levées de fonds en royalties</p>
 							<?php break;
 							case 2: ?>
-							<p class="screen-message">En 2016,<br />WE DO GOOD obtient l'agrément<br />du Pôle de compétitivité<br />Finance Innovation.</p>
+							<p class="screen-message">En 2016, WE DO GOOD<br />obtient l'agrément du<br />Pôle de compétitivité<br />Finance Innovation</p>
 							<?php break;
 							case 3: ?>
-							<p class="screen-message">142 personnes<br />ont investi 90 000 €<br />pour propulser la transition énergétique<br />avec Naoden.</p>
+							<p class="screen-message">142 personnes ont investi<br />90 000 € pour propulser<br />les impacts positifs<br />de Naoden</p>
 							<?php break;
 						} ?>
 						<img class="slider-motif-left-bas" src="<?php echo $stylesheet_directory_uri; ?>/images/slider/slider-trame-bas-gauche-01.png"/>
