@@ -8,7 +8,7 @@ if ($campaign->video() == '') {
 
 //Sinon on utilise l'objet vidéo fourni par wordpress
 } else {
-	$video_element = wp_oembed_get($campaign->video(), array('width' => 580, 'height' => 325));
+	$video_element = wp_oembed_get($campaign->video(), array('height' => 400));
 }
 $campaign_status = $campaign->campaign_status();
 $campaign_categories_str = $campaign->get_categories_str();

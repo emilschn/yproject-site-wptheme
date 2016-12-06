@@ -7,7 +7,7 @@
    
 function Slideshow(){
     this.currentIndex = 0;      
-    this.timeInterval = 4500;
+    this.timeInterval = 5500;
 	this.intervalId = null;
     this.init();  
 }

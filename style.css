@@ -2190,12 +2190,12 @@ ul.activity-list p {
 * PROFILE PAGE - MEMBER ACCOUNT
 *******************************************************************************/ 
 #yp_admin_bar {
+    position: relative;
+	margin-top: 80px;
     padding: 5px 0px;
     background-color: #E1E3E2;
     width:auto;
     font-size:13px;
-    z-index: 10;
-    position: relative;
 }
 #yp_admin_bar .center {
     padding: 5px 0px;

@@ -1,5 +1,5 @@
 <?php
-
+global $stylesheet_directory_uri;
 /* 
  * Page pour la section des projets à afficher en page d'accueil
  *
@@ -17,15 +17,18 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 <div class="project-container" id="project-<?php echo $project_id ?>" data-step="<?php echo $campaign_status; ?>" data-location="<?php echo $campaign->get_location_number(); ?>" data-categories="<?php echo $campaign_categories_str; ?>">
     <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
         <div class="impacts-container" id="impacts-<?php echo $project_id ?>">
-                    <?php if (strpos($campaign_categories_str, 'environnemental') != FALSE): ?>
-            <span class="impact-logo impact-ecologic" id="impact-ecologic-<?php echo $project_id ?>"><p>ecl</p></span>
-                    <?php endif; ?>
-                    <?php if (strpos($campaign_categories_str, 'social') != FALSE): ?>
-            <span class="impact-logo impact-social" id="impact-social-<?php echo $project_id ?>"><p>soc</p></span>
-                    <?php endif; ?>
-                    <?php if (strpos($campaign_categories_str, 'economique') != FALSE): ?>
-            <span class="impact-logo impact-economic" id="impact-economic-<?php echo $project_id ?>"><p>ecn</p></span>
-                    <?php endif; ?>
+			<?php if (strpos($campaign_categories_str, 'environnemental') != FALSE): ?>
+			<?php /* <span class="impact-logo impact-ecologic" id="impact-ecologic-<?php echo $project_id ?>"><p>ecl</p></span> */ ?>
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="ecl" width="42" height="42" class="impact-logo" />
+			<?php endif; ?>
+			<?php if (strpos($campaign_categories_str, 'social') != FALSE): ?>
+			<?php /* <span class="impact-logo impact-social" id="impact-social-<?php echo $project_id ?>"><p>soc</p></span> */ ?>
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="soc" width="42" height="42" class="impact-logo" />
+			<?php endif; ?>
+			<?php if (strpos($campaign_categories_str, 'economique') != FALSE): ?>
+			<?php /* <span class="impact-logo impact-economic" id="impact-economic-<?php echo $project_id ?>"><p>ecn</p></span> */ ?>
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="ecn" width="42" height="42" class="impact-logo" />
+			<?php endif; ?>
         </div>
     </a>
         <div class="project-framed">
@@ -82,7 +85,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
                     <span class="progress-days"><p class="info-nb"><?php echo $timeRemaining; echo $days ?></p><p class="info-action"><?php echo $projectAction ?></p></span>
                 </div>
         </a>
-                            <a class="home-button-project project-button" href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $buttonAction ?></a>
+		<a class="home-button-project project-button" href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $buttonAction ?></a>
         <?php
 
             //Projets déja financés

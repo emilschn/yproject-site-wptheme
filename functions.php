@@ -59,7 +59,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
-	$current_version = '20161201';
+	$current_version = '20161205';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -111,8 +111,8 @@ function yproject_enqueue_script(){
 	wp_enqueue_script( 'sharer-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/sharer.min.js', array(), true, true);
 //	wp_enqueue_script( 'wdg-ux-helper', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-ux-helper.js', array('wdg-script'));
 	
-	if ($is_campaign_page && $campaign->edit_version() >= 3) {
-		if ($is_campaign && $campaign->edit_version() >= 3 && !$is_dashboard_page) {
+	if ($is_campaign_page) {
+		if ($is_campaign && !$is_dashboard_page) {
 			wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, $current_version, 'all');
 		}
 	    wp_enqueue_script( 'wdg-campaign', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign.js', array('jquery', 'jquery-ui-dialog'), $current_version);

@@ -265,8 +265,7 @@ div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before 
 /*******************************************************************************
 * BANNER
 *******************************************************************************/
-div#content.version-3 div.project-banner {
-}
+div#content.version-3 div.project-banner {}
 div#content.version-3 div.project-banner .project-banner-content {
     height: 400px;
     overflow: hidden;
@@ -278,7 +277,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 }
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.left iframe {
 	width: 100%;
-	height: 500px;
+	height: 400px;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.left img {
 	width: 100%;
@@ -286,7 +285,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right {
     width: 32%;
-	height: 470px;
+	height: 400px;
 	padding: 15px 1%;
 	background-color: #FFF;
 }
@@ -389,8 +388,8 @@ div#content.version-3 div.project-banner div.subtitle {
 div#content.version-3 div#triggered-menu-share {
 	display: none;
     position: relative;
-	top: -400px;
-	text-align: right;
+	margin-top: -400px;
+    margin-bottom: 350px;
 }
 div#content.version-3 div#triggered-menu-share.triggered {
     display: block;
@@ -559,7 +558,7 @@ div#content.version-3 div.project-description div.projects-desc-content .project
 }
 
 div#content.version-3 .projects-desc-content h3{
-    margin-top: 30px;
+    margin-top: 35px;
     text-transform: uppercase;
     font-size: 13pt;
     font-style: normal;
