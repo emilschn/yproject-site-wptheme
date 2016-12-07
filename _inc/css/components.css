@@ -413,7 +413,6 @@
 
 .impacts-container .impact-logo:hover{  /* à revoir : empecher le déplacement des impacts au survol ***********/
     transform: scale(1.15);
-    border: 0.25em #FFFFFF solid;
 }
 
 

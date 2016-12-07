@@ -17,16 +17,13 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 <div class="project-container" id="project-<?php echo $project_id ?>" data-step="<?php echo $campaign_status; ?>" data-location="<?php echo $campaign->get_location_number(); ?>" data-categories="<?php echo $campaign_categories_str; ?>">
     <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
         <div class="impacts-container" id="impacts-<?php echo $project_id ?>">
-			<?php if (strpos($campaign_categories_str, 'environnemental') != FALSE): ?>
-			<?php /* <span class="impact-logo impact-ecologic" id="impact-ecologic-<?php echo $project_id ?>"><p>ecl</p></span> */ ?>
+			<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE): ?>
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="ecl" width="42" height="42" class="impact-logo" />
 			<?php endif; ?>
-			<?php if (strpos($campaign_categories_str, 'social') != FALSE): ?>
-			<?php /* <span class="impact-logo impact-social" id="impact-social-<?php echo $project_id ?>"><p>soc</p></span> */ ?>
+			<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="soc" width="42" height="42" class="impact-logo" />
 			<?php endif; ?>
-			<?php if (strpos($campaign_categories_str, 'economique') != FALSE): ?>
-			<?php /* <span class="impact-logo impact-economic" id="impact-economic-<?php echo $project_id ?>"><p>ecn</p></span> */ ?>
+			<?php if (strpos($campaign_categories_str, 'economique') !== FALSE): ?>
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="ecn" width="42" height="42" class="impact-logo" />
 			<?php endif; ?>
         </div>
@@ -96,7 +93,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
             <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
                 <div class="progress-bar">
                     <span class="current-amount" style="min-width:<?php echo $width; ?>%">&nbsp;
-                        <p><?php echo $campaign->current_amount(); ?> : <?php echo $campaign->percent_completed(); ?></p>&nbsp;
+                        <p><?php echo $campaign->current_amount(); ?> : <?php echo $campaign->percent_minimum_completed(); ?></p>&nbsp;
                     </span>        
                 </div>
                 <div class="progress-info">

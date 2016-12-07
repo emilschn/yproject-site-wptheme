@@ -55,7 +55,7 @@ $cache_project_stats = $WDG_cache_plugin->get_cache('list-projects-stats', 1);
 if ($cache_project_stats !== FALSE) { echo $cache_project_stats; }
 else {
 	ob_start();
-			$project_list_funded = ATCF_Campaign::get_list_funded( );
+			$project_list_funded = ATCF_Campaign::get_list_funded( 28 );
 			$count_amount = 0;
 			$count_people = 0;
 			$count_projects = 0;
@@ -228,7 +228,7 @@ else {
 ?>
 					<?php
 					$count = 0;
-					$project_list_funded = ATCF_Campaign::get_list_funded( );
+					$project_list_funded = ATCF_Campaign::get_list_funded( 28 );
 					foreach ( $project_list_funded as $project_post ) {
 						$count++;
 						$project_id = $project_post->ID;
@@ -248,11 +248,9 @@ else {
 				</div>
 			</section>
 			
-			<?php if ($count > 4): ?>
 			<div class="align-center">
 				<button><?php _e( "Voir plus", 'yproject' ); ?></button>
 			</div>
-			<?php endif; ?>
 
 		</div><!-- .padder -->
 	</div>

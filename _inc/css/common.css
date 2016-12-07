@@ -384,12 +384,15 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 /*******************************************************************************
 * FOOTER
 *******************************************************************************/
+footer.bg-dark-gray {
+	background-image: url("../../images/footer/trame-footer.png");
+	background-repeat: no-repeat;
+}
 footer > .footer-container {
-        max-width: 1280px;
-        margin: 0 auto;
-        background-image: url("../../images/footer/trame-footer.png");
-        background-repeat: no-repeat;
-        padding: 0% 1.1%;
+	max-width: 1280px;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	padding: 0% 1.1%;
 }
 
 footer > .footer-container > section:first-child { padding: 25px 0px 35px; }
@@ -637,12 +640,12 @@ footer > .footer-container > section:nth-child(2) > div:last-child a{
 *******************************************************************************/
 body.page-template-template-discover-projects-php header {
 	background: rgba(51, 51, 51, 0.05);
+	background-image: url("../../images/common-background.png");
+	background-repeat: no-repeat;
 }
 body.page-template-template-discover-projects-php header .header-container {
         max-width: 1300px;
         margin: 0 auto;
-        background-image: url("../../images/common-background.png");
-        background-repeat: no-repeat;
         padding: 0% 0.5%;
         padding-top: 100px;
 }

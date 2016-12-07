@@ -27,6 +27,7 @@
 			);
 			array_push($projects_searchable, $item_project);
 		}
+		$projects_searchable = json_decode(json_encode($projects_searchable)); //transformation en type object
 		$WDG_cache_plugin->set_cache('ATCF_Campaign::list_projects_searchable', json_encode($projects_searchable), 60*60*3, 1); //MAJ 3h
 	}
 	
@@ -135,7 +136,7 @@
 					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher", 'yproject'); ?>" />
 					<ul class="submenu-list">
 						<?php foreach ($projects_searchable as $project_post): ?>
-						<li class="hidden"><a href="<?php echo get_permalink( $project_post['ID'] ); ?>"><?php echo $project_post['title']; ?></a></li>
+						<li class="hidden"><a href="<?php echo get_permalink( $project_post->ID ); ?>"><?php echo $project_post->title; ?></a></li>
 						<?php endforeach; ?>
 					</ul>
 				</div>
