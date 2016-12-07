@@ -70,6 +70,7 @@ YPUIFunctions = (function($) {
 				} else {
 					$('#btn-search, #btn-burger').addClass('active').removeClass('inactive');
 					$('#submenu-search').show();
+					$('#submenu-search-input').focus();
 					$('.btn-user').removeClass('active').addClass('inactive');
 					$('#submenu-user').hide();
 				}
