@@ -3,12 +3,30 @@
 	$stylesheet_directory_uri = get_stylesheet_directory_uri();
 	date_default_timezone_set("Europe/Paris");
 	ypcf_session_start();
-	UIHelpers::init_social_infos();
 	$title_str = UIHelpers::current_page_title();
+	
+	$project_list = array();
+	if (is_user_logged_in()) {
+		$cache_project_list = $WDG_cache_plugin->get_cache('WDGUser::get_projects_by_id('.bp_loggedin_user_id().', TRUE)', 1);
+		if ($cache_project_list !== FALSE) { $project_list = json_decode($cache_project_list); }
+		else {
+			$project_list = WDGUser::get_projects_by_id(bp_loggedin_user_id(), TRUE);
+			$WDG_cache_plugin->set_cache('WDGUser::get_projects_by_id('.bp_loggedin_user_id().', TRUE)', json_encode($project_list), 60*10, 1); //MAJ 10min
+		}
+	}
+	
+	$cache_projects_searchable = $WDG_cache_plugin->get_cache('ATCF_Campaign::list_projects_searchable', 1);
+	if ($cache_projects_searchable !== FALSE) { $projects_searchable = json_decode($cache_projects_searchable); }
+	else {
+		$projects_searchable = ATCF_Campaign::list_projects_searchable();
+		$WDG_cache_plugin->set_cache('ATCF_Campaign::list_projects_searchable', json_encode($projects_searchable), 60*60*3, 1); //MAJ 3h
+	}
+	
+	wp_reset_query();
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
-	<head>
+	<head>              
 		<title><?php if ($title_str) { echo $title_str; } else { wp_title( '|', true, 'right' ); bloginfo( 'name' ); } ?></title>
 		
 		<link rel="alternate" href="<?php echo get_permalink($campaign->ID); ?>?lang=fr_FR" hreflang="fr" />
@@ -42,8 +60,14 @@
 		
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
-		<![endif]-->
-		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=20160916" type="text/css" media="screen" />
+		<![endif]--> 
+		<?php $version = '20161205'; ?>
+		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/components.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/responsive-inf997.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/responsive.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/responsive-medium.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php
 			$cache_head = ob_get_contents();
@@ -72,144 +96,108 @@
 		<meta property="og:image:type" content="image/jpeg" />
 	</head>
 
-	<body <?php body_class(get_locale()); ?> id="bp-default"> 
-		<?php
-		global $post;
-		$menu_pages = array(
-			'les-projets' => 'Les projets',
-			'financement' => 'Financer son projet',
-			'descriptif' => 'Comment ca marche ?',
-			'blog' => 'Actualit&eacute;s'
-		);
-		?>
+	<body <?php body_class(get_locale()); ?>> 
+		<nav id="main">
+			<div id="menu">
+				<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
+				<a href="<?php echo home_url( '/vision' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/financement' ); ?>" class="lines"><?php _e( "Financer son projet", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/investissement' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/les-projets' ); ?>" class="lines"><?php _e( "Les projets", 'yproject' ); ?></a>
+                                
+				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
+				<?php if (is_user_logged_in()): ?>
+				<a href="#" class="btn-user connected"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-par-defaut.png" alt="USER" /></a>
+				<?php else: ?>
+				<a href="#" class="btn-user not-connected inactive"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
+				<?php endif; ?>
+				<a href="#" id="btn-burger" class="only-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/menu-burger.png" alt="MENU" /></a>
+				
+				
+				<?php /* Affichage quand clic sur Rerchercher */ ?>
+				<div id="submenu-search" class="submenu-style hidden">
+					<div class="only-inf997">
+						<a href="<?php echo home_url( '/vision' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/financement' ); ?>"><?php _e( "Financer son projet", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/investissement' ); ?>"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/les-projets' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
+					</div>
+					
+					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher", 'yproject'); ?>" />
+					<ul class="submenu-list">
+						<?php foreach ($projects_searchable as $project_post): ?>
+						<li class="hidden"><a href="<?php echo get_permalink( $project_post->ID ); ?>"><?php echo $project_post->post_title; ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
 
-		<nav id="navigation">
-			<div class="center">
-				<ul id="nav">
-				    
-					<?php
-					//*******************
-					//CACHE MENU
-					$cache_menu = $WDG_cache_plugin->get_cache('menu-items', 2);
-					if ($cache_menu !== FALSE) { echo $cache_menu; }
-					else {
-						ob_start();
+				<?php if (is_user_logged_in()): ?>
+				<div id="submenu-user" class="connected submenu-style hidden">
+					<?php /* Au clic picto Compte, afficher menu utilisateur */ ?>
+					<?php global $current_user; get_currentuserinfo();
+					$user_name_str = ($current_user->user_firstname != '') ? $current_user->user_firstname : $current_user->user_login;
+					$page_dashboard = home_url( '/tableau-de-bord' );
 					?>
-				    
-					<li class="page_item only_on_mobile">
-						<span class="page_item_border"><a href="#" id="mobile-menu"><img src="<?php echo $stylesheet_directory_uri; ?>/images/menu-smartphone.png" alt="bouton menu mobile" /></a></span>
-					</li>
-				    
-					<?php /* Logo Accueil */ ?>
-					<li class="page_item_out page_item_logo tablet_hidden"><a href="<?php echo home_url(); ?>" style="padding-left: 0px; padding-right: 14px;">
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo.png" width="160" height="100" alt="logo" class="mobile_hidden" />
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/logo_court.png" width="160" height="51" alt="logo court" class="only_on_mobile" style="display: none;" />
-					</a></li>
-				    
-					<li class="page_item only_on_tablet" style="display: none;"><span><a href="<?php echo home_url(); ?>">WEDOGOOD.co</a></span></li>
-				    
-					<?php 
-					foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
-						<?php $menu_page_object = get_page_by_path($menu_page_key); ?>
-						<li class="page_item mobile_hidden"><span class="page_item_border"><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></span></li>
-					<?php endforeach; ?>
-				    
-					<?php /* Logo FB / TW */ ?>
-					<li class="page_item_out mobile_hidden" id="menu_item_facebook"><a href="https://www.facebook.com/wedogood.co" target="_blank" title="Notre page Facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook.png" width="20" height="20" alt="logo facebook" /></a></li>
-					<li class="page_item_out mobile_hidden" id="menu_item_twitter"><a href="https://twitter.com/wedogood_co" target="_blank" title="Notre compte Twitter"><img src="<?php echo $stylesheet_directory_uri; ?>/images/twitter.png" width="20" height="20" alt="logo twitter" /></a></li>
-					<?php
-						$cache_menu = ob_get_contents();
-						$WDG_cache_plugin->set_cache('menu-items', $cache_menu, 60*60*24, 1);
-						ob_end_clean();
-						echo $cache_menu;
-					}
-					//FIN CACHE MENU
-					//*******************
-					?>
-					
-					
-					<?php
-					if (is_user_logged_in()) : 
-						// Menu Mon compte
-						$page_update_account = get_page_by_path('modifier-mon-compte'); 
-						$page_dashboard = get_page_by_path('tableau-de-bord'); 
-						?>
-						<li class="page_item_out page_item_inverted mobile_hidden">
-						<a class="page_item_inverted" href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a>
-						<ul>
-							<li class="page_item_out upper"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Param&egrave;tres', 'yproject'); ?></a></li>
-							<?php 
-							$project_list = WDGUser::get_projects_by_id(bp_loggedin_user_id(), TRUE); 
-							foreach ($project_list as $project_id) {
-							    if (!empty($project_id)) {
-							    $post_campaign = get_post($project_id);
-							?>
-							<li class="page_item_out"><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' .$project_id; ?>"><?php echo $post_campaign->post_title; ?></a></li>
-							<?php } } ?>
-							<li class="page_item_out last upper"><a href="<?php echo wp_logout_url();echo '&page_id='.get_the_ID() ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
-						</ul>
-						</li>
+					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
+					<ul class="submenu-list">
+						<li><a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e("Mon compte", 'yproject'); ?></a></li>
 						
-					<?php else : ?>
-						<?php /* Menu Connexion */ $page_connexion = get_page_by_path('connexion'); ?>
-						<li id="menu_item_connection" class="page_item_out page_item_inverted mobile_hidden"><a class="page_item_inverted" href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
-					<?php endif; ?>
-				</ul>
+						<?php foreach ($project_list as $project_id): if (!empty($project_id)): $post_campaign = get_post($project_id); if (isset($post_campaign)): ?>
+							<li><a href="<?php echo $page_dashboard . '?campaign_id=' .$project_id; ?>"><?php echo $post_campaign->post_title; ?></a></li>
+						<?php endif; endif; endforeach; ?>
+					</ul>
+					
+					<div id="button-logout" class="box_connection_buttons red">
+						<a href="<?php echo wp_logout_url(); echo '&page_id='.get_the_ID() ?>"><span><?php _e("Me d&eacute;connecter", 'yproject'); ?></span></a>
+					</div>
+				</div>
+				
+				
+				<?php else: ?>
+				<div id="submenu-user" class="not-connected submenu-style hidden">
+					<?php /* Au clic picto Compte, afficher menu connexion */ ?>
+					<div class="box_connection_buttons red">
+						<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><span><?php _e('Cr&eacute;er un compte', 'yproject'); ?></span></a>
+					</div>
+
+					<div class="box_connection_buttons blue">
+						<a href="javascript:void(0);" class="social_connect_login_facebook"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
+					</div>
+
+					<div class="hidden"><?php dynamic_sidebar('sidebar-1'); ?></div>
+
+					<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 2px 0 0; color: #000000; margin: 5% 5%;"/>
+
+					<form method="post" action="" name="login-form" id="sidebar-login-form" class="model-form">
+						<span id="title-connection"><?php _e('Connexion', 'yproject'); ?></span>
+						<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('Identifiant ou e-mail', 'yproject'); ?>" value="" />
+						<br />
+
+						<input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
+						<div id="submit-center" style="display: none;">             
+							<input type="submit" name="wp-submit" class="input_submit" id="connect" value="OK"/>
+							<input type="hidden" id="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
+							<input type="hidden" name="login-form" value="1" />
+						</div>   
+
+						<div id="sidebar-login-form-lightbox">
+							<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
+							<a href="<?php echo get_permalink($page_forgotten->ID); ?>" style="margin: 0% 5%;"><?php _e('(Mot de passe oubli&eacute)', 'yproject');?></a>
+						</div>
+
+						<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
+						<label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
+						<br />
+						<br />
+					</form>
+				</div>
+				<?php endif; ?>
+				
 			</div>
 		</nav>
             
-		<div id="submenu_item_connection">
-                    <?php /* Sous-Menu Connexion */ $page_connexion_register = get_page_by_path('register'); ?>
-                    <ul>
-                        <li class="page_item_out">
-                                <div id="submenu_item_connection_register" style="background-color: #3E3E40;"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_blc_connexion.jpg" width="25" height="25" alt="Triangle blanc" />&nbsp;<a href="<?php echo get_permalink($page_connexion_register->ID); ?>">Cr&eacute;er un compte</a></div>
-                                <hr />
-                                <div class="social_connect_login_facebook"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo $stylesheet_directory_uri; ?>/images/facebook_connexion.jpg" width="25" height="25" alt="connexion facebook" /><span>&nbsp;Se connecter avec Facebook</span></a></div>
-                                <div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
-                                <hr /> 
-
-                                <div id="submenu_item_connection_login"><img src="<?php echo $stylesheet_directory_uri; ?>/images/triangle_noir_connexion.jpg" width="25" height="25" alt="triangle noir" />&nbsp;Connexion</div>
-                                <form method="post" action="" name="login-form" id="sidebar-login-form" class="standard-form" >
-                                    <input type="text" name="log" id="sidebar-user-login" class="input" placeholder="Identifiant ou e-mail" />
-                                    <br />
-
-                                    <input type="password" name="pwd" id="sidebar-user-pass" class="input" placeholder="<?php _e('Mot de passe', 'yproject'); ?>" />
-                                    <input type="submit" name="wp-submit" id="sidebar-wp-submit" value="OK" />
-
-                                    <input type="hidden" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
-                                    <input type="hidden" name="redirect-error" value="<?php $page_connexion = get_page_by_path("connexion"); echo get_permalink($page_connexion->ID); ?>?login=failed" />
-				    <input type="hidden" name="login-form" value="1" />
-                                    <br />
-                                    <?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-                                    <a style="color: #333333; text-align: right; font-size: 10px; font-style: italic;" href="<?php echo get_permalink($page_forgotten->ID); ?>">(Mot de passe oubli&eacute;)</a>
-                                    <br /><br />
-                                    <label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" />&nbsp;<?php _e('Se souvenir de moi', 'yproject'); ?></label>
-                                </form>
-                        </li>
-                    </ul>                   
-		</div>
-	    
-		<div id="submenu-mobile">
-                    <ul>    
-                        <?php foreach ($menu_pages as $menu_page_key => $menu_page_label): ?>
-                                <?php $menu_page_object = get_page_by_path($menu_page_key); ?>
-                                <li class="page_item"><a href="<?php echo get_permalink($menu_page_object->ID); ?>"><?php _e($menu_page_label, 'yproject'); ?></a></li>
-                        <?php endforeach; ?>
-
-                        <?php if (is_user_logged_in()) : ?>
-                                <?php /* Menu Mon compte */ ?>
-                                <?php $page_update_account = get_page_by_path('modifier-mon-compte'); ?>
-                                <li class="page_item"><a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e('Mon compte', 'yproject'); ?></a></li>
-                                <li class="page_item"><a href="<?php echo get_permalink($page_update_account->ID); ?>"><?php _e('Param&egrave;tres', 'yproject'); ?></a></li>
-                                <li class="page_item"><a href="<?php echo wp_logout_url();echo '&page_id='.get_the_ID() ?>"><?php _e('Se deconnecter', 'yproject'); ?></a></li>
-                        <?php else : ?>
-                                <?php /* Menu Connexion */ ?>
-                                <?php $page_connexion = get_page_by_path('connexion'); ?>
-                                <li class="page_item"><a href="<?php echo get_permalink($page_connexion->ID); ?>"><?php _e('Connexion', 'yproject'); ?></a></li>
-                        <?php endif; ?>
-                    </ul>             
-		</div>
-             
+            
+                
 		<?php 
 		WDGUser::check_validate_general_terms();
 		if (WDGUser::must_show_general_terms_block()): 
@@ -229,46 +217,24 @@
 			</div>
 		</div>
 		<?php endif; ?>
-           
-		<?php 
-		if (is_user_logged_in() && (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID))): 
-			$_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; 
-		?>
-		<div class="timeout-lightbox wdg-lightbox">
-			<div class="wdg-lightbox-click-catcher"></div>
-			<?php 
-			get_currentuserinfo();
-			$user_name_str = $current_user->user_firstname;
-			if ($user_name_str == '') {
-				$user_name_str = $current_user->user_login;
-			}
-			?>
-			<div class="wdg-lightbox-padder">
-				Bonjour <?php echo $user_name_str; ?>, bienvenue sur WE DO GOOD !
-			</div>
-		</div>
-		<?php endif; ?>
-            
-                <?php 
-                /*if (is_user_logged_in()){
-                    $userId = get_current_user_id(); 
-                    $check = yproject_check_is_warning_meta_init($userId);
-                    if($check){ ?>
-                        <?php 
-                            ob_start();
-                                locate_template('common/warning-lightbox.php',true);
-                                $content = ob_get_contents();
-                            ob_end_clean();
-                        ?>
-                        <div class="wdg-lightbox">
-                            <div class="wdg-lightbox-padder">
-                                <div class="validate-terms-excerpt">
-                                     <?php echo $content; ?>
+
+		<?php if (!is_user_logged_in()): ?>
+			<?php echo do_shortcode('[yproject_register_lightbox]'); ?>
+		<?php elseif (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)): ?>
+			<?php $_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; ?>
+			<div class="timeout-lightbox wdg-lightbox">
+				<div class="wdg-lightbox-click-catcher"></div>
+				<?php 
+				get_currentuserinfo();
+				$user_name_str = $current_user->user_firstname;
+				if ($user_name_str == '') {
+					$user_name_str = $current_user->user_login;
+				}
+				?>
+				<div class="wdg-lightbox-padder">
+					Bonjour <?php echo $user_name_str; ?>, bienvenue sur WE DO GOOD !
 				</div>
-                                    
-                            </div>
-                        </div>
-                    <?php }
-                }*/
-                ?>
-                <div id="container"> 
+			</div>
+		<?php endif; ?>
+		
+		<div id="container"> 

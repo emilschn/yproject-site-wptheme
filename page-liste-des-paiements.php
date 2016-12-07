@@ -55,7 +55,7 @@ get_header(); ?>
 		    </div>
 		</li> */ ?>
 		
-		<?php $project_list = ATCF_Campaigns::list_projects_started(); ?>
+		<?php $project_list = ATCF_Campaign::list_projects_started(); ?>
 		<?php foreach ($project_list as $project_post): ?>
 		<li class="db-money-flow-item">
 		    <h2 class="expandator" data-target="<?php echo $project_post->ID; ?>"><?php echo $project_post->post_title; ?> +</h2>

@@ -5,49 +5,8 @@
 	.tablet_hidden { display: none !important; }
 	.only_on_tablet { display: block !important; }
 	.center { width: 768px !important; }
-	#container { padding-top: 60px !important; }
 	.indent { margin-left: 20px !important; }
 	.center { max-width: 100% !important }
-	
-/*******************************************************************************
-* HEADER MENU
-*******************************************************************************/
-	#navigation { min-width: 0px !important; }
-	#navigation #nav { height: 50px !important; }
-	#navigation #nav .page_item { padding-top: 20px !important; height: 30px !important; }
-	#navigation #nav li.page_item_inverted { padding-top: 0px !important; height: 50px !important; }
-	#navigation #nav .page_item_inverted a { padding-top: 20px !important; }
-	#navigation #nav #menu_item_facebook { display: none; }
-	#navigation #nav #menu_item_twitter { display: none; }
-	#navigation #nav li a { padding: 0px 11px; }
-	
-/*******************************************************************************
-* HEADER
-*******************************************************************************/
-	header { min-width: 768px !important; }
-	header.header_home #welcome_text { position: absolute; }
-	header.header_home #welcome_text hr { display: none; }
-	header.header_home #welcome_text p { margin: 5px 10px !important; }
-	header.header_home #welcome_text p.hello { margin: 15px 15px 0px 0px !important; }
-	header.header_home #welcome_text #header_homepage_link { margin: 10px 0px !important; }
-	
-/*******************************************************************************
-* FOOTER
-*******************************************************************************/
-	footer { min-width: 768px !important; }
-	footer div.widget-area { width: 220px !important; }
-	footer div.widget-area-large { width: 300px !important; }
-
-/*******************************************************************************
-* HOME PAGE
-*******************************************************************************/
-	#home_middle_top .home_middle_top_content { width: 365px !important; }
-	#home_middle_top #home_middle_top_left { margin: 130px 5px 0px 5px !important; }
-	#home_middle_top #home_middle_top_right { margin: 130px 5px 0px 5px !important; }
-	#home_middle_top .round_title { margin: -105px 110px 0px !important; }
-	#home_middle_top .home_middle_top_content p:nth-child(2) { margin: 80px 15px 15px !important; }
-	#home_bottom .part-title-separator { width: 768px !important; }
-	#home_bottom .partners_zone { width: 768px !important; }
 	
 /*******************************************************************************
 * PROJECT SHORT - SEPARATOR

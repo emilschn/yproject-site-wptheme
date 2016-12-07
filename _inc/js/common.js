@@ -8,9 +8,7 @@ YPUIFunctions = (function($) {
 		memberTabs: ["activity", "projects", "community"],
 
 		initUI: function() {
-			YPMenuFunctions.initMenuBar();
 			WDGProjectPageFunctions.initUI();
-			YPUIFunctions.refreshProjectList();
 			YPUIFunctions.initQtip();
 
 			$(document).scroll(function() {
@@ -29,25 +27,10 @@ YPUIFunctions = (function($) {
 
 
 				} else {
-					if ($(document).scrollTop() > 110) {
-						$(".page_item_logo a").children().eq(0).hide();
-						$(".page_item_logo a").children().eq(1).show();
-						$(".page_item_logo").height(51);
-						$("#nav").height(50);
-						$("#nav > li").css("paddingTop", 20);
-						$("#nav > li").height(30);
-						$("#nav #menu_item_facebook, #nav #menu_item_twitter").css("paddingTop", 17);
-						$(".page_item_inverted").css("paddingBottom", 0);
+					if ($(document).scrollTop() > 50) {
+						$("nav#main").css("marginTop", 0);
 					} else {
-						$(".page_item_logo a").children().eq(0).show();
-						$(".page_item_logo a").children().eq(1).hide();
-						$(".page_item_logo").height(100);
-						$("#nav").height(100);
-						$("#nav > li").css("paddingTop", 50);
-						$("#nav > li").height(50);
-						$("#nav #menu_item_facebook, #nav #menu_item_twitter").css("paddingTop", 47);
-						$(".page_item_logo").css("paddingTop", 0);
-						$(".page_item_inverted").css("paddingBottom", 7);
+						$("nav#main").css("marginTop", 10);
 					}
 				}
 
@@ -57,6 +40,74 @@ YPUIFunctions = (function($) {
 					$(".responsive-fixed").removeClass("fixed");
 				}
 			});
+			
+			
+			$("nav#main a.lines").click(function(e) {
+				$("nav#main a.lines").removeClass("current");
+				$(this).addClass("current"); 
+                                $(this).addClass("select-nav");
+			});
+            
+			// Navbar : bouton compte utilisateur
+			$('.btn-user').click(function(e){
+				e.preventDefault();
+				if ($('.btn-user').hasClass('active')) {
+					$('.btn-user').removeClass('active').addClass('inactive');
+					$('#submenu-user').hide();
+				} else {
+					$('.btn-user').addClass('active').removeClass('inactive');
+					$('#submenu-user').show();
+					$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
+					$('#submenu-search').hide();
+				}
+			});
+			// Navbar : bouton recherche
+			$('#btn-search, #btn-burger').click(function(e){
+				e.preventDefault();
+				if ($('#btn-search, #btn-burger').hasClass('active')) {
+					$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
+					$('#submenu-search').hide();
+				} else {
+					$('#btn-search, #btn-burger').addClass('active').removeClass('inactive');
+					$('#submenu-search').show();
+					$('.btn-user').removeClass('active').addClass('inactive');
+					$('#submenu-user').hide();
+				}
+			});
+			$("#submenu-search-input").keyup(function() {
+				var search = $("#submenu-search-input").val().toLowerCase();
+				$("#submenu-search .submenu-list li").addClass("hidden");
+				
+				if (search != "") {
+					$("#submenu-search .submenu-list li").each(function() {
+						var itemText = $(this).find('a').text().toLowerCase();
+						if (itemText.indexOf(search) > -1) {
+							$(this).removeClass("hidden");
+						}
+					});
+				}
+				$("#submenu-search").height("auto");
+			});
+			
+			
+			//Apparition bouton OK pour connexion
+			if ($('.model-form #password').val() !== "" && $('.model-form #password').val() !== undefined) {
+				$('.model-form #submit-center').css('display', 'inline');
+				$('.model-form input#password').addClass('pwd_submit');
+				$('.model-form input#connect').addClass('ok_valid');
+				
+			} else {
+				$('.model-form #password').keypress(function(){
+					$('.model-form #submit-center').css('display', 'inline');
+					$('.model-form input#password').addClass('pwd_submit');
+					$('.model-form input#connect').addClass('ok_valid');
+				});
+			}
+			
+			$("#subscribe-nl-mail").keypress(function() {
+				$("#subscribe-nl-mail").addClass("retracted");
+				$("#subscribe-nl-submit").show();
+			});
 
 			$(".expandator").css("cursor", "pointer");
 			$(".expandable").not(".default-expanded").hide();
@@ -65,15 +116,43 @@ YPUIFunctions = (function($) {
 				if ($("#extendable-" + targetId).is(":visible")) $("#extendable-" + targetId).hide();
 				else $("#extendable-" + targetId).show();
 			});
+			
+			$("footer h3.clickable").click(function() {
+				if ($(window).width() < 998) {
+					if ($(this).next().is(":visible")) {
+						$(this).removeClass("expanded");
+						$(this).next().hide();
+					} else {
+						$(this).addClass("expanded");
+						$(this).next().show()
+					}
+				}
+			});
 
 			$(".home_video .button-video, .home_video .button-video-shadows").click(function() {
-				$(".home_video .button-video").hide();
-				$(".home_video .button-video-shadows").hide();
-				$(".home_video .video-container").show();
-				var src = $(".home_video .video-container iframe").attr("src");
+				$(".home_video .button-video, .home_video .button-video-shadows").hide();
+				var sContainer = ".home_video .video-container";
+				if ($(window).width() > 570) {
+					sContainer += ".w570";
+				} else {
+					sContainer += ".w320";
+				}
+				$(sContainer).show();
+				var src = $(sContainer + " iframe").attr("src");
 				src += '&autoplay=1';
-				$(".home_video .video-container iframe").attr("src", src);
+				$(sContainer + " iframe").attr("src", src);
 			});
+			
+			if ($("#cookies-alert").length > 0) {
+				$("#cookies-alert-close").click(function() {
+					$("#cookies-alert").hide();
+					var date = new Date();
+					var days = 100;
+					date.setTime(date.getTime()+(days*24*60*60*1000));
+					var expires = "; expires="+date.toGMTString();
+					document.cookie = "hidecookiealert=1"+expires+"; path=/";
+				});
+			}
 
 			if ($("#fundingproject").val()) {
 				$("#goalsum_fixe").click(function() { $("#goalsum_flexible_param").hide(); $("#goalsum_fixe_param").show();});
@@ -117,10 +196,6 @@ YPUIFunctions = (function($) {
 			if ($(".wp-editor-wrap")[0]) {
 				setInterval(YPUIFunctions.onRemoveUploadInterval, 1000);
 			}
-
-			$( window ).resize(function() {
-				YPUIFunctions.refreshProjectList();
-			});
 
 			if ($(".home-activity-list").length > 0) {
 				setTimeout(function() {YPUIFunctions.onSlideHomeActivity(); }, YPUIFunctions.homeslideInterval);
@@ -287,6 +362,52 @@ YPUIFunctions = (function($) {
 					});
 					i++;
 				}
+			}
+			
+			
+			if ($(".projects-current .wdg-component-projects-preview .project-slider .block-projects").width() > $(".projects-current .wdg-component-projects-preview .project-slider").width()) {
+				
+				if ($(".projects-current .wdg-component-projects-preview .project-slider").length > 0) {
+					$(".projects-current .wdg-component-projects-preview .block-projects").width( ($(".projects-current .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-current .wdg-component-projects-preview .project-container").length );
+					$(".projects-current .wdg-component-projects-preview .project-slider").scrollLeft( ($(".projects-current .wdg-component-projects-preview .block-projects").width() - $(".projects-current .wdg-component-projects-preview .project-slider").width()) / 2 );
+
+					$(".projects-funded .wdg-component-projects-preview .block-projects").width( ($(".projects-funded .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-funded .wdg-component-projects-preview .project-container").length );
+					$(".projects-funded .wdg-component-projects-preview .project-slider").scrollLeft( ($(".projects-funded .wdg-component-projects-preview .block-projects").width() - $(".projects-funded .wdg-component-projects-preview .project-slider").width()) / 2 );
+
+				} else if ($(".wdg-component-projects-preview .project-slider").length > 0) {
+					$(".wdg-component-projects-preview .block-projects").width( ($(".wdg-component-projects-preview .project-container").width() + 5) * $(".wdg-component-projects-preview .project-container").length );
+					$(".wdg-component-projects-preview .project-slider").scrollLeft( ($(".wdg-component-projects-preview .block-projects").width() - $(".wdg-component-projects-preview .project-slider").width()) / 2 );
+				}
+				
+			}
+			
+			if ($("#project-filter").length > 0) {
+				$("#project-filter > span").click(function() {
+					if ($("#project-filter span").hasClass("show")) {
+						$("#project-filter span").removeClass("show");
+					} else {
+						$("#project-filter span").addClass("show");
+					}
+					$("#project-filter select").toggle();
+				});
+				
+				$("#project-filter .project-filter-select").click(function() {
+					var step = $("#project-filter-step").val();
+					var location = $("#project-filter-location").val();
+					var activity = $("#project-filter-activity").val();
+					var impact = $("#project-filter-impact").val();
+					YPUIFunctions.refreshProjectList( step, location, activity, impact );
+				});
+				
+				$("div.padder.projects-funded button").click(function() {
+					var lineHeight = 620;
+					var height = $("div.padder.projects-funded .block-projects").height() + lineHeight;
+					$("div.padder.projects-funded .block-projects").css( 'max-height', height );
+					var maxLines = Math.ceil($("div.padder.projects-funded .block-projects .project-container").length / 4);
+					if (height >= maxLines * lineHeight) {
+						$("div.padder.projects-funded button").hide();
+					}
+				});
 			}
 		},
 
@@ -568,67 +689,42 @@ YPUIFunctions = (function($) {
 			}
 		},
 
-		refreshProjectList: function() {
-			if ($("#project-list-menu").length > 0) {
-				$("#project-list-menu a").click(function() {
-					$(".home-large-project").hide();
-					$(".home-small-project").hide();
-					$(".status-" + $(this).data("status")).show();
-					$("#project-list-menu a").removeClass("selected");
-					$(this).addClass("selected");
-				});
-				if ($("#project-list-menu").is(":visible")) {
-					$(".home-large-project").hide();
-					$(".home-small-project").hide();
-					if ($(".status-collecte").length == 0) $("#project-list-menu [data-status='collecte']").remove();
-					if ($(".status-vote").length == 0) $("#project-list-menu [data-status='vote']").remove();
-					if ($(".status-preview").length == 0) $("#project-list-menu [data-status='preview']").remove();
-					$("#project-list-menu a").first().trigger("click");
-				} else {
-					$(".home-large-project").show();
-					$(".home-small-project").show();
+		refreshProjectList: function( step, location, activity, impact ) {
+			var locationList = location.split(',');
+			$(".wdg-component-projects-preview .block-projects .project-container").show();
+			$(".wdg-component-projects-preview .block-projects .project-container").each(function() {
+				var categoryList = $(this).data("categories");
+				if ( step !== "all" && $(this).data("step") !== step ) {
+					$(this).hide();
 				}
-			}
-			YPUIFunctions.refreshProjectPreview();
-		}
-	}
-
-})(jQuery);
-
-YPMenuFunctions = (function($){
-	return {
-		initMenuBar: function() {
-			$("#menu_item_connection").mouseenter(function(){
-				$("#submenu_item_connection").css("top", $(document).scrollTop() + $("#navigation").height());
-				$("#submenu_item_connection").css("left", $("#menu_item_connection").position().left + $("#menu_item_connection").width() - $("#submenu_item_connection").width() - 1);
-				clearTimeout($("#menu_item_connection").data('timeoutId'));
-				$("#submenu_item_connection").fadeIn("slow");
-			}).mouseleave(function(){
-				var timeoutId = setTimeout(function(){
-					$("#submenu_item_connection").fadeOut("slow");
-				}, 650);
-				$("#menu_item_connection").data('timeoutId', timeoutId);
-			});
-
-			$("#submenu_item_connection").mouseenter(function(){
-				clearTimeout($("#menu_item_connection").data('timeoutId'));
-				$("#submenu_item_connection").fadeIn("slow");
-			}).mouseleave(function(){
-				var timeoutId = setTimeout(function(){
-					$("#submenu_item_connection").fadeOut("slow");
-				}, 650);
-				$("#menu_item_connection").data('timeoutId', timeoutId);
-			});
-
-			$("#mobile-menu").click(function() {
-				$("#submenu-mobile").toggle();
+				if ( location !== "all" && locationList.indexOf( $(this).data("location").toString() ) === -1 ) {
+					$(this).hide();
+				}
+				if ( activity !== "all" && categoryList.indexOf( activity ) === -1 ) {
+					$(this).hide();
+				}
+				if ( impact !== "all" && categoryList.indexOf( impact ) === -1 ) {
+					$(this).hide();
+				}
 			});
 		},
-
-		refreshMenuBar: function() {
-			$("#navigation").css("top", $(window).scrollTop());
+		
+		getCookie: function(cookieName) {
+			var name = cookieName + "=";
+			var ca = document.cookie.split(';');
+			for (var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0)===' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) === 0) {
+					return c.substring(name.length,c.length);
+				}
+			}
+			return "";
 		}
-	}
+	};
+
 })(jQuery);
 
 /* Projet */

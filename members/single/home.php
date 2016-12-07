@@ -21,20 +21,20 @@ $page_modify = get_page_by_path('modifier-mon-compte');
 		<header id="item-header">
 		    
 			<?php if ($display_loggedin_user): ?>
-			<div class="center">
+			<div>
 				<div id="settings-img">
 					<a href="<?php echo get_permalink($page_modify->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri() . "/images/settings.png";?>"></a>
 				</div>
 			</div>
 			<?php endif; ?>
 
-			<div id="item-header-container" class="center">
+			<div id="item-header-container">
 				<?php locate_template( array( 'members/single/member-header.php' ), true ); ?>
 			</div>
 		    
 		</header>
 
-		<div class="center">
+		<div>
 		    
 			<ul id="item-submenu">
 				<li id="item-submenu-projects" class="selected"><a href="#projects"><?php _e("Projets et investissements", "yproject"); ?></a></li>

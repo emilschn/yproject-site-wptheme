@@ -368,7 +368,16 @@ var WDGProjectDashboard = (function ($) {
                             data_to_update[id] = tinyMCE.get(id).getContent();
                             break;
                         case 'check':
-                            data_to_update[id] = $("#"+id).is(':checked')
+                            data_to_update[id] = $("#"+id).is(':checked');
+                            break;
+                        case 'multicheck':
+							var data_temp = new Array();
+							$('input', this).each(function() {
+								if ($(this).is(':visible') && $(this).is(':checked')) {
+									data_temp.push($(this).val());
+								}
+							});
+                            data_to_update[id] = data_temp;
                             break;
                         case 'text':
                         case 'number':

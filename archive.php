@@ -66,12 +66,7 @@ if (isset($_GET['delete_post_id'])){
 
 	<div class="page" id="blog-archives" role="main">
 		
-		<?php if ($edit_version < 3): ?>
-			<?php require_once('projects/single-admin-bar.php'); ?>
-			<?php require_once('projects/single-header.php'); ?>
-		<?php else: ?>
-			<?php locate_template( array("projects/single/banner.php"), true ); ?>
-		<?php endif; ?>
+		<?php locate_template( array("projects/single/banner.php"), true ); ?>
 
 		<div id="post_bottom_content" class="center margin-height">
 

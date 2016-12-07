@@ -123,7 +123,6 @@
                 inGraphDataShow : true,
                 inGraphDataPaddingX : -2,
                 inGraphDataFontSize : 18,
-                inGraphDataFontFamily : "BebasNeue",
                 inGraphDataFontColor : "#000",
                 inGraphDataAlign : "right",
                 scaleFontSize : 12,

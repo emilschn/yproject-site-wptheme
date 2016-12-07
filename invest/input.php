@@ -105,8 +105,10 @@ if (isset($campaign)):
 				<?php
 				break;
 			} ?>
-					
-			&nbsp;&nbsp;<center><a href="javascript:void(0);" id="link_validate_invest_amount" class="button"><?php _e("Valider", 'yproject'); ?></a></center><br /><br />
+			
+			<br /><br />
+			<div class="align-center"><a href="javascript:void(0);" id="link_validate_invest_amount" class="button red"><?php _e("Valider", 'yproject'); ?></a></div>
+			<br /><br />
 		
 			<div id="validate_invest_amount_feedback" style="display: none;">
 				<?php $temp_min_part = ceil($min_value / $part_value); ?>
@@ -164,7 +166,7 @@ if (isset($campaign)):
 							$api_user_id = BoppLibHelpers::get_api_user_id($current_user->ID);
 							$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
 							?>
-							<input type="submit" value="<?php _e("Investir", 'yproject'); ?>" class="button" />
+							<input type="submit" value="<?php _e("Investir", 'yproject'); ?>" class="button red" />
 							<select id="invest_type" name="invest_type">
 								<option value="user"><?php _e("En mon nom (personne physique)", 'yproject'); ?></option>
 								<?php if (count($organisations_list) > 0): ?>
@@ -187,10 +189,6 @@ if (isset($campaign)):
 		
 		</form>
 		<br /><br />
-		
-		<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
-		<div class="align-center mangopay-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="Mangopay" /></div>
-		<?php endif; ?>
 	    
 		
 	<?php else: ?>

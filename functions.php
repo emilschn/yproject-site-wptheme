@@ -5,6 +5,7 @@ function yproject_init() {
 	WDGCronActions::init_actions();
     WDGUser::login();
     WDGUser::register();
+	WDGPostActions::subscribe_newsletter_sendinblue();
 }
 add_action('init', 'yproject_init');
 
@@ -58,7 +59,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
-	$current_version = '20161014';
+	$current_version = '20161205';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -75,6 +76,9 @@ function yproject_enqueue_script(){
 	wp_enqueue_style('font-awesome');
 
 	wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.js', array('jquery'), $current_version);
+	if (is_home() || is_front_page() || $post->post_name == 'les-projets') { 
+		wp_enqueue_script('wdg-slider', dirname(get_bloginfo('stylesheet_url')).'/_inc/js/slideshow.js', array('jquery'), $current_version);            
+	}       
 	if ($is_campaign) { wp_enqueue_script( 'wdg-project-invest', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign-invest.js', array('jquery'), $current_version); }
 
 	//Fichiers du tableau de bord (CSS, Fonctions Ajax et scripts de Datatable)
@@ -107,8 +111,8 @@ function yproject_enqueue_script(){
 	wp_enqueue_script( 'sharer-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/sharer.min.js', array(), true, true);
 //	wp_enqueue_script( 'wdg-ux-helper', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-ux-helper.js', array('wdg-script'));
 	
-	if ($is_campaign_page && $campaign->edit_version() >= 3) {
-		if ($is_campaign && $campaign->edit_version() >= 3 && !$is_dashboard_page) {
+	if ($is_campaign_page) {
+		if ($is_campaign && !$is_dashboard_page) {
 			wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, $current_version, 'all');
 		}
 	    wp_enqueue_script( 'wdg-campaign', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign.js', array('jquery', 'jquery-ui-dialog'), $current_version);
@@ -411,12 +415,16 @@ function ypbp_filter_send_activation_key() {
 }
 add_filter('bp_core_signup_send_activation_key', 'ypbp_filter_send_activation_key');
 
+function yproject_user_register( $user_id ) {
+	$user = get_userdata( $user_id );
+	WDGPostActions::subscribe_newsletter_sendinblue( $user->user_email );
+}
+add_action('user_register', 'yproject_user_register', 10, 1 );
+
 //********
 // Lightbox profil 
 //
 //*********
-
-
 // Vérifie si l'user possede l'user_meta 
 function yproject_check_is_profile_meta_init($user_id){
     $profil = get_user_meta($user_id, 'first_visite_profil');
@@ -693,7 +701,7 @@ function print_user_projects(){
 			}
 		 
 			?>
-			<div class="center">
+			<div>
 			<?php
 			foreach ($user_projects as $project) {
 				$payments = $project['payments'];

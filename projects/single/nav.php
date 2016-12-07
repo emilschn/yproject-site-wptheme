@@ -12,7 +12,7 @@ $page_invest = get_page_by_path('investir');
 $campaign_id_param = '?campaign_id=' . $campaign->ID;
 $invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
 $invest_url_href = "#connexion";
-$btn_invest_classes = 'wdg-button-lightbox-open';
+$btn_invest_classes = 'button red wdg-button-lightbox-open';
 $btn_invest_data_lightbox = 'connexion';
 $btn_invest_text = ($campaign->funding_type() == 'fundingdonation') ? __('Soutenir', 'yproject') : __('Investir', 'yproject');
 
@@ -31,20 +31,22 @@ if (is_user_logged_in()) {
 	
 	$invest_url_href = $invest_url;
 	
-	$btn_invest_classes = '';
+	$btn_invest_classes = 'button red';
 	$btn_invest_data_lightbox = '';
 }
 ?>
 
 <nav class="project-navigation">
-	<div class="center clearfix">
+	<div class="padder">
 		<ul class="menu-project campaign-mobile-hidden">
+			<li class="project-navigation-logo"><a href="#" data-target="banner"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/grenade-gris-fonce.png" alt="logo noir" style="width: 36px"/></a></li>
+			<li class="project-navigation-title"><?php echo $campaign->data->post_title; ?></li>
 			<?php foreach ($menu_project_parts as $menu_part_key => $menu_part_label): ?>
-				<li><a href="#" id="target-<?php echo $menu_part_key; ?>" data-target="<?php echo $menu_part_key; ?>"><?php _e($menu_part_label, 'yproject'); ?></a></li>
+				<li class="slashed"><a href="#" id="target-<?php echo $menu_part_key; ?>" data-target="<?php echo $menu_part_key; ?>"><?php _e($menu_part_label, 'yproject'); ?></a></li>
 			<?php endforeach; ?>
 		</ul>
 
-		<ul class="menu-actions <?php if (!empty($lang_list)): ?>haslangs<?php endif;?>">
+		<ul class="menu-actions">
 			<li class="action-item">
 			<?php
 			$campaign_status = $campaign->campaign_status();
@@ -62,24 +64,24 @@ if (is_user_logged_in()) {
 					?>
 
 					<?php if (!is_user_logged_in()): ?>
-						<a href="#connexion" class="wdg-button-lightbox-open" data-lightbox="connexion" 
+						<a href="#connexion" class="button red wdg-button-lightbox-open" data-lightbox="connexion" 
 							data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start">
 							<?php _e('Voter', 'yproject'); ?>
 						</a>
-				
+
 					<?php elseif ($has_voted): ?>
 						<div style="-webkit-filter: grayscale(100%); text-transform: uppercase;">
 							<?php _e('Merci pour votre vote !', 'yproject'); ?>
 						</div>
-				
+
 					<?php else: ?>
-					<div id="vote-form-v3">
-						<a href="#lightbox_voter" id="vote-form-v3-link" class="wdg-button-lightbox-open" data-lightbox="vote">
+					<div>
+						<a href="#lightbox_voter" class="button red wdg-button-lightbox-open" data-lightbox="vote">
 							<?php _e('Voter', 'yproject'); ?>
 						</a>
 					</div>
 					<?php endif; ?>
-				
+
 					<?php endif; ?>
 
 				<?php
@@ -92,19 +94,6 @@ if (is_user_logged_in()) {
 				<?php break;
 			} ?>
 			</li>
-			
-			<?php if (!empty($lang_list)): ?>
-			<li class="lang-item">
-				<form method="GET" action="<?php the_permalink(); ?>">
-					<select name="lang">
-						<option value="fr_FR" <?php selected($current_lang , "fr_FR"); ?>>Fran&ccedil;ais</option>
-						<?php foreach ($lang_list as $lang): ?>
-						<option value="<?php echo $lang; ?>" <?php selected($current_lang, $lang); ?>><?php echo $language_list[$lang]; ?></option>
-						<?php endforeach; ?>
-					</select>
-				</form>
-			</li>
-			<?php endif; ?>
 		</ul>
 	</div>
 </nav>

@@ -11,10 +11,10 @@ var WDGProjectViewer = (function($) {
 		
 		init: function() {
 			$(document).scroll(function() {
-				if ($(document).scrollTop() > 100) {
-					$("#content, #navigation").addClass("scrolled");
+				if ($(document).scrollTop() > 600) {
+					$("#content, nav#main").addClass("scrolled");
 				} else {
-					$("#content, #navigation").removeClass("scrolled");
+					$("#content, nav#main").removeClass("scrolled");
 				}
 				WDGProjectViewer.refreshScroll();
 			});
@@ -33,7 +33,7 @@ var WDGProjectViewer = (function($) {
 				e.preventDefault();
 				var target = $(this).data("target");
 				$('html, body').animate(
-					{ scrollTop: $("div.project-" + target).offset().top - $("nav.project-navigation").height() },
+					{ scrollTop: $("div.project-" + target).offset().top - 100 },
 					"slow"
 				); 
 			});
@@ -42,7 +42,7 @@ var WDGProjectViewer = (function($) {
 			});
 			$("a.update-follow").click(function(e) {
 				e.preventDefault();
-				if ($(this).data("following") === '1') {
+				if ($(this).data("following") == '1') {
 					$(this).data("following", '0');
 					$("a.update-follow span").text($(this).data("textfollow"));
 				} else {

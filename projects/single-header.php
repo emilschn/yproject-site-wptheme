@@ -343,9 +343,7 @@ else {
 				$category_link = get_category_link($campaign->get_news_category_id());
 				$posts_in_category = get_posts(array('category'=>$campaign->get_news_category_id()));
 				$nb_cat = (isset($posts_in_category)) ? ' ('.count($posts_in_category).')' : '';
-				if ($campaign->edit_version() > 2) {
-					$category_link = get_permalink($campaign->ID);
-				}
+				$category_link = get_permalink($campaign->ID);
 				$news_link = esc_url($category_link);
 
 				$forum = get_page_by_path('forum');

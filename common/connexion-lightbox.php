@@ -41,7 +41,7 @@
 
         <div id="connexion_facebook_container">
             <div class="post_bottom_buttons_connexion" >
-                <div id="submenu_item_connection_register" class="dark" style="text-align: left; background-color: #3E3E40;">
+                <div id="submenu_item_connection_register" class="dark" style="text-align: left; background-color: #3E3E40; margin: auto;">
                     <a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><img width="25" height="25" src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" alt="triangle blanc"><span style="font-size: 9pt; vertical-align: 8px; color: #FFF; ">Cr&eacute;er un compte</span></a>
                 </div>
             </div>

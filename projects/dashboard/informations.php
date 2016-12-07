@@ -77,49 +77,37 @@ function print_informations_page()
                 ));
 
 
-                //Gestion des catégories
-                $campaign_categories = get_the_terms($campaign_id, 'download_category');
-                $selected_category = 0;
-                $selected_activity = 0;
                 $terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
                 $term_category_id = $terms_category[0]->term_id;
                 $terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
                 $term_activity_id = $terms_activity[0]->term_id;
-                if ($campaign_categories) {
-                    foreach ($campaign_categories as $campaign_category) {
-                        if ($campaign_category->parent == $term_category_id) {
-                            $selected_category = $campaign_category->term_id;
-                        }
-                        if ($campaign_category->parent == $term_activity_id) {
-                            $selected_activity = $campaign_category->term_id;
-                        }
-                    }
-                }
                 ?>
 
-                <div class="field"><label for="categories">Cat&eacute;gorie</label><!--
-                    --><span class="field-value" data-type="select" data-id="new_project_category"><?php
-                        wp_dropdown_categories(array(
-                        'hide_empty' => 0,
-                        'taxonomy' => 'download_category',
-                        'selected' => $selected_category,
-                        'echo' => 1,
-                        'child_of' => $term_category_id,
-                        'name' => 'categories',
-                        'id' => 'new_project_category'
-                    )); ?></span></div>
+                <div class="field">
+					<label for="categories"><?php _e("Cat&eacute;gorie", 'yproject'); ?></label>
+					<span class="field-value" data-type="multicheck" data-id="new_project_categories"><?php
+						wp_terms_checklist(
+							$campaign_id, 
+							array(
+								'taxonomy' => 'download_category',
+								'descendants_and_self' => $term_category_id,
+								'checked_ontop' => false
+						) );
+					?></span>
+				</div>
 
-                <div class="field"><label for="activities">Secteur d&apos;activit&eacute;</label><!--
-                    --><span class="field-value" data-type="select" data-id="new_project_activity"><?php
-                        wp_dropdown_categories(array(
-                        'hide_empty' => 0,
-                        'taxonomy' => 'download_category',
-                        'selected' => $selected_activity,
-                        'echo' => 1,
-                        'child_of' => $term_activity_id,
-                        'name' => 'activities',
-                        'id' => 'new_project_activity'
-                    )); ?></span></div>
+                <div class="field">
+					<label for="activities"><?php _e("Secteur d&apos;activit&eacute;", 'yproject'); ?></label>
+					<span class="field-value" data-type="multicheck" data-id="new_project_activities"><?php
+						wp_terms_checklist(
+							$campaign_id, 
+							array(
+								'taxonomy' => 'download_category',
+								'descendants_and_self' => $term_activity_id,
+								'checked_ontop' => false
+						) );
+					?></span>
+				</div>
 
                 <?php
                 $locations = atcf_get_locations();

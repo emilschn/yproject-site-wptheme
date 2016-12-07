@@ -4,12 +4,8 @@ $comment_list = get_comments(array(
 	'post_id'	=> $campaign->ID
 ));
 ?>
-<div class="project-comments center">
-	<div class="project-comments-title separator-title">
-		<span> 
-			<?php _e('Commentaires', 'yproject'); ?>
-		</span>
-	</div>
+<div class="project-comments padder">
+	<h2 class="standard">/ <?php _e('Commentaires', 'yproject'); ?> /</h2>
     
 	<?php if ( count($comment_list) > 0 ) : ?>
 		<ul>
