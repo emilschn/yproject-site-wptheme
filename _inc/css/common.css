@@ -781,3 +781,14 @@ body.page-template-template-discover-projects-php div#content > div:last-child .
 body.bp-user #item-header {
 	 margin-top: 80px;
 }
+
+/*******************************************************************************
+* TEMPLATE - SINGLE CAMPAIGN INVEST
+*******************************************************************************/
+#template-single-campaign-invest .progress-bar{
+    min-width: 0;
+    width: 360px;
+    max-width: 95%;
+    top: auto;
+    margin: auto;
+}
