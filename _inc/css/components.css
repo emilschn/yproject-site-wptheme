@@ -423,7 +423,7 @@
 *******************************************************************************/
 .progress-bar {
     min-width: 100%;
-    position: absolute;
+    position: relative;
     top: 355px;
     height: 50px;
     background-color: #E1E3E2;
@@ -487,4 +487,14 @@
     background-color: #526794;
     border: 1px solid #526794;
 	color: #FFFFFF;
+}
+
+/*******************************************************************************
+* TEMPLATE - SINGLE CAMPAIGN INVEST
+*******************************************************************************/
+#template-single-campaign-invest .progress-bar{
+    min-width: 0;
+    width: 360px;
+    top: auto;
+    margin: auto;
 }
