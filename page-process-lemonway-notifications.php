@@ -100,7 +100,11 @@ if ( !empty( $lemonway_posted_category ) ) {
 					NotificationsEmails::new_purchase_user_success_nocontract( $investment_id, $new_contract_pdf_file, FALSE );
 					NotificationsEmails::new_purchase_admin_success_nocontract( $investment_id, $new_contract_pdf_file );
 				}
+			} else {
+				NotificationsEmails::send_mail( 'emilien@wedogood.co', 'Notif interne - Virement reçu - erreur', '$investment_id == FALSE || $investment_campaign_id == FALSE', true );
 			}
+		} else {
+			NotificationsEmails::send_mail( 'emilien@wedogood.co', 'Notif interne - Virement reçu - erreur', '$WDGUser_invest_author === FALSE', true );
 		}
 		
 	}
