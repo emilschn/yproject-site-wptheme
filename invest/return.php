@@ -88,7 +88,10 @@ if (isset($campaign) && is_user_logged_in()):
 			}
 		}
 
-		$paymentlist = edd_get_payments();
+		$paymentlist = edd_get_payments(array(
+		    'number'	 => -1,
+		    'download'   => $campaign->ID
+		));
 		foreach ($paymentlist as $payment) {
 			if (edd_get_payment_key($payment->ID) == $purchase_key) {
 				$page_investments = get_page_by_path('mes-investissements');
