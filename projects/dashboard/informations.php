@@ -414,25 +414,36 @@ function print_informations_page()
 
                 ?>
 
-                <div class="field"><label>Chiffre d'affaires pr&eacute;visionnel</label></div>
+                <div class="field">
+                    <label>Chiffre d'affaires pr&eacute;visionnel</label>
+                    <label style="margin-left: 320px"><?php _e('Montant des royalties reversés', 'yproject'); ?></label>
+                </div>
                 <ul id="estimated-turnover">
                     <?php
-					$estimated_turnover = $campaign->estimated_turnover();
+                    $estimated_turnover = $campaign->estimated_turnover();
                     if(!empty($estimated_turnover)){
                         $i=0;
                         foreach (($campaign->estimated_turnover()) as $year => $turnover) :?>
                             <li class="field">
                                 <label>Année <span class="year"><?php echo ($i+1); ?></span></label>
-								<span class="field-container">
-									<span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
-										<?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
-										<i class="right fa fa-eur" aria-hidden="true"></i>
-										<input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />
-										<?php else: ?>
-										<?php echo $turnover; ?> &euro;
-										<?php endif; ?>
-									</span>
-								</span>
+                                <span class="field-container">
+                                        <span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
+                                                <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
+                                                <i class="right fa fa-eur" aria-hidden="true"></i>
+                                                <input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />                                         
+                                                <?php else: ?>
+                                                <?php echo $turnover; ?> 
+                                                <?php endif; ?>
+                                        </span>
+                                        <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?>
+                                        &euro;
+                                        <?php endif; ?>
+                                        <!--montant des royalties reversés par année-->
+                                        <span class="like-input-center">
+                                            <p id="roi-amount-<?php echo $i;?>">0 €</p>
+                                            <!--<input class="input-center" type="text" id="new-estimated-roi-<?php echo $i;?>" disabled="disabled"/>-->
+                                        </span>                                     
+                                </span>
                             </li>
                         <?php
                             $i++;
@@ -443,6 +454,24 @@ function print_informations_page()
 
                 <?php DashboardUtility::create_save_button("projectfunding_form"); ?>
             </form>
+            <!-- Résultats de la simulation -->
+            <div class="field" id="calc-funding">
+                <p id="info-roi-project" class="calc-result">
+                    <?php _e('Avec ce pourcentage, mes investisseurs auront retrouvé','yproject');?>
+                    <span id="total-roi">---</span> &euro; 
+                    <?php _e('dans', 'yproject');?>
+                    <span id="nb-years">---</span>&nbsp;ans,
+                    <?php _e('pour' , 'yproject');?>
+                    <span id="total-funding">---</span>&nbsp;&euro;*
+                    <?php _e('investis', 'yproject');?>
+                </p>
+                <p id="annual-gain" class="calc-result">
+                    <?php ?>
+                    <strong class="uppercase"><?php _e('rendement annuel pour investisseur','yproject'); ?>&nbsp;:&nbsp;</strong>
+                    <span id="medium-rend" class="lowercase" >---&nbsp;%</span>
+                </p>
+                <p class="calc-result">*<?php _e('montant de la collecte, incluant la commission de WE DO GOOD', 'yproject') ?></p>
+            </div>
         </div>
 
         <div class="tab-content" id="tab-communication">

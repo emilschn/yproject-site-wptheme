@@ -227,16 +227,16 @@ var WDGProjectDashboard = (function ($) {
                     $("#new_first_payment").change(function(){
                         var start_year = 1;
                         $("#estimated-turnover li .year").each(function(index){
-                            $(this).html((parseInt(start_year)+index));
+                            $(this).html((parseInt(start_year)+index));//le n° d'année est déjà renseigné par le reste du code => pour admin, on a année 11, année 22...(ne vois pas le rapport avec new_first_payment)
                         });
                     });
-
+                    
                     //Cases pour le CA prévisionnel
                     $("#new_funding_duration").change(function() {
                         var nb_years_li_existing = ($("#estimated-turnover li").length);
                         var new_nb_years = parseInt($("#new_funding_duration").val());
                         "change nb year trigger "+new_nb_years+"(exist : "+nb_years_li_existing+")";
-
+                        
                         //Ajoute des boîtes au besoin
                         if(new_nb_years > nb_years_li_existing){
                             var newlines = $("#estimated-turnover").html();
@@ -244,14 +244,19 @@ var WDGProjectDashboard = (function ($) {
                             for(var i=0; i<new_nb_years-nb_years_li_existing;i++){
                                 newlines = newlines+
                                     '<li class="field">' +
-                                    '<label>Année <span class="year"></span></label>'+
+                                    '<label>Année '+(i+1+nb_years_li_existing)+'<span class="year"></span></label>'+
+                                    '<span class="field-container">'+
                                     '&nbsp;<span class="field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
-                                    '<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'"/>' +
+                                    '<i class="right fa fa-eur" aria-hidden="true"></i>'+
+                                    '<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" />'+                                   
                                     '</span>'+
-                                    '</li>'
+                                    '<span class="like-input-center"><p id="roi-amount-'+(i+nb_years_li_existing)+'">0 €</p></span>'+
+                                    '</span>'+
+                                    '</li>';
                             }
-                            $("#estimated-turnover").html(newlines);
 
+                            $("#estimated-turnover").html(newlines);
+                                                      
                             //MAJ des étiquettes "Année XXXX"
                             $("#new_first_payment").trigger("change");
                             nb_years_li_existing = new_nb_years;
@@ -261,8 +266,30 @@ var WDGProjectDashboard = (function ($) {
                             $("#estimated-turnover li").slice(0,new_nb_years).show();
                         }
                         nb_years_li_existing = Math.max(new_nb_years,nb_years_li_existing);
+                        //Calculs de tous les élements et rattachement du keyup/click sur changement de CA
+                        WDGProjectDashboard.calculAndShowResult();
                     });
                     $("#new_funding_duration").trigger('change');
+                    $("#new_funding_duration").keyup(function(){
+                        if($("#new_funding_duration").val()!==""){
+                                 $("#new_funding_duration").trigger('change');
+                        }
+                    });
+
+                    //A l'ouverture de l'onglet besoin de financement
+                    //Calculs de tous les élements et rattachement du keyup/click sur changement de CA 
+                    WDGProjectDashboard.calculAndShowResult();
+                    
+                    //Recalcul du rendement si modification de l'objectif max / % royalties / durée financement
+                    $("#new_maximum_goal, #new_roi_percent_estimated, #new_funding_duration").bind('keyup click', function(){
+                        if($("#new_maximum_goal").val()!=="" && ($("#new_minimum_goal").val()!=="" && $("#new_funding_duration").val()!==""
+                            && $("#new_roi_percent_estimated").val()!=="" && $("#new_estimated_turnover_0").val()!=="")){
+                            WDGProjectDashboard.simuProcess();
+                        }
+                        else{
+                            WDGProjectDashboard.initResultCalcul();
+                        }
+                    });
                 }
             }
 
@@ -799,6 +826,180 @@ var WDGProjectDashboard = (function ($) {
                 $('#ajax-loader-img').hide();//On cache la roue de chargement.
             });
         },
+
+        /**
+         * Récupération de tous les CA en fonction de la durée de financement
+         * @returns {Array} tableau avec le montant des CA pour chaque année
+         */
+        createCaTab: function(){           
+            if(new_funding_duration!== "0"){
+                var nbYears = parseInt(new_funding_duration);
+                var caTab = new Array;
+                for (var ii=0; ii < nbYears; ii++){
+                    var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? ($.trim($("span[data-id=new_estimated_turnover_"+ii+"]").text())) : $("#new_estimated_turnover_"+ii).val();
+                    caTab.push(parseFloat(new_estimated_turnover));
+                }
+                return caTab;
+            }
+        },
+        /**
+         * Calcul du CA total sur les années de CA renseignées
+         */
+        calculTotalCa: function(){
+            caTab = WDGProjectDashboard.createCaTab();
+            totalca = 0; 
+            //boucler sur le nb d'années renseignées pour le cas où celui-ci diminue
+            //(ce qui cache les années en moins) sans pour autant perdre les données
+            //on peut rajouter une année et retrouver le montant de CA précédemment
+            //rempli (tant qu'on n'a pas enregistré)
+            
+            $.each(caTab, function(year, ca){
+                if(ca >= 0){
+                    totalca += ca;
+                }
+            });
+        },
+        /**
+         * Calcul des royalties reversés par année de CA renseignée
+         */
+        calculRoiPerYear: function(){           
+            if(new_roi_percent_estimated !== ""){
+                percent = parseFloat(new_roi_percent_estimated)/100;
+            }
+            else{ percent = false; }
+            for (var ii=0; ii < caTab.length; ii++ ) {
+                if (caTab[ii] > 0) {
+                    if(percent){
+                        var roi_amount = percent * caTab[ii];
+                        var roi_amount_format = WDGProjectDashboard.numberFormat(roi_amount);
+                        $("#roi-amount-"+ii).html(roi_amount_format+" €");
+                    }else{ $("#roi-amount-"+ii).html("0 €"); }
+                }else{ $("#roi-amount-"+ii).html("0 €"); }
+            }
+        },
+        /**
+         * Calcul du total de royalties reversés sur le nombre d'années de CA
+         * renseigné
+         */
+        calculReturn: function(){
+            if(percent){
+                totalRoi = percent * totalca;
+                if(totalRoi){
+                    var totalRoi_format = WDGProjectDashboard.numberFormat(totalRoi);
+                    $("#total-roi").html(totalRoi_format);
+                }
+            }
+	},
+        /**
+         * Calcul du montant total de la collecte incluant la comission WDG
+         */
+        calculCollect: function (){                     
+            if (need!==""){
+                collect = need*1.1;
+                remb = collect*1.1;
+                var collect_format = WDGProjectDashboard.numberFormat(collect);
+                $("#total-funding").html(collect_format);
+            }
+        },
+        /**
+         * Fonction de calcul du rendement annuel investisseur
+         */
+        calculAnnualRend: function(){
+            var nbYears = 0;
+            for (var ii=0; ii < caTab.length; ii++ ) {
+                if (caTab[ii] > 0) {
+                    nbYears++;
+                }
+            }
+            // Ecarter les dénominateurs à zéro
+            if(collect != "0" && nbYears != 0){
+                mediumRend = (Math.pow((percent*totalca/collect),(1/nbYears))-1)*100;
+                var mediumRend_format = WDGProjectDashboard.numberFormat(mediumRend);
+                $("#medium-rend").html(mediumRend_format+' %');
+                $("#nb-years").html(nbYears);
+            }
+            else if(collect == "0" || nbYears == 0){
+                WDGProjectDashboard.initResultCalcul();
+            }
+        },
+        /**
+         * Vérification d'un rendement minimum supérieur à 3%
+         */
+        verifMediumRend: function () {
+            var rend = $("#medium-rend");
+            var errorHtml = " (insuffisant en dessous de 3%, étant donné le risque)";
+            if (mediumRend < "3" ) {
+                rend.css('color', 'red');
+                rend.append(errorHtml);
+            }
+            else{
+                rend.css('color','black');
+            }
+        },
+        /**
+         * Processus de calcul des investissements et du rendement investisseur
+         * et mise à jour des résultats dans l'interface
+         */
+        simuProcess: function(){
+            WDGProjectDashboard.getFixedData();
+            WDGProjectDashboard.calculTotalCa();
+            WDGProjectDashboard.calculRoiPerYear();
+            WDGProjectDashboard.calculReturn();
+            WDGProjectDashboard.calculCollect();
+            WDGProjectDashboard.calculAnnualRend();
+            WDGProjectDashboard.verifMediumRend();
+        },
+        
+        initResultCalcul: function(){
+            $("#total-roi").html("---");
+            $("#nb-years").html("--");
+            $("#total-funding").html("---");
+            $("#medium-rend").html("--- %").css('color','#2B2C2C');
+            
+            caTab = WDGProjectDashboard.createCaTab();
+            for (var ii=0; ii < caTab.length; ii++ ) {
+                $("#roi-amount-"+ii).html("0 €");
+            }
+        },
+        /**
+         * Calcul des royalties reversés par année et du rendement (si données déjà renseignées)
+         * et rattachement des events sur la modif du CA
+         */
+        calculAndShowResult: function(){
+            WDGProjectDashboard.getFixedData();
+            if(new_minimum_goal!="" && need!="" && new_funding_duration!="" && new_roi_percent_estimated!=""){
+                WDGProjectDashboard.simuProcess();
+                //Recalcul à la modification des montants de CA
+                for(var ii = 0; ii < parseInt(new_funding_duration); ii++){ 
+                    var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? $("span[data-id=new_estimated_turnover_"+ii+"]") : $("#new_estimated_turnover_"+ii);
+                    $(new_estimated_turnover).bind('click keyup',function(){                               
+                        WDGProjectDashboard.simuProcess();
+                    });
+                }
+            }
+            else{
+                WDGProjectDashboard.initResultCalcul();
+            }
+            
+        },
+        
+        getFixedData: function(){
+            new_minimum_goal = $("#new_minimum_goal").val() == null ? $.trim($("span[data-id=new_minimum_goal]").text()) : $("#new_minimum_goal").val();
+            need = $("#new_maximum_goal").val() == null ? $.trim($("span[data-id=new_maximum_goal]").text()) : $("#new_maximum_goal").val();
+            new_roi_percent_estimated = $("#new_roi_percent_estimated").val() == null ? $.trim($("span[data-id=new_roi_percent_estimated]").text()) : $("#new_roi_percent_estimated").val();
+            new_funding_duration = ($("#new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration]").text()) : $("#new_funding_duration").val();
+        },
+        
+        /**
+         * Formate les nombres en groupant les chiffres par 3 et affiche au maximum 2 décimales
+         * @param {number} number
+         * @returns {number}
+         */
+        numberFormat: function(number){
+            numberFormat = new Intl.NumberFormat({useGrouping: true, maximumSignificantDigits : 2}).format(number);
+            return numberFormat;
+        }
+        
     };
 
 })(jQuery);
