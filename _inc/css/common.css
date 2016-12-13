@@ -782,6 +782,7 @@ body.page-template-template-discover-projects-php .wdg-component-projects-previe
 	height: auto;
 	max-height: 1240px;
 	margin: auto;
+        padding-top: 5px;
 	overflow-y: hidden;
 }
 

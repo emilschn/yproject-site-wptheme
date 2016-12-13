@@ -399,11 +399,11 @@
     width: 42px;
     height: 42px;
     border-radius: 100%;
-    background-color: #0F8216;  
+    border: solid 4px transparent; 
     color: #FFFFFF;
     transition: all .2s linear;
     cursor: pointer;
-	margin: 0px 5px;
+    margin: 0px 1px;
 }
 /* Dégradés de couleurs pour les impacts */
 .impacts-container .impact-ecologic{
@@ -418,6 +418,7 @@
 
 .impacts-container .impact-logo:hover{  /* à revoir : empecher le déplacement des impacts au survol ***********/
     transform: scale(1.15);
+    border-color: #fff;
 }
 
 
