@@ -209,7 +209,7 @@
 
 .wdg-component-projects-preview .project-slider {
 	width: 100%;
-        overflow: -moz-scrollbars-horizontal;/* Firefox */
+        overflow: -moz-scrollbars-horizontal;/* Firefox */ 
             -ms-overflow-style: scrollbar;/* Edge */
 	overflow-x: auto;
         margin-bottom: 15px;
