@@ -92,7 +92,11 @@ button.red {
 	border: 0px;
 	background: #FFFFFF;
 }
-
+.button.more-content {
+        background: none repeat scroll 0 0 #FFF;
+        border: 2px solid #333;
+        color: #333;
+}
 /*******************************************************************************
 * SCROLLBAR VISIBLE - NAVIGATEUR CHROME
 *******************************************************************************/
