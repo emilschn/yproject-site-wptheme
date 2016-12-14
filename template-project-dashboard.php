@@ -96,7 +96,7 @@ if ($can_modify){
     } ?>
 
 <div id="content">
-    <div class="padder">
+    <div class="">
         <div id="ndashboard"
         data-campaign-id="<?php echo $campaign_id?>">
             <nav id="ndashboard-navbar">
