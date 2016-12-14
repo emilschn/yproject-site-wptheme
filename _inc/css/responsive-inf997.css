@@ -207,6 +207,7 @@
 	}
 	body.page-template-template-discover-projects-php .wdg-component-projects-preview .block-projects {
 		display: block;
+                width: 960px;
 		max-height: 620px;
 	}
 	body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container {
