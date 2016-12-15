@@ -286,14 +286,14 @@
 
 .wdg-component-projects-preview .project-container .project-framed .project-summary{
     position: absolute;
-    top: 255px;
+    top: 238px;
     max-width: 100%;
-	height: 85px;
-	overflow: hidden;
-	margin: 0px;
-    padding: 0px 4%;
+    height: 77px;
+    overflow: hidden;
+    margin: 0px;
+    padding: 5px 4%;
     font-size: 10pt;
-    text-align: left;
+    text-align: justify;
 }
 
 .wdg-component-projects-preview .project-container .project-framed .progress-info{
