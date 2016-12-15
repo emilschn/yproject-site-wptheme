@@ -66,7 +66,7 @@ else {
 			
 			<section>
 				<div>
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/membre-FPF.png" alt="logo membre financement participatif France" width="150px"/>
+                                    <a href="http://www.financeparticipative.org/"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/membre-FPF.png" alt="logo membre financement participatif France" width="150px"/></a>
 				</div>
 
 				<div class="lines" id="finance_innovation">
