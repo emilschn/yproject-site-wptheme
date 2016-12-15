@@ -263,7 +263,7 @@
 }
 
 .wdg-component-projects-preview .project-container .project-framed .project-title{
-    width: 100%;
+    width: 80%;
     text-align: center;
     position: relative;
     top: 20px;
@@ -271,6 +271,7 @@
     font-size: 13pt;
     font-weight: bold;
 	margin: 15px auto;
+        margin-left: 30px;/* pour tenir compte du coin coupé du cartouche*/
 }
 
 .wdg-component-projects-preview .project-container .project-framed .project-img{
@@ -309,7 +310,7 @@
     letter-spacing: 0.125em;
 }
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers{
-    border-right: 2px solid black;
+    border-right: 2px solid #333;
 }
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers,
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-days,
@@ -371,7 +372,10 @@
 		width: 320px;
 	}
 }
-
+/* Ajustements spécifiques cartouche projet */
+body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container .project-framed {
+    height: 81%;
+}
 
 /*******************************************************************************
 * IMPACTS

@@ -165,7 +165,10 @@
 	body.home-page .wdg-component-projects-preview .block-projects .project-container {
 		display: inline-block;
 	}
-	
+        body.home-page .wdg-component-projects-preview .block-projects .project-container .project-framed {
+                position: absolute;         
+        }
+        
 	#home-video .home_video .video-container, .home_video .button-video {
 		-moz-box-shadow: 0px 0px;
 		-webkit-box-shadow: 0px 0px;
@@ -214,4 +217,8 @@
 		display: inline-block;
 		height: 620px;
 	}
+        body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container .project-framed {
+            position: absolute;
+            height: 82%;
+        }
 }
