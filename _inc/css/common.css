@@ -144,7 +144,10 @@ nav#main > div#menu {
 	margin: auto;
 	padding: 10px;
 	background: #FFFFFF;
-        /*box-shadow: 1px 1px 5px #333;*/
+        -moz-box-shadow: 1px 1px 5px #E4E4E4;
+        -webkit-box-shadow: 1px 1px 5px #E4E4E4;
+        -o-box-shadow: 1px 1px 5px #E4E4E4;
+        box-shadow: 1px 1px 5px #E4E4E4;
 	text-align: right;
 }
 
