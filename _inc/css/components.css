@@ -222,7 +222,7 @@
     justify-content: center;
 	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
-	height: 620px;
+	height: 555px;
 }
 @media screen and (min-width: 1200px) {
 	.wdg-component-projects-preview .block-projects {
@@ -237,14 +237,14 @@
 	width: 29%;
     min-width: 320px;
     max-width: 400px;
-	height: 620px;
+	height: 500px;
     -webkit-justify-content: center;
     justify-content: center;
     font-family: Trebuchet MS, sans-serif;
 }
 .wdg-component-projects-preview .project-container .project-framed{ 
     width: 90%;
-    height: 80%;
+    height: 100%;
     background-color: rgba(51, 51, 51, 0.05);
     position: relative;
     top: 25px;
