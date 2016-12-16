@@ -507,8 +507,8 @@ footer > .footer-container > section:nth-child(2) > div:nth-child(1){
 }
 footer > .footer-container > section:nth-child(2) > div:nth-child(2){
 	position: relative;
-	width: 180px;
-	margin-top: 55px;
+	width: 200px;
+	margin-top: 74px;
 	margin-left: 4%;
 }
 footer > .footer-container > section:nth-child(2) > div:nth-child(3){
@@ -518,15 +518,6 @@ footer > .footer-container > section:nth-child(2) > div:nth-child(3){
 footer > .footer-container > section:nth-child(2) > div:nth-child(4){
 	width: 22%;
 	margin-left: 3%;
-}
-footer p.label {
-	position: absolute;
-	background-color: #FFFFFF;
-	padding: 0 10px;
-	margin-left: 3.5%;
-	top: -30px;
-	left: 18%;
-	letter-spacing: 2px;
 }
 footer > .footer-container > section div#lemonway p {
 	font-size: 10pt;       
