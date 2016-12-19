@@ -80,10 +80,10 @@ if ($can_modify){
 
     page_resume_lightboxes();
 
-    if(filter_input(INPUT_GET,'lightbox')=='newproject'){
-    //if(true/*!$campaign->get_has_been_welcomed() && !current_user_can('manage_options')*/){
+	$hidenewprojectlightbox = filter_input( INPUT_COOKIE, 'hidenewprojectlightbox' );
+    if ( empty($hidenewprojectlightbox) && (filter_input(INPUT_GET, 'lightbox') == 'newproject') ) {
         ob_start();
-        locate_template('projects/dashboard/dashboard-welcome-lightbox.php',true);
+        locate_template('projects/dashboard/dashboard-welcome-lightbox.php', true);
         $content = ob_get_contents();
         ob_end_clean();
         ?>
@@ -92,8 +92,16 @@ if ($can_modify){
                 <?php echo $content; ?>
             </div>
         </div>
+		<script type="text/javascript">
+			var date = new Date();
+			var days = 100;
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+			document.cookie = "hidenewprojectlightbox=1"+expires+"; path=/";
+		</script>
         <?php
-    } ?>
+    }
+?>
 
 <div id="content">
     <div class="">
