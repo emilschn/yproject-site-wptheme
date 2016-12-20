@@ -55,7 +55,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 				$time_remaining_str = $campaign->time_remaining_str();
 				if ($time_remaining_str != '-') {
 					$time_remaining_str_split = explode('-', $time_remaining_str);
-					$time_remaining_str = $time_remaining_str_split[1] . ' ';
+					$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
 					$time_remaining_str_unit = $time_remaining_str_split[0];
 					switch ($time_remaining_str_split[0]) {
 						case 'J': $time_remaining_str .= __("jours", "yproject"); break;

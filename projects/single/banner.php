@@ -158,7 +158,7 @@ if (count($current_organisations) > 0) {
 						$time_remaining_str = $campaign->time_remaining_str();
 						if ($time_remaining_str != '-'):
 							$time_remaining_str_split = explode('-', $time_remaining_str);
-							$time_remaining_str = $time_remaining_str_split[1] . ' ';
+							$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
 							$time_remaining_str_unit = $time_remaining_str_split[0];
 							switch ($time_remaining_str_split[0]) {
 								case 'J': $time_remaining_str .= 'jours'; break;
@@ -247,7 +247,7 @@ if (count($current_organisations) > 0) {
 						$time_remaining_str = $campaign->time_remaining_str();
 						if ($time_remaining_str != '-'):
 							$time_remaining_str_split = explode('-', $time_remaining_str);
-							$time_remaining_str = $time_remaining_str_split[1] . ' ';
+							$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
 							$time_remaining_str_unit = $time_remaining_str_split[0];
 							switch ($time_remaining_str_split[0]) {
 								case 'J': $time_remaining_str .= 'jours'; break;
