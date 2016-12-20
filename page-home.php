@@ -88,7 +88,7 @@ else {
 			?>
 		</div>
 	</div>
-    <a class="home-button-project see-more red" href="<?php echo home_url( '/les-projets' ); ?>"><?php _e("D&eacute;couvrir tous les projets","yproject" ) ?></a>
+        <a class="home-button-project see-more red" href="<?php echo home_url( '/les-projets' ); ?>"><?php _e("D&eacute;couvrir tous les projets","yproject" ) ?></a>
 </section> <!-- section.wdg-component-projects-preview -->
 
 <?php
