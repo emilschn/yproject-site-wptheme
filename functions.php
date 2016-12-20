@@ -473,8 +473,11 @@ add_filter( 'template_include', 'yproject_page_template', 99 );
 
 /** BACK-OFFICE USERS **/
 function yproject_user_contact_methods( $user_contact ) {
-	//Affichage du numéro de téléphone dans la fiche utilisateur
-	$user_contact['user_mobile_phone'] = __('Telephone');
+	$user_contact['user_mobile_phone'] = __('T&eacute;l&eacute;phone');
+	$user_contact['user_address'] = __('Adresse');
+	$user_contact['user_postal_code'] = __('Code Postal');
+	$user_contact['user_city'] = __('Ville');
+	$user_contact['user_country'] = __('Pays');
 	return $user_contact;
 }
 add_filter( 'user_contactmethods', 'yproject_user_contact_methods' );

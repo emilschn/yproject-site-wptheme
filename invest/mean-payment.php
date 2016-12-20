@@ -43,10 +43,7 @@ if (isset($campaign)):
 	?>
 
 	<?php if (isset($error_session) && $error_session == '1'): ?>
-		<?php
-			$page_invest_link = get_permalink($page_invest->ID);
-			$page_invest_link .= '?campaign_id=' . $campaign->ID . '&invest_start=1';
-		?>
+		<?php $page_invest_link = home_url('/investir') . '?campaign_id=' . $campaign->ID . '&invest_start=1'; ?>
 		<?php _e("La session de paiement n'existe plus. Peut-&ecirc;tre avez-vous choisi un autre moyen de paiement ?", 'yproject'); ?><br />
 		<a href="<?php echo $page_invest_link; ?>"><?php _e("Merci de recommencer le processus de paiement.", 'yproject'); ?></a><br /><br />
 

@@ -516,22 +516,51 @@ function print_informations_page()
             <ul class="errors">
 
             </ul>
-            <form id="contract_form" class="db-form" data-action="save_project_contract">
-                <?php
+			
+			<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
+				la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>
+			
+            <form action="<?php echo admin_url( 'admin-post.php?action=upload_contract_files'); ?>" method="post" id="contract_files_form" enctype="multipart/form-data">
+                <ul class="errors">
 
+                </ul>
+
+				<?php
+				$file_name_contract_user = $campaign->backoffice_contract_user();
+				if (!empty($file_name_contract_user)) {
+					$file_name_exploded = explode('.', $file_name_contract_user);
+					$ext = $file_name_exploded[count($file_name_exploded) - 1];
+					$file_name_contract_user = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_user;
+				}
                 DashboardUtility::create_field(array(
-                    "id"				=> "new_contract_url",
-                    "type"				=> "link",
-                    "label"				=> "Lien du contrat",
-                    "value"				=> $campaign->contract_doc_url(),
+                    "id"				=> "new_backoffice_contract_user",
+                    "type"				=> "upload",
+                    "label"				=> "Contrat d'investissement au nom d'une personne physique",
+                    "value"				=> $file_name_contract_user,
                     "editable"			=> $is_admin,
-                    "admin_theme"		=> $is_admin,
-                    "placeholder"		=> "http://.....",
-                    "default_display"	=> "Le contrat n'a pas encore &eacute;t&eacute; g&eacute;n&eacute;r&eacute;."
+					"download_label"	=> $post_campaign->post_title . " - Contrat personne physique." . $ext
                 ));
-
-                DashboardUtility::create_save_button("contract_form", $is_admin);?>
-            </form>
+				
+				$file_name_contract_orga = $campaign->backoffice_contract_orga();
+				if (!empty($file_name_contract_orga)) {
+					$file_name_exploded = explode('.', $file_name_contract_orga);
+					$ext = $file_name_exploded[count($file_name_exploded) - 1];
+					$file_name_contract_orga = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_orga;
+				}
+                DashboardUtility::create_field(array(
+                    "id"				=> "new_backoffice_contract_orga",
+                    "type"				=> "upload",
+                    "label"				=> "Contrat d'investissement au nom d'une organisation",
+                    "value"				=> $file_name_contract_orga,
+                    "editable"			=> $is_admin,
+					"download_label"	=> $post_campaign->post_title . " - Contrat organisation." . $ext
+                ));
+				
+                DashboardUtility::create_save_button("projectinfo_form");
+				?>
+				
+				<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+			</form>
         </div>
     </div>
     <?php

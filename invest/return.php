@@ -214,6 +214,7 @@ if (isset($campaign) && is_user_logged_in()):
 					?>
 				
 					<?php if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wire'): ?>
+						<?php NotificationsEmails::new_purchase_pending_wire_admin( $payment_id ); ?>
 						<?php NotificationsEmails::new_purchase_pending_wire_user( $payment_id ); ?>
 						<?php _e("Dans l'attente de votre virement, vous recevrez un e-mail rappelant les informations &agrave; nous fournir.", 'yproject'); ?><br /><br />
 						
