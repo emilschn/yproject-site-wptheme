@@ -266,6 +266,10 @@ div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before 
 * BANNER
 *******************************************************************************/
 div#content.version-3 div.project-banner {}
+div#content.version-3 div.project-banner div.project-banner-title div.project-banner-info-item.author-info p {
+        margin-bottom: 25px;
+}
+
 div#content.version-3 div.project-banner .project-banner-content {
     height: 400px;
     overflow: hidden;
@@ -322,23 +326,33 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 }
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions a {
 	display: inline-block;
-	padding: 10px 20px;
+	padding: 13px;
 	font-size: 12pt;
 	line-height: 20px;
+        vertical-align: middle;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions a.btn-followed {
 	background: #D3EAE9;
 	border: #D3EAE9;
 	color: #333;
 }
+div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions a:last-child {
+        line-height: 16px;
+        padding: 0;
+}
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions a img {
-	height: 16px;
+	height: 24px;
+        width: 22px;
+        padding: 10px;
 }
 
 
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-pitch-text {
-	height: 80px;
-	padding: 10px 0px;
+	height: 122px;
+        margin: 10px auto;
+        text-align: justify;
+        overflow: hidden;
+        line-height: 1.25;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-pitch-text p {
 	text-align: justify;
@@ -362,17 +376,23 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	border-left: 2px solid;
 	border-right: 2px solid;
 }
+div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left.bordered span:last-child {
+        font-size: 9pt;
+}
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left span:first-child {
-	font-size: 15pt;
+	font-size: 12pt;
 	font-weight: bold;
 }
-	
+div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left span:last-child {
+        font-size: 9pt;
+}
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right a.button.red {
 	display: inline-block;
 	width: -webkit-calc(100% - 32px);
 	width: -moz-calc(100% - 32px);
 	width: calc(100% - 32px);
-	padding: 15px;
+	padding: 20px 15px;
 	font-size: 12pt;
 	font-weight: bold;
 	text-align: center;
