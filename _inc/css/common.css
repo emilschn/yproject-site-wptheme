@@ -92,6 +92,36 @@ button.red {
 	border: 0px;
 	background: #FFFFFF;
 }
+.button.more-content {
+        background: none repeat scroll 0 0 #FFF;
+        border: 2px solid #333;
+        color: #333;
+}
+/*******************************************************************************
+* SCROLLBAR VISIBLE - NAVIGATEUR CHROME
+*******************************************************************************/
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+    width: 12px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .2);
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ffffff;
+}
 
 /*******************************************************************************
 * NAV BAR
@@ -114,6 +144,10 @@ nav#main > div#menu {
 	margin: auto;
 	padding: 10px;
 	background: #FFFFFF;
+        -moz-box-shadow: 1px 1px 5px #E4E4E4;
+        -webkit-box-shadow: 1px 1px 5px #E4E4E4;
+        -o-box-shadow: 1px 1px 5px #E4E4E4;
+        box-shadow: 1px 1px 5px #E4E4E4;
 	text-align: right;
 }
 
@@ -398,7 +432,7 @@ footer > .footer-container {
 footer > .footer-container > section:first-child { padding: 25px 0px 35px; }
 footer > .footer-container > section:nth-child(2) { background: #FFFFFF; }
 footer h3 {
-	font-size: 18pt;
+	font-size: 16pt;
 	font-weight: bold;
 	text-transform: uppercase;
 	color: #FFF;
@@ -411,7 +445,7 @@ footer li {
 	margin: 8px 0px;
 }
 footer a{
-	font-size: 15pt;
+	font-size: 13pt;
 	font-weight: normal;
 	text-transform: uppercase;
 	color: #FFF;
@@ -473,8 +507,8 @@ footer > .footer-container > section:nth-child(2) > div:nth-child(1){
 }
 footer > .footer-container > section:nth-child(2) > div:nth-child(2){
 	position: relative;
-	width: 180px;
-	margin-top: 55px;
+	width: 200px;
+	margin-top: 74px;
 	margin-left: 4%;
 }
 footer > .footer-container > section:nth-child(2) > div:nth-child(3){
@@ -484,15 +518,6 @@ footer > .footer-container > section:nth-child(2) > div:nth-child(3){
 footer > .footer-container > section:nth-child(2) > div:nth-child(4){
 	width: 22%;
 	margin-left: 3%;
-}
-footer p.label {
-	position: absolute;
-	background-color: #FFFFFF;
-	padding: 0 10px;
-	margin-left: 3.5%;
-	top: -30px;
-	left: 18%;
-	letter-spacing: 2px;
 }
 footer > .footer-container > section div#lemonway p {
 	font-size: 10pt;       
@@ -754,7 +779,8 @@ body.page-template-template-discover-projects-php .wdg-component-projects-previe
 body.page-template-template-discover-projects-php .wdg-component-projects-preview .block-projects {
 	height: auto;
 	max-height: 1240px;
-	margin: 0px;
+	margin: auto;
+        padding-top: 5px;
 	overflow-y: hidden;
 }
 
@@ -780,4 +806,15 @@ body.page-template-template-discover-projects-php div#content > div:last-child .
 *******************************************************************************/
 body.bp-user #item-header {
 	 margin-top: 80px;
+}
+
+/*******************************************************************************
+* TEMPLATE - SINGLE CAMPAIGN INVEST
+*******************************************************************************/
+#template-single-campaign-invest .progress-bar{
+    min-width: 0;
+    width: 360px;
+    max-width: 95%;
+    top: auto;
+    margin: auto;
 }

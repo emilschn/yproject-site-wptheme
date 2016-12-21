@@ -92,19 +92,28 @@ YPUIFunctions = (function($) {
 			
 			
 			//Apparition bouton OK pour connexion
-			if ($('.model-form #password').val() !== "" && $('.model-form #password').val() !== undefined) {
-				$('.model-form #submit-center').css('display', 'inline');
+                        showOkConnect = function(){
+                                $('.model-form #submit-center').css('display', 'inline');
 				$('.model-form input#password').addClass('pwd_submit');
 				$('.model-form input#connect').addClass('ok_valid');
-				
-			} else {
-				$('.model-form #password').keypress(function(){
-					$('.model-form #submit-center').css('display', 'inline');
-					$('.model-form input#password').addClass('pwd_submit');
-					$('.model-form input#connect').addClass('ok_valid');
-				});
-			}
-			
+                        };
+                        $('#menu .btn-user').click(function(){
+                            if($('#menu .btn-user').hasClass("active")){
+                                 if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "" && $('#rememberme').is(':checked')) {
+                                    console.log("données ok");
+                                    showOkConnect();
+                                }
+                            }
+                        });
+                            
+                        
+                        $('.model-form #identifiant').bind("keypress click",function(){
+                                showOkConnect();
+                        });
+                        $('.model-form #password').bind("keypress click",function(){
+                                showOkConnect();
+                        });
+                                			
 			$("#subscribe-nl-mail").keypress(function() {
 				$("#subscribe-nl-mail").addClass("retracted");
 				$("#subscribe-nl-submit").show();
@@ -411,7 +420,7 @@ YPUIFunctions = (function($) {
 				});
 			}
 		},
-
+                
 		refreshTurnoverAmountToPay: function() {
 			var roiPercent = $("#turnover-declaration").data("roi-percent");
 			var costsOrga = $("#turnover-declaration").data("costs-orga");

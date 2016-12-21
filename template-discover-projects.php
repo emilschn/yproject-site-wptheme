@@ -249,7 +249,7 @@ else {
 			</section>
 			
 			<div class="align-center">
-				<button><?php _e( "Voir plus", 'yproject' ); ?></button>
+				<button class="button big more-content"><?php _e( "Voir plus de projets", 'yproject' ); ?></button>
 			</div>
 
 		</div><!-- .padder -->
