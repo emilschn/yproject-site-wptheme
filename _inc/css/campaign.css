@@ -386,7 +386,12 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left span:last-child {
         font-size: 9pt;
 }
-
+div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.end-sentence {
+        margin: 20px auto;
+        text-align: justify;
+        font-size: 12pt;
+        text-transform: uppercase;
+}
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right a.button.red {
 	display: inline-block;
 	width: -webkit-calc(100% - 32px);
