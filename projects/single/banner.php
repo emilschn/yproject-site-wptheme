@@ -276,7 +276,7 @@ if (count($current_organisations) > 0) {
 				
 				
 				<?php // cas d'un projet terminé et financé ?>
-				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_funded): ?>
+				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_funded && $campaign->is_funded()): ?>
                                         <?php
 					$nbinvestors = $campaign->backers_count();
                                         $invest_amount =$campaign->current_amount();
@@ -285,8 +285,17 @@ if (count($current_organisations) > 0) {
                                                 <?php echo $nbinvestors." ". __("personnes","yproject")." ". __("ont investi","yproject") ." ". $invest_amount ." ". __("pour propulser ce projet à impact positif","yproject");?>
                                         </div>
                                         <a href="<?php echo home_url( '/les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
-				<?php endif; ?>
 				
+                                        
+                                <?php // cas d'un projet terminé et non financé ?>
+                                <?php elseif($campaign_status == ATCF_Campaign::$campaign_status_funded && !$campaign->is_funded()): ?>            
+                                        <div class="end-sentence">
+                                                <?php _e("Malheureusement, ce projet n'a pas &eacute;t&eacute; propuls&eacute;","yproject"); ?>
+                                        </div>
+                                        <a href="<?php echo home_url( '/les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+				   
+                                <?php endif; ?>
+                                      				
 			</div>
 
 		</div>
