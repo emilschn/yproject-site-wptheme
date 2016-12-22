@@ -37,7 +37,9 @@
 								<img class="slide" id="img-slide-<?php echo $i?>" src="<?php echo $img; ?>"/> 
 
 								<div class="message-banner">
-									<p class="screen-message"><?php echo $campaign->data->post_title; ?></p>
+                                                                    <!--<div class="screen-message-container">-->
+                                                                        <p class="screen-message"><?php echo $campaign->data->post_title; ?></p>
+                                                                    <!--</div>-->
 								</div>
 								<div id="button-container">
 									<a class="button-slide" href="<?php echo get_permalink($project_id); ?>"><?php _e("D&eacute;couvrir le projet", "yproject") ?></a>

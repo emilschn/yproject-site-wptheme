@@ -690,28 +690,35 @@ body.page-template-template-discover-projects-php header .header-container > div
 	width: -webkit-calc(100% - 275px);
 	width: -moz-calc(100% - 275px);
 	width: calc(100% - 275px);
-	height: 312px;
+	height: 250px;/*312px*/
+        top: 212px;
 	background: rgba(0, 0, 0, 0.4);
 }
 body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner:after {
 	border-top: 315px solid rgba(0, 0, 0, 0.4);
 }
-body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner .screen-message {
-	min-height: 100px;
-	margin: 25px 20px;
+/*body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner .screen-message-container {
+        height: 141px;
+	margin: 20px 20px;
 	padding: 0px 0px 20px;
 	border-bottom: 1px solid #FFFFFF;
-	font-size: 35pt;
-    font-family: Trebuchet MS, sans-serif;
+}*/
+body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner .screen-message {
+	min-height: 60px;
+	margin: 20px 20px;
+	padding: 0px 0px 20px;
+        border-bottom: 1px solid #FFFFFF;
+	font-size: 24pt;/*35pt*/
+        font-family: Trebuchet MS, sans-serif;
 	text-transform: uppercase;
 	text-align: left;
 	color: #FFF;
 }
 body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider .slider-container #slider #button-container {
 	display: block;
-	width: 380px;
+	width: 310px;
 	left: 0px;
-	top: 330px;
+	top: 335px;
 }
 body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider .slider-container #slider #button-container .button-slide {
 	width: auto;
