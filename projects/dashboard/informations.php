@@ -384,6 +384,7 @@ function print_informations_page()
                     "id"			=> "new_maximum_goal",
                     "type"			=> "number",
                     "label"			=> "Montant maximum",
+                    "infobubble"	=> "C'est le montant maximum de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD",
                     "value"			=> $campaign->goal(false),
                     "right_icon"	=> "eur",
                     "min"			=> 500,
@@ -430,7 +431,7 @@ function print_informations_page()
                     <label class="column-title" style="margin-left: 270px">Chiffre d'affaires pr&eacute;visionnel</label>
                     <label class="column-title" style="margin-left: 10px; width: 260px">
                         <?php echo __('Montant des Royalties reversées', 'yproject')."&nbsp;".__("pour","yproject")?>
-                        <span id="total-funding">---</span>&nbsp;&euro;*
+                        <span id="total-funding">---</span>&nbsp;&euro;
                         <?php echo "&nbsp;".__("investis"); ?>
                     </label>
                 </div>

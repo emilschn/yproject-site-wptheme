@@ -887,12 +887,11 @@ var WDGProjectDashboard = (function ($) {
 	},
         /**
          * Calcul du montant total de la collecte incluant la commission WDG
+         * need = montant max incluant la commission de WDG
          */
         calculCollect: function (){
             if (need!==""){
-                collect = need*1.1;
-                remb = collect*1.1;
-                var collect_format = WDGProjectDashboard.numberFormat(collect);
+                var collect_format = WDGProjectDashboard.numberFormat(need);
                 $("#total-funding").html(collect_format);
             }
         },
