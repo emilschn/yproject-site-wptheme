@@ -455,7 +455,7 @@ function print_informations_page()
                                         <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?>
                                         &euro;
                                         <?php endif; ?>
-                                        <!--montant des royalties reversés par année-->
+                                        <!--montant des royalties reversées par année-->
                                         <span class="like-input-center">
                                             <p id="roi-amount-<?php echo $i;?>">0 €</p>
                                             <!--<input class="input-center" type="text" id="new-estimated-roi-<?php echo $i;?>" disabled="disabled"/>-->
@@ -468,10 +468,13 @@ function print_informations_page()
                     }
                      ?>
                 </ul>
-
+                <!-- Total de royalties reversées -->
+                <div class="field">
+                    <label style="padding-left: 45px;">TOTAL</label><span class="like-input-center" id="total-roi" style="margin-left: 350px">---</span> &euro;
+                </div>
                 <?php DashboardUtility::create_save_button("projectfunding_form"); ?>
             </form>
-            <!-- Résultats de la simulation -->
+            <!-- Résultats de la simulation -->          
             <div class="field" id="calc-funding">
                 <p id="info-roi-project" class="calc-result">
                     <?php _e('Avec ce pourcentage, mes investisseurs auront retrouvé','yproject');?>

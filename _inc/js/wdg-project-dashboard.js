@@ -891,7 +891,8 @@ var WDGProjectDashboard = (function ($) {
          */
         calculCollect: function (){
             if (need!==""){
-                var collect_format = WDGProjectDashboard.numberFormat(need);
+                collect = need;
+                var collect_format = WDGProjectDashboard.numberFormat(collect);
                 $("#total-funding").html(collect_format);
             }
         },
