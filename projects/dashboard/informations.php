@@ -427,8 +427,12 @@ function print_informations_page()
                 ?>
 
                 <div class="field">
-                    <label>Chiffre d'affaires pr&eacute;visionnel</label>
-                    <label style="margin-left: 320px"><?php _e('Montant des royalties reversés', 'yproject'); ?></label>
+                    <label class="column-title" style="margin-left: 270px">Chiffre d'affaires pr&eacute;visionnel</label>
+                    <label class="column-title" style="margin-left: 10px; width: 260px">
+                        <?php echo __('Montant des Royalties reversées', 'yproject')."&nbsp;".__("pour","yproject")?>
+                        <span id="total-funding">---</span>&nbsp;&euro;*
+                        <?php echo "&nbsp;".__("investis"); ?>
+                    </label>
                 </div>
                 <ul id="estimated-turnover">
                     <?php
