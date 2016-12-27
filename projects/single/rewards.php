@@ -55,7 +55,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 
 						<span class="uppercase"><?php _e("Je recevrai", 'yproject'); ?></span> <span class="roi_amount_user">0</span> &euro;* <br />
 						<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span> % <?php _e("du chiffre d'affaire vers&eacute; tous les trimestres.", 'yproject'); ?><br />
-						
+                                                
 						<div>
 							<table>
 								<tr>
@@ -68,7 +68,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 									</td>
 									<?php $index++; endforeach; ?>
 								</tr>
-							</table>
+							</table>                                       
 						</div>
 
 					<?php else: ?>
@@ -80,12 +80,13 @@ $estimated_turnover = $campaign->estimated_turnover();
 							<a href="#register" id="register" class="wdg-button-lightbox-open button red" data-lightbox="register" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Inscription", 'yproject'); ?></a>
 							<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button red" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Connexion", 'yproject'); ?></a>
 						</div>
-
+                                                
 					<?php endif; ?>
-
+                                                
 				<?php endif; ?>
+                                <div class="arrow-line"><div class="arrow-end"></div></div>
 			</div>
-
+                        
 		<?php if (is_user_logged_in()): ?>
 			<div class="project-rewards-alert">
 				<?php _e("Rendement vis&eacute; :", "yproject"); ?> 
