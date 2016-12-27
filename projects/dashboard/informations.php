@@ -398,7 +398,7 @@ function print_informations_page()
                     "value"			=> $campaign->funding_duration(),
                     "suffix"		=> " ann&eacute;es",
                     "min"			=> 1,
-                    "max"			=> 10,
+                    "max"			=> 20,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
 
