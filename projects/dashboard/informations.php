@@ -469,8 +469,8 @@ function print_informations_page()
                      ?>
                 </ul>
                 <!-- Total de royalties reversées -->
-                <div class="field">
-                    <label style="padding-left: 45px;">TOTAL</label><span class="like-input-center" id="total-roi" style="margin-left: 350px">---</span> &euro;
+                <div id="total-roi-container" class="field">
+                    <label>TOTAL</label><span class="like-input-center" id="total-roi" style="margin-left: 350px">---</span> &euro;
                 </div>
                 <?php DashboardUtility::create_save_button("projectfunding_form"); ?>
             </form>
