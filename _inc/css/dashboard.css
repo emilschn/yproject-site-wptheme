@@ -418,11 +418,13 @@
     border-top: 1px solid grey;
     width: 93.8%;
     margin-left: auto;
-    margin-top: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 #page-informations #tab-funding #annual-gain-container {
     width: 93.8%;
     margin-left: auto;
+    margin-top: 0;
 }
 #page-informations .like-input-center{
     padding: 3px 0;
@@ -432,15 +434,6 @@
 #page-informations .like-input-center p{
     display: inline-block;
     width: 200px;
-}
-#page-informations .calc-result{
-    text-align: center;
-}
-#page-informations #annual-gain > .uppercase{
-    text-transform: uppercase;
-}
-#page-informations #annual-gain > .lowercase{
-    text-transform: lowercase;
 }
 
 /*******************************************************************************

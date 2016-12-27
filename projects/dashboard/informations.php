@@ -470,32 +470,14 @@ function print_informations_page()
                 </ul>
                 <!-- Total de royalties reversées -->
                 <div id="total-roi-container" class="field">
-                    <label><?php _e("TOTAL", "yproject")?></label><span class="like-input-center" id="total-roi" style="margin-left: 350px">---</span> &euro;
+                    <label><?php _e("TOTAL", "yproject")?></label><span class="like-input-center" style="margin-left: 280px"><p id="total-roi">0&nbsp;€</p></span>
                 </div>
                 <!-- Rendement annuel moyen pour les investisseurs -->
                 <div id="annual-gain-container" class="field">
-                    <label><?php _e("Rendement annuel moyen pour les investisseurs", "yrpoject") ?></label><span class="like-input-center" id="medium-rend" style="margin-left: 350px">---&nbsp;%</span>
+                    <label><?php _e("Rendement annuel moyen pour les investisseurs", "yrpoject") ?></label><span class="like-input-center" style="margin-left: 280px"><p id="medium-rend">---&nbsp;%</p></span>
                 </div>
                 <?php DashboardUtility::create_save_button("projectfunding_form"); ?>
             </form>
-            <!-- Résultats de la simulation -->          
-            <div class="field" id="calc-funding">
-                <p id="info-roi-project" class="calc-result">
-                    <?php _e('Avec ce pourcentage, mes investisseurs auront retrouvé','yproject');?>
-                    <span id="total-roi">---</span> &euro; 
-                    <?php _e('dans', 'yproject');?>
-                    <span id="nb-years">---</span>&nbsp;ans,
-                    <?php _e('pour' , 'yproject');?>
-                    <span id="total-funding">---</span>&nbsp;&euro;*
-                    <?php _e('investis', 'yproject');?>
-                </p>
-                <p id="annual-gain" class="calc-result">
-                    <?php ?>
-                    <strong class="uppercase"><?php _e('rendement annuel pour investisseur','yproject'); ?>&nbsp;:&nbsp;</strong>
-                    <span id="medium-rend" class="lowercase" >---&nbsp;%</span>
-                </p>
-                <p class="calc-result">*<?php _e('montant de la collecte, incluant la commission de WE DO GOOD', 'yproject') ?></p>
-            </div>
         </div>
 
         <div class="tab-content" id="tab-communication">

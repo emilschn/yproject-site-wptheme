@@ -881,7 +881,7 @@ var WDGProjectDashboard = (function ($) {
                 totalRoi = percent * totalca;
                 if(totalRoi){
                     var totalRoi_format = WDGProjectDashboard.numberFormat(totalRoi);
-                    $("#total-roi").html(totalRoi_format);
+                    $("#total-roi").html(totalRoi_format+" €");
                 }
             }
 	},
@@ -911,7 +911,6 @@ var WDGProjectDashboard = (function ($) {
                 mediumRend = (Math.pow((percent*totalca/collect),(1/nbYears))-1)*100;
                 var mediumRend_format = WDGProjectDashboard.numberFormat(mediumRend);
                 $("#medium-rend").html(mediumRend_format+' %');
-                $("#nb-years").html(nbYears);
             }
             else if(collect == "0" || nbYears == 0){
                 WDGProjectDashboard.initResultCalcul();
@@ -922,9 +921,9 @@ var WDGProjectDashboard = (function ($) {
          */
         verifMediumRend: function () {
             var rend = $("#medium-rend");
-            var errorHtml = " <br/>(insuffisant en dessous de 3%, étant donné le risque)";
+            var errorHtml = "<br/>(insuffisant en dessous de 3%, étant donné le risque)";
             if (mediumRend < "3" ) {
-                rend.css('color', '#EA4F51').css('display','inline-block').css('width', '220px').css('margin-left', '270px');
+                rend.css('color', '#EA4F51').css('display','inline-block').css('margin', 0);
                 rend.append(errorHtml);
             }
             else{
@@ -948,8 +947,7 @@ var WDGProjectDashboard = (function ($) {
          * réalisés par manque de données
          */
         initResultCalcul: function(){
-            $("#total-roi").html("---");
-            $("#nb-years").html("--");
+            $("#total-roi").html("0 €");
             $("#total-funding").html("---");
             $("#medium-rend").html("--- %").css('color','#2B2C2C');
             
