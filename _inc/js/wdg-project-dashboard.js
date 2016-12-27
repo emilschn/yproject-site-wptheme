@@ -922,13 +922,13 @@ var WDGProjectDashboard = (function ($) {
          */
         verifMediumRend: function () {
             var rend = $("#medium-rend");
-            var errorHtml = " (insuffisant en dessous de 3%, étant donné le risque)";
+            var errorHtml = " <br/>(insuffisant en dessous de 3%, étant donné le risque)";
             if (mediumRend < "3" ) {
-                rend.css('color', 'red');
+                rend.css('color', '#EA4F51').css('display','inline-block').css('width', '220px').css('margin-left', '270px');
                 rend.append(errorHtml);
             }
             else{
-                rend.css('color','black');
+                rend.css('color','#2B2C2C');
             }
         },
         /**

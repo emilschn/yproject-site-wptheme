@@ -420,6 +420,10 @@
     margin-left: auto;
     margin-top: 0px;
 }
+#page-informations #tab-funding #annual-gain-container {
+    width: 93.8%;
+    margin-left: auto;
+}
 #page-informations .like-input-center{
     padding: 3px 0;
     margin-left: 55px;

@@ -470,7 +470,11 @@ function print_informations_page()
                 </ul>
                 <!-- Total de royalties reversées -->
                 <div id="total-roi-container" class="field">
-                    <label>TOTAL</label><span class="like-input-center" id="total-roi" style="margin-left: 350px">---</span> &euro;
+                    <label><?php _e("TOTAL", "yproject")?></label><span class="like-input-center" id="total-roi" style="margin-left: 350px">---</span> &euro;
+                </div>
+                <!-- Rendement annuel moyen pour les investisseurs -->
+                <div id="annual-gain-container" class="field">
+                    <label><?php _e("Rendement annuel moyen pour les investisseurs", "yrpoject") ?></label><span class="like-input-center" id="medium-rend" style="margin-left: 350px">---&nbsp;%</span>
                 </div>
                 <?php DashboardUtility::create_save_button("projectfunding_form"); ?>
             </form>
