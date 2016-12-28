@@ -778,9 +778,25 @@ body.page-template-template-discover-projects-php nav#project-filter {
 	font-size: 15pt;
 }
 body.page-template-template-discover-projects-php nav#project-filter select {
+        position: relative;
+        top: -2px;
+        width: 100%;
 	height: 40px;
+        -webkit-appearance: none;/*supprime apparence par défaut due au navigateur*/
+        background-color: transparent;
+        border: 1px solid #333;
+        line-height: 40px;
 }
-
+body.page-template-template-discover-projects-php nav#project-filter div.project-filter-container {
+        width: 21%;
+        overflow: hidden;
+        background: url("../../images/common/arrow-filter.png") no-repeat right #FFF;/*image flèche provisoire*/
+}
+body.page-template-template-discover-projects-php nav#project-filter select option {
+        text-transform: lowercase;
+        padding: 10px;
+        border-bottom: 1px solid rgba(51, 51, 51, 0.05);
+}
 body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container {
 	width: 25%;
 	height: 620px;

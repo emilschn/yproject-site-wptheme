@@ -186,6 +186,9 @@
 		line-height: 30px;
 		background: #FFFFFF;
 	}
+        body.page-template-template-discover-projects-php nav#project-filter div.project-filter-container {
+                width: 100%;
+        }
 	body.page-template-template-discover-projects-php nav#project-filter select {
 		display: none;
 		width: 100%;
@@ -208,6 +211,9 @@
 	body.page-template-template-discover-projects-php nav#project-filter > span.show:after {
 		content: "-";
 	}
+        body.page-template-template-discover-projects-php nav#project-filter select.project-filter-select option {
+                padding: 10px 8%;
+        }            
 	body.page-template-template-discover-projects-php .wdg-component-projects-preview .block-projects {
 		display: block;
                 width: 960px;

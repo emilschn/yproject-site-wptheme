@@ -122,6 +122,7 @@ else {
 ?>
 		<nav id="project-filter">
 			<span><?php _e( "Filtres", 'yproject' ); ?> <span class="only-inf997 inline"><?php _e( "projets", 'yproject' ); ?></span></span>
+                        <div class="project-filter-container">
 			<select id="project-filter-impact" class="project-filter-select">
 				<option value="all" selected="selected"><?php _e( "Tous les impacts", 'yproject' ); ?></option>
 				<?php
@@ -133,9 +134,11 @@ else {
 					'hide_empty' => false
 				) );
 				foreach ( $impacts_list as $impact ): ?>
-				<option value="<?php echo $impact->slug; ?>"><?php echo $impact->name; ?></option>
+                                <option value="<?php echo $impact->slug; ?>"><?php echo $impact->name; ?></option>
 				<?php endforeach; ?>
 			</select>
+                        </div>
+                        <div class="project-filter-container">
 			<select id="project-filter-location" class="project-filter-select">
 				<option value="all" selected="selected"><?php _e( "Toutes les r&eacute;gions", 'yproject' ); ?></option>
 				<?php $region_list = atcf_get_regions(); ?>
@@ -143,12 +146,16 @@ else {
 				<option value="<?php echo implode($dpt_list, ','); ?>"><?php echo $region ?></option>
 				<?php endforeach; ?>
 			</select>
+                        </div>
+                        <div class="project-filter-container">
 			<select id="project-filter-step" class="project-filter-select">
 				<option value="all" selected="selected"><?php _e( "Toutes les &eacute;tapes de campagne", 'yproject' ); ?></option>
 				<option value="vote"><?php _e( "En vote", 'yproject' ); ?></option>
 				<option value="collecte"><?php _e( "En financement", 'yproject' ); ?></option>
 				<option value="funded"><?php _e( "Financ&eacute;", 'yproject' ); ?></option>
 			</select>
+                        </div>
+                        <div class="project-filter-container">
 			<select id="project-filter-activity" class="project-filter-select">
 				<option value="all" selected="selected"><?php _e( "Tous les secteurs d'activit&eacute;", 'yproject' ); ?></option>
 				<?php
@@ -163,6 +170,7 @@ else {
 				<option value="<?php echo $activity->slug; ?>"><?php echo $activity->name; ?></option>
 				<?php endforeach; ?>
 			</select>
+                        </div>
 		</nav>
 <?php
 	$cache_project_filters = ob_get_contents();
