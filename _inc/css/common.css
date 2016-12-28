@@ -751,8 +751,11 @@ body.page-template-template-discover-projects-php header .header-container > div
 	float: left;
 	margin-right: 20px;
 }
+body.page-template-template-discover-projects-php header .header-container > div > div#wdg-project-stats p span {
+        font-size: 20pt;
+}
 body.page-template-template-discover-projects-php header .header-container > div > div#wdg-project-stats p span span {
-	font-size: 30pt;
+	font-size: 25pt;
 	letter-spacing: 2px;
 	font-weight: bold;
 }
