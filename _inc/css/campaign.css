@@ -1528,7 +1528,7 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder button.init_invest_count { display: block; margin: 7px auto; }
 	div#content.version-3 div.project-rewards-content table tr td { min-width: 40px; padding: 0px 3px; }
 	div#content.version-3 div.project-description div.project-description-item { width: 96%; margin: 25px 2%; }
-	div#content.version-3 div.project-description div.project-description-item img.project-content-icon { display: none; }
+	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { display: none; }
 	div#content.version-3 div.project-description div.project-description-item img.grey-triangle { display: none; }
 	div#content.version-3 div.project-description div.projects-desc-content { width: 100% !important; margin: 0px; padding: 0px; left: 0px; }
 	div#content.version-3 div.project-description div.projects-desc-content h2 { margin: 15px 10px; font-size: 18px; text-align: center; text-transform: none; }
