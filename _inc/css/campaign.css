@@ -461,12 +461,17 @@ div#content.version-3 div.project-rewards-content div.project-rewards-padder {
         position: relative;
 }
 div#content.version-3 div.project-rewards-content div.project-rewards-padder p.half-form-count input {
-	height: 30px;
+	height: 50px;
 	background: rgba(51, 51, 51, 0.05);
 	border: 2px solid rgba(51, 51, 51, 0);
+        padding-left: 10px;
 }
-div#content.version-3 div.project-rewards-content div.project-rewards-padder p.half-form-count span {
-	font-size: 14pt;
+div#content.version-3 div.project-rewards-content div.project-rewards-padder table tbody {
+        font-family: Trebuchet MS, sans-serif;
+}
+div#content.version-3 div.project-rewards-content div.project-rewards-padder p.half-form-count span, div#content.version-3 div.project-rewards-content div.project-rewards-padder span:nth-child(2), div#content.version-3 div.project-rewards-content div.project-rewards-padder span:nth-child(4) {
+	font-size: 16pt;
+        letter-spacing: 0.125em;
 }
 div#content.version-3 div.project-rewards-content div.project-rewards-padder p.half-form-count span.input-suffix {
 	display: inline-block;
@@ -475,7 +480,9 @@ div#content.version-3 div.project-rewards-content div.project-rewards-padder p.h
 	font-size: 12pt;
 }
 div#content.version-3 div.project-rewards-content div.project-rewards-padder p.half-form-count button {
-	height: 36px;
+	height: 56px;
+        font-size: 12pt;
+        letter-spacing: 0.125em;
 }
 
 div#content.version-3 div.project-rewards-content div.project-rewards-padder p {
@@ -483,8 +490,16 @@ div#content.version-3 div.project-rewards-content div.project-rewards-padder p {
 	margin: 10px auto;
 }
 div#content.version-3 div.project-rewards-content span.roi_percent_user, div#content.version-3 div.project-rewards-content span.roi_amount_user {
-    font-weight: bold;
+        font-weight: bold;
 	color: #93626D;
+}
+div#content.version-3 div.project-rewards-content span.roi_amount_user {
+        font-size: 16pt;
+}
+div#content.version-3 div.project-rewards-content div.roi_amount_base {
+        height: 5px;
+        margin-bottom: 5px;
+        background-color: #333;
 }
 div#content.version-3 div.project-rewards-content table {
     margin: 30px auto 15px;
@@ -521,15 +536,14 @@ div#content.version-3 div.project-rewards-content table tr:last-child td span.ro
 }
 div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-line {
         position: relative;
-        bottom: 38px;
-        width: 40%;
+        bottom: 43px;
         margin: 0 auto;
-        border-bottom: 2px solid #333; 
+        border-bottom: 1px solid #333; 
 }
 div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-end {
         position: absolute;
         bottom: -6px;
-        right: -10px;
+        right: -2px;
         width: 0;
         height: 0;
         border-top: 6px solid transparent;
@@ -544,7 +558,8 @@ div#content.version-3 div.project-rewards-content div.project-rewards-alert span
 	font-size: 11px;
 }
 div#content.version-3 div.project-rewards-content input.button.red {
-	padding: 10px 80px;
+        width: 288px;
+	padding: 20px 80px;
 	font-size: 12pt;
 	font-weight: bold;
 }
@@ -1529,4 +1544,12 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
 	div#content.version-3 div.project-responsive-buttons a img { width: 80px; }
 	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered { position: fixed; display: block; bottom: 50px; right: 0px; padding: 5px; background: #FFFFFF; }
 	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered a img { width: 50px; }
+}
+
+
+/*******************************************************************************
+* RESPONSIVE MOBILE
+*******************************************************************************/
+@media screen and (max-width: 400px) {
+        div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-line { width: 98% !important; }
 }
