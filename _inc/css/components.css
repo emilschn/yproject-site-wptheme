@@ -92,7 +92,8 @@
     left: 10%;
 }
 .wdg-component-slider #button-container .button-slide, .wdg-component-slider .slider-container #slider .slide-1button #button-container .button-slide{
-    width: 32%; 
+    width: 32%;
+    margin: 0% 1.5%;
     text-align: center;
     font-size: 11pt;
 	line-height: 55px;

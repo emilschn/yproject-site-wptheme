@@ -722,7 +722,7 @@ body.page-template-template-discover-projects-php header .header-container > div
 }
 body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider .slider-container #slider #button-container .button-slide {
 	width: auto;
-	margin-left: 20px;
+	margin: 0px 0px 0px 20px;
 	padding: 20px 60px;
 }
 
