@@ -213,7 +213,10 @@
 	}
         body.page-template-template-discover-projects-php nav#project-filter select.project-filter-select option {
                 padding: 10px 8%;
-        }            
+        }
+        body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-slider {
+                margin-bottom: 15px;
+        }
 	body.page-template-template-discover-projects-php .wdg-component-projects-preview .block-projects {
 		display: block;
                 width: 960px;
