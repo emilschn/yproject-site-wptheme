@@ -93,7 +93,7 @@ button.red {
 	background: #FFFFFF;
 }
 .button.more-content {
-        background: none repeat scroll 0 0 #FFF;
+        background: none repeat scroll 0 0 transparent;
         border: 2px solid #333;
         color: #333;
 }
