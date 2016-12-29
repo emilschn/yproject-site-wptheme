@@ -212,7 +212,7 @@
         overflow: -moz-scrollbars-horizontal;/* Firefox */ 
             -ms-overflow-style: scrollbar;/* Edge */
 	overflow-x: auto;
-        margin-bottom: 15px;
+        margin-bottom: 0.8%;
 }
 .wdg-component-projects-preview .block-projects {
     z-index: 0;

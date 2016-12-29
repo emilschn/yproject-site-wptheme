@@ -614,7 +614,7 @@ footer > .footer-container > section:nth-child(2) > div:last-child a{
 }
 #home-video #video-content{
     background-color: #E1E3E2;
-    margin-top: 3%;
+    margin-top: 40px;
     max-width: 100%;
     background-image: url("../../images/header-video-nb.png");
     background-position: center center;
