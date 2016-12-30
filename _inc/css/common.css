@@ -222,6 +222,8 @@ nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.cur
     border: 4px solid #E1E3E2;
 }
 .submenu-style ul.submenu-list {
+        max-height: 400px;
+        overflow-y: auto;
 	margin: 0px;
 	padding-left: 0px;
 	list-style: none;

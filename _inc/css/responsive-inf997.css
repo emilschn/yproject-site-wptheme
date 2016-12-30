@@ -72,7 +72,9 @@
 		height: -moz-calc(100% - 150px);
 		height: calc(100% - 150px);
 	}
-	
+	.submenu-style ul.submenu-list {
+                max-height: 200px; /*hauteur max pour mobile 320*480px*/
+        }
 	
 	footer > .footer-container { background-image: none; }
 	footer > .footer-container > section:nth-child(1) > div {
