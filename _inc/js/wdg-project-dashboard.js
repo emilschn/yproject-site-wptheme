@@ -244,7 +244,7 @@ var WDGProjectDashboard = (function ($) {
                             for(var i=0; i<new_nb_years-nb_years_li_existing;i++){
                                 newlines = newlines+
                                     '<li class="field">' +
-                                    '<label>Année '+(i+1+nb_years_li_existing)+'<span class="year"></span></label>'+
+                                    '<label>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></label>'+
                                     '<span class="field-container">'+
                                     '&nbsp;<span class="field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
                                     '<i class="right fa fa-eur" aria-hidden="true"></i>'+
