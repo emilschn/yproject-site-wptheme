@@ -460,9 +460,9 @@ body.page-template-template-discover-projects-php .wdg-component-projects-previe
     background: repeating-linear-gradient(
     -45deg,
     #00879B,
-    #00879B 7px,
-    #D3EAE9 0.5px,
-    #00879B 7.5px);
+    #00879B 5px,
+    #E1E3E2 5px,
+    #00879B 6.3px);
 }
 .progress-bar .progress-percent { 
     display: -webkit-flex;
