@@ -273,13 +273,13 @@ nav#main > div#menu > a#btn-search.active > img {
 	border: 0px;
 	background: #E1E3E2;
 	margin: 10px;
-	width: -webkit-calc(100% - 30px);
-	width: -moz-calc(100% - 30px);
-	width: calc(100% - 30px);
-	height: -webkit-calc(100% - 30px);
-	height: -moz-calc(100% - 30px);
-	height: calc(100% - 30px);
-	padding: 5px;
+	width: -webkit-calc(100% - 50px);
+	width: -moz-calc(100% - 50px);
+	width: calc(100% - 50px);
+	height: -webkit-calc(100% - 50px);
+	height: -moz-calc(100% - 50px);
+	height: calc(100% - 50px);
+	padding: 15px;
 }
 /*Pour éviter backgroung yellow quand champ prérempli sur chrome*/
 input:-webkit-autofill {
@@ -411,11 +411,10 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 }
 @media screen and (max-width: 1300px) {
 	#submenu-user { right: 10px; }
-	#submenu-search { right: 74px }
 }
 @media screen and (min-width: 1301px) {
         #submenu-user { position: relative; top: 10px; left: 977px; }
-        #submenu-search { position: relative; top: 10px; left: 912px; }
+        #submenu-search { position: relative; top: 10px; left: 916px; }
 }
 
 /*******************************************************************************
