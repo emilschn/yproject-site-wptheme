@@ -907,6 +907,7 @@ var WDGProjectDashboard = (function ($) {
                 }
             }
             // Ecarter les dénominateurs à zéro
+            mediumRend = null;
             if(collect != "0" && nbYears != 0){
                 mediumRend = (Math.pow((percent*totalca/collect),(1/nbYears))-1)*100;
                 var mediumRend_format = WDGProjectDashboard.numberFormat(mediumRend);
