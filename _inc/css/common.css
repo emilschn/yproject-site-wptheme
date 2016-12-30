@@ -281,6 +281,10 @@ nav#main > div#menu > a#btn-search.active > img {
 	height: calc(100% - 30px);
 	padding: 5px;
 }
+/*Pour éviter backgroung yellow quand champ prérempli sur chrome*/
+input:-webkit-autofill {
+	-webkit-box-shadow: inset 0 0 0px 9999px #E1E3E2;
+}
 
 
 
