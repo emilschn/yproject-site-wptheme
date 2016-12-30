@@ -266,7 +266,6 @@ nav#main > div#menu > a#btn-search.active > img {
 	width: -webkit-calc(62px + (100% - 1280px) / 2);
 	width: -moz-calc(62px + (100% - 1280px) / 2);
 	width: 285px;
-	height: 50px;
 	font-size: 8pt;
 	text-align: left;
 }
