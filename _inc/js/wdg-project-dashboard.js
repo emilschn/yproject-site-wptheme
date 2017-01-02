@@ -267,7 +267,7 @@ var WDGProjectDashboard = (function ($) {
                         }
                         nb_years_li_existing = Math.max(new_nb_years,nb_years_li_existing);
                         //Calculs de tous les élements et rattachement du keyup/click sur changement de CA
-                        WDGProjectDashboard.calculAndShowResult();
+                        WDGProjectDashboard.calculAndShowResult();                       
                     });
                     $("#new_funding_duration").trigger('change');
                     $("#new_funding_duration").keyup(function(){
@@ -975,11 +975,11 @@ var WDGProjectDashboard = (function ($) {
          * Récupère les données renseignées dans l'onglet "besoin de financement"
          * selon qu'elles sont encore modifiables (input) ou non (span)
          */
-        getDataCalculator: function(){
-            new_minimum_goal = $("#new_minimum_goal").val() == null ? $.trim($("span[data-id=new_minimum_goal]").text()) : $("#new_minimum_goal").val();
-            need = $("#new_maximum_goal").val() == null ? $.trim($("span[data-id=new_maximum_goal]").text()) : $("#new_maximum_goal").val();
-            new_roi_percent_estimated = $("#new_roi_percent_estimated").val() == null ? $.trim($("span[data-id=new_roi_percent_estimated]").text()) : $("#new_roi_percent_estimated").val();
-            new_funding_duration = ($("#new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration]").text()) : $("#new_funding_duration").val();
+        getDataCalculator: function(){           
+            new_minimum_goal = $("#new_minimum_goal").val() == null ? $.trim($("span[data-id=new_minimum_goal] span").text()) : $("#new_minimum_goal").val();
+            need = $("#new_maximum_goal").val() == null ? $.trim($("span[data-id=new_maximum_goal] span").text()) : $("#new_maximum_goal").val();
+            new_roi_percent_estimated = $("#new_roi_percent_estimated").val() == null ? $.trim($("span[data-id=new_roi_percent_estimated] span").text()) : $("#new_roi_percent_estimated").val();
+            new_funding_duration = ($("#new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration] span").text()) : $("#new_funding_duration").val();
             new_estimated_turnover_0 = $("#new_estimated_turnover_0").val() == null ? $.trim($("span[data-id=new_estimated_turnover_0]").text()) : $("#new_estimated_turnover_0").val();
         },
         /**

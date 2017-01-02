@@ -375,7 +375,7 @@ function print_informations_page()
                     "label"			=> "Objectif",
                     "infobubble"	=> "C'est le seuil de validation de votre lev&eacute;e de fonds, vous pourrez ensuite viser le montant maximum !",
                     "value"			=> $campaign->minimum_goal(false),
-                    "right_icon"	=> "eur",
+                    "suffix"            => "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
@@ -386,7 +386,7 @@ function print_informations_page()
                     "label"			=> "Montant maximum",
                     "infobubble"	=> "C'est le montant maximum de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD",
                     "value"			=> $campaign->goal(false),
-                    "right_icon"	=> "eur",
+                    "suffix"            => "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
@@ -396,7 +396,7 @@ function print_informations_page()
                     "type"			=> "number",
                     "label"			=> "Dur&eacute;e du financement",
                     "value"			=> $campaign->funding_duration(),
-                    "suffix"		=> " ann&eacute;es",
+                    "suffix"		=> "<span>&nbsp;ann&eacute;es</span>",
                     "min"			=> 1,
                     "max"			=> 20,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
@@ -408,7 +408,7 @@ function print_informations_page()
                     "label"			=> "Royalties",
                     "infobubble"	=> "Pourcentage de chiffre d'affaires correspondant au montant maximum.",
                     "value"			=> $campaign->roi_percent_estimated(),
-                    "suffix"		=> "&nbsp;% du chiffre d'affaires",
+                    "suffix"		=> "<span>&nbsp;% du chiffre d'affaires</span>",
                     "min"			=> 0,
                     "max"			=> 100,
                     "step"			=> 0.01,
@@ -442,18 +442,18 @@ function print_informations_page()
                         $i=0;
                         foreach (($campaign->estimated_turnover()) as $year => $turnover) :?>
                             <li class="field">
-                                <label>Année <span class="year"><?php echo ($i+1); ?></span></label>
-                                <span class="field-container">
+                                <label>Année <span class="year"><?php echo ($i+1); ?></span></label>                           
+                                <span class="field-container" <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?> style="padding-left: 80px;" <?php endif; ?>>
                                         <span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
                                                 <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
                                                 <i class="right fa fa-eur" aria-hidden="true"></i>
                                                 <input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />                                         
                                                 <?php else: ?>
-                                                <?php echo $turnover; ?> 
+                                                <?php echo $turnover; ?>
                                                 <?php endif; ?>
                                         </span>
                                         <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?>
-                                        &euro;
+                                            <span style="padding-right: 70px;">&euro;</span>
                                         <?php endif; ?>
                                         <!--montant des royalties reversées par année-->
                                         <span class="like-input-center">
