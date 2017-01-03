@@ -404,30 +404,34 @@
 
 #page-informations #estimated-turnover {
     list-style: none;
+    margin-bottom: 0px;
 }
 
 #page-informations #estimated-turnover li {
     border-bottom: 1px solid grey;
 }
-	
+
+#page-informations #tab-funding #total-roi-container {
+    border-top: 1px solid grey;
+    width: 93.8%;
+    margin-left: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#page-informations #tab-funding #annual-gain-container {
+    width: 93.8%;
+    margin-left: auto;
+    margin-top: 0;
+}
+
 #page-informations .like-input-center{
     padding: 3px 0;
     margin-left: 55px;
-    background-color: #FFFFFF;
     text-align: center;
 }
 #page-informations .like-input-center p{
     display: inline-block;
     width: 200px;
-}
-#page-informations .calc-result{
-    text-align: center;
-}
-#page-informations #annual-gain > .uppercase{
-    text-transform: uppercase;
-}
-#page-informations #annual-gain > .lowercase{
-    text-transform: lowercase;
 }
 
 #page-informations div.field > label {
