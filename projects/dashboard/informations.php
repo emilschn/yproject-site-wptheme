@@ -476,7 +476,9 @@ function print_informations_page()
                 <div id="annual-gain-container" class="field">
                     <label><?php _e("Rendement annuel moyen pour les investisseurs", "yrpoject") ?></label><span class="like-input-center" style="margin-left: 280px"><p id="medium-rend">---&nbsp;%</p></span>
                 </div>
+                <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
                 <?php DashboardUtility::create_save_button("projectfunding_form"); ?>
+                <?php endif; ?>
             </form>
         </div>
 
