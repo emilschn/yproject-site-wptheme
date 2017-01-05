@@ -211,6 +211,7 @@ var WDGProjectDashboard = (function ($) {
                     //fermeture de la lightbox d'édition après enregistrement des infos
                     $("#wdg-lightbox-editOrga form.wdg-forms").submit(function(e){
                         e.preventDefault();
+                        var thisForm = $(this);
                         
                         var org_id, org_name, org_email, org_legalform,
                         org_idnumber, org_rcs,org_capital, org_ape, org_address, org_postal_code,
@@ -232,10 +233,15 @@ var WDGProjectDashboard = (function ($) {
                         org_bankownername = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankownername]').val();
                         org_bankowneraddress = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneraddress]').val();
                         org_bankowneriban = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneriban]').val();
-                        org_bankownerbic = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]').val()
+                        org_bankownerbic = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]').val();
 
-
-
+                        //Désactive les champs
+                        var save_button = $("#"+$(this).attr("id")+"_button");
+                        save_button.find(".button-text").hide();
+                        save_button.find(".button-waiting").show();
+                        $(":input", this).prop('disabled', true);
+                        thisForm.find('.feedback_save span').fadeOut();
+                        
                         $.ajax({  
                             'type': "POST",
                             'url': ajax_object.ajax_url,
@@ -257,17 +263,23 @@ var WDGProjectDashboard = (function ($) {
                                 'org_bankownername': org_bankownername,
                                 'org_bankowneraddress': org_bankowneraddress,
                                 'org_bankowneriban': org_bankowneriban,
-                                'org_bankownerbic': org_bankownerbic
+                                'org_bankownerbic': org_bankownerbic,
                             }
 
                         }).done(function(result){
                             var jsonResult = JSON.parse(result);
-                            feedback = jsonResult;
-                            
-                            //WDGProjectDashboard.updateOrgaForm(feedback);
-                            
+                            feedback = jsonResult;                          
+
                             $("#wdg-lightbox-editOrga").hide();
-                        });
+
+                        }).fail(function() {
+                            thisForm.find('.save_fail').fadeIn();
+                        }).always(function() {
+                            //Réactive les champs
+                            save_button.find(".button-waiting").hide();
+                            save_button.find(".button-text").show();
+                            thisForm. find(":input").prop('disabled', false);
+                        });                          
                     });
                     
                     //fermeture de la lightbox de création d'organisation après enregistrement

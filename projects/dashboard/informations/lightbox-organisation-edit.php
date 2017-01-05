@@ -191,8 +191,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
                 <input type="hidden" name="action" value="save_edit_organisation" />
                  
-                <input class= "button" type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" />
-                <?php // DashboardUtility::create_save_button("orgaedit_form"); ?>
+                <?php DashboardUtility::create_save_button("orgaedit_form"); ?>
         </form>
 
 
