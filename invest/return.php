@@ -77,12 +77,14 @@ if (isset($campaign) && is_user_logged_in()):
 			}
 		}
 
+		$buffer = "";
 		$paymentlist = edd_get_payments(array(
 		    'number'	 => -1,
 		    'download'   => $campaign->ID
 		));
 		foreach ($paymentlist as $payment) {
 			if (edd_get_payment_key($payment->ID) == $purchase_key) {
+				$buffer = "stop";
 				$page_investments = get_page_by_path('mes-investissements');
 				_e("Le paiement a d&eacute;j&agrave; &eacute;t&eacute; pris en compte. Merci de vous rendre sur la page", 'yproject');
 				?><a href="<?php echo get_permalink($page_investments->ID); ?>"><?php _e("Mes investissements", 'yproject'); ?></a>.<?php
