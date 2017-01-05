@@ -130,7 +130,7 @@ if (count($current_organisations) > 0) {
 				<div class="project-pitch-text"><?php echo html_entity_decode($campaign->summary()); ?></div>
 				
 				<?php locate_template( array("projects/common/progressbar.php"), true ); ?>
-				
+				<?php date_default_timezone_set("Europe/London"); ?>
 				
 				<?php // cas d'un projet en cours de vote ?>
 				<?php if ($campaign_status == ATCF_Campaign::$campaign_status_vote): ?>

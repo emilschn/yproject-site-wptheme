@@ -26,6 +26,7 @@
 						<?php
 						$i = 0;
 						$project_list_slider = ATCF_Campaign::get_list_most_recent( 3 );
+						date_default_timezone_set("Europe/London");
 						?>
 						<?php foreach ($project_list_slider as $project_id): ?>
 							<?php
@@ -113,6 +114,7 @@ else {
 <?php
 //*******************
 //CACHE PROJECT FILTERS
+date_default_timezone_set("Europe/London");
 $cache_project_filters = $WDG_cache_plugin->get_cache('list-project-filters', 1);
 if ($cache_project_filters !== FALSE) { echo $cache_project_filters; }
 else {
