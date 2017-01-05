@@ -23,7 +23,7 @@ global $campaign_id
         </ul>
         <?php endif; ?>
         <h1><?php _e('Cr&eacute;er une organisation','yproject')?></h1>
-        <form action="" method="POST" enctype="multipart/form-data" class="wdg-forms" data-action="save_new_organisation">
+        <form id="orgacreate_form" action="" method="POST" enctype="multipart/form-data" class="wdg-forms" data-action="save_new_organisation">
 
                 <label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?>*</label>
                 <input type="text" name="org_name" value="<?php echo filter_input(INPUT_POST, 'org_name'); ?>" /><br />
@@ -89,7 +89,9 @@ global $campaign_id
                 <input type="checkbox" name="org_capable" /><?php _e('Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette organisation.', 'yproject'); ?><br />
 
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
-                <input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" />
+                
+                <input type="hidden" name="action" value="save_new_organisation" />
+                <?php DashboardUtility::create_save_button("orgacreate_form"); ?>
         </form>
 
 
