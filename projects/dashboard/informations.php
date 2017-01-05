@@ -342,7 +342,7 @@ function print_informations_page()
                             <?php echo $str_organisations; ?>
                         </select>
                     </span>
-                    <?php if ($current_organisation!=null): ?>                      
+                    <?php if ($current_organisation!=null): ?>                   
                         <!--bouton d'édition de l'organisation-->
                         <a href="#informations" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga">
                             <?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organisation->organisation_name ?></a>

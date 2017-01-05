@@ -211,8 +211,65 @@ var WDGProjectDashboard = (function ($) {
                     //fermeture de la lightbox d'édition après enregistrement des infos
                     $("#wdg-lightbox-editOrga form.wdg-forms").submit(function(e){
                         e.preventDefault();
-                        $("#wdg-lightbox-editOrga").hide();
+                        
+                        var org_id, org_name, org_email, org_legalform,
+                        org_idnumber, org_rcs,org_capital, org_ape, org_address, org_postal_code,
+                        org_city, org_nationality, org_bankownername, org_bankowneraddress,
+                        org_bankowneriban, org_bankownerbic;
+                       
+                        org_id = $('#tab-organization #wdg-lightbox-editOrga input[name=orga_id]').val();                     
+                        org_name = $('#tab-organization #wdg-lightbox-editOrga input[name=org_name]').val();
+                        org_email = $('#tab-organization #wdg-lightbox-editOrga input[name=org_email]').val();
+                        org_legalform = $('#tab-organization #wdg-lightbox-editOrga input[name=org_legalform]').val();
+                        org_idnumber = $('#tab-organization #wdg-lightbox-editOrga input[name=org_idnumber]').val();
+                        org_rcs = $('#tab-organization #wdg-lightbox-editOrga input[name=org_rcs]').val();
+                        org_capital = $('#tab-organization #wdg-lightbox-editOrga input[name=org_capital]').val();
+                        org_ape = $('#tab-organization #wdg-lightbox-editOrga input[name=org_ape]').val();
+                        org_address = $('#tab-organization #wdg-lightbox-editOrga input[name=org_address]').val();                       
+                        org_postal_code = $('#tab-organization #wdg-lightbox-editOrga input[name=org_postal_code]').val();
+                        org_city = $('#tab-organization #wdg-lightbox-editOrga input[name=org_city]').val();
+                        org_nationality = $('#tab-organization #wdg-lightbox-editOrga #org_nationality option:selected').text();
+                        org_bankownername = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankownername]').val();
+                        org_bankowneraddress = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneraddress]').val();
+                        org_bankowneriban = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneriban]').val();
+                        org_bankownerbic = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]').val()
+
+
+
+                        $.ajax({  
+                            'type': "POST",
+                            'url': ajax_object.ajax_url,
+                            'data': {
+                                'action': 'save_edit_organisation',
+                                'org_id': org_id,
+                                'campaign_id': campaign_id,
+                                'org_name': org_name,
+                                'org_email': org_email,
+                                'org_legalform': org_legalform,
+                                'org_idnumber': org_idnumber,
+                                'org_rcs': org_rcs,
+                                'org_capital': org_capital,
+                                'org_ape': org_ape,
+                                'org_address': org_address,
+                                'org_postal_code': org_postal_code,
+                                'org_city': org_city,
+                                'org_nationality': org_nationality,
+                                'org_bankownername': org_bankownername,
+                                'org_bankowneraddress': org_bankowneraddress,
+                                'org_bankowneriban': org_bankowneriban,
+                                'org_bankownerbic': org_bankownerbic
+                            }
+
+                        }).done(function(result){
+                            var jsonResult = JSON.parse(result);
+                            feedback = jsonResult;
+                            
+                            //WDGProjectDashboard.updateOrgaForm(feedback);
+                            
+                            $("#wdg-lightbox-editOrga").hide();
+                        });
                     });
+                    
                     //fermeture de la lightbox de création d'organisation après enregistrement
                     $("#wdg-lightbox-newOrga form.wdg-forms").submit(function(e){
                         e.preventDefault();

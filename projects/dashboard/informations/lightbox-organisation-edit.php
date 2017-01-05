@@ -4,6 +4,7 @@
  * Lightbox d'édition d'une organisation
  * 
  */
+global $campaign_id;
 
 
 global $current_organisation;
@@ -14,7 +15,6 @@ if (!isset($current_organisation)) {
 }
 
 $WDGUser_current = WDGUser::current();
-YPOrganisation::edit($organisation_obj);
 $organisation_obj->send_kyc();
 $organisation_obj->submit_transfer_wallet_lemonway();
 
@@ -39,7 +39,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                         <li><?php echo $error_message; ?></li>
                 <?php endforeach; ?>
         </ul>
-        <?php elseif (filter_input(INPUT_POST, 'action') == 'edit-organisation'): ?>
+        <?php elseif (filter_input(INPUT_POST, 'action') == 'save_edit_organisation'): ?>
         <p class="success">
                 <?php _e('Modifications enregistr&eacute;es.'); ?>
         </p>
@@ -47,7 +47,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
 
         <h1><?php _e('&Eacute;diter l\'organisation','yproject'); echo "&nbsp;"; ?></h1>
 
-        <form action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
+        <form id="orgaedit_form" action="" method="POST" enctype="multipart/form-data" class="wdg-forms" data-action="save_edit_organisation">
 
                 <?php
                 /**
@@ -187,10 +187,12 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 <?php endif; ?>
                 <input type="file" name="org_doc_home" /> <br /><br />
 
-
-                <input type="hidden" name="action" value="edit-organisation" />
-
+                <input type="hidden" name="orga_id" value="<?php echo $organisation_obj->get_wpref(); ?>" />
+                <input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+                <input type="hidden" name="action" value="save_edit_organisation" />
+                 
                 <input class= "button" type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" />
+                <?php // DashboardUtility::create_save_button("orgaedit_form"); ?>
         </form>
 
 
