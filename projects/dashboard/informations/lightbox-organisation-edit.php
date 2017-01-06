@@ -187,9 +187,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 <?php endif; ?>
                 <input type="file" name="org_doc_home" /> <br /><br />
 
-                <input type="hidden" name="orga_id" value="<?php echo $organisation_obj->get_wpref(); ?>" />
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
-                <input type="hidden" name="action" value="save_edit_organisation" />
                  
                 <?php DashboardUtility::create_save_button("orgaedit_form"); ?>
         </form>

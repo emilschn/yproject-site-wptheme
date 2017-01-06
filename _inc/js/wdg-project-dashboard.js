@@ -247,7 +247,6 @@ var WDGProjectDashboard = (function ($) {
                             'url': ajax_object.ajax_url,
                             'data': {
                                 'action': 'save_edit_organisation',
-                                'org_id': org_id,
                                 'campaign_id': campaign_id,
                                 'org_name': org_name,
                                 'org_email': org_email,

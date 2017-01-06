@@ -90,7 +90,6 @@ global $campaign_id
 
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
                 
-                <input type="hidden" name="action" value="save_new_organisation" />
                 <?php DashboardUtility::create_save_button("orgacreate_form"); ?>
         </form>
 
