@@ -276,7 +276,7 @@ if (count($current_organisations) > 0) {
 				
 				
 				<?php // cas d'un projet terminé et financé ?>
-				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_funded && $campaign->is_funded()): ?>
+				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_funded): ?>
                                         <?php
 					$nbinvestors = $campaign->backers_count();
                                         $invest_amount =$campaign->current_amount();
@@ -288,7 +288,7 @@ if (count($current_organisations) > 0) {
 				
                                         
                                 <?php // cas d'un projet terminé et non financé ?>
-                                <?php elseif($campaign_status == ATCF_Campaign::$campaign_status_funded && !$campaign->is_funded()): ?>            
+                                <?php elseif($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>            
                                         <div class="end-sentence">
                                                 <?php _e("Malheureusement, ce projet n'a pas &eacute;t&eacute; propuls&eacute;","yproject"); ?>
                                         </div>
