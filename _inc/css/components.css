@@ -92,7 +92,7 @@
     left: 10%;
 }
 .wdg-component-slider #button-container .button-slide, .wdg-component-slider .slider-container #slider .slide-1button #button-container .button-slide{
-    width: 32%; 
+    width: 32%;
     margin: 0% 1.5%;
     text-align: center;
     font-size: 11pt;
@@ -212,7 +212,7 @@
         overflow: -moz-scrollbars-horizontal;/* Firefox */ 
             -ms-overflow-style: scrollbar;/* Edge */
 	overflow-x: auto;
-        margin-bottom: 15px;
+        margin-bottom: 0.8%;
 }
 .wdg-component-projects-preview .block-projects {
     z-index: 0;
@@ -222,7 +222,7 @@
     justify-content: center;
 	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
-	height: 620px;
+	height: 555px;
 }
 @media screen and (min-width: 1200px) {
 	.wdg-component-projects-preview .block-projects {
@@ -234,17 +234,17 @@
     position: relative;
     display: -webkit-flex;
     display: flex;
-	width: 33%;
+	width: 29%;
     min-width: 320px;
     max-width: 400px;
-	height: 620px;
+	height: 500px;
     -webkit-justify-content: center;
     justify-content: center;
     font-family: Trebuchet MS, sans-serif;
 }
 .wdg-component-projects-preview .project-container .project-framed{ 
     width: 90%;
-    height: 90%;
+    height: 100%;
     background-color: rgba(51, 51, 51, 0.05);
     position: relative;
     top: 25px;
@@ -263,20 +263,21 @@
 }
 
 .wdg-component-projects-preview .project-container .project-framed .project-title{
-    width: 100%;
+    width: 80%;
     text-align: center;
-    position: absolute;
+    position: relative;
     top: 20px;
     text-transform: uppercase;
-    font-size: 15pt;
+    font-size: 13pt;
     font-weight: bold;
-	margin: 15px 0px;
+	margin: 15px auto;
+        margin-left: 30px;/* pour tenir compte du coin coupé du cartouche*/
 }
 
 .wdg-component-projects-preview .project-container .project-framed .project-img{
     position: absolute;
     width: 100%;
-    height: 180px;
+    height: 160px;
     -webkit-background-size: cover;
     background-size: cover;
     background-position: center;
@@ -285,14 +286,14 @@
 
 .wdg-component-projects-preview .project-container .project-framed .project-summary{
     position: absolute;
-    top: 255px;
+    top: 238px;
     max-width: 100%;
-	height: 85px;
-	overflow: hidden;
-	margin: 0px;
+    height: 77px;
+    overflow: hidden;
+    margin: 4px 0px 0px 0px;
     padding: 0px 4%;
-    font-size: 11pt;
-    text-align: left;
+    font-size: 10pt;
+    text-align: justify;
 }
 
 .wdg-component-projects-preview .project-container .project-framed .progress-info{
@@ -303,13 +304,13 @@
     position: absolute;
     -webkit-justify-content: center;
     justify-content: center;
-    top: 405px;
+    top: 375px;
     width: 100%;
     margin-top: 15px;
     letter-spacing: 0.125em;
 }
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers{
-    border-right: 2px solid black;
+    border-right: 2px solid #333;
 }
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers,
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-days,
@@ -320,7 +321,7 @@
 .wdg-component-projects-preview .project-container .project-framed .progress-info .info-nb{
     text-transform: uppercase;
     text-align: center;
-    font-size: 13pt;
+    font-size: 12pt;
     font-weight: bold;
     margin: 0;
 }
@@ -337,7 +338,7 @@
     font-size: 0.938em;
     letter-spacing: 0.063em;
     text-transform: uppercase;   
-    padding: 30px 0%;
+    padding: 20px 0%;
     bottom: 0%;
 }
 .wdg-component-projects-preview .project-container .project-framed .project-button{
@@ -357,21 +358,33 @@
     color: #333333;
 }
 .wdg-component-projects-preview .see-more {
-	position: relative;
-    width: 30%;
+    position: relative;
+    width: -webkit-calc(0.26 * 100%);
+    width: -moz-calc(0.26 * 100%);
+    width: calc(0.26 * 100%);
     padding: 20px 0px;
     background-color: #EA4F51;
     color: #FFFFFF;
 }
 @media screen and (max-width: 997px) {
-	.wdg-component-projects-preview .see-more {
-		width: 288px;
-	}
 	.wdg-component-projects-preview .project-container {
 		width: 320px;
 	}
 }
-
+@media screen and (max-width: 1100px) {
+    .wdg-component-projects-preview .see-more {
+            width: 288px;
+    }
+}
+@media screen and (min-width: 1400px) {
+    .wdg-component-projects-preview .see-more {
+            width: 360px;
+    }
+}
+/* Ajustements spécifiques cartouche projet */
+body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container .project-framed {
+    height: 81%;
+}
 
 /*******************************************************************************
 * IMPACTS
@@ -427,9 +440,9 @@
 *******************************************************************************/
 .progress-bar {
     min-width: 100%;
-    position: relative;
-    top: 355px;
-    height: 50px;
+    position: absolute;
+    top: 335px;
+    height: 40px;
     background-color: #E1E3E2;
 }
 .progress-bar .current-amount {
@@ -441,15 +454,15 @@
     justify-content: space-around;
     position: absolute;
     height: 100%;
-    font-size: 15pt;
+    font-size: 13pt;
     letter-spacing: 0.12em;
     color: #FFFFFF;
     background: repeating-linear-gradient(
     -45deg,
     #00879B,
-    #00879B 7px,
-    #D3EAE9 0.5px,
-    #00879B 7.5px);
+    #00879B 5px,
+    #E1E3E2 5px,
+    #00879B 6.3px);
 }
 .progress-bar .progress-percent { 
     display: -webkit-flex;
@@ -459,7 +472,7 @@
     position: absolute;
     height: 100%;
     right: 3%;
-    font-size: 15pt;
+    font-size: 13pt;
     letter-spacing: 0.12em;
     font-weight: bold;
     text-align: right;

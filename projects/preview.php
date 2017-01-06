@@ -18,13 +18,13 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
     <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
         <div class="impacts-container" id="impacts-<?php echo $project_id ?>">
 			<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="ecl" width="42" height="42" class="impact-logo" />
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="impact environnemental" width="42" height="42" class="impact-logo" title="<?php _e('impact environnemental', 'yproject')?>" />
 			<?php endif; ?>
 			<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="soc" width="42" height="42" class="impact-logo" />
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="impact social" width="42" height="42" class="impact-logo" title="<?php _e('impact social', 'yproject')?>"/>
 			<?php endif; ?>
 			<?php if (strpos($campaign_categories_str, 'economique') !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="ecn" width="42" height="42" class="impact-logo" />
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="impact économique" width="42" height="42" class="impact-logo" title="<?php _e('impact économique', 'yproject')?>"/>
 			<?php endif; ?>
         </div>
     </a>
@@ -94,7 +94,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
         <?php
 
             //Projets déja financés
-            elseif($campaign_status === ATCF_Campaign::$campaign_status_funded ):
+            else :
                 $projectStatus = __("projet</br>financé !", "yproject");
                 $buttonAction = __("découvrir ce projet", "yproject"); // vers plus d'info sur ce projet
         ?>

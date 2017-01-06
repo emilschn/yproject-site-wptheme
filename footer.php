@@ -66,12 +66,11 @@ else {
 			
 			<section>
 				<div>
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/membre-FPF.png" alt="logo membre financement participatif France" width="150px"/>
+                                    <a href="http://www.financeparticipative.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/membre-FPF.png" alt="logo membre financement participatif France" width="150px"/></a>
 				</div>
 
-				<div class="lines" id="finance_innovation">
-					<p class="label"><?php _e("Agréée par", 'yproject')?></p>
-					<a href="http://www.finance-innovation.org/"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/finance-innovation-logo.png" alt="logo finance innovation" width="180px"/></a>
+				<div id="finance_innovation">					
+					<a href="https://finance-innovation.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/finance-innovation-labellise.png" alt="logo finance innovation" width="200px"/></a>
 				</div>
 
 				<div id="lemonway">
