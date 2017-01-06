@@ -86,7 +86,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
         <?php
 
             //Projets déja financés
-            elseif($campaign_status === ATCF_Campaign::$campaign_status_funded ):
+            else :
                 $projectStatus = __("projet</br>financé !", "yproject");
                 $buttonAction = __("découvrir ce projet", "yproject"); // vers plus d'info sur ce projet
         ?>
