@@ -37,9 +37,7 @@
 								<img class="slide" id="img-slide-<?php echo $i?>" src="<?php echo $img; ?>"/> 
 
 								<div class="message-banner">
-                                                                    <!--<div class="screen-message-container">-->
-                                                                        <p class="screen-message"><?php echo $campaign->data->post_title; ?></p>
-                                                                    <!--</div>-->
+									<p class="screen-message"><?php echo $campaign->data->post_title; ?></p>
 								</div>
 								<div id="button-container">
 									<a class="button-slide" href="<?php echo get_permalink($project_id); ?>"><?php _e("D&eacute;couvrir le projet", "yproject") ?></a>
@@ -122,55 +120,55 @@ else {
 ?>
 		<nav id="project-filter">
 			<span><?php _e( "Filtres", 'yproject' ); ?> <span class="only-inf997 inline"><?php _e( "projets", 'yproject' ); ?></span></span>
-                        <div class="project-filter-container">
-			<select id="project-filter-impact" class="project-filter-select">
-				<option value="all" selected="selected"><?php _e( "Tous les impacts", 'yproject' ); ?></option>
-				<?php
-                $terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
-                $term_category_id = $terms_category[0]->term_id;
-				$impacts_list = get_terms( 'download_category', array(
-					'child_of' => $term_category_id,
-					'hierarchical' => false,
-					'hide_empty' => false
-				) );
-				foreach ( $impacts_list as $impact ): ?>
-                                <option value="<?php echo $impact->slug; ?>"><?php echo $impact->name; ?></option>
-				<?php endforeach; ?>
-			</select>
-                        </div>
-                        <div class="project-filter-container">
-			<select id="project-filter-location" class="project-filter-select">
-				<option value="all" selected="selected"><?php _e( "Toutes les r&eacute;gions", 'yproject' ); ?></option>
-				<?php $region_list = atcf_get_regions(); ?>
-				<?php foreach ( $region_list as $region => $dpt_list ): ?>
-				<option value="<?php echo implode($dpt_list, ','); ?>"><?php echo $region ?></option>
-				<?php endforeach; ?>
-			</select>
-                        </div>
-                        <div class="project-filter-container">
-			<select id="project-filter-step" class="project-filter-select">
-				<option value="all" selected="selected"><?php _e( "Toutes les &eacute;tapes de campagne", 'yproject' ); ?></option>
-				<option value="vote"><?php _e( "En vote", 'yproject' ); ?></option>
-				<option value="collecte"><?php _e( "En financement", 'yproject' ); ?></option>
-				<option value="funded"><?php _e( "Financ&eacute;", 'yproject' ); ?></option>
-			</select>
-                        </div>
-                        <div class="project-filter-container">
-			<select id="project-filter-activity" class="project-filter-select">
-				<option value="all" selected="selected"><?php _e( "Tous les secteurs d'activit&eacute;", 'yproject' ); ?></option>
-				<?php
-                $terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
-                $term_activity_id = $terms_activity[0]->term_id;
-				$activities_list = get_terms( 'download_category', array(
-					'child_of' => $term_activity_id,
-					'hierarchical' => false,
-					'hide_empty' => false
-				) );
-				foreach ( $activities_list as $activity ): ?>
-				<option value="<?php echo $activity->slug; ?>"><?php echo $activity->name; ?></option>
-				<?php endforeach; ?>
-			</select>
-                        </div>
+            <div class="project-filter-container">
+                <select id="project-filter-impact" class="project-filter-select">
+                    <option value="all" selected="selected"><?php _e( "Tous les impacts", 'yproject' ); ?></option>
+                    <?php
+                    $terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
+                    $term_category_id = $terms_category[0]->term_id;
+                    $impacts_list = get_terms( 'download_category', array(
+                        'child_of' => $term_category_id,
+                        'hierarchical' => false,
+                        'hide_empty' => false
+                    ) );
+                    foreach ( $impacts_list as $impact ): ?>
+                                    <option value="<?php echo $impact->slug; ?>"><?php echo $impact->name; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="project-filter-container">
+                <select id="project-filter-location" class="project-filter-select">
+                    <option value="all" selected="selected"><?php _e( "Toutes les r&eacute;gions", 'yproject' ); ?></option>
+                    <?php $region_list = atcf_get_regions(); ?>
+                    <?php foreach ( $region_list as $region => $dpt_list ): ?>
+                    <option value="<?php echo implode($dpt_list, ','); ?>"><?php echo $region ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="project-filter-container">
+                <select id="project-filter-step" class="project-filter-select">
+                    <option value="all" selected="selected"><?php _e( "Toutes les &eacute;tapes de campagne", 'yproject' ); ?></option>
+                    <option value="vote"><?php _e( "En vote", 'yproject' ); ?></option>
+                    <option value="collecte"><?php _e( "En financement", 'yproject' ); ?></option>
+					<option value="funded"><?php _e( "Financ&eacute;", 'yproject' ); ?></option>
+                </select>
+            </div>
+            <div class="project-filter-container">
+                <select id="project-filter-activity" class="project-filter-select">
+                    <option value="all" selected="selected"><?php _e( "Tous les secteurs d'activit&eacute;", 'yproject' ); ?></option>
+                    <?php
+                    $terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
+                    $term_activity_id = $terms_activity[0]->term_id;
+                    $activities_list = get_terms( 'download_category', array(
+                        'child_of' => $term_activity_id,
+                        'hierarchical' => false,
+                        'hide_empty' => false
+                    ) );
+                    foreach ( $activities_list as $activity ): ?>
+                    <option value="<?php echo $activity->slug; ?>"><?php echo $activity->name; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 		</nav>
 <?php
 	$cache_project_filters = ob_get_contents();
