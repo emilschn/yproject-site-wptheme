@@ -29,7 +29,7 @@ require_once EDD_PLUGIN_DIR . 'includes/admin/payments/class-payments-table.php'
 get_header(); 
 ?>
 
-    <div id="content">
+    <div id="content" style="margin-top: 80px;">
 	<div class="padder">
 	    <div class="center">
 		<?php 
@@ -92,15 +92,20 @@ get_header();
 			 */
 			?>
 			
-			<?php //Transférer de wallet à wallet
+			<?php //Validation de virement a posteriori
 			/*
-			$orga_id = 3857;
-			$user_id = 4246;
-			$amount = 300;
+			$orga_id = 4904;
+			$user_id = 5524;
+			$amount = 500;
 			$organisation_obj = new YPOrganisation($orga_id);
 			$WDGUser = new WDGUser($user_id);
 			$WDGUser->register_lemonway();
 			$transfer = LemonwayLib::ask_transfer_funds( $WDGUser->get_lemonway_id(), $organisation_obj->get_lemonway_id(), $amount );
+			
+			$campaign_id = 12919;
+			$payment_id = 14401;
+			$new_contract_pdf_file = getNewPdfToSign($campaign_id, $payment_id, $user_id);
+			NotificationsEmails::new_purchase_user_success_nocontract($payment_id, $new_contract_pdf_file);
 			 * 
 			 */
 			?>

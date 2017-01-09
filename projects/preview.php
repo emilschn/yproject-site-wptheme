@@ -52,11 +52,20 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 
             //Projets en cours de collecte ou en vote
             if($campaign_status !== ATCF_Campaign::$campaign_status_funded):
-                $daysRemaining = $campaign->days_remaining();
-                $daysRemaining == "0" || $daysRemaining == "1" ? $days = __(" jour", "yproject") : $days = __(" jours", "yproject");
+				$time_remaining_str = $campaign->time_remaining_str();
+				if ($time_remaining_str != '-') {
+					$time_remaining_str_split = explode('-', $time_remaining_str);
+					$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
+					$time_remaining_str_unit = $time_remaining_str_split[0];
+					switch ($time_remaining_str_split[0]) {
+						case 'J': $time_remaining_str .= __("jours", "yproject"); break;
+						case 'H': $time_remaining_str .= __("heures", "yproject"); break;
+						case 'M': $time_remaining_str .= __("minutes", "yproject"); break;
+					}
+				}
+				
 
-                if ($campaign_status === ATCF_Campaign::$campaign_status_collecte):  
-                    $timeRemaining = $daysRemaining;
+                if ($campaign_status === ATCF_Campaign::$campaign_status_collecte):
                     $projectAction = __(" pour investir", "yproject");
                     $buttonAction = __("investir sur ce projet", "yproject");
         ?>              
@@ -67,7 +76,6 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
         <?php
 
                 elseif ($campaign_status === ATCF_Campaign::$campaign_status_vote):
-                    $timeRemaining = $campaign->end_vote_remaining();
                     $projectAction = __(" pour voter", "yproject");
                     $buttonAction = __("voter sur ce projet", "yproject");
         ?>
@@ -79,7 +87,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
         <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
                 <div class="progress-info">
                     <span class="progress-pers"><?php if($jycrois): ?><p class="info-nb"><?php echo $jycrois; ?>&nbsp;pers.</p><?php endif; ?><p class="info-action"><?php echo $persStatus ?></p></span>
-                    <span class="progress-days"><p class="info-nb"><?php echo $timeRemaining; echo $days ?></p><p class="info-action"><?php echo $projectAction ?></p></span>
+                    <span class="progress-days"><p class="info-nb"><?php echo $time_remaining_str; ?></p><p class="info-action"><?php echo $projectAction ?></p></span>
                 </div>
         </a>
 		<a class="home-button-project project-button" href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $buttonAction ?></a>

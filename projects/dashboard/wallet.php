@@ -17,6 +17,7 @@
 	$campaign_organization = $campaign->get_organisation();
 	$organization_obj = new YPOrganisation( $campaign_organization->organisation_wpref );
 	$mandate_conditions = $campaign->mandate_conditions();
+	$declaration_info = $campaign->declaration_info();
 
 	$params_full = ''; $params_partial = '';
 	if (isset($_GET['preview']) && $_GET['preview'] = 'true') { $params_full = '?preview=true'; $params_partial = '&preview=true'; }
@@ -171,7 +172,30 @@
 
 		<?php if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded): ?>
 			<h2><?php _e('Reverser aux investisseurs', 'yproject'); ?></h2>
+			
+			
+			<?php if ( $is_admin ): ?>
+				<form action="" id="forcemandate_form" class="db-form" data-action="save_project_declaration_info">
+					<?php DashboardUtility::create_field(array(
+						"id"			=> "new_declaration_info",
+						"type"			=> "editor",
+						"label"			=> __( "Informations de reversement", 'yproject' ),
+						"value"			=> $declaration_info,
+						"editable"		=> $is_admin,
+						"admin_theme"	=> $is_admin,
+						"visible"		=> $is_admin,
+					)); ?>
 
+					<?php DashboardUtility::create_save_button( "forcemandate-form", $is_admin ); ?>
+				</form>
+			<?php elseif ( !empty( $declaration_info ) ) : ?>
+
+				<strong><?php _e( "Informations relatives &agrave; votre d&eacute;claration", 'yproject' ) ?></strong><br />
+				<?php echo $declaration_info; ?><br /><br />
+
+			<?php endif; ?>
+
+				
 			<h3>Dates de vos versements :</h3>
 			<?php
 			$declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $campaign->ID );
@@ -194,7 +218,7 @@
 												$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
 												?>
 												<?php for ($i = 0; $i < $nb_fields; $i++): ?>
-													<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <input type="text" name="turnover-<?php echo $i; ?>" id="turnover-<?php echo $i; ?>" /></li>
+													<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <input type="text" name="turnover-<?php echo $i; ?>" id="turnover-<?php echo $i; ?>" /> &euro; HT</li>
 													<?php $date_due->add(new DateInterval('P1M')); ?>
 												<?php endfor; ?>
 											</ul>
@@ -204,7 +228,7 @@
 										<?php endif; ?>
 
 										<br /><br />
-										Somme à verser : <span class="amount-to-pay">0</span> €.
+										Somme à verser : <span class="amount-to-pay">0</span> &euro;.
 										<br /><br />
 
 										<input type="hidden" name="action" value="save-turnover-declaration" />
@@ -222,7 +246,7 @@
 											$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
 											?>
 											<?php for ($i = 0; $i < $nb_fields; $i++): ?>
-												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
+												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro; HT</li>
 												<?php $date_due->add(new DateInterval('P1M')); ?>
 											<?php endfor; ?>
 										</ul><br />
@@ -231,7 +255,7 @@
 										<?php echo $declaration_turnover[0]; ?> &euro;<br />
 									<?php endif; ?>
 
-									<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro;<br /><br />
+									<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro; HT<br /><br />
 
 									<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
 									<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br />
