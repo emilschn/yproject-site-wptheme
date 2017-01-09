@@ -325,23 +325,24 @@ function ypbp_get_current_signup_step() {
         return $bp->signup->step;
 }
 
+
 function ypbp_core_screen_signup() {
 	global $bp;
 
 	// Not a directory
-	bp_update_is_directory( false, 'register' );
+//	bp_update_is_directory( false, 'register' );
 
-	if ( !isset( $bp->signup ) ) {
+	/*if ( !isset( $bp->signup ) ) {
 		$bp->signup = new stdClass;
 	}
 
-	$bp->signup->step = 'request-details';
+	$bp->signup->step = 'request-details';*/
 
 	// If the signup page is submitted, validate and save
 	if ( isset( $_POST['signup_submit'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'register_form_posted' ) ) {
 
 		// Check the base account details for problems
-		$account_details = bp_core_validate_user_signup( $_POST['signup_username'], $_POST['signup_email'] );
+//		$account_details = bp_core_validate_user_signup( $_POST['signup_username'], $_POST['signup_email'] );
 
 		// If there are errors with account details, set them for display
 		if ( !empty( $account_details['errors']->errors['user_name'] ) )
@@ -381,11 +382,11 @@ function ypbp_core_screen_signup() {
 			$usermeta = apply_filters( 'bp_signup_usermeta', $usermeta );
 
 			// Finally, sign up the user
-			$wp_user_id = bp_core_signup_user( $_POST['signup_username'], $_POST['signup_password'], $_POST['signup_email'], $usermeta );
+//			$wp_user_id = bp_core_signup_user( $_POST['signup_username'], $_POST['signup_password'], $_POST['signup_email'], $usermeta );
 
 			if ( is_wp_error( $wp_user_id ) ) {
 				$bp->signup->step = 'request-details';
-				bp_core_add_message( $wp_user_id->get_error_message(), 'error' );
+//				bp_core_add_message( $wp_user_id->get_error_message(), 'error' );
 			} else {
 				global $wpdb, $edd_options;
 				$bp->signup->step = 'completed-confirmation';
