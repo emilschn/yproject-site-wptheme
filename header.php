@@ -128,7 +128,7 @@
 						<a href="<?php echo home_url( '/les-projets' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
 					</div>
 					
-					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher", 'yproject'); ?>" />
+					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher un projet", 'yproject'); ?>" />
 					<ul class="submenu-list">
 						<?php foreach ($projects_searchable as $project_post): ?>
 						<li class="hidden"><a href="<?php echo get_permalink( $project_post->ID ); ?>"><?php echo $project_post->post_title; ?></a></li>
