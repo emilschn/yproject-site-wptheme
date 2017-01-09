@@ -332,7 +332,7 @@ function print_informations_page()
                         $selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
                         $str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
                     }
-                }
+                }			
                 ?>
                 <label for="project-organisation">Organisation :</label>
                 <?php if ($str_organisations != ''): ?>

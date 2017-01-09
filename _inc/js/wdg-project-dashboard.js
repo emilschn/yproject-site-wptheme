@@ -267,10 +267,23 @@ var WDGProjectDashboard = (function ($) {
 
                         }).done(function(result){
                             var jsonResult = JSON.parse(result);
-                            feedback = jsonResult;                          
-
+                            feedback = jsonResult;
+							
+							//Mise à jour des liens de téléchargement des doc uploadés
+							var fileInfo = feedback.fileInfo;
+							if (fileInfo){
+								fileInfo.each(function(document_key, info){
+									if(!info.get_error_code()){//Si info n'est pas un code d'erreur, on a un filepath
+										$("#tab-organization #wdg-lightbox-editOrga a#"+document_key).href(info);
+									}
+									else{//affiche le message d'erreur
+										//$("#tab-organization #wdg-lightbox-editOrga .errors li").html(info.get_error_message(info.get_error_code())); //à revoir
+									}
+								});
+							}		
+							
                             $("#wdg-lightbox-editOrga").hide();
-
+							
                         }).fail(function() {
                             thisForm.find('.save_fail').fadeIn();
                         }).always(function() {
@@ -343,7 +356,6 @@ var WDGProjectDashboard = (function ($) {
                         }).done(function(result){
                             var jsonResult = JSON.parse(result);
                             feedback = jsonResult;
-                            console.log(feedback.organisation.wpref);
                             $("#wdg-lightbox-newOrga").hide();
 
                             //Mise à jour de l'input select
@@ -986,7 +998,7 @@ var WDGProjectDashboard = (function ($) {
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownername]").val(feedback.organisation.bankownername);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneraddress]").val(feedback.organisation.bankowneraddress);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneriban]").val(feedback.organisation.bankowneriban);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]").val(feedback.organisation.bankownerbic);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]").val(feedback.organisation.bankownerbic);			
         },
 
         /**
