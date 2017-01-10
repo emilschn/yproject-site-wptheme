@@ -85,7 +85,6 @@
 		//*******************
 		?>
 
-		<?php do_action( 'bp_head' ); ?>
 		<?php wp_head(); ?>
 
 		<!-- Meta spécifiques à Facebook -->

@@ -1,6 +1,6 @@
 <?php
-get_header( 'buddypress' );
-$display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
+get_header();
+$display_loggedin_user = true;
 if ($display_loggedin_user) {
 	$result_form = WDGFormUsers::wallet_to_bankaccount();
 }
@@ -62,4 +62,4 @@ $page_modify = get_page_by_path('modifier-mon-compte');
 	</div>
 </div>
 
-<?php get_footer( 'buddypress' ); ?>
+<?php get_footer();

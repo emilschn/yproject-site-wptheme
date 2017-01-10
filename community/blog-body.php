@@ -28,7 +28,7 @@ if ( have_posts() ) : ?>
 				<?php the_content( 'Lire la suite' ); ?>
 			</div>
 			
-			<span class="comments"><?php comments_popup_link( __( 'No Comments &#187;', 'buddypress' ), __( '1 Comment &#187;', 'buddypress' ), __( '% Comments &#187;', 'buddypress' ) ); ?></span></p>
+			<span class="comments"><?php comments_popup_link( __( 'Aucun commentaire &#187;', 'yproject' ), __( '1 commentaire &#187;', 'yproject' ), __( '% commentaires &#187;', 'yproject' ) ); ?></span></p>
 		</div>
 
 	</div>

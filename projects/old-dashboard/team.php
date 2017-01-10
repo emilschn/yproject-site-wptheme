@@ -7,8 +7,7 @@
     <div class="head">&Eacute;quipe</div>
     <div class="body" style="text-align:center">
         <h2><?php _e('Administrateur du projet', 'yproject'); ?></h2>
-        <?php echo $author_data->first_name . ' ' . $author_data->last_name.'<br/>'.
-                bp_core_get_userlink($author_data->ID)?>
+        <?php echo $author_data->first_name . ' ' . $author_data->last_name; ?>
 
         <h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
         <?php 
@@ -20,7 +19,7 @@
                 <ul id="team-list">
         <?php foreach ($team_member_list as $team_member): ?>
                     <li>
-                        <?php echo $team_member->user_name . ' ' . $team_member->user_surname . ' (' . bp_core_get_userlink($team_member->wp_user_id).')'; ?>
+                        <?php echo $team_member->user_name . ' ' . $team_member->user_surname; ?>
                         <a class="project-manage-team button" data-action="yproject-remove-member" data-user="<?php echo $team_member->wp_user_id; ?>">x</a>
                     </li>
         <?php endforeach; ?>

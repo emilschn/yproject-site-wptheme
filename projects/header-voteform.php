@@ -159,21 +159,6 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 				'project-header-right-'.$campaign_id,
 				'project-stats-public-votes-'.$campaign_id
 			));
-
-			// Construction des urls utilisés dans les liens du fil d'actualité
-			// url d'une campagne précisée par son nom 
-			$campaign_url = get_permalink($post->ID);
-			$post_title = $post->post_title;
-			$url_campaign = '<a href="'.$campaign_url.'">'.$post_title.'</a>';
-			//url d'un utilisateur précis
-			$user_display_name      = wp_get_current_user()->display_name;
-			$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '">' . $user_display_name . '</a>';
-
-			bp_activity_add(array (
-				'component' => 'profile',
-				'type'      => 'voted',
-				'action'    => $url_profile.' a voté sur le projet '.$url_campaign
-			));
 			
 			
 			if ($validate_project == 1) {

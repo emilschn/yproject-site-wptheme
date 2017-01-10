@@ -26,11 +26,6 @@ function tags_support_query($wp_query){
 }
 add_action('pre_get_posts', 'tags_support_query');
 
-//Chargement de la css de buddypress
-if ( !function_exists( 'bp_dtheme_enqueue_styles' ) ) :
-	function bp_dtheme_enqueue_styles() {}
-endif;
-
 //Enlever les "magic quotes"
 $_POST      = array_map( 'stripslashes_deep', $_POST );
 $_GET       = array_map( 'stripslashes_deep', $_GET );
@@ -319,10 +314,9 @@ function yproject_submit_lightbox() {
 } 
 add_action('init', 'yproject_submit_lightbox');
 
-function ypbp_get_current_signup_step() {
-        global $bp;
-
-        return $bp->signup->step;
+function yp_get_current_signup_step() {
+	global $bp;
+	return $bp->signup->step;
 }
 
 
@@ -353,11 +347,11 @@ function ypbp_core_screen_signup() {
            
 		// Check that both password fields are filled in
 		if ( empty( $_POST['signup_password'] ) || empty( $_POST['signup_password_confirm'] ) )
-			$bp->signup->errors['signup_password'] = __( 'Please make sure you enter your password twice', 'buddypress' );
+			$bp->signup->errors['signup_password'] = __( 'Avez-vous saisi deux fois le mot de passe ?', 'yproject' );
 
 		// Check that the passwords match
 		if ( ( !empty( $_POST['signup_password'] ) && !empty( $_POST['signup_password_confirm'] ) ) && $_POST['signup_password'] != $_POST['signup_password_confirm'] )
-			$bp->signup->errors['signup_password'] = __( 'The passwords you entered do not match.', 'buddypress' );
+			$bp->signup->errors['signup_password'] = __( 'Les mots de passe saisis ne correspondent pas.', 'yproject' );
 		
 		// Check that the cgu is checked
 		if ( empty($_POST['validate-terms-check']) )

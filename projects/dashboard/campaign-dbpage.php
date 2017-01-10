@@ -102,8 +102,7 @@ function print_campaign_page()
 
         <h2><?php _e('Administrateur du projet', 'yproject'); ?></h2>
         <div style="text-align:center">
-            <span><?php echo $WDGAuthor->wp_user->user_firstname . ' ' . $WDGAuthor->wp_user->user_lastname.'</span><br/><span>'.
-                bp_core_get_userlink($WDGAuthor->wp_user->ID)?></span>
+            <span><?php echo $WDGAuthor->wp_user->user_firstname . ' ' . $WDGAuthor->wp_user->user_lastname; ?></span>
         </div>
 
         <h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
@@ -118,7 +117,7 @@ function print_campaign_page()
                     foreach ($team_member_list as $team_member):
                         $team_member_wp = get_userdata($team_member->wp_user_id)?>
                         <li>
-                            <?php echo $team_member_wp->user_firstname . ' ' . $team_member_wp->user_lastname . ' (' . bp_core_get_userlink($team_member_wp->ID).')'; ?>
+                            <?php echo $team_member_wp->user_firstname . ' ' . $team_member_wp->user_lastname; ?>
                             <a class="project-manage-team button" data-action="yproject-remove-member" data-user="<?php echo $team_member->wp_user_id; ?>"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
                         </li>
                     <?php endforeach;
