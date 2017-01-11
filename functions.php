@@ -407,26 +407,6 @@ add_filter('oembed_result', 'remove_related_videos', 1, true);
 //Suppression de code supplémentaire généré par edd
 remove_filter( 'the_content', 'edd_microdata_wrapper', 10 );
 
-function comment_blog_post(){
-	global $wpdb, $post;
-	// Construction des urls utilisés dans les liens du fil d'actualité
-	// url d'une campagne précisée par son nom 
-	$post_title = $post->post_title;
-	$url_blog = '<a href="'.get_permalink( $post->ID ).'">'.$post_title.'</a>';
-	//url d'un utilisateur précis
-	$user_id                = wp_get_current_user()->ID;
-	$user_display_name      = wp_get_current_user()->display_name;
-	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '"> ' . $user_display_name . '</a>';
-	$user_avatar = UIHelpers::get_user_avatar($user_id);
-
-	bp_activity_add(array (
-		'component' => 'profile',
-		'type'      => 'jycrois',
-		'action'    => $user_avatar.' '.$url_profile.' a commenté '.$url_blog
-	    ));
-}
-add_action('comment_post','comment_blog_post');
-
 
 /**
  * Gestion ajax
@@ -495,7 +475,7 @@ add_action( 'wp_ajax_update_subscription_mail', 'update_subscription_mail' );
 function print_user_projects(){
     
 	global $wpdb, $post, $user_projects;
-	$is_same_user = (bp_displayed_user_id() == bp_loggedin_user_id());
+	$is_same_user = TRUE;
 	$str_believe = "J&apos;y crois";
 	$str_vote = "J&apos;ai vot&eacute;";
 	$str_investment = "J&apos;ai investi";
@@ -514,9 +494,9 @@ function print_user_projects(){
 	if(isset($_POST['user_id'])){
 		$payment_status = array("publish", "completed");
 //		if ($is_same_user) $payment_status = array("completed", "pending", "publish", "failed", "refunded");
-		$purchases = edd_get_users_purchases(bp_displayed_user_id(), -1, false, $payment_status);
+		$user_id = get_current_user_id();
+		$purchases = edd_get_users_purchases($user_id, -1, false, $payment_status);
 		$table = $wpdb->prefix.'jycrois';
-		$user_id = bp_displayed_user_id();
 		$projects_jy_crois = $wpdb->get_results("SELECT campaign_id, subscribe_news FROM $table WHERE user_id=$user_id");
                 $table = $wpdb->prefix.'ypcf_project_votes';
 		$projects_votes = $wpdb->get_results("SELECT post_id FROM $table WHERE user_id=$user_id");
@@ -559,15 +539,6 @@ function print_user_projects(){
 				    $signsquid_contract = new SignsquidContract($post->ID);
 				    $payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
 
-				    $investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
-				    $group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-				    $is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
-				    $group_link = '';
-				    if ($group_exists && $is_user_group_member){
-					    $group_obj = groups_get_group(array('group_id' => $investors_group_id));
-					    $group_link = bp_get_group_permalink($group_obj);
-				    }
-
 				    //Infos relatives au projet
 				    $user_projects[$campaign->ID]['ID'] = $campaign->ID;
 				    //Infos relatives à l'investissement de l'utilisateur
@@ -577,8 +548,6 @@ function print_user_projects(){
 				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_date'] = $payment_date;
 				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount'] = edd_get_payment_amount( $post->ID );
 				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_status'] = edd_get_payment_status( $post, true );
-				    //Lien vers le groupe d'investisseur
-				    $user_projects[$campaign->ID]['group_link']=$group_link;
 				}
 			endforeach;
 
@@ -677,25 +646,6 @@ function print_user_projects(){
 									<?php echo $project['minimum_goal']; ?>
 							    </div> 
 							</div>
-						    
-							<?php 
-							if ($is_same_user) {
-								//Lien vers le groupe d'investisseurs du projet
-								//Visible si le groupe existe et que l'utilisateur est bien dans ce groupe
-								$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
-								$group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-								$is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
-								if ($group_exists && $is_user_group_member):
-									$group_obj = groups_get_group(array('group_id' => $investors_group_id));
-									$group_link = bp_get_group_permalink($group_obj);
-							?>
-							<div class="project_preview_item_infos" style="width: 120px;">
-							    <a href="<?php echo $group_link; ?>">Acc&eacute;der au groupe priv&eacute;</a>
-							</div>
-							<?php
-								endif;
-							}
-							?>
 							<div style="clear: both"></div>
 						</div>
 					</div>
@@ -808,7 +758,7 @@ function add_team_member(){
             $data_new_member['id']=$user_wp_id;
             $data_new_member['firstName']=$user->first_name;
             $data_new_member['lastName']=$user->last_name;
-            $data_new_member['userLink']=bp_core_get_userlink($user_wp_id);
+            $data_new_member['userLink']=$user->user_login;
             $buffer = json_encode($data_new_member);
     }
     echo $buffer;
@@ -1075,7 +1025,7 @@ function get_investors_table() {
 				);
 			} else {
 				$datacolonnes = array(
-					bp_core_get_userlink($item['user']),
+					$user_data->user_login,
 					$user_data->last_name,
 					$user_data->first_name,
 					$user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,
