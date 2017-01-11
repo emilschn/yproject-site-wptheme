@@ -38,7 +38,6 @@ if ( ! isset( $content_width ) ) $content_width = 960;
 //Définition du domaine pour les traductions
 function yproject_setup() {
 	load_child_theme_textdomain( 'yproject', get_stylesheet_directory() . '/languages' );
-	remove_action( 'bp_member_header_actions',    'bp_send_public_message_button',  20 );
 }
 add_action( 'after_setup_theme', 'yproject_setup', 15 );
 
@@ -151,11 +150,6 @@ function yproject_redirect_logout(){
 	exit;
 }
 add_action('wp_logout', 'yproject_redirect_logout');
-
-function catch_register_page_loggedin_users() {
-	return home_url() . '?alreadyloggedin=1';
-}
-add_filter( 'bp_loggedin_register_page_redirect_to', 'catch_register_page_loggedin_users');
 /** FIN GESTION DU LOGIN **/
 
 
@@ -308,107 +302,6 @@ function yproject_check_is_warning_meta_init($user_id){
         return true; 
     }
 }
-//Gestion du formulaire de lightbox d'avertissements
-function yproject_submit_lightbox() {
-    ypbp_core_screen_signup();
-} 
-add_action('init', 'yproject_submit_lightbox');
-
-function yp_get_current_signup_step() {
-	global $bp;
-	return $bp->signup->step;
-}
-
-
-function ypbp_core_screen_signup() {
-	global $bp;
-
-	// Not a directory
-//	bp_update_is_directory( false, 'register' );
-
-	/*if ( !isset( $bp->signup ) ) {
-		$bp->signup = new stdClass;
-	}
-
-	$bp->signup->step = 'request-details';*/
-
-	// If the signup page is submitted, validate and save
-	if ( isset( $_POST['signup_submit'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'register_form_posted' ) ) {
-
-		// Check the base account details for problems
-//		$account_details = bp_core_validate_user_signup( $_POST['signup_username'], $_POST['signup_email'] );
-
-		// If there are errors with account details, set them for display
-		if ( !empty( $account_details['errors']->errors['user_name'] ) )
-			$bp->signup->errors['signup_username'] = $account_details['errors']->errors['user_name'][0];
-
-		if ( !empty( $account_details['errors']->errors['user_email'] ) )
-			$bp->signup->errors['signup_email'] = $account_details['errors']->errors['user_email'][0];
-           
-		// Check that both password fields are filled in
-		if ( empty( $_POST['signup_password'] ) || empty( $_POST['signup_password_confirm'] ) )
-			$bp->signup->errors['signup_password'] = __( 'Avez-vous saisi deux fois le mot de passe ?', 'yproject' );
-
-		// Check that the passwords match
-		if ( ( !empty( $_POST['signup_password'] ) && !empty( $_POST['signup_password_confirm'] ) ) && $_POST['signup_password'] != $_POST['signup_password_confirm'] )
-			$bp->signup->errors['signup_password'] = __( 'Les mots de passe saisis ne correspondent pas.', 'yproject' );
-		
-		// Check that the cgu is checked
-		if ( empty($_POST['validate-terms-check']) )
-			$bp->signup->errors['validate_terms_check'] = __( 'Merci de cocher la case pour accepter les conditions g&eacute;n&eacute;rales d&apos;utilisation.', 'yproject' );
-
-		$bp->signup->username = $_POST['signup_username'];
-		$bp->signup->email = $_POST['signup_email'];
-
-		// Add any errors to the action for the field in the template for display.
-		if ( !empty( $bp->signup->errors ) ) {
-			foreach ( (array) $bp->signup->errors as $fieldname => $error_message ) {
-				// addslashes() and stripslashes() to avoid create_function()
-				// syntax errors when the $error_message contains quotes
-				add_action( 'bp_' . $fieldname . '_errors', create_function( '', 'echo apply_filters(\'bp_members_signup_error_message\', "<div class=\"error\">" . stripslashes( \'' . addslashes( $error_message ) . '\' ) . "</div>" );' ) );
-			}
-		} else {
-			$bp->signup->step = 'save-details';
-
-			// Hash and store the password
-			$usermeta['password'] = wp_hash_password( $_POST['signup_password'] );
-
-			$usermeta = apply_filters( 'bp_signup_usermeta', $usermeta );
-
-			// Finally, sign up the user
-//			$wp_user_id = bp_core_signup_user( $_POST['signup_username'], $_POST['signup_password'], $_POST['signup_email'], $usermeta );
-
-			if ( is_wp_error( $wp_user_id ) ) {
-				$bp->signup->step = 'request-details';
-//				bp_core_add_message( $wp_user_id->get_error_message(), 'error' );
-			} else {
-				global $wpdb, $edd_options;
-				$bp->signup->step = 'completed-confirmation';
-				$wpdb->update( $wpdb->users, array( sanitize_key( 'user_status' ) => 0 ), array( 'ID' => $wp_user_id ) );
-				update_user_meta($wp_user_id, WDGUser::$key_validated_general_terms_version, $edd_options[WDGUser::$edd_general_terms_version]);
-				NotificationsEmails::new_user_admin($wp_user_id); //Envoi mail à l'admin
-				NotificationsEmails::new_user_user($wp_user_id); //Envoi mail à l'utilisateur
-				wp_set_auth_cookie( $wp_user_id, false, is_ssl() );
-				if (isset($_POST['redirect-home'])) {
-					wp_redirect(home_url());
-				} else {
-					wp_redirect(wp_unslash( $_SERVER['REQUEST_URI'] ));
-				}
-				exit();
-			}
-
-			do_action( 'bp_complete_signup' );
-		}
-
-	}
-
-	do_action( 'bp_core_screen_signup' );
-}
-
-function ypbp_filter_send_activation_key() {
-    return false;
-}
-add_filter('bp_core_signup_send_activation_key', 'ypbp_filter_send_activation_key');
 
 function yproject_user_register( $user_id ) {
 	$user = get_userdata( $user_id );

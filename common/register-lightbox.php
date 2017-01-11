@@ -1,7 +1,7 @@
-<?php global $page_register; ?>
+<?php global $page_register, $signup_errors, $signup_step; ?>
 
 <form action="<?php echo wp_unslash( $_SERVER['REQUEST_URI'] ); ?>#register" name="signup_form" id="signup_form" class="standard-form form-register" method="post" enctype="multipart/form-data">
-	<?php if ( 'request-details' == yp_get_current_signup_step() ) : ?>
+	<?php if ( $signup_step == 'request-details' ) : ?>
 		<h2><?php _e('Inscription', 'yproject'); ?></h2>
     
 		<div class="warning">
@@ -12,6 +12,7 @@
 		</div>
 
 		<div class="errors">
+			<?php echo $signup_errors->get_error_message(); ?>
 		</div>
     
 		<div class="register-section" id="basic-details-section">
@@ -64,7 +65,7 @@
 
 				    
 				    
-	<?php if ( 'completed-confirmation' == yp_get_current_signup_step() ) : ?>
+	<?php if ( $signup_step == 'completed-confirmation' ) : ?>
 
 		<h2><?php _e( 'Bienvenue chez WE DO GOOD !', 'yproject' ); ?> :)</h2>
 
