@@ -208,92 +208,57 @@ var WDGProjectDashboard = (function ($) {
                         e.preventDefault();
                         $("#edit-orga-button").hide();
                     });
-                    //fermeture de la lightbox d'édition après enregistrement des infos
-                    $("#wdg-lightbox-editOrga form.wdg-forms").submit(function(e){
-                        e.preventDefault();
-                        var thisForm = $(this);
-                        
-                        var org_id, org_name, org_email, org_legalform,
-                        org_idnumber, org_rcs,org_capital, org_ape, org_address, org_postal_code,
-                        org_city, org_nationality, org_bankownername, org_bankowneraddress,
-                        org_bankowneriban, org_bankownerbic;
-                       
-                        org_id = $('#tab-organization #wdg-lightbox-editOrga input[name=orga_id]').val();                     
-                        org_name = $('#tab-organization #wdg-lightbox-editOrga input[name=org_name]').val();
-                        org_email = $('#tab-organization #wdg-lightbox-editOrga input[name=org_email]').val();
-                        org_legalform = $('#tab-organization #wdg-lightbox-editOrga input[name=org_legalform]').val();
-                        org_idnumber = $('#tab-organization #wdg-lightbox-editOrga input[name=org_idnumber]').val();
-                        org_rcs = $('#tab-organization #wdg-lightbox-editOrga input[name=org_rcs]').val();
-                        org_capital = $('#tab-organization #wdg-lightbox-editOrga input[name=org_capital]').val();
-                        org_ape = $('#tab-organization #wdg-lightbox-editOrga input[name=org_ape]').val();
-                        org_address = $('#tab-organization #wdg-lightbox-editOrga input[name=org_address]').val();                       
-                        org_postal_code = $('#tab-organization #wdg-lightbox-editOrga input[name=org_postal_code]').val();
-                        org_city = $('#tab-organization #wdg-lightbox-editOrga input[name=org_city]').val();
-                        org_nationality = $('#tab-organization #wdg-lightbox-editOrga #org_nationality option:selected').text();
-                        org_bankownername = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankownername]').val();
-                        org_bankowneraddress = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneraddress]').val();
-                        org_bankowneriban = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneriban]').val();
-                        org_bankownerbic = $('#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]').val();
+                    
+					//Création objet FormData (Envoi des fichiers uploadés en ajax dans le formulaire d'édition)
+					$("#wdg-lightbox-editOrga form#orgaedit_form").submit(function(e){
+						e.preventDefault();
+						var thisForm = $(this);
+						var fd = new FormData($('#wdg-lightbox-editOrga #orgaedit_form')[0]);
 
-                        //Désactive les champs
+						//Désactive les champs
                         var save_button = $("#"+$(this).attr("id")+"_button");
                         save_button.find(".button-text").hide();
                         save_button.find(".button-waiting").show();
                         $(":input", this).prop('disabled', true);
                         thisForm.find('.feedback_save span').fadeOut();
-                        
-                        $.ajax({  
-                            'type': "POST",
-                            'url': ajax_object.ajax_url,
-                            'data': {
-                                'action': 'save_edit_organisation',
-                                'campaign_id': campaign_id,
-                                'org_name': org_name,
-                                'org_email': org_email,
-                                'org_legalform': org_legalform,
-                                'org_idnumber': org_idnumber,
-                                'org_rcs': org_rcs,
-                                'org_capital': org_capital,
-                                'org_ape': org_ape,
-                                'org_address': org_address,
-                                'org_postal_code': org_postal_code,
-                                'org_city': org_city,
-                                'org_nationality': org_nationality,
-                                'org_bankownername': org_bankownername,
-                                'org_bankowneraddress': org_bankowneraddress,
-                                'org_bankowneriban': org_bankowneriban,
-                                'org_bankownerbic': org_bankownerbic,
-                            }
 
-                        }).done(function(result){
-                            var jsonResult = JSON.parse(result);
+						$.ajax({
+							'type' : "POST",
+							'url' :ajax_object.ajax_url,
+							'data': fd,
+							'cache': false,
+							'contentType': false,
+							'processData': false,
+						}).done(function(result) {
+							var jsonResult = JSON.parse(result);
                             feedback = jsonResult;
 							
-							//Mise à jour des liens de téléchargement des doc uploadés
-							var fileInfo = feedback.fileInfo;
-							if (fileInfo){
-								fileInfo.each(function(document_key, info){
-									if(!info.get_error_code()){//Si info n'est pas un code d'erreur, on a un filepath
-										$("#tab-organization #wdg-lightbox-editOrga a#"+document_key).href(info);
-									}
-									else{//affiche le message d'erreur
-										//$("#tab-organization #wdg-lightbox-editOrga .errors li").html(info.get_error_message(info.get_error_code())); //à revoir
-									}
-								});
-							}		
-							
-                            $("#wdg-lightbox-editOrga").hide();
-							
-                        }).fail(function() {
+							//Vérification s'il y a des erreurs sur l'envoi de fichiers
+							var fdFileInfo = feedback.fileInfo;
+							var count_errors = 0;
+							for (var doc in fdFileInfo){
+								if(fdFileInfo[doc]['code'] === 0 ){//pas d'erreur donc on a un path ou null si pas d'upload
+								}
+								else if (fdFileInfo[doc]['code'] === 1){//erreur
+									count_errors += 1;
+									var li = $('<li>'+fdFileInfo[doc]['info']+'</li>');
+									$('#wdg-lightbox-editOrga ul.errors').append(li);
+								}
+							}
+							//fermeture ligthbox
+							if (count_errors === 0){
+								$("#wdg-lightbox-editOrga").hide();
+							}
+						}).fail(function() {
                             thisForm.find('.save_fail').fadeIn();
                         }).always(function() {
                             //Réactive les champs
                             save_button.find(".button-waiting").hide();
                             save_button.find(".button-text").show();
                             thisForm. find(":input").prop('disabled', false);
-                        });                          
-                    });
-                    
+                        });
+					});
+
                     //fermeture de la lightbox de création d'organisation après enregistrement
                     $("#wdg-lightbox-newOrga form.wdg-forms").submit(function(e){
                         e.preventDefault();

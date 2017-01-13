@@ -24,7 +24,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
 
 
         <?php global $errors_edit, $errors_submit; ?>
-
+		<ul class="errors"></ul>
         <?php if (count($errors_edit->errors) > 0): ?>
         <ul class="errors">
                 <?php $error_messages = $errors_edit->get_error_messages(); ?>
@@ -188,7 +188,8 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 <input type="file" name="org_doc_home" /> <br /><br />
 
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
-                 
+				<input type="hidden" name="action" value="save_edit_organisation" />
+
                 <?php DashboardUtility::create_save_button("orgaedit_form"); ?>
         </form>
 
