@@ -44,6 +44,10 @@ get_header();
 //			$roi_declaration->make_transfer(false);
 			?>
 			
+			<?php //Relancer un ROI seul
+//			$roi = new WDGROI(2798); $roi->retry();
+			?>
+			
 			<?php // Infos sur une transaction
 			//$lw_transaction_result = LemonwayLib::get_transaction_by_id( 'INVU7C11182TS39068' ); print_r($lw_transaction_result); 
 			?>
