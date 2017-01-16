@@ -139,7 +139,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 $current_file_bank = $current_filelist_bank[0];
                 if ( isset($current_file_bank) ):
                 ?>
-                <a target="_blank" href="<?php echo $current_file_bank->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_bank->date_uploaded; ?></a><br />
+                <a id="org_doc_bank" target="_blank" href="<?php echo $current_file_bank->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_bank->date_uploaded; ?></a><br />
                 <?php endif; ?>
                 <input type="file" name="org_doc_bank" /> <br /><br />
 
@@ -150,7 +150,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 $current_file_kbis = $current_filelist_kbis[0];
                 if ( isset($current_file_kbis) ):
                 ?>
-                <a target="_blank" href="<?php echo $current_file_kbis->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_kbis->date_uploaded; ?></a><br />
+                <a id="org_doc_kbis" target="_blank" href="<?php echo $current_file_kbis->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_kbis->date_uploaded; ?></a><br />
                 <?php endif; ?>
                 <input type="file" name="org_doc_kbis" /> <br /><br />
 
@@ -160,7 +160,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 $current_file_status = $current_filelist_status[0];
                 if ( isset($current_file_status) ):
                 ?>
-                <a target="_blank" href="<?php echo $current_file_status->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_status->date_uploaded; ?></a><br />
+                <a id="org_doc_status" target="_blank" href="<?php echo $current_file_status->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_status->date_uploaded; ?></a><br />
                 <?php endif; ?>
                 <input type="file" name="org_doc_status" /> <br /><br />
 
@@ -172,7 +172,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 $current_file_id = $current_filelist_id[0];
                 if ( isset($current_file_id) ):
                 ?>
-                <a target="_blank" href="<?php echo $current_file_id->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_id->date_uploaded; ?></a><br />
+                <a id="org_doc_id" target="_blank" href="<?php echo $current_file_id->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_id->date_uploaded; ?></a><br />
                 <?php endif; ?>
                 <input type="file" name="org_doc_id" /> <br /><br />
 
@@ -183,7 +183,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 $current_file_home = $current_filelist_home[0];
                 if ( isset($current_file_home) ):
                 ?>
-                <a target="_blank" href="<?php echo $current_file_home->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_home->date_uploaded; ?></a><br />
+                <a id="org_doc_home" target="_blank" href="<?php echo $current_file_home->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_home->date_uploaded; ?></a><br />
                 <?php endif; ?>
                 <input type="file" name="org_doc_home" /> <br /><br />
 

@@ -237,7 +237,8 @@ var WDGProjectDashboard = (function ($) {
 							var fdFileInfo = feedback.fileInfo;
 							var count_errors = 0;
 							for (var doc in fdFileInfo){
-								if(fdFileInfo[doc]['code'] === 0 ){//pas d'erreur donc on a un path ou null si pas d'upload
+								if(fdFileInfo[doc]['code'] === 0 ){//pas d'erreur donc on a un path ou null si pas d'upload									
+									WDGProjectDashboard.updateOrgaDoc(fdFileInfo, doc);//mise à jour des liens de téléchargement
 								}
 								else if (fdFileInfo[doc]['code'] === 1){//erreur
 									count_errors += 1;
@@ -247,7 +248,10 @@ var WDGProjectDashboard = (function ($) {
 							}
 							//fermeture ligthbox
 							if (count_errors === 0){
-								$("#wdg-lightbox-editOrga").hide();
+								thisForm.find('.save_ok').fadeIn(); 
+								setTimeout(function(){
+									$("#wdg-lightbox-editOrga").hide();							
+								}, 1500);
 							}
 						}).fail(function() {
                             thisForm.find('.save_fail').fadeIn();
@@ -574,7 +578,7 @@ var WDGProjectDashboard = (function ($) {
         },
 
         scrollTo: function(target){
-            $('html, body').animate(
+            $('html, body, #wdg-lightbox-editOrga').animate(
                 { scrollTop: target.offset().top - 75 },
                 "slow"
             );
@@ -963,8 +967,20 @@ var WDGProjectDashboard = (function ($) {
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownername]").val(feedback.organisation.bankownername);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneraddress]").val(feedback.organisation.bankowneraddress);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneriban]").val(feedback.organisation.bankowneriban);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]").val(feedback.organisation.bankownerbic);			
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]").val(feedback.organisation.bankownerbic);	
         },
+		
+		/**
+		 * Fonction de mise à jour du lien de téléchargement du fichier uploadé
+		 * @param {array} fileInfo : tableau des infos sur tous les fichiers uploadés
+		 * @param {String} document : nom du document uploadé
+		 */
+		updateOrgaDoc: function(fileInfo, document){
+			if(fileInfo[document]['info'] !== null) { //il y a un fichier à uploadé
+				$("#tab-organization #wdg-lightbox-editOrga a#"+document).attr("href", fileInfo[document]['info']);
+				$("#tab-organization #wdg-lightbox-editOrga a#"+document).html(fileInfo[document]['date']);			
+			}
+		},
 
         /**
          * Fonction de mise à jour du select pour le choix de l'organisation
