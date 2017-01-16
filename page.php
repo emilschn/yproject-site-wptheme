@@ -23,7 +23,7 @@ if (is_home() or is_front_page()) {
 					?>
 					<div class="entry center">
 					    
-						<?php the_content( __( '<p class="serif">Read the rest of this page &rarr;</p>', 'buddypress' ) ); ?>
+						<?php the_content( __( '<p class="serif">Lire le reste de la page &rarr;</p>', 'yproject' ) ); ?>
 
 					</div>
 

@@ -68,9 +68,7 @@
 			
 			<br /><br />
 			
-			&lt;&lt; <a href="<?php bp_loggedin_user_link(); ?>#projects">Mon compte</a><br /><br />
-			
-			<div class="align-center mangopay-image"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/powered_by_mangopay.png" alt="logo mangopay"/></div><br /><br />
+			&lt;&lt; <a href="<?php home_url('/mon-compte'); ?>#projects">Mon compte</a><br /><br />
 			
 		</div>
 	</div><!-- .padder -->

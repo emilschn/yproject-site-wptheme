@@ -98,8 +98,6 @@ if (isset($campaign_id)) {
 	<div id="content" style="margin-top: -15px;" class="<?php echo $classes; ?>">
 		<div class="padder">
 
-			<?php do_action( 'bp_before_blog_single_post' ); ?>
-
 			<div class="page" id="blog-archives" role="main">
 				
 				<?php locate_template( array("projects/single/banner.php"), true ); ?>
@@ -121,8 +119,6 @@ if (isset($campaign_id)) {
 				</div>
 			</div>
 
-			<?php do_action( 'bp_after_blog_single_post' ); ?>
-
 		</div><!-- .padder -->
 	</div><!-- #content -->
 <?php
@@ -133,7 +129,7 @@ if (isset($campaign_id)) {
 <?php endwhile; else: ?>
 	<div id="content">
 	    <div class="padder center">
-		<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
+		<p><?php _e( 'D&eacute;sol&eacute;, aucun article correspondant.', 'yproject' ); ?></p>
 	    </div><!-- .padder -->
 	</div><!-- #content -->
 <?php endif; ?>

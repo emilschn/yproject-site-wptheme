@@ -607,6 +607,9 @@ footer > .footer-container > section:nth-child(2) > div:last-child a{
 	max-width: 1280px;
 	margin: auto;
 }
+#content .padder.padder-top {
+	padding-top: 80px;
+}
 
 /*******************************************************************************
 * HOME - VIDEO

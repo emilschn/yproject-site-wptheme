@@ -30,7 +30,7 @@ if (isset($_GET['campaign_id'])) {
 			$user_obj = get_user_by('id', $advice->user_id);
 		?>
 			<li>
-			    <?php echo bp_core_get_userlink($advice->user_id); ?> : <?php echo html_entity_decode($advice->advice, ENT_QUOTES | ENT_HTML401); ?>
+			    <?php echo $user_obj->user_login; ?> : <?php echo html_entity_decode($advice->advice, ENT_QUOTES | ENT_HTML401); ?>
 			</li>
 		<?php } ?>
 	</ul>
