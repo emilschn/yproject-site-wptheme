@@ -60,12 +60,17 @@ if ( !empty( $lemonway_posted_category ) ) {
 			$investment_id = FALSE;
 			$investment_campaign_id = FALSE;
 			$investments_by_campaign = $WDGUser_invest_author->get_pending_investments();
+			$trace = '';
 			foreach ( $investments_by_campaign as $campaign_id => $campaign_investments ) {
-				foreach ($campaign_investments as $$campaign_investment_id) {
+				$trace .= 'A';
+				foreach ($campaign_investments as $campaign_investment_id) {
+					$trace .= 'B';
 					$payment_key = edd_get_payment_key( $campaign_investment_id );
-					if ( strpos( $payment_key, 'wire_' ) ) {
+					if ( strpos( $payment_key, 'wire_' ) !== FALSE ) {
+						$trace .= 'C';
 						$payment_amount = edd_get_payment_amount( $campaign_investment_id );
 						if ( $payment_amount == $lemonway_posted_amount ) {
+							$trace .= 'D';
 							$investment_campaign_id = $campaign_id;
 							$investment_id = $campaign_investment_id;
 						}
@@ -101,7 +106,7 @@ if ( !empty( $lemonway_posted_category ) ) {
 					NotificationsEmails::new_purchase_admin_success_nocontract( $investment_id, $new_contract_pdf_file );
 				}
 			} else {
-				NotificationsEmails::send_mail( 'emilien@wedogood.co', 'Notif interne - Virement reçu - erreur', '$investment_id == FALSE || $investment_campaign_id == FALSE', true );
+				NotificationsEmails::send_mail( 'emilien@wedogood.co', 'Notif interne - Virement reçu - erreur', '$investment_id == FALSE || $investment_campaign_id == FALSE => ' . $trace, true );
 			}
 		} else {
 			NotificationsEmails::send_mail( 'emilien@wedogood.co', 'Notif interne - Virement reçu - erreur', '$WDGUser_invest_author === FALSE', true );

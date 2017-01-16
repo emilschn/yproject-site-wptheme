@@ -10,6 +10,25 @@ if ($post_category == "wedogood") {
 	wp_redirect($new_url);
 	exit();
 }
+//Blocage pour actualités de projets pas encore publiés
+global $campaign_id, $is_campaign, $is_campaign_page;
+$this_category = get_the_category();
+$this_category = $this_category[0];
+$this_category_name = $this_category->name;
+$name_exploded = explode('cat', $this_category_name);
+if (count($name_exploded) > 1) {
+	$campaign_id = $name_exploded[1];
+}
+if (isset($campaign_id)) {
+	$is_campaign = true;
+	$is_campaign_page = true;
+	$campaign_post = get_post($campaign_id);
+	$campaign = atcf_get_campaign($campaign_post);
+	if ( ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated) && !$campaign->current_user_can_edit()) {
+		wp_redirect(home_url());
+	}
+}
+
 ?>
 
 <?php get_header(); ?>
