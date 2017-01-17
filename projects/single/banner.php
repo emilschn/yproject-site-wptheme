@@ -109,13 +109,13 @@ if (count($current_organisations) > 0) {
 				<div class="project-banner-info-actions">
 					<div class="impacts-container" id="impacts-<?php echo $post->ID; ?>">
 						<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="ecl" width="42" height="42" class="impact-logo" />
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="impact environnemental" width="42" height="42" class="impact-logo" title="<?php _e('impact environnemental', 'yproject')?>" />
 						<?php endif; ?>
 						<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="ecl" width="42" height="42" class="impact-logo" />
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="impact social" width="42" height="42" class="impact-logo" title="<?php _e('impact social', 'yproject')?>"/>
 						<?php endif; ?>
 						<?php if (strpos($campaign_categories_str, 'economique') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="ecl" width="42" height="42" class="impact-logo" />
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="impact économique" width="42" height="42" class="impact-logo" title="<?php _e('impact &eacute;conomique', 'yproject')?>"/>
 						<?php endif; ?>
 					</div>
 
@@ -275,11 +275,27 @@ if (count($current_organisations) > 0) {
 					</a>
 				
 				
-				<?php // cas d'un projet terminé ?>
-				<?php else: ?>
+				<?php // cas d'un projet terminé et financé ?>
+				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_funded): ?>
+                                        <?php
+					$nbinvestors = $campaign->backers_count();
+                                        $invest_amount =$campaign->current_amount();
+                                        ?>
+                                        <div class="end-sentence">
+                                                <?php echo $nbinvestors." ". __("personnes","yproject")." ". __("ont investi","yproject") ." ". $invest_amount ." ". __("pour propulser ce projet à impact positif","yproject");?>
+                                        </div>
+                                        <a href="<?php echo home_url( '/les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 				
-				<?php endif; ?>
-				
+                                        
+                                <?php // cas d'un projet terminé et non financé ?>
+                                <?php elseif($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>            
+                                        <div class="end-sentence">
+                                                <?php _e("Malheureusement, ce projet n'a pas &eacute;t&eacute; propuls&eacute;","yproject"); ?>
+                                        </div>
+                                        <a href="<?php echo home_url( '/les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+				   
+                                <?php endif; ?>
+                                      				
 			</div>
 
 		</div>

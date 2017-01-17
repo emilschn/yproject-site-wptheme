@@ -92,27 +92,52 @@ YPUIFunctions = (function($) {
 			
 			
 			//Apparition bouton OK pour connexion
-                        showOkConnect = function(){
-                                $('.model-form #submit-center').css('display', 'inline');
+			showOkConnect = function(){
+				$('.model-form #submit-center').css('display', 'inline');
 				$('.model-form input#password').addClass('pwd_submit');
 				$('.model-form input#connect').addClass('ok_valid');
-                        };
-                        $('#menu .btn-user').click(function(){
-                            if($('#menu .btn-user').hasClass("active")){
-                                 if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "" && $('#rememberme').is(':checked')) {
-                                    console.log("données ok");
-                                    showOkConnect();
-                                }
-                            }
-                        });
-                            
-                        
-                        $('.model-form #identifiant').bind("keypress click",function(){
-                                showOkConnect();
-                        });
-                        $('.model-form #password').bind("keypress click",function(){
-                                showOkConnect();
-                        });
+			};
+			$('#menu .btn-user').click(function(){
+				if($('#menu .btn-user').hasClass("active")){
+					 if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "" && $('#rememberme').is(':checked')) {
+						showOkConnect();
+					}
+				}
+			});
+
+
+			$('.model-form #identifiant').bind("keypress click",function(){
+					showOkConnect();
+			});
+			$('.model-form #password').bind("keypress click",function(){
+					showOkConnect();
+			});
+
+			//Fermeture des box connexion et recherche au clic dans la fenêtre
+			$(window).mouseup(function(e){
+				var boxUser = $('#submenu-user');
+				var btnUser = $('#menu .btn-user');
+				var imgUser = $('#menu .btn-user img');
+				var boxSearch = $('#submenu-search');
+				var btnSearch = $('#menu #btn-search');
+				var imgSearch = $('#menu #btn-search img');
+				var btnBurger = $('#btn-burger');
+				var imgBurger = $('#btn-burger img');
+
+				//connexion
+				if(!boxUser.is(e.target) && !btnUser.is(e.target) && !imgUser.is(e.target)
+					&& boxUser.css('display')==='block' && boxUser.has(e.target).length === 0) {
+					boxUser.hide();
+					btnUser.removeClass('active').addClass('inactive');
+				}
+				//recherche
+				else if(!boxSearch.is(e.target) && !btnSearch.is(e.target) && !imgSearch.is(e.target)
+					&& !imgBurger.is(e.target) && boxSearch.css('display') === 'block' && boxSearch.has(e.target).length === 0){
+					boxSearch.hide();
+					btnSearch.removeClass('active').addClass('inactive');
+					btnBurger.removeClass('active').addClass('inactive');
+				}
+			});
                                 			
 			$("#subscribe-nl-mail").keypress(function() {
 				$("#subscribe-nl-mail").addClass("retracted");

@@ -53,9 +53,9 @@ $estimated_turnover = $campaign->estimated_turnover();
 
 					<?php if (is_user_logged_in()): ?>
 
-						<span class="uppercase"><?php _e("Je recevrai", 'yproject'); ?></span> <span class="roi_amount_user">0</span> &euro;* <br />
+                                        <span class="uppercase"><?php _e("Je recevrai", 'yproject'); ?></span> <span class="roi_amount_user">0</span><span> &euro;* </span><br />
 						<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span> % <?php _e("du chiffre d'affaire vers&eacute; tous les trimestres.", 'yproject'); ?><br />
-						
+                                                
 						<div>
 							<table>
 								<tr>
@@ -64,13 +64,15 @@ $estimated_turnover = $campaign->estimated_turnover();
 									<?php $height = 100 - round($value / $max_turnover * 100); ?>
 									<td>
 										<div><div style="height: <?php echo $height; ?>%;"><span class="roi_amount_user_container"><span class="roi_amount_user<?php echo $index; ?>">0</span> &euro;</span></div></div>
+                                                                                <div class="roi_amount_base"></div>
 										<?php echo $i; ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $value; ?></span>
 									</td>
 									<?php $index++; endforeach; ?>
 								</tr>
-							</table>
+							</table>                                       
 						</div>
-
+                                                <?php $base = 130 * $index; ?>
+                                                <div class="arrow-line" style="width: <?php echo $base ?>px;"><div class="arrow-end"></div></div>
 					<?php else: ?>
 						<div class="hidden">
 							<p>
@@ -80,12 +82,12 @@ $estimated_turnover = $campaign->estimated_turnover();
 							<a href="#register" id="register" class="wdg-button-lightbox-open button red" data-lightbox="register" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Inscription", 'yproject'); ?></a>
 							<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button red" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Connexion", 'yproject'); ?></a>
 						</div>
-
+                                                
 					<?php endif; ?>
-
-				<?php endif; ?>
+                                               
+				<?php endif; ?>                               
 			</div>
-
+                        
 		<?php if (is_user_logged_in()): ?>
 			<div class="project-rewards-alert">
 				<?php _e("Rendement vis&eacute; :", "yproject"); ?> 

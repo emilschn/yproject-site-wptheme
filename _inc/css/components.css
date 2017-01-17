@@ -92,7 +92,7 @@
     left: 10%;
 }
 .wdg-component-slider #button-container .button-slide, .wdg-component-slider .slider-container #slider .slide-1button #button-container .button-slide{
-    width: 32%; 
+    width: 32%;
     margin: 0% 1.5%;
     text-align: center;
     font-size: 11pt;
@@ -212,7 +212,7 @@
         overflow: -moz-scrollbars-horizontal;/* Firefox */ 
             -ms-overflow-style: scrollbar;/* Edge */
 	overflow-x: auto;
-        margin-bottom: 15px;
+        margin-bottom: 0.8%;
 }
 .wdg-component-projects-preview .block-projects {
     z-index: 0;
@@ -460,9 +460,9 @@ body.page-template-template-discover-projects-php .wdg-component-projects-previe
     background: repeating-linear-gradient(
     -45deg,
     #00879B,
-    #00879B 7px,
-    #D3EAE9 0.5px,
-    #00879B 7.5px);
+    #00879B 5px,
+    #E1E3E2 5px,
+    #00879B 6.3px);
 }
 .progress-bar .progress-percent { 
     display: -webkit-flex;
