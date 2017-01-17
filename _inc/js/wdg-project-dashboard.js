@@ -253,6 +253,8 @@ var WDGProjectDashboard = (function ($) {
 									$("#wdg-lightbox-editOrga").hide();							
 								}, 1500);
 							}
+							//Mise à jour du reste du formulaire d'édition (input type text)
+							WDGProjectDashboard.updateOrgaForm(feedback);
 						}).fail(function() {
                             thisForm.find('.save_fail').fadeIn();
                         }).always(function() {
@@ -564,6 +566,8 @@ var WDGProjectDashboard = (function ($) {
                             WDGProjectDashboard.updateEditOrgaBtn(thisForm);
                             //Mise à jour du formulaire d'édition après enregistrement de la liaison
                             WDGProjectDashboard.updateOrgaForm(feedback);
+							//Mise à jour des liens de téléchargement des docs du formulaire d'édition
+							WDGProjectDashboard.updateOrgaFormDoc(feedback);
                         }
                    }
                }).fail(function() {
@@ -967,18 +971,101 @@ var WDGProjectDashboard = (function ($) {
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownername]").val(feedback.organisation.bankownername);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneraddress]").val(feedback.organisation.bankowneraddress);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneriban]").val(feedback.organisation.bankowneriban);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]").val(feedback.organisation.bankownerbic);	
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]").val(feedback.organisation.bankownerbic);
         },
 		
+		/**
+		 * Fonction de mise à jour des liens de téléchargement des documents
+		 * uploadés de l'organisation après l'action save_project_organisation
+		 * @param {object} feedback : infos renvoyées par l'action php
+		 */
+		updateOrgaFormDoc: function(feedback){
+			if(feedback.organisation.doc_bank.path != null){
+				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_bank").length === 0){
+					var link_bank = $('<a id="org_doc_bank" target="_blank" href="'+feedback.organisation.doc_bank.path+'">'+feedback.organisation.doc_bank.date_uploaded+'</a><br />');
+					link_bank.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_bank]"));
+				}
+				else{
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_bank").attr("href", feedback.organisation.doc_bank.path);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_bank").html(feedback.organisation.doc_bank.date_uploaded);
+				}
+			}
+			else {
+				$("#tab-organization #wdg-lightbox-editOrga a#org_doc_bank").remove();
+			}
+
+			if(feedback.organisation.doc_kbis.path != null){
+				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_kbis").length === 0){
+					var link_kbis = $('<a id="org_doc_kbis" target="_blank" href="'+feedback.organisation.doc_kbis.path+'">'+feedback.organisation.doc_kbis.date_uploaded+'</a><br />');
+					link_kbis.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_kbis]"));
+				}
+				else{
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_kbis").attr("href", feedback.organisation.doc_kbis.path);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_kbis").html(feedback.organisation.doc_kbis.date_uploaded);
+				}
+			}
+			else {
+				$("#tab-organization #wdg-lightbox-editOrga a#org_doc_kbis").remove();
+			}
+
+			if(feedback.organisation.doc_status.path != null){
+				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_status").length === 0){
+					var link_status = $('<a id="org_doc_status" target="_blank" href="'+feedback.organisation.doc_status.path+'">'+feedback.organisation.doc_status.date_uploaded+'</a><br />');
+					link_status.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_status]"));
+				}
+				else{
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_status").attr("href", feedback.organisation.doc_status.path);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_status").html(feedback.organisation.doc_status.date_uploaded);
+				}
+			}
+			else {
+				$("#tab-organization #wdg-lightbox-editOrga a#org_doc_status").remove();
+			}
+
+			if(feedback.organisation.doc_id.path != null){
+				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_id").length === 0){
+					var link_id = $('<a id="org_doc_id" target="_blank" href="'+feedback.organisation.doc_id.path+'">'+feedback.organisation.doc_id.date_uploaded+'</a><br />');
+					link_id.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_id]"));
+				}
+				else{
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_id").attr("href", feedback.organisation.doc_id.path);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_id").html(feedback.organisation.doc_id.date_uploaded);
+				}
+			}
+			else {
+				$("#tab-organization #wdg-lightbox-editOrga a#org_doc_id").remove();
+			}
+
+			if(feedback.organisation.doc_home.path != null){
+				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_home").length === 0){
+					var link_home = $('<a id="org_doc_home" target="_blank" href="'+feedback.organisation.doc_home.path+'">'+feedback.organisation.doc_home.date_uploaded+'</a><br />');
+					link_home.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_home]"));
+				}
+				else{
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_home").attr("href", feedback.organisation.doc_home.path);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_home").html(feedback.organisation.doc_home.date_uploaded);
+				}
+			}
+			else {
+				$("#tab-organization #wdg-lightbox-editOrga a#org_doc_home").remove();
+			}
+		},
+
 		/**
 		 * Fonction de mise à jour du lien de téléchargement du fichier uploadé
 		 * @param {array} fileInfo : tableau des infos sur tous les fichiers uploadés
 		 * @param {String} document : nom du document uploadé
 		 */
 		updateOrgaDoc: function(fileInfo, document){
-			if(fileInfo[document]['info'] !== null) { //il y a un fichier à uploadé
-				$("#tab-organization #wdg-lightbox-editOrga a#"+document).attr("href", fileInfo[document]['info']);
-				$("#tab-organization #wdg-lightbox-editOrga a#"+document).html(fileInfo[document]['date']);			
+			if(fileInfo[document]['info'] !== null) { //il y a un fichier à uploader
+				if($("#tab-organization #wdg-lightbox-editOrga a#"+document).length === 0){
+					var link = $('<a id="'+document+'" target="_blank" href="'+fileInfo[document]['info']+'">'+fileInfo[document]['date']+'</a><br />');
+					link.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name="+document+"]"));
+				}
+				else{
+					$("#tab-organization #wdg-lightbox-editOrga a#"+document).attr("href", fileInfo[document]['info']);
+					$("#tab-organization #wdg-lightbox-editOrga a#"+document).html(fileInfo[document]['date']);
+				}
 			}
 		},
 
