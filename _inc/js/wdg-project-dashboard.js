@@ -234,7 +234,7 @@ var WDGProjectDashboard = (function ($) {
                             feedback = jsonResult;
 							
 							//Vérification s'il y a des erreurs sur l'envoi de fichiers
-							var fdFileInfo = feedback.fileInfo;
+							var fdFileInfo = feedback.files_info;
 							var count_errors = 0;
 							for (var doc in fdFileInfo){
 								if(fdFileInfo[doc]['code'] === 0 ){//pas d'erreur donc on a un path ou null si pas d'upload									
