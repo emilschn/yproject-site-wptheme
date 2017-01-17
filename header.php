@@ -83,6 +83,9 @@
 		//FIN CACHE HEAD
 		//*******************
 		?>
+		<?php if (!is_user_logged_in()): ?>
+		<script src='https://www.google.com/recaptcha/api.js'></script>
+		<?php endif; ?>
 
 		<?php do_action( 'bp_head' ); ?>
 		<?php wp_head(); ?>

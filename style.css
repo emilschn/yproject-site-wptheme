@@ -2065,7 +2065,7 @@ span#extra-comment-image{
     text-align: center;
 }
 .form-register .register-section div {
-    margin: 7px 0px;
+    margin: 7px auto;
     text-align: center;
 }
 .form-register div#connexion_facebook_container {

@@ -21,7 +21,7 @@
     
 		<div class="register-section" id="basic-details-section">
 			<div class="on-focus">
-				<input type="text" name="signup_username" placeholder="<?php _e( 'Identifiant', 'yproject' ); ?> *" id="signup_username" value="<?php if (!empty($_POST['signup_username'])) { echo $_POST['signup_username']; } ?>" autofocus />
+				<input type="text" name="signup_username_login" placeholder="<?php _e( 'Identifiant', 'yproject' ); ?> *" id="signup_username_login" value="<?php if (!empty($_POST['signup_username'])) { echo $_POST['signup_username']; } ?>" autofocus />
 				<div class="tool-tip slideIn right">Choisissez un Identifiant</div>
 			</div>
 
@@ -39,7 +39,9 @@
 				<input type="password" name="signup_password_confirm" placeholder="<?php _e( 'Confirmation du mot de passe', 'yproject' ); ?> *" id="signup_password_confirm" value="" />
 				<div class="tool-tip slideIn right">Confirmez votre mot de passe</div>
 			</div>
-                                    
+			
+			<div class="g-recaptcha" data-sitekey="6LcoHRIUAAAAADwRb9TDAhshD3CZgIhx1M-MO84y"></div>
+			
 			<label for="validate-terms-check"><input type="checkbox" name="validate-terms-check" /> J&apos;accepte <a href="<?php echo home_url().'/cgu';  ?>"  target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
 			
 			<?php wp_nonce_field( 'register_form_posted' ); ?>

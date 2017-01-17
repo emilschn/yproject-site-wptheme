@@ -338,14 +338,14 @@ function ypbp_core_screen_signup() {
 	$bp->signup->step = 'request-details';
 
 	// If the signup page is submitted, validate and save
-	if ( isset( $_POST['signup_submit'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'register_form_posted' ) ) {
+	if ( isset( $_POST['signup_submit'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'register_form_posted' ) && yp_check_recaptcha($_POST['g-recaptcha-response']) ) {
 
 		// Check the base account details for problems
-		$account_details = bp_core_validate_user_signup( $_POST['signup_username'], $_POST['signup_email'] );
+		$account_details = bp_core_validate_user_signup( $_POST['signup_username_login'], $_POST['signup_email'] );
 
 		// If there are errors with account details, set them for display
 		if ( !empty( $account_details['errors']->errors['user_name'] ) )
-			$bp->signup->errors['signup_username'] = $account_details['errors']->errors['user_name'][0];
+			$bp->signup->errors['signup_username_login'] = $account_details['errors']->errors['user_name'][0];
 
 		if ( !empty( $account_details['errors']->errors['user_email'] ) )
 			$bp->signup->errors['signup_email'] = $account_details['errors']->errors['user_email'][0];
@@ -362,7 +362,7 @@ function ypbp_core_screen_signup() {
 		if ( empty($_POST['validate-terms-check']) )
 			$bp->signup->errors['validate_terms_check'] = __( 'Merci de cocher la case pour accepter les conditions g&eacute;n&eacute;rales d&apos;utilisation.', 'yproject' );
 
-		$bp->signup->username = $_POST['signup_username'];
+		$bp->signup->username = $_POST['signup_username_login'];
 		$bp->signup->email = $_POST['signup_email'];
 
 		// Add any errors to the action for the field in the template for display.
@@ -381,7 +381,7 @@ function ypbp_core_screen_signup() {
 			$usermeta = apply_filters( 'bp_signup_usermeta', $usermeta );
 
 			// Finally, sign up the user
-			$wp_user_id = bp_core_signup_user( $_POST['signup_username'], $_POST['signup_password'], $_POST['signup_email'], $usermeta );
+			$wp_user_id = bp_core_signup_user( $_POST['signup_username_login'], $_POST['signup_password'], $_POST['signup_email'], $usermeta );
 
 			if ( is_wp_error( $wp_user_id ) ) {
 				$bp->signup->step = 'request-details';
@@ -408,6 +408,31 @@ function ypbp_core_screen_signup() {
 	}
 
 	do_action( 'bp_core_screen_signup' );
+}
+
+function yp_check_recaptcha( $code ) {
+	if (empty($code)) { return false; }
+	$params = [
+		'secret'    => RECAPTCHA_SECRET,
+		'response'  => $code
+	];
+	if( $ip ){
+		$params['remoteip'] = $ip;
+	}
+	$url = "https://www.google.com/recaptcha/api/siteverify?" . http_build_query($params);
+	$curl = curl_init($url);
+	curl_setopt($curl, CURLOPT_HEADER, false);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($curl, CURLOPT_TIMEOUT, 1);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	$response = curl_exec($curl);
+
+	if (empty($response) || is_null($response)) {
+		return false;
+	}
+
+	$json = json_decode($response);
+	return $json->success;
 }
 
 function ypbp_filter_send_activation_key() {
