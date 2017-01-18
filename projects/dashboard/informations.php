@@ -365,14 +365,14 @@ function print_informations_page()
                     ob_start();
                     locate_template( array("projects/dashboard/informations/lightbox-organisation-edit.php"), true );                  
                     $lightbox_content = ob_get_clean();
-                    echo do_shortcode('[yproject_widelightbox id="editOrga"]'.$lightbox_content.'[/yproject_widelightbox]'); 
+                    echo do_shortcode('[yproject_widelightbox id="editOrga" scrolltop="1"]'.$lightbox_content.'[/yproject_widelightbox]');
                 }
             ?>
             <?php 
                 ob_start();
 		locate_template( array("projects/dashboard/informations/lightbox-organisation-new.php"), true );
                 $lightbox_content = ob_get_clean();
-                echo do_shortcode('[yproject_lightbox id="newOrga"]'.$lightbox_content.'[/yproject_lightbox]');
+                echo do_shortcode('[yproject_lightbox id="newOrga" scrolltop="1"]'.$lightbox_content.'[/yproject_lightbox]');
             ?>
         </div>
 

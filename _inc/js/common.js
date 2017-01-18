@@ -170,6 +170,9 @@ YPUIFunctions = (function($) {
 					$(".wdg-lightbox").hide();
 					var target = $(this).data("lightbox");
 					$("#wdg-lightbox-" + target).show();
+					if($("#wdg-lightbox-" + target).attr("data-scrolltop") == "1"){
+						YPUIFunctions.scrollTo($(".wdg-lightbox-padder"));
+					}
 				});
 				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function(e) {
 					$(".wdg-lightbox").hide();
@@ -590,7 +593,12 @@ YPUIFunctions = (function($) {
 				}
 			}
 			YPUIFunctions.refreshProjectPreview();
-		}
+		},
+
+		//Scroll en haut d'une ligthbox
+		scrollTo: function(target){
+            $('.wdg-lightbox-padder').scrollTop (target.offset().top - 75);
+        }
 	}
 
 })(jQuery);
