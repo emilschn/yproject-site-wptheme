@@ -23,27 +23,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
 <div class="center margin-height">
 
 
-        <?php global $errors_edit, $errors_submit; ?>
 		<ul class="errors"></ul>
-        <?php if (count($errors_edit->errors) > 0): ?>
-        <ul class="errors">
-                <?php $error_messages = $errors_edit->get_error_messages(); ?>
-                <?php foreach ($error_messages as $error_message): ?>
-                        <li><?php echo $error_message; ?></li>
-                <?php endforeach; ?>
-        </ul>
-        <?php elseif (count($errors_submit->errors) > 0): ?>
-        <ul class="errors">
-                <?php $error_messages = $errors_submit->get_error_messages(); ?>
-                <?php foreach ($error_messages as $error_message): ?>
-                        <li><?php echo $error_message; ?></li>
-                <?php endforeach; ?>
-        </ul>
-        <?php elseif (filter_input(INPUT_POST, 'action') == 'save_edit_organisation'): ?>
-        <p class="success">
-                <?php _e('Modifications enregistr&eacute;es.'); ?>
-        </p>
-        <?php endif; ?>
 
         <h1><?php _e('&Eacute;diter l\'organisation','yproject'); echo "&nbsp;"; ?></h1>
 
