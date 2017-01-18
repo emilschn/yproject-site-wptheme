@@ -237,14 +237,13 @@ var WDGProjectDashboard = (function ($) {
 							var fdFileInfo = feedback.files_info;
 							var count_errors = 0;
 							for (var doc in fdFileInfo){
-								if(fdFileInfo[doc]['code'] === 0 ){//pas d'erreur donc on a un path ou null si pas d'upload									
-									WDGProjectDashboard.updateOrgaDoc(fdFileInfo, doc);//mise à jour des liens de téléchargement
-								}
-								else if (fdFileInfo[doc]['code'] === 1){//erreur
+								if (fdFileInfo[doc]['code'] === 1){//erreur
 									count_errors += 1;
 									var li = $('<li>'+fdFileInfo[doc]['info']+'</li>');
-									$('#wdg-lightbox-editOrga ul.errors').append(li);
+									$("#wdg-lightbox-editOrga ul.errors").append(li);
+									WDGProjectDashboard.scrollTo($("#wdg-lightbox-editOrga ul.errors"));
 								}
+								WDGProjectDashboard.updateOrgaDoc(fdFileInfo, doc);//mise à jour des liens de téléchargement
 							}
 							//fermeture ligthbox
 							if (count_errors === 0){
@@ -582,7 +581,7 @@ var WDGProjectDashboard = (function ($) {
         },
 
         scrollTo: function(target){
-            $('html, body, #wdg-lightbox-editOrga').animate(
+            $('html, body, .wdg-lightbox-padder').animate(
                 { scrollTop: target.offset().top - 75 },
                 "slow"
             );
@@ -1066,6 +1065,9 @@ var WDGProjectDashboard = (function ($) {
 					$("#tab-organization #wdg-lightbox-editOrga a#"+document).attr("href", fileInfo[document]['info']);
 					$("#tab-organization #wdg-lightbox-editOrga a#"+document).html(fileInfo[document]['date']);
 				}
+			}
+			else {
+				$("#tab-organization #wdg-lightbox-editOrga a#"+document).remove();
 			}
 		},
 
