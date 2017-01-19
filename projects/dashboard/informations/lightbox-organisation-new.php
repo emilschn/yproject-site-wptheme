@@ -9,19 +9,8 @@ global $campaign_id
 	    
 <div class="margin-height">
 
+		<ul class="errors"></ul>
 
-        <?php global $errors_submit_new, $errors_create_orga; ?>
-        <?php if (count($errors_submit_new->errors) > 0 || count($errors_create_orga) > 0): ?>
-        <ul class="errors">
-                <?php $error_messages = $errors_submit_new->get_error_messages(); ?>
-                <?php foreach ($error_messages as $error_message): ?>
-                        <li><?php echo $error_message; ?></li>
-                <?php endforeach; ?>
-                <?php foreach ($errors_create_orga as $error_create_orga): ?>
-                        <li><?php echo $error_create_orga; ?></li>
-                <?php endforeach; ?>
-        </ul>
-        <?php endif; ?>
         <h1><?php _e('Cr&eacute;er une organisation','yproject')?></h1>
         <form id="orgacreate_form" action="" method="POST" enctype="multipart/form-data" class="wdg-forms" data-action="save_new_organisation">
 

@@ -326,24 +326,44 @@ var WDGProjectDashboard = (function ($) {
                                 'org_bankownerbic': org_bankownerbic,
                                 'org_capable': org_capable
                             }
-
                         }).done(function(result){
-                            var jsonResult = JSON.parse(result);
-                            feedback = jsonResult;
-                            $("#wdg-lightbox-newOrga").hide();
 
-                            //Mise à jour de l'input select
-                            WDGProjectDashboard.updateOrgaSelectInput(feedback);
+							if(result === "FALSE"){//user non connecté
+								window.location.reload();//affiche message de non permission
+							}else{
+								var jsonResult = JSON.parse(result);
+								feedback = jsonResult;
 
-                            //Mise à jour du bouton d'édition
-                            var newname = $("#new_project_organisation").find('option:selected').text();
-                            var edit_btn = $('#tab-organization #orgainfo_form').find($("#edit-orga-button"));
-                            edit_btn.attr("href","#");
-                            edit_btn.text("Editer "+newname);
-                            
-                            //Mise à jour du formulaire d'édition
-                            WDGProjectDashboard.updateOrgaForm(feedback);
+								//Vérification s'il y a des erreurs dans le formulaire
+								var errors = feedback.errors;
+								var count_errors = 0;
+								for (var error in errors){
+									if(error !== ""){
+										count_errors+=1;
+										var li = $('<li>'+errors[error]+'</li>');
+										$("#wdg-lightbox-newOrga ul.errors").append(li);
+										WDGProjectDashboard.scrollTo($("#wdg-lightbox-newOrga ul.errors"));
+									}
+								}
+								//Fermeture lightbox
+								if(count_errors === 0){
+									thisForm.find('.save_ok').fadeIn();
+									setTimeout(function(){
+										$("#wdg-lightbox-newOrga").hide();
+									}, 1500);
+									//Mise à jour de l'input select
+									WDGProjectDashboard.updateOrgaSelectInput(feedback);
 
+									//Mise à jour du bouton d'édition
+									var newname = $("#new_project_organisation").find('option:selected').text();
+									var edit_btn = $('#tab-organization #orgainfo_form').find($("#edit-orga-button"));
+									edit_btn.attr("href","#");
+									edit_btn.text("Editer "+newname);
+
+									//Mise à jour du formulaire d'édition
+									WDGProjectDashboard.updateOrgaForm(feedback);
+								}
+							}
                         }).fail(function() {
                             thisForm.find('.save_fail').fadeIn();
                         }).always(function() {
