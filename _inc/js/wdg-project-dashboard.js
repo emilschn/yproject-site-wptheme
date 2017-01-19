@@ -230,30 +230,34 @@ var WDGProjectDashboard = (function ($) {
 							'contentType': false,
 							'processData': false,
 						}).done(function(result) {
-							var jsonResult = JSON.parse(result);
-                            feedback = jsonResult;
-							
-							//Vérification s'il y a des erreurs sur l'envoi de fichiers
-							var fdFileInfo = feedback.files_info;
-							var count_errors = 0;
-							for (var doc in fdFileInfo){
-								if (fdFileInfo[doc]['code'] === 1){//erreur
-									count_errors += 1;
-									var li = $('<li>'+fdFileInfo[doc]['info']+'</li>');
-									$("#wdg-lightbox-editOrga ul.errors").append(li);
-									WDGProjectDashboard.scrollTo($("#wdg-lightbox-editOrga ul.errors"));
+
+							if(result === "FALSE"){//user non connecté
+								window.location.reload();//affiche message de non permission
+							}else{
+								var jsonResult = JSON.parse(result);
+								feedback = jsonResult;
+								//Vérification s'il y a des erreurs sur l'envoi de fichiers
+								var fdFileInfo = feedback.files_info;
+								var count_errors = 0;
+								for (var doc in fdFileInfo){
+									if (fdFileInfo[doc]['code'] === 1){//erreur
+										count_errors += 1;
+										var li = $('<li>'+fdFileInfo[doc]['info']+'</li>');
+										$("#wdg-lightbox-editOrga ul.errors").append(li);
+										WDGProjectDashboard.scrollTo($("#wdg-lightbox-editOrga ul.errors"));
+									}
+									WDGProjectDashboard.updateOrgaDoc(fdFileInfo, doc);//mise à jour des liens de téléchargement
 								}
-								WDGProjectDashboard.updateOrgaDoc(fdFileInfo, doc);//mise à jour des liens de téléchargement
+								//fermeture ligthbox
+								if (count_errors === 0){
+									thisForm.find('.save_ok').fadeIn();
+									setTimeout(function(){
+										$("#wdg-lightbox-editOrga").hide();
+									}, 1500);
+								}
+								//Mise à jour du reste du formulaire d'édition (input type text)
+								WDGProjectDashboard.updateOrgaForm(feedback);
 							}
-							//fermeture ligthbox
-							if (count_errors === 0){
-								thisForm.find('.save_ok').fadeIn(); 
-								setTimeout(function(){
-									$("#wdg-lightbox-editOrga").hide();							
-								}, 1500);
-							}
-							//Mise à jour du reste du formulaire d'édition (input type text)
-							WDGProjectDashboard.updateOrgaForm(feedback);
 						}).fail(function() {
                             thisForm.find('.save_fail').fadeIn();
                         }).always(function() {
