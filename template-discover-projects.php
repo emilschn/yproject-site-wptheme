@@ -51,20 +51,25 @@
 			<?php
 //*******************
 //CACHE STATS PROJETS
-$cache_project_stats = $WDG_cache_plugin->get_cache('list-projects-stats', 1);
+$cache_project_stats = $WDG_cache_plugin->get_cache('list-projects-stats', 2);
 if ($cache_project_stats !== FALSE) { echo $cache_project_stats; }
 else {
 	ob_start();
-			$project_list_funded = ATCF_Campaign::get_list_funded( 28 );
+			$project_list_funded = ATCF_Campaign::get_list_funded( 30 );
 			$count_amount = 0;
-			$count_people = 0;
+			$people_list = array();
+//			$count_people = 0;
 			$count_projects = 0;
 			foreach ( $project_list_funded as $project_post ) {
 				$count_projects++;
 				$campaign = atcf_get_campaign( $project_post->ID );
-				$count_people += $campaign->backers_count();
+//				$count_people += $campaign->backers_count();
+				$backers_id_list = $campaign->backers_id_list();
+				$people_list = array_merge( $people_list, $backers_id_list );
 				$count_amount += $campaign->current_amount( false );
 			}
+			$people_list = array_unique( $people_list );
+			$count_people = count( $people_list );
 			?>
 			<div id="wdg-project-stats" class="right">
 				<p><?php _e( "WE DO GOOD c'est :" ); ?></p>
@@ -92,7 +97,7 @@ else {
 			</div>
 <?php
 	$cache_project_stats = ob_get_contents();
-	$WDG_cache_plugin->set_cache('list-projects-stats', $cache_project_stats, 60*60*24, 1);  //MAJ 24h
+	$WDG_cache_plugin->set_cache('list-projects-stats', $cache_project_stats, 60*60*24, 2);  //MAJ 24h
 	ob_end_clean();
 	echo $cache_project_stats;
 }
