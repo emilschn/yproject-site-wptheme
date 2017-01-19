@@ -407,7 +407,6 @@ YPUIFunctions = (function($) {
 					$(".projects-current .wdg-component-projects-preview .project-slider").scrollLeft( ($(".projects-current .wdg-component-projects-preview .block-projects").width() - $(".projects-current .wdg-component-projects-preview .project-slider").width()) / 2 );
 
 					$(".projects-funded .wdg-component-projects-preview .block-projects").width( ($(".projects-funded .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-funded .wdg-component-projects-preview .project-container").length );
-					$(".projects-funded .wdg-component-projects-preview .project-slider").scrollLeft( ($(".projects-funded .wdg-component-projects-preview .block-projects").width() - $(".projects-funded .wdg-component-projects-preview .project-slider").width()) / 2 );
 
 				} else if ($(".wdg-component-projects-preview .project-slider").length > 0) {
 					$(".wdg-component-projects-preview .block-projects").width( ($(".wdg-component-projects-preview .project-container").width() + 5) * $(".wdg-component-projects-preview .project-container").length );
