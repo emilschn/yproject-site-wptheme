@@ -98,20 +98,12 @@ YPUIFunctions = (function($) {
 				$('.model-form input#connect').addClass('ok_valid');
 			};
 			$('#menu .btn-user').click(function(){
-				if($('#menu .btn-user').hasClass("active")){
-					 if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "" && $('#rememberme').is(':checked')) {
-						showOkConnect();
-					}
+				if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "") {
+					showOkConnect();
 				}
 			});
-
-
-			$('.model-form #identifiant').bind("keypress click",function(){
-					showOkConnect();
-			});
-			$('.model-form #password').bind("keypress click",function(){
-					showOkConnect();
-			});
+			$('.model-form #identifiant').bind("keypress click", function(){ showOkConnect(); });
+			$('.model-form #password').bind("keypress click", function(){ showOkConnect(); });
 
 			//Fermeture des box connexion et recherche au clic dans la fenêtre
 			$(window).mouseup(function(e){
