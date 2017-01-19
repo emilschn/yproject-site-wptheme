@@ -176,7 +176,7 @@
 
 					<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 2px 0 0; color: #000000; margin: 5% 5%;"/>
 
-					<form method="post" action="" name="login-form" id="sidebar-login-form" class="model-form">
+					<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" id="sidebar-login-form" class="model-form">
 						<span id="title-connection"><?php _e('Connexion', 'yproject'); ?></span>
 						<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('Identifiant ou e-mail', 'yproject'); ?>" value="" />
 						<br />
@@ -228,6 +228,8 @@
 
 		<?php if (!is_user_logged_in()): ?>
 			<?php echo do_shortcode('[yproject_register_lightbox]'); ?>
+			<?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
+		
 		<?php elseif (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)): ?>
 			<?php $_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; ?>
 			<div class="timeout-lightbox wdg-lightbox">
