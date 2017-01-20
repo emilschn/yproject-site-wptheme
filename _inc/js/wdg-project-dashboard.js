@@ -227,7 +227,7 @@ var WDGProjectDashboard = (function ($) {
                     $("#new_first_payment").change(function(){
                         var start_year = 1;
                         $("#estimated-turnover li .year").each(function(index){
-                            $(this).html((parseInt(start_year)+index));//le n° d'année est déjà renseigné par le reste du code => pour admin, on a année 11, année 22...(ne vois pas le rapport avec new_first_payment)
+                            $(this).html((parseInt(start_year)+index));
                         });
                     });
                     
@@ -240,20 +240,21 @@ var WDGProjectDashboard = (function ($) {
                         //Ajoute des boîtes au besoin
                         if(new_nb_years > nb_years_li_existing){
                             var newlines = $("#estimated-turnover").html();
-
-                            for(var i=0; i<new_nb_years-nb_years_li_existing;i++){
-                                newlines = newlines+
-                                    '<li class="field">' +
-                                    '<label>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></label>'+
-                                    '<span class="field-container">'+
-                                    '&nbsp;<span class="field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
-                                    '<i class="right fa fa-eur" aria-hidden="true"></i>'+
-                                    '<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" />'+                                   
-                                    '</span>'+
-                                    '<span class="like-input-center"><p id="roi-amount-'+(i+nb_years_li_existing)+'">0 €</p></span>'+
-                                    '</span>'+
-                                    '</li>';
-                            }
+							if(new_nb_years <= 20){
+								for(var i=0; i<new_nb_years-nb_years_li_existing;i++){
+									newlines = newlines+
+										'<li class="field">' +
+										'<label>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></label>'+
+										'<span class="field-container">'+
+										'&nbsp;<span class="field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
+										'<i class="right fa fa-eur" aria-hidden="true"></i>'+
+										'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" />'+                                   
+										'</span>'+
+										'<span class="like-input-center"><p id="roi-amount-'+(i+nb_years_li_existing)+'">0 €</p></span>'+
+										'</span>'+
+										'</li>';
+								}
+							}
 
                             $("#estimated-turnover").html(newlines);
                                                       
