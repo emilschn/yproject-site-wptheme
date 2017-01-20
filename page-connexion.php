@@ -2,7 +2,7 @@
     if (is_user_logged_in()) wp_redirect(home_url());
 ?>
 <?php get_header(); ?>
-    <div id="content">
+    <div id="content" style="margin-top: 90px;">
 	<div class="padder_more">
 	    <div class="center_small margin-height">
 		    <?php if (isset($_GET["login"]) && $_GET["login"] == "failed") {?>

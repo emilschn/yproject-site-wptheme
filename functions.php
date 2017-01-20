@@ -53,7 +53,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
-	$current_version = '20161205';
+	$current_version = '20170116';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -301,6 +301,32 @@ function yproject_check_is_warning_meta_init($user_id){
     if($warning == null){
         return true; 
     }
+}
+//yp_check_recaptcha($_POST['g-recaptcha-response'])
+
+function yp_check_recaptcha( $code ) {
+	if (empty($code)) { return false; }
+	$params = [
+		'secret'    => RECAPTCHA_SECRET,
+		'response'  => $code
+	];
+	if( $ip ){
+		$params['remoteip'] = $ip;
+	}
+	$url = "https://www.google.com/recaptcha/api/siteverify?" . http_build_query($params);
+	$curl = curl_init($url);
+	curl_setopt($curl, CURLOPT_HEADER, false);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($curl, CURLOPT_TIMEOUT, 1);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	$response = curl_exec($curl);
+
+	if (empty($response) || is_null($response)) {
+		return false;
+	}
+
+	$json = json_decode($response);
+	return $json->success;
 }
 
 function yproject_user_register( $user_id ) {

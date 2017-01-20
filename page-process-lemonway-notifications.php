@@ -84,7 +84,11 @@ if ( !empty( $lemonway_posted_category ) ) {
 				$campaign = new ATCF_Campaign( $post_campaign );
 				$campaign_organization = $campaign->get_organisation();
 				$organization_obj = new YPOrganisation( $campaign_organization->organisation_wpref );
-				LemonwayLib::ask_transfer_funds( $WDGUser_invest_author->get_lemonway_id(), $organisation_obj->get_lemonway_id(), $lemonway_posted_amount );
+				$invest_author = $WDGUser_invest_author;
+				if ( YPOrganisation::is_user_organisation($WDGUser_invest_author->wp_user->ID) ) {
+					$invest_author = new YPOrganisation( $WDGUser_invest_author->wp_user->ID );
+				}
+				LemonwayLib::ask_transfer_funds( $invest_author->get_lemonway_id(), $organisation_obj->get_lemonway_id(), $lemonway_posted_amount );
 				
 				// - Créer le contrat pdf
 				// - Envoyer validation d'investissement par mail

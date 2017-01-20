@@ -89,12 +89,16 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 			</table>
 		</div>
 	
-		<a href="https://www.wedogood.co/statistiques-utilisateurs">Page 1</a> |
-		<a href="https://www.wedogood.co/statistiques-utilisateurs?offset=1">Page 2</a> |
-		<a href="https://www.wedogood.co/statistiques-utilisateurs?offset=2">Page 3</a> |
-		<a href="https://www.wedogood.co/statistiques-utilisateurs?offset=3">Page 4</a> |
-		<a href="https://www.wedogood.co/statistiques-utilisateurs?offset=4">Page 5</a> |
-		<a href="https://www.wedogood.co/statistiques-utilisateurs?offset=5">Page 6</a>
+		<?php
+		$result = count_users();
+		$user_count = $result['total_users'];
+		$nb_page = ceil( $user_count / 1000 );
+		?>
+		Pages :
+		<a href="https://www.wedogood.co/statistiques-utilisateurs">1</a>
+		<?php for ($i = 2; $i <= $nb_page; $i++): ?>
+		| <a href="https://www.wedogood.co/statistiques-utilisateurs?offset=<?php echo ($i-1); ?>"><?php echo $i; ?></a>
+		<?php endfor; ?>
 		
     </div>
 </div>

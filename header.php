@@ -67,7 +67,8 @@
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]--> 
-		<?php $version = '20160105'; ?>
+
+		<?php $version = '20170116'; ?>
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/components.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/responsive-inf997.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
@@ -84,6 +85,9 @@
 		//FIN CACHE HEAD
 		//*******************
 		?>
+		<?php if (!is_user_logged_in()): ?>
+		<script src='https://www.google.com/recaptcha/api.js'></script>
+		<?php endif; ?>
 
 		<?php wp_head(); ?>
 
@@ -105,10 +109,10 @@
 		<nav id="main">
 			<div id="menu">
 				<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
-				<a href="<?php echo home_url( '/vision' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/les-projets' ); ?>" class="lines"><?php _e( "Les projets", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/financement' ); ?>" class="lines"><?php _e( "Financer son projet", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/investissement' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/les-projets' ); ?>" class="lines"><?php _e( "Les projets", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/vision' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
                                 
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
 				<?php if (is_user_logged_in()): ?>
@@ -119,16 +123,16 @@
 				<a href="#" id="btn-burger" class="only-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/menu-burger.png" alt="MENU" /></a>
 				
 				
-				<?php /* Affichage quand clic sur Rerchercher */ ?>
+				<?php /* Affichage quand clic sur Rechercher */ ?>
 				<div id="submenu-search" class="submenu-style hidden">
 					<div class="only-inf997">
-						<a href="<?php echo home_url( '/vision' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/les-projets' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/financement' ); ?>"><?php _e( "Financer son projet", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/investissement' ); ?>"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/les-projets' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/vision' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
 					</div>
 					
-					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher", 'yproject'); ?>" />
+					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher un projet", 'yproject'); ?>" />
 					<ul class="submenu-list">
 						<?php foreach ($projects_searchable as $project_post): ?>
 						<li class="hidden"><a href="<?php echo get_permalink( $project_post->ID ); ?>"><?php echo $project_post->post_title; ?></a></li>
@@ -173,7 +177,7 @@
 
 					<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 2px 0 0; color: #000000; margin: 5% 5%;"/>
 
-					<form method="post" action="" name="login-form" id="sidebar-login-form" class="model-form">
+					<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" id="sidebar-login-form" class="model-form">
 						<span id="title-connection"><?php _e('Connexion', 'yproject'); ?></span>
 						<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('Identifiant ou e-mail', 'yproject'); ?>" value="" />
 						<br />
@@ -225,6 +229,8 @@
 
 		<?php if (!is_user_logged_in()): ?>
 			<?php echo do_shortcode('[yproject_register_lightbox]'); ?>
+			<?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
+		
 		<?php elseif (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)): ?>
 			<?php $_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; ?>
 			<div class="timeout-lightbox wdg-lightbox">
