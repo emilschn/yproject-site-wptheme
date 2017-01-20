@@ -1435,9 +1435,10 @@ add_shortcode('yproject_lightbox_button', 'yproject_shortcode_lightbox_button');
 function yproject_shortcode_lightbox($atts, $content = '') {
     $atts = shortcode_atts( array(
 	'id' => 'lightbox',
+	'scrolltop' => '',
 	'style' => '',
     ), $atts );
-    return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox hidden">
+    return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].'>
 		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder">
 		    <div class="wdg-lightbox-button-close">
@@ -1452,8 +1453,9 @@ add_shortcode('yproject_lightbox', 'yproject_shortcode_lightbox');
 function yproject_shortcode_widelightbox($atts, $content = '') {
     $atts = shortcode_atts( array(
 	'id' => 'lightbox',
+	'scrolltop' => '',
     ), $atts );
-    return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox hidden">
+    return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].'>
 		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder wdg-widelightbox-padder">
 		    <div class="wdg-lightbox-button-close">
