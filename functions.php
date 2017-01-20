@@ -302,7 +302,6 @@ function yproject_check_is_warning_meta_init($user_id){
         return true; 
     }
 }
-//yp_check_recaptcha($_POST['g-recaptcha-response'])
 
 function yp_check_recaptcha( $code ) {
 	if (empty($code)) { return false; }
