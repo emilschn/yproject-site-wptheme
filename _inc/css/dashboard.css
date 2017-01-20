@@ -418,16 +418,34 @@
     margin-top: 0;
     margin-bottom: 0;
 }
+#page-informations #tab-funding #total-roi-container > label:nth-child(3){
+	font-weight: initial;
+	font-style: italic;
+}
+#page-informations #tab-funding #total-roi-container #gain{
+	font-style: italic;
+}
+#page-informations #tab-funding #total-roi-container #total-roi, #page-informations #tab-funding #total-roi-container #gain, #page-informations #tab-funding #annual-gain-container #medium-rend{
+	margin: 0;
+}
 #page-informations #tab-funding #annual-gain-container {
     width: 93.8%;
     margin-left: auto;
     margin-top: 0;
 }
-
+#page-informations #tab-funding #annual-gain-container > label:nth-child(1) {
+	display: block;
+	font-weight: initial;
+}
 #page-informations .like-input-center{
     padding: 3px 0;
     margin-left: 55px;
     text-align: center;
+}
+#page-informations #tab-funding #total-roi-container span.like-input-center, #page-informations #tab-funding #annual-gain-container span.like-input-center{
+	padding: 3px 0;
+	margin-left: 280px;
+	text-align: center;
 }
 #page-informations .like-input-center p{
     display: inline-block;

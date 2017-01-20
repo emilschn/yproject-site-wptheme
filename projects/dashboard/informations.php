@@ -372,7 +372,7 @@ function print_informations_page()
                     "id"			=> "new_maximum_goal",
                     "type"			=> "number",
                     "label"			=> "Montant maximum",
-                    "infobubble"	=> "C'est le montant maximum de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD",
+                    "infobubble"	=> "C'est le montant maximum de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD.",
                     "value"			=> $campaign->goal(false),
                     "suffix"            => "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
@@ -383,6 +383,7 @@ function print_informations_page()
                     "id"			=> "new_funding_duration",
                     "type"			=> "number",
                     "label"			=> "Dur&eacute;e du financement",
+					"infobubble"	=> "Indiquez 5 ans pour un projet entrepreneurial, sauf cas particulier à valider avec l’équipe WE DO GOOD.",
                     "value"			=> $campaign->funding_duration(),
                     "suffix"		=> "<span>&nbsp;ann&eacute;es</span>",
                     "min"			=> 1,
@@ -394,7 +395,7 @@ function print_informations_page()
                     "id"			=> "new_roi_percent_estimated",
                     "type"			=> "number",
                     "label"			=> "Royalties",
-                    "infobubble"	=> "Pourcentage de chiffre d'affaires correspondant au montant maximum.",
+                    "infobubble"	=> "Indiquez le pourcentage de chiffre d’affaires que vous souhaitez reverser à vos investisseurs. Vérifiez dans le prévisionnel ci-dessous que le retour sur investissement est suffisant.",
                     "value"			=> $campaign->roi_percent_estimated(),
                     "suffix"		=> "<span>&nbsp;% du chiffre d'affaires</span>",
                     "min"			=> 0,
@@ -458,11 +459,13 @@ function print_informations_page()
                 </ul>
                 <!-- Total de royalties reversées -->
                 <div id="total-roi-container" class="field">
-                    <label><?php _e("TOTAL", "yproject")?></label><span class="like-input-center" style="margin-left: 280px"><p id="total-roi">0&nbsp;€</p></span>
+                    <label><?php _e("TOTAL", "yproject")?></label><span class="like-input-center"><p id="total-roi">0&nbsp;€</p></span>
+					<label><?php _e("Retour sur investissement", "yproject")?></label><span class="like-input-center"><p id="gain"></p></span>
                 </div>
                 <!-- Rendement annuel moyen pour les investisseurs -->
                 <div id="annual-gain-container" class="field">
-                    <label><?php _e("Rendement annuel moyen pour les investisseurs", "yrpoject") ?></label><span class="like-input-center" style="margin-left: 280px"><p id="medium-rend">---&nbsp;%</p></span>
+					<label><?php _e("Pour vos investisseurs", "yproject")?>&nbsp;:</label>
+                    <label><?php _e("Rendement annuel moyen", "yproject") ?></label><span class="like-input-center"><p id="medium-rend">---&nbsp;%</p></span>
                 </div>
                 <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
                 <?php DashboardUtility::create_save_button("projectfunding_form"); ?>

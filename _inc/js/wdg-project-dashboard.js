@@ -227,7 +227,7 @@ var WDGProjectDashboard = (function ($) {
                     $("#new_first_payment").change(function(){
                         var start_year = 1;
                         $("#estimated-turnover li .year").each(function(index){
-                            $(this).html((parseInt(start_year)+index));//le n° d'année est déjà renseigné par le reste du code => pour admin, on a année 11, année 22...(ne vois pas le rapport avec new_first_payment)
+                            $(this).html((parseInt(start_year)+index));
                         });
                     });
                     
@@ -240,20 +240,21 @@ var WDGProjectDashboard = (function ($) {
                         //Ajoute des boîtes au besoin
                         if(new_nb_years > nb_years_li_existing){
                             var newlines = $("#estimated-turnover").html();
-
-                            for(var i=0; i<new_nb_years-nb_years_li_existing;i++){
-                                newlines = newlines+
-                                    '<li class="field">' +
-                                    '<label>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></label>'+
-                                    '<span class="field-container">'+
-                                    '&nbsp;<span class="field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
-                                    '<i class="right fa fa-eur" aria-hidden="true"></i>'+
-                                    '<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" />'+                                   
-                                    '</span>'+
-                                    '<span class="like-input-center"><p id="roi-amount-'+(i+nb_years_li_existing)+'">0 €</p></span>'+
-                                    '</span>'+
-                                    '</li>';
-                            }
+							if(new_nb_years <= 20){
+								for(var i=0; i<new_nb_years-nb_years_li_existing;i++){
+									newlines = newlines+
+										'<li class="field">' +
+										'<label>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></label>'+
+										'<span class="field-container">'+
+										'&nbsp;<span class="field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
+										'<i class="right fa fa-eur" aria-hidden="true"></i>'+
+										'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" />'+                                   
+										'</span>'+
+										'<span class="like-input-center"><p id="roi-amount-'+(i+nb_years_li_existing)+'">0 €</p></span>'+
+										'</span>'+
+										'</li>';
+								}
+							}
 
                             $("#estimated-turnover").html(newlines);
                                                       
@@ -940,6 +941,20 @@ var WDGProjectDashboard = (function ($) {
                 rend.css('color','#2B2C2C');
             }
         },
+		/**
+		 * Calcul le gain (montant ROI reçues/montant maximum de la collecte)
+		 */
+		calculGain: function(){
+			if(need != "" && need != "0" && new_roi_percent_estimated != "" && new_roi_percent_estimated != "0"){
+				var gain = totalRoi/need;
+				var gain_format = WDGProjectDashboard.numberFormat(gain);
+				var gain_text = "x"+gain_format+" en "+nb_years+" ans";
+				$("#total-roi-container #gain").html(gain_text);
+			}
+			else{
+				$("#total-roi-container #gain").html("");
+			}
+		},
         /**
          * Processus de calcul des investissements et du rendement investisseur
          * et mise à jour des résultats dans l'interface
@@ -951,6 +966,7 @@ var WDGProjectDashboard = (function ($) {
             WDGProjectDashboard.calculCollect();
             WDGProjectDashboard.calculAnnualRend();
             WDGProjectDashboard.verifMediumRend();
+			WDGProjectDashboard.calculGain();
         },
         /**
          * Initialisation de l'affichage lorsque les calculs ne peuvent être 
@@ -960,7 +976,7 @@ var WDGProjectDashboard = (function ($) {
             $("#total-roi").html("0 €");
             $("#total-funding").html("---");
             $("#medium-rend").html("--- %").css('color','#2B2C2C');
-            
+            $("#total-roi-container #gain").html("");
             caTab = WDGProjectDashboard.createCaTab();
             for (var ii=0; ii < caTab.length; ii++ ) {
                 $("#roi-amount-"+ii).html("0 €");
@@ -990,6 +1006,7 @@ var WDGProjectDashboard = (function ($) {
             new_roi_percent_estimated = $("#new_roi_percent_estimated").val() == null ? $.trim($("span[data-id=new_roi_percent_estimated] span").text()) : $("#new_roi_percent_estimated").val();
             new_funding_duration = ($("#new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration] span").text()) : $("#new_funding_duration").val();
             new_estimated_turnover_0 = $("#new_estimated_turnover_0").val() == null ? $.trim($("span[data-id=new_estimated_turnover_0]").text()) : $("#new_estimated_turnover_0").val();
+			nb_years = $("#new_funding_duration").val() == null ? $.trim($("span[data-id=new_funding_duration]").text()) : $("#new_funding_duration").val();
         },
         /**
          * Attache les events click et keyup sur les inputs des CA de chaque année
@@ -1005,15 +1022,22 @@ var WDGProjectDashboard = (function ($) {
         },
         
         /**
-         * Formate les nombres en groupant les chiffres par 3 et affiche au maximum 2 décimales
+         * Formate les nombres pour afficher au maximum 2 décimales
          * @param {number} number
-         * @returns {number}
+         * @returns {string}
          */
-        numberFormat: function(number){
-            numberFormat = new Intl.NumberFormat({useGrouping: true, maximumSignificantDigits : 2}).format(number);
-            return numberFormat;
-        }
-        
+		numberFormat: function(number){
+			var nb_format = number.toString().replace(",",".");
+			nb_format = parseFloat(nb_format);
+			nb_format = nb_format.toFixed(2);
+			nb_format = nb_format.toString().replace(".",",");
+			//Suppression des "00" après la virgule
+			if(nb_format.substr(nb_format.length - 2, nb_format.length) === "00"){
+				nb_format = nb_format.substr(0, nb_format.length - 3);
+			}
+			return nb_format;
+		}
+
     };
 
 })(jQuery);
