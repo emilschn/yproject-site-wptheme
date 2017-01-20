@@ -207,6 +207,7 @@ var WDGProjectDashboard = (function ($) {
                     $("#new_project_organisation").change(function(e){
                         e.preventDefault();
                         $("#edit-orga-button").hide();
+						$("#wdg-lightbox-editOrga ul.errors li").remove();
                     });
                     
 					//Création objet FormData (Envoi des fichiers uploadés en ajax dans le formulaire d'édition)
@@ -1335,9 +1336,6 @@ var WDGProjectDashboard = (function ($) {
 					$("#tab-organization #wdg-lightbox-editOrga a#"+document).attr("href", fileInfo[document]['info']);
 					$("#tab-organization #wdg-lightbox-editOrga a#"+document).html(fileInfo[document]['date']);
 				}
-			}
-			else {
-				$("#tab-organization #wdg-lightbox-editOrga a#"+document).remove();
 			}
 		},
 
