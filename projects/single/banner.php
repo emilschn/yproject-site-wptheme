@@ -270,31 +270,33 @@ if (count($current_organisations) > 0) {
 						?>
 					</div>
 
+					<?php if ($time_remaining_str != '-'): ?>
 					<a href="<?php echo $invest_url_href; ?>" class="<?php echo $btn_invest_classes; ?>" data-lightbox="<?php echo $btn_invest_data_lightbox; ?>" data-redirect="<?php echo $invest_url; ?>">
 						<?php echo $btn_invest_text; ?>
 					</a>
+					<?php endif; ?>
 				
 				
 				<?php // cas d'un projet terminé et financé ?>
 				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_funded): ?>
-                                        <?php
+					<?php
 					$nbinvestors = $campaign->backers_count();
-                                        $invest_amount =$campaign->current_amount();
-                                        ?>
-                                        <div class="end-sentence">
-                                                <?php echo $nbinvestors." ". __("personnes","yproject")." ". __("ont investi","yproject") ." ". $invest_amount ." ". __("pour propulser ce projet à impact positif","yproject");?>
-                                        </div>
-                                        <a href="<?php echo home_url( '/les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+					$invest_amount =$campaign->current_amount();
+					?>
+					<div class="end-sentence">
+						<?php echo $nbinvestors." ". __("personnes","yproject")." ". __("ont investi","yproject") ." ". $invest_amount ." ". __("pour propulser ce projet à impact positif","yproject");?>
+					</div>
+					<a href="<?php echo home_url( '/les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 				
                                         
-                                <?php // cas d'un projet terminé et non financé ?>
-                                <?php elseif($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>            
-                                        <div class="end-sentence">
-                                                <?php _e("Malheureusement, ce projet n'a pas &eacute;t&eacute; propuls&eacute;","yproject"); ?>
-                                        </div>
-                                        <a href="<?php echo home_url( '/les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
-				   
-                                <?php endif; ?>
+				<?php // cas d'un projet terminé et non financé ?>
+				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>            
+					<div class="end-sentence">
+						<?php _e("Malheureusement, ce projet n'a pas &eacute;t&eacute; propuls&eacute;","yproject"); ?>
+					</div>
+					<a href="<?php echo home_url( '/les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+
+				<?php endif; ?>
                                       				
 			</div>
 
