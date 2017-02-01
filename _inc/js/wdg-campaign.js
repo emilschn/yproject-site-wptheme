@@ -37,7 +37,7 @@ var WDGProjectViewer = (function($) {
 					"slow"
 				); 
 			});
-			$("div#content.version-3 nav.project-navigation ul.menu-actions li.lang-item form select").change(function() {
+			$("div#content.version-3 div.project-banner div.project-banner-title form select").change(function() {
 				$(this).parent().submit();
 			});
 			$("a.update-follow").click(function(e) {
