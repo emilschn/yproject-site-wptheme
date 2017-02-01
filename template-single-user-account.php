@@ -6,6 +6,9 @@
 ?>
 
 <?php
+if (!is_user_logged_in()) {
+	wp_redirect(home_url());
+}
 $display_loggedin_user = true;
 if ($display_loggedin_user) {
 	$result_form = WDGFormUsers::wallet_to_bankaccount();
