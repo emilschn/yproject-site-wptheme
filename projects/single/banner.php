@@ -1,5 +1,5 @@
 <?php 
-global $campaign, $current_user, $stylesheet_directory_uri, $can_modify;
+global $campaign, $current_user, $stylesheet_directory_uri, $can_modify, $language_list;
 $video_element = '';
 $img_src = '';
 //Si aucune vidéo n'est définie, on affiche l'image
@@ -64,6 +64,10 @@ if (count($current_organisations) > 0) {
 	$owner_str = $author->user_firstname . ' ' . $author->user_lastname;
 	if ($owner_str == ' ') { $owner_str = $author->user_login; }
 }
+
+$current_lang = get_locale();
+$campaign->set_current_lang($current_lang);
+$lang_list = $campaign->get_lang_list();
 ?>
 	
 <div class="project-banner">
