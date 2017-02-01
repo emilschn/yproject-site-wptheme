@@ -1,12 +1,7 @@
-<div id="yp_admin_bar">		
-	<div class="center">		
-		<?php // Lien page profil ?>		
-		<a href="<?php echo bp_loggedin_user_domain(); ?>"><?php echo __('Mon profil', 'yproject'); ?></a>		
-		.:|:.		
-		<?php $page_update = get_page_by_path('modifier-mon-compte'); // Lien page paramètres ?>		
-		<a href="<?php echo get_permalink($page_update->ID); ?>"><?php echo __('Param&egrave;tres', 'yproject'); ?></a>		
+<div id="yp_admin_bar">
+	<div class="center">
+		<a href="<?php echo home_url('/mon-compte'); ?>"><?php echo __('Mon profil', 'yproject'); ?></a>
 		.:|:.
-		<?php  // Lien page paramètres ?>		
-		<a href="<?php echo bp_loggedin_user_domain(); ?>settings/notifications/"><?php echo __('Notifications', 'yproject'); ?></a>		
-	</div>		
-</div>		
+		<a href="<?php echo home_url('/modifier-mon-compte'); ?>"><?php echo __('Param&egrave;tres', 'yproject'); ?></a>
+	</div>
+</div>

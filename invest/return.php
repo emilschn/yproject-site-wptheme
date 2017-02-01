@@ -294,19 +294,6 @@ if (isset($campaign) && is_user_logged_in()):
 							)
 						);
 					}
-
-					// Construction des urls utilisés dans les liens du fil d'actualité
-					// url d'une campagne précisée par son nom 
-					$post_title = $campaign->data->post_title;
-					$url_campaign = '<a href="'.$campaign_url.'">'.$post_title.'</a>';
-					//url d'un utilisateur précis
-					$url_profile = '<a href="' . bp_core_get_userlink($save_user_id, false, true) . '">' . $save_display_name . '</a>';
-
-					bp_activity_add( array (
-						'component' => 'profile',
-						'type'      => 'invested',
-						'action'    => $url_profile.' a investi sur le projet '.$url_campaign
-					) );
 					break;
 
 				case 'failed' :

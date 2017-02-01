@@ -40,7 +40,7 @@
 <?php endwhile; else: ?>
 	<div id="content">
 	    <div class="padder center">
-		<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
+		<p><?php _e( 'D&eacute;sol&eacute;, aucun article trouv&eacute;.', 'yproject' ); ?></p>
 	    </div><!-- .padder -->
 	</div><!-- #content -->
 <?php endif; ?>

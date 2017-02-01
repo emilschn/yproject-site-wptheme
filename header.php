@@ -7,11 +7,12 @@
 	
 	$project_list = array();
 	if (is_user_logged_in()) {
-		$cache_project_list = $WDG_cache_plugin->get_cache('WDGUser::get_projects_by_id('.bp_loggedin_user_id().', TRUE)', 1);
+		$WDGUser_current = WDGUser::current();
+		$cache_project_list = $WDG_cache_plugin->get_cache('WDGUser::get_projects_by_id('.$WDGUser_current->wp_user->ID.', TRUE)', 1);
 		if ($cache_project_list !== FALSE) { $project_list = json_decode($cache_project_list); }
 		else {
-			$project_list = WDGUser::get_projects_by_id(bp_loggedin_user_id(), TRUE);
-			$WDG_cache_plugin->set_cache('WDGUser::get_projects_by_id('.bp_loggedin_user_id().', TRUE)', json_encode($project_list), 60*10, 1); //MAJ 10min
+			$project_list = WDGUser::get_projects_by_id($WDGUser_current->wp_user->ID, TRUE);
+			$WDG_cache_plugin->set_cache('WDGUser::get_projects_by_id('.$WDGUser_current->wp_user->ID.', TRUE)', json_encode($project_list), 60*10, 1); //MAJ 10min
 		}
 	}
 	
@@ -87,7 +88,6 @@
 		<script src='https://www.google.com/recaptcha/api.js'></script>
 		<?php endif; ?>
 
-		<?php do_action( 'bp_head' ); ?>
 		<?php wp_head(); ?>
 
 		<!-- Meta spécifiques à Facebook -->
@@ -148,7 +148,7 @@
 					?>
 					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
 					<ul class="submenu-list">
-						<li><a href="<?php echo bp_loggedin_user_domain(); ?>"><?php _e("Mon compte", 'yproject'); ?></a></li>
+						<li><a href="<?php echo home_url( '/mon-compte' ); ?>"><?php _e("Mon compte", 'yproject'); ?></a></li>
 						
 						<?php foreach ($project_list as $project_id): if (!empty($project_id)): $post_campaign = get_post($project_id); if (isset($post_campaign)): ?>
 							<li><a href="<?php echo $page_dashboard . '?campaign_id=' .$project_id; ?>"><?php echo $post_campaign->post_title; ?></a></li>

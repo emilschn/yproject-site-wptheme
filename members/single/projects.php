@@ -1,8 +1,8 @@
 <?php 
 $page_publish = get_page_by_path('financement');
 $page_mes_investissements = get_page_by_path('mes-investissements');
-$display_loggedin_user = (bp_loggedin_user_id() == bp_displayed_user_id());
-$WDGUser_displayed = new WDGUser(bp_displayed_user_id());
+$display_loggedin_user = true;
+$WDGUser_displayed = WDGUser::current();
 ?>
 
 <h2 class="underlined">Projets</h2>
@@ -16,7 +16,7 @@ $WDGUser_displayed = new WDGUser(bp_displayed_user_id());
 			if ($display_loggedin_user) array_push($campaign_status, 'private');
 			$args = array(
 				'post_type' => 'download',
-				'author' => bp_displayed_user_id(),
+				'author' => $WDGUser_displayed->wp_user->ID,
 				'post_status' => $campaign_status
 			);
 			if (!$display_loggedin_user) {
@@ -45,7 +45,7 @@ $WDGUser_displayed = new WDGUser(bp_displayed_user_id());
 			?>
 					
 			<?php
-			$api_user_id = BoppLibHelpers::get_api_user_id(bp_displayed_user_id());
+			$api_user_id = BoppLibHelpers::get_api_user_id( $WDGUser_displayed->wp_user->ID );
 			$project_list = BoppUsers::get_projects_by_role($api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
 			if (!empty($project_list)) {
 				$has_projects = true;
@@ -130,7 +130,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 			<?php endif; ?>
 
 			<input type="hidden" name="action" value="user_wallet_to_bankaccount" />
-			<input type="hidden" name="user_id" value="<?php echo bp_displayed_user_id(); ?>" />
+			<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->wp_user->ID; ?>" />
 		</form>
 	<?php endif; ?>
 

@@ -59,11 +59,12 @@ $WDGUser_current = WDGUser::current();
 					    if($info[2] === IMAGETYPE_JPEG) $type='.jpg';
 					    if($info[2] === IMAGETYPE_PNG) $type='.png';
 					    if(!$avatar_error){
-						    $avatar_path = BP_AVATAR_UPLOAD_PATH . '/avatars/';
+							$upload_dir = wp_upload_dir();
+						    $avatar_path = $upload_dir['path'] . '/avatars/';
 						    if ( !file_exists($avatar_path)) {
 							    mkdir($avatar_path);
 						    }
-						    $avatar_path .= bp_loggedin_user_id().'/';
+						    $avatar_path .= $WDGUser_current->wp_user->ID.'/';
 						    if ( !file_exists($avatar_path)) {
 							    mkdir($avatar_path);
 						    }
@@ -72,14 +73,14 @@ $WDGUser_current = WDGUser::current();
 				    }
 				    
 				    if ($_POST['facebook_avatar'] || $_POST['reset_avatar']) {
-					    if(file_exists(BP_AVATAR_UPLOAD_PATH. '/avatars/'.bp_loggedin_user_id().'/avatar.png')){
-						    unlink(BP_AVATAR_UPLOAD_PATH. '/avatars/'.bp_loggedin_user_id().'/avatar.png');
+					    if(file_exists($upload_dir['path']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.png')){
+						    unlink($upload_dir['path']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.png');
 					    }
-					    if(file_exists(BP_AVATAR_UPLOAD_PATH. '/avatars/'.bp_loggedin_user_id().'/avatar.jpg')){
-						    unlink(BP_AVATAR_UPLOAD_PATH. '/avatars/'.bp_loggedin_user_id().'/avatar.jpg');
+					    if(file_exists($upload_dir['path']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.jpg')){
+						    unlink($upload_dir['path']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.jpg');
 					    }
 					    if($_POST['reset_avatar']){
-						    file_put_contents(BP_AVATAR_UPLOAD_PATH. '/avatars/'.bp_loggedin_user_id().'/avatar.jpg', file_get_contents(get_stylesheet_directory_uri() . "/images/default_avatar.jpg"));
+						    file_put_contents($upload_dir['path']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.jpg', file_get_contents(get_stylesheet_directory_uri() . "/images/default_avatar.jpg"));
 					    }
 				    }
 			    }
@@ -192,7 +193,7 @@ $WDGUser_current = WDGUser::current();
 						<br />
 
 						<label for="user_description" class="standard-label">Description</label>
-						<textarea name="user_description"> <?php $user_meta = get_userdata(bp_loggedin_user_id()); echo($user_meta->description);?></textarea> <br /> <br />
+						<textarea name="user_description"> <?php $user_meta = get_userdata($WDGUser_current->wp_user->ID); echo($user_meta->description);?></textarea> <br /> <br />
 						
 						<strong>RIB enregistré</strong><br />
 						<label for="holdername" class="standard-label" style="width: 220px;">Nom du propri&eacute;taire du compte : </label>

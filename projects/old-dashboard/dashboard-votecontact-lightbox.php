@@ -50,7 +50,7 @@
             <tr>
             <?php
                 $colonnesres = array(
-                    bp_core_get_userlink($item->user_id),
+                    $user_data->user_login,
                     $user_data->last_name,
                     $user_data->first_name,
                     $user_data->user_city,
