@@ -27,8 +27,8 @@ if (isset($campaign) && is_user_logged_in()):
 			//Paiement par porte-monnaie
 			} else if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wallet') {
 				$amount = $_SESSION['amount_to_save'];
-				$organization = $campaign->get_organisation();
-				$organization_obj = new YPOrganisation($organization->organisation_wpref);
+				$organization = $campaign->get_organization();
+				$organization_obj = new WDGOrganization($organization->wpref);
 				if ($invest_type == 'user') {
 					$WDGUser_current = WDGUser::current();
 					if ($WDGUser_current->can_pay_with_wallet($amount, $campaign)) {
@@ -36,9 +36,9 @@ if (isset($campaign) && is_user_logged_in()):
 					}
 					
 				} else {
-					$organisation_debit = new YPOrganisation($invest_type);
-					if ($organisation_debit->can_pay_with_wallet($amount, $campaign)) {
-						$transfer_funds_result = LemonwayLib::ask_transfer_funds($organisation_debit->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount);
+					$organization_debit = new WDGOrganization($invest_type);
+					if ($organization_debit->can_pay_with_wallet($amount, $campaign)) {
+						$transfer_funds_result = LemonwayLib::ask_transfer_funds($organization_debit->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount);
 					}
 				}
 				$purchase_key = 'wallet_'. $transfer_funds_result->ID;
@@ -53,8 +53,8 @@ if (isset($campaign) && is_user_logged_in()):
 				//Compléter avec Wallet
 				if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == "cardwallet" && $lw_return != "failed" && ($lw_transaction_result->STATUS == 3 || $lw_transaction_result->STATUS == 0) && isset($_SESSION['need_wallet_completion']) && $_SESSION['need_wallet_completion'] > 0) {
 					$amount_wallet = $_SESSION['need_wallet_completion'];
-					$organization = $campaign->get_organisation();
-					$organization_obj = new YPOrganisation($organization->organisation_wpref);
+					$organization = $campaign->get_organization();
+					$organization_obj = new WDGOrganization($organization->wpref);
 					if ($invest_type == 'user') {
 						$WDGUser_current = WDGUser::current();
 						if ($WDGUser_current->can_pay_with_wallet($amount_wallet, $campaign)) {
@@ -62,9 +62,9 @@ if (isset($campaign) && is_user_logged_in()):
 						}
 
 					} else {
-						$organisation_debit = new YPOrganisation($invest_type);
-						if ($organisation_debit->can_pay_with_wallet($amount_wallet, $campaign)) {
-							$transfer_funds_result = LemonwayLib::ask_transfer_funds($organisation_debit->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount_wallet);
+						$organization_debit = new WDGOrganization($invest_type);
+						if ($organization_debit->can_pay_with_wallet($amount_wallet, $campaign)) {
+							$transfer_funds_result = LemonwayLib::ask_transfer_funds($organization_debit->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount_wallet);
 						}
 					}
 					
@@ -85,9 +85,7 @@ if (isset($campaign) && is_user_logged_in()):
 		foreach ($paymentlist as $payment) {
 			if (edd_get_payment_key($payment->ID) == $purchase_key) {
 				$buffer = "stop";
-				$page_investments = get_page_by_path('mes-investissements');
-				_e("Le paiement a d&eacute;j&agrave; &eacute;t&eacute; pris en compte. Merci de vous rendre sur la page", 'yproject');
-				?><a href="<?php echo get_permalink($page_investments->ID); ?>"><?php _e("Mes investissements", 'yproject'); ?></a>.<?php
+				_e("Le paiement a d&eacute;j&agrave; &eacute;t&eacute; pris en compte. Merci de nous contacter si vous voyez ce message.", 'yproject');
 				break;
 			}
 		}
@@ -99,11 +97,11 @@ if (isset($campaign) && is_user_logged_in()):
 			$save_display_name = $current_user->display_name;
 			if (isset($_SESSION['redirect_current_invest_type']) && $_SESSION['redirect_current_invest_type'] != "user") {
 				$invest_type = $_SESSION['redirect_current_invest_type'];
-				$organisation = new YPOrganisation($invest_type);
-				if ($organisation) {
-					$current_user_organisation = $organisation->get_creator();
-					$save_user_id = $current_user_organisation->ID;
-					$save_display_name = $organisation->get_name();
+				$organization = new WDGOrganization($invest_type);
+				if ($organization) {
+					$current_user_organization = $organization->get_creator();
+					$save_user_id = $current_user_organization->ID;
+					$save_display_name = $organization->get_name();
 				}
 			}
 			

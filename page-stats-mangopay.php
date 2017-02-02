@@ -76,10 +76,10 @@ get_header();
 			$debit_orga = 2408;
 			$credit_user = 3090;
 			$amount = 0.22;
-			$organisation_obj = new YPOrganisation($debit_orga);
+			$organization_obj = new WDGOrganization($debit_orga);
 			$WDGUser = new WDGUser($credit_user);
 			$WDGUser->register_lemonway();
-			$transfer = LemonwayLib::ask_transfer_funds( $organisation_obj->get_lemonway_id(), $WDGUser->get_lemonway_id(), $amount );
+			$transfer = LemonwayLib::ask_transfer_funds( $organization_obj->get_lemonway_id(), $WDGUser->get_lemonway_id(), $amount );
 			if ($transfer != FALSE) {
 //				$roi = new WDGROI(1011);
 //				$roi->status = WDGROI::$status_transferred;
@@ -101,10 +101,10 @@ get_header();
 			$orga_id = 4904;
 			$user_id = 5524;
 			$amount = 500;
-			$organisation_obj = new YPOrganisation($orga_id);
+			$organization_obj = new WDGOrganization($orga_id);
 			$WDGUser = new WDGUser($user_id);
 			$WDGUser->register_lemonway();
-			$transfer = LemonwayLib::ask_transfer_funds( $WDGUser->get_lemonway_id(), $organisation_obj->get_lemonway_id(), $amount );
+			$transfer = LemonwayLib::ask_transfer_funds( $WDGUser->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount );
 			
 			$campaign_id = 12919;
 			$payment_id = 14401;

@@ -11,10 +11,9 @@
 
         <h2><?php _e('&Eacute;quipe projet', 'yproject'); ?></h2>
         <?php 
-                ypcf_debug_log('template-project-dashboard >> ' . $_GET['campaign_id']);
-                $project_api_id = BoppLibHelpers::get_api_project_id($_GET['campaign_id']);
-                if (isset($project_api_id)) $team_member_list = BoppLib::get_project_members_by_role($project_api_id, BoppLibHelpers::$project_team_member_role['slug']);
-                if (count($team_member_list) > 0):
+		$project_api_id = $campaign->get_api_id();
+		if (isset($project_api_id)) $team_member_list = WDGWPREST_Entity_Project::get_users_by_role( $project_api_id, WDGWPREST_Entity_Project::$link_user_type_team );
+		if (count($team_member_list) > 0):
         ?>
                 <ul id="team-list">
         <?php foreach ($team_member_list as $team_member): ?>
@@ -25,9 +24,9 @@
         <?php endforeach; ?>
                 </ul>
         <?php	
-                else:
-                        _e('Aucun membre dans l&apos;&eacute;quipe pour l&apos;instant.', 'yproject');
-                endif;
+			else:
+				_e('Aucun membre dans l&apos;&eacute;quipe pour l&apos;instant.', 'yproject');
+			endif;
         ?>
         <input type="text" id="new_team_member_string" style="width: 295px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
         <a class="project-manage-team button" data-action="yproject-add-member">Ajouter</a>

@@ -3,7 +3,6 @@
  * Template Name: Projet Paramètres
  *
  */
-BoppLibHelpers::check_create_role(BoppLibHelpers::$project_organisation_manager_role['slug'], BoppLibHelpers::$project_organisation_manager_role['title']);
 if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_parameters();
 ?>
 
@@ -194,39 +193,35 @@ if (isset($_POST['action'])) $feedback = WDGFormProjects::form_validate_edit_par
 					endif;
                                         
 					// Gestion des organisations
-					$str_organisations = '';
+					$str_organizations = '';
 					global $current_user;
-					$api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
-					$current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-					if (isset($current_organisations) && count($current_organisations) > 0) {
-						$current_organisation = $current_organisations[0];
-					}
-					$api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
-					$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
-					if ($organisations_list) {
-						foreach ($organisations_list as $organisation_item) {
-							$selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
-							$str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
+					$current_organization = $campaign->get_organization();
+					$wdg_current_user = new WDGUser( $post_campaign->post_author );
+					$organizations_list = $wdg_current_user->get_organizations_list();
+					if ($organizations_list) {
+						foreach ($organizations_list as $organization_item) {
+							$selected_str = ($organization_item->id == $current_organization->id) ? 'selected="selected"' : '';
+							$str_organizations .= '<option ' . $selected_str . ' value="'.$organization_item->wpref.'">' .$organization_item->name. '</option>';
 						}
 					}
 					?>
-					<label for="project-organisation">Organisation :</label>
+					<label for="project-organization">Organisation :</label>
 					    
-					<?php if ($str_organisations != ''): ?>
-						<select name="project-organisation">
+					<?php if ($str_organizations != ''): ?>
+						<select name="project-organization">
 							<option value=""></option>
-							<?php echo $str_organisations; ?>
+							<?php echo $str_organizations; ?>
 						</select>
-						<?php if ($current_organisation!=null){
+						<?php if ($current_organization!=null){
 							$page_edit_orga = get_page_by_path('editer-une-organisation');
-							$edit_org .= '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
-							$edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
+							$edit_org .= '<a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organization->wpref.'">';
+							$edit_org .= 'Editer '.$current_organization->name.'</a>';
 							echo $edit_org;
 						} ?>
 
 					<?php else: ?>
 						<?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
-						<input type="hidden" name="project-organisation" value="" />
+						<input type="hidden" name="project-organization" value="" />
 
 					<?php endif; ?>
 					

@@ -14,8 +14,8 @@
 	$return_roi_payment = WDGFormProjects::form_submit_roi_payment();
 	$return_lemonway_card = WDGFormProjects::return_lemonway_card();
 	WDGFormProjects::form_proceed_roi_transfers();
-	$campaign_organization = $campaign->get_organisation();
-	$organization_obj = new YPOrganisation( $campaign_organization->organisation_wpref );
+	$campaign_organization = $campaign->get_organization();
+	$organization_obj = new WDGOrganization( $campaign_organization->wpref );
 	$mandate_conditions = $campaign->mandate_conditions();
 	$declaration_info = $campaign->declaration_info();
 

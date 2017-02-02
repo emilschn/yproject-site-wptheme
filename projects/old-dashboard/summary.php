@@ -18,16 +18,11 @@ function check_next_step(){
          } //Avant-première -> Vote
          if (($status==ATCF_Campaign::$campaign_status_vote)||(($status==ATCF_Campaign::$campaign_status_preparing)&&($_POST['next_step']==2))) {
              $orga_done=false;
-             $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
-             $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-
-             //Vérifiation organisation complète
-             if (isset($current_organisations) && count($current_organisations) > 0) {
-                 $campaign_organisation = $campaign->get_organisation();
-                 $organization_obj = new YPOrganisation($campaign_organisation->organisation_wpref);
-
-                 if ($organization_obj->get_lemonway_status() == YPOrganisation::$lemonway_status_registered) { $orga_done = true; }
-             }
+			 $current_organization = $campaign->get_organization();
+			 if ( !empty($current_organization) ) {
+				$organization_obj = new WDGOrganization( $current_organization->wpref );
+                $orga_done = $organization_obj->is_registered_lemonway_wallet();
+			 }
 
              if($orga_done && ypcf_check_user_is_complete($campaign->post_author())&& isset($_POST['innbdayvote'])){
                 $vote_time = $_POST['innbdayvote'];
@@ -51,10 +46,7 @@ function check_next_step(){
                 $collecte_fin_heure = $_POST['inendh'];
                 $collecte_fin_minute = $_POST['inendm'];
 
-                $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
-                $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-                
-                 if( 1<=$collecte_time && $collecte_time<=60
+                if( 1<=$collecte_time && $collecte_time<=60
                         && 0<=$collecte_fin_heure && $collecte_fin_heure<=23
                         && 0<=$collecte_fin_minute && $collecte_fin_minute<=59){
                      //Fixe la date de fin de collecte
@@ -66,7 +58,7 @@ function check_next_step(){
 
                      $campaign->set_status(ATCF_Campaign::$campaign_status_collecte);
                      $campaign->set_validation_next_step(0);
-                 }
+                }
              }
          }
          $status = $campaign->campaign_status();
