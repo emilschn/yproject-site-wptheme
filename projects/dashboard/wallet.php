@@ -204,6 +204,7 @@
 			<?php if ($declaration_list): ?>
 				<ul class="payment-list">
 					<?php foreach ( $declaration_list as $declaration ): ?>
+						<?php $declaration_message = $declaration->get_message(); ?>
 						<li>
 							<h4><?php echo $declaration->get_formatted_date(); ?></h4>
 							<div>
@@ -266,7 +267,12 @@
 									<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br />
 									<b>Montant à verser : </b><?php echo $declaration->get_amount_with_commission(); ?> &euro;<br /><br />
 									
-									<b>Message qui sera envoyé à vos investisseurs :</b><?php echo $declaration->get_message(); ?><br /><br />
+									<?php if ( empty( $declaration_message ) ): ?>
+									Aucun message ne sera envoyé aux investisseurs.<br /><br />
+									<?php else: ?>
+									<b>Ce message sera envoyé à vos investisseurs :</b><br />
+									<?php echo $declaration->get_message(); ?><br /><br />
+									<?php endif; ?>
 
 									<form action="" method="POST" enctype="">
 										<input type="hidden" name="action" value="proceed_roi" />
@@ -298,7 +304,12 @@
 									<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
 									<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br /><br />
 									
-									<b>Message qui sera envoyé à vos investisseurs :</b><?php echo $declaration->get_message(); ?><br /><br />
+									<?php if ( empty( $declaration_message ) ): ?>
+									Aucun message ne sera envoyé aux investisseurs.<br /><br />
+									<?php else: ?>
+									<b>Ce message sera envoyé à vos investisseurs :</b><br />
+									<?php echo $declaration->get_message(); ?><br /><br />
+									<?php endif; ?>
 
 									Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
 									Le versement vers vos investisseurs est en cours.
@@ -352,7 +363,12 @@
 									<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
 									<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br /><br />
 									
-									<b>Message envoyé à vos investisseurs :</b><?php echo $declaration->get_message(); ?><br /><br />
+									<?php if ( empty( $declaration_message ) ): ?>
+									Aucun message n'a été envoyé aux investisseurs.<br /><br />
+									<?php else: ?>
+									<b>Ce message sera envoyé à vos investisseurs :</b><br />
+									<?php echo $declaration->get_message(); ?><br /><br />
+									<?php endif; ?>
 
 									Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
 									Vos investisseurs ont bien reçu leur retour sur investissement.
