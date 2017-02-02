@@ -12,7 +12,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 		</div>
 		<span>Vous &ecirc;tes d&eacute;j&agrave; inscrit et connect&eacute; !</span><br />
 		<hr /><br />
-		<a href="<?php echo bp_loggedin_user_domain(); ?>" class="button">Aller sur votre compte</a>
+		<a href="<?php echo home_url('/mon-compte'); ?>" class="button">Aller sur votre compte</a>
 		ou
 		<a href="<?php echo home_url(); ?>" class="button">Retourner &agrave; la case d&eacute;part</a>
 	</div>

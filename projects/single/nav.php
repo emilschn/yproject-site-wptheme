@@ -1,5 +1,5 @@
 <?php
-global $campaign, $stylesheet_directory_uri, $current_user, $language_list;
+global $campaign, $stylesheet_directory_uri, $current_user;
 $menu_project_parts = array (
 	'banner'		=> 'R&eacute;sum&eacute;',
 	'rewards'		=> 'Investissement',
@@ -17,10 +17,6 @@ $btn_invest_data_lightbox = 'connexion';
 $btn_invest_text = ($campaign->funding_type() == 'fundingdonation') ? __('Soutenir', 'yproject') : __('Investir', 'yproject');
 
 $user_name_str = '';
-
-$current_lang = get_locale();
-$campaign->set_current_lang($current_lang);
-$lang_list = $campaign->get_lang_list();
 
 if (is_user_logged_in()) {
 	get_currentuserinfo();

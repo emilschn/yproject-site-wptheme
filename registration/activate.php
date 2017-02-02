@@ -1,30 +1,26 @@
-<?php get_header( 'buddypress' ); ?>
+<?php get_header(); ?>
 
 	<div id="content">
 		<div class="padder">
 
-		<?php do_action( 'bp_before_activation_page' ); ?>
-
 		<div class="page center" id="activate-page">
 
-			<h3><?php if ( bp_account_was_activated() ) :
-				_e( 'Account Activated', 'buddypress' );
+			<h3><?php if ( true /*yp_account_was_activated()*/ ) :
+				_e( 'Compte activ&eacute;', 'yproject' );
 			else :
-				_e( 'Activate your Account', 'buddypress' );
+				_e( 'Activer votre compte', 'yproject' );
 			endif; ?></h3>
 
 			<?php do_action( 'template_notices' ); ?>
 
-			<?php do_action( 'bp_before_activate_content' ); ?>
-
-			<?php if ( bp_account_was_activated() ) : ?>
+			<?php if ( true /*yp_account_was_activated()*/ ) : ?>
 
 				<?php if ( isset( $_GET['e'] ) ) : ?>
 					<?php ypcf_debug_log('Account activated + mail'); ?>
-					<p><?php _e( 'Your account was activated successfully! Your account details have been sent to you in a separate email.', 'buddypress' ); ?></p>
+					<p><?php _e( 'Votre compte a &eacute;t&eacute; activ&eacute ! Les d&eacute;tails de votre compte ont &eacute;t&eacute; envoy&eacute;s par e-mail.', 'yproject' ); ?></p>
 				<?php else : ?>
 					<?php ypcf_debug_log('Account activated + form'); ?>
-					<p><?php printf( __( 'Your account was activated successfully! You can now <a href="%s">log in</a> with the username and password you provided when you signed up.', 'buddypress' ), wp_login_url( bp_get_root_domain() ) ); ?></p>
+					<p><?php printf( __( 'Votre compte a bien &eacute;t&eacute; activ&eacute; ! Vous pouvez maintenant <a href="%s">vous connecter</a> avec votre login et mot de passe.', 'yproject' ), home_url('/connexion') ); ?></p>
 
 					<form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
 					    <label class="standard-label"><?php _e('Identifiant', 'yproject'); ?></label>
@@ -50,30 +46,26 @@
 
 				<?php ypcf_debug_log('Provide a valid activation key'); ?>
 				<p>
-					<?php _e( 'Please provide a valid activation key.', 'buddypress' ); ?><br />
+					<?php _e( "Merci de saisir la cl&eacute; d'activation.", 'yproject' ); ?><br />
 					<?php _e( 'Essayez en copiant directement le lien que vous avez re&ccedil;u dans votre navigateur.', 'yproject' ); ?>
 				</p>
 
 				<form action="" method="get" class="standard-form" id="activation-form">
 
-					<label for="key"><?php _e( 'Activation Key:', 'buddypress' ); ?></label>
+					<label for="key"><?php _e( "Cl&eacute; d'activation :", 'yproject' ); ?></label>
 					<input type="text" name="key" id="key" value="" />
 
 					<p class="submit">
-						<input type="submit" name="submit" value="<?php _e( 'Activate', 'buddypress' ); ?>" />
+						<input type="submit" name="submit" value="<?php _e( 'Activer', 'yproject' ); ?>" />
 					</p>
 
 				</form>
 
 			<?php endif; ?>
 
-			<?php do_action( 'bp_after_activate_content' ); ?>
-
 		</div><!-- .page -->
-
-		<?php do_action( 'bp_after_activation_page' ); ?>
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
 
-<?php get_footer( 'buddypress' ); ?>
+<?php get_footer();

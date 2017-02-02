@@ -26,11 +26,6 @@ function tags_support_query($wp_query){
 }
 add_action('pre_get_posts', 'tags_support_query');
 
-//Chargement de la css de buddypress
-if ( !function_exists( 'bp_dtheme_enqueue_styles' ) ) :
-	function bp_dtheme_enqueue_styles() {}
-endif;
-
 //Enlever les "magic quotes"
 $_POST      = array_map( 'stripslashes_deep', $_POST );
 $_GET       = array_map( 'stripslashes_deep', $_GET );
@@ -43,7 +38,6 @@ if ( ! isset( $content_width ) ) $content_width = 960;
 //Définition du domaine pour les traductions
 function yproject_setup() {
 	load_child_theme_textdomain( 'yproject', get_stylesheet_directory() . '/languages' );
-	remove_action( 'bp_member_header_actions',    'bp_send_public_message_button',  20 );
 }
 add_action( 'after_setup_theme', 'yproject_setup', 15 );
 
@@ -156,11 +150,6 @@ function yproject_redirect_logout(){
 	exit;
 }
 add_action('wp_logout', 'yproject_redirect_logout');
-
-function catch_register_page_loggedin_users() {
-	return home_url() . '?alreadyloggedin=1';
-}
-add_filter( 'bp_loggedin_register_page_redirect_to', 'catch_register_page_loggedin_users');
 /** FIN GESTION DU LOGIN **/
 
 
@@ -201,6 +190,65 @@ function yproject_change_user_cap() {
 	YPShortcodeManager::register_shortcodes();
 }
 add_action('init', 'yproject_change_user_cap');
+
+function bp_dtheme_widgets_init() {
+
+	// Area 1, located in the sidebar. Empty by default.
+	register_sidebar( array(
+		'name'          => 'Sidebar',
+		'id'            => 'sidebar-1',
+		'description'   => __( 'The sidebar widget area', 'buddypress' ),
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widgettitle">',
+		'after_title'   => '</h3>'
+	) );
+
+	// Area 2, located in the footer. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'First Footer Widget Area', 'buddypress' ),
+		'id' => 'first-footer-widget-area',
+		'description' => __( 'The first footer widget area', 'buddypress' ),
+		'before_widget' => '<li id="%1$s" class="widget %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widgettitle">',
+		'after_title' => '</h3>',
+	) );
+
+	// Area 3, located in the footer. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'Second Footer Widget Area', 'buddypress' ),
+		'id' => 'second-footer-widget-area',
+		'description' => __( 'The second footer widget area', 'buddypress' ),
+		'before_widget' => '<li id="%1$s" class="widget %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widgettitle">',
+		'after_title' => '</h3>',
+	) );
+
+	// Area 4, located in the footer. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'Third Footer Widget Area', 'buddypress' ),
+		'id' => 'third-footer-widget-area',
+		'description' => __( 'The third footer widget area', 'buddypress' ),
+		'before_widget' => '<li id="%1$s" class="widget %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widgettitle">',
+		'after_title' => '</h3>',
+	) );
+
+	// Area 5, located in the footer. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'Fourth Footer Widget Area', 'buddypress' ),
+		'id' => 'fourth-footer-widget-area',
+		'description' => __( 'The fourth footer widget area', 'buddypress' ),
+		'before_widget' => '<li id="%1$s" class="widget %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widgettitle">',
+		'after_title' => '</h3>',
+	) );
+}
+add_action( 'widgets_init', 'bp_dtheme_widgets_init' );
 
 
 function yproject_campaign_open_comments( $open, $post_id ) {
@@ -313,102 +361,6 @@ function yproject_check_is_warning_meta_init($user_id){
         return true; 
     }
 }
-//Gestion du formulaire de lightbox d'avertissements
-function yproject_submit_lightbox() {
-    ypbp_core_screen_signup();
-} 
-add_action('init', 'yproject_submit_lightbox');
-
-function ypbp_get_current_signup_step() {
-        global $bp;
-
-        return $bp->signup->step;
-}
-
-function ypbp_core_screen_signup() {
-	global $bp;
-
-	// Not a directory
-	bp_update_is_directory( false, 'register' );
-
-	if ( !isset( $bp->signup ) ) {
-		$bp->signup = new stdClass;
-	}
-
-	$bp->signup->step = 'request-details';
-
-	// If the signup page is submitted, validate and save
-	if ( isset( $_POST['signup_submit'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'register_form_posted' ) && yp_check_recaptcha($_POST['g-recaptcha-response']) ) {
-
-		// Check the base account details for problems
-		$account_details = bp_core_validate_user_signup( $_POST['signup_username_login'], $_POST['signup_email'] );
-
-		// If there are errors with account details, set them for display
-		if ( !empty( $account_details['errors']->errors['user_name'] ) )
-			$bp->signup->errors['signup_username_login'] = $account_details['errors']->errors['user_name'][0];
-
-		if ( !empty( $account_details['errors']->errors['user_email'] ) )
-			$bp->signup->errors['signup_email'] = $account_details['errors']->errors['user_email'][0];
-           
-		// Check that both password fields are filled in
-		if ( empty( $_POST['signup_password'] ) || empty( $_POST['signup_password_confirm'] ) )
-			$bp->signup->errors['signup_password'] = __( 'Please make sure you enter your password twice', 'buddypress' );
-
-		// Check that the passwords match
-		if ( ( !empty( $_POST['signup_password'] ) && !empty( $_POST['signup_password_confirm'] ) ) && $_POST['signup_password'] != $_POST['signup_password_confirm'] )
-			$bp->signup->errors['signup_password'] = __( 'The passwords you entered do not match.', 'buddypress' );
-		
-		// Check that the cgu is checked
-		if ( empty($_POST['validate-terms-check']) )
-			$bp->signup->errors['validate_terms_check'] = __( 'Merci de cocher la case pour accepter les conditions g&eacute;n&eacute;rales d&apos;utilisation.', 'yproject' );
-
-		$bp->signup->username = $_POST['signup_username_login'];
-		$bp->signup->email = $_POST['signup_email'];
-
-		// Add any errors to the action for the field in the template for display.
-		if ( !empty( $bp->signup->errors ) ) {
-			foreach ( (array) $bp->signup->errors as $fieldname => $error_message ) {
-				// addslashes() and stripslashes() to avoid create_function()
-				// syntax errors when the $error_message contains quotes
-				add_action( 'bp_' . $fieldname . '_errors', create_function( '', 'echo apply_filters(\'bp_members_signup_error_message\', "<div class=\"error\">" . stripslashes( \'' . addslashes( $error_message ) . '\' ) . "</div>" );' ) );
-			}
-		} else {
-			$bp->signup->step = 'save-details';
-
-			// Hash and store the password
-			$usermeta['password'] = wp_hash_password( $_POST['signup_password'] );
-
-			$usermeta = apply_filters( 'bp_signup_usermeta', $usermeta );
-
-			// Finally, sign up the user
-			$wp_user_id = bp_core_signup_user( $_POST['signup_username_login'], $_POST['signup_password'], $_POST['signup_email'], $usermeta );
-
-			if ( is_wp_error( $wp_user_id ) ) {
-				$bp->signup->step = 'request-details';
-				bp_core_add_message( $wp_user_id->get_error_message(), 'error' );
-			} else {
-				global $wpdb, $edd_options;
-				$bp->signup->step = 'completed-confirmation';
-				$wpdb->update( $wpdb->users, array( sanitize_key( 'user_status' ) => 0 ), array( 'ID' => $wp_user_id ) );
-				update_user_meta($wp_user_id, WDGUser::$key_validated_general_terms_version, $edd_options[WDGUser::$edd_general_terms_version]);
-				NotificationsEmails::new_user_admin($wp_user_id); //Envoi mail à l'admin
-				NotificationsEmails::new_user_user($wp_user_id); //Envoi mail à l'utilisateur
-				wp_set_auth_cookie( $wp_user_id, false, is_ssl() );
-				if (isset($_POST['redirect-home'])) {
-					wp_redirect(home_url());
-				} else {
-					wp_redirect(wp_unslash( $_SERVER['REQUEST_URI'] ));
-				}
-				exit();
-			}
-
-			do_action( 'bp_complete_signup' );
-		}
-
-	}
-
-	do_action( 'bp_core_screen_signup' );
-}
 
 function yp_check_recaptcha( $code ) {
 	if (empty($code)) { return false; }
@@ -434,11 +386,6 @@ function yp_check_recaptcha( $code ) {
 	$json = json_decode($response);
 	return $json->success;
 }
-
-function ypbp_filter_send_activation_key() {
-    return false;
-}
-add_filter('bp_core_signup_send_activation_key', 'ypbp_filter_send_activation_key');
 
 function yproject_user_register( $user_id ) {
 	$user = get_userdata( $user_id );
@@ -544,26 +491,6 @@ add_filter('oembed_result', 'remove_related_videos', 1, true);
 //Suppression de code supplémentaire généré par edd
 remove_filter( 'the_content', 'edd_microdata_wrapper', 10 );
 
-function comment_blog_post(){
-	global $wpdb, $post;
-	// Construction des urls utilisés dans les liens du fil d'actualité
-	// url d'une campagne précisée par son nom 
-	$post_title = $post->post_title;
-	$url_blog = '<a href="'.get_permalink( $post->ID ).'">'.$post_title.'</a>';
-	//url d'un utilisateur précis
-	$user_id                = wp_get_current_user()->ID;
-	$user_display_name      = wp_get_current_user()->display_name;
-	$url_profile = '<a href="' . bp_core_get_userlink($user_id, false, true) . '"> ' . $user_display_name . '</a>';
-	$user_avatar = UIHelpers::get_user_avatar($user_id);
-
-	bp_activity_add(array (
-		'component' => 'profile',
-		'type'      => 'jycrois',
-		'action'    => $user_avatar.' '.$url_profile.' a commenté '.$url_blog
-	    ));
-}
-add_action('comment_post','comment_blog_post');
-
 
 /**
  * Gestion ajax
@@ -632,7 +559,7 @@ add_action( 'wp_ajax_update_subscription_mail', 'update_subscription_mail' );
 function print_user_projects(){
     
 	global $wpdb, $post, $user_projects;
-	$is_same_user = (bp_displayed_user_id() == bp_loggedin_user_id());
+	$is_same_user = TRUE;
 	$str_believe = "J&apos;y crois";
 	$str_vote = "J&apos;ai vot&eacute;";
 	$str_investment = "J&apos;ai investi";
@@ -651,9 +578,9 @@ function print_user_projects(){
 	if(isset($_POST['user_id'])){
 		$payment_status = array("publish", "completed");
 //		if ($is_same_user) $payment_status = array("completed", "pending", "publish", "failed", "refunded");
-		$purchases = edd_get_users_purchases(bp_displayed_user_id(), -1, false, $payment_status);
+		$user_id = get_current_user_id();
+		$purchases = edd_get_users_purchases($user_id, -1, false, $payment_status);
 		$table = $wpdb->prefix.'jycrois';
-		$user_id = bp_displayed_user_id();
 		$projects_jy_crois = $wpdb->get_results("SELECT campaign_id, subscribe_news FROM $table WHERE user_id=$user_id");
                 $table = $wpdb->prefix.'ypcf_project_votes';
 		$projects_votes = $wpdb->get_results("SELECT post_id FROM $table WHERE user_id=$user_id");
@@ -696,15 +623,6 @@ function print_user_projects(){
 				    $signsquid_contract = new SignsquidContract($post->ID);
 				    $payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
 
-				    $investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
-				    $group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-				    $is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
-				    $group_link = '';
-				    if ($group_exists && $is_user_group_member){
-					    $group_obj = groups_get_group(array('group_id' => $investors_group_id));
-					    $group_link = bp_get_group_permalink($group_obj);
-				    }
-
 				    //Infos relatives au projet
 				    $user_projects[$campaign->ID]['ID'] = $campaign->ID;
 				    //Infos relatives à l'investissement de l'utilisateur
@@ -714,8 +632,6 @@ function print_user_projects(){
 				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_date'] = $payment_date;
 				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount'] = edd_get_payment_amount( $post->ID );
 				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_status'] = edd_get_payment_status( $post, true );
-				    //Lien vers le groupe d'investisseur
-				    $user_projects[$campaign->ID]['group_link']=$group_link;
 				}
 			endforeach;
 
@@ -814,25 +730,6 @@ function print_user_projects(){
 									<?php echo $project['minimum_goal']; ?>
 							    </div> 
 							</div>
-						    
-							<?php 
-							if ($is_same_user) {
-								//Lien vers le groupe d'investisseurs du projet
-								//Visible si le groupe existe et que l'utilisateur est bien dans ce groupe
-								$investors_group_id = get_post_meta($campaign->ID, 'campaign_investors_group', true);
-								$group_exists = (is_numeric($investors_group_id) && ($investors_group_id > 0));
-								$is_user_group_member = groups_is_user_member(bp_displayed_user_id(), $investors_group_id);
-								if ($group_exists && $is_user_group_member):
-									$group_obj = groups_get_group(array('group_id' => $investors_group_id));
-									$group_link = bp_get_group_permalink($group_obj);
-							?>
-							<div class="project_preview_item_infos" style="width: 120px;">
-							    <a href="<?php echo $group_link; ?>">Acc&eacute;der au groupe priv&eacute;</a>
-							</div>
-							<?php
-								endif;
-							}
-							?>
 							<div style="clear: both"></div>
 						</div>
 					</div>
@@ -945,7 +842,7 @@ function add_team_member(){
             $data_new_member['id']=$user_wp_id;
             $data_new_member['firstName']=$user->first_name;
             $data_new_member['lastName']=$user->last_name;
-            $data_new_member['userLink']=bp_core_get_userlink($user_wp_id);
+            $data_new_member['userLink']=$user->user_login;
             $buffer = json_encode($data_new_member);
     }
     echo $buffer;
@@ -1212,7 +1109,7 @@ function get_investors_table() {
 				);
 			} else {
 				$datacolonnes = array(
-					bp_core_get_userlink($item['user']),
+					$user_data->user_login,
 					$user_data->last_name,
 					$user_data->first_name,
 					$user_data->user_birthday_day.'/'.$user_data->user_birthday_month.'/'.$user_data->user_birthday_year,

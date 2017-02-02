@@ -1,18 +1,14 @@
-@charset "UTF-8";
-/* CSS Document */
-
 /**
- * Theme Name: Y Project
+ * Theme Name: yproject
  * Theme URI: https://code.google.com/p/yproject-site-wptheme/
- * Description: Override of BuddyPress Default
- * Version: 0.1
- * Author: the WEDOGOOD team
+ * Author: the WE DO GOOD team
  * Author URI: http://www.wedogood.co
+ * Description: WE DO GOOD template
+ * Version: 2.1
  * License: GNU General Public License
  * License URI: license.txt
- * Template: bp-default
- * Tags: buddypress, Y Project
- * This file intentionally left blank. CSS is enqueued in functions.php
+ * Tags: Crowdfunding
+ * Text Domain: yproject
  *
  */
 
@@ -279,6 +275,10 @@ form.wdg-forms table input[type="text"].reward-text{
     width: 220px;
     margin: 3px 10px 3px 0px;
     font-weight: bold;
+}
+
+.db-form .field label.column-title {
+    text-align: center;
 }
 
 .db-form .field label.long-label {

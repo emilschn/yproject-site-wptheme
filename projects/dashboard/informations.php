@@ -363,7 +363,7 @@ function print_informations_page()
                     "label"			=> "Objectif",
                     "infobubble"	=> "C'est le seuil de validation de votre lev&eacute;e de fonds, vous pourrez ensuite viser le montant maximum !",
                     "value"			=> $campaign->minimum_goal(false),
-                    "right_icon"	=> "eur",
+                    "suffix"            => "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
@@ -372,8 +372,9 @@ function print_informations_page()
                     "id"			=> "new_maximum_goal",
                     "type"			=> "number",
                     "label"			=> "Montant maximum",
+                    "infobubble"	=> "C'est le montant maximum de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD.",
                     "value"			=> $campaign->goal(false),
-                    "right_icon"	=> "eur",
+                    "suffix"            => "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
@@ -382,10 +383,11 @@ function print_informations_page()
                     "id"			=> "new_funding_duration",
                     "type"			=> "number",
                     "label"			=> "Dur&eacute;e du financement",
+					"infobubble"	=> "Indiquez 5 ans pour un projet entrepreneurial, sauf cas particulier à valider avec l’équipe WE DO GOOD.",
                     "value"			=> $campaign->funding_duration(),
-                    "suffix"		=> " ann&eacute;es",
+                    "suffix"		=> "<span>&nbsp;ann&eacute;es</span>",
                     "min"			=> 1,
-                    "max"			=> 10,
+                    "max"			=> 20,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
 
@@ -393,9 +395,9 @@ function print_informations_page()
                     "id"			=> "new_roi_percent_estimated",
                     "type"			=> "number",
                     "label"			=> "Royalties",
-                    "infobubble"	=> "Pourcentage de chiffre d'affaires correspondant au montant maximum.",
+                    "infobubble"	=> "Indiquez le pourcentage de chiffre d’affaires que vous souhaitez reverser à vos investisseurs. Vérifiez dans le prévisionnel ci-dessous que le retour sur investissement est suffisant.",
                     "value"			=> $campaign->roi_percent_estimated(),
-                    "suffix"		=> "&nbsp;% du chiffre d'affaires",
+                    "suffix"		=> "<span>&nbsp;% du chiffre d'affaires</span>",
                     "min"			=> 0,
                     "max"			=> 100,
                     "step"			=> 0.01,
@@ -414,25 +416,40 @@ function print_informations_page()
 
                 ?>
 
-                <div class="field"><label>Chiffre d'affaires pr&eacute;visionnel</label></div>
+                <div class="field">
+                    <label class="column-title" style="margin-left: 270px">Chiffre d'affaires pr&eacute;visionnel</label>
+                    <label class="column-title" style="margin-left: 10px; width: 260px">
+                        <?php echo __('Montant des Royalties reversées', 'yproject')."&nbsp;".__("pour","yproject")?>
+                        <span id="total-funding">---</span>&nbsp;&euro;
+                        <?php echo "&nbsp;".__("investis"); ?>
+                    </label>
+                </div>
                 <ul id="estimated-turnover">
                     <?php
-					$estimated_turnover = $campaign->estimated_turnover();
+                    $estimated_turnover = $campaign->estimated_turnover();
                     if(!empty($estimated_turnover)){
                         $i=0;
                         foreach (($campaign->estimated_turnover()) as $year => $turnover) :?>
                             <li class="field">
-                                <label>Année <span class="year"><?php echo ($i+1); ?></span></label>
-								<span class="field-container">
-									<span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
-										<?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
-										<i class="right fa fa-eur" aria-hidden="true"></i>
-										<input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />
-										<?php else: ?>
-										<?php echo $turnover; ?> &euro;
-										<?php endif; ?>
-									</span>
-								</span>
+                                <label>Année <span class="year"><?php echo ($i+1); ?></span></label>                           
+                                <span class="field-container" <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?> style="padding-left: 80px;" <?php endif; ?>>
+                                        <span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
+                                                <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
+                                                <i class="right fa fa-eur" aria-hidden="true"></i>
+                                                <input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />                                         
+                                                <?php else: ?>
+                                                <?php echo $turnover; ?>
+                                                <?php endif; ?>
+                                        </span>
+                                        <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?>
+                                            <span style="padding-right: 70px;">&euro;</span>
+                                        <?php endif; ?>
+                                        <!--montant des royalties reversées par année-->
+                                        <span class="like-input-center">
+                                            <p id="roi-amount-<?php echo $i;?>">0 €</p>
+                                            <!--<input class="input-center" type="text" id="new-estimated-roi-<?php echo $i;?>" disabled="disabled"/>-->
+                                        </span>                                     
+                                </span>
                             </li>
                         <?php
                             $i++;
@@ -440,8 +457,19 @@ function print_informations_page()
                     }
                      ?>
                 </ul>
-
+                <!-- Total de royalties reversées -->
+                <div id="total-roi-container" class="field">
+                    <label><?php _e("TOTAL", "yproject")?></label><span class="like-input-center"><p id="total-roi">0&nbsp;€</p></span>
+					<label><?php _e("Retour sur investissement", "yproject")?></label><span class="like-input-center"><p id="gain"></p></span>
+                </div>
+                <!-- Rendement annuel moyen pour les investisseurs -->
+                <div id="annual-gain-container" class="field">
+					<label><?php _e("Pour vos investisseurs", "yproject")?>&nbsp;:</label>
+                    <label><?php _e("Rendement annuel moyen", "yproject") ?></label><span class="like-input-center"><p id="medium-rend">---&nbsp;%</p></span>
+                </div>
+                <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
                 <?php DashboardUtility::create_save_button("projectfunding_form"); ?>
+                <?php endif; ?>
             </form>
         </div>
 
