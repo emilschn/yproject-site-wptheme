@@ -307,13 +307,8 @@ function print_informations_page()
                 // Gestion des organisations
                 $str_organizations = '';
                 global $current_user;
-                $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
-                $current_organizations = BoppLib::get_project_organizations_by_role($api_project_id, BoppLibHelpers::$project_organization_manager_role['slug']);
-                if (isset($current_organizations) && count($current_organizations) > 0) {
-                    $current_organization = $current_organizations[0];
-                }
-                $api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
-                $organizations_list = BoppUsers::get_organizations_by_role($api_user_id, BoppLibHelpers::$organization_creator_role['slug']);
+                $current_organization = $campaign->get_organization();
+                $organizations_list = $WDGAuthor->get_organizations_list();
                 if ($organizations_list) {
                     foreach ($organizations_list as $organization_item) {
                         $selected_str = ($organization_item->id == $current_organization->id) ? 'selected="selected"' : '';
