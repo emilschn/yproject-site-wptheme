@@ -9,7 +9,6 @@
 $can_edit = true;
 global $current_user;
 $WDGUser_current = WDGUser::current();
-$api_user_id = BoppLibHelpers::get_api_user_id( $WDGUser_current->wp_user->ID );
 $organizations_list = $WDGUser_current->get_organizations_list();
 if (!empty($organizations_list)) {
 	foreach ($organizations_list as $organization_item) {
