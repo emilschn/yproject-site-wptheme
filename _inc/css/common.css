@@ -796,9 +796,30 @@ body.page-template-template-discover-projects-php nav#project-filter div.project
 	background: url("../../images/common/arrow-filter.png") no-repeat right #FFF;
 }
 body.page-template-template-discover-projects-php nav#project-filter select option {
-	text-transform: lowercase;
-	padding: 10px;
+	text-transform: capitalize;
+	padding: 15px;
+	padding-left: 10px;
 	border-bottom: 1px solid #E1E3E2;
+	min-height: 12px;
+}
+body.page-template-template-discover-projects-php nav#project-filter select#project-filter-impact option {
+	padding: 15px;
+	padding-left: 45px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: 5px center;
+}
+body.page-template-template-discover-projects-php nav#project-filter select option#all-impacts {
+	padding-left: 5px;
+}
+body.page-template-template-discover-projects-php nav#project-filter select option#economique {
+	background-image: url("../../images/common/impact-eco-small.png") ;
+}
+body.page-template-template-discover-projects-php nav#project-filter select option#environnemental {
+	background-image: url("../../images/common/impact-env-small.png") ;
+}
+body.page-template-template-discover-projects-php nav#project-filter select option#social {
+	background-image: url("../../images/common/impact-social-small.png") ;
 }
 body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container {
 	width: 25%;

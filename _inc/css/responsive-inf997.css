@@ -217,7 +217,13 @@
 		content: "-";
 	}
 	body.page-template-template-discover-projects-php nav#project-filter select.project-filter-select option {
-		padding: 10px 8%;
+		padding: 10px 8% !important;
+	}
+	body.page-template-template-discover-projects-php nav#project-filter select#project-filter-impact option#economique, 
+	body.page-template-template-discover-projects-php nav#project-filter select#project-filter-impact option#environnemental, 
+	body.page-template-template-discover-projects-php nav#project-filter select#project-filter-impact option#social {
+		padding-left: 75px !important;
+		background-position: 35px center;
 	}
 	body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-slider {
 		margin-bottom: 15px;
