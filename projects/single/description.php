@@ -112,7 +112,7 @@ if ($can_modify) {
 
 		<div class="project-description-item" data-content="implementation">
 			<div class="projects-desc-content-picto">
-				<img class="project-content-icon vertical-align-middle" src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/description-equipe.png" alt="team" />
+				<img class="project-content-icon vertical-align-middle" src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/description-equipe.png" alt="team" width="74px"/>
 			</div>
 			<div id="project-content-implementation" class="projects-desc-content">
 				<h3><?php _e('&Eacute;quipe', 'yproject'); ?></h3>
