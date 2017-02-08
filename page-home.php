@@ -29,7 +29,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
         <div id="slider">
             <?php
             $tabImg = array(1 => '/images/slider/slider-01.jpg',
-                            2 => '/images/slider/slider-02.jpg',
+                            2 => '/images/slider/slider-prixFintech.jpg',
                             3 => '/images/slider/slider-03.jpg'
                             );
             for ($ii = 1; $ii <= count($tabImg); $ii++):
@@ -45,7 +45,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
 							<p class="screen-message">Nous activons<br />une finance à impact positif<br />en développant<br />les levées de fonds en royalties</p>
 							<?php break;
 							case 2: ?>
-							<p class="screen-message">En 2016, WE DO GOOD<br />obtient l'agrément du<br />Pôle de compétitivité<br />Finance Innovation</p>
+							<p class="screen-message">En 2017,<br />WE DO GOOD<br />est le coup de coeur<br />Fintech de l'année</p>
 							<?php break;
 							case 3: ?>
 							<p class="screen-message">142 personnes ont investi<br />90 000 € pour propulser<br />les impacts positifs<br />de Naoden</p>
