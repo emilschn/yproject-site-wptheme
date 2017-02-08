@@ -337,6 +337,7 @@
 											<div class="loading-content"></div>
 											<div class="loading-form align-center hidden">
 												<form action="" method="POST">
+													<input type="checkbox" name="send_notifications" value="1" checked="checked" /> Envoyer un mail automatique aux investisseurs<br /><br />
 													<input type="hidden" name="action" value="proceed_roi_transfers" />
 													<input type="hidden" id="hidden-roi-id" name="roi_id" value="" />
 													<input type="submit" class="button" value="Transférer" />
