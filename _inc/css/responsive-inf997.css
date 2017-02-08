@@ -54,7 +54,7 @@
 	}
 	
 	
-	#submenu-user { top: 50px; }
+	#submenu-user { top: 50px; right: 0px; }
 	#submenu-search { top: 50px; right: 0px; }
 	#submenu-search a {
 		display: block;
@@ -246,5 +246,23 @@
 	}
 	body.page-template-template-discover-projects-php .button.more-content {
 		display: none;
+	}
+}
+
+/*******************************************************************************
+* RESPONSIVE MOBILE
+*******************************************************************************/
+@media screen and (max-width: 400px) {
+	#submenu-search {
+		width: -webkit-calc(100% - 8px);
+		width: -moz-calc(100% - 8px);
+		width: calc(100% - 8px);
+	}
+}
+@media screen and (max-width: 400px) {
+	#submenu-user {
+		width: -webkit-calc(100% - 8px);
+		width: -moz-calc(100% - 8px);
+		width: calc(100% - 8px);
 	}
 }
