@@ -335,12 +335,8 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 	width: -webkit-calc((100% - 1280px) / 2);
 	width: -moz-calc((100% - 1280px) / 2);
 	width: 285px;
-    height: 360px;
     font-size: 8pt;
 	text-align: left;
-}
-#submenu-user.connected {
-    height: 300px;
 }
 #submenu-user span {
     text-transform: uppercase;  
