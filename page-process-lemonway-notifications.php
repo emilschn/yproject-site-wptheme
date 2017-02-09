@@ -77,6 +77,8 @@ if ( !empty( $lemonway_posted_category ) ) {
 					}
 				}
 			}
+			ypcf_debug_log( "PROCESS -> $trace = " . $trace );
+			ypcf_debug_log( "PROCESS -> $investment_id = " . $investment_id .  " ; $investment_campaign_id = " . $investment_campaign_id );
 			
 			if ( $investment_id != FALSE && $investment_campaign_id != FALSE ) {
 				// - Faire le transfert vers le porte-monnaie du porteur de projet
@@ -88,6 +90,7 @@ if ( !empty( $lemonway_posted_category ) ) {
 				if ( YPOrganisation::is_user_organisation($WDGUser_invest_author->wp_user->ID) ) {
 					$invest_author = new YPOrganisation( $WDGUser_invest_author->wp_user->ID );
 				}
+				ypcf_debug_log( "PROCESS -> $invest_author = " . $invest_author->wp_user->ID );
 				LemonwayLib::ask_transfer_funds( $invest_author->get_lemonway_id(), $organisation_obj->get_lemonway_id(), $lemonway_posted_amount );
 				
 				// - Créer le contrat pdf
