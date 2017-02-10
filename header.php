@@ -190,7 +190,7 @@
 
 						<div id="sidebar-login-form-lightbox">
 							<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-							<a href="<?php echo get_permalink($page_forgotten->ID); ?>" style="margin: 0% 5%;"><?php _e('(Mot de passe oubli&eacute)', 'yproject');?></a>
+							<a href="<?php echo get_permalink($page_forgotten->ID); ?>"><?php _e('(Mot de passe oubli&eacute)', 'yproject');?></a>
 						</div>
 
 						<input id="rememberme" type="checkbox" name="rememberme" value="forever" />

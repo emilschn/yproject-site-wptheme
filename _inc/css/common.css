@@ -12,6 +12,10 @@ body a {
 body input {
 	font-family: Trebuchet MS, sans-serif;
 }
+/* Taille font définie pour tous les textes de formulaire */
+body input[type=text] {
+	font-size: 12pt;
+}
 
 /*******************************************************************************
 * COMMON
@@ -354,26 +358,25 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 #submenu-user div.box_connection_buttons span { color: #FFF; }
 
 #submenu-user form#sidebar-login-form {
+	width: 255px;
+	margin: 0 auto;
 	text-align: left;
 }
 #submenu-user form#sidebar-login-form span#title-connection {
+	display: block;
 	font-size: 11pt;
-	padding-left: 15px;
 }
 #submenu-user form#sidebar-login-form label {
     font-size: 10pt;
     margin-left: 5px;
     text-transform: uppercase;
 }
-#submenu-user form#sidebar-login-form input#rememberme {
-	margin-left: 15px;
-}
 
 #submenu-user form#sidebar-login-form .input_submit {
     color: #FFF;
 }
 #submenu-user form#sidebar-login-form .input_connection {
-    margin: 7px 15px; 
+    margin: 7px 0px;
     width: 246px;
     height: 40px; 
     border: none;
@@ -384,7 +387,7 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     padding: 5px;
 }
 #submenu-user form#sidebar-login-form .pwd_submit {
-    width: 193px;
+    width: 191px;
     margin-right: 0px;
 }  
 #submenu-user form#sidebar-login-form .ok_valid {
