@@ -298,49 +298,44 @@ function print_informations_page()
         </div>
 
         <div class="tab-content" id="tab-organization">
-            <form id="orgainfo_form" class="db-form" data-action="save_project_organisation">
+            <form id="orgainfo_form" class="db-form" data-action="save_project_organization">
                 <ul class="errors">
 
                 </ul>
 
                 <?php
                 // Gestion des organisations
-                $str_organisations = '';
+                $str_organizations = '';
                 global $current_user;
-                $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
-                $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-                if (isset($current_organisations) && count($current_organisations) > 0) {
-                    $current_organisation = $current_organisations[0];
-                }
-                $api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
-                $organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
-                if ($organisations_list) {
-                    foreach ($organisations_list as $organisation_item) {
-                        $selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
-                        $str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
+                $current_organization = $campaign->get_organization();
+                $organizations_list = $WDGAuthor->get_organizations_list();
+                if ($organizations_list) {
+                    foreach ($organizations_list as $organization_item) {
+                        $selected_str = ($organization_item->id == $current_organization->id) ? 'selected="selected"' : '';
+                        $str_organizations .= '<option ' . $selected_str . ' value="'.$organization_item->wpref.'">' .$organization_item->name. '</option>';
                     }
                 }
                 ?>
-                <label for="project-organisation">Organisation :</label>
-                <?php if ($str_organisations != ''): ?>
-                    <span class="field-value" data-type="select" data-id="new_project_organisation">
-                        <select name="project-organisation" id="new_project_organisation">
+                <label for="project-organization">Organisation :</label>
+                <?php if ($str_organizations != ''): ?>
+                    <span class="field-value" data-type="select" data-id="new_project_organization">
+                        <select name="project-organization" id="new_project_organization">
                             <option value=""></option>
-                            <?php echo $str_organisations; ?>
+                            <?php echo $str_organizations; ?>
                         </select>
                     </span>
-                    <?php if ($current_organisation!=null){
+                    <?php if ($current_organization!=null){
                         $page_edit_orga = get_page_by_path('editer-une-organisation');
                         $edit_org = '<a id="edit-orga-button" class="button" 
                             data-url-edit="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.'" 
-                            href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organisation->organisation_wpref.'">';
-                        $edit_org .= 'Editer '.$current_organisation->organisation_name.'</a>';
+                            href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organization->wpref.'">';
+                        $edit_org .= 'Editer '.$current_organization->name.'</a>';
                         echo $edit_org;
                     } ?>
 
                 <?php else: ?>
                     <?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
-                    <input type="hidden" name="project-organisation" value="" />
+                    <input type="hidden" name="project-organization" value="" />
                 <?php endif;
 
                 $page_new_orga = get_page_by_path('creer-une-organisation'); ?>

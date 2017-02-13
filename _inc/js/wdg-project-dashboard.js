@@ -205,12 +205,12 @@ var WDGProjectDashboard = (function ($) {
                 //Infos organisation
                 if ($("#tab-organization").length > 0) {
 
-                    $("#update_project_organisation").change(function(e){
-                        var newval = $("#update_project_organisation").val();
+                    $("#update_project_organization").change(function(e){
+                        var newval = $("#update_project_organization").val();
 
                         if(newval!=''){
                             $("#edit-orga-button").show();
-                            var newname = $("#update_project_organisation").find('option:selected').text();
+                            var newname = $("#update_project_organization").find('option:selected').text();
                             $("#edit-orga-button").attr("href",$("#edit-orga-button").data("url-edit")+newval);
 
                             $("#edit-orga-button").text("Editer "+newname);
@@ -316,12 +316,12 @@ var WDGProjectDashboard = (function ($) {
                 //Formulaire
                 //Infos organisation
                 if ($("#campaign_form").length > 0) {
-                    $("#update_project_organisation").change(function(e){
-                        var newval = $("#update_project_organisation").val();
+                    $("#update_project_organization").change(function(e){
+                        var newval = $("#update_project_organization").val();
 
                         if(newval!=''){
                             $("#edit-orga-button").show();
-                            var newname = $("#update_project_organisation").find('option:selected').text();
+                            var newname = $("#update_project_organization").find('option:selected').text();
                             $("#edit-orga-button").attr("href",$("#edit-orga-button").data("url-edit")+newval);
 
                             $("#edit-orga-button").text("Editer "+newname);

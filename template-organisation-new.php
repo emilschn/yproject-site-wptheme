@@ -6,7 +6,7 @@
 ?>
 
 <?php
-YPOrganisation::submit_new();
+WDGOrganization::submit_new();
 get_header();
 ?>
 
@@ -103,7 +103,7 @@ get_header();
 						    
 						<input type="checkbox" name="org_capable" /><?php _e('Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette organisation.', 'yproject'); ?><br />
 
-						<input type="hidden" name="action" value="submit-new-organisation" />
+						<input type="hidden" name="action" value="submit-new-organization" />
 
 						<input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" />
 

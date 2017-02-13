@@ -244,7 +244,7 @@ $WDGUser_current = WDGUser::current();
 				<?php if (isset($_SESSION['redirect_current_amount_part'])) { ?>
 					<input type="hidden" name="amount_part" value="<?php echo $_SESSION['redirect_current_amount_part']; ?>" />
 				<?php } ?>
-				<?php if (isset($_SESSION['redirect_current_invest_type']) && $_SESSION['redirect_current_invest_type'] != "new_organisation") { ?>
+				<?php if (isset($_SESSION['redirect_current_invest_type']) && $_SESSION['redirect_current_invest_type'] != "new_organization") { ?>
 					<input type="hidden" name="invest_type" value="<?php echo $_SESSION['redirect_current_invest_type']; ?>" />
 				<?php } ?>
 				<input type="hidden" name="update_user_posted" value="posted" />
@@ -264,19 +264,19 @@ $WDGUser_current = WDGUser::current();
 					$page_edit_orga = get_page_by_path('editer-une-organisation');
 					$can_edit = true;
 					global $current_user;
-					$api_user_id = BoppLibHelpers::get_api_user_id($current_user->ID);
-					$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
-					if (!empty($organisations_list)) {
-						foreach ($organisations_list as $organisation_item) {
-							$str_organisations .= '<li>';
-							if ($can_edit) { $str_organisations .= '<a href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$organisation_item->organisation_wpref.'">'; }
-							$str_organisations .= $organisation_item->organisation_name; 
-							if ($can_edit) { $str_organisations .= '</a>'; }
-							$str_organisations .= '</li>';
+					$wdg_current_user = new WDGUser( $current_user->ID );
+					$organizations_list = $wdg_current_user->get_organizations_list();
+					if (!empty($organizations_list)) {
+						foreach ($organizations_list as $organization_item) {
+							$str_organizations .= '<li>';
+							if ($can_edit) { $str_organizations .= '<a href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$organization_item->wpref.'">'; }
+							$str_organizations .= $organization_item->name; 
+							if ($can_edit) { $str_organizations .= '</a>'; }
+							$str_organizations .= '</li>';
 						}
 					}
-					if ($str_organisations != ''): ?>
-						<ul style="padding-left: 0px;"><?php echo $str_organisations; ?></ul>
+					if ($str_organizations != ''): ?>
+						<ul style="padding-left: 0px;"><?php echo $str_organizations; ?></ul>
 
 					<?php else: ?>
 						<?php _e('Aucune organisation.', 'yproject'); ?>

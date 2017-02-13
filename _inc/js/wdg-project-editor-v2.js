@@ -144,7 +144,7 @@ var ProjectEditor = (function($) {
 						ProjectEditor.redirectParams(sProperty);
 						break;
                     case "project-owner":
-						ProjectEditor.redirectOrganisation(sProperty);
+						ProjectEditor.redirectOrganization(sProperty);
 						break;
 				}
 			});
@@ -268,7 +268,7 @@ var ProjectEditor = (function($) {
 		},
                 
                 //Redirections pour l'édition de l'organisation
-		redirectOrganisation: function(property) {
+		redirectOrganization: function(property) {
 			window.location.href = $("#orga-edit").data("link-edit") + "#" + property;
 		},
 		

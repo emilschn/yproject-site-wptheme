@@ -773,10 +773,10 @@ function print_user_projects(){
 									if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $payment_status == "publish" && $payment['signsquid_status'] != 'Agreed') :
 									?>
 									<td style="width: 220px;">
-										<?php if (!empty($payment['signsquid_contract_id'])): ?>
+										<?php /*if (!empty($payment['signsquid_contract_id'])): ?>
 											<?php $page_my_investments = get_page_by_path('mes-investissements'); ?>
 											<a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $payment_id; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
-										<?php endif; ?>
+										<?php endif;*/ ?>
 										
 										<?php $page_cancel_invest = get_page_by_path('annuler-un-investissement'); ?>
 										<a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $payment_id; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
@@ -817,6 +817,8 @@ add_action( 'wp_ajax_nopriv_print_user_projects', 'print_user_projects' );
  */
 function add_team_member(){
     $campaign_id = intval($_POST['id_campaign']);
+	$post_campaign = get_post($campaign_id);
+	$campaign = new ATCF_Campaign($post_campaign);
     $user_by_login = get_user_by('login', $_POST['new_team_member']);
     $user_by_mail = get_user_by('email', $_POST['new_team_member']);
     if ($user_by_login === FALSE && $user_by_mail === FALSE) {
@@ -827,15 +829,15 @@ function add_team_member(){
             if ($user_by_login !== FALSE) $user_wp_id = $user_by_login->ID;
             else if ($user_by_mail !== FALSE) $user_wp_id = $user_by_mail->ID;
             //Récupération des infos existantes sur l'API
-            $user_api_id = BoppLibHelpers::get_api_user_id($user_wp_id);
-            $project_api_id = BoppLibHelpers::get_api_project_id($campaign_id);
-            BoppLibHelpers::check_create_role(BoppLibHelpers::$project_team_member_role['slug'], BoppLibHelpers::$project_team_member_role['title']);
+			$wdg_user = new WDGUser( $user_wp_id );
+			$api_user_id = $wdg_user->get_api_id();
+            $project_api_id = $campaign->get_api_id();
             //Ajout à l'API
-            BoppLib::link_user_to_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
+			WDGWPREST_Entity_Project::link_user( $project_api_id, $api_user_id, WDGWPREST_Entity_Project::$link_user_type_team );
             
             do_action('wdg_delete_cache', array(
-                    'users/' . $user_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
-                    'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
+                    'users/' . $api_user_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_team . '/projects',
+                    'projects/' . $project_api_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_team . '/members'
             ));
             
             $user = get_userdata($user_wp_id);
@@ -856,13 +858,16 @@ add_action( 'wp_ajax_nopriv_add_team_member', 'add_team_member' );
  */
 function remove_team_member(){
     //Récupération des infos existantes sur l'API
-    $user_api_id = BoppLibHelpers::get_api_user_id($_POST['user_to_remove']);
-    $project_api_id = BoppLibHelpers::get_api_project_id($_POST['id_campaign']);
+	$wdg_user = new WDGUser( $_POST['user_to_remove'] );
+	$api_user_id = $wdg_user->get_api_id();
+	$post_campaign = get_post($_POST['id_campaign']);
+	$campaign = new ATCF_Campaign($post_campaign);
+    $project_api_id = $campaign->get_api_id();
     //Supprimer dans l'API
-    BoppLib::unlink_user_from_project($project_api_id, $user_api_id, BoppLibHelpers::$project_team_member_role['slug']);
+	WDGWPREST_Entity_Project::unlink_user( $project_api_id, $api_user_id, WDGWPREST_Entity_Project::$link_user_type_team );
     do_action('wdg_delete_cache', array(
-            'users/' . $user_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/projects',
-            'projects/' . $project_api_id . '/roles/' . BoppLibHelpers::$project_team_member_role['slug'] . '/members'
+            'users/' . $api_user_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_team . '/projects',
+            'projects/' . $project_api_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_team . '/members'
     ));
     echo "TRUE";
     exit();
@@ -1048,17 +1053,16 @@ function get_investors_table() {
 			
 		<?php foreach ( $investments_list['payments_data'] as $item ) {
 			$post_invest = get_post($item['ID']);
-			$mangopay_id = edd_get_payment_key($item['ID']);
-
+			$payment_id = edd_get_payment_key($item['ID']);
+			$payment_type = 'Carte';
 			$payment_state = edd_get_payment_status( $post_invest, true );
 			if ($payment_state == "En attente" && $current_wdg_user->is_admin()) {
 				$payment_state .= '<br /><a href="' .get_permalink($page_dashboard->ID) . $campaign_id_param. '&approve_payment='.$item['ID'].'" style="font-size: 10pt;">[Confirmer]</a>';
 				$payment_state .= '<br /><br /><a href="' .get_permalink($page_dashboard->ID) . $campaign_id_param. '&cancel_payment='.$item['ID'].'" style="font-size: 10pt;">[Annuler]</a>';
 			}
-			$payment_type = 'Carte';
-			if (strpos($mangopay_id, 'wire_') !== FALSE) {
+			if (strpos($payment_id, 'wire_') !== FALSE) {
 				$payment_type = 'Virement';
-			} else if ($mangopay_id == 'check') {
+			} else if ($payment_id == 'check') {
 				$payment_type = 'Ch&egrave;que';
 			} else if (strpos($mangopay_id, '_wallet_') !== FALSE) {
 				$payment_type = 'Carte et Porte-monnaie';
@@ -1084,8 +1088,8 @@ function get_investors_table() {
 			$user_data = get_userdata($item['user']);
 
 			//Liste des données à afficher pour la ligne traitée
-			if(YPOrganisation::is_user_organisation($item['user'])){
-				$orga = new YPOrganisation($item['user']);
+			if(WDGOrganization::is_user_organization($item['user'])){
+				$orga = new WDGOrganization($item['user']);
 				$orga_user = get_user_by('email', $item['email']);
 				$datacolonnes = array(
 					'ORG - ' . $orga->get_name(),
@@ -1457,9 +1461,9 @@ Sélectionner :<br />
 	//Affichage de la liste d'e-mails
 	foreach ($user_list as $user_id => $classes) {
 		if (!empty($user_id)) {
-			if (YPOrganisation::is_user_organisation($user_id)) {
-				$organisation = new YPOrganisation($user_id);
-				$user_data = $organisation->get_creator();
+			if (WDGOrganization::is_user_organization($user_id)) {
+				$organization = new WDGOrganization($user_id);
+				$user_data = $organization->get_creator();
 				//TODO
 				
 			} else {

@@ -21,9 +21,9 @@ if (isset($campaign)):
 		$can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $amount, $campaign );
 	} else {
 		$invest_type = $_SESSION['redirect_current_invest_type'];
-		$organisation = new YPOrganisation($invest_type);
-		$can_use_wallet = $organisation->can_pay_with_wallet( $amount, $campaign );
-		$can_use_card_and_wallet = $organisation->can_pay_with_card_and_wallet( $amount, $campaign );
+		$organization = new WDGOrganization($invest_type);
+		$can_use_wallet = $organization->can_pay_with_wallet( $amount, $campaign );
+		$can_use_card_and_wallet = $organization->can_pay_with_card_and_wallet( $amount, $campaign );
 	}
 	
 	//Possible de régler par virement ?

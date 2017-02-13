@@ -166,7 +166,7 @@ var ProjectEditor = (function($) {
 						ProjectEditor.editImageVideo(sProperty);
 						break;
 					case "project-owner":
-						ProjectEditor.redirectOrganisation(sProperty);
+						ProjectEditor.redirectOrganization(sProperty);
 						break;
 				}
 			});
@@ -562,7 +562,7 @@ var ProjectEditor = (function($) {
 		},
                 
 		//Redirections pour l'édition de l'organisation
-		redirectOrganisation: function(property) {
+		redirectOrganization: function(property) {
 			window.location.href = $(".project-banner-info-item.author-info").data("link-edit") + "#" + property;
 		},
 		
