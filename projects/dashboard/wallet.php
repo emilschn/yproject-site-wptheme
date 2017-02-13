@@ -279,8 +279,36 @@
 										<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
 										<input type="submit" name="payment_card" class="button" value="<?php _e('Payer par carte', 'yproject'); ?>" />
 									</form>
+									<br />
 
-								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
+
+									<hr />
+
+									Si vous souhaitez payer par virement bancaire, voici les informations dont vous aurez besoin :
+									<ul>
+										<li><strong><?php _e("Titulaire du compte :", 'yproject'); ?></strong> LEMON WAY</li>
+										<li><strong>IBAN :</strong> FR76 3000 4025 1100 0111 8625 268</li>
+										<li><strong>BIC :</strong> BNPAFRPPIFE</li>
+										<li>
+											<strong><?php _e("Code &agrave; indiquer (pour identifier votre paiement) :", 'yproject'); ?></strong> wedogood-<?php echo $organization_obj->get_lemonway_id(); ?><br />
+											<ul>
+												<li><?php _e("Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !", 'yproject'); ?></li>
+											</ul>
+										</li>
+									</ul>
+									<br />
+
+									Ensuite, cliquez sur "Payer par virement bancaire", et nous validerons ce paiement une fois la somme réceptionnée par notre prestataire.<br />
+									<br />
+
+									<form action="" method="POST" enctype="">
+										<input type="hidden" name="action" value="proceed_roi" />
+										<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
+										<input type="submit" name="payment_bank_transfer" class="button" value="<?php _e('Payer par virement bancaire', 'yproject'); ?>" />
+									</form>
+
+
+								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ||  $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ): ?>
 									Chiffre d'affaires déclaré :
 									<?php $declaration_turnover = $declaration->get_turnover(); ?>
 									<?php if ($nb_fields > 1): ?>
@@ -311,8 +339,12 @@
 									<?php echo $declaration->get_message(); ?><br /><br />
 									<?php endif; ?>
 
+									<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ): ?>
+									Nous attendons la réception de la somme par notre prestataire de paiement et procèderons au versement par la suite.
+									<?php else: ?>
 									Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
 									Le versement vers vos investisseurs est en cours.
+									<?php endif; ?>
 
 									<?php if ($is_admin): ?>
 										<br /><br />
@@ -325,6 +357,7 @@
 											<div class="loading-content"></div>
 											<div class="loading-form align-center hidden">
 												<form action="" method="POST">
+													<input type="checkbox" name="send_notifications" value="1" checked="checked" /> Envoyer un mail automatique aux investisseurs<br /><br />
 													<input type="hidden" name="action" value="proceed_roi_transfers" />
 													<input type="hidden" id="hidden-roi-id" name="roi_id" value="" />
 													<input type="submit" class="button" value="Transférer" />
