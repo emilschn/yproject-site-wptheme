@@ -589,3 +589,11 @@ div.dt-button-collection{
 table.dataTable td.select-checkbox::before {
     border-radius: 1px;
 }
+
+/*******************************************************************************
+* Page gestion financiere
+*******************************************************************************/
+#page-wallet textarea {
+    width: 90%;
+    height: 150px;
+}
