@@ -45,9 +45,11 @@ var WDGProjectViewer = (function($) {
 				if ($(this).data("following") == '1') {
 					$(this).data("following", '0');
 					$("a.update-follow span").text($(this).data("textfollow"));
+					$("a.update-follow").removeClass("btn-followed");
 				} else {
 					$(this).data("following", '1');
 					$("a.update-follow span").text($(this).data("textfollowed"));
+					$("a.update-follow").addClass("btn-followed");
 				}
 	   			$.ajax({
 					'type' : "POST",

@@ -74,7 +74,7 @@ else {
 					</div>
 
 					<div id="lemonway">
-						<a href="http://www.lemonway.fr" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/lemonway-gris.png" alt="logo Lemonway" width="278px"/></a><br />
+						<a href="http://www.lemonway.fr" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/lemonway-gris.png" alt="logo Lemonway" width="258px"/></a><br />
 						<p class="lines">Partenaire de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l’ACPR en France le 24/12/2012 sous le num&eacute;ro 16568J.</p>
 					</div>
 					<?php if ( is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>

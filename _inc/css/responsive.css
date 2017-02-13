@@ -272,8 +272,8 @@
 * CONNECTION
 *******************************************************************************/
 	#sidebar-login-form .standard-label { width: 90px !important; }
-	#sidebar-login-form input[type="text"] { width: 210px !important; }
-	#sidebar-login-form input[type="submit"], #sidebar-login-form .link-forgotten { margin-left: 94px !important; }
+	#sidebar-login-form input[type="text"] { width: 245px !important; }
+	#sidebar-login-form .link-forgotten { margin-left: 94px !important; }
 	
 /*******************************************************************************
 * REGISTER PAGE / REGISTER LIGHTBOX

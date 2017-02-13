@@ -110,13 +110,13 @@
 			<div id="menu">
 				<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
 				<a href="<?php echo home_url( '/les-projets' ); ?>" class="lines"><?php _e( "Les projets", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/financement' ); ?>" class="lines"><?php _e( "Financer son projet", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/financement' ); ?>" class="lines"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/investissement' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/vision' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
                                 
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
 				<?php if (is_user_logged_in()): ?>
-				<a href="#" class="btn-user connected"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-par-defaut.png" alt="USER" /></a>
+				<a href="#" class="btn-user connected"><?php UIHelpers::print_user_avatar($WDGUser_current->wp_user->ID, 'icon'); ?></a>				
 				<?php else: ?>
 				<a href="#" class="btn-user not-connected inactive"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
 				<?php endif; ?>
@@ -191,7 +191,7 @@
 
 						<div id="sidebar-login-form-lightbox">
 							<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-							<a href="<?php echo get_permalink($page_forgotten->ID); ?>" style="margin: 0% 5%;"><?php _e('(Mot de passe oubli&eacute)', 'yproject');?></a>
+							<a href="<?php echo get_permalink($page_forgotten->ID); ?>"><?php _e('(Mot de passe oubli&eacute)', 'yproject');?></a>
 						</div>
 
 						<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
@@ -248,4 +248,13 @@
 			</div>
 		<?php endif; ?>
 		
+		<?php if($_SESSION['subscribe_newsletter_sendinblue'] == true): ?>
+			<div class="timeout-lightbox wdg-lightbox">
+				<div class="wdg-lightbox-click-catcher"></div>
+				<div class="wdg-lightbox-padder">
+					<p class="wdg-lightbox-msg-info"><?php _e("Votre inscription a bien été prise en compte!", 'yproject'); ?></p>
+				</div>
+			</div>
+		<?php endif; ?>
+		<?php $_SESSION['subscribe_newsletter_sendinblue'] = false; ?>
 		<div id="container"> 

@@ -12,6 +12,10 @@ body a {
 body input {
 	font-family: Trebuchet MS, sans-serif;
 }
+/* Taille font définie pour tous les textes de formulaire */
+body input[type=text] {
+	font-size: 12pt;
+}
 
 /*******************************************************************************
 * COMMON
@@ -264,7 +268,7 @@ nav#main > div#menu > a#btn-search.active > img {
 #submenu-search {
 	position: absolute;
 	top: 60px;
-	right: 72px;
+	right: 75px;
 	width: -webkit-calc(62px + (100% - 1280px) / 2);
 	width: -moz-calc(62px + (100% - 1280px) / 2);
 	width: 285px;
@@ -335,12 +339,8 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 	width: -webkit-calc((100% - 1280px) / 2);
 	width: -moz-calc((100% - 1280px) / 2);
 	width: 285px;
-    height: 360px;
     font-size: 8pt;
 	text-align: left;
-}
-#submenu-user.connected {
-    height: 295px;
 }
 #submenu-user span {
     text-transform: uppercase;  
@@ -350,7 +350,7 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     width: 225px;
     text-align: center;
     padding: 15px;
-    margin: 15px;
+    margin: 15px auto;
     font-size: 11pt;
 }
 #submenu-user div.box_connection_buttons.red { background-color: #EA4F51; }
@@ -358,26 +358,25 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 #submenu-user div.box_connection_buttons span { color: #FFF; }
 
 #submenu-user form#sidebar-login-form {
+	width: 255px;
+	margin: 0 auto;
 	text-align: left;
 }
 #submenu-user form#sidebar-login-form span#title-connection {
+	display: block;
 	font-size: 11pt;
-	padding-left: 15px;
 }
 #submenu-user form#sidebar-login-form label {
     font-size: 10pt;
     margin-left: 5px;
     text-transform: uppercase;
 }
-#submenu-user form#sidebar-login-form input#rememberme {
-	margin-left: 15px;
-}
 
 #submenu-user form#sidebar-login-form .input_submit {
     color: #FFF;
 }
 #submenu-user form#sidebar-login-form .input_connection {
-    margin: 7px 15px; 
+    margin: 7px 0px;
     width: 246px;
     height: 40px; 
     border: none;
@@ -388,7 +387,7 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     padding: 5px;
 }
 #submenu-user form#sidebar-login-form .pwd_submit {
-    width: 193px;
+    width: 191px;
     margin-right: 0px;
 }  
 #submenu-user form#sidebar-login-form .ok_valid {
@@ -408,7 +407,6 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 }
 
 #submenu-user div#button-logout {
-	position: absolute;
 	bottom: 0px;
 }
 @media screen and (max-width: 1300px) {
@@ -416,7 +414,7 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 }
 @media screen and (min-width: 1301px) {
         #submenu-user { position: relative; top: 10px; left: 977px; }
-        #submenu-search { position: relative; top: 10px; left: 916px; }
+        #submenu-search { position: relative; top: 10px; left: 912px; }
 }
 
 /*******************************************************************************
@@ -513,10 +511,10 @@ footer > .footer-container > section:nth-child(2) > div:nth-child(2){
 	position: relative;
 	width: 200px;
 	margin-top: 74px;
-	margin-left: 4%;
+	margin-left: 3%;
 }
 footer > .footer-container > section:nth-child(2) > div:nth-child(3){
-	width: 278px;
+	width: 258px;
 	margin: 2% 0% 0% 4%;
 }
 footer > .footer-container > section:nth-child(2) > div:nth-child(4){
@@ -594,6 +592,11 @@ footer > .footer-container > section:nth-child(2) > div:last-child a{
 	padding: 5px;
 }
 
+@media screen and (min-width: 998px) and (max-width: 1140px) {
+	footer > .footer-container > section:nth-child(2) > div:nth-child(4){
+		width: 20%;
+	}
+}
 /*******************************************************************************
 * PAGES - COMMON
 *******************************************************************************/
@@ -788,6 +791,7 @@ body.page-template-template-discover-projects-php nav#project-filter select {
 	background-color: transparent;
 	border: none;
 	line-height: 40px;
+	text-transform: uppercase;
 	cursor: pointer;
 }
 body.page-template-template-discover-projects-php nav#project-filter div.project-filter-container {
@@ -796,9 +800,35 @@ body.page-template-template-discover-projects-php nav#project-filter div.project
 	background: url("../../images/common/arrow-filter.png") no-repeat right #FFF;
 }
 body.page-template-template-discover-projects-php nav#project-filter select option {
-	text-transform: lowercase;
-	padding: 10px;
+	padding: 15px;
+	padding-left: 10px;
 	border-bottom: 1px solid #E1E3E2;
+	min-height: 12px;
+}
+body.page-template-template-discover-projects-php nav#project-filter .project-filter-container .project-filter-select option {
+	text-transform: none;
+}
+body.page-template-template-discover-projects-php nav#project-filter .project-filter-container .project-filter-select option[value=all] {
+	text-transform: uppercase;
+}
+body.page-template-template-discover-projects-php nav#project-filter select#project-filter-impact option {
+	padding: 15px;
+	padding-left: 45px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: 5px center;
+}
+body.page-template-template-discover-projects-php nav#project-filter select option#all-impacts {
+	padding-left: 5px;
+}
+body.page-template-template-discover-projects-php nav#project-filter select option#economique {
+	background-image: url("../../images/common/impact-eco-small.png") ;
+}
+body.page-template-template-discover-projects-php nav#project-filter select option#environnemental {
+	background-image: url("../../images/common/impact-env-small.png") ;
+}
+body.page-template-template-discover-projects-php nav#project-filter select option#social {
+	background-image: url("../../images/common/impact-social-small.png") ;
 }
 body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container {
 	width: 25%;

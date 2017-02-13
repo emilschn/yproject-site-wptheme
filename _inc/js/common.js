@@ -276,8 +276,9 @@ YPUIFunctions = (function($) {
 						YPUIFunctions.scrollTo($(".wdg-lightbox-padder"));
 					}
 				});
-				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function(e) {
+				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function(e) {				
 					$(".wdg-lightbox").hide();
+					e.preventDefault();
 				});
 				$(".wdg-lightbox #wdg-lightbox-welcome-close").click(function(e) {
 					$(".wdg-lightbox").hide();
