@@ -15,10 +15,10 @@
 @font-face{
     font-family: "wedogood";
 	src: url('fonts/wedogoodregular-webfont.eot');
-	src: url('fonts/wedogoodregular-webfont.woff2') format('woff2'), 	
+	src: url('fonts/wedogoodregular-webfont.eot?#iefix') format('embedded-opentype'),
+		url('fonts/wedogoodregular-webfont.woff2') format('woff2'), 	
 		url('fonts/wedogoodregular-webfont.woff') format('woff'),
 		url('fonts/wedogoodregular.otf') format("opentype"),
-		url('fonts/wedogoodregular-webfont.ttf') format('truetype'),
 		url('fonts/wedogoodregular-webfont.svg#wedogoodregular') format('svg');  
 	
 }
