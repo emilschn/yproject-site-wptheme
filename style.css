@@ -185,7 +185,7 @@ form.wdg-forms .small-margin {
 }
 
 .standard-form {
-    font-family: Arial, sans-serif;
+    font-family: Trebuchet MS, sans-serif;
     margin: 5px 0px;
 }
 .standard-form select{ margin-bottom: 5px; }
@@ -454,7 +454,7 @@ form.wdg-forms table input[type="text"].reward-text{
 	max-width: 600px;
 	max-height: 80vh;
 	margin: 5vh auto;
-	padding: 20px;
+	padding: 50px;
 	background-color: #F2F2F2;
 	overflow-y: auto;
 	z-index: 4002;
@@ -478,12 +478,17 @@ form.wdg-forms table input[type="text"].reward-text{
 }
 
 .wdg-lightbox .wdg-lightbox-button-close {
-	float: right;
-	margin-top: -17px;
+	position: absolute;
+	right: 0px;
+	margin-top: -45px;
 }
 .wdg-lightbox .wdg-lightbox-button-close a {
-	font-size: 16px;
-	font-weight: bold;
+	padding: 5px 20px;
+	background: none;
+	border: none;
+	font-size: 28pt;
+	color: #333333;
+	text-transform: lowercase;
 }
 
 #validate-terms .validate-terms-excerpt {
@@ -2057,7 +2062,12 @@ span#extra-comment-image{
 }
 .form-register h2 {
     text-align: center;
-    margin: 5px 0px;
+    margin: 0px;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+	color: #00879B;
+	font-size: 16pt;
+	font-weight: normal;
 }
 .form-register .warning {
     text-align: justify;
