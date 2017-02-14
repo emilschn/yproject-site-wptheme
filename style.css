@@ -191,6 +191,24 @@ form.wdg-forms .small-margin {
 .standard-form select{ margin-bottom: 5px; }
 .standard-form input[type=text] { margin-bottom: 5px; }
 .standard-form input[type=password] { margin-bottom: 3px; }
+.standard-form input[type=text], .standard-form input[type=password] {
+	width: 200px;
+	height: 30px;
+	padding: 0px 5px;
+	border: none;
+}
+.standard-form input[type=text]::-webkit-input-placeholder, .standard-form input[type=password]::-webkit-input-placeholder {
+	color: #E1E3E2;
+}
+.standard-form input[type=text]::-moz-placeholder, .standard-form input[type=password]::-moz-placeholder {
+	color: #E1E3E2;
+}
+.standard-form input[type=text]:-moz-placeholder, .standard-form input[type=password]:-moz-placeholder {
+	color: #E1E3E2;
+}
+.standard-form input[type=text]:-ms-input-placeholder, .standard-form input[type=password]:-ms-input-placeholder {
+	color: #E1E3E2;
+}
 .standard-form input.margin-left { margin-left: 140px !important; }
 .standard-form input[type=submit] {
     background: none repeat scroll 0 0 #333333;
