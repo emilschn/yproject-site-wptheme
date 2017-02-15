@@ -1,4 +1,4 @@
-<div id="post_bottom_content" class="center_small align-center">
+<div id="post_bottom_content" class="align-center">
 	<?php if (WDGUser::has_login_errors()): ?>
 	<div class="errors">
 		<?php echo WDGUser::display_login_errors(); ?>
@@ -16,6 +16,11 @@
             <input id="password" type="password" name="pwd" placeholder="Mot de passe" value="" style="margin: 5px;" />
             <br />
 	    
+            <div id="sidebar-login-form-lightbox">
+				<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
+				<a href="<?php echo get_permalink($page_forgotten->ID); ?>" >(Mot de passe oubli&eacute;)</a>
+            </div>
+
 			<input id="sidebar-rememberme" type="checkbox" name="rememberme" value="forever" />
 			<label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
 			<br />
@@ -26,14 +31,14 @@
 				<input type="hidden" name="login-form" value="1" />
             </div>
 	    
-            <div id="sidebar-login-form-lightbox">
-				<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-				<a href="<?php echo get_permalink($page_forgotten->ID); ?>" >(Mot de passe oubli&eacute;)</a>
-            </div>
             <br />
         </form>
-            
-        <hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
+
+        <div id="connexion_facebook_container" class="box_connection_buttons red">
+			<div id="submenu_item_connection_register" class="" >
+				<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><span style="color: #FFF; ">Cr&eacute;er mon compte</span></a>
+			</div>
+        </div>
 
         <div class="box_connection_buttons blue" id="connexion_facebook_container">
             <a href="javascript:void(0);" class="social_connect_login_facebook"><span style=" font-size: 11pt;">&nbsp;Se connecter avec Facebook</span></a>
@@ -41,15 +46,5 @@
 
         <div class="hidden"><?php dynamic_sidebar('sidebar-1'); ?></div>
 
-        <hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
-
-        <div id="connexion_facebook_container">
-            <div class="box_connection_buttons red" >
-                <div id="submenu_item_connection_register" class="" >
-                    <a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><span style="color: #FFF; ">Cr&eacute;er mon compte</span></a>
-                </div>
-            </div>
-        </div>
-        <br />
 </div>
 

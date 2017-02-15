@@ -2092,6 +2092,9 @@ span#extra-comment-image{
     text-align: justify;
     margin-bottom: 20px;
 }
+#wdg-lightbox-connexion .warning {
+	text-align: center;
+}
 .form-register .register-section {
     text-align: center;
 }
@@ -2114,7 +2117,7 @@ span#extra-comment-image{
 }
 #signup_form #signin-button {
 	float: right;
-	margin-top: 5px;
+	margin-top: 8px;
 }
 #signup_form #connexion_facebook_container {
 	margin: 15% auto 5%;
@@ -2128,7 +2131,26 @@ span#extra-comment-image{
 	font-size: 12pt;
 	cursor: pointer;
 }
-
+#wdg-lightbox-connexion #submit-center {
+	float: left;
+	margin-top: 23px;
+}
+#wdg-lightbox-connexion #connexion_facebook_container {
+	float: right;
+	margin-top: 0;
+	margin-bottom: 15px;
+}
+#wdg-lightbox-connexion #connexion_facebook_container.box_connection_buttons.blue {
+	float: none;
+	margin-top: 13%;
+	margin-bottom: 0;
+}
+#wdg-lightbox-connexion #connexion_facebook_container .box_connection_buttons {
+	margin: 0;
+}
+#wdg-lightbox-connexion #connexion_facebook_container.box_connection_buttons {
+	font-size: 12pt;
+}
 /*******************************************************************************
 * ACTIVATE PAGE
 *******************************************************************************/ 
