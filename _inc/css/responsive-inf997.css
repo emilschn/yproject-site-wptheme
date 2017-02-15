@@ -54,7 +54,7 @@
 	}
 	
 	
-	#submenu-user { top: 50px; }
+	#submenu-user { top: 50px; right: 0px; }
 	#submenu-search { top: 50px; right: 0px; }
 	#submenu-search a {
 		display: block;
@@ -217,7 +217,15 @@
 		content: "-";
 	}
 	body.page-template-template-discover-projects-php nav#project-filter select.project-filter-select option {
-		padding: 10px 8%;
+		padding: 10px 8% !important;
+	}
+	body.page-template-template-discover-projects-php nav#project-filter select#project-filter-impact option#economique, 
+	body.page-template-template-discover-projects-php nav#project-filter select#project-filter-impact option#environnemental, 
+	body.page-template-template-discover-projects-php nav#project-filter select#project-filter-impact option#social {
+		padding-left: -webkit-calc(40px + 8%) !important;
+		padding-left: -moz-calc(40px + 8%) !important;
+		padding-left: calc(40px + 8%) !important;
+		background-position: 8% center;
 	}
 	body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-slider {
 		margin-bottom: 15px;
@@ -238,5 +246,23 @@
 	}
 	body.page-template-template-discover-projects-php .button.more-content {
 		display: none;
+	}
+}
+
+/*******************************************************************************
+* RESPONSIVE MOBILE
+*******************************************************************************/
+@media screen and (max-width: 400px) {
+	#submenu-search {
+		width: -webkit-calc(100% - 8px);
+		width: -moz-calc(100% - 8px);
+		width: calc(100% - 8px);
+	}
+}
+@media screen and (max-width: 400px) {
+	#submenu-user {
+		width: -webkit-calc(100% - 8px);
+		width: -moz-calc(100% - 8px);
+		width: calc(100% - 8px);
 	}
 }

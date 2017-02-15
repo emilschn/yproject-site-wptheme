@@ -414,9 +414,11 @@ body.page-template-template-discover-projects-php .wdg-component-projects-previe
     border-radius: 100%;
     border: solid 4px transparent; 
     color: #FFFFFF;
-    transition: all .2s linear;
     cursor: pointer;
     margin: 0px 1px;
+}
+.wdg-component-projects-preview .impacts-container .impact-logo {
+	transition: all .2s linear;
 }
 /* Dégradés de couleurs pour les impacts */
 .impacts-container .impact-ecologic{
@@ -429,9 +431,30 @@ body.page-template-template-discover-projects-php .wdg-component-projects-previe
     background: linear-gradient(45deg, #00879B, #005663);
 }
 
-.impacts-container .impact-logo:hover{  /* à revoir : empecher le déplacement des impacts au survol ***********/
+.wdg-component-projects-preview .impacts-container .impact-logo:hover {
     transform: scale(1.15);
     border-color: #fff;
+}
+.impacts-container .impact-logo {
+	position: relative;
+}
+.impacts-container .info-bulle.invisible{
+	display: none;
+}
+.impacts-container .info-bulle.visible {
+	display: inline;
+	position: absolute;
+	z-index: 500;
+	top: 30px;
+	background-color: #FFFFFF;
+	border: 1px solid #333333;
+	padding: 1px 4px;
+	white-space: nowrap;
+	font-size: 9pt;
+}
+
+div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions div.impacts-container .impact-logo {
+	border: none;
 }
 
 

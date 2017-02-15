@@ -112,13 +112,13 @@ $lang_list = $campaign->get_lang_list();
 				<div class="project-banner-info-actions">
 					<div class="impacts-container" id="impacts-<?php echo $post->ID; ?>">
 						<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="impact environnemental" width="42" height="42" class="impact-logo" title="<?php _e('impact environnemental', 'yproject')?>" />
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="impact environnemental" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('impact environnemental', 'yproject')?></span>
 						<?php endif; ?>
 						<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="impact social" width="42" height="42" class="impact-logo" title="<?php _e('impact social', 'yproject')?>"/>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="impact social" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('impact social', 'yproject')?></span>
 						<?php endif; ?>
 						<?php if (strpos($campaign_categories_str, 'economique') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="impact économique" width="42" height="42" class="impact-logo" title="<?php _e('impact &eacute;conomique', 'yproject')?>"/>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="impact économique" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('impact &eacute;conomique', 'yproject')?></span>
 						<?php endif; ?>
 					</div>
 

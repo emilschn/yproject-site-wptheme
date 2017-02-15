@@ -575,30 +575,30 @@ div#content.version-3 div.project-expander {
     background: url("../../images/responsive-plus.png") no-repeat center center;
 }
 div#content.version-3 div.project-description-item {
-        position: relative;
-        margin-top: 5%;
+	position: relative;
+	margin-top: 5%;
 }
 div#content.version-3 div.project-description-item div.projects-desc-content-picto {
 	display: inline-block;
-        position: absolute;
-        z-index: 1;
-        top: -60px;
+	position: absolute;
+	z-index: 1;
+	top: -60px;
 	width: 90px;
-        margin-left: 46%;
-        padding: 2%;
-        border-radius: 100% 100% 0% 0%;
+	margin-left: 43.5%;
+	padding: 15px;
+	border-radius: 100% 100% 0% 0%;
 	text-align: center;
-        background-color: #FFF;
+	background-color: #FFF;
 }
 div#content.version-3 div.project-description-item div.projects-desc-content-picto img[alt="model"]{
-        margin-top: 10px;
-        margin-left: 8px;
+	margin-top: 10px;
+	margin-left: 8px;
 }
 
 div#content.version-3 .projects-desc-content {
     position: relative;
     display: inline-block;
-	width: 960px;
+	width: 95%;
 	margin-bottom: 40px;
 	padding: 25px;
 	vertical-align: top;
@@ -1528,11 +1528,13 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div:first-child img { width: 50px; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder button.init_invest_count { display: block; margin: 7px auto; }
 	div#content.version-3 div.project-rewards-content table tr td { min-width: 40px; padding: 0px 3px; }
-	div#content.version-3 div.project-description div.project-description-item { width: 96%; margin: 25px 2%; }
-	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { display: none; }
+	div#content.version-3 div.project-description div.project-description-item { width: 96%; margin: 80px 2% 0px 2%; }
+	/*div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { top: -60px; }*/
 	div#content.version-3 div.project-description div.project-description-item img.grey-triangle { display: none; }
 	div#content.version-3 div.project-description div.projects-desc-content { width: 100% !important; margin: 0px; padding: 0px; left: 0px; }
 	div#content.version-3 div.project-description div.projects-desc-content h2 { margin: 15px 10px; font-size: 18px; text-align: center; text-transform: none; }
+	div#content.version-3 div.project-description div.projects-desc-content h3 { margin-top: 45px; }
+	div#content.version-3 div.project-description div.projects-desc-content table { width: 90%; }
 	div#content.version-3 div.project-description div.projects-desc-content .projects-more { margin-top: 10px; }
 	div#content.version-3 div.project-description div.projects-desc-content p, div#content.version-3 div.project-description div.projects-desc-content h4 { padding: 0px 10px 10px; }
 	div#content.version-3 div.project-comments li { margin: 0px 0px 10px 5px; }
@@ -1547,10 +1549,23 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
 	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered a img { width: 50px; }
 }
 
-
+@media screen and (min-width: 750px) and (max-width: 959px) {
+	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 42%; }
+}
+@media screen and (min-width: 500px) and (max-width: 750px) {
+	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 40%; }
+}
+@media screen and (min-width: 400px) and (max-width: 500px) {
+	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 37%; }
+}
 /*******************************************************************************
 * RESPONSIVE MOBILE
 *******************************************************************************/
 @media screen and (max-width: 400px) {
-        div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-line { width: 98% !important; }
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-line { width: 98% !important; }
+	div#content.version-3 div.project-description { padding-bottom: 0px; background-color: #FFFFFF; }
+	div#content.version-3 div.project-description div.project-description-item { margin: 25px 2%; }
+	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 34%; top: -45px; border-radius: 0% 0% 100% 100%; }
+	div#content.version-3 div.project-description div.projects-desc-content h3 { margin-top: 65px; }
+	div#content.version-3 div.project-description div.projects-desc-content { margin: 0px 0px 40px 0px; background-color: #F4F4F4 }
 }
