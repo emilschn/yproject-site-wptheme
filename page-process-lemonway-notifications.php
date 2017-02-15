@@ -85,8 +85,10 @@ if ( !empty( $lemonway_posted_category ) ) {
 				$post_campaign = get_post( $investment_campaign_id );
 				$campaign = new ATCF_Campaign( $post_campaign );
 				$campaign_organization = $campaign->get_organisation();
+				ypcf_debug_log( "PROCESS -> $campaign_organization->organisation_wpref = " . $campaign_organization->organisation_wpref );
 				$organization_obj = new YPOrganisation( $campaign_organization->organisation_wpref );
 				$invest_author = $WDGUser_invest_author;
+				ypcf_debug_log( "PROCESS -> $WDGUser_invest_author->wp_user->ID = " . $WDGUser_invest_author->wp_user->ID );
 				if ( YPOrganisation::is_user_organisation($WDGUser_invest_author->wp_user->ID) ) {
 					$invest_author = new YPOrganisation( $WDGUser_invest_author->wp_user->ID );
 				}
