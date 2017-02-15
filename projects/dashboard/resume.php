@@ -16,8 +16,8 @@ function print_resume_page()
 	
 	$WDGUser_current = WDGUser::current();
 	$WDGUser_author = new WDGUser( $campaign->post_author() );
-	$campaign_organisation = $campaign->get_organisation();
-	$wdg_organisation = new YPOrganisation($campaign_organisation->organisation_wpref);
+	$campaign_organization = $campaign->get_organization();
+	$wdg_organization = new WDGOrganization($campaign_organization->wpref);
 
     ?>
     <div class="head"><?php _e("Vue d'ensemble", 'yproject'); ?></div>
@@ -260,7 +260,7 @@ function print_resume_page()
                     <li>
 						<label>
 							<?php
-							$preparing_org_is_complete = $wdg_organisation->has_filled_invest_infos();
+							$preparing_org_is_complete = $wdg_organization->has_filled_invest_infos();
 							$is_waiting_for_comitee &= $preparing_org_is_complete;
 							?>
 							<input type="checkbox" class="checkbox-next-status" disabled <?php checked( $preparing_org_is_complete ); ?>>
@@ -313,7 +313,7 @@ function print_resume_page()
                     <li>
 						<label>
 							<?php
-							$validated_documents_sent = $wdg_organisation->has_sent_all_documents();
+							$validated_documents_sent = $wdg_organization->has_sent_all_documents();
 							?>
 							<input type="checkbox" class="checkbox-next-status" disabled <?php checked($validated_documents_sent); ?>>
                             J'ai transmis les documents d'authentification de mon organisation
@@ -322,7 +322,7 @@ function print_resume_page()
                     <li>
 						<label>
 							<?php
-							$validated_org_authentified = $wdg_organisation->is_registered_lemonway_wallet();
+							$validated_org_authentified = $wdg_organization->is_registered_lemonway_wallet();
 							?>
 							<input type="checkbox" class="checkbox-next-status" disabled <?php checked($validated_org_authentified); ?>>
                             L'organisation est authentifiée par le prestataire de paiement

@@ -36,15 +36,6 @@ if (isset($campaign)):
 		
 		<div class="invest_step1_currentproject"><?php echo html_entity_decode( $campaign->investment_terms() ); ?></div>
 			
-		<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_mangopay): ?>
-			<?php if (!ypcf_mangopay_is_user_strong_authenticated($test_user->ID) && ypcf_mangopay_is_user_strong_authentication_sent($test_user->ID)): ?>
-				<div class="invest_step1_currentproject" style="text-align: center; font-weight: bold;">
-					<?php _e("Votre pi&egrave;ce d&apos;identit&eacute; est en cours de validation.", "yproject"); ?><br />
-					<?php _e("Un d&eacute;lai maximum de 24h est n&eacute;cessaire &agrave; cette validation.", "yproject"); ?><br />
-					<?php _e("Merci de votre compr&eacute;hension.", "yproject"); ?></div>
-			<?php endif; ?>
-		<?php endif; ?>
-			
 		<?php locate_template( 'invest/input-lightbox-user-infos.php', true ); ?>
 		<?php locate_template( 'invest/input-lightbox-orga-infos.php', true ); ?>
 		
@@ -163,19 +154,19 @@ if (isset($campaign)):
 					
 						default: 
 							$current_user = wp_get_current_user();
-							$api_user_id = BoppLibHelpers::get_api_user_id($current_user->ID);
-							$organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
+							$wdg_current_user = new WDGUser( $current_user->ID );
+							$organizations_list = $wdg_current_user->get_organizations_list();
 							?>
 							<input type="submit" value="<?php _e("Investir", 'yproject'); ?>" class="button red" />
 							<select id="invest_type" name="invest_type">
 								<option value="user"><?php _e("En mon nom (personne physique)", 'yproject'); ?></option>
-								<?php if (count($organisations_list) > 0): ?>
-									<?php foreach ($organisations_list as $organisation_item): ?>
-										<option value="<?php echo $organisation_item->organisation_wpref; ?>"><?php _e("Pour l'organisation", 'yproject'); ?> <?php echo $organisation_item->organisation_name; ?></option>
+								<?php if (count($organizations_list) > 0): ?>
+									<?php foreach ($organizations_list as $organization_item): ?>
+										<option value="<?php echo $organization_item->wpref; ?>"><?php _e("Pour l'organisation", 'yproject'); ?> <?php echo $organization_item->name; ?></option>
 									<?php endforeach; ?>
-									<option value="new_organisation"><?php _e("Pour une nouvelle organisation (personne morale)...", 'yproject'); ?></option>
+									<option value="new_organization"><?php _e("Pour une nouvelle organisation (personne morale)...", 'yproject'); ?></option>
 								<?php else: ?>
-									<option value="new_organisation"><?php _e("Pour une organisation (personne morale)...", 'yproject'); ?></option>
+									<option value="new_organization"><?php _e("Pour une organisation (personne morale)...", 'yproject'); ?></option>
 								<?php endif; ?>
 							</select>
 						<?php

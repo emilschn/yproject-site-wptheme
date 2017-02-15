@@ -45,8 +45,9 @@ $WDGUser_displayed = WDGUser::current();
 			?>
 					
 			<?php
-			$api_user_id = BoppLibHelpers::get_api_user_id( $WDGUser_displayed->wp_user->ID );
-			$project_list = BoppUsers::get_projects_by_role($api_user_id, BoppLibHelpers::$project_team_member_role['slug']);
+			$wdg_current_user = new WDGUser( $WDGUser_displayed->wp_user->ID );
+			$api_user_id = $wdg_current_user->get_api_id();
+			$project_list = WDGWPREST_Entity_User::get_projects_by_role( $api_user_id, WDGWPREST_Entity_Project::$link_user_type_team );
 			if (!empty($project_list)) {
 				$has_projects = true;
 				foreach ($project_list as $project) {	    

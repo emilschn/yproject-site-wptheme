@@ -31,7 +31,8 @@
 									locate_template( 'invest/breadcrumb.php', true );
 								}
 								
-								the_content(); ?>
+								the_content();
+								?>
 							</div>
 						</div>
 					</div>

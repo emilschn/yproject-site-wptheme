@@ -84,16 +84,17 @@ if ( !empty( $lemonway_posted_category ) ) {
 				// - Faire le transfert vers le porte-monnaie du porteur de projet
 				$post_campaign = get_post( $investment_campaign_id );
 				$campaign = new ATCF_Campaign( $post_campaign );
-				$campaign_organization = $campaign->get_organisation();
-				ypcf_debug_log( "PROCESS -> $campaign_organization->organisation_wpref = " . $campaign_organization->organisation_wpref );
-				$organization_obj = new YPOrganisation( $campaign_organization->organisation_wpref );
+
+				$campaign_organization = $campaign->get_organization();
+				ypcf_debug_log( "PROCESS -> $campaign_organization->wpref = " . $campaign_organization->wpref );
+				$organization_obj = new WDGOrganization( $campaign_organization->wpref );
 				$invest_author = $WDGUser_invest_author;
 				ypcf_debug_log( "PROCESS -> $WDGUser_invest_author->wp_user->ID = " . $WDGUser_invest_author->wp_user->ID );
-				if ( YPOrganisation::is_user_organisation($WDGUser_invest_author->wp_user->ID) ) {
-					$invest_author = new YPOrganisation( $WDGUser_invest_author->wp_user->ID );
+				if ( WDGOrganization::is_user_organization($WDGUser_invest_author->wp_user->ID) ) {
+					$invest_author = new WDGOrganization( $WDGUser_invest_author->wp_user->ID );
 				}
 				ypcf_debug_log( "PROCESS -> $invest_author = " . $invest_author->wp_user->ID );
-				LemonwayLib::ask_transfer_funds( $invest_author->get_lemonway_id(), $organisation_obj->get_lemonway_id(), $lemonway_posted_amount );
+				LemonwayLib::ask_transfer_funds( $invest_author->get_lemonway_id(), $organization_obj->get_lemonway_id(), $lemonway_posted_amount );
 				
 				// - Créer le contrat pdf
 				// - Envoyer validation d'investissement par mail
