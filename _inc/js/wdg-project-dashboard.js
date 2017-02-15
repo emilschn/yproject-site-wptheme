@@ -204,7 +204,7 @@ var WDGProjectDashboard = (function ($) {
 
                 //Infos organisation
                 if ($("#tab-organization").length > 0) {
-                    $("#new_project_organisation").change(function(e){
+                    $("#new_project_organization").change(function(e){
                         e.preventDefault();
                         $("#edit-orga-button").hide();
 						$("#wdg-lightbox-editOrga ul.errors li").remove();
@@ -269,6 +269,7 @@ var WDGProjectDashboard = (function ($) {
                         });
 					});
 
+<<<<<<< HEAD
                     //fermeture de la lightbox de création d'organisation après enregistrement
                     $("#wdg-lightbox-newOrga form.wdg-forms").submit(function(e){
                         e.preventDefault();
@@ -308,7 +309,7 @@ var WDGProjectDashboard = (function ($) {
                             'type': "POST",
                             'url': ajax_object.ajax_url,
                             'data': {
-                                'action': 'save_new_organisation',
+                                'action': 'save_new_organization',
                                 'campaign_id': campaign_id,
                                 'org_name': org_name,
                                 'org_email': org_email,
@@ -356,7 +357,7 @@ var WDGProjectDashboard = (function ($) {
 									WDGProjectDashboard.updateOrgaSelectInput(feedback);
 
 									//Mise à jour du bouton d'édition
-									var newname = $("#new_project_organisation").find('option:selected').text();
+									var newname = $("#new_project_organization").find('option:selected').text();
 									var edit_btn = $('#tab-organization #orgainfo_form').find($("#edit-orga-button"));
 									edit_btn.attr("href","#");
 									edit_btn.text("Editer "+newname);
@@ -372,6 +373,19 @@ var WDGProjectDashboard = (function ($) {
                             save_button.find(".button-waiting").hide();
                             save_button.find(".button-text").show();
                             thisForm. find(":input").prop('disabled', false);
+
+                        });
+
+                    });
+
+
+                    $("#update_project_organization").change(function(e){
+                        var newval = $("#update_project_organization").val();
+
+                        if(newval!=''){
+                            $("#edit-orga-button").show();
+                            var newname = $("#update_project_organization").find('option:selected').text();
+                            $("#edit-orga-button").attr("href",$("#edit-orga-button").data("url-edit")+newval);
 
                         });
 
@@ -473,12 +487,12 @@ var WDGProjectDashboard = (function ($) {
                 //Formulaire
                 //Infos organisation
                 if ($("#campaign_form").length > 0) {
-                    $("#update_project_organisation").change(function(e){
-                        var newval = $("#update_project_organisation").val();
+                    $("#update_project_organization").change(function(e){
+                        var newval = $("#update_project_organization").val();
 
                         if(newval!=''){
                             $("#edit-orga-button").show();
-                            var newname = $("#update_project_organisation").find('option:selected').text();
+                            var newname = $("#update_project_organization").find('option:selected').text();
                             $("#edit-orga-button").attr("href",$("#edit-orga-button").data("url-edit")+newval);
 
                             $("#edit-orga-button").text("Editer "+newname);
@@ -626,7 +640,7 @@ var WDGProjectDashboard = (function ($) {
                        }
 
                         // Enregistrer l'organisation liée au projet dans tab-organization
-                        if ($("#tab-organization").is(":visible") && ($("#ndashboard #orgainfo_form.db-form").data("action")) == "save_project_organisation"){
+                        if ($("#tab-organization").is(":visible") && ($("#ndashboard #orgainfo_form.db-form").data("action")) == "save_project_organization"){
                             //Afficher le bouton d'édition de l'organisation après enregistrement de la liaison
                             WDGProjectDashboard.updateEditOrgaBtn(thisForm);
                             //Mise à jour du formulaire d'édition après enregistrement de la liaison
@@ -1208,11 +1222,11 @@ var WDGProjectDashboard = (function ($) {
          * @param {type} form : formulaire de saisie
          */
         updateEditOrgaBtn: function(form){
-            var newval = $("#new_project_organisation").val();
+            var newval = $("#new_project_organization").val();
             if(newval!== ''){
                 var edit_btn = form.find($("#edit-orga-button")).show();
 
-                var newname = $("#new_project_organisation").find('option:selected').text();
+                var newname = $("#new_project_organization").find('option:selected').text();
                 edit_btn.attr("href","#");
                 edit_btn.text("Editer "+newname);
             } else {
@@ -1226,22 +1240,22 @@ var WDGProjectDashboard = (function ($) {
          * @param {objet} feedback : retour ajax
          */
         updateOrgaForm: function(feedback){
-            $("#tab-organization #wdg-lightbox-editOrga #org_name").html(feedback.organisation.name);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_email]").val(feedback.organisation.email);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_description]").val(feedback.organisation.description);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_legalform]").val(feedback.organisation.legalForm);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_idnumber]").val(feedback.organisation.idNumber);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_rcs]").val(feedback.organisation.rcs);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_capital]").val(feedback.organisation.capital);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_ape]").val(feedback.organisation.ape);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_address]").val(feedback.organisation.address);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_postal_code]").val(feedback.organisation.postal_code);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_city]").val(feedback.organisation.city);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_nationality]").val(feedback.organisation.nationality);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownername]").val(feedback.organisation.bankownername);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneraddress]").val(feedback.organisation.bankowneraddress);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneriban]").val(feedback.organisation.bankowneriban);
-            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]").val(feedback.organisation.bankownerbic);
+            $("#tab-organization #wdg-lightbox-editOrga #org_name").html(feedback.organization.name);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_email]").val(feedback.organization.email);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_description]").val(feedback.organization.description);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_legalform]").val(feedback.organization.legalForm);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_idnumber]").val(feedback.organization.idNumber);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_rcs]").val(feedback.organization.rcs);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_capital]").val(feedback.organization.capital);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_ape]").val(feedback.organization.ape);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_address]").val(feedback.organization.address);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_postal_code]").val(feedback.organization.postal_code);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_city]").val(feedback.organization.city);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_nationality]").val(feedback.organization.nationality);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownername]").val(feedback.organization.bankownername);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneraddress]").val(feedback.organization.bankowneraddress);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankowneriban]").val(feedback.organization.bankowneriban);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_bankownerbic]").val(feedback.organization.bankownerbic);
         },
 		
 		/**
@@ -1250,70 +1264,70 @@ var WDGProjectDashboard = (function ($) {
 		 * @param {object} feedback : infos renvoyées par l'action php
 		 */
 		updateOrgaFormDoc: function(feedback){
-			if(feedback.organisation.doc_bank.path != null){
+			if(feedback.organization.doc_bank.path != null){
 				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_bank").length === 0){
-					var link_bank = $('<a id="org_doc_bank" target="_blank" href="'+feedback.organisation.doc_bank.path+'">'+feedback.organisation.doc_bank.date_uploaded+'</a><br />');
+					var link_bank = $('<a id="org_doc_bank" target="_blank" href="'+feedback.organization.doc_bank.path+'">'+feedback.organization.doc_bank.date_uploaded+'</a><br />');
 					link_bank.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_bank]"));
 				}
 				else{
-					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_bank").attr("href", feedback.organisation.doc_bank.path);
-					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_bank").html(feedback.organisation.doc_bank.date_uploaded);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_bank").attr("href", feedback.organization.doc_bank.path);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_bank").html(feedback.organization.doc_bank.date_uploaded);
 				}
 			}
 			else {
 				$("#tab-organization #wdg-lightbox-editOrga a#org_doc_bank").remove();
 			}
 
-			if(feedback.organisation.doc_kbis.path != null){
+			if(feedback.organization.doc_kbis.path != null){
 				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_kbis").length === 0){
-					var link_kbis = $('<a id="org_doc_kbis" target="_blank" href="'+feedback.organisation.doc_kbis.path+'">'+feedback.organisation.doc_kbis.date_uploaded+'</a><br />');
+					var link_kbis = $('<a id="org_doc_kbis" target="_blank" href="'+feedback.organization.doc_kbis.path+'">'+feedback.organization.doc_kbis.date_uploaded+'</a><br />');
 					link_kbis.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_kbis]"));
 				}
 				else{
-					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_kbis").attr("href", feedback.organisation.doc_kbis.path);
-					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_kbis").html(feedback.organisation.doc_kbis.date_uploaded);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_kbis").attr("href", feedback.organization.doc_kbis.path);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_kbis").html(feedback.organization.doc_kbis.date_uploaded);
 				}
 			}
 			else {
 				$("#tab-organization #wdg-lightbox-editOrga a#org_doc_kbis").remove();
 			}
 
-			if(feedback.organisation.doc_status.path != null){
+			if(feedback.organization.doc_status.path != null){
 				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_status").length === 0){
-					var link_status = $('<a id="org_doc_status" target="_blank" href="'+feedback.organisation.doc_status.path+'">'+feedback.organisation.doc_status.date_uploaded+'</a><br />');
+					var link_status = $('<a id="org_doc_status" target="_blank" href="'+feedback.organization.doc_status.path+'">'+feedback.organization.doc_status.date_uploaded+'</a><br />');
 					link_status.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_status]"));
 				}
 				else{
-					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_status").attr("href", feedback.organisation.doc_status.path);
-					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_status").html(feedback.organisation.doc_status.date_uploaded);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_status").attr("href", feedback.organization.doc_status.path);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_status").html(feedback.organization.doc_status.date_uploaded);
 				}
 			}
 			else {
 				$("#tab-organization #wdg-lightbox-editOrga a#org_doc_status").remove();
 			}
 
-			if(feedback.organisation.doc_id.path != null){
+			if(feedback.organization.doc_id.path != null){
 				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_id").length === 0){
-					var link_id = $('<a id="org_doc_id" target="_blank" href="'+feedback.organisation.doc_id.path+'">'+feedback.organisation.doc_id.date_uploaded+'</a><br />');
+					var link_id = $('<a id="org_doc_id" target="_blank" href="'+feedback.organization.doc_id.path+'">'+feedback.organization.doc_id.date_uploaded+'</a><br />');
 					link_id.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_id]"));
 				}
 				else{
-					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_id").attr("href", feedback.organisation.doc_id.path);
-					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_id").html(feedback.organisation.doc_id.date_uploaded);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_id").attr("href", feedback.organization.doc_id.path);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_id").html(feedback.organization.doc_id.date_uploaded);
 				}
 			}
 			else {
 				$("#tab-organization #wdg-lightbox-editOrga a#org_doc_id").remove();
 			}
 
-			if(feedback.organisation.doc_home.path != null){
+			if(feedback.organization.doc_home.path != null){
 				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_home").length === 0){
-					var link_home = $('<a id="org_doc_home" target="_blank" href="'+feedback.organisation.doc_home.path+'">'+feedback.organisation.doc_home.date_uploaded+'</a><br />');
+					var link_home = $('<a id="org_doc_home" target="_blank" href="'+feedback.organization.doc_home.path+'">'+feedback.organization.doc_home.date_uploaded+'</a><br />');
 					link_home.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_home]"));
 				}
 				else{
-					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_home").attr("href", feedback.organisation.doc_home.path);
-					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_home").html(feedback.organisation.doc_home.date_uploaded);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_home").attr("href", feedback.organization.doc_home.path);
+					$("#tab-organization #wdg-lightbox-editOrga a#org_doc_home").html(feedback.organization.doc_home.date_uploaded);
 				}
 			}
 			else {
@@ -1345,13 +1359,13 @@ var WDGProjectDashboard = (function ($) {
          * @param {objet} feedback : retour ajax
          */
         updateOrgaSelectInput: function(feedback){
-            var orgaName = feedback.organisation.name;
-            var orgaWpref = feedback.organisation.wpref;
+            var orgaName = feedback.organization.name;
+            var orgaWpref = feedback.organization.wpref;
 
             // select à mettre à jour
-            $("#tab-organization #orgainfo_form #new_project_organisation").append(new Option(orgaName, orgaWpref));
-            $("#tab-organization #orgainfo_form #new_project_organisation option:selected").removeAttr('selected');
-            $("#tab-organization #orgainfo_form #new_project_organisation option[value="+orgaWpref+"]").attr("selected", "selected");
+            $("#tab-organization #orgainfo_form #new_project_organization").append(new Option(orgaName, orgaWpref));
+            $("#tab-organization #orgainfo_form #new_project_organization option:selected").removeAttr('selected');
+            $("#tab-organization #orgainfo_form #new_project_organization option[value="+orgaWpref+"]").attr("selected", "selected");
         },
 
     };

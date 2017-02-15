@@ -299,47 +299,41 @@ function print_informations_page()
         </div>
 
         <div class="tab-content" id="tab-organization">
-            <form id="orgainfo_form" class="db-form" data-action="save_project_organisation">
+            <form id="orgainfo_form" class="db-form" data-action="save_project_organization">
                 <ul class="errors">
 
                 </ul>
 
                 <?php
                 // Gestion des organisations
-                $str_organisations = '';
-                global $current_user, $current_organisation;
-                
-                $api_project_id = BoppLibHelpers::get_api_project_id($post_campaign->ID);
-                $current_organisations = BoppLib::get_project_organisations_by_role($api_project_id, BoppLibHelpers::$project_organisation_manager_role['slug']);
-                if (isset($current_organisations) && count($current_organisations) > 0) {
-                    $current_organisation = $current_organisations[0];
-                }              
-                $api_user_id = BoppLibHelpers::get_api_user_id($post_campaign->post_author);
-                $organisations_list = BoppUsers::get_organisations_by_role($api_user_id, BoppLibHelpers::$organisation_creator_role['slug']);
-                if ($organisations_list) {
-                    foreach ($organisations_list as $organisation_item) {
-                        $selected_str = ($organisation_item->id == $current_organisation->id) ? 'selected="selected"' : '';
-                        $str_organisations .= '<option ' . $selected_str . ' value="'.$organisation_item->organisation_wpref.'">' .$organisation_item->organisation_name. '</option>';
+                $str_organizations = '';
+                global $current_user;
+                $current_organization = $campaign->get_organization();
+                $organizations_list = $WDGAuthor->get_organizations_list();
+                if ($organizations_list) {
+                    foreach ($organizations_list as $organization_item) {
+                        $selected_str = ($organization_item->id == $current_organization->id) ? 'selected="selected"' : '';
+                        $str_organizations .= '<option ' . $selected_str . ' value="'.$organization_item->wpref.'">' .$organization_item->name. '</option>';
                     }
                 }			
                 ?>
-                <label for="project-organisation">Organisation :</label>
-                <?php if ($str_organisations != ''): ?>
-                    <span class="field-value" data-type="select" data-id="new_project_organisation">
-                        <select name="project-organisation" id="new_project_organisation">
+                <label for="project-organization">Organisation :</label>
+                <?php if ($str_organizations != ''): ?>
+                    <span class="field-value" data-type="select" data-id="new_project_organization">
+                        <select name="project-organization" id="new_project_organization">
                             <option value=""></option>
-                            <?php echo $str_organisations; ?>
+                            <?php echo $str_organizations; ?>
                         </select>
                     </span>
-                    <?php if ($current_organisation!=null): ?>                   
+                    <?php if ($current_organization!=null): ?>                   
                         <!--bouton d'édition de l'organisation-->
                         <a href="#informations" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga">
-                            <?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organisation->organisation_name ?></a>
+                            <?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organization->name ?></a>
                     <?php endif; ?>
 
                 <?php else: ?>
                     <?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
-                    <input type="hidden" name="project-organisation" value="" />
+                    <input type="hidden" name="project-organization" value="" />
                 <?php endif; ?>
 
                 <!--bouton de création de l'organisation visible dans tous les cas -->
@@ -350,16 +344,16 @@ function print_informations_page()
 
             </form> 
             <?php
-                if ($current_organisation!=null){
+                if ($current_organization!=null){
                     ob_start();
-                    locate_template( array("projects/dashboard/informations/lightbox-organisation-edit.php"), true );                  
+                    locate_template( array("projects/dashboard/informations/lightbox-organization-edit.php"), true );                  
                     $lightbox_content = ob_get_clean();
                     echo do_shortcode('[yproject_widelightbox id="editOrga" scrolltop="1"]'.$lightbox_content.'[/yproject_widelightbox]');
                 }
             ?>
             <?php 
                 ob_start();
-		locate_template( array("projects/dashboard/informations/lightbox-organisation-new.php"), true );
+                locate_template( array("projects/dashboard/informations/lightbox-organization-new.php"), true );
                 $lightbox_content = ob_get_clean();
                 echo do_shortcode('[yproject_lightbox id="newOrga" scrolltop="1"]'.$lightbox_content.'[/yproject_lightbox]');
             ?>

@@ -7,16 +7,16 @@
 global $campaign_id;
 
 
-global $current_organisation;
-if (!isset($current_organisation)) {
-    $organisation_obj = YPOrganisation::current();
+global $current_organization;
+if (!isset($current_organization)) {
+    $organization_obj = WDGOrganization::current();
 } else {
-    $organisation_obj = new YPOrganisation($current_organisation->organisation_wpref);
+    $organization_obj = new WDGOrganization($current_organization->wpref);
 }
 
 $WDGUser_current = WDGUser::current();
-$organisation_obj->send_kyc();
-$organisation_obj->submit_transfer_wallet_lemonway();
+$organization_obj->send_kyc();
+$organization_obj->submit_transfer_wallet_lemonway();
 
 ?>
 	    
@@ -27,7 +27,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
 
         <h1><?php _e('&Eacute;diter l\'organisation','yproject'); echo "&nbsp;"; ?></h1>
 
-        <form id="orgaedit_form" action="" method="POST" enctype="multipart/form-data" class="wdg-forms" data-action="save_edit_organisation">
+        <form id="orgaedit_form" action="" method="POST" enctype="multipart/form-data" class="wdg-forms" data-action="save_edit_organization">
 
                 <?php
                 /**
@@ -35,46 +35,46 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                  */
                 ?>
                 <label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?></label>
-                <em id="org_name"><?php echo $organisation_obj->get_name(); ?></em><br />
+                <em id="org_name"><?php echo $organization_obj->get_name(); ?></em><br />
 
 
                 <label for="org_email"><?php _e('E-mail de contact', 'yproject'); ?></label>
-                <input type="text" name="org_email" value="<?php echo $organisation_obj->get_email(); ?>" /><br />
+                <input type="text" name="org_email" value="<?php echo $organization_obj->get_email(); ?>" /><br />
 
                 <label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?></label>
-                <input type="text" name="org_description" value="<?php echo $organisation_obj->get_description(); ?>" /><br />
+                <input type="text" name="org_description" value="<?php echo $organization_obj->get_description(); ?>" /><br />
 
                 <label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?></label>
-                <input type="text" name="org_legalform" value="<?php echo $organisation_obj->get_legalform(); ?>" /><br />
+                <input type="text" name="org_legalform" value="<?php echo $organization_obj->get_legalform(); ?>" /><br />
 
                 <label for="org_idnumber"><?php _e('Num&eacute;ro SIREN', 'yproject'); ?></label>
-                <input type="text" name="org_idnumber" value="<?php echo $organisation_obj->get_idnumber(); ?>" /><br />
+                <input type="text" name="org_idnumber" value="<?php echo $organization_obj->get_idnumber(); ?>" /><br />
 
                 <label for="org_rcs"><?php _e('RCS', 'yproject'); ?></label>
-                <input type="text" name="org_rcs" value="<?php echo $organisation_obj->get_rcs(); ?>" /><br />
+                <input type="text" name="org_rcs" value="<?php echo $organization_obj->get_rcs(); ?>" /><br />
 
                 <label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?></label>
-                <input type="text" name="org_capital" value="<?php echo $organisation_obj->get_capital(); ?>" /><br />
+                <input type="text" name="org_capital" value="<?php echo $organization_obj->get_capital(); ?>" /><br />
 
                 <label for="org_ape"><?php _e('Code APE', 'yproject'); ?></label>
-                <input type="text" name="org_ape" value="<?php echo $organisation_obj->get_ape(); ?>" /><br />
+                <input type="text" name="org_ape" value="<?php echo $organization_obj->get_ape(); ?>" /><br />
 
                 <h2 class="underlined"><?php _e('Si&egrave;ge social', 'yproject'); ?></h2>
                 <label for="org_address"><?php _e('Adresse', 'yproject'); ?></label>
-                <input type="text" name="org_address" value="<?php echo $organisation_obj->get_address(); ?>" /><br />
+                <input type="text" name="org_address" value="<?php echo $organization_obj->get_address(); ?>" /><br />
 
                 <label for="org_postal_code"><?php _e('Code postal', 'yproject'); ?></label>
-                <input type="text" name="org_postal_code" value="<?php echo $organisation_obj->get_postal_code(); ?>" /><br />
+                <input type="text" name="org_postal_code" value="<?php echo $organization_obj->get_postal_code(); ?>" /><br />
 
                 <label for="org_city"><?php _e('Ville', 'yproject'); ?></label>
-                <input type="text" name="org_city" value="<?php echo $organisation_obj->get_city(); ?>" /><br />
+                <input type="text" name="org_city" value="<?php echo $organization_obj->get_city(); ?>" /><br />
 
                 <label for="org_nationality"><?php _e('Pays', 'yproject'); ?></label>
                 <select name="org_nationality" id="org_nationality">
                         <?php 
                         locate_template( array("country_list.php"), true );
                         global $country_list;
-                        $selected_country = $organisation_obj->get_nationality();
+                        $selected_country = $organization_obj->get_nationality();
                         foreach ($country_list as $country_code => $country_name): ?>
                                 <option value="<?php echo $country_code; ?>" <?php if ($country_code == $selected_country) { echo 'selected="selected"'; } ?>><?php echo $country_name; ?></option>
                         <?php endforeach; ?>
@@ -88,16 +88,16 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 ?>
                 <h3><?php _e('Informations bancaires - si vous souhaitez faire un virement d&apos;une somme obtenue', 'yproject'); ?></h3>
                 <label for="org_bankownername"><?php _e('Nom du propri&eacute;taire du compte', 'yproject'); ?></label>
-                <input type="text" name="org_bankownername" value="<?php echo $organisation_obj->get_bank_owner(); ?>" /> <br />
+                <input type="text" name="org_bankownername" value="<?php echo $organization_obj->get_bank_owner(); ?>" /> <br />
 
                 <label for="org_bankowneraddress"><?php _e('Adresse du compte', 'yproject'); ?></label>
-                <input type="text" name="org_bankowneraddress" value="<?php echo $organisation_obj->get_bank_address(); ?>" /> <br />
+                <input type="text" name="org_bankowneraddress" value="<?php echo $organization_obj->get_bank_address(); ?>" /> <br />
 
                 <label for="org_bankowneriban"><?php _e('IBAN', 'yproject'); ?></label>
-                <input type="text" name="org_bankowneriban" value="<?php echo $organisation_obj->get_bank_iban(); ?>" /> <br />
+                <input type="text" name="org_bankowneriban" value="<?php echo $organization_obj->get_bank_iban(); ?>" /> <br />
 
                 <label for="org_bankownerbic"><?php _e('BIC', 'yproject'); ?></label>
-                <input type="text" name="org_bankownerbic" value="<?php echo $organisation_obj->get_bank_bic(); ?>" /> <br />
+                <input type="text" name="org_bankownerbic" value="<?php echo $organization_obj->get_bank_bic(); ?>" /> <br />
 
 
                 <?php
@@ -115,7 +115,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
 
                 <strong><?php _e("Scan ou copie d'un RIB", 'yproject'); ?></strong><br />
                 <?php
-                $current_filelist_bank = WDGKYCFile::get_list_by_owner_id($organisation_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_bank);
+                $current_filelist_bank = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_bank);
                 $current_file_bank = $current_filelist_bank[0];
                 if ( isset($current_file_bank) ):
                 ?>
@@ -126,7 +126,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 <strong><?php _e("K-BIS ou &eacute;quivalent &agrave; un registre du commerce", 'yproject'); ?></strong><br />
                 <?php _e("Datant de moins de 3 mois", 'yproject'); ?><br />
                 <?php
-                $current_filelist_kbis = WDGKYCFile::get_list_by_owner_id($organisation_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_kbis);
+                $current_filelist_kbis = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_kbis);
                 $current_file_kbis = $current_filelist_kbis[0];
                 if ( isset($current_file_kbis) ):
                 ?>
@@ -136,7 +136,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
 
                 <strong><?php _e("Statuts de la soci&eacute;t&eacute;, certifi&eacute;s conformes à l'original par le g&eacute;rant", 'yproject'); ?></strong><br />
                 <?php
-                $current_filelist_status = WDGKYCFile::get_list_by_owner_id($organisation_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_status);
+                $current_filelist_status = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_status);
                 $current_file_status = $current_filelist_status[0];
                 if ( isset($current_file_status) ):
                 ?>
@@ -148,7 +148,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 <?php _e("Pour une personne fran&ccedil;aise : carte d'identit&eacute; recto-verso ou passeport fran&ccedil;ais.", 'yproject'); ?><br />
                 <?php _e("Sinon : le titre de s&eacute;jour et le passeport d'origine.", 'yproject'); ?><br />
                 <?php
-                $current_filelist_id = WDGKYCFile::get_list_by_owner_id($organisation_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_id);
+                $current_filelist_id = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_id);
                 $current_file_id = $current_filelist_id[0];
                 if ( isset($current_file_id) ):
                 ?>
@@ -159,7 +159,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 <strong><?php _e("Justificatif de domicile du g&eacute;rant ou du pr&eacute;sident", 'yproject'); ?></strong><br />
                 <?php _e("Datant de moins de 3 mois, provenant d'un fournisseur d'&eacute;nergie (&eacute;lectricit&eacute;, gaz, eau) ou d'un bailleur, ou un relev&eacute; d'imp&ocirc;t datant de moins de 3 mois", 'yproject'); ?><br />
                 <?php
-                $current_filelist_home = WDGKYCFile::get_list_by_owner_id($organisation_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_home);
+                $current_filelist_home = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_home);
                 $current_file_home = $current_filelist_home[0];
                 if ( isset($current_file_home) ):
                 ?>
@@ -168,7 +168,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
                 <input type="file" name="org_doc_home" /> <br /><br />
 
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
-				<input type="hidden" name="action" value="save_edit_organisation" />
+				<input type="hidden" name="action" value="save_edit_organization" />
 
                 <?php DashboardUtility::create_save_button("orgaedit_form"); ?>
         </form>
@@ -177,21 +177,21 @@ $organisation_obj->submit_transfer_wallet_lemonway();
         <?php if ( $WDGUser_current->is_admin() ): ?>
                 <h3><?php _e('Lemonway', 'yproject'); ?></h3>
 
-                <?php $organisation_lemonway_authentication_status = $organisation_obj->get_lemonway_status(); ?>
-                <?php if ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_blocked): ?>
+                <?php $organization_lemonway_authentication_status = $organization_obj->get_lemonway_status(); ?>
+                <?php if ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_blocked): ?>
                         <?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIREN. Ainsi que les 5 documents ci-dessus.", 'yproject'); ?><br />
-                <?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_ready): ?>
+                <?php elseif ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_ready): ?>
                         <form action="" method="POST" enctype="multipart/form-data">
                                 <input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
                         </form>
-                <?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_waiting): ?>
+                <?php elseif ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_waiting): ?>
                         <?php _e("L'organisation est en cours d'authentification aupr&egrave;s de notre partenaire.", 'yproject'); ?>
                         <form action="" method="POST" enctype="multipart/form-data">
                                 <input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
                         </form>
-                <?php elseif ($organisation_obj->is_registered_lemonway_wallet()): ?>
+                <?php elseif ($organization_obj->is_registered_lemonway_wallet()): ?>
                         <?php _e("L'organisation est bien authentifi&eacute;e aupr&egrave;s de notre partenaire.", 'yproject'); ?>
-                <?php elseif ($organisation_lemonway_authentication_status == YPOrganisation::$lemonway_status_rejected): ?>
+                <?php elseif ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_rejected): ?>
                         <?php _e("L'organisation a &eacute;t&eacute; refus&eacute;e par notre partenaire.", 'yproject'); ?>
                 <?php endif; ?>
 
@@ -206,7 +206,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
         ?>
         <h2 class="underlined"><?php _e( 'Porte-monnaie', 'yproject' ); ?></h2>
         <?php // Porte-monnaie LW ?>
-        <?php $lemonway_balance = $organisation_obj->get_lemonway_balance(); ?>
+        <?php $lemonway_balance = $organization_obj->get_lemonway_balance(); ?>
         Vous disposez de <?php echo $lemonway_balance; ?>&euro; dans votre porte-monnaie.<br /><br />
 
         <?php if ( $WDGUser_current->is_admin() ): ?>
@@ -236,7 +236,7 @@ $organisation_obj->submit_transfer_wallet_lemonway();
         <h2 class="underlined"><?php _e( 'Transferts d&apos;argent', 'yproject' ); ?></h2>
         <?php
         $args = array(
-            'author'	    => $organisation_obj->get_wpref(),
+            'author'	    => $organization_obj->get_wpref(),
             'post_type'	    => 'withdrawal_order',
             'post_status'   => 'any',
             'orderby'	    => 'post_date',
