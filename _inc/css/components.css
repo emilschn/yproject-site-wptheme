@@ -524,7 +524,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 *******************************************************************************/
 #wdg-lightbox-register #connexion_facebook_container a.social_connect_login_facebook, #wdg-lightbox-connexion #connexion_facebook_container a.social_connect_login_facebook {
 	padding: 4px 5px 5px;
-    background-color: #526794;
-    border: 1px solid #526794;
+	font-size: 12pt;
+	text-transform: uppercase;
 	color: #FFFFFF;
 }

@@ -217,7 +217,9 @@ form.wdg-forms .small-margin {
     padding: 3px 8px;
     text-transform: uppercase;
 }
-
+.standard-form #signup_submit, .standard-form #sidebar-wp-submit-lightbox {
+	padding: 0px;
+}
 .standard-label {
     display: inline-block;
     width: 140px;
@@ -2066,10 +2068,9 @@ span#extra-comment-image{
 * REGISTER PAGE / REGISTER LIGHTBOX
 *******************************************************************************/
 #wdg-lightbox-register .wdg-button-lightbox-open {
-    width: 174px;
-    padding: 5px 0px;
-    display: inline-block;
-    font-size: 12px;
+	border: none;
+	background: none;
+	font-size: 12pt;
 }
 
 .form-register .on-focus input { margin-left: 110px; }
@@ -2078,7 +2079,7 @@ span#extra-comment-image{
 .form-register {
     margin: 5px;
 }
-.form-register h2 {
+.form-register h2, #sidebar-login-form h2 {
     text-align: center;
     margin: 0px;
 	padding-bottom: 10px;
@@ -2097,6 +2098,7 @@ span#extra-comment-image{
 .form-register .register-section div {
     margin: 7px auto;
     text-align: center;
+	cursor: pointer;
 }
 .form-register div#connexion_facebook_container {
     display: block;
@@ -2105,17 +2107,16 @@ span#extra-comment-image{
 }
 .form-register div#connexion_facebook_container a {
     padding: 2px 0px 5px;
-    background-color: #526794;
-    border: 1px solid #526794;
 }
 
-#signup_submit {
-    background-color: #333333;
+#signup_submit, #sidebar-wp-submit-lightbox {
+    background-color: #EA4F51;
     color: #FFF;
     border: 0px;
     width: 174px;
-    padding: 5px 0px 5px 0px;
     text-transform: uppercase;
+	font-size: 12pt;
+	cursor: pointer;
 }
 
 /*******************************************************************************

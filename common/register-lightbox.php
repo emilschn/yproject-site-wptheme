@@ -46,20 +46,20 @@
 			<input type="hidden" name="redirect-home" value="1" />
 			<?php endif; ?>
 				    
-			<div class="submit">
+			<div class="submit box_connection_buttons red">
 				<input type="submit" name="signup_submit" id="signup_submit" value="Cr&eacute;er mon compte" />
 			</div>
 		</div>
 				
 		<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
 
-		<div id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" alt="logo facebook connexion" class="vert-align" width="25" height="25"/><span style=" font-size:12px;" >&nbsp;S&apos;inscrire avec Facebook</span></a></div>
+		<div class="box_connection_buttons blue" id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><span>&nbsp;S&apos;inscrire avec Facebook</span></a></div>
 		<div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
 			    
 			    
 		<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
 
-		<div class="align-center"><a href="#connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion" style="background-color: #333333 !important;">J&apos;ai d&eacute;j&agrave; un compte</a></div>
+		<div class="align-center box_connection_buttons red" id="signin-button"><a href="#connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">J&apos;ai d&eacute;j&agrave; un compte</a></div>
 
 		<br />
 		
