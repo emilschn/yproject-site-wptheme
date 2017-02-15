@@ -50,19 +50,12 @@
 				<input type="submit" name="signup_submit" id="signup_submit" value="Cr&eacute;er mon compte" />
 			</div>
 		</div>
-				
-		<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
-
-		<div class="box_connection_buttons blue" id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><span>&nbsp;S&apos;inscrire avec Facebook</span></a></div>
-		<div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
-			    
-			    
-		<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
 
 		<div class="align-center box_connection_buttons red" id="signin-button"><a href="#connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">J&apos;ai d&eacute;j&agrave; un compte</a></div>
 
-		<br />
-		
+		<div class="box_connection_buttons blue" id="connexion_facebook_container"><a href="javascript:void(0);" class="social_connect_login_facebook"><span>&nbsp;S&apos;inscrire avec Facebook</span></a></div>
+		<div class="hidden"><?php dynamic_sidebar( 'sidebar-1' ); ?></div>
+
 	<?php endif; // request-details signup step ?>
 
 				    
