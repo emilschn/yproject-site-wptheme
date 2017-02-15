@@ -156,6 +156,17 @@ YPUIFunctions = (function($) {
 				}
 			});
 
+			// Affichage des info-bulles des impacts
+			$(".impacts-container .impact-logo").mouseover(function(){
+				var pos = YPUIFunctions.findPos(this);
+				var posX = pos.x;
+				$(this).next().addClass("visible").removeClass("invisible");
+				$(this).next().css("left", posX);
+			});
+			$(".impacts-container .impact-logo").mouseout(function(){
+				$(this).next().addClass("invisible").removeClass("visible");
+			});
+
 			$(".home_video .button-video, .home_video .button-video-shadows").click(function() {
 				$(".home_video .button-video, .home_video .button-video-shadows").hide();
 				var sContainer = ".home_video .video-container";
@@ -440,7 +451,24 @@ YPUIFunctions = (function($) {
 				});
 			}
 		},
-                
+		/**
+		 * Fonction pour récupérer la position x,y d'un élément
+		 * @param {type} el : élément du DOM
+		 * @returns left et top en px
+		 */
+		findPos: function (el) {
+			var x = y = 0;
+			if(el.offsetParent) {
+				x = el.offsetLeft;
+				y = el.offsetTop;
+				while(el === el.offsetParent) {
+					x += el.offsetLeft;
+					y += el.offsetTop;
+				}
+			}
+			return {'x':x, 'y':y};
+		},
+
 		refreshTurnoverAmountToPay: function() {
 			var roiPercent = $("#turnover-declaration").data("roi-percent");
 			var costsOrga = $("#turnover-declaration").data("costs-orga");
