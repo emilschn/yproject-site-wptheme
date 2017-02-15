@@ -269,7 +269,6 @@ var WDGProjectDashboard = (function ($) {
                         });
 					});
 
-<<<<<<< HEAD
                     //fermeture de la lightbox de création d'organisation après enregistrement
                     $("#wdg-lightbox-newOrga form.wdg-forms").submit(function(e){
                         e.preventDefault();
@@ -387,7 +386,7 @@ var WDGProjectDashboard = (function ($) {
                             var newname = $("#update_project_organization").find('option:selected').text();
                             $("#edit-orga-button").attr("href",$("#edit-orga-button").data("url-edit")+newval);
 
-                        });
+                        };
 
                     });
                 }
