@@ -272,7 +272,7 @@
 * CONNECTION
 *******************************************************************************/
 	#sidebar-login-form .standard-label { width: 90px !important; }
-	#sidebar-login-form input[type="text"] { width: 245px !important; }
+	#sidebar-login-form input[type="text"], #sidebar-login-form input[type="password"] { width: 245px !important; }
 	#sidebar-login-form .link-forgotten { margin-left: 94px !important; }
 	
 /*******************************************************************************
