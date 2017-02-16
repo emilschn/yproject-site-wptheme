@@ -86,7 +86,7 @@ function print_informations_page()
                 <div class="field">
 					<label for="categories"><?php _e("Cat&eacute;gorie", 'yproject'); ?></label>
 					<span class="field-value" data-type="multicheck" data-id="new_project_categories"><?php
-					include ABSPATH . 'wp-admin/includes/template.php';
+					   include_once ABSPATH . 'wp-admin/includes/template.php';
 						wp_terms_checklist(
 							$campaign_id, 
 							array(
