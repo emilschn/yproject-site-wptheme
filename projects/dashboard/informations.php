@@ -325,11 +325,9 @@ function print_informations_page()
                             <?php echo $str_organizations; ?>
                         </select>
                     </span>
-                    <?php if ($current_organization!=null): ?>                   
-                        <!--bouton d'édition de l'organisation-->
-                        <a href="#informations" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga">
-                            <?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organization->name ?></a>
-                    <?php endif; ?>
+					<!--bouton d'édition de l'organisation-->
+					<a href="#informations" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga" style="display: none;">
+						<?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organization->name ?></a>
 
                 <?php else: ?>
                     <?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>

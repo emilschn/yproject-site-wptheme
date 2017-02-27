@@ -204,6 +204,9 @@ var WDGProjectDashboard = (function ($) {
 
                 //Infos organisation
                 if ($("#tab-organization").length > 0) {
+					if($("#new_project_organization").val() !== ""){
+						$("#edit-orga-button").show();
+					}
                     $("#new_project_organization").change(function(e){
                         e.preventDefault();
                         $("#edit-orga-button").hide();
