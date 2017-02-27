@@ -307,8 +307,8 @@ function print_informations_page()
                 <?php
                 // Gestion des organisations
                 $str_organizations = '';
-                global $current_user;
-                $current_organization = $campaign->get_organization();
+                global $current_user, $current_organization;
+				$current_organization = $campaign->get_organization();
                 $organizations_list = $WDGAuthor->get_organizations_list();
                 if ($organizations_list) {
                     foreach ($organizations_list as $organization_item) {
