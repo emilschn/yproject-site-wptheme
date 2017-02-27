@@ -271,8 +271,16 @@ var WDGProjectDashboard = (function ($) {
                             thisForm. find(":input").prop('disabled', false);
                         });
 					});
+					//Vider les champs à l'ouverture de la lightbox de création
+					$('#orgainfo_form #btn-new-orga').click(function(){
+						$(':input', '#orgacreate_form')
+							.not(':hidden')
+							.val('')
+							.removeAttr('checked')
+							.removeAttr('selected');
+					});
 
-                    //fermeture de la lightbox de création d'organisation après enregistrement
+					//fermeture de la lightbox de création d'organisation après enregistrement
                     $("#wdg-lightbox-newOrga form.wdg-forms").submit(function(e){
                         e.preventDefault();
                         var thisForm = $(this);
