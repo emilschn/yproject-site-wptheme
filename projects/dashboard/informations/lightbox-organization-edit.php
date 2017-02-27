@@ -25,7 +25,7 @@ $organization_obj->submit_transfer_wallet_lemonway();
 
 		<ul class="errors"></ul>
 
-        <h1><?php _e('&Eacute;diter l\'organisation','yproject'); echo "&nbsp;"; ?></h1>
+        <h1><?php _e('&Eacute;diter l\'organisation portant le projet','yproject'); echo "&nbsp;"; ?></h1>
 
         <form id="orgaedit_form" action="" method="POST" enctype="multipart/form-data" class="wdg-forms" data-action="save_edit_organization">
 

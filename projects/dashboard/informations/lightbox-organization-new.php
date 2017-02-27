@@ -11,7 +11,7 @@ global $campaign_id
 
 		<ul class="errors"></ul>
 
-        <h1><?php _e('Cr&eacute;er une organisation','yproject')?></h1>
+        <h1><?php _e('Cr&eacute;er une organisation portant le projet','yproject')?></h1>
         <form id="orgacreate_form" action="" method="POST" enctype="multipart/form-data" class="wdg-forms" data-action="save_new_organization">
 
                 <label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?>*</label>
