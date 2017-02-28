@@ -321,7 +321,6 @@ function print_informations_page()
                 <?php if ($str_organizations != ''): ?>
                     <span class="field-value" data-type="select" data-id="new_project_organization">
                         <select name="project-organization" id="new_project_organization">
-                            <option value=""></option>
                             <?php echo $str_organizations; ?>
                         </select>
                     </span>
