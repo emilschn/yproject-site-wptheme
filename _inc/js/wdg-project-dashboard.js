@@ -255,12 +255,10 @@ var WDGProjectDashboard = (function ($) {
 								//fermeture ligthbox
 								if (count_errors === 0){
 									thisForm.find('.save_ok').fadeIn();
-									setTimeout(function(){
-										$("#wdg-lightbox-editOrga").hide();
-									}, 1500);
+
+									//Mise à jour du reste du formulaire d'édition (input type text)
+									WDGProjectDashboard.updateOrgaForm(feedback);
 								}
-								//Mise à jour du reste du formulaire d'édition (input type text)
-								WDGProjectDashboard.updateOrgaForm(feedback);
 							}
 						}).fail(function() {
                             thisForm.find('.save_fail').fadeIn();
@@ -360,9 +358,6 @@ var WDGProjectDashboard = (function ($) {
 								//Fermeture lightbox
 								if(count_errors === 0){
 									thisForm.find('.save_ok').fadeIn();
-									setTimeout(function(){
-										$("#wdg-lightbox-newOrga").hide();
-									}, 1500);
 									//Mise à jour de l'input select
 									WDGProjectDashboard.updateOrgaSelectInput(feedback);
 
