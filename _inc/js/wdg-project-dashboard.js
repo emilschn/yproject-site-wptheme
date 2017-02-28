@@ -212,7 +212,11 @@ var WDGProjectDashboard = (function ($) {
                         $("#edit-orga-button").hide();
 						$("#wdg-lightbox-editOrga ul.errors li").remove();
                     });
-                    
+					//Suppression du feedback "enregistré" à l'ouverture de la lightbox
+                    $("#orgainfo_form #edit-orga-button").click(function(){
+						$("#orgaedit_form").find('.save_ok').fadeOut();
+					});
+
 					//Création objet FormData (Envoi des fichiers uploadés en ajax dans le formulaire d'édition)
 					$("#wdg-lightbox-editOrga form#orgaedit_form").submit(function(e){
 						e.preventDefault();
@@ -252,7 +256,7 @@ var WDGProjectDashboard = (function ($) {
 									}
 									WDGProjectDashboard.updateOrgaDoc(fdFileInfo, doc);//mise à jour des liens de téléchargement
 								}
-								//fermeture ligthbox
+								//Affichage confirmation enregistrement
 								if (count_errors === 0){
 									thisForm.find('.save_ok').fadeIn();
 
@@ -270,12 +274,14 @@ var WDGProjectDashboard = (function ($) {
                         });
 					});
 					//Vider les champs à l'ouverture de la lightbox de création
+					//Suppression du feedback "enregistré" à l'ouverture de la lightbox
 					$('#orgainfo_form #btn-new-orga').click(function(){
 						$(':input', '#orgacreate_form')
 							.not(':hidden')
 							.val('')
 							.removeAttr('checked')
 							.removeAttr('selected');
+						$("#orgacreate_form").find('.save_ok').fadeOut();
 					});
 
 					//fermeture de la lightbox de création d'organisation après enregistrement
@@ -355,7 +361,7 @@ var WDGProjectDashboard = (function ($) {
 										WDGProjectDashboard.scrollTo($("#wdg-lightbox-newOrga ul.errors"));
 									}
 								}
-								//Fermeture lightbox
+								//Affichage confirmation enregistrement
 								if(count_errors === 0){
 									thisForm.find('.save_ok').fadeIn();
 									//Mise à jour de l'input select
