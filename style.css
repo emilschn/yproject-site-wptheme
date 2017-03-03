@@ -505,6 +505,9 @@ form.wdg-forms table input[type="text"].reward-text{
 	right: 0px;
 	margin-top: -45px;
 }
+#wdg-lightbox-editOrga .wdg-lightbox-padder .wdg-lightbox-button-close {
+	margin-top: -10px;
+}
 .wdg-lightbox .wdg-lightbox-button-close a {
 	padding: 5px 20px;
 	background: none;
