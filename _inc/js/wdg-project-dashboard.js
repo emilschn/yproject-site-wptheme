@@ -282,6 +282,7 @@ var WDGProjectDashboard = (function ($) {
 							.removeAttr('checked')
 							.removeAttr('selected');
 						$("#orgacreate_form").find('.save_ok').fadeOut();
+						$("#wdg-lightbox-newOrga ul.errors").show();
 					});
 
 					//fermeture de la lightbox de création d'organisation après enregistrement
