@@ -351,6 +351,7 @@ var WDGProjectDashboard = (function ($) {
 								feedback = jsonResult;
 
 								//Vérification s'il y a des erreurs dans le formulaire
+								$("#wdg-lightbox-newOrga ul.errors li").remove();//supprime les erreurs éventuellement affichées après un 1er enregistrement
 								var errors = feedback.errors;
 								var count_errors = 0;
 								for (var error in errors){
@@ -363,6 +364,7 @@ var WDGProjectDashboard = (function ($) {
 								}
 								//Affichage confirmation enregistrement
 								if(count_errors === 0){
+									$("#wdg-lightbox-newOrga ul.errors").hide();//cache les erreurs éventuellement affichées après un 1er enregistrement
 									thisForm.find('.save_ok').fadeIn();
 									//Mise à jour de l'input select
 									WDGProjectDashboard.updateOrgaSelectInput(feedback);
