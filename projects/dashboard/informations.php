@@ -307,8 +307,8 @@ function print_informations_page()
                 <?php
                 // Gestion des organisations
                 $str_organizations = '';
-                global $current_user;
-                $current_organization = $campaign->get_organization();
+                global $current_user, $current_organization;
+				$current_organization = $campaign->get_organization();
                 $organizations_list = $WDGAuthor->get_organizations_list();
                 if ($organizations_list) {
                     foreach ($organizations_list as $organization_item) {
@@ -321,18 +321,15 @@ function print_informations_page()
                 <?php if ($str_organizations != ''): ?>
                     <span class="field-value" data-type="select" data-id="new_project_organization">
                         <select name="project-organization" id="new_project_organization">
-                            <option value=""></option>
                             <?php echo $str_organizations; ?>
                         </select>
                     </span>
-                    <?php if ($current_organization!=null): ?>                   
-                        <!--bouton d'édition de l'organisation-->
-                        <a href="#informations" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga">
-                            <?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organization->name ?></a>
-                    <?php endif; ?>
+					<!--bouton d'édition de l'organisation-->
+					<a href="#informations" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga" style="display: none;">
+						<?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organization->name ?></a>
 
                 <?php else: ?>
-                    <?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
+                    <p id="orga-mention" style="display: inline;"><?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?></p>
                     <input type="hidden" name="project-organization" value="" />
                 <?php endif; ?>
 

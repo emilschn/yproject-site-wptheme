@@ -204,12 +204,19 @@ var WDGProjectDashboard = (function ($) {
 
                 //Infos organisation
                 if ($("#tab-organization").length > 0) {
+					if($("#new_project_organization").val() !== ""){
+						$("#edit-orga-button").show();
+					}
                     $("#new_project_organization").change(function(e){
                         e.preventDefault();
                         $("#edit-orga-button").hide();
 						$("#wdg-lightbox-editOrga ul.errors li").remove();
                     });
-                    
+					//Suppression du feedback "enregistré" à l'ouverture de la lightbox
+                    $("#orgainfo_form #edit-orga-button").click(function(){
+						$("#orgaedit_form").find('.save_ok').fadeOut();
+					});
+
 					//Création objet FormData (Envoi des fichiers uploadés en ajax dans le formulaire d'édition)
 					$("#wdg-lightbox-editOrga form#orgaedit_form").submit(function(e){
 						e.preventDefault();
@@ -249,15 +256,13 @@ var WDGProjectDashboard = (function ($) {
 									}
 									WDGProjectDashboard.updateOrgaDoc(fdFileInfo, doc);//mise à jour des liens de téléchargement
 								}
-								//fermeture ligthbox
+								//Affichage confirmation enregistrement
 								if (count_errors === 0){
 									thisForm.find('.save_ok').fadeIn();
-									setTimeout(function(){
-										$("#wdg-lightbox-editOrga").hide();
-									}, 1500);
+
+									//Mise à jour du reste du formulaire d'édition (input type text)
+									WDGProjectDashboard.updateOrgaForm(feedback);
 								}
-								//Mise à jour du reste du formulaire d'édition (input type text)
-								WDGProjectDashboard.updateOrgaForm(feedback);
 							}
 						}).fail(function() {
                             thisForm.find('.save_fail').fadeIn();
@@ -268,8 +273,19 @@ var WDGProjectDashboard = (function ($) {
                             thisForm. find(":input").prop('disabled', false);
                         });
 					});
+					//Vider les champs à l'ouverture de la lightbox de création
+					//Suppression du feedback "enregistré" à l'ouverture de la lightbox
+					$('#orgainfo_form #btn-new-orga').click(function(){
+						$(':input', '#orgacreate_form')
+							.not(':hidden')
+							.val('')
+							.removeAttr('checked')
+							.removeAttr('selected');
+						$("#orgacreate_form").find('.save_ok').fadeOut();
+						$("#wdg-lightbox-newOrga ul.errors").show();
+					});
 
-                    //fermeture de la lightbox de création d'organisation après enregistrement
+					//fermeture de la lightbox de création d'organisation après enregistrement
                     $("#wdg-lightbox-newOrga form.wdg-forms").submit(function(e){
                         e.preventDefault();
                         var thisForm = $(this);
@@ -336,6 +352,7 @@ var WDGProjectDashboard = (function ($) {
 								feedback = jsonResult;
 
 								//Vérification s'il y a des erreurs dans le formulaire
+								$("#wdg-lightbox-newOrga ul.errors li").remove();//supprime les erreurs éventuellement affichées après un 1er enregistrement
 								var errors = feedback.errors;
 								var count_errors = 0;
 								for (var error in errors){
@@ -346,20 +363,24 @@ var WDGProjectDashboard = (function ($) {
 										WDGProjectDashboard.scrollTo($("#wdg-lightbox-newOrga ul.errors"));
 									}
 								}
-								//Fermeture lightbox
+								//Affichage confirmation enregistrement
 								if(count_errors === 0){
+									$("#wdg-lightbox-newOrga ul.errors").hide();//cache les erreurs éventuellement affichées après un 1er enregistrement
 									thisForm.find('.save_ok').fadeIn();
-									setTimeout(function(){
-										$("#wdg-lightbox-newOrga").hide();
-									}, 1500);
 									//Mise à jour de l'input select
 									WDGProjectDashboard.updateOrgaSelectInput(feedback);
 
 									//Mise à jour du bouton d'édition
 									var newname = $("#new_project_organization").find('option:selected').text();
-									var edit_btn = $('#tab-organization #orgainfo_form').find($("#edit-orga-button"));
-									edit_btn.attr("href","#");
-									edit_btn.text("Editer "+newname);
+									if($("#tab-organization #orgainfo_form #edit-orga-button").length === 0) {
+										var select = $("span[data-id='new_project_organization']");
+										$("<a href='#informations' id='edit-orga-button' class='wdg-button-lightbox-open button' data-lightbox='editOrga'>&Eacute;diter "+newname+"</a>").insertAfter(select);
+									}
+									else{
+										var edit_btn = $('#tab-organization #orgainfo_form').find($("#edit-orga-button"));
+										edit_btn.attr("href","#");
+										edit_btn.text("Editer "+newname);
+									}
 
 									//Mise à jour du formulaire d'édition
 									WDGProjectDashboard.updateOrgaForm(feedback);
@@ -1362,9 +1383,16 @@ var WDGProjectDashboard = (function ($) {
             var orgaWpref = feedback.organization.wpref;
 
             // select à mettre à jour
-            $("#tab-organization #orgainfo_form #new_project_organization").append(new Option(orgaName, orgaWpref));
-            $("#tab-organization #orgainfo_form #new_project_organization option:selected").removeAttr('selected');
-            $("#tab-organization #orgainfo_form #new_project_organization option[value="+orgaWpref+"]").attr("selected", "selected");
+			if($("#tab-organization #orgainfo_form #new_project_organization").length === 0){//cas avec aucune organisation créée au départ
+				$("#tab-organization #orgainfo_form #orga-mention").remove();//suppression de la mention aucune orga liée au PP
+				var select = $("<span class='field-value' data-type='select' data-id='new_project_organization'><select name='project-organization' id='new_project_organization'><option selected='selected' value='"+orgaWpref+"'>"+orgaName+"</option></select></span>");
+				select.insertAfter($("#tab-organization #orgainfo_form label[for='project-organization']"));
+			}
+			else{
+				$("#tab-organization #orgainfo_form #new_project_organization").append(new Option(orgaName, orgaWpref));
+				$("#tab-organization #orgainfo_form #new_project_organization option:selected").removeAttr('selected');
+				$("#tab-organization #orgainfo_form #new_project_organization option[value="+orgaWpref+"]").attr("selected", "selected");				
+			}
         },
 
     };

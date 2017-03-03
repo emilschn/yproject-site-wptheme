@@ -576,6 +576,10 @@ form.wdg-forms table input[type="text"].reward-text{
 	margin: 20px 0px;
 }
 
+#orgacreate_form input[name=org_capable] {
+	margin: 30px 5px 0;
+}
+
 /*******************************************************************************
 * LIGHTBOX - FORMULAIRE
 *******************************************************************************/
