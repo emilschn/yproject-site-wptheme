@@ -329,7 +329,7 @@ function print_informations_page()
 						<?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organization->name ?></a>
 
                 <?php else: ?>
-                    <?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
+                    <p id="orga-mention" style="display: inline;"><?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?></p>
                     <input type="hidden" name="project-organization" value="" />
                 <?php endif; ?>
 

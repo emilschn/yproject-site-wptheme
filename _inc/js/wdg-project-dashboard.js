@@ -371,9 +371,16 @@ var WDGProjectDashboard = (function ($) {
 
 									//Mise à jour du bouton d'édition
 									var newname = $("#new_project_organization").find('option:selected').text();
-									var edit_btn = $('#tab-organization #orgainfo_form').find($("#edit-orga-button"));
-									edit_btn.attr("href","#");
-									edit_btn.text("Editer "+newname);
+									if($("#tab-organization #orgainfo_form #edit-orga-button").length === 0) {
+										console.log("pas de bouton édition");
+										var select = $("span[data-id='new_project_organization']");
+										$("<a href='#informations' id='edit-orga-button' class='wdg-button-lightbox-open button' data-lightbox='editOrga'>&Eacute;diter "+newname+"</a>").insertAfter(select);
+									}
+									else{
+										var edit_btn = $('#tab-organization #orgainfo_form').find($("#edit-orga-button"));
+										edit_btn.attr("href","#");
+										edit_btn.text("Editer "+newname);
+									}
 
 									//Mise à jour du formulaire d'édition
 									WDGProjectDashboard.updateOrgaForm(feedback);
@@ -1376,9 +1383,17 @@ var WDGProjectDashboard = (function ($) {
             var orgaWpref = feedback.organization.wpref;
 
             // select à mettre à jour
-            $("#tab-organization #orgainfo_form #new_project_organization").append(new Option(orgaName, orgaWpref));
-            $("#tab-organization #orgainfo_form #new_project_organization option:selected").removeAttr('selected');
-            $("#tab-organization #orgainfo_form #new_project_organization option[value="+orgaWpref+"]").attr("selected", "selected");
+			if($("#tab-organization #orgainfo_form #new_project_organization").length === 0){//cas avec aucune organisation créée au départ
+				console.log("pas de select");
+				$("#tab-organization #orgainfo_form #orga-mention").remove();//suppression de la mention aucune orga liée au PP
+				var select = $("<span class='field-value' data-type='select' data-id='new_project_organization'><select name='project-organization' id='new_project_organization'><option selected='selected' value='"+orgaWpref+"'>"+orgaName+"</option></select></span>");
+				select.insertAfter($("#tab-organization #orgainfo_form label[for='project-organization']"));
+			}
+			else{
+				$("#tab-organization #orgainfo_form #new_project_organization").append(new Option(orgaName, orgaWpref));
+				$("#tab-organization #orgainfo_form #new_project_organization option:selected").removeAttr('selected');
+				$("#tab-organization #orgainfo_form #new_project_organization option[value="+orgaWpref+"]").attr("selected", "selected");				
+			}
         },
 
     };
