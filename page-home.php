@@ -59,7 +59,7 @@ if (is_user_logged_in() && isset($_GET['alreadyloggedin']) && $_GET['alreadylogg
     </div>
 	
 	<div id="button-container">
-		<a class="button-slide" href="<?php echo home_url( '/financement' ); ?>"><?php _e("Financer son projet", "yproject") ?></a>
+		<a class="button-slide" href="<?php echo home_url( '/financement' ); ?>"><?php _e("Financer mon projet", "yproject") ?></a>
 		<a class="button-slide" href="<?php echo home_url( '/investissement' ); ?>"><?php _e("Investir sur un projet", "yproject") ?></a>
 	</div>
 </header> <!-- .wdg-component-slider -->
