@@ -346,16 +346,16 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     text-transform: uppercase;  
 }
 
-#submenu-user div.box_connection_buttons {   
+.box_connection_buttons {
     width: 225px;
     text-align: center;
     padding: 15px;
     margin: 15px auto;
     font-size: 11pt;
 }
-#submenu-user div.box_connection_buttons.red { background-color: #EA4F51; }
-#submenu-user div.box_connection_buttons.blue { background-color: #3B5998; }
-#submenu-user div.box_connection_buttons span { color: #FFF; }
+.box_connection_buttons.red{ background-color: #EA4F51; text-transform: uppercase; }
+.box_connection_buttons.blue, #connexion_facebook_container.box_connection_buttons.blue { background-color: #3B5998; }
+.box_connection_buttons span { color: #FFF; }
 
 #submenu-user form#sidebar-login-form {
 	width: 255px;

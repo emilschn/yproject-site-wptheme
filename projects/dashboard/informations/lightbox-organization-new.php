@@ -11,7 +11,7 @@ global $campaign_id
 
 		<ul class="errors"></ul>
 
-        <h1><?php _e('Cr&eacute;er une organisation','yproject')?></h1>
+        <h1><?php _e('Cr&eacute;er une organisation portant le projet','yproject')?></h1>
         <form id="orgacreate_form" action="" method="POST" enctype="multipart/form-data" class="wdg-forms" data-action="save_new_organization">
 
                 <label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?>*</label>
@@ -75,7 +75,7 @@ global $campaign_id
                 <label for="org_bankownerbic"><?php _e('BIC', 'yproject'); ?></label>
                 <input type="text" name="org_bankownerbic" value="<?php echo filter_input(INPUT_POST, 'org_bankownerbic'); ?>" /> <br />
 
-                <input type="checkbox" name="org_capable" /><?php _e('Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette organisation.', 'yproject'); ?><br />
+                <input type="checkbox" name="org_capable" /><?php _e('Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette organisation', 'yproject'); ?>*<br />
 
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
                 
