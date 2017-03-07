@@ -9,6 +9,8 @@ function Slideshow(){
     this.currentIndex = 0;      
     this.timeInterval = 5500;
 	this.intervalId = null;
+	this.sliderContainer = $('.slider-container');
+	this.numSlide = $('.num-slide');
     this.init();  
 }
 
@@ -19,9 +21,10 @@ Slideshow.prototype.init = function(){
       
     //initialisation
     this.elem = $('#slider');
-    this.elem.find('.slider-item').hide();   
-    this.elem.find('.slider-item:first').show();
-    this.elemCurrent = this.elem.find('.slider-item:first');
+    this.elem.find('.slider-item').hide();
+	this.sliderFirstItem = this.elem.find('.slider-item:first');
+    this.sliderFirstItem.show();
+    this.elemCurrent = this.sliderFirstItem;
      
     //Play slider
     this.items = $('.slider-item');//tous les slides
@@ -29,10 +32,11 @@ Slideshow.prototype.init = function(){
     
 
     if ($(window).width() > 997){
-        this.playSlider();
         //Passage souris sur le slider
-        $('.slider-container').mouseover(this.stopSlider.bind(this));
-        $('.slider-container').mouseout(this.playSlider.bind(this));
+        this.sliderContainer.mouseover(this.stopSlider.bind(this));
+        this.sliderContainer.mouseout(this.playSlider.bind(this));
+
+        this.playSlider();
     }
 };
 
@@ -73,12 +77,12 @@ Slideshow.prototype.gotoSlide = function(num){
     var cssStart = {"left" : direction*this.elem.width()};
     var cssEnd = {"left" : -direction*this.elem.width()};
     this.elem.find('#slide-'+num).show().css(cssStart);//élément qui va arriver
-    this.elem.find('#slide-'+num).animate({"top": 0, "left": 0}, 1000);
-    this.elemCurrent.animate(cssEnd, 1000);
+    this.elem.find('#slide-'+num).animate({"top": 0, "left": 0}, 1500);
+    this.elemCurrent.animate(cssEnd, 1500);
     
     this.currentIndex = (parseInt(num))-1;
     this.pointSlide();
-    this.elemCurrent = $('#slider').find('#slide-'+num);
+    this.elemCurrent = this.elem.find('#slide-'+num);
     
 };
 
@@ -86,11 +90,11 @@ Slideshow.prototype.gotoSlide = function(num){
  * Modifie l'apparence des points selon la slide affichée dans le défilement
  */
 Slideshow.prototype.pointSlide = function(){
-    $('.num-slide').removeClass('active-slide').addClass('inactive-slide');
+    this.numSlide.removeClass('active-slide').addClass('inactive-slide');
     $('#span-'+(this.currentIndex+1)).removeClass('inactive-slide').addClass('active-slide');
 };
 
-// création du slider selon la taille du device
+// création du slider
 $(function(){
     new Slideshow();
     
