@@ -403,7 +403,14 @@ YPUIFunctions = (function($) {
 				}
 			}
 			
-			
+			// Page accueil : affichage slider de projets
+			if ($("body.home.page").length > 0) {
+				if ($(".wdg-component-projects-preview .project-slider").length > 0) {
+					$(".wdg-component-projects-preview .block-projects").width( ($(".wdg-component-projects-preview .project-container").width() + 5) * $(".wdg-component-projects-preview .project-container").length );
+					$(".wdg-component-projects-preview .project-slider").scrollLeft( ($(".wdg-component-projects-preview .block-projects").width() - $(".wdg-component-projects-preview .project-slider").width()) / 2 );
+				}
+			}
+			// Page les projets : affichage slider de projets (en cours / financés)
 			if ($(".projects-current .wdg-component-projects-preview .project-slider .block-projects").width() > $(".projects-current .wdg-component-projects-preview .project-slider").width()) {
 				
 				if ($(".projects-current .wdg-component-projects-preview .project-slider").length > 0) {
@@ -412,11 +419,7 @@ YPUIFunctions = (function($) {
 
 					$(".projects-funded .wdg-component-projects-preview .block-projects").width( ($(".projects-funded .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-funded .wdg-component-projects-preview .project-container").length );
 
-				} else if ($(".wdg-component-projects-preview .project-slider").length > 0) {
-					$(".wdg-component-projects-preview .block-projects").width( ($(".wdg-component-projects-preview .project-container").width() + 5) * $(".wdg-component-projects-preview .project-container").length );
-					$(".wdg-component-projects-preview .project-slider").scrollLeft( ($(".wdg-component-projects-preview .block-projects").width() - $(".wdg-component-projects-preview .project-slider").width()) / 2 );
 				}
-				
 			}
 			
 			if ($("#project-filter").length > 0) {

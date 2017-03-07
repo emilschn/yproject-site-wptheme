@@ -223,6 +223,7 @@
 	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
 	height: 555px;
+	margin: auto;
 }
 @media screen and (min-width: 1200px) {
 	.wdg-component-projects-preview .block-projects {
