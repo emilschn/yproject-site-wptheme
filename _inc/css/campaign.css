@@ -456,16 +456,17 @@ div#content.version-3 div.project-timeline span.selected {
 * REWARDS
 *******************************************************************************/
 div#content.version-3 div.project-rewards-content {
-	padding: 40px 0px;
+	padding: 0px;
 }
 div#content.version-3 div.project-rewards-content div.project-rewards-padder {
         position: relative;
 }
 div#content.version-3 div.project-rewards-content div.project-rewards-padder p.half-form-count input {
-	height: 50px;
+	height: 56px;
 	background: rgba(51, 51, 51, 0.05);
-	border: 2px solid rgba(51, 51, 51, 0);
-        padding-left: 10px;
+	border: none;
+	padding: 0;
+	padding-left: 10px;
 }
 div#content.version-3 div.project-rewards-content div.project-rewards-padder table tbody {
         font-family: Trebuchet MS, sans-serif;
@@ -488,7 +489,7 @@ div#content.version-3 div.project-rewards-content div.project-rewards-padder p.h
 
 div#content.version-3 div.project-rewards-content div.project-rewards-padder p {
 	width: 600px;
-	margin: 10px auto;
+	margin: 10px auto 30px;
 }
 div#content.version-3 div.project-rewards-content span.roi_percent_user, div#content.version-3 div.project-rewards-content span.roi_amount_user {
         font-weight: bold;
