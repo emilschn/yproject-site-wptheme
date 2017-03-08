@@ -92,6 +92,8 @@ button.red {
     cursor: default;
 }
 .button.sharer {
+	width: 45px;
+	height: 45px;
 	padding: 0px;
 	border: 0px;
 	background: #FFFFFF;

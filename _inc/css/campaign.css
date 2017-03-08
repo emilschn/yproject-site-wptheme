@@ -420,8 +420,9 @@ div#content.version-3 div.project-banner div.subtitle {
 div#content.version-3 div#triggered-menu-share {
 	display: none;
     position: relative;
-	margin-top: -400px;
-    margin-bottom: 350px;
+	margin-top: -520px;
+    margin-bottom: 470px;
+	float: right;
 }
 div#content.version-3 div#triggered-menu-share.triggered {
     display: block;
@@ -1476,6 +1477,9 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
 	nav#main.scrolled { display: none; }
 	div#content.version-3.scrolled nav.project-navigation { position:fixed; z-index: 2; width: 100%; top: 0px; }
 }
+@media screen and (min-width: 768px) and (max-width: 997px) {
+	div#content.version-3 div#triggered-menu-share { margin-top: -380px; margin-right: 150px; margin-bottom: 0px; }
+}
 
 /*******************************************************************************
 * RESPONSIVE MEDIUM
@@ -1549,7 +1553,9 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
 	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered { position: fixed; display: block; bottom: 50px; right: 0px; padding: 5px; background: #FFFFFF; }
 	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered a img { width: 50px; }
 }
-
+@media screen and (max-width: 768px) {
+	div#content.version-3 div#triggered-menu-share { margin-top: -451px; margin-right: 10px; }
+}
 @media screen and (min-width: 750px) and (max-width: 959px) {
 	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 42%; }
 }
