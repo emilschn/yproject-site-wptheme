@@ -70,12 +70,6 @@ $WDGUser_current = WDGUser::current();
         "value"		=> "",
     ));
 
-    DashboardUtility::create_field(array(
-        "id"		=> "project-WDGnotoriety",
-        "type"		=> "textarea",
-        "label"		=> "Comment avez-vous <br/>connu WE DO GOOD ?",
-        "value"		=> "",
-    ));
 
     DashboardUtility::create_save_button('newProject', true, "Enregistrer", "Enregistrement en cours");
 
