@@ -36,7 +36,9 @@
 				<div class="tool-tip slideIn right">Confirmez votre mot de passe</div>
 			</div>
 			
+			<?php if (!WP_IS_DEV_SITE): ?>
 			<div class="g-recaptcha" data-sitekey="6LcoHRIUAAAAADwRb9TDAhshD3CZgIhx1M-MO84y"></div>
+			<?php endif; ?>
 			
 			<label for="validate-terms-check"><input type="checkbox" name="validate-terms-check" /> J&apos;accepte <a href="<?php echo home_url().'/cgu';  ?>"  target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
 			

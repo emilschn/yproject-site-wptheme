@@ -279,7 +279,7 @@ YPUIFunctions = (function($) {
 			});
 
 			if ($(".wdg-lightbox").length > 0) {
-				$(".wdg-button-lightbox-open").click(function() {
+				$(".wdg-button-lightbox-open").not("#wdg-lightbox-newproject .wdg-button-lightbox-open").click(function() {
 					$(".wdg-lightbox").hide();
 					var target = $(this).data("lightbox");
 					$("#wdg-lightbox-" + target).show();
@@ -385,6 +385,22 @@ YPUIFunctions = (function($) {
 			if ($("#wdg-lightbox-connexion").length > 0) {
 				$(".wdg-button-lightbox-open").click(function(){
 					$("#wdg-lightbox-connexion #redirect-page").attr("value", $(this).data("redirect"));
+				});
+			}
+			if ($("#wdg-lightbox-newproject").length > 0) {
+				$("#wdg-lightbox-newproject #connect-form .wdg-button-lightbox-open").click(function(e){
+					e.preventDefault();
+					$("#wdg-lightbox-newproject #connect-form").hide();
+					$("#wdg-lightbox-newproject #newproject-register-user").show();
+					var action = $("#wdg-lightbox-newproject #newproject-register-user form").attr("action");
+					console.log(action);
+					action = action.split("#register").join("#newproject");
+					$("#wdg-lightbox-newproject #newproject-register-user form").attr("action", action);
+				});
+				$("#wdg-lightbox-newproject #newproject-register-user .wdg-button-lightbox-open").click(function(e){
+					e.preventDefault();
+					$("#wdg-lightbox-newproject #newproject-register-user").hide();
+					$("#wdg-lightbox-newproject #connect-form").show();
 				});
 			}
 

@@ -2073,7 +2073,7 @@ span#extra-comment-image{
 /*******************************************************************************
 * REGISTER PAGE / REGISTER LIGHTBOX
 *******************************************************************************/
-#wdg-lightbox-register .wdg-button-lightbox-open {
+#wdg-lightbox-register .wdg-button-lightbox-open, #newproject-register-user .wdg-button-lightbox-open {
 	border: none;
 	background: none;
 	font-size: 12pt;

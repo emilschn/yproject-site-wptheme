@@ -4,14 +4,20 @@ $WDGUser_current = WDGUser::current();
 ?>
 
 <?php if (!is_user_logged_in()): ?>
-    <p class="align-center"><?php _e('Afin de cr&eacute;er un projet, vous devez &ecirc;tre inscrit et connect&eacute;.', 'yproject'); ?></p>
-    <?php locate_template('common/connexion-lightbox.php', true); ?>
+    <p class="align-center"><?php _e('Connectez-vous afin de cr&eacute;er un projet.', 'yproject'); ?></p>
 	
-<?php else: ?>
+    <?php locate_template( array("common/connexion-lightbox.php"), true, false ); ?>
+	
+	<div id="newproject-register-user" class="hidden">
+    <?php locate_template( array("common/register-lightbox.php"), true, false ); ?>
+	</div>
+	
+<?php endif; ?>
 
-<form id="newproject_form" class="db-form" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>">
-    <h2 style="text-align: center;"><?php _e('D&eacute;pot de dossier','yproject');?></h2><?php
-
+<form id="newproject_form" class="db-form" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>" <?php if (!is_user_logged_in()){ ?>style="display: none;"<?php } ?>>
+    <h2 style="text-align: center;"><?php _e('D&eacute;pot de dossier','yproject');?></h2>
+		
+	<?php
     DashboardUtility::create_field(array(
         "id"		=> "firstname",
         "type"		=> "text",
@@ -78,6 +84,6 @@ $WDGUser_current = WDGUser::current();
     ));
 
     DashboardUtility::create_save_button('newProject', true, "Enregistrer", "Enregistrement en cours");
-
-    ?></form>
-<?php endif;
+	?>
+	
+</form>

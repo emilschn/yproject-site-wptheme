@@ -1,4 +1,4 @@
-<div id="post_bottom_content" class="align-center">
+<div id="connect-form" class="align-center">
 	<?php if (WDGUser::has_login_errors()): ?>
 	<div class="errors">
 		<?php echo WDGUser::display_login_errors(); ?>
@@ -7,9 +7,7 @@
     
         <form method="post" action="" name="login-form" id="sidebar-login-form" class="standard-form">
 			<h2><?php _e('Inscription et connexion', 'yproject'); ?></h2>
-			<div class="warning">
-				Afin de soutenir un projet, vous devez &ecirc;tre inscrit et connect&eacute;
-			</div>
+			
             <input id="identifiant" type="text" name="log" placeholder="Identifiant ou e-mail" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" />
             <br />
 

@@ -363,6 +363,8 @@ function yproject_check_is_warning_meta_init($user_id){
 }
 
 function yp_check_recaptcha( $code ) {
+	if (WP_IS_DEV_SITE){ return TRUE; }
+	
 	if (empty($code)) { return false; }
 	$params = [
 		'secret'    => RECAPTCHA_SECRET,
