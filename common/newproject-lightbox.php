@@ -1,6 +1,14 @@
 <?php
 locate_template( array("projects/dashboard/dashboardutility.php"), true );
 $WDGUser_current = WDGUser::current();
+$organizations_list = $WDGUser_current->get_organizations_list();
+
+if ($organizations_list) {
+	foreach ($organizations_list as $organization_item) {
+		$organizations_options_id[] = $organization_item->wpref;
+		$organizations_options_names[] = $organization_item->name;
+	}
+}
 ?>
 
 <?php if (!is_user_logged_in()): ?>
@@ -47,13 +55,26 @@ $WDGUser_current = WDGUser::current();
 
     echo '<hr class="form-separator"/>';
 
-    DashboardUtility::create_field(array(
-        "id"		=> "company-name",
-        "type"		=> "text",
-        "label"		=> "Nom de mon entreprise",
-        "value"		=> "",
-        "left_icon"	=> "building",
-    ));
+	if(!empty($organizations_list)){
+		DashboardUtility::create_field(array(
+			"id"			=> "company-name",
+			"type"			=> "select",
+			"label"			=> "Nom de mon entreprise",
+			"value"			=> $organizations_list,
+			"options_id"	=> array_values($organizations_options_id),
+			"options_names"	=> array_values($organizations_options_names),
+			"left_icon"		=> "building",
+		));
+	}
+	else{
+		DashboardUtility::create_field(array(
+			"id"		=> "company-name",
+			"type"		=> "text",
+			"label"		=> "Nom de mon entreprise",
+			"value"		=> "",
+			"left_icon"	=> "building",
+		));
+	}
 
     DashboardUtility::create_field(array(
         "id"		=> "project-name",

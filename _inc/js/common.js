@@ -307,14 +307,18 @@ YPUIFunctions = (function($) {
 
 			//Lightbox de nouveau projet
 			if( $("#newproject_form").length > 0){
-				$('#newproject_form #company-name').keyup(function() {
-					var val = $(this).val();
+				$('#newproject_form #company-name').on("keyup change", function() {
+					var val = $('#newproject_form input#company-name').length !== 0 ?  $(this).val() : $('#newproject_form select[name=company-name] option:selected').text();
 					if(val!=''){
 						$('#newproject_form #project-name').val("Projet de "+val);
 					} else {
 						$('#newproject_form #project-name').val('');
 					}
 				});
+				if($('#newproject_form #company-name') !== ''){
+					var val = $('#newproject_form #company-name option:selected').text();
+					$('#newproject_form #project-name').val("Projet de "+val);
+				}
 
 				//Désactive bouton si champs incomplets
 				$("input, textarea","#newproject_form").keyup(function(){
