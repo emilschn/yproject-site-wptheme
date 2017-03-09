@@ -9,11 +9,11 @@ body a {
     color: #EA4F51;
     text-decoration: none;
 }
-body input {
+body input, body select {
 	font-family: Trebuchet MS, sans-serif;
 }
 /* Taille font définie pour tous les textes de formulaire */
-body input[type=text] {
+body input[type=text], body select {
 	font-size: 12pt;
 }
 
@@ -101,6 +101,48 @@ button.red {
         border: 2px solid #333;
         color: #333;
 }
+
+/* Spécifique, à généraliser en fin de refonte */
+.wdg-lightbox #newproject_form {
+	text-align: center;
+}
+.wdg-lightbox #newproject_form .field label{
+	text-align: left;
+	vertical-align: top;
+}
+.wdg-lightbox #newproject_form input {
+	height: 30px;
+	border: none;
+}
+.wdg-lightbox #newproject_form input {
+	width: 194px;
+}
+.wdg-lightbox #newproject_form select {
+	width: 225px;
+	height: 34px;
+	border: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	overflow: hidden;
+	background: url("../../images/common/arrow-filter.png") no-repeat right #FFF;
+	background-size: 34px;
+}
+.wdg-lightbox #newproject_form select option {
+	padding: 7px;
+	border-bottom: 1px solid #E1E3E2;
+}
+.wdg-lightbox #newproject_form textarea {
+	width: 210px;
+}
+.wdg-lightbox #newproject_form #newProject_button button[type=submit] {
+	width: 225px;
+	padding: 15px;
+	margin: 15px auto;
+	border: none;
+	background-color: #EA4F51;
+	font-size: 11pt;
+}
+
 /*******************************************************************************
 * SCROLLBAR VISIBLE - NAVIGATEUR CHROME
 *******************************************************************************/

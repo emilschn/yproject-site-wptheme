@@ -17,8 +17,8 @@ if ($organizations_list) {
 	
 <?php else: ?>
 
-<form id="newproject_form" class="db-form" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>">
-    <h2 style="text-align: center;"><?php _e('D&eacute;pot de dossier','yproject');?></h2><?php
+<form id="newproject_form" class="db-form form-register" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>">
+    <h2 style="text-align: center;"><?php _e('D&eacute;p&ocirc;t de dossier','yproject');?></h2><?php
 
     DashboardUtility::create_field(array(
         "id"		=> "firstname",
