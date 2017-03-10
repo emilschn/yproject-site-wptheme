@@ -107,18 +107,25 @@ button.red {
 	text-align: center;
 }
 .wdg-lightbox #newproject_form .field label{
+	display: inline-block;
+	width: 220px;
+	margin: 3px 30px 3px 0px;
+	font-weight: bold;
 	text-align: left;
 	vertical-align: top;
+}
+.wdg-lightbox #newproject_form.db-form .field-container {
+	display: block;
 }
 .wdg-lightbox #newproject_form input[type=text] {
 	height: 30px;
 	border: none;
 }
 .wdg-lightbox #newproject_form input[type=text] {
-	width: 194px;
+	width: 240px;
 }
 .wdg-lightbox #newproject_form select {
-	width: 225px;
+	width: 255px;
 	height: 34px;
 	border: none;
 	-webkit-appearance: none;
@@ -132,11 +139,11 @@ button.red {
 	border-bottom: 1px solid #E1E3E2;
 }
 .wdg-lightbox #newproject_form textarea {
-	width: 210px;
+	width: 240px;
 	font-family: Trebuchet MS, sans-serif;
 }
 .wdg-lightbox #newproject_form #newProject_button button[type=submit] {
-	width: 225px;
+	width: 255px;
 	padding: 15px;
 	margin: 15px auto;
 	border: none;

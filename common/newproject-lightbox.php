@@ -25,7 +25,6 @@ if ($organizations_list) {
         "type"		=> "text",
         "label"		=> "Mon prénom",
         "value"		=> $WDGUser_current->wp_user->user_firstname,
-        "left_icon"	=> "user",
     ));
 
     DashboardUtility::create_field(array(
@@ -33,7 +32,6 @@ if ($organizations_list) {
         "type"		=> "text",
         "label"		=> "Mon nom",
         "value"		=> $WDGUser_current->wp_user->user_lastname,
-        "left_icon"	=> "user",
     ));
 
     DashboardUtility::create_field(array(
@@ -41,7 +39,6 @@ if ($organizations_list) {
         "type"		=> "text",
         "label"		=> "Mon e-mail",
         "value"		=> $WDGUser_current->wp_user->get('user_email'),
-        "left_icon"	=> "at",
     ));
 
     DashboardUtility::create_field(array(
@@ -50,7 +47,6 @@ if ($organizations_list) {
         "label"		=> "Mon t&eacute;l&eacute;phone mobile",
         "value"		=> $WDGUser_current->wp_user->get('user_mobile_phone'),
         "infobubble"=> "Ce num&eacute;ro sera celui utilis&eacute; pour vous contacter &agrave; propos de votre projet",
-        "left_icon"	=> "mobile-phone",
     ));
 
     echo '<hr class="form-separator"/>';
@@ -63,7 +59,6 @@ if ($organizations_list) {
 			"value"			=> $organizations_list,
 			"options_id"	=> array_values($organizations_options_id),
 			"options_names"	=> array_values($organizations_options_names),
-			"left_icon"		=> "building",
 		));
 	}
 	else{
@@ -72,7 +67,6 @@ if ($organizations_list) {
 			"type"		=> "text",
 			"label"		=> "Nom de mon entreprise",
 			"value"		=> "",
-			"left_icon"	=> "building",
 		));
 	}
 
@@ -81,7 +75,6 @@ if ($organizations_list) {
         "type"		=> "text",
         "label"		=> "Nom du projet",
         "value"		=> "",
-        "left_icon"	=> "lightbulb-o",
     ));
 
     DashboardUtility::create_field(array(
