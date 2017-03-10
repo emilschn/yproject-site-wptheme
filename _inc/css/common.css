@@ -102,11 +102,14 @@ button.red {
         color: #333;
 }
 
-/* Spécifique, à généraliser en fin de refonte */
-.wdg-lightbox #newproject_form {
+/*******************************************************************************
+* LIGHTBOX - DESIGN GENERAL
+*******************************************************************************/
+
+.wdg-lightbox-ref .db-form {
 	text-align: center;
 }
-.wdg-lightbox #newproject_form .field label{
+.wdg-lightbox-ref .db-form .field label{
 	display: inline-block;
 	width: 220px;
 	margin: 3px 30px 3px 0px;
@@ -114,17 +117,17 @@ button.red {
 	text-align: left;
 	vertical-align: top;
 }
-.wdg-lightbox #newproject_form.db-form .field-container {
+.wdg-lightbox-ref .db-form .field-container {
 	display: block;
 }
-.wdg-lightbox #newproject_form input[type=text] {
+.wdg-lightbox-ref .db-form .field-container input[type=text] {
 	height: 30px;
 	border: none;
 }
-.wdg-lightbox #newproject_form input[type=text] {
+.wdg-lightbox-ref .db-form .field-container input[type=text] {
 	width: 240px;
 }
-.wdg-lightbox #newproject_form select {
+.wdg-lightbox-ref .db-form .field-container select {
 	width: 255px;
 	height: 34px;
 	border: none;
@@ -134,15 +137,15 @@ button.red {
 	background: url("../../images/common/arrow-filter.png") no-repeat right #FFF;
 	background-size: 34px;
 }
-.wdg-lightbox #newproject_form select option {
+.wdg-lightbox-ref .db-form .field-container select option {
 	padding: 7px;
 	border-bottom: 1px solid #E1E3E2;
 }
-.wdg-lightbox #newproject_form textarea {
+.wdg-lightbox-ref .db-form .field-container textarea {
 	width: 240px;
 	font-family: Trebuchet MS, sans-serif;
 }
-.wdg-lightbox #newproject_form #newProject_button button[type=submit] {
+.wdg-lightbox-ref .db-form button[type=submit] {
 	width: 255px;
 	padding: 15px;
 	margin: 15px auto;
@@ -150,31 +153,6 @@ button.red {
 	background-color: #EA4F51;
 	font-size: 11pt;
 }
-
-/* CSS pour éléments WordPress non paramétrables dans le back-office */
-#wdg-lightbox-contactprojet span.wpcf7-list-item {
-	display: block;
-	margin-left: 0;
-}
-#wdg-lightbox-contactprojet .wpcf7-form {
-	width: 95%;
-	margin: auto;
-}
-#wdg-lightbox-contactprojet .wpcf7-form p {
-	margin: 20px auto;
-}
-#wdg-lightbox-contactprojet input[type=checkbox] {
-	width: 20px;
-	height: 20px;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	margin-left: 0;
-}
-
-/*******************************************************************************
-* LIGHTBOX - DESIGN GENERAL
-*******************************************************************************/
 
 /* Classes à ajouter dans le back-office WordPress */
 .wp-form-title {
@@ -202,12 +180,33 @@ button.red {
 	font-size: 11pt;
 }
 .wp-form-submit {
-	width: 225px;
+	width: 255px;
 	padding: 15px;
 	margin: 15px auto;
 	border: none;
 	background-color: #EA4F51;
 	font-size: 11pt;
+}
+
+/* CSS pour éléments WordPress non paramétrables dans le back-office */
+#wdg-lightbox-contactprojet span.wpcf7-list-item {
+	display: block;
+	margin-left: 0;
+}
+#wdg-lightbox-contactprojet .wpcf7-form {
+	width: 95%;
+	margin: auto;
+}
+#wdg-lightbox-contactprojet .wpcf7-form p {
+	margin: 20px auto;
+}
+#wdg-lightbox-contactprojet input[type=checkbox] {
+	width: 20px;
+	height: 20px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin-left: 0;
 }
 
 /*******************************************************************************

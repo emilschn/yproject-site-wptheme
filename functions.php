@@ -1499,8 +1499,9 @@ function yproject_shortcode_lightbox($atts, $content = '') {
     $atts = shortcode_atts( array(
 	'id' => 'lightbox',
 	'style' => '',
+	'class' => '',
     ), $atts );
-    return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox hidden">
+    return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox hidden'.' '.$atts['class'].'">
 		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder">
 		    <div class="wdg-lightbox-button-close">
@@ -1595,7 +1596,7 @@ function yproject_shortcode_newproject_lightbox($atts, $content = '') {
             locate_template('common/newproject-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="newproject"]' .$content . '[/yproject_lightbox]');
+	echo do_shortcode('[yproject_lightbox id="newproject" class="wdg-lightbox-ref"]' .$content . '[/yproject_lightbox]');
 	echo do_shortcode('[yproject_register_lightbox]');
 }
 add_shortcode('yproject_newproject_lightbox', 'yproject_shortcode_newproject_lightbox');
