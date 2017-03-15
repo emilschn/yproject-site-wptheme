@@ -28,18 +28,16 @@
                 <input type="hidden" id="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 				<input type="hidden" name="login-form" value="1" />
             </div>
-	    
-            <br />
         </form>
 
-        <div id="connexion_facebook_container" class="box_connection_buttons red">
-			<div id="submenu_item_connection_register" class="" >
-				<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><span style="color: #FFF; ">Cr&eacute;er mon compte</span></a>
-			</div>
+        <div id="connexion_facebook_container" class="box_connection_buttons blue">
+            <a href="javascript:void(0);" class="social_connect_login_facebook">&nbsp;Se connecter avec Facebook</a>
         </div>
 
-        <div class="box_connection_buttons blue" id="connexion_facebook_container">
-            <a href="javascript:void(0);" class="social_connect_login_facebook"><span style=" font-size: 11pt;">&nbsp;Se connecter avec Facebook</span></a>
+        <div class="box_connection_buttons red">
+			<div id="submenu_item_connection_register">
+				<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register">Cr&eacute;er mon compte</a>
+			</div>
         </div>
 
         <div class="hidden"><?php dynamic_sidebar('sidebar-1'); ?></div>
