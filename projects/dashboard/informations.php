@@ -123,15 +123,6 @@ function print_informations_page()
                 ));
 
 
-                DashboardUtility::create_field(array(
-                    "id"=>"new_project_WDG_notoriety",
-                    "type"=>"textarea",
-                    "label"=>'"Comment avez-vous connu WDG ?"',
-                    "value"=>$campaign->backoffice_WDG_notoriety(),
-                    "visible"=>$is_admin,
-                    "admin_theme"=>$is_admin,
-                    "editable"=>false
-                ));
 
                 DashboardUtility::create_save_button("projectinfo_form"); ?>
             </form>

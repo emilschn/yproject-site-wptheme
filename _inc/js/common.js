@@ -279,7 +279,7 @@ YPUIFunctions = (function($) {
 			});
 
 			if ($(".wdg-lightbox").length > 0) {
-				$(".wdg-button-lightbox-open").click(function() {
+				$(".wdg-button-lightbox-open").not("#wdg-lightbox-newproject .wdg-button-lightbox-open").click(function() {
 					$(".wdg-lightbox").hide();
 					var target = $(this).data("lightbox");
 					$("#wdg-lightbox-" + target).show();
@@ -310,14 +310,18 @@ YPUIFunctions = (function($) {
 
 			//Lightbox de nouveau projet
 			if( $("#newproject_form").length > 0){
-				$('#newproject_form #company-name').keyup(function() {
-					var val = $(this).val();
+				$('#newproject_form #company-name').on("keyup change", function() {
+					var val = $('#newproject_form input#company-name').length !== 0 ?  $(this).val() : $('#newproject_form select[name=company-name] option:selected').text();
 					if(val!=''){
 						$('#newproject_form #project-name').val("Projet de "+val);
 					} else {
 						$('#newproject_form #project-name').val('');
 					}
 				});
+				if($('#newproject_form #company-name') !== ''){
+					var val = $('#newproject_form #company-name option:selected').text();
+					$('#newproject_form #project-name').val("Projet de "+val);
+				}
 
 				//Désactive bouton si champs incomplets
 				$("input, textarea","#newproject_form").keyup(function(){
@@ -388,6 +392,22 @@ YPUIFunctions = (function($) {
 			if ($("#wdg-lightbox-connexion").length > 0) {
 				$(".wdg-button-lightbox-open").click(function(){
 					$("#wdg-lightbox-connexion #redirect-page").attr("value", $(this).data("redirect"));
+				});
+			}
+			if ($("#wdg-lightbox-newproject").length > 0) {
+				$("#wdg-lightbox-newproject #connect-form .wdg-button-lightbox-open").click(function(e){
+					e.preventDefault();
+					$("#wdg-lightbox-newproject #connect-form").hide();
+					$("#wdg-lightbox-newproject #newproject-register-user").show();
+					var action = $("#wdg-lightbox-newproject #newproject-register-user form").attr("action");
+					console.log(action);
+					action = action.split("#register").join("#newproject");
+					$("#wdg-lightbox-newproject #newproject-register-user form").attr("action", action);
+				});
+				$("#wdg-lightbox-newproject #newproject-register-user .wdg-button-lightbox-open").click(function(e){
+					e.preventDefault();
+					$("#wdg-lightbox-newproject #newproject-register-user").hide();
+					$("#wdg-lightbox-newproject #connect-form").show();
 				});
 			}
 

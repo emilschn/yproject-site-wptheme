@@ -53,7 +53,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
-	$current_version = '20170215';
+	$current_version = '20170315';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -363,6 +363,8 @@ function yproject_check_is_warning_meta_init($user_id){
 }
 
 function yp_check_recaptcha( $code ) {
+	if (WP_IS_DEV_SITE){ return TRUE; }
+	
 	if (empty($code)) { return false; }
 	$params = [
 		'secret'    => RECAPTCHA_SECRET,
@@ -1500,8 +1502,10 @@ function yproject_shortcode_lightbox($atts, $content = '') {
 	'id' => 'lightbox',
 	'scrolltop' => '',
 	'style' => '',
+	'class' => '',
     ), $atts );
-    return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].'>
+	
+    return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].' '.$atts['class'].'>
 		<div class="wdg-lightbox-click-catcher"></div>
 		<div class="wdg-lightbox-padder">
 		    <div class="wdg-lightbox-button-close">
@@ -1597,7 +1601,7 @@ function yproject_shortcode_newproject_lightbox($atts, $content = '') {
             locate_template('common/newproject-lightbox.php',true);
             $content = ob_get_contents();
 	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="newproject"]' .$content . '[/yproject_lightbox]');
+	echo do_shortcode('[yproject_lightbox id="newproject" class="wdg-lightbox-ref"]' .$content . '[/yproject_lightbox]');
 	echo do_shortcode('[yproject_register_lightbox]');
 }
 add_shortcode('yproject_newproject_lightbox', 'yproject_shortcode_newproject_lightbox');

@@ -521,11 +521,157 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 
 
 /*******************************************************************************
+* LIGHTBOX
+*******************************************************************************/
+.wdg-lightbox {
+	background-color: rgba(0, 0, 0, 0.75);
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	z-index: 4000;
+	width: 100%;
+	height: 100%;
+}
+
+.wdg-lightbox-click-catcher {
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	z-index: 4001;
+	width: 100%;
+	height: 100%;
+}
+
+.wdg-lightbox .wdg-lightbox-padder {
+	position: relative;
+	max-width: 600px;
+	max-height: 80vh;
+	margin: 5vh auto;
+	padding: 50px;
+	background-color: #F2F2F2;
+	overflow-y: auto;
+	z-index: 4002;
+}
+
+.wdg-lightbox .wdg-widelightbox-padder {
+	position: relative;
+	max-width: 90%;
+	max-height: 80vh;
+	margin: 5vh auto;
+	padding: 20px;
+	background-color: #F2F2F2;
+	overflow-y: auto;
+	z-index: 4002;
+}
+.wdg-lightbox .wdg-lightbox-padder div.wdg-lightbox-msg-info {
+	text-align: center;
+}
+.wdg-lightbox .wdg-lightbox-padder > div {
+	background-color: #F2F2F2 !important;
+}
+
+.wdg-lightbox .wdg-lightbox-button-close {
+	position: absolute;
+	right: 0px;
+	margin-top: -45px;
+}
+#wdg-lightbox-editOrga .wdg-lightbox-padder .wdg-lightbox-button-close {
+	margin-top: -10px;
+}
+.wdg-lightbox .wdg-lightbox-button-close a {
+	padding: 5px 20px;
+	background: none;
+	border: none;
+	font-size: 28pt;
+	color: #333333;
+	text-transform: lowercase;
+}
+
+#validate-terms .validate-terms-excerpt {
+    margin: 20px 0px;
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid #EEECED;
+    padding: 5px;
+}
+
+#validate-terms input {
+    text-align: center;
+    margin: 10px 0px;
+}
+
+#validate-terms > div > span {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#already-connected {
+	text-align: center;
+}
+
+.wdg-lightbox .warning {
+    text-align: justify;
+    margin: 10px 0px;
+}
+.wdg-lightbox .register-section {
+    margin: 15px 0px;
+    text-align: center;
+}
+.wdg-lightbox div.submit {
+    margin: 10px 0px;
+    text-align: center;
+}
+
+.wdg-lightbox.timeout-lightbox {
+	background-color: transparent;
+	margin-top: 88px;
+}
+.wdg-lightbox.timeout-lightbox .wdg-lightbox-padder {
+	background-color: #333333;
+	color: #FFFFFF;
+}
+
+.wdg-lightbox .wdg-lightbox-padder > div.admin-block {
+	background-color: #EA4F51 !important;
+	border: 1px dotted #000;
+	padding: 10px;
+	margin-bottom: 5px;
+}
+.wdg-lightbox .wdg-lightbox-padder > div.admin-block h3 { margin: 5px auto; }
+.wdg-lightbox .wdg-lightbox-padder > div.admin-block label { display: inline-block; width: 140px; }
+
+.wdg-lightbox ul.errors {
+	list-style: none;
+	padding-left: 10px;
+	margin: 20px 0px;
+}
+@media screen and (max-width: 997px) {
+	.wdg-lightbox .wdg-lightbox-padder {
+		padding: 10px;
+	}
+}
+
+#orgacreate_form input[name=org_capable] {
+	margin: 30px 5px 0;
+}
+
+/*******************************************************************************
 * LIGHTBOX CONNECTION
 *******************************************************************************/
-#wdg-lightbox-register #connexion_facebook_container a.social_connect_login_facebook, #wdg-lightbox-connexion #connexion_facebook_container a.social_connect_login_facebook {
+#wdg-lightbox-connexion .warning {
+	text-align: center;
+}
+#connexion_facebook_container {
+	margin-top: 0;
+	margin-bottom: 15px;
+}
+#connexion_facebook_container a.social_connect_login_facebook {
 	padding: 4px 5px 5px;
 	font-size: 12pt;
 	text-transform: uppercase;
 	color: #FFFFFF;
+}
+.box_connection_buttons.red a {
+	font-size: 12pt;
+	color: #FFF;
 }
