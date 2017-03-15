@@ -40,7 +40,6 @@ if ($can_modify){
     //Données générales
     $post_campaign = get_post($campaign_id);
     $campaign = atcf_get_campaign($post_campaign);
-    $status = $campaign->campaign_status();
 
     $WDGAuthor = new WDGUser(get_userdata($post_campaign->post_author));
     $WDGUser_current = WDGUser::current();
@@ -51,7 +50,7 @@ if ($can_modify){
     $collecte_or_after = $status==ATCF_Campaign::$campaign_status_collecte || $status==ATCF_Campaign::$campaign_status_funded ;
     $vote_or_after = $collecte_or_after || $status==ATCF_Campaign::$campaign_status_vote;
     $preview_or_after = $vote_or_after || $status==ATCF_Campaign::$campaign_status_preview;
-    $validated_or_after = $preview_or_after || $status==ATCF_Campaign::$campaign_status_validated;
+    $validated_or_after = true; //$preview_or_after || $status==ATCF_Campaign::$campaign_status_validated;
 
     //Stats vues
     $stats_views = 0;
@@ -105,13 +104,13 @@ if ($can_modify){
 
 <div id="content">
     <div class="">
-        <div id="ndashboard"
-        data-campaign-id="<?php echo $campaign_id?>">
+        <div id="ndashboard" data-campaign-id="<?php echo $campaign_id?>">
             <nav id="ndashboard-navbar">
                 <div class="nav-padding">
                     <div class="title"><?php echo $post_campaign->post_title; ?></div>
                     <div class="authorization">
-                        <i class="fa fa-user" aria-hidden="true"></i><span>&nbsp;&nbsp
+                        <i class="fa fa-user" aria-hidden="true"></i>
+						<span>&nbsp;&nbsp
                         <?php
                         if ($is_admin){
                                 echo 'Mode Administrateur';
@@ -121,11 +120,12 @@ if ($can_modify){
                                 echo 'Membre du projet';
                             }
                         ?>
-                    </span></div>
+						</span>
+					</div>
+					
                     <ul>
                         <li>
-                            <a href="#resume"
-                               data-target="page-resume">
+                            <a href="#resume" data-target="page-resume">
                                 <?php _e("Vue d'ensemble", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
@@ -137,44 +137,36 @@ if ($can_modify){
                             </a>
                         </li>
                         <li>
-                            <a href="#informations"
-                               data-target="page-informations">
+                            <a href="#informations" data-target="page-informations">
                                 <?php _e("Informations", 'yproject');?>
                                 <div class="badge-notif"><?php
                                     if(filter_input(INPUT_GET,'lightbox')=='newproject'){echo '<i class="fa fa-exclamation" aria-hidden="true"></i>';}?></div>
                             </a>
                         </li>
                         <li>
-                            <a href="#wallet"
-                                data-target="page-wallet"
+                            <a href="#wallet" data-target="page-wallet"
                                 <?php DashboardUtility::check_enabled_page(); ?>>
                                 <?php _e("Gestion financi&egrave;re", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a href="#campaign"
-                                data-target="page-campaign"
+                            <a href="#campaign" data-target="page-campaign"
                                 <?php DashboardUtility::check_enabled_page(); ?>>
                                 <?php _e("Campagne", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a href="#contacts"
-                                data-target="page-contacts"
+                            <a href="#contacts" data-target="page-contacts"
                                 <?php DashboardUtility::check_enabled_page(); ?>>
                                 <?php _e("Contacts", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a href="#news"
-                                data-target="page-news"
+                            <a href="#news" data-target="page-news"
                                 <?php DashboardUtility::check_enabled_page(); ?>>
                                 <?php _e("Actualit&eacute;s", 'yproject');?>&nbsp;&nbsp;&nbsp;&nbsp;
                             </a>
                         </li>
-                        <!--li>
-                            <a href="#page-support">Accompagnement</a>
-                        </li-->
                     </ul>
                 </div>
             </nav>
