@@ -155,8 +155,7 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 			if (!$vote_result) array_push($vote_errors, 'Probl&egrave;me de prise en compte du vote.');
 			global $vote_success; $vote_success = TRUE;
 
-			do_action('wdg_delete_cache', array( 
-				'project-header-right-'.$campaign_id,
+			do_action('wdg_delete_cache', array(
 				'project-stats-public-votes-'.$campaign_id
 			));
 			
