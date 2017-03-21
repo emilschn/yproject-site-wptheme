@@ -1,5 +1,8 @@
 <?php 
 	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user;
+	if ($WDG_cache_plugin == null) {
+		$WDG_cache_plugin = new WDG_Cache_Plugin();
+	}
 	$stylesheet_directory_uri = get_stylesheet_directory_uri();
 	date_default_timezone_set("Europe/Paris");
 	ypcf_session_start();
@@ -126,7 +129,7 @@
 				<div id="submenu-search" class="submenu-style hidden">
 					<div class="only-inf997">
 						<a href="<?php echo home_url( '/les-projets' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/financement' ); ?>"><?php _e( "Financer son projet", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/financement' ); ?>"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/investissement' ); ?>"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/vision' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
 					</div>

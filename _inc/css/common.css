@@ -92,6 +92,8 @@ button.red {
     cursor: default;
 }
 .button.sharer {
+	width: 45px;
+	height: 45px;
 	padding: 0px;
 	border: 0px;
 	background: #FFFFFF;
@@ -939,9 +941,14 @@ body.page-template-template-discover-projects-php nav#project-filter select opti
 	background-image: url("../../images/common/impact-social-small.png") ;
 }
 body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container {
-	width: 25%;
 	height: 620px;
 	min-width: 240px;
+}
+body.page-template-template-discover-projects-php .projects-current .wdg-component-projects-preview .project-container {
+	width: 33%;
+}
+body.page-template-template-discover-projects-php .projects-funded .wdg-component-projects-preview .project-container {
+	width: 25%;
 }
 body.page-template-template-discover-projects-php .wdg-component-projects-preview .block-projects {
 	height: auto;
