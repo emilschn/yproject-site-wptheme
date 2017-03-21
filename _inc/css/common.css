@@ -134,7 +134,7 @@ button.red {
 *******************************************************************************/
 nav#main {
 	position: fixed;
-	z-index: 3;
+	z-index: 180;
 	top: 0px;
 	margin: 10px 0px;
 	width: 100%;
