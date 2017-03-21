@@ -297,6 +297,23 @@
 	#content.theme-myphotoreporter .client-header .center { display: none; }
 }
 
+/*******************************************************************************
+* BANDEAU COOKIES
+*******************************************************************************/
+
+/* Positionnement bouton ok du bandeau cookie par rapport à l'icône Crisp*/
+@media screen and (min-width: 652px) and (max-width: 720px) {
+	#cookies-alert button#cookies-alert-close {
+		display: block;
+		margin: 0 auto;
+	}
+}
+@media screen and (min-width: 444px) and (max-width: 485px) {
+	#cookies-alert button#cookies-alert-close {
+		display: block;
+		margin: 0 auto;
+	}
+}
 
 @media screen and  (min-width: 562px) and  (max-width: 767px){
 /*******************************************************************************
