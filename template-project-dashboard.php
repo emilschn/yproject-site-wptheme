@@ -80,7 +80,7 @@ if ($can_modify){
     page_resume_lightboxes();
 
 	$hidenewprojectlightbox = filter_input( INPUT_COOKIE, 'hidenewprojectlightbox' );
-    if ( empty($hidenewprojectlightbox) && (filter_input(INPUT_GET, 'lightbox') == 'newproject') ) {
+    if ( /*empty($hidenewprojectlightbox) &&*/ (filter_input(INPUT_GET, 'lightbox') == 'newproject') ) {
         ob_start();
         locate_template('projects/dashboard/dashboard-welcome-lightbox.php', true);
         $content = ob_get_contents();
