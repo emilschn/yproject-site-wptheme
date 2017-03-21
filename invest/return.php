@@ -228,9 +228,8 @@ if (isset($campaign) && is_user_logged_in()):
 
 				case 'publish' :
 					do_action('wdg_delete_cache', array(
-						'project-header-right-'.$campaign->ID,
-						'projects-current',
-						'project-investments-data-'.$campaign->ID
+						'home-projects',
+						'list-projects-current'
 					));
 					$campaign_url = get_permalink($campaign->ID);
 					$share_page = get_page_by_path('paiement-partager');

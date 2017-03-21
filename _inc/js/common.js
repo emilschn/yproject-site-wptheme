@@ -325,9 +325,12 @@ YPUIFunctions = (function($) {
 
 				//Désactive bouton si champs incomplets
 				$("input, textarea","#newproject_form").keyup(function(){
-					$("#newProject_button").find("button").prop('disabled', $("input, textarea","#newproject_form").filter(function() { return $(this).val() == ""; }).length >0);
+					$("#newProject_button").find("button").prop('disabled', ($("input, textarea","#newproject_form").filter(function() { return $(this).val() == ""; }).length > 0 || !$("#project-terms").is(':checked')) );
 				});
-				$("input, textarea","#newproject_form").trigger('keyup')
+				$("input, textarea","#newproject_form").trigger('keyup');
+				$("#project-terms").change(function() {
+					$("input, textarea","#newproject_form").trigger('keyup');
+				});
 
 				$("#newproject_form").submit(function(){
 					$("#newProject_button").find(".button-text").hide();

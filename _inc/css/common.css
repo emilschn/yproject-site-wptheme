@@ -122,6 +122,9 @@ button.red {
 .wdg-lightbox-ref .db-form .field-container {
 	display: block;
 }
+.wdg-lightbox-ref .db-form .field-container.field-type-check {
+	display: inline-block;
+}
 .wdg-lightbox-ref .db-form .field-container input[type=text] {
 	height: 30px;
 	border: none;

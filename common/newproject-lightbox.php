@@ -22,7 +22,7 @@ if ($organizations_list) {
 <?php endif; ?>
 
 <form id="newproject_form" class="db-form form-register" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>" <?php if (!is_user_logged_in()){ ?>style="display: none;"<?php } ?>>
-    <h2 style="text-align: center;"><?php _e('D&eacute;p&ocirc;t de dossier','yproject');?></h2>
+    <h2 style="text-align: center;"><?php _e('Lancement de campagne','yproject');?></h2>
 		
 	<?php
     DashboardUtility::create_field(array(
@@ -86,6 +86,13 @@ if ($organizations_list) {
         "id"		=> "project-description",
         "type"		=> "textarea",
         "label"		=> "Description du projet",
+        "value"		=> "",
+    ));
+
+    DashboardUtility::create_field(array(
+        "id"		=> "project-terms",
+        "type"		=> "check",
+        "label"		=> 'Je valide les <a href="'.home_url('/conditions-particulieres').'" target="_blank">conditions particuli&egrave;res</a>',
         "value"		=> "",
     ));
 
