@@ -134,7 +134,7 @@ class DashboardUtility
 
         //Is this an hidden input
         if($type=='hidden'){
-            $text_field = '<span class="field-container">'.$prefix.'<span class="field-value" data-type="'.$type.'" data-id="'.$id.'">';
+            $text_field = '<span class="field-container>'.$prefix.'<span class="field-value" data-type="'.$type.'" data-id="'.$id.'">';
             $text_field .= '<input type="hidden" '
                 . 'name="' . $id . '" '
                 . 'id="' . $id . '" '
@@ -150,13 +150,14 @@ class DashboardUtility
         $text_field .='">';
 
         //Is this a checkbox
-        if($type=='check'){
-            $text_field .='<span class="field-container">'.$prefix.'<span class="field-value" data-type="'.$type.'" data-id="'.$id.'">
+        if ($type == 'check') {
+            $text_field .='<span class="field-container field-type-'.$type.'"">'.$prefix.'<span class="field-value" data-type="'.$type.'" data-id="'.$id.'">
             <input type="checkbox"
                 class="'.$fillbubble_class.'"';
                 if($initial_value){$text_field .='checked ';}
                 if(!$editable){$text_field .='disabled ';}
                 if($editable){$text_field .='id="'.$id.'"';}
+                if($editable){$text_field .='name="'.$id.'"';}
             $text_field .= ">";
             if(!empty($fillbubble)){$text_field .= '<span class="tooltiptext">'.translate($fillbubble, 'yproject').'</span>';}
             $text_field .= "</span>$suffix</span>";

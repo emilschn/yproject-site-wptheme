@@ -89,6 +89,13 @@ if ($organizations_list) {
         "value"		=> "",
     ));
 
+    DashboardUtility::create_field(array(
+        "id"		=> "project-terms",
+        "type"		=> "check",
+        "label"		=> 'Je valide les <a href="'.home_url('/conditions-particulieres').'" target="_blank">conditions particuli&egrave;res</a>',
+        "value"		=> "",
+    ));
+
 
     DashboardUtility::create_save_button('newProject', true, "Enregistrer", "Enregistrement en cours");
 	?>
