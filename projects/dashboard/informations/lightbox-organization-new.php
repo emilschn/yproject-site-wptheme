@@ -76,9 +76,11 @@ global $campaign_id
                 <input type="text" name="org_bankownerbic" value="<?php echo filter_input(INPUT_POST, 'org_bankownerbic'); ?>" /> <br />
 
                 <input type="checkbox" name="org_capable" /><?php _e('Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette organisation', 'yproject'); ?>*<br />
+				<br />
+				<p class="required-mention">* <?php _e('Obligatoire', 'yproject'); ?></p>
 
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
-                
+
                 <?php DashboardUtility::create_save_button("orgacreate_form"); ?>
         </form>
 
