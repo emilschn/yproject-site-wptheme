@@ -307,7 +307,7 @@ var WDGProjectDashboard = (function ($) {
                         e.preventDefault();
                         var thisForm = $(this);
                         
-                        var campaign_id, org_name, org_email, org_legalform,
+                        var campaign_id, org_name, org_email, org_description, org_legalform,
                         org_idnumber, org_rcs,org_capital, org_ape, org_address, org_postal_code,
                         org_city, org_nationality, org_bankownername, org_bankowneraddress,
                         org_bankowneriban, org_bankownerbic, org_capable;
@@ -315,6 +315,7 @@ var WDGProjectDashboard = (function ($) {
                         campaign_id = $('#tab-organization #wdg-lightbox-newOrga input[name=campaign_id]').val();
                         org_name = $('#tab-organization #wdg-lightbox-newOrga input[name=org_name]').val();
                         org_email = $('#tab-organization #wdg-lightbox-newOrga input[name=org_email]').val();
+						org_description = $('#tab-organization #wdg-lightbox-newOrga input[name=org_description]').val();
                         org_legalform = $('#tab-organization #wdg-lightbox-newOrga input[name=org_legalform]').val();
                         org_idnumber = $('#tab-organization #wdg-lightbox-newOrga input[name=org_idnumber]').val();
                         org_rcs = $('#tab-organization #wdg-lightbox-newOrga input[name=org_rcs]').val();
@@ -345,6 +346,7 @@ var WDGProjectDashboard = (function ($) {
                                 'campaign_id': campaign_id,
                                 'org_name': org_name,
                                 'org_email': org_email,
+								'org_description': org_description,
                                 'org_legalform': org_legalform,
                                 'org_idnumber': org_idnumber,
                                 'org_rcs': org_rcs,
@@ -361,7 +363,6 @@ var WDGProjectDashboard = (function ($) {
                                 'org_capable': org_capable
                             }
                         }).done(function(result){
-
 							if(result === "FALSE"){//user non connecté
 								window.location.reload();//affiche message de non permission
 							}else{

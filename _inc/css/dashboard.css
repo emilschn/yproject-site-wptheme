@@ -422,7 +422,7 @@
 	text-align: center;
 	margin: 30px 0 0;
 }
-#page-informations #tab-organization .feedback_save {
+#page-informations #tab-organization #orgainfo_form .feedback_save {
 	position: absolute;
 	top: 350px;
 	left: 680px;
