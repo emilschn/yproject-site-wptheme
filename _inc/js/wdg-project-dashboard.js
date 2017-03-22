@@ -204,22 +204,29 @@ var WDGProjectDashboard = (function ($) {
 
                 //Infos organisation
                 if ($("#tab-organization").length > 0) {
-					$("#orgainfo_form_button").hide();//bouton enregistrer
+					$("#orgainfo_form_button").hide();//suppression bouton enregistrer
 					if($("#new_project_organization").val() !== ""){
+						var new_project_organization = $("#new_project_organization option:selected").val();
 						$("#edit-orga-button").show();
 					}
                     $("#new_project_organization").change(function(e){
                         e.preventDefault();
-                        $("#edit-orga-button").hide();
-						$("#orgainfo_form_button").show();//apparition bouton enregistrer
-						//Suppression des éléments d'une validation précédente
-						if($(".save_ok").length > 0) $(".save_ok").hide();
-						if($("#orgainfo_form i.fa.validation").length > 0) $("#orgainfo_form i.fa.validation").remove();
-						if($("#new_project_organization").hasClass("validation")) $("#new_project_organization").removeClass("validation");
-						if($("#save-mention").length === 0) {
-							$("<p id='save-mention'>Veuillez enregistrer l'organisation choisie pour la lier à votre projet</p>").insertAfter($("#edit-orga-button"));							
+						$("#orgainfo_form_button").hide();//suppression bouton enregistrer
+						if($("#new_project_organization option:selected").val() !== new_project_organization) {
+							$("#edit-orga-button").hide();
+							$("#orgainfo_form_button").show();//apparition bouton enregistrer
+							//Suppression des éléments d'une validation précédente
+							if($(".save_ok").length > 0) $(".save_ok").hide();
+							if($("#orgainfo_form i.fa.validation").length > 0) $("#orgainfo_form i.fa.validation").remove();
+							if($("#new_project_organization").hasClass("validation")) $("#new_project_organization").removeClass("validation");
+							if($("#save-mention").length === 0) {
+								$("<p id='save-mention'>Veuillez enregistrer l'organisation choisie pour la lier à votre projet</p>").insertAfter($("#edit-orga-button"));
+							}
+							//
+						}else{
+							if($("#save-mention").length > 0) $("#save-mention").remove();
+							$("#edit-orga-button").show();
 						}
-						//
 						$("#wdg-lightbox-editOrga ul.errors li").remove();
                     });
 					//Suppression du feedback "enregistré" à l'ouverture de la lightbox
@@ -673,6 +680,7 @@ var WDGProjectDashboard = (function ($) {
 							WDGProjectDashboard.updateOrgaFormDoc(feedback);
 							$("#save-mention").remove();
 							$("#orgainfo_form_button").hide();
+							new_project_organization = $("#new_project_organization option:selected").val();
                         }
                    }
                }).fail(function() {
