@@ -317,7 +317,7 @@ function print_informations_page()
                     }
                 }			
                 ?>
-                <label for="project-organization">Organisation :</label>
+                <label for="project-organization"><?php _e("Organisation li&eacute;e au projet"); ?> :</label>
                 <?php if ($str_organizations != ''): ?>
                     <span class="field-value" data-type="select" data-id="new_project_organization">
                         <select name="project-organization" id="new_project_organization">
