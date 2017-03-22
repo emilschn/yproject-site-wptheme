@@ -106,7 +106,7 @@
 			if ( empty( $saved_mandates_list ) ) {
 				$keep_going = false;
 				if ( !$organization_obj->add_lemonway_mandate() ) {
-                                        $page_edit_orga = get_page_by_path('editer-une-organisation');
+					$page_edit_orga = get_page_by_path('editer-une-organisation');
 					echo LemonwayLib::get_last_error_message(); ?>
 					<a class="button" href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$organization_obj->get_wpref(); ?>"><?php _e('Editer', 'yproject'); ?></a><br /><br />
 					<button class="button disabled"><?php _e( "Signer l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
@@ -345,7 +345,9 @@
 									Nous attendons la réception de la somme par notre prestataire de paiement et procèderons au versement par la suite.
 									<?php else: ?>
 									Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
-									Le versement vers vos investisseurs est en cours.
+									Le versement vers vos investisseurs est en cours.<br /><br />
+									<?php $declaration->make_payment_certificate(); ?>
+									<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button red">Télécharger l'attestation de paiement</a>
 									<?php endif; ?>
 
 									<?php if ($is_admin): ?>
@@ -406,8 +408,10 @@
 									<?php endif; ?>
 
 									Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
-									Vos investisseurs ont bien reçu leur retour sur investissement.
-
+									Vos investisseurs ont bien reçu leur retour sur investissement.<br /><br />
+									<?php $declaration->make_payment_certificate(); ?>
+									<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button red">Télécharger l'attestation de paiement</a>
+									
 								<?php endif; ?>
 
 
