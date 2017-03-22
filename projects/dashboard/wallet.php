@@ -87,7 +87,7 @@
 			$page_edit_orga = get_page_by_path('editer-une-organisation');
 			?>
 			<?php _e( "Afin de signer votre autorisation de pr&eacute;l&egrave;vement, vous devez au pr&eacute;alable renseigner le RIB de l'organisation.", 'yproject' ); ?><br />
-			<a class="button" href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$organization_obj->get_wpref(); ?>"><?php _e('Editer', 'yproject'); ?></a><br /><br />
+			<p class="align-center"><a class="button" href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$organization_obj->get_wpref(); ?>"><?php _e('Editer', 'yproject'); ?></a></p><br /><br />
 			<button class="button disabled"><?php _e( "Signer l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
 			
 		<?php endif; ?>
@@ -232,8 +232,10 @@
 										Somme à verser : <span class="amount-to-pay">0</span> &euro;.
 										<br /><br />
 										
-										<?php _e("Informez vos investisseurs de l'état d'avancement de votre projet et de votre chiffre d'affaires !", 'yproject'); ?>
-										<?php _e("Nous leur transmettrons la nouvelle lors du versement des royalties.", 'yproject'); ?><br />
+										<?php _e("Informez vos investisseurs de l'&eacute;tat d'avancement de votre projet et de votre chiffre d'affaires, ", 'yproject'); ?>
+										<?php _e("et exprimez-leur clairement quels sont vos enjeux du moment.", 'yproject'); ?>
+										<?php _e("Eux aussi sont int&eacute;ress&eacute;s &agrave; la r&eacute;ussite de votre projet et peuvent vous soutenir de nouveau pour avancer !", 'yproject'); ?>
+										<?php _e("Nous leur transmettrons la nouvelle lors du versement des royalties.", 'yproject'); ?><br /><br />
 										<textarea name="declaration-message"></textarea>
 										<br /><br />
 
