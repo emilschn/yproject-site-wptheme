@@ -427,6 +427,13 @@
 	top: 350px;
 	left: 680px;
 }
+#page-informations #tab-organization #orgaedit_form .download-file {
+	display: block;
+	width: 290px;
+	margin-top: 10px;
+	color: #333333;
+}
+
 #page-informations #estimated-turnover {
     list-style: none;
     margin-bottom: 0px;

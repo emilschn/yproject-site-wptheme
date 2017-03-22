@@ -1301,7 +1301,7 @@ var WDGProjectDashboard = (function ($) {
 		updateOrgaFormDoc: function(feedback){
 			if(feedback.organization.doc_bank.path != null){
 				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_bank").length === 0){
-					var link_bank = $('<a id="org_doc_bank" target="_blank" href="'+feedback.organization.doc_bank.path+'">'+feedback.organization.doc_bank.date_uploaded+'</a><br />');
+					var link_bank = $('<a id="org_doc_bank" class="button blue-pale download-file" target="_blank" href="'+feedback.organization.doc_bank.path+'">'+feedback.organization.doc_bank.date_uploaded+'</a><br />');
 					link_bank.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_bank]"));
 				}
 				else{
@@ -1315,7 +1315,7 @@ var WDGProjectDashboard = (function ($) {
 
 			if(feedback.organization.doc_kbis.path != null){
 				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_kbis").length === 0){
-					var link_kbis = $('<a id="org_doc_kbis" target="_blank" href="'+feedback.organization.doc_kbis.path+'">'+feedback.organization.doc_kbis.date_uploaded+'</a><br />');
+					var link_kbis = $('<a id="org_doc_kbis" class="button blue-pale download-file" target="_blank" href="'+feedback.organization.doc_kbis.path+'">'+feedback.organization.doc_kbis.date_uploaded+'</a><br />');
 					link_kbis.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_kbis]"));
 				}
 				else{
@@ -1329,7 +1329,7 @@ var WDGProjectDashboard = (function ($) {
 
 			if(feedback.organization.doc_status.path != null){
 				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_status").length === 0){
-					var link_status = $('<a id="org_doc_status" target="_blank" href="'+feedback.organization.doc_status.path+'">'+feedback.organization.doc_status.date_uploaded+'</a><br />');
+					var link_status = $('<a id="org_doc_status" class="button blue-pale download-file" target="_blank" href="'+feedback.organization.doc_status.path+'">'+feedback.organization.doc_status.date_uploaded+'</a><br />');
 					link_status.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_status]"));
 				}
 				else{
@@ -1343,7 +1343,7 @@ var WDGProjectDashboard = (function ($) {
 
 			if(feedback.organization.doc_id.path != null){
 				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_id").length === 0){
-					var link_id = $('<a id="org_doc_id" target="_blank" href="'+feedback.organization.doc_id.path+'">'+feedback.organization.doc_id.date_uploaded+'</a><br />');
+					var link_id = $('<a id="org_doc_id" class="button blue-pale download-file" target="_blank" href="'+feedback.organization.doc_id.path+'">'+feedback.organization.doc_id.date_uploaded+'</a><br />');
 					link_id.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_id]"));
 				}
 				else{
@@ -1357,7 +1357,7 @@ var WDGProjectDashboard = (function ($) {
 
 			if(feedback.organization.doc_home.path != null){
 				if($("#tab-organization #wdg-lightbox-editOrga a#org_doc_home").length === 0){
-					var link_home = $('<a id="org_doc_home" target="_blank" href="'+feedback.organization.doc_home.path+'">'+feedback.organization.doc_home.date_uploaded+'</a><br />');
+					var link_home = $('<a id="org_doc_home" class="button blue-pale download-file" target="_blank" href="'+feedback.organization.doc_home.path+'">'+feedback.organization.doc_home.date_uploaded+'</a><br />');
 					link_home.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name=org_doc_home]"));
 				}
 				else{
@@ -1378,7 +1378,7 @@ var WDGProjectDashboard = (function ($) {
 		updateOrgaDoc: function(fileInfo, document){
 			if(fileInfo[document]['info'] !== null) { //il y a un fichier à uploader
 				if($("#tab-organization #wdg-lightbox-editOrga a#"+document).length === 0){
-					var link = $('<a id="'+document+'" target="_blank" href="'+fileInfo[document]['info']+'">'+fileInfo[document]['date']+'</a><br />');
+					var link = $('<a id="'+document+'" class="button blue-pale download-file" target="_blank" href="'+fileInfo[document]['info']+'">'+fileInfo[document]['date']+'</a><br />');
 					link.insertBefore($("#tab-organization #wdg-lightbox-editOrga input[name="+document+"]"));
 				}
 				else{
