@@ -336,6 +336,7 @@ function print_informations_page()
                 <!--bouton de création de l'organisation visible dans tous les cas -->
                 <a href="#informations" id="btn-new-orga" class="wdg-button-lightbox-open button" data-lightbox="newOrga"><?php _e("Cr&eacute;er une organisation","yproject") ?></a>               
                 <br />
+				<br />
                 <?php
                 DashboardUtility::create_save_button("orgainfo_form"); ?>
 
