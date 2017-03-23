@@ -385,6 +385,8 @@ var WDGProjectDashboard = (function ($) {
 								if(count_errors === 0){
 									$("#wdg-lightbox-newOrga ul.errors").hide();//cache les erreurs éventuellement affichées après un 1er enregistrement
 									thisForm.find('.save_ok').fadeIn();
+									$("#wdg-lightbox-newOrga").hide();
+									$("#tab-organization #wdg-lightbox-valid-newOrga").css('display', 'block');
 									//Mise à jour de l'input select
 									WDGProjectDashboard.updateOrgaSelectInput(feedback);
 

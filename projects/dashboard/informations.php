@@ -355,6 +355,11 @@ function print_informations_page()
                 $lightbox_content = ob_get_clean();
                 echo do_shortcode('[yproject_lightbox id="newOrga" scrolltop="1"]'.$lightbox_content.'[/yproject_lightbox]');
             ?>
+
+			<?php
+			$msg_valid = __("Votre nouvelle organisation a bien &eacute;t&eacute; cr&eacute;&eacute;e", "yproject");
+			echo do_shortcode('[yproject_msglightbox id="valid-newOrga" scrolltop="1" type="valid"]'.$msg_valid.'[/yproject_msglightbox]');
+			?>
         </div>
 
         <div class="tab-content" id="tab-funding">
