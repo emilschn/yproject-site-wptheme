@@ -71,14 +71,9 @@
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]--> 
 		<?php $version = '20170323'; ?>
-		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
-		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/components.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
-		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/responsive-inf997.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
-		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/responsive.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
-		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/responsive-medium.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.min.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=<?php echo $version; ?>" type="text/css" media="screen" />
-		<!--<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_tools/gulp/minCss/styles.min.css" type="text/css" media="screen" />-->
-                <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php
 			$cache_head = ob_get_contents();
 			$WDG_cache_plugin->set_cache('html-head', $cache_head, 60*60*24, 1);
