@@ -276,6 +276,8 @@ var WDGProjectDashboard = (function ($) {
 								//Affichage confirmation enregistrement
 								if (count_errors === 0){
 									thisForm.find('.save_ok').fadeIn();
+									$("#wdg-lightbox-editOrga").hide();
+									$("#tab-organization #wdg-lightbox-valid-editOrga").css('display', 'block');
 
 									//Mise à jour du reste du formulaire d'édition (input type text)
 									WDGProjectDashboard.updateOrgaForm(feedback);

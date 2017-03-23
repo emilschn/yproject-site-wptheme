@@ -357,8 +357,11 @@ function print_informations_page()
             ?>
 
 			<?php
-			$msg_valid = __("Votre nouvelle organisation a bien &eacute;t&eacute; cr&eacute;&eacute;e", "yproject");
-			echo do_shortcode('[yproject_msglightbox id="valid-newOrga" scrolltop="1" type="valid"]'.$msg_valid.'[/yproject_msglightbox]');
+			$msg_valid_newOrga = __("Votre nouvelle organisation a bien &eacute;t&eacute; cr&eacute;&eacute;e", "yproject");
+			echo do_shortcode('[yproject_msglightbox id="valid-newOrga" scrolltop="1" type="valid"]'.$msg_valid_newOrga.'[/yproject_msglightbox]');
+
+			$msg_valid_editOrga = __("Les informations ont bien &eacute;t&eacute; enregistr&eacute;es", "yproject");
+			echo do_shortcode('[yproject_msglightbox id="valid-editOrga" scrolltop="1" type="valid"]'.$msg_valid_editOrga.'[/yproject_msglightbox]');
 			?>
         </div>
 
