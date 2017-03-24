@@ -90,7 +90,7 @@ if ($can_modify) {
 		</div>
 
 		<div class="project-description-item" data-content="economic_model">
-			<div class="projects-desc-content-picto">
+			<div id="top-economic_model" class="projects-desc-content-picto">
 				<img class="project-content-icon vertical-align-middle" src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/description-financier.png" alt="model" />
 			</div>
 			<div id="project-content-economic_model" class="projects-desc-content">
