@@ -20,7 +20,10 @@ global $campaign_id
                 <label for="org_email"><?php _e('e-mail de contact', 'yproject'); ?>*</label>
                 <input type="text" name="org_email" value="<?php echo filter_input(INPUT_POST, 'org_email'); ?>" /><br />
 
-                <?php /*
+                <label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?>*</label>
+                <input type="text" name="org_description" value="<?php echo filter_input(INPUT_POST, 'org_description'); ?>" /><br />
+
+				<?php /*
                 <label for="org_type"><?php _e('Type d&apos;organisation', 'yproject'); ?></label>
                 <em>Pour l&apos;instant, seules les sociétés peuvent investir.</em><br />
                  */ ?>
@@ -76,9 +79,11 @@ global $campaign_id
                 <input type="text" name="org_bankownerbic" value="<?php echo filter_input(INPUT_POST, 'org_bankownerbic'); ?>" /> <br />
 
                 <input type="checkbox" name="org_capable" /><?php _e('Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette organisation', 'yproject'); ?>*<br />
+				<br />
+				<p class="required-mention">* <?php _e('Obligatoire', 'yproject'); ?></p>
 
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
-                
+
                 <?php DashboardUtility::create_save_button("orgacreate_form"); ?>
         </form>
 

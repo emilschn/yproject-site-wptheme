@@ -308,7 +308,7 @@ function print_informations_page()
                     }
                 }			
                 ?>
-                <label for="project-organization">Organisation :</label>
+                <label for="project-organization"><?php _e("Organisation li&eacute;e au projet"); ?> :</label>
                 <?php if ($str_organizations != ''): ?>
                     <span class="field-value" data-type="select" data-id="new_project_organization">
                         <select name="project-organization" id="new_project_organization">
@@ -318,7 +318,8 @@ function print_informations_page()
 					<!--bouton d'édition de l'organisation-->
 					<a href="#informations" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga" style="display: none;">
 						<?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organization->name ?></a>
-
+					<?php DashboardUtility::create_save_button("orgainfo_form"); ?>
+					<p id="save-mention" class="hidden"><?php _e("Veuillez enregistrer l'organisation choisie pour la lier à votre projet", "yproject"); ?></p>
                 <?php else: ?>
                     <?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
                     <input type="hidden" name="project-organization" value="" />
@@ -327,8 +328,7 @@ function print_informations_page()
                 <!--bouton de création de l'organisation visible dans tous les cas -->
                 <a href="#informations" id="btn-new-orga" class="wdg-button-lightbox-open button" data-lightbox="newOrga"><?php _e("Cr&eacute;er une organisation","yproject") ?></a>               
                 <br />
-                <?php
-                DashboardUtility::create_save_button("orgainfo_form"); ?>
+				<br />
 
             </form> 
             <?php
@@ -345,6 +345,17 @@ function print_informations_page()
                 $lightbox_content = ob_get_clean();
                 echo do_shortcode('[yproject_lightbox id="newOrga" scrolltop="1"]'.$lightbox_content.'[/yproject_lightbox]');
             ?>
+
+			<?php
+			$msg_valid_changeOrga = __("L'organisation a bien &eacute;t&eacute; li&eacute;e au projet", "yproject");
+			echo do_shortcode('[yproject_msglightbox id="valid-changeOrga" scrolltop="1" type="valid"]'.$msg_valid_changeOrga.'[/yproject_msglightbox]');
+
+			$msg_valid_newOrga = __("Votre nouvelle organisation a bien &eacute;t&eacute; cr&eacute;&eacute;e", "yproject");
+			echo do_shortcode('[yproject_msglightbox id="valid-newOrga" scrolltop="1" type="valid"]'.$msg_valid_newOrga.'[/yproject_msglightbox]');
+
+			$msg_valid_editOrga = __("Les informations ont bien &eacute;t&eacute; enregistr&eacute;es", "yproject");
+			echo do_shortcode('[yproject_msglightbox id="valid-editOrga" scrolltop="1" type="valid"]'.$msg_valid_editOrga.'[/yproject_msglightbox]');
+			?>
         </div>
 
         <div class="tab-content" id="tab-funding">
