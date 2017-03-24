@@ -25,7 +25,7 @@
     </div>
 
 	<div id="welcome-part-3" class="hidden">
-		<p>D'ici votre prochain point avec notre équipe, complétez vos informations !</p>
+		<p>Complétez vos informations avant le prochain point avec notre équipe !</p>
 
 		<p class="align-center">
 			<a class="button red" id="wdg-lightbox-welcome-close">J'y vais</a>
