@@ -219,12 +219,10 @@ var WDGProjectDashboard = (function ($) {
 							if($(".save_ok").length > 0) $(".save_ok").hide();
 							if($("#orgainfo_form i.fa.validation").length > 0) $("#orgainfo_form i.fa.validation").remove();
 							if($("#new_project_organization").hasClass("validation")) $("#new_project_organization").removeClass("validation");
-							if($("#save-mention").length === 0) {
-								$("<p id='save-mention'>Veuillez enregistrer l'organisation choisie pour la lier à votre projet</p>").insertAfter($("#edit-orga-button"));
-							}
+							if($("#save-mention").is(":hidden")) $("#save-mention").show();
 							//
 						}else{
-							if($("#save-mention").length > 0) $("#save-mention").remove();
+							if($("#save-mention").is(":visible")) $("#save-mention").hide();
 							$("#edit-orga-button").show();
 						}
 						$("#wdg-lightbox-editOrga ul.errors li").remove();
@@ -683,7 +681,7 @@ var WDGProjectDashboard = (function ($) {
                             WDGProjectDashboard.updateOrgaForm(feedback);
 							//Mise à jour des liens de téléchargement des docs du formulaire d'édition
 							WDGProjectDashboard.updateOrgaFormDoc(feedback);
-							$("#save-mention").remove();
+							$("#save-mention").hide();
 							$("#orgainfo_form_button").hide();
 							new_project_organization = $("#new_project_organization option:selected").val();
                         }

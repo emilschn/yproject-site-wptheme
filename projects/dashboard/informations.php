@@ -328,7 +328,8 @@ function print_informations_page()
 					<!--bouton d'édition de l'organisation-->
 					<a href="#informations" id="edit-orga-button" class="wdg-button-lightbox-open button" data-lightbox="editOrga" style="display: none;">
 						<?php _e("&Eacute;diter", "yproject"); echo '&nbsp;'.$current_organization->name ?></a>
-
+					<?php DashboardUtility::create_save_button("orgainfo_form"); ?>
+					<p id="save-mention" class="hidden"><?php _e("Veuillez enregistrer l'organisation choisie pour la lier à votre projet", "yproject"); ?></p>
                 <?php else: ?>
                     <?php _e('Le porteur de projet n&apos;est li&eacute; &agrave; aucune organisation.', 'yproject'); ?>
                     <input type="hidden" name="project-organization" value="" />
@@ -338,8 +339,6 @@ function print_informations_page()
                 <a href="#informations" id="btn-new-orga" class="wdg-button-lightbox-open button" data-lightbox="newOrga"><?php _e("Cr&eacute;er une organisation","yproject") ?></a>               
                 <br />
 				<br />
-                <?php
-                DashboardUtility::create_save_button("orgainfo_form"); ?>
 
             </form> 
             <?php
