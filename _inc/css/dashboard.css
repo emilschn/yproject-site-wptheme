@@ -411,10 +411,7 @@
     padding: 10px 0px;
 }
 #page-informations #tab-organization #orgainfo_form_button {
-	display: block;
-	position: absolute;
-	top: 310px;
-	left: 800px;
+	display: inline;
 }
 #page-informations #tab-organization #btn-new-orga {
 	display: block;
