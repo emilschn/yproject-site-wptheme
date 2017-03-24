@@ -1533,6 +1533,25 @@ function yproject_shortcode_widelightbox($atts, $content = '') {
 }
 add_shortcode('yproject_widelightbox', 'yproject_shortcode_widelightbox');
 
+//Shortcode ligthbox messages info/validé/erreur
+//id: valid / error / info
+//type: valid / error / info
+function yproject_shortcode_msglightbox($atts, $content = '') {
+    $atts = shortcode_atts( array(
+	'id' => 'lightbox',
+	'scrolltop' => '',
+	'type' => 'msg',
+    ), $atts );
+    return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox msg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].'>
+		<div class="wdg-lightbox-click-catcher"></div>
+		<div class="wdg-lightbox-padder '.$atts['type'].'-msg">
+		    <div class="wdg-lightbox-button-close">
+			<a href="#" class="button">X</a>
+		    </div>'.do_shortcode($content).'
+		</div>
+	    </div>';
+}
+add_shortcode('yproject_msglightbox', 'yproject_shortcode_msglightbox');
 
 //Shortcodes lightbox Connexion
 function yproject_shortcode_connexion_lightbox($atts, $content = '') {
