@@ -683,6 +683,8 @@ var WDGProjectDashboard = (function ($) {
 							WDGProjectDashboard.updateOrgaFormDoc(feedback);
 							$("#save-mention").hide();
 							$("#orgainfo_form_button").hide();
+							thisForm.find('.save_ok').hide();
+							$("#tab-organization #wdg-lightbox-valid-changeOrga").css('display', 'block');
 							new_project_organization = $("#new_project_organization option:selected").val();
                         }
                    }

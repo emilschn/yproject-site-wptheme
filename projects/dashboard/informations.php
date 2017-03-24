@@ -357,6 +357,9 @@ function print_informations_page()
             ?>
 
 			<?php
+			$msg_valid_changeOrga = __("L'organisation a bien &eacute;t&eacute; li&eacute;e au projet", "yproject");
+			echo do_shortcode('[yproject_msglightbox id="valid-changeOrga" scrolltop="1" type="valid"]'.$msg_valid_changeOrga.'[/yproject_msglightbox]');
+
 			$msg_valid_newOrga = __("Votre nouvelle organisation a bien &eacute;t&eacute; cr&eacute;&eacute;e", "yproject");
 			echo do_shortcode('[yproject_msglightbox id="valid-newOrga" scrolltop="1" type="valid"]'.$msg_valid_newOrga.'[/yproject_msglightbox]');
 
