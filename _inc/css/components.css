@@ -223,6 +223,7 @@
 	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
 	height: 555px;
+	margin: auto;
 }
 @media screen and (min-width: 1200px) {
 	.wdg-component-projects-preview .block-projects {
@@ -522,7 +523,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 /*******************************************************************************
 * LIGHTBOX CONNECTION
 *******************************************************************************/
-#wdg-lightbox-register #connexion_facebook_container a.social_connect_login_facebook, #wdg-lightbox-connexion #connexion_facebook_container a.social_connect_login_facebook {
+#connexion_facebook_container a.social_connect_login_facebook {
 	padding: 4px 5px 5px;
 	font-size: 12pt;
 	text-transform: uppercase;

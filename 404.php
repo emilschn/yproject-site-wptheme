@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div id="content">
+<div id="content" style="margin-top: 90px;">
 	<div class="padder one-column">
 		<div class="center">
 
