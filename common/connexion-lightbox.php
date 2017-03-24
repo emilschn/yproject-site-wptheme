@@ -1,4 +1,6 @@
-<div id="connect-form" class="align-center">
+<?php global $signup_errors; $has_register_errors = ($signup_errors->get_error_message() != ""); ?>
+
+<div id="connect-form" class="align-center <?php if ($has_register_errors): ?>specific-hidden<?php endif; ?>">
 	<?php if (WDGUser::has_login_errors()): ?>
 	<div class="errors">
 		<?php echo WDGUser::display_login_errors(); ?>

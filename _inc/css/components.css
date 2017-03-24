@@ -671,3 +671,6 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	font-size: 12pt;
 	color: #FFF;
 }
+#wdg-lightbox-newproject #connect-form.specific-hidden {
+	display: none;
+}
