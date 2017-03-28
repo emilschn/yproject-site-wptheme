@@ -7,7 +7,7 @@
 
 <?php
 if (!is_user_logged_in()) {
-	wp_redirect(home_url());
+	wp_redirect( home_url( '/connexion' ) . '?redirect-page=mon-compte' );
 }
 $display_loggedin_user = true;
 if ($display_loggedin_user) {

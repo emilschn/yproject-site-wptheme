@@ -70,7 +70,7 @@
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]--> 
-		<?php $version = '20170315'; ?>
+		<?php $version = '20170323'; ?>
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/components.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/responsive-inf997.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
@@ -172,10 +172,18 @@
 					</div>
 
 					<div class="box_connection_buttons blue">
-						<a href="javascript:void(0);" class="social_connect_login_facebook"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
+						<?php
+						$fb = new Facebook\Facebook([
+							'app_id' => YP_FB_APP_ID,
+							'app_secret' => YP_FB_SECRET,
+							'default_graph_version' => 'v2.8',
+						]);
+						$helper = $fb->getRedirectLoginHelper();
+						$permissions = ['email'];
+						$loginUrl = $helper->getLoginUrl( home_url( '/connexion/?fbcallback=1' ) , $permissions);
+						?>
+						<a href="<?php echo $loginUrl; ?>" class="social_connect_login_facebook"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
 					</div>
-
-					<div class="hidden"><?php dynamic_sidebar('sidebar-1'); ?></div>
 
 					<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 2px 0 0; color: #000000; margin: 5% 5%;"/>
 

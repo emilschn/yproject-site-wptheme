@@ -188,7 +188,7 @@ function print_resume_page()
             </div>
 
             <div class="list-button">
-                <a href="#statsadvanced" class="wdg-button-lightbox-open button" data-lightbox="statsadvanced"><i class="fa fa-line-chart"></i>  Statistiques d&eacute;taill&eacute;s</a>
+                <a href="#statsadvanced" class="wdg-button-lightbox-open button" data-lightbox="statsadvanced"><i class="fa fa-line-chart"></i>  Statistiques d&eacute;taill&eacute;es</a>
             </div>
             <script type="text/javascript">
                 jQuery(document).ready( function($) {

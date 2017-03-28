@@ -282,8 +282,15 @@ WDGInvestPageFunctions = (function($) {
 				var formData = new FormData();
 				formData.append('action', 'save_user_docs');
 				formData.append('campaign_id', $("#invest_form").data("campaignid"));
-				formData.append('user_doc_id', $('#user_doc_id')[0].files[0]);
-				formData.append('user_doc_home', $('#user_doc_home')[0].files[0]);
+				if ($('#org_doc_id').length > 0) {
+					formData.append('org_doc_id', $('#org_doc_id')[0].files[0]);
+					formData.append('org_doc_home', $('#org_doc_home')[0].files[0]);
+					formData.append('org_doc_kbis', $('#org_doc_kbis')[0].files[0]);
+					formData.append('org_doc_status', $('#org_doc_status')[0].files[0]);
+				} else {
+					formData.append('user_doc_id', $('#user_doc_id')[0].files[0]);
+					formData.append('user_doc_home', $('#user_doc_home')[0].files[0]);
+				}
 				$.ajax({
 					'type' : "POST",
 					'url' : ajax_object.ajax_url,

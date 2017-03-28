@@ -31,9 +31,19 @@
 				<input type="hidden" name="login-form" value="1" />
             </div>
         </form>
-
+	
         <div id="connexion_facebook_container" class="box_connection_buttons blue">
-            <a href="javascript:void(0);" class="social_connect_login_facebook">&nbsp;Se connecter avec Facebook</a>
+			<?php
+			$fb = new Facebook\Facebook([
+				'app_id' => YP_FB_APP_ID,
+				'app_secret' => YP_FB_SECRET,
+				'default_graph_version' => 'v2.8',
+			]);
+			$helper = $fb->getRedirectLoginHelper();
+			$permissions = ['email'];
+			$loginUrl = $helper->getLoginUrl( home_url( '/connexion/?fbcallback=1' ) , $permissions);
+			?>
+            <a href="<?php echo $loginUrl; ?>" class="social_connect_login_facebook">&nbsp;Se connecter avec Facebook</a>
         </div>
 
         <div class="box_connection_buttons red">
@@ -41,8 +51,6 @@
 				<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register">Cr&eacute;er mon compte</a>
 			</div>
         </div>
-
-        <div class="hidden"><?php dynamic_sidebar('sidebar-1'); ?></div>
 
 </div>
 

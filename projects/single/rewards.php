@@ -96,7 +96,10 @@ $estimated_turnover = $campaign->estimated_turnover();
 					(<?php _e("soit", 'yproject'); ?> <span class="roi_ratio_on_total">...</span> <?php echo __("en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>)
 				</span><br />
 
-				<span class="small-alert">* <?php echo sprintf( __("Ces valeurs sont estim&eacute;es selon les pr&eacute;visions du porteur de projet. Risque de perte int&eacute;grale de l&apos;investissement. Gain maximum : x%s.", "yproject"), $campaign->maximum_profit() ); ?></span>
+				<span class="small-alert">* <?php _e("Ces valeurs sont estim&eacute;es selon", "yproject");?>&nbsp;
+					<a href="#top-economic_model"><?php _e("les pr&eacute;visions du porteur de projet", "yproject")?></a>.
+					<?php echo sprintf( __("Risque de perte int&eacute;grale de l&apos;investissement. Gain maximum : x%s.", "yproject"), $campaign->maximum_profit() ); ?>
+				</span>
 			</div>
 
 			<?php if ($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
