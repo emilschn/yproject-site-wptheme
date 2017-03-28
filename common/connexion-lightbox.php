@@ -1,29 +1,42 @@
 <?php global $signup_errors; $has_register_errors = ($signup_errors->get_error_message() != ""); ?>
 
-<div id="connect-form" class="align-center <?php if ($has_register_errors): ?>specific-hidden<?php endif; ?>">
+<div id="connect-form" class="align-center wdg-lightbox-ref <?php if ($has_register_errors): ?>specific-hidden<?php endif; ?>">
 	<?php if (WDGUser::has_login_errors()): ?>
 	<div class="errors">
 		<?php echo WDGUser::display_login_errors(); ?>
 	</div>
 	<?php endif; ?>
     
-        <form method="post" action="" name="login-form" id="sidebar-login-form" class="standard-form">
+        <form method="post" action="" name="login-form" id="sidebar-login-form" class="db-form form-register">
 			<h2><?php _e('Inscription et connexion', 'yproject'); ?></h2>
 			
-            <input id="identifiant" type="text" name="log" placeholder="Identifiant ou e-mail" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" />
-            <br />
-
-            <input id="password" type="password" name="pwd" placeholder="Mot de passe" value="" style="margin: 5px;" />
-            <br />
+			<div class="field">
+				<label for="signin_username"><?php _e( 'Identifiant ou e-mail', 'yproject' ); ?> *</label>
+				<div class="field-container">
+					<span class="field-value">
+						<input type="text" name="log" id="signin_username" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" autofocus />
+					</span>
+				</div>
+			</div>
+			
+			<div class="field">
+				<label for="signin_password"><?php _e( 'Mot de passe', 'yproject' ); ?> *</label>
+				<div class="field-container">
+					<span class="field-value">
+						<input type="password" name="pwd" id="signin_password" value="" />
+					</span>
+				</div>
+			</div>
 	    
             <div id="sidebar-login-form-lightbox">
-				<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-				<a href="<?php echo get_permalink($page_forgotten->ID); ?>" >(Mot de passe oubli&eacute;)</a>
+				<a href="<?php echo home_url( '/mot-de-passe-oublie' ); ?>" >(<?php _e("Mot de passe oubli&eacute;", 'yproject'); ?>)</a>
             </div>
 
-			<input id="sidebar-rememberme" type="checkbox" name="rememberme" value="forever" />
-			<label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
-			<br />
+			
+			<div class="field">
+				<input id="signin_rememberme" type="checkbox" name="rememberme" value="forever" />
+				<label for="signin_rememberme" style="width: auto;"><?php _e( 'Se souvenir de moi', 'yproject' ); ?></label>
+			</div>
             
             <div class="box_connection_buttons red" id="submit-center">
                 <input type="submit"  name="wp-submit" id="sidebar-wp-submit-lightbox" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
@@ -43,12 +56,12 @@
 			$permissions = ['email'];
 			$loginUrl = $helper->getLoginUrl( home_url( '/connexion/?fbcallback=1' ) , $permissions);
 			?>
-            <a href="<?php echo $loginUrl; ?>" class="social_connect_login_facebook">&nbsp;Se connecter avec Facebook</a>
+            <a href="<?php echo $loginUrl; ?>" class="social_connect_login_facebook">&nbsp;<?php _e("Se connecter avec Facebook", 'yproject'); ?></a>
         </div>
 
         <div class="box_connection_buttons red">
 			<div id="submenu_item_connection_register">
-				<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register">Cr&eacute;er mon compte</a>
+				<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><?php _e("Cr&eacute;er mon compte", 'yproject'); ?></a>
 			</div>
         </div>
 

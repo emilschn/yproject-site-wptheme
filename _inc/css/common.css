@@ -113,7 +113,7 @@ button.red {
 }
 .wdg-lightbox-ref .db-form .field label{
 	display: inline-block;
-	width: 220px;
+	width: 240px;
 	margin: 3px 30px 3px 0px;
 	font-weight: bold;
 	text-align: left;
@@ -125,12 +125,10 @@ button.red {
 .wdg-lightbox-ref .db-form .field-container.field-type-check {
 	display: inline-block;
 }
-.wdg-lightbox-ref .db-form .field-container input[type=text] {
+.wdg-lightbox-ref .db-form .field-container input[type=text], .wdg-lightbox-ref .db-form .field-container input[type=password] {
+	width: 260px;
 	height: 30px;
 	border: none;
-}
-.wdg-lightbox-ref .db-form .field-container input[type=text] {
-	width: 240px;
 }
 .wdg-lightbox-ref .db-form .field-container select {
 	width: 255px;

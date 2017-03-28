@@ -618,7 +618,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
     text-align: center;
 }
 .wdg-lightbox div.submit {
-    margin: 10px 0px;
+    margin: 10px auto;
     text-align: center;
 }
 
