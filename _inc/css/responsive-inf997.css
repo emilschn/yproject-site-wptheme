@@ -267,3 +267,10 @@
 		width: calc(100% - 8px);
 	}
 }
+/* Positionnement bouton ok du bandeau cookie par rapport à l'icône Crisp*/
+@media screen and (min-width: 341px) and (max-width: 373px) {
+	#cookies-alert button#cookies-alert-close {
+		display: block;
+		margin: 0 auto;
+	}
+}
