@@ -196,6 +196,7 @@ WDGInvestPageFunctions = (function($) {
 				$("#lightbox_orgainfos_form_errors").append("<li>"+jsonInfos.errors[i]+"</li>");
 			}
 			if (jsonInfos.org_name != undefined) {
+				$("#org_description").val(jsonInfos.org_description);
 				$("#org_legalform").val(jsonInfos.org_legalform);
 				$("#org_idnumber").val(jsonInfos.org_idnumber);
 				$("#org_rcs").val(jsonInfos.org_rcs);
@@ -228,6 +229,7 @@ WDGInvestPageFunctions = (function($) {
 							'campaign_id': $("#invest_form").data("campaignid"),
 							'org_name': $("#org_name").val(),
 							'org_email': $("#org_email").val(),
+							'org_description': $("#org_description").val(),
 							'org_legalform': $("#org_legalform").val(),
 							'org_idnumber': $("#org_idnumber").val(),
 							'org_rcs': $("#org_rcs").val(),
