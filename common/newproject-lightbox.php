@@ -8,6 +8,8 @@ if ($organizations_list) {
 		$organizations_options_id[] = $organization_item->wpref;
 		$organizations_options_names[] = $organization_item->name;
 	}
+	array_push($organizations_options_id, "new_orga");
+	array_push($organizations_options_names, "Une nouvelle organisation...");
 }
 ?>
 
@@ -75,6 +77,13 @@ if ($organizations_list) {
 			"value"		=> "",
 		));
 	}
+
+	DashboardUtility::create_field(array(
+		"id"		=> "new-company-name",
+		"type"		=> "text",
+		"label"		=> "Nom de l'organisation",
+		"value"		=> "",
+	));
 
     DashboardUtility::create_field(array(
         "id"		=> "project-name",
