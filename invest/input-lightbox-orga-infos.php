@@ -17,7 +17,10 @@ ob_start();
 	
 	<label for="org_email" class="standard-label"><?php _e("E-mail de contact", 'yproject'); ?></label>
 	<input type="text" name="org_email" id="org_email" value="" /><span id="org_email_label"></span><br />
-	
+
+	<label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?></label>
+	<input type="text" name="org_description" id="org_description" value="" /><br />
+
 	<label for="org_legalform" class="standard-label"><?php _e("Forme juridique", 'yproject'); ?></label>
 	<input type="text" name="org_legalform" id="org_legalform" value="" /><br />
 
