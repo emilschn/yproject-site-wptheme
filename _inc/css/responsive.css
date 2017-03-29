@@ -285,9 +285,6 @@
 		height: 25px;
 		font-size: 20px;
 	}
-	.form-register .tool-tip { width: 100px !important; margin-top: -35px !important; }
-	.form-register .on-focus:nth-child(1) .tool-tip { margin-top: 0px !important; }
-	.form-register .on-focus:nth-child(4) .tool-tip { margin-top: -55px !important; }
 	#signup_form .submit, #signup_form #signin-button { float: none !important; }
 	#signup_form #connexion_facebook_container { margin: 15px auto !important; }
 
