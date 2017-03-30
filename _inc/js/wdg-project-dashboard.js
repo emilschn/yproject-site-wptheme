@@ -299,7 +299,7 @@ var WDGProjectDashboard = (function ($) {
 							.removeAttr('checked')
 							.removeAttr('selected');
 						$("#orgacreate_form").find('.save_ok').fadeOut();
-						$("#wdg-lightbox-newOrga ul.errors").show();
+						$("#wdg-lightbox-newOrga p.errors").remove();
 					});
 
 					//fermeture de la lightbox de création d'organisation après enregistrement
@@ -370,20 +370,33 @@ var WDGProjectDashboard = (function ($) {
 								feedback = jsonResult;
 
 								//Vérification s'il y a des erreurs dans le formulaire
-								$("#wdg-lightbox-newOrga ul.errors li").remove();//supprime les erreurs éventuellement affichées après un 1er enregistrement
+								$("#wdg-lightbox-newOrga p.errors").remove();//supprime les erreurs éventuellement affichées après un 1er enregistrement
 								var errors = feedback.errors;
 								var count_errors = 0;
 								for (var error in errors){
 									if(error !== ""){
 										count_errors+=1;
-										var li = $('<li>'+errors[error]+'</li>');
-										$("#wdg-lightbox-newOrga ul.errors").append(li);
-										WDGProjectDashboard.scrollTo($("#wdg-lightbox-newOrga ul.errors"));
+										var err = $('<p class="errors">'+errors[error]+'</p>');
+										if(error !== "org_capable"){
+											err.insertAfter($("#orgacreate_form input[name="+error+"]"));
+										}
+										if(error === "org_nationality") {
+											err.insertAfter($("#orgacreate_form select#org_nationality"));
+										}
+										if(error === "org_capable") {
+											err.insertAfter($("#orgacreate_form input[name="+error+"]").next());
+										}
+									}
+								}
+								if(count_errors > 1) {
+									var firsterror = thisForm.find(".errors").first();
+									if(firsterror.length === 1){
+										WDGProjectDashboard.scrollTo(firsterror);
 									}
 								}
 								//Affichage confirmation enregistrement
 								if(count_errors === 0){
-									$("#wdg-lightbox-newOrga ul.errors").hide();//cache les erreurs éventuellement affichées après un 1er enregistrement
+									$("#wdg-lightbox-newOrga p.errors").hide();//cache les erreurs éventuellement affichées après un 1er enregistrement
 									thisForm.find('.save_ok').fadeIn();
 									$("#wdg-lightbox-newOrga").hide();
 									$("#tab-organization #wdg-lightbox-valid-newOrga").css('display', 'block');
