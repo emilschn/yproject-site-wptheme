@@ -23,7 +23,6 @@ $organization_obj->submit_transfer_wallet_lemonway();
 <div class="center margin-height">
 
 
-		<ul class="errors"></ul>
 
         <h1><?php _e('&Eacute;diter l\'organisation portant le projet','yproject'); echo "&nbsp;"; ?></h1>
 
@@ -38,38 +37,38 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 <em id="org_name"><?php echo $organization_obj->get_name(); ?></em><br />
 
 
-                <label for="org_email"><?php _e('E-mail de contact', 'yproject'); ?></label>
+                <label for="org_email"><?php _e('E-mail de contact', 'yproject'); ?>*</label>
                 <input type="text" name="org_email" value="<?php echo $organization_obj->get_email(); ?>" /><br />
 
-                <label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?></label>
+                <label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?>*</label>
                 <input type="text" name="org_description" value="<?php echo $organization_obj->get_description(); ?>" /><br />
 
-                <label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?></label>
+                <label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?>*</label>
                 <input type="text" name="org_legalform" value="<?php echo $organization_obj->get_legalform(); ?>" /><br />
 
-                <label for="org_idnumber"><?php _e('Num&eacute;ro SIREN', 'yproject'); ?></label>
+                <label for="org_idnumber"><?php _e('Num&eacute;ro SIREN', 'yproject'); ?>*</label>
                 <input type="text" name="org_idnumber" value="<?php echo $organization_obj->get_idnumber(); ?>" /><br />
 
-                <label for="org_rcs"><?php _e('RCS', 'yproject'); ?></label>
+                <label for="org_rcs"><?php _e('RCS', 'yproject'); ?>*</label>
                 <input type="text" name="org_rcs" value="<?php echo $organization_obj->get_rcs(); ?>" /><br />
 
-                <label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?></label>
+                <label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?>*</label>
                 <input type="text" name="org_capital" value="<?php echo $organization_obj->get_capital(); ?>" /><br />
 
-                <label for="org_ape"><?php _e('Code APE', 'yproject'); ?></label>
+                <label for="org_ape"><?php _e('Code APE', 'yproject'); ?>*</label>
                 <input type="text" name="org_ape" value="<?php echo $organization_obj->get_ape(); ?>" /><br />
 
                 <h2 class="underlined"><?php _e('Si&egrave;ge social', 'yproject'); ?></h2>
-                <label for="org_address"><?php _e('Adresse', 'yproject'); ?></label>
+                <label for="org_address"><?php _e('Adresse', 'yproject'); ?>*</label>
                 <input type="text" name="org_address" value="<?php echo $organization_obj->get_address(); ?>" /><br />
 
-                <label for="org_postal_code"><?php _e('Code postal', 'yproject'); ?></label>
+                <label for="org_postal_code"><?php _e('Code postal', 'yproject'); ?>*</label>
                 <input type="text" name="org_postal_code" value="<?php echo $organization_obj->get_postal_code(); ?>" /><br />
 
-                <label for="org_city"><?php _e('Ville', 'yproject'); ?></label>
+                <label for="org_city"><?php _e('Ville', 'yproject'); ?>*</label>
                 <input type="text" name="org_city" value="<?php echo $organization_obj->get_city(); ?>" /><br />
 
-                <label for="org_nationality"><?php _e('Pays', 'yproject'); ?></label>
+                <label for="org_nationality"><?php _e('Pays', 'yproject'); ?>*</label>
                 <select name="org_nationality" id="org_nationality">
                         <?php 
                         locate_template( array("country_list.php"), true );
