@@ -618,7 +618,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
     text-align: center;
 }
 .wdg-lightbox div.submit {
-    margin: 10px 0px;
+    margin: 10px auto;
     text-align: center;
 }
 
@@ -674,4 +674,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 .box_connection_buttons.red a {
 	font-size: 12pt;
 	color: #FFF;
+}
+#wdg-lightbox-newproject #connect-form.specific-hidden {
+	display: none;
 }

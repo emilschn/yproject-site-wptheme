@@ -120,5 +120,5 @@ else {
 
 
 <section id="home-press" class="hidden-inf997">
-	<a href="<?php echo home_url( '/press-book' ); ?>"><img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse.jpg" alt="presse" /></a>
+	<a href="<?php echo home_url( '/press-book' ); ?>"><img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse-mars-2017.png" alt="presse" /></a>
 </section> <!-- section#home-press -->

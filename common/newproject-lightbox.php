@@ -8,15 +8,18 @@ if ($organizations_list) {
 		$organizations_options_id[] = $organization_item->wpref;
 		$organizations_options_names[] = $organization_item->name;
 	}
+	array_push($organizations_options_id, "new_orga");
+	array_push($organizations_options_names, "Une nouvelle organisation...");
 }
 ?>
 
 <?php if (!is_user_logged_in()): ?>
     <p class="align-center"><?php _e('Connectez-vous afin de cr&eacute;er un projet.', 'yproject'); ?></p>
 	
+	<?php global $signup_errors; $has_register_errors = ($signup_errors->get_error_message() != ""); ?>
     <?php locate_template( array("common/connexion-lightbox.php"), true, false ); ?>
 	
-	<div id="newproject-register-user" class="hidden">
+	<div id="newproject-register-user" class="<?php if (!$has_register_errors): ?>hidden<?php endif; ?>">
     <?php locate_template( array("common/register-lightbox.php"), true, false ); ?>
 	</div>
 <?php endif; ?>
@@ -74,6 +77,13 @@ if ($organizations_list) {
 			"value"		=> "",
 		));
 	}
+
+	DashboardUtility::create_field(array(
+		"id"		=> "new-company-name",
+		"type"		=> "text",
+		"label"		=> "Nom de l'organisation",
+		"value"		=> "",
+	));
 
     DashboardUtility::create_field(array(
         "id"		=> "project-name",

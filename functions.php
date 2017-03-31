@@ -54,6 +54,7 @@ function yproject_enqueue_script(){
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
 	$current_version = '20170323';
+	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
 		wp_register_script('jquery', (dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.min.js'), false);

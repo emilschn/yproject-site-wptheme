@@ -310,15 +310,45 @@ YPUIFunctions = (function($) {
 
 			//Lightbox de nouveau projet
 			if( $("#newproject_form").length > 0){
+				$('#newproject_form input#new-company-name').val(" ");
+				$('#newproject_form input#new-company-name').parent().parent().parent().hide();
+				if($('#newproject_form input#company-name').val() === ""){
+					$('#newproject_form #project-name').val("");
+				}
 				$('#newproject_form #company-name').on("keyup change", function() {
-					var val = $('#newproject_form input#company-name').length !== 0 ?  $(this).val() : $('#newproject_form select[name=company-name] option:selected').text();
-					if(val!=''){
+					$('#newproject_form input#new-company-name').parent().parent().parent().hide();
+					var val = "";
+					if($('#newproject_form input#company-name').length > 0 && $('#newproject_form input#company-name').val() !== "" ) {
+						val = $('#newproject_form input#company-name').val();
 						$('#newproject_form #project-name').val("Projet de "+val);
+						$('#newproject_form input#new-company-name').val(" ");
 					} else {
-						$('#newproject_form #project-name').val('');
+						if($('#newproject_form select[name=company-name]').length > 0) {
+							var option = $('#newproject_form select[name=company-name] option:selected').val();
+							if(option !== "new_orga"){
+								val = $('#newproject_form select[name=company-name] option:selected').text();
+								$('#newproject_form #project-name').val("Projet de "+val);
+								$('#newproject_form input#new-company-name').val(" ");
+							} else {
+								$('#newproject_form input#new-company-name').val("");
+								$('#newproject_form #project-name').val('');
+								$('#newproject_form input#new-company-name').parent().parent().parent().show();
+								$('#newproject_form input#new-company-name').on("keyup change", function() {
+									var val = $('#newproject_form input#new-company-name').val();
+									if (val!="") {
+										$('#newproject_form #project-name').val("Projet de "+val);
+									} else {
+										$('#newproject_form #project-name').val("");
+									}
+								});
+							}
+						}
 					}
 				});
-				if($('#newproject_form #company-name') !== ''){
+				$('#newproject_form input#new-company-name').focus(function(){
+					$('#newproject_form input#new-company-name').val('');
+				});
+				if($('#newproject_form #company-name').val() !== ''){
 					var val = $('#newproject_form #company-name option:selected').text();
 					$('#newproject_form #project-name').val("Projet de "+val);
 				}

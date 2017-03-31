@@ -625,40 +625,6 @@ form.wdg-forms table input[type="text"].reward-text{
     transition: all 240ms ease-in-out;	
 }
 
-/* default heights, width and margin w/o Javscript */
-.tool-tip, .tool-tip.top {
-    width: 90px;
-    margin-left: -90px;
-}
-
-/* tool tip position right */
-.tool-tip.right:after{
-    left: -5px;
-    top: 50%;	
-    margin-top: -6px;
-    bottom: auto;
-    border-top-color: transparent;	
-    border-right-color: rgba( 0, 0, 0, .7);	
-}
-
-/* tooltip on focus left and right */
-.on-focus input {
-    width:200px;
-}
-.on-focus .tool-tip.left, .on-focus .tool-tip.right{
-    margin-top: -30px;
-}
-/* on hover of element containing tooltip default*/
-*:not(.on-focus):hover > .tool-tip, .on-focus input:focus + .tool-tip{
-    visibility: visible;
-    opacity: 1;
-    -webkit-transition: all 240ms ease-in-out;
-    -moz-transition: all 240ms ease-in-out;
-    -ms-transition: all 240ms ease-in-out;
-    -o-transition: all 240ms ease-in-out;
-    transition: all 240ms ease-in-out;
-}
-
 .colonne {
     width: 235px;
     vertical-align: top; 
@@ -673,10 +639,6 @@ form.wdg-forms table input[type="text"].reward-text{
     color: #606060;
     font-size: 11px;
     font-style: italic;
-}
-#sidebar-login-form label {
-    text-align: right;
-    font-size: 14px;
 }
 #sidebar-login-form .link-forgotten { margin-left: 140px; }
 #sidebar-login-form .link-forgotten a { color: #333333; text-align: right; font-size: 10px; font-style: italic; }
@@ -2122,11 +2084,6 @@ span#extra-comment-image{
 }
 .form-register .register-section {
     text-align: center;
-}
-.form-register .register-section div {
-    margin: 7px auto;
-    text-align: center;
-	cursor: pointer;
 }
 .form-register div#connexion_facebook_container {
     display: block;
