@@ -272,7 +272,7 @@
 * CONNECTION
 *******************************************************************************/
 	#sidebar-login-form .standard-label { width: 90px !important; }
-	#sidebar-login-form input[type="text"] { width: 245px !important; }
+	#sidebar-login-form input[type="text"], #sidebar-login-form input[type="password"] { width: 245px !important; }
 	#sidebar-login-form .link-forgotten { margin-left: 94px !important; }
 	
 /*******************************************************************************
@@ -285,9 +285,12 @@
 		height: 25px;
 		font-size: 20px;
 	}
-	.form-register .tool-tip { width: 100px !important; margin-top: -35px !important; }
-	.form-register .on-focus:nth-child(1) .tool-tip { margin-top: 0px !important; }
-	.form-register .on-focus:nth-child(4) .tool-tip { margin-top: -55px !important; }
+	#signup_form .submit, #signup_form #signin-button { float: none !important; }
+	#signup_form #connexion_facebook_container { margin: 15px auto !important; }
+
+	#wdg-lightbox-connexion #submit-center { float: none !important; }
+	#wdg-lightbox-connexion #connexion_facebook_container { float: none !important; margin: -25px auto !important; }
+	#wdg-lightbox-connexion #connexion_facebook_container.box_connection_buttons.blue { margin-top: 40px !important; }
 
 /*******************************************************************************
 * THEME PHOTOREPORTER
@@ -297,6 +300,23 @@
 	#content.theme-myphotoreporter .client-header .center { display: none; }
 }
 
+/*******************************************************************************
+* BANDEAU COOKIES
+*******************************************************************************/
+
+/* Positionnement bouton ok du bandeau cookie par rapport à l'icône Crisp*/
+@media screen and (min-width: 652px) and (max-width: 720px) {
+	#cookies-alert button#cookies-alert-close {
+		display: block;
+		margin: 0 auto;
+	}
+}
+@media screen and (min-width: 444px) and (max-width: 485px) {
+	#cookies-alert button#cookies-alert-close {
+		display: block;
+		margin: 0 auto;
+	}
+}
 
 @media screen and  (min-width: 562px) and  (max-width: 767px){
 /*******************************************************************************

@@ -196,6 +196,7 @@ WDGInvestPageFunctions = (function($) {
 				$("#lightbox_orgainfos_form_errors").append("<li>"+jsonInfos.errors[i]+"</li>");
 			}
 			if (jsonInfos.org_name != undefined) {
+				$("#org_description").val(jsonInfos.org_description);
 				$("#org_legalform").val(jsonInfos.org_legalform);
 				$("#org_idnumber").val(jsonInfos.org_idnumber);
 				$("#org_rcs").val(jsonInfos.org_rcs);
@@ -228,6 +229,7 @@ WDGInvestPageFunctions = (function($) {
 							'campaign_id': $("#invest_form").data("campaignid"),
 							'org_name': $("#org_name").val(),
 							'org_email': $("#org_email").val(),
+							'org_description': $("#org_description").val(),
 							'org_legalform': $("#org_legalform").val(),
 							'org_idnumber': $("#org_idnumber").val(),
 							'org_rcs': $("#org_rcs").val(),
@@ -282,8 +284,15 @@ WDGInvestPageFunctions = (function($) {
 				var formData = new FormData();
 				formData.append('action', 'save_user_docs');
 				formData.append('campaign_id', $("#invest_form").data("campaignid"));
-				formData.append('user_doc_id', $('#user_doc_id')[0].files[0]);
-				formData.append('user_doc_home', $('#user_doc_home')[0].files[0]);
+				if ($('#org_doc_id').length > 0) {
+					formData.append('org_doc_id', $('#org_doc_id')[0].files[0]);
+					formData.append('org_doc_home', $('#org_doc_home')[0].files[0]);
+					formData.append('org_doc_kbis', $('#org_doc_kbis')[0].files[0]);
+					formData.append('org_doc_status', $('#org_doc_status')[0].files[0]);
+				} else {
+					formData.append('user_doc_id', $('#user_doc_id')[0].files[0]);
+					formData.append('user_doc_home', $('#user_doc_home')[0].files[0]);
+				}
 				$.ajax({
 					'type' : "POST",
 					'url' : ajax_object.ajax_url,
