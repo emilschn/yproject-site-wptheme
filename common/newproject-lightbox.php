@@ -63,13 +63,20 @@ if ($organizations_list) {
 		DashboardUtility::create_field(array(
 			"id"			=> "company-name",
 			"type"			=> "select",
-			"label"			=> "Nom de mon entreprise",
+			"label"			=> "Mon entreprise",
 			"value"			=> $organizations_list,
 			"options_id"	=> array_values($organizations_options_id),
 			"options_names"	=> array_values($organizations_options_names),
 		));
-	}
-	else{
+
+		DashboardUtility::create_field(array(
+			"id"		=> "new-company-name",
+			"type"		=> "text",
+			"label"		=> "Nom de mon entreprise",
+			"value"		=> "",
+		));
+		
+	} else {
 		DashboardUtility::create_field(array(
 			"id"		=> "company-name",
 			"type"		=> "text",
@@ -77,13 +84,6 @@ if ($organizations_list) {
 			"value"		=> "",
 		));
 	}
-
-	DashboardUtility::create_field(array(
-		"id"		=> "new-company-name",
-		"type"		=> "text",
-		"label"		=> "Nom de l'organisation",
-		"value"		=> "",
-	));
 
     DashboardUtility::create_field(array(
         "id"		=> "project-name",

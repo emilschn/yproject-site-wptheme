@@ -111,7 +111,7 @@ var WDGProjectViewer = (function($) {
 	        $("#phase2").attr('style','display:none;');
 		    $("#phase3").attr('style','display:none;');
 
-			$("#wdg-lightbox-voteform-validated").attr('style','display:block !important;');
+			$("#wdg-lightbox-voteform-validated").attr('style','display: block;');
 
 		 	var phase=0;
 

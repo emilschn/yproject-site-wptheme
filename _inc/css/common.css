@@ -203,14 +203,6 @@ button.red {
 #wdg-lightbox-contactprojet .wpcf7-form p {
 	margin: 20px auto;
 }
-#wdg-lightbox-contactprojet input[type=checkbox] {
-	width: 20px;
-	height: 20px;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	margin-left: 0;
-}
 
 /*******************************************************************************
 * SCROLLBAR VISIBLE - NAVIGATEUR CHROME

@@ -455,7 +455,12 @@
 			foreach ( $transfers as $transfer_post ) :
 				$post_status = ypcf_get_updated_transfer_status($transfer_post);
 				$transfer_post = get_post($transfer_post);
-				$post_amount = $transfer_post->post_title / 100;
+				$post_amount = $transfer_post->post_title;
+				$post_date = new DateTime($transfer_post->post_date);
+				// Les versements faits via Mangopay doivent être recalculés
+				if ( $post_date < new DateTime('2016-07-01') ) {
+					$post_amount /= 100;
+				}
 				$status_str = 'En cours';
 				if ($post_status == 'publish') {
 					$status_str = 'Termin&eacute;';
