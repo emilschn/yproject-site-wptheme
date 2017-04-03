@@ -39,43 +39,41 @@ get_header();
 
 					<form action="" method="POST" enctype="multipart/form-data" class="wdg-forms">
 
-						<label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?>*</label>
+						<label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?> *</label>
 						<input type="text" name="org_name" value="<?php echo filter_input(INPUT_POST, 'org_name'); ?>" /><br />
 
-						<label for="org_email"><?php _e('e-mail de contact', 'yproject'); ?>*</label>
+						<label for="org_email"><?php _e('e-mail de contact', 'yproject'); ?> *</label>
 						<input type="text" name="org_email" value="<?php echo filter_input(INPUT_POST, 'org_email'); ?>" /><br />
 
-						<?php /*
-						<label for="org_type"><?php _e('Type d&apos;organisation', 'yproject'); ?></label>
-						<em>Pour l&apos;instant, seules les sociétés peuvent investir.</em><br />
-						 */ ?>
+						<label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?> *</label>
+						<input type="text" name="org_description" value="<?php echo filter_input(INPUT_POST, 'org_description'); ?>" /><br />
 
-						<label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?>*</label>
+						<label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?> *</label>
 						<input type="text" name="org_legalform" value="<?php echo filter_input(INPUT_POST, 'org_legalform'); ?>" /><br />
 
-						<label for="org_idnumber"><?php _e('Num&eacute;ro SIREN', 'yproject'); ?>*</label>
+						<label for="org_idnumber"><?php _e('Num&eacute;ro SIREN', 'yproject'); ?> *</label>
 						<input type="text" name="org_idnumber" value="<?php echo filter_input(INPUT_POST, 'org_idnumber'); ?>" /><br />
 
-						<label for="org_rcs"><?php _e('RCS', 'yproject'); ?>*</label>
+						<label for="org_rcs"><?php _e('RCS', 'yproject'); ?> *</label>
 						<input type="text" name="org_rcs" value="<?php echo filter_input(INPUT_POST, 'org_rcs'); ?>" /><br />
 
-						<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?>*</label>
+						<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?> *</label>
 						<input type="text" name="org_capital" value="<?php echo filter_input(INPUT_POST, 'org_capital'); ?>" /><br />
 
-						<label for="org_ape"><?php _e('Code APE', 'yproject'); ?>*</label>
+						<label for="org_ape"><?php _e('Code APE', 'yproject'); ?> *</label>
 						<input type="text" name="org_ape" value="<?php echo filter_input(INPUT_POST, 'org_ape'); ?>" /><br />
 
 						<h2><?php _e('Si&egrave;ge social', 'yproject'); ?></h2>
-						<label for="org_address"><?php _e('Adresse', 'yproject'); ?>*</label>
+						<label for="org_address"><?php _e('Adresse', 'yproject'); ?> *</label>
 						<input type="text" name="org_address" value="<?php echo filter_input(INPUT_POST, 'org_address'); ?>" /><br />
 
-						<label for="org_postal_code"><?php _e('Code postal', 'yproject'); ?>*</label>
+						<label for="org_postal_code"><?php _e('Code postal', 'yproject'); ?> *</label>
 						<input type="text" name="org_postal_code" value="<?php echo filter_input(INPUT_POST, 'org_postal_code'); ?>" /><br />
 
-						<label for="org_city"><?php _e('Ville', 'yproject'); ?>*</label>
+						<label for="org_city"><?php _e('Ville', 'yproject'); ?> *</label>
 						<input type="text" name="org_city" value="<?php echo filter_input(INPUT_POST, 'org_city'); ?>" /><br />
 
-						<label for="org_nationality"><?php _e('Pays', 'yproject'); ?>*</label>
+						<label for="org_nationality"><?php _e('Pays', 'yproject'); ?> *</label>
 						<select name="org_nationality" id="org_nationality">
 							<?php 
 							require_once("country_list.php");
