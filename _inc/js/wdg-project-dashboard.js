@@ -253,26 +253,46 @@ var WDGProjectDashboard = (function ($) {
 							'contentType': false,
 							'processData': false,
 						}).done(function(result) {
-
 							if(result === "FALSE"){//user non connecté
 								window.location.reload();//affiche message de non permission
 							}else{
 								var jsonResult = JSON.parse(result);
 								feedback = jsonResult;
 								//Vérification s'il y a des erreurs sur l'envoi de fichiers
+								$("#wdg-lightbox-editOrga p.errors").remove();
 								var fdFileInfo = feedback.files_info;
-								var count_errors = 0;
+								var count_files_errors = 0;
 								for (var doc in fdFileInfo){
-									if (fdFileInfo[doc]['code'] === 1){//erreur
-										count_errors += 1;
-										var li = $('<li>'+fdFileInfo[doc]['info']+'</li>');
-										$("#wdg-lightbox-editOrga ul.errors").append(li);
-										WDGProjectDashboard.scrollTo($("#wdg-lightbox-editOrga ul.errors"));
+									if(fdFileInfo[doc] != null) {
+										if (fdFileInfo[doc]['code'] === 1){//erreur
+											count_files_errors += 1;
+											var errFile = $('<p class="errors">'+fdFileInfo[doc]['info']+'</p>');
+											errFile.insertAfter($("#orgaedit_form input[name="+doc+"]"));
+										}
+										else {
+											WDGProjectDashboard.updateOrgaDoc(fdFileInfo, doc);//mise à jour des liens de téléchargement
+										}
 									}
-									WDGProjectDashboard.updateOrgaDoc(fdFileInfo, doc);//mise à jour des liens de téléchargement
+								}
+								//Vérification s'il y a des erreurs sur les champs
+								var fdErrorsData = feedback.errors;
+								var count_data_errors = 0;
+								for (var error in fdErrorsData){
+									if(error !== "") {
+										count_data_errors += 1;
+										var err = $("<p class='errors'>"+fdErrorsData[error]+"</p>");
+										err.insertAfter($("#orgaedit_form input[name="+error+"]"));
+									}
+								}
+								if(count_files_errors > 0) {
+									var firsterror = thisForm.find(".errors").first();
+									if(firsterror.length === 1){
+										WDGProjectDashboard.scrollTo(firsterror);
+									}
 								}
 								//Affichage confirmation enregistrement
-								if (count_errors === 0){
+								if (count_files_errors === 0 && count_data_errors === 0){
+									$("#wdg-lightbox-editOrga p.errors").hide();
 									thisForm.find('.save_ok').fadeIn();
 									$("#wdg-lightbox-editOrga").hide();
 									$("#tab-organization #wdg-lightbox-valid-editOrga").css('display', 'block');
@@ -388,7 +408,7 @@ var WDGProjectDashboard = (function ($) {
 										}
 									}
 								}
-								if(count_errors > 1) {
+								if(count_errors > 0) {
 									var firsterror = thisForm.find(".errors").first();
 									if(firsterror.length === 1){
 										WDGProjectDashboard.scrollTo(firsterror);
