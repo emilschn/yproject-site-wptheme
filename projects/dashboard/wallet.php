@@ -87,7 +87,7 @@
 			$page_edit_orga = get_page_by_path('editer-une-organisation');
 			?>
 			<?php _e( "Afin de signer votre autorisation de pr&eacute;l&egrave;vement, vous devez au pr&eacute;alable renseigner le RIB de l'organisation.", 'yproject' ); ?><br />
-			<p class="align-center"><a class="button" href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$organization_obj->get_wpref(); ?>"><?php _e('Editer', 'yproject'); ?></a></p><br /><br />
+			<p class="align-center"><a class="button red" href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$organization_obj->get_wpref(); ?>"><?php _e('Editer', 'yproject'); ?></a></p><br /><br />
 			<button class="button disabled"><?php _e( "Signer l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
 			
 		<?php endif; ?>
@@ -106,9 +106,9 @@
 			if ( empty( $saved_mandates_list ) ) {
 				$keep_going = false;
 				if ( !$organization_obj->add_lemonway_mandate() ) {
-                                        $page_edit_orga = get_page_by_path('editer-une-organisation');
+					$page_edit_orga = get_page_by_path('editer-une-organisation');
 					echo LemonwayLib::get_last_error_message(); ?>
-					<a class="button" href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$organization_obj->get_wpref(); ?>"><?php _e('Editer', 'yproject'); ?></a><br /><br />
+					<a class="button red" href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$organization_obj->get_wpref(); ?>"><?php _e('Editer', 'yproject'); ?></a><br /><br />
 					<button class="button disabled"><?php _e( "Signer l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
 					<?php
 				} else {
@@ -153,7 +153,7 @@
 				<?php else: ?>
 				<form action="<?php echo admin_url( 'admin-post.php?action=organization_sign_mandate'); ?>" method="post" class="align-center">
 					<input type="hidden" name="organization_id" value="<?php echo $organization_obj->get_wpref(); ?>" />
-					<button type="submit" class="button"><?php _e( "Signer l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
+					<button type="submit" class="button red"><?php _e( "Signer l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
 				</form>
 				<?php endif; ?>
 				
@@ -241,7 +241,7 @@
 
 										<input type="hidden" name="action" value="save-turnover-declaration" />
 										<input type="hidden" name="declaration-id" value="<?php echo $declaration->id; ?>" />
-										<button type="submit" class="button">Enregistrer la déclaration</button>
+										<button type="submit" class="button red">Enregistrer la déclaration</button>
 									</form>
 
 								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
@@ -279,7 +279,7 @@
 									<form action="" method="POST" enctype="">
 										<input type="hidden" name="action" value="proceed_roi" />
 										<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
-										<input type="submit" name="payment_card" class="button" value="<?php _e('Payer par carte', 'yproject'); ?>" />
+										<input type="submit" name="payment_card" class="button red" value="<?php _e('Payer par carte', 'yproject'); ?>" />
 									</form>
 									<br />
 
@@ -306,7 +306,7 @@
 									<form action="" method="POST" enctype="">
 										<input type="hidden" name="action" value="proceed_roi" />
 										<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
-										<input type="submit" name="payment_bank_transfer" class="button" value="<?php _e('Payer par virement bancaire', 'yproject'); ?>" />
+										<input type="submit" name="payment_bank_transfer" class="button red" value="<?php _e('Payer par virement bancaire', 'yproject'); ?>" />
 									</form>
 
 
@@ -345,12 +345,14 @@
 									Nous attendons la réception de la somme par notre prestataire de paiement et procèderons au versement par la suite.
 									<?php else: ?>
 									Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
-									Le versement vers vos investisseurs est en cours.
+									Le versement vers vos investisseurs est en cours.<br /><br />
+									<?php $declaration->make_payment_certificate(); ?>
+									<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue">Télécharger l'attestation de paiement</a>
 									<?php endif; ?>
 
 									<?php if ($is_admin): ?>
 										<br /><br />
-										<a href="#transfer-roi" class="button transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>">Procéder aux versements</a>
+										<a href="#transfer-roi" class="button red transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>">Procéder aux versements</a>
 
 										<?php ob_start(); ?>
 										<h3><?php _e('Reverser aux utilisateurs', 'yproject'); ?></h3>
@@ -362,7 +364,7 @@
 													<input type="checkbox" name="send_notifications" value="1" checked="checked" /> Envoyer un mail automatique aux investisseurs<br /><br />
 													<input type="hidden" name="action" value="proceed_roi_transfers" />
 													<input type="hidden" id="hidden-roi-id" name="roi_id" value="" />
-													<input type="submit" class="button" value="Transférer" />
+													<input type="submit" class="button red" value="Transférer" />
 												</form>
 											</div>
 										</div>
@@ -406,8 +408,10 @@
 									<?php endif; ?>
 
 									Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
-									Vos investisseurs ont bien reçu leur retour sur investissement.
-
+									Vos investisseurs ont bien reçu leur retour sur investissement.<br /><br />
+									<?php $declaration->make_payment_certificate(); ?>
+									<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue">Télécharger l'attestation de paiement</a>
+									
 								<?php endif; ?>
 
 
@@ -427,7 +431,7 @@
 
 										<form action="" method="POST" enctype="multipart/form-data">
 											<input type="file" name="accounts_file_<?php echo $declaration->id; ?>" />
-											<input type="submit" class="button" value="<?php _e('Envoyer', 'yproject'); ?>" />
+											<input type="submit" class="button red" value="<?php _e('Envoyer', 'yproject'); ?>" />
 										</form>
 									</div>
 								<?php endif; ?>
