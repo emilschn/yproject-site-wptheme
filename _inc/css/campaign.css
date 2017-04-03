@@ -647,6 +647,10 @@ div#content.version-3 .projects-desc-content h6{
 div#content.version-3 .projects-desc-content iframe {
 	max-width: 100%;
 }
+div#content.version-3 .projects-desc-content img {
+	max-width: 100%;
+	height: auto;
+}
 
 div#content.version-3 .projects-desc-content p img {
     max-width: 100%;
