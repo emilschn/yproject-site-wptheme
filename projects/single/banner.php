@@ -195,12 +195,12 @@ $lang_list = $campaign->get_lang_list();
 							</a>
 
 						<?php elseif ($has_voted): ?>
-							<div style="-webkit-filter: grayscale(100%); text-transform: uppercase;">
+							<div style="-webkit-filter: grayscale(100%); text-transform: uppercase; text-align: center;">
 								<?php _e('Merci pour votre vote !', 'yproject'); ?>
 							</div>
 
 						<?php else: ?>
-							<a href="#lightbox_voter" class="button red wdg-button-lightbox-open" data-lightbox="vote">
+							<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote">
 								<?php _e('Voter', 'yproject'); ?>
 							</a>
 						<?php endif; ?>

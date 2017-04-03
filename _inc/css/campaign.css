@@ -647,6 +647,10 @@ div#content.version-3 .projects-desc-content h6{
 div#content.version-3 .projects-desc-content iframe {
 	max-width: 100%;
 }
+div#content.version-3 .projects-desc-content img {
+	max-width: 100%;
+	height: auto;
+}
 
 div#content.version-3 .projects-desc-content p img {
     max-width: 100%;
@@ -714,6 +718,10 @@ div#content.version-3 .project-news .project-news-item a.button {
 	margin: 15px 0px;
 	padding: 10px 60px;
 	color: #000000;
+}
+div#content.version-3 .project-news img {
+	max-width: 100%;
+	height: auto;
 }
 
 /*******************************************************************************
