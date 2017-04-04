@@ -285,10 +285,8 @@ var WDGProjectDashboard = (function ($) {
 									}
 								}
 								if(count_files_errors > 0) {
-									var firsterror = thisForm.find(".errors").first();
-									if(firsterror.length === 1){
-										WDGProjectDashboard.scrollTo(firsterror);
-									}
+									var err = $("<p class='errors'>Certains champs n'ont pas été validés.</p>");
+									err.insertAfter($("#orgaedit_form_button button"));
 								}
 								//Affichage confirmation enregistrement
 								if (count_files_errors === 0 && count_data_errors === 0){
