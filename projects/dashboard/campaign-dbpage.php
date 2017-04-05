@@ -113,7 +113,7 @@ function print_campaign_page()
                     $team_member_wp = get_userdata($team_member->wpref)?>
                     <li>
                         <?php echo $team_member_wp->user_firstname . ' ' . $team_member_wp->user_lastname; ?>
-                        <a class="project-manage-team button" data-action="yproject-remove-member" data-user="<?php echo $team_member->wp_user_id; ?>"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
+                        <a class="project-manage-team button" data-action="yproject-remove-member" data-user="<?php echo $team_member->wpref; ?>"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
                     </li>
                 <?php endforeach;
             else:
