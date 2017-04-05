@@ -314,7 +314,7 @@ msgstr "Calculate"
 msgid "Je recevrai"
 msgstr "I will receive"
 
-msgid "du chiffre d'affaire vers&eacute; tous les trimestres."
+msgid "du chiffre d'affaires vers&eacute; tous les trimestres."
 msgstr "of the turnover paid quarterly."
 
 msgid "Rendement vis&eacute; :"
