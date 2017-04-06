@@ -119,7 +119,7 @@ if ( !empty( $fbcallback ) ) {
 
 <?php
 if ( $do_fb_login || is_user_logged_in() ) {
-	wp_redirect( WDGUser::get_login_redirect_page() );
+	wp_redirect( WDGUser::get_login_redirect_page() . '#' );
 	exit();
 }
 ?>

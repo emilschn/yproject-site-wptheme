@@ -298,7 +298,7 @@ YPUIFunctions = (function($) {
 					$(".wdg-lightbox").hide();
 				});
 				var sHash = window.location.hash.substring(1);
-				if ($("#wdg-lightbox-" + sHash).length > 0) {
+				if ( (sHash.indexOf("=") === -1) && ($("#wdg-lightbox-" + sHash).length > 0) ) {
 					$("#wdg-lightbox-" + sHash).show();
 				}
 			}
