@@ -3,6 +3,7 @@ global $campaign;
 $comment_list = get_comments(array(
 	'post_id'	=> $campaign->ID
 ));
+$WDGUser_current = WDGUser::current();
 ?>
 <div class="project-comments padder">
 	<h2 class="standard">/ <?php _e('Commentaires', 'yproject'); ?> /</h2>
@@ -31,7 +32,8 @@ $comment_list = get_comments(array(
 	<?php else: ?>
 		<?php comment_form( array(
 				"title_reply"			=> __('Poster un commentaire', 'yproject'),
-				"comment_notes_after"	=> ""
+				"comment_notes_after"	=> "",
+				"logged_in_as"	=> __('Connect&eacute; en tant que ', 'yproject') . $WDGUser_current->wp_user->user_nicename
 		), $campaign->ID ); ?>
 	<?php endif; ?>
 </div>
