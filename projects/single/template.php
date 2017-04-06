@@ -1,5 +1,6 @@
 <?php 
 global $campaign, $can_modify;
+$can_modify = $campaign->current_user_can_edit();
 $client_context = $campaign->get_client_context();
 $campaign_status = $campaign->campaign_status();
 ?>
