@@ -339,6 +339,9 @@
     font-size: 80px;
     padding-top: 10px;
 }
+#ndashboard .data-blocks .stat-big-number.less-big {
+    font-size: 60px;
+}
 
 #ndashboard .data-blocks .stat-little-number {
     font-size: 22px;
