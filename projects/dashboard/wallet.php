@@ -348,8 +348,7 @@
 									Le versement vers vos investisseurs est en cours.<br /><br />
 									<?php $declaration->make_payment_certificate(); ?>
 									<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue">Télécharger l'attestation de paiement</a>
-									<?php endif; ?>
-
+			
 									<?php if ($is_admin): ?>
 										<br /><br />
 										<a href="#transfer-roi" class="button red transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>">Procéder aux versements</a>
@@ -374,6 +373,7 @@
 										echo do_shortcode('[yproject_lightbox id="transfer-roi"]' . $lightbox_content . '[/yproject_lightbox]');
 										?>
 
+									<?php endif; ?>
 									<?php endif; ?>
 
 								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_finished ): ?>
