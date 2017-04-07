@@ -110,9 +110,11 @@ function print_campaign_page()
         <ul id="team-list">
             <?php if (count($team_member_list) > 0):
                 foreach ($team_member_list as $team_member):
-                    $team_member_wp = get_userdata($team_member->wpref)?>
+                    $team_member_wp = get_userdata($team_member->wpref);
+					$team_member_name = ($team_member_wp->user_firstname != "") ? $team_member_wp->user_firstname . ' ' . $team_member_wp->user_lastname : $team_member_wp->user_login;
+			?>
                     <li>
-                        <?php echo $team_member_wp->user_firstname . ' ' . $team_member_wp->user_lastname; ?>
+                        <?php echo $team_member_name; ?>
                         <a class="project-manage-team button" data-action="yproject-remove-member" data-user="<?php echo $team_member->wpref; ?>"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
                     </li>
                 <?php endforeach;
