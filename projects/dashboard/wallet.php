@@ -284,6 +284,7 @@
 									<br />
 
 
+									<?php if ( $declaration->can_pay_with_wire() ): ?>
 									<hr />
 
 									Si vous souhaitez payer par virement bancaire, voici les informations dont vous aurez besoin :
@@ -308,6 +309,7 @@
 										<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
 										<input type="submit" name="payment_bank_transfer" class="button red" value="<?php _e('Payer par virement bancaire', 'yproject'); ?>" />
 									</form>
+									<?php endif; ?>
 
 
 								<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ||  $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ): ?>
