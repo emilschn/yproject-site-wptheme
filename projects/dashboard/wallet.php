@@ -409,11 +409,15 @@
 									<?php echo $declaration->get_message(); ?><br /><br />
 									<?php endif; ?>
 
-									Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
-									Vos investisseurs ont bien reçu leur retour sur investissement.<br /><br />
-									<?php $declaration->make_payment_certificate(); ?>
-									<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue">Télécharger l'attestation de paiement</a>
-									
+									<?php if ( $declaration->get_turnover_total() > 0 ): ?>
+										Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+										Vos investisseurs ont bien reçu leur retour sur investissement.<br /><br />
+										<?php $declaration->make_payment_certificate(); ?>
+										<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue">Télécharger l'attestation de paiement</a>
+									<?php else: ?>
+										Aucun paiement effectué.
+									<?php endif; ?>
+										
 								<?php endif; ?>
 
 
