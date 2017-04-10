@@ -189,8 +189,7 @@ $lang_list = $campaign->get_lang_list();
 						
 						<?php if ($campaign->time_remaining_str() != '-'): ?>
 						<?php if (!is_user_logged_in()): ?>
-							<a href="#connexion" class="button red wdg-button-lightbox-open" data-lightbox="connexion" 
-								data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start">
+							<a href="#connexion" class="button red wdg-button-lightbox-open" data-lightbox="connexion" data-redirect="<?php the_permalink(); ?>#vote">
 								<?php _e('Voter', 'yproject'); ?>
 							</a>
 
