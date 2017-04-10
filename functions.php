@@ -452,6 +452,8 @@ function yproject_user_contact_methods( $user_contact ) {
 	$user_contact['user_postal_code'] = __('Code Postal');
 	$user_contact['user_city'] = __('Ville');
 	$user_contact['user_country'] = __('Pays');
+	$user_contact['user_api_login'] = __('API Login');
+	$user_contact['user_api_password'] = __('API Password');
 	return $user_contact;
 }
 add_filter( 'user_contactmethods', 'yproject_user_contact_methods' );
