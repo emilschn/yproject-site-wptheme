@@ -119,6 +119,13 @@ button.red {
 	text-align: left;
 	vertical-align: top;
 }
+.wdg-lightbox-ref .db-form .field span.complement{
+	display: block;
+	width: 270px;
+	margin: 0px auto 3px;
+	font-size: 10pt;
+	text-align: left;
+}
 .wdg-lightbox-ref .db-form .field-container {
 	display: block;
 }

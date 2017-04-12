@@ -20,6 +20,7 @@
 			<div class="register-section" id="basic-details-section">
 				<div class="field">
 					<label for="signup_username_login"><?php _e( 'Identifiant', 'yproject' ); ?> *</label>
+					<span class="complement">compos&eacute; de lettres non-accentu&eacute;es, de chiffres ou des caract&egrave;res suivants : . - @</span>
 					<div class="field-container">
 						<span class="field-value">
 							<input type="text" name="signup_username_login" id="signup_username_login" value="<?php if (!empty($_POST['signup_username'])) { echo $_POST['signup_username']; } ?>" autofocus />
