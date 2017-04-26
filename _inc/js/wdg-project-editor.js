@@ -339,11 +339,11 @@ var ProjectEditor = (function($) {
 			var div_test = "<div class='project-pitch-video-bis'><div class='block_overview_image'></div><div class='block_overview_video'></div> <div class='block_url_image'></div> <div class='block_url_video'></div> <div class='block_boutons'></div> </div>";
 			$("#url_video_link").after(div_test);
 
-			var url_video_link = $("#url_video_link").attr('href');
+			var url_video_link = $("#url_video_link").val();
 			var video_preview = "<div id='apercu_video'><iframe width='290' height='100%' src='"+url_video_link+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
 			$(".block_overview_video").after(video_preview);
 
-			var image_link = $("#url_image_link").attr('href');
+			var image_link = $("#url_image_link").val();
 			var Element_image_view = '<div id="apercu_image"><img style="margin:10px;" height="200" id="video-zone-image" src="'+image_link+'"></div>';
 			$(".block_overview_image").after(Element_image_view);
 
@@ -359,53 +359,52 @@ var ProjectEditor = (function($) {
 				$("#wdg-edit-video-image").click();
 			});
 			
-			var image_check = 'False';
+			var image_check = false;
 			var image_src = '';
 			$(".image_video_zone").change(function(){
 				if (this.files) {
 					$.each(this.files, function(index, file) {
 						switch (file.type) {
-						case "image/jpeg":
-						case "image/jpg":
-						case "image/png":
-						case "image/gif":
-						var reader = new FileReader();
-						reader.onload = function (e) {
-							$("#apercu_image").remove();
-							var Element_image_view = '<div id="apercu_image"><img style="margin:10px;" height="200" id="video-zone-image" src="'+e.target.result+'"></div>';
-							$(".block_overview_image").after(Element_image_view);
-							image_src = e.target.result;
-							$("#url_image_link").attr('href', image_src);
-						}
-						reader.readAsDataURL(file);
-						default:
-						break;
+							case "image/jpeg":
+							case "image/jpg":
+							case "image/png":
+							case "image/gif":
+								var reader = new FileReader();
+								reader.onload = function (e) {
+									$("#apercu_image").remove();
+									image_src = e.target.result;
+									var Element_image_view = '<div id="apercu_image"><img style="margin:10px;" height="200" id="video-zone-image" src="'+image_src+'"></div>';
+									$(".block_overview_image").after(Element_image_view);
+									$("#url_image_link").val( image_src );
+								}
+								reader.readAsDataURL(file);
+							default:
+							break;
 						}
 					});
-					image_check = 'True';
+					image_check = true;
 				}
 			});
 
-			var video_check ='False'; 
+			var video_check = false; 
 			var video_number = '';
 			$(".url_video").change(function(){
 				$("#apercu_video").remove();
-				video_number = $("#text_url_video").val().split('youtube')[1];
+				video_number = $("#text_url_video").val().split('watch?v=')[1];
 				if(video_number){
-					video_number = $("#text_url_video").val().split('watch?v=')[1];
 					var link = "https://www.youtube.com/embed/"+video_number+"?feature=oembed&rel=0&wmode=transparent";
-					var video_preview = "<div  id='apercu_video' ><iframe  width='290' height='100%' src='"+link+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
+					var video_preview = "<div id='apercu_video'><iframe  width='290' height='100%' src='"+link+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
 					$(".block_overview_video").after(video_preview);
-					video_check = 'True';
-					$("#url_video_link").attr('href',$("#text_url_video").val());
+					video_check = true;
+					$("#url_video_link").val($("#text_url_video").val());
 					$("#text_url_video").addClass("input_text_good");
 				}else{
 					video_number = $("#text_url_video").val().split('dailymotion')[1];
 					if(video_number){
-						var video_preview = "<div  id='apercu_video' ><iframe  width='290' height='100%' src='"+$("#text_url_video").val()+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
+						var video_preview = "<div id='apercu_video'><iframe width='290' height='100%' src='"+$("#text_url_video").val()+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
 						$(".block_overview_video").after(video_preview);
-						video_check = 'True';
-						$("#url_video_link").attr('href',$("#text_url_video").val());
+						video_check = true;
+						$("#url_video_link").val($("#text_url_video").val());
 						$("#text_url_video").addClass("input_text_good");
 					}else{
 						$("#text_url_video").addClass("input_text_error");
@@ -458,27 +457,29 @@ var ProjectEditor = (function($) {
 		            'processData': false
 				}).done(function(result) {
 					ProjectEditor.validateInputDone(result);
-					if(video_check=='True'){
+					if ( video_check ){
 						$("#project-banner-picture").remove();
-						var video_number = $("#url_video_link").attr('href').split('youtube')[1];
+						var video_number = $("#url_video_link").val().split('youtube')[1];
 						if(video_number){
-							video_number = $("#url_video_link").attr('href').split('watch?v=')[1];
+							video_number = $("#url_video_link").val().split('watch?v=')[1];
 							var link = "https://www.youtube.com/embed/"+video_number+"?feature=oembed&rel=0&wmode=transparent";
 						}else{
-							var link = $("#url_video_link").attr('href');
+							var link = $("#url_video_link").val();
 						}
 						var div_video = '<div id="project-banner-picture"><iframe width="578" height="325" src="'+link+'" frameborder="0" allowfullscreen></iframe></div>';
 						$("#url_video_link").after(div_video);
-					}else{
-						if(image_check=='True'){
-                            if(!url_video_link){
-								$("#project-banner-picture").remove();
-								var div_video='<div id="project-banner-picture" style="display:inline-block; background-image:url('+image_src+'); background-repeat:no-repeat;"></div>';
-								$("#url_video_link").after(div_video);
-							}else{
-								$("#project-banner-picture").attr('style','display:inline-block;');
-							}
+						video_check = false;
+						
+					}else if( image_check ){
+						if (!url_video_link) {
+							image_src = result.split("|")[0];
+							$("#project-banner-picture").remove();
+							var div_video = '<div id="project-banner-picture"><img id="project-banner-src" src="'+image_src+'"></div>';
+							$("#url_video_link").after(div_video);
+						}else{
+							$("#project-banner-picture").attr('style','display:inline-block;');
 						}
+						image_check = false;
 					}
 					$("#wdg-validate-video-wait").hide();
 					$("#wdg-validate-video-wait").remove();

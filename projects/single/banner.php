@@ -103,8 +103,8 @@ $lang_list = $campaign->get_lang_list();
 					<?php echo $video_element; ?>
 					<?php endif; ?>
 				</div>
-				<input type="hidden" id="url_image_link" href="<?php echo $campaign->get_home_picture_src(); ?>" />
-				<input type="hidden" id="url_video_link" href="<?php echo $campaign->video(); ?>" />
+				<input type="hidden" id="url_image_link" value="<?php echo $campaign->get_home_picture_src(); ?>" />
+				<input type="hidden" id="url_video_link" value="<?php echo $campaign->video(); ?>" />
 			</div>
 			
 			<div class="banner-half right">
