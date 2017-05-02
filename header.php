@@ -263,7 +263,10 @@
 				}
 				?>
 				<div class="wdg-lightbox-padder">
-					Bonjour <?php echo $user_name_str; ?>, bienvenue sur WE DO GOOD !
+					<?php _e( "Bonjour", 'yproject' ); ?> <?php echo $user_name_str; ?>
+					<?php if ( ATCF_CrowdFunding::get_platform_context() == "wedogood" ): ?>
+					<?php _e( "et bienvenue sur WE DO GOOD !", 'yproject' ); ?>
+					<?php endif; ?>
 				</div>
 			</div>
 		<?php endif; ?>

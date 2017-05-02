@@ -100,7 +100,7 @@
 				
 				<div class="description-status"><a href="<?php the_permalink(); ?>">
 				<?php if ($campaign_status == ATCF_Campaign::$campaign_status_vote): ?>D&eacute;couvrez ce projet et participez &agrave; sa pr&eacute;paration.<?php endif; ?>
-				<?php if ($campaign_status == ATCF_Campaign::$campaign_status_vote): ?>&Eacute;valuez l&apos;impact du projet et d&eacute;cidez de sa pr&eacute;sence sur WEDOGOOD.co.<?php endif; ?>
+				<?php if ($campaign_status == ATCF_Campaign::$campaign_status_vote): ?>&Eacute;valuez l&apos;impact du projet et d&eacute;cidez de sa pr&eacute;sence sur <?php echo ATCF_CrowdFunding::get_platform_name(); ?>.<?php endif; ?>
 				</a></div>
 
 				<div class="description-separator"></div>

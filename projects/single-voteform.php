@@ -46,7 +46,7 @@ if ($campaign->end_vote_remaining() > 0) {
 					</ul>
 					
 					
-					<em>Ces impacts sont-ils suffisants pour que ce projet soit en financement sur WEDOGOOD.co ?</em><br />
+					<em>Ces impacts sont-ils suffisants pour que ce projet soit en financement sur <?php echo ATCF_CrowdFunding::get_platform_name(); ?> ?</em><br />
 					<label><input type="radio" id="btn-validate_project-true" name="validate_project" value="1" <?php if ($validate_project == 1) echo 'checked="checked"'; ?>>Oui</label><br />
 					<label><input type="radio" id="btn-validate_project-false" name="validate_project" value="0" <?php if ($validate_project == 0) echo 'checked="checked"'; ?>>Non</label><br />
 					<p id="validate_project-true" <?php if ($validate_project != 1) echo 'style="display: none;"'; ?>>

@@ -124,7 +124,7 @@ function print_campaign_page()
         </ul>
 
         <div style="text-align:center">
-            <input type="text" id="new_team_member_string" style="width: 295px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur WEDOGOOD.co', 'ypoject'); ?>" />
+            <input type="text" id="new_team_member_string" style="width: 295px;" placeholder="<?php _e('E-mail ou identifiant d&apos;un utilisateur', 'ypoject'); echo ' ' . ATCF_CrowdFunding::get_platform_name(); ?>" />
             <a class="project-manage-team button" data-action="yproject-add-member"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;<?php _e('Ajouter', 'ypoject'); ?></a>
             <?php DashboardUtility::get_infobutton("Les membres de l'&eacute;quipe peuvent acc&eacute;der au tableau de bord, modifier les param&egrave;tres et la page de projet",true); ?>
         </div>

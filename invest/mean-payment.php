@@ -17,13 +17,13 @@ if (isset($campaign)):
 	$can_use_wallet = FALSE;
 	$can_use_card_and_wallet = FALSE;
 	if ($_SESSION['redirect_current_invest_type'] == 'user') {
-		$can_use_wallet = $WDGUser_current->can_pay_with_wallet( $amount, $campaign );
-		$can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $amount, $campaign );
+		$can_use_wallet = $WDGUser_current->can_pay_with_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
+		$can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
 	} else {
 		$invest_type = $_SESSION['redirect_current_invest_type'];
 		$organization = new WDGOrganization($invest_type);
-		$can_use_wallet = $organization->can_pay_with_wallet( $amount, $campaign );
-		$can_use_card_and_wallet = $organization->can_pay_with_card_and_wallet( $amount, $campaign );
+		$can_use_wallet = $organization->can_pay_with_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
+		$can_use_card_and_wallet = $organization->can_pay_with_card_and_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
 	}
 	
 	//Possible de régler par virement ?
