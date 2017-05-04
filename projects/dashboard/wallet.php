@@ -254,20 +254,20 @@
 											$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
 											?>
 											<?php for ($i = 0; $i < $nb_fields; $i++): ?>
-												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro; HT</li>
+												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo UIHelpers::format_number( $declaration_turnover[$i] ); ?> &euro; HT</li>
 												<?php $date_due->add(new DateInterval('P1M')); ?>
 											<?php endfor; ?>
 										</ul><br />
 
 									<?php else: ?>
-										<?php echo $declaration_turnover[0]; ?> &euro;<br />
+										<?php echo UIHelpers::format_number( $declaration_turnover[0] ); ?> &euro;<br />
 									<?php endif; ?>
 
-									<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro; HT<br /><br />
+									<b>Total de chiffre d'affaires déclaré : </b><?php echo UIHelpers::format_number( $declaration->get_turnover_total() ); ?> &euro; HT<br /><br />
 
-									<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
-									<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br />
-									<b>Montant à verser : </b><?php echo $declaration->get_amount_with_commission(); ?> &euro;<br /><br />
+									<b>Total du versement : </b><?php echo UIHelpers::format_number( $declaration->amount ); ?> &euro; (<?php echo UIHelpers::format_number( $campaign->roi_percent() ); ?> %)<br />
+									<b>Frais de gestion : </b><?php echo UIHelpers::format_number( $declaration->get_commission_to_pay() ); ?> &euro;<br />
+									<b>Montant à verser : </b><?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro;<br /><br />
 									
 									<?php if ( empty( $declaration_message ) ): ?>
 									Aucun message ne sera envoyé aux investisseurs.<br /><br />
@@ -322,19 +322,19 @@
 											$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
 											?>
 											<?php for ($i = 0; $i < $nb_fields; $i++): ?>
-												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
+												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo UIHelpers::format_number( $declaration_turnover[$i] ); ?> &euro;</li>
 												<?php $date_due->add(new DateInterval('P1M')); ?>
 											<?php endfor; ?>
 										</ul><br />
 
 									<?php else: ?>
-										<?php echo $declaration_turnover[0]; ?> &euro;<br />
+										<?php echo UIHelpers::format_number( $declaration_turnover[0] ); ?> &euro;<br />
 									<?php endif; ?>
 
-									<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro;<br /><br />
+									<b>Total de chiffre d'affaires déclaré : </b><?php echo UIHelpers::format_number( $declaration->get_turnover_total() ); ?> &euro;<br /><br />
 
-									<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
-									<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br /><br />
+									<b>Total du versement : </b><?php echo UIHelpers::format_number( $declaration->amount ); ?> &euro; (<?php echo UIHelpers::format_number( $campaign->roi_percent() ); ?> %)<br />
+									<b>Frais de gestion : </b><?php echo UIHelpers::format_number( $declaration->get_commission_to_pay() ); ?> &euro;<br /><br />
 									
 									<?php if ( empty( $declaration_message ) ): ?>
 									Aucun message ne sera envoyé aux investisseurs.<br /><br />
@@ -346,7 +346,7 @@
 									<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ): ?>
 									Nous attendons la réception de la somme par notre prestataire de paiement et procèderons au versement par la suite.
 									<?php else: ?>
-									Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+									Votre paiement de <?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
 									Le versement vers vos investisseurs est en cours.<br /><br />
 									<?php $declaration->make_payment_certificate(); ?>
 									<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue">Télécharger l'attestation de paiement</a>
@@ -388,19 +388,19 @@
 											$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
 											?>
 											<?php for ($i = 0; $i < $nb_fields; $i++): ?>
-												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo $declaration_turnover[$i]; ?> &euro;</li>
+												<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <?php echo UIHelpers::format_number( $declaration_turnover[$i] ); ?> &euro;</li>
 												<?php $date_due->add(new DateInterval('P1M')); ?>
 											<?php endfor; ?>
 										</ul><br />
 
 									<?php else: ?>
-										<?php echo $declaration_turnover[0]; ?> &euro;<br />
+										<?php echo UIHelpers::format_number( $declaration_turnover[0] ); ?> &euro;<br />
 									<?php endif; ?>
 
-									<b>Total de chiffre d'affaires déclaré : </b><?php echo $declaration->get_turnover_total(); ?> &euro;<br /><br />
+									<b>Total de chiffre d'affaires déclaré : </b><?php echo UIHelpers::format_number( $declaration->get_turnover_total() ); ?> &euro;<br /><br />
 
-									<b>Total du versement : </b><?php echo $declaration->amount; ?> &euro; (<?php echo $campaign->roi_percent(); ?> %)<br />
-									<b>Frais de gestion : </b><?php echo $declaration->get_commission_to_pay(); ?> &euro;<br /><br />
+									<b>Total du versement : </b><?php echo UIHelpers::format_number( $declaration->amount ); ?> &euro; (<?php echo UIHelpers::format_number( $campaign->roi_percent() ); ?> %)<br />
+									<b>Frais de gestion : </b><?php echo UIHelpers::format_number( $declaration->get_commission_to_pay() ); ?> &euro;<br /><br />
 									
 									<?php if ( empty( $declaration_message ) ): ?>
 									Aucun message n'a été envoyé aux investisseurs.<br /><br />
@@ -410,7 +410,7 @@
 									<?php endif; ?>
 
 									<?php if ( $declaration->get_turnover_total() > 0 ): ?>
-										Votre paiement de <?php echo $declaration->get_amount_with_commission(); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+										Votre paiement de <?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
 										Vos investisseurs ont bien reçu leur retour sur investissement.<br /><br />
 										<?php $declaration->make_payment_certificate(); ?>
 										<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue">Télécharger l'attestation de paiement</a>
@@ -474,7 +474,7 @@
 					$status_str = 'Annul&eacute;';
 				}
 				?>
-				<li id="<?php echo $transfer_post->post_content; ?>"><?php echo $transfer_post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Termin&eacute;</li>
+				<li id="<?php echo $transfer_post->post_content; ?>"><?php echo $transfer_post->post_date; ?> : <?php echo UIHelpers::format_number( $post_amount ); ?>&euro; -- Termin&eacute;</li>
 				<?php
 			endforeach;
 			?>
