@@ -158,11 +158,6 @@ if (isset($campaign) && is_user_logged_in()):
 			$status = 'pending';
 			if ( (isset($_GET['cancel']) && $_GET['cancel'] == '1') || (isset($_GET['error']) && $_GET['error'] == '1') ) {
 				$status = 'failed';
-				try {
-					NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG );
-				} catch (Exception $e) {
-					
-				}
 			}
 			$payment_data = array( 
 				'price'			=> $amount, 
@@ -305,6 +300,7 @@ if (isset($campaign) && is_user_logged_in()):
 					_e("Il y a eu une erreur pendant la transaction.", 'yproject'); ?><br />
 					
 					<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway): ?>
+						<?php NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG ); ?>
 						<?php echo $lw_transaction_result->MSG . ' (' .$lw_transaction_result->INT_MSG. ')'; ?>
 					<?php endif; ?><br />
 					
