@@ -14,6 +14,16 @@ if ($can_modify) {
 		)
 	);
 }
+$description = html_entity_decode($campaign->description());
+$description_content = apply_filters('the_content', $description);
+$societal_challenge = html_entity_decode($campaign->societal_challenge());
+$societal_challenge_content = apply_filters('the_content', $societal_challenge);
+$added_value = html_entity_decode($campaign->added_value()); 
+$added_value_content = apply_filters('the_content', $added_value);
+$economic_model = html_entity_decode($campaign->economic_model()); 
+$economic_model_content = apply_filters('the_content', $economic_model);
+$implementation = html_entity_decode($campaign->implementation()); 
+$implementation_content = apply_filters('the_content', $implementation);
 ?>
 
 <div class="project-description">
@@ -31,10 +41,7 @@ if ($can_modify) {
 			<div id="project-content-description" class="projects-desc-content">
 				<h3><?php _e('Pitch', 'yproject'); ?></h3>
 				<div class="zone-content">
-					<?php 
-					$description = html_entity_decode($campaign->description());
-					echo apply_filters('the_content', $description);
-					?>
+					<?php echo $description_content; ?>
 				</div>
 				<?php if ($can_modify) { ?>
 				<div class="zone-edit hidden">
@@ -55,10 +62,7 @@ if ($can_modify) {
 			<div id="project-content-societal_challenge" class="projects-desc-content">
 				<h3><?php _e('Impacts positifs', 'yproject'); ?></h3>
 				<div class="zone-content">
-					<?php 
-					$societal_challenge = html_entity_decode($campaign->societal_challenge());
-					echo apply_filters('the_content', $societal_challenge);
-					?>
+					<?php echo $societal_challenge_content; ?>
 				</div>
 				<?php if ($can_modify) { ?>
 				<div class="zone-edit hidden">
@@ -76,10 +80,7 @@ if ($can_modify) {
 			<div id="project-content-added_value" class="projects-desc-content">
 				<h3><?php _e('Strat&eacute;gie', 'yproject'); ?></h3>
 				<div class="zone-content">
-					<?php 
-					$added_value = html_entity_decode($campaign->added_value()); 
-					echo apply_filters('the_content', $added_value);
-					?>
+					<?php echo $added_value_content; ?>
 				</div>
 				<?php if ($can_modify) { ?>
 				<div class="zone-edit hidden">
@@ -96,10 +97,7 @@ if ($can_modify) {
 			<div id="project-content-economic_model" class="projects-desc-content">
 				<h3><?php _e('Donn&eacute;es financi&egrave;res', 'yproject'); ?></h3>
 				<div class="zone-content">
-					<?php 
-					$economic_model = html_entity_decode($campaign->economic_model()); 
-					echo apply_filters('the_content', $economic_model);
-					?>
+					<?php echo $economic_model_content; ?>
 				</div>
 				<?php if ($can_modify) { ?>
 				<div class="zone-edit hidden">
@@ -117,10 +115,7 @@ if ($can_modify) {
 			<div id="project-content-implementation" class="projects-desc-content">
 				<h3><?php _e('&Eacute;quipe', 'yproject'); ?></h3>
 				<div class="zone-content">
-					<?php 
-					$implementation = html_entity_decode($campaign->implementation()); 
-					echo apply_filters('the_content', $implementation);
-					?>
+					<?php echo $implementation_content; ?>
 				</div>
 				<?php if ($can_modify) { ?>
 				<div class="zone-edit hidden">
