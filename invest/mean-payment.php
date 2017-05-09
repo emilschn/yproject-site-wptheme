@@ -58,6 +58,7 @@ if (isset($campaign)):
 				<a href="<?php echo $page_mean_payment_link; ?>card">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-carte.jpg" alt="<?php _e("Carte bancaire", 'yproject'); ?>" />
 					<?php _e("Carte bancaire", 'yproject'); ?>
+					- <?php _e("Les e-cartes bleues ne sont pas accept&eacute;es par notre prestataire", 'yproject'); ?>
 				</a>
 			</li>
 			
@@ -74,6 +75,7 @@ if (isset($campaign)):
 				<a href="<?php echo $page_mean_payment_link; ?>cardwallet">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-carte-portemonnaie.png" alt="<?php _e("Carte bancaire et porte-monnaie WEDOGOOD", 'yproject'); ?>" />
 					<?php echo sprintf( __( 'Porte-monnaie WEDOGOOD (Vous disposez actuellement de %s &euro;) compl&eacute;t&eacute; par carte', 'yproject' ), $lemonway_amount ); ?>
+					- <?php _e("Les e-cartes bleues ne sont pas accept&eacute;es par notre prestataire", 'yproject'); ?>
 				</a>
 			</li>
 			<?php endif; ?>
