@@ -137,6 +137,12 @@ if ($can_modify){
                             </a>
                         </li>
                         <li>
+                            <a href="<?php echo home_url('/guide'); ?>">
+                                <?php _e("Guide", 'yproject');?>&nbsp;&nbsp;
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
                             <a href="#informations" data-target="page-informations">
                                 <?php _e("Informations", 'yproject');?>
                                 <div class="badge-notif"><?php
@@ -190,7 +196,7 @@ if ($can_modify){
                     </div>
                     <div class="page-dashboard" id="page-redirect">
                         <div class="tab-content">
-                            <h2><i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;Redirection vers la page projet...</h2>
+                            <h2><i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;Redirection vers la page...</h2>
                         </div>
                     </div>
 
