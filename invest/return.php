@@ -298,13 +298,10 @@ if (isset($campaign) && is_user_logged_in()):
 
 				case 'failed' :
 					_e("Il y a eu une erreur pendant la transaction.", 'yproject'); ?><br />
-					
-					<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway): ?>
-						<?php NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG ); ?>
-						<?php echo $lw_transaction_result->MSG . ' (' .$lw_transaction_result->INT_MSG. ')'; ?>
-					<?php endif; ?><br />
-					
+					<?php echo $lw_transaction_result->MSG . ' (' .$lw_transaction_result->INT_MSG. ')'; ?><br />
 					<?php _e("Si vous souhaitez de l'aide relative &agrave; ce probl&egrave;me, merci de nous contacter sur investir@wedogood.co en pr&eacute;cisant les informations ci-dessus.", 'yproject'); ?>
+					
+					<?php NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG, $campaign->data->post_title ); ?>
 					<?php
 					break;
 			}
