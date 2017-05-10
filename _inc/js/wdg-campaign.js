@@ -80,7 +80,7 @@ var WDGProjectViewer = (function($) {
 					var totalTurnover = 0;
 					var nbYears = 0;
 					var ratioOfPercent = ratioOfGoal * percentProject;
-					var ratioOfPercentRound = Math.round(ratioOfPercent * 1000) / 1000;
+					var ratioOfPercentRound = Math.round(ratioOfPercent * 10000) / 10000;
 					var ratioOfPercentRoundStr = ratioOfPercentRound.toString().replace('.', ',');
 					$("span.roi_percent_user").text(ratioOfPercentRoundStr);
 
