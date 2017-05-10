@@ -158,11 +158,6 @@ if (isset($campaign) && is_user_logged_in()):
 			$status = 'pending';
 			if ( (isset($_GET['cancel']) && $_GET['cancel'] == '1') || (isset($_GET['error']) && $_GET['error'] == '1') ) {
 				$status = 'failed';
-				try {
-					NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG );
-				} catch (Exception $e) {
-					
-				}
 			}
 			$payment_data = array( 
 				'price'			=> $amount, 
@@ -208,7 +203,11 @@ if (isset($campaign) && is_user_logged_in()):
 						
 						<?php if ($campaign->funding_type() != 'fundingdonation' && $amount > 1500): ?>
 							<?php _e("Une fois valid&eacute;, vous recevrez deux e-mails :", 'yproject'); ?><br /><br />
+							<?php if ( ATCF_CrowdFunding::get_platform_context() == "wedogood" ): ?>
 							- <?php _e("un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement. Cet e-mail contient votre code pour signer le pouvoir", 'yproject'); ?><br /><br />
+							<?php else: ?>
+							- <?php _e("un e-mail envoy&eacute; pour la confirmation de votre paiement. Cet e-mail contient votre code pour signer le pouvoir", 'yproject'); ?><br /><br />
+							<?php endif; ?>
 							- <?php _e("un e-mail envoy&eacute; par notre partenaire Signsquid. Cet e-mail contient un lien vous permettant de signer le pouvoir pour le contrat d&apos;investissement", 'yproject'); ?><br /><br />
 							
 						<?php else: ?>
@@ -249,7 +248,11 @@ if (isset($campaign) && is_user_logged_in()):
 							<?php if (!isset($contract_errors) || $contract_errors == ''): ?>
 								<?php _e("Vous allez recevoir deux e-mails cons&eacute;cutifs &agrave; l&apos;adresse", 'yproject'); ?> <?php echo $current_user->user_email; ?>
 								(<?php _e("pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable", 'yproject'); ?>) :<br /><br />
+								<?php if ( ATCF_CrowdFunding::get_platform_context() == "wedogood" ): ?>
 								- <?php _e("un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement. Cet e-mail contient votre code pour signer le pouvoir", 'yproject'); ?><br /><br />
+								<?php else: ?>
+								- <?php _e("un e-mail envoy&eacute; pour la confirmation de votre paiement. Cet e-mail contient votre code pour signer le pouvoir", 'yproject'); ?><br /><br />
+								<?php endif; ?>
 								- <?php _e("un e-mail envoy&eacute; par notre partenaire Signsquid. Cet e-mail contient un lien vous permettant de signer le pouvoir pour le contrat d&apos;investissement", 'yproject'); ?><br /><br />
 								<center><img src="'. get_stylesheet_directory_uri() .'/images/signsquid.png" width="168" height="64" /></center><br />
 								<?php if (ypcf_check_user_phone_format($current_user->get('user_mobile_phone'))): ?>
@@ -295,12 +298,10 @@ if (isset($campaign) && is_user_logged_in()):
 
 				case 'failed' :
 					_e("Il y a eu une erreur pendant la transaction.", 'yproject'); ?><br />
-					
-					<?php if ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway): ?>
-						<?php echo $lw_transaction_result->MSG . ' (' .$lw_transaction_result->INT_MSG. ')'; ?>
-					<?php endif; ?><br />
-					
+					<?php echo $lw_transaction_result->MSG . ' (' .$lw_transaction_result->INT_MSG. ')'; ?><br />
 					<?php _e("Si vous souhaitez de l'aide relative &agrave; ce probl&egrave;me, merci de nous contacter sur investir@wedogood.co en pr&eacute;cisant les informations ci-dessus.", 'yproject'); ?>
+					
+					<?php NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG, $campaign->data->post_title ); ?>
 					<?php
 					break;
 			}

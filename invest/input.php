@@ -92,7 +92,8 @@ if (isset($campaign)):
 				
 				case 'fundingdevelopment':
 				case 'fundingproject': ?>
-					<input type="text" id="input_invest_amount_part" name="amount_part" placeholder="<?php echo $min_value; ?>" value="<?php echo (!empty($_GET["init_invest"]) ? $_GET["init_invest"] : ''); ?>"> &euro; <span id="input_invest_amount" class="hidden">0</span><br />
+					<?php _e("Montant de l'investissement (Exemple : 100) :", 'yproject'); ?><br /><br />
+					<input type="text" id="input_invest_amount_part" name="amount_part" value="<?php echo (!empty($_GET["init_invest"]) ? $_GET["init_invest"] : ''); ?>"> &euro; <span id="input_invest_amount" class="hidden">0</span><br />
 				<?php
 				break;
 			} ?>

@@ -54,7 +54,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 					<?php if (is_user_logged_in()): ?>
 
                                         <span class="uppercase"><?php _e("Je recevrai", 'yproject'); ?></span> <span class="roi_amount_user">0</span><span> &euro;* </span><br />
-						<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span> % <?php _e("du chiffre d'affaire vers&eacute; tous les trimestres.", 'yproject'); ?><br />
+						<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span> % <?php _e("du chiffre d'affaires vers&eacute; tous les trimestres.", 'yproject'); ?><br />
                                                 
 						<div>
 							<table>

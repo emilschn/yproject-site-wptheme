@@ -60,7 +60,7 @@ $WDGUser_current = WDGUser::current();
 					    if($info[2] === IMAGETYPE_PNG) $type='.png';
 					    if(!$avatar_error){
 							$upload_dir = wp_upload_dir();
-						    $avatar_path = $upload_dir['path'] . '/avatars/';
+						    $avatar_path = $upload_dir['basedir'] . '/avatars/';
 						    if ( !file_exists($avatar_path)) {
 							    mkdir($avatar_path);
 						    }
@@ -73,14 +73,14 @@ $WDGUser_current = WDGUser::current();
 				    }
 				    
 				    if ($_POST['facebook_avatar'] || $_POST['reset_avatar']) {
-					    if(file_exists($upload_dir['path']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.png')){
-						    unlink($upload_dir['path']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.png');
+					    if(file_exists($upload_dir['basedir']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.png')){
+						    unlink($upload_dir['basedir']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.png');
 					    }
-					    if(file_exists($upload_dir['path']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.jpg')){
-						    unlink($upload_dir['path']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.jpg');
+					    if(file_exists($upload_dir['basedir']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.jpg')){
+						    unlink($upload_dir['basedir']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.jpg');
 					    }
 					    if($_POST['reset_avatar']){
-						    file_put_contents($upload_dir['path']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.jpg', file_get_contents(get_stylesheet_directory_uri() . "/images/default_avatar.jpg"));
+						    file_put_contents($upload_dir['basedir']. '/avatars/'.$WDGUser_current->wp_user->ID.'/avatar.jpg', file_get_contents(get_stylesheet_directory_uri() . "/images/default_avatar.jpg"));
 					    }
 				    }
 			    }

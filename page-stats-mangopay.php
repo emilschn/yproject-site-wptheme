@@ -38,6 +38,17 @@ get_header();
 		
 		    <h1>Infos LW</h1>
 			
+			<?php //Ajouter un RIB à un utilisateur
+			/*$id_user = 0;
+			$user = new WDGUser($id_user);
+			$holder_name = "";
+			$iban = "";
+			$bic = "";
+			$address1 = "";
+			$user->save_iban( $holder_name, $iban, $bic, $address1 );
+			LemonwayLib::wallet_register_iban( $user->get_lemonway_id(), $holder_name, $iban, $bic, $address1 );*/
+			?>
+			
 			<?php // Refaire des transferts de ROI
 			//$roi_declaration = new WDGROIDeclaration(1); $roi_declaration->redo_transfers(); 
 //			$roi_declaration = new WDGROIDeclaration(14);

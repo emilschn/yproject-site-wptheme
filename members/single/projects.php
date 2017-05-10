@@ -53,9 +53,9 @@ $WDGUser_displayed = WDGUser::current();
 				foreach ($project_list as $project) {	    
 					if ($i > 0) {?> | <?php }
 					if ($display_loggedin_user) { 
-					?><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' . $project->project_wp_id; ?>"><?php echo $project->project_name; ?></a><?php
+					?><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' . $project->wpref; ?>"><?php echo $project->name; ?></a><?php
 					} else {
-					?><a href="<?php echo get_permalink($project->project_wp_id); ?>"><?php echo $project->project_name; ?></a><?php
+					?><a href="<?php echo get_permalink($project->wpref); ?>"><?php echo $project->name; ?></a><?php
 					}
 					$i++;
 				}
