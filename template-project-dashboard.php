@@ -46,6 +46,9 @@ if ($can_modify){
     $is_admin = $WDGUser_current->is_admin();
     $is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
 
+	$campaign_organization = $campaign->get_organization();
+	$organization_obj = new WDGOrganization( $campaign_organization->wpref );
+
     $status = $campaign->campaign_status();
     $collecte_or_after = $status==ATCF_Campaign::$campaign_status_collecte || $status==ATCF_Campaign::$campaign_status_funded ;
     $vote_or_after = $collecte_or_after || $status==ATCF_Campaign::$campaign_status_vote;
