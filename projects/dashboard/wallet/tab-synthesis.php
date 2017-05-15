@@ -1,10 +1,46 @@
 <?php
 global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDGAuthor, $WDGUser_current, $organization_obj, $is_admin, $is_author;
-$mandate_conditions = $campaign->mandate_conditions();
+$finished_declarations = $campaign->get_roi_declarations_by_status( WDGROIDeclaration::$status_finished );
+$nb_finished_declarations = count( $finished_declarations );
 ?>
 
 <div id="tab-wallet-synthesis" class="tab-content">
-	<h2><?php _e('Liste des op&eacute;rations bancaires', 'yproject'); ?></h2>
+	<h2><?php _e('Situation', 'yproject'); ?></h2>
+	<ul>
+		<li><strong><?php echo $organization_obj->get_lemonway_balance(); ?> €</strong> <?php _e( "dans votre porte-monnaie", 'yproject' ); ?></li>
+		<li><strong><?php echo $campaign->current_amount(); ?></strong> <?php _e( "lev&eacute;s", 'yproject' ); ?></li>
+		<li><strong><?php echo $campaign->roi_percent(); ?> %</strong> <?php _e( "du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $campaign->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
+		<li><strong><?php echo count( $finished_declarations ); ?> / <?php echo $campaign->get_roi_declarations_number(); ?></strong> <?php _e( "&eacute;ch&eacute;ances", 'yproject' ); ?></li>
+		<li>
+			<strong><?php echo $campaign->get_roi_declarations_total_turnover_amount(); ?> €</strong> <?php _e( "de CA d&eacute;clar&eacute;", 'yproject' ); ?>
+			<?php /* <ul>
+				<li><?php _e( "Maximum engag&eacute;", 'yproject' ); ?> : <strong>TODO €</strong></li>
+				<li><?php _e( "Objectif", 'yproject' ); ?> : <strong>TODO €</strong></li>
+				<li><?php _e( "Minimum", 'yproject' ); ?> : <strong>TODO €</strong></li>
+			</ul> */ ?>
+		</li>
+		<li>
+			<strong><?php echo $campaign->get_roi_declarations_total_roi_amount(); ?> €</strong> <?php _e( "de royalties vers&eacute;es", 'yproject' ); ?>
+			<?php /* <ul>
+				<li><?php _e( "Maximum :", 'yproject' ); ?> <strong>TODO €</strong></li>
+				<li><?php _e( "Objectif :", 'yproject' ); ?> <strong>TODO €</strong></li>
+				<li><?php _e( "Minimum :", 'yproject' ); ?> <strong>TODO €</strong></li>
+			</ul> */ ?>
+		</li>
+	</ul>
+	
+	
+	<h2><?php _e('Historique', 'yproject'); ?></h2>
+	<?php if ( $nb_finished_declarations > 0 ): ?>
+	
+		<ul>
+		<?php foreach( $finished_declarations as $declaration_item ): ?>
+			<li>Déclaration du <?php echo $declaration_item->date_due; ?> : <?php echo $declaration_item->amount; ?> € de royalties payées le <?php echo $declaration_item->date_paid; ?></li>
+		<?php endforeach; ?>
+		</ul>
+	
+	<?php endif; ?>
+	
 	<?php $transfers = $organization_obj->get_transfers();
 	if ($transfers) : ?>
 
@@ -34,6 +70,18 @@ $mandate_conditions = $campaign->mandate_conditions();
 		</ul>
 
 	<?php else: ?>
-		Aucun transfert d&apos;argent.
+		<?php _e( "Aucun transfert d&apos;argent.", 'yproject' ); ?>
 	<?php endif; ?>
+		
+		
+	<?php
+	$saved_mandates_list = $organization_obj->get_lemonway_mandates();
+	$last_mandate = end( $saved_mandates_list );
+	if ( empty( $saved_mandates_list ) ) {
+		$last_mandate_status = $last_mandate[ "S" ];
+		if ( $last_mandate_status == 5 || $last_mandate_status == 6 ): ?>
+			<?php _e( "Autorisation de pr&eacute;l&egrave;vement sign&eacute;.", 'yproject' ); ?>
+		<?php endif;
+	}
+	?>
 </div>

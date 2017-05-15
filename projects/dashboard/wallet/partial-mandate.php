@@ -1,5 +1,6 @@
 <?php
 global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDGAuthor, $WDGUser_current, $organization_obj, $is_admin, $is_author;
+$mandate_conditions = $campaign->mandate_conditions();
 ?>
 
 <h2><?php _e('Autorisation de pr&eacute;l&egrave;vement', 'yproject'); ?></h2>
