@@ -66,24 +66,28 @@ else {
 
 				<section>
 					<div>
-						<a href="http://www.financeparticipative.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/membre-FPF.png" alt="logo membre financement participatif France" width="150px"/></a>
+						<a href="https://acpr.banque-france.fr/agrements-et-autorisations/le-financement-participatif-crowdfunding.html" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/ifp.png" alt="logo label IFP" width="160"/></a>
+					</div>
+					
+					<div>
+						<a href="http://www.financeparticipative.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/membre-FPF.png" alt="logo membre financement participatif France" width="140"/></a>
 					</div>
 
-					<div id="finance_innovation">					
-						<a href="https://finance-innovation.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/finance-innovation-labellise.png" alt="logo finance innovation" width="200px"/></a>
+					<div>					
+						<a href="https://finance-innovation.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/finance-innovation-labellise.png" alt="logo finance innovation" width="200"/></a>
 					</div>
 
-					<div id="lemonway">
-						<a href="http://www.lemonway.fr" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/lemonway-gris.png" alt="logo Lemonway" width="258px"/></a><br />
+					<div>
+						<a href="http://www.lemonway.fr" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/lemonway-gris.png" alt="logo Lemonway" width="258"/></a><br />
 						<p class="lines">Partenaire de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l’ACPR en France le 24/12/2012 sous le num&eacute;ro 16568J.</p>
 					</div>
-					<?php if ( is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>
 					<div>
+					<?php if ( is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>
 						<ul>
 							<?php dynamic_sidebar( 'fourth-footer-widget-area' ); ?>
 						</ul>
-					</div>
 					<?php endif; ?>
+					</div>
 
 					<div class="clear"></div>
 
