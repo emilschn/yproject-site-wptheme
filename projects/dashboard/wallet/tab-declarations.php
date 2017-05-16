@@ -51,7 +51,7 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 			// TODO
 			?>
 			<?php else: ?>
-			Ajustement...
+			<!-- Ajustement... -->
 
 			<?php endif; ?>
 		<?php endif; ?>
