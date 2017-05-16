@@ -956,7 +956,6 @@ body.page-template-template-discover-projects-php .projects-funded .wdg-componen
 }
 body.page-template-template-discover-projects-php .wdg-component-projects-preview .block-projects {
 	height: auto;
-	max-height: 1240px;
 	margin: auto;
 	padding-top: 5px;
 	overflow-y: hidden;
