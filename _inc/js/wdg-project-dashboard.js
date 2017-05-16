@@ -184,21 +184,24 @@ var WDGProjectDashboard = (function ($) {
                             $(".bloc-grid .display-bloc").removeClass("active").animate({
                                 top: "0px"
                             }, { duration: 500, queue: false });
-                            $("#tab-container .tab-content").slideUp();*/
+                            $(".tab-container .tab-content").slideUp();*/
                         } else {
-                            $(".bloc-grid .display-bloc").removeClass("active").animate({
+							var parentId = $(this).parent().attr("id");
+                            $("#"+parentId+" .display-bloc").removeClass("active").animate({
                                 top: "0px"
                             }, { duration: 500, queue: false });
-                            $("#tab-container .tab-content").slideUp();
+                            $("#"+parentId+"-container .tab-content").slideUp();
+							
                             $(this).addClass("active").animate({
                                 top: "20px"
                             }, { duration: 500, queue: false });
-                            $("#tab-container #" + $(this).data("tab-target")).slideDown();
+                            $("#"+parentId+"-container #" + $(this).data("tab-target")).slideDown();
                         }
                     });
 
-                    $("#tab-container .tab-content").hide();
-                    $(".bloc-grid .display-bloc").first().trigger("click");
+                    $(".tab-container .tab-content").hide();
+                    $("#tab-informations-subtabs .display-bloc").first().trigger("click");
+                    $("#tab-wallet-subtabs .display-bloc").first().trigger("click");
                 }
 
 
