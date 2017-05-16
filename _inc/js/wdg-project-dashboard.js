@@ -173,37 +173,37 @@ var WDGProjectDashboard = (function ($) {
                         updateDate("innbdayvote","previewenddatevote");});
                 }
             }
+			
+			//Gestion sous-onglets
+			if ($(".bloc-grid").length > 0) {
+				$(".bloc-grid .display-bloc").click(function () {
+					if($(this).hasClass("active")){
+						/* Replie le bloc actif, désactivé pour l'instant
+						$(".bloc-grid .display-bloc").removeClass("active").animate({
+							top: "0px"
+						}, { duration: 500, queue: false });
+						$(".tab-container .tab-content").slideUp();*/
+					} else {
+						var parentId = $(this).parent().attr("id");
+						$("#"+parentId+" .display-bloc").removeClass("active").animate({
+							top: "0px"
+						}, { duration: 500, queue: false });
+						$("#"+parentId+"-container .tab-content, #"+parentId+"-container .tab-content-large").slideUp();
+
+						$(this).addClass("active").animate({
+							top: "20px"
+						}, { duration: 500, queue: false });
+						$("#"+parentId+"-container #" + $(this).data("tab-target")).slideDown();
+					}
+				});
+
+				$(".tab-container .tab-content, .tab-container .tab-content-large").hide();
+				$("#tab-informations-subtabs .display-bloc").first().trigger("click");
+				$("#tab-wallet-subtabs .display-bloc").first().trigger("click");
+			}
 
             //Page Informations
             if($("#page-informations").length > 0){
-                //Onglets information
-                if ($(".bloc-grid").length > 0) {
-                    $(".bloc-grid .display-bloc").click(function () {
-                        if($(this).hasClass("active")){
-                            /* Replie le bloc actif, désactivé pour l'instant
-                            $(".bloc-grid .display-bloc").removeClass("active").animate({
-                                top: "0px"
-                            }, { duration: 500, queue: false });
-                            $(".tab-container .tab-content").slideUp();*/
-                        } else {
-							var parentId = $(this).parent().attr("id");
-                            $("#"+parentId+" .display-bloc").removeClass("active").animate({
-                                top: "0px"
-                            }, { duration: 500, queue: false });
-                            $("#"+parentId+"-container .tab-content").slideUp();
-							
-                            $(this).addClass("active").animate({
-                                top: "20px"
-                            }, { duration: 500, queue: false });
-                            $("#"+parentId+"-container #" + $(this).data("tab-target")).slideDown();
-                        }
-                    });
-
-                    $(".tab-container .tab-content").hide();
-                    $("#tab-informations-subtabs .display-bloc").first().trigger("click");
-                    $("#tab-wallet-subtabs .display-bloc").first().trigger("click");
-                }
-
 
                 //Infos organisation
                 if ($("#tab-organization").length > 0) {
