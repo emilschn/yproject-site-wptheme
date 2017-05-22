@@ -339,6 +339,9 @@
     font-size: 80px;
     padding-top: 10px;
 }
+#ndashboard .data-blocks .stat-big-number.less-big {
+    font-size: 60px;
+}
 
 #ndashboard .data-blocks .stat-little-number {
     font-size: 22px;
@@ -355,6 +358,41 @@
 .details-card {
     height: 40px;
     vertical-align:bottom;
+}
+
+/* sous-onglets */
+.tab-subtabs.bloc-grid{
+    text-align: center;
+}
+
+.tab-subtabs .display-bloc{
+    width: 160px;
+    display: inline-block;
+    margin: 10px;
+    background-color: #EEECED;
+    vertical-align: top;
+    cursor: pointer;
+    border-bottom: 1px solid grey;
+    padding-top: 10px;
+    position:relative;
+}
+
+.tab-subtabs .display-bloc:hover{
+    background-color:grey;
+    color:white;
+}
+
+.tab-subtabs .display-bloc.active{
+    background-color:#EA4F51;
+    color:white;
+}
+
+.tab-subtabs .display-bloc .fa{
+    display: block;
+}
+
+.tab-subtabs .display-bloc .infobloc-title{
+    padding: 10px 0px;
 }
 
 
@@ -377,39 +415,6 @@
 /*******************************************************************************
 * Page informations
 *******************************************************************************/
-#page-informations .bloc-grid{
-    text-align: center;
-}
-
-#page-informations .display-bloc{
-    width: 160px;
-    display: inline-block;
-    margin: 10px;
-    background-color: #EEECED;
-    vertical-align: top;
-    cursor: pointer;
-    border-bottom: 1px solid grey;
-    padding-top: 10px;
-    position:relative;
-}
-
-#page-informations .display-bloc:hover{
-    background-color:grey;
-    color:white;
-}
-
-#page-informations .display-bloc.active{
-    background-color:#EA4F51;
-    color:white;
-}
-
-#page-informations .display-bloc .fa{
-    display: block;
-}
-
-#page-informations .display-bloc .infobloc-title{
-    padding: 10px 0px;
-}
 #page-informations #tab-organization #orgainfo_form_button {
 	display: inline;
 }

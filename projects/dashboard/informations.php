@@ -11,7 +11,7 @@ function print_informations_page()
     ?>
 
     <div class="head"><?php _e("Informations","yproject");?></div>
-    <div class="bloc-grid">
+    <div id="tab-informations-subtabs" class="tab-subtabs bloc-grid">
         <div class="display-bloc" data-tab-target="tab-project">
             <i class="fa fa-lightbulb-o fa-4x aria-hidden="true"></i>
             <div class="infobloc-title">
@@ -53,7 +53,7 @@ function print_informations_page()
         </div>
     </div>
 
-    <div id="tab-container">      
+    <div id="tab-informations-subtabs-container" class="tab-container">      
         <div class="tab-content" id="tab-project">
             <form id="projectinfo_form" class="db-form" data-action="save_project_infos">
                 <ul class="errors">

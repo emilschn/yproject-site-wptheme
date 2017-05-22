@@ -71,7 +71,7 @@
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
 		
-		<?php $version = '20170323'; ?>
+		<?php $version = '20170516'; ?>
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/components.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/responsive-inf997.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
@@ -102,10 +102,19 @@
                     } else {
 			    echo "Plateforme d'investissement participatif à impact positif";
                     } ?>" />*/ ?>
-                <?php $imageFacebook = (isset($campaign) && $is_campaign_page === true) ? $campaign->get_home_picture_src() : $stylesheet_directory_uri .'/images/logo_entier.jpg'; ?> 
-		<?php /* <meta property="og:image" content="<?php echo $imageFacebook ?>" /> */ ?>
+		<?php
+		$imageFacebook = (isset($campaign) && $is_campaign_page === true) ? $campaign->get_home_picture_src() : $stylesheet_directory_uri .'/images/common/wedogood-logo-rouge.png';
+		$url = (isset($campaign) && $is_campaign_page === true) ? get_page_link($post) : "";
+		?>
+		<?php if (isset($campaign) && $is_campaign_page === true): ?>
+		<meta property="og:url" content="<?php echo $url; ?>" />
+		<meta property="og:title" content="<?php echo $post->post_title; ?>" />
+		<meta property="og:description" content="<?php echo $campaign->summary(); ?>" />
+		<meta property="fb:app_id" content="<?php echo YP_FB_APP_ID; ?>" />
+		<?php endif; ?>
+		<meta property="og:image" content="<?php echo $imageFacebook ?>" />
 		<meta property="og:image:secure_url" content="<?php echo $imageFacebook ?>" />
-		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:type" content="image/png" />
 	</head>
 
 	<body <?php body_class(get_locale()); ?>> 
@@ -254,7 +263,10 @@
 				}
 				?>
 				<div class="wdg-lightbox-padder">
-					Bonjour <?php echo $user_name_str; ?>, bienvenue sur WE DO GOOD !
+					<?php _e( "Bonjour", 'yproject' ); ?> <?php echo $user_name_str; ?>
+					<?php if ( ATCF_CrowdFunding::get_platform_context() == "wedogood" ): ?>
+					<?php _e( "et bienvenue sur WE DO GOOD !", 'yproject' ); ?>
+					<?php endif; ?>
 				</div>
 			</div>
 		<?php endif; ?>

@@ -38,6 +38,17 @@ get_header();
 		
 		    <h1>Infos LW</h1>
 			
+			<?php //Ajouter un RIB à un utilisateur
+			/*$id_user = 0;
+			$user = new WDGUser($id_user);
+			$holder_name = "";
+			$iban = "";
+			$bic = "";
+			$address1 = "";
+			$user->save_iban( $holder_name, $iban, $bic, $address1 );
+			LemonwayLib::wallet_register_iban( $user->get_lemonway_id(), $holder_name, $iban, $bic, $address1 );*/
+			?>
+			
 			<?php // Refaire des transferts de ROI
 			//$roi_declaration = new WDGROIDeclaration(1); $roi_declaration->redo_transfers(); 
 //			$roi_declaration = new WDGROIDeclaration(14);
@@ -178,6 +189,24 @@ get_header();
 			$campaign = new ATCF_Campaign(11833);
 			$campaign->refund();
 			 *
+			 */
+			?>
+			
+			<?php
+			/*
+			// Récupérer la liste des mails d'utilisateurs qui ont eu des royalties en 2016
+			global $wpdb;
+			$query = "";
+			$query .= "SELECT user.user_email FROM " .$wpdb->prefix.WDGROI::$table_name. " roi";
+			$query .= " INNER JOIN " .$wpdb->users. " user ON (roi.id_user = user.ID)";
+			$query .= " WHERE YEAR(roi.date_transfer) = 2016";
+			$query .= " GROUP BY roi.id_user";
+
+			$email_list = $wpdb->get_results( $query );
+			foreach ( $email_list as $email_item ) {
+				echo $email_item->user_email . ', ';
+			}
+			 * 
 			 */
 			?>
 		    

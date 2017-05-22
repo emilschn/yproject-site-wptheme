@@ -7,8 +7,15 @@ function print_contacts_page() {
            $WDGAuthor, $WDGUser_current,
            $is_admin, $is_author;
 
+	$send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
         ?>
+
         <div class="head"><?php _e('Contacts', 'yproject'); ?></div>
+		
+		<?php if (!empty($send_mail_success)): ?>
+		<div class="success"><?php _e( "E-mails envoy&eacute;s avec succ&egrave;s !", 'yproject' ); ?></div>
+		<?php endif; ?>
+		
         <div class="tab-content-large">
             <div id="ajax-contacts-load" class="ajax-investments-load" style="text-align: center;" data-value="<?php echo $campaign->ID?>">
                 <img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />

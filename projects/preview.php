@@ -80,7 +80,15 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
                     $buttonAction = __("voter sur ce projet", "yproject");
         ?>
                     <div class="progress-bar">
-                        <span class="vote-status" style="min-width:100%">&nbsp;<p><?php _e("projet en cours de vote", "yproject"); ?></p>&nbsp;</span>        
+                        <span class="vote-status" style="min-width:100%">&nbsp;
+							<p>
+							<?php if ($time_remaining_str != '-'): ?>
+							<?php _e("projet en cours de vote", "yproject"); ?>
+							<?php else: ?>
+							<?php _e("vote termin&eacute;", "yproject"); ?>
+							<?php endif; ?>
+							</p>
+						&nbsp;</span>        
                     </div>
                 <?php endif; ?>
         </a>

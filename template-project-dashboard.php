@@ -46,6 +46,9 @@ if ($can_modify){
     $is_admin = $WDGUser_current->is_admin();
     $is_author = $WDGAuthor->wp_user->ID == $WDGUser_current->wp_user->ID;
 
+	$campaign_organization = $campaign->get_organization();
+	$organization_obj = new WDGOrganization( $campaign_organization->wpref );
+
     $status = $campaign->campaign_status();
     $collecte_or_after = $status==ATCF_Campaign::$campaign_status_collecte || $status==ATCF_Campaign::$campaign_status_funded ;
     $vote_or_after = $collecte_or_after || $status==ATCF_Campaign::$campaign_status_vote;
@@ -137,6 +140,12 @@ if ($can_modify){
                             </a>
                         </li>
                         <li>
+                            <a href="<?php echo home_url('/guide'); ?>">
+                                <?php _e("Guide", 'yproject');?>&nbsp;&nbsp;
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
                             <a href="#informations" data-target="page-informations">
                                 <?php _e("Informations", 'yproject');?>
                                 <div class="badge-notif"><?php
@@ -190,7 +199,7 @@ if ($can_modify){
                     </div>
                     <div class="page-dashboard" id="page-redirect">
                         <div class="tab-content">
-                            <h2><i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;Redirection vers la page projet...</h2>
+                            <h2><i class="fa fa-spinner fa-spin fa-fw"></i>&nbsp;Redirection vers la page...</h2>
                         </div>
                     </div>
 
