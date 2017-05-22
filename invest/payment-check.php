@@ -3,12 +3,14 @@ global $campaign;
 if (!isset($campaign)) {
 	$campaign = atcf_get_current_campaign();
 }
+$wdginvestment = WDGInvestment::current();
 
 if (isset($campaign)): ?>
 
 	<?php
     $filename = dirname ( __FILE__ ) . '/../../pdf_files/contract-'.$campaign->ID.'.docx';
     $url = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/pdf_files/contract-'.$campaign->ID.'.docx';
+	$wdginvestment->set_status( WDGInvestment::$status_waiting_check );
 	?>
     		
 	<?php
