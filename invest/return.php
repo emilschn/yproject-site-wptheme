@@ -7,6 +7,7 @@ if (!isset($campaign)) {
 if (isset($campaign) && is_user_logged_in()):
     ypcf_session_start();
     ypcf_check_is_project_investable();
+	$wdginvestment = WDGInvestment::current();
 	
     if (	isset($_REQUEST["ContributionID"]) || isset($_REQUEST["response_wkToken"])
 			|| ($campaign->get_payment_provider() == ATCF_Campaign::$payment_provider_lemonway && $_GET['meanofpayment'] == 'wire')
@@ -23,6 +24,7 @@ if (isset($campaign) && is_user_logged_in()):
 				$random = rand(10000, 99999);
 				$purchase_key = 'wire_TEMP_' . $random;
 				$amount = $_SESSION['amount_to_save'];
+				$wdginvestment->set_status( WDGInvestment::$status_waiting_wire );
 				
 			//Paiement par porte-monnaie
 			} else if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wallet') {
@@ -159,6 +161,15 @@ if (isset($campaign) && is_user_logged_in()):
 			if ( (isset($_GET['cancel']) && $_GET['cancel'] == '1') || (isset($_GET['error']) && $_GET['error'] == '1') ) {
 				$status = 'failed';
 			}
+			
+			if ( (isset($_GET['cancel']) && $_GET['cancel'] == '1') ) {
+				$wdginvestment->set_status( WDGInvestment::$status_canceled );
+			} elseif ( (isset($_GET['error']) && $_GET['error'] == '1') ) {
+				$wdginvestment->set_status( WDGInvestment::$status_error );
+			} else {
+				$wdginvestment->set_status( WDGInvestment::$status_validated );
+			}
+			
 			$payment_data = array( 
 				'price'			=> $amount, 
 				'date'			=> date('Y-m-d H:i:s'), 
@@ -218,10 +229,19 @@ if (isset($campaign) && is_user_logged_in()):
 						<?php _e("Transaction en cours.", 'yproject'); ?><br />
 					<?php endif; ?>
 						
-					
+					<?php if ( !$wdginvestment->has_token() ): ?>
 					<?php _e("Merci de vous rendre sur la page", 'yproject'); ?> <a href="<?php echo get_permalink($invest_page->ID); ?>"><?php _e("Mes investissements", 'yproject'); ?></a> <?php _e("pour suivre l&apos;&eacute;volution de votre paiement.", 'yproject'); ?><br /><br />
+					<?php endif; ?>
 					
-					<center><a class="button" href="<?php echo get_permalink($share_page->ID); ?>'?campaign_id=<?php echo $campaign->ID; ?>"><?php _e("Suivant", 'yproject'); ?></a></center><br /><br />
+					<?php
+					$link_next = '#';
+					if ( $wdginvestment->has_token() ) {
+						$link_next = $wdginvestment->get_redirection( 'error' );
+					} else {
+						$link_next = get_permalink($share_page->ID). '?campaign_id=' .$campaign->ID;
+					}
+					?>
+					<center><a class="button" href="<?php echo $link_next; ?>"><?php _e("Suivant", 'yproject'); ?></a></center><br /><br />
 					<?php
 					break;
 
@@ -279,7 +299,15 @@ if (isset($campaign) && is_user_logged_in()):
 							<?php _e("Vous allez recevoir un e-mail &agrave; l&apos;adresse", 'yproject'); ?> <?php echo $current_user->user_email; ?> (<?php _e("pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable", 'yproject'); ?>).<br /><br />
 						</div>
 					<?php endif; ?>
-					<div class="align-center"><a class="button" href="<?php echo get_permalink($share_page->ID); ?>?campaign_id=<?php echo $campaign->ID; ?>"><?php _e("Suivant", 'yproject'); ?></a></div><br /><br />
+					<?php
+					$link_next = '#';
+					if ( $wdginvestment->has_token() ) {
+						$link_next = $wdginvestment->get_redirection( 'error' );
+					} else {
+						$link_next = get_permalink($share_page->ID). '?campaign_id=' .$campaign->ID;
+					}
+					?>
+					<div class="align-center"><a class="button" href="<?php echo $link_next; ?>"><?php _e("Suivant", 'yproject'); ?></a></div><br /><br />
 
 					<?php 
 					//Si un utilisateur investit, il croit au projet
