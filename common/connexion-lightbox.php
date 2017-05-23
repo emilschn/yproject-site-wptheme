@@ -7,7 +7,7 @@
 	</div>
 	<?php endif; ?>
     
-        <form method="post" action="" name="login-form" class="sidebar-login-form db-form form-register">
+        <form method="post" name="login-form" class="sidebar-login-form db-form form-register">
 			<h2><?php _e('Inscription et connexion', 'yproject'); ?></h2>
 			
 			<div class="field">
@@ -38,8 +38,8 @@
 				<label for="signin_rememberme" style="width: auto;"><?php _e( 'Se souvenir de moi', 'yproject' ); ?></label>
 			</div>
             
-            <div class="box_connection_buttons red" class="submit-center">
-                <input type="submit"  name="wp-submit" id="sidebar-wp-submit-lightbox" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
+            <div class="box_connection_buttons red submit-center">
+                <input type="submit" name="wp-submit" id="sidebar-wp-submit-lightbox" class="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
                 <input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 				<input type="hidden" name="login-form" value="1" />
             </div>

@@ -485,10 +485,11 @@ function yproject_check_user_can_see_project_page() {
  */
 function remove_related_videos($embed) {
     if (strstr($embed,'http://www.youtube.com/embed/') || strstr($embed,'https://www.youtube.com/embed/')) {
-		return str_replace('feature=oembed','feature=oembed&rel=0&wmode=transparent',$embed);
-    } else {
-		return $embed;
+		$embed = str_replace( 'frameborder="0"', 'style="border: none"', $embed );
+		$embed = str_replace( 'allowfullscreen', '', $embed );
+		$embed = str_replace( 'feature=oembed', 'feature=oembed&rel=0&wmode=transparent', $embed );
     }
+	return $embed;
 }
 add_filter('oembed_result', 'remove_related_videos', 1, true);
 
@@ -1501,10 +1502,10 @@ add_shortcode('yproject_lightbox_button', 'yproject_shortcode_lightbox_button');
 //Shortcode lightbox standard
 function yproject_shortcode_lightbox($atts, $content = '') {
     $atts = shortcode_atts( array(
-	'id' => 'lightbox',
-	'scrolltop' => '',
-	'style' => '',
-	'class' => '',
+		'id' => 'lightbox',
+		'scrolltop' => '0',
+		'style' => '',
+		'class' => '',
     ), $atts );
 	
     return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].' '.$atts['class'].'>
@@ -1521,8 +1522,8 @@ add_shortcode('yproject_lightbox', 'yproject_shortcode_lightbox');
 //Shortcode grande lightbox
 function yproject_shortcode_widelightbox($atts, $content = '') {
     $atts = shortcode_atts( array(
-	'id' => 'lightbox',
-	'scrolltop' => '',
+		'id' => 'lightbox',
+		'scrolltop' => '0',
     ), $atts );
     return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].'>
 		<div class="wdg-lightbox-click-catcher"></div>

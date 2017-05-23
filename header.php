@@ -238,9 +238,9 @@
 				<div class="validate-terms-excerpt">
 					<?php echo wpautop( stripslashes( $edd_options[WDGUser::$edd_general_terms_excerpt])); ?>
 				</div>
-				<form action="" method="POST">
+				<form method="POST">
 					<input type="hidden" name="action" value="validate-terms" />
-					<label for="validate-terms-check"><input type="checkbox" id="validate-terms-check" name="validate-terms-check" /> J&apos;accepte les conditions g&eacute;n&eacute;rales d&apos;utilisation</label><br />
+					<label for="validate-terms-check-header"><input type="checkbox" id="validate-terms-check-header" name="validate-terms-check" /> J&apos;accepte les conditions g&eacute;n&eacute;rales d&apos;utilisation</label><br />
 					<div style="text-align: center;"><input type="submit" value="Valider" class="button" /></div>
 				</form> 
 			</div>

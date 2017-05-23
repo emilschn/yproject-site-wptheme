@@ -119,6 +119,6 @@ else {
 </section> <!-- section#home-video -->
 
 
-<section id="home-press" class="hidden-inf997">
+<div id="home-press" class="hidden-inf997">
 	<a href="<?php echo home_url( '/press-book' ); ?>"><img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse-mars-2017.png" alt="presse" /></a>
-</section> <!-- section#home-press -->
+</div> <!-- section#home-press -->
