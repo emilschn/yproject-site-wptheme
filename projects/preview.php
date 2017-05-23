@@ -70,8 +70,8 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
                     $buttonAction = __("investir sur ce projet", "yproject");
         ?>              
                     <div class="progress-bar">
-                        <span class="current-amount" style="min-width:<?php echo $width; ?>%">&nbsp;<p><?php echo $campaign->current_amount(); ?></p>&nbsp;</span>
-                        <span class="progress-percent"><p><?php echo $campaign->percent_minimum_completed(); ?></p></span>          
+                        <span class="current-amount" style="min-width:<?php echo $width; ?>%">&nbsp;<span><?php echo $campaign->current_amount(); ?></span>&nbsp;</span>
+                        <span class="progress-percent"><span><?php echo $campaign->percent_minimum_completed(); ?></span></span>          
                     </div>
         <?php
 
@@ -81,21 +81,21 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
         ?>
                     <div class="progress-bar">
                         <span class="vote-status" style="min-width:100%">&nbsp;
-							<p>
+							<span>
 							<?php if ($time_remaining_str != '-'): ?>
 							<?php _e("projet en cours de vote", "yproject"); ?>
 							<?php else: ?>
 							<?php _e("vote termin&eacute;", "yproject"); ?>
 							<?php endif; ?>
-							</p>
+							</span>
 						&nbsp;</span>        
                     </div>
                 <?php endif; ?>
         </a>
         <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
                 <div class="progress-info">
-                    <span class="progress-pers"><?php if($jycrois): ?><p class="info-nb"><?php echo $jycrois; ?>&nbsp;pers.</p><?php endif; ?><p class="info-action"><?php echo $persStatus ?></p></span>
-                    <span class="progress-days"><p class="info-nb"><?php echo $time_remaining_str; ?></p><p class="info-action"><?php echo $projectAction ?></p></span>
+                    <span class="progress-pers"><?php if($jycrois): ?><span class="info-nb"><?php echo $jycrois; ?>&nbsp;pers.</span><?php endif; ?><span class="info-action"><?php echo $persStatus ?></span></span>
+                    <span class="progress-days"><span class="info-nb"><?php echo $time_remaining_str; ?></span><span class="info-action"><?php echo $projectAction ?></span></span>
                 </div>
         </a>
 		<a class="home-button-project project-button" href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $buttonAction ?></a>
@@ -109,12 +109,12 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
             <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
                 <div class="progress-bar">
                     <span class="current-amount" style="min-width:<?php echo $width; ?>%">&nbsp;
-                        <p><?php echo $campaign->current_amount(); ?> : <?php echo $campaign->percent_minimum_completed(); ?></p>&nbsp;
+                        <span><?php echo $campaign->current_amount(); ?> : <?php echo $campaign->percent_minimum_completed(); ?></span>&nbsp;
                     </span>        
                 </div>
                 <div class="progress-info">
-                    <span class="progress-pers"><p class="info-nb"><?php echo $campaign->get_jycrois_nb(); ?>&nbsp;<?php _e("pers.", "yproject") ?></p><p class="info-action"><?php echo $persStatus ?></p></span>
-                    <span class="progress-status"><p class="info-nb"><?php echo $projectStatus ?></p></span>
+                    <span class="progress-pers"><span class="info-nb"><?php echo $campaign->get_jycrois_nb(); ?>&nbsp;<?php _e("pers.", "yproject") ?></span><span class="info-action"><?php echo $persStatus ?></span></span>
+                    <span class="progress-status"><span class="info-nb"><?php echo $projectStatus ?></span></span>
                 </div>
             </a>          
                 <a class="home-button-project project-button see-project" href="<?php echo get_permalink($campaign->ID); ?>"><?php echo $buttonAction ?></a>  

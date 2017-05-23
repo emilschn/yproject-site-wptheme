@@ -22,7 +22,7 @@
 					<?php ypcf_debug_log('Account activated + form'); ?>
 					<p><?php printf( __( 'Votre compte a bien &eacute;t&eacute; activ&eacute; ! Vous pouvez maintenant <a href="%s">vous connecter</a> avec votre login et mot de passe.', 'yproject' ), home_url('/connexion') ); ?></p>
 
-					<form name="login-form" id="sidebar-login-form" class="standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
+					<form name="login-form" class="sidebar-login-form standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
 					    <label class="standard-label"><?php _e('Identifiant', 'yproject'); ?></label>
 					    <input type="text" name="log" id="sidebar-user-login" class="input" value="<?php if ( isset( $user_login) ) echo esc_attr(stripslashes($user_login)); ?>" />
 					    <br />

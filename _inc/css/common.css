@@ -464,28 +464,28 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     font-size: 11pt;
 }
 .box_connection_buttons.red{ background-color: #EA4F51; text-transform: uppercase; }
-.box_connection_buttons.blue, #connexion_facebook_container.box_connection_buttons.blue { background-color: #3B5998; }
+.box_connection_buttons.blue, .connexion_facebook_container.box_connection_buttons.blue { background-color: #3B5998; }
 .box_connection_buttons span { color: #FFF; }
 
-#submenu-user form#sidebar-login-form {
+#submenu-user form.sidebar-login-form {
 	width: 255px;
 	margin: 0 auto;
 	text-align: left;
 }
-#submenu-user form#sidebar-login-form span#title-connection {
+#submenu-user form.sidebar-login-form span#title-connection {
 	display: block;
 	font-size: 11pt;
 }
-#submenu-user form#sidebar-login-form label {
+#submenu-user form.sidebar-login-form label {
     font-size: 10pt;
     margin-left: 5px;
     text-transform: uppercase;
 }
 
-#submenu-user form#sidebar-login-form .input_submit {
+#submenu-user form.sidebar-login-form .input_submit {
     color: #FFF;
 }
-#submenu-user form#sidebar-login-form .input_connection {
+#submenu-user form.sidebar-login-form .input_connection {
     margin: 7px 0px;
     width: 246px;
     height: 40px; 
@@ -496,11 +496,11 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     font-family: Trebuchet MS, sans-serif;
     padding: 5px;
 }
-#submenu-user form#sidebar-login-form .pwd_submit {
+#submenu-user form.sidebar-login-form .pwd_submit {
     width: 191px;
     margin-right: 0px;
 }  
-#submenu-user form#sidebar-login-form .ok_valid {
+#submenu-user form.sidebar-login-form .ok_valid {
     width: 50px;
     height: 50px;
     background-color: #EA4F51;

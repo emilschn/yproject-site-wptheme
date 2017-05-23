@@ -23,7 +23,7 @@
 					<span class="complement">compos&eacute; de lettres non-accentu&eacute;es, de chiffres ou des caract&egrave;res suivants : . - @</span>
 					<div class="field-container">
 						<span class="field-value">
-							<input type="text" name="signup_username_login" id="signup_username_login" value="<?php if (!empty($_POST['signup_username'])) { echo $_POST['signup_username']; } ?>" autofocus />
+							<input type="text" name="signup_username_login" id="signup_username_login" value="<?php if (!empty($_POST['signup_username'])) { echo $_POST['signup_username']; } ?>" />
 						</span>
 					</div>
 				</div>
@@ -72,7 +72,7 @@
 				</div>
 			</div>
 
-			<div class="box_connection_buttons blue" id="connexion_facebook_container">
+			<div class="connexion_facebook_container box_connection_buttons blue">
 				<?php
 				$fb = new Facebook\Facebook([
 					'app_id' => YP_FB_APP_ID,

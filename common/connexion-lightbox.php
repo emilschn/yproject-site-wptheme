@@ -7,14 +7,14 @@
 	</div>
 	<?php endif; ?>
     
-        <form method="post" action="" name="login-form" id="sidebar-login-form" class="db-form form-register">
+        <form method="post" action="" name="login-form" class="sidebar-login-form db-form form-register">
 			<h2><?php _e('Inscription et connexion', 'yproject'); ?></h2>
 			
 			<div class="field">
 				<label for="signin_username"><?php _e( 'Identifiant ou e-mail', 'yproject' ); ?> *</label>
 				<div class="field-container">
 					<span class="field-value">
-						<input type="text" name="log" id="signin_username" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" autofocus />
+						<input type="text" name="log" id="signin_username" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" />
 					</span>
 				</div>
 			</div>
@@ -28,7 +28,7 @@
 				</div>
 			</div>
 	    
-            <div id="sidebar-login-form-lightbox">
+            <div>
 				<a href="<?php echo home_url( '/mot-de-passe-oublie' ); ?>" >(<?php _e("Mot de passe oubli&eacute;", 'yproject'); ?>)</a>
             </div>
 
@@ -38,14 +38,14 @@
 				<label for="signin_rememberme" style="width: auto;"><?php _e( 'Se souvenir de moi', 'yproject' ); ?></label>
 			</div>
             
-            <div class="box_connection_buttons red" id="submit-center">
+            <div class="box_connection_buttons red" class="submit-center">
                 <input type="submit"  name="wp-submit" id="sidebar-wp-submit-lightbox" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
-                <input type="hidden" id="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
+                <input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 				<input type="hidden" name="login-form" value="1" />
             </div>
         </form>
 	
-        <div id="connexion_facebook_container" class="box_connection_buttons blue">
+        <div class="connexion_facebook_containerbox_connection_buttons blue">
 			<?php
 			$fb = new Facebook\Facebook([
 				'app_id' => YP_FB_APP_ID,
