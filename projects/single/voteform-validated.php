@@ -13,9 +13,7 @@
 	$directory_twitter=$stylesheet_directory_uri."/images/twitter.jpg";
 	$directory_google=$stylesheet_directory_uri."/images/google+.jpg";
 
-	$style_lightbox="style='display:block !important;'";
-
-	echo do_shortcode('[yproject_lightbox id="voteform-validated" style="'.$style_lightbox.'"]'."
+	echo do_shortcode('[yproject_lightbox id="voteform-validated"]'."
 		<div id='thanks'> 
 			<span class='block_thanks_1'>Merci d'avoir voté sur ce projet !</span>
 			</br>

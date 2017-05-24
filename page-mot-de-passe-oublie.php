@@ -27,7 +27,7 @@
 		    $wpdb->update($wpdb->users, array('user_activation_key' => $key), array('user_login' => $user_login));
 		}
 
-		$message = "Quelqu'un a demandé à changer votre mot de passe sur le site WEDOGOOD pour l'utilisateur suivant :\r\n\r\n";
+		$message = "Quelqu'un a demandé à changer votre mot de passe sur le site ".ATCF_CrowdFunding::get_platform_name()." pour l'utilisateur suivant :\r\n\r\n";
 		$message .= $user_login . "\r\n\r\n";
 		$message .= "Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous. Sinon, ignorez simplement ce message.\r\n\r\n";
 		$message .= get_permalink($page_forgot_password->ID) . "?action=rp&key=$key&login=" . rawurlencode($user_login);

@@ -188,12 +188,30 @@ form.wdg-forms .small-margin {
 }
 
 .standard-form {
-    font-family: Arial, sans-serif;
+    font-family: Trebuchet MS, sans-serif;
     margin: 5px 0px;
 }
 .standard-form select{ margin-bottom: 5px; }
 .standard-form input[type=text] { margin-bottom: 5px; }
 .standard-form input[type=password] { margin-bottom: 3px; }
+.standard-form input[type=text], .standard-form input[type=password] {
+	width: 200px;
+	height: 30px;
+	padding: 0px 5px;
+	border: none;
+}
+.standard-form input[type=text]::-webkit-input-placeholder, .standard-form input[type=password]::-webkit-input-placeholder {
+	color: #E1E3E2;
+}
+.standard-form input[type=text]::-moz-placeholder, .standard-form input[type=password]::-moz-placeholder {
+	color: #E1E3E2;
+}
+.standard-form input[type=text]:-moz-placeholder, .standard-form input[type=password]:-moz-placeholder {
+	color: #E1E3E2;
+}
+.standard-form input[type=text]:-ms-input-placeholder, .standard-form input[type=password]:-ms-input-placeholder {
+	color: #E1E3E2;
+}
 .standard-form input.margin-left { margin-left: 140px !important; }
 .standard-form input[type=submit] {
     background: none repeat scroll 0 0 #333333;
@@ -202,7 +220,9 @@ form.wdg-forms .small-margin {
     padding: 3px 8px;
     text-transform: uppercase;
 }
-
+.standard-form #signup_submit, .standard-form #sidebar-wp-submit-lightbox {
+	padding: 0px;
+}
 .standard-label {
     display: inline-block;
     width: 140px;
@@ -457,7 +477,7 @@ form.wdg-forms table input[type="text"].reward-text{
 	max-width: 600px;
 	max-height: 80vh;
 	margin: 5vh auto;
-	padding: 20px;
+	padding: 50px;
 	background-color: #F2F2F2;
 	overflow-y: auto;
 	z-index: 4002;
@@ -481,12 +501,17 @@ form.wdg-forms table input[type="text"].reward-text{
 }
 
 .wdg-lightbox .wdg-lightbox-button-close {
-	float: right;
-	margin-top: -17px;
+	position: absolute;
+	right: 0px;
+	margin-top: -45px;
 }
 .wdg-lightbox .wdg-lightbox-button-close a {
-	font-size: 16px;
-	font-weight: bold;
+	padding: 5px 20px;
+	background: none;
+	border: none;
+	font-size: 28pt;
+	color: #333333;
+	text-transform: lowercase;
 }
 
 #validate-terms .validate-terms-excerpt {
@@ -516,12 +541,14 @@ form.wdg-forms table input[type="text"].reward-text{
     margin: 10px 0px;
 }
 .wdg-lightbox .register-section {
-    margin: 20px 0px;
+    margin: 15px 0px;
     text-align: center;
 }
-.wdg-lightbox div.submit {
-    margin: 10px 0px;
-    text-align: center;
+.wdg-lightbox .register-section .g-recaptcha {
+	margin-bottom: 15px;
+}
+.wdg-lightbox .register-section .g-recaptcha div {
+	margin: auto;
 }
 
 .wdg-lightbox.timeout-lightbox {
@@ -546,6 +573,31 @@ form.wdg-forms table input[type="text"].reward-text{
 	list-style: none;
 	padding-left: 10px;
 	margin: 20px 0px;
+}
+
+#orgacreate_form input[name=org_capable] {
+	margin: 30px 5px 0;
+}
+
+/*******************************************************************************
+* LIGHTBOX - COURTS MESSAGES
+*******************************************************************************/
+.wdg-lightbox.msg-lightbox {
+	position: absolute;
+	text-align: center;
+	font-size: 12pt;
+}
+.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.valid-msg {
+	top: 280px;
+	background-color: #8BC79C;
+	color: #FFFFFF;
+}
+.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.valid-msg .wdg-lightbox-button-close {
+	background-color: transparent !important;
+}
+.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.valid-msg .wdg-lightbox-button-close a {
+	font-size: 24pt;
+	color: #FFFFFF;
 }
 
 /*******************************************************************************
@@ -575,40 +627,6 @@ form.wdg-forms table input[type="text"].reward-text{
     transition: all 240ms ease-in-out;	
 }
 
-/* default heights, width and margin w/o Javscript */
-.tool-tip, .tool-tip.top {
-    width: 90px;
-    margin-left: -90px;
-}
-
-/* tool tip position right */
-.tool-tip.right:after{
-    left: -5px;
-    top: 50%;	
-    margin-top: -6px;
-    bottom: auto;
-    border-top-color: transparent;	
-    border-right-color: rgba( 0, 0, 0, .7);	
-}
-
-/* tooltip on focus left and right */
-.on-focus input {
-    width:200px;
-}
-.on-focus .tool-tip.left, .on-focus .tool-tip.right{
-    margin-top: -30px;
-}
-/* on hover of element containing tooltip default*/
-*:not(.on-focus):hover > .tool-tip, .on-focus input:focus + .tool-tip{
-    visibility: visible;
-    opacity: 1;
-    -webkit-transition: all 240ms ease-in-out;
-    -moz-transition: all 240ms ease-in-out;
-    -ms-transition: all 240ms ease-in-out;
-    -o-transition: all 240ms ease-in-out;
-    transition: all 240ms ease-in-out;
-}
-
 .colonne {
     width: 235px;
     vertical-align: top; 
@@ -619,17 +637,13 @@ form.wdg-forms table input[type="text"].reward-text{
     text-align: left;
 }
 
-#sidebar-login-form a{
+.sidebar-login-form a{
     color: #606060;
     font-size: 11px;
     font-style: italic;
 }
-#sidebar-login-form label {
-    text-align: right;
-    font-size: 14px;
-}
-#sidebar-login-form .link-forgotten { margin-left: 140px; }
-#sidebar-login-form .link-forgotten a { color: #333333; text-align: right; font-size: 10px; font-style: italic; }
+.sidebar-login-form .link-forgotten { margin-left: 140px; }
+.sidebar-login-form .link-forgotten a { color: #333333; text-align: right; font-size: 10px; font-style: italic; }
 
 .infobutton, .fa.infobutton{
     cursor: help;
@@ -2045,11 +2059,10 @@ span#extra-comment-image{
 /*******************************************************************************
 * REGISTER PAGE / REGISTER LIGHTBOX
 *******************************************************************************/
-#wdg-lightbox-register .wdg-button-lightbox-open {
-    width: 174px;
-    padding: 5px 0px;
-    display: inline-block;
-    font-size: 12px;
+#wdg-lightbox-register .wdg-button-lightbox-open, #newproject-register-user .wdg-button-lightbox-open {
+	border: none;
+	background: none;
+	font-size: 12pt;
 }
 
 .form-register .on-focus input { margin-left: 110px; }
@@ -2058,9 +2071,14 @@ span#extra-comment-image{
 .form-register {
     margin: 5px;
 }
-.form-register h2 {
+.form-register h2, #sidebar-login-form h2 {
     text-align: center;
-    margin: 5px 0px;
+    margin: 0px;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+	color: #00879B;
+	font-size: 16pt;
+	font-weight: normal;
 }
 .form-register .warning {
     text-align: justify;
@@ -2069,30 +2087,29 @@ span#extra-comment-image{
 .form-register .register-section {
     text-align: center;
 }
-.form-register .register-section div {
-    margin: 7px auto;
-    text-align: center;
-}
-.form-register div#connexion_facebook_container {
+.form-register div.connexion_facebook_container {
     display: block;
     text-align: center;
     background-color: transparent;
 }
-.form-register div#connexion_facebook_container a {
+.form-register div.connexion_facebook_container a {
     padding: 2px 0px 5px;
-    background-color: #526794;
-    border: 1px solid #526794;
 }
-
-#signup_submit {
-    background-color: #333333;
+#signup_form .submit {
+	margin-top: 20px;
+}
+#signup_form #signin-button {
+	margin-top: 8px;
+}
+#signup_submit, #sidebar-wp-submit-lightbox {
+    background-color: #EA4F51;
     color: #FFF;
     border: 0px;
     width: 174px;
-    padding: 5px 0px 5px 0px;
     text-transform: uppercase;
+	font-size: 12pt;
+	cursor: pointer;
 }
-
 /*******************************************************************************
 * ACTIVATE PAGE
 *******************************************************************************/ 

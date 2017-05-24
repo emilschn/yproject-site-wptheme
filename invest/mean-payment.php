@@ -17,13 +17,13 @@ if (isset($campaign)):
 	$can_use_wallet = FALSE;
 	$can_use_card_and_wallet = FALSE;
 	if ($_SESSION['redirect_current_invest_type'] == 'user') {
-		$can_use_wallet = $WDGUser_current->can_pay_with_wallet( $amount, $campaign );
-		$can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $amount, $campaign );
+		$can_use_wallet = $WDGUser_current->can_pay_with_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
+		$can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
 	} else {
 		$invest_type = $_SESSION['redirect_current_invest_type'];
 		$organization = new WDGOrganization($invest_type);
-		$can_use_wallet = $organization->can_pay_with_wallet( $amount, $campaign );
-		$can_use_card_and_wallet = $organization->can_pay_with_card_and_wallet( $amount, $campaign );
+		$can_use_wallet = $organization->can_pay_with_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
+		$can_use_card_and_wallet = $organization->can_pay_with_card_and_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
 	}
 	
 	//Possible de régler par virement ?
@@ -58,6 +58,7 @@ if (isset($campaign)):
 				<a href="<?php echo $page_mean_payment_link; ?>card">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-carte.jpg" alt="<?php _e("Carte bancaire", 'yproject'); ?>" />
 					<?php _e("Carte bancaire", 'yproject'); ?>
+					- <?php _e("Les e-cartes bleues ne sont pas accept&eacute;es par notre prestataire", 'yproject'); ?>
 				</a>
 			</li>
 			
@@ -74,6 +75,7 @@ if (isset($campaign)):
 				<a href="<?php echo $page_mean_payment_link; ?>cardwallet">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-carte-portemonnaie.png" alt="<?php _e("Carte bancaire et porte-monnaie WEDOGOOD", 'yproject'); ?>" />
 					<?php echo sprintf( __( 'Porte-monnaie WEDOGOOD (Vous disposez actuellement de %s &euro;) compl&eacute;t&eacute; par carte', 'yproject' ), $lemonway_amount ); ?>
+					- <?php _e("Les e-cartes bleues ne sont pas accept&eacute;es par notre prestataire", 'yproject'); ?>
 				</a>
 			</li>
 			<?php endif; ?>

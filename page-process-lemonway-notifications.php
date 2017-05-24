@@ -90,6 +90,7 @@ if ( !empty( $lemonway_posted_category ) ) {
 				$organization_obj = new WDGOrganization( $campaign_organization->wpref );
 				$invest_author = $WDGUser_invest_author;
 				ypcf_debug_log( 'PROCESS -> $WDGUser_invest_author->wp_user->ID = ' . $WDGUser_invest_author->wp_user->ID );
+
 				if ( WDGOrganization::is_user_organization($WDGUser_invest_author->wp_user->ID) ) {
 					$invest_author = new WDGOrganization( $WDGUser_invest_author->wp_user->ID );
 				}

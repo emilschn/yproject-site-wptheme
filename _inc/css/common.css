@@ -9,11 +9,11 @@ body a {
     color: #EA4F51;
     text-decoration: none;
 }
-body input {
+body input, body select {
 	font-family: Trebuchet MS, sans-serif;
 }
 /* Taille font définie pour tous les textes de formulaire */
-body input[type=text] {
+body input[type=text], body select {
 	font-size: 12pt;
 }
 
@@ -103,6 +103,114 @@ button.red {
         border: 2px solid #333;
         color: #333;
 }
+
+/*******************************************************************************
+* LIGHTBOX - DESIGN GENERAL
+*******************************************************************************/
+
+.wdg-lightbox-ref .db-form {
+	text-align: center;
+}
+.wdg-lightbox-ref .db-form .field label{
+	display: inline-block;
+	width: 240px;
+	margin: 3px 30px 3px 0px;
+	font-weight: bold;
+	text-align: left;
+	vertical-align: top;
+}
+.wdg-lightbox-ref .db-form .field span.complement{
+	display: block;
+	width: 270px;
+	margin: 0px auto 3px;
+	font-size: 10pt;
+	text-align: left;
+}
+.wdg-lightbox-ref .db-form .field-container {
+	display: block;
+}
+.wdg-lightbox-ref .db-form .field-container.field-type-check {
+	display: inline-block;
+}
+.wdg-lightbox-ref .db-form .field-container input[type=text], .wdg-lightbox-ref .db-form .field-container input[type=password] {
+	width: 260px;
+	height: 30px;
+	border: none;
+}
+.wdg-lightbox-ref .db-form .field-container select {
+	width: 275px;
+	height: 34px;
+	border: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	overflow: hidden;
+	background: url("../../images/common/arrow-filter.png") no-repeat right #FFF;
+	background-size: 34px;
+}
+.wdg-lightbox-ref .db-form .field-container select option {
+	padding: 7px;
+	border-bottom: 1px solid #E1E3E2;
+}
+.wdg-lightbox-ref .db-form .field-container textarea {
+	width: 240px;
+	font-family: Trebuchet MS, sans-serif;
+}
+.wdg-lightbox-ref .db-form button[type=submit] {
+	width: 255px;
+	padding: 15px;
+	margin: 15px auto;
+	border: none;
+	background-color: #EA4F51;
+	font-size: 11pt;
+}
+
+/* Classes à ajouter dans le back-office WordPress */
+.wp-form-title {
+	text-align: center;
+	margin: 0px;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+	color: #00879B;
+	font-size: 16pt;
+	font-weight: normal;
+}
+.wp-form-text {
+	width: 240px;
+	height: 34px;
+	padding: 0px 10px;
+	border: none;
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 12pt;
+}
+.wp-form-textarea {
+	width: 250px;
+	padding: 5px;
+	border: none;
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 11pt;
+}
+.wp-form-submit {
+	width: 255px;
+	padding: 15px;
+	margin: 15px auto;
+	border: none;
+	background-color: #EA4F51;
+	font-size: 11pt;
+}
+
+/* CSS pour éléments WordPress non paramétrables dans le back-office */
+#wdg-lightbox-contactprojet span.wpcf7-list-item {
+	display: block;
+	margin-left: 0;
+}
+#wdg-lightbox-contactprojet .wpcf7-form {
+	width: 95%;
+	margin: auto;
+}
+#wdg-lightbox-contactprojet .wpcf7-form p {
+	margin: 20px auto;
+}
+
 /*******************************************************************************
 * SCROLLBAR VISIBLE - NAVIGATEUR CHROME
 *******************************************************************************/
@@ -348,36 +456,36 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     text-transform: uppercase;  
 }
 
-#submenu-user div.box_connection_buttons {   
+.box_connection_buttons {
     width: 225px;
     text-align: center;
     padding: 15px;
     margin: 15px auto;
     font-size: 11pt;
 }
-#submenu-user div.box_connection_buttons.red { background-color: #EA4F51; }
-#submenu-user div.box_connection_buttons.blue { background-color: #3B5998; }
-#submenu-user div.box_connection_buttons span { color: #FFF; }
+.box_connection_buttons.red{ background-color: #EA4F51; text-transform: uppercase; }
+.box_connection_buttons.blue, .connexion_facebook_container.box_connection_buttons.blue { background-color: #3B5998; }
+.box_connection_buttons span { color: #FFF; }
 
-#submenu-user form#sidebar-login-form {
+#submenu-user form.sidebar-login-form {
 	width: 255px;
 	margin: 0 auto;
 	text-align: left;
 }
-#submenu-user form#sidebar-login-form span#title-connection {
+#submenu-user form.sidebar-login-form span#title-connection {
 	display: block;
 	font-size: 11pt;
 }
-#submenu-user form#sidebar-login-form label {
+#submenu-user form.sidebar-login-form label {
     font-size: 10pt;
     margin-left: 5px;
     text-transform: uppercase;
 }
 
-#submenu-user form#sidebar-login-form .input_submit {
+#submenu-user form.sidebar-login-form .input_submit {
     color: #FFF;
 }
-#submenu-user form#sidebar-login-form .input_connection {
+#submenu-user form.sidebar-login-form .input_connection {
     margin: 7px 0px;
     width: 246px;
     height: 40px; 
@@ -388,11 +496,11 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     font-family: Trebuchet MS, sans-serif;
     padding: 5px;
 }
-#submenu-user form#sidebar-login-form .pwd_submit {
+#submenu-user form.sidebar-login-form .pwd_submit {
     width: 191px;
     margin-right: 0px;
 }  
-#submenu-user form#sidebar-login-form .ok_valid {
+#submenu-user form.sidebar-login-form .ok_valid {
     width: 50px;
     height: 50px;
     background-color: #EA4F51;
@@ -434,7 +542,7 @@ footer > .footer-container {
 }
 
 footer > .footer-container > section:first-child { padding: 25px 0px 35px; }
-footer > .footer-container > section:nth-child(2) { background: #FFFFFF; }
+footer > .footer-container > div { background: #FFFFFF; }
 footer h3 {
 	font-size: 16pt;
 	font-weight: bold;
@@ -464,7 +572,8 @@ footer a.social_network::before{
 footer a.social_network{
 	margin-right: 20px;
 }
-footer > .footer-container > section > div {
+footer > .footer-container > section > div,
+footer > .footer-container > div > div {
 	float: left;
 	width: 32%;
 	margin: 0% 0.5%;
@@ -498,35 +607,35 @@ footer form input#subscribe-nl-submit {
 }
 
 /* Footer 2nd partie*/
-footer > .footer-container > section:nth-child(2) > div > a::before {
+footer > .footer-container > div > div > a::before {
 	display: none;
 }
-footer > .footer-container > section:nth-child(2) > div {
-	margin: 30px 20px;
-
+footer > .footer-container > div > div {
+	margin: 20px 15px;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(1){
-	width: 12%;
-	padding-left: calc((100% - 48% - 458px) / 2);
+footer > .footer-container > div > div:nth-child(1){
+	width: 160px;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(2){
+footer > .footer-container > div > div:nth-child(1) img{
+	margin: 12px;
+}
+footer > .footer-container > div > div:nth-child(2){
+	width: 140px;
+}
+footer > .footer-container > div > div:nth-child(3){
 	position: relative;
 	width: 200px;
-	margin-top: 74px;
-	margin-left: 3%;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(3){
+footer > .footer-container > div > div:nth-child(3) img{
+	margin-top: 45px;
+}
+footer > .footer-container > div > div:nth-child(4){
 	width: 258px;
-	margin: 2% 0% 0% 4%;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(4){
-	width: 22%;
-	margin-left: 3%;
-}
-footer > .footer-container > section div#lemonway p {
+footer > .footer-container > div > div:nth-child(4) p {
 	font-size: 10pt;       
 }
-footer > .footer-container > section div#lemonway p.lines, footer div.lines {
+footer > .footer-container > div > div:nth-child(4) p.lines, footer div.lines {
 	border-top: 2px solid #333333;
 	border-bottom: 2px solid #333333;
 	padding: 2% 0%;
@@ -535,51 +644,60 @@ footer > .footer-container > section div#lemonway p.lines, footer div.lines {
 	line-height: 150%;
 	margin-left: 12px;
 }
+footer > .footer-container > div > div:nth-child(5){
+	width: 270px;
+	margin-left: 10px;
+}
 footer div.lines{
 	padding: 1% 0%;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(4) a {
+footer > .footer-container > div > div:nth-child(5) a {
 	text-transform: none;
 	font-size: 10pt;   
 	font-style: italic;
 	letter-spacing: 1px;
 	color: #333333;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(4) li {
+footer > .footer-container > div > div:nth-child(5) li {
 	text-align: right;   
 	margin: 0;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(4) h3 {
+footer > .footer-container > div > div:nth-child(5) h3 {
 	display: none;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(4) a::before {
+footer > .footer-container > div > div:nth-child(5) a::before {
 	display: none;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(4) a::after {
+footer > .footer-container > div > div:nth-child(5) a::after {
 	content: "/";
 	margin-left: 2%;
 }
+footer > .footer-container > div > div:last-child a{
+	text-transform: none;
+	font-size: 12pt;   
+	color: #333333;
+	margin: 2%;
+}
 
-footer > .footer-container > section > div.clear, footer > .footer-container > section > div.aligncenter {
+footer > .footer-container > section > div.clear,
+footer > .footer-container > section > div.aligncenter,
+footer > .footer-container > div > div.clear,
+footer > .footer-container > div > div.aligncenter {
 	float: none;
 	width: auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-footer > .footer-container > section > div.clear {
+footer > .footer-container > section > div.clear,
+footer > .footer-container > div > div.clear {
 	border-top: 2px solid #333333;
 	width: 60%;
 	margin: auto;
 }
-footer > .footer-container > section > div.aligncenter {
+footer > .footer-container > section > div.aligncenter,
+footer > .footer-container > div > div.aligncenter {
 	margin-bottom: 0px;
 	padding-bottom: 20px;
-}
-footer > .footer-container > section:nth-child(2) > div:last-child a{
-	text-transform: none;
-	font-size: 12pt;   
-	color: #333333;
-	margin: 2%;
 }
 
 /* BANDEAU COOKIES */
@@ -595,7 +713,7 @@ footer > .footer-container > section:nth-child(2) > div:last-child a{
 }
 
 @media screen and (min-width: 998px) and (max-width: 1140px) {
-	footer > .footer-container > section:nth-child(2) > div:nth-child(4){
+	footer > .footer-container > div > div:nth-child(5){
 		width: 20%;
 	}
 }
@@ -844,7 +962,6 @@ body.page-template-template-discover-projects-php .projects-funded .wdg-componen
 }
 body.page-template-template-discover-projects-php .wdg-component-projects-preview .block-projects {
 	height: auto;
-	max-height: 1240px;
 	margin: auto;
 	padding-top: 5px;
 	overflow-y: hidden;
@@ -878,6 +995,7 @@ body.bp-user #item-header {
 * TEMPLATE - SINGLE CAMPAIGN INVEST
 *******************************************************************************/
 #template-single-campaign-invest .progress-bar{
+	position: relative;
     min-width: 0;
     width: 360px;
     max-width: 95%;

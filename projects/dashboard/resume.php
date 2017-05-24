@@ -124,7 +124,13 @@ function print_resume_page()
                             </div>
                         </div><!--
                         --><div class="quart-card">
-                            <div class="stat-big-number"><?php echo $vote_results['sum_invest_ready'].'&euro;'?></div>
+							<?php
+							$big_number_class = '';
+							if ($vote_results['sum_invest_ready'] > 10000) {
+								$big_number_class = 'less-big';
+							}
+							?>
+                            <div class="stat-big-number <?php echo $big_number_class; ?>"><?php echo $vote_results['sum_invest_ready'].'&euro;'?></div>
                             <div class="stat-little-number">sur <?php echo $campaign->vote_invest_ready_min_required() ?> &euro; recommand&eacute;s</div>
                             <div class="details-card">
                                 <strong><?php echo $vote_results['sum_invest_ready']?></strong>&euro; d'intentions d'investissement
@@ -141,7 +147,13 @@ function print_resume_page()
                 else if($status==ATCF_Campaign::$campaign_status_collecte){ ?>
                     <div id="stats-invest">
                         <div class="quart-card">
-                            <div class="stat-big-number"><?php echo $campaign->current_amount()?></div>
+							<?php
+							$big_number_class = '';
+							if ($campaign->current_amount(false) > 10000) {
+								$big_number_class = 'less-big';
+							}
+							?>
+                            <div class="stat-big-number <?php echo $big_number_class; ?>"><?php echo $campaign->current_amount(); ?></div>
                             <div class="stat-little-number">sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro; requis</div>
                             <div class="details-card">
                                 <strong><?php echo $campaign->current_amount()?></strong> investis par
@@ -167,7 +179,13 @@ function print_resume_page()
                 else if($status==ATCF_Campaign::$campaign_status_funded){ ?>
                     <div id="stats-funded">
                         <div class="half-card">
-                            <div class="stat-big-number"><?php echo $campaign->current_amount()?></div>
+							<?php
+							$big_number_class = '';
+							if ($campaign->current_amount(false) > 10000) {
+								$big_number_class = 'less-big';
+							}
+							?>
+                            <div class="stat-big-number <?php echo $big_number_class; ?>"><?php echo $campaign->current_amount()?></div>
                             <div class="stat-little-number">récoltés sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro;</div>
                             <div class="details-card">
                                 <strong><?php echo $campaign->current_amount()?></strong> investis par
@@ -188,7 +206,7 @@ function print_resume_page()
             </div>
 
             <div class="list-button">
-                <a href="#statsadvanced" class="wdg-button-lightbox-open button" data-lightbox="statsadvanced"><i class="fa fa-line-chart"></i>  Statistiques d&eacute;taill&eacute;s</a>
+                <a href="#statsadvanced" class="wdg-button-lightbox-open button" data-lightbox="statsadvanced"><i class="fa fa-line-chart"></i>  Statistiques d&eacute;taill&eacute;es</a>
             </div>
             <script type="text/javascript">
                 jQuery(document).ready( function($) {

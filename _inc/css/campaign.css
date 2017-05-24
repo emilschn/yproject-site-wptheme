@@ -647,6 +647,10 @@ div#content.version-3 .projects-desc-content h6{
 div#content.version-3 .projects-desc-content iframe {
 	max-width: 100%;
 }
+div#content.version-3 .projects-desc-content img {
+	max-width: 100%;
+	height: auto;
+}
 
 div#content.version-3 .projects-desc-content p img {
     max-width: 100%;
@@ -714,6 +718,10 @@ div#content.version-3 .project-news .project-news-item a.button {
 	margin: 15px 0px;
 	padding: 10px 60px;
 	color: #000000;
+}
+div#content.version-3 .project-news img {
+	max-width: 100%;
+	height: auto;
 }
 
 /*******************************************************************************
@@ -1487,7 +1495,6 @@ div#hide_except_div1, div#hide_except_div2_phase3 {
 @media screen and (max-width: 997px) {
 	div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered { width: 768px; }
 	div#content.version-3 div.project-rewards-content > div:first-child, div#content.version-3 div.project-rewards-content > div:first-child img { width: 100px; }
-	div#content.version-3 div.project-rewards-content > div:last-child { width: 630px; margin-left: 10px; }
 	
 	.campaign-mobile-hidden { display: none; }
 	nav#navigation { display: block; }

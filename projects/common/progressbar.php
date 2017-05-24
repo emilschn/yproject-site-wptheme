@@ -1,5 +1,6 @@
 <?php 
 global $campaign;
+$time_remaining_str = $campaign->time_remaining_str();
 $campaign_status = $campaign->campaign_status();
 $percent = min(100, $campaign->percent_minimum_completed(false));
 $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
@@ -7,7 +8,13 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 
 <?php if ($campaign_status === ATCF_Campaign::$campaign_status_vote): ?>
 <div class="progress-bar">
-	<span class="vote-status" style="min-width:100%">&nbsp;<p><?php _e("projet en cours de vote", "yproject"); ?></p>&nbsp;</span>        
+	<span class="vote-status" style="min-width:100%">&nbsp;<p>
+		<?php if ($time_remaining_str != '-'): ?>
+		<?php _e("projet en cours de vote", "yproject"); ?>
+		<?php else: ?>
+		<?php _e("vote termin&eacute;", "yproject"); ?>
+		<?php endif; ?>
+	</p>&nbsp;</span>
 </div>
 <?php else: ?>
 <div class="progress-bar">

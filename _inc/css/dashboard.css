@@ -30,6 +30,15 @@
     padding: 10px;
 }
 
+#ndashboard .required-mention {
+	font-style: italic;
+	font-weight: bold;
+}
+#ndashboard #save-mention {
+	font-size: 9pt;
+	font-style: italic;
+}
+
 /*******************************************************************************
 * NAVIGATION BAR
 *******************************************************************************/
@@ -330,6 +339,9 @@
     font-size: 80px;
     padding-top: 10px;
 }
+#ndashboard .data-blocks .stat-big-number.less-big {
+    font-size: 60px;
+}
 
 #ndashboard .data-blocks .stat-little-number {
     font-size: 22px;
@@ -346,6 +358,41 @@
 .details-card {
     height: 40px;
     vertical-align:bottom;
+}
+
+/* sous-onglets */
+.tab-subtabs.bloc-grid{
+    text-align: center;
+}
+
+.tab-subtabs .display-bloc{
+    width: 160px;
+    display: inline-block;
+    margin: 10px;
+    background-color: #EEECED;
+    vertical-align: top;
+    cursor: pointer;
+    border-bottom: 1px solid grey;
+    padding-top: 10px;
+    position:relative;
+}
+
+.tab-subtabs .display-bloc:hover{
+    background-color:grey;
+    color:white;
+}
+
+.tab-subtabs .display-bloc.active{
+    background-color:#EA4F51;
+    color:white;
+}
+
+.tab-subtabs .display-bloc .fa{
+    display: block;
+}
+
+.tab-subtabs .display-bloc .infobloc-title{
+    padding: 10px 0px;
 }
 
 
@@ -368,38 +415,25 @@
 /*******************************************************************************
 * Page informations
 *******************************************************************************/
-#page-informations .bloc-grid{
-    text-align: center;
+#page-informations #tab-organization #orgainfo_form_button {
+	display: inline;
 }
-
-#page-informations .display-bloc{
-    width: 160px;
-    display: inline-block;
-    margin: 10px;
-    background-color: #EEECED;
-    vertical-align: top;
-    cursor: pointer;
-    border-bottom: 1px solid grey;
-    padding-top: 10px;
-    position:relative;
+#page-informations #tab-organization #btn-new-orga {
+	display: block;
+	width: 170px;
+	text-align: center;
+	margin: 30px 0 0;
 }
-
-#page-informations .display-bloc:hover{
-    background-color:grey;
-    color:white;
+#page-informations #tab-organization #orgainfo_form .feedback_save {
+	position: absolute;
+	top: 350px;
+	left: 680px;
 }
-
-#page-informations .display-bloc.active{
-    background-color:#EA4F51;
-    color:white;
-}
-
-#page-informations .display-bloc .fa{
-    display: block;
-}
-
-#page-informations .display-bloc .infobloc-title{
-    padding: 10px 0px;
+#page-informations #tab-organization #orgaedit_form .download-file {
+	display: block;
+	width: 290px;
+	margin-top: 10px;
+	color: #333333;
 }
 
 #page-informations #estimated-turnover {
@@ -410,6 +444,7 @@
 #page-informations #estimated-turnover li {
     border-bottom: 1px solid grey;
 }
+
 #page-informations #tab-funding #total-roi-container {
     border-top: 1px solid grey;
     width: 93.8%;

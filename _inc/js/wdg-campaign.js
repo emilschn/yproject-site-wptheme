@@ -80,7 +80,7 @@ var WDGProjectViewer = (function($) {
 					var totalTurnover = 0;
 					var nbYears = 0;
 					var ratioOfPercent = ratioOfGoal * percentProject;
-					var ratioOfPercentRound = Math.round(ratioOfPercent * 1000) / 1000;
+					var ratioOfPercentRound = Math.round(ratioOfPercent * 10000) / 10000;
 					var ratioOfPercentRoundStr = ratioOfPercentRound.toString().replace('.', ',');
 					$("span.roi_percent_user").text(ratioOfPercentRoundStr);
 
@@ -111,7 +111,7 @@ var WDGProjectViewer = (function($) {
 	        $("#phase2").attr('style','display:none;');
 		    $("#phase3").attr('style','display:none;');
 
-			$("#wdg-lightbox-voteform-validated").attr('style','display:block !important;');
+			$("#wdg-lightbox-voteform-validated").attr('style','display: block;');
 
 		 	var phase=0;
 

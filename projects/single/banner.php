@@ -103,8 +103,8 @@ $lang_list = $campaign->get_lang_list();
 					<?php echo $video_element; ?>
 					<?php endif; ?>
 				</div>
-				<input type="hidden" id="url_image_link" href="<?php echo $campaign->get_home_picture_src(); ?>" />
-				<input type="hidden" id="url_video_link" href="<?php echo $campaign->video(); ?>" />
+				<input type="hidden" id="url_image_link" value="<?php echo $campaign->get_home_picture_src(); ?>" />
+				<input type="hidden" id="url_video_link" value="<?php echo $campaign->video(); ?>" />
 			</div>
 			
 			<div class="banner-half right">
@@ -133,7 +133,7 @@ $lang_list = $campaign->get_lang_list();
 				<div class="project-pitch-text"><?php echo html_entity_decode($campaign->summary()); ?></div>
 				
 				<?php locate_template( array("projects/common/progressbar.php"), true ); ?>
-				
+				<?php date_default_timezone_set("Europe/London"); ?>
 				
 				<?php // cas d'un projet en cours de vote ?>
 				<?php if ($campaign_status == ATCF_Campaign::$campaign_status_vote): ?>
@@ -189,18 +189,17 @@ $lang_list = $campaign->get_lang_list();
 						
 						<?php if ($campaign->time_remaining_str() != '-'): ?>
 						<?php if (!is_user_logged_in()): ?>
-							<a href="#connexion" class="button red wdg-button-lightbox-open" data-lightbox="connexion" 
-								data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start">
+							<a href="#connexion" class="button red wdg-button-lightbox-open" data-lightbox="connexion" data-redirect="<?php the_permalink(); ?>#vote">
 								<?php _e('Voter', 'yproject'); ?>
 							</a>
 
 						<?php elseif ($has_voted): ?>
-							<div style="-webkit-filter: grayscale(100%); text-transform: uppercase;">
+							<div style="-webkit-filter: grayscale(100%); text-transform: uppercase; text-align: center;">
 								<?php _e('Merci pour votre vote !', 'yproject'); ?>
 							</div>
 
 						<?php else: ?>
-							<a href="#lightbox_voter" class="button red wdg-button-lightbox-open" data-lightbox="vote">
+							<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote">
 								<?php _e('Voter', 'yproject'); ?>
 							</a>
 						<?php endif; ?>

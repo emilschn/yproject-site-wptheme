@@ -47,7 +47,7 @@ get_header();
 								<li><?php echo $error_message; ?></li>
 							<?php endforeach; ?>
 						</ul>
-						<?php elseif (filter_input(INPUT_POST, 'action') == 'edit-organization'): ?>
+						<?php elseif (filter_input(INPUT_POST, 'action') == 'save_edit_organization'): ?>
 						<p class="success">
 							<?php _e('Modifications enregistr&eacute;es.'); ?>
 						</p>
@@ -193,7 +193,7 @@ get_header();
 							<input type="file" name="org_doc_home" /> <br /><br />
 							
 							
-							<input type="hidden" name="action" value="edit-organization" />
+							<input type="hidden" name="action" value="save_edit_organization" />
 
 							<input type="submit" value="<?php _e('Enregistrer', 'yproject'); ?>" />
 						</form>

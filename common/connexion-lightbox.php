@@ -1,51 +1,69 @@
-<div id="post_bottom_content" class="center_small align-center">
+<?php global $signup_errors; $has_register_errors = ($signup_errors->get_error_message() != ""); ?>
+
+<div id="connect-form" class="align-center wdg-lightbox-ref <?php if ($has_register_errors): ?>specific-hidden<?php endif; ?>">
 	<?php if (WDGUser::has_login_errors()): ?>
 	<div class="errors">
 		<?php echo WDGUser::display_login_errors(); ?>
 	</div>
 	<?php endif; ?>
     
-        <form method="post" action="" name="login-form" id="sidebar-login-form" class="standard-form">
-            <input id="identifiant" type="text" name="log" placeholder="Identifiant ou e-mail" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" />
-            <br />
+        <form method="post" name="login-form" class="sidebar-login-form db-form form-register">
+			<h2><?php _e('Inscription et connexion', 'yproject'); ?></h2>
+			
+			<div class="field">
+				<label for="signin_username"><?php _e( 'Identifiant ou e-mail', 'yproject' ); ?> *</label>
+				<div class="field-container">
+					<span class="field-value">
+						<input type="text" name="log" id="signin_username" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" />
+					</span>
+				</div>
+			</div>
+			
+			<div class="field">
+				<label for="signin_password"><?php _e( 'Mot de passe', 'yproject' ); ?> *</label>
+				<div class="field-container">
+					<span class="field-value">
+						<input type="password" name="pwd" id="signin_password" value="" />
+					</span>
+				</div>
+			</div>
+	    
+            <div>
+				<a href="<?php echo home_url( '/mot-de-passe-oublie' ); ?>" >(<?php _e("Mot de passe oubli&eacute;", 'yproject'); ?>)</a>
+            </div>
 
-            <input id="password" type="password" name="pwd" placeholder="Mot de passe" value="" style="margin: 5px;" />
-            <br />
-	    
-	    <input id="sidebar-rememberme" type="checkbox" name="rememberme" value="forever" />
-	    <label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
-	    <br />
+			
+			<div class="field">
+				<input id="signin_rememberme" type="checkbox" name="rememberme" value="forever" />
+				<label for="signin_rememberme" style="width: auto;"><?php _e( 'Se souvenir de moi', 'yproject' ); ?></label>
+			</div>
             
-            <div id="submit-center">
-                <input type="submit"  name="wp-submit" id="sidebar-wp-submit-lightbox" id="connect" value="<?php _e('Connexion', 'yproject'); ?>" style="margin: 5px;" />
-                <input type="hidden" id="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
-		<input type="hidden" name="login-form" value="1" />
+            <div class="box_connection_buttons red submit-center">
+                <input type="submit" name="wp-submit" id="sidebar-wp-submit-lightbox" class="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
+                <input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
+				<input type="hidden" name="login-form" value="1" />
             </div>
-	    
-            <div id="sidebar-login-form-lightbox">
-		<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-		<a href="<?php echo get_permalink($page_forgotten->ID); ?>" >(Mot de passe oubli&eacute;)</a>
-            </div>
-            <br />
         </form>
-            
-        <hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
-
-        <div id="connexion_facebook_container">
-            <a href="javascript:void(0);" class="social_connect_login_facebook"><img style="border-right: 1px solid #FFFFFF; width:25px; height:25px;" src="<?php echo get_stylesheet_directory_uri(); ?>/images/facebook_connexion.jpg" alt="connexion facebook"class="vert-align"/><span style=" font-size:12px;">&nbsp;Se connecter avec Facebook</span></a>
+	
+        <div class="connexion_facebook_containerbox_connection_buttons blue">
+			<?php
+			$fb = new Facebook\Facebook([
+				'app_id' => YP_FB_APP_ID,
+				'app_secret' => YP_FB_SECRET,
+				'default_graph_version' => 'v2.8',
+			]);
+			$helper = $fb->getRedirectLoginHelper();
+			$permissions = ['email'];
+			$loginUrl = $helper->getLoginUrl( home_url( '/connexion/?fbcallback=1' ) , $permissions);
+			?>
+            <a href="<?php echo $loginUrl; ?>" class="social_connect_login_facebook">&nbsp;<?php _e("Se connecter avec Facebook", 'yproject'); ?></a>
         </div>
 
-        <div class="hidden"><?php dynamic_sidebar('sidebar-1'); ?></div>
-
-        <hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: dotted none none; border-width: 1px 0 0; color: #808080; margin: 15px 0;"/>
-
-        <div id="connexion_facebook_container">
-            <div class="post_bottom_buttons_connexion" >
-                <div id="submenu_item_connection_register" class="dark" style="text-align: left; background-color: #3E3E40; margin: auto;">
-                    <a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><img width="25" height="25" src="<?php echo get_stylesheet_directory_uri(); ?>/images/triangle_blc_connexion.jpg" alt="triangle blanc"><span style="font-size: 9pt; vertical-align: 8px; color: #FFF; ">Cr&eacute;er un compte</span></a>
-                </div>
-            </div>
+        <div class="box_connection_buttons red">
+			<div id="submenu_item_connection_register">
+				<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><?php _e("Cr&eacute;er mon compte", 'yproject'); ?></a>
+			</div>
         </div>
-        <br />
+
 </div>
 

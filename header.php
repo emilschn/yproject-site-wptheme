@@ -70,7 +70,7 @@
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]--> 
-		<?php $version = '20170323'; ?>
+		<?php $version = '20170524b'; ?>
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.min.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
@@ -97,10 +97,19 @@
                     } else {
 			    echo "Plateforme d'investissement participatif à impact positif";
                     } ?>" />*/ ?>
-                <?php $imageFacebook = (isset($campaign) && $is_campaign_page === true) ? $campaign->get_home_picture_src() : $stylesheet_directory_uri .'/images/logo_entier.jpg'; ?> 
-		<?php /* <meta property="og:image" content="<?php echo $imageFacebook ?>" /> */ ?>
+		<?php
+		$imageFacebook = (isset($campaign) && $is_campaign_page === true) ? $campaign->get_home_picture_src() : $stylesheet_directory_uri .'/images/common/wedogood-logo-rouge.png';
+		$url = (isset($campaign) && $is_campaign_page === true) ? get_page_link($post) : "";
+		?>
+		<?php if (isset($campaign) && $is_campaign_page === true): ?>
+		<meta property="og:url" content="<?php echo $url; ?>" />
+		<meta property="og:title" content="<?php echo $post->post_title; ?>" />
+		<meta property="og:description" content="<?php echo $campaign->summary(); ?>" />
+		<meta property="fb:app_id" content="<?php echo YP_FB_APP_ID; ?>" />
+		<?php endif; ?>
+		<meta property="og:image" content="<?php echo $imageFacebook ?>" />
 		<meta property="og:image:secure_url" content="<?php echo $imageFacebook ?>" />
-		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:type" content="image/png" />
 	</head>
 
 	<body <?php body_class(get_locale()); ?>> 
@@ -168,28 +177,36 @@
 					</div>
 
 					<div class="box_connection_buttons blue">
-						<a href="javascript:void(0);" class="social_connect_login_facebook"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
+						<?php
+						$fb = new Facebook\Facebook([
+							'app_id' => YP_FB_APP_ID,
+							'app_secret' => YP_FB_SECRET,
+							'default_graph_version' => 'v2.8',
+						]);
+						$helper = $fb->getRedirectLoginHelper();
+						$permissions = ['email'];
+						$loginUrl = $helper->getLoginUrl( home_url( '/connexion/?fbcallback=1' ) , $permissions);
+						?>
+						<a href="<?php echo $loginUrl; ?>" class="social_connect_login_facebook"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
 					</div>
-
-					<div class="hidden"><?php dynamic_sidebar('sidebar-1'); ?></div>
 
 					<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 2px 0 0; color: #000000; margin: 5% 5%;"/>
 
-					<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" id="sidebar-login-form" class="model-form">
+					<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" class="sidebar-login-form model-form">
 						<span id="title-connection"><?php _e('Connexion', 'yproject'); ?></span>
 						<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('Identifiant ou e-mail', 'yproject'); ?>" value="" />
 						<br />
 
 						<input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
-						<div id="submit-center" style="display: none;">             
+						<div class="submit-center" style="display: none;">             
 							<input type="submit" name="wp-submit" class="input_submit" id="connect" value="OK"/>
-							<input type="hidden" id="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
+							<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 							<input type="hidden" name="login-form" value="1" />
 						</div>   
 
-						<div id="sidebar-login-form-lightbox">
+						<div>
 							<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-							<a href="<?php echo get_permalink($page_forgotten->ID); ?>"><?php _e('(Mot de passe oubli&eacute)', 'yproject');?></a>
+							<a href="<?php echo get_permalink($page_forgotten->ID); ?>"><?php _e('(Mot de passe oubli&eacute;)', 'yproject');?></a>
 						</div>
 
 						<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
@@ -216,9 +233,9 @@
 				<div class="validate-terms-excerpt">
 					<?php echo wpautop( stripslashes( $edd_options[WDGUser::$edd_general_terms_excerpt])); ?>
 				</div>
-				<form action="" method="POST">
+				<form method="POST">
 					<input type="hidden" name="action" value="validate-terms" />
-					<label for="validate-terms-check"><input type="checkbox" name="validate-terms-check" /> J&apos;accepte les conditions g&eacute;n&eacute;rales d&apos;utilisation</label><br />
+					<label for="validate-terms-check-header"><input type="checkbox" id="validate-terms-check-header" name="validate-terms-check" /> J&apos;accepte les conditions g&eacute;n&eacute;rales d&apos;utilisation</label><br />
 					<div style="text-align: center;"><input type="submit" value="Valider" class="button" /></div>
 				</form> 
 			</div>
@@ -241,7 +258,10 @@
 				}
 				?>
 				<div class="wdg-lightbox-padder">
-					Bonjour <?php echo $user_name_str; ?>, bienvenue sur WE DO GOOD !
+					<?php _e( "Bonjour", 'yproject' ); ?> <?php echo $user_name_str; ?>
+					<?php if ( ATCF_CrowdFunding::get_platform_context() == "wedogood" ): ?>
+					<?php _e( "et bienvenue sur WE DO GOOD !", 'yproject' ); ?>
+					<?php endif; ?>
 				</div>
 			</div>
 		<?php endif; ?>

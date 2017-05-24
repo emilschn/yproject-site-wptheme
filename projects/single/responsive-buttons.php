@@ -37,7 +37,7 @@ if (is_user_logged_in()) {
 			if ( !empty($hasvoted_results[0]->id) ) $has_voted = true;
 			if (!$has_voted){ ?>
 			<div id="vote-form-v3-button">
-				<a href="#lightbox_voter" class="wdg-button-lightbox-open" data-lightbox="vote" 
+				<a href="#vote" class="wdg-button-lightbox-open" data-lightbox="vote" 
 					style=""
 					id="vote-form-v3-link-responsive"
 					>		
