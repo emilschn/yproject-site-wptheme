@@ -170,7 +170,7 @@ if (is_user_logged_in() && $display_loggedin_user) :
 	<?php endif; ?>
 	
 
-	<h2 class="underlined"><?php _e( 'Mes attestations de transaction annuelles', 'yproject' ); ?></h2>
+	<h2 class="underlined"><?php _e( 'Mes attestations de transactions annuelles', 'yproject' ); ?></h2>
 	<?php
 	$has_declaration = false;
 	$date_now = new DateTime();
