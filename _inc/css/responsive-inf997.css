@@ -121,18 +121,19 @@
 		width: 96%;
 		height: 120px;
 		margin: 0px 1%;
-	}
-	footer > .footer-container > div > div:nth-child(3) img, footer > .footer-container > div > div:nth-child(4) img {
-		width: 100%;
+		text-align: center;
 	}
 	footer > .footer-container > div > div:nth-child(3) img {
-		margin-top: 20px;
+		margin-top: 5px;
 	}
 	footer > .footer-container > div > div:nth-child(4) {
 		clear: both;
 		width: 60%;
 		margin: 0% 20%;
 		text-align: center;
+	}
+	footer > .footer-container > div > div:nth-child(4) img {
+		width: 100%;
 	}
 	footer > .footer-container > div > div:nth-child(5) {
 		background: #EA4F51;

@@ -39,6 +39,3 @@ $campaign_status = $campaign->campaign_status();
 <?php locate_template( array("projects/single/news.php"), true ); ?>
 
 <?php locate_template( array("projects/single/comments.php"), true ); ?>
-    
-    
-<?php locate_template( array("projects/single/responsive-buttons.php"), true ); ?>
