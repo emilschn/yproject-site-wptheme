@@ -199,7 +199,7 @@
 
 						<input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
 						<div class="submit-center" style="display: none;">             
-							<input type="submit" name="wp-submit" class="input_submit" id="connect" value="OK"/>
+							<input type="submit" name="wp-submit" class="input_submit ok_valid" id="connect" value="OK"/>
 							<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 							<input type="hidden" name="login-form" value="1" />
 						</div>   
