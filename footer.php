@@ -40,7 +40,7 @@ else {
 						<div>
 							<h3><?php _e('Nous suivre', 'yproject'); ?></h3>
 
-							<form action="" method="POST">
+							<form method="POST">
 								<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/mail.jpg" alt="MAIL" width="48" height="48" />
 								<input type="text" id="subscribe-nl-mail" name="subscribe-nl-mail" placeholder="<?php _e("Je m'inscris à la newsletter", 'yproject'); ?>" />
 								<input type="submit" id="subscribe-nl-submit" value="OK" class="hidden" />
@@ -64,7 +64,7 @@ else {
 
 				</section>
 
-				<section>
+				<div>
 					<div>
 						<a href="https://acpr.banque-france.fr/agrements-et-autorisations/le-financement-participatif-crowdfunding.html" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/ifp.png" alt="logo label IFP" width="160"/></a>
 					</div>
@@ -97,7 +97,7 @@ else {
 						</a>
 					</div>
 
-				</section>
+				</div>
 			</div>
 		</footer>
 

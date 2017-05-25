@@ -637,13 +637,13 @@ form.wdg-forms table input[type="text"].reward-text{
     text-align: left;
 }
 
-#sidebar-login-form a{
+.sidebar-login-form a{
     color: #606060;
     font-size: 11px;
     font-style: italic;
 }
-#sidebar-login-form .link-forgotten { margin-left: 140px; }
-#sidebar-login-form .link-forgotten a { color: #333333; text-align: right; font-size: 10px; font-style: italic; }
+.sidebar-login-form .link-forgotten { margin-left: 140px; }
+.sidebar-login-form .link-forgotten a { color: #333333; text-align: right; font-size: 10px; font-style: italic; }
 
 .infobutton, .fa.infobutton{
     cursor: help;
@@ -2087,12 +2087,12 @@ span#extra-comment-image{
 .form-register .register-section {
     text-align: center;
 }
-.form-register div#connexion_facebook_container {
+.form-register div.connexion_facebook_container {
     display: block;
     text-align: center;
     background-color: transparent;
 }
-.form-register div#connexion_facebook_container a {
+.form-register div.connexion_facebook_container a {
     padding: 2px 0px 5px;
 }
 #signup_form .submit {

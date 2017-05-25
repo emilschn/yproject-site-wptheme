@@ -464,28 +464,28 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     font-size: 11pt;
 }
 .box_connection_buttons.red{ background-color: #EA4F51; text-transform: uppercase; }
-.box_connection_buttons.blue, #connexion_facebook_container.box_connection_buttons.blue { background-color: #3B5998; }
+.box_connection_buttons.blue, .connexion_facebook_container.box_connection_buttons.blue { background-color: #3B5998; }
 .box_connection_buttons span { color: #FFF; }
 
-#submenu-user form#sidebar-login-form {
+#submenu-user form.sidebar-login-form {
 	width: 255px;
 	margin: 0 auto;
 	text-align: left;
 }
-#submenu-user form#sidebar-login-form span#title-connection {
+#submenu-user form.sidebar-login-form span#title-connection {
 	display: block;
 	font-size: 11pt;
 }
-#submenu-user form#sidebar-login-form label {
+#submenu-user form.sidebar-login-form label {
     font-size: 10pt;
     margin-left: 5px;
     text-transform: uppercase;
 }
 
-#submenu-user form#sidebar-login-form .input_submit {
+#submenu-user form.sidebar-login-form .input_submit {
     color: #FFF;
 }
-#submenu-user form#sidebar-login-form .input_connection {
+#submenu-user form.sidebar-login-form .input_connection {
     margin: 7px 0px;
     width: 246px;
     height: 40px; 
@@ -496,11 +496,11 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     font-family: Trebuchet MS, sans-serif;
     padding: 5px;
 }
-#submenu-user form#sidebar-login-form .pwd_submit {
+#submenu-user form.sidebar-login-form .pwd_submit {
     width: 191px;
     margin-right: 0px;
 }  
-#submenu-user form#sidebar-login-form .ok_valid {
+#submenu-user form.sidebar-login-form .ok_valid {
     width: 50px;
     height: 50px;
     background-color: #EA4F51;
@@ -542,7 +542,7 @@ footer > .footer-container {
 }
 
 footer > .footer-container > section:first-child { padding: 25px 0px 35px; }
-footer > .footer-container > section:nth-child(2) { background: #FFFFFF; }
+footer > .footer-container > div { background: #FFFFFF; }
 footer h3 {
 	font-size: 16pt;
 	font-weight: bold;
@@ -572,7 +572,8 @@ footer a.social_network::before{
 footer a.social_network{
 	margin-right: 20px;
 }
-footer > .footer-container > section > div {
+footer > .footer-container > section > div,
+footer > .footer-container > div > div {
 	float: left;
 	width: 32%;
 	margin: 0% 0.5%;
@@ -606,35 +607,35 @@ footer form input#subscribe-nl-submit {
 }
 
 /* Footer 2nd partie*/
-footer > .footer-container > section:nth-child(2) > div > a::before {
+footer > .footer-container > div > div > a::before {
 	display: none;
 }
-footer > .footer-container > section:nth-child(2) > div {
+footer > .footer-container > div > div {
 	margin: 20px 15px;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(1){
+footer > .footer-container > div > div:nth-child(1){
 	width: 160px;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(1) img{
+footer > .footer-container > div > div:nth-child(1) img{
 	margin: 12px;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(2){
+footer > .footer-container > div > div:nth-child(2){
 	width: 140px;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(3){
+footer > .footer-container > div > div:nth-child(3){
 	position: relative;
 	width: 200px;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(3) img{
+footer > .footer-container > div > div:nth-child(3) img{
 	margin-top: 45px;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(4){
+footer > .footer-container > div > div:nth-child(4){
 	width: 258px;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(4) p {
+footer > .footer-container > div > div:nth-child(4) p {
 	font-size: 10pt;       
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(4) p.lines, footer div.lines {
+footer > .footer-container > div > div:nth-child(4) p.lines, footer div.lines {
 	border-top: 2px solid #333333;
 	border-bottom: 2px solid #333333;
 	padding: 2% 0%;
@@ -643,55 +644,60 @@ footer > .footer-container > section:nth-child(2) > div:nth-child(4) p.lines, fo
 	line-height: 150%;
 	margin-left: 12px;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(5){
+footer > .footer-container > div > div:nth-child(5){
 	width: 270px;
 	margin-left: 10px;
 }
 footer div.lines{
 	padding: 1% 0%;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(5) a {
+footer > .footer-container > div > div:nth-child(5) a {
 	text-transform: none;
 	font-size: 10pt;   
 	font-style: italic;
 	letter-spacing: 1px;
 	color: #333333;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(5) li {
+footer > .footer-container > div > div:nth-child(5) li {
 	text-align: right;   
 	margin: 0;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(5) h3 {
+footer > .footer-container > div > div:nth-child(5) h3 {
 	display: none;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(5) a::before {
+footer > .footer-container > div > div:nth-child(5) a::before {
 	display: none;
 }
-footer > .footer-container > section:nth-child(2) > div:nth-child(5) a::after {
+footer > .footer-container > div > div:nth-child(5) a::after {
 	content: "/";
 	margin-left: 2%;
 }
+footer > .footer-container > div > div:last-child a{
+	text-transform: none;
+	font-size: 12pt;   
+	color: #333333;
+	margin: 2%;
+}
 
-footer > .footer-container > section > div.clear, footer > .footer-container > section > div.aligncenter {
+footer > .footer-container > section > div.clear,
+footer > .footer-container > section > div.aligncenter,
+footer > .footer-container > div > div.clear,
+footer > .footer-container > div > div.aligncenter {
 	float: none;
 	width: auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-footer > .footer-container > section > div.clear {
+footer > .footer-container > section > div.clear,
+footer > .footer-container > div > div.clear {
 	border-top: 2px solid #333333;
 	width: 60%;
 	margin: auto;
 }
-footer > .footer-container > section > div.aligncenter {
+footer > .footer-container > section > div.aligncenter,
+footer > .footer-container > div > div.aligncenter {
 	margin-bottom: 0px;
 	padding-bottom: 20px;
-}
-footer > .footer-container > section:nth-child(2) > div:last-child a{
-	text-transform: none;
-	font-size: 12pt;   
-	color: #333333;
-	margin: 2%;
 }
 
 /* BANDEAU COOKIES */
@@ -707,7 +713,7 @@ footer > .footer-container > section:nth-child(2) > div:last-child a{
 }
 
 @media screen and (min-width: 998px) and (max-width: 1140px) {
-	footer > .footer-container > section:nth-child(2) > div:nth-child(5){
+	footer > .footer-container > div > div:nth-child(5){
 		width: 20%;
 	}
 }
