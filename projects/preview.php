@@ -1,5 +1,5 @@
 <?php
-global $stylesheet_directory_uri;
+global $stylesheet_directory_uri, $project_id;
 /* 
  * Page pour la section des projets à afficher en page d'accueil
  *

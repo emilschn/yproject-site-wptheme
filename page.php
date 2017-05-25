@@ -3,7 +3,9 @@
 <?php
 wp_reset_query();
 if (is_home() or is_front_page()) {
-	require_once("page-home.php");
+	locate_template( array('pages/controler/controler.php'), true );
+	locate_template( array('pages/controler/controler-home.php'), true );
+	locate_template( array('pages/view/view-home.php'), true );
 } else {
 ?>
 
