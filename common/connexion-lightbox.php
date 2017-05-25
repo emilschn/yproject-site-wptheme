@@ -45,7 +45,7 @@
             </div>
         </form>
 	
-        <div class="connexion_facebook_containerbox_connection_buttons blue">
+        <div class="connexion_facebook_container box_connection_buttons blue">
 			<?php
 			$fb = new Facebook\Facebook([
 				'app_id' => YP_FB_APP_ID,
