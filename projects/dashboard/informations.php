@@ -112,19 +112,32 @@ function print_informations_page()
 
                 <?php
                 $locations = atcf_get_locations();
-
                 DashboardUtility::create_field(array(
-                    "id"=>"new_project_location",
-                    "type"=>"select",
-                    "label"=>"Localisation",
-                    "value"=>$campaign->location(),
-                    "options_id"=>array_keys($locations),
-                    "options_names"=>array_values($locations)
+                    "id"			=> "new_project_location",
+                    "type"			=> "select",
+                    "label"			=> __( "Localisation", 'yproject' ),
+                    "value"			=> $campaign->location(),
+                    "options_id"	=> array_keys($locations),
+                    "options_names"	=> array_values($locations)
                 ));
+				?>
 
+				<?php
+				// Champs personnalisés
+				$nb_custom_fields = $WDGAuthor->wp_user->get('wdg-contract-nb-custom-fields');
+				if ( $nb_custom_fields > 0 ) {
+					for ( $i = 1; $i <= $nb_custom_fields; $i++ ) {
+						DashboardUtility::create_field(array(
+							"id"	=> 'custom_field_' . $i,
+							"type"	=> 'text',
+							"label"	=> __( "Champ personnalis&eacute; " , 'yproject') .$i,
+							"value"	=> get_post_meta( $campaign->ID, 'custom_field_' . $i, TRUE)
+						));
+					}
+				}
+				?>
 
-
-                DashboardUtility::create_save_button("projectinfo_form"); ?>
+                <?php DashboardUtility::create_save_button("projectinfo_form"); ?>
             </form>
 			
 			<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
@@ -409,6 +422,16 @@ function print_informations_page()
                     "max"			=> 100,
                     "step"			=> 0.01,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+                ));
+
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_contract_start_date",
+                    "type"			=> "date",
+                    "label"			=> "Première date de versement",
+                    "value"			=> new DateTime($campaign->first_payment_date()),
+                    "editable"		=> $is_admin,
+                    "admin_theme"	=> $is_admin,
+                    "visible"		=> $is_admin || ($campaign->first_payment_date()!="")
                 ));
 
                 DashboardUtility::create_field(array(
