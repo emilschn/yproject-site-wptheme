@@ -7,6 +7,7 @@ ypcf_session_start();
 
 if (isset($campaign)):
 	//Lien
+	$wdginvestment = WDGInvestment::current();
 	$page_mean_payment = get_page_by_path('moyen-de-paiement');
 	$page_mean_payment_link = get_permalink($page_mean_payment->ID) . '?campaign_id=' . $campaign->ID . '&meanofpayment=';
 	
@@ -16,20 +17,22 @@ if (isset($campaign)):
 	$amount = $_SESSION['redirect_current_amount_part'] * $campaign->part_value();
 	$can_use_wallet = FALSE;
 	$can_use_card_and_wallet = FALSE;
-	if ($_SESSION['redirect_current_invest_type'] == 'user') {
-		$can_use_wallet = $WDGUser_current->can_pay_with_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
-		$can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
-	} else {
-		$invest_type = $_SESSION['redirect_current_invest_type'];
-		$organization = new WDGOrganization($invest_type);
-		$can_use_wallet = $organization->can_pay_with_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
-		$can_use_card_and_wallet = $organization->can_pay_with_card_and_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
+	if ( !$wdginvestment->has_token() ) {
+		if ($_SESSION['redirect_current_invest_type'] == 'user') {
+			$can_use_wallet = $WDGUser_current->can_pay_with_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
+			$can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
+		} else {
+			$invest_type = $_SESSION['redirect_current_invest_type'];
+			$organization = new WDGOrganization($invest_type);
+			$can_use_wallet = $organization->can_pay_with_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
+			$can_use_card_and_wallet = $organization->can_pay_with_card_and_wallet( $amount, $campaign ) && ( ATCF_CrowdFunding::get_platform_context() == "wedogood" );
+		}
 	}
 	
 	//Possible de régler par virement ?
-	$can_use_wire = ($campaign->can_use_wire($_SESSION['redirect_current_amount_part']));
+	$can_use_wire = ( $campaign->can_use_wire($_SESSION['redirect_current_amount_part']) && !$wdginvestment->has_token() );
 	//Possible de régler par chèque ?
-	$can_use_check = ($campaign->can_use_check($_SESSION['redirect_current_amount_part']));
+	$can_use_check = ( $campaign->can_use_check($_SESSION['redirect_current_amount_part']) && !$wdginvestment->has_token() );
 	$user_is_lemonway_registered = FALSE;
 	if ($can_use_wire) {
 		$wdg_current_user = WDGUser::current();
@@ -87,7 +90,7 @@ if (isset($campaign)):
 					<?php _e("Virement bancaire", 'yproject'); ?> <?php _e("(une copie de votre pi&egrave;ce d'identit&eacute; et un justificatif de domicile seront n&eacute;cessaires)", 'yproject'); ?>
 				</a>
 			</li>
-			<?php elseif ($campaign->can_use_wire_remaining_time() && !$campaign->can_use_wire_amount($_SESSION['redirect_current_amount_part'])): ?>
+			<?php elseif ($campaign->can_use_wire_remaining_time() && !$campaign->can_use_wire_amount($_SESSION['redirect_current_amount_part']) && !$wdginvestment->has_token()): ?>
 			<li>
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-virement.jpg" alt="<?php _e("Virement bancaire", 'yproject'); ?>" />
 				<?php echo sprintf( __("Les virements bancaires sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement", 'yproject'), ATCF_Campaign::$invest_amount_min_wire); ?>
@@ -101,7 +104,7 @@ if (isset($campaign)):
 					<?php _e("Ch&egrave;que", 'yproject'); ?>
 				</a>
 			</li>
-			<?php else: ?>
+			<?php elseif(!$wdginvestment->has_token()): ?>
 			<li>
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/paiement-cheque.jpg" alt="<?php _e("Ch&egrave;que", 'yproject'); ?>" />
 				<?php echo sprintf( __("Les paiements par ch&egrave;ques sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement", 'yproject'), ATCF_Campaign::$invest_amount_min_check); ?>

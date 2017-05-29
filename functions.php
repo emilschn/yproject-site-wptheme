@@ -457,6 +457,45 @@ function yproject_user_contact_methods( $user_contact ) {
 	return $user_contact;
 }
 add_filter( 'user_contactmethods', 'yproject_user_contact_methods' );
+
+function wdg_admin_user_profile( $user ) {
+?>
+<h2><?php _e( "Porteur de projet", 'yproject' ); ?></h2>
+<table class="form-table">
+	<tr>
+		<th>
+			<label for="contract_override"><?php _e( "Remplacement du contrat d'investissement", 'yproject' ); ?></label>
+		</th>
+		<td>
+			<?php echo wp_editor( html_entity_decode( $user->get('wdg-contract-override') ), 'contract_override' ); ?>
+		</td>
+	</tr>
+	<tr>
+		<th>
+			<label for="contract_nb_custom_fields"><?php _e( "Nombre de champs personnalis&eacute;s &agrave; ajouter", 'yproject' ); ?></label>
+		</th>
+		<td>
+			<input type="text" name="contract_nb_custom_fields" value="<?php echo $user->get('wdg-contract-nb-custom-fields'); ?>" />
+		</td>
+	</tr>
+</table>
+<?php	
+}
+add_action('show_user_profile', 'wdg_admin_user_profile');
+add_action('edit_user_profile', 'wdg_admin_user_profile');
+ 
+function wdg_admin_save_user_profile( $user_id ) {
+	if ( current_user_can( 'edit_user', $user_id ) ) {
+		if ( !empty( $_POST['contract_override'] ) ) {
+			update_user_meta( $user_id, 'wdg-contract-override', $_POST['contract_override'] );
+		}
+		if ( !empty( $_POST['contract_nb_custom_fields'] ) ) {
+			update_user_meta( $user_id, 'wdg-contract-nb-custom-fields', $_POST['contract_nb_custom_fields'] );
+		}
+	}
+}
+add_action('edit_user_profile_update', 'wdg_admin_save_user_profile');
+add_action('personal_options_update', 'wdg_admin_save_user_profile');
 /** FIN BACK-OFFICE USERS **/
 
 

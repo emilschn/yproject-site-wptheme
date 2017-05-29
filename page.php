@@ -1,15 +1,15 @@
-<?php get_header(); ?>
+<?php get_header( ATCF_CrowdFunding::get_platform_context() ); ?>
 
 <?php
 wp_reset_query();
-if (is_home() or is_front_page()) {
+if ( is_home() or is_front_page() && ATCF_CrowdFunding::get_platform_context() == "wedogood" ) {
 	require_once("page-home.php");
 } else {
 ?>
 
 <div id="content">
     
-	<div class="padder">
+	<div class="padder page">
 
 		<div class="page" id="blog-page" role="main">
 
@@ -40,4 +40,4 @@ if (is_home() or is_front_page()) {
 }
 ?>
 
-<?php get_footer(); ?>
+<?php get_footer( ATCF_CrowdFunding::get_platform_context() ); ?>

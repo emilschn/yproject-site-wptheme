@@ -1,10 +1,9 @@
-
 <?php
 /**
  * Template Name: Template Basique
  *
  */
-get_header(); ?>
+get_header( ATCF_CrowdFunding::get_platform_context() ); ?>
 
 <?php 
 date_default_timezone_set("Europe/Paris");
@@ -24,4 +23,5 @@ date_default_timezone_set("Europe/Paris");
 		<?php endwhile; endif; ?>
 	</div><!-- .padder -->
 </div><!-- #content -->
-<?php get_footer(); ?>
+
+<?php get_footer( ATCF_CrowdFunding::get_platform_context() );
