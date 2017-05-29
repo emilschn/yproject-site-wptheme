@@ -271,9 +271,9 @@
 /*******************************************************************************
 * CONNECTION
 *******************************************************************************/
-	#sidebar-login-form .standard-label { width: 90px !important; }
-	#sidebar-login-form input[type="text"], #sidebar-login-form input[type="password"] { width: 245px !important; }
-	#sidebar-login-form .link-forgotten { margin-left: 94px !important; }
+	.sidebar-login-form .standard-label { width: 90px !important; }
+	.sidebar-login-form input[type="text"], .sidebar-login-form input[type="password"] { width: 245px !important; }
+	.sidebar-login-form .link-forgotten { margin-left: 94px !important; }
 	
 /*******************************************************************************
 * REGISTER PAGE / REGISTER LIGHTBOX
@@ -286,11 +286,11 @@
 		font-size: 20px;
 	}
 	#signup_form .submit, #signup_form #signin-button { float: none !important; }
-	#signup_form #connexion_facebook_container { margin: 15px auto !important; }
+	#signup_form .connexion_facebook_container { margin: 15px auto !important; }
 
-	#wdg-lightbox-connexion #submit-center { float: none !important; }
-	#wdg-lightbox-connexion #connexion_facebook_container { float: none !important; margin: -25px auto !important; }
-	#wdg-lightbox-connexion #connexion_facebook_container.box_connection_buttons.blue { margin-top: 40px !important; }
+	#wdg-lightbox-connexion .submit-center { float: none !important; }
+	#wdg-lightbox-connexion .connexion_facebook_container { float: none !important; margin: -25px auto !important; }
+	#wdg-lightbox-connexion .connexion_facebook_container.box_connection_buttons.blue { margin-top: 40px !important; }
 
 /*******************************************************************************
 * THEME PHOTOREPORTER

@@ -23,7 +23,7 @@
 					<span class="complement">compos&eacute; de lettres non-accentu&eacute;es, de chiffres ou des caract&egrave;res suivants : . - @</span>
 					<div class="field-container">
 						<span class="field-value">
-							<input type="text" name="signup_username_login" id="signup_username_login" value="<?php if (!empty($_POST['signup_username'])) { echo $_POST['signup_username']; } ?>" autofocus />
+							<input type="text" name="signup_username_login" id="signup_username_login" value="<?php if (!empty($_POST['signup_username'])) { echo $_POST['signup_username']; } ?>" />
 						</span>
 					</div>
 				</div>
@@ -59,7 +59,7 @@
 				<div class="g-recaptcha" data-sitekey="6LcoHRIUAAAAADwRb9TDAhshD3CZgIhx1M-MO84y"></div>
 				<?php endif; ?>
 
-				<label for="validate-terms-check"><input type="checkbox" name="validate-terms-check" /> J&apos;accepte <a href="<?php echo home_url().'/cgu';  ?>"  target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
+				<label for="validate-terms-check-register"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /> J&apos;accepte <a href="<?php echo home_url().'/cgu';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
 
 				<?php wp_nonce_field( 'register_form_posted' ); ?>
 
@@ -72,7 +72,7 @@
 				</div>
 			</div>
 
-			<div class="box_connection_buttons blue" id="connexion_facebook_container">
+			<div class="connexion_facebook_container box_connection_buttons blue">
 				<?php
 				$fb = new Facebook\Facebook([
 					'app_id' => YP_FB_APP_ID,

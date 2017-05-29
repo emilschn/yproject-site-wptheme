@@ -12,7 +12,7 @@
 	<li><span><?php _e('Autres :', 'yproject'); ?></span> <?php echo $vote_results['list_impact_others_string']; ?>
 </ul>
 
-<em><?php _e('Ces impacts sont-ils suffisants pour que ce projet soit en financement sur '.ATCF_CrowdFunding::get_platform_name().' ?', 'yproject'); ?></em><br />
+<em><?php _e('Souhaitez-vous soutenir cette campagne de financement sur '.ATCF_CrowdFunding::get_platform_name().' ?', 'yproject'); ?></em><br />
 <center><canvas id="canvas-pie" width="400" height="200"></canvas></center>
 
 <strong><?php echo $vote_results['count_project_validated']; ?></strong> <?php _e('personnes ont vot&eacute; oui', 'yproject'); ?>...<br />

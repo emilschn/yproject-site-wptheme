@@ -93,9 +93,9 @@ YPUIFunctions = (function($) {
 			
 			//Apparition bouton OK pour connexion
 			showOkConnect = function(){
-				$('.model-form #submit-center').css('display', 'inline');
+				$('.model-form .submit-center').css('display', 'inline');
 				$('.model-form input#password').addClass('pwd_submit');
-				$('.model-form input#connect').addClass('ok_valid');
+				$('.model-form input.connect').addClass('ok_valid');
 			};
 			$('#menu .btn-user').click(function(){
 				if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "") {
@@ -424,7 +424,7 @@ YPUIFunctions = (function($) {
 
 			if ($("#wdg-lightbox-connexion").length > 0) {
 				$(".wdg-button-lightbox-open").click(function(){
-					$("#wdg-lightbox-connexion #redirect-page").attr("value", $(this).data("redirect"));
+					$("#wdg-lightbox-connexion .redirect-page").attr("value", $(this).data("redirect"));
 				});
 			}
 			if ($("#wdg-lightbox-newproject").length > 0) {

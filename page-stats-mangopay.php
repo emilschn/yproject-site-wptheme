@@ -191,6 +191,24 @@ get_header();
 			 *
 			 */
 			?>
+			
+			<?php
+			/*
+			// Récupérer la liste des mails d'utilisateurs qui ont eu des royalties en 2016
+			global $wpdb;
+			$query = "";
+			$query .= "SELECT user.user_email FROM " .$wpdb->prefix.WDGROI::$table_name. " roi";
+			$query .= " INNER JOIN " .$wpdb->users. " user ON (roi.id_user = user.ID)";
+			$query .= " WHERE YEAR(roi.date_transfer) = 2016";
+			$query .= " GROUP BY roi.id_user";
+
+			$email_list = $wpdb->get_results( $query );
+			foreach ( $email_list as $email_item ) {
+				echo $email_item->user_email . ', ';
+			}
+			 * 
+			 */
+			?>
 		    
 		<?php
 		endif;

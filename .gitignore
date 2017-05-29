@@ -1,1 +1,5 @@
 dploy.yaml
+_tools/gulp/*
+!_tools/gulp/package.json
+!_tools/gulp/gulpfile.js
+node_modules

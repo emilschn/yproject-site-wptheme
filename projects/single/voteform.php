@@ -271,7 +271,7 @@ if ($campaign->end_vote_remaining() > 0) {
 					</ul>
 					</br>
 					<div id='em_impact'>
-					<em>Ces impacts sont-ils suffisants pour que ce projet soit en financement sur ".ATCF_CrowdFunding::get_platform_name()." ?</em><br />
+					<em>Souhaitez-vous soutenir cette campagne de financement sur ".ATCF_CrowdFunding::get_platform_name()." ?</em><br />
 					</div>
 					<div class='radio_validate'>
 						<label><input type='radio' id='btn-validate_project-true-v3' name='validate_project' value='1' ".$validate_project_checked_true.">
@@ -344,7 +344,8 @@ if ($campaign->end_vote_remaining() > 0) {
 							</br>
 							<div id='investir_sum_v3'>
 							    Je serais int&eacute;ress&eacute; pour investir :
-							    <input type='text' id='invest_sum_v3' name='invest_sum' value='".$invest_sum_before."' size='10' ".$style_sum." />&euro;<br />
+							    <input type='text' id='invest_sum_v3' name='invest_sum' value='".$invest_sum_before."' size='10' ".$style_sum." /> &euro;<br /><br />
+								Vous pouvez pré-investir par chèque afin d'aider l'entrepreneur à lancer sa campagne. Dans ce cas, prenez contact avec lui ou envoyez-nous un mail à investir@wedogood.co.<br />
 						    </div>
 							<br />
 						</div>

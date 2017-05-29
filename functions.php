@@ -53,7 +53,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
-	$current_version = '20170510';
+	$current_version = '20170524';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -125,7 +125,7 @@ add_action( 'wp_enqueue_scripts', 'yproject_enqueue_script' );
 
 //Cache serveur
 function varnish_safe_http_headers() {
-	header('X-UA-Compatible: IE=edge,chrome=1');
+	header('X-UA-Compatible: IE=edge');
 	session_cache_limiter('');
 	header('Cache-Control: public, s-maxage=120');
 	header('Pragma: public');
@@ -485,10 +485,11 @@ function yproject_check_user_can_see_project_page() {
  */
 function remove_related_videos($embed) {
     if (strstr($embed,'http://www.youtube.com/embed/') || strstr($embed,'https://www.youtube.com/embed/')) {
-		return str_replace('feature=oembed','feature=oembed&rel=0&wmode=transparent',$embed);
-    } else {
-		return $embed;
+		$embed = str_replace( 'frameborder="0"', 'style="border: none"', $embed );
+		$embed = str_replace( 'allowfullscreen', '', $embed );
+		$embed = str_replace( 'feature=oembed', 'feature=oembed&rel=0&wmode=transparent', $embed );
     }
+	return $embed;
 }
 add_filter('oembed_result', 'remove_related_videos', 1, true);
 
@@ -1501,10 +1502,10 @@ add_shortcode('yproject_lightbox_button', 'yproject_shortcode_lightbox_button');
 //Shortcode lightbox standard
 function yproject_shortcode_lightbox($atts, $content = '') {
     $atts = shortcode_atts( array(
-	'id' => 'lightbox',
-	'scrolltop' => '',
-	'style' => '',
-	'class' => '',
+		'id' => 'lightbox',
+		'scrolltop' => '0',
+		'style' => '',
+		'class' => '',
     ), $atts );
 	
     return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].' '.$atts['class'].'>
@@ -1521,8 +1522,8 @@ add_shortcode('yproject_lightbox', 'yproject_shortcode_lightbox');
 //Shortcode grande lightbox
 function yproject_shortcode_widelightbox($atts, $content = '') {
     $atts = shortcode_atts( array(
-	'id' => 'lightbox',
-	'scrolltop' => '',
+		'id' => 'lightbox',
+		'scrolltop' => '0',
     ), $atts );
     return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].'>
 		<div class="wdg-lightbox-click-catcher"></div>
@@ -1540,9 +1541,9 @@ add_shortcode('yproject_widelightbox', 'yproject_shortcode_widelightbox');
 //type: valid / error / info
 function yproject_shortcode_msglightbox($atts, $content = '') {
     $atts = shortcode_atts( array(
-	'id' => 'lightbox',
-	'scrolltop' => '',
-	'type' => 'msg',
+		'id' => 'lightbox',
+		'scrolltop' => '0',
+		'type' => 'msg',
     ), $atts );
     return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox msg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].'>
 		<div class="wdg-lightbox-click-catcher"></div>

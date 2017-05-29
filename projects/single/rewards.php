@@ -53,7 +53,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 
 					<?php if (is_user_logged_in()): ?>
 
-                                        <span class="uppercase"><?php _e("Je recevrai", 'yproject'); ?></span> <span class="roi_amount_user">0</span><span> &euro;* </span><br />
+						<span class="uppercase"><?php _e("Je recevrai", 'yproject'); ?></span> <span class="roi_amount_user">0</span><span> &euro;* </span><br />
 						<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span> % <?php _e("du chiffre d'affaires vers&eacute; tous les trimestres.", 'yproject'); ?><br />
                                                 
 						<div>
@@ -71,8 +71,9 @@ $estimated_turnover = $campaign->estimated_turnover();
 								</tr>
 							</table>                                       
 						</div>
-                                                <?php $base = 130 * $index; ?>
-                                                <div class="arrow-line" style="width: <?php echo $base ?>px;"><div class="arrow-end"></div></div>
+						<?php $base = 130 * $index; ?>
+						<div class="arrow-line" style="width: <?php echo $base ?>px;"><div class="arrow-end"></div></div>
+						
 					<?php else: ?>
 						<div class="hidden">
 							<p>
@@ -93,7 +94,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 				<?php _e("Rendement vis&eacute; :", "yproject"); ?> 
 				<span class="info-user">
 					<span class="roi_percent_average">...</span> <?php _e("% par an en moyenne*", 'yproject'); ?>
-					(<?php _e("soit", 'yproject'); ?> <span class="roi_ratio_on_total">...</span> <?php echo __("en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>)
+					(<?php _e("soit", 'yproject'); ?> <span class="roi_ratio_on_total">...</span> % <?php echo __("en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>)
 				</span><br />
 
 				<span class="small-alert">* <?php _e("Ces valeurs sont estim&eacute;es selon", "yproject");?>&nbsp;
