@@ -119,8 +119,6 @@ var WDGProjectViewer = (function($) {
 			$("#hide_except_div2_phase1").attr("onclick","hide_except_div2()");
 			$("#hide_except_div2_phase3").attr("onclick","hide_except_div2()");
 			$("#hide_except_div3").attr("onclick","hide_except_div3()");
-			$("#btn-validate_project-true-v3").attr("onclick","see_dev_true()");
-			$("#btn-validate_project-false-v3").attr("onclick","see_dev_false()");
 			$("#vote-form-v3-link").attr("onclick","see_div1()");
 			$("#vote-form-v3-link-responsive").attr("onclick","see_div1()");
 			$("#hide_except_div1").attr("onclick","hide_except_div1()");
@@ -212,20 +210,6 @@ var WDGProjectViewer = (function($) {
 			   	$("#phase2").attr('class','right_disappearance')
 			   	$("#phase1").attr('class','right_disappearance')
 			   window.setTimeout( wait, 400 ); 
-			};
-
-			see_dev_true = function()
-			{
-				$('#validate_project-true').attr('style','display:block;');
-				$('#validate_project-true_sum').attr('style','display:block;');
-				$('#validate_project-false').attr('style','display:none;');
-			};
-
-			see_dev_false = function ()
-			{
-				$('#validate_project-true').attr('style','display:none;');
-				$('#validate_project-true_sum').attr('style','display:none;');
-				$('#validate_project-false').attr('style','display:block;');
 			};
 
 
