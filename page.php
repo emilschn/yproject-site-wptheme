@@ -1,14 +1,5 @@
 <?php get_header(); ?>
 
-<?php
-wp_reset_query();
-if (is_home() or is_front_page()) {
-	locate_template( array('pages/controler/controler.php'), true );
-	locate_template( array('pages/controler/controler-home.php'), true );
-	locate_template( array('pages/view/view-home.php'), true );
-} else {
-?>
-
 <div id="content">
     
 	<div class="padder">
@@ -38,8 +29,5 @@ if (is_home() or is_front_page()) {
 	</div><!-- .padder -->
 	
 </div><!-- #content -->
-<?php
-}
-?>
 
 <?php get_footer(); ?>

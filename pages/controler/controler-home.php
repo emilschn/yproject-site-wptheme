@@ -26,3 +26,5 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 }
 
 $page_controler = new WDG_Page_Controler_Home();
+
+echo 'WDG_Page_Controler_Home';

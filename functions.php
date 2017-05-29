@@ -1653,3 +1653,9 @@ function yproject_shortcode_project_amount_count($atts, $content = '') {
     }
 }
 add_shortcode('wdg_project_amount_count', 'yproject_shortcode_project_amount_count');
+
+
+$wdg_functions_loaded_required_once = array(
+	'functions/templates-engine.php'
+);
+locate_template( $wdg_functions_loaded_required_once, true );
