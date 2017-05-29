@@ -60,20 +60,20 @@ if ( is_user_logged_in() && $campaign->end_vote_remaining() > 0 ) {
 					$invest_sum = round($_POST[ 'invest_sum' ]);
 				}
 			}
+		}
 			
-			if ($campaign->funding_type() != 'fundingdonation') {
-			    //Projet validé + Risque d'investissement
+		if ($campaign->funding_type() != 'fundingdonation') {
+			//Risque d'investissement
 
-			    $invest_risk = (isset($_POST[ 'invest_risk' ])) ? $_POST[ 'invest_risk' ] : 0;
-			    
-			    if ($invest_risk <= 0) {
-				    array_push($vote_errors, 'Vous n&apos;avez pas s&eacute;lectionn&eacute; de risque d&apos;investissement.');
-				    $is_vote_valid = false;
-				    $check_risk=false;
-			    }
-			} else {
-			    $invest_risk = 1;
+			$invest_risk = (isset($_POST[ 'invest_risk' ])) ? $_POST[ 'invest_risk' ] : 0;
+
+			if ($invest_risk <= 0) {
+				array_push($vote_errors, 'Vous n&apos;avez pas s&eacute;lectionn&eacute; de risque d&apos;investissement.');
+				$is_vote_valid = false;
+				$check_risk=false;
 			}
+		} else {
+			$invest_risk = 1;
 		}
 
 		//Plus d'infos
