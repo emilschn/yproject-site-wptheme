@@ -424,14 +424,50 @@ function print_informations_page()
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
 
+				$contract_start_date_editable = ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing );
+				$contract_start_date_values = array();
+				$contract_start_date_list = array();
+				if ( $contract_start_date_editable ) {
+					// Trouver la prochaine date possible : janvier, avril, juillet, octobre
+					$current_date = new DateTime();
+					$next_date = new DateTime();
+					switch ( $current_date->format('m') ) {
+						case 1:
+						case 2:
+						case 3:
+							$next_date = new DateTime( $current_date->format( 'Y' ) . '-04-01' );
+							break;
+						case 4:
+						case 5:
+						case 6:
+							$next_date = new DateTime( $current_date->format( 'Y' ) . '-07-01' );
+							break;
+						case 7:
+						case 8:
+						case 9:
+							$next_date = new DateTime( $current_date->format( 'Y' ) . '-10-01' );
+							break;
+						case 10:
+						case 11:
+						case 12:
+							$next_date = new DateTime( ( $current_date->format( 'Y' ) + 1 ) . '-01-01' );
+							break;
+					}
+					// Ensuite on ajoute (arbitrairement) 10 dates
+					for ( $i = 0; $i < 10; $i++ ) {
+						array_push( $contract_start_date_values, $next_date->format( 'Y-m-d H:i:s' ) );
+						array_push( $contract_start_date_list, $next_date->format( 'd/m/Y' ) );
+						$next_date->add( new DateInterval( 'P3M' ) );
+					}
+				}
                 DashboardUtility::create_field(array(
                     "id"			=> "new_contract_start_date",
-                    "type"			=> "date",
-                    "label"			=> "Première date de versement",
-                    "value"			=> new DateTime($campaign->first_payment_date()),
-                    "editable"		=> $is_admin,
-                    "admin_theme"	=> $is_admin,
-                    "visible"		=> $is_admin || ($campaign->first_payment_date()!="")
+                    "type"			=> "select",
+                    "label"			=> "Date de d&eacute;marrage du contrat",
+                    "value"			=> $campaign->contract_start_date(),
+                    "editable"		=> $contract_start_date_editable,
+                    "options_id"	=> $contract_start_date_values,
+                    "options_names"	=> $contract_start_date_list
                 ));
 
                 DashboardUtility::create_field(array(
