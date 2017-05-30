@@ -34,13 +34,17 @@
 </header> <!-- .wdg-component-slider -->
 
 <?php
-//*******************
-//CACHE HOME
-$cache_home = $WDG_cache_plugin->get_cache('home-projects', 1);
-if ($cache_home !== FALSE) { echo $cache_home; }
-else {
-	ob_start();
-	date_default_timezone_set("Europe/London");
+/******************************************************************************/
+// PROJECT LIST
+/******************************************************************************/
+$projects_html = $page_controler->get_projects_html();
+?>
+
+<?php if ( !$projects_html ): ?>
+
+<?php
+ob_start();
+date_default_timezone_set("Europe/London");
 ?>
 
 <section class="wdg-component-projects-preview">
@@ -49,26 +53,31 @@ else {
 		<div class="block-projects">
 			<?php
 			global $project_id;
-			$nb_projects = 3;
 			// Affiche les 3 projets les plus récents entre ceux en cours, en vote et financés
-			$all_projects = ATCF_Campaign::get_list_most_recent( $nb_projects );
+			$all_projects = $page_controler->get_projects_list();
 			foreach ($all_projects as $project_id) {
 				locate_template( array("projects/preview.php"), true, false );
 			}
 			?>
 		</div>
 	</div>
-        <a class="home-button-project see-more red" href="<?php echo home_url( '/les-projets' ); ?>"><?php _e("D&eacute;couvrir tous les projets","yproject" ) ?></a>
+	<a class="home-button-project see-more red" href="<?php echo home_url( '/les-projets' ); ?>"><?php _e("D&eacute;couvrir tous les projets","yproject" ) ?></a>
 </section> <!-- section.wdg-component-projects-preview -->
 
 <?php
 	$cache_home = ob_get_contents();
-	$WDG_cache_plugin->set_cache('home-projects', $cache_home, 60*2, 1);  //MAJ 2min
+	$page_controler->set_projects_html( $cache_home );
 	ob_end_clean();
-	echo $cache_home;
-}
-//FIN CACHE HOME
-//*******************
+?>
+
+<?php endif; ?>
+
+<?php echo $page_controler->get_projects_html(); ?>
+
+<?php
+/******************************************************************************/
+// FIN PROJECT LIST
+/******************************************************************************/
 ?>
 
 

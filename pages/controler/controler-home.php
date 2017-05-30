@@ -5,12 +5,23 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 	
 	private $slider;
 	
+	private static $projects_html_key = 'home-projects';
+	private static $projects_html_duration = 60 * 3; // 3 minutes de cache
+	private static $projects_html_version = 1;
+	private static $projects_nb_to_show = 3;
+	private $projects_html;
+	private $projects_list;
+	
 	public function __construct() {
 		parent::__construct();
-		date_default_timezone_set("Europe/Paris");
+		define( 'SKIP_BASIC_HTML', TRUE );
 		$this->make_slider();
+		$this->init_projects();
 	}
 	
+/******************************************************************************/
+// SLIDER
+/******************************************************************************/
 	public function get_slider() {
 		return $this->slider;
 	}
@@ -23,8 +34,29 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 		);
 	}
 	
+/******************************************************************************/
+// PROJECT LIST
+/******************************************************************************/
+	private function init_projects() {
+		$this->projects_html = $this->get_db_cached_elements( WDG_Page_Controler_Home::$projects_html_key, WDG_Page_Controler_Home::$projects_html_version );
+		if ( empty( $this->projects_html ) ) {
+			$this->projects_list = ATCF_Campaign::get_list_most_recent( WDG_Page_Controler_Home::$projects_nb_to_show );
+		}
+	}
+	
+	public function get_projects_html() {
+		return $this->projects_html;
+	}
+	
+	public function set_projects_html( $html ) {
+		$this->projects_html = $html;
+		$this->set_db_cached_elements( WDG_Page_Controler_Home::$projects_html_key, $html, WDG_Page_Controler_Home::$projects_html_duration, WDG_Page_Controler_Home::$projects_html_version );
+	}
+	
+	public function get_projects_list() {
+		return $this->projects_list;
+	}
+	
 }
 
 $page_controler = new WDG_Page_Controler_Home();
-
-echo 'WDG_Page_Controler_Home';

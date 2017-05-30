@@ -1,5 +1,9 @@
 <?php get_header(); ?>
 
+<?php if ( defined( 'SKIP_BASIC_HTML' ) ): ?>
+	<?php the_content(); ?>
+
+<?php else: ?>
 <div id="content">
     
 	<div class="padder">
@@ -10,10 +14,6 @@
 
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-					<?php 
-					ob_start();
-					$temp = ob_get_clean(); 
-					?>
 					<div class="entry center">
 					    
 						<?php the_content( __( '<p class="serif">Lire le reste de la page &rarr;</p>', 'yproject' ) ); ?>
@@ -30,4 +30,6 @@
 	
 </div><!-- #content -->
 
-<?php get_footer(); ?>
+<?php endif; ?>
+
+<?php get_footer();

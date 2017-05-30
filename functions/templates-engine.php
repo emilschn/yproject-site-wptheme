@@ -17,7 +17,7 @@ class WDG_Templates_Engine {
 	}
 	
 	public function __construct() {
-		add_action( 'template_include', 'WDG_Templates_Engine::load_controler' );
+		add_action( 'template_include', 'WDG_Templates_Engine::load_controler', 100, 2 );
 		add_filter( 'the_content', 'WDG_Templates_Engine::override_content' );
 	}
 	
@@ -60,17 +60,16 @@ class WDG_Templates_Engine {
 	 * - charge de toute façon le controler général
 	 * - charge le controler spécifique si existant
 	 */
-	public static function load_controler() {
-echo 'load_controler A';
+	public static function load_controler( $template ) {
 		locate_template( WDG_Templates_Engine::$controler_path. 'controler.php', TRUE );
 		
 		$wdg_templates_engine = WDG_Templates_Engine::instance();
 		$controler_name = $wdg_templates_engine->get_controler_name();
-echo 'load_controler F > ' . $controler_name;
 		if ( $controler_name ) {
 			locate_template( WDG_Templates_Engine::$controler_path. 'controler-' .$controler_name. '.php', TRUE );
 		}
-echo 'load_controler Z';
+
+		return $template;
 	}
 	
 	/**
@@ -105,7 +104,6 @@ echo 'load_controler Z';
 	 * - si une existe sur une page, remplace le content
 	 */
 	public static function override_content( $content ) {
-echo 'override_content A';
 		$wdg_templates_engine = WDG_Templates_Engine::instance();
 		$view = $wdg_templates_engine->get_view_name();
 		if ( $view ) {
@@ -115,7 +113,6 @@ echo 'override_content A';
 			ob_clean();
 		}
 		return $content;
-echo 'override_content A';
 	}
 	
 }
