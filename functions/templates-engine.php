@@ -30,7 +30,7 @@ class WDG_Templates_Engine {
 
 			} else {
 				global $post;
-				self::$current_page_name = $post->page_name;
+				self::$current_page_name = $post->post_name;
 
 			}
 		}

@@ -1,4 +1,4 @@
-<?php global $page_controler, $WDG_cache_plugin, $stylesheet_directory_uri; ?>
+<?php global $page_controler, $stylesheet_directory_uri; ?>
 
 <header class="wdg-component-slider home-slider">
     <div class="slider-container"> 
@@ -42,10 +42,7 @@ $projects_html = $page_controler->get_projects_html();
 
 <?php if ( !$projects_html ): ?>
 
-<?php
-ob_start();
-date_default_timezone_set("Europe/London");
-?>
+<?php ob_start(); ?>
 
 <section class="wdg-component-projects-preview">
     <h2 class="standard">/ <?php _e("les projets", "yproject") ?> /</h2>
