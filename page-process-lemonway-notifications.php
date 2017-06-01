@@ -97,6 +97,13 @@ if ( !empty( $lemonway_posted_category ) ) {
 				ypcf_debug_log( 'PROCESS -> $invest_author = ' . $invest_author->wp_user->ID );
 				LemonwayLib::ask_transfer_funds( $invest_author->get_lemonway_id(), $organization_obj->get_lemonway_id(), $lemonway_posted_amount );
 				
+				$postdata = array(
+					'ID'			=> $investment_id,
+					'post_status'	=> 'publish',
+					'edit_date'		=> current_time( 'mysql' )
+				);
+				wp_update_post($postdata);
+				
 				// - Créer le contrat pdf
 				// - Envoyer validation d'investissement par mail
 				if ( $lemonway_posted_amount > 1500 ) {
