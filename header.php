@@ -65,7 +65,7 @@
 		<link href="https://plus.google.com/+WedogoodCo" rel="publisher" />
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="Plateforme d'investissement participatif a impact positif" />
+		<meta name="description" content="Première plateforme de financement participatif en royalties (royalty crowdfunding). Entrepreneurs : levez des fonds sans diluer votre capital !" />
 		
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
@@ -90,13 +90,6 @@
 		<?php wp_head(); ?>
 
 		<!-- Meta spécifiques à Facebook -->
-		<?php /*<meta property="og:title" content="WEDOGOOD<?php if ($is_campaign_page === true) { echo " : ".$campaign->data->post_title; } ?>" />
-		<meta property="og:description" content="<?php 
-                    if ($is_campaign_page === true) {
-			    echo ($campaign->subtitle() != '') ? $campaign->subtitle() : $campaign->data->post_title;
-                    } else {
-			    echo "Plateforme d'investissement participatif à impact positif";
-                    } ?>" />*/ ?>
 		<?php
 		$imageFacebook = (isset($campaign) && $is_campaign_page === true) ? $campaign->get_home_picture_src() : $stylesheet_directory_uri .'/images/common/wedogood-logo-rouge.png';
 		$url = (isset($campaign) && $is_campaign_page === true) ? get_page_link($post) : "";
@@ -105,11 +98,15 @@
 		<meta property="og:url" content="<?php echo $url; ?>" />
 		<meta property="og:title" content="<?php echo $post->post_title; ?>" />
 		<meta property="og:description" content="<?php echo $campaign->summary(); ?>" />
-		<meta property="fb:app_id" content="<?php echo YP_FB_APP_ID; ?>" />
+		
+		<?php else: ?>
+		<meta property="og:description" content="Première plateforme de financement participatif en royalties (royalty crowdfunding). Entrepreneurs : levez des fonds sans diluer votre capital !" />
+		
 		<?php endif; ?>
 		<meta property="og:image" content="<?php echo $imageFacebook ?>" />
 		<meta property="og:image:secure_url" content="<?php echo $imageFacebook ?>" />
 		<meta property="og:image:type" content="image/png" />
+		<meta property="fb:app_id" content="<?php echo YP_FB_APP_ID; ?>" />
 	</head>
 
 	<body <?php body_class(get_locale()); ?>> 
