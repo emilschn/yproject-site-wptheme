@@ -329,7 +329,7 @@ if (isset($campaign) && is_user_logged_in()):
 					<?php echo $lw_transaction_result->MSG . ' (' .$lw_transaction_result->INT_MSG. ')'; ?><br />
 					<?php _e("Si vous souhaitez de l'aide relative &agrave; ce probl&egrave;me, merci de nous contacter sur investir@wedogood.co en pr&eacute;cisant les informations ci-dessus.", 'yproject'); ?>
 					
-					<?php NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG, $campaign->data->post_title ); ?>
+					<?php NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG, $campaign->data->post_title, $amount ); ?>
 					<?php
 					break;
 			}
