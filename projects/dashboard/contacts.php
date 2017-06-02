@@ -33,10 +33,8 @@ function print_contacts_page() {
                     <?php DashboardUtility::get_infobutton('Au moment de l\'envoi, les variables seront remplacées par les valeurs correspondantes.<br/><br/>
                         Ainsi, par exemple, <b>%username%</b> sera remplacé par le nom de l\'utilisateur qui recevra le message.',true)?></p>
                     <ul style="list-style-type: square;">
-                        <li><i>%projectname%</i> : Nom du projet</li>
-                        <li><i>%projecturl%</i> : Adresse du projet</li>
-                        <li><i>%projectauthor%</i> : Nom du porteur de projet</li>
-                        <li><i>%username%</i> : Nom de l'utilisateur destinataire</li>
+                        <li><i>%userfirstname%</i> : Prénom de l'utilisateur destinataire</li>
+                        <li><i>%userlastname%</i> : Nom de famille de l'utilisateur destinataire</li>
                         <li><i>%investwish%</i> : Intention d'investissement</li>
                     </ul>
                     <label><strong>Objet du mail : </strong>
