@@ -134,7 +134,7 @@ class DashboardUtility
 
         //Is this an hidden input
         if($type=='hidden'){
-            $text_field = '<span class="field-container>'.$prefix.'<span class="field-value" data-type="'.$type.'" data-id="'.$id.'">';
+            $text_field = '<span class="field-container">'.$prefix.'<span class="field-value" data-type="'.$type.'" data-id="'.$id.'">';
             $text_field .= '<input type="hidden" '
                 . 'name="' . $id . '" '
                 . 'id="' . $id . '" '

@@ -632,3 +632,24 @@ table.dataTable td.select-checkbox::before {
     width: 90%;
     height: 150px;
 }
+
+#page-wallet ul.payment-list > li {
+    margin-bottom: 30px;
+    padding: 5px 15px;
+    list-style: none;
+    background: #EEECED;
+}
+#page-wallet ul.payment-list li h4 {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 5px 0px;
+}
+#page-wallet ul.payment-list li div {
+    margin: 10px 0px;
+}
+#page-wallet ul.payment-list li div.wdg-lightbox, #page-wallet ul.payment-list li div.wdg-lightbox-click-catcher {
+	margin: 0px;
+}
+#page-wallet ul.payment-list li div.wdg-lightbox-padder {
+	margin: 5vh auto;
+}
