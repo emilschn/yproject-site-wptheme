@@ -540,6 +540,7 @@ YPUIFunctions = (function($) {
 			}
 			var amount = total * roiPercent / 100;
 			var amount_with_fees = amount + (amount * costsOrga / 100);
+			amount_with_fees += $("#turnover-declaration").data("adjustment");
 			amount_with_fees = Math.round(amount_with_fees * 100) / 100;
 
 			$(".amount-to-pay").text(amount_with_fees);

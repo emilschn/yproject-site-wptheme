@@ -40,18 +40,19 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 			<?php $declaration_list = $campaign->get_current_roi_declarations(); ?>
 			<ul class="payment-list">
 				<?php foreach ( $declaration_list as $declaration_item ): ?>
+					<li>
 					<?php global $declaration; $declaration = $declaration_item; ?>
 					<?php locate_template( array("projects/dashboard/wallet/partial-declaration.php"), true, false ); ?>
+					<?php locate_template( array("projects/dashboard/wallet/partial-adjustment.php"), true, false ); ?>
+					</li>
 				<?php endforeach; ?>
 			</ul>
 
 		
-			<?php
-			// Sans déclaration en cours, on affiche le formulaire permettant de procéder à l'ajustement de la prochaine
-			// TODO
-			?>
-			<?php else: ?>
-			<!-- Ajustement... -->
+			<?php // Sans déclaration en cours, on affiche le formulaire permettant de procéder à l'ajustement de la prochaine ?>
+			<?php elseif ( $campaign->has_next_roi_declaration() ): ?>
+				<?php global $declaration; $declaration = $campaign->get_next_roi_declaration(); ?>
+				<?php locate_template( array("projects/dashboard/wallet/partial-ajustment.php"), true, false ); ?>
 
 			<?php endif; ?>
 		<?php endif; ?>
