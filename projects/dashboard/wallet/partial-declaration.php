@@ -74,6 +74,9 @@ $declaration_message = $declaration->get_message();
 		<b>Total de chiffre d'affaires déclaré : </b><?php echo UIHelpers::format_number( $declaration->get_turnover_total() ); ?> &euro; HT<br /><br />
 
 		<b>Total du versement : </b><?php echo UIHelpers::format_number( $declaration->amount ); ?> &euro; (<?php echo UIHelpers::format_number( $campaign->roi_percent() ); ?> %)<br />
+		<?php if ( $declaration->get_adjustment_validated() ): ?>
+			<b>Ajustement : </b><?php echo UIHelpers::format_number( $declaration->get_adjustment_value() ); ?> &euro;<br />
+		<?php endif; ?>
 		<b>Frais de gestion : </b><?php echo UIHelpers::format_number( $declaration->get_commission_to_pay() ); ?> &euro;<br />
 		<b>Montant à verser : </b><?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro;<br /><br />
 
@@ -142,6 +145,9 @@ $declaration_message = $declaration->get_message();
 		<b>Total de chiffre d'affaires déclaré : </b><?php echo UIHelpers::format_number( $declaration->get_turnover_total() ); ?> &euro;<br /><br />
 
 		<b>Total du versement : </b><?php echo UIHelpers::format_number( $declaration->amount ); ?> &euro; (<?php echo UIHelpers::format_number( $campaign->roi_percent() ); ?> %)<br />
+		<?php if ( $declaration->get_adjustment_validated() ): ?>
+			<b>Ajustement : </b><?php echo UIHelpers::format_number( $declaration->get_adjustment_value() ); ?> &euro;<br />
+		<?php endif; ?>
 		<b>Frais de gestion : </b><?php echo UIHelpers::format_number( $declaration->get_commission_to_pay() ); ?> &euro;<br /><br />
 
 		<?php if ( empty( $declaration_message ) ): ?>
@@ -208,6 +214,9 @@ $declaration_message = $declaration->get_message();
 		<b>Total de chiffre d'affaires déclaré : </b><?php echo UIHelpers::format_number( $declaration->get_turnover_total() ); ?> &euro;<br /><br />
 
 		<b>Total du versement : </b><?php echo UIHelpers::format_number( $declaration->amount ); ?> &euro; (<?php echo UIHelpers::format_number( $campaign->roi_percent() ); ?> %)<br />
+		<?php if ( $declaration->get_adjustment_validated() ): ?>
+			<b>Ajustement : </b><?php echo UIHelpers::format_number( $declaration->get_adjustment_value() ); ?> &euro;<br />
+		<?php endif; ?>
 		<b>Frais de gestion : </b><?php echo UIHelpers::format_number( $declaration->get_commission_to_pay() ); ?> &euro;<br /><br />
 
 		<?php if ( empty( $declaration_message ) ): ?>
