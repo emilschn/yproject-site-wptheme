@@ -15,19 +15,7 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 			// - transmettez vos comptes ou votre attestation comptable pour le réajustement annuel de vos déclarations > à afficher toute l’année ? sauf entre la signature du prélèvement automatique et la 1ère déclaration.
 
 		?>
-		
-		<?php
-		// On affiche la partie sur le mandat de prélèvement automatique si il n'a pas été créé, ou si il n'est pas signé
-		$saved_mandates_list = $organization_obj->get_lemonway_mandates();
-		$last_mandate_status = '';
-		if ( !empty( $saved_mandates_list ) ) {
-			$last_mandate = end( $saved_mandates_list );
-			$last_mandate_status = $last_mandate[ "S" ];
-		}
-		?>
-		<?php if ( empty( $saved_mandates_list ) || ( $last_mandate_status != 5 && $last_mandate_status != 6 ) ): ?>
 		<?php locate_template( array("projects/dashboard/wallet/partial-mandate.php"), true ); ?>
-		<?php endif; ?>
 		
 		
 		<?php // Si la signature du mandat n'est pas bloquante, on affiche la suite ?>

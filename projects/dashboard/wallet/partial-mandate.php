@@ -1,44 +1,54 @@
 <?php
 global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDGAuthor, $WDGUser_current, $organization_obj, $is_admin, $is_author;
 $mandate_conditions = $campaign->mandate_conditions();
+
+$saved_mandates_list = $organization_obj->get_lemonway_mandates();
+$last_mandate_status = '';
+if ( !empty( $saved_mandates_list ) ) {
+	$last_mandate = end( $saved_mandates_list );
+	$last_mandate_status = $last_mandate[ "S" ];
+}
 ?>
 
 <h2><?php _e('Autorisation de pr&eacute;l&egrave;vement', 'yproject'); ?></h2>
-		
-<?php if ( $is_admin ): ?>
-	<form action="" id="forcemandate_form" class="db-form" data-action="save_project_force_mandate">
-		<?php DashboardUtility::create_field( array(
-			"id"			=> "new_force_mandate",
-			"type"			=> "select",
-			"label"			=> __( "Forcer l'entrepreneur &agrave; signer l'autorisation de pr&eacute;l&egrave;vement ?", 'yproject' ),
-			"value"			=> $campaign->is_forced_mandate(),
-			"editable"		=> $is_admin,
-			"admin_theme"	=> $is_admin,
-			"visible"		=> $is_admin,
-			"options_id"	=> array( 0, 1 ),
-			"options_names"	=> array( 
-				__( "Non", 'yproject' ),
-				__( "Oui", 'yproject' )
-			)
-		) ); ?>
 
-		<?php DashboardUtility::create_field(array(
-			"id"			=> "new_mandate_conditions",
-			"type"			=> "editor",
-			"label"			=> __( "Conditions contractuelles", 'yproject' ),
-			"value"			=> $mandate_conditions,
-			"editable"		=> $is_admin,
-			"admin_theme"	=> $is_admin,
-			"visible"		=> $is_admin,
-		)); ?>
+<?php if ( $last_mandate_status != 5 && $last_mandate_status != 6 ): ?>
+	<?php if ( $is_admin ): ?>
+		<form action="" id="forcemandate_form" class="db-form" data-action="save_project_force_mandate">
+			<?php DashboardUtility::create_field( array(
+				"id"			=> "new_force_mandate",
+				"type"			=> "select",
+				"label"			=> __( "Forcer l'entrepreneur &agrave; signer l'autorisation de pr&eacute;l&egrave;vement ?", 'yproject' ),
+				"value"			=> $campaign->is_forced_mandate(),
+				"editable"		=> $is_admin,
+				"admin_theme"	=> $is_admin,
+				"visible"		=> $is_admin,
+				"options_id"	=> array( 0, 1 ),
+				"options_names"	=> array( 
+					__( "Non", 'yproject' ),
+					__( "Oui", 'yproject' )
+				)
+			) ); ?>
 
-		<?php DashboardUtility::create_save_button( "forcemandate-form", $is_admin ); ?>
-	</form>
-<?php elseif ( !empty( $mandate_conditions ) ) : ?>
+			<?php DashboardUtility::create_field(array(
+				"id"			=> "new_mandate_conditions",
+				"type"			=> "editor",
+				"label"			=> __( "Conditions contractuelles", 'yproject' ),
+				"value"			=> $mandate_conditions,
+				"editable"		=> $is_admin,
+				"admin_theme"	=> $is_admin,
+				"visible"		=> $is_admin,
+			)); ?>
 
-	<strong><?php _e( "Conditions contractuelles pour la signature du mandat de pr&eacute;l&egrave;vement", 'yproject' ) ?></strong><br />
-	<?php echo $mandate_conditions; ?><br /><br />
+			<?php DashboardUtility::create_save_button( "forcemandate-form", $is_admin ); ?>
+		</form>
 
+	<?php elseif ( !empty( $mandate_conditions ) ) : ?>
+
+		<strong><?php _e( "Conditions contractuelles pour la signature du mandat de pr&eacute;l&egrave;vement", 'yproject' ) ?></strong><br />
+		<?php echo $mandate_conditions; ?><br /><br />
+
+	<?php endif; ?>
 <?php endif; ?>
 
 
@@ -68,7 +78,6 @@ $keep_going = true;
 	?>
 	<?php
 	$organization_obj->register_lemonway();
-	$saved_mandates_list = $organization_obj->get_lemonway_mandates();
 	if ( empty( $saved_mandates_list ) ) {
 		$keep_going = false;
 		if ( !$organization_obj->add_lemonway_mandate() ) {
@@ -94,10 +103,6 @@ $keep_going = true;
 	 * 8 	désactivé
 	 * 9 	rejeté
 	 */
-	?>
-	<?php 
-	$last_mandate = end( $saved_mandates_list );
-	$last_mandate_status = $last_mandate[ "S" ];
 	?>
 	<?php if ( $last_mandate_status == 0 ): //Si 0, proposer de signer ?>
 		<?php $phone_number = $WDGUser_current->wp_user->get('user_mobile_phone'); ?>

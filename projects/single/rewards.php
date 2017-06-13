@@ -93,7 +93,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 			<div class="project-rewards-alert">
 				<?php _e("Rendement vis&eacute; :", "yproject"); ?> 
 				<span class="info-user">
-					<span class="roi_percent_average">...</span> <?php _e("% par an en moyenne*", 'yproject'); ?>
+					+ <span class="roi_percent_total">...</span> % <?php echo __("en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>
 					(<?php _e("soit", 'yproject'); ?> x<span class="roi_ratio_on_total">...</span> <?php echo __("en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>)
 				</span><br />
 
