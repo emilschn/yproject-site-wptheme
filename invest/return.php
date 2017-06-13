@@ -302,7 +302,7 @@ if (isset($campaign) && is_user_logged_in()):
 					<?php
 					$link_next = '#';
 					if ( $wdginvestment->has_token() ) {
-						$link_next = $wdginvestment->get_redirection( 'error' );
+						$link_next = $wdginvestment->get_redirection( 'success' );
 					} else {
 						$link_next = get_permalink($share_page->ID). '?campaign_id=' .$campaign->ID;
 					}
@@ -328,6 +328,11 @@ if (isset($campaign) && is_user_logged_in()):
 					_e("Il y a eu une erreur pendant la transaction.", 'yproject'); ?><br />
 					<?php echo $lw_transaction_result->MSG . ' (' .$lw_transaction_result->INT_MSG. ')'; ?><br />
 					<?php _e("Si vous souhaitez de l'aide relative &agrave; ce probl&egrave;me, merci de nous contacter sur investir@wedogood.co en pr&eacute;cisant les informations ci-dessus.", 'yproject'); ?>
+					<br />
+					
+					<?php if ( $wdginvestment->has_token() ): ?>
+					<div class="align-center"><a class="button" href="<?php echo $wdginvestment->get_redirection( 'error' ); ?>"><?php _e("Suivant", 'yproject'); ?></a></div><br /><br />
+					<?php endif; ?>
 					
 					<?php NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG, $campaign->data->post_title, $amount ); ?>
 					<?php
