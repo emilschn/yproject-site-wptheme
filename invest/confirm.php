@@ -133,7 +133,7 @@ if (isset($campaign)):
 					<?php
 					$link_modify = '#';
 					if ( $wdginvestment->has_token() ){
-						$link_modify = $wdginvestment->get_redirection('error');
+						$link_modify = $wdginvestment->get_redirection( 'error', 'change-info' );
 					} else {
 						$link_modify = $page_invest_link. '&invest_start=1';
 					}
@@ -212,7 +212,7 @@ if (isset($campaign)):
 					<?php 
 					$redirect_page = '#';
 					if ( $wdginvestment->has_token() ){
-						$redirect_page = $wdginvestment->get_redirection('error');
+						$redirect_page = $wdginvestment->get_redirection( 'error', 'change-info' );
 						
 					} else {
 						$redirect_page = home_url('/modifier-mon-compte');

@@ -236,7 +236,7 @@ if (isset($campaign) && is_user_logged_in()):
 					<?php
 					$link_next = '#';
 					if ( $wdginvestment->has_token() ) {
-						$link_next = $wdginvestment->get_redirection( 'error' );
+						$link_next = $wdginvestment->get_redirection( 'error', 'investpending' );
 					} else {
 						$link_next = get_permalink($share_page->ID). '?campaign_id=' .$campaign->ID;
 					}
@@ -302,7 +302,7 @@ if (isset($campaign) && is_user_logged_in()):
 					<?php
 					$link_next = '#';
 					if ( $wdginvestment->has_token() ) {
-						$link_next = $wdginvestment->get_redirection( 'success' );
+						$link_next = $wdginvestment->get_redirection( 'success', $wdginvestment->get_token() );
 					} else {
 						$link_next = get_permalink($share_page->ID). '?campaign_id=' .$campaign->ID;
 					}
@@ -331,7 +331,7 @@ if (isset($campaign) && is_user_logged_in()):
 					<br />
 					
 					<?php if ( $wdginvestment->has_token() ): ?>
-					<div class="align-center"><a class="button" href="<?php echo $wdginvestment->get_redirection( 'error' ); ?>"><?php _e("Suivant", 'yproject'); ?></a></div><br /><br />
+					<div class="align-center"><a class="button" href="<?php echo $wdginvestment->get_redirection( 'error', 'investerror', $lw_transaction_result->INT_MSG ); ?>"><?php _e("Suivant", 'yproject'); ?></a></div><br /><br />
 					<?php endif; ?>
 					
 					<?php NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG, $campaign->data->post_title, $amount ); ?>
