@@ -8,7 +8,7 @@
     $page_name = get_post($post)->post_name;
     $campaign = atcf_get_current_campaign();
 	$wdginvestment = WDGInvestment::current();
-	$context = '';
+	$context = ATCF_CrowdFunding::get_platform_context();
 	if ( $wdginvestment->has_token() ) {
 		$context = 'invest-token';
 	}
@@ -61,5 +61,5 @@
 	    </div><!-- .padder -->
 	</div><!-- #content -->
 <?php endif; ?>
-	
-<?php get_footer( $context );
+
+<?php get_footer( ATCF_CrowdFunding::get_platform_context() );
