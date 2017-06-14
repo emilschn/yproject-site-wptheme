@@ -246,10 +246,9 @@ if (isset($campaign)):
 						<?php echo fillPDFHTMLDefaultContent($current_user, $campaign, $invest_data, $organization); ?>
 					</div><br />
 
-					<?php _e("Je donne pouvoir à la société WE DO GOOD :", 'yproject'); ?><br />
-					<?php _e("Ecrire", 'yproject'); ?> "<strong>Bon pour souscription</strong>" <?php _e("dans la zone de texte ci-contre :", 'yproject'); ?>
+					<?php _e("Ecrire dans la zone de texte ci-contre :", 'yproject'); ?> <strong>Bon pour souscription</strong>
 					<?php $confirm_power = (isset($_POST["confirm_power"])) ? $_POST["confirm_power"] : ''; ?>
-					&nbsp;<input type="text" name="confirm_power" value="<?php echo $confirm_power; ?>" placeholder="Bon pour souscription" /><br /><br />
+					&nbsp;<input type="text" name="confirm_power" value="<?php echo $confirm_power; ?>" /><br /><br />
 
 					<?php //Si investissement <= 1500, pas besoin de signature, donc on fait cocher une case
 					if ($amount <= 1500): ?>
