@@ -130,15 +130,17 @@ if (isset($campaign)):
 					<strong><?php echo $amount; ?>&euro;</strong>
 					<?php _e("sur le projet", 'yproject'); ?>
 					<strong><?php echo $campaign->data->post_title; ?></strong>.
-					<?php
-					$link_modify = '#';
-					if ( $wdginvestment->has_token() ){
-						$link_modify = $wdginvestment->get_redirection( 'error', 'change-info' );
-					} else {
-						$link_modify = $page_invest_link. '&invest_start=1';
-					}
-					?>
-					<a href="<?php echo $link_modify; ?>"><?php _e("Modifier mon investissement", 'yproject'); ?></a><br /><br />
+					
+					<?php if ( !$wdginvestment->has_token() ): ?>
+					<a href="<?php echo $page_invest_link. '&invest_start=1'; ?>"><?php _e("Modifier mon investissement", 'yproject'); ?></a><br /><br />
+					<?php else: ?>
+					<form action="<?php echo admin_url( 'admin-post.php?action=cancel_token_investment'); ?>" method="post" style="display: inline;">
+						<input type="hidden" name="campaign_id" value="<?php echo $campaign->ID; ?>" />
+						<button class="button"><?php _e("Annuler mon investissement"); ?></button>
+					</form>
+					<br /><br />
+					<?php endif; ?>
+					
 					<?php
 					break;
 				case 'fundingdonation': ?>

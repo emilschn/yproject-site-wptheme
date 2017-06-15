@@ -25,6 +25,7 @@ if (isset($campaign) && is_user_logged_in()):
 				$purchase_key = 'wire_TEMP_' . $random;
 				$amount = $_SESSION['amount_to_save'];
 				$wdginvestment->set_status( WDGInvestment::$status_waiting_wire );
+				$wdginvestment->post_token_notification();
 				
 			//Paiement par porte-monnaie
 			} else if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wallet') {
@@ -169,6 +170,7 @@ if (isset($campaign) && is_user_logged_in()):
 			} else {
 				$wdginvestment->set_status( WDGInvestment::$status_validated );
 			}
+			$wdginvestment->post_token_notification();
 			
 			$payment_data = array( 
 				'price'			=> $amount, 
