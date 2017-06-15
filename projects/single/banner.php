@@ -153,8 +153,8 @@ $lang_list = $campaign->get_lang_list();
 						<span><?php echo $text; ?></span>
 					</div>
 					<div class="left bordered">
-						<span><?php echo $campaign->minimum_goal(true); ?></span><br />
-						<span><?php _e('Objectif', 'yproject'); ?></span>
+						<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+						<span><?php _e('Objectif minimum', 'yproject'); ?></span>
 					</div>
 					<div class="left">
 						<?php
@@ -241,8 +241,8 @@ $lang_list = $campaign->get_lang_list();
 						<span><?php echo $text; ?></span>
 					</div>
 					<div class="left bordered">
-						<span><?php echo $campaign->minimum_goal(true); ?></span><br />
-						<span><?php _e('Objectif', 'yproject'); ?></span>
+						<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+						<span><?php _e('Objectif minimum', 'yproject'); ?></span>
 					</div>
 					<div class="left">
 						<?php
