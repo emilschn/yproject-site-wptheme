@@ -49,7 +49,11 @@ if (!empty($current_organization)) {
 		<div class="content align-left">
 		<span>'.__('Forme juridique :', 'yproject').'</span>'.$wdg_organization->get_legalform().'<br />
 		<span>'.__('Num&eacute;ro SIREN :', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
-		<span>'.__('Code APE :', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />
+		<span>'.__('Code APE :', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />';
+	if ( $wdg_organization->get_vat() != "" && $wdg_organization->get_vat() != '---' ) {
+		$lightbox_content .= '<span>'.__('Num&eacute;ro de TVA :', 'yproject').'</span>'.$wdg_organization->get_vat().'<br />';
+	}
+	$lightbox_content .= '
 		<span>'.__('Capital social :', 'yproject').'</span>'.$wdg_organization->get_capital().'<br /><br />
 		</div>
 		<div class="content align-left">
