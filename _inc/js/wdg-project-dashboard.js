@@ -9,7 +9,7 @@ var WDGProjectDashboard = (function ($) {
         currentOpenedROI: 0,
 
         init: function () {
-            var campaign_id = $("#ndashboard").data("campaign-medium-rendid");
+            var campaign_id = $("#ndashboard").data("campaign-id");
 
             //Gestion de l'AJAX pour la lightbox de ROI
             if ($(".transfert-roi-open").length > 0) {
