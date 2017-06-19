@@ -1151,11 +1151,13 @@ var WDGProjectDashboard = (function ($) {
                 }
             }
             // Ecarter les dénominateurs à zéro
-            mediumRend = null;
+            finalRend = null;
             if(collect != "0" && nbYears != 0){
-                mediumRend = (Math.pow((percent*totalca/collect),(1/nbYears))-1)*100;
-                var mediumRend_format = WDGProjectDashboard.numberFormat(mediumRend);
-                $("#medium-rend").html(mediumRend_format+' %');
+                //mediumRend = (Math.pow((percent*totalca/collect),(1/nbYears))-1)*100;
+				finalRend = Math.round( ( ( totalRoi / need ) - 1 ) * 100 * 100 ) / 100;
+                var finalRend_format = WDGProjectDashboard.numberFormat(finalRend);
+				if (finalRend > 0) finalRend_format = "+" + finalRend_format;
+                $("#medium-rend").html(finalRend_format+' %');
             }
             else if(collect == "0" || nbYears == 0){
                 WDGProjectDashboard.initResultCalcul();
@@ -1166,8 +1168,8 @@ var WDGProjectDashboard = (function ($) {
          */
         verifMediumRend: function () {
             var rend = $("#medium-rend");
-            var errorHtml = "<br/>(insuffisant en dessous de 3%, étant donné le risque)";
-            if (mediumRend < "3" ) {
+            var errorHtml = "<br/>(insuffisant)";
+            if (finalRend < 0 ) {
                 rend.css('color', '#EA4F51').css('display','inline-block').css('margin', 0);
                 rend.append(errorHtml);
             }

@@ -34,7 +34,10 @@ ob_start();
 	<input type="text" name="org_capital" id="org_capital" value="" /><br />
 
 	<label for="org_ape" class="standard-label"><?php _e("Code APE", 'yproject'); ?></label>
-	<input type="text" name="org_ape" id="org_ape" value="" /><br /><br />
+	<input type="text" name="org_ape" id="org_ape" value="" /><br />
+
+	<label for="org_vat" class="standard-label"><?php _e("Num&eacute;ro de TVA", 'yproject'); ?></label>
+	<input type="text" name="org_vat" id="org_vat" value="" /><br /><br />
 
 	<h2><?php _e("Si&egrave;ge social", 'yproject'); ?></h2>
 	<label for="org_address" class="standard-label"><?php _e("Adresse", 'yproject'); ?></label>

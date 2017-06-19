@@ -49,7 +49,11 @@ if (!empty($current_organization)) {
 		<div class="content align-left">
 		<span>'.__('Forme juridique :', 'yproject').'</span>'.$wdg_organization->get_legalform().'<br />
 		<span>'.__('Num&eacute;ro SIREN :', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
-		<span>'.__('Code APE :', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />
+		<span>'.__('Code APE :', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />';
+	if ( $wdg_organization->get_vat() != "" && $wdg_organization->get_vat() != '---' ) {
+		$lightbox_content .= '<span>'.__('Num&eacute;ro de TVA :', 'yproject').'</span>'.$wdg_organization->get_vat().'<br />';
+	}
+	$lightbox_content .= '
 		<span>'.__('Capital social :', 'yproject').'</span>'.$wdg_organization->get_capital().'<br /><br />
 		</div>
 		<div class="content align-left">
@@ -153,8 +157,8 @@ $lang_list = $campaign->get_lang_list();
 						<span><?php echo $text; ?></span>
 					</div>
 					<div class="left bordered">
-						<span><?php echo $campaign->minimum_goal(true); ?></span><br />
-						<span><?php _e('Objectif', 'yproject'); ?></span>
+						<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+						<span><?php _e('Objectif minimum', 'yproject'); ?></span>
 					</div>
 					<div class="left">
 						<?php
@@ -241,8 +245,8 @@ $lang_list = $campaign->get_lang_list();
 						<span><?php echo $text; ?></span>
 					</div>
 					<div class="left bordered">
-						<span><?php echo $campaign->minimum_goal(true); ?></span><br />
-						<span><?php _e('Objectif', 'yproject'); ?></span>
+						<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+						<span><?php _e('Objectif minimum', 'yproject'); ?></span>
 					</div>
 					<div class="left">
 						<?php
