@@ -170,13 +170,18 @@ $declaration_message = $declaration->get_message();
 			<a href="#transfer-roi" class="button red transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>">Procéder aux versements</a>
 
 			<?php ob_start(); ?>
+			<?php $previous_remaining_amount = $declaration->get_previous_remaining_amount(); ?>
 			<h3><?php _e('Reverser aux utilisateurs', 'yproject'); ?></h3>
 			<div id="lightbox-content">
 				<div class="loading-image align-center"><img id="ajax-email-loader-img" src="<?php echo get_stylesheet_directory_uri(); ?>/images/loading.gif" alt="chargement" /></div>
 				<div class="loading-content"></div>
 				<div class="loading-form align-center hidden">
 					<form action="" method="POST">
-						<input type="checkbox" name="send_notifications" value="1" checked="checked" /> Envoyer un mail automatique aux investisseurs<br /><br />
+						<input type="checkbox" name="send_notifications" value="1" checked="checked" /> Envoyer un mail automatique aux investisseurs<br />
+						<?php if ( $previous_remaining_amount > 0 ): ?>
+						<input type="checkbox" name="transfer_remaining_amount" value="1" /> Verser les reliquats précédents (<?php echo $previous_remaining_amount; ?> &euro;)<br />
+						<?php endif; ?>
+						<br />
 						<input type="hidden" name="action" value="proceed_roi_transfers" />
 						<input type="hidden" id="hidden-roi-id" name="roi_id" value="" />
 						<input type="submit" class="button red" value="Transférer" />
