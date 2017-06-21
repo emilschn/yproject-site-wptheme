@@ -327,16 +327,26 @@ if (isset($campaign) && is_user_logged_in()):
 					break;
 
 				case 'failed' :
-					_e("Il y a eu une erreur pendant la transaction.", 'yproject'); ?><br />
-					<?php echo $lw_transaction_result->MSG . ' (' .$lw_transaction_result->INT_MSG. ')'; ?><br />
-					<?php _e("Si vous souhaitez de l'aide relative &agrave; ce probl&egrave;me, merci de nous contacter sur investir@wedogood.co en pr&eacute;cisant les informations ci-dessus.", 'yproject'); ?>
-					<br />
+					$error_item = new LemonwayLibErrors( $lw_transaction_result->INT_MSG );
+					$error_message = $error_item->get_error_message();
+					NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG, $error_message, $campaign->data->post_title, $amount, $error_item->ask_restart() );
+					?>
+					
+					<?php echo $error_message; ?><br />
+					
+					<?php
+					_e( "Code erreur :", 'yproject' );
+					echo ' ' .$lw_transaction_result->INT_MSG;
+					?><br />
 					
 					<?php if ( $wdginvestment->has_token() ): ?>
 					<div class="align-center"><a class="button" href="<?php echo $wdginvestment->get_redirection( 'error', 'investerror', $lw_transaction_result->INT_MSG ); ?>"><?php _e("Suivant", 'yproject'); ?></a></div><br /><br />
+					
+					<?php elseif ( $error_item->ask_restart() ): ?>
+					<a href="<?php echo home_url( '/investir' ) . '?campaign_id=' . $campaign->ID; ?>&invest_start=1"><?php _e( "Red&eacute;marrer l'investissement", 'yproject' ); ?></a>
+
 					<?php endif; ?>
 					
-					<?php NotificationsEmails::new_purchase_admin_error( $current_user, $lw_transaction_result->INT_MSG, $campaign->data->post_title, $amount ); ?>
 					<?php
 					break;
 			}

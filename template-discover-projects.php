@@ -199,8 +199,8 @@ else {
 	ob_start();
 ?>
 				<?php
-				$project_list_funding = ATCF_Campaign::get_list_funding( );
-				$project_list_vote = ATCF_Campaign::get_list_vote( );
+				$project_list_funding = ATCF_Campaign::get_list_funding( 0, '', true );
+				$project_list_vote = ATCF_Campaign::get_list_vote( 0, '', true );
 				foreach ( $project_list_funding as $project_post ) {
 					$project_id = $project_post->ID;
 					require('projects/preview.php');
