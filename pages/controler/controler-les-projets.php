@@ -7,25 +7,25 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	private $slider;
 	
 	private static $stats_html_key = 'projectlist-projects-stats';
-	private static $stats_html_duration = 60*60*24; // 24 heures de cache
+	private static $stats_html_duration = 86400; // 24 heures de cache
 	private static $stats_html_version = 2;
 	private $stats_html;
 	private $stats_list;
 	
 	private static $filters_html_key = 'projectlist-filters';
-	private static $filters_html_duration = 60*60*24; // 24 heures de cache
+	private static $filters_html_duration = 86400; // 24 heures de cache
 	private static $filters_html_version = 2;
 	private $filters_html;
 	private $filters_list;
 	
 	private static $currentprojects_html_key = 'projectlist-projects-current';
-	private static $currentprojects_html_duration = 60*60*2; // 24 heures de cache
+	private static $currentprojects_html_duration = 7200; // 2 heures de cache
 	private static $currentprojects_html_version = 2;
 	private $currentprojects_html;
 	private $currentprojects_list;
 	
 	private static $fundedprojects_html_key = 'projectlist-projects-funded';
-	private static $fundedprojects_html_duration = 60*60*2; // 24 heures de cache
+	private static $fundedprojects_html_duration = 7200; // 2 heures de cache
 	private static $fundedprojects_html_version = 2;
 	private $fundedprojects_html;
 	private $fundedprojects_list;

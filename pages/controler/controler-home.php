@@ -7,7 +7,7 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 	private $slider;
 	
 	private static $projects_html_key = 'home-projects';
-	private static $projects_html_duration = 60 * 3; // 3 minutes de cache
+	private static $projects_html_duration = 180; // 3 minutes de cache
 	private static $projects_html_version = 2;
 	private static $projects_nb_to_show = 3;
 	private $projects_html;

@@ -18,6 +18,7 @@ class WDG_Templates_Engine {
 	
 	public function __construct() {
 		add_action( 'template_include', 'WDG_Templates_Engine::load_controler', 100, 2 );
+		add_filter( 'body_class', 'WDG_Templates_Engine::body_class' );
 		add_filter( 'the_content', 'WDG_Templates_Engine::override_content' );
 	}
 	
@@ -80,6 +81,15 @@ class WDG_Templates_Engine {
 	public function get_controler() {
 		global $page_controler;
 		return $page_controler;
+	}
+	
+/******************************************************************************/
+// CLASSE CSS DANS LE BODY
+/******************************************************************************/
+	public static function body_class( $classes ) {
+		$page_name = WDG_Templates_Engine::get_page_name();
+		array_push( $classes, 'template-' . $page_name );
+		return $classes;
 	}
 	
 /*******************************************************************************

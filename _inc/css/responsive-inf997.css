@@ -181,25 +181,25 @@
 		height: auto;
 	}
 
-	body.page-template-template-discover-projects-php header { display: none; }
-	body.page-template-template-discover-projects-php nav#project-filter {
+	body.template-les-projets header { display: none; }
+	body.template-les-projets nav#project-filter {
 		display: block;
 		height: auto;
 		padding: 0px;
 		line-height: 30px;
 		background: #FFFFFF;
 	}
-	body.page-template-template-discover-projects-php nav#project-filter div.project-filter-container {
+	body.template-les-projets nav#project-filter div.project-filter-container {
 		width: 100%;
 	}
-	body.page-template-template-discover-projects-php nav#project-filter select {
+	body.template-les-projets nav#project-filter select {
 		display: none;
 		width: 100%;
 		height: 44px;
 		padding-left: 5%;
 		border-bottom: 1px solid #E1E3E2;
 	}
-	body.page-template-template-discover-projects-php nav#project-filter > span {
+	body.template-les-projets nav#project-filter > span {
 		display: block;
 		width: 90%;
 		padding: 10px 5%;
@@ -207,43 +207,43 @@
 		color: #FFFFFF;
 		cursor: pointer;
 	}
-	body.page-template-template-discover-projects-php nav#project-filter > span:after {
+	body.template-les-projets nav#project-filter > span:after {
 		float: right;
 		content: "+";
 	}
-	body.page-template-template-discover-projects-php nav#project-filter > span.show:after {
+	body.template-les-projets nav#project-filter > span.show:after {
 		content: "-";
 	}
-	body.page-template-template-discover-projects-php nav#project-filter select.project-filter-select option {
+	body.template-les-projets nav#project-filter select.project-filter-select option {
 		padding: 10px 8% !important;
 	}
-	body.page-template-template-discover-projects-php nav#project-filter select#project-filter-impact option#economique, 
-	body.page-template-template-discover-projects-php nav#project-filter select#project-filter-impact option#environnemental, 
-	body.page-template-template-discover-projects-php nav#project-filter select#project-filter-impact option#social {
+	body.template-les-projets nav#project-filter select#project-filter-impact option#economique, 
+	body.template-les-projets nav#project-filter select#project-filter-impact option#environnemental, 
+	body.template-les-projets nav#project-filter select#project-filter-impact option#social {
 		padding-left: -webkit-calc(40px + 8%) !important;
 		padding-left: -moz-calc(40px + 8%) !important;
 		padding-left: calc(40px + 8%) !important;
 		background-position: 8% center;
 	}
-	body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-slider {
+	body.template-les-projets .wdg-component-projects-preview .project-slider {
 		margin-bottom: 15px;
 	}
-	body.page-template-template-discover-projects-php .wdg-component-projects-preview .block-projects {
+	body.template-les-projets .wdg-component-projects-preview .block-projects {
 		display: block;
 		width: 960px;
 		max-height: 620px;
 	}
-	body.page-template-template-discover-projects-php .projects-current .wdg-component-projects-preview .project-container,
-	body.page-template-template-discover-projects-php .projects-funded .wdg-component-projects-preview .project-container {
+	body.template-les-projets .projects-current .wdg-component-projects-preview .project-container,
+	body.template-les-projets .projects-funded .wdg-component-projects-preview .project-container {
 		display: inline-block;
 		width: 320px;
 		height: 620px;
 	}
-	body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container .project-framed {
+	body.template-les-projets .wdg-component-projects-preview .project-container .project-framed {
 		position: absolute;
 		height: 82%;
 	}
-	body.page-template-template-discover-projects-php .button.more-content {
+	body.template-les-projets .button.more-content {
 		display: none;
 	}
 }
