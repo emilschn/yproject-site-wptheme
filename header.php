@@ -1,12 +1,8 @@
 <?php 
-	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user;
+	global $page_controler, $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user;
 	if ($WDG_cache_plugin == null) {
 		$WDG_cache_plugin = new WDG_Cache_Plugin();
 	}
-	$stylesheet_directory_uri = get_stylesheet_directory_uri();
-	date_default_timezone_set("Europe/Paris");
-	ypcf_session_start();
-	$title_str = UIHelpers::current_page_title();
 	
 	$project_list = array();
 	if (is_user_logged_in()) {
@@ -36,17 +32,18 @@
 	<head> 
 		<link href="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png" rel="shortcut icon" type="image/vnd.microsoft.icon" />
 		<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="<?php echo $stylesheet_directory_uri; ?>/images/favicon.ico"/><![endif]-->
-		<title><?php if ($title_str) { echo $title_str; } else { wp_title( '|', true, 'right' ); bloginfo( 'name' ); } ?></title>
+		<title><?php echo $page_controler->get_page_title(); ?></title>
 		
-		<link rel="alternate" href="<?php echo get_permalink($campaign->ID); ?>?lang=fr_FR" hreflang="fr" />
-		<?php if ($is_campaign_page): 
+		<?php if ($is_campaign_page): ?>
+		<link rel="alternate" href="<?php echo get_permalink( $campaign->ID ); ?>?lang=fr_FR" hreflang="fr" />
+			<?php
 			$lang_list = $campaign->get_lang_list();
 			if (!empty($lang_list)):
 				foreach ($lang_list as $lang): $short_lang_str = substr($lang, 0, 2); ?>
-		<link rel="alternate" href="<?php echo get_permalink($campaign->ID); ?>?lang=<?php echo $lang; ?>" hreflang="<?php echo $short_lang_str; ?>" />
+		<link rel="alternate" href="<?php echo get_permalink( $campaign->ID ); ?>?lang=<?php echo $lang; ?>" hreflang="<?php echo $short_lang_str; ?>" />
 				<?php endforeach;
-			endif;
-		endif; ?>
+			endif; ?>
+		<?php endif; ?>
 		
 		<!-- meta keywords -->
 		<?php if (is_single() || is_page() ) : if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>	
