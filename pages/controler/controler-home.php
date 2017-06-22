@@ -1,5 +1,6 @@
 <?php
 global $page_controler;
+$page_controler = new WDG_Page_Controler_Home();
 
 class WDG_Page_Controler_Home extends WDG_Page_Controler {
 	
@@ -7,7 +8,7 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 	
 	private static $projects_html_key = 'home-projects';
 	private static $projects_html_duration = 60 * 3; // 3 minutes de cache
-	private static $projects_html_version = 1;
+	private static $projects_html_version = 2;
 	private static $projects_nb_to_show = 3;
 	private $projects_html;
 	private $projects_list;
@@ -59,5 +60,3 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 	}
 	
 }
-
-$page_controler = new WDG_Page_Controler_Home();
