@@ -2,14 +2,21 @@
 global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDGAuthor, $WDGUser_current, $organization_obj, $is_admin, $is_author;
 $finished_declarations = $campaign->get_roi_declarations_by_status( WDGROIDeclaration::$status_finished );
 $nb_finished_declarations = count( $finished_declarations );
+$roi_percent = $campaign->roi_percent();
 ?>
 
 <div id="tab-wallet-synthesis" class="tab-content">
 	<h2><?php _e('Situation', 'yproject'); ?></h2>
 	<ul>
-		<li><strong><?php echo $organization_obj->get_lemonway_balance(); ?> €</strong> <?php _e( "dans votre porte-monnaie", 'yproject' ); ?></li>
-		<li><strong><?php echo $campaign->current_amount(); ?></strong> <?php _e( "lev&eacute;s", 'yproject' ); ?></li>
+		<li><strong><?php echo UIHelpers::format_number( $organization_obj->get_lemonway_balance() ); ?> €</strong> <?php _e( "dans votre porte-monnaie", 'yproject' ); ?></li>
+		<li><strong><?php echo UIHelpers::format_number( $campaign->current_amount( false ) ); ?> €</strong> <?php _e( "lev&eacute;s", 'yproject' ); ?></li>
+		
+		<?php if ( $roi_percent > 0 ): ?>
 		<li><strong><?php echo $campaign->roi_percent(); ?> %</strong> <?php _e( "du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $campaign->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
+		<?php else: ?>
+		<li><strong><?php echo $campaign->roi_percent_estimated(); ?> %</strong> <?php _e( "maximum du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $campaign->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
+		<?php endif; ?>
+		
 		<li><strong><?php echo count( $finished_declarations ); ?> / <?php echo $campaign->get_roi_declarations_number(); ?></strong> <?php _e( "&eacute;ch&eacute;ances", 'yproject' ); ?></li>
 		<li>
 			<strong><?php echo $campaign->get_roi_declarations_total_turnover_amount(); ?> €</strong> <?php _e( "de CA d&eacute;clar&eacute;", 'yproject' ); ?>

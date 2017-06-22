@@ -53,7 +53,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
-	$current_version = '20170524';
+	$current_version = '20170620';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -333,6 +333,24 @@ function yproject_additional_button($buttons) {
    return $buttons;
 }
 add_filter('mce_buttons_2', 'yproject_additional_button');
+
+
+function wdg_reput_tinymce_old_buttons( $buttons_array ){
+	if ( !in_array( 'alignjustify', $buttons_array ) && in_array( 'alignright', $buttons_array ) ){
+		$key = array_search( 'alignright', $buttons_array );
+		$inserted = array( 'alignjustify' );
+		array_splice( $buttons_array, $key + 1, 0, $inserted );
+	}
+	if ( !in_array( 'underline', $buttons_array ) && in_array( 'italic', $buttons_array ) ){
+		$key = array_search( 'italic', $buttons_array );
+		$inserted = array( 'underline' );
+		array_splice( $buttons_array, $key + 1, 0, $inserted );
+	}
+	
+	return $buttons_array;
+	
+}
+add_filter( 'mce_buttons', 'wdg_reput_tinymce_old_buttons', 5 );
 //***********************
 // FIN - Modification TINYMCE
 //***********************

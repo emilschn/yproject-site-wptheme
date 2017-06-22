@@ -100,9 +100,11 @@ var WDGProjectViewer = (function($) {
 					var ratioOnInput = Math.round(amountOfGoalRound / inputVal * 100) / 100;
 					var ratioOnInputStr = isNaN(ratioOnInput) ? '...' : ratioOnInput.toString().replace('.', ',');
 					$("span.roi_ratio_on_total").text(ratioOnInputStr);
-					var averageROI = Math.round((Math.pow(( (percentProject / 100) * totalTurnover / goalProject), (1 / nbYears)) - 1) * 100 * 100) / 100;
-					var averageROIStr = averageROI.toString().replace('.', ',');
-					$("span.roi_percent_average").text(averageROIStr);
+//					var averageROI = Math.round((Math.pow(( (percentProject / 100) * totalTurnover / goalProject), (1 / nbYears)) - 1) * 100 * 100) / 100;
+//					var averageROIStr = averageROI.toString().replace('.', ',');
+					var roiPercentTotal = Math.round( ( ( amountOfGoalRound / inputVal ) - 1 ) * 100 * 100 ) / 100;
+					var roiPercentTotalStr = isNaN(roiPercentTotal) ? '...' : roiPercentTotal.toString().replace('.', ',');
+					$("span.roi_percent_total").text(roiPercentTotalStr);
 				}
 			});
 	

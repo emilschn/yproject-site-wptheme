@@ -42,6 +42,9 @@ global $campaign_id
                 <label for="org_ape"><?php _e('Code APE', 'yproject'); ?>*</label>
                 <input type="text" name="org_ape" value="<?php echo filter_input(INPUT_POST, 'org_ape'); ?>" /><br />
 
+                <label for="org_vat"><?php _e('Num&eacute;ro de TVA', 'yproject'); ?>*</label>
+                <input type="text" name="org_vat" value="<?php echo filter_input(INPUT_POST, 'org_vat'); ?>" /><br />
+
                 <h2><?php _e('Si&egrave;ge social', 'yproject'); ?></h2>
                 <label for="org_address"><?php _e('Adresse', 'yproject'); ?>*</label>
                 <input type="text" name="org_address" value="<?php echo filter_input(INPUT_POST, 'org_address'); ?>" /><br />
