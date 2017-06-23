@@ -18,6 +18,7 @@ class WDG_Templates_Engine {
 	
 	public function __construct() {
 		add_action( 'template_include', 'WDG_Templates_Engine::load_controler', 100, 2 );
+		add_action( 'single_template', 'WDG_Templates_Engine::load_controler', 100, 2 );
 		add_filter( 'body_class', 'WDG_Templates_Engine::body_class' );
 		add_filter( 'the_content', 'WDG_Templates_Engine::override_content' );
 	}
@@ -28,6 +29,9 @@ class WDG_Templates_Engine {
 			wp_reset_query();
 			if ( is_home() or is_front_page() ) {
 				self::$current_page_name = 'home';
+				
+			} elseif ( is_single() ) {
+				self::$current_page_name = 'projet';
 
 			} else {
 				global $post;
@@ -68,6 +72,11 @@ class WDG_Templates_Engine {
 		$controler_name = $wdg_templates_engine->get_controler_name();
 		if ( $controler_name ) {
 			locate_template( WDG_Templates_Engine::$controler_path. 'controler-' .$controler_name. '.php', TRUE );
+			
+		} else {
+			global $page_controler;
+			$page_controler = new WDG_Page_Controler();
+			
 		}
 
 		return $template;
