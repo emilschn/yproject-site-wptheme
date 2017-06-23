@@ -793,30 +793,30 @@ footer > .footer-container > div > div.aligncenter {
 /*******************************************************************************
 * TEMPLATE - PROJECT LIST
 *******************************************************************************/
-body.page-template-template-discover-projects-php header {
+body.template-les-projets header {
 	background: rgba(51, 51, 51, 0.05);
 	background-image: url("../../images/common-background.png");
 	background-repeat: no-repeat;
 }
-body.page-template-template-discover-projects-php header .header-container {
+body.template-les-projets header .header-container {
 	max-width: 1300px;
 	margin: 0 auto;
 	padding: 0% 0.5%;
 	padding-top: 100px;
 }
-body.page-template-template-discover-projects-php header .header-container > div > div {
+body.template-les-projets header .header-container > div > div {
 	display: inline-block;
 	height: 460px;
 	padding-bottom: 20px;
 }
 
-body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider.project-list-slider {
+body.template-les-projets header .header-container > div > div.wdg-component-slider.project-list-slider {
 	width: 68%;
 }
-body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider.project-list-slider .slider-container {
+body.template-les-projets header .header-container > div > div.wdg-component-slider.project-list-slider .slider-container {
 	height: 460px;
 }
-body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner {
+body.template-les-projets header .header-container > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner {
 	width: -webkit-calc(100% - 275px);
 	width: -moz-calc(100% - 275px);
 	width: calc(100% - 275px);
@@ -824,10 +824,10 @@ body.page-template-template-discover-projects-php header .header-container > div
 	top: 212px;
 	background: rgba(0, 0, 0, 0.4);
 }
-body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner:after {
+body.template-les-projets header .header-container > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner:after {
 	border-top: 315px solid rgba(0, 0, 0, 0.4);
 }
-body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner .screen-message {
+body.template-les-projets header .header-container > div > div.wdg-component-slider .slider-container #slider .slider-item .message-banner .screen-message {
 	min-height: 60px;
 	margin: 20px 20px;
 	padding: 0px 0px 20px;
@@ -838,24 +838,24 @@ body.page-template-template-discover-projects-php header .header-container > div
 	text-align: left;
 	color: #FFF;
 }
-body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider .slider-container #slider #button-container {
+body.template-les-projets header .header-container > div > div.wdg-component-slider .slider-container #slider #button-container {
 	display: block;
 	width: 310px;
 	left: 0px;
 	top: 335px;
 }
-body.page-template-template-discover-projects-php header .header-container > div > div.wdg-component-slider .slider-container #slider #button-container .button-slide {
+body.template-les-projets header .header-container > div > div.wdg-component-slider .slider-container #slider #button-container .button-slide {
 	width: auto;
 	margin: 0px 0px 0px 20px;
 	padding: 20px 60px;
 }
 
-body.page-template-template-discover-projects-php header .header-container > div > div#wdg-project-stats {
+body.template-les-projets header .header-container > div > div#wdg-project-stats {
 	vertical-align: top;
 	width: 30%;
 }
 
-body.page-template-template-discover-projects-php header .header-container > div > div#wdg-project-stats p {
+body.template-les-projets header .header-container > div > div#wdg-project-stats p {
 	width: 90%;
 	height: 80px;
 	margin: 0px 0px 6.5px;
@@ -864,32 +864,32 @@ body.page-template-template-discover-projects-php header .header-container > div
 	background: #FFFFFF;
 	color: #000000;
 }
-body.page-template-template-discover-projects-php header .header-container > div > div#wdg-project-stats p:first-child {
+body.template-les-projets header .header-container > div > div#wdg-project-stats p:first-child {
 	height: 40px;
 	background: #000000;
 	color: #FFFFFF;
 	line-height: 40px;
 }
 
-body.page-template-template-discover-projects-php header .header-container > div > div#wdg-project-stats p img {
+body.template-les-projets header .header-container > div > div#wdg-project-stats p img {
 	float: left;
 	margin-right: 20px;
 }
-body.page-template-template-discover-projects-php header .header-container > div > div#wdg-project-stats p span {
+body.template-les-projets header .header-container > div > div#wdg-project-stats p span {
 	font-size: 20pt;
 }
-body.page-template-template-discover-projects-php header .header-container > div > div#wdg-project-stats p span span {
+body.template-les-projets header .header-container > div > div#wdg-project-stats p span span {
 	font-size: 25pt;
 	letter-spacing: 2px;
 	font-weight: bold;
 }
 
-body.page-template-template-discover-projects-php div#content > h2 {
+body.template-les-projets div#content > h2 {
 	padding-top: 80px;
 	background-color: rgba(51, 51, 51, 0.05);
 }
 
-body.page-template-template-discover-projects-php nav#project-filter {
+body.template-les-projets nav#project-filter {
 	display: flex;
 	justify-content: space-around;
 	height: 45px;
@@ -901,7 +901,7 @@ body.page-template-template-discover-projects-php nav#project-filter {
 	color: #FFFFFF;
 	font-size: 15pt;
 }
-body.page-template-template-discover-projects-php nav#project-filter select {
+body.template-les-projets nav#project-filter select {
 	position: relative;
 	width: 100%;
 	height: 43px;
@@ -914,72 +914,72 @@ body.page-template-template-discover-projects-php nav#project-filter select {
 	text-transform: uppercase;
 	cursor: pointer;
 }
-body.page-template-template-discover-projects-php nav#project-filter div.project-filter-container {
+body.template-les-projets nav#project-filter div.project-filter-container {
 	width: 22%;
 	overflow: hidden;
 	background: url("../../images/common/arrow-filter.png") no-repeat right #FFF;
 }
-body.page-template-template-discover-projects-php nav#project-filter select option {
+body.template-les-projets nav#project-filter select option {
 	padding: 15px;
 	padding-left: 10px;
 	border-bottom: 1px solid #E1E3E2;
 	min-height: 12px;
 }
-body.page-template-template-discover-projects-php nav#project-filter .project-filter-container .project-filter-select option {
+body.template-les-projets nav#project-filter .project-filter-container .project-filter-select option {
 	text-transform: none;
 }
-body.page-template-template-discover-projects-php nav#project-filter .project-filter-container .project-filter-select option[value=all] {
+body.template-les-projets nav#project-filter .project-filter-container .project-filter-select option[value=all] {
 	text-transform: uppercase;
 }
-body.page-template-template-discover-projects-php nav#project-filter select#project-filter-impact option {
+body.template-les-projets nav#project-filter select#project-filter-impact option {
 	padding: 15px;
 	padding-left: 45px;
 	background-color: transparent;
 	background-repeat: no-repeat;
 	background-position: 5px center;
 }
-body.page-template-template-discover-projects-php nav#project-filter select option#all-impacts {
+body.template-les-projets nav#project-filter select option#all-impacts {
 	padding-left: 5px;
 }
-body.page-template-template-discover-projects-php nav#project-filter select option#economique {
+body.template-les-projets nav#project-filter select option#economique {
 	background-image: url("../../images/common/impact-eco-small.png") ;
 }
-body.page-template-template-discover-projects-php nav#project-filter select option#environnemental {
+body.template-les-projets nav#project-filter select option#environnemental {
 	background-image: url("../../images/common/impact-env-small.png") ;
 }
-body.page-template-template-discover-projects-php nav#project-filter select option#social {
+body.template-les-projets nav#project-filter select option#social {
 	background-image: url("../../images/common/impact-social-small.png") ;
 }
-body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container {
+body.template-les-projets .wdg-component-projects-preview .project-container {
 	height: 620px;
 	min-width: 240px;
 }
-body.page-template-template-discover-projects-php .projects-current .wdg-component-projects-preview .project-container {
+body.template-les-projets .projects-current .wdg-component-projects-preview .project-container {
 	width: 33%;
 }
-body.page-template-template-discover-projects-php .projects-funded .wdg-component-projects-preview .project-container {
+body.template-les-projets .projects-funded .wdg-component-projects-preview .project-container {
 	width: 25%;
 }
-body.page-template-template-discover-projects-php .wdg-component-projects-preview .block-projects {
+body.template-les-projets .wdg-component-projects-preview .block-projects {
 	height: auto;
 	margin: auto;
 	padding-top: 5px;
 	overflow-y: hidden;
 }
 
-body.page-template-template-discover-projects-php div#content > div:last-child {
+body.template-les-projets div#content > div:last-child {
 	margin-top: 20px;
 	padding-bottom: 30px;
 	background-color: rgba(51, 51, 51, 0.05);
 }
-body.page-template-template-discover-projects-php div#content > div:last-child .wdg-component-projects-preview .block-projects {
+body.template-les-projets div#content > div:last-child .wdg-component-projects-preview .block-projects {
 	max-height: 550px;
 	margin: auto;
 }
-body.page-template-template-discover-projects-php div#content > div:last-child .wdg-component-projects-preview .project-container .project-framed {
+body.template-les-projets div#content > div:last-child .wdg-component-projects-preview .project-container .project-framed {
 	background-color: #FFFFFF;
 }
-body.page-template-template-discover-projects-php div#content > div:last-child .wdg-component-projects-preview .project-container .project-framed::before {
+body.template-les-projets div#content > div:last-child .wdg-component-projects-preview .project-container .project-framed::before {
 	border-top: 60px solid rgba(51, 51, 51, 0.05);
 }
 
