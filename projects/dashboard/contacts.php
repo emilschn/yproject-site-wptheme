@@ -87,7 +87,7 @@ function print_contacts_page() {
 
                 <?php if (isset($_POST['action']) && $_POST['action'] == 'add-check-investment') {
                     $add_check_result = $campaign->add_investment(
-							'check', $_POST['email'], $_POST['value'],
+							'check', $_POST['email'], $_POST['value'], 'publish',
 							$_POST['username'], $_POST['password'],
 							$_POST['gender'], $_POST['firstname'], $_POST['lastname'],
 							$_POST['birthday_day'], $_POST['birthday_month'], $_POST['birthday_year'],
