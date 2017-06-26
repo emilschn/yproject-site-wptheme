@@ -1,10 +1,9 @@
 <?php
-global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDGAuthor, $WDGUser_current, $organization_obj, $is_admin, $is_author;
+global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDGAuthor, $WDGUser_current, $organization_obj, $is_admin, $is_author, $return_roi_payment;
 $disable_logs = FALSE;
 
 WDGFormProjects::form_submit_turnover();
 WDGFormProjects::form_submit_account_files();
-$return_roi_payment = WDGFormProjects::form_submit_roi_payment();
 $return_lemonway_card = WDGFormProjects::return_lemonway_card();
 WDGFormProjects::form_proceed_roi_transfers();
 ?>
