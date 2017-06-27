@@ -5,6 +5,11 @@
  */
 ?>
 
+<?php
+global $return_roi_payment;
+$return_roi_payment = WDGFormProjects::form_submit_roi_payment();
+?>
+
 <?php get_header(); ?>
 
 <?php
