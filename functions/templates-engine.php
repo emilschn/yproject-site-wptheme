@@ -113,7 +113,7 @@ class WDG_Templates_Engine {
 	public function get_view_name() {
 		$page_name = WDG_Templates_Engine::get_page_name();
 		if ( ATCF_CrowdFunding::get_platform_context() != 'wedogood') {
-			$page_name .= ATCF_CrowdFunding::get_platform_context();
+			$page_name .= '-' . ATCF_CrowdFunding::get_platform_context();
 		}
 		if ( locate_template( WDG_Templates_Engine::$view_path. 'view-' .$page_name. '.php' ) ) {
 			return $page_name;

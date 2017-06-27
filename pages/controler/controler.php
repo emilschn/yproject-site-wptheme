@@ -43,4 +43,12 @@ class WDG_Page_Controler {
 		}
 	}
 	
+	/**
+	 * Détermine si la navigation est visible ou non
+	 * @return boolean
+	 */
+	public function get_header_nav_visible() {
+		return ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' );
+	}
+	
 }

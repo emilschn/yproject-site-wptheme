@@ -15,13 +15,15 @@
 		}
 	}
 	
-	$projects_searchable = array();
-	$cache_projects_searchable = $WDG_cache_plugin->get_cache('ATCF_Campaign::list_projects_searchable', 1);
-	if ($cache_projects_searchable !== FALSE) { $projects_searchable = json_decode($cache_projects_searchable); }
-	else {
-		$projects_searchable = ATCF_Campaign::list_projects_searchable();
-		$projects_searchable_encoded = json_encode($projects_searchable);
-		$WDG_cache_plugin->set_cache('ATCF_Campaign::list_projects_searchable', $projects_searchable_encoded, 60*60*3, 1); //MAJ 3h
+	if ( $page_controler->get_header_nav_visible() ){
+		$projects_searchable = array();
+		$cache_projects_searchable = $WDG_cache_plugin->get_cache('ATCF_Campaign::list_projects_searchable', 1);
+		if ($cache_projects_searchable !== FALSE) { $projects_searchable = json_decode($cache_projects_searchable); }
+		else {
+			$projects_searchable = ATCF_Campaign::list_projects_searchable();
+			$projects_searchable_encoded = json_encode($projects_searchable);
+			$WDG_cache_plugin->set_cache('ATCF_Campaign::list_projects_searchable', $projects_searchable_encoded, 60*60*3, 1); //MAJ 3h
+		}
 	}
 	
 	
@@ -106,7 +108,9 @@
 		<meta property="fb:app_id" content="<?php echo YP_FB_APP_ID; ?>" />
 	</head>
 
-	<body <?php body_class(get_locale()); ?>> 
+	<body <?php body_class(get_locale()); ?>>
+		
+		<?php if ( $page_controler->get_header_nav_visible() ): ?>
 		<nav id="main">
 			<div id="menu">
 				<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
@@ -213,7 +217,7 @@
 				
 			</div>
 		</nav>
-            
+		<?php endif; ?>
             
                 
 		<?php 
@@ -260,6 +264,7 @@
 			</div>
 		<?php endif; ?>
 		
+		<?php if ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' ): ?>
 		<?php if($_SESSION['subscribe_newsletter_sendinblue'] == true): ?>
 			<div class="timeout-lightbox wdg-lightbox">
 				<div class="wdg-lightbox-click-catcher"></div>
@@ -269,4 +274,6 @@
 			</div>
 		<?php endif; ?>
 		<?php $_SESSION['subscribe_newsletter_sendinblue'] = false; ?>
+		<?php endif; ?>
+		
 		<div id="container"> 
