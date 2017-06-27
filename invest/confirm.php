@@ -10,6 +10,7 @@ if (isset($campaign)):
     $max_value = ypcf_get_max_value_to_invest();
     $part_value = ypcf_get_part_value();
     $max_part_value = ypcf_get_max_part_value();
+	$wdginvestment = WDGInvestment::current();
 
     if ($max_part_value > 0):
         //Si la valeur peut être ponctionnée sur l'objectif, et si c'est bien du numérique supérieur à 0
@@ -129,7 +130,17 @@ if (isset($campaign)):
 					<strong><?php echo $amount; ?>&euro;</strong>
 					<?php _e("sur le projet", 'yproject'); ?>
 					<strong><?php echo $campaign->data->post_title; ?></strong>.
-					<a href="<?php echo $page_invest_link; ?>&invest_start=1"><?php _e("Modifier mon investissement", 'yproject'); ?></a><br /><br />
+					
+					<?php if ( !$wdginvestment->has_token() ): ?>
+					<a href="<?php echo $page_invest_link. '&invest_start=1'; ?>"><?php _e("Modifier mon investissement", 'yproject'); ?></a><br /><br />
+					<?php else: ?>
+					<form action="<?php echo admin_url( 'admin-post.php?action=cancel_token_investment'); ?>" method="post" style="display: inline;">
+						<input type="hidden" name="campaign_id" value="<?php echo $campaign->ID; ?>" />
+						<button class="button"><?php _e("Annuler mon investissement"); ?></button>
+					</form>
+					<br /><br />
+					<?php endif; ?>
+					
 					<?php
 					break;
 				case 'fundingdonation': ?>
@@ -174,7 +185,7 @@ if (isset($campaign)):
 						<br />
 					<?php endif; ?>
 
-					<?php if ($campaign->funding_type() != 'fundingdonation'): ?>
+					<?php if ( $campaign->funding_type() != 'fundingdonation' && !$wdginvestment->has_token() ): ?>
 						<span class="label"><?php _e("Num&eacute;ro de t&eacute;l&eacute;phone :", 'yproject'); ?></span><?php echo $current_user->get('user_mobile_phone'); ?>
 						<?php if (!ypcf_check_user_phone_format($current_user->get('user_mobile_phone'))): ?>
 							<span class="errors"><?php _e("Le num&eacute;ro de t&eacute;l&eacute;phone ne correspond pas &agrave; un num&eacute;ro fran&ccedil;ais.", 'yproject'); ?></span>
@@ -200,8 +211,17 @@ if (isset($campaign)):
 						<br /><br />
 					<?php endif; ?>
 
-					<?php $page_update = get_page_by_path('modifier-mon-compte'); ?>
-					<a href="<?php echo get_permalink($page_update->ID); ?>"><?php _e("Modifier ces informations", 'yproject'); ?></a><br /><br />
+					<?php 
+					$redirect_page = '#';
+					if ( $wdginvestment->has_token() ){
+						$redirect_page = $wdginvestment->get_redirection( 'error', 'change-info' );
+						
+					} else {
+						$redirect_page = home_url('/modifier-mon-compte');
+						
+					}
+					 ?>
+					<a href="<?php echo $redirect_page; ?>"><?php _e("Modifier ces informations", 'yproject'); ?></a><br /><br />
 
 					<?php $information_confirmed = (isset($_POST["information_confirmed"]) && $_POST["information_confirmed"] == "1") ? 'checked="checked" ' : ''; ?>
 					<label><input type="checkbox" name="information_confirmed" value="1" <?php echo $information_confirmed; ?> /> <?php _e("Je d&eacute;clare que ces informations sont exactes.", 'yproject'); ?></label><br />

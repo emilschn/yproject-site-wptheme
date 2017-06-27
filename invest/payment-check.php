@@ -1,57 +1,65 @@
 <?php
-global $campaign;
-if (!isset($campaign)) {
-	$campaign = atcf_get_current_campaign();
-}
-
-if (isset($campaign)): ?>
-
-	<?php
-    $filename = dirname ( __FILE__ ) . '/../../pdf_files/contract-'.$campaign->ID.'.docx';
-    $url = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/pdf_files/contract-'.$campaign->ID.'.docx';
-	?>
-    		
-	<?php
-	global $current_breadcrumb_step; $current_breadcrumb_step = 3;
-	locate_template( 'invest/breadcrumb.php', true );
-	?>
+$check_return = filter_input( INPUT_GET, 'check-return' );
+if ( !empty( $check_return ) ) {
+	locate_template( 'invest/payment-check-return.php', true );
 	
-    <?php if (file_exists($filename)): ?>
+} else {
 
-		<?php _e('Pour investir par ch&egrave;que, merci de suivre les &eacute;tapes suivantes :', 'yproject'); ?><br /><br />
+	global $campaign;
+	if (!isset($campaign)) {
+		$campaign = atcf_get_current_campaign();
+	}
 
-		1. <?php _e('Imprimez le contrat accessible en cliquant sur le lien suivant :', 'yproject'); ?>
-		<a href="<?php echo $url; ?>"><?php _e('Contrat', 'yproject'); ?></a><br /><br />
+	if (isset($campaign)): ?>
 
-		2. <?php _e('Pr&eacute;parez un courrier contenant :', 'yproject'); ?>
-		<ul>
-			<li><?php _e('le contrat imprim&eacute; et rempli', 'yproject'); ?></li>
-			<li><?php _e('un ch&egrave;que &agrave; l&apos;ordre de', 'yproject'); ?> <strong><?php echo $campaign->company_name(); ?></strong></li>
-		</ul>
+		<?php
+		global $current_breadcrumb_step; $current_breadcrumb_step = 3;
+		locate_template( 'invest/breadcrumb.php', true );
+		$campaign_organization = $campaign->get_organization();
+		$organization_obj = new WDGOrganization( $campaign_organization->wpref );
+		$amount = $_SESSION['redirect_current_amount_part'];
+		$wdginvestment = WDGInvestment::current();
+		$wdginvestment->set_status( WDGInvestment::$status_waiting_check );
+		?>
 
-		3. <?php _e('Envoyez-le &agrave; l&apos;adresse suivante :', 'yproject'); ?><br />
+		<?php _e( "Afin d'investir par ch&egrave;que, prenez une photo du ch&egrave;que que vous souhaitez faire &agrave; l'ordre de", 'yproject' ); ?>
+		<?php echo $organization_obj->get_name(); ?>
+		<?php _e( "et envoyez cette photo gr&acirc;ce au formulaire ci-dessous.", 'yproject' ); ?><br /><br />
+
+		<?php _e( "Ensuite, envoyez-nous ce ch&egrave;que &agrave; l'adresse suivante :", 'yproject' ); ?><br />
 		WE DO GOOD<br />
-		8 route de la Joneli&egrave;re<br />
-		44300 NANTES<br /><br />
+		7 rue Mathurin Brissonneau<br />
+		44100 Nantes<br /><br />
 
-		<?php _e('Le montant de votre ch&egrave;que sera pris en compte d&egrave;s r&eacute;ception.', 'yproject'); ?>
-		<?php _e('Le montant total atteint sera alors de', 'yproject'); ?> <?php echo ($campaign->current_amount(false) + $_SESSION['redirect_current_amount_part'] * $campaign->part_value()); ?> &euro;.<br /><br />
+		<?php _e( "Le ch&egrave;que ne sera encaiss&eacute; que si la campagne r&eacute;ussit.", 'yproject' ); ?><br /><br />
 
-		<?php _e('Votre ch&egrave;que ne sera transmis au Porteur de Projet qu&apos;en cas de r&eacute;ussite de la collecte.', 'yproject'); ?>
-		<?php _e('Dans le cas contraire, il vous sera retourn&eacute;.', 'yproject'); ?><br /><br />
+		<?php if ( $amount > 1500 ): ?>
+			<?php _e( "Lorsque nous l'aurons valid&eacute;, vous recevrez un contrat d'investissement &agrave; signer en ligne, via notre partenaire Signsquid.", 'yproject' ); ?><br /><br />
+		<?php endif; ?>
 
-		<?php _e('Pour toute question, contactez-nous &agrave; l&apos;adresse', 'yproject'); ?> investir@wedogood.co<br /><br />
+		<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="POST" enctype="multipart/form-data">
+			<input type="file" name="check_picture" />
+			<button type="submit" class="button"><?php _e( "Envoyer", 'yproject' ); ?></button>
+			<input type="hidden" name="action" value="post_invest_check" />
+			<input type="hidden" name="campaign_id" value="<?php echo $campaign->ID; ?>" />
+		</form>
+			
+		<br /><br />
 
+		<?php _e( "Si vous ne pouvez pas prendre le ch&egrave;que en photo pour l'instant,", 'yproject' ); ?>
+		<?php _e( "vous pouvez confirmer votre investissement", 'yproject' ); ?>
+		<?php _e( "et nous envoyer ce chèque &agrave; l'adresse investir@wedogood.co quand ce sera possible.", 'yproject' ); ?>
+		
+		<br /><br />
 
-    <?php else: ?>
+		<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="POST">
+			<button type="submit" class="button"><?php _e( "Confirmer et envoyer plus tard", 'yproject' ); ?></button>
+			<input type="hidden" name="action" value="post_confirm_check" />
+			<input type="hidden" name="campaign_id" value="<?php echo $campaign->ID; ?>" />
+		</form>
+			
+		<br /><br />
 
-		<?php _e('Afin d&apos;investir par ch&egrave;que, contactez-nous &agrave; l&apos;adresse', 'yproject'); ?> investir@wedogood.co<br /><br />
+	<?php endif;
 
-    <?php endif; ?>
-    
-    <?php
-    if (isset($_SESSION['redirect_current_campaign_id'])) unset($_SESSION['redirect_current_campaign_id']);
-    if (isset($_SESSION['redirect_current_amount_part'])) unset($_SESSION['redirect_current_amount_part']);
-    ?>
-	
-<?php endif;
+}

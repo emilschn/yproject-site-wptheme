@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php get_header( ATCF_CrowdFunding::get_platform_context() ); ?>
 
 <?php if ( defined( 'SKIP_BASIC_HTML' ) ): ?>
 	<?php the_content(); ?>
@@ -6,7 +6,7 @@
 <?php else: ?>
 <div id="content">
     
-	<div class="padder">
+	<div class="padder page">
 
 		<div class="page" id="blog-page" role="main">
 
@@ -32,4 +32,4 @@
 
 <?php endif; ?>
 
-<?php get_footer();
+<?php get_footer( ATCF_CrowdFunding::get_platform_context() );

@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php get_header(); ?>
+<?php get_header( ATCF_CrowdFunding::get_platform_context() ); ?>
 
 <?php date_default_timezone_set("Europe/Paris"); ?>
 
@@ -33,4 +33,4 @@
 	
 </div><!-- #content -->
 
-<?php get_footer();
+<?php get_footer( ATCF_CrowdFunding::get_platform_context() );

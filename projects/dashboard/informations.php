@@ -112,19 +112,32 @@ function print_informations_page()
 
                 <?php
                 $locations = atcf_get_locations();
-
                 DashboardUtility::create_field(array(
-                    "id"=>"new_project_location",
-                    "type"=>"select",
-                    "label"=>"Localisation",
-                    "value"=>$campaign->location(),
-                    "options_id"=>array_keys($locations),
-                    "options_names"=>array_values($locations)
+                    "id"			=> "new_project_location",
+                    "type"			=> "select",
+                    "label"			=> __( "Localisation", 'yproject' ),
+                    "value"			=> $campaign->location(),
+                    "options_id"	=> array_keys($locations),
+                    "options_names"	=> array_values($locations)
                 ));
+				?>
 
+				<?php
+				// Champs personnalisés
+				$nb_custom_fields = $WDGAuthor->wp_user->get('wdg-contract-nb-custom-fields');
+				if ( $nb_custom_fields > 0 ) {
+					for ( $i = 1; $i <= $nb_custom_fields; $i++ ) {
+						DashboardUtility::create_field(array(
+							"id"	=> 'custom_field_' . $i,
+							"type"	=> 'text',
+							"label"	=> __( "Champ personnalis&eacute; " , 'yproject') .$i,
+							"value"	=> get_post_meta( $campaign->ID, 'custom_field_' . $i, TRUE)
+						));
+					}
+				}
+				?>
 
-
-                DashboardUtility::create_save_button("projectinfo_form"); ?>
+                <?php DashboardUtility::create_save_button("projectinfo_form"); ?>
             </form>
 			
 			<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
@@ -409,6 +422,52 @@ function print_informations_page()
                     "max"			=> 100,
                     "step"			=> 0.01,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+                ));
+
+				$contract_start_date_editable = ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing );
+				$contract_start_date_values = array();
+				$contract_start_date_list = array();
+				if ( $contract_start_date_editable ) {
+					// Trouver la prochaine date possible : janvier, avril, juillet, octobre
+					$current_date = new DateTime();
+					$next_date = new DateTime();
+					switch ( $current_date->format('m') ) {
+						case 1:
+						case 2:
+						case 3:
+							$next_date = new DateTime( $current_date->format( 'Y' ) . '-04-01' );
+							break;
+						case 4:
+						case 5:
+						case 6:
+							$next_date = new DateTime( $current_date->format( 'Y' ) . '-07-01' );
+							break;
+						case 7:
+						case 8:
+						case 9:
+							$next_date = new DateTime( $current_date->format( 'Y' ) . '-10-01' );
+							break;
+						case 10:
+						case 11:
+						case 12:
+							$next_date = new DateTime( ( $current_date->format( 'Y' ) + 1 ) . '-01-01' );
+							break;
+					}
+					// Ensuite on ajoute (arbitrairement) 10 dates
+					for ( $i = 0; $i < 10; $i++ ) {
+						array_push( $contract_start_date_values, $next_date->format( 'Y-m-d H:i:s' ) );
+						array_push( $contract_start_date_list, $next_date->format( 'd/m/Y' ) );
+						$next_date->add( new DateInterval( 'P3M' ) );
+					}
+				}
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_contract_start_date",
+                    "type"			=> "select",
+                    "label"			=> "Date de d&eacute;marrage du contrat",
+                    "value"			=> $campaign->contract_start_date(),
+                    "editable"		=> $contract_start_date_editable,
+                    "options_id"	=> $contract_start_date_values,
+                    "options_names"	=> $contract_start_date_list
                 ));
 
                 DashboardUtility::create_field(array(
