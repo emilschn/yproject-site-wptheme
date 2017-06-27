@@ -30,8 +30,13 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 				<?php foreach ( $declaration_list as $declaration_item ): ?>
 					<li>
 					<?php global $declaration; $declaration = $declaration_item; ?>
-					<?php locate_template( array("projects/dashboard/wallet/partial-declaration.php"), true, false ); ?>
+					<h4><?php echo $declaration->get_formatted_date(); ?></h4>
+					<?php if ( $is_admin || $declaration->get_adjustment_needed() ): ?>
 					<?php locate_template( array("projects/dashboard/wallet/partial-adjustment.php"), true, false ); ?>
+					<?php endif; ?>
+					<?php if ( $is_admin || !$declaration->get_adjustment_needed() || $declaration->get_adjustment_validated() ): ?>
+					<?php locate_template( array("projects/dashboard/wallet/partial-declaration.php"), true, false ); ?>
+					<?php endif; ?>
 					</li>
 				<?php endforeach; ?>
 			</ul>
@@ -40,9 +45,17 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 			<?php // Sans déclaration en cours, on affiche le formulaire permettant de procéder à l'ajustement de la prochaine ?>
 			<?php elseif ( $campaign->has_next_roi_declaration() ): ?>
 				<?php global $declaration; $declaration = $campaign->get_next_roi_declaration(); ?>
+		
+				<?php if ( !$is_admin && !$declaration->get_adjustment_needed() ): ?>
+				<?php _e( "Vous &ecirc;tes &agrave; jour dans vos d&eacute;clarations.", 'yproject' ); ?>
+		
+				<?php else: ?>
 				<?php locate_template( array("projects/dashboard/wallet/partial-ajustment.php"), true, false ); ?>
 
+				<?php endif; ?>
+		
 			<?php endif; ?>
+		
 		<?php endif; ?>
 
 	<?php endif; ?>

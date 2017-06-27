@@ -6,7 +6,6 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 $nb_fields = $campaign->get_turnover_per_declaration();
 $declaration_message = $declaration->get_message();
 ?>
-<h4><?php echo $declaration->get_formatted_date(); ?></h4>
 <div>
 	<?php $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); ?>
 
@@ -33,11 +32,12 @@ $declaration_message = $declaration->get_message();
 			<br /><br />
 			
 			<?php if ( $declaration->get_adjustment_validated() ): ?>
-				<?php _e( "Suite &agrave; l'ajustement des comptes, vous avez un solde de" ); ?> <?php echo $declaration->get_adjustment_value(); ?> &euro;.<br />
+				<?php _e( "Suite &agrave; l'ajustement des comptes, nous avons constat&eacute; un diff&eacute;rentiel de chiffre d'affaires de"); ?> <strong><?php echo $declaration->get_adjustment_turnover_difference(); ?> &euro; HT</strong>.<br />
+				<?php _e( "Vous avez donc un solde de" ); ?> <strong><?php echo $declaration->get_adjustment_value(); ?> &euro;</strong>.<br />
 				<?php echo $declaration->get_adjustment_message( 'author' ); ?><br /><br />
 			<?php endif; ?>
 
-			Somme à verser : <span class="amount-to-pay"><?php echo $declaration->get_adjustment_value(); ?></span> &euro;.
+			Somme à verser : <strong><span class="amount-to-pay"><?php echo $declaration->get_adjustment_value(); ?></span> &euro;</strong>.
 			<br /><br />
 
 			<?php _e("Informez vos investisseurs de l'&eacute;tat d'avancement de votre projet et de votre chiffre d'affaires, ", 'yproject'); ?>
