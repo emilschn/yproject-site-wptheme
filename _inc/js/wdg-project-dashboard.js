@@ -539,6 +539,22 @@ var WDGProjectDashboard = (function ($) {
                     });
                 }
             }
+			
+			//Page wallet
+			if ( $("#page-wallet").length > 0 && $("#new_declaration_adjustment_turnover_difference").length > 0 ) {
+				$("#new_declaration_adjustment_turnover_difference").change( function() {
+					var newDifference = Number( $(this).val() );
+					if ( !isNaN( newDifference ) ) {
+						var roiVal = Number( $('#form-declaration-adjustment').data('roi-percent') );
+						var costsOrga = Number( $('#form-declaration-adjustment').data('costs-orga') );
+						
+						var amount = newDifference * roiVal / 100;
+						var amount_with_fees = amount + (amount * costsOrga / 100);
+						amount_with_fees = Math.round(amount_with_fees * 100) / 100;
+						$("#new_declaration_adjustment_value").val( amount_with_fees );
+					}
+				} );
+			}
 
             //Page campagne
             if($("#page-campaign").length > 0){
