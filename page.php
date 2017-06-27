@@ -1,12 +1,9 @@
 <?php get_header(); ?>
 
-<?php
-wp_reset_query();
-if (is_home() or is_front_page()) {
-	require_once("page-home.php");
-} else {
-?>
+<?php if ( defined( 'SKIP_BASIC_HTML' ) ): ?>
+	<?php the_content(); ?>
 
+<?php else: ?>
 <div id="content">
     
 	<div class="padder">
@@ -17,10 +14,6 @@ if (is_home() or is_front_page()) {
 
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-					<?php 
-					ob_start();
-					$temp = ob_get_clean(); 
-					?>
 					<div class="entry center">
 					    
 						<?php the_content( __( '<p class="serif">Lire le reste de la page &rarr;</p>', 'yproject' ) ); ?>
@@ -36,8 +29,7 @@ if (is_home() or is_front_page()) {
 	</div><!-- .padder -->
 	
 </div><!-- #content -->
-<?php
-}
-?>
 
-<?php get_footer(); ?>
+<?php endif; ?>
+
+<?php get_footer();

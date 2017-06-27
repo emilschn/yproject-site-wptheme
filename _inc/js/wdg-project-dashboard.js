@@ -194,6 +194,9 @@ var WDGProjectDashboard = (function ($) {
 							top: "20px"
 						}, { duration: 500, queue: false });
 						$("#"+parentId+"-container #" + $(this).data("tab-target")).slideDown();
+						if ( $(this).data("tab-target") == 'tab-wallet-timetable' ) {
+							WDGProjectDashboard.drawTimetable();
+						}
 					}
 				});
 
@@ -714,6 +717,67 @@ var WDGProjectDashboard = (function ($) {
                });;
             });
         },
+		
+		walletTimetableDatatable: false,
+		drawTimetable: function() {
+			// Ajoute mise en page et interactions du tableau
+			// Ajoute un champ de filtre à chaque colonne dans le footer
+			$('#wdg-timetable tfoot td').each( function () {
+				$(this).prepend( '<input type="text" placeholder="Filtrer par :" class="col-filter"/><br/>' );
+			} );
+
+			// Ajoute les actions de filtrage
+			$("#wdg-timetable tfoot input").on( 'keyup change', function () {
+				walletTimetable
+					.column( $(this).parent().index()+':visible' )
+					.search( this.value )
+					.draw();
+			} );
+
+			//Récupère le tri par défaut 
+			sortColumn = 0;
+
+			WDGProjectDashboard.walletTimetableDatatable = $('#wdg-timetable').DataTable({
+				scrollX: true,
+
+				order: [[ sortColumn, "asc" ]], //Colonne à trier (date)
+
+				dom: 'RC<"clear">lfrtip',
+				lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "Tous"]], //nombre d'élements possibles
+				iDisplayLength: 50,//nombre d'éléments par défaut
+
+				//Boutons de sélection de colonnes
+				colVis: {
+					buttonText: "Afficher/cacher colonnes",
+					restore: "Restaurer",
+					showAll: "Tout afficher",
+					showNone: "Tout cacher",
+					overlayFade: 100
+				},
+				language: {
+					"sProcessing":     "Traitement en cours...",
+					"sSearch":         "Rechercher&nbsp;:",
+					"sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+					"sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+					"sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+					"sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+					"sInfoPostFix":    "",
+					"sLoadingRecords": "Chargement en cours...",
+					"sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+					"sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+					"oPaginate": {
+						"sFirst":      "Premier",
+						"sPrevious":   "Pr&eacute;c&eacute;dent",
+						"sNext":       "Suivant",
+						"sLast":       "Dernier"
+					},
+					"oAria": {
+						"sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+						"sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+					}
+				}
+			});
+		},
 
         scrollTo: function(target){
             $('html, body, .wdg-lightbox-padder').animate(

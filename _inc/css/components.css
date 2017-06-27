@@ -384,7 +384,7 @@
     }
 }
 /* Ajustements spécifiques cartouche projet */
-body.page-template-template-discover-projects-php .wdg-component-projects-preview .project-container .project-framed {
+body.template-les-projets .wdg-component-projects-preview .project-container .project-framed {
     height: 81%;
 }
 

@@ -53,7 +53,7 @@ function yproject_enqueue_script(){
 	$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 	$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 	$is_admin_page = ($post->post_name == 'liste-des-paiements');
-	$current_version = '20170619';
+	$current_version = '20170620';
 	
 	if ( !is_admin() ) {
 		wp_deregister_script('jquery');
@@ -1671,3 +1671,9 @@ function yproject_shortcode_project_amount_count($atts, $content = '') {
     }
 }
 add_shortcode('wdg_project_amount_count', 'yproject_shortcode_project_amount_count');
+
+
+$wdg_functions_loaded_required_once = array(
+	'functions/templates-engine.php'
+);
+locate_template( $wdg_functions_loaded_required_once, true );
