@@ -18,7 +18,7 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 		<?php locate_template( array("projects/dashboard/wallet/partial-mandate.php"), true ); ?>
 		
 		
-		<?php // Si la signature du mandat n'est pas bloquante, on affiche la suite ?>
+		<?php global $last_mandate_status; // Si la signature du mandat n'est pas bloquante, on affiche la suite ?>
 		<?php if ( !$campaign->is_forced_mandate() || $last_mandate_status == 5 || $last_mandate_status == 6 ): ?>
 		
 			<?php // Si il y a une déclaration (ou plusieurs), on l'affiche ?>

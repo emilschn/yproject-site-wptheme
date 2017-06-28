@@ -1,5 +1,5 @@
 <?php
-global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDGAuthor, $WDGUser_current, $organization_obj, $is_admin, $is_author;
+global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDGAuthor, $WDGUser_current, $organization_obj, $is_admin, $is_author, $last_mandate_status;
 $mandate_conditions = $campaign->mandate_conditions();
 
 $saved_mandates_list = $organization_obj->get_lemonway_mandates();
