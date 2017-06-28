@@ -50,7 +50,7 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 				<?php _e( "Vous &ecirc;tes &agrave; jour dans vos d&eacute;clarations.", 'yproject' ); ?>
 		
 				<?php else: ?>
-				<?php locate_template( array("projects/dashboard/wallet/partial-ajustment.php"), true, false ); ?>
+				<?php locate_template( array("projects/dashboard/wallet/partial-adjustment.php"), true, false ); ?>
 
 				<?php endif; ?>
 		
