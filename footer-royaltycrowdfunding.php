@@ -1,6 +1,16 @@
 		</div> <!-- #container -->
 
 		<style>
+			footer {
+				width: -webkit-calc(100% - 20px);
+				width: -moz-calc(100% - 20px);
+				width: calc(100% - 20px);
+				max-width: 1280px;
+				margin: auto;
+			}
+			footer ul { text-align: center; }
+			footer li { display: inline; margin: 5px 30px; }
+			footer a { color: #333; }
 			footer a::before { content: ""; margin-right: 0px; }
 			footer div.align-center img { vertical-align: middle; }
 			footer div.align-center span { display: inline-block; }

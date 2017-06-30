@@ -219,4 +219,4 @@ if ($can_modify){
     </div><!-- .padder -->
 </div><!-- #content -->
 
-<?php get_footer(); ?>
+<?php get_footer( ATCF_CrowdFunding::get_platform_context() );

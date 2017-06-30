@@ -124,7 +124,7 @@ if ( $do_fb_login || is_user_logged_in() ) {
 }
 ?>
 
-<?php get_header(); ?>
+<?php get_header( ATCF_CrowdFunding::get_platform_context() ); ?>
 
 <div id="content" style="margin-top: 90px;">
 	<div class="padder_more">
@@ -134,4 +134,4 @@ if ( $do_fb_login || is_user_logged_in() ) {
 	</div>
 </div>
 
-<?php get_footer(); ?>
+<?php get_footer( ATCF_CrowdFunding::get_platform_context() );

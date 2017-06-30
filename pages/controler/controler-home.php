@@ -15,10 +15,12 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 	
 	public function __construct() {
 		parent::__construct();
-		date_default_timezone_set("Europe/London");
-		define( 'SKIP_BASIC_HTML', TRUE );
-		$this->make_slider();
-		$this->init_projects();
+		if ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
+			date_default_timezone_set("Europe/London");
+			define( 'SKIP_BASIC_HTML', TRUE );
+			$this->make_slider();
+			$this->init_projects();
+		}
 	}
 	
 /******************************************************************************/

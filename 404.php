@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php get_header( ATCF_CrowdFunding::get_platform_context() ); ?>
 
 <div id="content" style="margin-top: 90px;">
 	<div class="padder one-column">
@@ -19,4 +19,4 @@
 	</div><!-- .padder -->
 </div><!-- #content -->
 
-<?php get_footer(); ?>
+<?php get_footer( ATCF_CrowdFunding::get_platform_context() );
