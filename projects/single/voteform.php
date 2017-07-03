@@ -357,7 +357,7 @@ if ($campaign->end_vote_remaining() > 0) {
 						</ul>
 					</br>
 					<div class='vote'>
-						<input type='submit' name='submit_vote' value='Voter' class='vote_submit_v3'/>
+						<input type='submit' name='submit_vote' value='Voter' class='button red'/>
 					</div>
 				</div>
 				</br>

@@ -130,6 +130,43 @@ $keep_going = true;
 
 	<?php elseif ( $last_mandate_status == 5 || $last_mandate_status == 6 ): //Si 5 ou 6, afficher que OK ?>
 		<?php _e( "Merci d'avoir signé l'autorisation de pr&eacute;l&egrave;vement automatique.", 'yproject' ); ?>
+		
+
+		<?php if ( $is_admin ): ?>
+		<br /><br />
+		<form class="db-form" data-action="pay_with_mandate">
+			<div class="field admin-theme">
+
+				<?php
+				DashboardUtility::create_field(array(
+					'id'			=> 'pay_with_mandate_amount_for_organization',
+					'type'			=> 'text',
+					'label'			=> "Montant vers&eacute; sur le porte-monnaie de l'organisation",
+					'suffix'		=> " &euro;",
+                    "admin_theme"	=> true
+				));
+				?>
+				<br />
+
+				<?php
+				DashboardUtility::create_field(array(
+					'id'			=> 'pay_with_mandate_amount_for_commission',
+					'type'			=> 'text',
+					'label'			=> "Montant vers&eacute; en commission",
+					'suffix'		=> " &euro;",
+                    "admin_theme"	=> true
+				));
+				?>
+				<br />
+				
+                <input type="hidden" name="organization_id" value="<?php echo $organization_obj->get_wpref(); ?>" />
+				<?php DashboardUtility::create_save_button( "pay_with_mandate" ); ?>
+
+			</div>
+		</form>
+		<?php endif; ?>
+
+			
 
 	<?php elseif ( $last_mandate_status == 8 ): //Si 8, demander de nous contacter ?>
 		<?php _e( "L'autorisation de pr&eacute;l&egrave;vement automatique a &eacute;t&eacute; d&eacute;sactiv&eacute;e. Merci de nous contacter.", 'yproject' ); ?>
