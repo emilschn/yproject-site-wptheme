@@ -46,7 +46,7 @@
         </form>
 	
         <div class="connexion_facebook_container box_connection_buttons blue">
-            <a class="social_connect_login_facebook">&nbsp;<?php _e("Se connecter avec Facebook", 'yproject'); ?></a>
+            <a href="#" class="social_connect_login_facebook">&nbsp;<?php _e("Se connecter avec Facebook", 'yproject'); ?></a>
         </div>
 
         <div class="box_connection_buttons red">
