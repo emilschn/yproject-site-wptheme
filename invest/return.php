@@ -195,12 +195,12 @@ if (isset($campaign) && is_user_logged_in()):
 			// FIN GESTION DU PAIEMENT COTE EDD
 
 			// Vérifie le statut du paiement, envoie un mail de confirmation et crée un contrat si on est ok
-			$payment_status = ypcf_get_updated_payment_status($payment_id);
+			$payment_status = ypcf_get_updated_payment_status( $payment_id, false, false, $wdginvestment );
 
 			// Affichage en fonction du statut du paiement
 			switch ($payment_status) {
 				case 'pending' : 
-					$invest_page = get_page_by_path('mes_investissements');
+					$invest_page = get_page_by_path('mes-investissements');
 					$share_page = get_page_by_path('paiement-partager');
 					?>
 						
