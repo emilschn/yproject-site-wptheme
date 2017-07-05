@@ -37,7 +37,7 @@ $declaration_message = $declaration->get_message();
 				<?php echo $declaration->get_adjustment_message( 'author' ); ?><br /><br />
 			<?php endif; ?>
 
-			Somme à verser : <strong><span class="amount-to-pay"><?php echo $declaration->get_adjustment_value(); ?></span> &euro;</strong>.
+			Montant à régler : <strong><span class="amount-to-pay"><?php echo $declaration->get_adjustment_value(); ?></span> &euro;</strong>.
 			<br /><br />
 
 			<?php _e("Informez vos investisseurs de l'&eacute;tat d'avancement de votre projet et de votre chiffre d'affaires, ", 'yproject'); ?>
@@ -78,7 +78,7 @@ $declaration_message = $declaration->get_message();
 			<b>Ajustement : </b><?php echo UIHelpers::format_number( $declaration->get_adjustment_value() ); ?> &euro;<br />
 		<?php endif; ?>
 		<b>Frais de gestion : </b><?php echo UIHelpers::format_number( $declaration->get_commission_to_pay() ); ?> &euro;<br />
-		<b>Montant à verser : </b><?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro;<br /><br />
+		<b>Montant à régler : </b><?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro;<br /><br />
 
 		<?php if ( empty( $declaration_message ) ): ?>
 		Aucun message ne sera envoyé aux investisseurs.<br /><br />
