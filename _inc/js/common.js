@@ -133,6 +133,7 @@ YPUIFunctions = (function($) {
 			
 			$(".social_connect_login_facebook").click( function(e) {
 				e.preventDefault();
+				$(".social_connect_login_facebook_loading").show();
 				$.ajax({
 					'type' : "POST",
 					'url' : ajax_object.ajax_url,
@@ -147,6 +148,8 @@ YPUIFunctions = (function($) {
 					}
 				}).fail(function(){
 					alert( "Facebook Connection Error" );
+				}).always(function() {
+					$(".social_connect_login_facebook_loading").hide();
 				});
 			} );
                                 			

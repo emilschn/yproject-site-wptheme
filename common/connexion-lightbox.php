@@ -48,6 +48,9 @@
         <div class="connexion_facebook_container box_connection_buttons blue">
             <a href="#" class="social_connect_login_facebook">&nbsp;<?php _e("Se connecter avec Facebook", 'yproject'); ?></a>
         </div>
+		<div class="social_connect_login_facebook_loading align-center">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" />
+		</div>
 
         <div class="box_connection_buttons red">
 			<div id="submenu_item_connection_register">
