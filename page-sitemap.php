@@ -1,4 +1,7 @@
 <?php
+	$WDG_File_Cacher = new WDG_File_Cacher();
+	$WDG_File_Cacher->rebuild_cache();
+	
 	$postsForSitemap = get_posts(array(
 		'numberposts' => -1,
 		'orderby' => 'modified',
