@@ -73,17 +73,10 @@
 			</div>
 
 			<div class="connexion_facebook_container box_connection_buttons blue">
-				<?php
-				$fb = new Facebook\Facebook([
-					'app_id' => YP_FB_APP_ID,
-					'app_secret' => YP_FB_SECRET,
-					'default_graph_version' => 'v2.8',
-				]);
-				$helper = $fb->getRedirectLoginHelper();
-				$permissions = ['email'];
-				$loginUrl = $helper->getLoginUrl( home_url( '/connexion/?fbcallback=1' ) , $permissions);
-				?>
-				<a href="<?php echo $loginUrl; ?>" class="social_connect_login_facebook"><span>&nbsp;S&apos;inscrire avec Facebook</span></a>
+				<a href="#" class="social_connect_login_facebook"><span>&nbsp;S&apos;inscrire avec Facebook</span></a>
+			</div>
+			<div class="social_connect_login_facebook_loading align-center">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" />
 			</div>
 
 			<div class="align-center box_connection_buttons red" id="signin-button"><a href="#connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">J&apos;ai d&eacute;j&agrave; un compte</a></div>

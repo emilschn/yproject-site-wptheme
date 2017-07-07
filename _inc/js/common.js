@@ -130,6 +130,28 @@ YPUIFunctions = (function($) {
 					btnBurger.removeClass('active').addClass('inactive');
 				}
 			});
+			
+			$(".social_connect_login_facebook").click( function(e) {
+				e.preventDefault();
+				$(".social_connect_login_facebook_loading").show();
+				$.ajax({
+					'type' : "POST",
+					'url' : ajax_object.ajax_url,
+					'data': {
+						'action':'get_connect_to_facebook_url'
+					}
+				}).done(function(result){
+					if (result.indexOf('http') > -1) {
+						window.location = result;
+					} else {
+						alert( "Facebook Connection URL Error" );
+					}
+				}).fail(function(){
+					alert( "Facebook Connection Error" );
+				}).always(function() {
+					$(".social_connect_login_facebook_loading").hide();
+				});
+			} );
                                 			
 			$("#subscribe-nl-mail").keypress(function() {
 				$("#subscribe-nl-mail").addClass("retracted");

@@ -59,11 +59,6 @@
     bottom: -4px;
 }
 
-
-.wdg-component-slider .slider-container #slider .slider-item img.slide {
-	width: 100%;
-}
-
 /*message pour bannière sur screen*/
 .wdg-component-slider .slider-container #slider .slider-item .message-banner .screen-message, .wdg-component-slider .slider-container #slider .slide-1button .message-banner .screen-message{
 	margin: 42px 0px;

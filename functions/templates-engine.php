@@ -98,6 +98,7 @@ class WDG_Templates_Engine {
 	public static function body_class( $classes ) {
 		$page_name = WDG_Templates_Engine::get_page_name();
 		array_push( $classes, 'template-' . $page_name );
+		array_push( $classes, 'context-' . ATCF_CrowdFunding::get_platform_context() );
 		return $classes;
 	}
 	
@@ -112,7 +113,7 @@ class WDG_Templates_Engine {
 	 */
 	public function get_view_name() {
 		$page_name = WDG_Templates_Engine::get_page_name();
-		if ( ATCF_CrowdFunding::get_platform_context() != 'wedogood') {
+		if ( ATCF_CrowdFunding::get_platform_context() != 'wedogood' ) {
 			$page_name .= '-' . ATCF_CrowdFunding::get_platform_context();
 		}
 		if ( locate_template( WDG_Templates_Engine::$view_path. 'view-' .$page_name. '.php' ) ) {

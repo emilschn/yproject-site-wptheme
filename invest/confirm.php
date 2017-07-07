@@ -139,6 +139,12 @@ if (isset($campaign)):
 						<button class="button"><?php _e("Annuler mon investissement"); ?></button>
 					</form>
 					<br /><br />
+					
+					<form id="form-change-info" action="<?php echo admin_url( 'admin-post.php?action=cancel_token_investment'); ?>" method="post" style="display: none;">
+						<input type="hidden" name="campaign_id" value="<?php echo $campaign->ID; ?>" />
+						<input type="hidden" name="reason" value="change-info" />
+						<button class="button"><?php _e("Modifier ces informations"); ?></button>
+					</form>
 					<?php endif; ?>
 					
 					<?php
@@ -211,17 +217,11 @@ if (isset($campaign)):
 						<br /><br />
 					<?php endif; ?>
 
-					<?php 
-					$redirect_page = '#';
-					if ( $wdginvestment->has_token() ){
-						$redirect_page = $wdginvestment->get_redirection( 'error', 'change-info' );
-						
-					} else {
-						$redirect_page = home_url('/modifier-mon-compte');
-						
-					}
-					 ?>
-					<a href="<?php echo $redirect_page; ?>"><?php _e("Modifier ces informations", 'yproject'); ?></a><br /><br />
+					<?php if ( !$wdginvestment->has_token() ): ?>
+					<a href="<?php echo home_url('/modifier-mon-compte'); ?>"><?php _e("Modifier ces informations", 'yproject'); ?></a><br /><br />
+					<?php else: ?>
+					<a href="#" onclick="$('#form-change-info').submit();"><?php _e("Modifier ces informations", 'yproject'); ?></a><br /><br />
+					<?php endif; ?>
 
 					<?php $information_confirmed = (isset($_POST["information_confirmed"]) && $_POST["information_confirmed"] == "1") ? 'checked="checked" ' : ''; ?>
 					<label><input type="checkbox" name="information_confirmed" value="1" <?php echo $information_confirmed; ?> /> <?php _e("Je d&eacute;clare que ces informations sont exactes.", 'yproject'); ?></label><br />

@@ -46,18 +46,11 @@
         </form>
 	
         <div class="connexion_facebook_container box_connection_buttons blue">
-			<?php
-			$fb = new Facebook\Facebook([
-				'app_id' => YP_FB_APP_ID,
-				'app_secret' => YP_FB_SECRET,
-				'default_graph_version' => 'v2.8',
-			]);
-			$helper = $fb->getRedirectLoginHelper();
-			$permissions = ['email'];
-			$loginUrl = $helper->getLoginUrl( home_url( '/connexion/?fbcallback=1' ) , $permissions);
-			?>
-            <a href="<?php echo $loginUrl; ?>" class="social_connect_login_facebook">&nbsp;<?php _e("Se connecter avec Facebook", 'yproject'); ?></a>
+            <a href="#" class="social_connect_login_facebook">&nbsp;<?php _e("Se connecter avec Facebook", 'yproject'); ?></a>
         </div>
+		<div class="social_connect_login_facebook_loading align-center">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" />
+		</div>
 
         <div class="box_connection_buttons red">
 			<div id="submenu_item_connection_register">
