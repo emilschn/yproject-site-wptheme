@@ -717,7 +717,11 @@ function print_user_projects(){
 				if (isset($project['jy_crois']) && $project['jy_crois'] === 1) $data_jycrois = 1;
 				if (isset($project['has_voted']) && $project['has_voted'] === 1) $data_voted = 1;
 				if (count($project['payments']) > 0) $data_invested = 1;
-                                
+				
+				$is_campaign = (get_post_meta($project['ID'], 'campaign_funding_type', TRUE) != '');
+				if ( !$is_campaign ) {
+					continue;
+				}
 				$post_camp = get_post($project['ID']);
 				$campaign = atcf_get_campaign($post_camp);
 				$percent = min(100, $campaign->percent_minimum_completed(false));
