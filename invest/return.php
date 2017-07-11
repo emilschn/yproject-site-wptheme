@@ -250,7 +250,7 @@ if (isset($campaign) && is_user_logged_in()):
 				case 'publish' :
 					do_action('wdg_delete_cache', array(
 						'home-projects',
-						'list-projects-current'
+						'projectlist-projects-current'
 					));
 					$campaign_url = get_permalink($campaign->ID);
 					$share_page = get_page_by_path('paiement-partager');
