@@ -42,7 +42,11 @@ $roi_percent = $campaign->roi_percent();
 	
 		<ul>
 		<?php foreach( $finished_declarations as $declaration_item ): ?>
-			<li>Déclaration du <?php echo $declaration_item->date_due; ?> : <?php echo $declaration_item->amount; ?> € de royalties payées le <?php echo $declaration_item->date_paid; ?></li>
+			<li>Déclaration du <?php echo $declaration_item->date_due; ?> : <?php echo $declaration_item->get_amount_with_adjustment(); ?> € de royalties
+				<?php if ( $declaration_item->get_amount_with_adjustment() > 0 ): ?>
+				payées le <?php echo $declaration_item->get_formatted_date( 'paid' ); ?>
+				<?php endif; ?>
+			</li>
 		<?php endforeach; ?>
 		</ul>
 	
