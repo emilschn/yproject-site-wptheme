@@ -31,7 +31,7 @@ function print_contacts_page() {
                 <div class="step-write">
                     <p><strong><?php _e("Vous pouvez utiliser les variables suivantes : ", 'yproject'); ?></strong>
                     <?php DashboardUtility::get_infobutton('Au moment de l\'envoi, les variables seront remplacées par les valeurs correspondantes.<br/><br/>
-                        Ainsi, par exemple, <b>%username%</b> sera remplacé par le nom de l\'utilisateur qui recevra le message.',true)?></p>
+                        Ainsi, par exemple, <b>%userfirstname%</b> sera remplacé par le prénom de l\'utilisateur qui recevra le message.',true)?></p>
                     <ul style="list-style-type: square;">
                         <li><i>%userfirstname%</i> : Prénom de l'utilisateur destinataire</li>
                         <li><i>%userlastname%</i> : Nom de famille de l'utilisateur destinataire</li>
@@ -44,10 +44,9 @@ function print_contacts_page() {
                     <?php
                     $previous_content = filter_input(INPUT_POST, 'mail_content');
                     if (empty($previous_content)) {
-                        $previous_content = __("Bonjour ", 'yproject') . "%username%,<br />";
-                        $previous_content .= __("Nous vous donnons rendez-vous &agrave; l'adresse ", 'yproject') . "%projecturl%" . __(" pour suivre la campagne !", 'yproject') ."<br />";
-                        $previous_content .= __("A bient&ocirc;t !", 'yproject') ."<br />";
-                        $previous_content .= "%projectauthor%";
+                        $previous_content = __("Bonjour ", 'yproject') . "%userfirstname%,<br />";
+                        $previous_content .= __("Merci d'avoir investi dans notre projet !", 'yproject') ."<br />";
+                        $previous_content .= __("A bient&ocirc;t !", 'yproject');
                     }
                     wp_editor( $previous_content, 'mail_content',
                         array(
