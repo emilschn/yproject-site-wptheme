@@ -1,4 +1,4 @@
-<?php global $signup_errors; $has_register_errors = ($signup_errors->get_error_message() != ""); ?>
+<?php global $signup_errors, $stylesheet_directory_uri; $has_register_errors = ($signup_errors->get_error_message() != ""); ?>
 
 <div id="connect-form" class="align-center wdg-lightbox-ref <?php if ($has_register_errors): ?>specific-hidden<?php endif; ?>">
 	<?php if (WDGUser::has_login_errors()): ?>
@@ -48,7 +48,7 @@
         <div class="connexion_facebook_container box_connection_buttons blue">
             <a href="#" class="social_connect_login_facebook">&nbsp;<?php _e("Se connecter avec Facebook", 'yproject'); ?></a>
         </div>
-		<div class="social_connect_login_facebook_loading align-center">
+		<div class="social_connect_login_facebook_loading align-center hidden">
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" />
 		</div>
 
