@@ -8,7 +8,7 @@
 <?php 
 $WDGUser_current = WDGUser::current();
 $organization_obj = WDGOrganization::current();
-WDGOrganization::edit($organization_obj);
+$edit_return = WDGOrganization::edit($organization_obj);
 $organization_obj->send_kyc();
 $organization_obj->submit_transfer_wallet_lemonway();
 get_header();
@@ -61,6 +61,7 @@ get_header();
 							 */
 							?>
 							<label for="org_name"><?php _e('D&eacute;nomination sociale', 'yproject'); ?></label>
+							<input type="hidden" name="org_name" value="<?php echo $organization_obj->get_name(); ?>" />
 							<em><?php echo $organization_obj->get_name(); ?></em><br />
 							
 							<label for="org_email"><?php _e('E-mail de contact', 'yproject'); ?></label>
