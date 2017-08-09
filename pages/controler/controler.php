@@ -3,6 +3,7 @@ class WDG_Page_Controler {
 	
 	private $db_cache_manager;
 	private $page_title;
+	private $page_meta_keywords;
 	
 	public function __construct() {
 		ypcf_session_start();
@@ -11,6 +12,7 @@ class WDG_Page_Controler {
 		$stylesheet_directory_uri = get_stylesheet_directory_uri();
 		$this->db_cache_manager = new WDG_Cache_Plugin();
 		$this->init_page_title();
+		$this->init_page_meta_keywords();
 	}
 	
 	public function get_db_cached_elements( $key, $version ) {
@@ -40,6 +42,28 @@ class WDG_Page_Controler {
 			
 		} else {
 			$this->page_title = wp_title( '|', false, 'right' ) . get_bloginfo( 'name' );
+		}
+	}
+	
+	/**
+	 * Récupère les keywords à partir des tags
+	 */
+	public function get_page_meta_keywords() {
+		return $this->page_meta_keywords;
+	}
+	
+	private function init_page_meta_keywords() {
+		$this->page_meta_keywords = '';
+		if ( have_posts() ){
+			while ( have_posts() ) {
+				the_post();
+				$posttags = get_the_tags();
+				if ( $posttags ) {
+					foreach( (array) $posttags as $tag) {
+						$this->page_meta_keywords .= $tag->name . ',';
+					}
+				}
+			}
 		}
 	}
 	

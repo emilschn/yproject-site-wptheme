@@ -47,11 +47,7 @@
 			endif; ?>
 		<?php endif; ?>
 		
-		<!-- meta keywords -->
-		<?php if (is_single() || is_page() ) : if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>	
-		<?php csv_tags(); ?>
-		<?php endwhile; endif; elseif(is_home()) : ?>	
-		<?php endif; ?>
+		<meta name="keywords" content="<?php echo $page_controler->get_page_meta_keywords(); ?>" />
 		
 		<?php
 		//*******************

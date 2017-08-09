@@ -1,24 +1,4 @@
 <?php
-function yproject_init() {
-	//possibilité de mettre tag aux pages
-	register_taxonomy_for_object_type('post_tag', 'page');
-	WDGCronActions::init_actions();
-    WDGFormUsers::login();
-    WDGFormUsers::register();
-	WDGPostActions::subscribe_newsletter_sendinblue();
-}
-add_action('init', 'yproject_init');
-
-// Transforme un tag en meta keyword
-function csv_tags(){
-		$posttags = get_the_tags();
-	if ($posttags) {
-		foreach((array)$posttags as $tag) {
-			$csv_tags .= $tag->name . ',';
-		}
-		echo '<meta name="keywords" content="'.$csv_tags.'" />';
-	}
-}
 
 //assure que les tags sont inclus dans les requetes
 function tags_support_query($wp_query){
@@ -1717,6 +1697,9 @@ add_shortcode('wdg_project_amount_count', 'yproject_shortcode_project_amount_cou
 
 
 $wdg_functions_loaded_required_once = array(
-	'functions/templates-engine.php'
+	'functions/templates-engine.php',
+	'functions/wordpress-events.php'
 );
-locate_template( $wdg_functions_loaded_required_once, true );
+foreach ( $wdg_functions_loaded_required_once as $file_to_locate ) {
+	locate_template( $file_to_locate, true );
+}
