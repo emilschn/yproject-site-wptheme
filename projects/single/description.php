@@ -9,7 +9,7 @@ if ($can_modify) {
 		'quicktags'     => false,
 		'editor_height' => 500,
 		'tinymce'       => array(
-			'plugins' => 'paste, wplink, textcolor',
+			'plugins' => 'wordpress, paste, wplink, textcolor',
 			'paste_remove_styles' => true
 		)
 	);

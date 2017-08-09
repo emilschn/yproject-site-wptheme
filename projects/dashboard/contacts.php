@@ -53,7 +53,7 @@ function print_contacts_page() {
                             'media_buttons' => true,
                             'quicktags'     => false,
                             'tinymce'       => array(
-                                'plugins'				=> 'paste, wplink, textcolor',
+                                'plugins'				=> 'wordpress, paste, wplink, textcolor',
                                 'paste_remove_styles'   => true
                             )
                         )
