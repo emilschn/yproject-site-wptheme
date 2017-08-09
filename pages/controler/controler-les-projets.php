@@ -19,7 +19,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	private $filters_list;
 	
 	private static $currentprojects_html_key = 'projectlist-projects-current';
-	private static $currentprojects_html_duration = 7200; // 2 heures de cache
+	private static $currentprojects_html_duration = 3600; // 1 heure de cache
 	private static $currentprojects_html_version = 2;
 	private $currentprojects_html;
 	private $currentprojects_list;
