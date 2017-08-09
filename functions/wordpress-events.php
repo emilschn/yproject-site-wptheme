@@ -24,6 +24,7 @@ class WDG_WordPress_Events {
 		add_action( 'after_setup_theme', 'WDG_WordPress_Events::after_setup_theme', 15 );
 		add_action( 'send_headers', 'WDG_WordPress_Events::send_headers' );
 		add_action( 'wp_logout', 'WDG_WordPress_Events::wp_logout' );
+		add_action( 'user_register', 'WDG_WordPress_Events::user_register', 10, 1 );
 		// Sécurité
 		remove_action( 'wp_head', 'wp_generator' );
 		add_filter( 'login_errors', create_function( '$a', "return null;" ) );
@@ -125,6 +126,14 @@ class WDG_WordPress_Events {
 			wp_redirect( home_url() );
 		}
 		exit;
+	}
+
+	/**
+	 * Inscription à la NL lors de l'inscription
+	 */
+	public static function user_register( $user_id ) {
+		$user = get_userdata( $user_id );
+		WDGPostActions::subscribe_newsletter_sendinblue( $user->user_email );
 	}
 	
 	/**
