@@ -4,6 +4,17 @@
 if ( ! isset( $content_width ) ) $content_width = 960;
 
 
+$wdg_functions_loaded_required_once = array(
+	'functions/templates-engine.php',
+	'functions/wordpress-events.php',
+	'functions/ui-helpers.php',
+	'functions/shortcode-manager.php'
+);
+foreach ( $wdg_functions_loaded_required_once as $file_to_locate ) {
+	locate_template( $file_to_locate, true );
+}
+
+
 /** BACK-OFFICE USERS **/
 function yproject_user_contact_methods( $user_contact ) {
 	$user_contact['user_mobile_phone'] = __('T&eacute;l&eacute;phone');
@@ -1051,183 +1062,3 @@ Sélectionner :<br />
 }
 add_action('wp_ajax_get_email_selector', 'get_email_selector');
 add_action('wp_ajax_nopriv_get_email_selector', 'get_email_selector');
-
-/**
- * Shortcodes généraux
- */
-function yproject_shortcode_lightbox_button($atts, $content = '') {
-    $atts = shortcode_atts( array(
-	'label' => 'Afficher',
-	'id' => 'lightbox',
-	'class' => 'button',
-	'style' => ''
-    ), $atts );
-    return '<a href="#'.$atts['id'].'" class="wdg-button-lightbox-open '.$atts['class'].'" style="'.$atts['style'].'" data-lightbox="'.$atts['id'].'">'.$atts['label'].'</a>';
-}
-add_shortcode('yproject_lightbox_button', 'yproject_shortcode_lightbox_button');
-
-//Shortcode lightbox standard
-function yproject_shortcode_lightbox($atts, $content = '') {
-    $atts = shortcode_atts( array(
-		'id' => 'lightbox',
-		'scrolltop' => '0',
-		'style' => '',
-		'class' => '',
-    ), $atts );
-	
-    return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].' '.$atts['class'].'>
-		<div class="wdg-lightbox-click-catcher"></div>
-		<div class="wdg-lightbox-padder">
-		    <div class="wdg-lightbox-button-close">
-			<a href="#" class="button">X</a>
-		    </div>'.do_shortcode($content).'
-		</div>
-	    </div>';
-}
-add_shortcode('yproject_lightbox', 'yproject_shortcode_lightbox');
-
-//Shortcode grande lightbox
-function yproject_shortcode_widelightbox($atts, $content = '') {
-    $atts = shortcode_atts( array(
-		'id' => 'lightbox',
-		'scrolltop' => '0',
-    ), $atts );
-    return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].'>
-		<div class="wdg-lightbox-click-catcher"></div>
-		<div class="wdg-lightbox-padder wdg-widelightbox-padder">
-		    <div class="wdg-lightbox-button-close">
-			<a href="#" class="button">X</a>
-		    </div>'.do_shortcode($content).'
-		</div>
-	    </div>';
-}
-add_shortcode('yproject_widelightbox', 'yproject_shortcode_widelightbox');
-
-//Shortcode ligthbox messages info/validé/erreur
-//id: valid / error / info
-//type: valid / error / info
-function yproject_shortcode_msglightbox($atts, $content = '') {
-    $atts = shortcode_atts( array(
-		'id' => 'lightbox',
-		'scrolltop' => '0',
-		'type' => 'msg',
-    ), $atts );
-    return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox msg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].'>
-		<div class="wdg-lightbox-click-catcher"></div>
-		<div class="wdg-lightbox-padder '.$atts['type'].'-msg">
-		    <div class="wdg-lightbox-button-close">
-			<a href="#" class="button">X</a>
-		    </div>'.do_shortcode($content).'
-		</div>
-	    </div>';
-}
-add_shortcode('yproject_msglightbox', 'yproject_shortcode_msglightbox');
-
-//Shortcodes lightbox Connexion
-function yproject_shortcode_connexion_lightbox($atts, $content = '') {
-    ob_start();
-    locate_template('common/connexion-lightbox.php',true);
-    $lightbox_content = ob_get_contents();
-    ob_end_clean();
-    echo do_shortcode('[yproject_lightbox id="connexion"]' . $content . $lightbox_content . '[/yproject_lightbox]');
-}
-add_shortcode('yproject_connexion_lightbox', 'yproject_shortcode_connexion_lightbox');
-
-//Shortcodes lightbox d'inscription 
-function yproject_shortcode_register_lightbox($atts, $content = '') {
-    ob_start();
-    locate_template('common/register-lightbox.php',true);
-    $lightbox_content = ob_get_contents();
-    ob_end_clean();
-    echo do_shortcode('[yproject_lightbox id="register"]' . $content . $lightbox_content . '[/yproject_lightbox]');
-}
-add_shortcode('yproject_register_lightbox', 'yproject_shortcode_register_lightbox');
-
-//Shortcode lightbox Tableau de bord
-// ->TB Stats
-function yproject_shortcode_statsadvanced_lightbox($atts, $content = '') {
-	ob_start();
-            locate_template('projects/dashboard/dashboard-statsadvanced-lightbox.php',true);
-            $content = ob_get_contents();
-	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="statsadvanced"]' .$content . '[/yproject_lightbox]');
-}
-add_shortcode('yproject_statsadvanced_lightbox', 'yproject_shortcode_statsadvanced_lightbox');
-
-//->TB Liste votants
-function yproject_shortcode_votecontact_lightbox($atts, $content = '') {
-	ob_start();
-            locate_template('common/dashboard-votecontact-lightbox.php',true);
-            $content = ob_get_contents();
-	ob_end_clean();
-	echo do_shortcode('[yproject_widelightbox id="votecontact"]' .$content . '[/yproject_widelightbox]');
-}
-add_shortcode('yproject_votecontact_lightbox', 'yproject_shortcode_votecontact_lightbox');
-
-//->TB Liste investisseurs
-function yproject_shortcode_listinvestors_lightbox($atts, $content = '') {
-	ob_start();
-            locate_template('common/dashboard-project-investors.php',true);
-            $content = ob_get_contents();
-	ob_end_clean();
-	echo do_shortcode('[yproject_widelightbox id="listinvestors"]' .$content . '[/yproject_widelightbox]');
-}
-add_shortcode('yproject_listinvestors_lightbox', 'yproject_shortcode_listinvestors_lightbox');
-
-//->TB Passer à l'étape suivante
-function yproject_shortcode_gonextstep_lightbox($atts, $content = '') {
-	ob_start();
-            locate_template('common/dashboard-next-step-lightbox.php',true);
-            $content = ob_get_contents();
-	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="gonextstep"]' .$content . '[/yproject_lightbox]');
-}
-add_shortcode('yproject_gonextstep_lightbox', 'yproject_shortcode_gonextstep_lightbox');
-
-//Shortcode pour Lightbox de création de projet
-function yproject_shortcode_newproject_lightbox($atts, $content = '') {
-	ob_start();
-            locate_template('common/newproject-lightbox.php',true);
-            $content = ob_get_contents();
-	ob_end_clean();
-	echo do_shortcode('[yproject_lightbox id="newproject" class="wdg-lightbox-ref"]' .$content . '[/yproject_lightbox]');
-	echo do_shortcode('[yproject_register_lightbox]');
-}
-add_shortcode('yproject_newproject_lightbox', 'yproject_shortcode_newproject_lightbox');
-
-function yproject_shortcode_project_vote_count($atts, $content = '') {
-    $atts = shortcode_atts( array(
-	    'project' => '',
-    ), $atts );
-    
-    if (isset($atts['project']) && is_numeric($atts['project'])) {
-	    $post_campaign = get_post($atts['project']);
-	    $campaign = atcf_get_campaign($post_campaign);
-	    return $campaign->nb_voters();
-    }
-}
-add_shortcode('wdg_project_vote_count', 'yproject_shortcode_project_vote_count');
-
-function yproject_shortcode_project_amount_count($atts, $content = '') {
-    $atts = shortcode_atts( array(
-	    'project' => '',
-    ), $atts );
-    
-    if (isset($atts['project']) && is_numeric($atts['project'])) {
-	    $post_campaign = get_post($atts['project']);
-	    $campaign = atcf_get_campaign($post_campaign);
-	    return $campaign->current_amount();
-    }
-}
-add_shortcode('wdg_project_amount_count', 'yproject_shortcode_project_amount_count');
-
-
-$wdg_functions_loaded_required_once = array(
-	'functions/templates-engine.php',
-	'functions/wordpress-events.php',
-	'functions/ui-helpers.php',
-	'functions/shortcode-manager.php'
-);
-foreach ( $wdg_functions_loaded_required_once as $file_to_locate ) {
-	locate_template( $file_to_locate, true );
-}
