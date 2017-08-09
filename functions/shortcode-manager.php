@@ -1,4 +1,5 @@
 <?php
+YPShortcodeManager::register_shortcodes();
 class YPShortcodeManager {
 	public static $shortcode_list = array(
 		'yproject_crowdfunding_invest_form',
