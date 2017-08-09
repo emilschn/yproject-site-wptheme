@@ -1,9 +1,9 @@
 <?php global $signup_errors, $stylesheet_directory_uri; $has_register_errors = ($signup_errors->get_error_message() != ""); ?>
 
 <div id="connect-form" class="align-center wdg-lightbox-ref <?php if ($has_register_errors): ?>specific-hidden<?php endif; ?>">
-	<?php if (WDGUser::has_login_errors()): ?>
+	<?php if (WDGFormUsers::has_login_errors()): ?>
 	<div class="errors">
-		<?php echo WDGUser::display_login_errors(); ?>
+		<?php echo WDGFormUsers::display_login_errors(); ?>
 	</div>
 	<?php endif; ?>
     
