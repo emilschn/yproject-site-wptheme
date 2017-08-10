@@ -8,65 +8,6 @@ $WDGUser_displayed = WDGUser::current();
 <h2 class="underlined">Projets</h2>
 
 	<div>
-		<div class="left two-thirds">
-			<strong><?php if ($display_loggedin_user) { ?>Mes projets :<?php } else { ?>Ses projets :<?php } ?></strong>
-			
-			<?php
-			$campaign_status = array('publish');
-			if ($display_loggedin_user) array_push($campaign_status, 'private');
-			$args = array(
-				'post_type' => 'download',
-				'author' => $WDGUser_displayed->wp_user->ID,
-				'post_status' => $campaign_status
-			);
-			if (!$display_loggedin_user) {
-				$args['meta_key'] = 'campaign_vote';
-				$args['meta_compare'] = '!='; 
-				$args['meta_value'] = ATCF_Campaign::$campaign_status_preparing;
-			}
-			query_posts($args);
-			$has_projects = false;
-			$page_dashboard = get_page_by_path('tableau-de-bord');
-
-			if (have_posts()) {
-				$has_projects = true;
-				$i = 0;
-				while (have_posts()) {
-					the_post();
-					if ($i > 0) {?> | <?php }
-					if ($display_loggedin_user) { 
-					?><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' . get_the_ID(); ?>"><?php the_title(); ?></a><?php
-					} else {
-					?><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a><?php
-					}
-					$i++;
-				}
-			}
-			?>
-					
-			<?php
-			$wdg_current_user = new WDGUser( $WDGUser_displayed->wp_user->ID );
-			$api_user_id = $wdg_current_user->get_api_id();
-			$project_list = WDGWPREST_Entity_User::get_projects_by_role( $api_user_id, WDGWPREST_Entity_Project::$link_user_type_team );
-			if (!empty($project_list)) {
-				$has_projects = true;
-				foreach ($project_list as $project) {	    
-					if ($i > 0) {?> | <?php }
-					if ($display_loggedin_user) { 
-					?><a href="<?php echo get_permalink($page_dashboard->ID) . '?campaign_id=' . $project->wpref; ?>"><?php echo $project->name; ?></a><?php
-					} else {
-					?><a href="<?php echo get_permalink($project->wpref); ?>"><?php echo $project->name; ?></a><?php
-					}
-					$i++;
-				}
-			}
-			
-			if (!$has_projects): ?>
-			Aucun
-			<?php endif; ?>
-
-		</div>
-	    
 		<?php if ($display_loggedin_user) { ?>
 		<div class="right">
 			<a href="<?php echo get_permalink($page_publish->ID); ?>" class="button right">Financer mon projet</a>

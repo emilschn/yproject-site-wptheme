@@ -1,0 +1,38 @@
+body.template-mon-compte div#container div#content {
+	display: table;
+	width: 95%;
+	table-layout: fixed;
+	margin: 80px auto 0px;
+}
+body.template-mon-compte div#container div#content nav {
+	display: table-cell;
+    vertical-align: top;
+    width: 220px;
+	border-right: 3px solid #E1E3E2;
+}
+body.template-mon-compte div#container div#content nav div.nav-header {
+	padding: 15px;
+}
+body.template-mon-compte div#container div#content nav div.nav-header ul.project-list {
+	padding-left: 0px;
+	list-style: none;
+}
+body.template-mon-compte div#container div#content nav ul.nav-menu {
+	padding-left: 0px;
+	list-style: none;
+}
+body.template-mon-compte div#container div#content nav ul.nav-menu li a {
+	display: inline-block;
+	width: calc( 100% - 15px );
+	height: auto;
+	padding: 5px 0px 5px 15px;
+	text-transform: uppercase;
+	color: #333333;
+}
+body.template-mon-compte div#container div#content nav ul.nav-menu li.selected a {
+	background: #F4F4F4;
+}
+body.template-mon-compte div#container div#content main {
+	display: table-cell;
+    vertical-align: top;
+}
