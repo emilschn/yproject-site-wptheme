@@ -10,6 +10,7 @@ if (isset($campaign)):
 	$max_value = ypcf_get_max_value_to_invest();
 	$part_value = ypcf_get_part_value();
 	$max_part_value = ypcf_get_max_part_value();
+	$campaign_organization = $campaign->get_organization();
 	
 	if ($max_part_value > 0):
 		global $edd_options;
@@ -144,6 +145,11 @@ if (isset($campaign)):
 				</div>
 		
 				<br />
+				
+				<?php if ( !empty( $_SESSION['error_own_organization'] ) ): ?>
+				<?php _e( "Vous ne pouvez pas investir au nom de l'organisation qui porte le projet.", 'yproject' ); ?>
+				<br />
+				<?php endif; ?>
 
 				<p id="invest_form_button" class="align-center">
 					<?php switch ($campaign->funding_type()) {
@@ -163,7 +169,9 @@ if (isset($campaign)):
 								<option value="user"><?php _e("En mon nom (personne physique)", 'yproject'); ?></option>
 								<?php if (count($organizations_list) > 0): ?>
 									<?php foreach ($organizations_list as $organization_item): ?>
-										<option value="<?php echo $organization_item->wpref; ?>"><?php _e("Pour l'organisation", 'yproject'); ?> <?php echo $organization_item->name; ?></option>
+										<?php if ( $organization_item->wpref != $campaign_organization->wpref ) :?>
+											<option value="<?php echo $organization_item->wpref; ?>"><?php _e("Pour l'organisation", 'yproject'); ?> <?php echo $organization_item->name; ?></option>
+										<?php endif; ?>
 									<?php endforeach; ?>
 									<option value="new_organization"><?php _e("Pour une nouvelle organisation (personne morale)...", 'yproject'); ?></option>
 								<?php else: ?>
