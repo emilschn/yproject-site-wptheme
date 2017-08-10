@@ -98,10 +98,10 @@ button.red {
 	border: 0px;
 	background: #FFFFFF;
 }
-.button.more-content {
-        background: none repeat scroll 0 0 transparent;
-        border: 2px solid #333;
-        color: #333;
+.button.more-content, .button.transparent {
+	background: none repeat scroll 0 0 transparent;
+	border: 2px solid #333;
+	color: #333;
 }
 
 /*******************************************************************************
@@ -253,15 +253,15 @@ nav#main > div#menu {
 	width: -webkit-calc(100% - 40px);
 	width: -moz-calc(100% - 40px);
 	width: calc(100% - 40px);
-        max-width: 1260px; 
+	max-width: 1260px; 
 	height: 40px;
 	margin: auto;
 	padding: 10px;
 	background: #FFFFFF;
-        -moz-box-shadow: 1px 1px 5px #E4E4E4;
-        -webkit-box-shadow: 1px 1px 5px #E4E4E4;
-        -o-box-shadow: 1px 1px 5px #E4E4E4;
-        box-shadow: 1px 1px 5px #E4E4E4;
+	-moz-box-shadow: 1px 1px 5px #E4E4E4;
+	-webkit-box-shadow: 1px 1px 5px #E4E4E4;
+	-o-box-shadow: 1px 1px 5px #E4E4E4;
+	box-shadow: 1px 1px 5px #E4E4E4;
 	text-align: right;
 }
 
@@ -336,8 +336,8 @@ nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.cur
     border: 4px solid #E1E3E2;
 }
 .submenu-style ul.submenu-list {
-        max-height: 400px;
-        overflow-y: auto;
+	max-height: 400px;
+	overflow-y: auto;
 	margin: 0px;
 	padding-left: 0px;
 	list-style: none;
@@ -463,8 +463,9 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     margin: 15px auto;
     font-size: 11pt;
 }
-.box_connection_buttons.red{ background-color: #EA4F51; text-transform: uppercase; }
+.box_connection_buttons.red { background-color: #EA4F51; text-transform: uppercase; }
 .box_connection_buttons.blue, .connexion_facebook_container.box_connection_buttons.blue { background-color: #3B5998; }
+.box_connection_buttons.transparent { background: none repeat scroll 0 0 transparent; border: 2px solid #333; color: #333; }
 .box_connection_buttons span { color: #FFF; }
 
 #submenu-user form.sidebar-login-form {
@@ -523,8 +524,80 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 	#submenu-user { right: 10px; }
 }
 @media screen and (min-width: 1301px) {
-        #submenu-user { position: relative; top: 10px; left: 977px; }
-        #submenu-search { position: relative; top: 10px; left: 912px; }
+	#submenu-user { position: relative; top: 10px; left: 977px; }
+	#submenu-search { position: relative; top: 10px; left: 912px; }
+}
+
+/*******************************************************************************
+* CONNEXION PAGE
+*******************************************************************************/
+.post_bottom_buttons_connexion div { 
+    border-bottom: 1px solid #FFFFFF;
+    font-family: Arial, sans-serif;
+    font-size: 9pt;
+    text-transform: uppercase;
+    width: 200px;
+    height: 25px;
+    background-color: #333333;
+}
+
+.login_fail { color : red; margin-bottom: 10px; }
+
+/*******************************************************************************
+* REGISTER PAGE / REGISTER LIGHTBOX
+*******************************************************************************/
+#wdg-lightbox-register .wdg-button-lightbox-open,
+#newproject-register-user .wdg-button-lightbox-open,
+#wdg-lightbox-connexion .wdg-button-lightbox-open {
+	border: none;
+	background: none;
+	font-size: 12pt;
+}
+
+.form-register .on-focus input { margin-left: 110px; }
+.form-register .on-focus .tool-tip { width: 110px; margin-top: -20px; }
+
+.form-register {
+    margin: 5px;
+}
+.form-register h2, #sidebar-login-form h2 {
+    text-align: center;
+    margin: 0px;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+	color: #00879B;
+	font-size: 16pt;
+	font-weight: normal;
+}
+.form-register .warning {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+.form-register .register-section {
+    text-align: center;
+}
+.form-register div.connexion_facebook_container {
+    display: block;
+    text-align: center;
+    background-color: transparent;
+}
+.form-register div.connexion_facebook_container a {
+    padding: 2px 0px 5px;
+}
+#signup_form .submit {
+	margin-top: 20px;
+}
+#signup_form #signin-button {
+	margin-top: 8px;
+}
+#signup_submit, #sidebar-wp-submit-lightbox {
+    background-color: #EA4F51;
+    color: #FFF;
+    border: 0px;
+    width: 174px;
+    text-transform: uppercase;
+	font-size: 12pt;
+	cursor: pointer;
 }
 
 /*******************************************************************************

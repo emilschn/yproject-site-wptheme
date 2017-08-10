@@ -755,6 +755,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 }
 div#content.version-3 div.project-comments div.comment-respond p.form-submit input[type="submit"] {
 	padding: 10px 40px;
+	border: 0px;
 	font-size: 13pt;
 	background: #D3EAE9;
 	color: #000;

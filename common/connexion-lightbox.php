@@ -52,10 +52,8 @@
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" />
 		</div>
 
-        <div class="box_connection_buttons red">
-			<div id="submenu_item_connection_register">
-				<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><?php _e("Cr&eacute;er mon compte", 'yproject'); ?></a>
-			</div>
+        <div class="box_connection_buttons transparent">
+			<a href="#register" class="wdg-button-lightbox-open button transparent" data-lightbox="register"><?php _e("Cr&eacute;er mon compte", 'yproject'); ?></a>
         </div>
 
 </div>

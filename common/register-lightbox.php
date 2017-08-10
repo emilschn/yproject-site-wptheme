@@ -79,7 +79,7 @@
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" />
 			</div>
 
-			<div class="align-center box_connection_buttons red" id="signin-button"><a href="#connexion" class="wdg-button-lightbox-open button" data-lightbox="connexion">J&apos;ai d&eacute;j&agrave; un compte</a></div>
+			<div class="align-center box_connection_buttons transparent" id="signin-button"><a href="#connexion" class="wdg-button-lightbox-open button transparent" data-lightbox="connexion">J&apos;ai d&eacute;j&agrave; un compte</a></div>
 
 		<?php endif; // request-details signup step ?>
 
