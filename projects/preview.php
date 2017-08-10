@@ -36,7 +36,6 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
                     <?php echo html_entity_decode($campaign->summary()); ?>   
                 </div>
             </a>
-        <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
         <?php 
             $jycrois = $campaign->get_jycrois_nb();
             if($jycrois > 1){
@@ -51,7 +50,10 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
             }
 
             //Projets en cours de collecte ou en vote
-            if($campaign_status !== ATCF_Campaign::$campaign_status_funded):
+            if($campaign_status !== ATCF_Campaign::$campaign_status_funded): ?>
+		
+        <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
+			<?php
 				$time_remaining_str = $campaign->time_remaining_str();
 				if ($time_remaining_str != '-') {
 					$time_remaining_str_split = explode('-', $time_remaining_str);
@@ -104,7 +106,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 
             //Projets déja financés
             else :
-                $projectStatus = __("projet</br>financé !", "yproject");
+                $projectStatus = __("projet<br />financé !", "yproject");
                 $buttonAction = __("découvrir ce projet", "yproject"); // vers plus d'info sur ce projet
         ?>
             <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">

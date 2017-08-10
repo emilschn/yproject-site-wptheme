@@ -76,7 +76,7 @@
 				<a href="#" class="social_connect_login_facebook"><span>&nbsp;S&apos;inscrire avec Facebook</span></a>
 			</div>
 			<div class="social_connect_login_facebook_loading align-center hidden">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 			</div>
 
 			<div class="align-center box_connection_buttons transparent" id="signin-button"><a href="#connexion" class="wdg-button-lightbox-open button transparent" data-lightbox="connexion">J&apos;ai d&eacute;j&agrave; un compte</a></div>

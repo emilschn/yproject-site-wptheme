@@ -174,7 +174,7 @@
 						<a href="#" class="social_connect_login_facebook"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
 					</div>
 					<div class="social_connect_login_facebook_loading align-center hidden">
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" />
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 					</div>
 
 					<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 2px 0 0; color: #000000; margin: 5% 5%;"/>
