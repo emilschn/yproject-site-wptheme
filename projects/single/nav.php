@@ -66,7 +66,7 @@ if (is_user_logged_in()) {
 						</a>
 
 					<?php elseif ($has_voted): ?>
-						<div style="-webkit-filter: grayscale(100%); text-transform: uppercase; padding: 0px 10px;">
+						<div class="disabled">
 							<?php _e('Merci pour votre vote !', 'yproject'); ?>
 						</div>
 
