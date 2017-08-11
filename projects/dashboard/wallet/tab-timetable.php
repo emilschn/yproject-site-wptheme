@@ -9,6 +9,22 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 	<?php else: ?>
 
 		<?php if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded): ?>
+		
+			<?php if ( $is_admin ): ?>
+		
+				<form method="POST" action="<?php echo admin_url( 'admin-post.php?action=declaration_auto_generate'); ?>" class="align-center admin-theme-block">
+					
+					<br />
+					<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+					<input type="hidden" name="month_count" value="3" />
+					<button type="submit" class="button"><?php _e( "G&eacute;n&eacute;rer les &eacute;ch&eacute;ances manquantes", 'yproject' ); ?></button>
+					<br /><br />
+
+				</form>
+				<br /><br />
+		
+			<?php endif; ?>
+			
 
 			<?php $declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $campaign->ID ); ?>
 			
