@@ -1,14 +1,21 @@
+body.template-mon-compte div#container {
+	background: #93626D;
+	background-image: url(../../images/common-background.png);
+	background-repeat: no-repeat;
+}
 body.template-mon-compte div#container div#content {
 	display: table;
 	width: 95%;
 	table-layout: fixed;
-	margin: 80px auto 0px;
+	margin: auto;
+	padding: 80px 0px 10px;
 }
 body.template-mon-compte div#container div#content nav {
 	display: table-cell;
     vertical-align: top;
     width: 220px;
 	border-right: 3px solid #E1E3E2;
+	background: #FFFFFF;
 }
 body.template-mon-compte div#container div#content nav div.nav-header {
 	padding: 15px;
@@ -38,5 +45,5 @@ body.template-mon-compte div#container div#content main {
 	display: table-cell;
     vertical-align: top;
 	background: #F4F4F4;
-	padding: 10px;
+	padding: 10px 20px;
 }
