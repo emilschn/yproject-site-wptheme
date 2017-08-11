@@ -31,8 +31,12 @@ body.template-mon-compte div#container div#content nav ul.nav-menu li a {
 }
 body.template-mon-compte div#container div#content nav ul.nav-menu li.selected a {
 	background: #F4F4F4;
+	border-left: 4px solid #D3EAE9;
+	width: calc( 100% - 19px );
 }
 body.template-mon-compte div#container div#content main {
 	display: table-cell;
     vertical-align: top;
+	background: #F4F4F4;
+	padding: 10px;
 }

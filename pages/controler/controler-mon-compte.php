@@ -4,6 +4,7 @@ $page_controler = new WDG_Page_Controler_User_Account();
 
 class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	
+	private $user_id;
 	private $user_name;
 	private $user_project_list;
 	private $wallet_to_bankaccount_result;
@@ -15,8 +16,20 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 			wp_redirect( home_url( '/connexion' ) . '?redirect-page=mon-compte' );
 		}
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
+		$this->init_user_id();
 		$this->init_user_name();
 		$this->init_project_list();
+	}
+	
+/******************************************************************************/
+// USER ID
+/******************************************************************************/
+	public function get_user_id() {
+		return $this->user_id;
+	}
+	private function init_user_id() {
+		$WDGUser_current = WDGUser::current();
+		$this->user_id = $WDGUser_current->get_wpref();
 	}
 	
 /******************************************************************************/

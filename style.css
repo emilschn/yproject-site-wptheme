@@ -2205,36 +2205,6 @@ ul.activity-list p {
     height: auto;
 }
 
-#item-submenu {
-    padding: 0;
-    list-style: none;
-    display: block;
-    height: 45px;
-    font-size: 9pt;
-    -webkit-padding-start: 0px;
-    -webkit-margin-after: 0em;
-}
-#item-submenu li {
-    background-color: #7B7B7B;
-    float: left;
-    border-right: 5px solid #FFF;
-    font-family: Arial,sans-serif;
-    padding: 15px 0px;
-    text-transform: uppercase;
-    -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;
-    -ms-transition: all 0.2s ease-out;
-    -o-transition: all 0.2s ease-out;
-    transition: all 0.2s ease-out;
-}
-#item-submenu li.selected,
-#item-submenu li.sfhover,
-#item-submenu li:hover { background-color: #2B2C2C; }
-#item-submenu li a { 
-    color: #FFFFFF;
-    padding: 15px;
-}
-
 .follow-button {
     background: none repeat scroll 0 0 #333333;
     border: medium none;

@@ -21,8 +21,8 @@
 	</div>
 	
 	<ul class="nav-menu">
-		<li class="selected"><a href="#projects"><?php _e("Projets et investissements", "yproject"); ?></a></li>
-		<li><a href="#organizations"><?php _e("Organisations", "yproject"); ?></a></li>
+		<li id="menu-item-projects" class="selected"><a href="#projects" data-tab="projects"><?php _e("Projets et investissements", "yproject"); ?></a></li>
+		<li id="menu-item-organizations"><a href="#organizations" data-tab="organizations"><?php _e("Organisations", "yproject"); ?></a></li>
 	</ul>
 	
 </nav>
