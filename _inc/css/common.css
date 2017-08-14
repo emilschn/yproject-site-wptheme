@@ -546,6 +546,7 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 /*******************************************************************************
 * REGISTER PAGE / REGISTER LIGHTBOX
 *******************************************************************************/
+.template-connexion #content #connect-form .wdg-button-lightbox-open,
 #wdg-lightbox-register .wdg-button-lightbox-open,
 #newproject-register-user .wdg-button-lightbox-open,
 #wdg-lightbox-connexion .wdg-button-lightbox-open {
