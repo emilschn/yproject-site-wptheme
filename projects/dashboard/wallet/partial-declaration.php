@@ -165,7 +165,7 @@ $declaration_message = $declaration->get_message();
 			<form action="<?php echo admin_url( 'admin-post.php?action=roi_mark_transfer_received'); ?>" method="POST" class="align-center admin-theme-block">
 				<input type="hidden" name="roi_declaration_id" value="<?php echo $declaration->id; ?>" />
 				<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
-				<button><?php _e( "Marquer le virement comme re&ccedil;u", 'yproject' ); ?></button>
+				<button class="button"><?php _e( "Marquer le virement comme re&ccedil;u", 'yproject' ); ?></button>
 			</form>
 
 		<?php endif; ?>
@@ -178,7 +178,9 @@ $declaration_message = $declaration->get_message();
 
 		<?php if ($is_admin): ?>
 			<br /><br />
-			<a href="#transfer-roi" class="button red transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>">Procéder aux versements</a>
+			<div class="align-center admin-theme-block">
+				<a href="#transfer-roi" class="button transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>">Procéder aux versements</a>
+			</div>
 
 			<?php ob_start(); ?>
 			<?php $previous_remaining_amount = $declaration->get_previous_remaining_amount(); ?>
