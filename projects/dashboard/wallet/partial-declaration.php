@@ -159,6 +159,17 @@ $declaration_message = $declaration->get_message();
 
 		<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ): ?>
 		Nous attendons la réception de la somme par notre prestataire de paiement et procèderons au versement par la suite.
+		
+		<?php if ($is_admin): ?>
+			<br /><br />
+			<form action="<?php echo admin_url( 'admin-post.php?action=roi_mark_transfer_received'); ?>" method="POST" class="align-center admin-theme-block">
+				<input type="hidden" name="roi_declaration_id" value="<?php echo $declaration->id; ?>" />
+				<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+				<button><?php _e( "Marquer le virement comme re&ccedil;u", 'yproject' ); ?></button>
+			</form>
+
+		<?php endif; ?>
+		
 		<?php else: ?>
 		Votre paiement de <?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
 		Le versement vers vos investisseurs est en cours.<br /><br />
