@@ -82,7 +82,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 				$count_amount += $campaign->current_amount( false );
 				$declaration_list = $campaign->get_roi_declarations();
 				foreach ( $declaration_list as $declaration ) {
-					$count_roi += $declaration[ 'total_roi' ];
+					$count_roi += $declaration[ 'total_roi_with_adjustment' ];
 				}
 			}
 			$people_list_unique = array_unique( $people_list );
