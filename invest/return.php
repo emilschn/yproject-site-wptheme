@@ -44,7 +44,11 @@ if (isset($campaign) && is_user_logged_in()):
 						$transfer_funds_result = LemonwayLib::ask_transfer_funds($organization_debit->get_lemonway_id(), $organization_obj->get_lemonway_id(), $amount);
 					}
 				}
-				$purchase_key = 'wallet_'. $transfer_funds_result->ID;
+				if ( !empty( $transfer_funds_result ) && isset( $transfer_funds_result->ID ) ) {
+					$purchase_key = 'wallet_'. $transfer_funds_result->ID;
+				} else {
+					NotificationsEmails::new_purchase_admin_error_wallet( $WDGUser_current, $campaign->data->post_title, $amount );
+				}
 				
 			//Paiement par carte
 			} else {
@@ -56,6 +60,7 @@ if (isset($campaign) && is_user_logged_in()):
 				//Compléter avec Wallet
 				if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == "cardwallet" && $lw_return != "failed" && ($lw_transaction_result->STATUS == 3 || $lw_transaction_result->STATUS == 0) && isset($_SESSION['need_wallet_completion']) && $_SESSION['need_wallet_completion'] > 0) {
 					$amount_wallet = $_SESSION['need_wallet_completion'];
+					$amount += $amount_wallet;
 					$organization = $campaign->get_organization();
 					$organization_obj = new WDGOrganization($organization->wpref);
 					if ($invest_type == 'user') {
@@ -71,10 +76,11 @@ if (isset($campaign) && is_user_logged_in()):
 						}
 					}
 					
-					
-					if ( $transfer_funds_result != FALSE ) {
+					if ( !empty( $transfer_funds_result ) && isset( $transfer_funds_result->ID ) ) {
 						$purchase_key .= '_wallet_'. $transfer_funds_result->ID;
-						$amount += $amount_wallet;
+					} else {
+						$purchase_key .= '_wallet_FAILED';
+						NotificationsEmails::new_purchase_admin_error_card_wallet( $WDGUser_current, $campaign->data->post_title, $amount, $amount_wallet );
 					}
 				}
 			}
@@ -93,7 +99,7 @@ if (isset($campaign) && is_user_logged_in()):
 			}
 		}
 
-		if ($buffer == ''):
+		if ($buffer == '' && !empty($purchase_key)):
 			//Récupération du bon utilisateur
 			$current_user = wp_get_current_user();
 			$save_user_id = $current_user->ID;
