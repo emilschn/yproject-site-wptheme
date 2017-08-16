@@ -949,6 +949,9 @@ body.template-les-projets header .header-container > div > div#wdg-project-stats
 	float: left;
 	margin-right: 20px;
 }
+body.template-les-projets header .header-container > div > div#wdg-project-stats p:nth-child(2) img {
+	margin-right: 37px;
+}
 body.template-les-projets header .header-container > div > div#wdg-project-stats p span {
 	font-size: 20pt;
 }
