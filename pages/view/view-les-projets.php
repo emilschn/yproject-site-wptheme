@@ -58,24 +58,24 @@ $stats_html = $page_controler->get_stats_html();
 				<div id="wdg-project-stats" class="right">
 					<p><?php _e( "WE DO GOOD c'est :" ); ?></p>
 					<p>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="money" />
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-arrows.png" alt="arrows" />
 						<span>
 							<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span>
-							<?php _e( "lev&eacute;s" ); ?>
+							<?php _e( "lev&eacute;s", 'yproject' ); ?>
 						</span>
 					</p>
 					<p>
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-people.png" alt="people" />
 						<span>
 							<span><?php echo number_format( $stats_list[ 'count_people' ], 0, '', ' ' ); ?></span>
-							<?php _e( "investisseurs" ); ?>
+							<?php _e( "investisseurs", 'yproject' ); ?>
 						</span>
 					</p>
 					<p>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-arrows.png" alt="arrows" />
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="money" />
 						<span>
-							<span><?php echo $stats_list[ 'nb_projects' ]; ?></span>
-							<?php _e( "projets propuls&eacute;s" ); ?>
+							<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?> &euro;</span>
+							<?php _e( "de royalties vers&eacute;s", 'yproject' ); ?>
 						</span>
 					</p>
 				</div>

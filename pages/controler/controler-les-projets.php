@@ -73,19 +73,26 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 			$count_amount = 0;
 			$people_list = array();
 			$count_projects = 0;
+			$count_roi = 0;
 			foreach ( $project_list_funded as $project_post ) {
 				$count_projects++;
 				$campaign = atcf_get_campaign( $project_post->ID );
 				$backers_id_list = $campaign->backers_id_list();
 				$people_list = array_merge( $people_list, $backers_id_list );
 				$count_amount += $campaign->current_amount( false );
+				$declaration_list = $campaign->get_roi_declarations();
+				foreach ( $declaration_list as $declaration ) {
+					$count_roi += $declaration[ 'total_roi' ];
+				}
 			}
 			$people_list_unique = array_unique( $people_list );
 			$count_people = count( $people_list_unique );
+			$count_roi = floor( $count_roi );
 			$this->stats_list = array(
 				'count_amount'	=> $count_amount,
 				'count_people'	=> $count_people,
 				'nb_projects'	=> count($project_list_funded),
+				'count_roi'		=> $count_roi
 			);
 		}
 	}
