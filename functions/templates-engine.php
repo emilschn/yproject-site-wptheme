@@ -113,13 +113,22 @@ class WDG_Templates_Engine {
 	 */
 	public function get_view_name() {
 		$page_name = WDG_Templates_Engine::get_page_name();
-		if ( ATCF_CrowdFunding::get_platform_context() != 'wedogood' ) {
+		if ( ATCF_CrowdFunding::get_platform_context() != 'wedogood' && $this->is_context_overriden( $page_name ) ) {
 			$page_name .= '-' . ATCF_CrowdFunding::get_platform_context();
 		}
 		if ( locate_template( WDG_Templates_Engine::$view_path. 'view-' .$page_name. '.php' ) ) {
 			return $page_name;
 		}
 		return FALSE;
+	}
+	
+	/**
+	 * Détermine si c'est une page qui doit être surchargée par le contexte
+	 * @param string $page_name
+	 * @return boolean
+	 */
+	public function is_context_overriden( $page_name ) {
+		return ( $page_name == 'home' );
 	}
 	
 	/**
