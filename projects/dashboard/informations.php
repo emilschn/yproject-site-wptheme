@@ -424,7 +424,7 @@ function print_informations_page()
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
 
-				$contract_start_date_editable = ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing );
+				$contract_start_date_editable = ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $is_admin );
 				$contract_start_date_values = array();
 				$contract_start_date_list = array();
 				if ( $contract_start_date_editable ) {
