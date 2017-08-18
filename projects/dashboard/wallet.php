@@ -31,7 +31,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 </div>
 
 <div>
-<?php if ( /*$return_roi_payment == 'error_lw_payment'*/true ): ?>
+<?php if ( $return_roi_payment == 'error_lw_payment' ): ?>
 	<?php
 	$msg_error_payment = __("Erreur LWROI001 : Erreur de paiement vers votre porte-monnaie.", "yproject");
 	echo do_shortcode('[yproject_lightbox id="msg-validation-payment" scrolltop="1" msgtype="error" autoopen="1"]'.$msg_error_payment.'[/yproject_lightbox]');
