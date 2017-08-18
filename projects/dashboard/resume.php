@@ -24,10 +24,19 @@ function print_resume_page()
     <div id="status-list">
         <?php
         $status_list = ATCF_Campaign::get_campaign_status_list();
-        $nb_status = count($status_list)-1;
+        $nb_status = count($status_list)-2;
         $i=1; ?>
         <div class="perso <?php if($status==ATCF_Campaign::$campaign_status_preparing){echo ' preparing ';}?>"></div>
-        <?php foreach ($status_list as $status_key => $name): if ($status_key != ATCF_Campaign::$campaign_status_preview): ?>
+        <?php foreach ($status_list as $status_key => $name): ?>
+			<?php if ( 
+					( $status_key != ATCF_Campaign::$campaign_status_preview )
+					&& ( 
+						( $status == ATCF_Campaign::$campaign_status_archive && $status_key == ATCF_Campaign::$campaign_status_archive )
+						|| 
+						( $status != ATCF_Campaign::$campaign_status_archive && $status_key == ATCF_Campaign::$campaign_status_closed )
+						|| 
+						( $status_key != ATCF_Campaign::$campaign_status_closed && $status_key != ATCF_Campaign::$campaign_status_archive )
+						) ): ?>
             <div class="status
                     <?php   if($i==1){echo "begin ";}
                             if($i==$nb_status){echo "end ";}?>"
@@ -84,7 +93,8 @@ function print_resume_page()
                 </div>
             </div>
 			<?php $i++; ?>
-		<?php endif; endforeach; ?>
+			<?php endif; ?>
+		<?php endforeach; ?>
     </div>
 
     <?php if($preview_or_after){ ?>
