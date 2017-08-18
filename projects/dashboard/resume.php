@@ -75,6 +75,7 @@ function print_resume_page()
                         case ATCF_Campaign::$campaign_status_funded:
                             DashboardUtility::get_infobutton("Versez les royalties &agrave; vos investisseurs en fonction de votre chiffre d'affaires et tenez-les inform&eacute;s des avanc&eacute;es de votre projet.",true);
                             break;
+                        case ATCF_Campaign::$campaign_status_closed:
                         case ATCF_Campaign::$campaign_status_archive:
                             DashboardUtility::get_infobutton("Votre contrat est arriv&eacute; &agrave; son terme.",true);
                             break;

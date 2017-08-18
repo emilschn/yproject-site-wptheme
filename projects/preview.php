@@ -50,7 +50,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
             }
 
             //Projets en cours de collecte ou en vote
-            if($campaign_status !== ATCF_Campaign::$campaign_status_funded): ?>
+            if ( $campaign_status == ATCF_Campaign::$campaign_status_vote || $campaign_status == ATCF_Campaign::$campaign_status_collecte ): ?>
 		
         <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
 			<?php

@@ -284,7 +284,7 @@ $lang_list = $campaign->get_lang_list();
 				
 				
 				<?php // cas d'un projet terminé et financé ?>
-				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_funded): ?>
+				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_funded || $campaign_status == ATCF_Campaign::$campaign_status_closed): ?>
 					<?php
 					$nbinvestors = $campaign->backers_count();
 					$invest_amount =$campaign->current_amount();

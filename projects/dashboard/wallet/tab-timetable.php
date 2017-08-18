@@ -8,7 +8,7 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 		
 	<?php else: ?>
 
-		<?php if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded): ?>
+		<?php if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed): ?>
 		
 			<?php if ( $is_admin ): ?>
 		

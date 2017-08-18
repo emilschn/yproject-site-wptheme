@@ -543,6 +543,7 @@ function get_investors_table() {
 	$campaign_id_param = '?campaign_id=' . $campaign->ID;
         
 	$is_campaign_over = ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded 
+		|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed
 		|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive
 		|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing);
         

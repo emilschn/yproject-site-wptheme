@@ -36,6 +36,7 @@ if (!empty($campaign)):
 
 	<?php if ( $status == ATCF_Campaign::$campaign_status_collecte 
 	|| $status == ATCF_Campaign::$campaign_status_funded 
+	|| $status == ATCF_Campaign::$campaign_status_closed 
 	|| $status == ATCF_Campaign::$campaign_status_archive): ?>
 	<h2 class="expandator" data-target="investments"><?php echo ucfirst($campaign->funding_type_vocabulary()['investor_action']);?>s  <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus" /></h2>
 	<div id="extendable-investments" class="expandable default-expanded">
