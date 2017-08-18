@@ -519,7 +519,22 @@ function print_resume_page()
             DashboardUtility::create_save_button("statusmanage-form",$is_admin);
             ?>
         </form>
-    <?php } ?>
+		<?php } ?>
+		
+		
+		<?php if ( $is_admin && $status == ATCF_Campaign::$campaign_status_archive ): ?>
+
+			<form method="POST" action="<?php echo admin_url( 'admin-post.php?action=refund_investors'); ?>" class="align-center admin-theme-block">
+
+				<br />
+				<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+				<button type="submit" class="button"><?php _e( "Rembourser les investisseurs", 'yproject' ); ?></button>
+				<br /><br />
+
+			</form>
+			<br /><br />
+
+		<?php endif; ?>
     </div>
     <?php
 
