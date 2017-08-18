@@ -587,17 +587,28 @@ form.wdg-forms table input[type="text"].reward-text{
 	text-align: center;
 	font-size: 12pt;
 }
+.wdg-lightbox.msg-lightbox .wdg-lightbox-padder {
+	top: 200px;
+}
 .wdg-lightbox.msg-lightbox .wdg-lightbox-padder.valid-msg {
-	top: 280px;
 	background-color: #8BC79C;
 	color: #FFFFFF;
 }
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.valid-msg .wdg-lightbox-button-close {
+.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.error-msg {
+	background-color: #EACDCB;
+	color: #333333;
+}
+.wdg-lightbox.msg-lightbox .wdg-lightbox-padder .wdg-lightbox-button-close {
 	background-color: transparent !important;
 }
+.wdg-lightbox.msg-lightbox .wdg-lightbox-padder .wdg-lightbox-button-close a {
+	font-size: 18pt;
+}
 .wdg-lightbox.msg-lightbox .wdg-lightbox-padder.valid-msg .wdg-lightbox-button-close a {
-	font-size: 24pt;
 	color: #FFFFFF;
+}
+.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.error-msg .wdg-lightbox-button-close a {
+	color: #333333;
 }
 
 /*******************************************************************************

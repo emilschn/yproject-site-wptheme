@@ -31,14 +31,23 @@ WDGFormProjects::form_proceed_roi_transfers();
 </div>
 
 <div>
-<?php if ( $return_roi_payment == 'error_lw_payment' ): ?>
-	<span class="errors">Erreur LWROI001 : Erreur de paiement vers votre porte-monnaie.</span>
+<?php if ( /*$return_roi_payment == 'error_lw_payment'*/true ): ?>
+	<?php
+	$msg_error_payment = __("Erreur LWROI001 : Erreur de paiement vers votre porte-monnaie.", "yproject");
+	echo do_shortcode('[yproject_lightbox id="msg-validation-payment" scrolltop="1" msgtype="error" autoopen="1"]'.$msg_error_payment.'[/yproject_lightbox]');
+	?>
 <?php endif; ?>
 
 <?php if ( $return_lemonway_card == TRUE ): ?>
-	<span class="success">Paiement effectué</span>
+	<?php
+	$msg_validation_payment = __("Paiement effectu&eacute;", "yproject");
+	echo do_shortcode('[yproject_lightbox id="msg-validation-payment" scrolltop="1" msgtype="valid" autoopen="1"]'.$msg_validation_payment.'[/yproject_lightbox]');
+	?>
 <?php elseif ( $return_lemonway_card !== FALSE ): ?>
-	<span class="errors">Il y a eu une erreur au cours de votre paiement.</span>
+	<?php
+	$msg_error_payment = __("Il y a eu une erreur au cours de votre paiement.", "yproject");
+	echo do_shortcode('[yproject_lightbox id="msg-validation-payment" scrolltop="1" msgtype="error" autoopen="1"]'.$msg_error_payment.'[/yproject_lightbox]');
+	?>
 <?php endif; ?>
 </div>
 

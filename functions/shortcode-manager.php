@@ -88,11 +88,19 @@ class YPShortcodeManager {
 			'scrolltop' => '0',
 			'style'		=> '',
 			'class'		=> '',
+			'msgtype'	=> '',
+			'autoopen'	=> '0'
 		), $atts );
 
-		return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].' '.$atts['class'].'>
+		$msgtype_lightbox = '';
+		$classes = ( $atts['autoopen'] == '0' ) ? $atts['class']. ' hidden' : $atts['class'];
+		if ( !empty( $atts['msgtype'] ) ) {
+			$msgtype_lightbox = $atts['msgtype'].'-msg';
+			$classes .= ' msg-lightbox';
+		}
+		return '<div id="wdg-lightbox-'.$atts['id'].'" '.$atts['style'].' class="wdg-lightbox '.$classes.'" data-scrolltop='.$atts['scrolltop'].'>
 			<div class="wdg-lightbox-click-catcher"></div>
-			<div class="wdg-lightbox-padder">
+			<div class="wdg-lightbox-padder '.$msgtype_lightbox.'">
 				<div class="wdg-lightbox-button-close">
 				<a href="#" class="button">X</a>
 				</div>'.do_shortcode($content).'
