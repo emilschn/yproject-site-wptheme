@@ -2,11 +2,16 @@
 locate_template( array("projects/dashboard/dashboardutility.php"), true );
 $WDGUser_current = WDGUser::current();
 $organizations_list = $WDGUser_current->get_organizations_list();
+$first_organization_email = '';
 
 if ($organizations_list) {
 	foreach ($organizations_list as $organization_item) {
 		$organizations_options_id[] = $organization_item->wpref;
 		$organizations_options_names[] = $organization_item->name;
+		if ( empty( $first_organization_email ) ) {
+			$first_organization = new WDGOrganization( $organization_item->wpref );
+			$first_organization_email = $first_organization->get_creator()->user_email;
+		}
 	}
 	array_push($organizations_options_id, "new_orga");
 	array_push($organizations_options_names, "Une nouvelle organisation...");
@@ -26,6 +31,25 @@ if ($organizations_list) {
 
 <form id="newproject_form" class="db-form form-register" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>" <?php if (!is_user_logged_in()){ ?>style="display: none;"<?php } ?>>
     <h2 style="text-align: center;"><?php _e('Lancement de campagne','yproject');?></h2>
+	
+	<?php
+	$errors_submit_new = $_SESSION[ 'newproject-errors-submit' ];
+	$errors_create_orga = $_SESSION[ 'newproject-errors-orga' ];
+	?>
+	<?php if ( !empty( $errors_submit_new ) ): ?>
+		<div class="errors">
+		<?php foreach ( $errors_submit_new as $error ): ?>
+			<?php echo $error; ?>
+		<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
+	<?php if ( !empty( $errors_create_orga ) ): ?>
+		<div class="errors">
+		<?php foreach ( $errors_create_orga as $error ): ?>
+			<?php echo $error; ?>
+		<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
 		
 	<?php
     DashboardUtility::create_field(array(
@@ -40,13 +64,6 @@ if ($organizations_list) {
         "type"		=> "text",
         "label"		=> "Mon nom",
         "value"		=> $WDGUser_current->wp_user->user_lastname,
-    ));
-
-    DashboardUtility::create_field(array(
-        "id"		=> "email",
-        "type"		=> "text",
-        "label"		=> "Mon e-mail",
-        "value"		=> $WDGUser_current->wp_user->get('user_email'),
     ));
 
     DashboardUtility::create_field(array(
@@ -84,6 +101,14 @@ if ($organizations_list) {
 			"value"		=> "",
 		));
 	}
+
+    DashboardUtility::create_field(array(
+        "id"		=> "email-organization",
+        "type"		=> "text",
+        "label"		=> "E-mail de contact",
+        "value"		=> $first_organization_email,
+        "infobubble"=> __( "Cet e-mail ne doit pas &ecirc;tre utilis&eacute; par un compte existant.", 'yproject' )
+    ));
 
     DashboardUtility::create_field(array(
         "id"		=> "project-name",
