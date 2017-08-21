@@ -28,8 +28,8 @@ if ( !empty( $check_return ) ) {
 
 		<?php _e( "Ensuite, envoyez-nous ce ch&egrave;que &agrave; l'adresse suivante :", 'yproject' ); ?><br />
 		WE DO GOOD<br />
-		7 rue Mathurin Brissonneau<br />
-		44100 Nantes<br /><br />
+		8 rue Kervégan<br />
+		44000 Nantes<br /><br />
 
 		<?php _e( "Le ch&egrave;que ne sera encaiss&eacute; que si la campagne r&eacute;ussit.", 'yproject' ); ?><br /><br />
 

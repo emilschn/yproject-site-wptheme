@@ -52,8 +52,8 @@ if (isset($campaign)): ?>
 		<?php echo $organization_obj->get_name(); ?>
 		<?php _e( "&agrave; l'adresse suivante :", 'yproject' ); ?><br />
 		WE DO GOOD<br />
-		7 rue Mathurin Brissonneau<br />
-		44100 Nantes<br /><br />
+		8 rue Kervégan<br />
+		44000 Nantes<br /><br />
 
 		<div class="align-center"><a class="button" href="<?php echo get_permalink( $share_page->ID ); ?>?campaign_id=<?php echo $campaign->ID; ?>"><?php _e("Suivant", 'yproject'); ?></a></div><br /><br />
 
