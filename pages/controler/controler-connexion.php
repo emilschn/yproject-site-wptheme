@@ -9,8 +9,21 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 	public function __construct() {
 		parent::__construct();
 		
-		if ( WDGFormUsers::login_facebook() || is_user_logged_in() ) {
+		if ( is_user_logged_in() ) {
 			wp_redirect( WDGUser::get_login_redirect_page() . '#' );
+			exit();
+		}
+		//Cas particulier cause cache :
+		// Si on se connecte par facebook sur la page d'accueil ou la liste des projets, 
+		// => la redirection directe ne fonctionne pas (rechargement de la page en cache)
+		// Solution temporaire : dans ces cas spécifiques, on redirige vers Mon compte
+		if ( WDGFormUsers::login_facebook() ) {
+			$referer_url = wp_get_referer();
+			if ( $referer_url == home_url( '/' ) || $referer_url == home_url( '/les-projets/' ) ) {
+				wp_redirect( home_url( '/mon-compte#' ) );
+			} else {
+				wp_redirect( WDGUser::get_login_redirect_page() . '#' );
+			}
 			exit();
 		}
 		
