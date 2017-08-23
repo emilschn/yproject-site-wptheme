@@ -176,7 +176,6 @@ if (isset($campaign) && is_user_logged_in()):
 			} else {
 				$wdginvestment->set_status( WDGInvestment::$status_validated );
 			}
-			$wdginvestment->post_token_notification();
 			
 			$payment_data = array( 
 				'price'			=> $amount, 
@@ -202,6 +201,8 @@ if (isset($campaign) && is_user_logged_in()):
 
 			// Vérifie le statut du paiement, envoie un mail de confirmation et crée un contrat si on est ok
 			$payment_status = ypcf_get_updated_payment_status( $payment_id, false, false, $wdginvestment );
+			$wdginvestment->update_contract_url();
+			$wdginvestment->post_token_notification();
 
 			// Affichage en fonction du statut du paiement
 			switch ($payment_status) {
