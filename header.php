@@ -31,9 +31,14 @@
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
-	<head> 
+	<head>
+		<?php if ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' ): ?>
 		<link href="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png" rel="shortcut icon" type="image/vnd.microsoft.icon" />
 		<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="<?php echo $stylesheet_directory_uri; ?>/images/favicon.ico"/><![endif]-->
+		<?php else: ?>
+		<link href="<?php echo $stylesheet_directory_uri; ?>/images/favicon/chart.png" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+		<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="<?php echo $stylesheet_directory_uri; ?>/images/favicon/chart.ico"/><![endif]-->
+		<?php endif; ?>
 		<title><?php echo $page_controler->get_page_title(); ?></title>
 		
 		<?php if ($is_campaign_page): ?>
