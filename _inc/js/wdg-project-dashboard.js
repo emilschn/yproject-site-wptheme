@@ -645,8 +645,7 @@ var WDGProjectDashboard = (function ($) {
 							'email' : $( '#add-check-input-email' ).val()
 						}
 					}).done(function(result){
-						console.log(result);
-                       var jsonResult = JSON.parse(result);
+						var jsonResult = JSON.parse(result);
 						$( '#add-check-search-email' ).removeClass( 'disabled' );
 						$( '#add-check-search-loading' ).hide();
 						switch ( jsonResult.user_type ) {
