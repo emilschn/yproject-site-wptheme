@@ -23,6 +23,7 @@
 	<ul class="nav-menu">
 		<li id="menu-item-projects" class="selected"><a href="#projects" data-tab="projects"><?php _e("Projets et investissements", "yproject"); ?></a></li>
 		<li id="menu-item-organizations"><a href="#organizations" data-tab="organizations"><?php _e("Organisations", "yproject"); ?></a></li>
+		<li id="menu-item-parameters"><a href="#parameters" data-tab="parameters"><?php _e("Param&egrave;tres", "yproject"); ?></a></li>
 	</ul>
 	
 </nav>

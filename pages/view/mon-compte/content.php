@@ -26,6 +26,10 @@
 			<div id="item-body-organizations" class="item-body-tab" style="display:none">
 				<?php locate_template( array( 'members/single/community.php'  ), true ); ?>
 			</div>
+
+			<div id="item-body-parameters" class="item-body-tab" style="display:none">
+				<?php locate_template( array( 'pages/view/mon-compte/content-parameters.php'  ), true ); ?>
+			</div>
 		</div>
 
 	</div>

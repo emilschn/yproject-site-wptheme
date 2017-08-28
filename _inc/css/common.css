@@ -13,7 +13,7 @@ body input, body select {
 	font-family: Trebuchet MS, sans-serif;
 }
 /* Taille font définie pour tous les textes de formulaire */
-body input[type=text], body select {
+body input[type=text], body input[type=email], body select {
 	font-size: 12pt;
 }
 
@@ -104,6 +104,199 @@ button.red {
 	color: #333;
 }
 
+
+/*******************************************************************************
+* FORMULAIRES
+*******************************************************************************/
+.db-form .field {
+    display: block;
+    margin: 10px 0px;
+    padding: 5px;
+}
+
+.db-form .field.admin-theme {
+    border-left: 3px solid darkturquoise;
+    background-color: lightgray;
+    padding: 10px;
+    margin: 0px;
+}
+
+.db-form .field.admin-theme label i.fa-unlock-alt,
+.db-form .admin-theme-block i.fa-unlock-alt {
+    color:darkturquoise;
+}
+
+.db-form .field label {
+    display: inline-block;
+    width: 220px;
+    margin: 3px 10px 3px 0px;
+    font-weight: bold;
+}
+
+.db-form .field label.column-title {
+    text-align: center;
+}
+
+.db-form .field label.long-label {
+    width: auto;
+}
+
+.db-form .field-container select{
+    display: inline-block;
+    width: 220px;
+}
+
+.db-form .field-container select.timepicker {
+    padding: 1px 2px;
+    width: 52px;
+    margin-left: 3px;
+}
+
+.db-form .field-container input,
+.db-form .field-container textarea{
+    display: inline-block;
+    width: 200px;
+}
+.db-form .field-container select {
+	width: 200px;
+	height: 34px;
+	border: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	overflow: hidden;
+	background: url("../../images/common/arrow-filter.png") no-repeat right #FFF;
+	background-size: 34px;
+}
+.db-form .field-container select option {
+	padding: 7px;
+	border-bottom: 1px solid #E1E3E2;
+}
+
+.db-form input:not([type="submit"]),
+.db-form select,
+.db-form textarea{
+    margin: 3px 0px;
+    background: none repeat scroll 0 0 #FFF;
+    border: 1px solid #FFF;
+    padding: 2px 7px;
+}
+
+.db-form textarea{
+    font-family: Arial, sans-serif;
+    font-size: 0.9em;
+    vertical-align: initial;
+    resize: vertical;
+}
+
+.db-form input:not([type='submit']):hover,
+.db-form select:hover,
+.db-form textarea:hover,
+.db-form input:not([type='submit']):focus,
+.db-form select:focus,
+.db-form textarea:focus{
+    background-color: #FCFCFC;
+    border: 1px solid #DDD;
+}
+
+
+
+.db-form input:not([type='submit']).error,
+.db-form select.error{
+    border: 1px solid red;
+    background-color: rgb(255, 200, 200)
+}
+
+.db-form input:not([type='submit']).validation,
+.db-form select.validation{
+    border: 1px solid #6db26c;
+}
+
+.fa.fa-check.validation{
+    color: #6db26c;
+}
+
+.db-form .field-container input[type='checkbox']{
+    vertical-align: top;
+    margin: 5px 10px 0px 5px;
+    width: initial;
+}
+
+
+.db-form .field-container .left-icon{
+    padding-left: 24px;
+    width: 183px;
+}
+
+
+.db-form .field-container .right-icon{
+    padding-right: 24px;
+    width: 188px;
+}
+
+.db-form .field-container .left-icon.datetime,
+.db-form .field-container .right-icon.datetime{
+    width: 78px;
+}
+
+
+.db-form .field-container {
+    white-space: nowrap;
+    vertical-align: top;
+
+}
+
+.db-form .field-container .field-value {
+    position: relative;
+}
+
+.db-form .field-container .field-value .non-editable{
+    white-space: normal;
+    display: inline-block;
+    margin: 3px 0px;
+}
+
+.db-form .field-container .field-value a {
+    display: inline-block;
+    overflow: hidden;
+    max-width: 250px;
+    text-overflow: ellipsis;
+}
+
+
+.db-form .field-container i.fa.left{
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    width: 14px;
+    text-align: center;
+}
+.db-form .field-container i.fa.right{
+    position: absolute;
+    top: 1px;
+    right: 5px;
+    width: 14px;
+    text-align: center;
+}
+
+.db-form .button.admin-theme{
+    background-color: darkturquoise;
+    border-color:darkturquoise;
+}
+
+.db-form .button[disabled] {
+    opacity: 0.5;
+    cursor: initial;
+}
+
+.db-form .feedback_save{
+    text-align: center;
+    font-style: italic;
+    min-height: 25px;
+}
+.db-form .feedback_save span{
+    display:none;
+}
+
 /*******************************************************************************
 * LIGHTBOX - DESIGN GENERAL
 *******************************************************************************/
@@ -132,7 +325,9 @@ button.red {
 .wdg-lightbox-ref .db-form .field-container.field-type-check {
 	display: inline-block;
 }
-.wdg-lightbox-ref .db-form .field-container input[type=text], .wdg-lightbox-ref .db-form .field-container input[type=password] {
+.wdg-lightbox-ref .db-form .field-container input[type=text],
+.wdg-lightbox-ref .db-form .field-container input[type=email],
+.wdg-lightbox-ref .db-form .field-container input[type=password] {
 	width: 260px;
 	height: 30px;
 	border: none;
