@@ -328,7 +328,7 @@ function print_resume_page()
                     </li>
 					
 					
-                <?php elseif ($status == ATCF_Campaign::$campaign_status_validated): ?>
+                <?php elseif ($status == ATCF_Campaign::$campaign_status_validated && !$campaign->skip_vote()): ?>
                     <p id="desc-preview">
 						<?php _e("Il est temps maintenant de pr&eacute;parer la publication de votre projet.", 'yproject'); ?><br />
 						<?php _e("Vous devrez r&eacute;unir au moins :", 'yproject'); ?><br />
@@ -406,7 +406,7 @@ function print_resume_page()
 					</li>
 
 
-                <?php elseif ($status == ATCF_Campaign::$campaign_status_vote): ?>
+                <?php elseif ( $status == ATCF_Campaign::$campaign_status_vote || ( $status == ATCF_Campaign::$campaign_status_validated && $campaign->skip_vote() ) ): ?>
                     <p id="desc-preview">
 						<?php _e("Il est temps maintenant de passer aux choses s&eacute;rieuses.", 'yproject'); ?>
 						<?php _e("&Ecirc;tes-vous pr&ecirc;t &agrave; lancer votre lev&eacute;e de fonds ?", 'yproject'); ?>
@@ -471,7 +471,7 @@ function print_resume_page()
 						<?php endif; ?>
 					<?php endif; ?>
 							
-				<?php elseif ($status == ATCF_Campaign::$campaign_status_validated): ?>
+				<?php elseif ( $status == ATCF_Campaign::$campaign_status_validated && !$campaign->skip_vote() ): ?>
 					<?php if ( $WDGUser_current->is_admin() ): ?>
 					<?php DashboardUtility::get_admin_infobutton( TRUE ); ?>
 					<button type="submit" name="validation-next-save" value="1" id="submit-go-next-status-admin" class="button admin-theme">Enregistrer le statut</button><br /><br />
@@ -479,7 +479,7 @@ function print_resume_page()
 					
                     <input type="submit" value="Publier mon projet en vote !" class="button" id="submit-go-next-status">
 					
-                <?php elseif ($status == ATCF_Campaign::$campaign_status_vote): ?>
+                <?php elseif ( $status == ATCF_Campaign::$campaign_status_vote || ( $status == ATCF_Campaign::$campaign_status_validated && $campaign->skip_vote() ) ): ?>
                     <input type="submit" value="Lancer ma lev&eacute;e de fonds !" class="button" id="submit-go-next-status">
                 <?php endif; ?>
             </div>

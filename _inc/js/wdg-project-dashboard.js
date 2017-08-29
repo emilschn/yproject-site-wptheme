@@ -631,6 +631,49 @@ var WDGProjectDashboard = (function ($) {
                     $("#direct-mail .step-confirm").slideUp();
                     $("#direct-mail .step-write").slideDown();
                 });
+				
+				$( '#add-check-search-email' ).click( function( e ) {
+					e.preventDefault();
+					$( '#add-check-search-email' ).addClass( 'disabled' );
+					$( '.add-check-feedback' ).hide();
+					$( '#add-check-search-loading' ).show();
+					$.ajax({
+						'type' : "POST",
+						'url' : ajax_object.ajax_url,
+						'data': {
+							'action':'search_user_by_email',
+							'email' : $( '#add-check-input-email' ).val()
+						}
+					}).done(function(result){
+						var jsonResult = JSON.parse(result);
+						$( '#add-check-search-email' ).removeClass( 'disabled' );
+						$( '#add-check-search-loading' ).hide();
+						switch ( jsonResult.user_type ) {
+							case 'user': $("#add-check-feedback-found-user").show(); break;
+							case 'orga': $("#add-check-feedback-found-orga").show(); break;
+							default: $("#add-check-feedback-not-found").show(); break;
+						}
+						if ( jsonResult.user_type == 'user' || jsonResult.user_type == 'orga' ) {
+							$( '#wdg-lightbox-add-check #add-check-input-username' ).val( jsonResult.user_data.user.login );
+							$( '#wdg-lightbox-add-check #add-check-input-gender' ).val( jsonResult.user_data.user.gender );
+							$( '#wdg-lightbox-add-check #add-check-input-firstname' ).val( jsonResult.user_data.user.firstname );
+							$( '#wdg-lightbox-add-check #add-check-input-lastname' ).val( jsonResult.user_data.user.lastname );
+							$( '#wdg-lightbox-add-check #add-check-input-birthday-day' ).val( jsonResult.user_data.user.birthday_day );
+							$( '#wdg-lightbox-add-check #add-check-input-birthday-month' ).val( jsonResult.user_data.user.birthday_month );
+							$( '#wdg-lightbox-add-check #add-check-input-birthday-year' ).val( jsonResult.user_data.user.birthday_year );
+							$( '#wdg-lightbox-add-check #add-check-input-birthplace' ).val( jsonResult.user_data.user.birthplace );
+							$( '#wdg-lightbox-add-check #add-check-input-nationality' ).val( jsonResult.user_data.user.nationality );
+							$( '#wdg-lightbox-add-check #add-check-input-address' ).val( jsonResult.user_data.user.address );
+							$( '#wdg-lightbox-add-check #add-check-input-postal-code' ).val( jsonResult.user_data.user.postal_code );
+							$( '#wdg-lightbox-add-check #add-check-input-city' ).val( jsonResult.user_data.user.city );
+							$( '#wdg-lightbox-add-check #add-check-input-country' ).val( jsonResult.user_data.user.country );
+						}
+						if ( jsonResult.user_type == 'orga' ) {
+							$( '#wdg-lightbox-add-check #add-check-input-orga-email' ).val( jsonResult.user_data.orga.email );
+							$( '#wdg-lightbox-add-check #add-check-input-orga-name' ).val( jsonResult.user_data.orga.name );
+						}
+					});
+				} );
             }
 
 
