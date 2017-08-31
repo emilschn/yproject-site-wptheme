@@ -10,6 +10,7 @@ class YPShortcodeManager {
 		'yproject_crowdfunding_invest_return',
 		'yproject_crowdfunding_invest_share',
 		'yproject_lightbox_button',
+		'yproject_lightbox_cornered',
 		'yproject_lightbox',
 		'yproject_widelightbox',
 		'yproject_msglightbox',
@@ -80,6 +81,44 @@ class YPShortcodeManager {
 			'style' => ''
 		), $atts );
 		return '<a href="#'.$atts['id'].'" class="wdg-button-lightbox-open '.$atts['class'].'" style="'.$atts['style'].'" data-lightbox="'.$atts['id'].'">'.$atts['label'].'</a>';
+	}
+	
+	function yproject_lightbox_cornered( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'id'		=> 'lightbox',
+			'title'		=> '',
+			'scrolltop' => '0',
+			'style'		=> '',
+			'class'		=> '',
+			'msgtype'	=> '',
+			'autoopen'	=> '0'
+		), $atts );
+		
+		$msgtype_lightbox = '';
+		$classes = ( $atts['autoopen'] == '0' ) ? $atts['class']. ' hidden' : $atts['class'];
+		if ( !empty( $atts['msgtype'] ) ) {
+			$msgtype_lightbox = $atts['msgtype'].'-msg';
+			$classes .= ' msg-lightbox';
+		}
+		
+		ob_start();
+		?>
+		<div id="wdg-lightbox-<?php echo $atts[ 'id' ]; ?>" <?php echo $atts[ 'style' ]; ?> class="wdg-lightbox cornered <?php echo $classes; ?>" data-scrolltop=<?php echo $atts[ 'scrolltop' ]; ?>>
+			<div class="wdg-lightbox-click-catcher"></div>
+			<div class="wdg-lightbox-corner">
+				<div class="wdg-lightbox-button-close">
+					<a href="#" class="button">X</a>
+				</div>
+				<h2><?php echo $atts[ 'title' ]; ?></h2>
+			</div>
+			<div class="wdg-lightbox-padder <?php echo $msgtype_lightbox; ?>">
+				<?php echo do_shortcode( $content ); ?>
+			</div>
+		</div>
+		<?php
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		return $buffer;
 	}
 
 	function yproject_lightbox($atts, $content = '') {

@@ -222,11 +222,6 @@
 		z-index: 20;
 	}
 	#invest-button .description-discover { margin-top: 22px !important; }
-	#vote-form.collapsed {
-		z-index: 10;
-		top: 325px !important;
-		width: 100%;
-	}
 	ul.secondary-menu {
 		list-style: none;
 		width: 200px;

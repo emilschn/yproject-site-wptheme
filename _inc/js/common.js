@@ -756,12 +756,10 @@ WDGProjectPageFunctions=(function($) {
 			$("#btn-validate_project-true").click(function(){
 				$("#validate_project-true").show();
 				$("#validate_project-false").hide();
-				$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 			});
 			$("#btn-validate_project-false").click(function(){
 				$("#validate_project-false").show();
 				$("#validate_project-true").hide();
-				$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 			});
 		},
 
@@ -816,32 +814,6 @@ WDGProjectPageFunctions=(function($) {
 			});
 			$("#dialog").dialog("open");
 		},
-
-		print_vote_form:function(){
-			if ($("#vote-form").hasClass("collapsed")) {
-				$("#vote-form").removeClass("collapsed");
-				$(".description-discover").removeClass('clicked');
-				if ($(window).width() > 480) {
-					$("#vote-form").animate({
-						top: "-350px"
-					}, 500 );
-				}
-
-			} else {
-				if ($(window).width() > 480) {
-					$('html, body').animate({scrollTop: $("#invest-button").offset().top - WDGProjectPageFunctions.navigationHeight}, "fast");
-				} else {
-					$('html, body').animate({scrollTop: $("#projects-stats-content").offset().top}, "fast");
-				}
-				$("#vote-form").animate({
-					top: "370px"
-				}, 500 );
-				$(".description-discover").addClass('clicked');
-				$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
-				$("#vote-form").addClass("collapsed");
-			}
-		},
-
 
 
 		//Initialisation du comportement des différentes parties

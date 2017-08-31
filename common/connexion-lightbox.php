@@ -7,7 +7,7 @@
 	</div>
 	<?php endif; ?>
     
-        <form method="post" name="login-form" class="sidebar-login-form db-form form-register">
+        <form method="post" name="login-form" class="sidebar-login-form db-form v3 form-register">
 			<h2><?php _e('Inscription et connexion', 'yproject'); ?></h2>
 			
 			<div class="field">
