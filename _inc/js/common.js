@@ -1,7 +1,7 @@
 jQuery(document).ready( function($) {
 	YPUIFunctions.initUI();
+	WDGFormsFunctions.init();
 });
-
 
 YPUIFunctions = (function($) {
 	return {
@@ -734,6 +734,34 @@ YPUIFunctions = (function($) {
 		}
 	};
 
+})(jQuery);
+
+
+var WDGFormsFunctions = (function($) {
+	return {
+
+		init: function() {
+			WDGFormsFunctions.initRateCheckboxes();
+		},
+		
+		initRateCheckboxes: function() {
+			if ( $( 'input[type=checkbox].rate' ).length > 0 ) {
+				$( 'input[type=checkbox].rate' ).click( function() {
+					var sRateType = $( this ).data( 'rate' );
+					$( 'input[type=checkbox].' + sRateType ).attr( 'checked', false );
+					var thisVal = $( this ).val();
+					WDGFormsFunctions.setRateCheckboxes( sRateType, thisVal );
+				} );
+			}
+		},
+		
+		setRateCheckboxes: function( sRateType, nRate ) {
+			for ( var i = 1; i <= nRate; i++ ) {
+				$( 'input[type=checkbox]#' + sRateType + '-' + i )[0].checked = true;
+			}
+		}
+		
+	};
 })(jQuery);
 
 /* Projet */

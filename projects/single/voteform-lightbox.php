@@ -6,6 +6,8 @@ $fields_impact = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_impacts );
 $fields_validate = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_validate );
 $fields_risk = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_risk );
 $fields_info = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_info );
+$field_invest = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_invest );
+$field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 ?>
 
 <?php ob_start(); ?>
@@ -40,6 +42,21 @@ $fields_info = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_info );
 			<?php endforeach; ?>
 			
 			<?php foreach ( $fields_info as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+			
+		</div>
+		
+		<div id="vote-form-slide3" class="vote-form-slide align-left hidden">
+			
+			<?php foreach ( $field_invest as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+			
+			<h4><?php _e( "Conseils", 'yproject' ); ?></h4>
+			<?php foreach ( $field_advice as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 			<?php endforeach; ?>
