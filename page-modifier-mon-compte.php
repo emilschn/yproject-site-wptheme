@@ -154,7 +154,6 @@ $WDGUser_current = WDGUser::current();
 					<label for="update_birthplace" class="standard-label"><?php _e( 'Ville de naissance', 'yproject' ); ?> <?php if ($is_campaign_investment_type){ ?>*<?php } ?></label>
 					<input type="text" name="update_birthplace" id="update_birthplace" value="<?php echo $current_user->get('user_birthplace'); ?>" /><br />
 
-					<?php require_once("country_list.php"); ?>
 					<label for="update_nationality" class="standard-label"><?php _e( 'Nationalit&eacute;', 'yproject' ); ?> *</label>
 					<select name="update_nationality" id="update_nationality">
 						<option value=""></option>

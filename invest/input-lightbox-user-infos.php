@@ -1,5 +1,4 @@
 <?php
-locate_template( 'country_list.php', true );
 global $country_list;
 $WDGUser_current = WDGUser::current();
 ob_start();

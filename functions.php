@@ -535,7 +535,6 @@ function get_investors_table() {
 	$disable_logs = TRUE;
     
 	$current_wdg_user = WDGUser::current();
-	require_once("country_list.php");
 	global $country_list;
 	$investments_list = (json_decode($_POST['data'],true));
 	$campaign = atcf_get_campaign($_POST['id_campaign']);
