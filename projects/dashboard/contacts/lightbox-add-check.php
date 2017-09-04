@@ -82,7 +82,7 @@
 			<input type="text" id="add-check-input-birthplace" name="birthplace" />
 		</div>
 
-		<?php locate_template( 'country_list.php', true ); global $country_list; ?>
+		<?php global $country_list; ?>
 		<div class="field">
 			<label for="nationality"><?php _e( 'Nationalit&eacute; :', 'yproject' ); ?></label>
 			<select id="add-check-input-nationality" name="nationality">

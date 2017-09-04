@@ -78,8 +78,7 @@ get_header();
 
 						<label for="org_nationality"><?php _e('Pays', 'yproject'); ?> *</label>
 						<select name="org_nationality" id="org_nationality">
-							<?php 
-							require_once("country_list.php");
+							<?php
 							global $country_list;
 							$selected_country = filter_input(INPUT_POST, 'org_nationality');
 							foreach ($country_list as $country_code => $country_name): ?>
