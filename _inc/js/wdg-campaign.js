@@ -130,13 +130,17 @@ var WDGProjectVote = (function($) {
 		maxSlide: 3,
 		init: function() {
 			if ( $( 'div#vote-form' ).length > 0 ) {
-				$( 'div#vote-form div#vote-form-buttons button.left' ).click( function( e ) {
+				$( 'div#vote-form div#vote-form-buttons button.previous' ).click( function( e ) {
 					e.preventDefault();
 					WDGProjectVote.slidePrevious();
 				} );
-				$( 'div#vote-form div#vote-form-buttons button.right' ).click( function( e ) {
+				$( 'div#vote-form div#vote-form-buttons button.next' ).click( function( e ) {
 					e.preventDefault();
 					WDGProjectVote.slideNext();
+				} );
+				$( 'div#vote-form div#vote-form-buttons button.save' ).click( function( e ) {
+					e.preventDefault();
+					WDGProjectVote.saveVote();
 				} );
 			}
 		},
@@ -154,12 +158,34 @@ var WDGProjectVote = (function($) {
 		refresh: function() {
 			$( 'div.vote-form-slide' ).hide();
 			$( 'div#vote-form-slide' + WDGProjectVote.currentSlide ).show();
-			$( 'div#vote-form div#vote-form-buttons button' ).show();
-			if ( WDGProjectVote.currentSlide === WDGProjectVote.minSlide ) {
-				$( 'div#vote-form div#vote-form-buttons button.left' ).hide();
+			
+			$( 'div#vote-form div#vote-form-buttons button' ).hide();
+			if ( WDGProjectVote.currentSlide > WDGProjectVote.minSlide ) {
+				$( 'div#vote-form div#vote-form-buttons button.previous' ).show();
+			}
+			if ( WDGProjectVote.currentSlide < WDGProjectVote.maxSlide ) {
+				$( 'div#vote-form div#vote-form-buttons button.next' ).show();
 			}
 			if ( WDGProjectVote.currentSlide === WDGProjectVote.maxSlide ) {
-				$( 'div#vote-form div#vote-form-buttons button.right' ).hide();
+				$( 'div#vote-form div#vote-form-buttons button.save' ).show();
+			}
+		},
+		
+		saveVote: function() {
+			$( '#vote-form-buttons .loading' ).show();
+			$( 'div#vote-form div#vote-form-buttons button' ).hide();
+			WDGFormsFunctions.postForm( 'div#vote-form', WDGProjectVote.saveVoteCallback );
+		},
+		
+		saveVoteCallback: function( result ) {
+			$( '#vote-form-buttons .loading' ).hide();
+			WDGProjectVote.refresh();
+			var jsonResult = JSON.parse(result);
+			
+			if ( jsonResult.errors.length > 0 ) {
+				WDGProjectVote.currentSlide = jsonResult.gotoslide;
+				WDGProjectVote.refresh();
+				$( '#wdg-lightbox-vote .wdg-lightbox-padder' ).animate( { scrollTop: 0 }, "slow" );
 			}
 		}
 	};

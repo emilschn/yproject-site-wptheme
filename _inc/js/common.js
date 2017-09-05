@@ -759,6 +759,43 @@ var WDGFormsFunctions = (function($) {
 			for ( var i = 1; i <= nRate; i++ ) {
 				$( 'input[type=checkbox]#' + sRateType + '-' + i )[0].checked = true;
 			}
+			$( 'span#' + sRateType + '-description' ).text( $( 'input[type=checkbox]#' + sRateType + '-' + nRate ).data( 'description' ) );
+		},
+		
+		postForm: function( formid, callback ) {
+			$( formid+ ' div.field' ).removeClass( 'error' );
+			var sentData = {};
+			$( formid+' input, '+formid+' select, '+formid+' textarea' ).each( function() {
+				if ( $( this ).attr( 'type' ) === 'checkbox' || $( this ).attr( 'type' ) === 'radio' ) {
+					if ( $( this ).is(':checked') ) {
+						sentData[ $( this ).attr( 'name' ) ] = $( this ).val();
+					}
+				} else {
+					sentData[ $( this ).attr( 'name' ) ] = $( this ).val();
+				}
+			} );
+			
+			$.ajax({
+				'type': "POST",
+				'url': ajax_object.ajax_url,
+				'data': sentData
+				
+			}).done(function (result) {
+				
+				var jsonResult = JSON.parse(result);
+				var nErrors = jsonResult.errors.length;
+				for ( var i = 0; i < nErrors; i++ ) {
+					var errorItem = jsonResult.errors[ i ];
+					if ( errorItem.element == 'general' ) {
+						$( formid+' span.form-error-general' ).html( errorItem.text );
+					} else {
+						$( formid+' div#field-'+errorItem.element ).addClass( 'error' );
+						$( formid+' div#field-'+errorItem.element+' span.field-error' ).html( errorItem.text );
+					}
+				}
+				callback( result );
+				
+			});
 		}
 		
 	};

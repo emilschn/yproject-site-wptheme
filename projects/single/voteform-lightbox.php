@@ -1,7 +1,8 @@
-<?php global $vote_errors, $stylesheet_directory_uri; ?>
+<?php global $vote_errors, $stylesheet_directory_uri, $post; ?>
 
 <?php
-$WDGVoteForm = new WDG_Form_Vote();
+$WDGVoteForm = new WDG_Form_Vote( $post->ID );
+$fields_hidden = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_hidden );
 $fields_impact = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_impacts );
 $fields_validate = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_validate );
 $fields_risk = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_risk );
@@ -13,7 +14,14 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 <?php ob_start(); ?>
 <div id="vote-form" class="wdg-lightbox-ref">
 	
-	<form method="post" class="sidebar-login-form db-form v3 full form-register">
+	<form method="post" class="sidebar-login-form db-form v3 full form-register ajax-form">
+		
+		<?php foreach ( $fields_hidden as $field ): ?>
+			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+		<?php endforeach; ?>
+		
+		<span class="form-error-general"></span>
 		
 		<div id="vote-form-slide1" class="vote-form-slide align-left">
 			
@@ -66,9 +74,15 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 		
 		<div id="vote-form-buttons">
 			
-			<button class="button half left transparent hidden"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
+			<button class="button previous half left transparent hidden"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
 			
-			<button class="button half right transparent"><?php _e( "Suivant", 'yproject' ); ?></button>
+			<button class="button next half right transparent"><?php _e( "Suivant", 'yproject' ); ?></button>
+			
+			<button class="button save half right transparent hidden"><?php _e( "Suivant", 'yproject' ); ?></button>
+			
+			<div class="loading align-center hidden">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
+			</div>
 			
 		</div>
 		
@@ -79,4 +93,5 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 <?php
 $lightbox_content = ob_get_contents();
 ob_end_clean();
-echo do_shortcode('[yproject_lightbox_cornered id="vote" title="'.__( "Voter", 'yproject' ).'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
+$campaign_title = $post->post_title;
+echo do_shortcode('[yproject_lightbox_cornered id="vote" title="'.__( "Vote sur ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');

@@ -587,6 +587,9 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	text-transform: uppercase;
 	text-align: center;
 	color: #00879b;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .wdg-lightbox .wdg-lightbox-padder h3 {
 	text-transform: uppercase;
@@ -748,11 +751,16 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 .db-form.v3 {
 	text-align: center;
 }
-
+.db-form.v3 .form-error-general {
+	color: #FF0000;
+}
 .db-form.v3 .field {
     display: block;
     margin: 0px;
     padding: 0px 0px 24px;
+}
+.db-form.v3 .field-hidden {
+	display: none;
 }
 
 .db-form.v3 .field label {
@@ -771,6 +779,15 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 .db-form.v3.full .field label {
 	display: block;
 	width: 100%;
+}
+
+.db-form.v3 .field span.field-error {
+	display: none;
+	color: #FF0000;
+	padding-bottom: 8px;
+}
+.db-form.v3 .field.error span.field-error {
+	display: inline-block;
 }
 
 .db-form.v3 .field span.complement{
@@ -792,10 +809,10 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	border: none;
 }
 .db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password] {
-	width: 100%;
+	width: calc( 100% - 16px );
 	height: 50px;
 	margin: 0px;
-	padding: 3px 0px;
+	padding: 3px 8px;
 }
 .db-form.v3 .field-container select {
 	width: 275px;
@@ -816,8 +833,11 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	font-family: Trebuchet MS, sans-serif;
 }
 .db-form.v3.full .field-container textarea {
-	width: 100%;
+	width: calc( 100% - 16px );
 	height: 150px;
+	margin: 0px;
+	padding: 8px 8px;
+	font-size: 12pt;
 	font-family: Trebuchet MS, sans-serif;
 }
 .db-form.v3 button {
@@ -877,26 +897,45 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	background: #333;
 	border: 4px solid #FFF;
 }
-.db-form.v3 input[type=checkbox].rate-ecology:checked:after  {
+.db-form.v3 input[type=checkbox].rate-ecology:checked:after {
 	width: 24px;
 	height: 24px;
 	border: 0px;
 	background: url(../../images/common/impact-env-small.png);
 	background-size: 100%;
 }
-.db-form.v3 input[type=checkbox].rate-economy:checked:after  {
+.db-form.v3 input[type=checkbox].rate-economy:checked:after {
 	width: 24px;
 	height: 24px;
 	border: 0px;
 	background: url(../../images/common/impact-eco-small.png);
 	background-size: 100%;
 }
-.db-form.v3 input[type=checkbox].rate-social:checked:after  {
+.db-form.v3 input[type=checkbox].rate-social:checked:after {
 	width: 24px;
 	height: 24px;
 	border: 0px;
 	background: url(../../images/common/impact-social-small.png);
 	background-size: 100%;
+}
+
+
+.db-form.v3 span.field-money {
+	display: inline-block;
+	margin-left: -30px;
+}
+.db-form.v3 span.rate-description {
+	display: inline-block;
+	margin-top: 16px;
+}
+.db-form.v3 span.rate-description.rate-ecology {
+	color: #8BC79C;
+}
+.db-form.v3 span.rate-description.rate-economy {
+	color: #00879B;
+}
+.db-form.v3 span.rate-description.rate-social {
+	color: #F1A074;
 }
 
 /* Classes à ajouter dans le back-office WordPress */
