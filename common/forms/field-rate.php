@@ -1,5 +1,5 @@
 <?php global $wdg_current_field; ?>
-<?php $current_rate = 3; ?>
+<?php $current_rate = !empty( $wdg_current_field[ 'value' ] ) ? $wdg_current_field[ 'value' ] : 3; ?>
 <?php $rate = 0; ?>
 <?php foreach ( $wdg_current_field[ 'options' ] as $option_label ): $rate++; ?>
 	<?php $str_checked = ( $rate <= $current_rate ) ? 'checked' : ''; ?>

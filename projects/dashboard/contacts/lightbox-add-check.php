@@ -1,4 +1,4 @@
-<?php global $is_admin, $stylesheet_directory_uri; ?>
+<?php global $is_admin, $stylesheet_directory_uri, $campaign, $campaign_id; ?>
 
 <?php if ( $is_admin ): ?>
 
@@ -22,7 +22,7 @@
 <div class="tab-content align-left">
 	<h3><?php _e('Ajouter un paiement par ch&egrave;que', 'yproject'); ?></h3>
 
-	<form method="POST" action="<?php echo admin_url( 'admin-post.php?action=add_new_check'); ?>">
+	<form method="POST" action="<?php echo home_url( '/tableau-de-bord?campaign_id=' .$campaign_id. '#contacts' ); ?>">
 		
 		<div class="field">
 			<label for="add-check-input-email"><?php _e('E-mail :', 'yproject'); ?>*</label>

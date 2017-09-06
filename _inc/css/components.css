@@ -722,14 +722,23 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	font-size: 12pt;
 }
 .wdg-lightbox.msg-lightbox .wdg-lightbox-padder {
-	top: 200px;
+	position: relative;
+	overflow-y: hidden;
+	max-width: 600px;
+    height: 0px;
+	margin: 200px auto 0px;
+	padding: 0px;
+    padding: 20px 60px;
+    border-left: 60px solid transparent;
+	z-index: 4002;
+	background-color: transparent;
 }
 .wdg-lightbox.msg-lightbox .wdg-lightbox-padder.valid-msg {
-	background-color: #8BC79C;
+    border-bottom: 60px solid #8BC79C;
 	color: #FFFFFF;
 }
 .wdg-lightbox.msg-lightbox .wdg-lightbox-padder.error-msg {
-	background-color: #EACDCB;
+    border-bottom: 60px solid #EACDCB;
 	color: #333333;
 }
 .wdg-lightbox.msg-lightbox .wdg-lightbox-padder .wdg-lightbox-button-close {
@@ -744,10 +753,17 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 .wdg-lightbox.msg-lightbox .wdg-lightbox-padder.error-msg .wdg-lightbox-button-close a {
 	color: #333333;
 }
+.wdg-lightbox.msg-lightbox .wdg-lightbox-button-close {
+	margin-top: -15px;
+}
 
 /*******************************************************************************
 * FORMULAIRES V3
 *******************************************************************************/
+body input[type=text], body input[type=email], body select {
+	font-size: 12pt;
+}
+
 .db-form.v3 {
 	text-align: center;
 }
@@ -803,26 +819,27 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 .db-form.v3 .field-container.field-type-check {
 	display: inline-block;
 }
-.db-form.v3 .field-container input[type=text], .db-form.v3 .field-container input[type=password] {
+.db-form.v3 .field-container input[type=text], .db-form.v3 .field-container input[type=password], .db-form.v3 .field-container input[type=email] {
 	width: 260px;
 	height: 30px;
 	border: none;
 }
-.db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password] {
+.db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=email] {
 	width: calc( 100% - 16px );
 	height: 50px;
 	margin: 0px;
 	padding: 3px 8px;
 }
+.db-form.v3 .field-container input[type=text].adddatepicker {
+	cursor: pointer;
+}
 .db-form.v3 .field-container select {
-	width: 275px;
-	height: 34px;
+	width: 100%;
+	height: 50px;
+	margin: 0px;
+	padding: 3px 8px;
 	border: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	overflow: hidden;
-	background: url("../../images/common/arrow-filter.png") no-repeat right #FFF;
-	background-size: 34px;
+	cursor: pointer;
 }
 .db-form.v3 .field-container select option {
 	padding: 7px;

@@ -270,4 +270,8 @@
 		<?php $_SESSION['subscribe_newsletter_sendinblue'] = false; ?>
 		<?php endif; ?>
 		
+		<?php if ( $page_controler->get_show_user_details_confirmation() ): ?>
+			<?php locate_template( array( 'common/user-details-lightbox.php' ), true ); ?>
+		<?php endif; ?>
+		
 		<div id="container"> 

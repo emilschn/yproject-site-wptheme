@@ -1,4 +1,4 @@
-<?php global $vote_errors, $stylesheet_directory_uri, $post; ?>
+<?php global $stylesheet_directory_uri, $post; ?>
 
 <?php
 $WDGVoteForm = new WDG_Form_Vote( $post->ID );

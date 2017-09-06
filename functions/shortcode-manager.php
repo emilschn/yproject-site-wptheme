@@ -163,7 +163,6 @@ class YPShortcodeManager {
 	}
 
 	//Shortcode ligthbox messages info/validé/erreur
-	//id: valid / error / info
 	//type: valid / error / info
 	function yproject_msglightbox($atts, $content = '') {
 		$atts = shortcode_atts( array(

@@ -12,10 +12,6 @@ body a {
 body input, body select {
 	font-family: Trebuchet MS, sans-serif;
 }
-/* Taille font définie pour tous les textes de formulaire */
-body input[type=text], body select {
-	font-size: 12pt;
-}
 
 /*******************************************************************************
 * COMMON

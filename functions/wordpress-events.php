@@ -154,6 +154,7 @@ class WDG_WordPress_Events {
 		}
 		wp_enqueue_script('jquery-ui-dialog');
 		wp_enqueue_script('jquery-ui-datepicker');
+		wp_enqueue_script('wdg-project-dashboard-i18n-fr', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/i18n/datepicker-fr.js', array('jquery', 'jquery-ui-datepicker'), $current_version);
 
 		wp_enqueue_style('jquery-ui-wdg',dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery-ui-wdg.css', null, false, 'all');
 
@@ -170,7 +171,6 @@ class WDG_WordPress_Events {
 		//Fichiers du tableau de bord (CSS, Fonctions Ajax et scripts de Datatable)
 		if ($is_dashboard_page && $can_modify) {
 			wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery'), $current_version);
-			wp_enqueue_script('wdg-project-dashboard-i18n-fr', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/i18n/datepicker-fr.js', array('jquery', 'jquery-ui-datepicker'), $current_version);
 			wp_enqueue_style( 'dashboard-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dashboard.css', null, $current_version, 'all');
 
 

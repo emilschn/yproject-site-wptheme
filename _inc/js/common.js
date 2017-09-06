@@ -741,7 +741,19 @@ var WDGFormsFunctions = (function($) {
 	return {
 
 		init: function() {
+			WDGFormsFunctions.initSaveButton();
 			WDGFormsFunctions.initRateCheckboxes();
+			WDGFormsFunctions.initDatePickers();
+		},
+		
+		initSaveButton: function() {
+			$( '.wdg-lightbox-ref .ajax-form button.save' ).click( function( e ) {
+				e.preventDefault();
+				$( this ).siblings( '.loading' ).show();
+				$( this ).hide();
+				var formId = $( this ).parent().parent().parent().attr( 'id' );
+				WDGFormsFunctions.postForm( 'div#' + formId, WDGFormsFunctions.postFormCallback );
+			} );
 		},
 		
 		initRateCheckboxes: function() {
@@ -753,6 +765,15 @@ var WDGFormsFunctions = (function($) {
 					WDGFormsFunctions.setRateCheckboxes( sRateType, thisVal );
 				} );
 			}
+		},
+		
+		initDatePickers: function() {
+            $( 'input[type=text].adddatepicker' ).datepicker({
+                dateFormat: "dd/mm/yy",
+                regional: "fr",
+                changeMonth: true,
+                changeYear: true
+            });
 		},
 		
 		setRateCheckboxes: function( sRateType, nRate ) {
@@ -783,19 +804,35 @@ var WDGFormsFunctions = (function($) {
 			}).done(function (result) {
 				
 				var jsonResult = JSON.parse(result);
-				var nErrors = jsonResult.errors.length;
-				for ( var i = 0; i < nErrors; i++ ) {
-					var errorItem = jsonResult.errors[ i ];
-					if ( errorItem.element == 'general' ) {
-						$( formid+' span.form-error-general' ).html( errorItem.text );
-					} else {
-						$( formid+' div#field-'+errorItem.element ).addClass( 'error' );
-						$( formid+' div#field-'+errorItem.element+' span.field-error' ).html( errorItem.text );
+				if ( jsonResult.errors != undefined ) {
+					var nErrors = jsonResult.errors.length;
+					for ( var i = 0; i < nErrors; i++ ) {
+						var errorItem = jsonResult.errors[ i ];
+						if ( errorItem.element == 'general' ) {
+							$( formid+' span.form-error-general' ).html( errorItem.text );
+						} else {
+							$( formid+' div#field-'+errorItem.element ).addClass( 'error' );
+							$( formid+' div#field-'+errorItem.element+' span.field-error' ).html( errorItem.text );
+						}
 					}
 				}
-				callback( result );
+				callback( result, formid );
 				
 			});
+		},
+		
+		postFormCallback: function( result, formid ) {
+			$( formid+' .loading' ).hide();
+			$( formid+' button.save' ).show();
+			var jsonResult = JSON.parse(result);
+			if ( jsonResult.errors === undefined || jsonResult.errors.length === 0 ) {
+				if ( $( formid+' button.save' ).data( 'close' ) !== undefined && $( formid+' button.save' ).data( 'close' ) !== '' ) {
+					$( '#wdg-lightbox-' + $( formid+' button.save' ).data( 'close' ) ).hide();
+				}
+				if ( $( formid+' button.save' ).data( 'message' ) !== undefined && $( formid+' button.save' ).data( 'message' ) !== '' ) {
+					$( '#wdg-lightbox-' + $( formid+' button.save' ).data( 'message' ) ).show();
+				}
+			}
 		}
 		
 	};
