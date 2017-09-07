@@ -125,7 +125,7 @@ var WDGProjectViewer = (function($) {
 
 var WDGProjectVote = (function($) {
 	return {
-		currentSlide: 1,
+		currentSlide: 0,
 		minSlide: 1,
 		maxSlide: 3,
 		init: function() {
@@ -137,10 +137,6 @@ var WDGProjectVote = (function($) {
 				$( 'div#vote-form div#vote-form-buttons button.next' ).click( function( e ) {
 					e.preventDefault();
 					WDGProjectVote.slideNext();
-				} );
-				$( 'div#vote-form div#vote-form-buttons button.save' ).click( function( e ) {
-					e.preventDefault();
-					WDGProjectVote.saveVote();
 				} );
 			}
 		},
@@ -169,23 +165,31 @@ var WDGProjectVote = (function($) {
 			if ( WDGProjectVote.currentSlide === WDGProjectVote.maxSlide ) {
 				$( 'div#vote-form div#vote-form-buttons button.save' ).show();
 			}
-		},
-		
-		saveVote: function() {
-			$( '#vote-form-buttons .loading' ).show();
-			$( 'div#vote-form div#vote-form-buttons button' ).hide();
-			WDGFormsFunctions.postForm( 'div#vote-form', WDGProjectVote.saveVoteCallback );
+			$( '#wdg-lightbox-vote .wdg-lightbox-padder' ).animate( { scrollTop: 0 }, "slow" );
 		},
 		
 		saveVoteCallback: function( result ) {
-			$( '#vote-form-buttons .loading' ).hide();
-			WDGProjectVote.refresh();
-			var jsonResult = JSON.parse(result);
-			
+			var jsonResult = JSON.parse( result );
 			if ( jsonResult.errors.length > 0 ) {
 				WDGProjectVote.currentSlide = jsonResult.gotoslide;
 				WDGProjectVote.refresh();
 				$( '#wdg-lightbox-vote .wdg-lightbox-padder' ).animate( { scrollTop: 0 }, "slow" );
+			} else {
+				if ( $( '#wdg-lightbox-vote #validate-project-1' ).is( ':checked' ) ) {
+					$( '#wdg-lightbox-user-details' ).show();
+				} else {
+					$( '#wdg-lightbox-vote-simple-confirmation' ).show();
+					setTimeout( function() { location.reload() }, 1000 );
+				}
+				$( '#wdg-lightbox-vote' ).remove();
+			}
+		},
+		
+		saveVoteUserCallback: function( result ) {
+			var jsonResult = JSON.parse( result );
+			if ( jsonResult.errors == undefined || jsonResult.errors.length == 0 ) {
+				$( '#wdg-lightbox-user-details' ).remove();
+				setTimeout( function() { location.reload() }, 1000 );
 			}
 		}
 	};

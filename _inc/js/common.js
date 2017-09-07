@@ -750,6 +750,7 @@ var WDGFormsFunctions = (function($) {
 			$( '.wdg-lightbox-ref .ajax-form button.save' ).click( function( e ) {
 				e.preventDefault();
 				$( this ).siblings( '.loading' ).show();
+				$( this ).siblings( 'button' ).hide();
 				$( this ).hide();
 				var formId = $( this ).parent().parent().parent().attr( 'id' );
 				WDGFormsFunctions.postForm( 'div#' + formId, WDGFormsFunctions.postFormCallback );
@@ -824,14 +825,22 @@ var WDGFormsFunctions = (function($) {
 		postFormCallback: function( result, formid ) {
 			$( formid+' .loading' ).hide();
 			$( formid+' button.save' ).show();
+			if ( $( formid+' button.previous' ).length > 0 ) {
+				$( formid+' button.previous' ).show();
+			}
 			var jsonResult = JSON.parse(result);
 			if ( jsonResult.errors === undefined || jsonResult.errors.length === 0 ) {
 				if ( $( formid+' button.save' ).data( 'close' ) !== undefined && $( formid+' button.save' ).data( 'close' ) !== '' ) {
 					$( '#wdg-lightbox-' + $( formid+' button.save' ).data( 'close' ) ).hide();
 				}
-				if ( $( formid+' button.save' ).data( 'message' ) !== undefined && $( formid+' button.save' ).data( 'message' ) !== '' ) {
-					$( '#wdg-lightbox-' + $( formid+' button.save' ).data( 'message' ) ).show();
+				if ( $( formid+' button.save' ).data( 'open' ) !== undefined && $( formid+' button.save' ).data( 'open' ) !== '' ) {
+					$( '#wdg-lightbox-' + $( formid+' button.save' ).data( 'open' ) ).show();
 				}
+			}
+			
+			var callbackFunctionName = $( formid+' button.save' ).data( 'callback' );
+			if ( callbackFunctionName !== undefined && callbackFunctionName !== '' ) {
+				( eval( callbackFunctionName ) )( result );
 			}
 		}
 		

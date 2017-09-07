@@ -36,7 +36,7 @@ $fields_complete = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field
 		
 		<div id="user-details-form-buttons">
 			
-			<button class="button save red" data-close="user-details" data-message="user-details-confirmation"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+			<button class="button save red" data-close="user-details" data-open="user-details-confirmation"><?php _e( "Enregistrer", 'yproject' ); ?></button>
 			
 			<div class="loading align-center hidden">
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
