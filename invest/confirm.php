@@ -93,7 +93,6 @@ if (isset($campaign)):
 			EDD()->session->set( 'edd_cart', $to_add );
 
 			// Rappel des informations remplies
-			locate_template( 'country_list.php', true );
 			global $country_list;
 			$_SESSION['redirect_current_campaign_id'] = $campaign->ID;
 			?>

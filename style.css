@@ -451,167 +451,6 @@ form.wdg-forms table input[type="text"].reward-text{
 }
 
 /*******************************************************************************
-* LIGHTBOX
-*******************************************************************************/
-.wdg-lightbox {
-	background-color: rgba(0, 0, 0, 0.75);
-	top: 0px;
-	left: 0px;
-	position: fixed;
-	z-index: 4000;
-	width: 100%;
-	height: 100%;
-}
-
-.wdg-lightbox-click-catcher {
-	top: 0px;
-	left: 0px;
-	position: fixed;
-	z-index: 4001;
-	width: 100%;
-	height: 100%;
-}
-
-.wdg-lightbox .wdg-lightbox-padder {
-	position: relative;
-	max-width: 600px;
-	max-height: 80vh;
-	margin: 5vh auto;
-	padding: 50px;
-	background-color: #F2F2F2;
-	overflow-y: auto;
-	z-index: 4002;
-}
-
-.wdg-lightbox .wdg-widelightbox-padder {
-	position: relative;
-	max-width: 90%;
-	max-height: 80vh;
-	margin: 5vh auto;
-	padding: 20px;
-	background-color: #F2F2F2;
-	overflow-y: auto;
-	z-index: 4002;
-}
-.wdg-lightbox .wdg-lightbox-padder div.wdg-lightbox-msg-info {
-	text-align: center;
-}
-.wdg-lightbox .wdg-lightbox-padder > div {
-	background-color: #F2F2F2 !important;
-}
-
-.wdg-lightbox .wdg-lightbox-button-close {
-	position: absolute;
-	right: 0px;
-	margin-top: -45px;
-}
-.wdg-lightbox .wdg-lightbox-button-close a {
-	padding: 5px 20px;
-	background: none;
-	border: none;
-	font-size: 28pt;
-	color: #333333;
-	text-transform: lowercase;
-}
-
-#validate-terms .validate-terms-excerpt {
-    margin: 20px 0px;
-    max-height: 250px;
-    overflow-y: auto;
-    border: 1px solid #EEECED;
-    padding: 5px;
-}
-
-#validate-terms input {
-    text-align: center;
-    margin: 10px 0px;
-}
-
-#validate-terms > div > span {
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-#already-connected {
-	text-align: center;
-}
-
-.wdg-lightbox .warning {
-    text-align: justify;
-    margin: 10px 0px;
-}
-.wdg-lightbox .register-section {
-    margin: 15px 0px;
-    text-align: center;
-}
-.wdg-lightbox .register-section .g-recaptcha {
-	margin-bottom: 15px;
-}
-.wdg-lightbox .register-section .g-recaptcha div {
-	margin: auto;
-}
-
-.wdg-lightbox.timeout-lightbox {
-	background-color: transparent;
-	margin-top: 88px;
-}
-.wdg-lightbox.timeout-lightbox .wdg-lightbox-padder {
-	background-color: #333333;
-	color: #FFFFFF;
-}
-
-.wdg-lightbox .wdg-lightbox-padder > div.admin-block {
-	background-color: #EA4F51 !important;
-	border: 1px dotted #000;
-	padding: 10px;
-	margin-bottom: 5px;
-}
-.wdg-lightbox .wdg-lightbox-padder > div.admin-block h3 { margin: 5px auto; }
-.wdg-lightbox .wdg-lightbox-padder > div.admin-block label { display: inline-block; width: 140px; }
-
-.wdg-lightbox ul.errors {
-	list-style: none;
-	padding-left: 10px;
-	margin: 20px 0px;
-}
-
-#orgacreate_form input[name=org_capable] {
-	margin: 30px 5px 0;
-}
-
-/*******************************************************************************
-* LIGHTBOX - COURTS MESSAGES
-*******************************************************************************/
-.wdg-lightbox.msg-lightbox {
-	position: absolute;
-	text-align: center;
-	font-size: 12pt;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder {
-	top: 200px;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.valid-msg {
-	background-color: #8BC79C;
-	color: #FFFFFF;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.error-msg {
-	background-color: #EACDCB;
-	color: #333333;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder .wdg-lightbox-button-close {
-	background-color: transparent !important;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder .wdg-lightbox-button-close a {
-	font-size: 18pt;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.valid-msg .wdg-lightbox-button-close a {
-	color: #FFFFFF;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.error-msg .wdg-lightbox-button-close a {
-	color: #333333;
-}
-
-/*******************************************************************************
 * LIGHTBOX - FORMULAIRE
 *******************************************************************************/
 /* tooltip */
@@ -1663,9 +1502,6 @@ form.wdg-forms table input[type="text"].reward-text{
 #wp-link .howto, #wp-link #search-panel, #wp-link #wp-link-close .screen-reader-text {
     display: none !important;
 }
-#project-description-title-padding {
-     clear: both;
-}
 .grey-triangle {
     position: relative;
     left: -5px;
@@ -1904,15 +1740,6 @@ form.wdg-forms table input[type="text"].reward-text{
     padding: 0px 10px;
 }
 
-#vote-form{
-    position: absolute;
-    top: -350px;
-    width: 340px;
-    min-height: 500px;
-    background-color: #F2F2F2;
-    z-index: -11;
-    text-align: center;
-}
 .ypvote-form {
     font-size: 12px;
     padding: 10px;

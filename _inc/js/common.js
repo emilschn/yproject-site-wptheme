@@ -1,7 +1,7 @@
 jQuery(document).ready( function($) {
 	YPUIFunctions.initUI();
+	WDGFormsFunctions.init();
 });
-
 
 YPUIFunctions = (function($) {
 	return {
@@ -736,6 +736,117 @@ YPUIFunctions = (function($) {
 
 })(jQuery);
 
+
+var WDGFormsFunctions = (function($) {
+	return {
+
+		init: function() {
+			WDGFormsFunctions.initSaveButton();
+			WDGFormsFunctions.initRateCheckboxes();
+			WDGFormsFunctions.initDatePickers();
+		},
+		
+		initSaveButton: function() {
+			$( '.wdg-lightbox-ref .ajax-form button.save' ).click( function( e ) {
+				e.preventDefault();
+				$( this ).siblings( '.loading' ).show();
+				$( this ).siblings( 'button' ).hide();
+				$( this ).hide();
+				var formId = $( this ).parent().parent().parent().attr( 'id' );
+				WDGFormsFunctions.postForm( 'div#' + formId, WDGFormsFunctions.postFormCallback );
+			} );
+		},
+		
+		initRateCheckboxes: function() {
+			if ( $( 'input[type=checkbox].rate' ).length > 0 ) {
+				$( 'input[type=checkbox].rate' ).click( function() {
+					var sRateType = $( this ).data( 'rate' );
+					$( 'input[type=checkbox].' + sRateType ).attr( 'checked', false );
+					var thisVal = $( this ).val();
+					WDGFormsFunctions.setRateCheckboxes( sRateType, thisVal );
+				} );
+			}
+		},
+		
+		initDatePickers: function() {
+            $( 'input[type=text].adddatepicker' ).datepicker({
+                dateFormat: "dd/mm/yy",
+                regional: "fr",
+                changeMonth: true,
+                changeYear: true
+            });
+		},
+		
+		setRateCheckboxes: function( sRateType, nRate ) {
+			for ( var i = 1; i <= nRate; i++ ) {
+				$( 'input[type=checkbox]#' + sRateType + '-' + i )[0].checked = true;
+			}
+			$( 'span#' + sRateType + '-description' ).text( $( 'input[type=checkbox]#' + sRateType + '-' + nRate ).data( 'description' ) );
+		},
+		
+		postForm: function( formid, callback ) {
+			$( formid+ ' div.field' ).removeClass( 'error' );
+			var sentData = {};
+			$( formid+' input, '+formid+' select, '+formid+' textarea' ).each( function() {
+				if ( $( this ).attr( 'type' ) === 'checkbox' || $( this ).attr( 'type' ) === 'radio' ) {
+					if ( $( this ).is(':checked') ) {
+						sentData[ $( this ).attr( 'name' ) ] = $( this ).val();
+					}
+				} else {
+					sentData[ $( this ).attr( 'name' ) ] = $( this ).val();
+				}
+			} );
+			
+			$.ajax({
+				'type': "POST",
+				'url': ajax_object.ajax_url,
+				'data': sentData
+				
+			}).done(function (result) {
+				
+				var jsonResult = JSON.parse(result);
+				if ( jsonResult.errors != undefined ) {
+					var nErrors = jsonResult.errors.length;
+					for ( var i = 0; i < nErrors; i++ ) {
+						var errorItem = jsonResult.errors[ i ];
+						if ( errorItem.element == 'general' ) {
+							$( formid+' span.form-error-general' ).html( errorItem.text );
+						} else {
+							$( formid+' div#field-'+errorItem.element ).addClass( 'error' );
+							$( formid+' div#field-'+errorItem.element+' span.field-error' ).html( errorItem.text );
+						}
+					}
+				}
+				callback( result, formid );
+				
+			});
+		},
+		
+		postFormCallback: function( result, formid ) {
+			$( formid+' .loading' ).hide();
+			$( formid+' button.save' ).show();
+			if ( $( formid+' button.previous' ).length > 0 ) {
+				$( formid+' button.previous' ).show();
+			}
+			var jsonResult = JSON.parse(result);
+			if ( jsonResult.errors === undefined || jsonResult.errors.length === 0 ) {
+				if ( $( formid+' button.save' ).data( 'close' ) !== undefined && $( formid+' button.save' ).data( 'close' ) !== '' ) {
+					$( '#wdg-lightbox-' + $( formid+' button.save' ).data( 'close' ) ).hide();
+				}
+				if ( $( formid+' button.save' ).data( 'open' ) !== undefined && $( formid+' button.save' ).data( 'open' ) !== '' ) {
+					$( '#wdg-lightbox-' + $( formid+' button.save' ).data( 'open' ) ).show();
+				}
+			}
+			
+			var callbackFunctionName = $( formid+' button.save' ).data( 'callback' );
+			if ( callbackFunctionName !== undefined && callbackFunctionName !== '' ) {
+				( eval( callbackFunctionName ) )( result );
+			}
+		}
+		
+	};
+})(jQuery);
+
 /* Projet */
 WDGProjectPageFunctions=(function($) {
 	return {
@@ -756,12 +867,10 @@ WDGProjectPageFunctions=(function($) {
 			$("#btn-validate_project-true").click(function(){
 				$("#validate_project-true").show();
 				$("#validate_project-false").hide();
-				$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 			});
 			$("#btn-validate_project-false").click(function(){
 				$("#validate_project-false").show();
 				$("#validate_project-true").hide();
-				$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 			});
 		},
 
@@ -816,32 +925,6 @@ WDGProjectPageFunctions=(function($) {
 			});
 			$("#dialog").dialog("open");
 		},
-
-		print_vote_form:function(){
-			if ($("#vote-form").hasClass("collapsed")) {
-				$("#vote-form").removeClass("collapsed");
-				$(".description-discover").removeClass('clicked');
-				if ($(window).width() > 480) {
-					$("#vote-form").animate({
-						top: "-350px"
-					}, 500 );
-				}
-
-			} else {
-				if ($(window).width() > 480) {
-					$('html, body').animate({scrollTop: $("#invest-button").offset().top - WDGProjectPageFunctions.navigationHeight}, "fast");
-				} else {
-					$('html, body').animate({scrollTop: $("#projects-stats-content").offset().top}, "fast");
-				}
-				$("#vote-form").animate({
-					top: "370px"
-				}, 500 );
-				$(".description-discover").addClass('clicked');
-				$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
-				$("#vote-form").addClass("collapsed");
-			}
-		},
-
 
 
 		//Initialisation du comportement des différentes parties

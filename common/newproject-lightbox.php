@@ -29,7 +29,7 @@ if ($organizations_list) {
 	</div>
 <?php endif; ?>
 
-<form id="newproject_form" class="db-form form-register" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>" <?php if (!is_user_logged_in()){ ?>style="display: none;"<?php } ?>>
+<form id="newproject_form" class="db-form v3 form-register" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>" <?php if (!is_user_logged_in()){ ?>style="display: none;"<?php } ?>>
     <h2 style="text-align: center;"><?php _e('Lancement de campagne','yproject');?></h2>
 	
 	<?php

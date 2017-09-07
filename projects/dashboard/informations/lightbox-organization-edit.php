@@ -74,7 +74,6 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 <label for="org_nationality"><?php _e('Pays', 'yproject'); ?>*</label>
                 <select name="org_nationality" id="org_nationality">
                         <?php 
-                        locate_template( array("country_list.php"), true );
                         global $country_list;
                         $selected_country = $organization_obj->get_nationality();
                         foreach ($country_list as $country_code => $country_name): ?>

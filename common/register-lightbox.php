@@ -2,7 +2,7 @@
 
 <div class="wdg-lightbox-ref">
 
-	<form action="<?php echo wp_unslash( $_SERVER['REQUEST_URI'] ); ?>#register" name="signup_form" id="signup_form" class="db-form form-register" method="post" enctype="multipart/form-data">
+	<form action="<?php echo wp_unslash( $_SERVER['REQUEST_URI'] ); ?>#register" name="signup_form" id="signup_form" class="db-form v3 form-register" method="post" enctype="multipart/form-data">
 		<?php if ( $signup_step == 'request-details' ) : ?>
 			<h2><?php _e('Inscription', 'yproject'); ?></h2>
 

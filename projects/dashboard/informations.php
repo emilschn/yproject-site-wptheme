@@ -2,7 +2,6 @@
 
 function print_informations_page()
 {
-    locate_template('country_list.php', true);
     global $country_list;
     global $campaign_id, $campaign, $post_campaign,
            $WDGAuthor, $WDGUser_current,
