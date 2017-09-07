@@ -52,4 +52,4 @@ $fields_complete = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field
 $lightbox_content = ob_get_contents();
 ob_end_clean();
 echo do_shortcode('[yproject_lightbox_cornered id="user-details" title="'.__( "Validation de vos informations", 'yproject' ).'" autoopen="1"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
-echo do_shortcode('[yproject_msglightbox id="user-details-confirmation" type="valid"]'.__( "Donn&eacute;es enregistr&eacute;es ! Merci !", 'yproject' ).'[/yproject_msglightbox]');
+echo do_shortcode('[yproject_lightbox_cornered id="user-details-confirmation" msgtype="valid"]'.__( "Donn&eacute;es enregistr&eacute;es ! Merci !", 'yproject' ).'[/yproject_lightbox_cornered]');

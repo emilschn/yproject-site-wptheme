@@ -83,6 +83,9 @@ class YPShortcodeManager {
 		return '<a href="#'.$atts['id'].'" class="wdg-button-lightbox-open '.$atts['class'].'" style="'.$atts['style'].'" data-lightbox="'.$atts['id'].'">'.$atts['label'].'</a>';
 	}
 	
+	/**
+	 * Lightbox avec coin transparent
+	 */
 	function yproject_lightbox_cornered( $atts, $content = '' ) {
 		$atts = shortcode_atts( array(
 			'id'		=> 'lightbox',
@@ -90,15 +93,14 @@ class YPShortcodeManager {
 			'scrolltop' => '0',
 			'style'		=> '',
 			'class'		=> '',
-			'msgtype'	=> '',
+			'msgtype'	=> '', // valid / error
 			'autoopen'	=> '0'
 		), $atts );
 		
 		$msgtype_lightbox = '';
 		$classes = ( $atts['autoopen'] == '0' ) ? $atts['class']. ' hidden' : $atts['class'];
 		if ( !empty( $atts['msgtype'] ) ) {
-			$msgtype_lightbox = $atts['msgtype'].'-msg';
-			$classes .= ' msg-lightbox';
+			$classes .= ' msg-'.$atts['msgtype'];
 		}
 		
 		ob_start();
@@ -111,7 +113,7 @@ class YPShortcodeManager {
 				</div>
 				<h2><?php echo $atts[ 'title' ]; ?></h2>
 			</div>
-			<div class="wdg-lightbox-padder <?php echo $msgtype_lightbox; ?>">
+			<div class="wdg-lightbox-padder">
 				<?php echo do_shortcode( $content ); ?>
 			</div>
 		</div>

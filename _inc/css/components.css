@@ -548,6 +548,14 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
     padding-right: 60px;
 	z-index: 4002;
 }
+.wdg-lightbox.cornered.msg-valid .wdg-lightbox-corner {
+    border-bottom: 60px solid #8BC79C;
+	color: #FFFFFF;
+}
+.wdg-lightbox.cornered.msg-error .wdg-lightbox-corner {
+    border-bottom: 60px solid #EACDCB;
+	color: #333333;
+}
 
 .wdg-lightbox .wdg-lightbox-padder {
 	position: relative;
@@ -562,6 +570,15 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 .wdg-lightbox.cornered .wdg-lightbox-padder {
 	margin-top: 0px;
 	padding: 10px 60px 60px;
+}
+.wdg-lightbox.cornered.msg-valid .wdg-lightbox-padder {
+    background-color: #8BC79C;
+	color: #FFFFFF;
+	text-align: center;
+}
+.wdg-lightbox.cornered.msg-error .wdg-lightbox-padder {
+    background-color: #EACDCB;
+	color: #333333;
 }
 
 .wdg-lightbox .wdg-widelightbox-padder {
@@ -619,6 +636,9 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	font-size: 28pt;
 	color: #333333;
 	text-transform: lowercase;
+}
+.wdg-lightbox.cornered.msg-valid .wdg-lightbox-button-close a {
+	color: #FFFFFF;
 }
 
 #validate-terms .validate-terms-excerpt {
