@@ -569,7 +569,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 }
 .wdg-lightbox.cornered .wdg-lightbox-padder {
 	margin-top: 0px;
-	padding: 10px 60px 60px;
+	padding: 8px 60px 40px;
 }
 .wdg-lightbox.cornered.msg-valid .wdg-lightbox-padder {
     background-color: #8BC79C;
@@ -893,23 +893,25 @@ body input[type=text], body input[type=email], body select {
 	position: relative;
 	margin-right: 24px;
 	vertical-align: top;
+	visibility: hidden;
 }
-.db-form.v3 input[type=checkbox]:after {
+.db-form.v3 input[type=checkbox] + span:after {
 	content: '';
 	width: 20px;
 	height: 20px;
 	position: absolute;
 	background: #FFFFFF;
 	cursor: pointer;
+	margin-left: -24px;
 }
-.db-form.v3 input[type=checkbox]:checked:after {
+.db-form.v3 input[type=checkbox]:checked + span:after {
 	width: 12px;
 	height: 12px;
 	background: #333;
 	border: 4px solid #FFF;
 }
-.db-form.v3 input[type=checkbox].rate:after,
-.db-form.v3 input[type=radio]:after {
+.db-form.v3 input[type=checkbox].rate + span:after,
+.db-form.v3 input[type=radio] + span:after {
 	content: '';
 	width: 24px;
 	height: 24px;
@@ -917,38 +919,39 @@ body input[type=text], body input[type=email], body select {
 	background: #FFFFFF;
 	border-radius: 12px;
 	cursor: pointer;
+	margin-left: -24px;
 }
-.db-form.v3 input[type=radio]:after {
+.db-form.v3 input[type=radio] + span:after {
 	width: 20px;
 	height: 20px;
 }
-.db-form.v3 input[type=radio]:checked:after {
+.db-form.v3 input[type=radio]:checked + span:after {
 	width: 12px;
 	height: 12px;
 	background: #333;
 	border: 4px solid #FFF;
 }
-.db-form.v3 input[type=checkbox].rate:checked:after {
+.db-form.v3 input[type=checkbox].rate:checked + span:after {
 	width: 16px;
 	height: 16px;
 	background: #333;
 	border: 4px solid #FFF;
 }
-.db-form.v3 input[type=checkbox].rate-ecology:checked:after {
+.db-form.v3 input[type=checkbox].rate-ecology:checked + span:after {
 	width: 24px;
 	height: 24px;
 	border: 0px;
 	background: url(../../images/common/impact-env-small.png);
 	background-size: 100%;
 }
-.db-form.v3 input[type=checkbox].rate-economy:checked:after {
+.db-form.v3 input[type=checkbox].rate-economy:checked + span:after {
 	width: 24px;
 	height: 24px;
 	border: 0px;
 	background: url(../../images/common/impact-eco-small.png);
 	background-size: 100%;
 }
-.db-form.v3 input[type=checkbox].rate-social:checked:after {
+.db-form.v3 input[type=checkbox].rate-social:checked + span:after {
 	width: 24px;
 	height: 24px;
 	border: 0px;
