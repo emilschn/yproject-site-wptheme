@@ -80,6 +80,10 @@ function print_informations_page()
                 $term_category_id = $terms_category[0]->term_id;
                 $terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
                 $term_activity_id = $terms_activity[0]->term_id;
+                $terms_type = get_terms('download_category', array('slug' => 'types', 'hide_empty' => false));
+				if ( $terms_type ) {
+					$term_type_id = $terms_type[0]->term_id;
+				}
                 ?>
 
                 <div class="field">
@@ -100,7 +104,7 @@ function print_informations_page()
 					<label for="activities"><?php _e("Secteur d&apos;activit&eacute;", 'yproject'); ?></label>
 					<span class="field-value" data-type="multicheck" data-id="new_project_activities"><?php
 						wp_terms_checklist(
-							$campaign_id, 
+							$campaign_id,
 							array(
 								'taxonomy' => 'download_category',
 								'descendants_and_self' => $term_activity_id,
@@ -108,6 +112,21 @@ function print_informations_page()
 						) );
 					?></span>
 				</div>
+
+				<?php if ( $terms_type ): ?>
+                <div class="field">
+					<label for="types"><?php _e("Type de projet", 'yproject'); ?></label>
+					<span class="field-value" data-type="multicheck" data-id="new_project_types"><?php
+						wp_terms_checklist(
+							$campaign_id,
+							array(
+								'taxonomy' => 'download_category',
+								'descendants_and_self' => $term_type_id,
+								'checked_ontop' => false
+						) );
+					?></span>
+				</div>
+				<?php endif; ?>
 
                 <?php
                 $locations = atcf_get_locations();
