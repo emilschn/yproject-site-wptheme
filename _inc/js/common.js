@@ -759,10 +759,10 @@ var WDGFormsFunctions = (function($) {
 		
 		initRateCheckboxes: function() {
 			if ( $( 'input[type=checkbox].rate' ).length > 0 ) {
-				$( 'input[type=checkbox].rate' ).click( function() {
+				$( 'input[type=checkbox].rate + span' ).click( function() {
 					var sRateType = $( this ).data( 'rate' );
 					$( 'input[type=checkbox].' + sRateType ).attr( 'checked', false );
-					var thisVal = $( this ).val();
+					var thisVal = $( this ).data( 'value' );
 					WDGFormsFunctions.setRateCheckboxes( sRateType, thisVal );
 				} );
 			}

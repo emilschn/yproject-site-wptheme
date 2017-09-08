@@ -23,7 +23,7 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 		
 		<span class="form-error-general"></span>
 		
-		<div id="vote-form-slide0" class="vote-form-slide align-left">
+		<div id="vote-form-slide0" class="vote-form-slide align-justify">
 			
 			<?php _e( "Bonjour,", 'yproject' ); ?>
 			<br /><br />
@@ -34,7 +34,7 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 			
 		</div>
 		
-		<div id="vote-form-slide1" class="vote-form-slide align-left hidden">
+		<div id="vote-form-slide1" class="vote-form-slide align-justify hidden">
 			
 			<div class="vote-progress-bar align-center">
 				<span class="selected">Etape 1</span>
@@ -150,7 +150,7 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 		<span class="form-error-general"></span>
 		
 		<p class="align-left">
-		<?php _e( "Votre vote a bien &eacute;t&eacute; enregistr&eacute; !", 'yproject' ); ?>
+		<i><?php _e( "Votre vote a bien &eacute;t&eacute; enregistr&eacute; !", 'yproject' ); ?></i>
 		<br /><br />
 		<?php _e( "Vous avez indiqu&eacute; &ecirc;tre int&eacute;ress&eacute;(e) pour investir, confirmez vos informations afin que le porteur de projet puisse vous joindre lors du lancement de la lev&eacute;e de fonds.", 'yproject' ); ?>
 		<br /><br />
