@@ -9,6 +9,8 @@ $campaign_status = $campaign->campaign_status();
 	<?php $WDGUser_current = WDGUser::current(); ?>
 	<?php if ( !$WDGUser_current->has_voted_on_campaign( $campaign->ID ) ): ?>
 		<?php locate_template( array("projects/single/voteform-lightbox.php"), true ); ?>
+	<?php else: ?>
+		<?php locate_template( array("projects/single/voteform-lightbox-share.php"), true ); ?>
 	<?php endif; ?>
 <?php endif; ?>
 

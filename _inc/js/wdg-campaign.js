@@ -179,7 +179,7 @@ var WDGProjectVote = (function($) {
 					$( '#wdg-lightbox-user-details' ).show();
 				} else {
 					$( '#wdg-lightbox-vote-simple-confirmation' ).show();
-					setTimeout( function() { location.reload() }, 1000 );
+					setTimeout( function() { location.reload( true ) }, 1000 );
 				}
 				$( '#wdg-lightbox-vote' ).remove();
 			}
@@ -189,7 +189,12 @@ var WDGProjectVote = (function($) {
 			var jsonResult = JSON.parse( result );
 			if ( jsonResult.errors == undefined || jsonResult.errors.length == 0 ) {
 				$( '#wdg-lightbox-user-details' ).remove();
-				setTimeout( function() { location.reload() }, 1000 );
+				setTimeout( function() {
+					var currentAddress = location.href;
+					var newUrl = currentAddress.split( '#' )[ 0 ];
+					window.location = newUrl + '#vote-share';
+					location.reload( true );
+				}, 1000 );
 			}
 		}
 	};
