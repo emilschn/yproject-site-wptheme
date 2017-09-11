@@ -46,6 +46,12 @@ $declaration_message = $declaration->get_message();
 			<?php _e("Nous leur transmettrons la nouvelle lors du versement des royalties.", 'yproject'); ?><br /><br />
 			<textarea name="declaration-message"></textarea>
 			<br /><br />
+			
+			<?php _e( "Afin d'am&eacute;liorer nos statistiques, pourriez-vous nous transmettre ces informations (ces donn&eacute;es ne seront pas communiqu&eacute;es) :", 'yproject' ); ?><br />
+			Nombre d'employés : <input type="number" name="employees-number" id="employees-number" value="0" /><br />
+			Autres financements :<br />
+			<textarea name="other-fundings"></textarea>
+			<br /><br />
 
 			<input type="hidden" name="action" value="save-turnover-declaration" />
 			<input type="hidden" name="declaration-id" value="<?php echo $declaration->id; ?>" />
@@ -86,6 +92,10 @@ $declaration_message = $declaration->get_message();
 		<b>Ce message sera envoyé à vos investisseurs :</b><br />
 		<?php echo $declaration->get_message(); ?><br /><br />
 		<?php endif; ?>
+		
+		Nombre d'employés : <?php echo $declaration->employees_number; ?><br />
+		Autres financements :<br />
+		<?php echo $declaration->get_other_fundings(); ?><br /><br />
 
 		<form action="" method="POST" enctype="">
 			<input type="hidden" name="action" value="proceed_roi" />
@@ -156,6 +166,10 @@ $declaration_message = $declaration->get_message();
 		<b>Ce message sera envoyé à vos investisseurs :</b><br />
 		<?php echo $declaration->get_message(); ?><br /><br />
 		<?php endif; ?>
+		
+		Nombre d'employés : <?php echo $declaration->employees_number; ?><br />
+		Autres financements :<br />
+		<?php echo $declaration->get_other_fundings(); ?><br /><br />
 
 		<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ): ?>
 		Nous attendons la réception de la somme par notre prestataire de paiement et procèderons au versement par la suite.
@@ -243,6 +257,10 @@ $declaration_message = $declaration->get_message();
 		<b>Ce message sera envoyé à vos investisseurs :</b><br />
 		<?php echo $declaration->get_message(); ?><br /><br />
 		<?php endif; ?>
+		
+		Nombre d'employés : <?php echo $declaration->employees_number; ?><br />
+		Autres financements :<br />
+		<?php echo $declaration->get_other_fundings(); ?><br /><br />
 
 		<?php if ( $declaration->get_turnover_total() > 0 ): ?>
 			Votre paiement de <?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
