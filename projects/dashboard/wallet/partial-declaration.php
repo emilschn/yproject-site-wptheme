@@ -47,7 +47,7 @@ $declaration_message = $declaration->get_message();
 			<textarea name="declaration-message"></textarea>
 			<br /><br />
 			
-			<?php _e( "Ces informations sont utilis&eacute;es exclusivement pour des fins statistiques. WE DO GOOD s'engage &agrave; ne pas les communiquer &agrave; des tiers.", 'yproject' ); ?><br />
+			<?php _e( "Ces informations sont utilis&eacute;es exclusivement &agrave; des fins statistiques. WE DO GOOD s'engage &agrave; ne pas les communiquer &agrave; des tiers.", 'yproject' ); ?><br />
 			<?php _e( "Nombre d'employ&eacute;s :", 'yproject' ); ?> <input type="number" name="employees-number" id="employees-number" value="0" /><br />
 			<?php _e( "Autres financements :", 'yproject' ); ?><br />
 			<textarea name="other-fundings"></textarea>
