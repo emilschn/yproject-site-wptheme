@@ -897,45 +897,38 @@ body input[type=text], body input[type=email], body select {
 }
 .db-form.v3 input[type=checkbox] + span:after {
 	content: '';
-	width: 20px;
-	height: 20px;
 	position: absolute;
+	width: 19px;
+	height: 19px;
+	margin-left: -24px;
+	border: 1px solid #333;
 	background: #FFFFFF;
 	cursor: pointer;
-	margin-left: -24px;
-}
-.db-form.v3 input[type=checkbox]:checked + span:after {
-	width: 12px;
-	height: 12px;
-	background: #333;
-	border: 4px solid #FFF;
 }
 .db-form.v3 input[type=checkbox].rate + span:after,
 .db-form.v3 input[type=radio] + span:after {
 	content: '';
-	width: 24px;
-	height: 24px;
 	position: absolute;
+	width: 23px;
+	height: 23px;
+	margin-left: -23px;
+	border: 1px solid #333;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
 	background: #FFFFFF;
-	border-radius: 12px;
 	cursor: pointer;
-	margin-left: -24px;
 }
 .db-form.v3 input[type=radio] + span:after {
 	width: 20px;
 	height: 20px;
 }
-.db-form.v3 input[type=radio]:checked + span:after {
-	width: 12px;
-	height: 12px;
-	background: #333;
-	border: 4px solid #FFF;
-}
+.db-form.v3 input[type=checkbox]:checked + span:after,
+.db-form.v3 input[type=radio]:checked + span:after,
 .db-form.v3 input[type=checkbox].rate:checked + span:after {
-	width: 16px;
-	height: 16px;
+	width: 20px;
+	height: 20px;
 	background: #333;
-	border: 4px solid #FFF;
 }
 .db-form.v3 input[type=checkbox].rate-ecology:checked + span:after {
 	width: 24px;
