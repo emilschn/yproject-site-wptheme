@@ -731,6 +731,20 @@ function print_informations_page()
 					"download_label"	=> $post_campaign->post_title . " - Contrat organisation." . $ext
                 ));
 				
+				
+				if ( $is_admin ) {
+					
+					DashboardUtility::create_field(array(
+						"id"			=> "new_override_contract",
+						"type"			=> "editor",
+						"label"			=> "Surcharger le contrat standard",
+						"infobubble"	=> "Le contrat ne sera pas surcharg&eacute; si ce champ reste vide.",
+						"value"			=> $campaign->override_contract()
+					));
+				
+				}
+				
+				
                 DashboardUtility::create_save_button("projectinfo_form");
 				?>
 				
