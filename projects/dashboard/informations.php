@@ -74,6 +74,33 @@ function print_informations_page()
                     "infobubble"	=> "Ces informations seront traitées de manière confidentielle",
                     "value"	=> $campaign->backoffice_summary()
                 ));
+				
+				if ( $is_admin ) {
+					DashboardUtility::create_field(array(
+						'id'			=> 'new_project_url',
+						'type'			=> 'text',
+						'label'			=> __( "URL du projet", 'yproject' ),
+						'value'			=> $post_campaign->post_name,
+						'admin_theme'	=> true
+					));
+					
+					DashboardUtility::create_field(array(
+						'id'			=> 'new_is_hidden',
+						'type'			=> 'check',
+						'label'			=> __( "Masquée du public", 'yproject' ),
+						'value'			=> $campaign->is_hidden(),
+						'admin_theme'	=> true
+					));
+					
+					DashboardUtility::create_field(array(
+						'id'			=> 'new_skip_vote',
+						'type'			=> 'check',
+						'label'			=> __( "Passer la phase de vote", 'yproject' ),
+						'value'			=> $campaign->skip_vote(),
+						'admin_theme'	=> true,
+						"editable"		=> $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					));
+				}
 
 
                 $terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
@@ -428,6 +455,21 @@ function print_informations_page()
                     "max"			=> 20,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
+				
+				if ( $is_admin ) {
+
+					DashboardUtility::create_field(array(
+						"id"			=> "new_maximum_profit",
+						"type"			=> "number",
+						"label"			=> "Gain maximum",
+						"value"			=> $campaign->maximum_profit(),
+						"prefix"		=> '*',
+						"min"			=> 1,
+						"admin_theme"	=> true,
+						"editable"		=> $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					));
+					
+				}
 
                 DashboardUtility::create_field(array(
                     "id"			=> "new_roi_percent_estimated",
@@ -441,6 +483,19 @@ function print_informations_page()
                     "step"			=> 0.01,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
+				
+				DashboardUtility::create_field(array(
+					"id"			=> "new_roi_percent",
+					"type"			=> "number",
+					"label"			=> "Royalties r&eacute;els (selon montant collect&eacute;)",
+					"value"			=> $campaign->roi_percent(),
+					"suffix"		=> "<span>&nbsp;% du chiffre d'affaires</span>",
+					"min"			=> 0,
+					"max"			=> 100,
+					"step"			=> 0.01,
+					"visible"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed,
+					"editable"		=> $is_admin
+				));
 
 				$contract_start_date_editable = ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $is_admin );
 				$contract_start_date_values = array();
@@ -487,6 +542,43 @@ function print_informations_page()
                     "options_id"	=> $contract_start_date_values,
                     "options_names"	=> $contract_start_date_list
                 ));
+				
+				if ( $is_admin ) {
+					DashboardUtility::create_field(array(
+						"id"			=> "new_turnover_per_declaration",
+						"type"			=> "select",
+						"label"			=> "Nb d&eacute;claration CA par versement",
+						"value"			=> $campaign->get_turnover_per_declaration(),
+						"options_id"	=> array(1, 3),
+						"options_names"	=> array(1, 3),
+						"editable"		=> $is_admin,
+						"admin_theme"	=> true
+					));
+					DashboardUtility::create_field(array(
+						"id"			=> "new_costs_to_organization",
+						"type"			=> "number",
+						"label"			=> "Pourcentage de frais appliqués au PP",
+						"value"			=> $campaign->get_costs_to_organization(),
+						"suffix"		=> "<span>&nbsp;%</span>",
+						"min"			=> 0,
+						"max"			=> 100,
+						"step"			=> 0.01,
+						"editable"		=> $is_admin,
+						"admin_theme"	=> true
+					));
+					DashboardUtility::create_field(array(
+						"id"			=> "new_costs_to_investors",
+						"type"			=> "number",
+						"label"			=> "Pourcentage de frais appliqués aux investisseurs",
+						"value"			=> $campaign->get_costs_to_investors(),
+						"suffix"		=> "<span>&nbsp;%</span>",
+						"min"			=> 0,
+						"max"			=> 100,
+						"step"			=> 0.01,
+						"editable"		=> $is_admin,
+						"admin_theme"	=> true
+					));
+				}
 
                 DashboardUtility::create_field(array(
                     "id"			=> "new_first_payment",
