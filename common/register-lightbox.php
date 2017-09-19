@@ -2,7 +2,7 @@
 
 <div class="wdg-lightbox-ref">
 
-	<form action="<?php echo wp_unslash( $_SERVER['REQUEST_URI'] ); ?>#register" name="signup_form" id="signup_form" class="db-form form-register" method="post" enctype="multipart/form-data">
+	<form action="<?php echo wp_unslash( $_SERVER['REQUEST_URI'] ); ?>#register" name="signup_form" id="signup_form" class="db-form v3 form-register" method="post" enctype="multipart/form-data">
 		<?php if ( $signup_step == 'request-details' ) : ?>
 			<h2><?php _e('Inscription', 'yproject'); ?></h2>
 
@@ -59,7 +59,7 @@
 				<div class="g-recaptcha" data-sitekey="6LcoHRIUAAAAADwRb9TDAhshD3CZgIhx1M-MO84y"></div>
 				<?php endif; ?>
 
-				<label for="validate-terms-check-register"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /> J&apos;accepte <a href="<?php echo home_url().'/cgu';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
+				<label for="validate-terms-check-register"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> J&apos;accepte <a href="<?php echo home_url().'/cgu';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
 
 				<?php wp_nonce_field( 'register_form_posted' ); ?>
 

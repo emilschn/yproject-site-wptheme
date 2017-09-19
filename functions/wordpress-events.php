@@ -145,7 +145,7 @@ class WDG_WordPress_Events {
 		$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 		$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 		$is_admin_page = ($post->post_name == 'liste-des-paiements');
-		$current_version = '20170811';
+		$current_version = '20170907';
 
 		if ( !is_admin() ) {
 			wp_deregister_script('jquery');
@@ -154,6 +154,7 @@ class WDG_WordPress_Events {
 		}
 		wp_enqueue_script('jquery-ui-dialog');
 		wp_enqueue_script('jquery-ui-datepicker');
+		wp_enqueue_script('wdg-project-dashboard-i18n-fr', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/i18n/datepicker-fr.js', array('jquery', 'jquery-ui-datepicker'), $current_version);
 
 		wp_enqueue_style('jquery-ui-wdg',dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery-ui-wdg.css', null, false, 'all');
 
@@ -170,7 +171,6 @@ class WDG_WordPress_Events {
 		//Fichiers du tableau de bord (CSS, Fonctions Ajax et scripts de Datatable)
 		if ($is_dashboard_page && $can_modify) {
 			wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery'), $current_version);
-			wp_enqueue_script('wdg-project-dashboard-i18n-fr', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/i18n/datepicker-fr.js', array('jquery', 'jquery-ui-datepicker'), $current_version);
 			wp_enqueue_style( 'dashboard-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dashboard.css', null, $current_version, 'all');
 
 
@@ -199,7 +199,7 @@ class WDG_WordPress_Events {
 
 		if ($is_campaign_page) {
 			if ($is_campaign && !$is_dashboard_page) {
-				wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.css', null, $current_version, 'all');
+				wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.min.css', null, $current_version, 'all');
 			}
 			wp_enqueue_script( 'wdg-campaign', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign.js', array('jquery', 'jquery-ui-dialog'), $current_version);
 			if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), $current_version); }

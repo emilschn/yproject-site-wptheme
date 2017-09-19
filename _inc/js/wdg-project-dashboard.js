@@ -100,14 +100,6 @@ var WDGProjectDashboard = (function ($) {
                 }
             }
 
-            //Datepickers
-            $("input.adddatepicker").datepicker({
-                dateFormat: "yy-mm-dd",
-                regional: "fr",
-                changeMonth: true,
-                changeYear: true
-            });
-
             /**
              * DASHBOARD TABS
              */
