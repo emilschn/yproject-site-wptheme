@@ -428,7 +428,7 @@ function print_informations_page()
                     "label"			=> "Objectif",
                     "infobubble"	=> "C'est le seuil de validation de votre lev&eacute;e de fonds, vous pourrez ensuite viser le montant maximum !",
                     "value"			=> $campaign->minimum_goal(false),
-                    "suffix"            => "<span>&nbsp;&euro;</span>",
+                    "suffix"		=> "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
@@ -439,7 +439,7 @@ function print_informations_page()
                     "label"			=> "Montant maximum",
                     "infobubble"	=> "C'est le montant maximum de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD.",
                     "value"			=> $campaign->goal(false),
-                    "suffix"            => "<span>&nbsp;&euro;</span>",
+                    "suffix"		=> "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
 					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
                 ));
@@ -735,11 +735,21 @@ function print_informations_page()
 				if ( $is_admin ) {
 					
 					DashboardUtility::create_field(array(
+						"id"			=> "new_contract_budget_type",
+						"type"			=> "select",
+						"label"			=> "Budget &eacute;gal au",
+						"value"			=> $campaign->contract_budget_type(),
+						"options_id"	=> array_keys( ATCF_Campaign::$contract_budget_types ),
+						"options_names"	=> array_values( ATCF_Campaign::$contract_budget_types )
+					));
+					
+					DashboardUtility::create_field(array(
 						"id"			=> "new_override_contract",
 						"type"			=> "editor",
 						"label"			=> "Surcharger le contrat standard",
 						"infobubble"	=> "Le contrat ne sera pas surcharg&eacute; si ce champ reste vide.",
-						"value"			=> $campaign->override_contract()
+						"value"			=> $campaign->override_contract(),
+						"admin_theme"	=> true
 					));
 				
 				}
