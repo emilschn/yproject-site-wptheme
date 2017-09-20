@@ -828,10 +828,8 @@ body input[type=text], body input[type=email], body select {
 
 .db-form.v3 .field span.complement{
 	display: block;
-	width: 270px;
-	margin: 0px auto 3px;
 	font-size: 10pt;
-	text-align: left;
+	text-align: justify;
 }
 .db-form.v3 .field-container {
 	display: block;

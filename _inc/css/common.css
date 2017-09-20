@@ -73,6 +73,10 @@ button.red {
     background: none repeat scroll 0 0 #00879B;
     border: 1px solid #00879B;
 }
+.button.blue-facebook {
+    background: none repeat scroll 0 0 #3B5998;
+    border: 1px solid #3B5998;
+}
 .button.blue-pale {
     background: none repeat scroll 0 0 #D3EAE9;
     border: 1px solid #D3EAE9;
@@ -436,10 +440,8 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 /*******************************************************************************
 * REGISTER PAGE / REGISTER LIGHTBOX
 *******************************************************************************/
-.template-connexion #content #connect-form .wdg-button-lightbox-open,
-#wdg-lightbox-register .wdg-button-lightbox-open,
-#newproject-register-user .wdg-button-lightbox-open,
-#wdg-lightbox-connexion .wdg-button-lightbox-open {
+.template-connexion #content #connect-form .wdg-button-lightbox-open
+#newproject-register-user .wdg-button-lightbox-open {
 	border: none;
 	background: none;
 	font-size: 12pt;
