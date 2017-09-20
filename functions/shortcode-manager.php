@@ -188,7 +188,7 @@ class YPShortcodeManager {
 		locate_template('common/connexion-lightbox.php',true);
 		$lightbox_content = ob_get_contents();
 		ob_end_clean();
-		echo do_shortcode('[yproject_lightbox id="connexion"]' . $content . $lightbox_content . '[/yproject_lightbox]');
+		echo do_shortcode('[yproject_lightbox_cornered id="connexion" title="'.__('Inscription et connexion', 'yproject').'"]' . $content . $lightbox_content . '[/yproject_lightbox_cornered]');
 	}
 	
 	//Shortcodes lightbox d'inscription 
@@ -197,7 +197,7 @@ class YPShortcodeManager {
 		locate_template('common/register-lightbox.php',true);
 		$lightbox_content = ob_get_contents();
 		ob_end_clean();
-		echo do_shortcode('[yproject_lightbox id="register"]' . $content . $lightbox_content . '[/yproject_lightbox]');
+		echo do_shortcode('[yproject_lightbox_cornered id="register" title="'.__('Inscription', 'yproject').'"]' . $content . $lightbox_content . '[/yproject_lightbox_cornered]');
 	}
 	
 	//Shortcode lightbox Tableau de bord
@@ -216,7 +216,7 @@ class YPShortcodeManager {
 		locate_template('common/newproject-lightbox.php',true);
 		$content = ob_get_contents();
 		ob_end_clean();
-		echo do_shortcode('[yproject_lightbox id="newproject" class="wdg-lightbox-ref"]' .$content . '[/yproject_lightbox]');
+		echo do_shortcode('[yproject_lightbox_cornered id="newproject" class="wdg-lightbox-ref"]' .$content . '[/yproject_lightbox_cornered]');
 		echo do_shortcode('[yproject_register_lightbox]');
 	}
 	

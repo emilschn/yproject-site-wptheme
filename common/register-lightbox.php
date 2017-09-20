@@ -2,10 +2,8 @@
 
 <div class="wdg-lightbox-ref">
 
-	<form action="<?php echo wp_unslash( $_SERVER['REQUEST_URI'] ); ?>#register" name="signup_form" id="signup_form" class="db-form v3 form-register" method="post" enctype="multipart/form-data">
+	<form action="<?php echo wp_unslash( $_SERVER['REQUEST_URI'] ); ?>#register" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
 		<?php if ( $signup_step == 'request-details' ) : ?>
-			<h2><?php _e('Inscription', 'yproject'); ?></h2>
-
 			<div class="warning">
 				La cr&eacute;ation d&apos;un compte de Membre sur <?php echo ATCF_CrowdFunding::get_platform_name(); ?> est exclusivement r&eacute;serv&eacute;e aux personnes physiques.
 				Chaque membre ne peut b&eacute;n&eacute;ficier que d&apos;un seul compte &agrave; son nom.<br /><br />
@@ -59,7 +57,9 @@
 				<div class="g-recaptcha" data-sitekey="6LcoHRIUAAAAADwRb9TDAhshD3CZgIhx1M-MO84y"></div>
 				<?php endif; ?>
 
-				<label for="validate-terms-check-register"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> J&apos;accepte <a href="<?php echo home_url().'/cgu';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
+				<div class="field">
+					<label for="validate-terms-check-register"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> J&apos;accepte <a href="<?php echo home_url().'/cgu';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
+				</div>
 
 				<?php wp_nonce_field( 'register_form_posted' ); ?>
 
@@ -67,20 +67,18 @@
 				<input type="hidden" name="redirect-home" value="1" />
 				<?php endif; ?>
 
-				<div class="submit box_connection_buttons red">
-					<input type="submit" name="signup_submit" id="signup_submit" value="Cr&eacute;er mon compte" />
+				<button class="button save red" type="submit"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></button>
+				<br /><br />
+	
+				<button type="button" class="button blue-facebook social_connect_login_facebook"><?php _e( "Se connecter avec Facebook", 'yproject' ); ?></button>
+				<div class="social_connect_login_facebook_loading align-center hidden">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 				</div>
-			</div>
+				<br /><br />
 
-			<div class="connexion_facebook_container box_connection_buttons blue">
-				<a href="#" class="social_connect_login_facebook"><span>&nbsp;S&apos;inscrire avec Facebook</span></a>
-			</div>
-			<div class="social_connect_login_facebook_loading align-center hidden">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
-			</div>
+				<button type="button" class="wdg-button-lightbox-open button transparent" data-lightbox="connexion"><?php _e( "J&apos;ai d&eacute;j&agrave; un compte", 'yproject' ); ?></button>
 
-			<div class="align-center box_connection_buttons transparent" id="signin-button"><a href="#connexion" class="wdg-button-lightbox-open button transparent" data-lightbox="connexion">J&apos;ai d&eacute;j&agrave; un compte</a></div>
-
+			</div>
 		<?php endif; // request-details signup step ?>
 
 
