@@ -82,7 +82,7 @@ $user_investments = $WDGUser_current->get_validated_investments();
 				 * Liste des ROIs reçus
 				 */
 				?>
-				<?php $roi_list = WDGROI::get_roi_list_by_campaign_user( $campaign_id, $WDGUser_current->wp_user->ID ); ?>
+				<?php $roi_list = $WDGUser_current->get_royalties_by_campaign_id( $campaign_id ); ?>
 				<?php $future_roi_list = WDGROIDeclaration::get_list_by_campaign_id( $campaign_id ); ?>
 				
 				<h4 class="margin-top"><?php _e("Vos royalties", 'yproject'); ?></h4>

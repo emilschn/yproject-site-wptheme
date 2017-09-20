@@ -70,7 +70,7 @@
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]--> 
-		<?php $version = '20170811'; ?>
+		<?php $version = '20170920'; ?>
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.min.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
@@ -268,6 +268,10 @@
 			</div>
 		<?php endif; ?>
 		<?php $_SESSION['subscribe_newsletter_sendinblue'] = false; ?>
+		<?php endif; ?>
+		
+		<?php if ( $page_controler->get_show_user_details_confirmation() ): ?>
+			<?php locate_template( array( 'common/user-details-lightbox.php' ), true ); ?>
 		<?php endif; ?>
 		
 		<div id="container"> 

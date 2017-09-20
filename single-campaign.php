@@ -12,7 +12,6 @@ $tag_list = $campaign->get_keywords();
 $client_context = $campaign->get_client_context();
 $classes = ($client_context != '') ? 'theme-' . $client_context . ' ' : '';
 
-if ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote) { require_once('projects/header-voteform.php'); }
 $classes .= 'version-3';
 ?>
 			

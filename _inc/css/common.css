@@ -12,10 +12,6 @@ body a {
 body input, body select {
 	font-family: Trebuchet MS, sans-serif;
 }
-/* Taille font définie pour tous les textes de formulaire */
-body input[type=text], body select {
-	font-size: 12pt;
-}
 
 /*******************************************************************************
 * COMMON
@@ -27,6 +23,7 @@ body input[type=text], body select {
 
 .aligncenter, .align-center { text-align: center; }
 .alignleft, .align-left { text-align: left; }
+.align-justify { text-align: justify; }
 
 .center-lg { max-width: 1300px; margin: auto; }
 .only-inf997 { display: none; }
@@ -102,113 +99,6 @@ button.red {
 	background: none repeat scroll 0 0 transparent;
 	border: 2px solid #333;
 	color: #333;
-}
-
-/*******************************************************************************
-* LIGHTBOX - DESIGN GENERAL
-*******************************************************************************/
-
-.wdg-lightbox-ref .db-form {
-	text-align: center;
-}
-.wdg-lightbox-ref .db-form .field label{
-	display: inline-block;
-	width: 240px;
-	margin: 3px 30px 3px 0px;
-	font-weight: bold;
-	text-align: left;
-	vertical-align: top;
-}
-.wdg-lightbox-ref .db-form .field span.complement{
-	display: block;
-	width: 270px;
-	margin: 0px auto 3px;
-	font-size: 10pt;
-	text-align: left;
-}
-.wdg-lightbox-ref .db-form .field-container {
-	display: block;
-}
-.wdg-lightbox-ref .db-form .field-container.field-type-check {
-	display: inline-block;
-}
-.wdg-lightbox-ref .db-form .field-container input[type=text], .wdg-lightbox-ref .db-form .field-container input[type=password] {
-	width: 260px;
-	height: 30px;
-	border: none;
-}
-.wdg-lightbox-ref .db-form .field-container select {
-	width: 275px;
-	height: 34px;
-	border: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	overflow: hidden;
-	background: url("../../images/common/arrow-filter.png") no-repeat right #FFF;
-	background-size: 34px;
-}
-.wdg-lightbox-ref .db-form .field-container select option {
-	padding: 7px;
-	border-bottom: 1px solid #E1E3E2;
-}
-.wdg-lightbox-ref .db-form .field-container textarea {
-	width: 240px;
-	font-family: Trebuchet MS, sans-serif;
-}
-.wdg-lightbox-ref .db-form button[type=submit] {
-	width: 255px;
-	padding: 15px;
-	margin: 15px auto;
-	border: none;
-	background-color: #EA4F51;
-	font-size: 11pt;
-}
-
-/* Classes à ajouter dans le back-office WordPress */
-.wp-form-title {
-	text-align: center;
-	margin: 0px;
-	padding-bottom: 10px;
-	text-transform: uppercase;
-	color: #00879B;
-	font-size: 16pt;
-	font-weight: normal;
-}
-.wp-form-text {
-	width: 240px;
-	height: 34px;
-	padding: 0px 10px;
-	border: none;
-	font-family: Trebuchet MS, sans-serif;
-	font-size: 12pt;
-}
-.wp-form-textarea {
-	width: 250px;
-	padding: 5px;
-	border: none;
-	font-family: Trebuchet MS, sans-serif;
-	font-size: 11pt;
-}
-.wp-form-submit {
-	width: 255px;
-	padding: 15px;
-	margin: 15px auto;
-	border: none;
-	background-color: #EA4F51;
-	font-size: 11pt;
-}
-
-/* CSS pour éléments WordPress non paramétrables dans le back-office */
-#wdg-lightbox-contactprojet span.wpcf7-list-item {
-	display: block;
-	margin-left: 0;
-}
-#wdg-lightbox-contactprojet .wpcf7-form {
-	width: 95%;
-	margin: auto;
-}
-#wdg-lightbox-contactprojet .wpcf7-form p {
-	margin: 20px auto;
 }
 
 /*******************************************************************************

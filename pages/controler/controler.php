@@ -4,6 +4,7 @@ class WDG_Page_Controler {
 	private $db_cache_manager;
 	private $page_title;
 	private $page_meta_keywords;
+	private $show_user_details_confirmation;
 	
 	public function __construct() {
 		ypcf_session_start();
@@ -13,6 +14,7 @@ class WDG_Page_Controler {
 		$this->db_cache_manager = new WDG_Cache_Plugin();
 		$this->init_page_title();
 		$this->init_page_meta_keywords();
+		$this->init_show_user_details_confirmation();
 	}
 	
 	public function get_db_cached_elements( $key, $version ) {
@@ -73,6 +75,27 @@ class WDG_Page_Controler {
 	 */
 	public function get_header_nav_visible() {
 		return ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' );
+	}
+	
+	/**
+	 * Détermine si il est nécessaire d'afficher la lightbox de confirmation d'information à l'utilisateur
+	 */
+	public function init_show_user_details_confirmation() {
+		if ( !isset( $this->show_user_details_confirmation ) ) {
+			$this->show_user_details_confirmation = false;
+			if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
+				$WDG_user_current = WDGUser::current();
+				$user_details_confirmation = $WDG_user_current->get_show_details_confirmation();
+				if ( $user_details_confirmation ) {
+					$this->show_user_details_confirmation = new WDG_Form_User_Details( $WDG_user_current->get_wpref(), $user_details_confirmation );
+					$WDG_user_current->update_last_details_confirmation();
+				}
+			}
+		}
+	}
+	
+	public function get_show_user_details_confirmation() {
+		return $this->show_user_details_confirmation;
 	}
 	
 }
