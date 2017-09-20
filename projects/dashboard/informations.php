@@ -167,6 +167,41 @@ function print_informations_page()
                 ));
 				?>
 
+                <?php
+				$contract_descriptions_editable = $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated;
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_project_contract_earnings_description",
+                    "type"			=> "editor",
+                    "label"			=> __( "Description des revenus", 'yproject' ),
+                    "value"			=> $campaign->contract_earnings_description(),
+					"editable"		=> $is_admin || $contract_descriptions_editable
+                ));
+				
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_project_contract_spendings_description",
+                    "type"			=> "editor",
+                    "label"			=> __( "Description des d&eacute;penses", 'yproject' ),
+                    "value"			=> $campaign->contract_spendings_description(),
+					"editable"		=> $is_admin || $contract_descriptions_editable
+                ));
+				
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_project_contract_simple_info",
+                    "type"			=> "editor",
+                    "label"			=> __( "Informations simples", 'yproject' ),
+                    "value"			=> $campaign->contract_simple_info(),
+					"editable"		=> $is_admin || $contract_descriptions_editable
+                ));
+				
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_project_contract_detailed_info",
+                    "type"			=> "editor",
+                    "label"			=> __( "Informations d&eacute;taill&eacute;es", 'yproject' ),
+                    "value"			=> $campaign->contract_detailed_info(),
+					"editable"		=> $is_admin || $contract_descriptions_editable
+                ));
+				?>
+
 				<?php
 				// Champs personnalisés
 				$nb_custom_fields = $WDGAuthor->wp_user->get('wdg-contract-nb-custom-fields');
@@ -460,11 +495,12 @@ function print_informations_page()
 
 					DashboardUtility::create_field(array(
 						"id"			=> "new_maximum_profit",
-						"type"			=> "number",
+						"type"			=> "select",
 						"label"			=> "Gain maximum",
 						"value"			=> $campaign->maximum_profit(),
+						"options_id"	=> array_keys( ATCF_Campaign::$maximum_profit_list ),
+						"options_names"	=> array_values( ATCF_Campaign::$maximum_profit_list ),
 						"prefix"		=> '*',
-						"min"			=> 1,
 						"admin_theme"	=> true,
 						"editable"		=> $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
 					));
@@ -730,18 +766,42 @@ function print_informations_page()
                     "editable"			=> $is_admin,
 					"download_label"	=> $post_campaign->post_title . " - Contrat organisation." . $ext
                 ));
+					
+				DashboardUtility::create_field(array(
+					"id"			=> "new_contract_budget_type",
+					"type"			=> "select",
+					"label"			=> "Budget &eacute;gal au",
+					"value"			=> $campaign->contract_budget_type(),
+					"options_id"	=> array_keys( ATCF_Campaign::$contract_budget_types ),
+					"options_names"	=> array_values( ATCF_Campaign::$contract_budget_types ),
+					"admin_theme"	=> true,
+					"editable"		=> $is_admin
+				));
+
+				DashboardUtility::create_field(array(
+					"id"			=> "new_contract_maximum_type",
+					"type"			=> "select",
+					"label"			=> "Plafond",
+					"value"			=> $campaign->contract_maximum_type(),
+					"options_id"	=> array_keys( ATCF_Campaign::$contract_maximum_types ),
+					"options_names"	=> array_values( ATCF_Campaign::$contract_maximum_types ),
+					"admin_theme"	=> true,
+					"editable"		=> $is_admin
+				));
+
+				DashboardUtility::create_field(array(
+					"id"			=> "new_quarter_earnings_estimation_type",
+					"type"			=> "select",
+					"label"			=> "Estimation de revenus trimestriels",
+					"value"			=> $campaign->quarter_earnings_estimation_type(),
+					"options_id"	=> array_keys( ATCF_Campaign::$quarter_earnings_estimation_types ),
+					"options_names"	=> array_values( ATCF_Campaign::$quarter_earnings_estimation_types ),
+					"admin_theme"	=> true,
+					"editable"		=> $is_admin
+				));
 				
 				
 				if ( $is_admin ) {
-					
-					DashboardUtility::create_field(array(
-						"id"			=> "new_contract_budget_type",
-						"type"			=> "select",
-						"label"			=> "Budget &eacute;gal au",
-						"value"			=> $campaign->contract_budget_type(),
-						"options_id"	=> array_keys( ATCF_Campaign::$contract_budget_types ),
-						"options_names"	=> array_values( ATCF_Campaign::$contract_budget_types )
-					));
 					
 					DashboardUtility::create_field(array(
 						"id"			=> "new_override_contract",
