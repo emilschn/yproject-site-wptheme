@@ -55,6 +55,7 @@
 
 				<?php if (!WP_IS_DEV_SITE): ?>
 				<div class="g-recaptcha" data-sitekey="6LcoHRIUAAAAADwRb9TDAhshD3CZgIhx1M-MO84y"></div>
+				<br /><br />
 				<?php endif; ?>
 
 				<div class="field">
@@ -67,6 +68,7 @@
 				<input type="hidden" name="redirect-home" value="1" />
 				<?php endif; ?>
 
+				<input type="hidden" name="signup_submit" value="1" />
 				<button class="button save red" type="submit"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></button>
 				<br /><br />
 	
