@@ -590,6 +590,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	padding: 20px;
 	background-color: #F2F2F2;
 	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
 	z-index: 4002;
 }
 .wdg-lightbox .wdg-lightbox-padder div.wdg-lightbox-msg-info {
