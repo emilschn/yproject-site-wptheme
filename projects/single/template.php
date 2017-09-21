@@ -13,6 +13,9 @@ $campaign_status = $campaign->campaign_status();
 		<?php locate_template( array("projects/single/voteform-lightbox-share.php"), true ); ?>
 	<?php endif; ?>
 <?php endif; ?>
+<?php if ( !is_user_logged_in() ): ?>
+	<?php locate_template( array( 'projects/single/warning-lightbox.php' ), true ); ?>
+<?php endif; ?>
 
 <?php if ($can_modify): ?>
 <?php locate_template( array("projects/single/admin.php"), true ); ?>

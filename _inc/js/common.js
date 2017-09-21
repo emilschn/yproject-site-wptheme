@@ -300,7 +300,9 @@ YPUIFunctions = (function($) {
 					$(".wdg-lightbox").hide();
 				});
 				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function(e) {
-					$(".wdg-lightbox").hide();
+					if ( !$( this ).hasClass( 'disable' ) ) {
+						$(".wdg-lightbox").hide();
+					}
 				});
 				var sHash = window.location.hash.substring(1);
 				if ( (sHash.indexOf("=") === -1) && ($("#wdg-lightbox-" + sHash).length > 0) ) {
@@ -754,6 +756,9 @@ var WDGFormsFunctions = (function($) {
 				$( this ).hide();
 				var formId = $( this ).parent().parent().parent().attr( 'id' );
 				WDGFormsFunctions.postForm( 'div#' + formId, WDGFormsFunctions.postFormCallback );
+			} );
+			$( '.wdg-lightbox-ref button.close' ).click( function( e ) {
+				$( this ).parents( 'div.wdg-lightbox' ).hide();
 			} );
 		},
 		
