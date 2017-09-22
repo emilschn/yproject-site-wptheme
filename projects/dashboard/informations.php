@@ -441,13 +441,13 @@ function print_informations_page()
 
 			<?php
 			$msg_valid_changeOrga = __("L'organisation a bien &eacute;t&eacute; li&eacute;e au projet", "yproject");
-			echo do_shortcode('[yproject_msglightbox id="valid-changeOrga" scrolltop="1" type="valid"]'.$msg_valid_changeOrga.'[/yproject_msglightbox]');
+			echo do_shortcode('[yproject_lightbox_cornered id="valid-changeOrga" scrolltop="1" msgtype="valid"]'.$msg_valid_changeOrga.'[/yproject_lightbox_cornered]');
 
 			$msg_valid_newOrga = __("Votre nouvelle organisation a bien &eacute;t&eacute; cr&eacute;&eacute;e", "yproject");
-			echo do_shortcode('[yproject_msglightbox id="valid-newOrga" scrolltop="1" type="valid"]'.$msg_valid_newOrga.'[/yproject_msglightbox]');
+			echo do_shortcode('[yproject_lightbox_cornered id="valid-newOrga" scrolltop="1" msgtype="valid"]'.$msg_valid_newOrga.'[/yproject_lightbox_cornered]');
 
 			$msg_valid_editOrga = __("Les informations ont bien &eacute;t&eacute; enregistr&eacute;es", "yproject");
-			echo do_shortcode('[yproject_msglightbox id="valid-editOrga" scrolltop="1" type="valid"]'.$msg_valid_editOrga.'[/yproject_msglightbox]');
+			echo do_shortcode('[yproject_lightbox_cornered id="valid-editOrga" scrolltop="1" msgtype="valid"]'.$msg_valid_editOrga.'[/yproject_lightbox_cornered]');
 			?>
         </div>
 
@@ -727,6 +727,17 @@ function print_informations_page()
             <ul class="errors">
 
             </ul>
+			
+			<?php if ( $is_admin ): ?>
+			<form action="<?php echo admin_url( 'admin-post.php?action=generate_contract_files'); ?>" method="post" id="contract_files_generate_form" class="field admin-theme">
+				/!\ <?php _e( "Si vous choisissez de g&eacute;n&eacute;rer les contrats, cela remplacera les fichiers précédents :", 'yproject' ); ?> /!\
+				<br /><br />
+				<div class="align-center">
+					<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+					<button class="button blue-pale"><?php _e( "G&eacute;n&eacute;rer des contrats vierges", 'yproject' ); ?></button>
+				</div>
+			</form>
+			<?php endif; ?>
 			
 			<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
 				la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>

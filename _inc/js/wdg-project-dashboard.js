@@ -323,7 +323,7 @@ var WDGProjectDashboard = (function ($) {
                         e.preventDefault();
                         var thisForm = $(this);
                         
-                        var campaign_id, org_name, org_email, org_description, org_legalform,
+                        var campaign_id, org_name, org_email, org_representative_function, org_description, org_legalform,
                         org_idnumber, org_rcs,org_capital, org_ape, org_address, org_postal_code,
                         org_city, org_nationality, org_bankownername, org_bankowneraddress,
                         org_bankowneriban, org_bankownerbic, org_capable;
@@ -331,6 +331,7 @@ var WDGProjectDashboard = (function ($) {
                         campaign_id = $('#tab-organization #wdg-lightbox-newOrga input[name=campaign_id]').val();
                         org_name = $('#tab-organization #wdg-lightbox-newOrga input[name=org_name]').val();
                         org_email = $('#tab-organization #wdg-lightbox-newOrga input[name=org_email]').val();
+						org_representative_function = $('#tab-organization #wdg-lightbox-newOrga input[name=org_representative_function]').val();
 						org_description = $('#tab-organization #wdg-lightbox-newOrga input[name=org_description]').val();
                         org_legalform = $('#tab-organization #wdg-lightbox-newOrga input[name=org_legalform]').val();
                         org_idnumber = $('#tab-organization #wdg-lightbox-newOrga input[name=org_idnumber]').val();
@@ -362,6 +363,7 @@ var WDGProjectDashboard = (function ($) {
                                 'campaign_id': campaign_id,
                                 'org_name': org_name,
                                 'org_email': org_email,
+								'org_representative_function': org_representative_function,
 								'org_description': org_description,
                                 'org_legalform': org_legalform,
                                 'org_idnumber': org_idnumber,
@@ -1432,6 +1434,7 @@ var WDGProjectDashboard = (function ($) {
         updateOrgaForm: function(feedback){
             $("#tab-organization #wdg-lightbox-editOrga #org_name").html(feedback.organization.name);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_email]").val(feedback.organization.email);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_representative_function]").val(feedback.organization.representative_function);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_description]").val(feedback.organization.description);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_legalform]").val(feedback.organization.legalForm);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_idnumber]").val(feedback.organization.idNumber);

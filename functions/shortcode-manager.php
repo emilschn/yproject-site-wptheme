@@ -13,7 +13,6 @@ class YPShortcodeManager {
 		'yproject_lightbox_cornered',
 		'yproject_lightbox',
 		'yproject_widelightbox',
-		'yproject_msglightbox',
 		'yproject_connexion_lightbox',
 		'yproject_register_lightbox',
 		'yproject_statsadvanced_lightbox',
@@ -157,24 +156,6 @@ class YPShortcodeManager {
 		return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].'>
 			<div class="wdg-lightbox-click-catcher"></div>
 			<div class="wdg-lightbox-padder wdg-widelightbox-padder">
-				<div class="wdg-lightbox-button-close">
-				<a href="#" class="button">X</a>
-				</div>'.do_shortcode($content).'
-			</div>
-			</div>';
-	}
-
-	//Shortcode ligthbox messages info/validé/erreur
-	//type: valid / error / info
-	function yproject_msglightbox($atts, $content = '') {
-		$atts = shortcode_atts( array(
-			'id'		=> 'lightbox',
-			'scrolltop'	=> '0',
-			'type'		=> 'msg'
-		), $atts );
-		return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox msg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].'>
-			<div class="wdg-lightbox-click-catcher"></div>
-			<div class="wdg-lightbox-padder '.$atts['type'].'-msg">
 				<div class="wdg-lightbox-button-close">
 				<a href="#" class="button">X</a>
 				</div>'.do_shortcode($content).'

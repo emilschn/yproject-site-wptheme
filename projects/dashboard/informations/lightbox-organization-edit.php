@@ -40,6 +40,9 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 <label for="org_email"><?php _e('E-mail de contact', 'yproject'); ?>*</label>
                 <input type="text" name="org_email" value="<?php echo $organization_obj->get_email(); ?>" /><br />
 
+                <label for="org_representative_function"><?php _e("Fonction du repr&eacute;sentant", 'yproject'); ?>*</label>
+                <input type="text" name="org_representative_function" value="<?php echo $organization_obj->get_representative_function(); ?>" /><br />
+
                 <label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?>*</label>
                 <input type="text" name="org_description" value="<?php echo $organization_obj->get_description(); ?>" /><br />
 
