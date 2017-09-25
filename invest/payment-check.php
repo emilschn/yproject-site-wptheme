@@ -13,6 +13,7 @@ if ( !empty( $check_return ) ) {
 	if (isset($campaign)): ?>
 
 		<?php
+		ypcf_debug_log( 'payment-wire.php' );
 		global $current_breadcrumb_step; $current_breadcrumb_step = 3;
 		locate_template( 'invest/breadcrumb.php', true );
 		$campaign_organization = $campaign->get_organization();
