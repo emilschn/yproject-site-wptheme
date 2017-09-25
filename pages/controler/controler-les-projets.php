@@ -135,7 +135,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 				'funded'	=> __( "Financ&eacute;", 'yproject' )	
 			);
 
-			$terms_activity = get_terms('download_category', array( 'slug' => 'activities', 'hide_empty' => false ) );
+			$terms_activity = get_terms('download_category', array( 'slug' => 'types', 'hide_empty' => false ) );
 			$term_activity_id = $terms_activity[0]->term_id;
 			$this->filters_list[ 'activities' ] = get_terms( 'download_category', array(
 				'child_of' => $term_activity_id,

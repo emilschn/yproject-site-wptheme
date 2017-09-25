@@ -2,7 +2,7 @@
 
 <div class="wdg-lightbox-ref">
 
-	<form action="<?php echo wp_unslash( $_SERVER['REQUEST_URI'] ); ?>#register" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
+	<form action="<?php echo home_url( "/connexion" ); ?>#register" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
 		<?php if ( $signup_step == 'request-details' ) : ?>
 			<div class="warning">
 				La cr&eacute;ation d&apos;un compte de Membre sur <?php echo ATCF_CrowdFunding::get_platform_name(); ?> est exclusivement r&eacute;serv&eacute;e aux personnes physiques.
@@ -68,6 +68,7 @@
 				<input type="hidden" name="redirect-home" value="1" />
 				<?php endif; ?>
 
+				<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 				<input type="hidden" name="signup_submit" value="1" />
 				<button class="button save red" type="submit"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></button>
 				<br /><br />

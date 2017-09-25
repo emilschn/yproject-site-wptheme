@@ -502,6 +502,8 @@ YPUIFunctions = (function($) {
 					var impact = $("#project-filter-impact").val();
 					YPUIFunctions.refreshProjectList( step, location, activity, impact );
 				});
+				$("#project-filter-activity").val( 'entreprises' );
+				$("#project-filter .project-filter-select").trigger("click");
 				
 				$("div.padder.projects-funded button").click(function() {
 					var lineHeight = 620;

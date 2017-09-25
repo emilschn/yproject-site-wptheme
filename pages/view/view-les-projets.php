@@ -156,9 +156,9 @@ $stats_html = $page_controler->get_stats_html();
             </div>
             <div class="project-filter-container">
                 <select id="project-filter-activity" class="project-filter-select">
-                    <option value="all" selected="selected"><?php _e( "Tous les secteurs d'activit&eacute;", 'yproject' ); ?></option>
+                    <option value="all"><?php _e( "Tous les types de projet", 'yproject' ); ?></option>
                     <?php foreach ( $activities_list as $activity ): ?>
-						<option value="<?php echo $activity->slug; ?>"><?php echo $activity->name; ?></option>
+						<option value="<?php echo $activity->slug; ?>" <?php selected( $activity->slug, 'entreprises' ); ?>><?php echo $activity->name; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
