@@ -20,8 +20,8 @@
 			<br />
 		<?php endif; ?>
 		<?php _e( "Vous pouvez y acc&eacute;der sans investir mais vous devez &ecirc;tre conscient que l'investissement dans des soci&eacute;t&eacute;s non cot&eacute;es comporte des risques sp&eacute;cifiques :", 'yproject' ); ?><br />
-		<?php _e( "&gt; Risque de perte totale ou partielle du capital investi", 'yproject' ); ?><br />
 		<?php _e( "&gt; Le retour sur investissement d&eacute;pend de la r&eacute;ussite du projet financ&eacute;", 'yproject' ); ?><br />
+		<?php _e( "&gt; Risque de perte totale ou partielle du capital investi", 'yproject' ); ?><br />
 		<br />
 		<strong><?php _e( "Avez‐vous conscience que, dans le cas o&ugrave; vous investissez, vous pouvez perdre &eacute;ventuellement la totalit&eacute; de votre investissement ?", 'yproject' ); ?></strong><br />
 		<br />

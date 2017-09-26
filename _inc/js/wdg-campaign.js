@@ -105,6 +105,16 @@ var WDGProjectViewer = (function($) {
 					$("span.roi_percent_total").text(roiPercentTotalStr);
 				}
 			});
+			
+			if ( $( '#wdg-lightbox-project-warning button.close' ).length > 0 ) {
+				$( '#wdg-lightbox-project-warning button.close' ).click( function() {
+					var date = new Date();
+					var days = 10;
+					date.setTime(date.getTime()+(days*24*60*60*1000));
+					var expires = "; expires="+date.toGMTString();
+					document.cookie = "hideprojectwarning=1"+expires+"; path=/";
+				} );
+			}
 
 		},
 		
