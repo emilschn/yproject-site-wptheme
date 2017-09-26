@@ -49,8 +49,6 @@ class WDG_WordPress_Events {
 		
 		// Donne la possibilité de mettre des tags aux pages
 		register_taxonomy_for_object_type('post_tag', 'page');
-		// Vérifie si nécessaire de lancer les tâches quotidiennes
-		WDGCronActions::init_actions();
 		// Vérifie si le formulaire de connexion ou d'inscription a été posté
 		WDGFormUsers::login();
 		WDGFormUsers::register();

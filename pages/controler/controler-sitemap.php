@@ -6,8 +6,32 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	
 	public function __construct() {
 		parent::__construct();
+		$this->hourly_call();
+		if ( $this->is_daily_call_time() ) {
+			$this->daily_call();
+		}
+	}
+	
+	private function hourly_call() {
 		$this->rebuild_cache();
+	}
+	
+	private function daily_call() {
 		$this->rebuild_sitemap();
+		WDGCronActions::make_projects_rss();
+		WDGCronActions::send_notifications();
+	}
+	
+	private function is_daily_call_time() {
+		$buffer = FALSE;
+		$date_now = new DateTime();
+		$last_daily_call = get_option( 'last_daily_call' );
+		$saved_date = new DateTime( $last_daily_call );
+		if ( $last_daily_call == FALSE || $saved_date->diff($date_now)->days >= 1 ) {
+			update_option( 'last_daily_call', $date_now->format( 'Y-m-d H:i:s' ) );
+			$buffer = TRUE;
+		}
+		return $buffer;
 	}
 	
 	private function rebuild_cache() {
