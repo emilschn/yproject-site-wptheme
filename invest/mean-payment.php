@@ -8,6 +8,11 @@ ypcf_session_start();
 if (isset($campaign)):
 	//Lien
 	$wdginvestment = WDGInvestment::current();
+	if ( $wdginvestment->has_token() ) {
+		ypcf_debug_log( 'mean-payment.php > Token : ' . $wdginvestment->get_token() );
+	} else {
+		ypcf_debug_log( 'mean-payment.php > Pas de token' );
+	}
 	$page_mean_payment = get_page_by_path('moyen-de-paiement');
 	$page_mean_payment_link = get_permalink($page_mean_payment->ID) . '?campaign_id=' . $campaign->ID . '&meanofpayment=';
 	
@@ -30,7 +35,7 @@ if (isset($campaign)):
 	}
 	
 	//Possible de régler par virement ?
-	$can_use_wire = ( $campaign->can_use_wire($_SESSION['redirect_current_amount_part']) && !$wdginvestment->has_token() );
+	$can_use_wire = ( $campaign->can_use_wire($_SESSION['redirect_current_amount_part']) );
 	//Possible de régler par chèque ?
 	$can_use_check = ( $campaign->can_use_check($_SESSION['redirect_current_amount_part']) && !$wdginvestment->has_token() );
 	$user_is_lemonway_registered = FALSE;

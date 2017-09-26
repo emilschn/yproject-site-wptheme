@@ -8,6 +8,7 @@ if (isset($campaign)): ?>
 
 	<?php if (isset($_GET['meanofpayment']) && $_GET['meanofpayment'] == 'wire'): ?>
 		<?php
+		ypcf_debug_log( 'payment-wire.php' );
 		$WDGUser_current = WDGUser::current();
 		$WDGUser_current->register_lemonway();
 		$invest_type = $_SESSION['redirect_current_invest_type'];
