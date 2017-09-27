@@ -236,7 +236,9 @@
 
 		<?php if (!is_user_logged_in()): ?>
 			<?php echo do_shortcode('[yproject_register_lightbox]'); ?>
+			<?php if ( !isset( $post->post_name ) || $post->post_name != 'connexion' ): ?>
 			<?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
+			<?php endif; ?>
 		
 		<?php elseif (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)): ?>
 			<?php $_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; ?>
