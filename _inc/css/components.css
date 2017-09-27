@@ -169,10 +169,12 @@
 		justify-content: space-between;
 	}
 	.wdg-component-slider #button-container .button-slide {
+		display: block;
 		-webkit-flex-flow: column wrap;
 		flex-flow: column wrap;
 		margin-bottom: 10px;
 		width: 50%;
+		height: 55px;
 		min-width: 250px;
 	}
 }
