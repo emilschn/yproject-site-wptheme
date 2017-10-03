@@ -1,6 +1,6 @@
 <?php global $page_controler; ?>
 
-<div id="content" style="margin-top: 90px;">
+<div id="content" style="margin-top: 90px; background-color: #f2f2f2;">
 	<div class="padder_more">
 		<div class="center_small margin-height">
 			

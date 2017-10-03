@@ -169,10 +169,12 @@
 		justify-content: space-between;
 	}
 	.wdg-component-slider #button-container .button-slide {
+		display: block;
 		-webkit-flex-flow: column wrap;
 		flex-flow: column wrap;
 		margin-bottom: 10px;
 		width: 50%;
+		height: 55px;
 		min-width: 250px;
 	}
 }
@@ -204,10 +206,10 @@
 
 .wdg-component-projects-preview .project-slider {
 	width: 100%;
-        overflow: -moz-scrollbars-horizontal;/* Firefox */ 
-            -ms-overflow-style: scrollbar;/* Edge */
+	overflow: -moz-scrollbars-horizontal;/* Firefox */ 
+	-ms-overflow-style: scrollbar;/* Edge */
 	overflow-x: auto;
-        margin-bottom: 0.8%;
+	margin-bottom: 0.8%;
 }
 .wdg-component-projects-preview .block-projects {
     z-index: 0;
@@ -564,8 +566,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	margin: 5vh auto;
 	padding: 50px;
 	background-color: #F2F2F2;
-	overflow-y: scroll;
-	-webkit-overflow-scrolling: touch;
+	overflow-y: auto;
 	z-index: 4002;
 }
 .wdg-lightbox.cornered .wdg-lightbox-padder {
@@ -590,7 +591,6 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	padding: 20px;
 	background-color: #F2F2F2;
 	overflow-y: auto;
-	-webkit-overflow-scrolling: touch;
 	z-index: 4002;
 }
 .wdg-lightbox .wdg-lightbox-padder div.wdg-lightbox-msg-info {
@@ -646,7 +646,8 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 #validate-terms .validate-terms-excerpt {
     margin: 20px 0px;
     max-height: 250px;
-    overflow-y: auto;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
     border: 1px solid #EEECED;
     padding: 5px;
 }
@@ -705,12 +706,24 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	.wdg-lightbox .wdg-lightbox-corner,
 	.wdg-lightbox.cornered .wdg-lightbox-padder,
 	.wdg-lightbox .wdg-lightbox-padder {
-		width: calc(100% - 30px);
-		margin: 0px 5px;
+		margin: 0px auto;
 		padding: 10px;
 	}
+	.wdg-lightbox.cornered .wdg-lightbox-padder,
+	.wdg-lightbox .wdg-lightbox-padder {
+		width: calc(100% - 40px);
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+	}
 	.wdg-lightbox .wdg-lightbox-corner {
-		width: calc(100% - 90px);
+		width: calc(100% - 100px);
+		max-width: 540px;
+	}
+	.wdg-lightbox.cornered .wdg-lightbox-padder {
+		max-height: 70%;
+		max-height: -webkit-calc( 100% - 120px );
+		max-height: -moz-calc( 100% - 120px );
+		max-height: calc( 100% - 120px );
 	}
 }
 
@@ -852,7 +865,10 @@ body input[type=text], body input[type=email], body select {
 	border: none;
 }
 .db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=email] {
-	width: calc( 100% - 16px );
+	width: 96%;
+    width: -webkit-calc( 100% - 16px );
+    width: -moz-calc( 100% - 16px );
+    width: calc( 100% - 16px );
 	height: 50px;
 	margin: 0px;
 	padding: 3px 8px;
@@ -884,11 +900,18 @@ body input[type=text], body input[type=email], body select {
 	font-size: 12pt;
 	font-family: Trebuchet MS, sans-serif;
 }
-.db-form.v3 button {
+.db-form.v3 a.button {
+	padding: 0px;
+	line-height: 50px;
+	height: 48px;
+}
+.db-form.v3 button,
+.db-form.v3 a.button {
 	width: 100%;
 	height: 50px;
 }
-.db-form.v3 button.half {
+.db-form.v3 button.half,
+.db-form.v3 a.button.half {
 	width: 45%;
 }
 

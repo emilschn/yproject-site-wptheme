@@ -47,16 +47,10 @@ a.hidden-link {
     color: #333333;
 }
 
-button.red {
-	background-color: #EA4F51;
-	color: #FFFFFF;
-	border: 0px;
-	cursor: pointer;
-}
-
 .button, .wpcf7-submit {
     background: none repeat scroll 0 0 #333333;
     border: 1px solid #333333;
+	border-radius: 0;
     color: #FFFFFF;
     padding: 5px 15px;
     text-transform: uppercase;
@@ -64,6 +58,14 @@ button.red {
     font-weight: normal;
     font-size: 10pt;
     white-space: nowrap;
+	-webkit-appearance: none;
+	-webkit-border-radius: 0px;
+}
+button.red {
+	background-color: #EA4F51;
+	color: #FFFFFF;
+	border: 0px;
+	cursor: pointer;
 }
 .button.red, .wpcf7-submit {
     background: none repeat scroll 0 0 #EA4F51;
@@ -377,9 +379,6 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     text-transform: uppercase;
 }
 
-#submenu-user form.sidebar-login-form .input_submit {
-    color: #FFF;
-}
 #submenu-user form.sidebar-login-form .input_connection {
     margin: 7px 0px;
     width: 246px;
@@ -392,14 +391,12 @@ nav#main > div#menu > a.btn-user.active.connected > img {
     padding: 5px;
 }
 #submenu-user form.sidebar-login-form .pwd_submit {
-    width: 191px;
+    width: calc( 100% - 65px );
     margin-right: 0px;
 }  
-#submenu-user form.sidebar-login-form .ok_valid {
+#submenu-user form.sidebar-login-form input.button.red {
     width: 50px;
     height: 50px;
-    background-color: #EA4F51;
-    border: none;
     cursor: pointer;
 }  
 

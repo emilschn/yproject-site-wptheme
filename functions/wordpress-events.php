@@ -49,8 +49,6 @@ class WDG_WordPress_Events {
 		
 		// Donne la possibilité de mettre des tags aux pages
 		register_taxonomy_for_object_type('post_tag', 'page');
-		// Vérifie si nécessaire de lancer les tâches quotidiennes
-		WDGCronActions::init_actions();
 		// Vérifie si le formulaire de connexion ou d'inscription a été posté
 		WDGFormUsers::login();
 		WDGFormUsers::register();
@@ -145,7 +143,7 @@ class WDG_WordPress_Events {
 		$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 		$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 		$is_admin_page = ($post->post_name == 'liste-des-paiements');
-		$current_version = '20170921b';
+		$current_version = '20171003';
 
 		if ( !is_admin() ) {
 			wp_deregister_script('jquery');

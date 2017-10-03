@@ -70,7 +70,7 @@
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]--> 
-		<?php $version = '20170921b'; ?>
+		<?php $version = '20171003'; ?>
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.min.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
@@ -191,7 +191,7 @@
 
 						<input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
 						<div class="submit-center" style="display: none;">             
-							<input type="submit" name="wp-submit" class="input_submit ok_valid" id="connect" value="OK"/>
+							<input type="submit" name="wp-submit" class="input_submit button red" id="connect" value="OK"/>
 							<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 							<input type="hidden" name="login-form" value="1" />
 						</div>   
@@ -236,7 +236,9 @@
 
 		<?php if (!is_user_logged_in()): ?>
 			<?php echo do_shortcode('[yproject_register_lightbox]'); ?>
+			<?php if ( !isset( $post->post_name ) || $post->post_name != 'connexion' ): ?>
 			<?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
+			<?php endif; ?>
 		
 		<?php elseif (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)): ?>
 			<?php $_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; ?>
