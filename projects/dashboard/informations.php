@@ -748,21 +748,6 @@ function print_informations_page()
                 </ul>
 
 				<?php
-				$file_name_contract_user = $campaign->backoffice_contract_user();
-				if (!empty($file_name_contract_user)) {
-					$file_name_exploded = explode('.', $file_name_contract_user);
-					$ext = $file_name_exploded[count($file_name_exploded) - 1];
-					$file_name_contract_user = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_user;
-				}
-                DashboardUtility::create_field(array(
-                    "id"				=> "new_backoffice_contract_user",
-                    "type"				=> "upload",
-                    "label"				=> "Contrat d'investissement au nom d'une personne physique",
-                    "value"				=> $file_name_contract_user,
-                    "editable"			=> $is_admin,
-					"download_label"	=> $post_campaign->post_title . " - Contrat personne physique." . $ext
-                ));
-				
 				$file_name_contract_orga = $campaign->backoffice_contract_orga();
 				if (!empty($file_name_contract_orga)) {
 					$file_name_exploded = explode('.', $file_name_contract_orga);
@@ -772,10 +757,10 @@ function print_informations_page()
                 DashboardUtility::create_field(array(
                     "id"				=> "new_backoffice_contract_orga",
                     "type"				=> "upload",
-                    "label"				=> "Contrat d'investissement au nom d'une organisation",
+                    "label"				=> "Contrat d'investissement",
                     "value"				=> $file_name_contract_orga,
                     "editable"			=> $is_admin,
-					"download_label"	=> $post_campaign->post_title . " - Contrat organisation." . $ext
+					"download_label"	=> $post_campaign->post_title . " - Contrat royalties." . $ext
                 ));
 					
 				DashboardUtility::create_field(array(
