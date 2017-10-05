@@ -185,11 +185,15 @@ $declaration_message = $declaration->get_message();
 		<?php endif; ?>
 		
 		<?php else: ?>
-		Votre paiement de <?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
-		Le versement vers vos investisseurs est en cours.<br /><br />
-		<?php $declaration->make_payment_certificate(); ?>
-		<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue">Télécharger l'attestation de paiement</a>
-
+			<?php if ( $declaration->get_amount_with_commission() > 0 ): ?>
+			Votre paiement de <?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+			Le versement vers vos investisseurs est en cours.<br /><br />
+			<?php $declaration->make_payment_certificate(); ?>
+			<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue">Télécharger l'attestation de paiement</a>
+			<?php else: ?>
+			La cloture de votre déclaration est en cours.
+			<?php endif; ?>
+		
 		<?php if ($is_admin): ?>
 			<br /><br />
 			<div class="align-center admin-theme-block">
