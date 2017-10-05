@@ -170,19 +170,21 @@ function print_informations_page()
                 <?php
 				$contract_descriptions_editable = $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated;
                 DashboardUtility::create_field(array(
-                    "id"			=> "new_project_contract_earnings_description",
-                    "type"			=> "editor",
-                    "label"			=> __( "Description des revenus", 'yproject' ),
-                    "value"			=> $campaign->contract_earnings_description(),
-					"editable"		=> $is_admin || $contract_descriptions_editable
-                ));
-				
-                DashboardUtility::create_field(array(
                     "id"			=> "new_project_contract_spendings_description",
                     "type"			=> "editor",
                     "label"			=> __( "Description des d&eacute;penses", 'yproject' ),
                     "value"			=> $campaign->contract_spendings_description(),
 					"editable"		=> $is_admin || $contract_descriptions_editable
+                ));
+                
+				if ( $is_admin ):
+				DashboardUtility::create_field(array(
+                    "id"			=> "new_project_contract_earnings_description",
+                    "type"			=> "editor",
+                    "label"			=> __( "Description des revenus", 'yproject' ),
+                    "value"			=> $campaign->contract_earnings_description(),
+					'admin_theme'	=> true,
+					"editable"		=> $is_admin
                 ));
 				
                 DashboardUtility::create_field(array(
@@ -190,7 +192,8 @@ function print_informations_page()
                     "type"			=> "editor",
                     "label"			=> __( "Informations simples", 'yproject' ),
                     "value"			=> $campaign->contract_simple_info(),
-					"editable"		=> $is_admin || $contract_descriptions_editable
+					'admin_theme'	=> true,
+					"editable"		=> $is_admin
                 ));
 				
                 DashboardUtility::create_field(array(
@@ -198,8 +201,10 @@ function print_informations_page()
                     "type"			=> "editor",
                     "label"			=> __( "Informations d&eacute;taill&eacute;es", 'yproject' ),
                     "value"			=> $campaign->contract_detailed_info(),
-					"editable"		=> $is_admin || $contract_descriptions_editable
+					'admin_theme'	=> true,
+					"editable"		=> $is_admin
                 ));
+				endif;
 				?>
 
 				<?php
@@ -636,7 +641,8 @@ function print_informations_page()
                         <?php echo "&nbsp;".__("investis"); ?>
                     </label>
                 </div>
-                <ul id="estimated-turnover">
+				<?php $is_euro = ( $campaign->contract_budget_type() != 'collected_funds' ); ?>
+                <ul id="estimated-turnover" data-symbol="<?php if ( $is_euro ): ?>€<?php else: ?>%<?php endif; ?>">
                     <?php
                     $estimated_turnover = $campaign->estimated_turnover();
                     if(!empty($estimated_turnover)){
@@ -647,8 +653,9 @@ function print_informations_page()
                                 <span class="field-container" <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?> style="padding-left: 80px;" <?php endif; ?>>
                                         <span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
                                                 <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
-                                                <i class="right fa fa-eur" aria-hidden="true"></i>
-                                                <input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />                                         
+                                                <i class="right fa <?php if ($is_euro): ?>fa-eur<?php endif; ?>" aria-hidden="true"></i>
+                                                <input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />
+													<?php if ( !$is_euro ): ?>%<?php endif; ?>
                                                 <?php else: ?>
                                                 <?php echo $turnover; ?>
                                                 <?php endif; ?>
@@ -773,7 +780,13 @@ function print_informations_page()
 					"admin_theme"	=> true,
 					"editable"		=> $is_admin
 				));
+				?>
+				<div class="field admin-theme">
+					<?php echo _e( "Si le budget est égal au montant collecté, le prévisionnel sera exprimé en pourcentage du budget.", 'yproject' ); ?>
+					<br /><br />
+				</div>
 
+				<?php
 				DashboardUtility::create_field(array(
 					"id"			=> "new_contract_maximum_type",
 					"type"			=> "select",
@@ -784,7 +797,14 @@ function print_informations_page()
 					"admin_theme"	=> true,
 					"editable"		=> $is_admin
 				));
+				?>
+				<div class="field admin-theme">
+					<?php echo _e( "Si infini, le budget est égal au montant collecté.", 'yproject' ); ?>
+					<br /><br />
+				</div>
 
+
+				<?php
 				DashboardUtility::create_field(array(
 					"id"			=> "new_quarter_earnings_estimation_type",
 					"type"			=> "select",
