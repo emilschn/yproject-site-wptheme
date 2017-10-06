@@ -169,7 +169,10 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 		
 		<div id="user-details-form-buttons">
 			
-			<button class="button save red" data-close="user-details" data-open="user-details-confirmation" data-callback="WDGProjectVote.saveVoteUserCallback"><?php _e( "Confirmer", 'yproject' ); ?></button>
+			<button class="button save red" data-callback="WDGProjectVote.saveVoteUserRedirect" data-redirecturl="<?php echo home_url( '/investir' ) . '?campaign_id=' .$post->ID. '&invest_start=1'; ?>"><?php _e( "Confirmer et pr&eacute;-investir", 'yproject' ); ?></button>
+			<br /><br />
+			
+			<button class="button save blue" data-close="user-details" data-open="user-details-confirmation" data-callback="WDGProjectVote.saveVoteUserCallback"><?php _e( "Confirmer", 'yproject' ); ?></button>
 			
 			<div class="loading align-center hidden">
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
