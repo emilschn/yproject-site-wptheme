@@ -50,7 +50,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		$this->slider = array();
 		foreach ( $list_projects as $project_id ) {
 			$campaign = atcf_get_campaign( $project_id );
-			$img = $campaign->get_home_picture_src();
+			$img = $campaign->get_home_picture_src( TRUE, 'large' );
 			array_push( $this->slider, array(
 					'img'	=> $img,
 					'title'	=> $campaign->data->post_title,

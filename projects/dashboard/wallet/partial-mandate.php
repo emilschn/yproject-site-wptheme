@@ -159,7 +159,14 @@ $keep_going = true;
 				?>
 				<br />
 				
-                <input type="hidden" name="organization_id" value="<?php echo $organization_obj->get_wpref(); ?>" />
+				<?php
+				DashboardUtility::create_field( array(
+					'id'			=> 'organization_id',
+					'type'			=> 'hidden',
+					'value'			=> $organization_obj->get_wpref()
+				) );
+				?>
+				
 				<?php DashboardUtility::create_save_button( "pay_with_mandate" ); ?>
 
 			</div>
