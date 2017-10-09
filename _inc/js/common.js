@@ -87,6 +87,22 @@ YPUIFunctions = (function($) {
 					});
 				}
 				$("#submenu-search").height("auto");
+				
+				if ( search === 'get funky!' ) {
+					$( '#container' ).empty();
+					$( '#container' ).append( '<div class="align-center" style="padding-top: 80px;"><iframe width="560" height="315" src="https://www.youtube.com/embed/kxopViU98Xo?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe></div>' );
+					WDGGETFUNKY_MARGINLEFT = 500;
+					WDGGETFUNKY();
+					function WDGGETFUNKY() {
+						WDGGETFUNKY_MARGINLEFT *= -1;
+						$( '#container div' ).animate(
+							{ marginLeft: WDGGETFUNKY_MARGINLEFT }, 
+							2000, 
+							"swing",
+							function() { WDGGETFUNKY(); }
+						);
+					}
+				}
 			});
 			
 			
