@@ -323,7 +323,7 @@ var WDGProjectDashboard = (function ($) {
                         e.preventDefault();
                         var thisForm = $(this);
                         
-                        var campaign_id, org_name, org_email, org_description, org_legalform,
+                        var campaign_id, org_name, org_email, org_representative_function, org_description, org_legalform,
                         org_idnumber, org_rcs,org_capital, org_ape, org_address, org_postal_code,
                         org_city, org_nationality, org_bankownername, org_bankowneraddress,
                         org_bankowneriban, org_bankownerbic, org_capable;
@@ -331,6 +331,7 @@ var WDGProjectDashboard = (function ($) {
                         campaign_id = $('#tab-organization #wdg-lightbox-newOrga input[name=campaign_id]').val();
                         org_name = $('#tab-organization #wdg-lightbox-newOrga input[name=org_name]').val();
                         org_email = $('#tab-organization #wdg-lightbox-newOrga input[name=org_email]').val();
+						org_representative_function = $('#tab-organization #wdg-lightbox-newOrga input[name=org_representative_function]').val();
 						org_description = $('#tab-organization #wdg-lightbox-newOrga input[name=org_description]').val();
                         org_legalform = $('#tab-organization #wdg-lightbox-newOrga input[name=org_legalform]').val();
                         org_idnumber = $('#tab-organization #wdg-lightbox-newOrga input[name=org_idnumber]').val();
@@ -362,6 +363,7 @@ var WDGProjectDashboard = (function ($) {
                                 'campaign_id': campaign_id,
                                 'org_name': org_name,
                                 'org_email': org_email,
+								'org_representative_function': org_representative_function,
 								'org_description': org_description,
                                 'org_legalform': org_legalform,
                                 'org_idnumber': org_idnumber,
@@ -481,10 +483,10 @@ var WDGProjectDashboard = (function ($) {
 										'<label>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></label>'+
 										'<span class="field-container">'+
 										'&nbsp;<span class="field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
-										'<i class="right fa fa-eur" aria-hidden="true"></i>'+
-										'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" />'+                                   
+										'<i class="right fa" aria-hidden="true"></i>'+
+										'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" /> '+$('#estimated-turnover').data('symbol')+                                   
 										'</span>'+
-										'<span class="like-input-center"><p id="roi-amount-'+(i+nb_years_li_existing)+'">0 €</p></span>'+
+										'<span class="like-input-center"><p id="roi-amount-'+(i+nb_years_li_existing)+'">0 '+$('#estimated-turnover').data('symbol')+'</p></span>'+
 										'</span>'+
 										'</li>';
 								}
@@ -1244,9 +1246,9 @@ var WDGProjectDashboard = (function ($) {
                     if(percent){
                         var roi_amount = percent * caTab[ii];
                         var roi_amount_format = WDGProjectDashboard.numberFormat(roi_amount);
-                        $("#roi-amount-"+ii).html(roi_amount_format+" €");
-                    }else{ $("#roi-amount-"+ii).html("0 €"); }
-                }else{ $("#roi-amount-"+ii).html("0 €"); }
+                        $("#roi-amount-"+ii).html(roi_amount_format+" " + $('#estimated-turnover').data('symbol'));
+                    }else{ $("#roi-amount-"+ii).html("0 " + $('#estimated-turnover').data('symbol')); }
+                }else{ $("#roi-amount-"+ii).html("0 " + $('#estimated-turnover').data('symbol')); }
             }
         },
         /**
@@ -1258,7 +1260,7 @@ var WDGProjectDashboard = (function ($) {
                 totalRoi = percent * totalca;
                 if(totalRoi){
                     var totalRoi_format = WDGProjectDashboard.numberFormat(totalRoi);
-                    $("#total-roi").html(totalRoi_format+" €");
+                    $("#total-roi").html(totalRoi_format+" " + $('#estimated-turnover').data('symbol'));
                 }
             }
 	},
@@ -1342,13 +1344,13 @@ var WDGProjectDashboard = (function ($) {
          * réalisés par manque de données
          */
         initResultCalcul: function(){
-            $("#total-roi").html("0 €");
+            $("#total-roi").html("0 " + $('#estimated-turnover').data('symbol'));
             $("#total-funding").html("---");
             $("#medium-rend").html("--- %").css('color','#2B2C2C');
             $("#total-roi-container #gain").html("");
             caTab = WDGProjectDashboard.createCaTab();
             for (var ii=0; ii < caTab.length; ii++ ) {
-                $("#roi-amount-"+ii).html("0 €");
+                $("#roi-amount-"+ii).html("0 " + $('#estimated-turnover').data('symbol'));
             }
         },
         /**
@@ -1432,6 +1434,7 @@ var WDGProjectDashboard = (function ($) {
         updateOrgaForm: function(feedback){
             $("#tab-organization #wdg-lightbox-editOrga #org_name").html(feedback.organization.name);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_email]").val(feedback.organization.email);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_representative_function]").val(feedback.organization.representative_function);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_description]").val(feedback.organization.description);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_legalform]").val(feedback.organization.legalForm);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_idnumber]").val(feedback.organization.idNumber);

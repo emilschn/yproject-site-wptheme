@@ -45,6 +45,9 @@ get_header();
 						<label for="org_email"><?php _e('e-mail de contact', 'yproject'); ?> *</label>
 						<input type="text" name="org_email" value="<?php echo filter_input(INPUT_POST, 'org_email'); ?>" /><br />
 
+						<label for="org_representative_function"><?php _e("Fonction du repr&eacute;sentant", 'yproject'); ?>*</label>
+						<input type="text" name="org_representative_function" value="<?php echo filter_input(INPUT_POST, 'org_representative_function'); ?>" /><br />
+
 						<label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?> *</label>
 						<input type="text" name="org_description" value="<?php echo filter_input(INPUT_POST, 'org_description'); ?>" /><br />
 

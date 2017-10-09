@@ -11,6 +11,14 @@ if (isset($campaign)):
 	$part_value = ypcf_get_part_value();
 	$max_part_value = ypcf_get_max_part_value();
 	$campaign_organization = $campaign->get_organization();
+	$organization_obj = new WDGOrganization( $campaign_orga->wpref );
+	
+	global $shortcode_campaign_obj, $shortcode_organization_obj, $shortcode_organization_creator;
+	$shortcode_campaign_obj = $campaign;
+	$shortcode_organization_obj = $organization_obj;
+	$campaign_orga_linked_users = $shortcode_organization_obj->get_linked_users( WDGWPREST_Entity_Organization::$link_user_type_creator );
+	$shortcode_organization_creator = $campaign_orga_linked_users[0];
+	WDG_PDF_Generator::add_shortcodes();
 	
 	if ($max_part_value > 0):
 		global $edd_options;
@@ -35,7 +43,7 @@ if (isset($campaign)):
 		} ?>
 		</div>
 		
-		<div class="invest_step1_currentproject"><?php echo html_entity_decode( $campaign->investment_terms() ); ?></div>
+		<div class="invest_step1_currentproject"><?php echo apply_filters( 'the_content', ATCF_CrowdFunding::get_translated_setting('investment_terms') ); ?></div>
 			
 		<?php locate_template( 'invest/input-lightbox-user-infos.php', true ); ?>
 		<?php locate_template( 'invest/input-lightbox-orga-infos.php', true ); ?>
