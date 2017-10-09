@@ -644,6 +644,22 @@ function print_informations_page()
 				
 				<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
 			</form>
+			
+			<?php if ( $is_admin ): ?>
+            <form id="contract_modification_form" class="db-form" data-action="save_project_contract_modification">
+                <?php
+                DashboardUtility::create_field( array(
+                    'id'			=> 'new_contract_modification',
+                    'type'			=> 'editor',
+                    'label'			=> __( "Modifications sur le contrat entre vote et campagne", 'yproject' ),
+                    'value'			=> $campaign->contract_modifications(),
+                    "admin-theme"	=> true
+                ) );
+				?>
+
+                <?php DashboardUtility::create_save_button("contract_modification_form"); ?>
+            </form>
+			<?php endif; ?>
         </div>
     </div>
     <?php
