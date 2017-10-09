@@ -11,7 +11,7 @@ if (isset($campaign)):
 	$part_value = ypcf_get_part_value();
 	$max_part_value = ypcf_get_max_part_value();
 	$campaign_organization = $campaign->get_organization();
-	$organization_obj = new WDGOrganization( $campaign_orga->wpref );
+	$organization_obj = new WDGOrganization( $campaign_organization->wpref );
 	
 	global $shortcode_campaign_obj, $shortcode_organization_obj, $shortcode_organization_creator;
 	$shortcode_campaign_obj = $campaign;
