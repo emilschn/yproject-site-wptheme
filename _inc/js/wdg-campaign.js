@@ -206,13 +206,6 @@ var WDGProjectVote = (function($) {
 					location.reload( true );
 				}, 1000 );
 			}
-		},
-		
-		saveVoteUserRedirect: function( result ) {
-			var jsonResult = JSON.parse( result );
-			if ( jsonResult.errors == undefined || jsonResult.errors.length == 0 ) {
-				window.location = $( '#wdg-lightbox-user-details .button.save.red' ).data( 'redirecturl' );
-			}
 		}
 	};
     

@@ -841,11 +841,11 @@ function print_informations_page()
             <form id="contract_modification_form" class="db-form" data-action="save_project_contract_modification">
                 <?php
                 DashboardUtility::create_field( array(
-                    'id'			=> 'new_contract_modification',
-                    'type'			=> 'editor',
-                    'label'			=> __( "Modifications sur le contrat entre vote et campagne", 'yproject' ),
-                    'value'			=> $campaign->contract_modifications(),
-                    "admin-theme"	=> true
+					'id'			=> 'new_contract_modification',
+					'type'			=> 'editor',
+					'label'			=> __( "Modifications sur le contrat entre vote et campagne", 'yproject' ),
+					'value'			=> $campaign->contract_modifications(),
+					'admin_theme'	=> true
                 ) );
 				?>
 

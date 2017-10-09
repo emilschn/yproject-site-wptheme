@@ -762,6 +762,9 @@ var WDGFormsFunctions = (function($) {
 			$( '.wdg-lightbox-ref button.close' ).click( function( e ) {
 				$( this ).parents( 'div.wdg-lightbox' ).hide();
 			} );
+			$( '.wdg-lightbox-ref button.redirect' ).click( function( e ) {
+				window.location = $( this ).data( 'redirecturl' );
+			} );
 		},
 		
 		initRateCheckboxes: function() {
