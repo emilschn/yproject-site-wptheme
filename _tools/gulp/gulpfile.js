@@ -16,6 +16,9 @@ var cssFileList = [  // CSS files ordered
 var cssCampaignFileList = [  // CSS files ordered
 	source + '_inc/css/campaign.css'
 ];
+var cssInvestFileList = [  // CSS files ordered
+	source + '_inc/css/invest.css'
+];
 
 // Tache 1 : récupérer tous les fichiers communs et les assembler en un seul
 gulp.task( 'concat', function() {
@@ -26,6 +29,11 @@ gulp.task( 'concat', function() {
 gulp.task( 'concat-campaign', function() {
 	return gulp.src( cssCampaignFileList )
 		.pipe( concat( 'concatCampaignStyles.css' ) )
+		.pipe( gulp.dest( destination ) );
+} );
+gulp.task( 'concat-invest', function() {
+	return gulp.src( cssInvestFileList )
+		.pipe( concat( 'concatInvestStyles.css' ) )
 		.pipe( gulp.dest( destination ) );
 } );
 
@@ -53,14 +61,27 @@ gulp.task( 'minify-campaign', ['concat-campaign'], function() {
 		} ) )
 		.pipe( gulp.dest( source + '_inc/css/' ) );
 } );
+gulp.task( 'minify-invest', ['concat-invest'], function() {
+	return gulp.src(destination+'concatInvestStyles.css')
+		.pipe( plugins.csso() ) // minify
+		.pipe( plugins.rename( { // rename .min.css  
+			dirname: "",
+			basename: "invest",
+			suffix: ".min",
+			extname: ".css"
+		} ) )
+		.pipe( gulp.dest( source + '_inc/css/' ) );
+} );
 
 
 // Tâche par défaut
 gulp.task( 'css', ['concat', 'minify'] );
 gulp.task( 'css-campaign', ['concat-campaign', 'minify-campaign'] );
+gulp.task( 'css-invest', ['concat-invest', 'minify-invest'] );
 
 // Tâche de veille
 gulp.task( 'watch', function() {
 	gulp.watch( cssFileList, ['css'] );
 	gulp.watch( cssCampaignFileList, ['css-campaign'] );
+	gulp.watch( cssInvestFileList, ['css-invest'] );
 } );

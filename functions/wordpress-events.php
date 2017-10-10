@@ -209,6 +209,9 @@ class WDG_WordPress_Events {
 			wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, $current_version, 'all');
 			wp_enqueue_script( 'wdg-user-account', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-user-account.js', array('jquery', 'jquery-ui-dialog'), $current_version);
 		}
+		if ( $post->post_name == 'investir' ) {
+			wp_enqueue_style( 'invest-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/invest.min.css', null, $current_version, 'all');
+		}
 
 		wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.min.js', array('jquery'));
 		wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, 'all');
