@@ -864,6 +864,9 @@ body input[type=text], body input[type=email], body select {
 	height: 30px;
 	border: none;
 }
+.db-form.v3.bg-white .field-container input[type=text], .db-form.v3.bg-white .field-container input[type=password], .db-form.v3.bg-white .field-container input[type=email] {
+	background: #E1E3E2;
+}
 .db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=email] {
 	width: 96%;
     width: -webkit-calc( 100% - 16px );
@@ -985,7 +988,8 @@ body input[type=text], body input[type=email], body select {
 
 .db-form.v3 span.field-money {
 	display: inline-block;
-	margin-left: -30px;
+	position: relative;
+	left: -30px;
 }
 .db-form.v3 span.rate-description {
 	display: inline-block;

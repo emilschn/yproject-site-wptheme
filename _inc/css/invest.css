@@ -17,6 +17,16 @@ body.template-investir.context-wedogood nav#main div#menu > a.btn-user:before {
 	border-left: 0px;
 }
 
+body.template-investir.context-wedogood div#content form {
+	min-width: 320px;
+	max-width: 500px;
+	margin: 20px auto;
+}
+
+body.template-investir.context-wedogood div#content form span#royalties-percent {
+	color: #93626D;
+}
+
 div#content header {
 	padding-top: 80px;
 	background: #cfb7b7;
