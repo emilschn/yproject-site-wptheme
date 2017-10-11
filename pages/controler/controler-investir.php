@@ -20,6 +20,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'invest-input' );
+		$core->include_form( 'invest-user-details' );
 		
 		date_default_timezone_set( "Europe/London" );
 		define( 'SKIP_BASIC_HTML', TRUE );
@@ -89,6 +90,8 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		
 		switch ( $this->current_step ) {
 			case 2:
+				$WDGCurrent_User = WDGUser::current();
+				$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 				break;
 		}
 		

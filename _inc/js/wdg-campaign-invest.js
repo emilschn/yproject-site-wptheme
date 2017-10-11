@@ -6,10 +6,23 @@ var WDGInvestPageFunctions = (function($) {
 	return {
 		forceInvestSubmit: false,
 		initUI:function() {
-			//Changement de montant
+			// Changement de montant
 			$( 'form input#amount' ).on( 'keyup change', function () {
 				WDGInvestPageFunctions.checkInvestInput();
-			});
+			} );
+			// Changement de type d'investisseur
+			$( 'form input#user-type-user, form input#user-type-orga' ).click( function() {
+				if ( $( this ).val() == 'user' ) {
+					$( '#fieldgroup-user-type-orga' ).hide();
+					$( '#fieldgroup-user-type-user' ).slideDown( 200 );
+					$( 'form button' ).slideDown( 200 );
+					
+				} else if ( $( this ).val() == 'orga' ) {
+					$( '#fieldgroup-user-type-user' ).hide();
+					$( '#fieldgroup-user-type-orga' ).slideDown( 200 );
+					$( 'form button' ).hide();
+				}
+			} );
 		},
 		
 		checkInvestInput: function() {
