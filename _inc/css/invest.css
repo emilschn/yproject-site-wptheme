@@ -97,3 +97,12 @@ div#content header #invest-breadcrumb span:after {
 div#content header #invest-breadcrumb span.selected:after {
 	border-left: 0px;
 }
+
+.invest_error {
+    color: #FE494C;
+}
+.invest_error:after {
+	content: "";
+	display: block;
+	height: 20px;
+}

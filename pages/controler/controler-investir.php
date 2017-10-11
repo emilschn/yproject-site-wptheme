@@ -39,6 +39,16 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	public function get_current_campaign() {
 		return $this->current_campaign;
 	}
+	public function get_campaign_min_part() {
+		$buffer = ceil( $this->get_campaign_min_amount() / $this->current_campaign->part_value() );
+		return $buffer;
+	}
+	public function get_campaign_max_amount() {
+		return ypcf_get_max_value_to_invest();
+	}
+	public function get_campaign_min_amount() {
+		return ypcf_get_min_value_to_invest();
+	}
 	
 /******************************************************************************/
 // CURRENT INVESTMENT
@@ -65,10 +75,29 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 // CURRENT STEP
 /******************************************************************************/
 	private function init_form() {
+		$action_posted = filter_input( INPUT_POST, 'action' );
+		
 		$this->form = new WDG_Form_Invest_Input( $this->current_campaign );
+		
+		switch ( $action_posted ) {
+			case WDG_Form_Invest_Input::$name:
+				if ( $this->form->postForm() ) {
+					$this->current_step = 2;
+				}
+				break;
+		}
+		
+		switch ( $this->current_step ) {
+			case 2:
+				break;
+		}
+		
 	}
 	public function get_form() {
 		return $this->form;
+	}
+	public function get_form_errors() {
+		return $this->form->getPostErrors();
 	}
 	
 }

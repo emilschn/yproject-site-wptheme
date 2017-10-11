@@ -62,13 +62,13 @@ tbody {
 .text-white { color: #FFFFFF; }
 .text-green { color: #74BF43; }
 
-.errors, .invest_error {
+.errors {
     color: #FE494C;
     text-transform: none !important;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.success, .invest_success {
+.success {
     color: green;
 }
 
