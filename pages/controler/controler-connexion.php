@@ -42,10 +42,13 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 		if ( !empty( $error_reason ) ) {
 			switch( $error_reason ) {
 				case 'empty_fields':
-					$this->login_error_reason = __('Champs vides', 'yproject');
+					$this->login_error_reason = __( "Champs vides", 'yproject' );
 					break;
 				case 'orga_account':
-					$this->login_error_reason = __('Ce compte correspond &agrave; une organisation', 'yproject');
+					$this->login_error_reason = __( "Ce compte correspond &agrave; une organisation", 'yproject' );
+					break;
+				default:
+					$this->login_error_reason = __( "Cet utilisateur n'existe pas ou le mot de passe ne correspond pas.", 'yproject' );
 					break;
 			}
 		}
