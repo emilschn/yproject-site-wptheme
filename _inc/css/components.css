@@ -864,7 +864,7 @@ body input[type=text], body input[type=email], body select {
 	height: 30px;
 	border: none;
 }
-.db-form.v3.bg-white .field-container input[type=text], .db-form.v3.bg-white .field-container input[type=password], .db-form.v3.bg-white .field-container input[type=email] {
+.db-form.v3.bg-white .field-container input, .db-form.v3.bg-white .field-container select {
 	background: #E1E3E2;
 }
 .db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=email] {

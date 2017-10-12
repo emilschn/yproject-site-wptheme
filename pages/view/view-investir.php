@@ -9,6 +9,8 @@
 	<?php locate_template( array( 'pages/view/investir/input.php'  ), true ); ?>
 	<?php elseif ( $page_controler->get_current_step() == 2 ): ?>
 	<?php locate_template( array( 'pages/view/investir/user-details.php'  ), true ); ?>
+	<?php elseif ( $page_controler->get_current_step() == 3 ): ?>
+	<?php locate_template( array( 'pages/view/investir/contract.php'  ), true ); ?>
 	<?php endif; ?>
 	
 </div><!-- #content -->

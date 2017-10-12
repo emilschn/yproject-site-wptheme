@@ -76,23 +76,47 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 // CURRENT STEP
 /******************************************************************************/
 	private function init_form() {
+		// Récupération d'un éventuel post de formulaire
 		$action_posted = filter_input( INPUT_POST, 'action' );
-		
-		$this->form = new WDG_Form_Invest_Input( $this->current_campaign );
+		$reload_form = FALSE;
 		
 		switch ( $action_posted ) {
+			// Analyse formulaire saisie montant
 			case WDG_Form_Invest_Input::$name:
+				$this->form = new WDG_Form_Invest_Input( $this->current_campaign );
 				if ( $this->form->postForm() ) {
 					$this->current_step = 2;
+					$reload_form = TRUE;
 				}
+				break;
+			
+			// Analyse formulaire saisie infos
+			case WDG_Form_Invest_User_Details::$name:
+				$this->current_step = 2;
+				$WDGCurrent_User = WDGUser::current();
+				$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
+				if ( $this->form->postForm() ) {
+					$this->current_step = 3;
+					$reload_form = TRUE;
+				}
+				break;
+				
+			// Chargement formulaire saisie montant, si rien en cours
+			default:
+				$this->form = new WDG_Form_Invest_Input( $this->current_campaign );
 				break;
 		}
 		
-		switch ( $this->current_step ) {
-			case 2:
-				$WDGCurrent_User = WDGUser::current();
-				$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
-				break;
+		// Chargement du formulaire à afficher
+		if ( $reload_form ) {
+			switch ( $this->current_step ) {
+				case 2:
+					$WDGCurrent_User = WDGUser::current();
+					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
+					break;
+				case 3:
+					break;
+			}
 		}
 		
 	}

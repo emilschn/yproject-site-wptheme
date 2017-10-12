@@ -797,6 +797,7 @@ var WDGFormsFunctions = (function($) {
 		initDatePickers: function() {
             $( 'input[type=text].adddatepicker' ).datepicker({
                 dateFormat: "dd/mm/yy",
+				yearRange: "-120:+0",
                 regional: "fr",
                 changeMonth: true,
                 changeYear: true
