@@ -346,8 +346,8 @@ class DashboardUtility
                         }
                         break;
 					case 'upload':
-						if ( !empty($value) ) {
-							$text_field .= '<a href="'.$value.'">' .__("T&eacute;l&eacute;charger", 'yproject'). '</a>';
+						if ( !empty($initial_value) ) {
+							$text_field .= '<a href="'.$initial_value.'">' .__("T&eacute;l&eacute;charger", 'yproject'). '</a>';
 						} else {
 							$text_field .= __("En attente d'envoi", 'yproject');
 						}

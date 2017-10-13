@@ -744,10 +744,10 @@ function print_informations_page()
 					<button class="button blue-pale"><?php _e( "G&eacute;n&eacute;rer des contrats vierges", 'yproject' ); ?></button>
 				</div>
 			</form>
-			<?php endif; ?>
 			
 			<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
 				la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>
+			<?php endif; ?>
 			
             <form action="<?php echo admin_url( 'admin-post.php?action=upload_contract_files'); ?>" method="post" id="contract_files_form" enctype="multipart/form-data">
                 <ul class="errors">
@@ -777,7 +777,7 @@ function print_informations_page()
 					"value"			=> $campaign->contract_budget_type(),
 					"options_id"	=> array_keys( ATCF_Campaign::$contract_budget_types ),
 					"options_names"	=> array_values( ATCF_Campaign::$contract_budget_types ),
-					"admin_theme"	=> true,
+					"admin_theme"	=> $is_admin,
 					"editable"		=> $is_admin
 				));
 				?>
@@ -794,7 +794,7 @@ function print_informations_page()
 					"value"			=> $campaign->contract_maximum_type(),
 					"options_id"	=> array_keys( ATCF_Campaign::$contract_maximum_types ),
 					"options_names"	=> array_values( ATCF_Campaign::$contract_maximum_types ),
-					"admin_theme"	=> true,
+					"admin_theme"	=> $is_admin,
 					"editable"		=> $is_admin
 				));
 				?>
@@ -812,7 +812,7 @@ function print_informations_page()
 					"value"			=> $campaign->quarter_earnings_estimation_type(),
 					"options_id"	=> array_keys( ATCF_Campaign::$quarter_earnings_estimation_types ),
 					"options_names"	=> array_values( ATCF_Campaign::$quarter_earnings_estimation_types ),
-					"admin_theme"	=> true,
+					"admin_theme"	=> $is_admin,
 					"editable"		=> $is_admin
 				));
 				
