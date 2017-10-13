@@ -781,10 +781,12 @@ function print_informations_page()
 					"editable"		=> $is_admin
 				));
 				?>
+				<?php if ( $is_admin ): ?>
 				<div class="field admin-theme">
 					<?php echo _e( "Si le budget est égal au montant collecté, le prévisionnel sera exprimé en pourcentage du budget.", 'yproject' ); ?>
 					<br /><br />
 				</div>
+				<?php endif; ?>
 
 				<?php
 				DashboardUtility::create_field(array(
@@ -798,10 +800,12 @@ function print_informations_page()
 					"editable"		=> $is_admin
 				));
 				?>
+				<?php if ( $is_admin ): ?>
 				<div class="field admin-theme">
 					<?php echo _e( "Si infini, le budget est égal au montant collecté.", 'yproject' ); ?>
 					<br /><br />
 				</div>
+				<?php endif; ?>
 
 
 				<?php
