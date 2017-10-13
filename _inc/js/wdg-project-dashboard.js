@@ -324,7 +324,7 @@ var WDGProjectDashboard = (function ($) {
                         var thisForm = $(this);
                         
                         var campaign_id, org_name, org_email, org_representative_function, org_description, org_legalform,
-                        org_idnumber, org_rcs,org_capital, org_ape, org_address, org_postal_code,
+                        org_idnumber, org_rcs,org_capital, org_ape, org_vat, org_fiscal_year_end_month, org_address, org_postal_code,
                         org_city, org_nationality, org_bankownername, org_bankowneraddress,
                         org_bankowneriban, org_bankownerbic, org_capable;
 
@@ -338,6 +338,8 @@ var WDGProjectDashboard = (function ($) {
                         org_rcs = $('#tab-organization #wdg-lightbox-newOrga input[name=org_rcs]').val();
                         org_capital = $('#tab-organization #wdg-lightbox-newOrga input[name=org_capital]').val();
                         org_ape = $('#tab-organization #wdg-lightbox-newOrga input[name=org_ape]').val();
+                        org_vat = $('#tab-organization #wdg-lightbox-newOrga input[name=org_vat]').val();
+                        org_fiscal_year_end_month = $('#tab-organization #wdg-lightbox-newOrga input[name=org_fiscal_year_end_month]').val();
                         org_address = $('#tab-organization #wdg-lightbox-newOrga input[name=org_address]').val();
                         org_postal_code = $('#tab-organization #wdg-lightbox-newOrga input[name=org_postal_code]').val();
                         org_city = $('#tab-organization #wdg-lightbox-newOrga input[name=org_city]').val();
@@ -370,6 +372,8 @@ var WDGProjectDashboard = (function ($) {
                                 'org_rcs': org_rcs,
                                 'org_capital': org_capital,
                                 'org_ape': org_ape,
+                                'org_vat': org_vat,
+                                'org_fiscal_year_end_month': org_fiscal_year_end_month,
                                 'org_address': org_address,
                                 'org_postal_code': org_postal_code,
                                 'org_city': org_city,
@@ -1441,6 +1445,8 @@ var WDGProjectDashboard = (function ($) {
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_rcs]").val(feedback.organization.rcs);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_capital]").val(feedback.organization.capital);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_ape]").val(feedback.organization.ape);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_vat]").val(feedback.organization.vat);
+            $("#tab-organization #wdg-lightbox-editOrga input[name=org_fiscal_year_end_month]").val(feedback.organization.fiscal_year_end_month);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_address]").val(feedback.organization.address);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_postal_code]").val(feedback.organization.postal_code);
             $("#tab-organization #wdg-lightbox-editOrga input[name=org_city]").val(feedback.organization.city);
