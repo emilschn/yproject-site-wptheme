@@ -98,7 +98,7 @@ function print_informations_page()
 						'label'			=> __( "Passer la phase de vote", 'yproject' ),
 						'value'			=> $campaign->skip_vote(),
 						'admin_theme'	=> true,
-						"editable"		=> $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+						"editable"		=> $campaign->is_preparing()
 					));
 				}
 
@@ -168,7 +168,7 @@ function print_informations_page()
 				?>
 
                 <?php
-				$contract_descriptions_editable = $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated;
+				$contract_descriptions_editable = $campaign->is_preparing();
                 DashboardUtility::create_field(array(
                     "id"			=> "new_project_contract_spendings_description",
                     "type"			=> "editor",
@@ -470,7 +470,7 @@ function print_informations_page()
                     "value"			=> $campaign->minimum_goal(false),
                     "suffix"		=> "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
-					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 
                 DashboardUtility::create_field(array(
@@ -481,7 +481,7 @@ function print_informations_page()
                     "value"			=> $campaign->goal(false),
                     "suffix"		=> "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
-					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 
                 DashboardUtility::create_field(array(
@@ -493,7 +493,7 @@ function print_informations_page()
                     "suffix"		=> "<span>&nbsp;ann&eacute;es</span>",
                     "min"			=> 1,
                     "max"			=> 20,
-					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 				
 				if ( $is_admin ) {
@@ -507,7 +507,7 @@ function print_informations_page()
 						"options_names"	=> array_values( ATCF_Campaign::$maximum_profit_list ),
 						"prefix"		=> '*',
 						"admin_theme"	=> true,
-						"editable"		=> $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+						"editable"		=> $campaign->is_preparing()
 					));
 					
 				}
@@ -522,7 +522,7 @@ function print_informations_page()
                     "min"			=> 0,
                     "max"			=> 100,
                     "step"			=> 0.01,
-					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 				
 				DashboardUtility::create_field(array(
@@ -538,7 +538,7 @@ function print_informations_page()
 					"editable"		=> $is_admin
 				));
 
-				$contract_start_date_editable = ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $is_admin );
+				$contract_start_date_editable = ( $campaign->is_preparing() || $is_admin );
 				$contract_start_date_values = array();
 				$contract_start_date_list = array();
 				if ( $contract_start_date_editable ) {
@@ -650,9 +650,9 @@ function print_informations_page()
                         foreach (($campaign->estimated_turnover()) as $year => $turnover) :?>
                             <li class="field">
                                 <label>Année <span class="year"><?php echo ($i+1); ?></span></label>                           
-                                <span class="field-container" <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?> style="padding-left: 80px;" <?php endif; ?>>
+                                <span class="field-container" <?php if ( !$is_admin && !$campaign->is_preparing() ): ?> style="padding-left: 80px;" <?php endif; ?>>
                                         <span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
-                                                <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
+                                                <?php if ( $is_admin || $campaign->is_preparing() ): ?>
                                                 <i class="right fa <?php if ($is_euro): ?>fa-eur<?php endif; ?>" aria-hidden="true"></i>
                                                 <input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />
 													<?php if ( !$is_euro ): ?>%<?php endif; ?>
@@ -660,7 +660,7 @@ function print_informations_page()
                                                 <?php echo $turnover; ?>
                                                 <?php endif; ?>
                                         </span>
-                                        <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?>
+                                        <?php if ( !$is_admin && !$campaign->is_preparing() ): ?>
                                             <span style="padding-right: 70px;">&euro;</span>
                                         <?php endif; ?>
                                         <!--montant des royalties reversées par année-->
@@ -686,7 +686,7 @@ function print_informations_page()
 					<label><?php _e("Pour vos investisseurs", "yproject")?>&nbsp;:</label>
                     <label><?php _e("Rendement final", "yproject") ?></label><span class="like-input-center"><p id="medium-rend">---&nbsp;%</p></span>
                 </div>
-                <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
+                <?php if ( $is_admin || $campaign->is_preparing() ): ?>
                 <?php DashboardUtility::create_save_button("projectfunding_form"); ?>
                 <?php endif; ?>
             </form>
