@@ -105,7 +105,7 @@ $declaration_message = $declaration->get_message();
 		<br />
 
 
-		<?php if ( $declaration->can_pay_with_wire() ): ?>
+		<?php if ( $declaration->can_pay_with_wire() || $is_admin ): ?>
 		<hr />
 
 		Si vous souhaitez payer par virement bancaire, voici les informations dont vous aurez besoin :
@@ -130,21 +130,6 @@ $declaration_message = $declaration->get_message();
 			<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
 			<input type="submit" name="payment_bank_transfer" class="button red" value="<?php _e('Payer par virement bancaire', 'yproject'); ?>" />
 		</form>
-		
-		<?php else: ?>
-		<div class="hidden">
-			<ul>
-				<li><strong><?php _e("Titulaire du compte :", 'yproject'); ?></strong> LEMON WAY</li>
-				<li><strong>IBAN :</strong> FR76 3000 4025 1100 0111 8625 268</li>
-				<li><strong>BIC :</strong> BNPAFRPPIFE</li>
-				<li>
-					<strong><?php _e("Code &agrave; indiquer (pour identifier votre paiement) :", 'yproject'); ?></strong> wedogood-<?php echo $organization_obj->get_lemonway_id(); ?><br />
-					<ul>
-						<li><?php _e("Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !", 'yproject'); ?></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
 		<?php endif; ?>
 
 
