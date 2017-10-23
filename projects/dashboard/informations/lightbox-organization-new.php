@@ -48,12 +48,13 @@ global $campaign_id
                 <label for="org_vat"><?php _e('Num&eacute;ro de TVA', 'yproject'); ?>*</label>
                 <input type="text" name="org_vat" value="<?php echo filter_input(INPUT_POST, 'org_vat'); ?>" /><br />
 
-				<label for="org_fiscal_year_end_month"><?php _e("L'exerice comptable se termine au cours du mois", 'yproject'); ?></label>
+				<label for="org_fiscal_year_end_month"><?php _e("L'exerice comptable se termine &agrave; la fin du mois", 'yproject'); ?></label>
 				<?php
 				$months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' );
 				$count_months = count( $months );
 				?>
 				<select name="org_fiscal_year_end_month">
+					<option value=""></option>
 					<?php for ( $i = 0; $i < $count_months; $i++ ): ?>
 					<option value="<?php echo ( $i + 1 ); ?>" <?php selected( filter_input(INPUT_POST, 'orga_fiscal_year_end_month'), $i + 1 ); ?>><?php _e( $months[ $i ] ); ?></option>
 					<?php endfor; ?>
