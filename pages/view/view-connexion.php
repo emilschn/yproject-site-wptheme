@@ -4,7 +4,7 @@
 	<div class="padder_more">
 		<div class="center_small margin-height">
 			
-			<div class="errors align-center margin-height">
+			<div class="errors align-center" style="padding: 20px 0px;">
 				<?php echo $page_controler->get_login_error_reason(); ?>
 			</div>
 			

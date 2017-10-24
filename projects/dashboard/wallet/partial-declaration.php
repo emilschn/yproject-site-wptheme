@@ -48,7 +48,7 @@ $declaration_message = $declaration->get_message();
 			<br /><br />
 			
 			<?php _e( "Ces informations sont utilis&eacute;es exclusivement &agrave; des fins statistiques. WE DO GOOD s'engage &agrave; ne pas les communiquer &agrave; des tiers.", 'yproject' ); ?><br />
-			<?php _e( "Nombre d'employ&eacute;s :", 'yproject' ); ?> <input type="number" name="employees-number" id="employees-number" value="0" /><br />
+			<?php _e( "Nombre de salari&eacute;s :", 'yproject' ); ?> <input type="number" name="employees-number" id="employees-number" value="0" /><br />
 			<?php _e( "Autres financements :", 'yproject' ); ?><br />
 			<textarea name="other-fundings"></textarea>
 			<br /><br />
@@ -93,7 +93,7 @@ $declaration_message = $declaration->get_message();
 		<?php echo $declaration->get_message(); ?><br /><br />
 		<?php endif; ?>
 		
-		Nombre d'employés : <?php echo $declaration->employees_number; ?><br />
+		Nombre de salari&eacute;s : <?php echo $declaration->employees_number; ?><br />
 		Autres financements :<br />
 		<?php echo $declaration->get_other_fundings(); ?><br /><br />
 
@@ -105,7 +105,7 @@ $declaration_message = $declaration->get_message();
 		<br />
 
 
-		<?php if ( $declaration->can_pay_with_wire() ): ?>
+		<?php if ( $declaration->can_pay_with_wire() || $is_admin ): ?>
 		<hr />
 
 		Si vous souhaitez payer par virement bancaire, voici les informations dont vous aurez besoin :
@@ -167,7 +167,7 @@ $declaration_message = $declaration->get_message();
 		<?php echo $declaration->get_message(); ?><br /><br />
 		<?php endif; ?>
 		
-		Nombre d'employés : <?php echo $declaration->employees_number; ?><br />
+		Nombre de salari&eacute;s : <?php echo $declaration->employees_number; ?><br />
 		Autres financements :<br />
 		<?php echo $declaration->get_other_fundings(); ?><br /><br />
 
@@ -262,7 +262,7 @@ $declaration_message = $declaration->get_message();
 		<?php echo $declaration->get_message(); ?><br /><br />
 		<?php endif; ?>
 		
-		Nombre d'employés : <?php echo $declaration->employees_number; ?><br />
+		Nombre de salari&eacute;s : <?php echo $declaration->employees_number; ?><br />
 		Autres financements :<br />
 		<?php echo $declaration->get_other_fundings(); ?><br /><br />
 
