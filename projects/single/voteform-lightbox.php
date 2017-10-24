@@ -25,12 +25,11 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 		
 		<div id="vote-form-slide0" class="vote-form-slide align-justify">
 			
-			<?php _e( "Bonjour,", 'yproject' ); ?>
-			<br /><br />
+			<br /><br /><br />
 			<?php _e( "Le vote est l'&eacute;tape pr&eacute;alable à l'investissement et ne prend que 2 petites minutes !", 'yproject' ); ?>
 			<br /><br />
 			<?php _e( "Les entrepreneurs ont besoin de votre avis sur le projet pour mesurer l'int&eacute;r&ecirc;t qu'il suscite et bien lancer leur lev&eacute;e de fonds.", 'yproject' ); ?>
-			<br /><br />
+			<br /><br /><br /><br />
 			
 		</div>
 		
