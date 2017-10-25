@@ -2,6 +2,7 @@
 
 <?php
 $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_User_Details::$field_group_hidden );
+$fields_user_type = $page_controler->get_form()->getFields( WDG_Form_Invest_User_Details::$field_group_user_type );
 $fields_user_info = $page_controler->get_form()->getFields( WDG_Form_Invest_User_Details::$field_group_user_info );
 $fields_orga_select = $page_controler->get_form()->getFields( WDG_Form_Invest_User_Details::$field_group_orga_select );
 $fields_orga_info = $page_controler->get_form()->getFields( WDG_Form_Invest_User_Details::$field_group_orga_info );
@@ -9,7 +10,7 @@ $fields_orga_info_new = $page_controler->get_form()->getFields( WDG_Form_Invest_
 $fields_info_confirm = $page_controler->get_form()->getFields( WDG_Form_Invest_User_Details::$field_group_confirm );
 ?>
 	
-<form method="post" class="db-form v3 full bg-white">
+<form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
 	
 	<div class="align-left">
 		<?php $form_errors = $page_controler->get_form_errors(); ?>
@@ -25,7 +26,7 @@ $fields_info_confirm = $page_controler->get_form()->getFields( WDG_Form_Invest_U
 		<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 	<?php endforeach; ?>
 	
-	<?php foreach ( $fields_user_info as $field ): ?>
+	<?php foreach ( $fields_user_type as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 	<?php endforeach; ?>
@@ -37,7 +38,16 @@ $fields_info_confirm = $page_controler->get_form()->getFields( WDG_Form_Invest_U
 	<?php endforeach; ?>
 	</div>
 	
+	<div id="fieldgroup-user-info" class="hidden">
+	<h2><?php _e( "Informations personnelles", 'yproject' ); ?></h2>
+	<?php foreach ( $fields_user_info as $field ): ?>
+		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+		<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
+	<?php endforeach; ?>
+	</div>
+	
 	<div id="fieldgroup-orga-info" class="fieldgroup-user-type hidden">
+	<h2><?php _e( "Informations de votre organisation", 'yproject' ); ?></h2>
 	<?php foreach ( $fields_orga_info as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
@@ -56,6 +66,8 @@ $fields_info_confirm = $page_controler->get_form()->getFields( WDG_Form_Invest_U
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 			<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 		<?php endforeach; ?>
+	
+		<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
 
 		<button type="submit" class="button half right transparent"><?php _e( "Suivant", 'yproject' ); ?></button>
 	</div>

@@ -18,9 +18,17 @@ body.template-investir.context-wedogood nav#main div#menu > a.btn-user:before {
 }
 
 body.template-investir.context-wedogood div#content form {
-	min-width: 320px;
 	max-width: 500px;
 	margin: 20px auto;
+}
+body.template-investir.context-wedogood div#content form.enlarge {
+	max-width: 600px;
+}
+@media screen and (max-width: 600px) {
+	body.template-investir.context-wedogood div#content form {
+		min-width: 310px;
+		margin: 20px 5px;
+	}
 }
 
 body.template-investir.context-wedogood div#content form span#royalties-percent {
@@ -105,4 +113,36 @@ div#content header #invest-breadcrumb span.selected:after {
 	content: "";
 	display: block;
 	height: 20px;
+}
+
+/**
+ ETAPE 3 : Contrat
+**/
+body.template-investir.context-wedogood div#content div#contract-intro {
+	min-height: 120px;
+	text-align: justify;
+}
+body.template-investir.context-wedogood div#content div#contract-intro img {
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+body.template-investir.context-wedogood div#content div#contract-preview {
+	height: 400px;
+	overflow: scroll;
+	margin-top: 20px;
+	padding: 10px;
+	clear: both;
+	border: 1px solid grey;
+	text-align: left;
+}
+body.template-investir.context-wedogood div#content #field-validate_contract label {
+	font-weight: normal;
+}
+@media screen and (max-width: 500px) {
+	body.template-investir.context-wedogood div#content div#contract-intro img {
+		width: 100px;
+		margin-right: 5px;
+		margin-bottom: 5px;
+	}
 }

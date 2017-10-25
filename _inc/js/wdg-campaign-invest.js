@@ -16,20 +16,24 @@ var WDGInvestPageFunctions = (function($) {
 					$( 'form #fieldgroup-orga-info' ).hide();
 					$( 'form #fieldgroup-orga-info-new' ).hide();
 					$( 'form #fieldgroup-user-type-orga' ).hide();
+					$( 'form #fieldgroup-user-info' ).slideDown( 200 );
 					$( 'form #fieldgroup-to-display' ).slideDown( 200 );
 					
 				} else if ( $( this ).val() == 'orga' ) {
 					$( 'form #fieldgroup-user-type-orga' ).slideDown( 200 );
+					$( 'form #fieldgroup-user-info' ).hide();
 					$( 'form #fieldgroup-to-display' ).hide();
 				}
 			} );
 			// Changement choix d'organisation
 			$( 'form select#select-orga-id' ).change( function() {
 				if ( $(this).val() === '' ) {
+					$( 'form #fieldgroup-user-info' ).hide();
 					$( 'form #fieldgroup-orga-info' ).hide();
 					$( 'form #fieldgroup-to-display' ).hide();
 					$( 'form #fieldgroup-orga-info-new' ).hide();
 				} else {
+					$( 'form #fieldgroup-user-info' ).slideDown( 200 );
 					$( 'form #fieldgroup-orga-info' ).slideDown( 200 );
 					$( 'form #fieldgroup-to-display' ).slideDown( 200 );
 					if ( $(this).val() === 'new-orga' ) {

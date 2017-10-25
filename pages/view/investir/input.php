@@ -5,7 +5,7 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::
 $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::$field_group_amount );
 ?>
 	
-<form method="post" class="db-form v3 full bg-white">
+<form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
 
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>

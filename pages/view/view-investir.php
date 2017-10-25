@@ -5,12 +5,22 @@
 	
 	<?php locate_template( array( 'pages/view/investir/header.php'  ), true ); ?>
 	
-	<?php if ( $page_controler->get_current_step() == 1 ): ?>
-	<?php locate_template( array( 'pages/view/investir/input.php'  ), true ); ?>
-	<?php elseif ( $page_controler->get_current_step() == 2 ): ?>
-	<?php locate_template( array( 'pages/view/investir/user-details.php'  ), true ); ?>
-	<?php elseif ( $page_controler->get_current_step() == 3 ): ?>
-	<?php locate_template( array( 'pages/view/investir/contract.php'  ), true ); ?>
-	<?php endif; ?>
+	<?php
+	$current_step = $page_controler->get_current_step();
+	switch ( $current_step ) {
+		case 2:
+			locate_template( array( 'pages/view/investir/user-details.php'  ), true );
+			break;
+		case 3:
+			locate_template( array( 'pages/view/investir/contract.php'  ), true );
+			break;
+		case 4:
+			locate_template( array( 'pages/view/investir/mean-payments.php'  ), true );
+			break;
+		default:
+			locate_template( array( 'pages/view/investir/input.php'  ), true );
+			break;
+	}
+	?>
 	
 </div><!-- #content -->
