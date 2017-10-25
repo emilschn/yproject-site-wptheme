@@ -105,7 +105,7 @@ $declaration_message = $declaration->get_message();
 		<br />
 
 
-		<?php if ( $declaration->can_pay_with_wire() ): ?>
+		<?php if ( $declaration->can_pay_with_wire() || $is_admin ): ?>
 		<hr />
 
 		Si vous souhaitez payer par virement bancaire, voici les informations dont vous aurez besoin :

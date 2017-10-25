@@ -98,7 +98,7 @@ function print_informations_page()
 						'label'			=> __( "Passer la phase de vote", 'yproject' ),
 						'value'			=> $campaign->skip_vote(),
 						'admin_theme'	=> true,
-						"editable"		=> $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+						"editable"		=> $campaign->is_preparing()
 					));
 				}
 
@@ -168,7 +168,7 @@ function print_informations_page()
 				?>
 
                 <?php
-				$contract_descriptions_editable = $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated;
+				$contract_descriptions_editable = $campaign->is_preparing();
                 DashboardUtility::create_field(array(
                     "id"			=> "new_project_contract_spendings_description",
                     "type"			=> "editor",
@@ -470,7 +470,7 @@ function print_informations_page()
                     "value"			=> $campaign->minimum_goal(false),
                     "suffix"		=> "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
-					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 
                 DashboardUtility::create_field(array(
@@ -481,7 +481,7 @@ function print_informations_page()
                     "value"			=> $campaign->goal(false),
                     "suffix"		=> "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
-					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 
                 DashboardUtility::create_field(array(
@@ -493,7 +493,7 @@ function print_informations_page()
                     "suffix"		=> "<span>&nbsp;ann&eacute;es</span>",
                     "min"			=> 1,
                     "max"			=> 20,
-					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 				
 				if ( $is_admin ) {
@@ -507,7 +507,7 @@ function print_informations_page()
 						"options_names"	=> array_values( ATCF_Campaign::$maximum_profit_list ),
 						"prefix"		=> '*',
 						"admin_theme"	=> true,
-						"editable"		=> $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+						"editable"		=> $campaign->is_preparing()
 					));
 					
 				}
@@ -522,7 +522,7 @@ function print_informations_page()
                     "min"			=> 0,
                     "max"			=> 100,
                     "step"			=> 0.01,
-					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 				
 				DashboardUtility::create_field(array(
@@ -538,35 +538,42 @@ function print_informations_page()
 					"editable"		=> $is_admin
 				));
 
-				$contract_start_date_editable = ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $is_admin );
+				$contract_start_date_editable = ( $campaign->is_preparing() || $is_admin );
 				$contract_start_date_values = array();
 				$contract_start_date_list = array();
 				if ( $contract_start_date_editable ) {
 					// Trouver la prochaine date possible : janvier, avril, juillet, octobre
 					$current_date = new DateTime();
+					$previous_date = new DateTime();
 					$next_date = new DateTime();
 					switch ( $current_date->format('m') ) {
 						case 1:
 						case 2:
 						case 3:
+							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-01-01' );
 							$next_date = new DateTime( $current_date->format( 'Y' ) . '-04-01' );
 							break;
 						case 4:
 						case 5:
 						case 6:
+							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-04-01' );
 							$next_date = new DateTime( $current_date->format( 'Y' ) . '-07-01' );
 							break;
 						case 7:
 						case 8:
 						case 9:
+							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-07-01' );
 							$next_date = new DateTime( $current_date->format( 'Y' ) . '-10-01' );
 							break;
 						case 10:
 						case 11:
 						case 12:
+							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-10-01' );
 							$next_date = new DateTime( ( $current_date->format( 'Y' ) + 1 ) . '-01-01' );
 							break;
 					}
+					array_push( $contract_start_date_values, $previous_date->format( 'Y-m-d H:i:s' ) );
+					array_push( $contract_start_date_list, $previous_date->format( 'd/m/Y' ) );
 					// Ensuite on ajoute (arbitrairement) 10 dates
 					for ( $i = 0; $i < 10; $i++ ) {
 						array_push( $contract_start_date_values, $next_date->format( 'Y-m-d H:i:s' ) );
@@ -650,9 +657,9 @@ function print_informations_page()
                         foreach (($campaign->estimated_turnover()) as $year => $turnover) :?>
                             <li class="field">
                                 <label>Année <span class="year"><?php echo ($i+1); ?></span></label>                           
-                                <span class="field-container" <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?> style="padding-left: 80px;" <?php endif; ?>>
+                                <span class="field-container" <?php if ( !$is_admin && !$campaign->is_preparing() ): ?> style="padding-left: 80px;" <?php endif; ?>>
                                         <span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
-                                                <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
+                                                <?php if ( $is_admin || $campaign->is_preparing() ): ?>
                                                 <i class="right fa <?php if ($is_euro): ?>fa-eur<?php endif; ?>" aria-hidden="true"></i>
                                                 <input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />
 													<?php if ( !$is_euro ): ?>%<?php endif; ?>
@@ -660,7 +667,7 @@ function print_informations_page()
                                                 <?php echo $turnover; ?>
                                                 <?php endif; ?>
                                         </span>
-                                        <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?>
+                                        <?php if ( !$is_admin && !$campaign->is_preparing() ): ?>
                                             <span style="padding-right: 70px;">&euro;</span>
                                         <?php endif; ?>
                                         <!--montant des royalties reversées par année-->
@@ -686,7 +693,7 @@ function print_informations_page()
 					<label><?php _e("Pour vos investisseurs", "yproject")?>&nbsp;:</label>
                     <label><?php _e("Rendement final", "yproject") ?></label><span class="like-input-center"><p id="medium-rend">---&nbsp;%</p></span>
                 </div>
-                <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
+                <?php if ( $is_admin || $campaign->is_preparing() ): ?>
                 <?php DashboardUtility::create_save_button("projectfunding_form"); ?>
                 <?php endif; ?>
             </form>
@@ -744,10 +751,10 @@ function print_informations_page()
 					<button class="button blue-pale"><?php _e( "G&eacute;n&eacute;rer des contrats vierges", 'yproject' ); ?></button>
 				</div>
 			</form>
-			<?php endif; ?>
 			
 			<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
 				la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>
+			<?php endif; ?>
 			
             <form action="<?php echo admin_url( 'admin-post.php?action=upload_contract_files'); ?>" method="post" id="contract_files_form" enctype="multipart/form-data">
                 <ul class="errors">
@@ -777,14 +784,16 @@ function print_informations_page()
 					"value"			=> $campaign->contract_budget_type(),
 					"options_id"	=> array_keys( ATCF_Campaign::$contract_budget_types ),
 					"options_names"	=> array_values( ATCF_Campaign::$contract_budget_types ),
-					"admin_theme"	=> true,
+					"admin_theme"	=> $is_admin,
 					"editable"		=> $is_admin
 				));
 				?>
+				<?php if ( $is_admin ): ?>
 				<div class="field admin-theme">
 					<?php echo _e( "Si le budget est égal au montant collecté, le prévisionnel sera exprimé en pourcentage du budget.", 'yproject' ); ?>
 					<br /><br />
 				</div>
+				<?php endif; ?>
 
 				<?php
 				DashboardUtility::create_field(array(
@@ -794,14 +803,16 @@ function print_informations_page()
 					"value"			=> $campaign->contract_maximum_type(),
 					"options_id"	=> array_keys( ATCF_Campaign::$contract_maximum_types ),
 					"options_names"	=> array_values( ATCF_Campaign::$contract_maximum_types ),
-					"admin_theme"	=> true,
+					"admin_theme"	=> $is_admin,
 					"editable"		=> $is_admin
 				));
 				?>
+				<?php if ( $is_admin ): ?>
 				<div class="field admin-theme">
 					<?php echo _e( "Si infini, le budget est égal au montant collecté.", 'yproject' ); ?>
 					<br /><br />
 				</div>
+				<?php endif; ?>
 
 
 				<?php
@@ -812,7 +823,7 @@ function print_informations_page()
 					"value"			=> $campaign->quarter_earnings_estimation_type(),
 					"options_id"	=> array_keys( ATCF_Campaign::$quarter_earnings_estimation_types ),
 					"options_names"	=> array_values( ATCF_Campaign::$quarter_earnings_estimation_types ),
-					"admin_theme"	=> true,
+					"admin_theme"	=> $is_admin,
 					"editable"		=> $is_admin
 				));
 				
