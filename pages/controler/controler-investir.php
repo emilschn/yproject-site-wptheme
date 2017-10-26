@@ -34,6 +34,10 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		define( 'SKIP_BASIC_HTML', TRUE );
 		
 		$this->init_current_campaign();
+		WDGRoutes::redirect_invest_if_not_logged_in();
+		WDGRoutes::redirect_invest_if_project_not_investable();
+		WDGRoutes::redirect_invest_if_investment_not_initialized();
+		
 		$this->init_current_investment();
 		$this->init_current_step();
 		$this->init_form();
@@ -178,8 +182,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					$WDGCurrent_User = WDGUser::current();
 					$this->form = new WDG_Form_Invest_Contract( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 					if ( $this->form->postForm() ) {
-						$this->current_step = 4;
-						$reload_form = TRUE;
+						wp_redirect( home_url( '/moyen-de-paiement' ) . '?campaign_id=' . $this->current_campaign->ID );
 					}
 				}
 				break;
@@ -203,8 +206,6 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 				case 3:
 					$this->form = new WDG_Form_Invest_Contract( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 					break;
-				case 4:
-					break;
 			}
 		}
 		
@@ -222,83 +223,6 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		$url = home_url( '/investir' );
 		$url .= '?campaign_id=' . $this->current_campaign->ID;
 		return $url;
-	}
-	
-/******************************************************************************/
-// ACCEPTED MEAN OF PAYMENTS
-/******************************************************************************/
-	public function get_payment_url( $param ) {
-		return home_url( '/moyen-de-paiement' ) . '?campaign_id=' .$this->current_campaign->ID. '&meanofpayment=' .$param;
-	}
-	
-	public function get_lemonway_amount() {
-		$WDGUser_current = WDGUser::current();
-		return $WDGUser_current->get_lemonway_wallet_amount();
-	}
-	
-	public function get_remaining_amount() {
-		$current_investment = WDGInvestment::current();
-		return $current_investment->get_session_amount() - $this->get_lemonway_amount();
-	}
-	
-	public function is_user_lemonway_registered() {
-		$WDGUser_current = WDGUser::current();
-		return $WDGUser_current->is_lemonway_registered();
-	}
-	
-	public function init_can_use_wallet() {
-		if ( !isset( $this->can_use_wallet ) ) {
-			$this->can_use_wallet = FALSE;
-			$this->can_use_card_and_wallet = FALSE;
-			$current_investment = WDGInvestment::current();
-			if ( !$current_investment->has_token() && ATCF_CrowdFunding::get_platform_context() == "wedogood" ) {
-				if ( $current_investment->get_session_user_type() == 'user' ) {
-					$WDGUser_current = WDGUser::current();
-					$can_use_wallet = $WDGUser_current->can_pay_with_wallet( $current_investment->get_session_amount(), $this->current_campaign );
-					$can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $current_investment->get_session_amount(), $this->current_campaign );
-				} else {
-					$invest_type = $current_investment->get_session_user_type();
-					$organization = new WDGOrganization($invest_type);
-					$can_use_wallet = $organization->can_pay_with_wallet( $current_investment->get_session_amount(), $this->current_campaign );
-					$can_use_card_and_wallet = $organization->can_pay_with_card_and_wallet( $current_investment->get_session_amount(), $this->current_campaign );
-				}
-			}
-		}
-	}
-	
-	public function can_use_wallet() {
-		$this->init_can_use_wallet();
-		return $this->can_use_wallet;
-	}
-	
-	public function can_use_card_and_wallet() {
-		$this->init_can_use_wallet();
-		return $this->can_use_card_and_wallet;
-	}
-	
-	public function can_use_wire() {
-		$current_investment = WDGInvestment::current();
-		return ( $this->current_campaign->can_use_wire( $current_investment->get_session_amount() ) );
-	}
-	
-	public function display_inactive_wire() {
-		$current_investment = WDGInvestment::current();
-		$buffer = $this->current_campaign->can_use_wire_remaining_time()
-				&& !$this->current_campaign->can_use_wire_amount( $current_investment->get_session_amount() )
-				&& !$current_investment->has_token();
-		return $buffer;
-	}
-	
-	public function can_use_check() {
-		$current_investment = WDGInvestment::current();
-		$buffer = $this->current_campaign->can_use_check( $current_investment->get_session_amount() )
-				&& !$current_investment->has_token();
-		return $buffer;
-	}
-	
-	public function display_inactive_check() {
-		$current_investment = WDGInvestment::current();
-		return !$current_investment->has_token();
 	}
 	
 }

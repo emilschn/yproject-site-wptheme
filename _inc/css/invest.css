@@ -1,37 +1,37 @@
-body.template-investir.context-wedogood nav#main div#menu {
+nav#main div#menu {
 	text-align: center;
 }
-body.template-investir.context-wedogood nav#main div#menu > a {
+nav#main div#menu > a {
 	display: none;
 }
-body.template-investir.context-wedogood nav#main div#menu > a:first-child {
+nav#main div#menu > a:first-child {
 	display: inline-block;
 	float: none;
 	margin-left: 60px;
 }
-body.template-investir.context-wedogood nav#main div#menu > a.btn-user {
+nav#main div#menu > a.btn-user {
 	display: inline-block;
 	float: right;
 }
-body.template-investir.context-wedogood nav#main div#menu > a.btn-user:before {
+nav#main div#menu > a.btn-user:before {
 	border-left: 0px;
 }
 
-body.template-investir.context-wedogood div#content form {
+div#content form {
 	max-width: 500px;
 	margin: 20px auto;
 }
-body.template-investir.context-wedogood div#content form.enlarge {
+div#content form.enlarge {
 	max-width: 600px;
 }
 @media screen and (max-width: 600px) {
-	body.template-investir.context-wedogood div#content form {
+	div#content form {
 		min-width: 310px;
 		margin: 20px 5px;
 	}
 }
 
-body.template-investir.context-wedogood div#content form span#royalties-percent {
+div#content form span#royalties-percent {
 	color: #93626D;
 }
 
@@ -118,16 +118,16 @@ div#content header #invest-breadcrumb span.selected:after {
 /**
  ETAPE 3 : Contrat
 **/
-body.template-investir.context-wedogood div#content div#contract-intro {
+div#content div#contract-intro {
 	min-height: 120px;
 	text-align: justify;
 }
-body.template-investir.context-wedogood div#content div#contract-intro img {
+div#content div#contract-intro img {
 	float: left;
 	margin-right: 20px;
 	margin-bottom: 20px;
 }
-body.template-investir.context-wedogood div#content div#contract-preview {
+div#content div#contract-preview {
 	height: 400px;
 	overflow: scroll;
 	margin-top: 20px;
@@ -136,11 +136,11 @@ body.template-investir.context-wedogood div#content div#contract-preview {
 	border: 1px solid grey;
 	text-align: left;
 }
-body.template-investir.context-wedogood div#content #field-validate_contract label {
+div#content #field-validate_contract label {
 	font-weight: normal;
 }
 @media screen and (max-width: 500px) {
-	body.template-investir.context-wedogood div#content div#contract-intro img {
+	div#content div#contract-intro img {
 		width: 100px;
 		margin-right: 5px;
 		margin-bottom: 5px;
@@ -148,29 +148,29 @@ body.template-investir.context-wedogood div#content #field-validate_contract lab
 }
 
 
-body.template-investir.context-wedogood div.center {
+div.center {
 	width: 500px;
 }
-body.template-investir.context-wedogood h2 {
+h2 {
 	font-size: 14px;
 }
-body.template-investir.context-wedogood div.mean-payment-list {
+div.mean-payment-list {
 	margin: 25px auto;
 }
-body.template-investir.context-wedogood div.mean-payment-list a, body.template-investir.context-wedogood div.mean-payment-list p {
+div.mean-payment-list a, div.mean-payment-list p {
 	display: block;
 	clear: both;
 	color: #333333;
 	min-height: 80px;
 }
-body.template-investir.context-wedogood div.mean-payment-list a img, body.template-investir.context-wedogood div.mean-payment-list p img {
+div.mean-payment-list a img, div.mean-payment-list p img {
 	float: left;
 	margin-right: 10px;
 }
-body.template-investir.context-wedogood div.mean-payment-list a span, body.template-investir.context-wedogood div.mean-payment-list p span {
+div.mean-payment-list a span, div.mean-payment-list p span {
 	font-size: 0.9em;
 }
-body.template-investir.context-wedogood div.mean-payment-list a span.mean-payment-name, body.template-investir.context-wedogood div.mean-payment-list p span.mean-payment-name {
+div.mean-payment-list a span.mean-payment-name, div.mean-payment-list p span.mean-payment-name {
 	font-size: 1em;
 	text-transform: uppercase;
 }
