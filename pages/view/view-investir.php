@@ -15,7 +15,7 @@
 			locate_template( array( 'pages/view/investir/contract.php'  ), true );
 			break;
 		case 4:
-			locate_template( array( 'pages/view/investir/mean-payments.php'  ), true );
+			locate_template( array( 'pages/view/investir/mean-payment.php'  ), true );
 			break;
 		default:
 			locate_template( array( 'pages/view/investir/input.php'  ), true );

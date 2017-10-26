@@ -41,7 +41,7 @@ $fields_contract_validate = $page_controler->get_form()->getFields( WDG_Form_Inv
 	
 	<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
 	
-	<button type="submit" class="button half right transparent"><?php _e( "Suivant", 'yproject' ); ?></button>
+	<button type="submit" class="button half right red"><?php _e( "Valider le contrat", 'yproject' ); ?></button>
 	
 	<div class="clear"></div>
 </form>

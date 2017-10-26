@@ -146,3 +146,31 @@ body.template-investir.context-wedogood div#content #field-validate_contract lab
 		margin-bottom: 5px;
 	}
 }
+
+
+body.template-investir.context-wedogood div.center {
+	width: 500px;
+}
+body.template-investir.context-wedogood h2 {
+	font-size: 14px;
+}
+body.template-investir.context-wedogood div.mean-payment-list {
+	margin: 25px auto;
+}
+body.template-investir.context-wedogood div.mean-payment-list a, body.template-investir.context-wedogood div.mean-payment-list p {
+	display: block;
+	clear: both;
+	color: #333333;
+	min-height: 80px;
+}
+body.template-investir.context-wedogood div.mean-payment-list a img, body.template-investir.context-wedogood div.mean-payment-list p img {
+	float: left;
+	margin-right: 10px;
+}
+body.template-investir.context-wedogood div.mean-payment-list a span, body.template-investir.context-wedogood div.mean-payment-list p span {
+	font-size: 0.9em;
+}
+body.template-investir.context-wedogood div.mean-payment-list a span.mean-payment-name, body.template-investir.context-wedogood div.mean-payment-list p span.mean-payment-name {
+	font-size: 1em;
+	text-transform: uppercase;
+}
