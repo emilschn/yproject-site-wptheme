@@ -136,7 +136,7 @@ div#content div#contract-preview {
 	border: 1px solid grey;
 	text-align: left;
 }
-div#content #field-validate_contract label {
+div#content #field-confirm-subscription label {
 	font-weight: normal;
 }
 @media screen and (max-width: 500px) {
@@ -160,8 +160,11 @@ div.mean-payment-list {
 div.mean-payment-list a, div.mean-payment-list p {
 	display: block;
 	clear: both;
-	color: #333333;
 	min-height: 80px;
+	padding: 5px;
+    margin-bottom: 5px;
+	border: 1px solid #333;
+	color: #333333;
 }
 div.mean-payment-list a img, div.mean-payment-list p img {
 	float: left;

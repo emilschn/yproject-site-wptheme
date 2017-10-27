@@ -9,6 +9,7 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 	private $current_campaign;
 	
 	private $current_step;
+	private $current_investment;
 	
 	public function __construct() {
 		parent::__construct();
@@ -17,6 +18,7 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 		
 		$this->init_current_campaign();
 		$this->init_current_step();
+		$this->init_current_investment();
 	}
 	
 /******************************************************************************/
@@ -32,6 +34,17 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 	
 	public function get_campaign_link() {
 		return get_permalink( $this->current_campaign->ID );
+	}
+	
+/******************************************************************************/
+// CURRENT INVESTMENT
+/******************************************************************************/
+	private function init_current_investment() {
+		$this->current_investment = WDGInvestment::current();
+	}
+	
+	public function get_current_investment() {
+		return $this->current_investment;
 	}
 	
 /******************************************************************************/

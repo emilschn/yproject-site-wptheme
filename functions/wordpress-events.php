@@ -208,7 +208,7 @@ class WDG_WordPress_Events {
 			wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, $current_version, 'all');
 			wp_enqueue_script( 'wdg-user-account', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-user-account.js', array('jquery', 'jquery-ui-dialog'), $current_version);
 		}
-		if ( $post->post_name == 'investir' || $post->post_name == 'moyen-de-paiement' ) {
+		if ( $post->post_name == 'investir' || $post->post_name == 'moyen-de-paiement' || $post->post_name == 'paiement-effectue' || $post->post_name == 'paiement-partager' ) {
 			wp_enqueue_style( 'invest-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/invest.min.css', null, $current_version, 'all' );
 			wp_enqueue_script( 'wdg-project-invest', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign-invest.js', array('jquery'), $current_version );
 		}

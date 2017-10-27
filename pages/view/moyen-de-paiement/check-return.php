@@ -1,37 +1,39 @@
 <?php global $page_controler, $stylesheet_directory_uri; ?>
 
-<?php _e( "Merci pour votre investissement de", 'yproject' ); ?>
-<?php echo $page_controler->get_current_investment()->get_session_amount(); ?> &euro;
-<?php _e( "par chèque pour", 'yproject' ); ?>
-<?php echo $page_controler->get_campaign_organization_name(); ?>.<br><br>
+<div class="center align-justify">
+	<?php _e( "Merci pour votre investissement de", 'yproject' ); ?>
+	<?php echo $page_controler->get_current_investment()->get_session_amount(); ?> &euro;
+	<?php _e( "par chèque pour", 'yproject' ); ?>
+	<?php echo $page_controler->get_campaign_organization_name(); ?>.<br><br>
 
-<?php if ( $page_controler->get_check_return() == 'post_confirm_check' ): ?>
+	<?php if ( $page_controler->get_check_return() == 'post_confirm_check' ): ?>
 
-	<?php _e( "Pour que celui-ci soit comptabilis&eacute; dans la campagne, vous devez nous envoyer une photo par mail &agrave; l'adresse investir@wedogood.co.", 'yproject' ); ?>
+		<?php _e( "Pour que celui-ci soit comptabilis&eacute; dans la campagne, vous devez nous envoyer une photo par mail &agrave; l'adresse investir@wedogood.co.", 'yproject' ); ?>
 
-<?php endif; ?>
+	<?php endif; ?>
 
-<?php _e( "Une fois re&ccedil;u et confirm&eacute;, nous vous enverrons une validation de votre investissement par e-mail &agrave; l'adresse", 'yproject' ); ?>
-<?php echo $page_controler->get_current_user_email(); ?>.<br><br>
+	<?php _e( "Une fois re&ccedil;u et confirm&eacute;, nous vous enverrons une validation de votre investissement par e-mail &agrave; l'adresse", 'yproject' ); ?>
+	<?php echo $page_controler->get_current_user_email(); ?>.<br><br>
 
-<?php if ( $page_controler->get_current_investment()->get_session_amount() > 1500 ): ?>
-<?php _e( "Nous vous rappelons que pour que celui-ci soit valid&eacute;, vous devez signer le contrat électronique qui vous a &eacute;t&eacute; envoy&eacute; &agrave; l'adresse", 'yproject' ); ?>
-<?php echo $page_controler->get_current_user_email(); ?>.
-<?php _e( "Pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable (spam).", 'yproject' ); ?><br><br>
-<?php else: ?>
-<?php _e( "Cet e-mail contiendra le contrat d'investissement correspondant.", 'yproject' ); ?><br><br>
-<?php endif; ?>
+	<?php if ( $page_controler->get_current_investment()->get_session_amount() > 1500 ): ?>
+	<?php _e( "Nous vous rappelons que pour que celui-ci soit valid&eacute;, vous devez signer le contrat électronique qui vous a &eacute;t&eacute; envoy&eacute; &agrave; l'adresse", 'yproject' ); ?>
+	<?php echo $page_controler->get_current_user_email(); ?>.
+	<?php _e( "Pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable (spam).", 'yproject' ); ?><br><br>
+	<?php else: ?>
+	<?php _e( "Cet e-mail contiendra le contrat d'investissement correspondant.", 'yproject' ); ?><br><br>
+	<?php endif; ?>
 
-<?php _e( "Pensez aussi &agrave; nous faire parvenir le ch&egrave;que de", 'yproject' ); ?>
-<?php echo $page_controler->get_current_investment()->get_session_amount(); ?> &euro;
-<?php _e( "&agrave; l'ordre de", 'yproject' ); ?>
-<?php echo $page_controler->get_campaign_organization_name(); ?>
-<?php _e( "&agrave; l'adresse suivante :", 'yproject' ); ?><br>
-WE DO GOOD<br>
-8 rue Kervégan<br>
-44000 Nantes<br><br>
+	<?php _e( "Pensez aussi &agrave; nous faire parvenir le ch&egrave;que de", 'yproject' ); ?>
+	<?php echo $page_controler->get_current_investment()->get_session_amount(); ?> &euro;
+	<?php _e( "&agrave; l'ordre de", 'yproject' ); ?>
+	<?php echo $page_controler->get_campaign_organization_name(); ?>
+	<?php _e( "&agrave; l'adresse suivante :", 'yproject' ); ?><br>
+	WE DO GOOD<br>
+	8 rue Kervégan<br>
+	44000 Nantes<br><br>
 
-<div class="align-center">
-	<a class="button" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e("Suivant", 'yproject'); ?></a>
+	<div class="align-center">
+		<a class="button red" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e("Suivant", 'yproject'); ?></a>
+	</div>
+	<br><br>
 </div>
-<br><br>
