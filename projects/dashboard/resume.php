@@ -129,9 +129,9 @@ function print_resume_page()
                             </div>
                         </div><!--
                         --><div class="quart-card">
-                            <canvas id="canvas-pie-block" width="160" height="160"></canvas><br/>
+                            <canvas id="canvas-vertical-bar-block" width="160" height="160"></canvas><br/>
                             <div class="details-card">
-                                Valid&eacute; par <strong><?php echo $vote_results['percent_project_validated']?>&percnt;</strong> des votants
+                                En moyenne, les votants notent <strong><?php echo $vote_results[ 'rate_project_average' ]; ?></strong>
                             </div>
                         </div><!--
                         --><div class="quart-card">
@@ -219,33 +219,36 @@ function print_resume_page()
             <div class="list-button">
                 <a href="#statsadvanced" class="wdg-button-lightbox-open button" data-lightbox="statsadvanced"><i class="fa fa-line-chart"></i>  Statistiques d&eacute;taill&eacute;es</a>
             </div>
+			<?php if ( $status == ATCF_Campaign::$campaign_status_vote ): ?>
             <script type="text/javascript">
                 jQuery(document).ready( function($) {
-
-                    <?php if($status==ATCF_Campaign::$campaign_status_vote){ ?>
-                    var ctxPie = $("#canvas-pie-block").get(0).getContext("2d");
-                    var dataPie = [
-                        {value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "Oui"},
-                        {value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: "Non"}
-                    ];
-                    var optionsPie = {
-                        legend: true,
-                        legendBorders: false,
-                        inGraphDataShow : true,
-                        inGraphDataTmpl : "<%=v6%>%",
-                        inGraphDataFontSize : 25,
-                        inGraphDataFontColor : "#FFF",
-                        inGraphDataAnglePosition : 2,
-                        inGraphDataRadiusPosition : 2,
-                        inGraphDataMinimumAngle : 30,
-                        inGraphDataAlign : "center",
-                        inGraphDataVAlign : "middle"
-                    };
-                    var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
-
-                    <?php } ?>
+                    var ctxBar = $("#canvas-vertical-bar-block").get(0).getContext("2d");
+					var nStepsBar = Math.max(Math.max(Math.max(Math.max(Math.max(0, <?php echo $vote_results['rate_project_list'][1]; ?>), <?php echo $vote_results['rate_project_list'][2]; ?>), <?php echo $vote_results['rate_project_list'][3]; ?>), <?php echo $vote_results['rate_project_list'][4]; ?>), <?php echo $vote_results['rate_project_list'][5]; ?>);
+					var barData = {
+						labels: [ "1", "2", "3", "4", "5" ],
+						datasets: [{
+							fillColor: "#FE494C",
+							strokeColor: "#FE494C",
+							data: [
+								<?php echo $vote_results[ 'rate_project_list' ][ '1' ]; ?>,
+								<?php echo $vote_results[ 'rate_project_list' ][ '2' ]; ?>,
+								<?php echo $vote_results[ 'rate_project_list' ][ '3' ]; ?>,
+								<?php echo $vote_results[ 'rate_project_list' ][ '4' ]; ?>,
+								<?php echo $vote_results[ 'rate_project_list' ][ '5' ]; ?>
+							]
+						}]
+					};
+					var barOptions = {
+						scaleOverride: true,
+						scaleSteps: nStepsBar,
+						scaleStepWidth: 1,
+						scaleStartValue: 0,
+						pointDot: false
+					};
+					var canvasBar = new Chart( ctxBar ).Bar( barData, barOptions );
                 });
             </script>
+			<?php endif; ?>
         </div>
     </div>
     <?php } ?>
