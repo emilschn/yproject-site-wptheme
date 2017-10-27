@@ -19,27 +19,21 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	private $current_step;
 	private $current_view;
 	private $current_meanofpayment;
-	private $form;
 	
 	private $can_use_wallet;
 	private $can_use_card_and_wallet;
 	
+	private $display_error;
+	
 	public function __construct() {
 		parent::__construct();
 		
-		$core = ATCF_CrowdFunding::instance();
-		$core->include_form( 'invest-input' );
-		$core->include_form( 'invest-user-details' );
-		$core->include_form( 'invest-contract' );
-		
-		date_default_timezone_set( "Europe/London" );
 		define( 'SKIP_BASIC_HTML', TRUE );
 		
 		$this->init_current_campaign();
 		WDGRoutes::redirect_invest_if_not_logged_in();
 		WDGRoutes::redirect_invest_if_project_not_investable();
 		
-		$this->init_current_organization();
 		$this->init_current_investment();
 		$this->init_current_step();
 		$this->init_current_mean_of_payment();
@@ -94,6 +88,10 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	
 	public function get_current_view() {
 		return $this->current_view;
+	}
+	
+	public function get_display_error() {
+		return $this->display_error;
 	}
 	
 /******************************************************************************/
@@ -175,8 +173,8 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 		$this->current_meanofpayment = filter_input( INPUT_GET, 'meanofpayment' );
 		
 		switch ( $this->current_meanofpayment ) {
-			case 'wallet':
-				$return = $this->current_investment->try_payment( 'wallet' );
+			case WDGInvestment::$meanofpayment_wallet:
+				$return = $this->current_investment->try_payment( WDGInvestment::$meanofpayment_wallet );
 				if ( empty( $return ) ) {
 					$this->current_view = 'wallet-error';
 				} else {
@@ -184,16 +182,19 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 				}
 				break;
 				
-			case 'cardwallet':
-			case 'card':
+			case WDGInvestment::$meanofpayment_cardwallet:
+			case WDGInvestment::$meanofpayment_card:
 				$return = $this->current_investment->try_payment( $this->current_meanofpayment );
+				if ( empty( $return ) ) {
+					$this->display_error = __( "Erreur de connexion &agrave; Lemon Way.", 'yproject' );
+				}
 				break;
 			
-			case 'wire':
+			case WDGInvestment::$meanofpayment_wire:
 				$this->current_view = 'wire';
 				break;
 			
-			case 'check':
+			case WDGInvestment::$meanofpayment_check:
 				$check_return = $this->get_check_return();
 				if ( !empty( $check_return ) ) {
 					$this->current_investment->get_session_amount(); // Stock avant destruction
@@ -216,7 +217,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 		global $contract_errors;
 		$buffer = FALSE;
 		if ( isset( $contract_errors ) && $contract_errors != '' ) {
-			ypcf_debug_log( "ypcf_shortcode_invest_return --- ERROR :: contract :: " .$contract_errors );
+			ypcf_debug_log( "has_contract_errors --- ERROR :: contract :: " .$contract_errors );
 			$buffer = TRUE;
 		}
 		return $buffer;
@@ -272,6 +273,11 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	
 	public function get_organization_document_list_by_type( $type ) {
 		return WDGKYCFile::get_list_by_owner_id( $this->current_investment->get_session_user_type(), WDGKYCFile::$owner_organization, $type );
+	}
+	
+	public function get_wire_next_link() {
+		$buffer = home_url( '/paiement-effectue' ). '?campaign_id=' .$this->current_campaign->ID. '&meanofpayment=wire';
+		return $buffer;
 	}
 	
 	public function get_success_next_link() {

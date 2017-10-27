@@ -123,7 +123,7 @@
 
 
 <?php _e("Une fois le virement effectu&eacute;, cliquez sur", 'yproject'); ?>
-<a class="button" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e("Suivant", 'yproject'); ?></a>
+<a class="button" href="<?php echo $page_controler->get_wire_next_link(); ?>"><?php _e("Suivant", 'yproject'); ?></a>
 <br><br>
 
 

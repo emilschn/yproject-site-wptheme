@@ -6,7 +6,7 @@ if (!isset($campaign)) {
 
 if (isset($campaign) && is_user_logged_in()):
     ypcf_session_start();
-    ypcf_check_is_project_investable();
+    WDGRoutes::redirect_invest_if_project_not_investable();
 	$wdginvestment = WDGInvestment::current();
 	
     if (	isset($_REQUEST["ContributionID"]) || isset($_REQUEST["response_wkToken"])
