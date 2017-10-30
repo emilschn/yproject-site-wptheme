@@ -1,6 +1,6 @@
 <?php
-global $page_controler;
-$page_controler = new WDG_Page_Controler_PaymentDone();
+$template_engine = WDG_Templates_Engine::instance();
+$template_engine->set_controler( new WDG_Page_Controler_PaymentDone() );
 
 class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 	/**
@@ -15,7 +15,6 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 	private $current_step;
 	private $current_meanofpayment;
 	private $current_view;
-	private $display_error;
 	
 	public function __construct() {
 		parent::__construct();
@@ -80,6 +79,9 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 			$this->current_meanofpayment = WDGInvestment::$meanofpayment_card;
 		}
 		$payment_return = $this->current_investment->payment_return( $this->current_meanofpayment );
+		if ( empty( $payment_return ) ) {
+			$payment_return = 'error-contact';
+		}
 		$this->current_view = $this->current_meanofpayment . '-' . $payment_return;
 	}
 	
@@ -145,7 +147,8 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 	
 	public function get_error_restart_link() {
 		$buffer = '';
-		if ( $this->current_investment->get_error_item()->ask_restart() ) {
+		$error_item = $this->current_investment->get_error_item();
+		if ( isset( $error_item ) && $error_item->ask_restart() ) {
 			$buffer = home_url( '/investir' ). '?campaign_id=' .$this->current_campaign->ID. '&invest_start=1';
 		}
 		return $buffer;

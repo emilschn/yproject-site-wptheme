@@ -1,6 +1,6 @@
 <?php
-global $page_controler;
-$page_controler = new WDG_Page_Controler_InvestShare();
+$template_engine = WDG_Templates_Engine::instance();
+$template_engine->set_controler( new WDG_Page_Controler_InvestShare() );
 
 class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 	/**

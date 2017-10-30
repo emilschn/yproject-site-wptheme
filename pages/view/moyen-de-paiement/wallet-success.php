@@ -1,4 +1,7 @@
-<?php global $page_controler, $stylesheet_directory_uri; ?>
+<?php
+global $stylesheet_directory_uri;
+$page_controler = WDG_Templates_Engine::instance()->get_controler();
+?>
 
 <?php if ( $page_controler->get_current_investment()->get_session_amount() > 1500 ): ?>
 
