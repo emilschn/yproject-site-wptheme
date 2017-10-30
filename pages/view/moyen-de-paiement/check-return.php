@@ -1,6 +1,7 @@
 <?php global $page_controler, $stylesheet_directory_uri; ?>
 
 <div class="center align-justify">
+	<br><br>
 	<?php _e( "Merci pour votre investissement de", 'yproject' ); ?>
 	<?php echo $page_controler->get_current_investment()->get_session_amount(); ?> &euro;
 	<?php _e( "par chèque pour", 'yproject' ); ?>

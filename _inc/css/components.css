@@ -904,6 +904,7 @@ body input[type=text], body input[type=email], body select {
 	font-family: Trebuchet MS, sans-serif;
 }
 .db-form.v3 a.button {
+	display: inline-block;
 	padding: 0px;
 	line-height: 50px;
 	height: 48px;

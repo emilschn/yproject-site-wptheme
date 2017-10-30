@@ -17,7 +17,7 @@
 		</div>
 		<br><br>
 		
-		<div class="align-center">
+		<div class="db-form v3 full">
 			<a class="button transparent" href="<?php echo $page_controler->get_campaign_link(); ?>"><?php _e( "Retour au projet", 'yproject' ); ?></a>
 		</div>
 		<br><br>
