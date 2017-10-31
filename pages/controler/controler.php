@@ -34,7 +34,11 @@ class WDG_Page_Controler {
 	}
 	
 	private function init_page_title() {
-		if ( is_category() ) {
+		if ( is_home() || is_front_page() ) {
+			global $post;
+			$this->page_title = $post->post_title;
+			
+		} else if ( is_category() ) {
 			global $cat;
 			$this_category = get_category($cat);
 			$this_category_name = $this_category->name;
