@@ -69,10 +69,10 @@ $fields_info_confirm = $page_controler->get_form()->getFields( WDG_Form_Invest_U
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 			<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 		<?php endforeach; ?>
-	
-		<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
 
 		<button type="submit" class="button half right transparent"><?php _e( "Suivant", 'yproject' ); ?></button>
+	
+		<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
 	</div>
 	
 	<div class="clear"></div>
