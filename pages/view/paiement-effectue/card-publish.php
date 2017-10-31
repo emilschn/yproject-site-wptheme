@@ -3,6 +3,9 @@ global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 
+<div class="center align-justify">
+<br><br>
+
 <?php if ( $page_controler->get_current_investment()->get_session_amount() > 1500 ): ?>
 
 	<?php if ( !$page_controler->has_contract_errors() ): ?>
@@ -37,7 +40,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 <?php endif; ?>
 
-<div class="align-center">
-	<a class="button" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e( "Suivant", 'yproject' ); ?></a>
+<div class="db-form full v3">
+	<a class="button red" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e( "Suivant", 'yproject' ); ?></a>
 </div>
 <br><br>
+
+</div>
