@@ -1,22 +1,3 @@
-nav#main div#menu {
-	text-align: center;
-}
-nav#main div#menu > a {
-	display: none;
-}
-nav#main div#menu > a:first-child {
-	display: inline-block;
-	float: none;
-	margin-left: 60px;
-}
-nav#main div#menu > a.btn-user {
-	display: inline-block;
-	float: right;
-}
-nav#main div#menu > a.btn-user:before {
-	border-left: 0px;
-}
-
 div#content form {
 	max-width: 500px;
 	margin: 20px auto;
@@ -115,6 +96,14 @@ div#content header #invest-breadcrumb span.selected:after {
 	height: 20px;
 }
 
+@media screen and (max-width: 450px) {
+	.db-form.v3 a.button.half, .db-form.v3 button.half {
+		width: 47%;
+		padding: 2px;
+		font-size: 12px;
+	}
+}
+
 /**
  ETAPE 3 : Contrat
 **/
@@ -162,7 +151,7 @@ div.mean-payment-list a, div.mean-payment-list p {
 	clear: both;
 	min-height: 80px;
 	padding: 5px;
-    margin-bottom: 5px;
+    margin: 5px;
 	border: 1px solid #333;
 	color: #333333;
 }

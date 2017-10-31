@@ -834,6 +834,9 @@ body input[type=text], body input[type=email], body select {
 	font-weight: normal;
 	line-height: 28px;
 }
+.db-form.v3 .field label.radio-label {
+	white-space: normal;
+}
 .db-form.v3.full .field label {
 	display: block;
 	width: 100%;

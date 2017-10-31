@@ -7,43 +7,49 @@ var WDGInvestPageFunctions = (function($) {
 		forceInvestSubmit: false,
 		initUI:function() {
 			// Changement de montant
-			$( 'form input#amount' ).on( 'keyup change', function () {
+			if ( $( 'form input#amount' ).length > 0 ) {
 				WDGInvestPageFunctions.checkInvestInput();
-			} );
+				$( 'form input#amount' ).on( 'keyup change', function () {
+					WDGInvestPageFunctions.checkInvestInput();
+				} );
+			}
+			
 			// Changement de type d'investisseur
-			$( 'form input#user-type-user, form input#user-type-orga' ).click( function() {
-				if ( $( this ).val() == 'user' ) {
-					$( 'form #fieldgroup-orga-info' ).hide();
-					$( 'form #fieldgroup-orga-info-new' ).hide();
-					$( 'form #fieldgroup-user-type-orga' ).hide();
-					$( 'form #fieldgroup-user-info' ).slideDown( 200 );
-					$( 'form #fieldgroup-to-display' ).slideDown( 200 );
-					
-				} else if ( $( this ).val() == 'orga' ) {
-					$( 'form #fieldgroup-user-type-orga' ).slideDown( 200 );
-					$( 'form #fieldgroup-user-info' ).hide();
-					$( 'form #fieldgroup-to-display' ).hide();
-				}
-			} );
-			// Changement choix d'organisation
-			$( 'form select#select-orga-id' ).change( function() {
-				if ( $(this).val() === '' ) {
-					$( 'form #fieldgroup-user-info' ).hide();
-					$( 'form #fieldgroup-orga-info' ).hide();
-					$( 'form #fieldgroup-to-display' ).hide();
-					$( 'form #fieldgroup-orga-info-new' ).hide();
-				} else {
-					$( 'form #fieldgroup-user-info' ).slideDown( 200 );
-					$( 'form #fieldgroup-orga-info' ).slideDown( 200 );
-					$( 'form #fieldgroup-to-display' ).slideDown( 200 );
-					if ( $(this).val() === 'new-orga' ) {
-						$( 'form #fieldgroup-orga-info-new' ).slideDown( 200 );
-					} else {
+			if ( $( 'form input#user-type-user' ).length > 0 ) {
+				$( 'form input#user-type-user, form input#user-type-orga' ).click( function() {
+					if ( $( this ).val() == 'user' ) {
+						$( 'form #fieldgroup-orga-info' ).hide();
 						$( 'form #fieldgroup-orga-info-new' ).hide();
+						$( 'form #fieldgroup-user-type-orga' ).hide();
+						$( 'form #fieldgroup-user-info' ).slideDown( 200 );
+						$( 'form #fieldgroup-to-display' ).slideDown( 200 );
+
+					} else if ( $( this ).val() == 'orga' ) {
+						$( 'form #fieldgroup-user-type-orga' ).slideDown( 200 );
+						$( 'form #fieldgroup-user-info' ).hide();
+						$( 'form #fieldgroup-to-display' ).hide();
 					}
-					WDGInvestPageFunctions.updateOrgaFields( $(this).val() );
-				}
-			} );
+				} );
+				// Changement choix d'organisation
+				$( 'form select#select-orga-id' ).change( function() {
+					if ( $(this).val() === '' ) {
+						$( 'form #fieldgroup-user-info' ).hide();
+						$( 'form #fieldgroup-orga-info' ).hide();
+						$( 'form #fieldgroup-to-display' ).hide();
+						$( 'form #fieldgroup-orga-info-new' ).hide();
+					} else {
+						$( 'form #fieldgroup-user-info' ).slideDown( 200 );
+						$( 'form #fieldgroup-orga-info' ).slideDown( 200 );
+						$( 'form #fieldgroup-to-display' ).slideDown( 200 );
+						if ( $(this).val() === 'new-orga' ) {
+							$( 'form #fieldgroup-orga-info-new' ).slideDown( 200 );
+						} else {
+							$( 'form #fieldgroup-orga-info-new' ).hide();
+						}
+						WDGInvestPageFunctions.updateOrgaFields( $(this).val() );
+					}
+				} );
+			}
 		},
 		
 		checkInvestInput: function() {

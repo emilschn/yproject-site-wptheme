@@ -4,4 +4,4 @@
 	<input type="checkbox" id="<?php echo $wdg_current_field[ 'name' ] .'-'. $option_value; ?>" name="<?php echo $option_value; ?>" value="<?php echo $option_value; ?>"><span></span>
 	<?php echo $option_label; ?>
 </label>
-<?php endforeach; ?>
+<?php endforeach;
