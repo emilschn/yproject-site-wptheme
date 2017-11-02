@@ -53,3 +53,20 @@ $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::
 	<div class="clear"></div>
 	
 </form>
+
+
+
+<?php if ( $page_controler->is_warning_visible() ): ?>
+
+	<?php ob_start(); ?>
+
+		<?php echo $page_controler->get_warning_content(); ?>
+		<br><br>
+		<button class="button transparent close right"><?php _e( "Continuer", 'yproject' ); ?></button>
+
+	<?php $lightbox_content = ob_get_contents(); ?>
+	<?php ob_clean(); ?>
+
+	<?php echo do_shortcode( '[yproject_lightbox_cornered id="invest-warning" autoopen="1"]'.$lightbox_content.'[/yproject_lightbox_cornered]' ); ?>
+
+<?php endif;

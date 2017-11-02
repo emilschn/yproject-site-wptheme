@@ -775,10 +775,10 @@ var WDGFormsFunctions = (function($) {
 				var formId = $( this ).parent().parent().parent().attr( 'id' );
 				WDGFormsFunctions.postForm( 'div#' + formId, WDGFormsFunctions.postFormCallback );
 			} );
-			$( '.wdg-lightbox-ref button.close' ).click( function( e ) {
+			$( '.wdg-lightbox button.close, .wdg-lightbox-ref button.close' ).click( function( e ) {
 				$( this ).parents( 'div.wdg-lightbox' ).hide();
 			} );
-			$( '.wdg-lightbox-ref button.redirect' ).click( function( e ) {
+			$( '.wdg-lightbox button.redirect, .wdg-lightbox-ref button.redirect' ).click( function( e ) {
 				window.location = $( this ).data( 'redirecturl' );
 			} );
 		},

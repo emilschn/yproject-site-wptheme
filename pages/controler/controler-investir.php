@@ -137,6 +137,15 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		return $this->current_step;
 	}
 	
+	public function is_warning_visible() {
+		$invest_start = filter_input( INPUT_GET, 'invest_start' );
+		return ( $this->current_step == 1 && $invest_start == '1' );
+	}
+	public function get_warning_content() {
+		$edd_settings = get_option( 'edd_settings' );
+		return wpautop( $edd_settings[ 'investment_generalities' ] );
+	}
+	
 /******************************************************************************/
 // CURRENT FORM
 /******************************************************************************/

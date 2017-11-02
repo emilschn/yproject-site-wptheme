@@ -103,6 +103,10 @@ div#content header #invest-breadcrumb span.selected:after {
 /**
  ETAPE 1 : Saisie montant
 **/
+div#wdg-lightbox-invest-warning button.right {
+	width: 200px;
+	height: 50px;
+}
 div#content div#thanks-to-me > img {
 	float: left;
 	max-width: 40%;
