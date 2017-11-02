@@ -8,7 +8,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	
 	<?php locate_template( array( 'pages/view/investir/header.php'  ), true ); ?>
 	
-	<div class="center">
+	<div class="view-share center">
 		<br><br>
 		
 		<?php _e( "Votre investissement a bien &eacute;t&eacute; pris en compte, merci !" ); ?><br><br>

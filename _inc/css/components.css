@@ -921,6 +921,12 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3 a.button.half {
 	width: 45%;
 }
+.db-form.v3 .button.transparent {
+	width: calc( 100% - 4px );
+}
+.db-form.v3 .button.transparent.half {
+	width: calc( 45% - 4px );
+}
 
 .db-form.v3 input[type=checkbox],
 .db-form.v3 input[type=checkbox].rate,
