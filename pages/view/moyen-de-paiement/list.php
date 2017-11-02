@@ -42,7 +42,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			</a>
 		
 		<?php elseif ( $page_controler->display_inactive_wire() ): ?>
-			<p>
+			<p class="disabled">
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Virement bancaire", 'yproject' ); ?>" width="120">
 				<span class="mean-payment-name"><?php _e( "Virement bancaire", 'yproject' ); ?></span><br>
 				<span><?php echo sprintf( __( "Les virements bancaires sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement", 'yproject' ), ATCF_Campaign::$invest_amount_min_wire ); ?></span>
@@ -58,9 +58,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			</a>
 			
 		<?php elseif ( $page_controler->display_inactive_check() ): ?>
-			<p>
+			<p class="disabled">
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-cheque.png" alt="<?php _e("Ch&egrave;que", 'yproject'); ?>" width="120">
-				<span class="mean-payment-name"><?php _e( "Ch&egrave;que", 'yproject' ); ?></span>
+				<span class="mean-payment-name"><?php _e( "Ch&egrave;que", 'yproject' ); ?></span><br>
 				<span><?php echo sprintf( __( "Les paiements par ch&egrave;ques sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement", 'yproject' ), ATCF_Campaign::$invest_amount_min_check ); ?></span>
 			</p>
 		<?php endif; ?>

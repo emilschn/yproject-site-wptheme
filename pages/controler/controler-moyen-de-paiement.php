@@ -146,18 +146,18 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	}
 	
 	public function can_use_wire() {
-		return ( $this->current_campaign->can_use_wire( $this->current_investment->get_session_amount() ) );
+		return ( $this->current_campaign->can_use_wire( $this->current_investment->get_session_amount() / $this->current_campaign->part_value() ) );
 	}
 	
 	public function display_inactive_wire() {
 		$buffer = $this->current_campaign->can_use_wire_remaining_time()
-				&& !$this->current_campaign->can_use_wire_amount( $this->current_investment->get_session_amount() )
+				&& !$this->current_campaign->can_use_wire_amount( $this->current_investment->get_session_amount() / $this->current_campaign->part_value() )
 				&& !$this->current_investment->has_token();
 		return $buffer;
 	}
 	
 	public function can_use_check() {
-		$buffer = $this->current_campaign->can_use_check( $this->current_investment->get_session_amount() )
+		$buffer = $this->current_campaign->can_use_check( $this->current_investment->get_session_amount() / $this->current_campaign->part_value() )
 				&& !$this->current_investment->has_token();
 		return $buffer;
 	}

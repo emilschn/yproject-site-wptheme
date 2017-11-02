@@ -77,7 +77,7 @@ div#content header #invest-breadcrumb span:after {
 	left: 26px;
 	border-top: 6px solid transparent;
 	border-bottom: 6px solid transparent;
-	border-left: 12px solid #F2F2F2;
+	border-left: 12px solid #cfb7b7;
 }
 div#content header #invest-breadcrumb span.selected:after {
 	border-left: 0px;
@@ -190,4 +190,12 @@ div.mean-payment-list a span, div.mean-payment-list p span {
 div.mean-payment-list a span.mean-payment-name, div.mean-payment-list p span.mean-payment-name {
 	font-size: 1em;
 	text-transform: uppercase;
+}
+
+div.mean-payment-list p.disabled {
+	background: rgba( 0, 0, 0, 0.1);
+	border: 0px;
+}
+div.mean-payment-list p.disabled img {
+	opacity: 0.5;
 }
