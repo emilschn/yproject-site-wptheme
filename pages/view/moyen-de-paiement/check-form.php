@@ -35,7 +35,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 	<br><br>
 
-	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="POST" class="align-center">
+	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="POST" class="db-form v3 full">
 		<button type="submit" class="button transparent"><?php _e( "Confirmer et envoyer plus tard", 'yproject' ); ?></button>
 		<input type="hidden" name="action" value="post_confirm_check" />
 		<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_current_campaign()->ID; ?>" />

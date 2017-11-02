@@ -36,8 +36,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	8 rue Kervégan<br>
 	44000 Nantes<br><br>
 
-	<div class="align-center">
-		<a class="button red" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e("Suivant", 'yproject'); ?></a>
+	<div class="db-form v3 full">
+		<a class="button transparent" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e("Suivant", 'yproject'); ?></a>
 	</div>
 	<br><br>
 </div>
