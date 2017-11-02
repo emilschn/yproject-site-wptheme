@@ -21,9 +21,7 @@ $fields_contract_validate = $page_controler->get_form()->getFields( WDG_Form_Inv
 	
 	<div id="contract-intro">
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/picto-contrat.png" width="150" />
-		<?php echo sprintf( __( "En investissant sur le projet %s, je souscris &agrave; une contrepartie financi&egrave;re :", 'yproject' ), $page_controler->get_campaign_name() ); ?>
-		<?php echo sprintf( __( "une redevance index&eacute;e sur le chiffre d'affaires de %s sur les %s prochaines ann&eacute;es,", 'yproject' ), $page_controler->get_campaign_organization_name(), $page_controler->get_campaign_funding_duration() ); ?>
-		<?php echo sprintf( __( "plafonn&eacute;e &agrave; %s fois mon investissement.", 'yproject' ), $page_controler->get_campaign_maximum_profit() ); ?>
+		<?php echo $page_controler->get_contract_warning(); ?>
 	</div>
 	
 	<div id="contract-preview">

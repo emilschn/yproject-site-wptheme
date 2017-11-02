@@ -146,6 +146,12 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		return wpautop( $edd_settings[ 'investment_generalities' ] );
 	}
 	
+	public function get_contract_warning() {
+		WDG_PDF_Generator::add_shortcodes();
+		$edd_settings = get_option( 'edd_settings' );
+		return wpautop( $edd_settings[ 'investment_terms' ] );
+	}
+	
 /******************************************************************************/
 // CURRENT FORM
 /******************************************************************************/
