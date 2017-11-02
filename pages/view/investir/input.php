@@ -35,11 +35,20 @@ $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::
 	</div>
 		
 	<div class="align-left">
-		<span id="royalties-percent">0</span> % <?php _e( "du chiffre d'affaires pendant", 'yproject' ); ?> <?php echo $page_controler->get_current_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?>.
+		<span class="number"><span id="royalties-percent">0</span> %</span> <?php _e( "du chiffre d'affaires pendant", 'yproject' ); ?> <?php echo $page_controler->get_current_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?>.
 	</div>
-	<br /><br />
 	
-	<button type="submit" class="button half right transparent hidden"><?php _e( "Suivant", 'yproject' ); ?></button>
+	<div id="thanks-to-me">
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-invest/picto-ensemble.png">
+		<div>
+			<span><?php _e( "Gr&acirc;ce &agrave; moi" ); ?></span><br>
+			<br>
+			<span class="number"><?php echo $page_controler->get_campaign_investors_number(); ?></span> <?php _e( "investisseurs" ); ?><br>
+			<span class="number"><span id="amount-reached" data-current-amount="<?php echo $page_controler->get_campaign_current_amount(); ?>"><?php echo $page_controler->get_campaign_current_amount(); ?></span> &euro;</span> <?php _e( "atteints" ); ?><br>
+		</div>
+	</div>
+	
+	<button type="submit" class="button half right transparent hidden clear"><?php _e( "Suivant", 'yproject' ); ?></button>
 	
 	<div class="clear"></div>
 	

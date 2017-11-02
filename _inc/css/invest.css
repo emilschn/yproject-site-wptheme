@@ -12,10 +12,6 @@ div#content form.enlarge {
 	}
 }
 
-div#content form span#royalties-percent {
-	color: #93626D;
-}
-
 div#content header {
 	padding-top: 80px;
 	background: #cfb7b7;
@@ -102,6 +98,31 @@ div#content header #invest-breadcrumb span.selected:after {
 		padding: 2px;
 		font-size: 12px;
 	}
+}
+
+/**
+ ETAPE 1 : Saisie montant
+**/
+div#content div#thanks-to-me > img {
+	float: left;
+	max-width: 40%;
+	margin-right: 10%;
+}
+div#content div#thanks-to-me > div {
+	float: left;
+	text-align: left;
+	padding-top: 45px;
+}
+div#content div#thanks-to-me > div > span:first-child {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+div#content span.number {
+	font-style: italic;
+	color: #93626D;
+}
+div#content button.clear {
+	margin-top: 20px;
 }
 
 /**

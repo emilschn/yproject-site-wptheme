@@ -58,8 +58,11 @@ var WDGInvestPageFunctions = (function($) {
 
 			var bValidInput = true;
 			$( 'form input#amount' ).val( ( $( 'form input#amount' ).val() ).replace( /,/g, "." ) );
-                        
-			if ( !$.isNumeric( $( 'form input#amount' ).val() ) ) {
+            
+			if ( $( 'form input#amount' ).val() == '' ) {
+			    bValidInput = false;
+				
+			} else if ( !$.isNumeric( $( 'form input#amount' ).val() ) ) {
 			    $( '#invest_error_general' ).show();
 			    bValidInput = false;
 				
@@ -93,6 +96,9 @@ var WDGInvestPageFunctions = (function($) {
 				var ratioOfPercent = ratioOfGoal * percentProject;
 				var ratioOfPercentRound = Math.round( ratioOfPercent * 10000 ) / 10000;
 				ratioOfPercentRoundStr = ratioOfPercentRound.toString().replace( '.', ',' );
+				
+				var currentAmount = Number( $( 'span#amount-reached' ).data( 'current-amount' ) );
+				$( 'span#amount-reached' ).text( inputVal + currentAmount );
 				
 				$( 'form button' ).slideDown( 200 );
 				
