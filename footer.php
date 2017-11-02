@@ -15,7 +15,7 @@ else {
 
 					<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) : ?>
 						<div>
-							<h3 class="clickable border-hidden"><?php _e('Qui sommes-nous ?', 'yproject'); ?></h3>
+							<span class="footer-subtitle clickable border-hidden"><?php _e('Qui sommes-nous&nbsp;?', 'yproject'); ?></span>
 							<ul>
 								<?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
 							</ul>
@@ -24,12 +24,12 @@ else {
 
 					<?php if ( is_active_sidebar( 'second-footer-widget-area' ) ) : ?>
 						<div>
-							<h3 class="clickable"><?php _e('Entrepreneurs', 'yproject'); ?></h3>
+							<span class="footer-subtitle clickable"><?php _e('Entrepreneurs', 'yproject'); ?></span>
 							<ul>
 								<?php dynamic_sidebar( 'second-footer-widget-area' ); ?>
 							</ul>
 
-							<h3 class="clickable"><?php _e('Investisseurs', 'yproject'); ?></h3>
+							<span class="footer-subtitle clickable"><?php _e('Investisseurs', 'yproject'); ?></span>
 							<ul>
 								<?php dynamic_sidebar( 'third-footer-widget-area' ); ?>
 							</ul>
@@ -38,7 +38,7 @@ else {
 
 					<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) : ?>
 						<div>
-							<h3><?php _e('Nous suivre', 'yproject'); ?></h3>
+							<span class="footer-subtitle"><?php _e('Nous suivre', 'yproject'); ?></span>
 
 							<form method="POST" action="<?php echo admin_url( 'admin-post.php' ); ?>">
 								<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/mail.jpg" alt="MAIL" width="48" height="48" />
@@ -48,10 +48,10 @@ else {
 							</form>
 
 							<div style="margin: 30px 0px;">
-									<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook"/></a>
-									<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter"/></a>
-									<a class="social_network" href="https://www.linkedin.com/company/3171289" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin"/></a>
-									<a class="social_network" href="https://www.wedogood.co/rss.xml" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-rss.jpg" alt="<?php _e("Flux RSS", 'yproject'); ?>"/></a>
+								<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook"/></a>
+								<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter"/></a>
+								<a class="social_network" href="https://www.linkedin.com/company/3171289" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin"/></a>
+								<a class="social_network" href="https://www.wedogood.co/rss.xml" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-rss.jpg" alt="<?php _e("Flux RSS", 'yproject'); ?>"/></a>
 							</div>
 
 							<div>

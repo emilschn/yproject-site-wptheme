@@ -506,7 +506,7 @@ footer > .footer-container {
 
 footer > .footer-container > section:first-child { padding: 25px 0px 35px; }
 footer > .footer-container > div { background: #FFFFFF; }
-footer h3 {
+footer span.footer-subtitle {
 	font-size: 16pt;
 	font-weight: bold;
 	text-transform: uppercase;

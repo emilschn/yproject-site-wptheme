@@ -181,7 +181,7 @@ YPUIFunctions = (function($) {
 				else $("#extendable-" + targetId).show();
 			});
 			
-			$("footer h3.clickable").click(function() {
+			$("footer span.footer-subtitle.clickable").click(function() {
 				if ($(window).width() < 998) {
 					if ($(this).next().is(":visible")) {
 						$(this).removeClass("expanded");
