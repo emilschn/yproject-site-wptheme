@@ -90,24 +90,24 @@
 	footer a {
 		font-size: 20pt;
 	}
-	footer > .footer-container > section:nth-child(1) > div > h3 {
+	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle {
 		margin: 0px;
 		padding: 10px 0px;
 		border-top: 3px solid #E1E2E2;
 		font-size: 25pt;
 	}
-	footer > .footer-container > section:nth-child(1) > div > h3.border-hidden {
+	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.border-hidden {
 		border-top: 0px;
 	}
-	footer > .footer-container > section:nth-child(1) > div > h3.clickable {
+	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.clickable {
 		cursor: pointer;
 	}
-	footer > .footer-container > section:nth-child(1) > div > h3.clickable::after {
+	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.clickable::after {
 		content: "+";
 		right: 1%;
 		position: absolute;
 	}
-	footer > .footer-container > section:nth-child(1) > div > h3.clickable.expanded::after {
+	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.clickable.expanded::after {
 		content: "-";
 	}
 	
