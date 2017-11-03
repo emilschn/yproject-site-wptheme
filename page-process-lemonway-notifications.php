@@ -110,17 +110,17 @@ if ( !empty( $lemonway_posted_category ) ) {
 					$contract_id = ypcf_create_contract( $investment_id, $investment_campaign_id, $WDGUser_invest_author->wp_user->ID );
 					if ($contract_id != '') {
 						$contract_infos = signsquid_get_contract_infos( $contract_id );
-						NotificationsEmails::new_purchase_user_success( $investment_id, $contract_infos->{'signatories'}[0]->{'code'}, FALSE );
+						NotificationsEmails::new_purchase_user_success( $investment_id, $contract_infos->{'signatories'}[0]->{'code'}, FALSE, ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ) );
 						NotificationsEmails::new_purchase_admin_success( $investment_id );
 					} else {
 						global $contract_errors;
 						$contract_errors = 'contract_failed';
-						NotificationsEmails::new_purchase_user_error_contract( $investment_id );
+						NotificationsEmails::new_purchase_user_error_contract( $investment_id, ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ) );
 						NotificationsEmails::new_purchase_admin_error_contract( $investment_id );
 					}
 				} else {
 					$new_contract_pdf_file = getNewPdfToSign( $investment_campaign_id, $investment_id, $WDGUser_invest_author->wp_user->ID );
-					NotificationsEmails::new_purchase_user_success_nocontract( $investment_id, $new_contract_pdf_file, FALSE );
+					NotificationsEmails::new_purchase_user_success_nocontract( $investment_id, $new_contract_pdf_file, FALSE, ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ) );
 					NotificationsEmails::new_purchase_admin_success_nocontract( $investment_id, $new_contract_pdf_file );
 				}
 			} else {

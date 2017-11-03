@@ -37,6 +37,12 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	</div>
 		
 <?php endif; ?>
+		
+<?php if ( $page_controler->is_preinvestment() ): ?>
+	<?php _e( "Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacutes;es &agrave; l'issue de la phase de vote.", 'yproject' ); ?><br>
+	<?php _e( "Si aucun changement ne survient, votre investissement sera valid&eacute; automatiquement.", 'yproject' ); ?><br>
+	<?php _e( "Si un changement devait survenir, vous devrez confirmer ou infirmer votre investissement.", 'yproject' ); ?><br><br>
+<?php endif; ?>
 
 <div class="align-center">
 	<a class="button" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e("Suivant", 'yproject'); ?></a>

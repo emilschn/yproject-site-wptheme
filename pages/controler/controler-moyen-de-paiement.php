@@ -69,6 +69,10 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 		return $this->current_investment;
 	}
 	
+	public function is_preinvestment() {
+		return ( $this->current_campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote );
+	}
+	
 /******************************************************************************/
 // CURRENT STEP
 /******************************************************************************/
