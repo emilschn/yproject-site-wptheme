@@ -14,41 +14,36 @@ YPUIFunctions = (function($) {
 			WDGLightboxFunctions.init();
 
 			$(document).scroll(function() {
-				if ($(".menu-client").length > 0) {
-					if ($(document).scrollTop() > 110) {
-						$("#nav").hide();
-						$(".menu-client").css("position", "fixed");
-						$("#content.theme-myphotoreporter #projects-stats-content").css("top", 60);
-						$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 60);
-					} else {
-						$("#nav").show();
-						$(".menu-client").css("position", "relative");
-						$("#content.theme-myphotoreporter #projects-stats-content").css("top", 0);
-						$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 0);
-					}
-
-
-				} else {
-					if ($(document).scrollTop() > 50) {
-						$("nav#main").css("marginTop", 0);
-					} else {
-						$("nav#main").css("marginTop", 10);
-					}
-				}
-
-				if ($(document).scrollTop() > 250) {
-					$(".responsive-fixed").addClass("fixed");
-				} else {
-					$(".responsive-fixed").removeClass("fixed");
-				}
+				if ( YPUIFunctions.currentLightbox === '' ) {
 				
-				if ( YPUIFunctions.currentLightbox !== '' ) {
-					var maxDocumentScroll = $('body').height();
-					maxDocumentScroll -= $( "#wdg-lightbox-" + YPUIFunctions.currentLightbox + " .wdg-lightbox-corner" ).innerHeight();
-					maxDocumentScroll -= $( "#wdg-lightbox-" + YPUIFunctions.currentLightbox + " .wdg-lightbox-padder" ).innerHeight();
-					maxDocumentScroll -= 100;
-					var documentScroll = Math.max( Math.min( maxDocumentScroll, $(document).scrollTop() ) + 10, 15 );
-					$( "#wdg-lightbox-" + YPUIFunctions.currentLightbox + " .wdg-lightbox-corner" ).css( 'marginTop', documentScroll );
+					if ($(".menu-client").length > 0) {
+						if ($(document).scrollTop() > 110) {
+							$("#nav").hide();
+							$(".menu-client").css("position", "fixed");
+							$("#content.theme-myphotoreporter #projects-stats-content").css("top", 60);
+							$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 60);
+						} else {
+							$("#nav").show();
+							$(".menu-client").css("position", "relative");
+							$("#content.theme-myphotoreporter #projects-stats-content").css("top", 0);
+							$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 0);
+						}
+
+
+					} else {
+						if ($(document).scrollTop() > 50) {
+							$("nav#main").css("marginTop", 0);
+						} else {
+							$("nav#main").css("marginTop", 10);
+						}
+					}
+
+					if ($(document).scrollTop() > 250) {
+						$(".responsive-fixed").addClass("fixed");
+					} else {
+						$(".responsive-fixed").removeClass("fixed");
+					}
+					
 				}
 			});
 			
@@ -56,7 +51,7 @@ YPUIFunctions = (function($) {
 			$("nav#main a.lines").click(function(e) {
 				$("nav#main a.lines").removeClass("current");
 				$(this).addClass("current"); 
-                                $(this).addClass("select-nav");
+				$(this).addClass("select-nav");
 			});
             
 			// Navbar : bouton compte utilisateur
@@ -650,11 +645,6 @@ YPUIFunctions = (function($) {
 				}
 			});
 		},
-
-		//Scroll en haut d'une ligthbox
-		scrollTo: function(target){
-            $('.wdg-lightbox-padder').scrollTop (target.offset().top - 75);
-        },
 		
 		getCookie: function(cookieName) {
 			var name = cookieName + "=";
@@ -778,18 +768,30 @@ var WDGLightboxFunctions = (function($) {
 		displaySingle: function( sLightboxId ) {
 			console.log(sLightboxId);
 			$( ".wdg-lightbox" ).hide();
-			$( "#wdg-lightbox-" + sLightboxId ).height( $( 'body' ).height() );
 			$( "#wdg-lightbox-" + sLightboxId ).show();
 			if( $( "#wdg-lightbox-" + sLightboxId ).data( "scrolltop" ) == "1" ){
-				YPUIFunctions.scrollTo( $( ".wdg-lightbox-padder" ) );
+				WDGLightboxFunctions.scrollTop( $( ".wdg-lightbox-padder" ) );
 			}
+			$('html, body').css({
+				overflow: 'hidden',
+				height: '100%'
+			});
 			YPUIFunctions.currentLightbox = sLightboxId;
 		},
 		
 		hideAll: function() {
 			$(".wdg-lightbox").hide();
+			$('html, body').css({
+				overflow: 'auto',
+				height: 'auto'
+			});
 			YPUIFunctions.currentLightbox = '';
-		}
+		},
+
+		//Scroll en haut d'une ligthbox
+		scrollTop: function(target){
+            $('.wdg-lightbox-padder').scrollTop(target.offset().top - 75);
+        }
 		
 	};
 })(jQuery);
