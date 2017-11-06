@@ -525,7 +525,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	background-color: rgba(0, 0, 0, 0.75);
 	top: 0px;
 	left: 0px;
-	position: fixed;
+	position: absolute;
 	z-index: 4000;
 	width: 100%;
 	height: 100%;
@@ -534,7 +534,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 .wdg-lightbox-click-catcher {
 	top: 0px;
 	left: 0px;
-	position: fixed;
+	position: absolute;
 	z-index: 4001;
 	width: 100%;
 	height: 100%;

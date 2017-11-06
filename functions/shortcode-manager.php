@@ -98,7 +98,8 @@ class YPShortcodeManager {
 		), $atts );
 		
 		$msgtype_lightbox = '';
-		$classes = ( $atts['autoopen'] == '0' ) ? $atts['class']. ' hidden' : $atts['class'];
+		$data_autoopen = ( $atts['autoopen'] == '1' ) ? '1' : '0';
+		$classes = 'hidden';
 		if ( !empty( $atts['msgtype'] ) ) {
 			$classes .= ' msg-'.$atts['msgtype'];
 		}
@@ -106,7 +107,7 @@ class YPShortcodeManager {
 		
 		ob_start();
 		?>
-		<div id="wdg-lightbox-<?php echo $atts[ 'id' ]; ?>" <?php echo $atts[ 'style' ]; ?> class="wdg-lightbox cornered <?php echo $classes; ?>" data-scrolltop=<?php echo $atts[ 'scrolltop' ]; ?>>
+		<div id="wdg-lightbox-<?php echo $atts[ 'id' ]; ?>" <?php echo $atts[ 'style' ]; ?> class="wdg-lightbox cornered <?php echo $classes; ?>" data-autoopen="<?php echo $data_autoopen; ?>" data-scrolltop=<?php echo $atts[ 'scrolltop' ]; ?>>
 			<div class="wdg-lightbox-click-catcher <?php echo $catcher_classes; ?>"></div>
 			<div class="wdg-lightbox-corner">
 				<div class="wdg-lightbox-button-close">
