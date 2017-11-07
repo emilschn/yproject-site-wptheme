@@ -525,7 +525,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	background-color: rgba(0, 0, 0, 0.75);
 	top: 0px;
 	left: 0px;
-	position: fixed;
+	position: absolute;
 	z-index: 4000;
 	width: 100%;
 	height: 100%;
@@ -534,7 +534,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 .wdg-lightbox-click-catcher {
 	top: 0px;
 	left: 0px;
-	position: fixed;
+	position: absolute;
 	z-index: 4001;
 	width: 100%;
 	height: 100%;
@@ -562,7 +562,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 .wdg-lightbox .wdg-lightbox-padder {
 	position: relative;
 	max-width: 600px;
-	max-height: 80vh;
+	max-height: 75vh;
 	margin: 5vh auto;
 	padding: 50px;
 	background-color: #F2F2F2;
@@ -571,7 +571,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 }
 .wdg-lightbox.cornered .wdg-lightbox-padder {
 	margin-top: 0px;
-	padding: 8px 60px 40px;
+	padding: 2vh 60px 3vh;
 }
 .wdg-lightbox.cornered.msg-valid .wdg-lightbox-padder {
     background-color: #8BC79C;
@@ -586,7 +586,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 .wdg-lightbox .wdg-widelightbox-padder {
 	position: relative;
 	max-width: 90%;
-	max-height: 80vh;
+	max-height: 75vh;
 	margin: 5vh auto;
 	padding: 20px;
 	background-color: #F2F2F2;

@@ -5,38 +5,45 @@ jQuery(document).ready( function($) {
 
 YPUIFunctions = (function($) {
 	return {
+		
+		currentLightbox: '',
 
 		initUI: function() {
 			WDGProjectPageFunctions.initUI();
 			YPUIFunctions.initQtip();
+			WDGLightboxFunctions.init();
 
 			$(document).scroll(function() {
-				if ($(".menu-client").length > 0) {
-					if ($(document).scrollTop() > 110) {
-						$("#nav").hide();
-						$(".menu-client").css("position", "fixed");
-						$("#content.theme-myphotoreporter #projects-stats-content").css("top", 60);
-						$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 60);
+				if ( YPUIFunctions.currentLightbox === '' ) {
+				
+					if ($(".menu-client").length > 0) {
+						if ($(document).scrollTop() > 110) {
+							$("#nav").hide();
+							$(".menu-client").css("position", "fixed");
+							$("#content.theme-myphotoreporter #projects-stats-content").css("top", 60);
+							$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 60);
+						} else {
+							$("#nav").show();
+							$(".menu-client").css("position", "relative");
+							$("#content.theme-myphotoreporter #projects-stats-content").css("top", 0);
+							$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 0);
+						}
+
+
 					} else {
-						$("#nav").show();
-						$(".menu-client").css("position", "relative");
-						$("#content.theme-myphotoreporter #projects-stats-content").css("top", 0);
-						$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 0);
+						if ($(document).scrollTop() > 50) {
+							$("nav#main").css("marginTop", 0);
+						} else {
+							$("nav#main").css("marginTop", 10);
+						}
 					}
 
-
-				} else {
-					if ($(document).scrollTop() > 50) {
-						$("nav#main").css("marginTop", 0);
+					if ($(document).scrollTop() > 250) {
+						$(".responsive-fixed").addClass("fixed");
 					} else {
-						$("nav#main").css("marginTop", 10);
+						$(".responsive-fixed").removeClass("fixed");
 					}
-				}
-
-				if ($(document).scrollTop() > 250) {
-					$(".responsive-fixed").addClass("fixed");
-				} else {
-					$(".responsive-fixed").removeClass("fixed");
+					
 				}
 			});
 			
@@ -44,7 +51,7 @@ YPUIFunctions = (function($) {
 			$("nav#main a.lines").click(function(e) {
 				$("nav#main a.lines").removeClass("current");
 				$(this).addClass("current"); 
-                                $(this).addClass("select-nav");
+				$(this).addClass("select-nav");
 			});
             
 			// Navbar : bouton compte utilisateur
@@ -298,100 +305,6 @@ YPUIFunctions = (function($) {
 					window.location.href = $(this).attr("href");
 				}
 			});
-
-			if ($(".wdg-lightbox").length > 0) {
-				$(".wdg-button-lightbox-open").not("#wdg-lightbox-newproject .wdg-button-lightbox-open").click(function() {
-					$(".wdg-lightbox").hide();
-					var target = $(this).data("lightbox");
-					$("#wdg-lightbox-" + target).show();
-					if($("#wdg-lightbox-" + target).attr("data-scrolltop") == "1"){
-						YPUIFunctions.scrollTo($(".wdg-lightbox-padder"));
-					}
-				});
-				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function(e) {				
-					$(".wdg-lightbox").hide();
-					e.preventDefault();
-				});
-				$(".wdg-lightbox #wdg-lightbox-welcome-close").click(function(e) {
-					$(".wdg-lightbox").hide();
-				});
-				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function(e) {
-					if ( !$( this ).hasClass( 'disable' ) ) {
-						$(".wdg-lightbox").hide();
-					}
-				});
-				var sHash = window.location.hash.substring(1);
-				if ( (sHash.indexOf("=") === -1) && ($("#wdg-lightbox-" + sHash).length > 0) ) {
-					$("#wdg-lightbox-" + sHash).show();
-				}
-			}
-			if ($(".timeout-lightbox").length > 0) {
-				var nTimeout = 2000;
-				if ($(".timeout-lightbox").data("duration") > 0) nTimeout = $(".timeout-lightbox").data("duration");
-				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, nTimeout);
-			}
-
-			//Lightbox de nouveau projet
-			if( $("#newproject_form").length > 0){
-				$('#newproject_form input#new-company-name').val(" ");
-				$('#newproject_form input#new-company-name').parent().parent().parent().hide();
-				if($('#newproject_form input#company-name').val() === ""){
-					$('#newproject_form #project-name').val("");
-				}
-				$('#newproject_form #company-name').on("keyup change", function() {
-					$('#newproject_form input#new-company-name').parent().parent().parent().hide();
-					var val = "";
-					if($('#newproject_form input#company-name').length > 0 && $('#newproject_form input#company-name').val() !== "" ) {
-						val = $('#newproject_form input#company-name').val();
-						$('#newproject_form #project-name').val("Projet de "+val);
-						$('#newproject_form input#new-company-name').val(" ");
-					} else {
-						if($('#newproject_form select[name=company-name]').length > 0) {
-							var option = $('#newproject_form select[name=company-name] option:selected').val();
-							if(option !== "new_orga"){
-								val = $('#newproject_form select[name=company-name] option:selected').text();
-								$('#newproject_form #project-name').val("Projet de "+val);
-								$('#newproject_form input#new-company-name').val(" ");
-							} else {
-								$('#newproject_form input#new-company-name').val("");
-								$('#newproject_form #project-name').val('');
-								$('#newproject_form input#new-company-name').parent().parent().parent().show();
-								$('#newproject_form input#new-company-name').on("keyup change", function() {
-									var val = $('#newproject_form input#new-company-name').val();
-									if (val!="") {
-										$('#newproject_form #project-name').val("Projet de "+val);
-									} else {
-										$('#newproject_form #project-name').val("");
-									}
-								});
-							}
-						}
-					}
-				});
-				$('#newproject_form input#new-company-name').focus(function(){
-					$('#newproject_form input#new-company-name').val('');
-				});
-				if($('#newproject_form #company-name').val() !== ''){
-					var val = $('#newproject_form #company-name option:selected').text();
-					$('#newproject_form #project-name').val("Projet de "+val);
-				}
-
-				//Désactive bouton si champs incomplets
-				$("input, textarea","#newproject_form").keyup(function(){
-					$("#newProject_button").find("button").prop('disabled', ($("input, textarea","#newproject_form").filter(function() { return $(this).val() == ""; }).length > 0 || !$("#project-terms").is(':checked')) );
-				});
-				$("input, textarea","#newproject_form").trigger('keyup');
-				$("#project-terms").change(function() {
-					$("input, textarea","#newproject_form").trigger('keyup');
-				});
-
-				$("#newproject_form").submit(function(){
-					$("#newProject_button").find(".button-text").hide();
-					$("#newProject_button").find(".button-waiting").show();
-					$("#newProject_button button").prop('disabled', true);
-				});
-
-			}
 
 			//Si chargement données investisseurs/investissements nécessaire
 			if ($(".ajax-investments-load").length > 0) {
@@ -732,11 +645,6 @@ YPUIFunctions = (function($) {
 				}
 			});
 		},
-
-		//Scroll en haut d'une ligthbox
-		scrollTo: function(target){
-            $('.wdg-lightbox-padder').scrollTop (target.offset().top - 75);
-        },
 		
 		getCookie: function(cookieName) {
 			var name = cookieName + "=";
@@ -756,6 +664,137 @@ YPUIFunctions = (function($) {
 
 })(jQuery);
 
+var WDGLightboxFunctions = (function($) {
+	return {
+
+		init: function() {
+			if ($(".wdg-lightbox").length > 0) {
+				$( ".wdg-lightbox" ).each( function(){
+					if ( $( this ).data( 'autoopen' ) == '1' ) {
+						WDGLightboxFunctions.displaySingle( $(this).attr('id').split('wdg-lightbox-')[1] );
+					}
+				});
+				$(".wdg-button-lightbox-open").not("#wdg-lightbox-newproject .wdg-button-lightbox-open").click(function() {
+					WDGLightboxFunctions.displaySingle( $(this).data("lightbox") );
+				});
+				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function(e) {
+					e.preventDefault();
+					WDGLightboxFunctions.hideAll();
+				});
+				$(".wdg-lightbox #wdg-lightbox-welcome-close").click(function(e) {
+					WDGLightboxFunctions.hideAll();
+				});
+				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function(e) {
+					if ( !$( this ).hasClass( 'disable' ) ) {
+						WDGLightboxFunctions.hideAll();
+					}
+				});
+				var sHash = window.location.hash.substring(1);
+				if ( (sHash.indexOf("=") === -1) && ($("#wdg-lightbox-" + sHash).length > 0) ) {
+					WDGLightboxFunctions.displaySingle( sHash );
+				}
+			}
+			
+			if ($(".timeout-lightbox").length > 0) {
+				var nTimeout = 2000;
+				if ($(".timeout-lightbox").data("duration") > 0) nTimeout = $(".timeout-lightbox").data("duration");
+				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, nTimeout);
+			}
+
+			//Lightbox de nouveau projet
+			if( $("#newproject_form").length > 0){
+				$('#newproject_form input#new-company-name').val(" ");
+				$('#newproject_form input#new-company-name').parent().parent().parent().hide();
+				if($('#newproject_form input#company-name').val() === ""){
+					$('#newproject_form #project-name').val("");
+				}
+				$('#newproject_form #company-name').on("keyup change", function() {
+					$('#newproject_form input#new-company-name').parent().parent().parent().hide();
+					var val = "";
+					if($('#newproject_form input#company-name').length > 0 && $('#newproject_form input#company-name').val() !== "" ) {
+						val = $('#newproject_form input#company-name').val();
+						$('#newproject_form #project-name').val("Projet de "+val);
+						$('#newproject_form input#new-company-name').val(" ");
+					} else {
+						if($('#newproject_form select[name=company-name]').length > 0) {
+							var option = $('#newproject_form select[name=company-name] option:selected').val();
+							if(option !== "new_orga"){
+								val = $('#newproject_form select[name=company-name] option:selected').text();
+								$('#newproject_form #project-name').val("Projet de "+val);
+								$('#newproject_form input#new-company-name').val(" ");
+							} else {
+								$('#newproject_form input#new-company-name').val("");
+								$('#newproject_form #project-name').val('');
+								$('#newproject_form input#new-company-name').parent().parent().parent().show();
+								$('#newproject_form input#new-company-name').on("keyup change", function() {
+									var val = $('#newproject_form input#new-company-name').val();
+									if (val!="") {
+										$('#newproject_form #project-name').val("Projet de "+val);
+									} else {
+										$('#newproject_form #project-name').val("");
+									}
+								});
+							}
+						}
+					}
+				});
+				$('#newproject_form input#new-company-name').focus(function(){
+					$('#newproject_form input#new-company-name').val('');
+				});
+				if($('#newproject_form #company-name').val() !== ''){
+					var val = $('#newproject_form #company-name option:selected').text();
+					$('#newproject_form #project-name').val("Projet de "+val);
+				}
+
+				//Désactive bouton si champs incomplets
+				$("input, textarea","#newproject_form").keyup(function(){
+					$("#newProject_button").find("button").prop('disabled', ($("input, textarea","#newproject_form").filter(function() { return $(this).val() == ""; }).length > 0 || !$("#project-terms").is(':checked')) );
+				});
+				$("input, textarea","#newproject_form").trigger('keyup');
+				$("#project-terms").change(function() {
+					$("input, textarea","#newproject_form").trigger('keyup');
+				});
+
+				$("#newproject_form").submit(function(){
+					$("#newProject_button").find(".button-text").hide();
+					$("#newProject_button").find(".button-waiting").show();
+					$("#newProject_button button").prop('disabled', true);
+				});
+
+			}
+			
+		},
+		
+		displaySingle: function( sLightboxId ) {
+			console.log(sLightboxId);
+			$( ".wdg-lightbox" ).hide();
+			$( "#wdg-lightbox-" + sLightboxId ).show();
+			if( $( "#wdg-lightbox-" + sLightboxId ).data( "scrolltop" ) == "1" ){
+				WDGLightboxFunctions.scrollTop( $( ".wdg-lightbox-padder" ) );
+			}
+			$('html, body').css({
+				overflow: 'hidden',
+				height: '100%'
+			});
+			YPUIFunctions.currentLightbox = sLightboxId;
+		},
+		
+		hideAll: function() {
+			$(".wdg-lightbox").hide();
+			$('html, body').css({
+				overflow: 'auto',
+				height: 'auto'
+			});
+			YPUIFunctions.currentLightbox = '';
+		},
+
+		//Scroll en haut d'une ligthbox
+		scrollTop: function(target){
+            $('.wdg-lightbox-padder').scrollTop(target.offset().top - 75);
+        }
+		
+	};
+})(jQuery);
 
 var WDGFormsFunctions = (function($) {
 	return {
