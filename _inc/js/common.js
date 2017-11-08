@@ -766,7 +766,6 @@ var WDGLightboxFunctions = (function($) {
 		},
 		
 		displaySingle: function( sLightboxId ) {
-			console.log(sLightboxId);
 			$( ".wdg-lightbox" ).hide();
 			$( "#wdg-lightbox-" + sLightboxId ).show();
 			if( $( "#wdg-lightbox-" + sLightboxId ).data( "scrolltop" ) == "1" ){
@@ -776,6 +775,7 @@ var WDGLightboxFunctions = (function($) {
 				overflow: 'hidden',
 				height: '100%'
 			});
+			$('html, body').animate({scrollTop: 0});
 			YPUIFunctions.currentLightbox = sLightboxId;
 		},
 		
