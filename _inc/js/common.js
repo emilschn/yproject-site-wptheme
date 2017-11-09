@@ -825,7 +825,7 @@ var WDGFormsFunctions = (function($) {
 				WDGFormsFunctions.postForm( 'div#' + formId, WDGFormsFunctions.postFormCallback );
 			} );
 			$( '.wdg-lightbox-ref button.close' ).click( function( e ) {
-				$( this ).parents( 'div.wdg-lightbox' ).hide();
+				WDGLightboxFunctions.hideAll();
 			} );
 		},
 		
