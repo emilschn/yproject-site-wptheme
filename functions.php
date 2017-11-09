@@ -700,7 +700,7 @@ function get_investments_data() {
 	global $disable_logs;
 	$disable_logs = TRUE;
 	$campaign_id = filter_input(INPUT_POST, 'id_campaign');
-	$investments_list = WDGCampaignInvestments::get_list($campaign_id);
+	$investments_list = WDGCampaignInvestments::get_list( $campaign_id, TRUE );
 	echo json_encode($investments_list);
 	exit();
 }
