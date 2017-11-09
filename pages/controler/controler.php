@@ -5,6 +5,7 @@ class WDG_Page_Controler {
 	private $page_title;
 	private $page_meta_keywords;
 	private $show_user_details_confirmation;
+	private $show_user_pending_preinvestment;
 	
 	public function __construct() {
 		ypcf_session_start();
@@ -14,7 +15,11 @@ class WDG_Page_Controler {
 		$this->db_cache_manager = new WDG_Cache_Plugin();
 		$this->init_page_title();
 		$this->init_page_meta_keywords();
-		$this->init_show_user_details_confirmation();
+		
+		if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
+			$this->init_show_user_pending_preinvestment();
+			$this->init_show_user_details_confirmation();
+		}
 	}
 	
 	public function get_db_cached_elements( $key, $version ) {
@@ -81,13 +86,15 @@ class WDG_Page_Controler {
 		return ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' );
 	}
 	
+	
+//******************************************************************************
 	/**
 	 * Détermine si il est nécessaire d'afficher la lightbox de confirmation d'information à l'utilisateur
 	 */
 	public function init_show_user_details_confirmation() {
 		if ( !isset( $this->show_user_details_confirmation ) ) {
 			$this->show_user_details_confirmation = false;
-			if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
+			if ( !$this->get_show_user_pending_preinvestment() && is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
 				$WDG_user_current = WDGUser::current();
 				$user_details_confirmation = $WDG_user_current->get_show_details_confirmation();
 				if ( $user_details_confirmation ) {
@@ -100,6 +107,24 @@ class WDG_Page_Controler {
 	
 	public function get_show_user_details_confirmation() {
 		return $this->show_user_details_confirmation;
+	}
+	
+	
+//******************************************************************************
+	public function init_show_user_pending_preinvestment() {
+		if ( !isset( $this->show_user_pending_preinvestment ) ) {
+			$this->show_user_pending_preinvestment = false;
+			if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
+				$WDG_user_current = WDGUser::current();
+				if ( $WDG_user_current->has_pending_preinvestments() ) {
+					$this->show_user_pending_preinvestment = $WDG_user_current->get_first_pending_preinvestment();
+				}
+			}
+		}
+	}
+	
+	public function get_show_user_pending_preinvestment() {
+		return $this->show_user_pending_preinvestment;
 	}
 	
 }
