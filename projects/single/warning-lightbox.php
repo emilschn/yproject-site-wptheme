@@ -3,10 +3,10 @@
 <?php ob_start(); ?>
 <div class="wdg-lightbox-ref">
 	
-	<div class="align-center">
-		<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/picto-stat-loupe.png" width="150" />
-	</div>
-	<br />
+	<p class="align-center">
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/picto-stat-loupe.png" width="150">
+	</p>
+	<br>
 	
 	<div class="align-justify">
 		<strong><?php _e( "WE DO GOOD est une plateforme de financement participatif en royalties.", 'yproject' ); ?></strong><br />

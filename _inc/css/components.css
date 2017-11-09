@@ -914,7 +914,7 @@ body input[type=text], body input[type=email], body select {
 }
 .db-form.v3 button,
 .db-form.v3 a.button {
-	width: 100%;
+	width: calc( 100% - 2px );
 	height: 50px;
 }
 .db-form.v3 button.half,
