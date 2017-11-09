@@ -31,7 +31,6 @@ body input, body select {
 .bg-dark-gray { background: #333333; color: #FFF; }
 .uppercase { text-transform: uppercase; }
 
-
 h2.standard {
     text-align: center;
     margin: 0;
@@ -45,6 +44,15 @@ h2.standard {
 
 a.hidden-link {
     color: #333333;
+}
+
+img.alignright {
+    float: right;
+    margin: 5px 0 20px 20px;
+}
+img.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
 }
 
 .button, .wpcf7-submit {
