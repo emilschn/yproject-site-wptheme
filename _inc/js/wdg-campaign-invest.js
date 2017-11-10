@@ -134,7 +134,7 @@ WDGInvestPageFunctions = (function($) {
 		
 		isUserInfosFormDisplayed: false,
 		showUserInfosForm: function(jsonInfos) {
-			$("#wdg-lightbox-userinfos").show();
+			WDGLightboxFunctions.displaySingle( 'userinfos' );
 			$("#wdg-lightbox-orgainfos").hide();
 			$("#wdg-lightbox-userkyc").hide();
 			$("#lightbox_userinfo_form_button").show();
@@ -187,7 +187,7 @@ WDGInvestPageFunctions = (function($) {
 		isOrgaInfosFormDisplayed: false,
 		showOrgaInfosForm: function(jsonInfos) {
 			$("#wdg-lightbox-userinfos").hide();
-			$("#wdg-lightbox-orgainfos").show();
+			WDGLightboxFunctions.displaySingle( 'orgainfos' );
 			$("#wdg-lightbox-userkyc").hide();
 			$("#lightbox_orgainfos_form_button").show();
 			$("#lightbox_orgainfos_form_loading").hide();
@@ -257,7 +257,7 @@ WDGInvestPageFunctions = (function($) {
 		showUserKycForm: function(jsonInfos) {
 			$("#wdg-lightbox-userinfos").hide();
 			$("#wdg-lightbox-orgainfos").hide();
-			$("#wdg-lightbox-userkyc").show();
+			WDGLightboxFunctions.displaySingle( 'userkyc' );
 			$("#userkyc_form_button").show();
 			$("#userkyc_form_loading").hide();
 			$("#userkyc_form_errors").empty();
