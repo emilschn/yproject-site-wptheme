@@ -114,7 +114,8 @@ class WDG_Page_Controler {
 	public function init_show_user_pending_preinvestment() {
 		if ( !isset( $this->show_user_pending_preinvestment ) ) {
 			$this->show_user_pending_preinvestment = false;
-			if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
+			global $post;
+			if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' && $post->post_name != 'terminer-preinvestissement' ) {
 				$WDG_user_current = WDGUser::current();
 				if ( $WDG_user_current->has_pending_preinvestments() ) {
 					$this->show_user_pending_preinvestment = $WDG_user_current->get_first_pending_preinvestment();
