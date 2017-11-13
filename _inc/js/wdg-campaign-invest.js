@@ -99,9 +99,7 @@ var WDGInvestPageFunctions = (function($) {
 				
 				var currentAmount = Number( $( 'span#amount-reached' ).data( 'current-amount' ) );
 				$( 'span#amount-reached' ).text( inputVal + currentAmount );
-				
 				$( 'form button' ).slideDown( 200 );
-				
 			} else {
 				$( 'form button' ).slideUp( 200 );
 			}
