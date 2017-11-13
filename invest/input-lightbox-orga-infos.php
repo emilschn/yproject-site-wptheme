@@ -38,19 +38,6 @@ ob_start();
 	<label for="org_vat" class="standard-label"><?php _e("Num&eacute;ro de TVA", 'yproject'); ?></label>
 	<input type="text" name="org_vat" id="org_vat" value="" /><br /><br />
 
-	<label for="org_fiscal_year_end_month" class="standard-label"><?php _e("L'exerice comptable se termine &agrave; la fin du mois", 'yproject'); ?></label><br />
-	<?php
-	$months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' );
-	$count_months = count( $months );
-	?>
-	<select name="orga_fiscal_year_end_month" id="org_fiscal_year_end_month">
-		<option value=""></option>
-		<?php for ( $i = 0; $i < $count_months; $i++ ): ?>
-		<option value="<?php echo ( $i + 1 ); ?>"><?php _e( $months[ $i ] ); ?></option>
-		<?php endfor; ?>
-	</select>
-	<br /><br />
-
 	<h2><?php _e("Si&egrave;ge social", 'yproject'); ?></h2>
 	<label for="org_address" class="standard-label"><?php _e("Adresse", 'yproject'); ?></label>
 	<input type="text" name="org_address" id="org_address" value="" /><br />
