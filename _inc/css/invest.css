@@ -4,6 +4,9 @@ div.center {
 h2 {
 	font-size: 14px;
 }
+.wdg-lightbox h2 {
+	font-size: 1.5em;
+}
 
 div#content form {
 	max-width: 500px;
