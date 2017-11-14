@@ -25,6 +25,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 		
 		$this->init_current_investment();
 		$this->init_current_campaign();
+		$this->check_current_preinvestment();
 		$this->init_current_step();
 		$this->init_form();
 	}
@@ -36,6 +37,36 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 		$investment_id = filter_input( INPUT_GET, 'investment_id' );
 		if ( !empty( investment_id ) ) {
 			$this->current_investment = new WDGInvestment( $investment_id );
+		}
+	}
+	
+	/**
+	 * Vérifications de sécurité pour être sûr qu'on a le droit de toucher à cet investissement
+	 */
+	private function check_current_preinvestment() {
+		$buffer = TRUE;
+		
+		// Forcément un utilisateur connecté
+		if ( !is_user_logged_in() ) {
+			$buffer = FALSE;
+		}
+		// Seul l'utilisateur qui correspond à cet investissement peut y toucher
+		$current_user = wp_get_current_user();
+		$saved_user_id = $this->current_investment->get_saved_user_id();
+		if ( $saved_user_id != $current_user->ID ) {
+			$buffer = FALSE;
+		}
+		// Il ne peut le modifier que si le statut correspond à un préinvestissement à valider
+		if ( $this->current_investment->get_contract_status() != WDGInvestment::$contract_status_preinvestment_validated ) {
+			$buffer = FALSE;
+		}
+		// Il ne peut y toucher que si la campagne est en collecte
+		if (  $this->current_campaign->campaign_status() != ATCF_Campaign::$campaign_status_collecte ) {
+			$buffer = FALSE;
+		}
+		
+		if ( !$buffer ) {
+			wp_redirect( home_url() );
 		}
 	}
 	
@@ -111,31 +142,36 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 	private function init_form() {
 		// Récupération d'un éventuel post de formulaire
 		$action_posted = filter_input( INPUT_POST, 'action' );
-		$reload_form = TRUE;
-		
-		switch ( $action_posted ) {
-			// Analyse formulaire validation contrat
-			case WDG_Form_Invest_Contract::$name:
-				$input_nav = filter_input( INPUT_POST, 'nav' );
-				if ( $input_nav == 'previous' ) {
-					$url = home_url( '/terminer-preinvestissement' );
-					$url .= '?cancel=1&investment_id=' . $this->current_investment->get_id();
-					wp_redirect( $url );
-					
-				} else {
-					$WDGCurrent_User = WDGUser::current();
-					$this->form = new WDG_Form_Invest_Contract( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
-					if ( $this->form->postForm() ) {
-						$this->current_investment->set_contract_status( WDGInvestment::$contract_status_investment_validated );
-						ypcf_get_updated_payment_status( $this->current_investment->get_id() );
-						wp_redirect( home_url( '/paiement-partager' ) . '?campaign_id=' . $this->current_campaign->ID );
-					}
+		$load_form = TRUE;
+
+		// Analyse formulaire validation contrat
+		if ( $action_posted == WDG_Form_Invest_Contract::$name ) {
+			$input_nav = filter_input( INPUT_POST, 'nav' );
+			if ( $input_nav == 'previous' ) {
+				$url = home_url( '/terminer-preinvestissement' );
+				$url .= '?cancel=1&investment_id=' . $this->current_investment->get_id();
+				wp_redirect( $url );
+
+			} else {
+				$WDGCurrent_User = WDGUser::current();
+				$this->form = new WDG_Form_Invest_Contract( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
+				if ( $this->form->postForm() ) {
+					$this->current_investment->set_contract_status( WDGInvestment::$contract_status_investment_validated );
+					ypcf_get_updated_payment_status( $this->current_investment->get_id() );
+					wp_redirect( home_url( '/paiement-partager' ) . '?campaign_id=' . $this->current_campaign->ID );
 				}
-				break;
+			}
+			
+		// Action d'annulation du paiement
+		} elseif ( $this->current_step == WDG_Page_Controler_PreinvestmentFinish::$step_confirm_cancel ) {
+			$this->current_investment->set_contract_status( WDGInvestment::$contract_status_investment_refused );
+			$this->current_investment->refund();
+			$current_user = wp_get_current_user();
+			NotificationsEmails::preinvestment_canceled( $current_user, $this->current_investment->get_saved_campaign() );
 		}
 		
 		// Chargement du formulaire à afficher
-		if ( $reload_form ) {
+		if ( $load_form ) {
 			$WDGCurrent_User = WDGUser::current();
 			$this->form = new WDG_Form_Invest_Contract( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 		}
