@@ -185,7 +185,7 @@ var WDGProjectVote = (function($) {
 				WDGProjectVote.refresh();
 				$( '#wdg-lightbox-vote .wdg-lightbox-padder' ).animate( { scrollTop: 0 }, "slow" );
 			} else {
-				if ( $( '#wdg-lightbox-vote #validate-project-1' ).is( ':checked' ) ) {
+				if ( $( '#wdg-lightbox-vote #rate-project-3' ).is( ':checked' ) ) {
 					$( '#wdg-lightbox-user-details' ).show();
 				} else {
 					$( '#wdg-lightbox-vote-simple-confirmation' ).show();

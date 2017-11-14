@@ -766,7 +766,6 @@ var WDGLightboxFunctions = (function($) {
 		},
 		
 		displaySingle: function( sLightboxId ) {
-			console.log(sLightboxId);
 			$( ".wdg-lightbox" ).hide();
 			$( "#wdg-lightbox-" + sLightboxId ).show();
 			if( $( "#wdg-lightbox-" + sLightboxId ).data( "scrolltop" ) == "1" ){
@@ -776,6 +775,17 @@ var WDGLightboxFunctions = (function($) {
 				overflow: 'hidden',
 				height: '100%'
 			});
+			$('html, body').animate({scrollTop: 0});
+			if ( !$( "#wdg-lightbox-" + sLightboxId ).hasClass( 'positioned' ) ) {
+				var parentOffset = $( "#wdg-lightbox-" + sLightboxId ).offset();
+				$( "#wdg-lightbox-" + sLightboxId ).css({
+					top: 0 - parentOffset.top,
+					left: 0 - parentOffset.left,
+					width: $(window).width(),
+					height: $(window).height()
+				});
+				$( "#wdg-lightbox-" + sLightboxId ).addClass( 'positioned' );
+			}
 			YPUIFunctions.currentLightbox = sLightboxId;
 		},
 		
@@ -815,7 +825,7 @@ var WDGFormsFunctions = (function($) {
 				WDGFormsFunctions.postForm( 'div#' + formId, WDGFormsFunctions.postFormCallback );
 			} );
 			$( '.wdg-lightbox button.close, .wdg-lightbox-ref button.close' ).click( function( e ) {
-				$( this ).parents( 'div.wdg-lightbox' ).hide();
+				WDGLightboxFunctions.hideAll();
 			} );
 			$( '.wdg-lightbox button.redirect, .wdg-lightbox-ref button.redirect' ).click( function( e ) {
 				window.location = $( this ).data( 'redirecturl' );
