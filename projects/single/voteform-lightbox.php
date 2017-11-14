@@ -1,6 +1,9 @@
 <?php global $stylesheet_directory_uri, $post; ?>
 
 <?php
+// *****************************************************************************
+// Formulaire de vote lui-même
+// *****************************************************************************
 $WDGVoteForm = new WDG_Form_Vote( $post->ID );
 $fields_hidden = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_hidden );
 $fields_impact = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_impacts );
@@ -125,10 +128,14 @@ ob_end_clean();
 $campaign_title = $post->post_title;
 echo do_shortcode('[yproject_lightbox_cornered id="vote" title="'.__( "Vote sur ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
 echo do_shortcode('[yproject_lightbox_cornered id="vote-simple-confirmation" msgtype="valid"]'.__( "Votre vote est enregistr&eacute; !", 'yproject' ).'[/yproject_lightbox_cornered]');
+// *****************************************************************************
 ?>
 
 
 <?php
+// *****************************************************************************
+// Formulaire de validation des détails utilisateur
+// *****************************************************************************
 $WDGUser_current = WDGUser::current();
 $WDGUserDetailsForm = new WDG_Form_User_Details( $WDGUser_current->get_wpref(), WDG_Form_User_Details::$type_vote );
 $fields_vote_hidden = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field_group_hidden );
@@ -168,6 +175,9 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 		
 		<div id="user-details-form-buttons">
 			
+			<?php /* <button class="button save red" data-close="user-details" data-open="preinvest-warning"><?php _e( "Confirmer et pr&eacute;-investir", 'yproject' ); ?></button>
+			<br /><br /> */ ?>
+			
 			<button class="button save red" data-close="user-details" data-open="user-details-confirmation" data-callback="WDGProjectVote.saveVoteUserCallback"><?php _e( "Confirmer", 'yproject' ); ?></button>
 			
 			<div class="loading align-center hidden">
@@ -185,3 +195,40 @@ $lightbox_content = ob_get_contents();
 ob_end_clean();
 echo do_shortcode('[yproject_lightbox_cornered id="user-details" title="'.__( "Vote sur ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
 echo do_shortcode('[yproject_lightbox_cornered id="user-details-confirmation" msgtype="valid"]'.__( "Donn&eacute;es enregistr&eacute;es ! Merci !", 'yproject' ).'[/yproject_lightbox_cornered]');
+// *****************************************************************************
+?>
+
+
+
+
+<?php
+// *****************************************************************************
+// Lightbox d'avertissement de pré-investissement
+// *****************************************************************************
+$edd_settings = get_option( 'edd_settings' );
+?>
+
+<?php ob_start(); ?>
+<div id="user-details-form" class="wdg-lightbox-ref">
+	
+	<form method="post" class="sidebar-login-form db-form v3 full ajax-form">
+		
+		<div class="align-left">
+			<?php echo apply_filters( 'the_content', $edd_settings[ 'preinvest_warning' ] ); ?>
+		</div>
+		
+		<div id="user-details-form-buttons">
+			
+			<button type="button" class="button redirect half right red" data-redirecturl="<?php echo home_url( '/investir' ) . '?campaign_id=' .$post->ID. '&invest_start=1'; ?>"><?php _e( "Continuer", 'yproject' ); ?></button>
+			
+		</div>
+		
+	</form>
+	
+</div>
+
+<?php
+$lightbox_content = ob_get_contents();
+ob_end_clean();
+echo do_shortcode('[yproject_lightbox_cornered id="preinvest-warning" title="'.__( "Avant de pr&eacute;-investir", 'yproject' ).'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
+// *****************************************************************************

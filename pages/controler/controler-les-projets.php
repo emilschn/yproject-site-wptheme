@@ -1,6 +1,6 @@
 <?php
-global $page_controler;
-$page_controler = new WDG_Page_Controler_ProjectList();
+$template_engine = WDG_Templates_Engine::instance();
+$template_engine->set_controler( new WDG_Page_Controler_ProjectList() );
 
 class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	

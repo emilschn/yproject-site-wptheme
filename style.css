@@ -62,13 +62,13 @@ tbody {
 .text-white { color: #FFFFFF; }
 .text-green { color: #74BF43; }
 
-.errors, .invest_error {
+.errors {
     color: #FE494C;
     text-transform: none !important;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.success, .invest_success {
+.success {
     color: green;
 }
 
@@ -2252,192 +2252,6 @@ table.mceLayout {
 }
 #member-list li a {
     vertical-align: top;
-}
-
-/*******************************************************************************
-* INVEST PAGE
-*******************************************************************************/
-/***** COMMON *****/
-#template-single-campaign-invest { padding-top: 100px; }
-#template-single-campaign-invest h1 { text-align: center; }
-
-/***** STEP 1 *****/
-.invest_step1_generalities {
-    width: 800px;
-    margin:auto;
-    font-size: 12pt;
-}
-
-.invest_step1_generalities ol li{
-    margin-bottom: 10px;
-}
-
-.invest_step1_currentproject {
-    width: 600px;
-    margin:auto;
-    font-size: 13pt;
-}
-
-#reward-selector {
-    list-style: outside none none;
-    padding-left: 0px;
-}
-
-#reward-selector li {
-    padding: 5px;
-    margin-bottom: 5px;
-    border: 1px solid #EEE;
-}
-
-#reward-selector .selected {
-    background-color: #EA4F51;
-    color: white;
-    font-weight: bold;
-}
-
-#reward-selector .reward-amount {
-    font-weight: bold;
-}
-
-#reward-selector .detail {
-    opacity: 0.7;
-}
-
-#reward-selector .reward-not-null {
-    margin: 10px 15px 10px 20px ;
-}
-
-#reward-selector li {
-    padding: 8px;
-}
-
-#reward-selector .unavailable-reward {
-    opacity: 0.5;
-}
-
-#invest_form {
-    font-size: 13px;
-    width: 37%;
-    margin: auto;
-    margin-top: 30px;
-}
-
-#invest_form input[type=text] {
-    width: 120px;
-}
-
-#PaylineForm {
-    width: 500px;
-}
-#card {
-    border: 1px solid grey;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-#card .labelLogo, #card .label {
-    display: inline-block;
-    width: 170px;
-    font-weight: bold;
-}
-#card .content {
-    display: inline-block;
-}
-#card #spacer {
-    height: 10px;
-}
-
-ul.invest-mean-payment {
-    -webkit-padding-start: 0px;
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
-    padding-left: 0px;
-}
-ul.invest-mean-payment li {
-    list-style: none;
-    margin: 25px 0px;
-    border: 1px solid #EEEEEE;
-}
-ul.invest-mean-payment li:hover {
-    border: 1px solid #E1E3E2;
-}
-ul.invest-mean-payment li a {
-    width: 100%;
-    margin: 0px;
-    display: block;
-}
-ul.invest-mean-payment li img {
-    vertical-align: middle;
-}
-
-#invest-breadcrumb {
-    padding: 30px;
-    text-align: center;
-}
-#invest-breadcrumb div.invest-breadcrumb-item {
-	display: inline-block;
-	width: 100px;
-	padding-top: 60px;
-	height: 16px;
-	background: url("images/invest-breadcrumb-pictos.jpg") -37px top no-repeat;
-	text-align: center;
-}
-#invest-breadcrumb > div#input {
-	background-position: -37px top;
-}
-#invest-breadcrumb.breadcrumb-step-1 > div#input {
-	background-position: -37px -63px;
-	color: #EA4F51;
-}
-#invest-breadcrumb > div#confirm {
-	background-position: -145px top;
-}
-#invest-breadcrumb.breadcrumb-step-2 > div#confirm {
-	background-position: -145px -63px;
-	color: #EA4F51;
-}
-#invest-breadcrumb > div#mean-payment {
-	background-position: -246px top;
-}
-#invest-breadcrumb.breadcrumb-step-3 > div#mean-payment {
-	background-position: -246px -63px;
-	color: #EA4F51;
-}
-#invest-breadcrumb > div#return {
-	background-position: -364px top;
-}
-#invest-breadcrumb.breadcrumb-step-4 > div#return {
-	background-position: -364px -63px;
-	color: #EA4F51;
-}
-#invest-breadcrumb > div#share {
-	background-position: -472px top;
-}
-#invest-breadcrumb.breadcrumb-step-5 > div#share {
-	background-position: -472px -63px;
-	color: #EA4F51;
-}
-#invest-breadcrumb > div span {
-	background: #FFF;
-}
-
-#invest-breadcrumb div.separator {
-	display: inline-block;
-	font-weight: bold;
-}
-.invest_part {
-    padding: 15px 30px;
-    background: #EEEEEE;
-    margin-bottom: 10px;
-    font-size: 13px;
-    width: 500px;
-    margin: auto;
-    margin-bottom: 20px;
-}
-.invest_part .label {
-    display: inline-block;
-    width: 200px;
-    font-weight: bold;
-    margin-right: 10px;
 }
 
 /*******************************************************************************

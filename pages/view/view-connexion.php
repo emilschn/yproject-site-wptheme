@@ -1,4 +1,6 @@
-<?php global $page_controler; ?>
+<?php
+$page_controler = WDG_Templates_Engine::instance()->get_controler();
+?>
 
 <div id="content" style="margin-top: 90px; background-color: #f2f2f2;">
 	<div class="padder_more">

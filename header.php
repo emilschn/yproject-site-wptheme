@@ -1,8 +1,9 @@
 <?php 
-	global $page_controler, $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user;
+	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user;
 	if ($WDG_cache_plugin == null) {
 		$WDG_cache_plugin = new WDG_Cache_Plugin();
 	}
+	$page_controler = WDG_Templates_Engine::instance()->get_controler();
 	
 	$project_list = array();
 	if (is_user_logged_in()) {

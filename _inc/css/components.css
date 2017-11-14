@@ -834,6 +834,9 @@ body input[type=text], body input[type=email], body select {
 	font-weight: normal;
 	line-height: 28px;
 }
+.db-form.v3 .field label.radio-label {
+	white-space: normal;
+}
 .db-form.v3.full .field label {
 	display: block;
 	width: 100%;
@@ -863,6 +866,9 @@ body input[type=text], body input[type=email], body select {
 	width: 260px;
 	height: 30px;
 	border: none;
+}
+.db-form.v3.bg-white .field-container input, .db-form.v3.bg-white .field-container select {
+	background: #E1E3E2;
 }
 .db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=email] {
 	width: 96%;
@@ -901,6 +907,7 @@ body input[type=text], body input[type=email], body select {
 	font-family: Trebuchet MS, sans-serif;
 }
 .db-form.v3 a.button {
+	display: inline-block;
 	padding: 0px;
 	line-height: 50px;
 	height: 48px;
@@ -913,6 +920,12 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3 button.half,
 .db-form.v3 a.button.half {
 	width: 45%;
+}
+.db-form.v3 .button.transparent {
+	width: calc( 100% - 4px );
+}
+.db-form.v3 .button.transparent.half {
+	width: calc( 45% - 4px );
 }
 
 .db-form.v3 input[type=checkbox],
@@ -985,7 +998,8 @@ body input[type=text], body input[type=email], body select {
 
 .db-form.v3 span.field-money {
 	display: inline-block;
-	margin-left: -30px;
+	position: relative;
+	left: -30px;
 }
 .db-form.v3 span.rate-description {
 	display: inline-block;
