@@ -209,3 +209,9 @@ div.mean-payment-list p.disabled {
 div.mean-payment-list p.disabled img {
 	opacity: 0.5;
 }
+div.mean-payment-list p > span {
+	display: block;
+}
+div.mean-payment-list a div, div.mean-payment-list p > span {
+	margin-left: 130px;
+}

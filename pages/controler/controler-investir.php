@@ -19,9 +19,6 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	private $current_step;
 	private $form;
 	
-	private $can_use_wallet;
-	private $can_use_card_and_wallet;
-	
 	public function __construct() {
 		parent::__construct();
 		
