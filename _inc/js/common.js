@@ -357,29 +357,6 @@ YPUIFunctions = (function($) {
 
 			}
 
-
-			if ($("#wdg-lightbox-connexion").length > 0) {
-				$(".wdg-button-lightbox-open").click(function(){
-					$("#wdg-lightbox-connexion .redirect-page").attr("value", $(this).data("redirect"));
-				});
-			}
-			if ($("#wdg-lightbox-newproject").length > 0) {
-				$("#wdg-lightbox-newproject #connect-form .wdg-button-lightbox-open").click(function(e){
-					e.preventDefault();
-					$("#wdg-lightbox-newproject #connect-form").hide();
-					$("#wdg-lightbox-newproject #newproject-register-user").show();
-					var action = $("#wdg-lightbox-newproject #newproject-register-user form").attr("action");
-					console.log(action);
-					action = action.split("#register").join("#newproject");
-					$("#wdg-lightbox-newproject #newproject-register-user form").attr("action", action);
-				});
-				$("#wdg-lightbox-newproject #newproject-register-user .wdg-button-lightbox-open").click(function(e){
-					e.preventDefault();
-					$("#wdg-lightbox-newproject #newproject-register-user").hide();
-					$("#wdg-lightbox-newproject #connect-form").show();
-				});
-			}
-
 			if ($("#turnover-declaration").length > 0) {
 				if ($("#turnover-total").length > 0) {
 					$("#turnover-total").change(function() {
@@ -701,8 +678,35 @@ var WDGLightboxFunctions = (function($) {
 				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, nTimeout);
 			}
 
+
+			if ($("#wdg-lightbox-connexion").length > 0) {
+				$(".wdg-button-lightbox-open").click(function(){
+					$("#wdg-lightbox-connexion .redirect-page").attr("value", $(this).data("redirect"));
+				});
+			}
+			if ($("#wdg-lightbox-register").length > 0) {
+				$(".wdg-button-lightbox-open").click(function(){
+					$("#wdg-lightbox-register .redirect-page").attr("value", $(this).data("redirect"));
+				});
+			}
+
 			//Lightbox de nouveau projet
 			if( $("#newproject_form").length > 0){
+				$("#wdg-lightbox-newproject #connect-form .wdg-button-lightbox-open").click(function(e){
+					e.preventDefault();
+					$("#wdg-lightbox-newproject #connect-form").hide();
+					$("#wdg-lightbox-newproject #newproject-register-user").show();
+					var action = $("#wdg-lightbox-newproject #newproject-register-user form").attr("action");
+					console.log(action);
+					action = action.split("#register").join("#newproject");
+					$("#wdg-lightbox-newproject #newproject-register-user form").attr("action", action);
+				});
+				$("#wdg-lightbox-newproject #newproject-register-user .wdg-button-lightbox-open").click(function(e){
+					e.preventDefault();
+					$("#wdg-lightbox-newproject #newproject-register-user").hide();
+					$("#wdg-lightbox-newproject #connect-form").show();
+				});
+				
 				$('#newproject_form input#new-company-name').val(" ");
 				$('#newproject_form input#new-company-name').parent().parent().parent().hide();
 				if($('#newproject_form input#company-name').val() === ""){
