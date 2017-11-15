@@ -61,6 +61,7 @@ div#content header #invest-breadcrumb span {
 	font-size: 11px;
 	vertical-align: top;
 	text-align: center;
+	line-height: 14px;
 }
 div#content header #invest-breadcrumb span.selected {
 	font-weight: bold;
@@ -70,7 +71,7 @@ div#content header #invest-breadcrumb span:first-child {
 	margin-left: -25px;
 }
 div#content header #invest-breadcrumb span:nth-child(2):after {
-	top: -46px;
+	top: -50px;
 }
 div#content header #invest-breadcrumb span:last-child {
 	float: right;
@@ -89,7 +90,7 @@ div#content header #invest-breadcrumb span:before, div#content header #invest-br
 	border-left: 16px solid #333333;
 }
 div#content header #invest-breadcrumb span:after {
-	top: -34px;
+	top: -36px;
 	left: 26px;
 	border-top: 6px solid transparent;
 	border-bottom: 6px solid transparent;
