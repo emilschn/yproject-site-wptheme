@@ -770,8 +770,10 @@ var WDGLightboxFunctions = (function($) {
 		},
 		
 		displaySingle: function( sLightboxId ) {
-			ga('set', { page: document.location.pathname + '#' + sLightboxId, title: document.title + ' | ' + sLightboxId });
-			ga('send', 'pageview');
+			if (typeof ga === 'function') {
+				ga('set', { page: document.location.pathname + '#' + sLightboxId, title: document.title + ' | ' + sLightboxId });
+				ga('send', 'pageview');
+			}
 			$( ".wdg-lightbox" ).hide();
 			$( "#wdg-lightbox-" + sLightboxId ).show();
 			if( $( "#wdg-lightbox-" + sLightboxId ).data( "scrolltop" ) == "1" ){
