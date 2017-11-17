@@ -940,7 +940,10 @@ body input[type=text], body input[type=email], body select {
 }
 .db-form.v3 input[type=checkbox] + span:after {
 	content: '';
-	position: absolute;
+	position: relative;
+	display: inline-block;
+	left: -5px;
+	top: 5px;
 	width: 19px;
 	height: 19px;
 	margin-left: -24px;
@@ -951,7 +954,10 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3 input[type=checkbox].rate + span:after,
 .db-form.v3 input[type=radio] + span:after {
 	content: '';
-	position: absolute;
+	position: relative;
+	display: inline-block;
+	left: -5px;
+	top: 5px;
 	width: 23px;
 	height: 23px;
 	margin-left: -23px;

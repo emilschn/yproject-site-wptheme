@@ -67,6 +67,6 @@ $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::
 	<?php $lightbox_content = ob_get_contents(); ?>
 	<?php ob_clean(); ?>
 
-	<?php echo do_shortcode( '[yproject_lightbox_cornered id="invest-warning" autoopen="1"]'.$lightbox_content.'[/yproject_lightbox_cornered]' ); ?>
+	<?php echo do_shortcode( '[yproject_lightbox_cornered id="invest-warning" autoopen="1" title="'.__( "Avant d'investir", 'yproject' ).'"]'.$lightbox_content.'[/yproject_lightbox_cornered]' ); ?>
 
 <?php endif;
