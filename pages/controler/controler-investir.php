@@ -107,7 +107,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	public function get_current_investment_contract_preview() {
 		$current_user = wp_get_current_user();
 		$campaign = $this->current_campaign;
-		$part_value = ypcf_get_part_value();
+		$part_value = $campaign->part_value();
         $amount_part = ( $_SESSION[ 'redirect_current_amount' ] === FALSE ) ? 0 : $_SESSION[ 'redirect_current_amount' ] / $part_value;
 		$invest_data = array(
 			"amount_part"					=> $amount_part,

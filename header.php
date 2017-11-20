@@ -274,7 +274,11 @@
 		<?php endif; ?>
 		
 		<?php if ( $page_controler->get_show_user_details_confirmation() ): ?>
-			<?php locate_template( array( 'common/user-details-lightbox.php' ), true ); ?>
+			<?php locate_template( array( 'common/lightbox/user-details-lightbox.php' ), true ); ?>
+		<?php endif; ?>
+		
+		<?php if ( $page_controler->get_show_user_pending_preinvestment() ): ?>
+			<?php locate_template( array( 'common/lightbox/pending-preinvestment-lightbox.php' ), true ); ?>
 		<?php endif; ?>
 		
 		<div id="container"> 
