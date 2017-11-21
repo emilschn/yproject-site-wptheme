@@ -53,8 +53,6 @@
 			endif; ?>
 		<?php endif; ?>
 		
-		<meta name="keywords" content="<?php echo $page_controler->get_page_meta_keywords(); ?>" />
-		
 		<?php
 		//*******************
 		//CACHE HEAD
