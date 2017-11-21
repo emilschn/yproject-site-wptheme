@@ -143,7 +143,7 @@ class WDG_WordPress_Events {
 		$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 		$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 		$is_admin_page = ($post->post_name == 'liste-des-paiements');
-		$current_version = '20171115a';
+		$current_version = '20171121';
 
 		if ( !is_admin() ) {
 			wp_deregister_script('jquery');

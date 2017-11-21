@@ -70,7 +70,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	private function prepare_stats() {
 		$this->stats_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$stats_html_key, WDG_Page_Controler_ProjectList::$stats_html_version );
 		if ( empty( $this->stats_html ) ) {
-			$project_list_funded = ATCF_Campaign::get_list_funded( WDG_Page_Controler_ProjectList::$nb_query_campaign_funded );
+			$project_list_funded = ATCF_Campaign::get_list_funded( WDG_Page_Controler_ProjectList::$nb_query_campaign_funded, '', true );
 			$count_amount = 0;
 			$people_list = array();
 			$count_projects = 0;
