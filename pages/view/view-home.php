@@ -38,6 +38,64 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 <?php
 /******************************************************************************/
+// STATS PROJECTS
+/******************************************************************************/
+$stats_html = $page_controler->get_stats_html();
+?>
+
+<?php if ( !$stats_html ): ?>
+				
+	<?php $stats_list = $page_controler->get_stats_list(); ?>
+				
+	<?php ob_start(); ?>
+				
+				<section class="project-stats">
+					<h2 class="standard">/ <?php _e("WE DO GOOD c'est", "yproject") ?> /</h2>
+					<div class="left">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-montgolfiere.png" alt="montgolfiere" width="220" height="220">
+						<br><br>
+						<span>
+							<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span><br>
+							<?php _e( "lev&eacute;s", 'yproject' ); ?>
+						</span>
+					</div>
+					<div class="left">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-ensemble.png" alt="ensemble" width="220" height="220">
+						<br><br>
+						<span>
+							<span><?php echo number_format( $stats_list[ 'count_people' ], 0, '', ' ' ); ?></span><br>
+							<?php _e( "investisseurs", 'yproject' ); ?>
+						</span>
+					</div>
+					<div class="left">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-monnaie.png" alt="monnaie" width="220" height="220">
+						<br><br>
+						<span>
+							<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?> &euro;</span><br>
+							<?php _e( "de royalties vers&eacute;s", 'yproject' ); ?>
+						</span>
+					</div>
+					<div class="clear"></div>
+				</section>
+				
+	<?php
+	$cache_stats = ob_get_contents();
+	$page_controler->set_stats_html( $cache_stats );
+	ob_end_clean();
+	?>
+				
+<?php endif; ?>
+
+<?php echo $page_controler->get_stats_html(); ?>
+				
+<?php
+/******************************************************************************/
+// FIN STATS PROJECTS
+/******************************************************************************/
+?>
+
+<?php
+/******************************************************************************/
 // PROJECT LIST
 /******************************************************************************/
 $projects_html = $page_controler->get_projects_html();

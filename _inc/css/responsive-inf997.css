@@ -162,14 +162,26 @@
 		background: #FFF;
 	}
 	
-	body.home-page .wdg-component-projects-preview .block-projects {
-		width: 960px;
+	body.home section.project-stats div.left {
+		width: 100%;
+		margin-bottom: 25px;
 	}
-	body.home-page .wdg-component-projects-preview .block-projects .project-container {
-		display: inline-block;
+	body.home section.project-stats div.left img {
+		width: 130px;
+		height: 130px;
+		margin-bottom: -35px;
 	}
-	body.home-page .wdg-component-projects-preview .block-projects .project-container .project-framed {
-		position: absolute;         
+	body.home section.project-stats div.left:nth-child(3) img {
+		margin-bottom: -55px;
+	}
+	body.home section.project-stats div.left:nth-child(4) img {
+		margin-bottom: -20px;
+	}
+	body.home section.project-stats div.left span {
+		font-size: 15pt;
+	}
+	body.home section.project-stats div.left span span {
+		font-size: 17pt;
 	}
         
 	#home-video .home_video .video-container, .home_video .button-video {
