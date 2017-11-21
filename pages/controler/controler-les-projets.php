@@ -5,8 +5,8 @@ $template_engine->set_controler( new WDG_Page_Controler_ProjectList() );
 class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	
 	private $slider;
-	private static $nb_query_campaign_funded = 30;
 	
+	private static $nb_query_campaign_funded = 40;
 	private static $stats_html_key = 'projectlist-projects-stats';
 	private static $stats_html_duration = 86400; // 24 heures de cache
 	private static $stats_html_version = 2;

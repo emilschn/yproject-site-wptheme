@@ -688,6 +688,7 @@ footer > .footer-container > div > div.aligncenter {
 		width: 20%;
 	}
 }
+
 /*******************************************************************************
 * PAGES - COMMON
 *******************************************************************************/
@@ -703,6 +704,27 @@ footer > .footer-container > div > div.aligncenter {
 }
 #content .padder.padder-top {
 	padding-top: 80px;
+}
+
+/*******************************************************************************
+* HOME - STATS
+*******************************************************************************/
+body.home section.project-stats {
+	width: -webkit-calc(100% - 20px);
+	width: -moz-calc(100% - 20px);
+	width: calc(100% - 20px);
+	max-width: 960px;
+	margin: 30px auto;
+}
+body.home section.project-stats div.left {
+	width: 33%;
+	text-align: center;
+	font-size: 20pt;
+}
+body.home section.project-stats div.left span span {
+	font-size: 25pt;
+	letter-spacing: 2px;
+	font-weight: bold;
 }
 
 /*******************************************************************************
