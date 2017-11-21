@@ -64,7 +64,7 @@
 		<link href="https://plus.google.com/+WedogoodCo" rel="publisher" />
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="Première plateforme française de royalty crowdfunding. Levez des fonds sans dilution de capital ni endettement." />
+		<meta name="description" content="<?php echo $page_controler->get_page_description(); ?>" />
 		
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
