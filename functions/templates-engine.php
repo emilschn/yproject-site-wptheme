@@ -20,7 +20,6 @@ class WDG_Templates_Engine {
 	
 	public function __construct() {
 		add_action( 'template_include', 'WDG_Templates_Engine::load_controler', 100, 2 );
-		add_action( 'single_template', 'WDG_Templates_Engine::load_controler', 100, 2 );
 		add_filter( 'body_class', 'WDG_Templates_Engine::body_class' );
 		add_filter( 'the_content', 'WDG_Templates_Engine::override_content' );
 	}
