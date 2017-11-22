@@ -712,7 +712,10 @@ footer > .footer-container > div > div.aligncenter {
 body.home section.project-stats {
 	color: #FFFFFF;
 	background: #333333;
-	padding-bottom: 30px;
+	padding-bottom: 35px;
+}
+body.home section.project-stats h2 {
+	padding: 35px 0px;
 }
 body.home section.project-stats > div {
 	width: -webkit-calc(100% - 20px);
@@ -724,7 +727,7 @@ body.home section.project-stats > div {
 body.home section.project-stats > div div.left {
 	width: calc(100% / 3 - 15px);
 	text-align: left;
-	font-size: 20pt;
+	font-size: 18pt;
 	margin-left: 15px;
 }
 body.home section.project-stats > div div.left img {
@@ -732,7 +735,7 @@ body.home section.project-stats > div div.left img {
 	margin-right: 20px;
 }
 body.home section.project-stats > div div.left span span {
-	font-size: 25pt;
+	font-size: 23pt;
 	letter-spacing: 2px;
 	font-weight: bold;
 	line-height: 50px;

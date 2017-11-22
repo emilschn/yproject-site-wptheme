@@ -3,6 +3,7 @@ class WDG_Page_Controler {
 	
 	private $db_cache_manager;
 	private $page_title;
+	private $page_description;
 	private $page_meta_keywords;
 	private $show_user_details_confirmation;
 	private $show_user_pending_preinvestment;
@@ -20,6 +21,7 @@ class WDG_Page_Controler {
 			$this->init_show_user_pending_preinvestment();
 			$this->init_show_user_details_confirmation();
 		}
+		$this->init_page_description();
 	}
 	
 	public function get_db_cached_elements( $key, $version ) {
@@ -73,6 +75,27 @@ class WDG_Page_Controler {
 					foreach( (array) $posttags as $tag) {
 						$this->page_meta_keywords .= $tag->name . ',';
 					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Récupère la description de la page (champs personnalisé)
+	 */
+	public function get_page_description() {
+		return $this->page_description;
+	}
+	
+	private function init_page_description() {
+		$this->page_description = "Première plateforme française de royalty crowdfunding. Levez des fonds sans dilution de capital ni endettement.";
+		if ( have_posts() ){
+			while ( have_posts() ) {
+				the_post();
+				global $post;
+				$meta_description = get_post_meta( $post->ID, 'metadescription', TRUE );
+				if ( !empty( $meta_description ) ) {
+					$this->page_description = $meta_description;
 				}
 			}
 		}
