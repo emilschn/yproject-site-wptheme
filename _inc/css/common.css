@@ -35,7 +35,7 @@ body input, body select {
 h2.standard {
     text-align: center;
     margin: 0;
-    padding: 2%;
+    padding: 20px 0px;
     font-family: Trebuchet MS, sans-serif;
     text-transform: uppercase;
     font-size: 25pt;
@@ -711,21 +711,32 @@ footer > .footer-container > div > div.aligncenter {
 * HOME - STATS
 *******************************************************************************/
 body.home section.project-stats {
+	color: #FFFFFF;
+	background: #333333;
+	padding-bottom: 30px;
+}
+body.home section.project-stats > div {
 	width: -webkit-calc(100% - 20px);
 	width: -moz-calc(100% - 20px);
 	width: calc(100% - 20px);
-	max-width: 960px;
-	margin: 30px auto;
+	max-width: 1280px;
+	margin: auto;
 }
-body.home section.project-stats div.left {
-	width: 33%;
-	text-align: center;
+body.home section.project-stats > div div.left {
+	width: calc(100% / 3 - 15px);
+	text-align: left;
 	font-size: 20pt;
+	margin-left: 15px;
 }
-body.home section.project-stats div.left span span {
+body.home section.project-stats > div div.left img {
+	float: left;
+	margin-right: 20px;
+}
+body.home section.project-stats > div div.left span span {
 	font-size: 25pt;
 	letter-spacing: 2px;
 	font-weight: bold;
+	line-height: 50px;
 }
 
 /*******************************************************************************

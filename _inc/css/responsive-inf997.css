@@ -162,26 +162,20 @@
 		background: #FFF;
 	}
 	
-	body.home section.project-stats div.left {
+	body.home section.project-stats > div div.left {
 		width: 100%;
 		margin-bottom: 25px;
+		margin-left: 0px;
+		text-align: center;
 	}
-	body.home section.project-stats div.left img {
+	body.home section.project-stats > div div.left img {
 		width: 130px;
 		height: 130px;
-		margin-bottom: -35px;
+		margin-right: 0px;
+		float: none;
 	}
-	body.home section.project-stats div.left:nth-child(3) img {
-		margin-bottom: -55px;
-	}
-	body.home section.project-stats div.left:nth-child(4) img {
-		margin-bottom: -20px;
-	}
-	body.home section.project-stats div.left span {
-		font-size: 15pt;
-	}
-	body.home section.project-stats div.left span span {
-		font-size: 17pt;
+	body.home section.project-stats > div div.left > span {
+		display: block;
 	}
         
 	#home-video .home_video .video-container, .home_video .button-video {
