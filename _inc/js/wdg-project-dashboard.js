@@ -691,7 +691,9 @@ var WDGProjectDashboard = (function ($) {
                     var id = $(this).data('id');
                     switch ($(this).data("type")){
                         case 'datetime':
-                            data_to_update[id] = $(this).find("input:eq(0)").val()+"\ "
+							var sDate = $(this).find("input:eq(0)").val();
+							var aDate = sDate.split('/');
+                            data_to_update[id] = aDate[1]+'/'+aDate[0]+'/'+aDate[2]+"\ "
                                 + $(this).find("select:eq(0)").val() +':'
                                 + $(this).find("select:eq(1)").val();
                             break;
