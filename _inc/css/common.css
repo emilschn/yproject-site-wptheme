@@ -97,8 +97,8 @@ button.red {
     padding: 15px 30px;
 }
 .button.disabled {
-    background: #EEECED;
-    border: 1px solid #EEECED !important;
+    background: #e1e3e2;
+    border: 1px solid #e1e3e2 !important;
     color: #333333;
     cursor: default;
 }

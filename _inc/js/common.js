@@ -770,6 +770,9 @@ var WDGLightboxFunctions = (function($) {
 		},
 		
 		displaySingle: function( sLightboxId ) {
+			if ( sLightboxId == '' ) {
+				return FALSE;
+			}
 			if (typeof ga === 'function') {
 				ga('set', { page: document.location.pathname + '#' + sLightboxId, title: document.title + ' | ' + sLightboxId });
 				ga('send', 'pageview');
@@ -830,7 +833,7 @@ var WDGFormsFunctions = (function($) {
 				$( this ).siblings( 'button' ).hide();
 				$( this ).hide();
 				var formId = $( this ).parent().parent().parent().attr( 'id' );
-				WDGFormsFunctions.postForm( 'div#' + formId, WDGFormsFunctions.postFormCallback );
+				WDGFormsFunctions.postForm( 'div#' + formId, WDGFormsFunctions.postFormCallback, this );
 			} );
 			$( '.wdg-lightbox button.close, .wdg-lightbox-ref button.close' ).click( function( e ) {
 				WDGLightboxFunctions.hideAll();
@@ -868,7 +871,7 @@ var WDGFormsFunctions = (function($) {
 			$( 'span#' + sRateType + '-description' ).text( $( 'input[type=checkbox]#' + sRateType + '-' + nRate ).data( 'description' ) );
 		},
 		
-		postForm: function( formid, callback ) {
+		postForm: function( formid, callback, clickedButton ) {
 			$( formid+ ' div.field' ).removeClass( 'error' );
 			var sentData = {};
 			$( formid+' input, '+formid+' select, '+formid+' textarea' ).each( function() {
@@ -901,12 +904,12 @@ var WDGFormsFunctions = (function($) {
 						}
 					}
 				}
-				callback( result, formid );
+				callback( result, formid, clickedButton );
 				
 			});
 		},
 		
-		postFormCallback: function( result, formid ) {
+		postFormCallback: function( result, formid, clickedButton ) {
 			$( formid+' .loading' ).hide();
 			$( formid+' button.save' ).show();
 			if ( $( formid+' button.previous' ).length > 0 ) {
@@ -914,15 +917,15 @@ var WDGFormsFunctions = (function($) {
 			}
 			var jsonResult = JSON.parse(result);
 			if ( jsonResult.errors === undefined || jsonResult.errors.length === 0 ) {
-				if ( $( formid+' button.save' ).data( 'close' ) !== undefined && $( formid+' button.save' ).data( 'close' ) !== '' ) {
-					$( '#wdg-lightbox-' + $( formid+' button.save' ).data( 'close' ) ).hide();
+				if ( $( clickedButton ).data( 'close' ) !== undefined && $( clickedButton ).data( 'close' ) !== '' ) {
+					$( '#wdg-lightbox-' + $( clickedButton ).data( 'close' ) ).hide();
 				}
-				if ( $( formid+' button.save' ).data( 'open' ) !== undefined && $( formid+' button.save' ).data( 'open' ) !== '' ) {
-					$( '#wdg-lightbox-' + $( formid+' button.save' ).data( 'open' ) ).show();
+				if ( $( clickedButton ).data( 'open' ) !== undefined && $( clickedButton ).data( 'open' ) !== '' ) {
+					$( '#wdg-lightbox-' + $( clickedButton ).data( 'open' ) ).show();
 				}
 			}
 			
-			var callbackFunctionName = $( formid+' button.save' ).data( 'callback' );
+			var callbackFunctionName = $( clickedButton ).data( 'callback' );
 			if ( callbackFunctionName !== undefined && callbackFunctionName !== '' ) {
 				( eval( callbackFunctionName ) )( result );
 			}
