@@ -4,9 +4,11 @@ $mandate_conditions = $campaign->mandate_conditions();
 
 $saved_mandates_list = $organization_obj->get_lemonway_mandates();
 $last_mandate_status = '';
+$last_mandate_id = FALSE;
 if ( !empty( $saved_mandates_list ) ) {
 	$last_mandate = end( $saved_mandates_list );
 	$last_mandate_status = $last_mandate[ "S" ];
+	$last_mandate_id = $last_mandate[ "ID" ];
 }
 ?>
 
@@ -133,44 +135,69 @@ $keep_going = true;
 		
 
 		<?php if ( $is_admin ): ?>
-		<br /><br />
-		<form class="db-form" data-action="pay_with_mandate">
-			<div class="field admin-theme">
+			<br /><br />
+			<form class="db-form" data-action="pay_with_mandate">
+				<div class="field admin-theme">
 
-				<?php
-				DashboardUtility::create_field(array(
-					'id'			=> 'pay_with_mandate_amount_for_organization',
-					'type'			=> 'text',
-					'label'			=> "Montant vers&eacute; sur le porte-monnaie de l'organisation",
-					'suffix'		=> " &euro;",
-                    "admin_theme"	=> true
-				));
-				?>
-				<br />
+					<?php
+					DashboardUtility::create_field(array(
+						'id'			=> 'pay_with_mandate_amount_for_organization',
+						'type'			=> 'text',
+						'label'			=> "Montant vers&eacute; sur le porte-monnaie de l'organisation",
+						'suffix'		=> " &euro;",
+						"admin_theme"	=> true
+					));
+					?>
+					<br />
 
-				<?php
-				DashboardUtility::create_field(array(
-					'id'			=> 'pay_with_mandate_amount_for_commission',
-					'type'			=> 'text',
-					'label'			=> "Montant vers&eacute; en commission",
-					'suffix'		=> " &euro;",
-                    "admin_theme"	=> true
-				));
-				?>
-				<br />
-				
-				<?php
-				DashboardUtility::create_field( array(
-					'id'			=> 'organization_id',
-					'type'			=> 'hidden',
-					'value'			=> $organization_obj->get_wpref()
-				) );
-				?>
-				
-				<?php DashboardUtility::create_save_button( "pay_with_mandate" ); ?>
+					<?php
+					DashboardUtility::create_field(array(
+						'id'			=> 'pay_with_mandate_amount_for_commission',
+						'type'			=> 'text',
+						'label'			=> "Montant vers&eacute; en commission",
+						'suffix'		=> " &euro;",
+						"admin_theme"	=> true
+					));
+					?>
+					<br />
 
-			</div>
-		</form>
+					<?php
+					DashboardUtility::create_field( array(
+						'id'			=> 'organization_id',
+						'type'			=> 'hidden',
+						'value'			=> $organization_obj->get_wpref()
+					) );
+					?>
+
+					<?php DashboardUtility::create_save_button( "pay_with_mandate" ); ?>
+
+				</div>
+			</form>
+
+			<br /><br />
+			<form action="<?php echo admin_url( 'admin-post.php?action=organization_remove_mandate'); ?>" method="post">
+				<div class="field admin-theme">
+
+					<?php
+					DashboardUtility::create_field( array(
+						'id'			=> 'organization_id',
+						'type'			=> 'hidden',
+						'value'			=> $organization_obj->get_wpref()
+					) );
+					?>
+
+					<?php
+					DashboardUtility::create_field( array(
+						'id'			=> 'mandate_id',
+						'type'			=> 'hidden',
+						'value'			=> $last_mandate_id
+					) );
+					?>
+
+					<?php DashboardUtility::create_save_button( "pay_with_mandate", TRUE, "Annuler le mandat en cours" ); ?>
+
+				</div>
+			</form>
 		<?php endif; ?>
 
 			

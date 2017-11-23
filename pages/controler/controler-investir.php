@@ -121,7 +121,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
 			$organization = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
 		}
-		return fillPDFHTMLDefaultContent( $current_user, $campaign, $invest_data, $organization );
+		return fillPDFHTMLDefaultContent( $current_user, $campaign, $invest_data, $organization, true );
 	}
 	
 /******************************************************************************/

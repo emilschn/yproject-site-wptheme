@@ -166,6 +166,15 @@ function print_informations_page()
                     "options_names"	=> array_values($locations)
                 ));
 				?>
+				
+				<?php
+                DashboardUtility::create_field(array(
+                    "id"	=> "new_employees_number",
+                    "type"	=> "number",
+                    "label"	=> __( "Nombre d'employ&eacute;s au lancement", 'yproject' ),
+                    "value"	=> $campaign->get_api_data( 'employees_number' )
+                ));
+				?>
 
                 <?php
 				$contract_descriptions_editable = $campaign->is_preparing();
