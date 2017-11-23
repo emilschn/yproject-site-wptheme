@@ -19,6 +19,15 @@ div#content.version-3 div.separator-title span {
 }
 
 /*******************************************************************************
+* LIGHTBOX WARNING
+*******************************************************************************/
+@media screen and (max-width: 340px) {
+	div#content div#wdg-lightbox-project-warning .button {
+		font-size: 11px;
+	}
+}
+
+/*******************************************************************************
 * BANNIERE HEADER
 *******************************************************************************/
 div#content.version-3 header {
