@@ -266,7 +266,7 @@ class DashboardUtility
                             . 'class="adddatepicker datetime ' .$fillbubble_class.$icon_class. '" '
                             . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
-                            . 'value="' . $initial_value->format('Y-m-d') . '" '
+                            . 'value="' . $initial_value->format('d/m/Y') . '" '
                             . '/>';
 
                         $text_field .= '<select class="timepicker" ' . 'id="' . $id . '_h">';

@@ -203,7 +203,7 @@ $lang_list = $campaign->get_lang_list();
 							</div>
 
 						<?php else: ?>
-							<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote">
+							<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote" data-thankyoumsg="<?php _e( "Merci pour votre vote !", 'yproject' ); ?>">
 								<?php _e('Voter', 'yproject'); ?>
 							</a>
 						<?php endif; ?>

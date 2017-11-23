@@ -192,6 +192,12 @@ var WDGProjectVote = (function($) {
 					setTimeout( function() { location.reload( true ) }, 1000 );
 				}
 				$( '#wdg-lightbox-vote' ).remove();
+				$( 'a[href="#vote"]' ).click( function( e ) { e.preventDefault(); } );
+				$( 'a[href="#vote"]' ).text( $( 'a[href="#vote"]' ).data( 'thankyoumsg' ) );
+				$( 'a[href="#vote"]' ).addClass( 'disabled' );
+				$( 'a[href="#vote"]' ).removeClass( 'wdg-button-lightbox-open' );
+				$( 'a[href="#vote"]' ).data( 'lightbox', '' );
+				$( 'a[href="#vote"]' ).attr( 'href', '#' );
 			}
 		},
 		

@@ -210,7 +210,12 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 				
 			// Chargement formulaire saisie montant, si rien en cours
 			default:
-				$this->form = new WDG_Form_Invest_Input( $this->current_campaign );
+				$amount_voted_on_campaign = FALSE;
+				if ( $this->current_campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ) {
+					$WDGCurrent_User = WDGUser::current();
+					$amount_voted_on_campaign = $WDGCurrent_User->get_amount_voted_on_campaign( $this->current_campaign->ID );
+				}
+				$this->form = new WDG_Form_Invest_Input( $this->current_campaign, $amount_voted_on_campaign );
 				break;
 		}
 		
@@ -219,7 +224,12 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 			$WDGCurrent_User = WDGUser::current();
 			switch ( $this->current_step ) {
 				case 1:
-					$this->form = new WDG_Form_Invest_Input( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
+					$amount_voted_on_campaign = FALSE;
+					if ( $this->current_campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ) {
+						$WDGCurrent_User = WDGUser::current();
+						$amount_voted_on_campaign = $WDGCurrent_User->get_amount_voted_on_campaign( $this->current_campaign->ID );
+					}
+					$this->form = new WDG_Form_Invest_Input( $this->current_campaign, $amount_voted_on_campaign );
 					break;
 				case 2:
 					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID );

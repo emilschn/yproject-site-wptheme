@@ -72,7 +72,7 @@ if (is_user_logged_in()) {
 
 					<?php else: ?>
 					<div>
-						<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote">
+						<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote" data-thankyoumsg="<?php _e( "Merci pour votre vote !", 'yproject' ); ?>">
 							<?php _e('Voter', 'yproject'); ?>
 						</a>
 					</div>

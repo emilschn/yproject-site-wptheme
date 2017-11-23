@@ -51,9 +51,19 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 			$buffer = FALSE;
 		}
 		// Seul l'utilisateur qui correspond à cet investissement peut y toucher
-		$current_user = wp_get_current_user();
+		$WDGUser_current = WDGUser::current();
 		$saved_user_id = $this->current_investment->get_saved_user_id();
-		if ( $saved_user_id != $current_user->ID ) {
+		$user_organizations_list = $WDGUser_current->get_organizations_list();
+		$is_user_organization_preinvestment = FALSE;
+		if ( $user_organizations_list ) {
+			foreach ( $user_organizations_list as $organization_item ) {
+				if ( $saved_user_id == $organization_item->wpref ) {
+					$is_user_organization_preinvestment = TRUE;
+					break;
+				}
+			}
+		}
+		if ( !$is_user_organization_preinvestment && $saved_user_id != $WDGUser_current->get_wpref() ) {
 			$buffer = FALSE;
 		}
 		// Il ne peut le modifier que si le statut correspond à un préinvestissement à valider
