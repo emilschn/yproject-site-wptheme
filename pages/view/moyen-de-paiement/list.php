@@ -5,7 +5,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 <div class="center">
 	
-	<h2>Je choisis mon mode de paiement :</h2>
+	<h2><?php _e( "Je choisis mon mode de paiement :", 'yproject' ); ?></h2>
 	
 	<div class="mean-payment-list">
 

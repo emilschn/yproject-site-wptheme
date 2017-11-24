@@ -144,7 +144,7 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 ?>
 
 <?php ob_start(); ?>
-<div id="user-details-form" class="wdg-lightbox-ref">
+<div id="user-details-vote-form" class="wdg-lightbox-ref">
 	
 	<form method="post" class="sidebar-login-form db-form v3 full ajax-form">
 		
@@ -175,10 +175,10 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 		
 		<div id="user-details-form-buttons">
 			
-			<button class="button save red" data-close="user-details" data-open="preinvest-warning"><?php _e( "Confirmer et pr&eacute;-investir", 'yproject' ); ?></button>
+			<button class="button save red" data-close="user-details-vote" data-open="preinvest-warning"><?php _e( "Confirmer et pr&eacute;-investir", 'yproject' ); ?></button>
 			<br><br>
 			
-			<button class="button save blue" data-close="user-details" data-open="user-details-confirmation" data-callback="WDGProjectVote.saveVoteUserCallback"><?php _e( "Confirmer", 'yproject' ); ?></button>
+			<button class="button save blue" data-close="user-details-vote" data-open="user-details-confirmation" data-callback="WDGProjectVote.saveVoteUserCallback"><?php _e( "Confirmer", 'yproject' ); ?></button>
 			
 			<div class="loading align-center hidden">
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
@@ -193,7 +193,7 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 <?php
 $lightbox_content = ob_get_contents();
 ob_end_clean();
-echo do_shortcode('[yproject_lightbox_cornered id="user-details" title="'.__( "Vote sur ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="user-details-vote" title="'.__( "Vote sur ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
 echo do_shortcode('[yproject_lightbox_cornered id="user-details-confirmation" msgtype="valid"]'.__( "Donn&eacute;es enregistr&eacute;es ! Merci !", 'yproject' ).'[/yproject_lightbox_cornered]');
 // *****************************************************************************
 ?>
