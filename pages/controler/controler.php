@@ -10,6 +10,7 @@ class WDG_Page_Controler {
 	public function __construct() {
 		ypcf_session_start();
 		date_default_timezone_set("Europe/Paris");
+		include_once( __DIR__ . '/../../functions/assets-version.php' );
 		global $stylesheet_directory_uri;
 		$stylesheet_directory_uri = get_stylesheet_directory_uri();
 		$this->db_cache_manager = new WDG_Cache_Plugin();
