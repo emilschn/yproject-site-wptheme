@@ -146,7 +146,7 @@ class WDG_Page_Controler {
 				if ( !$this->show_user_pending_preinvestment ) {
 					$user_organizations_list = $WDG_user_current->get_organizations_list();
 					foreach ( $user_organizations_list as $organization_item ) {
-						$WDGUserOrga = new WDGUserOrga( $organization_item->wpref );
+						$WDGUserOrga = new WDGUser( $organization_item->wpref );
 						if ( $WDGUserOrga->has_pending_preinvestments() ) {
 							$this->show_user_pending_preinvestment = $WDGUserOrga->get_first_pending_preinvestment();
 							break;
