@@ -2,4 +2,5 @@ dploy.yaml
 _tools/gulp/*
 !_tools/gulp/package.json
 !_tools/gulp/gulpfile.js
+!_tools/gulp/assets-version-template.php
 node_modules
