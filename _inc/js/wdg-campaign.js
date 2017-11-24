@@ -186,7 +186,7 @@ var WDGProjectVote = (function($) {
 				$( '#wdg-lightbox-vote .wdg-lightbox-padder' ).animate( { scrollTop: 0 }, "slow" );
 			} else {
 				if ( $( '#wdg-lightbox-vote #rate-project-3' ).is( ':checked' ) || $( '#wdg-lightbox-vote #invest-sum' ).val() > 0 ) {
-					$( '#wdg-lightbox-user-details' ).show();
+					$( '#wdg-lightbox-user-details-vote' ).show();
 				} else {
 					$( '#wdg-lightbox-vote-simple-confirmation' ).show();
 					setTimeout( function() { location.reload( true ) }, 1000 );
@@ -204,7 +204,7 @@ var WDGProjectVote = (function($) {
 		saveVoteUserCallback: function( result ) {
 			var jsonResult = JSON.parse( result );
 			if ( jsonResult.errors == undefined || jsonResult.errors.length == 0 ) {
-				$( '#wdg-lightbox-user-details' ).remove();
+				$( '#wdg-lightbox-user-details-vote' ).remove();
 				setTimeout( function() {
 					var currentAddress = location.href;
 					var newUrl = currentAddress.split( '#' )[ 0 ];
