@@ -880,8 +880,8 @@ function print_informations_page()
 			<?php if ( $is_admin && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte ): ?>
 				<div class="field admin-theme">
 					<?php if ( $count_pending_preinvestements > 0 ): ?>
-					Il y a des pré-investissements non-validés.<br>
-					<form action="<?php echo admin_url( 'admin-post.php?action=send_project_contract_modification_notification'); ?>" method="post" class="db-form align-center">
+					Il y a des pré-investissements non-validés.<br><br>
+					<form action="<?php echo admin_url( 'admin-post.php?action=send_project_contract_modification_notification'); ?>" method="post" class="align-center">
 						<button type="submit" class="button red"><?php _e( "Envoyer les notifications de modification de contrat" ); ?></button>
 						<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
 					</form>
