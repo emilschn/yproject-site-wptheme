@@ -177,7 +177,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 			$this->current_investment->set_contract_status( WDGInvestment::$contract_status_investment_refused );
 			$this->current_investment->refund();
 			$current_user = wp_get_current_user();
-			NotificationsEmails::preinvestment_canceled( $current_user, $this->current_investment->get_saved_campaign() );
+			NotificationsEmails::preinvestment_canceled( $current_user->user_email, $this->current_investment->get_saved_campaign() );
 		}
 		
 		// Chargement du formulaire à afficher
