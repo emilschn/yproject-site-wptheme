@@ -160,6 +160,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		if ( $action_posted != WDG_Form_Invest_Input::$name && !$current_investment->is_session_correct() ) {
 			$action_posted = FALSE;
 			$this->current_step = 1;
+			ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 1 >> $action_posted != WDG_Form_Invest_Input::$name && !$current_investment->is_session_correct()' );
 		}
 		$reload_form = FALSE;
 		
@@ -169,6 +170,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 				$this->form = new WDG_Form_Invest_Input( $this->current_campaign );
 				if ( $this->form->postForm() ) {
 					$this->current_step = 2;
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2 >> WDG_Form_Invest_Input::$name POSTED' );
 					$reload_form = TRUE;
 				}
 				break;
@@ -178,14 +180,17 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 				$input_nav = filter_input( INPUT_POST, 'nav' );
 				if ( $input_nav == 'previous' ) {
 					$this->current_step = 1;
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 1 >> WDG_Form_Invest_User_Details::$name PREVIOUS' );
 					$reload_form = TRUE;
 					
 				} else {
 					$this->current_step = 2;
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2 >> WDG_Form_Invest_User_Details::$name POSTED' );
 					$WDGCurrent_User = WDGUser::current();
 					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 					if ( $this->form->postForm() ) {
 						$this->current_step = 3;
+						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 3 >> GOTO WDG_Form_Invest_Contract' );
 						$reload_form = TRUE;
 					}
 				}
@@ -196,13 +201,16 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 				$input_nav = filter_input( INPUT_POST, 'nav' );
 				if ( $input_nav == 'previous' ) {
 					$this->current_step = 2;
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2 >> WDG_Form_Invest_Contract::$name PREVIOUS' );
 					$reload_form = TRUE;
 					
 				} else {
 					$this->current_step = 3;
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 3 >> WDG_Form_Invest_Contract::$name POSTED' );
 					$WDGCurrent_User = WDGUser::current();
 					$this->form = new WDG_Form_Invest_Contract( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 					if ( $this->form->postForm() ) {
+						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> GOTO moyen-de-paiement' );
 						wp_redirect( home_url( '/moyen-de-paiement' ) . '?campaign_id=' . $this->current_campaign->ID );
 					}
 				}
@@ -210,6 +218,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 				
 			// Chargement formulaire saisie montant, si rien en cours
 			default:
+				ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> START >> WDG_Form_Invest_Input::$name PREVIOUS' );
 				$this->form = new WDG_Form_Invest_Input( $this->current_campaign );
 				break;
 		}
@@ -219,12 +228,15 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 			$WDGCurrent_User = WDGUser::current();
 			switch ( $this->current_step ) {
 				case 1:
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_Invest_Input' );
 					$this->form = new WDG_Form_Invest_Input( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 					break;
 				case 2:
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_Invest_User_Details' );
 					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 					break;
 				case 3:
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_Invest_Contract' );
 					$this->form = new WDG_Form_Invest_Contract( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 					break;
 			}
