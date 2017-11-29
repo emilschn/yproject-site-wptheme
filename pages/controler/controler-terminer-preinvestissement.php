@@ -35,7 +35,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 /******************************************************************************/
 	private function init_current_investment() {
 		$investment_id = filter_input( INPUT_GET, 'investment_id' );
-		if ( !empty( investment_id ) ) {
+		if ( !empty( $investment_id ) ) {
 			$this->current_investment = new WDGInvestment( $investment_id );
 		}
 	}
