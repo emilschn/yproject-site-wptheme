@@ -75,11 +75,10 @@ $estimated_turnover = $campaign->estimated_turnover();
 				<?php endif; ?>                               
 			</div>
                         
-		<?php if (is_user_logged_in()): ?>
 			<div class="project-rewards-alert">
 				<?php _e("Rendement vis&eacute; :", "yproject"); ?> 
 				<span class="info-user">
-					+ <span class="roi_percent_total">...</span> % <?php echo __("en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>
+					+ <span class="roi_percent_total">...</span> % <?php echo __("(brut) en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>
 					(<?php _e("soit", 'yproject'); ?> x<span class="roi_ratio_on_total">...</span> <?php echo __("en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>)
 				</span><br />
 
@@ -89,7 +88,8 @@ $estimated_turnover = $campaign->estimated_turnover();
 				</span>
 			</div>
 
-			<?php if ($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
+		<?php if ($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
+			<?php if (is_user_logged_in()): ?>
 				<div class="align-center">
 					<br />
 					<input type="submit" value="<?php _e("Investir", "yproject"); ?>" class="button red" />
@@ -97,7 +97,19 @@ $estimated_turnover = $campaign->estimated_turnover();
 					<input type="hidden" name="invest_start" value="1" />
 				</div>
 			</form>
+			<?php else: ?>
+				<?php
+				$page_invest = get_page_by_path('investir');
+				$campaign_id_param = '?campaign_id=' . $campaign->ID;
+				$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
+				?>
+				<div class="align-center">
+					<br />
+					<button class="button red wdg-button-lightbox-open" data-lightbox="connexion" 
+							data-redirect="<?php echo $invest_url; ?>"><?php _e( "Investir", 'yproject' ); ?></button>
+				</div>
 			<?php endif; ?>
+			<br />
 		<?php endif; ?>
 	    
 	    

@@ -566,8 +566,8 @@ div#content.version-3 div.project-rewards-content div.project-rewards-alert span
 	font-style: italic;
 	font-size: 11px;
 }
-div#content.version-3 div.project-rewards-content input.button.red {
-        width: 288px;
+div#content.version-3 div.project-rewards-content .button.red {
+	width: 288px;
 	padding: 20px 80px;
 	font-size: 12pt;
 	font-weight: bold;
