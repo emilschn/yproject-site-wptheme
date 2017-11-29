@@ -162,14 +162,18 @@
 		background: #FFF;
 	}
 	
-	body.home-page .wdg-component-projects-preview .block-projects {
-		width: 960px;
+	body.home section.project-stats > div div.left {
+		width: 100%;
+		margin-bottom: 25px;
+		margin-left: 0px;
+		text-align: center;
 	}
-	body.home-page .wdg-component-projects-preview .block-projects .project-container {
-		display: inline-block;
+	body.home section.project-stats > div div.left img {
+		margin-right: 0px;
+		float: none;
 	}
-	body.home-page .wdg-component-projects-preview .block-projects .project-container .project-framed {
-		position: absolute;         
+	body.home section.project-stats > div div.left > span {
+		display: block;
 	}
         
 	#home-video .home_video .video-container, .home_video .button-video {

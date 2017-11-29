@@ -5,8 +5,8 @@ $template_engine->set_controler( new WDG_Page_Controler_ProjectList() );
 class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	
 	private $slider;
-	private static $nb_query_campaign_funded = 30;
 	
+	private static $nb_query_campaign_funded = 40;
 	private static $stats_html_key = 'projectlist-projects-stats';
 	private static $stats_html_duration = 86400; // 24 heures de cache
 	private static $stats_html_version = 2;
@@ -70,7 +70,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	private function prepare_stats() {
 		$this->stats_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$stats_html_key, WDG_Page_Controler_ProjectList::$stats_html_version );
 		if ( empty( $this->stats_html ) ) {
-			$project_list_funded = ATCF_Campaign::get_list_funded( WDG_Page_Controler_ProjectList::$nb_query_campaign_funded );
+			$project_list_funded = ATCF_Campaign::get_list_funded( WDG_Page_Controler_ProjectList::$nb_query_campaign_funded, '', true );
 			$count_amount = 0;
 			$people_list = array();
 			$count_projects = 0;
