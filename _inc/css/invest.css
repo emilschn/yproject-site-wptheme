@@ -163,6 +163,9 @@ div#content div#contract-intro img {
 	margin-right: 20px;
 	margin-bottom: 20px;
 }
+div#content div#contract-intro p {
+	margin-left: 170px;
+}
 div#content div#contract-preview {
 	height: 400px;
 	overflow: scroll;
@@ -180,6 +183,10 @@ div#content #field-confirm-subscription label {
 		width: 100px;
 		margin-right: 5px;
 		margin-bottom: 5px;
+	}
+	
+	div#content div#contract-intro p {
+		margin-left: 105px;
 	}
 }
 
