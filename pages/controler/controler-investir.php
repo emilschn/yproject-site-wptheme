@@ -218,7 +218,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 				
 			// Chargement formulaire saisie montant, si rien en cours
 			default:
-				ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> START >> WDG_Form_Invest_Input::$name PREVIOUS' );
+				ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> START >> WDG_Form_Invest_Input::$name' );
 				$this->form = new WDG_Form_Invest_Input( $this->current_campaign );
 				break;
 		}
