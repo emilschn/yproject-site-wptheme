@@ -34,7 +34,7 @@ body input, body select {
 h2.standard {
     text-align: center;
     margin: 0;
-    padding: 20px 0px;
+    padding: 40px 0px;
     font-family: Trebuchet MS, sans-serif;
     text-transform: uppercase;
     font-size: 25pt;
@@ -712,10 +712,7 @@ footer > .footer-container > div > div.aligncenter {
 body.home section.project-stats {
 	color: #FFFFFF;
 	background: #333333;
-	padding-bottom: 35px;
-}
-body.home section.project-stats h2 {
-	padding: 35px 0px;
+	padding-bottom: 40px;
 }
 body.home section.project-stats > div {
 	width: -webkit-calc(100% - 20px);
@@ -752,11 +749,11 @@ body.home section.project-stats > div div.left span span {
 #home-video #video-content{
     background-color: #E1E3E2;
     margin-top: 40px;
+	padding-bottom: 40px;
     max-width: 100%;
     background-image: url("../../images/header-video-nb.png");
     background-position: center center;
     background-repeat: no-repeat;
-    padding: 2%;
     text-align: center;
 }
 @media screen and (max-width: 580px) {
