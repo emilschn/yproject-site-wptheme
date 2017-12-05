@@ -37,9 +37,19 @@ var WDGProjectViewer = (function($) {
 					"slow"
 				); 
 			});
+			
 			$("div#content.version-3 div.project-banner div.project-banner-title form select").change(function() {
 				$(this).parent().submit();
 			});
+			
+			if ( $( 'div#project-banner-picture .video-element iframe' ).length > 0 && $( document ).width() < 997 ) {
+				var nWidthIframe = $( 'div#project-banner-picture .video-element iframe' ).attr( 'width' );
+				var nWidth = $( 'div#project-banner-picture .video-element iframe' ).width();
+				var nCoef = nWidthIframe / nWidth;
+				var nHeight = $( 'div#project-banner-picture .video-element iframe' ).attr( 'height' );
+				$( 'div#project-banner-picture .video-element iframe' ).height( nHeight / nCoef );
+			}
+			
 			$("a.update-follow").click(function(e) {
 				e.preventDefault();
 				if ($(this).data("following") == '1') {
