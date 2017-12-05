@@ -103,7 +103,32 @@ $declaration_message = $declaration->get_message();
 			<input type="submit" name="payment_card" class="button red" value="<?php _e('Payer par carte', 'yproject'); ?>" />
 		</form>
 		<br />
-
+		
+		<?php
+		$saved_mandates_list = $organization_obj->get_lemonway_mandates();
+		$last_mandate_status = '';
+		if ( !empty( $saved_mandates_list ) ) {
+			$last_mandate = end( $saved_mandates_list );
+			$last_mandate_status = $last_mandate[ "S" ];
+		}
+		?>
+		<?php if ( $last_mandate_status == 0 ): ?>
+			<hr />
+			<?php _e( "Afin de pouvoir payer par pr&eacute;l&eacute;vement automatique :", 'yproject' ); ?><br /><br />
+			<form action="<?php echo admin_url( 'admin-post.php?action=organization_sign_mandate'); ?>" method="post" class="align-center">
+				<input type="hidden" name="organization_id" value="<?php echo $organization_obj->get_wpref(); ?>" />
+				<button type="submit" class="button red"><?php _e( "Je signe l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
+			</form>
+			<br />
+		<?php elseif ( $last_mandate_status == 5 && $last_mandate_status == 6 ): ?>
+			<hr />
+			<form action="" method="POST" enctype="">
+				<input type="hidden" name="action" value="proceed_roi" />
+				<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
+				<input type="submit" name="payment_mandate" class="button red" value="<?php _e( "Payer par pr&eacute;l&eacute;vement automatique", 'yproject' ); ?>" />
+			</form>
+			<br />
+		<?php endif; ?>
 
 		<?php if ( $declaration->can_pay_with_wire() || $is_admin ): ?>
 		<hr />
