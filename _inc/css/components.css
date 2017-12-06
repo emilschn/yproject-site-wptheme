@@ -842,6 +842,10 @@ body input[type=text], body input[type=email], body select {
 	width: 100%;
 }
 
+.db-form.v3 .field div.field-description {
+	font-size: 14px;
+	text-align: justify;
+}
 .db-form.v3 .field span.field-error {
 	display: none;
 	color: #FF0000;
