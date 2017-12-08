@@ -111,6 +111,10 @@ function print_informations_page()
 				if ( $terms_type ) {
 					$term_type_id = $terms_type[0]->term_id;
 				}
+                $terms_partners = get_terms('download_category', array('slug' => 'partners', 'hide_empty' => false));
+				if ( $terms_partners ) {
+					$terms_partners_id = $terms_partners[0]->term_id;
+				}
                 ?>
 
                 <div class="field">
@@ -149,6 +153,21 @@ function print_informations_page()
 							array(
 								'taxonomy' => 'download_category',
 								'descendants_and_self' => $term_type_id,
+								'checked_ontop' => false
+						) );
+					?></span>
+				</div>
+				<?php endif; ?>
+
+				<?php if ( $terms_partners ): ?>
+                <div class="field">
+					<label for="partners"><?php _e("Partenaires", 'yproject'); ?></label>
+					<span class="field-value" data-type="multicheck" data-id="new_project_partners"><?php
+						wp_terms_checklist(
+							$campaign_id,
+							array(
+								'taxonomy' => 'download_category',
+								'descendants_and_self' => $terms_partners_id,
 								'checked_ontop' => false
 						) );
 					?></span>
