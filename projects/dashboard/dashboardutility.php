@@ -97,7 +97,7 @@ class DashboardUtility
 
         $type = $params["type"];
         $placeholder=$params["placeholder"];
-        if(empty($placeholder) && ($type=='date' || $type=='datetime' )){$placeholder="aaaa-mm-jj";}
+        if(empty($placeholder) && ($type=='date' || $type=='datetime' )){$placeholder="jj/mm/yyyy";}
         $prefix=$params["prefix"];
         $suffix=$params["suffix"];
 
@@ -257,7 +257,7 @@ class DashboardUtility
                             . 'class="adddatepicker ' .$fillbubble_class.$icon_class. '" '
                             . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
-                            . 'value="' . $initial_value->format('Y-m-d') . '" '
+                            . 'value="' . $initial_value->format('d/m/Y') . '" '
                             . '/>';
                         break;
                     case 'datetime':

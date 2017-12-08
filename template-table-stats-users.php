@@ -33,6 +33,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 						<td>Entité morale</td>
 						<td>Sexe</td>
 						<td>Date de naissance</td>
+						<td>Adresse</td>
 						<td>CP</td>
 						<td>Ville</td>
 						<td>Nb projets suivis</td>
@@ -48,6 +49,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 						<td>Entité morale</td>
 						<td>Sexe</td>
 						<td>Date de naissance</td>
+						<td>Adresse</td>
 						<td>CP</td>
 						<td>Ville</td>
 						<td>Nb projets suivis</td>
@@ -79,6 +81,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 							<td><?php echo ( WDGOrganization::is_user_organization( $user->ID ) ? "OUI" : "NON" ); ?></td>
 							<td><?php if ($user->get('user_gender') == "female") { echo 'F'; } elseif ($user->get('user_gender') == "male") { echo 'M'; } ?></td>
 							<td><?php echo $user->get('user_birthday_year') . '-' . $user->get('user_birthday_month') . '-' . $user->get('user_birthday_day'); ?></td>
+							<td><?php echo $user->get('user_address'); ?></td>
 							<td><?php echo $user->get('user_postal_code'); ?></td>
 							<td><?php echo $user->get('user_city'); ?></td>
 							<td><?php echo $user_result->nb_follow; ?></td>

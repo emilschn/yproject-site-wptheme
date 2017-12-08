@@ -218,13 +218,15 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 				
 			// Chargement formulaire saisie montant, si rien en cours
 			default:
-				$amount_voted_on_campaign = FALSE;
+				$init_invest = FALSE;
 				if ( $this->current_campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ) {
 					$WDGCurrent_User = WDGUser::current();
-					$amount_voted_on_campaign = $WDGCurrent_User->get_amount_voted_on_campaign( $this->current_campaign->ID );
+					$init_invest = $WDGCurrent_User->get_amount_voted_on_campaign( $this->current_campaign->ID );
+				} else {
+					$init_invest = filter_input( INPUT_GET, 'init_invest' );
 				}
 				ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> START >> WDG_Form_Invest_Input::$name' );
-				$this->form = new WDG_Form_Invest_Input( $this->current_campaign, $amount_voted_on_campaign );
+				$this->form = new WDG_Form_Invest_Input( $this->current_campaign, $init_invest );
 				break;
 		}
 		
