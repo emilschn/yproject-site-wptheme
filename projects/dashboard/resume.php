@@ -186,8 +186,7 @@ function print_resume_page()
                         </div>
                     </div>
 
-                <?php }
-                else if($status==ATCF_Campaign::$campaign_status_funded){ ?>
+                <?php } else if ( $status == ATCF_Campaign::$campaign_status_funded || $status == ATCF_Campaign::$campaign_status_archive ){ ?>
                     <div id="stats-funded">
                         <div class="half-card">
 							<?php

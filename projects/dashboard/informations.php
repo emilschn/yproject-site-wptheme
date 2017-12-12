@@ -111,6 +111,10 @@ function print_informations_page()
 				if ( $terms_type ) {
 					$term_type_id = $terms_type[0]->term_id;
 				}
+                $terms_partners = get_terms('download_category', array('slug' => 'partners', 'hide_empty' => false));
+				if ( $terms_partners ) {
+					$terms_partners_id = $terms_partners[0]->term_id;
+				}
                 ?>
 
                 <div class="field">
@@ -149,6 +153,21 @@ function print_informations_page()
 							array(
 								'taxonomy' => 'download_category',
 								'descendants_and_self' => $term_type_id,
+								'checked_ontop' => false
+						) );
+					?></span>
+				</div>
+				<?php endif; ?>
+
+				<?php if ( $terms_partners ): ?>
+                <div class="field">
+					<label for="partners"><?php _e("Partenaires", 'yproject'); ?></label>
+					<span class="field-value" data-type="multicheck" data-id="new_project_partners"><?php
+						wp_terms_checklist(
+							$campaign_id,
+							array(
+								'taxonomy' => 'download_category',
+								'descendants_and_self' => $terms_partners_id,
 								'checked_ontop' => false
 						) );
 					?></span>
@@ -508,6 +527,17 @@ function print_informations_page()
 				if ( $is_admin ) {
 
 					DashboardUtility::create_field(array(
+						"id"			=> "new_platform_commission",
+						"type"			=> "number",
+						"label"			=> "Commission de la plateforme",
+						"value"			=> $campaign->platform_commission(),
+						"suffix"		=> "<span>&nbsp;% TTC</span>",
+						"editable"		=> $is_admin,
+						"visible"		=> $is_admin,
+						"admin_theme"	=> true
+					));
+
+					DashboardUtility::create_field(array(
 						"id"			=> "new_maximum_profit",
 						"type"			=> "select",
 						"label"			=> "Gain maximum",
@@ -750,6 +780,14 @@ function print_informations_page()
             <ul class="errors">
 
             </ul>
+			
+			<?php if ( $is_admin ): // A supprimer ?>
+			<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+			<div class="field admin-theme align-center">
+				<a href="<?php echo $campaign->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red">Attestation de lev&eacute;e de fonds</a>
+			</div>
+			<?php endif; ?>
+			<?php endif; ?>
 			
 			<?php if ( $is_admin ): ?>
 			<form action="<?php echo admin_url( 'admin-post.php?action=generate_contract_files'); ?>" method="post" id="contract_files_generate_form" class="field admin-theme">
