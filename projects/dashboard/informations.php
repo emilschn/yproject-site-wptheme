@@ -527,6 +527,17 @@ function print_informations_page()
 				if ( $is_admin ) {
 
 					DashboardUtility::create_field(array(
+						"id"			=> "new_platform_commission",
+						"type"			=> "number",
+						"label"			=> "Commission de la plateforme",
+						"value"			=> $campaign->platform_commission(),
+						"suffix"		=> "<span>&nbsp;% TTC</span>",
+						"editable"		=> $is_admin,
+						"visible"		=> $is_admin,
+						"admin_theme"	=> true
+					));
+
+					DashboardUtility::create_field(array(
 						"id"			=> "new_maximum_profit",
 						"type"			=> "select",
 						"label"			=> "Gain maximum",
@@ -769,6 +780,14 @@ function print_informations_page()
             <ul class="errors">
 
             </ul>
+			
+			<?php if ( $is_admin ): // A supprimer ?>
+			<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+			<div class="field admin-theme align-center">
+				<a href="<?php echo $campaign->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red">Attestation de lev&eacute;e de fonds</a>
+			</div>
+			<?php endif; ?>
+			<?php endif; ?>
 			
 			<?php if ( $is_admin ): ?>
 			<form action="<?php echo admin_url( 'admin-post.php?action=generate_contract_files'); ?>" method="post" id="contract_files_generate_form" class="field admin-theme">
