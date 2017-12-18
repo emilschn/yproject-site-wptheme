@@ -62,8 +62,8 @@ $estimated_turnover = $campaign->estimated_turnover();
 								<?php $height = 100 - round($value / $max_turnover * 100); ?>
 								<td>
 									<div><div style="height: <?php echo $height; ?>%;"><span class="roi_amount_user_container"><span class="roi_amount_user<?php echo $index; ?>">0</span> &euro;</span></div></div>
-																			<div class="roi_amount_base"></div>
-									<?php echo $i; ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $value; ?></span>
+									<div class="roi_amount_base"></div>
+									<?php echo ( $index + 1 ); ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $value; ?></span>
 								</td>
 								<?php $index++; endforeach; ?>
 							</tr>
