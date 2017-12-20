@@ -195,7 +195,7 @@ var WDGProjectVote = (function($) {
 				WDGProjectVote.refresh();
 				$( '#wdg-lightbox-vote .wdg-lightbox-padder' ).animate( { scrollTop: 0 }, "slow" );
 			} else {
-				if ( $( '#wdg-lightbox-vote #rate-project-3' ).is( ':checked' ) || $( '#wdg-lightbox-vote #invest-sum' ).val() > 0 ) {
+				if ( $( '#wdg-lightbox-vote #invest-sum' ).val() > 0 ) {
 					$( '#wdg-lightbox-user-details-vote' ).show();
 				} else {
 					$( '#wdg-lightbox-vote-simple-confirmation' ).show();

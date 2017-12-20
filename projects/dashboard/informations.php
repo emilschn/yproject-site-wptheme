@@ -67,15 +67,16 @@ function print_informations_page()
                     "value"	=> $post_campaign->post_title
                 ));
 
-                DashboardUtility::create_field(array(
-                    "id"	=> "new_backoffice_summary",
-                    "type"	=> "editor",
-                    "label"	=> "D&eacute;crivez-nous votre projet : ",
-                    "infobubble"	=> "Ces informations seront traitées de manière confidentielle",
-                    "value"	=> $campaign->backoffice_summary()
-                ));
-				
 				if ( $is_admin ) {
+					DashboardUtility::create_field(array(
+						"id"	=> "new_backoffice_summary",
+						"type"	=> "editor",
+						"label"	=> "Description lors de la création du projet",
+						"infobubble"	=> "Ces informations seront traitées de manière confidentielle",
+						"value"	=> $campaign->backoffice_summary(),
+						'admin_theme'	=> true
+					));
+				
 					DashboardUtility::create_field(array(
 						'id'			=> 'new_project_url',
 						'type'			=> 'text',
@@ -253,34 +254,38 @@ function print_informations_page()
                 <?php DashboardUtility::create_save_button("projectinfo_form"); ?>
             </form>
 			
-			<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
-				la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>
-			
-            <form action="<?php echo admin_url( 'admin-post.php?action=upload_information_files'); ?>" method="post" id="projectinfo_form" enctype="multipart/form-data">
-                <ul class="errors">
+			<?php if ( $is_admin ): ?>
+			<div class="field admin-theme">
+				<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
+					la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>
 
-                </ul>
+				<form action="<?php echo admin_url( 'admin-post.php?action=upload_information_files'); ?>" method="post" id="projectinfo_form" enctype="multipart/form-data">
+					<ul class="errors">
 
-				<?php
-				$file_name = $campaign->backoffice_businessplan();
-				if (!empty($file_name)) {
-					$file_name_exploded = explode('.', $file_name);
-					$ext = $file_name_exploded[count($file_name_exploded) - 1];
-					$file_name = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/kyc/' . $file_name;
-				}
-                DashboardUtility::create_field(array(
-                    "id"				=> "new_backoffice_businessplan",
-                    "type"				=> "upload",
-                    "label"				=> "Votre business plan",
-                    "infobubble"		=> "Ces informations seront traitées de manière confidentielle",
-                    "value"				=> $file_name,
-					"download_label"	=> $post_campaign->post_title . " - BP." . $ext
-                ));
-				
-                DashboardUtility::create_save_button("projectinfo_form"); ?>
-				
-				<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
-			</form>
+					</ul>
+
+					<?php
+					$file_name = $campaign->backoffice_businessplan();
+					if (!empty($file_name)) {
+						$file_name_exploded = explode('.', $file_name);
+						$ext = $file_name_exploded[count($file_name_exploded) - 1];
+						$file_name = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/kyc/' . $file_name;
+					}
+					DashboardUtility::create_field(array(
+						"id"				=> "new_backoffice_businessplan",
+						"type"				=> "upload",
+						"label"				=> "Votre business plan",
+						"infobubble"		=> "Ces informations seront traitées de manière confidentielle",
+						"value"				=> $file_name,
+						"download_label"	=> $post_campaign->post_title . " - BP." . $ext
+					));
+
+					DashboardUtility::create_save_button("projectinfo_form"); ?>
+
+					<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+				</form>
+			</div>
+			<?php endif; ?>
         </div>
 
         <div class="tab-content" id="tab-user-infos">
@@ -786,10 +791,38 @@ function print_informations_page()
 			<div class="field admin-theme align-center">
 				<a href="<?php echo $campaign->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red">Attestation de lev&eacute;e de fonds</a>
 			</div>
+			<br>
 			<?php endif; ?>
 			<?php endif; ?>
 			
 			<?php if ( $is_admin ): ?>
+				<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+
+				<?php $campaign_bill = new WDGCampaignBill( $campaign, WDGCampaignBill::$tool_name_quickbooks ); ?>
+				<?php if ( $campaign_bill->can_generate() ): ?>
+				<form action="<?php echo admin_url( 'admin-post.php?action=generate_campaign_bill'); ?>" method="post" id="generate_campaign_bill_form" class="field admin-theme">
+					/!\ <?php _e( "Ce bouton cr&eacute;era une nouvelle facture sur l'outil de facturation. Assurez-vous que cette facture n'a pas déjà été générée auparavant.", 'yproject' ); ?> /!\<br>
+					<?php _e( "Les informations suivantes seront utilis&eacute;es pour g&eacute;n&eacute;rer la facture :", 'yproject' ); ?>
+
+					<ul>
+						<li><?php echo $campaign_bill->get_line_title(); ?></li>
+						<li><?php echo nl2br( $campaign_bill->get_line_description() ); ?></li>
+						<li><?php echo nl2br( $campaign_bill->get_bill_description() ); ?></li>
+					</ul>
+					<br>
+					<div class="align-center">
+						<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+						<button class="button blue-pale"><?php _e( "G&eacute;n&eacute;rer la facture de la levée de fonds", 'yproject' ); ?></button>
+					</div>
+				</form>
+				<?php else: ?>
+				Vous ne pouvez pas encore générer la facture pour cette campagne.
+				Avez-vous vérifié que l'identifiant Quickbooks et la commission sont bien paramétrés ?
+				<?php endif; ?>
+
+				<hr>
+				<?php endif; ?>
+			
 			<form action="<?php echo admin_url( 'admin-post.php?action=generate_contract_files'); ?>" method="post" id="contract_files_generate_form" class="field admin-theme">
 				/!\ <?php _e( "Si vous choisissez de g&eacute;n&eacute;rer les contrats, cela remplacera les fichiers précédents :", 'yproject' ); ?> /!\
 				<br /><br />

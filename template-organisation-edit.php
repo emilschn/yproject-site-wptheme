@@ -123,6 +123,13 @@ get_header();
 									<option value="<?php echo $country_code; ?>" <?php if ($country_code == $selected_country) { echo 'selected="selected"'; } ?>><?php echo $country_name; ?></option>
 								<?php endforeach; ?>
 							</select><br />
+
+							<?php if ( $WDGUser_current->is_admin() ): ?>
+							<div class="field admin-theme">
+								<label for="org_id_quickbooks"><?php _e('ID Quickbooks', 'yproject'); ?></label>
+								<input type="text" name="org_id_quickbooks" value="<?php echo $organization_obj->get_id_quickbooks(); ?>" /><br>
+							</div>
+							<?php endif; ?>
 						
 						
 							<?php
