@@ -77,6 +77,14 @@ $organization_obj->submit_transfer_wallet_lemonway();
 				</select>
 				<br /><br />
 
+				<?php if ( $WDGUser_current->is_admin() ): ?>
+				<div class="field admin-theme">
+					<label for="org_id_quickbooks"><?php _e('ID Quickbooks', 'yproject'); ?></label>
+					<input type="text" name="org_id_quickbooks" value="<?php echo $organization_obj->get_id_quickbooks(); ?>" />
+				</div>
+				<br><br>
+				<?php endif; ?>
+
                 <h2 class="underlined"><?php _e('Si&egrave;ge social', 'yproject'); ?></h2>
                 <label for="org_address"><?php _e('Adresse', 'yproject'); ?>*</label>
                 <input type="text" name="org_address" value="<?php echo $organization_obj->get_address(); ?>" /><br />
