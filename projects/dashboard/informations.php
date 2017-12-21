@@ -798,7 +798,7 @@ function print_informations_page()
 			<?php if ( $is_admin ): ?>
 				<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
 
-				<?php $campaign_bill = new WDGCampaignBill( $campaign, WDGCampaignBill::$tool_name_quickbooks ); ?>
+				<?php $campaign_bill = new WDGCampaignBill( $campaign, WDGCampaignBill::$tool_name_quickbooks, WDGCampaignBill::$bill_type_crowdfunding_commission ); ?>
 				<?php if ( $campaign_bill->can_generate() ): ?>
 				<form action="<?php echo admin_url( 'admin-post.php?action=generate_campaign_bill'); ?>" method="post" id="generate_campaign_bill_form" class="field admin-theme">
 					/!\ <?php _e( "Ce bouton cr&eacute;era une nouvelle facture sur l'outil de facturation. Assurez-vous que cette facture n'a pas déjà été générée auparavant.", 'yproject' ); ?> /!\<br>
