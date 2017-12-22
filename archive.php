@@ -82,7 +82,7 @@ if (isset($_GET['delete_post_id'])){
 							<div class="post-content">
 								<?php echo '<h3 class="posttitle">'.$_POST['posttitle'].'</h3>';
 									echo '<p class="date">'.mysql2date( get_option( 'date_format' ), date_format(new DateTime(), 'Y-m-d H:i:s')).'</p>';
-									echo '<div class="entry">'.$_POST['postcontent'].'</div>';?>
+									echo '<div class="entry">'.nl2br($_POST['postcontent']).'</div>';?>
 							</div>
 						</div>
 					</div>

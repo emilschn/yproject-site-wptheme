@@ -3,16 +3,25 @@ class WDG_Page_Controler {
 	
 	private $db_cache_manager;
 	private $page_title;
+	private $page_description;
 	private $page_meta_keywords;
+	private $show_user_details_confirmation;
+	private $show_user_pending_preinvestment;
 	
 	public function __construct() {
 		ypcf_session_start();
 		date_default_timezone_set("Europe/Paris");
+		include_once( __DIR__ . '/../../functions/assets-version.php' );
 		global $stylesheet_directory_uri;
 		$stylesheet_directory_uri = get_stylesheet_directory_uri();
 		$this->db_cache_manager = new WDG_Cache_Plugin();
 		$this->init_page_title();
-		$this->init_page_meta_keywords();
+		$this->init_page_description();
+		
+		if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
+			$this->init_show_user_pending_preinvestment();
+			$this->init_show_user_details_confirmation();
+		}
 	}
 	
 	public function get_db_cached_elements( $key, $version ) {
@@ -32,7 +41,11 @@ class WDG_Page_Controler {
 	}
 	
 	private function init_page_title() {
-		if ( is_category() ) {
+		if ( is_home() || is_front_page() ) {
+			global $post;
+			$this->page_title = $post->post_title;
+			
+		} else if ( is_category() ) {
 			global $cat;
 			$this_category = get_category($cat);
 			$this_category_name = $this_category->name;
@@ -68,11 +81,84 @@ class WDG_Page_Controler {
 	}
 	
 	/**
+	 * Récupère la description de la page (champs personnalisé)
+	 */
+	public function get_page_description() {
+		return $this->page_description;
+	}
+	
+	private function init_page_description() {
+		$this->page_description = "Première plateforme française de royalty crowdfunding. Levez des fonds sans dilution de capital ni endettement.";
+		if ( have_posts() ){
+			while ( have_posts() ) {
+				the_post();
+				global $post;
+				$meta_description = get_post_meta( $post->ID, 'metadescription', TRUE );
+				if ( !empty( $meta_description ) ) {
+					$this->page_description = $meta_description;
+				}
+			}
+		}
+	}
+	
+	/**
 	 * Détermine si la navigation est visible ou non
 	 * @return boolean
 	 */
 	public function get_header_nav_visible() {
 		return ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' );
+	}
+	
+	
+//******************************************************************************
+	/**
+	 * Détermine si il est nécessaire d'afficher la lightbox de confirmation d'information à l'utilisateur
+	 */
+	public function init_show_user_details_confirmation() {
+		if ( !isset( $this->show_user_details_confirmation ) ) {
+			$this->show_user_details_confirmation = false;
+			if ( !$this->get_show_user_pending_preinvestment() && is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
+				$WDG_user_current = WDGUser::current();
+				$user_details_confirmation = $WDG_user_current->get_show_details_confirmation();
+				if ( $user_details_confirmation ) {
+					$this->show_user_details_confirmation = new WDG_Form_User_Details( $WDG_user_current->get_wpref(), $user_details_confirmation );
+					$WDG_user_current->update_last_details_confirmation();
+				}
+			}
+		}
+	}
+	
+	public function get_show_user_details_confirmation() {
+		return $this->show_user_details_confirmation;
+	}
+	
+	
+//******************************************************************************
+	public function init_show_user_pending_preinvestment() {
+		if ( !isset( $this->show_user_pending_preinvestment ) ) {
+			$this->show_user_pending_preinvestment = false;
+			global $post;
+			if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' && $post->post_name != 'terminer-preinvestissement' ) {
+				$WDG_user_current = WDGUser::current();
+				if ( $WDG_user_current->has_pending_preinvestments() ) {
+					$this->show_user_pending_preinvestment = $WDG_user_current->get_first_pending_preinvestment();
+				}
+				if ( !$this->show_user_pending_preinvestment ) {
+					$user_organizations_list = $WDG_user_current->get_organizations_list();
+					foreach ( $user_organizations_list as $organization_item ) {
+						$WDGUserOrga = new WDGUser( $organization_item->wpref );
+						if ( $WDGUserOrga->has_pending_preinvestments() ) {
+							$this->show_user_pending_preinvestment = $WDGUserOrga->get_first_pending_preinvestment();
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public function get_show_user_pending_preinvestment() {
+		return $this->show_user_pending_preinvestment;
 	}
 	
 }

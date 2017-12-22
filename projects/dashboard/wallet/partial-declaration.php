@@ -46,6 +46,12 @@ $declaration_message = $declaration->get_message();
 			<?php _e("Nous leur transmettrons la nouvelle lors du versement des royalties.", 'yproject'); ?><br /><br />
 			<textarea name="declaration-message"></textarea>
 			<br /><br />
+			
+			<?php _e( "Ces informations sont utilis&eacute;es exclusivement &agrave; des fins statistiques. WE DO GOOD s'engage &agrave; ne pas les communiquer &agrave; des tiers.", 'yproject' ); ?><br />
+			<?php _e( "Nombre de salari&eacute;s :", 'yproject' ); ?> <input type="number" name="employees-number" id="employees-number" value="0" /><br />
+			<?php _e( "Autres financements :", 'yproject' ); ?><br />
+			<textarea name="other-fundings"></textarea>
+			<br /><br />
 
 			<input type="hidden" name="action" value="save-turnover-declaration" />
 			<input type="hidden" name="declaration-id" value="<?php echo $declaration->id; ?>" />
@@ -86,6 +92,10 @@ $declaration_message = $declaration->get_message();
 		<b>Ce message sera envoyé à vos investisseurs :</b><br />
 		<?php echo $declaration->get_message(); ?><br /><br />
 		<?php endif; ?>
+		
+		Nombre de salari&eacute;s : <?php echo $declaration->employees_number; ?><br />
+		Autres financements :<br />
+		<?php echo $declaration->get_other_fundings(); ?><br /><br />
 
 		<form action="" method="POST" enctype="">
 			<input type="hidden" name="action" value="proceed_roi" />
@@ -93,9 +103,34 @@ $declaration_message = $declaration->get_message();
 			<input type="submit" name="payment_card" class="button red" value="<?php _e('Payer par carte', 'yproject'); ?>" />
 		</form>
 		<br />
+		
+		<?php
+		$saved_mandates_list = $organization_obj->get_lemonway_mandates();
+		$last_mandate_status = '';
+		if ( !empty( $saved_mandates_list ) ) {
+			$last_mandate = end( $saved_mandates_list );
+			$last_mandate_status = $last_mandate[ "S" ];
+		}
+		?>
+		<?php if ( $last_mandate_status == 0 ): ?>
+			<hr />
+			<?php _e( "Afin de pouvoir payer par pr&eacute;l&eacute;vement automatique :", 'yproject' ); ?><br /><br />
+			<form action="<?php echo admin_url( 'admin-post.php?action=organization_sign_mandate'); ?>" method="post" class="align-center">
+				<input type="hidden" name="organization_id" value="<?php echo $organization_obj->get_wpref(); ?>" />
+				<button type="submit" class="button red"><?php _e( "Je signe l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
+			</form>
+			<br />
+		<?php elseif ( $last_mandate_status == 5 && $last_mandate_status == 6 ): ?>
+			<hr />
+			<form action="" method="POST" enctype="">
+				<input type="hidden" name="action" value="proceed_roi" />
+				<input type="hidden" name="proceed_roi_id" value="<?php echo $declaration->id; ?>" />
+				<input type="submit" name="payment_mandate" class="button red" value="<?php _e( "Payer par pr&eacute;l&eacute;vement automatique", 'yproject' ); ?>" />
+			</form>
+			<br />
+		<?php endif; ?>
 
-
-		<?php if ( $declaration->can_pay_with_wire() ): ?>
+		<?php if ( $declaration->can_pay_with_wire() || $is_admin ): ?>
 		<hr />
 
 		Si vous souhaitez payer par virement bancaire, voici les informations dont vous aurez besoin :
@@ -156,6 +191,10 @@ $declaration_message = $declaration->get_message();
 		<b>Ce message sera envoyé à vos investisseurs :</b><br />
 		<?php echo $declaration->get_message(); ?><br /><br />
 		<?php endif; ?>
+		
+		Nombre de salari&eacute;s : <?php echo $declaration->employees_number; ?><br />
+		Autres financements :<br />
+		<?php echo $declaration->get_other_fundings(); ?><br /><br />
 
 		<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ): ?>
 		Nous attendons la réception de la somme par notre prestataire de paiement et procèderons au versement par la suite.
@@ -171,11 +210,15 @@ $declaration_message = $declaration->get_message();
 		<?php endif; ?>
 		
 		<?php else: ?>
-		Votre paiement de <?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
-		Le versement vers vos investisseurs est en cours.<br /><br />
-		<?php $declaration->make_payment_certificate(); ?>
-		<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue">Télécharger l'attestation de paiement</a>
-
+			<?php if ( $declaration->get_amount_with_commission() > 0 ): ?>
+			Votre paiement de <?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />
+			Le versement vers vos investisseurs est en cours.<br /><br />
+			<?php $declaration->make_payment_certificate(); ?>
+			<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue">Télécharger l'attestation de paiement</a>
+			<?php else: ?>
+			La cloture de votre déclaration est en cours.
+			<?php endif; ?>
+		
 		<?php if ($is_admin): ?>
 			<br /><br />
 			<div class="align-center admin-theme-block">
@@ -190,7 +233,7 @@ $declaration_message = $declaration->get_message();
 				<div class="loading-content"></div>
 				<div class="loading-form align-center hidden">
 					<form action="" method="POST">
-						<input type="checkbox" name="send_notifications" value="1" checked="checked" /> Envoyer un mail automatique aux investisseurs<br />
+						<input type="checkbox" name="send_notifications" value="1" <?php checked( !has_term( 'actifs', 'download_category', $campaign_id ) ); ?> /> Envoyer un mail automatique aux investisseurs (laisser décocher pour les projets d'actifs)<br />
 						<?php if ( $previous_remaining_amount > 0 ): ?>
 						<input type="checkbox" name="transfer_remaining_amount" value="1" /> Verser les reliquats précédents (<?php echo $previous_remaining_amount; ?> &euro;)<br />
 						<?php endif; ?>
@@ -243,6 +286,10 @@ $declaration_message = $declaration->get_message();
 		<b>Ce message sera envoyé à vos investisseurs :</b><br />
 		<?php echo $declaration->get_message(); ?><br /><br />
 		<?php endif; ?>
+		
+		Nombre de salari&eacute;s : <?php echo $declaration->employees_number; ?><br />
+		Autres financements :<br />
+		<?php echo $declaration->get_other_fundings(); ?><br /><br />
 
 		<?php if ( $declaration->get_turnover_total() > 0 ): ?>
 			Votre paiement de <?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro; a bien été effecuté le <?php echo $declaration->get_formatted_date( 'paid' ); ?>.<br />

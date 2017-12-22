@@ -90,24 +90,24 @@
 	footer a {
 		font-size: 20pt;
 	}
-	footer > .footer-container > section:nth-child(1) > div > h3 {
+	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle {
 		margin: 0px;
 		padding: 10px 0px;
 		border-top: 3px solid #E1E2E2;
 		font-size: 25pt;
 	}
-	footer > .footer-container > section:nth-child(1) > div > h3.border-hidden {
+	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.border-hidden {
 		border-top: 0px;
 	}
-	footer > .footer-container > section:nth-child(1) > div > h3.clickable {
+	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.clickable {
 		cursor: pointer;
 	}
-	footer > .footer-container > section:nth-child(1) > div > h3.clickable::after {
+	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.clickable::after {
 		content: "+";
 		right: 1%;
 		position: absolute;
 	}
-	footer > .footer-container > section:nth-child(1) > div > h3.clickable.expanded::after {
+	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.clickable.expanded::after {
 		content: "-";
 	}
 	
@@ -162,14 +162,18 @@
 		background: #FFF;
 	}
 	
-	body.home-page .wdg-component-projects-preview .block-projects {
-		width: 960px;
+	body.home section.project-stats > div div.left {
+		width: 100%;
+		margin-bottom: 25px;
+		margin-left: 0px;
+		text-align: center;
 	}
-	body.home-page .wdg-component-projects-preview .block-projects .project-container {
-		display: inline-block;
+	body.home section.project-stats > div div.left img {
+		margin-right: 0px;
+		float: none;
 	}
-	body.home-page .wdg-component-projects-preview .block-projects .project-container .project-framed {
-		position: absolute;         
+	body.home section.project-stats > div div.left > span {
+		display: block;
 	}
         
 	#home-video .home_video .video-container, .home_video .button-video {
@@ -257,8 +261,6 @@
 		width: -moz-calc(100% - 8px);
 		width: calc(100% - 8px);
 	}
-}
-@media screen and (max-width: 400px) {
 	#submenu-user {
 		width: -webkit-calc(100% - 8px);
 		width: -moz-calc(100% - 8px);
@@ -270,5 +272,17 @@
 	#cookies-alert button#cookies-alert-close {
 		display: block;
 		margin: 0 auto;
+	}
+}
+@media screen and (max-width: 450px) {
+	#label-validate-terms-check-register {
+		width: calc(100% - 30px);
+		margin-left: 30px;
+	}
+	#label-validate-terms-check-register input {
+		display: none;
+	}
+	#label-validate-terms-check-register input[type=checkbox]+span:after {
+		margin-left: -24px;
 	}
 }

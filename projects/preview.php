@@ -5,7 +5,7 @@ global $stylesheet_directory_uri, $project_id;
  *
  */
 $campaign = atcf_get_campaign( $project_id );
-$img = $campaign->get_home_picture_src();
+$img = $campaign->get_home_picture_src( TRUE, 'large' );
 $campaign_status = $campaign->campaign_status();
 $campaign_categories_str = $campaign->get_categories_str();
 

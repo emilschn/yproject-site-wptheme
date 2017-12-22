@@ -1,6 +1,6 @@
 jQuery(document).ready( function($) {
     WDGProjectViewer.init();
-    WDGProjectDescription.init();
+	WDGProjectVote.init();
 });
 
 
@@ -37,9 +37,19 @@ var WDGProjectViewer = (function($) {
 					"slow"
 				); 
 			});
+			
 			$("div#content.version-3 div.project-banner div.project-banner-title form select").change(function() {
 				$(this).parent().submit();
 			});
+			
+			if ( $( 'div#project-banner-picture .video-element iframe' ).length > 0 && $( document ).width() < 997 ) {
+				var nWidthIframe = $( 'div#project-banner-picture .video-element iframe' ).attr( 'width' );
+				var nWidth = $( 'div#project-banner-picture .video-element iframe' ).width();
+				var nCoef = nWidthIframe / nWidth;
+				var nHeight = $( 'div#project-banner-picture .video-element iframe' ).attr( 'height' );
+				$( 'div#project-banner-picture .video-element iframe' ).height( nHeight / nCoef );
+			}
+			
 			$("a.update-follow").click(function(e) {
 				e.preventDefault();
 				if ($(this).data("following") == '1') {
@@ -100,201 +110,21 @@ var WDGProjectViewer = (function($) {
 					var ratioOnInput = Math.round(amountOfGoalRound / inputVal * 100) / 100;
 					var ratioOnInputStr = isNaN(ratioOnInput) ? '...' : ratioOnInput.toString().replace('.', ',');
 					$("span.roi_ratio_on_total").text(ratioOnInputStr);
-//					var averageROI = Math.round((Math.pow(( (percentProject / 100) * totalTurnover / goalProject), (1 / nbYears)) - 1) * 100 * 100) / 100;
-//					var averageROIStr = averageROI.toString().replace('.', ',');
 					var roiPercentTotal = Math.round( ( ( amountOfGoalRound / inputVal ) - 1 ) * 100 * 100 ) / 100;
 					var roiPercentTotalStr = isNaN(roiPercentTotal) ? '...' : roiPercentTotal.toString().replace('.', ',');
 					$("span.roi_percent_total").text(roiPercentTotalStr);
 				}
 			});
-	
-			// Initialisation des divs
-	        $("#phase1").attr('style','display:block;');
-	        $("#phase2").attr('style','display:none;');
-		    $("#phase3").attr('style','display:none;');
-
-			$("#wdg-lightbox-voteform-validated").attr('style','display: block;');
-
-		 	var phase=0;
-
-			$("#hide_except_div1").attr("onclick","hide_except_div1()");
-			$("#hide_except_div2_phase1").attr("onclick","hide_except_div2()");
-			$("#hide_except_div2_phase3").attr("onclick","hide_except_div2()");
-			$("#hide_except_div3").attr("onclick","hide_except_div3()");
-			$("#vote-form-v3-link").attr("onclick","see_div1()");
-			$("#vote-form-v3-link-responsive").attr("onclick","see_div1()");
-			$("#hide_except_div1").attr("onclick","hide_except_div1()");
-			$("#hide_except_div1").attr("onclick","hide_except_div1()");
-			$("#go-block1").attr("onclick","hide_except_div1()");
-			$("#go-block2").attr("onclick","hide_except_div2()");
-			$("#go-block3").attr("onclick","hide_except_div3()");
-
-			hide_div = function(idok,id1,id2)
-			{
-				if(idok=='#phase1'){
- 					if($("#phase2").css('display') == 'none'){
-						phase=0;
-					}
-	  				if (1 > phase)
-	  				{
-						$(idok).attr('class','left');
-	  				}else{
-						$(idok).attr('class','right');
-	  				}
-	  				phase=1;    
-			       $('#go-block1').attr('style','color: #EA4F51 !important; font-size: 200%;');
-			       $('#go-block2').attr('style','color: #333333 !important;');
-			       $('#go-block3').attr('style','color: #333333 !important;');
-				};
-				if(idok == '#phase2'){
-	  				if (2 > phase)
-	  				{
-						$(idok).attr('class','left');
-	  				}else{
-						$(idok).attr('class','right');
-	  				}
-	  				phase = 2;
-			       $('#go-block1').attr('style','color: #333333 !important;');
-			       $('#go-block2').attr('style','color: #EA4F51 !important; font-size: 200%;');
-			       $('#go-block3').attr('style','color: #333333 !important; ');
-				};
-				if(idok == '#phase3'){
-	  				if (3 > phase)
-	  				{
-						$(idok).attr('class','left');
-	  				}else{
-						$(idok).attr('class','right');
-	  				}
-	  				phase = 3;		  				
-			       $('#go-block1').attr('style','color: #333333 !important;');
-			       $('#go-block2').attr('style','color: #333333 !important;');
-			       $('#go-block3').attr('style','color: #EA4F51 !important; font-size: 200%;');
-				};
-		    	$(idok).attr('style','display:block;');
-		    	$(id1).attr('style','display:none;');
-		    	$(id2).attr('style','display:none;');
-
-			};
-
-			see_div1 = function()
-			{
-				hide_div('#phase1','#phase2','#phase3');
-			};
-
-
-			hide_except_div1 = function()
-			{
-				function wait(){
-					hide_div('#phase1','#phase2','#phase3');
-			   	};
-				$("#phase2").attr('class','left_disappearance')
-				$("#phase3").attr('class','left_disappearance')
-			   	window.setTimeout( wait, 400 ); 
-			};
-
-			hide_except_div2 = function()
-			{
-				function wait(){
-					hide_div('#phase2','#phase1','#phase3');
-			   	};
-			   	if(phase==3)
-			  	 	$("#phase3").attr('class','left_disappearance')
-			   	if(phase==1)
-			  	 	$("#phase1").attr('class','right_disappearance')
-			   window.setTimeout( wait, 400 ); 
-			};
-
-			hide_except_div3 = function()
-			{
-				function wait(){
-					hide_div('#phase3','#phase1','#phase2');
-			   	};
-			   	$("#phase2").attr('class','right_disappearance')
-			   	$("#phase1").attr('class','right_disappearance')
-			   window.setTimeout( wait, 400 ); 
-			};
-
-
 			
-			display_range1 = function (newVal){
-				$('span#valBox1_1').attr('style','display:none;');
-				$('span#valBox1_2').attr('style','display:none;');
-				$('span#valBox1_3').attr('style','display:none;');
-				$('span#valBox1_4').attr('style','display:none;');
-				$('span#valBox1_5').attr('style','display:none;');
-				if(newVal==1)
-					$('span#valBox1_1').attr('style','display:inline-block;');
-				if(newVal==2)
-					$('span#valBox1_2').attr('style','display:inline-block;');
-				if(newVal==3)
-					$('span#valBox1_3').attr('style','display:inline-block;');
-				if(newVal==4)
-					$('span#valBox1_4').attr('style','display:inline-block;');
-				if(newVal==5)
-					$('span#valBox1_5').attr('style','display:inline-block;');
-			};
-
-
-			display_range2 = function (newVal){
-				$('span#valBox2_1').attr('style','display:none;');
-				$('span#valBox2_2').attr('style','display:none;');
-				$('span#valBox2_3').attr('style','display:none;');
-				$('span#valBox2_4').attr('style','display:none;');
-				$('span#valBox2_5').attr('style','display:none;');
-				if(newVal==1)
-					$('span#valBox2_1').attr('style','display:inline-block;');
-				if(newVal==2)
-					$('span#valBox2_2').attr('style','display:inline-block;');
-				if(newVal==3)
-					$('span#valBox2_3').attr('style','display:inline-block;');
-				if(newVal==4)
-					$('span#valBox2_4').attr('style','display:inline-block;');
-				if(newVal==5)
-					$('span#valBox2_5').attr('style','display:inline-block;');
-			};
-
-
-			display_range3 = function(newVal){
-				$('span#valBox3_1').attr('style','display:none;');
-				$('span#valBox3_2').attr('style','display:none;');
-				$('span#valBox3_3').attr('style','display:none;');
-				$('span#valBox3_4').attr('style','display:none;');
-				$('span#valBox3_5').attr('style','display:none;');
-				if(newVal==1)
-					$('span#valBox3_1').attr('style','display:inline-block;');
-				if(newVal==2)
-					$('span#valBox3_2').attr('style','display:inline-block;');
-				if(newVal==3)
-					$('span#valBox3_3').attr('style','display:inline-block;');
-				if(newVal==4)
-					$('span#valBox3_4').attr('style','display:inline-block;');
-				if(newVal==5)
-					$('span#valBox3_5').attr('style','display:inline-block;');
-			};
-
-
-			display_range4 = function(newVal){
-				$('span#valBox4_1').attr('style','display:none;');
-				$('span#valBox4_2').attr('style','display:none;');
-				$('span#valBox4_3').attr('style','display:none;');
-				$('span#valBox4_4').attr('style','display:none;');
-				$('span#valBox4_5').attr('style','display:none;');
-				if (newVal == 1){
-					$('span#valBox4_1').attr('style','display:inline-block;');
-				};
-				if (newVal == 2){
-					$('span#valBox4_2').attr('style','display:inline-block;');
-				};					
-				if (newVal == 3){
-					$('span#valBox4_3').attr('style','display:inline-block;');
-				};	
-				if (newVal == 4){
-					$('span#valBox4_4').attr('style','display:inline-block;');
-				};
-				if (newVal == 5){
-					$('span#valBox4_5').attr('style','display:inline-block;');
-				};
-			};
+			if ( $( '#wdg-lightbox-project-warning button.close' ).length > 0 ) {
+				$( '#wdg-lightbox-project-warning button.close' ).click( function() {
+					var date = new Date();
+					var days = 10;
+					date.setTime(date.getTime()+(days*24*60*60*1000));
+					var expires = "; expires="+date.toGMTString();
+					document.cookie = "hideprojectwarning=1"+expires+"; path=/";
+				} );
+			}
 
 		},
 		
@@ -313,10 +143,85 @@ var WDGProjectViewer = (function($) {
     
 })(jQuery);
 
-//TODO : utiliser pour supprimer de common.js à terme
-var WDGProjectDescription = (function($) {
+var WDGProjectVote = (function($) {
 	return {
+		currentSlide: 0,
+		minSlide: 1,
+		maxSlide: 3,
 		init: function() {
+			if ( $( 'div#vote-form' ).length > 0 ) {
+				$( 'div#vote-form div#vote-form-buttons button.previous' ).click( function( e ) {
+					e.preventDefault();
+					WDGProjectVote.slidePrevious();
+				} );
+				$( 'div#vote-form div#vote-form-buttons button.next' ).click( function( e ) {
+					e.preventDefault();
+					WDGProjectVote.slideNext();
+				} );
+			}
+		},
+		
+		slidePrevious: function() {
+			WDGProjectVote.currentSlide = Math.max( WDGProjectVote.minSlide, WDGProjectVote.currentSlide - 1 );
+			WDGProjectVote.refresh();
+		},
+		
+		slideNext: function() {
+			WDGProjectVote.currentSlide = Math.min( WDGProjectVote.maxSlide, WDGProjectVote.currentSlide + 1 );
+			WDGProjectVote.refresh();
+		},
+		
+		refresh: function() {
+			$( 'div.vote-form-slide' ).hide();
+			$( 'div#vote-form-slide' + WDGProjectVote.currentSlide ).show();
+			
+			$( 'div#vote-form div#vote-form-buttons button' ).hide();
+			if ( WDGProjectVote.currentSlide > WDGProjectVote.minSlide ) {
+				$( 'div#vote-form div#vote-form-buttons button.previous' ).show();
+			}
+			if ( WDGProjectVote.currentSlide < WDGProjectVote.maxSlide ) {
+				$( 'div#vote-form div#vote-form-buttons button.next' ).show();
+			}
+			if ( WDGProjectVote.currentSlide === WDGProjectVote.maxSlide ) {
+				$( 'div#vote-form div#vote-form-buttons button.save' ).show();
+			}
+			$( '#wdg-lightbox-vote .wdg-lightbox-padder' ).animate( { scrollTop: 0 }, "slow" );
+		},
+		
+		saveVoteCallback: function( result ) {
+			var jsonResult = JSON.parse( result );
+			if ( jsonResult.errors.length > 0 ) {
+				WDGProjectVote.currentSlide = jsonResult.gotoslide;
+				WDGProjectVote.refresh();
+				$( '#wdg-lightbox-vote .wdg-lightbox-padder' ).animate( { scrollTop: 0 }, "slow" );
+			} else {
+				if ( $( '#wdg-lightbox-vote #invest-sum' ).val() > 0 ) {
+					$( '#wdg-lightbox-user-details-vote' ).show();
+				} else {
+					$( '#wdg-lightbox-vote-simple-confirmation' ).show();
+					setTimeout( function() { location.reload( true ) }, 1000 );
+				}
+				$( '#wdg-lightbox-vote' ).remove();
+				$( 'a[href="#vote"]' ).click( function( e ) { e.preventDefault(); } );
+				$( 'a[href="#vote"]' ).text( $( 'a[href="#vote"]' ).data( 'thankyoumsg' ) );
+				$( 'a[href="#vote"]' ).addClass( 'disabled' );
+				$( 'a[href="#vote"]' ).removeClass( 'wdg-button-lightbox-open' );
+				$( 'a[href="#vote"]' ).data( 'lightbox', '' );
+				$( 'a[href="#vote"]' ).attr( 'href', '#' );
+			}
+		},
+		
+		saveVoteUserCallback: function( result ) {
+			var jsonResult = JSON.parse( result );
+			if ( jsonResult.errors == undefined || jsonResult.errors.length == 0 ) {
+				$( '#wdg-lightbox-user-details-vote' ).remove();
+				setTimeout( function() {
+					var currentAddress = location.href;
+					var newUrl = currentAddress.split( '#' )[ 0 ];
+					window.location = newUrl + '#vote-share';
+					location.reload( true );
+				}, 1000 );
+			}
 		}
 	};
     

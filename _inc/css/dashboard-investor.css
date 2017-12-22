@@ -48,3 +48,9 @@ body.template-mon-compte div#container div#content main {
 	background: #F4F4F4;
 	padding: 10px 20px;
 }
+
+@media screen and (max-width: 900px) {
+	body.template-mon-compte div#container div#content nav, body.template-mon-compte div#container div#content main {
+		display: block;
+	}
+}

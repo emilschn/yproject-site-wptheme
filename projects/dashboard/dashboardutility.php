@@ -97,7 +97,7 @@ class DashboardUtility
 
         $type = $params["type"];
         $placeholder=$params["placeholder"];
-        if(empty($placeholder) && ($type=='date' || $type=='datetime' )){$placeholder="aaaa-mm-jj";}
+        if(empty($placeholder) && ($type=='date' || $type=='datetime' )){$placeholder="jj/mm/yyyy";}
         $prefix=$params["prefix"];
         $suffix=$params["suffix"];
 
@@ -257,7 +257,7 @@ class DashboardUtility
                             . 'class="adddatepicker ' .$fillbubble_class.$icon_class. '" '
                             . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
-                            . 'value="' . $initial_value->format('Y-m-d') . '" '
+                            . 'value="' . $initial_value->format('d/m/Y') . '" '
                             . '/>';
                         break;
                     case 'datetime':
@@ -266,7 +266,7 @@ class DashboardUtility
                             . 'class="adddatepicker datetime ' .$fillbubble_class.$icon_class. '" '
                             . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
-                            . 'value="' . $initial_value->format('Y-m-d') . '" '
+                            . 'value="' . $initial_value->format('d/m/Y') . '" '
                             . '/>';
 
                         $text_field .= '<select class="timepicker" ' . 'id="' . $id . '_h">';
@@ -346,8 +346,8 @@ class DashboardUtility
                         }
                         break;
 					case 'upload':
-						if ( !empty($value) ) {
-							$text_field .= '<a href="'.$value.'">' .__("T&eacute;l&eacute;charger", 'yproject'). '</a>';
+						if ( !empty($initial_value) ) {
+							$text_field .= '<a href="'.$initial_value.'">' .__("T&eacute;l&eacute;charger", 'yproject'). '</a>';
 						} else {
 							$text_field .= __("En attente d'envoi", 'yproject');
 						}

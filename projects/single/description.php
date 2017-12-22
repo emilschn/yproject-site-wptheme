@@ -31,8 +31,6 @@ $implementation_content = apply_filters('the_content', $implementation);
 	<h2 class="standard">/ <?php _e('Pr&eacute;sentation', 'yproject'); ?> /</h2>
 	
 	<div class="center">
-    
-	<?php if (is_user_logged_in() || $campaign->funding_type() == 'fundingdonation') : ?>
 
 		<div class="project-description-item" data-content="description">
 			<div class="projects-desc-content-picto">
@@ -141,18 +139,5 @@ $implementation_content = apply_filters('the_content', $implementation);
 			</div>
 		</div>
 		<?php endif; ?>
-
-	<?php else: ?>
-
-		<div class="align-center">
-			<p>
-				<?php _e("Investir est une aventure risqu&eacute;e, c'est pourquoi WE DO GOOD est une plateforme &agrave; acc&egrave;s progressif.", 'yproject'); ?><br />
-				<?php _e("Inscrivez-vous pour visualiser l'int&eacute;gralit&eacute; du projet !", 'yproject'); ?>
-			</p>
-			<a href="#register" id="register" class="wdg-button-lightbox-open button red" data-lightbox="register" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Inscription", 'yproject'); ?></a>
-			<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button red" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Connexion", 'yproject'); ?></a>
-		</div>
-
-	<?php endif; ?>
 	</div>
 </div>

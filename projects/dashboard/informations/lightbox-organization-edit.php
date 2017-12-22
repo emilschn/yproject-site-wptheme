@@ -40,6 +40,9 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 <label for="org_email"><?php _e('E-mail de contact', 'yproject'); ?>*</label>
                 <input type="text" name="org_email" value="<?php echo $organization_obj->get_email(); ?>" /><br />
 
+                <label for="org_representative_function"><?php _e("Fonction du repr&eacute;sentant", 'yproject'); ?>*</label>
+                <input type="text" name="org_representative_function" value="<?php echo $organization_obj->get_representative_function(); ?>" /><br />
+
                 <label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?>*</label>
                 <input type="text" name="org_description" value="<?php echo $organization_obj->get_description(); ?>" /><br />
 
@@ -61,6 +64,19 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 <label for="org_vat"><?php _e('Num&eacute;ro de TVA', 'yproject'); ?></label>
                 <input type="text" name="org_vat" value="<?php echo $organization_obj->get_vat(); ?>" /><br />
 
+				<label for="org_fiscal_year_end_month"><?php _e("L'exerice comptable se termine &agrave; la fin du mois", 'yproject'); ?></label>
+				<?php
+				$months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' );
+				$count_months = count( $months );
+				?>
+				<select name="org_fiscal_year_end_month">
+					<option value=""></option>
+					<?php for ( $i = 0; $i < $count_months; $i++ ): ?>
+					<option value="<?php echo ( $i + 1 ); ?>" <?php selected( $organization_obj->get_fiscal_year_end_month(), $i + 1 ); ?>><?php _e( $months[ $i ] ); ?></option>
+					<?php endfor; ?>
+				</select>
+				<br /><br />
+
                 <h2 class="underlined"><?php _e('Si&egrave;ge social', 'yproject'); ?></h2>
                 <label for="org_address"><?php _e('Adresse', 'yproject'); ?>*</label>
                 <input type="text" name="org_address" value="<?php echo $organization_obj->get_address(); ?>" /><br />
@@ -74,7 +90,6 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 <label for="org_nationality"><?php _e('Pays', 'yproject'); ?>*</label>
                 <select name="org_nationality" id="org_nationality">
                         <?php 
-                        locate_template( array("country_list.php"), true );
                         global $country_list;
                         $selected_country = $organization_obj->get_nationality();
                         foreach ($country_list as $country_code => $country_name): ?>

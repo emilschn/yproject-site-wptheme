@@ -222,11 +222,6 @@
 		z-index: 20;
 	}
 	#invest-button .description-discover { margin-top: 22px !important; }
-	#vote-form.collapsed {
-		z-index: 10;
-		top: 325px !important;
-		width: 100%;
-	}
 	ul.secondary-menu {
 		list-style: none;
 		width: 200px;
@@ -250,23 +245,9 @@
 * INVESTMENT
 *******************************************************************************/
 	#invest_form { width: 90% !important; }
-	#invest-breadcrumb { padding: 30px 0px !important; }
-	#invest-breadcrumb img, .mangopay-image img { width: 320px; height: auto; }
 	.invest_part { width: 94% !important; padding: 10px 3% !important; }
 	.invest_part .label { width: auto !important; }
 	.invest_step1_generalities, .invest_step1_currentproject { margin: 2% !important; max-width: 98%; }
-
-	/* FRISE */
-	.invest-breadcrumb-item {
-		display: inline-block !important;
-		width: 12% !important;
-		margin:1% !important;
-	}
-	#invest-breadcrumb > div#mean-payment {
-		background-position: 49.1%top !important;
-		background-position: 49.1% top !important;
-	}
-	#invest-breadcrumb.breadcrumb-step-3 > div#mean-payment { background-position: 49.1% 114% !important; }
 
 /*******************************************************************************
 * CONNECTION
@@ -315,80 +296,5 @@
 	#cookies-alert button#cookies-alert-close {
 		display: block;
 		margin: 0 auto;
-	}
-}
-
-@media screen and  (min-width: 562px) and  (max-width: 767px){
-/*******************************************************************************
-* INVESTMENT
-*******************************************************************************/
-	/* FRISE */
-	.invest-breadcrumb-item {
-		font-size: 10px !important;
-	}
-	#invest-breadcrumb > div#input {
-		background-position: 8% top !important;
-	}
-	#invest-breadcrumb.breadcrumb-step-1 > div#input {
-		background-position: 8% 114% !important;
-	}
-	#invest-breadcrumb > div#confirm {
-		background-position: 30% top !important;
-	}
-	#invest-breadcrumb.breadcrumb-step-2 > div#confirm {
-		background-position: 30% 114% !important;
-	}
-	#invest-breadcrumb > div#return {
-		background-position: 70.8% top !important;
-	} 
-	#invest-breadcrumb.breadcrumb-step-4 > div#return {
-		background-position: 70.8% 114% !important;
-	}
-	#invest-breadcrumb > div#share {
-		background-position: 92% top !important;
-	}
-	#invest-breadcrumb.breadcrumb-step-5 > div#share {
-		background-position: 92% 114% !important;
-	}
-}
-
-
-@media screen and (max-width: 562px) {
-/*******************************************************************************
-* INVESTMENT
-*******************************************************************************/
-	/* FRISE */
-	.invest-breadcrumb-item {
-		font-size: 8px !important;
-	}
-	#invest-breadcrumb > div#input {
-		background-position: 12.1% top !important;
-	}
-	#invest-breadcrumb.breadcrumb-step-1 > div#input {
-		background-position: 12.1% 114% !important;
-	}
-	#invest-breadcrumb > div#share {
-		background-position: 89% top !important;
-	}
-	#invest-breadcrumb > div#confirm {
-		background-position: 31.5% top !important;
-	}
-	#invest-breadcrumb.breadcrumb-step-2 > div#confirm {
-		background-position: 31.5% 114% !important;
-	}
-	#invest-breadcrumb > div#return {
-		background-position: 70.7% top !important;
-	}   
-	#invest-breadcrumb > div#confirm {
-		background-position: 31.5% top !important;
-	}
-	#invest-breadcrumb.breadcrumb-step-4 > div#return {
-		background-position: 70.7% 114% !important;
-	}
-	#invest-breadcrumb > div#share {
-		background-position: 89% top !important;
-	}
-	#invest-breadcrumb.breadcrumb-step-5 > div#share {
-		background-position: 89% 114% !important;
 	}
 }

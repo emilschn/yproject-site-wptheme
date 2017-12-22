@@ -1,8 +1,9 @@
 <?php 
-	global $page_controler, $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user;
+	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user;
 	if ($WDG_cache_plugin == null) {
 		$WDG_cache_plugin = new WDG_Cache_Plugin();
 	}
+	$page_controler = WDG_Templates_Engine::instance()->get_controler();
 	
 	$project_list = array();
 	if (is_user_logged_in()) {
@@ -52,8 +53,6 @@
 			endif; ?>
 		<?php endif; ?>
 		
-		<meta name="keywords" content="<?php echo $page_controler->get_page_meta_keywords(); ?>" />
-		
 		<?php
 		//*******************
 		//CACHE HEAD
@@ -65,14 +64,13 @@
 		<link href="https://plus.google.com/+WedogoodCo" rel="publisher" />
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="Première plateforme de financement participatif en royalties (royalty crowdfunding). Entrepreneurs : levez des fonds sans diluer votre capital !" />
+		<meta name="description" content="<?php echo $page_controler->get_page_description(); ?>" />
 		
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
-		<![endif]--> 
-		<?php $version = '20170828'; ?>
-		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.min.css?d=<?php echo $version; ?>" type="text/css" media="screen" />
-		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=<?php echo $version; ?>" type="text/css" media="screen" />
+		<![endif]-->
+		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.min.css?d=<?php echo ASSETS_VERSION; ?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=<?php echo ASSETS_VERSION; ?>" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php
 			$cache_head = ob_get_contents();
@@ -191,7 +189,7 @@
 
 						<input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
 						<div class="submit-center" style="display: none;">             
-							<input type="submit" name="wp-submit" class="input_submit ok_valid" id="connect" value="OK"/>
+							<input type="submit" name="wp-submit" class="input_submit button red" id="connect" value="OK"/>
 							<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 							<input type="hidden" name="login-form" value="1" />
 						</div>   
@@ -236,7 +234,9 @@
 
 		<?php if (!is_user_logged_in()): ?>
 			<?php echo do_shortcode('[yproject_register_lightbox]'); ?>
+			<?php if ( !isset( $post->post_name ) || $post->post_name != 'connexion' ): ?>
 			<?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
+			<?php endif; ?>
 		
 		<?php elseif (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)): ?>
 			<?php $_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; ?>
@@ -268,6 +268,14 @@
 			</div>
 		<?php endif; ?>
 		<?php $_SESSION['subscribe_newsletter_sendinblue'] = false; ?>
+		<?php endif; ?>
+		
+		<?php if ( $page_controler->get_show_user_details_confirmation() ): ?>
+			<?php locate_template( array( 'common/lightbox/user-details-lightbox.php' ), true ); ?>
+		<?php endif; ?>
+		
+		<?php if ( $page_controler->get_show_user_pending_preinvestment() ): ?>
+			<?php locate_template( array( 'common/lightbox/pending-preinvestment-lightbox.php' ), true ); ?>
 		<?php endif; ?>
 		
 		<div id="container"> 

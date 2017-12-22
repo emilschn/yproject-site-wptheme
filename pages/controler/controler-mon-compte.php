@@ -1,6 +1,6 @@
 <?php
-global $page_controler;
-$page_controler = new WDG_Page_Controler_User_Account();
+$template_engine = WDG_Templates_Engine::instance();
+$template_engine->set_controler( new WDG_Page_Controler_User_Account() );
 
 class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	
@@ -17,6 +17,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		if (!is_user_logged_in()) {
 			wp_redirect( home_url( '/connexion' ) . '?redirect-page=mon-compte' );
 		}
+		WDGFormUsers::register_rib();
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
 		$this->init_current_user();
 		$this->init_project_list();

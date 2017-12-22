@@ -19,6 +19,9 @@ global $campaign_id
                 <label for="org_email"><?php _e('e-mail de contact', 'yproject'); ?>*</label>
                 <input type="text" name="org_email" value="<?php echo filter_input(INPUT_POST, 'org_email'); ?>" /><br />
 
+                <label for="org_representative_function"><?php _e("Fonction du repr&eacute;sentant", 'yproject'); ?>*</label>
+                <input type="text" name="org_representative_function" value="<?php echo filter_input(INPUT_POST, 'org_representative_function'); ?>" /><br />
+
                 <label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?>*</label>
                 <input type="text" name="org_description" value="<?php echo filter_input(INPUT_POST, 'org_description'); ?>" /><br />
 
@@ -45,6 +48,19 @@ global $campaign_id
                 <label for="org_vat"><?php _e('Num&eacute;ro de TVA', 'yproject'); ?>*</label>
                 <input type="text" name="org_vat" value="<?php echo filter_input(INPUT_POST, 'org_vat'); ?>" /><br />
 
+				<label for="org_fiscal_year_end_month"><?php _e("L'exerice comptable se termine &agrave; la fin du mois", 'yproject'); ?></label>
+				<?php
+				$months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' );
+				$count_months = count( $months );
+				?>
+				<select name="org_fiscal_year_end_month">
+					<option value=""></option>
+					<?php for ( $i = 0; $i < $count_months; $i++ ): ?>
+					<option value="<?php echo ( $i + 1 ); ?>" <?php selected( filter_input(INPUT_POST, 'orga_fiscal_year_end_month'), $i + 1 ); ?>><?php _e( $months[ $i ] ); ?></option>
+					<?php endfor; ?>
+				</select>
+				<br /><br />
+
                 <h2><?php _e('Si&egrave;ge social', 'yproject'); ?></h2>
                 <label for="org_address"><?php _e('Adresse', 'yproject'); ?>*</label>
                 <input type="text" name="org_address" value="<?php echo filter_input(INPUT_POST, 'org_address'); ?>" /><br />
@@ -58,7 +74,6 @@ global $campaign_id
                 <label for="org_nationality"><?php _e('Pays', 'yproject'); ?>*</label>
                 <select name="org_nationality" id="org_nationality">
                         <?php
-                        locate_template( array("country_list.php"), true );
                         global $country_list;
                         $selected_country = filter_input(INPUT_POST, 'org_nationality');
                         foreach ($country_list as $country_code => $country_name): ?>

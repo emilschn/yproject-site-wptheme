@@ -1,4 +1,6 @@
-<?php global $page_controler; ?>
+<?php
+$page_controler = WDG_Templates_Engine::instance()->get_controler();
+?>
 
 <nav>
 	

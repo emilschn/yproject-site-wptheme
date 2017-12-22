@@ -29,7 +29,7 @@ if ($organizations_list) {
 	</div>
 <?php endif; ?>
 
-<form id="newproject_form" class="db-form form-register" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>" <?php if (!is_user_logged_in()){ ?>style="display: none;"<?php } ?>>
+<form id="newproject_form" class="db-form v3 full form-register" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>" <?php if (!is_user_logged_in()){ ?>style="display: none;"<?php } ?>>
     <h2 style="text-align: center;"><?php _e('Lancement de campagne','yproject');?></h2>
 	
 	<?php
@@ -123,16 +123,13 @@ if ($organizations_list) {
         "label"		=> "Description du projet",
         "value"		=> "",
     ));
-
-    DashboardUtility::create_field(array(
-        "id"		=> "project-terms",
-        "type"		=> "check",
-        "label"		=> 'Je valide les <a href="'.home_url('/conditions-particulieres').'" target="_blank">conditions particuli&egrave;res</a>',
-        "value"		=> "",
-    ));
-
-
-    DashboardUtility::create_save_button('newProject', true, "Enregistrer", "Enregistrement en cours");
 	?>
+
+	<div class="align-left">
+	<label for="project-terms"><input type="checkbox" id="project-terms" name="project-terms" /><span></span> Je valide les <a href="'.home_url('/conditions-particulieres').'" target="_blank">conditions particuli&egrave;res</a></label><br />
+	</div>
+	<br /><br />
 	
+	<button class="button save red" type="submit"><?php _e( "Valider", 'yproject' ); ?></button>
+
 </form>

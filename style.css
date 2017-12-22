@@ -62,13 +62,13 @@ tbody {
 .text-white { color: #FFFFFF; }
 .text-green { color: #74BF43; }
 
-.errors, .invest_error {
+.errors {
     color: #FE494C;
     text-transform: none !important;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.success, .invest_success {
+.success {
     color: green;
 }
 
@@ -269,167 +269,6 @@ form.wdg-forms table input[type="text"].reward-text{
     max-width: 90%;
     min-width: 500px;
     margin: 0px;
-}
-
-/*******************************************************************************
-* LIGHTBOX
-*******************************************************************************/
-.wdg-lightbox {
-	background-color: rgba(0, 0, 0, 0.75);
-	top: 0px;
-	left: 0px;
-	position: fixed;
-	z-index: 4000;
-	width: 100%;
-	height: 100%;
-}
-
-.wdg-lightbox-click-catcher {
-	top: 0px;
-	left: 0px;
-	position: fixed;
-	z-index: 4001;
-	width: 100%;
-	height: 100%;
-}
-
-.wdg-lightbox .wdg-lightbox-padder {
-	position: relative;
-	max-width: 600px;
-	max-height: 80vh;
-	margin: 5vh auto;
-	padding: 50px;
-	background-color: #F2F2F2;
-	overflow-y: auto;
-	z-index: 4002;
-}
-
-.wdg-lightbox .wdg-widelightbox-padder {
-	position: relative;
-	max-width: 90%;
-	max-height: 80vh;
-	margin: 5vh auto;
-	padding: 20px;
-	background-color: #F2F2F2;
-	overflow-y: auto;
-	z-index: 4002;
-}
-.wdg-lightbox .wdg-lightbox-padder div.wdg-lightbox-msg-info {
-	text-align: center;
-}
-.wdg-lightbox .wdg-lightbox-padder > div {
-	background-color: #F2F2F2 !important;
-}
-
-.wdg-lightbox .wdg-lightbox-button-close {
-	position: absolute;
-	right: 0px;
-	margin-top: -45px;
-}
-.wdg-lightbox .wdg-lightbox-button-close a {
-	padding: 5px 20px;
-	background: none;
-	border: none;
-	font-size: 28pt;
-	color: #333333;
-	text-transform: lowercase;
-}
-
-#validate-terms .validate-terms-excerpt {
-    margin: 20px 0px;
-    max-height: 250px;
-    overflow-y: auto;
-    border: 1px solid #EEECED;
-    padding: 5px;
-}
-
-#validate-terms input {
-    text-align: center;
-    margin: 10px 0px;
-}
-
-#validate-terms > div > span {
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-#already-connected {
-	text-align: center;
-}
-
-.wdg-lightbox .warning {
-    text-align: justify;
-    margin: 10px 0px;
-}
-.wdg-lightbox .register-section {
-    margin: 15px 0px;
-    text-align: center;
-}
-.wdg-lightbox .register-section .g-recaptcha {
-	margin-bottom: 15px;
-}
-.wdg-lightbox .register-section .g-recaptcha div {
-	margin: auto;
-}
-
-.wdg-lightbox.timeout-lightbox {
-	background-color: transparent;
-	margin-top: 88px;
-}
-.wdg-lightbox.timeout-lightbox .wdg-lightbox-padder {
-	background-color: #333333;
-	color: #FFFFFF;
-}
-
-.wdg-lightbox .wdg-lightbox-padder > div.admin-block {
-	background-color: #EA4F51 !important;
-	border: 1px dotted #000;
-	padding: 10px;
-	margin-bottom: 5px;
-}
-.wdg-lightbox .wdg-lightbox-padder > div.admin-block h3 { margin: 5px auto; }
-.wdg-lightbox .wdg-lightbox-padder > div.admin-block label { display: inline-block; width: 140px; }
-
-.wdg-lightbox ul.errors {
-	list-style: none;
-	padding-left: 10px;
-	margin: 20px 0px;
-}
-
-#orgacreate_form input[name=org_capable] {
-	margin: 30px 5px 0;
-}
-
-/*******************************************************************************
-* LIGHTBOX - COURTS MESSAGES
-*******************************************************************************/
-.wdg-lightbox.msg-lightbox {
-	position: absolute;
-	text-align: center;
-	font-size: 12pt;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder {
-	top: 200px;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.valid-msg {
-	background-color: #8BC79C;
-	color: #FFFFFF;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.error-msg {
-	background-color: #EACDCB;
-	color: #333333;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder .wdg-lightbox-button-close {
-	background-color: transparent !important;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder .wdg-lightbox-button-close a {
-	font-size: 18pt;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.valid-msg .wdg-lightbox-button-close a {
-	color: #FFFFFF;
-}
-.wdg-lightbox.msg-lightbox .wdg-lightbox-padder.error-msg .wdg-lightbox-button-close a {
-	color: #333333;
 }
 
 /*******************************************************************************
@@ -1484,9 +1323,6 @@ form.wdg-forms table input[type="text"].reward-text{
 #wp-link .howto, #wp-link #search-panel, #wp-link #wp-link-close .screen-reader-text {
     display: none !important;
 }
-#project-description-title-padding {
-     clear: both;
-}
 .grey-triangle {
     position: relative;
     left: -5px;
@@ -1725,15 +1561,6 @@ form.wdg-forms table input[type="text"].reward-text{
     padding: 0px 10px;
 }
 
-#vote-form{
-    position: absolute;
-    top: -350px;
-    width: 340px;
-    min-height: 500px;
-    background-color: #F2F2F2;
-    z-index: -11;
-    text-align: center;
-}
 .ypvote-form {
     font-size: 12px;
     padding: 10px;
@@ -2249,192 +2076,6 @@ table.mceLayout {
 }
 
 /*******************************************************************************
-* INVEST PAGE
-*******************************************************************************/
-/***** COMMON *****/
-#template-single-campaign-invest { padding-top: 100px; }
-#template-single-campaign-invest h1 { text-align: center; }
-
-/***** STEP 1 *****/
-.invest_step1_generalities {
-    width: 800px;
-    margin:auto;
-    font-size: 12pt;
-}
-
-.invest_step1_generalities ol li{
-    margin-bottom: 10px;
-}
-
-.invest_step1_currentproject {
-    width: 600px;
-    margin:auto;
-    font-size: 13pt;
-}
-
-#reward-selector {
-    list-style: outside none none;
-    padding-left: 0px;
-}
-
-#reward-selector li {
-    padding: 5px;
-    margin-bottom: 5px;
-    border: 1px solid #EEE;
-}
-
-#reward-selector .selected {
-    background-color: #EA4F51;
-    color: white;
-    font-weight: bold;
-}
-
-#reward-selector .reward-amount {
-    font-weight: bold;
-}
-
-#reward-selector .detail {
-    opacity: 0.7;
-}
-
-#reward-selector .reward-not-null {
-    margin: 10px 15px 10px 20px ;
-}
-
-#reward-selector li {
-    padding: 8px;
-}
-
-#reward-selector .unavailable-reward {
-    opacity: 0.5;
-}
-
-#invest_form {
-    font-size: 13px;
-    width: 37%;
-    margin: auto;
-    margin-top: 30px;
-}
-
-#invest_form input[type=text] {
-    width: 120px;
-}
-
-#PaylineForm {
-    width: 500px;
-}
-#card {
-    border: 1px solid grey;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-#card .labelLogo, #card .label {
-    display: inline-block;
-    width: 170px;
-    font-weight: bold;
-}
-#card .content {
-    display: inline-block;
-}
-#card #spacer {
-    height: 10px;
-}
-
-ul.invest-mean-payment {
-    -webkit-padding-start: 0px;
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
-    padding-left: 0px;
-}
-ul.invest-mean-payment li {
-    list-style: none;
-    margin: 25px 0px;
-    border: 1px solid #EEEEEE;
-}
-ul.invest-mean-payment li:hover {
-    border: 1px solid #E1E3E2;
-}
-ul.invest-mean-payment li a {
-    width: 100%;
-    margin: 0px;
-    display: block;
-}
-ul.invest-mean-payment li img {
-    vertical-align: middle;
-}
-
-#invest-breadcrumb {
-    padding: 30px;
-    text-align: center;
-}
-#invest-breadcrumb div.invest-breadcrumb-item {
-	display: inline-block;
-	width: 100px;
-	padding-top: 60px;
-	height: 16px;
-	background: url("images/invest-breadcrumb-pictos.jpg") -37px top no-repeat;
-	text-align: center;
-}
-#invest-breadcrumb > div#input {
-	background-position: -37px top;
-}
-#invest-breadcrumb.breadcrumb-step-1 > div#input {
-	background-position: -37px -63px;
-	color: #EA4F51;
-}
-#invest-breadcrumb > div#confirm {
-	background-position: -145px top;
-}
-#invest-breadcrumb.breadcrumb-step-2 > div#confirm {
-	background-position: -145px -63px;
-	color: #EA4F51;
-}
-#invest-breadcrumb > div#mean-payment {
-	background-position: -246px top;
-}
-#invest-breadcrumb.breadcrumb-step-3 > div#mean-payment {
-	background-position: -246px -63px;
-	color: #EA4F51;
-}
-#invest-breadcrumb > div#return {
-	background-position: -364px top;
-}
-#invest-breadcrumb.breadcrumb-step-4 > div#return {
-	background-position: -364px -63px;
-	color: #EA4F51;
-}
-#invest-breadcrumb > div#share {
-	background-position: -472px top;
-}
-#invest-breadcrumb.breadcrumb-step-5 > div#share {
-	background-position: -472px -63px;
-	color: #EA4F51;
-}
-#invest-breadcrumb > div span {
-	background: #FFF;
-}
-
-#invest-breadcrumb div.separator {
-	display: inline-block;
-	font-weight: bold;
-}
-.invest_part {
-    padding: 15px 30px;
-    background: #EEEEEE;
-    margin-bottom: 10px;
-    font-size: 13px;
-    width: 500px;
-    margin: auto;
-    margin-bottom: 20px;
-}
-.invest_part .label {
-    display: inline-block;
-    width: 200px;
-    font-weight: bold;
-    margin-right: 10px;
-}
-
-/*******************************************************************************
 * INVESTORS PAGE
 *******************************************************************************/ 
 #display-options-col-menu {
@@ -2578,30 +2219,3 @@ ul.invest-mean-payment li img {
 #page-single-user-roi div.user-roi-item table tr td {
 	padding: 3px 10px;
 }
-
-/*******************************************************************************
-* THEME PHOTOREPORTER
-*******************************************************************************/
-/** Footer **/
-footer.theme-myphotoreporter { background-color: #189AB4; background-image: url("images/footer-myphotoreporter.jpg"); }
-/** Page Liste des projets **/
-#content.theme-myphotoreporter nav.menu-client { position: relative; top: 0px; width: 100%; height: 40px; background-color: #189AB4; color: #FFF; padding-top: 20px; text-transform: uppercase; z-index: 10; }
-#content.theme-myphotoreporter nav.menu-client a { color: #FFF; text-decoration: none; padding: 15px; }
-#content.theme-myphotoreporter nav.menu-client a img { vertical-align: middle; }
-#content.theme-myphotoreporter nav.menu-client strong { padding: 15px; }
-#content.theme-myphotoreporter .client-header { margin-top: 0px; height: 360px; }
-#content.theme-myphotoreporter .client-header .center { padding-top: 40px; color: #FFFFFF; font-size: 17px; text-align: right; }
-#content.theme-myphotoreporter .client-header .center p { margin-left: 70%; }
-#content.theme-myphotoreporter .home-large-project h2 a, #content.theme-myphotoreporter .home-large-project h2 a:hover { color: #189AB4; }
-#content.theme-myphotoreporter .home-large-project h2 img { display: none; }
-#content.theme-myphotoreporter .home-large-project .description-zone .description-discover,
-#content.theme-myphotoreporter .home-small-project.status-vote .description-discover { background-color: #189AB4; }
-#content.theme-myphotoreporter .vote-bubble-left { background-image:url('images/bulle-gauche-myphotoreporter.png'); }
-#content.theme-myphotoreporter .vote-bubble-right { background-image:url('images/bulle-droite-myphotoreporter.png'); }
-#content.theme-myphotoreporter .vote-banner { background:url('images/bandeau_vote-myphotoreporter.png') no-repeat; }
-/** Page Projet **/
-#content.theme-myphotoreporter #invest-button .description-discover { background-color: #189AB4; }
-#content.theme-myphotoreporter #participate-button .description-discover { background-color: #189AB4; }
-#content.theme-myphotoreporter #map-cursor { background-image: url("images/curseur-myphotoreporter.png"); }
-#content.theme-myphotoreporter .projects-more { background-image: url("images/responsive-plus-myphotoreporter.png"); }
-#content.theme-myphotoreporter #head-image { top: 167px; }

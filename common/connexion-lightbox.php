@@ -7,9 +7,7 @@
 	</div>
 	<?php endif; ?>
     
-        <form method="post" name="login-form" class="sidebar-login-form db-form form-register">
-			<h2><?php _e('Inscription et connexion', 'yproject'); ?></h2>
-			
+        <form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
 			<div class="field">
 				<label for="signin_username"><?php _e( 'Identifiant ou e-mail', 'yproject' ); ?> *</label>
 				<div class="field-container">
@@ -32,29 +30,27 @@
 				<a href="<?php echo home_url( '/mot-de-passe-oublie' ); ?>" >(<?php _e("Mot de passe oubli&eacute;", 'yproject'); ?>)</a>
             </div>
 
-			
 			<div class="field">
-				<input id="signin_rememberme" type="checkbox" name="rememberme" value="forever" />
-				<label for="signin_rememberme" style="width: auto;"><?php _e( 'Se souvenir de moi', 'yproject' ); ?></label>
+				<label for="signin_rememberme">
+					<input id="signin_rememberme" type="checkbox" name="rememberme" value="forever" /><span></span>
+					<?php _e( 'Se souvenir de moi', 'yproject' ); ?>
+				</label>
 			</div>
+			<br />
             
-            <div class="box_connection_buttons red submit-center">
-                <input type="submit" name="wp-submit" id="sidebar-wp-submit-lightbox" class="connect" value="<?php _e('Connexion', 'yproject'); ?>" />
-                <input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
-				<input type="hidden" name="login-form" value="1" />
-            </div>
-        </form>
+			<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
+			<input type="hidden" name="login-form" value="1" />
+			<button class="button save red" type="submit"><?php _e( "Connexion", 'yproject' ); ?></button>
+			<br /><br />
 	
-        <div class="connexion_facebook_container box_connection_buttons blue">
-            <a href="#" class="social_connect_login_facebook">&nbsp;<?php _e("Se connecter avec Facebook", 'yproject'); ?></a>
-        </div>
-		<div class="social_connect_login_facebook_loading align-center hidden">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
-		</div>
-
-        <div class="box_connection_buttons transparent">
-			<a href="#register" class="wdg-button-lightbox-open button transparent" data-lightbox="register"><?php _e("Cr&eacute;er mon compte", 'yproject'); ?></a>
-        </div>
+			<button type="button" class="button blue-facebook social_connect_login_facebook"><?php _e( "Se connecter avec Facebook", 'yproject' ); ?></button>
+			<div class="social_connect_login_facebook_loading align-center hidden">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
+			</div>
+			<br /><br />
+			
+			<button type="button" class="wdg-button-lightbox-open button transparent" data-lightbox="register"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></button>
+        </form>
 
 </div>
 

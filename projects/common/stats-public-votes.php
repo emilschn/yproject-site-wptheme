@@ -12,10 +12,10 @@
 	<li><span><?php _e('Autres :', 'yproject'); ?></span> <?php echo $vote_results['list_impact_others_string']; ?>
 </ul>
 
-<em><?php _e('Souhaitez-vous soutenir cette campagne de financement sur '.ATCF_CrowdFunding::get_platform_name().' ?', 'yproject'); ?></em><br />
-<center><canvas id="canvas-pie" width="400" height="200"></canvas></center>
+<em><?php _e('Notes attribu&eacute;es au projet', 'yproject'); ?></em><br />
+<center><canvas id="canvas-vertical-bar" width="400" height="200"></canvas></center>
 
-<strong><?php echo $vote_results['count_project_validated']; ?></strong> <?php _e('personnes ont vot&eacute; oui', 'yproject'); ?>...<br />
+<strong><?php echo $vote_results['count_project_validated']; ?></strong> <?php _e('personnes ont donn&eacute; une note sup&eacute;rieure &agrave; 2', 'yproject'); ?><br />
 <ul>
 	<li>
 			<?php
@@ -29,7 +29,7 @@
 	<?php if ($vote_results['show_risk']): ?>
 	<li>
 	    <?php _e("ont &eacute;valu&eacute; le risque, en moyenne, &agrave; :", 'yproject'); ?> <strong><?php echo round($vote_results['average_risk'], 2); ?></strong> / 5<br />
-	    <center><canvas id="canvas-vertical" width="600" height="300"></canvas></center>
+	    <center><canvas id="canvas-vertical" width="400" height="200"></canvas></center>
 	</li>
 	<?php endif; ?>
 </ul>
@@ -42,36 +42,49 @@
 
 <script type="text/javascript">
 jQuery(document).ready( function($) {
-    var ctxPie = $("#canvas-pie").get(0).getContext("2d");
-    var dataPie = [
-	{value: <?php echo $vote_results['count_project_validated']; ?>, color: "#FE494C", title: "<?php _e("Oui", 'yproject'); ?>"}, 
-	{value: <?php echo ($vote_results['count_voters'] - $vote_results['count_project_validated']); ?>, color: "#333333", title: "<?php _e("Non", 'yproject'); ?>"}
-    ];
-    var optionsPie = {
-	legend: true,
-	legendBorders: false,
-	inGraphDataShow : true
-    };
-    var canvasPie = new Chart(ctxPie).Pie(dataPie, optionsPie);
+    var ctxBar = $("#canvas-vertical-bar").get(0).getContext("2d");
+		var nStepsBar = Math.max(Math.max(Math.max(Math.max(Math.max(0, <?php echo $vote_results['rate_project_list'][1]; ?>), <?php echo $vote_results['rate_project_list'][2]; ?>), <?php echo $vote_results['rate_project_list'][3]; ?>), <?php echo $vote_results['rate_project_list'][4]; ?>), <?php echo $vote_results['rate_project_list'][5]; ?>);
+		var barData = {
+			labels: [ "1", "2", "3", "4", "5" ],
+			datasets: [{
+				fillColor: "#FE494C",
+				strokeColor: "#FE494C",
+				data: [
+					<?php echo $vote_results[ 'rate_project_list' ][ '1' ]; ?>,
+					<?php echo $vote_results[ 'rate_project_list' ][ '2' ]; ?>,
+					<?php echo $vote_results[ 'rate_project_list' ][ '3' ]; ?>,
+					<?php echo $vote_results[ 'rate_project_list' ][ '4' ]; ?>,
+					<?php echo $vote_results[ 'rate_project_list' ][ '5' ]; ?>
+				]
+			}]
+		};
+		var barOptions = {
+			scaleOverride: true,
+			scaleSteps: nStepsBar,
+			scaleStepWidth: 1,
+			scaleStartValue: 0,
+			pointDot: false
+		};
+		var canvasBar = new Chart( ctxBar ).Bar( barData, barOptions );
     
     <?php if ($vote_results['show_risk']): ?>
     var ctxVertical = $("#canvas-vertical").get(0).getContext("2d");
     var dataVertical = {
-	labels: ["1", "2", "3", "4", "5"],
-	datasets: [{
-	    fillColor: "#CCC",
-	    strokeColor: "#CCC",
-	    data: [<?php echo $vote_results['risk_list'][1] . ',' . $vote_results['risk_list'][2] . ',' . $vote_results['risk_list'][3] . ',' . $vote_results['risk_list'][4] . ',' . $vote_results['risk_list'][5]; ?>]
-	}]
+		labels: ["1", "2", "3", "4", "5"],
+		datasets: [{
+			fillColor: "#FE494C",
+			strokeColor: "#FE494C",
+			data: [<?php echo $vote_results['risk_list'][1] . ',' . $vote_results['risk_list'][2] . ',' . $vote_results['risk_list'][3] . ',' . $vote_results['risk_list'][4] . ',' . $vote_results['risk_list'][5]; ?>]
+		}]
     };
     var nSteps = Math.max(Math.max(Math.max(Math.max(Math.max(0, <?php echo $vote_results['risk_list'][1]; ?>), <?php echo $vote_results['risk_list'][2]; ?>), <?php echo $vote_results['risk_list'][3]; ?>), <?php echo $vote_results['risk_list'][4]; ?>), <?php echo $vote_results['risk_list'][5]; ?>);
     var optionsVertical = {
-	scaleOverride: true,
-	scaleSteps: nSteps,
-	scaleStepWidth: 1,
-	scaleStartValue: 0,
-	pointDot: false
-    }
+		scaleOverride: true,
+		scaleSteps: nSteps,
+		scaleStepWidth: 1,
+		scaleStartValue: 0,
+		pointDot: false
+    };
     var canvasVertical = new Chart(ctxVertical).Bar(dataVertical, optionsVertical);
     <?php endif; ?>
     

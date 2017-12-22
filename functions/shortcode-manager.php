@@ -10,9 +10,9 @@ class YPShortcodeManager {
 		'yproject_crowdfunding_invest_return',
 		'yproject_crowdfunding_invest_share',
 		'yproject_lightbox_button',
+		'yproject_lightbox_cornered',
 		'yproject_lightbox',
 		'yproject_widelightbox',
-		'yproject_msglightbox',
 		'yproject_connexion_lightbox',
 		'yproject_register_lightbox',
 		'yproject_statsadvanced_lightbox',
@@ -81,6 +81,51 @@ class YPShortcodeManager {
 		), $atts );
 		return '<a href="#'.$atts['id'].'" class="wdg-button-lightbox-open '.$atts['class'].'" style="'.$atts['style'].'" data-lightbox="'.$atts['id'].'">'.$atts['label'].'</a>';
 	}
+	
+	/**
+	 * Lightbox avec coin transparent
+	 */
+	function yproject_lightbox_cornered( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'id'		=> 'lightbox',
+			'title'		=> '',
+			'scrolltop' => '0',
+			'style'		=> '',
+			'class'		=> '',
+			'msgtype'	=> '', // valid / error
+			'autoopen'	=> '0',
+			'catchclick'=> '1'
+		), $atts );
+		
+		$msgtype_lightbox = '';
+		$data_autoopen = ( $atts['autoopen'] == '1' ) ? '1' : '0';
+		$classes = 'hidden';
+		if ( !empty( $atts['msgtype'] ) ) {
+			$classes .= ' msg-'.$atts['msgtype'];
+		}
+		$catcher_classes = ( $atts['catchclick'] == '1' ) ? '' : 'disable';
+		
+		ob_start();
+		?>
+		<div id="wdg-lightbox-<?php echo $atts[ 'id' ]; ?>" <?php echo $atts[ 'style' ]; ?> class="wdg-lightbox cornered <?php echo $classes; ?>" data-autoopen="<?php echo $data_autoopen; ?>" data-scrolltop=<?php echo $atts[ 'scrolltop' ]; ?>>
+			<div class="wdg-lightbox-click-catcher <?php echo $catcher_classes; ?>"></div>
+			<div class="wdg-lightbox-corner">
+				<div class="wdg-lightbox-button-close">
+					<?php if ( $atts['catchclick'] == '1' ): ?>
+					<a href="#" class="button">X</a>
+					<?php endif; ?>
+				</div>
+				<h2><?php echo $atts[ 'title' ]; ?></h2>
+			</div>
+			<div class="wdg-lightbox-padder">
+				<?php echo do_shortcode( $content ); ?>
+			</div>
+		</div>
+		<?php
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		return $buffer;
+	}
 
 	function yproject_lightbox($atts, $content = '') {
 		$atts = shortcode_atts( array(
@@ -122,25 +167,6 @@ class YPShortcodeManager {
 			</div>
 			</div>';
 	}
-
-	//Shortcode ligthbox messages info/validé/erreur
-	//id: valid / error / info
-	//type: valid / error / info
-	function yproject_msglightbox($atts, $content = '') {
-		$atts = shortcode_atts( array(
-			'id'		=> 'lightbox',
-			'scrolltop'	=> '0',
-			'type'		=> 'msg'
-		), $atts );
-		return '<div id="wdg-lightbox-'.$atts['id'].'" class="wdg-lightbox msg-lightbox hidden" data-scrolltop='.$atts['scrolltop'].'>
-			<div class="wdg-lightbox-click-catcher"></div>
-			<div class="wdg-lightbox-padder '.$atts['type'].'-msg">
-				<div class="wdg-lightbox-button-close">
-				<a href="#" class="button">X</a>
-				</div>'.do_shortcode($content).'
-			</div>
-			</div>';
-	}
 	
 	//Shortcodes lightbox Connexion
 	function yproject_connexion_lightbox($atts, $content = '') {
@@ -148,7 +174,7 @@ class YPShortcodeManager {
 		locate_template('common/connexion-lightbox.php',true);
 		$lightbox_content = ob_get_contents();
 		ob_end_clean();
-		echo do_shortcode('[yproject_lightbox id="connexion"]' . $content . $lightbox_content . '[/yproject_lightbox]');
+		echo do_shortcode('[yproject_lightbox_cornered id="connexion" title="'.__('Inscription et connexion', 'yproject').'"]' . $content . $lightbox_content . '[/yproject_lightbox_cornered]');
 	}
 	
 	//Shortcodes lightbox d'inscription 
@@ -157,7 +183,7 @@ class YPShortcodeManager {
 		locate_template('common/register-lightbox.php',true);
 		$lightbox_content = ob_get_contents();
 		ob_end_clean();
-		echo do_shortcode('[yproject_lightbox id="register"]' . $content . $lightbox_content . '[/yproject_lightbox]');
+		echo do_shortcode('[yproject_lightbox_cornered id="register" title="'.__('Inscription', 'yproject').'"]' . $content . $lightbox_content . '[/yproject_lightbox_cornered]');
 	}
 	
 	//Shortcode lightbox Tableau de bord
@@ -176,7 +202,7 @@ class YPShortcodeManager {
 		locate_template('common/newproject-lightbox.php',true);
 		$content = ob_get_contents();
 		ob_end_clean();
-		echo do_shortcode('[yproject_lightbox id="newproject" class="wdg-lightbox-ref"]' .$content . '[/yproject_lightbox]');
+		echo do_shortcode('[yproject_lightbox_cornered id="newproject" class="wdg-lightbox-ref"]' .$content . '[/yproject_lightbox_cornered]');
 		echo do_shortcode('[yproject_register_lightbox]');
 	}
 	

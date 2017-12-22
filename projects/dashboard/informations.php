@@ -2,7 +2,6 @@
 
 function print_informations_page()
 {
-    locate_template('country_list.php', true);
     global $country_list;
     global $campaign_id, $campaign, $post_campaign,
            $WDGAuthor, $WDGUser_current,
@@ -68,19 +67,55 @@ function print_informations_page()
                     "value"	=> $post_campaign->post_title
                 ));
 
-                DashboardUtility::create_field(array(
-                    "id"	=> "new_backoffice_summary",
-                    "type"	=> "editor",
-                    "label"	=> "D&eacute;crivez-nous votre projet : ",
-                    "infobubble"	=> "Ces informations seront traitées de manière confidentielle",
-                    "value"	=> $campaign->backoffice_summary()
-                ));
+				if ( $is_admin ) {
+					DashboardUtility::create_field(array(
+						"id"	=> "new_backoffice_summary",
+						"type"	=> "editor",
+						"label"	=> "Description lors de la création du projet",
+						"infobubble"	=> "Ces informations seront traitées de manière confidentielle",
+						"value"	=> $campaign->backoffice_summary(),
+						'admin_theme'	=> true
+					));
+				
+					DashboardUtility::create_field(array(
+						'id'			=> 'new_project_url',
+						'type'			=> 'text',
+						'label'			=> __( "URL du projet", 'yproject' ),
+						'value'			=> $post_campaign->post_name,
+						'admin_theme'	=> true
+					));
+					
+					DashboardUtility::create_field(array(
+						'id'			=> 'new_is_hidden',
+						'type'			=> 'check',
+						'label'			=> __( "Masquée du public", 'yproject' ),
+						'value'			=> $campaign->is_hidden(),
+						'admin_theme'	=> true
+					));
+					
+					DashboardUtility::create_field(array(
+						'id'			=> 'new_skip_vote',
+						'type'			=> 'check',
+						'label'			=> __( "Passer la phase de vote", 'yproject' ),
+						'value'			=> $campaign->skip_vote(),
+						'admin_theme'	=> true,
+						"editable"		=> $campaign->is_preparing()
+					));
+				}
 
 
                 $terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
                 $term_category_id = $terms_category[0]->term_id;
                 $terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
                 $term_activity_id = $terms_activity[0]->term_id;
+                $terms_type = get_terms('download_category', array('slug' => 'types', 'hide_empty' => false));
+				if ( $terms_type ) {
+					$term_type_id = $terms_type[0]->term_id;
+				}
+                $terms_partners = get_terms('download_category', array('slug' => 'partners', 'hide_empty' => false));
+				if ( $terms_partners ) {
+					$terms_partners_id = $terms_partners[0]->term_id;
+				}
                 ?>
 
                 <div class="field">
@@ -101,7 +136,7 @@ function print_informations_page()
 					<label for="activities"><?php _e("Secteur d&apos;activit&eacute;", 'yproject'); ?></label>
 					<span class="field-value" data-type="multicheck" data-id="new_project_activities"><?php
 						wp_terms_checklist(
-							$campaign_id, 
+							$campaign_id,
 							array(
 								'taxonomy' => 'download_category',
 								'descendants_and_self' => $term_activity_id,
@@ -109,6 +144,36 @@ function print_informations_page()
 						) );
 					?></span>
 				</div>
+
+				<?php if ( $terms_type ): ?>
+                <div class="field">
+					<label for="types"><?php _e("Type de projet", 'yproject'); ?></label>
+					<span class="field-value" data-type="multicheck" data-id="new_project_types"><?php
+						wp_terms_checklist(
+							$campaign_id,
+							array(
+								'taxonomy' => 'download_category',
+								'descendants_and_self' => $term_type_id,
+								'checked_ontop' => false
+						) );
+					?></span>
+				</div>
+				<?php endif; ?>
+
+				<?php if ( $terms_partners ): ?>
+                <div class="field">
+					<label for="partners"><?php _e("Partenaires", 'yproject'); ?></label>
+					<span class="field-value" data-type="multicheck" data-id="new_project_partners"><?php
+						wp_terms_checklist(
+							$campaign_id,
+							array(
+								'taxonomy' => 'download_category',
+								'descendants_and_self' => $terms_partners_id,
+								'checked_ontop' => false
+						) );
+					?></span>
+				</div>
+				<?php endif; ?>
 
                 <?php
                 $locations = atcf_get_locations();
@@ -120,6 +185,55 @@ function print_informations_page()
                     "options_id"	=> array_keys($locations),
                     "options_names"	=> array_values($locations)
                 ));
+				?>
+				
+				<?php
+                DashboardUtility::create_field(array(
+                    "id"	=> "new_employees_number",
+                    "type"	=> "number",
+                    "label"	=> __( "Nombre d'employ&eacute;s au lancement", 'yproject' ),
+                    "value"	=> $campaign->get_api_data( 'employees_number' )
+                ));
+				?>
+
+                <?php
+				$contract_descriptions_editable = $campaign->is_preparing();
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_project_contract_spendings_description",
+                    "type"			=> "editor",
+                    "label"			=> __( "Description des d&eacute;penses", 'yproject' ),
+                    "value"			=> $campaign->contract_spendings_description(),
+					"editable"		=> $is_admin || $contract_descriptions_editable
+                ));
+                
+				if ( $is_admin ):
+				DashboardUtility::create_field(array(
+                    "id"			=> "new_project_contract_earnings_description",
+                    "type"			=> "editor",
+                    "label"			=> __( "Description des revenus", 'yproject' ),
+                    "value"			=> $campaign->contract_earnings_description(),
+					'admin_theme'	=> true,
+					"editable"		=> $is_admin
+                ));
+				
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_project_contract_simple_info",
+                    "type"			=> "editor",
+                    "label"			=> __( "Informations simples", 'yproject' ),
+                    "value"			=> $campaign->contract_simple_info(),
+					'admin_theme'	=> true,
+					"editable"		=> $is_admin
+                ));
+				
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_project_contract_detailed_info",
+                    "type"			=> "editor",
+                    "label"			=> __( "Informations d&eacute;taill&eacute;es", 'yproject' ),
+                    "value"			=> $campaign->contract_detailed_info(),
+					'admin_theme'	=> true,
+					"editable"		=> $is_admin
+                ));
+				endif;
 				?>
 
 				<?php
@@ -140,34 +254,38 @@ function print_informations_page()
                 <?php DashboardUtility::create_save_button("projectinfo_form"); ?>
             </form>
 			
-			<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
-				la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>
-			
-            <form action="<?php echo admin_url( 'admin-post.php?action=upload_information_files'); ?>" method="post" id="projectinfo_form" enctype="multipart/form-data">
-                <ul class="errors">
+			<?php if ( $is_admin ): ?>
+			<div class="field admin-theme">
+				<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
+					la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>
 
-                </ul>
+				<form action="<?php echo admin_url( 'admin-post.php?action=upload_information_files'); ?>" method="post" id="projectinfo_form" enctype="multipart/form-data">
+					<ul class="errors">
 
-				<?php
-				$file_name = $campaign->backoffice_businessplan();
-				if (!empty($file_name)) {
-					$file_name_exploded = explode('.', $file_name);
-					$ext = $file_name_exploded[count($file_name_exploded) - 1];
-					$file_name = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/kyc/' . $file_name;
-				}
-                DashboardUtility::create_field(array(
-                    "id"				=> "new_backoffice_businessplan",
-                    "type"				=> "upload",
-                    "label"				=> "Votre business plan",
-                    "infobubble"		=> "Ces informations seront traitées de manière confidentielle",
-                    "value"				=> $file_name,
-					"download_label"	=> $post_campaign->post_title . " - BP." . $ext
-                ));
-				
-                DashboardUtility::create_save_button("projectinfo_form"); ?>
-				
-				<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
-			</form>
+					</ul>
+
+					<?php
+					$file_name = $campaign->backoffice_businessplan();
+					if (!empty($file_name)) {
+						$file_name_exploded = explode('.', $file_name);
+						$ext = $file_name_exploded[count($file_name_exploded) - 1];
+						$file_name = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/kyc/' . $file_name;
+					}
+					DashboardUtility::create_field(array(
+						"id"				=> "new_backoffice_businessplan",
+						"type"				=> "upload",
+						"label"				=> "Votre business plan",
+						"infobubble"		=> "Ces informations seront traitées de manière confidentielle",
+						"value"				=> $file_name,
+						"download_label"	=> $post_campaign->post_title . " - BP." . $ext
+					));
+
+					DashboardUtility::create_save_button("projectinfo_form"); ?>
+
+					<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+				</form>
+			</div>
+			<?php endif; ?>
         </div>
 
         <div class="tab-content" id="tab-user-infos">
@@ -361,13 +479,13 @@ function print_informations_page()
 
 			<?php
 			$msg_valid_changeOrga = __("L'organisation a bien &eacute;t&eacute; li&eacute;e au projet", "yproject");
-			echo do_shortcode('[yproject_msglightbox id="valid-changeOrga" scrolltop="1" type="valid"]'.$msg_valid_changeOrga.'[/yproject_msglightbox]');
+			echo do_shortcode('[yproject_lightbox_cornered id="valid-changeOrga" scrolltop="1" msgtype="valid"]'.$msg_valid_changeOrga.'[/yproject_lightbox_cornered]');
 
 			$msg_valid_newOrga = __("Votre nouvelle organisation a bien &eacute;t&eacute; cr&eacute;&eacute;e", "yproject");
-			echo do_shortcode('[yproject_msglightbox id="valid-newOrga" scrolltop="1" type="valid"]'.$msg_valid_newOrga.'[/yproject_msglightbox]');
+			echo do_shortcode('[yproject_lightbox_cornered id="valid-newOrga" scrolltop="1" msgtype="valid"]'.$msg_valid_newOrga.'[/yproject_lightbox_cornered]');
 
 			$msg_valid_editOrga = __("Les informations ont bien &eacute;t&eacute; enregistr&eacute;es", "yproject");
-			echo do_shortcode('[yproject_msglightbox id="valid-editOrga" scrolltop="1" type="valid"]'.$msg_valid_editOrga.'[/yproject_msglightbox]');
+			echo do_shortcode('[yproject_lightbox_cornered id="valid-editOrga" scrolltop="1" msgtype="valid"]'.$msg_valid_editOrga.'[/yproject_lightbox_cornered]');
 			?>
         </div>
 
@@ -383,9 +501,9 @@ function print_informations_page()
                     "label"			=> "Objectif",
                     "infobubble"	=> "C'est le seuil de validation de votre lev&eacute;e de fonds, vous pourrez ensuite viser le montant maximum !",
                     "value"			=> $campaign->minimum_goal(false),
-                    "suffix"            => "<span>&nbsp;&euro;</span>",
+                    "suffix"		=> "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
-					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 
                 DashboardUtility::create_field(array(
@@ -394,9 +512,9 @@ function print_informations_page()
                     "label"			=> "Montant maximum",
                     "infobubble"	=> "C'est le montant maximum de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD.",
                     "value"			=> $campaign->goal(false),
-                    "suffix"            => "<span>&nbsp;&euro;</span>",
+                    "suffix"		=> "<span>&nbsp;&euro;</span>",
                     "min"			=> 500,
-					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 
                 DashboardUtility::create_field(array(
@@ -408,8 +526,35 @@ function print_informations_page()
                     "suffix"		=> "<span>&nbsp;ann&eacute;es</span>",
                     "min"			=> 1,
                     "max"			=> 20,
-					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
+				
+				if ( $is_admin ) {
+
+					DashboardUtility::create_field(array(
+						"id"			=> "new_platform_commission",
+						"type"			=> "number",
+						"label"			=> "Commission de la plateforme",
+						"value"			=> $campaign->platform_commission(),
+						"suffix"		=> "<span>&nbsp;% TTC</span>",
+						"editable"		=> $is_admin,
+						"visible"		=> $is_admin,
+						"admin_theme"	=> true
+					));
+
+					DashboardUtility::create_field(array(
+						"id"			=> "new_maximum_profit",
+						"type"			=> "select",
+						"label"			=> "Gain maximum",
+						"value"			=> $campaign->maximum_profit(),
+						"options_id"	=> array_keys( ATCF_Campaign::$maximum_profit_list ),
+						"options_names"	=> array_values( ATCF_Campaign::$maximum_profit_list ),
+						"prefix"		=> '*',
+						"admin_theme"	=> true,
+						"editable"		=> $campaign->is_preparing()
+					));
+					
+				}
 
                 DashboardUtility::create_field(array(
                     "id"			=> "new_roi_percent_estimated",
@@ -421,38 +566,58 @@ function print_informations_page()
                     "min"			=> 0,
                     "max"			=> 100,
                     "step"			=> 0.01,
-					"editable"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing
+					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
+				
+				DashboardUtility::create_field(array(
+					"id"			=> "new_roi_percent",
+					"type"			=> "number",
+					"label"			=> "Royalties r&eacute;els (selon montant collect&eacute;)",
+					"value"			=> $campaign->roi_percent(),
+					"suffix"		=> "<span>&nbsp;% du chiffre d'affaires</span>",
+					"min"			=> 0,
+					"max"			=> 100,
+					"step"			=> 0.01,
+					"visible"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed,
+					"editable"		=> $is_admin
+				));
 
-				$contract_start_date_editable = ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $is_admin );
+				$contract_start_date_editable = ( $campaign->is_preparing() || $is_admin );
 				$contract_start_date_values = array();
 				$contract_start_date_list = array();
 				if ( $contract_start_date_editable ) {
 					// Trouver la prochaine date possible : janvier, avril, juillet, octobre
 					$current_date = new DateTime();
+					$previous_date = new DateTime();
 					$next_date = new DateTime();
 					switch ( $current_date->format('m') ) {
 						case 1:
 						case 2:
 						case 3:
+							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-01-01' );
 							$next_date = new DateTime( $current_date->format( 'Y' ) . '-04-01' );
 							break;
 						case 4:
 						case 5:
 						case 6:
+							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-04-01' );
 							$next_date = new DateTime( $current_date->format( 'Y' ) . '-07-01' );
 							break;
 						case 7:
 						case 8:
 						case 9:
+							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-07-01' );
 							$next_date = new DateTime( $current_date->format( 'Y' ) . '-10-01' );
 							break;
 						case 10:
 						case 11:
 						case 12:
+							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-10-01' );
 							$next_date = new DateTime( ( $current_date->format( 'Y' ) + 1 ) . '-01-01' );
 							break;
 					}
+					array_push( $contract_start_date_values, $previous_date->format( 'Y-m-d H:i:s' ) );
+					array_push( $contract_start_date_list, $previous_date->format( 'd/m/Y' ) );
 					// Ensuite on ajoute (arbitrairement) 10 dates
 					for ( $i = 0; $i < 10; $i++ ) {
 						array_push( $contract_start_date_values, $next_date->format( 'Y-m-d H:i:s' ) );
@@ -469,6 +634,43 @@ function print_informations_page()
                     "options_id"	=> $contract_start_date_values,
                     "options_names"	=> $contract_start_date_list
                 ));
+				
+				if ( $is_admin ) {
+					DashboardUtility::create_field(array(
+						"id"			=> "new_turnover_per_declaration",
+						"type"			=> "select",
+						"label"			=> "Nb d&eacute;claration CA par versement",
+						"value"			=> $campaign->get_turnover_per_declaration(),
+						"options_id"	=> array(1, 3),
+						"options_names"	=> array(1, 3),
+						"editable"		=> $is_admin,
+						"admin_theme"	=> true
+					));
+					DashboardUtility::create_field(array(
+						"id"			=> "new_costs_to_organization",
+						"type"			=> "number",
+						"label"			=> "Pourcentage de frais appliqués au PP",
+						"value"			=> $campaign->get_costs_to_organization(),
+						"suffix"		=> "<span>&nbsp;%</span>",
+						"min"			=> 0,
+						"max"			=> 100,
+						"step"			=> 0.01,
+						"editable"		=> $is_admin,
+						"admin_theme"	=> true
+					));
+					DashboardUtility::create_field(array(
+						"id"			=> "new_costs_to_investors",
+						"type"			=> "number",
+						"label"			=> "Pourcentage de frais appliqués aux investisseurs",
+						"value"			=> $campaign->get_costs_to_investors(),
+						"suffix"		=> "<span>&nbsp;%</span>",
+						"min"			=> 0,
+						"max"			=> 100,
+						"step"			=> 0.01,
+						"editable"		=> $is_admin,
+						"admin_theme"	=> true
+					));
+				}
 
                 DashboardUtility::create_field(array(
                     "id"			=> "new_first_payment",
@@ -490,7 +692,8 @@ function print_informations_page()
                         <?php echo "&nbsp;".__("investis"); ?>
                     </label>
                 </div>
-                <ul id="estimated-turnover">
+				<?php $is_euro = ( $campaign->contract_budget_type() != 'collected_funds' ); ?>
+                <ul id="estimated-turnover" data-symbol="<?php if ( $is_euro ): ?>€<?php else: ?>%<?php endif; ?>">
                     <?php
                     $estimated_turnover = $campaign->estimated_turnover();
                     if(!empty($estimated_turnover)){
@@ -498,16 +701,17 @@ function print_informations_page()
                         foreach (($campaign->estimated_turnover()) as $year => $turnover) :?>
                             <li class="field">
                                 <label>Année <span class="year"><?php echo ($i+1); ?></span></label>                           
-                                <span class="field-container" <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?> style="padding-left: 80px;" <?php endif; ?>>
+                                <span class="field-container" <?php if ( !$is_admin && !$campaign->is_preparing() ): ?> style="padding-left: 80px;" <?php endif; ?>>
                                         <span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
-                                                <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
-                                                <i class="right fa fa-eur" aria-hidden="true"></i>
-                                                <input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />                                         
+                                                <?php if ( $is_admin || $campaign->is_preparing() ): ?>
+                                                <i class="right fa <?php if ($is_euro): ?>fa-eur<?php endif; ?>" aria-hidden="true"></i>
+                                                <input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />
+													<?php if ( !$is_euro ): ?>%<?php endif; ?>
                                                 <?php else: ?>
                                                 <?php echo $turnover; ?>
                                                 <?php endif; ?>
                                         </span>
-                                        <?php if ( !$is_admin && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing ): ?>
+                                        <?php if ( !$is_admin && !$campaign->is_preparing() ): ?>
                                             <span style="padding-right: 70px;">&euro;</span>
                                         <?php endif; ?>
                                         <!--montant des royalties reversées par année-->
@@ -533,7 +737,7 @@ function print_informations_page()
 					<label><?php _e("Pour vos investisseurs", "yproject")?>&nbsp;:</label>
                     <label><?php _e("Rendement final", "yproject") ?></label><span class="like-input-center"><p id="medium-rend">---&nbsp;%</p></span>
                 </div>
-                <?php if ( $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing ): ?>
+                <?php if ( $is_admin || $campaign->is_preparing() ): ?>
                 <?php DashboardUtility::create_save_button("projectfunding_form"); ?>
                 <?php endif; ?>
             </form>
@@ -582,8 +786,27 @@ function print_informations_page()
 
             </ul>
 			
+			<?php if ( $is_admin ): // A supprimer ?>
+			<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+			<div class="field admin-theme align-center">
+				<a href="<?php echo $campaign->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red">Attestation de lev&eacute;e de fonds</a>
+			</div>
+			<?php endif; ?>
+			<?php endif; ?>
+			
+			<?php if ( $is_admin ): ?>
+			<form action="<?php echo admin_url( 'admin-post.php?action=generate_contract_files'); ?>" method="post" id="contract_files_generate_form" class="field admin-theme">
+				/!\ <?php _e( "Si vous choisissez de g&eacute;n&eacute;rer les contrats, cela remplacera les fichiers précédents :", 'yproject' ); ?> /!\
+				<br /><br />
+				<div class="align-center">
+					<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+					<button class="button blue-pale"><?php _e( "G&eacute;n&eacute;rer des contrats vierges", 'yproject' ); ?></button>
+				</div>
+			</form>
+			
 			<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
 				la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>
+			<?php endif; ?>
 			
             <form action="<?php echo admin_url( 'admin-post.php?action=upload_contract_files'); ?>" method="post" id="contract_files_form" enctype="multipart/form-data">
                 <ul class="errors">
@@ -591,21 +814,6 @@ function print_informations_page()
                 </ul>
 
 				<?php
-				$file_name_contract_user = $campaign->backoffice_contract_user();
-				if (!empty($file_name_contract_user)) {
-					$file_name_exploded = explode('.', $file_name_contract_user);
-					$ext = $file_name_exploded[count($file_name_exploded) - 1];
-					$file_name_contract_user = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_user;
-				}
-                DashboardUtility::create_field(array(
-                    "id"				=> "new_backoffice_contract_user",
-                    "type"				=> "upload",
-                    "label"				=> "Contrat d'investissement au nom d'une personne physique",
-                    "value"				=> $file_name_contract_user,
-                    "editable"			=> $is_admin,
-					"download_label"	=> $post_campaign->post_title . " - Contrat personne physique." . $ext
-                ));
-				
 				$file_name_contract_orga = $campaign->backoffice_contract_orga();
 				if (!empty($file_name_contract_orga)) {
 					$file_name_exploded = explode('.', $file_name_contract_orga);
@@ -615,17 +823,116 @@ function print_informations_page()
                 DashboardUtility::create_field(array(
                     "id"				=> "new_backoffice_contract_orga",
                     "type"				=> "upload",
-                    "label"				=> "Contrat d'investissement au nom d'une organisation",
+                    "label"				=> "Contrat d'investissement",
                     "value"				=> $file_name_contract_orga,
                     "editable"			=> $is_admin,
-					"download_label"	=> $post_campaign->post_title . " - Contrat organisation." . $ext
+					"download_label"	=> $post_campaign->post_title . " - Contrat royalties." . $ext
                 ));
+					
+				DashboardUtility::create_field(array(
+					"id"			=> "new_contract_budget_type",
+					"type"			=> "select",
+					"label"			=> "Budget &eacute;gal au",
+					"value"			=> $campaign->contract_budget_type(),
+					"options_id"	=> array_keys( ATCF_Campaign::$contract_budget_types ),
+					"options_names"	=> array_values( ATCF_Campaign::$contract_budget_types ),
+					"admin_theme"	=> $is_admin,
+					"editable"		=> $is_admin
+				));
+				?>
+				<?php if ( $is_admin ): ?>
+				<div class="field admin-theme">
+					<?php echo _e( "Si le budget est égal au montant collecté, le prévisionnel sera exprimé en pourcentage du budget.", 'yproject' ); ?>
+					<br /><br />
+				</div>
+				<?php endif; ?>
+
+				<?php
+				DashboardUtility::create_field(array(
+					"id"			=> "new_contract_maximum_type",
+					"type"			=> "select",
+					"label"			=> "Plafond",
+					"value"			=> $campaign->contract_maximum_type(),
+					"options_id"	=> array_keys( ATCF_Campaign::$contract_maximum_types ),
+					"options_names"	=> array_values( ATCF_Campaign::$contract_maximum_types ),
+					"admin_theme"	=> $is_admin,
+					"editable"		=> $is_admin
+				));
+				?>
+				<?php if ( $is_admin ): ?>
+				<div class="field admin-theme">
+					<?php echo _e( "Si infini, le budget est égal au montant collecté.", 'yproject' ); ?>
+					<br /><br />
+				</div>
+				<?php endif; ?>
+
+
+				<?php
+				DashboardUtility::create_field(array(
+					"id"			=> "new_quarter_earnings_estimation_type",
+					"type"			=> "select",
+					"label"			=> "Estimation de revenus trimestriels",
+					"value"			=> $campaign->quarter_earnings_estimation_type(),
+					"options_id"	=> array_keys( ATCF_Campaign::$quarter_earnings_estimation_types ),
+					"options_names"	=> array_values( ATCF_Campaign::$quarter_earnings_estimation_types ),
+					"admin_theme"	=> $is_admin,
+					"editable"		=> $is_admin
+				));
+				
+				
+				if ( $is_admin ) {
+					
+					DashboardUtility::create_field(array(
+						"id"			=> "new_override_contract",
+						"type"			=> "editor",
+						"label"			=> "Surcharger le contrat standard",
+						"infobubble"	=> "Le contrat ne sera pas surcharg&eacute; si ce champ reste vide.",
+						"value"			=> $campaign->override_contract(),
+						"admin_theme"	=> true
+					));
+				
+				}
+				
 				
                 DashboardUtility::create_save_button("projectinfo_form");
 				?>
 				
 				<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
 			</form>
+			
+			<?php if ( $is_admin ): ?>
+            <form id="contract_modification_form" class="db-form" data-action="save_project_contract_modification">
+                <?php
+                DashboardUtility::create_field( array(
+					'id'			=> 'new_contract_modification',
+					'type'			=> 'editor',
+					'label'			=> __( "Modifications sur le contrat entre vote et campagne", 'yproject' ),
+					'value'			=> $campaign->contract_modifications(),
+					'admin_theme'	=> true
+                ) );
+				?>
+
+                <?php DashboardUtility::create_save_button("contract_modification_form"); ?>
+            </form>
+			<?php endif; ?>
+			
+			<?php
+			$pending_preinvestements = $campaign->pending_preinvestments();
+			$count_pending_preinvestements = count( $pending_preinvestements );
+			?>
+			<?php if ( $is_admin && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte ): ?>
+				<div class="field admin-theme">
+					<?php if ( $count_pending_preinvestements > 0 ): ?>
+					Il y a des pré-investissements non-validés.<br><br>
+					<form action="<?php echo admin_url( 'admin-post.php?action=send_project_contract_modification_notification'); ?>" method="post" class="align-center">
+						<button type="submit" class="button red"><?php _e( "Envoyer les notifications de modification de contrat" ); ?></button>
+						<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+					</form>
+					<?php else: ?>
+					Il n'y a pas de pré-investissement en attente.
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
         </div>
     </div>
     <?php

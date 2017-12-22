@@ -1,4 +1,7 @@
-<?php global $page_controler, $stylesheet_directory_uri; ?>
+<?php
+global $stylesheet_directory_uri;
+$page_controler = WDG_Templates_Engine::instance()->get_controler();
+?>
 
 <main data-userid="<?php echo $page_controler->get_user_id(); ?>">
 		

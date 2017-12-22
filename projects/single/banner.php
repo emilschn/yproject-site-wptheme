@@ -8,7 +8,7 @@ if ($campaign->video() == '') {
 
 //Sinon on utilise l'objet vidéo fourni par wordpress
 } else {
-	$video_element = wp_oembed_get($campaign->video(), array('height' => 400));
+	$video_element = wp_oembed_get( $campaign->video(), array( 'height' => 400 ) );
 }
 $campaign_status = $campaign->campaign_status();
 $campaign_categories_str = $campaign->get_categories_str();
@@ -102,9 +102,9 @@ $lang_list = $campaign->get_lang_list();
 			<div class="banner-half left">
 				<div id="project-banner-picture">
 					<?php if ($img_src != ''): ?>
-					<img id="project-banner-src" src="<?php echo $img_src; ?>" alt="banner <?php echo $post->post_title; ?>" />
+						<img id="project-banner-src" src="<?php echo $img_src; ?>" alt="banner <?php echo $post->post_title; ?>" />
 					<?php else: ?>
-					<?php echo $video_element; ?>
+						<div class="video-element"><?php echo $video_element; ?></div>
 					<?php endif; ?>
 				</div>
 				<input type="hidden" id="url_image_link" value="<?php echo $campaign->get_home_picture_src(); ?>" />
@@ -203,7 +203,7 @@ $lang_list = $campaign->get_lang_list();
 							</div>
 
 						<?php else: ?>
-							<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote">
+							<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote" data-thankyoumsg="<?php _e( "Merci pour votre vote !", 'yproject' ); ?>">
 								<?php _e('Voter', 'yproject'); ?>
 							</a>
 						<?php endif; ?>

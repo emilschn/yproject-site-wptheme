@@ -1,6 +1,6 @@
 <?php
-global $page_controler;
-$page_controler = new WDG_Page_Controler_Connection();
+$template_engine = WDG_Templates_Engine::instance();
+$template_engine->set_controler( new WDG_Page_Controler_Connection() );
 
 class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 	
@@ -10,7 +10,8 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 		parent::__construct();
 		
 		if ( is_user_logged_in() ) {
-			wp_redirect( WDGUser::get_login_redirect_page() . '#' );
+			ypcf_debug_log( 'WDG_Page_Controler_Connection::is_user_logged_in' );
+			wp_redirect( WDGUser::get_login_redirect_page( '#' ) );
 			exit();
 		}
 		//Cas particulier cause cache :
@@ -20,9 +21,11 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 		if ( WDGFormUsers::login_facebook() ) {
 			$referer_url = wp_get_referer();
 			if ( $referer_url == home_url( '/' ) || $referer_url == home_url( '/les-projets/' ) ) {
+				ypcf_debug_log( 'WDG_Page_Controler_Connection::login_facebook > mon-compte' );
 				wp_redirect( home_url( '/mon-compte#' ) );
 			} else {
-				wp_redirect( WDGUser::get_login_redirect_page() . '#' );
+				ypcf_debug_log( 'WDG_Page_Controler_Connection::login_facebook > #' );
+				wp_redirect( WDGUser::get_login_redirect_page( '#' ) );
 			}
 			exit();
 		}
@@ -42,10 +45,13 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 		if ( !empty( $error_reason ) ) {
 			switch( $error_reason ) {
 				case 'empty_fields':
-					$this->login_error_reason = __('Champs vides', 'yproject');
+					$this->login_error_reason = __( "Champs vides", 'yproject' );
 					break;
 				case 'orga_account':
-					$this->login_error_reason = __('Ce compte correspond &agrave; une organisation', 'yproject');
+					$this->login_error_reason = __( "Ce compte correspond &agrave; une organisation", 'yproject' );
+					break;
+				default:
+					$this->login_error_reason = __( "Cet utilisateur n'existe pas ou le mot de passe ne correspond pas.", 'yproject' );
 					break;
 			}
 		}

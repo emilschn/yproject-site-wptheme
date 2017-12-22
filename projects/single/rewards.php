@@ -51,49 +51,34 @@ $estimated_turnover = $campaign->estimated_turnover();
 						<button class="init_invest_count button blue"><?php _e('Calculer', 'yproject'); ?></button>
 					</p>
 
-					<?php if (is_user_logged_in()): ?>
+					<span class="uppercase"><?php _e("Je recevrai", 'yproject'); ?></span> <span class="roi_amount_user">0</span><span> &euro;* </span><br />
+					<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span> % <?php _e("du chiffre d'affaires vers&eacute; tous les trimestres.", 'yproject'); ?><br />
 
-						<span class="uppercase"><?php _e("Je recevrai", 'yproject'); ?></span> <span class="roi_amount_user">0</span><span> &euro;* </span><br />
-						<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span> % <?php _e("du chiffre d'affaires vers&eacute; tous les trimestres.", 'yproject'); ?><br />
-                                                
-						<div>
-							<table>
-								<tr>
-									<?php $index = 0; $max_turnover = max( max($estimated_turnover), 1 ); ?>
-									<?php foreach ($estimated_turnover as $i => $value): ?>
-									<?php $height = 100 - round($value / $max_turnover * 100); ?>
-									<td>
-										<div><div style="height: <?php echo $height; ?>%;"><span class="roi_amount_user_container"><span class="roi_amount_user<?php echo $index; ?>">0</span> &euro;</span></div></div>
-                                                                                <div class="roi_amount_base"></div>
-										<?php echo $i; ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $value; ?></span>
-									</td>
-									<?php $index++; endforeach; ?>
-								</tr>
-							</table>                                       
-						</div>
-						<?php $base = 130 * $index; ?>
-						<div class="arrow-line" style="width: <?php echo $base ?>px;"><div class="arrow-end"></div></div>
-						
-					<?php else: ?>
-						<div class="hidden">
-							<p>
-								<?php _e("Investir est une aventure risqu&eacute;e, c'est pourquoi WE DO GOOD est une plateforme &agrave; acc&egrave;s progressif.", 'yproject'); ?><br />
-								<?php _e("Inscrivez-vous pour visualiser l'int&eacute;gralit&eacute; du projet !", 'yproject'); ?>
-							</p>
-							<a href="#register" id="register" class="wdg-button-lightbox-open button red" data-lightbox="register" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Inscription", 'yproject'); ?></a>
-							<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button red" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Connexion", 'yproject'); ?></a>
-						</div>
-                                                
-					<?php endif; ?>
+					<div>
+						<table>
+							<tr>
+								<?php $index = 0; $max_turnover = max( max($estimated_turnover), 1 ); ?>
+								<?php foreach ($estimated_turnover as $i => $value): ?>
+								<?php $height = 100 - round($value / $max_turnover * 100); ?>
+								<td>
+									<div><div style="height: <?php echo $height; ?>%;"><span class="roi_amount_user_container"><span class="roi_amount_user<?php echo $index; ?>">0</span> &euro;</span></div></div>
+									<div class="roi_amount_base"></div>
+									<?php echo ( $index + 1 ); ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $value; ?></span>
+								</td>
+								<?php $index++; endforeach; ?>
+							</tr>
+						</table>                                       
+					</div>
+					<?php $base = 130 * $index; ?>
+					<div class="arrow-line" style="width: <?php echo $base ?>px;"><div class="arrow-end"></div></div>
                                                
 				<?php endif; ?>                               
 			</div>
                         
-		<?php if (is_user_logged_in()): ?>
 			<div class="project-rewards-alert">
 				<?php _e("Rendement vis&eacute; :", "yproject"); ?> 
 				<span class="info-user">
-					+ <span class="roi_percent_total">...</span> % <?php echo __("en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>
+					+ <span class="roi_percent_total">...</span> % <?php echo __("(brut) en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>
 					(<?php _e("soit", 'yproject'); ?> x<span class="roi_ratio_on_total">...</span> <?php echo __("en", 'yproject'). ' '. $funding_duration. ' ' .__("ans", "yproject"); ?>)
 				</span><br />
 
@@ -103,7 +88,8 @@ $estimated_turnover = $campaign->estimated_turnover();
 				</span>
 			</div>
 
-			<?php if ($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
+		<?php if ($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
+			<?php if (is_user_logged_in()): ?>
 				<div class="align-center">
 					<br />
 					<input type="submit" value="<?php _e("Investir", "yproject"); ?>" class="button red" />
@@ -111,7 +97,19 @@ $estimated_turnover = $campaign->estimated_turnover();
 					<input type="hidden" name="invest_start" value="1" />
 				</div>
 			</form>
+			<?php else: ?>
+				<?php
+				$page_invest = get_page_by_path('investir');
+				$campaign_id_param = '?campaign_id=' . $campaign->ID;
+				$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
+				?>
+				<div class="align-center">
+					<br />
+					<button class="button red wdg-button-lightbox-open" data-lightbox="connexion" 
+							data-redirect="<?php echo $invest_url; ?>"><?php _e( "Investir", 'yproject' ); ?></button>
+				</div>
 			<?php endif; ?>
+			<br />
 		<?php endif; ?>
 	    
 	    

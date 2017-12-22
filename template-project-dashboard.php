@@ -8,6 +8,8 @@
 <?php
 global $return_roi_payment;
 $return_roi_payment = WDGFormProjects::form_submit_roi_payment();
+WDGFormProjects::form_approve_payment();
+WDGFormProjects::form_cancel_payment();
 ?>
 
 <?php get_header(); ?>
@@ -17,8 +19,6 @@ $campaign_id = filter_input(INPUT_GET, 'campaign_id');
 
 //TODO: Unification des feedbacks
 $success_msg = filter_input(INPUT_GET, 'success_msg');
-WDGFormProjects::form_approve_payment();
-WDGFormProjects::form_cancel_payment();
 if ( isset($success_msg) && !empty($success_msg) ): ?>
 	<div id="lightbox-successmsg" class="wdg-lightbox">
 		<div class="wdg-lightbox-click-catcher"></div>
@@ -55,7 +55,7 @@ if ($can_modify){
 	$organization_obj = new WDGOrganization( $campaign_organization->wpref );
 
     $status = $campaign->campaign_status();
-    $collecte_or_after = $status==ATCF_Campaign::$campaign_status_collecte || $status==ATCF_Campaign::$campaign_status_funded || $status==ATCF_Campaign::$campaign_status_closed;
+    $collecte_or_after = $status==ATCF_Campaign::$campaign_status_collecte || $status==ATCF_Campaign::$campaign_status_funded || $status==ATCF_Campaign::$campaign_status_archive || $status==ATCF_Campaign::$campaign_status_closed;
     $vote_or_after = $collecte_or_after || $status==ATCF_Campaign::$campaign_status_vote;
     $preview_or_after = $vote_or_after || $status==ATCF_Campaign::$campaign_status_preview;
     $validated_or_after = true; //$preview_or_after || $status==ATCF_Campaign::$campaign_status_validated;

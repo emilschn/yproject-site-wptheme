@@ -1,4 +1,7 @@
-<?php global $page_controler, $stylesheet_directory_uri; ?>
+<?php
+global $stylesheet_directory_uri;
+$page_controler = WDG_Templates_Engine::instance()->get_controler();
+?>
 
 
 <div id="content">
@@ -58,7 +61,7 @@ $stats_html = $page_controler->get_stats_html();
 				<div id="wdg-project-stats" class="right">
 					<p><?php _e( "WE DO GOOD c'est :" ); ?></p>
 					<p>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-balloon.png" alt="arrows" />
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-balloon.png" alt="air balloon" />
 						<span>
 							<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span><br />
 							<?php _e( "lev&eacute;s", 'yproject' ); ?>
@@ -156,9 +159,9 @@ $stats_html = $page_controler->get_stats_html();
             </div>
             <div class="project-filter-container">
                 <select id="project-filter-activity" class="project-filter-select">
-                    <option value="all" selected="selected"><?php _e( "Tous les secteurs d'activit&eacute;", 'yproject' ); ?></option>
+                    <option value="all"><?php _e( "Tous les types de projet", 'yproject' ); ?></option>
                     <?php foreach ( $activities_list as $activity ): ?>
-						<option value="<?php echo $activity->slug; ?>"><?php echo $activity->name; ?></option>
+						<option value="<?php echo $activity->slug; ?>" <?php selected( $activity->slug, 'entreprises' ); ?>><?php echo $activity->name; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

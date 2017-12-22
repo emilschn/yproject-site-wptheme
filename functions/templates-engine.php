@@ -6,6 +6,8 @@
 class WDG_Templates_Engine {
 	
 	private static $instance;
+	private $current_controler;
+	
 	/**
 	 * @return WDG_Templates_Engine
 	 */
@@ -18,7 +20,6 @@ class WDG_Templates_Engine {
 	
 	public function __construct() {
 		add_action( 'template_include', 'WDG_Templates_Engine::load_controler', 100, 2 );
-		add_action( 'single_template', 'WDG_Templates_Engine::load_controler', 100, 2 );
 		add_filter( 'body_class', 'WDG_Templates_Engine::body_class' );
 		add_filter( 'the_content', 'WDG_Templates_Engine::override_content' );
 	}
@@ -27,10 +28,11 @@ class WDG_Templates_Engine {
 	public static function get_page_name() {
 		if ( ! isset ( self::$current_page_name ) ) {
 			wp_reset_query();
+			global $wp_query;
 			if ( is_home() or is_front_page() ) {
 				self::$current_page_name = 'home';
 				
-			} elseif ( is_single() ) {
+			} elseif ( isset( $wp_query ) && is_single() ) {
 				self::$current_page_name = 'projet';
 
 			} else {
@@ -74,8 +76,8 @@ class WDG_Templates_Engine {
 			locate_template( WDG_Templates_Engine::$controler_path. 'controler-' .$controler_name. '.php', TRUE );
 			
 		} else {
-			global $page_controler;
-			$page_controler = new WDG_Page_Controler();
+			$wdg_templates_engine = WDG_Templates_Engine::instance();
+			$wdg_templates_engine->set_controler( new WDG_Page_Controler() );
 			
 		}
 
@@ -88,8 +90,15 @@ class WDG_Templates_Engine {
 	 * @return WDG_Page_Controler
 	 */
 	public function get_controler() {
-		global $page_controler;
-		return $page_controler;
+		return $this->current_controler;
+	}
+	
+	/**
+	 * Définit le controler en cours
+	 * @param WDG_Page_Controler $page_controler
+	 */
+	public function set_controler( $page_controler ) {
+		$this->current_controler = $page_controler;
 	}
 	
 /******************************************************************************/
@@ -149,5 +158,4 @@ class WDG_Templates_Engine {
 	
 }
 
-global $wdg_templates_engine;
-$wdg_templates_engine = WDG_Templates_Engine::instance();
+WDG_Templates_Engine::instance();

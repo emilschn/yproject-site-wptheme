@@ -1,42 +1,49 @@
 jQuery(document).ready( function($) {
 	YPUIFunctions.initUI();
+	WDGFormsFunctions.init();
 });
-
 
 YPUIFunctions = (function($) {
 	return {
+		
+		currentLightbox: '',
 
 		initUI: function() {
 			WDGProjectPageFunctions.initUI();
 			YPUIFunctions.initQtip();
+			WDGLightboxFunctions.init();
 
 			$(document).scroll(function() {
-				if ($(".menu-client").length > 0) {
-					if ($(document).scrollTop() > 110) {
-						$("#nav").hide();
-						$(".menu-client").css("position", "fixed");
-						$("#content.theme-myphotoreporter #projects-stats-content").css("top", 60);
-						$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 60);
+				if ( YPUIFunctions.currentLightbox === '' ) {
+				
+					if ($(".menu-client").length > 0) {
+						if ($(document).scrollTop() > 110) {
+							$("#nav").hide();
+							$(".menu-client").css("position", "fixed");
+							$("#content.theme-myphotoreporter #projects-stats-content").css("top", 60);
+							$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 60);
+						} else {
+							$("#nav").show();
+							$(".menu-client").css("position", "relative");
+							$("#content.theme-myphotoreporter #projects-stats-content").css("top", 0);
+							$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 0);
+						}
+
+
 					} else {
-						$("#nav").show();
-						$(".menu-client").css("position", "relative");
-						$("#content.theme-myphotoreporter #projects-stats-content").css("top", 0);
-						$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 0);
+						if ($(document).scrollTop() > 50) {
+							$("nav#main").css("marginTop", 0);
+						} else {
+							$("nav#main").css("marginTop", 10);
+						}
 					}
 
-
-				} else {
-					if ($(document).scrollTop() > 50) {
-						$("nav#main").css("marginTop", 0);
+					if ($(document).scrollTop() > 250) {
+						$(".responsive-fixed").addClass("fixed");
 					} else {
-						$("nav#main").css("marginTop", 10);
+						$(".responsive-fixed").removeClass("fixed");
 					}
-				}
-
-				if ($(document).scrollTop() > 250) {
-					$(".responsive-fixed").addClass("fixed");
-				} else {
-					$(".responsive-fixed").removeClass("fixed");
+					
 				}
 			});
 			
@@ -44,7 +51,7 @@ YPUIFunctions = (function($) {
 			$("nav#main a.lines").click(function(e) {
 				$("nav#main a.lines").removeClass("current");
 				$(this).addClass("current"); 
-                                $(this).addClass("select-nav");
+				$(this).addClass("select-nav");
 			});
             
 			// Navbar : bouton compte utilisateur
@@ -87,6 +94,22 @@ YPUIFunctions = (function($) {
 					});
 				}
 				$("#submenu-search").height("auto");
+				
+				if ( search === 'get funky!' ) {
+					$( '#container' ).empty();
+					$( '#container' ).append( '<div class="align-center" style="padding-top: 80px;"><iframe width="560" height="315" src="https://www.youtube.com/embed/kxopViU98Xo?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe></div>' );
+					WDGGETFUNKY_MARGINLEFT = 500;
+					WDGGETFUNKY();
+					function WDGGETFUNKY() {
+						WDGGETFUNKY_MARGINLEFT *= -1;
+						$( '#container div' ).animate(
+							{ marginLeft: WDGGETFUNKY_MARGINLEFT }, 
+							2000, 
+							"swing",
+							function() { WDGGETFUNKY(); }
+						);
+					}
+				}
 			});
 			
 			
@@ -165,7 +188,7 @@ YPUIFunctions = (function($) {
 				else $("#extendable-" + targetId).show();
 			});
 			
-			$("footer h3.clickable").click(function() {
+			$("footer span.footer-subtitle.clickable").click(function() {
 				if ($(window).width() < 998) {
 					if ($(this).next().is(":visible")) {
 						$(this).removeClass("expanded");
@@ -283,98 +306,6 @@ YPUIFunctions = (function($) {
 				}
 			});
 
-			if ($(".wdg-lightbox").length > 0) {
-				$(".wdg-button-lightbox-open").not("#wdg-lightbox-newproject .wdg-button-lightbox-open").click(function() {
-					$(".wdg-lightbox").hide();
-					var target = $(this).data("lightbox");
-					$("#wdg-lightbox-" + target).show();
-					if($("#wdg-lightbox-" + target).attr("data-scrolltop") == "1"){
-						YPUIFunctions.scrollTo($(".wdg-lightbox-padder"));
-					}
-				});
-				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function(e) {				
-					$(".wdg-lightbox").hide();
-					e.preventDefault();
-				});
-				$(".wdg-lightbox #wdg-lightbox-welcome-close").click(function(e) {
-					$(".wdg-lightbox").hide();
-				});
-				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function(e) {
-					$(".wdg-lightbox").hide();
-				});
-				var sHash = window.location.hash.substring(1);
-				if ( (sHash.indexOf("=") === -1) && ($("#wdg-lightbox-" + sHash).length > 0) ) {
-					$("#wdg-lightbox-" + sHash).show();
-				}
-			}
-			if ($(".timeout-lightbox").length > 0) {
-				var nTimeout = 2000;
-				if ($(".timeout-lightbox").data("duration") > 0) nTimeout = $(".timeout-lightbox").data("duration");
-				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, nTimeout);
-			}
-
-			//Lightbox de nouveau projet
-			if( $("#newproject_form").length > 0){
-				$('#newproject_form input#new-company-name').val(" ");
-				$('#newproject_form input#new-company-name').parent().parent().parent().hide();
-				if($('#newproject_form input#company-name').val() === ""){
-					$('#newproject_form #project-name').val("");
-				}
-				$('#newproject_form #company-name').on("keyup change", function() {
-					$('#newproject_form input#new-company-name').parent().parent().parent().hide();
-					var val = "";
-					if($('#newproject_form input#company-name').length > 0 && $('#newproject_form input#company-name').val() !== "" ) {
-						val = $('#newproject_form input#company-name').val();
-						$('#newproject_form #project-name').val("Projet de "+val);
-						$('#newproject_form input#new-company-name').val(" ");
-					} else {
-						if($('#newproject_form select[name=company-name]').length > 0) {
-							var option = $('#newproject_form select[name=company-name] option:selected').val();
-							if(option !== "new_orga"){
-								val = $('#newproject_form select[name=company-name] option:selected').text();
-								$('#newproject_form #project-name').val("Projet de "+val);
-								$('#newproject_form input#new-company-name').val(" ");
-							} else {
-								$('#newproject_form input#new-company-name').val("");
-								$('#newproject_form #project-name').val('');
-								$('#newproject_form input#new-company-name').parent().parent().parent().show();
-								$('#newproject_form input#new-company-name').on("keyup change", function() {
-									var val = $('#newproject_form input#new-company-name').val();
-									if (val!="") {
-										$('#newproject_form #project-name').val("Projet de "+val);
-									} else {
-										$('#newproject_form #project-name').val("");
-									}
-								});
-							}
-						}
-					}
-				});
-				$('#newproject_form input#new-company-name').focus(function(){
-					$('#newproject_form input#new-company-name').val('');
-				});
-				if($('#newproject_form #company-name').val() !== ''){
-					var val = $('#newproject_form #company-name option:selected').text();
-					$('#newproject_form #project-name').val("Projet de "+val);
-				}
-
-				//Désactive bouton si champs incomplets
-				$("input, textarea","#newproject_form").keyup(function(){
-					$("#newProject_button").find("button").prop('disabled', ($("input, textarea","#newproject_form").filter(function() { return $(this).val() == ""; }).length > 0 || !$("#project-terms").is(':checked')) );
-				});
-				$("input, textarea","#newproject_form").trigger('keyup');
-				$("#project-terms").change(function() {
-					$("input, textarea","#newproject_form").trigger('keyup');
-				});
-
-				$("#newproject_form").submit(function(){
-					$("#newProject_button").find(".button-text").hide();
-					$("#newProject_button").find(".button-waiting").show();
-					$("#newProject_button button").prop('disabled', true);
-				});
-
-			}
-
 			//Si chargement données investisseurs/investissements nécessaire
 			if ($(".ajax-investments-load").length > 0) {
 				campaign_id = $(".ajax-investments-load").attr('data-value');
@@ -424,29 +355,6 @@ YPUIFunctions = (function($) {
 
 				addListeners();
 
-			}
-
-
-			if ($("#wdg-lightbox-connexion").length > 0) {
-				$(".wdg-button-lightbox-open").click(function(){
-					$("#wdg-lightbox-connexion .redirect-page").attr("value", $(this).data("redirect"));
-				});
-			}
-			if ($("#wdg-lightbox-newproject").length > 0) {
-				$("#wdg-lightbox-newproject #connect-form .wdg-button-lightbox-open").click(function(e){
-					e.preventDefault();
-					$("#wdg-lightbox-newproject #connect-form").hide();
-					$("#wdg-lightbox-newproject #newproject-register-user").show();
-					var action = $("#wdg-lightbox-newproject #newproject-register-user form").attr("action");
-					console.log(action);
-					action = action.split("#register").join("#newproject");
-					$("#wdg-lightbox-newproject #newproject-register-user form").attr("action", action);
-				});
-				$("#wdg-lightbox-newproject #newproject-register-user .wdg-button-lightbox-open").click(function(e){
-					e.preventDefault();
-					$("#wdg-lightbox-newproject #newproject-register-user").hide();
-					$("#wdg-lightbox-newproject #connect-form").show();
-				});
 			}
 
 			if ($("#turnover-declaration").length > 0) {
@@ -500,6 +408,8 @@ YPUIFunctions = (function($) {
 					var impact = $("#project-filter-impact").val();
 					YPUIFunctions.refreshProjectList( step, location, activity, impact );
 				});
+				$("#project-filter-activity").val( 'entreprises' );
+				$("#project-filter .project-filter-select").trigger("click");
 				
 				$("div.padder.projects-funded button").click(function() {
 					var lineHeight = 620;
@@ -712,11 +622,6 @@ YPUIFunctions = (function($) {
 				}
 			});
 		},
-
-		//Scroll en haut d'une ligthbox
-		scrollTo: function(target){
-            $('.wdg-lightbox-padder').scrollTop (target.offset().top - 75);
-        },
 		
 		getCookie: function(cookieName) {
 			var name = cookieName + "=";
@@ -734,6 +639,299 @@ YPUIFunctions = (function($) {
 		}
 	};
 
+})(jQuery);
+
+var WDGLightboxFunctions = (function($) {
+	return {
+
+		init: function() {
+			if ($(".wdg-lightbox").length > 0) {
+				$( ".wdg-lightbox" ).each( function(){
+					if ( $( this ).data( 'autoopen' ) == '1' ) {
+						WDGLightboxFunctions.displaySingle( $(this).attr('id').split('wdg-lightbox-')[1] );
+					}
+				});
+				$(".wdg-button-lightbox-open").not("#wdg-lightbox-newproject .wdg-button-lightbox-open").click(function() {
+					WDGLightboxFunctions.displaySingle( $(this).data("lightbox") );
+				});
+				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function(e) {
+					e.preventDefault();
+					WDGLightboxFunctions.hideAll();
+				});
+				$(".wdg-lightbox #wdg-lightbox-welcome-close").click(function(e) {
+					WDGLightboxFunctions.hideAll();
+				});
+				$(".wdg-lightbox .wdg-lightbox-click-catcher").click(function(e) {
+					if ( !$( this ).hasClass( 'disable' ) ) {
+						WDGLightboxFunctions.hideAll();
+					}
+				});
+				var sHash = window.location.hash.substring(1);
+				if ( (sHash.indexOf("=") === -1) && ($("#wdg-lightbox-" + sHash).length > 0) ) {
+					WDGLightboxFunctions.displaySingle( sHash );
+				}
+			}
+			
+			if ($(".timeout-lightbox").length > 0) {
+				var nTimeout = 2000;
+				if ($(".timeout-lightbox").data("duration") > 0) nTimeout = $(".timeout-lightbox").data("duration");
+				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, nTimeout);
+			}
+
+
+			if ($("#wdg-lightbox-connexion").length > 0) {
+				$(".wdg-button-lightbox-open").click(function(){
+					$("#wdg-lightbox-connexion .redirect-page").attr("value", $(this).data("redirect"));
+				});
+			}
+			if ($("#wdg-lightbox-register").length > 0) {
+				$(".wdg-button-lightbox-open").click(function(){
+					$("#wdg-lightbox-register .redirect-page").attr("value", $(this).data("redirect"));
+				});
+			}
+
+			//Lightbox de nouveau projet
+			if( $("#newproject_form").length > 0){
+				$("#wdg-lightbox-newproject #connect-form .wdg-button-lightbox-open").click(function(e){
+					e.preventDefault();
+					$("#wdg-lightbox-newproject #connect-form").hide();
+					$("#wdg-lightbox-newproject #newproject-register-user").show();
+					var action = $("#wdg-lightbox-newproject #newproject-register-user form").attr("action");
+					console.log(action);
+					action = action.split("#register").join("#newproject");
+					$("#wdg-lightbox-newproject #newproject-register-user form").attr("action", action);
+				});
+				$("#wdg-lightbox-newproject #newproject-register-user .wdg-button-lightbox-open").click(function(e){
+					e.preventDefault();
+					$("#wdg-lightbox-newproject #newproject-register-user").hide();
+					$("#wdg-lightbox-newproject #connect-form").show();
+				});
+				
+				$('#newproject_form input#new-company-name').val(" ");
+				$('#newproject_form input#new-company-name').parent().parent().parent().hide();
+				if($('#newproject_form input#company-name').val() === ""){
+					$('#newproject_form #project-name').val("");
+				}
+				$('#newproject_form #company-name').on("keyup change", function() {
+					$('#newproject_form input#new-company-name').parent().parent().parent().hide();
+					var val = "";
+					if($('#newproject_form input#company-name').length > 0 && $('#newproject_form input#company-name').val() !== "" ) {
+						val = $('#newproject_form input#company-name').val();
+						$('#newproject_form #project-name').val("Projet de "+val);
+						$('#newproject_form input#new-company-name').val(" ");
+					} else {
+						if($('#newproject_form select[name=company-name]').length > 0) {
+							var option = $('#newproject_form select[name=company-name] option:selected').val();
+							if(option !== "new_orga"){
+								val = $('#newproject_form select[name=company-name] option:selected').text();
+								$('#newproject_form #project-name').val("Projet de "+val);
+								$('#newproject_form input#new-company-name').val(" ");
+							} else {
+								$('#newproject_form input#new-company-name').val("");
+								$('#newproject_form #project-name').val('');
+								$('#newproject_form input#new-company-name').parent().parent().parent().show();
+								$('#newproject_form input#new-company-name').on("keyup change", function() {
+									var val = $('#newproject_form input#new-company-name').val();
+									if (val!="") {
+										$('#newproject_form #project-name').val("Projet de "+val);
+									} else {
+										$('#newproject_form #project-name').val("");
+									}
+								});
+							}
+						}
+					}
+				});
+				$('#newproject_form input#new-company-name').focus(function(){
+					$('#newproject_form input#new-company-name').val('');
+				});
+				if($('#newproject_form #company-name').val() !== ''){
+					var val = $('#newproject_form #company-name option:selected').text();
+					$('#newproject_form #project-name').val("Projet de "+val);
+				}
+
+				//Désactive bouton si champs incomplets
+				$("input, textarea","#newproject_form").keyup(function(){
+					$("#newProject_button").find("button").prop('disabled', ($("input, textarea","#newproject_form").filter(function() { return $(this).val() == ""; }).length > 0 || !$("#project-terms").is(':checked')) );
+				});
+				$("input, textarea","#newproject_form").trigger('keyup');
+				$("#project-terms").change(function() {
+					$("input, textarea","#newproject_form").trigger('keyup');
+				});
+
+				$("#newproject_form").submit(function(){
+					$("#newProject_button").find(".button-text").hide();
+					$("#newProject_button").find(".button-waiting").show();
+					$("#newProject_button button").prop('disabled', true);
+				});
+
+			}
+			
+		},
+		
+		displaySingle: function( sLightboxId ) {
+			if ( sLightboxId == '' ) {
+				return FALSE;
+			}
+			if (typeof ga === 'function') {
+				ga('set', { page: document.location.pathname + '#' + sLightboxId, title: document.title + ' | ' + sLightboxId });
+				ga('send', 'pageview');
+			}
+			$( ".wdg-lightbox" ).hide();
+			$( "#wdg-lightbox-" + sLightboxId ).show();
+			if( $( "#wdg-lightbox-" + sLightboxId ).data( "scrolltop" ) == "1" ){
+				WDGLightboxFunctions.scrollTop( $( ".wdg-lightbox-padder" ) );
+			}
+			$('html, body').css({
+				overflow: 'hidden',
+				height: '100%'
+			});
+			$('html, body').animate({scrollTop: 0});
+			if ( !$( "#wdg-lightbox-" + sLightboxId ).hasClass( 'positioned' ) ) {
+				var parentOffset = $( "#wdg-lightbox-" + sLightboxId ).offset();
+				$( "#wdg-lightbox-" + sLightboxId ).css({
+					top: 0 - parentOffset.top,
+					left: 0 - parentOffset.left,
+					width: $(window).width(),
+					height: $(window).height()
+				});
+				$( "#wdg-lightbox-" + sLightboxId ).addClass( 'positioned' );
+			}
+			YPUIFunctions.currentLightbox = sLightboxId;
+		},
+		
+		hideAll: function() {
+			$(".wdg-lightbox").hide();
+			$('html, body').css({
+				overflow: 'auto',
+				height: 'auto'
+			});
+			YPUIFunctions.currentLightbox = '';
+		},
+
+		//Scroll en haut d'une ligthbox
+		scrollTop: function(target){
+            $('.wdg-lightbox-padder').scrollTop(target.offset().top - 75);
+        }
+		
+	};
+})(jQuery);
+
+var WDGFormsFunctions = (function($) {
+	return {
+
+		init: function() {
+			WDGFormsFunctions.initSaveButton();
+			WDGFormsFunctions.initRateCheckboxes();
+			WDGFormsFunctions.initDatePickers();
+		},
+		
+		initSaveButton: function() {
+			$( '.wdg-lightbox-ref .ajax-form button.save' ).click( function( e ) {
+				e.preventDefault();
+				$( this ).siblings( '.loading' ).show();
+				$( this ).siblings( 'button' ).hide();
+				$( this ).hide();
+				var formId = $( this ).parent().parent().parent().attr( 'id' );
+				WDGFormsFunctions.postForm( 'div#' + formId, WDGFormsFunctions.postFormCallback, this );
+			} );
+			$( '.wdg-lightbox button.close, .wdg-lightbox-ref button.close' ).click( function( e ) {
+				WDGLightboxFunctions.hideAll();
+			} );
+			$( '.wdg-lightbox button.redirect, .wdg-lightbox-ref button.redirect' ).click( function( e ) {
+				window.location = $( this ).data( 'redirecturl' );
+			} );
+		},
+		
+		initRateCheckboxes: function() {
+			if ( $( 'input[type=checkbox].rate' ).length > 0 ) {
+				$( 'input[type=checkbox].rate + span' ).click( function() {
+					var sRateType = $( this ).data( 'rate' );
+					$( 'input[type=checkbox].' + sRateType ).attr( 'checked', false );
+					var thisVal = $( this ).data( 'value' );
+					WDGFormsFunctions.setRateCheckboxes( sRateType, thisVal );
+				} );
+			}
+		},
+		
+		initDatePickers: function() {
+            $( 'input[type=text].adddatepicker' ).datepicker({
+                dateFormat: "dd/mm/yy",
+				yearRange: "-120:+10",
+                regional: "fr",
+                changeMonth: true,
+                changeYear: true
+            });
+		},
+		
+		setRateCheckboxes: function( sRateType, nRate ) {
+			for ( var i = 1; i <= nRate; i++ ) {
+				$( 'input[type=checkbox]#' + sRateType + '-' + i )[0].checked = true;
+			}
+			$( 'span#' + sRateType + '-description' ).text( $( 'input[type=checkbox]#' + sRateType + '-' + nRate ).data( 'description' ) );
+		},
+		
+		postForm: function( formid, callback, clickedButton ) {
+			$( formid+ ' div.field' ).removeClass( 'error' );
+			var sentData = {};
+			$( formid+' input, '+formid+' select, '+formid+' textarea' ).each( function() {
+				if ( $( this ).attr( 'type' ) === 'checkbox' || $( this ).attr( 'type' ) === 'radio' ) {
+					if ( $( this ).is(':checked') ) {
+						sentData[ $( this ).attr( 'name' ) ] = $( this ).val();
+					}
+				} else {
+					sentData[ $( this ).attr( 'name' ) ] = $( this ).val();
+				}
+			} );
+			
+			$.ajax({
+				'type': "POST",
+				'url': ajax_object.ajax_url,
+				'data': sentData
+				
+			}).done(function (result) {
+				
+				var jsonResult = JSON.parse(result);
+				if ( jsonResult.errors != undefined ) {
+					var nErrors = jsonResult.errors.length;
+					for ( var i = 0; i < nErrors; i++ ) {
+						var errorItem = jsonResult.errors[ i ];
+						if ( errorItem.element == 'general' ) {
+							$( formid+' span.form-error-general' ).html( errorItem.text );
+						} else {
+							$( formid+' div#field-'+errorItem.element ).addClass( 'error' );
+							$( formid+' div#field-'+errorItem.element+' span.field-error' ).html( errorItem.text );
+						}
+					}
+				}
+				callback( result, formid, clickedButton );
+				
+			});
+		},
+		
+		postFormCallback: function( result, formid, clickedButton ) {
+			$( formid+' .loading' ).hide();
+			$( formid+' button.save' ).show();
+			if ( $( formid+' button.previous' ).length > 0 ) {
+				$( formid+' button.previous' ).show();
+			}
+			var jsonResult = JSON.parse(result);
+			if ( jsonResult.errors === undefined || jsonResult.errors.length === 0 ) {
+				if ( $( clickedButton ).data( 'close' ) !== undefined && $( clickedButton ).data( 'close' ) !== '' ) {
+					$( '#wdg-lightbox-' + $( clickedButton ).data( 'close' ) ).hide();
+				}
+				if ( $( clickedButton ).data( 'open' ) !== undefined && $( clickedButton ).data( 'open' ) !== '' ) {
+					$( '#wdg-lightbox-' + $( clickedButton ).data( 'open' ) ).show();
+				}
+			}
+			
+			var callbackFunctionName = $( clickedButton ).data( 'callback' );
+			if ( callbackFunctionName !== undefined && callbackFunctionName !== '' ) {
+				( eval( callbackFunctionName ) )( result );
+			}
+		}
+		
+	};
 })(jQuery);
 
 /* Projet */
@@ -756,12 +954,10 @@ WDGProjectPageFunctions=(function($) {
 			$("#btn-validate_project-true").click(function(){
 				$("#validate_project-true").show();
 				$("#validate_project-false").hide();
-				$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 			});
 			$("#btn-validate_project-false").click(function(){
 				$("#validate_project-false").show();
 				$("#validate_project-true").hide();
-				$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
 			});
 		},
 
@@ -816,32 +1012,6 @@ WDGProjectPageFunctions=(function($) {
 			});
 			$("#dialog").dialog("open");
 		},
-
-		print_vote_form:function(){
-			if ($("#vote-form").hasClass("collapsed")) {
-				$("#vote-form").removeClass("collapsed");
-				$(".description-discover").removeClass('clicked');
-				if ($(window).width() > 480) {
-					$("#vote-form").animate({
-						top: "-350px"
-					}, 500 );
-				}
-
-			} else {
-				if ($(window).width() > 480) {
-					$('html, body').animate({scrollTop: $("#invest-button").offset().top - WDGProjectPageFunctions.navigationHeight}, "fast");
-				} else {
-					$('html, body').animate({scrollTop: $("#projects-stats-content").offset().top}, "fast");
-				}
-				$("#vote-form").animate({
-					top: "370px"
-				}, 500 );
-				$(".description-discover").addClass('clicked');
-				$("#project-description-title-padding").height($("#vote-form").height() - $("#projects-right-desc").height());
-				$("#vote-form").addClass("collapsed");
-			}
-		},
-
 
 
 		//Initialisation du comportement des différentes parties
@@ -948,203 +1118,6 @@ WDGProjectPageFunctions=(function($) {
 		hideEditButton: function(property) {
 			if (typeof ProjectEditor !== 'undefined') {
 				ProjectEditor.hideEditButton(property);
-			}
-		}
-
-	};
-})(jQuery);
-
-
-
-WDGInvestPageFunctions=(function($) {
-	return {
-		initUI:function() {
-			//Interactions choix de contrepartie
-			if ($("#invest_form").length > 0) {
-				//Changement de montant
-				$("#input_invest_amount_part").on( 'keyup change', function () {
-					$("#validate_invest_amount_feedback").slideUp();
-					$("#link_validate_invest_amount").slideDown();
-					WDGInvestPageFunctions.checkInvestInput();
-				});
-
-				//Changement de contrepartie
-				if($("#reward-selector").length>0){
-					$("#reward-selector input:checked").closest("li").addClass("selected");
-
-					$("#reward-selector input").click(function() {
-						$("#validate_invest_amount_feedback").slideUp();
-						$("#link_validate_invest_amount").slideDown();
-						WDGInvestPageFunctions.changeInvestInput();
-						WDGInvestPageFunctions.checkInvestInput();
-					});
-				}
-
-				//Clic sur valider
-				$("#link_validate_invest_amount").click(function() {
-					WDGInvestPageFunctions.checkInvestInput();
-					$("#link_validate_invest_amount").slideUp();
-					$("#validate_invest_amount_feedback").show();
-					$('html, body').animate({scrollTop: $('#link_validate_invest_amount').offset().top - $("#navigation").height()}, "slow");
-				});
-
-				//Validation du formulaire
-				$("#invest_form").submit(function(e) {
-					var formSelf = this;
-					if ($(formSelf).data("hasfilledinfos") != "1" && $("#invest_type").val() == "user") {
-						e.preventDefault();
-						$("#invest_form_button").hide();
-						$("#invest_form_loading").show();
-						$.ajax({
-							'type' : "POST",
-							'url' : ajax_object.ajax_url,
-							'data': {
-								'action': 'check_invest_input',
-								'campaign_id': $(formSelf).data("campaignid"),
-								'invest_value': $("#input_invest_amount_part").val(),
-								'invest_type' : $("#invest_type").val()
-							}
-						}).done(function(result){
-							WDGInvestPageFunctions.formInvestReturnEvent(result);
-						});
-					}
-				});
-			}
-		},
-
-		checkInvestInput: function() {
-			$(".invest_error").hide();
-			$(".invest_success").hide();
-
-			var bValidInput = true;
-			$("#input_invest_amount_part").val(($("#input_invest_amount_part").val()).replace(/,/g,"."));
-
-			if (!$.isNumeric($("#input_invest_amount_part").val())) {
-				$("#invest_error_general").show();
-				bValidInput = false;
-			} else {
-				$("#input_invest_amount").text($("#input_invest_part_value").val() * $("#input_invest_amount_part").val());
-
-				if ($("#input_invest_amount").text() != Math.floor($("#input_invest_amount").text())) {
-					$("#invest_error_integer").show();
-					bValidInput = false;
-				}
-				if (parseInt($("#input_invest_amount").text()) < $("#input_invest_min_value").val()) {
-					$("#invest_error_min").show();
-					bValidInput = false;
-				}
-				if (parseInt($("#input_invest_amount").text()) > $("#input_invest_max_value").val()) {
-					$("#invest_error_max").show();
-					bValidInput = false;
-				}
-				var nAmountInterval = $("#input_invest_max_value").val() - parseInt($("#input_invest_amount").text());
-				if (nAmountInterval < $("#input_invest_min_value").val() && nAmountInterval > 0) {
-					$("#invest_error_interval").show();
-					bValidInput = false;
-				}
-
-				//Vérification Contreparties
-				if($("#reward-selector").length>0){
-					var rewardSelectedAmount = parseInt($("#reward-selector input:checked~.reward-amount").text());
-					var rewardSelectedRemaining = parseInt($("#reward-selector input:checked~.reward-remaining").text());
-
-					if(rewardSelectedRemaining <= 0) {
-						$("#invest_error_reward_remaining").show();
-						bValidInput = false;
-					}
-
-					if (parseInt($("#input_invest_amount").text()) < rewardSelectedAmount){
-						$("#invest_error_reward_insufficient").show();
-						bValidInput = false;
-					}
-				}
-			}
-
-			if (bValidInput) {
-				$("#invest_success_amount").text( parseInt($("#input_invest_amount_total").val()) + parseInt($("#input_invest_amount").text()));
-				$("#invest_show_amount").text( parseInt($("#input_invest_amount").text()));
-				$("#invest_show_reward").text( ($("#reward-selector input:checked").closest("li").find(".reward-name").text()));
-				$(".invest_success").show();
-			}
-
-			$("#input_invest_amount_part").css("color", bValidInput ? "green" : "red");
-			return bValidInput;
-		},
-
-		changeInvestInput: function(){
-			//Change apparence élément sélectionné
-			$("#reward-selector li").removeClass("selected");
-			$("#reward-selector input:checked").closest("li").addClass("selected");
-
-			//Ajuster le champ de montant choisi à la contrepartie selectionnee
-			var rewardSelectedAmount = parseInt($("#reward-selector input:checked~.reward-amount").text());
-			$("#input_invest_amount_part").val(rewardSelectedAmount);
-		},
-
-		isUserInfosFormDisplayed: false,
-		showUserInfosForm: function(jsonInfos) {
-			$("#wdg-lightbox-userinfos").show();
-			$("#lightbox_userinfo_form_button").show();
-			$("#lightbox_userinfo_form_loading").hide();
-			$("#lightbox_userinfo_form_errors").empty();
-			for (var i = 0; i < jsonInfos.errors.length; i++) {
-				$("#lightbox_userinfo_form_errors").append("<li>"+jsonInfos.errors[i]+"</li>");
-			}
-
-			if (!WDGInvestPageFunctions.isUserInfosFormDisplayed) {
-				WDGInvestPageFunctions.isUserInfosFormDisplayed = true;
-				$("#lightbox_userinfo_form").submit(function(e) {
-					e.preventDefault();
-					$("#lightbox_userinfo_form_button").hide();
-					$("#lightbox_userinfo_form_loading").show();
-					$.ajax({
-						'type' : "POST",
-						'url' : ajax_object.ajax_url,
-						'data': {
-							'action': 'save_user_infos',
-							'campaign_id': $("#invest_form").data("campaignid"),
-							'invest_type': $("#invest_type").val(),
-							'gender': $("#update_gender").val(),
-							'firstname': $("#update_firstname").val(),
-							'lastname': $("#update_lastname").val(),
-							'birthday_day': $("#update_birthday_day").val(),
-							'birthday_month': $("#update_birthday_month").val(),
-							'birthday_year': $("#update_birthday_year").val(),
-							'birthplace': $("#update_birthplace").val(),
-							'nationality': $("#update_nationality").val(),
-							'address': $("#update_address").val(),
-							'postal_code': $("#update_postal_code").val(),
-							'city': $("#update_city").val(),
-							'country': $("#update_country").val(),
-							'telephone': $("#update_mobile_phone").val()
-						}
-					}).done(function(result){
-						WDGInvestPageFunctions.formInvestReturnEvent(result);
-					});
-				});
-			}
-		},
-
-		formInvestReturnEvent: function(result) {
-			var response = "";
-			if (result != "") {
-				var jsonResult = JSON.parse(result);
-				response = jsonResult.response;
-			}
-			switch (response) {
-				case "edit_user":
-					WDGInvestPageFunctions.showUserInfosForm(jsonResult);
-					break;
-				case "new_organization":
-					break;
-				case "edit_organization":
-					break;
-				case "kyc":
-					break;
-				default:
-					$("#invest_form").data("hasfilledinfos", "1");
-					$("#invest_form").submit();
-					break;
 			}
 		}
 
