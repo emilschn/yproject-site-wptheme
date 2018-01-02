@@ -537,6 +537,9 @@ function print_informations_page()
 						"label"			=> "Commission de la plateforme",
 						"value"			=> $campaign->platform_commission(),
 						"suffix"		=> "<span>&nbsp;% TTC</span>",
+						"min"			=> 0,
+						"max"			=> 100,
+						"step"			=> 0.000000000000000000000001,
 						"editable"		=> $is_admin,
 						"visible"		=> $is_admin,
 						"admin_theme"	=> true
@@ -565,6 +568,7 @@ function print_informations_page()
                     "suffix"		=> "<span>&nbsp;% du chiffre d'affaires</span>",
                     "min"			=> 0,
                     "max"			=> 100,
+                    "step"			=> 0.000000000000000000000001,
 					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 				
@@ -576,6 +580,7 @@ function print_informations_page()
 					"suffix"		=> "<span>&nbsp;% du chiffre d'affaires</span>",
 					"min"			=> 0,
 					"max"			=> 100,
+                    "step"			=> 0.000000000000000000000001,
 					"visible"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed,
 					"editable"		=> $is_admin
 				));
