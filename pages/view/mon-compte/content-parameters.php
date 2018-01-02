@@ -1,165 +1,57 @@
-<?php global $page_controler, $stylesheet_directory_uri, $country_list; ?>
+<?php global $stylesheet_directory_uri, $country_list; ?>
+<?php
+$page_controler = WDG_Templates_Engine::instance()->get_controler();
+$WDGUserDetailsForm = $page_controler->get_user_details_form();
+$fields_hidden = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field_group_hidden );
+$fields_basics = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field_group_basics );
+$fields_complete = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field_group_complete );
+$fields_extended = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field_group_extended );
+?>
 
 
-<form method="post" class="db-form form-register" enctype="multipart/form-data">
-	
-	<h2><?php _e( "Informations personnelles", 'yproject' ); ?></h2>
+<form method="post" class="db-form form-register v3 full" enctype="multipart/form-data">
+		
+	<?php foreach ( $fields_hidden as $field ): ?>
+		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+	<?php endforeach; ?>
 
-	<div class="field">
-		<label for="update_email"><?php _e( "Adresse e-mail", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<input type="email" name="update_email" id="update_email" value="<?php echo $page_controler->get_user_data( 'email' ); ?>" />
-			</span>
-		</div>
-	</div>
+	<span class="form-error-general"></span>
 
-	<div class="field">
-		<label for="update_gender"><?php _e( "Vous &ecirc;tes", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<select name="update_gender" id="update_gender">
-					<option value="female" <?php selected( $page_controler->get_user_data( 'gender' ), 'female' ); ?>><?php _e( "une femme", 'yproject' ); ?></option>
-					<option value="male" <?php selected( $page_controler->get_user_data( 'gender' ), 'male' ); ?>><?php _e( "un homme", 'yproject' ); ?></option>
-				</select>
-			</span>
+	<h3><?php _e( "Enregistrez vos informations", 'yproject' ); ?></h3>
+
+	<?php foreach ( $fields_basics as $field ): ?>
+		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+	<?php endforeach; ?>
+
+	<?php if ( !empty( $fields_complete ) ): ?>
+	<?php foreach ( $fields_complete as $field ): ?>
+		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+	<?php endforeach; ?>
+	<?php endif; ?>
+
+	<?php if ( !empty( $fields_extended ) ): ?>
+	<?php foreach ( $fields_extended as $field ): ?>
+		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+	<?php endforeach; ?>
+	<?php endif; ?>
+
+
+	<div id="user-details-form-buttons">
+
+		<button class="button save red" data-close="user-details" data-open="user-details-confirmation"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+
+		<div class="loading align-center hidden">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 		</div>
-	</div>
-	
-	<div class="field">
-		<label for="update_firstname"><?php _e( "Pr&eacute;nom", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<input type="text" name="update_firstname" id="update_firstname" value="<?php echo $page_controler->get_user_data( 'firstname' ); ?>" />
-			</span>
-		</div>
-	</div>
-	
-	<div class="field">
-		<label for="update_lastname"><?php _e( "Nom", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<input type="text" name="update_lastname" id="update_lastname" value="<?php echo $page_controler->get_user_data( 'lastname' ); ?>" />
-			</span>
-		</div>
-	</div>
-	
-	<div class="field">
-		<label for="update_publicname"><?php _e( "Nom public", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<input type="text" name="update_publicname" id="update_publicname" value="<?php echo $page_controler->get_user_data( 'display_name' ); ?>" />
-			</span>
-		</div>
-	</div>
-	
-	<div class="field">
-		<label for="update_birthday_day"><?php _e( "Date de naissance", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<select name="update_birthday_day" id="update_birthday_day">
-					<?php for ($i = 1; $i <= 31; $i++) { ?>
-						<option value="<?php echo $i; ?>" <?php selected( $page_controler->get_user_data( 'birthday_day' ), $i); ?>><?php echo $i; ?></option>
-					<?php } ?>
-				</select>
-			</span>
-			<span class="field-value">
-				<select name="update_birthday_month" id="update_birthday_month">
-					<?php $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ); ?>
-					<?php for ( $i = 1; $i <= 12; $i++ ): ?>
-						<option value="<?php echo $i; ?>" <?php selected( $page_controler->get_user_data( 'birthday_month' ), $i); ?>><?php _e( $months[ $i - 1 ] ); ?></option>
-					<?php endfor; ?>
-				</select>
-			</span>
-			<span class="field-value">
-				<select name="update_birthday_year" id="update_birthday_month">
-					<?php for ( $i = date("Y"); $i >= 1900; $i-- ): ?>
-						<option value="<?php echo $i; ?>" <?php selected( $page_controler->get_user_data( 'birthday_year' ), $i); ?>><?php echo $i; ?></option>
-					<?php endfor; ?>
-				</select>
-			</span>
-		</div>
-	</div>
-	
-	<div class="field">
-		<label for="update_birthplace"><?php _e( "Ville de naissance", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<input type="text" name="update_birthplace" id="update_birthplace" value="<?php echo $page_controler->get_user_data( 'birthplace' ); ?>" />
-			</span>
-		</div>
-	</div>
-	
-	<div class="field">
-		<label for="update_nationality"><?php _e( "Nationalit&eacute;", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<select name="update_nationality" id="update_nationality">
-					<option value=""></option>
-					<?php foreach ( $country_list as $country_code => $country_name ) : ?>
-						<option value="<?php echo $country_code; ?>" <?php selected( $page_controler->get_user_data( 'nationality' ), $country_code ); ?>><?php echo $country_name; ?></option>
-					<?php endforeach; ?>
-				</select>
-			</span>
-		</div>
-	</div>
-	
-	<div class="field">
-		<label for="update_address"><?php _e( "Adresse", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<input type="text" name="update_address" id="update_address" value="<?php echo $page_controler->get_user_data( 'address' ); ?>" />
-			</span>
-		</div>
-	</div>
-	
-	<div class="field">
-		<label for="update_postal_code"><?php _e( "Code postal", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<input type="text" name="update_postal_code" id="update_postal_code" value="<?php echo $page_controler->get_user_data( 'postal_code' ); ?>" />
-			</span>
-		</div>
-	</div>
-	
-	<div class="field">
-		<label for="update_city"><?php _e( "Ville", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<input type="text" name="update_city" id="update_city" value="<?php echo $page_controler->get_user_data( 'city' ); ?>" />
-			</span>
-		</div>
-	</div>
-	
-	<div class="field">
-		<label for="update_country"><?php _e( "Pays", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<input type="text" name="update_country" id="update_country" value="<?php echo $page_controler->get_user_data( 'country' ); ?>" />
-			</span>
-		</div>
-	</div>
-	
-	<div class="field">
-		<label for="update_mobile_phone"><?php _e( "T&eacute;l&eacute;phone mobile", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<input type="text" name="update_mobile_phone" id="update_mobile_phone" value="<?php echo $page_controler->get_user_data( 'mobile_phone' ); ?>" />
-			</span>
-		</div>
+
 	</div>
 	
 	
 	<?php if (!isset($_SESSION['redirect_current_campaign_id'])): ?>
-	
-	<div class="field">
-		<label for="update_description"><?php _e( "Description", 'yproject' ); ?></label>
-		<div class="field-container">
-			<span class="field-value">
-				<textarea name="update_description" id="update_description"><?php echo $page_controler->get_user_data( 'description' ); ?></textarea>
-			</span>
-		</div>
-	</div>
 	
 	
 	<label for="avatar_image" class="standard-label"><?php _e( "Avatar", 'yproject' ); ?></label>

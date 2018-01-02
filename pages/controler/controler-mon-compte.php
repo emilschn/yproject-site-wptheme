@@ -10,6 +10,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	private $user_project_list;
 	private $user_data;
 	private $wallet_to_bankaccount_result;
+	private $form_user_details;
 	
 	public function __construct() {
 		parent::__construct();
@@ -21,6 +22,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
 		$this->init_current_user();
 		$this->init_project_list();
+		$this->init_form();
 		locate_template( array( 'country_list.php'  ), true );
 	}
 	
@@ -83,6 +85,14 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 /******************************************************************************/
 // USER DATA
 /******************************************************************************/
+	private function init_form() {
+		$this->form_user_details = new WDG_Form_User_Details( $this->current_user->get_wpref(), WDG_Form_User_Details::$type_extended );
+	}
+	
+	public function get_user_details_form() {
+		return $this->form_user_details;
+	}
+	
 	public function get_user_data( $data_key ) {
 		$buffer = '';
 		if ( !empty( $data_key ) ) {
