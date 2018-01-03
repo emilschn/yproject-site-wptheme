@@ -590,33 +590,33 @@ function print_informations_page()
 				$contract_start_date_list = array();
 				if ( $contract_start_date_editable ) {
 					// Trouver la prochaine date possible : janvier, avril, juillet, octobre
-					$current_date = new DateTime();
+					$campaign_creation_date = new DateTime( $post_campaign->post_date );
 					$previous_date = new DateTime();
 					$next_date = new DateTime();
-					switch ( $current_date->format('m') ) {
+					switch ( $campaign_creation_date->format('m') ) {
 						case 1:
 						case 2:
 						case 3:
-							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-01-01' );
-							$next_date = new DateTime( $current_date->format( 'Y' ) . '-04-01' );
+							$previous_date =  new DateTime( $campaign_creation_date->format( 'Y' ) . '-01-01' );
+							$next_date = new DateTime( $campaign_creation_date->format( 'Y' ) . '-04-01' );
 							break;
 						case 4:
 						case 5:
 						case 6:
-							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-04-01' );
-							$next_date = new DateTime( $current_date->format( 'Y' ) . '-07-01' );
+							$previous_date =  new DateTime( $campaign_creation_date->format( 'Y' ) . '-04-01' );
+							$next_date = new DateTime( $campaign_creation_date->format( 'Y' ) . '-07-01' );
 							break;
 						case 7:
 						case 8:
 						case 9:
-							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-07-01' );
-							$next_date = new DateTime( $current_date->format( 'Y' ) . '-10-01' );
+							$previous_date =  new DateTime( $campaign_creation_date->format( 'Y' ) . '-07-01' );
+							$next_date = new DateTime( $campaign_creation_date->format( 'Y' ) . '-10-01' );
 							break;
 						case 10:
 						case 11:
 						case 12:
-							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-10-01' );
-							$next_date = new DateTime( ( $current_date->format( 'Y' ) + 1 ) . '-01-01' );
+							$previous_date =  new DateTime( $campaign_creation_date->format( 'Y' ) . '-10-01' );
+							$next_date = new DateTime( ( $campaign_creation_date->format( 'Y' ) + 1 ) . '-01-01' );
 							break;
 					}
 					array_push( $contract_start_date_values, $previous_date->format( 'Y-m-d H:i:s' ) );
