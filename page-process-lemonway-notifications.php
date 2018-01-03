@@ -107,7 +107,7 @@ if ( !empty( $lemonway_posted_category ) ) {
 				// - Créer le contrat pdf
 				// - Envoyer validation d'investissement par mail
 				if ( $lemonway_posted_amount > 1500 ) {
-					$contract_id = ypcf_create_contract( $investment_id, $investment_campaign_id, $WDGUser_invest_author->wp_user->ID );
+					$contract_id = WDGInvestment::create_contract( $investment_id, $investment_campaign_id, $WDGUser_invest_author->wp_user->ID );
 					if ($contract_id != '') {
 						$contract_infos = signsquid_get_contract_infos( $contract_id );
 						NotificationsEmails::new_purchase_user_success( $investment_id, $contract_infos->{'signatories'}[0]->{'code'}, FALSE, ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ) );

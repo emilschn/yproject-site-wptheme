@@ -299,7 +299,7 @@ else {
 				    
 		<div id="dialog" title="Partager ce projet">
 			<?php if (class_exists('Sharing_Service')) {
-				echo ypcf_fake_sharing_display();
+//				echo ypcf_fake_sharing_display();
 
 			} else { ?>
 

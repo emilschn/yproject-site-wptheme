@@ -111,7 +111,7 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 	public function get_current_user_phone() {
 		$buffer = FALSE;
 		$WDGUser_current = WDGUser::current();
-		if ( ypcf_check_user_phone_format( $WDGUser_current->get_phone_number() ) ) {
+		if ( $WDGUser_current->has_phone_number_correct() ) {
 			$buffer = $WDGUser_current->get_phone_number();
 		}
 		return $buffer;
