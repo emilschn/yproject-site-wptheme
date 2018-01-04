@@ -6,7 +6,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <div class="center align-justify">
 <br><br>
 
-<?php if ( $page_controler->get_current_investment()->get_session_amount() > 1500 ): ?>
+<?php if ( $page_controler->get_current_investment()->get_session_amount() > WDGInvestmentContract::$signature_minimum_amount ): ?>
 
 	<?php if ( !$page_controler->has_contract_errors() ): ?>
 		<?php _e( "Vous allez recevoir deux e-mails cons&eacute;cutifs &agrave; l&apos;adresse", 'yproject' ); ?> <?php echo $page_controler->get_current_user_email(); ?>
