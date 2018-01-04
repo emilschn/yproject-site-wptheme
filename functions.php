@@ -199,15 +199,14 @@ function print_user_projects(){
 				    $post_camp = get_post($download_id);
 				    $campaign = atcf_get_campaign($post_camp);
 				    ypcf_get_updated_payment_status($post->ID);
-				    $signsquid_contract = new SignsquidContract($post->ID);
+				    $investment_contract = new WDGInvestmentContract($post->ID);
 				    $payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
 
 				    //Infos relatives au projet
 				    $user_projects[$campaign->ID]['ID'] = $campaign->ID;
 				    //Infos relatives à l'investissement de l'utilisateur
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_contract_id'] = $signsquid_contract->get_contract_id();
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status'] = $signsquid_contract->get_status_code();
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status_str'] = $signsquid_contract->get_status_str();
+				    $user_projects[$campaign->ID]['payments'][$post->ID]['contract_status'] = $investment_contract->get_status_code();
+				    $user_projects[$campaign->ID]['payments'][$post->ID]['contract_status_str'] = $investment_contract->get_status_str();
 				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_date'] = $payment_date;
 				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount'] = edd_get_payment_amount( $post->ID );
 				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_status'] = edd_get_payment_status( $post, true );
@@ -347,20 +346,15 @@ function print_user_projects(){
 										<?php echo $payment['payment_status']; ?>
 									</td>
 									<td class="user-payment-item user-payment-signsquid-status">
-										<?php echo $payment['signsquid_status_str']; ?>
+										<?php echo $payment['contract_status_str']; ?>
 									</td>
 
 									<?php
 									//Boutons pour Annuler l'investissement | Recevoir le code à nouveau
 									//Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
-									if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $payment_status == "publish" && $payment['signsquid_status'] != 'Agreed') :
+									if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $payment_status == "publish" && $payment['contract_status'] != WDGInvestmentContract::$status_code_agreed) :
 									?>
 									<td style="width: 220px;">
-										<?php /*if (!empty($payment['signsquid_contract_id'])): ?>
-											<?php $page_my_investments = get_page_by_path('mes-investissements'); ?>
-											<a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $payment_id; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
-										<?php endif;*/ ?>
-										
 										<?php $page_cancel_invest = get_page_by_path('annuler-un-investissement'); ?>
 										<a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $payment_id; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
 									</td>

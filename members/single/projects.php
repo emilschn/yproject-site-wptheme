@@ -4,30 +4,6 @@ $page_mes_investissements = get_page_by_path('mes-investissements');
 $WDGUser_displayed = WDGUser::current();
 ?>
 
-<?php
-//Si on a demandé de renvoyer le code
-if (isset($_GET['invest_id_resend']) && $_GET['invest_id_resend'] != '') {
-	$contractid = ypcf_get_signsquidcontractid_from_invest($_GET['invest_id_resend']);
-	// $signsquid_infos = signsquid_get_contract_infos($contractid);
-	$signsquid_signatory = signsquid_get_contract_signatory($contractid);
-	$current_user = wp_get_current_user();
-	if ($signsquid_signatory != '' && $signsquid_signatory->{'email'} == $current_user->user_email) {
-		if (ypcf_send_mail_purchase($_GET['invest_id_resend'], "send_code", $signsquid_signatory->{'code'}, $current_user->user_email)) {
-			?>
-			Votre code de signature de contrat a &eacute;t&eacute; renvoy&eacute; &agrave; l&apos;adresse <?php echo $current_user->user_email; ?>.<br />
-			<?php
-		} else {
-			?>
-			<span class="errors">Il y a eu une erreur lors de l&apos;envoi du code. N&apos;h&eacute;sitez pas &agrave; nous contacter.</span><br />
-			<?php
-		}
-	} else {
-	?>
-	<span class="errors">Nous ne trouvons pas le contrat correspondant.</span><br />
-	<?php
-	}
-}
-?>
 <h2 class="underlined">Mon porte-monnaie électronique</h2>
 
 <?php $post_details = get_page_by_path("details-des-investissements"); ?>
