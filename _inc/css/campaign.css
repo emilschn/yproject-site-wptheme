@@ -672,20 +672,15 @@ div#content.version-3 .projects-desc-content img {
 	max-width: 100%;
 	height: auto;
 }
-
-div#content.version-3 .projects-desc-content p img {
-    max-width: 100%;
-    height: auto;
- }
-div#content.version-3 .projects-desc-content p img.aligncenter {
+div#content.version-3 .projects-desc-content img.aligncenter {
     display: block !important;
     margin: 0px auto;
 }
-div#content.version-3 .projects-desc-content p img.alignleft {
+div#content.version-3 .projects-desc-content img.alignleft {
     float: left;
     margin: 5px 20px 20px 0;
 }
-div#content.version-3 .projects-desc-content p img.alignright {
+div#content.version-3 .projects-desc-content img.alignright {
     float: right;
     margin: 5px 0 20px 20px;
 }
