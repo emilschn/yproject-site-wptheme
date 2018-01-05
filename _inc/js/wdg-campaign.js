@@ -53,7 +53,7 @@ var WDGProjectViewer = (function($) {
 				
 				$( 'div.projects-desc-content iframe' ).each( function() {
 					var nWidthIframe = $( this ).attr( 'width' );
-					var nWidth = $( this ).width();
+					var nWidth = $( 'div.projects-desc-content' ).width() - 20;
 					var nCoef = nWidthIframe / nWidth;
 					var nHeight = $( this ).attr( 'height' );
 					$( this ).height( nHeight / nCoef );
