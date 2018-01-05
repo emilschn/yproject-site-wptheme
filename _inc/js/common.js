@@ -943,7 +943,7 @@ WDGProjectPageFunctions=(function($) {
 		isClickBlocked: false,
 		navigationHeight: 0,
 		initUI:function() {
-			WDGProjectPageFunctions.navigationHeight = ($("nav.project-navigation").height() > 0) ? $("nav.project-navigation").height() : $("#navigation").height();
+			WDGProjectPageFunctions.navigationHeight = ($("nav.project-navigation").height() > 0 && $("nav.project-navigation").is(':visible')) ? $("nav.project-navigation").height() : $("nav").height();
 			WDGProjectPageFunctions.initClick();
 			$('.project-content-icon').click(function(){
 				var contentDiv = $("#project-content-" + $(this).data("content"));
@@ -1058,7 +1058,11 @@ WDGProjectPageFunctions=(function($) {
 				if (projectMore.is(':visible')) {
 					//il faut la masquer puis afficher les éléments qui suivent
 					projectMore.hide(400, function(){
-						$('html, body').animate({scrollTop: clickedElement.offset().top - WDGProjectPageFunctions.navigationHeight}, "slow");
+						var offset = - 60;
+						if ( $( document ).width() < 997 ) {
+							offset = - 45;
+						}
+						$('html, body').animate({scrollTop: clickedElement.offset().top - WDGProjectPageFunctions.navigationHeight + offset}, "slow");
 						clickedElement.find('.zone-content > div, p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
 						WDGProjectPageFunctions.refreshEditable();
 					});
