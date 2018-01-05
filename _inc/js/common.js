@@ -1058,13 +1058,15 @@ WDGProjectPageFunctions=(function($) {
 				if (projectMore.is(':visible')) {
 					//il faut la masquer puis afficher les éléments qui suivent
 					projectMore.hide(400, function(){
-						var offset = - 60;
-						if ( $( document ).width() < 997 ) {
-							offset = - 45;
-						}
-						$('html, body').animate({scrollTop: clickedElement.offset().top - WDGProjectPageFunctions.navigationHeight + offset}, "slow");
-						clickedElement.find('.zone-content > div, p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
-						WDGProjectPageFunctions.refreshEditable();
+						setTimeout( function() {
+							var offset = - 60;
+							if ( $( document ).width() < 997 ) {
+								offset = - 45;
+							}
+							$('html, body').animate({scrollTop: clickedElement.offset().top - WDGProjectPageFunctions.navigationHeight + offset}, "slow");
+							clickedElement.find('.zone-content > div, p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
+							WDGProjectPageFunctions.refreshEditable();
+						}, 200 );
 					});
 					//on masque aussi toutes les autres parties
 					WDGProjectPageFunctions.hideOthers(parseInt(projectMore.attr("data-value")));
