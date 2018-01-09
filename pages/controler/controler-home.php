@@ -65,6 +65,12 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 				$count_campaignlist += count( $campaignlist_vote_sorted );
 				foreach ( $campaignlist_vote_sorted as $campaign ) { array_push( $this->projects_list, $campaign->ID ); }
 			}
+			
+			$i = $count_campaignlist - 1;
+			while ( $i > WDG_Page_Controler_Home::$projects_nb_to_show ){
+				array_splice( $this->projects_list, $i, 1 );
+				$i--;
+			}
 
 			if ( $count_campaignlist < WDG_Page_Controler_Home::$projects_nb_to_show ) {
 				for ( $i = 0; $i < WDG_Page_Controler_Home::$projects_nb_to_show - $count_campaignlist; $i++ ) {
