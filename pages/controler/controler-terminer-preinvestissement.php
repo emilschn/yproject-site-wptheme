@@ -8,7 +8,6 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 	 */
 	private $current_campaign;
 	/**
-	 *
 	 * @var WDGInvestment
 	 */
 	private $current_investment;
@@ -168,7 +167,11 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 				if ( $this->form->postForm() ) {
 					$this->current_investment->set_contract_status( WDGInvestment::$contract_status_investment_validated );
 					ypcf_get_updated_payment_status( $this->current_investment->get_id() );
-					wp_redirect( home_url( '/paiement-partager' ) . '?campaign_id=' . $this->current_campaign->ID );
+					if ( $this->current_investment->needs_signature() ) {
+						wp_redirect( home_url( '/paiement-signature' ). '?campaign_id=' .$this->current_campaign->ID );
+					} else {
+						wp_redirect( home_url( '/paiement-partager' ) . '?campaign_id=' . $this->current_campaign->ID );
+					}
 				}
 			}
 			
