@@ -67,7 +67,7 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 			}
 			
 			$i = $count_campaignlist - 1;
-			while ( $i > WDG_Page_Controler_Home::$projects_nb_to_show ){
+			while ( $i > WDG_Page_Controler_Home::$projects_nb_to_show - 1 ){
 				array_splice( $this->projects_list, $i, 1 );
 				$i--;
 			}
