@@ -42,12 +42,22 @@ var WDGProjectViewer = (function($) {
 				$(this).parent().submit();
 			});
 			
-			if ( $( 'div#project-banner-picture .video-element iframe' ).length > 0 && $( document ).width() < 997 ) {
-				var nWidthIframe = $( 'div#project-banner-picture .video-element iframe' ).attr( 'width' );
-				var nWidth = $( 'div#project-banner-picture .video-element iframe' ).width();
-				var nCoef = nWidthIframe / nWidth;
-				var nHeight = $( 'div#project-banner-picture .video-element iframe' ).attr( 'height' );
-				$( 'div#project-banner-picture .video-element iframe' ).height( nHeight / nCoef );
+			if ( $( document ).width() < 997 ) {
+				if ( $( 'div#project-banner-picture .video-element iframe' ).length > 0 ) {
+					var nWidthIframe = $( 'div#project-banner-picture .video-element iframe' ).attr( 'width' );
+					var nWidth = $( 'div#project-banner-picture .video-element iframe' ).width();
+					var nCoef = nWidthIframe / nWidth;
+					var nHeight = $( 'div#project-banner-picture .video-element iframe' ).attr( 'height' );
+					$( 'div#project-banner-picture .video-element iframe' ).height( nHeight / nCoef );
+				}
+				
+				$( 'div.projects-desc-content iframe' ).each( function() {
+					var nWidthIframe = $( this ).attr( 'width' );
+					var nWidth = $( 'div.projects-desc-content' ).width() - 20;
+					var nCoef = nWidthIframe / nWidth;
+					var nHeight = $( this ).attr( 'height' );
+					$( this ).height( nHeight / nCoef );
+				} );
 			}
 			
 			$("a.update-follow").click(function(e) {

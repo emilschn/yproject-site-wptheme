@@ -19,7 +19,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php _e( "Une fois re&ccedil;u et confirm&eacute;, nous vous enverrons une validation de votre investissement par e-mail &agrave; l'adresse", 'yproject' ); ?>
 	<?php echo $page_controler->get_current_user_email(); ?>.<br><br>
 
-	<?php if ( $page_controler->get_current_investment()->get_session_amount() > 1500 ): ?>
+	<?php if ( $page_controler->get_current_investment()->get_session_amount() > WDGInvestmentContract::$signature_minimum_amount ): ?>
 	<?php _e( "Nous vous rappelons que pour que celui-ci soit valid&eacute;, vous devez signer le contrat électronique qui vous a &eacute;t&eacute; envoy&eacute; &agrave; l'adresse", 'yproject' ); ?>
 	<?php echo $page_controler->get_current_user_email(); ?>.
 	<?php _e( "Pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable (spam).", 'yproject' ); ?><br><br>

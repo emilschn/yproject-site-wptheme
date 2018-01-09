@@ -8,7 +8,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 <?php _e( "Dans l'attente de votre virement, vous recevrez un e-mail rappelant les informations &agrave; nous fournir.", 'yproject' ); ?><br><br>
 
-<?php if ( $page_controler->get_current_investment()->get_session_amount() > 1500 ): ?>
+<?php if ( $page_controler->get_current_investment()->get_session_amount() > WDGInvestmentContract::$signature_minimum_amount ): ?>
 	<?php _e( "Une fois valid&eacute;, vous recevrez deux e-mails :", 'yproject' ); ?><br><br>
 	
 	<?php if ( ATCF_CrowdFunding::get_platform_context() == "wedogood" ): ?>

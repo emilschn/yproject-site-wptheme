@@ -187,7 +187,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					$this->current_step = 2;
 					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2 >> WDG_Form_Invest_User_Details::$name POSTED' );
 					$WDGCurrent_User = WDGUser::current();
-					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
+					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID, $current_investment->get_session_amount() );
 					if ( $this->form->postForm() ) {
 						$this->current_step = 3;
 						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 3 >> GOTO WDG_Form_Invest_Contract' );
@@ -245,7 +245,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					break;
 				case 2:
 					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_Invest_User_Details' );
-					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
+					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID, $current_investment->get_session_amount() );
 					break;
 				case 3:
 					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_Invest_Contract' );

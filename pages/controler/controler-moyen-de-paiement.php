@@ -202,7 +202,9 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 				$check_return = $this->get_check_return();
 				if ( !empty( $check_return ) ) {
 					$this->current_investment->get_session_amount(); // Stock avant destruction
-					WDGInvestment::unset_session();
+					if ( !$this->current_investment->needs_signature() ) {
+						WDGInvestment::unset_session();
+					}
 					$this->current_view = 'check-return';
 				} else {
 					$this->current_investment->set_status( WDGInvestment::$status_waiting_check );
@@ -239,7 +241,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	public function get_current_user_phone() {
 		$buffer = FALSE;
 		$WDGUser_current = WDGUser::current();
-		if ( ypcf_check_user_phone_format( $WDGUser_current->get_phone_number() ) ) {
+		if ( $WDGUser_current->has_phone_number_correct() ) {
 			$buffer = $WDGUser_current->get_phone_number();
 		}
 		return $buffer;
@@ -288,6 +290,8 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 		$buffer = '';
 		if ( $this->current_investment->has_token() ) {
 			$buffer = $this->current_investment->get_redirection( 'success', $this->current_investment->get_token() );
+		} elseif ( $this->current_investment->needs_signature() ) {
+			$buffer = home_url( '/paiement-signature' ). '?campaign_id=' .$this->current_campaign->ID;
 		} else {
 			$buffer = home_url( '/paiement-partager' ). '?campaign_id=' .$this->current_campaign->ID;
 		}
