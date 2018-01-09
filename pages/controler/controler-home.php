@@ -54,13 +54,13 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 		$this->projects_html = $this->get_db_cached_elements( WDG_Page_Controler_Home::$projects_html_key, WDG_Page_Controler_Home::$projects_html_version );
 		if ( empty( $this->projects_html ) ) {
 			$this->projects_list = array();
-			$campaignlist_funding = ATCF_Campaign::get_list_funding( WDG_Page_Controler_Home::$projects_nb_to_show );
+			$campaignlist_funding = ATCF_Campaign::get_list_funding( 10 );
 			$campaignlist_funding_sorted = $this->sort_project_list( $campaignlist_funding );
 			$count_campaignlist = count( $campaignlist_funding_sorted );
 			foreach ( $campaignlist_funding_sorted as $campaign ) { array_push( $this->projects_list, $campaign->ID ); }
 			
 			if ( $count_campaignlist < WDG_Page_Controler_Home::$projects_nb_to_show ) {
-				$campaignlist_vote = ATCF_Campaign::get_list_vote( WDG_Page_Controler_Home::$projects_nb_to_show - $count_campaignlist, '' );
+				$campaignlist_vote = ATCF_Campaign::get_list_vote( 10 );
 				$campaignlist_vote_sorted = $this->sort_project_list( $campaignlist_vote );
 				$count_campaignlist += count( $campaignlist_vote_sorted );
 				foreach ( $campaignlist_vote_sorted as $campaign ) { array_push( $this->projects_list, $campaign->ID ); }
