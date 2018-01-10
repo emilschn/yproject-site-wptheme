@@ -120,7 +120,7 @@ $declaration_message = $declaration->get_message();
 				<button type="submit" class="button red"><?php _e( "Je signe l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
 			</form>
 			<br />
-		<?php elseif ( $last_mandate_status == 5 && $last_mandate_status == 6 ): ?>
+		<?php elseif ( $last_mandate_status == 5 || $last_mandate_status == 6 ): ?>
 			<hr />
 			<form action="" method="POST" enctype="">
 				<input type="hidden" name="action" value="proceed_roi" />
