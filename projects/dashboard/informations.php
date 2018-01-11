@@ -788,16 +788,6 @@ function print_informations_page()
             <ul class="errors">
 
             </ul>
-			
-			<?php if ( $is_admin ): // A supprimer ?>
-			<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
-			<div class="field admin-theme align-center">
-				<a href="<?php echo $campaign->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red">Attestation de lev&eacute;e de fonds</a>
-			</div>
-			<br>
-			<?php endif; ?>
-			<?php endif; ?>
-			
 			<?php if ( $is_admin ): ?>
 				<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
 

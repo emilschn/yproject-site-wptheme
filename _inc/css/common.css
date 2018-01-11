@@ -710,9 +710,10 @@ footer > .footer-container > div > div.aligncenter {
 * HOME - STATS
 *******************************************************************************/
 body.home section.project-stats {
+	margin-top: -1px;
+	padding-bottom: 40px;
 	color: #FFFFFF;
 	background: #333333;
-	padding-bottom: 40px;
 }
 body.home section.project-stats > div {
 	width: -webkit-calc(100% - 20px);
