@@ -18,12 +18,12 @@
 	
 	if ( $page_controler->get_header_nav_visible() ){
 		$projects_searchable = array();
-		$cache_projects_searchable = $WDG_cache_plugin->get_cache('ATCF_Campaign::list_projects_searchable', 1);
+		$cache_projects_searchable = $WDG_cache_plugin->get_cache('ATCF_Campaign::list_projects_searchable', 2);
 		if ($cache_projects_searchable !== FALSE) { $projects_searchable = json_decode($cache_projects_searchable); }
 		else {
 			$projects_searchable = ATCF_Campaign::list_projects_searchable();
 			$projects_searchable_encoded = json_encode($projects_searchable);
-			$WDG_cache_plugin->set_cache('ATCF_Campaign::list_projects_searchable', $projects_searchable_encoded, 60*60*3, 1); //MAJ 3h
+			$WDG_cache_plugin->set_cache('ATCF_Campaign::list_projects_searchable', $projects_searchable_encoded, 60*60*3, 2); //MAJ 3h
 		}
 	}
 	
@@ -139,7 +139,7 @@
 					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher un projet", 'yproject'); ?>" />
 					<ul class="submenu-list">
 						<?php foreach ($projects_searchable as $project_post): ?>
-						<li class="hidden"><a href="<?php echo get_permalink( $project_post->ID ); ?>"><?php echo $project_post->post_title; ?></a></li>
+						<li class="hidden"><a href="<?php echo get_permalink( $project_post->ID ); ?>"><?php echo $project_post->post_title; ?><span class="hidden"><?php echo $project_post->post_name; ?></span></a></li>
 						<?php endforeach; ?>
 					</ul>
 				</div>

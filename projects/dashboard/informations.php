@@ -789,14 +789,6 @@ function print_informations_page()
 
             </ul>
 			
-			<?php if ( $is_admin ): // A supprimer ?>
-			<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
-			<div class="field admin-theme align-center">
-				<a href="<?php echo $campaign->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red">Attestation de lev&eacute;e de fonds</a>
-			</div>
-			<?php endif; ?>
-			<?php endif; ?>
-			
 			<?php if ( $is_admin ): ?>
 			<form action="<?php echo admin_url( 'admin-post.php?action=generate_contract_files'); ?>" method="post" id="contract_files_generate_form" class="field admin-theme">
 				/!\ <?php _e( "Si vous choisissez de g&eacute;n&eacute;rer les contrats, cela remplacera les fichiers précédents :", 'yproject' ); ?> /!\
