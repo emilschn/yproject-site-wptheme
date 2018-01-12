@@ -4,6 +4,9 @@ $template_engine->set_controler( new WDG_Page_Controler_User_Account() );
 
 class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	
+	/**
+	 * @var WDGUser 
+	 */
 	private $current_user;
 	private $user_id;
 	private $user_name;
@@ -11,6 +14,8 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	private $user_data;
 	private $wallet_to_bankaccount_result;
 	private $form_user_details;
+	private $form_user_password;
+	private $form_feedback;
 	
 	public function __construct() {
 		parent::__construct();
@@ -18,6 +23,10 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		if (!is_user_logged_in()) {
 			wp_redirect( home_url( '/connexion' ) . '?redirect-page=mon-compte' );
 		}
+		
+		$core = ATCF_CrowdFunding::instance();
+		$core->include_form( 'user-password' );
+		
 		WDGFormUsers::register_rib();
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
 		$this->init_current_user();
@@ -91,13 +100,24 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		if ( $action_posted == WDG_Form_User_Details::$name ) {
 			$this->form_feedback = $this->form_user_details->postForm();
 		}
+		
+		if ( !$this->current_user->is_logged_in_with_facebook() ) {
+			$this->form_user_password = new WDG_Form_User_Password( $this->current_user->get_wpref() );
+			if ( $action_posted == WDG_Form_User_Password::$name ) {
+				$this->form_feedback = $this->form_user_password->postForm();
+			}
+		}
 	}
 	
 	public function get_user_details_form() {
 		return $this->form_user_details;
 	}
 	
-	public function get_user_details_form_feedback() {
+	public function get_user_password_form() {
+		return $this->form_user_password;
+	}
+	
+	public function get_user_form_feedback() {
 		return $this->form_feedback;
 	}
 	
