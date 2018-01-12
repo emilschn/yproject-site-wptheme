@@ -537,6 +537,9 @@ function print_informations_page()
 						"label"			=> "Commission de la plateforme",
 						"value"			=> $campaign->platform_commission(),
 						"suffix"		=> "<span>&nbsp;% TTC</span>",
+						"min"			=> 0,
+						"max"			=> 100,
+						"step"			=> 0.000000000000000000000001,
 						"editable"		=> $is_admin,
 						"visible"		=> $is_admin,
 						"admin_theme"	=> true
@@ -565,7 +568,7 @@ function print_informations_page()
                     "suffix"		=> "<span>&nbsp;% du chiffre d'affaires</span>",
                     "min"			=> 0,
                     "max"			=> 100,
-                    "step"			=> 0.01,
+                    "step"			=> 0.000000000000000000000001,
 					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 				
@@ -577,7 +580,7 @@ function print_informations_page()
 					"suffix"		=> "<span>&nbsp;% du chiffre d'affaires</span>",
 					"min"			=> 0,
 					"max"			=> 100,
-					"step"			=> 0.01,
+                    "step"			=> 0.000000000000000000000001,
 					"visible"		=> $is_admin || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed,
 					"editable"		=> $is_admin
 				));
@@ -587,33 +590,33 @@ function print_informations_page()
 				$contract_start_date_list = array();
 				if ( $contract_start_date_editable ) {
 					// Trouver la prochaine date possible : janvier, avril, juillet, octobre
-					$current_date = new DateTime();
+					$campaign_creation_date = new DateTime( $post_campaign->post_date );
 					$previous_date = new DateTime();
 					$next_date = new DateTime();
-					switch ( $current_date->format('m') ) {
+					switch ( $campaign_creation_date->format('m') ) {
 						case 1:
 						case 2:
 						case 3:
-							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-01-01' );
-							$next_date = new DateTime( $current_date->format( 'Y' ) . '-04-01' );
+							$previous_date =  new DateTime( $campaign_creation_date->format( 'Y' ) . '-01-01' );
+							$next_date = new DateTime( $campaign_creation_date->format( 'Y' ) . '-04-01' );
 							break;
 						case 4:
 						case 5:
 						case 6:
-							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-04-01' );
-							$next_date = new DateTime( $current_date->format( 'Y' ) . '-07-01' );
+							$previous_date =  new DateTime( $campaign_creation_date->format( 'Y' ) . '-04-01' );
+							$next_date = new DateTime( $campaign_creation_date->format( 'Y' ) . '-07-01' );
 							break;
 						case 7:
 						case 8:
 						case 9:
-							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-07-01' );
-							$next_date = new DateTime( $current_date->format( 'Y' ) . '-10-01' );
+							$previous_date =  new DateTime( $campaign_creation_date->format( 'Y' ) . '-07-01' );
+							$next_date = new DateTime( $campaign_creation_date->format( 'Y' ) . '-10-01' );
 							break;
 						case 10:
 						case 11:
 						case 12:
-							$previous_date =  new DateTime( $current_date->format( 'Y' ) . '-10-01' );
-							$next_date = new DateTime( ( $current_date->format( 'Y' ) + 1 ) . '-01-01' );
+							$previous_date =  new DateTime( $campaign_creation_date->format( 'Y' ) . '-10-01' );
+							$next_date = new DateTime( ( $campaign_creation_date->format( 'Y' ) + 1 ) . '-01-01' );
 							break;
 					}
 					array_push( $contract_start_date_values, $previous_date->format( 'Y-m-d H:i:s' ) );
@@ -785,14 +788,6 @@ function print_informations_page()
             <ul class="errors">
 
             </ul>
-			
-			<?php if ( $is_admin ): // A supprimer ?>
-			<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
-			<div class="field admin-theme align-center">
-				<a href="<?php echo $campaign->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red">Attestation de lev&eacute;e de fonds</a>
-			</div>
-			<?php endif; ?>
-			<?php endif; ?>
 			
 			<?php if ( $is_admin ): ?>
 			<form action="<?php echo admin_url( 'admin-post.php?action=generate_contract_files'); ?>" method="post" id="contract_files_generate_form" class="field admin-theme">

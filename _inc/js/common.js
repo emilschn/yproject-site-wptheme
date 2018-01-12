@@ -822,6 +822,7 @@ var WDGFormsFunctions = (function($) {
 
 		init: function() {
 			WDGFormsFunctions.initSaveButton();
+			WDGFormsFunctions.initCheckboxes();
 			WDGFormsFunctions.initRateCheckboxes();
 			WDGFormsFunctions.initDatePickers();
 		},
@@ -843,9 +844,23 @@ var WDGFormsFunctions = (function($) {
 			} );
 		},
 		
+		initCheckboxes: function() {
+			if ( $( '.db-form.v3 input[type=checkbox]' ).length > 0 ) {
+				$( '.db-form.v3 input[type=checkbox]' ).each( function(){
+					if ( !$( this ).hasClass( 'rate' ) ) {
+						$( this ).parent().click( function( e ) {
+							e.preventDefault();
+							var checkboxItem = $( this ).children( 'input[type=checkbox]' )[0];
+							checkboxItem.checked = !checkboxItem.checked;
+						} );
+					}
+				} );
+			}
+		},
+		
 		initRateCheckboxes: function() {
-			if ( $( 'input[type=checkbox].rate' ).length > 0 ) {
-				$( 'input[type=checkbox].rate + span' ).click( function() {
+			if ( $( '.db-form.v3 input[type=checkbox].rate' ).length > 0 ) {
+				$( '.db-form.v3 input[type=checkbox].rate + span' ).click( function() {
 					var sRateType = $( this ).data( 'rate' );
 					$( 'input[type=checkbox].' + sRateType ).attr( 'checked', false );
 					var thisVal = $( this ).data( 'value' );
@@ -943,7 +958,7 @@ WDGProjectPageFunctions=(function($) {
 		isClickBlocked: false,
 		navigationHeight: 0,
 		initUI:function() {
-			WDGProjectPageFunctions.navigationHeight = ($("nav.project-navigation").height() > 0) ? $("nav.project-navigation").height() : $("#navigation").height();
+			WDGProjectPageFunctions.navigationHeight = ($("nav.project-navigation").height() > 0 && $("nav.project-navigation").is(':visible')) ? $("nav.project-navigation").height() : $("nav").height();
 			WDGProjectPageFunctions.initClick();
 			$('.project-content-icon').click(function(){
 				var contentDiv = $("#project-content-" + $(this).data("content"));
@@ -1058,9 +1073,15 @@ WDGProjectPageFunctions=(function($) {
 				if (projectMore.is(':visible')) {
 					//il faut la masquer puis afficher les éléments qui suivent
 					projectMore.hide(400, function(){
-						$('html, body').animate({scrollTop: clickedElement.offset().top - WDGProjectPageFunctions.navigationHeight}, "slow");
-						clickedElement.find('.zone-content > div, p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
-						WDGProjectPageFunctions.refreshEditable();
+						setTimeout( function() {
+							var offset = - 60;
+							if ( $( document ).width() < 997 ) {
+								offset = - 45;
+							}
+							$('html, body').animate({scrollTop: clickedElement.offset().top - WDGProjectPageFunctions.navigationHeight + offset}, "slow");
+							clickedElement.find('.zone-content > div, p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
+							WDGProjectPageFunctions.refreshEditable();
+						}, 200 );
 					});
 					//on masque aussi toutes les autres parties
 					WDGProjectPageFunctions.hideOthers(parseInt(projectMore.attr("data-value")));

@@ -35,6 +35,12 @@ $roi_percent = $campaign->roi_percent();
 			</ul> */ ?>
 		</li>
 	</ul>
+			
+	<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+	<div class="field align-center">
+		<a href="<?php echo $campaign->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red"><?php _e( "T&eacute;l&eacute;charger mon attestation de lev&eacute;e de fonds", 'yproject' ); ?></a>
+	</div>
+	<?php endif; ?>
 	
 	
 	<h2><?php _e('Historique', 'yproject'); ?></h2>
