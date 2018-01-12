@@ -87,10 +87,18 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 /******************************************************************************/
 	private function init_form() {
 		$this->form_user_details = new WDG_Form_User_Details( $this->current_user->get_wpref(), WDG_Form_User_Details::$type_extended );
+		$action_posted = filter_input( INPUT_POST, 'action' );
+		if ( $action_posted == WDG_Form_User_Details::$name ) {
+			$this->form_feedback = $this->form_user_details->postForm();
+		}
 	}
 	
 	public function get_user_details_form() {
 		return $this->form_user_details;
+	}
+	
+	public function get_user_details_form_feedback() {
+		return $this->form_feedback;
 	}
 	
 	public function get_user_data( $data_key ) {

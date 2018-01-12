@@ -2,6 +2,7 @@
 <?php
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGUserDetailsForm = $page_controler->get_user_details_form();
+$form_feedback = $page_controler->get_user_details_form_feedback();
 $fields_hidden = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field_group_hidden );
 $fields_basics = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field_group_basics );
 $fields_complete = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field_group_complete );
@@ -16,9 +17,17 @@ $fields_extended = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
 
-	<span class="form-error-general"></span>
+	<h2><?php _e( "Enregistrez vos informations", 'yproject' ); ?></h2>
 
-	<h3><?php _e( "Enregistrez vos informations", 'yproject' ); ?></h3>
+	<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
+	<div class="form-error-general align-left">
+		<?php _e( "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :", 'yproject' ); ?><br>
+		<?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
+			- <span class="form-error-general"><?php echo $error[ 'text' ]; ?></span>
+		<?php endforeach; ?>
+		<br><br>
+	</div>
+	<?php endif; ?>
 
 	<?php foreach ( $fields_basics as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
@@ -42,16 +51,19 @@ $fields_extended = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field
 
 	<div id="user-details-form-buttons">
 
-		<button class="button save red" data-close="user-details" data-open="user-details-confirmation"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+		<?php if (isset($_SESSION['redirect_current_amount_part'])): ?>
+			<input type="hidden" name="amount_part" value="<?php echo $_SESSION['redirect_current_amount_part']; ?>" />
+		<?php endif; ?>
+		<?php if (isset($_SESSION['redirect_current_invest_type']) && $_SESSION['redirect_current_invest_type'] != "new_organization"): ?>
+			<input type="hidden" name="invest_type" value="<?php echo $_SESSION['redirect_current_invest_type']; ?>" />
+		<?php endif; ?>
 
-		<div class="loading align-center hidden">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
-		</div>
+		<button type="submit" class="button save red"><?php _e( "Enregistrer les modifications", 'yproject' ); ?></button>
 
 	</div>
 	
 	
-	<?php if (!isset($_SESSION['redirect_current_campaign_id'])): ?>
+	<?php /*if (!isset($_SESSION['redirect_current_campaign_id'])): ?>
 	
 	
 	<label for="avatar_image" class="standard-label"><?php _e( "Avatar", 'yproject' ); ?></label>
@@ -62,21 +74,7 @@ $fields_extended = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field
 	<input type="checkbox" name="facebook_avatar">Utiliser l'avatar facebook
 	<?php endif; ?>
 	
-	<?php endif; ?>
-	
-            
-	<div class="box_connection_buttons">
-		<input type="submit" name="wp-submit" class="button red" value="<?php _e( "Enregistrer les modifications", 'yproject'); ?>" />
-	</div>
-
-	<?php if (isset($_SESSION['redirect_current_amount_part'])): ?>
-		<input type="hidden" name="amount_part" value="<?php echo $_SESSION['redirect_current_amount_part']; ?>" />
-	<?php endif; ?>
-	<?php if (isset($_SESSION['redirect_current_invest_type']) && $_SESSION['redirect_current_invest_type'] != "new_organization"): ?>
-		<input type="hidden" name="invest_type" value="<?php echo $_SESSION['redirect_current_invest_type']; ?>" />
-	<?php endif; ?>
-	<input type="hidden" name="update_user_posted" value="posted" />
-	<input type="hidden" name="update_user_id" value="<?php echo $page_controler->get_user_id(); ?>" />
+	<?php endif;*/ ?>
 	
 </form>
 	
