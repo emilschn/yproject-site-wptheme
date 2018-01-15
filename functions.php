@@ -563,11 +563,9 @@ function get_invests_graph(){
     /******************************************************/
     //Date de début de collecte (1er investissement si l'information n'est pas enregistrée)
     $date_collecte_start = $campaign->begin_collecte_date();
-    if ($date_collecte_start==null){
-        if(count($datesinvest)!=0){
-            $date_collecte_start = $datesinvest[0];
-        }
-    }
+	if ( count( $datesinvest ) != 0 && ( $datesinvest[0] < $date_collecte_start || $date_collecte_start == null ) ) {
+		$date_collecte_start = $datesinvest[0];
+	}
     $date_collecte_end = $campaign->end_date();
     
     //Etiquettes de dates intermédiaires
