@@ -795,7 +795,7 @@ function print_informations_page()
 				<br /><br />
 				<div class="align-center">
 					<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
-					<button class="button blue-pale"><?php _e( "G&eacute;n&eacute;rer des contrats vierges", 'yproject' ); ?></button>
+					<button class="button blue-pale"><?php _e( "G&eacute;n&eacute;rer le contrat vierge", 'yproject' ); ?></button>
 				</div>
 			</form>
 			
@@ -825,6 +825,24 @@ function print_informations_page()
                 ));
 					
 				DashboardUtility::create_field(array(
+					"id"			=> "new_contract_premium",
+					"type"			=> "editor",
+					"label"			=> "Prime",
+					"value"			=> $campaign->contract_premium(),
+					"admin_theme"	=> $is_admin,
+					"editable"		=> $is_admin
+				));
+					
+				DashboardUtility::create_field(array(
+					"id"			=> "new_contract_warranty",
+					"type"			=> "editor",
+					"label"			=> "Garantie",
+					"value"			=> $campaign->contract_warranty(),
+					"admin_theme"	=> $is_admin,
+					"editable"		=> $is_admin
+				));
+					
+				DashboardUtility::create_field(array(
 					"id"			=> "new_contract_budget_type",
 					"type"			=> "select",
 					"label"			=> "Budget &eacute;gal au",
@@ -834,6 +852,8 @@ function print_informations_page()
 					"admin_theme"	=> $is_admin,
 					"editable"		=> $is_admin
 				));
+				
+				
 				?>
 				<?php if ( $is_admin ): ?>
 				<div class="field admin-theme">
