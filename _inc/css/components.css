@@ -1071,3 +1071,10 @@ body input[type=text], body input[type=email], body select {
 #wdg-lightbox-contactprojet .wpcf7-form p {
 	margin: 20px auto;
 }
+
+/*******************************************************************************
+* BREADCRUMB
+*******************************************************************************/
+nav.wdg-breadcrumb {
+	margin: 10px 0px;
+}

@@ -19,6 +19,7 @@ class YPShortcodeManager {
 		'yproject_newproject_lightbox',
 		'wdg_project_vote_count',
 		'wdg_project_amount_count',
+		'wdg_page_breadcrumb'
 	);
 	
 	public static function register_shortcodes() {
@@ -228,6 +229,59 @@ class YPShortcodeManager {
 			$campaign = atcf_get_campaign($post_campaign);
 			return $campaign->current_amount();
 		}
+	}
+	
+	function wdg_page_breadcrumb( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'separator'				=> '&gt;',
+			'separator_unpublished'	=> '-'
+		), $atts );
+		global $post;
+		
+		// On commence toujours par WE DO GOOD
+		$buffer = "<a href=\"" .home_url(). "\">WE DO GOOD</a>";
+		$buffer .= " " .$atts[ 'separator' ]. " ";
+		
+		if ( $post->post_parent ) {
+			// Récupère les parents et les replace dans l'ordre du plus haut au plus bas
+			$post_ancestors_list = get_post_ancestors( $post->ID );
+			$post_ancestors_list = array_reverse( $post_ancestors_list );
+			
+			// On ajoute le post en cours pour le gérer correctement dans la liste
+			array_push( $post_ancestors_list, get_the_ID() );
+			$count_ancestors = count( $post_ancestors_list );
+			
+			// Parcours des parents dans le bon ordre
+			for ( $i = 0; $i < $count_ancestors; $i++ ) {
+				$post_ancestor = get_post( $post_ancestors_list[ $i ] );
+			
+				// Le parent est publié normalement, on lui met un lien normal
+				if ( $post_ancestor->post_status == 'publish' ) {
+					$buffer .= "<a href=\"" . get_permalink( $post_ancestor ) . "\" title=\"" .get_the_title( $post_ancestor ). "\">" .get_the_title( $post_ancestor ). "</a>";
+					if ( isset( $post_ancestors_list[ $i + 1 ] ) ) {
+						$buffer .= " " .$atts[ 'separator' ]. " ";
+					}
+					
+				} else {
+					// Le parent n'est pas publié : on parcourt ses descendants pour faire une liste de type Catégorie 1 - Catégorie 2 (plutôt que >) au sein du même lien
+					$current_title = get_the_title( $post_ancestor );
+					while ( isset( $post_ancestors_list[ $i + 1 ] ) && $post_ancestors_list[ $i ]->post_status != 'publish' ) {
+						$i++;
+						$current_title .= " " .$atts[ 'separator_unpublished' ]. " ";
+						$current_title .= get_the_title( $post_ancestors_list[ $i ] );
+					}
+					$buffer .= "<a href=\"" . get_permalink( $post_ancestors_list[ $i ] ) . "\" title=\"" .$current_title. "\">" .$current_title. "</a>";
+				}
+			}
+			
+		// Pas de parent, mais pas la page d'accueil = on affiche juste la page
+		} elseif ( !is_home() && !is_front_page() ) {
+			$buffer .= "<a href=\"" .get_the_permalink(). "\" title=\"" .get_the_title(). "\">" .get_the_title(). "</a>";
+		}
+		
+		$buffer = "<nav itemtype=\"http://data-vocabulary.org/Breadcrumb\" class=\"wdg-breadcrumb\">" .$buffer. "</nav>";
+		
+		return $buffer;
 	}
 }
 
