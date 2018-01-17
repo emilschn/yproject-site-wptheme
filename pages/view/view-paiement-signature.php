@@ -11,14 +11,19 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<div class="view-share center">
 		<br><br>
 		
-		<?php _e( "Afin de proc&eacute;d&eacute;r &agrave; la signature de votre contrat, veuillez suivre les instructions de la fen&ecirc;tre ci-dessous." ); ?><br><br>
-		<?php _e( "Avant de commencer, merci de vous munir du t&eacute;l&eacute;phone mobile que vous avez renseign&eacute; pr&eacute;c&eacute;demment." ); ?><br><br><br>
+		<?php _e( "Afin de proc&eacute;d&eacute;r &agrave; la signature de votre contrat, veuillez suivre les instructions de le cadre ci-dessous.", 'yproject' ); ?><br><br>
+		<?php _e( "Avant de commencer, merci de vous munir du t&eacute;l&eacute;phone mobile que vous avez renseign&eacute; pr&eacute;c&eacute;demment.", 'yproject' ); ?><br><br><br>
 		
 		<?php if ( $page_controler->get_signature_link() ): ?>
-			<iframe src="<?php echo $page_controler->get_signature_link(); ?>" style="width: 100%; height: 500px;"></iframe>
-			
+			<iframe id="yousign-container" src="<?php echo $page_controler->get_signature_link(); ?>" style="width: 100%; height: 500px;"></iframe>
 			<br><br>
-			<?php _e( "Une fois le contrat sign&eacute; (lorsqu'il est &eacute;crit F&eacute;licitations), vous pouvez cliquer sur Suivant :" ); ?><br><br>
+			
+			<?php _e( "Une fois le contrat ci-dessus sign&eacute; (lorsqu'il est &eacute;crit F&eacute;licitations), merci de cliquer sur Suivant.", 'yproject' ); ?><br>
+			<?php _e( "Ce clic enclenchera la v&eacute;rification que la signature a bien &aecute;t&eacute; effectu&eacute;e chez notre prestataire.", 'yproject' ); ?><br>
+			<?php _e( "Si la signature est valid&eacute;e, vous serez automatiquement redirig&eacute; vers la page suivante.", 'yproject' ); ?><br>
+			<?php _e( "Il est possible que quelques secondes soient nécessaires pour avoir le bon r&eacute;sultat, n'h&eacute;sitez pas &agrave; cliquer &agrave; nouveau sur le bouton Suivant si vous n'&ecirc;tes pas redirig&eacute;.", 'yproject' ); ?><br>
+			<?php _e( "Si le probl&egrave;me persiste, contactez-nous via le livechat ou &agrave; l'adresse investir@wedogood.co.", 'yproject' ); ?><br>
+			<br>
 		
 		<?php else: ?>
 		
@@ -29,7 +34,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		
 		
 		<div class="db-form v3 full">
-			<a class="button transparent" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e( "Suivant", 'yproject' ); ?></a>
+			<a class="button transparent next" href="<?php echo $page_controler->get_success_next_link(); ?>" data-paymentid="<?php echo $page_controler->get_current_investment()->get_id(); ?>"><?php _e( "Suivant", 'yproject' ); ?></a>
+			
+			<div class="loading align-center hidden">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
+			</div>
 		</div>
 		<br><br>
 		

@@ -26,7 +26,6 @@ class WDG_Page_Controler_InvestSignature extends WDG_Page_Controler {
 		$this->init_current_step();
 		$this->init_signature_link();
 		$this->init_success_next_link();
-		WDGInvestment::unset_session();
 	}
 	
 /******************************************************************************/
