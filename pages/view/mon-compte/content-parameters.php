@@ -7,8 +7,10 @@ $fields_basics = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field_g
 $fields_complete = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field_group_complete );
 $fields_extended = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field_group_extended );
 $WDGUserPasswordForm = $page_controler->get_user_password_form();
-$fields_password_hidden = $WDGUserPasswordForm->getFields(WDG_Form_User_Password::$field_group_hidden );
-$fields_password_visible = $WDGUserPasswordForm->getFields( WDG_Form_User_Password::$field_group_password );
+if ( $WDGUserPasswordForm ) {
+	$fields_password_hidden = $WDGUserPasswordForm->getFields(WDG_Form_User_Password::$field_group_hidden );
+	$fields_password_visible = $WDGUserPasswordForm->getFields( WDG_Form_User_Password::$field_group_password );
+}
 $form_feedback = $page_controler->get_user_form_feedback();
 ?>
 
@@ -75,7 +77,8 @@ $form_feedback = $page_controler->get_user_form_feedback();
 	
 </form>
 <br>
-	
+
+<?php if ( $WDGUserPasswordForm ): ?>
 <hr>
 
 <br>
@@ -99,3 +102,4 @@ $form_feedback = $page_controler->get_user_form_feedback();
 		<button type="submit" class="button save red"><?php _e( "Enregistrer les modifications", 'yproject' ); ?></button>
 	</div>
 </form>
+<?php endif; ?>
