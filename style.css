@@ -1856,14 +1856,6 @@ ul.activity-list p {
     display: block;
 }
 
-#settings-img {
-    float: right;
-}
-#settings-img img{
-    width: 120px;
-    height: auto;
-}
-
 .follow-button {
     background: none repeat scroll 0 0 #333333;
     border: medium none;

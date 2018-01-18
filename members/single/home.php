@@ -4,7 +4,6 @@ $display_loggedin_user = true;
 if ($display_loggedin_user) {
 	$result_form = WDGFormUsers::wallet_to_bankaccount();
 }
-$page_modify = get_page_by_path('modifier-mon-compte');
 ?>
 
 <div id="content">
@@ -19,14 +18,6 @@ $page_modify = get_page_by_path('modifier-mon-compte');
 		<?php endif; ?>
 
 		<header id="item-header">
-		    
-			<?php if ($display_loggedin_user): ?>
-			<div>
-				<div id="settings-img">
-					<a href="<?php echo get_permalink($page_modify->ID); ?>"><img src="<?php echo get_stylesheet_directory_uri() . "/images/settings.png";?>"></a>
-				</div>
-			</div>
-			<?php endif; ?>
 
 			<div id="item-header-container">
 				<?php locate_template( array( 'members/single/member-header.php' ), true ); ?>
