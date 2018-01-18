@@ -257,18 +257,23 @@ class YPShortcodeManager {
 			
 				// Le parent est publié normalement, on lui met un lien normal
 				if ( $post_ancestor->post_status == 'publish' ) {
-					$buffer .= "<a href=\"" . get_permalink( $post_ancestor ) . "\" title=\"" .get_the_title( $post_ancestor ). "\">" .get_the_title( $post_ancestor ). "</a>";
+					$post_meta_title = get_post_meta( $post_ancestor->ID, 'breadcrumb_title', TRUE );
+					$post_title = ( !empty( $post_meta_title ) ) ? $post_meta_title : get_the_title( $post_ancestor );
+					$buffer .= "<a href=\"" . get_permalink( $post_ancestor ) . "\" title=\"" .$post_title. "\">" .$post_title. "</a>";
 					if ( isset( $post_ancestors_list[ $i + 1 ] ) ) {
 						$buffer .= " " .$atts[ 'separator' ]. " ";
 					}
 					
 				} else {
 					// Le parent n'est pas publié : on parcourt ses descendants pour faire une liste de type Catégorie 1 - Catégorie 2 (plutôt que >) au sein du même lien
-					$current_title = get_the_title( $post_ancestor );
+					$post_meta_title = get_post_meta( $post_ancestor->ID, 'breadcrumb_title', TRUE );
+					$current_title = ( !empty( $post_meta_title ) ) ? $post_meta_title : get_the_title( $post_ancestor );
 					while ( isset( $post_ancestors_list[ $i + 1 ] ) && $post_ancestors_list[ $i ]->post_status != 'publish' ) {
 						$i++;
 						$current_title .= " " .$atts[ 'separator_unpublished' ]. " ";
-						$current_title .= get_the_title( $post_ancestors_list[ $i ] );
+						$post_meta_title = get_post_meta( $post_ancestors_list[ $i ], 'breadcrumb_title', TRUE );
+						$post_title = ( !empty( $post_meta_title ) ) ? $post_meta_title : get_the_title( $post_ancestors_list[ $i ] );
+						$current_title .= $post_title;
 					}
 					$buffer .= "<a href=\"" . get_permalink( $post_ancestors_list[ $i ] ) . "\" title=\"" .$current_title. "\">" .$current_title. "</a>";
 				}
@@ -276,7 +281,9 @@ class YPShortcodeManager {
 			
 		// Pas de parent, mais pas la page d'accueil = on affiche juste la page
 		} elseif ( !is_home() && !is_front_page() ) {
-			$buffer .= "<a href=\"" .get_the_permalink(). "\" title=\"" .get_the_title(). "\">" .get_the_title(). "</a>";
+			$post_meta_title = get_post_meta( get_the_ID(), 'breadcrumb_title', TRUE );
+			$post_title = ( !empty( $post_meta_title ) ) ? $post_meta_title : get_the_title();
+			$buffer .= "<a href=\"" .get_the_permalink(). "\" title=\"" .$post_title. "\">" .$post_title. "</a>";
 		}
 		
 		$buffer = "<nav itemtype=\"http://data-vocabulary.org/Breadcrumb\" class=\"wdg-breadcrumb\">" .$buffer. "</nav>";
