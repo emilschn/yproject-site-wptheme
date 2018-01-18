@@ -19,7 +19,9 @@ $btn_follow_data_lightbox = 'connexion';
 $btn_follow_text = __('Suivre', 'yproject');
 $btn_follow_following = '0';
 $has_voted = false;
+$has_voted_and_preinvested = false;
 if (is_user_logged_in()) {
+	$WDGUser_current = WDGUser::current();
 	$btn_follow_classes = 'update-follow';
 	$btn_follow_data_lightbox = $campaign->ID;
 	global $wpdb;
@@ -31,9 +33,10 @@ if (is_user_logged_in()) {
 	if (!empty($users[0]->ID)) { $btn_follow_href = '#'; }
 	
 	if ($campaign_status == "vote") {
-		$table_name = $wpdb->prefix . "ypcf_project_votes";
-		$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign->ID.'. AND user_id = '.$current_user->ID );
-		if ( !empty($hasvoted_results[0]->id) ) $has_voted = true;
+		$has_voted = $WDGUser_current->has_voted_on_campaign( $campaign->ID );
+		if ( $has_voted ) {
+			$has_voted_and_preinvested = $WDGUser_current->has_invested_on_campaign( $campaign->ID );
+		}
 	}
 }
 
@@ -190,17 +193,20 @@ $lang_list = $campaign->get_lang_list();
 				
 				
 					<div class="clear">
+					<?php if ( $campaign->time_remaining_str() != '-' ): ?>
 						
-						<?php if ($campaign->time_remaining_str() != '-'): ?>
-						<?php if (!is_user_logged_in()): ?>
+						<?php if ( !is_user_logged_in() ): ?>
 							<a href="#connexion" class="button red wdg-button-lightbox-open" data-lightbox="connexion" data-redirect="<?php the_permalink(); ?>#vote">
 								<?php _e('Voter', 'yproject'); ?>
 							</a>
 
-						<?php elseif ($has_voted): ?>
-							<div style="-webkit-filter: grayscale(100%); text-transform: uppercase; text-align: center;">
-								<?php _e('Merci pour votre vote !', 'yproject'); ?>
+						<?php elseif ( $has_voted_and_preinvested ): ?>
+							<div style="-webkit-filter: grayscale(100%); text-transform: uppercase; text-align: center; padding-top: 25px;">
+								<?php _e( "Merci pour votre pr&eacute;-investissement !", 'yproject' ); ?>
 							</div>
+
+						<?php elseif ( $has_voted ): ?>
+							<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
 
 						<?php else: ?>
 							<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote" data-thankyoumsg="<?php _e( "Merci pour votre vote !", 'yproject' ); ?>">
@@ -208,8 +214,7 @@ $lang_list = $campaign->get_lang_list();
 							</a>
 						<?php endif; ?>
 
-						<?php endif; ?>
-						
+					<?php endif; ?>
 					</div>
 				
 				

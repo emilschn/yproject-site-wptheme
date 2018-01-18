@@ -95,7 +95,7 @@
 		<?php if (isset($campaign) && $is_campaign_page === true): ?>
 		<meta property="og:url" content="<?php echo $url; ?>" />
 		<meta property="og:title" content="<?php echo $post->post_title; ?>" />
-		<meta property="og:description" content="<?php echo $campaign->summary(); ?>" />
+		<meta property="og:description" content="<?php echo str_replace( array( '<br>', '<br />' ), '', $campaign->summary() ); ?>" />
 		
 		<?php else: ?>
 		<meta property="og:description" content="Première plateforme de financement participatif en royalties (royalty crowdfunding). Entrepreneurs : levez des fonds sans diluer votre capital !" />
