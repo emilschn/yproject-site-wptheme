@@ -1,12 +1,13 @@
 <?php
 global $campaign, $can_modify, $stylesheet_directory_uri;
 $campaign_status = $campaign->campaign_status();
+$WDGCurrentUser = WDGUser::current();
 $file_complement = '';
 if (!empty($client_context)) { $file_complement .= '-' . $client_context; }
 if ($can_modify) { 
 	$editor_params = array( 
 		'media_buttons' => true,
-		'quicktags'     => false,
+		'quicktags'     => $WDGCurrentUser->is_admin(),
 		'editor_height' => 500,
 		'tinymce'       => array(
 			'plugins' => 'wordpress, paste, wplink, textcolor',
