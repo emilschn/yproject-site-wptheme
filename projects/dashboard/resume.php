@@ -242,6 +242,7 @@ function print_resume_page()
 						scaleSteps: nStepsBar,
 						scaleStepWidth: 1,
 						scaleStartValue: 0,
+						scaleShowLabels: ( nStepsBar < 20 ),
 						pointDot: false
 					};
 					var canvasBar = new Chart( ctxBar ).Bar( barData, barOptions );

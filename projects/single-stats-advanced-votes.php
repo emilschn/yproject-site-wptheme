@@ -4,24 +4,24 @@ if (isset($_GET['campaign_id'])) {
 
 	<h2>Statistiques des votes</h2>
 	<?php
-            locate_template( array("projects/common/stats-public-votes.php"), true );
-            $vote_results = WDGCampaignVotes::get_results($_GET['campaign_id']); 
-            $status = $campaign->campaign_status();
-            
-            //N'affiche pas le graphe si les dates des votes n'ont pas été enregistrées ou le vote n'a pas été fait
-            $displayGraph = ($status==ATCF_Campaign::$campaign_status_vote 
-                    || $status==ATCF_Campaign::$campaign_status_collecte 
-                    || $status==ATCF_Campaign::$campaign_status_closed 
-                    || $status==ATCF_Campaign::$campaign_status_funded)
-                    && $vote_results['count_voters'] != 0
-                    && $vote_results['list_date'][0] != 'NULL'
-                    && $vote_results['list_date'][0] != null
-                    && $vote_results['list_date'][0] != '0000-00-00';
-            
-            if ($displayGraph){ ?>
-            <canvas id="canvas-line-vote" width="420" height="200"></canvas><br/>
-            <?php }
-            print_vote_results($vote_results);
+	locate_template( array("projects/common/stats-public-votes.php"), true );
+	$vote_results = WDGCampaignVotes::get_results($_GET['campaign_id']); 
+	$status = $campaign->campaign_status();
+
+	//N'affiche pas le graphe si les dates des votes n'ont pas été enregistrées ou le vote n'a pas été fait
+	$displayGraph = ($status==ATCF_Campaign::$campaign_status_vote 
+			|| $status==ATCF_Campaign::$campaign_status_collecte 
+			|| $status==ATCF_Campaign::$campaign_status_closed 
+			|| $status==ATCF_Campaign::$campaign_status_funded)
+			&& $vote_results['count_voters'] != 0
+			&& $vote_results['list_date'][0] != 'NULL'
+			&& $vote_results['list_date'][0] != null
+			&& $vote_results['list_date'][0] != '0000-00-00';
+
+	if ($displayGraph){ ?>
+	<canvas id="canvas-line-vote" width="420" height="200"></canvas><br/>
+	<?php }
+	print_vote_results($vote_results);
 	?>
 
 	<h3>Conseils</h3>
@@ -48,8 +48,7 @@ if (isset($_GET['campaign_id'])) {
         }
 
         $list_date = $vote_results['list_date'];
-        $liste_cumul_pos = $vote_results['list_cumul_pos'];
-        $liste_cumul_neg = $vote_results['list_cumul_neg'];
+        $list_cumul = $vote_results['list_cumul'];
 
         //Choix la date de début du graphe
         $beginvotedate=date_create($list_date[0]);
@@ -73,21 +72,13 @@ if (isset($_GET['campaign_id'])) {
                             xPos : [new Date(<?php echo date_format($beginvotedate,'"D M d Y H:i:s O"'); ?>),new Date(<?php echo date_format( new DateTime($campaign->end_vote_date()),'"D M d Y H:i:s O"'); ?>)],
                             title : "Axe"
                         },{
-                            fillColor : "rgba(55,55,55,0.5)",
-                            strokeColor : "rgba(55,55,55,1)",
-                            pointColor : "rgba(110,110,110,1)",
-                            pointStrokeColor : "rgba(55,55,55,1)",
-                            data : [<?php foreach ($liste_cumul_neg as $cumul_pos){echo $cumul_pos.',';}?> ],
-                            xPos : [<?php foreach ($list_date as $date){echo 'new Date('.date_param($date).'),';}?> ],
-                            title : "Non"
-                        },{
                             fillColor : "rgba(255,73,76,0.5)",
                             strokeColor : "rgba(255,73,76,1)",
                             pointColor : "rgba(255,73,76,1)",
                             pointStrokeColor : "rgba(199,46,49,1)",
-                            data : [<?php foreach ($liste_cumul_pos as $cumul_pos){echo $cumul_pos.',';}?> ],
+                            data : [<?php foreach ($list_cumul as $cumul){echo $cumul.',';}?> ],
                             xPos : [<?php foreach ($list_date as $date){echo 'new Date('.date_param($date).'),';}?> ],
-                            title : "Oui"
+							title : "Vote"
                         }<?php
                         if (new DateTime(null)< new DateTime($campaign->end_vote_date())){
                         ?>,{
@@ -104,10 +95,10 @@ if (isset($_GET['campaign_id'])) {
 
                 //Fonction d'affichage 
                 displayAnnotVotes = function(cat, date, val){
-                    if(cat==="Oui"||cat==="Non"){
+                    if(cat==="Vote"){
                         plur="";
                         if (val>1) { plur="s"; }
-                        return val+' vote'+plur+' "'+cat+'" cumulé'+plur+' au total, le '+date.getDate()+'/'+(date.getMonth()+1)+'/'+(date.getFullYear());
+                        return val+' vote'+plur+' cumulé'+plur+' au total, le '+date.getDate()+'/'+(date.getMonth()+1)+'/'+(date.getFullYear());
                     } else if(cat==="Aujourd'hui") {
                         return 'Aujourd\'hui le '+date.getDate()+'/'+(date.getMonth()+1)+'/'+(date.getFullYear())+' il y a '+val+' votes au total.';
                     } else {

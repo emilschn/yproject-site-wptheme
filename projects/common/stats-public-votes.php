@@ -20,7 +20,7 @@
 <em><?php _e('Notes attribu&eacute;es au projet', 'yproject'); ?></em><br />
 <center><canvas id="canvas-vertical-bar" width="400" height="200"></canvas></center>
 
-<strong><?php echo $vote_results['count_project_validated']; ?></strong> <?php _e('personnes ont donn&eacute; une note sup&eacute;rieure &agrave; 2', 'yproject'); ?><br />
+<strong><?php echo $vote_results['percent_project_validated']; ?> %</strong> <?php _e( "des votants ont donn&eacute; un avis positif (note sup&eacute;rieure &agrave; 2)", 'yproject' ); ?><br />
 <ul>
 	<li>
 			<?php
@@ -48,29 +48,29 @@
 <script type="text/javascript">
 jQuery(document).ready( function($) {
     var ctxBar = $("#canvas-vertical-bar").get(0).getContext("2d");
-		var nStepsBar = Math.max(Math.max(Math.max(Math.max(Math.max(0, <?php echo $vote_results['rate_project_list'][1]; ?>), <?php echo $vote_results['rate_project_list'][2]; ?>), <?php echo $vote_results['rate_project_list'][3]; ?>), <?php echo $vote_results['rate_project_list'][4]; ?>), <?php echo $vote_results['rate_project_list'][5]; ?>);
-		var barData = {
-			labels: [ "1", "2", "3", "4", "5" ],
-			datasets: [{
-				fillColor: "#FE494C",
-				strokeColor: "#FE494C",
-				data: [
-					<?php echo $vote_results[ 'rate_project_list' ][ '1' ]; ?>,
-					<?php echo $vote_results[ 'rate_project_list' ][ '2' ]; ?>,
-					<?php echo $vote_results[ 'rate_project_list' ][ '3' ]; ?>,
-					<?php echo $vote_results[ 'rate_project_list' ][ '4' ]; ?>,
-					<?php echo $vote_results[ 'rate_project_list' ][ '5' ]; ?>
-				]
-			}]
-		};
-		var barOptions = {
-			scaleOverride: true,
-			scaleSteps: nStepsBar,
-			scaleStepWidth: 1,
-			scaleStartValue: 0,
-			pointDot: false
-		};
-		var canvasBar = new Chart( ctxBar ).Bar( barData, barOptions );
+	var nStepsBar = Math.max(Math.max(Math.max(Math.max(Math.max(0, <?php echo $vote_results['rate_project_list'][1]; ?>), <?php echo $vote_results['rate_project_list'][2]; ?>), <?php echo $vote_results['rate_project_list'][3]; ?>), <?php echo $vote_results['rate_project_list'][4]; ?>), <?php echo $vote_results['rate_project_list'][5]; ?>);
+	var barData = {
+		labels: [ "1", "2", "3", "4", "5" ],
+		datasets: [{
+			fillColor: "#FE494C",
+			strokeColor: "#FE494C",
+			data: [
+				<?php echo $vote_results[ 'rate_project_list' ][ '1' ]; ?>,
+				<?php echo $vote_results[ 'rate_project_list' ][ '2' ]; ?>,
+				<?php echo $vote_results[ 'rate_project_list' ][ '3' ]; ?>,
+				<?php echo $vote_results[ 'rate_project_list' ][ '4' ]; ?>,
+				<?php echo $vote_results[ 'rate_project_list' ][ '5' ]; ?>
+			]
+		}]
+	};
+	var barOptions = {
+		scaleOverride: true,
+		scaleSteps: nStepsBar,
+		scaleStepWidth: 1,
+		scaleStartValue: 0,
+		pointDot: false
+	};
+	var canvasBar = new Chart( ctxBar ).Bar( barData, barOptions );
     
     <?php if ($vote_results['show_risk']): ?>
     var ctxVertical = $("#canvas-vertical").get(0).getContext("2d");
@@ -95,19 +95,19 @@ jQuery(document).ready( function($) {
     
     var ctxHorizontal = $("#canvas-horizontal").get(0).getContext("2d");
     var dataHorizontal = {
-	labels: ["<?php _e("autres", 'yproject'); ?>", "<?php _e("previsionnel financier", 'yproject'); ?>", "<?php _e("structuration de l'equipe", 'yproject'); ?>", "<?php _e("produit / service", 'yproject'); ?>", "<?php _e("impact societal", 'yproject'); ?>"],
-	datasets: [{
-	    fillColor: "#CCC",
-	    strokeColor: "#CCC",
-	    data: [<?php echo $vote_results['count_more_info_other'] .','. $vote_results['count_more_info_finance'] .','. $vote_results['count_more_info_team'] .','. $vote_results['count_more_info_service'] .','. $vote_results['count_more_info_impact']; ?>]
-	}]
+		labels: ["<?php _e("autres", 'yproject'); ?>", "<?php _e("previsionnel financier", 'yproject'); ?>", "<?php _e("structuration de l'equipe", 'yproject'); ?>", "<?php _e("produit / service", 'yproject'); ?>", "<?php _e("impact societal", 'yproject'); ?>"],
+		datasets: [{
+			fillColor: "#CCC",
+			strokeColor: "#CCC",
+			data: [<?php echo $vote_results['count_more_info_other'] .','. $vote_results['count_more_info_finance'] .','. $vote_results['count_more_info_team'] .','. $vote_results['count_more_info_service'] .','. $vote_results['count_more_info_impact']; ?>]
+		}]
     };
     var nSteps = Math.max(Math.max(Math.max(Math.max(Math.max(0, <?php echo $vote_results['count_more_info_impact']; ?>), <?php echo $vote_results['count_more_info_service']; ?>), <?php echo $vote_results['count_more_info_team']; ?>), <?php echo $vote_results['count_more_info_finance']; ?>), <?php echo $vote_results['count_more_info_other']; ?>);
     var optionsHorizontal = {
-	scaleOverride: true,
-	scaleSteps: nSteps,
-	scaleStepWidth: 1,
-	scaleStartValue: 0
+		scaleOverride: true,
+		scaleSteps: nSteps,
+		scaleStepWidth: 1,
+		scaleStartValue: 0
     }
     var canvasHorizontal = new Chart(ctxHorizontal).HorizontalBar(dataHorizontal, optionsHorizontal);
 });
