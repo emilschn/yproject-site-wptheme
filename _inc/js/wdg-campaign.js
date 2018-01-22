@@ -136,6 +136,8 @@ var WDGProjectViewer = (function($) {
 				} );
 			}
 
+			$( '.project-description-item a' ).attr( 'target', '_blank' );
+			$( '.project-description-item a > img' ).parent().click( function( e ) { e.preventDefault(); } );
 		},
 		
 		refreshScroll: function() {

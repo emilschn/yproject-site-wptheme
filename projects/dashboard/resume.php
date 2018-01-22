@@ -239,9 +239,10 @@ function print_resume_page()
 					};
 					var barOptions = {
 						scaleOverride: true,
-						scaleSteps: nStepsBar,
+						scaleSteps: ( nStepsBar < 10 ) ? nStepsBar : 10,
 						scaleStepWidth: 1,
 						scaleStartValue: 0,
+						scaleShowLabels: ( nStepsBar < 10 ),
 						pointDot: false
 					};
 					var canvasBar = new Chart( ctxBar ).Bar( barData, barOptions );

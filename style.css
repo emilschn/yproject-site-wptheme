@@ -271,185 +271,6 @@ form.wdg-forms table input[type="text"].reward-text{
     margin: 0px;
 }
 
-
-/*******************************************************************************
-* Formulaires
-*******************************************************************************/
-.db-form .field {
-    display: block;
-    margin: 10px 0px;
-    padding: 5px;
-}
-
-.db-form .field.admin-theme {
-    border-left: 3px solid darkturquoise;
-    background-color: lightgray;
-    padding: 10px;
-    margin: 0px;
-}
-
-.db-form .field.admin-theme label i.fa-unlock-alt,
-.db-form .admin-theme-block i.fa-unlock-alt {
-    color:darkturquoise;
-}
-
-.db-form .field label {
-    display: inline-block;
-    width: 220px;
-    margin: 3px 10px 3px 0px;
-    font-weight: bold;
-}
-
-.db-form .field label.column-title {
-    text-align: center;
-}
-
-.db-form .field label.long-label {
-    width: auto;
-}
-
-.db-form .field-container select{
-    display: inline-block;
-    width: 220px;
-}
-
-.db-form .field-container select.timepicker {
-    padding: 1px 2px;
-    width: 52px;
-    margin-left: 3px;
-}
-
-.db-form .field-container input,
-.db-form .field-container textarea{
-    display: inline-block;
-    width: 200px;
-}
-
-.db-form input:not([type="submit"]),
-.db-form select,
-.db-form textarea{
-    margin: 3px 0px;
-    background: none repeat scroll 0 0 #FFF;
-    border: 1px solid #FFF;
-    padding: 2px 7px;
-}
-
-.db-form textarea{
-    font-family: Arial, sans-serif;
-    font-size: 0.9em;
-    vertical-align: initial;
-    resize: vertical;
-}
-
-.db-form input:not([type='submit']):hover,
-.db-form select:hover,
-.db-form textarea:hover,
-.db-form input:not([type='submit']):focus,
-.db-form select:focus,
-.db-form textarea:focus{
-    background-color: #FCFCFC;
-    border: 1px solid #DDD;
-}
-
-
-
-.db-form input:not([type='submit']).error,
-.db-form select.error{
-    border: 1px solid red;
-    background-color: rgb(255, 200, 200)
-}
-
-.db-form input:not([type='submit']).validation,
-.db-form select.validation{
-    border: 1px solid #6db26c;
-}
-
-.fa.fa-check.validation{
-    color: #6db26c;
-}
-
-.db-form .field-container input[type='checkbox']{
-    vertical-align: top;
-    margin: 5px 10px 0px 5px;
-    width: initial;
-}
-
-
-.db-form .field-container .left-icon{
-    padding-left: 24px;
-    width: 183px;
-}
-
-
-.db-form .field-container .right-icon{
-    padding-right: 24px;
-    width: 188px;
-}
-
-.db-form .field-container .left-icon.datetime,
-.db-form .field-container .right-icon.datetime{
-    width: 78px;
-}
-
-
-.db-form .field-container {
-    white-space: nowrap;
-    vertical-align: top;
-
-}
-
-.db-form .field-container .field-value {
-    position: relative;
-}
-
-.db-form .field-container .field-value .non-editable{
-    white-space: normal;
-    display: inline-block;
-    margin: 3px 0px;
-}
-
-.db-form .field-container .field-value a {
-    display: inline-block;
-    overflow: hidden;
-    max-width: 250px;
-    text-overflow: ellipsis;
-}
-
-
-.db-form .field-container i.fa.left{
-    position: absolute;
-    top: 1px;
-    left: 5px;
-    width: 14px;
-    text-align: center;
-}
-.db-form .field-container i.fa.right{
-    position: absolute;
-    top: 1px;
-    right: 5px;
-    width: 14px;
-    text-align: center;
-}
-
-.db-form .button.admin-theme{
-    background-color: darkturquoise;
-    border-color:darkturquoise;
-}
-
-.db-form .button[disabled] {
-    opacity: 0.5;
-    cursor: initial;
-}
-
-.db-form .feedback_save{
-    text-align: center;
-    font-style: italic;
-    min-height: 25px;
-}
-.db-form .feedback_save span{
-    display:none;
-}
-
 /*******************************************************************************
 * LIGHTBOX - FORMULAIRE
 *******************************************************************************/
@@ -486,14 +307,6 @@ form.wdg-forms table input[type="text"].reward-text{
     width: 220px;
     text-align: left;
 }
-
-.sidebar-login-form a{
-    color: #606060;
-    font-size: 11px;
-    font-style: italic;
-}
-.sidebar-login-form .link-forgotten { margin-left: 140px; }
-.sidebar-login-form .link-forgotten a { color: #333333; text-align: right; font-size: 10px; font-style: italic; }
 
 .infobutton, .fa.infobutton{
     cursor: help;
@@ -2035,14 +1848,6 @@ ul.activity-list p {
     display: block;
 }
 
-#settings-img {
-    float: right;
-}
-#settings-img img{
-    width: 120px;
-    height: auto;
-}
-
 .follow-button {
     background: none repeat scroll 0 0 #333333;
     border: medium none;
@@ -2286,7 +2091,7 @@ table.mceLayout {
 *******************************************************************************/ 
 .vote-results-impacts span {
     display: inline-block;
-    width: 110px;
+    width: 130px;
 }
 
 .tab-results{
@@ -2335,40 +2140,6 @@ table.mceLayout {
     width: 610px;
     height: 330px;
     overflow: hidden;
-}
-
-/*******************************************************************************
-* COMMUNITY PAGES
-*******************************************************************************/
-.community-desc{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 620px;
-    padding-left: 10px;
-    padding-right: 20px;
-    font-size: 11pt;
-}
-.community-menu{
-    margin-top: 20px; 
-    border-bottom: 1px solid #FFFFFF;
-    font-family: Arial,sans-serif;
-    font-size: 10pt;
-    padding: 15px 0;
-    text-align: center;
-    text-transform: uppercase;
-    width: 310px;
-    border: 0;
-}
-
-/*******************************************************************************
-* TEAM PAGE
-*******************************************************************************/
-.jeandavid, .marlene, .loeiza, .emilien, .suzanna , .adrien {
-   height:450px;
-}
-
-.separateur-h4 {
-   font-size: 35px;
 }
 
 /*******************************************************************************

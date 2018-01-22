@@ -26,8 +26,8 @@
 				</div>
 			</div>
 	    
-            <div>
-				<a href="<?php echo home_url( '/mot-de-passe-oublie' ); ?>" >(<?php _e("Mot de passe oubli&eacute;", 'yproject'); ?>)</a>
+            <div class="field">
+				<a href="<?php echo home_url( '/mot-de-passe-oublie' ); ?>" class="forgotten">(<?php _e("Mot de passe oubli&eacute;", 'yproject'); ?>)</a>
             </div>
 
 			<div class="field">
@@ -36,20 +36,25 @@
 					<?php _e( 'Se souvenir de moi', 'yproject' ); ?>
 				</label>
 			</div>
-			<br />
             
 			<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 			<input type="hidden" name="login-form" value="1" />
 			<button class="button save red" type="submit"><?php _e( "Connexion", 'yproject' ); ?></button>
-			<br /><br />
+			
+			<hr class="login-separator">
+			<div class="login-separator-label"><span><?php _e( "ou", 'yproject' ); ?></span></div>
 	
 			<button type="button" class="button blue-facebook social_connect_login_facebook"><?php _e( "Se connecter avec Facebook", 'yproject' ); ?></button>
 			<div class="social_connect_login_facebook_loading align-center hidden">
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 			</div>
-			<br /><br />
 			
-			<button type="button" class="wdg-button-lightbox-open button transparent" data-lightbox="register"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></button>
+			<hr class="login-separator">
+			<div class="login-separator-label"><span><?php _e( "ou", 'yproject' ); ?></span></div>
+			
+			<div>
+				<a href="<?php echo home_url( '/connexion' ); ?>?register=1" class="box_connection_buttons button transparent"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></a>
+			</div>
         </form>
 
 </div>

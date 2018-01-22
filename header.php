@@ -169,23 +169,15 @@
 				<?php else: ?>
 				<div id="submenu-user" class="not-connected submenu-style hidden">
 					<?php /* Au clic picto Compte, afficher menu connexion */ ?>
-					<div class="box_connection_buttons red">
-						<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><span><?php _e('Cr&eacute;er un compte', 'yproject'); ?></span></a>
+					<div class="only-inf997">
+						<a href="<?php echo home_url( '/connexion' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Connexion", 'yproject' ); ?></span></a>
 					</div>
-
-					<div class="box_connection_buttons blue">
-						<a href="#" class="social_connect_login_facebook"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
-					</div>
-					<div class="social_connect_login_facebook_loading align-center hidden">
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
-					</div>
-
-					<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 2px 0 0; color: #000000; margin: 5% 5%;"/>
-
-					<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" class="sidebar-login-form model-form">
+					
+					<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" class="sidebar-login-form model-form hidden-inf997">
+						<br>
 						<span id="title-connection"><?php _e('Connexion', 'yproject'); ?></span>
 						<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('Identifiant ou e-mail', 'yproject'); ?>" value="" />
-						<br />
+						<br>
 
 						<input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
 						<div class="submit-center" style="display: none;">             
@@ -196,15 +188,29 @@
 
 						<div>
 							<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-							<a href="<?php echo get_permalink($page_forgotten->ID); ?>"><?php _e('(Mot de passe oubli&eacute;)', 'yproject');?></a>
+							<a href="<?php echo get_permalink($page_forgotten->ID); ?>" class="forgotten"><?php _e('(Mot de passe oubli&eacute;)', 'yproject');?></a>
 						</div>
 
 						<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
 						<label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
-						<br />
-						<br />
+						<br><br>
 					</form>
-				</div>
+					
+					<hr class="login-separator">
+
+					<div class="box_connection_buttons blue">
+						<a href="#" class="social_connect_login_facebook"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
+					</div>
+					<div class="social_connect_login_facebook_loading align-center hidden">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
+					</div>
+					
+					<hr class="login-separator">
+
+					<div>
+						<a href="<?php echo home_url( '/connexion' ); ?>?register=1" class="box_connection_buttons button red"><span><?php _e( "Cr&eacute;er un compte", 'yproject' ); ?></span></a>
+					</div>
+					
 				<?php endif; ?>
 				
 			</div>
@@ -233,10 +239,6 @@
 		<?php endif; ?>
 
 		<?php if (!is_user_logged_in()): ?>
-			<?php echo do_shortcode('[yproject_register_lightbox]'); ?>
-			<?php if ( !isset( $post->post_name ) || $post->post_name != 'connexion' ): ?>
-			<?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
-			<?php endif; ?>
 		
 		<?php elseif (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)): ?>
 			<?php $_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; ?>

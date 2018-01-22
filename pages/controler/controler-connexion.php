@@ -34,6 +34,14 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 	}
 	
 /******************************************************************************/
+// CONTEXTE
+/******************************************************************************/
+	public function is_login_displayed() {
+		$input_register = filter_input( INPUT_GET, 'register' );
+		return empty( $input_register );
+	}
+	
+/******************************************************************************/
 // LOGIN ERROR
 /******************************************************************************/
 	public function get_login_error_reason() {
@@ -45,7 +53,7 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 		if ( !empty( $error_reason ) ) {
 			switch( $error_reason ) {
 				case 'empty_fields':
-					$this->login_error_reason = __( "Champs vides", 'yproject' );
+					$this->login_error_reason = __( "Merci de remplir tous les champs", 'yproject' );
 					break;
 				case 'orga_account':
 					$this->login_error_reason = __( "Ce compte correspond &agrave; une organisation", 'yproject' );

@@ -1,8 +1,9 @@
 <?php global $page_register, $signup_errors, $signup_step, $stylesheet_directory_uri; ?>
 
 <div class="wdg-lightbox-ref">
+	<br><br>
 
-	<form action="<?php echo home_url( "/connexion" ); ?>#register" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
+	<form action="<?php echo home_url( "/connexion" ); ?>?register=1" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
 		<?php if ( $signup_step == 'request-details' ) : ?>
 			<div class="warning">
 				La cr&eacute;ation d&apos;un compte de Membre sur <?php echo ATCF_CrowdFunding::get_platform_name(); ?> est exclusivement r&eacute;serv&eacute;e aux personnes physiques.
@@ -55,7 +56,7 @@
 
 				<?php if (!WP_IS_DEV_SITE): ?>
 				<div class="g-recaptcha" data-sitekey="6LcoHRIUAAAAADwRb9TDAhshD3CZgIhx1M-MO84y"></div>
-				<br /><br />
+				<br><br>
 				<?php endif; ?>
 
 				<div class="field">
@@ -71,15 +72,17 @@
 				<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 				<input type="hidden" name="signup_submit" value="1" />
 				<button class="button save red" type="submit"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></button>
-				<br /><br />
+				<br><br>
 	
 				<button type="button" class="button blue-facebook social_connect_login_facebook"><?php _e( "Se connecter avec Facebook", 'yproject' ); ?></button>
 				<div class="social_connect_login_facebook_loading align-center hidden">
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 				</div>
-				<br /><br />
-
-				<button type="button" class="wdg-button-lightbox-open button transparent" data-lightbox="connexion"><?php _e( "J&apos;ai d&eacute;j&agrave; un compte", 'yproject' ); ?></button>
+				<br><br>
+			
+				<div>
+					<a href="<?php echo home_url( '/connexion' ); ?>" class="box_connection_buttons button transparent"><?php _e( "J&apos;ai d&eacute;j&agrave; un compte", 'yproject' ); ?></a>
+				</div>
 
 			</div>
 		<?php endif; // request-details signup step ?>

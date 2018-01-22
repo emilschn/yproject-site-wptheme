@@ -812,6 +812,9 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3 .form-error-general {
 	color: #FF0000;
 }
+.db-form.v3 .form-success-general {
+	color: #00FF00;
+}
 .db-form.v3 .field {
     display: block;
     margin: 0px;
