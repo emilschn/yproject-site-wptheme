@@ -308,14 +308,6 @@ form.wdg-forms table input[type="text"].reward-text{
     text-align: left;
 }
 
-.sidebar-login-form a{
-    color: #606060;
-    font-size: 11px;
-    font-style: italic;
-}
-.sidebar-login-form .link-forgotten { margin-left: 140px; }
-.sidebar-login-form .link-forgotten a { color: #333333; text-align: right; font-size: 10px; font-style: italic; }
-
 .infobutton, .fa.infobutton{
     cursor: help;
     color: grey;
@@ -2148,40 +2140,6 @@ table.mceLayout {
     width: 610px;
     height: 330px;
     overflow: hidden;
-}
-
-/*******************************************************************************
-* COMMUNITY PAGES
-*******************************************************************************/
-.community-desc{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 620px;
-    padding-left: 10px;
-    padding-right: 20px;
-    font-size: 11pt;
-}
-.community-menu{
-    margin-top: 20px; 
-    border-bottom: 1px solid #FFFFFF;
-    font-family: Arial,sans-serif;
-    font-size: 10pt;
-    padding: 15px 0;
-    text-align: center;
-    text-transform: uppercase;
-    width: 310px;
-    border: 0;
-}
-
-/*******************************************************************************
-* TEAM PAGE
-*******************************************************************************/
-.jeandavid, .marlene, .loeiza, .emilien, .suzanna , .adrien {
-   height:450px;
-}
-
-.separateur-h4 {
-   font-size: 35px;
 }
 
 /*******************************************************************************
