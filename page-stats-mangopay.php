@@ -69,7 +69,9 @@ get_header();
 			
 			<?php // Regénération d'un contrat d'investissement
 //			getNewPdfToSign($project_id, $payment_id, $user_id);
-//			getNewPdfToSign(11182, 11943, 4298);
+//			ypcf_create_contract($payment_id, $download_id, $current_user->ID);
+//			getNewPdfToSign(22310, 22465, 12609);
+//			ypcf_create_contract(22465, 22310, 12609);
 //			getNewPdfToSign(11182, 11740, 4246);
 //			getNewPdfToSign(11182, 11595, 4055);
 			?>

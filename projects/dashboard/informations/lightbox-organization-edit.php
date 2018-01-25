@@ -46,6 +46,9 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 <label for="org_description"><?php _e("Descriptif de l'activit&eacute;", 'yproject'); ?>*</label>
                 <input type="text" name="org_description" value="<?php echo $organization_obj->get_description(); ?>" /><br />
 
+                <label for="org_website"><?php _e("Site Web", 'yproject'); ?>*</label>
+                <input type="text" name="org_website" value="<?php echo $organization_obj->get_website(); ?>" /><br />
+
                 <label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?>*</label>
                 <input type="text" name="org_legalform" value="<?php echo $organization_obj->get_legalform(); ?>" /><br />
 

@@ -34,14 +34,6 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 	}
 	
 /******************************************************************************/
-// CONTEXTE
-/******************************************************************************/
-	public function is_login_displayed() {
-		$input_register = filter_input( INPUT_GET, 'register' );
-		return empty( $input_register );
-	}
-	
-/******************************************************************************/
 // LOGIN ERROR
 /******************************************************************************/
 	public function get_login_error_reason() {

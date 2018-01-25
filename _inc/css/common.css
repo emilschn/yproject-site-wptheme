@@ -624,6 +624,25 @@ nav#main > div#menu > a.btn-user.active.connected > img {
 /*******************************************************************************
 * CONNEXION PAGE
 *******************************************************************************/
+.template-connexion, .template-inscription {
+	background-color: #f2f2f2;
+}
+.template-connexion .center, .template-inscription .center {
+	width: 100%;
+}
+.login-page-container {
+	padding-top: 90px;
+}
+.template-connexion h1, .template-inscription h1 {
+	text-align: center;
+	margin: 0px;
+	font-family: Trebuchet MS,sans-serif;
+	font-size: 28px;
+	font-weight: bold;
+	letter-spacing: .125em;
+}
+
+
 .post_bottom_buttons_connexion div { 
     border-bottom: 1px solid #FFFFFF;
     font-family: Arial, sans-serif;

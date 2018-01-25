@@ -3,7 +3,7 @@
 <div class="wdg-lightbox-ref">
 	<br><br>
 
-	<form action="<?php echo home_url( "/connexion" ); ?>?register=1" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
+	<form action="<?php echo home_url( "/inscription" ); ?>" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
 		<?php if ( $signup_step == 'request-details' ) : ?>
 			<div class="warning">
 				La cr&eacute;ation d&apos;un compte de Membre sur <?php echo ATCF_CrowdFunding::get_platform_name(); ?> est exclusivement r&eacute;serv&eacute;e aux personnes physiques.

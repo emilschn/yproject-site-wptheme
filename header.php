@@ -208,7 +208,7 @@
 					<hr class="login-separator">
 
 					<div>
-						<a href="<?php echo home_url( '/connexion' ); ?>?register=1" class="box_connection_buttons button red"><span><?php _e( "Cr&eacute;er un compte", 'yproject' ); ?></span></a>
+						<a href="<?php echo home_url( '/inscription' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Cr&eacute;er un compte", 'yproject' ); ?></span></a>
 					</div>
 					
 				<?php endif; ?>
