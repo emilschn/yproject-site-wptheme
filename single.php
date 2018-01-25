@@ -1,6 +1,7 @@
 <?php
-//Redirection vers nouveau blog wedogood
 global $post;
+
+//Redirection vers nouveau blog wedogood
 $post_category_list = get_the_category($post->ID);
 $post_category = $post_category_list[0]->slug;
 if ($post_category == "wedogood") {
@@ -9,6 +10,13 @@ if ($post_category == "wedogood") {
 	$new_url = 'http://blog.wedogood.co/' . $post_date . '/' . $post_name;
 	wp_redirect($new_url);
 	exit();
+}
+//Blocage pour pages qui sont censées êtes sous un parent (et qui se retrouvent mystérieusement avec le template "single")
+if ( $post->post_type == 'page' && $post->post_parent ) {
+    global $wp_query;
+    $wp_query->set_404();
+    status_header( 404 );
+    get_template_part( 404 ); exit();
 }
 //Blocage pour actualités de projets pas encore publiés
 global $campaign_id, $is_campaign, $is_campaign_page;
