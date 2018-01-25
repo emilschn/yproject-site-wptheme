@@ -53,7 +53,7 @@
 			<div class="login-separator-label"><span><?php _e( "ou", 'yproject' ); ?></span></div>
 			
 			<div>
-				<a href="<?php echo home_url( '/connexion' ); ?>?register=1" class="box_connection_buttons button transparent"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/inscription' ); ?>" class="box_connection_buttons button transparent"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></a>
 			</div>
         </form>
 
