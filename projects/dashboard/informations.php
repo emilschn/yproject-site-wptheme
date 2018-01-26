@@ -524,7 +524,7 @@ function print_informations_page()
 					"infobubble"	=> "Indiquez 5 ans pour un projet entrepreneurial, sauf cas particulier à valider avec l’équipe WE DO GOOD.",
                     "value"			=> $campaign->funding_duration(),
                     "suffix"		=> "<span>&nbsp;ann&eacute;es</span>",
-                    "min"			=> 1,
+                    "min"			=> 0,
                     "max"			=> 20,
 					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
