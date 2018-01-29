@@ -160,7 +160,8 @@ YPUIFunctions = (function($) {
 					'type' : "POST",
 					'url' : ajax_object.ajax_url,
 					'data': {
-						'action':'get_connect_to_facebook_url'
+						'action':'get_connect_to_facebook_url',
+						'redirect':$( '.social_connect_login_facebook' ).data( 'redirect' )
 					}
 				}).done(function(result){
 					if (result.indexOf('http') > -1) {

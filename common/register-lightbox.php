@@ -74,7 +74,7 @@
 				<button class="button save red" type="submit"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></button>
 				<br><br>
 	
-				<button type="button" class="button blue-facebook social_connect_login_facebook"><?php _e( "Se connecter avec Facebook", 'yproject' ); ?></button>
+				<button type="button" class="button blue-facebook social_connect_login_facebook" data-redirect="<?php echo WDGUser::get_login_redirect_page(); ?>"><?php _e( "Se connecter avec Facebook", 'yproject' ); ?></button>
 				<div class="social_connect_login_facebook_loading align-center hidden">
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 				</div>
