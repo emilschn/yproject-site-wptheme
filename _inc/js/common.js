@@ -160,7 +160,8 @@ YPUIFunctions = (function($) {
 					'type' : "POST",
 					'url' : ajax_object.ajax_url,
 					'data': {
-						'action':'get_connect_to_facebook_url'
+						'action':'get_connect_to_facebook_url',
+						'redirect':$( '.social_connect_login_facebook' ).data( 'redirect' )
 					}
 				}).done(function(result){
 					if (result.indexOf('http') > -1) {
@@ -834,7 +835,7 @@ var WDGFormsFunctions = (function($) {
 				$( this ).siblings( 'button' ).hide();
 				$( this ).hide();
 				var formId = $( this ).parent().parent().parent().attr( 'id' );
-				WDGFormsFunctions.postForm( 'div#' + formId, WDGFormsFunctions.postFormCallback, this );
+				WDGFormsFunctions.postForm( '#' + formId, WDGFormsFunctions.postFormCallback, this );
 			} );
 			$( '.wdg-lightbox button.close, .wdg-lightbox-ref button.close' ).click( function( e ) {
 				WDGLightboxFunctions.hideAll();
@@ -889,20 +890,28 @@ var WDGFormsFunctions = (function($) {
 		postForm: function( formid, callback, clickedButton ) {
 			$( formid+ ' div.field' ).removeClass( 'error' );
 			var sentData = {};
-			$( formid+' input, '+formid+' select, '+formid+' textarea' ).each( function() {
-				if ( $( this ).attr( 'type' ) === 'checkbox' || $( this ).attr( 'type' ) === 'radio' ) {
-					if ( $( this ).is(':checked') ) {
+			if ( $( formid ).hasClass( 'has-files' ) ) {
+  				sentData = new FormData( $( formid )[0]);
+				
+			} else {
+				$( formid+' input, '+formid+' select, '+formid+' textarea' ).each( function() {
+					if ( $( this ).attr( 'type' ) === 'checkbox' || $( this ).attr( 'type' ) === 'radio' ) {
+						if ( $( this ).is(':checked') ) {
+							sentData[ $( this ).attr( 'name' ) ] = $( this ).val();
+						}
+					} else {
 						sentData[ $( this ).attr( 'name' ) ] = $( this ).val();
 					}
-				} else {
-					sentData[ $( this ).attr( 'name' ) ] = $( this ).val();
-				}
-			} );
+				} );
+			}
 			
 			$.ajax({
 				'type': "POST",
 				'url': ajax_object.ajax_url,
-				'data': sentData
+				'data': sentData,
+				'cache': false,
+				'contentType': false,
+				'processData': false
 				
 			}).done(function (result) {
 				
@@ -917,6 +926,10 @@ var WDGFormsFunctions = (function($) {
 							$( formid+' div#field-'+errorItem.element ).addClass( 'error' );
 							$( formid+' div#field-'+errorItem.element+' span.field-error' ).html( errorItem.text );
 						}
+					}
+				} else {
+					if ( $( formid + '_success' ).length > 0 ) {
+						$( formid + '_success' ).show();
 					}
 				}
 				callback( result, formid, clickedButton );

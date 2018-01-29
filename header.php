@@ -199,7 +199,7 @@
 					<hr class="login-separator">
 
 					<div class="box_connection_buttons blue">
-						<a href="#" class="social_connect_login_facebook"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
+						<a href="#" class="social_connect_login_facebook" data-redirect="<?php echo WDGUser::get_login_redirect_page(); ?>"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
 					</div>
 					<div class="social_connect_login_facebook_loading align-center hidden">
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
