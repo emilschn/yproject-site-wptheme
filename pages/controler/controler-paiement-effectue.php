@@ -87,6 +87,7 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 			$payment_return = 'error-contact';
 		}
 		$this->current_view = $this->current_meanofpayment . '-' . $payment_return;
+		ypcf_debug_log( 'paiement-effectue > init_payment_result --- $this->current_view :: ' .$this->current_view );
 	}
 	
 	public function get_current_view() {
