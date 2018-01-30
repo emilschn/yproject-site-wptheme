@@ -13,7 +13,7 @@ if ($campaign->video() == '') {
 $campaign_status = $campaign->campaign_status();
 $campaign_categories_str = $campaign->get_categories_str();
 
-$btn_follow_href = '#connexion';
+$btn_follow_href = home_url( '/connexion' );
 $btn_follow_classes = 'wdg-button-lightbox-open';
 $btn_follow_data_lightbox = 'connexion';
 $btn_follow_text = __('Suivre', 'yproject');
@@ -196,7 +196,7 @@ $lang_list = $campaign->get_lang_list();
 					<?php if ( $campaign->time_remaining_str() != '-' ): ?>
 						
 						<?php if ( !is_user_logged_in() ): ?>
-							<a href="#connexion" class="button red wdg-button-lightbox-open" data-lightbox="connexion" data-redirect="<?php the_permalink(); ?>#vote">
+							<a href="<?php echo home_url( '/connexion' ); ?>" class="button red wdg-button-lightbox-open">
 								<?php _e('Voter', 'yproject'); ?>
 							</a>
 
@@ -225,9 +225,9 @@ $lang_list = $campaign->get_lang_list();
 					$page_invest = get_page_by_path('investir');
 					$campaign_id_param = '?campaign_id=' . $campaign->ID;
 					$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
-					$invest_url_href = "#connexion";
+					$invest_url_href = home_url( '/connexion' );
 					$btn_invest_classes = 'button red wdg-button-lightbox-open';
-					$btn_invest_data_lightbox = 'connexion';
+					$btn_invest_data_lightbox = '';
 					$btn_invest_text = ($campaign->funding_type() == 'fundingdonation') ? __('Soutenir', 'yproject') : __('Investir', 'yproject');
 					if (is_user_logged_in()) {
 						$invest_url_href = $invest_url;
