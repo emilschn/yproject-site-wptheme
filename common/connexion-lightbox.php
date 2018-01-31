@@ -7,7 +7,7 @@
 	</div>
 	<?php endif; ?>
     
-        <form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
+		<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
 			<div class="field">
 				<label for="signin_username"><?php _e( 'Identifiant ou e-mail', 'yproject' ); ?> *</label>
 				<div class="field-container">
@@ -51,11 +51,14 @@
 			
 			<hr class="login-separator">
 			<div class="login-separator-label"><span><?php _e( "ou", 'yproject' ); ?></span></div>
+		</form>
 			
+		<form method="post" action="<?php echo home_url( "/inscription" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
 			<div>
-				<a href="<?php echo home_url( '/inscription' ); ?>" class="box_connection_buttons button transparent"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></a>
+				<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
+				<button class="button transparent" type="submit"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></button>
 			</div>
-        </form>
+		</form>
 
 </div>
 
