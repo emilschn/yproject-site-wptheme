@@ -79,10 +79,6 @@
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 				</div>
 				<br><br>
-			
-				<div>
-					<a href="<?php echo home_url( '/connexion' ); ?>" class="box_connection_buttons button transparent"><?php _e( "J&apos;ai d&eacute;j&agrave; un compte", 'yproject' ); ?></a>
-				</div>
 
 			</div>
 		<?php endif; // request-details signup step ?>
@@ -103,6 +99,13 @@
 			<?php endif; ?>
 
 		<?php endif; // completed-confirmation signup step ?>
+	</form>
+			
+	<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
+		<div>
+			<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
+			<button class="button transparent" type="submit"><?php _e( "J&apos;ai d&eacute;j&agrave; un compte", 'yproject' ); ?></button>
+		</div>
 	</form>
 	
 </div>

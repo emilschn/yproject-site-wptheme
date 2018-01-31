@@ -141,7 +141,7 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 } ?>
                 <br /><br />
 
-                <strong><?php _e("Scan ou copie d'un RIB", 'yproject'); ?></strong><br />
+                <strong><?php _e("Scan ou copie d'un RIB*", 'yproject'); ?></strong><br />
                 <?php
                 $current_filelist_bank = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_bank);
                 $current_file_bank = $current_filelist_bank[0];
@@ -151,7 +151,7 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 <?php endif; ?>
                 <input type="file" name="org_doc_bank" /> <br /><br />
 
-                <strong><?php _e("K-BIS ou &eacute;quivalent &agrave; un registre du commerce", 'yproject'); ?></strong><br />
+                <strong><?php _e("K-BIS ou &eacute;quivalent &agrave; un registre du commerce*", 'yproject'); ?></strong><br />
                 <?php _e("Datant de moins de 3 mois", 'yproject'); ?><br />
                 <?php
                 $current_filelist_kbis = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_kbis);
@@ -162,7 +162,7 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 <?php endif; ?>
                 <input type="file" name="org_doc_kbis" /> <br /><br />
 
-                <strong><?php _e("Statuts de la soci&eacute;t&eacute;, certifi&eacute;s conformes à l'original par le g&eacute;rant", 'yproject'); ?></strong><br />
+                <strong><?php _e("Statuts de la soci&eacute;t&eacute;, certifi&eacute;s conformes à l'original par le g&eacute;rant*", 'yproject'); ?></strong><br />
                 <?php
                 $current_filelist_status = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_status);
                 $current_file_status = $current_filelist_status[0];
@@ -172,7 +172,7 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 <?php endif; ?>
                 <input type="file" name="org_doc_status" /> <br /><br />
 
-                <strong><?php _e("Justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident", 'yproject'); ?></strong><br />
+                <strong><?php _e("Justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident*", 'yproject'); ?></strong><br />
                 <?php _e("Pour une personne fran&ccedil;aise : carte d'identit&eacute; recto-verso ou passeport fran&ccedil;ais.", 'yproject'); ?><br />
                 <?php _e("Sinon : le titre de s&eacute;jour et le passeport d'origine.", 'yproject'); ?><br />
                 <?php
@@ -184,7 +184,7 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 <?php endif; ?>
                 <input type="file" name="org_doc_id" /> <br /><br />
 
-                <strong><?php _e("Justificatif de domicile du g&eacute;rant ou du pr&eacute;sident", 'yproject'); ?></strong><br />
+                <strong><?php _e("Justificatif de domicile du g&eacute;rant ou du pr&eacute;sident*", 'yproject'); ?></strong><br />
                 <?php _e("Datant de moins de 3 mois, provenant d'un fournisseur d'&eacute;nergie (&eacute;lectricit&eacute;, gaz, eau) ou d'un bailleur, ou un relev&eacute; d'imp&ocirc;t datant de moins de 3 mois", 'yproject'); ?><br />
                 <?php
                 $current_filelist_home = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_home);
@@ -194,7 +194,76 @@ $organization_obj->submit_transfer_wallet_lemonway();
                 <a id="org_doc_home" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_home->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_home->date_uploaded; ?></a>
                 <?php endif; ?>
                 <input type="file" name="org_doc_home" /> <br /><br />
+				
+				
+				<span style="color: #EE0000;"><em>--&gt; <?php _e( "Si la r&eacute;partition du capital n'est pas exprim&eacute;e clairement dans les statuts, merci de nous fournir une attestation avec ces pr&eacute;cisions :", 'yproject' ); ?></em></span><br />
+				<strong><?php _e( "Attestation de r&eacute;partition du capital (facultatif)", 'yproject' ); ?></strong><br />
+				<?php
+                $current_filelist_capital_allocation = WDGKYCFile::get_list_by_owner_id( $organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_capital_allocation );
+                $current_file_capital_allocation = $current_filelist_capital_allocation[0];
+                if ( isset( $current_file_capital_allocation ) ):
+                ?>
+                <a id="org_doc_home" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_capital_allocation->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_capital_allocation->date_uploaded; ?></a>
+                <?php endif; ?>
+                <input type="file" name="org_doc_capital_allocation" /> <br><br>
+				
+				
+				<span style="color: #EE0000;"><em>--&gt; <?php _e( "Si une deuxi&egrave;me personne physique d&eacute;tient au moins 25% du capital, merci de transmettre ces pi&egrave;ces justificatives :", 'yproject' ); ?></em></span><br />
+				
+				<strong><?php _e("Justificatif d'identit&eacute; de la deuxi&egrave;me personne (facultatif)", 'yproject'); ?></strong><br />
+                <?php _e("Pour une personne fran&ccedil;aise : carte d'identit&eacute; recto-verso ou passeport fran&ccedil;ais.", 'yproject'); ?><br />
+                <?php _e("Sinon : le titre de s&eacute;jour et le passeport d'origine.", 'yproject'); ?><br />
+                <?php
+                $current_filelist_id_2 = WDGKYCFile::get_list_by_owner_id( $organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_id_2 );
+                $current_file_id_2 = $current_filelist_id_2[0];
+                if ( isset( $current_file_id_2 ) ):
+                ?>
+                <a id="org_doc_id_2" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_id_2->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_id_2->date_uploaded; ?></a>
+                <?php endif; ?>
+                <input type="file" name="org_doc_id_2" /> <br /><br />
 
+                <strong><?php _e("Justificatif de domicile de la deuxi&egrave;me personne (facultatif)", 'yproject'); ?></strong><br />
+                <?php _e("Datant de moins de 3 mois, provenant d'un fournisseur d'&eacute;nergie (&eacute;lectricit&eacute;, gaz, eau) ou d'un bailleur, ou un relev&eacute; d'imp&ocirc;t datant de moins de 3 mois", 'yproject'); ?><br />
+                <?php
+                $current_filelist_home_2 = WDGKYCFile::get_list_by_owner_id( $organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_home_2 );
+                $current_file_home_2 = $current_filelist_home_2[0];
+                if ( isset( $current_file_home_2 ) ):
+                ?>
+                <a id="org_doc_home_2" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_home_2->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_home_2->date_uploaded; ?></a>
+                <?php endif; ?>
+                <input type="file" name="org_doc_home_2" /> <br /><br />
+				
+				
+				<span style="color: #EE0000;"><em>--&gt; <?php _e( "Si une troisi&egrave;me personne physique d&eacute;tient au moins 25% du capital, merci de transmettre ces pi&egrave;ces justificatives :", 'yproject' ); ?></span></em><br />
+				
+				<strong><?php _e("Justificatif d'identit&eacute; de la troisi&egrave;me personne (facultatif)", 'yproject'); ?></strong><br />
+                <?php _e("Pour une personne fran&ccedil;aise : carte d'identit&eacute; recto-verso ou passeport fran&ccedil;ais.", 'yproject'); ?><br />
+                <?php _e("Sinon : le titre de s&eacute;jour et le passeport d'origine.", 'yproject'); ?><br />
+                <?php
+                $current_filelist_id_3 = WDGKYCFile::get_list_by_owner_id( $organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_id_3 );
+                $current_file_id_3 = $current_filelist_id_3[0];
+                if ( isset( $current_file_id_3 ) ):
+                ?>
+                <a id="org_doc_id_3" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_id_3->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_id_3->date_uploaded; ?></a>
+                <?php endif; ?>
+                <input type="file" name="org_doc_id_3" /> <br /><br />
+
+                <strong><?php _e("Justificatif de domicile de la troisi&egrave;me personne (facultatif)", 'yproject'); ?></strong><br />
+                <?php _e("Datant de moins de 3 mois, provenant d'un fournisseur d'&eacute;nergie (&eacute;lectricit&eacute;, gaz, eau) ou d'un bailleur, ou un relev&eacute; d'imp&ocirc;t datant de moins de 3 mois", 'yproject'); ?><br />
+                <?php
+                $current_filelist_home_3 = WDGKYCFile::get_list_by_owner_id( $organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_home_3 );
+                $current_file_home_3 = $current_filelist_home_3[0];
+                if ( isset( $current_file_home_3 ) ):
+                ?>
+                <a id="org_doc_home_3" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_home_3->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_home_3->date_uploaded; ?></a>
+                <?php endif; ?>
+                <input type="file" name="org_doc_home_3" /> <br /><br />
+				
+				
+				<span style="color: #EE0000;"><em>--&gt; <?php _e( "Si une quatri&egrave;me personne ou une personne morale d&eacute;tient au moins 25% de votre capital, merci de nous le signaler sur support@wedogood.co.", 'yproject' ); ?></em></span><br />
+				
+				
+				
                 <input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
 				<input type="hidden" name="action" value="save_edit_organization" />
 
@@ -207,7 +276,7 @@ $organization_obj->submit_transfer_wallet_lemonway();
 
                 <?php $organization_lemonway_authentication_status = $organization_obj->get_lemonway_status(); ?>
                 <?php if ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_blocked): ?>
-                        <?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIREN. Ainsi que les 5 documents ci-dessus.", 'yproject'); ?><br />
+                        <?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIREN. Ainsi que les 5 documents suivis d'une &eacute;toile ci-dessus.", 'yproject'); ?><br />
                 <?php elseif ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_ready): ?>
                         <form action="" method="POST" enctype="multipart/form-data">
                                 <input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
