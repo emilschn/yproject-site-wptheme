@@ -891,7 +891,7 @@ var WDGFormsFunctions = (function($) {
 			$( formid+ ' div.field' ).removeClass( 'error' );
 			var sentData = {};
 			if ( $( formid ).hasClass( 'has-files' ) ) {
-  				sentData = new FormData( $( formid )[0]);
+  				sentData = new FormData( $( formid )[0] );
 				
 			} else {
 				$( formid+' input, '+formid+' select, '+formid+' textarea' ).each( function() {
@@ -905,15 +905,23 @@ var WDGFormsFunctions = (function($) {
 				} );
 			}
 			
-			$.ajax({
-				'type': "POST",
-				'url': ajax_object.ajax_url,
-				'data': sentData,
-				'cache': false,
-				'contentType': false,
-				'processData': false
-				
-			}).done(function (result) {
+			if ( $( formid ).hasClass( 'has-files' ) ) {
+				var ajaxParams = {
+					'type': "POST",
+					'url': ajax_object.ajax_url,
+					'data': sentData,
+					'cache': false,
+					'contentType': false,
+					'processData': false
+				}
+			} else {
+				var ajaxParams = {
+					'type': "POST",
+					'url': ajax_object.ajax_url,
+					'data': sentData
+				}
+			}
+			$.ajax( ajaxParams ).done(function (result) {
 				
 				var jsonResult = JSON.parse(result);
 				if ( jsonResult.errors != undefined ) {
