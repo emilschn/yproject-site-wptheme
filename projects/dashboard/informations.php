@@ -789,7 +789,43 @@ function print_informations_page()
 
             </ul>
 			
+			<?php if ( $is_admin ): // A supprimer ?>
+			<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+			<div class="field admin-theme align-center">
+				<a href="<?php echo $campaign->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red">Attestation de lev&eacute;e de fonds</a>
+			</div>
+			<br>
+			<?php endif; ?>
+			<?php endif; ?>
+			
 			<?php if ( $is_admin ): ?>
+				<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+
+				<?php $campaign_bill = new WDGCampaignBill( $campaign, WDGCampaignBill::$tool_name_quickbooks, WDGCampaignBill::$bill_type_crowdfunding_commission ); ?>
+				<?php if ( $campaign_bill->can_generate() ): ?>
+				<form action="<?php echo admin_url( 'admin-post.php?action=generate_campaign_bill'); ?>" method="post" id="generate_campaign_bill_form" class="field admin-theme">
+					/!\ <?php _e( "Ce bouton cr&eacute;era une nouvelle facture sur l'outil de facturation. Assurez-vous que cette facture n'a pas déjà été générée auparavant.", 'yproject' ); ?> /!\<br>
+					<?php _e( "Les informations suivantes seront utilis&eacute;es pour g&eacute;n&eacute;rer la facture :", 'yproject' ); ?>
+
+					<ul>
+						<li><?php echo $campaign_bill->get_line_title(); ?></li>
+						<li><?php echo nl2br( $campaign_bill->get_line_description() ); ?></li>
+						<li><?php echo nl2br( $campaign_bill->get_bill_description() ); ?></li>
+					</ul>
+					<br>
+					<div class="align-center">
+						<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+						<button class="button blue-pale"><?php _e( "G&eacute;n&eacute;rer la facture de la levée de fonds", 'yproject' ); ?></button>
+					</div>
+				</form>
+				<?php else: ?>
+				Vous ne pouvez pas encore générer la facture pour cette campagne.
+				Avez-vous vérifié que l'identifiant Quickbooks et la commission sont bien paramétrés ?
+				<?php endif; ?>
+
+				<hr>
+				<?php endif; ?>
+			
 			<form action="<?php echo admin_url( 'admin-post.php?action=generate_contract_files'); ?>" method="post" id="contract_files_generate_form" class="field admin-theme">
 				/!\ <?php _e( "Si vous choisissez de g&eacute;n&eacute;rer les contrats, cela remplacera les fichiers précédents :", 'yproject' ); ?> /!\
 				<br /><br />

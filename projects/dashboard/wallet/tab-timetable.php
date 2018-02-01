@@ -42,6 +42,7 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 								<td>Info ajustement</td>
 								<td>Montant ajustement</td>
 								<td>Justificatif</td>
+								<td>Facture</td>
 							</tr>
 						</thead>
 						<tfoot>
@@ -55,6 +56,7 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 								<td>Info ajustement</td>
 								<td>Montant ajustement</td>
 								<td>Justificatif</td>
+								<td>Facture</td>
 							</tr>
 						</tfoot>
 
