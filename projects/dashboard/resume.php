@@ -196,7 +196,7 @@ function print_resume_page()
 							}
 							?>
                             <div class="stat-big-number <?php echo $big_number_class; ?>"><?php echo $campaign->current_amount()?></div>
-                            <div class="stat-little-number">récoltés sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro;</div>
+                            <div class="stat-little-number">levés sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro;</div>
                             <div class="details-card">
                                 <strong><?php echo $campaign->current_amount()?></strong> investis par
                                 <strong><?php echo $nb_invests?></strong> personne<?php if($nb_invests>1){echo 's';}?>
