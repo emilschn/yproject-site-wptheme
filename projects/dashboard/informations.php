@@ -990,6 +990,7 @@ function print_informations_page()
 				( 
 					$campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte
 					|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded
+					|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed
 					|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive
 				);
 			?>	
