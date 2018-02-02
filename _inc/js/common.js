@@ -3,6 +3,14 @@ jQuery(document).ready( function($) {
 	WDGFormsFunctions.init();
 });
 
+JSHelpers = ( function( $ ) {
+	return {
+		urldecode: function(str) {
+			return decodeURIComponent( ( str + '' ).replace( /\+/g, '%20' ) );
+		}
+	};
+} ) ( jQuery );
+
 YPUIFunctions = (function($) {
 	return {
 		
