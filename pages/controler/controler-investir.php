@@ -108,10 +108,10 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		$current_user = wp_get_current_user();
 		$campaign = $this->current_campaign;
 		$part_value = $campaign->part_value();
-        $amount_part = ( $_SESSION[ 'redirect_current_amount' ] === FALSE ) ? 0 : $_SESSION[ 'redirect_current_amount' ] / $part_value;
+        $amount_part = ( $_SESSION[ 'redirect_current_amount_part' ] === FALSE ) ? 0 : $_SESSION[ 'redirect_current_amount_part' ] / $part_value;
 		$invest_data = array(
 			"amount_part"					=> $amount_part,
-			"amount"						=> $_SESSION[ 'redirect_current_amount' ],
+			"amount"						=> $_SESSION[ 'redirect_current_amount_part' ],
 			"total_parts_company"			=> $campaign->total_parts(),
 			"total_minimum_parts_company"	=> $campaign->total_minimum_parts(),
 			"ip"							=> filter_input( INPUT_SERVER, 'REMOTE_ADDR' )
