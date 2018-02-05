@@ -788,6 +788,16 @@ function print_informations_page()
             <ul class="errors">
 
             </ul>
+			
+			<?php if ( $is_admin ): // A supprimer ?>
+			<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+			<div class="field admin-theme align-center">
+				<a href="<?php echo $campaign->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red">Attestation de lev&eacute;e de fonds</a>
+			</div>
+			<br>
+			<?php endif; ?>
+			<?php endif; ?>
+			
 			<?php if ( $is_admin ): ?>
 				<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
 
@@ -972,6 +982,117 @@ function print_informations_page()
 					<?php else: ?>
 					Il n'y a pas de pré-investissement en attente.
 					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+				
+			<?php
+			$can_add_contract = $is_admin && 
+				( 
+					$campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte
+					|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded
+					|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed
+					|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive
+				);
+			?>	
+			<?php if ( $is_admin && $can_add_contract ): ?>
+				<br><br>
+				<div class="field admin-theme">
+					<strong><?php _e( "Contrats investisseurs compl&eacute;mentaires :" ); ?></strong>
+					<?php $contract_models = WDGWPREST_Entity_Project::get_contract_models( $campaign->get_api_id() ); ?>
+					<?php if ( $contract_models ): ?>
+						<?php
+						$status_to_text = array(
+							'draft' => __( "Brouillon", 'yproject' ),
+							'sent' => __( "Envoy&eacute;", 'yproject' )
+						);
+						?>
+						<ul>
+						<?php foreach ( $contract_models as $contract_model ): ?>
+							<li>
+								<?php echo $contract_model->model_name; ?> (<?php echo $status_to_text[ $contract_model->status ]; ?>)
+								<?php if ( $contract_model->status != 'sent' ): ?>
+									<a href="#" class="button blue" data-alertconfirm="<?php _e( "Ceci enverra le contrat &agrave; chacun des investisseurs", 'yproject' ); ?>"><?php _e( "Faire signer", 'yproject' ); ?></a>
+									<button type="button" class="button blue edit-contract-model" data-modelid="<?php echo $contract_model->id; ?>" data-modelname="<?php echo urlencode( $contract_model->model_name ); ?>" data-modelcontent="<?php echo urlencode( nl2br( $contract_model->model_content ) ); ?>"><?php _e( "Editer", 'yproject' ); ?></button>
+								<?php endif; ?>
+							</li>
+						<?php endforeach; ?>
+						</ul>
+						<br>
+					<?php else: ?>
+						<?php _e( "Aucun", 'yproject' ); ?>
+					<?php endif; ?>
+					
+					<div class="align-center">
+						<button id="button-show-form-add-contract-model" type="button" class="button blue"><?php _e( "Ajouter", 'yproject' ); ?></button>
+					</div>
+					
+					<form id="form-add-contract-model" method="POST" action="<?php echo admin_url( 'admin-post.php?action=add_contract_model' ); ?>" class="db-form v3 full hidden">
+				
+						<hr>
+						
+						<strong><?php _e( "Nouveau contrat compl&eacute;mentaire :", 'yproject' ); ?></strong><br><br>
+						<div class="field">
+							<label><?php _e( "Titre", 'yproject' ); ?></label>
+							<div class="field-container">
+								<span class="field-value"><input type="text" name="contract_model_name" /></span>
+							</div>
+						</div>
+						<div class="field">
+							<label><?php _e( "Contenu", 'yproject' ); ?></label>
+							<div class="field-container">
+								<?php
+								wp_editor( '', 'contract_model_content',
+									array(
+										'media_buttons' => true,
+										'quicktags' => false,
+										'tinymce' => array(
+											'plugins' => 'wordpress, paste, wplink, textcolor',
+											'paste_remove_styles' => true
+										)
+									)
+								);
+								?>
+							</div>
+						</div>
+						
+						<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>">
+						<button type="submit" class="button red"><?php _e( "Ajouter", 'yproject' ); ?></button>
+						
+					</form>
+					
+					<form id="form-edit-contract-model" method="POST" action="<?php echo admin_url( 'admin-post.php?action=edit_contract_model' ); ?>" class="db-form v3 full hidden">
+				
+						<hr>
+						
+						<strong><?php _e( "Edition du contrat compl&eacute;mentaire :", 'yproject' ); ?></strong><br><br>
+						<div class="field">
+							<label><?php _e( "Titre", 'yproject' ); ?></label>
+							<div class="field-container">
+								<span class="field-value"><input type="text" name="contract_edit_model_name" /></span>
+							</div>
+						</div>
+						<div class="field">
+							<label><?php _e( "Contenu", 'yproject' ); ?></label>
+							<div class="field-container">
+								<?php
+								wp_editor( '', 'contract_edit_model_content',
+									array(
+										'media_buttons' => true,
+										'quicktags' => false,
+										'tinymce' => array(
+											'plugins' => 'wordpress, paste, wplink, textcolor',
+											'paste_remove_styles' => true
+										)
+									)
+								);
+								?>
+							</div>
+						</div>
+						
+						<input type="hidden" name="contract_edit_model_id" value="">
+						<button type="submit" class="button red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+						
+					</form>
 				</div>
 			<?php endif; ?>
         </div>

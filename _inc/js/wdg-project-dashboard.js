@@ -164,6 +164,22 @@ var WDGProjectDashboard = (function ($) {
                     $("#innbdayvote").on( 'keyup change', function () {
                         updateDate("innbdayvote","previewenddatevote");});
                 }
+				
+				if ( $( '#button-show-form-add-contract-model' ).length > 0 ) {
+					$( '#button-show-form-add-contract-model' ).click( function() {
+						$( '#form-add-contract-model' ).show();
+						$( '#form-edit-contract-model' ).hide();
+					} );
+				}
+				if ( $( '.edit-contract-model' ).length > 0 ) {
+					$( '.edit-contract-model' ).click( function() {
+						$( '#form-edit-contract-model input[name=contract_edit_model_name]' ).val( JSHelpers.urldecode( $( this ).data( 'modelname' ) ) );
+						tinyMCE.get( 'contract_edit_model_content' ).setContent( JSHelpers.urldecode( $( this ).data( 'modelcontent' ) ) );
+						$( '#form-edit-contract-model input[name=contract_edit_model_id]' ).val( $( this ).data( 'modelid' ) );
+						$( '#form-edit-contract-model' ).show();
+						$( '#form-add-contract-model' ).hide();
+					} );
+				}
             }
 			
 			//Gestion sous-onglets
@@ -677,6 +693,9 @@ var WDGProjectDashboard = (function ($) {
 
             //Fonction globale d'update d'informations
            $("#ndashboard form.db-form").submit(function(e){
+			   if ( $(this).attr( 'action' ) != '' && $(this).attr( 'action' ) != undefined ) {
+				   return;
+			   }
                e.preventDefault();
                if ($(this).data("action")==undefined) return false;
                var thisForm = $(this);
