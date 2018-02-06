@@ -1011,7 +1011,7 @@ function print_informations_page()
 							<li>
 								<?php echo $contract_model->model_name; ?> (<?php echo $status_to_text[ $contract_model->status ]; ?>)
 								<?php if ( $contract_model->status != 'sent' ): ?>
-									<a href="#" class="button blue" data-alertconfirm="<?php _e( "Ceci enverra le contrat &agrave; chacun des investisseurs", 'yproject' ); ?>"><?php _e( "Faire signer", 'yproject' ); ?></a>
+									<a href="<?php echo admin_url( 'admin-post.php?action=send_contract_model&model=' . $contract_model->id ); ?>" class="button blue alert-confirm" data-alertconfirm="<?php _e( "Ceci enverra le contrat &agrave; chacun des investisseurs", 'yproject' ); ?>"><?php _e( "Faire signer", 'yproject' ); ?></a>
 									<button type="button" class="button blue edit-contract-model" data-modelid="<?php echo $contract_model->id; ?>" data-modelname="<?php echo urlencode( $contract_model->model_name ); ?>" data-modelcontent="<?php echo urlencode( nl2br( $contract_model->model_content ) ); ?>"><?php _e( "Editer", 'yproject' ); ?></button>
 								<?php endif; ?>
 							</li>
@@ -1032,7 +1032,7 @@ function print_informations_page()
 						
 						<strong><?php _e( "Nouveau contrat compl&eacute;mentaire :", 'yproject' ); ?></strong><br><br>
 						<div class="field">
-							<label><?php _e( "Titre", 'yproject' ); ?></label>
+							<label><?php _e( "Titre (sera repris sur Signsquid)", 'yproject' ); ?></label>
 							<div class="field-container">
 								<span class="field-value"><input type="text" name="contract_model_name" /></span>
 							</div>
@@ -1066,7 +1066,7 @@ function print_informations_page()
 						
 						<strong><?php _e( "Edition du contrat compl&eacute;mentaire :", 'yproject' ); ?></strong><br><br>
 						<div class="field">
-							<label><?php _e( "Titre", 'yproject' ); ?></label>
+							<label><?php _e( "Titre (sera repris sur Signsquid)", 'yproject' ); ?></label>
 							<div class="field-container">
 								<span class="field-value"><input type="text" name="contract_edit_model_name" /></span>
 							</div>
