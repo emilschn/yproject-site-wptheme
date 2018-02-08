@@ -201,7 +201,9 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 			case WDGInvestment::$meanofpayment_check:
 				$check_return = $this->get_check_return();
 				if ( !empty( $check_return ) ) {
-					$this->current_investment->get_session_amount(); // Stock avant destruction
+					// Stock avant destruction
+					$this->current_investment->get_session_amount();
+					$this->current_investment->get_session_user_type();
 					WDGInvestment::unset_session();
 					$this->current_view = 'check-return';
 				} else {
