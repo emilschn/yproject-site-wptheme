@@ -181,7 +181,7 @@ function print_informations_page()
 
 				<?php if ( $terms_tousnosprojets ): ?>
                 <div class="field">
-					<label for="tousnosprojets"><?php _e("Tous nos projets", 'yproject'); ?></label>
+					<label for="tousnosprojets"><?php _e("Cat&eacute;gorie sur le site tousnosprojets.fr", 'yproject'); ?></label>
 					<span class="field-value" data-type="multicheck" data-id="new_project_tousnosprojets"><?php
 						wp_terms_checklist(
 							$campaign_id,
