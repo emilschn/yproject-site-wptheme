@@ -79,7 +79,11 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 						"SELECT ID FROM ".$wpdb->posts." WHERE ".$wpdb->posts.".post_type = 'download' AND ".$wpdb->posts.".post_name = '".WDG_Page_Controler_Home::$funded_campaign_top_list[ $i ]."'",
 						OBJECT
 					);
-					array_push( $this->projects_list, $result[0]->ID );
+					if ( count( $result ) > 0 ) {
+						array_push( $this->projects_list, $result[0]->ID );
+					} else {
+						array_push( $this->projects_list, 1 );
+					}
 				}
 			}
 		}
