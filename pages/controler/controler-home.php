@@ -75,11 +75,11 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 			if ( $count_campaignlist < WDG_Page_Controler_Home::$projects_nb_to_show ) {
 				for ( $i = 0; $i < WDG_Page_Controler_Home::$projects_nb_to_show - $count_campaignlist; $i++ ) {
 					global $wpdb;
-					$result = $wpdb->get_var( 
+					$result = $wpdb->get_results( 
 						"SELECT ID FROM ".$wpdb->posts." WHERE ".$wpdb->posts.".post_type = 'download' AND ".$wpdb->posts.".post_name = '".WDG_Page_Controler_Home::$funded_campaign_top_list[ $i ]."'",
 						OBJECT
 					);
-					array_push( $this->projects_list, $result );
+					array_push( $this->projects_list, $result[0]->ID );
 				}
 			}
 		}
