@@ -75,11 +75,15 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 			if ( $count_campaignlist < WDG_Page_Controler_Home::$projects_nb_to_show ) {
 				for ( $i = 0; $i < WDG_Page_Controler_Home::$projects_nb_to_show - $count_campaignlist; $i++ ) {
 					global $wpdb;
-					$result = $wpdb->get_var( 
+					$result = $wpdb->get_results( 
 						"SELECT ID FROM ".$wpdb->posts." WHERE ".$wpdb->posts.".post_type = 'download' AND ".$wpdb->posts.".post_name = '".WDG_Page_Controler_Home::$funded_campaign_top_list[ $i ]."'",
 						OBJECT
 					);
-					array_push( $this->projects_list, $result );
+					if ( count( $result ) > 0 ) {
+						array_push( $this->projects_list, $result[0]->ID );
+					} else {
+						array_push( $this->projects_list, 1 );
+					}
 				}
 			}
 		}
@@ -130,7 +134,7 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 	private function prepare_stats() {
 		$this->stats_html = $this->get_db_cached_elements( WDG_Page_Controler_Home::$stats_html_key, WDG_Page_Controler_Home::$stats_html_version );
 		if ( empty( $this->stats_html ) ) {
-			$project_list_funded = ATCF_Campaign::get_list_funded( WDG_Page_Controler_Home::$nb_query_campaign_funded, '', true );
+			$project_list_funded = ATCF_Campaign::get_list_funded( WDG_Page_Controler_Home::$nb_query_campaign_funded, '', true, false );
 			$count_amount = 0;
 			$people_list = array();
 			$count_projects = 0;

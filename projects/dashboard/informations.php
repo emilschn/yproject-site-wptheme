@@ -116,6 +116,10 @@ function print_informations_page()
 				if ( $terms_partners ) {
 					$terms_partners_id = $terms_partners[0]->term_id;
 				}
+                $terms_tousnosprojets = get_terms('download_category', array('slug' => 'tousnosprojets', 'hide_empty' => false));
+				if ( $terms_tousnosprojets ) {
+					$terms_tousnosprojets_id = $terms_tousnosprojets[0]->term_id;
+				}
                 ?>
 
                 <div class="field">
@@ -169,6 +173,21 @@ function print_informations_page()
 							array(
 								'taxonomy' => 'download_category',
 								'descendants_and_self' => $terms_partners_id,
+								'checked_ontop' => false
+						) );
+					?></span>
+				</div>
+				<?php endif; ?>
+
+				<?php if ( $terms_tousnosprojets ): ?>
+                <div class="field">
+					<label for="tousnosprojets"><?php _e("Cat&eacute;gorie sur le site tousnosprojets.fr", 'yproject'); ?></label>
+					<span class="field-value" data-type="multicheck" data-id="new_project_tousnosprojets"><?php
+						wp_terms_checklist(
+							$campaign_id,
+							array(
+								'taxonomy' => 'download_category',
+								'descendants_and_self' => $terms_tousnosprojets_id,
 								'checked_ontop' => false
 						) );
 					?></span>
