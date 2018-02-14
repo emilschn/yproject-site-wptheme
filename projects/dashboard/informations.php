@@ -573,7 +573,7 @@ function print_informations_page()
 						"options_names"	=> array_values( ATCF_Campaign::$maximum_profit_list ),
 						"prefix"		=> '*',
 						"admin_theme"	=> true,
-						"editable"		=> $campaign->is_preparing()
+						"editable"		=> $is_admin || $campaign->is_preparing()
 					));
 					
 				}
@@ -704,6 +704,17 @@ function print_informations_page()
                     "visible"		=> $is_admin || ($campaign->first_payment_date()!="")
                 ));
 
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_estimated_turnover_unit",
+                    "type"			=> "select",
+                    "label"			=> "Le pr&eacute;visionnel est exprim&eacute; en",
+                    "value"			=> $campaign->estimated_turnover_unit(),
+					"options_id"	=> array( 'euro', 'percent' ),
+					"options_names"	=> array( '&euro;', '%' ),
+                    "editable"		=> $is_admin,
+                    "admin_theme"	=> $is_admin,
+                    "visible"		=> $is_admin
+                ));
                 ?>
 
                 <div class="field">
@@ -714,7 +725,7 @@ function print_informations_page()
                         <?php echo "&nbsp;".__("investis"); ?>
                     </label>
                 </div>
-				<?php $is_euro = ( $campaign->contract_budget_type() != 'collected_funds' ); ?>
+				<?php $is_euro = ( $campaign->estimated_turnover_unit() == 'euro' ); ?>
                 <ul id="estimated-turnover" data-symbol="<?php if ( $is_euro ): ?>€<?php else: ?>%<?php endif; ?>">
                     <?php
                     $estimated_turnover = $campaign->estimated_turnover();
