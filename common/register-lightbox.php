@@ -18,20 +18,28 @@
 
 			<div class="register-section" id="basic-details-section">
 				<div class="field">
-					<label for="signup_username_login"><?php _e( 'Identifiant', 'yproject' ); ?> *</label>
-					<span class="complement">compos&eacute; de lettres non-accentu&eacute;es, de chiffres ou des caract&egrave;res suivants : . - @</span>
-					<div class="field-container">
-						<span class="field-value">
-							<input type="text" name="signup_username_login" id="signup_username_login" value="<?php if (!empty($_POST['signup_username'])) { echo $_POST['signup_username']; } ?>" />
-						</span>
-					</div>
-				</div>
-
-				<div class="field">
 					<label for="signup_email"><?php _e( 'Adresse e-mail', 'yproject' ); ?> *</label>
 					<div class="field-container">
 						<span class="field-value">
 							<input type="text" name="signup_email" id="signup_email" value="<?php if (!empty($_POST['signup_email'])) { echo $_POST['signup_email']; } ?>" />
+						</span>
+					</div>
+				</div>
+				
+				<div class="field">
+					<label for="signup_firstname"><?php _e( "Pr&eacute;nom", 'yproject' ); ?> *</label>
+					<div class="field-container">
+						<span class="field-value">
+							<input type="text" name="signup_firstname" id="signup_firstname" value="<?php if ( !empty( $_POST[ 'signup_firstname' ] ) ) { echo $_POST[ 'signup_firstname' ]; } ?>" />
+						</span>
+					</div>
+				</div>
+				
+				<div class="field">
+					<label for="signup_lastname"><?php _e( "Nom de famille", 'yproject' ); ?> *</label>
+					<div class="field-container">
+						<span class="field-value">
+							<input type="text" name="signup_lastname" id="signup_lastname" value="<?php if ( !empty( $_POST[ 'signup_lastname' ] ) ) { echo $_POST[ 'signup_lastname' ]; } ?>" />
 						</span>
 					</div>
 				</div>
