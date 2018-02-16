@@ -522,7 +522,7 @@ YPUIFunctions = (function($) {
 
 				//Crée le tableau de contacts si besoin
                 if ($("#ajax-contacts-load").length > 0) {
-                    WDGProjectDashboard.getContactsTable(JSON.stringify(inv_data),campaign_id);
+                    wdgCampaignDashboard.getContactsTable(JSON.stringify(inv_data),campaign_id);
                 }
 
 			}).fail(function(){});
