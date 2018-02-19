@@ -8,6 +8,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $campaign_url;
 	private $can_access;
 	private $can_access_admin;
+	private $can_access_author;
 	private $must_show_lightbox_welcome;
 	/**
 	 * @var ATCF_Campaign
@@ -68,21 +69,27 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		return $this->can_access_admin;
 	}
 	
+	public function can_access_author() {
+		return $this->can_access_author;
+	}
+	
 /******************************************************************************/
 // DONNEES DE LA CAMPAGNE
 /******************************************************************************/
 	private function init_campaign_data() {
 		$this->can_access = FALSE;
 		$this->can_access_admin = FALSE;
+		$this->can_access_author = FALSE;
 		$this->campaign_id = filter_input(INPUT_GET, 'campaign_id');
 		
 		if ( !empty( $this->campaign_id ) && is_user_logged_in() ) {
 			$this->current_user = WDGUser::current();
 			$this->campaign = new ATCF_Campaign( $this->campaign_id );
+			$this->author_user = new WDGUser( $this->campaign->data->post_author );
 			$this->campaign_url = get_permalink( $this->campaign_id );
 			$this->can_access = $this->campaign->current_user_can_edit();
 			$this->can_access_admin = $this->current_user->is_admin();
-			$this->author_user = new WDGUser( $this->campaign->post_author() );
+			$this->can_access_author = ( $this->author_user->get_wpref() == $this->current_user->get_wpref() );
 			$campaign_organization_item = $this->campaign->get_organization();
 			$this->campaign_organization = new WDGOrganization( $campaign_organization_item->wpref );
 		}

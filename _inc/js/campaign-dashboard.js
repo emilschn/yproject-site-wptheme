@@ -3,6 +3,7 @@ function WDGCampaignDashboard() {
     this.initWithHash();
 	this.initMenu();
 	this.drawTimetable();
+	this.initAjaxForms();
 }
 
 /**
@@ -44,6 +45,135 @@ WDGCampaignDashboard.prototype.switchTab = function(sType) {
 	$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
 	$( 'div#item-body > div#item-body-' + sType ).show();
 	
+};
+
+/**
+ * Gère les formulaires ajax
+ */
+WDGCampaignDashboard.prototype.initAjaxForms = function() {
+	
+	var self = this;
+	$( 'form.ajax-db-form' ).submit( function( e ) {
+		
+		if ( $(this).attr( 'action' ) != '' && $(this).attr( 'action' ) != undefined ) {
+			return;
+		}
+		e.preventDefault();
+		if ($(this).data("action")==undefined) return false;
+		var thisForm = $(this);
+
+		//Receuillir informations du formulaire
+		var data_to_update = {
+			'action': $(this).data("action"),
+			'campaign_id': campaign_id
+		};
+
+		$(this).find(".field-value").each(function(index){
+			 var id = $(this).data('id');
+			 switch ($(this).data("type")){
+				 case 'datetime':
+					 var sDate = $(this).find("input:eq(0)").val();
+					 var aDate = sDate.split('/');
+					 data_to_update[id] = aDate[1]+'/'+aDate[0]+'/'+aDate[2]+"\ "
+						 + $(this).find("select:eq(0)").val() +':'
+						 + $(this).find("select:eq(1)").val();
+					 break;
+				 case 'editor':
+					 data_to_update[id] = tinyMCE.get(id).getContent();
+					 break;
+				 case 'check':
+					 data_to_update[id] = $("#"+id).is(':checked');
+					 break;
+				 case 'multicheck':
+					 var data_temp = new Array();
+					 $('input', this).each(function() {
+						 if ($(this).is(':visible') && $(this).is(':checked')) {
+							 data_temp.push($(this).val());
+						 }
+					 });
+					 data_to_update[id] = data_temp;
+					 break;
+				 case 'text':
+				 case 'number':
+				 case 'date':
+				 case 'link':
+				 case 'textarea':
+				 case 'select':
+				 default:
+					 data_to_update[id] = $(':input', this).val();
+					 break;
+			 }
+			 if(data_to_update[id] == undefined){
+				 delete data_to_update[id];
+			 }
+		 });
+
+		//Désactive les champs
+		var save_button = $("#"+$(this).attr("id")+"_button");
+		save_button.find(".button-text").hide();
+		save_button.find(".button-waiting").show();
+		$(":input", this).prop('disabled', true);
+
+		thisForm.find('.feedback_save span').fadeOut();
+
+		//Envoi de requête Ajax
+		$.ajax({
+			'type': "POST",
+			'url': ajax_object.ajax_url,
+			'data': data_to_update
+		}).done(function (result) {
+			if (result != "") {
+				var jsonResult = JSON.parse(result);
+				feedback = jsonResult;
+
+				//Affiche les erreurs
+				for(var input in feedback.errors){
+					self.fieldError(thisForm.find('#'+input), feedback.errors[input])
+				}
+
+				for(var input in feedback.success){
+					var thisinput = thisForm.find('#'+input)
+					self.removeFieldError(thisinput);
+					thisinput.closest(".field-value").parent().find('i.fa.validation').remove();
+					thisinput.addClass("validation");
+					thisinput.closest(".field-value").after('<i class="fa fa-check validation" aria-hidden="true"></i>');
+				}
+
+				//Scrolle jusqu'à la 1ère erreur et la sélectionne
+				var firsterror = thisForm.find(".error").first();
+				if(firsterror.length == 1){
+					self.scrollTo(firsterror);
+					//La sélection (ci-dessous) Ne fonctione ne marche pas
+					firsterror.focus();
+					thisForm.find('.save_errors').fadeIn();
+				} else {
+					thisForm.find('.save_ok').fadeIn();                          
+				}
+
+				// Enregistrer l'organisation liée au projet dans tab-organization
+				if ($("#tab-organization").is(":visible") && ($("#ndashboard #orgainfo_form.db-form").data("action")) == "save_project_organization"){
+					//Afficher le bouton d'édition de l'organisation après enregistrement de la liaison
+//					WDGProjectDashboard.updateEditOrgaBtn(thisForm);
+					//Mise à jour du formulaire d'édition après enregistrement de la liaison
+//					WDGProjectDashboard.updateOrgaForm(feedback);
+					//Mise à jour des liens de téléchargement des docs du formulaire d'édition
+//					WDGProjectDashboard.updateOrgaFormDoc(feedback);
+					$("#save-mention").hide();
+					$("#orgainfo_form_button").hide();
+					thisForm.find('.save_ok').hide();
+					$("#tab-organization #wdg-lightbox-valid-changeOrga").css('display', 'block');
+					new_project_organization = $("#new_project_organization option:selected").val();
+				}
+			}
+		}).fail(function() {
+			thisForm.find('.save_fail').fadeIn();
+		}).always(function() {
+			//Réactive les champs
+			save_button.find(".button-waiting").hide();
+			save_button.find(".button-text").show();
+			thisForm.find(":input").prop('disabled', false);
+		});
+	});
 };
 
 WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id) {
@@ -344,6 +474,31 @@ WDGCampaignDashboard.prototype.scrollTo = function( target ) {
 		{ scrollTop: target.offset().top - 75 },
 		'slow'
 	);
+};
+
+WDGCampaignDashboard.prototype.fieldError = function( $param, errorText ) {
+	$param.addClass("error");
+	$param.removeClass("validation");
+	$param.qtip({
+		content: errorText,
+		position: {
+			my: 'bottom center',
+			at: 'top center',
+		},
+		style: {
+			classes: 'wdgQtip qtip-red qtip-rounded qtip-shadow'
+		},
+		show: 'focus',
+		hide: 'blur'
+	});
+	$param.closest(".field-value").parent().find('i.fa.validation').remove();
+};
+
+WDGCampaignDashboard.prototype.removeFieldError = function( $param ){
+	if ( $param.hasClass( "error" ) ) {
+		$param.removeClass( "error" );
+		$param.qtip().destroy();
+	}
 };
 
 var wdgCampaignDashboard;
