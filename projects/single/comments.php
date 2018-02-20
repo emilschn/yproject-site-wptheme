@@ -35,7 +35,7 @@ $WDGUser_current = WDGUser::current();
 			<?php comment_form( array(
 					"title_reply"			=> __('Poster un commentaire', 'yproject'),
 					"comment_notes_after"	=> "",
-					"logged_in_as"	=> __('Connect&eacute; en tant que ', 'yproject') . $WDGUser_current->wp_user->display_name
+					"logged_in_as"	=> __('Connect&eacute; en tant que ', 'yproject') . $WDGUser_current->get_display_name()
 			), $campaign->ID ); ?>
 		<?php endif; ?>
 	<?php endif; ?>
