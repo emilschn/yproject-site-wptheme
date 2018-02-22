@@ -4,14 +4,14 @@
  * Lightbox d'édition d'une organisation
  * 
  */
-global $campaign_id;
+global $campaign_id, $current_organization, $organization_obj;
 
-
-global $current_organization;
-if (!isset($current_organization)) {
-    $organization_obj = WDGOrganization::current();
-} else {
-    $organization_obj = new WDGOrganization($current_organization->wpref);
+if ( !isset( $organization_obj ) ) {
+	if ( !isset( $current_organization ) ) {
+		$organization_obj = WDGOrganization::current();
+	} else {
+		$organization_obj = new WDGOrganization( $current_organization->wpref );
+	}
 }
 
 $WDGUser_current = WDGUser::current();
