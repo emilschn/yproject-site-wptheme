@@ -19,8 +19,9 @@ $WDGUser_current = WDGUser::current();
 		<?php if ( count($comment_list) > 0 ) : ?>
 			<ul>
 			<?php foreach ($comment_list as $comment): ?>
+				<?php $WDGUser_author = new WDGUser( $comment->user_id ); ?>
 				<li id="comment-<?php echo $comment->comment_ID; ?>">
-					<strong><?php echo $comment->comment_author. ' (' .get_comment_date('', $comment->comment_ID). ') : '; ?></strong>
+					<strong><?php echo $WDGUser_author->get_display_name(). ' (' .get_comment_date('', $comment->comment_ID). ') : '; ?></strong>
 					<?php echo $comment->comment_content; ?>
 				</li>
 			<?php endforeach; ?>
@@ -35,7 +36,7 @@ $WDGUser_current = WDGUser::current();
 			<?php comment_form( array(
 					"title_reply"			=> __('Poster un commentaire', 'yproject'),
 					"comment_notes_after"	=> "",
-					"logged_in_as"	=> __('Connect&eacute; en tant que ', 'yproject') . $WDGUser_current->wp_user->display_name
+					"logged_in_as"	=> __('Connect&eacute; en tant que ', 'yproject') . $WDGUser_current->get_display_name()
 			), $campaign->ID ); ?>
 		<?php endif; ?>
 	<?php endif; ?>
