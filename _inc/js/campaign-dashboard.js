@@ -1,3 +1,242 @@
+function WDGCampaignSimulator() {
+	//A l'ouverture de l'onglet besoin de financement : calculs de tous les élements
+	this.calculAndShowResult();
+	//Rattachement des events sur modif du CA
+	this.attachEventOnCa();
+}
+
+/**
+ * Récupération de tous les CA en fonction de la durée de financement
+ * @returns {Array} tableau avec le montant des CA pour chaque année
+ */
+WDGCampaignSimulator.prototype.createCaTab = function(){           
+	if(new_funding_duration!== "0"){
+		var nbYears = parseInt(new_funding_duration);
+		var caTab = new Array;
+		for (var ii=0; ii < nbYears; ii++){
+			var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? ($.trim($("span[data-id=new_estimated_turnover_"+ii+"]").text())) : $("#new_estimated_turnover_"+ii).val();
+			caTab.push(parseFloat(new_estimated_turnover));
+		}
+		return caTab;
+	}
+};
+
+/**
+ * Calcul du CA total sur les années de CA renseignées
+ */
+WDGCampaignSimulator.prototype.calculTotalCa = function(){
+	caTab = this.createCaTab();
+	totalca = 0; 
+	//boucler sur le nb d'années renseignées pour le cas où celui-ci diminue
+	//(ce qui cache les années en moins) sans pour autant perdre les données
+	//on peut rajouter une année et retrouver le montant de CA précédemment
+	//rempli (tant qu'on n'a pas enregistré)
+
+	$.each(caTab, function(year, ca){
+		if(ca >= 0){
+			totalca += ca;
+		}
+	});
+};
+
+/**
+ * Calcul des royalties reversées par année de CA renseignée
+ */
+WDGCampaignSimulator.prototype.calculRoiPerYear = function(){
+	if(new_roi_percent_estimated !== ""){
+		percent = parseFloat(new_roi_percent_estimated)/100;
+	} else { percent = false; }
+	
+	for (var ii=0; ii < caTab.length; ii++ ) {
+		if (caTab[ii] > 0) {
+			if(percent){
+				var roi_amount = percent * caTab[ii];
+				var roi_amount_format = this.numberFormat(roi_amount);
+				$("#roi-amount-"+ii).html(roi_amount_format+" " + $('#estimated-turnover').data('symbol'));
+			}else{ $("#roi-amount-"+ii).html("0 " + $('#estimated-turnover').data('symbol')); }
+		}else{ $("#roi-amount-"+ii).html("0 " + $('#estimated-turnover').data('symbol')); }
+	}
+};
+
+/**
+ * Calcul du total de royalties reversées sur le nombre d'années de CA
+ * renseigné
+ */
+WDGCampaignSimulator.prototype.calculReturn = function(){
+	if(percent){
+		totalRoi = percent * totalca;
+		if(totalRoi){
+			var totalRoi_format = this.numberFormat(totalRoi);
+			$("#total-roi").html(totalRoi_format+" " + $('#estimated-turnover').data('symbol'));
+		}
+	}
+};
+
+/**
+ * Calcul du montant total de la collecte incluant la commission WDG
+ * need = montant max incluant la commission de WDG
+ */
+WDGCampaignSimulator.prototype.calculCollect = function (){
+	if (need!==""){
+		collect = need;
+		var collect_format = this.numberFormat(collect);
+		$("#total-funding").html(collect_format);
+	}
+};
+
+/**
+ * Fonction de calcul du rendement annuel investisseur
+ */
+WDGCampaignSimulator.prototype.calculAnnualRend = function(){
+	var nbYears = 0;
+	for (var ii=0; ii < caTab.length; ii++ ) {
+		if (caTab[ii] > 0) {
+			nbYears++;
+		}
+	}
+	// Ecarter les dénominateurs à zéro
+	finalRend = null;
+	if(collect != "0" && nbYears != 0){
+		//mediumRend = (Math.pow((percent*totalca/collect),(1/nbYears))-1)*100;
+		finalRend = Math.round( ( ( totalRoi / need ) - 1 ) * 100 * 100 ) / 100;
+		var finalRend_format = this.numberFormat(finalRend);
+		if (finalRend > 0) finalRend_format = "+" + finalRend_format;
+		$("#medium-rend").html(finalRend_format+' %');
+	} else if(collect == "0" || nbYears == 0){
+		this.initResultCalcul();
+	}
+};
+
+/**
+ * Vérification d'un rendement minimum supérieur à 3%
+ */
+WDGCampaignSimulator.prototype.verifMediumRend = function () {
+	var rend = $("#medium-rend");
+	var errorHtml = "<br/>(insuffisant)";
+	if (finalRend < 0 ) {
+		rend.css('color', '#EA4F51').css('display','inline-block').css('margin', 0);
+		rend.append(errorHtml);
+	}
+	else{
+		rend.css('color','#2B2C2C');
+	}
+};
+		
+/**
+ * Calcul le gain (montant ROI reçues/montant maximum de la collecte)
+ */
+WDGCampaignSimulator.prototype.calculGain = function(){
+	if(need != "" && need != "0" && new_roi_percent_estimated != "" && new_roi_percent_estimated != "0"){
+		var gain = totalRoi/need;
+		var gain_format = this.numberFormat(gain);
+		var gain_text = "x"+gain_format+" en "+nb_years+" ans";
+		$("#total-roi-container #gain").html(gain_text);
+	}
+	else{
+		$("#total-roi-container #gain").html("");
+	}
+}
+
+/**
+ * Processus de calcul des investissements et du rendement investisseur
+ * et mise à jour des résultats dans l'interface
+ */
+WDGCampaignSimulator.prototype.simuProcess = function(){
+	this.calculTotalCa();
+	this.calculRoiPerYear();
+	this.calculReturn();
+	this.calculCollect();
+	this.calculAnnualRend();
+	this.verifMediumRend();
+	this.calculGain();
+};
+
+/**
+ * Initialisation de l'affichage lorsque les calculs ne peuvent être 
+ * réalisés par manque de données
+ */
+WDGCampaignSimulator.prototype.initResultCalcul = function(){
+	$("#total-roi").html("0 " + $('#estimated-turnover').data('symbol'));
+	$("#total-funding").html("---");
+	$("#medium-rend").html("--- %").css('color','#2B2C2C');
+	$("#total-roi-container #gain").html("");
+	caTab = this.createCaTab();
+	for (var ii=0; ii < caTab.length; ii++ ) {
+		$("#roi-amount-"+ii).html("0 " + $('#estimated-turnover').data('symbol'));
+	}
+};
+
+/**
+ * Calcul des royalties reversés par année et du rendement (si données déjà renseignées)
+ * et rattachement des events sur la modif du CA
+ */
+WDGCampaignSimulator.prototype.calculAndShowResult = function(){
+	this.getDataCalculator();
+	if(new_minimum_goal!="" && need!="" && new_funding_duration!="" && new_roi_percent_estimated!="" && new_estimated_turnover_0!=""){
+		this.simuProcess();
+	} else {
+		this.initResultCalcul();
+	}
+};
+
+/**
+ * Récupère les données renseignées dans l'onglet "besoin de financement"
+ * selon qu'elles sont encore modifiables (input) ou non (span)
+ */
+WDGCampaignSimulator.prototype.getDataCalculator = function(){           
+	new_minimum_goal = $("#new_minimum_goal").val() == null ? $.trim($("span[data-id=new_minimum_goal] span").text()) : $("#new_minimum_goal").val();
+	need = $("#new_maximum_goal").val() == null ? $.trim($("span[data-id=new_maximum_goal] span").text()) : $("#new_maximum_goal").val();
+	new_roi_percent_estimated = $("#new_roi_percent_estimated").val() == null ? $.trim($("span[data-id=new_roi_percent_estimated] span").text()) : $("#new_roi_percent_estimated").val();
+	new_funding_duration = ($("#new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration] span").text()) : $("#new_funding_duration").val();
+	new_estimated_turnover_0 = $("#new_estimated_turnover_0").val() == null ? $.trim($("span[data-id=new_estimated_turnover_0]").text()) : $("#new_estimated_turnover_0").val();
+	nb_years = $("#new_funding_duration").val() == null ? $.trim($("span[data-id=new_funding_duration]").text()) : $("#new_funding_duration").val();
+};
+
+/**
+ * Attache les events click et keyup sur les inputs des CA de chaque année
+ * et déclenche les calculs
+ */
+WDGCampaignSimulator.prototype.attachEventOnCa = function(){
+	var self = this;
+	for(var ii = 0; ii < parseInt(new_funding_duration); ii++){
+		var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? $("span[data-id=new_estimated_turnover_"+ii+"]") : $("#new_estimated_turnover_"+ii);
+		$(new_estimated_turnover).bind('click keyup',function(){
+			self.calculAndShowResult();
+		});
+	}
+};
+
+/**
+* Formate les nombres pour afficher au maximum 2 décimales
+* @param {number} number
+* @returns {string}
+*/
+WDGCampaignSimulator.prototype.numberFormat = function(number){
+	var nb_format = number.toString().replace(",",".");
+	nb_format = parseFloat(nb_format);
+	nb_format = nb_format.toFixed(2);
+	nb_format = nb_format.toString().replace(".",",");
+	//Suppression des "00" après la virgule
+	if(nb_format.substr(nb_format.length - 2, nb_format.length) === "00"){
+		nb_format = nb_format.substr(0, nb_format.length - 3);
+	}
+	return nb_format;
+}
+
+var wdgCampaignSimulator;
+$( function(){
+    wdgCampaignSimulator = new WDGCampaignSimulator();
+} );
+
+
+
+
+//******************************************************************************
+
+
+
+
+
 function WDGCampaignDashboard() {
 	this.walletTimetableDatatable;
     this.initWithHash();
@@ -6,6 +245,7 @@ function WDGCampaignDashboard() {
 	this.initAjaxForms();
 	this.initOrgaForms();
 	this.initTeam();
+	this.initFinance();
 }
 
 /**
@@ -1014,7 +1254,76 @@ WDGCampaignDashboard.prototype.manageTeam = function(action, data, campaign_id){
 			$("a[data-user="+data+"]").closest("li").slideUp("slow",function(){ $(this).remove();});
 		});
 	}
-}
+};
+
+WDGCampaignDashboard.prototype.initFinance = function(){
+	//Etiquettes de numéros d'années pour le CA prévisionnel
+	$("#new_first_payment").change(function(){
+		var start_year = 1;
+		$("#estimated-turnover li .year").each(function(index){
+			$(this).html((parseInt(start_year)+index));
+		});
+	});
+
+	//Cases pour le CA prévisionnel
+	$("#new_funding_duration").change(function() {
+		var nb_years_li_existing = ($("#estimated-turnover li").length);
+		var new_nb_years = parseInt($("#new_funding_duration").val());
+		"change nb year trigger "+new_nb_years+"(exist : "+nb_years_li_existing+")";
+
+		//Ajoute des boîtes au besoin
+		if(new_nb_years > nb_years_li_existing){
+			var newlines = $("#estimated-turnover").html();
+			if(new_nb_years <= 20){
+				for(var i=0; i<new_nb_years-nb_years_li_existing;i++){
+					newlines = newlines+
+						'<li class="field">' +
+						'<label>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></label>'+
+						'<span class="field-container">'+
+						'&nbsp;<span class="field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
+						'<i class="right fa" aria-hidden="true"></i>'+
+						'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" /> '+$('#estimated-turnover').data('symbol')+                                   
+						'</span>'+
+						'<span class="like-input-center"><p id="roi-amount-'+(i+nb_years_li_existing)+'">0 '+$('#estimated-turnover').data('symbol')+'</p></span>'+
+						'</span>'+
+						'</li>';
+				}
+			}
+
+			$("#estimated-turnover").html(newlines);
+
+			//MAJ des étiquettes "Année XXXX"
+			$("#new_first_payment").trigger("change");
+			nb_years_li_existing = new_nb_years;
+		} else {
+			//N'affiche que les boites nécessaires
+			$("#estimated-turnover li").hide();
+			$("#estimated-turnover li").slice(0,new_nb_years).show();
+		}
+		nb_years_li_existing = Math.max(new_nb_years,nb_years_li_existing);
+		//Calculs de tous les élements et rattachement du keyup/click sur changement de CA
+		wdgCampaignSimulator.calculAndShowResult();                       
+	});
+	$("#new_funding_duration").trigger('change');
+	$("#new_funding_duration").keyup(function(){
+		if($("#new_funding_duration").val()!==""){
+			$("#new_funding_duration").trigger('change');
+		}
+	});
+
+	//Recalcul du rendement si modification de l'objectif max / % royalties / durée financement
+	$("#new_maximum_goal, #new_roi_percent_estimated, #new_funding_duration").bind('keyup click', function(){
+		//Rattachement des events sur modif du CA
+		wdgCampaignSimulator.attachEventOnCa();
+
+		if($("#new_maximum_goal").val()!=="" && ($("#new_minimum_goal").val()!=="" && $("#new_funding_duration").val()!==""
+			&& $("#new_roi_percent_estimated").val()!=="" )){
+			wdgCampaignSimulator.calculAndShowResult();
+		} else{
+			wdgCampaignSimulator.initResultCalcul();
+		}
+	});
+};
 
 var wdgCampaignDashboard;
 $( function(){
