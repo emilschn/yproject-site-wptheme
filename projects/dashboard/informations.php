@@ -573,7 +573,7 @@ function print_informations_page()
 						"options_names"	=> array_values( ATCF_Campaign::$maximum_profit_list ),
 						"prefix"		=> '*',
 						"admin_theme"	=> true,
-						"editable"		=> $campaign->is_preparing()
+						"editable"		=> $is_admin || $campaign->is_preparing()
 					));
 					
 				}
@@ -704,6 +704,17 @@ function print_informations_page()
                     "visible"		=> $is_admin || ($campaign->first_payment_date()!="")
                 ));
 
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_estimated_turnover_unit",
+                    "type"			=> "select",
+                    "label"			=> "Le pr&eacute;visionnel est exprim&eacute; en",
+                    "value"			=> $campaign->estimated_turnover_unit(),
+					"options_id"	=> array( 'euro', 'percent' ),
+					"options_names"	=> array( '&euro;', '%' ),
+                    "editable"		=> $is_admin,
+                    "admin_theme"	=> $is_admin,
+                    "visible"		=> $is_admin
+                ));
                 ?>
 
                 <div class="field">
@@ -714,7 +725,7 @@ function print_informations_page()
                         <?php echo "&nbsp;".__("investis"); ?>
                     </label>
                 </div>
-				<?php $is_euro = ( $campaign->contract_budget_type() != 'collected_funds' ); ?>
+				<?php $is_euro = ( $campaign->estimated_turnover_unit() == 'euro' ); ?>
                 <ul id="estimated-turnover" data-symbol="<?php if ( $is_euro ): ?>€<?php else: ?>%<?php endif; ?>">
                     <?php
                     $estimated_turnover = $campaign->estimated_turnover();
@@ -1031,7 +1042,7 @@ function print_informations_page()
 								<?php echo $contract_model->model_name; ?> (<?php echo $status_to_text[ $contract_model->status ]; ?>)
 								<?php if ( $contract_model->status != 'sent' ): ?>
 									<a href="<?php echo admin_url( 'admin-post.php?action=send_contract_model&model=' . $contract_model->id ); ?>" class="button blue alert-confirm" data-alertconfirm="<?php _e( "Ceci enverra le contrat &agrave; chacun des investisseurs", 'yproject' ); ?>"><?php _e( "Faire signer", 'yproject' ); ?></a>
-									<button type="button" class="button blue edit-contract-model" data-modelid="<?php echo $contract_model->id; ?>" data-modelname="<?php echo urlencode( $contract_model->model_name ); ?>" data-modelcontent="<?php echo urlencode( nl2br( $contract_model->model_content ) ); ?>"><?php _e( "Editer", 'yproject' ); ?></button>
+									<button type="button" class="button blue edit-contract-model" data-modelid="<?php echo $contract_model->id; ?>" data-modelname="<?php echo urlencode( $contract_model->model_name ); ?>" data-modelcontent="<?php echo urlencode( $contract_model->model_content ); ?>"><?php _e( "Editer", 'yproject' ); ?></button>
 								<?php endif; ?>
 							</li>
 						<?php endforeach; ?>

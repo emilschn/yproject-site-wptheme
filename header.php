@@ -176,7 +176,7 @@
 					<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" class="sidebar-login-form model-form hidden-inf997">
 						<br>
 						<span id="title-connection"><?php _e('Connexion', 'yproject'); ?></span>
-						<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('Identifiant ou e-mail', 'yproject'); ?>" value="" />
+						<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('E-mail ou identifiant', 'yproject'); ?>" value="" />
 						<br>
 
 						<input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />

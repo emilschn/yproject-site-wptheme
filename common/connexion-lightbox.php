@@ -9,7 +9,7 @@
     
 		<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
 			<div class="field">
-				<label for="signin_username"><?php _e( 'Identifiant ou e-mail', 'yproject' ); ?> *</label>
+				<label for="signin_username"><?php _e( 'E-mail ou identifiant', 'yproject' ); ?> *</label>
 				<div class="field-container">
 					<span class="field-value">
 						<input type="text" name="log" id="signin_username" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" />

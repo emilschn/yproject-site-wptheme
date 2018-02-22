@@ -809,6 +809,10 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3 {
 	text-align: center;
 }
+.db-form.v3.center {
+	max-width: 500px;
+	margin: 0px auto;
+}
 .db-form.v3 .form-error-general {
 	color: #FF0000;
 }
