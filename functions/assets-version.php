@@ -1,2 +1,2 @@
 <?php
-define( 'ASSETS_VERSION', '1519309433586');
+define( 'ASSETS_VERSION', '1519310315698');

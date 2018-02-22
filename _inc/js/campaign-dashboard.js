@@ -5,6 +5,7 @@ function WDGCampaignDashboard() {
 	this.drawTimetable();
 	this.initAjaxForms();
 	this.initOrgaForms();
+	this.initTeam();
 }
 
 /**
@@ -909,6 +910,111 @@ WDGCampaignDashboard.prototype.removeFieldError = function( $param ){
 		$param.qtip().destroy();
 	}
 };
+
+WDGCampaignDashboard.prototype.initTeam = function( $param ){
+	var self = this;
+	$(".project-manage-team").click(function(){
+		var action, data
+		action = $(this).attr('data-action');
+		if(action==="yproject-add-member"){
+			data=($("#new_team_member_string")[0].value);
+		}
+		else if (action==="yproject-remove-member"){
+			data=$(this).attr('data-user');
+		}
+		self.manageTeam(action, data, campaign_id);
+	});
+};
+
+WDGCampaignDashboard.prototype.manageTeam = function(action, data, campaign_id){
+	var self = this;
+	//Clic pour ajouter un membre
+	if(action==="yproject-add-member"){
+		//Test si le champ de texte est vide
+		if (data===""){
+			//Champ vide, ne rien faire
+		} else {
+			//Bloque le champ de texte d'ajout
+			$("#new_team_member_string").prop('disabled',true);
+			$("#new_team_member_string").val('');
+			tmpPlaceHolder = $("#new_team_member_string").prop('placeholder');
+			$("#new_team_member_string").prop('placeholder',"Ajout de "+data+"...");
+			$("#new_team_member_string").next().hide();
+
+			//Lance la requête Ajax
+			$.ajax({
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': {
+					'action':'add_team_member',
+					'id_campaign':campaign_id,
+					'new_team_member' : data
+				}
+			}).done(function(result){
+				//Nettoie le champ de texte d'ajout
+				$("#new_team_member_string").prop('disabled', false);
+				$("#new_team_member_string").prop('placeholder',tmpPlaceHolder);
+				$("#new_team_member_string").next().show();
+
+				if(result==="FALSE"){
+					$("#new_team_member_string").next().next().after("<div id=\"fail_add_team_indicator\"><br/><em>L'utilisateur "+data+" n'a pas été trouvé</em><div>");
+					$("#fail_add_team_indicator").delay(4000).fadeOut(400);
+				} else {
+					res = JSON.parse(result);
+
+					//Teste si l'user existait déjà
+					doublon = false;
+					$(".project-manage-team").each(function(){
+						doublon = doublon || (res.id == $(this).attr('data-user'));
+					});
+
+					if(!doublon){
+						if($("#team-list li").length==0){
+							$("#team-list").html("");
+						}
+						newline ='<li style="display: none;">';
+						newline+=res.firstName+" "+res.lastName+" ("+res.userLink+") ";
+						newline+='<a class="project-manage-team button" data-action="yproject-remove-member" data-user="'+res.id+'"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>';
+						newline+="</li>";
+						$("#team-list").append(newline);
+						$("a[data-user="+res.id+"]").closest("li").slideDown();
+
+						//Recharge l'UI pour ajouter listener au nouveau button
+						$(".project-manage-team").click(function(){
+							action = $(this).attr('data-action');
+							if(action==="yproject-add-member"){
+								data=($("#new_team_member_string")[0].value);
+							}
+							else if (action==="yproject-remove-member"){
+								data=$(this).attr('data-user');
+							}
+							self.manageTeam(action, data, campaign_id);
+						});
+					}
+				}
+			});
+		}
+	}
+
+	//Clic pour supprimer un membre
+	else if(action==="yproject-remove-member") {
+		//Affichage en attente de suppression
+		$("a[data-user="+data+"]").closest("li").css("opacity",0.5);
+		$("a[data-user="+data+"]").html('<i class="fa fa-spinner fa-spin fa-fw"></i>');
+
+		$.ajax({
+			'type' : "POST",
+			'url' : ajax_object.ajax_url,
+			'data': {
+				'action':'remove_team_member',
+				'id_campaign':campaign_id,
+				'user_to_remove' : data
+			}
+		}).done(function(result){
+			$("a[data-user="+data+"]").closest("li").slideUp("slow",function(){ $(this).remove();});
+		});
+	}
+}
 
 var wdgCampaignDashboard;
 $( function(){
