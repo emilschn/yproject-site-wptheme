@@ -245,11 +245,11 @@ div#item-body-home .data-blocks .stat-little-number-top {
 /*******************************************************************************
 * STATS
 *******************************************************************************/
-body.template-tableau-de-bord div#container div#content main #item-body-stats h2 {
+div#container div#content main #item-body-stats h2 {
 	text-transform: none;
 	text-align: left;
 }
-body.template-tableau-de-bord div#container div#content main #item-body-stats .expandable h2 {
+div#container div#content main #item-body-stats .expandable h2 {
 	font-size: 26px;
 	text-transform: none;
 	text-align: left;
@@ -258,6 +258,10 @@ body.template-tableau-de-bord div#container div#content main #item-body-stats .e
 /*******************************************************************************
 * CONTACTS
 *******************************************************************************/
-body.template-tableau-de-bord div#container div#content main #item-body-contacts table {
+div#container div#content main #item-body-contacts table {
 	font-size: 12px;
+}
+
+div#container div#content main #item-body-contacts #direct-mail {
+	text-align: left;
 }

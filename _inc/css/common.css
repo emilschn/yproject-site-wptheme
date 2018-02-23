@@ -93,6 +93,10 @@ button.red {
     border: 1px solid #D3EAE9;
 	color: #000000;
 }
+.button.admin-theme{
+    background: none repeat scroll 0 0 #F1A074;
+    border: 1px solid #F1A074;
+}
 .button.big {
     font-size: 15px;
     padding: 15px 30px;
@@ -285,11 +289,6 @@ button.red {
     right: 5px;
     width: 14px;
     text-align: center;
-}
-
-.db-form .button.admin-theme{
-    background-color: #F1A074;
-    border-color:#F1A074;
 }
 
 .db-form .button[disabled] {

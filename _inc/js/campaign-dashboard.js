@@ -221,7 +221,7 @@ WDGCampaignSimulator.prototype.numberFormat = function(number){
 		nb_format = nb_format.substr(0, nb_format.length - 3);
 	}
 	return nb_format;
-}
+};
 
 var wdgCampaignSimulator;
 $( function(){
@@ -243,6 +243,7 @@ function WDGCampaignDashboard() {
 	this.initMenu();
 	this.drawTimetable();
 	this.initAjaxForms();
+	this.initContacts();
 	this.initOrgaForms();
 	this.initTeam();
 	this.initFinance();
@@ -426,6 +427,91 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 			thisForm.find(":input").prop('disabled', false);
 		});
 	});
+};
+
+WDGCampaignDashboard.prototype.initContacts = function() {
+
+	var self = this;
+	var mail_content, mail_title, originalText;
+	$("#direct-mail #mail-preview-button").click(function () {
+		mail_content = tinyMCE.get('mail_content').getContent();
+		mail_title = $("#direct-mail #mail-title").val();
+
+		if (mail_title == ""){
+			self.fieldError($("#direct-mail #mail-title"),"L'objet du mail ne peut être vide");
+		} else {
+			self.removeFieldError($("#direct-mail #mail-title"));
+			originalText = $(this).html();
+			$(this).html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>');
+
+			$.ajax({
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': {
+					'action':'preview_mail_message',
+					'id_campaign':campaign_id,
+					'mail_content' : mail_content,
+					'mail_title' : mail_title
+				}
+			}).done(function(result){
+				var res = JSON.parse(result);
+
+				$("#direct-mail .preview-title").html('<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;'+res.content.title);
+				$("#direct-mail .preview").html(res.content.body);
+				$("#direct-mail .step-write").slideUp();
+				$("#direct-mail .step-confirm").slideDown();
+				$("#direct-mail #mail-preview-button").html(originalText);
+			})
+		}
+	});
+
+	$("#direct-mail #mail-back-button").click(function () {
+		$("#direct-mail .step-confirm").slideUp();
+		$("#direct-mail .step-write").slideDown();
+	});
+
+	$( '#add-check-search-email' ).click( function( e ) {
+		e.preventDefault();
+		$( '#add-check-search-email' ).addClass( 'disabled' );
+		$( '.add-check-feedback' ).hide();
+		$( '#add-check-search-loading' ).show();
+		$.ajax({
+			'type' : "POST",
+			'url' : ajax_object.ajax_url,
+			'data': {
+				'action':'search_user_by_email',
+				'email' : $( '#add-check-input-email' ).val()
+			}
+		}).done(function(result){
+			var jsonResult = JSON.parse(result);
+			$( '#add-check-search-email' ).removeClass( 'disabled' );
+			$( '#add-check-search-loading' ).hide();
+			switch ( jsonResult.user_type ) {
+				case 'user': $("#add-check-feedback-found-user").show(); break;
+				case 'orga': $("#add-check-feedback-found-orga").show(); break;
+				default: $("#add-check-feedback-not-found").show(); break;
+			}
+			if ( jsonResult.user_type == 'user' || jsonResult.user_type == 'orga' ) {
+				$( '#wdg-lightbox-add-check #add-check-input-username' ).val( jsonResult.user_data.user.login );
+				$( '#wdg-lightbox-add-check #add-check-input-gender' ).val( jsonResult.user_data.user.gender );
+				$( '#wdg-lightbox-add-check #add-check-input-firstname' ).val( jsonResult.user_data.user.firstname );
+				$( '#wdg-lightbox-add-check #add-check-input-lastname' ).val( jsonResult.user_data.user.lastname );
+				$( '#wdg-lightbox-add-check #add-check-input-birthday-day' ).val( jsonResult.user_data.user.birthday_day );
+				$( '#wdg-lightbox-add-check #add-check-input-birthday-month' ).val( jsonResult.user_data.user.birthday_month );
+				$( '#wdg-lightbox-add-check #add-check-input-birthday-year' ).val( jsonResult.user_data.user.birthday_year );
+				$( '#wdg-lightbox-add-check #add-check-input-birthplace' ).val( jsonResult.user_data.user.birthplace );
+				$( '#wdg-lightbox-add-check #add-check-input-nationality' ).val( jsonResult.user_data.user.nationality );
+				$( '#wdg-lightbox-add-check #add-check-input-address' ).val( jsonResult.user_data.user.address );
+				$( '#wdg-lightbox-add-check #add-check-input-postal-code' ).val( jsonResult.user_data.user.postal_code );
+				$( '#wdg-lightbox-add-check #add-check-input-city' ).val( jsonResult.user_data.user.city );
+				$( '#wdg-lightbox-add-check #add-check-input-country' ).val( jsonResult.user_data.user.country );
+			}
+			if ( jsonResult.user_type == 'orga' ) {
+				$( '#wdg-lightbox-add-check #add-check-input-orga-email' ).val( jsonResult.user_data.orga.email );
+				$( '#wdg-lightbox-add-check #add-check-input-orga-name' ).val( jsonResult.user_data.orga.name );
+			}
+		});
+	} );
 };
 
 /**

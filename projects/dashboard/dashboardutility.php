@@ -444,9 +444,9 @@ class DashboardUtility
      * @param bool $display Affiche ou non le bouton à la fin, affiche par défaut
      * @return string le code HTML du bouton
      */
-    public static function create_save_button($id, $display=true, $initialText= 'Enregistrer', $waitingText = 'Enregistrement'){
+    public static function create_save_button( $id, $display = true, $initialText = 'Enregistrer', $waitingText = 'Enregistrement', $admin_theme = false ){
         $text_field ='<p class="align-center" id="'.$id.'_button">';
-        $text_field .='<button type="submit" class="button red">'
+        $text_field .='<button type="submit" class="button '.($admin_theme ? 'admin-theme' : 'red').'">'
                 .'<span class="button-text">'
                     .__($initialText, 'yproject')
                 .'</span>'

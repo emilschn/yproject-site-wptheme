@@ -451,10 +451,10 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 				<button type="submit" name="validation-next-save" value="1" id="submit-go-next-status-admin" class="button admin-theme">Enregistrer le statut</button><br /><br />
 				<?php endif; ?>
 
-				<input type="submit" value="Publier mon projet en vote !" class="button" id="submit-go-next-status">
+				<input type="submit" value="Publier mon projet en vote !" class="button red" id="submit-go-next-status">
 
 			<?php elseif ( $status == ATCF_Campaign::$campaign_status_vote || ( $status == ATCF_Campaign::$campaign_status_validated && $page_controler->get_campaign()->skip_vote() ) ): ?>
-				<input type="submit" value="Lancer ma lev&eacute;e de fonds !" class="button" id="submit-go-next-status">
+				<input type="submit" value="Lancer ma lev&eacute;e de fonds !" class="button red" id="submit-go-next-status">
 			<?php endif; ?>
 		</div>
 
@@ -489,7 +489,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 			"visible"		=> $page_controler->can_access_admin() && $validated_or_after
 		));
 
-		DashboardUtility::create_save_button( 'statusmanage-form', $page_controler->can_access_admin() );
+		DashboardUtility::create_save_button( 'statusmanage-form', $page_controler->can_access_admin(), 'Enregistrer', 'Enregistrement', TRUE );
 		?>
 	</form>
 	<?php endif; ?>
