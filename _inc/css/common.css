@@ -127,15 +127,15 @@ button.red {
 }
 
 .db-form .field.admin-theme {
-    border-left: 3px solid darkturquoise;
-    background-color: lightgray;
+    border-left: 3px solid #F1A074;
+    background-color: rgba( 241, 160, 116, 0.2 );
     padding: 10px;
     margin: 0px;
 }
 
 .db-form .field.admin-theme label i.fa-unlock-alt,
 .db-form .admin-theme-block i.fa-unlock-alt {
-    color:darkturquoise;
+    color: #F1A074;
 }
 
 .db-form .field label {
@@ -288,8 +288,8 @@ button.red {
 }
 
 .db-form .button.admin-theme{
-    background-color: darkturquoise;
-    border-color:darkturquoise;
+    background-color: #F1A074;
+    border-color:#F1A074;
 }
 
 .db-form .button[disabled] {

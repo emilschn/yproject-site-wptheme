@@ -301,54 +301,64 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 			return;
 		}
 		e.preventDefault();
-		if ($(this).data("action")==undefined) return false;
+		if ( $( this ).data( 'action' ) == undefined ) {
+			return false;
+		}
 		var thisForm = $(this);
 
 		//Receuillir informations du formulaire
 		var data_to_update = {
-			'action': $(this).data("action"),
+			'action': $( this ).data( 'action' ),
 			'campaign_id': campaign_id
 		};
 
-		$(this).find(".field-value").each(function(index){
-			 var id = $(this).data('id');
-			 switch ($(this).data("type")){
-				 case 'datetime':
-					 var sDate = $(this).find("input:eq(0)").val();
-					 var aDate = sDate.split('/');
-					 data_to_update[id] = aDate[1]+'/'+aDate[0]+'/'+aDate[2]+"\ "
-						 + $(this).find("select:eq(0)").val() +':'
-						 + $(this).find("select:eq(1)").val();
-					 break;
-				 case 'editor':
-					 data_to_update[id] = tinyMCE.get(id).getContent();
-					 break;
-				 case 'check':
-					 data_to_update[id] = $("#"+id).is(':checked');
-					 break;
-				 case 'multicheck':
-					 var data_temp = new Array();
-					 $('input', this).each(function() {
-						 if ($(this).is(':visible') && $(this).is(':checked')) {
-							 data_temp.push($(this).val());
-						 }
-					 });
-					 data_to_update[id] = data_temp;
-					 break;
-				 case 'text':
-				 case 'number':
-				 case 'date':
-				 case 'link':
-				 case 'textarea':
-				 case 'select':
-				 default:
-					 data_to_update[id] = $(':input', this).val();
-					 break;
-			 }
-			 if(data_to_update[id] == undefined){
-				 delete data_to_update[id];
-			 }
-		 });
+		$( this ).find( '.field' ).each( function( index ){
+			var id = $( this ).data( 'id' );
+			switch ( $( this ).data( 'type' ) ) {
+				case 'datetime':
+					var sDate = $( this ).find( 'input:eq(0)' ).val();
+					var aDate = sDate.split( '/' );
+					data_to_update[ id ] = aDate[ 1 ] + '/' + aDate[ 0 ] + '/' + aDate[ 2 ] + "\ "
+						+ $( this ).find( 'select:eq(0)' ).val() + ':'
+						+ $( this ).find( 'select:eq(1)' ).val();
+					break;
+				case 'editor':
+					data_to_update[ id ] = tinyMCE.get( id ).getContent();
+					break;
+				case 'check':
+					data_to_update[ id ] = $( '#' + id ).is( ':checked' );
+					break;
+				case 'multicheck':
+					var data_temp = new Array();
+					$( 'input', this ).each( function() {
+						if ( $( this ).is( ':visible' ) && $( this ).is( ':checked' ) ) {
+							data_temp.push( $( this ).val() );
+						}
+					} );
+					data_to_update[ id ] = data_temp;
+					break;
+				case 'checkboxes':
+					var data_temp = new Array();
+					$( 'input', this ).each( function() {
+						if ( $( this ).is( ':visible' ) && $( this ).is( ':checked' ) ) {
+							data_to_update[ id ] = $( this ).is( ':checked' );
+						}
+					} );
+					break;
+				case 'text':
+				case 'number':
+				case 'date':
+				case 'link':
+				case 'textarea':
+				case 'select':
+				default:
+					data_to_update[ id ] = $( ':input', this ).val();
+					break;
+			}
+			if( data_to_update[ id ] == undefined ){
+				delete data_to_update[ id ];
+			}
+		} );
 
 		//Désactive les champs
 		var save_button = $("#"+$(this).attr("id")+"_button");

@@ -28,6 +28,70 @@ class DashboardUtility
         }
         return $infobutton;
     }
+	
+	public static function create_field_template_translator( $params, $display = TRUE ) {
+		$buffer = FALSE;
+		
+        $type = $params[ 'type' ];
+		$override_with_template = array( 'select', 'check' );
+		if ( in_array( $type, $override_with_template ) ) {
+			$editable = ( isset( $params[ 'editable' ] ) ) ? $params[ 'editable' ] : TRUE;
+			$warning = false;
+			if ( $editable ) {
+				$warning = ( isset( $params[ 'warning' ] ) ) ? __( "Cette option doit &ecirc;tre mani&eacute;e avec pr&eacute;caution !", 'yproject' ) : FALSE;
+			} else {
+				$type = 'not-editable';
+			}
+			$admin_theme = ( isset( $params[ 'admin_theme' ] ) ) ? $params[ 'admin_theme' ] : FALSE;
+			
+			global $wdg_current_field;
+			$wdg_current_field = array(
+				'name'			=> $params[ 'id' ],
+				'type'			=> $type,
+				'label'			=> $params[ 'label' ],
+				'description'	=> $params[ 'description' ],
+				'value'			=> $params[ 'value' ],
+				'admin_theme'	=> $admin_theme,
+				'warning'		=> $warning
+			);
+			
+			switch ( $params[ 'type' ] ) {
+				case 'select':
+					$options_id = $params[ 'options_id' ];
+					$options_names = $params[ 'options_names' ];
+					if ( !empty( $options_names ) ) {
+						if ( !empty( $options_id ) ) {
+							$options_list = array_combine( $options_id, $options_names );
+						} else {
+							$options_list = array_combine( $options_names, $options_names );
+						}
+					}
+					$wdg_current_field[ 'options' ] = $options_list;
+					if ( !$editable ) {
+						$wdg_current_field[ 'value' ] = $options_list[ $wdg_current_field[ 'value' ] ];
+					}
+					break;
+					
+				case 'check':
+					$wdg_current_field[ 'type' ] = 'checkboxes';
+					$wdg_current_field[ 'label' ] = '';
+					$wdg_current_field[ 'options' ] = array(
+						$params[ 'id' ] => $params[ 'label' ]
+					);
+					break;
+			}
+			
+			ob_start();
+			locate_template( array( 'common/forms/field.php' ), true, false );
+			$buffer = ob_get_clean();
+			
+			if ( $display ) {
+				echo $buffer;
+			}
+		}
+		
+		return $buffer;
+	}
 
     /**
      * Crée un champ de formulaire standardisé avec moult paramètres
@@ -74,8 +138,19 @@ class DashboardUtility
      * @param bool $display Affiche ou non le champ à la fin, affiche par défaut (impossible à empêcher avec un editor)
      * @return string le code HTML du champ
      */
-    public static function create_field($params, $display=true){
+    public static function create_field( $params, $display = true ) {
+		$visible = ( isset( $params[ 'visible' ] ) ) ? $params[ 'visible' ] : true;
+		if ( !$visible ) {
+			return '';
+		}
+		
+		$translator_result = self::create_field_template_translator( $params, $display );
+		if ( !empty( $translator_result ) ) {
+			return $translator_result;
+		}
+		
         //Label options
+        $type = $params[ 'type' ];
         $id = $params["id"];
         $label = $params["label"];
         $infobubble = $params["infobubble"];
@@ -87,15 +162,14 @@ class DashboardUtility
         }
 
         //All input options
-        if(isset($params["editable"])){$editable=$params["editable"];}else{$editable=true;};
-        if(isset($params["visible"]) && ($params["visible"])==false){return "";};
-        if(isset($params["admin_theme"])){$admin_theme=$params["admin_theme"];}else{$admin_theme=false;};
-        if(isset($params["warning"])){$warning=$params["warning"];}else{$warning=false;};
+        if(isset($params["editable"])){$editable=$params["editable"];}else{$editable=true;}
+        if(isset($params["visible"]) && ($params["visible"])==false){return "";}
+        if(isset($params["admin_theme"])){$admin_theme=$params["admin_theme"];}else{$admin_theme=false;}
+        if(isset($params["warning"])){$warning=$params["warning"];}else{$warning=false;}
 
         $initial_value = $params["value"];
         $default_initial_value = $params["default_display"];
 
-        $type = $params["type"];
         $placeholder=$params["placeholder"];
         if(empty($placeholder) && ($type=='date' || $type=='datetime' )){$placeholder="jj/mm/yyyy";}
         $prefix=$params["prefix"];
@@ -372,7 +446,7 @@ class DashboardUtility
      */
     public static function create_save_button($id, $display=true, $initialText= 'Enregistrer', $waitingText = 'Enregistrement'){
         $text_field ='<p class="align-center" id="'.$id.'_button">';
-        $text_field .='<button type="submit" class="button">'
+        $text_field .='<button type="submit" class="button red">'
                 .'<span class="button-text">'
                     .__($initialText, 'yproject')
                 .'</span>'
