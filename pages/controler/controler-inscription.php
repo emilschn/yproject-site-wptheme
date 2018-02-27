@@ -12,6 +12,9 @@ class WDG_Page_Controler_Register extends WDG_Page_Controler {
 			wp_redirect( WDGUser::get_login_redirect_page( '#' ) );
 			exit();
 		}
+		
+		ypcf_session_start();
+		$_SESSION[ 'login-fb-referer' ] = WDGUser::get_login_redirect_page();
 	}
 		
 	
