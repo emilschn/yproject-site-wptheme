@@ -14,6 +14,7 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 			wp_redirect( WDGUser::get_login_redirect_page( '#' ) );
 			exit();
 		}
+		
 		//Cas particulier cause cache :
 		// Si on se connecte par facebook sur la page d'accueil ou la liste des projets, 
 		// => la redirection directe ne fonctionne pas (rechargement de la page en cache)
@@ -29,6 +30,9 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 			}
 			exit();
 		}
+		
+		ypcf_session_start();
+		$_SESSION[ 'login-fb-referer' ] = WDGUser::get_login_redirect_page();
 		
 		$this->init_login_error_reason();
 	}

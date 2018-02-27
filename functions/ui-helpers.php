@@ -23,7 +23,7 @@ class YPUIHelpers {
 		//Place des espaces entre les milliers
 		$exceeds_one_thousand = floor( $number / 1000 );
 		if ( $exceeds_one_thousand > 0 ) {
-			$number_with_spaces = $exceeds_one_thousand .' '. YPUIHelpers::complete_number_str( $number % 1000 );
+			$number_with_spaces = $exceeds_one_thousand .'&nbsp;'. YPUIHelpers::complete_number_str( $number % 1000 );
 		} else {
 			$number_with_spaces = $number;
 		}
