@@ -4,6 +4,9 @@ $campaign_id = $campaign->ID;
 $page_invest = get_page_by_path('investir');
 $campaign_status = $campaign->campaign_status();
 $funding_duration = $campaign->funding_duration();
+if ( $funding_duration == 0 ) {
+	$funding_duration = 5;
+}
 $funding_duration_str = ( $funding_duration == 0 ) ? __( "ind&eacute;termin&eacute;e", 'yproject' ) : $funding_duration. " " .__( "ans", 'yproject' );
 $firstpayment_date = new DateTime( $campaign->first_payment_date() );
 $firstpayment_year = $firstpayment_date->format( 'Y' );

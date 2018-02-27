@@ -76,14 +76,6 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		return $this->current_campaign_organization->get_name();
 	}
 	
-	public function get_campaign_funding_duration() {
-		return $this->current_campaign->funding_duration();
-	}
-	
-	public function get_campaign_maximum_profit() {
-		return $this->current_campaign->maximum_profit();
-	}
-	
 	public function get_campaign_investors_number() {
 		$current_number = $this->current_campaign->backers_count();
 		return $current_number + 1;

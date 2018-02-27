@@ -35,7 +35,7 @@ $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::
 	</div>
 		
 	<div class="align-left">
-		<span class="number"><span id="royalties-percent">0</span> %</span> <?php _e( "du chiffre d'affaires pendant", 'yproject' ); ?> <?php echo $page_controler->get_current_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?>.
+		<span class="number"><span id="royalties-percent">0</span> %</span> <?php _e( "du chiffre d'affaires pendant", 'yproject' ); ?> <?php echo $page_controler->get_current_campaign()->funding_duration_str(); ?>.
 	</div>
 	
 	<div id="thanks-to-me">
