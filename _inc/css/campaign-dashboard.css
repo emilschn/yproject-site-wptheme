@@ -265,3 +265,14 @@ div#container div#content main #item-body-contacts table {
 div#container div#content main #item-body-contacts #direct-mail {
 	text-align: left;
 }
+
+/*******************************************************************************
+* NEWS
+*******************************************************************************/
+#item-body-news ul li {
+	list-style: none;
+}
+#item-body-news ul li a.news-title {
+	font-size: 20px;
+	text-transform: uppercase;
+}

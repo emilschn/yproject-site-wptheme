@@ -8,37 +8,36 @@ $news_link = esc_url( get_category_link( $page_controler->get_campaign()->get_ne
 $posts_blog = $page_controler->get_campaign()->get_news_posts();
 $nbposts_blog = count( $posts_blog );
 ?>
-<div id ="block-news" class="block">
-	<div class="tab-content" style="text-align:center">
-		<?php if ( $nbposts_blog == 0 ): ?>
-			<p>Vous n'avez pas encore publi&eacute; d'article.</p>
-		<?php else: ?>
-			<ul>
-				<?php
-				foreach ( $posts_blog as $post_blog ) {
-					$link = get_permalink( $post_blog->ID );
-					$link_edit = home_url( 'editer-une-actu' ). "?campaign_id=" .$page_controler->get_campaign_id(). "&edit_post_id=" .$post_blog->ID;
-					$title = $post_blog->post_title;
-					$date = ( new DateTime( $post_blog->post_date ) )->format( 'd/m/Y' );
+<div class="db-form v3 center">
+	<?php if ( $nbposts_blog == 0 ): ?>
+		<p>Vous n'avez pas encore publi&eacute; d'article.</p>
+		
+	<?php else: ?>
+		<ul>
+			<?php
+			foreach ( $posts_blog as $post_blog ) {
+				$link = get_permalink( $post_blog->ID );
+				$link_edit = home_url( 'editer-une-actu' ). "?campaign_id=" .$page_controler->get_campaign_id(). "&edit_post_id=" .$post_blog->ID;
+				$title = $post_blog->post_title;
+				$date = ( new DateTime( $post_blog->post_date ) )->format( 'd/m/Y' );
+			?>
+				<li>
+					<a class="news-title" href="<?php echo $link; ?>"><?php echo $title; ?></a><br>
+					<a class="news-title" href="<?php echo $link; ?>#responds">
+						<?php echo $post_blog->comment_count; ?> <i class="fa fa-comments" aria-hidden="true"></i>
+					</a><br>
+					<em>Publi&eacute; le <?php echo $date; ?></em>
+					<a class="button blue" href="<?php echo $link_edit; ?>">&Eacute;diter</a>
+					<br><br>
+				</li>
 
-					$line = '<li>';
-					$line .= '<div class="news-item-tools">';
-					$line .= '<a class="nb-comments-widget" href="' .$link. '#responds">' .$post_blog->comment_count;
-					$line .= '&nbsp;<i class="fa fa-comments" aria-hidden="true"></i></a> ';
-					$line .= '<a class="button" href="'.$link_edit.'">&Eacute;diter</a></div>';
-					$line .= '<a href="'.$link.'">'.$title.'</a><br/>';
-					$line .= '<em>Publi&eacute; le '.$date.'</em>';
-					$line .= '<div class="clear"/></li>';
+			<?php
+			}
+			?>
+		</ul>
+	<?php endif; ?>
 
-					echo $line;
-				}
-				?>
-			</ul>
-		<?php endif; ?>
-
-		<div class="list-button">
-			<a href="<?php echo $news_link; ?>" class="button"><?php _e('Voir plus', 'yproject'); ?></a>
-			<a href="<?php echo $news_link.'?new-topic=1'; ?>" class="button"><?php _e('Publier une nouvelle actualit&eacute;', 'yproject'); ?></a>
-		</div>
+	<div>
+		<a href="<?php echo $news_link.'?new-topic=1'; ?>" class="button red"><?php _e('Publier une nouvelle actualit&eacute;', 'yproject'); ?></a>
 	</div>
 </div>
