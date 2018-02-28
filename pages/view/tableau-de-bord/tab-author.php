@@ -3,7 +3,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 global $country_list;
 ?>
 
-<div class="db-form v3 center">
+<div class="db-form v3 full center bg-white">
 	
 	<form id="userinfo_form" class="ajax-db-form" data-action="save_user_infos_dashboard">
 		<?php if ( $page_controler->can_access_author() ) {
@@ -32,8 +32,7 @@ global $country_list;
 			'type'			=> 'text',
 			'label'			=> "Pr&eacute;nom",
 			'value'			=> $page_controler->get_campaign_author()->wp_user->user_firstname,
-			'editable'		=> $page_controler->can_access_author(),
-			'left_icon'		=> 'user',
+			'editable'		=> $page_controler->can_access_author()
 		) );
 
 		DashboardUtility::create_field( array(
@@ -41,8 +40,7 @@ global $country_list;
 			'type'			=> 'text',
 			'label'			=> "Nom",
 			'value'			=> $page_controler->get_campaign_author()->wp_user->user_lastname,
-			'editable'		=> $page_controler->can_access_author(),
-			'left_icon'		=> 'user',
+			'editable'		=> $page_controler->can_access_author()
 		));
 
 		$bd = new DateTime();
@@ -87,8 +85,7 @@ global $country_list;
 			'label'			=> "T&eacute;l&eacute;phone mobile",
 			'value'			=> $page_controler->get_campaign_author()->wp_user->get( 'user_mobile_phone' ),
 			'infobubble'	=> "Ce num&eacute;ro sera celui utilis&eacute; pour vous contacter &agrave; propos de votre projet",
-			'editable'		=> $page_controler->can_access_author(),
-			'left_icon'		=> 'mobile-phone'
+			'editable'		=> $page_controler->can_access_author()
 		) );
 
 		DashboardUtility::create_field( array(
@@ -96,8 +93,7 @@ global $country_list;
 			'type'			=> 'text',
 			'label'			=> "Adresse &eacute;lectronique",
 			'value'			=> $page_controler->get_campaign_author()->wp_user->get( 'user_email' ),
-			'infobubble'	=> "Pour modifier votre adresse e-mail de contact, rendez-vous dans vos param&egrave;tres de compte",
-			'left_icon'		=> 'at'
+			'infobubble'	=> "Pour modifier votre adresse e-mail de contact, rendez-vous dans vos param&egrave;tres de compte"
 		) );
 
 		DashboardUtility::create_field( array(

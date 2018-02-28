@@ -33,7 +33,7 @@ class DashboardUtility
 		$buffer = FALSE;
 		
         $type = $params[ 'type' ];
-		$override_with_template = array( 'select', 'check' );
+		$override_with_template = array( 'select', 'check', 'text', 'date' );
 		if ( in_array( $type, $override_with_template ) ) {
 			$editable = ( isset( $params[ 'editable' ] ) ) ? $params[ 'editable' ] : TRUE;
 			$warning = false;
@@ -49,11 +49,14 @@ class DashboardUtility
 				'name'			=> $params[ 'id' ],
 				'type'			=> $type,
 				'label'			=> $params[ 'label' ],
-				'description'	=> $params[ 'description' ],
 				'value'			=> $params[ 'value' ],
 				'admin_theme'	=> $admin_theme,
 				'warning'		=> $warning
 			);
+			
+			if ( isset( $params[ 'description' ] ) ) {
+				$wdg_current_field[ 'description' ] = $params[ 'description' ];
+			}
 			
 			switch ( $params[ 'type' ] ) {
 				case 'select':
@@ -78,6 +81,10 @@ class DashboardUtility
 					$wdg_current_field[ 'options' ] = array(
 						$params[ 'id' ] => $params[ 'label' ]
 					);
+					break;
+				
+				case 'date':
+					$wdg_current_field[ 'value' ] = $wdg_current_field[ 'value' ]->format( 'd/m/Y' );
 					break;
 			}
 			
@@ -182,9 +189,9 @@ class DashboardUtility
         }else if(isset($params["right_icon"])){
             $right_icon=$params["right_icon"];
         }else if($type=='date' || $type=='datetime'){
-            $left_icon="calendar";
+//            $left_icon="calendar";
         }else if($type=='link'){
-            $right_icon="link";
+//            $right_icon="link";
         }
 
         $icon_class = "";

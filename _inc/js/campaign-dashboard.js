@@ -385,7 +385,10 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 				}
 
 				for(var input in feedback.success){
-					var thisinput = thisForm.find('#'+input)
+					var thisinput = thisForm.find('#'+input);
+					if ( thisinput.length == 0 ) {
+						thisinput = thisForm.find('input[name='+input+'],select[name='+input+']');
+					}
 					self.removeFieldError(thisinput);
 					thisinput.closest(".field-value").parent().find('i.fa.validation').remove();
 					thisinput.addClass("validation");
