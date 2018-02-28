@@ -35,16 +35,15 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"value"			=> $page_controler->get_campaign()->contract_spendings_description(),
 			"editable"		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
 		));
-
+		
 		DashboardUtility::create_field(array(
 			"id"			=> "new_funding_duration",
-			"type"			=> "number",
+			"type"			=> "select",
 			"label"			=> "Dur&eacute;e du financement",
 			"infobubble"	=> "Indiquez 5 ans pour un projet entrepreneurial, sauf cas particulier à valider avec l’équipe WE DO GOOD.",
 			"value"			=> $page_controler->get_campaign()->funding_duration(),
-			"suffix"		=> "<span>&nbsp;ann&eacute;es</span>",
-			"min"			=> 1,
-			"max"			=> 20,
+			"options_id"	=> array_keys( ATCF_Campaign::$funding_duration_list ),
+			"options_names"	=> array_values( ATCF_Campaign::$funding_duration_list ),
 			"editable"		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
 		));
 

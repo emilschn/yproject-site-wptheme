@@ -17,7 +17,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<br />
 					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
 					<input type="hidden" name="month_count" value="3" />
-					<button type="submit" class="button"><?php _e( "G&eacute;n&eacute;rer les &eacute;ch&eacute;ances manquantes", 'yproject' ); ?></button>
+					<button type="submit" class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer les &eacute;ch&eacute;ances manquantes", 'yproject' ); ?></button>
 					<br /><br />
 
 				</form>

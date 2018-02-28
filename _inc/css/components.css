@@ -837,6 +837,9 @@ body input[type=text], body input[type=email], body select {
 	text-align: left;
 	vertical-align: top;
 }
+.db-form.v3 .field.admin-theme label {
+	padding: 8px 4px;
+}
 .db-form.v3 .field label.radio-label {
 	font-weight: normal;
 	line-height: 28px;
@@ -847,6 +850,10 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3.full .field label {
 	display: block;
 	width: 100%;
+}
+.db-form.v3 .field i.infobutton {
+	float: right;
+	margin-top: -25px;
 }
 
 .db-form.v3 .field div.field-description {
@@ -881,9 +888,6 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3.bg-white .field-container input {
 	background: #E1E3E2;
 }
-.db-form.v3.bg-white .field-container select {
-	background: url(../../images/common/arrow-filter.png) no-repeat right #E1E3E2;
-}
 .db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=email] {
 	width: 96%;
     width: -webkit-calc( 100% - 16px );
@@ -903,6 +907,10 @@ body input[type=text], body input[type=email], body select {
 	padding: 3px 8px;
 	border: none;
 	cursor: pointer;
+	background-size: 50px;
+}
+.db-form.v3.bg-white .field-container select {
+	background: url(../../images/common/arrow-filter.png) no-repeat right #E1E3E2;
 }
 .db-form.v3 .field-container select option {
 	padding: 7px;
@@ -940,6 +948,11 @@ body input[type=text], body input[type=email], body select {
 }
 .db-form.v3 .button.transparent.half {
 	width: calc( 45% - 4px );
+}
+.db-form.v3 #insert-media-button, .db-form.v3 a.button.su-generator-button {
+	width: auto;
+	height: auto;
+	line-height: normal;
 }
 
 .db-form.v3 input[type=checkbox],

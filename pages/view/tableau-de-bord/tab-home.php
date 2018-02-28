@@ -228,7 +228,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 	<?php if (	$status == ATCF_Campaign::$campaign_status_preparing
 				|| $status == ATCF_Campaign::$campaign_status_validated
 				|| $status == ATCF_Campaign::$campaign_status_preview
-				|| ($status == ATCF_Campaign::$campaign_status_vote && $page_controler->get_campaign()->end_vote_remaining()<=0)) { ?>
+				|| ($status == ATCF_Campaign::$campaign_status_vote && $page_controler->get_campaign()->end_vote_remaining()<=0)): ?>
 	<h2 style='text-align:center'><?php _e("Pr&ecirc;t(e) pour la suite ?", 'yproject'); ?></h2>
 
 	<form method="POST" action="<?php echo admin_url( 'admin-post.php?action=change_project_status'); ?>">
@@ -451,49 +451,48 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 				<button type="submit" name="validation-next-save" value="1" id="submit-go-next-status-admin" class="button admin-theme">Enregistrer le statut</button><br /><br />
 				<?php endif; ?>
 
-				<input type="submit" value="Publier mon projet en vote !" class="button" id="submit-go-next-status">
+				<input type="submit" value="Publier mon projet en vote !" class="button red" id="submit-go-next-status">
 
 			<?php elseif ( $status == ATCF_Campaign::$campaign_status_vote || ( $status == ATCF_Campaign::$campaign_status_validated && $page_controler->get_campaign()->skip_vote() ) ): ?>
-				<input type="submit" value="Lancer ma lev&eacute;e de fonds !" class="button" id="submit-go-next-status">
+				<input type="submit" value="Lancer ma lev&eacute;e de fonds !" class="button red" id="submit-go-next-status">
 			<?php endif; ?>
 		</div>
 
 		<input type="hidden" name="next_status" value="2" id="next-status-choice">
 	</form>
-	<?php } ?>
+	<hr class="form-separator">
+	<?php endif; ?>
 
-	<?php if ( $page_controler->can_access_admin() ){ ?>
-	<form action="" id="statusmanage_form" class="db-form" data-action="save_project_status">
-		<hr class="form-separator"/>
+	<?php if ( $page_controler->can_access_admin() ): ?>
+	<form action="" id="statusmanage_form" class="ajax-db-form db-form v3 full center" data-action="save_project_status">
 		<?php
 		DashboardUtility::create_field(array(
-			"id"			=> "new_campaign_status",
-			"type"			=> "select",
-			"label"			=> "Changer l'&eacute;tape actuelle de la campagne",
-			"value"			=> $status,
-			"editable"		=> $page_controler->can_access_admin(),
-			"admin_theme"	=> $page_controler->can_access_admin(),
-			"visible"		=> $page_controler->can_access_admin(),
-			"options_id"	=> array_keys($status_list),
-			"options_names"	=> array_values($status_list),
-			"warning"		=> true
+			'id'			=> 'new_campaign_status',
+			'type'			=> 'select',
+			'label'			=> "Changer l'&eacute;tape actuelle de la campagne",
+			'value'			=> $status,
+			'editable'		=> $page_controler->can_access_admin(),
+			'admin_theme'	=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin(),
+			'options_id'	=> array_keys( $status_list ),
+			'options_names'	=> array_values( $status_list ),
+			'warning'		=> true
 		));
 
 		DashboardUtility::create_field(array(
-			"id"			=> "new_can_go_next_status",
-			"type"			=> "check",
+			"id"			=> 'new_can_go_next_status',
+			"type"			=> 'check',
 			"label"			=> "Autoriser &agrave; passer &agrave; l'&eacute;tape suivante",
 			"value"			=> $page_controler->get_campaign()->can_go_next_status(),
 			"editable"		=> $page_controler->can_access_admin(),
 			"admin_theme"	=> $page_controler->can_access_admin(),
-			"visible"		=> $page_controler->can_access_admin() && $validated_or_after,
-			"placeholder"	=> "http://....."
+			"visible"		=> $page_controler->can_access_admin() && $validated_or_after
 		));
 
-		DashboardUtility::create_save_button("statusmanage-form",$page_controler->can_access_admin());
+		DashboardUtility::create_save_button( 'statusmanage-form', $page_controler->can_access_admin(), 'Enregistrer', 'Enregistrement', TRUE );
 		?>
 	</form>
-	<?php } ?>
+	<?php endif; ?>
 
 
 	<?php if ( $page_controler->can_access_admin() && $status == ATCF_Campaign::$campaign_status_archive ): ?>
@@ -516,163 +515,93 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 	$nb_finished_declarations = count( $finished_declarations );
 	$roi_percent = $page_controler->get_campaign()->roi_percent();
 	?>
-	<div id="tab-wallet-synthesis" class="tab-content">
-		<h2><?php _e('Situation', 'yproject'); ?></h2>
+	<h2><?php _e('Situation', 'yproject'); ?></h2>
+	<ul>
+		<li><strong><?php echo UIHelpers::format_number( $page_controler->get_campaign_organization()->get_lemonway_balance() ); ?> €</strong> <?php _e( "dans votre porte-monnaie", 'yproject' ); ?></li>
+		<li><strong><?php echo UIHelpers::format_number( $page_controler->get_campaign()->current_amount( false ) ); ?> €</strong> <?php _e( "lev&eacute;s", 'yproject' ); ?></li>
+
+		<?php if ( $roi_percent > 0 ): ?>
+		<li><strong><?php echo $page_controler->get_campaign()->roi_percent(); ?> %</strong> <?php _e( "du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
+		<?php else: ?>
+		<li><strong><?php echo $page_controler->get_campaign()->roi_percent_estimated(); ?> %</strong> <?php _e( "maximum du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
+		<?php endif; ?>
+
+		<li><strong><?php echo count( $finished_declarations ); ?> / <?php echo $page_controler->get_campaign()->get_roi_declarations_number(); ?></strong> <?php _e( "&eacute;ch&eacute;ances", 'yproject' ); ?></li>
+		<li>
+			<strong><?php echo $page_controler->get_campaign()->get_roi_declarations_total_turnover_amount(); ?> €</strong> <?php _e( "de CA d&eacute;clar&eacute;", 'yproject' ); ?>
+		</li>
+		<li>
+			<strong><?php echo $page_controler->get_campaign()->get_roi_declarations_total_roi_amount(); ?> €</strong> <?php _e( "de royalties vers&eacute;es", 'yproject' ); ?>
+		</li>
+	</ul>
+	<br>
+
+
+	<h2><?php _e('Historique', 'yproject'); ?></h2>
+	<?php if ( $nb_finished_declarations > 0 ): ?>
+
 		<ul>
-			<li><strong><?php echo UIHelpers::format_number( $page_controler->get_campaign_organization()->get_lemonway_balance() ); ?> €</strong> <?php _e( "dans votre porte-monnaie", 'yproject' ); ?></li>
-			<li><strong><?php echo UIHelpers::format_number( $page_controler->get_campaign()->current_amount( false ) ); ?> €</strong> <?php _e( "lev&eacute;s", 'yproject' ); ?></li>
-
-			<?php if ( $roi_percent > 0 ): ?>
-			<li><strong><?php echo $page_controler->get_campaign()->roi_percent(); ?> %</strong> <?php _e( "du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
-			<?php else: ?>
-			<li><strong><?php echo $page_controler->get_campaign()->roi_percent_estimated(); ?> %</strong> <?php _e( "maximum du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
-			<?php endif; ?>
-
-			<li><strong><?php echo count( $finished_declarations ); ?> / <?php echo $page_controler->get_campaign()->get_roi_declarations_number(); ?></strong> <?php _e( "&eacute;ch&eacute;ances", 'yproject' ); ?></li>
-			<li>
-				<strong><?php echo $page_controler->get_campaign()->get_roi_declarations_total_turnover_amount(); ?> €</strong> <?php _e( "de CA d&eacute;clar&eacute;", 'yproject' ); ?>
+		<?php foreach( $finished_declarations as $declaration_item ): ?>
+			<li>Déclaration du <?php echo $declaration_item->date_due; ?> : <?php echo $declaration_item->get_amount_with_adjustment(); ?> € de royalties
+				<?php if ( $declaration_item->get_amount_with_adjustment() > 0 ): ?>
+				payées le <?php echo $declaration_item->get_formatted_date( 'paid' ); ?>
+				<?php endif; ?>
 			</li>
-			<li>
-				<strong><?php echo $page_controler->get_campaign()->get_roi_declarations_total_roi_amount(); ?> €</strong> <?php _e( "de royalties vers&eacute;es", 'yproject' ); ?>
-			</li>
+		<?php endforeach; ?>
 		</ul>
 
-		<?php if ( $status == ATCF_Campaign::$campaign_status_funded || $status == ATCF_Campaign::$campaign_status_closed ): ?>
-		<div class="field align-center">
-			<a href="<?php echo $page_controler->get_campaign()->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red"><?php _e( "T&eacute;l&eacute;charger mon attestation de lev&eacute;e de fonds", 'yproject' ); ?></a>
-		</div>
-		<?php endif; ?>
+	<?php endif; ?>
 
+	<?php $transfers = $page_controler->get_campaign_organization()->get_transfers();
+	if ($transfers) : ?>
 
-		<h2><?php _e('Historique', 'yproject'); ?></h2>
-		<?php if ( $nb_finished_declarations > 0 ): ?>
-
-			<ul>
-			<?php foreach( $finished_declarations as $declaration_item ): ?>
-				<li>Déclaration du <?php echo $declaration_item->date_due; ?> : <?php echo $declaration_item->get_amount_with_adjustment(); ?> € de royalties
-					<?php if ( $declaration_item->get_amount_with_adjustment() > 0 ): ?>
-					payées le <?php echo $declaration_item->get_formatted_date( 'paid' ); ?>
-					<?php endif; ?>
-				</li>
-			<?php endforeach; ?>
-			</ul>
-
-		<?php endif; ?>
-
-		<?php $transfers = $page_controler->get_campaign_organization()->get_transfers();
-		if ($transfers) : ?>
-
-			<h3>Transferts vers votre compte :</h3>
-			<ul>
-				<?php
-				foreach ( $transfers as $transfer_post ) :
-					$post_status = ypcf_get_updated_transfer_status($transfer_post);
-					$transfer_post = get_post($transfer_post);
-					$post_amount = $transfer_post->post_title;
-					$post_date = new DateTime($transfer_post->post_date);
-					// Les versements faits via Mangopay doivent être recalculés
-					if ( $post_date < new DateTime('2016-07-01') ) {
-						$post_amount /= 100;
-					}
-					$status_str = 'En cours';
-					if ($post_status == 'publish') {
-						$status_str = 'Termin&eacute;';
-					} else if ($post_status == 'draft') {
-						$status_str = 'Annul&eacute;';
-					}
-					?>
-					<li id="<?php echo $transfer_post->post_content; ?>"><?php echo $transfer_post->post_date; ?> : <?php echo UIHelpers::format_number( $post_amount ); ?>&euro; -- Termin&eacute;</li>
-					<?php
-				endforeach;
+		<h3>Transferts vers votre compte :</h3>
+		<ul>
+			<?php
+			foreach ( $transfers as $transfer_post ) :
+				$post_status = ypcf_get_updated_transfer_status($transfer_post);
+				$transfer_post = get_post($transfer_post);
+				$post_amount = $transfer_post->post_title;
+				$post_date = new DateTime($transfer_post->post_date);
+				// Les versements faits via Mangopay doivent être recalculés
+				if ( $post_date < new DateTime('2016-07-01') ) {
+					$post_amount /= 100;
+				}
+				$status_str = 'En cours';
+				if ($post_status == 'publish') {
+					$status_str = 'Termin&eacute;';
+				} else if ($post_status == 'draft') {
+					$status_str = 'Annul&eacute;';
+				}
 				?>
-			</ul>
+				<li id="<?php echo $transfer_post->post_content; ?>"><?php echo $transfer_post->post_date; ?> : <?php echo UIHelpers::format_number( $post_amount ); ?>&euro; -- Termin&eacute;</li>
+				<?php
+			endforeach;
+			?>
+		</ul>
 
-		<?php else: ?>
-			<?php _e( "Aucun transfert d&apos;argent.", 'yproject' ); ?>
-		<?php endif; ?>
+	<?php else: ?>
+		<?php _e( "Aucun transfert d&apos;argent.", 'yproject' ); ?>
+	<?php endif; ?>
+	<br><br>
 
 
-		<?php
-		$saved_mandates_list = $page_controler->get_campaign_organization()->get_lemonway_mandates();
-		$last_mandate = end( $saved_mandates_list );
-		if ( empty( $saved_mandates_list ) ) {
-			$last_mandate_status = $last_mandate[ "S" ];
-			if ( $last_mandate_status == 5 || $last_mandate_status == 6 ): ?>
-				<?php _e( "Autorisation de pr&eacute;l&egrave;vement sign&eacute;.", 'yproject' ); ?>
-			<?php endif;
-		}
-		?>
-	</div>
-		
-		
-	<?php
-	/**
-	 * Porte-monnaie
-	 */
-	?>
-	<h2 class="underlined"><?php _e( 'Porte-monnaie', 'yproject' ); ?></h2>
+	<h2><?php _e( 'Porte-monnaie', 'yproject' ); ?></h2>
 	<?php // Porte-monnaie LW ?>
 	<?php $lemonway_balance = $page_controler->get_campaign_organization()->get_lemonway_balance(); ?>
 	Vous disposez de <?php echo $lemonway_balance; ?>&euro; dans votre porte-monnaie.<br /><br />
 
-	<?php if ( $page_controler->can_access_admin() ): ?>
+	<?php if ( $page_controler->can_access_admin() && $lemonway_balance > 0 ): ?>
 
-			<?php if ( $lemonway_balance > 0 ): ?>
-
-					<div style="background: #DDD">
-							Ce formulaire n'est accessible qu'en administration :<br />
-							<form action="" method="POST">
-									<input type="hidden" name="submit_transfer_wallet_lemonway" value="1" />
-									Somme à verser au porteur de projet : <input type="text" name="transfer_amount" value="0" /><br />
-									Somme à prendre en commission : <input type="text" name="transfer_commission" value="0" /><br />
-									<input type="submit" value="Verser" />
-							</form>
-					</div>
-
-			<?php endif; ?>
+		<div class="db-form">
+			Ce formulaire n'est accessible qu'en administration :<br />
+			<form action="" method="POST" class="field admin-theme">
+				<input type="hidden" name="submit_transfer_wallet_lemonway" value="1" />
+				Somme à verser au porteur de projet : <input type="text" name="transfer_amount" value="0" /><br />
+				Somme à prendre en commission : <input type="text" name="transfer_commission" value="0" /><br />
+				<input type="submit" value="Verser" />
+			</form>
+		</div>
 
 	<?php endif; ?>
-
-
-	<?php
-	/**
-	 * Transferts d'argent
-	 */
-	?>
-	<h2 class="underlined"><?php _e( 'Transferts d&apos;argent', 'yproject' ); ?></h2>
-	<?php
-	$args = array(
-		'author'	    => $page_controler->get_campaign_organization()->get_wpref(),
-		'post_type'	    => 'withdrawal_order',
-		'post_status'   => 'any',
-		'orderby'	    => 'post_date',
-		'order'			=>  'ASC'
-	);
-	$transfers = get_posts($args);
-	if ($transfers) :
-	?>
-	<ul class="user_history">
-			<?php foreach ( $transfers as $post_transfer ) :
-					$post_transfer = get_post($post_transfer);
-					$date_lemonway = new DateTime( '2016-08-03' );
-					$date_transfer = new DateTime( $post_transfer->post_date );
-					$post_amount = ($date_transfer > $date_lemonway) ? $post_transfer->post_title : $post_transfer->post_title / 100;
-					if ($post_transfer->post_status == 'publish') {
-						?>
-						<li id="<?php echo $post_transfer->post_content; ?>"><?php echo $post_transfer->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Termin&eacute;</li>
-						<?php
-					} else if ($post_transfer->post_status == 'draft') {
-						?>
-						<li id="<?php echo $post_transfer->post_content; ?>"><?php echo $post_transfer->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Annul&eacute;</li>
-						<?php
-					} else {
-						?>
-						<li id="<?php echo $post_transfer->post_content; ?>"><?php echo $post_transfer->post_date; ?> : <?php echo $post_amount; ?>&euro; -- En cours</li>
-						<?php
-					}
-			endforeach; ?>
-	</ul>
-	<?php else: ?>
-			Aucun transfert.
-	<?php endif; ?> 
 </div>

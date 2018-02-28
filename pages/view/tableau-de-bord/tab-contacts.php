@@ -16,11 +16,11 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 
 <div class="tab-content" id="send-mail-tab" style="display: none">
 	<h2><?php _e("Envoyer un mail", 'yproject')?></h2>
-	<form id="direct-mail" method="POST" action="<?php echo admin_url( 'admin-post.php?action=send_project_mail'); ?>">
+	<form id="direct-mail" method="POST" action="<?php echo admin_url( 'admin-post.php?action=send_project_mail'); ?>" class="db-form v3 full center bg-white">
 		<p><?php _e("Le message sera envoyé &agrave", 'yproject')?> <strong id="nb-mailed-contacts">0</strong> personnes</p>
 		<input type="hidden" id="mail_recipients" name="mail_recipients"/>
 		<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>"/>
-		<div class="step-write">
+		<div class="step-write field field-container">
 			<p><strong><?php _e("Vous pouvez utiliser les variables suivantes : ", 'yproject'); ?></strong>
 			<?php DashboardUtility::get_infobutton('Au moment de l\'envoi, les variables seront remplacées par les valeurs correspondantes.<br/><br/>
 				Ainsi, par exemple, <b>%userfirstname%</b> sera remplacé par le prénom de l\'utilisateur qui recevra le message.',true)?></p>
@@ -29,9 +29,9 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 				<li><i>%userlastname%</i> : Nom de famille de l'utilisateur destinataire</li>
 				<li><i>%investwish%</i> : Intention d'investissement</li>
 			</ul>
-			<label><strong>Objet du mail : </strong>
-				<input typ="text" name="mail_title" id="mail-title" value=""></label>
-			<br/><br/>
+			<label>Objet du mail :</label>
+			<input type="text" name="mail_title" id="mail-title" value="">
+			<br><br>
 
 			<?php
 			$previous_content = filter_input(INPUT_POST, 'mail_content');
@@ -51,10 +51,10 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 				)
 			);
 			?>
-			<br/>
+			<br>
 
 			<p class="align-center">
-				<a id="mail-preview-button" class="button"><?php _e('Prévisualisation', 'yproject'); ?></a>
+				<a id="mail-preview-button" class="button red"><?php _e('Prévisualisation', 'yproject'); ?></a>
 			</p>
 		</div>
 		<div class="step-confirm" hidden>
@@ -63,16 +63,17 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 			<div class="preview"></div>
 
 			<p class="align-center">
-				<a id="mail-back-button" class="button"><?php _e('Editer', 'yproject'); ?></a>
-				<button type="submit" id="mail-send-button" class="button"><?php _e('Envoyer le message', 'yproject'); ?></button>
+				<a id="mail-back-button" class="button blue"><?php _e('Editer', 'yproject'); ?></a><br><br>
+				<button type="submit" id="mail-send-button" class="button red"><?php _e('Envoyer le message', 'yproject'); ?></button>
 			</p>
 		</div>
 	</form>
 </div>
 
 <?php if ( $page_controler->can_access_admin() ): ?>
+	<br><br>
 	<div class="admin-theme-block align-center">
-		<a href="#contacts" class="wdg-button-lightbox-open button" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a>
-		<?php locate_template( array( 'projects/dashboard/contacts/lightbox-add-check.php' ), true ); ?>
+		<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a>
+		<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/lightbox-add-check.php' ), true ); ?>
 	</div>
 <?php endif;
