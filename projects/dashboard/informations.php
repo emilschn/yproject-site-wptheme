@@ -876,11 +876,11 @@ function print_informations_page()
 
 				<?php
 				$file_name_contract_orga = $campaign->backoffice_contract_orga();
+				$date = new DateTime();
 				if (!empty($file_name_contract_orga)) {
 					$file_name_exploded = explode('.', $file_name_contract_orga);
 					$ext = $file_name_exploded[count($file_name_exploded) - 1];
 					$file_name_contract_orga = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_orga;
-					$date = new DateTime();
 				}
                 DashboardUtility::create_field(array(
                     "id"				=> "new_backoffice_contract_orga",
