@@ -880,6 +880,7 @@ function print_informations_page()
 					$file_name_exploded = explode('.', $file_name_contract_orga);
 					$ext = $file_name_exploded[count($file_name_exploded) - 1];
 					$file_name_contract_orga = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_orga;
+					$date = new DateTime();
 				}
                 DashboardUtility::create_field(array(
                     "id"				=> "new_backoffice_contract_orga",
@@ -887,7 +888,7 @@ function print_informations_page()
                     "label"				=> "Contrat d'investissement",
                     "value"				=> $file_name_contract_orga,
                     "editable"			=> $is_admin,
-					"download_label"	=> $post_campaign->post_title . " - Contrat royalties." . $ext
+					"download_label"	=> $post_campaign->post_title . " - Contrat royalties - ".$date->format('YmdHis')."." . $ext
                 ));
 					
 				DashboardUtility::create_field(array(
