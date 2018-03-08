@@ -479,12 +479,10 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
     font-size: 13pt;
     letter-spacing: 0.12em;
     color: #FFFFFF;
-    background: repeating-linear-gradient(
-    -45deg,
-    #00879B,
-    #00879B 5px,
-    #E1E3E2 5px,
-    #00879B 6.3px);
+    background: #00879B;
+}
+.progress-bar.minimum-as-step .current-amount {
+	background: linear-gradient( to right, #59cee0, #00879B );
 }
 .progress-bar .progress-percent { 
     display: -webkit-flex;
@@ -516,7 +514,24 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
         #F5F5F5 1px,
         #E1E3E2 8px);
 }
-
+.progress-bar.minimum-as-step .progress-bar-separator {
+	position: absolute;
+	z-index: 1;
+	display: inline-block;
+	height: 40px;
+	border-left: 2px solid #FFFFFF;
+}
+.progress-bar.minimum-as-step .progress-bar-separator img {
+	position: absolute;
+	left: -11px;
+	top: 10px;
+}
+.progress-bar.minimum-as-step .bg-separated {
+	position: absolute;
+	display: inline-block;
+	height: 40px;
+	background: #00879B;
+}
 
 /*******************************************************************************
 * LIGHTBOX

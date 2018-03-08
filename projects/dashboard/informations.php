@@ -204,14 +204,21 @@ function print_informations_page()
                     "options_id"	=> array_keys($locations),
                     "options_names"	=> array_values($locations)
                 ));
-				?>
 				
-				<?php
                 DashboardUtility::create_field(array(
                     "id"	=> "new_employees_number",
                     "type"	=> "number",
                     "label"	=> __( "Nombre d'employ&eacute;s au lancement", 'yproject' ),
                     "value"	=> $campaign->get_api_data( 'employees_number' )
+                ));
+				
+                DashboardUtility::create_field(array(
+                    "id"	=> "new_minimum_goal_display",
+                    "type"	=> "select",
+                    "label"	=> __( "Affichage de l'objectif minimum", 'yproject' ),
+                    "value"	=> $campaign->get_minimum_goal_display(),
+                    "options_id"	=> array( ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_max, ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ),
+                    "options_names"	=> array( "Afficher l'objectif minimum", "Afficher l'objectif maximum et un seuil de validation" )
                 ));
 				?>
 
