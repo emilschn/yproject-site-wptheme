@@ -418,7 +418,7 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 					$("#orgainfo_form_button").hide();
 					thisForm.find('.save_ok').hide();
 					$("#wdg-lightbox-valid-changeOrga").css('display', 'block');
-					new_project_organization = $("#new_project_organization option:selected").val();
+					new_project_organization = $("#select-new_project_organization option:selected").val();
 				}
 			}
 		}).fail(function() {
@@ -524,20 +524,20 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 
 	var self = this;
 	$("#orgainfo_form_button").hide();//suppression bouton enregistrer
-	if($("#new_project_organization").val() !== ""){
-		var new_project_organization = $("#new_project_organization option:selected").val();
+	if($("#select-new_project_organization").val() !== ""){
+		var new_project_organization = $("#select-new_project_organization option:selected").val();
 		$("#edit-orga-button").show();
 	}
-	$("#new_project_organization").change(function(e){
+	$("#select-new_project_organization").change(function(e){
 		e.preventDefault();
 		$("#orgainfo_form_button").hide();//suppression bouton enregistrer
-		if($("#new_project_organization option:selected").val() !== new_project_organization) {
+		if($("#select-new_project_organization option:selected").val() !== new_project_organization) {
 			$("#edit-orga-button").hide();
 			$("#orgainfo_form_button").show();//apparition bouton enregistrer
 			//Suppression des éléments d'une validation précédente
 			if($(".save_ok").length > 0) $(".save_ok").hide();
 			if($("#orgainfo_form i.fa.validation").length > 0) $("#orgainfo_form i.fa.validation").remove();
-			if($("#new_project_organization").hasClass("validation")) $("#new_project_organization").removeClass("validation");
+			if($("#select-new_project_organization").hasClass("validation")) $("#select-new_project_organization").removeClass("validation");
 			if($("#save-mention").is(":hidden")) $("#save-mention").show();
 			//
 		}else{
@@ -747,7 +747,7 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 					self.updateOrgaSelectInput(feedback);
 
 					//Mise à jour du bouton d'édition
-					var newname = $("#new_project_organization").find('option:selected').text();
+					var newname = $("#select-new_project_organization").find('option:selected').text();
 					var edit_btn = $('#orgainfo_form').find($("#edit-orga-button"));
 					edit_btn.attr("href","#");
 					edit_btn.text("Editer "+newname);
@@ -787,11 +787,11 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 * @param {type} form : formulaire de saisie
 */
 WDGCampaignDashboard.prototype.updateEditOrgaBtn = function(form){
-   var newval = $("#new_project_organization").val();
+   var newval = $("#select-new_project_organization").val();
    if(newval!== ''){
 	   var edit_btn = form.find($("#edit-orga-button")).show();
 
-	   var newname = $("#new_project_organization").find('option:selected').text();
+	   var newname = $("#select-new_project_organization").find('option:selected').text();
 	   edit_btn.attr("href","#");
 	   edit_btn.text("Editer "+newname);
    } else {
@@ -920,9 +920,9 @@ WDGCampaignDashboard.prototype.updateOrgaSelectInput = function(feedback){
 	var orgaName = feedback.organization.name;
 	var orgaWpref = feedback.organization.wpref;
 
-	$("#orgainfo_form #new_project_organization").append(new Option(orgaName, orgaWpref));
-	$("#orgainfo_form #new_project_organization option:selected").removeAttr('selected');
-	$("#orgainfo_form #new_project_organization option[value="+orgaWpref+"]").attr("selected", "selected");
+	$("#orgainfo_form #select-new_project_organization").append(new Option(orgaName, orgaWpref));
+	$("#orgainfo_form #select-new_project_organization option:selected").removeAttr('selected');
+	$("#orgainfo_form #select-new_project_organization option[value="+orgaWpref+"]").attr("selected", "selected");
 };
 
 WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id) {

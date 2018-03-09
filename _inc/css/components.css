@@ -891,11 +891,12 @@ body input[type=text], body input[type=email], body select {
 }
 .db-form.v3 .field-container {
 	display: block;
+	white-space: normal;
 }
 .db-form.v3 .field-container.field-type-check {
 	display: inline-block;
 }
-.db-form.v3 .field-container input[type=text], .db-form.v3 .field-container input[type=password], .db-form.v3 .field-container input[type=email] {
+.db-form.v3 .field-container input[type=text], .db-form.v3 .field-container input[type=password], .db-form.v3 .field-container input[type=email], .db-form.v3 .field-container input[type=file] {
 	width: 260px;
 	height: 30px;
 	border: none;
@@ -903,7 +904,7 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3.bg-white .field-container input {
 	background: #E1E3E2;
 }
-.db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=email] {
+.db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=email], .db-form.v3.full .field-container input[type=file] {
 	width: 96%;
     width: -webkit-calc( 100% - 16px );
     width: -moz-calc( 100% - 16px );
@@ -942,6 +943,9 @@ body input[type=text], body input[type=email], body select {
 	padding: 8px 8px;
 	font-size: 12pt;
 	font-family: Trebuchet MS, sans-serif;
+}
+.db-form.v3 .field-container .field-value a {
+	max-width: none;
 }
 .db-form.v3 a.button {
 	display: inline-block;
