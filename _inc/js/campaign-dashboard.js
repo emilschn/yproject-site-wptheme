@@ -1313,10 +1313,11 @@ WDGCampaignDashboard.prototype.manageTeam = function(action, data, campaign_id){
 						}
 						newline ='<li style="display: none;">';
 						newline+=res.firstName+" "+res.lastName+" ("+res.userLink+") ";
-						newline+='<a class="project-manage-team button" data-action="yproject-remove-member" data-user="'+res.id+'"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>';
+						newline+='<a class="project-manage-team button red" data-action="yproject-remove-member" data-user="'+res.id+'"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>';
 						newline+="</li>";
 						$("#team-list").append(newline);
 						$("a[data-user="+res.id+"]").closest("li").slideDown();
+						$( '#team-list-empty' ).hide();
 
 						//Recharge l'UI pour ajouter listener au nouveau button
 						$(".project-manage-team").click(function(){

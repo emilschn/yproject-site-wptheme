@@ -276,3 +276,15 @@ div#container div#content main #item-body-contacts #direct-mail {
 	font-size: 20px;
 	text-transform: uppercase;
 }
+
+/*******************************************************************************
+* TEAM
+*******************************************************************************/
+#item-body-team ul#team-list {
+	list-style: none;
+}
+#item-body-team ul#team-list li a {
+	width: auto;
+	height: auto;
+	line-height: normal;
+}
