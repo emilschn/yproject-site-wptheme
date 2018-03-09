@@ -33,7 +33,7 @@ class DashboardUtility
 		$buffer = FALSE;
 		
         $type = $params[ 'type' ];
-		$override_with_template = array( 'select', 'check', 'text', 'date' );
+		$override_with_template = array( 'select', 'check', 'text', 'text-money', 'text-percent', 'date' );
 		if ( in_array( $type, $override_with_template ) ) {
 			$editable = ( isset( $params[ 'editable' ] ) ) ? $params[ 'editable' ] : TRUE;
 			$warning = false;
@@ -85,6 +85,10 @@ class DashboardUtility
 				
 				case 'date':
 					$wdg_current_field[ 'value' ] = $wdg_current_field[ 'value' ]->format( 'd/m/Y' );
+					break;
+				
+				case 'text-percent':
+					$wdg_current_field[ 'unit' ] = $params[ 'unit' ];
 					break;
 			}
 			

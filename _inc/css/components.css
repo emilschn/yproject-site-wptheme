@@ -968,7 +968,7 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3 .button.transparent.half {
 	width: calc( 45% - 4px );
 }
-.db-form.v3 #insert-media-button, .db-form.v3 a.button.su-generator-button {
+.db-form.v3 .button#insert-media-button, .db-form.v3 .button.insert-media, .db-form.v3 a.button.su-generator-button, .db-form.v3 .mce-container button {
 	width: auto;
 	height: auto;
 	line-height: normal;
@@ -1048,10 +1048,10 @@ body input[type=text], body input[type=email], body select {
 }
 
 
-.db-form.v3 span.field-money {
-	display: inline-block;
-	position: relative;
-	left: -30px;
+.db-form.v3 span.field-money, .db-form.v3 span.field-percent {
+	position: absolute;
+	top: 0px;
+	right: 15px;
 }
 .db-form.v3 span.rate-description {
 	display: inline-block;

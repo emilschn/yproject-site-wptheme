@@ -3,29 +3,27 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 <h2><?php _e( "Financement", 'yproject' ); ?></h2>
 
-<div class="db-form v3 center">
-	<form id="projectfunding_form"  class="ajax-db-form" data-action="save_project_funding">
+<div class="db-form v3 full center bg-white">
+	<form id="projectfunding_form" class="ajax-db-form" data-action="save_project_funding">
 		<?php
 		DashboardUtility::create_field(array(
-			"id"			=> "new_minimum_goal",
-			"type"			=> "number",
-			"label"			=> "Objectif",
-			"infobubble"	=> "C'est le seuil de validation de votre lev&eacute;e de fonds, vous pourrez ensuite viser le montant maximum !",
-			"value"			=> $page_controler->get_campaign()->minimum_goal(false),
-			"suffix"		=> "<span>&nbsp;&euro;</span>",
-			"min"			=> 500,
-			"editable"		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+			'id'			=> 'new_minimum_goal',
+			'type'			=> 'text-money',
+			'label'			=> "Objectif",
+			'description'	=> "C'est le seuil de validation de votre lev&eacute;e de fonds, vous pourrez ensuite viser le montant maximum !",
+			'value'			=> $page_controler->get_campaign()->minimum_goal(false),
+			'min'			=> 500,
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
 		));
 
 		DashboardUtility::create_field(array(
-			"id"			=> "new_maximum_goal",
-			"type"			=> "number",
-			"label"			=> "Montant maximum",
-			"infobubble"	=> "C'est le montant maximum de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD.",
-			"value"			=> $page_controler->get_campaign()->goal(false),
-			"suffix"		=> "<span>&nbsp;&euro;</span>",
-			"min"			=> 500,
-			"editable"		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+			'id'			=> 'new_maximum_goal',
+			'type'			=> 'text-money',
+			'label'			=> "Montant maximum",
+			'description'	=> "C'est le montant maximum de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD.",
+			'value'			=> $page_controler->get_campaign()->goal(false),
+			'min'			=> 500,
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
 		));
 		
 		DashboardUtility::create_field(array(
@@ -40,7 +38,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"id"			=> "new_funding_duration",
 			"type"			=> "select",
 			"label"			=> "Dur&eacute;e du financement",
-			"infobubble"	=> "Indiquez 5 ans pour un projet entrepreneurial, sauf cas particulier à valider avec l’équipe WE DO GOOD.",
+			"description"	=> "Indiquez 5 ans pour un projet entrepreneurial, sauf cas particulier à valider avec l’équipe WE DO GOOD.",
 			"value"			=> $page_controler->get_campaign()->funding_duration(),
 			"options_id"	=> array_keys( ATCF_Campaign::$funding_duration_list ),
 			"options_names"	=> array_values( ATCF_Campaign::$funding_duration_list ),
@@ -51,10 +49,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 			DashboardUtility::create_field(array(
 				"id"			=> "new_platform_commission",
-				"type"			=> "number",
+				"type"			=> "text-percent",
 				"label"			=> "Commission de la plateforme",
 				"value"			=> $page_controler->get_campaign()->platform_commission(),
-				"suffix"		=> "<span>&nbsp;% TTC</span>",
+				"unit"			=> "% TTC",
 				"min"			=> 0,
 				"max"			=> 100,
 				"step"			=> 0.000000000000000000000001,
@@ -79,11 +77,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 		DashboardUtility::create_field(array(
 			"id"			=> "new_roi_percent_estimated",
-			"type"			=> "number",
+			"type"			=> "text-percent",
 			"label"			=> "Royalties",
-			"infobubble"	=> "Indiquez le pourcentage de chiffre d’affaires que vous souhaitez reverser à vos investisseurs. Vérifiez dans le prévisionnel ci-dessous que le retour sur investissement est suffisant.",
+			"description"	=> "Indiquez le pourcentage de chiffre d’affaires que vous souhaitez reverser à vos investisseurs. Vérifiez dans le prévisionnel ci-dessous que le retour sur investissement est suffisant.",
 			"value"			=> $page_controler->get_campaign()->roi_percent_estimated(),
-			"suffix"		=> "<span>&nbsp;% du chiffre d'affaires</span>",
+			"unit"			=> "% du CA",
 			"min"			=> 0,
 			"max"			=> 100,
 			"step"			=> 0.000000000000000000000001,
@@ -92,10 +90,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 		DashboardUtility::create_field(array(
 			"id"			=> "new_roi_percent",
-			"type"			=> "number",
+			"type"			=> "text-percent",
 			"label"			=> "Royalties r&eacute;els (selon montant collect&eacute;)",
 			"value"			=> $page_controler->get_campaign()->roi_percent(),
-			"suffix"		=> "<span>&nbsp;% du chiffre d'affaires</span>",
+			"unit"			=> "% du CA",
 			"min"			=> 0,
 			"max"			=> 100,
 			"step"			=> 0.000000000000000000000001,
@@ -169,10 +167,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			));
 			DashboardUtility::create_field(array(
 				"id"			=> "new_costs_to_organization",
-				"type"			=> "number",
+				"type"			=> "text-percent",
 				"label"			=> "Pourcentage de frais appliqués au PP",
 				"value"			=> $page_controler->get_campaign()->get_costs_to_organization(),
-				"suffix"		=> "<span>&nbsp;%</span>",
 				"min"			=> 0,
 				"max"			=> 100,
 				"step"			=> 0.01,
@@ -181,10 +178,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			));
 			DashboardUtility::create_field(array(
 				"id"			=> "new_costs_to_investors",
-				"type"			=> "number",
+				"type"			=> "text-percent",
 				"label"			=> "Pourcentage de frais appliqués aux investisseurs",
 				"value"			=> $page_controler->get_campaign()->get_costs_to_investors(),
-				"suffix"		=> "<span>&nbsp;%</span>",
 				"min"			=> 0,
 				"max"			=> 100,
 				"step"			=> 0.01,
@@ -234,23 +230,23 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<li class="field">
 						<label>Année <span class="year"><?php echo ($i+1); ?></span></label>                           
 						<span class="field-container" <?php if ( !$page_controler->can_access_admin() && !$page_controler->get_campaign()->is_preparing() ): ?> style="padding-left: 80px;" <?php endif; ?>>
-								<span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
-										<?php if ( $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing() ): ?>
-										<i class="right fa <?php if ($is_euro): ?>fa-eur<?php endif; ?>" aria-hidden="true"></i>
-										<input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />
-											<?php if ( !$is_euro ): ?>%<?php endif; ?>
-										<?php else: ?>
-										<?php echo $turnover; ?>
-										<?php endif; ?>
-								</span>
-								<?php if ( !$page_controler->can_access_admin() && !$page_controler->get_campaign()->is_preparing() ): ?>
-									<span style="padding-right: 70px;">&euro;</span>
+							<span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
+								<?php if ( $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing() ): ?>
+								<i class="right fa <?php if ($is_euro): ?>fa-eur<?php endif; ?>" aria-hidden="true"></i>
+								<input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />
+									<?php if ( !$is_euro ): ?>%<?php endif; ?>
+								<?php else: ?>
+								<?php echo $turnover; ?>
 								<?php endif; ?>
-								<!--montant des royalties reversées par année-->
-								<span class="like-input-center">
-									<p id="roi-amount-<?php echo $i;?>">0 €</p>
-									<!--<input class="input-center" type="text" id="new-estimated-roi-<?php echo $i;?>" disabled="disabled"/>-->
-								</span>                                     
+							</span>
+							<?php if ( !$page_controler->can_access_admin() && !$page_controler->get_campaign()->is_preparing() ): ?>
+								<span style="padding-right: 70px;">&euro;</span>
+							<?php endif; ?>
+							<!--montant des royalties reversées par année-->
+							<span class="like-input-center">
+								<p id="roi-amount-<?php echo $i;?>">0 €</p>
+								<!--<input class="input-center" type="text" id="new-estimated-roi-<?php echo $i;?>" disabled="disabled"/>-->
+							</span>                                     
 						</span>
 					</li>
 				<?php

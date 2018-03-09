@@ -231,7 +231,7 @@ button.red {
 .db-form .field-container input[type='checkbox']{
     vertical-align: top;
     margin: 5px 10px 0px 5px;
-    width: initial;
+    width: auto;
 }
 
 

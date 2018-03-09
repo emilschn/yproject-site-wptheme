@@ -187,9 +187,9 @@ WDGCampaignSimulator.prototype.getDataCalculator = function(){
 	new_minimum_goal = $("#new_minimum_goal").val() == null ? $.trim($("span[data-id=new_minimum_goal] span").text()) : $("#new_minimum_goal").val();
 	need = $("#new_maximum_goal").val() == null ? $.trim($("span[data-id=new_maximum_goal] span").text()) : $("#new_maximum_goal").val();
 	new_roi_percent_estimated = $("#new_roi_percent_estimated").val() == null ? $.trim($("span[data-id=new_roi_percent_estimated] span").text()) : $("#new_roi_percent_estimated").val();
-	new_funding_duration = ($("#new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration] span").text()) : $("#new_funding_duration").val();
+	new_funding_duration = ($("#select-new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration] span").text()) : $("#select-new_funding_duration").val();
 	new_estimated_turnover_0 = $("#new_estimated_turnover_0").val() == null ? $.trim($("span[data-id=new_estimated_turnover_0]").text()) : $("#new_estimated_turnover_0").val();
-	nb_years = $("#new_funding_duration").val() == null ? $.trim($("span[data-id=new_funding_duration]").text()) : $("#new_funding_duration").val();
+	nb_years = $("#select-new_funding_duration").val() == null ? $.trim($("span[data-id=new_funding_duration]").text()) : $("#select-new_funding_duration").val();
 };
 
 /**
@@ -407,7 +407,7 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 				}
 
 				// Enregistrer l'organisation liée au projet dans tab-organization
-				if (($("#orgainfo_form.db-form").data("action")) == "save_project_organization"){
+				if ( $( this ).data( 'action' ) == "save_project_organization" ){
 					//Afficher le bouton d'édition de l'organisation après enregistrement de la liaison
 					self.updateEditOrgaBtn(thisForm);
 					//Mise à jour du formulaire d'édition après enregistrement de la liaison
@@ -1366,9 +1366,9 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 	});
 
 	//Cases pour le CA prévisionnel
-	$("#new_funding_duration").change(function() {
+	$("#select-new_funding_duration").change(function() {
 		var nb_years_li_existing = ($("#estimated-turnover li").length);
-		var new_nb_years = parseInt($("#new_funding_duration").val());
+		var new_nb_years = parseInt($("#select-new_funding_duration").val());
 		"change nb year trigger "+new_nb_years+"(exist : "+nb_years_li_existing+")";
 
 		//Ajoute des boîtes au besoin
@@ -1404,19 +1404,19 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 		//Calculs de tous les élements et rattachement du keyup/click sur changement de CA
 		wdgCampaignSimulator.calculAndShowResult();                       
 	});
-	$("#new_funding_duration").trigger('change');
-	$("#new_funding_duration").keyup(function(){
-		if($("#new_funding_duration").val()!==""){
-			$("#new_funding_duration").trigger('change');
+	$("#select-new_funding_duration").trigger('change');
+	$("#select-new_funding_duration").keyup(function(){
+		if($("#select-new_funding_duration").val()!==""){
+			$("#select-new_funding_duration").trigger('change');
 		}
 	});
 
 	//Recalcul du rendement si modification de l'objectif max / % royalties / durée financement
-	$("#new_maximum_goal, #new_roi_percent_estimated, #new_funding_duration").bind('keyup click', function(){
+	$("#new_maximum_goal, #new_roi_percent_estimated, #select-new_funding_duration").bind('keyup click', function(){
 		//Rattachement des events sur modif du CA
 		wdgCampaignSimulator.attachEventOnCa();
 
-		if($("#new_maximum_goal").val()!=="" && ($("#new_minimum_goal").val()!=="" && $("#new_funding_duration").val()!==""
+		if($("#new_maximum_goal").val()!=="" && ($("#new_minimum_goal").val()!=="" && $("#select-new_funding_duration").val()!==""
 			&& $("#new_roi_percent_estimated").val()!=="" )){
 			wdgCampaignSimulator.calculAndShowResult();
 		} else{
