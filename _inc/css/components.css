@@ -482,7 +482,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
     background: #00879B;
 }
 .progress-bar.minimum-as-step .current-amount {
-	background: linear-gradient( to right, #59cee0, #00879B );
+	background: linear-gradient( 45deg, #59cee0, #00879B );
 }
 .progress-bar .progress-percent { 
     display: -webkit-flex;
