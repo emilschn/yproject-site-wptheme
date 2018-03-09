@@ -5,6 +5,7 @@ $template_engine->set_controler( new WDG_Page_Controler_Connection() );
 class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 	
 	private $login_error_reason;
+	private $display_alert_project;
 	
 	public function __construct() {
 		parent::__construct();
@@ -35,6 +36,9 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 		$_SESSION[ 'login-fb-referer' ] = WDGUser::get_login_redirect_page();
 		
 		$this->init_login_error_reason();
+		
+		$input_source = filter_input( INPUT_GET, 'source' );
+		$this->display_alert_project = ( $input_source == 'project' );
 	}
 	
 /******************************************************************************/
@@ -59,6 +63,10 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 					break;
 			}
 		}
+	}
+	
+	public function get_display_alert_project() {
+		return $this->display_alert_project;
 	}
 		
 	
