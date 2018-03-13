@@ -33,7 +33,7 @@ class DashboardUtility
 		$buffer = FALSE;
 		
         $type = $params[ 'type' ];
-		$override_with_template = array( 'select', 'check', 'text', 'text-money', 'text-percent', 'date' );
+		$override_with_template = array( 'select', 'check', 'text', 'text-money', 'text-percent', 'number', 'date' );
 		if ( in_array( $type, $override_with_template ) ) {
 			$editable = ( isset( $params[ 'editable' ] ) ) ? $params[ 'editable' ] : TRUE;
 			$warning = false;
@@ -80,6 +80,9 @@ class DashboardUtility
 					$wdg_current_field[ 'label' ] = '';
 					$wdg_current_field[ 'options' ] = array(
 						$params[ 'id' ] => $params[ 'label' ]
+					);
+					$wdg_current_field[ 'values' ] = array(
+						$params[ 'value' ]
 					);
 					break;
 				

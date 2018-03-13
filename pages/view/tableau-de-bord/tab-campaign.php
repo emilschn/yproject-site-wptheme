@@ -3,7 +3,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 <h2><?php _e( "Campagne", 'yproject' ); ?></h2>
 
-<div class="db-form v3 center">
+<div class="db-form v3 full center bg-white">
 	<form id="projectinfo_form" class="ajax-db-form" data-action="save_project_infos">
 		<?php
 		DashboardUtility::create_field(array(
@@ -70,7 +70,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 		<div class="field">
 			<label for="categories"><?php _e("Cat&eacute;gorie", 'yproject'); ?></label>
-			<span class="field-value" data-type="multicheck" data-id="new_project_categories"><?php
+			<span class="field field-value" data-type="multicheck" data-id="new_project_categories"><?php
 				include_once ABSPATH . 'wp-admin/includes/template.php';
 				wp_terms_checklist(
 					$page_controler->get_campaign_id(), 
@@ -84,7 +84,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 		<div class="field">
 			<label for="activities"><?php _e("Secteur d&apos;activit&eacute;", 'yproject'); ?></label>
-			<span class="field-value" data-type="multicheck" data-id="new_project_activities"><?php
+			<span class="field field-value" data-type="multicheck" data-id="new_project_activities"><?php
 				wp_terms_checklist(
 					$page_controler->get_campaign_id(),
 					array(
@@ -98,7 +98,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php if ( $terms_type ): ?>
 		<div class="field">
 			<label for="types"><?php _e("Type de projet", 'yproject'); ?></label>
-			<span class="field-value" data-type="multicheck" data-id="new_project_types"><?php
+			<span class="field field-value" data-type="multicheck" data-id="new_project_types"><?php
 				wp_terms_checklist(
 					$page_controler->get_campaign_id(),
 					array(
@@ -113,7 +113,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php if ( $terms_partners ): ?>
 		<div class="field">
 			<label for="partners"><?php _e("Partenaires", 'yproject'); ?></label>
-			<span class="field-value" data-type="multicheck" data-id="new_project_partners"><?php
+			<span class="field field-value" data-type="multicheck" data-id="new_project_partners"><?php
 				wp_terms_checklist(
 					$page_controler->get_campaign_id(),
 					array(
@@ -128,7 +128,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php if ( $terms_tousnosprojets ): ?>
 		<div class="field">
 			<label for="tousnosprojets"><?php _e("Cat&eacute;gorie sur le site tousnosprojets.fr", 'yproject'); ?></label>
-			<span class="field-value" data-type="multicheck" data-id="new_project_tousnosprojets"><?php
+			<span class="field field-value" data-type="multicheck" data-id="new_project_tousnosprojets"><?php
 				wp_terms_checklist(
 					$page_controler->get_campaign_id(),
 					array(
@@ -149,6 +149,34 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"value"			=> $page_controler->get_campaign()->location(),
 			"options_id"	=> array_keys($locations),
 			"options_names"	=> array_values($locations)
+		));
+		
+		DashboardUtility::create_field( array(
+			'id'			=> 'new_website',
+			'type'			=> 'text',
+			'label'			=> "Site web",
+			'value'			=> $page_controler->get_campaign()->campaign_external_website(),
+			'right_icon'	=> 'link'
+		) );
+
+		DashboardUtility::create_field( array(
+			'id'			=> 'new_facebook',
+			'type'			=> 'text',
+			'label'			=> "Page Facebook",
+			'value'			=> $page_controler->get_campaign()->facebook_name(),
+			'prefix'		=> 'www.facebook.com/',
+			'placeholder'	=> 'PageFacebook',
+			'right_icon'	=> 'facebook'
+		) );
+
+		DashboardUtility::create_field(array(
+			'id'			=> 'new_twitter',
+			'type'			=> 'text',
+			'label'			=> "Twitter",
+			'value'			=> $page_controler->get_campaign()->twitter_name(),
+			'prefix'		=> '@',
+			'placeholder'	=> 'CompteTwitter',
+			'right_icon'	=> 'twitter'
 		));
 		
 		DashboardUtility::create_field(array(
@@ -181,7 +209,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		}
 		?>
 
-		<?php DashboardUtility::create_save_button("projectinfo_form"); ?>
+		<?php DashboardUtility::create_save_button( 'projectinfo_form' ); ?>
 	</form>
 			
 	<?php if ( $page_controler->can_access_admin() ): ?>
@@ -210,44 +238,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				"download_label"	=> $page_controler->get_campaign()->data->post_title . " - BP." . $ext
 			));
 
-			DashboardUtility::create_save_button("projectinfo_form"); ?>
+			DashboardUtility::create_save_button( 'projectinfo_form', TRUE, "Enregistrer", "Enregistrement", TRUE );
+			?>
 
 			<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
 		</form>
 	</div>
 	<?php endif; ?>
-	
-	
-	<form id="communication_form" class="ajax-db-form" data-action="save_project_communication">
-		<?php
-		DashboardUtility::create_field( array(
-			'id'			=> 'new_website',
-			'type'			=> 'text',
-			'label'			=> "Site web",
-			'value'			=> $page_controler->get_campaign()->campaign_external_website(),
-			'right_icon'	=> 'link'
-		) );
-
-		DashboardUtility::create_field( array(
-			'id'			=> 'new_facebook',
-			'type'			=> 'text',
-			'label'			=> "Page Facebook",
-			'value'			=> $page_controler->get_campaign()->facebook_name(),
-			'prefix'		=> 'www.facebook.com/',
-			'placeholder'	=> 'PageFacebook',
-			'right_icon'	=> 'facebook'
-		) );
-
-		DashboardUtility::create_field(array(
-			'id'			=> 'new_twitter',
-			'type'			=> 'text',
-			'label'			=> "Twitter",
-			'value'			=> $page_controler->get_campaign()->twitter_name(),
-			'prefix'		=> '@',
-			'placeholder'	=> 'CompteTwitter',
-			'right_icon'	=> 'twitter'
-		));
-
-		DashboardUtility::create_save_button("communication_form");?>
-	</form>
 </div>

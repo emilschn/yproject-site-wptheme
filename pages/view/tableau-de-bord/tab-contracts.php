@@ -3,7 +3,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 <h2><?php _e( "Contrats", 'yproject' ); ?></h2>
 
-<div class="db-form v3 full center">
+<div class="db-form v3 full center bg-white">
 	
 	<?php if ( $page_controler->can_access_admin() ): ?>
 	<form action="<?php echo admin_url( 'admin-post.php?action=generate_contract_files'); ?>" method="post" id="contract_files_generate_form" class="field admin-theme">
