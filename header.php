@@ -116,7 +116,7 @@
 				<a href="<?php echo home_url( '/les-projets' ); ?>" class="lines"><?php _e( "Les projets", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/financement' ); ?>" class="lines"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/investissement' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/vision' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/a-propos/vision' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
                                 
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
 				<?php if (is_user_logged_in()): ?>
@@ -133,7 +133,7 @@
 						<a href="<?php echo home_url( '/les-projets' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/financement' ); ?>"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/investissement' ); ?>"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/vision' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/a-propos/vision' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
 					</div>
 					
 					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher un projet", 'yproject'); ?>" />

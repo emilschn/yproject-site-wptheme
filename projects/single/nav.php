@@ -11,11 +11,7 @@ $menu_project_parts = array (
 $page_invest = get_page_by_path('investir');
 $campaign_id_param = '?campaign_id=' . $campaign->ID;
 $invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
-$invest_url_href = "#connexion";
-$btn_invest_classes = 'button red wdg-button-lightbox-open';
-$btn_invest_data_lightbox = 'connexion';
-$btn_invest_text = ($campaign->funding_type() == 'fundingdonation') ? __('Soutenir', 'yproject') : __('Investir', 'yproject');
-
+$invest_url_href = home_url( '/connexion' ) . '?source=project';
 $user_name_str = '';
 
 if (is_user_logged_in()) {
@@ -26,9 +22,6 @@ if (is_user_logged_in()) {
 	}
 	
 	$invest_url_href = $invest_url;
-	
-	$btn_invest_classes = 'button red';
-	$btn_invest_data_lightbox = '';
 }
 ?>
 
@@ -60,7 +53,7 @@ if (is_user_logged_in()) {
 					?>
 
 					<?php if (!is_user_logged_in()): ?>
-						<a href="#connexion" class="button red wdg-button-lightbox-open" data-lightbox="connexion" 
+						<a href="<?php echo home_url( '/connexion' ) . '?source=project'; ?>" class="button red"
 							data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start">
 							<?php _e('Voter', 'yproject'); ?>
 						</a>
@@ -84,8 +77,8 @@ if (is_user_logged_in()) {
 				break;
 				case ATCF_Campaign::$campaign_status_collecte:
 				?>
-				<a href="<?php echo $invest_url_href; ?>" class="<?php echo $btn_invest_classes; ?>" data-lightbox="<?php echo $btn_invest_data_lightbox; ?>" data-redirect="<?php echo $invest_url; ?>">
-					<?php echo $btn_invest_text; ?>
+				<a href="<?php echo $invest_url_href; ?>" class="button red">
+					<?php _e( "Investir", 'yproject' ); ?>
 				</a>
 				<?php break;
 			} ?>

@@ -856,7 +856,7 @@ var WDGFormsFunctions = (function($) {
 		initCheckboxes: function() {
 			if ( $( '.db-form.v3 input[type=checkbox]' ).length > 0 ) {
 				$( '.db-form.v3 input[type=checkbox]' ).each( function(){
-					if ( !$( this ).hasClass( 'rate' ) ) {
+					if ( !$( this ).hasClass( 'rate' ) && !$( this ).parent().hasClass( 'selectit' ) ) {
 						$( this ).parent().click( function( e ) {
 							e.preventDefault();
 							var checkboxItem = $( this ).children( 'input[type=checkbox]' )[0];

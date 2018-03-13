@@ -14,7 +14,7 @@ WDGCampaignSimulator.prototype.createCaTab = function(){
 		var nbYears = parseInt(new_funding_duration);
 		var caTab = new Array;
 		for (var ii=0; ii < nbYears; ii++){
-			var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? ($.trim($("span[data-id=new_estimated_turnover_"+ii+"]").text())) : $("#new_estimated_turnover_"+ii).val();
+			var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? ($.trim($("td[data-id=new_estimated_turnover_"+ii+"]").text())) : $("#new_estimated_turnover_"+ii).val();
 			caTab.push(parseFloat(new_estimated_turnover));
 		}
 		return caTab;
@@ -130,10 +130,10 @@ WDGCampaignSimulator.prototype.calculGain = function(){
 		var gain = totalRoi/need;
 		var gain_format = this.numberFormat(gain);
 		var gain_text = "x"+gain_format+" en "+nb_years+" ans";
-		$("#total-roi-container #gain").html(gain_text);
+		$("#gain").html(gain_text);
 	}
 	else{
-		$("#total-roi-container #gain").html("");
+		$("#gain").html("");
 	}
 }
 
@@ -159,7 +159,7 @@ WDGCampaignSimulator.prototype.initResultCalcul = function(){
 	$("#total-roi").html("0 " + $('#estimated-turnover').data('symbol'));
 	$("#total-funding").html("---");
 	$("#medium-rend").html("--- %").css('color','#2B2C2C');
-	$("#total-roi-container #gain").html("");
+	$("#gain").html("");
 	caTab = this.createCaTab();
 	for (var ii=0; ii < caTab.length; ii++ ) {
 		$("#roi-amount-"+ii).html("0 " + $('#estimated-turnover').data('symbol'));
@@ -183,13 +183,16 @@ WDGCampaignSimulator.prototype.calculAndShowResult = function(){
  * Récupère les données renseignées dans l'onglet "besoin de financement"
  * selon qu'elles sont encore modifiables (input) ou non (span)
  */
-WDGCampaignSimulator.prototype.getDataCalculator = function(){           
+WDGCampaignSimulator.prototype.getDataCalculator = function(){
 	new_minimum_goal = $("#new_minimum_goal").val() == null ? $.trim($("span[data-id=new_minimum_goal] span").text()) : $("#new_minimum_goal").val();
 	need = $("#new_maximum_goal").val() == null ? $.trim($("span[data-id=new_maximum_goal] span").text()) : $("#new_maximum_goal").val();
 	new_roi_percent_estimated = $("#new_roi_percent_estimated").val() == null ? $.trim($("span[data-id=new_roi_percent_estimated] span").text()) : $("#new_roi_percent_estimated").val();
-	new_funding_duration = ($("#new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration] span").text()) : $("#new_funding_duration").val();
-	new_estimated_turnover_0 = $("#new_estimated_turnover_0").val() == null ? $.trim($("span[data-id=new_estimated_turnover_0]").text()) : $("#new_estimated_turnover_0").val();
-	nb_years = $("#new_funding_duration").val() == null ? $.trim($("span[data-id=new_funding_duration]").text()) : $("#new_funding_duration").val();
+	new_funding_duration = ($("#select-new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration] span").text()) : $("#select-new_funding_duration").val();
+	if ( new_funding_duration == 0 ) {
+		new_funding_duration = 5;
+	}
+	nb_years = new_funding_duration;
+	new_estimated_turnover_0 = $("#new_estimated_turnover_0").val() == null ? $.trim($("td[data-id=new_estimated_turnover_0]").text()) : $("#new_estimated_turnover_0").val();
 };
 
 /**
@@ -199,7 +202,7 @@ WDGCampaignSimulator.prototype.getDataCalculator = function(){
 WDGCampaignSimulator.prototype.attachEventOnCa = function(){
 	var self = this;
 	for(var ii = 0; ii < parseInt(new_funding_duration); ii++){
-		var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? $("span[data-id=new_estimated_turnover_"+ii+"]") : $("#new_estimated_turnover_"+ii);
+		var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? $("td[data-id=new_estimated_turnover_"+ii+"]") : $("#new_estimated_turnover_"+ii);
 		$(new_estimated_turnover).bind('click keyup',function(){
 			self.calculAndShowResult();
 		});
@@ -224,7 +227,7 @@ WDGCampaignSimulator.prototype.numberFormat = function(number){
 };
 
 var wdgCampaignSimulator;
-$( function(){
+jQuery(document).ready( function($) {
     wdgCampaignSimulator = new WDGCampaignSimulator();
 } );
 
@@ -274,6 +277,9 @@ WDGCampaignDashboard.prototype.initMenu = function() {
 			self.switchTab( $( this ).data( 'tab' ) );
 		} );
 	} );
+	$( 'a.switch-tab' ).click( function() {
+		self.switchTab( $( this ).attr( 'href' ).substr( 1 ) );
+	} );
 	
 };
 
@@ -287,6 +293,8 @@ WDGCampaignDashboard.prototype.switchTab = function(sType) {
 	
 	$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
 	$( 'div#item-body > div#item-body-' + sType ).show();
+	
+	this.scrollTo( $( '#item-body' ) );
 	
 };
 
@@ -407,7 +415,7 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 				}
 
 				// Enregistrer l'organisation liée au projet dans tab-organization
-				if (($("#orgainfo_form.db-form").data("action")) == "save_project_organization"){
+				if ( $( this ).data( 'action' ) == "save_project_organization" ){
 					//Afficher le bouton d'édition de l'organisation après enregistrement de la liaison
 					self.updateEditOrgaBtn(thisForm);
 					//Mise à jour du formulaire d'édition après enregistrement de la liaison
@@ -418,7 +426,7 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 					$("#orgainfo_form_button").hide();
 					thisForm.find('.save_ok').hide();
 					$("#wdg-lightbox-valid-changeOrga").css('display', 'block');
-					new_project_organization = $("#new_project_organization option:selected").val();
+					new_project_organization = $("#select-new_project_organization option:selected").val();
 				}
 			}
 		}).fail(function() {
@@ -524,20 +532,20 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 
 	var self = this;
 	$("#orgainfo_form_button").hide();//suppression bouton enregistrer
-	if($("#new_project_organization").val() !== ""){
-		var new_project_organization = $("#new_project_organization option:selected").val();
+	if($("#select-new_project_organization").val() !== ""){
+		var new_project_organization = $("#select-new_project_organization option:selected").val();
 		$("#edit-orga-button").show();
 	}
-	$("#new_project_organization").change(function(e){
+	$("#select-new_project_organization").change(function(e){
 		e.preventDefault();
 		$("#orgainfo_form_button").hide();//suppression bouton enregistrer
-		if($("#new_project_organization option:selected").val() !== new_project_organization) {
+		if($("#select-new_project_organization option:selected").val() !== new_project_organization) {
 			$("#edit-orga-button").hide();
 			$("#orgainfo_form_button").show();//apparition bouton enregistrer
 			//Suppression des éléments d'une validation précédente
 			if($(".save_ok").length > 0) $(".save_ok").hide();
 			if($("#orgainfo_form i.fa.validation").length > 0) $("#orgainfo_form i.fa.validation").remove();
-			if($("#new_project_organization").hasClass("validation")) $("#new_project_organization").removeClass("validation");
+			if($("#select-new_project_organization").hasClass("validation")) $("#select-new_project_organization").removeClass("validation");
 			if($("#save-mention").is(":hidden")) $("#save-mention").show();
 			//
 		}else{
@@ -747,7 +755,7 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 					self.updateOrgaSelectInput(feedback);
 
 					//Mise à jour du bouton d'édition
-					var newname = $("#new_project_organization").find('option:selected').text();
+					var newname = $("#select-new_project_organization").find('option:selected').text();
 					var edit_btn = $('#orgainfo_form').find($("#edit-orga-button"));
 					edit_btn.attr("href","#");
 					edit_btn.text("Editer "+newname);
@@ -787,11 +795,11 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 * @param {type} form : formulaire de saisie
 */
 WDGCampaignDashboard.prototype.updateEditOrgaBtn = function(form){
-   var newval = $("#new_project_organization").val();
+   var newval = $("#select-new_project_organization").val();
    if(newval!== ''){
 	   var edit_btn = form.find($("#edit-orga-button")).show();
 
-	   var newname = $("#new_project_organization").find('option:selected').text();
+	   var newname = $("#select-new_project_organization").find('option:selected').text();
 	   edit_btn.attr("href","#");
 	   edit_btn.text("Editer "+newname);
    } else {
@@ -920,9 +928,9 @@ WDGCampaignDashboard.prototype.updateOrgaSelectInput = function(feedback){
 	var orgaName = feedback.organization.name;
 	var orgaWpref = feedback.organization.wpref;
 
-	$("#orgainfo_form #new_project_organization").append(new Option(orgaName, orgaWpref));
-	$("#orgainfo_form #new_project_organization option:selected").removeAttr('selected');
-	$("#orgainfo_form #new_project_organization option[value="+orgaWpref+"]").attr("selected", "selected");
+	$("#orgainfo_form #select-new_project_organization").append(new Option(orgaName, orgaWpref));
+	$("#orgainfo_form #select-new_project_organization option:selected").removeAttr('selected');
+	$("#orgainfo_form #select-new_project_organization option[value="+orgaWpref+"]").attr("selected", "selected");
 };
 
 WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id) {
@@ -1313,10 +1321,11 @@ WDGCampaignDashboard.prototype.manageTeam = function(action, data, campaign_id){
 						}
 						newline ='<li style="display: none;">';
 						newline+=res.firstName+" "+res.lastName+" ("+res.userLink+") ";
-						newline+='<a class="project-manage-team button" data-action="yproject-remove-member" data-user="'+res.id+'"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>';
+						newline+='<a class="project-manage-team button red" data-action="yproject-remove-member" data-user="'+res.id+'"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>';
 						newline+="</li>";
 						$("#team-list").append(newline);
 						$("a[data-user="+res.id+"]").closest("li").slideDown();
+						$( '#team-list-empty' ).hide();
 
 						//Recharge l'UI pour ajouter listener au nouveau button
 						$(".project-manage-team").click(function(){
@@ -1359,15 +1368,18 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 	//Etiquettes de numéros d'années pour le CA prévisionnel
 	$("#new_first_payment").change(function(){
 		var start_year = 1;
-		$("#estimated-turnover li .year").each(function(index){
+		$("#estimated-turnover tr .year").each(function(index){
 			$(this).html((parseInt(start_year)+index));
 		});
 	});
 
 	//Cases pour le CA prévisionnel
-	$("#new_funding_duration").change(function() {
-		var nb_years_li_existing = ($("#estimated-turnover li").length);
-		var new_nb_years = parseInt($("#new_funding_duration").val());
+	$("#select-new_funding_duration").change(function() {
+		var nb_years_li_existing = ($("#estimated-turnover tr").length);
+		var new_nb_years = parseInt($("#select-new_funding_duration").val());
+		if ( new_nb_years == 0 ) {
+			new_nb_years = 5;
+		}
 		"change nb year trigger "+new_nb_years+"(exist : "+nb_years_li_existing+")";
 
 		//Ajoute des boîtes au besoin
@@ -1376,16 +1388,15 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 			if(new_nb_years <= 20){
 				for(var i=0; i<new_nb_years-nb_years_li_existing;i++){
 					newlines = newlines+
-						'<li class="field">' +
-						'<label>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></label>'+
-						'<span class="field-container">'+
-						'&nbsp;<span class="field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
+						'<tr>' +
+						'<td>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></td>'+
+						'<td class="field field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
 						'<i class="right fa" aria-hidden="true"></i>'+
-						'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" /> '+$('#estimated-turnover').data('symbol')+                                   
-						'</span>'+
-						'<span class="like-input-center"><p id="roi-amount-'+(i+nb_years_li_existing)+'">0 '+$('#estimated-turnover').data('symbol')+'</p></span>'+
-						'</span>'+
-						'</li>';
+						'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" />&nbsp;'+$('#estimated-turnover').data('symbol')+                                   
+						'</td>'+
+						'<td id="roi-amount-'+(i+nb_years_li_existing)+'">0 '+$('#estimated-turnover').data('symbol')+
+						'</td>'+
+						'</tr>';
 				}
 			}
 
@@ -1396,26 +1407,26 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 			nb_years_li_existing = new_nb_years;
 		} else {
 			//N'affiche que les boites nécessaires
-			$("#estimated-turnover li").hide();
-			$("#estimated-turnover li").slice(0,new_nb_years).show();
+			$("#estimated-turnover tr").hide();
+			$("#estimated-turnover tr").slice(0,new_nb_years).show();
 		}
 		nb_years_li_existing = Math.max(new_nb_years,nb_years_li_existing);
 		//Calculs de tous les élements et rattachement du keyup/click sur changement de CA
 		wdgCampaignSimulator.calculAndShowResult();                       
 	});
-	$("#new_funding_duration").trigger('change');
-	$("#new_funding_duration").keyup(function(){
-		if($("#new_funding_duration").val()!==""){
-			$("#new_funding_duration").trigger('change');
+	$("#select-new_funding_duration").trigger('change');
+	$("#select-new_funding_duration").keyup(function(){
+		if($("#select-new_funding_duration").val()!==""){
+			$("#select-new_funding_duration").trigger('change');
 		}
 	});
 
 	//Recalcul du rendement si modification de l'objectif max / % royalties / durée financement
-	$("#new_maximum_goal, #new_roi_percent_estimated, #new_funding_duration").bind('keyup click', function(){
+	$("#new_maximum_goal, #new_roi_percent_estimated, #select-new_funding_duration").bind('keyup click', function(){
 		//Rattachement des events sur modif du CA
 		wdgCampaignSimulator.attachEventOnCa();
 
-		if($("#new_maximum_goal").val()!=="" && ($("#new_minimum_goal").val()!=="" && $("#new_funding_duration").val()!==""
+		if($("#new_maximum_goal").val()!=="" && ($("#new_minimum_goal").val()!=="" && $("#select-new_funding_duration").val()!==""
 			&& $("#new_roi_percent_estimated").val()!=="" )){
 			wdgCampaignSimulator.calculAndShowResult();
 		} else{
@@ -1425,6 +1436,6 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 };
 
 var wdgCampaignDashboard;
-$( function(){
+jQuery(document).ready( function($) {
     wdgCampaignDashboard = new WDGCampaignDashboard();
 } );

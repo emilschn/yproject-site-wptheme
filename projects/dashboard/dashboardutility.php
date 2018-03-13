@@ -33,7 +33,7 @@ class DashboardUtility
 		$buffer = FALSE;
 		
         $type = $params[ 'type' ];
-		$override_with_template = array( 'select', 'check', 'text', 'date' );
+		$override_with_template = array( 'select', 'check', 'text', 'text-money', 'text-percent', 'number', 'date' );
 		if ( in_array( $type, $override_with_template ) ) {
 			$editable = ( isset( $params[ 'editable' ] ) ) ? $params[ 'editable' ] : TRUE;
 			$warning = false;
@@ -81,10 +81,17 @@ class DashboardUtility
 					$wdg_current_field[ 'options' ] = array(
 						$params[ 'id' ] => $params[ 'label' ]
 					);
+					$wdg_current_field[ 'values' ] = array(
+						$params[ 'value' ]
+					);
 					break;
 				
 				case 'date':
 					$wdg_current_field[ 'value' ] = $wdg_current_field[ 'value' ]->format( 'd/m/Y' );
+					break;
+				
+				case 'text-percent':
+					$wdg_current_field[ 'unit' ] = $params[ 'unit' ];
 					break;
 			}
 			
@@ -248,8 +255,6 @@ class DashboardUtility
         $text_field .='<label for="update_'.$id.'"';
             if($type=='check'){$text_field.='class="long-label"';}
         $text_field .='>';
-        if($admin_theme){
-            $text_field .= self::get_admin_infobutton();}
         $text_field .= translate($label,'yproject')
             .DashboardUtility::get_infobutton($infobubble);
         if($warning && $editable){

@@ -479,12 +479,10 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
     font-size: 13pt;
     letter-spacing: 0.12em;
     color: #FFFFFF;
-    background: repeating-linear-gradient(
-    -45deg,
-    #00879B,
-    #00879B 5px,
-    #E1E3E2 5px,
-    #00879B 6.3px);
+    background: #00879B;
+}
+.progress-bar.minimum-as-step .current-amount {
+	background: linear-gradient( 45deg, #59cee0, #00879B );
 }
 .progress-bar .progress-percent { 
     display: -webkit-flex;
@@ -516,7 +514,24 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
         #F5F5F5 1px,
         #E1E3E2 8px);
 }
-
+.progress-bar.minimum-as-step .progress-bar-separator {
+	position: absolute;
+	z-index: 1;
+	display: inline-block;
+	height: 40px;
+	border-left: 2px solid #FFFFFF;
+}
+.progress-bar.minimum-as-step .progress-bar-separator img {
+	position: absolute;
+	left: -11px;
+	top: 10px;
+}
+.progress-bar.minimum-as-step .bg-separated {
+	position: absolute;
+	display: inline-block;
+	height: 40px;
+	background: #00879B;
+}
 
 /*******************************************************************************
 * LIGHTBOX
@@ -876,11 +891,12 @@ body input[type=text], body input[type=email], body select {
 }
 .db-form.v3 .field-container {
 	display: block;
+	white-space: normal;
 }
 .db-form.v3 .field-container.field-type-check {
 	display: inline-block;
 }
-.db-form.v3 .field-container input[type=text], .db-form.v3 .field-container input[type=password], .db-form.v3 .field-container input[type=email] {
+.db-form.v3 .field-container input[type=text], .db-form.v3 .field-container input[type=password], .db-form.v3 .field-container input[type=email], .db-form.v3 .field-container input[type=file] {
 	width: 260px;
 	height: 30px;
 	border: none;
@@ -888,7 +904,7 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3.bg-white .field-container input {
 	background: #E1E3E2;
 }
-.db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=email] {
+.db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=email], .db-form.v3.full .field-container input[type=file] {
 	width: 96%;
     width: -webkit-calc( 100% - 16px );
     width: -moz-calc( 100% - 16px );
@@ -928,6 +944,9 @@ body input[type=text], body input[type=email], body select {
 	font-size: 12pt;
 	font-family: Trebuchet MS, sans-serif;
 }
+.db-form.v3 .field-container .field-value a {
+	max-width: none;
+}
 .db-form.v3 a.button {
 	display: inline-block;
 	padding: 0px;
@@ -949,7 +968,7 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3 .button.transparent.half {
 	width: calc( 45% - 4px );
 }
-.db-form.v3 #insert-media-button, .db-form.v3 a.button.su-generator-button {
+.db-form.v3 .button#insert-media-button, .db-form.v3 .button.insert-media, .db-form.v3 a.button.su-generator-button, .db-form.v3 .mce-container button {
 	width: auto;
 	height: auto;
 	line-height: normal;
@@ -1029,10 +1048,10 @@ body input[type=text], body input[type=email], body select {
 }
 
 
-.db-form.v3 span.field-money {
-	display: inline-block;
-	position: relative;
-	left: -30px;
+.db-form.v3 span.field-money, .db-form.v3 span.field-percent {
+	position: absolute;
+	top: 0px;
+	right: 15px;
 }
 .db-form.v3 span.rate-description {
 	display: inline-block;
