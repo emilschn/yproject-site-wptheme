@@ -277,6 +277,9 @@ WDGCampaignDashboard.prototype.initMenu = function() {
 			self.switchTab( $( this ).data( 'tab' ) );
 		} );
 	} );
+	$( 'a.switch-tab' ).click( function() {
+		self.switchTab( $( this ).attr( 'href' ).substr( 1 ) );
+	} );
 	
 };
 
@@ -290,6 +293,8 @@ WDGCampaignDashboard.prototype.switchTab = function(sType) {
 	
 	$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
 	$( 'div#item-body > div#item-body-' + sType ).show();
+	
+	this.scrollTo( $( '#item-body' ) );
 	
 };
 

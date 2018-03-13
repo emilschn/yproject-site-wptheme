@@ -252,8 +252,6 @@ class DashboardUtility
         $text_field .='<label for="update_'.$id.'"';
             if($type=='check'){$text_field.='class="long-label"';}
         $text_field .='>';
-        if($admin_theme){
-            $text_field .= self::get_admin_infobutton();}
         $text_field .= translate($label,'yproject')
             .DashboardUtility::get_infobutton($infobubble);
         if($warning && $editable){

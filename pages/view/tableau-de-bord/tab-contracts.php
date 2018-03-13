@@ -3,7 +3,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 <h2><?php _e( "Contrats", 'yproject' ); ?></h2>
 
-<div class="db-form v3 center">
+<div class="db-form v3 full center">
 	
 	<?php if ( $page_controler->can_access_admin() ): ?>
 	<form action="<?php echo admin_url( 'admin-post.php?action=generate_contract_files'); ?>" method="post" id="contract_files_generate_form" class="field admin-theme">
@@ -11,7 +11,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<br /><br />
 		<div class="align-center">
 			<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
-			<button class="button blue-pale"><?php _e( "G&eacute;n&eacute;rer le contrat vierge", 'yproject' ); ?></button>
+			<button class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer le contrat vierge", 'yproject' ); ?></button>
 		</div>
 	</form>
 
@@ -45,7 +45,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"type"			=> "editor",
 			"label"			=> __( "Description des revenus", 'yproject' ),
 			"value"			=> $page_controler->get_campaign()->contract_earnings_description(),
-			'admin_theme'	=> true,
+			'admin_theme'	=> $page_controler->can_access_admin(),
 			"editable"		=> $page_controler->can_access_admin()
 		));
 
@@ -54,7 +54,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"type"			=> "editor",
 			"label"			=> __( "Informations simples", 'yproject' ),
 			"value"			=> $page_controler->get_campaign()->contract_simple_info(),
-			'admin_theme'	=> true,
+			'admin_theme'	=> $page_controler->can_access_admin(),
 			"editable"		=> $page_controler->can_access_admin()
 		));
 
@@ -63,7 +63,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"type"			=> "editor",
 			"label"			=> __( "Informations d&eacute;taill&eacute;es", 'yproject' ),
 			"value"			=> $page_controler->get_campaign()->contract_detailed_info(),
-			'admin_theme'	=> true,
+			'admin_theme'	=> $page_controler->can_access_admin(),
 			"editable"		=> $page_controler->can_access_admin()
 		));
 
@@ -95,8 +95,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"admin_theme"	=> $page_controler->can_access_admin(),
 			"editable"		=> $page_controler->can_access_admin()
 		));
-
-
 		?>
 		<?php if ( $page_controler->can_access_admin() ): ?>
 		<div class="field admin-theme">
@@ -149,10 +147,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				"admin_theme"	=> true
 			));
 
+			DashboardUtility::create_save_button( 'projectinfo_form', TRUE, "Enregistrer", "Enregistrement", TRUE );
 		}
-
-
-		DashboardUtility::create_save_button("projectinfo_form");
 		?>
 
 		<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
@@ -170,7 +166,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		) );
 		?>
 
-		<?php DashboardUtility::create_save_button("contract_modification_form"); ?>
+		<?php DashboardUtility::create_save_button( 'contract_modification_form', TRUE, "Enregistrer", "Enregistrement", TRUE ); ?>
 	</form>
 	<?php endif; ?>
 
@@ -218,8 +214,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<li>
 						<?php echo $contract_model->model_name; ?> (<?php echo $status_to_text[ $contract_model->status ]; ?>)
 						<?php if ( $contract_model->status != 'sent' ): ?>
-							<a href="<?php echo admin_url( 'admin-post.php?action=send_contract_model&model=' . $contract_model->id ); ?>" class="button blue alert-confirm" data-alertconfirm="<?php _e( "Ceci enverra le contrat &agrave; chacun des investisseurs", 'yproject' ); ?>"><?php _e( "Faire signer", 'yproject' ); ?></a>
-							<button type="button" class="button blue edit-contract-model" data-modelid="<?php echo $contract_model->id; ?>" data-modelname="<?php echo urlencode( $contract_model->model_name ); ?>" data-modelcontent="<?php echo urlencode( $contract_model->model_content ); ?>"><?php _e( "Editer", 'yproject' ); ?></button>
+							<a href="<?php echo admin_url( 'admin-post.php?action=send_contract_model&model=' . $contract_model->id ); ?>" class="button admin-theme alert-confirm" data-alertconfirm="<?php _e( "Ceci enverra le contrat &agrave; chacun des investisseurs", 'yproject' ); ?>"><?php _e( "Faire signer", 'yproject' ); ?></a>
+							<button type="button" class="button admin-theme edit-contract-model" data-modelid="<?php echo $contract_model->id; ?>" data-modelname="<?php echo urlencode( $contract_model->model_name ); ?>" data-modelcontent="<?php echo urlencode( $contract_model->model_content ); ?>"><?php _e( "Editer", 'yproject' ); ?></button>
 						<?php endif; ?>
 					</li>
 				<?php endforeach; ?>
@@ -230,7 +226,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<?php endif; ?>
 
 			<div class="align-center">
-				<button id="button-show-form-add-contract-model" type="button" class="button blue"><?php _e( "Ajouter", 'yproject' ); ?></button>
+				<button id="button-show-form-add-contract-model" type="button" class="button admin-theme"><?php _e( "Ajouter", 'yproject' ); ?></button>
 			</div>
 
 			<form id="form-add-contract-model" method="POST" action="<?php echo admin_url( 'admin-post.php?action=add_contract_model' ); ?>" class="db-form v3 full hidden">
@@ -263,7 +259,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				</div>
 
 				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>">
-				<button type="submit" class="button red"><?php _e( "Ajouter", 'yproject' ); ?></button>
+				<button type="submit" class="button admin-theme"><?php _e( "Ajouter", 'yproject' ); ?></button>
 
 			</form>
 
@@ -297,7 +293,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				</div>
 
 				<input type="hidden" name="contract_edit_model_id" value="">
-				<button type="submit" class="button red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+				<button type="submit" class="button admin-theme"><?php _e( "Enregistrer", 'yproject' ); ?></button>
 
 			</form>
 		</div>
@@ -305,7 +301,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 
 
-
+	<br><br><br>
 	<?php
 	$mandate_conditions = $page_controler->get_campaign()->mandate_conditions();
 
@@ -318,7 +314,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		$last_mandate_id = $last_mandate[ "ID" ];
 	}
 	?>
-
 	<h2><?php _e('Autorisation de pr&eacute;l&egrave;vement', 'yproject'); ?></h2>
 
 	<?php if ( $last_mandate_status != 5 && $last_mandate_status != 6 ): ?>
@@ -349,7 +344,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					"visible"		=> $page_controler->can_access_admin(),
 				)); ?>
 
-				<?php DashboardUtility::create_save_button( "forcemandate-form", $page_controler->can_access_admin() ); ?>
+				<?php DashboardUtility::create_save_button( "forcemandate-form", $page_controler->can_access_admin(), "Enregistrer", "Enregistrement", TRUE ); ?>
 			</form>
 
 		<?php elseif ( !empty( $mandate_conditions ) ) : ?>
@@ -392,7 +387,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			if ( !$page_controler->get_campaign_organization()->add_lemonway_mandate() ) {
 				$page_edit_orga = get_page_by_path('editer-une-organisation');
 				echo LemonwayLib::get_last_error_message(); ?>
-				<a class="button red" href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$page_controler->get_campaign_organization()->get_wpref(); ?>"><?php _e('Editer', 'yproject'); ?></a><br /><br />
+				<a class="button red switch-tab" href="#organization"><?php _e('Editer', 'yproject'); ?></a><br /><br />
 				<button class="button disabled"><?php _e( "Signer l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
 				<?php
 			} else {
