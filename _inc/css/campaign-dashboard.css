@@ -288,3 +288,17 @@ div#container div#content main #item-body-contacts #direct-mail {
 	height: auto;
 	line-height: normal;
 }
+
+/*******************************************************************************
+* FINANCE
+*******************************************************************************/
+#item-body-finance table thead {
+	font-weight: bold;
+}
+#item-body-finance table tbody tr td:nth-child(1), #item-body-finance table tfoot tr td:nth-child(1) {
+	font-weight: bold;
+	text-align: left;
+}
+#item-body-finance table tbody tr td:nth-child(2) {
+	min-width: 180px;
+}

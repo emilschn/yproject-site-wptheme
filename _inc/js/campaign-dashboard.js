@@ -14,7 +14,7 @@ WDGCampaignSimulator.prototype.createCaTab = function(){
 		var nbYears = parseInt(new_funding_duration);
 		var caTab = new Array;
 		for (var ii=0; ii < nbYears; ii++){
-			var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? ($.trim($("span[data-id=new_estimated_turnover_"+ii+"]").text())) : $("#new_estimated_turnover_"+ii).val();
+			var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? ($.trim($("td[data-id=new_estimated_turnover_"+ii+"]").text())) : $("#new_estimated_turnover_"+ii).val();
 			caTab.push(parseFloat(new_estimated_turnover));
 		}
 		return caTab;
@@ -130,10 +130,10 @@ WDGCampaignSimulator.prototype.calculGain = function(){
 		var gain = totalRoi/need;
 		var gain_format = this.numberFormat(gain);
 		var gain_text = "x"+gain_format+" en "+nb_years+" ans";
-		$("#total-roi-container #gain").html(gain_text);
+		$("#gain").html(gain_text);
 	}
 	else{
-		$("#total-roi-container #gain").html("");
+		$("#gain").html("");
 	}
 }
 
@@ -159,7 +159,7 @@ WDGCampaignSimulator.prototype.initResultCalcul = function(){
 	$("#total-roi").html("0 " + $('#estimated-turnover').data('symbol'));
 	$("#total-funding").html("---");
 	$("#medium-rend").html("--- %").css('color','#2B2C2C');
-	$("#total-roi-container #gain").html("");
+	$("#gain").html("");
 	caTab = this.createCaTab();
 	for (var ii=0; ii < caTab.length; ii++ ) {
 		$("#roi-amount-"+ii).html("0 " + $('#estimated-turnover').data('symbol'));
@@ -183,13 +183,16 @@ WDGCampaignSimulator.prototype.calculAndShowResult = function(){
  * Récupère les données renseignées dans l'onglet "besoin de financement"
  * selon qu'elles sont encore modifiables (input) ou non (span)
  */
-WDGCampaignSimulator.prototype.getDataCalculator = function(){           
+WDGCampaignSimulator.prototype.getDataCalculator = function(){
 	new_minimum_goal = $("#new_minimum_goal").val() == null ? $.trim($("span[data-id=new_minimum_goal] span").text()) : $("#new_minimum_goal").val();
 	need = $("#new_maximum_goal").val() == null ? $.trim($("span[data-id=new_maximum_goal] span").text()) : $("#new_maximum_goal").val();
 	new_roi_percent_estimated = $("#new_roi_percent_estimated").val() == null ? $.trim($("span[data-id=new_roi_percent_estimated] span").text()) : $("#new_roi_percent_estimated").val();
 	new_funding_duration = ($("#select-new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration] span").text()) : $("#select-new_funding_duration").val();
-	new_estimated_turnover_0 = $("#new_estimated_turnover_0").val() == null ? $.trim($("span[data-id=new_estimated_turnover_0]").text()) : $("#new_estimated_turnover_0").val();
-	nb_years = $("#select-new_funding_duration").val() == null ? $.trim($("span[data-id=new_funding_duration]").text()) : $("#select-new_funding_duration").val();
+	if ( new_funding_duration == 0 ) {
+		new_funding_duration = 5;
+	}
+	nb_years = new_funding_duration;
+	new_estimated_turnover_0 = $("#new_estimated_turnover_0").val() == null ? $.trim($("td[data-id=new_estimated_turnover_0]").text()) : $("#new_estimated_turnover_0").val();
 };
 
 /**
@@ -199,7 +202,7 @@ WDGCampaignSimulator.prototype.getDataCalculator = function(){
 WDGCampaignSimulator.prototype.attachEventOnCa = function(){
 	var self = this;
 	for(var ii = 0; ii < parseInt(new_funding_duration); ii++){
-		var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? $("span[data-id=new_estimated_turnover_"+ii+"]") : $("#new_estimated_turnover_"+ii);
+		var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? $("td[data-id=new_estimated_turnover_"+ii+"]") : $("#new_estimated_turnover_"+ii);
 		$(new_estimated_turnover).bind('click keyup',function(){
 			self.calculAndShowResult();
 		});
@@ -224,7 +227,7 @@ WDGCampaignSimulator.prototype.numberFormat = function(number){
 };
 
 var wdgCampaignSimulator;
-$( function(){
+jQuery(document).ready( function($) {
     wdgCampaignSimulator = new WDGCampaignSimulator();
 } );
 
@@ -1360,15 +1363,18 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 	//Etiquettes de numéros d'années pour le CA prévisionnel
 	$("#new_first_payment").change(function(){
 		var start_year = 1;
-		$("#estimated-turnover li .year").each(function(index){
+		$("#estimated-turnover tr .year").each(function(index){
 			$(this).html((parseInt(start_year)+index));
 		});
 	});
 
 	//Cases pour le CA prévisionnel
 	$("#select-new_funding_duration").change(function() {
-		var nb_years_li_existing = ($("#estimated-turnover li").length);
+		var nb_years_li_existing = ($("#estimated-turnover tr").length);
 		var new_nb_years = parseInt($("#select-new_funding_duration").val());
+		if ( new_nb_years == 0 ) {
+			new_nb_years = 5;
+		}
 		"change nb year trigger "+new_nb_years+"(exist : "+nb_years_li_existing+")";
 
 		//Ajoute des boîtes au besoin
@@ -1377,16 +1383,15 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 			if(new_nb_years <= 20){
 				for(var i=0; i<new_nb_years-nb_years_li_existing;i++){
 					newlines = newlines+
-						'<li class="field">' +
-						'<label>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></label>'+
-						'<span class="field-container">'+
-						'&nbsp;<span class="field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
+						'<tr>' +
+						'<td>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></td>'+
+						'<td class="field field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
 						'<i class="right fa" aria-hidden="true"></i>'+
-						'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" /> '+$('#estimated-turnover').data('symbol')+                                   
-						'</span>'+
-						'<span class="like-input-center"><p id="roi-amount-'+(i+nb_years_li_existing)+'">0 '+$('#estimated-turnover').data('symbol')+'</p></span>'+
-						'</span>'+
-						'</li>';
+						'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" />&nbsp;'+$('#estimated-turnover').data('symbol')+                                   
+						'</td>'+
+						'<td id="roi-amount-'+(i+nb_years_li_existing)+'">0 '+$('#estimated-turnover').data('symbol')+
+						'</td>'+
+						'</tr>';
 				}
 			}
 
@@ -1397,8 +1402,8 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 			nb_years_li_existing = new_nb_years;
 		} else {
 			//N'affiche que les boites nécessaires
-			$("#estimated-turnover li").hide();
-			$("#estimated-turnover li").slice(0,new_nb_years).show();
+			$("#estimated-turnover tr").hide();
+			$("#estimated-turnover tr").slice(0,new_nb_years).show();
 		}
 		nb_years_li_existing = Math.max(new_nb_years,nb_years_li_existing);
 		//Calculs de tous les élements et rattachement du keyup/click sur changement de CA
@@ -1426,6 +1431,6 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 };
 
 var wdgCampaignDashboard;
-$( function(){
+jQuery(document).ready( function($) {
     wdgCampaignDashboard = new WDGCampaignDashboard();
 } );

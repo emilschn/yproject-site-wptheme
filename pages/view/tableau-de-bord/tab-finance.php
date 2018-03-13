@@ -212,59 +212,70 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 		?>
 
-		<div class="field">
-			<label class="column-title" style="margin-left: 270px">Chiffre d'affaires pr&eacute;visionnel</label>
-			<label class="column-title" style="margin-left: 10px; width: 260px">
-				<?php echo __('Montant des Royalties reversées', 'yproject')."&nbsp;".__("pour","yproject")?>
-				<span id="total-funding">---</span>&nbsp;&euro;
-				<?php echo "&nbsp;".__("investis"); ?>
-			</label>
-		</div>
-		<?php $is_euro = ( $page_controler->get_campaign()->estimated_turnover_unit() == 'euro' ); ?>
-		<ul id="estimated-turnover" data-symbol="<?php if ( $is_euro ): ?>€<?php else: ?>%<?php endif; ?>">
+		<table>
+			
+			<thead>
+				<tr>
+					<td></td>
+					<td><?php _e( "CA pr&eacute;visionnel", 'yproject' ); ?></td>
+					<td>
+						<?php _e( "Montant des Royalties reversées pour", 'yproject' ); ?>
+						<span id="total-funding">---</span>&nbsp;&euro;
+						<?php _e( "investis", 'yproject' ); ?>
+					</td>
+				</tr>
+			</thead>
+
 			<?php
 			$estimated_turnover = $page_controler->get_campaign()->estimated_turnover();
-			if(!empty($estimated_turnover)){
-				$i=0;
-				foreach (($page_controler->get_campaign()->estimated_turnover()) as $year => $turnover) :?>
-					<li class="field">
-						<label>Année <span class="year"><?php echo ($i+1); ?></span></label>                           
-						<span class="field-container" <?php if ( !$page_controler->can_access_admin() && !$page_controler->get_campaign()->is_preparing() ): ?> style="padding-left: 80px;" <?php endif; ?>>
-							<span class="field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>">
+			$is_euro = ( $page_controler->get_campaign()->estimated_turnover_unit() == 'euro' );
+			$data_symbol = ( $is_euro ) ? '€' : '%';
+			?>
+			<tbody id="estimated-turnover" data-symbol="<?php echo $data_symbol; ?>">
+				<?php if ( !empty( $estimated_turnover ) ): ?>
+					<?php $i = 0; ?>
+					<?php foreach ( $estimated_turnover as $year => $turnover ): ?>
+						<tr>
+							<td>
+								Année <span class="year"><?php echo ( $i+1 ); ?></span>
+							</td>
+							<td class="field field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>" data-type="number">
 								<?php if ( $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing() ): ?>
-								<i class="right fa <?php if ($is_euro): ?>fa-eur<?php endif; ?>" aria-hidden="true"></i>
-								<input type="number" value="<?php echo $turnover?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />
-									<?php if ( !$is_euro ): ?>%<?php endif; ?>
+									<input type="number" value="<?php echo $turnover; ?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />&nbsp;<?php echo $data_symbol; ?>
 								<?php else: ?>
-								<?php echo $turnover; ?>
+									<?php echo $turnover; ?>
+									<span style="padding-right: 70px;"><?php echo $data_symbol; ?></span>
 								<?php endif; ?>
-							</span>
-							<?php if ( !$page_controler->can_access_admin() && !$page_controler->get_campaign()->is_preparing() ): ?>
-								<span style="padding-right: 70px;">&euro;</span>
-							<?php endif; ?>
-							<!--montant des royalties reversées par année-->
-							<span class="like-input-center">
-								<p id="roi-amount-<?php echo $i;?>">0 €</p>
-								<!--<input class="input-center" type="text" id="new-estimated-roi-<?php echo $i;?>" disabled="disabled"/>-->
-							</span>                                     
-						</span>
-					</li>
-				<?php
-					$i++;
-				endforeach;
-			}
-			 ?>
-		</ul>
-		<!-- Total de royalties reversées -->
-		<div id="total-roi-container" class="field">
-			<label><?php _e("TOTAL", "yproject")?></label><span class="like-input-center"><p id="total-roi">0&nbsp;€</p></span>
-			<label><?php _e("Retour sur investissement", "yproject")?></label><span class="like-input-center"><p id="gain"></p></span>
-		</div>
-		<!-- Rendement annuel moyen pour les investisseurs -->
-		<div id="annual-gain-container" class="field">
-			<label><?php _e("Pour vos investisseurs", "yproject")?>&nbsp;:</label>
-			<label><?php _e("Rendement final", "yproject") ?></label><span class="like-input-center"><p id="medium-rend">---&nbsp;%</p></span>
-		</div>
+							</td>
+							<td id="roi-amount-<?php echo $i;?>" class="like-input-center">
+								0 €
+							</td>
+						</tr>
+						<?php $i++; ?>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</tbody>
+			
+			<tfoot>
+				<tr>
+					<td colspan="2"><?php _e( "TOTAL", 'yproject' ); ?></td>
+					<td id="total-roi">0&nbsp;€</td>
+				</tr>
+				<tr>
+					<td colspan="2"><?php _e( "Retour sur investissement", 'yproject' ); ?></td>
+					<td id="gain">0&nbsp;€</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<?php _e( "Pour vos investisseurs :", 'yproject' ); ?><br>
+						<?php _e( "Rendement final", 'yproject' ); ?>
+					</td>
+					<td id="medium-rend">---&nbsp;%</td>
+				</tr>
+			</tfoot>
+			
+		</table>
+		
 		<?php if ( $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing() ): ?>
 		<?php DashboardUtility::create_save_button("projectfunding_form"); ?>
 		<?php endif; ?>
