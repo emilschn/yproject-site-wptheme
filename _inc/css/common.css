@@ -952,8 +952,7 @@ footer > .footer-container > div > div.aligncenter {
 * HOME - STATS
 *******************************************************************************/
 body.home section.project-stats {
-	margin-top: -1px;
-	padding-bottom: 40px;
+	padding: 40px 0px;
 	color: #FFFFFF;
 	background: #333333;
 }
