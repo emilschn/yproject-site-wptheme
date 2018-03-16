@@ -331,7 +331,7 @@ function print_informations_page()
                     "id"=>"new_gender",
                     "type"=>"select",
                     "label"=>"Vous &ecirc;tes",
-                    "value"=>$WDGAuthor->wp_user->get('user_gender'),
+                    "value"=>$WDGAuthor->get_gender(),
                     "editable"=>$is_author,
                     "options_id"=>array("female", "male"),
                     "options_names"=>array("une femme", "un homme")
@@ -341,7 +341,7 @@ function print_informations_page()
                     "id"=>"new_firstname",
                     "type"=>"text",
                     "label"=>"Pr&eacute;nom",
-                    "value"=>$WDGAuthor->wp_user->user_firstname,
+                    "value"=>$WDGAuthor->get_firstname(),
                     "editable"=>$is_author,
                     "left_icon"=>"user",
                 ));
@@ -350,19 +350,12 @@ function print_informations_page()
                     "id"=>"new_lastname",
                     "type"=>"text",
                     "label"=>"Nom",
-                    "value"=>$WDGAuthor->wp_user->user_lastname,
+                    "value"=>$WDGAuthor->get_lastname(),
                     "editable"=>$is_author,
                     "left_icon"=>"user",
                 ));
 
-                $bd = new DateTime();
-				$user_birthday_year = $WDGAuthor->wp_user->get('user_birthday_year');
-                if(!empty($user_birthday_year)){
-                    $bd->setDate(intval($WDGAuthor->wp_user->get('user_birthday_year')),
-                        intval($WDGAuthor->wp_user->get('user_birthday_month')),
-                        intval($WDGAuthor->wp_user->get('user_birthday_day')));
-                }
-
+                $bd = new DateTime( $WDGAuthor->get_birthday_date() );
                 DashboardUtility::create_field(array(
                     "id"=>"new_birthday",
                     "type"=>"date",
@@ -375,7 +368,7 @@ function print_informations_page()
                     "id"=>"new_birthplace",
                     "type"=>"text",
                     "label"=>"Ville de naissance",
-                    "value"=>$WDGAuthor->wp_user->get('user_birthplace'),
+                    "value"=>$WDGAuthor->get_birthplace(),
                     "editable"=>$is_author
                 ));
 
@@ -383,7 +376,7 @@ function print_informations_page()
                     "id"=>"new_nationality",
                     "type"=>"select",
                     "label"=>"Nationalit&eacute;",
-                    "value"=>$WDGAuthor->wp_user->get('user_nationality'),
+                    "value"=>$WDGAuthor->get_nationality(),
                     "editable"=>$is_author,
                     "options_id"=>array_keys($country_list),
                     "options_names"=>array_values($country_list)
@@ -393,7 +386,7 @@ function print_informations_page()
                     "id"=>"new_mobile_phone",
                     "type"=>"text",
                     "label"=>"T&eacute;l&eacute;phone mobile",
-                    "value"=>$WDGAuthor->wp_user->get('user_mobile_phone'),
+                    "value"=>$WDGAuthor->get_phone_number(),
                     "infobubble"=>"Ce num&eacute;ro sera celui utilis&eacute; pour vous contacter &agrave; propos de votre projet",
                     "editable"=>$is_author,
                     "left_icon"=>"mobile-phone"
@@ -403,7 +396,7 @@ function print_informations_page()
                     "id"=>"new_mail",
                     "type"=>"text",
                     "label"=>"Adresse &eacute;lectronique",
-                    "value"=>$WDGAuthor->wp_user->get('user_email'),
+                    "value"=>$WDGAuthor->get_email(),
                     "infobubble"=>"Pour modifier votre adresse e-mail de contact, rendez-vous dans vos param&egrave;tres de compte",
                     "left_icon"=>"at"
                 ));
@@ -412,7 +405,7 @@ function print_informations_page()
                     "id"=>"new_address",
                     "type"=>"text",
                     "label"=>"Adresse",
-                    "value"=>$WDGAuthor->wp_user->get('user_address'),
+                    "value"=>$WDGAuthor->get_address(),
                     "editable"=>$is_author
                 ));
 
@@ -420,7 +413,7 @@ function print_informations_page()
                     "id"=>"new_postal_code",
                     "type"=>"text",
                     "label"=>"Code postal",
-                    "value"=>$WDGAuthor->wp_user->get('user_postal_code'),
+                    "value"=>$WDGAuthor->get_postal_code(),
                     "editable"=>$is_author
                 ));
 
@@ -428,7 +421,7 @@ function print_informations_page()
                     "id"=>"new_city",
                     "type"=>"text",
                     "label"=>"Ville",
-                    "value"=>$WDGAuthor->wp_user->get('user_city'),
+                    "value"=>$WDGAuthor->get_city(),
                     "editable"=>$is_author
                 ));
 
@@ -436,7 +429,7 @@ function print_informations_page()
                     "id"=>"new_country",
                     "type"=>"text",
                     "label"=>"Pays",
-                    "value"=>$WDGAuthor->wp_user->get('user_country'),
+                    "value"=>$WDGAuthor->get_country(),
                     "editable"=>$is_author
                 ));?>
                 <br/>
