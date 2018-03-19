@@ -37,13 +37,16 @@ body.template-tableau-de-bord div#container div#content nav ul.nav-menu li {
 }
 body.template-tableau-de-bord div#container div#content nav ul.nav-menu li a {
 	display: inline-block;
-	width: 100%;
+	width: calc( 100% - 8px );
+	padding-left: 8px;
+	font-size: 12px;
 	text-transform: uppercase;
 	font-weight: normal;
 	color: #000000;
 }
 body.template-tableau-de-bord div#container div#content nav ul.nav-menu li.selected {
 	background: #FFFFFF;
+	border-left: 4px solid #D3EAE9;
 }
 body.template-tableau-de-bord div#container div#content main {
 	display: table-cell;
@@ -245,13 +248,16 @@ div#item-body-home .data-blocks .stat-little-number-top {
 /*******************************************************************************
 * STATS
 *******************************************************************************/
-div#container div#content main #item-body-stats h2 {
+div#container div#content main #item-body-stats h2.expandator {
 	text-transform: none;
 	text-align: left;
 }
 div#container div#content main #item-body-stats .expandable h2 {
 	font-size: 26px;
 	text-transform: none;
+	text-align: left;
+}
+div#container div#content main #item-body-stats center {
 	text-align: left;
 }
 
@@ -278,6 +284,17 @@ div#container div#content main #item-body-contacts #direct-mail {
 }
 
 /*******************************************************************************
+* AUTHOR
+*******************************************************************************/
+#item-body-author form {
+	text-align: left;
+}
+
+#item-body-author form br {
+	display: none;
+}
+
+/*******************************************************************************
 * TEAM
 *******************************************************************************/
 #item-body-team ul#team-list {
@@ -292,6 +309,10 @@ div#container div#content main #item-body-contacts #direct-mail {
 /*******************************************************************************
 * FINANCE
 *******************************************************************************/
+#item-body-finance form br {
+	display: none;
+}
+
 #item-body-finance table thead {
 	font-weight: bold;
 }
@@ -304,8 +325,19 @@ div#container div#content main #item-body-contacts #direct-mail {
 }
 
 /*******************************************************************************
+* CONTRACTS
+*******************************************************************************/
+#item-body-contracts form br {
+	display: none;
+}
+
+/*******************************************************************************
 * CAMPAIGN
 *******************************************************************************/
+#item-body-campaign form br {
+	display: none;
+}
+
 #item-body-campaign .field span.field-value > li > label {
 	display: none;
 }

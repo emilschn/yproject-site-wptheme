@@ -37,9 +37,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
         <h3><?php _e( "Ajouter un utilisateur", 'yproject' ); ?></h3>
 		<div class="field">
 			<label for="new_team_member_string"><?php _e( "E-mail d&apos;un utilisateur", 'yproject' ); ?></label>
-			<div class="field-container align-left">
+			<div class="field-description">
+				<?php _e( "Les membres de l'&eacute;quipe peuvent acc&eacute;der au tableau de bord, modifier les param&egrave;tres et la page de projet.", 'yproject' ); ?>
+			</div>
+			<div class="field-container">
 				<span class="field-value">
-					<?php _e( "Les membres de l'&eacute;quipe peuvent acc&eacute;der au tableau de bord, modifier les param&egrave;tres et la page de projet.", 'yproject' ); ?>
 					<input type="text" id="new_team_member_string">
 				</span>
 			</div>

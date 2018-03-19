@@ -873,6 +873,7 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3 .field div.field-description {
 	font-size: 14px;
 	text-align: justify;
+	padding-bottom: 8px;
 }
 .db-form.v3 .field span.field-error {
 	display: none;

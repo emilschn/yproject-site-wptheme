@@ -3,6 +3,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 global $organization_obj;
 ?>
 
+<h2><?php _e( "Organisation", 'yproject' ); ?></h2>
 <form id="orgainfo_form" class="ajax-db-form db-form v3 full center bg-white" data-action="save_project_organization">
 	<ul class="errors">
 

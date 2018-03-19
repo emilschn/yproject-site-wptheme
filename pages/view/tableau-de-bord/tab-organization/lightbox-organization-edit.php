@@ -471,36 +471,6 @@ $organization_obj->submit_transfer_wallet_lemonway();
 	<?php endif; ?>
 
 
-
-	<?php
-	/**
-	 * Porte-monnaie
-	 */
-	?>
-	<h2 class="underlined"><?php _e( 'Porte-monnaie', 'yproject' ); ?></h2>
-	<?php // Porte-monnaie LW ?>
-	<?php $lemonway_balance = $organization_obj->get_lemonway_balance(); ?>
-	Vous disposez de <?php echo $lemonway_balance; ?>&euro; dans votre porte-monnaie.<br /><br />
-
-	<?php if ( $WDGUser_current->is_admin() ): ?>
-
-		<?php if ( $lemonway_balance > 0 ): ?>
-
-			<div style="background: #DDD">
-				Ce formulaire n'est accessible qu'en administration :<br />
-				<form action="" method="POST">
-					<input type="hidden" name="submit_transfer_wallet_lemonway" value="1" />
-					Somme à verser au porteur de projet : <input type="text" name="transfer_amount" value="0" /><br />
-					Somme à prendre en commission : <input type="text" name="transfer_commission" value="0" /><br />
-					<input type="submit" value="Verser" />
-				</form>
-			</div>
-
-		<?php endif; ?>
-
-	<?php endif; ?>
-
-
 	<?php
 	/**
 	 * Transferts d'argent
