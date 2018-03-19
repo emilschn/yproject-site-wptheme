@@ -51,19 +51,19 @@ Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.
 		<br>
 		<form action="" method="POST" enctype="multipart/form-data">
 			<label for="holdername" class="large-label"><?php _e( "Nom du propri&eacute;taire du compte :", 'yproject' ); ?></label>
-				<input type="text" id="holdername" name="holdername" value="<?php echo $WDGUser_displayed->get_iban_info( 'holdername' ); ?>">
+				<input type="text" id="holdername" name="holdername" value="<?php echo $WDGUser_displayed->get_bank_holdername(); ?>">
 				<br>
 			<label for="address" class="large-label"><?php _e( "Adresse du compte :", 'yproject' ); ?></label>
-				<input type="text" id="address" name="address" value="<?php echo $WDGUser_displayed->get_iban_info( 'address1' ); ?>">
+				<input type="text" id="address" name="address" value="<?php echo $WDGUser_displayed->get_bank_address(); ?>">
 				<br>
 			<label for="address2" class="large-label"><?php _e( "Pays :", 'yproject' ); ?></label>
-				<input type="text" id="address2" name="address2" value="<?php echo $WDGUser_displayed->get_iban_info( 'address2' ); ?>">
+				<input type="text" id="address2" name="address2" value="<?php echo $WDGUser_displayed->get_bank_address2(); ?>">
 				<br>
 			<label for="iban" class="large-label"><?php _e( "IBAN :", 'yproject' ); ?></label>
-				<input type="text" id="iban" name="iban" value="<?php echo $WDGUser_displayed->get_iban_info( 'iban' ); ?>">
+				<input type="text" id="iban" name="iban" value="<?php echo $WDGUser_displayed->get_bank_iban(); ?>">
 				<br>
 			<label for="bic" class="large-label"><?php _e( "BIC :", 'yproject' ); ?></label>
-				<input type="text" id="bic" name="bic" value="<?php echo $WDGUser_displayed->get_iban_info( 'bic' ); ?>">
+				<input type="text" id="bic" name="bic" value="<?php echo $WDGUser_displayed->get_bank_bic(); ?>">
 				<br>
 			<label for="rib" class="large-label"><?php _e( "Fichier de votre RIB :", 'yproject' ); ?></label>
 				<input type="file" id="rib" name="rib">
@@ -73,7 +73,7 @@ Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.
 				<input type="submit" class="button" value="<?php _e( "Enregistrer", 'yproject' ); ?>" />
 			</p>
 			<input type="hidden" name="action" value="register_rib" />
-			<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->wp_user->ID; ?>" />
+			<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->get_wpref(); ?>" />
 		</form>
 	<?php endif; ?>
 
@@ -83,7 +83,7 @@ Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.
 			<input type="submit" class="button" value="Reverser sur mon compte bancaire" />
 		</p>
 		<input type="hidden" name="action" value="user_wallet_to_bankaccount" />
-		<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->wp_user->ID; ?>" />
+		<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->get_wpref(); ?>" />
 	</form>
 	<br><br>
 	

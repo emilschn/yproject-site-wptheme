@@ -131,6 +131,11 @@
 
 /* RESPONSIVE - Cas spécifique affichage slider home */
 @media screen and (max-width: 1220px) {
+	.template-home .wdg-component-slider .slider-container #slider .slider-item img.slide {
+		width: auto;
+		position: absolute;
+		left: -850px;
+	}
 	.wdg-component-slider .slider-container #slider .slider-item .message-banner .screen-message {
 		padding-left: 20%;
 	}
@@ -153,9 +158,6 @@
 		display: flex;
 		-webkit-align-items: center;
 		align-items: center;
-	}
-	.wdg-component-slider .slider-container #slider .slider-item img.slide {
-		width: auto;
 	}
 	.wdg-component-slider .slider-container #slider .slider-item .message-banner .screen-message {
 		margin: 0px;
@@ -479,9 +481,6 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
     font-size: 13pt;
     letter-spacing: 0.12em;
     color: #FFFFFF;
-    background: #00879B;
-}
-.progress-bar.minimum-as-step .current-amount {
 	background: linear-gradient( 45deg, #59cee0, #00879B );
 }
 .progress-bar .progress-percent { 

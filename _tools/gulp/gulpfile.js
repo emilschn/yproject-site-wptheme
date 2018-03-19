@@ -32,7 +32,6 @@ var cssProjectDashboardFileList = [
 
 // JS - Common
 var jsCommonFileList = [
-	source + '_inc/js/slideshow.js', // Ne fonctionne pas dans l'autre sens...?
 	source + '_inc/js/common.js',
 	source + '_inc/js/sharer.min.js'
 ];

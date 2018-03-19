@@ -4,8 +4,6 @@ $template_engine->set_controler( new WDG_Page_Controler_Home() );
 
 class WDG_Page_Controler_Home extends WDG_Page_Controler {
 	
-	private $slider;
-	
 	private static $nb_query_campaign_funded = 40;
 	private static $projects_html_key = 'home-projects';
 	private static $projects_html_duration = 180; // 3 minutes de cache
@@ -25,25 +23,9 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 		if ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
 			date_default_timezone_set("Europe/London");
 			define( 'SKIP_BASIC_HTML', TRUE );
-			$this->make_slider();
 			$this->init_projects();
 			$this->prepare_stats();
 		}
-	}
-	
-/******************************************************************************/
-// SLIDER
-/******************************************************************************/
-	public function get_slider() {
-		return $this->slider;
-	}
-	
-	private function make_slider() {
-		$this->slider = array(
-			'slider-01.jpg' => "Nous activons<br />une finance à impact positif<br />en développant<br />les levées de fonds en royalties",
-			'slider-prix-fintech.jpg' => "En 2017,<br />WE DO GOOD<br />est le coup de coeur<br />Fintech de l'année",
-			'slider-twiza.jpg' => "255 personnes ont investi<br />101 060 € pour propulser<br />les impacts positifs<br />de Twiza",
-		);
 	}
 	
 /******************************************************************************/
