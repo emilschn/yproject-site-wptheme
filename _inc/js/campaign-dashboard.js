@@ -63,6 +63,7 @@ WDGCampaignSimulator.prototype.calculRoiPerYear = function(){
  * renseigné
  */
 WDGCampaignSimulator.prototype.calculReturn = function(){
+	totalRoi = 0;
 	if(percent){
 		totalRoi = percent * totalca;
 		if(totalRoi){
