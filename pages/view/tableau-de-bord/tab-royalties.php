@@ -77,6 +77,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				</div>
 			<?php endif; ?>
 		
+		<?php else: ?>
+			<p class="align-center">
+				<?php _e( "Retrouvez prochainement ici le suivi de vos paiements de royalties.", 'yproject' ); ?>
+			</p>
+
 		<?php endif; ?>
 		
 	<?php endif; ?>

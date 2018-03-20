@@ -68,7 +68,7 @@ if ($current_organization!=null){
 ob_start();
 locate_template( array( 'pages/view/tableau-de-bord/tab-organization/lightbox-organization-new.php' ), true );
 $lightbox_content = ob_get_clean();
-echo do_shortcode( '[yproject_lightbox id="newOrga" scrolltop="1"]'.$lightbox_content.'[/yproject_lightbox]' );
+echo do_shortcode( '[yproject_widelightbox id="newOrga" scrolltop="1"]'.$lightbox_content.'[/yproject_widelightbox]' );
 ?>
 
 <?php

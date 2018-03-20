@@ -10,7 +10,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'id'			=> 'new_minimum_goal',
 			'type'			=> 'text-money',
 			'label'			=> "Objectif",
-			'description'	=> "C'est le seuil de validation de votre lev&eacute;e de fonds, vous pourrez ensuite viser le montant maximum !",
+			'description'	=> "C'est le seuil de validation de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD. Vous pourrez ensuite viser l'objectif maximum !",
 			'value'			=> $page_controler->get_campaign()->minimum_goal(false),
 			'min'			=> 500,
 			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
@@ -19,7 +19,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		DashboardUtility::create_field(array(
 			'id'			=> 'new_maximum_goal',
 			'type'			=> 'text-money',
-			'label'			=> "Montant maximum",
+			'label'			=> "Objectif maximum",
 			'description'	=> "C'est le montant maximum de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD.",
 			'value'			=> $page_controler->get_campaign()->goal(false),
 			'min'			=> 500,
