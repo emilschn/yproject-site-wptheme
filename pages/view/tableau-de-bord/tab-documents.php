@@ -2,13 +2,14 @@
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 
+<h2><?php _e( "Documents", 'yproject' ); ?></h2>
 <div class="db-form v3 center">
 	<br>
 	
 	<?php if ( $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
 	<a href="<?php echo $page_controler->get_campaign()->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red"><?php _e( "Attestation de lev&eacute;e de fonds", 'yproject' ); ?></a>
 	<?php else: ?>
-	<?php _e( "A venir :" ); ?> <?php _e( "Attestation de lev&eacute;e de fonds", 'yproject' ); ?>
+	<?php _e( "Prochainement :" ); ?> <?php _e( "Attestation de lev&eacute;e de fonds", 'yproject' ); ?>
 	<?php endif; ?>
 	<br><br>
 	
@@ -44,10 +45,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<br><br>
 	<?php endif; ?>
 		
-	<?php _e( "A venir :" ); ?> <?php _e( "Facture de lev&eacute;e de fonds", 'yproject' ); ?>
-	<br><br>
-	
-	<?php _e( "A venir :" ); ?> <?php _e( "Contrats investisseurs", 'yproject' ); ?>
+	<?php _e( "Retrouvez prochainement ici vos documents : facture de lev&eacute;e de fonds et contrats des investisseurs.", 'yproject' ); ?>
 	<br><br>
 	
 </div>

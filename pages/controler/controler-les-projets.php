@@ -35,6 +35,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		parent::__construct();
 		date_default_timezone_set("Europe/London");
 		define( 'SKIP_BASIC_HTML', TRUE );
+		wp_enqueue_script( 'wdg-script', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/js/slideshow.js', array( 'jquery' ), ASSETS_VERSION );
 		$this->prepare_slider();
 		$this->prepare_stats();
 		$this->prepare_filters();

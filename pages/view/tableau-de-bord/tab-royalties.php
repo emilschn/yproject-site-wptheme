@@ -2,6 +2,7 @@
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 
+<h2><?php _e( "Royalties", 'yproject' ); ?></h2>
 <div id="tab-wallet-timetable" class="tab-content-large">
 	<?php if ($page_controler->get_campaign()->funding_type() == 'fundingdonation'): ?>
 		Ce projet n'est pas concerné.
@@ -27,50 +28,60 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			
 
 			<?php $declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $page_controler->get_campaign_id() ); ?>
-			
-			<div style="text-align: center;">
-				<div>
-					<table id="wdg-timetable" width="100%">
-						<thead>
-							<tr>
-								<td>Echéance</td>
-								<td>Mois</td>
-								<td>CA déclaré</td>
-								<td>Royalties</td>
-								<td>Message</td>
-								<td>Etat</td>
-								<td>Info ajustement</td>
-								<td>Montant ajustement</td>
-								<td>Justificatif</td>
-								<td>Facture</td>
-							</tr>
-						</thead>
-						<tfoot>
-							<tr>
-								<td>Echéance</td>
-								<td>Mois</td>
-								<td>CA déclaré</td>
-								<td>Royalties</td>
-								<td>Message</td>
-								<td>Etat</td>
-								<td>Info ajustement</td>
-								<td>Montant ajustement</td>
-								<td>Justificatif</td>
-								<td>Facture</td>
-							</tr>
-						</tfoot>
+				
+			<?php if ( count( $declaration_list ) == 0 ): ?>
+				<?php _e( "Retrouvez prochainement ici le suivi de vos paiements de royalties.", 'yproject' ); ?>
+				
+			<?php else: ?>
+				<div style="text-align: center;">
+					<div>
+						<table id="wdg-timetable" width="100%">
+							<thead>
+								<tr>
+									<td>Echéance</td>
+									<td>Mois</td>
+									<td>CA déclaré</td>
+									<td>Royalties</td>
+									<td>Message</td>
+									<td>Etat</td>
+									<td>Info ajustement</td>
+									<td>Montant ajustement</td>
+									<td>Justificatif</td>
+									<td>Facture</td>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<td>Echéance</td>
+									<td>Mois</td>
+									<td>CA déclaré</td>
+									<td>Royalties</td>
+									<td>Message</td>
+									<td>Etat</td>
+									<td>Info ajustement</td>
+									<td>Montant ajustement</td>
+									<td>Justificatif</td>
+									<td>Facture</td>
+								</tr>
+							</tfoot>
 
-						<tbody>
-							<?php foreach ( $declaration_list as $declaration_item ): ?>
-								<?php global $declaration; $declaration = $declaration_item; ?>
-								<?php locate_template( array( 'pages/view/tableau-de-bord/tab-royalties/partial-royalties-line.php' ), true, false ); ?>
-							<?php endforeach; ?>
-						</tbody>
+							<tbody>
+								<?php foreach ( $declaration_list as $declaration_item ): ?>
+									<?php global $declaration; $declaration = $declaration_item; ?>
+									<?php locate_template( array( 'pages/view/tableau-de-bord/tab-royalties/partial-royalties-line.php' ), true, false ); ?>
+								<?php endforeach; ?>
+							</tbody>
 
-					</table>
+						</table>
+					</div>
 				</div>
-			</div>
+			<?php endif; ?>
 		
+		<?php else: ?>
+			<p class="align-center">
+				<?php _e( "Retrouvez prochainement ici le suivi de vos paiements de royalties.", 'yproject' ); ?>
+			</p>
+
 		<?php endif; ?>
 		
 	<?php endif; ?>

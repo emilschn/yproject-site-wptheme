@@ -668,7 +668,7 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 		org_capital = $('#wdg-lightbox-newOrga input[name=org_capital]').val();
 		org_ape = $('#wdg-lightbox-newOrga input[name=org_ape]').val();
 		org_vat = $('#wdg-lightbox-newOrga input[name=org_vat]').val();
-		org_fiscal_year_end_month = $('#wdg-lightbox-newOrga input[name=org_fiscal_year_end_month]').val();
+		org_fiscal_year_end_month = $('#wdg-lightbox-newOrga select[name=org_fiscal_year_end_month]').val();
 		org_address = $('#wdg-lightbox-newOrga input[name=org_address]').val();
 		org_postal_code = $('#wdg-lightbox-newOrga input[name=org_postal_code]').val();
 		org_city = $('#wdg-lightbox-newOrga input[name=org_city]').val();
@@ -742,7 +742,7 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 				if(count_errors > 0) {
 					var firsterror = thisForm.find(".errors").first();
 					if(firsterror.length === 1){
-						this.scrollTo(firsterror);
+						self.scrollTo(firsterror);
 					}
 				}
 				//Affichage confirmation enregistrement

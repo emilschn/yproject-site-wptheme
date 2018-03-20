@@ -2,6 +2,7 @@
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 
+<h2><?php _e( "Guide et outils", 'yproject' ); ?></h2>
 <div class="db-form v3 center">
 	<br>
 	<p class="align-justify">

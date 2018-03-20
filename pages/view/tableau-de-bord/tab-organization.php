@@ -3,6 +3,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 global $organization_obj;
 ?>
 
+<h2><?php _e( "Organisation", 'yproject' ); ?></h2>
 <form id="orgainfo_form" class="ajax-db-form db-form v3 full center bg-white" data-action="save_project_organization">
 	<ul class="errors">
 
@@ -67,7 +68,7 @@ if ($current_organization!=null){
 ob_start();
 locate_template( array( 'pages/view/tableau-de-bord/tab-organization/lightbox-organization-new.php' ), true );
 $lightbox_content = ob_get_clean();
-echo do_shortcode( '[yproject_lightbox id="newOrga" scrolltop="1"]'.$lightbox_content.'[/yproject_lightbox]' );
+echo do_shortcode( '[yproject_widelightbox id="newOrga" scrolltop="1"]'.$lightbox_content.'[/yproject_widelightbox]' );
 ?>
 
 <?php

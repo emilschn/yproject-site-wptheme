@@ -3,6 +3,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 global $country_list;
 ?>
 
+<h2><?php _e( "Repr&eacute;sentant l&eacute;gal", 'yproject' ); ?></h2>
 <div class="db-form v3 full center bg-white">
 	
 	<form id="userinfo_form" class="ajax-db-form" data-action="save_user_infos_dashboard">
@@ -93,7 +94,7 @@ global $country_list;
 			'type'			=> 'text',
 			'label'			=> "Adresse &eacute;lectronique",
 			'value'			=> $page_controler->get_campaign_author()->wp_user->get( 'user_email' ),
-			'infobubble'	=> "Pour modifier votre adresse e-mail de contact, rendez-vous dans vos param&egrave;tres de compte"
+			'editable'		=> $page_controler->can_access_author()
 		) );
 
 		DashboardUtility::create_field( array(

@@ -314,7 +314,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		$last_mandate_id = $last_mandate[ "ID" ];
 	}
 	?>
-	<h2><?php _e('Autorisation de pr&eacute;l&egrave;vement', 'yproject'); ?></h2>
+	<h3><?php _e('Autorisation de pr&eacute;l&egrave;vement', 'yproject'); ?></h3>
 
 	<?php if ( $last_mandate_status != 5 && $last_mandate_status != 6 ): ?>
 		<?php if ( $page_controler->can_access_admin() ): ?>
