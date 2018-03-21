@@ -186,15 +186,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"value"	=> $page_controler->get_campaign()->get_api_data( 'employees_number' )
 		));
 		
-		$contract_descriptions_editable = $page_controler->get_campaign()->is_preparing();
-		DashboardUtility::create_field(array(
-			"id"			=> "new_project_contract_spendings_description",
-			"type"			=> "editor",
-			"label"			=> __( "Description des d&eacute;penses", 'yproject' ),
-			"value"			=> $page_controler->get_campaign()->contract_spendings_description(),
-			"editable"		=> $page_controler->can_access_admin() || $contract_descriptions_editable
-		));
-		
 		// Champs personnalisés
 		$nb_custom_fields = $page_controler->get_campaign_author()->wp_user->get('wdg-contract-nb-custom-fields');
 		if ( $nb_custom_fields > 0 ) {

@@ -251,6 +251,7 @@ function WDGCampaignDashboard() {
 	this.initOrgaForms();
 	this.initTeam();
 	this.initFinance();
+	this.initCampaign();
 }
 
 /**
@@ -1434,6 +1435,10 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 			wdgCampaignSimulator.initResultCalcul();
 		}
 	});
+};
+
+WDGCampaignDashboard.prototype.initCampaign = function(){
+	$( "#item-body-campaign ul input[type=checkbox]" ).prop( 'disabled', false );
 };
 
 var wdgCampaignDashboard;
