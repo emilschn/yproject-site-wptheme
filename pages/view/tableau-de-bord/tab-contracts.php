@@ -362,12 +362,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	$keep_going = true;
 	?>
 	<?php if ( !$page_controler->get_campaign_organization()->has_saved_iban() ): ?>
-		<?php
-		$keep_going = false;
-		$page_edit_orga = get_page_by_path('editer-une-organisation');
-		?>
+		<?php $keep_going = false; ?>
 		<?php _e( "Afin de signer votre autorisation de pr&eacute;l&egrave;vement, vous devez au pr&eacute;alable renseigner le RIB de l'organisation.", 'yproject' ); ?><br />
-		<p class="align-center"><a class="button red" href="<?php echo get_permalink($page_edit_orga->ID) .'?orga_id='.$page_controler->get_campaign_organization()->get_wpref(); ?>"><?php _e('Editer', 'yproject'); ?></a></p><br /><br />
+		<p class="align-center"><a class="button red switch-tab" href="#organization"><?php _e('Editer', 'yproject'); ?></a></p><br /><br />
 		<button class="button disabled"><?php _e( "Signer l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
 
 	<?php endif; ?>
@@ -385,7 +382,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		if ( empty( $saved_mandates_list ) ) {
 			$keep_going = false;
 			if ( !$page_controler->get_campaign_organization()->add_lemonway_mandate() ) {
-				$page_edit_orga = get_page_by_path('editer-une-organisation');
 				echo LemonwayLib::get_last_error_message(); ?>
 				<a class="button red switch-tab" href="#organization"><?php _e('Editer', 'yproject'); ?></a><br /><br />
 				<button class="button disabled"><?php _e( "Signer l'autorisation de pr&eacute;l&egrave;vement automatique", 'yproject' ); ?></button>
