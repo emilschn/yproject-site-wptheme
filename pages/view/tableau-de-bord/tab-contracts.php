@@ -405,7 +405,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		 */
 		?>
 		<?php if ( $last_mandate_status == 0 ): //Si 0, proposer de signer ?>
-			<?php $phone_number = $WDGUser_current->wp_user->get('user_mobile_phone'); ?>
+			<?php $phone_number = $page_controler->get_campaign_author()->get_phone_number(); ?>
 
 			<?php 
 			//Indication pour rappeler qu'ils se sont engagés dans le contrat à autoriser les prélévements automatiques
