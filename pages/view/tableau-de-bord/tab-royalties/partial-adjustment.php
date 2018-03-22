@@ -7,15 +7,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <?php if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration ): ?>
 
 	<?php if ( $declaration->get_adjustment_needed() ): ?>
-	<form method="POST" enctype="multipart/form-data">
+	<form method="POST" enctype="multipart/form-data" class="form-adjustment-file">
 		<h4><?php _e( "Ajustement", 'yproject' ); ?></h4>
 		Tous les ans (ou plus régulièrement), transmettez-nous votre bilan comptable certifié conforme,
 		vos déclarations fiscales de chiffre d'affaires ou l’attestation de votre expert-comptable
-		afin de valider vos déclarations et procéder à d'éventuels ajustements !<br /><br />
+		afin de valider vos déclarations et procéder à d'éventuels ajustements !
 
 		<?php $declaration_file_list = $declaration->get_file_list(); ?>
 		<?php if ( empty( $declaration_file_list ) ): ?>
-			<?php _e( "Aucun fichier pour l'instant", 'yproject' ); ?><br />
+			<br><br>
+			<?php _e( "Aucun fichier pour l'instant", 'yproject' ); ?><br>
 
 		<?php else: ?>
 			<ul>
@@ -43,7 +44,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php endif; ?>
 
 	<?php if ( $page_controler->can_access_admin() ): ?>
-	<form id="form-declaration-adjustment" class="db-form" data-action="save_declaration_adjustment"
+	<form id="form-declaration-adjustment" class="ajax-db-form" data-action="save_declaration_adjustment"
 			data-roi-percent="<?php echo $page_controler->get_campaign()->roi_percent(); ?>"
 			data-costs-orga="<?php echo $page_controler->get_campaign()->get_costs_to_organization(); ?>">
 		<div class="field admin-theme">

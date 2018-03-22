@@ -4,7 +4,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 <?php $declaration_info = $page_controler->get_campaign()->declaration_info(); ?>
 <?php if ( $page_controler->can_access_admin() ): ?>
-	<form action="" id="forcemandate_form" class="db-form" data-action="save_project_declaration_info">
+	<form action="" id="forcemandate_form" class="ajax-db-form" data-action="save_project_declaration_info">
 		<?php DashboardUtility::create_field(array(
 			"id"			=> "new_declaration_info",
 			"type"			=> "editor",

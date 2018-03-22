@@ -10,6 +10,20 @@ if ( !empty( $saved_mandates_list ) ) {
 }
 ?>
 
+<div>
+<?php if ( $page_controler->get_return_lemonway_card() == TRUE ): ?>
+	<?php
+	$msg_validation_payment = __("Paiement effectu&eacute;", "yproject");
+	echo do_shortcode('[yproject_lightbox id="msg-validation-payment" scrolltop="1" msgtype="valid" autoopen="1"]'.$msg_validation_payment.'[/yproject_lightbox]');
+	?>
+<?php elseif ( $page_controler->get_return_lemonway_card() !== FALSE ): ?>
+	<?php
+	$msg_error_payment = __("Il y a eu une erreur au cours de votre paiement.", "yproject");
+	echo do_shortcode('[yproject_lightbox id="msg-validation-payment" scrolltop="1" msgtype="error" autoopen="1"]'.$msg_error_payment.'[/yproject_lightbox]');
+	?>
+<?php endif; ?>
+</div>
+
 <h2><?php _e( "Royalties", 'yproject' ); ?></h2>
 <div id="tab-wallet-timetable" class="tab-content-large">
 	<?php if ($page_controler->get_campaign()->funding_type() == 'fundingdonation'): ?>

@@ -10,6 +10,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $can_access_admin;
 	private $can_access_author;
 	private $must_show_lightbox_welcome;
+	private $return_lemonway_card;
 	/**
 	 * @var ATCF_Campaign
 	 */
@@ -56,6 +57,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		
 		$this->init_campaign_data();
 		$this->init_context();
+		WDGFormProjects::form_submit_turnover();
+		WDGFormProjects::form_submit_account_files();
+		$this->return_lemonway_card = WDGFormProjects::return_lemonway_card();
+		WDGFormProjects::form_proceed_roi_transfers();
 	}
 	
 /******************************************************************************/
@@ -129,6 +134,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	}
 	public function get_show_lightbox_welcome() {
 		return $this->must_show_lightbox_welcome;
+	}
+	
+	public function get_return_lemonway_card() {
+		return $this->return_lemonway_card;
 	}
 	
 }

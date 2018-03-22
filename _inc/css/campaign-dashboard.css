@@ -286,6 +286,12 @@ div#container div#content main #item-body-contacts #direct-mail {
 /*******************************************************************************
 * ROYALTIES
 *******************************************************************************/
+#item-body-royalties .form-adjustment-file ul {
+	margin: 0px;
+}
+#item-body-royalties .form-adjustment-file ul li {
+    list-style: none;
+}
 #item-body-royalties ul.payment-list > li {
     margin-bottom: 30px;
     padding: 5px 15px;

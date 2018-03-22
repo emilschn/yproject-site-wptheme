@@ -222,7 +222,7 @@ class DashboardUtility
 
         //Is this an hidden input
         if($type=='hidden'){
-            $text_field = '<span class="field-container">'.$prefix.'<span class="field-value" data-type="'.$type.'" data-id="'.$id.'">';
+            $text_field = '<span class="field-container">'.$prefix.'<span class="field field-value" data-type="'.$type.'" data-id="'.$id.'">';
             $text_field .= '<input type="hidden" '
                 . 'name="' . $id . '" '
                 . 'id="' . $id . '" '
@@ -262,7 +262,7 @@ class DashboardUtility
         $text_field .='</label>';
 
         if($type!='check') {
-            $text_field .= '<span class="field-container">' . $prefix . '<span class="field-value" data-type="' . $type . '" data-id="'.$id.'">';
+            $text_field .= '<span class="field-container">' . $prefix . '<span class="field field-value" data-type="' . $type . '" data-id="'.$id.'">';
 
             if ($editable) {
                 //Add the icon inside input
