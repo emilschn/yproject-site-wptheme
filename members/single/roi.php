@@ -29,7 +29,7 @@ $user_investments = $WDGUser_current->get_validated_investments();
 				<a href="<?php echo get_permalink( $campaign_id ); ?>"><h3><?php echo $campaign->data->post_title; ?></h3></a>
 				
 				<div class="percent33"><strong><?php _e("Montant lev&eacute; :", 'yproject'); ?></strong> <?php echo YPUIHelpers::display_number( $campaign_amount, TRUE ); ?> &euro;</div>
-				<div class="percent33"><strong><?php _e("Dur&eacute;e du versement :", 'yproject'); ?></strong> <?php echo $campaign->funding_duration(); ?> <?php _e("ans", 'yproject'); ?></div>
+				<div class="percent33"><strong><?php _e("Dur&eacute;e du versement :", 'yproject'); ?></strong> <?php echo $campaign->funding_duration_str(); ?></div>
 				<div class="percent33"><strong><?php _e("Pourcentage du versement :", 'yproject'); ?></strong> <?php echo YPUIHelpers::display_number( $campaign->roi_percent() ); ?> %</div>
 				
 				<div class="clear"></div>

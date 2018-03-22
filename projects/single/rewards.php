@@ -4,6 +4,9 @@ $campaign_id = $campaign->ID;
 $page_invest = get_page_by_path('investir');
 $campaign_status = $campaign->campaign_status();
 $funding_duration = $campaign->funding_duration();
+if ( $funding_duration == 0 ) {
+	$funding_duration = 5;
+}
 $firstpayment_date = $campaign->first_payment_date();
 $firstpayment_year = mysql2date( 'Y', $firstpayment_date, false );
 $estimated_turnover = $campaign->estimated_turnover();
@@ -42,7 +45,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 		<?php endif; ?>
 			
 			<div class="project-rewards-padder align-center">
-				<?php if ($campaign->funding_duration() > 0 && $campaign->roi_percent_estimated() > 0 && $firstpayment_year > 2014): ?>
+				<?php if ( $funding_duration > 0 && $campaign->roi_percent_estimated() > 0 && $firstpayment_year > 2014 ): ?>
 
 					<p class="half-form-count">
 						<span class="uppercase"><?php _e("Si j'investis :", 'yproject'); ?></span>

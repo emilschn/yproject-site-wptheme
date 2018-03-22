@@ -93,6 +93,10 @@ button.red {
     border: 1px solid #D3EAE9;
 	color: #000000;
 }
+.button.admin-theme{
+    background: none repeat scroll 0 0 #F1A074;
+    border: 1px solid #F1A074;
+}
 .button.big {
     font-size: 15px;
     padding: 15px 30px;
@@ -127,15 +131,15 @@ button.red {
 }
 
 .db-form .field.admin-theme {
-    border-left: 3px solid darkturquoise;
-    background-color: lightgray;
+    border-left: 3px solid #F1A074;
+    background-color: rgba( 241, 160, 116, 0.2 );
     padding: 10px;
     margin: 0px;
 }
 
 .db-form .field.admin-theme label i.fa-unlock-alt,
 .db-form .admin-theme-block i.fa-unlock-alt {
-    color:darkturquoise;
+    color: #F1A074;
 }
 
 .db-form .field label {
@@ -227,7 +231,7 @@ button.red {
 .db-form .field-container input[type='checkbox']{
     vertical-align: top;
     margin: 5px 10px 0px 5px;
-    width: initial;
+    width: auto;
 }
 
 
@@ -285,11 +289,6 @@ button.red {
     right: 5px;
     width: 14px;
     text-align: center;
-}
-
-.db-form .button.admin-theme{
-    background-color: darkturquoise;
-    border-color:darkturquoise;
 }
 
 .db-form .button[disabled] {

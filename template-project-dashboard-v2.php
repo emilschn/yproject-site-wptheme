@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Projet Tableau de bord
+ * Template Name: Projet Tableau de bord V2
  *
  */
 ?>

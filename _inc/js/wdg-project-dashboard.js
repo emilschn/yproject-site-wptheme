@@ -491,6 +491,9 @@ var WDGProjectDashboard = (function ($) {
                     $("#new_funding_duration").change(function() {
                         var nb_years_li_existing = ($("#estimated-turnover li").length);
                         var new_nb_years = parseInt($("#new_funding_duration").val());
+						if ( new_nb_years == 0 ) {
+							new_nb_years = 5;
+						}
                         "change nb year trigger "+new_nb_years+"(exist : "+nb_years_li_existing+")";
                         
                         //Ajoute des boîtes au besoin
@@ -529,7 +532,7 @@ var WDGProjectDashboard = (function ($) {
                     $("#new_funding_duration").trigger('change');
                     $("#new_funding_duration").keyup(function(){
                         if($("#new_funding_duration").val()!==""){
-                                 $("#new_funding_duration").trigger('change');
+							$("#new_funding_duration").trigger('change');
                         }
                     });
 
@@ -1231,15 +1234,13 @@ var WDGProjectDashboard = (function ($) {
          * @returns {Array} tableau avec le montant des CA pour chaque année
          */
         createCaTab: function(){           
-            if(new_funding_duration!== "0"){
-                var nbYears = parseInt(new_funding_duration);
-                var caTab = new Array;
-                for (var ii=0; ii < nbYears; ii++){
-                    var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? ($.trim($("span[data-id=new_estimated_turnover_"+ii+"]").text())) : $("#new_estimated_turnover_"+ii).val();
-                    caTab.push(parseFloat(new_estimated_turnover));
-                }
-                return caTab;
-            }
+			var nbYears = parseInt(new_funding_duration);
+			var caTab = new Array;
+			for (var ii=0; ii < nbYears; ii++){
+				var new_estimated_turnover = ($("#new_estimated_turnover_"+ii).val() == null) ? ($.trim($("span[data-id=new_estimated_turnover_"+ii+"]").text())) : $("#new_estimated_turnover_"+ii).val();
+				caTab.push(parseFloat(new_estimated_turnover));
+			}
+			return caTab;
         },
         /**
          * Calcul du CA total sur les années de CA renseignées
@@ -1401,6 +1402,9 @@ var WDGProjectDashboard = (function ($) {
             need = $("#new_maximum_goal").val() == null ? $.trim($("span[data-id=new_maximum_goal] span").text()) : $("#new_maximum_goal").val();
             new_roi_percent_estimated = $("#new_roi_percent_estimated").val() == null ? $.trim($("span[data-id=new_roi_percent_estimated] span").text()) : $("#new_roi_percent_estimated").val();
             new_funding_duration = ($("#new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration] span").text()) : $("#new_funding_duration").val();
+			if ( new_funding_duration == 0 ) {
+				new_funding_duration = 5;
+			}
             new_estimated_turnover_0 = $("#new_estimated_turnover_0").val() == null ? $.trim($("span[data-id=new_estimated_turnover_0]").text()) : $("#new_estimated_turnover_0").val();
 			nb_years = $("#new_funding_duration").val() == null ? $.trim($("span[data-id=new_funding_duration]").text()) : $("#new_funding_duration").val();
         },

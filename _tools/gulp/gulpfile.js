@@ -25,11 +25,19 @@ var cssCampaignFileList = [
 var cssInvestFileList = [
 	source + '_inc/css/invest.css'
 ];
+// CSS - Project Dashboard
+var cssProjectDashboardFileList = [
+	source + '_inc/css/campaign-dashboard.css'
+];
 
 // JS - Common
 var jsCommonFileList = [
 	source + '_inc/js/common.js',
 	source + '_inc/js/sharer.min.js'
+];
+// JS - Project Dashboard
+var jsProjectDashboardFileList = [
+	source + '_inc/js/campaign-dashboard.js'
 ];
 
 
@@ -49,9 +57,19 @@ gulp.task( 'concat-invest', function() {
 		.pipe( concat( 'concatInvestStyles.css' ) )
 		.pipe( gulp.dest( destination ) );
 } );
+gulp.task( 'concat-projectdb', function() {
+	return gulp.src( cssProjectDashboardFileList )
+		.pipe( concat( 'concatProjectDBStyles.css' ) )
+		.pipe( gulp.dest( destination ) );
+} );
 gulp.task( 'concat-js-common', function() {
 	return gulp.src( jsCommonFileList )
 		.pipe( concat( 'concatCommonScripts.js' ) )
+		.pipe( gulp.dest( destination ) );
+} );
+gulp.task( 'concat-js-projectdb', function() {
+	return gulp.src( jsProjectDashboardFileList )
+		.pipe( concat( 'concatProjectDBScripts.js' ) )
 		.pipe( gulp.dest( destination ) );
 } );
 
@@ -90,12 +108,34 @@ gulp.task( 'minify-invest', ['concat-invest'], function() {
 		} ) )
 		.pipe( gulp.dest( source + '_inc/css/' ) );
 } );
+gulp.task( 'minify-projectdb', ['concat-projectdb'], function() {
+	return gulp.src(destination+'concatProjectDBStyles.css')
+		.pipe( plugins.csso() ) // minify
+		.pipe( plugins.rename( { // rename .min.css  
+			dirname: "",
+			basename: "campaign-dashboard",
+			suffix: ".min",
+			extname: ".css"
+		} ) )
+		.pipe( gulp.dest( source + '_inc/css/' ) );
+} );
 gulp.task( 'minify-js-common', ['concat-js-common'], function() {
 	return gulp.src(destination+'concatCommonScripts.js')
 		.pipe( uglify() ) // minify
 		.pipe( plugins.rename( { // rename .min.css  
 			dirname: "",
 			basename: "common",
+			suffix: ".min",
+			extname: ".js"
+		} ) )
+		.pipe( gulp.dest( source + '_inc/js/' ) );
+} );
+gulp.task( 'minify-js-projectdb', ['concat-js-projectdb'], function() {
+	return gulp.src(destination+'concatProjectDBScripts.js')
+		.pipe( uglify() ) // minify
+		.pipe( plugins.rename( { // rename .min.css  
+			dirname: "",
+			basename: "campaign-dashboard",
 			suffix: ".min",
 			extname: ".js"
 		} ) )
@@ -124,7 +164,9 @@ gulp.task( 'update-version', function() {
 gulp.task( 'css', [ 'concat', 'minify', 'update-version' ] );
 gulp.task( 'css-campaign', [ 'concat-campaign', 'minify-campaign', 'update-version' ] );
 gulp.task( 'css-invest', [ 'concat-invest', 'minify-invest', 'update-version' ] );
+gulp.task( 'css-projectdb', [ 'concat-projectdb', 'minify-projectdb', 'update-version' ] );
 gulp.task( 'js-common', [ 'concat-js-common', 'minify-js-common', 'update-version' ] );
+gulp.task( 'js-projectdb', [ 'concat-js-projectdb', 'minify-js-projectdb', 'update-version' ] );
 
 
 // Tâche de veille pour les modifications des différents fichiers
@@ -132,5 +174,7 @@ gulp.task( 'watch', function() {
 	gulp.watch( cssFileList, ['css'] );
 	gulp.watch( cssCampaignFileList, ['css-campaign'] );
 	gulp.watch( cssInvestFileList, ['css-invest'] );
+	gulp.watch( cssProjectDashboardFileList, ['css-projectdb'] );
 	gulp.watch( jsCommonFileList, ['js-common'] );
+	gulp.watch( jsProjectDashboardFileList, ['js-projectdb'] );
 } );
