@@ -284,6 +284,34 @@ div#container div#content main #item-body-contacts #direct-mail {
 }
 
 /*******************************************************************************
+* ROYALTIES
+*******************************************************************************/
+#item-body-royalties ul.payment-list > li {
+    margin-bottom: 30px;
+    padding: 5px 15px;
+    list-style: none;
+    background: #E1E3E2;
+	text-align: left;
+}
+#item-body-royalties ul.payment-list li h4 {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 5px 0px;
+}
+#item-body-royalties ul.payment-list li div {
+    margin: 10px 0px;
+}
+#item-body-royalties ul.payment-list li div.wdg-lightbox, #item-body-royalties ul.payment-list li div.wdg-lightbox-click-catcher {
+	margin: 0px;
+}
+#item-body-royalties ul.payment-list li div.wdg-lightbox-padder {
+	margin: 5vh auto;
+}
+#item-body-royalties ul.payment-list > li ul li {
+	margin-left: 20px;
+}
+
+/*******************************************************************************
 * AUTHOR
 *******************************************************************************/
 #item-body-author form {
