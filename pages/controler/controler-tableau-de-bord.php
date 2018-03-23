@@ -60,7 +60,6 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		WDGFormProjects::form_submit_turnover();
 		WDGFormProjects::form_submit_account_files();
 		$this->return_lemonway_card = WDGFormProjects::return_lemonway_card();
-		WDGFormProjects::form_proceed_roi_transfers();
 	}
 	
 /******************************************************************************/

@@ -250,6 +250,7 @@ function WDGCampaignDashboard() {
 	this.initContacts();
 	this.initOrgaForms();
 	this.initTeam();
+	this.initRoyalties();
 	this.initFinance();
 	this.initCampaign();
 }
@@ -1275,6 +1276,84 @@ WDGCampaignDashboard.prototype.initTeam = function( $param ){
 		}
 		self.manageTeam(action, data, campaign_id);
 	});
+};
+
+WDGCampaignDashboard.prototype.initRoyalties = function(){
+	var self = this;
+	self.currentOpenedROI = 0;
+	if ($(".transfert-roi-open").length > 0) {
+		$(".transfert-roi-open").click(function () {
+			if ($(this).data('roideclaration-id') !== self.currentOpenedROI) {
+				//Affichage
+				self.currentOpenedROI = $(this).data('roideclaration-id');
+				$("#wdg-lightbox-transfer-roi #lightbox-content .loading-content").html("");
+				$("#wdg-lightbox-transfer-roi #lightbox-content .loading-image").show();
+				$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").hide();
+
+				//Lancement de la requête pour récupérer les utilisateurs et les sommes associées
+				$.ajax({
+					'type': "POST",
+					'url': ajax_object.ajax_url,
+					'data': {
+						'action': 'display_roi_user_list',
+						'roideclaration_id': $(this).data('roideclaration-id')
+					}
+				}).done(function (result) {
+					var content = '<table>';
+					content += '<tr><td>Utilisateur</td><td>Investissement</td><td>Versement</td><td>Commission</td></tr>';
+					content += result;
+					content += '</table>';
+					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-content").html(content);
+					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-image").hide();
+					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-roi-id").val(self.currentOpenedROI);
+					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").show();
+				});
+			}
+		});
+		
+		$( '#proceed_roi_transfers_form' ).submit( function( e ) {
+			e.preventDefault();
+			self.proceedRoyalties();
+		} );
+	}
+};
+
+WDGCampaignDashboard.prototype.proceedRoyalties = function(){
+	var self = this;
+	var data_to_update = {
+		'action': 'proceed_roi_transfers',
+		'campaign_id': $( '#hidden-campaign-id' ).val(),
+		'roi_id': $( '#hidden-roi-id' ).val(),
+		'send_notifications': $( '#check_send_notifications' ).is( ':checked' ),
+		'transfer_remaining_amount': $( '#check_transfer_remaining_amount' ).is( ':checked' )
+	};
+
+	var save_button = $( '#proceed_roi_transfers_button' );
+	save_button.find( '.button-text' ).hide();
+	save_button.find( '.button-waiting' ).show();
+
+	//Envoi de requête Ajax
+	$.ajax( {
+		'type': "POST",
+		'url': ajax_object.ajax_url,
+		'data': data_to_update
+
+	} ).done( function ( result ) {
+		if ( result == 100 ) {
+			$( '#proceed_roi_transfers_percent' ).html( 'Versement effecut&eacute; !' );
+			$( '#proceed_roi_transfers_button' ).hide();
+
+		} else {
+			var roundResult = parseFloat( result );
+			roundResult = roundResult.toFixed(2);
+			$( '#proceed_roi_transfers_percent' ).html( roundResult + ' %' );
+			self.proceedRoyalties();
+		}
+
+	} ).fail( function() {
+		$( '#proceed_roi_transfers_percent' ).html( '<span class="error">Erreur serveur (ROI1611)</p>' );
+	} );
+	
 };
 
 WDGCampaignDashboard.prototype.manageTeam = function(action, data, campaign_id){

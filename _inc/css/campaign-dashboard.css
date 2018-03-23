@@ -316,6 +316,14 @@ div#container div#content main #item-body-contacts #direct-mail {
 #item-body-royalties ul.payment-list > li ul li {
 	margin-left: 20px;
 }
+#item-body-royalties #wdg-lightbox-transfer-roi input[type=checkbox] {
+	visibility: visible;
+	position: static;
+	display: inline;
+	width: auto;
+	height: auto;
+	margin-right: 3px;
+}
 
 /*******************************************************************************
 * AUTHOR
