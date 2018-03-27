@@ -1524,5 +1524,8 @@ WDGCampaignDashboard.prototype.initCampaign = function(){
 
 var wdgCampaignDashboard;
 jQuery(document).ready( function($) {
-    wdgCampaignDashboard = new WDGCampaignDashboard();
+	// Initialisation uniquement si construit
+	if ( $( 'ul.nav-menu' ).length > 0 ) {
+		wdgCampaignDashboard = new WDGCampaignDashboard();
+	}
 } );

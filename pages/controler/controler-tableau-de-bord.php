@@ -56,6 +56,11 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		wp_enqueue_style( 'datatable-buttons-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/buttons.dataTables.min.css', null, false, 'all' );
 		
 		$this->init_campaign_data();
+		if ( !$this->can_access ) {
+			wp_redirect( home_url() );
+			exit();
+		}
+		
 		$this->init_context();
 		WDGFormProjects::form_submit_turnover();
 		WDGFormProjects::form_submit_account_files();
