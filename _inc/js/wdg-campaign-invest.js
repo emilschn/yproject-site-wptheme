@@ -120,8 +120,8 @@ var WDGInvestPageFunctions = (function($) {
 				var goalProject = Number( $( 'input#roi_goal_project' ).val() );
 				var ratioOfGoal = inputVal / goalProject;
 				var ratioOfPercent = ratioOfGoal * percentProject;
-				var ratioOfPercentRound = Math.round( ratioOfPercent * 10000 ) / 10000;
-				ratioOfPercentRoundStr = ratioOfPercentRound.toLocaleString( 'fr-FR' );
+				var ratioOfPercentRound = Math.round( ratioOfPercent * 100000 ) / 100000;
+				ratioOfPercentRoundStr = ratioOfPercentRound.toString().replace('.', ',');
 				
 				var currentAmount = Number( $( 'span#amount-reached' ).data( 'current-amount' ) );
 				var amountReached = inputVal + currentAmount;
