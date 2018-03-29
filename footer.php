@@ -55,7 +55,7 @@ else {
 							</div>
 
 							<div>
-								<a class="link" href="<?php echo home_url('/contact'); ?>"><?php _e( "Contactez-nous", 'yproject' ); ?></a>
+								<a class="link" href="<?php echo home_url('/a-propos/contact'); ?>"><?php _e( "Contactez-nous", 'yproject' ); ?></a>
 							</div>
 						</div>
 					<?php endif; ?>
