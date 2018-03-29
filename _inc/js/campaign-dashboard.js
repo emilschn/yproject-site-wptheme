@@ -247,6 +247,7 @@ function WDGCampaignDashboard() {
 	this.initMenu();
 	this.drawTimetable();
 	this.initAjaxForms();
+	this.initHome();
 	this.initContacts();
 	this.initOrgaForms();
 	this.initTeam();
@@ -443,6 +444,35 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 			thisForm.find(":input").prop('disabled', false);
 		});
 	});
+};
+
+WDGCampaignDashboard.prototype.initHome = function() {
+
+	//Preview date fin collecte sur LB étape suivante
+	if(($("#innbdayvote").length > 0)||($("#innbdaycollecte").length > 0)) {
+
+		updateDate = function(idfieldinput, iddisplay) {
+			$("#"+iddisplay).empty();
+			if($("#"+idfieldinput).val()<=$("#"+idfieldinput).prop("max") && $("#"+idfieldinput).val()>=$("#"+idfieldinput).prop("min")){
+				var d = new Date();
+				var jsupp = $("#"+idfieldinput).val();
+				d.setDate(d.getDate()+parseInt(jsupp));
+				$("#"+iddisplay).prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+			} else {
+				$("#"+iddisplay).prepend("La durée doit être comprise entre "+($("#"+idfieldinput).prop("min"))+" et "+($("#"+idfieldinput).prop("max"))+" jours");
+			}
+		};
+
+		updateDate("innbdaycollecte","previewenddatecollecte");
+		updateDate("innbdayvote","previewenddatevote");
+
+		$("#innbdaycollecte").on( 'keyup change', function () {
+			updateDate("innbdaycollecte","previewenddatecollecte");});
+
+		$("#innbdayvote").on( 'keyup change', function () {
+			updateDate("innbdayvote","previewenddatevote");});
+	}
+	
 };
 
 WDGCampaignDashboard.prototype.initContacts = function() {
