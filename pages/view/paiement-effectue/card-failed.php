@@ -3,6 +3,8 @@ global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 
+<div class="center align-justify">
+<br><br>
 <?php echo $page_controler->get_current_investment()->error_item->get_error_message(); ?><br>
 
 <?php
@@ -19,3 +21,4 @@ echo $page_controler->get_current_investment()->error_item->get_error_code();
 
 	<?php endif; ?>
 </div><br><br>
+</div>
