@@ -493,6 +493,50 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 		?>
 	</form>
 	<?php endif; ?>
+	
+	<h2><?php _e( "Planning de campagne", 'yproject' ); ?></h2>
+	<form action="" id="campaign_form" class="ajax-db-form db-form v3 full center" data-action="save_project_campaigntab">
+		<ul class="errors">
+
+		</ul>
+		<?php
+		DashboardUtility::create_field(array(
+			"id"			=> "new_end_vote_date",
+			"type"			=> "datetime",
+			"label"			=> "Date de fin de vote",
+			"value"			=> new DateTime($page_controler->get_campaign()->end_vote_date()),
+			"editable"		=> $page_controler->can_access_admin(),
+			"admin_theme"	=> $page_controler->can_access_admin(),
+			"warning"		=> true,
+			"visible"		=> $page_controler->can_access_admin() || $vote_or_after
+		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_begin_collecte_date",
+			"type"			=> "datetime",
+			"label"			=> "Date de d&eacute;but de collecte",
+			"value"			=> new DateTime($page_controler->get_campaign()->begin_collecte_date()),
+			"editable"		=> false,
+			"admin_theme"	=> $page_controler->can_access_admin(),
+			"editable"		=> $page_controler->can_access_admin(),
+			"warning"		=> true,
+			"visible"		=> $page_controler->can_access_admin() || $collecte_or_after
+		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_end_collecte_date",
+			"type"			=> "datetime",
+			"label"			=> "Date de fin de collecte",
+			"value"			=> new DateTime($page_controler->get_campaign()->end_date()),
+			"admin_theme"	=> $page_controler->can_access_admin(),
+			"editable"		=> $page_controler->can_access_admin(),
+			"warning"		=> true,
+			"visible"		=> $page_controler->can_access_admin() || $collecte_or_after
+		));
+
+		DashboardUtility::create_save_button( 'campaign_form', $page_controler->can_access_admin(), 'Enregistrer', 'Enregistrement', TRUE );
+		?>
+	</form>
 
 
 	<?php if ( $page_controler->can_access_admin() && $status == ATCF_Campaign::$campaign_status_archive ): ?>
