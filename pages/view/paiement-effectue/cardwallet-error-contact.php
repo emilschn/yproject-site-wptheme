@@ -3,6 +3,7 @@ global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 
+<div class="center align-justify">
 <br><br>
 <?php _e( "Il y a eu une erreur pendant votre tentative d'investissement, ou celui-ci &eacute;tait d&eacute;j&agrave; comptabilis&eacute.", 'yproject' ); ?><br>
 <?php _e( "Merci de nous contacter afin d'&eacute;tudier votre tentative sur investir@wedogood.co.", 'yproject' ); ?><br>
@@ -16,3 +17,4 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 	<?php endif; ?>
 </div><br><br>
+</div>
