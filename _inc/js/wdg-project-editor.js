@@ -20,6 +20,14 @@ var ProjectEditor = (function($) {
 			$("#wdg-edit-project-add-lang button.add-button").click(function() {
 				ProjectEditor.clickAddLang();
 			});
+			
+			window.addEventListener( 'beforeunload', function (e) {
+				if ( WDGProjectPageFunctions.isEditing !== '' ) {
+					var confirmationMessage = "Votre projet est en cours d'édition, êtes-vous sûr de vouloir quitter ?";
+					(e || window.event).returnValue = confirmationMessage; //Gecko + IE
+					return confirmationMessage; //Webkit, Safari, Chrome
+				}
+			} );
 		},
 		
 		//Permet de switcher du texte Nouvelle langue vers le sélecteur de langue
