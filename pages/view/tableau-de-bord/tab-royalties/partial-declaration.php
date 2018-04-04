@@ -243,7 +243,7 @@ $declaration_message = $declaration->get_message();
 						<input type="hidden" id="hidden-campaign-id" name="campaign_id" class="field" data-id="campaign_id" data-type="hidden" value="<?php echo $page_controler->get_campaign_id(); ?>" />
 						
 						<p id="proceed_roi_transfers_percent" class="align-center"></p>
-						<?php DashboardUtility::create_save_button( 'proceed_roi_transfers', $page_controler->can_access_author(), "Verser", "Versement", true ); ?>
+						<?php DashboardUtility::create_save_button( 'proceed_roi_transfers', $page_controler->can_access_admin(), "Verser", "Versement", true ); ?>
 					</form>
 				</div>
 			</div>
