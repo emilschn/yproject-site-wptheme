@@ -826,10 +826,19 @@ footer > .footer-container > div > div {
 	margin: 20px 15px;
 }
 footer > .footer-container > div > div:nth-child(1){
-	width: 160px;
+	width: 180px;
 }
 footer > .footer-container > div > div:nth-child(1) img{
-	margin: 12px;
+	margin: 10px;
+}
+footer > .footer-container > div > div:nth-child(1) span{
+	display: inline-block;
+	border-top: 2px solid #333333;
+	border-bottom: 2px solid #333333;
+	padding: 2% 0%;
+	font-size: 13px;
+	text-align: justify;
+	color: #333333;
 }
 footer > .footer-container > div > div:nth-child(2){
 	width: 140px;
@@ -843,6 +852,9 @@ footer > .footer-container > div > div:nth-child(3) img{
 }
 footer > .footer-container > div > div:nth-child(4){
 	width: 258px;
+}
+footer > .footer-container > div > div:nth-child(4) img{
+	margin-top: 25px;
 }
 footer > .footer-container > div > div:nth-child(4) p {
 	font-size: 10pt;       
