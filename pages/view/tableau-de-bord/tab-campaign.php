@@ -245,4 +245,17 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		</form>
 	</div>
 	<?php endif; ?>
+			
+	<?php if ( $page_controler->can_access_admin() ): ?>
+		<?php $can_conclude = ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_archive || $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_closed ); ?>
+		<?php if ( $can_conclude ): ?>
+		<div class="field admin-theme">
+			Bouton réservé pour gestion des données. Ne pas toucher ! :)
+			<form id="conclude_project_form" class="ajax-db-form" data-action="conclude_project">
+				<?php DashboardUtility::create_save_button( 'conclude_project_form', $page_controler->can_access_admin(), 'Finaliser', 'Finalisation' ); ?>
+				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+			</form>
+		</div>
+		<?php endif; ?>
+	<?php endif; ?>
 </div>
