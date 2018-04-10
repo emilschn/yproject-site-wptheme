@@ -252,7 +252,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<div class="field admin-theme">
 			Bouton réservé pour gestion des données. Ne pas toucher ! :)
 			<form id="conclude_project_form" class="ajax-db-form" data-action="conclude_project">
-				<?php DashboardUtility::create_save_button( 'conclude_project_form', $page_controler->can_access_admin(), 'Finaliser', 'Finalisation' ); ?>
+				<?php DashboardUtility::create_save_button( 'conclude_project_form', $page_controler->can_access_admin(), 'Finaliser', 'Finalisation', TRUE ); ?>
 				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
 			</form>
 		</div>
