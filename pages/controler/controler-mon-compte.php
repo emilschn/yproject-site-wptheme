@@ -27,9 +27,10 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'user-password' );
 		
-		WDGFormUsers::register_rib();
+		// Si on met à jour le RIB, il faut recharger l'utilisateur en cours
+		$reload = WDGFormUsers::register_rib();
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
-		$this->init_current_user();
+		$this->init_current_user( $reload );
 		$this->init_project_list();
 		$this->init_form();
 		locate_template( array( 'country_list.php'  ), true );
@@ -45,8 +46,11 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	public function get_current_user() {
 		return $this->current_user;
 	}
-	private function init_current_user() {
+	private function init_current_user( $reload ) {
 		$WDGUser_current = WDGUser::current();
+		if ( $reload ) {
+			$WDGUser_current->construct_with_api_data();
+		}
 		$this->current_user = $WDGUser_current;
 		if ( $WDGUser_current->is_admin() ) {
 			$input_user_id = filter_input( INPUT_GET, 'override_current_user' );
