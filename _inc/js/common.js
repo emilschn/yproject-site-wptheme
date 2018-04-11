@@ -15,6 +15,7 @@ YPUIFunctions = (function($) {
 	return {
 		
 		currentLightbox: '',
+		currentRequest: '',
 
 		initUI: function() {
 			WDGProjectPageFunctions.initUI();
@@ -491,7 +492,7 @@ YPUIFunctions = (function($) {
 		},
 
 		getInvestments: function(campaign_id){
-			$.ajax({
+			YPUIFunctions.currentRequest = $.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,
 				'data': {
@@ -499,6 +500,7 @@ YPUIFunctions = (function($) {
 					'id_campaign' : campaign_id
 				}
 			}).done(function(result){
+				YPUIFunctions.currentRequest = '';
 				inv_data = JSON.parse(result);
 
 				//Injecte les données directement affichées dans leurs emplacements
