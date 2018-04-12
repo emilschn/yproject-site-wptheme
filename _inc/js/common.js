@@ -224,15 +224,17 @@ YPUIFunctions = (function($) {
 			$(".home_video .button-video, .home_video .button-video-shadows").click(function() {
 				$(".home_video .button-video, .home_video .button-video-shadows").hide();
 				var sContainer = ".home_video .video-container";
+				var sW = '320';
+				var sH = '180';
 				if ($(window).width() > 570) {
 					sContainer += ".w570";
+					sW = '570';
+					sH = '321';
 				} else {
 					sContainer += ".w320";
 				}
+				$(sContainer).append( '<iframe src="https://www.youtube.com/embed/QJmhrCG5acU?feature=oembed&amp;rel=0&amp;wmode=transparent&amp;autoplay=1" style="border: none" allow="autoplay; encrypted-media" width="'+sW+'" height="'+sH+'"></iframe>' );
 				$(sContainer).show();
-				var src = $(sContainer + " iframe").attr("src");
-				src += '&autoplay=1';
-				$(sContainer + " iframe").attr("src", src);
 			});
 			
 			if ($("#cookies-alert").length > 0) {
