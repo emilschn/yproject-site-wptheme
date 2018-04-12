@@ -280,7 +280,7 @@ WDGCampaignDashboard.prototype.initLinks = function() {
 	var self = this;
 	$( 'a' ).click( function() {
 		// On ne couple la requete que si il n'y a pas de # dans le lien
-		if ( $( this ).attr( 'href' ) !== '' && $( this ).attr( 'href' ).indexOf( '#' ) !== '' && $( this ).attr( 'href' ).indexOf( '#' ) === -1 ) {
+		if ( $( this ).attr( 'href' ) !== undefined && $( this ).attr( 'href' ) !== '' && $( this ).attr( 'href' ).indexOf( '#' ) === -1 ) {
 			if ( self.createTableRequest !== undefined ) {
 				self.createTableRequest.abort();
 			}
