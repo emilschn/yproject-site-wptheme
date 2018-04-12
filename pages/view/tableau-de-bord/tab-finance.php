@@ -144,11 +144,12 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				$next_date->add( new DateInterval( 'P3M' ) );
 			}
 		}
+		$contract_start_date = new DateTime( $page_controler->get_campaign()->contract_start_date() );
 		DashboardUtility::create_field(array(
 			"id"			=> "new_contract_start_date",
 			"type"			=> "select",
 			"label"			=> "Date de d&eacute;marrage du contrat",
-			"value"			=> $page_controler->get_campaign()->contract_start_date(),
+			"value"			=> $contract_start_date->format( 'Y-m-d' ),
 			"editable"		=> $contract_start_date_editable,
 			"options_id"	=> $contract_start_date_values,
 			"options_names"	=> $contract_start_date_list
