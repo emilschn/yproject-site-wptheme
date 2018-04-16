@@ -15,8 +15,6 @@ if ( !isset( $organization_obj ) ) {
 }
 
 $WDGUser_current = WDGUser::current();
-$organization_obj->send_kyc();
-$organization_obj->submit_transfer_wallet_lemonway();
 
 ?>
 	    
@@ -454,13 +452,15 @@ $organization_obj->submit_transfer_wallet_lemonway();
 		<?php if ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_blocked): ?>
 			<?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIREN. Ainsi que les 5 documents suivis d'une &eacute;toile ci-dessus.", 'yproject'); ?><br />
 		<?php elseif ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_ready): ?>
-			<form action="" method="POST" enctype="multipart/form-data">
-				<input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
+			<form action="" method="POST">
+				<input type="hidden" name="authentify_lw" value="1" />
+				<input type="submit" class="button" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
 			</form>
 		<?php elseif ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_waiting): ?>
 			<?php _e("L'organisation est en cours d'authentification aupr&egrave;s de notre partenaire.", 'yproject'); ?>
-			<form action="" method="POST" enctype="multipart/form-data">
-				<input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
+			<form action="" method="POST">
+				<input type="hidden" name="authentify_lw" value="1" />
+				<input type="submit" class="button" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
 			</form>
 		<?php elseif ($organization_obj->is_registered_lemonway_wallet()): ?>
 			<?php _e("L'organisation est bien authentifi&eacute;e aupr&egrave;s de notre partenaire.", 'yproject'); ?>

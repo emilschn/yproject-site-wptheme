@@ -67,6 +67,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		WDGFormProjects::form_submit_roi_payment();
 		WDGFormProjects::form_approve_payment();
 		WDGFormProjects::form_cancel_payment();
+		$current_organization = $this->get_campaign_organization();
+		$current_organization->send_kyc();
+		$current_organization->submit_transfer_wallet_lemonway();
 		$this->return_lemonway_card = WDGFormProjects::return_lemonway_card();
 	}
 	
