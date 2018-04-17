@@ -130,8 +130,8 @@ $projects_html = $page_controler->get_projects_html();
     <div id="video-content">
         <h2 class="standard">/ <?php _e("Comment &ccedil;a marche ?", "yproject")?> /</h2>
         <div class="home_video">
-            <div class="video-container w570 hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 570)); ?></div>
-            <div class="video-container w320 hidden"><?php echo wp_oembed_get('https://youtu.be/QJmhrCG5acU', array("width" => 320)); ?></div>
+            <div class="video-container w570 hidden"></div>
+            <div class="video-container w320 hidden"></div>
 
             <div class="button-video"><img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-nb.jpg" alt="Bouton video" /></div>
             <div class="button-video-shadows hidden-inf997">
@@ -144,5 +144,5 @@ $projects_html = $page_controler->get_projects_html();
 
 
 <div id="home-press" class="hidden-inf997">
-	<a href="<?php echo home_url( '/press-book' ); ?>"><img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse-mars-2017.png" alt="presse" /></a>
+	<a href="<?php echo home_url( '/a-propos/press-book' ); ?>"><img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse-mars-2017.png" alt="presse" /></a>
 </div> <!-- section#home-press -->

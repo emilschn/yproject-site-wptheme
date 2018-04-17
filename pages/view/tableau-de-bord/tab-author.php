@@ -22,7 +22,7 @@ global $country_list;
 			'id'			=> 'new_gender',
 			'type'			=> 'select',
 			'label'			=> "Vous &ecirc;tes",
-			'value'			=> $page_controler->get_campaign_author()->wp_user->get('user_gender'),
+			'value'			=> $page_controler->get_campaign_author()->get_gender(),
 			'editable'		=> $page_controler->can_access_author(),
 			'options_id'	=> array( 'female', 'male' ),
 			'options_names'	=> array( "une femme", "un homme" )
@@ -32,7 +32,7 @@ global $country_list;
 			'id'			=> 'new_firstname',
 			'type'			=> 'text',
 			'label'			=> "Pr&eacute;nom",
-			'value'			=> $page_controler->get_campaign_author()->wp_user->user_firstname,
+			'value'			=> $page_controler->get_campaign_author()->get_firstname(),
 			'editable'		=> $page_controler->can_access_author()
 		) );
 
@@ -40,25 +40,16 @@ global $country_list;
 			'id'			=> 'new_lastname',
 			'type'			=> 'text',
 			'label'			=> "Nom",
-			'value'			=> $page_controler->get_campaign_author()->wp_user->user_lastname,
+			'value'			=> $page_controler->get_campaign_author()->get_lastname(),
 			'editable'		=> $page_controler->can_access_author()
 		));
-
-		$bd = new DateTime();
-		$user_birthday_year = $page_controler->get_campaign_author()->wp_user->get( 'user_birthday_year' );
-		if ( !empty( $user_birthday_year ) ) {
-			$bd->setDate( 
-				intval( $page_controler->get_campaign_author()->wp_user->get( 'user_birthday_year' ) ),
-				intval( $page_controler->get_campaign_author()->wp_user->get( 'user_birthday_month' ) ),
-				intval( $page_controler->get_campaign_author()->wp_user->get( 'user_birthday_day' ) )
-			);
-		}
-
+		
+		$birthday_datetime = new DateTime( $page_controler->get_campaign_author()->get_birthday_date() );
 		DashboardUtility::create_field( array(
 			'id'			=> 'new_birthday',
 			'type'			=> 'date',
 			'label'			=> "Date de naissance",
-			'value'			=> $bd,
+			'value'			=> $birthday_datetime,
 			'editable'		=> $page_controler->can_access_author()
 		) );
 
@@ -66,7 +57,7 @@ global $country_list;
 			'id'			=> 'new_birthplace',
 			'type'			=> 'text',
 			'label'			=> "Ville de naissance",
-			'value'			=> $page_controler->get_campaign_author()->wp_user->get( 'user_birthplace' ),
+			'value'			=> $page_controler->get_campaign_author()->get_birthplace(),
 			'editable'		=> $page_controler->can_access_author()
 		));
 
@@ -74,7 +65,7 @@ global $country_list;
 			'id'			=> 'new_nationality',
 			'type'			=> 'select',
 			'label'			=> "Nationalit&eacute;",
-			'value'			=> $page_controler->get_campaign_author()->wp_user->get( 'user_nationality' ),
+			'value'			=> $page_controler->get_campaign_author()->get_nationality(),
 			'editable'		=> $page_controler->can_access_author(),
 			'options_id'	=> array_keys( $country_list ),
 			'options_names'	=> array_values( $country_list )
@@ -84,7 +75,7 @@ global $country_list;
 			'id'			=> 'new_mobile_phone',
 			'type'			=> 'text',
 			'label'			=> "T&eacute;l&eacute;phone mobile",
-			'value'			=> $page_controler->get_campaign_author()->wp_user->get( 'user_mobile_phone' ),
+			'value'			=> $page_controler->get_campaign_author()->get_phone_number(),
 			'infobubble'	=> "Ce num&eacute;ro sera celui utilis&eacute; pour vous contacter &agrave; propos de votre projet",
 			'editable'		=> $page_controler->can_access_author()
 		) );
@@ -93,7 +84,7 @@ global $country_list;
 			'id'			=> 'new_mail',
 			'type'			=> 'text',
 			'label'			=> "Adresse &eacute;lectronique",
-			'value'			=> $page_controler->get_campaign_author()->wp_user->get( 'user_email' ),
+			'value'			=> $page_controler->get_campaign_author()->get_email(),
 			'editable'		=> $page_controler->can_access_author()
 		) );
 
@@ -101,7 +92,7 @@ global $country_list;
 			'id'			=> 'new_address',
 			'type'			=> 'text',
 			'label'			=> "Adresse",
-			'value'			=> $page_controler->get_campaign_author()->wp_user->get( 'user_address' ),
+			'value'			=> $page_controler->get_campaign_author()->get_address(),
 			'editable'		=> $page_controler->can_access_author()
 		) );
 
@@ -109,7 +100,7 @@ global $country_list;
 			'id'			=> 'new_postal_code',
 			'type'			=> 'text',
 			'label'			=> "Code postal",
-			'value'			=> $page_controler->get_campaign_author()->wp_user->get('user_postal_code'),
+			'value'			=> $page_controler->get_campaign_author()->get_postal_code(),
 			'editable'		=> $page_controler->can_access_author()
 		) );
 
@@ -117,7 +108,7 @@ global $country_list;
 			'id'			=> 'new_city',
 			'type'			=> 'text',
 			'label'			=> "Ville",
-			'value'			=> $page_controler->get_campaign_author()->wp_user->get('user_city'),
+			'value'			=> $page_controler->get_campaign_author()->get_city(),
 			'editable'		=> $page_controler->can_access_author()
 		) );
 
@@ -125,7 +116,7 @@ global $country_list;
 			'id'			=> 'new_country',
 			'type'			=> 'text',
 			'label'			=> "Pays",
-			'value'			=> $page_controler->get_campaign_author()->wp_user->get('user_country'),
+			'value'			=> $page_controler->get_campaign_author()->get_country(),
 			'editable'		=> $page_controler->can_access_author()
 		) );?>
 		<br/>

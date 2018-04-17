@@ -135,20 +135,21 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					$next_date = new DateTime( ( $campaign_creation_date->format( 'Y' ) + 1 ) . '-01-01' );
 					break;
 			}
-			array_push( $contract_start_date_values, $previous_date->format( 'Y-m-d H:i:s' ) );
+			array_push( $contract_start_date_values, $previous_date->format( 'Y-m-d' ) );
 			array_push( $contract_start_date_list, $previous_date->format( 'd/m/Y' ) );
 			// Ensuite on ajoute (arbitrairement) 10 dates
 			for ( $i = 0; $i < 10; $i++ ) {
-				array_push( $contract_start_date_values, $next_date->format( 'Y-m-d H:i:s' ) );
+				array_push( $contract_start_date_values, $next_date->format( 'Y-m-d' ) );
 				array_push( $contract_start_date_list, $next_date->format( 'd/m/Y' ) );
 				$next_date->add( new DateInterval( 'P3M' ) );
 			}
 		}
+		$contract_start_date = new DateTime( $page_controler->get_campaign()->contract_start_date() );
 		DashboardUtility::create_field(array(
 			"id"			=> "new_contract_start_date",
 			"type"			=> "select",
 			"label"			=> "Date de d&eacute;marrage du contrat",
-			"value"			=> $page_controler->get_campaign()->contract_start_date(),
+			"value"			=> $contract_start_date->format( 'Y-m-d' ),
 			"editable"		=> $contract_start_date_editable,
 			"options_id"	=> $contract_start_date_values,
 			"options_names"	=> $contract_start_date_list

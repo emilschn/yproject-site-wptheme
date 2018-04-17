@@ -185,6 +185,15 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"label"	=> __( "Nombre d'employ&eacute;s au lancement", 'yproject' ),
 			"value"	=> $page_controler->get_campaign()->get_api_data( 'employees_number' )
 		));
+				
+		DashboardUtility::create_field(array(
+			"id"	=> "new_minimum_goal_display",
+			"type"	=> "select",
+			"label"	=> __( "Affichage de l'objectif minimum", 'yproject' ),
+			"value"	=> $page_controler->get_campaign()->get_minimum_goal_display(),
+			"options_id"	=> array( ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_max, ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ),
+			"options_names"	=> array( "Afficher l'objectif minimum", "Afficher l'objectif maximum et un seuil de validation" )
+		));
 		
 		// Champs personnalisés
 		$nb_custom_fields = $page_controler->get_campaign_author()->wp_user->get('wdg-contract-nb-custom-fields');
@@ -235,5 +244,18 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
 		</form>
 	</div>
+	<?php endif; ?>
+			
+	<?php if ( $page_controler->can_access_admin() ): ?>
+		<?php $can_conclude = ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_archive || $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_closed ); ?>
+		<?php if ( $can_conclude ): ?>
+		<div class="field admin-theme">
+			Bouton réservé pour gestion des données. Ne pas toucher ! :)
+			<form id="conclude_project_form" class="ajax-db-form" data-action="conclude_project">
+				<?php DashboardUtility::create_save_button( 'conclude_project_form', $page_controler->can_access_admin(), 'Finaliser', 'Finalisation', TRUE ); ?>
+				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+			</form>
+		</div>
+		<?php endif; ?>
 	<?php endif; ?>
 </div>

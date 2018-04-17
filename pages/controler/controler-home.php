@@ -31,7 +31,7 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 /******************************************************************************/
 // PROJECT LIST
 /******************************************************************************/
-	private static $funded_campaign_top_list = array( 'naoden', 'twiza', 'blocinbloc' );
+	private static $funded_campaign_top_list = array( 'naoden', 'listo', 'twiza' );
 	private function init_projects() {
 		$this->projects_html = $this->get_db_cached_elements( WDG_Page_Controler_Home::$projects_html_key, WDG_Page_Controler_Home::$projects_html_version );
 		if ( empty( $this->projects_html ) ) {

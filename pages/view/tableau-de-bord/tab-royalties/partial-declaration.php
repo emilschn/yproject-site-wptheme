@@ -234,16 +234,16 @@ $declaration_message = $declaration->get_message();
 				<div class="loading-content"></div>
 				<div class="loading-form align-center hidden">
 					<form action="" method="POST" id="proceed_roi_transfers_form">
-						<label for="check_send_notifications"><input type="checkbox" name="send_notifications" class="field" id="check_send_notifications" value="1" <?php checked( !has_term( 'actifs', 'download_category', $page_controler->get_campaign_id() ) ); ?> /> Envoyer un mail automatique aux investisseurs (laisser décocher pour les projets d'actifs)</label><br />
+						<label for="check_send_notifications"><input type="checkbox" name="send_notifications" class="field" id="check_send_notifications" data-id="check_send_notifications" data-type="check" value="1" <?php checked( !has_term( 'actifs', 'download_category', $page_controler->get_campaign_id() ) ); ?> /> Envoyer un mail automatique aux investisseurs (laisser décocher pour les projets d'actifs)</label><br />
 						<?php if ( $previous_remaining_amount > 0 ): ?>
-						<label for="check_transfer_remaining_amount"><input type="checkbox" name="transfer_remaining_amount" class="field" id="check_transfer_remaining_amount" value="1" /> Verser les reliquats précédents (<?php echo $previous_remaining_amount; ?> &euro;)</label><br />
+						<label for="check_transfer_remaining_amount"><input type="checkbox" name="transfer_remaining_amount" class="field" id="check_transfer_remaining_amount" data-id="check_transfer_remaining_amount" data-type="check" value="1" /> Verser les reliquats précédents (<?php echo $previous_remaining_amount; ?> &euro;)</label><br />
 						<?php endif; ?>
 						<br />
 						<input type="hidden" id="hidden-roi-id" name="roi_id" class="field" data-id="roi_id" data-type="hidden" value="" />
 						<input type="hidden" id="hidden-campaign-id" name="campaign_id" class="field" data-id="campaign_id" data-type="hidden" value="<?php echo $page_controler->get_campaign_id(); ?>" />
 						
 						<p id="proceed_roi_transfers_percent" class="align-center"></p>
-						<?php DashboardUtility::create_save_button( 'proceed_roi_transfers', $page_controler->can_access_author(), "Verser", "Versement", true ); ?>
+						<?php DashboardUtility::create_save_button( 'proceed_roi_transfers', $page_controler->can_access_admin(), "Verser", "Versement", true ); ?>
 					</form>
 				</div>
 			</div>

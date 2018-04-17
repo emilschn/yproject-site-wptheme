@@ -56,9 +56,20 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		wp_enqueue_style( 'datatable-buttons-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/buttons.dataTables.min.css', null, false, 'all' );
 		
 		$this->init_campaign_data();
+		if ( !$this->can_access ) {
+			wp_redirect( home_url() );
+			exit();
+		}
+		$this->check_has_signed_mandate();
 		$this->init_context();
 		WDGFormProjects::form_submit_turnover();
 		WDGFormProjects::form_submit_account_files();
+		WDGFormProjects::form_submit_roi_payment();
+		WDGFormProjects::form_approve_payment();
+		WDGFormProjects::form_cancel_payment();
+		$current_organization = $this->get_campaign_organization();
+		$current_organization->send_kyc();
+		$current_organization->submit_transfer_wallet_lemonway();
 		$this->return_lemonway_card = WDGFormProjects::return_lemonway_card();
 	}
 	
@@ -139,4 +150,15 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		return $this->return_lemonway_card;
 	}
 	
+/******************************************************************************/
+// CONTROLE FORMULAIRES
+/******************************************************************************/
+	public function check_has_signed_mandate() {
+		$input_has_signed_mandate = filter_input( INPUT_GET, 'has_signed_mandate' );
+		if ( !empty( $input_has_signed_mandate ) ) {
+			NotificationsEmails::campaign_sign_mandate_admin( $this->campaign_organization->get_wpref() );
+			wp_redirect( home_url( 'tableau-de-bord' ) . '?campaign_id=' . $this->get_campaign_id() . '#contracts' );
+			exit();
+		}
+	}
 }

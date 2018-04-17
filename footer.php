@@ -55,7 +55,7 @@ else {
 							</div>
 
 							<div>
-								<a class="link" href="<?php echo home_url('/contact'); ?>"><?php _e( "Contactez-nous", 'yproject' ); ?></a>
+								<a class="link" href="<?php echo home_url('/a-propos/contact'); ?>"><?php _e( "Contactez-nous", 'yproject' ); ?></a>
 							</div>
 						</div>
 					<?php endif; ?>
@@ -67,6 +67,7 @@ else {
 				<div>
 					<div>
 						<a href="https://acpr.banque-france.fr/agrements-et-autorisations/le-financement-participatif-crowdfunding.html" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/ifp.png" alt="logo label IFP" width="160"/></a>
+						<span>Immatricul&eacute;e &agrave; l'ORIAS sous le num&eacute;ro <strong>17002712</strong></span>
 					</div>
 					
 					<div>

@@ -243,10 +243,13 @@ jQuery(document).ready( function($) {
 
 function WDGCampaignDashboard() {
 	this.walletTimetableDatatable;
+	this.createTableRequest;
     this.initWithHash();
+    this.initLinks();
 	this.initMenu();
 	this.drawTimetable();
 	this.initAjaxForms();
+	this.initHome();
 	this.initContacts();
 	this.initOrgaForms();
 	this.initTeam();
@@ -266,6 +269,26 @@ WDGCampaignDashboard.prototype.initWithHash = function() {
 	} else {
 		this.switchTab( 'home' );
 	}
+	
+};
+
+/**
+ * Initialise les liens pour couper d'éventuelles requêtes si nécessaire
+ */
+WDGCampaignDashboard.prototype.initLinks = function() {
+	
+	var self = this;
+	$( 'a' ).click( function() {
+		// On ne couple la requete que si il n'y a pas de # dans le lien
+		if ( $( this ).attr( 'href' ) !== undefined && $( this ).attr( 'href' ) !== '' && $( this ).attr( 'href' ).indexOf( '#' ) === -1 ) {
+			if ( self.createTableRequest !== undefined ) {
+				self.createTableRequest.abort();
+			}
+			if ( YPUIFunctions.currentRequest !== '' ) {
+				YPUIFunctions.currentRequest.abort();
+			}
+		}
+	} );
 	
 };
 
@@ -443,6 +466,35 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 			thisForm.find(":input").prop('disabled', false);
 		});
 	});
+};
+
+WDGCampaignDashboard.prototype.initHome = function() {
+
+	//Preview date fin collecte sur LB étape suivante
+	if(($("#innbdayvote").length > 0)||($("#innbdaycollecte").length > 0)) {
+
+		updateDate = function(idfieldinput, iddisplay) {
+			$("#"+iddisplay).empty();
+			if($("#"+idfieldinput).val()<=$("#"+idfieldinput).prop("max") && $("#"+idfieldinput).val()>=$("#"+idfieldinput).prop("min")){
+				var d = new Date();
+				var jsupp = $("#"+idfieldinput).val();
+				d.setDate(d.getDate()+parseInt(jsupp));
+				$("#"+iddisplay).prepend(' '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+			} else {
+				$("#"+iddisplay).prepend("La durée doit être comprise entre "+($("#"+idfieldinput).prop("min"))+" et "+($("#"+idfieldinput).prop("max"))+" jours");
+			}
+		};
+
+		updateDate("innbdaycollecte","previewenddatecollecte");
+		updateDate("innbdayvote","previewenddatevote");
+
+		$("#innbdaycollecte").on( 'keyup change', function () {
+			updateDate("innbdaycollecte","previewenddatecollecte");});
+
+		$("#innbdayvote").on( 'keyup change', function () {
+			updateDate("innbdayvote","previewenddatevote");});
+	}
+	
 };
 
 WDGCampaignDashboard.prototype.initContacts = function() {
@@ -941,7 +993,7 @@ WDGCampaignDashboard.prototype.updateOrgaSelectInput = function(feedback){
 WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id) {
 	var self = this;
 	
-	$.ajax({
+	self.createTableRequest = $.ajax({
 		'type' : "POST",
 		'url' : ajax_object.ajax_url,
 		'data': {
@@ -950,6 +1002,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 			'data' : inv_data
 		}
 	}).done(function(result){
+		self.createTableRequest = undefined;
 		//Affiche resultat requete Ajax une fois reçue
 		$('#ajax-contacts-load').after(result);
 		$('#ajax-loader-img').hide();//On cache la roue de chargement.
@@ -1524,5 +1577,8 @@ WDGCampaignDashboard.prototype.initCampaign = function(){
 
 var wdgCampaignDashboard;
 jQuery(document).ready( function($) {
-    wdgCampaignDashboard = new WDGCampaignDashboard();
+	// Initialisation uniquement si construit
+	if ( $( 'ul.nav-menu' ).length > 0 ) {
+		wdgCampaignDashboard = new WDGCampaignDashboard();
+	}
 } );

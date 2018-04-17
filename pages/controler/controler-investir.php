@@ -126,9 +126,16 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		return $this->current_step;
 	}
 	
+	/**
+	 * Détermine si la fenêtre d'avertissement est visible :
+	 * - sur la première page du processus
+	 * - quand on y vient pour la première fois
+	 * - si on est en collecte
+	 * @return boolean
+	 */
 	public function is_warning_visible() {
 		$invest_start = filter_input( INPUT_GET, 'invest_start' );
-		return ( $this->current_step == 1 && $invest_start == '1' );
+		return ( $this->current_step == 1 && $invest_start == '1' && $this->current_campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte );
 	}
 	public function get_warning_content() {
 		$edd_settings = get_option( 'edd_settings' );
