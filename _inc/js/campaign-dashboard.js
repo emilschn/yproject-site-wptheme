@@ -243,7 +243,9 @@ jQuery(document).ready( function($) {
 
 function WDGCampaignDashboard() {
 	this.walletTimetableDatatable;
+	this.createTableRequest;
     this.initWithHash();
+    this.initLinks();
 	this.initMenu();
 	this.drawTimetable();
 	this.initAjaxForms();
@@ -267,6 +269,26 @@ WDGCampaignDashboard.prototype.initWithHash = function() {
 	} else {
 		this.switchTab( 'home' );
 	}
+	
+};
+
+/**
+ * Initialise les liens pour couper d'éventuelles requêtes si nécessaire
+ */
+WDGCampaignDashboard.prototype.initLinks = function() {
+	
+	var self = this;
+	$( 'a' ).click( function() {
+		// On ne couple la requete que si il n'y a pas de # dans le lien
+		if ( $( this ).attr( 'href' ) !== undefined && $( this ).attr( 'href' ) !== '' && $( this ).attr( 'href' ).indexOf( '#' ) === -1 ) {
+			if ( self.createTableRequest !== undefined ) {
+				self.createTableRequest.abort();
+			}
+			if ( YPUIFunctions.currentRequest !== '' ) {
+				YPUIFunctions.currentRequest.abort();
+			}
+		}
+	} );
 	
 };
 
@@ -971,7 +993,7 @@ WDGCampaignDashboard.prototype.updateOrgaSelectInput = function(feedback){
 WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id) {
 	var self = this;
 	
-	$.ajax({
+	self.createTableRequest = $.ajax({
 		'type' : "POST",
 		'url' : ajax_object.ajax_url,
 		'data': {
@@ -980,6 +1002,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 			'data' : inv_data
 		}
 	}).done(function(result){
+		self.createTableRequest = undefined;
 		//Affiche resultat requete Ajax une fois reçue
 		$('#ajax-contacts-load').after(result);
 		$('#ajax-loader-img').hide();//On cache la roue de chargement.
