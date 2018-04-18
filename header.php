@@ -121,7 +121,7 @@
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
 				<?php if (is_user_logged_in()): ?>
 				<a href="#" class="btn-user connected"><?php UIHelpers::print_user_avatar($WDGUser_current->wp_user->ID, 'icon'); ?></a>				
-				<?php elseif ( is_home() or is_front_page() ): ?>
+				<?php elseif ( $page_controler->get_display_link_account() ): ?>
 				<a href="<?php echo home_url( 'mon-compte' ); ?>" class="btn-user not-connected"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
 				<?php else: ?>
 				<a href="#" class="btn-user not-connected inactive"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
