@@ -226,4 +226,5 @@ div.mean-payment-list p > span {
 }
 div.mean-payment-list a div, div.mean-payment-list p > span {
 	margin-left: 130px;
+	text-align: justify;
 }

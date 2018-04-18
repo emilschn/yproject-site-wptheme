@@ -3,6 +3,8 @@ $template_engine = WDG_Templates_Engine::instance();
 $template_engine->set_controler( new WDG_Page_Controler_MeanPayment() );
 
 class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
+	public static $display_card_alert_amount = 500;
+	
 	/**
 	 * @var ATCF_Campaign
 	 */
@@ -147,6 +149,10 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	public function can_use_card_and_wallet() {
 		$this->init_can_use_wallet();
 		return $this->can_use_card_and_wallet;
+	}
+	
+	public function display_card_amount_alert() {
+		return ( $this->current_investment->get_session_amount() >= WDG_Page_Controler_MeanPayment::$display_card_alert_amount );
 	}
 	
 	public function can_use_wire() {
