@@ -8,6 +8,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	 * @var WDGUser 
 	 */
 	private $current_user;
+	private $current_user_organizations;
 	private $user_id;
 	private $user_name;
 	private $user_project_list;
@@ -34,6 +35,9 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$this->init_project_list();
 		$this->init_form();
 		locate_template( array( 'country_list.php'  ), true );
+		
+		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
+		wp_enqueue_script( 'wdg-user-account', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-user-account.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION);
 	}
 	
 /******************************************************************************/
@@ -46,6 +50,11 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	public function get_current_user() {
 		return $this->current_user;
 	}
+	
+	public function get_current_user_organizations() {
+		return $this->current_user_organizations;
+	}
+	
 	private function init_current_user( $reload ) {
 		$WDGUser_current = WDGUser::current();
 		if ( $reload ) {
@@ -59,8 +68,20 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 			}
 		}
 		
+		$this->init_current_user_organizations();
 		$this->user_id = $this->current_user->get_wpref();
 		$this->init_user_name();
+	}
+	
+	private function init_current_user_organizations() {
+		$this->current_user_organizations = array();
+		$organizations_list = $this->current_user->get_organizations_list();
+		if ( !empty( $organizations_list ) ) {
+			foreach ( $organizations_list as $organization_item ) {
+				$organization_obj = new WDGOrganization( $organization_item->wpref );
+				array_push( $this->current_user_organizations, $organization_obj );
+			}
+		}
 	}
 	
 /******************************************************************************/

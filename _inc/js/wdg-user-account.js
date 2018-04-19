@@ -10,8 +10,12 @@ function UserAccountDashboard() {
 UserAccountDashboard.prototype.initWithHash = function() {
 
 	var sCurrentTab = window.location.hash.substring(1);
-	if (sCurrentTab !== '') {
-		this.switchTab( sCurrentTab );
+	if ( sCurrentTab !== '' ) {
+		if ( sCurrentTab === 'orga-wallet' || sCurrentTab === 'orga-investments' ) {
+			$( 'li#menu-item-wallet a' ).click();
+		} else {
+			this.switchTab( sCurrentTab, false );
+		}
 	}
 	
 };
@@ -24,7 +28,7 @@ UserAccountDashboard.prototype.initMenu = function() {
 	var self = this;
 	$( 'ul.nav-menu li a' ).each( function() {
 		$( this ).click( function() {
-			self.switchTab( $( this ).data( 'tab' ) );
+			self.switchTab( $( this ).data( 'tab' ), this );
 		} );
 	} );
 	
@@ -33,13 +37,19 @@ UserAccountDashboard.prototype.initMenu = function() {
 /**
  * Change d'onglet
  */
-UserAccountDashboard.prototype.switchTab = function(sType) {
+UserAccountDashboard.prototype.switchTab = function( sType, clickedElement ) {
 	
 	$( 'ul.nav-menu li' ).removeClass( 'selected' );
 	$( 'div#item-body > div.item-body-tab' ).hide();
 	
-	$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
-	$( 'div#item-body > div#item-body-' + sType ).show();
+	if ( sType === 'orga-wallet' || sType === 'orga-investments' ) {
+		$( clickedElement ).parent().addClass( 'selected' );
+		$( 'div#item-body > div#item-body-' +sType+ '-' + $( clickedElement ).data( 'id' ) ).show();
+		
+	} else {
+		$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
+		$( 'div#item-body > div#item-body-' + sType ).show();
+	}
 	
 };
 

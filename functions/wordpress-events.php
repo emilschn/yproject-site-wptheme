@@ -202,10 +202,6 @@ class WDG_WordPress_Events {
 			if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION); }
 		}
 		
-		if ( $post->post_name == 'mon-compte' ) {
-			wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
-			wp_enqueue_script( 'wdg-user-account', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-user-account.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION);
-		}
 		$pages_investment = array( 'investir', 'moyen-de-paiement', 'paiement-effectue', 'paiement-partager', 'terminer-preinvestissement' );
 		if ( in_array( $post->post_name, $pages_investment ) ) {
 			wp_enqueue_style( 'invest-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/invest.min.css', null, ASSETS_VERSION, 'all' );
