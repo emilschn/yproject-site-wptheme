@@ -149,11 +149,11 @@ $lang_list = $campaign->get_lang_list();
 					<div class="left">
 						<?php
 						$number = $nbvoters;
-						$text = __("votant", 'yproject');
+						$text = __("&eacute;valuateur", 'yproject');
 						if ($nbvoters == 0) {
 							$number = __("aucun", 'yproject');
 						} elseif ($nbvoters > 1) {
-							$text = __("votants", 'yproject');
+							$text = __("&eacute;valuateurs", 'yproject');
 						}
 						?>
 						<span><?php echo $number; ?></span><br />
@@ -197,7 +197,7 @@ $lang_list = $campaign->get_lang_list();
 						
 						<?php if ( !is_user_logged_in() ): ?>
 							<a href="<?php echo home_url( '/connexion' ); ?>?source=project" class="button red">
-								<?php _e('Voter', 'yproject'); ?>
+								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
 
 						<?php elseif ( $has_voted_and_preinvested ): ?>
@@ -209,8 +209,8 @@ $lang_list = $campaign->get_lang_list();
 							<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
 
 						<?php else: ?>
-							<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote" data-thankyoumsg="<?php _e( "Merci pour votre vote !", 'yproject' ); ?>">
-								<?php _e('Voter', 'yproject'); ?>
+							<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote" data-thankyoumsg="<?php _e( "Merci pour votre &eacute;valuation !", 'yproject' ); ?>">
+								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
 						<?php endif; ?>
 

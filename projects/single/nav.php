@@ -55,18 +55,18 @@ if (is_user_logged_in()) {
 					<?php if (!is_user_logged_in()): ?>
 						<a href="<?php echo home_url( '/connexion' ) . '?source=project'; ?>" class="button red"
 							data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start">
-							<?php _e('Voter', 'yproject'); ?>
+							<?php _e('&Eacute;valuer', 'yproject'); ?>
 						</a>
 
 					<?php elseif ($has_voted): ?>
 						<div class="disabled">
-							<?php _e('Merci pour votre vote !', 'yproject'); ?>
+							<?php _e('Merci pour votre &eacute;valuation !', 'yproject'); ?>
 						</div>
 
 					<?php else: ?>
 					<div>
-						<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote" data-thankyoumsg="<?php _e( "Merci pour votre vote !", 'yproject' ); ?>">
-							<?php _e('Voter', 'yproject'); ?>
+						<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote" data-thankyoumsg="<?php _e( "Merci pour votre &eacute;valuation !", 'yproject' ); ?>">
+							<?php _e('&Eacute;valuer', 'yproject'); ?>
 						</a>
 					</div>
 					<?php endif; ?>

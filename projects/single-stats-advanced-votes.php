@@ -2,7 +2,7 @@
 if (isset($_GET['campaign_id'])) {
         $campaign = atcf_get_campaign($_GET['campaign_id']); ?>
 
-	<h2>Statistiques des votes</h2>
+	<h2>Statistiques des &eacute;valuations</h2>
 	<?php
 	locate_template( array("projects/common/stats-public-votes.php"), true );
 	$vote_results = WDGCampaignVotes::get_results($_GET['campaign_id']); 

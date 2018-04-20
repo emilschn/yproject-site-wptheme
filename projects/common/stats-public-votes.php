@@ -1,7 +1,7 @@
 <?php function print_vote_results($vote_results) { ?>
 
 <?php if ($vote_results['count_voters'] > 0): ?>
-<strong><?php echo $vote_results['count_voters']; ?></strong> <?php _e('personnes ont vot&eacute; sur ce projet.', 'yproject'); ?><br />
+<strong><?php echo $vote_results['count_voters']; ?></strong> <?php _e('personnes ont &eacute;valu&eacute; sur ce projet.', 'yproject'); ?><br />
 
 <h3><?php _e( "Pr&eacute;investissements", 'yproject' ); ?></h3>
 	<?php _e( "Nombre de pr&eacute;investissements :" ); ?> <?php echo $vote_results[ 'count_preinvestments' ]; ?><br>
@@ -20,7 +20,7 @@
 <em><?php _e('Notes attribu&eacute;es au projet', 'yproject'); ?></em><br />
 <center><canvas id="canvas-vertical-bar" width="400" height="200"></canvas></center>
 
-<strong><?php echo $vote_results['percent_project_validated']; ?> %</strong> <?php _e( "des votants ont donn&eacute; un avis positif (note sup&eacute;rieure &agrave; 2)", 'yproject' ); ?><br />
+<strong><?php echo $vote_results['percent_project_validated']; ?> %</strong> <?php _e( "des &eacute;valuateurs ont donn&eacute; un avis positif (note sup&eacute;rieure &agrave; 2)", 'yproject' ); ?><br />
 <ul>
 	<li>
 			<?php
@@ -28,7 +28,7 @@
 			$pourcentage = ($total*100)/$vote_results['objective'];
             ?>
       
-            <?php _e('Sur ces', 'yproject'); ?> <strong><?php echo $vote_results['count_project_validated']; ?></strong> <?php _e('votants', 'yproject'); ?>, <strong><?php echo $vote_results['count_invest_ready']; ?></strong> <?php _e("personnes ont d&eacute;clar&eacute; qu'ils investiraient en moyenne", 'yproject'); ?> <strong><?php echo round($vote_results["average_invest_ready"],2); ?> &euro;</strong>. 
+            <?php _e('Sur ces', 'yproject'); ?> <strong><?php echo $vote_results['count_project_validated']; ?></strong> <?php _e('&eacute;valuateurs', 'yproject'); ?>, <strong><?php echo $vote_results['count_invest_ready']; ?></strong> <?php _e("personnes ont d&eacute;clar&eacute; qu'ils investiraient en moyenne", 'yproject'); ?> <strong><?php echo round($vote_results["average_invest_ready"],2); ?> &euro;</strong>. 
             <?php _e('Pour un total de', 'yproject'); ?> <strong><?php echo round($total ,2); ?></strong> <?php _e("euros d'intentions d'investissement, soit", 'yproject'); ?> <strong><?php echo round($pourcentage ,2).' %'; ?></strong> <?php _e("de l’objectif", 'yproject'); ?>.
         </li>
 	<?php if ($vote_results['show_risk']): ?>
@@ -115,6 +115,6 @@ jQuery(document).ready( function($) {
 </script>
 
 <?php else: ?>
-<?php _e("Il n'y a pas encore eu de vote sur ce projet.", 'yproject'); ?>
+<?php _e("Il n'y a pas encore eu d'&eacute;valuation sur ce projet.", 'yproject'); ?>
 <?php endif; ?>
 <?php } ?>

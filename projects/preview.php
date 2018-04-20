@@ -79,13 +79,13 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 
                 elseif ($campaign_status === ATCF_Campaign::$campaign_status_vote):
 					if ($time_remaining_str != '-') {
-						$projectAction = __(" pour voter", "yproject");
-						$buttonAction = __("Voter sur ce projet", "yproject");
-						$project_status = __("Projet en cours de vote", "yproject");
+						$projectAction = __(" pour &eacute;valuer", "yproject");
+						$buttonAction = __("&Eacute;valuer ce projet", "yproject");
+						$project_status = __("Projet en cours d'&eacute;valuation", "yproject");
 					} else {
 						$projectAction = '';
 						$buttonAction = __("D&eacute;couvrir ce projet", "yproject");
-						$project_status = __("Vote termin&eacute;", "yproject");
+						$project_status = __("&Eacute;valuation termin&eacute;", "yproject");
 					}
         ?>
                     <div class="progress-bar">

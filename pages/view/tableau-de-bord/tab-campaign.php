@@ -42,7 +42,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			DashboardUtility::create_field(array(
 				'id'			=> 'new_skip_vote',
 				'type'			=> 'check',
-				'label'			=> __( "Passer la phase de vote", 'yproject' ),
+				'label'			=> __( "Passer la phase d'&eacute;valuation", 'yproject' ),
 				'value'			=> $page_controler->get_campaign()->skip_vote(),
 				'admin_theme'	=> true,
 				"editable"		=> $page_controler->get_campaign()->is_preparing()
