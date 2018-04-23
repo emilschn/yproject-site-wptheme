@@ -374,9 +374,8 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 						data_to_update[ id ] = data_temp;
 						break;
 					case 'checkboxes':
-						var data_temp = new Array();
 						$( 'input', this ).each( function() {
-							if ( $( this ).is( ':visible' ) && $( this ).is( ':checked' ) ) {
+							if ( $( this ).is( ':checked' ) ) {
 								data_to_update[ id ] = $( this ).is( ':checked' );
 							}
 						} );
