@@ -36,6 +36,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<div>
 				<span class="mean-payment-name"><?php _e( "Carte bancaire", 'yproject' ); ?></span><br>
 				<span><?php _e( "CB, Visa, Mastercard ; e-carte bleue provisoire non accept&eacute;e", 'yproject' ); ?></span>
+				<?php if ( $page_controler->display_card_amount_alert() ): ?>
+				<br>
+				<span class="errors"><?php _e( "Le montant que vous souhaitez investir risque de d&eacute;passer le plafond de paiement de votre carte. Si vous avez un message d'erreur, contactez votre banque pour augmenter votre plafond de paiement par carte ou choisissez un autre mode de paiement.", 'yproject' ); ?></span>
+				<?php endif; ?>
 			</div>
 		</a>
 

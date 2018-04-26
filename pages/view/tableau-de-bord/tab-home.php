@@ -113,13 +113,13 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 						<div class="stat-big-number"><?php echo $nb_votes; ?></div>
 						<div class="stat-little-number">sur <?php echo ATCF_Campaign::$voters_min_required?> requis</div>
 						<div class="details-card">
-							<strong><?php echo $nb_votes; ?></strong> personne<?php if($nb_votes>1){echo 's ont';}else{echo ' a';} echo ' voté';?>
+							<strong><?php echo $nb_votes; ?></strong> personne<?php if($nb_votes>1){echo 's ont';}else{echo ' a';} echo ' évalué';?>
 						</div>
 					</div>
 					<div class="quart-card">
 						<canvas id="canvas-vertical-bar-block" width="160" height="160"></canvas><br/>
 						<div class="details-card">
-							En moyenne, les votants notent <strong><?php echo $vote_results[ 'rate_project_average' ]; ?></strong>
+							En moyenne, les évaluateurs notent <strong><?php echo $vote_results[ 'rate_project_average' ]; ?></strong>
 						</div>
 					</div>
 					<div class="quart-card">
@@ -131,7 +131,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 					</div>
 					<div class="quart-card">
 						<div class="stat-big-number"><?php echo $page_controler->get_campaign()->time_remaining_str();?><br/></div>
-						<div class="stat-little-number">Avant la fin du vote</div>
+						<div class="stat-little-number">Avant la fin de l'évaluation</div>
 						<div class="details-card"><?php echo $page_controler->get_campaign()->time_remaining_fullstr()?></div>
 					</div>
 				</div>
@@ -306,8 +306,8 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 				<p id="desc-preview">
 					<?php _e("Il est temps maintenant de pr&eacute;parer la publication de votre projet.", 'yproject'); ?><br />
 					<?php _e("Vous devrez r&eacute;unir au moins :", 'yproject'); ?><br />
-					<?php _e("- 50 votants avec des intentions d'investissement", 'yproject'); ?><br />
-					<?php _e("- 50% de votes positifs", 'yproject'); ?><br />
+					<?php _e("- 50 évaluateurs avec des intentions d'investissement", 'yproject'); ?><br />
+					<?php _e("- 50% de évaluations positives", 'yproject'); ?><br />
 					<?php _e("- 50% d'intentions d'investissement par rapport &agrave; votre objectif", 'yproject'); ?><br />
 					<br />
 					<?php _e("&Ecirc;tes-vous pr&ecirc;t &agrave; le publier ?", 'yproject'); ?><br />
@@ -347,7 +347,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 						$validated_vote_authorized = $page_controler->get_campaign()->can_go_next_status();
 						?>
 						<input type="checkbox" class="checkbox-next-status" disabled <?php checked($validated_vote_authorized); ?>>
-						WE DO GOOD a autoris&eacute; la publication de mon projet en vote
+						WE DO GOOD a autoris&eacute; la publication de mon projet en évaluation
 					</label>
 				</li>
 
@@ -372,10 +372,10 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 
 				<li>
 					<label>
-						Nombre de jours du vote :
+						Nombre de jours d'évaluation :
 						<input type="number" id="innbdayvote" name="innbdayvote" min="10" max="30" value="30" style="width: 40px;">
 					</label>
-					Fin du vote : <span id="previewenddatevote"></span>
+					Fin de l'évaluation : <span id="previewenddatevote"></span>
 					<?php //TODO : choisir l'heure de fin de vote ?>
 				</li>
 
@@ -451,7 +451,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 				<button type="submit" name="validation-next-save" value="1" id="submit-go-next-status-admin" class="button admin-theme">Enregistrer le statut</button><br /><br />
 				<?php endif; ?>
 
-				<input type="submit" value="Publier mon projet en vote !" class="button red" id="submit-go-next-status">
+				<input type="submit" value="Publier mon projet en évaluation !" class="button red" id="submit-go-next-status">
 
 			<?php elseif ( $status == ATCF_Campaign::$campaign_status_vote || ( $status == ATCF_Campaign::$campaign_status_validated && $page_controler->get_campaign()->skip_vote() ) ): ?>
 				<input type="submit" value="Lancer ma lev&eacute;e de fonds !" class="button red" id="submit-go-next-status">
@@ -503,7 +503,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 		DashboardUtility::create_field(array(
 			"id"			=> "new_end_vote_date",
 			"type"			=> "datetime",
-			"label"			=> "Date de fin de vote",
+			"label"			=> "Date de fin d'évaluation",
 			"value"			=> new DateTime($page_controler->get_campaign()->end_vote_date()),
 			"editable"		=> $page_controler->can_access_admin(),
 			"admin_theme"	=> $page_controler->can_access_admin(),

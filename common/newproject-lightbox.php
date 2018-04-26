@@ -33,6 +33,7 @@ if ($organizations_list) {
     <h2 style="text-align: center;"><?php _e('Lancement de campagne','yproject');?></h2>
 	
 	<?php
+	$input_error = filter_input( INPUT_GET, 'error' );
 	$errors_submit_new = $_SESSION[ 'newproject-errors-submit' ];
 	$errors_create_orga = $_SESSION[ 'newproject-errors-orga' ];
 	?>
@@ -48,6 +49,15 @@ if ($organizations_list) {
 		<?php foreach ( $errors_create_orga as $error ): ?>
 			<?php echo $error; ?>
 		<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
+	<?php if ( !empty( $input_error ) ): ?>
+		<div class="errors">
+		<?php if ( $input_error == 'creation' ): ?>
+			Erreur de création, merci de nous contacter.
+		<?php elseif ( $input_error == 'field_empty' ): ?>
+			Certains champs n'ont pas été remplis. Chaque champ est obligatoire.
+		<?php endif; ?>
 		</div>
 	<?php endif; ?>
 		

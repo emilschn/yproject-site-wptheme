@@ -29,7 +29,7 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 		<div id="vote-form-slide0" class="vote-form-slide align-justify">
 			
 			<br /><br /><br />
-			<?php _e( "Le vote est l'&eacute;tape pr&eacute;alable à l'investissement et ne prend que 2 petites minutes !", 'yproject' ); ?>
+			<?php _e( "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable à l'investissement et ne prend que 2 petites minutes !", 'yproject' ); ?>
 			<br /><br />
 			<?php _e( "Les entrepreneurs ont besoin de votre avis sur le projet pour mesurer l'int&eacute;r&ecirc;t qu'il suscite et bien lancer leur lev&eacute;e de fonds.", 'yproject' ); ?>
 			<br /><br /><br /><br />
@@ -126,8 +126,8 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 $lightbox_content = ob_get_contents();
 ob_end_clean();
 $campaign_title = $post->post_title;
-echo do_shortcode('[yproject_lightbox_cornered id="vote" title="'.__( "Vote sur ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
-echo do_shortcode('[yproject_lightbox_cornered id="vote-simple-confirmation" msgtype="valid"]'.__( "Votre vote est enregistr&eacute; !", 'yproject' ).'[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="vote" title="'.__( "&Eacute;valuation de ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="vote-simple-confirmation" msgtype="valid"]'.__( "Votre &eacute;valuation est enregistr&eacute;e !", 'yproject' ).'[/yproject_lightbox_cornered]');
 // *****************************************************************************
 ?>
 
@@ -156,7 +156,7 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 		<span class="form-error-general"></span>
 		
 		<p class="align-left">
-		<i><?php _e( "Votre vote a bien &eacute;t&eacute; enregistr&eacute; !", 'yproject' ); ?></i>
+		<i><?php _e( "Votre &eacute;valuation a bien &eacute;t&eacute; enregistr&eacute; !", 'yproject' ); ?></i>
 		<br /><br />
 		<?php _e( "Vous avez indiqu&eacute; &ecirc;tre int&eacute;ress&eacute;(e) pour investir, confirmez vos informations afin que le porteur de projet puisse vous joindre lors du lancement de la lev&eacute;e de fonds.", 'yproject' ); ?>
 		<br /><br />
@@ -193,7 +193,7 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 <?php
 $lightbox_content = ob_get_contents();
 ob_end_clean();
-echo do_shortcode('[yproject_lightbox_cornered id="user-details-vote" title="'.__( "Vote sur ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="user-details-vote" title="'.__( "&Eacute;valuation de ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
 echo do_shortcode('[yproject_lightbox_cornered id="user-details-confirmation" msgtype="valid"]'.__( "Donn&eacute;es enregistr&eacute;es ! Merci !", 'yproject' ).'[/yproject_lightbox_cornered]');
 // *****************************************************************************
 ?>

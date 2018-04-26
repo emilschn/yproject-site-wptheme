@@ -140,17 +140,17 @@ function print_user_projects(){
 	global $wpdb, $post, $user_projects;
 	$is_same_user = TRUE;
 	$str_believe = "J&apos;y crois";
-	$str_vote = "J&apos;ai vot&eacute;";
+	$str_vote = "J&apos;ai &eacute;valu&eacute;";
 	$str_investment = "J&apos;ai investi";
 	$str_not_believe = "Je n&apos;y crois pas";
-	$str_not_vote = "Je n&apos;ai pas vot&eacute;";
+	$str_not_vote = "Je n&apos;ai pas &eacute;valu&eacute;";
 	$str_not_investment = "Je n&apos;ai pas investi";
 	if (!$is_same_user) {
 		$str_believe = "Y croit";
-		$str_vote = "A vot&eacute;";
+		$str_vote = "A &eacute;valu&eacute;";
 		$str_investment = "A investi";
 		$str_not_believe = "N&apos;y croit pas";
-		$str_not_vote = "N&apos;a pas vot&eacute;";
+		$str_not_vote = "N&apos;a pas &eacute;valu&eacute;";
 		$str_not_investment = "N&apos;a pas investi";
 	}
         
@@ -709,7 +709,7 @@ function get_email_selector(){
     <form id="email-selector">
 Sélectionner :<br />
 <label><input type="checkbox" class="select-options" data-selection="believe" checked="checked" /> Y croit</label><br />
-<label><input type="checkbox" class="select-options" data-selection="vote" checked="checked" /> A voté</label><br />
+<label><input type="checkbox" class="select-options" data-selection="vote" checked="checked" /> A &eacute;valu&eacute;</label><br />
 <label><input type="checkbox" class="select-options" data-selection="invest" checked="checked" /> A investi</label><br />
 <br />
 </form>

@@ -131,7 +131,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 			$this->filters_list[ 'regions' ] = atcf_get_regions();
 
 			$this->filters_list[ 'status' ] = array(
-				'vote'		=> __( "En vote", 'yproject' ),
+				'vote'		=> __( "En &eacute;valuation", 'yproject' ),
 				'collecte'	=> __( "En financement", 'yproject' ),
 				'funded'	=> __( "Financ&eacute;", 'yproject' )	
 			);

@@ -906,6 +906,9 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 @media screen and (min-width: 768px) and (max-width: 997px) {
 	div#content.version-3 div#triggered-menu-share { margin-top: -380px; margin-right: 150px; margin-bottom: 0px; }
 }
+@media screen and (min-width: 997px) and (max-width: 1300px) {
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-pitch-text { font-size: 14px; }
+}
 
 /*******************************************************************************
 * RESPONSIVE MEDIUM
@@ -932,6 +935,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	}
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right { height: auto; }
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.separator { display: none; }
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-pitch-text { height: auto; }
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.progressbar-bg { background: #FFFFFF; }
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.progressbar-bg div.progressbar-complete { background: #EA4F51; }
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.progressbar { margin: 80px auto 0px; width: 310px; }

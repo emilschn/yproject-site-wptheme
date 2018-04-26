@@ -8,9 +8,9 @@ $campaign_status = $campaign->campaign_status();
 <div class="progress-bar">
 	<span class="vote-status" style="min-width:100%">&nbsp;<p>
 		<?php if ($time_remaining_str != '-'): ?>
-		<?php _e("projet en cours de vote", "yproject"); ?>
+		<?php _e("projet en cours d'&eacute;valuation", "yproject"); ?>
 		<?php else: ?>
-		<?php _e("vote termin&eacute;", "yproject"); ?>
+		<?php _e("&eacute;valuation termin&eacute;", "yproject"); ?>
 		<?php endif; ?>
 	</p>&nbsp;</span>
 </div>

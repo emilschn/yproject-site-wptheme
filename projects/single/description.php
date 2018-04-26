@@ -134,7 +134,7 @@ $implementation_content = apply_filters('the_content', $implementation);
 			<div id="project-content-statistics" class="projects-desc-content">
 				<h3><?php _e('Statistiques', 'yproject'); ?></h3>
 				<div class="zone-content">
-					<p><?php _e('Les statistiques de vote et d&apos;investissement du projet', 'yproject'); ?></p>
+					<p><?php _e("Les statistiques d'&eacute;valuation et d&apos;investissement du projet", 'yproject'); ?></p>
 					<?php locate_template( array("projects/common/stats-public.php"), true ); ?>
 				</div>
 			</div>

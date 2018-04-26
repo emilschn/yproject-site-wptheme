@@ -12,7 +12,7 @@
 		<strong><?php _e( "WE DO GOOD est une plateforme de financement participatif en royalties.", 'yproject' ); ?></strong><br />
 		<br />
 		<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ): ?>
-			<?php echo sprintf( __( "Vous souhaitez acc&eacute;der à la pr&eacute;sentation du projet %s, actuellement en vote, phase pr&eacute;alable au lancement de la lev&eacute;e de fonds.", 'yproject' ), $campaign->data->post_title ); ?><br />
+			<?php echo sprintf( __( "Vous souhaitez acc&eacute;der à la pr&eacute;sentation du projet %s, actuellement en &eacute;valuation, phase pr&eacute;alable au lancement de la lev&eacute;e de fonds.", 'yproject' ), $campaign->data->post_title ); ?><br />
 			<br />
 		<?php endif; ?>
 		<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte ): ?>

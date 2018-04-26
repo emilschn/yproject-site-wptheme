@@ -19,7 +19,8 @@ class YPShortcodeManager {
 		'yproject_newproject_lightbox',
 		'wdg_project_vote_count',
 		'wdg_project_amount_count',
-		'wdg_page_breadcrumb'
+		'wdg_page_breadcrumb',
+		'wdg_footer_banner_link'
 	);
 	
 	public static function register_shortcodes() {
@@ -287,6 +288,23 @@ class YPShortcodeManager {
 		}
 		
 		$buffer = "<nav itemtype=\"http://data-vocabulary.org/Breadcrumb\" class=\"wdg-breadcrumb\">" .$buffer. "</nav>";
+		
+		return $buffer;
+	}
+	
+	function wdg_footer_banner_link( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'link' => ''
+		), $atts );
+		
+		$footer_style = 'position: fixed; z-index: 30000; bottom: 0px; left: 0px; width: 100%; padding: 16px 0px; font-size: 18px; background: #333; color: #FFF; text-align: center;';
+		$link_style = 'color: #FFF; text-transform: uppercase;';
+		$img_arrow_src = get_stylesheet_directory_uri(). "/images/footer-banner-shortcode-arrow.png";
+		$img_arrow_style = 'margin-top: -4px; vertical-align: middle;';
+		$img_wdg_src = get_stylesheet_directory_uri(). "/images/footer-banner-shortcode-logo.png";
+		$img_wdg_style = 'height: 31px; margin-top: -3px; vertical-align: middle;';
+		$text = "D&eacute;couvrez les royalties sur";
+		$buffer = '<div style="' .$footer_style. '"><a href="' .$atts[ 'link' ]. '" style="' .$link_style. '"><img style="' .$img_arrow_style. '" src="' .$img_arrow_src. '"> ' .$text. ' <img style="' .$img_wdg_style. '" src="' .$img_wdg_src. '"></a></div>';
 		
 		return $buffer;
 	}
