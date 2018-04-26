@@ -106,7 +106,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			$this->can_access_admin = $this->current_user->is_admin();
 			$this->can_access_author = ( $this->author_user->get_wpref() == $this->current_user->get_wpref() );
 			$campaign_organization_item = $this->campaign->get_organization();
-			$this->campaign_organization = new WDGOrganization( $campaign_organization_item->wpref );
+			$this->campaign_organization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
 		}
 	}
 	public function get_campaign_id() {

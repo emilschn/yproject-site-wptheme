@@ -44,7 +44,7 @@ $owner_str = '';
 $lightbox_content = '';
 $current_organization = $campaign->get_organization();
 if (!empty($current_organization)) {
-	$wdg_organization = new WDGOrganization( $current_organization->wpref );
+	$wdg_organization = new WDGOrganization( $current_organization->wpref, $current_organization );
 	$page_edit_orga = get_permalink(get_page_by_path('editer-une-organisation')->ID) .'?orga_id='.$current_organization->wpref;
 	
 	$owner_str = $wdg_organization->get_name();

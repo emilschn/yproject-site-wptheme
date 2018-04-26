@@ -55,7 +55,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	public function get_campaign_organization_name() {
 		if ( !isset( $this->current_campaign_organization ) ) {
 			$campaign_organization = $this->current_campaign->get_organization();
-			$this->current_campaign_organization = new WDGOrganization( $campaign_organization->wpref );
+			$this->current_campaign_organization = new WDGOrganization( $campaign_organization->wpref, $campaign_organization );
 		}
 		return $this->current_campaign_organization->get_name();
 	}
