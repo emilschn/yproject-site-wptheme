@@ -160,8 +160,14 @@ $lang_list = $campaign->get_lang_list();
 						<span><?php echo $text; ?></span>
 					</div>
 					<div class="left bordered">
-						<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
-						<span><?php _e('Objectif minimum', 'yproject'); ?></span>
+						<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
+							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro; MIN<br />
+							<?php echo YPUIHelpers::display_number( $campaign->goal( false ) ); ?> &euro; MAX</span>
+							<span></span>
+						<?php else: ?>
+							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+							<span><?php _e('Objectif minimum', 'yproject'); ?></span>
+						<?php endif; ?>
 					</div>
 					<div class="left">
 						<?php
@@ -245,8 +251,14 @@ $lang_list = $campaign->get_lang_list();
 						<span><?php echo $text; ?></span>
 					</div>
 					<div class="left bordered">
-						<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
-						<span><?php _e('Objectif minimum', 'yproject'); ?></span>
+						<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
+							<span></span>
+							<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro; MIN<br />
+							<?php echo YPUIHelpers::display_number( $campaign->goal( false ) ); ?> &euro; MAX</span>
+						<?php else: ?>
+							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+							<span><?php _e('Objectif minimum', 'yproject'); ?></span>
+						<?php endif; ?>
 					</div>
 					<div class="left">
 						<?php
