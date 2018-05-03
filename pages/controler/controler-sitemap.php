@@ -55,73 +55,149 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	
 	private function rebuild_sitemap() {
 	
-		$postsForSitemap = get_posts( array(
-			'numberposts'	=> -1,
-			'orderby'		=> 'modified',
-			'post_type'		=> array( 'page', 'download' ),
-			'order'			=> 'DESC'
-		));
-
-		$ordre_prio = array(
-			"1.0" => array("type" => "page", "id" => array("accueil")),
-			"0.9" => array("type" => "page", "id" => array("les-projets", "financement", "investissement")),
-			"0.8" => array("type" => "page", "id" => array("offre","vision")),
-			"0.7" => array("type" => "page", "id" => array("blog")),
-			"0.6" => array("type" => "page", "id" => array()),
-			"0.5" => array("type" => "page", "id" => array()),
-			"0.4" => array("type" => "page", "id" => array()),
-			"0.3" => array("type" => "page", "id" => array("espace-presse","press-book","partenaires")),
-			"0.2" => array("type" => "page", "id" => array("lequipe","contact","stats","recrutement")),
-			"0.1" => array("type" => "page", "id" => array("cgu","confidentialite","mentions-legales","reclamations")),
+		$priority_by_url = array(
+			// 0.9
+			'/financement'			=> '0.9',
+			'/investissement'		=> '0.9',
+			// 0.8
+			'/financement/entreprises'				=> '0.8',
+//			'/financement/solutions'				=> '0.8',
+			'/investissement/comparatif-risque'		=> '0.8',
+			'/investissement/start-up'				=> '0.8',
+			// 0.7
+			'/financement/automatise'						=> '0.7',
+//			'/financement/entreprises/B2B'					=> '0.7',
+			'/financement/entreprises/cooperatives'			=> '0.7',
+//			'/financement/entreprises/PME'					=> '0.7',
+//			'/financement/entreprises/start-up'				=> '0.7',
+			'/financement/entreprises/start-up/amorcage'	=> '0.7',
+			'/financement/ethique'							=> '0.7',
+			'/financement/flexible'							=> '0.7',
+			'/financement/fonds-propres'					=> '0.7',
+			'/financement/non-dilutif'						=> '0.7',
+			'/financement/offres/love-money'				=> '0.7',
+			'/financement/royalty-crowdfunding'				=> '0.7',
+//			'/financement/solutions/innovation'				=> '0.7',
+//			'/financement/solutions/investissements'		=> '0.7',
+//			'/financement/solutions/tresorerie-bfr'			=> '0.7',
+			'/financement/investissement/impact-investing'	=> '0.7',
+//			'/les-projets'									=> '0.7',
+//			'/solutions/expert-comptable'					=> '0.7',
+			'/solutions/start-up'							=> '0.7',
+			// 0.6
+			'/guide'										=> '0.6',
+			'/a-propos/statistiques'						=> '0.6',
+			'/a-propos/vision'								=> '0.6',
+//			'/financement/entreprises/B2C'					=> '0.6',
+			'/financement/entreprises/start-up/love-money'	=> '0.6',
+			'/financement/label-croissance-verte'			=> '0.6',
+			'/investissement/comparatif-capital-pret-royalties'		=> '0.6',
+//			'/investissement/impact-investing/evaluation-impacts'	=> '0.6',
+			'/solutions'									=> '0.6',
+//			'/solutions/accelerateur'						=> '0.6',
+//			'/solutions/entreprises'						=> '0.6',
+//			'/solutions/fonds-investissement'				=> '0.6',
+			'/solutions/incubateur'							=> '0.6',
+			// 0.5
+			// PROJETS
+//			'/financement/offres'							=> '0.5',
+//			'/financement/royalty-crowdfunding/accompagnement'		=> '0.5',
+//			'/investissement/cooperatives'					=> '0.5',
+			'/investissement/fiscalite-royalties'			=> '0.5',
+			// 0.4
+			'/financement/offres/amorcage-crowdfunding'		=> '0.4',
+			'/financement/offres/crowdfunding-accompagnement'		=> '0.4',
+			'/financement/offres/crowdfunding-self-service'			=> '0.4',
+			// 0.3
+			'/a-propos/espace-presse'			=> '0.3',
+			'/a-propos/partenaires'				=> '0.3',
+//			'/investir/actifs'					=> '0.3',
+			'/press-book'						=> '0.3',
+			// 0.2
+			'/a-propos/contact'					=> '0.2',
+			'/a-propos/equipe'					=> '0.2',
+			'/a-propos/recrutement'				=> '0.2',
+			// 0.1
+			'/cgu'								=> '0.1',
+			'/placement-royalties'				=> '0.1',
+			'/a-propos'							=> '0.1',
+			'/confidentialite'					=> '0.1',
+			'/love-money'						=> '0.1',
+			'/mentions-legales'					=> '0.1',
+			'/reclamations'						=> '0.1',
+			
 		);
 		
+		$current_date = new DateTime();
 		$sitemap = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
 		$sitemap .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
-
-		foreach($postsForSitemap as $post) {		
-			setup_postdata($post);		
-			$postdate = explode(" ", $post->post_modified);
-			$lien = get_permalink($post->ID);
-
-			switch ($post->post_type) {
-				case "page":
-					$priority = "";
-					foreach ($ordre_prio as $obj_key =>$prio){
-						foreach($prio['id'] as $prio1){
-							if (($prio1)==($post->post_name)){
-								$priority = $obj_key;}
-						}
-					}
-
-					if ( !empty( $priority ) ){
-						$sitemap .= "<url>".
-							"<loc>". $lien ."</loc>".
-							"<lastmod>". $postdate[0] ."</lastmod>".
-							"<changefreq>weekly</changefreq>".
-							"<priority>". $priority ."</priority>".
-						"</url>\n";
-					}
-					break;
-
-				case "download":
-					$campaign = atcf_get_campaign($post->ID);
-
-					if ( $campaign->campaign_status() !== ATCF_Campaign::$campaign_status_preparing 
-							&& $campaign->campaign_status() !== ATCF_Campaign::$campaign_status_validated
-							&& $campaign->campaign_status() !== ATCF_Campaign::$campaign_status_archive ) {
-						
-						$priority = "0.6";
-						$sitemap .= "<url>".
-							"<loc>". $lien ."</loc>".
-							"<lastmod>". $postdate[0] ."</lastmod>".
-							"<changefreq>weekly</changefreq>".
-							"<priority>". $priority ."</priority>".
-						"</url>\n";
-						
-					}
-				break;
+		
+		// Accueil : '1.0'
+		$sitemap .= "<url>".
+			"<loc>". home_url() ."</loc>".
+			"<lastmod>". $current_date->format( 'Y-m-d' ) ."</lastmod>".
+			"<changefreq>hourly</changefreq>".
+			"<priority>1.0</priority>".
+		"</url>\n";
+		// les-projets : '0.7'
+		$sitemap .= "<url>".
+			"<loc>". home_url( '/les-projets' ) ."</loc>".
+			"<lastmod>". $current_date->format( 'Y-m-d' ) ."</lastmod>".
+			"<changefreq>hourly</changefreq>".
+			"<priority>0.7</priority>".
+		"</url>\n";
+		
+		// Ajout accueil et les-projets d'abord
+		foreach ( $priority_by_url as $uri => $priority ) {
+			$page_by_uri = get_page_by_path( $uri );
+			if ( $page_by_uri ) {
+				$page_modified_exploded = explode( ' ', $page_by_uri->post_modified );
+				if ( count( $page_modified_exploded ) > 0 ) {
+					$sitemap .= "<url>".
+						"<loc>". home_url( $uri ) ."</loc>".
+						"<lastmod>". $page_modified_exploded[0] ."</lastmod>".
+						"<changefreq>weekly</changefreq>".
+						"<priority>". $priority ."</priority>".
+					"</url>\n";
+				}
 			}
 		}
+
+		// Ajout des projets en vote
+		$campaignlist_vote = ATCF_Campaign::get_list_vote();
+		foreach ( $campaignlist_vote as $campaign_post ) {
+			$campaign_id = $campaign_post->ID;
+			$sitemap .= "<url>".
+				"<loc>". get_permalink( $campaign_id ) ."</loc>".
+				"<lastmod>". $current_date->format( 'Y-m-d' ) ."</lastmod>".
+				"<changefreq>daily</changefreq>".
+				"<priority>0.5</priority>".
+			"</url>\n";
+		}
+		
+		$campaignlist_funding = ATCF_Campaign::get_list_funding();
+		foreach ( $campaignlist_funding as $campaign_post ) {
+			$campaign_id = $campaign_post->ID;
+			$sitemap .= "<url>".
+				"<loc>". get_permalink( $campaign_id ) ."</loc>".
+				"<lastmod>". $current_date->format( 'Y-m-d' ) ."</lastmod>".
+				"<changefreq>hourly</changefreq>".
+				"<priority>0.5</priority>".
+			"</url>\n";
+		}
+		
+		$campaignlist_funded = ATCF_Campaign::get_list_funded();
+		foreach ( $campaignlist_funded as $campaign_post ) {
+			$campaign_id = $campaign_post->ID;
+			$page_modified_exploded = explode( ' ', $campaign_post->post_modified );
+			$sitemap .= "<url>".
+				"<loc>". get_permalink( $campaign_id ) ."</loc>".
+				"<lastmod>". $page_modified_exploded[0] ."</lastmod>".
+				"<changefreq>monthly</changefreq>".
+				"<priority>0.5</priority>".
+			"</url>\n";
+		}
+		
 		$sitemap .= '</urlset>';
 
 		$fp = fopen( dirname ( __FILE__ ) . '/../../../../../sitemap.xml', 'w' );
