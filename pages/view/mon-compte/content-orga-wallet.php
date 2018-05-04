@@ -36,8 +36,14 @@ Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_roi
 			<label for="bic" class="large-label"><?php _e( "BIC :", 'yproject' ); ?></label>
 				<input type="text" id="bic" name="bic" value="<?php echo $WDGOrganization->get_bank_bic(); ?>">
 				<br>
+				<br>
 			<label for="rib" class="large-label"><?php _e( "Fichier de votre RIB :", 'yproject' ); ?></label>
 				<input type="file" id="rib" name="rib">
+				<br>
+				<span class="file-description">
+				<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 10 Mo.", 'yproject' ); ?>
+				<br>
+				<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?></span>
 				<br>
 				<br>
 			<p class="align-center">

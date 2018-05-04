@@ -72,6 +72,7 @@ Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.
 				<br>
 				<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?></span>
 				<br>
+				<br>
 			<p class="align-center">
 				<input type="submit" class="button" value="<?php _e( "Enregistrer", 'yproject' ); ?>" />
 			</p>
