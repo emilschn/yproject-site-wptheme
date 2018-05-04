@@ -67,9 +67,10 @@ Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.
 			<label for="rib" class="large-label"><?php _e( "Fichier de votre RIB :", 'yproject' ); ?></label>
 				<input type="file" id="rib" name="rib">
 				<br>
-			<span class="formats"><?php _e( "Le fichier doit avoir une taille inférieure à 10 Mo.", 'yproject' ); ?></span>
+				<span class="file-description">
+				<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 10 Mo.", 'yproject' ); ?>
 				<br>
-			<span class="formats"><?php _e( "Les formats de documents autorisés sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?></span>
+				<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?></span>
 				<br>
 			<p class="align-center">
 				<input type="submit" class="button" value="<?php _e( "Enregistrer", 'yproject' ); ?>" />
