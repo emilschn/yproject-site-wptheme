@@ -63,9 +63,11 @@ Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.
 			<label for="bic" class="large-label"><?php _e( "BIC :", 'yproject' ); ?></label>
 				<input type="text" id="bic" name="bic" value="<?php echo $WDGUser_displayed->get_bank_bic(); ?>">
 				<br>
+				<br>
 			<label for="rib" class="large-label"><?php _e( "Fichier de votre RIB :", 'yproject' ); ?></label>
 				<input type="file" id="rib" name="rib">
 				<br>
+			<label class="formats"><?php _e( "Le fichier doit avoir une taille inférieure à 10 Mo. Les formats de documents autorisés sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?></label>
 				<br>
 			<p class="align-center">
 				<input type="submit" class="button" value="<?php _e( "Enregistrer", 'yproject' ); ?>" />

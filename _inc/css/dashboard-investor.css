@@ -68,3 +68,8 @@ body.template-mon-compte div#container div#content .db-form.v3 {
 		display: block;
 	}
 }
+
+.formats {
+	font-size: 12px;
+	text-align: start !important;
+}
