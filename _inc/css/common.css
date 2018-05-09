@@ -157,6 +157,10 @@ button.red {
     width: auto;
 }
 
+form span.file-description {
+    font-size: 12px;
+}
+
 
 .db-form .field-container input,
 .db-form .field-container textarea{
