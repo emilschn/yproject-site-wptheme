@@ -6,7 +6,8 @@ global $WDGOrganization;
 
 <h2 class="underlined">Porte-monnaie électronique de <?php echo $WDGOrganization->get_name(); ?></h2>
 
-Vous disposez de <?php echo $WDGOrganization->get_rois_amount(); ?> &euro; sur un total de <?php echo $WDGOrganization->get_lemonway_balance(); ?> &euro; dans votre porte-monnaie.
+Montant de toutes les royalties vers&eacute;es : <?php echo $WDGOrganization->get_rois_amount(); ?> &euro;<br>
+Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_rois_amount(); ?> &euro;<br>
 <br><br>
 
 <?php if ( !$WDGOrganization->is_document_lemonway_registered( LemonwayDocument::$document_type_bank ) ): ?>

@@ -34,6 +34,8 @@ class WDG_WordPress_Events {
 		add_action( 'wp_insert_comment', array('NotificationsEmails', 'new_comment'), 99 ,2 );
 		// Composants
 		add_action( 'widgets_init', 'WDG_WordPress_Events::widgets_init' );
+		// Suppression de l'action qui passe les paiements en attente en abandonnés au bout d'une semaine
+		remove_action( 'edd_weekly_scheduled_events', 'edd_mark_abandoned_orders' );
 	}
 	
 	/**

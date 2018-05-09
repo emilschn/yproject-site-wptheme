@@ -57,7 +57,7 @@ WDGFormProjects::form_proceed_roi_transfers();
 					if (isset($current_organization)) {
 						$page_edit_orga = get_page_by_path('editer-une-organisation');
 						echo __('Organisation d&eacute;finie :', 'yproject') . ' ' . $current_organization->name . ' <a class="button" href="'.  get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organization->wpref.'">' . __('Editer', 'yproject') . '</a>';
-						$organization_obj = new WDGOrganization($current_organization->wpref);
+						$organization_obj = new WDGOrganization( $current_organization->wpref, $current_organization );
 					} else {
 						$keep_going = FALSE;
 						_e('Pas encore d&eacute;fini', 'yproject');

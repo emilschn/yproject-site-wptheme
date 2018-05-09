@@ -37,31 +37,19 @@
 		<div class="page" id="blog-single" role="main">
 
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-				
-				<?php require_once('projects/single-admin-bar.php'); ?>
 
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<?php require_once('projects/single-header.php'); ?>
-
-					<div id="post_bottom_bg">
-						<div id="post_bottom_content" class="center margin-height">
-							<?php
-							switch ($page_name) {
-								case 'editer-une-actu':
-								    do_shortcode('[yproject_crowdfunding_edit_news]');
-								    break;
-								case 'statistiques':
-								    locate_template( array("projects/common/stats-public.php"), true );
-								    break;
-								case 'liste-investisseurs':
-									locate_template( array("projects/single-project-investors.php"), true );
-								    break;
-								default:
-								    the_content();
-								    break;
-							}
-							?>
-						</div>
+					<div class="center margin-height">
+						<?php
+						switch ($page_name) {
+							case 'editer-une-actu':
+								do_shortcode('[yproject_crowdfunding_edit_news]');
+								break;
+							default:
+								the_content();
+								break;
+						}
+						?>
 					</div>
 				</div>
 			<?php endwhile; endif; ?>

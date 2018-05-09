@@ -17,7 +17,7 @@ function print_resume_page()
 	$WDGUser_current = WDGUser::current();
 	$WDGUser_author = new WDGUser( $campaign->post_author() );
 	$campaign_organization = $campaign->get_organization();
-	$wdg_organization = new WDGOrganization($campaign_organization->wpref);
+	$wdg_organization = new WDGOrganization( $campaign_organization->wpref, $campaign_organization );
 
     ?>
     <div class="head"><?php _e("Vue d'ensemble", 'yproject'); ?></div>

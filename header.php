@@ -268,7 +268,7 @@
 			<div class="timeout-lightbox wdg-lightbox">
 				<div class="wdg-lightbox-click-catcher"></div>
 				<div class="wdg-lightbox-padder">
-					<p class="wdg-lightbox-msg-info"><?php _e("Votre inscription a bien été prise en compte!", 'yproject'); ?></p>
+					<p class="wdg-lightbox-msg-info"><?php _e("Votre inscription a bien &eacute;t&eacute; prise en compte !", 'yproject'); ?></p>
 				</div>
 			</div>
 		<?php endif; ?>

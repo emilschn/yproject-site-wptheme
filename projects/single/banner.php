@@ -44,7 +44,7 @@ $owner_str = '';
 $lightbox_content = '';
 $current_organization = $campaign->get_organization();
 if (!empty($current_organization)) {
-	$wdg_organization = new WDGOrganization( $current_organization->wpref );
+	$wdg_organization = new WDGOrganization( $current_organization->wpref, $current_organization );
 	$page_edit_orga = get_permalink(get_page_by_path('editer-une-organisation')->ID) .'?orga_id='.$current_organization->wpref;
 	
 	$owner_str = $wdg_organization->get_name();
@@ -160,8 +160,14 @@ $lang_list = $campaign->get_lang_list();
 						<span><?php echo $text; ?></span>
 					</div>
 					<div class="left bordered">
-						<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
-						<span><?php _e('Objectif minimum', 'yproject'); ?></span>
+						<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
+							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro; MIN<br />
+							<?php echo YPUIHelpers::display_number( $campaign->goal( false ) ); ?> &euro; MAX</span>
+							<span></span>
+						<?php else: ?>
+							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+							<span><?php _e('Objectif minimum', 'yproject'); ?></span>
+						<?php endif; ?>
 					</div>
 					<div class="left">
 						<?php
@@ -245,8 +251,14 @@ $lang_list = $campaign->get_lang_list();
 						<span><?php echo $text; ?></span>
 					</div>
 					<div class="left bordered">
-						<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
-						<span><?php _e('Objectif minimum', 'yproject'); ?></span>
+						<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
+							<span></span>
+							<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro; MIN<br />
+							<?php echo YPUIHelpers::display_number( $campaign->goal( false ) ); ?> &euro; MAX</span>
+						<?php else: ?>
+							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+							<span><?php _e('Objectif minimum', 'yproject'); ?></span>
+						<?php endif; ?>
 					</div>
 					<div class="left">
 						<?php
