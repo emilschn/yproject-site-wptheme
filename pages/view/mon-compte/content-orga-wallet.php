@@ -55,7 +55,7 @@ Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_roi
 		</form>
 	<?php endif; ?>
 
-<?php elseif ($amount > 0): ?>
+<?php elseif ( $WDGOrganization->get_available_rois_amount() > 0 ): ?>
 	<form action="" method="POST" enctype="multipart/form-data">
 		<p class="align-center">
 			<input type="submit" class="button" value="Reverser sur mon compte bancaire" />
