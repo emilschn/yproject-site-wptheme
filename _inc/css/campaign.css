@@ -18,6 +18,13 @@ div#content.version-3 div.separator-title span {
     text-transform: uppercase;
 }
 
+div.underlined_lightbox_parts {
+	color: #333333;
+    border-bottom: 1px solid #333333;
+    font-weight: normal;
+    font-size: 13pt !important;
+}
+
 /*******************************************************************************
 * LIGHTBOX WARNING
 *******************************************************************************/
