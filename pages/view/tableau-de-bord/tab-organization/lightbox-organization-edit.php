@@ -442,6 +442,8 @@ $WDGUser_current = WDGUser::current();
 		<input type="hidden" name="action" value="save_edit_organization" />
 
 		<?php DashboardUtility::create_save_button("orgaedit_form"); ?>
+		<span class="errors"><label id="input_error_edit"></label></span>
+
 	</form>
 
 
