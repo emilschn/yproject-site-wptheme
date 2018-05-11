@@ -48,20 +48,20 @@ if (!empty($current_organization)) {
 	$page_edit_orga = get_permalink(get_page_by_path('editer-une-organisation')->ID) .'?orga_id='.$current_organization->wpref;
 	
 	$owner_str = $wdg_organization->get_name();
-	$lightbox_content = '<div class="underlined_lightbox_parts"></div>
+	$lightbox_content = '<div class="lightbox-organization-separator"></div>
 		<div class="content align-left"><br />
-		<span>'.__('<b>Forme juridique : </b>', 'yproject').'</span>'.$wdg_organization->get_legalform().'<br />
-		<span>'.__('<b>Num&eacute;ro SIREN : </b>', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
-		<span>'.__('<b>Code APE : </b>', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />';
+		<span>'.__('Forme juridique : ', 'yproject').'</span>'.$wdg_organization->get_legalform().'<br />
+		<span>'.__('Num&eacute;ro SIREN : ', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
+		<span>'.__('Code APE : ', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />';
 	if ( $wdg_organization->get_vat() != "" && $wdg_organization->get_vat() != '---' ) {
-		$lightbox_content .= '<span>'.__('<b>Num&eacute;ro de TVA : </b>', 'yproject').'</span>'.$wdg_organization->get_vat().'<br />';
+		$lightbox_content .= '<span>'.__('Num&eacute;ro de TVA : ', 'yproject').'</span>'.$wdg_organization->get_vat().'<br />';
 	}
-	$lightbox_content .= '
-		<span>'.__('<b>Capital social : </b>', 'yproject').'</span>'.$wdg_organization->get_capital().' €'.'<br /><br />
+	$lightbox_content .= 
+		'<span>'.__('Capital social : ', 'yproject').'</span>'.$wdg_organization->get_capital().' &euro;'.'<br /><br />
 		</div>
-		<div class="underlined_lightbox_parts"></div>'.'<br/>
+		<div class="lightbox-organization-separator"></div>'.'<br/>
 		<div class="content align-left">
-		<span>'.__('<b>Si&egrave;ge social : </b>', 'yproject').'<br/>'.'</span>'.$wdg_organization->get_address().'<br />
+		<span>'.__('Si&egrave;ge social : ', 'yproject').'<br/>'.'</span>'.$wdg_organization->get_address().'<br />
 		<span></span>'.$wdg_organization->get_postal_code().' '.$wdg_organization->get_city().'<br />
 		<span></span>'.$wdg_organization->get_nationality().'<br />
 		</div>';
