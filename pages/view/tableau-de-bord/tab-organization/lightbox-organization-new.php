@@ -221,7 +221,6 @@ global $campaign_id
 		<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
 
 		<?php DashboardUtility::create_save_button( 'orgacreate_form' ); ?>
-		<span class="errors"><label id="input_error_new"></label></span>
 	</form>
 
 

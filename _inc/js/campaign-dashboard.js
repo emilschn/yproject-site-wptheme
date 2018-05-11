@@ -662,16 +662,14 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 				//Vérification s'il y a des erreurs sur les champs
 				var fdErrorsData = feedback.errors;
 				var count_data_errors = 0;
-				var inputerroredit = document.getElementById('input_error_edit'); 
 				for (var error in fdErrorsData){
 					if(error !== "") {
 						count_data_errors += 1;
 						var err = $("<p class='errors'>"+fdErrorsData[error]+"</p>");
 						err.insertAfter($("#orgaedit_form input[name="+error+"]"));
-						inputerroredit.innerHTML="Certains champs n'ont pas été validés.";
 					}
 				}
-				if(count_files_errors > 0) {
+				if(count_files_errors > 0 || count_data_errors > 0) {
 					var err = $("<p class='errors'>Certains champs n'ont pas été validés.</p>");
 					err.insertAfter($("#orgaedit_form_button button"));
 				}
@@ -681,7 +679,6 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 					thisForm.find('.save_ok').fadeIn();
 					$("#wdg-lightbox-editOrga").hide();
 					$("#wdg-lightbox-valid-editOrga").css('display', 'block');
-					inputerroredit.innerHTML='';
 
 					//Mise à jour du reste du formulaire d'édition (input type text)
 					self.updateOrgaForm(feedback);
@@ -783,7 +780,6 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 
 				//Vérification s'il y a des erreurs dans le formulaire
 				$("#wdg-lightbox-newOrga p.errors").remove();//supprime les erreurs éventuellement affichées après un 1er enregistrement
-				inputerror
 				var errors = feedback.errors;
 				var count_errors = 0;
 				for (var error in errors){
@@ -803,13 +799,10 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 				}
 				if(count_errors > 0) {
 					var firsterror = thisForm.find(".errors").first();
-					var inputerrornew = document.getElementById('input_error_new'); 
 					
 					if(firsterror.length === 1){
 						self.scrollTo(firsterror);
 					}
-					
-					inputerrornew.innerHTML="Certains champs n'ont pas été validés.";
 				}
 				//Affichage confirmation enregistrement
 				if(count_errors === 0){
