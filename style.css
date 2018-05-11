@@ -1604,17 +1604,13 @@ form.wdg-forms table input[type="text"].reward-text{
 #wdg-lightbox-project-organisation div.content {
     font-size: 16px;
 }
+
 #wdg-lightbox-project-organization div.content span {
     display: inline-block;
     width: 135px;
     font-weight: bold;
     margin-right: 10px;
 }
-
-#wdg-lightbox-project-organisation span { 
-    font-weight: bold; 
-}
-
 
 span#extra-comment {
     background-color: rgba(0, 0, 0, 0.5);
