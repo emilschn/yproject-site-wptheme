@@ -77,9 +77,11 @@ if (is_user_logged_in()) {
 				break;
 				case ATCF_Campaign::$campaign_status_collecte:
 				?>
-				<a href="<?php echo $invest_url_href; ?>" class="button red">
-					<?php _e( "Investir", 'yproject' ); ?>
-				</a>
+					<?php if ( $campaign->time_remaining_str() != '-' && $campaign->percent_completed( false ) < 100 ): ?>
+					<a href="<?php echo $invest_url_href; ?>" class="button red">
+						<?php _e( "Investir", 'yproject' ); ?>
+					</a>
+					<?php endif; ?>
 				<?php break;
 			} ?>
 			</li>

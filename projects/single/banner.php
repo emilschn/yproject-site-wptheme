@@ -288,7 +288,7 @@ $lang_list = $campaign->get_lang_list();
 						?>
 					</div>
 
-					<?php if ($time_remaining_str != '-'): ?>
+					<?php if ( $time_remaining_str != '-' && $campaign->percent_completed( false ) < 100 ): ?>
 					<a href="<?php echo $invest_url_href; ?>" class="button red">
 						<?php _e( "Investir", 'yproject' ); ?>
 					</a>
