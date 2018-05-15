@@ -135,6 +135,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					$next_date = new DateTime( ( $campaign_creation_date->format( 'Y' ) + 1 ) . '-01-01' );
 					break;
 			}
+			$previous_date->sub( new DateInterval( 'P3M' ) );
+			array_push( $contract_start_date_values, $previous_date->format( 'Y-m-d' ) );
+			array_push( $contract_start_date_list, $previous_date->format( 'd/m/Y' ) );
+			$previous_date->add( new DateInterval( 'P3M' ) );
 			array_push( $contract_start_date_values, $previous_date->format( 'Y-m-d' ) );
 			array_push( $contract_start_date_list, $previous_date->format( 'd/m/Y' ) );
 			// Ensuite on ajoute (arbitrairement) 10 dates
