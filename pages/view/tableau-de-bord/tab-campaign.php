@@ -47,6 +47,15 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				'admin_theme'	=> true,
 				"editable"		=> $page_controler->get_campaign()->is_preparing()
 			));
+
+			DashboardUtility::create_field(array(
+				'id'			=> 'new_skip_in_stats',
+				'type'			=> 'check',
+				'label'			=> __( "Ne pas compter dans les stats", 'yproject' ),
+				'value'			=> $page_controler->get_campaign()->skip_in_stats(),
+				'admin_theme'	=> true,
+				"editable"		=> true
+			));
 		}
 
 
