@@ -25,7 +25,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <div class="tab-content align-left">
 	<h3><?php _e('Ajouter un paiement par ch&egrave;que', 'yproject'); ?></h3>
 
-	<form method="POST" action="<?php echo home_url( '/tableau-de-bord?campaign_id=' .$page_controler->get_campaign_id(). '#contacts' ); ?>">
+	<form method="POST" action="<?php echo home_url( '/tableau-de-bord/?campaign_id=' .$page_controler->get_campaign_id(). '#contacts' ); ?>">
 		
 		<div class="field">
 			<label for="add-check-input-email"><?php _e('E-mail :', 'yproject'); ?>*</label>

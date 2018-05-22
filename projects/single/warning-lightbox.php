@@ -26,7 +26,7 @@
 		<strong><?php _e( "Avez‐vous conscience que, dans le cas o&ugrave; vous investissez, vous pouvez perdre &eacute;ventuellement la totalit&eacute; de votre investissement ?", 'yproject' ); ?></strong><br />
 		<br />
 		<form class="db-form v3">
-			<a href="<?php echo home_url( '/investissement' ); ?>" class="button half left transparent"><?php _e( "Non / En savoir plus", 'yproject' ); ?></a>
+			<a href="<?php echo home_url( '/investissement/' ); ?>" class="button half left transparent"><?php _e( "Non / En savoir plus", 'yproject' ); ?></a>
 			<button type="button" class="button half right close red" data-close="project-warning"><?php _e( "Oui / Continuer", 'yproject' ); ?></button>
 		</form>
 	</div>

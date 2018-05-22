@@ -145,7 +145,7 @@ if ($can_modify){
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo home_url('/guide'); ?>">
+                            <a href="<?php echo home_url('/guide/'); ?>">
                                 <?php _e("Guide", 'yproject');?>&nbsp;&nbsp;
                                 <i class="fa fa-external-link" aria-hidden="true"></i>
                             </a>

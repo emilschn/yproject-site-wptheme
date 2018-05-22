@@ -114,10 +114,10 @@
 		<nav id="main">
 			<div id="menu">
 				<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
-				<a href="<?php echo home_url( '/les-projets' ); ?>" class="lines"><?php _e( "Les projets", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/financement' ); ?>" class="lines"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/investissement' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/a-propos/vision' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/les-projets/' ); ?>" class="lines"><?php _e( "Les projets", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/financement/' ); ?>" class="lines"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/investissement/' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/a-propos/vision/' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
                                 
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
 				<?php if (is_user_logged_in()): ?>
@@ -133,10 +133,10 @@
 				<?php /* Affichage quand clic sur Rechercher */ ?>
 				<div id="submenu-search" class="submenu-style hidden">
 					<div class="only-inf997">
-						<a href="<?php echo home_url( '/les-projets' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/financement' ); ?>"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/investissement' ); ?>"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/a-propos/vision' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/les-projets/' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/financement/' ); ?>"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/investissement/' ); ?>"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/a-propos/vision/' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
 					</div>
 					
 					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher un projet", 'yproject'); ?>" />
@@ -152,11 +152,11 @@
 					<?php /* Au clic picto Compte, afficher menu utilisateur */ ?>
 					<?php global $current_user; get_currentuserinfo();
 					$user_name_str = ($current_user->user_firstname != '') ? $current_user->user_firstname : $current_user->user_login;
-					$page_dashboard = home_url( '/tableau-de-bord' );
+					$page_dashboard = home_url( '/tableau-de-bord/' );
 					?>
 					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
 					<ul class="submenu-list">
-						<li><a href="<?php echo home_url( '/mon-compte' ); ?>"><?php _e("Mon compte", 'yproject'); ?></a></li>
+						<li><a href="<?php echo home_url( '/mon-compte/' ); ?>"><?php _e("Mon compte", 'yproject'); ?></a></li>
 						
 						<?php foreach ($project_list as $project_id): if (!empty($project_id)): $post_campaign = get_post($project_id); if (isset($post_campaign)): ?>
 							<li><a href="<?php echo $page_dashboard . '?campaign_id=' .$project_id; ?>"><?php echo $post_campaign->post_title; ?></a></li>
@@ -173,10 +173,10 @@
 				<div id="submenu-user" class="not-connected submenu-style hidden">
 					<?php /* Au clic picto Compte, afficher menu connexion */ ?>
 					<div class="only-inf997">
-						<a href="<?php echo home_url( '/connexion' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Connexion", 'yproject' ); ?></span></a>
+						<a href="<?php echo home_url( '/connexion/' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Connexion", 'yproject' ); ?></span></a>
 					</div>
 					
-					<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" class="sidebar-login-form model-form hidden-inf997">
+					<form method="post" action="<?php echo home_url( "/connexion/" ); ?>" name="login-form" class="sidebar-login-form model-form hidden-inf997">
 						<br>
 						<span id="title-connection"><?php _e('Connexion', 'yproject'); ?></span>
 						<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('E-mail ou identifiant', 'yproject'); ?>" value="" />
@@ -211,7 +211,7 @@
 					<hr class="login-separator">
 
 					<div>
-						<a href="<?php echo home_url( '/inscription' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Cr&eacute;er un compte", 'yproject' ); ?></span></a>
+						<a href="<?php echo home_url( '/inscription/' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Cr&eacute;er un compte", 'yproject' ); ?></span></a>
 					</div>
 					
 				<?php endif; ?>

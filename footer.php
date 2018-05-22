@@ -55,7 +55,7 @@ else {
 							</div>
 
 							<div>
-								<a class="link" href="<?php echo home_url('/a-propos/contact'); ?>"><?php _e( "Contactez-nous", 'yproject' ); ?></a>
+								<a class="link" href="<?php echo home_url('/a-propos/contact/'); ?>"><?php _e( "Contactez-nous", 'yproject' ); ?></a>
 							</div>
 						</div>
 					<?php endif; ?>
@@ -116,9 +116,9 @@ else {
 	<?php if ( empty( $hidecookiealert ) ): ?>
 	<div id="cookies-alert" class="bg-dark-gray aligncenter">
 		<?php if ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' ): ?>
-		<?php _e( "En poursuivant votre navigation sur WE DO GOOD.co, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
+		<?php _e( "En poursuivant votre navigation sur WE DO GOOD.co, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu/' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
 		<?php else: ?>
-		<?php _e( "En poursuivant votre navigation, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
+		<?php _e( "En poursuivant votre navigation, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu/' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
 		<?php endif; ?>
 
 		<button id="cookies-alert-close" class="red"><?php _e( "OK", 'yproject' ); ?></button>

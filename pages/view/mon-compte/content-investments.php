@@ -61,7 +61,7 @@ $date_now = new DateTime();
 
 	<div>
 		<div class="right">
-			<a href="<?php echo home_url( '/financement' ); ?>" class="button right">Financer mon projet</a>
+			<a href="<?php echo home_url( '/financement/' ); ?>" class="button right">Financer mon projet</a>
 		</div>
 	    
 		<div class="clear"></div>

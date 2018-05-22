@@ -5,13 +5,13 @@ $displayed_user = get_user_by('id', $WDGUser_current->wp_user->ID);
 
 <div id="item-header-avatar" class="left">
     
-	<a href="<?php echo home_url('/mon-compte'); ?>"><?php UIHelpers::print_user_avatar($WDGUser_current->wp_user->ID); ?></a>
+	<a href="<?php echo home_url('/mon-compte/'); ?>"><?php UIHelpers::print_user_avatar($WDGUser_current->wp_user->ID); ?></a>
 	
 </div><!-- #item-header-avatar -->
 
 <div id="item-header-content" class="left">
 
-	<h1><a href="<?php echo home_url('/mon-compte'); ?>"><?php echo $displayed_user->display_name; ?></a></h1>
+	<h1><a href="<?php echo home_url('/mon-compte/'); ?>"><?php echo $displayed_user->display_name; ?></a></h1>
 
 	<span class="user-nicename" id="user-id" data-value="<?php echo $WDGUser_current->wp_user->ID; ?>"><?php echo $WDGUser_current->wp_user->user_login; ?></span>
 

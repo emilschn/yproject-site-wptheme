@@ -25,7 +25,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <?php endif; ?>
 
 <?php if ( !$page_controler->get_current_investment()->has_token() ): ?>
-	<?php _e( "Merci de vous rendre sur la page", 'yproject' ); ?> <a href="<?php echo home_url( '/mon-compte' ); ?>"><?php _e( "Mon compte", 'yproject' ); ?></a> <?php _e( "pour suivre l&apos;&eacute;volution de votre paiement.", 'yproject' ); ?><br><br>
+	<?php _e( "Merci de vous rendre sur la page", 'yproject' ); ?> <a href="<?php echo home_url( '/mon-compte/' ); ?>"><?php _e( "Mon compte", 'yproject' ); ?></a> <?php _e( "pour suivre l&apos;&eacute;volution de votre paiement.", 'yproject' ); ?><br><br>
 <?php endif; ?>
 
 <div class="db-form full v3">

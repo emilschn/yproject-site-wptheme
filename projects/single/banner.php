@@ -13,7 +13,7 @@ if ($campaign->video() == '') {
 $campaign_status = $campaign->campaign_status();
 $campaign_categories_str = $campaign->get_categories_str();
 
-$btn_follow_href = home_url( '/connexion' ) . '?source=project';
+$btn_follow_href = home_url( '/connexion/' ) . '?source=project';
 $btn_follow_classes = 'wdg-button-lightbox-open';
 $btn_follow_data_lightbox = 'connexion';
 $btn_follow_text = __('Suivre', 'yproject');
@@ -203,7 +203,7 @@ $lang_list = $campaign->get_lang_list();
 					<?php if ( $campaign->time_remaining_str() != '-' ): ?>
 						
 						<?php if ( !is_user_logged_in() ): ?>
-							<a href="<?php echo home_url( '/connexion' ); ?>?source=project" class="button red">
+							<a href="<?php echo home_url( '/connexion/' ); ?>?source=project" class="button red">
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
 
@@ -232,7 +232,7 @@ $lang_list = $campaign->get_lang_list();
 					$page_invest = get_page_by_path('investir');
 					$campaign_id_param = '?campaign_id=' . $campaign->ID;
 					$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
-					$invest_url_href = home_url( '/connexion' ) . '?source=project';
+					$invest_url_href = home_url( '/connexion/' ) . '?source=project';
 					if (is_user_logged_in()) {
 						$invest_url_href = $invest_url;
 					}
@@ -305,7 +305,7 @@ $lang_list = $campaign->get_lang_list();
 					<div class="end-sentence">
 						<?php echo $nbinvestors." ". __("personnes","yproject")." ". __("ont investi","yproject") ." ". $invest_amount ." ". __("pour propulser ce projet à impact positif","yproject");?>
 					</div>
-					<a href="<?php echo home_url( '/les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+					<a href="<?php echo home_url( '/les-projets/' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 				
                                         
 				<?php // cas d'un projet terminé et non financé ?>
@@ -317,7 +317,7 @@ $lang_list = $campaign->get_lang_list();
 							<?php echo $campaign->archive_message(); ?>
 						<?php endif; ?>
 					</div>
-					<a href="<?php echo home_url( '/les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+					<a href="<?php echo home_url( '/les-projets/' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 
 				<?php endif; ?>
                                       				

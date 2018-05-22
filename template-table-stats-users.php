@@ -101,9 +101,9 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 		$nb_page = ceil( $user_count / 1000 );
 		?>
 		Pages :
-		<a href="<?php echo home_url('/statistiques-utilisateurs'); ?>">1</a>
+		<a href="<?php echo home_url('/statistiques-utilisateurs/'); ?>">1</a>
 		<?php for ($i = 2; $i <= $nb_page; $i++): ?>
-		| <a href="<?php echo home_url('/statistiques-utilisateurs'); ?>?offset=<?php echo ($i-1); ?>"><?php echo $i; ?></a>
+		| <a href="<?php echo home_url('/statistiques-utilisateurs/'); ?>?offset=<?php echo ($i-1); ?>"><?php echo $i; ?></a>
 		<?php endfor; ?>
 		
     </div>

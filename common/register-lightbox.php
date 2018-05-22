@@ -3,7 +3,7 @@
 <div class="wdg-lightbox-ref">
 	<br><br>
 
-	<form action="<?php echo home_url( "/inscription" ); ?>" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
+	<form action="<?php echo home_url( "/inscription/" ); ?>" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
 		<?php if ( $signup_step == 'request-details' ) : ?>
 			<div class="warning">
 				La cr&eacute;ation d&apos;un compte de Membre sur <?php echo ATCF_CrowdFunding::get_platform_name(); ?> est exclusivement r&eacute;serv&eacute;e aux personnes physiques.
@@ -68,7 +68,7 @@
 				<?php endif; ?>
 
 				<div class="field">
-					<label for="validate-terms-check-register" id="label-validate-terms-check-register"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> J&apos;accepte <a href="<?php echo home_url().'/cgu';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
+					<label for="validate-terms-check-register" id="label-validate-terms-check-register"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> J&apos;accepte <a href="<?php echo home_url().'/cgu/';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
 				</div>
 
 				<?php wp_nonce_field( 'register_form_posted' ); ?>
@@ -109,7 +109,7 @@
 		<?php endif; // completed-confirmation signup step ?>
 	</form>
 			
-	<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
+	<form method="post" action="<?php echo home_url( "/connexion/" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
 		<div>
 			<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 			<button class="button transparent" type="submit"><?php _e( "J&apos;ai d&eacute;j&agrave; un compte", 'yproject' ); ?></button>
