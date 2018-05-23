@@ -55,11 +55,11 @@ $estimated_turnover = $campaign->estimated_turnover();
 					</p>
 
 					<span class="uppercase"><?php _e("Je recevrai", 'yproject'); ?></span> <span class="roi_amount_user">0</span><span> &euro;* </span><br>
-					<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span> % <?php _e("du chiffre d'affaires vers&eacute; tous les trimestres", 'yproject'); ?>
+					<?php $complementary_text = '.'; ?>
 					<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
-						<?php _e( "(pourcentage indicatif)", 'yproject' ); ?>
+						<?php $complementary_text = __( " (pourcentage indicatif).", 'yproject' ); ?>
 					<?php endif; ?>
-					.<br>
+					<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span> % <?php _e("du chiffre d'affaires vers&eacute; tous les trimestres", 'yproject'); echo $complementary_text; ?><br>
 
 					<div>
 						<table>
