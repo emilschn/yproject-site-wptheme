@@ -54,8 +54,12 @@ $estimated_turnover = $campaign->estimated_turnover();
 						<button class="init_invest_count button blue"><?php _e('Calculer', 'yproject'); ?></button>
 					</p>
 
-					<span class="uppercase"><?php _e("Je recevrai", 'yproject'); ?></span> <span class="roi_amount_user">0</span><span> &euro;* </span><br />
-					<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span> % <?php _e("du chiffre d'affaires vers&eacute; tous les trimestres.", 'yproject'); ?><br />
+					<span class="uppercase"><?php _e("Je recevrai", 'yproject'); ?></span> <span class="roi_amount_user">0</span><span> &euro;* </span><br>
+					<?php _e("soit", 'yproject'); ?> <span class="roi_percent_user">0</span> % <?php _e("du chiffre d'affaires vers&eacute; tous les trimestres", 'yproject'); ?>
+					<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
+						<?php _e( "(pourcentage indicatif)", 'yproject' ); ?>
+					<?php endif; ?>
+					.<br>
 
 					<div>
 						<table>
