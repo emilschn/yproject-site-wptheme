@@ -36,7 +36,7 @@ $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::
 		
 	<div class="align-left">
 		<span class="number"><span id="royalties-percent">0</span> %</span> <?php _e( "du chiffre d'affaires pendant", 'yproject' ); ?> <?php echo $page_controler->get_current_campaign()->funding_duration_str(); ?>
-		<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
+		<?php if ( $page_controler->get_current_campaign()->contract_budget_type() == 'collected_funds' ): ?>
 			<?php _e( "(pourcentage indicatif)", 'yproject' ); ?>
 		<?php endif; ?>.
 	</div>
