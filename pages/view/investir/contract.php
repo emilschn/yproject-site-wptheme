@@ -33,12 +33,7 @@ $fields_contract_validate = $page_controler->get_form()->getFields( WDG_Form_Inv
 		<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 	<?php endforeach; ?>
 	
-	<br /><br />
-	
-	<?php foreach ( $fields_contract_validate as $field ): ?>
-		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-		<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
-	<?php endforeach; ?>
+	<br /><br /><br />
 	
 	<button type="submit" class="button half right red"><?php _e( "Valider le contrat", 'yproject' ); ?></button>
 	
