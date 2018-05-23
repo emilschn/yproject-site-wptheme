@@ -124,6 +124,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$action_posted = filter_input( INPUT_POST, 'action' );
 		if ( $action_posted == WDG_Form_User_Details::$name ) {
 			$this->form_feedback = $this->form_user_details->postForm();
+			$this->init_current_user( TRUE );
 		}
 		
 		if ( !$this->current_user->is_logged_in_with_facebook() ) {

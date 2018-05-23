@@ -5,9 +5,8 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 ?>
 
 <nav>
-	
 	<div class="nav-header">
-		<?php _e( "Bonjour", 'yproject' ); ?> <?php echo $page_controler->get_user_name(); ?> !
+        <?php _e( "Bonjour", 'yproject' ); ?> <?php echo $page_controler->get_user_name(); ?> !
 	</div>
 	
 	<ul class="nav-menu">
