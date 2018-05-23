@@ -3,7 +3,15 @@
  * Affichage des investissements de l'utilisateur
  */
 $WDGUser_current = WDGUser::current();
-$user_investments = $WDGUser_current->get_validated_investments();
+$input_organization = filter_input( INPUT_GET, 'organization' );
+if ( !empty( $input_organization ) ) {
+	if ( $WDGUser_current->can_edit_organization( $input_organization ) ) {
+		$WDGOrganization = new WDGOrganization( $input_organization );
+		$user_investments = $WDGOrganization->get_validated_investments();
+	}
+} else {
+	$user_investments = $WDGUser_current->get_validated_investments();
+}
 ?>
 
 <?php if ( empty( $user_investments ) ): ?>
@@ -82,7 +90,7 @@ $user_investments = $WDGUser_current->get_validated_investments();
 				 * Liste des ROIs reçus
 				 */
 				?>
-				<?php $roi_list = $WDGUser_current->get_royalties_by_campaign_id( $campaign_id ); ?>
+				<?php $roi_list = ( !empty( $WDGOrganization ) ) ? $WDGOrganization->get_royalties_by_campaign_id( $campaign_id ) : $WDGUser_current->get_royalties_by_campaign_id( $campaign_id ); ?>
 				<?php $future_roi_list = WDGROIDeclaration::get_list_by_campaign_id( $campaign_id ); ?>
 				
 				<h4 class="margin-top"><?php _e("Vos royalties", 'yproject'); ?></h4>
