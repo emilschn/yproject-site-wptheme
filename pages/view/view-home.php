@@ -20,8 +20,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
     </div>
 	
 	<div id="button-container">
-		<a class="button-slide" href="<?php echo home_url( '/financement' ); ?>"><?php _e("Financer mon projet", "yproject") ?></a>
-		<a class="button-slide" href="<?php echo home_url( '/investissement' ); ?>"><?php _e("Investir sur un projet", "yproject") ?></a>
+		<a class="button-slide" href="<?php echo home_url( '/financement/' ); ?>"><?php _e("Financer mon projet", "yproject") ?></a>
+		<a class="button-slide" href="<?php echo home_url( '/investissement/' ); ?>"><?php _e("Investir sur un projet", "yproject") ?></a>
 	</div>
 </header> <!-- .wdg-component-slider -->
 
@@ -106,7 +106,7 @@ $projects_html = $page_controler->get_projects_html();
 			?>
 		</div>
 	</div>
-	<a class="home-button-project see-more red" href="<?php echo home_url( '/les-projets' ); ?>"><?php _e("D&eacute;couvrir tous les projets","yproject" ) ?></a>
+	<a class="home-button-project see-more red" href="<?php echo home_url( '/les-projets/' ); ?>"><?php _e("D&eacute;couvrir tous les projets","yproject" ) ?></a>
 </section> <!-- section.wdg-component-projects-preview -->
 
 <?php
@@ -144,5 +144,5 @@ $projects_html = $page_controler->get_projects_html();
 
 
 <div id="home-press" class="hidden-inf997">
-	<a href="<?php echo home_url( '/a-propos/press-book' ); ?>"><img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse-mars-2017.png" alt="presse" /></a>
+	<a href="<?php echo home_url( '/a-propos/press-book/' ); ?>"><img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse-mars-2017.png" alt="presse" /></a>
 </div> <!-- section#home-press -->

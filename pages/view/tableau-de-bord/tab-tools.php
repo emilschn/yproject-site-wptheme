@@ -11,5 +11,5 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	</p>
 	<br><br>
 	
-	<a href="<?php echo home_url( '/guide' ); ?>" class="button red" target="_blank"><?php _e( "Consulter le guide", 'yproject' ); ?></a>
+	<a href="<?php echo home_url( '/guide/' ); ?>" class="button red" target="_blank"><?php _e( "Consulter le guide", 'yproject' ); ?></a>
 </div>

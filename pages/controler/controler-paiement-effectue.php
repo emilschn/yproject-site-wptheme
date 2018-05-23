@@ -123,7 +123,7 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		if ( $this->current_investment->has_token() ) {
 			$buffer = $this->current_investment->get_redirection( 'error', 'investpending' );
 		} else {
-			$buffer = home_url( '/paiement-partager' ). '?campaign_id=' .$this->current_campaign->ID;
+			$buffer = home_url( '/paiement-partager/' ). '?campaign_id=' .$this->current_campaign->ID;
 		}
 		return $buffer;
 	}
@@ -133,13 +133,13 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		if ( $this->current_investment->has_token() ) {
 			$buffer = $this->current_investment->get_redirection( 'success', $this->current_investment->get_token() );
 		} else {
-			$buffer = home_url( '/paiement-partager' ). '?campaign_id=' .$this->current_campaign->ID;
+			$buffer = home_url( '/paiement-partager/' ). '?campaign_id=' .$this->current_campaign->ID;
 		}
 		return $buffer;
 	}
 	
 	public function get_restart_link() {
-		return home_url( '/investir' ). '?campaign_id=' .$this->current_campaign->ID. '&invest_start=1';
+		return home_url( '/investir/' ). '?campaign_id=' .$this->current_campaign->ID. '&invest_start=1';
 	}
 	
 	public function get_error_link() {
@@ -154,7 +154,7 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		$buffer = '';
 		$error_item = $this->current_investment->get_error_item();
 		if ( isset( $error_item ) && $error_item->ask_restart() ) {
-			$buffer = home_url( '/investir' ). '?campaign_id=' .$this->current_campaign->ID. '&invest_start=1';
+			$buffer = home_url( '/investir/' ). '?campaign_id=' .$this->current_campaign->ID. '&invest_start=1';
 		}
 		return $buffer;
 	}

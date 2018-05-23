@@ -31,7 +31,7 @@ if (isset($_GET['invest_id_resend']) && $_GET['invest_id_resend'] != '') {
 
 <?php $amount = $WDGUser_displayed->get_lemonway_wallet_amount(); ?>
 Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.
-<a href="<?php echo home_url( '/details-des-investissements' ); ?>">Voir le d&eacute;tail de mes royalties</a>
+<a href="<?php echo home_url( '/details-des-investissements/' ); ?>">Voir le d&eacute;tail de mes royalties</a>
 <br><br>
 
 <?php if ( !$WDGUser_displayed->is_document_lemonway_registered( LemonwayDocument::$document_type_bank ) ): ?>

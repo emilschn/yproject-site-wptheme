@@ -141,7 +141,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		"</url>\n";
 		// les-projets : '0.7'
 		$sitemap .= "<url>".
-			"<loc>". home_url( '/les-projets' ) ."</loc>".
+			"<loc>". home_url( '/les-projets/' ) ."</loc>".
 			"<lastmod>". $current_date->format( 'Y-m-d' ) ."</lastmod>".
 			"<changefreq>hourly</changefreq>".
 			"<priority>0.7</priority>".

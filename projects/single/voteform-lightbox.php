@@ -219,7 +219,7 @@ $edd_settings = get_option( 'edd_settings' );
 		
 		<div id="user-details-form-buttons">
 			
-			<button type="button" class="button redirect half right red" data-redirecturl="<?php echo home_url( '/investir' ) . '?campaign_id=' .$post->ID. '&invest_start=1'; ?>"><?php _e( "Continuer", 'yproject' ); ?></button>
+			<button type="button" class="button redirect half right red" data-redirecturl="<?php echo home_url( '/investir/' ) . '?campaign_id=' .$post->ID. '&invest_start=1'; ?>"><?php _e( "Continuer", 'yproject' ); ?></button>
 			
 		</div>
 		
