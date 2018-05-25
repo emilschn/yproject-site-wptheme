@@ -20,6 +20,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	
 	private function daily_call() {
 		$this->rebuild_sitemap();
+		$this->initialize_home_stats();
 		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
 		if ( empty( $input_make_finished_xml ) ) {
 			WDGCronActions::make_projects_rss();
@@ -50,7 +51,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'projectlist-projects-funded'
 		));
 		$WDG_File_Cacher->rebuild_cache();
-		
+
 	}
 	
 	private function rebuild_sitemap() {
@@ -206,4 +207,41 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		
 	}
 	
+	// Calcul les stats et les met en cache 
+	private function initialize_home_stats() {
+		$db_cacher = WDG_Cache_Plugin::current();
+		$stats_duration = 48 * 60 * 60;
+
+		$count_amount = 0;
+		$people_list = array();
+		$count_projects = 0;
+		$count_roi = 0;
+
+		$project_list_funded = ATCF_Campaign::get_list_funded( WDG_Cache_Plugin::$nb_query_campaign_funded, '', true, false );
+		foreach ( $project_list_funded as $project_post ) {
+			$count_projects++;
+			$campaign = atcf_get_campaign( $project_post->ID );
+			$backers_id_list = $campaign->backers_id_list();
+			$people_list = array_merge( $people_list, $backers_id_list );
+			$count_amount += $campaign->current_amount( false );
+			$declaration_list = $campaign->get_roi_declarations();
+
+			foreach ( $declaration_list as $declaration ) {
+				$count_roi += $declaration[ 'total_roi_with_adjustment' ];
+			}
+		}
+
+		$people_list_unique = array_unique( $people_list );
+		$count_people = count( $people_list_unique );
+		$count_roi = floor( $count_roi );
+		$stats_list = array(
+			'count_amount'	=> $count_amount,
+			'count_people'	=> $count_people,
+			'nb_projects'	=> count($project_list_funded),
+			'count_roi'		=> $count_roi
+		);
+		$stats_content = json_encode($stats_list);
+
+	    $db_cacher->set_cache( WDG_Cache_Plugin::$stats_key, $stats_content, $stats_duration, WDG_Cache_Plugin::$stats_version );
+	}
 }
