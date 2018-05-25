@@ -9,6 +9,8 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	 */
 	private $current_user;
 	private $current_user_organizations;
+	private $current_user_authentication;
+	private $current_user_authentication_info;
 	private $user_id;
 	private $user_name;
 	private $user_project_list;
@@ -55,6 +57,14 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		return $this->current_user_organizations;
 	}
 	
+	public function get_current_user_authentication() {
+		return $this->current_user_authentication;
+	}
+	
+	public function get_current_user_authentication_info() {
+		return $this->current_user_authentication_info;
+	}
+	
 	private function init_current_user( $reload ) {
 		$WDGUser_current = WDGUser::current();
 		if ( $reload ) {
@@ -69,6 +79,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		}
 		
 		$this->init_current_user_organizations();
+		$this->init_current_user_authentication();
 		$this->user_id = $this->current_user->get_wpref();
 		$this->init_user_name();
 	}
@@ -81,6 +92,32 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 				$organization_obj = new WDGOrganization( $organization_item->wpref );
 				array_push( $this->current_user_organizations, $organization_obj );
 			}
+		}
+	}
+	
+	private function init_current_user_authentication() {
+		$this->current_user_authentication = 0;
+		$this->current_user_authentication_info = '';
+		
+		// Vérifications pour niveau 1 : les infos sont renseignées
+		if ( $this->current_user->can_register_lemonway() ) {
+			$this->current_user_authentication = 1;
+		} else {
+			$this->current_user_authentication_info = ''; //
+		}
+		
+		// Vérifications pour niveau 2 : les documents sont vérifiés
+		if ( $this->current_user_authentication == 1 && $this->current_user->is_lemonway_registered() ) {
+			$this->current_user_authentication = 2;
+		} else {
+			$this->current_user_authentication_info = ''; //
+		}
+		
+		// Vérifications pour niveau 3 : le RIB est validé
+		if ( $this->current_user_authentication == 2 && $this->current_user->is_lemonway_registered() ) {
+			$this->current_user_authentication = 3;
+		} else {
+			$this->current_user_authentication_info = ''; //
 		}
 	}
 	
