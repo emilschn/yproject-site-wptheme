@@ -210,7 +210,6 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	// Calcul les stats et les met en cache 
 	private function initialize_home_stats() {
 		$db_cacher = WDG_Cache_Plugin::current();
-		$stats_duration = 48 * 60 * 60;
 
 		$count_amount = 0;
 		$people_list = array();
@@ -242,6 +241,6 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		);
 		$stats_content = json_encode($stats_list);
 
-	    $db_cacher->set_cache( WDG_Cache_Plugin::$stats_key, $stats_content, $stats_duration, WDG_Cache_Plugin::$stats_version );
+	    $db_cacher->set_cache( WDG_Cache_Plugin::$stats_key, $stats_content, WDG_Cache_Plugin::$stats_duration, WDG_Cache_Plugin::$stats_version );
 	}
 }

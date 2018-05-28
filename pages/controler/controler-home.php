@@ -11,10 +11,6 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 	private $projects_html;
 	private $projects_list;
 	
-	private static $stats_html_key = 'home-projects-stats';
-	private static $stats_html_duration = 86400; // 24 heures de cache
-	private static $stats_html_version = 2;
-	private $stats_html;
 	private $stats_list;
 	
 	public function __construct() {
@@ -125,16 +121,7 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 				'count_roi'		=> $stats_array['count_roi']
 		);
 	}
-	
-	public function get_stats_html() {
-		return $this->stats_html;
-	}
-	
-	public function set_stats_html( $html ) {
-		$this->stats_html = $html;
-		$this->set_db_cached_elements( WDG_Page_Controler_Home::$stats_html_key, $html, WDG_Page_Controler_Home::$stats_html_duration, WDG_Page_Controler_Home::$stats_html_version );
-	}
-	
+
 	public function get_stats_list() {
 		return $this->stats_list;
 	}

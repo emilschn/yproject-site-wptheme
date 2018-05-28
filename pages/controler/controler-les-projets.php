@@ -5,12 +5,6 @@ $template_engine->set_controler( new WDG_Page_Controler_ProjectList() );
 class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	
 	private $slider;
-	
-	private static $nb_query_campaign_funded = 40;
-	private static $stats_html_key = 'projectlist-projects-stats';
-	private static $stats_html_duration = 86400; // 24 heures de cache
-	private static $stats_html_version = 2;
-	private $stats_html;
 	private $stats_list;
 	
 	private static $filters_html_key = 'projectlist-filters';
@@ -70,7 +64,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 /******************************************************************************/
 	private function prepare_stats() {
 		$db_cacher = WDG_Cache_Plugin::current();
-
+		
 		$stats = $db_cacher->get_cache( WDG_Cache_Plugin::$stats_key, WDG_Cache_Plugin::$stats_version );
 
 		$stats_array = json_decode($stats, true);
@@ -80,15 +74,6 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 				'nb_projects'	=> $stats_array['nb_projects'],
 				'count_roi'		=> $stats_array['count_roi']
 		);
-	}
-	
-	public function get_stats_html() {
-		return $this->stats_html;
-	}
-	
-	public function set_stats_html( $html ) {
-		$this->stats_html = $html;
-		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$stats_html_key, $html, WDG_Page_Controler_ProjectList::$stats_html_duration, WDG_Page_Controler_ProjectList::$stats_html_version );
 	}
 	
 	public function get_stats_list() {
@@ -174,7 +159,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	private function prepare_fundedprojects() {
 		$this->fundedprojects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
 		if ( empty( $this->fundedprojects_html ) ) {
-			$this->fundedprojects_list = ATCF_Campaign::get_list_funded( WDG_Page_Controler_ProjectList::$nb_query_campaign_funded );
+			$this->fundedprojects_list = ATCF_Campaign::get_list_funded( WDG_Cache_Plugin::$nb_query_campaign_funded );
 		}
 	}
 	
