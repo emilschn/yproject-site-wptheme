@@ -76,4 +76,101 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 		<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a>
 		<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/lightbox-add-check.php' ), true ); ?>
 	</div>
+<?php endif; ?>
+
+
+
+<?php if ( $page_controler->can_access_admin() ): ?>
+	<?php $campaign_poll_answers = $page_controler->get_campaign()->get_api_data( 'poll_answers' ); ?>
+	<br><br><br>
+	<div class="db-form">
+		<div class="field admin-theme">
+
+			<b>Sondage lié à la garantie</b><br><br>
+
+			<table>
+				<tr>
+					<td>Date</td>
+					<td>Contexte</td>
+					<td>Montant (contexte)</td>
+					<td>Investirait sur d'autres projets</td>
+					<td>Investirait montant différent</td>
+					<td>Investirait montant</td>
+					<td>E-mail</td>
+					<td>Age</td>
+					<td>Code postal</td>
+					<td>Sexe</td>
+				</tr>
+
+				<?php foreach ( $campaign_poll_answers as $answer ): ?>
+					<?php if ( $answer->poll_slug != 'warranty' ) { continue; } ?>
+					<?php $answers_decoded = json_decode( $answer->answers ); ?>
+					<tr>
+						<td><?php echo $answer->date; ?></td>
+						<td><?php echo $answer->context; ?></td>
+						<td><?php echo $answer->context_amount; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'would-invest-other-projects-if-warranty' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'would-invest-different-amount-if-warranty' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo $answers_decoded->{ 'would-invest-amount-with-warranty' }; ?></td>
+						<td><?php echo $answer->user_email; ?></td>
+						<td><?php echo $answer->user_age; ?></td>
+						<td><?php echo $answer->user_postal_code; ?></td>
+						<td><?php echo $answer->user_gender; ?></td>
+					</tr>
+				<?php endforeach; ?>
+			</table>
+		</div>
+		
+		<div class="field admin-theme">
+
+			<b>Sondage lié à la motivation</b><br><br>
+
+			<table>
+				<tr>
+					<td>Date</td>
+					<td>Contexte</td>
+					<td>Montant (contexte)</td>
+					<td>Connait le PP</td>
+					<td>Intéret secteur</td>
+					<td>Diversifier</td>
+					<td>Impact</td>
+					<td>Autre</td>
+					<td>Autre (txt)</td>
+					<td>Connu par</td>
+					<td>Autre (txt)</td>
+					<td>Venu via</td>
+					<td>Autre (txt)</td>
+					<td>E-mail</td>
+					<td>Age</td>
+					<td>Code postal</td>
+					<td>Sexe</td>
+				</tr>
+
+				<?php foreach ( $campaign_poll_answers as $answer ): ?>
+					<?php if ( $answer->poll_slug != 'source' ) { continue; } ?>
+					<?php $answers_decoded = json_decode( $answer->answers ); ?>
+					<tr>
+						<td><?php echo $answer->date; ?></td>
+						<td><?php echo $answer->context; ?></td>
+						<td><?php echo $answer->context_amount; ?></td>
+						<td><?php echo ( $answers_decoded->motivations->{ 'know-project-manager' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->motivations->{ 'interrested-by-domain' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->motivations->{ 'diversify-savings' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->motivations->{ 'looking-for-positive-impact' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->motivations->{ 'other-motivations' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo $answers_decoded->{ 'other-motivations-to-invest' }; ?></td>
+						<td><?php echo $answers_decoded->{ 'how-the-fundraising-was-known' }; ?></td>
+						<td><?php echo $answers_decoded->{ 'other-source-to-know-the-fundraising' }; ?></td>
+						<td><?php echo $answers_decoded->{ 'where-user-come-from' }; ?></td>
+						<td><?php echo $answers_decoded->{ 'other-source-where-the-user-come-from' }; ?></td>
+						<td><?php echo $answer->user_email; ?></td>
+						<td><?php echo $answer->user_age; ?></td>
+						<td><?php echo $answer->user_postal_code; ?></td>
+						<td><?php echo $answer->user_gender; ?></td>
+					</tr>
+				<?php endforeach; ?>
+			</table>
+		</div>
+	</div>
+	
 <?php endif;

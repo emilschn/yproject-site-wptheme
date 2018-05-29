@@ -18,10 +18,147 @@ get_header();
 global $stylesheet_directory_uri, $wpdb;
 $table_jcrois = $wpdb->prefix . "jycrois";
 $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
+$input_poll = filter_input( INPUT_GET, 'poll' );
 ?>
 
 <div id="content">
     <div class="padder">
+		<br><br><br>
+		
+		<?php if ( $input_poll == 'warranty' ): ?>
+		<?php $poll_answers = WDGWPREST_Entity_PollAnswer::get_list( FALSE, FALSE, $input_poll ); ?>
+		<h1>Résultats sondage garantie</h1>
+		<div class="wdg-datatable">
+			<table width="100%">
+				<thead>
+					<tr>
+						<td>Date</td>
+						<td>Contexte</td>
+						<td>Montant (contexte)</td>
+						<td>Investirait sur d'autres projets</td>
+						<td>Investirait montant différent</td>
+						<td>Investirait montant</td>
+						<td>E-mail</td>
+						<td>Age</td>
+						<td>Code postal</td>
+						<td>Sexe</td>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td>Date</td>
+						<td>Contexte</td>
+						<td>Montant (contexte)</td>
+						<td>Investirait sur d'autres projets</td>
+						<td>Investirait montant différent</td>
+						<td>Investirait montant</td>
+						<td>E-mail</td>
+						<td>Age</td>
+						<td>Code postal</td>
+						<td>Sexe</td>
+					</tr>
+				</tfoot>
+				
+				<tbody>
+					<?php foreach ( $poll_answers as $answer ): ?>
+					<?php $answers_decoded = json_decode( $answer->answers ); ?>
+					<tr>
+						<td><?php echo $answer->date; ?></td>
+						<td><?php echo $answer->context; ?></td>
+						<td><?php echo $answer->context_amount; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'would-invest-other-projects-if-warranty' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'would-invest-different-amount-if-warranty' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo $answers_decoded->{ 'would-invest-amount-with-warranty' }; ?></td>
+						<td><?php echo $answer->user_email; ?></td>
+						<td><?php echo $answer->user_age; ?></td>
+						<td><?php echo $answer->user_postal_code; ?></td>
+						<td><?php echo $answer->user_gender; ?></td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+				
+			</table>
+		</div>
+		
+		
+		<?php elseif ( $input_poll == 'source' ): ?>
+		<?php $poll_answers = WDGWPREST_Entity_PollAnswer::get_list( FALSE, FALSE, $input_poll ); ?>
+		<h1>Résultats sondage source</h1>
+		<div class="wdg-datatable">
+			<table width="100%">
+				<thead>
+					<tr>
+						<td>Date</td>
+						<td>Contexte</td>
+						<td>Montant (contexte)</td>
+						<td>Connait le PP</td>
+						<td>Intéret secteur</td>
+						<td>Diversifier</td>
+						<td>Impact</td>
+						<td>Autre</td>
+						<td>Autre (txt)</td>
+						<td>Connu par</td>
+						<td>Autre (txt)</td>
+						<td>Venu via</td>
+						<td>Autre (txt)</td>
+						<td>E-mail</td>
+						<td>Age</td>
+						<td>Code postal</td>
+						<td>Sexe</td>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td>Date</td>
+						<td>Contexte</td>
+						<td>Montant (contexte)</td>
+						<td>Connait le PP</td>
+						<td>Intéret secteur</td>
+						<td>Diversifier</td>
+						<td>Impact</td>
+						<td>Autre</td>
+						<td>Autre (txt)</td>
+						<td>Connu par</td>
+						<td>Autre (txt)</td>
+						<td>Venu via</td>
+						<td>Autre (txt)</td>
+						<td>E-mail</td>
+						<td>Age</td>
+						<td>Code postal</td>
+						<td>Sexe</td>
+					</tr>
+				</tfoot>
+				
+				<tbody>
+					<?php foreach ( $poll_answers as $answer ): ?>
+					<?php $answers_decoded = json_decode( $answer->answers ); ?>
+					<tr>
+						<td><?php echo $answer->date; ?></td>
+						<td><?php echo $answer->context; ?></td>
+						<td><?php echo $answer->context_amount; ?></td>
+						<td><?php echo ( $answers_decoded->motivations->{ 'know-project-manager' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->motivations->{ 'interrested-by-domain' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->motivations->{ 'diversify-savings' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->motivations->{ 'looking-for-positive-impact' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->motivations->{ 'other-motivations' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo $answers_decoded->{ 'other-motivations-to-invest' }; ?></td>
+						<td><?php echo $answers_decoded->{ 'how-the-fundraising-was-known' }; ?></td>
+						<td><?php echo $answers_decoded->{ 'other-source-to-know-the-fundraising' }; ?></td>
+						<td><?php echo $answers_decoded->{ 'where-user-come-from' }; ?></td>
+						<td><?php echo $answers_decoded->{ 'other-source-where-the-user-come-from' }; ?></td>
+						<td><?php echo $answer->user_email; ?></td>
+						<td><?php echo $answer->user_age; ?></td>
+						<td><?php echo $answer->user_postal_code; ?></td>
+						<td><?php echo $answer->user_gender; ?></td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+				
+			</table>
+		</div>
+		
+		
+		<?php else: ?>
 		<h1>Tableau complet de la liste des utilisateurs</h1>
 		
 		<div class="wdg-datatable">
@@ -105,6 +242,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 		<?php for ($i = 2; $i <= $nb_page; $i++): ?>
 		| <a href="<?php echo home_url('/statistiques-utilisateurs/'); ?>?offset=<?php echo ($i-1); ?>"><?php echo $i; ?></a>
 		<?php endfor; ?>
+		<?php endif; ?>
 		
     </div>
 </div>
