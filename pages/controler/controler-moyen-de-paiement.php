@@ -104,7 +104,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 // ACCEPTED MEAN OF PAYMENTS
 /******************************************************************************/
 	public function get_payment_url( $param ) {
-		return home_url( '/moyen-de-paiement' ) . '?campaign_id=' .$this->current_campaign->ID. '&meanofpayment=' .$param;
+		return home_url( '/moyen-de-paiement/' ) . '?campaign_id=' .$this->current_campaign->ID. '&meanofpayment=' .$param;
 	}
 	
 	public function get_lemonway_amount() {
@@ -290,7 +290,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	}
 	
 	public function get_wire_next_link() {
-		$buffer = home_url( '/paiement-effectue' ). '?campaign_id=' .$this->current_campaign->ID. '&meanofpayment=wire';
+		$buffer = home_url( '/paiement-effectue/' ). '?campaign_id=' .$this->current_campaign->ID. '&meanofpayment=wire';
 		return $buffer;
 	}
 	
@@ -301,13 +301,13 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 		} elseif ( $this->current_investment->needs_signature() ) {
 			$buffer = home_url( '/paiement-signature' ). '?campaign_id=' .$this->current_campaign->ID;
 		} else {
-			$buffer = home_url( '/paiement-partager' ). '?campaign_id=' .$this->current_campaign->ID;
+			$buffer = home_url( '/paiement-partager/' ). '?campaign_id=' .$this->current_campaign->ID;
 		}
 		return $buffer;
 	}
 	
 	public function get_restart_link() {
-		return home_url( '/investir' ). '?campaign_id=' .$this->current_campaign->ID. '&invest_start=1';
+		return home_url( '/investir/' ). '?campaign_id=' .$this->current_campaign->ID. '&invest_start=1';
 	}
 	
 }

@@ -441,6 +441,7 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 					thisForm.find('.save_ok').fadeIn();                          
 				}
 
+
 				// Enregistrer l'organisation liée au projet dans tab-organization
 				if ( $( this ).data( 'action' ) == "save_project_organization" ){
 					//Afficher le bouton d'édition de l'organisation après enregistrement de la liaison
@@ -454,6 +455,7 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 					thisForm.find('.save_ok').hide();
 					$("#wdg-lightbox-valid-changeOrga").css('display', 'block');
 					new_project_organization = $("#select-new_project_organization option:selected").val();
+					
 				}
 			}
 		}).fail(function() {
@@ -667,7 +669,7 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 						err.insertAfter($("#orgaedit_form input[name="+error+"]"));
 					}
 				}
-				if(count_files_errors > 0) {
+				if(count_files_errors > 0 || count_data_errors > 0) {
 					var err = $("<p class='errors'>Certains champs n'ont pas été validés.</p>");
 					err.insertAfter($("#orgaedit_form_button button"));
 				}
@@ -797,6 +799,7 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 				}
 				if(count_errors > 0) {
 					var firsterror = thisForm.find(".errors").first();
+					
 					if(firsterror.length === 1){
 						self.scrollTo(firsterror);
 					}
@@ -858,6 +861,7 @@ WDGCampaignDashboard.prototype.updateEditOrgaBtn = function(form){
 	   var newname = $("#select-new_project_organization").find('option:selected').text();
 	   edit_btn.attr("href","#");
 	   edit_btn.text("Editer "+newname);
+
    } else {
 	   edit_btn.hide();
    }

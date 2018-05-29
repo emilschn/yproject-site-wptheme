@@ -66,7 +66,11 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 					<div class="field">
 						<label for="init_invest"><?php _e( "Je recevrai", 'yproject' ); ?></label>
 						<div class="field-container">
-							<span class="roi_percent_user">0</span> % <?php _e( "du chiffre d'affaires de ce projet.", 'yproject' ); ?><br />
+							<?php $complementary_text = '.'; ?>
+							<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
+								<?php $complementary_text = __( " (pourcentage indicatif).", 'yproject' ); ?>
+							<?php endif; ?>
+							<span class="roi_percent_user">0</span> % <?php _e( "du chiffre d'affaires de ce projet", 'yproject' ); echo $complementary_text; ?><br />
 							<?php _e("Soit", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro;* </span><?php _e( "selon", 'yproject' ); ?>
 							<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet", 'yproject' )?></a>
 							<?php _e( "r&eacute;partis de la mani&egrave;re suivante :", 'yproject' ); ?>

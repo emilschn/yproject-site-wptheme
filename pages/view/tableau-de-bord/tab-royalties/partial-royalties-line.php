@@ -126,7 +126,7 @@ for ($i = 0; $i < $nb_fields; $i++) {
 		<form action="<?php echo admin_url( 'admin-post.php?action=generate_royalties_bill'); ?>" method="POST" class="align-center admin-theme-block">
 			/!\ Attention : assurez-vous que la facture n'a pas encore été générée sur l'outil pour ne pas créer de doublon. /!\<br>
 			<input type="hidden" name="roi_declaration_id" value="<?php echo $declaration->id; ?>">
-			<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>">
+			<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>">
 			<button class="button"><?php _e( "G&eacute;n&eacute;rer la facture", 'yproject' ); ?></button>
 		</form>
 		<?php else: ?>

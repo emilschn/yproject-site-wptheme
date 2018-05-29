@@ -159,7 +159,7 @@ var WDGProjectVote = (function($) {
 	return {
 		currentSlide: 0,
 		minSlide: 1,
-		maxSlide: 3,
+		maxSlide: 4,
 		init: function() {
 			if ( $( 'div#vote-form' ).length > 0 ) {
 				$( 'div#vote-form div#vote-form-buttons button.previous' ).click( function( e ) {

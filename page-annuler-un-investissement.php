@@ -65,7 +65,7 @@
 			
 			<br /><br />
 			
-			&lt;&lt; <a href="<?php home_url('/mon-compte'); ?>#projects">Mon compte</a><br /><br />
+			&lt;&lt; <a href="<?php home_url('/mon-compte/'); ?>#projects">Mon compte</a><br /><br />
 			
 		</div>
 	</div><!-- .padder -->

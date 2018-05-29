@@ -85,7 +85,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 					} else {
 						$projectAction = '';
 						$buttonAction = __("D&eacute;couvrir ce projet", "yproject");
-						$project_status = __("&Eacute;valuation termin&eacute;", "yproject");
+						$project_status = __("&Eacute;valuation termin&eacute;e", "yproject");
 					}
         ?>
                     <div class="progress-bar">

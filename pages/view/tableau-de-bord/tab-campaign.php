@@ -47,6 +47,15 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				'admin_theme'	=> true,
 				"editable"		=> $page_controler->get_campaign()->is_preparing()
 			));
+
+			DashboardUtility::create_field(array(
+				'id'			=> 'new_skip_in_stats',
+				'type'			=> 'check',
+				'label'			=> __( "Ne pas compter dans les stats", 'yproject' ),
+				'value'			=> $page_controler->get_campaign()->skip_in_stats(),
+				'admin_theme'	=> true,
+				"editable"		=> true
+			));
 		}
 
 
@@ -193,6 +202,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"value"	=> $page_controler->get_campaign()->get_minimum_goal_display(),
 			"options_id"	=> array( ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_max, ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ),
 			"options_names"	=> array( "Afficher l'objectif minimum", "Afficher l'objectif maximum et un seuil de validation" )
+		));
+
+		DashboardUtility::create_field(array(
+			'id'			=> 'new_archive_message',
+			'type'			=> 'text',
+			'label'			=> __( "Message de projet archiv&eacute;", 'yproject' ),
+			'value'			=> $page_controler->get_campaign()->archive_message(),
+			'admin_theme'	=> true,
+			'editable'		=> ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_archive ) && $page_controler->can_access_admin(),
+			'visible'		=> ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_archive ) && $page_controler->can_access_admin()
 		));
 		
 		// Champs personnalisés

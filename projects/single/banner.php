@@ -13,7 +13,7 @@ if ($campaign->video() == '') {
 $campaign_status = $campaign->campaign_status();
 $campaign_categories_str = $campaign->get_categories_str();
 
-$btn_follow_href = home_url( '/connexion' ) . '?source=project';
+$btn_follow_href = home_url( '/connexion/' ) . '?source=project';
 $btn_follow_classes = 'wdg-button-lightbox-open';
 $btn_follow_data_lightbox = 'connexion';
 $btn_follow_text = __('Suivre', 'yproject');
@@ -48,19 +48,20 @@ if (!empty($current_organization)) {
 	$page_edit_orga = get_permalink(get_page_by_path('editer-une-organisation')->ID) .'?orga_id='.$current_organization->wpref;
 	
 	$owner_str = $wdg_organization->get_name();
-	$lightbox_content = '<div class="content align-center">'.$wdg_organization->get_name().'</div>
-		<div class="content align-left">
-		<span>'.__('Forme juridique :', 'yproject').'</span>'.$wdg_organization->get_legalform().'<br />
-		<span>'.__('Num&eacute;ro SIREN :', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
-		<span>'.__('Code APE :', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />';
+	$lightbox_content = '<div class="lightbox-organization-separator"></div>
+		<div class="content align-left"><br />
+		<span>'.__('Forme juridique : ', 'yproject').'</span>'.$wdg_organization->get_legalform().'<br />
+		<span>'.__('Num&eacute;ro SIREN : ', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
+		<span>'.__('Code APE : ', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />';
 	if ( $wdg_organization->get_vat() != "" && $wdg_organization->get_vat() != '---' ) {
-		$lightbox_content .= '<span>'.__('Num&eacute;ro de TVA :', 'yproject').'</span>'.$wdg_organization->get_vat().'<br />';
+		$lightbox_content .= '<span>'.__('Num&eacute;ro de TVA : ', 'yproject').'</span>'.$wdg_organization->get_vat().'<br />';
 	}
-	$lightbox_content .= '
-		<span>'.__('Capital social :', 'yproject').'</span>'.$wdg_organization->get_capital().'<br /><br />
+	$lightbox_content .= 
+		'<span>'.__('Capital social : ', 'yproject').'</span>'.$wdg_organization->get_capital().' &euro;'.'<br /><br />
 		</div>
+		<div class="lightbox-organization-separator"></div>'.'<br/>
 		<div class="content align-left">
-		<span>'.__('Si&egrave;ge social :', 'yproject').'</span>'.$wdg_organization->get_address().'<br />
+		<span>'.__('Si&egrave;ge social : ', 'yproject').'<br/>'.'</span>'.$wdg_organization->get_address().'<br />
 		<span></span>'.$wdg_organization->get_postal_code().' '.$wdg_organization->get_city().'<br />
 		<span></span>'.$wdg_organization->get_nationality().'<br />
 		</div>';
@@ -95,7 +96,7 @@ $lang_list = $campaign->get_lang_list();
 			<p>
 				<?php _e("Un projet port&eacute; par", 'yproject'); ?> <a href="#project-organization" class="wdg-button-lightbox-open" data-lightbox="project-organization"><?php echo $owner_str; ?></a>
 			</p>
-			<?php echo do_shortcode('[yproject_lightbox id="project-organization"]'.$lightbox_content.'[/yproject_lightbox]'); ?>
+			<?php echo do_shortcode('[yproject_lightbox_cornered id="project-organization" title="'.$wdg_organization->get_name().'"]'.$lightbox_content.'[/yproject_lightbox_cornered]'); ?>
 		</div>
 	</div>
 
@@ -202,7 +203,7 @@ $lang_list = $campaign->get_lang_list();
 					<?php if ( $campaign->time_remaining_str() != '-' ): ?>
 						
 						<?php if ( !is_user_logged_in() ): ?>
-							<a href="<?php echo home_url( '/connexion' ); ?>?source=project" class="button red">
+							<a href="<?php echo home_url( '/connexion/' ); ?>?source=project" class="button red">
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
 
@@ -231,7 +232,7 @@ $lang_list = $campaign->get_lang_list();
 					$page_invest = get_page_by_path('investir');
 					$campaign_id_param = '?campaign_id=' . $campaign->ID;
 					$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
-					$invest_url_href = home_url( '/connexion' ) . '?source=project';
+					$invest_url_href = home_url( '/connexion/' ) . '?source=project';
 					if (is_user_logged_in()) {
 						$invest_url_href = $invest_url;
 					}
@@ -288,7 +289,7 @@ $lang_list = $campaign->get_lang_list();
 						?>
 					</div>
 
-					<?php if ($time_remaining_str != '-'): ?>
+					<?php if ( $time_remaining_str != '-' && $campaign->percent_completed( false ) < 100 ): ?>
 					<a href="<?php echo $invest_url_href; ?>" class="button red">
 						<?php _e( "Investir", 'yproject' ); ?>
 					</a>
@@ -299,20 +300,24 @@ $lang_list = $campaign->get_lang_list();
 				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_funded || $campaign_status == ATCF_Campaign::$campaign_status_closed): ?>
 					<?php
 					$nbinvestors = $campaign->backers_count();
-					$invest_amount =$campaign->current_amount();
+					$invest_amount = $campaign->current_amount();
 					?>
 					<div class="end-sentence">
 						<?php echo $nbinvestors." ". __("personnes","yproject")." ". __("ont investi","yproject") ." ". $invest_amount ." ". __("pour propulser ce projet à impact positif","yproject");?>
 					</div>
-					<a href="<?php echo home_url( '/les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+					<a href="<?php echo home_url( '/les-projets/' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 				
                                         
 				<?php // cas d'un projet terminé et non financé ?>
 				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>            
 					<div class="end-sentence">
-						<?php _e("Malheureusement, ce projet n'a pas &eacute;t&eacute; propuls&eacute;","yproject"); ?>
+						<?php if ( $campaign->archive_message() == '' ): ?>
+							<?php _e( "Malheureusement, ce projet n'a pas &eacute;t&eacute; propuls&eacute;", 'yproject' ); ?>
+						<?php else: ?>
+							<?php echo $campaign->archive_message(); ?>
+						<?php endif; ?>
 					</div>
-					<a href="<?php echo home_url( '/les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+					<a href="<?php echo home_url( '/les-projets/' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 
 				<?php endif; ?>
                                       				

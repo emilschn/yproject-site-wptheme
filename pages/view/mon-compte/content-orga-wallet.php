@@ -8,6 +8,7 @@ global $WDGOrganization;
 
 Montant de toutes les royalties vers&eacute;es : <?php echo $WDGOrganization->get_rois_amount(); ?> &euro;<br>
 Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_rois_amount(); ?> &euro;<br>
+<a href="<?php echo home_url( '/details-des-investissements/' ); ?>?organization=<?php echo $WDGOrganization->get_wpref(); ?>">Voir le d&eacute;tail de mes royalties</a><br>
 <br><br>
 
 <?php if ( !$WDGOrganization->is_document_lemonway_registered( LemonwayDocument::$document_type_bank ) ): ?>
@@ -55,7 +56,7 @@ Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_roi
 		</form>
 	<?php endif; ?>
 
-<?php elseif ($amount > 0): ?>
+<?php elseif ( $WDGOrganization->get_available_rois_amount() > 0 ): ?>
 	<form action="" method="POST" enctype="multipart/form-data">
 		<p class="align-center">
 			<input type="submit" class="button" value="Reverser sur mon compte bancaire" />

@@ -18,6 +18,13 @@ div#content.version-3 div.separator-title span {
     text-transform: uppercase;
 }
 
+div.lightbox-organization-separator {
+	color: #333333;
+    border-bottom: 1px solid #333333;
+    font-weight: normal;
+    font-size: 13pt !important;
+}
+
 /*******************************************************************************
 * LIGHTBOX WARNING
 *******************************************************************************/
@@ -784,6 +791,14 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	float: left;
 	margin-left: -25px;
 }
+#vote-form .vote-progress-bar span:nth-child(2) {
+	float: left;
+	margin-left: 25px;
+}
+#vote-form .vote-progress-bar span:first-child {
+	float: left;
+	margin-left: -25px;
+}
 #vote-form .vote-progress-bar span:last-child {
 	float: right;
 	margin-right: -25px;
@@ -807,8 +822,18 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	border-bottom: 6px solid transparent;
 	border-left: 12px solid #F2F2F2;
 }
+@-moz-document url-prefix() {
+	#vote-form .vote-progress-bar span:after {
+		top: -58px;
+	}
+}
 #vote-form .vote-progress-bar span.selected:after {
 	border-left: 0px;
+}
+
+#wdg-lightbox-vote #field-would-invest-amount-with-warranty, #wdg-lightbox-vote #field-other-motivations-to-invest, #wdg-lightbox-vote #field-other-source-to-know-the-fundraising, #wdg-lightbox-vote #field-other-source-where-the-user-come-from {
+	margin-top: -50px;
+	margin-left: 30px;
 }
 
 

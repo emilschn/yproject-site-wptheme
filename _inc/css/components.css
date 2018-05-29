@@ -865,6 +865,11 @@ body input[type=text], body input[type=email], body select {
 	display: block;
 	width: 100%;
 }
+@-moz-document url-prefix() {
+	.db-form.v3.full .field .field-container label {
+		margin-left: -12px;
+	}
+}
 .db-form.v3 .field i.infobutton {
 	float: right;
 	margin-top: -25px;

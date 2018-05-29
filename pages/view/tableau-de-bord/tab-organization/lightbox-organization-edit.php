@@ -435,9 +435,6 @@ $WDGUser_current = WDGUser::current();
 
 
 		<span style="color: #EE0000;"><em>--&gt; <?php _e( "Si une quatri&egrave;me personne ou une personne morale d&eacute;tient au moins 25% de votre capital, merci de nous le signaler sur support@wedogood.co.", 'yproject' ); ?></em></span><br />
-
-
-
 		<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
 		<input type="hidden" name="action" value="save_edit_organization" />
 

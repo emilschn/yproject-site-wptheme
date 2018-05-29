@@ -24,7 +24,7 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 			$referer_url = wp_get_referer();
 			if ( $referer_url == home_url( '/' ) || $referer_url == home_url( '/les-projets/' ) ) {
 				ypcf_debug_log( 'WDG_Page_Controler_Connection::login_facebook > mon-compte' );
-				wp_redirect( home_url( '/mon-compte#' ) );
+				wp_redirect( home_url( '/mon-compte/#' ) );
 			} else {
 				ypcf_debug_log( 'WDG_Page_Controler_Connection::login_facebook > #' );
 				wp_redirect( WDGUser::get_login_redirect_page( '#' ) );

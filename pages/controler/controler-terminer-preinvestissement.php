@@ -157,7 +157,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 		if ( $action_posted == WDG_Form_Invest_Contract::$name ) {
 			$input_nav = filter_input( INPUT_POST, 'nav' );
 			if ( $input_nav == 'previous' ) {
-				$url = home_url( '/terminer-preinvestissement' );
+				$url = home_url( '/terminer-preinvestissement/' );
 				$url .= '?cancel=1&investment_id=' . $this->current_investment->get_id();
 				wp_redirect( $url );
 
@@ -168,9 +168,9 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 					$this->current_investment->set_contract_status( WDGInvestment::$contract_status_investment_validated );
 					ypcf_get_updated_payment_status( $this->current_investment->get_id() );
 					if ( $this->current_investment->needs_signature() ) {
-						wp_redirect( home_url( '/paiement-signature' ). '?campaign_id=' .$this->current_campaign->ID );
+						wp_redirect( home_url( '/paiement-signature/' ). '?campaign_id=' .$this->current_campaign->ID );
 					} else {
-						wp_redirect( home_url( '/paiement-partager' ) . '?campaign_id=' . $this->current_campaign->ID );
+						wp_redirect( home_url( '/paiement-partager/' ) . '?campaign_id=' . $this->current_campaign->ID );
 					}
 				}
 			}
@@ -200,7 +200,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 	}
 	
 	public function get_form_action() {
-		$url = home_url( '/terminer-preinvestissement' );
+		$url = home_url( '/terminer-preinvestissement/' );
 		$url .= '?investment_id=' . $this->current_investment->get_id();
 		return $url;
 	}

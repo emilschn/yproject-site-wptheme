@@ -22,7 +22,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		parent::__construct();
 		define( 'SKIP_BASIC_HTML', TRUE );
 		if (!is_user_logged_in()) {
-			wp_redirect( home_url( '/connexion' ) . '?redirect-page=mon-compte' );
+			wp_redirect( home_url( '/connexion/' ) . '?redirect-page=mon-compte' );
 		}
 		
 		$core = ATCF_CrowdFunding::instance();
@@ -124,6 +124,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$action_posted = filter_input( INPUT_POST, 'action' );
 		if ( $action_posted == WDG_Form_User_Details::$name ) {
 			$this->form_feedback = $this->form_user_details->postForm();
+			$this->init_current_user( TRUE );
 		}
 		
 		if ( !$this->current_user->is_logged_in_with_facebook() ) {
@@ -190,7 +191,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 			while (have_posts()) {
 				the_post();
 				$project = array(
-					'link'	=> home_url( '/tableau-de-bord' ) . '?campaign_id=' . get_the_ID(),
+					'link'	=> home_url( '/tableau-de-bord/' ) . '?campaign_id=' . get_the_ID(),
 					'name'	=> get_the_title()
 				);
 				array_push( $this->user_project_list, $project );
@@ -202,7 +203,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		if ( !empty( $project_list ) ) {
 			foreach ($project_list as $project) {
 				$project = array(
-					'link'	=> home_url( '/tableau-de-bord' ) . '?campaign_id=' . $project->wpref,
+					'link'	=> home_url( '/tableau-de-bord/' ) . '?campaign_id=' . $project->wpref,
 					'name'	=> $project->name
 				);
 				array_push( $this->user_project_list, $project );
