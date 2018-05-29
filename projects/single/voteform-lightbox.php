@@ -12,6 +12,12 @@ $fields_risk = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_risk );
 $fields_info = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_info );
 $field_invest = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_invest );
 $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
+$core = ATCF_CrowdFunding::instance();
+$core->include_form( 'invest-poll' );
+$WDGCurrent_User = WDGUser::current();
+$WDGPollForm = new WDG_Form_Invest_Poll( $post->ID, $WDGCurrent_User->wp_user->ID, 'vote' );
+$fields_poll_source = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_group_poll_source );
+$fields_poll_warranty = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_group_poll_warranty );
 ?>
 
 <?php ob_start(); ?>
@@ -42,6 +48,7 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 				<span class="selected">Etape 1</span>
 				<span>Etape 2</span>
 				<span>Etape 3</span>
+				<span>Etape 4</span>
 			</div>
 			
 			<?php _e( "WE DO GOOD reconnecte la finance avec le bien commun.", 'yproject' ); ?>
@@ -69,6 +76,7 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 				<span>Etape 1</span>
 				<span class="selected">Etape 2</span>
 				<span>Etape 3</span>
+				<span>Etape 4</span>
 			</div>
 			
 			<?php foreach ( $fields_risk as $field ): ?>
@@ -89,9 +97,37 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 				<span>Etape 1</span>
 				<span>Etape 2</span>
 				<span class="selected">Etape 3</span>
+				<span>Etape 4</span>
+			</div>
+			
+			<?php foreach ( $fields_poll_source as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+			
+		</div>
+		
+		<div id="vote-form-slide4" class="vote-form-slide align-left hidden">
+			
+			<div class="vote-progress-bar align-center">
+				<span>Etape 1</span>
+				<span>Etape 2</span>
+				<span>Etape 3</span>
+				<span class="selected">Etape 4</span>
 			</div>
 			
 			<?php foreach ( $field_invest as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+			
+			<div>
+				<br>
+				<?php _e( "WE DO GOOD envisage avec son partenaire Le Fonds Compagnon de proposer une protections des investissements en cas de cession d'activit&eacute; de l'entreprise.", 'yproject' ); ?>
+				<br><br>
+			</div>
+			
+			<?php foreach ( $fields_poll_warranty as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 			<?php endforeach; ?>
@@ -111,6 +147,8 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 			<button class="button next half right transparent"><?php _e( "Suivant", 'yproject' ); ?></button>
 			
 			<button class="button save half right red hidden" data-close="vote" data-callback="WDGProjectVote.saveVoteCallback"><?php _e( "Valider", 'yproject' ); ?></button>
+			
+			<div class="clear"></div>
 			
 			<div class="loading align-center hidden">
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
