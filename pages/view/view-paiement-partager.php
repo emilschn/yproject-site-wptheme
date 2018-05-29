@@ -8,7 +8,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	
 	<?php locate_template( array( 'pages/view/investir/header.php'  ), true ); ?>
 	
-	<div class="view-share center">
+	<div class="view-share center align-justify">
 		<br><br>
 		
 		<?php _e( "Votre investissement a bien &eacute;t&eacute; pris en compte, merci !" ); ?><br><br>
@@ -21,7 +21,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			$fields_poll_source = $page_controler->get_form()->getFields( WDG_Form_Invest_Poll::$field_group_poll_source );
 			?>
 		
-			<div><?php _e( "WE DO GOOD envisage avec son partenaire Le Fonds Compagnon de proposer une garantie des investissements vous permettant d'&ecirc;tre certain(e) de r&eacute;cup&eacute;rer votre argent m&ecirc;me si l'entreprise qui porte le projet s'arr&ecirc;tait.", 'yproject' ); ?></div>
+			<div><?php _e( "WE DO GOOD envisage avec son partenaire Le Fonds Compagnon de proposer une protections des investissements en cas de cession d'activit&eacute; de l'entreprise.", 'yproject' ); ?></div>
 			
 			<form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
 

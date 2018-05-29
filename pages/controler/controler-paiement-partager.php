@@ -65,15 +65,18 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 // CURRENT STEP
 /******************************************************************************/
 	private function init_form_polls() {
-		$WDGCurrent_User = WDGUser::current();
-		$poll_answers = WDGWPREST_Entity_PollAnswer::get_list( $WDGCurrent_User->get_api_id(), $this->current_campaign->get_api_id() );
-		if ( empty( $poll_answers ) ) {
-			$this->can_display_form = TRUE;
-			$core = ATCF_CrowdFunding::instance();
-			$core->include_form( 'invest-poll' );
-			$this->form = new WDG_Form_Invest_Poll( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
-			if ( $this->form->isPosted() && $this->form->postForm( $this->current_investment->get_session_amount() ) ) {
-				$this->can_display_form = FALSE;
+		$this->can_display_form = FALSE;
+		if ( is_user_logged_in() ) {
+			$WDGCurrent_User = WDGUser::current();
+			$poll_answers = WDGWPREST_Entity_PollAnswer::get_list( $WDGCurrent_User->get_api_id(), $this->current_campaign->get_api_id() );
+			if ( empty( $poll_answers ) ) {
+				$this->can_display_form = TRUE;
+				$core = ATCF_CrowdFunding::instance();
+				$core->include_form( 'invest-poll' );
+				$this->form = new WDG_Form_Invest_Poll( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
+				if ( $this->form->isPosted() && $this->form->postForm( $this->current_investment->get_session_amount() ) ) {
+					$this->can_display_form = FALSE;
+				}
 			}
 		}
 	}

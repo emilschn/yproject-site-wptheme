@@ -171,30 +171,7 @@ class WDG_WordPress_Events {
 		wp_deregister_script( 'edd-ajax' );
 		
 		wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.min.js', array('jquery'));
-		wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, 'all');       
-		
-		//Fichiers du tableau de bord (CSS, Fonctions Ajax et scripts de Datatable)
-		/*if ($is_dashboard_page && $can_modify) {
-			wp_enqueue_script( 'wdg-project-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-dashboard.js', array('jquery'), ASSETS_VERSION);
-			wp_enqueue_style( 'dashboard-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dashboard.css', null, ASSETS_VERSION, 'all');
-
-
-			wp_enqueue_script( 'datatable-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/jquery.dataTables.min.js', array('jquery', 'wdg-script'), true, true);
-			wp_enqueue_style('datatable-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/jquery.dataTables.min.css', null, false, 'all');
-
-			wp_enqueue_script( 'datatable-colreorder-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.colReorder.min.js', array('datatable-script'), true, true);
-			wp_enqueue_style('datatable-colreorder-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/colReorder.dataTables.min.css', null, false, 'all');
-
-			wp_enqueue_script( 'datatable-select-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.select.min.js', array('datatable-script'), true, true);
-			wp_enqueue_style('datatable-select-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/select.dataTables.min.css', null, false, 'all');
-
-			wp_enqueue_script( 'datatable-buttons-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/dataTables.buttons.min.js', array('datatable-script'), true, true);
-			wp_enqueue_script( 'datatable-buttons-colvis-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/buttons.colVis.min.js', array('datatable-script'), true, true);
-			wp_enqueue_script( 'datatable-buttons-html5-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/buttons.html5.min.js', array('datatable-script'), true, true);
-			wp_enqueue_script( 'datatable-buttons-print-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/buttons.print.min.js', array('datatable-script'), true, true);
-			wp_enqueue_script( 'datatable-jszip-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/dataTables/jszip.min.js', array('datatable-script'), true, true);
-			wp_enqueue_style('datatable-buttons-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/dataTables/buttons.dataTables.min.css', null, false, 'all');
-		}*/
+		wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, 'all');
 
 		if ($is_campaign_page) {
 			if ($is_campaign && !$is_dashboard_page) {
