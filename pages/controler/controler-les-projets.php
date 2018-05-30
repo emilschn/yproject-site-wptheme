@@ -4,7 +4,7 @@ $template_engine->set_controler( new WDG_Page_Controler_ProjectList() );
 
 class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	
-	private $slider;
+	private $slider_list = array();
 	private $stats_list;
 	
 	private static $filters_html_key = 'projectlist-filters';
@@ -41,22 +41,26 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 // SLIDER
 /******************************************************************************/
 	private function prepare_slider() {
-		$list_projects = ATCF_Campaign::get_list_most_recent( 3 );
-		$this->slider = array();
-		foreach ( $list_projects as $project_id ) {
-			$campaign = atcf_get_campaign( $project_id );
-			$img = $campaign->get_home_picture_src( TRUE, 'large' );
-			array_push( $this->slider, array(
+		$db_cacher = WDG_Cache_Plugin::current();
+		$slider = $db_cacher->get_cache( WDG_Cache_Plugin::$slider_key, WDG_Cache_Plugin::$slider_version );
+
+		$slider_array = json_decode( $slider, true );
+		for ( $i = 0 ; $i < 3 ; $i++ ) {
+			$img = $slider_array[$i]['img'];
+			$title = $slider_array[$i]['title'];
+			$link = $slider_array[$i]['link'];
+			
+			array_push( $this->slider_list, array(
 					'img'	=> $img,
-					'title'	=> $campaign->data->post_title,
-					'link'	=> get_permalink( $project_id )
+					'title'	=> $title,
+					'link'	=> $link
 				)
 			);
-		}
+		}	
 	}
 	
 	public function get_slider() {
-		return $this->slider;
+		return $this->slider_list;
 	}
 	
 /******************************************************************************/
@@ -64,7 +68,6 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 /******************************************************************************/
 	private function prepare_stats() {
 		$db_cacher = WDG_Cache_Plugin::current();
-		
 		$stats = $db_cacher->get_cache( WDG_Cache_Plugin::$stats_key, WDG_Cache_Plugin::$stats_version );
 
 		$stats_array = json_decode($stats, true);

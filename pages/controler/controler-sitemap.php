@@ -21,6 +21,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	private function daily_call() {
 		$this->rebuild_sitemap();
 		$this->initialize_home_stats();
+		$this->initialize_most_recent_projects();
 		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
 		if ( empty( $input_make_finished_xml ) ) {
 			WDGCronActions::make_projects_rss();
@@ -242,5 +243,26 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		$stats_content = json_encode($stats_list);
 
 	    $db_cacher->set_cache( WDG_Cache_Plugin::$stats_key, $stats_content, WDG_Cache_Plugin::$stats_duration, WDG_Cache_Plugin::$stats_version );
+	}
+
+	// Recherche les 3 projects les plus récent et les met en cache 
+	private function initialize_most_recent_projects() {
+		$db_cacher = WDG_Cache_Plugin::current();
+		$list_projects = ATCF_Campaign::get_list_most_recent( 3 );
+		$slider = array();
+
+		foreach ( $list_projects as $project_id ) {
+			$campaign = atcf_get_campaign( $project_id );
+			$img = $campaign->get_home_picture_src( TRUE, 'large' );
+			array_push( $slider, array(
+					'img'	=> $img,
+					'title'	=> $campaign->data->post_title,
+					'link'	=> get_permalink( $project_id )
+				)
+			);
+		}		
+		$slider_content = json_encode($slider);
+
+	    $db_cacher->set_cache( WDG_Cache_Plugin::$slider_key, $slider_content, WDG_Cache_Plugin::$slider_duration, WDG_Cache_Plugin::$slider_version );
 	}
 }
