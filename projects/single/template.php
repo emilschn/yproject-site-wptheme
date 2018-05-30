@@ -47,3 +47,9 @@ $campaign_status = $campaign->campaign_status();
 <?php locate_template( array("projects/single/news.php"), true ); ?>
 
 <?php locate_template( array("projects/single/comments.php"), true ); ?>
+
+<?php 
+$custom_footer_code = $campaign->custom_footer_code();
+if ( !empty( $custom_footer_code ) ) {
+	echo $custom_footer_code;
+}

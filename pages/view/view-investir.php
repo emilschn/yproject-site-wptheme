@@ -24,3 +24,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	?>
 	
 </div><!-- #content -->
+
+<?php 
+$custom_footer_code = $page_controler->get_current_campaign()->custom_footer_code();
+if ( !empty( $custom_footer_code ) ) {
+	echo $custom_footer_code;
+}
