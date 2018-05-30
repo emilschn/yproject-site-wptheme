@@ -71,12 +71,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 /******************************************************************************/
 // PROJECT LIST
 /******************************************************************************/
-$projects_html = $page_controler->get_projects_html();
 ?>
-
-<?php if ( !$projects_html ): ?>
-
-<?php ob_start(); ?>
 
 <section class="wdg-component-projects-preview">
     <h2 class="standard">/ <?php _e("les projets", "yproject") ?> /</h2>
@@ -94,16 +89,6 @@ $projects_html = $page_controler->get_projects_html();
 	</div>
 	<a class="home-button-project see-more red" href="<?php echo home_url( '/les-projets/' ); ?>"><?php _e("D&eacute;couvrir tous les projets","yproject" ) ?></a>
 </section> <!-- section.wdg-component-projects-preview -->
-
-<?php
-	$cache_home = ob_get_contents();
-	$page_controler->set_projects_html( $cache_home );
-	ob_end_clean();
-?>
-
-<?php endif; ?>
-
-<?php echo $page_controler->get_projects_html(); ?>
 
 <?php
 /******************************************************************************/
