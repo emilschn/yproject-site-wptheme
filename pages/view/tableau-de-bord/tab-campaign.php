@@ -205,6 +205,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 
 		DashboardUtility::create_field(array(
+			'id'			=> 'new_custom_footer_code',
+			'type'			=> 'textarea',
+			'label'			=> __( "Code personnalis&eacute; (tracking...)", 'yproject' ),
+			'value'			=> $page_controler->get_campaign()->custom_footer_code(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
+
+		DashboardUtility::create_field(array(
 			'id'			=> 'new_archive_message',
 			'type'			=> 'text',
 			'label'			=> __( "Message de projet archiv&eacute;", 'yproject' ),
