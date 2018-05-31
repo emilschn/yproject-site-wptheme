@@ -25,7 +25,7 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 		$projects = $db_cacher->get_cache( WDG_Cache_Plugin::$projects_key, WDG_Cache_Plugin::$projects_version );
 
 		if (!$projects) {
-			$this->projects_list = $db_cacher->initialize_home_projects();
+			$this->projects_list = WDG_Cache_Plugin::initialize_home_projects();
 		} else {
 			$this->projects_list = json_decode($projects, true);
 		}
@@ -43,7 +43,7 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 		$stats = $db_cacher->get_cache( WDG_Cache_Plugin::$stats_key, WDG_Cache_Plugin::$stats_version );
 
 		if (!$stats) {
-			$this->stats_list = $db_cacher->initialize_home_stats();
+			$this->stats_list = WDG_Cache_Plugin::initialize_home_stats();
 		} else {
 			$stats_array = json_decode($stats, true);
 			$this->stats_list = array(

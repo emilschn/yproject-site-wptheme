@@ -15,14 +15,14 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	}
 	
 	private function hourly_call() {
+		WDG_Cache_Plugin::initialize_most_recent_projects();
+		WDG_Cache_Plugin::initialize_home_projects();
 		$this->rebuild_cache();
-		$this->initialize_home_projects();
-		$this->initialize_most_recent_projects();
 	}
 	
 	private function daily_call() {
 		$this->rebuild_sitemap();
-		$this->initialize_home_stats();
+		WDG_Cache_Plugin::initialize_home_stats();
 		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
 		if ( empty( $input_make_finished_xml ) ) {
 			WDGCronActions::make_projects_rss();
@@ -207,20 +207,5 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		fwrite($fp, $sitemap);
 		fclose($fp);
 		
-	}
-	
-	private function initialize_home_stats() {
-		$db_cacher = WDG_Cache_Plugin::current();
-		$db_cacher->initialize_home_stats();
-	}
-
-	private function initialize_most_recent_projects() {
-		$db_cacher = WDG_Cache_Plugin::current();
-		$db_cacher->initialize_most_recent_projects();
-	}
-
-	private function initialize_home_projects(){
-		$db_cacher = WDG_Cache_Plugin::current();
-		$db_cacher->initialize_home_projects();
 	}
 }
