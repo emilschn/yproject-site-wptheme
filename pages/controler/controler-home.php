@@ -24,7 +24,11 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 		$db_cacher = WDG_Cache_Plugin::current();
 		$projects = $db_cacher->get_cache( WDG_Cache_Plugin::$projects_key, WDG_Cache_Plugin::$projects_version );
 
-		$this->projects_list = json_decode($projects, true);
+		if (!$projects) {
+			$this->projects_list = $db_cacher->initialize_home_projects();
+		} else {
+			$this->projects_list = json_decode($projects, true);
+		}
 	}
 	
 	public function get_projects_list() {
@@ -36,16 +40,19 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 /******************************************************************************/
 	private function prepare_stats() {
 		$db_cacher = WDG_Cache_Plugin::current();
-
 		$stats = $db_cacher->get_cache( WDG_Cache_Plugin::$stats_key, WDG_Cache_Plugin::$stats_version );
 
-		$stats_array = json_decode($stats, true);
-		$this->stats_list = array(
+		if (!$stats) {
+			$this->stats_list = $db_cacher->initialize_home_stats();
+		} else {
+			$stats_array = json_decode($stats, true);
+			$this->stats_list = array(
 				'count_amount'	=> $stats_array['count_amount'],
 				'count_people'	=> $stats_array['count_people'],
 				'nb_projects'	=> $stats_array['nb_projects'],
 				'count_roi'		=> $stats_array['count_roi']
-		);
+			);
+		}
 	}
 
 	public function get_stats_list() {

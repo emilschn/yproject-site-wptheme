@@ -44,18 +44,22 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		$db_cacher = WDG_Cache_Plugin::current();
 		$slider = $db_cacher->get_cache( WDG_Cache_Plugin::$slider_key, WDG_Cache_Plugin::$slider_version );
 
-		$slider_array = json_decode( $slider, true );
-		for ( $i = 0 ; $i < 3 ; $i++ ) {
-			$img = $slider_array[$i]['img'];
-			$title = $slider_array[$i]['title'];
-			$link = $slider_array[$i]['link'];
+		if (!$slider) {
+			$this->slider_list = $db_cacher->initialize_most_recent_projects();
+		} else {
+			$slider_array = json_decode( $slider, true );
+			for ( $i = 0 ; $i < 3 ; $i++ ) {
+				$img = $slider_array[$i]['img'];
+				$title = $slider_array[$i]['title'];
+				$link = $slider_array[$i]['link'];
 			
-			array_push( $this->slider_list, array(
-					'img'	=> $img,
-					'title'	=> $title,
-					'link'	=> $link
-				)
-			);
+				array_push( $this->slider_list, array(
+						'img'	=> $img,
+						'title'	=> $title,
+						'link'	=> $link
+					)
+				);
+			}	
 		}	
 	}
 	
@@ -70,13 +74,17 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		$db_cacher = WDG_Cache_Plugin::current();
 		$stats = $db_cacher->get_cache( WDG_Cache_Plugin::$stats_key, WDG_Cache_Plugin::$stats_version );
 
-		$stats_array = json_decode($stats, true);
-		$this->stats_list = array(
+		if (!$stats) {
+			$this->stats_list = $db_cacher->initialize_home_stats();
+		} else {
+			$stats_array = json_decode($stats, true);
+			$this->stats_list = array(
 				'count_amount'	=> $stats_array['count_amount'],
 				'count_people'	=> $stats_array['count_people'],
 				'nb_projects'	=> $stats_array['nb_projects'],
 				'count_roi'		=> $stats_array['count_roi']
-		);
+			);
+		}
 	}
 	
 	public function get_stats_list() {
