@@ -20,7 +20,7 @@ $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::
 		<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 	<?php endforeach; ?>
 	
-	<div class="align-left">
+	<div class="align-justify">
 		<?php $form_errors = $page_controler->get_form_errors(); ?>
 		<?php if ( $form_errors ): ?>
 			<?php foreach ( $form_errors as $form_error ): ?>
@@ -32,6 +32,7 @@ $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::
 		<span class="invest_error <?php if ($current_error != "interval") { ?>hidden<?php } ?>" id="invest_error_interval"><?php _e("Merci de ne pas laisser moins de", 'yproject'); ?> <?php echo $page_controler->get_campaign_min_amount(); ?>&euro; <?php _e("&agrave; investir.", 'yproject'); ?></span>
 		<span class="invest_error <?php if ($current_error != "integer") { ?>hidden<?php } ?>" id="invest_error_integer"><?php _e("Le montant que vous pouvez investir doit &ecirc;tre entier.", 'yproject'); ?></span>
 		<span class="invest_error <?php if ($current_error != "general") { ?>hidden<?php } ?>" id="invest_error_general"><?php _e("Le montant saisi semble comporter une erreur.", 'yproject'); ?></span>
+		<span class="invest_error hidden" id="invest_error_alert"></span>
 	</div>
 		
 	<div class="align-left">

@@ -79,11 +79,22 @@ var WDGInvestPageFunctions = (function($) {
 					$( '#invest_error_max' ).show();
 					bValidInput = false;
 			    }
+				if ( parseInt( $( 'form input#amount' ).val() ) > $( '#input_invest_user_max_value' ).val() ) {
+					$( '#invest_error_max' ).text( $( '#input_invest_user_max_reason' ).val() );
+					$( '#invest_error_max' ).show();
+					bValidInput = false;
+				}
 			    var nAmountInterval = $( '#input_invest_max_value' ).val() - parseInt( $( 'form input#amount' ).val()); 		
 				if ( nAmountInterval < $( '#input_invest_min_value' ).val() && nAmountInterval > 0 ) {
 					$( '#invest_error_interval' ).show(); 		
 					bValidInput = false; 		
 			    }
+				if ( $( '#input_invest_user_max_amount_without_alert' ).length > 0 && bValidInput ) {
+					if ( parseInt( $( 'form input#amount' ).val() ) > $( '#input_invest_user_max_amount_without_alert' ).val() ) {
+						$( '#invest_error_alert' ).text( $( '#input_invest_user_max_amount_without_alert_reason' ).val() );
+						$( '#invest_error_alert' ).show();
+					}
+				}
 			}
 			
 			var ratioOfPercentRoundStr = 0;
