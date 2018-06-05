@@ -229,7 +229,11 @@ div.mean-payment-list a div, div.mean-payment-list p > span {
 	text-align: justify;
 }
 
-.template-paiement-partager #field-would-invest-amount-with-warranty, .template-paiement-partager #field-other-motivations-to-invest, .template-paiement-partager #field-other-source-to-know-the-fundraising, .template-paiement-partager #field-other-source-where-the-user-come-from {
+.template-paiement-partager #field-would-invest-amount-with-warranty, .template-paiement-partager #field-would-invest-number-per-year-with-warranty {
+	display: none;
+}
+
+.template-paiement-partager #field-other-motivations-to-invest, .template-paiement-partager #field-other-source-to-know-the-fundraising, .template-paiement-partager #field-other-source-where-the-user-come-from {
 	margin-top: -50px;
 	margin-left: 30px;
 }

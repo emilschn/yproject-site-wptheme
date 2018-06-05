@@ -844,7 +844,11 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	border-left: 0px;
 }
 
-#wdg-lightbox-vote #field-would-invest-amount-with-warranty, #wdg-lightbox-vote #field-other-motivations-to-invest, #wdg-lightbox-vote #field-other-source-to-know-the-fundraising, #wdg-lightbox-vote #field-other-source-where-the-user-come-from {
+#wdg-lightbox-vote #field-would-invest-amount-with-warranty, .template-paiement-partager #field-would-invest-number-per-year-with-warranty {
+	display: none;
+}
+
+#wdg-lightbox-vote #field-other-motivations-to-invest, #wdg-lightbox-vote #field-other-source-to-know-the-fundraising, #wdg-lightbox-vote #field-other-source-where-the-user-come-from {
 	margin-top: -50px;
 	margin-left: 30px;
 }

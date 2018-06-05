@@ -50,6 +50,24 @@ var WDGInvestPageFunctions = (function($) {
 					}
 				} );
 			}
+			
+			// Sondage
+			if ( $( '#field-would-invest-more-amount' ).length > 0 ) {
+				$( $( '#would-invest-more-amount-yes' ) ).change( function() {
+					$( '#field-would-invest-amount-with-warranty' ).show( 100 );
+				} );
+				$( $( '#would-invest-more-amount-no' ) ).change( function() {
+					$( '#field-would-invest-amount-with-warranty' ).hide( 100 );
+				} );
+			}
+			if ( $( '#field-would-invest-more-number' ).length > 0 ) {
+				$( $( '#would-invest-more-number-yes' ) ).change( function() {
+					$( '#field-would-invest-number-per-year-with-warranty' ).show( 100 );
+				} );
+				$( $( '#would-invest-more-number-no' ) ).change( function() {
+					$( '#field-would-invest-number-per-year-with-warranty' ).hide( 100 );
+				} );
+			}
 		},
 		
 		checkInvestInput: function() {
