@@ -93,9 +93,10 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 					<td>Date</td>
 					<td>Contexte</td>
 					<td>Montant (contexte)</td>
-					<td>Investirait sur d'autres projets</td>
 					<td>Investirait montant différent</td>
 					<td>Investirait montant</td>
+					<td>Investirait sur d'autres projets</td>
+					<td>Investirait nombre</td>
 					<td>E-mail</td>
 					<td>Age</td>
 					<td>Code postal</td>
@@ -109,9 +110,10 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 						<td><?php echo $answer->date; ?></td>
 						<td><?php echo $answer->context; ?></td>
 						<td><?php echo $answer->context_amount; ?></td>
-						<td><?php echo ( $answers_decoded->{ 'would-invest-other-projects-if-warranty' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->{ 'would-invest-different-amount-if-warranty' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo $answers_decoded->{ 'would-invest-more-amount' }; ?></td>
 						<td><?php echo $answers_decoded->{ 'would-invest-amount-with-warranty' }; ?></td>
+						<td><?php echo $answers_decoded->{ 'would-invest-more-number' }; ?></td>
+						<td><?php echo $answers_decoded->{ 'would-invest-number-per-year-with-warranty' }; ?></td>
 						<td><?php echo $answer->user_email; ?></td>
 						<td><?php echo $answer->user_age; ?></td>
 						<td><?php echo $answer->user_postal_code; ?></td>
