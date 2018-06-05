@@ -67,7 +67,7 @@ $input_poll = filter_input( INPUT_GET, 'poll' );
 					<tr>
 						<td><?php echo $answer->date; ?></td>
 						<td><?php echo $answer->context; ?></td>
-						<td><?php echo $answer->context_amount; ?></td>	
+						<td><?php echo $answer->context_amount; ?></td>
 						<td><?php echo $answers_decoded->{ 'would-invest-more-amount' }; ?></td>
 						<td><?php echo $answers_decoded->{ 'would-invest-amount-with-warranty' }; ?></td>
 						<td><?php echo $answers_decoded->{ 'would-invest-more-number' }; ?></td>
