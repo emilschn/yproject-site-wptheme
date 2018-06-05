@@ -49,14 +49,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 /******************************************************************************/
 // STATS PROJECTS
 /******************************************************************************/
-$stats_html = $page_controler->get_stats_html();
 ?>
-
-<?php if ( !$stats_html ): ?>
+		
+<?php $stats_list = $page_controler->get_stats_list(); ?>
 				
-	<?php $stats_list = $page_controler->get_stats_list(); ?>
-				
-	<?php ob_start(); ?>
 				
 				<div id="wdg-project-stats" class="right">
 					<p><?php _e( "WE DO GOOD c'est :" ); ?></p>
@@ -82,16 +78,6 @@ $stats_html = $page_controler->get_stats_html();
 						</span>
 					</p>
 				</div>
-				
-	<?php
-	$cache_stats = ob_get_contents();
-	$page_controler->set_stats_html( $cache_stats );
-	ob_end_clean();
-	?>
-				
-<?php endif; ?>
-
-<?php echo $page_controler->get_stats_html(); ?>
 				
 <?php
 /******************************************************************************/
