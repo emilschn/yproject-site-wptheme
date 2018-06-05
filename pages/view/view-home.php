@@ -29,51 +29,37 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 /******************************************************************************/
 // STATS PROJECTS
 /******************************************************************************/
-$stats_html = $page_controler->get_stats_html();
 ?>
+			
+<?php $stats_list = $page_controler->get_stats_list(); ?>
 
-<?php if ( !$stats_html ): ?>
 				
-	<?php $stats_list = $page_controler->get_stats_list(); ?>
-				
-	<?php ob_start(); ?>
-				
-		<section class="project-stats">
-			<div>
-				<div class="left">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-montgolfiere-blanc-h100.png" alt="montgolfiere" width="115" height="100">
-					<span>
-						<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span><br>
-						<?php _e( "lev&eacute;s", 'yproject' ); ?>
-					</span>
-				</div>
-				<div class="left">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-ensemble-blanc-h100.png" alt="ensemble" width="139" height="100">
-					<span>
-						<span><?php echo number_format( $stats_list[ 'count_people' ], 0, '', ' ' ); ?></span><br>
-						<?php _e( "investisseurs", 'yproject' ); ?>
-					</span>
-				</div>
-				<div class="left">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-monnaie-blanc-h100.png" alt="monnaie" width="102" height="100">
-					<span>
-						<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?> &euro;</span><br>
-						<?php _e( "de royalties vers&eacute;s", 'yproject' ); ?>
-					</span>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</section>
-				
-	<?php
-	$cache_stats = ob_get_contents();
-	$page_controler->set_stats_html( $cache_stats );
-	ob_end_clean();
-	?>
-				
-<?php endif; ?>
-
-<?php echo $page_controler->get_stats_html(); ?>
+<section class="project-stats">
+	<div>
+		<div class="left">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-montgolfiere-blanc-h100.png" alt="montgolfiere" width="115" height="100">
+			<span>
+				<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span><br>
+					<?php _e( "lev&eacute;s", 'yproject' ); ?>
+			</span>
+		</div>
+		<div class="left">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-ensemble-blanc-h100.png" alt="ensemble" width="139" height="100">
+			<span>
+				<span><?php echo number_format( $stats_list[ 'count_people' ], 0, '', ' ' ); ?></span><br>
+					<?php _e( "investisseurs", 'yproject' ); ?>
+			</span>
+		</div>
+		<div class="left">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-monnaie-blanc-h100.png" alt="monnaie" width="102" height="100">
+				<span>
+					<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?> &euro;</span><br>
+					<?php _e( "de royalties vers&eacute;s", 'yproject' ); ?>
+				</span>
+		</div>
+			<div class="clear"></div>
+		</div>
+</section>
 				
 <?php
 /******************************************************************************/
@@ -85,12 +71,7 @@ $stats_html = $page_controler->get_stats_html();
 /******************************************************************************/
 // PROJECT LIST
 /******************************************************************************/
-$projects_html = $page_controler->get_projects_html();
 ?>
-
-<?php if ( !$projects_html ): ?>
-
-<?php ob_start(); ?>
 
 <section class="wdg-component-projects-preview">
     <h2 class="standard">/ <?php _e("les projets", "yproject") ?> /</h2>
@@ -108,16 +89,6 @@ $projects_html = $page_controler->get_projects_html();
 	</div>
 	<a class="home-button-project see-more red" href="<?php echo home_url( '/les-projets/' ); ?>"><?php _e("D&eacute;couvrir tous les projets","yproject" ) ?></a>
 </section> <!-- section.wdg-component-projects-preview -->
-
-<?php
-	$cache_home = ob_get_contents();
-	$page_controler->set_projects_html( $cache_home );
-	ob_end_clean();
-?>
-
-<?php endif; ?>
-
-<?php echo $page_controler->get_projects_html(); ?>
 
 <?php
 /******************************************************************************/

@@ -15,11 +15,14 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	}
 	
 	private function hourly_call() {
+		WDG_Cache_Plugin::initialize_most_recent_projects();
+		WDG_Cache_Plugin::initialize_home_projects();
 		$this->rebuild_cache();
 	}
 	
 	private function daily_call() {
 		$this->rebuild_sitemap();
+		WDG_Cache_Plugin::initialize_home_stats();
 		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
 		if ( empty( $input_make_finished_xml ) ) {
 			WDGCronActions::make_projects_rss();
@@ -50,7 +53,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'projectlist-projects-funded'
 		));
 		$WDG_File_Cacher->rebuild_cache();
-		
+
 	}
 	
 	private function rebuild_sitemap() {
@@ -205,5 +208,4 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		fclose($fp);
 		
 	}
-	
 }
