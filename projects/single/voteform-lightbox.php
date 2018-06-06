@@ -123,7 +123,7 @@ $fields_poll_warranty = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_gr
 			
 			<div>
 				<br>
-				<?php _e( "WE DO GOOD envisage avec son partenaire Le Fonds Compagnon de proposer une protections des investissements en cas de cession d'activit&eacute; de l'entreprise.", 'yproject' ); ?>
+				<?php _e( "WE DO GOOD envisage avec son partenaire Le Fonds Compagnon de proposer une protection des investissements en cas de cession d'activit&eacute; de l'entreprise.", 'yproject' ); ?>
 				<br><br>
 			</div>
 			

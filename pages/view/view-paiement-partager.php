@@ -21,7 +21,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			$fields_poll_source = $page_controler->get_form()->getFields( WDG_Form_Invest_Poll::$field_group_poll_source );
 			?>
 		
-			<div><?php _e( "WE DO GOOD envisage avec son partenaire Le Fonds Compagnon de proposer une protections des investissements en cas de cession d'activit&eacute; de l'entreprise.", 'yproject' ); ?></div>
+			<div><?php _e( "WE DO GOOD envisage avec son partenaire Le Fonds Compagnon de proposer une protection des investissements en cas de cession d'activit&eacute; de l'entreprise.", 'yproject' ); ?></div>
 			
 			<form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
 

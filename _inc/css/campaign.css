@@ -844,7 +844,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	border-left: 0px;
 }
 
-#wdg-lightbox-vote #field-would-invest-amount-with-warranty, .template-paiement-partager #field-would-invest-number-per-year-with-warranty {
+#wdg-lightbox-vote #field-would-invest-amount-with-warranty, #wdg-lightbox-vote #field-would-invest-number-per-year-with-warranty {
 	display: none;
 }
 
