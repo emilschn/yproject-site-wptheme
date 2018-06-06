@@ -191,28 +191,30 @@ function print_user_projects(){
 				</label>
 			</form>
 			<?php
-			foreach ( $purchases as $post ) : setup_postdata( $post );
-				$downloads = edd_get_payment_meta_downloads($post->ID); 
-				$download_id = '';
-				if (!is_array($downloads[0])){
-				    $download_id = $downloads[0];
-				    $post_camp = get_post($download_id);
-				    $campaign = atcf_get_campaign($post_camp);
-				    ypcf_get_updated_payment_status($post->ID);
-				    $signsquid_contract = new SignsquidContract($post->ID);
-				    $payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
+			if  ($purchases):
+				foreach ( $purchases as $post ) : setup_postdata( $post );
+					$downloads = edd_get_payment_meta_downloads($post->ID); 
+					$download_id = '';
+					if (!is_array($downloads[0])){
+					    $download_id = $downloads[0];
+					    $post_camp = get_post($download_id);
+					    $campaign = atcf_get_campaign($post_camp);
+					    ypcf_get_updated_payment_status($post->ID);
+					    $signsquid_contract = new SignsquidContract($post->ID);
+					    $payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
 
-				    //Infos relatives au projet
-				    $user_projects[$campaign->ID]['ID'] = $campaign->ID;
-				    //Infos relatives à l'investissement de l'utilisateur
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_contract_id'] = $signsquid_contract->get_contract_id();
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status'] = $signsquid_contract->get_status_code();
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status_str'] = $signsquid_contract->get_status_str();
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_date'] = $payment_date;
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount'] = edd_get_payment_amount( $post->ID );
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_status'] = edd_get_payment_status( $post, true );
-				}
-			endforeach;
+					    //Infos relatives au projet
+					    $user_projects[$campaign->ID]['ID'] = $campaign->ID;
+					    //Infos relatives à l'investissement de l'utilisateur
+					    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_contract_id'] = $signsquid_contract->get_contract_id();
+					    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status'] = $signsquid_contract->get_status_code();
+					    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status_str'] = $signsquid_contract->get_status_str();
+					    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_date'] = $payment_date;
+					    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount'] = edd_get_payment_amount( $post->ID );
+					    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_status'] = edd_get_payment_status( $post, true );
+					}
+				endforeach;
+			endif;
 
 			foreach ($projects_jy_crois as $project) {
 				$user_projects[$project->campaign_id]['jy_crois'] = 1;
