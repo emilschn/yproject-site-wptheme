@@ -12,8 +12,10 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 	<ul class="nav-menu">
 		<li id="menu-item-wallet" class="selected"><a href="#wallet" data-tab="wallet"><?php _e( "Mon porte-monnaie", 'yproject' ); ?></a></li>
 		<li id="menu-item-investments"><a href="#investments" data-tab="investments"><?php _e( "Mes investissements", 'yproject' ); ?></a></li>
+		<li id="menu-item-parameters"><a href="#parameters" data-tab="parameters"><?php _e( "Mes informations personnelles", 'yproject' ); ?></a></li>
+		<li id="menu-item-identitydocs"><a href="#identitydocs" data-tab="identitydocs"><?php _e( "Mes justificatifs d'identit&eacute;", 'yproject' ); ?></a></li>
+		<li id="menu-item-bank"><a href="#bank" data-tab="bank"><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></a></li>
 		<li id="menu-item-authentication"><a href="#authentication" data-tab="authentication"><?php _e( "Mon authentification", 'yproject' ); ?></a></li>
-		<li id="menu-item-parameters"><a href="#parameters" data-tab="parameters"><?php _e( "Mes param&egrave;tres", 'yproject' ); ?></a></li>
 	</ul>
 	
 	<?php if ( count( $list_current_organizations ) > 0 ): ?>

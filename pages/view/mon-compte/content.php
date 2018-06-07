@@ -25,12 +25,20 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 				<?php locate_template( array( 'pages/view/mon-compte/content-investments.php' ), true ); ?>
 			</div>
 
-			<div id="item-body-authentication" class="item-body-tab hidden">
-				<?php locate_template( array( 'pages/view/mon-compte/content-authentication.php' ), true ); ?>
-			</div>
-
 			<div id="item-body-parameters" class="item-body-tab hidden">
 				<?php locate_template( array( 'pages/view/mon-compte/content-parameters.php' ), true ); ?>
+			</div>
+
+			<div id="item-body-identitydocs" class="item-body-tab hidden">
+				<?php locate_template( array( 'pages/view/mon-compte/content-identitydocs.php' ), true ); ?>
+			</div>
+
+			<div id="item-body-bank" class="item-body-tab hidden">
+				<?php locate_template( array( 'pages/view/mon-compte/content-bank.php' ), true ); ?>
+			</div>
+
+			<div id="item-body-authentication" class="item-body-tab hidden">
+				<?php locate_template( array( 'pages/view/mon-compte/content-authentication.php' ), true ); ?>
 			</div>
 			
 			<?php if ( count( $list_current_organizations ) > 0 ): ?>
