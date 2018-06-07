@@ -176,7 +176,7 @@ var WDGProjectVote = (function($) {
 					$( $( '#would-invest-more-amount-yes' ) ).change( function() {
 						$( '#field-would-invest-amount-with-warranty' ).show( 100 );
 					} );
-					$( $( '#would-invest-more-amount-no' ) ).change( function() {
+					$( $( '#would-invest-more-amount-no, #would-invest-more-amount-maybe' ) ).change( function() {
 						$( '#field-would-invest-amount-with-warranty' ).hide( 100 );
 					} );
 				}
@@ -184,7 +184,7 @@ var WDGProjectVote = (function($) {
 					$( $( '#would-invest-more-number-yes' ) ).change( function() {
 						$( '#field-would-invest-number-per-year-with-warranty' ).show( 100 );
 					} );
-					$( $( '#would-invest-more-number-no' ) ).change( function() {
+					$( $( '#would-invest-more-number-no, #would-invest-more-number-maybe' ) ).change( function() {
 						$( '#field-would-invest-number-per-year-with-warranty' ).hide( 100 );
 					} );
 				}
