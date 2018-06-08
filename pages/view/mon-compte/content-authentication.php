@@ -15,37 +15,81 @@ $current_user_authentication_info = $page_controler->get_current_user_authentica
 	<thead>
 		<tr>
 			<td></td>
-			<td><?php _e( "Inscription", 'yproject' ); ?></td>
-			<td><?php _e( "Informations", 'yproject' ); ?></td>
-			<td><?php _e( "Authentifi&eacute;", 'yproject' ); ?></td>
+			<td class="align-center"><?php _e( "Inscription", 'yproject' ); ?></td>
+			<td class="align-center"><?php _e( "Informations", 'yproject' ); ?></td>
+			<td class="align-center"><?php _e( "Authentifi&eacute;", 'yproject' ); ?></td>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td>Evaluer les projets</td>
-			<td><img src="" alt="check"></td>
-			<td><img src="" alt="check"></td>
-			<td><img src="" alt="check"></td>
+			<td>
+				- évaluer les projets
+			</td>
+			<td class="align-center">
+				<img src="" alt="check">
+			</td>
+			<td class="align-center">
+				<?php if ( $WDGUser_displayed->can_register_lemonway() ): ?>
+					<img src="" alt="check">
+				<?php else: ?>
+					<img src="" alt="uncheck">
+				<?php endif; ?>
+			</td>
+			<td class="align-center">
+				<?php if ( $WDGUser_displayed->is_lemonway_registered() ): ?>
+					<img src="" alt="check">
+				<?php else: ?>
+					<img src="" alt="uncheck">
+				<?php endif; ?>
+			</td>
 		</tr>
 		<tr>
-			<td>Investir jusqu'&agrave; 250 &euro; ou par ch&egrave;que et recevoir jusqu'&agrave; 2 500 &euro; de royalties</td>
-			<td></td>
-			<td><img src="" alt="check"></td>
-			<td><img src="" alt="check"></td>
+			<td>
+				- investir jusqu'&agrave; 250 &euro; ou par ch&egrave;que<br>
+				- recevoir jusqu'&agrave; 2 500 &euro; de royalties
+			</td>
+			<td class="align-center"></td>
+			<td class="align-center">
+				<?php if ( $WDGUser_displayed->can_register_lemonway() ): ?>
+					<img src="" alt="check">
+				<?php else: ?>
+					<img src="" alt="uncheck">
+				<?php endif; ?>
+			</td>
+			<td class="align-center">
+				<?php if ( $WDGUser_displayed->is_lemonway_registered() ): ?>
+					<img src="" alt="check">
+				<?php else: ?>
+					<img src="" alt="uncheck">
+				<?php endif; ?>
+			</td>
 		</tr>
 		<tr>
-			<td>Investir une sommes infinie et recevoir des royalties infinies</td>
-			<td></td>
-			<td></td>
-			<td><img src="" alt="check"></td>
+			<td>
+				- investir une sommes infinie<br>
+				- recevoir des royalties infinies
+			</td>
+			<td class="align-center"></td>
+			<td class="align-center"></td>
+			<td class="align-center">
+				<?php if ( $WDGUser_displayed->is_lemonway_registered() ): ?>
+					<img src="" alt="check">
+				<?php else: ?>
+					<img src="" alt="uncheck">
+				<?php endif; ?>
+			</td>
 		</tr>
 	</tbody>
 	<tfoot>
 		<tr>
 			<td></td>
-			<td></td>
-			<td><?php _e( "Bouton informations perso", 'yproject' ); ?></td>
-			<td><?php _e( "Bouton documents", 'yproject' ); ?></td>
+			<td class="align-center"></td>
+			<td class="align-center">
+				<a href="#parameters" class="button blue" data-tab="parameters"><?php _e( "Saisir mes informations personnelles", 'yproject' ); ?></a>
+			</td>
+			<td class="align-center">
+				<a href="#identitydocs" class="button blue" data-tab="identitydocs"><?php _e( "Envoyer mes justificatifs", 'yproject' ); ?></a>
+			</td>
 		</tr>
 	</tfoot>
 </table>
