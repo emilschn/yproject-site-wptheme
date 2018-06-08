@@ -17,6 +17,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	private $user_data;
 	private $wallet_to_bankaccount_result;
 	private $form_user_details;
+	private $form_user_identitydocs;
 	private $form_user_password;
 	private $form_feedback;
 	
@@ -29,13 +30,15 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'user-password' );
+		$core->include_form( 'user-identitydocs' );
 		
 		// Si on met à jour le RIB, il faut recharger l'utilisateur en cours
 		$reload = WDGFormUsers::register_rib();
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
 		$this->init_current_user( $reload );
 		$this->init_project_list();
-		$this->init_form();
+		$this->init_form_user_details();
+		$this->init_form_user_identitydocs();
 		locate_template( array( 'country_list.php'  ), true );
 		
 		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
@@ -156,7 +159,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 /******************************************************************************/
 // USER DATA
 /******************************************************************************/
-	private function init_form() {
+	private function init_form_user_details() {
 		$this->form_user_details = new WDG_Form_User_Details( $this->current_user->get_wpref(), WDG_Form_User_Details::$type_extended );
 		$action_posted = filter_input( INPUT_POST, 'action' );
 		if ( $action_posted == WDG_Form_User_Details::$name ) {
@@ -203,6 +206,21 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 			$buffer = $this->user_data[ $data_key ];
 		}
 		return $buffer;
+	}
+	
+/******************************************************************************/
+// USER DOCUMENTS
+/******************************************************************************/
+	private function init_form_user_identitydocs() {
+		$this->form_user_identitydocs = new WDG_Form_User_Identity_Docs( $this->current_user->get_wpref() );
+		$action_posted = filter_input( INPUT_POST, 'action' );
+		if ( $action_posted == WDG_Form_User_Identity_Docs::$name ) {
+			$this->form_feedback = $this->form_user_identitydocs->postForm();
+		}
+	}
+	
+	public function get_user_identitydocs_form() {
+		return $this->form_user_identitydocs;
 	}
 	
 /******************************************************************************/

@@ -15,7 +15,7 @@ $form_feedback = $page_controler->get_user_form_feedback();
 ?>
 
 
-<form method="post" class="db-form form-register v3 full" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" class="db-form form-register v3 full">
 		
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
