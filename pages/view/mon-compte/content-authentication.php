@@ -100,16 +100,16 @@ $current_user_authentication_info = $page_controler->get_current_user_authentica
 				<td class="align-center"></td>
 				<td class="align-center">
 					<?php if ( $WDGUser_displayed->can_register_lemonway() ): ?>
-						<a href="#parameters" class="button blue" data-tab="parameters"><?php _e( "Mes informations<br>personnelles", 'yproject' ); ?></a>
+						<a href="#parameters" class="button blue go-to-tab" data-tab="parameters"><?php _e( "Mes informations<br>personnelles", 'yproject' ); ?></a>
 					<?php else: ?>
-						<a href="#parameters" class="button red" data-tab="parameters"><?php _e( "Mes informations<br>personnelles", 'yproject' ); ?></a>
+						<a href="#parameters" class="button red go-to-tab" data-tab="parameters"><?php _e( "Mes informations<br>personnelles", 'yproject' ); ?></a>
 					<?php endif; ?>
 				</td>
 				<td class="align-center">
 					<?php if ( $WDGUser_displayed->is_lemonway_registered() ): ?>
-						<a href="#identitydocs" class="button blue" data-tab="identitydocs"><?php _e( "Mes justificatifs<br>d'identit&eacute;", 'yproject' ); ?></a>
+						<a href="#identitydocs" class="button blue go-to-tab" data-tab="identitydocs"><?php _e( "Mes justificatifs<br>d'identit&eacute;", 'yproject' ); ?></a>
 					<?php else: ?>
-						<a href="#identitydocs" class="button red" data-tab="identitydocs"><?php _e( "Mes justificatifs<br>d'identit&eacute;", 'yproject' ); ?></a>
+						<a href="#identitydocs" class="button red go-to-tab" data-tab="identitydocs"><?php _e( "Mes justificatifs<br>d'identit&eacute;", 'yproject' ); ?></a>
 					<?php endif; ?>
 				</td>
 			</tr>

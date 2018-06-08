@@ -17,8 +17,9 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	private $user_data;
 	private $wallet_to_bankaccount_result;
 	private $form_user_details;
-	private $form_user_identitydocs;
 	private $form_user_password;
+	private $form_user_identitydocs;
+	private $form_user_bank;
 	private $form_feedback;
 	
 	public function __construct() {
@@ -31,6 +32,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'user-password' );
 		$core->include_form( 'user-identitydocs' );
+		$core->include_form( 'user-bank' );
 		
 		// Si on met à jour le RIB, il faut recharger l'utilisateur en cours
 		$reload = WDGFormUsers::register_rib();
@@ -39,6 +41,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$this->init_project_list();
 		$this->init_form_user_details();
 		$this->init_form_user_identitydocs();
+		$this->init_form_user_bank();
 		locate_template( array( 'country_list.php'  ), true );
 		
 		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
@@ -221,6 +224,21 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	
 	public function get_user_identitydocs_form() {
 		return $this->form_user_identitydocs;
+	}
+	
+/******************************************************************************/
+// USER BANK
+/******************************************************************************/
+	private function init_form_user_bank() {
+		$this->form_user_bank = new WDG_Form_User_Bank( $this->current_user->get_wpref() );
+		$action_posted = filter_input( INPUT_POST, 'action' );
+		if ( $action_posted == WDG_Form_User_Bank::$name ) {
+			$this->form_feedback = $this->form_user_bank->postForm();
+		}
+	}
+	
+	public function get_user_bank_form() {
+		return $this->form_user_bank;
 	}
 	
 /******************************************************************************/

@@ -31,7 +31,7 @@ UserAccountDashboard.prototype.initMenu = function() {
 			self.switchTab( $( this ).data( 'tab' ), this );
 		} );
 	} );
-	$( '#item-body-authentication tfoot a' ).each( function() {
+	$( 'a.go-to-tab' ).each( function() {
 		$( this ).click( function() {
 			self.switchTab( $( this ).data( 'tab' ), this );
 		} );
