@@ -48,8 +48,13 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 					<div id="item-body-orga-wallet-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
 						<?php locate_template( array( 'pages/view/mon-compte/content-orga-wallet.php' ), true, false ); ?>
 					</div>
+			
 					<div id="item-body-orga-investments-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
 						<?php locate_template( array( 'pages/view/mon-compte/content-orga-investments.php' ), true, false ); ?>
+					</div>
+			
+					<div id="item-body-orga-authentication-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
+						<?php locate_template( array( 'pages/view/mon-compte/content-orga-authentication.php' ), true, false ); ?>
 					</div>
 				<?php endforeach; ?>
 			<?php endif; ?>

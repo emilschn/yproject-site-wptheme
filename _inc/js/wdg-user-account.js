@@ -11,7 +11,7 @@ UserAccountDashboard.prototype.initWithHash = function() {
 
 	var sCurrentTab = window.location.hash.substring(1);
 	if ( sCurrentTab !== '' ) {
-		if ( sCurrentTab === 'orga-wallet' || sCurrentTab === 'orga-investments' ) {
+		if ( sCurrentTab === 'orga-wallet' || sCurrentTab === 'orga-investments' || sCurrentTab === 'orga-authentication' ) {
 			$( 'li#menu-item-wallet a' ).click();
 		} else {
 			this.switchTab( sCurrentTab, false );
@@ -47,7 +47,7 @@ UserAccountDashboard.prototype.switchTab = function( sType, clickedElement ) {
 	$( 'ul.nav-menu li' ).removeClass( 'selected' );
 	$( 'div#item-body > div.item-body-tab' ).hide();
 	
-	if ( sType === 'orga-wallet' || sType === 'orga-investments' ) {
+	if ( sType === 'orga-wallet' || sType === 'orga-investments' || sType === 'orga-authentication' ) {
 		$( clickedElement ).parent().addClass( 'selected' );
 		$( 'div#item-body > div#item-body-' +sType+ '-' + $( clickedElement ).data( 'id' ) ).show();
 		

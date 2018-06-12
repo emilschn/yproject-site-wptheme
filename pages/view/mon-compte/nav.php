@@ -24,6 +24,7 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 			<ul class="nav-menu">
 				<li id="menu-item-orga-wallet-<?php echo $WDGOrganization->get_wpref(); ?>"><a href="#orga-wallet" data-tab="orga-wallet" data-id="<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Porte-monnaie", 'yproject' ); ?></a></li>
 				<li id="menu-item-orga-investments-<?php echo $WDGOrganization->get_wpref(); ?>"><a href="#orga-investments" data-tab="orga-investments" data-id="<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Investissements", 'yproject' ); ?></a></li>
+				<li id="menu-item-orga-authentication-<?php echo $WDGOrganization->get_wpref(); ?>"><a href="#orga-authentication" data-tab="orga-authentication" data-id="<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Authentification", 'yproject' ); ?></a></li>
 			</ul>
 		<?php endforeach; ?>
 	<?php endif; ?>
