@@ -231,7 +231,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 				|| ($status == ATCF_Campaign::$campaign_status_vote && $page_controler->get_campaign()->end_vote_remaining()<=0)): ?>
 	<h2 style='text-align:center'><?php _e("Pr&ecirc;t(e) pour la suite ?", 'yproject'); ?></h2>
 
-	<form method="POST" action="<?php echo admin_url( 'admin-post.php?action=change_project_status'); ?>">
+	<form method="POST" action="<?php echo admin_url( 'admin-post.php?action=change_project_status'); ?>" id="form-changing-from-<?php echo $status; ?>">
 		<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id();?>">
 		<ul>
 			<?php if ($status == ATCF_Campaign::$campaign_status_preparing): ?>

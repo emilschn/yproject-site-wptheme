@@ -159,7 +159,7 @@ var WDGProjectVote = (function($) {
 	return {
 		currentSlide: 0,
 		minSlide: 1,
-		maxSlide: 3,
+		maxSlide: 4,
 		init: function() {
 			if ( $( 'div#vote-form' ).length > 0 ) {
 				$( 'div#vote-form div#vote-form-buttons button.previous' ).click( function( e ) {
@@ -170,6 +170,24 @@ var WDGProjectVote = (function($) {
 					e.preventDefault();
 					WDGProjectVote.slideNext();
 				} );
+			
+				// Sondage
+				if ( $( '#field-would-invest-more-amount' ).length > 0 ) {
+					$( $( '#would-invest-more-amount-yes' ) ).change( function() {
+						$( '#field-would-invest-amount-with-warranty' ).show( 100 );
+					} );
+					$( $( '#would-invest-more-amount-no, #would-invest-more-amount-maybe' ) ).change( function() {
+						$( '#field-would-invest-amount-with-warranty' ).hide( 100 );
+					} );
+				}
+				if ( $( '#field-would-invest-more-number' ).length > 0 ) {
+					$( $( '#would-invest-more-number-yes' ) ).change( function() {
+						$( '#field-would-invest-number-per-year-with-warranty' ).show( 100 );
+					} );
+					$( $( '#would-invest-more-number-no, #would-invest-more-number-maybe' ) ).change( function() {
+						$( '#field-would-invest-number-per-year-with-warranty' ).hide( 100 );
+					} );
+				}
 			}
 		},
 		
