@@ -1,11 +1,10 @@
-<?php global $stylesheet_directory_uri, $WDGOrganization; ?>
+<?php global $WDGOrganization; ?>
 <?php
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
-$WDGOrganizationDetailsForm = new WDG_Form_Organization_Details( $WDGOrganization->get_wpref() );
+$WDGOrganizationDetailsForm = new WDG_Form_Organization_Details( $WDGOrganization->get_wpref(), TRUE );
 $fields_hidden = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_hidden );
 $fields_complete = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_complete );
 $fields_address = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_address );
-$form_feedback = $page_controler->get_organization_form_feedback()[ $WDGOrganization->get_wpref() ];
 ?>
 
 

@@ -25,6 +25,7 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 				<li id="menu-item-orga-wallet-<?php echo $WDGOrganization->get_wpref(); ?>"><a href="#orga-wallet-<?php echo $WDGOrganization->get_wpref(); ?>" data-tab="orga-wallet-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Porte-monnaie", 'yproject' ); ?></a></li>
 				<li id="menu-item-orga-investments-<?php echo $WDGOrganization->get_wpref(); ?>"><a href="#orga-investments-<?php echo $WDGOrganization->get_wpref(); ?>" data-tab="orga-investments-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Investissements", 'yproject' ); ?></a></li>
 				<li id="menu-item-orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>"><a href="#orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>" data-tab="orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Informations", 'yproject' ); ?></a></li>
+				<li id="menu-item-orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>"><a href="#orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>" data-tab="orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Justificatifs d'identification", 'yproject' ); ?></a></li>
 				<li id="menu-item-orga-authentication-<?php echo $WDGOrganization->get_wpref(); ?>"><a href="#orga-authentication-<?php echo $WDGOrganization->get_wpref(); ?>" data-tab="orga-authentication-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Authentification", 'yproject' ); ?></a></li>
 			</ul>
 		<?php endforeach; ?>

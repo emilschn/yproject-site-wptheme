@@ -21,7 +21,6 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	private $form_user_identitydocs;
 	private $form_user_bank;
 	private $form_user_feedback;
-	private $form_organization_feedback;
 	
 	public function __construct() {
 		parent::__construct();
@@ -93,7 +92,6 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	
 	private function init_current_user_organizations() {
 		$this->current_user_organizations = array();
-		$this->form_organization_feedback = array();
 		$organizations_list = $this->current_user->get_organizations_list();
 		if ( !empty( $organizations_list ) ) {
 			$core = ATCF_CrowdFunding::instance();
@@ -192,10 +190,6 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	
 	public function get_user_form_feedback() {
 		return $this->form_user_feedback;
-	}
-	
-	public function get_organization_form_feedback() {
-		return $this->form_organization_feedback;
 	}
 	
 	public function get_user_data( $data_key ) {

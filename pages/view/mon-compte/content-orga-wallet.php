@@ -12,48 +12,13 @@ Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_roi
 <br><br>
 
 <?php if ( !$WDGOrganization->is_document_lemonway_registered( LemonwayDocument::$document_type_bank ) ): ?>
-	<?php _e( "Afin de lutter contre la fraude et le blanchiment d'argent, il est n&eacute;cessaire que votre RIB soit contr&ocirc;l&eacute; par notre prestataire de paiement.", 'yproject' ); ?><br>
-	<?php _e( "Le compte bancaire qui vous permettra de r&eacute;cup&eacute;rer l'argent doit &ecirc;tre &agrave; votre nom.", 'yproject' ); ?><br>
-	
 	<?php if ( $WDGOrganization->get_document_lemonway_status( LemonwayDocument::$document_type_bank ) == LemonwayDocument::$document_status_waiting ): ?>
-		<br>
-		<?php _e( "Votre RIB est en cours de validation par notre prestataire de paiement. Merci de revenir d'ici 48h pour vous assurer de sa validation.", 'yproject' ); ?><br>
-	
+		<?php _e( "Le RIB de l'organisation est en cours de validation par notre prestataire de paiement. Merci de revenir d'ici 48h pour vous assurer de sa validation.", 'yproject' ); ?><br>
+
 	<?php else: ?>
-		<?php if ( $WDGOrganization->has_document_lemonway_error( LemonwayDocument::$document_type_bank ) ): ?>
-			<?php echo $WDGOrganization->get_document_lemonway_error( LemonwayDocument::$document_type_bank ); ?><br>
-		<?php endif; ?>
-		<br>
-		<form action="" method="POST" enctype="multipart/form-data">
-			<label for="holdername" class="large-label"><?php _e( "Nom du propri&eacute;taire du compte :", 'yproject' ); ?></label>
-				<input type="text" id="holdername" name="holdername" value="<?php echo $WDGOrganization->get_bank_owner(); ?>">
-				<br>
-			<label for="address" class="large-label"><?php _e( "Adresse du compte :", 'yproject' ); ?></label>
-				<input type="text" id="address" name="address" value="<?php echo $WDGOrganization->get_bank_address(); ?>">
-				<br>
-			<label for="iban" class="large-label"><?php _e( "IBAN :", 'yproject' ); ?></label>
-				<input type="text" id="iban" name="iban" value="<?php echo $WDGOrganization->get_bank_iban(); ?>">
-				<br>
-			<label for="bic" class="large-label"><?php _e( "BIC :", 'yproject' ); ?></label>
-				<input type="text" id="bic" name="bic" value="<?php echo $WDGOrganization->get_bank_bic(); ?>">
-				<br>
-				<br>
-			<label for="rib" class="large-label"><?php _e( "Fichier de votre RIB :", 'yproject' ); ?></label>
-				<input type="file" id="rib" name="rib">
-				<br>
-				<span class="file-description">
-				<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 10 Mo.", 'yproject' ); ?>
-				<br>
-				<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?></span>
-				<br>
-				<br>
-			<p class="align-center">
-				<input type="submit" class="button" value="<?php _e( "Enregistrer", 'yproject' ); ?>" />
-			</p>
-			<input type="hidden" name="action" value="register_rib" />
-			<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->get_wpref(); ?>" />
-			<input type="hidden" name="orga_id" value="<?php echo $WDGOrganization->get_wpref(); ?>" />
-		</form>
+		<?php _e( "Afin de retirer les royalties per&ccedil;ues par l'organisation, merci de renseigner ses coordonn&eacute;es bancaires.", 'yproject' ); ?><br><br>
+		<a href="#bank" class="button red go-to-tab" data-tab="orga-bank-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></a>
+
 	<?php endif; ?>
 
 <?php elseif ( $WDGOrganization->get_available_rois_amount() > 0 ): ?>
@@ -68,3 +33,40 @@ Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_roi
 	<br><br>
 	
 <?php endif; ?>
+
+
+<h2 class="underlined"><?php _e( 'Transferts d&apos;argent', 'yproject' ); ?></h2>
+<?php
+$args = array(
+	'author'    => $WDGOrganization->get_wpref(),
+	'post_type' => 'withdrawal_order_lw',
+	'post_status' => 'any',
+	'orderby'   => 'post_date',
+	'order'     =>  'ASC'
+);
+$transfers = get_posts($args);
+if ($transfers) :
+?>
+<ul class="user_history">
+	<?php 
+	foreach ( $transfers as $post ) :
+		$post = get_post($post);
+		$post_amount = $post->post_title;
+		?>
+		<?php if ($post->post_status == 'publish'): ?>
+		<li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Termin&eacute;</li>
+		<?php elseif ($post->post_status == 'draft'): ?>
+		<li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Annul&eacute;</li>
+		<?php else: ?>
+		<li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- En cours</li>
+		<?php endif; ?>
+	<?php
+	endforeach;
+	?>
+</ul>
+<?php else: ?>
+	Aucun transfert d&apos;argent.
+<?php endif; ?>
+<br><br>
+
+

@@ -103,16 +103,16 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 				<?php if ( isset( $WDGOrganization ) ): ?>
 					<td class="align-center">
 						<?php if ( $can_register_lemonway ): ?>
-							<a href="#orga-parameters" class="button blue go-to-tab" data-tab="orga-parameters" data-id="<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Informations de<br>l'organisation", 'yproject' ); ?></a>
+							<a href="#orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>" class="button blue go-to-tab" data-tab="orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Informations de<br>l'organisation", 'yproject' ); ?></a>
 						<?php else: ?>
-							<a href="#orga-parameters" class="button red go-to-tab" data-tab="orga-parameters" data-id="<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Informations de<br>l'organisation", 'yproject' ); ?></a>
+							<a href="#orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>" class="button red go-to-tab" data-tab="orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Informations de<br>l'organisation", 'yproject' ); ?></a>
 						<?php endif; ?>
 					</td>
 					<td class="align-center">
 						<?php if ( $is_lemonway_registered ): ?>
-							<a href="#orga-identitydocs" class="button blue go-to-tab" data-tab="orga-identitydocs" data-id="<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Justificatifs<br>d'identification", 'yproject' ); ?></a>
+							<a href="#orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>" class="button blue go-to-tab" data-tab="orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Justificatifs<br>d'identification", 'yproject' ); ?></a>
 						<?php else: ?>
-							<a href="#orga-identitydocs" class="button red go-to-tab" data-tab="orga-identitydocs" data-id="<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Justificatifs<br>d'identification", 'yproject' ); ?></a>
+							<a href="#orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>" class="button red go-to-tab" data-tab="orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Justificatifs<br>d'identification", 'yproject' ); ?></a>
 						<?php endif; ?>
 					</td>
 					
