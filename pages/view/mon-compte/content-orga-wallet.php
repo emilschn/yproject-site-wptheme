@@ -1,7 +1,7 @@
 <?php
+global $WDGOrganization;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGUser_displayed = $page_controler->get_current_user();
-global $WDGOrganization;
 ?>
 
 <h2 class="underlined">Porte-monnaie électronique de <?php echo $WDGOrganization->get_name(); ?></h2>
@@ -17,7 +17,7 @@ Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_roi
 
 	<?php else: ?>
 		<?php _e( "Afin de retirer les royalties per&ccedil;ues par l'organisation, merci de renseigner ses coordonn&eacute;es bancaires.", 'yproject' ); ?><br><br>
-		<a href="#bank" class="button red go-to-tab" data-tab="orga-bank-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></a>
+		<a href="#orga-bank-<?php echo $WDGOrganization->get_wpref(); ?>" class="button red go-to-tab" data-tab="orga-bank-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Coordonn&eacute;es bancaires", 'yproject' ); ?></a>
 
 	<?php endif; ?>
 
