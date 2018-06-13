@@ -53,6 +53,10 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 						<?php locate_template( array( 'pages/view/mon-compte/content-orga-investments.php' ), true, false ); ?>
 					</div>
 			
+					<div id="item-body-orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
+						<?php locate_template( array( 'pages/view/mon-compte/content-orga-parameters.php' ), true, false ); ?>
+					</div>
+			
 					<div id="item-body-orga-authentication-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
 						<?php locate_template( array( 'pages/view/mon-compte/content-orga-authentication.php' ), true, false ); ?>
 					</div>
