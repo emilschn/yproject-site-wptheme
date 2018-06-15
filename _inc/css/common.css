@@ -979,7 +979,7 @@ body.home section.project-stats > div {
 	margin: auto;
 }
 body.home section.project-stats > div div.left {
-	width: calc(100% / 3 - 15px);
+	width: calc(100% / 3 - 16px);
 	text-align: left;
 	font-size: 18pt;
 	margin-left: 15px;

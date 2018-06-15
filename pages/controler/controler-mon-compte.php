@@ -25,6 +25,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	public function __construct() {
 		parent::__construct();
 		define( 'SKIP_BASIC_HTML', TRUE );
+		
 		if ( !is_user_logged_in() ) {
 			wp_redirect( home_url( '/connexion/' ) . '?redirect-page=mon-compte' );
 		}

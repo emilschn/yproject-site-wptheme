@@ -4,10 +4,9 @@ function WDGCampaignSimulator() {
 	//Rattachement des events sur modif du CA
 	this.attachEventOnCa();
 	// Validation du passage à l'étape suivante
-	$( '#form-changing-from-vote' ).click( function( e ) {
-		e.preventDefault();
-		if ( confirm( 'Attention, le choix de la date de fin est définitif. Êtes-vous sûr de valider cette date de fin ?' ) ) {
-			$( this ).submit();
+	$( '#form-changing-from-vote' ).submit( function( e ) {
+		if ( !confirm( 'Attention, le choix de la date de fin est définitif. Êtes-vous sûr(e) de valider cette date de fin ?' ) ) {
+			e.preventDefault();
 		}
 	} );
 }
