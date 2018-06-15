@@ -19,11 +19,12 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	private $form_feedback;
 	
 	public function __construct() {
-		parent::__construct();
-		define( 'SKIP_BASIC_HTML', TRUE );
-		if (!is_user_logged_in()) {
+		if ( !is_user_logged_in() ) {
 			wp_redirect( home_url( '/connexion/' ) . '?redirect-page=mon-compte' );
 		}
+		
+		parent::__construct();
+		define( 'SKIP_BASIC_HTML', TRUE );
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'user-password' );
