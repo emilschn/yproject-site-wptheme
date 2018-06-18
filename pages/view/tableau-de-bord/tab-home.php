@@ -425,7 +425,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 						<input type="number" id="inendh" name="inendh" min="0" max="23" value="12" style="width: 40px;">h
 						<input type="number" id="inendm" name="inendm" min="0" max="59" value="00" style="width: 40px;">
 					</label>
-					<?php DashboardUtility::get_infobutton("Veillez &agrave; d&eacute;finir l'heure de fin &agrave; un moment o&ugrave; vous pourrez toucher des investisseurs et encore mener des action de communication. Nous vous conseillons 22h.",true); ?>
+					<?php DashboardUtility::get_infobutton("Veillez &agrave; d&eacute;finir l'heure de fin &agrave; un moment o&ugrave; vous pourrez toucher des investisseurs et encore mener des action de communication. Nous vous conseillons 21h.",true); ?>
 				</li>
 			<?php endif; ?>
 		</ul>
