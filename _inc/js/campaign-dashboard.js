@@ -1403,7 +1403,7 @@ WDGCampaignDashboard.prototype.proceedRoyalties = function(){
 
 	} ).done( function ( result ) {
 		if ( result == 100 ) {
-			$( '#proceed_roi_transfers_percent' ).html( 'Versement effecut&eacute; !' );
+			$( '#proceed_roi_transfers_percent' ).html( 'Versement effectu&eacute; !' );
 			$( '#proceed_roi_transfers_button' ).hide();
 
 		} else {
