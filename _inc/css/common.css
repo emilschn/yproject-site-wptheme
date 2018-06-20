@@ -968,8 +968,8 @@ footer > .footer-container > div > div.aligncenter {
 *******************************************************************************/
 body.home section.project-stats {
 	padding: 40px 0px;
-	color: #FFFFFF;
-	background: #333333;
+	color: #333333;
+	background: #FFFFFF;
 }
 body.home section.project-stats > div {
 	width: -webkit-calc(100% - 20px);
@@ -993,6 +993,45 @@ body.home section.project-stats > div div.left span span {
 	letter-spacing: 2px;
 	font-weight: bold;
 	line-height: 50px;
+}
+
+/*******************************************************************************
+* HOME - NEWS
+*******************************************************************************/
+body.home section.news {
+	color: #333333;
+	background: #FFFFFF;
+    background: url("../../images/template-home/bee-background-min.jpg") center center no-repeat;
+}
+body.home section.news > div {
+	width: -webkit-calc(100% - 20px);
+	width: -moz-calc(100% - 20px);
+	width: calc(100% - 20px);
+	max-width: 1280px;
+	margin: auto;
+}
+body.home section.news > div div.news-content {
+	float: right;
+	width: 40%;
+	min-width: 250px;
+	padding: 20px;
+	text-align: right;
+	background-color: rgba( 255, 255, 255, .7 );
+}
+body.home section.news > div div.news-content span.news-description {
+	font-size: 18px;
+}
+body.home section.news > div div.news-content span.news-title {
+	display: inline-block;
+	padding: 32px 0px;
+	font-size: 32px;
+	text-transform: uppercase;
+}
+body.home section.news > div div.news-content a.button {
+	width: 40%;
+	display: inline-block;
+	text-align: center;
+	padding: 15px;
 }
 
 /*******************************************************************************
