@@ -22,29 +22,141 @@ $fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_fil
 	<br>
 </p>
 
-<?php if ( $WDGUser_displayed->has_document_lemonway_error( LemonwayDocument::$document_type_bank ) ): ?>
-	<?php echo $WDGUser_displayed->get_document_lemonway_error( LemonwayDocument::$document_type_bank ); ?><br>
-<?php endif; ?>
+<?php
+$WDGUser_lw_bank_info = $page_controler->get_current_user_iban();
+$WDGUser_lw_bank_status = $page_controler->get_current_user_iban_status();
+$WDGUser_lw_bank_document_status = $page_controler->get_current_user_iban_document_status();
+?>
 
-<form method="POST" enctype="multipart/form-data" class="db-form v3 full">
-		
-	<?php foreach ( $fields_hidden as $field ): ?>
-		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
-	<?php endforeach; ?>
+<?php
+// Si l'IBAN et le document de RIB sont validés, on affiche le résumé et le bouton qui permet de le modifier
+if ( $page_controler->is_iban_validated() ): ?>
+	<div class="center">
+		<div class="wdg-message confirm">
+			<?php _e( "Coordonn&eacute;es bancaires valid&eacute;es", 'yproject' ); ?>
+		</div>
+	</div>
 
-	<?php foreach ( $fields_iban as $field ): ?>
-		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
-	<?php endforeach; ?>
+	<?php print_r( $WDGUser_lw_bank_info ); ?>
 
-	<?php foreach ( $fields_file as $field ): ?>
-		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
-	<?php endforeach; ?>
+	<?php
+	$current_filelist_bank = WDGKYCFile::get_list_by_owner_id( $page_controler->get_current_user()->get_wpref(), WDGKYCFile::$owner_user, WDGKYCFile::$type_bank );
+	$current_file_bank = $current_filelist_bank[0];
+	$bank_file_path = ( empty( $current_file_bank ) ) ? '' : $current_file_bank->get_public_filepath();
+	?>
+	<div class="align-center">
+		<a href="<?php echo $bank_file_path; ?>" target="_blank"><?php _e( "Aper&ccedil;u", 'yproject' ); ?></a>
+	</div>
 
-	<div id="user-bank-form-buttons">
-		<button type="submit" class="button save red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+	<br><br>
+	<div class="align-center">
+		<button id="modify-iban" class="button blue"><?php _e( "Modifier mon RIB", 'yproject' ); ?></button>
+	</div>
+	<br><br>
+
+	<form method="POST" enctype="multipart/form-data" id="form-modify-iban" class="db-form v3 full hidden">
+
+		<?php foreach ( $fields_hidden as $field ): ?>
+			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+		<?php endforeach; ?>
+
+		<?php foreach ( $fields_iban as $field ): ?>
+			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+		<?php endforeach; ?>
+
+		<?php foreach ( $fields_file as $field ): ?>
+			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+		<?php endforeach; ?>
+
+		<div id="user-bank-form-buttons">
+			<button type="submit" class="button save red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+		</div>
+
+	</form>
+
+<?php
+// Si l'IBAN et le document de RIB sont en attente, on affiche juste un résumé
+elseif( $page_controler->is_iban_waiting() ): ?>
+	<div class="center">
+		<div class="wdg-message error">
+			<?php _e( "Coordonn&eacute;es bancaires en attente de validation", 'yproject' ); ?>
+		</div>
+	</div>
+
+	<?php print_r( $WDGUser_lw_bank_info ); ?>
+
+	<?php
+	$current_filelist_bank = WDGKYCFile::get_list_by_owner_id( $page_controler->get_current_user()->get_wpref(), WDGKYCFile::$owner_user, WDGKYCFile::$type_bank );
+	$current_file_bank = $current_filelist_bank[0];
+	$bank_file_path = ( empty( $current_file_bank ) ) ? '' : $current_file_bank->get_public_filepath();
+	?>
+	<div class="align-center">
+		<a href="<?php echo $bank_file_path; ?>" target="_blank"><?php _e( "Aper&ccedil;u", 'yproject' ); ?></a>
 	</div>
 	
-</form>
+
+<?php else: ?>
+	<?php if ( $WDGUser_lw_bank_status == WDGUser::$iban_status_disabled ): ?>
+		<div class="center">
+			<div class="wdg-message error">
+				<?php _e( "Coordonn&eacute;es bancaires d&eacute;sactiv&eacute;es", 'yproject' ); ?>
+			</div>
+		</div>
+	<?php elseif ( $WDGUser_lw_bank_status == WDGUser::$iban_status_rejected ): ?>
+		<div class="center">
+			<div class="wdg-message error">
+				<?php _e( "Coordonn&eacute;es bancaires refus&eacute;es", 'yproject' ); ?>
+			</div>
+		</div>
+	<?php endif; ?>
+
+	<?php if ( $WDGUser_displayed->has_document_lemonway_error( LemonwayDocument::$document_type_bank ) ): ?>
+		<div class="center">
+			<div class="wdg-message error">
+				<?php echo $WDGUser_displayed->get_document_lemonway_error( LemonwayDocument::$document_type_bank ); ?>
+			</div>
+		</div>
+	<?php endif; ?>
+
+	<form method="POST" enctype="multipart/form-data" class="db-form v3 full">
+
+		<?php foreach ( $fields_hidden as $field ): ?>
+			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+		<?php endforeach; ?>
+
+		<?php if ( empty( $WDGUser_lw_bank_status ) || $WDGUser_lw_bank_status == WDGUser::$iban_status_disabled || $WDGUser_lw_bank_status == WDGUser::$iban_status_rejected ): ?>
+			<?php foreach ( $fields_iban as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+		<?php elseif ( $WDGUser_lw_bank_status == WDGUser::$iban_status_waiting ): ?>
+			<div class="center">
+				<div class="wdg-message error">
+					<?php _e( "Coordonn&eacute;es bancaires en attente de validation", 'yproject' ); ?>
+				</div>
+			</div>
+		<?php endif; ?>
+
+		<?php if ( $WDGUser_lw_bank_document_status == LemonwayDocument::$document_status_waiting ): ?>
+			<div class="center">
+				<div class="wdg-message error">
+					<?php _e( "RIB en attente de validation", 'yproject' ); ?>
+				</div>
+			</div>
+		<?php else: ?>
+			<?php foreach ( $fields_file as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+		<?php endif; ?>
+
+		<div id="user-bank-form-buttons">
+			<button type="submit" class="button save red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+		</div>
+
+	</form>
+<?php endif; ?>

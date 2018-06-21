@@ -32,6 +32,11 @@ UserAccountDashboard.prototype.initMenu = function() {
 			self.switchTab( $( this ).data( 'tab' ), this );
 		} );
 	} );
+	if ( $( '#modify-iban' ).length > 0 ) {
+		$( '#modify-iban' ).click( function() {
+			$( '#form-modify-iban' ).toggle( 100 );
+		} );
+	}
 	
 };
 

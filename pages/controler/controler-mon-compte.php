@@ -64,6 +64,18 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		return $this->current_user_organizations;
 	}
 	
+	public function get_current_user_iban() {
+		return $this->current_user->get_lemonway_iban();
+	}
+	
+	public function get_current_user_iban_status() {
+		return $this->current_user->get_lemonway_iban_status();
+	}
+	
+	public function get_current_user_iban_document_status() {
+		return $this->current_user->get_document_lemonway_status( LemonwayDocument::$document_type_bank );
+	}
+	
 	public function get_current_user_authentication() {
 		return $this->current_user_authentication;
 	}
@@ -242,6 +254,18 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	
 	public function get_user_bank_form() {
 		return $this->form_user_bank;
+	}
+	
+	public function is_iban_validated() {
+		$lw_iban_status = $this->current_user->get_lemonway_iban_status();
+		$lw_doc_iban_status = $this->current_user->get_document_lemonway_status( LemonwayDocument::$document_type_bank );
+		return ( $lw_iban_status == WDGUser::$iban_status_validated && $lw_doc_iban_status == LemonwayDocument::$document_status_accepted );
+	}
+	
+	public function is_iban_waiting() {
+		$lw_iban_status = $this->current_user->get_lemonway_iban_status();
+		$lw_doc_iban_status = $this->current_user->get_document_lemonway_status( LemonwayDocument::$document_type_bank );
+		return ( $lw_iban_status == WDGUser::$iban_status_waiting && ( $lw_doc_iban_status == LemonwayDocument::$document_status_waiting || $lw_doc_iban_status == LemonwayDocument::$document_status_waiting_verification ) );
 	}
 	
 /******************************************************************************/

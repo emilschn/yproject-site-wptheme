@@ -120,6 +120,21 @@ button.red {
 	color: #333;
 }
 
+.wdg-message {
+	margin: 20px 0px;
+	padding: 20px 0px;
+	text-transform: uppercase;
+	text-align: center;
+}
+.wdg-message.confirm {
+	background: #8BC79C;
+	color: #FFFFFF;
+}
+.wdg-message.error {
+	background: #EACDCB;
+	color: #333333;
+}
+
 
 /*******************************************************************************
 * FORMULAIRES
