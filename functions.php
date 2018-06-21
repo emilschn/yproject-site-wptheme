@@ -497,8 +497,8 @@ function yproject_save_edit_project() {
 	if ($current_lang == 'fr_FR') { $current_lang = ''; }
 	else { $current_lang = '_' . $current_lang; }
 	
-	ypcf_debug_log( 'yproject_save_edit_project > property => ' . $_POST['property'], TRUE );
-	ypcf_debug_log( 'yproject_save_edit_project > value => ' . $_POST['value'], TRUE );
+	ypcf_debug_log( 'yproject_save_edit_project > property ('.$current_lang.') => ' . $_POST['property'], TRUE );
+	ypcf_debug_log( 'yproject_save_edit_project > value ('.$current_lang.') => ' . $_POST['value'], TRUE );
 	
 	switch ($_POST['property']) {
 		case "title":
@@ -529,6 +529,12 @@ function yproject_save_edit_project() {
 		'projects-current',
 		'projects-others'
 	));
+	
+	$campaign = new ATCF_Campaign( $_POST['id_campaign'] );
+	if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded ) {
+		$file_cacher = WDG_File_Cacher::current();
+		$file_cacher->build_campaign_page_cache( $this->campaign->ID );
+	}
 	echo $_POST['property'];
 	exit();
 }

@@ -512,8 +512,8 @@ div#content.version-3 div.project-rewards-content div.project-rewards-padder p.h
 }
 div#content.version-3 div.project-rewards-content div.project-rewards-padder p.half-form-count button {
 	height: 56px;
-        font-size: 12pt;
-        letter-spacing: 0.125em;
+	font-size: 12pt;
+	letter-spacing: 0.125em;
 }
 
 div#content.version-3 div.project-rewards-content div.project-rewards-padder p {
@@ -589,7 +589,8 @@ div#content.version-3 div.project-rewards-content div.project-rewards-alert span
 	font-size: 11px;
 }
 div#content.version-3 div.project-rewards-content .button.red {
-	width: 288px;
+	display: inline-block;
+	width: 230px;
 	padding: 20px 80px;
 	font-size: 12pt;
 	font-weight: bold;
