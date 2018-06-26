@@ -527,13 +527,14 @@ function yproject_save_edit_project() {
 		'project-content-about-' . $_POST['id_campaign'],
 		'project-content-bottom-' . $_POST['id_campaign'],
 		'projects-current',
-		'projects-others'
+		'projects-others',
+		'cache_campaign_' . $_POST['id_campaign']
 	));
 	
 	$campaign = new ATCF_Campaign( $_POST['id_campaign'] );
 	if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded ) {
 		$file_cacher = WDG_File_Cacher::current();
-		$file_cacher->build_campaign_page_cache( $this->campaign->ID );
+		$file_cacher->delete( $campaign->data->post_name );
 	}
 	echo $_POST['property'];
 	exit();
