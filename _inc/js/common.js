@@ -804,6 +804,7 @@ var WDGFormsFunctions = (function($) {
 			WDGFormsFunctions.initCheckboxes();
 			WDGFormsFunctions.initRateCheckboxes();
 			WDGFormsFunctions.initDatePickers();
+			WDGFormsFunctions.initFileInput();
 		},
 		
 		initSaveButton: function() {
@@ -856,6 +857,30 @@ var WDGFormsFunctions = (function($) {
                 changeMonth: true,
                 changeYear: true
             });
+		},
+		
+		initFileInput: function() {
+			$( '.field-file input' ).each( function() {
+				var $input = $( this ),
+				$label = $input.next( 'label' ),
+				labelVal = $label.html();
+
+				$input.on( 'change', function( e ) {
+					var fileName = '';
+
+					if( this.files && this.files.length > 1 )
+						fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+					else if( e.target.value )
+						fileName = e.target.value.split( '\\' ).pop();
+
+					if( fileName ) {
+						$label.find( 'span' ).html( fileName );
+						$label.find( 'span.hide-when-filled' ).hide();
+					} else {
+						$label.html( labelVal );
+					}
+				} );
+			} );
 		},
 		
 		setRateCheckboxes: function( sRateType, nRate ) {
