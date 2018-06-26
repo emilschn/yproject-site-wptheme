@@ -10,7 +10,7 @@ $campaign_status = $campaign->campaign_status();
 		<?php if ($time_remaining_str != '-'): ?>
 		<?php _e("projet en cours d'&eacute;valuation", "yproject"); ?>
 		<?php else: ?>
-		<?php _e("&eacute;valuation termin&eacute;", "yproject"); ?>
+		<?php _e("&eacute;valuation termin&eacute;e", "yproject"); ?>
 		<?php endif; ?>
 	</p>&nbsp;</span>
 </div>
