@@ -95,7 +95,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/financement/entreprises/start-up/love-money/'	=> '0.6',
 			'/financement/label-croissance-verte/'			=> '0.6',
 			'/investissement/comparatif-capital-pret-royalties/'		=> '0.6',
-//			'/investissement/impact-investing/evaluation-impacts/'		=> '0.6',
+			'/investissement/impact-investing/evaluation-des-impacts/'	=> '0.6',
 			'/solutions/'									=> '0.6',
 //			'/solutions/accelerateur/'						=> '0.6',
 //			'/solutions/entreprises/'						=> '0.6',

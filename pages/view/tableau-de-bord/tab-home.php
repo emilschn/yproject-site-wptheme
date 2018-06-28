@@ -231,7 +231,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 				|| ($status == ATCF_Campaign::$campaign_status_vote && $page_controler->get_campaign()->end_vote_remaining()<=0)): ?>
 	<h2 style='text-align:center'><?php _e("Pr&ecirc;t(e) pour la suite ?", 'yproject'); ?></h2>
 
-	<form method="POST" action="<?php echo admin_url( 'admin-post.php?action=change_project_status'); ?>">
+	<form method="POST" action="<?php echo admin_url( 'admin-post.php?action=change_project_status'); ?>" id="form-changing-from-<?php echo $status; ?>">
 		<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id();?>">
 		<ul>
 			<?php if ($status == ATCF_Campaign::$campaign_status_preparing): ?>
@@ -425,7 +425,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 						<input type="number" id="inendh" name="inendh" min="0" max="23" value="12" style="width: 40px;">h
 						<input type="number" id="inendm" name="inendm" min="0" max="59" value="00" style="width: 40px;">
 					</label>
-					<?php DashboardUtility::get_infobutton("Veillez &agrave; d&eacute;finir l'heure de fin &agrave; un moment o&ugrave; vous pourrez toucher des investisseurs et encore mener des action de communication. Nous vous conseillons 22h.",true); ?>
+					<?php DashboardUtility::get_infobutton("Veillez &agrave; d&eacute;finir l'heure de fin &agrave; un moment o&ugrave; vous pourrez toucher des investisseurs et encore mener des action de communication. Nous vous conseillons 21h.",true); ?>
 				</li>
 			<?php endif; ?>
 		</ul>

@@ -146,16 +146,13 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 					</div>
 				</form>
 				<?php else: ?>
-					<?php
-					$page_invest = home_url( '/investir' );
-					$campaign_id_param = '?campaign_id=' . $campaign->ID;
-					$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
-					?>
-					<div class="align-center">
-						<br />
-						<button class="button red wdg-button-lightbox-open" data-lightbox="connexion" 
-								data-redirect="<?php echo $invest_url; ?>"><?php _e( "Investir", 'yproject' ); ?></button>
-					</div>
+				<?php
+				$invest_url_href = home_url( '/connexion/' ) . '?source=project';
+				?>
+				<div class="align-center">
+					<br />
+					<a href="<?php echo $invest_url_href; ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
+				</div>
 				<?php endif; ?>
 				<br />
 			<?php endif; ?>

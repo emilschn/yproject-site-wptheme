@@ -499,6 +499,11 @@ div#content.version-3 div.project-rewards-content .db-form .field-container {
 div#content.version-3 div.project-rewards-content .db-form .field-container.field-init-invest {
 	white-space: nowrap;
 }
+div#content.version-3 div.project-rewards-content div.project-rewards-padder p.half-form-count button {
+	height: 56px;
+	font-size: 12pt;
+	letter-spacing: 0.125em;
+}
 div#content.version-3 div.project-rewards-content label {
 	font-size: 20px;
 	font-weight: normal;
@@ -580,6 +585,13 @@ div#content.version-3 div.project-rewards-content div.project-rewards-alert {
 	margin-top: 10px;
 	font-style: italic;
 	font-size: 11px;
+}
+div#content.version-3 div.project-rewards-content .button.red {
+	display: inline-block;
+	width: 230px;
+	padding: 20px 80px;
+	font-size: 12pt;
+	font-weight: bold;
 }
 
 /*******************************************************************************

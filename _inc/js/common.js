@@ -370,21 +370,6 @@ YPUIFunctions = (function($) {
 				addListeners();
 
 			}
-
-			if ($("#turnover-declaration").length > 0) {
-				if ($("#turnover-total").length > 0) {
-					$("#turnover-total").change(function() {
-						YPUIFunctions.refreshTurnoverAmountToPay();
-					});
-				}
-				var i = 0;
-				while ($("#turnover-" + i).length > 0) {
-					$("#turnover-" + i).change(function() {
-						YPUIFunctions.refreshTurnoverAmountToPay();
-					});
-					i++;
-				}
-			}
 			
 			// Page accueil : affichage slider de projets
 			if ($("body.home.page").length > 0) {
@@ -452,27 +437,6 @@ YPUIFunctions = (function($) {
 				}
 			}
 			return {'x':x, 'y':y};
-		},
-
-		refreshTurnoverAmountToPay: function() {
-			var roiPercent = $("#turnover-declaration").data("roi-percent");
-			var costsOrga = $("#turnover-declaration").data("costs-orga");
-			var total = 0;
-			if ($("#turnover-total").length > 0) {
-				total = Number($("#turnover-total").val());
-			} else {
-				var i = 0;
-				while ($("#turnover-" + i).length > 0) {
-					total += Number($("#turnover-" + i).val());
-					i++;
-				}
-			}
-			var amount = total * roiPercent / 100;
-			var amount_with_fees = amount + (amount * costsOrga / 100);
-			amount_with_fees += $("#turnover-declaration").data("adjustment");
-			amount_with_fees = Math.round(amount_with_fees * 100) / 100;
-
-			$(".amount-to-pay").text(amount_with_fees);
 		},
 
 		getInvestsGraph : function(inv_data, campaign_id) {
@@ -840,6 +804,7 @@ var WDGFormsFunctions = (function($) {
 			WDGFormsFunctions.initCheckboxes();
 			WDGFormsFunctions.initRateCheckboxes();
 			WDGFormsFunctions.initDatePickers();
+			WDGFormsFunctions.initFileInput();
 		},
 		
 		initSaveButton: function() {
@@ -892,6 +857,30 @@ var WDGFormsFunctions = (function($) {
                 changeMonth: true,
                 changeYear: true
             });
+		},
+		
+		initFileInput: function() {
+			$( '.field-file input' ).each( function() {
+				var $input = $( this ),
+				$label = $input.next( 'label' ),
+				labelVal = $label.html();
+
+				$input.on( 'change', function( e ) {
+					var fileName = '';
+
+					if( this.files && this.files.length > 1 )
+						fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+					else if( e.target.value )
+						fileName = e.target.value.split( '\\' ).pop();
+
+					if( fileName ) {
+						$label.find( 'span' ).html( fileName );
+						$label.find( 'span.hide-when-filled' ).hide();
+					} else {
+						$label.html( labelVal );
+					}
+				} );
+			} );
 		},
 		
 		setRateCheckboxes: function( sRateType, nRate ) {
