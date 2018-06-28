@@ -881,6 +881,25 @@ var WDGFormsFunctions = (function($) {
 					}
 				} );
 			} );
+			
+			$( 'label.file-label' ).on( 'dragover', function( e ) {
+				$( this ).addClass( 'dragover' );
+				e.stopPropagation();
+				e.preventDefault();
+			} );
+			$( 'label.file-label' ).on( 'dragleave', function( e ) {
+				$( this ).removeClass( 'dragover' );
+				e.stopPropagation();
+				e.preventDefault();
+			} );
+			$( 'label.file-label' ).on( 'drop', function( e ) {
+				e.stopPropagation();
+				e.preventDefault();
+				$( this ).removeClass( 'dragover' );
+				var inputId = $( this ).data( 'input' );
+				$( '#' + inputId ).prop( 'files', e.originalEvent.dataTransfer.files );
+				$( '#' + inputId ).trigger( 'change' );
+			} );
 		},
 		
 		setRateCheckboxes: function( sRateType, nRate ) {
