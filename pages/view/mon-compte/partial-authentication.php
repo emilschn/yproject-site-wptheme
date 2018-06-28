@@ -12,7 +12,7 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 	<?php elseif ( $can_register_lemonway ): ?>
 		<?php _e( "Pour investir des montants sup&eacute;rieurs &agrave; 250 &euro; sur WEDOGOOD, vous devez &ecirc;tre authentifi&eacute; aupr&egrave;s de notre prestataire de paiement, Lemon Way.", 'yproject' ); ?>
 	<?php else: ?>
-		<?php _e( "Pour investir sur WEDOGOOD, vous devez &ecirc;tre authentifi&eacute; aupr&egravee notre prestataire de paiement, Lemon Way.", 'yproject' ); ?>
+		<?php _e( "Pour investir sur WEDOGOOD, vous devez &ecirc;tre authentifi&eacute; aupr&egrave;s notre prestataire de paiement, Lemon Way.", 'yproject' ); ?>
 	<?php endif; ?><br>
 	<?php _e( "Il existe 3 niveaux d'authentification :", 'yproject' ); ?>
 </p>
@@ -37,20 +37,20 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 					<strong><?php _e( "&Eacute;valuer les projets", 'yproject' ); ?></strong>
 				</td>
 				<td class="align-center inside">
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/minimum-goal-full.png" alt="check" width="40" height="40">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-checked.png" alt="check" width="40" height="40">
 				</td>
 				<td class="align-center inside">
 					<?php if ( $can_register_lemonway ): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/minimum-goal-full.png" alt="check" width="40" height="40">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-checked.png" alt="check" width="40" height="40">
 					<?php else: ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/minimum-goal-empty.png" alt="uncheck" width="40" height="40">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-unchecked.png" alt="uncheck" width="40" height="40">
 					<?php endif; ?>
 				</td>
 				<td class="align-center inside">
 					<?php if ( $is_lemonway_registered ): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/minimum-goal-full.png" alt="check" width="40" height="40">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-checked.png" alt="check" width="40" height="40">
 					<?php else: ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/minimum-goal-empty.png" alt="uncheck" width="40" height="40">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-unchecked.png" alt="uncheck" width="40" height="40">
 					<?php endif; ?>
 				</td>
 			</tr>
@@ -58,23 +58,22 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 				<td class="title">
 					<strong><?php _e( "Investissement", 'yproject' ); ?></strong><br>
 					- <?php _e( "jusqu'&agrave; 250 &euro; par carte ou virement", 'yproject' ); ?><br>
-					- <?php _e( "illimit&eacute; par ch&egrave;que", 'yproject' ); ?><br>
 					<strong><?php _e( "Retrait de royalties", 'yproject' ); ?></strong><br>
 					- <?php _e( "jusqu'&agrave; 2 500 &euro;", 'yproject' ); ?><br>
 				</td>
 				<td class="align-center inside"></td>
 				<td class="align-center inside">
 					<?php if ( $can_register_lemonway ): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/minimum-goal-full.png" alt="check" width="40" height="40">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-checked.png" alt="check" width="40" height="40">
 					<?php else: ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/minimum-goal-empty.png" alt="uncheck" width="40" height="40">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-unchecked.png" alt="uncheck" width="40" height="40">
 					<?php endif; ?>
 				</td>
 				<td class="align-center inside">
 					<?php if ( $is_lemonway_registered ): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/minimum-goal-full.png" alt="check" width="40" height="40">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-checked.png" alt="check" width="40" height="40">
 					<?php else: ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/minimum-goal-empty.png" alt="uncheck" width="40" height="40">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-unchecked.png" alt="uncheck" width="40" height="40">
 					<?php endif; ?>
 				</td>
 			</tr>
@@ -89,9 +88,9 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 				<td class="align-center inside"></td>
 				<td class="align-center inside">
 					<?php if ( $is_lemonway_registered ): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/minimum-goal-full.png" alt="check" width="40" height="40">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-checked.png" alt="check" width="40" height="40">
 					<?php else: ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/minimum-goal-empty.png" alt="uncheck" width="40" height="40">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-unchecked.png" alt="uncheck" width="40" height="40">
 					<?php endif; ?>
 				</td>
 			</tr>
