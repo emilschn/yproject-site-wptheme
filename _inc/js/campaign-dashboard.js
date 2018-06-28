@@ -1406,11 +1406,11 @@ WDGCampaignDashboard.prototype.refreshTurnoverAmountToPay = function() {
 	var costsOrga = $("#turnover-declaration").data("costs-orga");
 	var total = 0;
 	if ($("#turnover-total").length > 0) {
-		total = Number($("#turnover-total").val());
+		total = Number( $("#turnover-total").val().split(',').join('.') );
 	} else {
 		var i = 0;
 		while ($("#turnover-" + i).length > 0) {
-			total += Number($("#turnover-" + i).val());
+			total += Number( $("#turnover-" + i).val().split(',').join('.') );
 			i++;
 		}
 	}
