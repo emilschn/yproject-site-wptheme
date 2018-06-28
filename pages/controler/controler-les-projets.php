@@ -20,13 +20,10 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	private $currentprojects_list;
 	
 	private static $fundedprojects_html_key = 'projectlist-projects-funded';
-	private static $fundedprojects_html_key_2 = 'projectlist-projects-funded-2';
 	private static $fundedprojects_html_duration = 7200; // 2 heures de cache
 	private static $fundedprojects_html_version = 2;
 	private $fundedprojects_html;
 	private $fundedprojects_list;
-	private $fundedprojects_html_2;
-	private $fundedprojects_list_2;
 	
 	public function __construct() {
 		parent::__construct();
@@ -171,9 +168,15 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 // FUNDED PROJECTS
 /******************************************************************************/
 	private function prepare_fundedprojects() {
-		$this->fundedprojects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
+		$nb_key = ceil( WDG_Cache_Plugin::$nb_query_campaign_funded / 5 );
+		$this->fundedprojects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key . '_1', WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
 		if ( empty( $this->fundedprojects_html ) ) {
-			$this->fundedprojects_list = ATCF_Campaign::get_list_funded( WDG_Cache_Plugin::$nb_query_campaign_funded / 2 );
+			$this->fundedprojects_list = ATCF_Campaign::get_list_funded( WDG_Cache_Plugin::$nb_query_campaign_funded );
+			
+		} else {
+			for ( $i = 2; $i <= $nb_key; $i++ ) {
+				$this->fundedprojects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key. '_' .$i, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
+			}
 		}
 	}
 	
@@ -181,33 +184,13 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		return $this->fundedprojects_html;
 	}
 	
-	public function set_fundedprojects_html( $html ) {
+	public function set_fundedprojects_html( $html, $index ) {
 		$this->fundedprojects_html = $html;
-		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key, $html, WDG_Page_Controler_ProjectList::$fundedprojects_html_duration, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
+		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key. '_' .$index, $html, WDG_Page_Controler_ProjectList::$fundedprojects_html_duration, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
 	}
 	
 	public function get_fundedprojects_list() {
 		return $this->fundedprojects_list;
-	}
-	
-	private function prepare_fundedprojects_2() {
-		$this->fundedprojects_html_2 = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key_2, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
-		if ( empty( $this->fundedprojects_html_2 ) ) {
-			$this->fundedprojects_list_2 = ATCF_Campaign::get_list_funded( WDG_Page_Controler_ProjectList::$nb_query_campaign_funded / 2 );
-		}
-	}
-	
-	public function get_fundedprojects_html_2() {
-		return $this->fundedprojects_html_2;
-	}
-	
-	public function set_fundedprojects_html_2( $html ) {
-		$this->fundedprojects_html_2 = $html;
-		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key_2, $html, WDG_Page_Controler_ProjectList::$fundedprojects_html_duration, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
-	}
-	
-	public function get_fundedprojects_list_2() {
-		return $this->fundedprojects_list_2;
 	}
 	
 }
