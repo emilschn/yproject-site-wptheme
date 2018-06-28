@@ -8,13 +8,14 @@ $campaign = atcf_get_campaign( $project_id );
 $img = $campaign->get_home_picture_src( TRUE, 'large' );
 $campaign_status = $campaign->campaign_status();
 $campaign_categories_str = $campaign->get_categories_str();
+$class_category = ( strpos( $campaign_categories_str, 'actifs' ) !== FALSE ) ? 'cat-actifs' : 'cat-entreprises';
 
 $percent = min(100, $campaign->percent_minimum_completed(false));
 $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 ?>
 
 
-<div class="project-container" id="project-<?php echo $project_id ?>" data-step="<?php echo $campaign_status; ?>" data-location="<?php echo $campaign->get_location_number(); ?>" data-categories="<?php echo $campaign_categories_str; ?>">
+<div class="project-container <?php echo $class_category; ?>" id="project-<?php echo $project_id ?>" data-step="<?php echo $campaign_status; ?>" data-location="<?php echo $campaign->get_location_number(); ?>" data-categories="<?php echo $campaign_categories_str; ?>">
     <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
         <div class="impacts-container" id="impacts-<?php echo $project_id ?>">
 			<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE): ?>

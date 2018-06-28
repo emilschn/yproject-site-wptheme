@@ -384,8 +384,8 @@ YPUIFunctions = (function($) {
 				if ($(".projects-current .wdg-component-projects-preview .project-slider").length > 0) {
 					$(".projects-current .wdg-component-projects-preview .block-projects").width( ($(".projects-current .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-current .wdg-component-projects-preview .project-container").length );
 					$(".projects-current .wdg-component-projects-preview .project-slider").scrollLeft( ($(".projects-current .wdg-component-projects-preview .block-projects").width() - $(".projects-current .wdg-component-projects-preview .project-slider").width()) / 2 );
-
-					$(".projects-funded .wdg-component-projects-preview .block-projects").width( ($(".projects-funded .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-funded .wdg-component-projects-preview .project-container").length );
+					// On affiche une zone suffisamment grande pour accueillir tous les projets d'entreprise
+					$(".projects-funded .wdg-component-projects-preview .block-projects").width( $(".projects-funded .wdg-component-projects-preview .project-container").width() * $(".projects-funded .wdg-component-projects-preview .project-container.cat-entreprises").length );
 
 				}
 			}
@@ -880,6 +880,25 @@ var WDGFormsFunctions = (function($) {
 						$label.html( labelVal );
 					}
 				} );
+			} );
+			
+			$( 'label.file-label' ).on( 'dragover', function( e ) {
+				$( this ).addClass( 'dragover' );
+				e.stopPropagation();
+				e.preventDefault();
+			} );
+			$( 'label.file-label' ).on( 'dragleave', function( e ) {
+				$( this ).removeClass( 'dragover' );
+				e.stopPropagation();
+				e.preventDefault();
+			} );
+			$( 'label.file-label' ).on( 'drop', function( e ) {
+				e.stopPropagation();
+				e.preventDefault();
+				$( this ).removeClass( 'dragover' );
+				var inputId = $( this ).data( 'input' );
+				$( '#' + inputId ).prop( 'files', e.originalEvent.dataTransfer.files );
+				$( '#' + inputId ).trigger( 'change' );
 			} );
 		},
 		

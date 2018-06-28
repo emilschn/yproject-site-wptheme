@@ -93,7 +93,6 @@
 	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle {
 		margin: 0px;
 		padding: 10px 0px;
-		border-top: 3px solid #E1E2E2;
 		font-size: 25pt;
 	}
 	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.border-hidden {

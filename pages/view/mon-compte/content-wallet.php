@@ -40,14 +40,14 @@ Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.
 
 	<?php else: ?>
 		<?php _e( "Afin de retirer vos royalties, merci de renseigner vos coordonn&eacute;es bancaires.", 'yproject' ); ?><br><br>
-		<a href="#bank" class="button red go-to-tab" data-tab="bank"><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></a>
+		<a href="#bank" class="button blue go-to-tab" data-tab="bank"><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></a>
 
 	<?php endif; ?>
 
 <?php elseif ($amount > 0): ?>
 	<form action="" method="POST" enctype="multipart/form-data">
 		<p class="align-center">
-			<input type="submit" class="button" value="Reverser sur mon compte bancaire" />
+			<input type="submit" class="button blue" value="Reverser sur mon compte bancaire" />
 		</p>
 		<input type="hidden" name="action" value="user_wallet_to_bankaccount" />
 		<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->get_wpref(); ?>" />

@@ -310,7 +310,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 					<?php _e("- 50% de évaluations positives", 'yproject'); ?><br />
 					<?php _e("- 50% d'intentions d'investissement par rapport &agrave; votre objectif", 'yproject'); ?><br />
 					<br />
-					<?php _e("&Ecirc;tes-vous pr&ecirc;t &agrave; le publier ?", 'yproject'); ?><br />
+					<?php _e("&Ecirc;tes-vous pr&ecirc;t(e) &agrave; le publier ?", 'yproject'); ?><br />
 				</p>
 
 				<li>
@@ -383,7 +383,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 			<?php elseif ( $status == ATCF_Campaign::$campaign_status_vote || ( $status == ATCF_Campaign::$campaign_status_validated && $page_controler->get_campaign()->skip_vote() ) ): ?>
 				<p id="desc-preview">
 					<?php _e("Il est temps maintenant de passer aux choses s&eacute;rieuses.", 'yproject'); ?>
-					<?php _e("&Ecirc;tes-vous pr&ecirc;t &agrave; lancer votre lev&eacute;e de fonds ?", 'yproject'); ?>
+					<?php _e("&Ecirc;tes-vous pr&ecirc;t(e) &agrave; lancer votre lev&eacute;e de fonds ?", 'yproject'); ?>
 				</p>
 				<li>
 					<label>
@@ -397,7 +397,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 				<li>
 					<label>
 						<input type="checkbox" class="checkbox-next-status">
-						Je suis pr&ecirc;t &agrave; devenir le premier investisseur de mon projet 
+						Je suis pr&ecirc;t(e) &agrave; devenir le premier investisseur de mon projet 
 					</label>
 				</li>
 				<li>
