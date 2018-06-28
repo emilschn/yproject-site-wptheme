@@ -385,7 +385,7 @@ YPUIFunctions = (function($) {
 					$(".projects-current .wdg-component-projects-preview .block-projects").width( ($(".projects-current .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-current .wdg-component-projects-preview .project-container").length );
 					$(".projects-current .wdg-component-projects-preview .project-slider").scrollLeft( ($(".projects-current .wdg-component-projects-preview .block-projects").width() - $(".projects-current .wdg-component-projects-preview .project-slider").width()) / 2 );
 
-					$(".projects-funded .wdg-component-projects-preview .block-projects").width( $(".projects-funded .wdg-component-projects-preview .project-container").width() * $(".projects-funded .wdg-component-projects-preview .project-container").length );
+					$(".projects-funded .wdg-component-projects-preview .block-projects").width( $(".projects-funded .wdg-component-projects-preview .project-container").width() * $(".projects-funded .wdg-component-projects-preview .project-container.cat-entreprises").length );
 
 				}
 			}
