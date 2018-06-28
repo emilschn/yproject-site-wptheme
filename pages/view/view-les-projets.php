@@ -256,6 +256,33 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <?php endif; ?>
 
 <?php echo $page_controler->get_fundedprojects_html(); ?>
+					
+<?php $fundedprojects_html_2 = $page_controler->get_fundedprojects_html_2(); ?>
+
+<?php if ( !$fundedprojects_html_2 ): ?>
+
+					<?php ob_start(); ?>
+						
+					<?php
+					global $project_id;
+					$project_list_funded = $page_controler->get_fundedprojects_list_2();
+					if ( $project_list_funded ) {
+						foreach ( $project_list_funded as $project_post ) {
+							$project_id = $project_post->ID;
+							locate_template( array( "projects/preview.php" ), true, false );
+						}
+					}
+					?>
+				
+					<?php
+					$cache_fundedprojects = ob_get_contents();
+					$page_controler->set_fundedprojects_html_2( $cache_fundedprojects );
+					ob_end_clean();
+					?>
+					
+<?php endif; ?>
+
+<?php echo $page_controler->get_fundedprojects_html_2(); ?>
 						
 					</div>
 				</div>
