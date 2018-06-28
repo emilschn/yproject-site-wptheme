@@ -227,7 +227,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		DashboardUtility::create_field(array(
 			'id'			=> 'new_end_vote_pending_message',
 			'type'			=> 'text',
-			'label'			=> __( "Message de levée de fond en attente de lancement", 'yproject' ),
+			'label'			=> __( "Message de lev&eacute;e de fond en attente de lancement", 'yproject' ),
 			'value'			=> $page_controler->get_campaign()->end_vote_pending_message(),
 			'admin_theme'	=> true,
 			'editable'		=> ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_vote ) && $page_controler->can_access_admin(),
@@ -237,7 +237,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		DashboardUtility::create_field(array(
 			'id'			=> 'new_maximum_complete_message',
 			'type'			=> 'text',
-			'label'			=> __( "Message de levée de fond en cours de clôture", 'yproject' ),
+			'label'			=> __( "Message de lev&eacute;e de fond en cours de cl&ocirc;ture", 'yproject' ),
 			'value'			=> $page_controler->get_campaign()->maximum_complete_message(),
 			'admin_theme'	=> true,
 			'editable'		=> ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_collecte ) && $page_controler->can_access_admin(),

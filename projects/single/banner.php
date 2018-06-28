@@ -223,7 +223,7 @@ $lang_list = $campaign->get_lang_list();
 					<?php else: ?>
 						<div class="end-sentence">
 							<?php if ( $campaign->end_vote_pending_message() == '' ): ?>
-								<?php _e( "Ce projet passera bientôt en phase de collecte !", 'yproject' ); ?>
+								<?php _e( "Ce projet passera bient&ocirc;t en phase de collecte !", 'yproject' ); ?>
 							<?php else: ?>
 								<?php echo $campaign->end_vote_pending_message(); ?>
 							<?php endif; ?>
@@ -303,7 +303,7 @@ $lang_list = $campaign->get_lang_list();
 					<?php elseif ( $time_remaining_str != '-' && $campaign->percent_completed( false ) >= 100 ): ?>
 						<div class="end-sentence">
 							<?php if ( $campaign->maximum_complete_message() == '' ): ?>
-								<?php _e( "Ce projet est en cours de clôture !", 'yproject' ); ?>
+								<?php _e( "Ce projet est en cours de cl&ocirc;ture !", 'yproject' ); ?>
 							<?php else: ?>
 								<?php echo $campaign->maximum_complete_message(); ?>
 							<?php endif; ?>
@@ -318,7 +318,7 @@ $lang_list = $campaign->get_lang_list();
 					$invest_amount = $campaign->current_amount();
 					?>
 					<div class="end-sentence">
-						<?php echo $nbinvestors." ". __("personnes","yproject")." ". __("ont investi","yproject") ." ". $invest_amount ." ". __("pour propulser ce projet à impact positif","yproject");?>
+						<?php echo $nbinvestors." ". __("personnes","yproject")." ". __("ont investi","yproject") ." ". $invest_amount ." ". __("pour propulser ce projet &agrave; impact positif","yproject");?>
 					</div>
 					<a href="<?php echo home_url( '/les-projets/' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 				
