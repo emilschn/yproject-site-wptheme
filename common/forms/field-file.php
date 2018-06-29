@@ -3,8 +3,8 @@
 	<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 10 Mo.", 'yproject' ); ?><br>
 	<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?>
 </div>
-<input type="file" name="<?php echo $wdg_current_field[ 'name' ]; ?>" id="input-file-<?php echo $wdg_current_field[ 'name' ]; ?>">
-<label for="<?php echo $wdg_current_field[ 'name' ]; ?>" class="file-label" data-input="input-file-<?php echo $wdg_current_field[ 'name' ]; ?>">
+<input type="file" name="<?php echo $wdg_current_field[ 'name' ]; ?>" id="<?php echo $wdg_current_field[ 'name' ]; ?>">
+<label for="<?php echo $wdg_current_field[ 'name' ]; ?>" class="file-label" data-input="<?php echo $wdg_current_field[ 'name' ]; ?>">
 	<span class="hide-when-filled">
 		<?php _e( "Je glisse mon fichier ici" ); ?><br>
 		ou<br>
