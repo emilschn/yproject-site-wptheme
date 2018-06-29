@@ -562,6 +562,15 @@ nav#main > div#menu > a.btn-user.connected.needs-authentication:after {
 	font-size: 17px;
 	color: #FF0000;
 }
+nav#main > div#menu > a.btn-user.connected.needs-authentication.active:after {
+	display: none;
+}
+#submenu-user li a.needs-authentication:after {
+	margin-left: 15px;
+	content: "!";
+	font-size: 15px;
+	color: #FF0000;
+}
 
 #submenu-user {
 	position: absolute;
