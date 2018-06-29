@@ -191,28 +191,30 @@ function print_user_projects(){
 				</label>
 			</form>
 			<?php
-			foreach ( $purchases as $post ) : setup_postdata( $post );
-				$downloads = edd_get_payment_meta_downloads($post->ID); 
-				$download_id = '';
-				if (!is_array($downloads[0])){
-				    $download_id = $downloads[0];
-				    $post_camp = get_post($download_id);
-				    $campaign = atcf_get_campaign($post_camp);
-				    ypcf_get_updated_payment_status($post->ID);
-				    $signsquid_contract = new SignsquidContract($post->ID);
-				    $payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
+			if  ($purchases):
+				foreach ( $purchases as $post ) : setup_postdata( $post );
+					$downloads = edd_get_payment_meta_downloads($post->ID); 
+					$download_id = '';
+					if (!is_array($downloads[0])){
+					    $download_id = $downloads[0];
+					    $post_camp = get_post($download_id);
+					    $campaign = atcf_get_campaign($post_camp);
+					    ypcf_get_updated_payment_status($post->ID);
+					    $signsquid_contract = new SignsquidContract($post->ID);
+					    $payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
 
-				    //Infos relatives au projet
-				    $user_projects[$campaign->ID]['ID'] = $campaign->ID;
-				    //Infos relatives à l'investissement de l'utilisateur
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_contract_id'] = $signsquid_contract->get_contract_id();
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status'] = $signsquid_contract->get_status_code();
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status_str'] = $signsquid_contract->get_status_str();
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_date'] = $payment_date;
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount'] = edd_get_payment_amount( $post->ID );
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_status'] = edd_get_payment_status( $post, true );
-				}
-			endforeach;
+					    //Infos relatives au projet
+					    $user_projects[$campaign->ID]['ID'] = $campaign->ID;
+					    //Infos relatives à l'investissement de l'utilisateur
+					    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_contract_id'] = $signsquid_contract->get_contract_id();
+					    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status'] = $signsquid_contract->get_status_code();
+					    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status_str'] = $signsquid_contract->get_status_str();
+					    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_date'] = $payment_date;
+					    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount'] = edd_get_payment_amount( $post->ID );
+					    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_status'] = edd_get_payment_status( $post, true );
+					}
+				endforeach;
+			endif;
 
 			foreach ($projects_jy_crois as $project) {
 				$user_projects[$project->campaign_id]['jy_crois'] = 1;
@@ -495,8 +497,8 @@ function yproject_save_edit_project() {
 	if ($current_lang == 'fr_FR') { $current_lang = ''; }
 	else { $current_lang = '_' . $current_lang; }
 	
-	ypcf_debug_log( 'yproject_save_edit_project > property => ' . $_POST['property'], TRUE );
-	ypcf_debug_log( 'yproject_save_edit_project > value => ' . $_POST['value'], TRUE );
+	ypcf_debug_log( 'yproject_save_edit_project > property ('.$current_lang.') => ' . $_POST['property'], TRUE );
+	ypcf_debug_log( 'yproject_save_edit_project > value ('.$current_lang.') => ' . $_POST['value'], TRUE );
 	
 	switch ($_POST['property']) {
 		case "title":
@@ -525,8 +527,15 @@ function yproject_save_edit_project() {
 		'project-content-about-' . $_POST['id_campaign'],
 		'project-content-bottom-' . $_POST['id_campaign'],
 		'projects-current',
-		'projects-others'
+		'projects-others',
+		'cache_campaign_' . $_POST['id_campaign']
 	));
+	
+	$campaign = new ATCF_Campaign( $_POST['id_campaign'] );
+	if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded ) {
+		$file_cacher = WDG_File_Cacher::current();
+		$file_cacher->delete( $campaign->data->post_name );
+	}
 	echo $_POST['property'];
 	exit();
 }

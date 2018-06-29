@@ -11,11 +11,7 @@ UserAccountDashboard.prototype.initWithHash = function() {
 
 	var sCurrentTab = window.location.hash.substring(1);
 	if ( sCurrentTab !== '' ) {
-		if ( sCurrentTab === 'orga-wallet' || sCurrentTab === 'orga-investments' ) {
-			$( 'li#menu-item-wallet a' ).click();
-		} else {
-			this.switchTab( sCurrentTab, false );
-		}
+		this.switchTab( sCurrentTab, false );
 	}
 	
 };
@@ -31,6 +27,16 @@ UserAccountDashboard.prototype.initMenu = function() {
 			self.switchTab( $( this ).data( 'tab' ), this );
 		} );
 	} );
+	$( 'a.go-to-tab' ).each( function() {
+		$( this ).click( function() {
+			self.switchTab( $( this ).data( 'tab' ), this );
+		} );
+	} );
+	if ( $( '#modify-iban' ).length > 0 ) {
+		$( '#modify-iban' ).click( function() {
+			$( '#form-modify-iban' ).toggle( 100 );
+		} );
+	}
 	
 };
 
@@ -42,14 +48,8 @@ UserAccountDashboard.prototype.switchTab = function( sType, clickedElement ) {
 	$( 'ul.nav-menu li' ).removeClass( 'selected' );
 	$( 'div#item-body > div.item-body-tab' ).hide();
 	
-	if ( sType === 'orga-wallet' || sType === 'orga-investments' ) {
-		$( clickedElement ).parent().addClass( 'selected' );
-		$( 'div#item-body > div#item-body-' +sType+ '-' + $( clickedElement ).data( 'id' ) ).show();
-		
-	} else {
-		$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
-		$( 'div#item-body > div#item-body-' + sType ).show();
-	}
+	$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
+	$( 'div#item-body > div#item-body-' + sType ).show();
 	
 };
 

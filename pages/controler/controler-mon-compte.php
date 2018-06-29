@@ -18,24 +18,31 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	private $wallet_to_bankaccount_result;
 	private $form_user_details;
 	private $form_user_password;
-	private $form_feedback;
+	private $form_user_identitydocs;
+	private $form_user_bank;
+	private $form_user_feedback;
 	
 	public function __construct() {
 		parent::__construct();
 		define( 'SKIP_BASIC_HTML', TRUE );
-		if (!is_user_logged_in()) {
+		
+		if ( !is_user_logged_in() ) {
 			wp_redirect( home_url( '/connexion/' ) . '?redirect-page=mon-compte' );
 		}
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'user-password' );
+		$core->include_form( 'user-identitydocs' );
+		$core->include_form( 'user-bank' );
 		
 		// Si on met à jour le RIB, il faut recharger l'utilisateur en cours
 		$reload = WDGFormUsers::register_rib();
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
 		$this->init_current_user( $reload );
 		$this->init_project_list();
-		$this->init_form();
+		$this->init_form_user_details();
+		$this->init_form_user_identitydocs();
+		$this->init_form_user_bank();
 		locate_template( array( 'country_list.php'  ), true );
 		
 		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
@@ -55,6 +62,18 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	
 	public function get_current_user_organizations() {
 		return $this->current_user_organizations;
+	}
+	
+	public function get_current_user_iban() {
+		return $this->current_user->get_lemonway_iban();
+	}
+	
+	public function get_current_user_iban_status() {
+		return $this->current_user->get_lemonway_iban_status();
+	}
+	
+	public function get_current_user_iban_document_status() {
+		return $this->current_user->get_document_lemonway_status( LemonwayDocument::$document_type_bank );
 	}
 	
 	public function get_current_user_authentication() {
@@ -88,6 +107,8 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$this->current_user_organizations = array();
 		$organizations_list = $this->current_user->get_organizations_list();
 		if ( !empty( $organizations_list ) ) {
+			$core = ATCF_CrowdFunding::instance();
+			$core->include_form( 'organization-details' );
 			foreach ( $organizations_list as $organization_item ) {
 				$organization_obj = new WDGOrganization( $organization_item->wpref );
 				array_push( $this->current_user_organizations, $organization_obj );
@@ -156,18 +177,18 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 /******************************************************************************/
 // USER DATA
 /******************************************************************************/
-	private function init_form() {
+	private function init_form_user_details() {
 		$this->form_user_details = new WDG_Form_User_Details( $this->current_user->get_wpref(), WDG_Form_User_Details::$type_extended );
 		$action_posted = filter_input( INPUT_POST, 'action' );
 		if ( $action_posted == WDG_Form_User_Details::$name ) {
-			$this->form_feedback = $this->form_user_details->postForm();
+			$this->form_user_feedback = $this->form_user_details->postForm();
 			$this->init_current_user( TRUE );
 		}
 		
 		if ( !$this->current_user->is_logged_in_with_facebook() ) {
 			$this->form_user_password = new WDG_Form_User_Password( $this->current_user->get_wpref() );
 			if ( $action_posted == WDG_Form_User_Password::$name ) {
-				$this->form_feedback = $this->form_user_password->postForm();
+				$this->form_user_feedback = $this->form_user_password->postForm();
 			}
 		}
 	}
@@ -181,7 +202,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	}
 	
 	public function get_user_form_feedback() {
-		return $this->form_feedback;
+		return $this->form_user_feedback;
 	}
 	
 	public function get_user_data( $data_key ) {
@@ -203,6 +224,48 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 			$buffer = $this->user_data[ $data_key ];
 		}
 		return $buffer;
+	}
+	
+/******************************************************************************/
+// USER DOCUMENTS
+/******************************************************************************/
+	private function init_form_user_identitydocs() {
+		$this->form_user_identitydocs = new WDG_Form_User_Identity_Docs( $this->current_user->get_wpref() );
+		$action_posted = filter_input( INPUT_POST, 'action' );
+		if ( $action_posted == WDG_Form_User_Identity_Docs::$name ) {
+			$this->form_user_feedback = $this->form_user_identitydocs->postForm();
+		}
+	}
+	
+	public function get_user_identitydocs_form() {
+		return $this->form_user_identitydocs;
+	}
+	
+/******************************************************************************/
+// USER BANK
+/******************************************************************************/
+	private function init_form_user_bank() {
+		$this->form_user_bank = new WDG_Form_User_Bank( $this->current_user->get_wpref() );
+		$action_posted = filter_input( INPUT_POST, 'action' );
+		if ( $action_posted == WDG_Form_User_Bank::$name ) {
+			$this->form_user_feedback = $this->form_user_bank->postForm();
+		}
+	}
+	
+	public function get_user_bank_form() {
+		return $this->form_user_bank;
+	}
+	
+	public function is_iban_validated() {
+		$lw_iban_status = $this->current_user->get_lemonway_iban_status();
+		$lw_doc_iban_status = $this->current_user->get_document_lemonway_status( LemonwayDocument::$document_type_bank );
+		return ( $lw_iban_status == WDGUser::$iban_status_validated && $lw_doc_iban_status == LemonwayDocument::$document_status_accepted );
+	}
+	
+	public function is_iban_waiting() {
+		$lw_iban_status = $this->current_user->get_lemonway_iban_status();
+		$lw_doc_iban_status = $this->current_user->get_document_lemonway_status( LemonwayDocument::$document_type_bank );
+		return ( $lw_iban_status == WDGUser::$iban_status_waiting && ( $lw_doc_iban_status == LemonwayDocument::$document_status_waiting || $lw_doc_iban_status == LemonwayDocument::$document_status_waiting_verification ) );
 	}
 	
 /******************************************************************************/

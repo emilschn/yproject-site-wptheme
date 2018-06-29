@@ -32,26 +32,24 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 			
 <?php $stats_list = $page_controler->get_stats_list(); ?>
-
-				
 <section class="project-stats">
 	<div>
 		<div class="left">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-montgolfiere-blanc-h100.png" alt="montgolfiere" width="115" height="100">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-montgolfiere-noir-h100.png" alt="montgolfiere" width="115" height="100">
 			<span>
 				<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span><br>
 					<?php _e( "lev&eacute;s", 'yproject' ); ?>
 			</span>
 		</div>
 		<div class="left">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-ensemble-blanc-h100.png" alt="ensemble" width="139" height="100">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-ensemble-noir-h100.png" alt="ensemble" width="139" height="100">
 			<span>
 				<span><?php echo number_format( $stats_list[ 'count_people' ], 0, '', ' ' ); ?></span><br>
 					<?php _e( "investisseurs", 'yproject' ); ?>
 			</span>
 		</div>
 		<div class="left">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-monnaie-blanc-h100.png" alt="monnaie" width="102" height="100">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-monnaie-noir-h100.png" alt="monnaie" width="102" height="100">
 				<span>
 					<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?> &euro;</span><br>
 					<?php _e( "de royalties vers&eacute;s", 'yproject' ); ?>
@@ -64,6 +62,37 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <?php
 /******************************************************************************/
 // FIN STATS PROJECTS
+/******************************************************************************/
+?>
+
+<?php
+/******************************************************************************/
+// NEWS
+/******************************************************************************/
+?>
+<section class="news">
+	<div>
+		<h2 class="standard">/ <?php _e("Actualit&eacute;", "yproject") ?> /</h2>
+		
+		<div class="news-content">
+			<span class="news-description">
+				<?php _e( "Ruches, &eacute;nergie renouvelable,", 'yproject' ); ?><br>
+				<?php _e( "moblit&eacute; et &eacute;lectronique durable...", 'yproject' ); ?>
+			</span>
+			<br>
+			<span class="news-title"><?php _e( "D&eacute;couvrez l'&eacute;pargne positive !", 'yproject' ); ?></span>
+			<br>
+			<a href="https://www.wedogood.co/accelerer-la-transition/" class="button transparent"><?php _e( "Lire", 'yproject' ); ?></a>
+		</div>
+		
+		<div class="clear">
+			<br><br>
+		</div>
+	</div>
+</section>		
+<?php
+/******************************************************************************/
+// FIN NEWS
 /******************************************************************************/
 ?>
 

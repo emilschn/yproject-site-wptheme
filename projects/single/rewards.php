@@ -106,14 +106,11 @@ $estimated_turnover = $campaign->estimated_turnover();
 			</form>
 			<?php else: ?>
 				<?php
-				$page_invest = get_page_by_path('investir');
-				$campaign_id_param = '?campaign_id=' . $campaign->ID;
-				$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
+				$invest_url_href = home_url( '/connexion/' ) . '?source=project';
 				?>
 				<div class="align-center">
 					<br />
-					<button class="button red wdg-button-lightbox-open" data-lightbox="connexion" 
-							data-redirect="<?php echo $invest_url; ?>"><?php _e( "Investir", 'yproject' ); ?></button>
+					<a href="<?php echo $invest_url_href; ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
 				</div>
 			<?php endif; ?>
 			<br />
