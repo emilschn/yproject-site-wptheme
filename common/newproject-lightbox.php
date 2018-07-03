@@ -117,7 +117,8 @@ if ($organizations_list) {
         "type"		=> "text",
         "label"		=> "E-mail de contact",
         "value"		=> $first_organization_email,
-        "infobubble"=> __( "Cet e-mail ne doit pas &ecirc;tre utilis&eacute; par un compte existant.", 'yproject' )
+        "description"	=> __( "Cette adresse doit &ecirc;tre diff&eacute;rente de celle de votre compte personnel, utilisez une adresse telle que contact@votre-entreprise.fr", 'yproject' ),
+        "infobubble"	=> __( "Cet e-mail ne doit pas &ecirc;tre utilis&eacute; par un compte existant.", 'yproject' )
     ));
 
     DashboardUtility::create_field(array(
