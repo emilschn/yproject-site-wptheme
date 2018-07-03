@@ -176,6 +176,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 			
 		} else {
 			for ( $i = 1; $i <= $nb_key; $i++ ) {
+				$this->fundedprojects_html = '';
 				$this->fundedprojects_html .= $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key. '_' .$i, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
 			}
 		}
