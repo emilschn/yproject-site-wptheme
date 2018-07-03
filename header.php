@@ -44,6 +44,9 @@
 					$list_to_cache = array();
 				}
 			}
+			// Sauvegarde des restants
+			$projects_searchable_encoded = json_encode( $list_to_cache );
+			$WDG_cache_plugin->set_cache( 'ATCF_Campaign::list_projects_searchable_' .$index, $projects_searchable_encoded, 60 * 60 * 3, 3 ); //MAJ 3h
 		}
 	}
 	
