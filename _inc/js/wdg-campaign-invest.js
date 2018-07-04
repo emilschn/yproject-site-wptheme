@@ -51,6 +51,51 @@ var WDGInvestPageFunctions = (function($) {
 				} );
 			}
 			
+			if ( $( '.mean-payment-button' ).length > 0 ) {
+				$( '.mean-payment-button' ).click( function( e ) {
+					e.preventDefault();
+					$( '.mean-payment' ).hide();
+					$( this ).show();
+					$( '#change-mean-payment' ).show();
+					var sMeanPayment = 'mean-payment-';
+					$( '#meanofpayment' ).val( $( this ).attr( 'id' ).substr( sMeanPayment.length ) );
+					if ( $( this ).attr( 'id' ).indexOf( 'card' ) > -1 && $( '#two-contracts-preview' ).length > 0 ) {
+						$( '#two-contracts-preview' ).show();
+					} else {
+						$( '#contract-preview' ).show();
+					}
+					$( '#contract-buttons' ).show();
+				} );
+				
+				$( '#change-mean-payment' ).click( function( e ) {
+					e.preventDefault();
+					$( '.mean-payment' ).show();
+					$( this ).hide();
+					$( '#contract-preview' ).hide();
+					$( '#two-contracts-preview' ).hide();
+					$( '#contract-buttons' ).hide();
+				} );
+				
+				$( 'div#two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).click( function() {
+					if ( !$( this ).hasClass( 'selected' ) ) {
+						$( 'div#two-contracts-preview .contract-preview-with-tabs .contract-preview-content > div' ).each( function() {
+							if ( $( this ).is( ':visible' ) ) {
+								$( this ).hide();
+							} else {
+								$( this ).show();
+							}
+						} );
+						$( 'div#two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).each( function() {
+							if ( $( this ).hasClass( 'selected' ) ) {
+								$( this ).removeClass( 'selected' );
+							} else {
+								$( this ).addClass( 'selected' );
+							}
+						} );
+					}
+				} );
+			}
+			
 			// Sondage
 			if ( $( '#field-would-invest-more-amount' ).length > 0 ) {
 				$( $( '#would-invest-more-amount-yes' ) ).change( function() {
