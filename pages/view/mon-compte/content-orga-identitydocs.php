@@ -28,6 +28,10 @@ $fields_files_orga = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_
 	
 	<span style="color: #EE0000;"><em>--&gt; <?php _e( "Si une quatri&egrave;me personne ou une personne morale d&eacute;tient au moins 25% de votre capital, merci de nous le signaler sur support@wedogood.co.", 'yproject' ); ?></em></span>
 	<br><br>
+	
+	<p class="align-left">
+		<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+	</p>
 
 	<div id="user-identify-docs-form-buttons">
 		<button type="submit" class="button save red"><?php _e( "Envoyer les documents", 'yproject' ); ?></button>

@@ -37,7 +37,13 @@ if ( $page_controler->is_iban_validated() ): ?>
 		</div>
 	</div>
 
-	<?php print_r( $WDGUser_lw_bank_info ); ?>
+	<?php _e( "Le RIB valid&eacute; est le suivant :", 'yproject' ); ?><br>
+	<strong><?php _e( "Propri&eacute;taire du compte :" );?></strong><br>
+	<?php echo $WDGUser_lw_bank_info->HOLDER; ?><br>
+	<strong><?php _e( "IBAN :" );?></strong><br>
+	<?php echo $WDGUser_lw_bank_info->DATA; ?><br>
+	<strong><?php _e( "BIC :" );?></strong><br>
+	<?php echo $WDGUser_lw_bank_info->SWIFT; ?><br>
 
 	<?php
 	$current_filelist_bank = WDGKYCFile::get_list_by_owner_id( $page_controler->get_current_user()->get_wpref(), WDGKYCFile::$owner_user, WDGKYCFile::$type_bank );
@@ -71,6 +77,10 @@ if ( $page_controler->is_iban_validated() ): ?>
 			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 		<?php endforeach; ?>
 
+		<p class="align-left">
+			<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+		</p>
+
 		<div id="user-bank-form-buttons">
 			<button type="submit" class="button save red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
 		</div>
@@ -86,7 +96,12 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 		</div>
 	</div>
 
-	<?php print_r( $WDGUser_lw_bank_info ); ?>
+	<strong><?php _e( "Propri&eacute;taire du compte :" );?></strong><br>
+	<?php echo $WDGUser_lw_bank_info->HOLDER; ?><br>
+	<strong><?php _e( "IBAN :" );?></strong><br>
+	<?php echo $WDGUser_lw_bank_info->DATA; ?><br>
+	<strong><?php _e( "BIC :" );?></strong><br>
+	<?php echo $WDGUser_lw_bank_info->SWIFT; ?><br>
 
 	<?php
 	$current_filelist_bank = WDGKYCFile::get_list_by_owner_id( $page_controler->get_current_user()->get_wpref(), WDGKYCFile::$owner_user, WDGKYCFile::$type_bank );
@@ -153,7 +168,11 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 			<?php endforeach; ?>
 		<?php endif; ?>
-
+		
+		<p class="align-left">
+			<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+		</p>
+	
 		<div id="user-bank-form-buttons">
 			<button type="submit" class="button save red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
 		</div>
