@@ -70,6 +70,10 @@ $form_feedback = $page_controler->get_user_form_feedback();
 	<input type="checkbox" name="facebook_avatar">Utiliser l'avatar facebook
 	<?php endif; ?>
 	<?php endif;*/ ?>
+	
+	<p class="align-left">
+	<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+	</p>
 
 	<div id="user-details-form-buttons">
 		<button type="submit" class="button save red"><?php _e( "Enregistrer les modifications", 'yproject' ); ?></button>

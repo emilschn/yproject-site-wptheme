@@ -71,6 +71,10 @@ if ( $page_controler->is_iban_validated() ): ?>
 			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 		<?php endforeach; ?>
 
+		<p class="align-left">
+			<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+		</p>
+
 		<div id="user-bank-form-buttons">
 			<button type="submit" class="button save red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
 		</div>
@@ -153,7 +157,11 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 			<?php endforeach; ?>
 		<?php endif; ?>
-
+		
+		<p class="align-left">
+			<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+		</p>
+	
 		<div id="user-bank-form-buttons">
 			<button type="submit" class="button save red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
 		</div>
