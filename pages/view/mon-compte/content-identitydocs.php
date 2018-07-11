@@ -18,7 +18,11 @@ $fields_files = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
-
+	
+	<p class="align-left">
+		<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+	</p>
+	
 	<div id="user-identify-docs-form-buttons">
 		<button type="submit" class="button save red"><?php _e( "Envoyer les documents", 'yproject' ); ?></button>
 	</div>

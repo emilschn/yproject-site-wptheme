@@ -175,8 +175,8 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 			$this->fundedprojects_list = ATCF_Campaign::get_list_funded( WDG_Cache_Plugin::$nb_query_campaign_funded );
 			
 		} else {
+			$this->fundedprojects_html = '';
 			for ( $i = 1; $i <= $nb_key; $i++ ) {
-				$this->fundedprojects_html = '';
 				$this->fundedprojects_html .= $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key. '_' .$i, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
 			}
 		}

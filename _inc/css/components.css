@@ -725,19 +725,23 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	}
 	.wdg-lightbox.cornered .wdg-lightbox-padder,
 	.wdg-lightbox .wdg-lightbox-padder {
+		width: -webkit-calc(100% - 40px);
+		width: -moz-calc(100% - 40px);
 		width: calc(100% - 40px);
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
 	}
 	.wdg-lightbox .wdg-lightbox-corner {
+		width: -webkit-calc(100% - 100px);
+		width: -moz-calc(100% - 100px);
 		width: calc(100% - 100px);
 		max-width: 540px;
 	}
 	.wdg-lightbox.cornered .wdg-lightbox-padder {
 		max-height: 70%;
-		max-height: -webkit-calc( 100% - 120px );
-		max-height: -moz-calc( 100% - 120px );
-		max-height: calc( 100% - 120px );
+		max-height: -webkit-calc(100% - 120px);
+		max-height: -moz-calc(100% - 120px);
+		max-height: calc(100% - 120px);
 	}
 }
 
@@ -911,9 +915,9 @@ body input[type=text], body input[type=email], body select {
 }
 .db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=email] {
 	width: 96%;
-    width: -webkit-calc( 100% - 16px );
-    width: -moz-calc( 100% - 16px );
-    width: calc( 100% - 16px );
+    width: -webkit-calc(100% - 16px);
+    width: -moz-calc(100% - 16px);
+    width: calc(100% - 16px);
 	height: 50px;
 	margin: 0px;
 	padding: 3px 8px;
@@ -942,7 +946,9 @@ body input[type=text], body input[type=email], body select {
 	font-family: Trebuchet MS, sans-serif;
 }
 .db-form.v3.full .field-container textarea {
-	width: calc( 100% - 16px );
+    width: -webkit-calc(100% - 16px);
+    width: -moz-calc(100% - 16px);
+    width: calc(100% - 16px);
 	height: 150px;
 	margin: 0px;
 	padding: 8px 8px;
@@ -960,7 +966,9 @@ body input[type=text], body input[type=email], body select {
 }
 .db-form.v3 button,
 .db-form.v3 a.button {
-	width: calc( 100% - 2px );
+    width: -webkit-calc(100% - 2px);
+    width: -moz-calc(100% - 2px);
+    width: calc(100% - 2px);
 	height: 50px;
 }
 .db-form.v3 button.half,
@@ -968,10 +976,14 @@ body input[type=text], body input[type=email], body select {
 	width: 45%;
 }
 .db-form.v3 .button.transparent {
-	width: calc( 100% - 4px );
+    width: -webkit-calc(100% - 4px);
+    width: -moz-calc(100% - 4px);
+    width: calc(100% - 4px);
 }
 .db-form.v3 .button.transparent.half {
-	width: calc( 45% - 4px );
+    width: -webkit-calc(45% - 4px);
+    width: -moz-calc(45% - 4px);
+    width: calc(45% - 4px);
 }
 .db-form.v3 .button#insert-media-button, .db-form.v3 .button.insert-media, .db-form.v3 a.button.su-generator-button, .db-form.v3 .mce-container button {
 	width: auto;
@@ -1081,6 +1093,10 @@ body input[type=text], body input[type=email], body select {
 }
 .db-form.v3 .field-container input[type=file] + label.file-label {
     display: inline-block;
+    width: -webkit-calc(100% - 2px);
+    width: -moz-calc(100% - 2px);
+    width: calc(100% - 2px);
+	margin-left: 0px;
 	padding: 20px 0px;
 	line-height: 30px;
 	font-weight: normal;
