@@ -104,15 +104,17 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	}
 	
 	public function needs_two_contracts() {
-		$WDGCurrent_User = WDGUser::current();
+		if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
+			$WDGInvestorEntity = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
+		} else {
+			$WDGInvestorEntity = WDGUser::current();
+		}
 		$amount_part = $_SESSION[ 'redirect_current_amount_part' ];
-		$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGCurrent_User );
+		$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGInvestorEntity );
 		return ( $amount_part > $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert() );
 	}
 	
 	public function get_current_investment_contract_preview( $first_contract = TRUE ) {
-		$WDGCurrent_User = WDGUser::current();
-		$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGCurrent_User );
 		$current_user = wp_get_current_user();
 		$campaign = $this->current_campaign;
 		$part_value = $campaign->part_value();
@@ -143,8 +145,12 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	
 	public function get_first_contract_amount() {
 		if ( !isset( $this->amount_first_contract ) ) {
-			$WDGCurrent_User = WDGUser::current();
-			$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGCurrent_User );
+			if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
+				$WDGInvestorEntity = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
+			} else {
+				$WDGInvestorEntity = WDGUser::current();
+			}
+			$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGInvestorEntity );
 			$this->amount_first_contract = $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert();
 		}
 		return $this->amount_first_contract;
@@ -340,8 +346,12 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	public function can_use_card() {
 		$buffer = TRUE;
 		
-		$WDGCurrent_User = WDGUser::current();
-		$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGCurrent_User );
+		if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
+			$WDGInvestorEntity = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
+		} else {
+			$WDGInvestorEntity = WDGUser::current();
+		}
+		$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGInvestorEntity );
 		if ( $WDGCurrent_User_Investments->can_invest_nb() != TRUE ) {
 			$buffer = FALSE;
 		}
