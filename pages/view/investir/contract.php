@@ -34,7 +34,7 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contrac
 	</div>
 	
 	<?php if ( $page_controler->needs_two_contracts() ): ?>
-	<div id="two-contracts-preview" class="hidden">
+	<div id="two-contracts-preview" class="two-contracts-preview hidden">
 		<div class="align-justify">
 			<?php _e( "Conform&eacute;ment &agrave; la r&eacute;glementation, votre niveau d'authentification actuel vous permet d'investir jusqu'&agrave; 250 &euro;.", 'yproject' ); ?>
 			<?php _e( "Votre investissement sera donc valid&eacute; en deux temps :", 'yproject' ); ?>
@@ -50,7 +50,29 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contrac
 					<div><?php echo $page_controler->get_second_contract_amount(); ?> &euro;</div>
 				</div>
 			</div>
-			<div class="contract-preview-tabs investment-with-card-wallet hidden">
+			<div class="contract-preview-content">
+				<div>
+					<?php echo $page_controler->get_current_investment_contract_preview(); ?>
+				</div>
+				<div class="hidden">
+					<?php echo $page_controler->get_current_investment_contract_preview( FALSE ); ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
+	
+	<?php if ( $page_controler->needs_two_contracts( TRUE ) ): ?>
+	<div id="two-contracts-preview-with-wallet" class="two-contracts-preview hidden">
+		<div class="align-justify">
+			<?php _e( "Conform&eacute;ment &agrave; la r&eacute;glementation, votre niveau d'authentification actuel vous permet d'investir jusqu'&agrave; 250 &euro;.", 'yproject' ); ?>
+			<?php _e( "Votre investissement sera donc valid&eacute; en deux temps :", 'yproject' ); ?>
+			<?php _e( "un premier d&eacute;bit imm&eacute;diat de", 'yproject' ); ?> <?php echo $page_controler->get_first_contract_amount( TRUE ); ?> &euro;,
+			<?php _e( "et un second d&eacute;bit du montant restant apr&egrave;s validation de vos pi&egrave;ces justificatives.", 'yproject' ); ?>
+		</div>
+		
+		<div class="contract-preview-with-tabs">
+			<div class="contract-preview-tabs hidden">
 				<div class="selected">
 					<div><?php echo $page_controler->get_first_contract_amount( TRUE ); ?> &euro;</div>
 				</div><div>
@@ -59,10 +81,10 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contrac
 			</div>
 			<div class="contract-preview-content">
 				<div>
-					<?php echo $page_controler->get_current_investment_contract_preview(); ?>
+					<?php echo $page_controler->get_current_investment_contract_preview( TRUE, TRUE); ?>
 				</div>
 				<div class="hidden">
-					<?php echo $page_controler->get_current_investment_contract_preview( FALSE ); ?>
+					<?php echo $page_controler->get_current_investment_contract_preview( FALSE, TRUE ); ?>
 				</div>
 			</div>
 		</div>
