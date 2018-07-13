@@ -553,6 +553,33 @@ nav#main > div#menu > a.btn-user.active > img {
 nav#main > div#menu > a.btn-user.active.connected > img {
 	margin-top: 13px;
 }
+nav#main > div#menu > a.btn-user.connected.needs-authentication:after, #submenu-user li a.needs-authentication:after, nav ul.nav-menu li a.needs-authentication:after {
+	content: "!";
+	font-size: 17px;
+	background: #ea4f51;
+	color: #FFF;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #FFF;
+	border-radius: 50%;
+	text-align: center;
+}
+nav#main > div#menu > a.btn-user.connected.needs-authentication.active:after, nav ul.nav-menu li.selected a.needs-authentication:after {
+	display: none;
+}
+nav#main > div#menu > a.btn-user.connected.needs-authentication:after {
+	position: absolute;
+	top: 2px;
+	margin-left: -15px;
+	padding-left: 3px;
+	height: 23px;
+	line-height: 23px;
+}
+#submenu-user li a.needs-authentication:after, nav ul.nav-menu li a.needs-authentication:after {
+	display: inline-block;
+	margin-left: 5px;
+}
 
 #submenu-user {
 	position: absolute;

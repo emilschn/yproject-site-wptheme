@@ -14,6 +14,10 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	 */
 	private $current_campaign_organization;
 	/**
+	 * @var WDGUserInvestments
+	 */
+	private $current_user_investments;
+	/**
 	 * @var WDGInvestment
 	 */
 	private $current_investment;
@@ -36,6 +40,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 		WDGRoutes::redirect_invest_if_not_logged_in();
 		WDGRoutes::redirect_invest_if_project_not_investable();
 		
+		$this->init_current_user_investments();
 		$this->init_current_investment();
 		$this->init_current_step();
 		$this->init_current_mean_of_payment();
@@ -58,6 +63,18 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 			$this->current_campaign_organization = new WDGOrganization( $campaign_organization->wpref, $campaign_organization );
 		}
 		return $this->current_campaign_organization->get_name();
+	}
+	
+/******************************************************************************/
+// CURRENT USER
+/******************************************************************************/
+	private function init_current_user_investments() {
+		$WDGUser_current = WDGUser::current();
+		$this->current_user_investments = new WDGUserInvestments( $WDGUser_current );
+	}
+	
+	public function get_current_user_investments() {
+		return $this->current_user_investments;
 	}
 	
 /******************************************************************************/
@@ -120,6 +137,20 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	public function is_user_lemonway_registered() {
 		$WDGUser_current = WDGUser::current();
 		return $WDGUser_current->is_lemonway_registered();
+	}
+	
+	/**
+	 * On ne peut utiliser la carte que si on n'a pas dépassé les valeurs limites sur une période imposées par LW
+	 * @return boolean
+	 */
+	public function can_use_card() {
+		$buffer = TRUE;
+		
+		if ( $this->current_user_investments->can_invest_nb() != TRUE ) {
+			$buffer = FALSE;
+		}
+		
+		return $buffer;
 	}
 	
 	public function init_can_use_wallet() {
