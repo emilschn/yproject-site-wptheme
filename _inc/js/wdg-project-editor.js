@@ -1,8 +1,8 @@
 jQuery(document).ready( function($) {
     ProjectEditor.init();
 });
-
-
+var intervalID = null;
+var partIsEditing = null;
 var ProjectEditor = (function($) {
 	return {
 		elements: [],
@@ -165,7 +165,23 @@ var ProjectEditor = (function($) {
 					case "added_value":
 					case "economic_model":
 					case "implementation":
-						ProjectEditor.showEditableZone(sProperty);
+						$.ajax({
+							'type' : "POST",
+							'url' : ajax_object.ajax_url,
+							'data': {
+								'action':	'edit_project',
+								'property':	sProperty,
+								'id_campaign':  $("#content").data("campaignid")
+							}
+		            	}).done(function(result) {
+		            		if ( result == 'error') {
+		            			alert( "Quelqu'un édite déjà cette partie du projet." )
+		            		} else {
+		            			ProjectEditor.showEditableZone(result);
+		            			partIsEditing = sProperty;
+		            			ProjectEditor.majUser();
+		            		}
+						});
 						break;
 					case "picture-head":
 						ProjectEditor.createfile(sProperty);
@@ -179,7 +195,28 @@ var ProjectEditor = (function($) {
 				}
 			});
 		},
-		
+
+		//Mise à jour les données de l'édition en cours
+		majUser: function() {
+			if ( intervalID ) {
+				clearInterval(intervalID);
+				intervalID = null;
+			} else {
+				intervalID = setInterval( function() { 
+					$.ajax({
+						'type' : "POST",
+						'url' : ajax_object.ajax_url,
+						'data': {
+							'action':	'update_user_editor',
+							'property':	partIsEditing,		
+							'id_campaign':  $("#content").data("campaignid")
+						}
+					});
+			}, 120000 );
+			}
+			
+		},
+
 		//Affiche un cadre sur certaines zones éditables
 		initEditable: function(property) {
 			switch (property) {
@@ -629,6 +666,7 @@ var ProjectEditor = (function($) {
 		    
 			$("#wdg-validate-"+property).addClass("wait-button");
 			$("#wdg-validate-"+property).unbind("click");
+			ProjectEditor.majUser();
 			$.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,
