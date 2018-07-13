@@ -60,6 +60,13 @@ var WDGInvestPageFunctions = (function($) {
 					var sMeanPayment = 'mean-payment-';
 					$( '#meanofpayment' ).val( $( this ).attr( 'id' ).substr( sMeanPayment.length ) );
 					if ( $( this ).attr( 'id' ).indexOf( 'card' ) > -1 && $( '#two-contracts-preview' ).length > 0 ) {
+						if ( $( this ).attr( 'id' ).indexOf( 'wallet' ) > -1 ) {
+							$( '.contract-preview-tabs.investment-with-card-wallet' ).show();
+							$( '.contract-preview-tabs.investment-with-card' ).hide();
+						} else {
+							$( '.contract-preview-tabs.investment-with-card' ).show();
+							$( '.contract-preview-tabs.investment-with-card-wallet' ).hide();
+						}
 						$( '#two-contracts-preview' ).show();
 					} else {
 						$( '#contract-preview' ).show();
