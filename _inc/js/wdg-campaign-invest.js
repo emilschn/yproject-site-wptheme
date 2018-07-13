@@ -60,14 +60,11 @@ var WDGInvestPageFunctions = (function($) {
 					var sMeanPayment = 'mean-payment-';
 					$( '#meanofpayment' ).val( $( this ).attr( 'id' ).substr( sMeanPayment.length ) );
 					if ( $( this ).attr( 'id' ).indexOf( 'card' ) > -1 && $( '#two-contracts-preview' ).length > 0 ) {
-						if ( $( this ).attr( 'id' ).indexOf( 'wallet' ) > -1 ) {
-							$( '.contract-preview-tabs.investment-with-card-wallet' ).show();
-							$( '.contract-preview-tabs.investment-with-card' ).hide();
+						if ( $( this ).attr( 'id' ).indexOf( 'wallet' ) > -1 && $( '#two-contracts-preview-with-wallet' ).length > 0 ) {
+							$( '#two-contracts-preview-with-wallet' ).show();
 						} else {
-							$( '.contract-preview-tabs.investment-with-card' ).show();
-							$( '.contract-preview-tabs.investment-with-card-wallet' ).hide();
+							$( '#two-contracts-preview' ).show();
 						}
-						$( '#two-contracts-preview' ).show();
 					} else {
 						$( '#contract-preview' ).show();
 					}
@@ -79,20 +76,20 @@ var WDGInvestPageFunctions = (function($) {
 					$( '.mean-payment' ).show();
 					$( this ).hide();
 					$( '#contract-preview' ).hide();
-					$( '#two-contracts-preview' ).hide();
+					$( '.two-contracts-preview' ).hide();
 					$( '#contract-buttons' ).hide();
 				} );
 				
-				$( 'div#two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).click( function() {
+				$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).click( function() {
 					if ( !$( this ).hasClass( 'selected' ) ) {
-						$( 'div#two-contracts-preview .contract-preview-with-tabs .contract-preview-content > div' ).each( function() {
+						$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-content > div' ).each( function() {
 							if ( $( this ).is( ':visible' ) ) {
 								$( this ).hide();
 							} else {
 								$( this ).show();
 							}
 						} );
-						$( 'div#two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).each( function() {
+						$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).each( function() {
 							if ( $( this ).hasClass( 'selected' ) ) {
 								$( this ).removeClass( 'selected' );
 							} else {

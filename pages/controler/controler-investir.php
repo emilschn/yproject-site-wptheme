@@ -17,6 +17,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	 */
 	private $current_investment;
 	
+	private $needs_two_contracts;
 	private $amount_first_contract;
 	private $amount_second_contract;
 	private $can_use_wallet;
@@ -103,27 +104,41 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		return $this->current_investment;
 	}
 	
-	public function needs_two_contracts() {
-		if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
-			$WDGInvestorEntity = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
-		} else {
-			$WDGInvestorEntity = WDGUser::current();
+	public function needs_two_contracts( $with_wallet = FALSE ) {
+		if ( !isset( $this->needs_two_contracts ) ) {
+			$this->needs_two_contracts = array();
 		}
-		$amount_part = $_SESSION[ 'redirect_current_amount_part' ];
-		$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGInvestorEntity );
-		return ( $amount_part > $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert() );
+		if ( !isset( $this->needs_two_contracts[ $with_wallet ] ) ) {
+			$amount_wallet = 0;
+			if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
+				$WDGInvestorEntity = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
+				if ( $with_wallet ) {
+					$amount_wallet = $WDGInvestorEntity->get_available_rois_amount();
+				}
+				
+			} else {
+				$WDGInvestorEntity = WDGUser::current();
+				if ( $with_wallet ) {
+					$amount_wallet = $WDGInvestorEntity->get_lemonway_wallet_amount();
+				}
+			}
+			$amount_part = $_SESSION[ 'redirect_current_amount_part' ];
+			$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGInvestorEntity );
+			$this->needs_two_contracts[ $with_wallet ] = ( $amount_part > $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert() + $amount_wallet );
+		}
+		return $this->needs_two_contracts[ $with_wallet ];
 	}
 	
-	public function get_current_investment_contract_preview( $first_contract = TRUE ) {
+	public function get_current_investment_contract_preview( $first_contract = TRUE, $with_wallet = FALSE ) {
 		$current_user = wp_get_current_user();
 		$campaign = $this->current_campaign;
 		$part_value = $campaign->part_value();
 		$amount = $_SESSION[ 'redirect_current_amount_part' ];
-		if ( $this->needs_two_contracts() ) {
+		if ( $this->needs_two_contracts( $with_wallet ) ) {
 			if ( $first_contract ) {
-				$amount = $this->get_first_contract_amount();
+				$amount = $this->get_first_contract_amount( $with_wallet );
 			} else {
-				$amount = $this->get_second_contract_amount();
+				$amount = $this->get_second_contract_amount( $with_wallet );
 			}
 		}
         $amount_part = ( $amount === FALSE ) ? 0 : $amount / $part_value;
