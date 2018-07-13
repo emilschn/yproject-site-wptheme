@@ -145,6 +145,9 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	
 	public function get_first_contract_amount( $with_wallet = FALSE ) {
 		if ( !isset( $this->amount_first_contract ) ) {
+			$this->amount_first_contract = array();
+		}
+		if ( !isset( $this->amount_first_contract[ $with_wallet ] ) ) {
 			$amount_wallet = 0;
 			if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
 				$WDGInvestorEntity = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
@@ -159,17 +162,20 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 				}
 			}
 			$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGInvestorEntity );
-			$this->amount_first_contract = $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert() + $amount_wallet;
+			$this->amount_first_contract[ $with_wallet ] = $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert() + $amount_wallet;
 		}
-		return $this->amount_first_contract;
+		return $this->amount_first_contract[ $with_wallet ];
 	}
 	
 	public function get_second_contract_amount( $with_wallet = FALSE ) {
 		if ( !isset( $this->amount_second_contract ) ) {
-			$amount = $_SESSION[ 'redirect_current_amount_part' ];
-			$this->amount_second_contract = $amount - $this->get_first_contract_amount( $with_wallet );
+			$this->amount_first_contract = array();
 		}
-		return $this->amount_second_contract;
+		if ( !isset( $this->amount_second_contract[ $with_wallet ] ) ) {
+			$amount = $_SESSION[ 'redirect_current_amount_part' ];
+			$this->amount_second_contract[ $with_wallet ] = $amount - $this->get_first_contract_amount( $with_wallet );
+		}
+		return $this->amount_second_contract[ $with_wallet ];
 	}
 	
 /******************************************************************************/
