@@ -63,15 +63,15 @@ var WDGInvestPageFunctions = (function($) {
 						if ( $( this ).attr( 'id' ).indexOf( 'wallet' ) > -1 ) {
 							if ( $( '#two-contracts-preview-with-wallet' ).length > 0 ) {
 								$( '#two-contracts-preview-with-wallet' ).show();
-								$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).first().addClass( 'selected' );
-								$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-content > div' ).first().show();
+								$( '#two-contracts-preview-with-wallet .contract-preview-with-tabs .contract-preview-tabs div:first' ).addClass( 'selected' );
+								$( '#two-contracts-preview-with-wallet .contract-preview-with-tabs .contract-preview-content > div:first' ).show();
 							} else {
 								$( '#contract-preview' ).show();
 							}
 						} else {
 							$( '#two-contracts-preview' ).show();
-							$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).first().addClass( 'selected' );
-							$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-content > div' ).first().show();
+							$( '#two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div:first' ).addClass( 'selected' );
+							$( '#two-contracts-preview .contract-preview-with-tabs .contract-preview-content > div:first' ).show();
 						}
 					} else {
 						$( '#contract-preview' ).show();
