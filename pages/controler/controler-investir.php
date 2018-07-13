@@ -134,7 +134,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		$campaign = $this->current_campaign;
 		$part_value = $campaign->part_value();
 		$amount = $_SESSION[ 'redirect_current_amount_part' ];
-		if ( $first_contract != 'single' && $this->needs_two_contracts( $with_wallet ) ) {
+		if ( $first_contract !== 'single' && $this->needs_two_contracts( $with_wallet ) ) {
 			if ( $first_contract ) {
 				$amount = $this->get_first_contract_amount( $with_wallet );
 			} else {
