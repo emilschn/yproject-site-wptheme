@@ -145,6 +145,8 @@ class WDG_WordPress_Events {
 		$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
 		$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
 		$is_admin_page = ($post->post_name == 'liste-des-paiements');
+		
+		// Modification version jquery chargée
 		include_once( 'assets-version.php' );
 		
 		if ( !is_admin() ) {
@@ -152,28 +154,39 @@ class WDG_WordPress_Events {
 			wp_register_script('jquery', (dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.min.js'), false);
 			wp_enqueue_script('jquery');
 		}
-		wp_enqueue_script('jquery-ui-dialog');
-		wp_enqueue_script('jquery-ui-datepicker');
-		wp_enqueue_script('wdg-project-dashboard-i18n-fr', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/i18n/datepicker-fr.js', array('jquery', 'jquery-ui-datepicker'), ASSETS_VERSION);
 
-		wp_enqueue_style('jquery-ui-wdg',dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery-ui-wdg.css', null, false, 'all');
-
-		wp_deregister_style( 'font-awesome' );
-		wp_register_style('font-awesome', (dirname( get_bloginfo('stylesheet_url')).'/_inc/css/font-awesome.min.css'));
-		wp_enqueue_style('font-awesome');
-
+		// Script principal WDG
 		wp_enqueue_script( 'wdg-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/common.min.js', array('jquery'), ASSETS_VERSION);
 		
-		if ($is_admin_page) { wp_enqueue_script( 'wdg-admin-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-admin-dashboard.js', array('jquery'), ASSETS_VERSION); }
-		wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
-		wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
-	//	wp_enqueue_script( 'wdg-ux-helper', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-ux-helper.js', array('wdg-script'));
+		// Suppression script et style de easy digital downloads
 		wp_deregister_style( 'edd-styles' );
 		wp_deregister_script( 'edd-ajax' );
 		
-		wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.min.js', array('jquery'));
-		wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, 'all');
+		// Styles utiles dans les pages complexes (avec selection de date, popups, formulaires spécifiques etc.)
+		$pages_simple = array( 'connexion', 'inscription' );
+		if ( !in_array( $post->post_name, $pages_simple ) ) {
+			wp_enqueue_script('jquery-ui-dialog');
+			wp_enqueue_script('jquery-ui-datepicker');
+			wp_enqueue_script('wdg-project-dashboard-i18n-fr', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/i18n/datepicker-fr.js', array('jquery', 'jquery-ui-datepicker'), ASSETS_VERSION);
 
+			wp_enqueue_style('jquery-ui-wdg',dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery-ui-wdg.css', null, false, 'all');
+
+			wp_deregister_style( 'font-awesome' );
+			wp_register_style('font-awesome', (dirname( get_bloginfo('stylesheet_url')).'/_inc/css/font-awesome.min.css'));
+			wp_enqueue_style('font-awesome');
+
+			wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
+
+			wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.min.js', array('jquery'));
+			wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, 'all');
+		}
+
+		// Chargement de la lib de graphs (uniquement en liaison avec les projets)
+		if ( $is_campaign || $is_campaign_page || $is_dashboard_page ) {
+			wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
+		}
+		
+		// Styles et scripts liés aux projets
 		if ($is_campaign_page) {
 			if ($is_campaign && !$is_dashboard_page) {
 				wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.min.css', null, ASSETS_VERSION, 'all');
@@ -182,12 +195,19 @@ class WDG_WordPress_Events {
 			if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION); }
 		}
 		
+		// Styles et scripts liés aux pages d'investissements
 		$pages_investment = array( 'investir', 'moyen-de-paiement', 'paiement-effectue', 'paiement-signature', 'paiement-partager', 'terminer-preinvestissement' );
 		if ( in_array( $post->post_name, $pages_investment ) ) {
 			wp_enqueue_style( 'invest-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/invest.min.css', null, ASSETS_VERSION, 'all' );
 			wp_enqueue_script( 'wdg-project-invest', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign-invest.js', array('jquery'), ASSETS_VERSION );
 		}
+		
+		// Script lié aux pages d'admin
+		if ($is_admin_page) {
+			wp_enqueue_script( 'wdg-admin-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-admin-dashboard.js', array('jquery'), ASSETS_VERSION);
+		}
 
+		// Ajout variable JS avec l'url de la page utilisée pour les requêtes Ajax
 		wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
 	}
 	
