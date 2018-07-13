@@ -34,6 +34,7 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		WDGRoutes::redirect_invest_if_not_logged_in();
 		WDGRoutes::redirect_invest_if_project_not_investable();
 		
+		$this->init_mean_of_payment();
 		$this->init_current_investment();
 		$this->init_maximum_investable_amount();
 		$this->init_identitydocs_form();
@@ -63,6 +64,13 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 /******************************************************************************/
 // CURRENT INVESTMENT
 /******************************************************************************/
+	private function init_mean_of_payment() {
+		$this->current_meanofpayment = filter_input( INPUT_GET, 'meanofpayment' );
+		if ( empty( $this->current_meanofpayment ) ) {
+			$this->current_meanofpayment = WDGInvestment::$meanofpayment_card;
+		}
+	}
+	
 	private function init_current_investment() {
 		$this->current_investment = WDGInvestment::current();
 	}
@@ -76,9 +84,21 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 	}
 	
 	private function init_maximum_investable_amount() {
-		$WDGCurrent_User = WDGUser::current();
-		$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGCurrent_User );
-		$this->maximum_investable_amount = $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert();
+		$amount_wallet = 0;
+		if ( $this->current_investment->get_session_user_type() != 'user' ) {
+			$WDGInvestorEntity = new WDGOrganization( $this->current_investment->get_session_user_type() );
+			if ( $this->current_meanofpayment == WDGInvestment::$meanofpayment_cardwallet ) {
+				$amount_wallet = $WDGInvestorEntity->get_available_rois_amount();
+			}
+
+		} else {
+			$WDGInvestorEntity = WDGUser::current();
+			if ( $this->current_meanofpayment == WDGInvestment::$meanofpayment_cardwallet ) {
+				$amount_wallet = $WDGInvestorEntity->get_lemonway_wallet_amount();
+			}
+		}
+		$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGInvestorEntity );
+		$this->maximum_investable_amount = $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert() + $amount_wallet;
 	}
 	
 	public function get_maximum_investable_amount() {
@@ -134,10 +154,6 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 // CURRENT MEAN OF PAYMENT RETURN
 /******************************************************************************/
 	private function init_payment_result() {
-		$this->current_meanofpayment = filter_input( INPUT_GET, 'meanofpayment' );
-		if ( empty( $this->current_meanofpayment ) ) {
-			$this->current_meanofpayment = WDGInvestment::$meanofpayment_card;
-		}
 		$payment_return = $this->current_investment->payment_return( $this->current_meanofpayment );
 		if ( empty( $payment_return ) ) {
 			$payment_return = 'error-contact';
