@@ -27,6 +27,9 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		
 		define( 'SKIP_BASIC_HTML', TRUE );
 		
+		$core = ATCF_CrowdFunding::instance();
+		$core->include_form( 'user-identitydocs' );
+		
 		$this->init_current_campaign();
 		WDGRoutes::redirect_invest_if_not_logged_in();
 		WDGRoutes::redirect_invest_if_project_not_investable();
