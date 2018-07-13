@@ -178,23 +178,23 @@ div#content div#contract-preview {
 div#content #field-confirm-subscription label {
 	font-weight: normal;
 }
-div#two-contracts-preview .align-justify {
+div.two-contracts-preview .align-justify {
 	margin: 20px auto;
 }
-div#two-contracts-preview .contract-preview-with-tabs {
+div.two-contracts-preview .contract-preview-with-tabs {
 	margin-top: 20px;
 	clear: both;
 	border: 1px solid #E1E3E2;
 }
-div#two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs {
+div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs {
 	border-bottom: 1px solid #E1E3E2;
 }
-div#two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div {
+div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div {
 	display: inline-block;
 	width: 50%;
     cursor: pointer;
 }
-div#two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div div {
+div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div div {
 	width: calc( 100% - 40px );
 	height: 15px;
 	line-height: 15px;
@@ -202,14 +202,14 @@ div#two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div
 	padding: 10px;
 	background: #f4f2f2;
 }
-div#two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div.selected div {
+div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div.selected div {
 	width: calc( 100% - 20px );
 	height: 35px;
 	line-height: 35px;
 	margin: 0px;
 	background: #E1E3E2;
 }
-div#two-contracts-preview .contract-preview-with-tabs .contract-preview-content {
+div.two-contracts-preview .contract-preview-with-tabs .contract-preview-content {
 	height: 400px;
 	overflow: scroll;
 	padding: 10px;
