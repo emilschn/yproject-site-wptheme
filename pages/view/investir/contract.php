@@ -30,7 +30,7 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contrac
 	</div>
 	
 	<div id="contract-preview" class="hidden">
-		<?php echo $page_controler->get_current_investment_contract_preview(); ?>
+		<?php echo $page_controler->get_current_investment_contract_preview( 'single' ); ?>
 	</div>
 	
 	<?php if ( $page_controler->needs_two_contracts() ): ?>
