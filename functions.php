@@ -499,6 +499,12 @@ function yproject_save_edit_project() {
 	
 	ypcf_debug_log( 'yproject_save_edit_project > property ('.$current_lang.') => ' . $_POST['property'], TRUE );
 	ypcf_debug_log( 'yproject_save_edit_project > value ('.$current_lang.') => ' . $_POST['value'], TRUE );
+
+	//Supprime la réservation de l'édition en cours
+	$campaign_id = $campaign_id = filter_input( INPUT_POST, 'id_campaign' );
+	$property = filter_input( INPUT_POST, 'property' );
+	$meta_key = $property.'_add_value_reservation';
+	delete_post_meta( $campaign_id, $meta_key );
 	
 	switch ($_POST['property']) {
 		case "title":
