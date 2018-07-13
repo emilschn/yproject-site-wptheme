@@ -143,23 +143,31 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		return fillPDFHTMLDefaultContent( $current_user, $campaign, $invest_data, $organization, true );
 	}
 	
-	public function get_first_contract_amount() {
+	public function get_first_contract_amount( $with_wallet = FALSE ) {
 		if ( !isset( $this->amount_first_contract ) ) {
+			$amount_wallet = 0;
 			if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
 				$WDGInvestorEntity = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
+				if ( $with_wallet ) {
+					$amount_wallet = $WDGInvestorEntity->get_available_rois_amount();
+				}
+				
 			} else {
 				$WDGInvestorEntity = WDGUser::current();
+				if ( $with_wallet ) {
+					$amount_wallet = $WDGInvestorEntity->get_lemonway_wallet_amount();
+				}
 			}
 			$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGInvestorEntity );
-			$this->amount_first_contract = $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert();
+			$this->amount_first_contract = $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert() + $amount_wallet;
 		}
 		return $this->amount_first_contract;
 	}
 	
-	public function get_second_contract_amount() {
+	public function get_second_contract_amount( $with_wallet = FALSE ) {
 		if ( !isset( $this->amount_second_contract ) ) {
 			$amount = $_SESSION[ 'redirect_current_amount_part' ];
-			$this->amount_second_contract = $amount - $this->get_first_contract_amount();
+			$this->amount_second_contract = $amount - $this->get_first_contract_amount( $with_wallet );
 		}
 		return $this->amount_second_contract;
 	}

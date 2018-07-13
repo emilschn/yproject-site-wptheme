@@ -43,11 +43,18 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contrac
 		</div>
 		
 		<div class="contract-preview-with-tabs">
-			<div class="contract-preview-tabs">
+			<div class="contract-preview-tabs investment-with-card">
 				<div class="selected">
 					<div><?php echo $page_controler->get_first_contract_amount(); ?> &euro;</div>
 				</div><div>
 					<div><?php echo $page_controler->get_second_contract_amount(); ?> &euro;</div>
+				</div>
+			</div>
+			<div class="contract-preview-tabs investment-with-card-wallet hidden">
+				<div class="selected">
+					<div><?php echo $page_controler->get_first_contract_amount_with_wallet( TRUE ); ?> &euro;</div>
+				</div><div>
+					<div><?php echo $page_controler->get_second_contract_amount_with_wallet( TRUE ); ?> &euro;</div>
 				</div>
 			</div>
 			<div class="contract-preview-content">
