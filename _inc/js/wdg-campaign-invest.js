@@ -13,41 +13,33 @@ var WDGInvestPageFunctions = (function($) {
 					WDGInvestPageFunctions.checkInvestInput();
 				} );
 			}
+
+			// Si erreur le formulaire se met à jour en prenant en compte les précédentes modifications
+			var userType = $( 'form input#user-type-select' ).val();
+			WDGInvestPageFunctions.userTypeSelect( userType );
+
+			var idOrga = $( 'form select#select-orga-id' ).val();
+			if ( idOrga ) {
+				$( 'form #fieldgroup-user-info' ).slideDown( 200 );
+				$( 'form #fieldgroup-orga-info' ).slideDown( 200 );
+				$( 'form #fieldgroup-to-display' ).slideDown( 200 );
+				if ( idOrga == 'new-orga' ) {
+					$( 'form #fieldgroup-orga-info-new' ).slideDown( 200 );
+				} else {
+					$( 'form #fieldgroup-orga-info-new' ).hide();
+				}
+				WDGInvestPageFunctions.updateOrgaFields( idOrga );
+			}
+
 			
 			// Changement de type d'investisseur
 			if ( $( 'form input#user-type-user' ).length > 0 ) {
 				$( 'form input#user-type-user, form input#user-type-orga' ).click( function() {
-					if ( $( this ).val() == 'user' ) {
-						$( 'form #fieldgroup-orga-info' ).hide();
-						$( 'form #fieldgroup-orga-info-new' ).hide();
-						$( 'form #fieldgroup-user-type-orga' ).hide();
-						$( 'form #fieldgroup-user-info' ).slideDown( 200 );
-						$( 'form #fieldgroup-to-display' ).slideDown( 200 );
-
-					} else if ( $( this ).val() == 'orga' ) {
-						$( 'form #fieldgroup-user-type-orga' ).slideDown( 200 );
-						$( 'form #fieldgroup-user-info' ).hide();
-						$( 'form #fieldgroup-to-display' ).hide();
-					}
+					WDGInvestPageFunctions.userTypeSelect( $( this ).val() );
 				} );
 				// Changement choix d'organisation
 				$( 'form select#select-orga-id' ).change( function() {
-					if ( $(this).val() === '' ) {
-						$( 'form #fieldgroup-user-info' ).hide();
-						$( 'form #fieldgroup-orga-info' ).hide();
-						$( 'form #fieldgroup-to-display' ).hide();
-						$( 'form #fieldgroup-orga-info-new' ).hide();
-					} else {
-						$( 'form #fieldgroup-user-info' ).slideDown( 200 );
-						$( 'form #fieldgroup-orga-info' ).slideDown( 200 );
-						$( 'form #fieldgroup-to-display' ).slideDown( 200 );
-						if ( $(this).val() === 'new-orga' ) {
-							$( 'form #fieldgroup-orga-info-new' ).slideDown( 200 );
-						} else {
-							$( 'form #fieldgroup-orga-info-new' ).hide();
-						}
-						WDGInvestPageFunctions.updateOrgaFields( $(this).val() );
-					}
+					WDGInvestPageFunctions.idOrgaSelect( $( this ).val() );
 				} );
 			}
 			
@@ -67,6 +59,42 @@ var WDGInvestPageFunctions = (function($) {
 				$( $( '#would-invest-more-number-no, #would-invest-more-number-maybe' ) ).change( function() {
 					$( '#field-would-invest-number-per-year-with-warranty' ).hide( 100 );
 				} );
+			}
+		},
+
+		userTypeSelect: function( userType ) {
+			if ( userType == 'user' ) {
+				$( 'form #fieldgroup-orga-info' ).hide();
+				$( 'form #fieldgroup-orga-info-new' ).hide();
+				$( 'form #fieldgroup-user-type-orga' ).hide();
+				$( 'form #fieldgroup-user-info' ).slideDown( 200 );
+				$( 'form #fieldgroup-to-display' ).slideDown( 200 );
+				$( '#user-type-user' ).prop("checked", true);
+			} else if ( userType == 'orga' ) {
+				$( 'form #fieldgroup-user-type-orga' ).slideDown( 200 );
+				$( 'form #fieldgroup-user-info' ).hide();
+				$( 'form #fieldgroup-to-display' ).hide();
+				$( '#user-type-orga' ).prop("checked", true);
+			}
+
+		},
+
+		idOrgaSelect: function( idOrga ) {
+			if ( idOrga == '' ) {
+				$( 'form #fieldgroup-user-info' ).hide();
+				$( 'form #fieldgroup-orga-info' ).hide();
+				$( 'form #fieldgroup-to-display' ).hide();
+				$( 'form #fieldgroup-orga-info-new' ).hide();
+			} else {
+				$( 'form #fieldgroup-user-info' ).slideDown( 200 );
+				$( 'form #fieldgroup-orga-info' ).slideDown( 200 );
+				$( 'form #fieldgroup-to-display' ).slideDown( 200 );
+				if ( idOrga == 'new-orga' ) {
+					$( 'form #fieldgroup-orga-info-new' ).slideDown( 200 );
+				} else {
+					$( 'form #fieldgroup-orga-info-new' ).hide();
+				}
+				WDGInvestPageFunctions.updateOrgaFields( idOrga );
 			}
 		},
 		
