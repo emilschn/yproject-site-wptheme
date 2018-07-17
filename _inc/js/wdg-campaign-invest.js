@@ -20,18 +20,9 @@ var WDGInvestPageFunctions = (function($) {
 
 			var idOrga = $( 'form select#select-orga-id' ).val();
 			if ( idOrga ) {
-				$( 'form #fieldgroup-user-info' ).slideDown( 200 );
-				$( 'form #fieldgroup-orga-info' ).slideDown( 200 );
-				$( 'form #fieldgroup-to-display' ).slideDown( 200 );
-				if ( idOrga == 'new-orga' ) {
-					$( 'form #fieldgroup-orga-info-new' ).slideDown( 200 );
-				} else {
-					$( 'form #fieldgroup-orga-info-new' ).hide();
-				}
-				WDGInvestPageFunctions.updateOrgaFields( idOrga );
+				WDGInvestPageFunctions.idOrgaSelect( idOrga );
 			}
 
-			
 			// Changement de type d'investisseur
 			if ( $( 'form input#user-type-user' ).length > 0 ) {
 				$( 'form input#user-type-user, form input#user-type-orga' ).click( function() {
