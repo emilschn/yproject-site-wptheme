@@ -21,7 +21,7 @@
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=<?php echo $version; ?>" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		
-		<?php if (!is_user_logged_in()): ?>
+		<?php if ( !is_user_logged_in() && $post->post_name == 'inscription' ): ?>
 		<script src='https://www.google.com/recaptcha/api.js'></script>
 		<?php endif; ?>
 
