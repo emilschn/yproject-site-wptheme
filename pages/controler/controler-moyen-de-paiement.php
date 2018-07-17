@@ -230,7 +230,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 					$this->display_error = __( "Erreur de connexion &agrave; Lemon Way.", 'yproject' );
 					$investment_error = $this->current_investment->get_error();
 					if ( !empty( $investment_error ) ) {
-						$this->display_error .= " (" .$investment_error['E']['Code']. " - " .$investment_error['E']['Msg']. ")";
+						$this->display_error .= " (" .$investment_error[0]['E']['Code']. " - " .$investment_error[0]['E']['Msg']. ")";
 					}
 				}
 				break;
