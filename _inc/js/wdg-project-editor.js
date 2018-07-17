@@ -1,12 +1,12 @@
 jQuery(document).ready( function($) {
     ProjectEditor.init();
 });
-var intervalID = null;
-var partIsEditing = null;
+
 var ProjectEditor = (function($) {
 	return {
 		elements: [],
 		isInit: false,
+		intervalID: null,
 		
 		//Initialisation : création du bouton en haut de page permettant de switcher d'un mode à l'autre
 		init: function() {
@@ -142,6 +142,27 @@ var ProjectEditor = (function($) {
 		hideEditButton: function(property) {
 			$("#wdg-edit-"+property).hide();
 		},
+
+		requestLockProject: function(sProperty) {
+			$.ajax({
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': {
+					'action':	'try_lock_project_edition',
+					'property':	sProperty,
+					'id_campaign':  $("#content").data("campaignid")
+				}
+		    }).done(function(result) {
+				etat = JSON.parse(result);
+		    	if ( etat.response == 'error') {
+		     		alert( etat.val + " édite déjà cette partie du projet." );
+		     		WDGProjectPageFunctions.isEditing = "";
+		        } else {
+		            ProjectEditor.showEditableZone(etat.val);
+		            ProjectEditor.keepUserLockProject();
+		        }
+			});
+		},
 		
 		//Définit les événements de clicks sur les différents boutons d'édition
 		initClick: function() {
@@ -165,23 +186,7 @@ var ProjectEditor = (function($) {
 					case "added_value":
 					case "economic_model":
 					case "implementation":
-						$.ajax({
-							'type' : "POST",
-							'url' : ajax_object.ajax_url,
-							'data': {
-								'action':	'edit_project',
-								'property':	sProperty,
-								'id_campaign':  $("#content").data("campaignid")
-							}
-		            	}).done(function(result) {
-		            		if ( result == 'error') {
-		            			alert( "Quelqu'un édite déjà cette partie du projet." )
-		            		} else {
-		            			ProjectEditor.showEditableZone(result);
-		            			partIsEditing = sProperty;
-		            			ProjectEditor.majUser();
-		            		}
-						});
+						ProjectEditor.requestLockProject(sProperty);
 						break;
 					case "picture-head":
 						ProjectEditor.createfile(sProperty);
@@ -197,24 +202,27 @@ var ProjectEditor = (function($) {
 		},
 
 		//Mise à jour les données de l'édition en cours
-		majUser: function() {
-			if ( intervalID ) {
-				clearInterval(intervalID);
-				intervalID = null;
+		keepUserLockProject: function() {
+			if ( ProjectEditor.intervalID ) {
+				clearInterval(ProjectEditor.intervalID);
+				ProjectEditor.intervalID = null;
 			} else {
-				intervalID = setInterval( function() { 
+				ProjectEditor.intervalID = setInterval( function() { 
 					$.ajax({
 						'type' : "POST",
 						'url' : ajax_object.ajax_url,
 						'data': {
-							'action':	'update_user_editor',
-							'property':	partIsEditing,		
+							'action':	'keep_lock_project_edition',
+							'property':	WDGProjectPageFunctions.isEditing,		
 							'id_campaign':  $("#content").data("campaignid")
 						}
-					});
-			}, 120000 );
+					}).done(function(result) {
+				    	if ( result == 'error') {
+				     		alert( "Une inactivité prolongé a entraîné la perte de votre session. Une autre personne édite ce projet pour l'instant, revenez plus tard." );
+				        } 
+				    });
+			}, 120000); // La mise à jour se fait toutes les 2 minutes.
 			}
-			
 		},
 
 		//Affiche un cadre sur certaines zones éditables
@@ -666,7 +674,6 @@ var ProjectEditor = (function($) {
 		    
 			$("#wdg-validate-"+property).addClass("wait-button");
 			$("#wdg-validate-"+property).unbind("click");
-			ProjectEditor.majUser();
 			$.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,
@@ -707,6 +714,7 @@ var ProjectEditor = (function($) {
 					$("#wdg-validate-"+property).remove();
 					break;
 			}
+			ProjectEditor.keepUserLockProject();
 			WDGProjectPageFunctions.initClick();
 			WDGProjectPageFunctions.isEditing = "";
 		},
