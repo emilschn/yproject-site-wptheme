@@ -1497,6 +1497,9 @@ WDGCampaignDashboard.prototype.manageTeam = function(action, data, campaign_id){
 					'new_team_member' : data
 				}
 			}).done(function(result){
+				if ( result == 'FALSE' ) {
+					alert( "Cet utilisateur n'a pas de compte sur la plateforme." );
+				}
 				//Nettoie le champ de texte d'ajout
 				$("#new_team_member_string").prop('disabled', false);
 				$("#new_team_member_string").prop('placeholder',tmpPlaceHolder);
