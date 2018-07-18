@@ -153,12 +153,12 @@ var ProjectEditor = (function($) {
 					'id_campaign':  $("#content").data("campaignid")
 				}
 		    }).done(function(result) {
-				etat = JSON.parse(result);
-		    	if ( etat.response == 'error') {
-		     		alert( etat.val + " édite déjà cette partie du projet." );
+				result = JSON.parse(result);
+		    	if ( result.response == 'error') {
+		     		alert( result.values + " édite déjà cette partie du projet." );
 		     		WDGProjectPageFunctions.isEditing = "";
 		        } else {
-		            ProjectEditor.showEditableZone(etat.val);
+		            ProjectEditor.showEditableZone(result.values);
 		            ProjectEditor.keepUserLockProject();
 		        }
 			});
@@ -201,7 +201,7 @@ var ProjectEditor = (function($) {
 			});
 		},
 
-		//Mise à jour les données de l'édition en cours
+		//Mise à jour des données de l'édition en cours
 		keepUserLockProject: function() {
 			if ( ProjectEditor.intervalID ) {
 				clearInterval(ProjectEditor.intervalID);
@@ -216,9 +216,16 @@ var ProjectEditor = (function($) {
 							'property':	WDGProjectPageFunctions.isEditing,		
 							'id_campaign':  $("#content").data("campaignid")
 						}
-					}).done(function(result) {
-				    	if ( result == 'error') {
-				     		alert( "Une inactivité prolongé a entraîné la perte de votre session. Une autre personne édite ce projet pour l'instant, revenez plus tard." );
+					}).done(function(result) {					     	
+						result = JSON.parse(result);
+						if ( result.response == 'error') {
+						    alert( "Une inactivité prolongé a entraîné la perte de votre session. Une autre personne édite cette partie du projet actuellement, vos modifications seront donc perdues. Revenez plus tard." );
+							$(ProjectEditor.elements[result.values].elementId).show();
+							$(ProjectEditor.elements[result.values].contentId).hide();
+							ProjectEditor.showEditButton(result.values);
+							$("#wdg-validate-"+result.values).remove();
+							WDGProjectPageFunctions.initClick();
+							WDGProjectPageFunctions.isEditing = "";
 				        } 
 				    });
 			}, 120000); // La mise à jour se fait toutes les 2 minutes.
@@ -685,7 +692,19 @@ var ProjectEditor = (function($) {
 					'lang':		$("html").attr("lang").split("-").join("_")
 				}
 			}).done(function(result) {
-				ProjectEditor.validateInputDone(result);
+				result = JSON.parse(result);
+				if ( result.response == 'error') {
+				    alert( "Une inactivité prolongé a entraîné la perte de votre session. Une autre personne édite cette partie du projet actuellement, vos modifications seront donc perdues. Revenez plus tard." );
+					$(ProjectEditor.elements[result.values].elementId).show();
+					$(ProjectEditor.elements[result.values].contentId).hide();
+					ProjectEditor.showEditButton(result.values);
+					$("#wdg-validate-"+result.values).remove();
+					ProjectEditor.keepUserLockProject();
+					WDGProjectPageFunctions.initClick();
+					WDGProjectPageFunctions.isEditing = "";
+				} else {
+					ProjectEditor.validateInputDone(result.values);
+				}
 			});
 		},
 		

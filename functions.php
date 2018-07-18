@@ -501,6 +501,12 @@ function yproject_save_edit_project() {
 	ypcf_debug_log( 'yproject_save_edit_project > value ('.$current_lang.') => ' . $_POST['value'], TRUE );
 
 	//Supprime la réservation de l'édition en cours
+	$buffer = FALSE;
+	$return_values = array(
+		"response" => "done",
+		"values" => $_POST['property']
+	);
+
 	$WDGuser_current = WDGUser::current();
 	$user_id = $WDGuser_current->wp_user->ID;
 	$campaign_id = filter_input( INPUT_POST, 'id_campaign' );
@@ -511,6 +517,9 @@ function yproject_save_edit_project() {
 	if ( !empty($meta_value) ) {
 	    if ( $meta_value[ 'user' ] == $user_id ) {			
 			delete_post_meta( $campaign_id, $meta_key );
+			$buffer = TRUE;
+	    } else {
+	    	$return_values[ 'response' ] = "error";
 	    }
 	}
 	
@@ -522,13 +531,35 @@ function yproject_save_edit_project() {
 			));
 			break;
 		case "description":
-			if (empty($current_lang)) {
-				wp_update_post(array(
-					'ID' => $_POST['id_campaign'],
-					'post_content' => $_POST['value']
-				));
-			} else {
-				update_post_meta($_POST['id_campaign'], 'campaign_description' . $current_lang, $_POST['value']);
+			if ( $buffer ) {
+				if (empty($current_lang)) {
+					wp_update_post(array(
+						'ID' => $_POST['id_campaign'],
+						'post_content' => $_POST['value']
+					));
+				} else {
+					update_post_meta($_POST['id_campaign'], 'campaign_description' . $current_lang, $_POST['value']);
+				}
+			}
+			break;
+		case "societal_challenge":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_societal_challenge' . $current_lang, $_POST['value']);
+			}
+			break;
+		case "added_value":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_added_value' . $current_lang, $_POST['value']);
+			}
+			break;
+		case "economic_model":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_economic_model' . $current_lang, $_POST['value']);
+			}
+			break;
+		case "implementation":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_implementation' . $current_lang, $_POST['value']);
 			}
 			break;
 		default: 
@@ -550,7 +581,7 @@ function yproject_save_edit_project() {
 		$file_cacher = WDG_File_Cacher::current();
 		$file_cacher->delete( $campaign->data->post_name );
 	}
-	echo $_POST['property'];
+	echo json_encode($return_values);
 	exit();
 }
 add_action('wp_ajax_save_edit_project', 'yproject_save_edit_project');
