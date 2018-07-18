@@ -51,8 +51,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<div class="left">
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-monnaie-noir-h100.png" alt="monnaie" width="102" height="100">
 				<span>
-					<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?> &euro;</span><br>
-					<?php _e( "de royalties vers&eacute;s", 'yproject' ); ?>
+					<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?></span><br>
+					<?php _e( "versements de royalties", 'yproject' ); ?>
 				</span>
 		</div>
 			<div class="clear"></div>

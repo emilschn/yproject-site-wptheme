@@ -73,8 +73,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<p>
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="money" />
 						<span>
-							<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?> &euro;</span><br />
-							<?php _e( "de royalties vers&eacute;s", 'yproject' ); ?>
+							<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?></span><br />
+							<?php _e( "versements", 'yproject' ); ?>
 						</span>
 					</p>
 				</div>
