@@ -1169,3 +1169,13 @@ body input[type=text], body input[type=email], body select {
 nav.wdg-breadcrumb {
 	margin: 10px 0px;
 }
+
+/*******************************************************************************
+* NEWS
+*******************************************************************************/
+
+label.title-news  {
+    font-size: 14pt;
+    font-weight: bold;
+}
+
