@@ -52,32 +52,30 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 		
 <?php $stats_list = $page_controler->get_stats_list(); ?>
-				
-				
-				<div id="wdg-project-stats" class="right">
-					<p><?php _e( "WE DO GOOD c'est :" ); ?></p>
-					<p>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-balloon.png" alt="air balloon" />
-						<span>
-							<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span><br />
-							<?php _e( "lev&eacute;s", 'yproject' ); ?>
-						</span>
-					</p>
-					<p>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-people.png" alt="people" />
-						<span>
-							<span><?php echo number_format( $stats_list[ 'count_people' ], 0, '', ' ' ); ?></span><br />
-							<?php _e( "investisseurs", 'yproject' ); ?>
-						</span>
-					</p>
-					<p>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="money" />
-						<span>
-							<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?></span><br />
-							<?php _e( "versements", 'yproject' ); ?>
-						</span>
-					</p>
-				</div>
+<div id="wdg-project-stats" class="right">
+	<p><?php _e( "WE DO GOOD c'est :" ); ?></p>
+	<p>
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-balloon.png" alt="air balloon" />
+		<span>
+			<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span><br>
+			<?php _e( "lev&eacute;s", 'yproject' ); ?>
+		</span>
+	</p>
+	<p>
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-people.png" alt="people" />
+		<span>
+			<span><?php echo number_format( $stats_list[ 'count_people' ], 0, '', ' ' ); ?></span><br>
+			<?php _e( "investisseurs", 'yproject' ); ?>
+		</span>
+	</p>
+	<p>
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="money" />
+		<span>
+			<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?></span><br>
+			<?php _e( "versements", 'yproject' ); ?>
+		</span>
+	</p>
+</div>
 				
 <?php
 /******************************************************************************/
