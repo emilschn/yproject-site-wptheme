@@ -516,7 +516,6 @@ function yproject_save_edit_project() {
 
 	if ( !empty($meta_value) ) {
 	    if ( $meta_value[ 'user' ] == $user_id ) {			
-			delete_post_meta( $campaign_id, $meta_key );
 			$buffer = TRUE;
 	    } else {
 	    	$return_values[ 'response' ] = "error";
@@ -540,26 +539,16 @@ function yproject_save_edit_project() {
 				} else {
 					update_post_meta($_POST['id_campaign'], 'campaign_description' . $current_lang, $_POST['value']);
 				}
+				delete_post_meta( $campaign_id, $meta_key );
 			}
 			break;
 		case "societal_challenge":
-			if ( $buffer ) {
-				update_post_meta($_POST['id_campaign'], 'campaign_societal_challenge' . $current_lang, $_POST['value']);
-			}
-			break;
 		case "added_value":
-			if ( $buffer ) {
-				update_post_meta($_POST['id_campaign'], 'campaign_added_value' . $current_lang, $_POST['value']);
-			}
-			break;
 		case "economic_model":
-			if ( $buffer ) {
-				update_post_meta($_POST['id_campaign'], 'campaign_economic_model' . $current_lang, $_POST['value']);
-			}
-			break;
 		case "implementation":
 			if ( $buffer ) {
-				update_post_meta($_POST['id_campaign'], 'campaign_implementation' . $current_lang, $_POST['value']);
+				update_post_meta($_POST['id_campaign'], 'campaign_'. $_POST['property'] . $current_lang, $_POST['value']);
+				delete_post_meta( $campaign_id, $meta_key );
 			}
 			break;
 		default: 

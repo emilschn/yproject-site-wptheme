@@ -219,17 +219,21 @@ var ProjectEditor = (function($) {
 					}).done(function(result) {					     	
 						result = JSON.parse(result);
 						if ( result.response == 'error') {
-						    alert( "Une inactivité prolongé a entraîné la perte de votre session. Une autre personne édite cette partie du projet actuellement, vos modifications seront donc perdues. Revenez plus tard." );
-							$(ProjectEditor.elements[result.values].elementId).show();
-							$(ProjectEditor.elements[result.values].contentId).hide();
-							ProjectEditor.showEditButton(result.values);
-							$("#wdg-validate-"+result.values).remove();
-							WDGProjectPageFunctions.initClick();
-							WDGProjectPageFunctions.isEditing = "";
+						    ProjectEditor.lockProjectFail(result.values);
 				        } 
 				    });
 			}, 120000); // La mise à jour se fait toutes les 2 minutes.
 			}
+		},
+
+		lockProjectFail: function(property) {
+			alert( "Une inactivité prolongée a entraîné la perte de votre session. Une autre personne édite ce projet actuellement, vos modifications seront donc perdues, merci de réessayer plus tard." );
+			$(ProjectEditor.elements[property].elementId).show();
+			$(ProjectEditor.elements[property].contentId).hide();
+			ProjectEditor.showEditButton(property);
+			$("#wdg-validate-"+property).remove();
+			WDGProjectPageFunctions.initClick();
+			WDGProjectPageFunctions.isEditing = "";
 		},
 
 		//Affiche un cadre sur certaines zones éditables
@@ -694,14 +698,8 @@ var ProjectEditor = (function($) {
 			}).done(function(result) {
 				result = JSON.parse(result);
 				if ( result.response == 'error') {
-				    alert( "Une inactivité prolongé a entraîné la perte de votre session. Une autre personne édite cette partie du projet actuellement, vos modifications seront donc perdues. Revenez plus tard." );
-					$(ProjectEditor.elements[result.values].elementId).show();
-					$(ProjectEditor.elements[result.values].contentId).hide();
-					ProjectEditor.showEditButton(result.values);
-					$("#wdg-validate-"+result.values).remove();
 					ProjectEditor.keepUserLockProject();
-					WDGProjectPageFunctions.initClick();
-					WDGProjectPageFunctions.isEditing = "";
+					ProjectEditor.lockProjectFail(result.values);
 				} else {
 					ProjectEditor.validateInputDone(result.values);
 				}
