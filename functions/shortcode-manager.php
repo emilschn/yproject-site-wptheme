@@ -19,6 +19,7 @@ class YPShortcodeManager {
 		'yproject_newproject_lightbox',
 		'wdg_project_vote_count',
 		'wdg_project_amount_count',
+		'wdg_project_investment_link',
 		'wdg_page_breadcrumb',
 		'wdg_footer_banner_link'
 	);
@@ -219,7 +220,7 @@ class YPShortcodeManager {
 			return $campaign->nb_voters();
 		}
 	}
-
+	
 	function wdg_project_amount_count($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
@@ -230,6 +231,24 @@ class YPShortcodeManager {
 			$campaign = atcf_get_campaign($post_campaign);
 			return $campaign->current_amount();
 		}
+	}
+
+	function wdg_project_investment_link($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'project' => '',
+			'label' => '',
+			'class' => ''
+		), $atts );
+
+		$buffer = '';
+		if ( isset( $atts[ 'project' ] ) && is_numeric( $atts[ 'project' ] ) ) {
+			if ( is_user_logged_in() ) {
+				$buffer = '<a href="' .home_url( '/investir/' ). '?campaign_id=' .$atts[ 'project' ]. '&amp;invest_start=1" class="' .$atts[ 'class' ]. '">' .$atts[ 'label' ]. '</a>';
+			} else {
+				$buffer = '<a href="' .home_url( '/connexion/' ). '" class="' .$atts[ 'class' ]. '">' .$atts[ 'label' ]. '</a>';
+			}
+		}
+		return $buffer;
 	}
 	
 	function wdg_page_breadcrumb( $atts, $content = '' ) {
