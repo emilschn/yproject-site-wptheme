@@ -20,6 +20,7 @@ class YPShortcodeManager {
 		'wdg_project_vote_count',
 		'wdg_project_amount_count',
 		'wdg_project_investment_link',
+		'wdg_project_progress_bar',
 		'wdg_page_breadcrumb',
 		'wdg_footer_banner_link'
 	);
@@ -248,6 +249,24 @@ class YPShortcodeManager {
 				$buffer = '<a href="' .home_url( '/connexion/' ). '" class="' .$atts[ 'class' ]. '">' .$atts[ 'label' ]. '</a>';
 			}
 		}
+		return $buffer;
+	}
+
+	function wdg_project_progress_bar( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'project' => ''
+		), $atts );
+		
+		global $campaign, $stylesheet_directory_uri, $is_progressbar_shortcode;
+		$campaign = new ATCF_Campaign( $atts[ 'project' ] );
+		$stylesheet_directory_uri = get_stylesheet_directory_uri();
+		$is_progressbar_shortcode = TRUE;
+		
+		ob_start();
+		locate_template( array( 'projects/common/progressbar.php' ), true );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
 		return $buffer;
 	}
 	
