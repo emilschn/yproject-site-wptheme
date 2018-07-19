@@ -21,6 +21,7 @@ class YPShortcodeManager {
 		'wdg_project_amount_count',
 		'wdg_project_investment_link',
 		'wdg_project_progress_bar',
+		'wdg_project_royalties_simulator',
 		'wdg_page_breadcrumb',
 		'wdg_footer_banner_link'
 	);
@@ -264,6 +265,27 @@ class YPShortcodeManager {
 		
 		ob_start();
 		locate_template( array( 'projects/common/progressbar.php' ), true );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
+	}
+
+	function wdg_project_royalties_simulator( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'project' => ''
+		), $atts );
+		
+		global $campaign, $stylesheet_directory_uri, $is_simulator_shortcode;
+		$campaign = new ATCF_Campaign( $atts[ 'project' ] );
+		$stylesheet_directory_uri = get_stylesheet_directory_uri();
+		$is_simulator_shortcode = TRUE;
+		
+		ob_start();
+		?>
+		<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/wdg-campaign.js?d=<?php echo ASSETS_VERSION; ?>"></script>
+		<?php
+		locate_template( array( 'projects/single/rewards.php' ), true );
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		
