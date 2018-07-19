@@ -3,6 +3,11 @@
  * Affichage des investissements de l'utilisateur
  */
 $WDGUser_current = WDGUser::current();
+$override_current_user = filter_input( INPUT_GET, 'override_current_user' );
+if ( !empty( $override_current_user ) && $WDGUser_current->is_admin() ) {
+	$WDGUser_current = new WDGUser( $override_current_user );
+}
+
 $input_organization = filter_input( INPUT_GET, 'organization' );
 if ( !empty( $input_organization ) ) {
 	if ( $WDGUser_current->can_edit_organization( $input_organization ) ) {

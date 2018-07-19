@@ -115,7 +115,7 @@ if (isset($_GET['delete_post_id'])){
 					?><br /><br />
 
 					<label><input type="checkbox" name="send_mail" <?php if (isset($_POST['send_mail'])){echo 'checked';}?>/>
-					Envoyer par mail cette actualité aux utilisateurs qui croient au projet. <em>Les utilisateurs qui se sont désabonnés de vos actualités ne les recevront pas.</em></label> <br/><br/>
+					Envoyer par mail cette actualité aux utilisateurs qui suivent le projet. <em>Les utilisateurs qui se sont désabonnés de vos actualités ne les recevront pas.</em></label> <br/><br/>
 					
 					<?php _e('Relayez cette actualit&eacute; sur vos r&eacute;seaux sociaux et pr&eacute;venez WE DO GOOD pour une communication d&eacute;cupl&eacute;e !', 'yproject'); ?><br /><br />
 					
