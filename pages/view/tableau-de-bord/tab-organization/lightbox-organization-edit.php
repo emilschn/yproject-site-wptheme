@@ -287,7 +287,7 @@ $WDGUser_current = WDGUser::current();
 		
 		<div class="field">
 			<label for="org_doc_bank"><?php _e("Scan ou copie d'un RIB*", 'yproject'); ?></label>
-			<div class="field-container align-left">
+			<div class="align-left">
 				<span class="field-value">
 					<?php if ( isset($current_file_bank) ): ?>
 						<a id="org_doc_bank" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_bank->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_bank->date_uploaded; ?></a>
@@ -300,7 +300,7 @@ $WDGUser_current = WDGUser::current();
 
 		<div class="field">
 			<label for="org_doc_kbis"><?php _e("K-BIS ou &eacute;quivalent &agrave; un registre du commerce*", 'yproject'); ?></label>
-			<div class="field-container align-left">
+			<div class="align-left">
 				<span class="field-value">
 					<?php _e("Datant de moins de 3 mois", 'yproject'); ?><br />
 					<?php if ( isset($current_file_kbis) ): ?>
@@ -314,7 +314,7 @@ $WDGUser_current = WDGUser::current();
 
 		<div class="field">
 			<label for="org_doc_status"><?php _e("Statuts de la soci&eacute;t&eacute;, certifi&eacute;s conformes à l'original par le g&eacute;rant*", 'yproject'); ?></label>
-			<div class="field-container align-left">
+			<div class="align-left">
 				<span class="field-value">
 					<?php if ( isset($current_file_status) ): ?>
 						<a id="org_doc_status" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_status->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_status->date_uploaded; ?></a>
@@ -327,7 +327,7 @@ $WDGUser_current = WDGUser::current();
 
 		<div class="field">
 			<label for="org_doc_id"><?php _e("Justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident*", 'yproject'); ?></label>
-			<div class="field-container align-left">
+			<div class="align-left">
 				<span class="field-value">
 					<?php _e("Pour une personne fran&ccedil;aise : carte d'identit&eacute; recto-verso ou passeport fran&ccedil;ais.", 'yproject'); ?><br />
 					<?php _e("Sinon : le titre de s&eacute;jour et le passeport d'origine.", 'yproject'); ?><br />
@@ -342,7 +342,7 @@ $WDGUser_current = WDGUser::current();
 
 		<div class="field">
 			<label for="org_doc_home"><?php _e("Justificatif de domicile du g&eacute;rant ou du pr&eacute;sident*", 'yproject'); ?></label>
-			<div class="field-container align-left">
+			<div class="align-left">
 				<span class="field-value">
 					<?php _e("Datant de moins de 3 mois, provenant d'un fournisseur d'&eacute;nergie (&eacute;lectricit&eacute;, gaz, eau) ou d'un bailleur, ou un relev&eacute; d'imp&ocirc;t datant de moins de 3 mois", 'yproject'); ?><br />
 					<?php if ( isset($current_file_home) ): ?>
@@ -358,7 +358,7 @@ $WDGUser_current = WDGUser::current();
 		<div class="field align-left">
 			<span style="color: #EE0000;"><em>--&gt; <?php _e( "Si la r&eacute;partition du capital n'est pas exprim&eacute;e clairement dans les statuts, merci de nous fournir une attestation avec ces pr&eacute;cisions :", 'yproject' ); ?></em></span><br />
 			<label for="org_doc_capital_allocation"><?php _e( "Attestation de r&eacute;partition du capital (facultatif)", 'yproject' ); ?></label>
-			<div class="field-container">
+			<div>
 				<span class="field-value">
 					<?php if ( isset( $current_file_capital_allocation ) ): ?>
 						<a id="org_doc_capital_allocation" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_capital_allocation->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_capital_allocation->date_uploaded; ?></a>
@@ -378,7 +378,7 @@ $WDGUser_current = WDGUser::current();
 			<label for="org_doc_id_2"><?php _e("Justificatif d'identit&eacute; de la deuxi&egrave;me personne (facultatif)", 'yproject'); ?></label>
 			<?php _e("Pour une personne fran&ccedil;aise : carte d'identit&eacute; recto-verso ou passeport fran&ccedil;ais.", 'yproject'); ?><br>
 			<?php _e("Sinon : le titre de s&eacute;jour et le passeport d'origine.", 'yproject'); ?><br>
-			<div class="field-container">
+			<div>
 				<span class="field-value">
 					<?php if ( isset( $current_file_id_2 ) ): ?>
 					<a id="org_doc_id_2" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_id_2->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_id_2->date_uploaded; ?></a>
@@ -391,7 +391,7 @@ $WDGUser_current = WDGUser::current();
 		<div class="field align-left">
 			<label for="org_doc_home_2"><?php _e("Justificatif de domicile de la deuxi&egrave;me personne (facultatif)", 'yproject'); ?></label>
 			<?php _e("Datant de moins de 3 mois, provenant d'un fournisseur d'&eacute;nergie (&eacute;lectricit&eacute;, gaz, eau) ou d'un bailleur, ou un relev&eacute; d'imp&ocirc;t datant de moins de 3 mois", 'yproject'); ?><br>
-			<div class="field-container">
+			<div>
 				<span class="field-value">
 					<?php if ( isset( $current_file_home_2 ) ): ?>
 					<a id="org_doc_home_2" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_home_2->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_home_2->date_uploaded; ?></a>
@@ -410,7 +410,7 @@ $WDGUser_current = WDGUser::current();
 			<label for="org_doc_id_3"><?php _e("Justificatif d'identit&eacute; de la troisi&egrave;me personne (facultatif)", 'yproject'); ?></label>
 			<?php _e("Pour une personne fran&ccedil;aise : carte d'identit&eacute; recto-verso ou passeport fran&ccedil;ais.", 'yproject'); ?><br>
 			<?php _e("Sinon : le titre de s&eacute;jour et le passeport d'origine.", 'yproject'); ?><br>
-			<div class="field-container">
+			<div>
 				<span class="field-value">
 					<?php if ( isset( $current_file_id_3 ) ): ?>
 					<a id="org_doc_id_3" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_id_3->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_id_3->date_uploaded; ?></a>
@@ -423,7 +423,7 @@ $WDGUser_current = WDGUser::current();
 		<div class="field align-left">
 			<label for="org_doc_home_3"><?php _e("Justificatif de domicile de la troisi&egrave;me personne (facultatif)", 'yproject'); ?></label>
 			<?php _e("Datant de moins de 3 mois, provenant d'un fournisseur d'&eacute;nergie (&eacute;lectricit&eacute;, gaz, eau) ou d'un bailleur, ou un relev&eacute; d'imp&ocirc;t datant de moins de 3 mois", 'yproject'); ?><br>
-			<div class="field-container">
+			<div>
 				<span class="field-value">
 					<?php if ( isset( $current_file_home_3 ) ): ?>
 					<a id="org_doc_home_3" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_home_3->get_public_filepath(); ?>"><?php _e("T&eacute;l&eacute;charger le fichier envoy&eacute; le"); ?> <?php echo $current_file_home_3->date_uploaded; ?></a>
