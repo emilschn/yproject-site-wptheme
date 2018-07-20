@@ -186,6 +186,7 @@ var ProjectEditor = (function($) {
 					case "added_value":
 					case "economic_model":
 					case "implementation":
+						$("#wdg-edit-"+sProperty).addClass("wait-button");
 						ProjectEditor.requestLockProject(sProperty);
 						break;
 					case "picture-head":
@@ -654,6 +655,7 @@ var ProjectEditor = (function($) {
 			$("#wdg-validate-"+property).click(function() {
 				ProjectEditor.validateInput($(this).data("property"));
 			});
+			$("#wdg-edit-"+property).removeClass("wait-button");
 		},
 		
 		//Redirige vers la page Paramètres
