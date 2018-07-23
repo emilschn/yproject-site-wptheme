@@ -4,7 +4,7 @@ $campaign_id = filter_input( INPUT_GET, 'campaign_id' );
 if ( !empty( $campaign_id ) ) {
 	$campaign = new ATCF_Campaign( $campaign_id );
 }
-$campaign_url = get_permalink( $campaign->ID );
+$campaign_url = $campaign->get_public_url();
 ?>
 <button class="sharer button" data-sharer="twitter" data-title="<?php _e("Faites comme moi, investissez sur le projet", 'yproject'); ?> <?php echo $campaign->data->post_title ?>" data-hashtags="royalty, crowdfunding" data-url="<?php echo $campaign_url; ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partage/twitter.png" /></button>
 <button class="sharer button" data-sharer="facebook" data-url="<?php echo $campaign_url; ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partage/facebook.png" /></button>
