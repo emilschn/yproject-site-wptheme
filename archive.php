@@ -92,7 +92,7 @@ if (isset($_GET['delete_post_id'])){
 					<input type="text" name="posttitle" style="width: 250px;" value="<?php if (isset($_POST['posttitle'])){echo $_POST['posttitle'];}?>"><br/><br/>
 
 					<label class="title-news" for="postcontent"><?php _e( 'Contenu', 'ypcf' ); ?></label> <br/>
-					<label>Attention à ne pas mettre une image de plus de <span class="errors">600 px</span> de largeur afin de ne pas déformer la mise en page du mail envoyé à vos évaluateurs et investisseurs.</label> <br/> <br/>
+					<label>Attention à ne pas mettre une image de plus de <span class="advice-news">600 px</span> de largeur afin de ne pas déformer la mise en page du mail envoyé à vos évaluateurs et investisseurs.</label> <br/> <br/>
 					<?php
 					global $post_ID, $post;
 					$post_ID = $post = 0;

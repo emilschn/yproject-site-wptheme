@@ -1179,3 +1179,8 @@ label.title-news  {
     font-weight: bold;
 }
 
+span.advice-news  {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
