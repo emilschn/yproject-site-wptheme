@@ -1288,3 +1288,17 @@ div.project-rewards-content .button.red {
 	font-size: 12pt;
 	font-weight: bold;
 }
+
+/*******************************************************************************
+* NEWS
+*******************************************************************************/
+label.title-news  {
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+span.advice-news  {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
