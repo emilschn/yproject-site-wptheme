@@ -1,5 +1,5 @@
 <?php
-global $campaign, $stylesheet_directory_uri;
+global $campaign, $stylesheet_directory_uri, $is_simulator_shortcode;
 $campaign_id = $campaign->ID;
 $page_invest = get_page_by_path('investir');
 $campaign_status = $campaign->campaign_status();
@@ -14,6 +14,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illimit&eacute;", 'yproject' ) : 'x' .$campaign->maximum_profit();
 ?>
 <div class="project-rewards padder">
+	<?php if ( empty( $is_simulator_shortcode ) ): ?>
 	<h2 class="standard">
 		<?php // CAPITAL // ?>
 		<?php if ($campaign->funding_type() == 'fundingproject'): ?>
@@ -22,6 +23,7 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 			/ <?php _e('Contreparties', 'yproject'); ?> /
 		<?php endif; ?>
 	</h2>
+	<?php endif; ?>
     
 	<div class="project-rewards-content">
 		<?php // CAPITAL // ?>

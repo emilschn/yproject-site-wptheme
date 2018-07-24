@@ -85,7 +85,27 @@ class WDG_WordPress_Events {
 			$role_subscriber->add_cap( 'edit_published_posts' );
 			$role_subscriber->add_cap( 'edit_others_posts' );
 		}
-		
+
+		if ( get_user_option('rich_editing') == 'true' ) { 
+      		add_filter( 'mce_external_plugins', 'WDG_WordPress_Events::add_plugin' );
+      		add_filter( 'mce_buttons', 'WDG_WordPress_Events::register_button' );
+      	}
+	}
+	
+	/**
+	 * Ajout du bouton aux boutons existant
+	 */
+	public static function register_button( $buttons ) {
+    	array_push( $buttons, "|", "video" );
+   		return $buttons;
+	}
+
+	/**
+	 * Ajout du plugin video aux plugins existant
+	 */
+	public static function add_plugin( $plugin_array ) { 
+   		$plugin_array['video'] = '/wp-content/themes/yproject/_inc/js/tinymce/video-plugin.js';
+   		return $plugin_array;
 	}
 	
 	/**
