@@ -1,5 +1,5 @@
 <?php
-global $campaign, $stylesheet_directory_uri;
+global $campaign, $stylesheet_directory_uri, $is_simulator_shortcode;
 $campaign_id = $campaign->ID;
 $page_invest = get_page_by_path('investir');
 $campaign_status = $campaign->campaign_status();
@@ -12,6 +12,7 @@ $firstpayment_year = mysql2date( 'Y', $firstpayment_date, false );
 $estimated_turnover = $campaign->estimated_turnover();
 ?>
 <div class="project-rewards padder">
+	<?php if ( empty( $is_simulator_shortcode ) ): ?>
 	<h2 class="standard">
 		<?php // CAPITAL // ?>
 		<?php if ($campaign->funding_type() == 'fundingproject'): ?>
@@ -20,6 +21,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 			/ <?php _e('Contreparties', 'yproject'); ?> /
 		<?php endif; ?>
 	</h2>
+	<?php endif; ?>
     
 	<div class="project-rewards-content">
 		<?php // CAPITAL // ?>

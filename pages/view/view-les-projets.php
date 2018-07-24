@@ -145,7 +145,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
                 <select id="project-filter-activity" class="project-filter-select">
                     <option value="all"><?php _e( "Tous les types de projet", 'yproject' ); ?></option>
                     <?php foreach ( $activities_list as $activity ): ?>
+						<?php if ( $activity->slug != 'epargne-positive' ): ?>
 						<option value="<?php echo $activity->slug; ?>" <?php selected( $activity->slug, 'entreprises' ); ?>><?php echo $activity->name; ?></option>
+						<?php endif; ?>
                     <?php endforeach; ?>
                 </select>
             </div>

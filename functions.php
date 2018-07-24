@@ -264,7 +264,7 @@ function print_user_projects(){
 					data-voted="<?php echo $data_voted;?>"
 					data-invested="<?php echo $data_invested;?>"
 					>
-					<a href="<?php echo get_permalink($project['ID']); ?>"><h3><?php echo $project['title']; ?></h3></a>
+					<a href="<?php echo $campaign->get_public_url(); ?>"><h3><?php echo $project['title']; ?></h3></a>
 					<div class="project_preview_item_infos">
 						<div class="project_preview_item_picto" style="width:45px">
 							<?php if($project['jy_crois'] === 1) { ?>

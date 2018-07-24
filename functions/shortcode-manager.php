@@ -19,6 +19,9 @@ class YPShortcodeManager {
 		'yproject_newproject_lightbox',
 		'wdg_project_vote_count',
 		'wdg_project_amount_count',
+		'wdg_project_investment_link',
+		'wdg_project_progress_bar',
+		'wdg_project_royalties_simulator',
 		'wdg_page_breadcrumb',
 		'wdg_footer_banner_link'
 	);
@@ -219,7 +222,7 @@ class YPShortcodeManager {
 			return $campaign->nb_voters();
 		}
 	}
-
+	
 	function wdg_project_amount_count($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
@@ -230,6 +233,63 @@ class YPShortcodeManager {
 			$campaign = atcf_get_campaign($post_campaign);
 			return $campaign->current_amount();
 		}
+	}
+
+	function wdg_project_investment_link($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'project' => '',
+			'label' => '',
+			'class' => ''
+		), $atts );
+
+		$buffer = '';
+		if ( isset( $atts[ 'project' ] ) && is_numeric( $atts[ 'project' ] ) ) {
+			if ( is_user_logged_in() ) {
+				$buffer = '<a href="' .home_url( '/investir/' ). '?campaign_id=' .$atts[ 'project' ]. '&amp;invest_start=1" class="' .$atts[ 'class' ]. '">' .$atts[ 'label' ]. '</a>';
+			} else {
+				$buffer = '<a href="' .home_url( '/connexion/' ). '" class="' .$atts[ 'class' ]. '">' .$atts[ 'label' ]. '</a>';
+			}
+		}
+		return $buffer;
+	}
+
+	function wdg_project_progress_bar( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'project' => ''
+		), $atts );
+		
+		global $campaign, $stylesheet_directory_uri, $is_progressbar_shortcode;
+		$campaign = new ATCF_Campaign( $atts[ 'project' ] );
+		$stylesheet_directory_uri = get_stylesheet_directory_uri();
+		$is_progressbar_shortcode = TRUE;
+		
+		ob_start();
+		locate_template( array( 'projects/common/progressbar.php' ), true );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
+	}
+
+	function wdg_project_royalties_simulator( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'project' => ''
+		), $atts );
+		
+		global $campaign, $stylesheet_directory_uri, $is_simulator_shortcode;
+		$campaign = new ATCF_Campaign( $atts[ 'project' ] );
+		$stylesheet_directory_uri = get_stylesheet_directory_uri();
+		$is_simulator_shortcode = TRUE;
+		
+		ob_start();
+		?>
+		<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/wdg-campaign.js?d=<?php echo ASSETS_VERSION; ?>"></script>
+		<?php
+		locate_template( array( 'projects/single/rewards.php' ), true );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
 	}
 	
 	function wdg_page_breadcrumb( $atts, $content = '' ) {
