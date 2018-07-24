@@ -12,6 +12,7 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 	 */
 	private $current_investment;
 	private $maximum_investable_amount;
+	private $need_two_contracts;
 	/**
 	 * @var WDG_Form_User_Identity_Docs
 	 */
@@ -37,6 +38,7 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		$this->init_mean_of_payment();
 		$this->init_current_investment();
 		$this->init_maximum_investable_amount();
+		$this->init_need_two_contracts();
 		$this->init_identitydocs_form();
 		$this->init_current_step();
 		$this->init_payment_result();
@@ -109,9 +111,13 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		return ( $this->current_investment->get_session_amount() - $this->get_maximum_investable_amount() );
 	}
 	
-	public function needs_two_contracts() {
+	private function init_need_two_contracts() {
 		$amount_part = $this->current_investment->get_session_amount();
-		return ( $amount_part > $this->maximum_investable_amount );
+		$this->need_two_contracts = ( $amount_part > $this->maximum_investable_amount );
+	}
+	
+	public function needs_two_contracts() {
+		return $this->need_two_contracts;
 	}
 	
 /******************************************************************************/
