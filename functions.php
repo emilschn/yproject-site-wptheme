@@ -16,6 +16,59 @@ foreach ( $wdg_functions_loaded_required_once as $file_to_locate ) {
 
 
 /** BACK-OFFICE USERS **/
+function color_text_editor( $init ) {
+	$default_colours = '
+	"FFFFFF", "Blanc",
+	"A9EAFE", "Azurin",
+	"FF5E4D", "Rouge capucine",
+	"F7FF3C", "Jaune citron",
+	"B0F2B6", "Vert eau",
+	"FEBFD2", "Rose dragée",
+	"FFE4C4", "Beige",
+	"EACDCB", "Rose WDG",
+
+	"CECECE", "Gris perle",
+	"77B5FE", "Bleu ciel",
+	"FF0000", "Rouge vif",
+	"E7F00D", "Jaune",
+	"16B84E", "Vert menthe",
+	"FD6C9E", "Rose",
+	"BA9B61", "Claro",
+	"EA4F51", "Rouge WDG",
+
+	"9E9E9E", "Gris souris",
+	"318CE7", "Bleu France",
+	"DE2916", "Rouge tomate",
+	"DFAF2C", "Ocre jaune",
+	"3A9D23", "Vert gazon",
+	"D473D4", "Mauve",
+	"87591A", "Marron",
+	"8BC79C", "Vert WDG",
+
+	"606060", "Gris",
+	"0131B4", "Bleu saphir",
+	"BC2001", "Rouge écrevisse",
+	"ED7F10", "Orange",
+	"096A09", "Vert bouteille",
+	"800080", "Magenta foncé",
+	"5B3C11", "Brun",
+	"00879B", "Bleu WDG",
+
+	"000000", "Noir",
+	"0F056B", "Bleu nuit",
+	"6D071A", "Bordeaux",
+	"CC5500", "Orange foncé",
+	"00561B", "Vert impérial",
+	"660099", "Violet",
+	"463F32", "Taupe",
+	"333333", "Noir WDG",
+	';
+
+	$init['textcolor_map'] = '['.$default_colours.']';
+	return $init;
+}
+add_filter('tiny_mce_before_init', 'color_text_editor');
+
 function yproject_user_contact_methods( $user_contact ) {
 	$user_contact['user_mobile_phone'] = __('T&eacute;l&eacute;phone');
 	$user_contact['user_address'] = __('Adresse');
