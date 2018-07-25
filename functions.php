@@ -502,17 +502,20 @@ function yproject_save_edit_project() {
 
 	//Supprime la réservation de l'édition en cours
 	$buffer = FALSE;
-	$return_values = array(
-		"response" => "done",
-		"values" => $_POST['property']
-	);
-
 	$WDGuser_current = WDGUser::current();
 	$user_id = $WDGuser_current->wp_user->ID;
 	$campaign_id = filter_input( INPUT_POST, 'id_campaign' );
 	$property = filter_input( INPUT_POST, 'property' );
 	$meta_key = $property.'_add_value_reservation';
-	$meta_value = get_post_meta( $campaign_id, $meta_key, TRUE ); 
+	$meta_value = get_post_meta( $campaign_id, $meta_key, TRUE );
+	$WDGUser = new WDGUser( $meta_value[ 'user' ] );
+	$name = $WDGUser->get_firstname()." ".$WDGUser->get_lastname();
+
+	$return_values = array(
+			"response" => "done",
+			"values" => $_POST['property'],
+			"user" => $name
+	);
 
 	if ( !empty($meta_value) ) {
 	    if ( $meta_value[ 'user' ] == $user_id ) {			

@@ -7,6 +7,7 @@ var ProjectEditor = (function($) {
 		elements: [],
 		isInit: false,
 		intervalID: null,
+		softCancel: null,
 		
 		//Initialisation : création du bouton en haut de page permettant de switcher d'un mode à l'autre
 		init: function() {
@@ -144,12 +145,14 @@ var ProjectEditor = (function($) {
 		},
 
 		requestLockProject: function(sProperty) {
+			value = tinyMCE.get("wdg-input-"+sProperty).getContent();
 			$.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,
 				'data': {
 					'action':	'try_lock_project_edition',
 					'property':	sProperty,
+					'value':	value,
 					'id_campaign':  $("#content").data("campaignid")
 				}
 		    }).done(function(result) {
@@ -157,6 +160,11 @@ var ProjectEditor = (function($) {
 		    	if ( result.response == 'error') {
 		     		alert( result.values + " édite déjà cette partie du projet." );
 		     		WDGProjectPageFunctions.isEditing = "";
+		     		$("#wdg-edit-"+sProperty).removeClass("wait-button");
+		     	} else if ( result.response == 'different_content') {
+		     		alert( "Cette partie a été modifié récemment, merci d'actualiser la page afin d'afficher le bon contenu." );
+		     		WDGProjectPageFunctions.isEditing = "";
+		     		$("#wdg-edit-"+sProperty).removeClass("wait-button"); 
 		        } else {
 		            ProjectEditor.showEditableZone(result.values);
 		            ProjectEditor.keepUserLockProject();
@@ -220,21 +228,19 @@ var ProjectEditor = (function($) {
 					}).done(function(result) {					     	
 						result = JSON.parse(result);
 						if ( result.response == 'error') {
-						    ProjectEditor.lockProjectFail(result.values);
+						    ProjectEditor.lockProjectFail(result.user, result.values );
 				        } 
 				    });
 			}, 120000); // La mise à jour se fait toutes les 2 minutes.
 			}
 		},
 
-		lockProjectFail: function(property) {
-			alert( "Une inactivité prolongée a entraîné la perte de votre session. Une autre personne édite ce projet actuellement, vos modifications seront donc perdues, merci de réessayer plus tard." );
-			$(ProjectEditor.elements[property].elementId).show();
-			$(ProjectEditor.elements[property].contentId).hide();
-			ProjectEditor.showEditButton(property);
+		lockProjectFail: function(user, property) {
+			alert( "Une inactivité prolongée a entraîné la perte de votre session. \n" + user + " édite ce projet actuellement, vos modifications seront donc perdues. \n\n Il vous est conseillé de copier/coller vos modifications dans un document afin de les conserver et de les mettre en commun avec les autres éditeurs. Merci de votre compréhension." );
 			$("#wdg-validate-"+property).remove();
-			WDGProjectPageFunctions.initClick();
-			WDGProjectPageFunctions.isEditing = "";
+			$("#wdg-edit-"+property).removeClass("wait-button");
+			ProjectEditor.keepUserLockProject();
+			ProjectEditor.softCancel = true;
 		},
 
 		//Affiche un cadre sur certaines zones éditables
@@ -648,13 +654,22 @@ var ProjectEditor = (function($) {
 			
 			$(ProjectEditor.elements[property].contentId).show();
 			$(ProjectEditor.elements[property].contentId + "> div").show();
-			var buttonValidate = '<div id="wdg-validate-'+property+'" class="edit-button-validate" data-property="'+property+'"></div>';
+			var buttonValidate = '<div id="wdg-validate-'+property+'" class="edit-button-validate" data-property="'+property+'" title="Enregistrer"></div>';
 			$(ProjectEditor.elements[property].contentId).after(buttonValidate);
 			$("#wdg-validate-"+property).css("left", $(ProjectEditor.elements[property].contentId).position().left + $(ProjectEditor.elements[property].contentId).outerWidth());
 			$("#wdg-validate-"+property).css("top", $(ProjectEditor.elements[property].contentId).position().top);
 			$("#wdg-validate-"+property).click(function() {
 				ProjectEditor.validateInput($(this).data("property"));
 			});
+			
+			var buttonCancel = '<div id="wdg-cancel-'+property+'" class="cancel-button" data-property="'+property+'" title="Annuler l\'édition"></div>';
+			$(ProjectEditor.elements[property].contentId).after(buttonCancel);
+			$("#wdg-cancel-"+property).css("left", $(ProjectEditor.elements[property].contentId).position().left + $(ProjectEditor.elements[property].contentId).outerWidth());
+			$("#wdg-cancel-"+property).css("top", $(ProjectEditor.elements[property].contentId).position().top);
+			$("#wdg-cancel-"+property).click(function() {
+				ProjectEditor.cancelInput(property);
+			});
+
 			$("#wdg-edit-"+property).removeClass("wait-button");
 		},
 		
@@ -700,8 +715,7 @@ var ProjectEditor = (function($) {
 			}).done(function(result) {
 				result = JSON.parse(result);
 				if ( result.response == 'error') {
-					ProjectEditor.keepUserLockProject();
-					ProjectEditor.lockProjectFail(result.values);
+					ProjectEditor.lockProjectFail(result.user, result.values);
 				} else {
 					ProjectEditor.validateInputDone(result.values);
 				}
@@ -731,11 +745,47 @@ var ProjectEditor = (function($) {
 					$(ProjectEditor.elements[property].contentId).hide();
 					ProjectEditor.showEditButton(property);
 					$("#wdg-validate-"+property).remove();
+					$("#wdg-cancel-"+property).remove();
 					break;
 			}
 			ProjectEditor.keepUserLockProject();
 			WDGProjectPageFunctions.initClick();
 			WDGProjectPageFunctions.isEditing = "";
+		},
+
+		backToEditMode: function(property) {
+			$(ProjectEditor.elements[property].elementId).show();
+			$(ProjectEditor.elements[property].contentId).hide();
+			ProjectEditor.showEditButton(property);
+			$("#wdg-cancel-"+property).remove();
+			ProjectEditor.keepUserLockProject();
+			WDGProjectPageFunctions.initClick();
+			WDGProjectPageFunctions.isEditing = "";
+		},
+		
+		//Gère l'annulation de l'édition
+		cancelInput: function(property) {
+			if ( ProjectEditor.softCancel ) {
+				ProjectEditor.backToEditMode(property);
+				ProjectEditor.softCancel = null;
+			} else {
+				resultat=window.confirm("Attention, vous êtes sur le point d'arrêter l'édition et de perdre toutes vos modifications, voulez-vous continuer ?");
+				if ( resultat ) {
+					$("#wdg-cancel-"+property).addClass("wait-button");
+					$.ajax({
+						'type' : "POST",
+						'url' : ajax_object.ajax_url,
+						'data': { 
+							'action': 'delete_lock_project_edition',
+							'property':	property,
+							'id_campaign': $("#content").data("campaignid")
+						}
+					}).done(function(property) {
+						$("#wdg-validate-"+property).remove();
+						ProjectEditor.backToEditMode(property);
+					});
+				}
+			}		    
 		},
 		
 		//Mise à jour du texte dans l'affichage
