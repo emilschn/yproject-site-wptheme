@@ -145,7 +145,7 @@ var ProjectEditor = (function($) {
 		},
 
 		requestLockProject: function(sProperty) {
-			value = tinyMCE.get("wdg-input-"+sProperty).getContent();
+    		var value = $("#project-content-"+sProperty).data("md5");
 			$.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,
@@ -153,7 +153,8 @@ var ProjectEditor = (function($) {
 					'action':	'try_lock_project_edition',
 					'property':	sProperty,
 					'value':	value,
-					'id_campaign':  $("#content").data("campaignid")
+					'id_campaign':  $("#content").data("campaignid"),
+					'lang':		$("html").attr("lang").split("-").join("_")
 				}
 		    }).done(function(result) {
 				result = JSON.parse(result);
@@ -162,7 +163,7 @@ var ProjectEditor = (function($) {
 		     		WDGProjectPageFunctions.isEditing = "";
 		     		$("#wdg-edit-"+sProperty).removeClass("wait-button");
 		     	} else if ( result.response == 'different_content') {
-		     		alert( "Cette partie a été modifié récemment, merci d'actualiser la page afin d'afficher le bon contenu." );
+		     		alert( "Cette partie a été modifiée récemment, merci d'actualiser la page afin d'afficher le bon contenu." );
 		     		WDGProjectPageFunctions.isEditing = "";
 		     		$("#wdg-edit-"+sProperty).removeClass("wait-button"); 
 		        } else {
@@ -223,7 +224,8 @@ var ProjectEditor = (function($) {
 						'data': {
 							'action':	'keep_lock_project_edition',
 							'property':	WDGProjectPageFunctions.isEditing,		
-							'id_campaign':  $("#content").data("campaignid")
+							'id_campaign':  $("#content").data("campaignid"),
+							'lang':		$("html").attr("lang").split("-").join("_")
 						}
 					}).done(function(result) {					     	
 						result = JSON.parse(result);
@@ -758,7 +760,6 @@ var ProjectEditor = (function($) {
 			$(ProjectEditor.elements[property].contentId).hide();
 			ProjectEditor.showEditButton(property);
 			$("#wdg-cancel-"+property).remove();
-			ProjectEditor.keepUserLockProject();
 			WDGProjectPageFunctions.initClick();
 			WDGProjectPageFunctions.isEditing = "";
 		},
@@ -769,8 +770,8 @@ var ProjectEditor = (function($) {
 				ProjectEditor.backToEditMode(property);
 				ProjectEditor.softCancel = null;
 			} else {
-				resultat=window.confirm("Attention, vous êtes sur le point d'arrêter l'édition et de perdre toutes vos modifications, voulez-vous continuer ?");
-				if ( resultat ) {
+				var confirmCancel = window.confirm("Attention, vous êtes sur le point d'arrêter l'édition et de perdre toutes vos modifications, voulez-vous continuer ?");
+				if ( confirmCancel ) {
 					$("#wdg-cancel-"+property).addClass("wait-button");
 					$.ajax({
 						'type' : "POST",
@@ -778,10 +779,12 @@ var ProjectEditor = (function($) {
 						'data': { 
 							'action': 'delete_lock_project_edition',
 							'property':	property,
-							'id_campaign': $("#content").data("campaignid")
+							'id_campaign': $("#content").data("campaignid"),
+							'lang':		$("html").attr("lang").split("-").join("_")
 						}
 					}).done(function(property) {
 						$("#wdg-validate-"+property).remove();
+						ProjectEditor.keepUserLockProject();
 						ProjectEditor.backToEditMode(property);
 					});
 				}

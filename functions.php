@@ -506,7 +506,8 @@ function yproject_save_edit_project() {
 	$user_id = $WDGuser_current->wp_user->ID;
 	$campaign_id = filter_input( INPUT_POST, 'id_campaign' );
 	$property = filter_input( INPUT_POST, 'property' );
-	$meta_key = $property.'_add_value_reservation';
+	$lang = filter_input( INPUT_POST, 'lang' );
+	$meta_key = $property.'_add_value_reservation_'.$lang;
 	$meta_value = get_post_meta( $campaign_id, $meta_key, TRUE );
 	$WDGUser = new WDGUser( $meta_value[ 'user' ] );
 	$name = $WDGUser->get_firstname()." ".$WDGUser->get_lastname();
