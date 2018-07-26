@@ -11,9 +11,9 @@ if ($can_modify) {
 		'editor_height' => 500,
 		'tinymce'       => array(
 			'plugins' => 'wordpress, paste, wplink, textcolor',
-			'toolbar1' => 'bold,italic,underline,|,hr,bullist,numlist,|,alignleft,aligncenter,alignright,alignjustify,|,link,unlink,video',
-			'toolbar2' => 'formatselect,fontsizeselect,removeformat,charmap,forecolor,pastetext,undo,redo,help,forecolorpicker',
-			'plugins' => 'wordpress, paste, wplink, textcolor, wpdialogs, charmap, hr, directionality, colorpicker',
+			'toolbar1' => 'bold,italic,underline,|,hr,bullist,numlist,|,alignleft,aligncenter,alignright,alignjustify,|,link,unlink,video,wp_adv',
+			'toolbar2' => 'formatselect,fontsizeselect,removeformat,charmap,forecolor,forecolorpicker,pastetext,undo,redo,help',
+			'plugins' => 'wordpress, paste, wplink, textcolor, charmap, hr, colorpicker',
 			'paste_remove_styles' => true
 		)
 	);
