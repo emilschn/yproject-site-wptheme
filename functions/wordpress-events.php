@@ -92,7 +92,7 @@ class WDG_WordPress_Events {
       	}
 
       	add_filter('tiny_mce_before_init', 'WDG_WordPress_Events::color_text_editor');
-      	add_filter( 'tiny_mce_before_init', 'WDG_WordPress_Events::my_format_TinyMCE' );
+      	add_filter( 'tiny_mce_before_init', 'WDG_WordPress_Events::display_toolbar' );
 	}
 	
 	/**
@@ -166,9 +166,9 @@ class WDG_WordPress_Events {
 		return $init;
 	}
 
-	public static function my_format_TinyMCE( $in ) {
-    	$in['toolbar'] = true;
-    	return $in;
+	public static function display_toolbar( $init ) {
+    	$init['toolbar'] = true;
+    	return $init;
 	}
 	
 	
