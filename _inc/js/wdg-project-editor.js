@@ -24,7 +24,7 @@ var ProjectEditor = (function($) {
 			
 			window.addEventListener( 'beforeunload', function (e) {
 				if ( WDGProjectPageFunctions.isEditing !== '' ) {
-					var confirmationMessage = "Votre projet est en cours d'édition, êtes-vous sûr de vouloir quitter ?";
+					var confirmationMessage = "Vous avez réservé une des parties du projet pour l'éditer, prenez le temps de la sauvegarder ou d'annuler la réservation. Êtes vous sûr de vouloir quitter ?";
 					(e || window.event).returnValue = confirmationMessage; //Gecko + IE
 					return confirmationMessage; //Webkit, Safari, Chrome
 				}
@@ -720,6 +720,7 @@ var ProjectEditor = (function($) {
 					ProjectEditor.lockProjectFail(result.user, result.values);
 				} else {
 					ProjectEditor.validateInputDone(result.values);
+					$("#project-content-"+property).data("md5", result.md5content);
 				}
 			});
 		},

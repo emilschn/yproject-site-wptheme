@@ -515,7 +515,8 @@ function yproject_save_edit_project() {
 	$return_values = array(
 			"response" => "done",
 			"values" => $_POST['property'],
-			"user" => $name
+			"user" => $name,
+			"md5content" => null
 	);
 
 	if ( !empty($meta_value) ) {
@@ -543,6 +544,7 @@ function yproject_save_edit_project() {
 				} else {
 					update_post_meta($_POST['id_campaign'], 'campaign_description' . $current_lang, $_POST['value']);
 				}
+				$return_values[ 'md5content' ] = md5( $_POST['value'] );
 				delete_post_meta( $campaign_id, $meta_key );
 			}
 			break;
@@ -552,6 +554,7 @@ function yproject_save_edit_project() {
 		case "implementation":
 			if ( $buffer ) {
 				update_post_meta($_POST['id_campaign'], 'campaign_'. $_POST['property'] . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $_POST['value'] );
 				delete_post_meta( $campaign_id, $meta_key );
 			}
 			break;
