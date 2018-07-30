@@ -239,7 +239,9 @@ var ProjectEditor = (function($) {
 
 		lockProjectFail: function(user, property) {
 			alert( "Une inactivité prolongée a entraîné la perte de votre session. \n" + user + " édite ce projet actuellement, vos modifications seront donc perdues. \n\n Il vous est conseillé de copier/coller vos modifications dans un document afin de les conserver et de les mettre en commun avec les autres éditeurs. Merci de votre compréhension." );
-			$("#wdg-validate-"+property).remove();
+			$("#wdg-validate-"+property).removeClass();
+			$("#wdg-validate-"+property).css( 'cursor', 'default' );
+			$("#wdg-validate-"+property).addClass("edit-button-validate-locked");
 			$("#wdg-edit-"+property).removeClass("wait-button");
 			ProjectEditor.keepUserLockProject();
 			ProjectEditor.softCancel = true;
@@ -760,6 +762,7 @@ var ProjectEditor = (function($) {
 			$(ProjectEditor.elements[property].elementId).show();
 			$(ProjectEditor.elements[property].contentId).hide();
 			ProjectEditor.showEditButton(property);
+			$("#wdg-validate-"+property).remove();
 			$("#wdg-cancel-"+property).remove();
 			WDGProjectPageFunctions.initClick();
 			WDGProjectPageFunctions.isEditing = "";
@@ -784,7 +787,6 @@ var ProjectEditor = (function($) {
 							'lang':		$("html").attr("lang").split("-").join("_")
 						}
 					}).done(function(property) {
-						$("#wdg-validate-"+property).remove();
 						ProjectEditor.keepUserLockProject();
 						ProjectEditor.backToEditMode(property);
 					});

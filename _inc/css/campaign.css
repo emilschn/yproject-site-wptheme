@@ -213,7 +213,7 @@ div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before 
 .editable {
     border: 1px dashed #2B2C2C;
 }
-.edit-button, .edit-button-validate, .move-button, .wait-button {
+.edit-button, .edit-button-validate, .edit-button-validate-locked, .move-button, .wait-button {
     position: absolute;
     cursor: pointer;
     width: 30px;
@@ -240,6 +240,9 @@ div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before 
 }
 .edit-button-validate {
     background: url("../../images/enregistrement.png") #D3EAE9 center no-repeat;
+}
+.edit-button-validate-locked {
+    background: url("../../images/enregistrement.png") #E1E3E2 center no-repeat;
 }
 .move-button {
     background: url("../../images/position.png") #D3EAE9 center no-repeat;
