@@ -598,6 +598,24 @@ var ProjectEditor = (function($) {
 			$("#wdg-validate-"+property).click(function() {
 				ProjectEditor.validateInput($(this).data("property"));
 			});
+
+			$(window).scroll(function() {
+				var scrollFromTop = window.scrollY;
+      			var buttonRegister = $("#wdg-validate-"+property);
+				var buttonsHeight = buttonRegister.height();         										
+      			var container = $(ProjectEditor.elements[property].contentId);
+			    var containerHeight = container.height();    										
+			    var containerOffset = (container.offset().top);
+			    													
+      			var maxScroll = containerOffset + containerHeight;									
+
+      			if(scrollFromTop < maxScroll){
+         			var size = scrollFromTop - containerOffset + ($(window).height() / 4);
+         			if (size > 3*buttonsHeight && size < containerHeight + 3*buttonsHeight ) {						
+             			buttonRegister.css('top', (size)+"px");
+             		}
+             	}
+			});
 		},
 		
 		//Redirige vers la page Paramètres
