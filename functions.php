@@ -504,14 +504,17 @@ function yproject_save_edit_project() {
 	$buffer = FALSE;
 	$WDGuser_current = WDGUser::current();
 	$user_id = $WDGuser_current->wp_user->ID;
+	$campaign = new ATCF_Campaign( $_POST['id_campaign'] );
+
 	$campaign_id = filter_input( INPUT_POST, 'id_campaign' );
 	$property = filter_input( INPUT_POST, 'property' );
 	$lang = filter_input( INPUT_POST, 'lang' );
+	
 	$meta_key = $property.'_add_value_reservation_'.$lang;
 	$meta_value = get_post_meta( $campaign_id, $meta_key, TRUE );
 	$WDGUser = new WDGUser( $meta_value[ 'user' ] );
 	$name = $WDGUser->get_firstname()." ".$WDGUser->get_lastname();
-
+	
 	$return_values = array(
 			"response" => "done",
 			"values" => $_POST['property'],
@@ -541,20 +544,41 @@ function yproject_save_edit_project() {
 						'ID' => $_POST['id_campaign'],
 						'post_content' => $_POST['value']
 					));
+					//nouvelle instance pour récupérer le contenu à jour
+					$description_campaign = new ATCF_Campaign( $_POST['id_campaign'] );
+					$return_values[ 'md5content' ] = md5( $description_campaign->description() );
 				} else {
 					update_post_meta($_POST['id_campaign'], 'campaign_description' . $current_lang, $_POST['value']);
+					$return_values[ 'md5content' ] = md5( $campaign->description() );
 				}
-				$return_values[ 'md5content' ] = md5( $_POST['value'] );
 				delete_post_meta( $campaign_id, $meta_key );
 			}
 			break;
 		case "societal_challenge":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_societal_challenge' . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $campaign->societal_challenge() );
+				delete_post_meta( $campaign_id, $meta_key );
+			}
+			break;
 		case "added_value":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_added_value' . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $campaign->added_value() );
+				delete_post_meta( $campaign_id, $meta_key );
+			}
+			break;
 		case "economic_model":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_economic_model' . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $campaign->economic_model() );
+				delete_post_meta( $campaign_id, $meta_key );
+			}
+			break;
 		case "implementation":
 			if ( $buffer ) {
-				update_post_meta($_POST['id_campaign'], 'campaign_'. $_POST['property'] . $current_lang, $_POST['value']);
-				$return_values[ 'md5content' ] = md5( $_POST['value'] );
+				update_post_meta($_POST['id_campaign'], 'campaign_implementation' . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $campaign->implementation() );
 				delete_post_meta( $campaign_id, $meta_key );
 			}
 			break;
@@ -571,8 +595,7 @@ function yproject_save_edit_project() {
 		'projects-others',
 		'cache_campaign_' . $_POST['id_campaign']
 	));
-	
-	$campaign = new ATCF_Campaign( $_POST['id_campaign'] );
+
 	if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded ) {
 		$file_cacher = WDG_File_Cacher::current();
 		$file_cacher->delete( $campaign->data->post_name );
