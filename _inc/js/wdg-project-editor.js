@@ -605,16 +605,14 @@ var ProjectEditor = (function($) {
 				var topButtonValidate = $(ProjectEditor.elements[property].contentId).position().top; // position du bouton enregistré par rapport à l'encadrer de la partie
 				var margin = 10; // marge entre la barre de menu et la position de bouton
       			var buttonRegister = $("#wdg-validate-"+property);
-				var buttonsHeight = buttonRegister.height();         										
       			var container = $(ProjectEditor.elements[property].contentId);
-			    var containerHeight = container.height();    										
+			    var containerHeight = container.height();
 			    var containerOffset = (container.offset().top);
-			    													
-      			var maxScroll = containerOffset + containerHeight;									
+      			var maxScroll = containerOffset + containerHeight;
 
       			if ( scrollFromTop < maxScroll ) {
          			var size = scrollFromTop - containerOffset + topButtonValidate + heightNavBar + margin;
-         			if (size > topButtonValidate && size < containerHeight + topButtonValidate ) {						
+         			if (size > topButtonValidate && size < containerHeight + topButtonValidate ) {
              			buttonRegister.css('top', (size)+"px");
              		}
              	}
