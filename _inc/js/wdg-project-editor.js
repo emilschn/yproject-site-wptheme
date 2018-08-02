@@ -8,6 +8,7 @@ var ProjectEditor = (function($) {
 		isInit: false,
 		intervalID: null,
 		softCancel: null,
+		iniContent: null,
 		
 		//Initialisation : création du bouton en haut de page permettant de switcher d'un mode à l'autre
 		init: function() {
@@ -142,6 +143,14 @@ var ProjectEditor = (function($) {
 		//Masque le bouton d'édition d'un élément en paramètre
 		hideEditButton: function(property) {
 			$("#wdg-edit-"+property).hide();
+		},
+
+		hideAllEditButton: function() {
+			ProjectEditor.hideEditButton('description');
+			ProjectEditor.hideEditButton('societal_challenge');
+			ProjectEditor.hideEditButton('added_value');
+			ProjectEditor.hideEditButton('economic_model');
+			ProjectEditor.hideEditButton('implementation');
 		},
 
 		requestLockProject: function(sProperty) {
@@ -674,6 +683,8 @@ var ProjectEditor = (function($) {
 				ProjectEditor.cancelInput(property);
 			});
 
+			ProjectEditor.hideAllEditButton(); 
+			ProjectEditor.initContent = tinyMCE.get("wdg-input-"+property).getContent();
 			$("#wdg-edit-"+property).removeClass("wait-button");
 		},
 		
@@ -766,6 +777,7 @@ var ProjectEditor = (function($) {
 			$("#wdg-cancel-"+property).remove();
 			WDGProjectPageFunctions.initClick();
 			WDGProjectPageFunctions.isEditing = "";
+			tinyMCE.get("wdg-input-"+property).setContent(ProjectEditor.initContent);
 		},
 		
 		//Gère l'annulation de l'édition
