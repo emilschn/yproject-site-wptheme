@@ -601,6 +601,9 @@ var ProjectEditor = (function($) {
 
 			$(window).scroll(function() {
 				var scrollFromTop = window.scrollY;
+				var heightNavBar = $("div#content.version-3 nav.project-navigation").height(); // hauteur de la barre du menu
+				var topButtonValidate = $(ProjectEditor.elements[property].contentId).position().top; // position du bouton enregistré par rapport à l'encadrer de la partie
+				var margin = 10; // marge entre la barre de menu et la position de bouton
       			var buttonRegister = $("#wdg-validate-"+property);
 				var buttonsHeight = buttonRegister.height();         										
       			var container = $(ProjectEditor.elements[property].contentId);
@@ -609,9 +612,9 @@ var ProjectEditor = (function($) {
 			    													
       			var maxScroll = containerOffset + containerHeight;									
 
-      			if(scrollFromTop < maxScroll){
-         			var size = scrollFromTop - containerOffset + ($(window).height() / 4);
-         			if (size > 3*buttonsHeight && size < containerHeight + 3*buttonsHeight ) {						
+      			if ( scrollFromTop < maxScroll ) {
+         			var size = scrollFromTop - containerOffset + topButtonValidate + heightNavBar + margin;
+         			if (size > topButtonValidate && size < containerHeight + topButtonValidate ) {						
              			buttonRegister.css('top', (size)+"px");
              		}
              	}
