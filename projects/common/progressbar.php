@@ -1,11 +1,11 @@
 <?php 
-global $campaign, $stylesheet_directory_uri;
+global $campaign, $stylesheet_directory_uri, $is_progressbar_shortcode;
 $time_remaining_str = $campaign->time_remaining_str();
 $campaign_status = $campaign->campaign_status();
 ?>
 
 <?php if ( $campaign_status === ATCF_Campaign::$campaign_status_vote ): ?>
-<div class="progress-bar">
+<div class="progress-bar <?php if ( !empty( $is_progressbar_shortcode ) ) { echo 'shortcode-context'; } ?>">
 	<span class="vote-status" style="min-width:100%">&nbsp;<p>
 		<?php if ($time_remaining_str != '-'): ?>
 		<?php _e("projet en cours d'&eacute;valuation", "yproject"); ?>
@@ -30,7 +30,7 @@ $campaign_status = $campaign->campaign_status();
 		$file_check = 'minimum-goal-full.png';
 	}
 	?>
-<div class="progress-bar minimum-as-step">
+<div class="progress-bar minimum-as-step <?php if ( !empty( $is_progressbar_shortcode ) ) { echo 'shortcode-context'; } ?>">
 	<span class="current-amount" style="min-width:<?php echo $width_to_minimum_completed; ?>%;">&nbsp;<p><?php echo $campaign->current_amount(); ?></p>&nbsp;</span>
 	<span class="progress-bar-separator" style="margin-left: <?php echo $width_to_minimum_goal; ?>%;">
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/<?php echo $file_check; ?>" width="20" height="20">
@@ -46,7 +46,7 @@ $campaign_status = $campaign->campaign_status();
 	$percent = min( 100, $campaign->percent_minimum_completed( false ) );
 	$width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 	?>
-<div class="progress-bar">
+<div class="progress-bar <?php if ( !empty( $is_progressbar_shortcode ) ) { echo 'shortcode-context'; } ?>">
 	<span class="current-amount" style="min-width:<?php echo $width; ?>%;">&nbsp;<p><?php echo $campaign->current_amount(); ?></p>&nbsp;</span>
 	<span class="progress-percent"><p><?php echo $campaign->percent_minimum_completed(); ?></p></span>          
 </div>

@@ -105,7 +105,7 @@
 		//FIN CACHE HEAD
 		//*******************
 		?>
-		<?php if (!is_user_logged_in()): ?>
+		<?php if ( !is_user_logged_in() && $post->post_name == 'inscription' ): ?>
 		<script src='https://www.google.com/recaptcha/api.js'></script>
 		<?php endif; ?>
 

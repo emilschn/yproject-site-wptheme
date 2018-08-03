@@ -674,6 +674,7 @@ var ProjectEditor = (function($) {
 			$("#wdg-validate-"+property).click(function() {
 				ProjectEditor.validateInput($(this).data("property"));
 			});
+<<<<<<< HEAD
 			
 			var buttonCancel = '<div id="wdg-cancel-'+property+'" class="cancel-button" data-property="'+property+'" title="Annuler l\'édition"></div>';
 			$(ProjectEditor.elements[property].contentId).after(buttonCancel);
@@ -686,6 +687,27 @@ var ProjectEditor = (function($) {
 			ProjectEditor.hideAllEditButton(); 
 			ProjectEditor.initContent = tinyMCE.get("wdg-input-"+property).getContent();
 			$("#wdg-edit-"+property).removeClass("wait-button");
+=======
+
+			$(window).scroll(function() {
+				var scrollFromTop = window.scrollY;
+				var heightNavBar = $("div#content.version-3 nav.project-navigation").height(); // hauteur de la barre du menu
+				var topButtonValidate = $(ProjectEditor.elements[property].contentId).position().top; // position du bouton enregistré par rapport à l'encadrer de la partie
+				var margin = 10; // marge entre la barre de menu et la position de bouton
+      			var buttonRegister = $("#wdg-validate-"+property);
+      			var container = $(ProjectEditor.elements[property].contentId);
+			    var containerHeight = container.height();
+			    var containerOffset = (container.offset().top);
+      			var maxScroll = containerOffset + containerHeight;
+
+      			if ( scrollFromTop < maxScroll ) {
+         			var size = scrollFromTop - containerOffset + topButtonValidate + heightNavBar + margin;
+         			if (size > topButtonValidate && size < containerHeight + topButtonValidate ) {
+             			buttonRegister.css('top', (size)+"px");
+             		}
+             	}
+			});
+>>>>>>> master
 		},
 		
 		//Redirige vers la page Paramètres
