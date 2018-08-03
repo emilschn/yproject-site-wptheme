@@ -1099,7 +1099,7 @@ WDGProjectPageFunctions=(function($) {
 				}
 				WDGProjectPageFunctions.currentDiv++;
 			});
-			$('.projects-desc-content img, .projects-desc-content .expandator, .projects-desc-content .edit-button, .projects-desc-content .edit-button-validate').click(function() {
+			$('.projects-desc-content img, .projects-desc-content .expandator, .projects-desc-content .edit-button, .projects-desc-content .edit-button-validate, .projects-desc-content .cancel-button').click(function() {
 				WDGProjectPageFunctions.isClickBlocked = true;
 			});
 			WDGProjectPageFunctions.refreshEditable();
@@ -1110,7 +1110,7 @@ WDGProjectPageFunctions=(function($) {
 		clickItem: function(clickedElement) {
 			//Ne déclenche pas d'action si l'utilisateur sélectionnait du texte
 			var select = getSelection().toString();
-			if (!select && WDGProjectPageFunctions.isEditing === "" && !WDGProjectPageFunctions.isClickBlocked) {
+			if (!select && !WDGProjectPageFunctions.isClickBlocked) {
 				//Si la balise "lire plus" de l'élément cliqué est affichée
 				var projectMore = clickedElement.find('.projects-more');
 				if (projectMore.is(':visible')) {
@@ -1123,33 +1123,22 @@ WDGProjectPageFunctions=(function($) {
 							}
 							$('html, body').animate({scrollTop: clickedElement.offset().top - WDGProjectPageFunctions.navigationHeight + offset}, "slow");
 							clickedElement.find('.zone-content > div, p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
-							WDGProjectPageFunctions.refreshEditable();
+							//on empêche les petites zones d'être éditable si une partie est en cours d'édition
+							if ( WDGProjectPageFunctions.isEditing === "" ) {
+								WDGProjectPageFunctions.refreshEditable();
+							}
 						}, 200 );
 					});
-					//on masque aussi toutes les autres parties
-					WDGProjectPageFunctions.hideOthers(parseInt(projectMore.attr("data-value")));
+					//on masque aussi toutes les autres parties si aucune partie est en cours d'édition
+					if ( WDGProjectPageFunctions.isEditing === "" ) {
+						WDGProjectPageFunctions.hideOthers(parseInt(projectMore.attr("data-value")));
+					}
 					//Sinon on masque tout
-				} else {
+				} else if ( WDGProjectPageFunctions.isEditing === "" ) {
 					WDGProjectPageFunctions.hideOthers(-1);
 					WDGProjectPageFunctions.refreshEditable();
 				}
 			} 
-
-			if ( WDGProjectPageFunctions.isEditing ) {
-				var projectMore = clickedElement.find('.projects-more');
-				if (projectMore.is(':visible')) {
-					projectMore.hide(400, function(){
-						setTimeout( function() {
-							var offset = - 60;
-							if ( $( document ).width() < 997 ) {
-								offset = - 45;
-							}
-							$('html, body').animate({scrollTop: clickedElement.offset().top - WDGProjectPageFunctions.navigationHeight + offset}, "slow");
-							clickedElement.find('.zone-content > div, p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
-						}, 200 );
-					});
-				}
-			}
 			WDGProjectPageFunctions.isClickBlocked = false;
 		},
 
