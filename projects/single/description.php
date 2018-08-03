@@ -10,7 +10,9 @@ if ($can_modify) {
 		'quicktags'     => $WDGCurrentUser->is_admin(),
 		'editor_height' => 500,
 		'tinymce'       => array(
-			'plugins' => 'wordpress, paste, wplink, textcolor',
+			'plugins'		=> 'wordpress, paste, wplink, textcolor, charmap, hr, colorpicker, lists',
+			'toolbar1'		=> 'bold,italic,underline,|,hr,bullist,numlist,|,alignleft,aligncenter,alignright,alignjustify,|,link,unlink,video,wp_adv',
+			'toolbar2'		=> 'formatselect,fontsizeselect,removeformat,charmap,forecolor,forecolorpicker,pastetext,table,undo,redo,help',
 			'paste_remove_styles' => true
 		)
 	);
