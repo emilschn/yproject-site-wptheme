@@ -101,6 +101,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 //			'/solutions/entreprises/'						=> '0.6',
 //			'/solutions/fonds-investissement/'				=> '0.6',
 			'/solutions/incubateur/'						=> '0.6',
+			'/epargne-positive/'							=> '0.6',
 			// 0.5
 			// PROJETS
 //			'/financement/offres/'									=> '0.5',
