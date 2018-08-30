@@ -18,6 +18,7 @@ class YPShortcodeManager {
 		'yproject_statsadvanced_lightbox',
 		'yproject_newproject_lightbox',
 		'wdg_project_vote_count',
+		'wdg_project_investors_count',
 		'wdg_project_amount_count',
 		'wdg_project_investment_link',
 		'wdg_project_progress_bar',
@@ -220,6 +221,18 @@ class YPShortcodeManager {
 			$post_campaign = get_post($atts['project']);
 			$campaign = atcf_get_campaign($post_campaign);
 			return $campaign->nb_voters();
+		}
+	}
+	
+	function wdg_project_investors_count($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'project' => '',
+		), $atts );
+
+		if (isset($atts['project']) && is_numeric($atts['project'])) {
+			$post_campaign = get_post($atts['project']);
+			$campaign = atcf_get_campaign($post_campaign);
+			return $campaign->backers_count();
 		}
 	}
 	
