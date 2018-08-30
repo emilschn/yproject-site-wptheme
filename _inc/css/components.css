@@ -473,6 +473,9 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	position: relative;
 	top: 0px;
 }
+.wpb_text_column .progress-bar.shortcode-context span p {
+	margin-bottom: 15px !important;
+}
 .progress-bar .current-amount {
     display: -webkit-flex;
     display: flex;
