@@ -459,6 +459,12 @@ $WDGUser_current = WDGUser::current();
 				<input type="hidden" name="authentify_lw" value="1" />
 				<input type="submit" class="button" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
 			</form>
+		<?php elseif ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_incomplete): ?>
+			<?php _e("L'organisation n'est que partiellement authentifi&eacute;e.", 'yproject'); ?>
+			<form action="" method="POST">
+				<input type="hidden" name="authentify_lw" value="1" />
+				<input type="submit" class="button" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />
+			</form>
 		<?php elseif ($organization_obj->is_registered_lemonway_wallet()): ?>
 			<?php _e("L'organisation est bien authentifi&eacute;e aupr&egrave;s de notre partenaire.", 'yproject'); ?>
 		<?php elseif ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_rejected): ?>

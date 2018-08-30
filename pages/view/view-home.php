@@ -82,7 +82,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<br>
 			<span class="news-title"><?php _e( "D&eacute;couvrez l'&eacute;pargne positive !", 'yproject' ); ?></span>
 			<br>
-			<a href="https://www.wedogood.co/accelerer-la-transition/" class="button transparent"><?php _e( "Lire", 'yproject' ); ?></a>
+			<a href="https://www.wedogood.co/epargne-positive/" class="button transparent"><?php _e( "Lire", 'yproject' ); ?></a>
 		</div>
 		
 		<div class="clear">

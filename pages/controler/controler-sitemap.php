@@ -62,6 +62,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			// 0.9
 			'/financement/'			=> '0.9',
 			'/investissement/'		=> '0.9',
+			'/epargne-positive/'	=> '0.9',
 			// 0.8
 			'/financement/entreprises/'				=> '0.8',
 //			'/financement/solutions/'				=> '0.8',
