@@ -252,15 +252,16 @@ class YPShortcodeManager {
 		$atts = shortcode_atts( array(
 			'project' => '',
 			'label' => '',
-			'class' => ''
+			'class' => '',
+			'style' => ''
 		), $atts );
 
 		$buffer = '';
 		if ( isset( $atts[ 'project' ] ) && is_numeric( $atts[ 'project' ] ) ) {
 			if ( is_user_logged_in() ) {
-				$buffer = '<a href="' .home_url( '/investir/' ). '?campaign_id=' .$atts[ 'project' ]. '&amp;invest_start=1" class="' .$atts[ 'class' ]. '">' .$atts[ 'label' ]. '</a>';
+				$buffer = '<a href="' .home_url( '/investir/' ). '?campaign_id=' .$atts[ 'project' ]. '&amp;invest_start=1" class="' .$atts[ 'class' ]. '" style="' .$atts[ 'style' ]. '">' .$atts[ 'label' ]. '</a>';
 			} else {
-				$buffer = '<a href="' .home_url( '/connexion/' ). '" class="' .$atts[ 'class' ]. '">' .$atts[ 'label' ]. '</a>';
+				$buffer = '<a href="' .home_url( '/connexion/' ). '" class="' .$atts[ 'class' ]. '" style="' .$atts[ 'style' ]. '">' .$atts[ 'label' ]. '</a>';
 			}
 		}
 		return $buffer;
