@@ -17,7 +17,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		
 			<?php
 			$fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Poll::$field_group_hidden );
-			$fields_poll_warranty = $page_controler->get_form()->getFields( WDG_Form_Invest_Poll::$field_group_poll_warranty );
 			$fields_poll_source = $page_controler->get_form()->getFields( WDG_Form_Invest_Poll::$field_group_poll_source );
 			?>
 		
@@ -35,11 +34,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				</div>
 
 				<?php foreach ( $fields_hidden as $field ): ?>
-					<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-					<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
-				<?php endforeach; ?>
-
-				<?php foreach ( $fields_poll_warranty as $field ): ?>
 					<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 					<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 				<?php endforeach; ?>

@@ -17,7 +17,6 @@ $core->include_form( 'invest-poll' );
 $WDGCurrent_User = WDGUser::current();
 $WDGPollForm = new WDG_Form_Invest_Poll( $post->ID, $WDGCurrent_User->wp_user->ID, 'vote' );
 $fields_poll_source = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_group_poll_source );
-$fields_poll_warranty = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_group_poll_warranty );
 ?>
 
 <?php ob_start(); ?>
@@ -117,17 +116,6 @@ $fields_poll_warranty = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_gr
 			</div>
 			
 			<?php foreach ( $field_invest as $field ): ?>
-				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
-			<?php endforeach; ?>
-			
-			<div>
-				<br>
-				<?php _e( "WE DO GOOD envisage avec son partenaire Le Fonds Compagnon de proposer une protection des investissements en cas de cession d'activit&eacute; de l'entreprise.", 'yproject' ); ?>
-				<br><br>
-			</div>
-			
-			<?php foreach ( $fields_poll_warranty as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 			<?php endforeach; ?>
