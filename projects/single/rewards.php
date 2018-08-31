@@ -74,7 +74,11 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 							<?php endif; ?>
 							<span class="roi_percent_user">0</span> % <?php _e( "du chiffre d'affaires de ce projet", 'yproject' ); echo $complementary_text; ?><br />
 							<?php _e("Soit", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro;* </span><?php _e( "selon", 'yproject' ); ?>
-							<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet", 'yproject' )?></a>
+							<?php if ( empty( $is_simulator_shortcode ) ): ?>
+								<a href="#top-economic_model"><?php _e("les pr&eacute;visions du porteur de projet", "yproject")?></a>
+							<?php else: ?>
+								<?php _e("les pr&eacute;visions du porteur de projet", "yproject")?>
+							<?php endif; ?>
 							<?php _e( "r&eacute;partis de la mani&egrave;re suivante :", 'yproject' ); ?>
 						</div>
 					</div>
@@ -98,8 +102,18 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 					<?php $base = 130 * $index; ?>
 					<div class="arrow-line" style="width: <?php echo $base ?>px;"><div class="arrow-end"></div></div>
 					<?php endif; ?>
-
 				<?php endif; ?>  
+=======
+				<span class="small-alert">* <?php _e("Ces valeurs sont estim&eacute;es selon", "yproject");?>&nbsp;
+					<?php if ( empty( $is_simulator_shortcode ) ): ?>
+						<a href="#top-economic_model"><?php _e("les pr&eacute;visions du porteur de projet", "yproject")?></a>.
+					<?php else: ?>
+						<?php _e("les pr&eacute;visions du porteur de projet", "yproject")?>.
+					<?php endif; ?>
+					<?php echo sprintf( __("Risque de perte int&eacute;grale de l&apos;investissement. Gain maximum : %s.", "yproject"), $campaign->maximum_profit_str() ); ?>
+				</span>
+			</div>
+>>>>>>> master
 
 				<div>
 					<ul>
