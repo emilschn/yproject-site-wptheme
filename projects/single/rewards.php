@@ -93,7 +93,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 
 				<span class="small-alert">* <?php _e("Ces valeurs sont estim&eacute;es selon", "yproject");?>&nbsp;
 					<a href="#top-economic_model"><?php _e("les pr&eacute;visions du porteur de projet", "yproject")?></a>.
-					<?php echo sprintf( __("Risque de perte int&eacute;grale de l&apos;investissement. Gain maximum : x%s.", "yproject"), $campaign->maximum_profit() ); ?>
+					<?php echo sprintf( __("Risque de perte int&eacute;grale de l&apos;investissement. Gain maximum : %s.", "yproject"), $campaign->maximum_profit_str() ); ?>
 				</span>
 			</div>
 
