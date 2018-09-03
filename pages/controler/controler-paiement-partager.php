@@ -62,7 +62,7 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 /******************************************************************************/
 	private function init_form_polls() {
 		$this->can_display_form = FALSE;
-		if ( is_user_logged_in() ) {
+		if ( is_user_logged_in() && !$this->current_campaign->is_positive_savings() ) {
 			$WDGCurrent_User = WDGUser::current();
 			$poll_answers = WDGWPREST_Entity_PollAnswer::get_list( $WDGCurrent_User->get_api_id(), $this->current_campaign->get_api_id() );
 			if ( empty( $poll_answers ) ) {
