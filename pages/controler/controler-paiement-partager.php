@@ -36,10 +36,6 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 		return $this->current_campaign;
 	}
 	
-	public function get_campaign_link() {
-		return get_permalink( $this->current_campaign->ID );
-	}
-	
 /******************************************************************************/
 // CURRENT INVESTMENT
 /******************************************************************************/
