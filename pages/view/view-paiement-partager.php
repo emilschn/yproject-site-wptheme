@@ -61,7 +61,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<br><br>
 		
 			<div class="db-form v3 full">
-				<a class="button transparent" href="<?php echo $page_controler->get_current_campaign()->get_public_url(); ?>"><?php _e( "Retour au projet", 'yproject' ); ?></a>
+				<?php if ( $page_controler->get_current_campaign()->is_positive_savings() ): ?>
+					<a class="button transparent" href="<?php echo $page_controler->get_current_campaign()->get_public_url(); ?>"><?php _e( "Retour &agrave; la page &Eacute;pargne positive", 'yproject' ); ?></a>
+				<?php else: ?>
+					<a class="button transparent" href="<?php echo $page_controler->get_current_campaign()->get_public_url(); ?>"><?php _e( "Retour au projet", 'yproject' ); ?></a>
+				<?php endif; ?>
 			</div>
 		
 		<?php endif; ?>
