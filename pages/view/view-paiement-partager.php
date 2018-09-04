@@ -17,7 +17,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		
 			<?php
 			$fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Poll::$field_group_hidden );
-			$fields_poll_warranty = $page_controler->get_form()->getFields( WDG_Form_Invest_Poll::$field_group_poll_warranty );
 			$fields_poll_source = $page_controler->get_form()->getFields( WDG_Form_Invest_Poll::$field_group_poll_source );
 			?>
 		
@@ -35,11 +34,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				</div>
 
 				<?php foreach ( $fields_hidden as $field ): ?>
-					<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-					<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
-				<?php endforeach; ?>
-
-				<?php foreach ( $fields_poll_warranty as $field ): ?>
 					<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 					<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 				<?php endforeach; ?>
@@ -67,7 +61,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<br><br>
 		
 			<div class="db-form v3 full">
-				<a class="button transparent" href="<?php echo $page_controler->get_campaign_link(); ?>"><?php _e( "Retour au projet", 'yproject' ); ?></a>
+				<?php if ( $page_controler->get_current_campaign()->is_positive_savings() ): ?>
+					<a class="button transparent" href="<?php echo $page_controler->get_current_campaign()->get_public_url(); ?>"><?php _e( "Retour &agrave; la page &Eacute;pargne positive", 'yproject' ); ?></a>
+				<?php else: ?>
+					<a class="button transparent" href="<?php echo $page_controler->get_current_campaign()->get_public_url(); ?>"><?php _e( "Retour au projet", 'yproject' ); ?></a>
+				<?php endif; ?>
 			</div>
 		
 		<?php endif; ?>

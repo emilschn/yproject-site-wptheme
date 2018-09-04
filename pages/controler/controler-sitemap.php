@@ -80,6 +80,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/financement/fonds-propres/'					=> '0.7',
 			'/financement/non-dilutif/'						=> '0.7',
 			'/financement/offres/love-money/'				=> '0.7',
+			'/financement/rapide/'							=> '0.7',
 			'/financement/royalty-crowdfunding/'			=> '0.7',
 //			'/financement/solutions/innovation/'			=> '0.7',
 //			'/financement/solutions/investissements/'		=> '0.7',
@@ -102,6 +103,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 //			'/solutions/entreprises/'						=> '0.6',
 //			'/solutions/fonds-investissement/'				=> '0.6',
 			'/solutions/incubateur/'						=> '0.6',
+			'/solutions/incubateurs-accelerateurs/'			=> '0.6',
 			// 0.5
 			// PROJETS
 //			'/financement/offres/'									=> '0.5',
