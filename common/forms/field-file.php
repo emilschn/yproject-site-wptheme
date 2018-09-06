@@ -11,7 +11,9 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 ?>
 
 <?php if ( !empty( $message_instead_of_field ) ): ?>
-<div class="field-description"><?php echo $message_instead_of_field; ?></div>
+<div class="wdg-message">
+	<?php echo $message_instead_of_field; ?>
+</div>
 
 <?php else: ?>
 <?php if ( $display_refused_alert ): ?>
