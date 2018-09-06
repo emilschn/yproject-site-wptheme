@@ -14,7 +14,8 @@ $replaces_final = array( '', '\\\'', '\n' );
 $declaration_message = str_replace( $replaces_original, $replaces_final, $declaration->get_message() );
 
 $adjustment_value = $declaration->get_adjustment_value();
-$adjustment_message = $declaration->get_adjustment_message( 'investors' );
+$adjustment_message_author = $declaration->get_adjustment_message( 'author' );
+$adjustment_message_investors = $declaration->get_adjustment_message( 'investors' );
 
 $date_due = new DateTime( $declaration->date_due );
 $declaration_month_num = $date_due->format( 'n' );
@@ -108,10 +109,25 @@ for ($i = 0; $i < $nb_fields; $i++) {
 		<?php endif; ?>
 	</td>
 	
-	<?php // Info ajustement ?>
+	<?php // Info ajustement ent. ?>
 	<td>
 		<?php if ( $adjustment_value != 0 ): ?>
-			<a href="#wallet" onclick="alert('<?php echo $adjustment_message; ?>');"><?php _e( "Voir le message", 'yproject' ); ?></a>
+			<?php if ( empty( $adjustment_message_author ) ): ?>
+				<?php _e( "Aucun message", 'yproject' ); ?>
+			<?php else: ?>
+				<a href="#wallet" onclick="alert('<?php echo $adjustment_message_author; ?>');"><?php _e( "Voir le message", 'yproject' ); ?></a>
+			<?php endif; ?>
+		<?php endif; ?>
+	</td>
+	
+	<?php // Info ajustement inv. ?>
+	<td>
+		<?php if ( $adjustment_value != 0 ): ?>
+			<?php if ( empty( $adjustment_message_investors ) ): ?>
+				<?php _e( "Aucun message", 'yproject' ); ?>
+			<?php else: ?>
+				<a href="#wallet" onclick="alert('<?php echo $adjustment_message_investors; ?>');"><?php _e( "Voir le message", 'yproject' ); ?></a>
+			<?php endif; ?>
 		<?php endif; ?>
 	</td>
 	
