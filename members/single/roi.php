@@ -83,7 +83,7 @@ if ( !empty( $input_organization ) ) {
 								<td><?php echo YPUIHelpers::display_number( $payment_amount, TRUE ); ?> &euro;</td>
 								<td><?php echo YPUIHelpers::display_number( $roi_percent_display ); ?> %</td>
 								<td>
-									<?php if ( empty( $contract_filename ) ): ?>
+									<?php if ( !empty( $contract_filename ) ): ?>
 										<a href="<?php echo home_url('/wp-content/plugins/appthemer-crowdfunding/includes/pdf_files/') . $contract_filename; ?>" download="<?php echo $download_filename; ?>"><?php _e("T&eacute;l&eacute;charger", 'yproject'); ?></a>
 									<?php else: ?>
 										<?php _e( "Pas de contrat sur le site", 'yproject' ); ?>
