@@ -13,6 +13,9 @@ $replaces_original = array( '<br />', '\'', '
 $replaces_final = array( '', '\\\'', '\n' );
 $declaration_message = str_replace( $replaces_original, $replaces_final, $declaration->get_message() );
 
+$adjustment_value = $declaration->get_adjustment_value();
+$adjustment_message = $declaration->get_adjustment_message( 'investors' );
+
 $date_due = new DateTime( $declaration->date_due );
 $declaration_month_num = $date_due->format( 'n' );
 $declaration_year = $date_due->format( 'Y' );
@@ -106,10 +109,18 @@ for ($i = 0; $i < $nb_fields; $i++) {
 	</td>
 	
 	<?php // Info ajustement ?>
-	<td></td>
+	<td>
+		<?php if ( $adjustment_value > 0 ): ?>
+			<a href="#wallet" onclick="alert('<?php echo $adjustment_message; ?>');"><?php _e( "Voir le message", 'yproject' ); ?></a>
+		<?php endif; ?>
+	</td>
 	
 	<?php // Montant ajustement ?>
-	<td></td>
+	<td>
+		<?php if ( $adjustment_value > 0 ): ?>
+			<?php echo UIHelpers::format_number( $adjustment_value ); ?> &euro;
+		<?php endif; ?>
+	</td>
 	
 	<?php // Justificatif ?>
 	<td>
