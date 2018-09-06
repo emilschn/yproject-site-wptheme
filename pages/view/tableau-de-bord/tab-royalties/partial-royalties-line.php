@@ -110,14 +110,14 @@ for ($i = 0; $i < $nb_fields; $i++) {
 	
 	<?php // Info ajustement ?>
 	<td>
-		<?php if ( $adjustment_value > 0 ): ?>
+		<?php if ( $adjustment_value != 0 ): ?>
 			<a href="#wallet" onclick="alert('<?php echo $adjustment_message; ?>');"><?php _e( "Voir le message", 'yproject' ); ?></a>
 		<?php endif; ?>
 	</td>
 	
 	<?php // Montant ajustement ?>
 	<td>
-		<?php if ( $adjustment_value > 0 ): ?>
+		<?php if ( $adjustment_value != 0 ): ?>
 			<?php echo UIHelpers::format_number( $adjustment_value ); ?> &euro;
 		<?php endif; ?>
 	</td>
