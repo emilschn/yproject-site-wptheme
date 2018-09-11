@@ -169,6 +169,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$buffer = array();
 		
 		$buffer[ 'name' ] = $this->campaign->get_name();
+		$buffer[ 'url' ] = '/' .$this->campaign->get_url();
 		$buffer[ 'goal' ] = $this->campaign->minimum_goal();
 		$buffer[ 'average_median_for_campaign' ] = 40000;
 		
