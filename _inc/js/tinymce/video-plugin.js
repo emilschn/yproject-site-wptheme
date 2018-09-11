@@ -9,7 +9,7 @@
                 title : 'Ajouter une vidéo',
                 image : url + '/img/mon_picto.png',
                 onclick : function() {
-                    var urlVideo = prompt('Lien de votre vidéo', '');
+                    var urlVideo = prompt('Lien de votre vidéo (ceci ajoutera un code spécial, veuillez rafraichir la page pour la visualiser)', '');
                     if ( urlVideo != null && urlVideo != '') {
                         codeUrlVideo = '[embed]'+urlVideo+'[/embed]';
                         ed.execCommand('mceInsertContent', false, codeUrlVideo);    

@@ -499,6 +499,36 @@ function yproject_save_edit_project() {
 	
 	ypcf_debug_log( 'yproject_save_edit_project > property ('.$current_lang.') => ' . $_POST['property'], TRUE );
 	ypcf_debug_log( 'yproject_save_edit_project > value ('.$current_lang.') => ' . $_POST['value'], TRUE );
+
+	//Supprime la réservation de l'édition en cours
+	$buffer = FALSE;
+	$WDGuser_current = WDGUser::current();
+	$user_id = $WDGuser_current->wp_user->ID;
+	$campaign = new ATCF_Campaign( $_POST['id_campaign'] );
+
+	$campaign_id = filter_input( INPUT_POST, 'id_campaign' );
+	$property = filter_input( INPUT_POST, 'property' );
+	$lang = filter_input( INPUT_POST, 'lang' );
+	
+	$meta_key = $property.'_add_value_reservation_'.$lang;
+	$meta_value = get_post_meta( $campaign_id, $meta_key, TRUE );
+	$WDGUser = new WDGUser( $meta_value[ 'user' ] );
+	$name = $WDGUser->get_firstname()." ".$WDGUser->get_lastname();
+	
+	$return_values = array(
+			"response" => "done",
+			"values" => $_POST['property'],
+			"user" => $name,
+			"md5content" => null
+	);
+
+	if ( !empty($meta_value) ) {
+	    if ( $meta_value[ 'user' ] == $user_id ) {			
+			$buffer = TRUE;
+	    } else {
+	    	$return_values[ 'response' ] = "error";
+	    }
+	}
 	
 	switch ($_POST['property']) {
 		case "title":
@@ -508,13 +538,48 @@ function yproject_save_edit_project() {
 			));
 			break;
 		case "description":
-			if (empty($current_lang)) {
-				wp_update_post(array(
-					'ID' => $_POST['id_campaign'],
-					'post_content' => $_POST['value']
-				));
-			} else {
-				update_post_meta($_POST['id_campaign'], 'campaign_description' . $current_lang, $_POST['value']);
+			if ( $buffer ) {
+				if (empty($current_lang)) {
+					wp_update_post(array(
+						'ID' => $_POST['id_campaign'],
+						'post_content' => $_POST['value']
+					));
+					//nouvelle instance pour récupérer le contenu à jour
+					$description_campaign = new ATCF_Campaign( $_POST['id_campaign'] );
+					$return_values[ 'md5content' ] = md5( $description_campaign->description() );
+				} else {
+					update_post_meta($_POST['id_campaign'], 'campaign_description' . $current_lang, $_POST['value']);
+					$return_values[ 'md5content' ] = md5( $campaign->description() );
+				}
+				delete_post_meta( $campaign_id, $meta_key );
+			}
+			break;
+		case "societal_challenge":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_societal_challenge' . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $campaign->societal_challenge() );
+				delete_post_meta( $campaign_id, $meta_key );
+			}
+			break;
+		case "added_value":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_added_value' . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $campaign->added_value() );
+				delete_post_meta( $campaign_id, $meta_key );
+			}
+			break;
+		case "economic_model":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_economic_model' . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $campaign->economic_model() );
+				delete_post_meta( $campaign_id, $meta_key );
+			}
+			break;
+		case "implementation":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_implementation' . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $campaign->implementation() );
+				delete_post_meta( $campaign_id, $meta_key );
 			}
 			break;
 		default: 
@@ -530,13 +595,12 @@ function yproject_save_edit_project() {
 		'projects-others',
 		'cache_campaign_' . $_POST['id_campaign']
 	));
-	
-	$campaign = new ATCF_Campaign( $_POST['id_campaign'] );
+
 	if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded ) {
 		$file_cacher = WDG_File_Cacher::current();
 		$file_cacher->delete( $campaign->data->post_name );
 	}
-	echo $_POST['property'];
+	echo json_encode($return_values);
 	exit();
 }
 add_action('wp_ajax_save_edit_project', 'yproject_save_edit_project');

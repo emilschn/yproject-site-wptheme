@@ -829,7 +829,9 @@ var WDGFormsFunctions = (function($) {
 				$( '.db-form.v3 input[type=checkbox]' ).each( function(){
 					if ( !$( this ).hasClass( 'rate' ) && !$( this ).parent().hasClass( 'selectit' ) ) {
 						$( this ).parent().click( function( e ) {
-							e.preventDefault();
+							if ( $( this ).data( 'keepdefault' ) != '1' ) {
+								e.preventDefault();
+							}
 							var checkboxItem = $( this ).children( 'input[type=checkbox]' )[0];
 							checkboxItem.checked = !checkboxItem.checked;
 						} );
