@@ -666,7 +666,7 @@ function get_invests_graph(){
     }
     ?>
     <script type="text/javascript">
-    jQuery(document).ready( function($) {
+    /* jQuery(document).ready( function($) {
             var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
             var dataLine = {
                 labels : [<?php echo date_abs($date_collecte_start); ?>,
@@ -761,7 +761,7 @@ function get_invests_graph(){
                     echo (round($max,0,PHP_ROUND_HALF_UP)/5);?>
             };
             var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
-    });
+    }); */
     </script>
     
     
