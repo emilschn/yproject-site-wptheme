@@ -118,7 +118,8 @@ if ( !empty( $saved_mandates_list ) ) {
 									<td>Royalties</td>
 									<td>Message</td>
 									<td>Etat</td>
-									<td>Info ajustement</td>
+									<td>Info ajustement ent.</td>
+									<td>Info ajustement inv.</td>
 									<td>Montant ajustement</td>
 									<td>Justificatif</td>
 									<td>Facture</td>
@@ -132,7 +133,8 @@ if ( !empty( $saved_mandates_list ) ) {
 									<td>Royalties</td>
 									<td>Message</td>
 									<td>Etat</td>
-									<td>Info ajustement</td>
+									<td>Info ajustement ent.</td>
+									<td>Info ajustement inv.</td>
 									<td>Montant ajustement</td>
 									<td>Justificatif</td>
 									<td>Facture</td>

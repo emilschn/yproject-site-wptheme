@@ -7,6 +7,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <br><br>
 
 <?php if ( $page_controler->needs_two_contracts() ): ?>
+
+	<?php _e( "Votre compte bancaire a &eacute;t&eacute; d&eacute;bit&eacute;.", 'yproject' ); ?><br>
 	<?php _e( "Votre investissement est valid&eacute; pour un montant de ", 'yproject' ); ?> <?php echo $page_controler->get_maximum_investable_amount(); ?> &euro;.<br>
 	<?php _e( "Vous allez recevoir un e-mail &agrave; l&apos;adresse", 'yproject' ); ?> <?php echo $page_controler->get_current_user_email(); ?> (<?php _e( "pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable", 'yproject' ); ?>).<br>
 	<?php _e( "Votre contrat d&apos;investissement sera joint &agrave; cet e-mail.", 'yproject' ); ?><br><br>
@@ -87,6 +89,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 
 	<?php else: ?>
+		<?php _e( "Votre compte bancaire a &eacute;t&eacute; d&eacute;bit&eacute;.", 'yproject' ); ?><br>
 		<?php _e( "Votre investissement est valid&eacute;.", 'yproject' ); ?><br>
 		<?php _e( "Vous allez recevoir un e-mail &agrave; l&apos;adresse", 'yproject' ); ?> <?php echo $page_controler->get_current_user_email(); ?> (<?php _e( "pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable", 'yproject' ); ?>).<br>
 		<?php _e( "Votre contrat d&apos;investissement sera joint &agrave; cet e-mail.", 'yproject' ); ?><br><br>

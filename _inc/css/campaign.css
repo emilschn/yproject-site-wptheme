@@ -160,7 +160,7 @@ div#content.version-3 div.project-admin > a, div#content.version-3 div.project-a
 	color: #000000;
 	background-color: #D3EAE9;
 }
-.edit-button, .move-button, .wait-button, #wdg-edit-project-add-lang button.add-button {
+.edit-button, .move-button, .cancel-button, .wait-button, #wdg-edit-project-add-lang button.add-button {
 	background-color: #D3EAE9;
 }
 div#content.version-3 div.project-admin > div.btn-edit.edit-button-validate {
@@ -213,7 +213,7 @@ div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before 
 .editable {
     border: 1px dashed #2B2C2C;
 }
-.edit-button, .edit-button-validate, .move-button, .wait-button {
+.edit-button, .edit-button-validate, .edit-button-validate-locked, .move-button, .wait-button {
     position: absolute;
     cursor: pointer;
     width: 30px;
@@ -221,13 +221,28 @@ div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before 
     margin-left: 5px;
     z-index: 150;
 }
+.cancel-button {
+    position: absolute;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-top: 35px;
+    z-index: 150;
+}
 .edit-button {
     background: url("../../images/editer.png") #D3EAE9 center no-repeat;
     position: absolute;
     min-height: 24px;
 }
+.cancel-button {
+    background: url("../../images/croix.png") #D3EAE9 center no-repeat;
+}
 .edit-button-validate {
     background: url("../../images/enregistrement.png") #D3EAE9 center no-repeat;
+}
+.edit-button-validate-locked {
+    background: url("../../images/enregistrement.png") #E1E3E2 center no-repeat;
 }
 .move-button {
     background: url("../../images/position.png") #D3EAE9 center no-repeat;

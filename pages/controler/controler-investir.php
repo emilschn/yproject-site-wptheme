@@ -288,6 +288,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					if ( $this->form->postForm() ) {
 						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> GOTO moyen-de-paiement' );
 						wp_redirect( home_url( '/moyen-de-paiement/' ) . '?campaign_id=' . $this->current_campaign->ID. '&meanofpayment=' .$this->form->getMeanOfPayment() );
+						exit();
 					}
 				}
 				break;

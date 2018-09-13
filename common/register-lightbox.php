@@ -68,7 +68,7 @@
 				<?php endif; ?>
 
 				<div class="field">
-					<label for="validate-terms-check-register" id="label-validate-terms-check-register"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> J&apos;accepte <a href="<?php echo home_url().'/cgu/';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
+					<label for="validate-terms-check-register" id="label-validate-terms-check-register" data-keepdefault="1"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> J&apos;accepte <a href="<?php echo home_url().'/cgu/';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
 				</div>
 
 				<?php wp_nonce_field( 'register_form_posted' ); ?>

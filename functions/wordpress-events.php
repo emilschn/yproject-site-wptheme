@@ -90,6 +90,9 @@ class WDG_WordPress_Events {
       		add_filter( 'mce_external_plugins', 'WDG_WordPress_Events::add_plugin' );
       		add_filter( 'mce_buttons', 'WDG_WordPress_Events::register_button' );
       	}
+
+      	add_filter('tiny_mce_before_init', 'WDG_WordPress_Events::color_text_editor');
+      	add_filter( 'tiny_mce_before_init', 'WDG_WordPress_Events::display_toolbar' );
 	}
 	
 	/**
@@ -107,6 +110,67 @@ class WDG_WordPress_Events {
    		$plugin_array['video'] = '/wp-content/themes/yproject/_inc/js/tinymce/video-plugin.js';
    		return $plugin_array;
 	}
+
+	/**
+	 * Choix des couleurs de la palette de l'éditeur de texte
+	 */
+	public static function color_text_editor( $init ) {
+		$default_colours = '
+		"FFFFFF", "Blanc",
+		"A9EAFE", "Azurin",
+		"FF5E4D", "Rouge capucine",
+		"F7FF3C", "Jaune citron",
+		"B0F2B6", "Vert eau",
+		"FEBFD2", "Rose dragée",
+		"FFE4C4", "Beige",
+		"EACDCB", "Rose WDG",
+
+		"CECECE", "Gris perle",
+		"77B5FE", "Bleu ciel",
+		"FF0000", "Rouge vif",
+		"E7F00D", "Jaune",
+		"16B84E", "Vert menthe",
+		"FD6C9E", "Rose",
+		"BA9B61", "Claro",
+		"EA4F51", "Rouge WDG",
+
+		"9E9E9E", "Gris souris",
+		"318CE7", "Bleu France",
+		"DE2916", "Rouge tomate",
+		"DFAF2C", "Ocre jaune",
+		"3A9D23", "Vert gazon",
+		"D473D4", "Mauve",
+		"87591A", "Marron",
+		"8BC79C", "Vert WDG",
+
+		"606060", "Gris",
+		"0131B4", "Bleu saphir",
+		"BC2001", "Rouge écrevisse",
+		"ED7F10", "Orange",
+		"096A09", "Vert bouteille",
+		"800080", "Magenta foncé",
+		"5B3C11", "Brun",
+		"00879B", "Bleu WDG",
+
+		"000000", "Noir",
+		"0F056B", "Bleu nuit",
+		"6D071A", "Bordeaux",
+		"CC5500", "Orange foncé",
+		"00561B", "Vert impérial",
+		"660099", "Violet",
+		"463F32", "Taupe",
+		"333333", "Noir WDG",
+		';
+
+		$init['textcolor_map'] = '['.$default_colours.']';
+		return $init;
+	}
+
+	public static function display_toolbar( $init ) {
+    	$init['toolbar'] = true;
+    	return $init;
+	}
+	
 	
 	/**
 	 * Définition du domaine pour les traductions

@@ -73,6 +73,15 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				"editable"		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
 			));
 
+			DashboardUtility::create_field(array(
+				"id"			=> "new_maximum_profit_precision",
+				"type"			=> "number",
+				"label"			=> "Pr&eacute;cision pour le gain maximum (apr&egrave;s la virgule, nombre entier positif)",
+				"value"			=> $page_controler->get_campaign()->maximum_profit_precision(),
+				"admin_theme"	=> true,
+				"editable"		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+			));
+
 		}
 
 		DashboardUtility::create_field(array(
