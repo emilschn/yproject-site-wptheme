@@ -227,7 +227,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			);
 			array_push( $this->campaign_stats[ 'vote' ][ 'list_vote' ][ 'current' ], $vote_item );
 		}
-		$this->campaign_stats[ 'vote' ][ 'list_vote' ][ 'target' ] = array(); // TODO
+		$this->campaign_stats[ 'vote' ][ 'list_vote' ][ 'target' ] = array();
+		// TODO
+		$this->campaign_stats[ 'vote' ][ 'list_vote' ][ 'target' ][ $this->campaign_stats[ 'vote' ][ 'start' ] ] = 500;
+		$this->campaign_stats[ 'vote' ][ 'list_vote' ][ 'target' ][ $this->campaign_stats[ 'vote' ][ 'end' ] ] = $this->campaign_stats[ 'vote' ][ 'amount_intent' ][ 'min' ];
 		
 		// Préinvestissements
 		$this->campaign_stats[ 'vote' ][ 'list_preinvestement' ] = array();
@@ -239,7 +242,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			);
 			array_push( $this->campaign_stats[ 'vote' ][ 'list_preinvestement' ][ 'current' ], $preinvestment_item );
 		}
-		$this->campaign_stats[ 'vote' ][ 'list_preinvestement' ][ 'target' ] = array(); // TODO
+		$this->campaign_stats[ 'vote' ][ 'list_preinvestement' ][ 'target' ] = array();
+		// TODO
+		$this->campaign_stats[ 'vote' ][ 'list_preinvestement' ][ 'target' ][ $this->campaign_stats[ 'vote' ][ 'start' ] ] = 500;
+		$this->campaign_stats[ 'vote' ][ 'list_preinvestement' ][ 'target' ][ $this->campaign_stats[ 'vote' ][ 'end' ] ] = $this->campaign_stats[ 'vote' ][ 'amount_preinvestment' ][ 'min' ];
 		
 		// Notes
 		$this->campaign_stats[ 'vote' ][ 'rates' ] = array();
@@ -308,6 +314,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			array_push( $this->campaign_stats[ 'funding' ][ 'list_investement' ][ 'current' ], $investment_item );
 		}
 		$this->campaign_stats[ 'funding' ][ 'list_investement' ][ 'target' ] = array();
+		// TODO
+		$this->campaign_stats[ 'funding' ][ 'list_investement' ][ 'target' ][ $this->campaign_stats[ 'funding' ][ 'start' ] ] = round( $this->campaign_stats[ 'goal' ] ) / 3;
+		$this->campaign_stats[ 'funding' ][ 'list_investement' ][ 'target' ][ $this->campaign_stats[ 'funding' ][ 'end' ] ] = $this->campaign_stats[ 'goal' ];
 		
 		// Stats
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'age' ] = max( 0, $investment_results[ 'average_age' ] );
