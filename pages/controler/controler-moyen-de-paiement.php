@@ -204,7 +204,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	}
 	
 	public function display_inactive_check() {
-		return !$this->current_investment->has_token();
+		return $this->current_campaign->can_use_check_option() && !$this->current_investment->has_token();
 	}
 	
 /******************************************************************************/

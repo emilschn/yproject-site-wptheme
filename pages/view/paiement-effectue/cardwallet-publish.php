@@ -63,6 +63,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 <?php else: ?>
 
+	<?php _e( "Votre compte bancaire a &eacute;t&eacute; d&eacute;bit&eacute;.", 'yproject' ); ?><br>
 	<?php if ( $page_controler->get_current_investment()->get_session_amount() > 1500 ): ?>
 
 		<?php if ( !$page_controler->has_contract_errors() ): ?>

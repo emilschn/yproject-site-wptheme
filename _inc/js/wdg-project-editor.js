@@ -739,6 +739,9 @@ var ProjectEditor = (function($) {
 		    
 			$("#wdg-validate-"+property).addClass("wait-button");
 			$("#wdg-validate-"+property).unbind("click");
+			if ( $( '#wdg-cancel-' + property ).length > 0 ) {
+				$( '#wdg-cancel-' + property ).remove();
+			}
 			$.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,
@@ -811,6 +814,7 @@ var ProjectEditor = (function($) {
 				var confirmCancel = window.confirm("Attention, vous êtes sur le point d'arrêter l'édition et de perdre toutes vos modifications, voulez-vous continuer ?");
 				if ( confirmCancel ) {
 					$("#wdg-cancel-"+property).addClass("wait-button");
+					$( '#wdg-validate-' + property ).remove();
 					$.ajax({
 						'type' : "POST",
 						'url' : ajax_object.ajax_url,
