@@ -106,14 +106,6 @@ $vote_more_info = $vote['more_info']; // liste des 'autres informations'
 		</table>
 	</section>
 
-	<!-- Courbe "Valeurs des pré-investissements et intentions d'investissements" -->
-	<section>
-		<h3>Valeurs des pré-investissements et intentions d'investissements</h3>
-		<div class="chart-container">
-			<canvas id="preinvestment-intent-values-chart"></canvas>
-		</div>
-	</section>
-
 	<!-- Courbe des objectifs -->
 	<section>
 		<h3>Courbes des objectifs</h3>
