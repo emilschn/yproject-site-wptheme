@@ -33,7 +33,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php echo $page_controler->get_campaign_organization_name(); ?>
 	<?php _e( "&agrave; l'adresse suivante :", 'yproject' ); ?><br>
 	WE DO GOOD<br>
-	8 rue Kervégan<br>
+	chez Novapuls<br>
+	13 Square la Pérouse<br>
 	44000 Nantes<br><br>
 
 	<div class="db-form v3 full">
