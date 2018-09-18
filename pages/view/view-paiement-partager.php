@@ -53,7 +53,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		
 		<?php else: ?>
 		
-			<strong><?php _e( "Pour augmenter les chances de r&eacute;ussite de ce projet, je passe le mot sur :" ); ?></strong><br><br>
+			<?php if ( $campaign->is_positive_savings() ): ?>
+				<strong><?php _e( "Pour d&eacute;multiplier mon impact et permettre &agrave; plus de projets positifs de voir le jour, je passe le mot sur :" ); ?></strong><br><br>
+			<?php else: ?>
+				<strong><?php _e( "Pour augmenter les chances de r&eacute;ussite de ce projet, je passe le mot sur :" ); ?></strong><br><br>
+			<?php endif; ?>
 
 			<div class="align-center">
 				<?php locate_template( 'projects/common/share-buttons.php', true ); ?>
