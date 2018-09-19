@@ -12,11 +12,11 @@ if ( $post_guide_tool ) {
 ?>
 
 <h2><?php _e( "Guide et outils", 'yproject' ); ?></h2>
-<div class="db-form v3 center">
-	<?php if ( !empty( $post_guide_tool_content_filtered ) ): ?>
-		<?php echo $post_guide_tool_content_filtered; ?>
-	
-	<?php else: ?>
+<?php if ( !empty( $post_guide_tool_content_filtered ) ): ?>
+	<?php echo $post_guide_tool_content_filtered; ?>
+
+<?php else: ?>
+	<div class="db-form v3 center">
 		<br>
 		<h3><?php _e( "Centre de support", 'yproject' ); ?></h3>
 		<p class="align-justify">
@@ -26,5 +26,5 @@ if ( $post_guide_tool ) {
 		<br><br>
 
 		<a href="https://support.wedogood.co/comment-animer-ma-campagne-de-financement" class="button red" target="_blank"><?php _e( "Consulter le centre de support", 'yproject' ); ?></a>
-	<?php endif; ?>
-</div>
+	</div>
+<?php endif;
