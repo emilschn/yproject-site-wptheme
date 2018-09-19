@@ -215,7 +215,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'vote' ][ 'amount_preinvestment' ][ 'average' ] = 25000; // TODO
 		$this->campaign_stats[ 'vote' ][ 'amount_preinvestment' ][ 'median' ] = 20000; // TODO
 		$this->campaign_stats[ 'vote' ][ 'average_intent' ] = max( 0, $vote_results[ 'average_invest_ready' ] );
-		$this->campaign_stats[ 'vote' ][ 'percent_intent' ] = max( 0, $vote_results[ 'count_invest_ready' ] ) / $vote_results[ 'count_voters' ] * 100;
+		$this->campaign_stats[ 'vote' ][ 'percent_intent' ] = 0;
+		if ( $vote_results[ 'count_voters' ] > 0 ) {
+			$this->campaign_stats[ 'vote' ][ 'percent_intent' ] = max( 0, $vote_results[ 'count_invest_ready' ] ) / $vote_results[ 'count_voters' ] * 100;
+		}
 		
 		// Liste
 		$this->campaign_stats[ 'vote' ][ 'list_vote' ] = array();
