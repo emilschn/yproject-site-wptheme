@@ -662,100 +662,97 @@ function get_invests_graph(){
     ?>
     <script type="text/javascript">
     jQuery(document).ready( function($) {
-            var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
-            var dataLine = {
-                labels : [<?php echo date_abs($date_collecte_start); ?>,
-                    <?php echo $datequarterstr; ?>,
-                    <?php echo $datehalfstr; ?>,
-                    <?php echo $datethreequarterstr; ?>,
-                    <?php echo date_abs($date_collecte_end); ?>],
-                xBegin : new Date(<?php echo date_param($date_collecte_start); ?>),
-                xEnd : new Date(<?php echo date_param($date_collecte_end); ?>),
-                datasets : [
-                    {
-                        fillColor : "rgba(204,204,204,0.25)",
-                        strokeColor : "rgba(180,180,180,0.5)",
-                        pointColor : "rgba(0,0,0,0)",
-                        pointStrokeColor : "rgba(0,0,0,0)",
-                        data : [0,<?php echo $campaign->minimum_goal(false);?>],
-                        xPos : [new Date(<?php echo date_param($date_collecte_start); ?>),new Date(<?php echo date_param($date_collecte_end); ?>)],
-                        title : "But progression"
-                    },{
-                        fillColor : "rgba(0,0,0,0)",
-                        strokeColor : "rgba(140,140,140,0.5)",
-                        pointColor : "rgba(0,0,0,0)",
-                        pointStrokeColor : "rgba(0,0,0,0)",
-                        data : [<?php echo $campaign->minimum_goal(false);?>,<?php echo $campaign->minimum_goal(false);?>],
-                        xPos : [new Date(<?php echo date_param($date_collecte_start); ?>),new Date(<?php echo date_param($date_collecte_end); ?>)],
-                        title : "But"
-                    }
-                    <?php 
-                    if (count($datesinvest)!=0){?>
-                    ,{
-                        fillColor : "rgba(255,73,76,0.25)",
-                        strokeColor : "rgba(255,73,76,0.5)",
-                        pointColor : "rgba(0,0,0,0)",
-                        pointStrokeColor : "rgba(0,0,0,0)",
-                        data : [<?php echo $campaign->current_amount(false);?>,<?php echo $campaign->current_amount(false);?>],
-                        xPos : [new Date(<?php foreach ($allamount as $date => $amount){$lastdate = $date;} echo date_param($lastdate); ?>),new Date(<?php echo date_format(min([new DateTime($date_collecte_end),new DateTime(null)]),'"D M d Y H:i:s O"'); ?>)],
-                        title : "linetoday"
-                    },{
-                        fillColor : "rgba(0,0,0,0)",
-                        strokeColor : "rgba(0,0,0,0)",
-                        pointColor : "rgba(0,0,0,0)",
-                        pointStrokeColor : "rgba(0,0,0,0)",
-                        data : [<?php foreach ($allamount as $date => $amount){echo $amount.',';}?> ],
-                        xPos : [<?php foreach ($allamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
-                        title : "inv"
-                    },{
-                        fillColor : "rgba(255,73,76,0.5)",
-                        strokeColor : "rgba(255,73,76,1)",
-                        pointColor : "rgba(255,73,76,1)",
-                        pointStrokeColor : "rgba(199,46,49,1)",
-                        data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?> ],
-                        xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
-                        title : "investissements"
-                    }<?php } 
-                    if (new DateTime(null)< new DateTime($date_collecte_end)){?>
-                    ,{
-                        fillColor : "rgba(0,0,0,0)",
-                        strokeColor : "rgba(0,0,0,0)",
-                        pointColor : "rgba(110,110,110,1)",
-                        pointStrokeColor : "rgba(55,55,55,1)",
-                        data : [<?php echo ($campaign->current_amount(false));?>],
-                        xPos : [new Date(<?php echo date_param(null); ?>)],
-                        title : "aujourdhui"
-                    }<?php }
-                    ?>
-                ]
-            };
-
-            displayAnnot = function(cat, date, invest, investtotal){
-                if(cat === "investissements"){
-                    min = date.getMinutes().toString();
-                    return '<b>'+invest+ '€</b>, le ' +date.getDate()+'/'+(date.getMonth()+1)+'/'+(date.getFullYear())+' à '+date.getHours()+'h'+(min[1]?min:"0"+min[0])
-                            +'.<br/><b>Total: '+investtotal+'€</b>';
-                } else if(cat=== "aujourdhui"){
-                    return "Aujourd'hui vous en êtes à "+investtotal+'€'
-                }
-            };
-
-            var optionsLine = {
-                annotateDisplay: true,
-                annotateLabel: "<%=displayAnnot(v1,v2,v3-v4,v3)%>",
-                pointHitDetectionRadius: 7,
-
-                animation: true,
-
-                scaleOverride : true,
-                scaleStartValue : 0,
-                scaleSteps : 6,
-                scaleStepWidth :  <?php
-                    if($campaign->is_funded()){$max= ($campaign->current_amount(false));}
-                    else{$max= ($campaign->minimum_goal(false));}
-                    echo (round($max,0,PHP_ROUND_HALF_UP)/5);?>
-            };
-            var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
+		var listDates = [];
+		listDates.push(<?php echo date_abs($date_collecte_start); ?>);
+		<?php foreach ($allamount as $date => $amount): ?>
+			listDates.push(<?php echo date_abs($date); ?>);
+		<?php endforeach; ?>
+		listDates.push(<?php echo date_abs($date_collecte_end); ?>);
+		new Chart(
+			document.getElementById("canvas-line-block"),
+			{
+				"type":"line",
+				"data":{
+					"labels": listDates,
+					"datasets":[
+						{
+							backgroundColor : "rgba(204,204,204,0.25)",
+							borderColor : "rgba(180,180,180,0.5)",
+							pointColor : "rgba(0,0,0,0)",
+							pointStrokeColor : "rgba(0,0,0,0)",
+							data: [
+								{
+									x: <?php echo date_abs($date_collecte_start); ?>,
+									y: 0
+								},
+								{
+									x: <?php echo date_abs($date_collecte_end); ?>,
+									y: <?php echo $campaign->minimum_goal(false); ?>
+								}
+							],
+							title : "But progression"
+						},
+						{
+							backgroundColor : "rgba(0,0,0,0)",
+							borderColor : "rgba(140,140,140,0.5)",
+							pointColor : "rgba(0,0,0,0)",
+							pointStrokeColor : "rgba(0,0,0,0)",
+							data: [
+								{
+									x: <?php echo date_abs($date_collecte_start); ?>,
+									y: <?php echo $campaign->minimum_goal(false); ?>
+								},
+								{
+									x: <?php echo date_abs($date_collecte_end); ?>,
+									y: <?php echo $campaign->minimum_goal(false); ?>
+								}
+							],
+							title : "But"
+						}
+						<?php if (count($datesinvest)!=0): ?>
+						,
+						{
+							backgroundColor : "rgba(255,73,76,0.25)",
+							borderColor : "rgba(255,73,76,0.5)",
+							pointColor : "rgba(0,0,0,0)",
+							pointStrokeColor : "rgba(0,0,0,0)",
+							data : [
+								{
+									x: <?php echo date_abs($date_collecte_start); ?>,
+									y: <?php echo $campaign->current_amount(false); ?>
+								},
+								{
+									x: <?php echo date_abs($date_collecte_end); ?>,
+									y: <?php echo $campaign->current_amount(false); ?>
+								}
+							],
+							title : "linetoday"
+						},
+						{
+							backgroundColor : "rgba(255,73,76,0.5)",
+							borderColor : "rgba(255,73,76,1)",
+							pointColor : "rgba(255,73,76,1)",
+							pointStrokeColor : "rgba(199,46,49,1)",
+							data : [
+								<?php foreach ($cumulamount as $date => $amount): ?>
+								{
+									x: <?php echo date_abs($date); ?>,
+									y: <?php echo $amount; ?>
+								},
+								<?php endforeach; ?>
+							],
+							title : "investissements"
+						}
+						<?php endif; ?>
+					]
+				},
+				options:{
+					legend:{
+						display: false
+					}
+				}
+			}
+		);
     });
     </script>
     
