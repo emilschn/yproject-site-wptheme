@@ -144,7 +144,7 @@
                                 
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
 				<?php if (is_user_logged_in()): ?>
-				<a href="#" class="btn-user connected"><?php UIHelpers::print_user_avatar($WDGUser_current->wp_user->ID, 'icon'); ?></a>				
+				<a href="#" class="btn-user connected <?php if ( $page_controler->get_show_user_needs_authentication() ): ?>needs-authentication<?php endif; ?>"><?php UIHelpers::print_user_avatar($WDGUser_current->wp_user->ID, 'icon'); ?></a>				
 				<?php elseif ( $page_controler->get_display_link_account() ): ?>
 				<a href="<?php echo home_url( 'mon-compte' ); ?>" class="btn-user not-connected"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
 				<?php else: ?>
@@ -179,7 +179,7 @@
 					?>
 					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
 					<ul class="submenu-list">
-						<li><a href="<?php echo home_url( '/mon-compte/' ); ?>"><?php _e("Mon compte", 'yproject'); ?></a></li>
+						<li><a href="<?php echo home_url( '/mon-compte/' ); ?>" <?php if ( $page_controler->get_show_user_needs_authentication() ): ?>class="needs-authentication"<?php endif; ?>><?php _e("Mon compte", 'yproject'); ?></a></li>
 						
 						<?php foreach ($project_list as $project_id): if (!empty($project_id)): $post_campaign = get_post($project_id); if (isset($post_campaign)): ?>
 							<li><a href="<?php echo $page_dashboard . '?campaign_id=' .$project_id; ?>"><?php echo $post_campaign->post_title; ?></a></li>
