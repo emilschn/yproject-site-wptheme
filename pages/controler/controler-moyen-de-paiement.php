@@ -227,10 +227,14 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 			case WDGInvestment::$meanofpayment_card:
 				$return = $this->current_investment->try_payment( $this->current_meanofpayment );
 				if ( empty( $return ) ) {
-					$this->display_error = __( "Erreur de connexion &agrave; Lemon Way.", 'yproject' );
+					$this->display_error = __( "Il y a eu une erreur de connexion &agrave; notre prestataire de paiement Lemon Way.", 'yproject' );
 					$investment_error = $this->current_investment->get_error();
 					if ( !empty( $investment_error ) ) {
-						$this->display_error .= " (" .$investment_error[0]. ")";
+						$this->display_error .= '<br>';
+						$this->display_error .= __( "Merci de nous transmettre les informations ci-dessous via le chat en ligne en bas &agrave; droite de l'&eacute;cran, ou par e-mail &agrave; l'adresse investir@wedogood.co.", 'yproject' );
+						$this->display_error .= '<br><br>';
+						$this->display_error .= $investment_error[0];
+						$this->display_error .= '<br><br>';
 					}
 				}
 				break;
