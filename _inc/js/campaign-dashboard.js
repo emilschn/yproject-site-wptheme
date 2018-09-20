@@ -329,6 +329,9 @@ WDGCampaignDashboard.prototype.initStatsSubTabs = function() {
 				$( '#stat-subtab-' + $( this ).data( 'subtab' ) ).show();
 				$( 'ul.menu-onglet li a' ).removeClass( 'focus' );
 				$( this ).addClass( 'focus' );
+				if ( $( this ).data( 'subtab' ) == 'leveedefonds' ) {
+					$('#sup-stats-chart').width(600);
+				}
 			}
 		} );
 	} );
