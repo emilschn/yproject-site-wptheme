@@ -1,13 +1,23 @@
 <?php $page_controler = WDG_Templates_Engine::instance()->get_controler(); ?>
 
-<h2><?php _e( "Statistiques", 'yproject' ); ?></h2>
-<h2 class="expandator" data-target="votes"><?php _e( "&Eacute;valuations", 'yproject' ); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" alt="signe plus"></h2>
-<div id="extendable-votes" class="expandable">
-    <?php locate_template( array("projects/single-stats-advanced-votes.php"), true );?>
-</div>
+<?php
+// Préparation des statistiques
+global $campaign_stats;
+$campaign_stats = $page_controler->get_campaign_stats();
+?>
 
-<?php $campaign = atcf_get_current_campaign(); ?>
-<h2 class="expandator" data-target="investments"><?php _e( "Investissements", 'yproject' ); ?> <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/plus.png" alt="signe plus"></h2>
-<div id="extendable-investments" class="expandable">
-    <?php locate_template( array("projects/single-stats-advanced-investments.php"), true );?>
-</div>
+<h2>Statistiques</h2>
+
+<ul class="menu-onglet">
+  <li><a href="#stats" class="focus" data-subtab="evaluations"><?php _e( "&Eacute;valuations", 'yproject' ); ?><span></span></a></li>
+  <li><a href="#stats" data-subtab="leveedefonds"><?php _e( "Lev&eacute;e de fonds", 'yproject' ); ?><span></span></a></li>
+  <li><a href="#stats" data-subtab="visites"><?php _e( "Visites", 'yproject' ); ?><span></span></a></li>
+</ul>
+
+
+
+<?php
+// Inclusion des fichiers externes dans /tab-stats/
+locate_template( array( 'pages/view/tableau-de-bord/tab-stats/tab-evaluations.php'  ), true );
+locate_template( array( 'pages/view/tableau-de-bord/tab-stats/tab-levee-de-fonds.php'  ), true );
+locate_template( array( 'pages/view/tableau-de-bord/tab-stats/tab-visites.php'  ), true );

@@ -253,6 +253,7 @@ function WDGCampaignDashboard() {
     this.initWithHash();
     this.initLinks();
 	this.initMenu();
+	this.initStatsSubTabs();
 	this.drawTimetable();
 	this.initAjaxForms();
 	this.initHome();
@@ -311,6 +312,28 @@ WDGCampaignDashboard.prototype.initMenu = function() {
 	} );
 	$( 'a.switch-tab' ).click( function() {
 		self.switchTab( $( this ).attr( 'href' ).substr( 1 ) );
+	} );
+	
+};
+
+/**
+ * Initialise le sous-menu de l'onglet Statistiques
+ */
+WDGCampaignDashboard.prototype.initStatsSubTabs = function() {
+	
+	var self = this;
+	$( 'ul.menu-onglet li a' ).each( function() {
+		$( this ).click( function() {
+			if ( $( this ).data( 'subtab' ) !== '' ) {
+				$( '.stat-subtab' ).hide();
+				$( '#stat-subtab-' + $( this ).data( 'subtab' ) ).show();
+				$( 'ul.menu-onglet li a' ).removeClass( 'focus' );
+				$( this ).addClass( 'focus' );
+				if ( $( this ).data( 'subtab' ) == 'leveedefonds' ) {
+					$('#sup-stats-chart').width(600);
+				}
+			}
+		} );
 	} );
 	
 };

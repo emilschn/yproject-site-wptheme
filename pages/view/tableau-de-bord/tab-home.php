@@ -189,31 +189,46 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 		<?php if ( $status == ATCF_Campaign::$campaign_status_vote ): ?>
 		<script type="text/javascript">
 			jQuery(document).ready( function($) {
-				var ctxBar = $("#canvas-vertical-bar-block").get(0).getContext("2d");
-				var nStepsBar = Math.max(Math.max(Math.max(Math.max(Math.max(0, <?php echo $vote_results['rate_project_list'][1]; ?>), <?php echo $vote_results['rate_project_list'][2]; ?>), <?php echo $vote_results['rate_project_list'][3]; ?>), <?php echo $vote_results['rate_project_list'][4]; ?>), <?php echo $vote_results['rate_project_list'][5]; ?>);
-				var barData = {
-					labels: [ "1", "2", "3", "4", "5" ],
-					datasets: [{
-						fillColor: "#FE494C",
-						strokeColor: "#FE494C",
-						data: [
-							<?php echo $vote_results[ 'rate_project_list' ][ '1' ]; ?>,
-							<?php echo $vote_results[ 'rate_project_list' ][ '2' ]; ?>,
-							<?php echo $vote_results[ 'rate_project_list' ][ '3' ]; ?>,
-							<?php echo $vote_results[ 'rate_project_list' ][ '4' ]; ?>,
-							<?php echo $vote_results[ 'rate_project_list' ][ '5' ]; ?>
-						]
-					}]
-				};
-				var barOptions = {
-					scaleOverride: true,
-					scaleSteps: ( nStepsBar < 10 ) ? nStepsBar : 10,
-					scaleStepWidth: 1,
-					scaleStartValue: 0,
-					scaleShowLabels: ( nStepsBar < 10 ),
-					pointDot: false
-				};
-				var canvasBar = new Chart( ctxBar ).Bar( barData, barOptions );
+				new Chart(
+					document.getElementById("canvas-vertical-bar-block"),
+					{
+						"type":"bar",
+						"data":{
+							"labels": [ "1", "2", "3", "4", "5" ],
+							"datasets":[ {
+								"label":"",
+								"data":[
+									<?php echo $vote_results[ 'rate_project_list' ][ '1' ]; ?>,
+									<?php echo $vote_results[ 'rate_project_list' ][ '2' ]; ?>,
+									<?php echo $vote_results[ 'rate_project_list' ][ '3' ]; ?>,
+									<?php echo $vote_results[ 'rate_project_list' ][ '4' ]; ?>,
+									<?php echo $vote_results[ 'rate_project_list' ][ '5' ]; ?>
+								],
+								"fill":false,
+								"backgroundColor":[
+									"#93626d",
+									"#93626d",
+									"#93626d",
+									"#93626d",
+									"#93626d"
+								]
+							} ]
+						},
+						options:{
+							legend:{
+								display: false
+							},
+							scales:{
+								yAxes:[{
+									ticks:{
+										beginAtZero: true,
+										stepSize: 1
+									}
+								}]
+							}
+						}
+					}
+				);
 			});
 		</script>
 		<?php endif; ?>
