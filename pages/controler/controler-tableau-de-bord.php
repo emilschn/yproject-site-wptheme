@@ -156,7 +156,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	public function check_has_signed_mandate() {
 		$input_has_signed_mandate = filter_input( INPUT_GET, 'has_signed_mandate' );
 		if ( !empty( $input_has_signed_mandate ) ) {
-			NotificationsEmails::campaign_sign_mandate_admin( $this->campaign_organization->get_wpref() );
+			NotificationsSlack::send_new_project_mandate( $this->campaign_organization->get_wpref() );
 			wp_redirect( home_url( 'tableau-de-bord' ) . '?campaign_id=' . $this->get_campaign_id() . '#contracts' );
 			exit();
 		}
