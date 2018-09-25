@@ -217,7 +217,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'vote' ][ 'average_intent' ] = max( 0, $vote_results[ 'average_invest_ready' ] );
 		$this->campaign_stats[ 'vote' ][ 'percent_intent' ] = 0;
 		if ( $vote_results[ 'count_voters' ] > 0 ) {
-			$this->campaign_stats[ 'vote' ][ 'percent_intent' ] = max( 0, $vote_results[ 'count_invest_ready' ] ) / $vote_results[ 'count_voters' ] * 100;
+			$this->campaign_stats[ 'vote' ][ 'percent_intent' ] = max( 0, round( $vote_results[ 'count_invest_ready' ] ) / $vote_results[ 'count_voters' ] * 100, 2 );
 		}
 		
 		// Liste
@@ -252,9 +252,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		
 		// Notes
 		$this->campaign_stats[ 'vote' ][ 'rates' ] = array();
-		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'economy' ] = $vote_results[ 'average_impact_economy' ];
-		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'environment' ] = $vote_results[ 'average_impact_environment' ];
-		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'social' ] = $vote_results[ 'average_impact_social' ];
+		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'economy' ] = round( $vote_results[ 'average_impact_economy' ], 2 );
+		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'environment' ] = round( $vote_results[ 'average_impact_environment' ], 2 );
+		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'social' ] = round( $vote_results[ 'average_impact_social' ], 2 );
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'others' ] = $vote_results[ 'list_impact_others_string' ];
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ] = array();
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ][ '1' ] = max( 0, $vote_results[ 'rate_project_list' ][ 1 ] );
@@ -263,7 +263,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ][ '4' ] = max( 0, $vote_results[ 'rate_project_list' ][ 4 ] );
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ][ '5' ] = max( 0, $vote_results[ 'rate_project_list' ][ 5 ] );
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ][ 'average' ] = max( 0, $vote_results[ 'rate_project_average' ] );
-		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ][ 'positive_percent' ] = max( 0, $vote_results[ 'percent_project_not_validated' ] );
+		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ][ 'positive_percent' ] = max( 0, $vote_results[ 'percent_project_validated' ] );
 		
 		// Risque
 		$this->campaign_stats[ 'vote' ][ 'risk' ] = array();
@@ -272,7 +272,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'vote' ][ 'risk' ][ '3' ] = max( 0, $vote_results[ 'risk_list' ][ 3 ] );
 		$this->campaign_stats[ 'vote' ][ 'risk' ][ '4' ] = max( 0, $vote_results[ 'risk_list' ][ 4 ] );
 		$this->campaign_stats[ 'vote' ][ 'risk' ][ '5' ] = max( 0, $vote_results[ 'risk_list' ][ 5 ] );
-		$this->campaign_stats[ 'vote' ][ 'risk' ][ 'average' ] = max( 0, $vote_results[ 'average_risk' ] );
+		$this->campaign_stats[ 'vote' ][ 'risk' ][ 'average' ] = max( 0, round( $vote_results[ 'average_risk' ], 2 ) );
 		
 		// Plus d'infos
 		$this->campaign_stats[ 'vote' ][ 'more_info' ] = array();
