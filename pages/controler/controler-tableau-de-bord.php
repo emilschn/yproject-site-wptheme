@@ -243,6 +243,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 				'date' => $date_preinvestment->format( 'Y-m-d\Th:i' ),
 				'sum' => $preinvestment[ 'sum' ]
 			);
+			if ( $date_preinvestment > $date_end ) {
+				$preinvestment_item[ 'date' ] = $date_end->format( 'Y-m-d\Th:i' );
+			}
 			array_push( $this->campaign_stats[ 'vote' ][ 'list_preinvestment' ][ 'current' ], $preinvestment_item );
 		}
 		$this->campaign_stats[ 'vote' ][ 'list_preinvestment' ][ 'target' ] = array();
@@ -254,7 +257,6 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'economy' ] = round( $vote_results[ 'average_impact_economy' ], 2 );
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'environment' ] = round( $vote_results[ 'average_impact_environment' ], 2 );
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'social' ] = round( $vote_results[ 'average_impact_social' ], 2 );
-		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'others' ] = str_replace( '"', '\'', $vote_results[ 'list_impact_others_string' ] );
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ] = array();
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ][ '1' ] = max( 0, $vote_results[ 'rate_project_list' ][ 1 ] );
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ][ '2' ] = max( 0, $vote_results[ 'rate_project_list' ][ 2 ] );
