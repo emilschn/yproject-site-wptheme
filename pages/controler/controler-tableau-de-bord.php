@@ -332,8 +332,6 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		
 		
 		setcookie( 'campaign_url', json_encode( $this->campaign_stats[ 'url' ] ) );
-		setcookie( 'vote', json_encode( $this->campaign_stats[ 'vote' ] ) );
-		setcookie( 'funding', json_encode( $this->campaign_stats[ 'funding' ] ) );
 	}
 	
 	public function get_campaign_stats() {
