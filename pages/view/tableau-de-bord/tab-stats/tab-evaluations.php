@@ -314,6 +314,7 @@ $vote_more_info = $vote['more_info']; // liste des 'autres informations'
 
 	<script>
 	  var tab = 'evaluations';
+	  var voteData = '<?php echo json_encode($vote); ?>';
 	</script>
 
 </div>
