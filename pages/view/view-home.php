@@ -77,7 +77,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<div class="news-content">
 			<span class="news-description">
 				<?php _e( "Ruches, &eacute;nergie renouvelable,", 'yproject' ); ?><br>
-				<?php _e( "moblit&eacute; et &eacute;lectronique durable...", 'yproject' ); ?>
+				<?php _e( "mobilit&eacute; et &eacute;lectronique durable...", 'yproject' ); ?>
 			</span>
 			<br>
 			<span class="news-title"><?php _e( "D&eacute;couvrez l'&eacute;pargne positive !", 'yproject' ); ?></span>

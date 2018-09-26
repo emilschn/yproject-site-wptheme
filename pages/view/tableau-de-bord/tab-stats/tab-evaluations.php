@@ -281,7 +281,7 @@ $vote_more_info = $vote['more_info']; // liste des 'autres informations'
 		</div>
 	</section>
 
-	<p class="txt-center"><a class="btn-new-blue" href="#stats">Afficher les conseils de vos contacts</a></p>
+	<p class="txt-center"><a class="btn-new-blue" href="#contacts">Afficher les conseils de vos contacts</a></p>
 
 	<script>
 

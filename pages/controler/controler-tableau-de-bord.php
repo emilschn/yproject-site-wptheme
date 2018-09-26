@@ -174,7 +174,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats = array();
 		
 		$this->campaign_stats[ 'name' ] = $this->campaign->get_name();
-		$this->campaign_stats[ 'url' ] = '/' .$this->campaign->get_url();
+		$this->campaign_stats[ 'url' ] = '/' .$this->campaign->get_url(). '/';
 		$this->campaign_stats[ 'goal' ] = $this->campaign->minimum_goal();
 		$this->campaign_stats[ 'average_median_for_campaign' ] = 40000;
 		
@@ -231,29 +231,30 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			array_push( $this->campaign_stats[ 'vote' ][ 'list_vote' ][ 'current' ], $vote_item );
 		}
 		$this->campaign_stats[ 'vote' ][ 'list_vote' ][ 'target' ] = array();
-		$this->campaign_stats[ 'vote' ][ 'list_vote' ][ 'target' ][ $this->campaign_stats[ 'vote' ][ 'start' ] ] = $this->campaign_stats[ 'goal' ] / 5;
+		$this->campaign_stats[ 'vote' ][ 'list_vote' ][ 'target' ][ $this->campaign_stats[ 'vote' ][ 'start' ] ] = round( $this->campaign_stats[ 'goal' ] / 5 );
 		$this->campaign_stats[ 'vote' ][ 'list_vote' ][ 'target' ][ $this->campaign_stats[ 'vote' ][ 'end' ] ] = $this->campaign_stats[ 'goal' ];
 		
 		// Préinvestissements
 		$this->campaign_stats[ 'vote' ][ 'list_preinvestment' ] = array();
 		$this->campaign_stats[ 'vote' ][ 'list_preinvestment' ][ 'current' ] = array();
 		foreach ( $vote_results[ 'list_preinvestments' ] as $preinvestment ) {
+			$date_preinvestment = new DateTime( $preinvestment[ 'date' ] );
 			$preinvestment_item = array(
-				'date' => $preinvestment[ 'date' ],
+				'date' => $date_preinvestment->format( 'Y-m-d\Th:i' ),
 				'sum' => $preinvestment[ 'sum' ]
 			);
 			array_push( $this->campaign_stats[ 'vote' ][ 'list_preinvestment' ][ 'current' ], $preinvestment_item );
 		}
 		$this->campaign_stats[ 'vote' ][ 'list_preinvestment' ][ 'target' ] = array();
-		$this->campaign_stats[ 'vote' ][ 'list_preinvestment' ][ 'target' ][ $this->campaign_stats[ 'vote' ][ 'start' ] ] = $this->campaign_stats[ 'goal' ] / 7;
-		$this->campaign_stats[ 'vote' ][ 'list_preinvestment' ][ 'target' ][ $this->campaign_stats[ 'vote' ][ 'end' ] ] = $this->campaign_stats[ 'goal' ] / 3;
+		$this->campaign_stats[ 'vote' ][ 'list_preinvestment' ][ 'target' ][ $this->campaign_stats[ 'vote' ][ 'start' ] ] = round( $this->campaign_stats[ 'goal' ] / 7 );
+		$this->campaign_stats[ 'vote' ][ 'list_preinvestment' ][ 'target' ][ $this->campaign_stats[ 'vote' ][ 'end' ] ] = round( $this->campaign_stats[ 'goal' ] / 3 );
 		
 		// Notes
 		$this->campaign_stats[ 'vote' ][ 'rates' ] = array();
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'economy' ] = round( $vote_results[ 'average_impact_economy' ], 2 );
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'environment' ] = round( $vote_results[ 'average_impact_environment' ], 2 );
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'social' ] = round( $vote_results[ 'average_impact_social' ], 2 );
-		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'others' ] = $vote_results[ 'list_impact_others_string' ];
+		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'others' ] = str_replace( '"', '\'', $vote_results[ 'list_impact_others_string' ] );
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ] = array();
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ][ '1' ] = max( 0, $vote_results[ 'rate_project_list' ][ 1 ] );
 		$this->campaign_stats[ 'vote' ][ 'rates' ][ 'project' ][ '2' ] = max( 0, $vote_results[ 'rate_project_list' ][ 2 ] );
@@ -292,6 +293,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'funding' ] = array();
 		$this->campaign_stats[ 'funding' ][ 'start' ] = $this->campaign->begin_collecte_date( 'Y-m-d' );
 		$this->campaign_stats[ 'funding' ][ 'end' ] = $this->campaign->end_date( 'Y-m-d' );
+		if ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated || $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ) {
+			$this->campaign_stats[ 'funding' ][ 'start' ] = $this->campaign_stats[ 'vote' ][ 'end' ];
+			$this->campaign_stats[ 'funding' ][ 'end' ] = $this->campaign_stats[ 'vote' ][ 'end' ];
+		}
 		$this->campaign_stats[ 'funding' ][ 'nb_investment' ] = array();
 		$this->campaign_stats[ 'funding' ][ 'nb_investment' ][ 'current' ] = max( 0, $investment_results[ 'count_validate_investments' ] );
 		$this->campaign_stats[ 'funding' ][ 'nb_investment' ][ 'current_different' ] = max( 0, $investment_results[ 'count_validate_investors' ] );
@@ -316,7 +321,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		}
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ] = array();
 		// TODO
-		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $this->campaign_stats[ 'funding' ][ 'start' ] ] = round( $this->campaign_stats[ 'goal' ] ) / 3;
+		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $this->campaign_stats[ 'funding' ][ 'start' ] ] = round( $this->campaign_stats[ 'goal' ] / 3 );
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $this->campaign_stats[ 'funding' ][ 'end' ] ] = $this->campaign_stats[ 'goal' ];
 		
 		// Stats
