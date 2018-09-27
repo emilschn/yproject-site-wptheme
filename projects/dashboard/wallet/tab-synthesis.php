@@ -12,9 +12,12 @@ $roi_percent = $campaign->roi_percent();
 		<li><strong><?php echo UIHelpers::format_number( $campaign->current_amount( false ) ); ?> €</strong> <?php _e( "lev&eacute;s", 'yproject' ); ?></li>
 		
 		<?php if ( $roi_percent > 0 ): ?>
-		<li><strong><?php echo $campaign->roi_percent(); ?> %</strong> <?php _e( "du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $campaign->funding_duration_str(); ?></strong></li>
+			<li><strong><?php echo $campaign->roi_percent(); ?> %</strong> <?php _e( "du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $campaign->funding_duration_str(); ?></strong></li>
+			<?php if ( $page_controler->get_campaign()->roi_percent_remaining() != $roi_percent ): ?>
+				<li><?php _e( "Suite &agrave; des modifications sur vos contrats, il restera" ); ?> <strong><?php echo $page_controler->get_campaign()->roi_percent_remaining(); ?> %</strong> <?php _e( "du CA &agrave; verser.", 'yproject' ); ?></li>
+			<?php endif; ?>
 		<?php else: ?>
-		<li><strong><?php echo $campaign->roi_percent_estimated(); ?> %</strong> <?php _e( "maximum du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $campaign->funding_duration_str(); ?></strong></li>
+			<li><strong><?php echo $campaign->roi_percent_estimated(); ?> %</strong> <?php _e( "maximum du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $campaign->funding_duration_str(); ?></strong></li>
 		<?php endif; ?>
 		
 		<li><strong><?php echo count( $finished_declarations ); ?> / <?php echo $campaign->get_roi_declarations_number(); ?></strong> <?php _e( "&eacute;ch&eacute;ances", 'yproject' ); ?></li>

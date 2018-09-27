@@ -45,7 +45,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 	<?php if ( $page_controler->can_access_admin() ): ?>
 	<form id="form-declaration-adjustment" class="ajax-db-form" data-action="save_declaration_adjustment"
-			data-roi-percent="<?php echo $page_controler->get_campaign()->roi_percent(); ?>"
+			data-roi-percent="<?php echo $page_controler->get_campaign()->roi_percent_remaining(); ?>"
 			data-costs-orga="<?php echo $page_controler->get_campaign()->get_costs_to_organization(); ?>">
 		<div class="field admin-theme">
 
