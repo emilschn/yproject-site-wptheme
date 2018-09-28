@@ -84,6 +84,47 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 	<?php $campaign_poll_answers = $page_controler->get_campaign()->get_api_data( 'poll_answers' ); ?>
 	<br><br><br>
 	<div class="db-form">
+		
+		<?php $investment_contracts = WDGInvestmentContract::get_list( $page_controler->get_campaign()->ID ); ?>
+		<?php if ( !empty( $investment_contracts ) ): ?>
+		<div class="field admin-theme">
+
+			<b>Etat des contrats li&eacute;s &agrave; la lev&eacute;e de fonds</b><br><br>
+
+			<table>
+				<tr>
+					<td>Nom</td>
+					<td>Montant inv.</td>
+					<td>Statut</td>
+					<td>Pourcent du CA</td>
+					<td>Montant per&ccedil;u</td>
+				</tr>
+
+				<?php foreach ( $investment_contracts as $investment_contract ): ?>
+					<?php
+					$name = '';
+					if ( $investment_contract->investor_type == WDGInvestmentContract::$investor_type_user ) {
+						$WDGUser = WDGUser::get_by_api_id( $investment_contract->investor_id );
+						$name = $WDGUser->get_lastname() .' '. $WDGUser->get_firstname();
+					} else {
+						$WDGOrganization = WDGOrganization::get_by_api_id( $investment_contract->investor_id );
+						$name = $WDGOrganization->get_name();
+					}
+					$status = ( $investment_contract->status == 'active' ) ? 'Actif' : 'Arrêté';
+					?>
+					<tr>
+						<td><?php echo $name; ?></td>
+						<td><?php echo $investment_contract->subscription_amount; ?></td>
+						<td><?php echo $status; ?></td>
+						<td><?php echo $investment_contract->turnover_percent; ?> %</td>
+						<td><?php echo $investment_contract->amount_received; ?> €</td>
+					</tr>
+				<?php endforeach; ?>
+			</table>
+		</div>
+		<?php endif; ?>
+		
+		
 		<div class="field admin-theme">
 
 			<b>Sondage lié à la garantie</b><br><br>
