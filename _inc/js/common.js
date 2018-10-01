@@ -687,12 +687,12 @@ var WDGLightboxFunctions = (function($) {
 				});
 				
 				$('#newproject_form input#new-company-name').val(" ");
-				$('#newproject_form input#new-company-name').parent().parent().parent().hide();
+				$('#newproject_form div#field-new-company-name').hide();
 				if($('#newproject_form input#company-name').val() === ""){
 					$('#newproject_form #project-name').val("");
 				}
-				$('#newproject_form #company-name').on("keyup change", function() {
-					$('#newproject_form input#new-company-name').parent().parent().parent().hide();
+				$('#newproject_form #select-company-name').on("keyup change", function() {
+					$('#newproject_form div#field-new-company-name').hide();
 					var val = "";
 					if($('#newproject_form input#company-name').length > 0 && $('#newproject_form input#company-name').val() !== "" ) {
 						val = $('#newproject_form input#company-name').val();
@@ -708,7 +708,7 @@ var WDGLightboxFunctions = (function($) {
 							} else {
 								$('#newproject_form input#new-company-name').val("");
 								$('#newproject_form #project-name').val('');
-								$('#newproject_form input#new-company-name').parent().parent().parent().show();
+								$('#newproject_form div#field-new-company-name').show();
 								$('#newproject_form input#new-company-name').on("keyup change", function() {
 									var val = $('#newproject_form input#new-company-name').val();
 									if (val!="") {
