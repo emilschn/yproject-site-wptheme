@@ -201,7 +201,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'vote' ][ 'nb_intent' ][ 'median' ] = 30; // TODO
 		$this->campaign_stats[ 'vote' ][ 'amount_intent' ] = array();
 		$this->campaign_stats[ 'vote' ][ 'amount_intent' ][ 'current' ] = max( 0, $vote_results[ 'sum_invest_ready' ] );
-		$this->campaign_stats[ 'vote' ][ 'amount_intent' ][ 'min' ] = $this->campaign_stats[ 'goal' ]; // TODO
+		$this->campaign_stats[ 'vote' ][ 'amount_intent' ][ 'min' ] = $this->campaign_stats[ 'goal' ];
 		$this->campaign_stats[ 'vote' ][ 'amount_intent' ][ 'average' ] = 55000; // TODO
 		$this->campaign_stats[ 'vote' ][ 'amount_intent' ][ 'median' ] = 50000; // TODO
 		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ] = array();
@@ -217,7 +217,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'vote' ][ 'average_intent' ] = max( 0, $vote_results[ 'average_invest_ready' ] );
 		$this->campaign_stats[ 'vote' ][ 'percent_intent' ] = 0;
 		if ( $vote_results[ 'count_voters' ] > 0 ) {
-			$this->campaign_stats[ 'vote' ][ 'percent_intent' ] = max( 0, round( $vote_results[ 'count_invest_ready' ] / $vote_results[ 'count_voters' ] * 100, 2 ) );
+			$this->campaign_stats[ 'vote' ][ 'percent_intent' ] = max( 0, round( $vote_results[ 'sum_invest_ready' ] / $this->campaign_stats[ 'goal' ] * 100, 2 ) );
 		}
 		
 		// Liste
