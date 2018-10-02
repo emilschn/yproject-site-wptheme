@@ -12,6 +12,19 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<div class="align-center">
 			<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
 			<button class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer le contrat vierge", 'yproject' ); ?></button>
+			
+			<?php
+			$file_name_contract_agreement = $page_controler->get_campaign()->backoffice_contract_agreement();
+			if ( !empty( $file_name_contract_agreement ) ) {
+				$file_name_exploded = explode('.', $file_name_contract_agreement);
+				$ext = $file_name_exploded[count($file_name_exploded) - 1];
+				$file_name_contract_agreement = home_url( '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_agreement );
+			}
+			?>
+			<?php if ( !empty( $file_name_contract_agreement ) ): ?>
+				<div>&nbsp;</div>
+				<a href="<?php echo $file_name_contract_agreement; ?>?time=<?php echo time(); ?>" target="_blank">Accord cadre</a>
+			<?php endif; ?>
 		</div>
 	</form>
 
@@ -35,7 +48,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"id"				=> "new_backoffice_contract_orga",
 			"type"				=> "upload",
 			"label"				=> "Contrat d'investissement",
-			"value"				=> $file_name_contract_orga,
+			"value"				=> $file_name_contract_orga . '?time=' .time(),
 			"editable"			=> $page_controler->can_access_admin(),
 			"download_label"	=> $page_controler->get_campaign()->data->post_title . " - Contrat royalties." . $ext
 		));
