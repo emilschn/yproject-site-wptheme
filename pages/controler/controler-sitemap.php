@@ -75,7 +75,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'nb_invest' ] = $campaign->backers_count();
 			$item[ 'value_invest' ] = $campaign->current_amount( false );
 			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
-			array_push( $params[ 'vote' ], $item );
+			array_push( $params[ 'funding' ], $item );
 		}
 		
 		
@@ -90,7 +90,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'nb_invest' ] = $campaign->backers_count();
 			$item[ 'value_invest' ] = $campaign->current_amount( false );
 			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
-			array_push( $params[ 'vote' ], $item );
+			array_push( $params[ 'hidden' ], $item );
 		}
 		
 		NotificationsSlack::send_update_summary_current_projects( $params );
