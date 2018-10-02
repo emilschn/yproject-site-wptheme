@@ -38,6 +38,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		
 		locate_template( array( 'projects/dashboard/dashboardutility.php' ), true );
 		wp_enqueue_script( 'campaign-dashboard-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/campaign-dashboard.min.js', array( 'jquery' ), ASSETS_VERSION );
+		wp_enqueue_script( 'campaign-dashboard-moment-script', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js', array( 'jquery' ) );
 		wp_enqueue_script( 'campaign-dashboard-chart-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/campaign-dashboard-chart.min.js', array( 'jquery' ), ASSETS_VERSION );
 		wp_enqueue_script( 'campaign-dashboard-d3-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/campaign-dashboard-d3.min.js', array( 'jquery' ), ASSETS_VERSION );
 		wp_enqueue_script( 'campaign-dashboard-graphs-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/campaign-dashboard-graphs.min.js', array( 'jquery' ), ASSETS_VERSION );
