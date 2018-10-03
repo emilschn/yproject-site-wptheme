@@ -39,6 +39,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 		$this->init_current_campaign();
 		WDGRoutes::redirect_invest_if_not_logged_in();
 		WDGRoutes::redirect_invest_if_project_not_investable();
+		WDGRoutes::redirect_invest_if_investment_session_not_initialized();
 		
 		$this->init_current_user_investments();
 		$this->init_current_investment();
