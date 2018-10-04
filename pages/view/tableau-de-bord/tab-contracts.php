@@ -54,6 +54,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 		
 		DashboardUtility::create_field(array(
+			"id"			=> "new_project_agreement_bundle",
+			"type"			=> "editor",
+			"label"			=> __( "Formule commerciale (pour accord cadre)", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->agreement_bundle(),
+			'admin_theme'	=> $page_controler->can_access_admin(),
+			"editable"		=> $page_controler->can_access_admin(),
+			"visible"		=> $page_controler->can_access_admin()
+		));
+		
+		DashboardUtility::create_field(array(
 			"id"			=> "new_project_contract_earnings_description",
 			"type"			=> "editor",
 			"label"			=> __( "Description des revenus", 'yproject' ),
