@@ -489,6 +489,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
     letter-spacing: 0.12em;
     color: #FFFFFF;
 	background: linear-gradient( 45deg, #59cee0, #00879B );
+	z-index: 1;
 }
 .progress-bar .progress-percent { 
     display: -webkit-flex;
@@ -522,7 +523,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 }
 .progress-bar.minimum-as-step .progress-bar-separator {
 	position: absolute;
-	z-index: 1;
+	z-index: 2;
 	display: inline-block;
 	height: 40px;
 	border-left: 2px solid #FFFFFF;
