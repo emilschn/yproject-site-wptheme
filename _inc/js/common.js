@@ -90,6 +90,25 @@ YPUIFunctions = (function($) {
 					$('#submenu-search-input').focus();
 					$('.btn-user').removeClass('active').addClass('inactive');
 					$('#submenu-user').hide();
+					
+					if ( $( '#submenu-search ul.submenu-list li' ).length == 0 ) {
+						$.ajax({
+							'type' : "POST",
+							'url' : ajax_object.ajax_url,
+							'data': {
+								'action':'get_searchable_projects_list'
+							}
+							
+						}).done(function(result){
+							var aProjectList = JSON.parse( result );
+							var nProjects = aProjectList.length;
+							for ( var i = 0; i < nProjects; i++ ) {
+								$( '#submenu-search ul.submenu-list' ).append(
+									'<li class="hidden"><a href="https://www.wedogood.co/'+aProjectList[i].post_name+'">'+aProjectList[i].post_title+'<span class="hidden">'+aProjectList[i].post_title+'</span></a></li>'
+								);
+							}
+						});
+					}
 				}
 			});
 			$("#submenu-search-input").keyup(function() {
