@@ -29,9 +29,16 @@ if (isset($_GET['invest_id_resend']) && $_GET['invest_id_resend'] != '') {
 ?>
 <h2 class="underlined">Mon porte-monnaie électronique</h2>
 
-<?php $amount = $WDGUser_displayed->get_lemonway_wallet_amount(); ?>
+<?php
+$amount = $WDGUser_displayed->get_lemonway_wallet_amount();
+$override_current_user = filter_input( INPUT_GET, 'override_current_user' );
+$suffix = '';
+if ( !empty( $override_current_user ) ) {
+	$suffix = '?override_current_user=' .$override_current_user;
+}
+?>
 Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.
-<a href="<?php echo home_url( '/details-des-investissements/' ); ?>">Voir le d&eacute;tail de mes royalties</a>
+<a href="<?php echo home_url( '/details-des-investissements/' ) . $suffix; ?>">Voir le d&eacute;tail de mes royalties</a>
 <br><br>
 
 <?php if ( !$WDGUser_displayed->is_document_lemonway_registered( LemonwayDocument::$document_type_bank ) ): ?>
