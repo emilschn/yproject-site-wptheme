@@ -225,8 +225,13 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'vote' ][ 'list_vote' ] = array();
 		$this->campaign_stats[ 'vote' ][ 'list_vote' ][ 'current' ] = array();
 		foreach ( $vote_results[ 'list_votes' ] as $vote_result ) {
+			$vote_date = $vote_result->date;
+			if ( $vote_date == 'NULL' || $vote_date == null || $vote_date == '0000-00-00' ) {
+				$vote_date = $this->campaign->end_vote();
+			}
+			
 			$vote_item = array(
-				'date' => $vote_result->date,
+				'date' => $vote_date,
 				'sum' => $vote_result->invest_sum
 			);
 			array_push( $this->campaign_stats[ 'vote' ][ 'list_vote' ][ 'current' ], $vote_item );
