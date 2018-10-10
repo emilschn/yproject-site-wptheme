@@ -64,9 +64,9 @@ $vote_more_info = $vote['more_info']; // liste des 'autres informations'
 			<tr class="txt-center">
 				<th width="20%">&nbsp;</th>
 				<th width="20%">En cours</th>
-				<th width="20%">Minimum pour passer en levée de fonds</th>
-				<th width="20%">Moyenne pour une collecte de <?php echo $average_median_for_campaign; ?> €</th>
-				<th width="20%">Médiane pour une collecte de <?php echo $average_median_for_campaign; ?> €</th>
+				<th width="20%">Minimum recommandé pour passer en levée de fonds</th>
+				<th width="20%">Moyenne pour une levée de fonds de <?php echo $average_median_for_campaign; ?>&nbsp;€</th>
+				<th width="20%">Médiane pour une levée de fonds de <?php echo $average_median_for_campaign; ?>&nbsp;€</th>
 			</tr>
 			<tr class="txt-center">
 				<td>Nb d’évaluateurs</td>
@@ -90,14 +90,14 @@ $vote_more_info = $vote['more_info']; // liste des 'autres informations'
 				<td><?php echo UIHelpers::format_number($vote_amount_intent['median']) . ' €'; ?></td>
 			</tr>
 			<tr class="txt-center">
-				<td>Nb pré-investissement</td>
+				<td>Nb pré-investissements</td>
 				<td <?php if ($vote_nb_preinvestment['current'] >= $vote_nb_preinvestment['min']) { ?> class="min-ok" <?php } ?>><?php echo $vote_nb_preinvestment['current']; ?><?php if ($vote_nb_preinvestment['current'] < $vote_nb_preinvestment['min']) { ?><br><span class="reste">(plus que <?php echo $vote_nb_preinvestment['min'] - $vote_nb_preinvestment['current']; ?>)</span><?php } ?></td>
 				<td><?php echo $vote_nb_preinvestment['min']; ?></td>
 				<td><?php echo $vote_nb_preinvestment['average']; ?></td>
 				<td><?php echo $vote_nb_preinvestment['median']; ?></td>
 			</tr>
 			<tr class="txt-center">
-				<td>Valeur pré-investissement</td>
+				<td>Valeur pré-investissements</td>
 				<td <?php if ($vote_amount_preinvestment['current'] >= $vote_amount_preinvestment['min']) { ?> class="min-ok" <?php } ?>><?php echo UIHelpers::format_number($vote_amount_preinvestment['current']) . ' €'; ?></td>
 				<td><?php echo UIHelpers::format_number($vote_amount_preinvestment['min']) . ' €'; ?></td>
 				<td><?php echo UIHelpers::format_number($vote_amount_preinvestment['average']) . ' €'; ?></td>
