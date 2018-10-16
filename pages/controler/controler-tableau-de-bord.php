@@ -230,8 +230,8 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ] = array();
 		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ][ 'current' ] = max( 0, $vote_results[ 'count_preinvestments' ] );
 		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ][ 'min' ] = 15; // TODO
-		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ][ 'average' ] = round( $reference_for_average_ratio_nb_preinvestment );
-		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ][ 'median' ] = round( $reference_for_median_ratio_nb_preinvestment );
+		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ][ 'average' ] = round( $reference_for_average_ratio_nb_preinvestment * $campaign_ratio_to_average );
+		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ][ 'median' ] = round( $reference_for_median_ratio_nb_preinvestment * $campaign_ratio_to_median );
 		$this->campaign_stats[ 'vote' ][ 'amount_preinvestment' ] = array();
 		$this->campaign_stats[ 'vote' ][ 'amount_preinvestment' ][ 'current' ] = max( 0, $vote_results[ 'amount_preinvestments' ] );
 		$this->campaign_stats[ 'vote' ][ 'amount_preinvestment' ][ 'min' ] = round( $this->campaign_stats[ 'goal' ] / 4 );
