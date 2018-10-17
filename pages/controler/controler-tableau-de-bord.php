@@ -219,7 +219,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'vote' ][ 'nb' ][ 'median' ] = round( $reference_for_median_ratio_nb * $campaign_ratio_to_median );
 		$this->campaign_stats[ 'vote' ][ 'nb_intent' ] = array();
 		$this->campaign_stats[ 'vote' ][ 'nb_intent' ][ 'current' ] = max( 0, $vote_results[ 'count_invest_ready' ] );
-		$this->campaign_stats[ 'vote' ][ 'nb_intent' ][ 'min' ] = 25; // TODO
+		$this->campaign_stats[ 'vote' ][ 'nb_intent' ][ 'min' ] = 80;
 		$this->campaign_stats[ 'vote' ][ 'nb_intent' ][ 'average' ] = round( $reference_for_average_ratio_nb_intent * $campaign_ratio_to_average );
 		$this->campaign_stats[ 'vote' ][ 'nb_intent' ][ 'median' ] = round( $reference_for_median_ratio_nb_intent * $campaign_ratio_to_median );
 		$this->campaign_stats[ 'vote' ][ 'amount_intent' ] = array();
@@ -229,7 +229,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'vote' ][ 'amount_intent' ][ 'median' ] = round( $reference_for_median_ratio_amount_intent_percent * $campaign_ratio_to_median * $this->campaign_stats[ 'goal' ] / 100 );
 		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ] = array();
 		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ][ 'current' ] = max( 0, $vote_results[ 'count_preinvestments' ] );
-		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ][ 'min' ] = 15; // TODO
+		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ][ 'min' ] = 25;
 		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ][ 'average' ] = round( $reference_for_average_ratio_nb_preinvestment * $campaign_ratio_to_average );
 		$this->campaign_stats[ 'vote' ][ 'nb_preinvestment' ][ 'median' ] = round( $reference_for_median_ratio_nb_preinvestment * $campaign_ratio_to_median );
 		$this->campaign_stats[ 'vote' ][ 'amount_preinvestment' ] = array();
