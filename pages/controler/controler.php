@@ -129,9 +129,9 @@ class WDG_Page_Controler {
 			$this->show_user_details_confirmation = false;
 			if ( !$this->get_show_user_pending_preinvestment() && is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
 				$WDG_user_current = WDGUser::current();
-				$user_details_confirmation = $WDG_user_current->get_show_details_confirmation();
-				if ( $user_details_confirmation ) {
-					$this->show_user_details_confirmation = new WDG_Form_User_Details( $WDG_user_current->get_wpref(), $user_details_confirmation );
+				$user_details_confirmation_type = $WDG_user_current->get_show_details_confirmation();
+				if ( $user_details_confirmation_type ) {
+					$this->show_user_details_confirmation = new WDG_Form_User_Details( $WDG_user_current->get_wpref(), $user_details_confirmation_type );
 					$WDG_user_current->update_last_details_confirmation();
 				}
 			}
