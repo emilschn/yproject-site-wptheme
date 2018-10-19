@@ -2,11 +2,13 @@ jQuery(document).ready( function($) {
     ProjectEditor.init();
 });
 
-
 var ProjectEditor = (function($) {
 	return {
 		elements: [],
 		isInit: false,
+		intervalID: null,
+		softCancel: null,
+		iniContent: null,
 		
 		//Initialisation : création du bouton en haut de page permettant de switcher d'un mode à l'autre
 		init: function() {
@@ -20,6 +22,14 @@ var ProjectEditor = (function($) {
 			$("#wdg-edit-project-add-lang button.add-button").click(function() {
 				ProjectEditor.clickAddLang();
 			});
+			
+			window.addEventListener( 'beforeunload', function (e) {
+				if ( WDGProjectPageFunctions.isEditing !== '' ) {
+					var confirmationMessage = "Vous avez réservé une des parties du projet pour l'éditer, prenez le temps de la sauvegarder ou d'annuler la réservation. Êtes vous sûr de vouloir quitter ?";
+					(e || window.event).returnValue = confirmationMessage; //Gecko + IE
+					return confirmationMessage; //Webkit, Safari, Chrome
+				}
+			} );
 		},
 		
 		//Permet de switcher du texte Nouvelle langue vers le sélecteur de langue
@@ -134,6 +144,43 @@ var ProjectEditor = (function($) {
 		hideEditButton: function(property) {
 			$("#wdg-edit-"+property).hide();
 		},
+
+		hideAllEditButton: function() {
+			ProjectEditor.hideEditButton('description');
+			ProjectEditor.hideEditButton('societal_challenge');
+			ProjectEditor.hideEditButton('added_value');
+			ProjectEditor.hideEditButton('economic_model');
+			ProjectEditor.hideEditButton('implementation');
+		},
+
+		requestLockProject: function(sProperty) {
+    		var value = $("#project-content-"+sProperty).data("md5");
+			$.ajax({
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': {
+					'action':	'try_lock_project_edition',
+					'property':	sProperty,
+					'value':	value,
+					'id_campaign':  $("#content").data("campaignid"),
+					'lang':		$("html").attr("lang").split("-").join("_")
+				}
+		    }).done(function(result) {
+				result = JSON.parse(result);
+		    	if ( result.response == 'error') {
+		     		alert( result.values + " édite déjà cette partie du projet." );
+		     		WDGProjectPageFunctions.isEditing = "";
+		     		$("#wdg-edit-"+sProperty).removeClass("wait-button");
+		     	} else if ( result.response == 'different_content') {
+		     		alert( "Cette partie a été modifiée récemment, merci d'actualiser la page afin d'afficher le bon contenu." );
+		     		WDGProjectPageFunctions.isEditing = "";
+		     		$("#wdg-edit-"+sProperty).removeClass("wait-button"); 
+		        } else {
+		            ProjectEditor.showEditableZone(result.values);
+		            ProjectEditor.keepUserLockProject();
+		        }
+			});
+		},
 		
 		//Définit les événements de clicks sur les différents boutons d'édition
 		initClick: function() {
@@ -157,7 +204,8 @@ var ProjectEditor = (function($) {
 					case "added_value":
 					case "economic_model":
 					case "implementation":
-						ProjectEditor.showEditableZone(sProperty);
+						$("#wdg-edit-"+sProperty).addClass("wait-button");
+						ProjectEditor.requestLockProject(sProperty);
 						break;
 					case "picture-head":
 						ProjectEditor.createfile(sProperty);
@@ -171,7 +219,43 @@ var ProjectEditor = (function($) {
 				}
 			});
 		},
-		
+
+		//Mise à jour des données de l'édition en cours
+		keepUserLockProject: function() {
+			if ( ProjectEditor.intervalID ) {
+				clearInterval(ProjectEditor.intervalID);
+				ProjectEditor.intervalID = null;
+			} else {
+				ProjectEditor.intervalID = setInterval( function() { 
+					$.ajax({
+						'type' : "POST",
+						'url' : ajax_object.ajax_url,
+						'data': {
+							'action':	'keep_lock_project_edition',
+							'property':	WDGProjectPageFunctions.isEditing,		
+							'id_campaign':  $("#content").data("campaignid"),
+							'lang':		$("html").attr("lang").split("-").join("_")
+						}
+					}).done(function(result) {					     	
+						result = JSON.parse(result);
+						if ( result.response == 'error') {
+						    ProjectEditor.lockProjectFail(result.user, result.values );
+				        } 
+				    });
+			}, 120000); // La mise à jour se fait toutes les 2 minutes.
+			}
+		},
+
+		lockProjectFail: function(user, property) {
+			alert( "Une inactivité prolongée a entraîné la perte de votre session. \n" + user + " édite ce projet actuellement, vos modifications seront donc perdues. \n\n Il vous est conseillé de copier/coller vos modifications dans un document afin de les conserver et de les mettre en commun avec les autres éditeurs. Merci de votre compréhension." );
+			$("#wdg-validate-"+property).removeClass();
+			$("#wdg-validate-"+property).css( 'cursor', 'default' );
+			$("#wdg-validate-"+property).addClass("edit-button-validate-locked");
+			$("#wdg-edit-"+property).removeClass("wait-button");
+			ProjectEditor.keepUserLockProject();
+			ProjectEditor.softCancel = true;
+		},
+
 		//Affiche un cadre sur certaines zones éditables
 		initEditable: function(property) {
 			switch (property) {
@@ -391,19 +475,37 @@ var ProjectEditor = (function($) {
 			$(".url_video").change(function(){
 				$("#apercu_video").remove();
 				var youtube_id = false;
+				var vimeo_id = '';
 				if ($("#text_url_video").val().indexOf('watch?v=') > -1) {
 					youtube_id = $("#text_url_video").val().split('watch?v=')[1];
 				} else if ($("#text_url_video").val().indexOf('youtu.be') > -1) {
 					youtube_id = $("#text_url_video").val().split('youtu.be/')[1];
+				} else if ( $("#text_url_video").val().indexOf('vimeo') > -1 ) {
+					var urlVimeoSplit = $("#text_url_video").val().split('/');
+					vimeo_id = urlVimeoSplit[ urlVimeoSplit.length - 1 ];
+					if ( vimeo_id === '' ) {
+						vimeo_id = urlVimeoSplit[ urlVimeoSplit.length - 2 ];
+					}
 				}
+				
 				if (youtube_id) {
 					var link = "https://www.youtube.com/embed/"+video_number+"?feature=oembed&rel=0&wmode=transparent";
-					var video_preview = "<div id='apercu_video'><iframe  width='290' height='100%' src='"+link+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
+					var video_preview = "<div id='apercu_video'><iframe width='290' height='100%' src='"+link+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
 					$(".block_overview_video").after(video_preview);
 					video_check = true;
 					$("#url_video_link").val($("#text_url_video").val());
 					$("#text_url_video").addClass("input_text_good");
-				}else{
+					
+				} else if ( vimeo_id !== '' ) {
+					var link = "https://player.vimeo.com/video/"+vimeo_id;
+					var video_preview = "<div id='apercu_video'><iframe src=\""+link+"\" width=\"290\" height=\"100%\" frameborder=\"0\" allowfullscreen></iframe></div>";
+					$(".block_overview_video").after(video_preview);
+					video_check = true;
+					$("#url_video_link").val($("#text_url_video").val());
+					$("#text_url_video").addClass("input_text_good");
+					
+					
+				} else {
 					video_number = $("#text_url_video").val().split('dailymotion')[1];
 					if(video_number){
 						var video_preview = "<div id='apercu_video'><iframe width='290' height='100%' src='"+$("#text_url_video").val()+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
@@ -414,7 +516,7 @@ var ProjectEditor = (function($) {
 					}else{
 						$("#text_url_video").addClass("input_text_error");
 						$("#text_url_video").val(url_video_link);
-						var video_preview = "<div  id='apercu_video' ><iframe  width='290' height='100%' src='"+url_video_link+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
+						var video_preview = "<div id='apercu_video' ><iframe width='290' height='100%' src='"+url_video_link+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
 						$(".block_overview_video").after(video_preview);
 					}
 				}
@@ -465,16 +567,25 @@ var ProjectEditor = (function($) {
 					if ( video_check ){
 						$("#project-banner-picture").remove();
 						var youtube_id = false;
+						var vimeo_id = '';
 						if ($("#text_url_video").val().indexOf('watch?v=') > -1) {
 							youtube_id = $("#text_url_video").val().split('watch?v=')[1];
 						} else if ($("#text_url_video").val().indexOf('youtu.be') > -1) {
 							youtube_id = $("#text_url_video").val().split('youtu.be/')[1];
+						} else if ( $("#text_url_video").val().indexOf('vimeo') > -1 ) {
+							var urlVimeoSplit = $("#text_url_video").val().split('/');
+							vimeo_id = urlVimeoSplit[ urlVimeoSplit.length - 1 ];
+							if ( vimeo_id === '' ) {
+								vimeo_id = urlVimeoSplit[ urlVimeoSplit.length - 2 ];
+							}
 						}
 						var link = $("#url_video_link").val();
 						if (youtube_id) {
 							link = "https://www.youtube.com/embed/"+youtube_id+"?feature=oembed&rel=0&wmode=transparent";
+						} else if ( vimeo_id !== '' ) {
+							link = "https://player.vimeo.com/video/"+vimeo_id;
 						}
-						var div_video = '<div id="project-banner-picture"><iframe width="578" height="325" src="'+link+'" frameborder="0" allowfullscreen></iframe></div>';
+						var div_video = '<div id="project-banner-picture"><iframe width="578" height="325" src="'+link+'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
 						$("#url_video_link").after(div_video);
 						video_check = false;
 						
@@ -556,12 +667,46 @@ var ProjectEditor = (function($) {
 			
 			$(ProjectEditor.elements[property].contentId).show();
 			$(ProjectEditor.elements[property].contentId + "> div").show();
-			var buttonValidate = '<div id="wdg-validate-'+property+'" class="edit-button-validate" data-property="'+property+'"></div>';
+			var buttonValidate = '<div id="wdg-validate-'+property+'" class="edit-button-validate" data-property="'+property+'" title="Enregistrer"></div>';
 			$(ProjectEditor.elements[property].contentId).after(buttonValidate);
 			$("#wdg-validate-"+property).css("left", $(ProjectEditor.elements[property].contentId).position().left + $(ProjectEditor.elements[property].contentId).outerWidth());
 			$("#wdg-validate-"+property).css("top", $(ProjectEditor.elements[property].contentId).position().top);
 			$("#wdg-validate-"+property).click(function() {
 				ProjectEditor.validateInput($(this).data("property"));
+			});
+			
+			var buttonCancel = '<div id="wdg-cancel-'+property+'" class="cancel-button" data-property="'+property+'" title="Annuler l\'édition"></div>';
+			$(ProjectEditor.elements[property].contentId).after(buttonCancel);
+			$("#wdg-cancel-"+property).css("left", $(ProjectEditor.elements[property].contentId).position().left + $(ProjectEditor.elements[property].contentId).outerWidth());
+			$("#wdg-cancel-"+property).css("top", $(ProjectEditor.elements[property].contentId).position().top);
+			$("#wdg-cancel-"+property).click(function() {
+				ProjectEditor.cancelInput(property);
+			});
+
+			ProjectEditor.hideAllEditButton(); 
+			ProjectEditor.initContent = tinyMCE.get("wdg-input-"+property).getContent();
+			$("#wdg-edit-"+property).removeClass("wait-button");
+
+			$(window).scroll(function() {
+				var scrollFromTop = window.scrollY;
+				var heightNavBar = $("div#content.version-3 nav.project-navigation").height(); // hauteur de la barre du menu
+				var topButtonValidate = $(ProjectEditor.elements[property].contentId).position().top; // position du bouton enregistré par rapport à l'encadrer de la partie
+				var margin = 10; // marge entre la barre de menu et la position de bouton
+      			var validatePosition = $("#wdg-validate-"+property);
+                var cancelPosition = $("#wdg-cancel-"+property);
+                var buttonsHeight = validatePosition.height();                                                
+      			var container = $(ProjectEditor.elements[property].contentId);
+			    var containerHeight = container.height();
+			    var containerOffset = (container.offset().top);
+      			var maxScroll = containerOffset + containerHeight;
+
+      			if ( scrollFromTop < maxScroll ) {
+         			var size = scrollFromTop - containerOffset + topButtonValidate + heightNavBar + margin;
+         			if ( size > topButtonValidate && size < containerHeight + buttonsHeight ) {                        
+                        validatePosition.css('top', (size)+"px");
+                        cancelPosition.css('top', (size)+"px");
+             		}
+             	}
 			});
 		},
 		
@@ -594,6 +739,9 @@ var ProjectEditor = (function($) {
 		    
 			$("#wdg-validate-"+property).addClass("wait-button");
 			$("#wdg-validate-"+property).unbind("click");
+			if ( $( '#wdg-cancel-' + property ).length > 0 ) {
+				$( '#wdg-cancel-' + property ).remove();
+			}
 			$.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,
@@ -605,7 +753,13 @@ var ProjectEditor = (function($) {
 					'lang':		$("html").attr("lang").split("-").join("_")
 				}
 			}).done(function(result) {
-				ProjectEditor.validateInputDone(result);
+				result = JSON.parse(result);
+				if ( result.response == 'error') {
+					ProjectEditor.lockProjectFail(result.user, result.values);
+				} else {
+					ProjectEditor.validateInputDone(result.values);
+					$("#project-content-"+property).data("md5", result.md5content);
+				}
 			});
 		},
 		
@@ -632,10 +786,50 @@ var ProjectEditor = (function($) {
 					$(ProjectEditor.elements[property].contentId).hide();
 					ProjectEditor.showEditButton(property);
 					$("#wdg-validate-"+property).remove();
+					$("#wdg-cancel-"+property).remove();
 					break;
 			}
+			ProjectEditor.keepUserLockProject();
 			WDGProjectPageFunctions.initClick();
 			WDGProjectPageFunctions.isEditing = "";
+		},
+
+		backToEditMode: function(property) {
+			$(ProjectEditor.elements[property].elementId).show();
+			$(ProjectEditor.elements[property].contentId).hide();
+			ProjectEditor.showEditButton(property);
+			$("#wdg-validate-"+property).remove();
+			$("#wdg-cancel-"+property).remove();
+			WDGProjectPageFunctions.initClick();
+			WDGProjectPageFunctions.isEditing = "";
+			tinyMCE.get("wdg-input-"+property).setContent(ProjectEditor.initContent);
+		},
+		
+		//Gère l'annulation de l'édition
+		cancelInput: function(property) {
+			if ( ProjectEditor.softCancel ) {
+				ProjectEditor.backToEditMode(property);
+				ProjectEditor.softCancel = null;
+			} else {
+				var confirmCancel = window.confirm("Attention, vous êtes sur le point d'arrêter l'édition et de perdre toutes vos modifications, voulez-vous continuer ?");
+				if ( confirmCancel ) {
+					$("#wdg-cancel-"+property).addClass("wait-button");
+					$( '#wdg-validate-' + property ).remove();
+					$.ajax({
+						'type' : "POST",
+						'url' : ajax_object.ajax_url,
+						'data': { 
+							'action': 'delete_lock_project_edition',
+							'property':	property,
+							'id_campaign': $("#content").data("campaignid"),
+							'lang':		$("html").attr("lang").split("-").join("_")
+						}
+					}).done(function(property) {
+						ProjectEditor.keepUserLockProject();
+						ProjectEditor.backToEditMode(property);
+					});
+				}
+			}		    
 		},
 		
 		//Mise à jour du texte dans l'affichage

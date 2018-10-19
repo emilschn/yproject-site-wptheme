@@ -12,6 +12,11 @@ $fields_risk = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_risk );
 $fields_info = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_info );
 $field_invest = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_invest );
 $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
+$core = ATCF_CrowdFunding::instance();
+$core->include_form( 'invest-poll' );
+$WDGCurrent_User = WDGUser::current();
+$WDGPollForm = new WDG_Form_Invest_Poll( $post->ID, $WDGCurrent_User->wp_user->ID, 'vote' );
+$fields_poll_source = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_group_poll_source );
 ?>
 
 <?php ob_start(); ?>
@@ -29,7 +34,7 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 		<div id="vote-form-slide0" class="vote-form-slide align-justify">
 			
 			<br /><br /><br />
-			<?php _e( "Le vote est l'&eacute;tape pr&eacute;alable à l'investissement et ne prend que 2 petites minutes !", 'yproject' ); ?>
+			<?php _e( "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable à l'investissement et ne prend que 2 petites minutes !", 'yproject' ); ?>
 			<br /><br />
 			<?php _e( "Les entrepreneurs ont besoin de votre avis sur le projet pour mesurer l'int&eacute;r&ecirc;t qu'il suscite et bien lancer leur lev&eacute;e de fonds.", 'yproject' ); ?>
 			<br /><br /><br /><br />
@@ -42,6 +47,7 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 				<span class="selected">Etape 1</span>
 				<span>Etape 2</span>
 				<span>Etape 3</span>
+				<span>Etape 4</span>
 			</div>
 			
 			<?php _e( "WE DO GOOD reconnecte la finance avec le bien commun.", 'yproject' ); ?>
@@ -69,6 +75,7 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 				<span>Etape 1</span>
 				<span class="selected">Etape 2</span>
 				<span>Etape 3</span>
+				<span>Etape 4</span>
 			</div>
 			
 			<?php foreach ( $fields_risk as $field ): ?>
@@ -89,6 +96,23 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 				<span>Etape 1</span>
 				<span>Etape 2</span>
 				<span class="selected">Etape 3</span>
+				<span>Etape 4</span>
+			</div>
+			
+			<?php foreach ( $fields_poll_source as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+			
+		</div>
+		
+		<div id="vote-form-slide4" class="vote-form-slide align-left hidden">
+			
+			<div class="vote-progress-bar align-center">
+				<span>Etape 1</span>
+				<span>Etape 2</span>
+				<span>Etape 3</span>
+				<span class="selected">Etape 4</span>
 			</div>
 			
 			<?php foreach ( $field_invest as $field ): ?>
@@ -112,6 +136,8 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 			
 			<button class="button save half right red hidden" data-close="vote" data-callback="WDGProjectVote.saveVoteCallback"><?php _e( "Valider", 'yproject' ); ?></button>
 			
+			<div class="clear"></div>
+			
 			<div class="loading align-center hidden">
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 			</div>
@@ -126,8 +152,8 @@ $field_advice = $WDGVoteForm->getFields( WDG_Form_Vote::$field_group_advice );
 $lightbox_content = ob_get_contents();
 ob_end_clean();
 $campaign_title = $post->post_title;
-echo do_shortcode('[yproject_lightbox_cornered id="vote" title="'.__( "Vote sur ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
-echo do_shortcode('[yproject_lightbox_cornered id="vote-simple-confirmation" msgtype="valid"]'.__( "Votre vote est enregistr&eacute; !", 'yproject' ).'[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="vote" title="'.__( "&Eacute;valuation de ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="vote-simple-confirmation" msgtype="valid"]'.__( "Votre &eacute;valuation est enregistr&eacute;e !", 'yproject' ).'[/yproject_lightbox_cornered]');
 // *****************************************************************************
 ?>
 
@@ -156,7 +182,7 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 		<span class="form-error-general"></span>
 		
 		<p class="align-left">
-		<i><?php _e( "Votre vote a bien &eacute;t&eacute; enregistr&eacute; !", 'yproject' ); ?></i>
+		<i><?php _e( "Votre &eacute;valuation a bien &eacute;t&eacute; enregistr&eacute; !", 'yproject' ); ?></i>
 		<br /><br />
 		<?php _e( "Vous avez indiqu&eacute; &ecirc;tre int&eacute;ress&eacute;(e) pour investir, confirmez vos informations afin que le porteur de projet puisse vous joindre lors du lancement de la lev&eacute;e de fonds.", 'yproject' ); ?>
 		<br /><br />
@@ -193,7 +219,7 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 <?php
 $lightbox_content = ob_get_contents();
 ob_end_clean();
-echo do_shortcode('[yproject_lightbox_cornered id="user-details-vote" title="'.__( "Vote sur ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="user-details-vote" title="'.__( "&Eacute;valuation de ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
 echo do_shortcode('[yproject_lightbox_cornered id="user-details-confirmation" msgtype="valid"]'.__( "Donn&eacute;es enregistr&eacute;es ! Merci !", 'yproject' ).'[/yproject_lightbox_cornered]');
 // *****************************************************************************
 ?>
@@ -219,7 +245,7 @@ $edd_settings = get_option( 'edd_settings' );
 		
 		<div id="user-details-form-buttons">
 			
-			<button type="button" class="button redirect half right red" data-redirecturl="<?php echo home_url( '/investir' ) . '?campaign_id=' .$post->ID. '&invest_start=1'; ?>"><?php _e( "Continuer", 'yproject' ); ?></button>
+			<button type="button" class="button redirect half right red" data-redirecturl="<?php echo home_url( '/investir/' ) . '?campaign_id=' .$post->ID. '&invest_start=1'; ?>"><?php _e( "Continuer", 'yproject' ); ?></button>
 			
 		</div>
 		

@@ -20,7 +20,7 @@
 					<p><?php _e( 'Votre compte a &eacute;t&eacute; activ&eacute ! Les d&eacute;tails de votre compte ont &eacute;t&eacute; envoy&eacute;s par e-mail.', 'yproject' ); ?></p>
 				<?php else : ?>
 					<?php ypcf_debug_log('Account activated + form'); ?>
-					<p><?php printf( __( 'Votre compte a bien &eacute;t&eacute; activ&eacute; ! Vous pouvez maintenant <a href="%s">vous connecter</a> avec votre login et mot de passe.', 'yproject' ), home_url('/connexion') ); ?></p>
+					<p><?php printf( __( 'Votre compte a bien &eacute;t&eacute; activ&eacute; ! Vous pouvez maintenant <a href="%s">vous connecter</a> avec votre login et mot de passe.', 'yproject' ), home_url('/connexion/') ); ?></p>
 
 					<form name="login-form" class="sidebar-login-form standard-form" action="<?php echo site_url( 'wp-login.php', 'login_post' ); ?>" method="post">
 					    <label class="standard-label"><?php _e('Identifiant', 'yproject'); ?></label>

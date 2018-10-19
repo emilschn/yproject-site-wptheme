@@ -49,49 +49,33 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 /******************************************************************************/
 // STATS PROJECTS
 /******************************************************************************/
-$stats_html = $page_controler->get_stats_html();
 ?>
-
-<?php if ( !$stats_html ): ?>
-				
-	<?php $stats_list = $page_controler->get_stats_list(); ?>
-				
-	<?php ob_start(); ?>
-				
-				<div id="wdg-project-stats" class="right">
-					<p><?php _e( "WE DO GOOD c'est :" ); ?></p>
-					<p>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-balloon.png" alt="air balloon" />
-						<span>
-							<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span><br />
-							<?php _e( "lev&eacute;s", 'yproject' ); ?>
-						</span>
-					</p>
-					<p>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-people.png" alt="people" />
-						<span>
-							<span><?php echo number_format( $stats_list[ 'count_people' ], 0, '', ' ' ); ?></span><br />
-							<?php _e( "investisseurs", 'yproject' ); ?>
-						</span>
-					</p>
-					<p>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="money" />
-						<span>
-							<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?> &euro;</span><br />
-							<?php _e( "de royalties vers&eacute;s", 'yproject' ); ?>
-						</span>
-					</p>
-				</div>
-				
-	<?php
-	$cache_stats = ob_get_contents();
-	$page_controler->set_stats_html( $cache_stats );
-	ob_end_clean();
-	?>
-				
-<?php endif; ?>
-
-<?php echo $page_controler->get_stats_html(); ?>
+		
+<?php $stats_list = $page_controler->get_stats_list(); ?>
+<div id="wdg-project-stats" class="right">
+	<p><?php _e( "WE DO GOOD c'est :" ); ?></p>
+	<p>
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-balloon.png" alt="air balloon" />
+		<span>
+			<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span><br>
+			<?php _e( "lev&eacute;s", 'yproject' ); ?>
+		</span>
+	</p>
+	<p>
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-people.png" alt="people" />
+		<span>
+			<span><?php echo number_format( $stats_list[ 'count_people' ], 0, '', ' ' ); ?></span><br>
+			<?php _e( "investisseurs", 'yproject' ); ?>
+		</span>
+	</p>
+	<p>
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="money" />
+		<span>
+			<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?></span><br>
+			<?php _e( "versements", 'yproject' ); ?>
+		</span>
+	</p>
+</div>
 				
 <?php
 /******************************************************************************/
@@ -161,7 +145,9 @@ $stats_html = $page_controler->get_stats_html();
                 <select id="project-filter-activity" class="project-filter-select">
                     <option value="all"><?php _e( "Tous les types de projet", 'yproject' ); ?></option>
                     <?php foreach ( $activities_list as $activity ): ?>
+						<?php if ( $activity->slug != 'epargne-positive' ): ?>
 						<option value="<?php echo $activity->slug; ?>" <?php selected( $activity->slug, 'entreprises' ); ?>><?php echo $activity->name; ?></option>
+						<?php endif; ?>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -253,18 +239,29 @@ $stats_html = $page_controler->get_stats_html();
 					<?php ob_start(); ?>
 						
 					<?php
+					$index_project = 1;
+					$index_cache = 1;
 					global $project_id;
 					$project_list_funded = $page_controler->get_fundedprojects_list();
 					foreach ( $project_list_funded as $project_post ) {
 						$project_id = $project_post->ID;
 						locate_template( array( "projects/preview.php" ), true, false );
+						if ( $index_project == 5 ) {
+							$cache_fundedprojects = ob_get_contents();
+							$page_controler->set_fundedprojects_html( $cache_fundedprojects, $index_cache );
+							ob_end_clean();
+							ob_start();
+							$index_cache++;
+							$index_project = 1;
+						} else {
+							$index_project++;
+						}
 					}
-					?>
-				
-					<?php
-					$cache_fundedprojects = ob_get_contents();
-					$page_controler->set_fundedprojects_html( $cache_fundedprojects );
-					ob_end_clean();
+					if ( $index_project > 1 ) {
+						$cache_fundedprojects = ob_get_contents();
+						$page_controler->set_fundedprojects_html( $cache_fundedprojects, $index_cache );
+						ob_end_clean();
+					}
 					?>
 					
 <?php endif; ?>

@@ -1,5 +1,5 @@
 <?php
-global $campaign, $stylesheet_directory_uri;
+global $campaign, $stylesheet_directory_uri, $is_simulator_shortcode;
 $campaign_id = $campaign->ID;
 $page_invest = get_page_by_path('investir');
 $campaign_status = $campaign->campaign_status();
@@ -11,6 +11,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illimit&eacute;", 'yproject' ) : 'x' .$campaign->maximum_profit();
 ?>
 <div class="project-rewards padder">
+	<?php if ( empty( $is_simulator_shortcode ) ): ?>
 	<h2 class="standard">
 		<?php // CAPITAL // ?>
 		<?php if ($campaign->funding_type() == 'fundingproject'): ?>
@@ -19,6 +20,7 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 			/ <?php _e('Contreparties', 'yproject'); ?> /
 		<?php endif; ?>
 	</h2>
+	<?php endif; ?>
     
 	<div class="project-rewards-content">
 		<?php // CAPITAL // ?>
@@ -63,7 +65,11 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 					<div class="field">
 						<label for="init_invest"><?php _e( "Je recevrai", 'yproject' ); ?></label>
 						<div class="field-container">
-							<span class="roi_percent_user">0</span> % <?php _e( "du chiffre d'affaires de ce projet.", 'yproject' ); ?><br />
+							<?php $complementary_text = '.'; ?>
+							<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
+								<?php $complementary_text = __( " (pourcentage indicatif).", 'yproject' ); ?>
+							<?php endif; ?>
+							<span class="roi_percent_user">0</span> % <?php _e( "du chiffre d'affaires de ce projet", 'yproject' ); echo $complementary_text; ?><br />
 							<?php _e("Soit", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro;* </span><?php _e( "selon", 'yproject' ); ?>
 							<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet", 'yproject' )?></a>
 							<?php _e( "r&eacute;partis de la mani&egrave;re suivante :", 'yproject' ); ?>
@@ -90,7 +96,7 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 					<div class="arrow-line" style="width: <?php echo $base ?>px;"><div class="arrow-end"></div></div>
 					<?php endif; ?>
 
-				<?php endif; ?>  
+				<?php endif; ?>
 
 				<div>
 					<ul>

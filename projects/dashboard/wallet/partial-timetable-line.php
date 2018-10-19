@@ -117,4 +117,21 @@ for ($i = 0; $i < $nb_fields; $i++) {
 			<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue"><?php _e( "T&eacute;l&eacute;charger", 'yproject' ); ?></a>
 		<?php endif; ?>
 	</td>
+	
+	<?php // Facture ?>
+	<td>
+		<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_finished ): ?>
+		<?php if ( $is_admin ): ?>
+		<form action="<?php echo admin_url( 'admin-post.php?action=generate_royalties_bill'); ?>" method="POST" class="align-center admin-theme-block">
+			/!\ Attention : assurez-vous que la facture n'a pas encore été générée sur l'outil pour ne pas créer de doublon. /!\<br>
+			<input type="hidden" name="roi_declaration_id" value="<?php echo $declaration->id; ?>">
+			<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>">
+			<button class="button"><?php _e( "G&eacute;n&eacute;rer la facture", 'yproject' ); ?></button>
+		</form>
+		<?php else: ?>
+		A venir
+		<?php endif; ?>
+		<?php endif; ?>
+	</td>
+			
 </tr>

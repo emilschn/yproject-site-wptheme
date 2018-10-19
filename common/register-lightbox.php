@@ -1,8 +1,9 @@
 <?php global $page_register, $signup_errors, $signup_step, $stylesheet_directory_uri; ?>
 
 <div class="wdg-lightbox-ref">
+	<br><br>
 
-	<form action="<?php echo home_url( "/connexion" ); ?>#register" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
+	<form action="<?php echo home_url( "/inscription/" ); ?>" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
 		<?php if ( $signup_step == 'request-details' ) : ?>
 			<div class="warning">
 				La cr&eacute;ation d&apos;un compte de Membre sur <?php echo ATCF_CrowdFunding::get_platform_name(); ?> est exclusivement r&eacute;serv&eacute;e aux personnes physiques.
@@ -17,20 +18,28 @@
 
 			<div class="register-section" id="basic-details-section">
 				<div class="field">
-					<label for="signup_username_login"><?php _e( 'Identifiant', 'yproject' ); ?> *</label>
-					<span class="complement">compos&eacute; de lettres non-accentu&eacute;es, de chiffres ou des caract&egrave;res suivants : . - @</span>
-					<div class="field-container">
-						<span class="field-value">
-							<input type="text" name="signup_username_login" id="signup_username_login" value="<?php if (!empty($_POST['signup_username'])) { echo $_POST['signup_username']; } ?>" />
-						</span>
-					</div>
-				</div>
-
-				<div class="field">
 					<label for="signup_email"><?php _e( 'Adresse e-mail', 'yproject' ); ?> *</label>
 					<div class="field-container">
 						<span class="field-value">
 							<input type="text" name="signup_email" id="signup_email" value="<?php if (!empty($_POST['signup_email'])) { echo $_POST['signup_email']; } ?>" />
+						</span>
+					</div>
+				</div>
+				
+				<div class="field">
+					<label for="signup_firstname"><?php _e( "Pr&eacute;nom", 'yproject' ); ?> *</label>
+					<div class="field-container">
+						<span class="field-value">
+							<input type="text" name="signup_firstname" id="signup_firstname" value="<?php if ( !empty( $_POST[ 'signup_firstname' ] ) ) { echo $_POST[ 'signup_firstname' ]; } ?>" />
+						</span>
+					</div>
+				</div>
+				
+				<div class="field">
+					<label for="signup_lastname"><?php _e( "Nom de famille", 'yproject' ); ?> *</label>
+					<div class="field-container">
+						<span class="field-value">
+							<input type="text" name="signup_lastname" id="signup_lastname" value="<?php if ( !empty( $_POST[ 'signup_lastname' ] ) ) { echo $_POST[ 'signup_lastname' ]; } ?>" />
 						</span>
 					</div>
 				</div>
@@ -55,11 +64,11 @@
 
 				<?php if (!WP_IS_DEV_SITE): ?>
 				<div class="g-recaptcha" data-sitekey="6LcoHRIUAAAAADwRb9TDAhshD3CZgIhx1M-MO84y"></div>
-				<br /><br />
+				<br><br>
 				<?php endif; ?>
 
 				<div class="field">
-					<label for="validate-terms-check-register" id="label-validate-terms-check-register"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> J&apos;accepte <a href="<?php echo home_url().'/cgu';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
+					<label for="validate-terms-check-register" id="label-validate-terms-check-register" data-keepdefault="1"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> J&apos;accepte <a href="<?php echo home_url().'/cgu/';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
 				</div>
 
 				<?php wp_nonce_field( 'register_form_posted' ); ?>
@@ -71,15 +80,13 @@
 				<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 				<input type="hidden" name="signup_submit" value="1" />
 				<button class="button save red" type="submit"><?php _e( "Cr&eacute;er mon compte", 'yproject' ); ?></button>
-				<br /><br />
+				<br><br>
 	
-				<button type="button" class="button blue-facebook social_connect_login_facebook"><?php _e( "Se connecter avec Facebook", 'yproject' ); ?></button>
+				<button type="button" class="button blue-facebook social_connect_login_facebook" data-redirect="<?php echo WDGUser::get_login_redirect_page(); ?>"><?php _e( "Se connecter avec Facebook", 'yproject' ); ?></button>
 				<div class="social_connect_login_facebook_loading align-center hidden">
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 				</div>
-				<br /><br />
-
-				<button type="button" class="wdg-button-lightbox-open button transparent" data-lightbox="connexion"><?php _e( "J&apos;ai d&eacute;j&agrave; un compte", 'yproject' ); ?></button>
+				<br><br>
 
 			</div>
 		<?php endif; // request-details signup step ?>
@@ -100,6 +107,13 @@
 			<?php endif; ?>
 
 		<?php endif; // completed-confirmation signup step ?>
+	</form>
+			
+	<form method="post" action="<?php echo home_url( "/connexion/" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
+		<div>
+			<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
+			<button class="button transparent" type="submit"><?php _e( "J&apos;ai d&eacute;j&agrave; un compte", 'yproject' ); ?></button>
+		</div>
 	</form>
 	
 </div>

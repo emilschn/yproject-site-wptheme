@@ -13,42 +13,138 @@ var WDGInvestPageFunctions = (function($) {
 					WDGInvestPageFunctions.checkInvestInput();
 				} );
 			}
-			
+
+			// Si erreur le formulaire se met à jour en prenant en compte les précédentes modifications
+			var userType = $( 'form input#user-type-select' ).val();
+			WDGInvestPageFunctions.userTypeSelect( userType );
+
+			var idOrga = $( 'form select#select-orga-id' ).val();
+			if ( idOrga ) {
+				WDGInvestPageFunctions.idOrgaSelect( idOrga );
+			}
+
 			// Changement de type d'investisseur
 			if ( $( 'form input#user-type-user' ).length > 0 ) {
 				$( 'form input#user-type-user, form input#user-type-orga' ).click( function() {
-					if ( $( this ).val() == 'user' ) {
-						$( 'form #fieldgroup-orga-info' ).hide();
-						$( 'form #fieldgroup-orga-info-new' ).hide();
-						$( 'form #fieldgroup-user-type-orga' ).hide();
-						$( 'form #fieldgroup-user-info' ).slideDown( 200 );
-						$( 'form #fieldgroup-to-display' ).slideDown( 200 );
-
-					} else if ( $( this ).val() == 'orga' ) {
-						$( 'form #fieldgroup-user-type-orga' ).slideDown( 200 );
-						$( 'form #fieldgroup-user-info' ).hide();
-						$( 'form #fieldgroup-to-display' ).hide();
-					}
+					WDGInvestPageFunctions.userTypeSelect( $( this ).val() );
 				} );
 				// Changement choix d'organisation
 				$( 'form select#select-orga-id' ).change( function() {
-					if ( $(this).val() === '' ) {
-						$( 'form #fieldgroup-user-info' ).hide();
-						$( 'form #fieldgroup-orga-info' ).hide();
-						$( 'form #fieldgroup-to-display' ).hide();
-						$( 'form #fieldgroup-orga-info-new' ).hide();
-					} else {
-						$( 'form #fieldgroup-user-info' ).slideDown( 200 );
-						$( 'form #fieldgroup-orga-info' ).slideDown( 200 );
-						$( 'form #fieldgroup-to-display' ).slideDown( 200 );
-						if ( $(this).val() === 'new-orga' ) {
-							$( 'form #fieldgroup-orga-info-new' ).slideDown( 200 );
+					WDGInvestPageFunctions.idOrgaSelect( $( this ).val() );
+				} );
+			}
+			
+			if ( $( '.mean-payment-button' ).length > 0 ) {
+				$( '.mean-payment-button' ).click( function( e ) {
+					e.preventDefault();
+					$( '.mean-payment' ).hide();
+					$( this ).show();
+					$( '#change-mean-payment' ).show();
+					var sMeanPayment = 'mean-payment-';
+					$( '#meanofpayment' ).val( $( this ).attr( 'id' ).substr( sMeanPayment.length ) );
+					if ( $( this ).attr( 'id' ).indexOf( 'card' ) > -1 && $( '#two-contracts-preview' ).length > 0 ) {
+						if ( $( this ).attr( 'id' ).indexOf( 'wallet' ) > -1 ) {
+							if ( $( '#two-contracts-preview-with-wallet' ).length > 0 ) {
+								$( '#two-contracts-preview-with-wallet' ).show();
+								$( '#two-contracts-preview-with-wallet .contract-preview-with-tabs .contract-preview-tabs div:first' ).addClass( 'selected' );
+								$( '#two-contracts-preview-with-wallet .contract-preview-with-tabs .contract-preview-content > div:first' ).show();
+							} else {
+								$( '#contract-preview' ).show();
+							}
 						} else {
-							$( 'form #fieldgroup-orga-info-new' ).hide();
+							$( '#two-contracts-preview' ).show();
+							$( '#two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div:first' ).addClass( 'selected' );
+							$( '#two-contracts-preview .contract-preview-with-tabs .contract-preview-content > div:first' ).show();
 						}
-						WDGInvestPageFunctions.updateOrgaFields( $(this).val() );
+					} else {
+						$( '#contract-preview' ).show();
+					}
+					$( '#contract-buttons' ).show();
+				} );
+				
+				$( '#change-mean-payment' ).click( function( e ) {
+					e.preventDefault();
+					$( '.mean-payment' ).show();
+					$( this ).hide();
+					$( '#contract-preview' ).hide();
+					$( '.two-contracts-preview' ).hide();
+					$( '#contract-buttons' ).hide();
+					$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).removeClass( 'selected' );
+					$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-content > div' ).hide();
+				} );
+				
+				$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).click( function() {
+					if ( !$( this ).hasClass( 'selected' ) ) {
+						$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-content > div' ).each( function() {
+							if ( $( this ).is( ':visible' ) ) {
+								$( this ).hide();
+							} else {
+								$( this ).show();
+							}
+						} );
+						$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).each( function() {
+							if ( $( this ).hasClass( 'selected' ) ) {
+								$( this ).removeClass( 'selected' );
+							} else {
+								$( this ).addClass( 'selected' );
+							}
+						} );
 					}
 				} );
+			}
+			
+			// Sondage
+			if ( $( '#field-would-invest-more-amount' ).length > 0 ) {
+				$( $( '#would-invest-more-amount-yes' ) ).change( function() {
+					$( '#field-would-invest-amount-with-warranty' ).show( 100 );
+				} );
+				$( $( '#would-invest-more-amount-no, #would-invest-more-amount-maybe' ) ).change( function() {
+					$( '#field-would-invest-amount-with-warranty' ).hide( 100 );
+				} );
+			}
+			if ( $( '#field-would-invest-more-number' ).length > 0 ) {
+				$( $( '#would-invest-more-number-yes' ) ).change( function() {
+					$( '#field-would-invest-number-per-year-with-warranty' ).show( 100 );
+				} );
+				$( $( '#would-invest-more-number-no, #would-invest-more-number-maybe' ) ).change( function() {
+					$( '#field-would-invest-number-per-year-with-warranty' ).hide( 100 );
+				} );
+			}
+		},
+
+		userTypeSelect: function( userType ) {
+			if ( userType == 'user' ) {
+				$( 'form #fieldgroup-orga-info' ).hide();
+				$( 'form #fieldgroup-orga-info-new' ).hide();
+				$( 'form #fieldgroup-user-type-orga' ).hide();
+				$( 'form #fieldgroup-user-info' ).slideDown( 200 );
+				$( 'form #fieldgroup-to-display' ).slideDown( 200 );
+				$( '#user-type-user' ).prop("checked", true);
+			} else if ( userType == 'orga' ) {
+				$( 'form #fieldgroup-user-type-orga' ).slideDown( 200 );
+				$( 'form #fieldgroup-user-info' ).hide();
+				$( 'form #fieldgroup-to-display' ).hide();
+				$( '#user-type-orga' ).prop("checked", true);
+			}
+
+		},
+
+		idOrgaSelect: function( idOrga ) {
+			if ( idOrga == '' ) {
+				$( 'form #fieldgroup-user-info' ).hide();
+				$( 'form #fieldgroup-orga-info' ).hide();
+				$( 'form #fieldgroup-to-display' ).hide();
+				$( 'form #fieldgroup-orga-info-new' ).hide();
+			} else {
+				$( 'form #fieldgroup-user-info' ).slideDown( 200 );
+				$( 'form #fieldgroup-orga-info' ).slideDown( 200 );
+				$( 'form #fieldgroup-to-display' ).slideDown( 200 );
+				if ( idOrga == 'new-orga' ) {
+					$( 'form #fieldgroup-orga-info-new' ).slideDown( 200 );
+				} else {
+					$( 'form #fieldgroup-orga-info-new' ).hide();
+				}
+				WDGInvestPageFunctions.updateOrgaFields( idOrga );
 			}
 		},
 		
@@ -79,11 +175,22 @@ var WDGInvestPageFunctions = (function($) {
 					$( '#invest_error_max' ).show();
 					bValidInput = false;
 			    }
+				if ( parseInt( $( 'form input#amount' ).val() ) > $( '#input_invest_user_max_value' ).val() ) {
+					$( '#invest_error_max' ).text( $( '#input_invest_user_max_reason' ).val() );
+					$( '#invest_error_max' ).show();
+					bValidInput = false;
+				}
 			    var nAmountInterval = $( '#input_invest_max_value' ).val() - parseInt( $( 'form input#amount' ).val()); 		
 				if ( nAmountInterval < $( '#input_invest_min_value' ).val() && nAmountInterval > 0 ) {
 					$( '#invest_error_interval' ).show(); 		
 					bValidInput = false; 		
 			    }
+				if ( $( '#input_invest_user_max_amount_without_alert' ).length > 0 && bValidInput ) {
+					if ( parseInt( $( 'form input#amount' ).val() ) > $( '#input_invest_user_max_amount_without_alert' ).val() ) {
+						$( '#invest_error_alert' ).text( $( '#input_invest_user_max_amount_without_alert_reason' ).val() );
+						$( '#invest_error_alert' ).show();
+					}
+				}
 			}
 			
 			var ratioOfPercentRoundStr = 0;
@@ -94,8 +201,8 @@ var WDGInvestPageFunctions = (function($) {
 				var goalProject = Number( $( 'input#roi_goal_project' ).val() );
 				var ratioOfGoal = inputVal / goalProject;
 				var ratioOfPercent = ratioOfGoal * percentProject;
-				var ratioOfPercentRound = Math.round( ratioOfPercent * 10000 ) / 10000;
-				ratioOfPercentRoundStr = ratioOfPercentRound.toLocaleString( 'fr-FR' );
+				var ratioOfPercentRound = Math.round( ratioOfPercent * 100000 ) / 100000;
+				ratioOfPercentRoundStr = ratioOfPercentRound.toString().replace('.', ',');
 				
 				var currentAmount = Number( $( 'span#amount-reached' ).data( 'current-amount' ) );
 				var amountReached = inputVal + currentAmount;

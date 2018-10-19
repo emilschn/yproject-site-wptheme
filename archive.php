@@ -88,10 +88,11 @@ if (isset($_GET['delete_post_id'])){
 					</div>
 					<?php } ?>
                                     
-					<label for="posttitle"><?php _e( 'Titre', 'ypcf' ); ?></label>
-					<input type="text" name="posttitle" style="width: 250px;" value="<?php if (isset($_POST['posttitle'])){echo $_POST['posttitle'];}?>"><br />
+					<label class="title-news" for="posttitle"><?php _e( 'Titre', 'ypcf' ); ?></label> <br/>
+					<input type="text" name="posttitle" style="width: 250px;" value="<?php if (isset($_POST['posttitle'])){echo $_POST['posttitle'];}?>"><br/><br/>
 
-					<label for="postcontent"><?php _e( 'Contenu', 'ypcf' ); ?></label>
+					<label class="title-news" for="postcontent"><?php _e( 'Contenu', 'ypcf' ); ?></label> <br/>
+					<label>Attention à ne pas mettre une image de plus de <span class="advice-news">600 px</span> de largeur afin de ne pas déformer la mise en page du mail envoyé à vos évaluateurs et investisseurs.</label> <br/> <br/>
 					<?php
 					global $post_ID, $post;
 					$post_ID = $post = 0;
@@ -112,10 +113,10 @@ if (isset($_GET['delete_post_id'])){
 							)
 						) 
 					);
-					?><br /><br />
+					?> <br/><br/>
 
 					<label><input type="checkbox" name="send_mail" <?php if (isset($_POST['send_mail'])){echo 'checked';}?>/>
-					Envoyer par mail cette actualité aux utilisateurs qui croient au projet. <em>Les utilisateurs qui se sont désabonnés de vos actualités ne les recevront pas.</em></label> <br/><br/>
+					Envoyer par mail cette actualité aux utilisateurs qui suivent le projet. <em>Les utilisateurs qui se sont désabonnés de vos actualités ne les recevront pas.</em></label> <br/><br/>
 					
 					<?php _e('Relayez cette actualit&eacute; sur vos r&eacute;seaux sociaux et pr&eacute;venez WE DO GOOD pour une communication d&eacute;cupl&eacute;e !', 'yproject'); ?><br /><br />
 					

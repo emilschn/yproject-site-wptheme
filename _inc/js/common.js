@@ -3,10 +3,19 @@ jQuery(document).ready( function($) {
 	WDGFormsFunctions.init();
 });
 
+JSHelpers = ( function( $ ) {
+	return {
+		urldecode: function(str) {
+			return decodeURIComponent( ( str + '' ).replace( /\+/g, '%20' ) );
+		}
+	};
+} ) ( jQuery );
+
 YPUIFunctions = (function($) {
 	return {
 		
 		currentLightbox: '',
+		currentRequest: '',
 
 		initUI: function() {
 			WDGProjectPageFunctions.initUI();
@@ -56,15 +65,17 @@ YPUIFunctions = (function($) {
             
 			// Navbar : bouton compte utilisateur
 			$('.btn-user').click(function(e){
-				e.preventDefault();
-				if ($('.btn-user').hasClass('active')) {
-					$('.btn-user').removeClass('active').addClass('inactive');
-					$('#submenu-user').hide();
-				} else {
-					$('.btn-user').addClass('active').removeClass('inactive');
-					$('#submenu-user').show();
-					$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
-					$('#submenu-search').hide();
+				if ( $( this ).attr( 'href' ) == '#' ) {
+					e.preventDefault();
+					if ($('.btn-user').hasClass('active')) {
+						$('.btn-user').removeClass('active').addClass('inactive');
+						$('#submenu-user').hide();
+					} else {
+						$('.btn-user').addClass('active').removeClass('inactive');
+						$('#submenu-user').show();
+						$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
+						$('#submenu-search').hide();
+					}
 				}
 			});
 			// Navbar : bouton recherche
@@ -79,6 +90,25 @@ YPUIFunctions = (function($) {
 					$('#submenu-search-input').focus();
 					$('.btn-user').removeClass('active').addClass('inactive');
 					$('#submenu-user').hide();
+					
+					if ( $( '#submenu-search ul.submenu-list li' ).length == 0 ) {
+						$.ajax({
+							'type' : "POST",
+							'url' : ajax_object.ajax_url,
+							'data': {
+								'action':'get_searchable_projects_list'
+							}
+							
+						}).done(function(result){
+							var aProjectList = JSON.parse( result );
+							var nProjects = aProjectList.length;
+							for ( var i = 0; i < nProjects; i++ ) {
+								$( '#submenu-search ul.submenu-list' ).append(
+									'<li class="hidden"><a href="https://www.wedogood.co/'+aProjectList[i].post_name+'">'+aProjectList[i].post_title+'<span class="hidden">'+aProjectList[i].post_title+'</span></a></li>'
+								);
+							}
+						});
+					}
 				}
 			});
 			$("#submenu-search-input").keyup(function() {
@@ -160,7 +190,8 @@ YPUIFunctions = (function($) {
 					'type' : "POST",
 					'url' : ajax_object.ajax_url,
 					'data': {
-						'action':'get_connect_to_facebook_url'
+						'action':'get_connect_to_facebook_url',
+						'redirect':$( '.social_connect_login_facebook' ).data( 'redirect' )
 					}
 				}).done(function(result){
 					if (result.indexOf('http') > -1) {
@@ -214,15 +245,17 @@ YPUIFunctions = (function($) {
 			$(".home_video .button-video, .home_video .button-video-shadows").click(function() {
 				$(".home_video .button-video, .home_video .button-video-shadows").hide();
 				var sContainer = ".home_video .video-container";
+				var sW = '320';
+				var sH = '180';
 				if ($(window).width() > 570) {
 					sContainer += ".w570";
+					sW = '570';
+					sH = '321';
 				} else {
 					sContainer += ".w320";
 				}
+				$(sContainer).append( '<iframe src="https://www.youtube.com/embed/QJmhrCG5acU?feature=oembed&amp;rel=0&amp;wmode=transparent&amp;autoplay=1" style="border: none" allow="autoplay; encrypted-media" width="'+sW+'" height="'+sH+'"></iframe>' );
 				$(sContainer).show();
-				var src = $(sContainer + " iframe").attr("src");
-				src += '&autoplay=1';
-				$(sContainer + " iframe").attr("src", src);
 			});
 			
 			if ($("#cookies-alert").length > 0) {
@@ -356,21 +389,6 @@ YPUIFunctions = (function($) {
 				addListeners();
 
 			}
-
-			if ($("#turnover-declaration").length > 0) {
-				if ($("#turnover-total").length > 0) {
-					$("#turnover-total").change(function() {
-						YPUIFunctions.refreshTurnoverAmountToPay();
-					});
-				}
-				var i = 0;
-				while ($("#turnover-" + i).length > 0) {
-					$("#turnover-" + i).change(function() {
-						YPUIFunctions.refreshTurnoverAmountToPay();
-					});
-					i++;
-				}
-			}
 			
 			// Page accueil : affichage slider de projets
 			if ($("body.home.page").length > 0) {
@@ -385,8 +403,8 @@ YPUIFunctions = (function($) {
 				if ($(".projects-current .wdg-component-projects-preview .project-slider").length > 0) {
 					$(".projects-current .wdg-component-projects-preview .block-projects").width( ($(".projects-current .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-current .wdg-component-projects-preview .project-container").length );
 					$(".projects-current .wdg-component-projects-preview .project-slider").scrollLeft( ($(".projects-current .wdg-component-projects-preview .block-projects").width() - $(".projects-current .wdg-component-projects-preview .project-slider").width()) / 2 );
-
-					$(".projects-funded .wdg-component-projects-preview .block-projects").width( ($(".projects-funded .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-funded .wdg-component-projects-preview .project-container").length );
+					// On affiche une zone suffisamment grande pour accueillir tous les projets d'entreprise
+					$(".projects-funded .wdg-component-projects-preview .block-projects").width( $(".projects-funded .wdg-component-projects-preview .project-container").width() * $(".projects-funded .wdg-component-projects-preview .project-container.cat-entreprises").length );
 
 				}
 			}
@@ -440,27 +458,6 @@ YPUIFunctions = (function($) {
 			return {'x':x, 'y':y};
 		},
 
-		refreshTurnoverAmountToPay: function() {
-			var roiPercent = $("#turnover-declaration").data("roi-percent");
-			var costsOrga = $("#turnover-declaration").data("costs-orga");
-			var total = 0;
-			if ($("#turnover-total").length > 0) {
-				total = Number($("#turnover-total").val());
-			} else {
-				var i = 0;
-				while ($("#turnover-" + i).length > 0) {
-					total += Number($("#turnover-" + i).val());
-					i++;
-				}
-			}
-			var amount = total * roiPercent / 100;
-			var amount_with_fees = amount + (amount * costsOrga / 100);
-			amount_with_fees += $("#turnover-declaration").data("adjustment");
-			amount_with_fees = Math.round(amount_with_fees * 100) / 100;
-
-			$(".amount-to-pay").text(amount_with_fees);
-		},
-
 		getInvestsGraph : function(inv_data, campaign_id) {
 			$.ajax({
 				'type' : "POST",
@@ -482,7 +479,7 @@ YPUIFunctions = (function($) {
 		},
 
 		getInvestments: function(campaign_id){
-			$.ajax({
+			YPUIFunctions.currentRequest = $.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,
 				'data': {
@@ -490,6 +487,7 @@ YPUIFunctions = (function($) {
 					'id_campaign' : campaign_id
 				}
 			}).done(function(result){
+				YPUIFunctions.currentRequest = '';
 				inv_data = JSON.parse(result);
 
 				//Injecte les données directement affichées dans leurs emplacements
@@ -513,7 +511,7 @@ YPUIFunctions = (function($) {
 
 				//Crée le tableau de contacts si besoin
                 if ($("#ajax-contacts-load").length > 0) {
-                    WDGProjectDashboard.getContactsTable(JSON.stringify(inv_data),campaign_id);
+                    wdgCampaignDashboard.getContactsTable(JSON.stringify(inv_data),campaign_id);
                 }
 
 			}).fail(function(){});
@@ -708,12 +706,12 @@ var WDGLightboxFunctions = (function($) {
 				});
 				
 				$('#newproject_form input#new-company-name').val(" ");
-				$('#newproject_form input#new-company-name').parent().parent().parent().hide();
+				$('#newproject_form div#field-new-company-name').hide();
 				if($('#newproject_form input#company-name').val() === ""){
 					$('#newproject_form #project-name').val("");
 				}
-				$('#newproject_form #company-name').on("keyup change", function() {
-					$('#newproject_form input#new-company-name').parent().parent().parent().hide();
+				$('#newproject_form #select-company-name').on("keyup change", function() {
+					$('#newproject_form div#field-new-company-name').hide();
 					var val = "";
 					if($('#newproject_form input#company-name').length > 0 && $('#newproject_form input#company-name').val() !== "" ) {
 						val = $('#newproject_form input#company-name').val();
@@ -729,7 +727,7 @@ var WDGLightboxFunctions = (function($) {
 							} else {
 								$('#newproject_form input#new-company-name').val("");
 								$('#newproject_form #project-name').val('');
-								$('#newproject_form input#new-company-name').parent().parent().parent().show();
+								$('#newproject_form div#field-new-company-name').show();
 								$('#newproject_form input#new-company-name').on("keyup change", function() {
 									var val = $('#newproject_form input#new-company-name').val();
 									if (val!="") {
@@ -825,6 +823,7 @@ var WDGFormsFunctions = (function($) {
 			WDGFormsFunctions.initCheckboxes();
 			WDGFormsFunctions.initRateCheckboxes();
 			WDGFormsFunctions.initDatePickers();
+			WDGFormsFunctions.initFileInput();
 		},
 		
 		initSaveButton: function() {
@@ -834,7 +833,7 @@ var WDGFormsFunctions = (function($) {
 				$( this ).siblings( 'button' ).hide();
 				$( this ).hide();
 				var formId = $( this ).parent().parent().parent().attr( 'id' );
-				WDGFormsFunctions.postForm( 'div#' + formId, WDGFormsFunctions.postFormCallback, this );
+				WDGFormsFunctions.postForm( '#' + formId, WDGFormsFunctions.postFormCallback, this );
 			} );
 			$( '.wdg-lightbox button.close, .wdg-lightbox-ref button.close' ).click( function( e ) {
 				WDGLightboxFunctions.hideAll();
@@ -847,9 +846,11 @@ var WDGFormsFunctions = (function($) {
 		initCheckboxes: function() {
 			if ( $( '.db-form.v3 input[type=checkbox]' ).length > 0 ) {
 				$( '.db-form.v3 input[type=checkbox]' ).each( function(){
-					if ( !$( this ).hasClass( 'rate' ) ) {
+					if ( !$( this ).hasClass( 'rate' ) && !$( this ).parent().hasClass( 'selectit' ) ) {
 						$( this ).parent().click( function( e ) {
-							e.preventDefault();
+							if ( $( this ).data( 'keepdefault' ) != '1' ) {
+								e.preventDefault();
+							}
 							var checkboxItem = $( this ).children( 'input[type=checkbox]' )[0];
 							checkboxItem.checked = !checkboxItem.checked;
 						} );
@@ -879,6 +880,49 @@ var WDGFormsFunctions = (function($) {
             });
 		},
 		
+		initFileInput: function() {
+			$( '.field-file input' ).each( function() {
+				var $input = $( this ),
+				$label = $input.next( 'label' ),
+				labelVal = $label.html();
+
+				$input.on( 'change', function( e ) {
+					var fileName = '';
+
+					if( this.files && this.files.length > 1 )
+						fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+					else if( e.target.value )
+						fileName = e.target.value.split( '\\' ).pop();
+
+					if( fileName ) {
+						$label.find( 'span' ).html( fileName );
+						$label.find( 'span.hide-when-filled' ).hide();
+					} else {
+						$label.html( labelVal );
+					}
+				} );
+			} );
+			
+			$( 'label.file-label' ).on( 'dragover', function( e ) {
+				$( this ).addClass( 'dragover' );
+				e.stopPropagation();
+				e.preventDefault();
+			} );
+			$( 'label.file-label' ).on( 'dragleave', function( e ) {
+				$( this ).removeClass( 'dragover' );
+				e.stopPropagation();
+				e.preventDefault();
+			} );
+			$( 'label.file-label' ).on( 'drop', function( e ) {
+				e.stopPropagation();
+				e.preventDefault();
+				$( this ).removeClass( 'dragover' );
+				var inputId = $( this ).data( 'input' );
+				$( '#' + inputId ).prop( 'files', e.originalEvent.dataTransfer.files );
+				$( '#' + inputId ).trigger( 'change' );
+			} );
+		},
+		
 		setRateCheckboxes: function( sRateType, nRate ) {
 			for ( var i = 1; i <= nRate; i++ ) {
 				$( 'input[type=checkbox]#' + sRateType + '-' + i )[0].checked = true;
@@ -889,22 +933,38 @@ var WDGFormsFunctions = (function($) {
 		postForm: function( formid, callback, clickedButton ) {
 			$( formid+ ' div.field' ).removeClass( 'error' );
 			var sentData = {};
-			$( formid+' input, '+formid+' select, '+formid+' textarea' ).each( function() {
-				if ( $( this ).attr( 'type' ) === 'checkbox' || $( this ).attr( 'type' ) === 'radio' ) {
-					if ( $( this ).is(':checked') ) {
+			if ( $( formid ).hasClass( 'has-files' ) ) {
+  				sentData = new FormData( $( formid )[0] );
+				
+			} else {
+				$( formid+' input, '+formid+' select, '+formid+' textarea' ).each( function() {
+					if ( $( this ).attr( 'type' ) === 'checkbox' || $( this ).attr( 'type' ) === 'radio' ) {
+						if ( $( this ).is(':checked') ) {
+							sentData[ $( this ).attr( 'name' ) ] = $( this ).val();
+						}
+					} else {
 						sentData[ $( this ).attr( 'name' ) ] = $( this ).val();
 					}
-				} else {
-					sentData[ $( this ).attr( 'name' ) ] = $( this ).val();
-				}
-			} );
+				} );
+			}
 			
-			$.ajax({
-				'type': "POST",
-				'url': ajax_object.ajax_url,
-				'data': sentData
-				
-			}).done(function (result) {
+			if ( $( formid ).hasClass( 'has-files' ) ) {
+				var ajaxParams = {
+					'type': "POST",
+					'url': ajax_object.ajax_url,
+					'data': sentData,
+					'cache': false,
+					'contentType': false,
+					'processData': false
+				}
+			} else {
+				var ajaxParams = {
+					'type': "POST",
+					'url': ajax_object.ajax_url,
+					'data': sentData
+				}
+			}
+			$.ajax( ajaxParams ).done(function (result) {
 				
 				var jsonResult = JSON.parse(result);
 				if ( jsonResult.errors != undefined ) {
@@ -917,6 +977,10 @@ var WDGFormsFunctions = (function($) {
 							$( formid+' div#field-'+errorItem.element ).addClass( 'error' );
 							$( formid+' div#field-'+errorItem.element+' span.field-error' ).html( errorItem.text );
 						}
+					}
+				} else {
+					if ( $( formid + '_success' ).length > 0 ) {
+						$( formid + '_success' ).show();
 					}
 				}
 				callback( result, formid, clickedButton );

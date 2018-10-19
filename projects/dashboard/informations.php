@@ -116,6 +116,10 @@ function print_informations_page()
 				if ( $terms_partners ) {
 					$terms_partners_id = $terms_partners[0]->term_id;
 				}
+                $terms_tousnosprojets = get_terms('download_category', array('slug' => 'tousnosprojets', 'hide_empty' => false));
+				if ( $terms_tousnosprojets ) {
+					$terms_tousnosprojets_id = $terms_tousnosprojets[0]->term_id;
+				}
                 ?>
 
                 <div class="field">
@@ -175,6 +179,21 @@ function print_informations_page()
 				</div>
 				<?php endif; ?>
 
+				<?php if ( $terms_tousnosprojets ): ?>
+                <div class="field">
+					<label for="tousnosprojets"><?php _e("Cat&eacute;gorie sur le site tousnosprojets.fr", 'yproject'); ?></label>
+					<span class="field-value" data-type="multicheck" data-id="new_project_tousnosprojets"><?php
+						wp_terms_checklist(
+							$campaign_id,
+							array(
+								'taxonomy' => 'download_category',
+								'descendants_and_self' => $terms_tousnosprojets_id,
+								'checked_ontop' => false
+						) );
+					?></span>
+				</div>
+				<?php endif; ?>
+
                 <?php
                 $locations = atcf_get_locations();
                 DashboardUtility::create_field(array(
@@ -185,14 +204,21 @@ function print_informations_page()
                     "options_id"	=> array_keys($locations),
                     "options_names"	=> array_values($locations)
                 ));
-				?>
 				
-				<?php
                 DashboardUtility::create_field(array(
                     "id"	=> "new_employees_number",
                     "type"	=> "number",
                     "label"	=> __( "Nombre d'employ&eacute;s au lancement", 'yproject' ),
                     "value"	=> $campaign->get_api_data( 'employees_number' )
+                ));
+				
+                DashboardUtility::create_field(array(
+                    "id"	=> "new_minimum_goal_display",
+                    "type"	=> "select",
+                    "label"	=> __( "Affichage de l'objectif minimum", 'yproject' ),
+                    "value"	=> $campaign->get_minimum_goal_display(),
+                    "options_id"	=> array( ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_max, ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ),
+                    "options_names"	=> array( "Afficher l'objectif minimum", "Afficher l'objectif maximum et un seuil de validation" )
                 ));
 				?>
 
@@ -305,7 +331,7 @@ function print_informations_page()
                     "id"=>"new_gender",
                     "type"=>"select",
                     "label"=>"Vous &ecirc;tes",
-                    "value"=>$WDGAuthor->wp_user->get('user_gender'),
+                    "value"=>$WDGAuthor->get_gender(),
                     "editable"=>$is_author,
                     "options_id"=>array("female", "male"),
                     "options_names"=>array("une femme", "un homme")
@@ -315,7 +341,7 @@ function print_informations_page()
                     "id"=>"new_firstname",
                     "type"=>"text",
                     "label"=>"Pr&eacute;nom",
-                    "value"=>$WDGAuthor->wp_user->user_firstname,
+                    "value"=>$WDGAuthor->get_firstname(),
                     "editable"=>$is_author,
                     "left_icon"=>"user",
                 ));
@@ -324,19 +350,12 @@ function print_informations_page()
                     "id"=>"new_lastname",
                     "type"=>"text",
                     "label"=>"Nom",
-                    "value"=>$WDGAuthor->wp_user->user_lastname,
+                    "value"=>$WDGAuthor->get_lastname(),
                     "editable"=>$is_author,
                     "left_icon"=>"user",
                 ));
 
-                $bd = new DateTime();
-				$user_birthday_year = $WDGAuthor->wp_user->get('user_birthday_year');
-                if(!empty($user_birthday_year)){
-                    $bd->setDate(intval($WDGAuthor->wp_user->get('user_birthday_year')),
-                        intval($WDGAuthor->wp_user->get('user_birthday_month')),
-                        intval($WDGAuthor->wp_user->get('user_birthday_day')));
-                }
-
+                $bd = new DateTime( $WDGAuthor->get_birthday_date() );
                 DashboardUtility::create_field(array(
                     "id"=>"new_birthday",
                     "type"=>"date",
@@ -349,7 +368,7 @@ function print_informations_page()
                     "id"=>"new_birthplace",
                     "type"=>"text",
                     "label"=>"Ville de naissance",
-                    "value"=>$WDGAuthor->wp_user->get('user_birthplace'),
+                    "value"=>$WDGAuthor->get_birthplace(),
                     "editable"=>$is_author
                 ));
 
@@ -357,7 +376,7 @@ function print_informations_page()
                     "id"=>"new_nationality",
                     "type"=>"select",
                     "label"=>"Nationalit&eacute;",
-                    "value"=>$WDGAuthor->wp_user->get('user_nationality'),
+                    "value"=>$WDGAuthor->get_nationality(),
                     "editable"=>$is_author,
                     "options_id"=>array_keys($country_list),
                     "options_names"=>array_values($country_list)
@@ -367,7 +386,7 @@ function print_informations_page()
                     "id"=>"new_mobile_phone",
                     "type"=>"text",
                     "label"=>"T&eacute;l&eacute;phone mobile",
-                    "value"=>$WDGAuthor->wp_user->get('user_mobile_phone'),
+                    "value"=>$WDGAuthor->get_phone_number(),
                     "infobubble"=>"Ce num&eacute;ro sera celui utilis&eacute; pour vous contacter &agrave; propos de votre projet",
                     "editable"=>$is_author,
                     "left_icon"=>"mobile-phone"
@@ -377,7 +396,7 @@ function print_informations_page()
                     "id"=>"new_mail",
                     "type"=>"text",
                     "label"=>"Adresse &eacute;lectronique",
-                    "value"=>$WDGAuthor->wp_user->get('user_email'),
+                    "value"=>$WDGAuthor->get_email(),
                     "infobubble"=>"Pour modifier votre adresse e-mail de contact, rendez-vous dans vos param&egrave;tres de compte",
                     "left_icon"=>"at"
                 ));
@@ -386,7 +405,7 @@ function print_informations_page()
                     "id"=>"new_address",
                     "type"=>"text",
                     "label"=>"Adresse",
-                    "value"=>$WDGAuthor->wp_user->get('user_address'),
+                    "value"=>$WDGAuthor->get_address(),
                     "editable"=>$is_author
                 ));
 
@@ -394,7 +413,7 @@ function print_informations_page()
                     "id"=>"new_postal_code",
                     "type"=>"text",
                     "label"=>"Code postal",
-                    "value"=>$WDGAuthor->wp_user->get('user_postal_code'),
+                    "value"=>$WDGAuthor->get_postal_code(),
                     "editable"=>$is_author
                 ));
 
@@ -402,7 +421,7 @@ function print_informations_page()
                     "id"=>"new_city",
                     "type"=>"text",
                     "label"=>"Ville",
-                    "value"=>$WDGAuthor->wp_user->get('user_city'),
+                    "value"=>$WDGAuthor->get_city(),
                     "editable"=>$is_author
                 ));
 
@@ -410,7 +429,7 @@ function print_informations_page()
                     "id"=>"new_country",
                     "type"=>"text",
                     "label"=>"Pays",
-                    "value"=>$WDGAuthor->wp_user->get('user_country'),
+                    "value"=>$WDGAuthor->get_country(),
                     "editable"=>$is_author
                 ));?>
                 <br/>
@@ -519,13 +538,12 @@ function print_informations_page()
 
                 DashboardUtility::create_field(array(
                     "id"			=> "new_funding_duration",
-                    "type"			=> "number",
+                    "type"			=> "select",
                     "label"			=> "Dur&eacute;e du financement",
 					"infobubble"	=> "Indiquez 5 ans pour un projet entrepreneurial, sauf cas particulier à valider avec l’équipe WE DO GOOD.",
                     "value"			=> $campaign->funding_duration(),
-                    "suffix"		=> "<span>&nbsp;ann&eacute;es</span>",
-                    "min"			=> 0,
-                    "max"			=> 20,
+					"options_id"	=> array_keys( ATCF_Campaign::$funding_duration_list ),
+					"options_names"	=> array_values( ATCF_Campaign::$funding_duration_list ),
 					"editable"		=> $is_admin || $campaign->is_preparing()
                 ));
 				
@@ -554,7 +572,7 @@ function print_informations_page()
 						"options_names"	=> array_values( ATCF_Campaign::$maximum_profit_list ),
 						"prefix"		=> '*',
 						"admin_theme"	=> true,
-						"editable"		=> $campaign->is_preparing()
+						"editable"		=> $is_admin || $campaign->is_preparing()
 					));
 					
 				}
@@ -685,6 +703,17 @@ function print_informations_page()
                     "visible"		=> $is_admin || ($campaign->first_payment_date()!="")
                 ));
 
+                DashboardUtility::create_field(array(
+                    "id"			=> "new_estimated_turnover_unit",
+                    "type"			=> "select",
+                    "label"			=> "Le pr&eacute;visionnel est exprim&eacute; en",
+                    "value"			=> $campaign->estimated_turnover_unit(),
+					"options_id"	=> array( 'euro', 'percent' ),
+					"options_names"	=> array( '&euro;', '%' ),
+                    "editable"		=> $is_admin,
+                    "admin_theme"	=> $is_admin,
+                    "visible"		=> $is_admin
+                ));
                 ?>
 
                 <div class="field">
@@ -695,7 +724,7 @@ function print_informations_page()
                         <?php echo "&nbsp;".__("investis"); ?>
                     </label>
                 </div>
-				<?php $is_euro = ( $campaign->contract_budget_type() != 'collected_funds' ); ?>
+				<?php $is_euro = ( $campaign->estimated_turnover_unit() == 'euro' ); ?>
                 <ul id="estimated-turnover" data-symbol="<?php if ( $is_euro ): ?>€<?php else: ?>%<?php endif; ?>">
                     <?php
                     $estimated_turnover = $campaign->estimated_turnover();
@@ -789,7 +818,43 @@ function print_informations_page()
 
             </ul>
 			
+			<?php if ( $is_admin ): // A supprimer ?>
+			<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+			<div class="field admin-theme align-center">
+				<a href="<?php echo $campaign->get_funded_certificate_url(); ?>" download="attestation-levee-fonds.pdf" class="button red">Attestation de lev&eacute;e de fonds</a>
+			</div>
+			<br>
+			<?php endif; ?>
+			<?php endif; ?>
+			
 			<?php if ( $is_admin ): ?>
+				<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+
+				<?php $campaign_bill = new WDGCampaignBill( $campaign, WDGCampaignBill::$tool_name_quickbooks, WDGCampaignBill::$bill_type_crowdfunding_commission ); ?>
+				<?php if ( $campaign_bill->can_generate() ): ?>
+				<form action="<?php echo admin_url( 'admin-post.php?action=generate_campaign_bill'); ?>" method="post" id="generate_campaign_bill_form" class="field admin-theme">
+					/!\ <?php _e( "Ce bouton cr&eacute;era une nouvelle facture sur l'outil de facturation. Assurez-vous que cette facture n'a pas déjà été générée auparavant.", 'yproject' ); ?> /!\<br>
+					<?php _e( "Les informations suivantes seront utilis&eacute;es pour g&eacute;n&eacute;rer la facture :", 'yproject' ); ?>
+
+					<ul>
+						<li><?php echo $campaign_bill->get_line_title(); ?></li>
+						<li><?php echo nl2br( $campaign_bill->get_line_description() ); ?></li>
+						<li><?php echo nl2br( $campaign_bill->get_bill_description() ); ?></li>
+					</ul>
+					<br>
+					<div class="align-center">
+						<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
+						<button class="button blue-pale"><?php _e( "G&eacute;n&eacute;rer la facture de la levée de fonds", 'yproject' ); ?></button>
+					</div>
+				</form>
+				<?php else: ?>
+				Vous ne pouvez pas encore générer la facture pour cette campagne.
+				Avez-vous vérifié que l'identifiant Quickbooks et la commission sont bien paramétrés ?
+				<?php endif; ?>
+
+				<hr>
+				<?php endif; ?>
+			
 			<form action="<?php echo admin_url( 'admin-post.php?action=generate_contract_files'); ?>" method="post" id="contract_files_generate_form" class="field admin-theme">
 				/!\ <?php _e( "Si vous choisissez de g&eacute;n&eacute;rer les contrats, cela remplacera les fichiers précédents :", 'yproject' ); ?> /!\
 				<br /><br />
@@ -810,6 +875,7 @@ function print_informations_page()
 
 				<?php
 				$file_name_contract_orga = $campaign->backoffice_contract_orga();
+				$date = new DateTime();
 				if (!empty($file_name_contract_orga)) {
 					$file_name_exploded = explode('.', $file_name_contract_orga);
 					$ext = $file_name_exploded[count($file_name_exploded) - 1];
@@ -821,7 +887,7 @@ function print_informations_page()
                     "label"				=> "Contrat d'investissement",
                     "value"				=> $file_name_contract_orga,
                     "editable"			=> $is_admin,
-					"download_label"	=> $post_campaign->post_title . " - Contrat royalties." . $ext
+					"download_label"	=> $post_campaign->post_title . " - Contrat royalties - ".$date->format('YmdHis')."." . $ext
                 ));
 					
 				DashboardUtility::create_field(array(
@@ -946,6 +1012,117 @@ function print_informations_page()
 					<?php else: ?>
 					Il n'y a pas de pré-investissement en attente.
 					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+				
+			<?php
+			$can_add_contract = $is_admin && 
+				( 
+					$campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte
+					|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded
+					|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_closed
+					|| $campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive
+				);
+			?>	
+			<?php if ( $is_admin && $can_add_contract ): ?>
+				<br><br>
+				<div class="field admin-theme">
+					<strong><?php _e( "Contrats investisseurs compl&eacute;mentaires :" ); ?></strong>
+					<?php $contract_models = WDGWPREST_Entity_Project::get_contract_models( $campaign->get_api_id() ); ?>
+					<?php if ( $contract_models ): ?>
+						<?php
+						$status_to_text = array(
+							'draft' => __( "Brouillon", 'yproject' ),
+							'sent' => __( "Envoy&eacute;", 'yproject' )
+						);
+						?>
+						<ul>
+						<?php foreach ( $contract_models as $contract_model ): ?>
+							<li>
+								<?php echo $contract_model->model_name; ?> (<?php echo $status_to_text[ $contract_model->status ]; ?>)
+								<?php if ( $contract_model->status != 'sent' ): ?>
+									<a href="<?php echo admin_url( 'admin-post.php?action=send_contract_model&model=' . $contract_model->id ); ?>" class="button blue alert-confirm" data-alertconfirm="<?php _e( "Ceci enverra le contrat &agrave; chacun des investisseurs", 'yproject' ); ?>"><?php _e( "Faire signer", 'yproject' ); ?></a>
+									<button type="button" class="button blue edit-contract-model" data-modelid="<?php echo $contract_model->id; ?>" data-modelname="<?php echo urlencode( $contract_model->model_name ); ?>" data-modelcontent="<?php echo urlencode( $contract_model->model_content ); ?>"><?php _e( "Editer", 'yproject' ); ?></button>
+								<?php endif; ?>
+							</li>
+						<?php endforeach; ?>
+						</ul>
+						<br>
+					<?php else: ?>
+						<?php _e( "Aucun", 'yproject' ); ?>
+					<?php endif; ?>
+					
+					<div class="align-center">
+						<button id="button-show-form-add-contract-model" type="button" class="button blue"><?php _e( "Ajouter", 'yproject' ); ?></button>
+					</div>
+					
+					<form id="form-add-contract-model" method="POST" action="<?php echo admin_url( 'admin-post.php?action=add_contract_model' ); ?>" class="db-form v3 full hidden">
+				
+						<hr>
+						
+						<strong><?php _e( "Nouveau contrat compl&eacute;mentaire :", 'yproject' ); ?></strong><br><br>
+						<div class="field">
+							<label><?php _e( "Titre (sera repris sur Signsquid)", 'yproject' ); ?></label>
+							<div class="field-container">
+								<span class="field-value"><input type="text" name="contract_model_name" /></span>
+							</div>
+						</div>
+						<div class="field">
+							<label><?php _e( "Contenu", 'yproject' ); ?></label>
+							<div class="field-container">
+								<?php
+								wp_editor( '', 'contract_model_content',
+									array(
+										'media_buttons' => true,
+										'quicktags' => false,
+										'tinymce' => array(
+											'plugins' => 'wordpress, paste, wplink, textcolor',
+											'paste_remove_styles' => true
+										)
+									)
+								);
+								?>
+							</div>
+						</div>
+						
+						<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>">
+						<button type="submit" class="button red"><?php _e( "Ajouter", 'yproject' ); ?></button>
+						
+					</form>
+					
+					<form id="form-edit-contract-model" method="POST" action="<?php echo admin_url( 'admin-post.php?action=edit_contract_model' ); ?>" class="db-form v3 full hidden">
+				
+						<hr>
+						
+						<strong><?php _e( "Edition du contrat compl&eacute;mentaire :", 'yproject' ); ?></strong><br><br>
+						<div class="field">
+							<label><?php _e( "Titre (sera repris sur Signsquid)", 'yproject' ); ?></label>
+							<div class="field-container">
+								<span class="field-value"><input type="text" name="contract_edit_model_name" /></span>
+							</div>
+						</div>
+						<div class="field">
+							<label><?php _e( "Contenu", 'yproject' ); ?></label>
+							<div class="field-container">
+								<?php
+								wp_editor( '', 'contract_edit_model_content',
+									array(
+										'media_buttons' => true,
+										'quicktags' => false,
+										'tinymce' => array(
+											'plugins' => 'wordpress, paste, wplink, textcolor',
+											'paste_remove_styles' => true
+										)
+									)
+								);
+								?>
+							</div>
+						</div>
+						
+						<input type="hidden" name="contract_edit_model_id" value="">
+						<button type="submit" class="button red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+						
+					</form>
 				</div>
 			<?php endif; ?>
         </div>

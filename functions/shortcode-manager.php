@@ -18,8 +18,13 @@ class YPShortcodeManager {
 		'yproject_statsadvanced_lightbox',
 		'yproject_newproject_lightbox',
 		'wdg_project_vote_count',
+		'wdg_project_investors_count',
 		'wdg_project_amount_count',
-		'wdg_page_breadcrumb'
+		'wdg_project_investment_link',
+		'wdg_project_progress_bar',
+		'wdg_project_royalties_simulator',
+		'wdg_page_breadcrumb',
+		'wdg_footer_banner_link'
 	);
 	
 	public static function register_shortcodes() {
@@ -218,7 +223,19 @@ class YPShortcodeManager {
 			return $campaign->nb_voters();
 		}
 	}
+	
+	function wdg_project_investors_count($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'project' => '',
+		), $atts );
 
+		if (isset($atts['project']) && is_numeric($atts['project'])) {
+			$post_campaign = get_post($atts['project']);
+			$campaign = atcf_get_campaign($post_campaign);
+			return $campaign->backers_count();
+		}
+	}
+	
 	function wdg_project_amount_count($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
@@ -229,6 +246,64 @@ class YPShortcodeManager {
 			$campaign = atcf_get_campaign($post_campaign);
 			return $campaign->current_amount();
 		}
+	}
+
+	function wdg_project_investment_link($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'project' => '',
+			'label' => '',
+			'class' => '',
+			'style' => ''
+		), $atts );
+
+		$buffer = '';
+		if ( isset( $atts[ 'project' ] ) && is_numeric( $atts[ 'project' ] ) ) {
+			if ( is_user_logged_in() ) {
+				$buffer = '<a href="' .home_url( '/investir/' ). '?campaign_id=' .$atts[ 'project' ]. '&amp;invest_start=1" class="' .$atts[ 'class' ]. '" style="' .$atts[ 'style' ]. '">' .$atts[ 'label' ]. '</a>';
+			} else {
+				$buffer = '<a href="' .home_url( '/connexion/' ). '" class="' .$atts[ 'class' ]. '" style="' .$atts[ 'style' ]. '">' .$atts[ 'label' ]. '</a>';
+			}
+		}
+		return $buffer;
+	}
+
+	function wdg_project_progress_bar( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'project' => ''
+		), $atts );
+		
+		global $campaign, $stylesheet_directory_uri, $is_progressbar_shortcode;
+		$campaign = new ATCF_Campaign( $atts[ 'project' ] );
+		$stylesheet_directory_uri = get_stylesheet_directory_uri();
+		$is_progressbar_shortcode = TRUE;
+		
+		ob_start();
+		locate_template( array( 'projects/common/progressbar.php' ), true );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
+	}
+
+	function wdg_project_royalties_simulator( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'project' => ''
+		), $atts );
+		
+		global $campaign, $stylesheet_directory_uri, $is_simulator_shortcode;
+		$campaign = new ATCF_Campaign( $atts[ 'project' ] );
+		$stylesheet_directory_uri = get_stylesheet_directory_uri();
+		$is_simulator_shortcode = TRUE;
+		
+		ob_start();
+		?>
+		<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/wdg-campaign.js?d=<?php echo ASSETS_VERSION; ?>"></script>
+		<?php
+		locate_template( array( 'projects/single/rewards.php' ), true );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
 	}
 	
 	function wdg_page_breadcrumb( $atts, $content = '' ) {
@@ -287,6 +362,23 @@ class YPShortcodeManager {
 		}
 		
 		$buffer = "<nav itemtype=\"http://data-vocabulary.org/Breadcrumb\" class=\"wdg-breadcrumb\">" .$buffer. "</nav>";
+		
+		return $buffer;
+	}
+	
+	function wdg_footer_banner_link( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'link' => ''
+		), $atts );
+		
+		$footer_style = 'position: fixed; z-index: 30000; bottom: 0px; left: 0px; width: 100%; padding: 16px 0px; font-size: 18px; background: #333; color: #FFF; text-align: center;';
+		$link_style = 'color: #FFF; text-transform: uppercase;';
+		$img_arrow_src = get_stylesheet_directory_uri(). "/images/footer-banner-shortcode-arrow.png";
+		$img_arrow_style = 'margin-top: -4px; vertical-align: middle;';
+		$img_wdg_src = get_stylesheet_directory_uri(). "/images/footer-banner-shortcode-logo.png";
+		$img_wdg_style = 'height: 31px; margin-top: -3px; vertical-align: middle;';
+		$text = "D&eacute;couvrez les royalties sur";
+		$buffer = '<div style="' .$footer_style. '"><a href="' .$atts[ 'link' ]. '" style="' .$link_style. '"><img style="' .$img_arrow_style. '" src="' .$img_arrow_src. '"> ' .$text. ' <img style="' .$img_wdg_style. '" src="' .$img_wdg_src. '"></a></div>';
 		
 		return $buffer;
 	}

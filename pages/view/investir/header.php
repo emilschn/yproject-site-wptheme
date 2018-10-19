@@ -15,7 +15,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 		<?php if ( !$page_controler->get_current_investment()->has_token() ): ?>
 			<div class="back-project">
-				<a href="<?php echo get_permalink( $page_controler->get_current_campaign()->ID ); ?>"><?php _e("Retour au projet", 'yproject'); ?></a>
+				<a href="<?php echo $page_controler->get_current_campaign()->get_public_url(); ?>"><?php _e("Retour au projet", 'yproject'); ?></a>
 			</div>
 		<?php endif; ?>
 

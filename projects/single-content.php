@@ -115,7 +115,7 @@ else {
 			$owner_str = '';
 			$current_organization = $campaign->get_organization();
 			if ( !empty( $current_organization ) ) {
-				$wdg_organization = new WDGOrganization( $current_organization->wpref );
+				$wdg_organization = new WDGOrganization( $current_organization->wpref, $current_organization );
 				$page_edit_orga = get_page_by_path('editer-une-organisation');
 				$owner_str = '<div id="orga-edit" data-link-edit="'
                                         .get_permalink($page_edit_orga->ID) .'?orga_id='.$current_organization->wpref

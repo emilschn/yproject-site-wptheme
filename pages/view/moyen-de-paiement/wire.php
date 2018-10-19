@@ -3,7 +3,7 @@ global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 
-<div class="center align-justify">
+<div class="center align-justify wdg-lightbox-ref">
 <br><br>
 
 <?php _e("Afin de proc&eacute;der au virement, voici les informations bancaires dont vous aurez besoin :", 'yproject'); ?><br>
@@ -20,10 +20,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 </ul>
 <br><br>
 
-<?php /* if ( !$page_controler->is_investor_lemonway_registered() ): ?>
+<?php if ( !$page_controler->is_investor_lemonway_registered() ): ?>
 	<?php if ( $page_controler->get_current_investment()->get_session_user_type() == 'user' ): ?>
 		<?php _e("Une validation de votre identit&eacute; par notre prestataire de paiement est n&eacute;cessaire pour un investissement via virement bancaire. L'envoi des documents ci-dessous est n&eacute;cessaire.", 'yproject'); ?><br>
-		<form id="userkyc_form" enctype="multipart/form-data" class="db-form v3 full align-justify ajax-form">
+		<form id="userkyc_form" enctype="multipart/form-data" class="db-form v3 full align-justify ajax-form has-files">
 			<ul id="userkyc_form_errors" class="errors">
 
 			</ul>
@@ -53,12 +53,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<input type="file" id="user_doc_home" name="user_doc_home" /> <br><br>
 			</div>
 
-			<p id="userkyc_form_button" class="align-center">
-				<button type="submit" class="button blue"><?php _e( "Envoyer", 'yproject' ); ?></button>
-			</p>
-			<p id="userkyc_form_loading" class="align-center hidden">
-				<img id="ajax-loader-img" src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" alt="chargement" />
-			</p>
+			<div>
+				<div class="align-center">
+					<button type="submit" class="button blue save"><?php _e( "Envoyer", 'yproject' ); ?></button>
+					
+					<div class="loading align-center hidden">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
+					</div>
+				</div>
+			</div>
+			
 			<p id="userkyc_form_success" class="align-center hidden">
 				<?php _e( "Documents envoy&eacute;s !", 'yproject' ); ?>
 			</p>
@@ -69,7 +73,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 	<?php else: //Cas d'une organisation ?>
 		<?php _e("Une validation de votre organisation par notre prestataire de paiement est n&eacute;cessaire pour un investissement via virement bancaire. L'envoi des documents ci-dessous est n&eacute;cessaire.", 'yproject'); ?><br>
-		<form id="userkyc_form" enctype="multipart/form-data" class="db-form full v3 align-justify ajax-form">
+		<form id="userkyc_form" enctype="multipart/form-data" class="db-form full v3 align-justify ajax-form has-files">
 			<ul id="userkyc_form_errors" class="errors">
 
 			</ul>
@@ -120,12 +124,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<input type="file" name="org_doc_home" /> <br><br>
 			</div>
 
-			<p id="userkyc_form_button" class="align-center">
-				<button type="submit" class="button blue"><?php _e( "Envoyer", 'yproject' ); ?></button>
-			</p>
-			<p id="userkyc_form_loading" class="align-center hidden">
-				<img id="ajax-loader-img" src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" alt="chargement" />
-			</p>
+			<div>
+				<div class="align-center">
+					<button type="submit" class="button blue save"><?php _e( "Envoyer", 'yproject' ); ?></button>
+					
+					<div class="loading align-center hidden">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
+					</div>
+				</div>
+			</div>
+			
 			<p id="userkyc_form_success" class="align-center hidden">
 				<?php _e( "Documents envoy&eacute;s !", 'yproject' ); ?>
 			</p>
@@ -133,7 +141,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<input type="hidden" name="action" value="save_user_docs" />
 		</form>
 	<?php endif; ?>
-<?php endif;*/ ?>
+<?php endif; ?>
 
 <div class="db-form full v3">
 	<p class="align-justify">

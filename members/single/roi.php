@@ -3,7 +3,20 @@
  * Affichage des investissements de l'utilisateur
  */
 $WDGUser_current = WDGUser::current();
-$user_investments = $WDGUser_current->get_validated_investments();
+$override_current_user = filter_input( INPUT_GET, 'override_current_user' );
+if ( !empty( $override_current_user ) && $WDGUser_current->is_admin() ) {
+	$WDGUser_current = new WDGUser( $override_current_user );
+}
+
+$input_organization = filter_input( INPUT_GET, 'organization' );
+if ( !empty( $input_organization ) ) {
+	if ( $WDGUser_current->can_edit_organization( $input_organization ) ) {
+		$WDGOrganization = new WDGOrganization( $input_organization );
+		$user_investments = $WDGOrganization->get_validated_investments();
+	}
+} else {
+	$user_investments = $WDGUser_current->get_validated_investments();
+}
 ?>
 
 <?php if ( empty( $user_investments ) ): ?>
@@ -29,7 +42,7 @@ $user_investments = $WDGUser_current->get_validated_investments();
 				<a href="<?php echo get_permalink( $campaign_id ); ?>"><h3><?php echo $campaign->data->post_title; ?></h3></a>
 				
 				<div class="percent33"><strong><?php _e("Montant lev&eacute; :", 'yproject'); ?></strong> <?php echo YPUIHelpers::display_number( $campaign_amount, TRUE ); ?> &euro;</div>
-				<div class="percent33"><strong><?php _e("Dur&eacute;e du versement :", 'yproject'); ?></strong> <?php echo $campaign->funding_duration(); ?> <?php _e("ans", 'yproject'); ?></div>
+				<div class="percent33"><strong><?php _e("Dur&eacute;e du versement :", 'yproject'); ?></strong> <?php echo $campaign->funding_duration_str(); ?></div>
 				<div class="percent33"><strong><?php _e("Pourcentage du versement :", 'yproject'); ?></strong> <?php echo YPUIHelpers::display_number( $campaign->roi_percent() ); ?> %</div>
 				
 				<div class="clear"></div>
@@ -69,7 +82,13 @@ $user_investments = $WDGUser_current->get_validated_investments();
 								<td><?php echo $payment_date; ?></td>
 								<td><?php echo YPUIHelpers::display_number( $payment_amount, TRUE ); ?> &euro;</td>
 								<td><?php echo YPUIHelpers::display_number( $roi_percent_display ); ?> %</td>
-								<td><a href="<?php echo home_url('/wp-content/plugins/appthemer-crowdfunding/includes/pdf_files/') . $contract_filename; ?>" download="<?php echo $download_filename; ?>"><?php _e("T&eacute;l&eacute;charger", 'yproject'); ?></a></td>
+								<td>
+									<?php if ( !empty( $contract_filename ) ): ?>
+										<a href="<?php echo home_url('/wp-content/plugins/appthemer-crowdfunding/includes/pdf_files/') . $contract_filename; ?>" download="<?php echo $download_filename; ?>"><?php _e("T&eacute;l&eacute;charger", 'yproject'); ?></a>
+									<?php else: ?>
+										<?php _e( "Pas de contrat sur le site", 'yproject' ); ?>
+									<?php endif; ?>
+								</td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>
@@ -82,7 +101,7 @@ $user_investments = $WDGUser_current->get_validated_investments();
 				 * Liste des ROIs reçus
 				 */
 				?>
-				<?php $roi_list = $WDGUser_current->get_royalties_by_campaign_id( $campaign_id ); ?>
+				<?php $roi_list = ( !empty( $WDGOrganization ) ) ? $WDGOrganization->get_royalties_by_campaign_id( $campaign_id ) : $WDGUser_current->get_royalties_by_campaign_id( $campaign_id ); ?>
 				<?php $future_roi_list = WDGROIDeclaration::get_list_by_campaign_id( $campaign_id ); ?>
 				
 				<h4 class="margin-top"><?php _e("Vos royalties", 'yproject'); ?></h4>

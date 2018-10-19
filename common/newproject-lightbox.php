@@ -33,6 +33,7 @@ if ($organizations_list) {
     <h2 style="text-align: center;"><?php _e('Lancement de campagne','yproject');?></h2>
 	
 	<?php
+	$input_error = filter_input( INPUT_GET, 'error' );
 	$errors_submit_new = $_SESSION[ 'newproject-errors-submit' ];
 	$errors_create_orga = $_SESSION[ 'newproject-errors-orga' ];
 	?>
@@ -48,6 +49,15 @@ if ($organizations_list) {
 		<?php foreach ( $errors_create_orga as $error ): ?>
 			<?php echo $error; ?>
 		<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
+	<?php if ( !empty( $input_error ) ): ?>
+		<div class="errors">
+		<?php if ( $input_error == 'creation' ): ?>
+			Erreur de création, merci de nous contacter.
+		<?php elseif ( $input_error == 'field_empty' ): ?>
+			Certains champs n'ont pas été remplis. Chaque champ est obligatoire.
+		<?php endif; ?>
 		</div>
 	<?php endif; ?>
 		
@@ -107,7 +117,8 @@ if ($organizations_list) {
         "type"		=> "text",
         "label"		=> "E-mail de contact",
         "value"		=> $first_organization_email,
-        "infobubble"=> __( "Cet e-mail ne doit pas &ecirc;tre utilis&eacute; par un compte existant.", 'yproject' )
+        "description"	=> __( "Cette adresse doit &ecirc;tre diff&eacute;rente de celle de votre compte personnel, utilisez une adresse telle que contact@votre-entreprise.fr", 'yproject' ),
+        "infobubble"	=> __( "Cet e-mail ne doit pas &ecirc;tre utilis&eacute; par un compte existant.", 'yproject' )
     ));
 
     DashboardUtility::create_field(array(
@@ -126,7 +137,7 @@ if ($organizations_list) {
 	?>
 
 	<div class="align-left">
-	<label for="project-terms"><input type="checkbox" id="project-terms" name="project-terms" /><span></span> Je valide les <a href="'.home_url('/conditions-particulieres').'" target="_blank">conditions particuli&egrave;res</a></label><br />
+	<label for="project-terms"><input type="checkbox" id="project-terms" name="project-terms" /><span></span> Je valide les <a href="'.home_url('/conditions-particulieres/').'" target="_blank">conditions particuli&egrave;res</a></label><br />
 	</div>
 	<br /><br />
 	

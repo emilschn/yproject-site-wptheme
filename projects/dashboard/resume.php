@@ -17,7 +17,7 @@ function print_resume_page()
 	$WDGUser_current = WDGUser::current();
 	$WDGUser_author = new WDGUser( $campaign->post_author() );
 	$campaign_organization = $campaign->get_organization();
-	$wdg_organization = new WDGOrganization($campaign_organization->wpref);
+	$wdg_organization = new WDGOrganization( $campaign_organization->wpref, $campaign_organization );
 
     ?>
     <div class="head"><?php _e("Vue d'ensemble", 'yproject'); ?></div>
@@ -196,7 +196,7 @@ function print_resume_page()
 							}
 							?>
                             <div class="stat-big-number <?php echo $big_number_class; ?>"><?php echo $campaign->current_amount()?></div>
-                            <div class="stat-little-number">récoltés sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro;</div>
+                            <div class="stat-little-number">levés sur <?php echo $campaign->minimum_goal(false)/1 ?> &euro;</div>
                             <div class="details-card">
                                 <strong><?php echo $campaign->current_amount()?></strong> investis par
                                 <strong><?php echo $nb_invests?></strong> personne<?php if($nb_invests>1){echo 's';}?>
@@ -454,7 +454,7 @@ function print_resume_page()
                             <input type="number" id="inendh" name="inendh" min="0" max="23" value="12" style="width: 40px;">h
                             <input type="number" id="inendm" name="inendm" min="0" max="59" value="00" style="width: 40px;">
 						</label>
-						<?php DashboardUtility::get_infobutton("Veillez &agrave; d&eacute;finir l'heure de fin &agrave; un moment o&ugrave; vous pourrez toucher des investisseurs et encore mener des action de communication. Nous vous conseillons 22h.",true); ?>
+						<?php DashboardUtility::get_infobutton("Veillez &agrave; d&eacute;finir l'heure de fin &agrave; un moment o&ugrave; vous pourrez toucher des investisseurs et encore mener des action de communication. Nous vous conseillons 21h.",true); ?>
                     </li>
 				<?php endif; ?>
             </ul>

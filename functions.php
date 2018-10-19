@@ -140,254 +140,261 @@ function print_user_projects(){
 	global $wpdb, $post, $user_projects;
 	$is_same_user = TRUE;
 	$str_believe = "J&apos;y crois";
-	$str_vote = "J&apos;ai vot&eacute;";
+	$str_vote = "J&apos;ai &eacute;valu&eacute;";
 	$str_investment = "J&apos;ai investi";
 	$str_not_believe = "Je n&apos;y crois pas";
-	$str_not_vote = "Je n&apos;ai pas vot&eacute;";
+	$str_not_vote = "Je n&apos;ai pas &eacute;valu&eacute;";
 	$str_not_investment = "Je n&apos;ai pas investi";
 	if (!$is_same_user) {
 		$str_believe = "Y croit";
-		$str_vote = "A vot&eacute;";
+		$str_vote = "A &eacute;valu&eacute;";
 		$str_investment = "A investi";
 		$str_not_believe = "N&apos;y croit pas";
-		$str_not_vote = "N&apos;a pas vot&eacute;";
+		$str_not_vote = "N&apos;a pas &eacute;valu&eacute;";
 		$str_not_investment = "N&apos;a pas investi";
 	}
-        
-	if(isset($_POST['user_id'])){
-		$payment_status = array("publish", "completed");
+
+	$WDGUser_current = WDGUser::current();
+	if ( isset( $_POST[ 'user_id' ] ) && $WDGUser_current->is_admin() ){
+		$user_id = $_POST[ 'user_id' ];
+	} else {
+		$user_id = $WDGUser_current->get_wpref();
+	}
+	
+	$payment_status = array("publish", "completed");
 //		if ($is_same_user) $payment_status = array("completed", "pending", "publish", "failed", "refunded");
-		$user_id = get_current_user_id();
-		$purchases = edd_get_users_purchases($user_id, -1, false, $payment_status);
-		$table = $wpdb->prefix.'jycrois';
-		$projects_jy_crois = $wpdb->get_results("SELECT campaign_id, subscribe_news FROM $table WHERE user_id=$user_id");
-                $table = $wpdb->prefix.'ypcf_project_votes';
-		$projects_votes = $wpdb->get_results("SELECT post_id FROM $table WHERE user_id=$user_id");
-		$check_investment = true;
-		$check_vote = false;
-		$check_believe = true;
-		if (empty($purchases) && count($projects_votes) > 0) { $check_investment = false; $check_vote = true; }
-		if (empty($purchases) && count($projects_votes) == 0 && count($projects_jy_crois) == 0) { $check_investment = false; $check_believe = true; }
-		
-		if ($purchases != '' || count($projects_jy_crois) > 0 || count($projects_votes) > 0) { ?>
-			<h3> Afficher les projets : </h3>
-			<form id="filter-projects">
-  				<label>
-				<input type="checkbox" name="filter" value="jycrois" <?php if ($check_believe) { ?>checked="checked"<?php } ?>>
-				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="<?php echo $str_believe; ?>" title="<?php echo $str_believe; ?>" />
-  				<?php echo $str_believe; ?>
-				</label>
-		
-   				<label style="margin-left: 50px;">
-				<input type="checkbox" name="filter" value="voted" <?php if ($check_vote) { ?>checked="checked"<?php } ?>>
-				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png" alt="<?php echo $str_vote; ?>" title="<?php echo $str_vote; ?>" />
-  				<?php echo $str_vote; ?>
-				</label>
-		
-   				<label style="margin-left: 50px;">
-				<input type="checkbox" name="filter" value="invested" <?php if ($check_investment) { ?>checked="checked"<?php } ?>>
-				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png" alt="<?php echo $str_investment; ?>" title="<?php echo $str_investment; ?>" />
-  				<?php echo $str_investment; ?>
-				</label>
-			</form>
-			<?php
+	$purchases = edd_get_users_purchases($user_id, -1, false, $payment_status);
+	$table = $wpdb->prefix.'jycrois';
+	$projects_jy_crois = $wpdb->get_results("SELECT campaign_id, subscribe_news FROM $table WHERE user_id=$user_id");
+	$table = $wpdb->prefix.'ypcf_project_votes';
+	$projects_votes = $wpdb->get_results("SELECT post_id FROM $table WHERE user_id=$user_id");
+	$check_investment = true;
+	$check_vote = false;
+	$check_believe = true;
+	if (empty($purchases) && count($projects_votes) > 0) { $check_investment = false; $check_vote = true; }
+	if (empty($purchases) && count($projects_votes) == 0 && count($projects_jy_crois) == 0) { $check_investment = false; $check_believe = true; }
+
+	if ($purchases != '' || count($projects_jy_crois) > 0 || count($projects_votes) > 0) { ?>
+		<h3> Afficher les projets : </h3>
+		<form id="filter-projects">
+			<label>
+			<input type="checkbox" name="filter" value="jycrois" <?php if ($check_believe) { ?>checked="checked"<?php } ?>>
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="<?php echo $str_believe; ?>" title="<?php echo $str_believe; ?>" />
+			<?php echo $str_believe; ?>
+			</label>
+
+			<label style="margin-left: 50px;">
+			<input type="checkbox" name="filter" value="voted" <?php if ($check_vote) { ?>checked="checked"<?php } ?>>
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png" alt="<?php echo $str_vote; ?>" title="<?php echo $str_vote; ?>" />
+			<?php echo $str_vote; ?>
+			</label>
+
+			<label style="margin-left: 50px;">
+			<input type="checkbox" name="filter" value="invested" <?php if ($check_investment) { ?>checked="checked"<?php } ?>>
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png" alt="<?php echo $str_investment; ?>" title="<?php echo $str_investment; ?>" />
+			<?php echo $str_investment; ?>
+			</label>
+		</form>
+		<?php
+		if  ($purchases):
 			foreach ( $purchases as $post ) : setup_postdata( $post );
 				$downloads = edd_get_payment_meta_downloads($post->ID); 
 				$download_id = '';
 				if (!is_array($downloads[0])){
-				    $download_id = $downloads[0];
-				    $post_camp = get_post($download_id);
-				    $campaign = atcf_get_campaign($post_camp);
-				    ypcf_get_updated_payment_status($post->ID);
-				    $signsquid_contract = new SignsquidContract($post->ID);
-				    $payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
+					$download_id = $downloads[0];
+					$post_camp = get_post($download_id);
+					$campaign = atcf_get_campaign($post_camp);
+					ypcf_get_updated_payment_status($post->ID);
+					$signsquid_contract = new SignsquidContract($post->ID);
+					$payment_date = date_i18n( get_option('date_format'),strtotime(get_post_field('post_date', $post->ID)));
 
-				    //Infos relatives au projet
-				    $user_projects[$campaign->ID]['ID'] = $campaign->ID;
-				    //Infos relatives à l'investissement de l'utilisateur
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_contract_id'] = $signsquid_contract->get_contract_id();
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status'] = $signsquid_contract->get_status_code();
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status_str'] = $signsquid_contract->get_status_str();
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_date'] = $payment_date;
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount'] = edd_get_payment_amount( $post->ID );
-				    $user_projects[$campaign->ID]['payments'][$post->ID]['payment_status'] = edd_get_payment_status( $post, true );
+					//Infos relatives au projet
+					$user_projects[$campaign->ID]['ID'] = $campaign->ID;
+					//Infos relatives à l'investissement de l'utilisateur
+					$user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_contract_id'] = $signsquid_contract->get_contract_id();
+					$user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status'] = $signsquid_contract->get_status_code();
+					$user_projects[$campaign->ID]['payments'][$post->ID]['signsquid_status_str'] = $signsquid_contract->get_status_str();
+					$user_projects[$campaign->ID]['payments'][$post->ID]['payment_date'] = $payment_date;
+					$user_projects[$campaign->ID]['payments'][$post->ID]['payment_amount'] = edd_get_payment_amount( $post->ID );
+					$user_projects[$campaign->ID]['payments'][$post->ID]['payment_status'] = edd_get_payment_status( $post, true );
 				}
 			endforeach;
+		endif;
 
-			foreach ($projects_jy_crois as $project) {
-				$user_projects[$project->campaign_id]['jy_crois'] = 1;
-                                $user_projects[$project->campaign_id]['subscribe_news'] = intval($project->subscribe_news);
-				$user_projects[$project->campaign_id]['ID'] = $project->campaign_id;
-			}
-			foreach ($projects_votes as $project) {
-				$user_projects[$project->post_id]['has_voted'] = 1;
-			}
-		 
-			?>
-			<div>
-			<?php
-			foreach ($user_projects as $project) {
-				$payments = $project['payments'];
-				$data_jycrois = 0;
-				$data_voted = 0;
-				$data_invested = 0;
-				if (isset($project['jy_crois']) && $project['jy_crois'] === 1) $data_jycrois = 1;
-				if (isset($project['has_voted']) && $project['has_voted'] === 1) $data_voted = 1;
-				if (count($project['payments']) > 0) $data_invested = 1;
-				
-				$is_campaign = (get_post_meta($project['ID'], 'campaign_funding_type', TRUE) != '');
-				if ( !$is_campaign ) {
-					continue;
-				}
-				$post_camp = get_post($project['ID']);
-				$campaign = atcf_get_campaign($post_camp);
-				$percent = min(100, $campaign->percent_minimum_completed(false));
-				$width = 150 * $percent / 100;
-				$width_min = 0;
-				if ($percent >= 100 && $campaign->is_flexible()) {
-				    $percent_min = $campaign->percent_minimum_to_total();
-				    $width_min = 150 * $percent_min / 100;
-				}
-				//Infos relatives au projet
-				$project['title'] = $post_camp->post_title;
-				$project['width_min'] = $width_min;
-				$project['width'] = $width;
-				$project['days_remaining'] = $campaign->time_remaining_str();
-				$project['percent_minimum_completed'] = $campaign->percent_minimum_completed();
-				$project['minimum_goal'] = $campaign->minimum_goal(true);
-			?>
-				<div id="<?php echo $project['ID'] ?>-project" class="history-projects" 
-					data-value="<?php echo $project['ID'] ?>"
-					data-jycrois="<?php echo $data_jycrois; ?>"
-					data-voted="<?php echo $data_voted;?>"
-					data-invested="<?php echo $data_invested;?>"
-					>
-					<a href="<?php echo get_permalink($project['ID']); ?>"><h3><?php echo $project['title']; ?></h3></a>
-					<div class="project_preview_item_infos">
-						<div class="project_preview_item_picto" style="width:45px">
-							<?php if($project['jy_crois'] === 1) { ?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="<?php echo $str_believe; ?>" title="<?php echo $str_believe; ?>" />
-							<?php } else { ?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good_gris.png" alt="<?php echo $str_not_believe; ?>" title="<?php echo $str_not_believe; ?>" />
-								<span data-jycrois="0"></span>
-							<?php } ?>
-						</div>
-						<div class="project_preview_item_picto" style="width:45px">
-							<?php if($project['has_voted'] === 1) { ?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png" alt="<?php echo $str_vote; ?>" title="<?php echo $str_vote; ?>" />
-								<span data-voted="1"></span>
-							<?php } else { ?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote_gris.png" alt="<?php echo $str_not_vote; ?>" title="<?php echo $str_not_vote; ?>" />
-							<?php } ?>
-						</div>
-						<div class="project_preview_item_picto" style="width:45px">
-							<?php if(count($project['payments']) > 0) { ?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png" alt="<?php echo $str_investment; ?>" title="<?php echo $str_investment; ?>" />
-								<span data-invested="1"></span>
-							<?php } else { ?>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains_gris.png" alt="<?php echo $str_not_investment; ?>" title="<?php echo $str_not_investment; ?>" />
-							<?php } ?>
-						</div>  
-					</div>
-					<div class="project_preview_item_progress">
-						<div class="project_preview_item_progressbg">
-				   			<div class="project_preview_item_progressbar" style="width:<?php echo $project['width'] ?>px">
-								<?php if ($project['width_min'] > 0): ?>
-								<div style="width: <?php echo $project->width_min; ?>px; height: 100%; border: 0px; border-right: 1px solid white;">&nbsp;</div>
-								<?php else: ?>
-								&nbsp;
-								<?php endif; ?>
-							</div>
-						</div>
-						<span class="project_preview_item_progressprint"><?php echo $project['percent_minimum_completed']; ?></span>
-					</div>
-					<div class="user-history-pictos">
-						<div class="project_preview_item_pictos">
-							<div class="project_preview_item_infos">
-							    <div class="project_preview_item_picto" style="width:45px">
-									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="logo horloge" />
-									<?php echo $project['days_remaining']; ?>
-							    </div>
-							    <div class="project_preview_item_picto">
-									<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="logo cible"/>
-									<?php echo $project['minimum_goal']; ?>
-							    </div> 
-							</div>
-							<div style="clear: both"></div>
-						</div>
-					</div>
-                                        
-                                        <?php if(($project['jy_crois'] === 1) && $is_same_user) {?>
-                                        <div class="user-subscribe-news">
-                                                <label><input type="checkbox" <?php if ($project['subscribe_news']===1){echo 'checked="checked"';}?>/>
-                                                    Recevoir par mail les actualit&eacute;s du projet</label>
-                                        </div>
-                                        <?php } ?>
-					
-					<?php if(count($payments) > 0 && $is_same_user) {?>
-						<div class="show-payments"  data-value="<?php echo $project['ID'];?>">
-							D&eacute;tails des investissements
-						</div>
-						
-						<div class="user-history-payments">
-							<table class="user-history-payments-list">
-							    
-								<?php foreach ($payments as $payment_id => $payment) { 
-                                                                    $reward = get_post_meta($payment_id,'_edd_payment_reward',true);
-                                                                    ?>
-							    
-								<tr class="user-payments-list-item">
-									<td class="user-payment-item user-payment-date">
-										<?php echo $payment['payment_date']; ?>
-									</td>
-									<td class="user-payment-item user-payment-amount">
-										<?php echo $payment['payment_amount'].' &euro;'; ?>
-									</td>
-									<td class="user-payment-item user-payment-status">
-										<?php echo $payment['payment_status']; ?>
-									</td>
-									<td class="user-payment-item user-payment-signsquid-status">
-										<?php echo $payment['signsquid_status_str']; ?>
-									</td>
-
-									<?php
-									//Boutons pour Annuler l'investissement | Recevoir le code à nouveau
-									//Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
-									if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $payment_status == "publish" && $payment['signsquid_status'] != 'Agreed') :
-									?>
-									<td style="width: 220px;">
-										<?php /*if (!empty($payment['signsquid_contract_id'])): ?>
-											<?php $page_my_investments = get_page_by_path('mes-investissements'); ?>
-											<a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $payment_id; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
-										<?php endif;*/ ?>
-										
-										<?php $page_cancel_invest = get_page_by_path('annuler-un-investissement'); ?>
-										<a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $payment_id; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
-									</td>
-									<?php endif; ?>
-
-								</tr>
-                                                                <?php if ($reward != null) { ?>
-                                                                    <tr>
-                                                                        <td colspan="4" class="user-payment-item user-payment-reward" style="margin-bottom: 10px;">
-                                                                            Contrepartie choisie : Palier de <?php echo $reward['amount'].' € - '.$reward['name']?>
-                                                                        </td>
-                                                                    </tr>
-                                                                <?php } 
-                                                                } ?>
-									
-							</table>
-						</div>
-					<?php } ?>
-				</div>
-			</div>
-			<?php
-			}
-		
-		} else {
-			echo "Aucun projet.";
-
+		foreach ($projects_jy_crois as $project) {
+			$user_projects[$project->campaign_id]['jy_crois'] = 1;
+			$user_projects[$project->campaign_id]['subscribe_news'] = intval($project->subscribe_news);
+			$user_projects[$project->campaign_id]['ID'] = $project->campaign_id;
 		}
+		foreach ($projects_votes as $project) {
+			$user_projects[$project->post_id]['has_voted'] = 1;
+		}
+
+		?>
+		<div>
+		<?php
+		foreach ($user_projects as $project) {
+			$payments = $project['payments'];
+			$data_jycrois = 0;
+			$data_voted = 0;
+			$data_invested = 0;
+			if (isset($project['jy_crois']) && $project['jy_crois'] === 1) $data_jycrois = 1;
+			if (isset($project['has_voted']) && $project['has_voted'] === 1) $data_voted = 1;
+			if (count($project['payments']) > 0) $data_invested = 1;
+
+			$is_campaign = (get_post_meta($project['ID'], 'campaign_funding_type', TRUE) != '');
+			if ( !$is_campaign ) {
+				continue;
+			}
+			$post_camp = get_post($project['ID']);
+			$campaign = atcf_get_campaign($post_camp);
+			$percent = min(100, $campaign->percent_minimum_completed(false));
+			$width = 150 * $percent / 100;
+			$width_min = 0;
+			if ($percent >= 100 && $campaign->is_flexible()) {
+				$percent_min = $campaign->percent_minimum_to_total();
+				$width_min = 150 * $percent_min / 100;
+			}
+			//Infos relatives au projet
+			$project['title'] = $post_camp->post_title;
+			$project['width_min'] = $width_min;
+			$project['width'] = $width;
+			$project['days_remaining'] = $campaign->time_remaining_str();
+			$project['percent_minimum_completed'] = $campaign->percent_minimum_completed();
+			$project['minimum_goal'] = $campaign->minimum_goal(true);
+		?>
+			<div id="<?php echo $project['ID'] ?>-project" class="history-projects" 
+				data-value="<?php echo $project['ID'] ?>"
+				data-jycrois="<?php echo $data_jycrois; ?>"
+				data-voted="<?php echo $data_voted;?>"
+				data-invested="<?php echo $data_invested;?>"
+				>
+				<a href="<?php echo $campaign->get_public_url(); ?>"><h3><?php echo $project['title']; ?></h3></a>
+				<div class="project_preview_item_infos">
+					<div class="project_preview_item_picto" style="width:45px">
+						<?php if($project['jy_crois'] === 1) { ?>
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="<?php echo $str_believe; ?>" title="<?php echo $str_believe; ?>" />
+						<?php } else { ?>
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good_gris.png" alt="<?php echo $str_not_believe; ?>" title="<?php echo $str_not_believe; ?>" />
+							<span data-jycrois="0"></span>
+						<?php } ?>
+					</div>
+					<div class="project_preview_item_picto" style="width:45px">
+						<?php if($project['has_voted'] === 1) { ?>
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png" alt="<?php echo $str_vote; ?>" title="<?php echo $str_vote; ?>" />
+							<span data-voted="1"></span>
+						<?php } else { ?>
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote_gris.png" alt="<?php echo $str_not_vote; ?>" title="<?php echo $str_not_vote; ?>" />
+						<?php } ?>
+					</div>
+					<div class="project_preview_item_picto" style="width:45px">
+						<?php if(count($project['payments']) > 0) { ?>
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png" alt="<?php echo $str_investment; ?>" title="<?php echo $str_investment; ?>" />
+							<span data-invested="1"></span>
+						<?php } else { ?>
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains_gris.png" alt="<?php echo $str_not_investment; ?>" title="<?php echo $str_not_investment; ?>" />
+						<?php } ?>
+					</div>  
+				</div>
+				<div class="project_preview_item_progress">
+					<div class="project_preview_item_progressbg">
+						<div class="project_preview_item_progressbar" style="width:<?php echo $project['width'] ?>px">
+							<?php if ($project['width_min'] > 0): ?>
+							<div style="width: <?php echo $project->width_min; ?>px; height: 100%; border: 0px; border-right: 1px solid white;">&nbsp;</div>
+							<?php else: ?>
+							&nbsp;
+							<?php endif; ?>
+						</div>
+					</div>
+					<span class="project_preview_item_progressprint"><?php echo $project['percent_minimum_completed']; ?></span>
+				</div>
+				<div class="user-history-pictos">
+					<div class="project_preview_item_pictos">
+						<div class="project_preview_item_infos">
+							<div class="project_preview_item_picto" style="width:45px">
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/horloge.png" alt="logo horloge" />
+								<?php echo $project['days_remaining']; ?>
+							</div>
+							<div class="project_preview_item_picto">
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/cible.png" alt="logo cible"/>
+								<?php echo $project['minimum_goal']; ?>
+							</div> 
+						</div>
+						<div style="clear: both"></div>
+					</div>
+				</div>
+
+				<?php if(($project['jy_crois'] === 1) && $is_same_user) {?>
+				<div class="user-subscribe-news">
+					<label><input type="checkbox" <?php if ($project['subscribe_news']===1){echo 'checked="checked"';}?>/>
+						Recevoir par mail les actualit&eacute;s du projet</label>
+				</div>
+				<?php } ?>
+
+				<?php if(count($payments) > 0 && $is_same_user) {?>
+					<div class="show-payments"  data-value="<?php echo $project['ID'];?>">
+						D&eacute;tails des investissements
+					</div>
+
+					<div class="user-history-payments">
+						<table class="user-history-payments-list">
+
+							<?php foreach ($payments as $payment_id => $payment) { 
+							$reward = get_post_meta($payment_id,'_edd_payment_reward',true);
+							?>
+
+							<tr class="user-payments-list-item">
+								<td class="user-payment-item user-payment-date">
+									<?php echo $payment['payment_date']; ?>
+								</td>
+								<td class="user-payment-item user-payment-amount">
+									<?php echo $payment['payment_amount'].' &euro;'; ?>
+								</td>
+								<td class="user-payment-item user-payment-status">
+									<?php echo $payment['payment_status']; ?>
+								</td>
+								<td class="user-payment-item user-payment-signsquid-status">
+									<?php echo $payment['signsquid_status_str']; ?>
+								</td>
+
+								<?php
+								//Boutons pour Annuler l'investissement | Recevoir le code à nouveau
+								//Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
+								if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $payment_status == "publish" && $payment['signsquid_status'] != 'Agreed') :
+								?>
+								<td style="width: 220px;">
+									<?php /*if (!empty($payment['signsquid_contract_id'])): ?>
+										<?php $page_my_investments = get_page_by_path('mes-investissements'); ?>
+										<a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $payment_id; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
+									<?php endif;*/ ?>
+
+									<?php $page_cancel_invest = get_page_by_path('annuler-un-investissement'); ?>
+									<a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $payment_id; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
+								</td>
+								<?php endif; ?>
+
+							</tr>
+							
+							<?php if ($reward != null) { ?>
+								<tr>
+									<td colspan="4" class="user-payment-item user-payment-reward" style="margin-bottom: 10px;">
+										Contrepartie choisie : Palier de <?php echo $reward['amount'].' € - '.$reward['name']?>
+									</td>
+								</tr>
+							<?php } 
+							} ?>
+
+						</table>
+					</div>
+				<?php } ?>
+			</div>
+		</div>
+		<?php
+		}
+
+	} else {
+		echo "Aucun projet.";
+
 	}
 	exit();
 }
@@ -495,6 +502,39 @@ function yproject_save_edit_project() {
 	if ($current_lang == 'fr_FR') { $current_lang = ''; }
 	else { $current_lang = '_' . $current_lang; }
 	
+	ypcf_debug_log( 'yproject_save_edit_project > property ('.$current_lang.') => ' . $_POST['property'], TRUE );
+	ypcf_debug_log( 'yproject_save_edit_project > value ('.$current_lang.') => ' . $_POST['value'], TRUE );
+
+	//Supprime la réservation de l'édition en cours
+	$buffer = FALSE;
+	$WDGuser_current = WDGUser::current();
+	$user_id = $WDGuser_current->wp_user->ID;
+	$campaign = new ATCF_Campaign( $_POST['id_campaign'] );
+
+	$campaign_id = filter_input( INPUT_POST, 'id_campaign' );
+	$property = filter_input( INPUT_POST, 'property' );
+	$lang = filter_input( INPUT_POST, 'lang' );
+	
+	$meta_key = $property.'_add_value_reservation_'.$lang;
+	$meta_value = get_post_meta( $campaign_id, $meta_key, TRUE );
+	$WDGUser = new WDGUser( $meta_value[ 'user' ] );
+	$name = $WDGUser->get_firstname()." ".$WDGUser->get_lastname();
+	
+	$return_values = array(
+			"response" => "done",
+			"values" => $_POST['property'],
+			"user" => $name,
+			"md5content" => null
+	);
+
+	if ( !empty($meta_value) ) {
+	    if ( $meta_value[ 'user' ] == $user_id ) {			
+			$buffer = TRUE;
+	    } else {
+	    	$return_values[ 'response' ] = "error";
+	    }
+	}
+	
 	switch ($_POST['property']) {
 		case "title":
 			wp_update_post(array(
@@ -503,13 +543,48 @@ function yproject_save_edit_project() {
 			));
 			break;
 		case "description":
-			if (empty($current_lang)) {
-				wp_update_post(array(
-					'ID' => $_POST['id_campaign'],
-					'post_content' => $_POST['value']
-				));
-			} else {
-				update_post_meta($_POST['id_campaign'], 'campaign_description' . $current_lang, $_POST['value']);
+			if ( $buffer ) {
+				if (empty($current_lang)) {
+					wp_update_post(array(
+						'ID' => $_POST['id_campaign'],
+						'post_content' => $_POST['value']
+					));
+					//nouvelle instance pour récupérer le contenu à jour
+					$description_campaign = new ATCF_Campaign( $_POST['id_campaign'] );
+					$return_values[ 'md5content' ] = md5( $description_campaign->description() );
+				} else {
+					update_post_meta($_POST['id_campaign'], 'campaign_description' . $current_lang, $_POST['value']);
+					$return_values[ 'md5content' ] = md5( $campaign->description() );
+				}
+				delete_post_meta( $campaign_id, $meta_key );
+			}
+			break;
+		case "societal_challenge":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_societal_challenge' . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $campaign->societal_challenge() );
+				delete_post_meta( $campaign_id, $meta_key );
+			}
+			break;
+		case "added_value":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_added_value' . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $campaign->added_value() );
+				delete_post_meta( $campaign_id, $meta_key );
+			}
+			break;
+		case "economic_model":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_economic_model' . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $campaign->economic_model() );
+				delete_post_meta( $campaign_id, $meta_key );
+			}
+			break;
+		case "implementation":
+			if ( $buffer ) {
+				update_post_meta($_POST['id_campaign'], 'campaign_implementation' . $current_lang, $_POST['value']);
+				$return_values[ 'md5content' ] = md5( $campaign->implementation() );
+				delete_post_meta( $campaign_id, $meta_key );
 			}
 			break;
 		default: 
@@ -522,9 +597,15 @@ function yproject_save_edit_project() {
 		'project-content-about-' . $_POST['id_campaign'],
 		'project-content-bottom-' . $_POST['id_campaign'],
 		'projects-current',
-		'projects-others'
+		'projects-others',
+		'cache_campaign_' . $_POST['id_campaign']
 	));
-	echo $_POST['property'];
+
+	if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_funded ) {
+		$file_cacher = WDG_File_Cacher::current();
+		$file_cacher->delete( $campaign->data->post_name );
+	}
+	echo json_encode($return_values);
 	exit();
 }
 add_action('wp_ajax_save_edit_project', 'yproject_save_edit_project');
@@ -591,100 +672,97 @@ function get_invests_graph(){
     ?>
     <script type="text/javascript">
     jQuery(document).ready( function($) {
-            var ctxLine = $("#canvas-line-block").get(0).getContext("2d");
-            var dataLine = {
-                labels : [<?php echo date_abs($date_collecte_start); ?>,
-                    <?php echo $datequarterstr; ?>,
-                    <?php echo $datehalfstr; ?>,
-                    <?php echo $datethreequarterstr; ?>,
-                    <?php echo date_abs($date_collecte_end); ?>],
-                xBegin : new Date(<?php echo date_param($date_collecte_start); ?>),
-                xEnd : new Date(<?php echo date_param($date_collecte_end); ?>),
-                datasets : [
-                    {
-                        fillColor : "rgba(204,204,204,0.25)",
-                        strokeColor : "rgba(180,180,180,0.5)",
-                        pointColor : "rgba(0,0,0,0)",
-                        pointStrokeColor : "rgba(0,0,0,0)",
-                        data : [0,<?php echo $campaign->minimum_goal(false);?>],
-                        xPos : [new Date(<?php echo date_param($date_collecte_start); ?>),new Date(<?php echo date_param($date_collecte_end); ?>)],
-                        title : "But progression"
-                    },{
-                        fillColor : "rgba(0,0,0,0)",
-                        strokeColor : "rgba(140,140,140,0.5)",
-                        pointColor : "rgba(0,0,0,0)",
-                        pointStrokeColor : "rgba(0,0,0,0)",
-                        data : [<?php echo $campaign->minimum_goal(false);?>,<?php echo $campaign->minimum_goal(false);?>],
-                        xPos : [new Date(<?php echo date_param($date_collecte_start); ?>),new Date(<?php echo date_param($date_collecte_end); ?>)],
-                        title : "But"
-                    }
-                    <?php 
-                    if (count($datesinvest)!=0){?>
-                    ,{
-                        fillColor : "rgba(255,73,76,0.25)",
-                        strokeColor : "rgba(255,73,76,0.5)",
-                        pointColor : "rgba(0,0,0,0)",
-                        pointStrokeColor : "rgba(0,0,0,0)",
-                        data : [<?php echo $campaign->current_amount(false);?>,<?php echo $campaign->current_amount(false);?>],
-                        xPos : [new Date(<?php foreach ($allamount as $date => $amount){$lastdate = $date;} echo date_param($lastdate); ?>),new Date(<?php echo date_format(min([new DateTime($date_collecte_end),new DateTime(null)]),'"D M d Y H:i:s O"'); ?>)],
-                        title : "linetoday"
-                    },{
-                        fillColor : "rgba(0,0,0,0)",
-                        strokeColor : "rgba(0,0,0,0)",
-                        pointColor : "rgba(0,0,0,0)",
-                        pointStrokeColor : "rgba(0,0,0,0)",
-                        data : [<?php foreach ($allamount as $date => $amount){echo $amount.',';}?> ],
-                        xPos : [<?php foreach ($allamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
-                        title : "inv"
-                    },{
-                        fillColor : "rgba(255,73,76,0.5)",
-                        strokeColor : "rgba(255,73,76,1)",
-                        pointColor : "rgba(255,73,76,1)",
-                        pointStrokeColor : "rgba(199,46,49,1)",
-                        data : [<?php foreach ($cumulamount as $date => $amount){echo $amount.',';}?> ],
-                        xPos : [<?php foreach ($cumulamount as $date => $amount){echo 'new Date('.date_param($date).'),';}?>],
-                        title : "investissements"
-                    }<?php } 
-                    if (new DateTime(null)< new DateTime($date_collecte_end)){?>
-                    ,{
-                        fillColor : "rgba(0,0,0,0)",
-                        strokeColor : "rgba(0,0,0,0)",
-                        pointColor : "rgba(110,110,110,1)",
-                        pointStrokeColor : "rgba(55,55,55,1)",
-                        data : [<?php echo ($campaign->current_amount(false));?>],
-                        xPos : [new Date(<?php echo date_param(null); ?>)],
-                        title : "aujourdhui"
-                    }<?php }
-                    ?>
-                ]
-            };
-
-            displayAnnot = function(cat, date, invest, investtotal){
-                if(cat === "investissements"){
-                    min = date.getMinutes().toString();
-                    return '<b>'+invest+ '€</b>, le ' +date.getDate()+'/'+(date.getMonth()+1)+'/'+(date.getFullYear())+' à '+date.getHours()+'h'+(min[1]?min:"0"+min[0])
-                            +'.<br/><b>Total: '+investtotal+'€</b>';
-                } else if(cat=== "aujourdhui"){
-                    return "Aujourd'hui vous en êtes à "+investtotal+'€'
-                }
-            };
-
-            var optionsLine = {
-                annotateDisplay: true,
-                annotateLabel: "<%=displayAnnot(v1,v2,v3-v4,v3)%>",
-                pointHitDetectionRadius: 7,
-
-                animation: true,
-
-                scaleOverride : true,
-                scaleStartValue : 0,
-                scaleSteps : 6,
-                scaleStepWidth :  <?php
-                    if($campaign->is_funded()){$max= ($campaign->current_amount(false));}
-                    else{$max= ($campaign->minimum_goal(false));}
-                    echo (round($max,0,PHP_ROUND_HALF_UP)/5);?>
-            };
-            var canvasLine = new Chart(ctxLine).Line(dataLine, optionsLine);
+		var listDates = [];
+		listDates.push(<?php echo date_abs($date_collecte_start); ?>);
+		<?php foreach ($allamount as $date => $amount): ?>
+			listDates.push(<?php echo date_abs($date); ?>);
+		<?php endforeach; ?>
+		listDates.push(<?php echo date_abs($date_collecte_end); ?>);
+		new Chart(
+			document.getElementById("canvas-line-block"),
+			{
+				"type":"line",
+				"data":{
+					"labels": listDates,
+					"datasets":[
+						{
+							backgroundColor : "rgba(204,204,204,0.25)",
+							borderColor : "rgba(180,180,180,0.5)",
+							pointColor : "rgba(0,0,0,0)",
+							pointStrokeColor : "rgba(0,0,0,0)",
+							data: [
+								{
+									x: <?php echo date_abs($date_collecte_start); ?>,
+									y: 0
+								},
+								{
+									x: <?php echo date_abs($date_collecte_end); ?>,
+									y: <?php echo $campaign->minimum_goal(false); ?>
+								}
+							],
+							title : "But progression"
+						},
+						{
+							backgroundColor : "rgba(0,0,0,0)",
+							borderColor : "rgba(140,140,140,0.5)",
+							pointColor : "rgba(0,0,0,0)",
+							pointStrokeColor : "rgba(0,0,0,0)",
+							data: [
+								{
+									x: <?php echo date_abs($date_collecte_start); ?>,
+									y: <?php echo $campaign->minimum_goal(false); ?>
+								},
+								{
+									x: <?php echo date_abs($date_collecte_end); ?>,
+									y: <?php echo $campaign->minimum_goal(false); ?>
+								}
+							],
+							title : "But"
+						}
+						<?php if (count($datesinvest)!=0): ?>
+						,
+						{
+							backgroundColor : "rgba(255,73,76,0.25)",
+							borderColor : "rgba(255,73,76,0.5)",
+							pointColor : "rgba(0,0,0,0)",
+							pointStrokeColor : "rgba(0,0,0,0)",
+							data : [
+								{
+									x: <?php echo date_abs($date_collecte_start); ?>,
+									y: <?php echo $campaign->current_amount(false); ?>
+								},
+								{
+									x: <?php echo date_abs($date_collecte_end); ?>,
+									y: <?php echo $campaign->current_amount(false); ?>
+								}
+							],
+							title : "linetoday"
+						},
+						{
+							backgroundColor : "rgba(255,73,76,0.5)",
+							borderColor : "rgba(255,73,76,1)",
+							pointColor : "rgba(255,73,76,1)",
+							pointStrokeColor : "rgba(199,46,49,1)",
+							data : [
+								<?php foreach ($cumulamount as $date => $amount): ?>
+								{
+									x: <?php echo date_abs($date); ?>,
+									y: <?php echo $amount; ?>
+								},
+								<?php endforeach; ?>
+							],
+							title : "investissements"
+						}
+						<?php endif; ?>
+					]
+				},
+				options:{
+					legend:{
+						display: false
+					}
+				}
+			}
+		);
     });
     </script>
     
@@ -712,7 +790,7 @@ function get_email_selector(){
     <form id="email-selector">
 Sélectionner :<br />
 <label><input type="checkbox" class="select-options" data-selection="believe" checked="checked" /> Y croit</label><br />
-<label><input type="checkbox" class="select-options" data-selection="vote" checked="checked" /> A voté</label><br />
+<label><input type="checkbox" class="select-options" data-selection="vote" checked="checked" /> A &eacute;valu&eacute;</label><br />
 <label><input type="checkbox" class="select-options" data-selection="invest" checked="checked" /> A investi</label><br />
 <br />
 </form>

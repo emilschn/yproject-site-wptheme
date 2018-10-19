@@ -1,0 +1,409 @@
+/******
+STRUCTURE
+******/
+body.template-tableau-de-bord div#container {
+	background: #CFB7B7;
+	background-image: url(../../images/common-background.png);
+	background-repeat: no-repeat;
+}
+body.template-tableau-de-bord div#container div#content {
+	display: table;
+	width: 100%;
+	max-width: 1280px;
+	table-layout: fixed;
+	margin: auto;
+	padding: 80px 0px 10px;
+}
+body.template-tableau-de-bord div#container div#content nav {
+	display: table-cell;
+    vertical-align: top;
+    width: 220px;
+	border-right: 1px solid #E1E3E2;
+	background: #F4F4F4;
+}
+body.template-tableau-de-bord div#container div#content nav ul.nav-menu {
+	margin: 0px;
+	padding-left: 0px;
+	list-style: none;
+}
+body.template-tableau-de-bord div#container div#content nav ul.nav-menu li {
+	display: inline-block;
+	width: calc( 100% - 16px );
+	height: auto;
+	padding: 8px 0px 8px 16px;
+	background: #F4F4F4;
+	font-weight: bold;
+	border-bottom: 1px solid #E1E3E2;
+}
+body.template-tableau-de-bord div#container div#content nav ul.nav-menu li a {
+	display: inline-block;
+	width: calc( 100% - 8px );
+	padding-left: 8px;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: normal;
+	color: #000000;
+}
+body.template-tableau-de-bord div#container div#content nav ul.nav-menu li.selected {
+	background: #FFFFFF;
+	border-left: 4px solid #D3EAE9;
+}
+body.template-tableau-de-bord div#container div#content main {
+	display: table-cell;
+    vertical-align: top;
+	padding: 8px 24px;
+	background: #FFFFFF
+}
+body.template-tableau-de-bord div#container div#content main div.item-body-tab {
+	display: none;
+}
+body.template-tableau-de-bord div#container div#content main div#item-body-loading {
+	display: block;
+}
+
+body.template-tableau-de-bord div#container div#content main h2 {
+	margin: 5px 0px;
+	font-size: 35px;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+/*******************************************************************************
+* HOME
+*******************************************************************************/
+/* Frise */
+div#item-body-home #status-list{
+	margin: 0px auto;
+	max-width: 1100px;
+	text-align: center;
+	position:relative;
+}
+
+div#item-body-home #status-list .perso{
+	background: url(images/frise-db/golf-perso2.png);
+	background-size: 56px;
+	background-position: 80%;
+	background-repeat: no-repeat;
+	position:absolute;
+	width: calc(40px + ((100% - 50px)/7)/2);
+	height: 105px;
+}
+
+div#item-body-home #status-list .perso.preparing{
+	background: url(images/frise-db/golf-perso1.png);
+	background-size: 56px;
+	background-position: 80%;
+	background-repeat: no-repeat;
+}
+
+div#item-body-home #status-list .status{
+	display: inline-block;
+	width: calc((100% - 40px)/7);
+	height: 170px;
+	position: relative;
+	margin-left: -5px;
+}
+
+div#item-body-home #status-list .status.begin {
+	margin-left: 40px;
+}
+
+div#item-body-home #status-list .line{
+	height: 90px;
+	border-bottom: 3px solid black;
+	position: absolute;
+	width: 100%;
+}
+div#item-body-home #status-list .line.begin{
+	width:50%;
+	margin-left:50%;
+}
+div#item-body-home #status-list .line.end{
+	width:50%;
+	margin-right:50%;
+}
+div#item-body-home #status-list .line.none{
+	width:0%;
+	margin-left:50%;
+	margin-right:50%;
+}
+div#item-body-home #status-list .linetoright{
+	display: none;
+	height: 45px;
+	border-top: 3px solid black;
+	border-left: 3px solid black;
+	position: absolute;
+	width: 50%;
+	margin-left: 50%;
+	margin-top: 45px;
+}
+
+div#item-body-home #status-list .linetoleft{
+	display: none;
+	height: 45px;
+	border-top: 3px solid black;
+	border-right: 3px solid black;
+	position: absolute;
+	width: 50%;
+	margin-right:50%;
+	margin-top: 45px;
+}
+div#item-body-home #status-list .linetoboth{
+	height: 45px;
+	border-top: 3px solid black;
+	position: absolute;
+	width: 100%;
+	margin-top: 45px;
+}
+
+div#item-body-home #status-list .name{
+	position: absolute;
+	left: 0;
+	right: 0;
+	padding: 0px 10px;
+	top: 110px;
+	overflow: hidden;
+}
+
+div#item-body-home #status-list .status#current .name{
+	color: #EA4F51;
+	font-weight: bold;
+}
+
+div#item-body-home #status-list .icon-etape{
+	background: url(images/frise-db/golf-etape.png);
+	width: 100%;
+	height: 100px;
+	position: absolute;
+	background-size: 20px;
+	background-position: bottom;
+	background-repeat: no-repeat;
+}
+
+div#item-body-home #status-list .status#current .icon-etape{
+	background: url(images/frise-db/golf-etape-rouge.png);
+	background-size: 20px;
+	background-position: bottom;
+	background-repeat: no-repeat;
+}
+div#item-body-home #status-list .status.end .icon-etape{
+	background: url(images/frise-db/golf-drapeau.png) no-repeat calc(50% + 6px) 100%;
+	background-size: 32px 80px;
+}
+div#item-body-home #status-list .status#current.end .icon-etape{
+	background: url(images/frise-db/golf-drapeau-rouge.png) no-repeat calc(50% + 6px) 100%;
+	background-size: 32px 80px;
+}
+
+
+/* Stats */
+div#item-body-home .tab-content {
+	display: block;
+	max-width: 800px;
+	margin: 0px auto 30px auto;
+	background-color: #F2F2F2;
+	padding: 20px 30px;
+	border-bottom: 1px solid grey;
+}
+div#item-body-home .data-blocks {
+    text-align: center;
+}
+div#item-body-home .data-blocks .quart-card {
+    display:inline-block;
+    width: 25%;
+    padding: 10px 0px;
+    min-width: 200px;
+    vertical-align: middle;
+}
+
+div#item-body-home .data-blocks .half-card {
+    display:inline-block;
+    width: 50%;
+    padding: 10px 0px;
+    min-width: 400px;
+    vertical-align: middle;
+}
+
+div#item-body-home .data-blocks .stat-big-number {
+    font-size: 80px;
+    padding-top: 10px;
+}
+div#item-body-home .data-blocks .stat-big-number.less-big {
+    font-size: 60px;
+}
+
+div#item-body-home .data-blocks .stat-little-number {
+    font-size: 22px;
+    margin-top: -12px;
+    padding-bottom: 15px;
+}
+
+div#item-body-home .data-blocks .stat-little-number-top {
+    font-size: 26px;
+    padding-bottom: 0px;
+    margin-bottom: -40px;
+    padding-top: 5px;
+}
+
+/*******************************************************************************
+* STATS
+*******************************************************************************/
+div#container div#content main #item-body-stats h2.expandator {
+	text-transform: none;
+	text-align: left;
+}
+div#container div#content main #item-body-stats .expandable h2 {
+	font-size: 26px;
+	text-transform: none;
+	text-align: left;
+}
+div#container div#content main #item-body-stats center {
+	text-align: left;
+}
+
+/*******************************************************************************
+* CONTACTS
+*******************************************************************************/
+div#container div#content main #item-body-contacts table {
+	font-size: 12px;
+}
+
+div#container div#content main #item-body-contacts #direct-mail {
+	text-align: left;
+}
+
+/*******************************************************************************
+* NEWS
+*******************************************************************************/
+#item-body-news ul li {
+	list-style: none;
+}
+#item-body-news ul li a.news-title {
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+/*******************************************************************************
+* ROYALTIES
+*******************************************************************************/
+#item-body-royalties .form-adjustment-file ul {
+	margin: 0px;
+}
+#item-body-royalties .form-adjustment-file ul li {
+    list-style: none;
+}
+#item-body-royalties ul.payment-list > li {
+    margin-bottom: 30px;
+    padding: 5px 15px;
+    list-style: none;
+    background: #E1E3E2;
+	text-align: left;
+}
+#item-body-royalties ul.payment-list li h4 {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 5px 0px;
+}
+#item-body-royalties ul.payment-list li div {
+    margin: 10px 0px;
+}
+#item-body-royalties ul.payment-list li div.wdg-lightbox, #item-body-royalties ul.payment-list li div.wdg-lightbox-click-catcher {
+	margin: 0px;
+}
+#item-body-royalties ul.payment-list li div.wdg-lightbox-padder {
+	margin: 5vh auto;
+}
+#item-body-royalties ul.payment-list > li ul li {
+	margin-left: 20px;
+}
+#item-body-royalties #wdg-lightbox-transfer-roi input[type=checkbox] {
+	visibility: visible;
+	position: static;
+	display: inline;
+	width: auto;
+	height: auto;
+	margin-right: 3px;
+}
+
+/*******************************************************************************
+* AUTHOR
+*******************************************************************************/
+#item-body-author form {
+	text-align: left;
+}
+
+#item-body-author form br {
+	display: none;
+}
+
+/*******************************************************************************
+* TEAM
+*******************************************************************************/
+#item-body-team ul#team-list {
+	list-style: none;
+}
+#item-body-team ul#team-list li a {
+	width: auto;
+	height: auto;
+	line-height: normal;
+}
+
+/*******************************************************************************
+* FINANCE
+*******************************************************************************/
+#item-body-finance form br {
+	display: none;
+}
+#item-body-finance table {
+	margin: 30px 0px;
+	font-size: 13px;
+}
+#item-body-finance table thead {
+	font-weight: bold;
+}
+#item-body-finance table tbody tr td:nth-child(1), #item-body-finance table tfoot tr td:nth-child(1) {
+	font-weight: bold;
+	text-align: left;
+}
+#item-body-finance table tbody tr td:nth-child(2) {
+	min-width: 180px;
+}
+#item-body-finance table input[type=number] {
+	background: #E1E3E2;
+}
+
+/*******************************************************************************
+* CONTRACTS
+*******************************************************************************/
+#item-body-contracts form br {
+	display: none;
+}
+
+/*******************************************************************************
+* CAMPAIGN
+*******************************************************************************/
+#item-body-campaign form br {
+	display: none;
+}
+#item-body-campaign .field span.field-value[data-type=multicheck] {
+	padding-bottom: 0px;
+}
+#item-body-campaign .field span.field-value[data-type=multicheck] ul {
+	margin: 0px;
+}
+#item-body-campaign .field span.field-value > li > label {
+	display: none;
+}
+#item-body-campaign .field span.field-value li ul li input {
+	position: static;
+	width: auto;
+	height: auto;
+	visibility: visible;
+	margin-right: 3px;
+}
+#item-body-campaign .field span.field-value li ul li label {
+	font-weight: normal;
+}
+#item-body-campaign .field span.field-value li {
+	list-style: none;
+}

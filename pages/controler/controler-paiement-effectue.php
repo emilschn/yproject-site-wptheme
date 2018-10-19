@@ -11,6 +11,13 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 	 * @var WDGInvestment
 	 */
 	private $current_investment;
+	private $maximum_investable_amount;
+	private $need_two_contracts;
+	/**
+	 * @var WDG_Form_User_Identity_Docs
+	 */
+	private $form_user_identity_docs;
+	private $form_user_identity_docs_feedback;
 	
 	private $current_step;
 	private $current_meanofpayment;
@@ -21,11 +28,18 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		
 		define( 'SKIP_BASIC_HTML', TRUE );
 		
+		$core = ATCF_CrowdFunding::instance();
+		$core->include_form( 'user-identitydocs' );
+		
 		$this->init_current_campaign();
 		WDGRoutes::redirect_invest_if_not_logged_in();
 		WDGRoutes::redirect_invest_if_project_not_investable();
 		
+		$this->init_mean_of_payment();
 		$this->init_current_investment();
+		$this->init_maximum_investable_amount();
+		$this->init_need_two_contracts();
+		$this->init_identitydocs_form();
 		$this->init_current_step();
 		$this->init_payment_result();
 	}
@@ -44,7 +58,7 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 	public function get_campaign_organization_name() {
 		if ( !isset( $this->current_campaign_organization ) ) {
 			$campaign_organization = $this->current_campaign->get_organization();
-			$this->current_campaign_organization = new WDGOrganization( $campaign_organization->wpref );
+			$this->current_campaign_organization = new WDGOrganization( $campaign_organization->wpref, $campaign_organization );
 		}
 		return $this->current_campaign_organization->get_name();
 	}
@@ -52,6 +66,13 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 /******************************************************************************/
 // CURRENT INVESTMENT
 /******************************************************************************/
+	private function init_mean_of_payment() {
+		$this->current_meanofpayment = filter_input( INPUT_GET, 'meanofpayment' );
+		if ( empty( $this->current_meanofpayment ) ) {
+			$this->current_meanofpayment = WDGInvestment::$meanofpayment_card;
+		}
+	}
+	
 	private function init_current_investment() {
 		$this->current_investment = WDGInvestment::current();
 	}
@@ -62,6 +83,41 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 	
 	public function is_preinvestment() {
 		return ( $this->current_campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote );
+	}
+	
+	private function init_maximum_investable_amount() {
+		$amount_wallet = 0;
+		if ( $this->current_investment->get_session_user_type() != 'user' ) {
+			$WDGInvestorEntity = new WDGOrganization( $this->current_investment->get_session_user_type() );
+			if ( $this->current_meanofpayment == WDGInvestment::$meanofpayment_cardwallet ) {
+				$amount_wallet = $WDGInvestorEntity->get_available_rois_amount();
+			}
+
+		} else {
+			$WDGInvestorEntity = WDGUser::current();
+			if ( $this->current_meanofpayment == WDGInvestment::$meanofpayment_cardwallet ) {
+				$amount_wallet = $WDGInvestorEntity->get_lemonway_wallet_amount();
+			}
+		}
+		$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGInvestorEntity );
+		$this->maximum_investable_amount = $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert() + $amount_wallet;
+	}
+	
+	public function get_maximum_investable_amount() {
+		return $this->maximum_investable_amount;
+	}
+	
+	public function get_remaining_amount_to_invest() {
+		return ( $this->current_investment->get_session_amount() - $this->get_maximum_investable_amount() );
+	}
+	
+	private function init_need_two_contracts() {
+		$amount_part = $this->current_investment->get_session_amount();
+		$this->need_two_contracts = ( $amount_part > $this->maximum_investable_amount );
+	}
+	
+	public function needs_two_contracts() {
+		return $this->need_two_contracts;
 	}
 	
 /******************************************************************************/
@@ -75,18 +131,41 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 	}
 	
 /******************************************************************************/
+// FORM
+/******************************************************************************/
+	private function init_identitydocs_form() {
+		if ( $this->needs_two_contracts() ) {
+			$WDGCurrent_User = WDGUser::current();
+			$is_orga = $this->get_current_investment()->get_session_user_type() != 'user';
+			$this->form_user_identity_docs = new WDG_Form_User_Identity_Docs( $is_orga ? $this->get_current_investment()->get_session_user_type() : $WDGCurrent_User->get_wpref(), $is_orga );
+			$action_posted = filter_input( INPUT_POST, 'action' );
+			if ( $action_posted == WDG_Form_User_Identity_Docs::$name ) {
+				$this->form_user_identity_docs_feedback = $this->form_user_identity_docs->postForm();
+				if ( empty( $this->form_user_identity_docs_feedback[ 'errors' ] ) ) {
+					wp_redirect( $this->get_success_next_link() );
+				}
+			}
+		}
+	}
+	
+	public function get_identitydocs_form() {
+		return $this->form_user_identity_docs;
+	}
+	
+	public function get_identitydocs_form_feedback() {
+		return $this->form_user_identity_docs_feedback;
+	}
+	
+/******************************************************************************/
 // CURRENT MEAN OF PAYMENT RETURN
 /******************************************************************************/
 	private function init_payment_result() {
-		$this->current_meanofpayment = filter_input( INPUT_GET, 'meanofpayment' );
-		if ( empty( $this->current_meanofpayment ) ) {
-			$this->current_meanofpayment = WDGInvestment::$meanofpayment_card;
-		}
 		$payment_return = $this->current_investment->payment_return( $this->current_meanofpayment );
 		if ( empty( $payment_return ) ) {
 			$payment_return = 'error-contact';
 		}
 		$this->current_view = $this->current_meanofpayment . '-' . $payment_return;
+		ypcf_debug_log( 'paiement-effectue > init_payment_result --- $this->current_view :: ' .$this->current_view );
 	}
 	
 	public function get_current_view() {
@@ -122,7 +201,7 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		if ( $this->current_investment->has_token() ) {
 			$buffer = $this->current_investment->get_redirection( 'error', 'investpending' );
 		} else {
-			$buffer = home_url( '/paiement-partager' ). '?campaign_id=' .$this->current_campaign->ID;
+			$buffer = home_url( '/paiement-partager/' ). '?campaign_id=' .$this->current_campaign->ID;
 		}
 		return $buffer;
 	}
@@ -132,13 +211,13 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		if ( $this->current_investment->has_token() ) {
 			$buffer = $this->current_investment->get_redirection( 'success', $this->current_investment->get_token() );
 		} else {
-			$buffer = home_url( '/paiement-partager' ). '?campaign_id=' .$this->current_campaign->ID;
+			$buffer = home_url( '/paiement-partager/' ). '?campaign_id=' .$this->current_campaign->ID;
 		}
 		return $buffer;
 	}
 	
 	public function get_restart_link() {
-		return home_url( '/investir' ). '?campaign_id=' .$this->current_campaign->ID. '&invest_start=1';
+		return home_url( '/investir/' ). '?campaign_id=' .$this->current_campaign->ID. '&invest_start=1';
 	}
 	
 	public function get_error_link() {
@@ -153,7 +232,7 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		$buffer = '';
 		$error_item = $this->current_investment->get_error_item();
 		if ( isset( $error_item ) && $error_item->ask_restart() ) {
-			$buffer = home_url( '/investir' ). '?campaign_id=' .$this->current_campaign->ID. '&invest_start=1';
+			$buffer = home_url( '/investir/' ). '?campaign_id=' .$this->current_campaign->ID. '&invest_start=1';
 		}
 		return $buffer;
 	}

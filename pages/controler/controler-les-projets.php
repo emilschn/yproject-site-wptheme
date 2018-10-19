@@ -4,13 +4,7 @@ $template_engine->set_controler( new WDG_Page_Controler_ProjectList() );
 
 class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	
-	private $slider;
-	
-	private static $nb_query_campaign_funded = 40;
-	private static $stats_html_key = 'projectlist-projects-stats';
-	private static $stats_html_duration = 86400; // 24 heures de cache
-	private static $stats_html_version = 2;
-	private $stats_html;
+	private $slider_list = array();
 	private $stats_list;
 	
 	private static $filters_html_key = 'projectlist-filters';
@@ -35,6 +29,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		parent::__construct();
 		date_default_timezone_set("Europe/London");
 		define( 'SKIP_BASIC_HTML', TRUE );
+		wp_enqueue_script( 'wdg-slideshow', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/js/slideshow.js', array( 'jquery' ), ASSETS_VERSION );
 		$this->prepare_slider();
 		$this->prepare_stats();
 		$this->prepare_filters();
@@ -46,65 +41,50 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 // SLIDER
 /******************************************************************************/
 	private function prepare_slider() {
-		$list_projects = ATCF_Campaign::get_list_most_recent( 3 );
-		$this->slider = array();
-		foreach ( $list_projects as $project_id ) {
-			$campaign = atcf_get_campaign( $project_id );
-			$img = $campaign->get_home_picture_src( TRUE, 'large' );
-			array_push( $this->slider, array(
-					'img'	=> $img,
-					'title'	=> $campaign->data->post_title,
-					'link'	=> get_permalink( $project_id )
-				)
-			);
-		}
+		$db_cacher = WDG_Cache_Plugin::current();
+		$slider = $db_cacher->get_cache( WDG_Cache_Plugin::$slider_key, WDG_Cache_Plugin::$slider_version );
+
+		if (!$slider) {
+			$this->slider_list = WDG_Cache_Plugin::initialize_most_recent_projects();
+		} else {
+			$slider_array = json_decode( $slider, true );
+			for ( $i = 0 ; $i < 3 ; $i++ ) {
+				$img = $slider_array[$i]['img'];
+				$title = $slider_array[$i]['title'];
+				$link = $slider_array[$i]['link'];
+			
+				array_push( $this->slider_list, array(
+						'img'	=> $img,
+						'title'	=> $title,
+						'link'	=> $link
+					)
+				);
+			}	
+		}	
 	}
 	
 	public function get_slider() {
-		return $this->slider;
+		return $this->slider_list;
 	}
 	
 /******************************************************************************/
 // PROJECT STATS
 /******************************************************************************/
 	private function prepare_stats() {
-		$this->stats_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$stats_html_key, WDG_Page_Controler_ProjectList::$stats_html_version );
-		if ( empty( $this->stats_html ) ) {
-			$project_list_funded = ATCF_Campaign::get_list_funded( WDG_Page_Controler_ProjectList::$nb_query_campaign_funded, '', true );
-			$count_amount = 0;
-			$people_list = array();
-			$count_projects = 0;
-			$count_roi = 0;
-			foreach ( $project_list_funded as $project_post ) {
-				$count_projects++;
-				$campaign = atcf_get_campaign( $project_post->ID );
-				$backers_id_list = $campaign->backers_id_list();
-				$people_list = array_merge( $people_list, $backers_id_list );
-				$count_amount += $campaign->current_amount( false );
-				$declaration_list = $campaign->get_roi_declarations();
-				foreach ( $declaration_list as $declaration ) {
-					$count_roi += $declaration[ 'total_roi_with_adjustment' ];
-				}
-			}
-			$people_list_unique = array_unique( $people_list );
-			$count_people = count( $people_list_unique );
-			$count_roi = floor( $count_roi );
+		$db_cacher = WDG_Cache_Plugin::current();
+		$stats = $db_cacher->get_cache( WDG_Cache_Plugin::$stats_key, WDG_Cache_Plugin::$stats_version );
+
+		if (!$stats) {
+			$this->stats_list = WDG_Cache_Plugin::initialize_home_stats();
+		} else {
+			$stats_array = json_decode($stats, true);
 			$this->stats_list = array(
-				'count_amount'	=> $count_amount,
-				'count_people'	=> $count_people,
-				'nb_projects'	=> count($project_list_funded),
-				'count_roi'		=> $count_roi
+				'count_amount'	=> $stats_array['count_amount'],
+				'count_people'	=> $stats_array['count_people'],
+				'nb_projects'	=> $stats_array['nb_projects'],
+				'count_roi'		=> $stats_array['count_roi']
 			);
 		}
-	}
-	
-	public function get_stats_html() {
-		return $this->stats_html;
-	}
-	
-	public function set_stats_html( $html ) {
-		$this->stats_html = $html;
-		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$stats_html_key, $html, WDG_Page_Controler_ProjectList::$stats_html_duration, WDG_Page_Controler_ProjectList::$stats_html_version );
 	}
 	
 	public function get_stats_list() {
@@ -130,7 +110,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 			$this->filters_list[ 'regions' ] = atcf_get_regions();
 
 			$this->filters_list[ 'status' ] = array(
-				'vote'		=> __( "En vote", 'yproject' ),
+				'vote'		=> __( "En &eacute;valuation", 'yproject' ),
 				'collecte'	=> __( "En financement", 'yproject' ),
 				'funded'	=> __( "Financ&eacute;", 'yproject' )	
 			);
@@ -188,9 +168,17 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 // FUNDED PROJECTS
 /******************************************************************************/
 	private function prepare_fundedprojects() {
+		$nb_key = ceil( WDG_Cache_Plugin::$nb_query_campaign_funded / 5 );
 		$this->fundedprojects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
 		if ( empty( $this->fundedprojects_html ) ) {
-			$this->fundedprojects_list = ATCF_Campaign::get_list_funded( WDG_Page_Controler_ProjectList::$nb_query_campaign_funded );
+			$this->fundedprojects_html = '';
+			$this->fundedprojects_list = ATCF_Campaign::get_list_funded( WDG_Cache_Plugin::$nb_query_campaign_funded );
+			
+		} else {
+			$this->fundedprojects_html = '';
+			for ( $i = 1; $i <= $nb_key; $i++ ) {
+				$this->fundedprojects_html .= $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key. '_' .$i, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
+			}
 		}
 	}
 	
@@ -198,9 +186,10 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		return $this->fundedprojects_html;
 	}
 	
-	public function set_fundedprojects_html( $html ) {
-		$this->fundedprojects_html = $html;
-		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key, $html, WDG_Page_Controler_ProjectList::$fundedprojects_html_duration, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
+	public function set_fundedprojects_html( $html, $index ) {
+		$this->fundedprojects_html .= $html;
+		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key, '1', WDG_Page_Controler_ProjectList::$fundedprojects_html_duration, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
+		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key. '_' .$index, $html, WDG_Page_Controler_ProjectList::$fundedprojects_html_duration, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
 	}
 	
 	public function get_fundedprojects_list() {

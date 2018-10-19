@@ -7,6 +7,7 @@ class WDG_Page_Controler {
 	private $page_meta_keywords;
 	private $show_user_details_confirmation;
 	private $show_user_pending_preinvestment;
+	private $show_user_needs_authentication;
 	
 	public function __construct() {
 		ypcf_session_start();
@@ -21,6 +22,7 @@ class WDG_Page_Controler {
 		if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
 			$this->init_show_user_pending_preinvestment();
 			$this->init_show_user_details_confirmation();
+			$this->init_show_user_needs_authentication();
 		}
 	}
 	
@@ -109,6 +111,14 @@ class WDG_Page_Controler {
 		return ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' );
 	}
 	
+	/**
+	 * 
+	 */
+	public function get_display_link_account() {
+		global $post;
+		return ( is_home() || is_front_page() || $post->post_name == 'les-projets' || $post->post_name == 'investissement' || $post->post_name == 'financement' );
+	}
+	
 	
 //******************************************************************************
 	/**
@@ -119,9 +129,9 @@ class WDG_Page_Controler {
 			$this->show_user_details_confirmation = false;
 			if ( !$this->get_show_user_pending_preinvestment() && is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
 				$WDG_user_current = WDGUser::current();
-				$user_details_confirmation = $WDG_user_current->get_show_details_confirmation();
-				if ( $user_details_confirmation ) {
-					$this->show_user_details_confirmation = new WDG_Form_User_Details( $WDG_user_current->get_wpref(), $user_details_confirmation );
+				$user_details_confirmation_type = $WDG_user_current->get_show_details_confirmation();
+				if ( $user_details_confirmation_type ) {
+					$this->show_user_details_confirmation = new WDG_Form_User_Details( $WDG_user_current->get_wpref(), $user_details_confirmation_type );
 					$WDG_user_current->update_last_details_confirmation();
 				}
 			}
@@ -159,6 +169,23 @@ class WDG_Page_Controler {
 	
 	public function get_show_user_pending_preinvestment() {
 		return $this->show_user_pending_preinvestment;
+	}
+	
+	
+//******************************************************************************
+	public function init_show_user_needs_authentication() {
+		if ( !isset( $this->show_user_needs_authentication ) ) {
+			$this->show_user_needs_authentication = false;
+			global $post;
+			if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' && $post->post_name != 'mon-compte' ) {
+				$WDG_user_current = WDGUser::current();
+				$this->show_user_needs_authentication = !$WDG_user_current->is_lemonway_registered();
+			}
+		}
+	}
+	
+	public function get_show_user_needs_authentication() {
+		return $this->show_user_needs_authentication;
 	}
 	
 }

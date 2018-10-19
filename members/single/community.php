@@ -1,5 +1,5 @@
 <div class="right">
-	<a href="<?php echo home_url('/creer-une-organisation'); ?>" class="button right">Cr&eacute;er une organisation</a>
+	<a href="<?php echo home_url('/creer-une-organisation/'); ?>" class="button right">Cr&eacute;er une organisation</a>
 </div>
 <br /><br />
 

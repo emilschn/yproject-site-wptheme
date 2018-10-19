@@ -10,8 +10,8 @@ function UserAccountDashboard() {
 UserAccountDashboard.prototype.initWithHash = function() {
 
 	var sCurrentTab = window.location.hash.substring(1);
-	if (sCurrentTab !== '') {
-		this.switchTab( sCurrentTab );
+	if ( sCurrentTab !== '' ) {
+		this.switchTab( sCurrentTab, false );
 	}
 	
 };
@@ -24,16 +24,26 @@ UserAccountDashboard.prototype.initMenu = function() {
 	var self = this;
 	$( 'ul.nav-menu li a' ).each( function() {
 		$( this ).click( function() {
-			self.switchTab( $( this ).data( 'tab' ) );
+			self.switchTab( $( this ).data( 'tab' ), this );
 		} );
 	} );
+	$( 'a.go-to-tab' ).each( function() {
+		$( this ).click( function() {
+			self.switchTab( $( this ).data( 'tab' ), this );
+		} );
+	} );
+	if ( $( '#modify-iban' ).length > 0 ) {
+		$( '#modify-iban' ).click( function() {
+			$( '#form-modify-iban' ).toggle( 100 );
+		} );
+	}
 	
 };
 
 /**
  * Change d'onglet
  */
-UserAccountDashboard.prototype.switchTab = function(sType) {
+UserAccountDashboard.prototype.switchTab = function( sType, clickedElement ) {
 	
 	$( 'ul.nav-menu li' ).removeClass( 'selected' );
 	$( 'div#item-body > div.item-body-tab' ).hide();

@@ -38,9 +38,9 @@
 		<?php if ( empty( $hidecookiealert ) ): ?>
 		<div id="cookies-alert" class="bg-dark-gray aligncenter">
 			<?php if ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' ): ?>
-			<?php _e( "En poursuivant votre navigation sur WE DO GOOD.co, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
+			<?php _e( "En poursuivant votre navigation sur WE DO GOOD.co, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu/' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
 			<?php else: ?>
-			<?php _e( "En poursuivant votre navigation, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
+			<?php _e( "En poursuivant votre navigation, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu/' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
 			<?php endif; ?>
 			
 			<button id="cookies-alert-close" class="red"><?php _e( "OK", 'yproject' ); ?></button>
@@ -50,7 +50,7 @@
 		<?php wp_footer(); ?>
 
 		<?php if (!WP_IS_DEV_SITE): ?>
-		<script type="text/javascript">$crisp=[];CRISP_WEBSITE_ID="b294206e-d4da-4d31-98c1-2581ca4fe2a9";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.im/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+		<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/1860698.js"></script>
 		<?php endif; ?>
 	
 	</body>

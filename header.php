@@ -16,18 +16,6 @@
 		}
 	}
 	
-	if ( $page_controler->get_header_nav_visible() ){
-		$projects_searchable = array();
-		$cache_projects_searchable = $WDG_cache_plugin->get_cache('ATCF_Campaign::list_projects_searchable', 2);
-		if ($cache_projects_searchable !== FALSE) { $projects_searchable = json_decode($cache_projects_searchable); }
-		else {
-			$projects_searchable = ATCF_Campaign::list_projects_searchable();
-			$projects_searchable_encoded = json_encode($projects_searchable);
-			$WDG_cache_plugin->set_cache('ATCF_Campaign::list_projects_searchable', $projects_searchable_encoded, 60*60*3, 2); //MAJ 3h
-		}
-	}
-	
-	
 	wp_reset_query();
 ?>
 <!DOCTYPE html>
@@ -65,6 +53,7 @@
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="<?php echo $page_controler->get_page_description(); ?>" />
+		<meta name="google-site-verification" content="GKtZACFMpEC-1TO9ox4c85RJgfWRm7gNv4c0QrNKYgM" />
 		
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
@@ -81,7 +70,7 @@
 		//FIN CACHE HEAD
 		//*******************
 		?>
-		<?php if (!is_user_logged_in()): ?>
+		<?php if ( !is_user_logged_in() && $post->post_name == 'inscription' ): ?>
 		<script src='https://www.google.com/recaptcha/api.js'></script>
 		<?php endif; ?>
 
@@ -113,14 +102,16 @@
 		<nav id="main">
 			<div id="menu">
 				<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
-				<a href="<?php echo home_url( '/les-projets' ); ?>" class="lines"><?php _e( "Les projets", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/financement' ); ?>" class="lines"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/investissement' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/vision' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/les-projets/' ); ?>" class="lines"><?php _e( "Les projets", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/financement/' ); ?>" class="lines"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/investissement/' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/a-propos/vision/' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
                                 
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
 				<?php if (is_user_logged_in()): ?>
-				<a href="#" class="btn-user connected"><?php UIHelpers::print_user_avatar($WDGUser_current->wp_user->ID, 'icon'); ?></a>				
+				<a href="#" class="btn-user connected <?php if ( $page_controler->get_show_user_needs_authentication() ): ?>needs-authentication<?php endif; ?>"><?php UIHelpers::print_user_avatar($WDGUser_current->wp_user->ID, 'icon'); ?></a>				
+				<?php elseif ( $page_controler->get_display_link_account() ): ?>
+				<a href="<?php echo home_url( 'mon-compte' ); ?>" class="btn-user not-connected"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
 				<?php else: ?>
 				<a href="#" class="btn-user not-connected inactive"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
 				<?php endif; ?>
@@ -130,17 +121,14 @@
 				<?php /* Affichage quand clic sur Rechercher */ ?>
 				<div id="submenu-search" class="submenu-style hidden">
 					<div class="only-inf997">
-						<a href="<?php echo home_url( '/les-projets' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/financement' ); ?>"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/investissement' ); ?>"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/vision' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/les-projets/' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/financement/' ); ?>"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/investissement/' ); ?>"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/a-propos/vision/' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
 					</div>
 					
 					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher un projet", 'yproject'); ?>" />
 					<ul class="submenu-list">
-						<?php foreach ($projects_searchable as $project_post): ?>
-						<li class="hidden"><a href="<?php echo get_permalink( $project_post->ID ); ?>"><?php echo $project_post->post_title; ?><span class="hidden"><?php echo $project_post->post_name; ?></span></a></li>
-						<?php endforeach; ?>
 					</ul>
 				</div>
 
@@ -149,11 +137,11 @@
 					<?php /* Au clic picto Compte, afficher menu utilisateur */ ?>
 					<?php global $current_user; get_currentuserinfo();
 					$user_name_str = ($current_user->user_firstname != '') ? $current_user->user_firstname : $current_user->user_login;
-					$page_dashboard = home_url( '/tableau-de-bord' );
+					$page_dashboard = home_url( '/tableau-de-bord/' );
 					?>
 					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
 					<ul class="submenu-list">
-						<li><a href="<?php echo home_url( '/mon-compte' ); ?>"><?php _e("Mon compte", 'yproject'); ?></a></li>
+						<li><a href="<?php echo home_url( '/mon-compte/' ); ?>" <?php if ( $page_controler->get_show_user_needs_authentication() ): ?>class="needs-authentication"<?php endif; ?>><?php _e("Mon compte", 'yproject'); ?></a></li>
 						
 						<?php foreach ($project_list as $project_id): if (!empty($project_id)): $post_campaign = get_post($project_id); if (isset($post_campaign)): ?>
 							<li><a href="<?php echo $page_dashboard . '?campaign_id=' .$project_id; ?>"><?php echo $post_campaign->post_title; ?></a></li>
@@ -169,23 +157,15 @@
 				<?php else: ?>
 				<div id="submenu-user" class="not-connected submenu-style hidden">
 					<?php /* Au clic picto Compte, afficher menu connexion */ ?>
-					<div class="box_connection_buttons red">
-						<a href="#register" class="wdg-button-lightbox-open" data-lightbox="register"><span><?php _e('Cr&eacute;er un compte', 'yproject'); ?></span></a>
+					<div class="only-inf997">
+						<a href="<?php echo home_url( '/connexion/' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Connexion", 'yproject' ); ?></span></a>
 					</div>
-
-					<div class="box_connection_buttons blue">
-						<a href="#" class="social_connect_login_facebook"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
-					</div>
-					<div class="social_connect_login_facebook_loading align-center hidden">
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
-					</div>
-
-					<hr style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; border-color: -moz-use-text-color; border-image: none; border-right: 0 none; border-style: solid none none; border-width: 2px 0 0; color: #000000; margin: 5% 5%;"/>
-
-					<form method="post" action="<?php echo home_url( "/connexion" ); ?>" name="login-form" class="sidebar-login-form model-form">
+					
+					<form method="post" action="<?php echo home_url( "/connexion/" ); ?>" name="login-form" class="sidebar-login-form model-form hidden-inf997">
+						<br>
 						<span id="title-connection"><?php _e('Connexion', 'yproject'); ?></span>
-						<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('Identifiant ou e-mail', 'yproject'); ?>" value="" />
-						<br />
+						<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('E-mail ou identifiant', 'yproject'); ?>" value="" />
+						<br>
 
 						<input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
 						<div class="submit-center" style="display: none;">             
@@ -196,15 +176,29 @@
 
 						<div>
 							<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-							<a href="<?php echo get_permalink($page_forgotten->ID); ?>"><?php _e('(Mot de passe oubli&eacute;)', 'yproject');?></a>
+							<a href="<?php echo get_permalink($page_forgotten->ID); ?>" class="forgotten"><?php _e('(Mot de passe oubli&eacute;)', 'yproject');?></a>
 						</div>
 
 						<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
 						<label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
-						<br />
-						<br />
+						<br><br>
 					</form>
-				</div>
+					
+					<hr class="login-separator">
+
+					<div class="box_connection_buttons blue">
+						<a href="#" class="social_connect_login_facebook" data-redirect="<?php echo WDGUser::get_login_redirect_page(); ?>"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
+					</div>
+					<div class="social_connect_login_facebook_loading align-center hidden">
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
+					</div>
+					
+					<hr class="login-separator">
+
+					<div>
+						<a href="<?php echo home_url( '/inscription/' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Cr&eacute;er un compte", 'yproject' ); ?></span></a>
+					</div>
+					
 				<?php endif; ?>
 				
 			</div>
@@ -233,10 +227,6 @@
 		<?php endif; ?>
 
 		<?php if (!is_user_logged_in()): ?>
-			<?php echo do_shortcode('[yproject_register_lightbox]'); ?>
-			<?php if ( !isset( $post->post_name ) || $post->post_name != 'connexion' ): ?>
-			<?php echo do_shortcode('[yproject_connexion_lightbox]'); ?>
-			<?php endif; ?>
 		
 		<?php elseif (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)): ?>
 			<?php $_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; ?>
@@ -263,7 +253,7 @@
 			<div class="timeout-lightbox wdg-lightbox">
 				<div class="wdg-lightbox-click-catcher"></div>
 				<div class="wdg-lightbox-padder">
-					<p class="wdg-lightbox-msg-info"><?php _e("Votre inscription a bien été prise en compte!", 'yproject'); ?></p>
+					<p class="wdg-lightbox-msg-info"><?php _e("Votre inscription a bien &eacute;t&eacute; prise en compte !", 'yproject'); ?></p>
 				</div>
 			</div>
 		<?php endif; ?>

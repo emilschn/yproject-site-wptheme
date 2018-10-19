@@ -19,7 +19,7 @@ if (!is_user_logged_in()) {
 	    
 		<div class="center margin-height">
 			
-			&lt;&lt; <a href="<?php echo home_url('/mon-compte'); ?>">Mon compte</a><br /><br />
+			&lt;&lt; <a href="<?php echo home_url('/mon-compte/'); ?>">Mon compte</a><br /><br />
 			
 			<?php
 			//Demande de renvoi de code
@@ -169,7 +169,7 @@ if (!is_user_logged_in()) {
 								wp_insert_post( $withdrawal_post );
 
 								?>
-								La transaction est en cours. Vous pourrez suivre son &eacute;volution sur <a href="<?php echo home_url('/mon-compte'); ?>">votre compte</a>.
+								La transaction est en cours. Vous pourrez suivre son &eacute;volution sur <a href="<?php echo home_url('/mon-compte/'); ?>">votre compte</a>.
 								<?php
 							}
 
