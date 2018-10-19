@@ -4,7 +4,8 @@ $campaign_id = $campaign->ID;
 $page_invest = get_page_by_path('investir');
 $campaign_status = $campaign->campaign_status();
 $funding_duration = $campaign->funding_duration();
-$funding_duration_str = ( $funding_duration == 0 ) ? __( "ind&eacute;termin&eacute;e", 'yproject' ) : $funding_duration. " " .__( "ans", 'yproject' );
+$funding_duration_str = ( $funding_duration == 0 ) ? __( "une dur&eacute;e ind&eacute;termin&eacute;e", 'yproject' ) : $funding_duration. " " .__( "ans", 'yproject' );
+$funding_duration_str_2 = ( $funding_duration == 0 ) ? '5 ' .__( "ans", 'yproject' ) : $funding_duration. " " .__( "ans", 'yproject' );
 $firstpayment_date = new DateTime( $campaign->first_payment_date() );
 $firstpayment_year = $firstpayment_date->format( 'Y' );
 $estimated_turnover = $campaign->estimated_turnover();
@@ -63,16 +64,15 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 					</div>
 
 					<div class="field">
-						<label for="init_invest"><?php _e( "Je recevrai", 'yproject' ); ?></label>
+						<label for="init_invest"><?php _e( "Je recevrais :", 'yproject' ); ?></label>
 						<div class="field-container">
 							<?php $complementary_text = '.'; ?>
 							<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
 								<?php $complementary_text = __( " (pourcentage indicatif).", 'yproject' ); ?>
 							<?php endif; ?>
-							<span class="roi_percent_user">0</span> % <?php _e( "du chiffre d'affaires de ce projet", 'yproject' ); echo $complementary_text; ?><br />
-							<?php _e("Soit", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro;* </span><?php _e( "selon", 'yproject' ); ?>
-							<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet", 'yproject' )?></a>
-							<?php _e( "r&eacute;partis de la mani&egrave;re suivante :", 'yproject' ); ?>
+							<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires de ce projet pendant", 'yproject' ) . ' ' .$funding_duration_str. $complementary_text; ?><br>
+							<?php _e("Soit", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro; </span><?php _e( "(brut) selon", 'yproject' ); ?>
+							<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet", 'yproject' )?></a> :
 						</div>
 					</div>
 
@@ -81,12 +81,15 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 					<div>
 						<table>
 							<tr>
+								<td>
+									<?php _e( "Ann&eacute;e" ); ?>
+								</td>
 								<?php $index = 0; $max_turnover = max( max($estimated_turnover), 1 ); ?>
 								<?php foreach ($estimated_turnover as $i => $value): ?>
 								<?php $height = 100 - round($value / $max_turnover * 100); ?>
 								<td>
 									<div><div style="height: <?php echo $height; ?>%;"><span class="roi_amount_user_container"><span class="roi_amount_user<?php echo $index; ?>">0</span> &euro;</span></div></div>
-									Ann&eacute;e <?php echo ( $index + 1 ); ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $value; ?></span>
+									<?php echo ( $index + 1 ); ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $value; ?></span>
 								</td>
 								<?php $index++; endforeach; ?>
 							</tr>
@@ -99,64 +102,32 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 				<?php endif; ?>
 
 				<div>
-					<ul>
-						<li>
-							<strong><?php _e( "Royalties :", 'yproject' ); ?></strong>
-							<span><?php echo $campaign->roi_percent_estimated(); ?> % <?php echo ( $funding_duration == 0 ) ? __( "au moins", 'yproject' ) : ""; ?></span> <?php _e( "du chiffre d'affaires pour", 'yproject' ); ?>
-							<?php echo $campaign->goal( true ); ?> <?php _e( "d'investissement", 'yproject' ); ?>
-						</li>
-						<li>
-							<strong><?php _e( "Rendement vis&eacute; :", 'yproject' ); ?></strong>
-							+ <span><span class="roi_percent_total">...</span> %</span>* <?php echo __( "en", 'yproject' ). ' '. $funding_duration. ' ' .__( "ans", 'yproject' ); ?>
-							(<?php _e( "soit", 'yproject' ); ?> <span>x<span class="roi_ratio_on_total">...</span>*</span> <?php echo __( "en", 'yproject' ). ' '. $funding_duration. ' ' .__( "ans", 'yproject' ); ?>)
-						</li>
-						<li>
-							<strong><?php _e( "Versements :", 'yproject' ); ?></strong>
-							<?php _e( "trimestriels", 'yproject' ); ?>
-						</li>
-						<li>
-							<strong><?php _e( "Dur&eacute;e :", 'yproject' ); ?></strong>
-							<span><?php echo $funding_duration_str; ?></span>, <?php _e( "&agrave; compter du" ); ?> <span><?php echo $firstpayment_date->format( 'd/m/Y' ); ?></span>
-						</li>
-						<li>
-							<strong><?php _e( "Rachat possible par le porteur de projet :", 'yproject' ); ?></strong>
-							<?php if ( $campaign->maximum_profit() == 'infinite' ): ?>
-								<?php _e( "Maximum entre 2 fois le montant de l'investissement initial et 5 fois le montant des royalties de l'ann&eacute;e &eacute;coul&eacute;e", 'yproject' ); ?>
-							<?php else: ?>
-								<?php _e( "1 fois le montant de l'investissement initial", 'yproject' ); ?>
-							<?php endif; ?>
-						</li>
-					</ul>
+					<strong><?php _e( "Retour sur investissement vis&eacute; :", 'yproject' ); ?></strong><br>
+					+ <span><span class="roi_percent_total">...</span> %</span> <?php echo __( "de votre investissement initial en", 'yproject' ). ' ' .$funding_duration_str_2; ?><br>
+					(<?php _e( "soit", 'yproject' ); ?> <span>x<span class="roi_ratio_on_total">...</span></span> <?php echo __( "votre investissement initial en", 'yproject' ). ' ' .$funding_duration_str_2; ?>)
 				</div>
 					
 				
 				<div class="project-rewards-alert">
-					<?php echo sprintf( __("Risque de perte int&eacute;grale de l&apos;investissement. Gain maximum : %s.", "yproject"), $maximum_profit_str ); ?><br>
-					* <?php _e( "Imposition non comprise : Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30% sur le b&eacute;n&eacute;fice r&eacute;alis&eacute;." ); ?>
+					<?php echo sprintf( __("Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s.", "yproject"), $maximum_profit_str ); ?><br>
+					* <?php _e( "Imposition : Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30% sur le b&eacute;n&eacute;fice r&eacute;alis&eacute;." ); ?>
 				</div>
 
 			<?php if ($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
 				<?php if (is_user_logged_in()): ?>
 					<div class="align-center">
 						<br />
-						<input type="submit" value="<?php _e("Investir", "yproject"); ?>" class="button red" />
+						<button type="submit" class="button red"><?php _e("Investir", "yproject"); ?></button>
 						<input type="hidden" name="campaign_id" value="<?php echo $campaign_id; ?>" />
 						<input type="hidden" name="invest_start" value="1" />
 					</div>
 				</form>
 				<?php else: ?>
-					<?php
-					$page_invest = home_url( '/investir' );
-					$campaign_id_param = '?campaign_id=' . $campaign->ID;
-					$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
-					?>
 					<div class="align-center">
-						<br />
-						<button class="button red wdg-button-lightbox-open" data-lightbox="connexion" 
-								data-redirect="<?php echo $invest_url; ?>"><?php _e( "Investir", 'yproject' ); ?></button>
+						<a href="<?php echo home_url( '/connexion' ); ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
 					</div>
 				<?php endif; ?>
-				<br />
+				<br>
 			<?php endif; ?>
 	    </div>
 	    
