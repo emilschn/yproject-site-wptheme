@@ -7,22 +7,23 @@ $fields_newsletters = $WDGUserNotificationsForm->getFields( WDG_Form_User_Notifi
 $fields_projects = $WDGUserNotificationsForm->getFields( WDG_Form_User_Notifications::$field_group_projects );
 ?>
 
+<h2><?php _e( "Notifications en provenance de WE DO GOOD", 'yproject' ); ?></h2>
+
 <form method="POST" enctype="multipart/form-data" class="db-form v3 full form-register">
-	<h2><?php _e( "Notifications en provenance de WE DO GOOD", 'yproject' ); ?></h2>
 
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
 		
-	<h3 class="align-left uppercase"><?php _e( "Newsletters", 'yproject' ); ?></h3>
+	<h3><?php _e( "Newsletters", 'yproject' ); ?></h3>
 
 	<?php foreach ( $fields_newsletters as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
 		
-	<h3 class="align-left uppercase"><?php _e( "Projets suivis", 'yproject' ); ?></h3>
+	<h3><?php _e( "Projets suivis", 'yproject' ); ?></h3>
 
 	<?php foreach ( $fields_projects as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
