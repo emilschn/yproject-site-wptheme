@@ -16,6 +16,7 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 		<li id="menu-item-identitydocs"><a href="#identitydocs" data-tab="identitydocs"><?php _e( "Mes justificatifs d'identit&eacute;", 'yproject' ); ?></a></li>
 		<li id="menu-item-bank"><a href="#bank" data-tab="bank"><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></a></li>
 		<li id="menu-item-authentication"><a href="#authentication" data-tab="authentication" <?php if ( !$WDGUser_displayed->is_lemonway_registered() ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Mon authentification", 'yproject' ); ?></a></li>
+		<li id="menu-item-notifications"><a href="#notifications" data-tab="notifications"><?php _e( "Mes notifications", 'yproject' ); ?></a></li>
 	</ul>
 	
 	<?php if ( count( $list_current_organizations ) > 0 ): ?>
