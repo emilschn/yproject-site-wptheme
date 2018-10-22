@@ -85,7 +85,7 @@ var WDGProjectViewer = (function($) {
 			$("button.init_invest_count").click(function(e) {
 				e.preventDefault();
 			});
-			$("input.init_invest").change(function() {
+			$("input#init_invest").change(function() {
 				if ($(".project-rewards-padder div.hidden").length > 0) {
 					$(".project-rewards-padder div.hidden").show();
 					

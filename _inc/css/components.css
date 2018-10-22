@@ -1278,19 +1278,9 @@ div.project-rewards-content div.project-rewards-padder div.arrow-end {
 	border-left: 14px solid #333;
 	border-bottom: 6px solid transparent;
 }
-div.project-rewards-content div.project-rewards-alert {
-	text-align: center;
-}
 div.project-rewards-content div.project-rewards-alert span.small-alert {
 	font-style: italic;
 	font-size: 11px;
-}
-div.project-rewards-content .button.red {
-	display: inline-block;
-	width: 230px;
-	padding: 20px 80px;
-	font-size: 12pt;
-	font-weight: bold;
 }
 
 /*******************************************************************************
