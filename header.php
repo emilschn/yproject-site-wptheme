@@ -41,14 +41,6 @@
 			endif; ?>
 		<?php endif; ?>
 		
-		<?php
-		//*******************
-		//CACHE HEAD
-		$cache_head = $WDG_cache_plugin->get_cache('html-head', 2);
-		if ($cache_head !== FALSE) { echo $cache_head; }
-		else {
-			ob_start();
-		?>
 		<link href="https://plus.google.com/+WedogoodCo" rel="publisher" />
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,15 +53,7 @@
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.min.css?d=<?php echo ASSETS_VERSION; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=<?php echo ASSETS_VERSION; ?>" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-		<?php
-			$cache_head = ob_get_contents();
-			$WDG_cache_plugin->set_cache('html-head', $cache_head, 60*60*24, 1);
-			ob_end_clean();
-			echo $cache_head;
-		}
-		//FIN CACHE HEAD
-		//*******************
-		?>
+		
 		<?php if ( !is_user_logged_in() && $post->post_name == 'inscription' ): ?>
 		<script src='https://www.google.com/recaptcha/api.js'></script>
 		<?php endif; ?>
