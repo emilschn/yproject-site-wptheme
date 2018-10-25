@@ -217,7 +217,6 @@ class WDG_WordPress_Events {
 	 */
 	public static function user_register( $user_id ) {
 		$user = get_userdata( $user_id );
-		WDGPostActions::subscribe_newsletter_sendinblue( $user->user_email );
 	}
 	
 	/**

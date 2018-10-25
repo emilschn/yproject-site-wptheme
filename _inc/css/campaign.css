@@ -504,9 +504,9 @@ div#content.version-3 div.project-timeline span.selected {
 *******************************************************************************/
 div#content.version-3 div.project-rewards-content {
 	max-width: 580px;
-	margin: 0px auto;
+	margin: 0px auto 40px;
 	padding: 0px;
-	font-size: 14px;
+	font-size: 15px;
 }
 div#content.version-3 div.project-rewards-content .db-form {
 	text-align: left;
@@ -555,6 +555,9 @@ div#content.version-3 div.project-rewards-content table tr:first-child {
 div#content.version-3 div.project-rewards-content table tr td {
     min-width: 75px;
     text-align: center;
+}
+div#content.version-3 div.project-rewards-content table tr td:nth-child(1) {
+    vertical-align: bottom;
 }
 div#content.version-3 div.project-rewards-content table tr td > div {
 	margin: auto;

@@ -12,7 +12,7 @@ $declaration_message = $declaration->get_message();
 
 	<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration ): ?>
 		<form action="" method="POST" id="turnover-declaration"
-				data-roi-percent="<?php echo $page_controler->get_campaign()->roi_percent(); ?>"
+				data-roi-percent="<?php echo $page_controler->get_campaign()->roi_percent_remaining(); ?>"
 				data-costs-orga="<?php echo $page_controler->get_campaign()->get_costs_to_organization(); ?>"
 				data-adjustment="<?php echo $declaration->get_adjustment_value(); ?>">
 			<?php if ($nb_fields > 1): ?>
@@ -80,7 +80,7 @@ $declaration_message = $declaration->get_message();
 
 		<b>Total de chiffre d'affaires déclaré : </b><?php echo UIHelpers::format_number( $declaration->get_turnover_total() ); ?> &euro; HT<br /><br />
 
-		<b>Total du versement : </b><?php echo UIHelpers::format_number( $declaration->amount ); ?> &euro; (<?php echo UIHelpers::format_number( $page_controler->get_campaign()->roi_percent() ); ?> %)<br />
+		<b>Total du versement : </b><?php echo UIHelpers::format_number( $declaration->amount ); ?> &euro; (<?php echo UIHelpers::format_number( $page_controler->get_campaign()->roi_percent_remaining() ); ?> %)<br />
 		<?php if ( $declaration->get_adjustment_validated() ): ?>
 			<b>Ajustement : </b><?php echo UIHelpers::format_number( $declaration->get_adjustment_value() ); ?> &euro;<br />
 		<?php endif; ?>
@@ -180,7 +180,7 @@ $declaration_message = $declaration->get_message();
 
 		<b>Total de chiffre d'affaires déclaré : </b><?php echo UIHelpers::format_number( $declaration->get_turnover_total() ); ?> &euro;<br /><br />
 
-		<b>Total du versement : </b><?php echo UIHelpers::format_number( $declaration->amount ); ?> &euro; (<?php echo UIHelpers::format_number( $page_controler->get_campaign()->roi_percent() ); ?> %)<br />
+		<b>Total du versement : </b><?php echo UIHelpers::format_number( $declaration->amount ); ?> &euro; (<?php echo UIHelpers::format_number( $page_controler->get_campaign()->roi_percent_remaining() ); ?> %)<br />
 		<?php if ( $declaration->get_adjustment_validated() ): ?>
 			<b>Ajustement : </b><?php echo UIHelpers::format_number( $declaration->get_adjustment_value() ); ?> &euro;<br />
 		<?php endif; ?>
@@ -277,7 +277,7 @@ $declaration_message = $declaration->get_message();
 
 		<b>Total de chiffre d'affaires déclaré : </b><?php echo UIHelpers::format_number( $declaration->get_turnover_total() ); ?> &euro;<br /><br />
 
-		<b>Total du versement : </b><?php echo UIHelpers::format_number( $declaration->amount ); ?> &euro; (<?php echo UIHelpers::format_number( $page_controler->get_campaign()->roi_percent() ); ?> %)<br />
+		<b>Total du versement : </b><?php echo UIHelpers::format_number( $declaration->amount ); ?> &euro;<br />
 		<?php if ( $declaration->get_adjustment_validated() ): ?>
 			<b>Ajustement : </b><?php echo UIHelpers::format_number( $declaration->get_adjustment_value() ); ?> &euro;<br />
 		<?php endif; ?>

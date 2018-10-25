@@ -43,7 +43,7 @@ global $can_modify, $disable_logs, $campaign_id, $campaign, $post_campaign, $WDG
 
 	<?php if ( $is_admin ): ?>
 	<form id="form-declaration-adjustment" class="db-form" data-action="save_declaration_adjustment"
-			data-roi-percent="<?php echo $campaign->roi_percent(); ?>"
+			data-roi-percent="<?php echo $campaign->roi_percent_remaining(); ?>"
 			data-costs-orga="<?php echo $campaign->get_costs_to_organization(); ?>">
 		<div class="field admin-theme">
 

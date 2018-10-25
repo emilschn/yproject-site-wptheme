@@ -90,8 +90,9 @@ if ( !empty( $saved_mandates_list ) ) {
 				<form method="POST" action="<?php echo admin_url( 'admin-post.php?action=declaration_auto_generate'); ?>" class="align-center admin-theme-block">
 					
 					<br />
-					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
-					<input type="hidden" name="month_count" value="3" />
+					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>">
+					<input type="hidden" name="month_count" value="3">
+					Nombre de déclarations (ne rien préciser si procédure normale) : <input type="text" name="declarations_count"><br>
 					<button type="submit" class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer les &eacute;ch&eacute;ances manquantes", 'yproject' ); ?></button>
 					<br /><br />
 

@@ -40,6 +40,10 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 			<div id="item-body-authentication" class="item-body-tab hidden">
 				<?php locate_template( array( 'pages/view/mon-compte/content-authentication.php' ), true ); ?>
 			</div>
+
+			<div id="item-body-notifications" class="item-body-tab hidden">
+				<?php locate_template( array( 'pages/view/mon-compte/content-user-notifications.php' ), true ); ?>
+			</div>
 			
 			<?php if ( count( $list_current_organizations ) > 0 ): ?>
 				<?php global $WDGOrganization; ?>

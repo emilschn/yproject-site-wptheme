@@ -90,6 +90,25 @@ YPUIFunctions = (function($) {
 					$('#submenu-search-input').focus();
 					$('.btn-user').removeClass('active').addClass('inactive');
 					$('#submenu-user').hide();
+					
+					if ( $( '#submenu-search ul.submenu-list li' ).length == 0 ) {
+						$.ajax({
+							'type' : "POST",
+							'url' : ajax_object.ajax_url,
+							'data': {
+								'action':'get_searchable_projects_list'
+							}
+							
+						}).done(function(result){
+							var aProjectList = JSON.parse( result );
+							var nProjects = aProjectList.length;
+							for ( var i = 0; i < nProjects; i++ ) {
+								$( '#submenu-search ul.submenu-list' ).append(
+									'<li class="hidden"><a href="https://www.wedogood.co/'+aProjectList[i].post_name+'">'+aProjectList[i].post_title+'<span class="hidden">'+aProjectList[i].post_title+'</span></a></li>'
+								);
+							}
+						});
+					}
 				}
 			});
 			$("#submenu-search-input").keyup(function() {
@@ -687,12 +706,12 @@ var WDGLightboxFunctions = (function($) {
 				});
 				
 				$('#newproject_form input#new-company-name').val(" ");
-				$('#newproject_form input#new-company-name').parent().parent().parent().hide();
+				$('#newproject_form div#field-new-company-name').hide();
 				if($('#newproject_form input#company-name').val() === ""){
 					$('#newproject_form #project-name').val("");
 				}
-				$('#newproject_form #company-name').on("keyup change", function() {
-					$('#newproject_form input#new-company-name').parent().parent().parent().hide();
+				$('#newproject_form #select-company-name').on("keyup change", function() {
+					$('#newproject_form div#field-new-company-name').hide();
 					var val = "";
 					if($('#newproject_form input#company-name').length > 0 && $('#newproject_form input#company-name').val() !== "" ) {
 						val = $('#newproject_form input#company-name').val();
@@ -708,7 +727,7 @@ var WDGLightboxFunctions = (function($) {
 							} else {
 								$('#newproject_form input#new-company-name').val("");
 								$('#newproject_form #project-name').val('');
-								$('#newproject_form input#new-company-name').parent().parent().parent().show();
+								$('#newproject_form div#field-new-company-name').show();
 								$('#newproject_form input#new-company-name').on("keyup change", function() {
 									var val = $('#newproject_form input#new-company-name').val();
 									if (val!="") {

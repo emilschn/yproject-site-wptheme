@@ -88,6 +88,7 @@ $funding_stats = $funding['stats']; // statistiques supplémentaires
 
 	<script>
 	  var tab = 'levee-de-fonds';
+	  var fundingData = '<?php echo json_encode( $funding ); ?>';
 	</script>
 
 </div>

@@ -8,8 +8,11 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		parent::__construct();
 		$this->hourly_call();
 		$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
+		$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
 		if ( $this->is_daily_call_time() || $input_force_daily_call == '1' ) {
 			$this->daily_call();
+		} else if ( $this->is_summary_call_time() || $input_force_summary_call == '1' ) {
+			$this->summary_call();
 		}
 		
 	}
@@ -39,6 +42,67 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		$saved_date = new DateTime( $last_daily_call );
 		if ( $last_daily_call == FALSE || $saved_date->diff($date_now)->days >= 1 ) {
 			update_option( 'last_daily_call', $date_now->format( 'Y-m-d H:i:s' ) );
+			$buffer = TRUE;
+		}
+		return $buffer;
+	}
+	
+	private function summary_call() {
+		$params = array();
+		$params[ 'vote' ] = array();
+		$project_list_vote = ATCF_Campaign::get_list_vote();
+		foreach ( $project_list_vote as $project_post ) {
+			$campaign = new ATCF_Campaign( $project_post->ID );
+			$vote_results = WDGCampaignVotes::get_results( $project_post->ID );
+			$item = array();
+			$item[ 'name' ] = $campaign->get_name();
+			$item[ 'min_goal' ] = $campaign->minimum_goal();
+			$item[ 'nb_votes' ] = $campaign->nb_voters();
+			$item[ 'value_intent' ] = $vote_results[ 'sum_invest_ready' ];
+			$item[ 'nb_preinvestment' ] = $vote_results[ 'count_preinvestments' ];
+			$item[ 'value_preinvestment' ] = $vote_results[ 'amount_preinvestments' ];
+			array_push( $params[ 'vote' ], $item );
+		}
+		
+		$params[ 'funding' ] = array();
+		$project_list_funding = ATCF_Campaign::get_list_funding();
+		foreach ( $project_list_funding as $project_post ) {
+			$campaign = new ATCF_Campaign( $project_post->ID );
+			$investment_results = WDGCampaignInvestments::get_list( $project_post->ID );
+			$item = array();
+			$item[ 'name' ] = $campaign->get_name();
+			$item[ 'min_goal' ] = $campaign->minimum_goal();
+			$item[ 'nb_invest' ] = $campaign->backers_count();
+			$item[ 'value_invest' ] = $campaign->current_amount( false );
+			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
+			array_push( $params[ 'funding' ], $item );
+		}
+		
+		
+		$params[ 'hidden' ] = array();
+		$project_list_hidden = ATCF_Campaign::get_list_current_hidden( ATCF_Campaign::$campaign_status_collecte );
+		foreach ( $project_list_hidden as $project_post ) {
+			$campaign = new ATCF_Campaign( $project_post->ID );
+			$investment_results = WDGCampaignInvestments::get_list( $project_post->ID );
+			$item = array();
+			$item[ 'name' ] = $campaign->get_name();
+			$item[ 'min_goal' ] = $campaign->minimum_goal();
+			$item[ 'nb_invest' ] = $campaign->backers_count();
+			$item[ 'value_invest' ] = $campaign->current_amount( false );
+			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
+			array_push( $params[ 'hidden' ], $item );
+		}
+		
+		NotificationsSlack::send_update_summary_current_projects( $params );
+	}
+	
+	private function is_summary_call_time() {
+		$buffer = FALSE;
+		$date_now = new DateTime();
+		$last_summary_call = get_option( 'last_summary_call' );
+		$saved_date = new DateTime( $last_summary_call );
+		if ( $last_summary_call == FALSE || $saved_date->diff($date_now)->h >= 12 ) {
+			update_option( 'last_summary_call', $date_now->format( 'Y-m-d H:i:s' ) );
 			$buffer = TRUE;
 		}
 		return $buffer;

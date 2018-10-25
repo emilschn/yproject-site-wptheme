@@ -67,13 +67,13 @@ for ($i = 0; $i < $nb_fields; $i++) {
 	<td>
 		<?php if ( $declaration->get_status() != WDGROIDeclaration::$status_declaration ): ?>
 			<?php
-			$amount = $declaration->get_amount_with_commission();
+			$amount = $declaration->get_amount_with_adjustment();
 			$commission = $declaration->get_commission_to_pay();
 			?>
 			<?php echo UIHelpers::format_number( $amount ); ?> &euro;
 			<?php if ( $commission > 0 ): ?>
 				<br />
-				(dont commission : <?php echo UIHelpers::format_number( $commission ); ?> &euro;)
+				(+ commission : <?php echo UIHelpers::format_number( $commission ); ?> &euro;)
 			<?php endif; ?>
 		<?php endif; ?>
 	</td>

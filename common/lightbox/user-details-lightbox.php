@@ -17,23 +17,21 @@ $fields_complete = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field
 		
 		<?php foreach ( $fields_hidden as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php locate_template( array( "common/forms/field.php" ), true, false ); ?>
 		<?php endforeach; ?>
 		
 		<span class="form-error-general"></span>
-			
-		<h3><?php _e( "Confirmez vos informations", 'yproject' ); ?></h3>
 		
 		<?php foreach ( $fields_basics as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php locate_template( array( "common/forms/field.php" ), true, false ); ?>
 		<?php endforeach; ?>
 		
 		<?php if ( !empty( $fields_complete ) ): ?>
-		<?php foreach ( $fields_complete as $field ): ?>
-			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
-		<?php endforeach; ?>
+			<?php foreach ( $fields_complete as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false ); ?>
+			<?php endforeach; ?>
 		<?php endif; ?>
 		
 		

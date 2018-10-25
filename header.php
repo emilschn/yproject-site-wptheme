@@ -16,41 +16,6 @@
 		}
 	}
 	
-	if ( $page_controler->get_header_nav_visible() ){
-		$projects_searchable = array();
-		$cache_projects_searchable = $WDG_cache_plugin->get_cache( 'ATCF_Campaign::list_projects_searchable_1', 3 );
-		if ( $cache_projects_searchable !== FALSE ) {
-			$projects_searchable = json_decode( $cache_projects_searchable );
-			$index = 2;
-			$cache_projects_searchable = $WDG_cache_plugin->get_cache( 'ATCF_Campaign::list_projects_searchable_' .$index, 3 );
-			while ( $cache_projects_searchable != FALSE ) {
-				$temp_projects_searchable = json_decode( $cache_projects_searchable );
-				$projects_searchable = array_merge( $projects_searchable, $temp_projects_searchable );
-				$index++;
-				$cache_projects_searchable = $WDG_cache_plugin->get_cache( 'ATCF_Campaign::list_projects_searchable_' .$index, 3 );
-			}
-			
-		} else {
-			$projects_searchable = ATCF_Campaign::list_projects_searchable();
-			$count_projects_searchable = count( $projects_searchable );
-			$index = 1;
-			$list_to_cache = array();
-			for ( $i = 0; $i < $count_projects_searchable; $i++ ) {
-				array_push( $list_to_cache, $projects_searchable[ $i ] );
-				if ( $i % 10 == 0 ) {
-					$projects_searchable_encoded = json_encode( $list_to_cache );
-					$WDG_cache_plugin->set_cache( 'ATCF_Campaign::list_projects_searchable_' .$index, $projects_searchable_encoded, 60 * 60 * 3, 3 ); //MAJ 3h
-					$index++;
-					$list_to_cache = array();
-				}
-			}
-			// Sauvegarde des restants
-			$projects_searchable_encoded = json_encode( $list_to_cache );
-			$WDG_cache_plugin->set_cache( 'ATCF_Campaign::list_projects_searchable_' .$index, $projects_searchable_encoded, 60 * 60 * 3, 3 ); //MAJ 3h
-		}
-	}
-	
-	
 	wp_reset_query();
 ?>
 <!DOCTYPE html>
@@ -76,14 +41,6 @@
 			endif; ?>
 		<?php endif; ?>
 		
-		<?php
-		//*******************
-		//CACHE HEAD
-		$cache_head = $WDG_cache_plugin->get_cache('html-head', 2);
-		if ($cache_head !== FALSE) { echo $cache_head; }
-		else {
-			ob_start();
-		?>
 		<link href="https://plus.google.com/+WedogoodCo" rel="publisher" />
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -96,15 +53,7 @@
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.min.css?d=<?php echo ASSETS_VERSION; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=<?php echo ASSETS_VERSION; ?>" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-		<?php
-			$cache_head = ob_get_contents();
-			$WDG_cache_plugin->set_cache('html-head', $cache_head, 60*60*24, 1);
-			ob_end_clean();
-			echo $cache_head;
-		}
-		//FIN CACHE HEAD
-		//*******************
-		?>
+		
 		<?php if ( !is_user_logged_in() && $post->post_name == 'inscription' ): ?>
 		<script src='https://www.google.com/recaptcha/api.js'></script>
 		<?php endif; ?>
@@ -164,9 +113,6 @@
 					
 					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher un projet", 'yproject'); ?>" />
 					<ul class="submenu-list">
-						<?php foreach ($projects_searchable as $project_post): ?>
-						<li class="hidden"><a href="<?php echo get_permalink( $project_post->ID ); ?>"><?php echo $project_post->post_title; ?><span class="hidden"><?php echo $project_post->post_name; ?></span></a></li>
-						<?php endforeach; ?>
 					</ul>
 				</div>
 
