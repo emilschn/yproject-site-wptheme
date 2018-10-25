@@ -23,6 +23,7 @@ class YPShortcodeManager {
 		'wdg_project_investment_link',
 		'wdg_project_progress_bar',
 		'wdg_project_royalties_simulator',
+		'wdg_royalties_simulator',
 		'wdg_page_breadcrumb',
 		'wdg_footer_banner_link'
 	);
@@ -300,6 +301,75 @@ class YPShortcodeManager {
 		<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/wdg-campaign.js?d=<?php echo ASSETS_VERSION; ?>"></script>
 		<?php
 		locate_template( array( 'projects/single/rewards.php' ), true );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
+	}
+	
+	function wdg_royalties_simulator( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'title_1'					=> __( "MON PR&Eacute;VISIONNEL :", 'yproject' ),
+			'description_1'				=> __( "Indiquez votre chiffre d&apos;affaires pr&eacute;visionnel sur le nombre d&apos;ann&eacute;es souhait&eacute;es.", 'yproject' ),
+			'title_2'					=> __( "MON BESOIN DE FINANCEMENT :", 'yproject' ),
+			'description_2'				=> __( "Indiquez le montant maximum que vous souhaitez lever et les royalties &agrave; reverser correspondantes.", 'yproject' ),
+			'goal_label'				=> __( "Montant maximum &agrave; lever", 'yproject' ),
+			'button_label'				=> __( "Calculer", 'yproject' ),
+			'percent_royalties_advice_1'	=> __( "Nous vous conseillons de verser", 'yproject' ),
+			'percent_royalties_advice_2'	=> __( "% de votre CA &agrave; vos investisseurs.", 'yproject' )
+		), $atts );
+		
+		global $stylesheet_directory_uri;
+		
+		ob_start();
+		?>
+		
+		<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/wdg-royalties-simulator.js?d=<?php echo ASSETS_VERSION; ?>"></script>
+		
+		<form id="royalties-simulator" class="db-form form-register v3 full center bg-white">
+			<h3><?php echo $atts[ 'title_1' ]; ?></h3>
+			<span><?php echo $atts[ 'description_1' ]; ?></span>
+			<br><br>
+			
+			<?php for ( $i = 1; $i <= 5; $i++ ): ?>
+			<div id="field-year-<?php echo $i; ?>" class="field field-text">
+				<label for="year-<?php echo $i; ?>"><?php _e( "Ann&eacute;e ", 'yproject' ); ?><?php echo $i; ?></label>
+				<span class="field-error"></span><br>
+				<div class="field-container">
+					<span class="field-value">
+						<input type="text" name="year-<?php echo $i; ?>" id="year-<?php echo $i; ?>">
+					</span>
+				</div>
+			</div>
+			<?php endfor; ?>
+			
+			<h3><?php echo $atts[ 'title_2' ]; ?></h3>
+			<span><?php echo $atts[ 'description_2' ]; ?></span>
+			<br><br>
+			
+			<div id="field-goal" class="field field-text">
+				<label for="goal"><?php echo $atts[ 'goal_label' ]; ?></label>
+				<span class="field-error"></span><br>
+				<div class="field-container">
+					<span class="field-value">
+						<input type="text" name="goal" id="goal">
+					</span>
+				</div>
+			</div>
+			
+			<button class="button blue"><?php echo $atts[ 'button_label' ]; ?></button>
+			<br><br>
+			
+			<span class="form-error-general hidden"><?php _e( "Il y a des erreurs dans les donn&eacute;es saisies.", 'yproject' ); ?></span>
+			
+			<span id="royalties_advice" class="hidden">
+				<?php echo $atts[ 'percent_royalties_advice_1' ]; ?>
+				<span class="royalties_advice_value"></span>
+				<?php echo $atts[ 'percent_royalties_advice_2' ]; ?>
+			</span>
+		</form>
+		
+		<?php
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		
