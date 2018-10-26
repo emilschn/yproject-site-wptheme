@@ -188,13 +188,14 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/a-propos/equipe/'					=> '0.2',
 			'/a-propos/recrutement/'			=> '0.2',
 			// 0.1
-			'/cgu/'								=> '0.1',
 			'/placement-royalties/'				=> '0.1',
 			'/a-propos/'						=> '0.1',
-			'/confidentialite/'					=> '0.1',
+			'/a-propos/cgu/'					=> '0.1',
+			'/a-propos/cgu/conditions-particulieres/'				=> '0.1',
+			'/a-propos/cgu/confidentialite/'	=> '0.1',
+			'/a-propos/cgu/mentions-legales/'	=> '0.1',
+			'/a-propos/cgu/reclamations/'		=> '0.1',
 			'/love-money/'						=> '0.1',
-			'/mentions-legales/'				=> '0.1',
-			'/reclamations/'					=> '0.1',
 			
 		);
 		
