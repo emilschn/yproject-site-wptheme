@@ -349,6 +349,14 @@ WDGCampaignDashboard.prototype.switchTab = function(sType) {
 	$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
 	$( 'div#item-body > div#item-body-' + sType ).show();
 	
+	// Mise à jour des datatables pour éviter les décalages de header
+	if ( sType == 'royalties' && this.walletTimetableDatatable != undefined ) {
+		this.walletTimetableDatatable.draw();
+	}
+	if ( sType == 'contacts' && this.table != undefined ) {
+		this.table.draw();
+	}
+	
 	this.scrollTo( $( '#item-body' ) );
 	
 };
@@ -1446,7 +1454,6 @@ WDGCampaignDashboard.prototype.refreshTurnoverAmountToPay = function() {
 };
 
 WDGCampaignDashboard.prototype.refreshAjustmentAmountToPay = function() {
-	console.log( 'change' );
 	var roiPercent = $( '#form-declaration-adjustment' ).data( 'roi-percent' );
 	var costsOrga = $( '#form-declaration-adjustment' ).data( 'costs-orga' );
 	var total = Number( $( '#new_declaration_adjustment_turnover_difference' ).val() );
