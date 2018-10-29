@@ -1296,3 +1296,12 @@ span.advice-news  {
     text-decoration: underline;
 }
 
+/*******************************************************************************
+* SHORTCODES - ROYALTIES SIMULATOR
+*******************************************************************************/
+#royalties_advice {
+	font-weight: bold;
+}
+#royalties_advice .royalties_advice_value {
+	color: #93626D;
+}
