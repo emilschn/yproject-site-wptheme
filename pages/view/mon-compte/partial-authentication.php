@@ -104,14 +104,14 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 						<?php if ( $can_register_lemonway ): ?>
 							<a href="#orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>" class="button blue go-to-tab" data-tab="orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Informations de<br>l'organisation", 'yproject' ); ?></a>
 						<?php else: ?>
-							<a href="#orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>" class="button red go-to-tab" data-tab="orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Informations de<br>l'organisation", 'yproject' ); ?></a>
+							<a href="#orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>" class="button red go-to-tab needs-authentication needs-authentication-parameters" data-tab="orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Informations de<br>l'organisation", 'yproject' ); ?></a>
 						<?php endif; ?>
 					</td>
 					<td class="align-center">
 						<?php if ( $is_lemonway_registered ): ?>
 							<a href="#orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>" class="button blue go-to-tab" data-tab="orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Justificatifs<br>d'identification", 'yproject' ); ?></a>
 						<?php else: ?>
-							<a href="#orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>" class="button red go-to-tab" data-tab="orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Justificatifs<br>d'identification", 'yproject' ); ?></a>
+							<a href="#orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>" class="button red go-to-tab <?php if ( $can_register_lemonway ){ echo 'needs-authentication'; } ?>" data-tab="orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Justificatifs<br>d'identification", 'yproject' ); ?></a>
 						<?php endif; ?>
 					</td>
 					
@@ -120,14 +120,14 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 						<?php if ( $can_register_lemonway ): ?>
 							<a href="#parameters" class="button blue go-to-tab" data-tab="parameters"><?php _e( "Mes informations<br>personnelles", 'yproject' ); ?></a>
 						<?php else: ?>
-							<a href="#parameters" class="button red go-to-tab" data-tab="parameters"><?php _e( "Mes informations<br>personnelles", 'yproject' ); ?></a>
+							<a href="#parameters" class="button red go-to-tab needs-authentication needs-authentication-parameters" data-tab="parameters"><?php _e( "Mes informations<br>personnelles", 'yproject' ); ?></a>
 						<?php endif; ?>
 					</td>
 					<td class="align-center">
 						<?php if ( $is_lemonway_registered ): ?>
 							<a href="#identitydocs" class="button blue go-to-tab" data-tab="identitydocs"><?php _e( "Mes justificatifs<br>d'identit&eacute;", 'yproject' ); ?></a>
 						<?php else: ?>
-							<a href="#identitydocs" class="button red go-to-tab" data-tab="identitydocs"><?php _e( "Mes justificatifs<br>d'identit&eacute;", 'yproject' ); ?></a>
+							<a href="#identitydocs" class="button red go-to-tab <?php if ( $can_register_lemonway ){ echo 'needs-authentication'; } ?>" data-tab="identitydocs"><?php _e( "Mes justificatifs<br>d'identit&eacute;", 'yproject' ); ?></a>
 						<?php endif; ?>
 					</td>
 				<?php endif; ?>

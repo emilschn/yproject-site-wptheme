@@ -15,7 +15,7 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 		<li id="menu-item-parameters"><a href="#parameters" data-tab="parameters"><?php _e( "Mes informations personnelles", 'yproject' ); ?></a></li>
 		<li id="menu-item-identitydocs"><a href="#identitydocs" data-tab="identitydocs"><?php _e( "Mes justificatifs d'identit&eacute;", 'yproject' ); ?></a></li>
 		<li id="menu-item-bank"><a href="#bank" data-tab="bank"><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></a></li>
-		<li id="menu-item-authentication"><a href="#authentication" data-tab="authentication" <?php if ( !$WDGUser_displayed->is_lemonway_registered() ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Mon authentification", 'yproject' ); ?></a></li>
+		<li id="menu-item-authentication"><a href="#authentication" data-tab="authentication" <?php if ( !$WDGUser_displayed->is_lemonway_registered() && !$page_controler->has_user_project_list() ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Mon authentification", 'yproject' ); ?></a></li>
 		<li id="menu-item-notifications"><a href="#notifications" data-tab="notifications"><?php _e( "Mes notifications", 'yproject' ); ?></a></li>
 	</ul>
 	
@@ -40,7 +40,7 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 		<?php $project_list = $page_controler->get_user_project_list(); ?>
 		<?php foreach ( $project_list as $project ): ?>
 
-			<li><a href="<?php echo $project[ 'link' ]; ?>"><?php echo $project[ 'name' ]; ?></a></li>
+			<li><a href="<?php echo $project[ 'link' ]; ?>" <?php if ( !$project[ 'authentified' ] ): ?>class="needs-authentication"<?php endif; ?>><?php echo $project[ 'name' ]; ?></a></li>
 
 		<?php endforeach; ?>
 		</ul>

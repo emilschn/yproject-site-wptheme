@@ -308,21 +308,30 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		if (have_posts()) {
 			while (have_posts()) {
 				the_post();
+				$campaign = new ATCF_Campaign( get_the_ID() );
+				$campaign_organization = $campaign->get_organization();
+				$WDGOrganization = new WDGOrganization( $campaign_organization->wpref );
 				$project = array(
 					'link'	=> home_url( '/tableau-de-bord/' ) . '?campaign_id=' . get_the_ID(),
-					'name'	=> get_the_title()
+					'name'	=> get_the_title(),
+					'authentified'	=> $WDGOrganization->is_registered_lemonway_wallet()
 				);
 				array_push( $this->user_project_list, $project );
 			}
 		}
+		wp_reset_query();
 		
 		$api_user_id = $this->current_user->get_api_id();
 		$project_list = WDGWPREST_Entity_User::get_projects_by_role( $api_user_id, WDGWPREST_Entity_Project::$link_user_type_team );
 		if ( !empty( $project_list ) ) {
 			foreach ($project_list as $project) {
+				$campaign = new ATCF_Campaign( $project->wpref );
+				$campaign_organization = $campaign->get_organization();
+				$WDGOrganization = new WDGOrganization( $campaign_organization->wpref );
 				$project = array(
 					'link'	=> home_url( '/tableau-de-bord/' ) . '?campaign_id=' . $project->wpref,
-					'name'	=> $project->name
+					'name'	=> $project->name,
+					'authentified'	=> $WDGOrganization->is_registered_lemonway_wallet()
 				);
 				array_push( $this->user_project_list, $project );
 			}
