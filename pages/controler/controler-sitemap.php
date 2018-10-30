@@ -57,6 +57,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item = array();
 			$item[ 'name' ] = $campaign->get_name();
 			$item[ 'min_goal' ] = $campaign->minimum_goal();
+			$item[ 'time_remaining' ] = $campaign->time_remaining_str();
 			$item[ 'nb_votes' ] = $campaign->nb_voters();
 			$item[ 'value_intent' ] = $vote_results[ 'sum_invest_ready' ];
 			$item[ 'nb_preinvestment' ] = $vote_results[ 'count_preinvestments' ];
@@ -72,6 +73,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item = array();
 			$item[ 'name' ] = $campaign->get_name();
 			$item[ 'min_goal' ] = $campaign->minimum_goal();
+			$item[ 'time_remaining' ] = $campaign->time_remaining_str();
 			$item[ 'nb_invest' ] = $campaign->backers_count();
 			$item[ 'value_invest' ] = $campaign->current_amount( false );
 			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
@@ -87,6 +89,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item = array();
 			$item[ 'name' ] = $campaign->get_name();
 			$item[ 'min_goal' ] = $campaign->minimum_goal();
+			$item[ 'time_remaining' ] = $campaign->time_remaining_str();
 			$item[ 'nb_invest' ] = $campaign->backers_count();
 			$item[ 'value_invest' ] = $campaign->current_amount( false );
 			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
