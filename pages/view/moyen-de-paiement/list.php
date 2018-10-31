@@ -40,7 +40,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<span><?php _e( "D&eacute;bit imm&eacute;diat, remboursement int&eacute;gral si la campagne &eacute;choue.", 'yproject' ); ?></span>
 					<?php if ( $page_controler->display_card_amount_alert() ): ?>
 					<br>
-					<span class="errors"><?php _e( "Le montant que vous souhaitez investir risque de d&eacute;passer le plafond de paiement de votre carte. Si vous avez un message d'erreur, contactez votre banque pour augmenter votre plafond de paiement par carte ou choisissez un autre mode de paiement.", 'yproject' ); ?></span>
+					<span><?php _e( "Attention : le montant que vous souhaitez investir risque de d&eacute;passer le plafond de paiement de votre carte. Si vous avez un message d'erreur, contactez votre banque pour augmenter votre plafond de paiement par carte ou choisissez un autre mode de paiement.", 'yproject' ); ?></span>
 					<?php endif; ?>
 				</div>
 			</a>
@@ -90,7 +90,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-cheque.png" alt="<?php _e("Ch&egrave;que", 'yproject'); ?>" width="120">
 				<span>
 					<span class="mean-payment-name"><?php _e( "Ch&egrave;que", 'yproject' ); ?></span><br>
-					<span><?php echo sprintf( __( "Les paiements par ch&egrave;ques sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement", 'yproject' ), ATCF_Campaign::$invest_amount_min_check ); ?></span>
+					<span><?php echo sprintf( __( "Les paiements par ch&egrave;que sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement. L'authentification de votre compte ne sera n&eacute;cessaire qu'apr&egrave;s le 1er versement de royalties. Vous pouvez par ailleurs n&eacute;gocier la date d'encaissement du ch&egrave;que avec le porteur de projet.", 'yproject' ), ATCF_Campaign::$invest_amount_min_check ); ?></span>
 				</span>
 			</p>
 		<?php endif; ?>
