@@ -61,7 +61,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Virement bancaire", 'yproject' ); ?>" width="120">
 				<div>
 					<span class="mean-payment-name"><?php _e( "Virement bancaire", 'yproject' ); ?></span><br>
-					<span><?php _e( "Une copie de votre pi&egrave;ce d'identit&eacute; et un justificatif de domicile seront n&eacute;cessaires", 'yproject' ); ?></span>
+					<span><?php _e( "Le virement n'est d&eacute;finitivement pris en compte que lors de l'authentification de votre compte par notre prestataire de paiement. Une copie de votre pi&egrave;ce d'identit&eacute; et un justificatif de domicile seront n&eacute;cessaires", 'yproject' ); ?></span>
 				</div>
 			</a>
 		
