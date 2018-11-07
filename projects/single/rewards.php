@@ -72,7 +72,11 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 							<?php endif; ?>
 							<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires de ce projet pendant", 'yproject' ) . ' ' .$funding_duration_str. $complementary_text; ?><br>
 							<?php _e("Soit", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro; </span><?php _e( "(brut) selon", 'yproject' ); ?>
-							<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet", 'yproject' )?></a> :
+							<?php if ( empty( $is_simulator_shortcode ) ): ?>
+								<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet", 'yproject' )?></a> :
+							<?php else: ?>
+								<?php _e( "les pr&eacute;visions du porteur de projet", 'yproject' )?> :
+							<?php endif; ?>
 						</div>
 					</div>
 
