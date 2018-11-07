@@ -13,6 +13,7 @@ $declaration_message = $declaration->get_message();
 	<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration ): ?>
 		<form action="" method="POST" id="turnover-declaration"
 				data-roi-percent="<?php echo $page_controler->get_campaign()->roi_percent_remaining(); ?>"
+				data-minimum-costs="<?php echo $page_controler->get_campaign()->get_minimum_costs_to_organization(); ?>"
 				data-costs-orga="<?php echo $page_controler->get_campaign()->get_costs_to_organization(); ?>"
 				data-adjustment="<?php echo $declaration->get_adjustment_value(); ?>">
 			<?php if ($nb_fields > 1): ?>
@@ -38,8 +39,9 @@ $declaration_message = $declaration->get_message();
 				<?php echo $declaration->get_adjustment_message( 'author' ); ?><br /><br />
 			<?php endif; ?>
 
-			Montant à régler : <strong><span class="amount-to-pay"><?php echo $declaration->get_adjustment_value(); ?></span> &euro;</strong>.
-			<br /><br />
+			Montant à régler : <strong><span class="amount-to-pay"><?php echo $declaration->get_adjustment_value(); ?></span> &euro;</strong><br>
+			dont commission : <strong><span class="commission-to-pay">0</span> &euro;</strong><br>
+			<br>
 
 			<?php _e("Informez vos investisseurs de l'&eacute;tat d'avancement de votre projet et de votre chiffre d'affaires, ", 'yproject'); ?>
 			<?php _e("et exprimez-leur clairement quels sont vos enjeux du moment.", 'yproject'); ?>

@@ -180,6 +180,14 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				"admin_theme"	=> true
 			));
 			DashboardUtility::create_field(array(
+				"id"			=> "new_minimum_costs_to_organization",
+				"type"			=> "text-money",
+				"label"			=> "Montant minimum TTC des frais appliqués au PP",
+				"value"			=> $page_controler->get_campaign()->get_minimum_costs_to_organization(),
+				"editable"		=> $page_controler->can_access_admin(),
+				"admin_theme"	=> true
+			));
+			DashboardUtility::create_field(array(
 				"id"			=> "new_costs_to_organization",
 				"type"			=> "text-percent",
 				"label"			=> "Pourcentage de frais appliqués au PP",
