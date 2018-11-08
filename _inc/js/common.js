@@ -674,6 +674,7 @@ var WDGLightboxFunctions = (function($) {
 				var nTimeout = 2000;
 				if ($(".timeout-lightbox").data("duration") > 0) nTimeout = $(".timeout-lightbox").data("duration");
 				setTimeout(function() { $(".timeout-lightbox").fadeOut(); }, nTimeout);
+				$( '.timeout-lightbox .wdg-lightbox-padder' ).click( function() { $( this ).parent().hide() } );
 			}
 
 
