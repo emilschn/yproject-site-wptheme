@@ -7,6 +7,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $campaign_id;
 	private $campaign_url;
 	private $campaign_stats;
+	private $campaign_contracts_url;
 	private $can_access;
 	private $can_access_admin;
 	private $can_access_author;
@@ -104,6 +105,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->can_access_admin = FALSE;
 		$this->can_access_author = FALSE;
 		$this->campaign_id = filter_input(INPUT_GET, 'campaign_id');
+		$this->campaign_contracts_url = FALSE;
 		
 		if ( !empty( $this->campaign_id ) && is_user_logged_in() ) {
 			$this->current_user = WDGUser::current();
@@ -115,6 +117,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			$this->can_access_author = ( $this->author_user->get_wpref() == $this->current_user->get_wpref() );
 			$campaign_organization_item = $this->campaign->get_organization();
 			$this->campaign_organization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+			
+			if ( file_exists( __DIR__ . '/../../../../plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->get_url() . '.zip' ) ) {
+				$this->campaign_contracts_url = home_url( 'wp-content/plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->get_url() . '.zip' );
+			}
 		}
 	}
 	public function get_campaign_id() {
@@ -137,6 +143,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	}
 	public function get_campaign_url() {
 		return $this->campaign_url;
+	}
+	public function get_campaign_contracts_url() {
+		return $this->campaign_contracts_url;
 	}
 	
 /******************************************************************************/

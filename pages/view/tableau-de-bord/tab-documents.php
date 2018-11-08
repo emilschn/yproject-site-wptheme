@@ -13,8 +13,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php endif; ?>
 	<br><br>
 	
-	<?php if ( $page_controler->can_access_admin() ): ?>
-		<?php if ( $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+	<?php if ( $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+		
+		<?php if ( $page_controler->can_access_admin() ): ?>
 
 			<?php $campaign_bill = new WDGCampaignBill( $page_controler->get_campaign(), WDGCampaignBill::$tool_name_quickbooks, WDGCampaignBill::$bill_type_crowdfunding_commission ); ?>
 			<?php if ( $campaign_bill->can_generate() ): ?>
@@ -40,12 +41,29 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				Avez-vous vérifié que l'identifiant Quickbooks et la commission sont bien paramétrés ?
 			</div>
 			<?php endif; ?>
-	
-		<?php endif; ?>
-		<br><br>
-	<?php endif; ?>
+			<br><br>
 		
-	<?php _e( "Retrouvez prochainement ici vos documents : facture de lev&eacute;e de fonds et contrats des investisseurs.", 'yproject' ); ?>
+		<?php endif; ?>
+		
+		
+		<?php if ( FALSE ): ?>
+			
+		<?php else: ?>
+			<?php _e( "Retrouvez prochainement ici la facture de votre lev&eacute;e de fonds.", 'yproject' ); ?>
+		<?php endif; ?>
+		<br><br><br>
+	
+		
+		<?php if ( $page_controler->get_campaign_contracts_url() ): ?>
+			<a href="<?php echo $page_controler->get_campaign_contracts_url(); ?>" download="contrats.zip" class="button red"><?php _e( "T&eacute;l&eacute;charger les fichiers des contrats", 'yproject' ); ?></a>
+		<?php else: ?>
+			<?php _e( "Retrouvez prochainement ici les contrats des investisseurs.", 'yproject' ); ?>
+		<?php endif; ?>
+		
+	<?php else: ?>
+		<?php _e( "Retrouvez prochainement ici vos documents : facture de lev&eacute;e de fonds et contrats des investisseurs.", 'yproject' ); ?>
+	<?php endif; ?>
+	
 	<br><br>
 	
 </div>
