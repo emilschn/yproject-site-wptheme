@@ -31,7 +31,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<br>
 				<div class="align-center">
 					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
-					<button class="button blue-pale"><?php _e( "G&eacute;n&eacute;rer la facture de la levée de fonds", 'yproject' ); ?></button>
+					<button class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer la facture de la levée de fonds", 'yproject' ); ?></button>
 				</div>
 			</form>
 
@@ -56,8 +56,21 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		
 		<?php if ( $page_controler->get_campaign_contracts_url() ): ?>
 			<a href="<?php echo $page_controler->get_campaign_contracts_url(); ?>" download="contrats.zip" class="button red"><?php _e( "T&eacute;l&eacute;charger les fichiers des contrats", 'yproject' ); ?></a>
+			
 		<?php else: ?>
+			<?php if ( $page_controler->can_access_admin() ): ?>
+				<form action="<?php echo admin_url( 'admin-post.php?action=generate_campaign_contracts_archive'); ?>" method="post" class="field admin-theme">
+					<br><br><strong>Mieux vaut attendre la fin de la période de rétractation pour appuyer sur ce bouton !</strong><br><br>
+					<div class="align-center">
+						<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+						<button class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer le zip de la liste des contrats", 'yproject' ); ?></button>
+					</div>
+				</form>
+				<br><br>
+			<?php endif; ?>
+				
 			<?php _e( "Retrouvez prochainement ici les contrats des investisseurs.", 'yproject' ); ?>
+				
 		<?php endif; ?>
 		
 	<?php else: ?>
