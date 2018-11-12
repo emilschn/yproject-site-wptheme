@@ -8,8 +8,14 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 <div class="success"><?php _e( "E-mails envoy&eacute;s avec succ&egrave;s !", 'yproject' ); ?></div>
 <?php endif; ?>
 
+<?php if ( $page_controler->can_add_check() ): ?>
+<div class="align-center margin-height">
+	<button class="button-contacts-add-check button blue"><?php _e( "Ajouter un chèque", 'yproject' ); ?></button>
+</div>
+<?php endif; ?>
+
 <div class="tab-content-large">
-	<div id="ajax-contacts-load" class="ajax-investments-load" style="text-align: center;" data-value="<?php echo $page_controler->get_campaign_id(); ?>">
+	<div id="ajax-contacts-load" class="ajax-investments-load align-center" data-value="<?php echo $page_controler->get_campaign_id(); ?>">
 		<img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />
 	</div>
 </div>
@@ -70,16 +76,31 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 	</form>
 </div>
 
-<?php if ( $page_controler->can_access_admin() ): ?>
-	<br><br>
-	<div class="admin-theme-block align-center">
-		<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a>
-		<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/lightbox-add-check.php' ), true ); ?>
+
+<?php if ( $page_controler->can_add_check() ): ?>
+
+<div class="align-center margin-height">
+	<button class="button-contacts-add-check button blue"><?php _e( "Ajouter un chèque", 'yproject' ); ?></button>
+</div>
+
+<form action="" method="post" id="form-contacts-add-check" class="db-form v3 full bg-white hidden">
+	<div class="align-justify">
+		<h3><?php _e( "Ajouter un investissement par ch&egrave;que", 'yproject' ); ?></h3>
+		<?php _e( "Pour ajouter un investissement par ch&egrave;que, vous aurez besoin des informations compl&egrave;tes de votre investisseur (et de sa structure/entreprise si il investit en tant que personne morale).", 'yproject' ); ?><br>
+		<?php _e( "Vous aurez aussi besoin de nous transmettre les fichiers permettant de l'authentifier (ainsi que la personne morale &eacute;ventuelle).", 'yproject' ); ?><br>
+		<?php _e( "Enfin, il nous faudra une photo du ch&egrave;que ainsi que du contrat paraph&eacute; et sign&eacute; correspondant &agrave; l'investissement.", 'yproject' ); ?><br>
+		<?php _e( "L'investissement sera mis en attente, en attendant que nos &eacute;quipes valident les informations.", 'yproject' ); ?>
 	</div>
+</form>
+
 <?php endif; ?>
 
 
 
+
+
+
+<?php // Affichage des résultats des sondages ?>
 <?php if ( $page_controler->can_access_admin() ): ?>
 	<?php $campaign_poll_answers = $page_controler->get_campaign()->get_api_data( 'poll_answers' ); ?>
 	<br><br><br>

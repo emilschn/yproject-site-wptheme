@@ -575,7 +575,15 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		$("#direct-mail .step-confirm").slideUp();
 		$("#direct-mail .step-write").slideDown();
 	});
+				
+	if ( $( '.button-contacts-add-check' ).length > 0 ) {
+		$( '.button-contacts-add-check' ).click( function() {
+			$( '#form-contacts-add-check' ).slideDown( 30 );
+			self.scrollTo( $( '#form-contacts-add-check' ) );
+		} );
+	}
 
+	// A supprimer
 	$( '#add-check-search-email' ).click( function( e ) {
 		e.preventDefault();
 		$( '#add-check-search-email' ).addClass( 'disabled' );
