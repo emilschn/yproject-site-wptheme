@@ -83,15 +83,7 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 	<button class="button-contacts-add-check button blue"><?php _e( "Ajouter un chèque", 'yproject' ); ?></button>
 </div>
 
-<form action="" method="post" id="form-contacts-add-check" class="db-form v3 full bg-white hidden">
-	<div class="align-justify">
-		<h3><?php _e( "Ajouter un investissement par ch&egrave;que", 'yproject' ); ?></h3>
-		<?php _e( "Pour ajouter un investissement par ch&egrave;que, vous aurez besoin des informations compl&egrave;tes de votre investisseur (et de sa structure/entreprise si il investit en tant que personne morale).", 'yproject' ); ?><br>
-		<?php _e( "Vous aurez aussi besoin de nous transmettre les fichiers permettant de l'authentifier (ainsi que la personne morale &eacute;ventuelle).", 'yproject' ); ?><br>
-		<?php _e( "Enfin, il nous faudra une photo du ch&egrave;que ainsi que du contrat paraph&eacute; et sign&eacute; correspondant &agrave; l'investissement.", 'yproject' ); ?><br>
-		<?php _e( "L'investissement sera mis en attente, en attendant que nos &eacute;quipes valident les informations.", 'yproject' ); ?>
-	</div>
-</form>
+<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/add-check.php'  ), true ); ?>
 
 <?php endif; ?>
 

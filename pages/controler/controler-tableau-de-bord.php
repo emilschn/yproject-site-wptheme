@@ -13,6 +13,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $can_access_author;
 	private $must_show_lightbox_welcome;
 	private $return_lemonway_card;
+	private $form_add_check;
 	/**
 	 * @var ATCF_Campaign
 	 */
@@ -70,12 +71,18 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->check_has_signed_mandate();
 		$this->init_context();
 		$this->init_stats();
+		
 		WDGFormProjects::form_submit_turnover();
 		WDGFormProjects::form_submit_account_files();
 		WDGFormProjects::form_submit_roi_payment();
 		WDGFormProjects::form_approve_payment();
 		WDGFormProjects::form_cancel_payment();
 		WDGFormProjects::form_try_pending_card();
+		
+		$core = ATCF_CrowdFunding::instance();
+		$core->include_form( 'dashboard-add-check' );
+		$this->form_add_check = new WDG_Form_Dashboard_Add_Check( $this->current_campaign->ID, $this->current_user->get_wpref() );
+		
 		$current_organization = $this->get_campaign_organization();
 		$current_organization->send_kyc();
 		$current_organization->submit_transfer_wallet_lemonway();
@@ -146,6 +153,14 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	}
 	public function get_campaign_contracts_url() {
 		return $this->campaign_contracts_url;
+	}
+	
+	
+/******************************************************************************/
+// GESTION CHEQUES
+/******************************************************************************/
+	public function get_form_add_check() {
+		return $this->form_add_check;
 	}
 	
 	public function can_add_check() {
