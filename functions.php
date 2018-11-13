@@ -139,20 +139,6 @@ function print_user_projects(){
     
 	global $wpdb, $post, $user_projects;
 	$is_same_user = TRUE;
-	$str_believe = "J&apos;y crois";
-	$str_vote = "J&apos;ai &eacute;valu&eacute;";
-	$str_investment = "J&apos;ai investi";
-	$str_not_believe = "Je n&apos;y crois pas";
-	$str_not_vote = "Je n&apos;ai pas &eacute;valu&eacute;";
-	$str_not_investment = "Je n&apos;ai pas investi";
-	if (!$is_same_user) {
-		$str_believe = "Y croit";
-		$str_vote = "A &eacute;valu&eacute;";
-		$str_investment = "A investi";
-		$str_not_believe = "N&apos;y croit pas";
-		$str_not_vote = "N&apos;a pas &eacute;valu&eacute;";
-		$str_not_investment = "N&apos;a pas investi";
-	}
 
 	$WDGUser_current = WDGUser::current();
 	if ( isset( $_POST[ 'user_id' ] ) && $WDGUser_current->is_admin() ){
@@ -162,39 +148,9 @@ function print_user_projects(){
 	}
 	
 	$payment_status = array("publish", "completed");
-//		if ($is_same_user) $payment_status = array("completed", "pending", "publish", "failed", "refunded");
 	$purchases = edd_get_users_purchases($user_id, -1, false, $payment_status);
-	$table = $wpdb->prefix.'jycrois';
-	$projects_jy_crois = $wpdb->get_results("SELECT campaign_id, subscribe_news FROM $table WHERE user_id=$user_id");
-	$table = $wpdb->prefix.'ypcf_project_votes';
-	$projects_votes = $wpdb->get_results("SELECT post_id FROM $table WHERE user_id=$user_id");
-	$check_investment = true;
-	$check_vote = false;
-	$check_believe = true;
-	if (empty($purchases) && count($projects_votes) > 0) { $check_investment = false; $check_vote = true; }
-	if (empty($purchases) && count($projects_votes) == 0 && count($projects_jy_crois) == 0) { $check_investment = false; $check_believe = true; }
 
 	if ($purchases != '' || count($projects_jy_crois) > 0 || count($projects_votes) > 0) { ?>
-		<h3> Afficher les projets : </h3>
-		<form id="filter-projects">
-			<label>
-			<input type="checkbox" name="filter" value="jycrois" <?php if ($check_believe) { ?>checked="checked"<?php } ?>>
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="<?php echo $str_believe; ?>" title="<?php echo $str_believe; ?>" />
-			<?php echo $str_believe; ?>
-			</label>
-
-			<label style="margin-left: 50px;">
-			<input type="checkbox" name="filter" value="voted" <?php if ($check_vote) { ?>checked="checked"<?php } ?>>
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png" alt="<?php echo $str_vote; ?>" title="<?php echo $str_vote; ?>" />
-			<?php echo $str_vote; ?>
-			</label>
-
-			<label style="margin-left: 50px;">
-			<input type="checkbox" name="filter" value="invested" <?php if ($check_investment) { ?>checked="checked"<?php } ?>>
-			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png" alt="<?php echo $str_investment; ?>" title="<?php echo $str_investment; ?>" />
-			<?php echo $str_investment; ?>
-			</label>
-		</form>
 		<?php
 		if  ($purchases):
 			foreach ( $purchases as $post ) : setup_postdata( $post );
@@ -221,25 +177,12 @@ function print_user_projects(){
 			endforeach;
 		endif;
 
-		foreach ($projects_jy_crois as $project) {
-			$user_projects[$project->campaign_id]['jy_crois'] = 1;
-			$user_projects[$project->campaign_id]['subscribe_news'] = intval($project->subscribe_news);
-			$user_projects[$project->campaign_id]['ID'] = $project->campaign_id;
-		}
-		foreach ($projects_votes as $project) {
-			$user_projects[$project->post_id]['has_voted'] = 1;
-		}
-
 		?>
 		<div>
 		<?php
 		foreach ($user_projects as $project) {
 			$payments = $project['payments'];
-			$data_jycrois = 0;
-			$data_voted = 0;
 			$data_invested = 0;
-			if (isset($project['jy_crois']) && $project['jy_crois'] === 1) $data_jycrois = 1;
-			if (isset($project['has_voted']) && $project['has_voted'] === 1) $data_voted = 1;
 			if (count($project['payments']) > 0) $data_invested = 1;
 
 			$is_campaign = (get_post_meta($project['ID'], 'campaign_funding_type', TRUE) != '');
@@ -263,39 +206,8 @@ function print_user_projects(){
 			$project['percent_minimum_completed'] = $campaign->percent_minimum_completed();
 			$project['minimum_goal'] = $campaign->minimum_goal(true);
 		?>
-			<div id="<?php echo $project['ID'] ?>-project" class="history-projects" 
-				data-value="<?php echo $project['ID'] ?>"
-				data-jycrois="<?php echo $data_jycrois; ?>"
-				data-voted="<?php echo $data_voted;?>"
-				data-invested="<?php echo $data_invested;?>"
-				>
+			<div id="<?php echo $project['ID'] ?>-project" class="history-projects" data-value="<?php echo $project['ID'] ?>">
 				<a href="<?php echo $campaign->get_public_url(); ?>"><h3><?php echo $project['title']; ?></h3></a>
-				<div class="project_preview_item_infos">
-					<div class="project_preview_item_picto" style="width:45px">
-						<?php if($project['jy_crois'] === 1) { ?>
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good.png" alt="<?php echo $str_believe; ?>" title="<?php echo $str_believe; ?>" />
-						<?php } else { ?>
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/good_gris.png" alt="<?php echo $str_not_believe; ?>" title="<?php echo $str_not_believe; ?>" />
-							<span data-jycrois="0"></span>
-						<?php } ?>
-					</div>
-					<div class="project_preview_item_picto" style="width:45px">
-						<?php if($project['has_voted'] === 1) { ?>
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote.png" alt="<?php echo $str_vote; ?>" title="<?php echo $str_vote; ?>" />
-							<span data-voted="1"></span>
-						<?php } else { ?>
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodvote_gris.png" alt="<?php echo $str_not_vote; ?>" title="<?php echo $str_not_vote; ?>" />
-						<?php } ?>
-					</div>
-					<div class="project_preview_item_picto" style="width:45px">
-						<?php if(count($project['payments']) > 0) { ?>
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains.png" alt="<?php echo $str_investment; ?>" title="<?php echo $str_investment; ?>" />
-							<span data-invested="1"></span>
-						<?php } else { ?>
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/goodmains_gris.png" alt="<?php echo $str_not_investment; ?>" title="<?php echo $str_not_investment; ?>" />
-						<?php } ?>
-					</div>  
-				</div>
 				<div class="project_preview_item_progress">
 					<div class="project_preview_item_progressbg">
 						<div class="project_preview_item_progressbar" style="width:<?php echo $project['width'] ?>px">
@@ -324,13 +236,6 @@ function print_user_projects(){
 					</div>
 				</div>
 
-				<?php if(($project['jy_crois'] === 1) && $is_same_user) {?>
-				<div class="user-subscribe-news">
-					<label><input type="checkbox" <?php if ($project['subscribe_news']===1){echo 'checked="checked"';}?>/>
-						Recevoir par mail les actualit&eacute;s du projet</label>
-				</div>
-				<?php } ?>
-
 				<?php if(count($payments) > 0 && $is_same_user) {?>
 					<div class="show-payments"  data-value="<?php echo $project['ID'];?>">
 						D&eacute;tails des investissements
@@ -357,32 +262,8 @@ function print_user_projects(){
 									<?php echo $payment['signsquid_status_str']; ?>
 								</td>
 
-								<?php
-								//Boutons pour Annuler l'investissement | Recevoir le code à nouveau
-								//Visibles si la collecte est toujours en cours, si le paiement a bien été validé, si le contrat n'est pas encore signé
-								if ($campaign->is_active() && !$campaign->is_collected() && !$campaign->is_funded() && $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $payment_status == "publish" && $payment['signsquid_status'] != 'Agreed') :
-								?>
-								<td style="width: 220px;">
-									<?php /*if (!empty($payment['signsquid_contract_id'])): ?>
-										<?php $page_my_investments = get_page_by_path('mes-investissements'); ?>
-										<a href="<?php echo get_permalink($page_my_investments->ID); ?>?invest_id_resend=<?php echo $payment_id; ?>"><?php _e("Renvoyer le code de confirmation", "yproject"); ?></a><br />
-									<?php endif;*/ ?>
-
-									<?php $page_cancel_invest = get_page_by_path('annuler-un-investissement'); ?>
-									<a href="<?php echo get_permalink($page_cancel_invest->ID); ?>?invest_id=<?php echo $payment_id; ?>"><?php _e("Annuler mon investissement", "yproject"); ?></a>
-								</td>
-								<?php endif; ?>
-
 							</tr>
-							
-							<?php if ($reward != null) { ?>
-								<tr>
-									<td colspan="4" class="user-payment-item user-payment-reward" style="margin-bottom: 10px;">
-										Contrepartie choisie : Palier de <?php echo $reward['amount'].' € - '.$reward['name']?>
-									</td>
-								</tr>
-							<?php } 
-							} ?>
+							<?php } ?>
 
 						</table>
 					</div>
