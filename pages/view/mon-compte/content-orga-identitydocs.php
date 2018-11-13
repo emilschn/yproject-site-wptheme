@@ -7,7 +7,7 @@ $fields_files = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Ident
 $fields_files_orga = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files_orga );
 ?>
 
-<h2 class="underlined"><?php _e( "Justificatifs d'identitification de", 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
+<h2><?php _e( "Justificatifs d'identitification de", 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
 
 <form method="POST" enctype="multipart/form-data" class="db-form v3 full" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_identitydocs' ); ?>">
 		

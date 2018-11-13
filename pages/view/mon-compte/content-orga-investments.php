@@ -2,7 +2,9 @@
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 global $WDGOrganization;
 ?>
-<h2 class="underlined"><?php _e( "Attestations de transactions annuelles", 'yproject' ); ?></h2>
+<h2><?php _e( "Investissements de", 'yproject' ); ?>  <?php echo $WDGOrganization->get_name(); ?></h2>
+
+<h3><?php _e( "Attestations de transactions annuelles", 'yproject' ); ?></h3>
 <?php
 $has_declaration = false;
 $date_now = new DateTime();

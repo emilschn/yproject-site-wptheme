@@ -8,7 +8,7 @@ $fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_fil
 ?>
 
 
-<h2 class="underlined"><?php _e( "Coordonn&eacute;es bancaires de", 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
+<h2><?php _e( "Coordonn&eacute;es bancaires de", 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
 
 <p class="center">
 	<?php if ( !$WDGOrganization->can_register_lemonway() ): ?>

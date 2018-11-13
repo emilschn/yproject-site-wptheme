@@ -4,7 +4,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGUser_displayed = $page_controler->get_current_user();
 ?>
 
-<h2 class="underlined">Porte-monnaie électronique de <?php echo $WDGOrganization->get_name(); ?></h2>
+<h2>Porte-monnaie électronique de <?php echo $WDGOrganization->get_name(); ?></h2>
 
 Montant de toutes les royalties vers&eacute;es : <?php echo $WDGOrganization->get_rois_amount(); ?> &euro;<br>
 Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_rois_amount(); ?> &euro;<br>
@@ -35,7 +35,7 @@ Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_roi
 <?php endif; ?>
 
 
-<h2 class="underlined"><?php _e( 'Transferts d&apos;argent', 'yproject' ); ?></h2>
+<h3><?php _e( 'Transferts d&apos;argent', 'yproject' ); ?></h3>
 <?php
 $args = array(
 	'author'    => $WDGOrganization->get_wpref(),

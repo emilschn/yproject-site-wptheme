@@ -7,7 +7,7 @@ $fields_iban = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_iba
 $fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_file );
 ?>
 
-<h2 class="underlined"><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></h2>
+<h2><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></h2>
 
 <p class="center">
 	<?php if ( !$WDGUser_displayed->can_register_lemonway() ): ?>

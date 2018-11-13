@@ -15,14 +15,14 @@ $form_feedback = $page_controler->get_user_form_feedback();
 ?>
 
 
+<h2><?php _e( "Enregistrez vos informations", 'yproject' ); ?></h2>
+
 <form method="POST" enctype="multipart/form-data" class="db-form form-register v3 full">
 		
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
-
-	<h2><?php _e( "Enregistrez vos informations", 'yproject' ); ?></h2>
 
 	<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
 	<div class="form-error-general align-left">
