@@ -1,7 +1,6 @@
 function UserAccountDashboard() {
 	this.initWithHash();
 	this.initMenu();
-	this.initProjectList();
 }
 
 /**
@@ -51,6 +50,10 @@ UserAccountDashboard.prototype.switchTab = function( sType, clickedElement ) {
 	$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
 	$( 'div#item-body > div#item-body-' + sType ).show();
 	
+	if ( sType == 'investments' ) {
+		this.initProjectList();
+	}
+	
 };
 
 /**
@@ -66,17 +69,65 @@ UserAccountDashboard.prototype.initProjectList = function() {
 		'url' : ajax_object.ajax_url,
 		'data': {
 			'user_id': userID,
-			'action' : 'print_user_projects'
+			'action' : 'display_user_investments'
 		}
 		
+	// Une fois les projets obtenus
 	}).done(function( result ){
-		// Une fois les projets obtenus
-		$( '#ajax-loader' ).after(result);
-		$( '#item-body-projects' ).height( 'auto' );
-		$( '#ajax-loader-img' ).hide();
 		
-		// On cache tous les paiements effectués
-		self.togglePayments();
+		// Affichage par campagne
+		var sBuffer = '';
+		var aInvestmentCampaigns = JSON.parse( result );
+		for ( var nCampaignID in aInvestmentCampaigns ) {
+			var oCampaignItem = aInvestmentCampaigns[ nCampaignID ];
+			if ( oCampaignItem[ 'name' ] !== undefined && oCampaignItem[ 'name' ] !== null ) {
+				sBuffer += '<h3 class="has-margin-top">Mes investissements sur ' + oCampaignItem[ 'name' ] + '</h3>';
+				var aCampaignInvestments = oCampaignItem[ 'items' ];
+				for ( var nIndex in aCampaignInvestments ) {
+					var oInvestmentItem = aCampaignInvestments[ nIndex ];
+					sBuffer += '<div class="investment-item">';
+					
+					sBuffer += '<div>';
+					sBuffer += '<strong>' + oInvestmentItem[ 'amount' ] + ' €</strong><br>';
+					sBuffer += oInvestmentItem[ 'date' ];
+					sBuffer += '</div>';
+					
+					var sStatusStr = 'Valid&eacute;';
+					if ( oInvestmentItem[ 'status' ] === 'pending' ) {
+						sStatusStr = 'En attente';
+					}
+					if ( oCampaignItem[ 'status' ] === 'archive' ) {
+						sStatusStr = 'Rembours&eacute;';
+					}
+					sBuffer += '<div class="single-line ' +oInvestmentItem[ 'status' ]+ ' campaign-' +oCampaignItem[ 'status' ]+ '">';
+					sBuffer += sStatusStr;
+					sBuffer += '</div>';
+					
+					sBuffer += '<div class="align-center">';
+					sBuffer += 'Investissement sur ' + oCampaignItem[ 'funding_duration' ] + ' ans<br>';
+					sBuffer += 'à compter du ' + oCampaignItem[ 'start_date' ];
+					sBuffer += '</div>';
+					
+					sBuffer += '<div class="align-center">';
+					sBuffer += 'Royalties reçues :<br><strong>' + oInvestmentItem[ 'roi_amount' ] + ' €</strong>';
+					sBuffer += '</div>';
+					
+					sBuffer += '<div class="align-center">';
+					sBuffer += 'Retour sur investissement :<br><strong>' + oInvestmentItem[ 'roi_return' ] + ' %</strong>';
+					sBuffer += '</div>';
+					
+					sBuffer += '<div class="clear"></div>';
+					
+					sBuffer += '</div>';
+				}
+			}
+		}
+		$( '#ajax-loader' ).after( sBuffer );
+		$( '#item-body-projects' ).height( 'auto' );
+		
+		// Masquage de ce qui n'est plus utile
+		$( '#ajax-loader-img' ).hide();
+		$( '.to-hide-after-loading' ).hide();
 		
 	});
 };

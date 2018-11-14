@@ -1,13 +1,16 @@
 <?php
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGUser_displayed = $page_controler->get_current_user();
+$list_current_organizations = $page_controler->get_current_user_organizations();
 ?>
 
 <h2><?php _e( "Investissements de", 'yproject' ); ?> <?php echo $page_controler->get_user_name(); ?></h2>
 
 <p>
 	<?php _e( "Les informations ci-dessous sont celles de votre compte personnel.", 'yproject' ); ?><br>
+	<?php if ( count( $list_current_organizations ) > 0 ): ?>
 	<?php _e( "Retrouvez celles de vos organisations en utilisant le menu.", 'yproject' ); ?>
+	<?php endif; ?>
 </p>
 
 
@@ -30,7 +33,7 @@ $date_now = new DateTime();
 <?php endif; ?>
 <br><br>
 
-<h3><?php _e( "Mes investissements", 'yproject' ); ?></h3>
+<h3 class="to-hide-after-loading"><?php _e( "Mes investissements", 'yproject' ); ?></h3>
 	
 <div id="ajax-loader" class="center" style="text-align: center;"><img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
 
