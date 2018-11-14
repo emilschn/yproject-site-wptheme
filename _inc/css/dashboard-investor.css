@@ -83,7 +83,11 @@ body.template-mon-compte div#container div#content .investment-item {
 	padding: 24px;
 	background: #FFFFFF;
 }
+body.template-mon-compte div#container div#content .investment-item .amount-date {
+	min-width: 150px;
+}
 body.template-mon-compte div#container div#content .investment-item .single-line {
+	min-width: 50px;
 	line-height: 38px;
 	vertical-align: middle;
 }

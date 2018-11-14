@@ -87,7 +87,7 @@ UserAccountDashboard.prototype.initProjectList = function() {
 					var oInvestmentItem = aCampaignInvestments[ nIndex ];
 					sBuffer += '<div class="investment-item">';
 					
-					sBuffer += '<div>';
+					sBuffer += '<div class="amount-date">';
 					sBuffer += '<strong>' + oInvestmentItem[ 'amount' ] + ' €</strong><br>';
 					sBuffer += oInvestmentItem[ 'date' ];
 					sBuffer += '</div>';
