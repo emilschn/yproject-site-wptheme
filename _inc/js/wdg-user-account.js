@@ -81,16 +81,16 @@ UserAccountDashboard.prototype.initProjectList = function() {
 		for ( var nCampaignID in aInvestmentCampaigns ) {
 			var oCampaignItem = aInvestmentCampaigns[ nCampaignID ];
 			if ( oCampaignItem[ 'name' ] !== undefined && oCampaignItem[ 'name' ] !== null ) {
-				sBuffer += '<h3 class="has-margin-top">Mes investissements sur ' + oCampaignItem[ 'name' ] + '</h3>';
+				var sCampaignBuffer = '<h3 class="has-margin-top">Mes investissements sur ' + oCampaignItem[ 'name' ] + '</h3>';
 				var aCampaignInvestments = oCampaignItem[ 'items' ];
 				for ( var nIndex in aCampaignInvestments ) {
 					var oInvestmentItem = aCampaignInvestments[ nIndex ];
-					sBuffer += '<div class="investment-item">';
+					sCampaignBuffer += '<div class="investment-item">';
 					
-					sBuffer += '<div class="amount-date">';
-					sBuffer += '<strong>' + oInvestmentItem[ 'amount' ] + ' €</strong><br>';
-					sBuffer += oInvestmentItem[ 'date' ];
-					sBuffer += '</div>';
+					sCampaignBuffer += '<div class="amount-date">';
+					sCampaignBuffer += '<strong>' + oInvestmentItem[ 'amount' ] + ' €</strong><br>';
+					sCampaignBuffer += oInvestmentItem[ 'date' ];
+					sCampaignBuffer += '</div>';
 					
 					var sStatusStr = 'Valid&eacute;';
 					if ( oInvestmentItem[ 'status' ] === 'pending' ) {
@@ -99,27 +99,30 @@ UserAccountDashboard.prototype.initProjectList = function() {
 					if ( oCampaignItem[ 'status' ] === 'archive' ) {
 						sStatusStr = 'Rembours&eacute;';
 					}
-					sBuffer += '<div class="single-line ' +oInvestmentItem[ 'status' ]+ ' campaign-' +oCampaignItem[ 'status' ]+ '">';
-					sBuffer += sStatusStr;
-					sBuffer += '</div>';
+					sCampaignBuffer += '<div class="single-line ' +oInvestmentItem[ 'status' ]+ ' campaign-' +oCampaignItem[ 'status' ]+ '">';
+					sCampaignBuffer += sStatusStr;
+					sCampaignBuffer += '</div>';
 					
-					sBuffer += '<div class="align-center">';
-					sBuffer += 'Investissement sur ' + oCampaignItem[ 'funding_duration' ] + ' ans<br>';
-					sBuffer += 'à compter du ' + oCampaignItem[ 'start_date' ];
-					sBuffer += '</div>';
+					sCampaignBuffer += '<div class="align-center">';
+					sCampaignBuffer += 'Investissement sur ' + oCampaignItem[ 'funding_duration' ] + ' ans<br>';
+					sCampaignBuffer += 'à compter du ' + oCampaignItem[ 'start_date' ];
+					sCampaignBuffer += '</div>';
 					
-					sBuffer += '<div class="align-center">';
-					sBuffer += 'Royalties reçues :<br><strong>' + oInvestmentItem[ 'roi_amount' ] + ' €</strong>';
-					sBuffer += '</div>';
+					sCampaignBuffer += '<div class="align-center">';
+					sCampaignBuffer += 'Royalties reçues :<br><strong>' + oInvestmentItem[ 'roi_amount' ] + ' €</strong>';
+					sCampaignBuffer += '</div>';
 					
-					sBuffer += '<div class="align-center">';
-					sBuffer += 'Retour sur investissement :<br><strong>' + oInvestmentItem[ 'roi_return' ] + ' %</strong>';
-					sBuffer += '</div>';
+					sCampaignBuffer += '<div class="align-center">';
+					sCampaignBuffer += 'Retour sur investissement :<br><strong>' + oInvestmentItem[ 'roi_return' ] + ' %</strong>';
+					sCampaignBuffer += '</div>';
 					
-					sBuffer += '<div class="clear"></div>';
+					sCampaignBuffer += '<div class="clear"></div>';
 					
-					sBuffer += '</div>';
+					sCampaignBuffer += '</div>';
 				}
+				
+				// Pour les mettre dans l'ordre inverse
+				sBuffer = sCampaignBuffer + sBuffer;
 			}
 		}
 		$( '#ajax-loader' ).after( sBuffer );
