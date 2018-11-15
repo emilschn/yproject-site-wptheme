@@ -17,10 +17,6 @@ body.template-mon-compte div#container div#content .item-body-tab > h2 {
 	text-transform: uppercase;
 	text-align: center;
 }
-body.template-mon-compte div#container div#content h2.underlined {
-	border-bottom: 0px;
-	color: #00879b;
-}
 body.template-mon-compte div#container div#content h3 {
 	text-transform: uppercase;
 	text-align: left;
@@ -73,6 +69,38 @@ body.template-mon-compte div#container div#content .db-form.v3 {
 	max-width: 600px;
 	margin: 0px auto;
 }
+body.template-mon-compte div#container div#content a.download-certificate {
+	display: inline-block;
+	padding: 16px 32px;
+}
+body.template-mon-compte div#container div#content h3.has-margin-top {
+	margin-top: 24px;
+}
+body.template-mon-compte div#container div#content .investment-item {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 8px;
+	padding: 24px;
+	background: #FFFFFF;
+}
+body.template-mon-compte div#container div#content .investment-item .amount-date {
+	min-width: 150px;
+}
+body.template-mon-compte div#container div#content .investment-item .single-line {
+	min-width: 50px;
+	line-height: 38px;
+	vertical-align: middle;
+}
+body.template-mon-compte div#container div#content .investment-item .single-line.publish {
+	color: #8BC79C;
+}
+body.template-mon-compte div#container div#content .investment-item .single-line.pending {
+	color: #cfb7b7;
+}
+body.template-mon-compte div#container div#content .investment-item .single-line.publish.campaign-archive {
+	color: #333333;
+}
+
 body.template-mon-compte table.authentication-list td.title {
 	padding: 10px;
 	background: #FFFFFF;
