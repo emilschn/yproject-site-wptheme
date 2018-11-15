@@ -10,7 +10,7 @@ function print_campaign_page()
 
     ?>
 
-    <div class="head"><?php _e('Organisation de la campagne', 'yproject'); ?></div>
+    <div class="head"><?php _e('Organisation de la lev&eacute;e de fonds', 'yproject'); ?></div>
     <div class="tab-content">
         <?php if ($campaign->google_doc() != ''): ?>
             <h2><?php _e("Planning", 'yproject'); ?></h2>
