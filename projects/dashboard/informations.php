@@ -848,7 +848,7 @@ function print_informations_page()
 					</div>
 				</form>
 				<?php else: ?>
-				Vous ne pouvez pas encore générer la facture pour cette campagne.
+				Vous ne pouvez pas encore générer la facture pour cette lev&eacute;e de fonds.
 				Avez-vous vérifié que l'identifiant Quickbooks et la commission sont bien paramétrés ?
 				<?php endif; ?>
 
@@ -987,7 +987,7 @@ function print_informations_page()
                 DashboardUtility::create_field( array(
 					'id'			=> 'new_contract_modification',
 					'type'			=> 'editor',
-					'label'			=> __( "Modifications sur le contrat entre vote et campagne", 'yproject' ),
+					'label'			=> __( "Modifications sur le contrat entre vote et investissement", 'yproject' ),
 					'value'			=> $campaign->contract_modifications(),
 					'admin_theme'	=> true
                 ) );

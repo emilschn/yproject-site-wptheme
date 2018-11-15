@@ -16,7 +16,7 @@ $funding_stats = $funding['stats']; // statistiques supplémentaires
 
 	<!-- Courbe "Visiteurs + Votes + Investissements + Pré-investissements" -->
 	<section>
-		<h3>Visites sur l'ensemble de la campagne</h3>
+		<h3>Visites sur l'ensemble de la levée de fonds</h3>
 	  <div class="chart-container">
 		<canvas id="visit-chart"></canvas>
 	  </div>

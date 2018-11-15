@@ -135,7 +135,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
             </div>
             <div class="project-filter-container">
                 <select id="project-filter-step" class="project-filter-select">
-                    <option value="all" selected="selected"><?php _e( "Toutes les &eacute;tapes de campagne", 'yproject' ); ?></option>
+                    <option value="all" selected="selected"><?php _e( "Toutes les &eacute;tapes de lev&eacute;e de fonds", 'yproject' ); ?></option>
                     <?php foreach ( $status_list as $status_key => $status_label ): ?>
 						<option value="<?php echo $status_key; ?>"><?php echo $status_label; ?></option>
                     <?php endforeach; ?>

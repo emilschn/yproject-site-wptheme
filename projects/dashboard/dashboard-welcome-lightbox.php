@@ -4,7 +4,7 @@
 		<h1 style="text-align:center">Bienvenue !</h1>
 		<p>Vos informations ont bien été enregistrées.</p>
 
-		<p>Accédez à tout moment à votre campagne via le bouton "MON COMPTE" dans le menu principal du site :</p>
+		<p>Accédez à tout moment à votre tableau de bord via le bouton "MON COMPTE" dans le menu principal du site :</p>
 		<img style="max-width: 100%;" src="<?php echo $stylesheet_directory_uri; ?>/images/apercu-mon-projet.png" alt="" /><br />
 
 		<p class="align-center">

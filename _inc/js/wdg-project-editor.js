@@ -616,7 +616,7 @@ var ProjectEditor = (function($) {
 		//Création d'un champ input pour certaines valeurs
 		createInput: function(property) {
 			var initValue = ProjectEditor.getInitValue(property);
-			var placeholder = (property === "subtitle") ? 'Slogan de la campagne' : '';
+			var placeholder = (property === "subtitle") ? 'Slogan de la levée de fonds' : '';
 			var newElement = '<input type="text" id="wdg-input-'+property+'" class="edit-input" value="'+initValue+'" placeholder="'+placeholder+'" />';
 			$(ProjectEditor.elements[property].elementId).after(newElement);
 			
