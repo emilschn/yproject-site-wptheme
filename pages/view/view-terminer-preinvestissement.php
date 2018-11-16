@@ -30,7 +30,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		$current_step = $page_controler->get_current_step();
 		switch ( $current_step ) {
 			case WDG_Page_Controler_PreinvestmentFinish::$step_validation:
-				locate_template( array( 'pages/view/investir/contract.php'  ), true );
+				locate_template( array( 'pages/view/investir/contract-preinvestment.php'  ), true );
 				break;
 			
 			case WDG_Page_Controler_PreinvestmentFinish::$step_cancel:
