@@ -77,7 +77,7 @@ UserAccountDashboard.prototype.initProjectList = function() {
 		
 		// Affichage par campagne
 		var sBuffer = '';
-		var aInvestmentCampaigns = array();
+		var aInvestmentCampaigns = new Array();
 		if ( result !== '' ) {
 			aInvestmentCampaigns = JSON.parse( result );
 			
