@@ -108,7 +108,7 @@ div#content header #invest-breadcrumb span.selected:after {
 .invest_error {
     color: #FE494C;
 }
-.invest_error:after {
+.invest_error:after, #invest_error_alert:after {
 	content: "";
 	display: block;
 	height: 20px;
