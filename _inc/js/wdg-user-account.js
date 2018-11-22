@@ -128,6 +128,7 @@ UserAccountDashboard.prototype.initProjectList = function() {
 					sBuffer = sCampaignBuffer + sBuffer;
 				}
 			}
+			$( '.to-hide-after-loading-success' ).hide();
 			
 		} else {
 			sBuffer = '<div class="align-center">';
@@ -141,7 +142,6 @@ UserAccountDashboard.prototype.initProjectList = function() {
 		
 		// Masquage de ce qui n'est plus utile
 		$( '#ajax-loader-img' ).hide();
-		$( '.to-hide-after-loading' ).hide();
 		
 	});
 };

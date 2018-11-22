@@ -33,7 +33,7 @@ $date_now = new DateTime();
 <?php endif; ?>
 <br><br>
 
-<h3 class="to-hide-after-loading"><?php _e( "Mes investissements", 'yproject' ); ?></h3>
+<h3 class="to-hide-after-loading-success"><?php _e( "Mes investissements", 'yproject' ); ?></h3>
 	
 <div id="ajax-loader" class="center" style="text-align: center;"><img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
 
