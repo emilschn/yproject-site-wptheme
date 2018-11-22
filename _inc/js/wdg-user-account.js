@@ -77,54 +77,65 @@ UserAccountDashboard.prototype.initProjectList = function() {
 		
 		// Affichage par campagne
 		var sBuffer = '';
-		var aInvestmentCampaigns = JSON.parse( result );
-		for ( var nCampaignID in aInvestmentCampaigns ) {
-			var oCampaignItem = aInvestmentCampaigns[ nCampaignID ];
-			if ( oCampaignItem[ 'name' ] !== undefined && oCampaignItem[ 'name' ] !== null ) {
-				var sCampaignBuffer = '<h3 class="has-margin-top">Mes investissements sur ' + oCampaignItem[ 'name' ] + '</h3>';
-				var aCampaignInvestments = oCampaignItem[ 'items' ];
-				for ( var nIndex in aCampaignInvestments ) {
-					var oInvestmentItem = aCampaignInvestments[ nIndex ];
-					sCampaignBuffer += '<div class="investment-item">';
-					
-					sCampaignBuffer += '<div class="amount-date">';
-					sCampaignBuffer += '<strong>' + oInvestmentItem[ 'amount' ] + ' €</strong><br>';
-					sCampaignBuffer += oInvestmentItem[ 'date' ];
-					sCampaignBuffer += '</div>';
-					
-					var sStatusStr = 'Valid&eacute;';
-					if ( oInvestmentItem[ 'status' ] === 'pending' ) {
-						sStatusStr = 'En attente';
+		var aInvestmentCampaigns = array();
+		if ( result !== '' ) {
+			aInvestmentCampaigns = JSON.parse( result );
+			
+			for ( var nCampaignID in aInvestmentCampaigns ) {
+				var oCampaignItem = aInvestmentCampaigns[ nCampaignID ];
+				if ( oCampaignItem[ 'name' ] !== undefined && oCampaignItem[ 'name' ] !== null ) {
+					var sCampaignBuffer = '<h3 class="has-margin-top">Mes investissements sur ' + oCampaignItem[ 'name' ] + '</h3>';
+					var aCampaignInvestments = oCampaignItem[ 'items' ];
+					for ( var nIndex in aCampaignInvestments ) {
+						var oInvestmentItem = aCampaignInvestments[ nIndex ];
+						sCampaignBuffer += '<div class="investment-item">';
+
+						sCampaignBuffer += '<div class="amount-date">';
+						sCampaignBuffer += '<strong>' + oInvestmentItem[ 'amount' ] + ' €</strong><br>';
+						sCampaignBuffer += oInvestmentItem[ 'date' ];
+						sCampaignBuffer += '</div>';
+
+						var sStatusStr = 'Valid&eacute;';
+						if ( oInvestmentItem[ 'status' ] === 'pending' ) {
+							sStatusStr = 'En attente';
+						}
+						if ( oCampaignItem[ 'status' ] === 'archive' ) {
+							sStatusStr = 'Rembours&eacute;';
+						}
+						sCampaignBuffer += '<div class="single-line ' +oInvestmentItem[ 'status' ]+ ' campaign-' +oCampaignItem[ 'status' ]+ '">';
+						sCampaignBuffer += sStatusStr;
+						sCampaignBuffer += '</div>';
+
+						sCampaignBuffer += '<div class="align-center">';
+						sCampaignBuffer += 'Investissement sur ' + oCampaignItem[ 'funding_duration' ] + ' ans<br>';
+						sCampaignBuffer += 'à compter du ' + oCampaignItem[ 'start_date' ];
+						sCampaignBuffer += '</div>';
+
+						sCampaignBuffer += '<div class="align-center">';
+						sCampaignBuffer += 'Royalties reçues :<br><strong>' + oInvestmentItem[ 'roi_amount' ] + ' €</strong>';
+						sCampaignBuffer += '</div>';
+
+						sCampaignBuffer += '<div class="align-center">';
+						sCampaignBuffer += 'Retour sur investissement :<br><strong>' + oInvestmentItem[ 'roi_return' ] + ' %</strong>';
+						sCampaignBuffer += '</div>';
+
+						sCampaignBuffer += '<div class="clear"></div>';
+
+						sCampaignBuffer += '</div>';
 					}
-					if ( oCampaignItem[ 'status' ] === 'archive' ) {
-						sStatusStr = 'Rembours&eacute;';
-					}
-					sCampaignBuffer += '<div class="single-line ' +oInvestmentItem[ 'status' ]+ ' campaign-' +oCampaignItem[ 'status' ]+ '">';
-					sCampaignBuffer += sStatusStr;
-					sCampaignBuffer += '</div>';
-					
-					sCampaignBuffer += '<div class="align-center">';
-					sCampaignBuffer += 'Investissement sur ' + oCampaignItem[ 'funding_duration' ] + ' ans<br>';
-					sCampaignBuffer += 'à compter du ' + oCampaignItem[ 'start_date' ];
-					sCampaignBuffer += '</div>';
-					
-					sCampaignBuffer += '<div class="align-center">';
-					sCampaignBuffer += 'Royalties reçues :<br><strong>' + oInvestmentItem[ 'roi_amount' ] + ' €</strong>';
-					sCampaignBuffer += '</div>';
-					
-					sCampaignBuffer += '<div class="align-center">';
-					sCampaignBuffer += 'Retour sur investissement :<br><strong>' + oInvestmentItem[ 'roi_return' ] + ' %</strong>';
-					sCampaignBuffer += '</div>';
-					
-					sCampaignBuffer += '<div class="clear"></div>';
-					
-					sCampaignBuffer += '</div>';
+
+					// Pour les mettre dans l'ordre inverse
+					sBuffer = sCampaignBuffer + sBuffer;
 				}
-				
-				// Pour les mettre dans l'ordre inverse
-				sBuffer = sCampaignBuffer + sBuffer;
 			}
+			
+		} else {
+			sBuffer = '<div class="align-center">';
+			sBuffer += 'Aucun investissement valid&eacute; pour l&apos;instant.<br>';
+			sBuffer += 'Si vous avez investi sur un projet en cours d&apos;&eacute;valuation, cet investissement est encore en attente de validation.';
+			sBuffer += '</div>';
 		}
+		
 		$( '#ajax-loader' ).after( sBuffer );
 		$( '#item-body-projects' ).height( 'auto' );
 		
