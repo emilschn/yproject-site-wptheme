@@ -134,6 +134,12 @@ button.red {
 	background: #EACDCB;
 	color: #333333;
 }
+.wdg-message.notification {
+	padding: 16px;
+	text-transform: none;
+	background: #333;
+	color: #FFFFFF;
+}
 
 
 /*******************************************************************************

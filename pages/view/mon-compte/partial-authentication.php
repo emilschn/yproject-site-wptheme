@@ -10,6 +10,10 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 	<?php if ( $is_lemonway_registered ): ?>
 		<?php _e( "Vous &ecirc;tes authentifi&eacute; chez notre prestataire de paiement, Lemon Way.", 'yproject' ); ?>
 	<?php elseif ( $can_register_lemonway ): ?>
+		<div class="wdg-message notification">
+			<?php _e( "&Agrave; partir de Janvier 2019, l'authentification sera n&eacute;cessaire aupr&egrave;s de notre prestataire pour tout investissement.", 'yproject' ); ?>
+			<?php _e( "Nous vous invitons ainsi &agrave; renseigner d&egrave;s maintenant les documents permettant de vous authentifier.", 'yproject' ); ?>
+		</div>
 		<?php _e( "Pour investir des montants sup&eacute;rieurs &agrave; 250 &euro; sur WEDOGOOD, vous devez &ecirc;tre authentifi&eacute; aupr&egrave;s de notre prestataire de paiement, Lemon Way.", 'yproject' ); ?>
 	<?php else: ?>
 		<?php _e( "Pour investir sur WEDOGOOD, vous devez &ecirc;tre authentifi&eacute; aupr&egrave;s notre prestataire de paiement, Lemon Way.", 'yproject' ); ?>
