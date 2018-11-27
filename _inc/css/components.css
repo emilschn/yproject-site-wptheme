@@ -503,6 +503,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
     letter-spacing: 0.12em;
     font-weight: bold;
     text-align: right;
+	z-index: 2;
 }
 .progress-bar .vote-status { 
     display: -webkit-flex;
