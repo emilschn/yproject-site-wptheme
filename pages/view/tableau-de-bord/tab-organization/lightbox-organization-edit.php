@@ -31,9 +31,17 @@ $WDGUser_current = WDGUser::current();
 		?>
 		<div class="field">
 			<label for="org_name"><?php _e( "D&eacute;nomination sociale", 'yproject' ); ?></label>
+			<?php if ( $WDGUser_current->is_admin() ): ?>
+			<div class="field-container">
+				<span class="field-value">
+					<input type="text" name="org_name" value="<?php echo $organization_obj->get_name(); ?>">
+				</span>
+			</div>
+			<?php else: ?>
 			<div class="field-container align-left">
 				<em id="org_name"><?php echo $organization_obj->get_name(); ?></em>
 			</div>
+			<?php endif; ?>
 		</div>
 
 		<div class="field">

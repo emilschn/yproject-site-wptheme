@@ -910,7 +910,11 @@ WDGCampaignDashboard.prototype.updateEditOrgaBtn = function(form){
 * @param {objet} feedback : retour ajax
 */
 WDGCampaignDashboard.prototype.updateOrgaForm = function(feedback){
-   $("#wdg-lightbox-editOrga #org_name").html(feedback.organization.name);
+	if ( $("#wdg-lightbox-editOrga #org_name").length > 0 ) {
+		$("#wdg-lightbox-editOrga #org_name").html(feedback.organization.name);
+	} else {
+		$("#wdg-lightbox-editOrga input[name=org_name]").val(feedback.organization.name);
+	}
    $("#wdg-lightbox-editOrga input[name=org_email]").val(feedback.organization.email);
    $("#wdg-lightbox-editOrga input[name=org_representative_function]").val(feedback.organization.representative_function);
    $("#wdg-lightbox-editOrga input[name=org_description]").val(feedback.organization.description);
