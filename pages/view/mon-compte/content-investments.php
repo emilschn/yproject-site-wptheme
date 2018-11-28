@@ -33,7 +33,7 @@ $date_now = new DateTime();
 <?php endif; ?>
 <br><br>
 
-<h3 class="to-hide-after-loading-success"><?php _e( "Mes investissements", 'yproject' ); ?></h3>
+<h3 id="to-hide-after-loading-success-<?php echo $WDGUser_displayed->get_wpref(); ?>"><?php _e( "Mes investissements", 'yproject' ); ?></h3>
 	
-<div id="ajax-loader" class="center" style="text-align: center;"><img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
+<div id="ajax-loader-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="center" style="text-align: center;"><img id="ajax-loader-img-<?php echo $WDGUser_displayed->get_wpref(); ?>" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
 

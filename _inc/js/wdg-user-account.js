@@ -50,7 +50,7 @@ UserAccountDashboard.prototype.switchTab = function( sType, clickedElement ) {
 	$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
 	$( 'div#item-body > div#item-body-' + sType ).show();
 	
-	if ( sType == 'investments' ) {
+	if ( sType.indexOf( 'investments' ) > -1 ) {
 		this.initProjectList();
 	}
 	
@@ -62,13 +62,15 @@ UserAccountDashboard.prototype.switchTab = function( sType, clickedElement ) {
 UserAccountDashboard.prototype.initProjectList = function() {
 	
 	var self = this;
-	var userID = $('main').data('userid');
+	var userID = $('ul.nav-menu li.selected a').data('userid');
+	var userType = $('ul.nav-menu li.selected a').data('usertype');
 	
 	$.ajax({
 		'type' : "POST",
 		'url' : ajax_object.ajax_url,
 		'data': {
 			'user_id': userID,
+			'user_type': userType,
 			'action' : 'display_user_investments'
 		}
 		
@@ -128,20 +130,23 @@ UserAccountDashboard.prototype.initProjectList = function() {
 					sBuffer = sCampaignBuffer + sBuffer;
 				}
 			}
-			$( '.to-hide-after-loading-success' ).hide();
 			
-		} else {
+		}
+		
+		if ( result === '' || aInvestmentCampaigns.length === 0 ) {
 			sBuffer = '<div class="align-center">';
 			sBuffer += 'Aucun investissement valid&eacute; pour l&apos;instant.<br>';
 			sBuffer += 'Si vous avez investi sur un projet en cours d&apos;&eacute;valuation, cet investissement est encore en attente de validation.';
 			sBuffer += '</div>';
+		} else {
+			$( '#to-hide-after-loading-success-' + userID ).hide();
 		}
 		
-		$( '#ajax-loader' ).after( sBuffer );
+		$( '#ajax-loader-' + userID ).after( sBuffer );
 		$( '#item-body-projects' ).height( 'auto' );
 		
 		// Masquage de ce qui n'est plus utile
-		$( '#ajax-loader-img' ).hide();
+		$( '#ajax-loader-img-' + userID ).hide();
 		
 	});
 };
