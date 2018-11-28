@@ -65,6 +65,11 @@ UserAccountDashboard.prototype.initProjectList = function() {
 	var userID = $('ul.nav-menu li.selected a').data('userid');
 	var userType = $('ul.nav-menu li.selected a').data('usertype');
 	
+	// Si le picto de chargement n'est pas affiché, c'est qu'on a déjà fait le processus pour cet onglet
+	if ( !$( '#ajax-loader-img-' + userID ).is( ':visible' ) ) {
+		return;
+	}
+	
 	$.ajax({
 		'type' : "POST",
 		'url' : ajax_object.ajax_url,
