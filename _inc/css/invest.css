@@ -282,3 +282,8 @@ div.mean-payment-list a div, div.mean-payment-list p > span {
 	margin-top: -50px;
 	margin-left: 30px;
 }
+
+.template-paiement-partager #field-other-invest-rythm, .template-paiement-partager #field-other-known-by-source {
+	margin-top: -50px;
+	margin-left: 30px;
+}
