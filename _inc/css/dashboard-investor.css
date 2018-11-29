@@ -101,26 +101,54 @@ body.template-mon-compte div#container div#content .investment-item .single-line
 	color: #333333;
 }
 
-body.template-mon-compte table.authentication-list td.title {
-	padding: 10px;
-	background: #FFFFFF;
+body.template-mon-compte div#container div#content div.authentication-items {
+    display: -webkit-flex;
+	display: flex;
+    -webkit-justify-content: space-around; 
+    justify-content: space-around;
+	margin: 32px 0px;
 }
-body.template-mon-compte table.authentication-list td.title.col {
-	width: 20%
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item {
+	width: 300px;
 }
-body.template-mon-compte table.authentication-list td.inside {
-	padding: 10px;
-	vertical-align: middle;
-	background: #E1E3E2;
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item.alert:before {
+	position: relative;
+	display: block;
+	content: "!";
+	font-size: 20px;
+	width: 40px;
+	height: 40px;
+	margin-top: -40px;
+	top: 20px;
+	left: 20px;
+	float: right;
+	line-height: 40px;
+	border: 1px solid #FFF;
+	border-radius: 50%;
+	text-align: center;
+	background: #ea4f51;
+	color: #FFF;
 }
-body.template-mon-compte table.authentication-list td a {
-	display: inline-block;
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item div {
+	margin-bottom: 16px;
+	padding: 8px;
+	text-align: center;
+	background: #FFF;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item div div {
+	font-weight: bold;
+	text-align: center;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item a {
+	display: block;
 	width: 100%;
-	padding: 5px 0px;
-	white-space: normal;
-}
-body.template-mon-compte table.authentication-list tfoot td {
-	max-width: 192px;
+	padding: 16px 0px;
+	text-align: center;
 }
 
 @media screen and (max-width: 900px) {

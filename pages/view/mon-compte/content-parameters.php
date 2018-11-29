@@ -25,7 +25,7 @@ $form_feedback = $page_controler->get_user_form_feedback();
 	<?php endforeach; ?>
 
 	<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
-	<div class="form-error-general align-left">
+	<div class="wdg-message error">
 		<?php _e( "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :", 'yproject' ); ?><br>
 		<?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
 			- <?php echo $error[ 'text' ]; ?><br>
@@ -34,7 +34,7 @@ $form_feedback = $page_controler->get_user_form_feedback();
 	</div>
 	<?php endif; ?>
 	<?php if ( !empty( $form_feedback[ 'success' ] ) ): ?>
-	<div class="form-success-general align-left">
+	<div class="wdg-message confirm">
 		<?php foreach ( $form_feedback[ 'success' ] as $message ): ?>
 			<?php echo $message; ?>
 		<?php endforeach; ?>
