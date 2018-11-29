@@ -362,12 +362,14 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ] = array();
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'current' ] = array();
 		foreach ( $investment_results[ 'payments_data' ] as $investment_result ) {
-			$investment_date = new DateTime( $investment_result[ 'date' ] );
-			$investment_item = array(
-				'date' => $investment_date->format( 'Y-m-d\Th:i' ),
-				'sum' => max( 0, $investment_result[ 'amount' ] )
-			);
-			array_push( $this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'current' ], $investment_item );
+			if ( $investment_result[ 'status' ] == 'publish' ) {
+				$investment_date = new DateTime( $investment_result[ 'date' ] );
+				$investment_item = array(
+					'date' => $investment_date->format( 'Y-m-d\Th:i' ),
+					'sum' => max( 0, $investment_result[ 'amount' ] )
+				);
+				array_push( $this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'current' ], $investment_item );
+			}
 		}
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ] = array();
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $this->campaign_stats[ 'funding' ][ 'start' ] ] = round( $this->campaign_stats[ 'goal' ] * 35 / 100 ); // J0
