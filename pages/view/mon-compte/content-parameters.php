@@ -30,7 +30,6 @@ $form_feedback = $page_controler->get_user_form_feedback();
 		<?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
 			- <?php echo $error[ 'text' ]; ?><br>
 		<?php endforeach; ?>
-		<br><br>
 	</div>
 	<?php endif; ?>
 	<?php if ( !empty( $form_feedback[ 'success' ] ) ): ?>
@@ -38,7 +37,6 @@ $form_feedback = $page_controler->get_user_form_feedback();
 		<?php foreach ( $form_feedback[ 'success' ] as $message ): ?>
 			<?php echo $message; ?>
 		<?php endforeach; ?>
-		<br><br>
 	</div>
 	<?php endif; ?>
 
