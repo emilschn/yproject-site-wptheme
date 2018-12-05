@@ -263,15 +263,17 @@
 }
 
 .wdg-component-projects-preview .project-container .project-framed .project-title{
-    width: 80%;
-    text-align: center;
     position: relative;
+    width: 80%;
+	max-height: 40px;
+	overflow: hidden;
     top: 20px;
-    text-transform: uppercase;
+	margin: 15px auto;
+	margin-left: 30px;/* pour tenir compte du coin coupé du cartouche*/
     font-size: 13pt;
     font-weight: bold;
-	margin: 15px auto;
-        margin-left: 30px;/* pour tenir compte du coin coupé du cartouche*/
+    text-transform: uppercase;
+    text-align: center;
 }
 
 .wdg-component-projects-preview .project-container .project-framed .project-img{
