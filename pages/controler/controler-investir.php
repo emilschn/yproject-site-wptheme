@@ -17,13 +17,12 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	 */
 	private $current_investment;
 	
-	private $amount_first_contract;
-	private $amount_second_contract;
 	private $can_use_wallet;
 	private $can_use_card_and_wallet;
 	
 	private $current_step;
 	private $form;
+	private $form_display_success;
 	
 	public function __construct() {
 		parent::__construct();
@@ -32,6 +31,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		$core->include_form( 'invest-input' );
 		$core->include_form( 'invest-user-details' );
 		$core->include_form( 'invest-contract' );
+		$core->include_form( 'user-identitydocs' );
 		
 		date_default_timezone_set( "Europe/London" );
 		define( 'SKIP_BASIC_HTML', TRUE );
@@ -197,9 +197,45 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					$WDGCurrent_User = WDGUser::current();
 					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 					if ( $this->form->postForm() ) {
-						$this->current_step = 3;
-						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 3 >> GOTO WDG_Form_Invest_Contract' );
-						$reload_form = TRUE;
+						$is_investor_registered = FALSE;
+						$current_user_type = $_SESSION[ 'redirect_current_user_type' ];
+						if ( $current_user_type == 'user' ) {
+							$is_investor_registered = $WDGCurrent_User->is_lemonway_registered();
+						} else {
+							$WDGCurrent_Organization = new WDGOrganization( $current_user_type );
+							$is_investor_registered = $WDGCurrent_Organization->is_registered_lemonway_wallet();
+						}
+						
+						if ( $is_investor_registered ) {
+							$this->current_step = 3;
+							ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 3 >> GOTO WDG_Form_Invest_Contract' );
+							$reload_form = TRUE;
+						} else {
+							$this->current_step = 2.5;
+							ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2.5 >> GOTO WDG_Form_Invest_Authentication' );
+							$reload_form = TRUE;
+						}
+					}
+				}
+				break;
+				
+			// Analyse formulaire validation authentification
+			case WDG_Form_User_Identity_Docs::$name:
+				$input_nav = filter_input( INPUT_POST, 'nav' );
+				if ( $input_nav == 'previous' ) {
+					$this->current_step = 2;
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2 >> WDG_Form_User_Identity_Docs::$name PREVIOUS' );
+					$reload_form = TRUE;
+					
+				} else {
+					$this->current_step = 2.5;
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2.5 >> WDG_Form_User_Identity_Docs::$name POSTED' );
+					$WDGCurrent_User = WDGUser::current();
+					$identity_docs_user_id = ( $_SESSION[ 'redirect_current_user_type' ] == 'user' ) ? $WDGCurrent_User->get_wpref() : $_SESSION[ 'redirect_current_user_type' ];
+					$this->form = new WDG_Form_User_Identity_Docs( $identity_docs_user_id, ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ), $this->current_campaign );
+					if ( $this->form->postForm() ) {
+						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> GOTO success' );
+						$this->form_display_success = TRUE;
 					}
 				}
 				break;
@@ -256,6 +292,11 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_Invest_User_Details' );
 					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 					break;
+				case 2.5:
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_Invest_Authentication' );
+					$identity_docs_user_id = ( $_SESSION[ 'redirect_current_user_type' ] == 'user' ) ? $WDGCurrent_User->get_wpref() : $_SESSION[ 'redirect_current_user_type' ];
+					$this->form = new WDG_Form_User_Identity_Docs( $identity_docs_user_id, ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ), $this->current_campaign );
+					break;
 				case 3:
 					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_Invest_Contract' );
 					$this->form = new WDG_Form_Invest_Contract( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
@@ -271,6 +312,10 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	
 	public function get_form_errors() {
 		return $this->form->getPostErrors();
+	}
+	
+	public function is_form_success_displayed() {
+		return $this->form_display_success;
 	}
 	
 	public function get_form_action() {

@@ -21,7 +21,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 		<div id="invest-breadcrumb">
 			<span class="<?php if ( $page_controler->get_current_step() == 1 ): ?>selected<?php endif; ?>"><?php _e( "Montant", 'yproject' ); ?></span>
-			<span class="<?php if ( $page_controler->get_current_step() == 2 ): ?>selected<?php endif; ?>"><?php _e( "Informations personnelles", 'yproject' ); ?></span>
+			<span class="<?php if ( $page_controler->get_current_step() == 2 ||  $page_controler->get_current_step() == 2.5 ): ?>selected<?php endif; ?>"><?php _e( "Informations personnelles", 'yproject' ); ?></span>
 			<span class="<?php if ( $page_controler->get_current_step() == 3 ): ?>selected<?php endif; ?>"><?php _e( "Contrat", 'yproject' ); ?></span>
 			<span class="<?php if ( $page_controler->get_current_step() == 4 ): ?>selected<?php endif; ?>"><?php _e( "Paiement", 'yproject' ); ?></span>
 			<span class="<?php if ( $page_controler->get_current_step() == 5 ): ?>selected<?php endif; ?>"><?php _e( "Partage", 'yproject' ); ?></span>
