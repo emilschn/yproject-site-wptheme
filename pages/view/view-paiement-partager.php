@@ -16,12 +16,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php if ( $page_controler->can_display_form() ): ?>
 		
 			<?php
-			$fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Poll::$field_group_hidden );
-			$fields_poll_source = $page_controler->get_form()->getFields( WDG_Form_Invest_Poll::$field_group_poll_source );
+			$fields_hidden = $page_controler->get_form()->getFields( $page_controler->get_form_fields_hidden_slug() );
+			$fields_displayed = $page_controler->get_form()->getFields( $page_controler->get_form_fields_displayed_slug() );
 			?>
 		
-			<div><?php _e( "WE DO GOOD envisage avec son partenaire Le Fonds Compagnon de proposer une protection des investissements en cas de cession d'activit&eacute; de l'entreprise.", 'yproject' ); ?></div>
-			
 			<form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
 
 				<div class="align-left">
@@ -38,7 +36,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 				<?php endforeach; ?>
 
-				<?php foreach ( $fields_poll_source as $field ): ?>
+				<?php foreach ( $fields_displayed as $field ): ?>
 					<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 					<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 				<?php endforeach; ?>
@@ -53,7 +51,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		
 		<?php else: ?>
 		
-			<?php if ( $campaign->is_positive_savings() ): ?>
+			<?php if ( $page_controler->get_current_campaign()->is_positive_savings() ): ?>
 				<strong><?php _e( "Pour d&eacute;multiplier mon impact et permettre &agrave; plus de projets positifs de voir le jour, je passe le mot sur :" ); ?></strong><br><br>
 			<?php else: ?>
 				<strong><?php _e( "Pour augmenter les chances de r&eacute;ussite de ce projet, je passe le mot sur :" ); ?></strong><br><br>

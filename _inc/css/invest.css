@@ -108,7 +108,7 @@ div#content header #invest-breadcrumb span.selected:after {
 .invest_error {
     color: #FE494C;
 }
-.invest_error:after {
+.invest_error:after, #invest_error_alert:after {
 	content: "";
 	display: block;
 	height: 20px;
@@ -279,6 +279,11 @@ div.mean-payment-list a div, div.mean-payment-list p > span {
 }
 
 .template-paiement-partager #field-other-motivations-to-invest, .template-paiement-partager #field-other-source-to-know-the-fundraising, .template-paiement-partager #field-other-source-where-the-user-come-from {
+	margin-top: -50px;
+	margin-left: 30px;
+}
+
+.template-paiement-partager #field-other-invest-rythm, .template-paiement-partager #field-other-known-by-source {
 	margin-top: -50px;
 	margin-left: 30px;
 }

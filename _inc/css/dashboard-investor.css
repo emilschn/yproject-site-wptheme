@@ -12,14 +12,10 @@ body.template-mon-compte div#container div#content {
 	padding: 80px 0px 10px;
 }
 body.template-mon-compte div#container div#content .item-body-tab > h2 {
-	margin: 5px 0;
+	margin: 8px 0px 16px;
 	font-size: 30px;
 	text-transform: uppercase;
 	text-align: center;
-}
-body.template-mon-compte div#container div#content h2.underlined {
-	border-bottom: 0px;
-	color: #00879b;
 }
 body.template-mon-compte div#container div#content h3 {
 	text-transform: uppercase;
@@ -73,26 +69,86 @@ body.template-mon-compte div#container div#content .db-form.v3 {
 	max-width: 600px;
 	margin: 0px auto;
 }
-body.template-mon-compte table.authentication-list td.title {
-	padding: 10px;
+body.template-mon-compte div#container div#content a.download-certificate {
+	display: inline-block;
+	padding: 16px 32px;
+}
+body.template-mon-compte div#container div#content h3.has-margin-top {
+	margin-top: 24px;
+}
+body.template-mon-compte div#container div#content .investment-item {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 8px;
+	padding: 24px;
 	background: #FFFFFF;
 }
-body.template-mon-compte table.authentication-list td.title.col {
-	width: 20%
+body.template-mon-compte div#container div#content .investment-item .amount-date {
+	min-width: 150px;
 }
-body.template-mon-compte table.authentication-list td.inside {
-	padding: 10px;
+body.template-mon-compte div#container div#content .investment-item .single-line {
+	min-width: 50px;
+	line-height: 38px;
 	vertical-align: middle;
-	background: #E1E3E2;
 }
-body.template-mon-compte table.authentication-list td a {
-	display: inline-block;
+body.template-mon-compte div#container div#content .investment-item .single-line.publish {
+	color: #8BC79C;
+}
+body.template-mon-compte div#container div#content .investment-item .single-line.pending {
+	color: #cfb7b7;
+}
+body.template-mon-compte div#container div#content .investment-item .single-line.publish.campaign-archive {
+	color: #333333;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items {
+    display: -webkit-flex;
+	display: flex;
+    -webkit-justify-content: space-around; 
+    justify-content: space-around;
+	margin: 32px 0px;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item {
+	width: 300px;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item.alert:before {
+	position: relative;
+	display: block;
+	content: "!";
+	font-size: 20px;
+	width: 40px;
+	height: 40px;
+	margin-top: -40px;
+	top: 20px;
+	left: 20px;
+	float: right;
+	line-height: 40px;
+	border: 1px solid #FFF;
+	border-radius: 50%;
+	text-align: center;
+	background: #ea4f51;
+	color: #FFF;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item div {
+	margin-bottom: 16px;
+	padding: 8px;
+	text-align: center;
+	background: #FFF;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item div div {
+	font-weight: bold;
+	text-align: center;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item a {
+	display: block;
 	width: 100%;
-	padding: 5px 0px;
-	white-space: normal;
-}
-body.template-mon-compte table.authentication-list tfoot td {
-	max-width: 192px;
+	padding: 16px 0px;
+	text-align: center;
 }
 
 @media screen and (max-width: 900px) {

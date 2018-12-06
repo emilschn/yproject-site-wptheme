@@ -19,7 +19,7 @@ $WDGUserPendingPreinvestment = $page_controler->get_show_user_pending_preinvestm
 	</p>
 	
 	<p class="align-justify">
-		<?php _e( "A l'issue du vote, les conditions de la campagne ont &eacute;t&eacute; modifi&eacute;es :", 'yproject' ); ?><br>
+		<?php _e( "A l'issue de l'&eacute;valuation, les conditions de la lev&eacute;e de fonds ont &eacute;t&eacute; modifi&eacute;es :", 'yproject' ); ?><br>
 		<?php echo $WDGUserPendingPreinvestment->get_saved_campaign()->contract_modifications(); ?>
 	</p>
 	

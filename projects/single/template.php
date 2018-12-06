@@ -17,11 +17,8 @@ $campaign_status = $campaign->campaign_status();
 	<?php endif; ?>
 <?php endif; ?>
 
-<?php $hideprojectwarning = filter_input( INPUT_COOKIE, 'hideprojectwarning' ); ?>
-<?php if ( empty( $hideprojectwarning ) ): ?>
 <?php if ( !is_user_logged_in() && ( $campaign_status == ATCF_Campaign::$campaign_status_preview || $campaign_status == ATCF_Campaign::$campaign_status_vote || $campaign_status == ATCF_Campaign::$campaign_status_collecte ) ): ?>
 	<?php locate_template( array( 'projects/single/warning-lightbox.php' ), true ); ?>
-<?php endif; ?>
 <?php endif; ?>
 
 <?php if ($can_modify): ?>

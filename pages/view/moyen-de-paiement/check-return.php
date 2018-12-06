@@ -12,7 +12,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 	<?php if ( $page_controler->get_check_return() == 'post_confirm_check' ): ?>
 
-		<?php _e( "Pour que celui-ci soit comptabilis&eacute; dans la campagne, vous devez nous envoyer une photo par mail &agrave; l'adresse investir@wedogood.co.", 'yproject' ); ?>
+		<?php _e( "Pour que celui-ci soit comptabilis&eacute; dans la lev&eacute;e de fonds, vous devez nous envoyer une photo par mail &agrave; l'adresse investir@wedogood.co.", 'yproject' ); ?>
 
 	<?php endif; ?>
 

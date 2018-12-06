@@ -127,6 +127,10 @@ var WDGProjectViewer = (function($) {
 			});
 			
 			if ( $( '#wdg-lightbox-project-warning button.close' ).length > 0 ) {
+				var hideprojectwarning = YPUIFunctions.getCookie( 'hideprojectwarning' );
+				if ( hideprojectwarning != '1' ) {
+					$( '#wdg-lightbox-project-warning' ).show();
+				}
 				$( '#wdg-lightbox-project-warning button.close' ).click( function() {
 					var date = new Date();
 					var days = 10;

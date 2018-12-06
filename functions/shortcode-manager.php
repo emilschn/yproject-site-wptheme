@@ -309,6 +309,7 @@ class YPShortcodeManager {
 	
 	function wdg_royalties_simulator( $atts, $content = '' ) {
 		$atts = shortcode_atts( array(
+			'title_color'				=> '#00879b',
 			'title_1'					=> __( "MON PR&Eacute;VISIONNEL :", 'yproject' ),
 			'description_1'				=> __( "Indiquez votre chiffre d&apos;affaires pr&eacute;visionnel sur le nombre d&apos;ann&eacute;es souhait&eacute;es.", 'yproject' ),
 			'title_2'					=> __( "MON BESOIN DE FINANCEMENT :", 'yproject' ),
@@ -327,7 +328,7 @@ class YPShortcodeManager {
 		<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/wdg-royalties-simulator.js?d=<?php echo ASSETS_VERSION; ?>"></script>
 		
 		<form id="royalties-simulator" class="db-form form-register v3 full center bg-white">
-			<h3><?php echo $atts[ 'title_1' ]; ?></h3>
+			<h3 style="color: <?php echo $atts[ 'title_color' ]; ?>"><?php echo $atts[ 'title_1' ]; ?></h3>
 			<span><?php echo $atts[ 'description_1' ]; ?></span>
 			<br><br>
 			
@@ -343,7 +344,7 @@ class YPShortcodeManager {
 			</div>
 			<?php endfor; ?>
 			
-			<h3><?php echo $atts[ 'title_2' ]; ?></h3>
+			<h3 style="color: <?php echo $atts[ 'title_color' ]; ?>"><?php echo $atts[ 'title_2' ]; ?></h3>
 			<span><?php echo $atts[ 'description_2' ]; ?></span>
 			<br><br>
 			

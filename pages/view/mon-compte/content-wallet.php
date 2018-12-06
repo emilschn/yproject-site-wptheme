@@ -27,7 +27,7 @@ if (isset($_GET['invest_id_resend']) && $_GET['invest_id_resend'] != '') {
 	}
 }
 ?>
-<h2 class="underlined">Mon porte-monnaie électronique</h2>
+<h2>Mon porte-monnaie électronique</h2>
 
 <?php
 $amount = $WDGUser_displayed->get_lemonway_wallet_amount();
@@ -66,7 +66,7 @@ Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.
 <?php endif; ?>
 	
 	
-<h2 class="underlined"><?php _e( 'Mes transferts d&apos;argent', 'yproject' ); ?></h2>
+<h3><?php _e( 'Mes transferts d&apos;argent', 'yproject' ); ?></h3>
 <?php
 $args = array(
 	'author'    => get_current_user_id(),

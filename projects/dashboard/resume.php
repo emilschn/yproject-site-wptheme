@@ -70,7 +70,7 @@ function print_resume_page()
                             DashboardUtility::get_infobutton("R&eacute;sumez votre projet et transmettez les informations n&eacute;cessaires au comit&eacute; de s&eacute;lection.",true);
                             break;
                         case ATCF_Campaign::$campaign_status_validated:
-                            DashboardUtility::get_infobutton("Nous vous conseillons sur votre campagne de communication et la pr&eacute;sentation de votre projet.",true);
+                            DashboardUtility::get_infobutton("Nous vous conseillons sur votre lev&eacute;e de fonds de communication et la pr&eacute;sentation de votre projet.",true);
                             break;
                         case ATCF_Campaign::$campaign_status_preview:
                             DashboardUtility::get_infobutton("L'avant-première permet de faire d&eacute;couvrir votre projet sur le site. Cette &eacute;tape est facultative",true);
@@ -79,7 +79,7 @@ function print_resume_page()
                             DashboardUtility::get_infobutton("Testez votre communication et &eacute;valuez votre capacit&eacute; à f&eacute;d&eacute;rer vos cercles d'investisseurs.",true);
                             break;
                         case ATCF_Campaign::$campaign_status_collecte:
-                            DashboardUtility::get_infobutton("Mobilisez des investisseurs pour atteindre votre seuil de validation de campagne et le d&eacute;passer !",true);
+                            DashboardUtility::get_infobutton("Mobilisez des investisseurs pour atteindre votre seuil de validation de lev&eacute;e de fonds et le d&eacute;passer !",true);
                             break;
                         case ATCF_Campaign::$campaign_status_funded:
                             DashboardUtility::get_infobutton("Versez les royalties &agrave; vos investisseurs en fonction de votre chiffre d'affaires et tenez-les inform&eacute;s des avanc&eacute;es de votre projet.",true);
@@ -395,7 +395,7 @@ function print_resume_page()
                     <li>
 						<label>
 							<input type="checkbox" class="checkbox-next-status">
-                            J'ai planifi&eacute; des rencontres et des prises de contact pour parler de mon projet et de ma campagne &agrave; mes proches et &agrave; mon r&eacute;seau
+                            J'ai planifi&eacute; des rencontres et des prises de contact pour parler de mon projet et de ma levée de fonds &agrave; mes proches et &agrave; mon r&eacute;seau
 						</label>
                     </li>
 					
@@ -438,7 +438,7 @@ function print_resume_page()
                     <li>
 						<label>
 							<input type="checkbox" class="checkbox-next-status">
-                            J'ai planifi&eacute; des rencontres et des prises de contact pour parler de mon projet et de ma campagne &agrave; mes proches et &agrave; mon r&eacute;seau
+                            J'ai planifi&eacute; des rencontres et des prises de contact pour parler de mon projet et de ma levée de fonds &agrave; mes proches et &agrave; mon r&eacute;seau
 						</label>
                     </li>
                     <li>
@@ -498,7 +498,7 @@ function print_resume_page()
             DashboardUtility::create_field(array(
                 "id"			=> "new_campaign_status",
                 "type"			=> "select",
-                "label"			=> "Changer l'&eacute;tape actuelle de la campagne",
+                "label"			=> "Changer l'&eacute;tape actuelle de la lev&eacute;e de fonds",
                 "value"			=> $status,
                 "editable"		=> $is_admin,
                 "admin_theme"	=> $is_admin,

@@ -263,15 +263,17 @@
 }
 
 .wdg-component-projects-preview .project-container .project-framed .project-title{
-    width: 80%;
-    text-align: center;
     position: relative;
+    width: 80%;
+	max-height: 40px;
+	overflow: hidden;
     top: 20px;
-    text-transform: uppercase;
+	margin: 15px auto;
+	margin-left: 30px;/* pour tenir compte du coin coupé du cartouche*/
     font-size: 13pt;
     font-weight: bold;
-	margin: 15px auto;
-        margin-left: 30px;/* pour tenir compte du coin coupé du cartouche*/
+    text-transform: uppercase;
+    text-align: center;
 }
 
 .wdg-component-projects-preview .project-container .project-framed .project-img{
@@ -503,6 +505,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
     letter-spacing: 0.12em;
     font-weight: bold;
     text-align: right;
+	z-index: 2;
 }
 .progress-bar .vote-status { 
     display: -webkit-flex;
@@ -1243,6 +1246,7 @@ div.project-rewards-content table tr:first-child {
 div.project-rewards-content table tr td {
     min-width: 75px;
     text-align: center;
+	vertical-align: bottom;
 }
 div.project-rewards-content table tr td > div {
 	margin: auto;
@@ -1296,3 +1300,12 @@ span.advice-news  {
     text-decoration: underline;
 }
 
+/*******************************************************************************
+* SHORTCODES - ROYALTIES SIMULATOR
+*******************************************************************************/
+#royalties_advice {
+	font-weight: bold;
+}
+#royalties_advice .royalties_advice_value {
+	color: #93626D;
+}

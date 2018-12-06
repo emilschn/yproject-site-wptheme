@@ -5,7 +5,7 @@ $fields_hidden = $WDGUserIdentityDocsForm->getFields(WDG_Form_User_Identity_Docs
 $fields_files = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files );
 ?>
 
-<h2 class="underlined"><?php _e( "Mes justificatifs d'identit&eacute;", 'yproject' ); ?></h2>
+<h2><?php _e( "Mes justificatifs d'identit&eacute;", 'yproject' ); ?></h2>
 
 <form method="POST" enctype="multipart/form-data" class="db-form v3 full">
 		

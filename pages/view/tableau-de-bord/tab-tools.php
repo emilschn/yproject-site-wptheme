@@ -20,7 +20,7 @@ if ( $post_guide_tool ) {
 		<br>
 		<h3><?php _e( "Centre de support", 'yproject' ); ?></h3>
 		<p class="align-justify">
-			<?php _e( "Le centre de support regroupe toutes les FAQ et met &agrave; votre disposition des conseils pratiques sur la pr&eacute;paration de votre lev&eacute;e de fonds, l'animation de votre campagne, ainsi que le versement de royalties.", 'yproject' ); ?><br>
+			<?php _e( "Le centre de support regroupe toutes les FAQ et met &agrave; votre disposition des conseils pratiques sur la pr&eacute;paration de votre lev&eacute;e de fonds, l'animation de votre lev&eacute;e de fonds, ainsi que le versement de royalties.", 'yproject' ); ?><br>
 			<?php _e( "Nous sommes aussi disponibles via le chat en ligne ou &agrave; l'adresse suivante : support@wedogood.co.", 'yproject' ); ?><br>
 		</p>
 		<br><br>

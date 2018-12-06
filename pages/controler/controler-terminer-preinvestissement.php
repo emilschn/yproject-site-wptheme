@@ -62,7 +62,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 				}
 			}
 		}
-		if ( !$is_user_organization_preinvestment && $saved_user_id != $WDGUser_current->get_wpref() ) {
+		if ( !$is_user_organization_preinvestment && $saved_user_id != $WDGUser_current->get_wpref() && !$WDGUser_current->is_admin() ) {
 			$buffer = FALSE;
 		}
 		// Il ne peut le modifier que si le statut correspond à un préinvestissement à valider

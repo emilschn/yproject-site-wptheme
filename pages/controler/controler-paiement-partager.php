@@ -13,6 +13,8 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 	
 	private $can_display_form;
 	private $form;
+	private $form_fields_hidden_slug;
+	private $form_fields_displayed_slug;
 	
 	public function __construct() {
 		parent::__construct();
@@ -62,16 +64,29 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 /******************************************************************************/
 	private function init_form_polls() {
 		$this->can_display_form = FALSE;
-		if ( is_user_logged_in() && !$this->current_campaign->is_positive_savings() ) {
+		if ( is_user_logged_in() ) {
 			$WDGCurrent_User = WDGUser::current();
 			$poll_answers = WDGWPREST_Entity_PollAnswer::get_list( $WDGCurrent_User->get_api_id(), $this->current_campaign->get_api_id() );
 			if ( empty( $poll_answers ) ) {
 				$this->can_display_form = TRUE;
 				$core = ATCF_CrowdFunding::instance();
-				$core->include_form( 'invest-poll' );
-				$this->form = new WDG_Form_Invest_Poll( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
-				if ( $this->form->isPosted() && $this->form->postForm( $this->current_investment->get_session_amount() ) ) {
-					$this->can_display_form = FALSE;
+				if ( $this->current_campaign->is_positive_savings() ) {
+					$core->include_form( 'invest-poll-continuous' );
+					$this->form = new WDG_Form_Invest_Poll_Continuous( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
+					$this->form_fields_hidden_slug = WDG_Form_Invest_Poll_Continuous::$field_group_hidden;
+					$this->form_fields_displayed_slug = WDG_Form_Invest_Poll_Continuous::$field_group_poll_continuous;
+					if ( $this->form->isPosted() && $this->form->postForm( $this->current_investment->get_session_amount() ) ) {
+						$this->can_display_form = FALSE;
+					}
+					
+				} else {
+					$core->include_form( 'invest-poll' );
+					$this->form = new WDG_Form_Invest_Poll( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
+					$this->form_fields_hidden_slug = WDG_Form_Invest_Poll::$field_group_hidden;
+					$this->form_fields_displayed_slug = WDG_Form_Invest_Poll::$field_group_poll_source;
+					if ( $this->form->isPosted() && $this->form->postForm( $this->current_investment->get_session_amount() ) ) {
+						$this->can_display_form = FALSE;
+					}
 				}
 			}
 		}
@@ -82,6 +97,12 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 	}
 	public function get_form() {
 		return $this->form;
+	}
+	public function get_form_fields_hidden_slug() {
+		return $this->form_fields_hidden_slug;
+	}
+	public function get_form_fields_displayed_slug() {
+		return $this->form_fields_displayed_slug;
 	}
 	
 	public function get_form_errors() {

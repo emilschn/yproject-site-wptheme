@@ -133,6 +133,12 @@ button.red {
 	background: #EACDCB;
 	color: #333333;
 }
+.wdg-message.notification {
+	padding: 16px;
+	text-transform: none;
+	background: #333;
+	color: #FFFFFF;
+}
 
 
 /*******************************************************************************
@@ -553,7 +559,7 @@ nav#main > div#menu > a.btn-user.active > img {
 nav#main > div#menu > a.btn-user.active.connected > img {
 	margin-top: 13px;
 }
-nav#main > div#menu > a.btn-user.connected.needs-authentication:after, #submenu-user li a.needs-authentication:after, nav ul.nav-menu li a.needs-authentication:after {
+nav#main > div#menu > a.btn-user.connected.needs-authentication:after, #submenu-user li a.needs-authentication:after, nav ul.nav-menu li a.needs-authentication:after, table.authentication-list a.needs-authentication:after, ul.project-list a.needs-authentication:after {
 	content: "!";
 	font-size: 17px;
 	background: #ea4f51;
@@ -578,6 +584,18 @@ nav#main > div#menu > a.btn-user.connected.needs-authentication:after {
 }
 #submenu-user li a.needs-authentication:after, nav ul.nav-menu li a.needs-authentication:after {
 	display: inline-block;
+	margin-left: 5px;
+}
+table.authentication-list a.needs-authentication:after {
+	position: absolute;
+	margin-left: 35px;
+	margin-top: -12px;
+}
+table.authentication-list a.needs-authentication.needs-authentication-parameters:after {
+	margin-left: 25px;
+}
+ul.project-list a.needs-authentication:after {
+	position: absolute;
 	margin-left: 5px;
 }
 

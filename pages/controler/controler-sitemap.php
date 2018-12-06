@@ -57,6 +57,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item = array();
 			$item[ 'name' ] = $campaign->get_name();
 			$item[ 'min_goal' ] = $campaign->minimum_goal();
+			$item[ 'time_remaining' ] = $campaign->time_remaining_str();
 			$item[ 'nb_votes' ] = $campaign->nb_voters();
 			$item[ 'value_intent' ] = $vote_results[ 'sum_invest_ready' ];
 			$item[ 'nb_preinvestment' ] = $vote_results[ 'count_preinvestments' ];
@@ -72,6 +73,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item = array();
 			$item[ 'name' ] = $campaign->get_name();
 			$item[ 'min_goal' ] = $campaign->minimum_goal();
+			$item[ 'time_remaining' ] = $campaign->time_remaining_str();
 			$item[ 'nb_invest' ] = $campaign->backers_count();
 			$item[ 'value_invest' ] = $campaign->current_amount( false );
 			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
@@ -87,6 +89,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item = array();
 			$item[ 'name' ] = $campaign->get_name();
 			$item[ 'min_goal' ] = $campaign->minimum_goal();
+			$item[ 'time_remaining' ] = $campaign->time_remaining_str();
 			$item[ 'nb_invest' ] = $campaign->backers_count();
 			$item[ 'value_invest' ] = $campaign->current_amount( false );
 			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
@@ -129,6 +132,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/epargne-positive/'	=> '0.9',
 			// 0.8
 			'/financement/entreprises/'				=> '0.8',
+			'/financement/royalties/levee-de-fonds-privee/'	=> '0.8',
 //			'/financement/solutions/'				=> '0.8',
 			'/investissement/comparatif-risque/'	=> '0.8',
 			'/investissement/start-up/'				=> '0.8',
@@ -145,6 +149,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/financement/non-dilutif/'						=> '0.7',
 			'/financement/offres/love-money/'				=> '0.7',
 			'/financement/rapide/'							=> '0.7',
+			'/financement/royalties/'						=> '0.7',
 			'/financement/royalty-crowdfunding/'			=> '0.7',
 //			'/financement/solutions/innovation/'			=> '0.7',
 //			'/financement/solutions/investissements/'		=> '0.7',
@@ -157,9 +162,11 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/guide/'										=> '0.6',
 			'/a-propos/statistiques/'						=> '0.6',
 			'/a-propos/vision/'								=> '0.6',
+			'/financement/conditions/'						=> '0.6',
 //			'/financement/entreprises/B2C/'					=> '0.6',
 			'/financement/entreprises/start-up/love-money/'	=> '0.6',
 			'/financement/label-croissance-verte/'			=> '0.6',
+			'/financement/simulateur-taux-de-royalties/'	=> '0.6',
 			'/investissement/comparatif-capital-pret-royalties/'		=> '0.6',
 			'/investissement/impact-investing/evaluation-des-impacts/'	=> '0.6',
 			'/solutions/'									=> '0.6',
@@ -188,13 +195,14 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/a-propos/equipe/'					=> '0.2',
 			'/a-propos/recrutement/'			=> '0.2',
 			// 0.1
-			'/cgu/'								=> '0.1',
 			'/placement-royalties/'				=> '0.1',
 			'/a-propos/'						=> '0.1',
-			'/confidentialite/'					=> '0.1',
+			'/a-propos/cgu/'					=> '0.1',
+			'/a-propos/cgu/conditions-particulieres/'				=> '0.1',
+			'/a-propos/cgu/confidentialite/'	=> '0.1',
+			'/a-propos/cgu/mentions-legales/'	=> '0.1',
+			'/a-propos/cgu/reclamations/'		=> '0.1',
 			'/love-money/'						=> '0.1',
-			'/mentions-legales/'				=> '0.1',
-			'/reclamations/'					=> '0.1',
 			
 		);
 		

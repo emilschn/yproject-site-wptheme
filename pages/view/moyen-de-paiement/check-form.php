@@ -15,7 +15,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	13 Square la Pérouse<br>
 	44000 Nantes<br><br>
 
-	<?php _e( "Le ch&egrave;que ne sera encaiss&eacute; que si la campagne r&eacute;ussit.", 'yproject' ); ?><br><br>
+	<?php _e( "Le ch&egrave;que ne sera encaiss&eacute; que si la lev&eacute;e de fonds r&eacute;ussit.", 'yproject' ); ?><br><br>
 
 	<?php if ( $page_controler->get_current_investment()->get_session_amount() > WDGInvestmentContract::$signature_minimum_amount ): ?>
 		<?php _e( "Vous serez invit&eacute;(e) &agrave; signer le contrat sur la page suivante.", 'yproject' ); ?><br><br>

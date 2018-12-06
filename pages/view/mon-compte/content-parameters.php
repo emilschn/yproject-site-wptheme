@@ -15,6 +15,8 @@ $form_feedback = $page_controler->get_user_form_feedback();
 ?>
 
 
+<h2><?php _e( "Enregistrez vos informations", 'yproject' ); ?></h2>
+
 <form method="POST" enctype="multipart/form-data" class="db-form form-register v3 full">
 		
 	<?php foreach ( $fields_hidden as $field ): ?>
@@ -22,23 +24,19 @@ $form_feedback = $page_controler->get_user_form_feedback();
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
 
-	<h2><?php _e( "Enregistrez vos informations", 'yproject' ); ?></h2>
-
 	<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
-	<div class="form-error-general align-left">
+	<div class="wdg-message error">
 		<?php _e( "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :", 'yproject' ); ?><br>
 		<?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
 			- <?php echo $error[ 'text' ]; ?><br>
 		<?php endforeach; ?>
-		<br><br>
 	</div>
 	<?php endif; ?>
 	<?php if ( !empty( $form_feedback[ 'success' ] ) ): ?>
-	<div class="form-success-general align-left">
+	<div class="wdg-message confirm">
 		<?php foreach ( $form_feedback[ 'success' ] as $message ): ?>
 			<?php echo $message; ?>
 		<?php endforeach; ?>
-		<br><br>
 	</div>
 	<?php endif; ?>
 

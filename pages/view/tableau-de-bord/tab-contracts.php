@@ -182,7 +182,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		DashboardUtility::create_field( array(
 			'id'			=> 'new_contract_modification',
 			'type'			=> 'editor',
-			'label'			=> __( "Modifications sur le contrat entre &eacute;valuation et campagne", 'yproject' ),
+			'label'			=> __( "Modifications sur le contrat entre &eacute;valuation et investissement", 'yproject' ),
 			'value'			=> $page_controler->get_campaign()->contract_modifications(),
 			'admin_theme'	=> true
 		) );

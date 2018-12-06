@@ -11,13 +11,13 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 ?>
 
 <?php if ( !empty( $message_instead_of_field ) ): ?>
-<div class="wdg-message">
+<div class="wdg-message confirm">
 	<?php echo $message_instead_of_field; ?>
 </div>
 
 <?php else: ?>
 <?php if ( $display_refused_alert ): ?>
-<div class="field-alert">
+<div class="wdg-message error">
 	<?php _e( "Le fichier a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement.", 'yproject' ); ?>
 </div>
 <?php endif; ?>
@@ -33,10 +33,10 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 	</span>
 	<span class="button blue"><?php _e( "J'importe mon fichier" ); ?></span>
 </label>
+<br><br>
 <?php endif; ?>
 
 <?php if ( !empty( $wdg_current_field[ 'value' ] ) ): ?>
-	<br><br>
 	<a id="<?php echo $wdg_current_field[ 'name' ]; ?>" class="button blue-pale download-file" target="_blank" href="<?php echo $wdg_current_field[ 'value' ]; ?>"><?php _e( "Aper&ccedil;u du fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $date_upload; ?></a>
 	<br>
 <?php endif;

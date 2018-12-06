@@ -42,4 +42,4 @@
 <?php
 $lightbox_content = ob_get_contents();
 ob_end_clean();
-echo do_shortcode('[yproject_lightbox_cornered id="project-warning" title="'.__( "Avertissement", 'yproject' ).'" autoopen="1" catchclick="0"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="project-warning" title="'.__( "Avertissement", 'yproject' ).'" autoopen="0" catchclick="0"]' . $lightbox_content . '[/yproject_lightbox_cornered]');

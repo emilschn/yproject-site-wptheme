@@ -1,7 +1,6 @@
 function UserAccountDashboard() {
 	this.initWithHash();
 	this.initMenu();
-	this.initProjectList();
 }
 
 /**
@@ -51,6 +50,10 @@ UserAccountDashboard.prototype.switchTab = function( sType, clickedElement ) {
 	$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
 	$( 'div#item-body > div#item-body-' + sType ).show();
 	
+	if ( sType.indexOf( 'investments' ) > -1 ) {
+		this.initProjectList();
+	}
+	
 };
 
 /**
@@ -59,33 +62,96 @@ UserAccountDashboard.prototype.switchTab = function( sType, clickedElement ) {
 UserAccountDashboard.prototype.initProjectList = function() {
 	
 	var self = this;
-	var userID = $('main').data('userid');
+	var userID = $('ul.nav-menu li.selected a').data('userid');
+	var userType = $('ul.nav-menu li.selected a').data('usertype');
+	
+	// Si le picto de chargement n'est pas affiché, c'est qu'on a déjà fait le processus pour cet onglet
+	if ( !$( '#ajax-loader-img-' + userID ).is( ':visible' ) ) {
+		return;
+	}
 	
 	$.ajax({
 		'type' : "POST",
 		'url' : ajax_object.ajax_url,
 		'data': {
 			'user_id': userID,
-			'action' : 'print_user_projects'
+			'user_type': userType,
+			'action' : 'display_user_investments'
 		}
 		
+	// Une fois les projets obtenus
 	}).done(function( result ){
-		// Une fois les projets obtenus
-		$( '#ajax-loader' ).after(result);
+		
+		// Affichage par campagne
+		var sBuffer = '';
+		var aInvestmentCampaigns = new Array();
+		if ( result !== '' ) {
+			aInvestmentCampaigns = JSON.parse( result );
+			
+			for ( var nCampaignID in aInvestmentCampaigns ) {
+				var oCampaignItem = aInvestmentCampaigns[ nCampaignID ];
+				if ( oCampaignItem[ 'name' ] !== undefined && oCampaignItem[ 'name' ] !== null ) {
+					var sCampaignBuffer = '<h3 class="has-margin-top">Mes investissements sur ' + oCampaignItem[ 'name' ] + '</h3>';
+					var aCampaignInvestments = oCampaignItem[ 'items' ];
+					for ( var nIndex in aCampaignInvestments ) {
+						var oInvestmentItem = aCampaignInvestments[ nIndex ];
+						sCampaignBuffer += '<div class="investment-item">';
+
+						sCampaignBuffer += '<div class="amount-date">';
+						sCampaignBuffer += '<strong>' + oInvestmentItem[ 'amount' ] + ' €</strong><br>';
+						sCampaignBuffer += oInvestmentItem[ 'date' ];
+						sCampaignBuffer += '</div>';
+
+						var sStatusStr = 'Valid&eacute;';
+						if ( oInvestmentItem[ 'status' ] === 'pending' ) {
+							sStatusStr = 'En attente';
+						}
+						if ( oCampaignItem[ 'status' ] === 'archive' ) {
+							sStatusStr = 'Rembours&eacute;';
+						}
+						sCampaignBuffer += '<div class="single-line ' +oInvestmentItem[ 'status' ]+ ' campaign-' +oCampaignItem[ 'status' ]+ '">';
+						sCampaignBuffer += sStatusStr;
+						sCampaignBuffer += '</div>';
+
+						sCampaignBuffer += '<div class="align-center">';
+						sCampaignBuffer += 'Investissement sur ' + oCampaignItem[ 'funding_duration' ] + ' ans<br>';
+						sCampaignBuffer += 'à compter du ' + oCampaignItem[ 'start_date' ];
+						sCampaignBuffer += '</div>';
+
+						sCampaignBuffer += '<div class="align-center">';
+						sCampaignBuffer += 'Royalties reçues :<br><strong>' + oInvestmentItem[ 'roi_amount' ] + ' €</strong>';
+						sCampaignBuffer += '</div>';
+
+						sCampaignBuffer += '<div class="align-center">';
+						sCampaignBuffer += 'Retour sur investissement :<br><strong>' + oInvestmentItem[ 'roi_return' ] + ' %</strong>';
+						sCampaignBuffer += '</div>';
+
+						sCampaignBuffer += '<div class="clear"></div>';
+
+						sCampaignBuffer += '</div>';
+					}
+
+					// Pour les mettre dans l'ordre inverse
+					sBuffer = sCampaignBuffer + sBuffer;
+				}
+			}
+			
+		}
+		
+		if ( result === '' || aInvestmentCampaigns.length === 0 ) {
+			sBuffer = '<div class="align-center">';
+			sBuffer += 'Aucun investissement valid&eacute; pour l&apos;instant.<br>';
+			sBuffer += 'Si vous avez investi sur un projet en cours d&apos;&eacute;valuation, cet investissement est encore en attente de validation.';
+			sBuffer += '</div>';
+		} else {
+			$( '#to-hide-after-loading-success-' + userID ).hide();
+		}
+		
+		$( '#ajax-loader-' + userID ).after( sBuffer );
 		$( '#item-body-projects' ).height( 'auto' );
-		$( '#ajax-loader-img' ).hide();
 		
-		// On cache tous les paiements effectués et on affiche Détails des paiements
-		self.togglePayments();
-		$( '.history-projects' ).each(function(){
-			$(this).hide();
-		});
-		
-		// On applique cette fonction une première fois afin d'afficher les projets investis
-		self.filterProjects();
-		$( '#filter-projects :checkbox' ).change(function() {// On met un listener sur les checkbox
-			self.filterProjects();
-		});
+		// Masquage de ce qui n'est plus utile
+		$( '#ajax-loader-img-' + userID ).hide();
 		
 	});
 };
@@ -112,65 +178,7 @@ UserAccountDashboard.prototype.togglePayments = function(){
 				});
 			});
 		});
-
-		$(this).find('.user-subscribe-news input').each(function(){
-			$(this).click(function(){
-				checkbox = $(this);
-
-				$(this).prop('disabled',true);
-				if(this.checked){
-					value = 1;
-				} else {
-					value = 0;
-				};
-				campaign_id = $(this).closest(".history-projects").data("value");
-
-				$.ajax({
-					'type' : "POST",
-					'url' : ajax_object.ajax_url,
-					'context' : checkbox,
-					'data': {
-						'action':'update_subscription_mail',
-						'subscribe' : value,
-						'id_campaign' : campaign_id
-					},
-				}).done(function(){
-					$(this).prop('disabled',false);
-				});
-			});
-		});
 	});
-};
-		
-UserAccountDashboard.prototype.filterProjects = function(){
-	
-	var o = new Object();
-	var tab = [ "jycrois", "invested", "voted" ];
-	
-	// On regarde quelles sont les checkbox cochées
-	$( '#filter-projects input' ).each(function(){
-		// Si elle est cochée, on met un "1"
-		o[ this.value ] = ( this.checked ) ? 1 : 0;
-		
-		// On affiche les projets selon les checkbox cochées
-		$( '.history-projects' ).each(function(){
-			var show_project = false;
-			for ( var i = 0; i <= tab.length; i++ ){
-				// Exemple : L'utilisateur croit au projet  -> data-jycrois=1 (dans le HTML) et J'y crois est coché
-				if( $(this).attr( 'data-' + tab[i] ) === '1' && o[ tab[ i ] ] === 1 ){
-					show_project = true;
-				}
-			}
-			
-			if ( show_project ) {
-				$(this).show();
-				
-			} else {
-				$(this).hide();
-			}
-		});
-	});
-
 };
 
 $(function(){

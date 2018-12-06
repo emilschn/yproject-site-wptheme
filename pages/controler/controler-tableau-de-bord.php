@@ -7,6 +7,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $campaign_id;
 	private $campaign_url;
 	private $campaign_stats;
+	private $campaign_contracts_url;
 	private $can_access;
 	private $can_access_admin;
 	private $can_access_author;
@@ -74,6 +75,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		WDGFormProjects::form_submit_roi_payment();
 		WDGFormProjects::form_approve_payment();
 		WDGFormProjects::form_cancel_payment();
+		WDGFormProjects::form_try_pending_card();
 		$current_organization = $this->get_campaign_organization();
 		$current_organization->send_kyc();
 		$current_organization->submit_transfer_wallet_lemonway();
@@ -103,6 +105,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->can_access_admin = FALSE;
 		$this->can_access_author = FALSE;
 		$this->campaign_id = filter_input(INPUT_GET, 'campaign_id');
+		$this->campaign_contracts_url = FALSE;
 		
 		if ( !empty( $this->campaign_id ) && is_user_logged_in() ) {
 			$this->current_user = WDGUser::current();
@@ -114,6 +117,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			$this->can_access_author = ( $this->author_user->get_wpref() == $this->current_user->get_wpref() );
 			$campaign_organization_item = $this->campaign->get_organization();
 			$this->campaign_organization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+			
+			if ( file_exists( __DIR__ . '/../../../../plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->get_url() . '.zip' ) ) {
+				$this->campaign_contracts_url = home_url( 'wp-content/plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->get_url() . '.zip' );
+			}
 		}
 	}
 	public function get_campaign_id() {
@@ -136,6 +143,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	}
 	public function get_campaign_url() {
 		return $this->campaign_url;
+	}
+	public function get_campaign_contracts_url() {
+		return $this->campaign_contracts_url;
 	}
 	
 /******************************************************************************/
@@ -352,12 +362,14 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ] = array();
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'current' ] = array();
 		foreach ( $investment_results[ 'payments_data' ] as $investment_result ) {
-			$investment_date = new DateTime( $investment_result[ 'date' ] );
-			$investment_item = array(
-				'date' => $investment_date->format( 'Y-m-d\Th:i' ),
-				'sum' => max( 0, $investment_result[ 'amount' ] )
-			);
-			array_push( $this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'current' ], $investment_item );
+			if ( $investment_result[ 'status' ] == 'publish' ) {
+				$investment_date = new DateTime( $investment_result[ 'date' ] );
+				$investment_item = array(
+					'date' => $investment_date->format( 'Y-m-d\Th:i' ),
+					'sum' => max( 0, $investment_result[ 'amount' ] )
+				);
+				array_push( $this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'current' ], $investment_item );
+			}
 		}
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ] = array();
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $this->campaign_stats[ 'funding' ][ 'start' ] ] = round( $this->campaign_stats[ 'goal' ] * 35 / 100 ); // J0

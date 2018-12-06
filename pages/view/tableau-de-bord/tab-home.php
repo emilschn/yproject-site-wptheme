@@ -70,7 +70,7 @@ $i=1;
 						DashboardUtility::get_infobutton("Testez votre communication et &eacute;valuez votre capacit&eacute; à f&eacute;d&eacute;rer vos cercles d'investisseurs.",true);
 						break;
 					case ATCF_Campaign::$campaign_status_collecte:
-						DashboardUtility::get_infobutton("Mobilisez des investisseurs pour atteindre votre seuil de validation de campagne et le d&eacute;passer !",true);
+						DashboardUtility::get_infobutton("Mobilisez des investisseurs pour atteindre votre seuil de validation de levée de fonds et le d&eacute;passer !",true);
 						break;
 					case ATCF_Campaign::$campaign_status_funded:
 						DashboardUtility::get_infobutton("Versez les royalties &agrave; vos investisseurs en fonction de votre chiffre d'affaires et tenez-les inform&eacute;s des avanc&eacute;es de votre projet.",true);
@@ -381,7 +381,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 				<li>
 					<label>
 						<input type="checkbox" class="checkbox-next-status">
-						J'ai planifi&eacute; des rencontres et des prises de contact pour parler de mon projet et de ma campagne &agrave; mes proches et &agrave; mon r&eacute;seau
+						J'ai planifi&eacute; des rencontres et des prises de contact pour parler de mon projet et de ma levée de fonds &agrave; mes proches et &agrave; mon r&eacute;seau
 					</label>
 				</li>
 
@@ -424,7 +424,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 				<li>
 					<label>
 						<input type="checkbox" class="checkbox-next-status">
-						J'ai planifi&eacute; des rencontres et des prises de contact pour parler de mon projet et de ma campagne &agrave; mes proches et &agrave; mon r&eacute;seau
+						J'ai planifi&eacute; des rencontres et des prises de contact pour parler de mon projet et de ma levée de fonds &agrave; mes proches et &agrave; mon r&eacute;seau
 					</label>
 				</li>
 				<li>
@@ -484,7 +484,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 		DashboardUtility::create_field(array(
 			'id'			=> 'new_campaign_status',
 			'type'			=> 'select',
-			'label'			=> "Changer l'&eacute;tape actuelle de la campagne",
+			'label'			=> "Changer l'&eacute;tape actuelle de la levée de fonds",
 			'value'			=> $status,
 			'editable'		=> $page_controler->can_access_admin(),
 			'admin_theme'	=> $page_controler->can_access_admin(),
@@ -509,7 +509,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 	</form>
 	<?php endif; ?>
 	
-	<h2><?php _e( "Planning de campagne", 'yproject' ); ?></h2>
+	<h2><?php _e( "Planning de lev&eacute;e de fonds", 'yproject' ); ?></h2>
 	<form action="" id="campaign_form" class="ajax-db-form db-form v3 full center" data-action="save_project_campaigntab">
 		<ul class="errors">
 

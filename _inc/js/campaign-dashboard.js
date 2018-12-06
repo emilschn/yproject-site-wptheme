@@ -349,6 +349,14 @@ WDGCampaignDashboard.prototype.switchTab = function(sType) {
 	$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
 	$( 'div#item-body > div#item-body-' + sType ).show();
 	
+	// Mise à jour des datatables pour éviter les décalages de header
+	if ( sType == 'royalties' && this.walletTimetableDatatable != undefined ) {
+		this.walletTimetableDatatable.draw();
+	}
+	if ( sType == 'contacts' && this.table != undefined ) {
+		this.table.draw();
+	}
+	
 	this.scrollTo( $( '#item-body' ) );
 	
 };
@@ -902,7 +910,11 @@ WDGCampaignDashboard.prototype.updateEditOrgaBtn = function(form){
 * @param {objet} feedback : retour ajax
 */
 WDGCampaignDashboard.prototype.updateOrgaForm = function(feedback){
-   $("#wdg-lightbox-editOrga #org_name").html(feedback.organization.name);
+	if ( $("#wdg-lightbox-editOrga #org_name").length > 0 ) {
+		$("#wdg-lightbox-editOrga #org_name").html(feedback.organization.name);
+	} else {
+		$("#wdg-lightbox-editOrga input[name=org_name]").val(feedback.organization.name);
+	}
    $("#wdg-lightbox-editOrga input[name=org_email]").val(feedback.organization.email);
    $("#wdg-lightbox-editOrga input[name=org_representative_function]").val(feedback.organization.representative_function);
    $("#wdg-lightbox-editOrga input[name=org_description]").val(feedback.organization.description);
@@ -1425,28 +1437,30 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 };
 
 WDGCampaignDashboard.prototype.refreshTurnoverAmountToPay = function() {
-	var roiPercent = $("#turnover-declaration").data("roi-percent");
-	var costsOrga = $("#turnover-declaration").data("costs-orga");
+	var roiPercent = $( '#turnover-declaration' ).data( 'roi-percent' );
+	var minCostsOrga = $( '#turnover-declaration' ).data( 'minimum-costs' );
+	var costsOrga = $( '#turnover-declaration' ).data( 'costs-orga' );
 	var total = 0;
-	if ($("#turnover-total").length > 0) {
-		total = Number( $("#turnover-total").val().split(',').join('.') );
+	if ( $( '#turnover-total' ).length > 0 ) {
+		total = Number( $( '#turnover-total' ).val().split(',').join('.') );
 	} else {
 		var i = 0;
-		while ($("#turnover-" + i).length > 0) {
-			total += Number( $("#turnover-" + i).val().split(',').join('.') );
+		while ( $( '#turnover-' + i ).length > 0 ) {
+			total += Number( $( '#turnover-' + i ).val().split(',').join('.') );
 			i++;
 		}
 	}
 	var amount = total * roiPercent / 100;
-	var amount_with_fees = amount + (amount * costsOrga / 100);
-	amount_with_fees += $("#turnover-declaration").data("adjustment");
+	var fees = Math.max( minCostsOrga, amount * costsOrga / 100 );
+	var amount_with_fees = amount + fees;
+	amount_with_fees += $( '#turnover-declaration' ).data( 'adjustment' );
 	amount_with_fees = Math.round(amount_with_fees * 100) / 100;
 
-	$(".amount-to-pay").text(amount_with_fees);
+	$( '.amount-to-pay' ).text(amount_with_fees);
+	$( '.commission-to-pay' ).text(fees);
 };
 
 WDGCampaignDashboard.prototype.refreshAjustmentAmountToPay = function() {
-	console.log( 'change' );
 	var roiPercent = $( '#form-declaration-adjustment' ).data( 'roi-percent' );
 	var costsOrga = $( '#form-declaration-adjustment' ).data( 'costs-orga' );
 	var total = Number( $( '#new_declaration_adjustment_turnover_difference' ).val() );
