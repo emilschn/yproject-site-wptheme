@@ -46,7 +46,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 			<form method="GET" action="<?php echo home_url( '/investir' ); ?>">
 			<?php endif; ?>
 
-				<?php if ( $funding_duration > 0 && $campaign->roi_percent_estimated() > 0 && $firstpayment_year > 2014 ): ?>
+				<?php if ( $campaign->roi_percent_estimated() > 0 && $firstpayment_year > 2014 ): ?>
 
 					<div class="field">
 						<label for="init_invest"><?php _e( "Si j'investis :", 'yproject' ); ?></label>
