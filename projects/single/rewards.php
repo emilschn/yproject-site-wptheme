@@ -9,7 +9,6 @@ $funding_duration_str_2 = ( $funding_duration == 0 ) ? '5 ' .__( "ans", 'yprojec
 $firstpayment_date = new DateTime( $campaign->first_payment_date() );
 $firstpayment_year = $firstpayment_date->format( 'Y' );
 $estimated_turnover = $campaign->estimated_turnover();
-$maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illimit&eacute;", 'yproject' ) : 'x' .$campaign->maximum_profit();
 ?>
 <div class="project-rewards padder">
 	<?php if ( empty( $is_simulator_shortcode ) ): ?>
@@ -113,7 +112,7 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 					
 				
 				<div class="project-rewards-alert">
-					<?php echo sprintf( __("Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s.", "yproject"), $maximum_profit_str ); ?><br>
+					<?php echo sprintf( __("Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s.", "yproject"), $campaign->maximum_profit_str() ); ?><br>
 					* <?php _e( "Imposition : Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30% sur le b&eacute;n&eacute;fice r&eacute;alis&eacute;." ); ?>
 				</div>
 
