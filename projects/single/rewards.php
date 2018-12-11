@@ -49,7 +49,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 				<?php if ( $campaign->roi_percent_estimated() > 0 && $firstpayment_year > 2014 ): ?>
 
 					<div class="field">
-						<label for="init_invest"><?php _e( "Si j'investis :", 'yproject' ); ?></label>
+						<label for="init_invest"><?php _e( "Si j'investissais :", 'yproject' ); ?></label>
 						<div class="field-container field-init-invest">
 							<span class="field-value">
 								<input type="text" name="init_invest" id="init_invest" />
