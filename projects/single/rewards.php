@@ -9,7 +9,6 @@ $funding_duration_str_2 = ( $funding_duration == 0 ) ? '5 ' .__( "ans", 'yprojec
 $firstpayment_date = new DateTime( $campaign->first_payment_date() );
 $firstpayment_year = $firstpayment_date->format( 'Y' );
 $estimated_turnover = $campaign->estimated_turnover();
-$maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illimit&eacute;", 'yproject' ) : 'x' .$campaign->maximum_profit();
 ?>
 <div class="project-rewards padder">
 	<?php if ( empty( $is_simulator_shortcode ) ): ?>
@@ -47,10 +46,10 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 			<form method="GET" action="<?php echo home_url( '/investir' ); ?>">
 			<?php endif; ?>
 
-				<?php if ( $funding_duration > 0 && $campaign->roi_percent_estimated() > 0 && $firstpayment_year > 2014 ): ?>
+				<?php if ( $campaign->roi_percent_estimated() > 0 && $firstpayment_year > 2014 ): ?>
 
 					<div class="field">
-						<label for="init_invest"><?php _e( "Si j'investis :", 'yproject' ); ?></label>
+						<label for="init_invest"><?php _e( "Si j'investissais :", 'yproject' ); ?></label>
 						<div class="field-container field-init-invest">
 							<span class="field-value">
 								<input type="text" name="init_invest" id="init_invest" />
@@ -61,6 +60,10 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 
 					<div class="field">
 						<button class="button blue" type="button"><?php _e( "Calculer", 'yproject' ); ?></button>
+					</div>
+				
+					<div id="error-maximum" class="hidden wdg-message error">
+						<?php _e( "Il n'est pas possible d'investir plus que l'objectif maximum recherch&eacute;.", 'yproject' ); ?>
 					</div>
 
 					<div class="field">
@@ -113,7 +116,7 @@ $maximum_profit_str = ( $campaign->maximum_profit() == 'infinite' ) ? __( "illim
 					
 				
 				<div class="project-rewards-alert">
-					<?php echo sprintf( __("Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s.", "yproject"), $maximum_profit_str ); ?><br>
+					<?php echo sprintf( __("Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s.", "yproject"), $campaign->maximum_profit_str() ); ?><br>
 					* <?php _e( "Imposition : Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30% sur le b&eacute;n&eacute;fice r&eacute;alis&eacute;." ); ?>
 				</div>
 
