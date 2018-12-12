@@ -61,6 +61,10 @@ $estimated_turnover = $campaign->estimated_turnover();
 					<div class="field">
 						<button class="button blue" type="button"><?php _e( "Calculer", 'yproject' ); ?></button>
 					</div>
+				
+					<div id="error-maximum" class="hidden wdg-message error">
+						<?php _e( "Il n'est pas possible d'investir plus que l'objectif maximum recherch&eacute;.", 'yproject' ); ?>
+					</div>
 
 					<div class="field">
 						<label for="init_invest"><?php _e( "Je recevrais :", 'yproject' ); ?></label>
