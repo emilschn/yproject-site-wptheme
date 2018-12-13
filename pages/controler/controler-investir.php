@@ -95,15 +95,34 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 /******************************************************************************/
 // CURRENT INVESTMENT
 /******************************************************************************/
+	/**
+	 * Surcharge de WDG_Page_Controler	
+	*/
+	public function init_show_user_pending_investment() {
+		$this->show_user_pending_investment = false;
+	}
+	/**
+	 * Surcharge de WDG_Page_Controler	
+	*/
+	public function init_show_user_pending_preinvestment() {
+		$this->show_user_pending_preinvestment = false;
+	}
+	
 	private function init_current_investment() {
-		$this->current_investment = WDGInvestment::current();
+		$input_init_with_id = filter_input( INPUT_GET, 'init_with_id' );
+		if ( !empty( $input_init_with_id ) ) {
+			$this->current_investment = new WDGInvestment( $input_init_with_id );
+			$this->current_investment->init_session_with_saved_values();
+		} else {
+			$this->current_investment = WDGInvestment::current();
+		}
 	}
 	
 	public function get_current_investment() {
 		return $this->current_investment;
 	}
 	
-	public function get_current_investment_contract_preview( $first_contract = TRUE, $with_wallet = FALSE ) {
+	public function get_current_investment_contract_preview() {
 		$current_user = wp_get_current_user();
 		$campaign = $this->current_campaign;
 		$part_value = $campaign->part_value();
@@ -170,7 +189,13 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 			$this->current_step = 1;
 			ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 1 >> $action_posted != WDG_Form_Invest_Input::$name && !$current_investment->is_session_correct()' );
 		}
+		
 		$reload_form = FALSE;
+		$input_init_with_id = filter_input( INPUT_GET, 'init_with_id' );
+		if ( !empty( $input_init_with_id ) ) {
+			$this->current_step = 3;
+			$reload_form = TRUE;
+		}
 		
 		switch ( $action_posted ) {
 			// Analyse formulaire saisie montant

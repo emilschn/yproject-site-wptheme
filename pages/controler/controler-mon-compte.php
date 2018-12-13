@@ -145,6 +145,10 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		}
 	}
 	
+	public function init_show_user_needs_authentication() {
+		$this->show_user_needs_authentication = false;
+	}
+	
 /******************************************************************************/
 // USER ID
 /******************************************************************************/
