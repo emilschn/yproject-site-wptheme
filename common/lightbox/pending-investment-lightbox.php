@@ -23,9 +23,9 @@ $WDGUserPendingPreinvestment = $page_controler->get_show_user_pending_investment
 	</p>
 	
 	<form class="db-form v3">
-		<a href="<?php echo home_url( '/investir/?init_with_id=' . $WDGUserPendingPreinvestment->get_id() . '&campaign_id=' . $WDGUserPendingPreinvestment->get_saved_campaign()->ID ); ?>" class="button red"><?php _e( "Confirmer mon investissement", 'yproject' ); ?></a>
+		<a href="<?php echo home_url( '/investir/?init_with_id=' .$WDGUserPendingPreinvestment->get_id(). '&campaign_id=' .$WDGUserPendingPreinvestment->get_saved_campaign()->ID ); ?>" class="button red"><?php _e( "Confirmer mon investissement", 'yproject' ); ?></a>
 		<br><br>
-		<a href="<?php echo home_url( '/investir/?cancel=1&investment_id=' . $WDGUserPendingPreinvestment->get_id() ); ?>" class="button transparent"><?php _e( "Annuler mon investissement", 'yproject' ); ?></a>
+		<a href="<?php echo home_url( '/investir/?init_with_id=' .$WDGUserPendingPreinvestment->get_id(). '&campaign_id=' .$WDGUserPendingPreinvestment->get_saved_campaign()->ID. '&cancel=1' ); ?>" class="button transparent"><?php _e( "Annuler mon investissement", 'yproject' ); ?></a>
 	</form>
 	
 </div>

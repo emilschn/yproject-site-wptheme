@@ -193,8 +193,19 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		$reload_form = FALSE;
 		$input_init_with_id = filter_input( INPUT_GET, 'init_with_id' );
 		if ( !empty( $input_init_with_id ) ) {
-			$this->current_step = 3;
-			$reload_form = TRUE;
+			$input_cancel = filter_input( INPUT_GET, 'cancel' );
+			if ( empty( $input_cancel ) ) {
+				$this->current_step = 3;
+				$reload_form = TRUE;
+			} else {
+				$this->current_step = -1;
+				$WDGUser_current = WDGUser::current();
+				// Seul l'investisseur peut annuler, et seulement si c'est un investissement non-démarré
+				$investment_to_cancel = new WDGInvestment( $input_init_with_id );
+				if ( $investment_to_cancel->get_saved_user_id() == $WDGUser_current->get_wpref() && $investment_to_cancel->get_contract_status() == WDGInvestment::$contract_status_not_validated ) {
+					$investment_to_cancel->cancel();
+				}
+			}
 		}
 		
 		switch ( $action_posted ) {
