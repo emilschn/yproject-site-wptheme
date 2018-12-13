@@ -5,16 +5,23 @@ $template_engine->set_controler( new WDG_Page_Controler_Sitemap() );
 class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	
 	public function __construct() {
-		parent::__construct();
-		$this->hourly_call();
-		$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
-		$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
-		if ( $this->is_daily_call_time() || $input_force_daily_call == '1' ) {
-			$this->daily_call();
-		} else if ( $this->is_summary_call_time() || $input_force_summary_call == '1' ) {
-			$this->summary_call();
-		}
+		$input_queue = filter_input( INPUT_GET, 'queue' );
 		
+		if ( !empty( $input_queue ) && $input_queue == '1' ) {
+			WDGQueue::execute_next( 10 );
+			
+		} else {
+			$this->hourly_call();
+			$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
+			$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
+			if ( $this->is_daily_call_time() || $input_force_daily_call == '1' ) {
+				$this->daily_call();
+			} else if ( $this->is_summary_call_time() || $input_force_summary_call == '1' ) {
+				$this->summary_call();
+			}
+			
+		}
+		exit();
 	}
 	
 	private function hourly_call() {
