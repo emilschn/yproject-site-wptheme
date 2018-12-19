@@ -31,6 +31,8 @@ body input, body select {
 .bg-dark-gray { background: #333333; color: #FFF; }
 .uppercase { text-transform: uppercase; }
 
+.margin-bottom { margin-bottom: 16px; }
+
 
 h2.standard {
     text-align: center;

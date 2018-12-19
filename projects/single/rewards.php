@@ -68,7 +68,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 
 					<div class="field">
 						<label for="init_invest"><?php _e( "Je recevrais :", 'yproject' ); ?></label>
-						<div class="field-container">
+						<div class="field-container align-left">
 							<?php $complementary_text = '.'; ?>
 							<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
 								<?php $complementary_text = __( " (pourcentage indicatif).", 'yproject' ); ?>
@@ -85,7 +85,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 
 
 					<?php if ( count( $estimated_turnover ) > 0 ): ?>
-					<div>
+					<div class="margin-bottom">
 						<table>
 							<tr>
 								<td>
@@ -102,20 +102,19 @@ $estimated_turnover = $campaign->estimated_turnover();
 							</tr>
 						</table>                                       
 					</div>
-					<?php $base = 130 * $index; ?>
-					<div class="arrow-line" style="width: <?php echo $base ?>px;"><div class="arrow-end"></div></div>
 					<?php endif; ?>
 
 				<?php endif; ?>
 
-				<div>
+				
+				<div class="align-left">
 					<strong><?php _e( "Retour sur investissement vis&eacute; :", 'yproject' ); ?></strong><br>
 					+ <span><span class="roi_percent_total">...</span> %</span> <?php echo __( "de votre investissement initial en", 'yproject' ). ' ' .$funding_duration_str_2; ?><br>
 					(<?php _e( "soit", 'yproject' ); ?> <span>x<span class="roi_ratio_on_total">...</span></span> <?php echo __( "votre investissement initial en", 'yproject' ). ' ' .$funding_duration_str_2; ?>)
 				</div>
 					
 				
-				<div class="project-rewards-alert">
+				<div class="project-rewards-alert align-left">
 					<?php echo sprintf( __("Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s.", "yproject"), $campaign->maximum_profit_str() ); ?><br>
 					* <?php _e( "Imposition : Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30% sur le b&eacute;n&eacute;fice r&eacute;alis&eacute;." ); ?>
 				</div>
