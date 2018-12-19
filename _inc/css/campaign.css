@@ -523,13 +523,6 @@ div#content.version-3 div.project-rewards-content label {
 	text-transform: uppercase;
 	color: #00879b;
 }
-div#content.version-3 div.project-rewards-content span.roi_percent_user, div#content.version-3 div.project-rewards-content span.roi_amount_user {
-	font-weight: bold;
-	color: #93626D;
-}
-div#content.version-3 div.project-rewards-content span.roi_percent_user {
-	font-size: 22px;
-}
 div#content.version-3 div.project-rewards-content div.roi_amount_base {
 	height: 5px;
 	margin-bottom: 5px;
@@ -596,11 +589,6 @@ div#content.version-3 div.project-rewards-content ul li:before {
 }
 div#content.version-3 div.project-rewards-content ul li span {
 	color: #93626D;
-}
-div#content.version-3 div.project-rewards-content div.project-rewards-alert {
-	margin-top: 10px;
-	font-style: italic;
-	font-size: 11px;
 }
 
 /*******************************************************************************
