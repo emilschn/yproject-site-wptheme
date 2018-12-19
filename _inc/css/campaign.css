@@ -536,10 +536,6 @@ div#content.version-3 div.project-rewards-content table:before {
 	top: 70px;
 	border-top: 1px solid;
 }
-div#content.version-3 div.project-rewards-content table tr:first-child {
-    font-size: 12px;
-	font-family: Trebuchet MS,sans-serif;
-}
 div#content.version-3 div.project-rewards-content table tr td {
     min-width: 75px;
     text-align: center;
@@ -556,10 +552,6 @@ div#content.version-3 div.project-rewards-content table tr td > div {
 div#content.version-3 div.project-rewards-content table tr td > div > div {
 	background: #FFF;
 	vertical-align: bottom;
-}
-div#content.version-3 div.project-rewards-content table tr:last-child td div {
-	margin-bottom: 4px;
-	color: #93626D;
 }
 div#content.version-3 div.project-rewards-content table tr:last-child td span.roi_amount_user_container {
 	position: relative;

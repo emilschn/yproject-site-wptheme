@@ -1239,6 +1239,8 @@ div.project-rewards-content table:before {
 	border-top: 1px solid;
 }
 div.project-rewards-content table tr:first-child {
+    font-size: 12px;
+	font-family: Trebuchet MS,sans-serif;
     font-weight: bold;
 }
 div.project-rewards-content table tr td {
@@ -1257,6 +1259,7 @@ div.project-rewards-content table tr td > div > div {
 	vertical-align: bottom;
 }
 div.project-rewards-content table tr:last-child td div {
+	margin-bottom: 4px;
 	color: #93626D;
 }
 div.project-rewards-content table tr:last-child td span.roi_amount_user_container {

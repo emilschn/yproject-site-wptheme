@@ -68,7 +68,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 
 					<div class="field">
 						<label for="init_invest"><?php _e( "Je recevrais :", 'yproject' ); ?></label>
-						<div class="field-container">
+						<div class="field-container align-left">
 							<?php $complementary_text = '.'; ?>
 							<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
 								<?php $complementary_text = __( " (pourcentage indicatif).", 'yproject' ); ?>
