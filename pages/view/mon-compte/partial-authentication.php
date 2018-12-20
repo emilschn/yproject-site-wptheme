@@ -25,7 +25,7 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 
 	<?php else: ?>
 		<div class="wdg-message notification">
-			<?php _e( "Suite &agrave; un renforcement de la l&eacute;gislation contre le blanchiment d'argent, &agrave; partir de Janvier 2019, l'authentification sera n&eacute;cessaire aupr&egrave;s de notre prestataire pour tout investissement.", 'yproject' ); ?>
+			<?php _e( "Depuis Janvier 2019 et suite &agrave; un renforcement de la l&eacute;gislation contre le blanchiment d'argent, l'authentification sera n&eacute;cessaire aupr&egrave;s de notre prestataire pour tout investissement.", 'yproject' ); ?>
 			<?php _e( "Nous vous invitons ainsi &agrave; renseigner d&egrave;s maintenant les documents permettant de vous authentifier.", 'yproject' ); ?>
 		</div>
 

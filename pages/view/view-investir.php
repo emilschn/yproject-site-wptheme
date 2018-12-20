@@ -14,8 +14,14 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		case 2:
 			locate_template( array( 'pages/view/investir/user-details.php'  ), true );
 			break;
+		case 2.5:
+			locate_template( array( 'pages/view/investir/identitydocs.php'  ), true );
+			break;
 		case 3:
 			locate_template( array( 'pages/view/investir/contract.php'  ), true );
+			break;
+		case -1:
+			locate_template( array( 'pages/view/investir/cancel-not-validated-investment.php'  ), true );
 			break;
 		default:
 			locate_template( array( 'pages/view/investir/input.php'  ), true );

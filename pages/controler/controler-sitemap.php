@@ -9,6 +9,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		
 		if ( !empty( $input_queue ) && $input_queue == '1' ) {
 			WDGQueue::execute_next( 10 );
+			exit( 'OK' );
 			
 		} else {
 			$this->hourly_call();

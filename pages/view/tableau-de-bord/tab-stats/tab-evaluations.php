@@ -222,7 +222,7 @@ $vote_more_info = $vote['more_info']; // liste des 'autres informations'
 				<div id="notation">
 					<div class="grid-12-small-1">
 						<div class="col-4">
-							<p><span>Note attribué<br> au projet</span></p>
+							<p><span>Note attribuée<br> au projet</span></p>
 						</div>
 						<div class="col-7">
 							<div class="grid-5-small-1 note-dot">

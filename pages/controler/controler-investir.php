@@ -17,14 +17,12 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	 */
 	private $current_investment;
 	
-	private $needs_two_contracts;
-	private $amount_first_contract;
-	private $amount_second_contract;
 	private $can_use_wallet;
 	private $can_use_card_and_wallet;
 	
 	private $current_step;
 	private $form;
+	private $form_display_success;
 	
 	public function __construct() {
 		parent::__construct();
@@ -33,6 +31,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		$core->include_form( 'invest-input' );
 		$core->include_form( 'invest-user-details' );
 		$core->include_form( 'invest-contract' );
+		$core->include_form( 'user-identitydocs' );
 		
 		date_default_timezone_set( "Europe/London" );
 		define( 'SKIP_BASIC_HTML', TRUE );
@@ -96,51 +95,38 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 /******************************************************************************/
 // CURRENT INVESTMENT
 /******************************************************************************/
+	/**
+	 * Surcharge de WDG_Page_Controler	
+	*/
+	public function init_show_user_pending_investment() {
+		$this->show_user_pending_investment = false;
+	}
+	/**
+	 * Surcharge de WDG_Page_Controler	
+	*/
+	public function init_show_user_pending_preinvestment() {
+		$this->show_user_pending_preinvestment = false;
+	}
+	
 	private function init_current_investment() {
-		$this->current_investment = WDGInvestment::current();
+		$input_init_with_id = filter_input( INPUT_GET, 'init_with_id' );
+		if ( !empty( $input_init_with_id ) ) {
+			$this->current_investment = new WDGInvestment( $input_init_with_id );
+			$this->current_investment->init_session_with_saved_values();
+		} else {
+			$this->current_investment = WDGInvestment::current();
+		}
 	}
 	
 	public function get_current_investment() {
 		return $this->current_investment;
 	}
 	
-	public function needs_two_contracts( $with_wallet = FALSE ) {
-		if ( !isset( $this->needs_two_contracts ) ) {
-			$this->needs_two_contracts = array();
-		}
-		if ( !isset( $this->needs_two_contracts[ $with_wallet ] ) ) {
-			$amount_wallet = 0;
-			if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
-				$WDGInvestorEntity = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
-				if ( $with_wallet ) {
-					$amount_wallet = $WDGInvestorEntity->get_available_rois_amount();
-				}
-				
-			} else {
-				$WDGInvestorEntity = WDGUser::current();
-				if ( $with_wallet ) {
-					$amount_wallet = $WDGInvestorEntity->get_lemonway_wallet_amount();
-				}
-			}
-			$amount_part = $_SESSION[ 'redirect_current_amount_part' ];
-			$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGInvestorEntity );
-			$this->needs_two_contracts[ $with_wallet ] = ( $amount_part > $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert() + $amount_wallet );
-		}
-		return $this->needs_two_contracts[ $with_wallet ];
-	}
-	
-	public function get_current_investment_contract_preview( $first_contract = TRUE, $with_wallet = FALSE ) {
+	public function get_current_investment_contract_preview() {
 		$current_user = wp_get_current_user();
 		$campaign = $this->current_campaign;
 		$part_value = $campaign->part_value();
 		$amount = $_SESSION[ 'redirect_current_amount_part' ];
-		if ( $first_contract !== 'single' && $this->needs_two_contracts( $with_wallet ) ) {
-			if ( $first_contract ) {
-				$amount = $this->get_first_contract_amount( $with_wallet );
-			} else {
-				$amount = $this->get_second_contract_amount( $with_wallet );
-			}
-		}
         $amount_part = ( $amount === FALSE ) ? 0 : $amount / $part_value;
 		
 		$invest_data = array(
@@ -156,41 +142,6 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 			$organization = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
 		}
 		return fillPDFHTMLDefaultContent( $current_user, $campaign, $invest_data, $organization, true );
-	}
-	
-	public function get_first_contract_amount( $with_wallet = FALSE ) {
-		if ( !isset( $this->amount_first_contract ) ) {
-			$this->amount_first_contract = array();
-		}
-		if ( !isset( $this->amount_first_contract[ $with_wallet ] ) ) {
-			$amount_wallet = 0;
-			if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
-				$WDGInvestorEntity = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
-				if ( $with_wallet ) {
-					$amount_wallet = $WDGInvestorEntity->get_available_rois_amount();
-				}
-				
-			} else {
-				$WDGInvestorEntity = WDGUser::current();
-				if ( $with_wallet ) {
-					$amount_wallet = $WDGInvestorEntity->get_lemonway_wallet_amount();
-				}
-			}
-			$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGInvestorEntity );
-			$this->amount_first_contract[ $with_wallet ] = $WDGCurrent_User_Investments->get_maximum_investable_amount_without_alert() + $amount_wallet;
-		}
-		return $this->amount_first_contract[ $with_wallet ];
-	}
-	
-	public function get_second_contract_amount( $with_wallet = FALSE ) {
-		if ( !isset( $this->amount_second_contract ) ) {
-			$this->amount_first_contract = array();
-		}
-		if ( !isset( $this->amount_second_contract[ $with_wallet ] ) ) {
-			$amount = $_SESSION[ 'redirect_current_amount_part' ];
-			$this->amount_second_contract[ $with_wallet ] = $amount - $this->get_first_contract_amount( $with_wallet );
-		}
-		return $this->amount_second_contract[ $with_wallet ];
 	}
 	
 /******************************************************************************/
@@ -238,7 +189,24 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 			$this->current_step = 1;
 			ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 1 >> $action_posted != WDG_Form_Invest_Input::$name && !$current_investment->is_session_correct()' );
 		}
+		
 		$reload_form = FALSE;
+		$input_init_with_id = filter_input( INPUT_GET, 'init_with_id' );
+		if ( !empty( $input_init_with_id ) ) {
+			$input_cancel = filter_input( INPUT_GET, 'cancel' );
+			if ( empty( $input_cancel ) ) {
+				$this->current_step = 3;
+				$reload_form = TRUE;
+			} else {
+				$this->current_step = -1;
+				$WDGUser_current = WDGUser::current();
+				// Seul l'investisseur peut annuler, et seulement si c'est un investissement non-démarré
+				$investment_to_cancel = new WDGInvestment( $input_init_with_id );
+				if ( $investment_to_cancel->get_saved_user_id() == $WDGUser_current->get_wpref() && $investment_to_cancel->get_contract_status() == WDGInvestment::$contract_status_not_validated ) {
+					$investment_to_cancel->cancel();
+				}
+			}
+		}
 		
 		switch ( $action_posted ) {
 			// Analyse formulaire saisie montant
@@ -265,9 +233,45 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					$WDGCurrent_User = WDGUser::current();
 					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID, $current_investment->get_session_amount() );
 					if ( $this->form->postForm() ) {
-						$this->current_step = 3;
-						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 3 >> GOTO WDG_Form_Invest_Contract' );
-						$reload_form = TRUE;
+						$is_investor_registered = FALSE;
+						$current_user_type = $_SESSION[ 'redirect_current_user_type' ];
+						if ( $current_user_type == 'user' ) {
+							$is_investor_registered = $WDGCurrent_User->is_lemonway_registered();
+						} else {
+							$WDGCurrent_Organization = new WDGOrganization( $current_user_type );
+							$is_investor_registered = $WDGCurrent_Organization->is_registered_lemonway_wallet();
+						}
+						
+						if ( $is_investor_registered ) {
+							$this->current_step = 3;
+							ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 3 >> GOTO WDG_Form_Invest_Contract' );
+							$reload_form = TRUE;
+						} else {
+							$this->current_step = 2.5;
+							ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2.5 >> GOTO WDG_Form_Invest_Authentication' );
+							$reload_form = TRUE;
+						}
+					}
+				}
+				break;
+				
+			// Analyse formulaire validation authentification
+			case WDG_Form_User_Identity_Docs::$name:
+				$input_nav = filter_input( INPUT_POST, 'nav' );
+				if ( $input_nav == 'previous' ) {
+					$this->current_step = 2;
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2 >> WDG_Form_User_Identity_Docs::$name PREVIOUS' );
+					$reload_form = TRUE;
+					
+				} else {
+					$this->current_step = 2.5;
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2.5 >> WDG_Form_User_Identity_Docs::$name POSTED' );
+					$WDGCurrent_User = WDGUser::current();
+					$identity_docs_user_id = ( $_SESSION[ 'redirect_current_user_type' ] == 'user' ) ? $WDGCurrent_User->get_wpref() : $_SESSION[ 'redirect_current_user_type' ];
+					$this->form = new WDG_Form_User_Identity_Docs( $identity_docs_user_id, ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ), $this->current_campaign );
+					if ( $this->form->postForm() ) {
+						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> GOTO success' );
+						$this->form_display_success = TRUE;
 					}
 				}
 				break;
@@ -324,6 +328,11 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_Invest_User_Details' );
 					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID, $current_investment->get_session_amount() );
 					break;
+				case 2.5:
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_Invest_Authentication' );
+					$identity_docs_user_id = ( $_SESSION[ 'redirect_current_user_type' ] == 'user' ) ? $WDGCurrent_User->get_wpref() : $_SESSION[ 'redirect_current_user_type' ];
+					$this->form = new WDG_Form_User_Identity_Docs( $identity_docs_user_id, ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ), $this->current_campaign );
+					break;
 				case 3:
 					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_Invest_Contract' );
 					$this->form = new WDG_Form_Invest_Contract( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
@@ -339,6 +348,10 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	
 	public function get_form_errors() {
 		return $this->form->getPostErrors();
+	}
+	
+	public function is_form_success_displayed() {
+		return $this->form_display_success;
 	}
 	
 	public function get_form_action() {

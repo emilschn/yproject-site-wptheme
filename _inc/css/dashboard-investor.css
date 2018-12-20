@@ -69,6 +69,16 @@ body.template-mon-compte div#container div#content .db-form.v3 {
 	max-width: 600px;
 	margin: 0px auto;
 }
+body.template-mon-compte div#container div#content #item-body-wallet .wdg-message {
+	margin: 16px auto;
+	padding: 16px;
+	text-transform: none;
+	text-align: justify;
+}
+body.template-mon-compte div#container div#content #item-body-wallet .wdg-message.error:before {
+	top: 0px;
+	left: 40px;
+}
 body.template-mon-compte div#container div#content a.download-certificate {
 	display: inline-block;
 	padding: 16px 32px;
@@ -113,7 +123,7 @@ body.template-mon-compte div#container div#content div.authentication-items div.
 	width: 300px;
 }
 
-body.template-mon-compte div#container div#content div.authentication-items div.authentication-item.alert:before {
+.msg-authentication-alert:before, body.template-mon-compte div#container div#content div.authentication-items div.authentication-item.alert:before {
 	position: relative;
 	display: block;
 	content: "!";

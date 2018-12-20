@@ -20,26 +20,6 @@ if (!is_user_logged_in()) {
 		<div class="center margin-height">
 			
 			&lt;&lt; <a href="<?php echo home_url('/mon-compte/'); ?>">Mon compte</a><br /><br />
-			
-			<?php
-			//Demande de renvoi de code
-			if (isset($_GET['invest_id_resend']) && !empty($_GET['invest_id_resend'])) {
-				$contractid = ypcf_get_signsquidcontractid_from_invest($_GET['invest_id_resend']);
-				$signsquid_signatory = signsquid_get_contract_signatory($contractid);
-				$current_user = wp_get_current_user();
-				if ($signsquid_signatory != '' && $signsquid_signatory->{'email'} == $current_user->user_email) {
-					if (NotificationsEmails::send_code_user($_GET['invest_id_resend'], $current_user, $signsquid_signatory->{'code'})) {
-						?>Votre code de signature de contrat a &eacute;t&eacute; renvoy&eacute; &agrave; l&apos;adresse <?php echo $current_user->user_email; ?>.<br /><?php
-					    
-					} else {
-						?><span class="errors">Il y a eu une erreur lors de l&apos;envoi du code. N&apos;h&eacute;sitez pas &agrave; nous contacter.</span><br /><?php
-					}
-					
-				} else {
-					?><span class="errors">Nous ne trouvons pas le contrat correspondant.</span><br /><?php
-				}
-			}
-			?>
 					
 					
 			<?php

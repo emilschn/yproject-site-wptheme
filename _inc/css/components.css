@@ -1188,7 +1188,7 @@ div.project-rewards-content {
 	padding: 0px;
 }
 div.project-rewards-content div.project-rewards-padder {
-        position: relative;
+	position: relative;
 }
 div.project-rewards-content div.project-rewards-padder p.half-form-count input {
 	height: 56px;
@@ -1198,11 +1198,11 @@ div.project-rewards-content div.project-rewards-padder p.half-form-count input {
 	padding-left: 10px;
 }
 div.project-rewards-content div.project-rewards-padder table tbody {
-        font-family: Trebuchet MS, sans-serif;
+	font-family: Trebuchet MS, sans-serif;
 }
 div.project-rewards-content div.project-rewards-padder p.half-form-count span, div.project-rewards-content div.project-rewards-padder span:nth-child(2), div.project-rewards-content div.project-rewards-padder span:nth-child(4) {
 	font-size: 16pt;
-        letter-spacing: 0.125em;
+	letter-spacing: 0.125em;
 }
 div.project-rewards-content div.project-rewards-padder p.half-form-count span.input-suffix {
 	display: inline-block;
@@ -1221,16 +1221,14 @@ div.project-rewards-content div.project-rewards-padder p {
 	margin: 10px auto 30px;
 }
 div.project-rewards-content span.roi_percent_user, div.project-rewards-content span.roi_amount_user {
-        font-weight: bold;
+	font-size: 22px;
+	font-weight: bold;
 	color: #93626D;
 }
-div.project-rewards-content span.roi_amount_user {
-        font-size: 16pt;
-}
 div.project-rewards-content div.roi_amount_base {
-        height: 5px;
-        margin-bottom: 5px;
-        background-color: #333;
+	height: 5px;
+	margin-bottom: 5px;
+	background-color: #333;
 }
 div.project-rewards-content table {
     margin: 30px auto 15px;
@@ -1241,6 +1239,8 @@ div.project-rewards-content table:before {
 	border-top: 1px solid;
 }
 div.project-rewards-content table tr:first-child {
+    font-size: 12px;
+	font-family: Trebuchet MS,sans-serif;
     font-weight: bold;
 }
 div.project-rewards-content table tr td {
@@ -1259,6 +1259,7 @@ div.project-rewards-content table tr td > div > div {
 	vertical-align: bottom;
 }
 div.project-rewards-content table tr:last-child td div {
+	margin-bottom: 4px;
 	color: #93626D;
 }
 div.project-rewards-content table tr:last-child td span.roi_amount_user_container {
@@ -1282,7 +1283,8 @@ div.project-rewards-content div.project-rewards-padder div.arrow-end {
 	border-left: 14px solid #333;
 	border-bottom: 6px solid transparent;
 }
-div.project-rewards-content div.project-rewards-alert span.small-alert {
+div.project-rewards-content div.project-rewards-alert {
+	margin-top: 10px;
 	font-style: italic;
 	font-size: 11px;
 }

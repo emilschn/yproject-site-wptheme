@@ -210,9 +210,7 @@
 		</div>
 		<?php endif; ?>
 
-		<?php if (!is_user_logged_in()): ?>
-		
-		<?php elseif (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)): ?>
+		<?php if ( is_user_logged_in() && (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)) ): ?>
 			<?php $_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; ?>
 			<div class="timeout-lightbox wdg-lightbox">
 				<div class="wdg-lightbox-click-catcher"></div>
@@ -233,7 +231,7 @@
 		<?php endif; ?>
 		
 		<?php if ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' ): ?>
-		<?php if($_SESSION['subscribe_newsletter_sendinblue'] == true): ?>
+		<?php if ( $_SESSION['subscribe_newsletter_sendinblue'] == true ): ?>
 			<div class="timeout-lightbox wdg-lightbox">
 				<div class="wdg-lightbox-click-catcher"></div>
 				<div class="wdg-lightbox-padder">
@@ -244,12 +242,16 @@
 		<?php $_SESSION['subscribe_newsletter_sendinblue'] = false; ?>
 		<?php endif; ?>
 		
-		<?php if ( $page_controler->get_show_user_details_confirmation() ): ?>
-			<?php locate_template( array( 'common/lightbox/user-details-lightbox.php' ), true ); ?>
+		<?php if ( $page_controler->get_show_user_pending_investment() ): ?>
+			<?php locate_template( array( 'common/lightbox/pending-investment-lightbox.php' ), true ); ?>
 		<?php endif; ?>
 		
 		<?php if ( $page_controler->get_show_user_pending_preinvestment() ): ?>
 			<?php locate_template( array( 'common/lightbox/pending-preinvestment-lightbox.php' ), true ); ?>
+		<?php endif; ?>
+		
+		<?php if ( $page_controler->get_show_user_details_confirmation() ): ?>
+			<?php locate_template( array( 'common/lightbox/user-details-lightbox.php' ), true ); ?>
 		<?php endif; ?>
 		
 		<div id="container"> 
