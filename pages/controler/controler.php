@@ -179,7 +179,7 @@ class WDG_Page_Controler {
 			$this->show_user_pending_investment = false;
 			if ( is_user_logged_in() ) {
 				$WDG_user_current = WDGUser::current();
-				if ( TRUE ) {//$WDG_user_current->is_lemonway_registered() ) {
+				if ( $WDG_user_current->is_lemonway_registered() ) {
 					if ( $WDG_user_current->has_pending_not_validated_investments() ) {
 						$this->show_user_pending_investment = $WDG_user_current->get_first_pending_not_validated_investment();
 					}
