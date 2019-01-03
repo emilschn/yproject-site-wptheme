@@ -193,10 +193,10 @@ class WDG_WordPress_Events {
 	 */
 	public static function send_headers() {
 		header('X-UA-Compatible: IE=edge');
-		session_cache_limiter('');
 		header('Cache-Control: public, s-maxage=120');
 		header('Pragma: public');
 		if( !session_id() ) {
+			session_cache_limiter('');
 			session_start();
 		}
 	}
