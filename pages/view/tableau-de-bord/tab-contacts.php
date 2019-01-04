@@ -214,6 +214,61 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 				<?php endforeach; ?>
 			</table>
 		</div>
+		
+		<div class="field admin-theme">
+
+			<b>Sondage lié à l'investissement en continu</b><br><br>
+
+			<table>
+				<tr>
+					<td>Date</td>
+					<td>Contexte</td>
+					<td>Montant (contexte)</td>
+					<td>Notifié si nv. lancement</td>
+					<td>Notifié si nv. thème</td>
+					<td>Inv. ponctuel</td>
+					<td>Inv. mensuel</td>
+					<td>Inv. trimestriel</td>
+					<td>Inv. nv. lancement</td>
+					<td>Inv. autre</td>
+					<td>Inv. autre Txt</td>
+					<td>Connu WDG</td>
+					<td>Connu Projet</td>
+					<td>Connu Autre</td>
+					<td>Connu Autre Txt</td>
+					<td>E-mail</td>
+					<td>Age</td>
+					<td>Code postal</td>
+					<td>Sexe</td>
+				</tr>
+
+				<?php foreach ( $campaign_poll_answers as $answer ): ?>
+					<?php if ( $answer->poll_slug != 'continuous' ) { continue; } ?>
+					<?php $answers_decoded = json_decode( $answer->answers ); ?>
+					<tr>
+						<td><?php echo $answer->date; ?></td>
+						<td><?php echo $answer->context; ?></td>
+						<td><?php echo $answer->context_amount; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'notifications' }->{ 'new-campaign' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'notifications' }->{ 'new-subject' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-ponctual' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-monthly' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-quarterly' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-campaign' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-other' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo $answers_decoded->{ 'other-invest-rythm' }; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'known-by' }->{ 'known-by-wedogood' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'known-by' }->{ 'known-by-project' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'known-by' }->{ 'known-by-other' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo $answers_decoded->{ 'other-known-by-source' }; ?></td>
+						<td><?php echo $answer->user_email; ?></td>
+						<td><?php echo $answer->user_age; ?></td>
+						<td><?php echo $answer->user_postal_code; ?></td>
+						<td><?php echo $answer->user_gender; ?></td>
+					</tr>
+				<?php endforeach; ?>
+			</table>
+		</div>
 	</div>
 	
 <?php endif;
