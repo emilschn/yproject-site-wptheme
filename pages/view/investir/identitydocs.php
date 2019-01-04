@@ -6,6 +6,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <?php
 $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_User_Identity_Docs::$field_group_hidden );
 $fields_files = $page_controler->get_form()->getFields( WDG_Form_User_Identity_Docs::$field_group_files );
+$fields_files_orga = $page_controler->get_form()->getFields( WDG_Form_User_Identity_Docs::$field_group_files_orga );
 $form_errors = $page_controler->get_form_errors();
 ?>
 
@@ -48,6 +49,13 @@ $form_errors = $page_controler->get_form_errors();
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 		<?php endforeach; ?>
+
+		<?php if ( !empty( $fields_files_orga ) ): ?>
+			<?php foreach ( $fields_files_orga as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+		<?php endif; ?>
 
 		<p class="align-left">
 			<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
