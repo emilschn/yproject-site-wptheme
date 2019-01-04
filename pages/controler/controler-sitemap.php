@@ -8,8 +8,8 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		$input_queue = filter_input( INPUT_GET, 'queue' );
 		
 		if ( !empty( $input_queue ) && $input_queue == '1' ) {
-			WDGQueue::execute_next( 10 );
-			exit( 'OK' );
+			$nb_done = WDGQueue::execute_next( 10 );
+			exit( $nb_done . ' queued actions executed.' );
 			
 		} else {
 			$this->hourly_call();
