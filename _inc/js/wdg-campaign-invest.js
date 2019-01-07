@@ -185,12 +185,6 @@ var WDGInvestPageFunctions = (function($) {
 					$( '#invest_error_interval' ).show(); 		
 					bValidInput = false; 		
 			    }
-				if ( $( '#input_invest_user_max_amount_without_alert' ).length > 0 && bValidInput ) {
-					if ( parseInt( $( 'form input#amount' ).val() ) > $( '#input_invest_user_max_amount_without_alert' ).val() ) {
-						$( '#invest_error_alert' ).text( $( '#input_invest_user_max_amount_without_alert_reason' ).val() );
-						$( '#invest_error_alert' ).show();
-					}
-				}
 			}
 			
 			var ratioOfPercentRoundStr = 0;

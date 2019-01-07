@@ -33,6 +33,19 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 /******************************************************************************/
 // CURRENT INVESTMENT
 /******************************************************************************/
+	/**
+	 * Surcharge de WDG_Page_Controler	
+	*/
+	public function init_show_user_pending_investment() {
+		$this->show_user_pending_investment = false;
+	}
+	/**
+	 * Surcharge de WDG_Page_Controler	
+	*/
+	public function init_show_user_pending_preinvestment() {
+		$this->show_user_pending_preinvestment = false;
+	}
+	
 	private function init_current_investment() {
 		$investment_id = filter_input( INPUT_GET, 'investment_id' );
 		if ( !empty( $investment_id ) ) {
