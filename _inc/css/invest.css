@@ -159,7 +159,8 @@ div#content div.center.upload-docs div.wdg-message.confirm {
 }
 div#content div.center.upload-docs div.align-center a.button.transparent {
 	display: inline-block;
-	height: 56px;
+	width: 100%;
+	padding: 16px 0px;
 }
 
 
