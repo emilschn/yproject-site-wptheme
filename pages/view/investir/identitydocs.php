@@ -11,7 +11,7 @@ $form_errors = $page_controler->get_form_errors();
 ?>
 
 <?php if ( $page_controler->is_form_success_displayed() ): ?>
-	<div class="center">
+	<div class="center upload-docs">
 		<div class="wdg-message confirm">
 			<?php _e( "Nous avons bien re&ccedil;u vos documents. Ils ont &eacute;t&eacute; transmis &agrave; notre prestataire Lemon Way pour validation.", 'yproject' ); ?>
 		</div>
@@ -24,7 +24,7 @@ $form_errors = $page_controler->get_form_errors();
 		</div>
 		
 		<div class="align-center">
-			<a href="<?php echo $page_controler->get_current_campaign()->get_public_url(); ?>" class="button red"><?php _e( "Retour au projet" ); ?></a>
+			<a href="<?php echo $page_controler->get_current_campaign()->get_public_url(); ?>" class="button transparent"><?php _e( "Retour au projet" ); ?></a>
 			<br><br>
 		</div>
 	</div>

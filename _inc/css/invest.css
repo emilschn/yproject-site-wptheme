@@ -152,7 +152,19 @@ div#content button.clear {
 }
 
 /**
- ETAPE 3 : Contrat
+ ETAPE 3A : Contrat
+**/
+div#content div.center.upload-docs div.wdg-message.confirm {
+	text-transform: none;
+}
+div#content div.center.upload-docs div.align-center a.button.transparent {
+	display: inline-block;
+	height: 56px;
+}
+
+
+/**
+ ETAPE 3B : Contrat
 **/
 div#content div#contract-intro {
 	min-height: 120px;
