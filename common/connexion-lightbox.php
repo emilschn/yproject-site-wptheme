@@ -46,6 +46,7 @@
 	
 			<button type="button" class="button blue-facebook social_connect_login_facebook" data-redirect="<?php echo WDGUser::get_login_redirect_page(); ?>"><?php _e( "Se connecter avec Facebook", 'yproject' ); ?></button>
 			<div class="social_connect_login_facebook_loading align-center hidden">
+				<br>
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 			</div>
 			
