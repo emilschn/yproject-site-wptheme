@@ -107,6 +107,7 @@ YPUIFunctions = (function($) {
 									'<li class="hidden"><a href="https://www.wedogood.co/'+aProjectList[i].post_name+'">'+aProjectList[i].post_title+'<span class="hidden">'+aProjectList[i].post_title+'</span></a></li>'
 								);
 							}
+							$("#submenu-search-input").trigger( 'keyup' );
 						});
 					}
 				}
