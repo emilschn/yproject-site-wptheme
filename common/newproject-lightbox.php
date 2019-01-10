@@ -137,7 +137,7 @@ if ($organizations_list) {
 	?>
 
 	<div class="align-left">
-	<label for="project-terms"><input type="checkbox" id="project-terms" name="project-terms" /><span></span> Je valide les <a href="'.home_url('/conditions-particulieres/').'" target="_blank">conditions particuli&egrave;res</a></label><br />
+	<label for="project-terms"><input type="checkbox" id="project-terms" name="project-terms" /><span></span> Je valide les <a href="<?php echo home_url('/a-propos/cgu/conditions-particulieres/'); ?>" target="_blank">conditions particuli&egrave;res</a></label><br />
 	</div>
 	<br /><br />
 	
