@@ -46,7 +46,6 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$this->init_form_user_identitydocs();
 		$this->init_form_user_bank();
 		$this->init_form_user_notifications();
-		locate_template( array( 'country_list.php'  ), true );
 		
 		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
 		wp_enqueue_script( 'wdg-user-account', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-user-account.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION);
