@@ -106,6 +106,9 @@ for ($i = 0; $i < $nb_fields; $i++) {
 		<?php elseif ( $declaration->get_status() == WDGROIDeclaration::$status_finished ): ?>
 			<?php _e( "Valid&eacute;e", 'yproject' ); ?>
 		
+		<?php elseif ( $declaration->get_status() == WDGROIDeclaration::$status_failed ): ?>
+			<?php _e( "En d&eacute;faut", 'yproject' ); ?>
+		
 		<?php endif; ?>
 	</td>
 	
