@@ -849,6 +849,10 @@ var WDGFormsFunctions = (function($) {
 			if ( $( '.db-form.v3 input[type=checkbox]' ).length > 0 ) {
 				$( '.db-form.v3 input[type=checkbox]' ).each( function(){
 					if ( !$( this ).hasClass( 'rate' ) && !$( this ).parent().hasClass( 'selectit' ) ) {
+						// Permet de cliquer sur des liens qui sont dans des div de checkbox (ex : cgu...)
+						$( this ).parent().children( 'a' ).click( function( e ) {
+							e.stopImmediatePropagation();
+						} );
 						$( this ).parent().click( function( e ) {
 							if ( $( this ).data( 'keepdefault' ) != '1' ) {
 								e.preventDefault();
