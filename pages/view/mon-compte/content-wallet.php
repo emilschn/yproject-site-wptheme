@@ -13,7 +13,17 @@ if ( !empty( $override_current_user ) ) {
 	$suffix = '?override_current_user=' .$override_current_user;
 }
 ?>
-Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.
+Montant des royalties vers&eacute;es : <?php echo $WDGUser_displayed->get_rois_amount(); ?> &euro;<br>
+<?php if ( !$WDGUser_displayed->is_lemonway_registered() ): ?>
+	<?php $pending_amount = $WDGUser_displayed->get_pending_rois_amount(); ?>
+	<?php if ( $pending_amount > 0 ): ?>
+	<?php echo $pending_amount; ?> &euro; sont en attente d'authentification.<br>
+	<?php endif; ?>
+	
+<?php else: ?>
+	Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.<br>
+	
+<?php endif; ?>
 <a href="<?php echo home_url( '/details-des-investissements/' ) . $suffix; ?>">Voir le d&eacute;tail de mes royalties</a>
 <br><br>
 
