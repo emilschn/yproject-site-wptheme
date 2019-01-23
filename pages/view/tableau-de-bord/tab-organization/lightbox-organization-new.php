@@ -58,7 +58,7 @@ global $campaign_id
 		</div>
 
 		<div class="field">
-			<label for="org_idnumber"><?php _e( "Num&eacute;ro SIREN", 'yproject' ); ?>*</label>
+			<label for="org_idnumber"><?php _e( "Num&eacute;ro SIRET", 'yproject' ); ?>*</label>
 			<div class="field-container">
 				<span class="field-value">
 					<input type="text" name="org_idnumber" value="<?php echo filter_input( INPUT_POST, 'org_idnumber' ); ?>">

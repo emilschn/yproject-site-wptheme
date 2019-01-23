@@ -90,7 +90,7 @@ $WDGUser_current = WDGUser::current();
 		</div>
 
 		<div class="field">
-			<label for="org_idnumber"><?php _e('Num&eacute;ro SIREN', 'yproject'); ?>*</label>
+			<label for="org_idnumber"><?php _e('Num&eacute;ro SIRET', 'yproject'); ?>*</label>
 			<div class="field-container">
 				<span class="field-value">
 					<input type="text" name="org_idnumber" value="<?php echo $organization_obj->get_idnumber(); ?>">
@@ -455,7 +455,7 @@ $WDGUser_current = WDGUser::current();
 
 		<?php $organization_lemonway_authentication_status = $organization_obj->get_lemonway_status(); ?>
 		<?php if ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_blocked): ?>
-			<?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIREN. Ainsi que les 5 documents suivis d'une &eacute;toile ci-dessus.", 'yproject'); ?><br />
+			<?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIRET. Ainsi que les 5 documents suivis d'une &eacute;toile ci-dessus.", 'yproject'); ?><br />
 		<?php elseif ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_ready): ?>
 			<form action="" method="POST">
 				<input type="hidden" name="authentify_lw" value="1" />

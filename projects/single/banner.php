@@ -51,7 +51,7 @@ if (!empty($current_organization)) {
 	$lightbox_content = '<div class="lightbox-organization-separator"></div>
 		<div class="content align-left"><br />
 		<span>'.__('Forme juridique : ', 'yproject').'</span>'.$wdg_organization->get_legalform().'<br />
-		<span>'.__('Num&eacute;ro SIREN : ', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
+		<span>'.__('Num&eacute;ro SIRET : ', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
 		<span>'.__('Code APE : ', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />';
 	if ( $wdg_organization->get_vat() != "" && $wdg_organization->get_vat() != '---' ) {
 		$lightbox_content .= '<span>'.__('Num&eacute;ro de TVA : ', 'yproject').'</span>'.$wdg_organization->get_vat().'<br />';
