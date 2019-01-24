@@ -172,6 +172,31 @@ $WDGUser_current = WDGUser::current();
 		<br><br>
 		<h3><?php _e('Si&egrave;ge social', 'yproject'); ?></h3>
 		<div class="field">
+			<label for="org_address_number"><?php _e('Num&eacute;ro', 'yproject'); ?>*</label>
+			<div class="field-container">
+				<span class="field-value">
+					<input type="text" name="org_address_number" value="<?php echo $organization_obj->get_address_number(); ?>">
+				</span>
+			</div>
+		</div>
+		
+		<div class="field">
+			<label for="org_address_number_comp"><?php _e('Compl&eacute;ment de num&eacute;ro', 'yproject'); ?>*</label>
+			<div class="field-container">
+				<span class="field-value">
+					<select name="org_address_number_comp" id="org_address_number_comp">
+						<?php 
+						global $address_number_complements;
+						$selected_address_number_comp = $organization_obj->get_address_number_comp();
+						foreach ($address_number_complements as $complement_key => $complement_label): ?>
+							<option value="<?php echo $complement_key; ?>" <?php if ($complement_key == $selected_address_number_comp) { echo 'selected="selected"'; } ?>><?php echo $complement_label; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</span>
+			</div>
+		</div>
+		
+		<div class="field">
 			<label for="org_address"><?php _e('Adresse', 'yproject'); ?>*</label>
 			<div class="field-container">
 				<span class="field-value">
