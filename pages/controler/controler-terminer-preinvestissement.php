@@ -17,6 +17,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 	
 	public function __construct() {
 		parent::__construct();
+		ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::__construct' );
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'invest-contract' );
@@ -61,6 +62,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 		
 		// Forcément un utilisateur connecté
 		if ( !is_user_logged_in() ) {
+			ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::check_current_preinvestment > !is_user_logged_in' );
 			$buffer = FALSE;
 		}
 		// Seul l'utilisateur qui correspond à cet investissement peut y toucher
@@ -77,18 +79,22 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 			}
 		}
 		if ( !$is_user_organization_preinvestment && $saved_user_id != $WDGUser_current->get_wpref() && !$WDGUser_current->is_admin() ) {
+			ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::check_current_preinvestment > !$is_user_organization_preinvestment && $saved_user_id != $WDGUser_current->get_wpref() && !$WDGUser_current->is_admin()' );
 			$buffer = FALSE;
 		}
 		// Il ne peut le modifier que si le statut correspond à un préinvestissement à valider
 		if ( $this->current_investment->get_contract_status() != WDGInvestment::$contract_status_preinvestment_validated ) {
+			ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::check_current_preinvestment > $this->current_investment->get_contract_status() != WDGInvestment::$contract_status_preinvestment_validated' );
 			$buffer = FALSE;
 		}
 		// Il ne peut y toucher que si la campagne est en collecte
-		if (  $this->current_campaign->campaign_status() != ATCF_Campaign::$campaign_status_collecte ) {
+		if ( $this->current_campaign->campaign_status() != ATCF_Campaign::$campaign_status_collecte ) {
+			ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::check_current_preinvestment > $this->current_campaign->campaign_status() != ATCF_Campaign::$campaign_status_collecte' );
 			$buffer = FALSE;
 		}
 		
 		if ( !$buffer ) {
+			ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::check_current_preinvestment > redirect home' );
 			wp_redirect( home_url() );
 		}
 	}
