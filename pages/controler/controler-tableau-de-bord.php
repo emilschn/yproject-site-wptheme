@@ -382,6 +382,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		
 		// Stats
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'age' ] = max( 0, $investment_results[ 'average_age' ] );
+		if ( !is_numeric( $this->campaign_stats[ 'funding' ][ 'stats' ][ 'age' ] ) ) {
+			$this->campaign_stats[ 'funding' ][ 'stats' ][ 'age' ] = 0;
+		}
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'percent_men' ] = max( 0, $investment_results[ 'percent_male' ] );
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'percent_women' ] = max( 0, $investment_results[ 'percent_female' ] );
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'invest_average' ] = max( 0, $investment_results[ 'average_invest' ] );
