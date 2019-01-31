@@ -12,7 +12,10 @@
 			</div>
 
 			<div class="errors">
-				<?php echo $signup_errors->get_error_message(); ?>
+				<?php $error_list = $signup_errors->get_error_messages(); ?>
+				<?php foreach ( $error_list as $error ): ?>
+					<?php echo $error . '<br>'; ?>
+				<?php endforeach; ?>
 			</div>
 
 			<div class="register-section" id="basic-details-section">
