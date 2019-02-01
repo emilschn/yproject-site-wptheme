@@ -77,7 +77,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		WDGFormProjects::form_cancel_payment();
 		WDGFormProjects::form_try_pending_card();
 		$current_organization = $this->get_campaign_organization();
-		$current_organization->send_kyc();
+		if ( isset($_POST['authentify_lw']) ) {
+			$current_organization->send_kyc();
+		}
 		$current_organization->submit_transfer_wallet_lemonway();
 		$this->return_lemonway_card = WDGFormProjects::return_lemonway_card();
 	}
