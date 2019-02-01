@@ -235,6 +235,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 
 		DashboardUtility::create_field(array(
+			'id'			=> 'new_has_overridden_wire_constraints',
+			'type'			=> 'check',
+			'label'			=> __( "Paiement par virement sans contrainte de temps", 'yproject' ),
+			'value'			=> $page_controler->get_campaign()->has_overridden_wire_constraints(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
+
+		DashboardUtility::create_field(array(
 			'id'			=> 'new_archive_message',
 			'type'			=> 'text',
 			'label'			=> __( "Message de projet archiv&eacute;", 'yproject' ),
