@@ -126,7 +126,19 @@ UserAccountDashboard.prototype.initProjectList = function() {
 						sCampaignBuffer += 'Retour sur investissement :<br><strong>' + oInvestmentItem[ 'roi_return' ] + ' %</strong>';
 						sCampaignBuffer += '</div>';
 
-						sCampaignBuffer += '<div class="clear"></div>';
+						if ( oInvestmentItem[ 'contract_file_path' ] != '' ) {
+							sCampaignBuffer += '<div class="align-center single-line">';
+							sCampaignBuffer += '<a href="' +oInvestmentItem[ 'contract_file_path' ]+ '" download="' +oInvestmentItem[ 'contract_file_name' ]+ '" class="button blue" title="T&eacute;l&eacute;charger le contrat">';
+							sCampaignBuffer += 'Contrat';
+							sCampaignBuffer += '</a>';
+							sCampaignBuffer += '<div class="clear"></div>';
+							sCampaignBuffer += '</div>';
+						} else {
+							sCampaignBuffer += '<div class="align-center">';
+							sCampaignBuffer += 'Contrat<br>inaccessible';
+							sCampaignBuffer += '<div class="clear"></div>';
+							sCampaignBuffer += '</div>';
+						}
 
 						sCampaignBuffer += '</div>';
 					}
