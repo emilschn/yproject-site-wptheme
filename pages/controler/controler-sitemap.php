@@ -185,6 +185,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/solutions/incubateurs-accelerateurs/'			=> '0.6',
 			// 0.5
 			// PROJETS
+			'/a-propos/statistiques/rapport-activite-2018/'			=> '0.5',
 //			'/financement/offres/'									=> '0.5',
 //			'/financement/royalty-crowdfunding/accompagnement/'		=> '0.5',
 //			'/investissement/cooperatives/'							=> '0.5',
@@ -202,6 +203,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/a-propos/contact/'				=> '0.2',
 			'/a-propos/equipe/'					=> '0.2',
 			'/a-propos/recrutement/'			=> '0.2',
+			'/a-propos/statistiques/rapport-activite-2017/'			=> '0.2',
 			// 0.1
 			'/placement-royalties/'				=> '0.1',
 			'/a-propos/'						=> '0.1',
