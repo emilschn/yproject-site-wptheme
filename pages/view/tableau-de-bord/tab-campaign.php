@@ -203,6 +203,13 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"options_id"	=> array( ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_max, ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ),
 			"options_names"	=> array( "Afficher l'objectif minimum", "Afficher l'objectif maximum et un seuil de validation" )
 		));
+				
+		DashboardUtility::create_field(array(
+			"id"	=> "new_hide_investors",
+			"type"	=> "check",
+			"label"	=> __( "Masquer les investisseurs sur la page projet", 'yproject' ),
+			"value"	=> $page_controler->get_campaign()->get_hide_investors()
+		));
 
 		DashboardUtility::create_field(array(
 			'id'			=> 'new_fake_url',
