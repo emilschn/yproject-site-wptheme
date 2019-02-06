@@ -110,6 +110,58 @@ body.template-mon-compte div#container div#content .investment-item .single-line
 body.template-mon-compte div#container div#content .investment-item .single-line.publish.campaign-archive {
 	color: #333333;
 }
+body.template-mon-compte div#container div#content .button-view-royalties-list {
+	position: relative;
+	top: -20px;
+	height: 42px;
+	background: #FFF;
+}
+body.template-mon-compte div#container div#content .royalties-list {
+	background: #FFF;
+	margin-top: -24px;
+	padding: 16px;
+}
+body.template-mon-compte div#container div#content .royalties-list > div {
+	font-weight: bold;
+}
+body.template-mon-compte div#container div#content .royalties-list hr {
+	width: 95%;
+	border: 1px solid #F4F2F2
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table {
+	margin: auto;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td {
+	text-align: left;
+	padding-bottom: 4px;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.align-right {
+	text-align: right;
+	padding-right: 16px;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.align-right:first-letter {
+	text-transform: uppercase;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td:nth-child(2) {
+	padding-left: 16px;
+	border-left: 4px solid #FFF;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr.year-title td {
+	padding-top: 8px;
+	font-weight: bold;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr.year-title td span {
+	font-weight: normal;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status {
+	border-left: 4px solid #F4F2F2;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.late {
+	border-left: 4px solid #EACDCB;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.finished {
+	border-left: 4px solid #8BC79C;
+}
 
 body.template-mon-compte div#container div#content div.authentication-items {
     display: -webkit-flex;

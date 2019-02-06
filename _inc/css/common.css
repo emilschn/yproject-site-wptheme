@@ -24,6 +24,7 @@ body input, body select {
 .aligncenter, .align-center { text-align: center; }
 .alignleft, .align-left { text-align: left; }
 .align-justify { text-align: justify; }
+.align-right { text-align: right; }
 
 .center-lg { max-width: 1300px; margin: auto; }
 .only-inf997 { display: none; }

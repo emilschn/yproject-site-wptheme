@@ -24,7 +24,6 @@ Montant des royalties vers&eacute;es : <?php echo $WDGUser_displayed->get_rois_a
 	Vous disposez de <?php echo $amount; ?> &euro; dans votre porte-monnaie.<br>
 	
 <?php endif; ?>
-<a href="<?php echo home_url( '/details-des-investissements/' ) . $suffix; ?>">Voir le d&eacute;tail de mes royalties</a>
 <br><br>
 
 <?php if ( !$WDGUser_displayed->is_lemonway_registered() ): ?>

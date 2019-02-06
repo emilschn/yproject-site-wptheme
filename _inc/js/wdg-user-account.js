@@ -141,6 +141,51 @@ UserAccountDashboard.prototype.initProjectList = function() {
 						}
 
 						sCampaignBuffer += '</div>';
+						
+						var nYears = oInvestmentItem[ 'rois_by_year' ].length;
+						if ( nYears > 0 ) {
+							sCampaignBuffer += '<div class="align-center">';
+							sCampaignBuffer += '<button class="button-view-royalties-list button transparent" data-list="'+nCampaignID+'-'+nIndex+'">+</button>';
+							sCampaignBuffer += '</div>';
+							
+							sCampaignBuffer += '<div class="royalties-list align-center hidden" id="royalties-list-'+nCampaignID+'-'+nIndex+'">';
+							
+							sCampaignBuffer += '<hr>';
+							
+							sCampaignBuffer += '<div>Versements trimestriels</div>';
+							
+							sCampaignBuffer += '<table class="roi-table">';
+							for ( var i = 0; i < nYears; i++ ) {
+								var oYearItem = oInvestmentItem[ 'rois_by_year' ][ i ];
+								sCampaignBuffer += '<tr class="year-title">';
+								sCampaignBuffer += '<td>Ann&eacute;e ' +(i+1)+ '</td>';
+								if ( oYearItem[ 'estimated_rois' ] != '-' ) {
+									sCampaignBuffer += '<td>' +oYearItem[ 'amount_rois' ]+ ' / ' +oYearItem[ 'estimated_rois' ]+ ' <span>(pr&eacute;visionnel)</span></td>';
+								} else {
+									sCampaignBuffer += '<td>' +oYearItem[ 'amount_rois' ]+ '</td>';
+								}
+								sCampaignBuffer += '</tr>';
+								
+								var nRois = oYearItem[ 'roi_items' ].length;
+								for ( var j = 0; j < nRois; j++ ) {
+									var oRoiItem = oYearItem[ 'roi_items' ][ j ];
+									sCampaignBuffer += '<tr>';
+									sCampaignBuffer += '<td class="align-right">' +oRoiItem[ 'date' ]+ '</td>';
+									sCampaignBuffer += '<td class="status ' +oRoiItem[ 'status' ]+ '">';
+									if ( oRoiItem[ 'status' ] == 'finished' ) {
+										sCampaignBuffer += oRoiItem[ 'amount' ];
+									} else {
+										sCampaignBuffer += oRoiItem[ 'status_str' ];
+									}
+									sCampaignBuffer += '</td>';
+									sCampaignBuffer += '</tr>';
+								}
+							}
+							sCampaignBuffer += '</table>';
+							
+							sCampaignBuffer += '</div>';
+							
+						}
 					}
 
 					// Pour les mettre dans l'ordre inverse
@@ -165,6 +210,7 @@ UserAccountDashboard.prototype.initProjectList = function() {
 		// Masquage de ce qui n'est plus utile
 		$( '#ajax-loader-img-' + userID ).hide();
 		
+		self.toggleRois();
 	});
 };
 
@@ -172,6 +218,8 @@ UserAccountDashboard.prototype.initProjectList = function() {
  * Affiche ou masque les détails de paiement
  */
 UserAccountDashboard.prototype.togglePayments = function(){
+	var self = this;
+	
 	$('.user-history-payments-list').each(function(){
 		$(this).hide();
 	});
@@ -191,6 +239,19 @@ UserAccountDashboard.prototype.togglePayments = function(){
 			});
 		});
 	});
+};
+
+/**
+ * Affiche ou masque les détails de paiement
+ */
+UserAccountDashboard.prototype.toggleRois = function(){
+	var self = this;
+	
+	$( '.button-view-royalties-list' ).click( function() {
+		var sIdList = $( this ).data( 'list' );
+		$( this ).slideUp( 100 );
+		$( '#royalties-list-' + sIdList ).slideDown( 300 );
+	} );
 };
 
 $(function(){

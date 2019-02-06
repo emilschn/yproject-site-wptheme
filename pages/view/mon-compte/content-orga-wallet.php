@@ -15,7 +15,6 @@ Montant des royalties vers&eacute;es : <?php echo $WDGOrganization->get_rois_amo
 <?php else: ?>
 	Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_rois_amount(); ?> &euro;<br>
 <?php endif; ?>
-<a href="<?php echo home_url( '/details-des-investissements/' ); ?>?organization=<?php echo $WDGOrganization->get_wpref(); ?>">Voir le d&eacute;tail de mes royalties</a><br>
 <br><br>
 
 <?php if ( !$WDGOrganization->is_document_lemonway_registered( LemonwayDocument::$document_type_bank ) ): ?>

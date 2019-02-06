@@ -15,23 +15,8 @@
 
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 			
-				<?php if (!is_user_logged_in()): ?>
-			
-					<div class="center margin-height">
-						<?php _e("Vous devez vous identifier pour acc&eacute;der &agrave; cette page.", 'yproject'); ?>
-					</div>
-			
-				<?php else: ?>
-			
-					<?php locate_template( array("members/single/header-short.php"), true ); ?>
-
-					<div id="page-single-user-roi" class="center margin-height">
-
-						<?php locate_template( array("members/single/roi.php"), true ); ?>
-
-					</div>
-			
-				<?php endif; ?>
+				<?php _e( "Le d&eacute;tail de vos royalties se trouve &agrave; pr&eacute;sent sur votre compte personnel.", 'yproject' ); ?><br><br>
+				<a href="<?php echo home_url( '/mon-compte/' ); ?>" class="button red"><?php _e( "Acc&eacute;der &agrave; mon compte", 'yproject' ); ?></a>
 
 			<?php endwhile; endif; ?>
 
