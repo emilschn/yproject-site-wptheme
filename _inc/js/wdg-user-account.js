@@ -128,7 +128,7 @@ UserAccountDashboard.prototype.initProjectList = function() {
 
 						if ( oInvestmentItem[ 'contract_file_path' ] != '' ) {
 							sCampaignBuffer += '<div class="align-center single-line">';
-							sCampaignBuffer += '<a href="' +oInvestmentItem[ 'contract_file_path' ]+ '" download="' +oInvestmentItem[ 'contract_file_name' ]+ '" class="button blue" title="T&eacute;l&eacute;charger le contrat">';
+							sCampaignBuffer += '<a href="' +oInvestmentItem[ 'contract_file_path' ]+ '" download="' +oInvestmentItem[ 'contract_file_name' ]+ '" class="button blue-pale" title="T&eacute;l&eacute;charger le contrat">';
 							sCampaignBuffer += 'Contrat';
 							sCampaignBuffer += '</a>';
 							sCampaignBuffer += '<div class="clear"></div>';
@@ -145,7 +145,7 @@ UserAccountDashboard.prototype.initProjectList = function() {
 						var nYears = oInvestmentItem[ 'rois_by_year' ].length;
 						if ( nYears > 0 ) {
 							sCampaignBuffer += '<div class="align-center">';
-							sCampaignBuffer += '<button class="button-view-royalties-list button transparent" data-list="'+nCampaignID+'-'+nIndex+'">+</button>';
+							sCampaignBuffer += '<button class="button-view-royalties-list button transparent" id="button-royalties-list-'+nCampaignID+'-'+nIndex+'" data-list="'+nCampaignID+'-'+nIndex+'">+</button>';
 							sCampaignBuffer += '</div>';
 							
 							sCampaignBuffer += '<div class="royalties-list align-center hidden" id="royalties-list-'+nCampaignID+'-'+nIndex+'">';
@@ -182,6 +182,10 @@ UserAccountDashboard.prototype.initProjectList = function() {
 								}
 							}
 							sCampaignBuffer += '</table>';
+							
+							sCampaignBuffer += '<div class="align-center">';
+							sCampaignBuffer += '<button class="button-hide-royalties-list button transparent" data-list="'+nCampaignID+'-'+nIndex+'">-</button>';
+							sCampaignBuffer += '</div>';
 							
 							sCampaignBuffer += '</div>';
 							
@@ -251,6 +255,12 @@ UserAccountDashboard.prototype.toggleRois = function(){
 		var sIdList = $( this ).data( 'list' );
 		$( this ).slideUp( 100 );
 		$( '#royalties-list-' + sIdList ).slideDown( 300 );
+	} );
+	
+	$( '.button-hide-royalties-list' ).click( function() {
+		var sIdList = $( this ).data( 'list' );
+		$( '#button-royalties-list-' + sIdList ).slideDown( 100 );
+		$( '#royalties-list-' + sIdList ).slideUp( 300 );
 	} );
 };
 

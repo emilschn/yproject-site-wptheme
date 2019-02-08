@@ -110,9 +110,18 @@ body.template-mon-compte div#container div#content .investment-item .single-line
 body.template-mon-compte div#container div#content .investment-item .single-line.publish.campaign-archive {
 	color: #333333;
 }
+body.template-mon-compte div#container div#content .investment-item a.button {
+	padding: 16px 16px;
+}
 body.template-mon-compte div#container div#content .button-view-royalties-list {
 	position: relative;
 	top: -20px;
+	height: 42px;
+	background: #FFF;
+}
+body.template-mon-compte div#container div#content .button-hide-royalties-list {
+	position: relative;
+	top: 36px;
 	height: 42px;
 	background: #FFF;
 }
