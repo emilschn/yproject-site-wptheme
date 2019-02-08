@@ -40,14 +40,16 @@ else {
 						<div>
 							<span class="footer-subtitle"><?php _e('Nous suivre', 'yproject'); ?></span>
 
+							<?php /*
 							<form method="POST" action="<?php echo admin_url( 'admin-post.php' ); ?>">
 								<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/mail.jpg" alt="MAIL" width="48" height="48" />
 								<input type="text" id="subscribe-nl-mail" name="subscribe-nl-mail" placeholder="<?php _e("Je m'inscris à la newsletter", 'yproject'); ?>" />
 								<input type="submit" id="subscribe-nl-submit" value="OK" class="hidden" />
 								<input type="hidden" name="action" value="subscribe_newsletter_sendinblue" />
 							</form>
+							 */ ?>
 
-							<div style="margin: 30px 0px;">
+							<div style="margin: 16px 0px;">
 								<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook"/></a>
 								<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter"/></a>
 								<a class="social_network" href="https://www.linkedin.com/company/we-do-good/" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin"/></a>
