@@ -135,7 +135,7 @@ $WDGUser_current = WDGUser::current();
 		</div>
 
 		<div class="field">
-			<label for="org_fiscal_year_end_month"><?php _e("L'exerice comptable se termine &agrave; la fin du mois", 'yproject'); ?></label>
+			<label for="org_fiscal_year_end_month"><?php _e("L'exercice comptable se termine &agrave; la fin du mois", 'yproject'); ?></label>
 			<div class="field-container">
 				<span class="field-value">
 					<?php
