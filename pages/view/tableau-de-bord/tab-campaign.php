@@ -205,10 +205,13 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 				
 		DashboardUtility::create_field(array(
-			"id"	=> "new_hide_investors",
-			"type"	=> "check",
-			"label"	=> __( "Masquer les investisseurs sur la page projet", 'yproject' ),
-			"value"	=> $page_controler->get_campaign()->get_hide_investors()
+			"id"			=> "new_hide_investors",
+			"type"			=> "check",
+			"label"			=> __( "Masquer les investisseurs sur la page projet", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->get_hide_investors(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
 		));
 
 		DashboardUtility::create_field(array(
