@@ -33,6 +33,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'user-password' );
+		$core->include_form( 'user-unlink-facebook' );
 		$core->include_form( 'user-identitydocs' );
 		$core->include_form( 'user-bank' );
 		$core->include_form( 'user-notifications' );
@@ -191,7 +192,13 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 			$this->init_current_user( TRUE );
 		}
 		
-		if ( !$this->current_user->is_logged_in_with_facebook() ) {
+		if ( $this->current_user->is_logged_in_with_facebook() ) {
+			$this->form_unlink_facebook = new WDG_Form_User_Unlink_Facebook( $this->current_user->get_wpref() );
+			if ( $action_posted == WDG_Form_User_Unlink_Facebook::$name ) {
+				$this->form_user_feedback = $this->form_user_password->postForm();
+			}
+			
+		} else {
 			$this->form_user_password = new WDG_Form_User_Password( $this->current_user->get_wpref() );
 			if ( $action_posted == WDG_Form_User_Password::$name ) {
 				$this->form_user_feedback = $this->form_user_password->postForm();
@@ -205,6 +212,10 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	
 	public function get_user_password_form() {
 		return $this->form_user_password;
+	}
+	
+	public function get_user_unlink_facebook_form() {
+		return $this->form_unlink_facebook;
 	}
 	
 	public function get_user_form_feedback() {
