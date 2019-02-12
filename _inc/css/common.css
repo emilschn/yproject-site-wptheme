@@ -996,16 +996,23 @@ footer > .footer-container > div > div.aligncenter {
 	position: fixed;
 	z-index: 3;
 	bottom: 0px;
-	width: 100%;
-	padding: 10px 0px;
+	width: calc( 100% - 200px );
+	padding: 10px 100px;
 }
 #cookies-alert-close {
-	padding: 5px;
+	margin-top: 10px;
 }
 
 @media screen and (min-width: 998px) and (max-width: 1140px) {
 	footer > .footer-container > div > div:nth-child(5){
 		width: 20%;
+	}
+}
+	
+@media screen and (max-width: 998px) {
+	#cookies-alert {
+		width: 100%;
+		padding: 10px 0px;
 	}
 }
 

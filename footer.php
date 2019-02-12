@@ -122,8 +122,8 @@ else {
 		<?php else: ?>
 		<?php _e( "En poursuivant votre navigation, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu/' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
 		<?php endif; ?>
-
-		<button id="cookies-alert-close" class="red"><?php _e( "OK", 'yproject' ); ?></button>
+		<br>
+		<button id="cookies-alert-close" class="button red"><?php _e( "J'accepte", 'yproject' ); ?></button>
 	</div>
 	<?php endif; ?>
 
