@@ -196,12 +196,22 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 				
 		DashboardUtility::create_field(array(
-			"id"	=> "new_minimum_goal_display",
-			"type"	=> "select",
-			"label"	=> __( "Affichage de l'objectif minimum", 'yproject' ),
-			"value"	=> $page_controler->get_campaign()->get_minimum_goal_display(),
+			"id"			=> "new_minimum_goal_display",
+			"type"			=> "select",
+			"label"			=> __( "Affichage de l'objectif minimum", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->get_minimum_goal_display(),
 			"options_id"	=> array( ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_max, ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ),
 			"options_names"	=> array( "Afficher l'objectif minimum", "Afficher l'objectif maximum et un seuil de validation" )
+		));
+				
+		DashboardUtility::create_field(array(
+			"id"			=> "new_show_comments_for_everyone",
+			"type"			=> "check",
+			"label"			=> __( "Afficher les commentaires sur la page projet pour tous les visiteurs", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->get_show_comments_for_everyone(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
 		));
 				
 		DashboardUtility::create_field(array(
