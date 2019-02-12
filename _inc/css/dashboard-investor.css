@@ -104,6 +104,9 @@ body.template-mon-compte div#container div#content .investment-item .single-line
 body.template-mon-compte div#container div#content .investment-item .single-line.publish {
 	color: #8BC79C;
 }
+body.template-mon-compte div#container div#content .investment-item .single-line.canceled {
+	color: #8BC79C;
+}
 body.template-mon-compte div#container div#content .investment-item .single-line.pending {
 	color: #cfb7b7;
 }
