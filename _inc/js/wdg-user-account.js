@@ -105,9 +105,10 @@ UserAccountDashboard.prototype.initProjectList = function() {
 						var sStatusStr = 'Valid&eacute;';
 						if ( oInvestmentItem[ 'status' ] === 'pending' ) {
 							sStatusStr = 'En attente';
-						}
-						if ( oCampaignItem[ 'status' ] === 'archive' ) {
+						} else if ( oCampaignItem[ 'status' ] === 'archive' ) {
 							sStatusStr = 'Rembours&eacute;';
+						} else if ( oCampaignItem[ 'status' ] === 'canceled' ) {
+							sStatusStr = 'Termin&eacute;';
 						}
 						sCampaignBuffer += '<div class="single-line ' +oInvestmentItem[ 'status' ]+ ' campaign-' +oCampaignItem[ 'status' ]+ '">';
 						sCampaignBuffer += sStatusStr;
