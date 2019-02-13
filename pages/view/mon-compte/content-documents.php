@@ -53,7 +53,7 @@ $date_now = new DateTime();
 
 <?php
 $date_today = new DateTime();
-$date_start_for_wdg = 2019;
+$date_start_for_wdg = 2018;
 ?>
 <?php for ( $year = $date_start_for_wdg; $year <= $date_today->format( 'Y' ); $year++ ): ?>
 	<?php $tax_exemption_filename = $WDGUser_displayed->has_tax_exemption_for_year( $year ); ?>
