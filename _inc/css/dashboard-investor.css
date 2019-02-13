@@ -83,6 +83,13 @@ body.template-mon-compte div#container div#content a.download-certificate {
 	display: inline-block;
 	padding: 16px 32px;
 }
+body.template-mon-compte div#container div#content #tax-exemption-preview {
+	margin-bottom: 16px;
+	padding: 16px;
+	border: 1px solid;
+	text-align: left;
+	background: #FFF;
+}
 body.template-mon-compte div#container div#content h3.has-margin-top {
 	margin-top: 24px;
 }

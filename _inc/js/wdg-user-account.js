@@ -54,6 +54,9 @@ UserAccountDashboard.prototype.switchTab = function( sType, clickedElement ) {
 		this.initProjectList();
 	}
 	
+	if ( sType.indexOf( 'documents' ) > -1 ) {
+		this.initTaxExemption();
+	}
 };
 
 /**
@@ -262,6 +265,19 @@ UserAccountDashboard.prototype.toggleRois = function(){
 		var sIdList = $( this ).data( 'list' );
 		$( '#button-royalties-list-' + sIdList ).slideDown( 100 );
 		$( '#royalties-list-' + sIdList ).slideUp( 300 );
+	} );
+};
+
+/**
+ * Affiche le formulaire de dispense
+ */
+UserAccountDashboard.prototype.initTaxExemption = function(){
+	$( '#display-tax-exemption-form' ).click( function() {
+		$( '#tax-exemption-form' ).slideDown( 300 );
+	} );
+	
+	$( '#tax-exemption-form button.half.left' ).click( function() {
+		$( '#tax-exemption-form' ).slideUp( 300 );
 	} );
 };
 

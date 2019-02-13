@@ -22,6 +22,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	private $form_user_bank;
 	private $form_user_notifications;
 	private $form_user_feedback;
+	private $form_user_tax_exemption;
 	
 	public function __construct() {
 		parent::__construct();
@@ -47,6 +48,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$this->init_form_user_identitydocs();
 		$this->init_form_user_bank();
 		$this->init_form_user_notifications();
+		$this->init_form_user_tax_exemption();
 		
 		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
 		wp_enqueue_script( 'wdg-user-account', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-user-account.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION);
@@ -298,6 +300,45 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	
 	public function get_user_notifications_form() {
 		return $this->form_user_notifications;
+	}
+	
+/******************************************************************************/
+// USER TAX EXEMPTION
+/******************************************************************************/
+	private function init_form_user_tax_exemption() {
+		$core = ATCF_CrowdFunding::instance();
+		$core->include_form( 'user-tax-exemption' );
+		$this->form_user_tax_exemption = new WDG_Form_User_Tax_Exemption( $this->current_user->get_wpref() );
+		$action_posted = filter_input( INPUT_POST, 'action' );
+		if ( $action_posted == WDG_Form_User_Tax_Exemption::$name ) {
+			$this->form_user_feedback = $this->form_user_tax_exemption->postForm();
+		}
+	}
+	
+	public function get_user_tax_exemption_form() {
+		return $this->form_user_tax_exemption;
+	}
+	
+	public function get_can_ask_tax_exemption() {
+		return $this->current_user->get_tax_country() == 'FR' || $this->current_user->get_tax_country() == '';
+	}
+	
+	public function get_show_user_tax_exemption_form() {
+		$date_today = new DateTime();
+		$tax_exemption_filename = get_user_meta( $this->current_user->get_wpref(), 'tax_exemption_' .$date_today->format( 'Y' ), TRUE );
+		
+		return ( empty( $tax_exemption_filename ) && $this->get_can_ask_tax_exemption() );
+	}
+	
+	public function get_tax_exemption_preview() {
+		$core = ATCF_CrowdFunding::instance();
+		$core->include_control( 'templates/pdf/form-tax-exemption' );
+		$user_name = $this->current_user->get_firstname(). ' ' .$this->current_user->get_lastname();
+		$user_address = $this->current_user->get_full_address_str(). ' ' .$this->current_user->get_postal_code( TRUE ). ' ' .$this->current_user->get_city();
+		$form_ip_address = $_SERVER[ 'REMOTE_ADDR' ];
+		$date_today = new DateTime();
+		$form_date = $date_today->format( 'd/m/Y' );
+		return WDG_Template_PDF_Form_Tax_Exemption::get( $user_name, $user_address, $form_ip_address, $form_date );
 	}
 	
 /******************************************************************************/
