@@ -195,7 +195,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		if ( $this->current_user->is_logged_in_with_facebook() ) {
 			$this->form_unlink_facebook = new WDG_Form_User_Unlink_Facebook( $this->current_user->get_wpref() );
 			if ( $action_posted == WDG_Form_User_Unlink_Facebook::$name ) {
-				$this->form_user_feedback = $this->form_user_password->postForm();
+				$this->form_user_feedback = $this->form_unlink_facebook->postForm();
 			}
 			
 		} else {
