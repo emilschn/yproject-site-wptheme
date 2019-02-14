@@ -39,6 +39,12 @@ $form_errors = $page_controler->get_form_errors();
 	<?php endif; ?>
 
 	<form method="POST" enctype="multipart/form-data" class="db-form v3 full bg-white enlarge">
+	
+		<p class="align-justify">
+			<?php _e( "Les justificatifs d'identit&eacute; sont imm&eacute;diatement transmis, puis v&eacute;rifi&eacute;s sous 48h par notre prestataire de paiement, Lemon Way.", 'yproject' ); ?>
+			<?php _e( "Ils sont d'abord analys&eacute;s par des services automatiques puis par une personne physique en cas d'erreur ou de cas particulier.", 'yproject' ); ?><br>
+			<?php _e( "En cas d'erreur manifeste de l'analyse de vos documents, vous pouvez nous contacter &agrave; l'adresse investir@wedogood.co ou sur le chat en ligne.", 'yproject' ); ?><br><br>
+		</p>
 
 		<?php foreach ( $fields_hidden as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
