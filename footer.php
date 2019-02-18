@@ -123,7 +123,7 @@ else {
 		<?php _e( "En poursuivant votre navigation, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu/' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
 		<?php endif; ?>
 		<br>
-		<button id="cookies-alert-close" class="button red"><?php _e( "J'accepte", 'yproject' ); ?></button>
+		<button id="cookies-alert-close" class="button red"><?php _e( "Accepter", 'yproject' ); ?></button>
 	</div>
 	<?php endif; ?>
 
