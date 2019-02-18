@@ -603,7 +603,8 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 				$( '#wdg-lightbox-add-check #add-check-input-firstname' ).val( jsonResult.user_data.user.firstname );
 				$( '#wdg-lightbox-add-check #add-check-input-lastname' ).val( jsonResult.user_data.user.lastname );
 				$( '#wdg-lightbox-add-check #add-check-input-birthday-day' ).val( jsonResult.user_data.user.birthday_day );
-				$( '#wdg-lightbox-add-check #add-check-input-birthday-month' ).val( jsonResult.user_data.user.birthday_month );
+				var month = Number( jsonResult.user_data.user.birthday_month );
+				$( '#wdg-lightbox-add-check #add-check-input-birthday-month' ).val( month );
 				$( '#wdg-lightbox-add-check #add-check-input-birthday-year' ).val( jsonResult.user_data.user.birthday_year );
 				$( '#wdg-lightbox-add-check #add-check-input-birthplace' ).val( jsonResult.user_data.user.birthplace );
 				$( '#wdg-lightbox-add-check #add-check-input-nationality' ).val( jsonResult.user_data.user.nationality );
