@@ -21,3 +21,13 @@ $date_now = new DateTime();
 <?php if ( !$has_declaration ): ?>
 	<?php _e( "Aucune", 'yproject' ); ?>
 <?php endif; ?>
+
+
+<?php if ( $page_controler->has_tax_documents( $WDGOrganization->get_wpref() ) ): ?>
+<h3><?php _e( "Attestations IFU (Imprim&eacute; Fiscal Unique - 2561)", 'yproject' ); ?></h3>
+<?php $tax_documents = $page_controler->get_tax_documents( $WDGOrganization->get_wpref() ); ?>
+<?php foreach( $tax_documents as $year => $document_path ): ?>
+	<a href="<?php echo $document_path; ?>" download="ifu-<?php echo $year; ?>.pdf" class="button blue-pale download-certificate">Télécharger l'attestation <?php echo $year; ?></a>
+	<br><br>
+<?php endforeach; ?>
+<?php endif; ?>

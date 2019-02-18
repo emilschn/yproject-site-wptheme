@@ -33,9 +33,19 @@ $date_now = new DateTime();
 <?php endfor; ?>
 <?php if ( !$has_declaration ): ?>
 	<?php _e( "Aucune", 'yproject' ); ?>
+	<br>
+	<br>
 <?php endif; ?>
-<br>
-<br>
+
+
+<?php if ( $page_controler->has_tax_documents() ): ?>
+<h3><?php _e( "Mes attestations IFU (Imprim&eacute; Fiscal Unique - 2561)", 'yproject' ); ?></h3>
+<?php $tax_documents = $page_controler->get_tax_documents(); ?>
+<?php foreach( $tax_documents as $year => $document_path ): ?>
+	<a href="<?php echo $document_path; ?>" download="ifu-<?php echo $year; ?>.pdf" class="button blue-pale download-certificate">Télécharger l'attestation <?php echo $year; ?></a>
+	<br><br>
+<?php endforeach; ?>
+<?php endif; ?>
 
 
 

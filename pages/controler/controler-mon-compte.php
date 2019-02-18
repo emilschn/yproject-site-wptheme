@@ -23,6 +23,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	private $form_user_notifications;
 	private $form_user_feedback;
 	private $form_user_tax_exemption;
+	private $tax_documents;
 	
 	public function __construct() {
 		parent::__construct();
@@ -49,6 +50,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$this->init_form_user_bank();
 		$this->init_form_user_notifications();
 		$this->init_form_user_tax_exemption();
+		$this->init_tax_documents();
 		
 		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
 		wp_enqueue_script( 'wdg-user-account', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-user-account.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION);
@@ -339,6 +341,48 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$date_today = new DateTime();
 		$form_date = $date_today->format( 'd/m/Y' );
 		return WDG_Template_PDF_Form_Tax_Exemption::get( $user_name, $user_address, $form_ip_address, $form_date );
+	}
+	
+/******************************************************************************/
+// USER TAX DOCUMENTS
+/******************************************************************************/
+	private function init_tax_documents() {
+		$this->tax_documents = array();
+		
+		$this->tax_documents[ 'user' ] = array();
+		foreach ( $this->current_user_organizations as $WDGOrganization ) {
+			$this->tax_documents[ $WDGOrganization->get_wpref() ] = array();
+		}
+			
+		$date_today = new DateTime();
+		$today_year = $date_today->format( 'Y' );
+		for ( $year = 2019; $year <= $today_year; $year++ ) {
+			$tax_document = $this->current_user->has_tax_document_for_year( $year );
+			if ( $tax_document ) {
+				$this->tax_documents[ 'user' ][ $year ] = $tax_document;
+			}
+			
+			foreach ( $this->current_user_organizations as $WDGOrganization ) {
+				$tax_document = $WDGOrganization->has_tax_document_for_year( $year );
+				if ( $tax_document ) {
+					$this->tax_documents[ $WDGOrganization->get_wpref() ][ $year ] = $tax_document;
+				}
+			}
+		}
+	}
+	
+	public function has_tax_documents( $orga_id ) {
+		if ( empty( $orga_id ) ) {
+			$orga_id = 'user';
+		}
+		return !empty( $this->tax_documents[ $orga_id ] );
+	}
+	
+	public function get_tax_documents( $orga_id ) {
+		if ( empty( $orga_id ) ) {
+			$orga_id = 'user';
+		}
+		return $this->tax_documents[ $orga_id ];
 	}
 	
 /******************************************************************************/
