@@ -371,14 +371,14 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		}
 	}
 	
-	public function has_tax_documents( $orga_id ) {
+	public function has_tax_documents( $orga_id = FALSE ) {
 		if ( empty( $orga_id ) ) {
 			$orga_id = 'user';
 		}
 		return !empty( $this->tax_documents[ $orga_id ] );
 	}
 	
-	public function get_tax_documents( $orga_id ) {
+	public function get_tax_documents( $orga_id = FALSE ) {
 		if ( empty( $orga_id ) ) {
 			$orga_id = 'user';
 		}
