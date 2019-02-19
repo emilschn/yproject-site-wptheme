@@ -340,7 +340,15 @@ $lang_list = $campaign->get_lang_list();
 
 		</div>
 	</div>
-	<div class="clear padder"><div class="subtitle"><?php echo $campaign->subtitle(); ?></div></div>
+	
+	<div class="clear padder">
+		<div class="hashtags">
+			<?php echo $campaign->get_subcategories_hashtags(); ?>
+		</div>
+		<div class="subtitle">
+			<?php echo $campaign->subtitle(); ?>
+		</div>
+	</div>
 </div>
 	
 <div class="padder">

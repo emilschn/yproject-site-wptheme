@@ -56,7 +56,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				'admin_theme'	=> true,
 				"editable"		=> true
 			));
-		}
 
 
 		$terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
@@ -77,7 +76,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		}
 		?>
 
-		<div class="field">
+		<div class="field admin-theme">
 			<label for="categories"><?php _e("Cat&eacute;gorie", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_categories"><?php
 				include_once ABSPATH . 'wp-admin/includes/template.php';
@@ -91,7 +90,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			?></span>
 		</div>
 
-		<div class="field">
+		<div class="field admin-theme">
 			<label for="activities"><?php _e("Secteur d&apos;activit&eacute;", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_activities"><?php
 				wp_terms_checklist(
@@ -105,7 +104,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		</div>
 
 		<?php if ( $terms_type ): ?>
-		<div class="field">
+		<div class="field admin-theme">
 			<label for="types"><?php _e("Type de projet", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_types"><?php
 				wp_terms_checklist(
@@ -120,7 +119,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 
 		<?php if ( $terms_partners ): ?>
-		<div class="field">
+		<div class="field admin-theme">
 			<label for="partners"><?php _e("Partenaires", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_partners"><?php
 				wp_terms_checklist(
@@ -135,7 +134,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 
 		<?php if ( $terms_tousnosprojets ): ?>
-		<div class="field">
+		<div class="field admin-theme">
 			<label for="tousnosprojets"><?php _e("Cat&eacute;gorie sur le site tousnosprojets.fr", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_tousnosprojets"><?php
 				wp_terms_checklist(
@@ -150,6 +149,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 
 		<?php
+		}
+		
 		$locations = atcf_get_locations();
 		DashboardUtility::create_field(array(
 			"id"			=> "new_project_location",
