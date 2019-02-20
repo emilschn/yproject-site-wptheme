@@ -183,12 +183,14 @@ class WDG_Page_Controler {
 					if ( $WDG_user_current->has_pending_not_validated_investments() ) {
 						$this->show_user_pending_investment = $WDG_user_current->get_first_pending_not_validated_investment();
 					}
-					if ( !$this->show_user_pending_investment ) {
-						$user_organizations_list = $WDG_user_current->get_organizations_list();
+				}
+				if ( !$this->show_user_pending_investment ) {
+					$user_organizations_list = $WDG_user_current->get_organizations_list();
+					if ( $user_organizations_list ) {
 						foreach ( $user_organizations_list as $organization_item ) {
-							$WDGUserOrga = new WDGUser( $organization_item->wpref );
-							if ( $WDGUserOrga->has_pending_not_validated_investments() ) {
-								$this->show_user_pending_investment = $WDGUserOrga->get_first_pending_not_validated_investment();
+							$WDGOrga = new WDGOrganization( $organization_item->wpref );
+							if ( $WDGOrga->is_registered_lemonway_wallet() && $WDGOrga->has_pending_not_validated_investments() ) {
+								$this->show_user_pending_investment = $WDGOrga->get_first_pending_not_validated_investment();
 								break;
 							}
 						}
