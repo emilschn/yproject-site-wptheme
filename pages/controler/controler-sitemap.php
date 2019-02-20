@@ -6,13 +6,22 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	
 	public function __construct() {
 		$input_queue = filter_input( INPUT_GET, 'queue' );
+		$input_rss = filter_input( INPUT_GET, 'rss' );
+		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
 		
 		if ( !empty( $input_queue ) && $input_queue == '1' ) {
 			$nb_done = WDGQueue::execute_next( 10 );
 			exit( $nb_done . ' queued actions executed.' );
 			
+		} else if ( !empty( $input_rss ) && $input_rss == '1' ) {
+			WDGCronActions::make_projects_rss();
+			
+		} else if ( !empty( $input_make_finished_xml ) && $input_make_finished_xml == '1' ) {
+			WDGCronActions::make_projects_rss( FALSE );
+			
 		} else {
 			$this->hourly_call();
+			
 			$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
 			$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
 			if ( $this->is_daily_call_time() || $input_force_daily_call == '1' ) {
@@ -34,12 +43,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	private function daily_call() {
 		$this->rebuild_sitemap();
 		WDG_Cache_Plugin::initialize_home_stats();
-		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
-		if ( empty( $input_make_finished_xml ) ) {
-			WDGCronActions::make_projects_rss();
-		} else {
-			WDGCronActions::make_projects_rss( FALSE );
-		}
+		WDGCronActions::make_projects_rss();
 		WDGCronActions::send_notifications();
 	}
 	
