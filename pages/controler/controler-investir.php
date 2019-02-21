@@ -272,6 +272,10 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					if ( $this->form->postForm() ) {
 						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> GOTO success' );
 						$this->form_display_success = TRUE;
+						// Si l'investisseur n'a pas encore envoyé tous ses documents malgré la validation du formulaire, on lui envoie un mail immédiatement
+						if ( !$WDGCurrent_User->has_sent_all_documents() ) {
+							NotificationsAPI::investment_authentication_needed( $WDGCurrent_User->get_email(), $WDGCurrent_User->get_firstname(), $this->current_campaign->get_name(), $this->current_campaign->get_api_id() );
+						}
 					}
 				}
 				break;
