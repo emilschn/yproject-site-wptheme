@@ -87,9 +87,8 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 	<div class="db-form">
 		<?php $campaign_emails = $page_controler->get_campaign_emails(); ?>
 		<?php if ( !empty( $campaign_emails ) ): ?>
-		<b>Liste des emails envoyés en rapport avec la lev&eacute;e de fonds</b><br><br>
-			
-		<div class="admin-theme-block">
+		<div class="field admin-theme">
+			<b>Liste des emails envoyés en rapport avec la lev&eacute;e de fonds</b><br><br>
 			<table>
 				<tr>
 					<td><strong>Date</strong></td>
@@ -105,8 +104,9 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 				</tr>
 				<?php endforeach; ?>
 			</table>
-		</div>
+			
 		<br><br>
+		</div>
 		<?php endif; ?>
 		
 		<?php $campaign_poll_answers = $page_controler->get_campaign()->get_api_data( 'poll_answers' ); ?>
