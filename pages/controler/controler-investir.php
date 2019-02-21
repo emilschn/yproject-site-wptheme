@@ -273,8 +273,16 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> GOTO success' );
 						$this->form_display_success = TRUE;
 						// Si l'investisseur n'a pas encore envoyé tous ses documents malgré la validation du formulaire, on lui envoie un mail immédiatement
-						if ( !$WDGCurrent_User->has_sent_all_documents() ) {
-							NotificationsAPI::investment_authentication_needed( $WDGCurrent_User->get_email(), $WDGCurrent_User->get_firstname(), $this->current_campaign->get_name(), $this->current_campaign->get_api_id() );
+						if ( WDGOrganization::is_user_organization( $identity_docs_user_id ) ) {
+							$WDGEntity = new WDGOrganization( $identity_docs_user_id );
+							$user_name = $WDGEntity->get_name();
+						} else {
+							$WDGEntity = new WDGUser( $identity_docs_user_id );
+							$user_name = $WDGEntity->get_firstname();
+						}
+						if ( !$WDGEntity->has_sent_all_documents() ) {
+							NotificationsAPI::investment_authentication_needed( $WDGEntity->get_email(), $user_name, $this->current_campaign->get_name(), $this->current_campaign->get_api_id() );
+							WDGQueue::add_investment_authentication_needed_reminder( $WDGEntity->get_wpref(), $WDGEntity->get_email(), $user_name, $this->current_campaign->get_name(), $this->current_campaign->get_api_id() );
 						}
 					}
 				}
