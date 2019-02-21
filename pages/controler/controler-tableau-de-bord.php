@@ -13,6 +13,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $can_access_author;
 	private $must_show_lightbox_welcome;
 	private $return_lemonway_card;
+	private $emails;
 	/**
 	 * @var ATCF_Campaign
 	 */
@@ -119,6 +120,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			$this->can_access_author = ( $this->author_user->get_wpref() == $this->current_user->get_wpref() );
 			$campaign_organization_item = $this->campaign->get_organization();
 			$this->campaign_organization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+			$this->emails = WDGWPREST_Entity_Project::get_emails( $this->campaign->get_api_id() );
 			
 			if ( file_exists( __DIR__ . '/../../../../plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->get_url() . '.zip' ) ) {
 				$this->campaign_contracts_url = home_url( 'wp-content/plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->get_url() . '.zip' );
@@ -148,6 +150,19 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	}
 	public function get_campaign_contracts_url() {
 		return $this->campaign_contracts_url;
+	}
+	public function get_campaign_emails() {
+		$buffer = array();
+		foreach ( $this->emails as $email ) {
+			$item = array(
+				'recipient'		=> $email->recipient,
+				'date'			=> $email->date,
+				'template_id'	=> $email->template,
+				'template_str'	=> NotificationsAPI::$description_str_by_template_id[ $email->template ]
+			);
+			array_push( $buffer, $item );
+		}
+		return $buffer;
 	}
 	
 /******************************************************************************/

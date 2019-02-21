@@ -81,6 +81,29 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 
 
 <?php if ( $page_controler->can_access_admin() ): ?>
+	<?php $campaign_emails = $page_controler->get_campaign_emails(); ?>
+	<?php if ( !empty( $campaign_emails ) ): ?>
+	<br><br>
+	<div class="admin-theme-block">
+		<table>
+			<tr>
+				<td>Date</td>
+				<td>Destinataire</td>
+				<td>Template</td>
+			</tr>
+			
+			<?php foreach ( $campaign_emails as $campaign_email ): ?>
+			<tr>
+				<td><?php echo $campaign_email[ 'date' ]; ?></td>
+				<td><?php echo $campaign_email[ 'recipient' ]; ?></td>
+				<td><?php echo $campaign_email[ 'template_str' ]; ?></td>
+			</tr>
+			<?php endforeach; ?>
+		</table>
+	</div>
+	<?php endif; ?>
+	
+	
 	<?php $campaign_poll_answers = $page_controler->get_campaign()->get_api_data( 'poll_answers' ); ?>
 	<br><br><br>
 	<div class="db-form">
