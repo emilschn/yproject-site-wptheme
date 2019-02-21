@@ -197,7 +197,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			// 0.4
 			'/financement/offres/amorcage-crowdfunding/'			=> '0.4',
 			'/financement/offres/crowdfunding-accompagnement/'		=> '0.4',
-			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
+//			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
 			// 0.3
 			'/a-propos/espace-presse/'			=> '0.3',
 			'/a-propos/partenaires/'			=> '0.3',
