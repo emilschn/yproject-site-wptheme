@@ -67,8 +67,12 @@ $form_errors = $page_controler->get_form_errors();
 			<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
 		</p>
 
-		<div>
+		<div class="align-center">
 			<button type="submit" class="button save red"><?php _e( "Envoyer les documents", 'yproject' ); ?></button>
+			<br><br>
+			<button type="submit" class="button save transparent"><?php _e( "Envoyer plus tard", 'yproject' ); ?></button>
+			<br>
+			(et investir plus tard)
 		</div>
 
 	</form>
