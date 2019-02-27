@@ -152,6 +152,7 @@ class WDG_Page_Controler {
 			if ( is_user_logged_in() ) {
 				$WDG_user_current = WDGUser::current();
 				if ( $WDG_user_current->has_pending_preinvestments() ) {
+					ypcf_debug_log( 'WDG_Page_Controler::init_show_user_pending_preinvestment has_pending_preinvestments' );
 					$this->show_user_pending_preinvestment = $WDG_user_current->get_first_pending_preinvestment();
 				}
 				if ( !$this->show_user_pending_preinvestment ) {
@@ -159,6 +160,7 @@ class WDG_Page_Controler {
 					foreach ( $user_organizations_list as $organization_item ) {
 						$WDGUserOrga = new WDGUser( $organization_item->wpref );
 						if ( $WDGUserOrga->has_pending_preinvestments() ) {
+							ypcf_debug_log( 'WDG_Page_Controler::init_show_user_pending_preinvestment ORGA has_pending_preinvestments' );
 							$this->show_user_pending_preinvestment = $WDGUserOrga->get_first_pending_preinvestment();
 							break;
 						}
