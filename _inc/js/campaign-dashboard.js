@@ -619,6 +619,11 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 			}
 		});
 	} );
+	
+	$( '#show-notifications-preinvestment' ).click( function( e ) {
+		e.preventDefault();
+		$( '#form-notifications-preinvestment' ).slideDown( 100 );
+	} );
 };
 
 /**

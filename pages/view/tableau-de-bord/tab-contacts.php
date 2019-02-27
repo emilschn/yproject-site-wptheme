@@ -72,19 +72,47 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 
 <?php if ( $page_controler->can_access_admin() ): ?>
 	<br><br>
-	<div class="admin-theme-block align-center">
-		<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a>
-		<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/lightbox-add-check.php' ), true ); ?>
-	</div>
-<?php endif; ?>
+	<div class="admin-theme-block db-form">
+		<div class="field admin-theme align-center">
+			<a href="#contacts" id="show-notifications-preinvestment" class="button admin-theme"><?php _e("Envoyer les notifications de pr&eacute;-investissement","yproject") ?></a>
+			<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a>
 
+			<br><br>
+			
+			<?php
+			$editor_params = array( 
+				'media_buttons' => true,
+				'quicktags'     => true,
+				'editor_height' => 500,
+				'tinymce'       => array(
+					'plugins'		=> 'wordpress, paste, wplink, textcolor, charmap, hr, colorpicker, lists',
+					'toolbar1'		=> 'bold,italic,underline,|,hr,bullist,numlist,|,alignleft,aligncenter,alignright,alignjustify,|,link,unlink,video,wp_adv',
+					'toolbar2'		=> 'formatselect,fontsizeselect,removeformat,charmap,forecolor,forecolorpicker,pastetext,table,undo,redo',
+					'paste_remove_styles' => true,
+					'wordpress_adv_hidden' => FALSE,
+				)
+			);
+			?>
+		
+			<form id="form-notifications-preinvestment" action="<?php echo admin_url( 'admin-post.php?action=send_project_preinvestment_notifications'); ?>" method="POST" class="hidden align-left">
+				<b>Notifications de pré-investissement :</b><br><br>
+				Témoignages :<br>
+				<?php wp_editor( '', 'testimony', $editor_params ); ?><br><br>
+				URL de l'image (au moins 590px de large) :<br>
+				<input type="text" name="image_url"><br><br>
+				Description sous l'image :<br>
+				<input type="text" name="image_description"><br><br>
+				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
+				<input type="submit" value="Envoyer" class="button admin-theme">
+			</form>
+			
+			<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/lightbox-add-check.php' ), true ); ?>
 
-
-<?php if ( $page_controler->can_access_admin() ): ?>
+		</div>
 	
 	
-	<br><br><br>
-	<div class="db-form">
+		<br><br><br>
+		
 		<?php $campaign_emails = $page_controler->get_campaign_emails(); ?>
 		<?php if ( !empty( $campaign_emails ) ): ?>
 		<div class="field admin-theme">
