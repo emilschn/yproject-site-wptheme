@@ -9,6 +9,14 @@ $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::
 ?>
 
 <form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
+	
+	<?php if ( $page_controler->is_authentication_alert_visible() ): ?>
+		<p class="align-justify">
+			<?php _e( "Afin de lutter contre le blanchiment d'argent, des justificatifs d'identit&eacute; vous seront demand&eacute;s au format num&eacute;rique pour authentifier votre compte.", 'yproject' ); ?>
+			<?php _e( "Si vous ne les avez pas avec vous, vous aurez la possibilit&eacute; de revenir plus tard pour compl&eacute;ter votre profil et finaliser votre investissement.", 'yproject' ); ?>
+			<br><br>
+		</p>
+	<?php endif; ?>
 
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>

@@ -176,6 +176,11 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		return wpautop( $edd_settings[ 'investment_terms' ] );
 	}
 	
+	public function is_authentication_alert_visible() {
+		$WDGUser_current = WDGUser::current();
+		return ( $this->current_step == 1 && !$WDGUser_current->is_lemonway_registered() );
+	}
+	
 /******************************************************************************/
 // CURRENT FORM
 /******************************************************************************/
