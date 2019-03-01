@@ -662,7 +662,7 @@ div#content.version-3 .projects-desc-content h3{
 	text-align: center;
 	color: #333333;
 }
-div#content.version-3 .projects-desc-content p {
+div#content.version-3 .projects-desc-content p, div#content.version-3 .projects-desc-content ul {
 	line-height: 1.6em;
 }
 div#content.version-3 .projects-desc-content p, div#content.version-3 .projects-desc-content h4 {
