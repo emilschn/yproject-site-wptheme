@@ -151,6 +151,13 @@ class WDG_Page_Controler {
 			$this->show_user_pending_preinvestment = false;
 			if ( is_user_logged_in() ) {
 				$WDG_user_current = WDGUser::current();
+				if ( $WDGUser_current->is_admin() ) {
+					$input_user_id = filter_input( INPUT_GET, 'override_current_user' );
+					if ( !empty( $input_user_id ) ) {
+						$WDG_user_current = new WDGUser( $input_user_id );
+					}
+				}
+				
 				if ( $WDG_user_current->has_pending_preinvestments() ) {
 					ypcf_debug_log( 'WDG_Page_Controler::init_show_user_pending_preinvestment has_pending_preinvestments' );
 					$this->show_user_pending_preinvestment = $WDG_user_current->get_first_pending_preinvestment();
@@ -181,6 +188,13 @@ class WDG_Page_Controler {
 			$this->show_user_pending_investment = false;
 			if ( is_user_logged_in() ) {
 				$WDG_user_current = WDGUser::current();
+				if ( $WDGUser_current->is_admin() ) {
+					$input_user_id = filter_input( INPUT_GET, 'override_current_user' );
+					if ( !empty( $input_user_id ) ) {
+						$WDG_user_current = new WDGUser( $input_user_id );
+					}
+				}
+				
 				if ( $WDG_user_current->is_lemonway_registered() ) {
 					if ( $WDG_user_current->has_pending_not_validated_investments() ) {
 						$this->show_user_pending_investment = $WDG_user_current->get_first_pending_not_validated_investment();
