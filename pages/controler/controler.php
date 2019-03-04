@@ -151,7 +151,7 @@ class WDG_Page_Controler {
 			$this->show_user_pending_preinvestment = false;
 			if ( is_user_logged_in() ) {
 				$WDG_user_current = WDGUser::current();
-				if ( $WDGUser_current->is_admin() ) {
+				if ( $WDG_user_current->is_admin() ) {
 					$input_user_id = filter_input( INPUT_GET, 'override_current_user' );
 					if ( !empty( $input_user_id ) ) {
 						$WDG_user_current = new WDGUser( $input_user_id );
@@ -188,7 +188,7 @@ class WDG_Page_Controler {
 			$this->show_user_pending_investment = false;
 			if ( is_user_logged_in() ) {
 				$WDG_user_current = WDGUser::current();
-				if ( $WDGUser_current->is_admin() ) {
+				if ( $WDG_user_current->is_admin() ) {
 					$input_user_id = filter_input( INPUT_GET, 'override_current_user' );
 					if ( !empty( $input_user_id ) ) {
 						$WDG_user_current = new WDGUser( $input_user_id );
