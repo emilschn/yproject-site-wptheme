@@ -343,7 +343,7 @@ $lang_list = $campaign->get_lang_list();
 	
 	<div class="clear padder">
 		<div class="hashtags">
-			<?php echo $campaign->get_subcategories_hashtags(); ?>
+			<?php _e( "Impacts", 'yproject' ); ?> (<a href="<?php echo home_url( '/investissement/impact-investing/evaluation-des-impacts/' ); ?>" target="_blank"><?php _e( "En savoir plus", 'yproject' ); ?></a>) : <?php echo $campaign->get_subcategories_hashtags(); ?>
 		</div>
 		<div class="subtitle">
 			<?php echo $campaign->subtitle(); ?>
