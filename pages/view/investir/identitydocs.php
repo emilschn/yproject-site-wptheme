@@ -38,9 +38,9 @@ $form_errors = $page_controler->get_form_errors();
 		</div>
 	<?php endif; ?>
 
-	<form method="POST" enctype="multipart/form-data" class="db-form v3 full bg-white enlarge">
+	<form method="POST" enctype="multipart/form-data" class="db-form v3 full bg-white enlarge identitydocs">
 	
-		<p class="align-justify">
+		<p class="align-justify resp-item-1">
 			<?php _e( "Les justificatifs d'identit&eacute; sont imm&eacute;diatement transmis, puis v&eacute;rifi&eacute;s sous 48h par notre prestataire de paiement, Lemon Way.", 'yproject' ); ?>
 			<?php _e( "Ils sont d'abord analys&eacute;s par des services automatiques puis par une personne physique en cas d'erreur ou de cas particulier.", 'yproject' ); ?><br>
 			<?php _e( "En cas d'erreur manifeste de l'analyse de vos documents, vous pouvez nous contacter &agrave; l'adresse investir@wedogood.co ou sur le chat en ligne.", 'yproject' ); ?><br><br>
@@ -63,16 +63,17 @@ $form_errors = $page_controler->get_form_errors();
 			<?php endforeach; ?>
 		<?php endif; ?>
 
-		<p class="align-left">
+		<p class="align-left resp-item-5">
 			<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
 		</p>
 
-		<div class="align-center">
+		<div class="align-center resp-item-6">
 			<button type="submit" class="button save red"><?php _e( "Envoyer les documents", 'yproject' ); ?></button>
 			<br><br>
 			<button type="submit" class="button save transparent"><?php _e( "Envoyer plus tard", 'yproject' ); ?></button>
-			<br>
-			(et investir plus tard)
+			<div style="margin-top: 8px;">
+				(<?php _e( "et investir plus tard", 'yproject' ); ?>)
+			</div>
 		</div>
 
 	</form>

@@ -152,6 +152,34 @@ div#content button.clear {
 }
 
 /**
+ ETAPE 2B : Documents
+**/
+@media screen and (max-width: 800px) {
+	div#content form.identitydocs {
+		display: flex;
+		flex-direction: column;
+	}
+	div#content form.identitydocs .resp-item-1 {
+		order: 1;
+	}
+	div#content form.identitydocs #field-identity {
+		order: 2;
+	}
+	div#content form.identitydocs #field-home {
+		order: 4;
+	}
+	div#content form.identitydocs #field-identity2 {
+		order: 3;
+	}
+	div#content form.identitydocs .resp-item-5 {
+		order: 5;
+	}
+	div#content form.identitydocs .resp-item-6 {
+		order: 6;
+	}
+}
+
+/**
  ETAPE 3A : Contrat
 **/
 div#content div.center.upload-docs div.wdg-message.confirm {
