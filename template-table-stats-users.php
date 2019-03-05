@@ -24,7 +24,7 @@ $input_official_data = filter_input( INPUT_GET, 'official_data' );
 
 <div id="content">
     <div class="padder">
-		<br><br><br>
+		<br><br><br><br><br>
 		
 		<?php if ( $input_official_data == '1' ): ?>
 			<?php
@@ -49,6 +49,7 @@ $input_official_data = filter_input( INPUT_GET, 'official_data' );
 					foreach ( $payments as $payment ) {
 						$count++;
 						$amount = edd_get_payment_amount( $payment->ID );
+						$amount_total += $amount;
 						if ( $amount < 51 ) {
 							$count_1_50++;
 						} elseif ( $amount < 101 ) {
@@ -70,7 +71,7 @@ $input_official_data = filter_input( INPUT_GET, 'official_data' );
 								$count_invest_by_user_in_france++;
 							}
 							$euro_list = array( 'DE', 'AT', 'BE', 'BG', 'CY', 'HR', 'DK', 'ES', 'EE', 'FI', 'FR', 'GR', 'HU', 'GR', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'CZ', 'RO', 'GB', 'SK', 'SI', 'SE' );
-							if ( !is_array( $country_iso_code, $euro_list ) ) {
+							if ( !in_array( $country_iso_code, $euro_list ) ) {
 								$amount_out_of_euro += $amount;
 							}
 						}
