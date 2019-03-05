@@ -169,6 +169,10 @@ body.template-mon-compte div#container div#content .royalties-list .roi-table tr
 	padding-top: 8px;
 	font-weight: bold;
 }
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr.year-title td:nth-child(1) {
+	width: 49%;
+	padding-left: 40px;
+}
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr.year-title td span {
 	font-weight: normal;
 }
