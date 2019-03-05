@@ -19,13 +19,75 @@ global $stylesheet_directory_uri, $wpdb;
 $table_jcrois = $wpdb->prefix . "jycrois";
 $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 $input_poll = filter_input( INPUT_GET, 'poll' );
+$input_official_data = filter_input( INPUT_GET, 'official_data' );
 ?>
 
 <div id="content">
     <div class="padder">
 		<br><br><br>
 		
-		<?php if ( $input_poll == 'warranty' ): ?>
+		<?php if ( $input_official_data == '1' ): ?>
+			<?php
+				$count = 0;
+				$count_1_50 = 0;
+				$count_51_100 = 0;
+				$count_101_250 = 0;
+				$count_251_1000 = 0;
+				$count_1000 = 0;
+				$count_invest_by_user_in_france = 0;
+				
+				$amount_total = 0;
+				$amount_out_of_euro = 0;
+			
+				$today = new DateTime();
+				$payments = edd_get_payments( array(
+					'number'	=> -1,
+					'status'	=> 'publish',
+					'year'		=> $today->format( 'Y' ) - 1
+				) );
+				if ( $payments ) {
+					foreach ( $payments as $payment ) {
+						$count++;
+						$amount = edd_get_payment_amount( $payment->ID );
+						if ( $amount < 51 ) {
+							$count_1_50++;
+						} elseif ( $amount < 101 ) {
+							$count_51_100++;
+						} elseif ( $amount < 251 ) {
+							$count_101_250++;
+						} elseif ( $amount < 1001 ) {
+							$count_251_1000++;
+						} else {
+							$count_1000++;
+						}
+						
+						$user_info = edd_get_payment_meta_user_info( $payment->ID );
+						$user_id = (isset( $user_info['id'] ) && $user_info['id'] != -1) ? $user_info['id'] : $user_info['email'];
+						if ( !WDGOrganization::is_user_organization( $user_id ) ) {
+							$WDGUser = new WDGUser( $user_id );
+							$country_iso_code = $WDGUser->get_country( 'iso2' );
+							if ( $country_iso_code == 'FR' ) {
+								$count_invest_by_user_in_france++;
+							}
+							$euro_list = array( 'DE', 'AT', 'BE', 'BG', 'CY', 'HR', 'DK', 'ES', 'EE', 'FI', 'FR', 'GR', 'HU', 'GR', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'CZ', 'RO', 'GB', 'SK', 'SI', 'SE' );
+							if ( !is_array( $country_iso_code, $euro_list ) ) {
+								$amount_out_of_euro += $amount;
+							}
+						}
+					}
+				}
+			?>
+			Investissements totaux : <?php echo $count; ?><br>
+			Investissements inf 51 € : <?php echo $count_1_50; ?> (<?php echo round( $count_1_50 / $count * 100, 2 ); ?> %)<br>
+			Investissements entre 51 et 100 € : <?php echo $count_51_100; ?> (<?php echo round( $count_51_100 / $count * 100, 2 ); ?> %)<br>
+			Investissements entre 101 et 250 € : <?php echo $count_101_250; ?> (<?php echo round( $count_101_250 / $count * 100, 2 ); ?> %)<br>
+			Investissements entre 251 et 1000 € : <?php echo $count_251_1000; ?> (<?php echo round( $count_251_1000 / $count * 100, 2 ); ?> %)<br>
+			Investissements plus de 1000 € : <?php echo $count_1000; ?> (<?php echo round( $count_1000 / $count * 100, 2 ); ?> %)<br>
+			Investissements par pers. phys. en France : <?php echo $count_invest_by_user_in_france; ?> (<?php echo round( $count_invest_by_user_in_france / $count * 100, 2 ); ?> %)<br>
+			Montants totaux : <?php echo $amount_total; ?> €<br>
+			Montants dont provenance hors UE : <?php echo $amount_out_of_euro; ?> € (<?php echo round( $amount_out_of_euro / $amount_total * 100, 2 ); ?> %)<br>
+		
+		<?php elseif ( $input_poll == 'warranty' ): ?>
 		<?php $poll_answers = WDGWPREST_Entity_PollAnswer::get_list( FALSE, FALSE, $input_poll ); ?>
 		<h1>Résultats sondage garantie</h1>
 		<div class="wdg-datatable">
