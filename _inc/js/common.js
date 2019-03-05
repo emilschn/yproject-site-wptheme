@@ -892,11 +892,11 @@ var WDGFormsFunctions = (function($) {
 		
 		initFileInput: function() {
 			$( '.field-file input' ).each( function() {
-				var $input = $( this ),
-				$label = $input.next( 'label' ),
-				labelVal = $label.html();
+				var self = $( this ),
+				label_element = self.next( 'label' ),
+				labelVal = label_element.html();
 
-				$input.on( 'change', function( e ) {
+				self.on( 'change', function( e ) {
 					var fileName = '';
 
 					if( this.files && this.files.length > 1 )
@@ -905,11 +905,17 @@ var WDGFormsFunctions = (function($) {
 						fileName = e.target.value.split( '\\' ).pop();
 
 					if( fileName ) {
-						$label.find( 'span' ).html( fileName );
-						$label.find( 'span.hide-when-filled' ).hide();
+						label_element.find( 'span' ).html( fileName );
+						label_element.find( 'span.hide-when-filled' ).hide();
 					} else {
-						$label.html( labelVal );
+						label_element.html( labelVal );
 					}
+					
+					// Exécutés quand chargement de fichier appelé depuis lightbox
+					label_element.show();
+					label_element.css( 'display', 'inline-block' );
+					label_element.next( '.displayed-responsive' ).hide();
+					WDGLightboxFunctions.hideAll();
 				} );
 			} );
 			
@@ -930,6 +936,20 @@ var WDGFormsFunctions = (function($) {
 				var inputId = $( this ).data( 'input' );
 				$( '#' + inputId ).prop( 'files', e.originalEvent.dataTransfer.files );
 				$( '#' + inputId ).trigger( 'change' );
+			} );
+			
+			$( 'button.take-picture, button.import-file' ).click( function( e ) {
+				e.stopPropagation();
+				e.preventDefault();
+				var inputID = $( this ).data( 'input-id' );
+				if ( $( this ).hasClass( 'take-picture' ) ) {
+					$( '#' + inputID ).attr( 'accept', 'image/*' );
+					$( '#' + inputID ).attr( 'capture', 'camera' );
+				} else {
+					$( '#' + inputID ).attr( 'accept', '*' );
+					$( '#' + inputID ).attr( 'capture', '' );
+				}
+				$( '#' + inputID ).click();
 			} );
 		},
 		
