@@ -10,6 +10,7 @@ JSHelpers = ( function( $ ) {
 		},
 		
 		formatNumber: function( nInput, sSuffix ) {
+			nInput = Math.round( nInput * 100 ) / 100;
 			var buffer = nInput.toString()
 			// Gestion milliers
 			if ( nInput > 1000 ) {
