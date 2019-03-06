@@ -20,63 +20,107 @@ $table_jcrois = $wpdb->prefix . "jycrois";
 $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 $input_poll = filter_input( INPUT_GET, 'poll' );
 $input_official_data = filter_input( INPUT_GET, 'official_data' );
+$input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 ?>
 
 <div id="content">
     <div class="padder">
 		<br><br><br><br><br>
 		
-		<?php if ( $input_official_data == '1' ): ?>
+		<?php if ( $input_declarations_list == '1' ): ?>
+			Liste des déclarations demandées et état des ajustements :
 			<?php
-				$count = 0;
-				$count_1_50 = 0;
-				$count_51_100 = 0;
-				$count_101_250 = 0;
-				$count_251_1000 = 0;
-				$count_1000 = 0;
-				$count_invest_by_user_in_france = 0;
-				
-				$amount_total = 0;
-				$amount_out_of_euro = 0;
-			
-				$today = new DateTime();
-				$payments = edd_get_payments( array(
-					'number'	=> -1,
-					'status'	=> 'publish',
-					'year'		=> $today->format( 'Y' ) - 1
-				) );
-				if ( $payments ) {
-					foreach ( $payments as $payment ) {
-						$count++;
-						$amount = edd_get_payment_amount( $payment->ID );
-						$amount_total += $amount;
-						if ( $amount < 51 ) {
-							$count_1_50++;
-						} elseif ( $amount < 101 ) {
-							$count_51_100++;
-						} elseif ( $amount < 251 ) {
-							$count_101_250++;
-						} elseif ( $amount < 1001 ) {
-							$count_251_1000++;
-						} else {
-							$count_1000++;
+			$input_declarations_year = filter_input( INPUT_GET, 'declarations_year' );
+			$input_declarations_month = filter_input( INPUT_GET, 'declarations_month' );
+			if ( !empty( $input_declarations_month ) && !empty( $input_declarations_year ) ):
+				$date_start = new DateTime();
+				$date_start->setDate( $input_declarations_year, $input_declarations_month, 1 );
+				$date_end = new DateTime();
+				$date_end->setDate( $input_declarations_year, $input_declarations_month, 28 );
+				$declarations_list = WDGWPREST_Entity_Declaration::get_list_by_date( $date_start->format( 'Y-m-d' ), $date_end->format( 'Y-m-d' ) );
+				if ( $declaration_list ):
+					foreach ( $declaration_list as $declaration_data ):
+						$roi_declaration = new WDGROIDeclaration( FALSE, FALSE, $declaration_data);
+						$roi_declaration_file_list = $roi_declaration->get_file_list();
+						$files_path = $declaration->get_file_path();
+						$campaign = new ATCF_Campaign( FALSE, $declaration_data->id_project );
+						?>
+						- <strong><?php echo $campaign->get_name(); ?> :</strong>
+							<?php if ( $roi_declaration->get_adjustment_validated() ): ?>
+							Ajustement validé
+							<?php else: ?>
+							Ajustement en cours
+							<?php endif; ?>
+							<br>
+							
+							<?php if ( empty( $roi_declaration_file_list ) ): ?>
+							Aucun fichier transmis
+							<?php else: ?>
+							Fichiers transmis :
+							<ul>
+							<?php foreach ($declaration_file_list as $declaration_file): ?>
+								<li><a href="<?php echo $files_path.$declaration_file->file; ?>" target="_blank"><?php echo html_entity_decode( $declaration_file->text ); ?></a></li>
+							<?php endforeach; ?>
+							</ul>
+							<?php endif; ?>
+							<br><br><br>
+						<?php
+					endforeach;
+				endif;
+			endif;
+			?>
+		
+		<?php elseif ( $input_official_data == '1' ): ?>
+			<?php
+			$count = 0;
+			$count_1_50 = 0;
+			$count_51_100 = 0;
+			$count_101_250 = 0;
+			$count_251_1000 = 0;
+			$count_1000 = 0;
+			$count_invest_by_user_in_france = 0;
+
+			$amount_total = 0;
+			$amount_out_of_euro = 0;
+
+			$today = new DateTime();
+			$payments = edd_get_payments( array(
+				'number'	=> -1,
+				'status'	=> 'publish',
+				'year'		=> $today->format( 'Y' ) - 1
+			) );
+			if ( $payments ) {
+				foreach ( $payments as $payment ) {
+					$count++;
+					$amount = edd_get_payment_amount( $payment->ID );
+					$amount_total += $amount;
+					if ( $amount < 51 ) {
+						$count_1_50++;
+					} elseif ( $amount < 101 ) {
+						$count_51_100++;
+					} elseif ( $amount < 251 ) {
+						$count_101_250++;
+					} elseif ( $amount < 1001 ) {
+						$count_251_1000++;
+					} else {
+						$count_1000++;
+					}
+
+					$user_info = edd_get_payment_meta_user_info( $payment->ID );
+					$user_id = (isset( $user_info['id'] ) && $user_info['id'] != -1) ? $user_info['id'] : $user_info['email'];
+					if ( !WDGOrganization::is_user_organization( $user_id ) ) {
+						$WDGUser = new WDGUser( $user_id );
+						$country_iso_code = $WDGUser->get_country( 'iso2' );
+						if ( $country_iso_code == 'FR' ) {
+							$count_invest_by_user_in_france++;
 						}
-						
-						$user_info = edd_get_payment_meta_user_info( $payment->ID );
-						$user_id = (isset( $user_info['id'] ) && $user_info['id'] != -1) ? $user_info['id'] : $user_info['email'];
-						if ( !WDGOrganization::is_user_organization( $user_id ) ) {
-							$WDGUser = new WDGUser( $user_id );
-							$country_iso_code = $WDGUser->get_country( 'iso2' );
-							if ( $country_iso_code == 'FR' ) {
-								$count_invest_by_user_in_france++;
-							}
-							$euro_list = array( 'DE', 'AT', 'BE', 'BG', 'CY', 'HR', 'DK', 'ES', 'EE', 'FI', 'FR', 'GR', 'HU', 'GR', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'CZ', 'RO', 'GB', 'SK', 'SI', 'SE' );
-							if ( !in_array( $country_iso_code, $euro_list ) ) {
-								$amount_out_of_euro += $amount;
-							}
+						$euro_list = array( 'DE', 'AT', 'BE', 'BG', 'CY', 'HR', 'DK', 'ES', 'EE', 'FI', 'FR', 'GR', 'HU', 'GR', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'CZ', 'RO', 'GB', 'SK', 'SI', 'SE' );
+						if ( !in_array( $country_iso_code, $euro_list ) ) {
+							$amount_out_of_euro += $amount;
 						}
 					}
 				}
+			}
 			?>
 			Investissements totaux : <?php echo $count; ?><br>
 			Investissements inf 51 € : <?php echo $count_1_50; ?> (<?php echo round( $count_1_50 / $count * 100, 2 ); ?> %)<br>
