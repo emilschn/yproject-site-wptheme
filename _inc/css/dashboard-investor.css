@@ -93,6 +93,44 @@ body.template-mon-compte div#container div#content #tax-exemption-preview {
 body.template-mon-compte div#container div#content h3.has-margin-top {
 	margin-top: 24px;
 }
+
+
+body.template-mon-compte div#container div#content .investment-synthesis {
+	display: hidden;
+	font-size: 20px;
+	margin-bottom: 24px;
+}
+body.template-mon-compte div#container div#content .investment-synthesis-pictos {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-bottom: 24px;
+}
+body.template-mon-compte div#container div#content .investment-synthesis-pictos.hidden {
+	display: none;
+}
+body.template-mon-compte div#container div#content .investment-synthesis-pictos > div {
+	width: 272px;
+	margin-bottom: 8px;
+	padding: 16px;
+	background: #FFFFFF;
+	text-align: right;
+}
+body.template-mon-compte div#container div#content .investment-synthesis-pictos > div img {
+	float: left;
+}
+body.template-mon-compte div#container div#content .investment-synthesis-pictos > div span.data {
+	font-size: 32px;
+	color: #93626D;
+}
+body.template-mon-compte div#container div#content .investment-synthesis-pictos > div span.txt {
+	clear: both;
+	font-size: 14px;
+	display: inline-block;
+	margin-top: 8px;
+}
+
+
 body.template-mon-compte div#container div#content .investment-item {
 	display: flex;
 	justify-content: space-around;

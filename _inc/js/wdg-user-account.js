@@ -86,6 +86,11 @@ UserAccountDashboard.prototype.initProjectList = function() {
 	}).done(function( result ){
 		
 		// Affichage par campagne
+		var nInvestmentPublishCount = 0;
+		var nInvestmentPendingCount = 0;
+		var nProject = 0;
+		var nAmountInvested = 0;
+		var nAmountReceived = 0;
 		var sBuffer = '';
 		var aInvestmentCampaigns = new Array();
 		if ( result !== '' ) {
@@ -94,10 +99,13 @@ UserAccountDashboard.prototype.initProjectList = function() {
 			for ( var nCampaignID in aInvestmentCampaigns ) {
 				var oCampaignItem = aInvestmentCampaigns[ nCampaignID ];
 				if ( oCampaignItem[ 'name' ] !== undefined && oCampaignItem[ 'name' ] !== null ) {
+					nProject++;
 					var sCampaignBuffer = '<h3 class="has-margin-top">Mes investissements sur ' + oCampaignItem[ 'name' ] + '</h3>';
 					var aCampaignInvestments = oCampaignItem[ 'items' ];
 					for ( var nIndex in aCampaignInvestments ) {
 						var oInvestmentItem = aCampaignInvestments[ nIndex ];
+						nAmountInvested += Number( oInvestmentItem[ 'amount' ] );
+						nAmountReceived += Number( oInvestmentItem[ 'roi_amount' ] );
 						sCampaignBuffer += '<div class="investment-item">';
 
 						sCampaignBuffer += '<div class="amount-date">';
@@ -106,7 +114,10 @@ UserAccountDashboard.prototype.initProjectList = function() {
 						sCampaignBuffer += '</div>';
 
 						var sStatusStr = 'Valid&eacute;';
+						nInvestmentPublishCount++;
 						if ( oInvestmentItem[ 'status' ] === 'pending' ) {
+							nInvestmentPublishCount--;
+							nInvestmentPendingCount++;
 							sStatusStr = 'En attente';
 						} else if ( oInvestmentItem[ 'status' ] === 'canceled' ) {
 							sStatusStr = 'Termin&eacute;';
@@ -209,6 +220,16 @@ UserAccountDashboard.prototype.initProjectList = function() {
 			sBuffer += 'Si vous avez investi sur un projet en cours d&apos;&eacute;valuation, cet investissement est encore en attente de validation.';
 			sBuffer += '</div>';
 		} else {
+			$( '.investment-synthesis .publish-count' ).text( nInvestmentPublishCount );
+			if ( nInvestmentPendingCount > 0 ) {
+				$( '.investment-synthesis .pending-str' ).show();
+				$( '.investment-synthesis .pending-count' ).text( nInvestmentPendingCount );
+			}
+			$( '.investment-synthesis-pictos .funded-projects .data' ).text( nProject );
+			$( '.investment-synthesis-pictos .amount-invested .data' ).html( JSHelpers.formatNumber( nAmountInvested, '&euro;' ) );
+			$( '.investment-synthesis-pictos .royalties-received .data' ).html( JSHelpers.formatNumber( nAmountReceived, '&euro;' ) );
+			$( '.investment-synthesis' ).removeClass( 'hidden' );
+			$( '.investment-synthesis-pictos' ).removeClass( 'hidden' );
 			$( '#to-hide-after-loading-success-' + userID ).hide();
 		}
 		

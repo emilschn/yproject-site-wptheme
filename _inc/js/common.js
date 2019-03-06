@@ -7,6 +7,20 @@ JSHelpers = ( function( $ ) {
 	return {
 		urldecode: function(str) {
 			return decodeURIComponent( ( str + '' ).replace( /\+/g, '%20' ) );
+		},
+		
+		formatNumber: function( nInput, sSuffix ) {
+			var buffer = nInput.toString()
+			// Gestion milliers
+			if ( nInput > 1000 ) {
+				var nThousands = Math.floor( nInput / 1000 );
+				buffer = nThousands + ' ';
+				var nRest = nInput - nThousands * 1000;
+				buffer += nRest;
+			}
+			buffer = buffer.split( '.' ).join( ',' );
+			buffer += ' ' + sSuffix;
+			return buffer;
 		}
 	};
 } ) ( jQuery );
