@@ -28,7 +28,7 @@ $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 		<br><br><br><br><br>
 		
 		<?php if ( $input_declarations_list == '1' ): ?>
-			Liste des déclarations demandées et état des ajustements :
+			Liste des déclarations demandées et état des ajustements :<br>
 			<?php
 			$input_declarations_year = filter_input( INPUT_GET, 'declarations_year' );
 			$input_declarations_month = filter_input( INPUT_GET, 'declarations_month' );
@@ -38,14 +38,13 @@ $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 				$date_end = new DateTime();
 				$date_end->setDate( $input_declarations_year, $input_declarations_month, 28 );
 				$declarations_list = WDGWPREST_Entity_Declaration::get_list_by_date( $date_start->format( 'Y-m-d' ), $date_end->format( 'Y-m-d' ) );
-				if ( $declaration_list ):
-					foreach ( $declaration_list as $declaration_data ):
-						$roi_declaration = new WDGROIDeclaration( FALSE, FALSE, $declaration_data);
+				if ( $declarations_list ):
+					foreach ( $declarations_list as $declaration_data ):
+						$roi_declaration = new WDGROIDeclaration( FALSE, FALSE, $declaration_data );
 						$roi_declaration_file_list = $roi_declaration->get_file_list();
-						$files_path = $declaration->get_file_path();
-						$campaign = new ATCF_Campaign( FALSE, $declaration_data->id_project );
+						$files_path = $roi_declaration->get_file_path();
 						?>
-						- <strong><?php echo $campaign->get_name(); ?> :</strong>
+						- <strong><?php echo $declaration_data->name_project; ?> :</strong>
 							<?php if ( $roi_declaration->get_adjustment_validated() ): ?>
 							Ajustement validé
 							<?php else: ?>
@@ -63,7 +62,7 @@ $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 							<?php endforeach; ?>
 							</ul>
 							<?php endif; ?>
-							<br><br><br>
+							<br><br>
 						<?php
 					endforeach;
 				endif;
