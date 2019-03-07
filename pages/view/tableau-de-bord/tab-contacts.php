@@ -74,9 +74,9 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 	<br><br>
 	<div class="admin-theme-block db-form">
 		<div class="field admin-theme align-center">
+			<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a><br><br>
+			
 			<a href="#contacts" id="show-notifications-preinvestment" class="button admin-theme"><?php _e("Envoyer les notifications de pr&eacute;-investissement","yproject") ?></a>
-			<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a>
-
 			<br><br>
 			
 			<?php
@@ -103,7 +103,8 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 				Description sous l'image :<br>
 				<input type="text" name="image_description"><br><br>
 				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
-				<input type="submit" value="Envoyer" class="button admin-theme">
+				<input type="submit" name="send_option" value="Envoyer test" class="button admin-theme">
+				<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
 			</form>
 			
 			<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/lightbox-add-check.php' ), true ); ?>
