@@ -76,7 +76,8 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 		<div class="field admin-theme align-center">
 			<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a><br><br>
 			
-			<a href="#contacts" id="show-notifications-preinvestment" class="button admin-theme"><?php _e("Envoyer les notifications de pr&eacute;-investissement","yproject") ?></a>
+			<a href="#contacts" id="show-notifications-preinvestment" class="button admin-theme"><?php _e("Envoyer les relances de pr&eacute;-investissement","yproject") ?></a>
+			<a href="#contacts" id="show-notifications-prelaunch" class="button admin-theme"><?php _e("Envoyer les relances de pr&eacute;-lancement","yproject") ?></a>
 			<br><br>
 			
 			<?php
@@ -94,7 +95,7 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 			);
 			?>
 		
-			<form id="form-notifications-preinvestment" action="<?php echo admin_url( 'admin-post.php?action=send_project_preinvestment_notifications'); ?>" method="POST" class="hidden align-left">
+			<form id="form-notifications-preinvestment" action="<?php echo admin_url( 'admin-post.php?action=send_project_vote_notifications'); ?>" method="POST" class="hidden align-left">
 				<b>Notifications de pré-investissement :</b><br><br>
 				Témoignages :<br>
 				<?php wp_editor( '', 'testimony', $editor_params ); ?><br><br>
@@ -103,6 +104,7 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 				Description sous l'image :<br>
 				<input type="text" name="image_description"><br><br>
 				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
+				<input type="hidden" id="mail_type" name="mail_type" value="">
 				<input type="submit" name="send_option" value="Envoyer test" class="button admin-theme">
 				<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
 			</form>
