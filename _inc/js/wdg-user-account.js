@@ -99,13 +99,11 @@ UserAccountDashboard.prototype.initProjectList = function() {
 			for ( var nCampaignID in aInvestmentCampaigns ) {
 				var oCampaignItem = aInvestmentCampaigns[ nCampaignID ];
 				if ( oCampaignItem[ 'name' ] !== undefined && oCampaignItem[ 'name' ] !== null ) {
-					nProject++;
+					var bCountProject = false;
 					var sCampaignBuffer = '<h3 class="has-margin-top">Mes investissements sur ' + oCampaignItem[ 'name' ] + '</h3>';
 					var aCampaignInvestments = oCampaignItem[ 'items' ];
 					for ( var nIndex in aCampaignInvestments ) {
 						var oInvestmentItem = aCampaignInvestments[ nIndex ];
-						nAmountInvested += Number( oInvestmentItem[ 'amount' ] );
-						nAmountReceived += Number( oInvestmentItem[ 'roi_amount' ] );
 						sCampaignBuffer += '<div class="investment-item">';
 
 						sCampaignBuffer += '<div class="amount-date">';
@@ -113,16 +111,23 @@ UserAccountDashboard.prototype.initProjectList = function() {
 						sCampaignBuffer += oInvestmentItem[ 'date' ];
 						sCampaignBuffer += '</div>';
 
+						var bCountInGlobalStat = true;
 						var sStatusStr = 'Valid&eacute;';
-						nInvestmentPublishCount++;
 						if ( oInvestmentItem[ 'status' ] === 'pending' ) {
-							nInvestmentPublishCount--;
+							bCountInGlobalStat = false;
 							nInvestmentPendingCount++;
 							sStatusStr = 'En attente';
 						} else if ( oInvestmentItem[ 'status' ] === 'canceled' ) {
 							sStatusStr = 'Termin&eacute;';
 						} else if ( oCampaignItem[ 'status' ] === 'archive' ) {
+							bCountInGlobalStat = false;
 							sStatusStr = 'Rembours&eacute;';
+						}
+						if ( bCountInGlobalStat ) {
+							bCountProject = true;
+							nInvestmentPublishCount++;
+							nAmountInvested += Number( oInvestmentItem[ 'amount' ] );
+							nAmountReceived += Number( oInvestmentItem[ 'roi_amount' ] );
 						}
 						sCampaignBuffer += '<div class="single-line ' +oInvestmentItem[ 'status' ]+ ' campaign-' +oCampaignItem[ 'status' ]+ '">';
 						sCampaignBuffer += sStatusStr;
@@ -205,6 +210,9 @@ UserAccountDashboard.prototype.initProjectList = function() {
 							sCampaignBuffer += '</div>';
 							
 						}
+					}
+					if ( bCountProject ) {
+						nProject++;
 					}
 
 					// Pour les mettre dans l'ordre inverse
