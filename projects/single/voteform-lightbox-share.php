@@ -12,8 +12,8 @@ if ( $WDGUser_current->has_voted_on_campaign( $post->ID ) && !$WDGUser_current->
 <i><?php _e( "Vos informations ont bien &eacute;t&eacute; enregistr&eacute;es.", 'yproject' ); ?></i>
 <br><br><br>
 
-<?php if ( $amount_voted > 250 && !$WDGUser_current->is_lemonway_registered() ): ?>
-	<?php _e( "Votre compte n'est pas encore authentifi&eacute; aupr&egrave;s de notre prestataire de paiement, Lemon Way. Vous ne pouvez donc pas investir plus de 250 €.", 'yproject' ); ?>
+<?php if ( !$WDGUser_current->is_lemonway_registered() ): ?>
+	<?php _e( "Votre compte n'est pas encore authentifi&eacute; aupr&egrave;s de notre prestataire de paiement, Lemon Way. Vous ne pouvez donc pas encore investir.", 'yproject' ); ?>
 	<br><br>
 	<?php _e( "Pour authentifier votre compte, il suffit de compl&eacute;ter les informations de votre compte personnel et d'y d&eacute;poser une copie de votre carte d'identit&eacute; ou passeport, ainsi qu'un justificatif de domicile.", 'yproject' ); ?>
 	<br>
