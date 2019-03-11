@@ -228,16 +228,16 @@ UserAccountDashboard.prototype.initProjectList = function() {
 			sBuffer += 'Si vous avez investi sur un projet en cours d&apos;&eacute;valuation, cet investissement est encore en attente de validation.';
 			sBuffer += '</div>';
 		} else {
-			$( '.investment-synthesis .publish-count' ).text( nInvestmentPublishCount );
+			$( '#investment-synthesis-' + userID + ' .publish-count' ).text( nInvestmentPublishCount );
 			if ( nInvestmentPendingCount > 0 ) {
-				$( '.investment-synthesis .pending-str' ).show();
-				$( '.investment-synthesis .pending-count' ).text( nInvestmentPendingCount );
+				$( '#investment-synthesis-' + userID + ' .pending-str' ).show();
+				$( '#investment-synthesis-' + userID + ' .pending-count' ).text( nInvestmentPendingCount );
 			}
-			$( '.investment-synthesis-pictos .funded-projects .data' ).text( nProject );
-			$( '.investment-synthesis-pictos .amount-invested .data' ).html( JSHelpers.formatNumber( nAmountInvested, '&euro;' ) );
-			$( '.investment-synthesis-pictos .royalties-received .data' ).html( JSHelpers.formatNumber( nAmountReceived, '&euro;' ) );
-			$( '.investment-synthesis' ).removeClass( 'hidden' );
-			$( '.investment-synthesis-pictos' ).removeClass( 'hidden' );
+			$( '#investment-synthesis-pictos-' + userID + ' .funded-projects .data' ).text( nProject );
+			$( '#investment-synthesis-pictos-' + userID + ' .amount-invested .data' ).html( JSHelpers.formatNumber( nAmountInvested, '&euro;' ) );
+			$( '#investment-synthesis-pictos-' + userID + ' .royalties-received .data' ).html( JSHelpers.formatNumber( nAmountReceived, '&euro;' ) );
+			$( '#investment-synthesis-' + userID ).removeClass( 'hidden' );
+			$( '#investment-synthesis-pictos-' + userID ).removeClass( 'hidden' );
 			$( '#to-hide-after-loading-success-' + userID ).hide();
 		}
 		

@@ -15,25 +15,25 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 </p>
 
 
-<div class="investment-synthesis hidden">
+<div id="investment-synthesis-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="investment-synthesis hidden">
 	<span class="publish-count">0</span> <?php _e( "investissements valid&eacute;s", 'yproject' ); ?><span class="pending-str hidden">, <span class="pending-count">0</span> en attente</span>.
 </div>
 
-<div class="investment-synthesis-pictos hidden">
+<div id="investment-synthesis-pictos-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="investment-synthesis-pictos hidden">
 	<div class="funded-projects">
-		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-balloon.png" alt="montgolfiere" width="84" height="84">
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-balloon.png" alt="montgolfiere" width="80" height="80">
 		<span class="data">0</span><br>
 		<span class="txt"><?php _e( "projets financ&eacute;s", 'yproject' ); ?></span>
 	</div>
 	
 	<div class="amount-invested">
-		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-arrows.png" alt="fleche" width="84" height="83">
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-arrows.png" alt="fleche" width="81" height="80">
 		<span class="data">0 &euro;</span><br>
 		<span class="txt"><?php _e( "investis", 'yproject' ); ?></span>
 	</div>
 	
 	<div class="royalties-received">
-		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="monnaie" width="97" height="79">
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="monnaie" width="97" height="80">
 		<span class="data">0 &euro;</span><br>
 		<span class="txt"><?php _e( "royalties re&ccedil;ues", 'yproject' ); ?></span>
 		

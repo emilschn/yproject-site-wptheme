@@ -110,9 +110,9 @@ body.template-mon-compte div#container div#content .investment-synthesis-pictos.
 	display: none;
 }
 body.template-mon-compte div#container div#content .investment-synthesis-pictos > div {
-	width: 272px;
+	width: 264px;
 	margin-bottom: 8px;
-	padding: 16px;
+	padding: 24px;
 	background: #FFFFFF;
 	text-align: right;
 }
@@ -125,7 +125,7 @@ body.template-mon-compte div#container div#content .investment-synthesis-pictos 
 }
 body.template-mon-compte div#container div#content .investment-synthesis-pictos > div span.txt {
 	clear: both;
-	font-size: 14px;
+	font-size: 12px;
 	display: inline-block;
 	margin-top: 8px;
 }
