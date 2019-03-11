@@ -36,6 +36,10 @@
 					<?php _e( 'Se souvenir de moi', 'yproject' ); ?>
 				</label>
 			</div>
+
+			<p class="align-left">
+				<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+			</p>
             
 			<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 			<input type="hidden" name="login-form" value="1" />
