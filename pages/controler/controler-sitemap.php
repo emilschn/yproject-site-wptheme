@@ -16,7 +16,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		} else if ( !empty( $input_rss ) && $input_rss == '1' ) {
 			$input_campaign = filter_input( INPUT_GET, 'campaign' );
 			if ( !empty( $input_campaign ) ) {
-				WDGCronActions::make_campaign_xml();
+				WDGCronActions::make_campaign_xml( $input_campaign );
 			} else {
 				WDGCronActions::make_projects_rss();
 			}
