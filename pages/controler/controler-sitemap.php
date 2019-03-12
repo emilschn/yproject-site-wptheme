@@ -14,7 +14,12 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			exit( $nb_done . ' queued actions executed.' );
 			
 		} else if ( !empty( $input_rss ) && $input_rss == '1' ) {
-			WDGCronActions::make_projects_rss();
+			$input_campaign = filter_input( INPUT_GET, 'campaign' );
+			if ( !empty( $input_campaign ) ) {
+				WDGCronActions::make_campaign_xml();
+			} else {
+				WDGCronActions::make_projects_rss();
+			}
 			
 		} else if ( !empty( $input_make_finished_xml ) && $input_make_finished_xml == '1' ) {
 			WDGCronActions::make_projects_rss( FALSE );
