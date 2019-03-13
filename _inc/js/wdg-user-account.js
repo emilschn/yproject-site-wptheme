@@ -36,6 +36,15 @@ UserAccountDashboard.prototype.initMenu = function() {
 			$( '#form-modify-iban' ).toggle( 100 );
 		} );
 	}
+	$( 'nav button#swap-menu' ).click( function() {
+		if ( $( 'nav' ).hasClass( 'visible' ) ) {
+			$( 'nav' ).removeClass( 'visible' );
+			$( 'nav button#swap-menu' ).html( '&gt;' );
+		} else {
+			$( 'nav' ).addClass( 'visible' );
+			$( 'nav button#swap-menu' ).html( '&lt;' );
+		}
+	} );
 	
 };
 

@@ -48,5 +48,6 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 		</ul>
 
 	<?php endif; ?>
-	
+		
+	<button type="button" id="swap-menu">&gt;</button>
 </nav>

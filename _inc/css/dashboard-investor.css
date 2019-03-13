@@ -59,6 +59,11 @@ body.template-mon-compte div#container div#content nav ul.nav-menu li.selected a
 	border-left: 4px solid #D3EAE9;
 	width: calc( 100% - 19px );
 }
+
+body.template-mon-compte div#container div#content nav button#swap-menu {
+	display: none;
+}
+
 body.template-mon-compte div#container div#content main {
 	display: table-cell;
     vertical-align: top;
@@ -275,7 +280,34 @@ body.template-mon-compte div#container div#content div.authentication-items div.
 }
 
 @media screen and (max-width: 900px) {
-	body.template-mon-compte div#container div#content nav, body.template-mon-compte div#container div#content main {
+	body.template-mon-compte div#container div#content main {
 		display: block;
+	}
+	body.template-mon-compte div#container div#content nav {
+		position: absolute;
+		left: -223px;
+	}
+	body.template-mon-compte div#container div#content nav button#swap-menu {
+		position: absolute;
+		display: block;
+		left: 0px;
+		top: 0px;
+		width: 64px;
+		height: 64px;
+		margin-left: 223px;
+		padding: 0px;
+		border: 0px;
+		font-size: 40px;
+		background: #E1E3E2;
+		text-align: center;
+		cursor: pointer;
+	}
+	body.template-mon-compte div#container div#content nav.visible {
+		display: block;
+		left: 0px;
+		border-bottom: 3px solid #E1E3E2;
+	}
+	body.template-mon-compte div#container div#content nav.visible button#swap-menu {
+		left: -2px;
 	}
 }
