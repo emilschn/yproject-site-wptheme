@@ -153,6 +153,13 @@ UserAccountDashboard.prototype.initProjectList = function() {
 							sCampaignBuffer += '</a>';
 							sCampaignBuffer += '<div class="clear"></div>';
 							sCampaignBuffer += '</div>';
+						} else if ( oInvestmentItem[ 'conclude-investment-url' ] != '' ) {
+							sCampaignBuffer += '<div class="align-center single-line">';
+							sCampaignBuffer += '<a href="' +oInvestmentItem[ 'conclude-investment-url' ]+ '" class="button red" title="Finaliser investissement">';
+							sCampaignBuffer += 'Finaliser l&apos;investissement';
+							sCampaignBuffer += '</a>';
+							sCampaignBuffer += '<div class="clear"></div>';
+							sCampaignBuffer += '</div>';
 						} else {
 							sCampaignBuffer += '<div class="align-center">';
 							sCampaignBuffer += 'Contrat<br>inaccessible';
