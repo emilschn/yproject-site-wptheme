@@ -166,6 +166,17 @@ body.template-mon-compte div#container div#content .investment-item .single-line
 body.template-mon-compte div#container div#content .investment-item a.button {
 	padding: 16px 16px;
 }
+
+body.template-mon-compte div#container div#content #vote-intentions h4 {
+	margin: 0px 0px 15px;
+	font-weight: bold;
+}
+body.template-mon-compte div#container div#content #vote-intentions a.button.red {
+	display: inline-block;
+	width: 250px;
+	text-align: center;
+}
+
 body.template-mon-compte div#container div#content .button-view-royalties-list {
 	position: relative;
 	top: -20px;

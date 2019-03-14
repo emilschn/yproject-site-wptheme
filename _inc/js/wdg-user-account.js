@@ -256,6 +256,7 @@ UserAccountDashboard.prototype.initProjectList = function() {
 			$( '#investment-synthesis-pictos-' + userID ).removeClass( 'hidden' );
 			$( '#to-hide-after-loading-success-' + userID ).hide();
 		}
+		$( '#vote-intentions-' + userID ).removeClass( 'hidden' );
 		
 		$( '#ajax-loader-' + userID ).after( sBuffer );
 		$( '#item-body-projects' ).height( 'auto' );

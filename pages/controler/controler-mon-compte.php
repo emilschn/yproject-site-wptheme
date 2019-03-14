@@ -452,7 +452,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 				$amount_voted = $this->current_user->get_amount_voted_on_campaign( $project_post->ID );
 				if ( $amount_voted > 0 && !$this->current_user->has_invested_on_campaign( $project_post->ID ) ) {
 					$intention_item = array(
-						'campaign_name'	=> $project_post->post_name,
+						'campaign_name'	=> $project_post->post_title,
 						'campaign_id'	=> $project_post->ID,
 						'vote_amount'	=> $amount_voted,
 						'status'		=> ATCF_Campaign::$campaign_status_collecte
@@ -466,7 +466,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 				$amount_voted = $this->current_user->get_amount_voted_on_campaign( $project_post->ID );
 				if ( $amount_voted > 0 && !$this->current_user->has_invested_on_campaign( $project_post->ID ) ) {
 					$intention_item = array(
-						'campaign_name'	=> $project_post->post_name,
+						'campaign_name'	=> $project_post->post_title,
 						'campaign_id'	=> $project_post->ID,
 						'vote_amount'	=> $amount_voted,
 						'status'		=> ATCF_Campaign::$campaign_status_vote

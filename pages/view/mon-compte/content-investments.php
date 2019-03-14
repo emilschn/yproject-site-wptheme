@@ -41,7 +41,7 @@ $list_intentions_to_confirm = $page_controler->get_intentions_to_confirm();
 	</div>
 </div>
 
-<div id="vote-intentions" class="hidden">
+<div id="vote-intentions-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="hidden">
 	
 	<?php if ( count( $list_intentions_to_confirm ) > 0 ): ?>
 		<h3><?php _e( "Mes intentions d'investissement &agrave; concr&eacute;tiser", 'yproject' ); ?></h3>
@@ -49,7 +49,7 @@ $list_intentions_to_confirm = $page_controler->get_intentions_to_confirm();
 		<?php foreach ( $list_intentions_to_confirm as $intention_item ): ?>
 		
 			<?php $status_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? "en &eacute;valuation" : "en investissement"; ?>
-			<strong><?php echo $intention_item[ 'campaign_name' ] . ' : ' . $status_str; ?></strong><br>
+			<h4><?php echo YPUIHelpers::display_number( $intention_item[ 'vote_amount' ] ). ' &euro; sur ' .$intention_item[ 'campaign_name' ]. ' (' .$status_str. ')'; ?></h4><br>
 			<a href="<?php echo home_url( '/investir/?campaign_id=' .$intention_item[ 'campaign_id' ]. '&invest_start=1&init_invest=' .$intention_item[ 'vote_amount' ] ); ?>" class="button red"><?php _e( "Investir" ); ?></a>
 		
 		<?php endforeach; ?>
