@@ -23,6 +23,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	private $form_user_notifications;
 	private $form_user_feedback;
 	private $form_user_tax_exemption;
+	private $list_intentions_to_confirm;
 	private $tax_documents;
 	
 	public function __construct() {
@@ -45,6 +46,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
 		$this->init_current_user( $reload );
 		$this->init_project_list();
+		$this->init_intentions_to_confirm();
 		$this->init_form_user_details();
 		$this->init_form_user_identitydocs();
 		$this->init_form_user_bank();
@@ -435,6 +437,49 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 				array_push( $this->user_project_list, $project );
 			}
 		}
+	}
+	
+/******************************************************************************/
+// INTENTIONS D'INVESTISSEMENT SANS INVESTISSEMENT
+/******************************************************************************/
+	private function init_intentions_to_confirm() {
+		$this->list_intentions_to_confirm = array();
+		
+		if ( $this->current_user->is_lemonway_registered() ) {
+			
+			$list_campaign_funding = ATCF_Campaign::get_list_funding( 0, '', true );
+			foreach ( $list_campaign_funding as $project_post ) {
+				$amount_voted = $this->current_user->get_amount_voted_on_campaign( $project_post->ID );
+				if ( $amount_voted > 0 && !$this->current_user->has_invested_on_campaign( $project_post->ID ) ) {
+					$intention_item = array(
+						'campaign_name'	=> $project_post->post_name,
+						'campaign_id'	=> $project_post->ID,
+						'vote_amount'	=> $amount_voted,
+						'status'		=> ATCF_Campaign::$campaign_status_collecte
+					);
+					array_push( $this->list_intentions_to_confirm, $intention_item );
+				}
+			}
+
+			$list_campaign_vote = ATCF_Campaign::get_list_vote( 0, '', true );
+			foreach ( $list_campaign_vote as $project_post ) {
+				$amount_voted = $this->current_user->get_amount_voted_on_campaign( $project_post->ID );
+				if ( $amount_voted > 0 && !$this->current_user->has_invested_on_campaign( $project_post->ID ) ) {
+					$intention_item = array(
+						'campaign_name'	=> $project_post->post_name,
+						'campaign_id'	=> $project_post->ID,
+						'vote_amount'	=> $amount_voted,
+						'status'		=> ATCF_Campaign::$campaign_status_vote
+					);
+					array_push( $this->list_intentions_to_confirm, $intention_item );
+				}
+			}
+			
+		}
+	}
+	
+	public function get_intentions_to_confirm() {
+		return $this->list_intentions_to_confirm;
 	}
 	
 /******************************************************************************/

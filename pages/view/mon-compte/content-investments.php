@@ -3,6 +3,7 @@ global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGUser_displayed = $page_controler->get_current_user();
 $list_current_organizations = $page_controler->get_current_user_organizations();
+$list_intentions_to_confirm = $page_controler->get_intentions_to_confirm();
 ?>
 
 <h2><?php _e( "Investissements de", 'yproject' ); ?> <?php echo $page_controler->get_user_name(); ?></h2>
@@ -39,6 +40,24 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 		
 	</div>
 </div>
+
+<div id="vote-intentions" class="hidden">
+	
+	<?php if ( count( $list_intentions_to_confirm ) > 0 ): ?>
+		<h3><?php _e( "Mes intentions d'investissement &agrave; concr&eacute;tiser", 'yproject' ); ?></h3>
+	
+		<?php foreach ( $list_intentions_to_confirm as $intention_item ): ?>
+		
+			<?php $status_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? "en &eacute;valuation" : "en investissement"; ?>
+			<strong><?php echo $intention_item[ 'campaign_name' ] . ' : ' . $status_str; ?></strong><br>
+			<a href="<?php echo home_url( '/investir/?campaign_id=' .$intention_item[ 'campaign_id' ]. '&invest_start=1&init_invest=' .$intention_item[ 'vote_amount' ] ); ?>" class="button red"><?php _e( "Investir" ); ?></a>
+		
+		<?php endforeach; ?>
+	
+	<?php endif; ?>
+	
+</div>
+
 	
 <div id="ajax-loader-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="center" style="text-align: center;"><img id="ajax-loader-img-<?php echo $WDGUser_displayed->get_wpref(); ?>" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
 
