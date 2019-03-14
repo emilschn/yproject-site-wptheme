@@ -41,7 +41,7 @@ $list_intentions_to_confirm = $page_controler->get_intentions_to_confirm();
 	</div>
 </div>
 
-<div id="vote-intentions-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="hidden">
+<div id="vote-intentions-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="vote-intentions hidden">
 	
 	<?php if ( count( $list_intentions_to_confirm ) > 0 ): ?>
 		<h3><?php _e( "Mes intentions d'investissement &agrave; concr&eacute;tiser", 'yproject' ); ?></h3>
