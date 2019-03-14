@@ -168,12 +168,14 @@ body.template-mon-compte div#container div#content .investment-item a.button {
 }
 
 body.template-mon-compte div#container div#content .vote-intentions h4 {
-	margin: 0px 0px 15px;
+	margin: 0px 0px 16px;
 	font-weight: bold;
 }
 body.template-mon-compte div#container div#content .vote-intentions a.button.red {
 	display: inline-block;
 	width: 250px;
+	margin-bottom: 32px;
+	padding: 16px 16px;
 	text-align: center;
 }
 
