@@ -38,8 +38,8 @@ Montant des royalties vers&eacute;es : <?php echo $WDGUser_displayed->get_rois_a
 	</div>
 
 <?php else: ?>
-	<?php if ( !$WDGUser_displayed->is_document_lemonway_registered( LemonwayDocument::$document_type_bank ) ): ?>
-		<?php if ( $WDGUser_displayed->get_document_lemonway_status( LemonwayDocument::$document_type_bank ) == LemonwayDocument::$document_status_waiting ): ?>
+	<?php if ( !$WDGUser_displayed->is_document_lemonway_registered( LemonwayDocument::$document_type_bank ) || $WDGUser_displayed->get_lemonway_iban_status() != WDGUser::$iban_status_validated ): ?>
+		<?php if ( $WDGUser_displayed->get_document_lemonway_status( LemonwayDocument::$document_type_bank ) == LemonwayDocument::$document_status_waiting || $WDGUser_displayed->get_lemonway_iban_status() != WDGUser::$iban_status_waiting ): ?>
 			<?php _e( "Votre RIB est en cours de validation par notre prestataire de paiement. Merci de revenir d'ici 48h pour vous assurer de sa validation.", 'yproject' ); ?>
 			<br><br>
 
