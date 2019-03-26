@@ -11,13 +11,14 @@ JSHelpers = ( function( $ ) {
 		
 		formatNumber: function( nInput, sSuffix ) {
 			nInput = Math.round( nInput * 100 ) / 100;
-			var buffer = nInput.toString()
+			var buffer = nInput.toString();
 			// Gestion milliers
 			if ( nInput > 1000 ) {
 				var nThousands = Math.floor( nInput / 1000 );
 				buffer = nThousands + ' ';
 				var nRest = nInput - nThousands * 1000;
-				buffer += nRest;
+				var sPad = "000";
+				buffer += sPad.substring( 0, sPad.length - nRest.toString().length ) + nRest;
 			}
 			buffer = buffer.split( '.' ).join( ',' );
 			buffer += ' ' + sSuffix;
