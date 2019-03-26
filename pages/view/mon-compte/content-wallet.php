@@ -38,19 +38,22 @@ Montant des royalties vers&eacute;es : <?php echo $WDGUser_displayed->get_rois_a
 	</div>
 
 <?php else: ?>
-	<?php if ( !$WDGUser_displayed->is_document_lemonway_registered( LemonwayDocument::$document_type_bank ) || $WDGUser_displayed->get_lemonway_iban_status() != WDGUser::$iban_status_validated ): ?>
-		<?php if ( $WDGUser_displayed->get_document_lemonway_status( LemonwayDocument::$document_type_bank ) == LemonwayDocument::$document_status_waiting || $WDGUser_displayed->get_lemonway_iban_status() != WDGUser::$iban_status_waiting ): ?>
+	<?php if ( !$page_controler->is_iban_validated() ): ?>
+		<?php if ( $page_controler->is_iban_waiting() ): ?>
 			<?php _e( "Votre RIB est en cours de validation par notre prestataire de paiement. Merci de revenir d'ici 48h pour vous assurer de sa validation.", 'yproject' ); ?>
 			<br><br>
 
 		<?php else: ?>
+			<?php if ( $WDGUser_displayed->get_lemonway_iban_status() != WDGUser::$iban_status_rejected ): ?>
+			<?php _e( "Votre RIB a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement.", 'yproject' ); ?><br>
+			<?php endif; ?>
 			<?php _e( "Afin de retirer vos royalties, merci de renseigner vos coordonn&eacute;es bancaires.", 'yproject' ); ?><br><br>
 			<a href="#bank" class="button blue go-to-tab" data-tab="bank"><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></a>
 			<br><br>
 
 		<?php endif; ?>
 
-	<?php elseif ($amount > 0): ?>
+	<?php elseif ( $amount > 0 ): ?>
 		<form action="" method="POST" enctype="multipart/form-data">
 			<p class="align-center">
 				<input type="submit" class="button blue" value="Reverser sur mon compte bancaire" />
