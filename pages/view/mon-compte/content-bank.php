@@ -35,7 +35,7 @@ $WDGUser_lw_bank_document_status = $page_controler->get_current_user_iban_docume
 <?php
 // Si l'IBAN et le document de RIB sont validés, on affiche le résumé et le bouton qui permet de le modifier
 if ( $page_controler->is_iban_validated() ): ?>
-	<form method="POST" enctype="multipart/form-data" id="form-modify-iban" class="db-form v3 full hidden">
+	<form method="POST" enctype="multipart/form-data" class="db-form v3 full">
 		<div class="wdg-message confirm">
 			<?php _e( "Coordonn&eacute;es bancaires valid&eacute;es", 'yproject' ); ?>
 		</div>
@@ -63,27 +63,29 @@ if ( $page_controler->is_iban_validated() ): ?>
 		</div>
 		<br><br>
 
-		<?php foreach ( $fields_hidden as $field ): ?>
-			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
-		<?php endforeach; ?>
+		<div id="form-modify-iban" class="hidden">
+			<?php foreach ( $fields_hidden as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
 
-		<?php foreach ( $fields_iban as $field ): ?>
-			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
-		<?php endforeach; ?>
+			<?php foreach ( $fields_iban as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
 
-		<?php foreach ( $fields_file as $field ): ?>
-			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
-		<?php endforeach; ?>
+			<?php foreach ( $fields_file as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
 
-		<p class="align-left">
-			<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
-		</p>
+			<p class="align-left">
+				<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+			</p>
 
-		<div id="user-bank-form-buttons">
-			<button type="submit" class="button save red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+			<div id="user-bank-form-buttons">
+				<button type="submit" class="button save red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+			</div>
 		</div>
 
 	</form>
