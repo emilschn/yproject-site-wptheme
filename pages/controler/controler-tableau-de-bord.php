@@ -13,6 +13,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $can_access_author;
 	private $must_show_lightbox_welcome;
 	private $return_lemonway_card;
+	private $emails;
 	/**
 	 * @var ATCF_Campaign
 	 */
@@ -77,7 +78,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		WDGFormProjects::form_cancel_payment();
 		WDGFormProjects::form_try_pending_card();
 		$current_organization = $this->get_campaign_organization();
-		$current_organization->send_kyc();
+		if ( isset($_POST['authentify_lw']) ) {
+			$current_organization->send_kyc();
+		}
 		$current_organization->submit_transfer_wallet_lemonway();
 		$this->return_lemonway_card = WDGFormProjects::return_lemonway_card();
 	}
@@ -117,6 +120,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			$this->can_access_author = ( $this->author_user->get_wpref() == $this->current_user->get_wpref() );
 			$campaign_organization_item = $this->campaign->get_organization();
 			$this->campaign_organization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+			$this->emails = WDGWPREST_Entity_Project::get_emails( $this->campaign->get_api_id() );
 			
 			if ( file_exists( __DIR__ . '/../../../../plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->get_url() . '.zip' ) ) {
 				$this->campaign_contracts_url = home_url( 'wp-content/plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->get_url() . '.zip' );
@@ -146,6 +150,19 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	}
 	public function get_campaign_contracts_url() {
 		return $this->campaign_contracts_url;
+	}
+	public function get_campaign_emails() {
+		$buffer = array();
+		foreach ( $this->emails as $email ) {
+			$item = array(
+				'recipient'		=> $email->recipient,
+				'date'			=> $email->date,
+				'template_id'	=> $email->template,
+				'template_str'	=> NotificationsAPI::$description_str_by_template_id[ $email->template ]
+			);
+			array_push( $buffer, $item );
+		}
+		return $buffer;
 	}
 	
 /******************************************************************************/
@@ -382,6 +399,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		
 		// Stats
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'age' ] = max( 0, $investment_results[ 'average_age' ] );
+		if ( is_nan( $this->campaign_stats[ 'funding' ][ 'stats' ][ 'age' ] ) ) {
+			$this->campaign_stats[ 'funding' ][ 'stats' ][ 'age' ] = 0;
+		}
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'percent_men' ] = max( 0, $investment_results[ 'percent_male' ] );
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'percent_women' ] = max( 0, $investment_results[ 'percent_female' ] );
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'invest_average' ] = max( 0, $investment_results[ 'average_invest' ] );

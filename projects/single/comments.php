@@ -8,12 +8,13 @@ $WDGUser_current = WDGUser::current();
 <div class="project-comments padder">
 	<h2 class="standard">/ <?php _e('Commentaires', 'yproject'); ?> /</h2>
 	
-	<?php if (!is_user_logged_in()): ?>
+	<?php if (!is_user_logged_in() && !$campaign->get_show_comments_for_everyone()): ?>
 		<div class="align-center">
-			<?php _e('Vous devez &ecirc;tre connect&eacute; pour lire et poster des commentaires.', 'yproject'); ?><br /><br />
-			<a href="#register" id="register" class="wdg-button-lightbox-open button red" data-lightbox="register" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Inscription", 'yproject'); ?></a>
-			<a href="#connexion" id="connexion" class="wdg-button-lightbox-open button red" data-lightbox="connexion" data-redirect="<?php echo get_permalink(); ?>"><?php _e("Connexion", 'yproject'); ?></a>
+			<?php _e('Vous devez &ecirc;tre connect&eacute;(e) pour lire et poster des commentaires.', 'yproject'); ?><br><br>
+			<a href="<?php echo home_url( '/inscription/' ); ?>" id="register" class="wdg-button-lightbox-open button red"><?php _e("Inscription", 'yproject'); ?></a>
+			<a href="<?php echo home_url( '/connexion/' ); ?>" id="connexion" class="wdg-button-lightbox-open button red"><?php _e("Connexion", 'yproject'); ?></a>
 		</div>
+	
 	<?php else: ?>
     
 		<?php if ( count($comment_list) > 0 ) : ?>
@@ -30,14 +31,27 @@ $WDGUser_current = WDGUser::current();
 			<div class="align-center"><?php _e('Aucun commentaire pour l&apos;instant.', 'yproject'); ?></div>
 		<?php endif; ?>
 			
-		<?php if (!comments_open()): ?>
-			<div class="align-center"><?php _e('Les commentaires ne sont pas ouverts.', 'yproject'); ?></div>
+			
+		<?php if ( !is_user_logged_in() ): ?>
+			<div class="align-center">
+				<br><br>
+				<?php _e('Vous devez &ecirc;tre connect&eacute;(e) pour poster des commentaires.', 'yproject'); ?><br><br>
+				<a href="<?php echo home_url( '/inscription/' ); ?>" id="register" class="wdg-button-lightbox-open button red"><?php _e("Inscription", 'yproject'); ?></a>
+				<a href="<?php echo home_url( '/connexion/' ); ?>" id="connexion" class="wdg-button-lightbox-open button red"><?php _e("Connexion", 'yproject'); ?></a>
+			</div>
+			
 		<?php else: ?>
-			<?php comment_form( array(
-					"title_reply"			=> __('Poster un commentaire', 'yproject'),
-					"comment_notes_after"	=> "",
-					"logged_in_as"	=> __('Connect&eacute; en tant que ', 'yproject') . $WDGUser_current->get_display_name()
-			), $campaign->ID ); ?>
+			
+			<?php if (!comments_open()): ?>
+				<div class="align-center"><?php _e('Les commentaires ne sont pas ouverts.', 'yproject'); ?></div>
+				
+			<?php else: ?>
+				<?php comment_form( array(
+						"title_reply"			=> __('Poster un commentaire', 'yproject'),
+						"comment_notes_after"	=> "",
+						"logged_in_as"	=> __('Connect&eacute;(e) en tant que ', 'yproject') . $WDGUser_current->get_display_name()
+				), $campaign->ID ); ?>
+			<?php endif; ?>
 		<?php endif; ?>
 	<?php endif; ?>
 </div>

@@ -21,9 +21,9 @@ if ($organizations_list) {
 <?php if (!is_user_logged_in()): ?>
     <p class="align-center"><?php _e('Connectez-vous afin de cr&eacute;er un projet.', 'yproject'); ?></p>
 	
-	<?php global $signup_errors; $has_register_errors = ($signup_errors->get_error_message() != ""); ?>
     <?php locate_template( array("common/connexion-lightbox.php"), true, false ); ?>
 	
+	<?php global $signup_errors; $has_register_errors = ($signup_errors->get_error_message() != ""); ?>
 	<div id="newproject-register-user" class="<?php if (!$has_register_errors): ?>hidden<?php endif; ?>">
     <?php locate_template( array("common/register-lightbox.php"), true, false ); ?>
 	</div>
@@ -137,7 +137,7 @@ if ($organizations_list) {
 	?>
 
 	<div class="align-left">
-	<label for="project-terms"><input type="checkbox" id="project-terms" name="project-terms" /><span></span> Je valide les <a href="'.home_url('/conditions-particulieres/').'" target="_blank">conditions particuli&egrave;res</a></label><br />
+	<label for="project-terms"><input type="checkbox" id="project-terms" name="project-terms" /><span></span> Je valide les <a href="<?php echo home_url('/a-propos/cgu/conditions-particulieres/'); ?>" target="_blank">conditions particuli&egrave;res</a></label><br />
 	</div>
 	<br /><br />
 	

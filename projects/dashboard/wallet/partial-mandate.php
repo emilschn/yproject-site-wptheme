@@ -79,7 +79,7 @@ $keep_going = true;
 	//Si il n'y en a pas : enregistrer un mandat lié
 	?>
 	<?php
-	$organization_obj->register_lemonway();
+	$organization_obj->register_lemonway( TRUE );
 	if ( empty( $saved_mandates_list ) ) {
 		$keep_going = false;
 		if ( !$organization_obj->add_lemonway_mandate() ) {

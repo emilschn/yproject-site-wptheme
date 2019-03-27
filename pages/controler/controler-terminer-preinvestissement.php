@@ -16,6 +16,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 	
 	public function __construct() {
 		parent::__construct();
+		ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::__construct' );
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'invest-contract' );
@@ -60,6 +61,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 		
 		// Forcément un utilisateur connecté
 		if ( !is_user_logged_in() ) {
+			ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::check_current_preinvestment > !is_user_logged_in' );
 			$buffer = FALSE;
 		}
 		// Seul l'utilisateur qui correspond à cet investissement peut y toucher
@@ -76,18 +78,22 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 			}
 		}
 		if ( !$is_user_organization_preinvestment && $saved_user_id != $WDGUser_current->get_wpref() && !$WDGUser_current->is_admin() ) {
+			ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::check_current_preinvestment > !$is_user_organization_preinvestment && $saved_user_id != $WDGUser_current->get_wpref() && !$WDGUser_current->is_admin()' );
 			$buffer = FALSE;
 		}
 		// Il ne peut le modifier que si le statut correspond à un préinvestissement à valider
 		if ( $this->current_investment->get_contract_status() != WDGInvestment::$contract_status_preinvestment_validated ) {
+			ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::check_current_preinvestment > $this->current_investment->get_contract_status() != WDGInvestment::$contract_status_preinvestment_validated' );
 			$buffer = FALSE;
 		}
 		// Il ne peut y toucher que si la campagne est en collecte
-		if (  $this->current_campaign->campaign_status() != ATCF_Campaign::$campaign_status_collecte ) {
+		if ( $this->current_campaign->campaign_status() != ATCF_Campaign::$campaign_status_collecte ) {
+			ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::check_current_preinvestment > $this->current_campaign->campaign_status() != ATCF_Campaign::$campaign_status_collecte' );
 			$buffer = FALSE;
 		}
 		
 		if ( !$buffer ) {
+			ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::check_current_preinvestment > redirect home' );
 			wp_redirect( home_url() );
 		}
 	}
@@ -162,6 +168,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 // CURRENT FORM
 /******************************************************************************/
 	private function init_form() {
+		ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::init_form' );
 		// Récupération d'un éventuel post de formulaire
 		$action_posted = filter_input( INPUT_POST, 'action' );
 		$load_form = TRUE;
@@ -169,15 +176,19 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 
 		// Analyse formulaire validation contrat
 		if ( $action_posted == WDG_Form_Invest_Contract::$name ) {
+			ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::init_form A' );
 			$input_nav = filter_input( INPUT_POST, 'nav' );
 			if ( $input_nav == 'previous' ) {
+				ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::init_form A1' );
 				$url = home_url( '/terminer-preinvestissement/' );
 				$url .= '?cancel=1&investment_id=' . $this->current_investment->get_id();
 				wp_redirect( $url );
 
 			} else {
+				ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::init_form A2' );
 				$this->form = new WDG_Form_Invest_Contract( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 				if ( $this->form->postForm() ) {
+					ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::init_form A2a' );
 					$this->current_investment->set_contract_status( WDGInvestment::$contract_status_investment_validated );
 					$WDGCurrent_User->get_pending_preinvestments( TRUE );
 					ypcf_get_updated_payment_status( $this->current_investment->get_id() );
@@ -191,6 +202,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 			
 		// Action d'annulation du paiement
 		} elseif ( $this->current_step == WDG_Page_Controler_PreinvestmentFinish::$step_confirm_cancel ) {
+			ypcf_debug_log( 'WDG_Page_Controler_PreinvestmentFinish::init_form B' );
 			$this->current_investment->set_contract_status( WDGInvestment::$contract_status_investment_refused );
 			$WDGCurrent_User->get_pending_preinvestments( TRUE );
 			$this->current_investment->refund();

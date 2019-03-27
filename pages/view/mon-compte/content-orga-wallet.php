@@ -6,9 +6,15 @@ $WDGUser_displayed = $page_controler->get_current_user();
 
 <h2>Porte-monnaie électronique de <?php echo $WDGOrganization->get_name(); ?></h2>
 
-Montant de toutes les royalties vers&eacute;es : <?php echo $WDGOrganization->get_rois_amount(); ?> &euro;<br>
-Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_rois_amount(); ?> &euro;<br>
-<a href="<?php echo home_url( '/details-des-investissements/' ); ?>?organization=<?php echo $WDGOrganization->get_wpref(); ?>">Voir le d&eacute;tail de mes royalties</a><br>
+Montant des royalties vers&eacute;es : <?php echo $WDGOrganization->get_rois_amount(); ?> &euro;<br>
+<?php if ( !$WDGOrganization->is_registered_lemonway_wallet() ): ?>
+	<?php $pending_amount = $WDGOrganization->get_pending_rois_amount(); ?>
+	<?php if ( $pending_amount > 0 ): ?>
+	<?php echo $pending_amount; ?> &euro; sont en attente d'authentification.<br>
+	<?php endif; ?>
+<?php else: ?>
+	Montant que vous pouvez retirer : <?php echo $WDGOrganization->get_available_rois_amount(); ?> &euro;<br>
+<?php endif; ?>
 <br><br>
 
 <?php if ( !$WDGOrganization->is_document_lemonway_registered( LemonwayDocument::$document_type_bank ) ): ?>

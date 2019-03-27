@@ -72,19 +72,75 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 
 <?php if ( $page_controler->can_access_admin() ): ?>
 	<br><br>
-	<div class="admin-theme-block align-center">
-		<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a>
-		<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/lightbox-add-check.php' ), true ); ?>
-	</div>
-<?php endif; ?>
-
-
-
-<?php if ( $page_controler->can_access_admin() ): ?>
-	<?php $campaign_poll_answers = $page_controler->get_campaign()->get_api_data( 'poll_answers' ); ?>
-	<br><br><br>
-	<div class="db-form">
+	<div class="admin-theme-block db-form">
+		<div class="field admin-theme align-center">
+			<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a><br><br>
+			
+			<a href="#contacts" id="show-notifications-preinvestment" class="button admin-theme"><?php _e("Envoyer les relances de pr&eacute;-investissement","yproject") ?></a>
+			<a href="#contacts" id="show-notifications-prelaunch" class="button admin-theme"><?php _e("Envoyer les relances de pr&eacute;-lancement","yproject") ?></a>
+			<br><br>
+			
+			<?php
+			$editor_params = array( 
+				'media_buttons' => true,
+				'quicktags'     => true,
+				'editor_height' => 500,
+				'tinymce'       => array(
+					'plugins'		=> 'wordpress, paste, wplink, textcolor, charmap, hr, colorpicker, lists',
+					'toolbar1'		=> 'bold,italic,underline,|,hr,bullist,numlist,|,alignleft,aligncenter,alignright,alignjustify,|,link,unlink,video,wp_adv',
+					'toolbar2'		=> 'formatselect,fontsizeselect,removeformat,charmap,forecolor,forecolorpicker,pastetext,table,undo,redo',
+					'paste_remove_styles' => true,
+					'wordpress_adv_hidden' => FALSE,
+				)
+			);
+			?>
 		
+			<form id="form-notifications-preinvestment" action="<?php echo admin_url( 'admin-post.php?action=send_project_vote_notifications'); ?>" method="POST" class="hidden align-left">
+				<b>Notifications de pré-investissement :</b><br><br>
+				Témoignages :<br>
+				<?php wp_editor( '', 'testimony', $editor_params ); ?><br><br>
+				URL de l'image (au moins 590px de large) :<br>
+				<input type="text" name="image_url"><br><br>
+				Description sous l'image :<br>
+				<input type="text" name="image_description"><br><br>
+				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
+				<input type="hidden" id="mail_type" name="mail_type" value="">
+				<input type="submit" name="send_option" value="Envoyer test" class="button admin-theme">
+				<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
+			</form>
+			
+			<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/lightbox-add-check.php' ), true ); ?>
+
+		</div>
+	
+	
+		<br><br><br>
+		
+		<?php $campaign_emails = $page_controler->get_campaign_emails(); ?>
+		<?php if ( !empty( $campaign_emails ) ): ?>
+		<div class="field admin-theme">
+			<b>Liste des emails envoyés en rapport avec la lev&eacute;e de fonds</b><br><br>
+			<table>
+				<tr>
+					<td><strong>Date</strong></td>
+					<td><strong>Destinataire</strong></td>
+					<td><strong>Template</strong></td>
+				</tr>
+
+				<?php foreach ( $campaign_emails as $campaign_email ): ?>
+				<tr>
+					<td><?php echo $campaign_email[ 'date' ]; ?></td>
+					<td><?php echo $campaign_email[ 'recipient' ]; ?></td>
+					<td><?php echo $campaign_email[ 'template_str' ]; ?> (<?php echo $campaign_email[ 'template_id' ]; ?>)</td>
+				</tr>
+				<?php endforeach; ?>
+			</table>
+			
+		<br><br>
+		</div>
+		<?php endif; ?>
+		
+		<?php $campaign_poll_answers = $page_controler->get_campaign()->get_api_data( 'poll_answers' ); ?>
 		<?php $investment_contracts = WDGInvestmentContract::get_list( $page_controler->get_campaign()->ID ); ?>
 		<?php if ( !empty( $investment_contracts ) ): ?>
 		<div class="field admin-theme">

@@ -36,6 +36,10 @@
 					<?php _e( 'Se souvenir de moi', 'yproject' ); ?>
 				</label>
 			</div>
+
+			<p class="align-left">
+				<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+			</p>
             
 			<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 			<input type="hidden" name="login-form" value="1" />
@@ -46,6 +50,7 @@
 	
 			<button type="button" class="button blue-facebook social_connect_login_facebook" data-redirect="<?php echo WDGUser::get_login_redirect_page(); ?>"><?php _e( "Se connecter avec Facebook", 'yproject' ); ?></button>
 			<div class="social_connect_login_facebook_loading align-center hidden">
+				<br>
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 			</div>
 			

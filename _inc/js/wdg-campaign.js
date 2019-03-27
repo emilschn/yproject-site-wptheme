@@ -94,12 +94,15 @@ var WDGProjectViewer = (function($) {
 					if (isNaN(inputVal) || inputVal < 0) inputVal = 0;
 					var percentProject = Number($("input#roi_percent_project").val());
 					var goalProject = Number($("input#roi_goal_project").val());
+					var maxProfit = Number($("input#roi_maximum_profit").val());
 					
 					if ( inputVal > goalProject ) {
 						$( '#error-maximum' ).show( 100 );
 					} else {
 						$( '#error-maximum' ).hide( 100 );
 						
+						var maxRoi = inputVal * maxProfit;
+						var maxRoiRemaining = maxRoi;
 						var ratioOfGoal = inputVal / goalProject;
 						var amountOfGoal = 0;
 						var totalTurnover = 0;
@@ -114,6 +117,11 @@ var WDGProjectViewer = (function($) {
 							var estTO = Number($(this).text());
 							totalTurnover += estTO;
 							var amountOfTO = estTO * ratioOfPercent / 100;
+							// Gestion du plafond de versement
+							if ( maxRoiRemaining < amountOfTO ) {
+								amountOfTO = maxRoiRemaining;
+							}
+							maxRoiRemaining -= amountOfTO;
 							amountOfGoal += amountOfTO;
 							var amountOfTORound = Math.round(amountOfTO * 100) / 100;
 							var amountOfTORoundStr = amountOfTORound.toString().replace('.', ',');

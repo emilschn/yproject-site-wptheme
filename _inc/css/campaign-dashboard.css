@@ -281,7 +281,7 @@ div#container div#content main #item-body-contacts table span.payment-status-err
 	left: 10px;
 	line-height: 10px;
 	border-radius: 50%;
-	background: #ea4f51;
+	background: #EACDCB;
 }
 div#container div#content main #item-body-contacts table span.payment-status-success::after {
 	background: #8BC79C;

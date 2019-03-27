@@ -24,6 +24,7 @@ body input, body select {
 .aligncenter, .align-center { text-align: center; }
 .alignleft, .align-left { text-align: left; }
 .align-justify { text-align: justify; }
+.align-right { text-align: right; }
 
 .center-lg { max-width: 1300px; margin: auto; }
 .only-inf997 { display: none; }
@@ -994,11 +995,15 @@ footer > .footer-container > div > div.aligncenter {
 	position: fixed;
 	z-index: 3;
 	bottom: 0px;
-	width: 100%;
-	padding: 10px 0px;
+	width: calc( 100% - 200px );
+	padding: 24px 100px;
+	font-size: 18px;
 }
 #cookies-alert-close {
-	padding: 5px;
+	width: 240px;
+	height: 56px;
+	margin: 24px auto 0px;
+	padding: 0px;
 }
 
 @media screen and (min-width: 998px) and (max-width: 1140px) {

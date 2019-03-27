@@ -30,8 +30,9 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 		</div>
 
 		<div>
-			<?php _e( "Pour investir des montants sup&eacute;rieurs &agrave; 250 &euro; sur WEDOGOOD, vous devez &ecirc;tre authentifi&eacute; aupr&egrave;s de notre prestataire de paiement, Lemon Way.", 'yproject' ); ?><br>
+			<?php _e( "Pour investir sur WEDOGOOD, vous devez &ecirc;tre authentifi&eacute; aupr&egrave;s de notre prestataire de paiement, Lemon Way.", 'yproject' ); ?><br>
 			<?php _e( "Merci de saisir vos informations personnelles, puis de nous transmettre vos justificatifs d'identit&eacute;.", 'yproject' ); ?>
+			<?php _e( "Ils seront &eacute;tudi&eacute;s sous 48h par des services de v&eacute;rification automatiques puis par une personne physique en cas d'erreur ou de cas particulier.", 'yproject' ); ?>
 		</div>
 		
 		<div class="authentication-items">

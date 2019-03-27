@@ -9,11 +9,13 @@
 				La cr&eacute;ation d&apos;un compte de Membre sur <?php echo ATCF_CrowdFunding::get_platform_name(); ?> est exclusivement r&eacute;serv&eacute;e aux personnes physiques.
 				Chaque membre ne peut b&eacute;n&eacute;ficier que d&apos;un seul compte &agrave; son nom.<br /><br />
 				Si vous souhaitez investir ou porter un projet pour une organisation, vous pourrez l&apos;indiquer au moment de l&apos;investissement ou dans les param&egrave;tres du projet.
-				Vous recevrez automatiquement la newsletter de <?php echo ATCF_CrowdFunding::get_platform_name(); ?> et pourrez vous en d&eacute;sinscrire &agrave; tout moment.
 			</div>
 
 			<div class="errors">
-				<?php echo $signup_errors->get_error_message(); ?>
+				<?php $error_list = $signup_errors->get_error_messages(); ?>
+				<?php foreach ( $error_list as $error ): ?>
+					<?php echo $error . '<br>'; ?>
+				<?php endforeach; ?>
 			</div>
 
 			<div class="register-section" id="basic-details-section">
@@ -68,8 +70,12 @@
 				<?php endif; ?>
 
 				<div class="field">
-					<label for="validate-terms-check-register" id="label-validate-terms-check-register" data-keepdefault="1"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> J&apos;accepte <a href="<?php echo home_url().'/cgu/';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a></label><br />
+					<label for="validate-terms-check-register" id="label-validate-terms-check-register" data-keepdefault="1"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> J&apos;accepte <a href="<?php echo home_url().'/cgu/';  ?>" target="_blank">les conditions g&eacute;n&eacute;rales d&apos;utilisation</a> *</label><br />
 				</div>
+
+				<p class="align-left">
+					<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+				</p>
 
 				<?php wp_nonce_field( 'register_form_posted' ); ?>
 
@@ -84,6 +90,7 @@
 	
 				<button type="button" class="button blue-facebook social_connect_login_facebook" data-redirect="<?php echo WDGUser::get_login_redirect_page(); ?>"><?php _e( "Se connecter avec Facebook", 'yproject' ); ?></button>
 				<div class="social_connect_login_facebook_loading align-center hidden">
+					<br>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 				</div>
 				<br><br>

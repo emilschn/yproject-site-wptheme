@@ -22,6 +22,9 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	private $form_user_bank;
 	private $form_user_notifications;
 	private $form_user_feedback;
+	private $form_user_tax_exemption;
+	private $list_intentions_to_confirm;
+	private $tax_documents;
 	
 	public function __construct() {
 		parent::__construct();
@@ -33,6 +36,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'user-password' );
+		$core->include_form( 'user-unlink-facebook' );
 		$core->include_form( 'user-identitydocs' );
 		$core->include_form( 'user-bank' );
 		$core->include_form( 'user-notifications' );
@@ -42,11 +46,13 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
 		$this->init_current_user( $reload );
 		$this->init_project_list();
+		$this->init_intentions_to_confirm();
 		$this->init_form_user_details();
 		$this->init_form_user_identitydocs();
 		$this->init_form_user_bank();
 		$this->init_form_user_notifications();
-		locate_template( array( 'country_list.php'  ), true );
+		$this->init_form_user_tax_exemption();
+		$this->init_tax_documents();
 		
 		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
 		wp_enqueue_script( 'wdg-user-account', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-user-account.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION);
@@ -192,7 +198,13 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 			$this->init_current_user( TRUE );
 		}
 		
-		if ( !$this->current_user->is_logged_in_with_facebook() ) {
+		if ( $this->current_user->is_logged_in_with_facebook() ) {
+			$this->form_unlink_facebook = new WDG_Form_User_Unlink_Facebook( $this->current_user->get_wpref() );
+			if ( $action_posted == WDG_Form_User_Unlink_Facebook::$name ) {
+				$this->form_user_feedback = $this->form_unlink_facebook->postForm();
+			}
+			
+		} else {
 			$this->form_user_password = new WDG_Form_User_Password( $this->current_user->get_wpref() );
 			if ( $action_posted == WDG_Form_User_Password::$name ) {
 				$this->form_user_feedback = $this->form_user_password->postForm();
@@ -206,6 +218,10 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	
 	public function get_user_password_form() {
 		return $this->form_user_password;
+	}
+	
+	public function get_user_unlink_facebook_form() {
+		return $this->form_unlink_facebook;
 	}
 	
 	public function get_user_form_feedback() {
@@ -291,6 +307,87 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 	}
 	
 /******************************************************************************/
+// USER TAX EXEMPTION
+/******************************************************************************/
+	private function init_form_user_tax_exemption() {
+		$core = ATCF_CrowdFunding::instance();
+		$core->include_form( 'user-tax-exemption' );
+		$this->form_user_tax_exemption = new WDG_Form_User_Tax_Exemption( $this->current_user->get_wpref() );
+		$action_posted = filter_input( INPUT_POST, 'action' );
+		if ( $action_posted == WDG_Form_User_Tax_Exemption::$name ) {
+			$this->form_user_feedback = $this->form_user_tax_exemption->postForm();
+		}
+	}
+	
+	public function get_user_tax_exemption_form() {
+		return $this->form_user_tax_exemption;
+	}
+	
+	public function get_can_ask_tax_exemption() {
+		return $this->current_user->get_tax_country() == 'FR' || $this->current_user->get_tax_country() == '';
+	}
+	
+	public function get_show_user_tax_exemption_form() {
+		$date_today = new DateTime();
+		$tax_exemption_filename = get_user_meta( $this->current_user->get_wpref(), 'tax_exemption_' .$date_today->format( 'Y' ), TRUE );
+		
+		return ( empty( $tax_exemption_filename ) && $this->get_can_ask_tax_exemption() );
+	}
+	
+	public function get_tax_exemption_preview() {
+		$core = ATCF_CrowdFunding::instance();
+		$core->include_control( 'templates/pdf/form-tax-exemption' );
+		$user_name = $this->current_user->get_firstname(). ' ' .$this->current_user->get_lastname();
+		$user_address = $this->current_user->get_full_address_str(). ' ' .$this->current_user->get_postal_code( TRUE ). ' ' .$this->current_user->get_city();
+		$form_ip_address = $_SERVER[ 'REMOTE_ADDR' ];
+		$date_today = new DateTime();
+		$form_date = $date_today->format( 'd/m/Y' );
+		return WDG_Template_PDF_Form_Tax_Exemption::get( $user_name, $user_address, $form_ip_address, $form_date );
+	}
+	
+/******************************************************************************/
+// USER TAX DOCUMENTS
+/******************************************************************************/
+	private function init_tax_documents() {
+		$this->tax_documents = array();
+		
+		$this->tax_documents[ 'user' ] = array();
+		foreach ( $this->current_user_organizations as $WDGOrganization ) {
+			$this->tax_documents[ $WDGOrganization->get_wpref() ] = array();
+		}
+			
+		$date_today = new DateTime();
+		$today_year = $date_today->format( 'Y' );
+		for ( $year = 2019; $year <= $today_year; $year++ ) {
+			$tax_document = $this->current_user->has_tax_document_for_year( $year );
+			if ( $tax_document ) {
+				$this->tax_documents[ 'user' ][ $year ] = $tax_document;
+			}
+			
+			foreach ( $this->current_user_organizations as $WDGOrganization ) {
+				$tax_document = $WDGOrganization->has_tax_document_for_year( $year );
+				if ( $tax_document ) {
+					$this->tax_documents[ $WDGOrganization->get_wpref() ][ $year ] = $tax_document;
+				}
+			}
+		}
+	}
+	
+	public function has_tax_documents( $orga_id = FALSE ) {
+		if ( empty( $orga_id ) ) {
+			$orga_id = 'user';
+		}
+		return !empty( $this->tax_documents[ $orga_id ] );
+	}
+	
+	public function get_tax_documents( $orga_id = FALSE ) {
+		if ( empty( $orga_id ) ) {
+			$orga_id = 'user';
+		}
+		return $this->tax_documents[ $orga_id ];
+	}
+	
+/******************************************************************************/
 // PROJECT LIST
 /******************************************************************************/
 	public function has_user_project_list() {
@@ -340,6 +437,49 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 				array_push( $this->user_project_list, $project );
 			}
 		}
+	}
+	
+/******************************************************************************/
+// INTENTIONS D'INVESTISSEMENT SANS INVESTISSEMENT
+/******************************************************************************/
+	private function init_intentions_to_confirm() {
+		$this->list_intentions_to_confirm = array();
+		
+		if ( $this->current_user->is_lemonway_registered() ) {
+			
+			$list_campaign_funding = ATCF_Campaign::get_list_funding( 0, '', true );
+			foreach ( $list_campaign_funding as $project_post ) {
+				$amount_voted = $this->current_user->get_amount_voted_on_campaign( $project_post->ID );
+				if ( $amount_voted > 0 && !$this->current_user->has_invested_on_campaign( $project_post->ID ) ) {
+					$intention_item = array(
+						'campaign_name'	=> $project_post->post_title,
+						'campaign_id'	=> $project_post->ID,
+						'vote_amount'	=> $amount_voted,
+						'status'		=> ATCF_Campaign::$campaign_status_collecte
+					);
+					array_push( $this->list_intentions_to_confirm, $intention_item );
+				}
+			}
+
+			$list_campaign_vote = ATCF_Campaign::get_list_vote( 0, '', true );
+			foreach ( $list_campaign_vote as $project_post ) {
+				$amount_voted = $this->current_user->get_amount_voted_on_campaign( $project_post->ID );
+				if ( $amount_voted > 0 && !$this->current_user->has_invested_on_campaign( $project_post->ID ) ) {
+					$intention_item = array(
+						'campaign_name'	=> $project_post->post_title,
+						'campaign_id'	=> $project_post->ID,
+						'vote_amount'	=> $amount_voted,
+						'status'		=> ATCF_Campaign::$campaign_status_vote
+					);
+					array_push( $this->list_intentions_to_confirm, $intention_item );
+				}
+			}
+			
+		}
+	}
+	
+	public function get_intentions_to_confirm() {
+		return $this->list_intentions_to_confirm;
 	}
 	
 /******************************************************************************/

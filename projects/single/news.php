@@ -13,6 +13,7 @@ $posts_in_category = $campaign->get_news_posts();
 			<p class="project-news-item-excerpt">
 				<?php echo apply_filters( 'the_excerpt', $cat_post->post_content ); ?>
 			</p>
+			<div class="clear"></div>
 			<a href="<?php echo get_permalink($cat_post->ID); ?>" class="button blue-pale"><?php _e("En savoir plus", 'yproject'); ?></a>
 		</div>
 		<?php endforeach; ?>

@@ -51,7 +51,7 @@ if (!empty($current_organization)) {
 	$lightbox_content = '<div class="lightbox-organization-separator"></div>
 		<div class="content align-left"><br />
 		<span>'.__('Forme juridique : ', 'yproject').'</span>'.$wdg_organization->get_legalform().'<br />
-		<span>'.__('Num&eacute;ro SIREN : ', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
+		<span>'.__('Num&eacute;ro SIRET : ', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
 		<span>'.__('Code APE : ', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />';
 	if ( $wdg_organization->get_vat() != "" && $wdg_organization->get_vat() != '---' ) {
 		$lightbox_content .= '<span>'.__('Num&eacute;ro de TVA : ', 'yproject').'</span>'.$wdg_organization->get_vat().'<br />';
@@ -61,7 +61,7 @@ if (!empty($current_organization)) {
 		</div>
 		<div class="lightbox-organization-separator"></div>'.'<br/>
 		<div class="content align-left">
-		<span>'.__('Si&egrave;ge social : ', 'yproject').'<br/>'.'</span>'.$wdg_organization->get_address().'<br />
+		<span>'.__('Si&egrave;ge social : ', 'yproject').'<br/>'.'</span>'.$wdg_organization->get_full_address_str().'<br />
 		<span></span>'.$wdg_organization->get_postal_code().' '.$wdg_organization->get_city().'<br />
 		<span></span>'.$wdg_organization->get_nationality().'<br />
 		</div>';
@@ -340,7 +340,15 @@ $lang_list = $campaign->get_lang_list();
 
 		</div>
 	</div>
-	<div class="clear padder"><div class="subtitle"><?php echo $campaign->subtitle(); ?></div></div>
+	
+	<div class="clear padder">
+		<div class="hashtags">
+			<strong><?php _e( "Impacts", 'yproject' ); ?></strong> (<a href="<?php echo home_url( '/investissement/impact-investing/evaluation-des-impacts/' ); ?>" target="_blank"><?php _e( "en savoir plus", 'yproject' ); ?></a>) : <?php echo $campaign->get_subcategories_hashtags(); ?>
+		</div>
+		<div class="subtitle">
+			<?php echo $campaign->subtitle(); ?>
+		</div>
+	</div>
 </div>
 	
 <div class="padder">

@@ -400,7 +400,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		//Si il n'y en a pas : enregistrer un mandat lié
 		?>
 		<?php
-		$page_controler->get_campaign_organization()->register_lemonway();
+		$page_controler->get_campaign_organization()->register_lemonway( TRUE );
 		if ( empty( $saved_mandates_list ) ) {
 			$keep_going = false;
 			if ( !$page_controler->get_campaign_organization()->add_lemonway_mandate() ) {

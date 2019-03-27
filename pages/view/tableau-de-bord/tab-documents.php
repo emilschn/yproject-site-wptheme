@@ -79,4 +79,17 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	
 	<br><br>
 	
+	
+	<?php if ( $page_controler->can_access_admin() ): ?>
+		<form action="<?php echo admin_url( 'admin-post.php?action=generate_yearly_fiscal_documents'); ?>" method="post" class="field admin-theme">
+			<div class="align-center">
+				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+				<input type="hidden" name="fiscal_year" value="0" />
+				<input type="hidden" name="init" value="1" />
+				<button class="button admin-theme">G&eacute;n&eacute;rer les fichiers pour les déclarations aux impots</button>
+			</div>
+		</form>
+		<br><br>
+	<?php endif; ?>
+	
 </div>

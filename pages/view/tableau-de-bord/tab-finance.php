@@ -180,6 +180,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				"admin_theme"	=> true
 			));
 			DashboardUtility::create_field(array(
+				"id"			=> "new_declaration_periodicity",
+				"type"			=> "select",
+				"label"			=> "P&eacute;riodicit&eacute; des d&eacute;clarations",
+				"value"			=> $page_controler->get_campaign()->get_declaration_periodicity(),
+				"options_id"	=> array_keys( ATCF_Campaign::$declaration_periodicity_list ),
+				"options_names"	=> array_values( ATCF_Campaign::$declaration_periodicity_list ),
+				"editable"		=> $page_controler->can_access_admin(),
+				"admin_theme"	=> true
+			));
+			DashboardUtility::create_field(array(
 				"id"			=> "new_minimum_costs_to_organization",
 				"type"			=> "text-money",
 				"label"			=> "Montant minimum TTC des frais appliqués au PP",

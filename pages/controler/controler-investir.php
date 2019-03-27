@@ -176,6 +176,11 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		return wpautop( $edd_settings[ 'investment_terms' ] );
 	}
 	
+	public function is_authentication_alert_visible() {
+		$WDGUser_current = WDGUser::current();
+		return ( $this->current_step == 1 && !$WDGUser_current->is_lemonway_registered() );
+	}
+	
 /******************************************************************************/
 // CURRENT FORM
 /******************************************************************************/
@@ -272,6 +277,18 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					if ( $this->form->postForm() ) {
 						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> GOTO success' );
 						$this->form_display_success = TRUE;
+						// Si l'investisseur n'a pas encore envoyé tous ses documents malgré la validation du formulaire, on lui envoie un mail immédiatement
+						if ( WDGOrganization::is_user_organization( $identity_docs_user_id ) ) {
+							$WDGEntity = new WDGOrganization( $identity_docs_user_id );
+							$user_name = $WDGEntity->get_name();
+						} else {
+							$WDGEntity = new WDGUser( $identity_docs_user_id );
+							$user_name = $WDGEntity->get_firstname();
+						}
+						if ( !$WDGEntity->has_sent_all_documents() ) {
+							NotificationsAPI::investment_authentication_needed( $WDGEntity->get_email(), $user_name, $this->current_campaign->get_name(), $this->current_campaign->get_api_id() );
+							WDGQueue::add_investment_authentication_needed_reminder( $WDGEntity->get_wpref(), $WDGEntity->get_email(), $user_name, $this->current_campaign->get_name(), $this->current_campaign->get_api_id() );
+						}
 					}
 				}
 				break;

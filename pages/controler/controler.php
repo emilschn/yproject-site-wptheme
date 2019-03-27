@@ -151,7 +151,15 @@ class WDG_Page_Controler {
 			$this->show_user_pending_preinvestment = false;
 			if ( is_user_logged_in() ) {
 				$WDG_user_current = WDGUser::current();
+				if ( $WDG_user_current->is_admin() ) {
+					$input_user_id = filter_input( INPUT_GET, 'override_current_user' );
+					if ( !empty( $input_user_id ) ) {
+						$WDG_user_current = new WDGUser( $input_user_id );
+					}
+				}
+				
 				if ( $WDG_user_current->has_pending_preinvestments() ) {
+					ypcf_debug_log( 'WDG_Page_Controler::init_show_user_pending_preinvestment has_pending_preinvestments' );
 					$this->show_user_pending_preinvestment = $WDG_user_current->get_first_pending_preinvestment();
 				}
 				if ( !$this->show_user_pending_preinvestment ) {
@@ -159,6 +167,7 @@ class WDG_Page_Controler {
 					foreach ( $user_organizations_list as $organization_item ) {
 						$WDGUserOrga = new WDGUser( $organization_item->wpref );
 						if ( $WDGUserOrga->has_pending_preinvestments() ) {
+							ypcf_debug_log( 'WDG_Page_Controler::init_show_user_pending_preinvestment ORGA has_pending_preinvestments' );
 							$this->show_user_pending_preinvestment = $WDGUserOrga->get_first_pending_preinvestment();
 							break;
 						}
@@ -179,16 +188,25 @@ class WDG_Page_Controler {
 			$this->show_user_pending_investment = false;
 			if ( is_user_logged_in() ) {
 				$WDG_user_current = WDGUser::current();
+				if ( $WDG_user_current->is_admin() ) {
+					$input_user_id = filter_input( INPUT_GET, 'override_current_user' );
+					if ( !empty( $input_user_id ) ) {
+						$WDG_user_current = new WDGUser( $input_user_id );
+					}
+				}
+				
 				if ( $WDG_user_current->is_lemonway_registered() ) {
 					if ( $WDG_user_current->has_pending_not_validated_investments() ) {
 						$this->show_user_pending_investment = $WDG_user_current->get_first_pending_not_validated_investment();
 					}
-					if ( !$this->show_user_pending_investment ) {
-						$user_organizations_list = $WDG_user_current->get_organizations_list();
+				}
+				if ( !$this->show_user_pending_investment ) {
+					$user_organizations_list = $WDG_user_current->get_organizations_list();
+					if ( $user_organizations_list ) {
 						foreach ( $user_organizations_list as $organization_item ) {
-							$WDGUserOrga = new WDGUser( $organization_item->wpref );
-							if ( $WDGUserOrga->has_pending_not_validated_investments() ) {
-								$this->show_user_pending_investment = $WDGUserOrga->get_first_pending_not_validated_investment();
+							$WDGOrga = new WDGOrganization( $organization_item->wpref );
+							if ( $WDGOrga->is_registered_lemonway_wallet() && $WDGOrga->has_pending_not_validated_investments() ) {
+								$this->show_user_pending_investment = $WDGOrga->get_first_pending_not_validated_investment();
 								break;
 							}
 						}

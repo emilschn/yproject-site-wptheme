@@ -647,7 +647,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 
 .wdg-lightbox .wdg-lightbox-button-close {
 	position: absolute;
-	right: 0px;
+	right: 8px;
 	margin-top: -45px;
 }
 #wdg-lightbox-editOrga .wdg-lightbox-padder .wdg-lightbox-button-close {

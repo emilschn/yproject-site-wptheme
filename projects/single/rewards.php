@@ -42,6 +42,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 		<div class="db-form v3 full bg-white">
 			<input type="hidden" id="roi_percent_project" value="<?php echo $campaign->roi_percent_estimated(); ?>" />
 			<input type="hidden" id="roi_goal_project" value="<?php echo $campaign->goal(false); ?>" />
+			<input type="hidden" id="roi_maximum_profit" value="<?php echo $campaign->maximum_profit_complete(); ?>" />
 			<?php if (is_user_logged_in() && $campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
 			<form method="GET" action="<?php echo home_url( '/investir' ); ?>">
 			<?php endif; ?>

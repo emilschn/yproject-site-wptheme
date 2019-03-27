@@ -32,9 +32,11 @@
         </canvas></p>
     <?php endif; ?>
 
+	<?php if ( !$campaign->get_hide_investors() ): ?>
     <h3><?php _e("Ils ont", 'yproject'); ?> <?php echo $voc['investor_verb']?></h3>
     <p class="data-inv-investors_string">&hellip;</p>
     </div>
+	<?php endif; ?>
     
     <?php if(edd_has_variable_prices($id_campaign)): ?>
     <script type="text/javascript">

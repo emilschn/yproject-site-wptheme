@@ -152,7 +152,57 @@ div#content button.clear {
 }
 
 /**
- ETAPE 3 : Contrat
+ ETAPE 2B : Documents
+**/
+@media screen and (max-width: 800px) {
+	div#content form.identitydocs {
+		display: flex;
+		flex-direction: column;
+	}
+	div#content form.identitydocs .resp-item-1 {
+		order: 1;
+	}
+	div#content form.identitydocs #field-identity {
+		order: 2;
+	}
+	div#content form.identitydocs #field-home {
+		order: 4;
+	}
+	div#content form.identitydocs #field-identity2 {
+		order: 3;
+	}
+	div#content form.identitydocs .resp-item-5 {
+		order: 5;
+	}
+	div#content form.identitydocs .resp-item-6 {
+		order: 6;
+	}
+	div#content form.identitydocs .field-description {
+		display: none;
+	}
+	div#content form.identitydocs .hidden-responsive {
+		display: none;
+	}
+	div#content form.identitydocs .displayed-responsive {
+		display: block;
+	}
+}
+
+/**
+ ETAPE 3A : Contrat
+**/
+div#content div.center.upload-docs div.wdg-message.confirm {
+	text-transform: none;
+}
+div#content div.center.upload-docs div.align-center a.button.transparent {
+	display: inline-block;
+	width: 100%;
+	padding: 16px 0px;
+}
+
+
+/**
+ ETAPE 3B : Contrat
 **/
 div#content div#contract-intro {
 	min-height: 120px;
