@@ -5,11 +5,29 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 <div class="align-center">
 	<?php _e( "Votre investissement est valid&eacute;.", 'yproject' ); ?><br>
-	<?php _e( "Vous allez recevoir un e-mail &agrave; l&apos;adresse", 'yproject'); ?> <?php echo $page_controler->get_current_user_email(); ?> <?php _e("(pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable).", 'yproject'); ?><br>
-	<?php _e( "Votre contrat d&apos;investissement sera joint &agrave; cet e-mail.", 'yproject'); ?><br><br>
 	
-	<?php if ( $page_controler->get_current_investment()->get_session_amount() > WDGInvestmentContract::$signature_minimum_amount ): ?>
-		<?php _e( "Sur la page suivante, un cadre sp&eacute;cifique vous invitera &agrave; signer votre contrat.", 'yproject'); ?><br>
+	<?php if ( $page_controler->get_current_investment()->get_session_amount() > 1500 ): ?>
+
+		<?php if ( !$page_controler->has_contract_errors() ): ?>
+
+			<?php _e( "Vous allez recevoir deux e-mails cons&eacute;cutifs &agrave; l&apos;adresse", 'yproject' ); ?> <?php echo $page_controler->get_current_user_email(); ?>
+			(<?php _e( "pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable) :", 'yproject' ); ?><br><br>
+
+			<?php if ( ATCF_CrowdFunding::get_platform_context() == "wedogood" ): ?>
+			- <?php _e( "un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement. Cet e-mail contient votre code pour signer le pouvoir", 'yproject' ); ?><br><br>
+			<?php else: ?>
+			- <?php _e( "un e-mail envoy&eacute; pour la confirmation de votre paiement. Cet e-mail contient votre code pour signer le pouvoir", 'yproject' ); ?><br><br>
+			<?php endif; ?>
+
+			- <?php _e( "un e-mail envoy&eacute; par notre partenaire Eversign. Cet e-mail contient un lien vous permettant de signer le pouvoir pour le contrat d&apos;investissement", 'yproject' ); ?><br><br>
+			<center><img src="<?php echo $stylesheet_directory_uri; ?>/images/eversign.png" width="150" height="40" /></center><br>
+
+		<?php else: ?>
+			<?php _e( "Vous allez recevoir un e-mail de confirmation de paiement.", 'yproject' ); ?><br>
+			<span class="errors"><?php _e( "Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me.", 'yproject' ); ?></span><br><br>
+
+		<?php endif; ?>
+			
 	<?php endif; ?>
 </div>
 		
