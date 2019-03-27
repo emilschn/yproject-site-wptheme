@@ -16,6 +16,8 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 	private $form_fields_hidden_slug;
 	private $form_fields_displayed_slug;
 	
+	private $return_eversign;
+	
 	public function __construct() {
 		parent::__construct();
 		
@@ -25,6 +27,7 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 		$this->init_current_step();
 		$this->init_current_investment();
 		$this->init_form_polls();
+		$this->init_return_eversign();
 	}
 	
 /******************************************************************************/
@@ -60,7 +63,7 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 	}
 	
 /******************************************************************************/
-// CURRENT STEP
+// CURRENT POLL
 /******************************************************************************/
 	private function init_form_polls() {
 		$this->can_display_form = FALSE;
@@ -112,6 +115,36 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 	public function get_form_action() {
 		$url = home_url( '/paiement-partager/' ). '?campaign_id=' .$this->current_campaign->ID;
 		return $url;
+	}
+	
+/******************************************************************************/
+// RETURN EVERSIGN
+/******************************************************************************/
+	private function init_return_eversign() {
+		$input_return_eversign = filter_input( INPUT_GET, 'return_eversign' );
+		if ( !empty( $input_return_eversign ) ) {
+			if ( $input_return_eversign == '1' ) {
+				$this->return_eversign = 'accepted';
+			} elseif ( $input_return_eversign == '2' )  {
+				$this->return_eversign = 'refused';
+			}
+		}
+	}
+	
+	public function has_accepted_eversign() {
+		$buffer = FALSE;
+		if ( isset( $this->return_eversign ) ) {
+			$buffer = ( $this->return_eversign == 'accepted' );
+		}
+		return $buffer;
+	}
+	
+	public function has_refused_eversign() {
+		$buffer = FALSE;
+		if ( isset( $this->return_eversign ) ) {
+			$buffer = ( $this->return_eversign == 'refused' );
+		}
+		return $buffer;
 	}
 	
 }
