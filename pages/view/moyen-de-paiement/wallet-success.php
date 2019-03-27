@@ -16,12 +16,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		- <?php _e( "un e-mail envoy&eacute; pour la confirmation de votre paiement. Cet e-mail contient votre code pour signer le pouvoir", 'yproject' ); ?><br><br>
 		<?php endif; ?>
 		
-		- <?php _e( "un e-mail envoy&eacute; par notre partenaire Signsquid. Cet e-mail contient un lien vous permettant de signer le pouvoir pour le contrat d&apos;investissement", 'yproject' ); ?><br><br>
-		<center><img src="'. get_stylesheet_directory_uri() .'/images/signsquid.png" width="168" height="64" /></center><br>
-		
-		<?php if ( $page_controler->get_current_user_phone() != FALSE ): ?>
-			<?php _e( "Vous allez aussi recevoir un sms contenant le code au num&eacute;ro que vous nous avez indiqu&eacute; :", 'yproject' ); ?> <?php echo $page_controler->get_current_user_phone(); ?><br><br>
-		<?php endif; ?>
+		- <?php _e( "un e-mail envoy&eacute; par notre partenaire Eversign. Cet e-mail contient un lien vous permettant de signer le pouvoir pour le contrat d&apos;investissement", 'yproject' ); ?><br><br>
+		<center><img src="<?php echo $stylesheet_directory_uri; ?>/images/eversign.png" width="150" height="40" /></center><br>
 
 	<?php else: ?>
 		<?php _e( "Vous allez recevoir un e-mail de confirmation de paiement.", 'yproject' ); ?><br>

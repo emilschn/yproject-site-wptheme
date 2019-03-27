@@ -1062,7 +1062,7 @@ function print_informations_page()
 						
 						<strong><?php _e( "Nouveau contrat compl&eacute;mentaire :", 'yproject' ); ?></strong><br><br>
 						<div class="field">
-							<label><?php _e( "Titre (sera repris sur Signsquid)", 'yproject' ); ?></label>
+							<label><?php _e( "Titre (sera repris sur Eversign)", 'yproject' ); ?></label>
 							<div class="field-container">
 								<span class="field-value"><input type="text" name="contract_model_name" /></span>
 							</div>
@@ -1096,7 +1096,7 @@ function print_informations_page()
 						
 						<strong><?php _e( "Edition du contrat compl&eacute;mentaire :", 'yproject' ); ?></strong><br><br>
 						<div class="field">
-							<label><?php _e( "Titre (sera repris sur Signsquid)", 'yproject' ); ?></label>
+							<label><?php _e( "Titre (sera repris sur Eversign)", 'yproject' ); ?></label>
 							<div class="field-container">
 								<span class="field-value"><input type="text" name="contract_edit_model_name" /></span>
 							</div>

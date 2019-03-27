@@ -12,12 +12,12 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php _e( "Une fois valid&eacute;, vous recevrez deux e-mails :", 'yproject' ); ?><br><br>
 	
 	<?php if ( ATCF_CrowdFunding::get_platform_context() == "wedogood" ): ?>
-	- <?php _e( "un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement. Cet e-mail contient votre code pour signer le pouvoir", 'yproject' ); ?><br><br>
+	- <?php _e( "un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement.", 'yproject' ); ?><br><br>
 	<?php else: ?>
-	- <?php _e( "un e-mail envoy&eacute; pour la confirmation de votre paiement. Cet e-mail contient votre code pour signer le pouvoir", 'yproject' ); ?><br><br>
+	- <?php _e( "un e-mail envoy&eacute; pour la confirmation de votre paiement.", 'yproject' ); ?><br><br>
 	<?php endif; ?>
 	
-	- <?php _e( "un e-mail envoy&eacute; par notre partenaire Signsquid. Cet e-mail contient un lien vous permettant de signer le pouvoir pour le contrat d'investissement", 'yproject' ); ?><br><br>
+	- <?php _e( "un e-mail envoy&eacute; par notre partenaire Eversign. Cet e-mail contient un lien vous permettant de signer le pouvoir pour le contrat d'investissement", 'yproject' ); ?><br><br>
 
 <?php else: ?>
 	<?php _e( "Une fois valid&eacute;, vous recevrez un e-mail confirmant votre paiement. Votre contrat d'investissement sera joint &agrave; cet e-mail.", 'yproject' ); ?><br><br>

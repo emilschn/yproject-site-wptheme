@@ -18,7 +18,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php _e( "Le ch&egrave;que ne sera encaiss&eacute; que si la lev&eacute;e de fonds r&eacute;ussit.", 'yproject' ); ?><br><br>
 
 	<?php if ( $page_controler->get_current_investment()->get_session_amount() > 1500 ): ?>
-		<?php _e( "Lorsque nous l'aurons valid&eacute;, vous recevrez un contrat d'investissement &agrave; signer en ligne, via notre partenaire Signsquid.", 'yproject' ); ?><br><br>
+		<?php _e( "Lorsque nous l'aurons valid&eacute;, vous recevrez un contrat d'investissement &agrave; signer en ligne, via notre partenaire Eversign.", 'yproject' ); ?><br><br>
 	<?php endif; ?>
 
 	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="POST" enctype="multipart/form-data">
