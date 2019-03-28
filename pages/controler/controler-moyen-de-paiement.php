@@ -351,8 +351,6 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 		$buffer = '';
 		if ( $this->current_investment->has_token() ) {
 			$buffer = $this->current_investment->get_redirection( 'success', $this->current_investment->get_token() );
-		} elseif ( $this->current_investment->needs_signature() ) {
-			$buffer = home_url( '/paiement-signature' ). '?campaign_id=' .$this->current_campaign->ID;
 		} else {
 			$buffer = home_url( '/paiement-partager/' ). '?campaign_id=' .$this->current_campaign->ID;
 		}

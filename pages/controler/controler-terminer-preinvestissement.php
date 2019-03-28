@@ -192,11 +192,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 					$this->current_investment->set_contract_status( WDGInvestment::$contract_status_investment_validated );
 					$WDGCurrent_User->get_pending_preinvestments( TRUE );
 					ypcf_get_updated_payment_status( $this->current_investment->get_id() );
-					if ( $this->current_investment->needs_signature() ) {
-						wp_redirect( home_url( '/paiement-signature/' ). '?campaign_id=' .$this->current_campaign->ID );
-					} else {
-						wp_redirect( home_url( '/paiement-partager/' ) . '?campaign_id=' . $this->current_campaign->ID );
-					}
+					wp_redirect( home_url( '/paiement-partager/' ) . '?campaign_id=' . $this->current_campaign->ID );
 				}
 			}
 			

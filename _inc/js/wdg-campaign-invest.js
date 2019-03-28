@@ -34,32 +34,6 @@ var WDGInvestPageFunctions = (function($) {
 				} );
 			}
 			
-			if ( $( '#yousign-container' ).length > 0 ) {
-				$( '.db-form .button.next' ).click( function( e ) {
-					e.preventDefault();
-					$( '.db-form .button.next' ).hide();
-					$( '.db-form .loading' ).show();
-					$.ajax( {
-						'type': "POST",
-						'url': ajax_object.ajax_url,
-						'data': {
-							'action': 'get_current_investment_signature_status',
-							'paymentid' : $( '.db-form .button.next' ).data( 'paymentid' )
-						}
-					} ).done( function( result ){
-						if ( result == '1' ) {
-							window.location = $( '.db-form .button.next' ).attr( 'href' );
-						} else {
-							$( '.db-form .loading' ).hide();
-							$( '.db-form .button.next' ).show();
-						}
-					} ).fail( function(){
-						$( '.db-form .loading' ).hide();
-						$( '.db-form .button.next' ).show();
-					} );
-				} );
-			}
-			
 			if ( $( '.mean-payment-button' ).length > 0 ) {
 				$( '.mean-payment-button' ).click( function( e ) {
 					e.preventDefault();
