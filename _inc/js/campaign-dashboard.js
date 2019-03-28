@@ -631,6 +631,18 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		$( '#form-notifications-preinvestment' ).hide();
 		$( '#form-notifications-preinvestment' ).slideDown( 100 );
 	} );
+	
+	/*$( '#show-notifications-investment-30, #show-notifications-investment-100' ).click( function( e ) {
+		e.preventDefault();
+		if ( $( this ).attr( 'id' ) == 'show-notifications-investment-30' ) {
+			$( '#form-notifications-preinvestment #mail_type' ).val( 'investment-30' );
+		}
+		if ( $( this ).attr( 'id' ) == 'show-notifications-investment-100' ) {
+			$( '#form-notifications-preinvestment #mail_type' ).val( 'investment-100' );
+		}
+		$( '#form-notifications-investment' ).hide();
+		$( '#form-notifications-investment' ).slideDown( 100 );
+	} );*/
 };
 
 /**
