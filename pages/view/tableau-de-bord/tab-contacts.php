@@ -93,35 +93,21 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 			);
 			?>
 			
-			<?php if ( TRUE /*$page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_vote*/ ): ?>
-			<a href="#contacts" id="show-notifications-preinvestment" class="button admin-theme"><?php _e("Envoyer les relances de pr&eacute;-investissement","yproject") ?></a>
-			<a href="#contacts" id="show-notifications-prelaunch" class="button admin-theme"><?php _e("Envoyer les relances de pr&eacute;-lancement","yproject") ?></a>
-			<br><br>
-		
-			<form id="form-notifications-preinvestment" action="<?php echo admin_url( 'admin-post.php?action=send_project_vote_notifications'); ?>" method="POST" class="hidden align-left">
-				<b>Notifications de pré-investissement :</b><br><br>
-				Témoignages :<br>
-				<?php wp_editor( '', 'testimony', $editor_params ); ?><br><br>
-				URL de l'image (au moins 590px de large) :<br>
-				<input type="text" name="image_url"><br><br>
-				Description sous l'image :<br>
-				<input type="text" name="image_description"><br><br>
-				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
-				<input type="hidden" id="mail_type" name="mail_type" value="">
-				<input type="submit" name="send_option" value="Envoyer test" class="button admin-theme">
-				<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
-			</form>
+			<?php if ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_vote ): ?>
+				<a href="#contacts" data-mailtype="preinvestment" class="button admin-theme show-notifications"><?php _e("Envoyer les relances de pr&eacute;-investissement","yproject") ?></a>
+				<a href="#contacts" data-mailtype="prelaunch" class="button admin-theme show-notifications"><?php _e("Envoyer les relances de pr&eacute;-lancement","yproject") ?></a>
 			<?php endif; ?>
-			
-			<?php if ( FALSE /*$page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_collecte*/ ): ?>
-			<a href="#contacts" id="show-notifications-investment-30" class="button admin-theme"><?php _e( "Envoyer les relances d'investissement 30 %", 'yproject' ); ?></a>
-				<?php if ( $page_controler->is_campaign_funded() ): ?>
-				<a href="#contacts" id="show-notifications-investment-100" class="button admin-theme"><?php _e( "Envoyer les relances d'investissement 100 %", 'yproject' ); ?></a>
+			<?php if ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_collecte ): ?>
+				<?php if ( FALSE /*$page_controler->is_campaign_funded()*/ ): ?>
+				<a href="#contacts" data-mailtype="investment-100" class="button admin-theme show-notifications"><?php _e( "Envoyer les relances d'investissement 100 %", 'yproject' ); ?></a>
+				<?php else: ?>
+				<a href="#contacts" data-mailtype="investment-30" class="button admin-theme show-notifications"><?php _e( "Envoyer les relances d'investissement 30 %", 'yproject' ); ?></a>
 				<?php endif; ?>
+			<?php endif; ?>
 			<br><br>
 		
-			<form id="form-notifications-investment" action="<?php echo admin_url( 'admin-post.php?action=send_project_investment_notifications'); ?>" method="POST" class="hidden align-left">
-				<b>Notifications d'investissement :</b><br><br>
+			<form id="form-notifications" action="<?php echo admin_url( 'admin-post.php?action=send_project_notifications' ); ?>" method="POST" class="hidden align-left">
+				<b>Champs des notifications :</b><br><br>
 				Témoignages :<br>
 				<?php wp_editor( '', 'testimony', $editor_params ); ?><br><br>
 				URL de l'image (au moins 590px de large) :<br>
@@ -133,7 +119,6 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 				<input type="submit" name="send_option" value="Envoyer test" class="button admin-theme">
 				<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
 			</form>
-			<?php endif; ?>
 		</div>
 	
 	
