@@ -354,6 +354,13 @@ msgstr "Impacts"
 msgid "en savoir plus"
 msgstr "know more"
 
+# THEME - projects/common/progressbar.php
+msgid "projet en cours d'&eacute;valuation"
+msgstr "project under evaluation"
+
+msgid "&eacute;valuation termin&eacute;e"
+msgstr "evaluation completed"
+
 # THEME - projects/single/timeline.php
 msgid "En vote"
 msgstr "Voting"
@@ -507,6 +514,12 @@ msgstr "Previous"
 
 msgid "Etape"
 msgstr "Step"
+
+msgid "WE DO GOOD reconnecte la finance avec le bien commun."
+msgstr "WE DO GOOD connects finance with common good."
+
+msgid "En finan&ccedil;ant l'&eacute;conomie r&eacute;elle, vous pouvez avoir un impact positif sur l'environnement et la soci&eacute;t&eacute;."
+msgstr "When you finance real economy, you have a positive impact on the environment and the society."
 
 msgid "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable à l'investissement et ne prend que 2 petites minutes !"
 msgstr "Evaluation is a pre-hearing phase, before investment. It takes about 2 minutes."
@@ -1013,6 +1026,9 @@ msgstr "The impact"
 
 msgid "La structuration de l'&eacute;quipe"
 msgstr "The team"
+
+msgid ""Le pr&eacute;visionnel financier""
+msgstr "The financial forecast"
 
 msgid "J'ai l'intention d'investir :"
 msgstr "I'm thinking about investing:"
