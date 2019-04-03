@@ -77,9 +77,9 @@ $estimated_turnover = $campaign->estimated_turnover();
 							<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires de ce projet pendant", 'yproject' ) . ' ' .$funding_duration_str. $complementary_text; ?><br>
 							<?php _e("Soit", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro; </span><?php _e( "(brut) selon", 'yproject' ); ?>
 							<?php if ( empty( $is_simulator_shortcode ) ): ?>
-								<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet", 'yproject' )?></a> :
+								<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet :", 'yproject' )?></a>
 							<?php else: ?>
-								<?php _e( "les pr&eacute;visions du porteur de projet", 'yproject' )?> :
+								<?php _e( "les pr&eacute;visions du porteur de projet :", 'yproject' )?>
 							<?php endif; ?>
 						</div>
 					</div>
@@ -90,7 +90,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 						<table>
 							<tr>
 								<td>
-									<?php _e( "Ann&eacute;e" ); ?>
+									<?php _e( "Ann&eacute;e", 'yproject' ); ?>
 								</td>
 								<?php $index = 0; $max_turnover = max( max($estimated_turnover), 1 ); ?>
 								<?php foreach ($estimated_turnover as $i => $value): ?>
@@ -116,8 +116,8 @@ $estimated_turnover = $campaign->estimated_turnover();
 					
 				
 				<div class="project-rewards-alert align-left">
-					<?php echo sprintf( __("Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s.", "yproject"), $campaign->maximum_profit_str() ); ?><br>
-					* <?php _e( "Imposition : Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30% sur le b&eacute;n&eacute;fice r&eacute;alis&eacute;." ); ?>
+					<?php echo sprintf( __( "Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s.", 'yproject' ), $campaign->maximum_profit_str() ); ?><br>
+					* <?php _e( "Imposition : Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30% sur le b&eacute;n&eacute;fice r&eacute;alis&eacute;.", 'yproject' ); ?>
 				</div>
 
 			<?php if ($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>

@@ -8,10 +8,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-03-24 10:19+0100\n"
+"PO-Revision-Date: 2019-04-03 11:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.8.11\n"
+"Language: en_US\n"
 
 # ############################## PROJECT COMMON ################################
 # THEME - projects/common/stats-public.php
@@ -37,11 +38,8 @@ msgstr "Social:"
 msgid "Autres :"
 msgstr "Others:"
 
-msgid ""
-"Ces impacts sont-ils suffisants pour que ce projet soit en financement sur "
-"WEDOGOOD.co ?"
-msgstr ""
-"Are these impacts sufficient for this project to be funded on WEDOGOOD.co?"
+msgid "Ces impacts sont-ils suffisants pour que ce projet soit en financement sur WEDOGOOD.co ?"
+msgstr "Are these impacts sufficient for this project to be funded on WEDOGOOD.co?"
 
 msgid "personnes ont vot&eacute; oui"
 msgstr "persons have voted yes"
@@ -186,6 +184,9 @@ msgstr "contributed"
 msgid "investisseur"
 msgstr "investor"
 
+msgid "investisseurs"
+msgstr "investors"
+
 msgid "investissement"
 msgstr "investment"
 
@@ -218,9 +219,6 @@ msgstr "Contribute"
 
 msgid "Investir"
 msgstr "Invest"
-
-msgid "Voter"
-msgstr "Vote"
 
 # THEME - projects/single/admin.php
 msgid "Tableau de bord"
@@ -281,6 +279,81 @@ msgstr "More information"
 msgid "Partager"
 msgstr "Share"
 
+msgid "impact environnemental"
+msgstr "environment impact"
+
+msgid "impact social"
+msgstr "social impact"
+
+msgid "impact &eacute;conomique"
+msgstr "economic impact"
+
+msgid "&Eacute;valuer"
+msgstr "Evaluate"
+
+msgid "&eacute;valuateur"
+msgstr "evaluator"
+
+msgid "&eacute;valuateurs"
+msgstr "evaluators"
+
+msgid "aucun"
+msgstr "none"
+
+msgid "Objectif minimum"
+msgstr "Minimum goal"
+
+msgid "Restants"
+msgstr "Remaining"
+
+msgid "Restantes"
+msgstr "Remaining"
+
+msgid "jours"
+msgstr "days"
+
+msgid "heures"
+msgstr "hours"
+
+msgid "minutes"
+msgstr "minutes"
+
+msgid "Merci pour votre pr&eacute;-investissement !"
+msgstr "Thank you for your pre-investment"
+
+msgid "Pr&eacute;-investir"
+msgstr "Pre-invest"
+
+msgid "Merci pour votre &eacute;valuation !"
+msgstr "Thank you for your evaluation!"
+
+msgid "Cette lev&eacute;e de fonds passera bient&ocirc;t en phase d'investissement !"
+msgstr "This fundraising campaign will be available for investment soon!"
+
+msgid "Cette lev&eacute;e de fonds est en cours de cl&ocirc;ture !"
+msgstr "This fundraising campaign is being closed!"
+
+msgid "personnes"
+msgstr "people"
+
+msgid "ont investi"
+msgstr "have invested"
+
+msgid "pour propulser ce projet &agrave; impact positif"
+msgstr "to boost this fundraising campaign"
+
+msgid "D&eacute;couvrir d'autres projets"
+msgstr "Discover other projects"
+
+msgid "Malheureusement, ce projet n'a pas &eacute;t&eacute; propuls&eacute;"
+msgstr "Sadly, this project has not succeeded in its fundraising campaign"
+
+msgid "Impacts"
+msgstr "Impacts"
+
+msgid "en savoir plus"
+msgstr "know more"
+
 # THEME - projects/single/timeline.php
 msgid "En vote"
 msgstr "Voting"
@@ -305,17 +378,23 @@ msgstr "Return on investment"
 msgid "Contreparties"
 msgstr "Rewards"
 
-msgid "Si j'investis :"
+msgid "Si j'investissais :"
 msgstr "If I invest:"
 
 msgid "Calculer"
 msgstr "Calculate"
 
-msgid "Je recevrai"
-msgstr "I will receive"
+msgid "Je recevrais :"
+msgstr "I'll receive:"
 
-msgid "du chiffre d'affaires vers&eacute; tous les trimestres."
-msgstr "of the turnover paid quarterly."
+msgid " (pourcentage indicatif)."
+msgstr " (estimated percentage)"
+
+msgid "du chiffre d'affaires de ce projet pendant"
+msgstr "of the project revenue for"
+
+msgid "Il n'est pas possible d'investir plus que l'objectif maximum recherch&eacute;."
+msgstr "It is not possible to invest more than the maximum goal."
 
 msgid "Rendement vis&eacute; :"
 msgstr "Target yield:"
@@ -323,8 +402,17 @@ msgstr "Target yield:"
 msgid "% par an en moyenne*"
 msgstr "% per year on average"
 
+msgid "Soit"
+msgstr "I.e."
+
 msgid "soit"
-msgstr "ie"
+msgstr "i.e."
+
+msgid "(brut) selon"
+msgstr "(gross) according to"
+
+msgid "les pr&eacute;visions du porteur de projet :"
+msgstr "to the project owner’s forecast:"
 
 msgid "en"
 msgstr "in"
@@ -332,13 +420,23 @@ msgstr "in"
 msgid "ans"
 msgstr "years"
 
-msgid ""
-"Ces valeurs sont estim&eacute;es selon les pr&eacute;visions du porteur de "
-"projet. Risque de perte int&eacute;grale de l&apos;investissement. Gain "
-"maximum : x2."
-msgstr ""
-"These values are estimated according to the project's handler previsions. "
-"Risk of integral loss of the investment. Maximum gain: x2."
+msgid "Ann&eacute;e"
+msgstr "Year"
+
+msgid "Retour sur investissement vis&eacute; :"
+msgstr "Targeted return on investment:"
+
+msgid "de votre investissement initial en"
+msgstr "of your investment in"
+
+msgid "votre investissement initial en"
+msgstr "your initial investment in"
+
+msgid "Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s."
+msgstr "Risk of losing the entire investment. Maximum return on investment: %s."
+
+msgid "Imposition : Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30% sur le b&eacute;n&eacute;fice r&eacute;alis&eacute;."
+msgstr "Tax: Flat tax of 30% on the profit if you declare your income in France. Otherwise, your local tax law applies."
 
 # THEME - projects/single/description.php
 msgid "Pitch"
@@ -363,18 +461,12 @@ msgid "Les statistiques de vote et d&apos;investissement du projet"
 msgstr "The project vote and investment statistics"
 
 msgid ""
-"Afin de r&eacute;pondre aux recommandations des autorit&eacute;s "
-"financi&egrave;res sur la pr&eacute;vention du risque repr&eacute;"
+"Afin de r&eacute;pondre aux recommandations des autorit&eacute;s financi&egrave;res sur la pr&eacute;vention du risque repr&eacute;"
 "sent&eacute; par l&apos;investissement participatif,"
-msgstr ""
-"In order to meet the financial authorities recommendations on the prevention "
-"of crowdfunding's risks,"
+msgstr "In order to meet the financial authorities recommendations on the prevention of crowdfunding's risks,"
 
-msgid ""
-"vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la "
-"totalit&eacute; du projet."
-msgstr ""
-"you need to be registered and logged in to access to the full presentation."
+msgid "vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet."
+msgstr "you need to be registered and logged in to access to the full presentation."
 
 # THEME - projects/single/news.php
 msgid "Aucune actualit&eacute; pour le moment."
@@ -396,6 +488,53 @@ msgstr "Comments are closed for now."
 msgid "Poster un commentaire"
 msgstr "Post a comment"
 
+msgid "Connect&eacute;(e) en tant que "
+msgstr "Connected as "
+
+# THEME - projects/single/preinvestment-warning-lightbox.php
+msgid "Continuer"
+msgstr "Next"
+
+msgid "Avant de pr&eacute;-investir"
+msgstr "Before pre-investing"
+
+# THEME - projects/single/voteform-lightbox.php
+msgid "Suivant"
+msgstr "Next"
+
+msgid "Pr&eacute;c&eacute;dent"
+msgstr "Previous"
+
+msgid "Etape"
+msgstr "Step"
+
+msgid "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable à l'investissement et ne prend que 2 petites minutes !"
+msgstr "Evaluation is a pre-hearing phase, before investment. It takes about 2 minutes."
+
+msgid "Les entrepreneurs ont besoin de votre avis sur le projet pour mesurer l'int&eacute;r&ecirc;t qu'il suscite et bien lancer leur lev&eacute;e de fonds."
+msgstr "Project owners need your feedback to mesure the potential interest and prepare their fundraise."
+
+msgid "Je pense que ce projet a un impact positif..."
+msgstr "I think this project has a positive impact..."
+
+msgid "&Eacute;valuation de "
+msgstr "Evaluation of "
+
+msgid "Votre &eacute;valuation est enregistr&eacute;e !"
+msgstr "Your evaluation has been registered!"
+
+msgid "Votre &eacute;valuation a bien &eacute;t&eacute; enregistr&eacute; !"
+msgstr "Your evaluation has been registered!"
+
+msgid "Confirmer et pr&eacute;-investir"
+msgstr "Validate and pre-invest"
+
+msgid "Confirmer"
+msgstr "Validate"
+
+msgid "Donn&eacute;es enregistr&eacute;es ! Merci !"
+msgstr "Parameters saved! Thank you!"
+
 # ################################ INVEST PAGES ################################
 # THEME - template-single-campaign-invest.php
 msgid "Investir sur le projet"
@@ -408,9 +547,7 @@ msgstr "back to the project"
 msgid "Votre pi&egrave;ce d&apos;identit&eacute; est en cours de validation."
 msgstr "Your ID is being validated."
 
-msgid ""
-"Un d&eacute;lai maximum de 24h est n&eacute;cessaire &agrave; cette "
-"validation."
+msgid "Un d&eacute;lai maximum de 24h est n&eacute;cessaire &agrave; cette validation."
 msgstr "A maximum delay of 24h is necessary for the validation."
 
 msgid "Merci de votre compr&eacute;hension."
@@ -519,24 +656,16 @@ msgstr "on a single year, please go to"
 msgid "l&apos;administration de votre entreprise"
 msgstr "your company parameters"
 
-msgid ""
-"sur une ann&eacute;e, vous devez fournir une pi&egrave;ce d&apos;"
-"identit&eacute;."
+msgid "sur une ann&eacute;e, vous devez fournir une pi&egrave;ce d&apos;identit&eacute;."
 msgstr "on a single year, please provide us with your ID."
 
 msgid ""
-"Si il s&apos;agit d&apos;une carte nationale d&apos;identit&eacute;, veillez "
-"&agrave; ce que le fichier contienne le recto et le verso de votre carte."
-msgstr ""
-"If this is an national ID, please check that the file contains the recto and "
-"the verso."
+"Si il s&apos;agit d&apos;une carte nationale d&apos;identit&eacute;, veillez &agrave; ce que le fichier contienne le recto et le "
+"verso de votre carte."
+msgstr "If this is an national ID, please check that the file contains the recto and the verso."
 
-msgid ""
-"Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf et son poids "
-"inf&eacute;rieur &agrave; 2 Mo."
-msgstr ""
-"The type of the file must be jpeg, gif, png or pdf. It should weigh less "
-"than 2Mb."
+msgid "Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf et son poids inf&eacute;rieur &agrave; 2 Mo."
+msgstr "The type of the file must be jpeg, gif, png or pdf. It should weigh less than 2Mb."
 
 msgid "Envoyer"
 msgstr "Send"
@@ -547,12 +676,8 @@ msgstr "Project creation problem"
 msgid "Merci de valider vos informations."
 msgstr "Thank you for checking your information."
 
-msgid ""
-"Merci de saisir 'Bon pour souscription' (sans guillemets) dans le champ "
-"pr&eacute;vu &agrave; cet effet."
-msgstr ""
-"Thank you for typing 'Bon pour souscription' (without the quotes) in the "
-"corresponding field."
+msgid "Merci de saisir 'Bon pour souscription' (sans guillemets) dans le champ pr&eacute;vu &agrave; cet effet."
+msgstr "Thank you for typing 'Bon pour souscription' (without the quotes) in the corresponding field."
 
 msgid "Merci de cocher la case de validation de contrat."
 msgstr "Thank you for checking the contract validation box."
@@ -569,18 +694,13 @@ msgstr "Modify my investment"
 msgid "Modifier mon don"
 msgstr "Modify my contribution"
 
-msgid ""
-"En &eacute;change de ce don, vous avez choisi la contrepartie suivante :"
-msgstr ""
-"In exchange of your contribution, you have chosen the following reward:"
+msgid "En &eacute;change de ce don, vous avez choisi la contrepartie suivante :"
+msgstr "In exchange of your contribution, you have chosen the following reward:"
 
-msgid ""
-"Veuillez v&eacute;rifier ces informations avant de passer &agrave; l&apos;"
-"&eacute;tape suivante."
+msgid "Veuillez v&eacute;rifier ces informations avant de passer &agrave; l&apos;&eacute;tape suivante."
 msgstr "Please check your parameters before going through the next step."
 
-msgid ""
-"Si vous choisissez une contrepartie, pensez &agrave; indiquer votre adresse."
+msgid "Si vous choisissez une contrepartie, pensez &agrave; indiquer votre adresse."
 msgstr "If you choose a reward, please make sure your address is filled."
 
 msgid "Informations personnelles"
@@ -610,9 +730,7 @@ msgstr "Address:"
 msgid "Num&eacute;ro de t&eacute;l&eacute;phone :"
 msgstr "Phone number:"
 
-msgid ""
-"Le num&eacute;ro de t&eacute;l&eacute;phone ne correspond pas &agrave; un "
-"num&eacute;ro fran&ccedil;ais."
+msgid "Le num&eacute;ro de t&eacute;l&eacute;phone ne correspond pas &agrave; un num&eacute;ro fran&ccedil;ais."
 msgstr "The phone number should be input in the french format."
 
 msgid "Informations de l&apos;organisation"
@@ -633,8 +751,7 @@ msgstr "I confirm that these informations are correct."
 msgid "Merci de prendre connaissance du contrat que vous allez accepter :"
 msgstr "Please read the contract you are about to accept:"
 
-msgid ""
-"Voici le pouvoir que vous allez signer pour valider l&apos;investissement :"
+msgid "Voici le pouvoir que vous allez signer pour valider l&apos;investissement :"
 msgstr "Please read the power you will sign to validate your investment:"
 
 msgid "Je donne pouvoir à la société WE DO GOOD :"
@@ -653,8 +770,7 @@ msgid "Confirmer le don"
 msgstr "Contribute"
 
 # THEME - invest/mean-payment.php
-msgid ""
-"La redirection automatique ayant &eacute;chou&eacute;, veuillez cliquer sur"
+msgid "La redirection automatique ayant &eacute;chou&eacute;, veuillez cliquer sur"
 msgstr "The automatic redirection has failed, please click on"
 
 msgid "ce lien"
@@ -673,9 +789,7 @@ msgid "Ch&egrave;que"
 msgstr "Cheque"
 
 # THEME - invest/payment-check.php
-msgid ""
-"Pour investir par ch&egrave;que, merci de suivre les &eacute;tapes "
-"suivantes :"
+msgid "Pour investir par ch&egrave;que, merci de suivre les &eacute;tapes suivantes :"
 msgstr "To invest with a cheque, please follow the following steps:"
 
 msgid "Imprimez le contrat accessible en cliquant sur le lien suivant :"
@@ -696,21 +810,14 @@ msgstr "a cheque payable to"
 msgid "Envoyez-le &agrave; l&apos;adresse suivante :"
 msgstr "Send it to the following address:"
 
-msgid ""
-"Le montant de votre ch&egrave;que sera pris en compte d&egrave;s r&eacute;"
-"ception."
-msgstr ""
-"The amount of your cheque will be included to the campaign when received."
+msgid "Le montant de votre ch&egrave;que sera pris en compte d&egrave;s r&eacute;ception."
+msgstr "The amount of your cheque will be included to the campaign when received."
 
 msgid "Le montant total atteint sera alors de"
 msgstr "The total amount reached will be"
 
-msgid ""
-"Votre ch&egrave;que ne sera transmis au Porteur de Projet qu&apos;en cas de "
-"r&eacute;ussite de la collecte."
-msgstr ""
-"Your cheque will be transmitted to the Project Leader if the campaign "
-"succeeds."
+msgid "Votre ch&egrave;que ne sera transmis au Porteur de Projet qu&apos;en cas de r&eacute;ussite de la collecte."
+msgstr "Your cheque will be transmitted to the Project Leader if the campaign succeeds."
 
 msgid "Dans le cas contraire, il vous sera retourn&eacute;."
 msgstr "Otherwise, we will send it back to you."
@@ -718,17 +825,12 @@ msgstr "Otherwise, we will send it back to you."
 msgid "Pour toute question, contactez-nous &agrave; l&apos;adresse"
 msgstr "If you have any questions, please contact us to the address"
 
-msgid ""
-"Afin d&apos;investir par ch&egrave;que, contactez-nous &agrave; l&apos;"
-"adresse"
+msgid "Afin d&apos;investir par ch&egrave;que, contactez-nous &agrave; l&apos;adresse"
 msgstr "To invest with a cheque, please contact us to the address"
 
 # THEME - invest/payment-wire.php
-msgid ""
-"Afin de proc&eacute;der au virement, voici les informations bancaires dont "
-"vous aurez besoin :"
-msgstr ""
-"To proceed with the bank transfer, these are the bank details you will need:"
+msgid "Afin de proc&eacute;der au virement, voici les informations bancaires dont vous aurez besoin :"
+msgstr "To proceed with the bank transfer, these are the bank details you will need:"
 
 msgid "Titulaire du compte :"
 msgstr "Account owner:"
@@ -737,11 +839,9 @@ msgid "Code unique (pour identifier votre paiement) :"
 msgstr "Unique code (to identify your payment):"
 
 msgid ""
-"Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;"
-"n&eacute;ficiaire' ou 'code destinataire' au moment du virement !"
-msgstr ""
-"You need to specify this code as 'beneficiary label' or 'recipient code' "
-"when you will order the bank transfer!"
+"Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du "
+"virement !"
+msgstr "You need to specify this code as 'beneficiary label' or 'recipient code' when you will order the bank transfer!"
 
 msgid "Une fois le virement effectu&eacute;, cliquez sur"
 msgstr "Once the bank transfer is finished, please click on"
@@ -756,9 +856,7 @@ msgid "Exemple de saisie du code destinataire sur diff&eacute;rentes banques :"
 msgstr "Recipient code input example on different banks:"
 
 # THEME - invest/return.php
-msgid ""
-"Le paiement a d&eacute;j&agrave; &eacute;t&eacute; pris en compte. Merci de "
-"vous rendre sur la page"
+msgid "Le paiement a d&eacute;j&agrave; &eacute;t&eacute; pris en compte. Merci de vous rendre sur la page"
 msgstr "The payment has already been validated. Please go the page"
 
 msgid "Mes investissements"
@@ -771,26 +869,19 @@ msgid "Une fois valid&eacute;, vous recevrez deux e-mails :"
 msgstr "Once validated, you will receive two e-mails:"
 
 msgid ""
-"un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement. "
-"Cet e-mail contient votre code pour signer le pouvoir"
-msgstr ""
-"an e-mail sent by WEDOGOOD to confirm your payment. This e-mail contains "
-"your unique code to sign the power"
+"un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement. Cet e-mail contient votre code pour signer le pouvoir"
+msgstr "an e-mail sent by WEDOGOOD to confirm your payment. This e-mail contains your unique code to sign the power"
 
 msgid ""
-"un e-mail envoy&eacute; par notre partenaire Signsquid. Cet e-mail contient "
-"un lien vous permettant de signer le pouvoir pour le contrat d&apos;"
-"investissement"
+"un e-mail envoy&eacute; par notre partenaire Signsquid. Cet e-mail contient un lien vous permettant de signer le pouvoir pour le "
+"contrat d&apos;investissement"
 msgstr ""
-"an e-mail sent by our partner Signsquid. This e-mail contains a link which "
-"will let you sign the power for the investment contract"
+"an e-mail sent by our partner Signsquid. This e-mail contains a link which will let you sign the power for the investment contract"
 
 msgid ""
-"Une fois valid&eacute;, vous recevrez un e-mail confirmant votre paiement. "
-"Votre contrat d&apos;investissement sera joint &agrave; cet e-mail."
-msgstr ""
-"Once validated, you will receive an e-mail confirming your payment. Your "
-"investment contract will be enclosed to that e-mail."
+"Une fois valid&eacute;, vous recevrez un e-mail confirmant votre paiement. Votre contrat d&apos;investissement sera joint &agrave; "
+"cet e-mail."
+msgstr "Once validated, you will receive an e-mail confirming your payment. Your investment contract will be enclosed to that e-mail."
 
 msgid "Transaction en cours."
 msgstr "Pending transaction."
@@ -801,33 +892,22 @@ msgstr "Please go the page"
 msgid "pour suivre l&apos;&eacute;volution de votre paiement."
 msgstr "to know the status of your payment."
 
-msgid "Suivant"
-msgstr "Next"
-
-msgid ""
-"Vous allez recevoir deux e-mails cons&eacute;cutifs &agrave; l&apos;adresse"
+msgid "Vous allez recevoir deux e-mails cons&eacute;cutifs &agrave; l&apos;adresse"
 msgstr "You are about to receive two consecutive e-mails to the address"
 
-msgid ""
-"pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable"
+msgid "pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable"
 msgstr "please look in the Spam folder of your inbox"
 
-msgid ""
-"Vous allez aussi recevoir un sms contenant le code au num&eacute;ro que vous "
-"nous avez indiqu&eacute; :"
-msgstr ""
-"You will also get an SMS containing the code to the number that was set:"
+msgid "Vous allez aussi recevoir un sms contenant le code au num&eacute;ro que vous nous avez indiqu&eacute; :"
+msgstr "You will also get an SMS containing the code to the number that was set:"
 
 msgid "Vous allez recevoir un e-mail de confirmation de paiement."
 msgstr "You are about to receive a payment confirmation e-mail."
 
 msgid ""
-"Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration "
-"du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de "
-"ce probl&egrave;me."
-msgstr ""
-"However, there was a problem while generating the contract. Our support "
-"teams are working to solve this problem."
+"Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la "
+"r&eacute;solution de ce probl&egrave;me."
+msgstr "However, there was a problem while generating the contract. Our support teams are working to solve this problem."
 
 msgid "Votre investissement est valid&eacute;."
 msgstr "Your investment is validated."
@@ -863,3 +943,144 @@ msgstr "Payment"
 
 msgid "Confirmation"
 msgstr "Confirmation"
+
+# PLUGIN - includes/control/forms/vote.php
+msgid "Sur l'&eacute;conomie (emploi, &eacute;conomie locale, innovation) :"
+msgstr "On the economy (employment, local economy, innovation):"
+
+msgid "Sur l'environnement (ressources, biodiversit&eacute;, pollution) :"
+msgstr "On the environment (resources, biodiversity, pollution):"
+
+msgid "Au niveau social (conditions de vie et de travail, lien social) :"
+msgstr "On a social level (work and living conditions, social bond):"
+
+msgid "Tr&egrave;s faible"
+msgstr "Very weak"
+
+msgid "Faible"
+msgstr "Weak"
+
+msgid "Moyen"
+msgstr "Average"
+
+msgid "Mod&eacute;r&eacute;"
+msgstr "Average"
+
+msgid "Fort"
+msgstr "Strong"
+
+msgid "Tr&egrave;s fort"
+msgstr "Very strong"
+
+msgid "&Eacute;lev&eacute;"
+msgstr "Very strong"
+
+msgid "Tr&egrave;s &eacute;lev&eacute;"
+msgstr "Very strong"
+
+msgid "Autre(s) :"
+msgstr "Other(s):"
+
+msgid "Globalement, ce projet..."
+msgstr "Overall this project..."
+
+msgid "Je n'y crois pas"
+msgstr "I don't buy it"
+
+msgid "Je ne suis pas convaincu(e)"
+msgstr "I'm not convinced"
+
+msgid "Je ne sais pas"
+msgstr "I don't know what to think about it"
+
+msgid "Je pense qu'il a du potentiel"
+msgstr "I think it has some potential"
+
+msgid "J'y crois !"
+msgstr "I believe in it!"
+
+msgid "Je pense qu'investir sur ce projet repr&eacute;sente un risque :"
+msgstr "I think the investment risk in this project is:"
+
+msgid "J'ai besoin de plus d'information concernant ces aspects :"
+msgstr "I need more information about:"
+
+msgid "Le produit / service"
+msgstr "The product/service"
+
+msgid "L'impact soci&eacute;tal"
+msgstr "The impact"
+
+msgid "La structuration de l'&eacute;quipe"
+msgstr "The team"
+
+msgid "J'ai l'intention d'investir :"
+msgstr "I'm thinking about investing:"
+
+msgid "Mes conseils ou encouragements pour le(s) porteur(s) de projet :"
+msgstr "My advices or cheerings to the project owner(s)"
+
+msgid "Je souhaite que mes conseils soient publi&eacute;s sur la page de pr&eacute;sentation du projet"
+msgstr "I would like my advices to be published on the page of the project"
+
+msgid "Vous n'avez pas exprim&eacute; votre note."
+msgstr "You have not rated the project"
+
+msgid "Votre intention d'investissement doit &ecirc;tre un nombre."
+msgstr "The amount you intent to invest should be a number."
+
+msgid "Il y a eu une erreur lors de l'enregistrement."
+msgstr "There was an error while saving your evaluation."
+
+# PLUGIN - includes/control/forms/invest-poll.php
+msgid "Ce qui m'a motiv&eacute;(e) &agrave; investir aujourd'hui&nbsp;: "
+msgstr "What was my motivation to invest today: "
+
+msgid "Ce qui me donnerait envie d'investir sur ce projet&nbsp;: "
+msgstr "What would lead me to invest in this project: "
+
+msgid "Je connais le(s) porteur(s) de projet"
+msgstr "I know the project owner"
+
+msgid "Le projet fait partie d'un secteur qui m'int&eacute;resse"
+msgstr "I'm interested about the sector/the industry"
+
+msgid "Je cherche &agrave; diversifier les placements de mon &eacute;pargne"
+msgstr "I want to diversify my investment portfolio"
+
+msgid "Je cherche &agrave; investir dans un projet &agrave; impact positif"
+msgstr "I want to invest in a project with a positive impact"
+
+msgid "J'ai connu cette lev&eacute;e de fonds via&nbsp;:"
+msgstr "I discovered this fundraise through:"
+
+msgid "L'entrepreneur"
+msgstr "The project owner"
+
+msgid "WE DO GOOD"
+msgstr "WE DO GOOD"
+
+msgid "Un autre investisseur du projet"
+msgstr "Another investor"
+
+msgid "Autre (presse...)"
+msgstr "Other (media…)"
+
+msgid "Je suis arriv&eacute;(e) sur la page de cette lev&eacute;e de fonds via&nbsp;:"
+msgstr "I arrived to this page through:"
+
+msgid "Un mail du porteur de projet"
+msgstr "An email from the project owner"
+
+msgid "Un message priv&eacute; sur Facebook, LinkedIn, Twitter..."
+msgstr "A private message on Facebook, LinkedIn, Twitter, ..."
+
+msgid "Une publication sur les r&eacute;seaux sociaux"
+msgstr "A social media publication"
+
+msgid "La newsletter ou le site de WE DO GOOD"
+msgstr "WE DO GOOD's newsletter or website"
+
+msgid "Un article de presse"
+msgstr "A news article"
+
