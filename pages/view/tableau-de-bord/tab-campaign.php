@@ -209,7 +209,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"id"			=> "new_enable_advice_notifications",
 			"type"			=> "check",
 			"label"			=> __( "Activer les notifications de conseils", 'yproject' ),
-			"value"			=> $page_controler->get_campaign()->has_planned_advice_notification(),
+			"value"			=> ( $page_controler->get_campaign()->has_planned_advice_notification() != FALSE ),
 			'admin_theme'	=> true,
 			'editable'		=> $page_controler->can_access_admin(),
 			'visible'		=> $page_controler->can_access_admin()
