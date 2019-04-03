@@ -1027,7 +1027,7 @@ msgstr "The impact"
 msgid "La structuration de l'&eacute;quipe"
 msgstr "The team"
 
-msgid ""Le pr&eacute;visionnel financier""
+msgid "Le pr&eacute;visionnel financier"
 msgstr "The financial forecast"
 
 msgid "J'ai l'intention d'investir :"
