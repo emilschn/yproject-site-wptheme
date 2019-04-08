@@ -550,7 +550,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	background-color: rgba(0, 0, 0, 0.75);
 	top: 0px;
 	left: 0px;
-	position: absolute;
+	position: fixed;
 	z-index: 4000;
 	width: 100%;
 	height: 100%;
