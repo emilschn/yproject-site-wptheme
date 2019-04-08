@@ -802,30 +802,11 @@ var WDGLightboxFunctions = (function($) {
 			if( $( "#wdg-lightbox-" + sLightboxId ).data( "scrolltop" ) == "1" ){
 				WDGLightboxFunctions.scrollTop( $( ".wdg-lightbox-padder" ) );
 			}
-			/*$('html, body').css({
-				overflow: 'hidden',
-				height: '100%'
-			});
-			$('html, body').animate({scrollTop: 0});
-			if ( !$( "#wdg-lightbox-" + sLightboxId ).hasClass( 'positioned' ) ) {
-				var parentOffset = $( "#wdg-lightbox-" + sLightboxId ).offset();
-				$( "#wdg-lightbox-" + sLightboxId ).css({
-					top: 0 - parentOffset.top,
-					left: 0 - parentOffset.left,
-					width: $(window).width(),
-					height: $(window).height()
-				});
-				$( "#wdg-lightbox-" + sLightboxId ).addClass( 'positioned' );
-			}*/
 			YPUIFunctions.currentLightbox = sLightboxId;
 		},
 		
 		hideAll: function() {
 			$(".wdg-lightbox").hide();
-			/*$('html, body').css({
-				overflow: 'auto',
-				height: 'auto'
-			});*/
 			YPUIFunctions.currentLightbox = '';
 		},
 
@@ -960,10 +941,10 @@ var WDGFormsFunctions = (function($) {
 				var inputID = $( this ).data( 'input-id' );
 				if ( $( this ).hasClass( 'take-picture' ) ) {
 					$( '#' + inputID ).attr( 'accept', 'image/*' );
-					$( '#' + inputID ).attr( 'capture', 'camera' );
+					$( '#' + inputID ).attr( 'capture', '1' );
 				} else {
-					$( '#' + inputID ).attr( 'accept', '*' );
-					$( '#' + inputID ).attr( 'capture', '' );
+					$( '#' + inputID ).removeAttr( 'accept' );
+					$( '#' + inputID ).removeAttr( 'capture' );
 				}
 				$( '#' + inputID ).click();
 			} );
