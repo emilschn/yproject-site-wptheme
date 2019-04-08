@@ -620,16 +620,11 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		});
 	} );
 	
-	$( '#show-notifications-preinvestment, #show-notifications-prelaunch' ).click( function( e ) {
+	$( '.show-notifications' ).click( function( e ) {
 		e.preventDefault();
-		if ( $( this ).attr( 'id' ) == 'show-notifications-preinvestment' ) {
-			$( '#form-notifications-preinvestment #mail_type' ).val( 'preinvestment' );
-		}
-		if ( $( this ).attr( 'id' ) == 'show-notifications-prelaunch' ) {
-			$( '#form-notifications-preinvestment #mail_type' ).val( 'prelaunch' );
-		}
-		$( '#form-notifications-preinvestment' ).hide();
-		$( '#form-notifications-preinvestment' ).slideDown( 100 );
+		$( '#form-notifications #mail_type' ).val( $( this ).data( 'mailtype' ) );
+		$( '#form-notifications' ).hide();
+		$( '#form-notifications' ).slideDown( 100 );
 	} );
 };
 

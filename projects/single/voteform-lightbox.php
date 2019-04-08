@@ -44,10 +44,10 @@ $fields_poll_source = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_grou
 		<div id="vote-form-slide1" class="vote-form-slide align-justify hidden">
 			
 			<div class="vote-progress-bar align-center">
-				<span class="selected">Etape 1</span>
-				<span>Etape 2</span>
-				<span>Etape 3</span>
-				<span>Etape 4</span>
+				<span class="selected"><?php _e( "Etape", 'yproject' ); ?> 1</span>
+				<span><?php _e( "Etape", 'yproject' ); ?> 2</span>
+				<span><?php _e( "Etape", 'yproject' ); ?> 3</span>
+				<span><?php _e( "Etape", 'yproject' ); ?> 4</span>
 			</div>
 			
 			<?php _e( "WE DO GOOD reconnecte la finance avec le bien commun.", 'yproject' ); ?>
@@ -72,10 +72,10 @@ $fields_poll_source = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_grou
 		<div id="vote-form-slide2" class="vote-form-slide align-left hidden">
 			
 			<div class="vote-progress-bar align-center">
-				<span>Etape 1</span>
-				<span class="selected">Etape 2</span>
-				<span>Etape 3</span>
-				<span>Etape 4</span>
+				<span><?php _e( "Etape", 'yproject' ); ?> 1</span>
+				<span class="selected"><?php _e( "Etape", 'yproject' ); ?> 2</span>
+				<span><?php _e( "Etape", 'yproject' ); ?> 3</span>
+				<span><?php _e( "Etape", 'yproject' ); ?> 4</span>
 			</div>
 			
 			<?php foreach ( $fields_risk as $field ): ?>
@@ -93,10 +93,10 @@ $fields_poll_source = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_grou
 		<div id="vote-form-slide3" class="vote-form-slide align-left hidden">
 			
 			<div class="vote-progress-bar align-center">
-				<span>Etape 1</span>
-				<span>Etape 2</span>
-				<span class="selected">Etape 3</span>
-				<span>Etape 4</span>
+				<span><?php _e( "Etape", 'yproject' ); ?> 1</span>
+				<span><?php _e( "Etape", 'yproject' ); ?> 2</span>
+				<span class="selected"><?php _e( "Etape", 'yproject' ); ?> 3</span>
+				<span><?php _e( "Etape", 'yproject' ); ?> 4</span>
 			</div>
 			
 			<?php foreach ( $fields_poll_source as $field ): ?>
@@ -109,10 +109,10 @@ $fields_poll_source = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_grou
 		<div id="vote-form-slide4" class="vote-form-slide align-left hidden">
 			
 			<div class="vote-progress-bar align-center">
-				<span>Etape 1</span>
-				<span>Etape 2</span>
-				<span>Etape 3</span>
-				<span class="selected">Etape 4</span>
+				<span><?php _e( "Etape", 'yproject' ); ?> 1</span>
+				<span><?php _e( "Etape", 'yproject' ); ?> 2</span>
+				<span><?php _e( "Etape", 'yproject' ); ?> 3</span>
+				<span class="selected"><?php _e( "Etape", 'yproject' ); ?> 4</span>
 			</div>
 			
 			<?php foreach ( $field_invest as $field ): ?>

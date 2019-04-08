@@ -164,6 +164,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		}
 		return $buffer;
 	}
+	public function is_campaign_funded() {
+		return $this->campaign->is_funded();
+	}
 	
 /******************************************************************************/
 // CONTEXTE

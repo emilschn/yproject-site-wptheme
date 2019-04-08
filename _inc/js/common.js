@@ -802,7 +802,7 @@ var WDGLightboxFunctions = (function($) {
 			if( $( "#wdg-lightbox-" + sLightboxId ).data( "scrolltop" ) == "1" ){
 				WDGLightboxFunctions.scrollTop( $( ".wdg-lightbox-padder" ) );
 			}
-			$('html, body').css({
+			/*$('html, body').css({
 				overflow: 'hidden',
 				height: '100%'
 			});
@@ -816,16 +816,16 @@ var WDGLightboxFunctions = (function($) {
 					height: $(window).height()
 				});
 				$( "#wdg-lightbox-" + sLightboxId ).addClass( 'positioned' );
-			}
+			}*/
 			YPUIFunctions.currentLightbox = sLightboxId;
 		},
 		
 		hideAll: function() {
 			$(".wdg-lightbox").hide();
-			$('html, body').css({
+			/*$('html, body').css({
 				overflow: 'auto',
 				height: 'auto'
-			});
+			});*/
 			YPUIFunctions.currentLightbox = '';
 		},
 

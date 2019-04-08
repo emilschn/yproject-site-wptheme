@@ -319,6 +319,7 @@ body.template-mon-compte div#container div#content div.authentication-items div.
 		display: block;
 		left: 0px;
 		border-bottom: 3px solid #E1E3E2;
+		z-index: 2;
 	}
 	body.template-mon-compte div#container div#content nav.visible button#swap-menu {
 		left: -2px;

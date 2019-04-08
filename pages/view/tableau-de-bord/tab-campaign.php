@@ -206,6 +206,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 				
 		DashboardUtility::create_field(array(
+			"id"			=> "new_enable_advice_notifications",
+			"type"			=> "check",
+			"label"			=> __( "Activer les notifications de conseils", 'yproject' ),
+			"value"			=> ( $page_controler->get_campaign()->has_planned_advice_notification() != FALSE ),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
+				
+		DashboardUtility::create_field(array(
 			"id"			=> "new_show_comments_for_everyone",
 			"type"			=> "check",
 			"label"			=> __( "Afficher les commentaires sur la page projet pour tous les visiteurs", 'yproject' ),

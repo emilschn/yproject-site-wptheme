@@ -45,7 +45,6 @@ $lightbox_content = '';
 $current_organization = $campaign->get_organization();
 if (!empty($current_organization)) {
 	$wdg_organization = new WDGOrganization( $current_organization->wpref, $current_organization );
-	$page_edit_orga = get_permalink(get_page_by_path('editer-une-organisation')->ID) .'?orga_id='.$current_organization->wpref;
 	
 	$owner_str = $wdg_organization->get_name();
 	$lightbox_content = '<div class="lightbox-organization-separator"></div>
@@ -66,7 +65,6 @@ if (!empty($current_organization)) {
 		<span></span>'.$wdg_organization->get_nationality().'<br />
 		</div>';
 } else {
-	$page_edit_orga = get_permalink(get_page_by_path('parametres-projet')->ID) . '?campaign_id=' . $campaign->ID;
 	$author = get_userdata($campaign->data->post_author);
 	$owner_str = $author->user_firstname . ' ' . $author->user_lastname;
 	if ($owner_str == ' ') { $owner_str = $author->user_login; }
@@ -92,7 +90,7 @@ $lang_list = $campaign->get_lang_list();
 		
 		<h1><?php echo $campaign->data->post_title; ?></h1>
 		
-		<div class="project-banner-info-item align-center author-info" data-link-edit="<?php echo $page_edit_orga; ?>">
+		<div class="project-banner-info-item align-center author-info">
 			<p>
 				<?php _e("Un projet port&eacute; par", 'yproject'); ?> <a href="#project-organization" class="wdg-button-lightbox-open" data-lightbox="project-organization"><?php echo $owner_str; ?></a>
 			</p>
@@ -178,9 +176,9 @@ $lang_list = $campaign->get_lang_list();
 							$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
 							$time_remaining_str_unit = $time_remaining_str_split[0];
 							switch ($time_remaining_str_split[0]) {
-								case 'J': $time_remaining_str .= 'jours'; break;
-								case 'H': $time_remaining_str .= 'heures'; break;
-								case 'M': $time_remaining_str .= 'minutes'; break;
+								case 'J': $time_remaining_str .= __('jours', 'yproject'); break;
+								case 'H': $time_remaining_str .= __('heures', 'yproject'); break;
+								case 'M': $time_remaining_str .= __('minutes', 'yproject'); break;
 							}
 						?>
 							<span><?php echo $time_remaining_str; ?></span><br />
