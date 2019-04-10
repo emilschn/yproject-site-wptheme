@@ -57,7 +57,7 @@ get_header();
 						<label for="org_idnumber"><?php _e('Num&eacute;ro SIRET', 'yproject'); ?> *</label>
 						<input type="text" name="org_idnumber" value="<?php echo filter_input(INPUT_POST, 'org_idnumber'); ?>" /><br />
 
-						<label for="org_rcs"><?php _e('RCS', 'yproject'); ?> *</label>
+						<label for="org_rcs"><?php _e('RCS (Ville)', 'yproject'); ?> *</label>
 						<input type="text" name="org_rcs" value="<?php echo filter_input(INPUT_POST, 'org_rcs'); ?>" /><br />
 
 						<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?> *</label>

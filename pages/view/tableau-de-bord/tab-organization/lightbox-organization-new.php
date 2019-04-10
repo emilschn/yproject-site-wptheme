@@ -67,7 +67,7 @@ global $campaign_id
 		</div>
 
 		<div class="field">
-			<label for="org_rcs"><?php _e( "RCS", 'yproject' ); ?>*</label>
+			<label for="org_rcs"><?php _e( "RCS (Ville)", 'yproject' ); ?>*</label>
 			<div class="field-container">
 				<span class="field-value">
 					<input type="text" name="org_rcs" value="<?php echo filter_input( INPUT_POST, 'org_rcs' ); ?>">

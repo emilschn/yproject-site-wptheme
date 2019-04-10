@@ -99,7 +99,7 @@ $WDGUser_current = WDGUser::current();
 		</div>
 
 		<div class="field">
-			<label for="org_rcs"><?php _e('RCS', 'yproject'); ?>*</label>
+			<label for="org_rcs"><?php _e('RCS (Ville)', 'yproject'); ?>*</label>
 			<div class="field-container">
 				<span class="field-value">
 					<input type="text" name="org_rcs" value="<?php echo $organization_obj->get_rcs(); ?>">
