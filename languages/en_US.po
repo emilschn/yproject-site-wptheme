@@ -339,14 +339,14 @@ msgstr "people"
 msgid "ont investi"
 msgstr "have invested"
 
-msgid "pour propulser ce projet &agrave; impact positif"
+msgid "pour propulser cette lev&eacute;e de fonds"
 msgstr "to boost this fundraising campaign"
 
 msgid "D&eacute;couvrir d'autres projets"
 msgstr "Discover other projects"
 
-msgid "Malheureusement, ce projet n'a pas &eacute;t&eacute; propuls&eacute;"
-msgstr "Sadly, this project has not succeeded in its fundraising campaign"
+msgid "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e"
+msgstr "Sadly, this fundraising campaign has not succeeded"
 
 msgid "Impacts"
 msgstr "Impacts"

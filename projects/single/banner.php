@@ -316,7 +316,7 @@ $lang_list = $campaign->get_lang_list();
 					$invest_amount = $campaign->current_amount();
 					?>
 					<div class="end-sentence">
-						<?php echo $nbinvestors." ". __("personnes","yproject")." ". __("ont investi","yproject") ." ". $invest_amount ." ". __("pour propulser ce projet &agrave; impact positif","yproject");?>
+						<?php echo $nbinvestors." ". __("personnes","yproject")." ". __("ont investi","yproject") ." ". $invest_amount ." ". __("pour propulser cette lev&eacute;e de fonds","yproject");?>
 					</div>
 					<a href="<?php echo home_url( '/les-projets/' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 				
@@ -325,7 +325,7 @@ $lang_list = $campaign->get_lang_list();
 				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>            
 					<div class="end-sentence">
 						<?php if ( $campaign->archive_message() == '' ): ?>
-							<?php _e( "Malheureusement, ce projet n'a pas &eacute;t&eacute; propuls&eacute;", 'yproject' ); ?>
+							<?php _e( "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e", 'yproject' ); ?>
 						<?php else: ?>
 							<?php echo $campaign->archive_message(); ?>
 						<?php endif; ?>
