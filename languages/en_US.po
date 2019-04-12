@@ -193,13 +193,13 @@ msgstr "investment"
 msgid "investi"
 msgstr "invested"
 
-msgid "d&eacute;veloppement &eacute;conomique et de l'emploi"
+msgid "d&eacute;veloppement &eacute;conomique et de l&rsquo;emploi"
 msgstr "economic and job growth"
 
 msgid "r&eacute;silience &eacute;conomique locale"
 msgstr "local economic resilience"
 
-msgid "encouragement de l'innovation"
+msgid "encouragement de l&rsquo;innovation"
 msgstr "innovation promotion"
 
 msgid "gouvernance ouverte et transparente"
@@ -214,7 +214,7 @@ msgstr "work conditions"
 msgid "lien social"
 msgstr "social bonds"
 
-msgid "acc&egrave;s &agrave; l'emploi"
+msgid "acc&egrave;s &agrave; l&rsquo;emploi"
 msgstr "Access to employment"
 
 msgid "conditions de vie"
