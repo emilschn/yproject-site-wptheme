@@ -8,9 +8,7 @@ $menu_project_parts = array (
 );
 
 
-$page_invest = get_page_by_path('investir');
-$campaign_id_param = '?campaign_id=' . $campaign->ID;
-$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
+$invest_url = home_url( '/investir/?campaign_id=' .$campaign->ID. '&amp;invest_start=1' );
 $invest_url_href = home_url( '/connexion/' ) . '?source=project';
 $user_name_str = '';
 
@@ -77,7 +75,7 @@ if (is_user_logged_in()) {
 				break;
 				case ATCF_Campaign::$campaign_status_collecte:
 				?>
-					<?php if ( $campaign->time_remaining_str() != '-' && $campaign->percent_completed( false ) < 100 ): ?>
+					<?php if ( $campaign->is_remaining_time() && $campaign->percent_completed( false ) < 100 ): ?>
 					<a href="<?php echo $invest_url_href; ?>" class="button red">
 						<?php _e( "Investir", 'yproject' ); ?>
 					</a>

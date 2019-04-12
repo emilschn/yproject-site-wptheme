@@ -304,6 +304,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'editable'		=> ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_collecte ) && $page_controler->can_access_admin(),
 			'visible'		=> ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_collecte ) && $page_controler->can_access_admin()
 		));
+
+		DashboardUtility::create_field(array(
+			'id'			=> 'new_can_invest_until_contract_start_date',
+			'type'			=> 'check',
+			'label'			=> __( "Autoriser les investissements jusqu'au d&eacute;marrage du contrat", 'yproject' ),
+			'value'			=> $page_controler->get_campaign()->can_invest_until_contract_start_date(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
 		
 		// Champs personnalisés
 		$nb_custom_fields = $page_controler->get_campaign_author()->wp_user->get('wdg-contract-nb-custom-fields');
