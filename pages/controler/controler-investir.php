@@ -207,8 +207,19 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 				$WDGUser_current = WDGUser::current();
 				// Seul l'investisseur peut annuler, et seulement si c'est un investissement non-démarré
 				$investment_to_cancel = new WDGInvestment( $input_init_with_id );
-				if ( $investment_to_cancel->get_saved_user_id() == $WDGUser_current->get_wpref() && $investment_to_cancel->get_contract_status() == WDGInvestment::$contract_status_not_validated ) {
-					$investment_to_cancel->cancel();
+				if ( $investment_to_cancel->get_contract_status() == WDGInvestment::$contract_status_not_validated ) {
+					$can_cancel = ( $investment_to_cancel->get_saved_user_id() == $WDGUser_current->get_wpref() );
+					if ( !$can_cancel ) {
+						$user_organizations_list = $WDGUser_current->get_organizations_list();
+						if ( $user_organizations_list ) {
+							foreach ( $user_organizations_list as $organization_item ) {
+								$can_cancel = ( $investment_to_cancel->get_saved_user_id() == $organization_item->wpref );
+							}
+						}
+					}
+					if ( $can_cancel ) {
+						$investment_to_cancel->cancel();
+					}
 				}
 			}
 		}
