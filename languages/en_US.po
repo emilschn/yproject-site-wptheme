@@ -193,6 +193,46 @@ msgstr "investment"
 msgid "investi"
 msgstr "invested"
 
+msgid "d&eacute;veloppement &eacute;conomique et de l'emploi"
+msgstr "economic and job growth"
+
+msgid "r&eacute;silience &eacute;conomique locale"
+msgstr "local economic resilience"
+
+msgid "encouragement de l'innovation"
+msgstr "innovation promotion"
+
+msgid "gouvernance ouverte et transparente"
+msgstr "open and transparent governance"
+
+msgid "efficience &eacute;conomique"
+msgstr "economic efficiency"
+
+msgid "conditions de travail"
+msgstr "work conditions"
+
+msgid "lien social"
+msgstr "social bonds"
+
+msgid "acc&egrave;s &agrave; l'emploi"
+msgstr "Access to employment"
+
+msgid "conditions de vie"
+msgstr "life conditions"
+
+msgid "pr&eacute;servation des ressources"
+msgstr "resource conservation"
+
+msgid "protection de la biodiversit&eacute;"
+msgstr "biodiversity protection"
+
+msgid "r&eacute;duction de la pollution"
+msgstr "pollution prevention"
+
+msgid "produit ou service &eacute;coresponsable"
+msgstr "eco-friendly product ou service"
+
+
 # ################################ PROJECT PAGE ################################
 # THEME - commun
 msgid "Inscription"
