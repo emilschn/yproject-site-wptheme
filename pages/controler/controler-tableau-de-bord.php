@@ -367,6 +367,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			$this->campaign_stats[ 'funding' ][ 'start' ] = $this->campaign_stats[ 'vote' ][ 'end' ];
 			$this->campaign_stats[ 'funding' ][ 'end' ] = $this->campaign_stats[ 'vote' ][ 'end' ];
 		}
+		if ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $this->campaign->can_invest_until_contract_start_date() ) {
+			$end_date_when_can_invest_until_contract_start_date = $this->campaign->get_end_date_when_can_invest_until_contract_start_date();
+			$this->campaign_stats[ 'funding' ][ 'end' ] = $end_date_when_can_invest_until_contract_start_date->format( 'Y-m-d' );
+		}
 		$this->campaign_stats[ 'funding' ][ 'nb_investment' ] = array();
 		$this->campaign_stats[ 'funding' ][ 'nb_investment' ][ 'current' ] = max( 0, $investment_results[ 'count_validate_investments' ] );
 		$this->campaign_stats[ 'funding' ][ 'nb_investment' ][ 'current_different' ] = max( 0, $investment_results[ 'count_validate_investors' ] );
