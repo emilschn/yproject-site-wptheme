@@ -162,6 +162,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <?php endif; ?>
 
 <?php echo $page_controler->get_filters_html(); ?>
+	    
+	</div><!-- .padder -->
 		
 <?php
 /******************************************************************************/
@@ -176,52 +178,81 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 // CURRENT PROJECTS
 /******************************************************************************/
 ?>
-		<section class="wdg-component-projects-preview">
-			<div class="project-slider">
-				<div class="block-projects">
 					
 <?php $currentprojects_html = $page_controler->get_currentprojects_html(); ?>
 
 <?php if ( !$currentprojects_html ): ?>
 
-				<?php ob_start(); ?>
-					
-				<?php
-				global $project_id;
-				$currentprojects_list = $page_controler->get_currentprojects_list();
-				$project_list_funding = $currentprojects_list[ 'funding' ];
-				$project_list_vote = $currentprojects_list[ 'vote' ];
-				foreach ( $project_list_funding as $project_post ) {
-					$project_id = $project_post->ID;
-					locate_template( array( "projects/preview.php" ), true, false );
-				}
-				foreach ( $project_list_vote as $project_post ) {
-					$project_id = $project_post->ID;
-					locate_template( array( "projects/preview.php" ), true, false );
-				}
-				?>
+	<?php ob_start(); ?>
+		<div class="padder projects-current">
+			<section class="wdg-component-projects-preview">
+				<div class="project-slider">
+					<div class="block-projects">
+
+					<?php
+					global $project_id;
+					$currentprojects_list = $page_controler->get_currentprojects_list();
+					$project_list_funding = $currentprojects_list[ 'funding' ];
+					if ( count( $project_list_funding ) > 0 ) {
+						foreach ( $project_list_funding as $project_post ) {
+							$project_id = $project_post->ID;
+							locate_template( array( "projects/preview.php" ), true, false );
+						}
+					}
+					$project_list_vote = $currentprojects_list[ 'vote' ];
+					if ( count( $project_list_vote ) > 0 ) {
+						foreach ( $project_list_vote as $project_post ) {
+							$project_id = $project_post->ID;
+							locate_template( array( "projects/preview.php" ), true, false );
+						}
+					}
+					?>
+
+					</div>
+				</div>
+			</section>
+		</div>
+		
+		<?php $project_list_funding_after = $currentprojects_list[ 'funding_after' ]; ?>
+		<?php if ( count( $project_list_funding_after ) > 0 ): ?>
+		<div class="projects-after-end-date">
+			<div class="padder">
+				<section class="wdg-component-projects-preview">
+					<h2 class="standard">/ <?php _e( "Lev&eacute;es de fonds en cl&ocirc;ture", 'yproject' ); ?> /</h2>
+					<div class="projects-after-end-date-precisions"><?php _e( "Ces projets ont &eacute;t&eacute; financ&eacute;s avec succ&egrave;s mais il est toujours possible d'investir jusqu'au d&eacute;marrage de leur contrat de royalties.", 'yproject' ); ?></div>
+
+					<div class="project-slider">
+						<div class="block-projects">
+
+						<?php
+						foreach ( $project_list_funding_after as $project_post ) {
+							$project_id = $project_post->ID;
+							locate_template( array( "projects/preview.php" ), true, false );
+						}
+						?>
+
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+		<?php endif; ?>
 				
-				<?php
-				$cache_currentprojects = ob_get_contents();
-				$page_controler->set_currentprojects_html( $cache_currentprojects );
-				ob_end_clean();
-				?>
+	<?php
+	$cache_currentprojects = ob_get_contents();
+	$page_controler->set_currentprojects_html( $cache_currentprojects );
+	ob_end_clean();
+	?>
 					
 <?php endif; ?>
 
 <?php echo $page_controler->get_currentprojects_html(); ?>
-				
-				</div>
-			</div>
-		</section>
 		
 <?php
 /******************************************************************************/
 // FIN CURRENT PROJECTS
 /******************************************************************************/
 ?>
-	    
-	</div><!-- .padder -->
 		
 	<div>
 		<div class="padder projects-funded">

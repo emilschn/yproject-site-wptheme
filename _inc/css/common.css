@@ -1320,6 +1320,13 @@ body.template-les-projets nav#project-filter select option#environnemental {
 body.template-les-projets nav#project-filter select option#social {
 	background-image: url("../../images/common/impact-social-small.png") ;
 }
+body.template-les-projets .projects-after-end-date {
+	background-color: rgba(51, 51, 51, .1);
+}
+body.template-les-projets .projects-after-end-date .projects-after-end-date-precisions{
+	margin-top: -16px;
+	margin-bottom: 32px;
+}
 body.template-les-projets .wdg-component-projects-preview .project-container {
 	height: 620px;
 	min-width: 240px;
@@ -1338,13 +1345,19 @@ body.template-les-projets .wdg-component-projects-preview .block-projects {
 }
 
 body.template-les-projets div#content > div:last-child {
-	margin-top: 20px;
+	margin-top: -10px;
 	padding-bottom: 30px;
 	background-color: rgba(51, 51, 51, 0.05);
 }
 body.template-les-projets div#content > div:last-child .wdg-component-projects-preview .block-projects {
 	max-height: 550px;
 	margin: auto;
+}
+body.template-les-projets div#content .projects-after-end-date .wdg-component-projects-preview .project-container .project-framed {
+	background-color: #FFFFFF;
+}
+body.template-les-projets div#content .projects-after-end-date .wdg-component-projects-preview .project-container .project-framed::before {
+	border-top: 60px solid rgba(51, 51, 51, 0.1);
 }
 body.template-les-projets div#content > div:last-child .wdg-component-projects-preview .project-container .project-framed {
 	background-color: #FFFFFF;
