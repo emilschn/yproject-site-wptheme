@@ -17,6 +17,7 @@ class YPShortcodeManager {
 		'yproject_register_lightbox',
 		'yproject_statsadvanced_lightbox',
 		'yproject_newproject_lightbox',
+		'wdg_page_auto_refresh',
 		'wdg_project_vote_count',
 		'wdg_project_investors_count',
 		'wdg_project_amount_count',
@@ -211,6 +212,17 @@ class YPShortcodeManager {
 		ob_end_clean();
 		echo do_shortcode('[yproject_lightbox_cornered id="newproject" class="wdg-lightbox-ref"]' .$content . '[/yproject_lightbox_cornered]');
 		echo do_shortcode('[yproject_register_lightbox]');
+	}
+	
+	function wdg_page_auto_refresh($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'nb_minutes' => '2',
+		), $atts );
+
+		$nb_milliseconds = $atts[ 'nb_minutes' ] * 60 * 1000;
+		$code = '<script type="text/javascript">setTimeout("location.reload(true);", ' .$nb_milliseconds. ');</script>';
+		
+		return $code;
 	}
 	
 	function wdg_project_vote_count($atts, $content = '') {
