@@ -1108,8 +1108,8 @@ body input[type=text], body input[type=email], body select {
     width: -moz-calc(100% - 2px);
     width: calc(100% - 2px);
 	margin-left: 0px;
-	padding: 20px 0px;
-	line-height: 30px;
+	padding: 24px 0px;
+	line-height: 32px;
 	font-weight: normal;
 	text-align: center;
 	border: 1px dashed #333;
@@ -1121,10 +1121,18 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3 .field-container input[type=file] + label.file-label span.button.blue {
 	display: inline-block;
 	margin: auto;
-	padding: 5px 20px;
+	padding: 8px 24px;
 	text-transform: uppercase;
 	background: #00879B;
 	color: #FFF;
+}
+
+.db-form.v3 .field.secondary {
+	margin-top: -16px;
+	margin-bottom: 16px;
+}
+.db-form.v3 .field.secondary label {
+	font-size: 11pt;
 }
 
 /* Classes à ajouter dans le back-office WordPress */

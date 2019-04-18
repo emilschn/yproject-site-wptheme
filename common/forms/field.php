@@ -1,8 +1,14 @@
 <?php
 global $wdg_current_field;
 $additional_classes = '';
+$secondary = '';
 if ( isset( $wdg_current_field[ 'admin_theme' ] ) && $wdg_current_field[ 'admin_theme' ] ) {
 	$additional_classes .= 'admin-theme';
+}
+if ( isset( $wdg_current_field[ 'options' ] ) ) {
+	if ( is_array( $wdg_current_field[ 'options' ] ) && $wdg_current_field[ 'options' ][ 'secondary' ] ) {
+		$additional_classes .= 'secondary';
+	}
 }
 ?>
 
