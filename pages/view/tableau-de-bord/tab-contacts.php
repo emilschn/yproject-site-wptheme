@@ -76,15 +76,18 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 	</form>
 </div>
 
+<?php if ( $page_controler->can_add_check() ): ?>
+<div class="align-center margin-height">
+	<a href="#contacts" class="button-contacts-add-check button blue" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a>
+	<br><br>
+	<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/add-check.php'  ), true ); ?>
+</div>
+<?php endif; ?>
+			
 <?php if ( $page_controler->can_access_admin() ): ?>
 	<br><br>
 	<div class="admin-theme-block db-form">
 		<div class="field admin-theme align-center">
-			<?php if ( $page_controler->can_add_check() ): ?>
-			<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a><br><br>
-			<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/add-check.php'  ), true ); ?>
-			<?php endif; ?>
-			
 			<?php
 			$editor_params = array( 
 				'media_buttons' => true,

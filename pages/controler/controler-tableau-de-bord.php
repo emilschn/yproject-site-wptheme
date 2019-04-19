@@ -190,9 +190,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			// - ADMIN
 				$this->can_access_admin()
 			// - en cours de levée
-				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte )
-			// - TODO Levée de fonds continue : validé + contrat pas démarré
-			//	|| ( $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_funded )
+				|| ( $this->campaign->get_campaign()->is_remaining_time() )
 			// - pas validé + dans les 14 jours qui suivent la levée de fonds
 				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive && !$this->campaign->has_retraction_passed() )
 		) {

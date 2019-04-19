@@ -601,17 +601,12 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 				$( '#button-contacts-add-check-search' ).removeClass( 'disabled' );
 				$( '#add-check-search-loading' ).hide();
 				
-				var bShowNextFields = false;
 				var jsonResult = JSON.parse(result);
 				switch ( jsonResult.user_type ) {
-					case 'user': $("#add-check-feedback-found-user").show(); bShowNextFields = true; break;
-					case 'orga': $("#add-check-feedback-found-orga").show(); break;
-					default: $("#add-check-feedback-not-found").show(); bShowNextFields = true; break;
-				}
-				
-				if ( bShowNextFields ) {
-					$( '#fields-user-info' ).show();
-					if ( jsonResult.user_type == 'user' ) {
+					case 'user':
+						$("#add-check-feedback-found-orga").hide();
+						$("#add-check-feedback-found-user").show();
+						$( '#fields-user-info' ).show();
 						$( '#fields-user-info #select-gender' ).val( jsonResult.user_data.user.gender );
 						$( '#fields-user-info #firstname' ).val( jsonResult.user_data.user.firstname );
 						$( '#fields-user-info #lastname' ).val( jsonResult.user_data.user.lastname );
@@ -622,9 +617,87 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 						$( '#fields-user-info #postal_code' ).val( jsonResult.user_data.user.postal_code );
 						$( '#fields-user-info #city' ).val( jsonResult.user_data.user.city );
 						$( '#fields-user-info #select-country' ).val( jsonResult.user_data.user.country );
-					}
+						break;
+						
+					case 'orga':
+						$("#add-check-feedback-found-user").hide();
+						$( '#fields-user-info' ).hide();
+						$("#add-check-feedback-found-orga").show();
+						break;
+						
+					default:
+						$("#add-check-feedback-found-orga").hide();
+						$("#add-check-feedback-not-found").show();
+						$( '#fields-user-info' ).show();
+						$( '#fields-user-info #select-gender' ).val( '' );
+						$( '#fields-user-info #firstname' ).val( '' );
+						$( '#fields-user-info #lastname' ).val( '' );
+						$( '#fields-user-info #field-birthday .adddatepicker' ).datepicker( 'setDate',  '01/01/1970' );
+						$( '#fields-user-info #birthplace' ).val( '' );
+						$( '#fields-user-info #select-nationality' ).val( '' );
+						$( '#fields-user-info #address' ).val( '' );
+						$( '#fields-user-info #postal_code' ).val( '' );
+						$( '#fields-user-info #city' ).val( '' );
+						$( '#fields-user-info #select-country' ).val( '' );
+						break;
 				}
 			});
+		} );
+		
+		$( 'form#form-contacts-add-check select#select-user_type' ).change( function() {
+			if ( $( 'form#form-contacts-add-check select#select-user_type' ).val() != '' ) {
+				if ( $( 'form#form-contacts-add-check select#select-user_type' ).val() != 'user' ) {
+					$( '#fields-save-info' ).hide();
+					$( '#fields-orga-select' ).show();
+				} else {
+					$( '#fields-orga-select' ).hide();
+					$( '#fields-save-info' ).show();
+				}
+			} else {
+				$( '#fields-orga-select' ).hide();
+				$( '#fields-save-info' ).hide();
+			}
+		} );
+		
+		$( 'form#form-contacts-add-check select#select-orga-id' ).change( function() {
+			if ( $( 'form#form-contacts-add-check select#select-orga-id' ).val() != '' ) {
+				if ( $( 'form#form-contacts-add-check select#select-orga-id' ).val() == 'new-orga' ) {
+					// Vider les champs d'infos d'orga
+					$( '#fields-user-info #org_name' ).val( '' );
+					$( '#fields-user-info #org_email' ).val( '' );
+					$( '#fields-user-info #org_website' ).val( '' );
+					$( '#fields-user-info #org_legalform' ).val( '' );
+					$( '#fields-user-info #org_idnumber' ).val( '' );
+					$( '#fields-user-info #org_rcs' ).val( '' );
+					$( '#fields-user-info #org_capital' ).val( '' );
+					$( '#fields-user-info #org_address_number' ).val( '' );
+					$( '#fields-user-info #select-org_address_number_comp' ).val( '' );
+					$( '#fields-user-info #org_address' ).val( '' );
+					$( '#fields-user-info #org_postal_code' ).val( '' );
+					$( '#fields-user-info #org_city' ).val( '' );
+					$( '#fields-user-info #select-org_nationality' ).val( '' );
+				} else {
+					// TODO : Remplir les champs
+					$( '#fields-user-info #org_name' ).val( '' );
+					$( '#fields-user-info #org_email' ).val( '' );
+					$( '#fields-user-info #org_website' ).val( '' );
+					$( '#fields-user-info #org_legalform' ).val( '' );
+					$( '#fields-user-info #org_idnumber' ).val( '' );
+					$( '#fields-user-info #org_rcs' ).val( '' );
+					$( '#fields-user-info #org_capital' ).val( '' );
+					$( '#fields-user-info #org_address_number' ).val( '' );
+					$( '#fields-user-info #select-org_address_number_comp' ).val( '' );
+					$( '#fields-user-info #org_address' ).val( '' );
+					$( '#fields-user-info #org_postal_code' ).val( '' );
+					$( '#fields-user-info #org_city' ).val( '' );
+					$( '#fields-user-info #select-org_nationality' ).val( '' );
+				}
+				$( '#fields-orga-info' ).show();
+				$( '#fields-save-info' ).show();
+			} else {
+				$( '#fields-orga-info' ).hide();
+				$( '#fields-save-info' ).hide();
+			}
 		} );
 	}
 };
