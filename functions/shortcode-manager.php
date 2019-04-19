@@ -237,6 +237,19 @@ class YPShortcodeManager {
 		}
 	}
 	
+	function wdg_project_vote_intention_count($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'project' => '',
+		), $atts );
+
+		if ( isset( $atts[ 'project' ] ) && is_numeric( $atts[ 'project' ] ) ) {
+			global $wpdb;
+			$table_name = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
+			$sum_vote_intention = $wpdb->get_var( "SELECT sum(invest_sum) FROM ".$table_name." WHERE post_id = ". $atts[ 'project' ] );
+			return $sum_vote_intention;
+		}
+	}
+	
 	function wdg_project_investors_count($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
