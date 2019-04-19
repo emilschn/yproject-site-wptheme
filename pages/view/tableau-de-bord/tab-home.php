@@ -650,7 +650,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 
 	<h2><?php _e( 'Porte-monnaie', 'yproject' ); ?></h2>
 	<?php // Porte-monnaie LW ?>
-	<?php $lemonway_balance = $page_controler->get_campaign_organization()->get_lemonway_balance(); ?>
+	<?php $lemonway_balance = $page_controler->get_campaign_organization()->get_lemonway_balance( 'campaign' ); ?>
 	Vous disposez de <?php echo $lemonway_balance; ?>&euro; dans votre porte-monnaie.<br /><br />
 
 	<?php if ( $page_controler->can_access_admin() && $lemonway_balance > 0 ): ?>

@@ -56,7 +56,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				'admin_theme'	=> true,
 				"editable"		=> true
 			));
-		}
 
 
 		$terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
@@ -77,7 +76,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		}
 		?>
 
-		<div class="field">
+		<div class="field admin-theme">
 			<label for="categories"><?php _e("Cat&eacute;gorie", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_categories"><?php
 				include_once ABSPATH . 'wp-admin/includes/template.php';
@@ -91,7 +90,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			?></span>
 		</div>
 
-		<div class="field">
+		<div class="field admin-theme">
 			<label for="activities"><?php _e("Secteur d&apos;activit&eacute;", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_activities"><?php
 				wp_terms_checklist(
@@ -105,7 +104,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		</div>
 
 		<?php if ( $terms_type ): ?>
-		<div class="field">
+		<div class="field admin-theme">
 			<label for="types"><?php _e("Type de projet", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_types"><?php
 				wp_terms_checklist(
@@ -120,7 +119,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 
 		<?php if ( $terms_partners ): ?>
-		<div class="field">
+		<div class="field admin-theme">
 			<label for="partners"><?php _e("Partenaires", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_partners"><?php
 				wp_terms_checklist(
@@ -135,7 +134,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 
 		<?php if ( $terms_tousnosprojets ): ?>
-		<div class="field">
+		<div class="field admin-theme">
 			<label for="tousnosprojets"><?php _e("Cat&eacute;gorie sur le site tousnosprojets.fr", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_tousnosprojets"><?php
 				wp_terms_checklist(
@@ -150,6 +149,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 
 		<?php
+		}
+		
 		$locations = atcf_get_locations();
 		DashboardUtility::create_field(array(
 			"id"			=> "new_project_location",
@@ -196,12 +197,42 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 				
 		DashboardUtility::create_field(array(
-			"id"	=> "new_minimum_goal_display",
-			"type"	=> "select",
-			"label"	=> __( "Affichage de l'objectif minimum", 'yproject' ),
-			"value"	=> $page_controler->get_campaign()->get_minimum_goal_display(),
+			"id"			=> "new_minimum_goal_display",
+			"type"			=> "select",
+			"label"			=> __( "Affichage de l'objectif minimum", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->get_minimum_goal_display(),
 			"options_id"	=> array( ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_max, ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ),
 			"options_names"	=> array( "Afficher l'objectif minimum", "Afficher l'objectif maximum et un seuil de validation" )
+		));
+				
+		DashboardUtility::create_field(array(
+			"id"			=> "new_enable_advice_notifications",
+			"type"			=> "check",
+			"label"			=> __( "Activer les notifications de conseils", 'yproject' ),
+			"value"			=> ( $page_controler->get_campaign()->has_planned_advice_notification() != FALSE ),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
+				
+		DashboardUtility::create_field(array(
+			"id"			=> "new_show_comments_for_everyone",
+			"type"			=> "check",
+			"label"			=> __( "Afficher les commentaires sur la page projet pour tous les visiteurs", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->get_show_comments_for_everyone(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
+				
+		DashboardUtility::create_field(array(
+			"id"			=> "new_hide_investors",
+			"type"			=> "check",
+			"label"			=> __( "Masquer les investisseurs sur la page projet", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->get_hide_investors(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
 		));
 
 		DashboardUtility::create_field(array(
@@ -235,6 +266,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 
 		DashboardUtility::create_field(array(
+			'id'			=> 'new_has_overridden_wire_constraints',
+			'type'			=> 'check',
+			'label'			=> __( "Paiement par virement sans contrainte de temps", 'yproject' ),
+			'value'			=> $page_controler->get_campaign()->has_overridden_wire_constraints(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
+
+		DashboardUtility::create_field(array(
 			'id'			=> 'new_archive_message',
 			'type'			=> 'text',
 			'label'			=> __( "Message de projet archiv&eacute;", 'yproject' ),
@@ -262,6 +303,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'admin_theme'	=> true,
 			'editable'		=> ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_collecte ) && $page_controler->can_access_admin(),
 			'visible'		=> ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_collecte ) && $page_controler->can_access_admin()
+		));
+
+		DashboardUtility::create_field(array(
+			'id'			=> 'new_can_invest_until_contract_start_date',
+			'type'			=> 'check',
+			'label'			=> __( "Autoriser les investissements jusqu'au d&eacute;marrage du contrat", 'yproject' ),
+			'value'			=> $page_controler->get_campaign()->can_invest_until_contract_start_date(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
 		));
 		
 		// Champs personnalisés

@@ -12,7 +12,7 @@ body.template-mon-compte div#container div#content {
 	padding: 80px 0px 10px;
 }
 body.template-mon-compte div#container div#content .item-body-tab > h2 {
-	margin: 5px 0;
+	margin: 8px 0px 16px;
 	font-size: 30px;
 	text-transform: uppercase;
 	text-align: center;
@@ -59,6 +59,11 @@ body.template-mon-compte div#container div#content nav ul.nav-menu li.selected a
 	border-left: 4px solid #D3EAE9;
 	width: calc( 100% - 19px );
 }
+
+body.template-mon-compte div#container div#content nav button#swap-menu {
+	display: none;
+}
+
 body.template-mon-compte div#container div#content main {
 	display: table-cell;
     vertical-align: top;
@@ -69,13 +74,68 @@ body.template-mon-compte div#container div#content .db-form.v3 {
 	max-width: 600px;
 	margin: 0px auto;
 }
+body.template-mon-compte div#container div#content #item-body-wallet .wdg-message {
+	margin: 16px auto;
+	padding: 16px;
+	text-transform: none;
+	text-align: justify;
+}
+body.template-mon-compte div#container div#content #item-body-wallet .wdg-message.error:before {
+	top: 0px;
+	left: 40px;
+}
 body.template-mon-compte div#container div#content a.download-certificate {
 	display: inline-block;
 	padding: 16px 32px;
 }
+body.template-mon-compte div#container div#content #tax-exemption-preview {
+	margin-bottom: 16px;
+	padding: 16px;
+	border: 1px solid;
+	text-align: left;
+	background: #FFF;
+}
 body.template-mon-compte div#container div#content h3.has-margin-top {
 	margin-top: 24px;
 }
+
+
+body.template-mon-compte div#container div#content .investment-synthesis {
+	display: hidden;
+	font-size: 20px;
+	margin-bottom: 24px;
+}
+body.template-mon-compte div#container div#content .investment-synthesis-pictos {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-bottom: 24px;
+}
+body.template-mon-compte div#container div#content .investment-synthesis-pictos.hidden {
+	display: none;
+}
+body.template-mon-compte div#container div#content .investment-synthesis-pictos > div {
+	width: 264px;
+	margin-bottom: 8px;
+	padding: 24px;
+	background: #FFFFFF;
+	text-align: right;
+}
+body.template-mon-compte div#container div#content .investment-synthesis-pictos > div img {
+	float: left;
+}
+body.template-mon-compte div#container div#content .investment-synthesis-pictos > div span.data {
+	font-size: 32px;
+	color: #93626D;
+}
+body.template-mon-compte div#container div#content .investment-synthesis-pictos > div span.txt {
+	clear: both;
+	font-size: 12px;
+	display: inline-block;
+	margin-top: 8px;
+}
+
+
 body.template-mon-compte div#container div#content .investment-item {
 	display: flex;
 	justify-content: space-around;
@@ -94,37 +154,174 @@ body.template-mon-compte div#container div#content .investment-item .single-line
 body.template-mon-compte div#container div#content .investment-item .single-line.publish {
 	color: #8BC79C;
 }
+body.template-mon-compte div#container div#content .investment-item .single-line.canceled {
+	color: #8BC79C;
+}
 body.template-mon-compte div#container div#content .investment-item .single-line.pending {
 	color: #cfb7b7;
 }
 body.template-mon-compte div#container div#content .investment-item .single-line.publish.campaign-archive {
 	color: #333333;
 }
+body.template-mon-compte div#container div#content .investment-item a.button {
+	padding: 16px 16px;
+}
 
-body.template-mon-compte table.authentication-list td.title {
-	padding: 10px;
-	background: #FFFFFF;
+body.template-mon-compte div#container div#content .vote-intentions h4 {
+	margin: 0px 0px 16px;
+	font-weight: bold;
 }
-body.template-mon-compte table.authentication-list td.title.col {
-	width: 20%
-}
-body.template-mon-compte table.authentication-list td.inside {
-	padding: 10px;
-	vertical-align: middle;
-	background: #E1E3E2;
-}
-body.template-mon-compte table.authentication-list td a {
+body.template-mon-compte div#container div#content .vote-intentions a.button.red {
 	display: inline-block;
-	width: 100%;
-	padding: 5px 0px;
-	white-space: normal;
+	width: 250px;
+	margin-bottom: 32px;
+	padding: 16px 16px;
+	text-align: center;
 }
-body.template-mon-compte table.authentication-list tfoot td {
-	max-width: 192px;
+
+body.template-mon-compte div#container div#content .button-view-royalties-list {
+	position: relative;
+	top: -20px;
+	height: 42px;
+	background: #FFF;
+}
+body.template-mon-compte div#container div#content .button-hide-royalties-list {
+	position: relative;
+	top: 36px;
+	height: 42px;
+	background: #FFF;
+}
+body.template-mon-compte div#container div#content .royalties-list {
+	background: #FFF;
+	margin-top: -24px;
+	padding: 16px;
+}
+body.template-mon-compte div#container div#content .royalties-list > div {
+	font-weight: bold;
+}
+body.template-mon-compte div#container div#content .royalties-list hr {
+	width: 95%;
+	border: 1px solid #F4F2F2
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table {
+	margin: auto;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td {
+	text-align: left;
+	padding-bottom: 4px;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.align-right {
+	text-align: right;
+	padding-right: 16px;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.align-right:first-letter {
+	text-transform: uppercase;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td:nth-child(2) {
+	padding-left: 16px;
+	border-left: 4px solid #FFF;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr.year-title td {
+	padding-top: 8px;
+	font-weight: bold;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr.year-title td:nth-child(1) {
+	width: 49%;
+	padding-left: 40px;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr.year-title td span {
+	font-weight: normal;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status {
+	border-left: 4px solid #F4F2F2;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.late {
+	border-left: 4px solid #EACDCB;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.finished {
+	border-left: 4px solid #8BC79C;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items {
+    display: -webkit-flex;
+	display: flex;
+    -webkit-justify-content: space-around; 
+    justify-content: space-around;
+	margin: 32px 0px;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item {
+	width: 300px;
+}
+
+.msg-authentication-alert:before, body.template-mon-compte div#container div#content div.authentication-items div.authentication-item.alert:before {
+	position: relative;
+	display: block;
+	content: "!";
+	font-size: 20px;
+	width: 40px;
+	height: 40px;
+	margin-top: -40px;
+	top: 20px;
+	left: 20px;
+	float: right;
+	line-height: 40px;
+	border: 1px solid #FFF;
+	border-radius: 50%;
+	text-align: center;
+	background: #ea4f51;
+	color: #FFF;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item div {
+	margin-bottom: 16px;
+	padding: 8px;
+	text-align: center;
+	background: #FFF;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item div div {
+	font-weight: bold;
+	text-align: center;
+}
+
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item a {
+	display: block;
+	width: 100%;
+	padding: 16px 0px;
+	text-align: center;
 }
 
 @media screen and (max-width: 900px) {
-	body.template-mon-compte div#container div#content nav, body.template-mon-compte div#container div#content main {
+	body.template-mon-compte div#container div#content main {
 		display: block;
+	}
+	body.template-mon-compte div#container div#content nav {
+		position: absolute;
+		left: -223px;
+	}
+	body.template-mon-compte div#container div#content nav button#swap-menu {
+		position: absolute;
+		display: block;
+		left: 0px;
+		top: 0px;
+		width: 64px;
+		height: 64px;
+		margin-left: 223px;
+		padding: 0px;
+		border: 0px;
+		font-size: 40px;
+		background: #E1E3E2;
+		text-align: center;
+		cursor: pointer;
+	}
+	body.template-mon-compte div#container div#content nav.visible {
+		display: block;
+		left: 0px;
+		border-bottom: 3px solid #E1E3E2;
+		z-index: 2;
+	}
+	body.template-mon-compte div#container div#content nav.visible button#swap-menu {
+		left: -2px;
 	}
 }

@@ -7,6 +7,22 @@ JSHelpers = ( function( $ ) {
 	return {
 		urldecode: function(str) {
 			return decodeURIComponent( ( str + '' ).replace( /\+/g, '%20' ) );
+		},
+		
+		formatNumber: function( nInput, sSuffix ) {
+			nInput = Math.round( nInput * 100 ) / 100;
+			var buffer = nInput.toString();
+			// Gestion milliers
+			if ( nInput > 1000 ) {
+				var nThousands = Math.floor( nInput / 1000 );
+				buffer = nThousands + ' ';
+				var nRest = nInput - nThousands * 1000;
+				var sPad = "000";
+				buffer += sPad.substring( 0, sPad.length - nRest.toString().length ) + nRest;
+			}
+			buffer = buffer.split( '.' ).join( ',' );
+			buffer += ' ' + sSuffix;
+			return buffer;
 		}
 	};
 } ) ( jQuery );
@@ -107,6 +123,7 @@ YPUIFunctions = (function($) {
 									'<li class="hidden"><a href="https://www.wedogood.co/'+aProjectList[i].post_name+'">'+aProjectList[i].post_title+'<span class="hidden">'+aProjectList[i].post_title+'</span></a></li>'
 								);
 							}
+							$("#submenu-search-input").trigger( 'keyup' );
 						});
 					}
 				}
@@ -258,14 +275,18 @@ YPUIFunctions = (function($) {
 				$(sContainer).show();
 			});
 			
-			if ($("#cookies-alert").length > 0) {
-				$("#cookies-alert-close").click(function() {
-					$("#cookies-alert").hide();
+			if ( $( '#cookies-alert' ).length > 0 ) {
+				var hidecookiealert = YPUIFunctions.getCookie( 'hidecookiealert' );
+				if ( hidecookiealert === '1' ) {
+					$( '#cookies-alert' ).hide();
+				}
+				$( '#cookies-alert-close' ).click(function() {
+					$( '#cookies-alert' ).hide();
 					var date = new Date();
 					var days = 100;
 					date.setTime(date.getTime()+(days*24*60*60*1000));
-					var expires = "; expires="+date.toGMTString();
-					document.cookie = "hidecookiealert=1"+expires+"; path=/";
+					var expires = '; expires=' + date.toGMTString();
+					document.cookie = 'hidecookiealert=1' + expires + '; path=/';
 				});
 			}
 
@@ -781,30 +802,11 @@ var WDGLightboxFunctions = (function($) {
 			if( $( "#wdg-lightbox-" + sLightboxId ).data( "scrolltop" ) == "1" ){
 				WDGLightboxFunctions.scrollTop( $( ".wdg-lightbox-padder" ) );
 			}
-			$('html, body').css({
-				overflow: 'hidden',
-				height: '100%'
-			});
-			$('html, body').animate({scrollTop: 0});
-			if ( !$( "#wdg-lightbox-" + sLightboxId ).hasClass( 'positioned' ) ) {
-				var parentOffset = $( "#wdg-lightbox-" + sLightboxId ).offset();
-				$( "#wdg-lightbox-" + sLightboxId ).css({
-					top: 0 - parentOffset.top,
-					left: 0 - parentOffset.left,
-					width: $(window).width(),
-					height: $(window).height()
-				});
-				$( "#wdg-lightbox-" + sLightboxId ).addClass( 'positioned' );
-			}
 			YPUIFunctions.currentLightbox = sLightboxId;
 		},
 		
 		hideAll: function() {
 			$(".wdg-lightbox").hide();
-			$('html, body').css({
-				overflow: 'auto',
-				height: 'auto'
-			});
 			YPUIFunctions.currentLightbox = '';
 		},
 
@@ -848,6 +850,10 @@ var WDGFormsFunctions = (function($) {
 			if ( $( '.db-form.v3 input[type=checkbox]' ).length > 0 ) {
 				$( '.db-form.v3 input[type=checkbox]' ).each( function(){
 					if ( !$( this ).hasClass( 'rate' ) && !$( this ).parent().hasClass( 'selectit' ) ) {
+						// Permet de cliquer sur des liens qui sont dans des div de checkbox (ex : cgu...)
+						$( this ).parent().children( 'a' ).click( function( e ) {
+							e.stopImmediatePropagation();
+						} );
 						$( this ).parent().click( function( e ) {
 							if ( $( this ).data( 'keepdefault' ) != '1' ) {
 								e.preventDefault();
@@ -883,11 +889,11 @@ var WDGFormsFunctions = (function($) {
 		
 		initFileInput: function() {
 			$( '.field-file input' ).each( function() {
-				var $input = $( this ),
-				$label = $input.next( 'label' ),
-				labelVal = $label.html();
+				var self = $( this ),
+				label_element = self.next( 'label' ),
+				labelVal = label_element.html();
 
-				$input.on( 'change', function( e ) {
+				self.on( 'change', function( e ) {
 					var fileName = '';
 
 					if( this.files && this.files.length > 1 )
@@ -896,11 +902,17 @@ var WDGFormsFunctions = (function($) {
 						fileName = e.target.value.split( '\\' ).pop();
 
 					if( fileName ) {
-						$label.find( 'span' ).html( fileName );
-						$label.find( 'span.hide-when-filled' ).hide();
+						label_element.find( 'span' ).html( fileName );
+						label_element.find( 'span.hide-when-filled' ).hide();
 					} else {
-						$label.html( labelVal );
+						label_element.html( labelVal );
 					}
+					
+					// Exécutés quand chargement de fichier appelé depuis lightbox
+					label_element.show();
+					label_element.css( 'display', 'inline-block' );
+					label_element.next( '.displayed-responsive' ).hide();
+					WDGLightboxFunctions.hideAll();
 				} );
 			} );
 			
@@ -921,6 +933,20 @@ var WDGFormsFunctions = (function($) {
 				var inputId = $( this ).data( 'input' );
 				$( '#' + inputId ).prop( 'files', e.originalEvent.dataTransfer.files );
 				$( '#' + inputId ).trigger( 'change' );
+			} );
+			
+			$( 'button.take-picture, button.import-file' ).click( function( e ) {
+				e.stopPropagation();
+				e.preventDefault();
+				var inputID = $( this ).data( 'input-id' );
+				if ( $( this ).hasClass( 'take-picture' ) ) {
+					$( '#' + inputID ).attr( 'accept', 'image/*' );
+					$( '#' + inputID ).attr( 'capture', '1' );
+				} else {
+					$( '#' + inputID ).removeAttr( 'accept' );
+					$( '#' + inputID ).removeAttr( 'capture' );
+				}
+				$( '#' + inputID ).click();
 			} );
 		},
 		

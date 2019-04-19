@@ -263,15 +263,17 @@
 }
 
 .wdg-component-projects-preview .project-container .project-framed .project-title{
-    width: 80%;
-    text-align: center;
     position: relative;
+    width: 80%;
+	max-height: 40px;
+	overflow: hidden;
     top: 20px;
-    text-transform: uppercase;
+	margin: 15px auto;
+	margin-left: 30px;/* pour tenir compte du coin coupé du cartouche*/
     font-size: 13pt;
     font-weight: bold;
-	margin: 15px auto;
-        margin-left: 30px;/* pour tenir compte du coin coupé du cartouche*/
+    text-transform: uppercase;
+    text-align: center;
 }
 
 .wdg-component-projects-preview .project-container .project-framed .project-img{
@@ -503,6 +505,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
     letter-spacing: 0.12em;
     font-weight: bold;
     text-align: right;
+	z-index: 2;
 }
 .progress-bar .vote-status { 
     display: -webkit-flex;
@@ -547,7 +550,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	background-color: rgba(0, 0, 0, 0.75);
 	top: 0px;
 	left: 0px;
-	position: absolute;
+	position: fixed;
 	z-index: 4000;
 	width: 100%;
 	height: 100%;
@@ -644,7 +647,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 
 .wdg-lightbox .wdg-lightbox-button-close {
 	position: absolute;
-	right: 0px;
+	right: 8px;
 	margin-top: -45px;
 }
 #wdg-lightbox-editOrga .wdg-lightbox-padder .wdg-lightbox-button-close {
@@ -1105,8 +1108,8 @@ body input[type=text], body input[type=email], body select {
     width: -moz-calc(100% - 2px);
     width: calc(100% - 2px);
 	margin-left: 0px;
-	padding: 20px 0px;
-	line-height: 30px;
+	padding: 24px 0px;
+	line-height: 32px;
 	font-weight: normal;
 	text-align: center;
 	border: 1px dashed #333;
@@ -1118,10 +1121,18 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3 .field-container input[type=file] + label.file-label span.button.blue {
 	display: inline-block;
 	margin: auto;
-	padding: 5px 20px;
+	padding: 8px 24px;
 	text-transform: uppercase;
 	background: #00879B;
 	color: #FFF;
+}
+
+.db-form.v3 .field.secondary {
+	margin-top: -16px;
+	margin-bottom: 16px;
+}
+.db-form.v3 .field.secondary label {
+	font-size: 11pt;
 }
 
 /* Classes à ajouter dans le back-office WordPress */
@@ -1185,7 +1196,7 @@ div.project-rewards-content {
 	padding: 0px;
 }
 div.project-rewards-content div.project-rewards-padder {
-        position: relative;
+	position: relative;
 }
 div.project-rewards-content div.project-rewards-padder p.half-form-count input {
 	height: 56px;
@@ -1195,11 +1206,11 @@ div.project-rewards-content div.project-rewards-padder p.half-form-count input {
 	padding-left: 10px;
 }
 div.project-rewards-content div.project-rewards-padder table tbody {
-        font-family: Trebuchet MS, sans-serif;
+	font-family: Trebuchet MS, sans-serif;
 }
 div.project-rewards-content div.project-rewards-padder p.half-form-count span, div.project-rewards-content div.project-rewards-padder span:nth-child(2), div.project-rewards-content div.project-rewards-padder span:nth-child(4) {
 	font-size: 16pt;
-        letter-spacing: 0.125em;
+	letter-spacing: 0.125em;
 }
 div.project-rewards-content div.project-rewards-padder p.half-form-count span.input-suffix {
 	display: inline-block;
@@ -1218,16 +1229,14 @@ div.project-rewards-content div.project-rewards-padder p {
 	margin: 10px auto 30px;
 }
 div.project-rewards-content span.roi_percent_user, div.project-rewards-content span.roi_amount_user {
-        font-weight: bold;
+	font-size: 22px;
+	font-weight: bold;
 	color: #93626D;
 }
-div.project-rewards-content span.roi_amount_user {
-        font-size: 16pt;
-}
 div.project-rewards-content div.roi_amount_base {
-        height: 5px;
-        margin-bottom: 5px;
-        background-color: #333;
+	height: 5px;
+	margin-bottom: 5px;
+	background-color: #333;
 }
 div.project-rewards-content table {
     margin: 30px auto 15px;
@@ -1238,11 +1247,14 @@ div.project-rewards-content table:before {
 	border-top: 1px solid;
 }
 div.project-rewards-content table tr:first-child {
+    font-size: 12px;
+	font-family: Trebuchet MS,sans-serif;
     font-weight: bold;
 }
 div.project-rewards-content table tr td {
     min-width: 75px;
     text-align: center;
+	vertical-align: bottom;
 }
 div.project-rewards-content table tr td > div {
 	margin: auto;
@@ -1255,6 +1267,7 @@ div.project-rewards-content table tr td > div > div {
 	vertical-align: bottom;
 }
 div.project-rewards-content table tr:last-child td div {
+	margin-bottom: 4px;
 	color: #93626D;
 }
 div.project-rewards-content table tr:last-child td span.roi_amount_user_container {
@@ -1278,7 +1291,8 @@ div.project-rewards-content div.project-rewards-padder div.arrow-end {
 	border-left: 14px solid #333;
 	border-bottom: 6px solid transparent;
 }
-div.project-rewards-content div.project-rewards-alert span.small-alert {
+div.project-rewards-content div.project-rewards-alert {
+	margin-top: 10px;
 	font-style: italic;
 	font-size: 11px;
 }

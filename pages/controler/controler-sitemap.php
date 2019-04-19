@@ -5,16 +5,38 @@ $template_engine->set_controler( new WDG_Page_Controler_Sitemap() );
 class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	
 	public function __construct() {
-		parent::__construct();
-		$this->hourly_call();
-		$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
-		$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
-		if ( $this->is_daily_call_time() || $input_force_daily_call == '1' ) {
-			$this->daily_call();
-		} else if ( $this->is_summary_call_time() || $input_force_summary_call == '1' ) {
-			$this->summary_call();
-		}
+		$input_queue = filter_input( INPUT_GET, 'queue' );
+		$input_rss = filter_input( INPUT_GET, 'rss' );
+		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
 		
+		if ( !empty( $input_queue ) && $input_queue == '1' ) {
+			$nb_done = WDGQueue::execute_next( 10 );
+			exit( $nb_done . ' queued actions executed.' );
+			
+		} else if ( !empty( $input_rss ) && $input_rss == '1' ) {
+			$input_campaign = filter_input( INPUT_GET, 'campaign' );
+			if ( !empty( $input_campaign ) ) {
+				WDGCronActions::make_campaign_xml( $input_campaign );
+			} else {
+				WDGCronActions::make_projects_rss();
+			}
+			
+		} else if ( !empty( $input_make_finished_xml ) && $input_make_finished_xml == '1' ) {
+			WDGCronActions::make_projects_rss( FALSE );
+			
+		} else {
+			$this->hourly_call();
+			
+			$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
+			$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
+			if ( $this->is_daily_call_time() || $input_force_daily_call == '1' ) {
+				$this->daily_call();
+			} else if ( $this->is_summary_call_time() || $input_force_summary_call == '1' ) {
+				$this->summary_call();
+			}
+			
+		}
+		exit();
 	}
 	
 	private function hourly_call() {
@@ -26,12 +48,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	private function daily_call() {
 		$this->rebuild_sitemap();
 		WDG_Cache_Plugin::initialize_home_stats();
-		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
-		if ( empty( $input_make_finished_xml ) ) {
-			WDGCronActions::make_projects_rss();
-		} else {
-			WDGCronActions::make_projects_rss( FALSE );
-		}
+		WDGCronActions::make_projects_rss();
 		WDGCronActions::send_notifications();
 	}
 	
@@ -132,6 +149,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/epargne-positive/'	=> '0.9',
 			// 0.8
 			'/financement/entreprises/'				=> '0.8',
+			'/financement/royalties/levee-de-fonds-privee/'	=> '0.8',
 //			'/financement/solutions/'				=> '0.8',
 			'/investissement/comparatif-risque/'	=> '0.8',
 			'/investissement/start-up/'				=> '0.8',
@@ -148,6 +166,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/financement/non-dilutif/'						=> '0.7',
 			'/financement/offres/love-money/'				=> '0.7',
 			'/financement/rapide/'							=> '0.7',
+			'/financement/royalties/'						=> '0.7',
 			'/financement/royalty-crowdfunding/'			=> '0.7',
 //			'/financement/solutions/innovation/'			=> '0.7',
 //			'/financement/solutions/investissements/'		=> '0.7',
@@ -160,9 +179,11 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/guide/'										=> '0.6',
 			'/a-propos/statistiques/'						=> '0.6',
 			'/a-propos/vision/'								=> '0.6',
+			'/financement/conditions/'						=> '0.6',
 //			'/financement/entreprises/B2C/'					=> '0.6',
 			'/financement/entreprises/start-up/love-money/'	=> '0.6',
 			'/financement/label-croissance-verte/'			=> '0.6',
+			'/financement/simulateur-taux-de-royalties/'	=> '0.6',
 			'/investissement/comparatif-capital-pret-royalties/'		=> '0.6',
 			'/investissement/impact-investing/evaluation-des-impacts/'	=> '0.6',
 			'/solutions/'									=> '0.6',
@@ -173,6 +194,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/solutions/incubateurs-accelerateurs/'			=> '0.6',
 			// 0.5
 			// PROJETS
+			'/a-propos/statistiques/rapport-activite-2018/'			=> '0.5',
 //			'/financement/offres/'									=> '0.5',
 //			'/financement/royalty-crowdfunding/accompagnement/'		=> '0.5',
 //			'/investissement/cooperatives/'							=> '0.5',
@@ -180,7 +202,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			// 0.4
 			'/financement/offres/amorcage-crowdfunding/'			=> '0.4',
 			'/financement/offres/crowdfunding-accompagnement/'		=> '0.4',
-			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
+//			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
 			// 0.3
 			'/a-propos/espace-presse/'			=> '0.3',
 			'/a-propos/partenaires/'			=> '0.3',
@@ -190,6 +212,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/a-propos/contact/'				=> '0.2',
 			'/a-propos/equipe/'					=> '0.2',
 			'/a-propos/recrutement/'			=> '0.2',
+			'/a-propos/statistiques/rapport-activite-2017/'			=> '0.2',
 			// 0.1
 			'/placement-royalties/'				=> '0.1',
 			'/a-propos/'						=> '0.1',

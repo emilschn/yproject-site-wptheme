@@ -155,6 +155,8 @@ if (isset($_GET['delete_post_id'])){
 							<div class="entry">
 								<?php the_content( __( "Lire la suite...", 'yproject' ) ); ?>
 							</div>
+							
+							<div class="clear"></div>
 
 							<span class="comments"><?php comments_popup_link( __( 'Aucun commentaire &#187;', 'yproject' ), __( '1 commentaire &#187;', 'yproject' ), __( '% commentaires &#187;', 'yproject' ) ); ?></span></p>
 						</div>

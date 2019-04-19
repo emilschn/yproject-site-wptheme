@@ -257,7 +257,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 				<strong><?php _e( "Nouveau contrat compl&eacute;mentaire :", 'yproject' ); ?></strong><br><br>
 				<div class="field">
-					<label><?php _e( "Titre (sera repris sur Signsquid)", 'yproject' ); ?></label>
+					<label><?php _e( "Titre (sera repris sur Eversign)", 'yproject' ); ?></label>
 					<div class="field-container">
 						<span class="field-value"><input type="text" name="contract_model_name" /></span>
 					</div>
@@ -291,7 +291,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 				<strong><?php _e( "Edition du contrat compl&eacute;mentaire :", 'yproject' ); ?></strong><br><br>
 				<div class="field">
-					<label><?php _e( "Titre (sera repris sur Signsquid)", 'yproject' ); ?></label>
+					<label><?php _e( "Titre (sera repris sur Eversign)", 'yproject' ); ?></label>
 					<div class="field-container">
 						<span class="field-value"><input type="text" name="contract_edit_model_name" /></span>
 					</div>
@@ -400,7 +400,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		//Si il n'y en a pas : enregistrer un mandat lié
 		?>
 		<?php
-		$page_controler->get_campaign_organization()->register_lemonway();
+		$page_controler->get_campaign_organization()->register_lemonway( TRUE );
 		if ( empty( $saved_mandates_list ) ) {
 			$keep_going = false;
 			if ( !$page_controler->get_campaign_organization()->add_lemonway_mandate() ) {

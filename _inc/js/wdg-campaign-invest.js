@@ -185,12 +185,6 @@ var WDGInvestPageFunctions = (function($) {
 					$( '#invest_error_interval' ).show(); 		
 					bValidInput = false; 		
 			    }
-				if ( $( '#input_invest_user_max_amount_without_alert' ).length > 0 && bValidInput ) {
-					if ( parseInt( $( 'form input#amount' ).val() ) > $( '#input_invest_user_max_amount_without_alert' ).val() ) {
-						$( '#invest_error_alert' ).text( $( '#input_invest_user_max_amount_without_alert_reason' ).val() );
-						$( '#invest_error_alert' ).show();
-					}
-				}
 			}
 			
 			var ratioOfPercentRoundStr = 0;
@@ -221,10 +215,13 @@ var WDGInvestPageFunctions = (function($) {
 		updateOrgaFields: function( idOrga ) {
 			$( 'form #fieldgroup-orga-info #org_name' ).val( $( 'form #org_init_name_' + idOrga ).val() );
 			$( 'form #fieldgroup-orga-info #org_email' ).val( $( 'form #org_init_email_' + idOrga ).val() );
+			$( 'form #fieldgroup-orga-info #org_website' ).val( $( 'form #org_init_website_' + idOrga ).val() );
 			$( 'form #fieldgroup-orga-info #org_legalform' ).val( $( 'form #org_init_legalform_' + idOrga ).val() );
 			$( 'form #fieldgroup-orga-info #org_idnumber' ).val( $( 'form #org_init_idnumber_' + idOrga ).val() );
 			$( 'form #fieldgroup-orga-info #org_rcs' ).val( $( 'form #org_init_rcs_' + idOrga ).val() );
 			$( 'form #fieldgroup-orga-info #org_capital' ).val( $( 'form #org_init_capital_' + idOrga ).val() );
+			$( 'form #fieldgroup-orga-info #org_address_number' ).val( $( 'form #org_init_address_number_' + idOrga ).val() );
+			$( 'form #fieldgroup-orga-info #select-org_address_number_comp' ).val( $( 'form #org_init_address_number_comp_' + idOrga ).val() );
 			$( 'form #fieldgroup-orga-info #org_address' ).val( $( 'form #org_init_address_' + idOrga ).val() );
 			$( 'form #fieldgroup-orga-info #org_postal_code' ).val( $( 'form #org_init_postal_code_' + idOrga ).val() );
 			$( 'form #fieldgroup-orga-info #org_city' ).val( $( 'form #org_init_city_' + idOrga ).val() );

@@ -7,6 +7,7 @@ class WDG_Page_Controler {
 	private $page_meta_keywords;
 	private $show_user_details_confirmation;
 	private $show_user_pending_preinvestment;
+	private $show_user_pending_investment;
 	private $show_user_needs_authentication;
 	
 	public function __construct() {
@@ -21,6 +22,7 @@ class WDG_Page_Controler {
 		
 		if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
 			$this->init_show_user_pending_preinvestment();
+			$this->init_show_user_pending_investment();
 			$this->init_show_user_details_confirmation();
 			$this->init_show_user_needs_authentication();
 		}
@@ -147,10 +149,17 @@ class WDG_Page_Controler {
 	public function init_show_user_pending_preinvestment() {
 		if ( !isset( $this->show_user_pending_preinvestment ) ) {
 			$this->show_user_pending_preinvestment = false;
-			global $post;
-			if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' && $post->post_name != 'terminer-preinvestissement' ) {
+			if ( is_user_logged_in() ) {
 				$WDG_user_current = WDGUser::current();
+				if ( $WDG_user_current->is_admin() ) {
+					$input_user_id = filter_input( INPUT_GET, 'override_current_user' );
+					if ( !empty( $input_user_id ) ) {
+						$WDG_user_current = new WDGUser( $input_user_id );
+					}
+				}
+				
 				if ( $WDG_user_current->has_pending_preinvestments() ) {
+					ypcf_debug_log( 'WDG_Page_Controler::init_show_user_pending_preinvestment has_pending_preinvestments' );
 					$this->show_user_pending_preinvestment = $WDG_user_current->get_first_pending_preinvestment();
 				}
 				if ( !$this->show_user_pending_preinvestment ) {
@@ -158,6 +167,7 @@ class WDG_Page_Controler {
 					foreach ( $user_organizations_list as $organization_item ) {
 						$WDGUserOrga = new WDGUser( $organization_item->wpref );
 						if ( $WDGUserOrga->has_pending_preinvestments() ) {
+							ypcf_debug_log( 'WDG_Page_Controler::init_show_user_pending_preinvestment ORGA has_pending_preinvestments' );
 							$this->show_user_pending_preinvestment = $WDGUserOrga->get_first_pending_preinvestment();
 							break;
 						}
@@ -173,11 +183,49 @@ class WDG_Page_Controler {
 	
 	
 //******************************************************************************
+	public function init_show_user_pending_investment() {
+		if ( !isset( $this->show_user_pending_investment ) ) {
+			$this->show_user_pending_investment = false;
+			if ( is_user_logged_in() ) {
+				$WDG_user_current = WDGUser::current();
+				if ( $WDG_user_current->is_admin() ) {
+					$input_user_id = filter_input( INPUT_GET, 'override_current_user' );
+					if ( !empty( $input_user_id ) ) {
+						$WDG_user_current = new WDGUser( $input_user_id );
+					}
+				}
+				
+				if ( $WDG_user_current->is_lemonway_registered() ) {
+					if ( $WDG_user_current->has_pending_not_validated_investments() ) {
+						$this->show_user_pending_investment = $WDG_user_current->get_first_pending_not_validated_investment();
+					}
+				}
+				if ( !$this->show_user_pending_investment ) {
+					$user_organizations_list = $WDG_user_current->get_organizations_list();
+					if ( $user_organizations_list ) {
+						foreach ( $user_organizations_list as $organization_item ) {
+							$WDGOrga = new WDGOrganization( $organization_item->wpref );
+							if ( $WDGOrga->is_registered_lemonway_wallet() && $WDGOrga->has_pending_not_validated_investments() ) {
+								$this->show_user_pending_investment = $WDGOrga->get_first_pending_not_validated_investment();
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public function get_show_user_pending_investment() {
+		return $this->show_user_pending_investment;
+	}
+	
+	
+//******************************************************************************
 	public function init_show_user_needs_authentication() {
 		if ( !isset( $this->show_user_needs_authentication ) ) {
 			$this->show_user_needs_authentication = false;
-			global $post;
-			if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' && $post->post_name != 'mon-compte' ) {
+			if ( is_user_logged_in() ) {
 				$WDG_user_current = WDGUser::current();
 				$this->show_user_needs_authentication = !$WDG_user_current->is_lemonway_registered();
 			}

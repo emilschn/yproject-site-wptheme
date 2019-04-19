@@ -14,6 +14,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $must_show_lightbox_welcome;
 	private $return_lemonway_card;
 	private $form_add_check;
+	private $emails;
 	/**
 	 * @var ATCF_Campaign
 	 */
@@ -84,7 +85,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->form_add_check = new WDG_Form_Dashboard_Add_Check( $this->current_campaign->ID, $this->current_user->get_wpref() );
 		
 		$current_organization = $this->get_campaign_organization();
-		$current_organization->send_kyc();
+		if ( isset($_POST['authentify_lw']) ) {
+			$current_organization->send_kyc();
+		}
 		$current_organization->submit_transfer_wallet_lemonway();
 		$this->return_lemonway_card = WDGFormProjects::return_lemonway_card();
 	}
@@ -124,6 +127,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			$this->can_access_author = ( $this->author_user->get_wpref() == $this->current_user->get_wpref() );
 			$campaign_organization_item = $this->campaign->get_organization();
 			$this->campaign_organization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+			$this->emails = WDGWPREST_Entity_Project::get_emails( $this->campaign->get_api_id() );
 			
 			if ( file_exists( __DIR__ . '/../../../../plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->get_url() . '.zip' ) ) {
 				$this->campaign_contracts_url = home_url( 'wp-content/plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->get_url() . '.zip' );
@@ -153,6 +157,22 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	}
 	public function get_campaign_contracts_url() {
 		return $this->campaign_contracts_url;
+	}
+	public function get_campaign_emails() {
+		$buffer = array();
+		foreach ( $this->emails as $email ) {
+			$item = array(
+				'recipient'		=> $email->recipient,
+				'date'			=> $email->date,
+				'template_id'	=> $email->template,
+				'template_str'	=> NotificationsAPI::$description_str_by_template_id[ $email->template ]
+			);
+			array_push( $buffer, $item );
+		}
+		return $buffer;
+	}
+	public function is_campaign_funded() {
+		return $this->campaign->is_funded();
 	}
 	
 	
@@ -381,6 +401,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			$this->campaign_stats[ 'funding' ][ 'start' ] = $this->campaign_stats[ 'vote' ][ 'end' ];
 			$this->campaign_stats[ 'funding' ][ 'end' ] = $this->campaign_stats[ 'vote' ][ 'end' ];
 		}
+		if ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $this->campaign->can_invest_until_contract_start_date() ) {
+			$end_date_when_can_invest_until_contract_start_date = $this->campaign->get_end_date_when_can_invest_until_contract_start_date();
+			$this->campaign_stats[ 'funding' ][ 'end' ] = $end_date_when_can_invest_until_contract_start_date->format( 'Y-m-d' );
+		}
 		$this->campaign_stats[ 'funding' ][ 'nb_investment' ] = array();
 		$this->campaign_stats[ 'funding' ][ 'nb_investment' ][ 'current' ] = max( 0, $investment_results[ 'count_validate_investments' ] );
 		$this->campaign_stats[ 'funding' ][ 'nb_investment' ][ 'current_different' ] = max( 0, $investment_results[ 'count_validate_investors' ] );
@@ -396,12 +420,14 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ] = array();
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'current' ] = array();
 		foreach ( $investment_results[ 'payments_data' ] as $investment_result ) {
-			$investment_date = new DateTime( $investment_result[ 'date' ] );
-			$investment_item = array(
-				'date' => $investment_date->format( 'Y-m-d\Th:i' ),
-				'sum' => max( 0, $investment_result[ 'amount' ] )
-			);
-			array_push( $this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'current' ], $investment_item );
+			if ( $investment_result[ 'status' ] == 'publish' ) {
+				$investment_date = new DateTime( $investment_result[ 'date' ] );
+				$investment_item = array(
+					'date' => $investment_date->format( 'Y-m-d\Th:i' ),
+					'sum' => max( 0, $investment_result[ 'amount' ] )
+				);
+				array_push( $this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'current' ], $investment_item );
+			}
 		}
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ] = array();
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $this->campaign_stats[ 'funding' ][ 'start' ] ] = round( $this->campaign_stats[ 'goal' ] * 35 / 100 ); // J0
@@ -414,6 +440,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		
 		// Stats
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'age' ] = max( 0, $investment_results[ 'average_age' ] );
+		if ( is_nan( $this->campaign_stats[ 'funding' ][ 'stats' ][ 'age' ] ) ) {
+			$this->campaign_stats[ 'funding' ][ 'stats' ][ 'age' ] = 0;
+		}
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'percent_men' ] = max( 0, $investment_results[ 'percent_male' ] );
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'percent_women' ] = max( 0, $investment_results[ 'percent_female' ] );
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'invest_average' ] = max( 0, $investment_results[ 'average_invest' ] );

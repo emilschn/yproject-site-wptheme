@@ -24,6 +24,7 @@ body input, body select {
 .aligncenter, .align-center { text-align: center; }
 .alignleft, .align-left { text-align: left; }
 .align-justify { text-align: justify; }
+.align-right { text-align: right; }
 
 .center-lg { max-width: 1300px; margin: auto; }
 .only-inf997 { display: none; }
@@ -32,7 +33,7 @@ body input, body select {
 .uppercase { text-transform: uppercase; }
 
 .margin-height { margin: 8px 0px; }
-
+.margin-bottom { margin-bottom: 16px; }
 
 h2.standard {
     text-align: center;
@@ -135,6 +136,12 @@ button.red {
 .wdg-message.error {
 	background: #EACDCB;
 	color: #333333;
+}
+.wdg-message.notification {
+	padding: 16px;
+	text-transform: none;
+	background: #333;
+	color: #FFFFFF;
 }
 
 
@@ -989,11 +996,15 @@ footer > .footer-container > div > div.aligncenter {
 	position: fixed;
 	z-index: 3;
 	bottom: 0px;
-	width: 100%;
-	padding: 10px 0px;
+	width: calc( 100% - 200px );
+	padding: 24px 100px;
+	font-size: 18px;
 }
 #cookies-alert-close {
-	padding: 5px;
+	width: 240px;
+	height: 56px;
+	margin: 24px auto 0px;
+	padding: 0px;
 }
 
 @media screen and (min-width: 998px) and (max-width: 1140px) {
@@ -1309,6 +1320,13 @@ body.template-les-projets nav#project-filter select option#environnemental {
 body.template-les-projets nav#project-filter select option#social {
 	background-image: url("../../images/common/impact-social-small.png") ;
 }
+body.template-les-projets .projects-after-end-date {
+	background-color: rgba(51, 51, 51, .1);
+}
+body.template-les-projets .projects-after-end-date .projects-after-end-date-precisions{
+	margin-top: -16px;
+	margin-bottom: 32px;
+}
 body.template-les-projets .wdg-component-projects-preview .project-container {
 	height: 620px;
 	min-width: 240px;
@@ -1327,13 +1345,19 @@ body.template-les-projets .wdg-component-projects-preview .block-projects {
 }
 
 body.template-les-projets div#content > div:last-child {
-	margin-top: 20px;
+	margin-top: -10px;
 	padding-bottom: 30px;
 	background-color: rgba(51, 51, 51, 0.05);
 }
 body.template-les-projets div#content > div:last-child .wdg-component-projects-preview .block-projects {
 	max-height: 550px;
 	margin: auto;
+}
+body.template-les-projets div#content .projects-after-end-date .wdg-component-projects-preview .project-container .project-framed {
+	background-color: #FFFFFF;
+}
+body.template-les-projets div#content .projects-after-end-date .wdg-component-projects-preview .project-container .project-framed::before {
+	border-top: 60px solid rgba(51, 51, 51, 0.1);
 }
 body.template-les-projets div#content > div:last-child .wdg-component-projects-preview .project-container .project-framed {
 	background-color: #FFFFFF;

@@ -94,35 +94,49 @@ var WDGProjectViewer = (function($) {
 					if (isNaN(inputVal) || inputVal < 0) inputVal = 0;
 					var percentProject = Number($("input#roi_percent_project").val());
 					var goalProject = Number($("input#roi_goal_project").val());
+					var maxProfit = Number($("input#roi_maximum_profit").val());
+					
+					if ( inputVal > goalProject ) {
+						$( '#error-maximum' ).show( 100 );
+					} else {
+						$( '#error-maximum' ).hide( 100 );
+						
+						var maxRoi = inputVal * maxProfit;
+						var maxRoiRemaining = maxRoi;
+						var ratioOfGoal = inputVal / goalProject;
+						var amountOfGoal = 0;
+						var totalTurnover = 0;
+						var nbYears = 0;
+						var ratioOfPercent = ratioOfGoal * percentProject;
+						var ratioOfPercentRound = Math.round(ratioOfPercent * 100000) / 100000;
+						var ratioOfPercentRoundStr = ratioOfPercentRound.toString().replace('.', ',');
+						$("span.roi_percent_user").text(ratioOfPercentRoundStr);
 
-					var ratioOfGoal = inputVal / goalProject;
-					var amountOfGoal = 0;
-					var totalTurnover = 0;
-					var nbYears = 0;
-					var ratioOfPercent = ratioOfGoal * percentProject;
-					var ratioOfPercentRound = Math.round(ratioOfPercent * 100000) / 100000;
-					var ratioOfPercentRoundStr = ratioOfPercentRound.toString().replace('.', ',');
-					$("span.roi_percent_user").text(ratioOfPercentRoundStr);
-
-					$("div.project-rewards-content table tr:first-child td span.hidden").each(function(index) {
-						nbYears++;
-						var estTO = Number($(this).text());
-						totalTurnover += estTO;
-						var amountOfTO = estTO * ratioOfPercent / 100;
-						amountOfGoal += amountOfTO;
-						var amountOfTORound = Math.round(amountOfTO * 100) / 100;
-						var amountOfTORoundStr = amountOfTORound.toString().replace('.', ',');
-						$("span.roi_amount_user" + index).text(amountOfTORoundStr);
-					});
-					var amountOfGoalRound = Math.round(amountOfGoal * 100) / 100;
-					var amountOfGoalRoundStr = amountOfGoalRound.toString().replace('.', ',');
-					$("span.roi_amount_user").text(amountOfGoalRoundStr);
-					var ratioOnInput = Math.round(amountOfGoalRound / inputVal * 100) / 100;
-					var ratioOnInputStr = isNaN(ratioOnInput) ? '...' : ratioOnInput.toString().replace('.', ',');
-					$("span.roi_ratio_on_total").text(ratioOnInputStr);
-					var roiPercentTotal = Math.round( ( ( amountOfGoalRound / inputVal ) - 1 ) * 100 * 100 ) / 100;
-					var roiPercentTotalStr = isNaN(roiPercentTotal) ? '...' : roiPercentTotal.toString().replace('.', ',');
-					$("span.roi_percent_total").text(roiPercentTotalStr);
+						$("div.project-rewards-content table tr:first-child td span.hidden").each(function(index) {
+							nbYears++;
+							var estTO = Number($(this).text());
+							totalTurnover += estTO;
+							var amountOfTO = estTO * ratioOfPercent / 100;
+							// Gestion du plafond de versement
+							if ( maxRoiRemaining < amountOfTO ) {
+								amountOfTO = maxRoiRemaining;
+							}
+							maxRoiRemaining -= amountOfTO;
+							amountOfGoal += amountOfTO;
+							var amountOfTORound = Math.round(amountOfTO * 100) / 100;
+							var amountOfTORoundStr = amountOfTORound.toString().replace('.', ',');
+							$("span.roi_amount_user" + index).text(amountOfTORoundStr);
+						});
+						var amountOfGoalRound = Math.round(amountOfGoal * 100) / 100;
+						var amountOfGoalRoundStr = amountOfGoalRound.toString().replace('.', ',');
+						$("span.roi_amount_user").text(amountOfGoalRoundStr);
+						var ratioOnInput = Math.round(amountOfGoalRound / inputVal * 100) / 100;
+						var ratioOnInputStr = isNaN(ratioOnInput) ? '...' : ratioOnInput.toString().replace('.', ',');
+						$("span.roi_ratio_on_total").text(ratioOnInputStr);
+						var roiPercentTotal = Math.round( ( ( amountOfGoalRound / inputVal ) - 1 ) * 100 * 100 ) / 100;
+						var roiPercentTotalStr = isNaN(roiPercentTotal) ? '...' : roiPercentTotal.toString().replace('.', ',');
+						$("span.roi_percent_total").text(roiPercentTotalStr);
+					}
 				}
 			});
 			

@@ -457,9 +457,22 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	margin-bottom: 20px;
 }
 
+div#content.version-3 div.project-banner div.hashtags {
+	padding: 8px 0px;
+	font-size: 10pt;
+}
+div#content.version-3 div.project-banner div.hashtags span.hashtag-environment {
+	color: #8BC79C;
+}
+div#content.version-3 div.project-banner div.hashtags span.hashtag-social {
+	color: #F1A074;
+}
+div#content.version-3 div.project-banner div.hashtags span.hashtag-economy {
+	color: #00879B;
+}
 div#content.version-3 div.project-banner div.subtitle {
 	height: 50px;
-	padding: 10px 0px;
+	padding: 8px 0px;
 	font-size: 10pt;
 }
 
@@ -523,13 +536,6 @@ div#content.version-3 div.project-rewards-content label {
 	text-transform: uppercase;
 	color: #00879b;
 }
-div#content.version-3 div.project-rewards-content span.roi_percent_user, div#content.version-3 div.project-rewards-content span.roi_amount_user {
-	font-weight: bold;
-	color: #93626D;
-}
-div#content.version-3 div.project-rewards-content span.roi_percent_user {
-	font-size: 22px;
-}
 div#content.version-3 div.project-rewards-content div.roi_amount_base {
 	height: 5px;
 	margin-bottom: 5px;
@@ -542,10 +548,6 @@ div#content.version-3 div.project-rewards-content table:before {
 	position: relative;
 	top: 70px;
 	border-top: 1px solid;
-}
-div#content.version-3 div.project-rewards-content table tr:first-child {
-    font-size: 12px;
-	font-family: Trebuchet MS,sans-serif;
 }
 div#content.version-3 div.project-rewards-content table tr td {
     min-width: 75px;
@@ -563,10 +565,6 @@ div#content.version-3 div.project-rewards-content table tr td > div {
 div#content.version-3 div.project-rewards-content table tr td > div > div {
 	background: #FFF;
 	vertical-align: bottom;
-}
-div#content.version-3 div.project-rewards-content table tr:last-child td div {
-	margin-bottom: 4px;
-	color: #93626D;
 }
 div#content.version-3 div.project-rewards-content table tr:last-child td span.roi_amount_user_container {
 	position: relative;
@@ -596,11 +594,6 @@ div#content.version-3 div.project-rewards-content ul li:before {
 }
 div#content.version-3 div.project-rewards-content ul li span {
 	color: #93626D;
-}
-div#content.version-3 div.project-rewards-content div.project-rewards-alert {
-	margin-top: 10px;
-	font-style: italic;
-	font-size: 11px;
 }
 
 /*******************************************************************************
@@ -668,6 +661,9 @@ div#content.version-3 .projects-desc-content h3{
     font-style: normal;
 	text-align: center;
 	color: #333333;
+}
+div#content.version-3 .projects-desc-content p, div#content.version-3 .projects-desc-content ul {
+	line-height: 1.6em;
 }
 div#content.version-3 .projects-desc-content p, div#content.version-3 .projects-desc-content h4 {
     padding: 0px 0px 10px;

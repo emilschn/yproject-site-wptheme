@@ -10,7 +10,7 @@ $campaign_stats = $page_controler->get_campaign_stats();
 
 <ul class="menu-onglet">
   <li><a href="#stats" class="focus" data-subtab="evaluations"><?php _e( "&Eacute;valuations", 'yproject' ); ?><span></span></a></li>
-  <li><a href="#stats" data-subtab="leveedefonds"><?php _e( "Lev&eacute;e de fonds", 'yproject' ); ?><span></span></a></li>
+  <li><a href="#stats" data-subtab="leveedefonds"><?php _e( "Investissements", 'yproject' ); ?><span></span></a></li>
   <li><a href="#stats" data-subtab="visites"><?php _e( "Visites", 'yproject' ); ?><span></span></a></li>
 </ul>
 

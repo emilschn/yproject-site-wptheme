@@ -132,7 +132,7 @@ else {
 					<div class="content align-center">'.$wdg_organization->get_name().'</div>
 					<div class="content align-left">
 					<span>Forme juridique :</span>'.$wdg_organization->get_legalform().'<br />
-					<span>Num&eacute;ro SIREN :</span>'.$wdg_organization->get_idnumber().'<br />
+					<span>Num&eacute;ro SIRET :</span>'.$wdg_organization->get_idnumber().'<br />
 					<span>Code APE :</span>'.$wdg_organization->get_ape().'<br />
 					<span>Capital social :</span>'.$wdg_organization->get_capital().'<br /><br />
 					</div>

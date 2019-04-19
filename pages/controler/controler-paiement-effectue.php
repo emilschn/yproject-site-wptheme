@@ -12,12 +12,6 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 	 */
 	private $current_investment;
 	private $maximum_investable_amount;
-	private $need_two_contracts;
-	/**
-	 * @var WDG_Form_User_Identity_Docs
-	 */
-	private $form_user_identity_docs;
-	private $form_user_identity_docs_feedback;
 	
 	private $current_step;
 	private $current_meanofpayment;
@@ -38,8 +32,6 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		$this->init_mean_of_payment();
 		$this->init_current_investment();
 		$this->init_maximum_investable_amount();
-		$this->init_need_two_contracts();
-		$this->init_identitydocs_form();
 		$this->init_current_step();
 		$this->init_payment_result();
 	}
@@ -66,6 +58,19 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 /******************************************************************************/
 // CURRENT INVESTMENT
 /******************************************************************************/
+	/**
+	 * Surcharge de WDG_Page_Controler	
+	*/
+	public function init_show_user_pending_investment() {
+		$this->show_user_pending_investment = false;
+	}
+	/**
+	 * Surcharge de WDG_Page_Controler	
+	*/
+	public function init_show_user_pending_preinvestment() {
+		$this->show_user_pending_preinvestment = false;
+	}
+	
 	private function init_mean_of_payment() {
 		$this->current_meanofpayment = filter_input( INPUT_GET, 'meanofpayment' );
 		if ( empty( $this->current_meanofpayment ) ) {
@@ -111,15 +116,6 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		return ( $this->current_investment->get_session_amount() - $this->get_maximum_investable_amount() );
 	}
 	
-	private function init_need_two_contracts() {
-		$amount_part = $this->current_investment->get_session_amount();
-		$this->need_two_contracts = ( $amount_part > $this->maximum_investable_amount );
-	}
-	
-	public function needs_two_contracts() {
-		return $this->need_two_contracts;
-	}
-	
 /******************************************************************************/
 // CURRENT STEP
 /******************************************************************************/
@@ -128,32 +124,6 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 	}
 	public function get_current_step() {
 		return $this->current_step;
-	}
-	
-/******************************************************************************/
-// FORM
-/******************************************************************************/
-	private function init_identitydocs_form() {
-		if ( $this->needs_two_contracts() ) {
-			$WDGCurrent_User = WDGUser::current();
-			$is_orga = $this->get_current_investment()->get_session_user_type() != 'user';
-			$this->form_user_identity_docs = new WDG_Form_User_Identity_Docs( $is_orga ? $this->get_current_investment()->get_session_user_type() : $WDGCurrent_User->get_wpref(), $is_orga );
-			$action_posted = filter_input( INPUT_POST, 'action' );
-			if ( $action_posted == WDG_Form_User_Identity_Docs::$name ) {
-				$this->form_user_identity_docs_feedback = $this->form_user_identity_docs->postForm();
-				if ( empty( $this->form_user_identity_docs_feedback[ 'errors' ] ) ) {
-					wp_redirect( $this->get_success_next_link() );
-				}
-			}
-		}
-	}
-	
-	public function get_identitydocs_form() {
-		return $this->form_user_identity_docs;
-	}
-	
-	public function get_identitydocs_form_feedback() {
-		return $this->form_user_identity_docs_feedback;
 	}
 	
 /******************************************************************************/

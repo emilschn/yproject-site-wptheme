@@ -76,28 +76,86 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 	</form>
 </div>
 
-
-<?php if ( $page_controler->can_add_check() ): ?>
-
-<div class="align-center margin-height">
-	<button class="button-contacts-add-check button blue"><?php _e( "Ajouter un chèque", 'yproject' ); ?></button>
-</div>
-
-<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/add-check.php'  ), true ); ?>
-
-<?php endif; ?>
-
-
-
-
-
-
-<?php // Affichage des résultats des sondages ?>
 <?php if ( $page_controler->can_access_admin() ): ?>
-	<?php $campaign_poll_answers = $page_controler->get_campaign()->get_api_data( 'poll_answers' ); ?>
-	<br><br><br>
-	<div class="db-form">
+	<br><br>
+	<div class="admin-theme-block db-form">
+		<div class="field admin-theme align-center">
+			<?php if ( $page_controler->can_add_check() ): ?>
+			<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a><br><br>
+			<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/add-check.php'  ), true ); ?>
+			<?php endif; ?>
+			
+			<?php
+			$editor_params = array( 
+				'media_buttons' => true,
+				'quicktags'     => true,
+				'editor_height' => 500,
+				'tinymce'       => array(
+					'plugins'		=> 'wordpress, paste, wplink, textcolor, charmap, hr, colorpicker, lists',
+					'toolbar1'		=> 'bold,italic,underline,|,hr,bullist,numlist,|,alignleft,aligncenter,alignright,alignjustify,|,link,unlink,video,wp_adv',
+					'toolbar2'		=> 'formatselect,fontsizeselect,removeformat,charmap,forecolor,forecolorpicker,pastetext,table,undo,redo',
+					'paste_remove_styles' => true,
+					'wordpress_adv_hidden' => FALSE,
+				)
+			);
+			?>
+			
+			<?php if ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_vote ): ?>
+				<a href="#contacts" data-mailtype="preinvestment" class="button admin-theme show-notifications"><?php _e("Envoyer les relances de pr&eacute;-investissement","yproject") ?></a>
+				<a href="#contacts" data-mailtype="prelaunch" class="button admin-theme show-notifications"><?php _e("Envoyer les relances de pr&eacute;-lancement","yproject") ?></a>
+			<?php endif; ?>
+			<?php if ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_collecte ): ?>
+				<?php if ( $page_controler->is_campaign_funded() ): ?>
+				<a href="#contacts" data-mailtype="investment-100" class="button admin-theme show-notifications"><?php _e( "Envoyer les relances d'investissement 100 %", 'yproject' ); ?></a>
+				<?php else: ?>
+				<a href="#contacts" data-mailtype="investment-30" class="button admin-theme show-notifications"><?php _e( "Envoyer les relances d'investissement 30 %", 'yproject' ); ?></a>
+				<?php endif; ?>
+			<?php endif; ?>
+			<br><br>
 		
+			<form id="form-notifications" action="<?php echo admin_url( 'admin-post.php?action=send_project_notifications' ); ?>" method="POST" class="hidden align-left">
+				<b>Champs des notifications :</b><br><br>
+				Témoignages :<br>
+				<?php wp_editor( '', 'testimony', $editor_params ); ?><br><br>
+				URL de l'image (au moins 590px de large) :<br>
+				<input type="text" name="image_url"><br><br>
+				Description sous l'image :<br>
+				<input type="text" name="image_description"><br><br>
+				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
+				<input type="hidden" id="mail_type" name="mail_type" value="">
+				<input type="submit" name="send_option" value="Envoyer test" class="button admin-theme">
+				<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
+			</form>
+		</div>
+	
+	
+		<br><br><br>
+		
+		<?php $campaign_emails = $page_controler->get_campaign_emails(); ?>
+		<?php if ( !empty( $campaign_emails ) ): ?>
+		<div class="field admin-theme">
+			<b>Liste des emails envoyés en rapport avec la lev&eacute;e de fonds</b><br><br>
+			<table>
+				<tr>
+					<td><strong>Date</strong></td>
+					<td><strong>Destinataire</strong></td>
+					<td><strong>Template</strong></td>
+				</tr>
+
+				<?php foreach ( $campaign_emails as $campaign_email ): ?>
+				<tr>
+					<td><?php echo $campaign_email[ 'date' ]; ?></td>
+					<td><?php echo $campaign_email[ 'recipient' ]; ?></td>
+					<td><?php echo $campaign_email[ 'template_str' ]; ?> (<?php echo $campaign_email[ 'template_id' ]; ?>)</td>
+				</tr>
+				<?php endforeach; ?>
+			</table>
+			
+		<br><br>
+		</div>
+		<?php endif; ?>
+		
+		<?php $campaign_poll_answers = $page_controler->get_campaign()->get_api_data( 'poll_answers' ); ?>
 		<?php $investment_contracts = WDGInvestmentContract::get_list( $page_controler->get_campaign()->ID ); ?>
 		<?php if ( !empty( $investment_contracts ) ): ?>
 		<div class="field admin-theme">
@@ -219,6 +277,61 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 						<td><?php echo $answers_decoded->{ 'other-source-to-know-the-fundraising' }; ?></td>
 						<td><?php echo $answers_decoded->{ 'where-user-come-from' }; ?></td>
 						<td><?php echo $answers_decoded->{ 'other-source-where-the-user-come-from' }; ?></td>
+						<td><?php echo $answer->user_email; ?></td>
+						<td><?php echo $answer->user_age; ?></td>
+						<td><?php echo $answer->user_postal_code; ?></td>
+						<td><?php echo $answer->user_gender; ?></td>
+					</tr>
+				<?php endforeach; ?>
+			</table>
+		</div>
+		
+		<div class="field admin-theme">
+
+			<b>Sondage lié à l'investissement en continu</b><br><br>
+
+			<table>
+				<tr>
+					<td>Date</td>
+					<td>Contexte</td>
+					<td>Montant (contexte)</td>
+					<td>Notifié si nv. lancement</td>
+					<td>Notifié si nv. thème</td>
+					<td>Inv. ponctuel</td>
+					<td>Inv. mensuel</td>
+					<td>Inv. trimestriel</td>
+					<td>Inv. nv. lancement</td>
+					<td>Inv. autre</td>
+					<td>Inv. autre Txt</td>
+					<td>Connu WDG</td>
+					<td>Connu Projet</td>
+					<td>Connu Autre</td>
+					<td>Connu Autre Txt</td>
+					<td>E-mail</td>
+					<td>Age</td>
+					<td>Code postal</td>
+					<td>Sexe</td>
+				</tr>
+
+				<?php foreach ( $campaign_poll_answers as $answer ): ?>
+					<?php if ( $answer->poll_slug != 'continuous' ) { continue; } ?>
+					<?php $answers_decoded = json_decode( $answer->answers ); ?>
+					<tr>
+						<td><?php echo $answer->date; ?></td>
+						<td><?php echo $answer->context; ?></td>
+						<td><?php echo $answer->context_amount; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'notifications' }->{ 'new-campaign' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'notifications' }->{ 'new-subject' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-ponctual' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-monthly' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-quarterly' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-campaign' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-other' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo $answers_decoded->{ 'other-invest-rythm' }; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'known-by' }->{ 'known-by-wedogood' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'known-by' }->{ 'known-by-project' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo ( $answers_decoded->{ 'known-by' }->{ 'known-by-other' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+						<td><?php echo $answers_decoded->{ 'other-known-by-source' }; ?></td>
 						<td><?php echo $answer->user_email; ?></td>
 						<td><?php echo $answer->user_age; ?></td>
 						<td><?php echo $answer->user_postal_code; ?></td>

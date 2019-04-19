@@ -282,19 +282,30 @@
 }
 
 /*******************************************************************************
-* BANDEAU COOKIES
+* RESPONSIVE MOBILE
 *******************************************************************************/
-
-/* Positionnement bouton ok du bandeau cookie par rapport à l'icône Crisp*/
-@media screen and (min-width: 652px) and (max-width: 720px) {
-	#cookies-alert button#cookies-alert-close {
-		display: block;
-		margin: 0 auto;
+@media screen and (max-width: 400px) {
+	#submenu-search {
+		width: -webkit-calc(100% - 8px);
+		width: -moz-calc(100% - 8px);
+		width: calc(100% - 8px);
+	}
+	#submenu-user {
+		width: -webkit-calc(100% - 8px);
+		width: -moz-calc(100% - 8px);
+		width: calc(100% - 8px);
 	}
 }
-@media screen and (min-width: 444px) and (max-width: 485px) {
-	#cookies-alert button#cookies-alert-close {
-		display: block;
-		margin: 0 auto;
+
+@media screen and (max-width: 450px) {
+	#label-validate-terms-check-register {
+		width: calc(100% - 30px);
+		margin-left: 30px;
+	}
+	#label-validate-terms-check-register input {
+		display: none;
+	}
+	#label-validate-terms-check-register input[type=checkbox]+span:after {
+		margin-left: -24px;
 	}
 }

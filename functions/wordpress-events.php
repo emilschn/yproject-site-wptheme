@@ -36,6 +36,8 @@ class WDG_WordPress_Events {
 		add_action( 'widgets_init', 'WDG_WordPress_Events::widgets_init' );
 		// Suppression de l'action qui passe les paiements en attente en abandonnés au bout d'une semaine
 		remove_action( 'edd_weekly_scheduled_events', 'edd_mark_abandoned_orders' );
+		// Suppression de la notification envoyée quand on modifie l'adresse d'un utilisateur
+		add_filter( 'send_email_change_email', '__return_false' );
 	}
 	
 	/**
@@ -191,10 +193,10 @@ class WDG_WordPress_Events {
 	 */
 	public static function send_headers() {
 		header('X-UA-Compatible: IE=edge');
-		session_cache_limiter('');
 		header('Cache-Control: public, s-maxage=120');
 		header('Pragma: public');
 		if( !session_id() ) {
+			session_cache_limiter('');
 			session_start();
 		}
 	}

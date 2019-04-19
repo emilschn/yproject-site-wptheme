@@ -8,6 +8,12 @@ $fields_files = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs
 <h2><?php _e( "Mes justificatifs d'identit&eacute;", 'yproject' ); ?></h2>
 
 <form method="POST" enctype="multipart/form-data" class="db-form v3 full">
+	
+	<p class="align-justify">
+		<?php _e( "Les justificatifs d'identit&eacute; sont imm&eacute;diatement transmis, puis v&eacute;rifi&eacute;s sous 48h par notre prestataire de paiement, Lemon Way.", 'yproject' ); ?>
+		<?php _e( "Ils sont d'abord analys&eacute;s par des services automatiques puis par une personne physique en cas d'erreur ou de cas particulier.", 'yproject' ); ?><br>
+		<?php _e( "En cas d'erreur manifeste de l'analyse de vos documents, vous pouvez nous contacter &agrave; l'adresse investir@wedogood.co ou sur le chat en ligne.", 'yproject' ); ?><br><br>
+	</p>
 		
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>

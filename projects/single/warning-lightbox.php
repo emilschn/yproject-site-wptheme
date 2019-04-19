@@ -19,9 +19,9 @@
 			<?php echo sprintf( __( "Vous souhaitez acc&eacute;der &agrave; la pr&eacute;sentation du projet %s, actuellement en lev&eacute;e de fonds.", 'yproject' ), $campaign->data->post_title ); ?><br />
 			<br />
 		<?php endif; ?>
-		<?php _e( "Vous pouvez y acc&eacute;der sans investir mais la r&egrave;glementation nous impose de vous informer que l'investissement dans des soci&eacute;t&eacute;s non cot&eacute;es comporte des risques sp&eacute;cifiques :", 'yproject' ); ?><br />
-		<?php _e( "&gt; Le retour sur investissement d&eacute;pend de la r&eacute;ussite du projet financ&eacute;", 'yproject' ); ?><br />
-		<?php _e( "&gt; Risque de perte totale ou partielle du capital investi", 'yproject' ); ?><br />
+		<?php _e( "Vous pouvez y acc&eacute;der sans investir mais la r&eacute;glementation nous impose de vous informer que l'investissement dans des soci&eacute;t&eacute;s non cot&eacute;es comporte des risques sp&eacute;cifiques :", 'yproject' ); ?><br />
+		<?php _e( "&gt; Le retour sur investissement d&eacute;pend de la r&eacute;ussite du projet financ&eacute;.", 'yproject' ); ?><br />
+		<?php _e( "&gt; Risque de perte totale ou partielle du capital investi.", 'yproject' ); ?><br />
 		<br />
 		<?php if ( $campaign->has_category_slug( 'partners', 'investisur' ) ): ?>
 		<?php _e( "Ce projet est n&eacute;anmoins labellis&eacute; &quot;InvestiS&ucirc;r&quot;, un syst&egrave;me de protection de l'investissement propos&eacute; par notre partenaire Le Fonds Compagnon.", 'yproject' ); ?>

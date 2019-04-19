@@ -31,9 +31,17 @@ $WDGUser_current = WDGUser::current();
 		?>
 		<div class="field">
 			<label for="org_name"><?php _e( "D&eacute;nomination sociale", 'yproject' ); ?></label>
+			<?php if ( $WDGUser_current->is_admin() ): ?>
+			<div class="field-container">
+				<span class="field-value">
+					<input type="text" name="org_name" value="<?php echo $organization_obj->get_name(); ?>">
+				</span>
+			</div>
+			<?php else: ?>
 			<div class="field-container align-left">
 				<em id="org_name"><?php echo $organization_obj->get_name(); ?></em>
 			</div>
+			<?php endif; ?>
 		</div>
 
 		<div class="field">
@@ -82,7 +90,7 @@ $WDGUser_current = WDGUser::current();
 		</div>
 
 		<div class="field">
-			<label for="org_idnumber"><?php _e('Num&eacute;ro SIREN', 'yproject'); ?>*</label>
+			<label for="org_idnumber"><?php _e('Num&eacute;ro SIRET', 'yproject'); ?>*</label>
 			<div class="field-container">
 				<span class="field-value">
 					<input type="text" name="org_idnumber" value="<?php echo $organization_obj->get_idnumber(); ?>">
@@ -91,7 +99,7 @@ $WDGUser_current = WDGUser::current();
 		</div>
 
 		<div class="field">
-			<label for="org_rcs"><?php _e('RCS', 'yproject'); ?>*</label>
+			<label for="org_rcs"><?php _e('RCS (Ville)', 'yproject'); ?>*</label>
 			<div class="field-container">
 				<span class="field-value">
 					<input type="text" name="org_rcs" value="<?php echo $organization_obj->get_rcs(); ?>">
@@ -127,7 +135,7 @@ $WDGUser_current = WDGUser::current();
 		</div>
 
 		<div class="field">
-			<label for="org_fiscal_year_end_month"><?php _e("L'exerice comptable se termine &agrave; la fin du mois", 'yproject'); ?></label>
+			<label for="org_fiscal_year_end_month"><?php _e("L'exercice comptable se termine &agrave; la fin du mois", 'yproject'); ?></label>
 			<div class="field-container">
 				<span class="field-value">
 					<?php
@@ -163,6 +171,31 @@ $WDGUser_current = WDGUser::current();
 		?>
 		<br><br>
 		<h3><?php _e('Si&egrave;ge social', 'yproject'); ?></h3>
+		<div class="field">
+			<label for="org_address_number"><?php _e('Num&eacute;ro', 'yproject'); ?>*</label>
+			<div class="field-container">
+				<span class="field-value">
+					<input type="text" name="org_address_number" value="<?php echo $organization_obj->get_address_number(); ?>">
+				</span>
+			</div>
+		</div>
+		
+		<div class="field">
+			<label for="org_address_number_comp"><?php _e('Compl&eacute;ment de num&eacute;ro', 'yproject'); ?>*</label>
+			<div class="field-container">
+				<span class="field-value">
+					<select name="org_address_number_comp" id="org_address_number_comp">
+						<?php 
+						global $address_number_complements;
+						$selected_address_number_comp = $organization_obj->get_address_number_comp();
+						foreach ($address_number_complements as $complement_key => $complement_label): ?>
+							<option value="<?php echo $complement_key; ?>" <?php if ($complement_key == $selected_address_number_comp) { echo 'selected="selected"'; } ?>><?php echo $complement_label; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</span>
+			</div>
+		</div>
+		
 		<div class="field">
 			<label for="org_address"><?php _e('Adresse', 'yproject'); ?>*</label>
 			<div class="field-container">
@@ -447,7 +480,7 @@ $WDGUser_current = WDGUser::current();
 
 		<?php $organization_lemonway_authentication_status = $organization_obj->get_lemonway_status(); ?>
 		<?php if ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_blocked): ?>
-			<?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIREN. Ainsi que les 5 documents suivis d'une &eacute;toile ci-dessus.", 'yproject'); ?><br />
+			<?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIRET. Ainsi que les 5 documents suivis d'une &eacute;toile ci-dessus.", 'yproject'); ?><br />
 		<?php elseif ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_ready): ?>
 			<form action="" method="POST">
 				<input type="hidden" name="authentify_lw" value="1" />

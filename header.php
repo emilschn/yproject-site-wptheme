@@ -125,11 +125,28 @@
 					?>
 					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
 					<ul class="submenu-list">
-						<li><a href="<?php echo home_url( '/mon-compte/' ); ?>" <?php if ( $page_controler->get_show_user_needs_authentication() ): ?>class="needs-authentication"<?php endif; ?>><?php _e("Mon compte", 'yproject'); ?></a></li>
-						
-						<?php foreach ($project_list as $project_id): if (!empty($project_id)): $post_campaign = get_post($project_id); if (isset($post_campaign)): ?>
-							<li><a href="<?php echo $page_dashboard . '?campaign_id=' .$project_id; ?>"><?php echo $post_campaign->post_title; ?></a></li>
-						<?php endif; endif; endforeach; ?>
+						<?php
+						$is_project_needing_authentication = FALSE;
+						$project_list_dom = '';
+						foreach ($project_list as $project_id) { 
+							if ( !empty( $project_id ) ) {
+								$project_campaign = new ATCF_Campaign( $project_id );
+								if ( isset( $project_campaign ) && $project_campaign->get_name() != '' ) {
+									$campaign_organization = $project_campaign->get_organization();
+									$campaign_organization = new WDGOrganization( $campaign_organization->wpref );
+									$project_list_dom .= '<li><a href="' .$page_dashboard. '?campaign_id=' .$project_id. '"';
+									if ( !$campaign_organization->is_registered_lemonway_wallet() ) {
+										$is_project_needing_authentication = TRUE;
+										$project_list_dom .= ' class="needs-authentication"';
+									}
+									$project_list_dom .= '>' .$project_campaign->get_name(). '</a></li>';
+								}
+							}
+						}
+						?>
+							
+						<li><a href="<?php echo home_url( '/mon-compte/' ); ?>" <?php if ( $page_controler->get_show_user_needs_authentication() && !$is_project_needing_authentication ): ?>class="needs-authentication"<?php endif; ?>><?php _e("Mon compte", 'yproject'); ?></a></li>
+						<?php echo $project_list_dom; ?>
 					</ul>
 					
 					<div id="button-logout" class="box_connection_buttons red">
@@ -210,9 +227,7 @@
 		</div>
 		<?php endif; ?>
 
-		<?php if (!is_user_logged_in()): ?>
-		
-		<?php elseif (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)): ?>
+		<?php if ( is_user_logged_in() && (!isset($_SESSION['has_displayed_connected_lightbox']) || ($_SESSION['has_displayed_connected_lightbox'] != $current_user->ID)) ): ?>
 			<?php $_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; ?>
 			<div class="timeout-lightbox wdg-lightbox">
 				<div class="wdg-lightbox-click-catcher"></div>
@@ -233,7 +248,7 @@
 		<?php endif; ?>
 		
 		<?php if ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' ): ?>
-		<?php if($_SESSION['subscribe_newsletter_sendinblue'] == true): ?>
+		<?php if ( $_SESSION['subscribe_newsletter_sendinblue'] == true ): ?>
 			<div class="timeout-lightbox wdg-lightbox">
 				<div class="wdg-lightbox-click-catcher"></div>
 				<div class="wdg-lightbox-padder">
@@ -244,12 +259,16 @@
 		<?php $_SESSION['subscribe_newsletter_sendinblue'] = false; ?>
 		<?php endif; ?>
 		
-		<?php if ( $page_controler->get_show_user_details_confirmation() ): ?>
-			<?php locate_template( array( 'common/lightbox/user-details-lightbox.php' ), true ); ?>
+		<?php if ( $page_controler->get_show_user_pending_investment() ): ?>
+			<?php locate_template( array( 'common/lightbox/pending-investment-lightbox.php' ), true ); ?>
 		<?php endif; ?>
 		
 		<?php if ( $page_controler->get_show_user_pending_preinvestment() ): ?>
 			<?php locate_template( array( 'common/lightbox/pending-preinvestment-lightbox.php' ), true ); ?>
+		<?php endif; ?>
+		
+		<?php if ( $page_controler->get_show_user_details_confirmation() ): ?>
+			<?php locate_template( array( 'common/lightbox/user-details-lightbox.php' ), true ); ?>
 		<?php endif; ?>
 		
 		<div id="container"> 

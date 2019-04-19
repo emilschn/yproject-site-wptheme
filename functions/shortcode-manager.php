@@ -17,7 +17,9 @@ class YPShortcodeManager {
 		'yproject_register_lightbox',
 		'yproject_statsadvanced_lightbox',
 		'yproject_newproject_lightbox',
+		'wdg_page_auto_refresh',
 		'wdg_project_vote_count',
+		'wdg_project_vote_intention_sum',
 		'wdg_project_investors_count',
 		'wdg_project_amount_count',
 		'wdg_project_investment_link',
@@ -213,6 +215,17 @@ class YPShortcodeManager {
 		echo do_shortcode('[yproject_register_lightbox]');
 	}
 	
+	function wdg_page_auto_refresh($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'nb_minutes' => '2',
+		), $atts );
+
+		$nb_milliseconds = $atts[ 'nb_minutes' ] * 60 * 1000;
+		$code = '<script type="text/javascript">setTimeout("location.reload(true);", ' .$nb_milliseconds. ');</script>';
+		
+		return $code;
+	}
+	
 	function wdg_project_vote_count($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
@@ -222,6 +235,19 @@ class YPShortcodeManager {
 			$post_campaign = get_post($atts['project']);
 			$campaign = atcf_get_campaign($post_campaign);
 			return $campaign->nb_voters();
+		}
+	}
+	
+	function wdg_project_vote_intention_sum($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'project' => '',
+		), $atts );
+
+		if ( isset( $atts[ 'project' ] ) && is_numeric( $atts[ 'project' ] ) ) {
+			global $wpdb;
+			$table_name = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
+			$sum_vote_intention = $wpdb->get_var( "SELECT sum(invest_sum) FROM ".$table_name." WHERE post_id = ". $atts[ 'project' ] );
+			return $sum_vote_intention;
 		}
 	}
 	

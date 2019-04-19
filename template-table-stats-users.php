@@ -19,13 +19,119 @@ global $stylesheet_directory_uri, $wpdb;
 $table_jcrois = $wpdb->prefix . "jycrois";
 $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 $input_poll = filter_input( INPUT_GET, 'poll' );
+$input_official_data = filter_input( INPUT_GET, 'official_data' );
+$input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 ?>
 
 <div id="content">
     <div class="padder">
-		<br><br><br>
+		<br><br><br><br><br>
 		
-		<?php if ( $input_poll == 'warranty' ): ?>
+		<?php if ( $input_declarations_list == '1' ): ?>
+			Liste des déclarations demandées et état des ajustements :<br>
+			<?php
+			$input_declarations_year = filter_input( INPUT_GET, 'declarations_year' );
+			$input_declarations_month = filter_input( INPUT_GET, 'declarations_month' );
+			if ( !empty( $input_declarations_month ) && !empty( $input_declarations_year ) ):
+				$date_start = new DateTime();
+				$date_start->setDate( $input_declarations_year, $input_declarations_month, 1 );
+				$date_end = new DateTime();
+				$date_end->setDate( $input_declarations_year, $input_declarations_month, 28 );
+				$declarations_list = WDGWPREST_Entity_Declaration::get_list_by_date( $date_start->format( 'Y-m-d' ), $date_end->format( 'Y-m-d' ) );
+				if ( $declarations_list ):
+					foreach ( $declarations_list as $declaration_data ):
+						$roi_declaration = new WDGROIDeclaration( FALSE, FALSE, $declaration_data );
+						$roi_declaration_file_list = $roi_declaration->get_file_list();
+						$files_path = $roi_declaration->get_file_path();
+						?>
+						- <strong><?php echo $declaration_data->name_project; ?> :</strong>
+							<?php if ( $roi_declaration->get_adjustment_validated() ): ?>
+							Ajustement validé
+							<?php else: ?>
+							Ajustement en cours
+							<?php endif; ?>
+							<br>
+							
+							<?php if ( empty( $roi_declaration_file_list ) ): ?>
+							Aucun fichier transmis
+							<?php else: ?>
+							Fichiers transmis :
+							<ul>
+							<?php foreach ($declaration_file_list as $declaration_file): ?>
+								<li><a href="<?php echo $files_path.$declaration_file->file; ?>" target="_blank"><?php echo html_entity_decode( $declaration_file->text ); ?></a></li>
+							<?php endforeach; ?>
+							</ul>
+							<?php endif; ?>
+							<br><br>
+						<?php
+					endforeach;
+				endif;
+			endif;
+			?>
+		
+		<?php elseif ( $input_official_data == '1' ): ?>
+			<?php
+			$count = 0;
+			$count_1_50 = 0;
+			$count_51_100 = 0;
+			$count_101_250 = 0;
+			$count_251_1000 = 0;
+			$count_1000 = 0;
+			$count_invest_by_user_in_france = 0;
+
+			$amount_total = 0;
+			$amount_out_of_euro = 0;
+
+			$today = new DateTime();
+			$payments = edd_get_payments( array(
+				'number'	=> -1,
+				'status'	=> 'publish',
+				'year'		=> $today->format( 'Y' ) - 1
+			) );
+			if ( $payments ) {
+				foreach ( $payments as $payment ) {
+					$count++;
+					$amount = edd_get_payment_amount( $payment->ID );
+					$amount_total += $amount;
+					if ( $amount < 51 ) {
+						$count_1_50++;
+					} elseif ( $amount < 101 ) {
+						$count_51_100++;
+					} elseif ( $amount < 251 ) {
+						$count_101_250++;
+					} elseif ( $amount < 1001 ) {
+						$count_251_1000++;
+					} else {
+						$count_1000++;
+					}
+
+					$user_info = edd_get_payment_meta_user_info( $payment->ID );
+					$user_id = (isset( $user_info['id'] ) && $user_info['id'] != -1) ? $user_info['id'] : $user_info['email'];
+					if ( !WDGOrganization::is_user_organization( $user_id ) ) {
+						$WDGUser = new WDGUser( $user_id );
+						$country_iso_code = $WDGUser->get_country( 'iso2' );
+						if ( $country_iso_code == 'FR' ) {
+							$count_invest_by_user_in_france++;
+						}
+						$euro_list = array( 'DE', 'AT', 'BE', 'BG', 'CY', 'HR', 'DK', 'ES', 'EE', 'FI', 'FR', 'GR', 'HU', 'GR', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'CZ', 'RO', 'GB', 'SK', 'SI', 'SE' );
+						if ( !in_array( $country_iso_code, $euro_list ) ) {
+							$amount_out_of_euro += $amount;
+						}
+					}
+				}
+			}
+			?>
+			Investissements totaux : <?php echo $count; ?><br>
+			Investissements inf 51 € : <?php echo $count_1_50; ?> (<?php echo round( $count_1_50 / $count * 100, 2 ); ?> %)<br>
+			Investissements entre 51 et 100 € : <?php echo $count_51_100; ?> (<?php echo round( $count_51_100 / $count * 100, 2 ); ?> %)<br>
+			Investissements entre 101 et 250 € : <?php echo $count_101_250; ?> (<?php echo round( $count_101_250 / $count * 100, 2 ); ?> %)<br>
+			Investissements entre 251 et 1000 € : <?php echo $count_251_1000; ?> (<?php echo round( $count_251_1000 / $count * 100, 2 ); ?> %)<br>
+			Investissements plus de 1000 € : <?php echo $count_1000; ?> (<?php echo round( $count_1000 / $count * 100, 2 ); ?> %)<br>
+			Investissements par pers. phys. en France : <?php echo $count_invest_by_user_in_france; ?> (<?php echo round( $count_invest_by_user_in_france / $count * 100, 2 ); ?> %)<br>
+			Montants totaux : <?php echo $amount_total; ?> €<br>
+			Montants dont provenance hors UE : <?php echo $amount_out_of_euro; ?> € (<?php echo round( $amount_out_of_euro / $amount_total * 100, 2 ); ?> %)<br>
+		
+		<?php elseif ( $input_poll == 'warranty' ): ?>
 		<?php $poll_answers = WDGWPREST_Entity_PollAnswer::get_list( FALSE, FALSE, $input_poll ); ?>
 		<h1>Résultats sondage garantie</h1>
 		<div class="wdg-datatable">
@@ -170,12 +276,12 @@ $input_poll = filter_input( INPUT_GET, 'poll' );
 					<tr>
 						<td>Prénom Nom</td>
 						<td>e-mail</td>
-						<td>Entité morale</td>
-						<td>Sexe</td>
+						<td>Sexe / Entité</td>
 						<td>Date de naissance</td>
 						<td>Adresse</td>
 						<td>CP</td>
 						<td>Ville</td>
+						<td>Pays</td>
 						<td>Nb projets suivis</td>
 						<td>Nb projets votés</td>
 						<td>Nb investissements</td>
@@ -186,12 +292,12 @@ $input_poll = filter_input( INPUT_GET, 'poll' );
 					<tr>
 						<td>Prénom Nom</td>
 						<td>e-mail</td>
-						<td>Entité morale</td>
-						<td>Sexe</td>
+						<td>Sexe / Entité</td>
 						<td>Date de naissance</td>
 						<td>Adresse</td>
 						<td>CP</td>
 						<td>Ville</td>
+						<td>Pays</td>
 						<td>Nb projets suivis</td>
 						<td>Nb projets votés</td>
 						<td>Nb investissements</td>
@@ -214,16 +320,43 @@ $input_poll = filter_input( INPUT_GET, 'poll' );
 						
 						$user_results = $wpdb->get_results( $sql );
 						$user_result = $user_results[0];
+						if ( WDGOrganization::is_user_organization( $user->ID ) ) {
+							$WDGEntity = new WDGOrganization( $user->ID );
+							$entity_name = $WDGEntity->get_name();
+							$entity_email = $WDGEntity->get_email();
+							$entity_gender = 'O';
+							$entity_birthdate = '';
+							$entity_address = $WDGEntity->get_address();
+							$entity_postal_code = $WDGEntity->get_postal_code();
+							$entity_city = $WDGEntity->get_city();
+							$entity_country = $WDGEntity->get_country();
+						} else {
+							$WDGEntity = new WDGUser( $user->ID );
+							$entity_name = $WDGEntity->get_firstname() . ' ' . $WDGEntity->get_lastname();
+							$entity_email = $WDGEntity->get_email();
+							$entity_gender = '-';
+							if ( $WDGEntity->get_gender() == 'female' ) {
+								$entity_gender = 'F';
+							}
+							if ( $WDGEntity->get_gender() == 'male' ) {
+								$entity_gender = 'M';
+							}
+							$entity_birthdate = $WDGEntity->get_birthday_date();
+							$entity_address = $WDGEntity->get_address();
+							$entity_postal_code = $WDGEntity->get_postal_code();
+							$entity_city = $WDGEntity->get_city();
+							$entity_country = $WDGEntity->get_country();
+						}
 						?>
 						<tr>
-							<td><?php echo $user->user_firstname . ' ' . $user->user_lastname; ?></td>
-							<td><?php echo $user->user_email; ?></td>
-							<td><?php echo ( WDGOrganization::is_user_organization( $user->ID ) ? "OUI" : "NON" ); ?></td>
-							<td><?php if ($user->get('user_gender') == "female") { echo 'F'; } elseif ($user->get('user_gender') == "male") { echo 'M'; } ?></td>
-							<td><?php echo $user->get('user_birthday_year') . '-' . $user->get('user_birthday_month') . '-' . $user->get('user_birthday_day'); ?></td>
-							<td><?php echo $user->get('user_address'); ?></td>
-							<td><?php echo $user->get('user_postal_code'); ?></td>
-							<td><?php echo $user->get('user_city'); ?></td>
+							<td><?php echo $entity_name; ?></td>
+							<td><?php echo $entity_email; ?></td>
+							<td><?php echo $entity_gender; ?></td>
+							<td><?php echo $entity_birthdate; ?></td>
+							<td><?php echo $entity_address; ?></td>
+							<td><?php echo $entity_postal_code; ?></td>
+							<td><?php echo $entity_city; ?></td>
+							<td><?php echo $entity_country; ?></td>
 							<td><?php echo $user_result->nb_follow; ?></td>
 							<td><?php echo $user_result->nb_votes; ?></td>
 							<td><?php echo $user_result->nb_invest; ?></td>

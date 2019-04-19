@@ -76,10 +76,10 @@ get_header();
 							<label for="org_legalform"><?php _e('Forme juridique', 'yproject'); ?></label>
 							<input type="text" name="org_legalform" value="<?php echo $organization_obj->get_legalform(); ?>" /><br />
 
-							<label for="org_idnumber"><?php _e('Num&eacute;ro SIREN', 'yproject'); ?></label>
+							<label for="org_idnumber"><?php _e('Num&eacute;ro SIRET', 'yproject'); ?></label>
 							<input type="text" name="org_idnumber" value="<?php echo $organization_obj->get_idnumber(); ?>" /><br />
 
-							<label for="org_rcs"><?php _e('RCS', 'yproject'); ?></label>
+							<label for="org_rcs"><?php _e('RCS (Ville)', 'yproject'); ?></label>
 							<input type="text" name="org_rcs" value="<?php echo $organization_obj->get_rcs(); ?>" /><br />
 
 							<label for="org_capital"><?php _e('Capital social (en euros)', 'yproject'); ?></label>
@@ -230,7 +230,7 @@ get_header();
 
 							<?php $organization_lemonway_authentication_status = $organization_obj->get_lemonway_status(); ?>
 							<?php if ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_blocked): ?>
-								<?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIREN. Ainsi que les 5 documents ci-dessus.", 'yproject'); ?><br />
+								<?php _e("Afin de s'authentifier chez notre partenaire Lemonway, les informations suivantes sont n&eacute;cessaires : e-mail, description, num&eacute;ro SIRET. Ainsi que les 5 documents ci-dessus.", 'yproject'); ?><br />
 							<?php elseif ($organization_lemonway_authentication_status == WDGOrganization::$lemonway_status_ready): ?>
 								<form action="" method="POST" enctype="multipart/form-data">
 									<input type="submit" class="button" name="authentify_lw" value="<?php _e("Authentifier chez Lemonway", 'yproject'); ?>" />

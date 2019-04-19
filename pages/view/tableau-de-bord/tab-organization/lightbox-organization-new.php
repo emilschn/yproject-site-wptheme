@@ -58,7 +58,7 @@ global $campaign_id
 		</div>
 
 		<div class="field">
-			<label for="org_idnumber"><?php _e( "Num&eacute;ro SIREN", 'yproject' ); ?>*</label>
+			<label for="org_idnumber"><?php _e( "Num&eacute;ro SIRET", 'yproject' ); ?>*</label>
 			<div class="field-container">
 				<span class="field-value">
 					<input type="text" name="org_idnumber" value="<?php echo filter_input( INPUT_POST, 'org_idnumber' ); ?>">
@@ -67,7 +67,7 @@ global $campaign_id
 		</div>
 
 		<div class="field">
-			<label for="org_rcs"><?php _e( "RCS", 'yproject' ); ?>*</label>
+			<label for="org_rcs"><?php _e( "RCS (Ville)", 'yproject' ); ?>*</label>
 			<div class="field-container">
 				<span class="field-value">
 					<input type="text" name="org_rcs" value="<?php echo filter_input( INPUT_POST, 'org_rcs' ); ?>">
@@ -103,7 +103,7 @@ global $campaign_id
 		</div>
 
 		<div class="field">
-			<label for="org_fiscal_year_end_month"><?php _e( "L'exerice comptable se termine &agrave; la fin du mois", 'yproject' ); ?></label>
+			<label for="org_fiscal_year_end_month"><?php _e( "L'exercice comptable se termine &agrave; la fin du mois", 'yproject' ); ?></label>
 			<div class="field-container">
 				<span class="field-value">
 					<?php
