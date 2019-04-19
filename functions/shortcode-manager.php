@@ -19,6 +19,7 @@ class YPShortcodeManager {
 		'yproject_newproject_lightbox',
 		'wdg_page_auto_refresh',
 		'wdg_project_vote_count',
+		'wdg_project_vote_intention_sum',
 		'wdg_project_investors_count',
 		'wdg_project_amount_count',
 		'wdg_project_investment_link',
@@ -237,7 +238,7 @@ class YPShortcodeManager {
 		}
 	}
 	
-	function wdg_project_vote_intention_count($atts, $content = '') {
+	function wdg_project_vote_intention_sum($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
 		), $atts );
