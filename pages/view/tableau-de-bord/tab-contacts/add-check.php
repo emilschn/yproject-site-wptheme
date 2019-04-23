@@ -9,7 +9,7 @@ $fields_orga_info = $page_controler->get_form_add_check()->getFields( WDG_Form_D
 $fields_invest_files = $page_controler->get_form_add_check()->getFields( WDG_Form_Dashboard_Add_Check::$field_group_invest_files );
 ?>
 
-<form action="" method="post" id="form-contacts-add-check" class="db-form v3 full center bg-white hidden">
+<form action="" method="post" id="form-contacts-add-check" class="db-form v3 full center bg-white ajax-form hidden">
 	<div class="align-justify">
 		<h3><?php _e( "Ajouter un investissement par ch&egrave;que", 'yproject' ); ?></h3>
 		<?php _e( "Pour ajouter un investissement par ch&egrave;que, vous aurez besoin des informations compl&egrave;tes de votre investisseur (et de sa structure/entreprise si il investit en tant que personne morale).", 'yproject' ); ?><br>
@@ -66,7 +66,10 @@ $fields_invest_files = $page_controler->get_form_add_check()->getFields( WDG_For
 			<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 		<?php endforeach; ?>
 		
-		<button type="submit" class="button red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+		<button type="button" id="button-contacts-check-add-check-params" class="button save red" data-callback="addCheckByPMCallback"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+		<div class="loading align-center hidden">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
+		</div>
 	</div>
 
 </form>

@@ -582,11 +582,15 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 			self.scrollTo( $( '#form-contacts-add-check' ) );
 		} );
 		
+		var aAddCheckCurrentUserOrgas = new Array();
 		$( '#button-contacts-add-check-search' ).click( function( e ) {
 			e.preventDefault();
 			$( '#button-contacts-add-check-search' ).addClass( 'disabled' );
 			$( '.add-check-feedback' ).hide();
 			$( '#fields-user-info' ).hide();
+			$( '#fields-orga-info' ).hide();
+			$( '#fields-orga-select' ).hide();
+			$( '#fields-save-info' ).hide();
 			$( '#add-check-search-loading' ).show();
 			
 			
@@ -604,8 +608,8 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 				var jsonResult = JSON.parse(result);
 				switch ( jsonResult.user_type ) {
 					case 'user':
-						$("#add-check-feedback-found-orga").hide();
-						$("#add-check-feedback-found-user").show();
+						$( '#add-check-feedback-found-orga' ).hide();
+						$( '#add-check-feedback-found-user' ).show();
 						$( '#fields-user-info' ).show();
 						$( '#fields-user-info #select-gender' ).val( jsonResult.user_data.user.gender );
 						$( '#fields-user-info #firstname' ).val( jsonResult.user_data.user.firstname );
@@ -613,21 +617,37 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 						$( '#fields-user-info #field-birthday .adddatepicker' ).datepicker( 'setDate',  jsonResult.user_data.user.birthday_day + '/' + jsonResult.user_data.user.birthday_month + '/' + jsonResult.user_data.user.birthday_year );
 						$( '#fields-user-info #birthplace' ).val( jsonResult.user_data.user.birthplace );
 						$( '#fields-user-info #select-nationality' ).val( jsonResult.user_data.user.nationality );
+						$( '#fields-user-info #address_number' ).val( jsonResult.user_data.user.address_number );
+						$( '#fields-user-info #select-address_number_complement' ).val( jsonResult.user_data.user.address_number_complement );
 						$( '#fields-user-info #address' ).val( jsonResult.user_data.user.address );
 						$( '#fields-user-info #postal_code' ).val( jsonResult.user_data.user.postal_code );
 						$( '#fields-user-info #city' ).val( jsonResult.user_data.user.city );
 						$( '#fields-user-info #select-country' ).val( jsonResult.user_data.user.country );
+						
+						// Vider et remplir la liste des organisations existantes
+						$( 'form#form-contacts-add-check select#select-orga-id option' ).each( function() {
+							if ( $( this ).val() !== '' && $( this ).val() !== 'new-orga' ) {
+								$( this ).remove();
+							}
+						} );
+						aAddCheckCurrentUserOrgas = new Array();
+						var aOrga = jsonResult.user_data.orga_list;
+						var nOrga = jsonResult.user_data.orga_list.length;
+						for ( var iOrga = 0; iOrga < nOrga; iOrga++ ) {
+							$( 'form#form-contacts-add-check select#select-orga-id' ).append( '<option value="' +aOrga[ iOrga ].wpref+ '">' +aOrga[ iOrga ].name+ '</option>' );
+							aAddCheckCurrentUserOrgas[ aOrga[ iOrga ].wpref ] = aOrga[ iOrga ];
+						}
 						break;
 						
 					case 'orga':
-						$("#add-check-feedback-found-user").hide();
+						$( '#add-check-feedback-found-user' ).hide();
 						$( '#fields-user-info' ).hide();
-						$("#add-check-feedback-found-orga").show();
+						$( '#add-check-feedback-found-orga' ).show();
 						break;
 						
 					default:
-						$("#add-check-feedback-found-orga").hide();
-						$("#add-check-feedback-not-found").show();
+						$( '#add-check-feedback-found-orga' ).hide();
+						$( '#add-check-feedback-not-found' ).show();
 						$( '#fields-user-info' ).show();
 						$( '#fields-user-info #select-gender' ).val( '' );
 						$( '#fields-user-info #firstname' ).val( '' );
@@ -635,6 +655,8 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 						$( '#fields-user-info #field-birthday .adddatepicker' ).datepicker( 'setDate',  '01/01/1970' );
 						$( '#fields-user-info #birthplace' ).val( '' );
 						$( '#fields-user-info #select-nationality' ).val( '' );
+						$( '#fields-user-info #address_number' ).val( '' );
+						$( '#fields-user-info #select-address_number_complement' ).val( '' );
 						$( '#fields-user-info #address' ).val( '' );
 						$( '#fields-user-info #postal_code' ).val( '' );
 						$( '#fields-user-info #city' ).val( '' );
@@ -657,40 +679,45 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 				$( '#fields-orga-select' ).hide();
 				$( '#fields-save-info' ).hide();
 			}
+			$( '#fields-orga-info' ).hide();
 		} );
 		
 		$( 'form#form-contacts-add-check select#select-orga-id' ).change( function() {
 			if ( $( 'form#form-contacts-add-check select#select-orga-id' ).val() != '' ) {
 				if ( $( 'form#form-contacts-add-check select#select-orga-id' ).val() == 'new-orga' ) {
 					// Vider les champs d'infos d'orga
-					$( '#fields-user-info #org_name' ).val( '' );
-					$( '#fields-user-info #org_email' ).val( '' );
-					$( '#fields-user-info #org_website' ).val( '' );
-					$( '#fields-user-info #org_legalform' ).val( '' );
-					$( '#fields-user-info #org_idnumber' ).val( '' );
-					$( '#fields-user-info #org_rcs' ).val( '' );
-					$( '#fields-user-info #org_capital' ).val( '' );
-					$( '#fields-user-info #org_address_number' ).val( '' );
-					$( '#fields-user-info #select-org_address_number_comp' ).val( '' );
-					$( '#fields-user-info #org_address' ).val( '' );
-					$( '#fields-user-info #org_postal_code' ).val( '' );
-					$( '#fields-user-info #org_city' ).val( '' );
-					$( '#fields-user-info #select-org_nationality' ).val( '' );
+					$( '#fields-orga-info #org_name' ).val( '' );
+					$( '#fields-orga-info #org_email' ).val( '' );
+					$( '#fields-orga-info #org_website' ).val( '' );
+					$( '#fields-orga-info #org_legalform' ).val( '' );
+					$( '#fields-orga-info #org_idnumber' ).val( '' );
+					$( '#fields-orga-info #org_rcs' ).val( '' );
+					$( '#fields-orga-info #org_capital' ).val( '' );
+					$( '#fields-orga-info #org_address_number' ).val( '' );
+					$( '#fields-orga-info #select-org_address_number_comp' ).val( '' );
+					$( '#fields-orga-info #org_address' ).val( '' );
+					$( '#fields-orga-info #org_postal_code' ).val( '' );
+					$( '#fields-orga-info #org_city' ).val( '' );
+					$( '#fields-orga-info #select-org_nationality' ).val( '' );
 				} else {
-					// TODO : Remplir les champs
-					$( '#fields-user-info #org_name' ).val( '' );
-					$( '#fields-user-info #org_email' ).val( '' );
-					$( '#fields-user-info #org_website' ).val( '' );
-					$( '#fields-user-info #org_legalform' ).val( '' );
-					$( '#fields-user-info #org_idnumber' ).val( '' );
-					$( '#fields-user-info #org_rcs' ).val( '' );
-					$( '#fields-user-info #org_capital' ).val( '' );
-					$( '#fields-user-info #org_address_number' ).val( '' );
-					$( '#fields-user-info #select-org_address_number_comp' ).val( '' );
-					$( '#fields-user-info #org_address' ).val( '' );
-					$( '#fields-user-info #org_postal_code' ).val( '' );
-					$( '#fields-user-info #org_city' ).val( '' );
-					$( '#fields-user-info #select-org_nationality' ).val( '' );
+					console.log( aAddCheckCurrentUserOrgas );
+					var oOrgaItem = aAddCheckCurrentUserOrgas[ $( 'form#form-contacts-add-check select#select-orga-id' ).val() ];
+					console.log( oOrgaItem );
+					console.log( oOrgaItem.name );
+					console.log( oOrgaItem[ 'name' ] );
+					$( '#fields-orga-info #org_name' ).val( oOrgaItem.name );
+					$( '#fields-orga-info #org_email' ).val( oOrgaItem.email );
+					$( '#fields-orga-info #org_website' ).val( oOrgaItem.website );
+					$( '#fields-orga-info #org_legalform' ).val( oOrgaItem.legalform );
+					$( '#fields-orga-info #org_idnumber' ).val( oOrgaItem.idnumber );
+					$( '#fields-orga-info #org_rcs' ).val( oOrgaItem.rcs );
+					$( '#fields-orga-info #org_capital' ).val( oOrgaItem.capital );
+					$( '#fields-orga-info #org_address_number' ).val( oOrgaItem.address_number );
+					$( '#fields-orga-info #select-org_address_number_comp' ).val( oOrgaItem.address_number_comp );
+					$( '#fields-orga-info #org_address' ).val( oOrgaItem.address );
+					$( '#fields-orga-info #org_postal_code' ).val( oOrgaItem.postal_code );
+					$( '#fields-orga-info #org_city' ).val( oOrgaItem.city );
+					$( '#fields-orga-info #select-org_nationality' ).val( oOrgaItem.nationality );
 				}
 				$( '#fields-orga-info' ).show();
 				$( '#fields-save-info' ).show();
@@ -701,6 +728,10 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		} );
 	}
 };
+
+function addCheckByPMCallback() {
+	console.log( 'truc' );
+}
 
 /**
  * Gestion des formulaires de mise à jour d'organisation

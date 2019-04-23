@@ -838,6 +838,14 @@ var WDGFormsFunctions = (function($) {
 				var formId = $( this ).parent().parent().parent().attr( 'id' );
 				WDGFormsFunctions.postForm( '#' + formId, WDGFormsFunctions.postFormCallback, this );
 			} );
+			$( '.ajax-form button.save' ).click( function( e ) {
+				e.preventDefault();
+				$( this ).siblings( '.loading' ).show();
+				$( this ).siblings( 'button' ).hide();
+				$( this ).hide();
+				var formId = $( this ).parent().parent().attr( 'id' );
+				WDGFormsFunctions.postForm( '#' + formId, WDGFormsFunctions.postFormCallback, this );
+			} );
 			$( '.wdg-lightbox button.close, .wdg-lightbox-ref button.close' ).click( function( e ) {
 				WDGLightboxFunctions.hideAll();
 			} );
