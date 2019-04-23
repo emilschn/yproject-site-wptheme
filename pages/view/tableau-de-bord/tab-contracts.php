@@ -493,31 +493,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 					</div>
 				</form>
-
-				<br /><br />
-				<form action="<?php echo admin_url( 'admin-post.php?action=organization_remove_mandate'); ?>" method="post">
-					<div class="field admin-theme">
-
-						<?php
-						DashboardUtility::create_field( array(
-							'id'			=> 'organization_id',
-							'type'			=> 'hidden',
-							'value'			=> $page_controler->get_campaign_organization()->get_wpref()
-						) );
-						?>
-
-						<?php
-						DashboardUtility::create_field( array(
-							'id'			=> 'mandate_id',
-							'type'			=> 'hidden',
-							'value'			=> $last_mandate_id
-						) );
-						?>
-
-						<?php DashboardUtility::create_save_button( "pay_with_mandate", TRUE, "Annuler le mandat en cours" ); ?>
-
-					</div>
-				</form>
 			<?php endif; ?>
 
 
@@ -528,6 +503,33 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php elseif ( $last_mandate_status == 9 ): //Si 9, demander de nous contacter ?>
 			<?php _e( "L'autorisation de pr&eacute;l&egrave;vement automatique a &eacute;t&eacute; rejet&eacute;e. Merci de nous contacter.", 'yproject' ); ?>
 
+		<?php endif; ?>
+				
+		<?php if ( $page_controler->can_access_admin() ): ?>
+			<br /><br />
+			<form action="<?php echo admin_url( 'admin-post.php?action=organization_remove_mandate'); ?>" method="post">
+				<div class="field admin-theme">
+
+					<?php
+					DashboardUtility::create_field( array(
+						'id'			=> 'organization_id',
+						'type'			=> 'hidden',
+						'value'			=> $page_controler->get_campaign_organization()->get_wpref()
+					) );
+					?>
+
+					<?php
+					DashboardUtility::create_field( array(
+						'id'			=> 'mandate_id',
+						'type'			=> 'hidden',
+						'value'			=> $last_mandate_id
+					) );
+					?>
+
+					<?php DashboardUtility::create_save_button( "pay_with_mandate", TRUE, "Annuler le mandat en cours" ); ?>
+
+				</div>
+			</form>
 		<?php endif; ?>
 	<?php endif; ?>		
 
