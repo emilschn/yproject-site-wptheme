@@ -1410,14 +1410,17 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 						'roideclaration_id': $(this).data('roideclaration-id')
 					}
 				}).done(function (result) {
-					var content = '<table>';
-					content += '<tr><td>Utilisateur</td><td>Investissement</td><td>Versement</td><td>Commission</td></tr>';
-					content += result;
-					content += '</table>';
+					var content = 'Versement impossible';
+					if ( result != '0' ) {
+						content = '<table>';
+						content += '<tr><td>Utilisateur</td><td>Investissement</td><td>Versement</td><td>Commission</td></tr>';
+						content += result;
+						content += '</table>';
+						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-roi-id").val(self.currentOpenedROI);
+						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").show();
+					}
 					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-content").html(content);
 					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-image").hide();
-					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-roi-id").val(self.currentOpenedROI);
-					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").show();
 				});
 			}
 		});
