@@ -244,7 +244,7 @@ class YPShortcodeManager {
 			$campaign = atcf_get_campaign( $project_id );
 			$buffer_nb_voters += $campaign->nb_voters();
 		}
-		return $buffer_nb_voters;
+		return UIHelpers::format_number( $buffer_nb_voters, 0 );
 	}
 	
 	function wdg_project_vote_intention_sum($atts, $content = '') {
@@ -267,7 +267,8 @@ class YPShortcodeManager {
 			$sum_vote_intention = $wpdb->get_var( "SELECT sum(invest_sum) FROM ".$table_name." WHERE post_id = ". $project_id );
 			$buffer_sum_vote_intention += $sum_vote_intention;
 		}
-		return $buffer_sum_vote_intention;
+		
+		return UIHelpers::format_number( $buffer_sum_vote_intention, 0 );
 	}
 	
 	function wdg_project_investors_count($atts, $content = '') {
