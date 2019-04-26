@@ -826,6 +826,7 @@ var WDGFormsFunctions = (function($) {
 			WDGFormsFunctions.initCheckboxes();
 			WDGFormsFunctions.initRateCheckboxes();
 			WDGFormsFunctions.initDatePickers();
+			WDGFormsFunctions.initTextInput();
 			WDGFormsFunctions.initFileInput();
 		},
 		
@@ -885,6 +886,15 @@ var WDGFormsFunctions = (function($) {
                 changeMonth: true,
                 changeYear: true
             });
+		},
+		
+		initTextInput: function() {
+			$( 'input.format-number' ).change( function() {
+				var sInput = $( this ).val();
+				sInput = sInput.split( ' ' ).join( '' );
+				sInput = sInput.split( ',' ).join( '.' );
+				$( this ).val( sInput );
+			} );
 		},
 		
 		initFileInput: function() {

@@ -13,7 +13,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'description'	=> "C'est le seuil de validation de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD. Vous pourrez ensuite viser l'objectif maximum !",
 			'value'			=> $page_controler->get_campaign()->minimum_goal(false),
 			'min'			=> 500,
-			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing(),
+			'complementary_class'	=> 'format-number'
 		));
 
 		DashboardUtility::create_field(array(
@@ -23,7 +24,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'description'	=> "C'est le montant maximum de votre lev&eacute;e de fonds, incluant la commission de WE DO GOOD.",
 			'value'			=> $page_controler->get_campaign()->goal(false),
 			'min'			=> 500,
-			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing(),
+			'complementary_class'	=> 'format-number'
 		));
 		
 		DashboardUtility::create_field(array(
@@ -94,7 +96,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"min"			=> 0,
 			"max"			=> 100,
 			"step"			=> 0.000000000000000000000001,
-			"editable"		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+			"editable"		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing(),
+			'complementary_class'	=> 'format-number'
 		));
 
 		DashboardUtility::create_field(array(
@@ -107,7 +110,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"max"			=> 100,
 			"step"			=> 0.000000000000000000000001,
 			"visible"		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed,
-			"editable"		=> $page_controler->can_access_admin()
+			"editable"		=> $page_controler->can_access_admin(),
+			'complementary_class'	=> 'format-number'
 		));
 
 		$contract_start_date_editable = ( $page_controler->get_campaign()->is_preparing() || $page_controler->can_access_admin() );
@@ -275,7 +279,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 							</td>
 							<td class="field field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>" data-type="number">
 								<?php if ( $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing() ): ?>
-									<input type="number" value="<?php echo $turnover; ?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />&nbsp;<?php echo $data_symbol; ?>
+									<input type="number" value="11<?php echo $turnover; ?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon format-number" />&nbsp;<?php echo $data_symbol; ?>
 								<?php else: ?>
 									<?php echo $turnover; ?>
 									<span style="padding-right: 70px;"><?php echo $data_symbol; ?></span>
