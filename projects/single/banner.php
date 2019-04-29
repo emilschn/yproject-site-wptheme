@@ -41,11 +41,13 @@ if (is_user_logged_in()) {
 }
 
 $owner_str = '';
+$lightbox_title = '';
 $lightbox_content = '';
 $current_organization = $campaign->get_organization();
 if (!empty($current_organization)) {
 	$wdg_organization = new WDGOrganization( $current_organization->wpref, $current_organization );
 	
+	$lightbox_title = $wdg_organization->get_name();
 	$owner_str = $wdg_organization->get_name();
 	$lightbox_content = '<div class="lightbox-organization-separator"></div>
 		<div class="content align-left"><br />
@@ -94,7 +96,7 @@ $lang_list = $campaign->get_lang_list();
 			<p>
 				<?php _e("Un projet port&eacute; par", 'yproject'); ?> <a href="#project-organization" class="wdg-button-lightbox-open" data-lightbox="project-organization"><?php echo $owner_str; ?></a>
 			</p>
-			<?php echo do_shortcode('[yproject_lightbox_cornered id="project-organization" title="'.$wdg_organization->get_name().'"]'.$lightbox_content.'[/yproject_lightbox_cornered]'); ?>
+			<?php echo do_shortcode('[yproject_lightbox_cornered id="project-organization" title="'.$lightbox_title.'"]'.$lightbox_content.'[/yproject_lightbox_cornered]'); ?>
 		</div>
 	</div>
 
