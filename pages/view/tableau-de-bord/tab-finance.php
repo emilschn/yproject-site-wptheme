@@ -279,7 +279,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 							</td>
 							<td class="field field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>" data-type="number">
 								<?php if ( $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing() ): ?>
-									<input type="number" value="11<?php echo $turnover; ?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon format-number" />&nbsp;<?php echo $data_symbol; ?>
+									<input type="number" value="<?php echo $turnover; ?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon format-number" />&nbsp;<?php echo $data_symbol; ?>
 								<?php else: ?>
 									<?php echo $turnover; ?>
 									<span style="padding-right: 70px;"><?php echo $data_symbol; ?></span>
