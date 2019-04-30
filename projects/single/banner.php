@@ -19,7 +19,6 @@ $btn_follow_data_lightbox = 'connexion';
 $btn_follow_text = __('Suivre', 'yproject');
 $btn_follow_following = '0';
 $has_voted = false;
-$has_voted_and_preinvested = false;
 if (is_user_logged_in()) {
 	$WDGUser_current = WDGUser::current();
 	$btn_follow_classes = 'update-follow';
@@ -34,9 +33,6 @@ if (is_user_logged_in()) {
 	
 	if ($campaign_status == "vote") {
 		$has_voted = $WDGUser_current->has_voted_on_campaign( $campaign->ID );
-		if ( $has_voted ) {
-			$has_voted_and_preinvested = $WDGUser_current->has_invested_on_campaign( $campaign->ID );
-		}
 	}
 }
 
@@ -206,11 +202,6 @@ $lang_list = $campaign->get_lang_list();
 							<a href="<?php echo home_url( '/connexion/' ); ?>?source=project" class="button red">
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
-
-						<?php elseif ( $has_voted_and_preinvested ): ?>
-							<div style="-webkit-filter: grayscale(100%); text-transform: uppercase; text-align: center; padding-top: 25px;">
-								<?php _e( "Merci pour votre pr&eacute;-investissement !", 'yproject' ); ?>
-							</div>
 
 						<?php elseif ( $has_voted ): ?>
 							<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
