@@ -11,9 +11,7 @@ $campaign_status = $campaign->campaign_status();
 		<?php locate_template( array("projects/single/voteform-lightbox.php"), true ); ?>
 	<?php else: ?>
 		<?php locate_template( array("projects/single/voteform-lightbox-share.php"), true ); ?>
-		<?php if ( !$WDGUser_current->has_invested_on_campaign( $campaign->ID ) ): ?>
-			<?php locate_template( array("projects/single/preinvestment-warning-lightbox.php"), true ); ?>
-		<?php endif; ?>
+		<?php locate_template( array("projects/single/preinvestment-warning-lightbox.php"), true ); ?>
 	<?php endif; ?>
 <?php endif; ?>
 
