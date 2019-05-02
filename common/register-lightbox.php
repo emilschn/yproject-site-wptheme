@@ -23,7 +23,7 @@
 					<label for="signup_email"><?php _e( 'Adresse e-mail', 'yproject' ); ?> *</label>
 					<div class="field-container">
 						<span class="field-value">
-							<input type="text" name="signup_email" id="signup_email" value="<?php if (!empty($_POST['signup_email'])) { echo $_POST['signup_email']; } ?>" />
+							<input type="email" name="signup_email" id="signup_email" value="<?php if (!empty($_POST['signup_email'])) { echo $_POST['signup_email']; } ?>" />
 						</span>
 					</div>
 				</div>

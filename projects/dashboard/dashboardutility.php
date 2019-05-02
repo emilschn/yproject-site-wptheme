@@ -51,7 +51,8 @@ class DashboardUtility
 				'label'			=> $params[ 'label' ],
 				'value'			=> $params[ 'value' ],
 				'admin_theme'	=> $admin_theme,
-				'warning'		=> $warning
+				'warning'		=> $warning,
+				'complementary_class'	=> $params[ 'complementary_class' ]
 			);
 			
 			if ( isset( $params[ 'description' ] ) ) {
@@ -167,8 +168,10 @@ class DashboardUtility
         $type = $params[ 'type' ];
         $id = $params["id"];
         $label = $params["label"];
+		
+		$complementary_class = $params[ 'complementary_class' ];
+		
         $infobubble = $params["infobubble"];
-
         $fillbubble = $params["fillbubble"];
         $fillbubble_class = " ";
         if(!empty($fillbubble)){
@@ -241,7 +244,7 @@ class DashboardUtility
         if ($type == 'check') {
             $text_field .='<span class="field-container field-type-'.$type.'"">'.$prefix.'<span class="field-value" data-type="'.$type.'" data-id="'.$id.'">
             <input type="checkbox"
-                class="'.$fillbubble_class.'"';
+                class="'.$fillbubble_class.$complementary_class.'"';
                 if($initial_value){$text_field .='checked ';}
                 if(!$editable){$text_field .='disabled ';}
                 if($editable){$text_field .='id="'.$id.'"';}
@@ -279,7 +282,7 @@ class DashboardUtility
                             . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
                             . 'value="' . $initial_value . '" '
-                            . 'class="'.$fillbubble_class.$icon_class.'"';
+                            . 'class="'.$fillbubble_class.$complementary_class.$icon_class.'"';
                         $text_field .= '">';
                         break;
                     case 'textarea':
@@ -287,7 +290,7 @@ class DashboardUtility
                             . 'name="' . $id . '" '
                             . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
-                            . 'class="'.$fillbubble_class.$icon_class.'"'
+                            . 'class="'.$fillbubble_class.$complementary_class.$icon_class.'"'
                             .'">'
                             .$initial_value.'</textarea>';
                         break;
@@ -298,7 +301,7 @@ class DashboardUtility
                             . 'placeholder="' . $placeholder . '" '
                             . 'step="' . $step . '" '
                             . 'value="' . $initial_value . '" '
-                            . 'class="'.$fillbubble_class.$icon_class.'"';
+                            . 'class="'.$fillbubble_class.$complementary_class.$icon_class.'"';
                         if (isset($max)) {
                             $text_field .= 'max="' . $max . '" ';
                         }
@@ -311,7 +314,7 @@ class DashboardUtility
                         $text_field .= '<select type="text" '
                             . 'name="' . $id . '" '
                             . 'id="' . $id . '" '
-                            . 'class="'.$fillbubble_class.$icon_class.'"'
+                            . 'class="'.$fillbubble_class.$complementary_class.$icon_class.'"'
                             . '" >';
                         foreach ($options_list as $index => $name) {
                             $text_field .= '<option value="' . $index . '" ';
@@ -340,7 +343,7 @@ class DashboardUtility
                     case 'date':
                         $text_field .= '<input type="text"'
                             . 'name="' . $id . '" '
-                            . 'class="adddatepicker ' .$fillbubble_class.$icon_class. '" '
+                            . 'class="adddatepicker ' .$fillbubble_class.$complementary_class.$icon_class. '" '
                             . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
                             . 'value="' . $initial_value->format('d/m/Y') . '" '
@@ -349,7 +352,7 @@ class DashboardUtility
                     case 'datetime':
                         $text_field .= '<input type="text"'
                             . 'name="' . $id . '" '
-                            . 'class="adddatepicker datetime ' .$fillbubble_class.$icon_class. '" '
+                            . 'class="adddatepicker datetime ' .$fillbubble_class.$complementary_class.$icon_class. '" '
                             . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
                             . 'value="' . $initial_value->format('d/m/Y') . '" '
@@ -381,14 +384,14 @@ class DashboardUtility
                             . 'id="' . $id . '" '
                             . 'placeholder="' . $placeholder . '" '
                             . 'value="' . $initial_value . '" '
-                            . 'class="'.$fillbubble_class.$icon_class.'"/>';
+                            . 'class="'.$fillbubble_class.$complementary_class.$icon_class.'"/>';
                         break;
 					case 'upload':
 						$download_label = $params["download_label"];
                         $text_field .= '<input type="file" '
                             . 'name="' . $id . '" '
                             . 'id="' . $id . '" '
-                            . 'class="'.$fillbubble_class.$icon_class.'" /> ';
+                            . 'class="'.$fillbubble_class.$complementary_class.$icon_class.'" /> ';
 						if ( !empty($initial_value) ) {
 							$text_field .= '<a href="'.$initial_value.'" download="'.$download_label.'">' .__("T&eacute;l&eacute;charger", 'yproject'). '</a>';
 						} else {

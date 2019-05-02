@@ -90,17 +90,32 @@ var WDGProjectViewer = (function($) {
 					$(".project-rewards-padder div.hidden").show();
 					
 				} else {
-					var inputVal = Number($(this).val());
-					if (isNaN(inputVal) || inputVal < 0) inputVal = 0;
 					var percentProject = Number($("input#roi_percent_project").val());
 					var goalProject = Number($("input#roi_goal_project").val());
 					var maxProfit = Number($("input#roi_maximum_profit").val());
+					$( '#error-maximum, #error-input, #error-amount' ).hide( 100 );
 					
+					var bIsCorrectInput = true;
+					var sInput =  $( this ).val();
+					sInput = sInput.split( ' ' ).join( '' );
+					sInput = sInput.split( ',' ).join( '.' );
+					var inputVal = Number( sInput );
+					if ( isNaN( inputVal ) ) {
+						inputVal = 0;
+						$( '#error-input' ).show( 100 );
+						bIsCorrectInput = false;
+					}
+					if ( inputVal < 0 || inputVal !== parseInt( inputVal, 10 ) ) {
+						inputVal = 0;
+						$( '#error-amount' ).show( 100 );
+						bIsCorrectInput = false;
+					}
 					if ( inputVal > goalProject ) {
 						$( '#error-maximum' ).show( 100 );
-					} else {
-						$( '#error-maximum' ).hide( 100 );
-						
+						bIsCorrectInput = false;
+					}
+					
+					if ( bIsCorrectInput ) {
 						var maxRoi = inputVal * maxProfit;
 						var maxRoiRemaining = maxRoi;
 						var ratioOfGoal = inputVal / goalProject;

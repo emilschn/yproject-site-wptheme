@@ -19,7 +19,6 @@ $btn_follow_data_lightbox = 'connexion';
 $btn_follow_text = __('Suivre', 'yproject');
 $btn_follow_following = '0';
 $has_voted = false;
-$has_voted_and_preinvested = false;
 if (is_user_logged_in()) {
 	$WDGUser_current = WDGUser::current();
 	$btn_follow_classes = 'update-follow';
@@ -34,18 +33,17 @@ if (is_user_logged_in()) {
 	
 	if ($campaign_status == "vote") {
 		$has_voted = $WDGUser_current->has_voted_on_campaign( $campaign->ID );
-		if ( $has_voted ) {
-			$has_voted_and_preinvested = $WDGUser_current->has_invested_on_campaign( $campaign->ID );
-		}
 	}
 }
 
 $owner_str = '';
+$lightbox_title = '';
 $lightbox_content = '';
 $current_organization = $campaign->get_organization();
 if (!empty($current_organization)) {
 	$wdg_organization = new WDGOrganization( $current_organization->wpref, $current_organization );
 	
+	$lightbox_title = $wdg_organization->get_name();
 	$owner_str = $wdg_organization->get_name();
 	$lightbox_content = '<div class="lightbox-organization-separator"></div>
 		<div class="content align-left"><br />
@@ -94,7 +92,7 @@ $lang_list = $campaign->get_lang_list();
 			<p>
 				<?php _e("Un projet port&eacute; par", 'yproject'); ?> <a href="#project-organization" class="wdg-button-lightbox-open" data-lightbox="project-organization"><?php echo $owner_str; ?></a>
 			</p>
-			<?php echo do_shortcode('[yproject_lightbox_cornered id="project-organization" title="'.$wdg_organization->get_name().'"]'.$lightbox_content.'[/yproject_lightbox_cornered]'); ?>
+			<?php echo do_shortcode('[yproject_lightbox_cornered id="project-organization" title="'.$lightbox_title.'"]'.$lightbox_content.'[/yproject_lightbox_cornered]'); ?>
 		</div>
 	</div>
 
@@ -204,11 +202,6 @@ $lang_list = $campaign->get_lang_list();
 							<a href="<?php echo home_url( '/connexion/' ); ?>?source=project" class="button red">
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
-
-						<?php elseif ( $has_voted_and_preinvested ): ?>
-							<div style="-webkit-filter: grayscale(100%); text-transform: uppercase; text-align: center; padding-top: 25px;">
-								<?php _e( "Merci pour votre pr&eacute;-investissement !", 'yproject' ); ?>
-							</div>
 
 						<?php elseif ( $has_voted ): ?>
 							<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>

@@ -12,7 +12,7 @@
 				<label for="signin_username"><?php _e( 'E-mail ou identifiant', 'yproject' ); ?> *</label>
 				<div class="field-container">
 					<span class="field-value">
-						<input type="text" name="log" id="signin_username" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" />
+						<input type="email" name="log" id="signin_username" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" />
 					</span>
 				</div>
 			</div>
