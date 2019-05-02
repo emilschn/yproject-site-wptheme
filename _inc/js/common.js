@@ -1039,15 +1039,18 @@ var WDGFormsFunctions = (function($) {
 			if ( $( formid+' button.previous' ).length > 0 ) {
 				$( formid+' button.previous' ).show();
 			}
-			var jsonResult = JSON.parse(result);
-			if ( jsonResult.errors === undefined || jsonResult.errors.length === 0 ) {
-				if ( $( clickedButton ).data( 'close' ) !== undefined && $( clickedButton ).data( 'close' ) !== '' ) {
-					$( '#wdg-lightbox-' + $( clickedButton ).data( 'close' ) ).hide();
+			
+			try {
+				var jsonResult = JSON.parse(result);
+				if ( jsonResult.errors === undefined || jsonResult.errors.length === 0 ) {
+					if ( $( clickedButton ).data( 'close' ) !== undefined && $( clickedButton ).data( 'close' ) !== '' ) {
+						$( '#wdg-lightbox-' + $( clickedButton ).data( 'close' ) ).hide();
+					}
+					if ( $( clickedButton ).data( 'open' ) !== undefined && $( clickedButton ).data( 'open' ) !== '' ) {
+						$( '#wdg-lightbox-' + $( clickedButton ).data( 'open' ) ).show();
+					}
 				}
-				if ( $( clickedButton ).data( 'open' ) !== undefined && $( clickedButton ).data( 'open' ) !== '' ) {
-					$( '#wdg-lightbox-' + $( clickedButton ).data( 'open' ) ).show();
-				}
-			}
+			} catch(e) { }
 			
 			var callbackFunctionName = $( clickedButton ).data( 'callback' );
 			if ( callbackFunctionName !== undefined && callbackFunctionName !== '' ) {

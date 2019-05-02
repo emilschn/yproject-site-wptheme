@@ -9,7 +9,7 @@ $fields_orga_info = $page_controler->get_form_add_check()->getFields( WDG_Form_D
 $fields_invest_files = $page_controler->get_form_add_check()->getFields( WDG_Form_Dashboard_Add_Check::$field_group_invest_files );
 ?>
 
-<form action="" method="post" id="form-contacts-add-check" class="db-form v3 full center bg-white ajax-form hidden">
+<form action="" method="post" id="form-contacts-add-check" class="db-form v3 full center bg-white ajax-form has-files hidden">
 	<div class="align-justify">
 		<h3><?php _e( "Ajouter un investissement par ch&egrave;que", 'yproject' ); ?></h3>
 		<?php _e( "Pour ajouter un investissement par ch&egrave;que, vous aurez besoin des informations compl&egrave;tes de votre investisseur (et de sa structure/entreprise si il investit en tant que personne morale).", 'yproject' ); ?><br>

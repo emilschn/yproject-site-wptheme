@@ -82,7 +82,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'dashboard-add-check' );
-		$this->form_add_check = new WDG_Form_Dashboard_Add_Check( $this->current_campaign->ID, $this->current_user->get_wpref() );
+		$this->form_add_check = new WDG_Form_Dashboard_Add_Check( $this->campaign_id );
 		
 		$current_organization = $this->get_campaign_organization();
 		if ( isset($_POST['authentify_lw']) ) {

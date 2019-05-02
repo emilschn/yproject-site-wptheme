@@ -699,11 +699,7 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 					$( '#fields-orga-info #org_city' ).val( '' );
 					$( '#fields-orga-info #select-org_nationality' ).val( '' );
 				} else {
-					console.log( aAddCheckCurrentUserOrgas );
 					var oOrgaItem = aAddCheckCurrentUserOrgas[ $( 'form#form-contacts-add-check select#select-orga-id' ).val() ];
-					console.log( oOrgaItem );
-					console.log( oOrgaItem.name );
-					console.log( oOrgaItem[ 'name' ] );
 					$( '#fields-orga-info #org_name' ).val( oOrgaItem.name );
 					$( '#fields-orga-info #org_email' ).val( oOrgaItem.email );
 					$( '#fields-orga-info #org_website' ).val( oOrgaItem.website );
@@ -728,7 +724,7 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 	}
 };
 
-function addCheckByPMCallback() {
+function addCheckByPMCallback( result ) {
 	console.log( 'truc' );
 }
 
