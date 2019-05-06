@@ -200,7 +200,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 //			'/investissement/cooperatives/'							=> '0.5',
 			'/investissement/fiscalite-royalties/'					=> '0.5',
 			// 0.4
-			'/financement/offres/amorcage-crowdfunding/'			=> '0.4',
+//			'/financement/offres/amorcage-crowdfunding/'			=> '0.4',
 			'/financement/offres/crowdfunding-accompagnement/'		=> '0.4',
 //			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
 			// 0.3
