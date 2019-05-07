@@ -726,21 +726,32 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 
 function addCheckByPMCallback( result ) {
 	$( 'form#form-contacts-add-check p.errors' ).remove();
-	var resultParsed = JSON.parse( result );
-	var fdErrorsData = resultParsed.errors;
-	var count_data_errors = 0;
-	for ( var error in fdErrorsData ){
-		if ( error !== "" ) {
-			count_data_errors++;
-			var err = $( "<p class='errors'>" + fdErrorsData[ error ][ 1 ] + "</p>" );
-			err.insertBefore( $( "form#form-contacts-add-check div#field-" + fdErrorsData[ error ][ 0 ] + " .field-container" ) );
-		}
-	}
-	if( count_data_errors > 0 ) {
-		var firsterror = $( 'form#form-contacts-add-check' ).find( '.errors' ).first().parent();
-		if ( firsterror.length === 1 ){
-			wdgCampaignDashboard.scrollTo( firsterror );
-		}
+	if ( result != '' ) {
+		try {
+			var resultParsed = JSON.parse( result );
+			var fdErrorsData = resultParsed.errors;
+			var count_data_errors = 0;
+			for ( var error in fdErrorsData ){
+				if ( error !== "" ) {
+					count_data_errors++;
+					var err = $( "<p class='errors'>" + fdErrorsData[ error ][ 1 ] + "</p>" );
+					err.insertBefore( $( "form#form-contacts-add-check div#field-" + fdErrorsData[ error ][ 0 ] + " .field-container" ) );
+				}
+			}
+			if( count_data_errors > 0 ) {
+				var firsterror = $( 'form#form-contacts-add-check' ).find( '.errors' ).first().parent();
+				if ( firsterror.length === 1 ){
+					wdgCampaignDashboard.scrollTo( firsterror );
+				}
+			} else {
+				if ( resultParsed.success === '1' ) {
+					$( 'form#form-contacts-add-check .loading' ).show();
+					$( 'form#form-contacts-add-check button' ).hide();
+					window.location.reload();
+				}
+			}
+			
+		} catch(e) { }
 	}
 }
 
