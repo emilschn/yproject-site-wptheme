@@ -624,7 +624,7 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 						$( '#fields-user-info #select-country' ).val( jsonResult.user_data.user.country );
 						
 						// Vider et remplir la liste des organisations existantes
-						$( 'form#form-contacts-add-check select#select-orga-id option' ).each( function() {
+						$( 'form#form-contacts-add-check select#select-orga_id option' ).each( function() {
 							if ( $( this ).val() !== '' && $( this ).val() !== 'new-orga' ) {
 								$( this ).remove();
 							}
@@ -633,7 +633,7 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 						var aOrga = jsonResult.user_data.orga_list;
 						var nOrga = jsonResult.user_data.orga_list.length;
 						for ( var iOrga = 0; iOrga < nOrga; iOrga++ ) {
-							$( 'form#form-contacts-add-check select#select-orga-id' ).append( '<option value="' +aOrga[ iOrga ].wpref+ '">' +aOrga[ iOrga ].name+ '</option>' );
+							$( 'form#form-contacts-add-check select#select-orga_id' ).append( '<option value="' +aOrga[ iOrga ].wpref+ '">' +aOrga[ iOrga ].name+ '</option>' );
 							aAddCheckCurrentUserOrgas[ aOrga[ iOrga ].wpref ] = aOrga[ iOrga ];
 						}
 						break;
@@ -681,9 +681,9 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 			$( '#fields-orga-info' ).hide();
 		} );
 		
-		$( 'form#form-contacts-add-check select#select-orga-id' ).change( function() {
-			if ( $( 'form#form-contacts-add-check select#select-orga-id' ).val() != '' ) {
-				if ( $( 'form#form-contacts-add-check select#select-orga-id' ).val() == 'new-orga' ) {
+		$( 'form#form-contacts-add-check select#select-orga_id' ).change( function() {
+			if ( $( 'form#form-contacts-add-check select#select-orga_id' ).val() != '' ) {
+				if ( $( 'form#form-contacts-add-check select#select-orga_id' ).val() == 'new-orga' ) {
 					// Vider les champs d'infos d'orga
 					$( '#fields-orga-info #org_name' ).val( '' );
 					$( '#fields-orga-info #org_email' ).val( '' );
@@ -699,7 +699,7 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 					$( '#fields-orga-info #org_city' ).val( '' );
 					$( '#fields-orga-info #select-org_nationality' ).val( '' );
 				} else {
-					var oOrgaItem = aAddCheckCurrentUserOrgas[ $( 'form#form-contacts-add-check select#select-orga-id' ).val() ];
+					var oOrgaItem = aAddCheckCurrentUserOrgas[ $( 'form#form-contacts-add-check select#select-orga_id' ).val() ];
 					$( '#fields-orga-info #org_name' ).val( oOrgaItem.name );
 					$( '#fields-orga-info #org_email' ).val( oOrgaItem.email );
 					$( '#fields-orga-info #org_website' ).val( oOrgaItem.website );
@@ -720,6 +720,14 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 				$( '#fields-orga-info' ).hide();
 				$( '#fields-save-info' ).hide();
 			}
+		} );
+	}
+	
+	if ( $( 'div#investment-drafts-list' ).length > 0 ) {
+		$( 'button.btn-view-investment-draft' ).click( function() {
+			var draftid = $( this ).data( 'draftid' );
+			console.log( draftid );
+			$( 'form#preview-investment-draft-' + draftid ).toggle();
 		} );
 	}
 };

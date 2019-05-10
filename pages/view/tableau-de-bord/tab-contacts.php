@@ -82,6 +82,7 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 	<br><br>
 	<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/add-check.php'  ), true ); ?>
 </div>
+<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/view-investment-draft.php'  ), true ); ?>
 <?php endif; ?>
 			
 <?php if ( $page_controler->can_access_admin() ): ?>
