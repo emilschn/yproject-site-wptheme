@@ -1,51 +1,62 @@
 body {
-	margin: 20px 100px;
-	font-family: Arial,sans-serif;
+	max-width: 600px;
+	margin: 24px auto 24px;
+	font-family: Trebuchet MS, sans-serif;
 	font-size: 16px;
 	color: #2B2C2C;
 }
-@media screen and (max-width: 767px) {
-	margin: 5px;
+@media screen and (max-width: 600px) {
+	body { margin: 24px 8px 24px; }
 }
+body a { color: #EA4F51; text-decoration: none; }
+body input, body select { font-family: Trebuchet MS, sans-serif; }
 
+table.sips_shop_name_table tbody br { display: none; }
+table.sips_shop_name_table tbody center { text-align: left; }
+table.sips_shop_name_table tbody font { text-transform: uppercase; color: #00879b; font-size: 18px }
+
+img.sips_logo { margin-top: -40px }
+table.sips_trans_ref_table tr td { padding-bottom: 8px; }
+table.sips_trans_ref_table tr td:first-child span:after { content: " :"; }
+table.sips_trans_ref_table tr td:last-child i { font-style: normal; }
+
+b.sips_secure_message { font-weight: normal; }
 
 form { margin:0; padding:5px 2px 0 2px; }
+
+form span.sips_card_number_title, form span.sips_expiry_date_card_title:nth-child(3) { display: block; margin-bottom: 4px; font-weight: bold; }
+form input.sips_card_number_input, form input.sips_cvvkey_mandatory_text_input { width: calc(100% - 16px); height: 50px; margin: 0px 0px 8px ; padding: 3px 8px; background: #F4F2F2; border: 0px; }
+form select.sips_expiry_month_card_input, form select.sips_expiry_year_card_input {
+	width: 45%; height: 50px; margin: 0px 0px 8px ; padding: 3px 8px; border: 0px; 
+	-webkit-appearance: none; -moz-appearance: none; overflow: hidden; background-size: 50px; padding-right: 50px;
+	background: url("https://www.wedogood.co/wp-content/themes/yproject/images/common/arrow-filter.png") no-repeat right #F4F2F2;
+}
+form select.sips_expiry_year_card_input { float: right; }
+form span.sips_expiry_date_card_title:nth-child(5) { display: none; }
+
 table.sips_trans_ref_table tr td:last-child { padding-left: 20px; }
 table.sips_trans_ref_table tr td:last-child b { font-weight: normal; }
+
 table.sips_cryptogram_table { border: none; }
 table.sips_cryptogram_table td.sips_cryptogram_message { border: none; }
-table.sips_cryptogram_table td.sips_cryptogram_message a { display: block; }
-.sips_submit_button { margin: 10px; padding:7px 30px 7px 30px; background-color:#B5C338; color:white; border:none; -webkit-appearance: none; cursor: pointer; }
-.sips_submit_button:active { background-color: white; color: #B5C338; }
-.sips_customer_return_button { margin:0 0 20px 0; padding:7px 10px 7px 10px; background-color:#de4343; color: white; border:none; -webkit-appearance: none; cursor: pointer; }
-.sips_customer_return_button:active { background-color:white; color:#de4343; }
+form span.sips_card_cvv2_message { display: block; margin-bottom: 4px; font-weight: bold; text-align: justify; }
+table.sips_cryptogram_table td.sips_cryptogram_message a { display: block; margin-top: -120px; }
+form input.sips_cvvkey_mandatory_text_input { margin-top: 48px; }
+form div.sips_threeD_info_message { text-align: justify !important; margin-top: 64px; }
 
-/*
-.sips_body_page {
-	background-color:white;
-	width:auto;
-	margin:auto;
-	text-align:center;
+hr { display: none; }
+form .sips_submit_message { font-weight: bold; }
+form .sips_submit_button { display: block; float: right; width: 45%; height: 50px; margin-top: 15px; padding: 5px 15px; background-color:#EA4F51; color:#FFF; border:none; -webkit-appearance: none; cursor: pointer; }
+form .sips_submit_button:active { background-color:#EA4F51; color:#FFF;  }
+form .sips_customer_return_button { display: block; float: left; width: 45%; height: 50px; margin-top: 10px; padding: 5px 15px; background: none repeat scroll 0 0 transparent; border: 2px solid #333; color: #333; -webkit-appearance: none; cursor: pointer; /*! word-wrap: now; */white-space: normal;}
+form .sips_customer_return_button:active { background: none repeat scroll 0 0 transparent; border: 2px solid #333; color: #333;  }
+@media screen and (max-width: 480px) {
+	form .sips_submit_button { height: 60px; margin-top: 35px; }
+	form .sips_customer_return_button { height: 60px; }
 }
-.sips_shop_name_table{display:none;}
-.sips_logo{display:none;}
-.sips_trans_ref_table{margin:auto;background-color:#fff;padding:10px;border:none;color:#777;font-size:0.8em;}
-.sips_trans_ref_table tr + tr +tr{color:#B5C338;font-size:1.2em;}
-.sips_secure_message{color:grey;display:none;text-align:center;width:auto;margin:auto;font-weight:normal;}
-img{margin-top:-15px;}
-.sips_card_number_title{color:#B5C338;font-size:1.2em;}
-.sips_card_number_input{border-radius:5px;border-color:rgb(227,227,227);border-style:solid;border-width:1px;padding:9px 5px 9px 5px;}
-.sips_expiry_month_card_input{border-radius:5px;border-color:rgb(227,227,227);border-style:solid;border-width:1px;padding:9px 5px 9px 5px;}
-.sips_expiry_year_card_input{border-radius:5px;border-color:rgb(227,227,227);border-style:solid;border-width:1px;padding:9px 5px 9px 5px;}
-.sips_expiry_date_card_title{margin-left:10px;color:#B5C338;font-size:1.2em;}
-.sips_cryptogram_table{border:none;max-width:590px;text-align:center;color:#B5C338;margin:auto;padding-top:5px;}
-.sips_cryptogram_message{border:none;font-size:1em;}
-.sips_cvvkey_mandatory_text_input{border-radius:5px;border-color:#d7d7d7;border-style:solid;border-width:1px;	padding:9px 5px 9px 5px;min-width:40px;}
-.sips_card_cvv2_message{color:#B5C338;}
-.sips_threeD_info_message{color:white;display:none;text-align:center;width:50%;margin:auto;font-size:0.8em;}
-.sips_cryptogram_example{display:none;}
-.sips_submit_message{color:#B5C338;font-size:1.2em;display:none;}
-.sips_error_code{color:#de4343;}
-.sips_error{color:#de4343;}
-.sips_footer_message{display:none;}
-*/
+@media screen and (max-width: 350px) {
+	form .sips_submit_button { margin-top: 15px; }
+}
+
+body center:nth-of-type(2) { clear: both; }
+i.sips_footer_message { font-weight: normal; font-size: 12px; display: inline-block; }
