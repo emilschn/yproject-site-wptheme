@@ -109,6 +109,7 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 				<a href="#contacts" data-mailtype="prelaunch" class="button admin-theme show-notifications"><?php _e("Envoyer les relances de pr&eacute;-lancement","yproject") ?></a>
 			<?php endif; ?>
 			<?php if ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_collecte ): ?>
+				<a href="#contacts" data-mailtype="investment-2days" class="button admin-theme show-notifications"><?php _e( "Envoyer les relances d'investissement J-2", 'yproject' ); ?></a>
 				<?php if ( $page_controler->is_campaign_funded() ): ?>
 				<a href="#contacts" data-mailtype="investment-100" class="button admin-theme show-notifications"><?php _e( "Envoyer les relances d'investissement 100 %", 'yproject' ); ?></a>
 				<?php else: ?>
