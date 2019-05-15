@@ -171,8 +171,8 @@ function view_investment_draft_helper_apply_draft( $is_existing_user, $current_d
 						<br><br>
 						<?php endif; ?>
 							
-						<b><?php _e( "Photo du ch&egrave;que :", 'yproject' ) ?></b> TODO DWNL<br>
-						<b><?php _e( "Photos du contrat :", 'yproject' ) ?></b> TODO DWNL<br>
+						<b><?php _e( "Photo du ch&egrave;que :", 'yproject' ) ?></b> <a href="<?php echo $investments_drafts_item->check; ?>" target="_blank"><?php _e( "T&eacute;l&eacute;charger", 'yproject' ); ?></a><br>
+						<b><?php _e( "Photos du contrat :", 'yproject' ) ?></b> <a href="<?php echo $investments_drafts_item->contract; ?>" target="_blank"><?php _e( "T&eacute;l&eacute;charger", 'yproject' ); ?></a><br>
 						
 						<br>
 					</div>
