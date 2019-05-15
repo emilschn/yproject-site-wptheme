@@ -615,6 +615,9 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 						$( '#fields-user-info #lastname' ).val( jsonResult.user_data.user.lastname );
 						$( '#fields-user-info #field-birthday .adddatepicker' ).datepicker( 'setDate',  jsonResult.user_data.user.birthday_day + '/' + jsonResult.user_data.user.birthday_month + '/' + jsonResult.user_data.user.birthday_year );
 						$( '#fields-user-info #birthplace' ).val( jsonResult.user_data.user.birthplace );
+						$( '#fields-user-info #select-birthplace_department' ).val( jsonResult.user_data.user.birthplace_department );
+						$( '#fields-user-info #select-birthplace_district' ).val( jsonResult.user_data.user.birthplace_district );
+						$( '#fields-user-info #select-birthplace_country' ).val( jsonResult.user_data.user.birthplace_country );
 						$( '#fields-user-info #select-nationality' ).val( jsonResult.user_data.user.nationality );
 						$( '#fields-user-info #address_number' ).val( jsonResult.user_data.user.address_number );
 						$( '#fields-user-info #select-address_number_complement' ).val( jsonResult.user_data.user.address_number_complement );
@@ -726,8 +729,36 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 	if ( $( 'div#investment-drafts-list' ).length > 0 ) {
 		$( 'button.btn-view-investment-draft' ).click( function() {
 			var draftid = $( this ).data( 'draftid' );
-			console.log( draftid );
 			$( 'form#preview-investment-draft-' + draftid ).toggle();
+		} );
+		
+		$( 'button.apply-draft-data' ).click( function() {
+			var self = this;
+			var userId = $( this ).parent().data( 'userid' );
+			var orgaId = $( this ).parent().data( 'orgaid' );
+			var draftId = $( this ).parent().data( 'draftid' );
+			var dataType = $( this ).data( 'type' );
+			var dataValue = $( this ).data( 'value' );
+			$( self ).hide();
+			if ( dataType === 'all' ) {
+				$( '#preview-investment-draft-' +draftId+ ' button.apply-draft-data' ).hide();
+			}
+			$( '#preview-investment-draft-' +draftId+ ' #img-loading-data-' + dataType ).show();
+			$.ajax( {
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': {
+					'action': 'apply_draft_data',
+					'user_id': userId,
+					'orga_id': orgaId,
+					'draft_id': draftId,
+					'data_type': dataType,
+					'data_value': dataValue
+				}
+			} ).done( function( result ) {
+				$( '<i class="text-green">' +result+ '</i>' ).insertAfter( $( '#preview-investment-draft-' +draftId+ ' #img-loading-data-' + dataType ) );
+				$( '#preview-investment-draft-' +draftId+ ' #img-loading-data-' + dataType ).hide();
+			} );
 		} );
 	}
 };

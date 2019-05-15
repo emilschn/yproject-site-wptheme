@@ -3,7 +3,7 @@
     $voc = $campaign->funding_type_vocabulary();
     ?>
 
-    <div class="ajax-investments-load" data-value="<?php echo $id_campaign?>">
+    <div class="ajax-investments-load-short" data-value="<?php echo $id_campaign?>">
     <h3><?php _e("G&eacute;n&eacute;ral", 'yproject'); ?></h3>
     <div class="ajax-data-inv-loader-img"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
     <p><strong class="data-inv-count_validate_investments">&hellip;</strong> <?php echo $voc['investor_action']?>s <?php _e("valid&eacute;", 'yproject'); ?><?php if ($voc['action_feminin']){echo 'e';}?>s par 

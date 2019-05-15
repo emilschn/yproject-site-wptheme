@@ -361,9 +361,13 @@ YPUIFunctions = (function($) {
 			});
 
 			//Si chargement données investisseurs/investissements nécessaire
-			if ($(".ajax-investments-load").length > 0) {
-				campaign_id = $(".ajax-investments-load").attr('data-value');
-				YPUIFunctions.getInvestments(campaign_id);
+			if ($('.ajax-investments-load').length > 0) {
+				campaign_id = $('.ajax-investments-load').attr('data-value');
+				YPUIFunctions.getInvestments(campaign_id, false);
+			}
+			if ($('.ajax-investments-load-short').length > 0) {
+				campaign_id = $('.ajax-investments-load-short').attr('data-value');
+				YPUIFunctions.getInvestments(campaign_id, true);
 			}
 			//Formulaire envoi mail
 			$("#jycrois-send-mail-selector").change(function(){
@@ -499,13 +503,14 @@ YPUIFunctions = (function($) {
 			});
 		},
 
-		getInvestments: function(campaign_id){
+		getInvestments: function(campaign_id, bShortVersion){
 			YPUIFunctions.currentRequest = $.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,
 				'data': {
 					'action':'get_investments_data',
-					'id_campaign' : campaign_id
+					'id_campaign' : campaign_id,
+					'is_short_version' : bShortVersion ? '1' : '0'
 				}
 			}).done(function(result){
 				YPUIFunctions.currentRequest = '';

@@ -509,7 +509,17 @@ function get_investments_data() {
 	global $disable_logs;
 	$disable_logs = TRUE;
 	$campaign_id = filter_input(INPUT_POST, 'id_campaign');
+	$input_is_short_version = filter_input(INPUT_POST, 'is_short_version');
 	$investments_list = WDGCampaignInvestments::get_list( $campaign_id, TRUE );
+	if ( $input_is_short_version == '1' ) {
+		unset( $investments_list[ 'campaign' ] );
+		unset( $investments_list[ 'payments_data' ] );
+		unset( $investments_list[ 'investors_list' ] );
+		$campaign = new ATCF_Campaign( $campaign_id );
+		if ( $campaign->get_hide_investors() ) {
+			unset( $investments_list[ 'investors_string' ] );
+		}
+	}
 	echo json_encode($investments_list);
 	exit();
 }
