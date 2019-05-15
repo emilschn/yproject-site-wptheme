@@ -760,6 +760,25 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 				$( '#preview-investment-draft-' +draftId+ ' #img-loading-data-' + dataType ).hide();
 			} );
 		} );
+		
+		$( 'button.create-investment-from-draft' ).click( function() {
+			var self = this;
+			var draftId = $( this ).parent().data( 'draftid' );
+			var campaignId = $( this ).parent().data( 'campaignid' );
+			$( self ).hide();
+			$( '#preview-investment-draft-' +draftId+ ' #img-loading-create-investment' ).show();
+			$.ajax( {
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': {
+					'action': 'create_investment_from_draft',
+					'draft_id': draftId,
+					'campaign_id': campaignId
+				}
+			} ).always( function( result ) {
+				window.location.reload();
+			} );
+		} );
 	}
 };
 

@@ -31,7 +31,13 @@ function view_investment_draft_helper_apply_draft( $is_existing_user, $current_d
 <div id="investment-drafts-list">
 	<h3><?php _e( "Ch&egrave;ques en attente de validation (ajout&eacute;s via le Tableau de bord)", 'yproject' ); ?></h3>
 	<ul>
-		<?php foreach ( $investments_drafts as $investments_drafts_item ): $investments_drafts_item_data = json_decode( $investments_drafts_item->data ); ?>
+		<?php foreach ( $investments_drafts as $investments_drafts_item ): ?>
+		<?php
+		if ( $investments_drafts_item->status != 'draft' ) {
+			continue;
+		}
+		$investments_drafts_item_data = json_decode( $investments_drafts_item->data );
+		?>
 		<li>
 			<?php echo $investments_drafts_item_data->email .' : '. $investments_drafts_item_data->invest_amount .' €'; ?>
 			<?php if ( $page_controler->can_access_admin() ): ?>
@@ -54,8 +60,8 @@ function view_investment_draft_helper_apply_draft( $is_existing_user, $current_d
 				}
 				?>
 				
-				<form id="preview-investment-draft-<?php echo $investments_drafts_item->id ; ?>" class="db-form hidden">
-					<div class="field admin-theme" data-campaignid="<?php echo $page_controler->get_campaign()->ID; ?>" data-draftid="<?php echo $investments_drafts_item->id ; ?>" data-userid="<?php echo $WDGUser_existing->get_wpref(); ?>" data-orgaid="<?php echo ( $is_existing_orga ? $WDGOrganization_existing->get_wpref() : '' ); ?>">
+				<form id="preview-investment-draft-<?php echo $investments_drafts_item->id; ?>" class="db-form hidden">
+					<div class="field admin-theme" data-campaignid="<?php echo $page_controler->get_campaign()->ID; ?>" data-draftid="<?php echo $investments_drafts_item->id ; ?>" data-userid="<?php echo ( $is_existing_user ? $WDGUser_existing->get_wpref() : '' ); ?>" data-orgaid="<?php echo ( $is_existing_orga ? $WDGOrganization_existing->get_wpref() : '' ); ?>">
 						<b><?php _e( "Montant de l'investissement :", 'yproject' ) ?></b> <?php echo $investments_drafts_item_data->invest_amount .' €'; ?><br>
 						<b><?php _e( "En tant que personne", 'yproject' ) ?> <?php echo ( $investments_drafts_item_data->user_type == 'user' ) ? "physique" : "morale"; ?></b><br>
 						<br>
@@ -100,7 +106,7 @@ function view_investment_draft_helper_apply_draft( $is_existing_user, $current_d
 						<?php view_investment_draft_helper_apply_draft( $is_existing_user, ( !empty( $WDGUser_existing ) ? $WDGUser_existing->get_address_number() : '' ), $investments_drafts_item_data->address_number, 'address_number' ); ?>
 						
 						<b><?php _e( "Compl&eacute;ment de num&eacute;ro :", 'yproject' ) ?></b> <?php echo $address_number_complements[ $investments_drafts_item_data->address_number_complement ]; ?>
-						<?php view_investment_draft_helper_apply_draft( $is_existing_user, $address_number_complements[ ( !empty( $WDGUser_existing ) ? $WDGUser_existing->get_address_number_complement() : '' ) ], $address_number_complements[ $investments_drafts_item_data->address_number_complement ], 'address_number_complement', $WDGUser_existing->get_address_number_complement() ); ?>
+						<?php view_investment_draft_helper_apply_draft( $is_existing_user, $address_number_complements[ ( !empty( $WDGUser_existing ) ? $WDGUser_existing->get_address_number_complement() : '' ) ], $address_number_complements[ $investments_drafts_item_data->address_number_complement ], 'address_number_complement', $investments_drafts_item_data->address_number_complement ); ?>
 						
 						<b><?php _e( "Adresse :", 'yproject' ) ?></b> <?php echo $investments_drafts_item_data->address; ?>
 						<?php view_investment_draft_helper_apply_draft( $is_existing_user, ( !empty( $WDGUser_existing ) ? $WDGUser_existing->get_address() : '' ), $investments_drafts_item_data->address, 'address' ); ?>
@@ -118,9 +124,9 @@ function view_investment_draft_helper_apply_draft( $is_existing_user, $current_d
 						<?php if ( $investments_drafts_item_data->user_type == 'orga' ): ?>
 							<b><?php _e( "Donn&eacute;es de l'organisation :", 'yproject' ); ?></b><br>
 							<?php if ( $is_existing_orga ): ?>
-								<i class="text-green"><?php _e( "Nouvelle organisation", 'yproject' ); ?></i><br>
-							<?php else: ?>
 								<i class="text-green"><?php _e( "Organisation existante", 'yproject' ); ?></i><br>
+							<?php else: ?>
+								<i class="text-green"><?php _e( "Nouvelle organisation", 'yproject' ); ?></i><br>
 							<?php endif; ?>
 								
 							<b><?php _e( "D&eacute;nomination sociale :", 'yproject' ) ?></b> <?php echo $investments_drafts_item_data->orga_name; ?>
@@ -166,15 +172,26 @@ function view_investment_draft_helper_apply_draft( $is_existing_user, $current_d
 						<?php endif; ?>
 							
 						<?php if ( $is_existing_user ): ?>
-						<button type="button" class="apply-draft-data button admin-theme" data-type="all"><?php _e( "Appliquer toutes les données", 'yproject' ) ?></button>
+						<button type="button" class="apply-draft-data button admin-theme" data-type="all"><?php _e( "Appliquer toutes les donn&eacute;es", 'yproject' ) ?></button>
 						<img id="img-loading-data-all" class="hidden" src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading">
 						<br><br>
 						<?php endif; ?>
 							
 						<b><?php _e( "Photo du ch&egrave;que :", 'yproject' ) ?></b> <a href="<?php echo $investments_drafts_item->check; ?>" target="_blank"><?php _e( "T&eacute;l&eacute;charger", 'yproject' ); ?></a><br>
 						<b><?php _e( "Photos du contrat :", 'yproject' ) ?></b> <a href="<?php echo $investments_drafts_item->contract; ?>" target="_blank"><?php _e( "T&eacute;l&eacute;charger", 'yproject' ); ?></a><br>
-						
 						<br>
+						
+						<?php if ( $is_existing_user ): ?>
+							<?php if ( $investments_drafts_item_data->user_type != 'orga' || ( $investments_drafts_item_data->user_type == 'orga' && $is_existing_orga ) ): ?>
+								<button type="button" class="create-investment-from-draft button admin-theme"><?php _e( "Valider l'investissement", 'yproject' ) ?></button>
+							<?php else: ?>
+								<button type="button" class="create-investment-from-draft button admin-theme"><?php _e( "Valider l'investissement (en cr&eacute;ant l'organisation)", 'yproject' ) ?></button>
+							<?php endif; ?>
+						<?php else: ?>
+							<button type="button" class="create-investment-from-draft button admin-theme"><?php _e( "Valider l'investissement (en cr&eacute;ant les donn&eacute;es de l'investisseur)", 'yproject' ) ?></button>
+						<?php endif; ?>
+						<img id="img-loading-create-investment" class="hidden" src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading">
+						
 					</div>
 				</form>
 			<?php endif; ?>
