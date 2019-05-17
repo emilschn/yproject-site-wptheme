@@ -83,7 +83,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		}
 		
 		$params[ 'funding' ] = array();
-		$project_list_funding = ATCF_Campaign::get_list_funding();
+		$project_list_funding = ATCF_Campaign::get_list_funding( 0, '', FALSE, FALSE );
 		foreach ( $project_list_funding as $project_post ) {
 			$campaign = new ATCF_Campaign( $project_post->ID );
 			$investment_results = WDGCampaignInvestments::get_list( $project_post->ID );
