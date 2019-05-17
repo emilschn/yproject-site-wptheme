@@ -13,6 +13,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $can_access_author;
 	private $must_show_lightbox_welcome;
 	private $return_lemonway_card;
+	private $form_add_check;
 	private $emails;
 	/**
 	 * @var ATCF_Campaign
@@ -71,12 +72,18 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->check_has_signed_mandate();
 		$this->init_context();
 		$this->init_stats();
+		
 		WDGFormProjects::form_submit_turnover();
 		WDGFormProjects::form_submit_account_files();
 		WDGFormProjects::form_submit_roi_payment();
 		WDGFormProjects::form_approve_payment();
 		WDGFormProjects::form_cancel_payment();
 		WDGFormProjects::form_try_pending_card();
+		
+		$core = ATCF_CrowdFunding::instance();
+		$core->include_form( 'dashboard-add-check' );
+		$this->form_add_check = new WDG_Form_Dashboard_Add_Check( $this->campaign_id );
+		
 		$current_organization = $this->get_campaign_organization();
 		if ( isset($_POST['authentify_lw']) ) {
 			$current_organization->send_kyc();
@@ -166,6 +173,31 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	}
 	public function is_campaign_funded() {
 		return $this->campaign->is_funded();
+	}
+	
+	
+/******************************************************************************/
+// GESTION CHEQUES
+/******************************************************************************/
+	public function get_form_add_check() {
+		return $this->form_add_check;
+	}
+	
+	public function can_add_check() {
+		$buffer = FALSE;
+		// Bouton d'ajout de chèque disponible si une des conditions suivantes :
+		if (
+			// - ADMIN
+				$this->can_access_admin()
+			// - en cours de levée
+				|| ( $this->campaign->is_remaining_time() )
+			// - pas validé + dans les 14 jours qui suivent la levée de fonds
+				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive && !$this->campaign->has_retraction_passed() )
+		) {
+			$buffer = TRUE;
+		}
+		
+		return $buffer;
 	}
 	
 /******************************************************************************/

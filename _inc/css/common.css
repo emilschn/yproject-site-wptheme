@@ -32,6 +32,7 @@ body input, body select {
 .bg-dark-gray { background: #333333; color: #FFF; }
 .uppercase { text-transform: uppercase; }
 
+.margin-height { margin: 8px 0px; }
 .margin-bottom { margin-bottom: 16px; }
 
 h2.standard {

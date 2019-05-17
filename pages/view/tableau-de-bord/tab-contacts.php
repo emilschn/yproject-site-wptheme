@@ -8,8 +8,14 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 <div class="success"><?php _e( "E-mails envoy&eacute;s avec succ&egrave;s !", 'yproject' ); ?></div>
 <?php endif; ?>
 
+<?php if ( $page_controler->can_add_check() ): ?>
+<div class="align-center margin-height">
+	<button class="button-contacts-add-check button blue"><?php _e( "Ajouter un chèque", 'yproject' ); ?></button>
+</div>
+<?php endif; ?>
+
 <div class="tab-content-large">
-	<div id="ajax-contacts-load" class="ajax-investments-load" style="text-align: center;" data-value="<?php echo $page_controler->get_campaign_id(); ?>">
+	<div id="ajax-contacts-load" class="ajax-investments-load align-center" data-value="<?php echo $page_controler->get_campaign_id(); ?>">
 		<img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />
 	</div>
 </div>
@@ -70,14 +76,19 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 	</form>
 </div>
 
+<?php if ( $page_controler->can_add_check() ): ?>
+<div class="align-center margin-height">
+	<a href="#contacts" class="button-contacts-add-check button blue" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a>
+	<br><br>
+	<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/add-check.php'  ), true ); ?>
+</div>
+<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/view-investment-draft.php'  ), true ); ?>
+<?php endif; ?>
+			
 <?php if ( $page_controler->can_access_admin() ): ?>
 	<br><br>
 	<div class="admin-theme-block db-form">
 		<div class="field admin-theme align-center">
-			<a href="#contacts" class="wdg-button-lightbox-open button admin-theme" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a><br><br>
-			
-			<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/lightbox-add-check.php' ), true ); ?>
-			
 			<?php
 			$editor_params = array( 
 				'media_buttons' => true,
