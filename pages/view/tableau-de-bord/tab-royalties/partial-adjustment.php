@@ -79,7 +79,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				'type'		=> 'text',
 				'label'		=> "Diff&eacute;rentiel de CA",
 				'value'		=> $declaration->get_adjustment_turnover_difference(),
-				'suffix'	=> " &euro;"
+				'suffix'	=> " &euro;",
+				'complementary_class'	=> 'format-number'
 			));
 			?>
 			<br />
@@ -90,7 +91,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				'type'		=> 'text',
 				'label'		=> "Somme &agrave; verser",
 				'value'		=> $declaration->get_adjustment_value(),
-				'suffix'	=> " &euro;"
+				'suffix'	=> " &euro;",
+				'complementary_class'	=> 'format-number'
 			));
 			?>
 			<br />

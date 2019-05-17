@@ -276,12 +276,12 @@ $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 					<tr>
 						<td>Prénom Nom</td>
 						<td>e-mail</td>
-						<td>Entité morale</td>
-						<td>Sexe</td>
+						<td>Sexe / Entité</td>
 						<td>Date de naissance</td>
 						<td>Adresse</td>
 						<td>CP</td>
 						<td>Ville</td>
+						<td>Pays</td>
 						<td>Nb projets suivis</td>
 						<td>Nb projets votés</td>
 						<td>Nb investissements</td>
@@ -292,12 +292,12 @@ $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 					<tr>
 						<td>Prénom Nom</td>
 						<td>e-mail</td>
-						<td>Entité morale</td>
-						<td>Sexe</td>
+						<td>Sexe / Entité</td>
 						<td>Date de naissance</td>
 						<td>Adresse</td>
 						<td>CP</td>
 						<td>Ville</td>
+						<td>Pays</td>
 						<td>Nb projets suivis</td>
 						<td>Nb projets votés</td>
 						<td>Nb investissements</td>
@@ -320,16 +320,43 @@ $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 						
 						$user_results = $wpdb->get_results( $sql );
 						$user_result = $user_results[0];
+						if ( WDGOrganization::is_user_organization( $user->ID ) ) {
+							$WDGEntity = new WDGOrganization( $user->ID );
+							$entity_name = $WDGEntity->get_name();
+							$entity_email = $WDGEntity->get_email();
+							$entity_gender = 'O';
+							$entity_birthdate = '';
+							$entity_address = $WDGEntity->get_address();
+							$entity_postal_code = $WDGEntity->get_postal_code();
+							$entity_city = $WDGEntity->get_city();
+							$entity_country = $WDGEntity->get_country();
+						} else {
+							$WDGEntity = new WDGUser( $user->ID );
+							$entity_name = $WDGEntity->get_firstname() . ' ' . $WDGEntity->get_lastname();
+							$entity_email = $WDGEntity->get_email();
+							$entity_gender = '-';
+							if ( $WDGEntity->get_gender() == 'female' ) {
+								$entity_gender = 'F';
+							}
+							if ( $WDGEntity->get_gender() == 'male' ) {
+								$entity_gender = 'M';
+							}
+							$entity_birthdate = $WDGEntity->get_birthday_date();
+							$entity_address = $WDGEntity->get_address();
+							$entity_postal_code = $WDGEntity->get_postal_code();
+							$entity_city = $WDGEntity->get_city();
+							$entity_country = $WDGEntity->get_country();
+						}
 						?>
 						<tr>
-							<td><?php echo $user->user_firstname . ' ' . $user->user_lastname; ?></td>
-							<td><?php echo $user->user_email; ?></td>
-							<td><?php echo ( WDGOrganization::is_user_organization( $user->ID ) ? "OUI" : "NON" ); ?></td>
-							<td><?php if ($user->get('user_gender') == "female") { echo 'F'; } elseif ($user->get('user_gender') == "male") { echo 'M'; } ?></td>
-							<td><?php echo $user->get('user_birthday_year') . '-' . $user->get('user_birthday_month') . '-' . $user->get('user_birthday_day'); ?></td>
-							<td><?php echo $user->get('user_address'); ?></td>
-							<td><?php echo $user->get('user_postal_code'); ?></td>
-							<td><?php echo $user->get('user_city'); ?></td>
+							<td><?php echo $entity_name; ?></td>
+							<td><?php echo $entity_email; ?></td>
+							<td><?php echo $entity_gender; ?></td>
+							<td><?php echo $entity_birthdate; ?></td>
+							<td><?php echo $entity_address; ?></td>
+							<td><?php echo $entity_postal_code; ?></td>
+							<td><?php echo $entity_city; ?></td>
+							<td><?php echo $entity_country; ?></td>
 							<td><?php echo $user_result->nb_follow; ?></td>
 							<td><?php echo $user_result->nb_votes; ?></td>
 							<td><?php echo $user_result->nb_invest; ?></td>

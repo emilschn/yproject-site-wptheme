@@ -17,7 +17,9 @@ class YPShortcodeManager {
 		'yproject_register_lightbox',
 		'yproject_statsadvanced_lightbox',
 		'yproject_newproject_lightbox',
+		'wdg_page_auto_refresh',
 		'wdg_project_vote_count',
+		'wdg_project_vote_intention_sum',
 		'wdg_project_investors_count',
 		'wdg_project_amount_count',
 		'wdg_project_investment_link',
@@ -213,16 +215,60 @@ class YPShortcodeManager {
 		echo do_shortcode('[yproject_register_lightbox]');
 	}
 	
+	function wdg_page_auto_refresh($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'nb_minutes' => '2',
+		), $atts );
+
+		$nb_milliseconds = $atts[ 'nb_minutes' ] * 60 * 1000;
+		$code = '<script type="text/javascript">setTimeout("location.reload(true);", ' .$nb_milliseconds. ');</script>';
+		
+		return $code;
+	}
+	
 	function wdg_project_vote_count($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
+			'project_list' => ''
 		), $atts );
 
-		if (isset($atts['project']) && is_numeric($atts['project'])) {
-			$post_campaign = get_post($atts['project']);
-			$campaign = atcf_get_campaign($post_campaign);
-			return $campaign->nb_voters();
+		$project_ids_list = array();
+		if ( isset( $atts[ 'project' ] ) && is_numeric( $atts[ 'project' ] ) ) {
+			array_push( $project_ids_list, $atts[ 'project' ] );
+		} elseif ( isset( $atts[ 'project_list' ] ) ) {
+			$project_ids_list = explode( ',', $atts[ 'project_list' ] );
 		}
+		
+		$buffer_nb_voters = 0;
+		foreach ( $project_ids_list as $project_id ) {
+			$campaign = atcf_get_campaign( $project_id );
+			$buffer_nb_voters += $campaign->nb_voters();
+		}
+		return UIHelpers::format_number( $buffer_nb_voters, 0 );
+	}
+	
+	function wdg_project_vote_intention_sum($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'project' => '',
+			'project_list' => ''
+		), $atts );
+
+		$project_ids_list = array();
+		if ( isset( $atts[ 'project' ] ) && is_numeric( $atts[ 'project' ] ) ) {
+			array_push( $project_ids_list, $atts[ 'project' ] );
+		} elseif ( isset( $atts[ 'project_list' ] ) ) {
+			$project_ids_list = explode( ',', $atts[ 'project_list' ] );
+		}
+		
+		global $wpdb;
+		$table_name = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
+		$buffer_sum_vote_intention = 0;
+		foreach ( $project_ids_list as $project_id ) {
+			$sum_vote_intention = $wpdb->get_var( "SELECT sum(invest_sum) FROM ".$table_name." WHERE post_id = ". $project_id );
+			$buffer_sum_vote_intention += $sum_vote_intention;
+		}
+		
+		return UIHelpers::format_number( $buffer_sum_vote_intention, 0 );
 	}
 	
 	function wdg_project_investors_count($atts, $content = '') {

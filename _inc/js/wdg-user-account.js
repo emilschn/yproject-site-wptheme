@@ -121,16 +121,12 @@ UserAccountDashboard.prototype.initProjectList = function() {
 						sCampaignBuffer += '</div>';
 
 						var bCountInGlobalStat = true;
-						var sStatusStr = 'Valid&eacute;';
+						var sStatusStr = oInvestmentItem[ 'status_str' ];
 						if ( oInvestmentItem[ 'status' ] === 'pending' ) {
 							bCountInGlobalStat = false;
 							nInvestmentPendingCount++;
-							sStatusStr = 'En attente';
-						} else if ( oInvestmentItem[ 'status' ] === 'canceled' ) {
-							sStatusStr = 'Termin&eacute;';
 						} else if ( oCampaignItem[ 'status' ] === 'archive' ) {
 							bCountInGlobalStat = false;
-							sStatusStr = 'Rembours&eacute;';
 						}
 						if ( bCountInGlobalStat ) {
 							bCountProject = true;

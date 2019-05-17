@@ -125,11 +125,28 @@
 					?>
 					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
 					<ul class="submenu-list">
-						<li><a href="<?php echo home_url( '/mon-compte/' ); ?>" <?php if ( $page_controler->get_show_user_needs_authentication() ): ?>class="needs-authentication"<?php endif; ?>><?php _e("Mon compte", 'yproject'); ?></a></li>
-						
-						<?php foreach ($project_list as $project_id): if (!empty($project_id)): $post_campaign = get_post($project_id); if (isset($post_campaign)): ?>
-							<li><a href="<?php echo $page_dashboard . '?campaign_id=' .$project_id; ?>"><?php echo $post_campaign->post_title; ?></a></li>
-						<?php endif; endif; endforeach; ?>
+						<?php
+						$is_project_needing_authentication = FALSE;
+						$project_list_dom = '';
+						foreach ($project_list as $project_id) { 
+							if ( !empty( $project_id ) ) {
+								$project_campaign = new ATCF_Campaign( $project_id );
+								if ( isset( $project_campaign ) && $project_campaign->get_name() != '' ) {
+									$campaign_organization = $project_campaign->get_organization();
+									$campaign_organization = new WDGOrganization( $campaign_organization->wpref );
+									$project_list_dom .= '<li><a href="' .$page_dashboard. '?campaign_id=' .$project_id. '"';
+									if ( !$campaign_organization->is_registered_lemonway_wallet() ) {
+										$is_project_needing_authentication = TRUE;
+										$project_list_dom .= ' class="needs-authentication"';
+									}
+									$project_list_dom .= '>' .$project_campaign->get_name(). '</a></li>';
+								}
+							}
+						}
+						?>
+							
+						<li><a href="<?php echo home_url( '/mon-compte/' ); ?>" <?php if ( $page_controler->get_show_user_needs_authentication() && !$is_project_needing_authentication ): ?>class="needs-authentication"<?php endif; ?>><?php _e("Mon compte", 'yproject'); ?></a></li>
+						<?php echo $project_list_dom; ?>
 					</ul>
 					
 					<div id="button-logout" class="box_connection_buttons red">

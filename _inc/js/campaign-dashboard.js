@@ -225,7 +225,6 @@ WDGCampaignSimulator.prototype.numberFormat = function(number){
 	var nb_format = number.toString().replace(",",".");
 	nb_format = parseFloat(nb_format);
 	nb_format = nb_format.toFixed(2);
-	nb_format = nb_format.toString().replace(".",",");
 	//Suppression des "00" après la virgule
 	if(nb_format.substr(nb_format.length - 2, nb_format.length) === "00"){
 		nb_format = nb_format.substr(0, nb_format.length - 3);
@@ -1410,14 +1409,17 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 						'roideclaration_id': $(this).data('roideclaration-id')
 					}
 				}).done(function (result) {
-					var content = '<table>';
-					content += '<tr><td>Utilisateur</td><td>Investissement</td><td>Versement</td><td>Commission</td></tr>';
-					content += result;
-					content += '</table>';
+					var content = 'Versement impossible';
+					if ( result != '0' ) {
+						content = '<table>';
+						content += '<tr><td>Utilisateur</td><td>Investissement</td><td>Versement</td><td>Commission</td></tr>';
+						content += result;
+						content += '</table>';
+						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-roi-id").val(self.currentOpenedROI);
+						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").show();
+					}
 					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-content").html(content);
 					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-image").hide();
-					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-roi-id").val(self.currentOpenedROI);
-					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").show();
 				});
 			}
 		});
@@ -1477,7 +1479,7 @@ WDGCampaignDashboard.prototype.refreshTurnoverAmountToPay = function() {
 WDGCampaignDashboard.prototype.refreshAjustmentAmountToPay = function() {
 	var roiPercent = $( '#form-declaration-adjustment' ).data( 'roi-percent' );
 	var costsOrga = $( '#form-declaration-adjustment' ).data( 'costs-orga' );
-	var total = Number( $( '#new_declaration_adjustment_turnover_difference' ).val() );
+	var total = Number( $( '#new_declaration_adjustment_turnover_difference' ).val().split(',').join('.') );
 	var amount = total * roiPercent / 100;
 	amount = Math.round( amount * 100 ) / 100;
 	
@@ -1644,7 +1646,7 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 						'<td>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></td>'+
 						'<td class="field field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
 						'<i class="right fa" aria-hidden="true"></i>'+
-						'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" />&nbsp;'+$('#estimated-turnover').data('symbol')+                                   
+						'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon format-number" />&nbsp;'+$('#estimated-turnover').data('symbol')+                                   
 						'</td>'+
 						'<td id="roi-amount-'+(i+nb_years_li_existing)+'">0 '+$('#estimated-turnover').data('symbol')+
 						'</td>'+

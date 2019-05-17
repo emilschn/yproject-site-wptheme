@@ -19,7 +19,6 @@ $btn_follow_data_lightbox = 'connexion';
 $btn_follow_text = __('Suivre', 'yproject');
 $btn_follow_following = '0';
 $has_voted = false;
-$has_voted_and_preinvested = false;
 if (is_user_logged_in()) {
 	$WDGUser_current = WDGUser::current();
 	$btn_follow_classes = 'update-follow';
@@ -34,18 +33,17 @@ if (is_user_logged_in()) {
 	
 	if ($campaign_status == "vote") {
 		$has_voted = $WDGUser_current->has_voted_on_campaign( $campaign->ID );
-		if ( $has_voted ) {
-			$has_voted_and_preinvested = $WDGUser_current->has_invested_on_campaign( $campaign->ID );
-		}
 	}
 }
 
 $owner_str = '';
+$lightbox_title = '';
 $lightbox_content = '';
 $current_organization = $campaign->get_organization();
 if (!empty($current_organization)) {
 	$wdg_organization = new WDGOrganization( $current_organization->wpref, $current_organization );
 	
+	$lightbox_title = $wdg_organization->get_name();
 	$owner_str = $wdg_organization->get_name();
 	$lightbox_content = '<div class="lightbox-organization-separator"></div>
 		<div class="content align-left"><br />
@@ -94,7 +92,7 @@ $lang_list = $campaign->get_lang_list();
 			<p>
 				<?php _e("Un projet port&eacute; par", 'yproject'); ?> <a href="#project-organization" class="wdg-button-lightbox-open" data-lightbox="project-organization"><?php echo $owner_str; ?></a>
 			</p>
-			<?php echo do_shortcode('[yproject_lightbox_cornered id="project-organization" title="'.$wdg_organization->get_name().'"]'.$lightbox_content.'[/yproject_lightbox_cornered]'); ?>
+			<?php echo do_shortcode('[yproject_lightbox_cornered id="project-organization" title="'.$lightbox_title.'"]'.$lightbox_content.'[/yproject_lightbox_cornered]'); ?>
 		</div>
 	</div>
 
@@ -205,11 +203,6 @@ $lang_list = $campaign->get_lang_list();
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
 
-						<?php elseif ( $has_voted_and_preinvested ): ?>
-							<div style="-webkit-filter: grayscale(100%); text-transform: uppercase; text-align: center; padding-top: 25px;">
-								<?php _e( "Merci pour votre pr&eacute;-investissement !", 'yproject' ); ?>
-							</div>
-
 						<?php elseif ( $has_voted ): ?>
 							<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
 
@@ -233,80 +226,93 @@ $lang_list = $campaign->get_lang_list();
 				<?php // cas d'un projet en financement ?>
 				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
 					<?php
-					$nbinvestors = $campaign->backers_count();
-					$page_invest = get_page_by_path('investir');
-					$campaign_id_param = '?campaign_id=' . $campaign->ID;
-					$invest_url = get_permalink($page_invest->ID) . $campaign_id_param . '&amp;invest_start=1';
+					$invest_url = home_url( '/investir/?campaign_id=' .$campaign->ID. '&amp;invest_start=1' );
 					$invest_url_href = home_url( '/connexion/' ) . '?source=project';
-					if (is_user_logged_in()) {
+					if ( is_user_logged_in() ) {
 						$invest_url_href = $invest_url;
 					}
+					$time_remaining_str = $campaign->time_remaining_str();
 					?>
-				
-					<div class="left">
-						<?php
-						$number = $nbinvestors;
-						$text = __("investisseur", 'yproject');
-						if ($nbinvestors == 0) {
-							$number = __("aucun", 'yproject');
-						} elseif ($nbinvestors > 1) {
-							$text = __("investisseurs", 'yproject');
-						}
-						?>
-						<span><?php echo $number; ?></span><br />
-						<span><?php echo $text; ?></span>
-					</div>
-					<div class="left bordered">
-						<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
-							<span></span>
-							<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro; MIN<br />
-							<?php echo YPUIHelpers::display_number( $campaign->goal( false ) ); ?> &euro; MAX</span>
-						<?php else: ?>
-							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
-							<span><?php _e('Objectif minimum', 'yproject'); ?></span>
+					<?php if ( $time_remaining_str == '-' ): ?>
+						<?php if ( $campaign->is_remaining_time() ): ?>
+							<div class="end-sentence">
+								<?php $datetime_end = $campaign->get_end_date_when_can_invest_until_contract_start_date(); ?>
+								<?php echo __( "L'investissement est possible jusqu'au premier versement de royalties", 'yproject' ). " (" .$datetime_end->format( 'd/m/Y' ). ")."; ?>
+							</div>
+							<a href="<?php echo $invest_url_href; ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
 						<?php endif; ?>
-					</div>
-					<div class="left">
+							
+							
+					<?php else: ?>
 						<?php
-						$time_remaining_str = $campaign->time_remaining_str();
-						if ($time_remaining_str != '-'):
-							$time_remaining_str_split = explode('-', $time_remaining_str);
-							$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
-							$time_remaining_str_unit = $time_remaining_str_split[0];
-							switch ($time_remaining_str_split[0]) {
-								case 'J': $time_remaining_str .= 'jours'; break;
-								case 'H': $time_remaining_str .= 'heures'; break;
-								case 'M': $time_remaining_str .= 'minutes'; break;
-							}
+						$nbinvestors = $campaign->backers_count();
 						?>
-							<span><?php echo $time_remaining_str; ?></span><br />
-							<?php if ($time_remaining_str_unit == 'J'): ?>
-							<span><?php _e('Restants', 'yproject'); ?></span>
-							<?php else: ?>
-							<span><?php _e('Restantes', 'yproject'); ?></span>
-							<?php endif; ?>
-						<?php
-						else:
-						?>
-							<span><?php echo $time_remaining_str; ?></span>
-						<?php	
-						endif;
-						?>
-					</div>
 
-					<?php if ( $time_remaining_str != '-' && $campaign->percent_completed( false ) < 100 ): ?>
-					<a href="<?php echo $invest_url_href; ?>" class="button red">
-						<?php _e( "Investir", 'yproject' ); ?>
-					</a>
-					<?php elseif ( $time_remaining_str != '-' && $campaign->percent_completed( false ) >= 100 ): ?>
-						<div class="end-sentence">
-							<?php if ( $campaign->maximum_complete_message() == '' ): ?>
-								<?php _e( "Cette lev&eacute;e de fonds est en cours de cl&ocirc;ture !", 'yproject' ); ?>
+						<div class="left">
+							<?php
+							$number = $nbinvestors;
+							$text = __("investisseur", 'yproject');
+							if ($nbinvestors == 0) {
+								$number = __("aucun", 'yproject');
+							} elseif ($nbinvestors > 1) {
+								$text = __("investisseurs", 'yproject');
+							}
+							?>
+							<span><?php echo $number; ?></span><br />
+							<span><?php echo $text; ?></span>
+						</div>
+						<div class="left bordered">
+							<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
+								<span></span>
+								<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro; MIN<br />
+								<?php echo YPUIHelpers::display_number( $campaign->goal( false ) ); ?> &euro; MAX</span>
 							<?php else: ?>
-								<?php echo $campaign->maximum_complete_message(); ?>
+								<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+								<span><?php _e('Objectif minimum', 'yproject'); ?></span>
 							<?php endif; ?>
 						</div>
+						<div class="left">
+							<?php
+							if ($time_remaining_str != '-'):
+								$time_remaining_str_split = explode('-', $time_remaining_str);
+								$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
+								$time_remaining_str_unit = $time_remaining_str_split[0];
+								switch ($time_remaining_str_split[0]) {
+									case 'J': $time_remaining_str .= 'jours'; break;
+									case 'H': $time_remaining_str .= 'heures'; break;
+									case 'M': $time_remaining_str .= 'minutes'; break;
+								}
+							?>
+								<span><?php echo $time_remaining_str; ?></span><br />
+								<?php if ($time_remaining_str_unit == 'J'): ?>
+								<span><?php _e('Restants', 'yproject'); ?></span>
+								<?php else: ?>
+								<span><?php _e('Restantes', 'yproject'); ?></span>
+								<?php endif; ?>
+							<?php
+							else:
+							?>
+								<span><?php echo $time_remaining_str; ?></span>
+							<?php	
+							endif;
+							?>
+						</div>
+
+						<?php if ( $campaign->percent_completed( false ) < 100 ): ?>
+							<a href="<?php echo $invest_url_href; ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
+						<?php else: ?>
+							<div class="end-sentence">
+								<?php if ( $campaign->maximum_complete_message() == '' ): ?>
+									<?php _e( "Cette lev&eacute;e de fonds est en cours de cl&ocirc;ture !", 'yproject' ); ?>
+								<?php else: ?>
+									<?php echo $campaign->maximum_complete_message(); ?>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
+				
 					<?php endif; ?>
+				
+				
 				
 				
 				<?php // cas d'un projet terminé et financé ?>
@@ -316,7 +322,7 @@ $lang_list = $campaign->get_lang_list();
 					$invest_amount = $campaign->current_amount();
 					?>
 					<div class="end-sentence">
-						<?php echo $nbinvestors." ". __("personnes","yproject")." ". __("ont investi","yproject") ." ". $invest_amount ." ". __("pour propulser ce projet &agrave; impact positif","yproject");?>
+						<?php echo $nbinvestors. " " .__("personnes","yproject"). " " .__("ont investi","yproject"). " " .$invest_amount. " " .__("pour propulser cette lev&eacute;e de fonds","yproject"); ?>
 					</div>
 					<a href="<?php echo home_url( '/les-projets/' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 				
@@ -325,7 +331,7 @@ $lang_list = $campaign->get_lang_list();
 				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>            
 					<div class="end-sentence">
 						<?php if ( $campaign->archive_message() == '' ): ?>
-							<?php _e( "Malheureusement, ce projet n'a pas &eacute;t&eacute; propuls&eacute;", 'yproject' ); ?>
+							<?php _e( "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e", 'yproject' ); ?>
 						<?php else: ?>
 							<?php echo $campaign->archive_message(); ?>
 						<?php endif; ?>

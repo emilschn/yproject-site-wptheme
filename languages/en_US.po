@@ -193,6 +193,46 @@ msgstr "investment"
 msgid "investi"
 msgstr "invested"
 
+msgid "d&eacute;veloppement &eacute;conomique et de l&rsquo;emploi"
+msgstr "economic and job growth"
+
+msgid "r&eacute;silience &eacute;conomique locale"
+msgstr "local economic resilience"
+
+msgid "encouragement de l&rsquo;innovation"
+msgstr "innovation promotion"
+
+msgid "gouvernance ouverte et transparente"
+msgstr "open and transparent governance"
+
+msgid "efficience &eacute;conomique"
+msgstr "economic efficiency"
+
+msgid "conditions de travail"
+msgstr "work conditions"
+
+msgid "lien social"
+msgstr "social bonds"
+
+msgid "acc&egrave;s &agrave; l&rsquo;emploi"
+msgstr "Access to employment"
+
+msgid "conditions de vie"
+msgstr "life conditions"
+
+msgid "pr&eacute;servation des ressources"
+msgstr "resource conservation"
+
+msgid "protection de la biodiversit&eacute;"
+msgstr "biodiversity protection"
+
+msgid "r&eacute;duction de la pollution"
+msgstr "pollution prevention"
+
+msgid "produit ou service &eacute;coresponsable"
+msgstr "eco-friendly product ou service"
+
+
 # ################################ PROJECT PAGE ################################
 # THEME - commun
 msgid "Inscription"
@@ -333,20 +373,23 @@ msgstr "This fundraising campaign will be available for investment soon!"
 msgid "Cette lev&eacute;e de fonds est en cours de cl&ocirc;ture !"
 msgstr "This fundraising campaign is being closed!"
 
+msgid "L'investissement est possible jusqu'au premier versement de royalties"
+msgstr "It is possible to keep investing up to the start of the royalties payment"
+
 msgid "personnes"
 msgstr "people"
 
 msgid "ont investi"
 msgstr "have invested"
 
-msgid "pour propulser ce projet &agrave; impact positif"
+msgid "pour propulser cette lev&eacute;e de fonds"
 msgstr "to boost this fundraising campaign"
 
 msgid "D&eacute;couvrir d'autres projets"
 msgstr "Discover other projects"
 
-msgid "Malheureusement, ce projet n'a pas &eacute;t&eacute; propuls&eacute;"
-msgstr "Sadly, this project has not succeeded in its fundraising campaign"
+msgid "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e"
+msgstr "Sadly, this fundraising campaign has not succeeded"
 
 msgid "Impacts"
 msgstr "Impacts"
@@ -539,6 +582,9 @@ msgstr "Your evaluation has been registered!"
 msgid "Votre &eacute;valuation a bien &eacute;t&eacute; enregistr&eacute; !"
 msgstr "Your evaluation has been registered!"
 
+msgid "Vous avez indiqu&eacute; &ecirc;tre int&eacute;ress&eacute;(e) pour investir, confirmez vos informations afin que le porteur de projet puisse vous joindre lors du lancement de la lev&eacute;e de fonds."
+msgstr "You indicated to be interested in investing. Complete your data so that the project owner is able to contact you when the fundraising campaign is launched."
+
 msgid "Confirmer et pr&eacute;-investir"
 msgstr "Validate and pre-invest"
 
@@ -547,6 +593,54 @@ msgstr "Validate"
 
 msgid "Donn&eacute;es enregistr&eacute;es ! Merci !"
 msgstr "Parameters saved! Thank you!"
+
+# THEME - projects/single/warning-lightbox.php
+msgid "WE DO GOOD est une plateforme d'investissement en &eacute;change de royalties."
+msgstr "WE DO GOOD is a fundraising platform where you can invest in exchange of royalties."
+
+msgid "Vous souhaitez acc&eacute;der à la pr&eacute;sentation du projet %s, actuellement en &eacute;valuation, phase pr&eacute;alable au lancement de la lev&eacute;e de fonds."
+msgstr "You would like to access to the project's presentation currently open to the evaluation by the public (before investment)."
+
+msgid "Vous souhaitez acc&eacute;der &agrave; la pr&eacute;sentation du projet %s, actuellement en lev&eacute;e de fonds."
+msgstr "You would like to access to the project's presentation currently open to investment."
+
+msgid "Vous pouvez y acc&eacute;der sans investir mais la r&eacute;glementation nous impose de vous informer que l'investissement dans des soci&eacute;t&eacute;s non cot&eacute;es comporte des risques sp&eacute;cifiques :"
+msgstr "You can access it without investing but regulation requires us to inform you that investing in a non quoted company entails specific risks:"
+
+msgid "&gt; Le retour sur investissement d&eacute;pend de la r&eacute;ussite du projet financ&eacute;."
+msgstr "&gt; Return on investment depends on the success of the funded project."
+
+msgid "&gt; Risque de perte totale ou partielle du capital investi."
+msgstr "&gt; Risk of partial or total loss of the invested capital."
+
+msgid "Avez‐vous conscience que, dans le cas o&ugrave; vous investissez, vous pouvez perdre &eacute;ventuellement la totalit&eacute; de votre investissement ?"
+msgstr "In the case of an investment, are you aware that you might lose your investment?"
+
+msgid "Non / En savoir plus"
+msgstr "No (know more)"
+
+msgid "Oui / Continuer"
+msgstr "Yes / Next"
+
+msgid "Avertissement"
+msgstr "Warning"
+
+# THEME - projects/single/voteform-lightbox-share.php
+msgid "Vos informations ont bien &eacute;t&eacute; enregistr&eacute;es."
+msgstr "Your data have been properly saved."
+
+msgid "Votre compte n'est pas encore authentifi&eacute; aupr&egrave;s de notre prestataire de paiement, Lemon Way. Vous ne pouvez donc pas encore investir."
+msgstr "Your account is not yet authenticated by our payment service provider, Lemon Way. You are not authorized to invest for the moment."
+
+msgid "Pour authentifier votre compte, il suffit de compl&eacute;ter les informations de votre compte personnel et d'y d&eacute;poser une copie de votre carte d'identit&eacute; ou passeport, ainsi qu'un justificatif de domicile."
+msgstr "To authenticate your account, you have to complete your personal data and upload an identity card or passport, as well as a proof of address."
+
+msgid "Je compl&egrave;te mon compte"
+msgstr "Complete my account"
+
+msgid "Merci d'avoir &eacute;valu&eacute; sur ce projet, pensez &agrave; en parler autour de vous !"
+msgstr "Thank you for your evaluation, don't forget to spread the word about this project around you!"
+
 
 # ################################ INVEST PAGES ################################
 # THEME - template-single-campaign-invest.php

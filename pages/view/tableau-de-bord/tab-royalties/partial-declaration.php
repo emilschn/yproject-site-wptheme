@@ -23,13 +23,13 @@ $declaration_message = $declaration->get_message();
 					$date_due->sub(new DateInterval('P'.$nb_fields.'M'));
 					?>
 					<?php for ($i = 0; $i < $nb_fields; $i++): ?>
-						<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <input type="text" name="turnover-<?php echo $i; ?>" id="turnover-<?php echo $i; ?>" /> &euro; HT</li>
+						<li><?php echo ucfirst(__($months[$date_due->format('m') - 1])); ?> : <input type="text" name="turnover-<?php echo $i; ?>" id="turnover-<?php echo $i; ?>" class="format-number"> &euro; HT</li>
 						<?php $date_due->add(new DateInterval('P1M')); ?>
 					<?php endfor; ?>
 				</ul>
 
 			<?php else: ?>
-				<input type="text" name="turnover-total" id="turnover-total" />
+				<input type="text" name="turnover-total" id="turnover-total" class="format-number">
 			<?php endif; ?>
 			<br /><br />
 			
