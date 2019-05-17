@@ -83,8 +83,21 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		}
 		
 		$params[ 'funding' ] = array();
-		$project_list_funding = ATCF_Campaign::get_list_funding( 0, '', FALSE, FALSE );
-		foreach ( $project_list_funding as $project_post ) {
+		$project_list_funding_current = ATCF_Campaign::get_list_funding( 0, '', FALSE );
+		foreach ( $project_list_funding_current as $project_post ) {
+			$campaign = new ATCF_Campaign( $project_post->ID );
+			$investment_results = WDGCampaignInvestments::get_list( $project_post->ID );
+			$item = array();
+			$item[ 'name' ] = $campaign->get_name();
+			$item[ 'min_goal' ] = $campaign->minimum_goal();
+			$item[ 'time_remaining' ] = $campaign->time_remaining_str();
+			$item[ 'nb_invest' ] = $campaign->backers_count();
+			$item[ 'value_invest' ] = $campaign->current_amount( false );
+			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
+			array_push( $params[ 'funding' ], $item );
+		}
+		$project_list_funding_notime = ATCF_Campaign::get_list_funding( 0, '', FALSE, FALSE );
+		foreach ( $project_list_funding_notime as $project_post ) {
 			$campaign = new ATCF_Campaign( $project_post->ID );
 			$investment_results = WDGCampaignInvestments::get_list( $project_post->ID );
 			$item = array();
