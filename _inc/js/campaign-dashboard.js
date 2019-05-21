@@ -15,7 +15,7 @@ function WDGCampaignSimulator() {
  * Récupération de tous les CA en fonction de la durée de financement
  * @returns {Array} tableau avec le montant des CA pour chaque année
  */
-WDGCampaignSimulator.prototype.createCaTab = function(){           
+WDGCampaignSimulator.prototype.createCaTab = function(){
 	if(new_funding_duration!== "0"){
 		var nbYears = parseInt(new_funding_duration);
 		var caTab = new Array;
@@ -574,6 +574,13 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		$("#direct-mail .step-confirm").slideUp();
 		$("#direct-mail .step-write").slideDown();
 	});
+	
+	$( '.show-notifications' ).click( function( e ) {
+		e.preventDefault();
+		$( '#form-notifications #mail_type' ).val( $( this ).data( 'mailtype' ) );
+		$( '#form-notifications' ).hide();
+		$( '#form-notifications' ).slideDown( 100 );
+	} );
 				
 	if ( $( '.button-contacts-add-check' ).length > 0 ) {
 		$( '.button-contacts-add-check' ).click( function() {
