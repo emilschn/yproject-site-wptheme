@@ -844,6 +844,14 @@ var WDGFormsFunctions = (function($) {
 				var formId = $( this ).parent().parent().parent().attr( 'id' );
 				WDGFormsFunctions.postForm( '#' + formId, WDGFormsFunctions.postFormCallback, this );
 			} );
+			$( '.ajax-form button.save' ).click( function( e ) {
+				e.preventDefault();
+				$( this ).siblings( '.loading' ).show();
+				$( this ).siblings( 'button' ).hide();
+				$( this ).hide();
+				var formId = $( this ).parent().parent().attr( 'id' );
+				WDGFormsFunctions.postForm( '#' + formId, WDGFormsFunctions.postFormCallback, this );
+			} );
 			$( '.wdg-lightbox button.close, .wdg-lightbox-ref button.close' ).click( function( e ) {
 				WDGLightboxFunctions.hideAll();
 			} );
@@ -1036,15 +1044,18 @@ var WDGFormsFunctions = (function($) {
 			if ( $( formid+' button.previous' ).length > 0 ) {
 				$( formid+' button.previous' ).show();
 			}
-			var jsonResult = JSON.parse(result);
-			if ( jsonResult.errors === undefined || jsonResult.errors.length === 0 ) {
-				if ( $( clickedButton ).data( 'close' ) !== undefined && $( clickedButton ).data( 'close' ) !== '' ) {
-					$( '#wdg-lightbox-' + $( clickedButton ).data( 'close' ) ).hide();
+			
+			try {
+				var jsonResult = JSON.parse(result);
+				if ( jsonResult.errors === undefined || jsonResult.errors.length === 0 ) {
+					if ( $( clickedButton ).data( 'close' ) !== undefined && $( clickedButton ).data( 'close' ) !== '' ) {
+						$( '#wdg-lightbox-' + $( clickedButton ).data( 'close' ) ).hide();
+					}
+					if ( $( clickedButton ).data( 'open' ) !== undefined && $( clickedButton ).data( 'open' ) !== '' ) {
+						$( '#wdg-lightbox-' + $( clickedButton ).data( 'open' ) ).show();
+					}
 				}
-				if ( $( clickedButton ).data( 'open' ) !== undefined && $( clickedButton ).data( 'open' ) !== '' ) {
-					$( '#wdg-lightbox-' + $( clickedButton ).data( 'open' ) ).show();
-				}
-			}
+			} catch(e) { }
 			
 			var callbackFunctionName = $( clickedButton ).data( 'callback' );
 			if ( callbackFunctionName !== undefined && callbackFunctionName !== '' ) {
