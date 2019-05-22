@@ -1331,7 +1331,8 @@ body.template-les-projets .wdg-component-projects-preview .project-container {
 	height: 620px;
 	min-width: 240px;
 }
-body.template-les-projets .projects-current .wdg-component-projects-preview .project-container {
+body.template-les-projets .projects-current .wdg-component-projects-preview .project-container,
+body.template-les-projets .projects-after-end-date .wdg-component-projects-preview .project-container {
 	width: 33%;
 }
 body.template-les-projets .projects-funded .wdg-component-projects-preview .project-container {
