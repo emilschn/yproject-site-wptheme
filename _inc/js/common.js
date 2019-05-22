@@ -433,6 +433,12 @@ YPUIFunctions = (function($) {
 
 				}
 			}
+			if ($(".projects-after-end-date .wdg-component-projects-preview .project-slider .block-projects").width() > $(".projects-after-end-date .wdg-component-projects-preview .project-slider").width()) {
+				if ($(".projects-after-end-date .wdg-component-projects-preview .project-slider").length > 0) {
+					$(".projects-after-end-date .wdg-component-projects-preview .block-projects").width( ($(".projects-after-end-date .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-after-end-date .wdg-component-projects-preview .project-container").length );
+					$(".projects-after-end-date .wdg-component-projects-preview .project-slider").scrollLeft( ($(".projects-after-end-date .wdg-component-projects-preview .block-projects").width() - $(".projects-after-end-date .wdg-component-projects-preview .project-slider").width()) / 2 );
+				}
+			}
 			
 			if ($("#project-filter").length > 0) {
 				$("#project-filter > span").click(function() {
