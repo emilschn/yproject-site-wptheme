@@ -12,7 +12,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<li id="menu-item-contacts"><a href="#contacts" data-tab="contacts"><?php _e( "Contacts", 'yproject' ); ?></a></li>
 		<li id="menu-item-presentation"><a href="#presentation" data-tab="presentation"><?php _e( "Pr&eacute;sentation", 'yproject' ); ?></a></li>
 		<li id="menu-item-news"><a href="#news" data-tab="news"><?php _e( "Actualit&eacute;s", 'yproject' ); ?></a></li>
-		<li id="menu-item-tools"><a href="#tools" data-tab="tools"><?php _e( "Guide et outils", 'yproject' ); ?></a></li>
+		<li id="menu-item-tools"><a href="#tools" data-tab="tools"><?php _e( "Centre de support", 'yproject' ); ?></a></li>
 		<li id="menu-item-documents"><a href="#documents" data-tab="documents"><?php _e( "Documents", 'yproject' ); ?></a></li>
 		<li id="menu-item-royalties"><a href="#royalties" data-tab="royalties"><?php _e( "Royalties", 'yproject' ); ?></a></li>
 		

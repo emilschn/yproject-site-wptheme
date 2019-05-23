@@ -11,7 +11,7 @@ if ( $post_guide_tool ) {
 }
 ?>
 
-<h2><?php _e( "Guide et outils", 'yproject' ); ?></h2>
+<h2><?php _e( "Centre de support", 'yproject' ); ?></h2>
 <?php if ( !empty( $post_guide_tool_content_filtered ) ): ?>
 	<?php echo $post_guide_tool_content_filtered; ?>
 
