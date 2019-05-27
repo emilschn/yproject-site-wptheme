@@ -224,8 +224,9 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			// 0.2
 			'/a-propos/contact/'				=> '0.2',
 			'/a-propos/equipe/'					=> '0.2',
+			'/a-propos/partenaires/des-bons-plans-pour-votre-entreprise/'	=> '0.2',
 			'/a-propos/recrutement/'			=> '0.2',
-			'/a-propos/statistiques/rapport-activite-2017/'			=> '0.2',
+			'/a-propos/statistiques/rapport-activite-2017/'					=> '0.2',
 			// 0.1
 			'/placement-royalties/'				=> '0.1',
 			'/a-propos/'						=> '0.1',
