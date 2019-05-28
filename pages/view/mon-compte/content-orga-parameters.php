@@ -1,6 +1,5 @@
 <?php global $WDGOrganization; ?>
 <?php
-$page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGOrganizationDetailsForm = new WDG_Form_Organization_Details( $WDGOrganization->get_wpref(), TRUE );
 $fields_hidden = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_hidden );
 $fields_complete = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_complete );

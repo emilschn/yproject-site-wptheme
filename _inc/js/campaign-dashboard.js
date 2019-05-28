@@ -908,7 +908,7 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 				}
 				if(count_files_errors > 0 || count_data_errors > 0) {
 					var err = $("<p class='errors'>Certains champs n'ont pas été validés.</p>");
-					err.insertAfter($("#orgaedit_form_button button"));
+					err.insertAfter( $( '#organization-details-form-buttons button' ) );
 				}
 				//Affichage confirmation enregistrement
 				if (count_files_errors === 0 && count_data_errors === 0){

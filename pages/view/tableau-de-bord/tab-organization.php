@@ -73,11 +73,11 @@ echo do_shortcode( '[yproject_widelightbox id="newOrga" scrolltop="1"]'.$lightbo
 
 <?php
 $msg_valid_changeOrga = __( "L'organisation a bien &eacute;t&eacute; li&eacute;e au projet", 'yproject' );
-echo do_shortcode('[yproject_lightbox_cornered id="valid-changeOrga" scrolltop="1" msgtype="valid"]'.$msg_valid_changeOrga.'[/yproject_lightbox_cornered]' );
+echo do_shortcode('[yproject_lightbox_cornered id="valid-changeOrga" scrolltop="1" msgtype="valid"]'.$msg_valid_changeOrga.'<br><br>[/yproject_lightbox_cornered]' );
 
 $msg_valid_newOrga = __( "Votre nouvelle organisation a bien &eacute;t&eacute; cr&eacute;&eacute;e", 'yproject' );
-echo do_shortcode('[yproject_lightbox_cornered id="valid-newOrga" scrolltop="1" msgtype="valid"]'.$msg_valid_newOrga.'[/yproject_lightbox_cornered]' );
+echo do_shortcode('[yproject_lightbox_cornered id="valid-newOrga" scrolltop="1" msgtype="valid"]'.$msg_valid_newOrga.'<br><br>[/yproject_lightbox_cornered]' );
 
 $msg_valid_editOrga = __( "Les informations ont bien &eacute;t&eacute; enregistr&eacute;es", 'yproject' );
-echo do_shortcode('[yproject_lightbox_cornered id="valid-editOrga" scrolltop="1" msgtype="valid"]'.$msg_valid_editOrga.'[/yproject_lightbox_cornered]' );
+echo do_shortcode('[yproject_lightbox_cornered id="valid-editOrga" scrolltop="1" msgtype="valid"]'.$msg_valid_editOrga.'<br><br>[/yproject_lightbox_cornered]' );
 ?>
