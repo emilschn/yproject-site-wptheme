@@ -83,6 +83,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'dashboard-add-check' );
 		$this->form_add_check = new WDG_Form_Dashboard_Add_Check( $this->campaign_id );
+		$core->include_form( 'organization-details' );
 		
 		$current_organization = $this->get_campaign_organization();
 		if ( isset($_POST['authentify_lw']) ) {
@@ -189,8 +190,11 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		if (
 			// - ADMIN
 				$this->can_access_admin()
+			// - avant la levée
+				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated )
+				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote )
 			// - en cours de levée
-				|| ( $this->campaign->is_remaining_time() )
+				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $this->campaign->is_remaining_time() )
 			// - pas validé + dans les 14 jours qui suivent la levée de fonds
 				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive && !$this->campaign->has_retraction_passed() )
 		) {
