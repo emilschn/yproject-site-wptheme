@@ -1,5 +1,6 @@
 <?php
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
+$today_date = new DateTime();
 ?>
 
 <h2><?php _e( "Documents", 'yproject' ); ?></h2>
@@ -11,6 +12,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<form action="<?php echo admin_url( 'admin-post.php?action=generate_campaign_funded_certificate'); ?>" method="post" id="generate_campaign_funded_certificate" class="field admin-theme">
 				<div class="align-center">
 					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+					Date du dernier investissement à prendre en compte : <input type="text" name="date_end" value="<?php echo $today_date->format( 'Y-m-d' ); ?>">
 					<button class="button admin-theme"><?php _e( "Reg&eacute;n&eacute;rer l'attestation de lev&eacute;e de fonds", 'yproject' ); ?></button>
 				</div>
 			</form>
