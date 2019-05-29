@@ -237,7 +237,7 @@ $lang_list = $campaign->get_lang_list();
 						<?php if ( $campaign->is_remaining_time() ): ?>
 							<div class="end-sentence">
 								<?php $datetime_end = $campaign->get_end_date_when_can_invest_until_contract_start_date(); ?>
-								<?php echo __( "L'investissement est possible jusqu'au premier versement de royalties", 'yproject' ). " (" .$datetime_end->format( 'd/m/Y' ). ")."; ?>
+								<?php echo __( "L'investissement est possible jusqu'au d&eacute;marrage du contrat de royalties", 'yproject' ). " (" .$datetime_end->format( 'd/m/Y' ). ")."; ?>
 							</div>
 							<a href="<?php echo $invest_url_href; ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
 						<?php endif; ?>
