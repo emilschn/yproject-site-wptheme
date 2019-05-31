@@ -177,7 +177,6 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/financement/flexible/'						=> '0.7',
 			'/financement/fonds-propres/'					=> '0.7',
 			'/financement/non-dilutif/'						=> '0.7',
-			'/financement/offres/love-money/'				=> '0.7',
 			'/financement/rapide/'							=> '0.7',
 			'/financement/royalties/'						=> '0.7',
 			'/financement/royalty-crowdfunding/'			=> '0.7',
@@ -208,17 +207,23 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			// 0.5
 			// PROJETS
 			'/a-propos/statistiques/rapport-activite-2018/'			=> '0.5',
-//			'/financement/offres/'									=> '0.5',
+			'/financement/offres/crowdfunding/'						=> '0.5',
+			'/financement/offres/crowdfunding-accompagnement/'		=> '0.5',
+			'/financement/offres/love-money/'						=> '0.5',
+			'/financement/offres/reseau/'							=> '0.5',
 //			'/financement/royalty-crowdfunding/accompagnement/'		=> '0.5',
 //			'/investissement/cooperatives/'							=> '0.5',
 			'/investissement/fiscalite-royalties/'					=> '0.5',
 			// 0.4
+			'/financement/offres/'									=> '0.4',
 //			'/financement/offres/amorcage-crowdfunding/'			=> '0.4',
-			'/financement/offres/crowdfunding-accompagnement/'		=> '0.4',
-//			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
+			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
 			// 0.3
 			'/a-propos/espace-presse/'			=> '0.3',
 			'/a-propos/partenaires/'			=> '0.3',
+			'/financement/offres/crowdfunding-accompagnement/atelier/'		=> '0.3',
+			'/financement/offres/crowdfunding-accompagnement/basique/'		=> '0.3',
+			'/financement/offres/crowdfunding-accompagnement/conseils/'		=> '0.3',
 //			'/investir/actifs/'					=> '0.3',
 			'/press-book/'						=> '0.3',
 			// 0.2
