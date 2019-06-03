@@ -79,6 +79,8 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'value_intent' ] = $vote_results[ 'sum_invest_ready' ];
 			$item[ 'nb_preinvestment' ] = $vote_results[ 'count_preinvestments' ];
 			$item[ 'value_preinvestment' ] = $vote_results[ 'amount_preinvestments' ];
+			$item[ 'nb_not_validated_preinvestment' ] = $vote_results[ 'count_not_validate_preinvestments' ];
+			$item[ 'value_not_validated_preinvestment' ] = $vote_results[ 'amount_not_validate_preinvestments' ];
 			array_push( $params[ 'vote' ], $item );
 		}
 		
@@ -94,6 +96,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'nb_invest' ] = $campaign->backers_count();
 			$item[ 'value_invest' ] = $campaign->current_amount( false );
 			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
+			$item[ 'value_not_validated' ] = $investment_results[ 'amount_not_validate_investments' ];
 			array_push( $params[ 'funding' ], $item );
 		}
 		$project_list_funding_notime = ATCF_Campaign::get_list_funding( 0, '', FALSE, FALSE );
@@ -107,6 +110,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'nb_invest' ] = $campaign->backers_count();
 			$item[ 'value_invest' ] = $campaign->current_amount( false );
 			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
+			$item[ 'value_not_validated' ] = $investment_results[ 'amount_not_validate_investments' ];
 			array_push( $params[ 'funding' ], $item );
 		}
 		
@@ -123,6 +127,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'nb_invest' ] = $campaign->backers_count();
 			$item[ 'value_invest' ] = $campaign->current_amount( false );
 			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
+			$item[ 'value_not_validated' ] = $investment_results[ 'amount_not_validate_investments' ];
 			array_push( $params[ 'hidden' ], $item );
 		}
 		
