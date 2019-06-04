@@ -95,7 +95,7 @@ else {
 					<div class="clear"></div>
 
 					<div class="aligncenter" role="contentinfo">
-						<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/">
+						<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/" target="_blank">
 							<img alt="Licence Creative Commons" width="25" height="25" style="vertical-align: middle" src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/cc-01.png" /> Some rights reserved
 						</a>
 					</div>
