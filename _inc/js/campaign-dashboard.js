@@ -451,27 +451,26 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 				feedback = jsonResult;
 
 				//Affiche les erreurs
-				for(var input in feedback.errors){
-					self.fieldError(thisForm.find('#'+input), feedback.errors[input])
+				var firstErrorInput = false;
+				for ( var input in feedback.errors ) {
+					firstErrorInput = $( '#field-' + input + ' .field-error' );
+					$( '#field-' + input + ' .field-error' ).html( feedback.errors[ input ] );
+					$( '#field-' + input + ' .field-error' ).show();
+					$( '#field-' + input ).find('i.fa.validation').remove();
 				}
 
 				for(var input in feedback.success){
-					var thisinput = thisForm.find('#'+input);
-					if ( thisinput.length == 0 ) {
-						thisinput = thisForm.find('input[name='+input+'],select[name='+input+']');
-					}
+					$( '#field-' + input + ' .field-error' ).hide();
+					thisinput = thisForm.find( 'input[name=' + input + '],select[name=select-' + input + ']');
 					self.removeFieldError(thisinput);
-					thisinput.closest(".field-value").parent().find('i.fa.validation').remove();
+					thisinput.parent().parent().find('i.fa.validation').remove();
 					thisinput.addClass("validation");
-					thisinput.closest(".field-value").after('<i class="fa fa-check validation" aria-hidden="true"></i>');
+					thisinput.parent().after('<i class="fa fa-check validation" aria-hidden="true"></i>');
 				}
 
 				//Scrolle jusqu'à la 1ère erreur et la sélectionne
-				var firsterror = thisForm.find(".error").first();
-				if(firsterror.length == 1){
-					self.scrollTo(firsterror);
-					//La sélection (ci-dessous) Ne fonctione ne marche pas
-					firsterror.focus();
+				if ( firstErrorInput !== false ) {
+					self.scrollTo( firstErrorInput );
 					thisForm.find('.save_errors').fadeIn();
 				} else {
 					thisForm.find('.save_ok').fadeIn();                          
@@ -1556,7 +1555,7 @@ WDGCampaignDashboard.prototype.fieldError = function( $param, errorText ) {
 		show: 'focus',
 		hide: 'blur'
 	});
-	$param.closest(".field-value").parent().find('i.fa.validation').remove();
+	$param.parent().parent().find('i.fa.validation').remove();
 };
 
 WDGCampaignDashboard.prototype.removeFieldError = function( $param ){
