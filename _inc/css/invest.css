@@ -346,3 +346,23 @@ div.mean-payment-list a div, div.mean-payment-list p > span {
 	margin-top: -50px;
 	margin-left: 30px;
 }
+
+/**
+ DECLARATION
+**/
+.declaration-summary {
+	margin: 24px auto;
+	line-height: 24px;
+	font-size: 14px;
+}
+.declaration-summary h2 {
+	margin: 0px;
+	padding: 0px;
+}
+.declaration-summary table {
+	width: 100%;
+	border: 0px;
+}
+.declaration-summary table tr.bold td {
+	font-weight: bold;
+}

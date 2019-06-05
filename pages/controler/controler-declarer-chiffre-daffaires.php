@@ -15,6 +15,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	private $form;
 	
 	private $can_access;
+	private $summary_data;
 	
 	public function __construct() {
 		parent::__construct();
@@ -96,6 +97,67 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	}
 	
 /******************************************************************************/
+// SUMMARY DATA
+/******************************************************************************/
+	private function init_summary_data() {
+		$this->summary_data = array();
+		// prévisionnel
+		$this->summary_data[ 'amount_estimated' ] = $this->current_declaration->get_estimated_turnover();
+		// mois et enregistrements
+		$this->summary_data[ 'turnover_by_month' ] = array();
+		$months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' );
+		$nb_fields = $this->current_campaign->get_turnover_per_declaration();
+		$date_due = new DateTime( $this->current_declaration->date_due );
+		$date_due->sub( new DateInterval( 'P' .$nb_fields. 'M' ) );
+		for ( $i = 0; $i < $nb_fields; $i++ ) {
+			$label = ucfirst( __( $months[ $date_due->format( 'm' ) - 1 ] ) ). ' ' . $date_due->format( 'Y' );
+			$this->summary_data[ 'turnover_by_month' ][ $label ] = $this->current_declaration->get_turnover()[ $i ];
+			$date_due->add( new DateInterval( 'P1M' ) );
+		}
+		// total
+		$this->summary_data[ 'turnover_total' ] = $this->current_declaration->get_turnover_total();
+		
+		// ajustement
+		$adjustment_value = $this->current_declaration->get_adjustment_value();
+		if ( $adjustment_value > 0 ) {
+			// TODO avec refonte
+			$this->summary_data[ 'amount_adjustment' ] = $this->current_declaration->get_adjustment_value();
+		}
+		
+		// commission
+		$commission = $this->current_declaration->get_commission_to_pay();
+		if ( $commission > 0 ) {
+			// frais
+			$this->summary_data[ 'commission_without_tax' ] = $this->current_declaration->get_commission_to_pay_without_tax();
+			// tva
+			$this->summary_data[ 'commission_tax' ] = $this->current_declaration->get_commission_tax();
+			// commission_percent_without_tax
+			$this->summary_data[ 'commission_percent_without_tax' ] = $this->current_campaign->get_costs_to_organization() / 1.2;
+			// minimum_commission_without_tax
+			$this->summary_data[ 'minimum_commission_without_tax' ] = $this->current_campaign->get_minimum_costs_to_organization() / 1.2;
+			// total royalties
+			$this->summary_data[ 'amount_royalties_with_adjustment' ] = $this->current_declaration->get_amount_with_adjustment();
+		}
+		
+		// On affiche le montant des royalties que si il diffère du montant total (autrement dit : on ne l'affiche pas pour les vieux projets
+		if ( $adjustment_value > 0 || $commission > 0 ) {
+			// royalties sur CA déclaré
+			$this->summary_data[ 'amount_royalties' ] = $this->current_declaration->get_amount_royalties();
+			$this->summary_data[ 'percent_royalties' ] = $this->current_campaign->roi_percent();
+		}
+		
+		// total à payer
+		$this->summary_data[ 'amount_to_pay' ] = $this->current_declaration->get_amount_with_commission();
+		
+		// message
+		$this->summary_data[ 'message' ] = $this->current_declaration->get_message();
+	}
+	
+	public function get_summary_data() {
+		return $this->summary_data;
+	}
+	
+/******************************************************************************/
 // CURRENT FORM
 /******************************************************************************/
 	private function init_form() {
@@ -115,6 +177,10 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					$this->current_step = $this->current_declaration->get_status();
 				}
 			}
+		}
+		
+		if ( $this->current_step == WDGROIDeclaration::$status_payment ) {
+			$this->init_summary_data();
 		}
 		
 	}

@@ -585,3 +585,10 @@ Sélectionner :<br />
 }
 add_action('wp_ajax_get_email_selector', 'get_email_selector');
 add_action('wp_ajax_nopriv_get_email_selector', 'get_email_selector');
+
+if ( !function_exists( 'array_key_first' ) ) {
+	function array_key_first( $array ) {
+		reset( $array );
+		return key( $array );
+	}
+}
