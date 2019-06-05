@@ -104,6 +104,15 @@ div#content header #invest-breadcrumb span:after {
 div#content header #invest-breadcrumb span.selected:after {
 	border-left: 0px;
 }
+body.template-declarer-chiffre-daffaires div#content header #invest-breadcrumb {
+	width: 125px;
+}
+body.template-declarer-chiffre-daffaires div#content header #invest-breadcrumb span:first-child {
+	margin-right: 8px;
+}
+body.template-declarer-chiffre-daffaires div#content header #invest-breadcrumb span:nth-child(2):after {
+	top: -36px;
+}
 
 .invest_error {
     color: #FE494C;

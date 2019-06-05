@@ -60,6 +60,7 @@ $declaration_message = $declaration->get_message();
 			<input type="hidden" name="declaration-id" value="<?php echo $declaration->id; ?>" />
 			<button type="submit" class="button red">Enregistrer la déclaration</button>
 		</form>
+		<a href="<?php echo home_url( '/declarer-chiffre-daffaires/?campaign_id=' .$page_controler->get_campaign()->ID. '&declaration_id=' .$declaration->id ); ?>" class="hidden">Tunnel de déclaration</a>
 
 	<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
 		Chiffre d'affaires déclaré :
