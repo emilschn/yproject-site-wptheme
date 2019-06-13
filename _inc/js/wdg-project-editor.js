@@ -991,7 +991,7 @@ var ProjectEditor = (function($) {
 		},
 		
 		addEditIntroErrorMessage: function() {
-			if ( $( '.project-admin span.intro' ).length == 0 ) {
+			if ( $( '.project-admin div.intro' ).length == 0 ) {
 				$( '.project-admin' ).append( '<div class="intro">Afin de ne pas surcharger votre page et accélérer le temps d\'ouverture, nous vous encourageons à limiter le poids des images à 200 Ko.</div>' );
 			}
 		},
