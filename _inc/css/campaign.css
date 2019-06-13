@@ -210,6 +210,30 @@ div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before 
 	background: #000;
 	cursor: pointer;
 }
+
+div#content div.project-admin div.intro {
+	width: 176px;
+	margin-right: 4px;
+	margin-bottom: 8px;
+	text-align: justify;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+div#content div.project-admin div.error {
+	width: 172px;
+	margin-bottom: 4px;
+	padding: 4px;
+	text-align: justify;
+	font-size: 11px;
+	background-color: #EACDCB;
+	color: #333;
+}
+div#content div.project-admin div.error.error-big {
+	background-color: #93626D;
+	color: #FFF;
+}
+
 .editable {
     border: 1px dashed #2B2C2C;
 }

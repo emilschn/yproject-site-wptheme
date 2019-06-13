@@ -30,6 +30,8 @@ var ProjectEditor = (function($) {
 					return confirmationMessage; //Webkit, Safari, Chrome
 				}
 			} );
+			
+			ProjectEditor.analyseImageFiles();
 		},
 		
 		//Permet de switcher du texte Nouvelle langue vers le sélecteur de langue
@@ -922,6 +924,84 @@ var ProjectEditor = (function($) {
 				$('#wdg-move-picture-location').addClass('move-button');
 				$('#wdg-move-picture-location').removeClass('wait-button');
 			}); 
+		},
+		
+		analyseImageFiles: function() {
+			if ( ( '.project-banner-picture img' ).length > 0 ) {
+				var sSrc = $( '.project-banner-picture img' ).attr( 'src' );
+				ProjectEditor.analyseImageSingleFile( sSrc, 'image de présentation' );
+			}
+			
+			$( '#project-content-description .zone-content img' ).each( function() {
+				var sSrc = $( this ).attr( 'src' );
+				if ( sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Pitch' );
+				}
+			} );
+			
+			$( '#project-content-societal_challenge .zone-content img' ).each( function() {
+				var sSrc = $( this ).attr( 'src' );
+				if ( sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Impacts positifs' );
+				}
+			} );
+			
+			$( '#project-content-added_value .zone-content img' ).each( function() {
+				var sSrc = $( this ).attr( 'src' );
+				if ( sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Stratégie' );
+				}
+			} );
+			
+			$( '#project-content-economic_model .zone-content img' ).each( function() {
+				var sSrc = $( this ).attr( 'src' );
+				if ( sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Données financières' );
+				}
+			} );
+			
+			$( '#project-content-implementation .zone-content img' ).each( function() {
+				var sSrc = $( this ).attr( 'src' );
+				if ( sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Equipe' );
+				}
+			} );
+		},
+		
+		analyseImageSingleFile: function( sSrc, sLocation ) {
+			var xhr = $.ajax({
+				type: "HEAD",
+				url: sSrc,
+				success: function(){
+					var nBytes = xhr.getResponseHeader( 'Content-Length' );
+					var nKBytes = nBytes / 1024;
+					if ( nKBytes > 200 ) {
+						var sUrl = this.url;
+						var aSplitUrl = sUrl.split( '/' );
+						var sFileName = aSplitUrl[ aSplitUrl.length - 1 ];
+						ProjectEditor.addEditIntroErrorMessage();
+						if ( nKBytes > 500 ) {
+							ProjectEditor.addEditErrorMessage( sFileName + ' (' + sLocation + ') dépasse 500ko.', true );
+						} else {
+							ProjectEditor.addEditErrorMessage( sFileName + ' (' + sLocation + ') dépasse 200ko.' );
+						}
+					}
+				}
+			});
+		},
+		
+		addEditIntroErrorMessage: function() {
+			if ( $( '.project-admin span.intro' ).length == 0 ) {
+				$( '.project-admin' ).append( '<div class="intro">Afin de ne pas surcharger votre page et accélérer le temps d\'ouverture, nous vous encourageons à limiter le poids des images à 200 Ko.</div>' );
+			}
+		},
+		
+		addEditErrorMessage: function( sMsg, bIsBig ) {
+			var sClass = 'error';
+			if ( bIsBig ) {
+				sClass += ' error-big';
+			}
+			$( '.project-admin' ).append( '<div class="' + sClass + '">' + sMsg + '</div>' );
 		}
 	};
     
