@@ -927,8 +927,8 @@ var ProjectEditor = (function($) {
 		},
 		
 		analyseImageFiles: function() {
-			if ( ( '.project-banner-picture img' ).length > 0 ) {
-				var sSrc = $( '.project-banner-picture img' ).attr( 'src' );
+			if ( ( '#project-banner-picture img' ).length > 0 ) {
+				var sSrc = $( '#project-banner-picture img' ).attr( 'src' );
 				ProjectEditor.analyseImageSingleFile( sSrc, 'image de présentation' );
 			}
 			
