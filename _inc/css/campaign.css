@@ -226,12 +226,11 @@ div#content div.project-admin div.error {
 	padding: 4px;
 	text-align: justify;
 	font-size: 11px;
-	background-color: #EACDCB;
+	background-color: #E1E3E2;
 	color: #333;
 }
 div#content div.project-admin div.error.error-big {
-	background-color: #93626D;
-	color: #FFF;
+	background-color: #EACDCB;
 }
 
 .editable {
