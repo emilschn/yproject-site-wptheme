@@ -162,6 +162,7 @@ $declaration_message = $declaration->get_message();
 			</form>
 			<br>
 		<?php endif; ?>
+		<a href="<?php echo home_url( '/declarer-chiffre-daffaires/?campaign_id=' .$page_controler->get_campaign()->ID. '&declaration_id=' .$declaration->id ); ?>" class="hidden">Tunnel de déclaration</a>
 
 
 	<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_transfer ||  $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ): ?>
@@ -260,6 +261,7 @@ $declaration_message = $declaration->get_message();
 
 		<?php endif; ?>
 		<?php endif; ?>
+		<a href="<?php echo home_url( '/declarer-chiffre-daffaires/?campaign_id=' .$page_controler->get_campaign()->ID. '&declaration_id=' .$declaration->id ); ?>" class="hidden">Tunnel de déclaration</a>
 
 	<?php elseif (  $declaration->get_status() == WDGROIDeclaration::$status_finished ): ?>
 		Chiffre d'affaires déclaré :

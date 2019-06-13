@@ -90,27 +90,19 @@ $summary_data = $page_controler->get_summary_data();
 	<?php endif; ?>
 </div>
 
-<?php
-/*
-$fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Declaration_Input::$field_group_hidden );
-$fields_declaration = $page_controler->get_form()->getFields( WDG_Form_Declaration_Input::$field_group_declaration );
-?>
-
 <form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
 	
-	<?php foreach ( $fields_hidden as $field ): ?>
-		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-		<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
-	<?php endforeach; ?>
-
-	<?php foreach ( $fields_declaration as $field ): ?>
-		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-		<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
-	<?php endforeach; ?>
-
-	<button type="submit" class="button half right transparent clear"><?php _e( "Suivant", 'yproject' ); ?></button>
-
+	<button type="submit" name="action" value="gotopayment" class="button red">
+	<?php if ( $page_controler->is_card_shortcut_displayed() ): ?>
+		<?php _e( "Valider et payer par carte", 'yproject' ); ?>
+	<?php else: ?>
+		<?php _e( "Valider et payer par pr&eacute;l&eacute;vement", 'yproject' ); ?>
+	<?php endif; ?>
+	</button>
+	<div class="clear"><br></div>
+	
+	<button type="submit" name="action" value="gobacktodeclaration" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
+	<button type="submit" name="action" value="changepayment" class="button half right transparent"><?php _e( "Autre mode de paiement", 'yproject' ); ?></button>
 	<div class="clear"></div>
 
 </form>
-*/
