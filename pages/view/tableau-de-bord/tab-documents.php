@@ -11,8 +11,11 @@ $today_date = new DateTime();
 		<a href="<?php echo $page_controler->get_campaign()->get_funded_certificate_url(); ?>?time=<?php echo time(); ?>" download="attestation-levee-fonds.pdf" class="button red"><?php _e( "Attestation de lev&eacute;e de fonds", 'yproject' ); ?></a>
 			<form action="<?php echo admin_url( 'admin-post.php?action=generate_campaign_funded_certificate'); ?>" method="post" id="generate_campaign_funded_certificate" class="field admin-theme">
 				<div class="align-center">
-					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>">
 					Date du dernier investissement à prendre en compte : <input type="text" name="date_end" value="<?php echo $today_date->format( 'Y-m-d' ); ?>">
+					<br>
+					Champs libre : <input type="text" name="free_field" size="50" value="" placeholder="Attestation temporaire XXX ; Annule et remplace l'attestation du XX/XX/XXXX, ...">
+					<br>
 					<button class="button admin-theme"><?php _e( "Reg&eacute;n&eacute;rer l'attestation de lev&eacute;e de fonds", 'yproject' ); ?></button>
 				</div>
 			</form>
