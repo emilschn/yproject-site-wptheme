@@ -14,6 +14,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $must_show_lightbox_welcome;
 	private $return_lemonway_card;
 	private $form_add_check;
+	private $form_document;
 	private $emails;
 	/**
 	 * @var ATCF_Campaign
@@ -70,8 +71,6 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			exit();
 		}
 		$this->check_has_signed_mandate();
-		$this->init_context();
-		$this->init_stats();
 		
 		WDGFormProjects::form_submit_turnover();
 		WDGFormProjects::form_submit_account_files();
@@ -80,10 +79,16 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		WDGFormProjects::form_cancel_payment();
 		WDGFormProjects::form_try_pending_card();
 		
+		$this->init_context();
+		$this->init_stats();
+		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'dashboard-add-check' );
 		$this->form_add_check = new WDG_Form_Dashboard_Add_Check( $this->campaign_id );
 		$core->include_form( 'organization-details' );
+		
+		$this->init_and_check_form_document();
+		
 		
 		$current_organization = $this->get_campaign_organization();
 		if ( isset($_POST['authentify_lw']) ) {
@@ -176,34 +181,6 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		return $this->campaign->is_funded();
 	}
 	
-	
-/******************************************************************************/
-// GESTION CHEQUES
-/******************************************************************************/
-	public function get_form_add_check() {
-		return $this->form_add_check;
-	}
-	
-	public function can_add_check() {
-		$buffer = FALSE;
-		// Bouton d'ajout de chèque disponible si une des conditions suivantes :
-		if (
-			// - ADMIN
-				$this->can_access_admin()
-			// - avant la levée
-				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated )
-				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote )
-			// - en cours de levée
-				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $this->campaign->is_remaining_time() )
-			// - pas validé + dans les 14 jours qui suivent la levée de fonds
-				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive && !$this->campaign->has_retraction_passed() )
-		) {
-			$buffer = TRUE;
-		}
-		
-		return $buffer;
-	}
-	
 /******************************************************************************/
 // CONTEXTE
 /******************************************************************************/
@@ -232,6 +209,68 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			wp_redirect( home_url( 'tableau-de-bord' ) . '?campaign_id=' . $this->get_campaign_id() . '#contracts' );
 			exit();
 		}
+	}
+	
+	
+/******************************************************************************/
+// GESTION DOCUMENTS
+/******************************************************************************/
+	private function init_and_check_form_document() {
+		$core = ATCF_CrowdFunding::instance();
+		$core->include_form( 'declaration-document' );
+		$this->form_document = new WDG_Form_Declaration_Document( $this->campaign_id );
+	}
+	
+	public function get_form_document() {
+		return $this->form_document;
+	}
+	
+	public function get_form_document_action() {
+		$url = admin_url( 'admin-post.php?action=add_declaration_document' );
+		return $url;
+	}
+	
+	public function get_form_document_feedback_message() {
+		$buffer = FALSE;
+		
+		$input_add_declaration_document_success = filter_input( INPUT_GET, 'add_declaration_document_success' );
+		if ( !empty( $input_add_declaration_document_success ) ) {
+			if ( $input_add_declaration_document_success == '1' ) {
+				$buffer = 'success';
+			} else {
+				$buffer = 'error';
+			}
+		}
+		
+		return $buffer;
+	}
+	
+	
+/******************************************************************************/
+// GESTION CHEQUES
+/******************************************************************************/
+	public function get_form_add_check() {
+		return $this->form_add_check;
+	}
+	
+	public function can_add_check() {
+		$buffer = FALSE;
+		// Bouton d'ajout de chèque disponible si une des conditions suivantes :
+		if (
+			// - ADMIN
+				$this->can_access_admin()
+			// - avant la levée
+				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated )
+				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote )
+			// - en cours de levée
+				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $this->campaign->is_remaining_time() )
+			// - pas validé + dans les 14 jours qui suivent la levée de fonds
+				|| ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_archive && !$this->campaign->has_retraction_passed() )
+		) {
+			$buffer = TRUE;
+		}
+		
+		return $buffer;
 	}
 	
 /******************************************************************************/

@@ -33,7 +33,10 @@ if ( !empty( $saved_mandates_list ) ) {
 
 		<?php if ($page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed): ?>
 		
+			<?php locate_template( array( 'pages/view/tableau-de-bord/tab-royalties/form-send-document.php' ), true ); ?>
 		
+		
+			<h3><?php _e( "Ech&eacute;ances", 'yproject' ); ?></h3>
 			<?php
 			// On affiche toujours une information liée au planning des actions, au début de la page :
 				// - signez votre autorisation de prélèvement automatique > à afficher dès la création du projet ?

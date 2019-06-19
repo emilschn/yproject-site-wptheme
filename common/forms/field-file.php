@@ -31,10 +31,10 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 <input type="file" name="<?php echo $wdg_current_field[ 'name' ]; ?>" id="<?php echo $wdg_current_field[ 'name' ]; ?>">
 <label for="<?php echo $wdg_current_field[ 'name' ]; ?>" class="file-label hidden-responsive" data-input="<?php echo $wdg_current_field[ 'name' ]; ?>">
 	<span class="hide-when-filled">
-		<?php _e( "Je glisse mon fichier ici" ); ?><br>
+		<?php _e( "Glisser mon fichier ici" ); ?><br>
 		ou<br>
 	</span>
-	<span class="button blue"><?php _e( "J'importe mon fichier" ); ?></span>
+	<span class="button blue"><?php _e( "Importer mon fichier" ); ?></span>
 </label>
 <div class="hidden displayed-responsive">
 	<button type="button" class="button blue wdg-button-lightbox-open" data-lightbox="lightbox-<?php echo $wdg_current_field[ 'name' ]; ?>"><?php _e( "Je prends une photo" ); ?></button>
