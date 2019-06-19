@@ -66,6 +66,12 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		return $this->current_campaign;
 	}
 	
+	public function get_current_campaign_organization_wallet_id() {
+		$campaign_organization_item = $this->current_campaign->get_organization();
+		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+		return $WDGOrganization->get_lemonway_id();
+	}
+	
 /******************************************************************************/
 // CURRENT DECLARATION
 /******************************************************************************/
@@ -167,16 +173,8 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	}
 	
 	public function is_card_shortcut_displayed() {
-		$buffer = TRUE;
 		$declaration_amount_to_pay = $this->current_declaration->get_amount_with_commission();
-		if ( $declaration_amount_to_pay >= 500 ) {
-			$campaign_organization_item = $this->current_campaign->get_organization();
-			$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
-			if ( $WDGOrganization->has_signed_mandate() ) {
-				$buffer = FALSE;
-			}
-		}
-		return $buffer;
+		return ( $declaration_amount_to_pay < 500 );
 	}
 	
 	public function has_commission() {
@@ -234,18 +232,22 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					}
 					break;
 					
-				case 'paywithcard':
+				case 'proceedpayment':
 					$this->current_step = WDGROIDeclaration::$status_payment . '2';
 					$has_tried_payment = TRUE;
 					// Démarrer paiement par carte
-					$this->display_payment_error = !$this->proceed_payment_card();
-					break;
-					
-				case 'paywithmandate':
-					$this->current_step = WDGROIDeclaration::$status_payment . '2';
-					$has_tried_payment = TRUE;
-					// Procéder au prélèvement
-					$this->display_payment_error = !$this->proceed_payment_mandate();
+					$input_meanofpayment = filter_input( INPUT_POST, 'meanofpayment' );
+					switch ( $input_meanofpayment ) {
+						case 'card':
+							$this->display_payment_error = !$this->proceed_payment_card();
+							break;
+						case 'mandate':
+							$this->display_payment_error = !$this->proceed_payment_mandate();
+							break;
+						case 'wire':
+							$this->proceed_payment_wire();
+							break;
+					}
 					break;
 			}
 			
@@ -279,6 +281,12 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	
 	public function can_display_payment_error() {
 		return $this->display_payment_error;
+	}
+	
+	public function has_sign_mandate() {
+		$campaign_organization_item = $this->current_campaign->get_organization();
+		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+		return $WDGOrganization->has_signed_mandate();
 	}
 	
 /******************************************************************************/
@@ -344,6 +352,11 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		}
 		
 		return $buffer;
+	}
+	
+	public function proceed_payment_wire() {
+		$this->current_declaration->status = WDGROIDeclaration::$status_waiting_transfer;
+		$this->current_declaration->save();
 	}
 	
 }

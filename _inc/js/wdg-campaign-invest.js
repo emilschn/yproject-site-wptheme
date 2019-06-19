@@ -110,6 +110,15 @@ var WDGInvestPageFunctions = (function($) {
 					$( '#field-would-invest-number-per-year-with-warranty' ).hide( 100 );
 				} );
 			}
+			
+			if ( $( 'body.template-declarer-chiffre-daffaires .mean-payment' ).length > 0 ) {
+				$( 'body.template-declarer-chiffre-daffaires .mean-payment' ).click( function() {
+					$( 'body.template-declarer-chiffre-daffaires .mean-payment' ).removeClass( 'selected' );
+					$( this ).addClass( 'selected' );
+					$( 'body.template-declarer-chiffre-daffaires form button.half.right.red').removeClass( 'hidden' );
+					$( 'input#input-meanofpayment' ).attr( 'value', $( this ).data( 'meanofpayment' ) );
+				} );
+			}
 		},
 
 		userTypeSelect: function( userType ) {
