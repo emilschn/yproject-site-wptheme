@@ -98,16 +98,19 @@ $estimated_turnover = $campaign->estimated_turnover();
 								<td>
 									<?php _e( "Ann&eacute;e", 'yproject' ); ?>
 								</td>
-								<?php $index = 0; $max_turnover = max( max($estimated_turnover), 1 ); ?>
-								<?php foreach ($estimated_turnover as $i => $value): ?>
-								<?php $height = 100 - round($value / $max_turnover * 100); ?>
-								<td>
-									<div><div style="height: <?php echo $height; ?>%;"><span class="roi_amount_user_container"><span class="roi_amount_user<?php echo $index; ?>">0</span> &euro;</span></div></div>
-									<?php echo ( $index + 1 ); ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $value; ?></span>
-								</td>
+								<?php $index = 0; $max_turnover = max( max($estimated_turnover), 1 ); $count_estimated_turnover = count( $estimated_turnover ); ?>
+								<?php foreach ( $estimated_turnover as $i => $value ): ?>
+									<?php $height = 100 - round($value / $max_turnover * 100); ?>
+									<td class="<?php if ( $count_estimated_turnover > 5 && $index > 1 && $index < $count_estimated_turnover - 2 ): ?>hidden<?php endif; ?>">
+										<div><div style="height: <?php echo $height; ?>%;"><span class="roi_amount_user_container"><span class="roi_amount_user<?php echo $index; ?>">0</span> &euro;</span></div></div>
+										<?php echo ( $index + 1 ); ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $value; ?></span>
+									</td>
+									<?php if ( $count_estimated_turnover > 5 && $index == 2 ): ?>
+										<td>...</td>
+									<?php endif; ?>
 								<?php $index++; endforeach; ?>
 							</tr>
-						</table>                                       
+						</table>
 					</div>
 					<?php endif; ?>
 
