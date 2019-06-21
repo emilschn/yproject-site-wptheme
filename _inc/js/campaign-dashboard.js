@@ -1647,6 +1647,11 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 		$( this ).hide( 50 );
 		$( '#form-send-document' ).show( 100 );
 	} );
+	
+	$( '#display-form-add-adjustment' ).click( function() {
+		$( this ).hide( 50 );
+		$( '#form-add-adjustment' ).show( 100 );
+	} );
 };
 
 WDGCampaignDashboard.prototype.refreshTurnoverAmountToPay = function() {

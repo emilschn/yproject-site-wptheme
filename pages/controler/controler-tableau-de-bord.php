@@ -15,6 +15,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $return_lemonway_card;
 	private $form_add_check;
 	private $form_document;
+	private $form_adjustment;
 	private $emails;
 	/**
 	 * @var ATCF_Campaign
@@ -87,11 +88,15 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->form_add_check = new WDG_Form_Dashboard_Add_Check( $this->campaign_id );
 		$core->include_form( 'organization-details' );
 		
-		$this->init_and_check_form_document();
+		$this->init_form_document();
+		if ( $this->can_access_admin() ) {
+			$this->init_form_adjustment();
+		}
 		
 		
 		$current_organization = $this->get_campaign_organization();
-		if ( isset($_POST['authentify_lw']) ) {
+		$input_authentify_lw = filter_input( INPUT_POST, 'authentify_lw' );
+		if ( !empty( $input_authentify_lw ) ) {
 			$current_organization->send_kyc();
 		}
 		$current_organization->submit_transfer_wallet_lemonway();
@@ -215,7 +220,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 /******************************************************************************/
 // GESTION DOCUMENTS
 /******************************************************************************/
-	private function init_and_check_form_document() {
+	private function init_form_document() {
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'declaration-document' );
 		$this->form_document = new WDG_Form_Declaration_Document( $this->campaign_id );
@@ -236,6 +241,40 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$input_add_declaration_document_success = filter_input( INPUT_GET, 'add_declaration_document_success' );
 		if ( !empty( $input_add_declaration_document_success ) ) {
 			if ( $input_add_declaration_document_success == '1' ) {
+				$buffer = 'success';
+			} else {
+				$buffer = 'error';
+			}
+		}
+		
+		return $buffer;
+	}
+	
+	
+/******************************************************************************/
+// GESTION AJUSTEMENTS
+/******************************************************************************/
+	private function init_form_adjustment() {
+		$core = ATCF_CrowdFunding::instance();
+		$core->include_form( 'adjustment' );
+		$this->form_adjustment = new WDG_Form_Adjustement( $this->campaign_id );
+	}
+	
+	public function get_form_adjustment() {
+		return $this->form_adjustment;
+	}
+	
+	public function get_form_adjustment_action() {
+		$url = admin_url( 'admin-post.php?action=edit_adjustment' );
+		return $url;
+	}
+	
+	public function get_form_adjustment_feedback_message() {
+		$buffer = FALSE;
+		
+		$input_add_adjustment_success = filter_input( INPUT_GET, 'add_adjustement_success' );
+		if ( !empty( $input_add_adjustment_success ) ) {
+			if ( $input_add_adjustment_success == '1' ) {
 				$buffer = 'success';
 			} else {
 				$buffer = 'error';
