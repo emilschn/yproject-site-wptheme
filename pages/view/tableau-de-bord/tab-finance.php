@@ -50,20 +50,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		if ( $page_controler->can_access_admin() ) {
 
 			DashboardUtility::create_field(array(
-				"id"			=> "new_platform_commission",
-				"type"			=> "text-percent",
-				"label"			=> "Commission de la plateforme",
-				"value"			=> $page_controler->get_campaign()->platform_commission(),
-				"unit"			=> "% TTC",
-				"min"			=> 0,
-				"max"			=> 100,
-				"step"			=> 0.000000000000000000000001,
-				"editable"		=> $page_controler->can_access_admin(),
-				"visible"		=> $page_controler->can_access_admin(),
-				"admin_theme"	=> true
-			));
-
-			DashboardUtility::create_field(array(
 				"id"			=> "new_maximum_profit",
 				"type"			=> "select",
 				"label"			=> "Gain maximum",
@@ -82,6 +68,34 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				"value"			=> $page_controler->get_campaign()->maximum_profit_precision(),
 				"admin_theme"	=> true,
 				"editable"		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+			));
+
+			DashboardUtility::create_field(array(
+				"id"			=> "new_platform_commission",
+				"type"			=> "text-percent",
+				"label"			=> "Commission de la plateforme",
+				"value"			=> $page_controler->get_campaign()->platform_commission(),
+				"unit"			=> "% TTC",
+				"min"			=> 0,
+				"max"			=> 100,
+				"step"			=> 0.000000000000000000000001,
+				"editable"		=> $page_controler->can_access_admin(),
+				"visible"		=> $page_controler->can_access_admin(),
+				"admin_theme"	=> true
+			));
+
+			DashboardUtility::create_field(array(
+				"id"			=> "new_platform_commission_above_100000",
+				"type"			=> "text-percent",
+				"label"			=> "Commission de la plateforme au-dela de 100 k€",
+				"value"			=> $page_controler->get_campaign()->platform_commission_above_100000(),
+				"unit"			=> "% TTC",
+				"min"			=> 0,
+				"max"			=> 100,
+				"step"			=> 0.000000000000000000000001,
+				"editable"		=> $page_controler->can_access_admin(),
+				"visible"		=> $page_controler->can_access_admin(),
+				"admin_theme"	=> true
 			));
 
 		}
