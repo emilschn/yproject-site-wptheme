@@ -952,6 +952,32 @@ body input[type=text], body input[type=email], body select {
 	padding: 7px;
 	border-bottom: 1px solid #E1E3E2;
 }
+.db-form.v3 .field-container .select-multiple-items-retracted {
+	text-align: left;
+	cursor: pointer;
+}
+.db-form.v3.bg-white .field-container .select-multiple-items-retracted {
+	background: #E1E3E2;
+}
+.db-form.v3 .field-container .select-multiple-items-retracted span {
+	display: inline-block;
+	overflow: hidden;
+	width: calc( 100% - 58px );
+	height: 50px;
+	line-height: 50px;
+	padding-left: 8px;
+}
+.db-form.v3 .field-container .select-multiple-items-retracted button {
+	float: right;
+	width: 50px;
+	height: 54px;
+	border: none;
+	background: url(../../images/common/arrow-filter.png) no-repeat;
+	cursor: pointer;
+}
+.db-form.v3 .field-container .select-multiple-items {
+	padding: 8px;
+}
 .db-form.v3 .field-container textarea {
 	width: 240px;
 	font-family: Trebuchet MS, sans-serif;

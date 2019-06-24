@@ -1,7 +1,9 @@
 <?php
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
-$fields_hidden = $page_controler->get_form_adjustment()->getFields( WDG_Form_Adjustement::$field_group_hidden );
-$fields_adjustment = $page_controler->get_form_adjustment()->getFields( WDG_Form_Adjustement::$field_group_adjustment );
+if ( $page_controler->can_access_admin() ) {
+	$fields_hidden = $page_controler->get_form_adjustment()->getFields( WDG_Form_Adjustement::$field_group_hidden );
+	$fields_adjustment = $page_controler->get_form_adjustment()->getFields( WDG_Form_Adjustement::$field_group_adjustment );
+}
 ?>
 
 <div id="stat-subtab-ajustements" class="stat-subtab">

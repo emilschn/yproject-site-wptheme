@@ -839,6 +839,7 @@ var WDGFormsFunctions = (function($) {
 			WDGFormsFunctions.initDatePickers();
 			WDGFormsFunctions.initTextInput();
 			WDGFormsFunctions.initFileInput();
+			WDGFormsFunctions.initSelectMultiple();
 		},
 		
 		initSaveButton: function() {
@@ -977,6 +978,21 @@ var WDGFormsFunctions = (function($) {
 				}
 				$( '#' + inputID ).click();
 			} );
+		},
+		
+		initSelectMultiple: function() {
+			$( '.select-multiple-items-retracted' ).click( function() {
+				var buttonTargetName = $( this ).data( 'name' );
+				$( '#select-multiple-items-' + buttonTargetName ).toggle( 50 );
+			} );
+			
+			$( '.select-multiple-items label input' ).change( function() {
+				WDGFormsFunctions.refreshSelectMultiple();
+			} );
+		},
+		
+		refreshSelectMultiple: function() {
+			
 		},
 		
 		setRateCheckboxes: function( sRateType, nRate ) {
