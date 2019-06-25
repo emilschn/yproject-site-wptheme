@@ -254,6 +254,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 /******************************************************************************/
 // GESTION AJUSTEMENTS
 /******************************************************************************/
+	public function get_adjustment_list() {
+		return $this->campaign->get_adjustments();
+	}
+	
 	private function init_form_adjustment() {
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'adjustment' );

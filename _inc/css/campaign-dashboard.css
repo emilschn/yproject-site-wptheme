@@ -344,6 +344,21 @@ div#container div#content main #item-body-contacts #direct-mail {
 	margin-right: 3px;
 }
 
+#item-body-royalties .adjustment-item {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 8px;
+	padding: 24px;
+	background: #F4F2F2;
+}
+#item-body-royalties .adjustment-item > div {
+	min-width: 110px;
+	text-align: left;
+}
+#item-body-royalties .adjustment-item .strong {
+	font-weight: bold;
+}
+
 /*******************************************************************************
 * AUTHOR
 *******************************************************************************/

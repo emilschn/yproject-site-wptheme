@@ -4,6 +4,7 @@ if ( $page_controler->can_access_admin() ) {
 	$fields_hidden = $page_controler->get_form_adjustment()->getFields( WDG_Form_Adjustement::$field_group_hidden );
 	$fields_adjustment = $page_controler->get_form_adjustment()->getFields( WDG_Form_Adjustement::$field_group_adjustment );
 }
+$adjustments = $page_controler->get_adjustment_list();
 ?>
 
 <div id="stat-subtab-ajustements" class="stat-subtab hidden">
@@ -28,6 +29,7 @@ if ( $page_controler->can_access_admin() ) {
 	<br>
 	
 	<h3><?php _e( "Ajustements", 'yproject' ); ?></h3>
+	
 	<?php if ( $page_controler->can_access_admin() ): ?>
 		<div class="db-form v3 full center admin-theme">
 			<?php if ( $page_controler->get_form_adjustment_feedback_message() == 'success' ): ?>
@@ -65,8 +67,16 @@ if ( $page_controler->can_access_admin() ) {
 		<br><br>
 	<?php endif; ?>
 	
-	
-	A venir...<br><br>
+	<?php if ( !empty( $adjustments ) ): ?>
+		<?php global $adjustment_obj, $declaration_obj; ?>
+		<?php foreach ( $adjustments as $adjustment_obj ): ?>
+			<?php $declaration_obj = $adjustment_obj->get_declaration(); ?>
+			<?php locate_template( array( 'pages/view/tableau-de-bord/tab-royalties/item-adjustment.php' ), true, false );  ?>
+		<?php endforeach; ?>
+		
+	<?php else: ?>
+		<?php _e( "Aucun ajustement pour l'instant", 'yproject' ); ?>
+	<?php endif; ?>
 	
 	
 </div>
