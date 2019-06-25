@@ -1,6 +1,6 @@
 <?php global $wdg_current_field; ?>
 <div class="select-multiple-items-retracted" data-name="<?php echo $wdg_current_field[ 'name' ]; ?>">
-	<span class="select-multiple-items-retracted-values">a
+	<span class="select-multiple-items-retracted-values">
 		<?php
 		$i = 0;
 		$init = FALSE;

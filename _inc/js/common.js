@@ -881,6 +881,9 @@ var WDGFormsFunctions = (function($) {
 							}
 							var checkboxItem = $( this ).children( 'input[type=checkbox]' )[0];
 							checkboxItem.checked = !checkboxItem.checked;
+							if ( $( this ).parent().hasClass( 'select-multiple-items' ) ) {
+								WDGFormsFunctions.refreshSelectMultiple( $( this ).parent().parent() );
+							}
 						} );
 					}
 				} );
@@ -983,16 +986,33 @@ var WDGFormsFunctions = (function($) {
 		initSelectMultiple: function() {
 			$( '.select-multiple-items-retracted' ).click( function() {
 				var buttonTargetName = $( this ).data( 'name' );
+				// On change l'état du bouton à l'inverse de celui de la liste, avant le changement car il y a un délai
+				if ( $( '#select-multiple-items-' + buttonTargetName ).is( ':visible' ) ) {
+					$( this ).removeClass( 'reverse' );
+				} else {
+					$( this ).addClass( 'reverse' );
+				}
 				$( '#select-multiple-items-' + buttonTargetName ).toggle( 50 );
-			} );
-			
-			$( '.select-multiple-items label input' ).change( function() {
-				WDGFormsFunctions.refreshSelectMultiple();
 			} );
 		},
 		
-		refreshSelectMultiple: function() {
+		refreshSelectMultiple: function( checkboxContainer ) {
+			var selectSpanItem = checkboxContainer.find( 'span.select-multiple-items-retracted-values' )[ 0 ];
 			
+			var sLabelText = '';
+			var checkboxLabelList = checkboxContainer.find( 'label.radio-label' );
+			var checkboxList = checkboxContainer.find( 'label.radio-label input' );
+			var nCheckbox = checkboxLabelList.length;
+			for ( var i = 0; i <nCheckbox; i++ ) {
+				if ( checkboxList[ i ].checked ) {
+					if ( sLabelText !== '' ) {
+						sLabelText += ', ';
+					}
+					sLabelText += $( checkboxLabelList[ i ] ).text();
+				}
+			}
+			sLabelText = sLabelText.split( '\n' ).join( '' ).split( '\t' ).join( '' );
+			$( selectSpanItem ).text( sLabelText );
 		},
 		
 		setRateCheckboxes: function( sRateType, nRate ) {

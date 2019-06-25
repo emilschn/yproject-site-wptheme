@@ -975,6 +975,12 @@ body input[type=text], body input[type=email], body select {
 	background: url(../../images/common/arrow-filter.png) no-repeat;
 	cursor: pointer;
 }
+.db-form.v3 .field-container .select-multiple-items-retracted.reverse button {
+	-moz-transform: scaleY(-1);
+	-o-transform: scaleY(-1);
+	-webkit-transform: scaleY(-1);
+	transform: scaleY(-1);
+}
 .db-form.v3 .field-container .select-multiple-items {
 	padding: 8px;
 }

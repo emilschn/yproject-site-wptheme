@@ -6,7 +6,7 @@ if ( $page_controler->can_access_admin() ) {
 }
 ?>
 
-<div id="stat-subtab-ajustements" class="stat-subtab">
+<div id="stat-subtab-ajustements" class="stat-subtab hidden">
 	
 	<h3><?php _e( "Somme des reliquats non-vers&eacute;s aux investisseurs", 'yproject' ); ?></h3>
 	<?php
