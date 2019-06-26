@@ -106,7 +106,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 										<?php echo ( $index + 1 ); ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $value; ?></span>
 									</td>
 									<?php if ( $count_estimated_turnover > 5 && $index == 2 ): ?>
-										<td>...</td>
+										<td class="small">...</td>
 									<?php endif; ?>
 								<?php $index++; endforeach; ?>
 							</tr>

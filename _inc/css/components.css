@@ -1291,6 +1291,9 @@ div.project-rewards-content table tr td {
     text-align: center;
 	vertical-align: bottom;
 }
+div.project-rewards-content table tr td.small {
+    min-width: 30px;
+}
 div.project-rewards-content table tr td > div {
 	margin: auto;
 	width: 40px;
