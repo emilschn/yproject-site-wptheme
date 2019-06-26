@@ -116,26 +116,49 @@ if ( isset( $organization_obj ) ) {
 		/**
 		 * Documents
 		 */
+		function temp_get_lw_doc_msg( $wallet_id, $document_type ) {
+			$buffer = '';
+			$lw_document_id = new LemonwayDocument( $wallet_id, $document_type );
+			if ( $lw_document_id->get_status() == LemonwayDocument::$document_status_accepted ) {
+				$buffer = __( "Document valid&eacute; par notre prestataire", 'yproject' );
+			} else if ( $lw_document_id->get_status() == LemonwayDocument::$document_status_waiting ) {
+				$buffer = __( "Document en cours de validation par notre prestataire", 'yproject' );
+			} else if ( $lw_document_id->get_status() > 2 ) {
+				$buffer = FALSE;
+			}
+			return $buffer;
+		}
+		
 		$current_filelist_bank = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_bank);
 		$current_file_bank = $current_filelist_bank[0];
+		$current_file_bank_msg = temp_get_lw_doc_msg( $organization_obj->get_lemonway_id(), LemonwayDocument::$document_type_bank );
 		$current_filelist_kbis = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_kbis);
 		$current_file_kbis = $current_filelist_kbis[0];
+		$current_file_kbis_msg = temp_get_lw_doc_msg( $organization_obj->get_lemonway_id(), LemonwayDocument::$document_type_kbis );
 		$current_filelist_status = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_status);
 		$current_file_status = $current_filelist_status[0];
+		$current_file_status_msg = temp_get_lw_doc_msg( $organization_obj->get_lemonway_id(), LemonwayDocument::$document_type_status );
 		$current_filelist_id = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_id);
 		$current_file_id = $current_filelist_id[0];
+		$current_file_id_msg = temp_get_lw_doc_msg( $organization_obj->get_lemonway_id(), LemonwayDocument::$document_type_id );
 		$current_filelist_home = WDGKYCFile::get_list_by_owner_id($organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_home);
 		$current_file_home = $current_filelist_home[0];
+		$current_file_home_msg = temp_get_lw_doc_msg( $organization_obj->get_lemonway_id(), LemonwayDocument::$document_type_home );
 		$current_filelist_capital_allocation = WDGKYCFile::get_list_by_owner_id( $organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_capital_allocation );
 		$current_file_capital_allocation = $current_filelist_capital_allocation[0];
+		$current_file_capital_allocation_msg = temp_get_lw_doc_msg( $organization_obj->get_lemonway_id(), LemonwayDocument::$document_type_capital_allocation );
 		$current_filelist_id_2 = WDGKYCFile::get_list_by_owner_id( $organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_id_2 );
 		$current_file_id_2 = $current_filelist_id_2[0];
+		$current_file_id_2_msg = temp_get_lw_doc_msg( $organization_obj->get_lemonway_id(), LemonwayDocument::$document_type_id2 );
 		$current_filelist_home_2 = WDGKYCFile::get_list_by_owner_id( $organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_home_2 );
 		$current_file_home_2 = $current_filelist_home_2[0];
+		$current_file_home_2_msg = temp_get_lw_doc_msg( $organization_obj->get_lemonway_id(), LemonwayDocument::$document_type_home2 );
 		$current_filelist_id_3 = WDGKYCFile::get_list_by_owner_id( $organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_id_3 );
 		$current_file_id_3 = $current_filelist_id_3[0];
+		$current_file_id_3_msg = temp_get_lw_doc_msg( $organization_obj->get_lemonway_id(), LemonwayDocument::$document_type_id3 );
 		$current_filelist_home_3 = WDGKYCFile::get_list_by_owner_id( $organization_obj->get_wpref(), WDGKYCFile::$owner_organization, WDGKYCFile::$type_home_3 );
 		$current_file_home_3 = $current_filelist_home_3[0];
+		$current_file_home_3_msg = temp_get_lw_doc_msg( $organization_obj->get_lemonway_id(), LemonwayDocument::$document_type_home3 );
 		?>
 		<br><br>
 		<h3><?php _e( "Documents", 'yproject' ); ?></h3>
@@ -154,7 +177,16 @@ if ( isset( $organization_obj ) ) {
 						<a id="org_doc_bank" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_bank->get_public_filepath(); ?>"><?php _e( "T&eacute;l&eacute;charger le fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $current_file_bank->date_uploaded; ?></a>
 						<br>
 					<?php endif; ?>
-					<input type="file" name="org_doc_bank">
+						
+					<?php if ( empty( $current_file_bank_msg ) ): ?>
+						<?php if ( $current_file_bank_msg === FALSE ): ?>
+							<div class="wdg-message error"><?php echo _e( "Document refus&eacute;", 'yproject' ); ?></div>
+						<?php endif; ?>
+						<input type="file" name="org_doc_bank">
+						
+					<?php else: ?>
+						<div class="wdg-message confirm"><?php echo $current_file_bank_msg; ?></div>
+					<?php endif; ?>
 				</span>
 			</div>
 		</div>
@@ -168,7 +200,16 @@ if ( isset( $organization_obj ) ) {
 						<a id="org_doc_kbis" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_kbis->get_public_filepath(); ?>"><?php _e( "T&eacute;l&eacute;charger le fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $current_file_kbis->date_uploaded; ?></a>
 						<br>
 					<?php endif; ?>
-					<input type="file" name="org_doc_kbis">
+						
+					<?php if ( empty( $current_file_kbis_msg ) ): ?>
+						<?php if ( $current_file_kbis_msg === FALSE ): ?>
+							<div class="wdg-message error"><?php echo _e( "Document refus&eacute;", 'yproject' ); ?></div>
+						<?php endif; ?>
+						<input type="file" name="org_doc_kbis">
+						
+					<?php else: ?>
+						<div class="wdg-message confirm"><?php echo $current_file_kbis_msg; ?></div>
+					<?php endif; ?>
 				</span>
 			</div>
 		</div>
@@ -181,7 +222,16 @@ if ( isset( $organization_obj ) ) {
 						<a id="org_doc_status" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_status->get_public_filepath(); ?>"><?php _e( "T&eacute;l&eacute;charger le fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $current_file_status->date_uploaded; ?></a>
 						<br>
 					<?php endif; ?>
-					<input type="file" name="org_doc_status">
+						
+					<?php if ( empty( $current_file_status_msg ) ): ?>
+						<?php if ( $current_file_status_msg === FALSE ): ?>
+							<div class="wdg-message error"><?php echo _e( "Document refus&eacute;", 'yproject' ); ?></div>
+						<?php endif; ?>
+						<input type="file" name="org_doc_status">
+						
+					<?php else: ?>
+						<div class="wdg-message confirm"><?php echo $current_file_status_msg; ?></div>
+					<?php endif; ?>
 				</span>
 			</div>
 		</div>
@@ -196,7 +246,16 @@ if ( isset( $organization_obj ) ) {
 						<a id="org_doc_id" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_id->get_public_filepath(); ?>"><?php _e( "T&eacute;l&eacute;charger le fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $current_file_id->date_uploaded; ?></a>
 						<br>
 					<?php endif; ?>
-					<input type="file" name="org_doc_id">
+						
+					<?php if ( empty( $current_file_id_msg ) ): ?>
+						<?php if ( $current_file_id_msg === FALSE ): ?>
+							<div class="wdg-message error"><?php echo _e( "Document refus&eacute;", 'yproject' ); ?></div>
+						<?php endif; ?>
+						<input type="file" name="org_doc_id">
+						
+					<?php else: ?>
+						<div class="wdg-message confirm"><?php echo $current_file_id_msg; ?></div>
+					<?php endif; ?>
 				</span>
 			</div>
 		</div>
@@ -210,7 +269,16 @@ if ( isset( $organization_obj ) ) {
 						<a id="org_doc_home" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_home->get_public_filepath(); ?>"><?php _e( "T&eacute;l&eacute;charger le fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $current_file_home->date_uploaded; ?></a>
 						<br>
 					<?php endif; ?>
-					<input type="file" name="org_doc_home">
+						
+					<?php if ( empty( $current_file_home_msg ) ): ?>
+						<?php if ( $current_file_home_msg === FALSE ): ?>
+							<div class="wdg-message error"><?php echo _e( "Document refus&eacute;", 'yproject' ); ?></div>
+						<?php endif; ?>
+						<input type="file" name="org_doc_home">
+						
+					<?php else: ?>
+						<div class="wdg-message confirm"><?php echo $current_file_home_msg; ?></div>
+					<?php endif; ?>
 				</span>
 			</div>
 		</div>
@@ -225,7 +293,16 @@ if ( isset( $organization_obj ) ) {
 						<a id="org_doc_capital_allocation" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_capital_allocation->get_public_filepath(); ?>"><?php _e( "T&eacute;l&eacute;charger le fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $current_file_capital_allocation->date_uploaded; ?></a>
 						<br>
 					<?php endif; ?>
-					<input type="file" name="org_doc_capital_allocation">
+						
+					<?php if ( empty( $current_file_capital_allocation_msg ) ): ?>
+						<?php if ( $current_file_capital_allocation_msg === FALSE ): ?>
+							<div class="wdg-message error"><?php echo _e( "Document refus&eacute;", 'yproject' ); ?></div>
+						<?php endif; ?>
+						<input type="file" name="org_doc_capital_allocation">
+						
+					<?php else: ?>
+						<div class="wdg-message confirm"><?php echo $current_file_capital_allocation_msg; ?></div>
+					<?php endif; ?>
 				</span>
 			</div>
 		</div>
@@ -244,7 +321,16 @@ if ( isset( $organization_obj ) ) {
 					<?php if ( isset( $current_file_id_2 ) ): ?>
 					<a id="org_doc_id_2" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_id_2->get_public_filepath(); ?>"><?php _e( "T&eacute;l&eacute;charger le fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $current_file_id_2->date_uploaded; ?></a>
 					<?php endif; ?>
-					<input type="file" name="org_doc_id_2">
+						
+					<?php if ( empty( $current_file_id_2_msg ) ): ?>
+						<?php if ( $current_file_id_2_msg === FALSE ): ?>
+							<div class="wdg-message error"><?php echo _e( "Document refus&eacute;", 'yproject' ); ?></div>
+						<?php endif; ?>
+						<input type="file" name="org_doc_id_2">
+						
+					<?php else: ?>
+						<div class="wdg-message confirm"><?php echo $current_file_id_2_msg; ?></div>
+					<?php endif; ?>
 				</span>
 			</div>
 		</div>
@@ -257,7 +343,16 @@ if ( isset( $organization_obj ) ) {
 					<?php if ( isset( $current_file_home_2 ) ): ?>
 					<a id="org_doc_home_2" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_home_2->get_public_filepath(); ?>"><?php _e( "T&eacute;l&eacute;charger le fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $current_file_home_2->date_uploaded; ?></a>
 					<?php endif; ?>
-					<input type="file" name="org_doc_home_2">
+						
+					<?php if ( empty( $current_file_home_2_msg ) ): ?>
+						<?php if ( $current_file_home_2_msg === FALSE ): ?>
+							<div class="wdg-message error"><?php echo _e( "Document refus&eacute;", 'yproject' ); ?></div>
+						<?php endif; ?>
+						<input type="file" name="org_doc_home_2">
+						
+					<?php else: ?>
+						<div class="wdg-message confirm"><?php echo $current_file_home_2_msg; ?></div>
+					<?php endif; ?>
 				</span>
 			</div>
 		</div>
@@ -276,7 +371,16 @@ if ( isset( $organization_obj ) ) {
 					<?php if ( isset( $current_file_id_3 ) ): ?>
 					<a id="org_doc_id_3" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_id_3->get_public_filepath(); ?>"><?php _e( "T&eacute;l&eacute;charger le fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $current_file_id_3->date_uploaded; ?></a>
 					<?php endif; ?>
-					<input type="file" name="org_doc_id_3">
+						
+					<?php if ( empty( $current_file_id_3_msg ) ): ?>
+						<?php if ( $current_file_id_3_msg === FALSE ): ?>
+							<div class="wdg-message error"><?php echo _e( "Document refus&eacute;", 'yproject' ); ?></div>
+						<?php endif; ?>
+						<input type="file" name="org_doc_id_3">
+						
+					<?php else: ?>
+						<div class="wdg-message confirm"><?php echo $current_file_id_3_msg; ?></div>
+					<?php endif; ?>
 				</span>
 			</div>
 		</div>
@@ -289,7 +393,16 @@ if ( isset( $organization_obj ) ) {
 					<?php if ( isset( $current_file_home_3 ) ): ?>
 					<a id="org_doc_home_3" class="button blue-pale download-file" target="_blank" href="<?php echo $current_file_home_3->get_public_filepath(); ?>"><?php _e( "T&eacute;l&eacute;charger le fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $current_file_home_3->date_uploaded; ?></a>
 					<?php endif; ?>
-					<input type="file" name="org_doc_home_3">
+						
+					<?php if ( empty( $current_file_home_3_msg ) ): ?>
+						<?php if ( $current_file_home_3_msg === FALSE ): ?>
+							<div class="wdg-message error"><?php echo _e( "Document refus&eacute;", 'yproject' ); ?></div>
+						<?php endif; ?>
+						<input type="file" name="org_doc_home_3">
+						
+					<?php else: ?>
+						<div class="wdg-message confirm"><?php echo $current_file_home_3_msg; ?></div>
+					<?php endif; ?>
 				</span>
 			</div>
 		</div>
