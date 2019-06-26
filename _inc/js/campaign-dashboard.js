@@ -1652,6 +1652,18 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 		$( this ).hide( 50 );
 		$( '#form-add-adjustment' ).show( 100 );
 	} );
+	
+	$( '.adjustment-item-more-btn button' ).click( function() {
+		var adjustmentId = $( this ).data( 'adjustment' );
+		if ( $( '#adjustment-item-more-' + adjustmentId ).is( ':visible' ) ) {
+			$( '#adjustment-item-more-btn-' + adjustmentId + ' button' ).text( '+' );
+			$( '#adjustment-item-' + adjustmentId ).removeClass( 'expanded' );
+		} else {
+			$( '#adjustment-item-more-btn-' + adjustmentId + ' button' ).text( '-' );
+			$( '#adjustment-item-' + adjustmentId ).addClass( 'expanded' );
+		}
+		$( '#adjustment-item-more-' + adjustmentId ).toggle( 50 );
+	} );
 };
 
 WDGCampaignDashboard.prototype.refreshTurnoverAmountToPay = function() {

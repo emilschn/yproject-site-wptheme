@@ -351,12 +351,40 @@ div#container div#content main #item-body-contacts #direct-mail {
 	padding: 24px;
 	background: #F4F2F2;
 }
+#item-body-royalties .adjustment-item.expanded {
+	margin-bottom: 0px;
+}
 #item-body-royalties .adjustment-item > div {
 	min-width: 110px;
 	text-align: left;
 }
 #item-body-royalties .adjustment-item .strong {
 	font-weight: bold;
+}
+#item-body-royalties .adjustment-item-more-btn button {
+	position: relative;
+	top: -20px;
+	height: 42px;
+	background: #F4F2F2;
+}
+#item-body-royalties .adjustment-item-more {
+	margin-top: -8px;
+	margin-bottom: 8px;
+	padding: 24px;
+	padding-top: 0px;
+	background: #F4F2F2;
+}
+#item-body-royalties .adjustment-item-more hr {
+	padding-bottom: 8px;
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	border-color: -moz-use-text-color;
+	border-image: none;
+	border-right: 0 none;
+	border-style: solid none none;
+	border-width: 2px 0 0;
 }
 
 /*******************************************************************************
