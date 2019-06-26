@@ -227,9 +227,13 @@ $declaration_message = $declaration->get_message();
 			<?php endif; ?>
 		
 		<?php if ( $page_controler->can_access_admin() ): ?>
-			<br /><br />
+			<br><br>
 			<div class="align-center admin-theme-block">
-				<a class="button transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>">Procéder aux versements</a>
+				<a class="button transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>" data-refund="0">Procéder aux versements</a>
+			</div>
+			<br><br>
+			<div class="align-center admin-theme-block">
+				<a class="button transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>" data-refund="1">Procéder aux remboursements</a>
 			</div>
 
 			<?php ob_start(); ?>
@@ -246,6 +250,7 @@ $declaration_message = $declaration->get_message();
 						<?php endif; ?>
 						<br />
 						<input type="hidden" id="hidden-roi-id" name="roi_id" class="field" data-id="roi_id" data-type="hidden" value="" />
+						<input type="hidden" id="hidden-isrefund" name="isrefund" class="field" data-id="isrefund" data-type="hidden" value="" />
 						<input type="hidden" id="hidden-campaign-id" name="campaign_id" class="field" data-id="campaign_id" data-type="hidden" value="<?php echo $page_controler->get_campaign_id(); ?>" />
 						
 						<p id="proceed_roi_transfers_percent" class="align-center"></p>

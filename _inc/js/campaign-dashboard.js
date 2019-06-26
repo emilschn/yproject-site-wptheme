@@ -1583,11 +1583,13 @@ WDGCampaignDashboard.prototype.initTeam = function( $param ){
 WDGCampaignDashboard.prototype.initRoyalties = function(){
 	var self = this;
 	self.currentOpenedROI = 0;
+	self.isRefund = 0;
 	if ($(".transfert-roi-open").length > 0) {
 		$(".transfert-roi-open").click(function () {
 			if ($(this).data('roideclaration-id') !== self.currentOpenedROI) {
 				//Affichage
 				self.currentOpenedROI = $(this).data('roideclaration-id');
+				self.isRefund = $(this).data('refund');
 				$("#wdg-lightbox-transfer-roi #lightbox-content .loading-content").html("");
 				$("#wdg-lightbox-transfer-roi #lightbox-content .loading-image").show();
 				$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").hide();
@@ -1598,7 +1600,8 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 					'url': ajax_object.ajax_url,
 					'data': {
 						'action': 'display_roi_user_list',
-						'roideclaration_id': $(this).data('roideclaration-id')
+						'roideclaration_id': $(this).data('roideclaration-id'),
+						'is_refund': $( this ).data( 'refund' )
 					}
 				}).done(function (result) {
 					var content = 'Versement impossible';
@@ -1607,7 +1610,8 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 						content += '<tr><td>Utilisateur</td><td>Investissement</td><td>Versement</td><td>Commission</td></tr>';
 						content += result;
 						content += '</table>';
-						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-roi-id").val(self.currentOpenedROI);
+						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-roi-id").val( self.currentOpenedROI );
+						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-isrefund").val( self.isRefund );
 						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").show();
 					}
 					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-content").html(content);
@@ -1706,6 +1710,7 @@ WDGCampaignDashboard.prototype.proceedRoyalties = function(){
 		'action': 'proceed_roi_transfers',
 		'campaign_id': $( '#hidden-campaign-id' ).val(),
 		'roi_id': $( '#hidden-roi-id' ).val(),
+		'isrefund': $( '#hidden-isrefund' ).val(),
 		'send_notifications': $( '#check_send_notifications' ).is( ':checked' ),
 		'transfer_remaining_amount': $( '#check_transfer_remaining_amount' ).is( ':checked' )
 	};
