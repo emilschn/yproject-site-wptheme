@@ -10,7 +10,7 @@ global $adjustment_obj, $declaration_obj;
 	<div class="strong">
 		<?php echo $adjustment_obj->amount; ?> &euro;
 	</div>
-	<div>
+	<div class="align-right">
 		<?php _e( "Etat :", 'yproject' ); ?>
 		<?php if ( $adjustment_obj->get_status() == WDGAdjustment::$status_upcoming ): ?>
 			<?php _e( "&Agrave; venir", 'yproject' ); ?>

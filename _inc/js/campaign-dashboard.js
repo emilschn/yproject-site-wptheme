@@ -1652,6 +1652,23 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 		$( '#form-send-document' ).show( 100 );
 	} );
 	
+	$( '#display-list-declarations' ).click( function() {
+		$( this ).hide( 50 );
+		$( '#list-declarations' ).show( 100 );
+	} );
+	
+	$( '.declaration-item-more-btn button' ).click( function() {
+		var adjustmentId = $( this ).data( 'declaration' );
+		if ( $( '#declaration-item-more-' + adjustmentId ).is( ':visible' ) ) {
+			$( '#declaration-item-more-btn-' + adjustmentId + ' button' ).text( '+' );
+			$( '#declaration-item-' + adjustmentId ).removeClass( 'expanded' );
+		} else {
+			$( '#declaration-item-more-btn-' + adjustmentId + ' button' ).text( '-' );
+			$( '#declaration-item-' + adjustmentId ).addClass( 'expanded' );
+		}
+		$( '#declaration-item-more-' + adjustmentId ).toggle( 50 );
+	} );
+	
 	$( '#display-form-add-adjustment' ).click( function() {
 		$( this ).hide( 50 );
 		$( '#form-add-adjustment' ).show( 100 );
