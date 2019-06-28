@@ -8,6 +8,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		$input_queue = filter_input( INPUT_GET, 'queue' );
 		$input_rss = filter_input( INPUT_GET, 'rss' );
 		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
+		$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
 		
 		if ( !empty( $input_queue ) && $input_queue == '1' ) {
 			$nb_done = WDGQueue::execute_next( 10 );
@@ -24,15 +25,15 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		} else if ( !empty( $input_make_finished_xml ) && $input_make_finished_xml == '1' ) {
 			WDGCronActions::make_projects_rss( FALSE );
 			
+		} else if ( !empty( $input_force_summary_call ) && $input_force_summary_call == '1' ) {
+			$this->summary_call();
+			
 		} else {
 			$this->hourly_call();
 			
 			$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
-			$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
 			if ( $this->is_daily_call_time() || $input_force_daily_call == '1' ) {
 				$this->daily_call();
-			} else if ( $this->is_summary_call_time() || $input_force_summary_call == '1' ) {
-				$this->summary_call();
 			}
 			
 		}
@@ -132,18 +133,6 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		}
 		
 		NotificationsSlack::send_update_summary_current_projects( $params );
-	}
-	
-	private function is_summary_call_time() {
-		$buffer = FALSE;
-		$date_now = new DateTime();
-		$last_summary_call = get_option( 'last_summary_call' );
-		$saved_date = new DateTime( $last_summary_call );
-		if ( $last_summary_call == FALSE || $saved_date->diff($date_now)->h >= 12 ) {
-			update_option( 'last_summary_call', $date_now->format( 'Y-m-d H:i:s' ) );
-			$buffer = TRUE;
-		}
-		return $buffer;
 	}
 	
 	private function rebuild_cache() {
