@@ -9,6 +9,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		$input_rss = filter_input( INPUT_GET, 'rss' );
 		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
 		$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
+		$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
 		
 		if ( !empty( $input_queue ) && $input_queue == '1' ) {
 			$nb_done = WDGQueue::execute_next( 10 );
@@ -28,13 +29,11 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		} else if ( !empty( $input_force_summary_call ) && $input_force_summary_call == '1' ) {
 			$this->summary_call();
 			
+		} else if ( !empty( $input_force_daily_call ) && $input_force_daily_call == '1' ) {
+			$this->daily_call();
+			
 		} else {
 			$this->hourly_call();
-			
-			$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
-			if ( $this->is_daily_call_time() || $input_force_daily_call == '1' ) {
-				$this->daily_call();
-			}
 			
 		}
 		exit();
