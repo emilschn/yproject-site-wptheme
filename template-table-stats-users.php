@@ -45,13 +45,6 @@ $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 						$files_path = $roi_declaration->get_file_path();
 						?>
 						- <strong><?php echo $declaration_data->name_project; ?> :</strong>
-							<?php if ( $roi_declaration->get_adjustment_validated() ): ?>
-							Ajustement validé
-							<?php else: ?>
-							Ajustement en cours
-							<?php endif; ?>
-							<br>
-							
 							<?php if ( empty( $roi_declaration_file_list ) ): ?>
 							Aucun fichier transmis
 							<?php else: ?>
