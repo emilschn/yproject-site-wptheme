@@ -7,7 +7,7 @@ $date_due = new DateTime( $declaration->date_due );
 $date_interval = $today_date->diff( $date_due );
 $is_future = $date_due > $today_date && $date_interval->format( '%a' ) > $date_due->format( 'd' );
 if ( $is_future ) {
-	$class_status = '';
+	$class_status = 'single-line';
 	$label_status = __( "A venir", 'yproject' );
 } else {
 	$class_status = ( $date_due < $today_date ) ? 'error' : '';
@@ -19,6 +19,8 @@ if ( $is_future ) {
 		$label_status .= "<br>" . __( "En attente de virement", 'yproject' );
 	} elseif ( $declaration->get_status() == WDGROIDeclaration::$status_transfer ) {
 		$label_status .= "<br>" . __( "En cours de versement", 'yproject' );
+	} else {
+		$class_status .= ' single-line';
 	}
 }
 ?>
