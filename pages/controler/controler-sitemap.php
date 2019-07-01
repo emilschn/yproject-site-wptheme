@@ -10,6 +10,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
 		$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
 		$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
+		$input_force_daily_notifications = filter_input( INPUT_GET, 'force_daily_notifications' );
 		
 		if ( !empty( $input_queue ) && $input_queue == '1' ) {
 			$nb_done = WDGQueue::execute_next( 10 );
@@ -32,6 +33,9 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		} else if ( !empty( $input_force_daily_call ) && $input_force_daily_call == '1' ) {
 			$this->daily_call();
 			
+		} else if ( !empty( $input_force_daily_notifications ) && $input_force_daily_notifications == '1' ) {
+			WDGCronActions::send_notifications();
+			
 		} else {
 			$this->hourly_call();
 			
@@ -48,8 +52,6 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	private function daily_call() {
 		$this->rebuild_sitemap();
 		WDG_Cache_Plugin::initialize_home_stats();
-		WDGCronActions::make_projects_rss();
-		WDGCronActions::send_notifications();
 	}
 	
 	private function is_daily_call_time() {
