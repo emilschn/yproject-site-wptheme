@@ -246,6 +246,36 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 
 		DashboardUtility::create_field(array(
+			'id'			=> 'new_asset_name_singular',
+			'type'			=> 'text',
+			'label'			=> __( "Nom de l'actif (masculin singulier)", 'yproject' ),
+			'value'			=> $page_controler->get_campaign()->get_asset_name_singular(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
+
+		DashboardUtility::create_field(array(
+			'id'			=> 'new_asset_name_plural',
+			'type'			=> 'text',
+			'label'			=> __( "Nom de l'actif (masculin pluriel)", 'yproject' ),
+			'value'			=> $page_controler->get_campaign()->get_asset_name_plural(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
+
+		DashboardUtility::create_field(array(
+			'id'			=> 'new_partner_company_name',
+			'type'			=> 'text',
+			'label'			=> __( "Nom de l'entreprise partenaire", 'yproject' ),
+			'value'			=> $page_controler->get_campaign()->get_partner_company_name(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
+
+		DashboardUtility::create_field(array(
 			'id'			=> 'new_custom_footer_code',
 			'type'			=> 'textarea',
 			'label'			=> __( "Code personnalis&eacute; (tracking...)", 'yproject' ),
