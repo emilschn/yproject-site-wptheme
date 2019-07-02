@@ -359,8 +359,10 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					$date_now = new DateTime();
 					$this->current_declaration->date_paid = $date_now->format( 'Y-m-d' );
 					$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_mandate;
-					$this->current_declaration->status = WDGROIDeclaration::$status_transfer;
+					$this->current_declaration->status = WDGROIDeclaration::$status_waiting_transfer;
 					$this->current_declaration->save();
+					
+					NotificationsEmails::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
 				}
 			}
 
@@ -370,8 +372,13 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	}
 	
 	public function proceed_payment_wire() {
+		$date_now = new DateTime();
+		$this->current_declaration->date_paid = $date_now->format( 'Y-m-d' );
 		$this->current_declaration->status = WDGROIDeclaration::$status_waiting_transfer;
+		$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_wire;
 		$this->current_declaration->save();
+					
+		NotificationsEmails::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
 	}
 	
 }

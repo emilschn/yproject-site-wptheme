@@ -161,6 +161,7 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 		<?php else: ?>
 			Aucun paiement effectué.
 		<?php endif; ?>
+		<br><br>
 		
 	</div>
 </div>
