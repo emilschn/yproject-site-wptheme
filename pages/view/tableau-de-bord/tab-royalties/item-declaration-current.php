@@ -47,14 +47,24 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 	</div>
 	<?php if ( !$is_future ): ?>
 		<?php if ( $declaration->get_status() != WDGROIDeclaration::$status_transfer && $declaration->get_status() != WDGROIDeclaration::$status_waiting_transfer ): ?>
-		<div class="single-line force-size">
-			<a href="<?php echo home_url( '/declarer-chiffre-daffaires/?campaign_id=' .$page_controler->get_campaign()->ID. '&declaration_id=' .$declaration->id ); ?>" class="button red"><?php _e( "D&eacute;clarer" ); ?></a>
+		<div class="single-line">
+			<a href="<?php echo home_url( '/declarer-chiffre-daffaires/?campaign_id=' .$page_controler->get_campaign()->ID. '&declaration_id=' .$declaration->id ); ?>" class="button red force-size"><?php _e( "D&eacute;clarer" ); ?></a>
 		</div>
 		<?php elseif ( $page_controler->can_access_admin() ): ?>
-		<div class="single-line force-size">
-			<a href="#" class="button admin-theme transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>" data-refund="0"><?php _e( "Verser" ); ?></a><br>
-			<a href="#" class="button admin-theme transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>" data-refund="1"><?php _e( "Rembourser" ); ?></a>
-		</div>
+			<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
+			<div class="single-line">
+				<a href="#" class="button admin-theme transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>" data-refund="0"><?php _e( "Verser" ); ?></a><br>
+				<a href="#" class="button admin-theme transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>" data-refund="1"><?php _e( "Rembourser" ); ?></a>
+			</div>
+			<?php elseif ( $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ): ?>
+			<div class="single-line">
+				<form action="<?php echo admin_url( 'admin-post.php?action=roi_mark_transfer_received'); ?>" method="POST" class="admin-theme-block">
+					<input type="hidden" name="roi_declaration_id" value="<?php echo $declaration->id; ?>" />
+					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+					<button class="button"><?php _e( "Valider la r&eacute;ception du paiement" ); ?></button>
+				</form>
+			</div>
+			<?php endif; ?>
 		<?php endif; ?>
 	<?php endif; ?>
 </div>

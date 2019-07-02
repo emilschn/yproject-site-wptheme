@@ -368,6 +368,12 @@ div#container div#content main #item-body-contacts #direct-mail {
 	line-height: 38px;
 	vertical-align: middle;
 }
+#item-body-royalties .adjustment-item > div.single-line .button.force-size, #item-body-royalties .declaration-item > div.single-line .button.force-size {
+	display: inline-block;
+	padding: 0px 24px;
+	height: 38px;
+	line-height: 38px;
+}
 #item-body-royalties .adjustment-item > div.confirm, #item-body-royalties .declaration-item > div.confirm {
 	color: #8BC79C;
 }

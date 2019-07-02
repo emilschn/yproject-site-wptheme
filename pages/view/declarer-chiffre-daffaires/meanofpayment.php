@@ -53,3 +53,5 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<div class="clear"></div>
 
 </form>
+
+<br><br>

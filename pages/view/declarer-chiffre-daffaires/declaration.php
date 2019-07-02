@@ -25,3 +25,5 @@ $fields_declaration = $page_controler->get_form()->getFields( WDG_Form_Declarati
 	<div class="clear"></div>
 
 </form>
+
+<br><br>

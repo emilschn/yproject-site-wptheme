@@ -108,3 +108,5 @@ $summary_data = $page_controler->get_summary_data();
 	<div class="clear"></div>
 
 </form>
+
+<br><br>
