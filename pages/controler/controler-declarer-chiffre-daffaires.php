@@ -249,6 +249,21 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 							break;
 					}
 					break;
+				
+				default:
+					$input_cardreturn = filter_input( INPUT_GET, 'cardreturn' );
+					$input_response_wkToken = filter_input( INPUT_GET, 'response_wkToken' );
+					if ( $input_cardreturn == '1' && !empty( $input_response_wkToken ) ) {
+						$return_lemonway_card = WDGFormProjects::return_lemonway_card();
+						if ( $return_lemonway_card == TRUE ) {
+							$has_tried_payment = TRUE;
+							
+						} elseif ( $return_lemonway_card !== FALSE ) {
+							$has_tried_payment = TRUE;
+							$this->display_payment_error = TRUE;
+						}
+					}
+					break;
 			}
 			
 			if ( $has_tried_payment && !$this->display_payment_error ) {
