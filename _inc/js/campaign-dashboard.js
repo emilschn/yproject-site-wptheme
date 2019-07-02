@@ -1642,30 +1642,31 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 	}
 	
 	$( '#display-form-send-document' ).click( function() {
-		$( this ).hide( 50 );
-		$( '#form-send-document' ).show( 100 );
+		$( this ).slideUp( 50 );
+		$( '#form-send-document' ).slideDown( 100 );
 	} );
 	
 	$( '#display-list-declarations' ).click( function() {
-		$( this ).hide( 50 );
-		$( '#list-declarations' ).show( 100 );
+		$( this ).slideUp( 50 );
+		$( '#list-declarations' ).slideDown( 100 );
 	} );
 	
 	$( '.declaration-item-more-btn button' ).click( function() {
-		var adjustmentId = $( this ).data( 'declaration' );
-		if ( $( '#declaration-item-more-' + adjustmentId ).is( ':visible' ) ) {
-			$( '#declaration-item-more-btn-' + adjustmentId + ' button' ).text( '+' );
-			$( '#declaration-item-' + adjustmentId ).removeClass( 'expanded' );
+		var declarationId = $( this ).data( 'declaration' );
+		if ( $( '#declaration-item-more-' + declarationId ).is( ':visible' ) ) {
+			$( '#declaration-item-more-btn-' + declarationId + ' button' ).text( '+' );
+			$( '#declaration-item-' + declarationId ).removeClass( 'expanded' );
+			$( '#declaration-item-more-' + declarationId ).slideUp( 50 );
 		} else {
-			$( '#declaration-item-more-btn-' + adjustmentId + ' button' ).text( '-' );
-			$( '#declaration-item-' + adjustmentId ).addClass( 'expanded' );
+			$( '#declaration-item-more-btn-' + declarationId + ' button' ).text( '-' );
+			$( '#declaration-item-' + declarationId ).addClass( 'expanded' );
+			$( '#declaration-item-more-' + declarationId ).slideDown( 100 );
 		}
-		$( '#declaration-item-more-' + adjustmentId ).toggle( 50 );
 	} );
 	
 	$( '#display-form-add-adjustment' ).click( function() {
-		$( this ).hide( 50 );
-		$( '#form-add-adjustment' ).show( 100 );
+		$( this ).slideUp( 50 );
+		$( '#form-add-adjustment' ).slideDown( 100 );
 	} );
 	
 	$( '#form-add-adjustment #field-turnover_difference #turnover_difference' ).change( function() {
@@ -1677,11 +1678,12 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 		if ( $( '#adjustment-item-more-' + adjustmentId ).is( ':visible' ) ) {
 			$( '#adjustment-item-more-btn-' + adjustmentId + ' button' ).text( '+' );
 			$( '#adjustment-item-' + adjustmentId ).removeClass( 'expanded' );
+			$( '#declaration-item-more-' + adjustmentId ).slideUp( 50 );
 		} else {
 			$( '#adjustment-item-more-btn-' + adjustmentId + ' button' ).text( '-' );
 			$( '#adjustment-item-' + adjustmentId ).addClass( 'expanded' );
+			$( '#adjustment-item-more-' + adjustmentId ).slideDown( 100 );
 		}
-		$( '#adjustment-item-more-' + adjustmentId ).toggle( 50 );
 	} );
 };
 
