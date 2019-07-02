@@ -1008,7 +1008,6 @@ body input[type=text], body input[type=email], body select {
 	display: inline-block;
 	padding: 0px;
 	line-height: 50px;
-	height: 48px;
 	text-align: center;
 }
 .db-form.v3 button,

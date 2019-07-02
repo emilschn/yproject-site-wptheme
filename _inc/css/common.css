@@ -122,6 +122,12 @@ button.red {
 	border: 2px solid #333;
 	color: #333;
 }
+.button.force-size {
+	display: inline-block;
+	padding: 0px 24px;
+	height: 50px;
+	line-height: 50px;
+}
 
 .wdg-message {
 	margin: 20px 0px;

@@ -46,28 +46,20 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 		<span class="amount"><?php echo UIHelpers::format_number( $declaration->get_estimated_amount() ); ?> &euro;</span>
 	</div>
 	<?php if ( !$is_future ): ?>
-		<?php if ( $declaration->get_status() != WDGROIDeclaration::$status_transfer ): ?>
-		<div class="single-line">
+		<?php if ( $declaration->get_status() != WDGROIDeclaration::$status_transfer && $declaration->get_status() != WDGROIDeclaration::$status_waiting_transfer ): ?>
+		<div class="single-line force-size">
 			<a href="<?php echo home_url( '/declarer-chiffre-daffaires/?campaign_id=' .$page_controler->get_campaign()->ID. '&declaration_id=' .$declaration->id ); ?>" class="button red"><?php _e( "D&eacute;clarer" ); ?></a>
 		</div>
 		<?php elseif ( $page_controler->can_access_admin() ): ?>
-		<div class="single-line">
-			<a href="#" class="button admin-theme"><?php _e( "Verser" ); ?></a>
+		<div class="single-line force-size">
+			<a href="#" class="button admin-theme transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>" data-refund="0"><?php _e( "Verser" ); ?></a><br>
+			<a href="#" class="button admin-theme transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>" data-refund="1"><?php _e( "Rembourser" ); ?></a>
 		</div>
 		<?php endif; ?>
 	<?php endif; ?>
 </div>
 
 <?php if ( $page_controler->can_access_admin() && ( $declaration->get_status() == WDGROIDeclaration::$status_transfer || $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ) ): ?>
-	<br><br>
-	<div class="align-center admin-theme-block">
-		<a class="button transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>" data-refund="0">Procéder aux versements</a>
-	</div>
-	<br><br>
-	<div class="align-center admin-theme-block">
-		<a class="button transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>" data-refund="1">Procéder aux remboursements</a>
-	</div>
-
 	<?php ob_start(); ?>
 	<?php $previous_remaining_amount = $declaration->get_previous_remaining_amount(); ?>
 	<h3><?php _e('Reverser aux utilisateurs', 'yproject'); ?></h3>
