@@ -105,10 +105,9 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 
 		<div class="db-form v3 center align-left">
 
-			<?php _e( "D&eacute;claration r&eacute;alis&eacute;e le" ); ?> <?php echo $declaration->get_formatted_date( 'paid' ); ?>
 			<?php $declared_by_info = $declaration->get_declared_by(); ?>
 			<?php if ( !empty( $declared_by_info ) && isset( $declared_by_info[ 'name' ] ) ): ?>
-				<?php _e( "par :", 'yproject' ); ?> <?php echo $declaration->get_declared_by()[ 'name' ]. ' (' .$declaration->get_declared_by()[ 'status' ]. ')'; ?>
+				<?php _e( "D&eacute;claration r&eacute;alis&eacute;e par :", 'yproject' ); ?> <?php echo $declaration->get_declared_by()[ 'name' ]. ' (' .$declaration->get_declared_by()[ 'status' ]. ')'; ?>
 			<?php endif; ?>
 			<br><br>
 
