@@ -53,18 +53,20 @@ UserAccountDashboard.prototype.initMenu = function() {
  */
 UserAccountDashboard.prototype.switchTab = function( sType, clickedElement ) {
 	
-	$( 'ul.nav-menu li' ).removeClass( 'selected' );
-	$( 'div#item-body > div.item-body-tab' ).hide();
-	
-	$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
-	$( 'div#item-body > div#item-body-' + sType ).show();
-	
-	if ( sType.indexOf( 'investments' ) > -1 ) {
-		this.initProjectList();
-	}
-	
-	if ( sType.indexOf( 'documents' ) > -1 ) {
-		this.initTaxExemption();
+	if ( $( 'ul.nav-menu li#menu-item-' + sType ).length > 0 ) {
+		$( 'ul.nav-menu li' ).removeClass( 'selected' );
+		$( 'div#item-body > div.item-body-tab' ).hide();
+
+		$( 'ul.nav-menu li#menu-item-' + sType ).addClass( 'selected' );
+		$( 'div#item-body > div#item-body-' + sType ).show();
+
+		if ( sType.indexOf( 'investments' ) > -1 ) {
+			this.initProjectList();
+		}
+
+		if ( sType.indexOf( 'documents' ) > -1 ) {
+			this.initTaxExemption();
+		}
 	}
 };
 
