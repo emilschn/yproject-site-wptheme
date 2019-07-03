@@ -9,7 +9,7 @@ function UserAccountDashboard() {
 UserAccountDashboard.prototype.initWithHash = function() {
 
 	var sCurrentTab = window.location.hash.substring(1);
-	if ( sCurrentTab !== '' ) {
+	if ( sCurrentTab !== '' && sCurrentTab !== '_=_' ) {
 		this.switchTab( sCurrentTab, false );
 	}
 	
