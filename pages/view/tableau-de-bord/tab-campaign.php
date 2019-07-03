@@ -363,40 +363,45 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	</form>
 			
 	<?php if ( $page_controler->can_access_admin() ): ?>
-	<div class="field admin-theme">
-		<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
-			la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>
+		<div class="field admin-theme">
+			<h3>Attention : si vous envoyez un document grâce au formulaire ci-dessous, 
+				la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>
 
-		<form action="<?php echo admin_url( 'admin-post.php?action=upload_information_files'); ?>" method="post" id="projectinfo_form" enctype="multipart/form-data">
-			<ul class="errors">
+			<form action="<?php echo admin_url( 'admin-post.php?action=upload_information_files'); ?>" method="post" id="projectinfo_form" enctype="multipart/form-data">
+				<ul class="errors">
 
-			</ul>
+				</ul>
 
-			<?php
-			$file_name = $page_controler->get_campaign()->backoffice_businessplan();
-			if (!empty($file_name)) {
-				$file_name_exploded = explode('.', $file_name);
-				$ext = $file_name_exploded[count($file_name_exploded) - 1];
-				$file_name = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/kyc/' . $file_name;
-			}
-			DashboardUtility::create_field(array(
-				"id"				=> "new_backoffice_businessplan",
-				"type"				=> "upload",
-				"label"				=> "Votre business plan",
-				"infobubble"		=> "Ces informations seront traitées de manière confidentielle",
-				"value"				=> $file_name,
-				"download_label"	=> $page_controler->get_campaign()->data->post_title . " - BP." . $ext
-			));
+				<?php
+				$file_name = $page_controler->get_campaign()->backoffice_businessplan();
+				if (!empty($file_name)) {
+					$file_name_exploded = explode('.', $file_name);
+					$ext = $file_name_exploded[count($file_name_exploded) - 1];
+					$file_name = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/kyc/' . $file_name;
+				}
+				DashboardUtility::create_field(array(
+					"id"				=> "new_backoffice_businessplan",
+					"type"				=> "upload",
+					"label"				=> "Votre business plan",
+					"infobubble"		=> "Ces informations seront traitées de manière confidentielle",
+					"value"				=> $file_name,
+					"download_label"	=> $page_controler->get_campaign()->data->post_title . " - BP." . $ext
+				));
 
-			DashboardUtility::create_save_button( 'projectinfo_form', TRUE, "Enregistrer", "Enregistrement", TRUE );
-			?>
+				DashboardUtility::create_save_button( 'projectinfo_form', TRUE, "Enregistrer", "Enregistrement", TRUE );
+				?>
 
-			<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
-		</form>
-	</div>
-	<?php endif; ?>
-			
-	<?php if ( $page_controler->can_access_admin() ): ?>
+				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+			</form>
+		</div>
+	
+		<div class="field admin-theme">
+			<form id="cancel_pending_investments" class="ajax-db-form" data-action="cancel_pending_investments">
+				<?php DashboardUtility::create_save_button( 'cancel_pending_investments', $page_controler->can_access_admin(), 'Annuler les investissements en attente', 'Annulation', TRUE ); ?>
+				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+			</form>
+		</div>
+	
 		<?php $can_conclude = ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_archive || $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_closed ); ?>
 		<?php if ( $can_conclude ): ?>
 		<div class="field admin-theme">
