@@ -186,7 +186,7 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 				<?php endif; ?>
 				<tr class="strong">
 					<td><?php _e( "Montant total pay&eacute; :", 'yproject' ); ?></td>
-					<td><?php echo UIHelpers::format_number( $declaration->get_commission_to_pay() ); ?> &euro;</td>
+					<td><?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro;</td>
 				</tr>
 				<tr>
 					<td><?php _e( "Reliquat non vers&eacute; aux investisseurs :", 'yproject' ); ?></td>
