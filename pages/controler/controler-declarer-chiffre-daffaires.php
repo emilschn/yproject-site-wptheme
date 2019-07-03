@@ -263,7 +263,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					if ( $input_cardreturn == '1' && !empty( $input_response_wkToken ) ) {
 						$return_lemonway_card = WDGFormProjects::return_lemonway_card();
 						if ( $return_lemonway_card == TRUE ) {
-							$has_tried_payment = TRUE;
+							$this->current_step = WDGROIDeclaration::$status_transfer;
 							
 						} elseif ( $return_lemonway_card !== FALSE ) {
 							$has_tried_payment = TRUE;
