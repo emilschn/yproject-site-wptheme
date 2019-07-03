@@ -133,10 +133,17 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$this->summary_data[ 'turnover_total' ] = $this->current_declaration->get_turnover_total();
 		
 		// ajustement
-		$adjustment_value = $this->current_declaration->get_adjustment_value();
-		if ( $adjustment_value > 0 ) {
-			// TODO avec refonte
-			$this->summary_data[ 'amount_adjustment' ] = $this->current_declaration->get_adjustment_value();
+		$this->summary_data[ 'adjustments' ] = array();
+		$adjustments = $this->current_declaration->get_adjustments();
+		if ( !empty( $adjustments ) ) {
+			foreach ( $adjustments as $adjustment_obj ) {
+				$item = array(
+					'message_organization'	=> $adjustment_obj->message_organization,
+					'turnover_difference'	=> $adjustment_obj->turnover_difference,
+					'amount'				=> $adjustment_obj->amount
+				);
+				array_push( $this->summary_data[ 'adjustments' ], $item );
+			}
 		}
 		
 		// commission

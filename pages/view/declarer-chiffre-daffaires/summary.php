@@ -31,16 +31,27 @@ $summary_data = $page_controler->get_summary_data();
 
 		<tr><td colspan="2"><br></td></tr>
 
-		<?php if ( !empty( $summary_data[ 'amount_adjustment' ] ) ): ?>
+		<?php if ( !empty( $summary_data[ 'adjustments' ] ) ): ?>
 			<tr class="bold">
 				<td colspan="2"><?php _e( "Ajustement", 'yproject' ); ?></td>
 			</tr>
-
-			<tr>
-				<td><?php _e( "Montant de l'ajustement :", 'yproject' ); ?></td>
-				<td class="align-right"><?php echo YPUIHelpers::display_number( $summary_data[ 'amount_adjustment' ] ); ?> &euro;</td>
-			</tr>
-
+			
+			<?php foreach ( $summary_data[ 'adjustments' ] as $adjustment_obj ): ?>
+				<tr>
+					<td><?php _e( "Raison :", 'yproject' ); ?></td>
+					<td><?php echo $adjustment_obj[ 'message_organization' ]; ?></td>
+				</tr>
+				<tr>
+					<td><?php _e( "Diff&eacute;rentiel de CA constat&eacute; lors de l'ajustement :", 'yproject' ); ?></td>
+					<td><?php echo UIHelpers::format_number( $adjustment_obj[ 'turnover_difference' ] ); ?> &euro;</td>
+				</tr>
+				<tr>
+					<td><?php _e( "Montant de l'ajustement :", 'yproject' ); ?></td>
+					<td><?php echo UIHelpers::format_number( $adjustment_obj[ 'amount' ] ); ?> &euro;</td>
+				</tr>
+				<tr><td colspan="2"><br></td></tr>
+			<?php endforeach; ?>
+				
 			<tr><td colspan="2"><br></td></tr>
 		<?php endif; ?>
 
