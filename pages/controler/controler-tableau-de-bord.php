@@ -13,8 +13,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $can_access_author;
 	private $must_show_lightbox_welcome;
 	private $return_lemonway_card;
+	private $declaration_list;
 	private $form_add_check;
 	private $form_document;
+	private $form_declaration_bill_list;
 	private $form_adjustment;
 	private $form_adjustment_edit_list;
 	private $emails;
@@ -89,6 +91,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->form_add_check = new WDG_Form_Dashboard_Add_Check( $this->campaign_id );
 		$core->include_form( 'organization-details' );
 		
+		$this->init_declarations();
 		$this->init_form_document();
 		if ( $this->can_access_admin() ) {
 			$this->init_form_adjustment();
@@ -249,6 +252,40 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		}
 		
 		return $buffer;
+	}
+	
+	
+/******************************************************************************/
+// GESTION DECLARATIONS
+/******************************************************************************/
+	private function init_declarations() {
+		$this->declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $this->get_campaign_id() );
+		
+		$core = ATCF_CrowdFunding::instance();
+		$core->include_form( 'declaration-bill' );
+		$this->form_declaration_bill_list = array();
+		foreach ( $this->declaration_list as $declaration ){
+			if ( $declaration->get_status() == WDGROIDeclaration::$status_finished ) {
+				$new_form = new WDG_Form_Declaration_Bill( $declaration->id );
+				$this->form_declaration_bill_list[ $declaration->id ] = $new_form;
+			}
+		}
+	}
+	
+	public function get_declaration_list() {
+		return $this->declaration_list;
+	}
+	
+	public function get_form_declaration_bill( $id_declaration ) {
+		$buffer = FALSE;
+		if ( !empty( $this->form_declaration_bill_list[ $id_declaration ] ) ) {
+			$buffer = $this->form_declaration_bill_list[ $id_declaration ];
+		}
+		return $buffer;
+	}
+	
+	public function get_form_declaration_bill_action() {
+		return admin_url( 'admin-post.php?action=save_declaration_bill' );
 	}
 	
 	

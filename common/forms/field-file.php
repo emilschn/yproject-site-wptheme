@@ -67,6 +67,12 @@ echo do_shortcode('[yproject_lightbox_cornered id="lightbox-'. $wdg_current_fiel
 <?php endif; ?>
 
 <?php if ( !empty( $wdg_current_field[ 'value' ] ) ): ?>
-	<a id="<?php echo $wdg_current_field[ 'name' ]; ?>" class="button blue-pale download-file" target="_blank" href="<?php echo $wdg_current_field[ 'value' ]; ?>"><?php _e( "Aper&ccedil;u du fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $date_upload; ?></a>
+	<a id="<?php echo $wdg_current_field[ 'name' ]; ?>" class="button blue-pale download-file" target="_blank" href="<?php echo $wdg_current_field[ 'value' ]; ?>">
+		<?php if ( !empty( $date_upload ) ): ?>
+			<?php _e( "Aper&ccedil;u du fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $date_upload; ?>
+		<?php else: ?>
+			<?php _e( "Aper&ccedil;u du fichier", 'yproject' ); ?>
+		<?php endif; ?>
+	</a>
 	<br>
 <?php endif;

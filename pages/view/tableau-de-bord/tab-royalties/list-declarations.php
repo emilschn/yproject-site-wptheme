@@ -1,6 +1,6 @@
 <?php
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
-$declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $page_controler->get_campaign_id() );
+$declaration_list = $page_controler->get_declaration_list();
 global $declaration;
 ?>
 

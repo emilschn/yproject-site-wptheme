@@ -3,6 +3,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 global $declaration;
 $adjustments = $declaration->get_adjustments();
 $class_status = ( $declaration->get_status == WDGROIDeclaration::$status_failed ) ? 'error' : 'confirm';
+
+$form_bill = $page_controler->get_form_declaration_bill( $declaration->id );
+$fields_hidden = $form_bill->getFields( WDG_Form_Declaration_Bill::$field_group_hidden );
+$fields_file = $form_bill->getFields( WDG_Form_Declaration_Bill::$field_group_file );
 ?>
 			
 <?php
@@ -135,7 +139,7 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 		<br><br>
 		
 		<strong><?php _e( "Message transmis aux investisseurs :", 'yproject' ); ?></strong><br>
-		<?php if ( empty( $declaration_message ) ): ?>
+		<?php if ( empty( $declaration->message ) ): ?>
 			Aucun message n'a été envoyé aux investisseurs.
 		<?php else: ?>
 			<?php echo $declaration->get_message(); ?>
@@ -159,11 +163,35 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 			<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue-pale" download="justificatif-<?php echo $declaration->date_due; ?>"><?php _e( "T&eacute;l&eacute;charger le justificatif" ); ?></a>
 			<br><br>
 			
+			<?php if ( $page_controler->can_access_admin() ): ?>
 			<form action="<?php echo admin_url( 'admin-post.php?action=generate_royalties_bill'); ?>" method="POST" class="db-form v3 admin-theme-block">
 				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>">
 				<input type="hidden" name="roi_declaration_id" value="<?php echo $declaration->id; ?>">
 				<button type="submit" class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer la facture", 'yproject' ); ?></button>
 			</form>
+			<br><br>
+			<?php endif; ?>
+
+			<form action="<?php echo $page_controler->get_form_declaration_bill_action(); ?>" method="post" enctype="multipart/form-data" class="db-form v3 full">
+
+				<?php foreach ( $fields_hidden as $field ): ?>
+					<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+					<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
+				<?php endforeach; ?>
+
+				<?php foreach ( $fields_file as $field ): ?>
+					<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+					<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
+				<?php endforeach; ?>
+
+				<?php if ( $page_controler->can_access_admin() ): ?>
+				<button type="submit" class="button admin-theme clear"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+				<?php endif; ?>
+
+				<div class="clear"></div>
+
+			</form>
+			<br><br>
 			
 		<?php else: ?>
 			Aucun paiement effectué.
