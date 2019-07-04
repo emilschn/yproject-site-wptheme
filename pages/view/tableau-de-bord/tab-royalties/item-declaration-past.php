@@ -157,6 +157,14 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 		<?php if ( $declaration->get_turnover_total() > 0 ): ?>
 			<?php $declaration->make_payment_certificate(); ?>
 			<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue-pale" download="justificatif-<?php echo $declaration->date_due; ?>"><?php _e( "T&eacute;l&eacute;charger le justificatif" ); ?></a>
+			<br><br>
+			
+			<form action="<?php echo admin_url( 'admin-post.php?action=generate_royalties_bill'); ?>" method="POST" class="db-form v3 admin-theme-block">
+				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>">
+				<input type="hidden" name="roi_declaration_id" value="<?php echo $declaration->id; ?>">
+				<button type="submit" class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer la facture", 'yproject' ); ?></button>
+			</form>
+			
 		<?php else: ?>
 			Aucun paiement effectué.
 		<?php endif; ?>
