@@ -1,6 +1,10 @@
 <?php
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 global $adjustment_obj, $declaration_obj;
+if ( $page_controler->can_access_admin() ) {
+	$fields_hidden = $page_controler->get_form_adjustment( $adjustment_obj->id )->getFields( WDG_Form_Adjustement::$field_group_hidden );
+	$fields_adjustment = $page_controler->get_form_adjustment( $adjustment_obj->id )->getFields( WDG_Form_Adjustement::$field_group_adjustment );
+}
 ?>
 
 <div id="adjustment-item-<?php echo $adjustment_obj->id; ?>" class="adjustment-item">
@@ -24,7 +28,7 @@ global $adjustment_obj, $declaration_obj;
 <div id="adjustment-item-more-<?php echo $adjustment_obj->id; ?>" class="adjustment-item-more hidden">
 	<hr>
 	
-	<div class="db-form v3 center align-left">
+	<div class="db-form v3 center align-left adjustment-summary">
 		<strong><?php _e( "Versement au moment duquel l'ajustement s'applique", 'yproject' ); ?></strong><br>
 		<?php echo $declaration_obj->get_formatted_date( 'due' ); ?><br><br>
 		
@@ -59,7 +63,31 @@ global $adjustment_obj, $declaration_obj;
 		<strong><?php _e( "Message pour les investisseurs", 'yproject' ); ?></strong><br>
 		<?php echo $adjustment_obj->message_investors; ?><br><br>
 		
+		<?php if ( $page_controler->can_access_admin() ): ?>
+			<button type="button" class="button admin-theme edit-adjustment" data-adjustment="<?php echo $adjustment_obj->id; ?>"><?php _e( "Modifier", 'yproject' ); ?></button>
+			<br><br>
+		<?php endif; ?>
 	</div>
+	
+	<?php if ( $page_controler->can_access_admin() ): ?>
+		<form action="<?php echo $page_controler->get_form_adjustment_action(); ?>" method="post" class="db-form v3 full center bg-white admin-theme-block adjustment-edit-form hidden">
+
+			<?php foreach ( $fields_hidden as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
+			<?php endforeach; ?>
+
+			<?php foreach ( $fields_adjustment as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
+			<?php endforeach; ?>
+
+			<button type="submit" class="button admin-theme clear"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+
+			<div class="clear"></div>
+
+		</form>
+	<?php endif; ?>
 </div>
 
 <div id="adjustment-item-more-btn-<?php echo $adjustment_obj->id; ?>" class="adjustment-item-more-btn align-center">

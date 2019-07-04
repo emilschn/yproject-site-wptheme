@@ -985,14 +985,14 @@ var WDGFormsFunctions = (function($) {
 		
 		initSelectMultiple: function() {
 			$( '.select-multiple-items-retracted' ).click( function() {
-				var buttonTargetName = $( this ).data( 'name' );
+				var siblings = $( this ).siblings( '.select-multiple-items' );
 				// On change l'état du bouton à l'inverse de celui de la liste, avant le changement car il y a un délai
-				if ( $( '#select-multiple-items-' + buttonTargetName ).is( ':visible' ) ) {
+				if ( siblings.is( ':visible' ) ) {
 					$( this ).removeClass( 'reverse' );
 				} else {
 					$( this ).addClass( 'reverse' );
 				}
-				$( '#select-multiple-items-' + buttonTargetName ).toggle( 50 );
+				siblings.toggle( 50 );
 			} );
 		},
 		

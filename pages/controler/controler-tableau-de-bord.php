@@ -16,6 +16,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $form_add_check;
 	private $form_document;
 	private $form_adjustment;
+	private $form_adjustment_edit_list;
 	private $emails;
 	/**
 	 * @var ATCF_Campaign
@@ -262,10 +263,21 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'adjustment' );
 		$this->form_adjustment = new WDG_Form_Adjustement( $this->campaign_id );
+		
+		$this->form_adjustment_edit_list = array();
+		$adjustment_list = $this->get_adjustment_list();
+		foreach ( $adjustment_list as $adjustment_item ) {
+			$form_adjustment_edit = new WDG_Form_Adjustement( $this->campaign_id, $adjustment_item );
+			$this->form_adjustment_edit_list[ $adjustment_item->id ] = $form_adjustment_edit;
+		}
 	}
 	
-	public function get_form_adjustment() {
-		return $this->form_adjustment;
+	public function get_form_adjustment( $id_adjustment = FALSE ) {
+		if ( !empty( $id_adjustment ) && isset( $this->form_adjustment_edit_list[ $id_adjustment ] ) ) {
+			return $this->form_adjustment_edit_list[ $id_adjustment ];
+		} else {
+			return $this->form_adjustment;
+		}
 	}
 	
 	public function get_form_adjustment_action() {

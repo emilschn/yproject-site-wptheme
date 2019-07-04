@@ -37,6 +37,17 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 	<div class="align-center <?php echo $class_status; ?>">
 		<?php echo $label_status; ?>
 	</div>
+	
+	<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_transfer || $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ): ?>
+	<div class="align-center">
+		<?php _e( "Chiffre d'affaires d&eacute;clar&eacute; :", 'yproject' ); ?><br>
+		<span class="amount"><?php echo UIHelpers::format_number( $declaration->get_turnover_total() ); ?> &euro;</span>
+	</div>
+	<div class="align-center">
+		<?php _e( "Montant pay&eacute; :", 'yproject' ); ?><br>
+		<span class="amount"><?php echo UIHelpers::format_number( $declaration->get_amount_with_commission() ); ?> &euro;</span>
+	</div>
+	<?php else: ?>
 	<div class="align-center">
 		<?php _e( "Chiffre d'affaires pr&eacute;visionnel :", 'yproject' ); ?><br>
 		<span class="amount"><?php echo UIHelpers::format_number( $declaration->get_estimated_turnover() ); ?> &euro;</span>
@@ -45,6 +56,8 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 		<?php _e( "Montant pr&eacute;visionnel :", 'yproject' ); ?><br>
 		<span class="amount"><?php echo UIHelpers::format_number( $declaration->get_estimated_amount() ); ?> &euro;</span>
 	</div>
+	<?php endif; ?>
+	
 	<?php if ( !$is_future ): ?>
 		<?php if ( $declaration->get_status() != WDGROIDeclaration::$status_transfer && $declaration->get_status() != WDGROIDeclaration::$status_waiting_transfer ): ?>
 		<div class="single-line">
