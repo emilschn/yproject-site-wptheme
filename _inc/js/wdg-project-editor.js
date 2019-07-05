@@ -934,35 +934,35 @@ var ProjectEditor = (function($) {
 			
 			$( '#project-content-description .zone-content img' ).each( function() {
 				var sSrc = $( this ).attr( 'src' );
-				if ( sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+				if ( sSrc !== undefined && sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
 					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Pitch' );
 				}
 			} );
 			
 			$( '#project-content-societal_challenge .zone-content img' ).each( function() {
 				var sSrc = $( this ).attr( 'src' );
-				if ( sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+				if ( sSrc !== undefined && sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
 					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Impacts positifs' );
 				}
 			} );
 			
 			$( '#project-content-added_value .zone-content img' ).each( function() {
 				var sSrc = $( this ).attr( 'src' );
-				if ( sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+				if ( sSrc !== undefined && sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
 					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Stratégie' );
 				}
 			} );
 			
 			$( '#project-content-economic_model .zone-content img' ).each( function() {
 				var sSrc = $( this ).attr( 'src' );
-				if ( sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+				if ( sSrc !== undefined && sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
 					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Données financières' );
 				}
 			} );
 			
 			$( '#project-content-implementation .zone-content img' ).each( function() {
 				var sSrc = $( this ).attr( 'src' );
-				if ( sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+				if ( sSrc !== undefined && sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
 					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Equipe' );
 				}
 			} );
