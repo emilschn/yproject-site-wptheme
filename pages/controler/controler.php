@@ -118,7 +118,7 @@ class WDG_Page_Controler {
 	 */
 	public function get_display_link_account() {
 		global $post;
-		return ( is_home() || is_front_page() || $post->post_name == 'les-projets' || $post->post_name == 'investissement' || $post->post_name == 'financement' );
+		return ( is_home() || is_front_page() || $post->post_name == 'les-projets' || $post->post_name == 'investissement' || $post->post_name == 'financement' || $post->post_name == 'epargne-positive' );
 	}
 	
 	

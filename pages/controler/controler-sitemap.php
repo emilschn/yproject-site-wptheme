@@ -54,18 +54,6 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		WDG_Cache_Plugin::initialize_home_stats();
 	}
 	
-	private function is_daily_call_time() {
-		$buffer = FALSE;
-		$date_now = new DateTime();
-		$last_daily_call = get_option( 'last_daily_call' );
-		$saved_date = new DateTime( $last_daily_call );
-		if ( $last_daily_call == FALSE || $saved_date->diff($date_now)->days >= 1 ) {
-			update_option( 'last_daily_call', $date_now->format( 'Y-m-d H:i:s' ) );
-			$buffer = TRUE;
-		}
-		return $buffer;
-	}
-	
 	private function summary_call() {
 		$params = array();
 		$params[ 'vote' ] = array();

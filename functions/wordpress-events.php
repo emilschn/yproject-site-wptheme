@@ -247,8 +247,8 @@ class WDG_WordPress_Events {
 		wp_deregister_script( 'edd-ajax' );
 		
 		// Styles utiles dans les pages complexes (avec selection de date, popups, formulaires spécifiques etc.)
-		$pages_simple = array( 'connexion', 'inscription' );
-		if ( !in_array( $post->post_name, $pages_simple ) ) {
+		$pages_simple = array( 'connexion', 'inscription', 'les-projets' );
+		if ( !in_array( $post->post_name, $pages_simple ) && !is_home() && !is_front_page() ) {
 			wp_enqueue_script('jquery-ui-dialog');
 			wp_enqueue_script('jquery-ui-datepicker');
 			wp_enqueue_script('wdg-project-dashboard-i18n-fr', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/i18n/datepicker-fr.js', array('jquery', 'jquery-ui-datepicker'), ASSETS_VERSION);
@@ -263,6 +263,13 @@ class WDG_WordPress_Events {
 
 			wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.min.js', array('jquery'));
 			wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, 'all');
+			
+		} else {
+			remove_action('wp_head', 'print_emoji_detection_script', 7);
+			remove_action('wp_print_styles', 'print_emoji_styles');
+			wp_deregister_script( 'wp-embed.min.js' );
+			wp_deregister_script('contact-form-7');
+			wp_deregister_style('contact-form-7');
 		}
 
 		// Chargement de la lib de graphs (uniquement en liaison avec les projets)

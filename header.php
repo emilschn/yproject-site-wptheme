@@ -115,91 +115,93 @@
 					<ul class="submenu-list">
 					</ul>
 				</div>
-
-				<?php if (is_user_logged_in()): ?>
-				<div id="submenu-user" class="connected submenu-style hidden">
-					<?php /* Au clic picto Compte, afficher menu utilisateur */ ?>
-					<?php global $current_user; get_currentuserinfo();
-					$user_name_str = ($current_user->user_firstname != '') ? $current_user->user_firstname : $current_user->user_login;
-					$page_dashboard = home_url( '/tableau-de-bord/' );
-					?>
-					<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
-					<ul class="submenu-list">
-						<?php
-						$is_project_needing_authentication = FALSE;
-						$project_list_dom = '';
-						foreach ($project_list as $project_id) { 
-							if ( !empty( $project_id ) ) {
-								$project_campaign = new ATCF_Campaign( $project_id );
-								if ( isset( $project_campaign ) && $project_campaign->get_name() != '' ) {
-									$campaign_organization = $project_campaign->get_organization();
-									$campaign_organization = new WDGOrganization( $campaign_organization->wpref );
-									$project_list_dom .= '<li><a href="' .$page_dashboard. '?campaign_id=' .$project_id. '"';
-									if ( !$campaign_organization->is_registered_lemonway_wallet() ) {
-										$is_project_needing_authentication = TRUE;
-										$project_list_dom .= ' class="needs-authentication"';
+				
+				<?php if ( !$page_controler->get_display_link_account() ): ?>
+					<?php if (is_user_logged_in()): ?>
+					<div id="submenu-user" class="connected submenu-style hidden">
+						<?php /* Au clic picto Compte, afficher menu utilisateur */ ?>
+						<?php global $current_user; get_currentuserinfo();
+						$user_name_str = ($current_user->user_firstname != '') ? $current_user->user_firstname : $current_user->user_login;
+						$page_dashboard = home_url( '/tableau-de-bord/' );
+						?>
+						<span id="submenu-user-hello"><?php _e("Bonjour", 'yproject'); ?> <?php echo $user_name_str; ?> !</span>
+						<ul class="submenu-list">
+							<?php
+							$is_project_needing_authentication = FALSE;
+							$project_list_dom = '';
+							foreach ($project_list as $project_id) { 
+								if ( !empty( $project_id ) ) {
+									$project_campaign = new ATCF_Campaign( $project_id );
+									if ( isset( $project_campaign ) && $project_campaign->get_name() != '' ) {
+										$campaign_organization = $project_campaign->get_organization();
+										$campaign_organization = new WDGOrganization( $campaign_organization->wpref );
+										$project_list_dom .= '<li><a href="' .$page_dashboard. '?campaign_id=' .$project_id. '"';
+										if ( !$campaign_organization->is_registered_lemonway_wallet() ) {
+											$is_project_needing_authentication = TRUE;
+											$project_list_dom .= ' class="needs-authentication"';
+										}
+										$project_list_dom .= '>' .$project_campaign->get_name(). '</a></li>';
 									}
-									$project_list_dom .= '>' .$project_campaign->get_name(). '</a></li>';
 								}
 							}
-						}
-						?>
-							
-						<li><a href="<?php echo home_url( '/mon-compte/' ); ?>" <?php if ( $page_controler->get_show_user_needs_authentication() && !$is_project_needing_authentication ): ?>class="needs-authentication"<?php endif; ?>><?php _e("Mon compte", 'yproject'); ?></a></li>
-						<?php echo $project_list_dom; ?>
-					</ul>
-					
-					<div id="button-logout" class="box_connection_buttons red">
-						<a href="<?php echo wp_logout_url(); echo '&page_id='.get_the_ID() ?>"><span><?php _e("Me d&eacute;connecter", 'yproject'); ?></span></a>
-					</div>
-				</div>
-				
-				
-				<?php else: ?>
-				<div id="submenu-user" class="not-connected submenu-style hidden">
-					<?php /* Au clic picto Compte, afficher menu connexion */ ?>
-					<div class="only-inf997">
-						<a href="<?php echo home_url( '/connexion/' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Connexion", 'yproject' ); ?></span></a>
-					</div>
-					
-					<form method="post" action="<?php echo home_url( "/connexion/" ); ?>" name="login-form" class="sidebar-login-form model-form hidden-inf997">
-						<br>
-						<span id="title-connection"><?php _e('Connexion', 'yproject'); ?></span>
-						<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('E-mail ou identifiant', 'yproject'); ?>" value="" />
-						<br>
+							?>
 
-						<input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
-						<div class="submit-center" style="display: none;">             
-							<input type="submit" name="wp-submit" class="input_submit button red" id="connect" value="OK"/>
-							<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
-							<input type="hidden" name="login-form" value="1" />
-						</div>   
+							<li><a href="<?php echo home_url( '/mon-compte/' ); ?>" <?php if ( $page_controler->get_show_user_needs_authentication() && !$is_project_needing_authentication ): ?>class="needs-authentication"<?php endif; ?>><?php _e("Mon compte", 'yproject'); ?></a></li>
+							<?php echo $project_list_dom; ?>
+						</ul>
 
-						<div>
-							<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-							<a href="<?php echo get_permalink($page_forgotten->ID); ?>" class="forgotten"><?php _e('(Mot de passe oubli&eacute;)', 'yproject');?></a>
+						<div id="button-logout" class="box_connection_buttons red">
+							<a href="<?php echo wp_logout_url(); echo '&page_id='.get_the_ID() ?>"><span><?php _e("Me d&eacute;connecter", 'yproject'); ?></span></a>
+						</div>
+					</div>
+
+
+					<?php else: ?>
+					<div id="submenu-user" class="not-connected submenu-style hidden">
+						<?php /* Au clic picto Compte, afficher menu connexion */ ?>
+						<div class="only-inf997">
+							<a href="<?php echo home_url( '/connexion/' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Connexion", 'yproject' ); ?></span></a>
 						</div>
 
-						<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
-						<label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
-						<br><br>
-					</form>
-					
-					<hr class="login-separator">
+						<form method="post" action="<?php echo home_url( "/connexion/" ); ?>" name="login-form" class="sidebar-login-form model-form hidden-inf997">
+							<br>
+							<span id="title-connection"><?php _e('Connexion', 'yproject'); ?></span>
+							<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('E-mail ou identifiant', 'yproject'); ?>" value="" />
+							<br>
 
-					<div class="box_connection_buttons blue">
-						<a href="#" class="social_connect_login_facebook" data-redirect="<?php echo WDGUser::get_login_redirect_page(); ?>"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
-					</div>
-					<div class="social_connect_login_facebook_loading align-center hidden">
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
-					</div>
-					
-					<hr class="login-separator">
+							<input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
+							<div class="submit-center" style="display: none;">             
+								<input type="submit" name="wp-submit" class="input_submit button red" id="connect" value="OK"/>
+								<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
+								<input type="hidden" name="login-form" value="1" />
+							</div>   
 
-					<div>
-						<a href="<?php echo home_url( '/inscription/' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Cr&eacute;er un compte", 'yproject' ); ?></span></a>
-					</div>
-					
+							<div>
+								<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
+								<a href="<?php echo get_permalink($page_forgotten->ID); ?>" class="forgotten"><?php _e('(Mot de passe oubli&eacute;)', 'yproject');?></a>
+							</div>
+
+							<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
+							<label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
+							<br><br>
+						</form>
+
+						<hr class="login-separator">
+
+						<div class="box_connection_buttons blue">
+							<a href="#" class="social_connect_login_facebook" data-redirect="<?php echo WDGUser::get_login_redirect_page(); ?>"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
+						</div>
+						<div class="social_connect_login_facebook_loading align-center hidden">
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
+						</div>
+
+						<hr class="login-separator">
+
+						<div>
+							<a href="<?php echo home_url( '/inscription/' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Cr&eacute;er un compte", 'yproject' ); ?></span></a>
+						</div>
+
+					<?php endif; ?>
 				<?php endif; ?>
 				
 			</div>

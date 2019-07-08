@@ -902,13 +902,15 @@ var WDGFormsFunctions = (function($) {
 		},
 		
 		initDatePickers: function() {
-            $( 'input[type=text].adddatepicker' ).datepicker({
-                dateFormat: "dd/mm/yy",
-				yearRange: "-120:+10",
-                regional: "fr",
-                changeMonth: true,
-                changeYear: true
-            });
+			if ( $( 'input[type=text].adddatepicker' ).length > 0 ) {
+				$( 'input[type=text].adddatepicker' ).datepicker({
+					dateFormat: "dd/mm/yy",
+					yearRange: "-120:+10",
+					regional: "fr",
+					changeMonth: true,
+					changeYear: true
+				});
+			}
 		},
 		
 		initTextInput: function() {
