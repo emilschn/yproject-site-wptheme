@@ -867,29 +867,6 @@ footer > .footer-container > div > div {
 footer form img {
 	vertical-align: top;
 }
-footer form input#subscribe-nl-mail {
-	width: -webkit-calc(100% - 60px);
-	width: -moz-calc(100% - 60px);
-	width: calc(100% - 60px);
-	height: 38px;
-	padding: 5px;
-	margin-left: -4px;
-	border: 0px;
-}
-footer form input#subscribe-nl-mail.retracted {
-	width: -webkit-calc(100% - 115px);
-	width: -moz-calc(100% - 115px);
-	width: calc(100% - 115px);
-}
-footer form input#subscribe-nl-submit {
-    width: 48px;
-    height: 48px;
-	margin-left: -5px;
-    border: none;
-    cursor: pointer;
-    background-color: #EA4F51;
-	color: #FFF;
-}
 
 /* Footer 2nd partie*/
 footer > .footer-container > div > div > a::before {
