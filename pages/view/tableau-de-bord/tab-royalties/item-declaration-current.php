@@ -208,7 +208,7 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 			<br><br>
 
 			<strong><?php _e( "Message transmis aux investisseurs :", 'yproject' ); ?></strong><br>
-			<?php if ( empty( $declaration_message ) ): ?>
+			<?php if ( empty( $declaration->message ) ): ?>
 				Aucun message n'a été envoyé aux investisseurs.
 			<?php else: ?>
 				<?php echo $declaration->get_message(); ?>
