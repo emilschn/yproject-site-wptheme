@@ -1668,7 +1668,11 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 	} );
 	
 	$( '#form-add-adjustment #field-turnover_difference #turnover_difference' ).change( function() {
-		self.refreshAjustmentAmountToPay();
+		self.refreshAjustmentAmountToPay( false );
+	} );
+	
+	$( '.adjustment-edit-form #field-turnover_difference #turnover_difference' ).change( function() {
+		self.refreshAjustmentAmountToPay( $( this ).parent().parent().parent().parent() );
 	} );
 	
 	$( '.adjustment-item-more-btn button' ).click( function() {
@@ -1723,13 +1727,17 @@ WDGCampaignDashboard.prototype.refreshTurnoverAmountToPay = function() {
 	$( '.commission-to-pay' ).text(fees);
 };
 
-WDGCampaignDashboard.prototype.refreshAjustmentAmountToPay = function() {
-	var roiPercent = $( '#form-add-adjustment #field-roi_percent #roi_percent' ).val();
-	var total = Number( $( '#form-add-adjustment #field-turnover_difference #turnover_difference' ).val().split(',').join('.') );
+WDGCampaignDashboard.prototype.refreshAjustmentAmountToPay = function( formTarget ) {
+	var idTarget = '#form-add-adjustment';
+	if ( formTarget !== false ) {
+		idTarget = formTarget.attr( 'id' );
+	}
+	var roiPercent = $( '#' + idTarget + ' #field-roi_percent #roi_percent' ).val();
+	var total = Number( $( '#' + idTarget + ' #field-turnover_difference #turnover_difference' ).val().split(',').join('.') );
 	var amount = total * roiPercent / 100;
 	amount = Math.round( amount * 100 ) / 100;
 	
-	$( '#form-add-adjustment #field-amount #amount' ).val( amount );
+	$( '#' + idTarget + ' #field-amount #amount' ).val( amount );
 };
 
 WDGCampaignDashboard.prototype.proceedRoyalties = function(){
