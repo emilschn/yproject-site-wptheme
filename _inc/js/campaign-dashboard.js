@@ -1256,8 +1256,6 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 		$('#ajax-contacts-load').after(result);
 		$('#ajax-loader-img').hide();//On cache la roue de chargement.
 
-		YPUIFunctions.initQtip();
-
 		//Création du tableau dynamique dataTable
 		self.table = $('#contacts-table').DataTable({
 			scrollX: '100%',
