@@ -285,7 +285,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			"</url>\n";
 		}
 		
-		$campaignlist_funded = ATCF_Campaign::get_list_funded( 50 );
+		$campaignlist_funded = ATCF_Campaign::get_list_funded( 80 );
 		foreach ( $campaignlist_funded as $campaign_post ) {
 			$campaign_id = $campaign_post->ID;
 			$page_modified_exploded = explode( ' ', $campaign_post->post_modified );
