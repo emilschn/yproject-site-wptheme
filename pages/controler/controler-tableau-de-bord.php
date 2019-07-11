@@ -12,7 +12,6 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $can_access_admin;
 	private $can_access_author;
 	private $must_show_lightbox_welcome;
-	private $return_lemonway_card;
 	private $declaration_list;
 	private $form_add_check;
 	private $form_document;
@@ -76,9 +75,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		}
 		$this->check_has_signed_mandate();
 		
-		WDGFormProjects::form_submit_turnover();
 		WDGFormProjects::form_submit_account_files();
-		WDGFormProjects::form_submit_roi_payment();
 		WDGFormProjects::form_approve_payment();
 		WDGFormProjects::form_cancel_payment();
 		WDGFormProjects::form_try_pending_card();
@@ -104,7 +101,6 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			$current_organization->send_kyc();
 		}
 		$current_organization->submit_transfer_wallet_lemonway();
-		$this->return_lemonway_card = WDGFormProjects::return_lemonway_card();
 	}
 	
 /******************************************************************************/
@@ -202,10 +198,6 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	}
 	public function get_show_lightbox_welcome() {
 		return $this->must_show_lightbox_welcome;
-	}
-	
-	public function get_return_lemonway_card() {
-		return $this->return_lemonway_card;
 	}
 	
 /******************************************************************************/
