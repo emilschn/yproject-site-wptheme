@@ -59,7 +59,7 @@ if ( $page_controler->is_iban_validated() ): ?>
 
 		<br><br>
 		<div class="align-center">
-			<button id="modify-iban" class="button blue"><?php _e( "Modifier mon RIB", 'yproject' ); ?></button>
+			<button id="modify-iban" type="button" class="button blue"><?php _e( "Modifier mon RIB", 'yproject' ); ?></button>
 		</div>
 		<br><br>
 
