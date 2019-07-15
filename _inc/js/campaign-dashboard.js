@@ -9,8 +9,6 @@ function WDGCampaignSimulator() {
 			e.preventDefault();
 		}
 	} );
-	//
-	this.initQtip();
 }
 
 /**
@@ -259,6 +257,7 @@ function WDGCampaignDashboard() {
 	this.initAjaxForms();
 	this.initHome();
 	this.initContacts();
+	this.initQtip();
 	this.initOrgaForms();
 	this.initTeam();
 	this.initRoyalties();
