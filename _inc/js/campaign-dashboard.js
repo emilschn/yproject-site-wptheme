@@ -9,6 +9,8 @@ function WDGCampaignSimulator() {
 			e.preventDefault();
 		}
 	} );
+	//
+	this.initQtip();
 }
 
 /**
@@ -1946,6 +1948,52 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 
 WDGCampaignDashboard.prototype.initCampaign = function(){
 	$( "#item-body-campaign ul input[type=checkbox]" ).prop( 'disabled', false );
+};
+
+WDGCampaignDashboard.prototype.initQtip = function(){
+	var i=0;
+	$('.infobutton, .qtip-element').each(function () {
+		//Check if doesn't exist yet
+		if($(this).data("hasqtip")==undefined){
+			var contentTip;
+			if($(this).attr("title")!=undefined){
+				contentTip = $(this).attr("title");
+			} else {
+				contentTip = $(this).next('.tooltiptext');
+			}
+
+			var settings = {
+				content: contentTip,
+				position: {
+					my: 'bottom center',
+					at: 'top center',
+				},
+				style: {
+					classes: 'wdgQtip qtip-dark qtip-rounded qtip-shadow'
+				},
+				hide: {
+					fixed: true,
+					delay: 300
+				}
+			};
+
+			if($(this).is("input[type=text], input[type=number], textarea")){
+				settings['show']='focus'
+				settings['hide']='blur'
+			}
+
+			var personnalised_settings = $(this).data("tooltip");
+			if(personnalised_settings!=undefined){
+				var data_settings = JSON.parse(personnalised_settings);
+				for (var attrname in data_settings) { settings[attrname] = data_settings[attrname]; }
+			}
+
+			if (contentTip != ""){
+				$(this).qtip(settings);
+				i++;
+			}
+		}
+	});
 };
 
 var wdgCampaignDashboard;
