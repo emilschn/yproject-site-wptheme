@@ -7,7 +7,7 @@ $menu_project_parts = array (
 	'news'			=> 'Actualit&eacute;s'
 );
 
-
+$WDGUser_current = WDGUser::current();
 $invest_url = home_url( '/investir/?campaign_id=' .$campaign->ID. '&amp;invest_start=1' );
 $invest_url_href = home_url( '/connexion/' ) . '?source=project';
 $user_name_str = '';
@@ -39,35 +39,22 @@ if (is_user_logged_in()) {
 			$campaign_status = $campaign->campaign_status();
 			switch ($campaign_status) {
 				case ATCF_Campaign::$campaign_status_vote: ?>
-					<?php if ($campaign->time_remaining_str() != '-'): ?>
-					<?php
-					$table_name = $wpdb->prefix . "ypcf_project_votes";
-					$campaign_id=$campaign->ID;
-					$user_id = wp_get_current_user()->ID;
+					<?php if ( $WDGUser_current->has_voted_on_campaign( $campaign->ID ) ): ?>
+						<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
 
-					$hasvoted_results = $wpdb->get_results( 'SELECT id FROM '.$table_name.' WHERE post_id = '.$campaign_id.' AND user_id = '.$user_id );
-					$has_voted = false;
-					if ( !empty($hasvoted_results[0]->id) ) $has_voted = true;
-					?>
+					<?php elseif ( $campaign->time_remaining_str() != '-' ): ?>
+						<?php if ( !is_user_logged_in() ): ?>
+							<a href="<?php echo home_url( '/connexion/' ) . '?source=project'; ?>" class="button red">
+								<?php _e('&Eacute;valuer', 'yproject'); ?>
+							</a>
 
-					<?php if (!is_user_logged_in()): ?>
-						<a href="<?php echo home_url( '/connexion/' ) . '?source=project'; ?>" class="button red"
-							data-redirect="<?php echo get_permalink($page_invest->ID) . $campaign_id_param; ?>&amp;invest_start=1#invest-start">
-							<?php _e('&Eacute;valuer', 'yproject'); ?>
-						</a>
-
-					<?php elseif ($has_voted): ?>
-						<div class="disabled">
-							<?php _e('Merci pour votre &eacute;valuation !', 'yproject'); ?>
-						</div>
-
-					<?php else: ?>
-					<div>
-						<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote" data-thankyoumsg="<?php _e( "Merci pour votre &eacute;valuation !", 'yproject' ); ?>">
-							<?php _e('&Eacute;valuer', 'yproject'); ?>
-						</a>
-					</div>
-					<?php endif; ?>
+						<?php else: ?>
+							<div>
+								<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote" data-thankyoumsg="<?php _e( "Merci pour votre &eacute;valuation !", 'yproject' ); ?>">
+									<?php _e('&Eacute;valuer', 'yproject'); ?>
+								</a>
+							</div>
+						<?php endif; ?>
 
 					<?php endif; ?>
 
@@ -75,7 +62,7 @@ if (is_user_logged_in()) {
 				break;
 				case ATCF_Campaign::$campaign_status_collecte:
 				?>
-					<?php if ( $campaign->is_remaining_time() && $campaign->percent_completed( false ) < 100 ): ?>
+					<?php if ( $campaign->is_investable() ): ?>
 					<a href="<?php echo $invest_url_href; ?>" class="button red">
 						<?php _e( "Investir", 'yproject' ); ?>
 					</a>
