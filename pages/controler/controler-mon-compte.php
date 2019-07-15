@@ -120,6 +120,13 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 			$core->include_form( 'organization-details' );
 			foreach ( $organizations_list as $organization_item ) {
 				$organization_obj = new WDGOrganization( $organization_item->wpref );
+		
+				// Au cas où, vérifie si les transferts de royalties en attente ont bien été effectués
+				if ( $organization_obj->is_registered_lemonway_wallet() ) {
+					$WDGUserInvestments = new WDGUserInvestments( $organization_obj );
+					$WDGUserInvestments->try_transfer_waiting_roi_to_wallet();
+				}
+				
 				array_push( $this->current_user_organizations, $organization_obj );
 			}
 		}
@@ -139,12 +146,16 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 		// Vérifications pour niveau 2 : les documents sont vérifiés
 		if ( $this->current_user_authentication == 1 && $this->current_user->is_lemonway_registered() ) {
 			$this->current_user_authentication = 2;
+			// Au cas où, vérifie si les transferts de royalties en attente ont bien été effectués
+			$WDGUserInvestments = new WDGUserInvestments( $this->current_user );
+			$WDGUserInvestments->try_transfer_waiting_roi_to_wallet();
 		} else {
 			$this->current_user_authentication_info = ''; //
+			$this->current_user->send_kyc( FALSE );
 		}
 		
 		// Vérifications pour niveau 3 : le RIB est validé
-		if ( $this->current_user_authentication == 2 && $this->current_user->is_lemonway_registered() ) {
+		if ( $this->current_user_authentication == 2 && $this->current_user->get_lemonway_iban_status() == WDGUser::$iban_status_validated ) {
 			$this->current_user_authentication = 3;
 		} else {
 			$this->current_user_authentication_info = ''; //
