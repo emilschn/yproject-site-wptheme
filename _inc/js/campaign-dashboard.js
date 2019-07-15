@@ -1463,7 +1463,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 					.draw();
 			}
 		} );
-
+		self.initQtip();
 
 	}).fail(function(){
 		$('#ajax-contacts-load').after("<em>Le chargement du tableau a échoué</em>");
@@ -1950,15 +1950,17 @@ WDGCampaignDashboard.prototype.initCampaign = function(){
 };
 
 WDGCampaignDashboard.prototype.initQtip = function(){
-	var i=0;
 	$('.infobutton, .qtip-element').each(function () {
 		//Check if doesn't exist yet
+				console.log( $(this) );
 		if($(this).data("hasqtip")==undefined){
 			var contentTip;
 			if($(this).attr("title")!=undefined){
 				contentTip = $(this).attr("title");
 			} else {
-				contentTip = $(this).next('.tooltiptext');
+				contentTip = $(this).next('.tooltiptext').text();
+				console.log( $(this).next('.tooltiptext') );
+				console.log( contentTip );
 			}
 
 			var settings = {
@@ -1988,8 +1990,8 @@ WDGCampaignDashboard.prototype.initQtip = function(){
 			}
 
 			if (contentTip != ""){
+//				console.log( settings );
 				$(this).qtip(settings);
-				i++;
 			}
 		}
 	});
