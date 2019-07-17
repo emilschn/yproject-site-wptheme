@@ -561,7 +561,6 @@ var ProjectEditor = (function($) {
 		            'contentType': false,
 		            'processData': false
 				}).done(function(result) {
-					debugger;
 					ProjectEditor.validateInputDone(result);
 					if ( video_check ){
 						$("#project-banner-picture").remove();
