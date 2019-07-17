@@ -884,7 +884,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 /*******************************************************************************
 * Mode édition
 *******************************************************************************/
-#wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel, #wdg-edit-picture-head-next_update, #wdg-edit-video-image_update, #wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid{
+#wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel, #wdg-edit-picture-head-next_update {
 	background: #A4DBDE;
     height: 25px;
     color: #000000;
@@ -903,22 +903,18 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 }
 
 
-#wdg-edit-video-image_update, #text_url_video{
+#text_url_video{
 	width: 100%;
 	height: 44px;
 }
-
-#wdg-edit-video-image_update, #wdg-edit-picture-head-next_update{
+#wdg-edit-picture-head-next_update{
 	height: 35px;
 	text-align: center;
 }
 #wdg-edit-picture-head-next_update{
     width: 180px;
 }
-#wdg-edit-video-image_update{
-    width: 255px;
-}
-#wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid, #wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel{
+#wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel{
 	height: 37px;
 	width: 65px;
 }

@@ -436,7 +436,7 @@ var ProjectEditor = (function($) {
 			var newElement = '<form id="upload-video-form" enctype="multipart/form-data"> <input type="hidden" name="action" value="save_image_url_video" /> <input type="hidden" name="campaign_id" value="'+$("#content").data("campaignid")+'" /> <input type="text" class="url_video" name="url_video" id="text_url_video" placeholder="Saissisez l\'url de votre vidéo" value="'+url_video_link+'"> <input style="display:none;" id="wdg-edit-video-image" type="file" class="image_video_zone" name="image_video_zone"/> </form>';
 			$(".block_url_video").after(newElement);
 
-			newElement = '<input type="button" id="wdg-edit-video-image_update" value="Télécharger une image d\'aperçu ..."/>';
+			newElement = '<input type="button" id="wdg-edit-video-image_update" value="Télécharger une image d\'aperçu ..." class="button blue-pale">';
 			$(".block_url_image").after(newElement);
 			var span_image = '<span id="extra-comment-image">(Max. 2Mo ; idéalement 870px de largeur * 460px de hauteur)</span>';
 			$("#upload-video-form").after(span_image);
@@ -474,7 +474,7 @@ var ProjectEditor = (function($) {
 
 			var video_check = false; 
 			var video_number = '';
-			$(".url_video").change(function(){
+			$( '#text_url_video' ).change(function(){
 				$("#apercu_video").remove();
 				var youtube_id = false;
 				var vimeo_id = '';
@@ -507,26 +507,22 @@ var ProjectEditor = (function($) {
 					$("#text_url_video").addClass("input_text_good");
 					
 					
+				} else if ( $("#text_url_video").val().indexOf( 'dailymotion' ) > -1 ){
+					var video_preview = "<div id='apercu_video'><iframe width='290' height='100%' src='"+$("#text_url_video").val()+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
+					$(".block_overview_video").after(video_preview);
+					video_check = true;
+					$("#url_video_link").val($("#text_url_video").val());
+					$("#text_url_video").addClass("input_text_good");
+					
 				} else {
-					video_number = $("#text_url_video").val().split('dailymotion')[1];
-					if(video_number){
-						var video_preview = "<div id='apercu_video'><iframe width='290' height='100%' src='"+$("#text_url_video").val()+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
-						$(".block_overview_video").after(video_preview);
-						video_check = true;
-						$("#url_video_link").val($("#text_url_video").val());
-						$("#text_url_video").addClass("input_text_good");
-					}else{
-						$("#text_url_video").addClass("input_text_error");
-						$("#text_url_video").val(url_video_link);
-						var video_preview = "<div id='apercu_video' ><iframe width='290' height='100%' src='"+url_video_link+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
-						$(".block_overview_video").after(video_preview);
-					}
+					var video_preview = "<div id='apercu_video'></div>";
+					$(".block_overview_video").after(video_preview);
 				}
 			});
 
-			newElement = '<input type="submit" id="wdg-edit-video-zone-next_valid" value="Valider"/>';
+			newElement = '<input type="button" id="wdg-edit-video-zone-next_valid" value="Valider" class="button blue-pale">';
 			$(".block_boutons").after(newElement);
-			newElement = '<input type="submit" id="wdg-edit-video-zone-next_cancel" value="Annuler"/>';
+			newElement = '<input type="button" id="wdg-edit-video-zone-next_cancel" value="Annuler" class="button blue-pale">';
 			$(".block_boutons").after(newElement);
 
 			$("#wdg-edit-video-zone-next_cancel").click(function() {
@@ -565,6 +561,7 @@ var ProjectEditor = (function($) {
 		            'contentType': false,
 		            'processData': false
 				}).done(function(result) {
+					debugger;
 					ProjectEditor.validateInputDone(result);
 					if ( video_check ){
 						$("#project-banner-picture").remove();
