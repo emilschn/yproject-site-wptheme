@@ -679,6 +679,9 @@ ul.project-list a.needs-authentication:after {
 	font-weight: bold;
 	text-transform: none;
 }
+#submenu-user span#submenu-user-hello span {
+	text-transform: none;
+}
 
 #submenu-user div#button-logout {
 	bottom: 0px;
