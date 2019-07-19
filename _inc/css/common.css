@@ -335,7 +335,7 @@ form span.file-description {
     font-style: italic;
     min-height: 25px;
 }
-.db-form .feedback_save span{
+.db-form .feedback_save span, .feedback_save span {
     display:none;
 }
 
