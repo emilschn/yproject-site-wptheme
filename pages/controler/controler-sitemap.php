@@ -171,7 +171,6 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 //			'/solutions/expert-comptable/'					=> '0.7',
 			'/solutions/start-up/'							=> '0.7',
 			// 0.6
-			'/guide/'										=> '0.6',
 			'/a-propos/statistiques/'						=> '0.6',
 			'/a-propos/vision/'								=> '0.6',
 			'/financement/conditions/'						=> '0.6',
@@ -179,6 +178,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/financement/entreprises/start-up/love-money/'	=> '0.6',
 			'/financement/label-croissance-verte/'			=> '0.6',
 			'/financement/simulateur-taux-de-royalties/'	=> '0.6',
+//			'/guide/'										=> '0.6',
 			'/investissement/comparatif-capital-pret-royalties/'		=> '0.6',
 			'/investissement/impact-investing/evaluation-des-impacts/'	=> '0.6',
 			'/solutions/'									=> '0.6',
@@ -200,7 +200,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			// 0.4
 			'/financement/offres/'									=> '0.4',
 //			'/financement/offres/amorcage-crowdfunding/'			=> '0.4',
-			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
+//			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
 			// 0.3
 			'/a-propos/espace-presse/'			=> '0.3',
 			'/a-propos/partenaires/'			=> '0.3',
