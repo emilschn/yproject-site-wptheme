@@ -995,5 +995,5 @@ var ProjectEditor = (function($) {
 })(jQuery);
 
 jQuery(document).ready( function($) {
-    ProjectEditor.init();
+	ProjectEditor.init();
 });
