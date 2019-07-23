@@ -1,11 +1,9 @@
 <?php
 global $campaign, $language_list;
-$page_dashboard = get_page_by_path('tableau-de-bord');	// Tableau de bord
-$page_wallet = get_page_by_path('gestion-financiere');	// Gestion financière
-$campaign_id_param = '?campaign_id=' . $campaign->ID;
+$page_dashboard = home_url( '/tableau-de-bord/?campaign_id=' . $campaign->ID );	// Tableau de bord
 ?>
-<div class="project-admin" data-link-project-settings="<?php echo get_permalink(get_page_by_path('parametres-projet')->ID) . $campaign_id_param; ?>">
-	<a href="<?php echo get_permalink($page_dashboard->ID) . $campaign_id_param; ?>" class="btn-dashboard"><?php _e('Tableau de bord', 'yproject'); ?></a>
+<div class="project-admin">
+	<a href="<?php echo $page_dashboard; ?>" class="btn-dashboard"><?php _e('Tableau de bord', 'yproject'); ?></a>
 	<div id="wdg-edit-project" class="btn-edit"></div>
 	<form id="wdg-edit-project-add-lang" method="POST" action="<?php echo get_permalink($campaign->ID); ?>">
 		<span>+ <?php _e('Nouvelle langue', 'yproject'); ?></span>

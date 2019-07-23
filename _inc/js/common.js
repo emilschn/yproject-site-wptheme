@@ -568,6 +568,11 @@ var WDGNavFunctions = (function($) {
 						$( 'body' ).append( '<script type="text/javascript" src="' +infoDecoded[ 'scripts' ][ i ]+ '"></script>' );
 					}
 					
+					if ( infoDecoded[ 'context' ] != undefined && infoDecoded[ 'context' ][ 'dashboard_url' ] != undefined ) {
+						$( '#content' ).append( '<div class="project-admin"></div>' );
+						$( '#content .project-admin' ).append( '<a href="' +infoDecoded[ 'context' ][ 'dashboard_url' ]+ '" class="btn-dashboard">Tableau de bord</a>' );
+						$( '#content .project-admin' ).append( '<div id="wdg-edit-project" class="btn-edit"></div>' );
+					}
 				}
 			} );
 		}

@@ -703,11 +703,6 @@ var ProjectEditor = (function($) {
              	}
 			});
 		},
-		
-		//Redirige vers la page Paramètres
-		redirectParams: function(property) {
-			window.location.href = $(".project-admin").data("link-project-settings") + "#" + property;
-		},
                 
 		//Redirections pour l'édition de l'organisation
 		redirectOrganization: function(property) {
