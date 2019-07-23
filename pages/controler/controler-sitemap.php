@@ -126,12 +126,18 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	
 	private function rebuild_cache() {
 		
-		$WDG_File_Cacher = new WDG_File_Cacher();
-		do_action('wdg_delete_cache', array(
+		$params = array(
 			'home-projects',
 			'projectlist-projects-current',
 			'projectlist-projects-funded'
-		));
+		);
+		
+		$WDG_Cache_Plugin = WDG_Cache_Plugin::current();
+		$WDG_Cache_Plugin->delete_cache( $params );
+		
+		$WDG_File_Cacher = WDG_File_Cacher::current();
+		$WDG_File_Cacher->delete( 'home' );
+		$WDG_File_Cacher->delete( 'les-projets' );
 		$WDG_File_Cacher->rebuild_cache();
 
 	}
