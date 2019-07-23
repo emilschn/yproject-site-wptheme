@@ -1,7 +1,3 @@
-jQuery(document).ready( function($) {
-    ProjectEditor.init();
-});
-
 var ProjectEditor = (function($) {
 	return {
 		elements: [],
@@ -1002,3 +998,7 @@ var ProjectEditor = (function($) {
 	};
     
 })(jQuery);
+
+jQuery(document).ready( function($) {
+    ProjectEditor.init();
+});
