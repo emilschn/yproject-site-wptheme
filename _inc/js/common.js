@@ -390,6 +390,9 @@ var WDGNavFunctions = (function($) {
 					}
 				}
 			});
+			if ( $( '#content' ).length > 0 && $( '#content' ).data( 'campaignid' ) !== undefined ) {
+				WDGNavFunctions.checkUserConnection();
+			}
 			
 			// Navbar : bouton recherche
 			$('#btn-search, #btn-burger').click(function(e){
@@ -523,11 +526,16 @@ var WDGNavFunctions = (function($) {
 		},
 		
 		checkUserConnection: function() {
+			var strPageInfo = '';
+			if ( $( '#content' ).length > 0 && $( '#content' ).data( 'campaignid' ) !== undefined ) {
+				strPageInfo = $( '#content' ).data( 'campaignid' );
+			}
 			$.ajax({
 				'type': "POST",
 				'url': ajax_object.ajax_url,
 				'data': {
-					'action': 'get_current_user_info'
+					'action': 'get_current_user_info',
+					'pageinfo': strPageInfo
 				}
 			}).done( function( result ){
 				if ( result === '0' ) {
@@ -554,6 +562,11 @@ var WDGNavFunctions = (function($) {
 					}
 					$( '#submenu-user.not-connected .menu-connected #button-logout a' ).attr( 'href', infoDecoded[ 'userinfos' ][ 'logout_url' ] );
 					$( '#submenu-user.not-connected .menu-connected' ).show();
+					
+					var lengthScripts = infoDecoded[ 'scripts' ].length;
+					for ( var i = 0; i < lengthScripts; i++ ) {
+						$( 'body' ).append( '<script type="text/javascript" src="' +infoDecoded[ 'scripts' ][ i ]+ '"></script>' );
+					}
 					
 				}
 			} );
