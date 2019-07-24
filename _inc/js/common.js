@@ -527,7 +527,7 @@ var WDGNavFunctions = (function($) {
 		
 		checkUserConnection: function() {
 			var strPageInfo = '';
-			if ( $( '#content' ).length > 0 && $( '#content' ).data( 'campaignid' ) !== undefined ) {
+			if ( $( '#content' ).length > 0 && $( '#content' ).data( 'campaignstatus' ) !== undefined && $( '#content' ).data( 'campaignstatus' ) === 'funded' ) {
 				strPageInfo = $( '#content' ).data( 'campaignid' );
 			}
 			$.ajax({
