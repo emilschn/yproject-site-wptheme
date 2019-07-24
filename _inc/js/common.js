@@ -570,13 +570,15 @@ var WDGNavFunctions = (function($) {
 					$( '#submenu-user.not-connected .menu-connected #button-logout a' ).attr( 'href', infoDecoded[ 'userinfos' ][ 'logout_url' ] );
 					$( '#submenu-user.not-connected .menu-connected' ).show();
 					
-					var lengthScripts = infoDecoded[ 'scripts' ].length;
-					for ( var i = 0; i < lengthScripts; i++ ) {
-						$( 'body' ).append( '<script type="text/javascript" src="' +infoDecoded[ 'scripts' ][ i ]+ '"></script>' );
-					}
-					
 					if ( infoDecoded[ 'context' ] != undefined && infoDecoded[ 'context' ][ 'dashboard_url' ] != undefined ) {
 						if ( $( '#content .project-admin' ).length == 0 ) {
+							// Fix temporaire (hum...) : ne devrait pas être derrière cette condition
+							// Mais correct tant que les scripts ne concernent que les pages projets terminés
+							var lengthScripts = infoDecoded[ 'scripts' ].length;
+							for ( var i = 0; i < lengthScripts; i++ ) {
+								$( 'body' ).append( '<script type="text/javascript" src="' +infoDecoded[ 'scripts' ][ i ]+ '"></script>' );
+							}
+
 							$( '#content' ).append( '<div class="project-admin"></div>' );
 							$( '#content .project-admin' ).append( '<a href="' +infoDecoded[ 'context' ][ 'dashboard_url' ]+ '" class="btn-dashboard">Tableau de bord</a>' );
 							$( '#content .project-admin' ).append( '<div id="wdg-edit-project" class="btn-edit"></div>' );

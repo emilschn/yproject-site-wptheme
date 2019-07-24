@@ -8,26 +8,33 @@ var ProjectEditor = (function($) {
 		
 		//Initialisation : création du bouton en haut de page permettant de switcher d'un mode à l'autre
 		init: function() {
-			$("#wdg-edit-project").show();
-			$("#wdg-edit-project").click(function() {
-				ProjectEditor.clickEditProject(this);
-			});
-			$("#wdg-edit-project-add-lang").click(function() {
-				ProjectEditor.clickShowAddLang();
-			});
-			$("#wdg-edit-project-add-lang button.add-button").click(function() {
-				ProjectEditor.clickAddLang();
-			});
-			
-			window.addEventListener( 'beforeunload', function (e) {
-				if ( WDGProjectPageFunctions.isEditing !== '' ) {
-					var confirmationMessage = "Vous avez réservé une des parties du projet pour l'éditer, prenez le temps de la sauvegarder ou d'annuler la réservation. Êtes vous sûr de vouloir quitter ?";
-					(e || window.event).returnValue = confirmationMessage; //Gecko + IE
-					return confirmationMessage; //Webkit, Safari, Chrome
-				}
-			} );
-			
-			ProjectEditor.analyseImageFiles();
+			console.log( 'ProjectEditor.init' );
+			if ( !ProjectEditor.isInit ) {
+				$("#wdg-edit-project").show();
+				$("#wdg-edit-project").click(function() {
+					ProjectEditor.clickEditProject(this);
+				});
+				$("#wdg-edit-project-add-lang").click(function() {
+					ProjectEditor.clickShowAddLang();
+				});
+				$("#wdg-edit-project-add-lang button.add-button").click(function() {
+					ProjectEditor.clickAddLang();
+				});
+
+				window.addEventListener( 'beforeunload', function (e) {
+					if ( WDGProjectPageFunctions.isEditing !== '' ) {
+						var confirmationMessage = "Vous avez réservé une des parties du projet pour l'éditer, prenez le temps de la sauvegarder ou d'annuler la réservation. Êtes vous sûr de vouloir quitter ?";
+						(e || window.event).returnValue = confirmationMessage; //Gecko + IE
+						return confirmationMessage; //Webkit, Safari, Chrome
+					}
+				} );
+
+				ProjectEditor.analyseImageFiles();
+				ProjectEditor.initElements();
+				ProjectEditor.initEdition();
+				ProjectEditor.stopEdition();
+				ProjectEditor.isInit = true;
+			}
 		},
 		
 		//Permet de switcher du texte Nouvelle langue vers le sélecteur de langue
@@ -69,7 +76,7 @@ var ProjectEditor = (function($) {
 	    
 		//Démarre l'édition de la page projet
 		initEdition: function() {
-			if (!ProjectEditor.isInit) { ProjectEditor.initElements(); }
+			console.log( 'ProjectEditor.initEdition' );
 			for (elementKey in ProjectEditor.elements) {
 				ProjectEditor.initEditable(elementKey);
 				if (!ProjectEditor.isInit) { ProjectEditor.addEditButton(elementKey); }
@@ -77,7 +84,6 @@ var ProjectEditor = (function($) {
 			}
 			WDGProjectPageFunctions.refreshEditable();
 			if (!ProjectEditor.isInit) { ProjectEditor.initClick(); }
-			ProjectEditor.isInit = true;
 		},
 		
 		//Arrête l'édition de la page projet
