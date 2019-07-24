@@ -363,6 +363,8 @@ YPUIFunctions = (function($) {
 var WDGNavFunctions = (function($) {
 	return {
 
+		isConnectionChecked: false,
+		
 		init: function() {
 			
 			$("nav#main a.lines").click(function(e) {
@@ -526,6 +528,11 @@ var WDGNavFunctions = (function($) {
 		},
 		
 		checkUserConnection: function() {
+			if ( WDGNavFunctions.isConnectionChecked ) {
+				return;
+			}
+			WDGNavFunctions.isConnectionChecked = true;
+			
 			var strPageInfo = '';
 			if ( $( '#content' ).length > 0 && $( '#content' ).data( 'campaignstatus' ) !== undefined && $( '#content' ).data( 'campaignstatus' ) === 'funded' ) {
 				strPageInfo = $( '#content' ).data( 'campaignid' );
