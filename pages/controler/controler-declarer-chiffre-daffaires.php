@@ -17,6 +17,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	private $can_access;
 	private $summary_data;
 	private $display_payment_error;
+	private $has_added_declaration;
 	
 	public function __construct() {
 		parent::__construct();
@@ -25,6 +26,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		
 		$this->can_access = TRUE;
 		$this->display_payment_error = FALSE;
+		$this->has_added_declaration = FALSE;
 		$this->init_current_campaign();
 		$this->init_current_declaration();
 		if ( !$this->can_access ) {
@@ -193,89 +195,103 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 /******************************************************************************/
 	private function init_form() {
 		ypcf_debug_log( 'WDG_Page_Controler_DeclarationInput::init_form' );
-		// Récupération d'un éventuel post de formulaire
-		$action_posted = filter_input( INPUT_POST, 'action' );
 		
-		if ( $this->current_step == WDGROIDeclaration::$status_declaration ) {
-			$core = ATCF_CrowdFunding::instance();
-			$core->include_form( 'declaration-input' );
-			$this->form = new WDG_Form_Declaration_Input( $this->current_campaign->ID, $this->current_declaration->id );
-			if ( $action_posted == WDG_Form_Declaration_Input::$name ) {
-				$result_form = $this->form->postForm();
-				if ( $result_form ) {
-					// La déclaration a été validée, le statut a changé, il faut recharger
-					$this->current_declaration = new WDGROIDeclaration( $this->current_declaration->id );
-					$this->current_step = $this->current_declaration->get_status();
+		$input_close_declarations = filter_input( INPUT_POST, 'close_declarations' );
+		if ( !empty( $input_close_declarations ) ) {
+			
+			$this->add_adjustment_and_redirect();
+			
+		} else {
+		
+			// Récupération d'un éventuel post de formulaire
+			$action_posted = filter_input( INPUT_POST, 'action' );
+
+			if ( $this->current_step == WDGROIDeclaration::$status_declaration ) {
+				$core = ATCF_CrowdFunding::instance();
+				$core->include_form( 'declaration-input' );
+				$this->form = new WDG_Form_Declaration_Input( $this->current_campaign->ID, $this->current_declaration->id );
+				if ( $action_posted == WDG_Form_Declaration_Input::$name ) {
+					$result_form = $this->form->postForm();
+					if ( $result_form ) {
+						// La déclaration a été validée, le statut a changé, il faut recharger
+						$this->current_declaration = new WDGROIDeclaration( $this->current_declaration->id );
+						$this->current_step = $this->current_declaration->get_status();
+					}
 				}
 			}
-		}
-		
-		if ( $this->current_step == WDGROIDeclaration::$status_payment ) {
-			$this->init_summary_data();
-			$has_tried_payment = FALSE;
-			switch( $action_posted ) {
-				case 'gobacktodeclaration':
-					$this->current_declaration->status = WDGROIDeclaration::$status_declaration;
-					$this->current_step = $this->current_declaration->get_status();
-					$core = ATCF_CrowdFunding::instance();
-					$core->include_form( 'declaration-input' );
-					$this->form = new WDG_Form_Declaration_Input( $this->current_campaign->ID, $this->current_declaration->id );
-					break;
-				
-				case 'changepayment':
-					$this->current_step = WDGROIDeclaration::$status_payment . '2';
-					break;
-				
-				case 'gotopayment':
-					$this->current_step = WDGROIDeclaration::$status_payment . '2';
-					$has_tried_payment = TRUE;
-					if ( $this->is_card_shortcut_displayed() ) {
-						// Démarrer paiement par carte
-						$this->display_payment_error = !$this->proceed_payment_card();
-						
-					} else {
-						// Procéder au prélèvement
-						$this->display_payment_error = !$this->proceed_payment_mandate();
-					}
-					break;
-					
-				case 'proceedpayment':
-					$this->current_step = WDGROIDeclaration::$status_payment . '2';
-					$has_tried_payment = TRUE;
-					// Démarrer paiement par carte
-					$input_meanofpayment = filter_input( INPUT_POST, 'meanofpayment' );
-					switch ( $input_meanofpayment ) {
-						case 'card':
+
+			if ( $this->current_step == WDGROIDeclaration::$status_payment ) {
+				$this->init_summary_data();
+				$has_tried_payment = FALSE;
+				switch( $action_posted ) {
+					case 'gobacktodeclaration':
+						$this->current_declaration->status = WDGROIDeclaration::$status_declaration;
+						$this->current_step = $this->current_declaration->get_status();
+						$core = ATCF_CrowdFunding::instance();
+						$core->include_form( 'declaration-input' );
+						$this->form = new WDG_Form_Declaration_Input( $this->current_campaign->ID, $this->current_declaration->id );
+						break;
+
+					case 'changepayment':
+						$this->current_step = WDGROIDeclaration::$status_payment . '2';
+						break;
+
+					case 'gotopayment':
+						$this->current_step = WDGROIDeclaration::$status_payment . '2';
+						$has_tried_payment = TRUE;
+						if ( $this->is_card_shortcut_displayed() ) {
+							// Démarrer paiement par carte
 							$this->display_payment_error = !$this->proceed_payment_card();
-							break;
-						case 'mandate':
+
+						} else {
+							// Procéder au prélèvement
 							$this->display_payment_error = !$this->proceed_payment_mandate();
-							break;
-						case 'wire':
-							$this->proceed_payment_wire();
-							break;
-					}
-					break;
-				
-				default:
-					$input_cardreturn = filter_input( INPUT_GET, 'cardreturn' );
-					$input_response_wkToken = filter_input( INPUT_GET, 'response_wkToken' );
-					if ( $input_cardreturn == '1' && !empty( $input_response_wkToken ) ) {
-						$return_lemonway_card = WDGFormProjects::return_lemonway_card();
-						if ( $return_lemonway_card == TRUE ) {
-							$this->current_step = WDGROIDeclaration::$status_transfer;
-							
-						} elseif ( $return_lemonway_card !== FALSE ) {
-							$has_tried_payment = TRUE;
-							$this->display_payment_error = TRUE;
 						}
-					}
-					break;
+						break;
+
+					case 'proceedpayment':
+						$this->current_step = WDGROIDeclaration::$status_payment . '2';
+						$has_tried_payment = TRUE;
+						// Démarrer paiement par carte
+						$input_meanofpayment = filter_input( INPUT_POST, 'meanofpayment' );
+						switch ( $input_meanofpayment ) {
+							case 'card':
+								$this->display_payment_error = !$this->proceed_payment_card();
+								break;
+							case 'mandate':
+								$this->display_payment_error = !$this->proceed_payment_mandate();
+								break;
+							case 'wire':
+								$this->proceed_payment_wire();
+								break;
+						}
+						break;
+
+					default:
+						$input_cardreturn = filter_input( INPUT_GET, 'cardreturn' );
+						$input_response_wkToken = filter_input( INPUT_GET, 'response_wkToken' );
+						if ( $input_cardreturn == '1' && !empty( $input_response_wkToken ) ) {
+							$return_lemonway_card = WDGFormProjects::return_lemonway_card();
+							if ( $return_lemonway_card == TRUE ) {
+								$this->current_step = WDGROIDeclaration::$status_transfer;
+
+							} elseif ( $return_lemonway_card !== FALSE ) {
+								$has_tried_payment = TRUE;
+								$this->display_payment_error = TRUE;
+							}
+						}
+						break;
+				}
+
+				if ( $has_tried_payment && !$this->display_payment_error ) {
+					$this->current_step = $this->current_declaration->get_status();
+				}
+
+				if ( $this->current_step == WDGROIDeclaration::$status_waiting_transfer || $this->current_step == WDGROIDeclaration::$status_transfer ) {
+					$this->has_added_declaration = $this->check_add_declaration();
+				}
 			}
 			
-			if ( $has_tried_payment && !$this->display_payment_error ) {
-				$this->current_step = $this->current_declaration->get_status();
-			}
 		}
 		
 		ypcf_debug_log( 'WDG_Page_Controler_DeclarationInput::init_form > ' .$this->current_step );
@@ -292,6 +308,12 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	public function get_form_action() {
 		$url = home_url( '/declarer-chiffre-daffaires/' );
 		$url .= '?campaign_id=' .$this->current_campaign->ID. '&declaration_id=' .$this->current_declaration->id;
+		return $url;
+	}
+	
+	public function get_form_action_to_added_declaration() {
+		$url = home_url( '/declarer-chiffre-daffaires/' );
+		$url .= '?campaign_id=' .$this->current_campaign->ID. '&declaration_id=' .$this->current_declaration->id. '&close_declarations=1';
 		return $url;
 	}
 	
@@ -386,6 +408,81 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$this->current_declaration->save();
 					
 		NotificationsEmails::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
+	}
+	
+	
+/******************************************************************************/
+// DECLARATIONS ULTERIEURES
+/******************************************************************************/
+	/**
+	 * Vérifie si nécessaire d'ajouter une déclaration complémentaire
+	 */
+	private function check_add_declaration() {
+		$add_declaration = TRUE;
+		// On ajoute une déclaration que si il n'y en a plus d'autres
+		$existing_roi_declarations = $this->current_campaign->get_roi_declarations();
+		foreach ( $existing_roi_declarations as $declaration_object ) {
+			if ( $declaration_object[ 'status' ] == WDGROIDeclaration::$status_declaration ) {
+				$add_declaration = FALSE;
+				break;
+			} else {
+				$amount_transferred += $declaration_object[ 'total_roi' ];
+			}
+		}
+		
+		// On ajoute une déclaration que si le montant minimum de versement n'a pas été atteint
+		if ( $add_declaration ) {
+			$amount_minimum_royalties = $this->current_campaign->current_amount( FALSE ) * $this->current_campaign->minimum_profit();
+			if ( $amount_transferred >= $amount_minimum_royalties ) {
+				$add_declaration = FALSE;
+			}
+		}
+		
+		// Ajoute une seule déclaration dans le rythme habituel
+		if ( $add_declaration ) {
+			$month_count = 12 / $this->current_campaign->get_declararations_count_per_year();
+			$declarations_count = 1;
+			$this->current_campaigns->generate_missing_declarations( $month_count, $declarations_count );
+		}
+		
+		return $add_declaration;
+	}
+	
+	/**
+	 * Retourne vrai si une déclaration a été ajoutée
+	 * @return boolean
+	 */
+	public function can_display_has_added_declaration() {
+		return $this->has_added_declaration;
+	}
+	
+	private function add_adjustment_and_redirect() {
+		// On récupère la dernière déclaration
+		$existing_roi_declarations = $this->current_campaign->get_roi_declarations();
+		$count_existing_roi_declarations = count( $existing_roi_declarations );
+		$last_declaration_item = $existing_roi_declarations[ $count_existing_roi_declarations - 1 ];
+		
+		// Calcul du montant de l'ajustement
+		$amount_transferred = 0;
+		foreach ( $existing_roi_declarations as $declaration_object ) {
+			if ( $declaration_object[ 'status' ] != WDGROIDeclaration::$status_declaration ) {
+				$amount_transferred += $declaration_object[ 'total_roi' ];
+			}
+		}
+		$amount_minimum_royalties = $this->current_campaign->current_amount( FALSE ) * $this->current_campaign->minimum_profit();
+		
+		// On lui ajoute un ajustement correspondant
+		$WDGAdjustment = new WDGAdjustment();
+		$WDGAdjustment->id_api_campaign = $this->current_campaign->get_api_id();
+		$WDGAdjustment->id_declaration = $last_declaration_item[ 'id' ];
+		$WDGAdjustment->amount = $amount_minimum_royalties - $amount_transferred;
+		$WDGAdjustment->type = WDGAdjustment::$type_fixed_amount;
+		$WDGAdjustment->create();
+		
+		// On redirige vers la déclaration
+		$url = home_url( '/declarer-chiffre-daffaires/' );
+		$url .= '?campaign_id=' .$this->current_campaign->ID. '&declaration_id=' .$last_declaration_item[ 'id' ];
+		wp_redirect( $url );
 	}
 	
 }
