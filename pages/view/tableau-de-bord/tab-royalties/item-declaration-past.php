@@ -108,7 +108,7 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 		<table>
 			<tr class="strong">
 				<td><?php _e( "Total de royalties vers&eacute;es :", 'yproject' ); ?></td>
-				<td><?php echo UIHelpers::format_number( $declaration->get_amount_royalties() ); ?> &euro;</td>
+				<td><?php echo UIHelpers::format_number( $declaration->get_amount_with_adjustment() ); ?> &euro;</td>
 			</tr>
 			<?php if ( $declaration->get_commission_to_pay() > 0 ): ?>
 				<tr>
