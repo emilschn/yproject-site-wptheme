@@ -419,7 +419,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	 */
 	private function check_add_declaration() {
 		$add_declaration = TRUE;
-		// On ajoute une déclaration que si il n'y en a plus d'autres
+		// On n'ajoute une déclaration que si il n'y en a plus d'autres
 		$existing_roi_declarations = $this->current_campaign->get_roi_declarations();
 		foreach ( $existing_roi_declarations as $declaration_object ) {
 			if ( $declaration_object[ 'status' ] == WDGROIDeclaration::$status_declaration ) {
@@ -430,16 +430,26 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			}
 		}
 		
-		// On ajoute une déclaration que si le montant minimum de versement n'a pas été atteint
-		if ( $add_declaration ) {
+		// On n'ajoute une déclaration que si le montant minimum de versement n'a pas été atteint
+		if ( $add_declaration && $this->current_campaign->funding_duration() > 0 ) {
 			$amount_minimum_royalties = $this->current_campaign->current_amount( FALSE ) * $this->current_campaign->minimum_profit();
 			if ( $amount_transferred >= $amount_minimum_royalties ) {
 				$add_declaration = FALSE;
 			}
 		}
 		
-		// Ajoute une seule déclaration dans le rythme habituel
 		if ( $add_declaration ) {
+			// Est-il nécessaire d'envoyer une notification de prolongation au porteur et aux investisseurs ?
+			// Si la durée du financement n'est pas indéterminée
+			if ( $this->current_campaign->funding_duration() > 0 ) {
+				// Si le nombre actuel de déclaration est égal au nombre de déclarations par année * le nombre d'années
+				if ( count( $existing_roi_declarations ) == $this->current_campaign->funding_duration() * $this->current_campaign->get_declararations_count_per_year() ) {
+					// Alors c'est la première fois qu'on va ajouter une déclaration, donc on notifie tout le monde
+					WDGQueue::add_contract_extension_notifications( $this->current_campaign->ID );
+				}
+			}
+				
+			// Ajoute une seule déclaration dans le rythme habituel
 			$month_count = 12 / $this->current_campaign->get_declararations_count_per_year();
 			$declarations_count = 1;
 			$this->current_campaigns->generate_missing_declarations( $month_count, $declarations_count );
