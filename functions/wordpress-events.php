@@ -283,7 +283,9 @@ class WDG_WordPress_Events {
 				wp_enqueue_style( 'campaign-css', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/campaign.min.css', null, ASSETS_VERSION, 'all');
 			}
 			wp_enqueue_script( 'wdg-campaign', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION);
-			if ($is_campaign_page && $can_modify) { wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION); }
+			if ( $is_campaign_page && $can_modify && !is_archive() ) {
+				wp_enqueue_script( 'wdg-project-editor', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-project-editor.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION );
+			}
 		}
 		
 		// Styles et scripts liés aux pages d'investissements

@@ -648,7 +648,6 @@ var WDGLightboxFunctions = (function($) {
 					$("#wdg-lightbox-newproject #connect-form").hide();
 					$("#wdg-lightbox-newproject #newproject-register-user").show();
 					var action = $("#wdg-lightbox-newproject #newproject-register-user form").attr("action");
-					console.log(action);
 					action = action.split("#register").join("#newproject");
 					$("#wdg-lightbox-newproject #newproject-register-user form").attr("action", action);
 				});

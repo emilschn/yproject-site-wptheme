@@ -8,7 +8,6 @@ var ProjectEditor = (function($) {
 		
 		//Initialisation : création du bouton en haut de page permettant de switcher d'un mode à l'autre
 		init: function() {
-			console.log( 'ProjectEditor.init' );
 			if ( !ProjectEditor.isInit ) {
 				$("#wdg-edit-project").show();
 				$("#wdg-edit-project").click(function() {
@@ -76,7 +75,6 @@ var ProjectEditor = (function($) {
 	    
 		//Démarre l'édition de la page projet
 		initEdition: function() {
-			console.log( 'ProjectEditor.initEdition' );
 			for (elementKey in ProjectEditor.elements) {
 				ProjectEditor.initEditable(elementKey);
 				if (!ProjectEditor.isInit) { ProjectEditor.addEditButton(elementKey); }
