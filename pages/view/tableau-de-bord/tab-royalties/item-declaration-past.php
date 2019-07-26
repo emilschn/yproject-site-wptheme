@@ -158,7 +158,7 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 		<?php _e( "Vous retrouverez le d&eacute;tail des versements par personne dans le justificatif." ); ?>
 		<br><br>
 		
-		<?php if ( $declaration->get_turnover_total() > 0 ): ?>
+		<?php if ( $declaration->get_amount_with_adjustment() > 0 ): ?>
 			<?php $declaration->make_payment_certificate(); ?>
 			<a href="<?php echo $declaration->get_payment_certificate_url(); ?>" target="_blank" class="button blue-pale" download="justificatif-<?php echo $declaration->date_due; ?>"><?php _e( "T&eacute;l&eacute;charger le justificatif" ); ?></a>
 			<br><br>
