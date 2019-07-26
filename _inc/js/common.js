@@ -9,19 +9,32 @@ JSHelpers = ( function( $ ) {
 			return decodeURIComponent( ( str + '' ).replace( /\+/g, '%20' ) );
 		},
 		
-		formatNumber: function( nInput, sSuffix ) {
-			nInput = Math.round( nInput * 100 ) / 100;
-			var buffer = nInput.toString();
-			// Gestion milliers
-			if ( nInput > 1000 ) {
-				var nThousands = Math.floor( nInput / 1000 );
-				buffer = nThousands + ' ';
-				var nRest = nInput - nThousands * 1000;
-				var sPad = "000";
-				buffer += sPad.substring( 0, sPad.length - nRest.toString().length ) + nRest;
+		formatTextToNumber: function( sInput ) {
+			var buffer = Number( sInput.split( ',' ).join( '.' ).split( ' ' ).join( '' ) );
+			if ( isNaN( buffer ) ) {
+				buffer = 0;
 			}
-			buffer = buffer.split( '.' ).join( ',' );
-			buffer += ' ' + sSuffix;
+			return buffer;
+		},
+		
+		formatNumber: function( nInput, sSuffix ) {
+			if ( nInput === parseInt( nInput, 10 ) ) {
+				nInput = nInput.toFixed( 2 );
+			}
+			var sInput = nInput.toString();
+			sInput = sInput.replace( /\d(?=(\d{3})+\.)/g, '$& ' );
+			sInput = sInput.split( '.' ).join( ',' );
+			
+			var aCutDecimals = sInput.split( ',' );
+			if ( aCutDecimals[ 1 ] === '00' ) {
+				sInput = aCutDecimals[ 0 ];
+			}
+			
+			var buffer = sInput;
+			if ( sSuffix !== '' ) {
+				buffer += ' ' + sSuffix;
+			}
+			
 			return buffer;
 		}
 	};
@@ -833,11 +846,15 @@ var WDGFormsFunctions = (function($) {
 		},
 		
 		initTextInput: function() {
+			$( 'input.format-number' ).each( function() {
+				var sInput = $( this ).val();
+				var sInputFormatted = JSHelpers.formatNumber( JSHelpers.formatTextToNumber( sInput ), '' );
+				$( this ).val( sInputFormatted );
+			} );
 			$( 'input.format-number' ).change( function() {
 				var sInput = $( this ).val();
-				sInput = sInput.split( ' ' ).join( '' );
-				sInput = sInput.split( ',' ).join( '.' );
-				$( this ).val( sInput );
+				var sInputFormatted = JSHelpers.formatNumber( JSHelpers.formatTextToNumber( sInput ), '' );
+				$( this ).val( sInputFormatted );
 			} );
 		},
 		

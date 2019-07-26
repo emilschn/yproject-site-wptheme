@@ -9,7 +9,7 @@ $fields_address = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_
 
 <h2><?php _e( "Informations de", 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
 
-<form method="POST" class="db-form form-register v3 full" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_details' ); ?>">
+<form method="POST" class="db-form form-register v3 full" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_details' ); ?>" novalidate>
 		
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>

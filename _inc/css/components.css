@@ -831,7 +831,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 /*******************************************************************************
 * FORMULAIRES V3
 *******************************************************************************/
-body input[type=text], body input[type=email], body select {
+body input[type=text], body input[type=number], body input[type=email], body select {
 	font-size: 12pt;
 }
 
@@ -919,7 +919,7 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3 .field-container.field-type-check {
 	display: inline-block;
 }
-.db-form.v3 .field-container input[type=text], .db-form.v3 .field-container input[type=password], .db-form.v3 .field-container input[type=email], .db-form.v3 .field-container input[type=file] {
+.db-form.v3 .field-container input[type=text], .db-form.v3 .field-container input[type=password], .db-form.v3 .field-container input[type=number], .db-form.v3 .field-container input[type=email], .db-form.v3 .field-container input[type=file] {
 	width: 260px;
 	height: 30px;
 	border: none;
@@ -927,7 +927,7 @@ body input[type=text], body input[type=email], body select {
 .db-form.v3.bg-white .field-container input, .db-form.v3.bg-white .field-container textarea {
 	background: #E1E3E2;
 }
-.db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=email] {
+.db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=number], .db-form.v3.full .field-container input[type=email] {
 	width: 96%;
     width: -webkit-calc(100% - 16px);
     width: -moz-calc(100% - 16px);
@@ -938,6 +938,11 @@ body input[type=text], body input[type=email], body select {
 }
 .db-form.v3 .field-container input[type=text].adddatepicker {
 	cursor: pointer;
+}
+.db-form.v3 .field-container input[type=text]:invalid {
+	border: none;
+	box-shadow: none;
+	-webkit-box-shadow: none;
 }
 .db-form.v3 .field-container select {
 	width: 100%;

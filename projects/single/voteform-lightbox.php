@@ -22,7 +22,7 @@ $fields_poll_source = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_grou
 <?php ob_start(); ?>
 <div id="vote-form" class="wdg-lightbox-ref">
 	
-	<form method="post" class="sidebar-login-form db-form v3 full form-register ajax-form">
+	<form method="post" class="sidebar-login-form db-form v3 full form-register ajax-form" novalidate>
 		
 		<?php foreach ( $fields_hidden as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
