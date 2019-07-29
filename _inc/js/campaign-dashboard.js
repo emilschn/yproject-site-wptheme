@@ -192,14 +192,18 @@ WDGCampaignSimulator.prototype.calculAndShowResult = function(){
  */
 WDGCampaignSimulator.prototype.getDataCalculator = function(){
 	new_minimum_goal = $("#new_minimum_goal").val() == null ? $.trim($("span[data-id=new_minimum_goal] span").text()) : $("#new_minimum_goal").val();
+	new_minimum_goal = this.numberFormat( new_minimum_goal );
 	need = $("#new_maximum_goal").val() == null ? $.trim($("span[data-id=new_maximum_goal] span").text()) : $("#new_maximum_goal").val();
+	need = this.numberFormat( need );
 	new_roi_percent_estimated = $("#new_roi_percent_estimated").val() == null ? $.trim($("span[data-id=new_roi_percent_estimated] span").text()) : $("#new_roi_percent_estimated").val();
+	new_roi_percent_estimated = this.numberFormat( new_roi_percent_estimated );
 	new_funding_duration = ($("#select-new_funding_duration").val() == null) ? $.trim($("span[data-id=new_funding_duration] span").text()) : $("#select-new_funding_duration").val();
 	if ( new_funding_duration == 0 ) {
 		new_funding_duration = 5;
 	}
 	nb_years = new_funding_duration;
 	new_estimated_turnover_0 = $("#new_estimated_turnover_0").val() == null ? $.trim($("td[data-id=new_estimated_turnover_0]").text()) : $("#new_estimated_turnover_0").val();
+	new_estimated_turnover_0 = this.numberFormat( new_estimated_turnover_0 );
 };
 
 /**
@@ -222,7 +226,7 @@ WDGCampaignSimulator.prototype.attachEventOnCa = function(){
 * @returns {string}
 */
 WDGCampaignSimulator.prototype.numberFormat = function(number){
-	var nb_format = number.toString().replace(",",".");
+	var nb_format = number.toString().replace(",",".").replace(' ', '');
 	nb_format = parseFloat(nb_format);
 	nb_format = nb_format.toFixed(2);
 	//Suppression des "00" après la virgule
@@ -1987,7 +1991,6 @@ WDGCampaignDashboard.prototype.initQtip = function(){
 			}
 
 			if (contentTip != ""){
-//				console.log( settings );
 				$(this).qtip(settings);
 			}
 		}
