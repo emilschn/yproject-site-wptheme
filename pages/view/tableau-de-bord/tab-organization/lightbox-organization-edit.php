@@ -18,7 +18,7 @@ if ( isset( $organization_obj ) ) {
 
 	<h3><?php _e( "&Eacute;diter l'organisation portant le projet", 'yproject' ); ?></h3>
 
-	<form id="orgaedit_form" action="" method="POST" enctype="multipart/form-data" class="wdg-forms db-form v3 full center" data-action="save_edit_organization">
+	<form id="orgaedit_form" action="" method="POST" enctype="multipart/form-data" class="wdg-forms db-form v3 full center" data-action="save_edit_organization" novalidate>
 		
 		<?php foreach ( $fields_hidden as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>

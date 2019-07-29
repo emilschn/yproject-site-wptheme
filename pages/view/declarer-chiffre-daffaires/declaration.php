@@ -8,7 +8,7 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Declaration_In
 $fields_declaration = $page_controler->get_form()->getFields( WDG_Form_Declaration_Input::$field_group_declaration );
 ?>
 
-<form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
+<form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white" novalidate>
 	
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
