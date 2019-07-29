@@ -18,7 +18,7 @@ $classes .= 'version-3';
 <?php get_header(); ?>
 
 <?php if (isset($campaign)) : ?>
-<div id="content" data-campaignid="<?php echo $campaign->ID; ?>" class="<?php echo $classes; ?>">
+<div id="content" data-campaignid="<?php echo $campaign->ID; ?>" data-campaignstatus="<?php echo $campaign->campaign_status(); ?>" class="<?php echo $classes; ?>">
 
 	<?php locate_template( array("projects/single/template.php"), true ); ?>
 

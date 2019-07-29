@@ -8,6 +8,9 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		$input_queue = filter_input( INPUT_GET, 'queue' );
 		$input_rss = filter_input( INPUT_GET, 'rss' );
 		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
+		$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
+		$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
+		$input_force_daily_notifications = filter_input( INPUT_GET, 'force_daily_notifications' );
 		
 		if ( !empty( $input_queue ) && $input_queue == '1' ) {
 			$nb_done = WDGQueue::execute_next( 10 );
@@ -24,16 +27,17 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		} else if ( !empty( $input_make_finished_xml ) && $input_make_finished_xml == '1' ) {
 			WDGCronActions::make_projects_rss( FALSE );
 			
+		} else if ( !empty( $input_force_summary_call ) && $input_force_summary_call == '1' ) {
+			$this->summary_call();
+			
+		} else if ( !empty( $input_force_daily_call ) && $input_force_daily_call == '1' ) {
+			$this->daily_call();
+			
+		} else if ( !empty( $input_force_daily_notifications ) && $input_force_daily_notifications == '1' ) {
+			WDGCronActions::send_notifications();
+			
 		} else {
 			$this->hourly_call();
-			
-			$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
-			$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
-			if ( $this->is_daily_call_time() || $input_force_daily_call == '1' ) {
-				$this->daily_call();
-			} else if ( $this->is_summary_call_time() || $input_force_summary_call == '1' ) {
-				$this->summary_call();
-			}
 			
 		}
 		exit();
@@ -48,20 +52,6 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	private function daily_call() {
 		$this->rebuild_sitemap();
 		WDG_Cache_Plugin::initialize_home_stats();
-		WDGCronActions::make_projects_rss();
-		WDGCronActions::send_notifications();
-	}
-	
-	private function is_daily_call_time() {
-		$buffer = FALSE;
-		$date_now = new DateTime();
-		$last_daily_call = get_option( 'last_daily_call' );
-		$saved_date = new DateTime( $last_daily_call );
-		if ( $last_daily_call == FALSE || $saved_date->diff($date_now)->days >= 1 ) {
-			update_option( 'last_daily_call', $date_now->format( 'Y-m-d H:i:s' ) );
-			$buffer = TRUE;
-		}
-		return $buffer;
 	}
 	
 	private function summary_call() {
@@ -79,6 +69,8 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'value_intent' ] = $vote_results[ 'sum_invest_ready' ];
 			$item[ 'nb_preinvestment' ] = $vote_results[ 'count_preinvestments' ];
 			$item[ 'value_preinvestment' ] = $vote_results[ 'amount_preinvestments' ];
+			$item[ 'nb_not_validated_preinvestment' ] = $vote_results[ 'count_not_validate_preinvestments' ];
+			$item[ 'value_not_validated_preinvestment' ] = $vote_results[ 'amount_not_validate_preinvestments' ];
 			array_push( $params[ 'vote' ], $item );
 		}
 		
@@ -94,6 +86,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'nb_invest' ] = $campaign->backers_count();
 			$item[ 'value_invest' ] = $campaign->current_amount( false );
 			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
+			$item[ 'value_not_validated' ] = $investment_results[ 'amount_not_validate_investments' ];
 			array_push( $params[ 'funding' ], $item );
 		}
 		$project_list_funding_notime = ATCF_Campaign::get_list_funding( 0, '', FALSE, FALSE );
@@ -107,6 +100,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'nb_invest' ] = $campaign->backers_count();
 			$item[ 'value_invest' ] = $campaign->current_amount( false );
 			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
+			$item[ 'value_not_validated' ] = $investment_results[ 'amount_not_validate_investments' ];
 			array_push( $params[ 'funding' ], $item );
 		}
 		
@@ -123,32 +117,27 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'nb_invest' ] = $campaign->backers_count();
 			$item[ 'value_invest' ] = $campaign->current_amount( false );
 			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
+			$item[ 'value_not_validated' ] = $investment_results[ 'amount_not_validate_investments' ];
 			array_push( $params[ 'hidden' ], $item );
 		}
 		
 		NotificationsSlack::send_update_summary_current_projects( $params );
 	}
 	
-	private function is_summary_call_time() {
-		$buffer = FALSE;
-		$date_now = new DateTime();
-		$last_summary_call = get_option( 'last_summary_call' );
-		$saved_date = new DateTime( $last_summary_call );
-		if ( $last_summary_call == FALSE || $saved_date->diff($date_now)->h >= 12 ) {
-			update_option( 'last_summary_call', $date_now->format( 'Y-m-d H:i:s' ) );
-			$buffer = TRUE;
-		}
-		return $buffer;
-	}
-	
 	private function rebuild_cache() {
 		
-		$WDG_File_Cacher = new WDG_File_Cacher();
-		do_action('wdg_delete_cache', array(
+		$params = array(
 			'home-projects',
 			'projectlist-projects-current',
 			'projectlist-projects-funded'
-		));
+		);
+		
+		$WDG_Cache_Plugin = WDG_Cache_Plugin::current();
+		$WDG_Cache_Plugin->delete_cache( $params );
+		
+		$WDG_File_Cacher = WDG_File_Cacher::current();
+		$WDG_File_Cacher->delete( 'home' );
+		$WDG_File_Cacher->delete( 'les-projets' );
 		$WDG_File_Cacher->rebuild_cache();
 
 	}
@@ -177,7 +166,6 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/financement/flexible/'						=> '0.7',
 			'/financement/fonds-propres/'					=> '0.7',
 			'/financement/non-dilutif/'						=> '0.7',
-			'/financement/offres/love-money/'				=> '0.7',
 			'/financement/rapide/'							=> '0.7',
 			'/financement/royalties/'						=> '0.7',
 			'/financement/royalty-crowdfunding/'			=> '0.7',
@@ -189,7 +177,6 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 //			'/solutions/expert-comptable/'					=> '0.7',
 			'/solutions/start-up/'							=> '0.7',
 			// 0.6
-			'/guide/'										=> '0.6',
 			'/a-propos/statistiques/'						=> '0.6',
 			'/a-propos/vision/'								=> '0.6',
 			'/financement/conditions/'						=> '0.6',
@@ -197,6 +184,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/financement/entreprises/start-up/love-money/'	=> '0.6',
 			'/financement/label-croissance-verte/'			=> '0.6',
 			'/financement/simulateur-taux-de-royalties/'	=> '0.6',
+//			'/guide/'										=> '0.6',
 			'/investissement/comparatif-capital-pret-royalties/'		=> '0.6',
 			'/investissement/impact-investing/evaluation-des-impacts/'	=> '0.6',
 			'/solutions/'									=> '0.6',
@@ -208,24 +196,31 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			// 0.5
 			// PROJETS
 			'/a-propos/statistiques/rapport-activite-2018/'			=> '0.5',
-//			'/financement/offres/'									=> '0.5',
+			'/financement/offres/crowdfunding/'						=> '0.5',
+			'/financement/offres/crowdfunding-accompagnement/'		=> '0.5',
+			'/financement/offres/love-money/'						=> '0.5',
+			'/financement/offres/reseau/'							=> '0.5',
 //			'/financement/royalty-crowdfunding/accompagnement/'		=> '0.5',
 //			'/investissement/cooperatives/'							=> '0.5',
 			'/investissement/fiscalite-royalties/'					=> '0.5',
 			// 0.4
+			'/financement/offres/'									=> '0.4',
 //			'/financement/offres/amorcage-crowdfunding/'			=> '0.4',
-			'/financement/offres/crowdfunding-accompagnement/'		=> '0.4',
 //			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
 			// 0.3
 			'/a-propos/espace-presse/'			=> '0.3',
 			'/a-propos/partenaires/'			=> '0.3',
+			'/financement/offres/crowdfunding-accompagnement/atelier/'		=> '0.3',
+			'/financement/offres/crowdfunding-accompagnement/basique/'		=> '0.3',
+			'/financement/offres/crowdfunding-accompagnement/conseils/'		=> '0.3',
 //			'/investir/actifs/'					=> '0.3',
 			'/press-book/'						=> '0.3',
 			// 0.2
 			'/a-propos/contact/'				=> '0.2',
 			'/a-propos/equipe/'					=> '0.2',
+			'/a-propos/partenaires/des-bons-plans-pour-votre-entreprise/'	=> '0.2',
 			'/a-propos/recrutement/'			=> '0.2',
-			'/a-propos/statistiques/rapport-activite-2017/'			=> '0.2',
+			'/a-propos/statistiques/rapport-activite-2017/'					=> '0.2',
 			// 0.1
 			'/placement-royalties/'				=> '0.1',
 			'/a-propos/'						=> '0.1',
@@ -296,7 +291,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			"</url>\n";
 		}
 		
-		$campaignlist_funded = ATCF_Campaign::get_list_funded( 50 );
+		$campaignlist_funded = ATCF_Campaign::get_list_funded( 80 );
 		foreach ( $campaignlist_funded as $campaign_post ) {
 			$campaign_id = $campaign_post->ID;
 			$page_modified_exploded = explode( ' ', $campaign_post->post_modified );

@@ -45,12 +45,14 @@ global $country_list;
 		));
 		
 		$birthday_datetime = new DateTime( $page_controler->get_campaign_author()->get_birthday_date() );
+		$birthday_description = ( !ypcf_check_user_is_complete( $page_controler->get_campaign()->post_author() ) ? "<span class='errors'>Le porteur de projet doit &ecirc;tre majeur</span>" : '' );
 		DashboardUtility::create_field( array(
 			'id'			=> 'new_birthday',
 			'type'			=> 'date',
 			'label'			=> "Date de naissance",
 			'value'			=> $birthday_datetime,
-			'editable'		=> $page_controler->can_access_author()
+			'editable'		=> $page_controler->can_access_author(),
+			'description'	=> $birthday_description
 		) );
 
 		DashboardUtility::create_field( array(

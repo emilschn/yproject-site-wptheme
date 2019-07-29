@@ -197,28 +197,30 @@ $lang_list = $campaign->get_lang_list();
 				
 					<div class="clear">
 					<?php if ( $campaign->time_remaining_str() != '-' ): ?>
-						
 						<?php if ( !is_user_logged_in() ): ?>
 							<a href="<?php echo home_url( '/connexion/' ); ?>?source=project" class="button red">
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
-
-						<?php elseif ( $has_voted ): ?>
-							<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
 
 						<?php else: ?>
 							<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote" data-thankyoumsg="<?php _e( "Merci pour votre &eacute;valuation !", 'yproject' ); ?>">
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
 						<?php endif; ?>
+						
 					<?php else: ?>
-						<div class="end-sentence">
-							<?php if ( $campaign->end_vote_pending_message() == '' ): ?>
-								<?php _e( "Cette lev&eacute;e de fonds passera bient&ocirc;t en phase d'investissement !", 'yproject' ); ?>
-							<?php else: ?>
-								<?php echo $campaign->end_vote_pending_message(); ?>
-							<?php endif; ?>
-						</div>
+						<?php if ( $has_voted ): ?>
+							<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
+						
+						<?php else: ?>
+							<div class="end-sentence">
+								<?php if ( $campaign->end_vote_pending_message() == '' ): ?>
+									<?php _e( "Cette lev&eacute;e de fonds passera bient&ocirc;t en phase d'investissement !", 'yproject' ); ?>
+								<?php else: ?>
+									<?php echo $campaign->end_vote_pending_message(); ?>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
 					<?php endif; ?>
 					</div>
 				
@@ -234,10 +236,10 @@ $lang_list = $campaign->get_lang_list();
 					$time_remaining_str = $campaign->time_remaining_str();
 					?>
 					<?php if ( $time_remaining_str == '-' ): ?>
-						<?php if ( $campaign->is_remaining_time() ): ?>
+						<?php if ( $campaign->is_investable() ): ?>
 							<div class="end-sentence">
 								<?php $datetime_end = $campaign->get_end_date_when_can_invest_until_contract_start_date(); ?>
-								<?php echo __( "L'investissement est possible jusqu'au premier versement de royalties", 'yproject' ). " (" .$datetime_end->format( 'd/m/Y' ). ")."; ?>
+								<?php echo __( "L'investissement est possible jusqu'au d&eacute;marrage du contrat de royalties", 'yproject' ). " (" .$datetime_end->format( 'd/m/Y' ). ")."; ?>
 							</div>
 							<a href="<?php echo $invest_url_href; ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
 						<?php endif; ?>

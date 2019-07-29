@@ -1,7 +1,3 @@
-jQuery(document).ready( function($) {
-    ProjectEditor.init();
-});
-
 var ProjectEditor = (function($) {
 	return {
 		elements: [],
@@ -12,24 +8,32 @@ var ProjectEditor = (function($) {
 		
 		//Initialisation : création du bouton en haut de page permettant de switcher d'un mode à l'autre
 		init: function() {
-			$("#wdg-edit-project").show();
-			$("#wdg-edit-project").click(function() {
-				ProjectEditor.clickEditProject(this);
-			});
-			$("#wdg-edit-project-add-lang").click(function() {
-				ProjectEditor.clickShowAddLang();
-			});
-			$("#wdg-edit-project-add-lang button.add-button").click(function() {
-				ProjectEditor.clickAddLang();
-			});
-			
-			window.addEventListener( 'beforeunload', function (e) {
-				if ( WDGProjectPageFunctions.isEditing !== '' ) {
-					var confirmationMessage = "Vous avez réservé une des parties du projet pour l'éditer, prenez le temps de la sauvegarder ou d'annuler la réservation. Êtes vous sûr de vouloir quitter ?";
-					(e || window.event).returnValue = confirmationMessage; //Gecko + IE
-					return confirmationMessage; //Webkit, Safari, Chrome
-				}
-			} );
+			if ( !ProjectEditor.isInit ) {
+				$("#wdg-edit-project").show();
+				$("#wdg-edit-project").click(function() {
+					ProjectEditor.clickEditProject(this);
+				});
+				$("#wdg-edit-project-add-lang").click(function() {
+					ProjectEditor.clickShowAddLang();
+				});
+				$("#wdg-edit-project-add-lang button.add-button").click(function() {
+					ProjectEditor.clickAddLang();
+				});
+
+				window.addEventListener( 'beforeunload', function (e) {
+					if ( WDGProjectPageFunctions.isEditing !== '' ) {
+						var confirmationMessage = "Vous avez réservé une des parties du projet pour l'éditer, prenez le temps de la sauvegarder ou d'annuler la réservation. Êtes vous sûr de vouloir quitter ?";
+						(e || window.event).returnValue = confirmationMessage; //Gecko + IE
+						return confirmationMessage; //Webkit, Safari, Chrome
+					}
+				} );
+
+				ProjectEditor.analyseImageFiles();
+				ProjectEditor.initElements();
+				ProjectEditor.initEdition();
+				ProjectEditor.stopEdition();
+				ProjectEditor.isInit = true;
+			}
 		},
 		
 		//Permet de switcher du texte Nouvelle langue vers le sélecteur de langue
@@ -71,7 +75,6 @@ var ProjectEditor = (function($) {
 	    
 		//Démarre l'édition de la page projet
 		initEdition: function() {
-			if (!ProjectEditor.isInit) { ProjectEditor.initElements(); }
 			for (elementKey in ProjectEditor.elements) {
 				ProjectEditor.initEditable(elementKey);
 				if (!ProjectEditor.isInit) { ProjectEditor.addEditButton(elementKey); }
@@ -79,7 +82,6 @@ var ProjectEditor = (function($) {
 			}
 			WDGProjectPageFunctions.refreshEditable();
 			if (!ProjectEditor.isInit) { ProjectEditor.initClick(); }
-			ProjectEditor.isInit = true;
 		},
 		
 		//Arrête l'édition de la page projet
@@ -434,7 +436,7 @@ var ProjectEditor = (function($) {
 			var newElement = '<form id="upload-video-form" enctype="multipart/form-data"> <input type="hidden" name="action" value="save_image_url_video" /> <input type="hidden" name="campaign_id" value="'+$("#content").data("campaignid")+'" /> <input type="text" class="url_video" name="url_video" id="text_url_video" placeholder="Saissisez l\'url de votre vidéo" value="'+url_video_link+'"> <input style="display:none;" id="wdg-edit-video-image" type="file" class="image_video_zone" name="image_video_zone"/> </form>';
 			$(".block_url_video").after(newElement);
 
-			newElement = '<input type="button" id="wdg-edit-video-image_update" value="Télécharger une image d\'aperçu ..."/>';
+			newElement = '<input type="button" id="wdg-edit-video-image_update" value="Télécharger une image d\'aperçu ..." class="button blue-pale">';
 			$(".block_url_image").after(newElement);
 			var span_image = '<span id="extra-comment-image">(Max. 2Mo ; idéalement 870px de largeur * 460px de hauteur)</span>';
 			$("#upload-video-form").after(span_image);
@@ -472,7 +474,7 @@ var ProjectEditor = (function($) {
 
 			var video_check = false; 
 			var video_number = '';
-			$(".url_video").change(function(){
+			$( '#text_url_video' ).change(function(){
 				$("#apercu_video").remove();
 				var youtube_id = false;
 				var vimeo_id = '';
@@ -505,26 +507,22 @@ var ProjectEditor = (function($) {
 					$("#text_url_video").addClass("input_text_good");
 					
 					
+				} else if ( $("#text_url_video").val().indexOf( 'dailymotion' ) > -1 ){
+					var video_preview = "<div id='apercu_video'><iframe width='290' height='100%' src='"+$("#text_url_video").val()+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
+					$(".block_overview_video").after(video_preview);
+					video_check = true;
+					$("#url_video_link").val($("#text_url_video").val());
+					$("#text_url_video").addClass("input_text_good");
+					
 				} else {
-					video_number = $("#text_url_video").val().split('dailymotion')[1];
-					if(video_number){
-						var video_preview = "<div id='apercu_video'><iframe width='290' height='100%' src='"+$("#text_url_video").val()+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
-						$(".block_overview_video").after(video_preview);
-						video_check = true;
-						$("#url_video_link").val($("#text_url_video").val());
-						$("#text_url_video").addClass("input_text_good");
-					}else{
-						$("#text_url_video").addClass("input_text_error");
-						$("#text_url_video").val(url_video_link);
-						var video_preview = "<div id='apercu_video' ><iframe width='290' height='100%' src='"+url_video_link+"' frameborder='0' id='myFrame' allowfullscreen/></div>";
-						$(".block_overview_video").after(video_preview);
-					}
+					var video_preview = "<div id='apercu_video'></div>";
+					$(".block_overview_video").after(video_preview);
 				}
 			});
 
-			newElement = '<input type="submit" id="wdg-edit-video-zone-next_valid" value="Valider"/>';
+			newElement = '<input type="button" id="wdg-edit-video-zone-next_valid" value="Valider" class="button blue-pale">';
 			$(".block_boutons").after(newElement);
-			newElement = '<input type="submit" id="wdg-edit-video-zone-next_cancel" value="Annuler"/>';
+			newElement = '<input type="button" id="wdg-edit-video-zone-next_cancel" value="Annuler" class="button blue-pale">';
 			$(".block_boutons").after(newElement);
 
 			$("#wdg-edit-video-zone-next_cancel").click(function() {
@@ -708,11 +706,6 @@ var ProjectEditor = (function($) {
              		}
              	}
 			});
-		},
-		
-		//Redirige vers la page Paramètres
-		redirectParams: function(property) {
-			window.location.href = $(".project-admin").data("link-project-settings") + "#" + property;
 		},
                 
 		//Redirections pour l'édition de l'organisation
@@ -922,7 +915,89 @@ var ProjectEditor = (function($) {
 				$('#wdg-move-picture-location').addClass('move-button');
 				$('#wdg-move-picture-location').removeClass('wait-button');
 			}); 
+		},
+		
+		analyseImageFiles: function() {
+			if ( ( '#project-banner-picture img' ).length > 0 ) {
+				var sSrc = $( '#project-banner-picture img' ).attr( 'src' );
+				ProjectEditor.analyseImageSingleFile( sSrc, 'image de présentation' );
+			}
+			
+			$( '#project-content-description .zone-content img' ).each( function() {
+				var sSrc = $( this ).attr( 'src' );
+				if ( sSrc !== undefined && sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Pitch' );
+				}
+			} );
+			
+			$( '#project-content-societal_challenge .zone-content img' ).each( function() {
+				var sSrc = $( this ).attr( 'src' );
+				if ( sSrc !== undefined && sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Impacts positifs' );
+				}
+			} );
+			
+			$( '#project-content-added_value .zone-content img' ).each( function() {
+				var sSrc = $( this ).attr( 'src' );
+				if ( sSrc !== undefined && sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Stratégie' );
+				}
+			} );
+			
+			$( '#project-content-economic_model .zone-content img' ).each( function() {
+				var sSrc = $( this ).attr( 'src' );
+				if ( sSrc !== undefined && sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Données financières' );
+				}
+			} );
+			
+			$( '#project-content-implementation .zone-content img' ).each( function() {
+				var sSrc = $( this ).attr( 'src' );
+				if ( sSrc !== undefined && sSrc.indexOf( '/wp-content/uploads/' ) > -1 ) {
+					ProjectEditor.analyseImageSingleFile( sSrc, 'partie Equipe' );
+				}
+			} );
+		},
+		
+		analyseImageSingleFile: function( sSrc, sLocation ) {
+			var xhr = $.ajax({
+				type: "HEAD",
+				url: sSrc,
+				success: function(){
+					var nBytes = xhr.getResponseHeader( 'Content-Length' );
+					var nKBytes = nBytes / 1024;
+					if ( nKBytes > 200 ) {
+						var sUrl = this.url;
+						var aSplitUrl = sUrl.split( '/' );
+						var sFileName = aSplitUrl[ aSplitUrl.length - 1 ];
+						ProjectEditor.addEditIntroErrorMessage();
+						if ( nKBytes > 500 ) {
+							ProjectEditor.addEditErrorMessage( sFileName + ' (' + sLocation + ') dépasse 500ko.', true );
+						} else {
+							ProjectEditor.addEditErrorMessage( sFileName + ' (' + sLocation + ') dépasse 200ko.' );
+						}
+					}
+				}
+			});
+		},
+		
+		addEditIntroErrorMessage: function() {
+			if ( $( '.project-admin div.intro' ).length == 0 ) {
+				$( '.project-admin' ).append( '<div class="intro">Afin de ne pas surcharger votre page et accélérer le temps d\'ouverture, nous vous encourageons à limiter le poids des images à 200 Ko.</div>' );
+			}
+		},
+		
+		addEditErrorMessage: function( sMsg, bIsBig ) {
+			var sClass = 'error';
+			if ( bIsBig ) {
+				sClass += ' error-big';
+			}
+			$( '.project-admin' ).append( '<div class="' + sClass + '">' + sMsg + '</div>' );
 		}
 	};
     
 })(jQuery);
+
+jQuery(document).ready( function($) {
+	ProjectEditor.init();
+});

@@ -104,6 +104,15 @@ div#content header #invest-breadcrumb span:after {
 div#content header #invest-breadcrumb span.selected:after {
 	border-left: 0px;
 }
+body.template-declarer-chiffre-daffaires div#content header #invest-breadcrumb {
+	width: 190px;
+}
+body.template-declarer-chiffre-daffaires div#content header #invest-breadcrumb span:first-child {
+	margin-right: 8px;
+}
+body.template-declarer-chiffre-daffaires div#content header #invest-breadcrumb span:nth-child(2):after {
+	top: -36px;
+}
 
 .invest_error {
     color: #FE494C;
@@ -285,7 +294,7 @@ div.two-contracts-preview .contract-preview-with-tabs .contract-preview-content 
 div.mean-payment-list {
 	margin: 25px auto;
 }
-div.mean-payment-list a, div.mean-payment-list p {
+div.mean-payment-list a, div.mean-payment-list p, div.mean-payment-list div.mean-payment {
 	display: block;
 	clear: both;
 	min-height: 80px;
@@ -294,14 +303,14 @@ div.mean-payment-list a, div.mean-payment-list p {
 	border: 1px solid #333;
 	color: #333333;
 }
-div.mean-payment-list a img, div.mean-payment-list p img {
+div.mean-payment-list a img, div.mean-payment-list p img, div.mean-payment-list div.mean-payment img {
 	float: left;
 	margin-right: 10px;
 }
-div.mean-payment-list a span, div.mean-payment-list p span {
+div.mean-payment-list a span, div.mean-payment-list p span, div.mean-payment-list div.mean-payment span {
 	font-size: 0.9em;
 }
-div.mean-payment-list a span.mean-payment-name, div.mean-payment-list p span.mean-payment-name {
+div.mean-payment-list a span.mean-payment-name, div.mean-payment-list p span.mean-payment-name, div.mean-payment-list div.mean-payment span.mean-payment-name {
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -313,12 +322,18 @@ div.mean-payment-list p.disabled {
 div.mean-payment-list p.disabled img {
 	opacity: 0.5;
 }
-div.mean-payment-list p > span {
+div.mean-payment-list p > span, div.mean-payment-list div.mean-payment > span {
 	display: block;
 }
-div.mean-payment-list a div, div.mean-payment-list p > span {
+div.mean-payment-list a div, div.mean-payment-list p > span, div.mean-payment-list div.mean-payment > div {
 	margin-left: 130px;
 	text-align: justify;
+}
+div.mean-payment-list div.mean-payment {
+	cursor: pointer;
+}
+div.mean-payment-list div.mean-payment.selected {
+	background: #F4F4F4;
 }
 
 /**
@@ -336,4 +351,29 @@ div.mean-payment-list a div, div.mean-payment-list p > span {
 .template-paiement-partager #field-other-invest-rythm, .template-paiement-partager #field-other-known-by-source {
 	margin-top: -50px;
 	margin-left: 30px;
+}
+
+/**
+ DECLARATION
+**/
+.declaration-summary {
+	margin: 24px auto;
+	line-height: 24px;
+	font-size: 14px;
+}
+.declaration-summary h2 {
+	margin: 0px;
+	padding: 0px;
+}
+.declaration-summary table {
+	width: 100%;
+	border: 0px;
+}
+.declaration-summary table tr.bold td {
+	font-weight: bold;
+}
+
+.meanofpayment-select {
+	width: 100%;
+	border: 1px solid #CCC;
 }

@@ -113,14 +113,6 @@ class WDG_Page_Controler {
 		return ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' );
 	}
 	
-	/**
-	 * 
-	 */
-	public function get_display_link_account() {
-		global $post;
-		return ( is_home() || is_front_page() || $post->post_name == 'les-projets' || $post->post_name == 'investissement' || $post->post_name == 'financement' );
-	}
-	
 	
 //******************************************************************************
 	/**

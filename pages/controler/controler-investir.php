@@ -264,7 +264,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 							$reload_form = TRUE;
 						} else {
 							$this->current_step = 2.5;
-							ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2.5 >> GOTO WDG_Form_Invest_Authentication' );
+							ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2.5 >> GOTO WDG_Form_User_Identity_Docs' );
 							$reload_form = TRUE;
 						}
 					}
@@ -357,7 +357,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					$this->form = new WDG_Form_Invest_User_Details( $this->current_campaign, $WDGCurrent_User->wp_user->ID, $current_investment->get_session_amount() );
 					break;
 				case 2.5:
-					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_Invest_Authentication' );
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> LOAD WDG_Form_User_Identity_Docs' );
 					$identity_docs_user_id = ( $_SESSION[ 'redirect_current_user_type' ] == 'user' ) ? $WDGCurrent_User->get_wpref() : $_SESSION[ 'redirect_current_user_type' ];
 					$this->form = new WDG_Form_User_Identity_Docs( $identity_docs_user_id, ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ), $this->current_campaign );
 					break;

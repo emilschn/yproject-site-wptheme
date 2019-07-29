@@ -40,15 +40,6 @@ else {
 						<div>
 							<span class="footer-subtitle"><?php _e('Nous suivre', 'yproject'); ?></span>
 
-							<?php /*
-							<form method="POST" action="<?php echo admin_url( 'admin-post.php' ); ?>">
-								<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/mail.jpg" alt="MAIL" width="48" height="48" />
-								<input type="text" id="subscribe-nl-mail" name="subscribe-nl-mail" placeholder="<?php _e("Je m'inscris à la newsletter", 'yproject'); ?>" />
-								<input type="submit" id="subscribe-nl-submit" value="OK" class="hidden" />
-								<input type="hidden" name="action" value="subscribe_newsletter_sendinblue" />
-							</form>
-							 */ ?>
-
 							<div style="margin: 16px 0px;">
 								<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook"/></a>
 								<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter"/></a>
@@ -95,7 +86,7 @@ else {
 					<div class="clear"></div>
 
 					<div class="aligncenter" role="contentinfo">
-						<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/">
+						<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/" target="_blank">
 							<img alt="Licence Creative Commons" width="25" height="25" style="vertical-align: middle" src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/cc-01.png" /> Some rights reserved
 						</a>
 					</div>

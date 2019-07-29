@@ -25,16 +25,16 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 <?php endif; ?>
 
 <div class="field-description">
-	<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 10 Mo.", 'yproject' ); ?><br>
+	<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 8 Mo.", 'yproject' ); ?><br>
 	<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?>
 </div>
 <input type="file" name="<?php echo $wdg_current_field[ 'name' ]; ?>" id="<?php echo $wdg_current_field[ 'name' ]; ?>">
 <label for="<?php echo $wdg_current_field[ 'name' ]; ?>" class="file-label hidden-responsive" data-input="<?php echo $wdg_current_field[ 'name' ]; ?>">
 	<span class="hide-when-filled">
-		<?php _e( "Je glisse mon fichier ici" ); ?><br>
+		<?php _e( "Glisser mon fichier ici" ); ?><br>
 		ou<br>
 	</span>
-	<span class="button blue"><?php _e( "J'importe mon fichier" ); ?></span>
+	<span class="button blue"><?php _e( "Importer mon fichier" ); ?></span>
 </label>
 <div class="hidden displayed-responsive">
 	<button type="button" class="button blue wdg-button-lightbox-open" data-lightbox="lightbox-<?php echo $wdg_current_field[ 'name' ]; ?>"><?php _e( "Je prends une photo" ); ?></button>
@@ -47,7 +47,7 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 <?php ob_start(); ?>
 <div id="lightbox-<?php echo $wdg_current_field[ 'name' ]; ?>" class="align-left">
 	<strong><?php echo $wdg_current_field[ 'label' ]; ?></strong><br><br>
-	<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 10 Mo.", 'yproject' ); ?><br>
+	<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 8 Mo.", 'yproject' ); ?><br>
 	<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?><br><br>
 	<?php echo $wdg_current_field[ 'description' ]; ?><br><br>
 	
@@ -67,6 +67,12 @@ echo do_shortcode('[yproject_lightbox_cornered id="lightbox-'. $wdg_current_fiel
 <?php endif; ?>
 
 <?php if ( !empty( $wdg_current_field[ 'value' ] ) ): ?>
-	<a id="<?php echo $wdg_current_field[ 'name' ]; ?>" class="button blue-pale download-file" target="_blank" href="<?php echo $wdg_current_field[ 'value' ]; ?>"><?php _e( "Aper&ccedil;u du fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $date_upload; ?></a>
+	<a id="<?php echo $wdg_current_field[ 'name' ]; ?>" class="button blue-pale download-file" target="_blank" href="<?php echo $wdg_current_field[ 'value' ]; ?>">
+		<?php if ( !empty( $date_upload ) ): ?>
+			<?php _e( "Aper&ccedil;u du fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $date_upload; ?>
+		<?php else: ?>
+			<?php _e( "Aper&ccedil;u du fichier", 'yproject' ); ?>
+		<?php endif; ?>
+	</a>
 	<br>
 <?php endif;

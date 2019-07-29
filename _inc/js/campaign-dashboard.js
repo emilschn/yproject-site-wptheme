@@ -15,7 +15,7 @@ function WDGCampaignSimulator() {
  * Récupération de tous les CA en fonction de la durée de financement
  * @returns {Array} tableau avec le montant des CA pour chaque année
  */
-WDGCampaignSimulator.prototype.createCaTab = function(){           
+WDGCampaignSimulator.prototype.createCaTab = function(){
 	if(new_funding_duration!== "0"){
 		var nbYears = parseInt(new_funding_duration);
 		var caTab = new Array;
@@ -257,6 +257,7 @@ function WDGCampaignDashboard() {
 	this.initAjaxForms();
 	this.initHome();
 	this.initContacts();
+	this.initQtip();
 	this.initOrgaForms();
 	this.initTeam();
 	this.initRoyalties();
@@ -451,27 +452,26 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 				feedback = jsonResult;
 
 				//Affiche les erreurs
-				for(var input in feedback.errors){
-					self.fieldError(thisForm.find('#'+input), feedback.errors[input])
+				var firstErrorInput = false;
+				for ( var input in feedback.errors ) {
+					firstErrorInput = $( '#field-' + input + ' .field-error' );
+					$( '#field-' + input + ' .field-error' ).html( feedback.errors[ input ] );
+					$( '#field-' + input + ' .field-error' ).show();
+					$( '#field-' + input ).find('i.fa.validation').remove();
 				}
 
 				for(var input in feedback.success){
-					var thisinput = thisForm.find('#'+input);
-					if ( thisinput.length == 0 ) {
-						thisinput = thisForm.find('input[name='+input+'],select[name='+input+']');
-					}
+					$( '#field-' + input + ' .field-error' ).hide();
+					thisinput = thisForm.find( 'input[name=' + input + '],select[name=select-' + input + ']');
 					self.removeFieldError(thisinput);
-					thisinput.closest(".field-value").parent().find('i.fa.validation').remove();
+					thisinput.parent().parent().find('i.fa.validation').remove();
 					thisinput.addClass("validation");
-					thisinput.closest(".field-value").after('<i class="fa fa-check validation" aria-hidden="true"></i>');
+					thisinput.parent().after('<i class="fa fa-check validation" aria-hidden="true"></i>');
 				}
 
 				//Scrolle jusqu'à la 1ère erreur et la sélectionne
-				var firsterror = thisForm.find(".error").first();
-				if(firsterror.length == 1){
-					self.scrollTo(firsterror);
-					//La sélection (ci-dessous) Ne fonctione ne marche pas
-					firsterror.focus();
+				if ( firstErrorInput !== false ) {
+					self.scrollTo( firstErrorInput );
 					thisForm.find('.save_errors').fadeIn();
 				} else {
 					thisForm.find('.save_ok').fadeIn();                          
@@ -574,6 +574,13 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		$("#direct-mail .step-confirm").slideUp();
 		$("#direct-mail .step-write").slideDown();
 	});
+	
+	$( '.show-notifications' ).click( function( e ) {
+		e.preventDefault();
+		$( '#form-notifications #mail_type' ).val( $( this ).data( 'mailtype' ) );
+		$( '#form-notifications' ).hide();
+		$( '#form-notifications' ).slideDown( 100 );
+	} );
 				
 	if ( $( '.button-contacts-add-check' ).length > 0 ) {
 		$( '.button-contacts-add-check' ).click( function() {
@@ -901,7 +908,7 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 				}
 				if(count_files_errors > 0 || count_data_errors > 0) {
 					var err = $("<p class='errors'>Certains champs n'ont pas été validés.</p>");
-					err.insertAfter($("#orgaedit_form_button button"));
+					err.insertAfter( $( '#organization-details-form-buttons button' ) );
 				}
 				//Affichage confirmation enregistrement
 				if (count_files_errors === 0 && count_data_errors === 0){
@@ -1250,8 +1257,6 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 		$('#ajax-contacts-load').after(result);
 		$('#ajax-loader-img').hide();//On cache la roue de chargement.
 
-		YPUIFunctions.initQtip();
-
 		//Création du tableau dynamique dataTable
 		self.table = $('#contacts-table').DataTable({
 			scrollX: '100%',
@@ -1458,7 +1463,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 					.draw();
 			}
 		} );
-
+		self.initQtip();
 
 	}).fail(function(){
 		$('#ajax-contacts-load').after("<em>Le chargement du tableau a échoué</em>");
@@ -1549,7 +1554,7 @@ WDGCampaignDashboard.prototype.fieldError = function( $param, errorText ) {
 		show: 'focus',
 		hide: 'blur'
 	});
-	$param.closest(".field-value").parent().find('i.fa.validation').remove();
+	$param.parent().parent().find('i.fa.validation').remove();
 };
 
 WDGCampaignDashboard.prototype.removeFieldError = function( $param ){
@@ -1577,11 +1582,13 @@ WDGCampaignDashboard.prototype.initTeam = function( $param ){
 WDGCampaignDashboard.prototype.initRoyalties = function(){
 	var self = this;
 	self.currentOpenedROI = 0;
+	self.isRefund = 0;
 	if ($(".transfert-roi-open").length > 0) {
 		$(".transfert-roi-open").click(function () {
 			if ($(this).data('roideclaration-id') !== self.currentOpenedROI) {
 				//Affichage
 				self.currentOpenedROI = $(this).data('roideclaration-id');
+				self.isRefund = $(this).data('refund');
 				$("#wdg-lightbox-transfer-roi #lightbox-content .loading-content").html("");
 				$("#wdg-lightbox-transfer-roi #lightbox-content .loading-image").show();
 				$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").hide();
@@ -1592,7 +1599,8 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 					'url': ajax_object.ajax_url,
 					'data': {
 						'action': 'display_roi_user_list',
-						'roideclaration_id': $(this).data('roideclaration-id')
+						'roideclaration_id': $(this).data('roideclaration-id'),
+						'is_refund': $( this ).data( 'refund' )
 					}
 				}).done(function (result) {
 					var content = 'Versement impossible';
@@ -1601,7 +1609,8 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 						content += '<tr><td>Utilisateur</td><td>Investissement</td><td>Versement</td><td>Commission</td></tr>';
 						content += result;
 						content += '</table>';
-						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-roi-id").val(self.currentOpenedROI);
+						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-roi-id").val( self.currentOpenedROI );
+						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form input#hidden-isrefund").val( self.isRefund );
 						$("#wdg-lightbox-transfer-roi #lightbox-content .loading-form").show();
 					}
 					$("#wdg-lightbox-transfer-roi #lightbox-content .loading-content").html(content);
@@ -1631,11 +1640,68 @@ WDGCampaignDashboard.prototype.initRoyalties = function(){
 		}
 	}
 	
-	if ( $( '#new_declaration_adjustment_turnover_difference' ).length > 0 ) {
-		$( '#new_declaration_adjustment_turnover_difference' ).change( function() {
-			self.refreshAjustmentAmountToPay();
+	$( '#display-form-send-document' ).click( function() {
+		$( this ).slideUp( 50 );
+		$( '#form-send-document' ).slideDown( 100 );
+	} );
+	
+	$( '#display-list-declarations' ).click( function() {
+		$( this ).slideUp( 50 );
+		$( '#list-declarations' ).slideDown( 100 );
+	} );
+	
+	$( '.declaration-item-more-btn button' ).click( function() {
+		var declarationId = $( this ).data( 'declaration' );
+		if ( $( '#declaration-item-more-' + declarationId ).is( ':visible' ) ) {
+			$( '#declaration-item-more-btn-' + declarationId + ' button' ).text( '+' );
+			$( '#declaration-item-' + declarationId ).removeClass( 'expanded' );
+			$( '#declaration-item-more-' + declarationId ).slideUp( 50 );
+		} else {
+			$( '#declaration-item-more-btn-' + declarationId + ' button' ).text( '-' );
+			$( '#declaration-item-' + declarationId ).addClass( 'expanded' );
+			$( '#declaration-item-more-' + declarationId ).slideDown( 100 );
+		}
+	} );
+	
+	$( '#display-form-add-adjustment' ).click( function() {
+		$( this ).slideUp( 50 );
+		$( '#form-add-adjustment' ).slideDown( 100 );
+	} );
+	
+	$( '#form-add-adjustment #field-turnover_difference #turnover_difference' ).change( function() {
+		self.refreshAjustmentAmountToPay( false );
+	} );
+	
+	$( '.adjustment-edit-form #field-turnover_difference #turnover_difference' ).change( function() {
+		self.refreshAjustmentAmountToPay( $( this ).parent().parent().parent().parent() );
+	} );
+	
+	$( '.adjustment-item-more-btn button' ).click( function() {
+		var adjustmentId = $( this ).data( 'adjustment' );
+		if ( $( '#adjustment-item-more-' + adjustmentId ).is( ':visible' ) ) {
+			$( '#adjustment-item-more-btn-' + adjustmentId + ' button' ).text( '+' );
+			$( '#adjustment-item-' + adjustmentId ).removeClass( 'expanded' );
+			$( '#declaration-item-more-' + adjustmentId ).slideUp( 50 );
+		} else {
+			$( '#adjustment-item-more-btn-' + adjustmentId + ' button' ).text( '-' );
+			$( '#adjustment-item-' + adjustmentId ).addClass( 'expanded' );
+			$( '#adjustment-item-more-' + adjustmentId ).slideDown( 100 );
+		}
+	} );
+	
+	$( 'div.adjustment-item-more div.adjustment-summary button.edit-adjustment' ).click( function() {
+		var adjustmentId = $( this ).data( 'adjustment' );
+		$( 'div#adjustment-item-more-' + adjustmentId + ' .adjustment-summary' ).slideUp( 50 );
+		$( 'div#adjustment-item-more-' + adjustmentId + ' .adjustment-edit-form' ).slideDown( 100 );
+		$( 'div#adjustment-item-more-' + adjustmentId + ' .adjustment-edit-form select' ).each( function() {
+			var selectElement = this;
+			$( this ).children().each( function() {
+				if ( $( this ).attr( 'selected' ) == 'selected' ) {
+					$( selectElement ).val( $( this ).attr( 'value' ) );
+				}
+			} );
 		} );
-	}
+	} );
 };
 
 WDGCampaignDashboard.prototype.refreshTurnoverAmountToPay = function() {
@@ -1662,14 +1728,17 @@ WDGCampaignDashboard.prototype.refreshTurnoverAmountToPay = function() {
 	$( '.commission-to-pay' ).text(fees);
 };
 
-WDGCampaignDashboard.prototype.refreshAjustmentAmountToPay = function() {
-	var roiPercent = $( '#form-declaration-adjustment' ).data( 'roi-percent' );
-	var costsOrga = $( '#form-declaration-adjustment' ).data( 'costs-orga' );
-	var total = Number( $( '#new_declaration_adjustment_turnover_difference' ).val().split(',').join('.') );
+WDGCampaignDashboard.prototype.refreshAjustmentAmountToPay = function( formTarget ) {
+	var idTarget = '#form-add-adjustment';
+	if ( formTarget !== false ) {
+		idTarget = formTarget.attr( 'id' );
+	}
+	var roiPercent = $( '#' + idTarget + ' #field-roi_percent #roi_percent' ).val();
+	var total = Number( $( '#' + idTarget + ' #field-turnover_difference #turnover_difference' ).val().split(',').join('.') );
 	var amount = total * roiPercent / 100;
 	amount = Math.round( amount * 100 ) / 100;
 	
-	$( '#new_declaration_adjustment_value' ).val( amount );
+	$( '#' + idTarget + ' #field-amount #amount' ).val( amount );
 };
 
 WDGCampaignDashboard.prototype.proceedRoyalties = function(){
@@ -1678,6 +1747,7 @@ WDGCampaignDashboard.prototype.proceedRoyalties = function(){
 		'action': 'proceed_roi_transfers',
 		'campaign_id': $( '#hidden-campaign-id' ).val(),
 		'roi_id': $( '#hidden-roi-id' ).val(),
+		'isrefund': $( '#hidden-isrefund' ).val(),
 		'send_notifications': $( '#check_send_notifications' ).is( ':checked' ),
 		'transfer_remaining_amount': $( '#check_transfer_remaining_amount' ).is( ':checked' )
 	};
@@ -1877,6 +1947,51 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 
 WDGCampaignDashboard.prototype.initCampaign = function(){
 	$( "#item-body-campaign ul input[type=checkbox]" ).prop( 'disabled', false );
+};
+
+WDGCampaignDashboard.prototype.initQtip = function(){
+	$('.infobutton, .qtip-element').each(function () {
+		//Check if doesn't exist yet
+		if($(this).data("hasqtip")==undefined){
+			var contentTip;
+			if($(this).attr("title")!=undefined){
+				contentTip = $(this).attr("title");
+			} else {
+				contentTip = $(this).next('.tooltiptext').text();
+			}
+
+			var settings = {
+				content: contentTip,
+				position: {
+					my: 'bottom center',
+					at: 'top center',
+				},
+				style: {
+					classes: 'wdgQtip qtip-dark qtip-rounded qtip-shadow'
+				},
+				hide: {
+					fixed: true,
+					delay: 300
+				}
+			};
+
+			if($(this).is("input[type=text], input[type=number], textarea")){
+				settings['show']='focus'
+				settings['hide']='blur'
+			}
+
+			var personnalised_settings = $(this).data("tooltip");
+			if(personnalised_settings!=undefined){
+				var data_settings = JSON.parse(personnalised_settings);
+				for (var attrname in data_settings) { settings[attrname] = data_settings[attrname]; }
+			}
+
+			if (contentTip != ""){
+//				console.log( settings );
+				$(this).qtip(settings);
+			}
+		}
+	});
 };
 
 var wdgCampaignDashboard;

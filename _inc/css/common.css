@@ -122,6 +122,12 @@ button.red {
 	border: 2px solid #333;
 	color: #333;
 }
+.button.force-size {
+	display: inline-block;
+	padding: 0px 24px;
+	height: 50px;
+	line-height: 50px;
+}
 
 .wdg-message {
 	margin: 20px 0px;
@@ -329,7 +335,7 @@ form span.file-description {
     font-style: italic;
     min-height: 25px;
 }
-.db-form .feedback_save span{
+.db-form .feedback_save span, .feedback_save span {
     display:none;
 }
 
@@ -673,6 +679,9 @@ ul.project-list a.needs-authentication:after {
 	font-weight: bold;
 	text-transform: none;
 }
+#submenu-user span#submenu-user-hello span {
+	text-transform: none;
+}
 
 #submenu-user div#button-logout {
 	bottom: 0px;
@@ -860,29 +869,6 @@ footer > .footer-container > div > div {
 
 footer form img {
 	vertical-align: top;
-}
-footer form input#subscribe-nl-mail {
-	width: -webkit-calc(100% - 60px);
-	width: -moz-calc(100% - 60px);
-	width: calc(100% - 60px);
-	height: 38px;
-	padding: 5px;
-	margin-left: -4px;
-	border: 0px;
-}
-footer form input#subscribe-nl-mail.retracted {
-	width: -webkit-calc(100% - 115px);
-	width: -moz-calc(100% - 115px);
-	width: calc(100% - 115px);
-}
-footer form input#subscribe-nl-submit {
-    width: 48px;
-    height: 48px;
-	margin-left: -5px;
-    border: none;
-    cursor: pointer;
-    background-color: #EA4F51;
-	color: #FFF;
 }
 
 /* Footer 2nd partie*/
@@ -1331,7 +1317,8 @@ body.template-les-projets .wdg-component-projects-preview .project-container {
 	height: 620px;
 	min-width: 240px;
 }
-body.template-les-projets .projects-current .wdg-component-projects-preview .project-container {
+body.template-les-projets .projects-current .wdg-component-projects-preview .project-container,
+body.template-les-projets .projects-after-end-date .wdg-component-projects-preview .project-container {
 	width: 33%;
 }
 body.template-les-projets .projects-funded .wdg-component-projects-preview .project-container {

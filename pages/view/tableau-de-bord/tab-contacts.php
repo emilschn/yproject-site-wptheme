@@ -181,10 +181,14 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 					$name = '';
 					if ( $investment_contract->investor_type == WDGInvestmentContract::$investor_type_user ) {
 						$WDGUser = WDGUser::get_by_api_id( $investment_contract->investor_id );
-						$name = $WDGUser->get_lastname() .' '. $WDGUser->get_firstname();
+						if ( !empty( $WDGUser ) ) {
+							$name = $WDGUser->get_lastname() .' '. $WDGUser->get_firstname();
+						}
 					} else {
 						$WDGOrganization = WDGOrganization::get_by_api_id( $investment_contract->investor_id );
-						$name = $WDGOrganization->get_name();
+						if ( !empty( $WDGOrganization ) ) {
+							$name = $WDGOrganization->get_name();
+						}
 					}
 					$status = ( $investment_contract->status == 'active' ) ? 'Actif' : 'Arrêté';
 					?>

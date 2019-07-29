@@ -15,7 +15,6 @@ if ( !isset( $organization_obj ) ) {
 }
 
 $WDGUser_current = WDGUser::current();
-$organization_obj->send_kyc();
 $organization_obj->submit_transfer_wallet_lemonway();
 
 ?>

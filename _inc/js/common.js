@@ -9,19 +9,32 @@ JSHelpers = ( function( $ ) {
 			return decodeURIComponent( ( str + '' ).replace( /\+/g, '%20' ) );
 		},
 		
-		formatNumber: function( nInput, sSuffix ) {
-			nInput = Math.round( nInput * 100 ) / 100;
-			var buffer = nInput.toString();
-			// Gestion milliers
-			if ( nInput > 1000 ) {
-				var nThousands = Math.floor( nInput / 1000 );
-				buffer = nThousands + ' ';
-				var nRest = nInput - nThousands * 1000;
-				var sPad = "000";
-				buffer += sPad.substring( 0, sPad.length - nRest.toString().length ) + nRest;
+		formatTextToNumber: function( sInput ) {
+			var buffer = Number( sInput.split( ',' ).join( '.' ).split( ' ' ).join( '' ) );
+			if ( isNaN( buffer ) ) {
+				buffer = 0;
 			}
-			buffer = buffer.split( '.' ).join( ',' );
-			buffer += ' ' + sSuffix;
+			return buffer;
+		},
+		
+		formatNumber: function( nInput, sSuffix ) {
+			if ( nInput === parseInt( nInput, 10 ) ) {
+				nInput = nInput.toFixed( 2 );
+			}
+			var sInput = nInput.toString();
+			sInput = sInput.replace( /\d(?=(\d{3})+\.)/g, '$& ' );
+			sInput = sInput.split( '.' ).join( ',' );
+			
+			var aCutDecimals = sInput.split( ',' );
+			if ( aCutDecimals[ 1 ] === '00' ) {
+				sInput = aCutDecimals[ 0 ];
+			}
+			
+			var buffer = sInput;
+			if ( sSuffix !== '' ) {
+				buffer += ' ' + sSuffix;
+			}
+			
 			return buffer;
 		}
 	};
@@ -34,198 +47,22 @@ YPUIFunctions = (function($) {
 		currentRequest: '',
 
 		initUI: function() {
-			WDGProjectPageFunctions.initUI();
-			YPUIFunctions.initQtip();
 			WDGLightboxFunctions.init();
+			WDGNavFunctions.init();
 
 			$(document).scroll(function() {
 				if ( YPUIFunctions.currentLightbox === '' ) {
-				
-					if ($(".menu-client").length > 0) {
-						if ($(document).scrollTop() > 110) {
-							$("#nav").hide();
-							$(".menu-client").css("position", "fixed");
-							$("#content.theme-myphotoreporter #projects-stats-content").css("top", 60);
-							$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 60);
+					if ( $(document).scrollTop() > 50 ) {
+						$( 'nav#main').css( 'marginTop', 0 );
+						if ( $(document).scrollTop() > 250 ) {
+							$( '.responsive-fixed' ).addClass( 'fixed' );
 						} else {
-							$("#nav").show();
-							$(".menu-client").css("position", "relative");
-							$("#content.theme-myphotoreporter #projects-stats-content").css("top", 0);
-							$("#content.theme-myphotoreporter #post_bottom_bg").css("marginTop", 0);
+							$( '.responsive-fixed' ).removeClass( 'fixed' );
 						}
-
-
 					} else {
-						if ($(document).scrollTop() > 50) {
-							$("nav#main").css("marginTop", 0);
-						} else {
-							$("nav#main").css("marginTop", 10);
-						}
-					}
-
-					if ($(document).scrollTop() > 250) {
-						$(".responsive-fixed").addClass("fixed");
-					} else {
-						$(".responsive-fixed").removeClass("fixed");
-					}
-					
-				}
-			});
-			
-			
-			$("nav#main a.lines").click(function(e) {
-				$("nav#main a.lines").removeClass("current");
-				$(this).addClass("current"); 
-				$(this).addClass("select-nav");
-			});
-            
-			// Navbar : bouton compte utilisateur
-			$('.btn-user').click(function(e){
-				if ( $( this ).attr( 'href' ) == '#' ) {
-					e.preventDefault();
-					if ($('.btn-user').hasClass('active')) {
-						$('.btn-user').removeClass('active').addClass('inactive');
-						$('#submenu-user').hide();
-					} else {
-						$('.btn-user').addClass('active').removeClass('inactive');
-						$('#submenu-user').show();
-						$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
-						$('#submenu-search').hide();
+						$( 'nav#main' ).css( 'marginTop', 10 );
 					}
 				}
-			});
-			// Navbar : bouton recherche
-			$('#btn-search, #btn-burger').click(function(e){
-				e.preventDefault();
-				if ($('#btn-search, #btn-burger').hasClass('active')) {
-					$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
-					$('#submenu-search').hide();
-				} else {
-					$('#btn-search, #btn-burger').addClass('active').removeClass('inactive');
-					$('#submenu-search').show();
-					$('#submenu-search-input').focus();
-					$('.btn-user').removeClass('active').addClass('inactive');
-					$('#submenu-user').hide();
-					
-					if ( $( '#submenu-search ul.submenu-list li' ).length == 0 ) {
-						$.ajax({
-							'type' : "POST",
-							'url' : ajax_object.ajax_url,
-							'data': {
-								'action':'get_searchable_projects_list'
-							}
-							
-						}).done(function(result){
-							var aProjectList = JSON.parse( result );
-							var nProjects = aProjectList.length;
-							for ( var i = 0; i < nProjects; i++ ) {
-								$( '#submenu-search ul.submenu-list' ).append(
-									'<li class="hidden"><a href="https://www.wedogood.co/'+aProjectList[i].post_name+'">'+aProjectList[i].post_title+'<span class="hidden">'+aProjectList[i].post_title+'</span></a></li>'
-								);
-							}
-							$("#submenu-search-input").trigger( 'keyup' );
-						});
-					}
-				}
-			});
-			$("#submenu-search-input").keyup(function() {
-				var search = $("#submenu-search-input").val().toLowerCase();
-				$("#submenu-search .submenu-list li").addClass("hidden");
-				
-				if (search != "") {
-					$("#submenu-search .submenu-list li").each(function() {
-						var itemText = $(this).find('a').text().toLowerCase();
-						if (itemText.indexOf(search) > -1) {
-							$(this).removeClass("hidden");
-						}
-					});
-				}
-				$("#submenu-search").height("auto");
-				
-				if ( search === 'get funky!' ) {
-					$( '#container' ).empty();
-					$( '#container' ).append( '<div class="align-center" style="padding-top: 80px;"><iframe width="560" height="315" src="https://www.youtube.com/embed/kxopViU98Xo?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe></div>' );
-					WDGGETFUNKY_MARGINLEFT = 500;
-					WDGGETFUNKY();
-					function WDGGETFUNKY() {
-						WDGGETFUNKY_MARGINLEFT *= -1;
-						$( '#container div' ).animate(
-							{ marginLeft: WDGGETFUNKY_MARGINLEFT }, 
-							2000, 
-							"swing",
-							function() { WDGGETFUNKY(); }
-						);
-					}
-				}
-			});
-			
-			
-			//Apparition bouton OK pour connexion
-			showOkConnect = function(){
-				$('.model-form .submit-center').css('display', 'inline');
-				$('.model-form input#password').addClass('pwd_submit');
-				$('.model-form input.connect').addClass('ok_valid');
-			};
-			$('#menu .btn-user').click(function(){
-				if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "") {
-					showOkConnect();
-				}
-			});
-			$('.model-form #identifiant').bind("keypress click", function(){ showOkConnect(); });
-			$('.model-form #password').bind("keypress click", function(){ showOkConnect(); });
-
-			//Fermeture des box connexion et recherche au clic dans la fenêtre
-			$(window).mouseup(function(e){
-				var boxUser = $('#submenu-user');
-				var btnUser = $('#menu .btn-user');
-				var imgUser = $('#menu .btn-user img');
-				var boxSearch = $('#submenu-search');
-				var btnSearch = $('#menu #btn-search');
-				var imgSearch = $('#menu #btn-search img');
-				var btnBurger = $('#btn-burger');
-				var imgBurger = $('#btn-burger img');
-
-				//connexion
-				if(!boxUser.is(e.target) && !btnUser.is(e.target) && !imgUser.is(e.target)
-					&& boxUser.css('display')==='block' && boxUser.has(e.target).length === 0) {
-					boxUser.hide();
-					btnUser.removeClass('active').addClass('inactive');
-				}
-				//recherche
-				else if(!boxSearch.is(e.target) && !btnSearch.is(e.target) && !imgSearch.is(e.target)
-					&& !imgBurger.is(e.target) && boxSearch.css('display') === 'block' && boxSearch.has(e.target).length === 0){
-					boxSearch.hide();
-					btnSearch.removeClass('active').addClass('inactive');
-					btnBurger.removeClass('active').addClass('inactive');
-				}
-			});
-			
-			$(".social_connect_login_facebook").click( function(e) {
-				e.preventDefault();
-				$(".social_connect_login_facebook_loading").show();
-				$.ajax({
-					'type' : "POST",
-					'url' : ajax_object.ajax_url,
-					'data': {
-						'action':'get_connect_to_facebook_url',
-						'redirect':$( '.social_connect_login_facebook' ).data( 'redirect' )
-					}
-				}).done(function(result){
-					if (result.indexOf('http') > -1) {
-						window.location = result;
-					} else {
-						alert( "Facebook Connection URL Error" );
-					}
-				}).fail(function(){
-					alert( "Facebook Connection Error" );
-				}).always(function() {
-					$(".social_connect_login_facebook_loading").hide();
-				});
-			} );
-                                			
-			$("#subscribe-nl-mail").keypress(function() {
-				$("#subscribe-nl-mail").addClass("retracted");
-				$("#subscribe-nl-submit").show();
 			});
 
 			$(".expandator").css("cursor", "pointer");
@@ -332,26 +169,6 @@ YPUIFunctions = (function($) {
 			if ($(".wp-editor-wrap")[0]) {
 				setInterval(YPUIFunctions.onRemoveUploadInterval, 1000);
 			}
-
-			if ($(".home-activity-list").length > 0) {
-				setTimeout(function() {YPUIFunctions.onSlideHomeActivity(); }, YPUIFunctions.homeslideInterval);
-			}
-			if ($(".home-blog-list-nav").length > 0) {
-				$(".home-blog-list-nav a").click(function() {
-					$(".home-blog-list-nav a").removeClass("selected");
-					$(this).addClass("selected");
-					$(".home-blog-list").animate(
-						{ marginLeft: - $(this).data('targetitem') * YPUIFunctions.homeblogItemWidth},
-						500
-					);
-				});
-			}
-
-			if ($("#scroll-to-utilite-societale").length > 0) {
-				$("#scroll-to-utilite-societale").click(function() {
-					$('html, body').animate({scrollTop: $('#anchor-societal_challenge').offset().top - $("#navigation").height()}, "slow");
-				});
-			}
 			
 			$(".alert-confirm").click( function(e) {
 				e.preventDefault();
@@ -368,51 +185,6 @@ YPUIFunctions = (function($) {
 			if ($('.ajax-investments-load-short').length > 0) {
 				campaign_id = $('.ajax-investments-load-short').attr('data-value');
 				YPUIFunctions.getInvestments(campaign_id, true);
-			}
-			//Formulaire envoi mail
-			$("#jycrois-send-mail-selector").change(function(){
-				if(this.checked){
-					$("#voted-send-mail-selector").prop('disabled',true);
-					$("#invested-send-mail-selector").prop('disabled',true);
-					$("#voted-send-mail-selector").prop('checked',true);
-					$("#invested-send-mail-selector").prop('checked',true);
-				} else {
-					$("#voted-send-mail-selector").prop('disabled',false);
-					$("#invested-send-mail-selector").prop('disabled',false);
-				}
-			});
-
-			//Modification des contreparties
-			if ($(".reward-table-param").length > 0){
-
-				checkNeedNewLines = function(){
-					if ($(".reward-text").filter(function() { return $(this).val() == ""; }).length <= 1){
-						//Ajouter des lignes
-						i = parseInt($(".reward-text").last().prop("name").substring(12))+1;
-						newline = '<tr>'
-							+'<td><input name="reward-name-'+i+'" type="text" name="" value="" placeholder="Nommez et d&eacute;crivez bri&egrave;vement la contrepartie" class="reward-text"/></td>'
-							+'<td><input name="reward-amount-'+i+'" type="number" min="0" name="" value="" placeholder=""/></td>'
-							+'<td><input name="reward-limit-'+i+'" type="number" min="0" name="" value="" placeholder=""/></td>'
-							+'</tr>';
-
-						$(".reward-table-param table tbody").append(newline);
-						addListeners();
-					}
-				};
-				addListeners = function(){
-					$(".reward-text").off().on( 'keyup change', function(){
-						if(this.value===''){
-							$(this).closest("tr").find("input").css("background-color","#CCC");
-						} else {
-							$(this).closest("tr").find("input").css("background-color","");
-							//Si toutes les cases sont utilisées
-							checkNeedNewLines();
-						}
-					}).trigger('change');
-				};
-
-				addListeners();
-
 			}
 			
 			// Page accueil : affichage slider de projets
@@ -431,6 +203,12 @@ YPUIFunctions = (function($) {
 					// On affiche une zone suffisamment grande pour accueillir tous les projets d'entreprise
 					$(".projects-funded .wdg-component-projects-preview .block-projects").width( $(".projects-funded .wdg-component-projects-preview .project-container").width() * $(".projects-funded .wdg-component-projects-preview .project-container.cat-entreprises").length );
 
+				}
+			}
+			if ($(".projects-after-end-date .wdg-component-projects-preview .project-slider .block-projects").width() > $(".projects-after-end-date .wdg-component-projects-preview .project-slider").width()) {
+				if ($(".projects-after-end-date .wdg-component-projects-preview .project-slider").length > 0) {
+					$(".projects-after-end-date .wdg-component-projects-preview .block-projects").width( ($(".projects-after-end-date .wdg-component-projects-preview .project-container").width() + 5) * $(".projects-after-end-date .wdg-component-projects-preview .project-container").length );
+					$(".projects-after-end-date .wdg-component-projects-preview .project-slider").scrollLeft( ($(".projects-after-end-date .wdg-component-projects-preview .block-projects").width() - $(".projects-after-end-date .wdg-component-projects-preview .project-slider").width()) / 2 );
 				}
 			}
 			
@@ -522,14 +300,6 @@ YPUIFunctions = (function($) {
 				});
 				$('.ajax-data-inv-loader-img').slideUp();
 
-				//Liste des ID pour l'envoi de mail
-				if ($("#ajax-id-investors-load").length > 0) {
-					$('#ajax-id-investors-load #img-investors').slideDown();
-					$('#ajax-id-investors-load #invested-send-mail-selector').slideDown();
-					list_id_inv = Object.keys(inv_data.investors_list).map(function (key) {return inv_data.investors_list[key];});
-					$('#ajax-id-investors-load #invested-send-mail-list').val(list_id_inv);
-				}
-
 				// Crée le graphe des investissements si besoin
 				if ($("#ajax-invests-graph-load").length > 0) {
 					YPUIFunctions.getInvestsGraph(JSON.stringify(inv_data),campaign_id);
@@ -543,71 +313,9 @@ YPUIFunctions = (function($) {
 			}).fail(function(){});
 		},
 
-		initQtip: function(){
-			var i=0;
-			$('.infobutton, .qtip-element').each(function () {
-				//Check if doesn't exist yet
-				if($(this).data("hasqtip")==undefined){
-					var contentTip;
-					if($(this).attr("title")!=undefined){
-						contentTip = $(this).attr("title");
-					} else {
-						contentTip = $(this).next('.tooltiptext');
-					}
-
-					var settings = {
-						content: contentTip,
-						position: {
-							my: 'bottom center',
-							at: 'top center',
-						},
-						style: {
-							classes: 'wdgQtip qtip-dark qtip-rounded qtip-shadow'
-						},
-						hide: {
-							fixed: true,
-							delay: 300
-						}
-					};
-
-					if($(this).is("input[type=text], input[type=number], textarea")){
-						settings['show']='focus'
-						settings['hide']='blur'
-					}
-
-					var personnalised_settings = $(this).data("tooltip");
-					if(personnalised_settings!=undefined){
-						var data_settings = JSON.parse(personnalised_settings);
-						for (var attrname in data_settings) { settings[attrname] = data_settings[attrname]; }
-					}
-
-					if (contentTip != ""){
-						$(this).qtip(settings);
-						i++;
-					}
-				}
-			});
-			return i;
-		},
-
 		onRemoveUploadInterval: function() {
 			if ($(".media-frame-menu")[0]) $(".media-frame-menu").remove();
 			if ($(".media-frame-router")[0]) $(".media-frame-router").show();
-		},
-
-		homeblogItemWidth: 570,
-		homeslideItemWidth: 960,
-		homeslideInterval: 3000,
-		onSlideHomeActivity: function() {
-			var currentMargin = parseInt($(".home-activity-list").css("margin-left").replace("px", ""));
-			currentMargin -= YPUIFunctions.homeslideItemWidth;
-			if ($(".home-activity-list").width() < (currentMargin * -1 + 1)) currentMargin = 0;
-			$(".home-activity-list").animate(
-				{ marginLeft: currentMargin},
-				500
-			);
-
-			setTimeout(function() {YPUIFunctions.onSlideHomeActivity(); }, YPUIFunctions.homeslideInterval);
 		},
 
 		refreshProjectPreview:function () {
@@ -663,6 +371,237 @@ YPUIFunctions = (function($) {
 		}
 	};
 
+})(jQuery);
+
+var WDGNavFunctions = (function($) {
+	return {
+
+		isConnectionChecked: false,
+		
+		init: function() {
+			
+			$("nav#main a.lines").click(function(e) {
+				$("nav#main a.lines").removeClass("current");
+				$(this).addClass("current"); 
+				$(this).addClass("select-nav");
+			});
+            
+			// Navbar : bouton compte utilisateur
+			$('.btn-user').click(function(e){
+				if ( $( this ).attr( 'href' ) == '#' ) {
+					e.preventDefault();
+					if ($('.btn-user').hasClass('active')) {
+						$('.btn-user').removeClass('active').addClass('inactive');
+						$('#submenu-user').hide();
+					} else {
+						$('.btn-user').addClass('active').removeClass('inactive');
+						$('#submenu-user').show();
+						$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
+						$('#submenu-search').hide();
+						
+						if ( $( this ).hasClass( 'not-connected' ) ) {
+							WDGNavFunctions.checkUserConnection();
+						}
+					}
+				}
+			});
+			if ( $( '#content' ).length > 0 && $( '#content' ).data( 'campaignid' ) !== undefined ) {
+				WDGNavFunctions.checkUserConnection();
+			}
+			
+			// Navbar : bouton recherche
+			$('#btn-search, #btn-burger').click(function(e){
+				e.preventDefault();
+				if ($('#btn-search, #btn-burger').hasClass('active')) {
+					$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
+					$('#submenu-search').hide();
+				} else {
+					$('#btn-search, #btn-burger').addClass('active').removeClass('inactive');
+					$('#submenu-search').show();
+					$('#submenu-search-input').focus();
+					$('.btn-user').removeClass('active').addClass('inactive');
+					$('#submenu-user').hide();
+					
+					if ( $( '#submenu-search ul.submenu-list li' ).length == 0 ) {
+						$.ajax({
+							'type' : "POST",
+							'url' : ajax_object.ajax_url,
+							'data': {
+								'action':'get_searchable_projects_list'
+							}
+							
+						}).done(function(result){
+							var aProjectList = JSON.parse( result );
+							var nProjects = aProjectList.length;
+							for ( var i = 0; i < nProjects; i++ ) {
+								$( '#submenu-search ul.submenu-list' ).append(
+									'<li class="hidden"><a href="https://www.wedogood.co/'+aProjectList[i].post_name+'">'+aProjectList[i].post_title+'<span class="hidden">'+aProjectList[i].post_title+'</span></a></li>'
+								);
+							}
+							$("#submenu-search-input").trigger( 'keyup' );
+						});
+					}
+				}
+			});
+			$("#submenu-search-input").keyup(function() {
+				var search = $("#submenu-search-input").val().toLowerCase();
+				$("#submenu-search .submenu-list li").addClass("hidden");
+				
+				if (search != "") {
+					$("#submenu-search .submenu-list li").each(function() {
+						var itemText = $(this).find('a').text().toLowerCase();
+						if (itemText.indexOf(search) > -1) {
+							$(this).removeClass("hidden");
+						}
+					});
+				}
+				$("#submenu-search").height("auto");
+				
+				if ( search === 'get funky!' ) {
+					$( '#container' ).empty();
+					$( '#container' ).append( '<div class="align-center" style="padding-top: 80px;"><iframe width="560" height="315" src="https://www.youtube.com/embed/kxopViU98Xo?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe></div>' );
+					WDGGETFUNKY_MARGINLEFT = 500;
+					WDGGETFUNKY();
+					function WDGGETFUNKY() {
+						WDGGETFUNKY_MARGINLEFT *= -1;
+						$( '#container div' ).animate(
+							{ marginLeft: WDGGETFUNKY_MARGINLEFT }, 
+							2000, 
+							"swing",
+							function() { WDGGETFUNKY(); }
+						);
+					}
+				}
+			});
+			
+			
+			$('#menu .btn-user').click(function(){
+				if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "") {
+					WDGNavFunctions.showOkConnect();
+				}
+			});
+			$('.model-form #identifiant').bind("keypress click", function(){ WDGNavFunctions.showOkConnect(); });
+			$('.model-form #password').bind("keypress click", function(){ WDGNavFunctions.showOkConnect(); });
+
+			//Fermeture des box connexion et recherche au clic dans la fenêtre
+			$(window).mouseup(function(e){
+				var boxUser = $('#submenu-user');
+				var btnUser = $('#menu .btn-user');
+				var imgUser = $('#menu .btn-user img');
+				var boxSearch = $('#submenu-search');
+				var btnSearch = $('#menu #btn-search');
+				var imgSearch = $('#menu #btn-search img');
+				var btnBurger = $('#btn-burger');
+				var imgBurger = $('#btn-burger img');
+
+				//connexion
+				if(!boxUser.is(e.target) && !btnUser.is(e.target) && !imgUser.is(e.target)
+					&& boxUser.css('display')==='block' && boxUser.has(e.target).length === 0) {
+					boxUser.hide();
+					btnUser.removeClass('active').addClass('inactive');
+				}
+				//recherche
+				else if(!boxSearch.is(e.target) && !btnSearch.is(e.target) && !imgSearch.is(e.target)
+					&& !imgBurger.is(e.target) && boxSearch.css('display') === 'block' && boxSearch.has(e.target).length === 0){
+					boxSearch.hide();
+					btnSearch.removeClass('active').addClass('inactive');
+					btnBurger.removeClass('active').addClass('inactive');
+				}
+			});
+			
+			$(".social_connect_login_facebook").click( function(e) {
+				e.preventDefault();
+				$(".social_connect_login_facebook_loading").show();
+				$.ajax({
+					'type' : "POST",
+					'url' : ajax_object.ajax_url,
+					'data': {
+						'action':'get_connect_to_facebook_url',
+						'redirect':$( '.social_connect_login_facebook' ).data( 'redirect' )
+					}
+				}).done(function(result){
+					if (result.indexOf('http') > -1) {
+						window.location = result;
+					} else {
+						alert( "Facebook Connection URL Error" );
+					}
+				}).fail(function(){
+					alert( "Facebook Connection Error" );
+				}).always(function() {
+					$(".social_connect_login_facebook_loading").hide();
+				});
+			} );
+		},
+		
+		//Apparition bouton OK pour connexion
+		showOkConnect: function() {
+			$('.model-form .submit-center').css('display', 'inline');
+			$('.model-form input#password').addClass('pwd_submit');
+			$('.model-form input.connect').addClass('ok_valid');
+		},
+		
+		checkUserConnection: function() {
+			if ( WDGNavFunctions.isConnectionChecked ) {
+				return;
+			}
+			WDGNavFunctions.isConnectionChecked = true;
+			
+			var strPageInfo = '';
+			if ( $( '#content' ).length > 0 && $( '#content' ).data( 'campaignstatus' ) !== undefined && $( '#content' ).data( 'campaignstatus' ) === 'funded' ) {
+				strPageInfo = $( '#content' ).data( 'campaignid' );
+			}
+			$.ajax({
+				'type': "POST",
+				'url': ajax_object.ajax_url,
+				'data': {
+					'action': 'get_current_user_info',
+					'pageinfo': strPageInfo
+				}
+			}).done( function( result ){
+				if ( result === '0' ) {
+					$( '#submenu-user.not-connected .menu-loading-init' ).hide();
+					$( '#submenu-user.not-connected .menu-connection-forms' ).show();
+				} else {
+					var infoDecoded = JSON.parse( result );
+					$( '#menu .btn-user' ).addClass( 'connected' ).removeClass( 'not-connected' );
+					if ( infoDecoded[ 'userinfos' ][ 'display_need_authentication' ] == '1' ) {
+						$( '#menu .btn-user' ).addClass( 'needs-authentication' );
+					}
+					$( '#menu .btn-user img' ).remove();
+					$( '#menu .btn-user' ).append( infoDecoded[ 'userinfos' ][ 'image_dom_element' ] );
+					
+					$( '#submenu-user.not-connected .menu-loading-init' ).hide();
+					$( '#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name' ).text( infoDecoded[ 'userinfos' ][ 'username' ] );
+					var lengthInfoProjects = infoDecoded[ 'projectlist' ].length;
+					for ( var i = 0; i < lengthInfoProjects; i++ ) {
+						itemProject = infoDecoded[ 'projectlist' ][ i ];
+						$( '#submenu-user.not-connected .menu-connected .submenu-list' ).append( '<li><a href="' +itemProject[ 'url' ]+ '" class="' +( itemProject[ 'display_need_authentication' ] === '1' ? 'needs-authentication' : '' )+ '">' +itemProject[ 'name' ]+ '</a></li>' );
+					}
+					if ( infoDecoded[ 'userinfos' ][ 'display_need_authentication' ] == '1' ) {
+						$( '#submenu-user.not-connected .menu-connected #button-logout a' ).addClass( 'needs-authentication' );
+					}
+					$( '#submenu-user.not-connected .menu-connected #button-logout a' ).attr( 'href', infoDecoded[ 'userinfos' ][ 'logout_url' ] );
+					$( '#submenu-user.not-connected .menu-connected' ).show();
+					
+					if ( infoDecoded[ 'context' ] != undefined && infoDecoded[ 'context' ][ 'dashboard_url' ] != undefined ) {
+						if ( $( '#content .project-admin' ).length == 0 ) {
+							// Fix temporaire (hum...) : ne devrait pas être derrière cette condition
+							// Mais correct tant que les scripts ne concernent que les pages projets terminés
+							var lengthScripts = infoDecoded[ 'scripts' ].length;
+							for ( var i = 0; i < lengthScripts; i++ ) {
+								$( 'body' ).append( '<script type="text/javascript" src="' +infoDecoded[ 'scripts' ][ i ]+ '"></script>' );
+							}
+
+							$( '#content' ).append( '<div class="project-admin"></div>' );
+							$( '#content .project-admin' ).append( '<a href="' +infoDecoded[ 'context' ][ 'dashboard_url' ]+ '" class="btn-dashboard">Tableau de bord</a>' );
+							$( '#content .project-admin' ).append( '<div id="wdg-edit-project" class="btn-edit"></div>' );
+							ProjectEditor.init();
+						}
+					}
+				}
+			} );
+		}
+	};
 })(jQuery);
 
 var WDGLightboxFunctions = (function($) {
@@ -722,7 +661,6 @@ var WDGLightboxFunctions = (function($) {
 					$("#wdg-lightbox-newproject #connect-form").hide();
 					$("#wdg-lightbox-newproject #newproject-register-user").show();
 					var action = $("#wdg-lightbox-newproject #newproject-register-user form").attr("action");
-					console.log(action);
 					action = action.split("#register").join("#newproject");
 					$("#wdg-lightbox-newproject #newproject-register-user form").attr("action", action);
 				});
@@ -833,6 +771,7 @@ var WDGFormsFunctions = (function($) {
 			WDGFormsFunctions.initDatePickers();
 			WDGFormsFunctions.initTextInput();
 			WDGFormsFunctions.initFileInput();
+			WDGFormsFunctions.initSelectMultiple();
 		},
 		
 		initSaveButton: function() {
@@ -874,6 +813,9 @@ var WDGFormsFunctions = (function($) {
 							}
 							var checkboxItem = $( this ).children( 'input[type=checkbox]' )[0];
 							checkboxItem.checked = !checkboxItem.checked;
+							if ( $( this ).parent().hasClass( 'select-multiple-items' ) ) {
+								WDGFormsFunctions.refreshSelectMultiple( $( this ).parent().parent() );
+							}
 						} );
 					}
 				} );
@@ -892,21 +834,27 @@ var WDGFormsFunctions = (function($) {
 		},
 		
 		initDatePickers: function() {
-            $( 'input[type=text].adddatepicker' ).datepicker({
-                dateFormat: "dd/mm/yy",
-				yearRange: "-120:+10",
-                regional: "fr",
-                changeMonth: true,
-                changeYear: true
-            });
+			if ( $( 'input[type=text].adddatepicker' ).length > 0 ) {
+				$( 'input[type=text].adddatepicker' ).datepicker({
+					dateFormat: "dd/mm/yy",
+					yearRange: "-120:+10",
+					regional: "fr",
+					changeMonth: true,
+					changeYear: true
+				});
+			}
 		},
 		
 		initTextInput: function() {
+			$( 'input.format-number' ).each( function() {
+				var sInput = $( this ).val();
+				var sInputFormatted = JSHelpers.formatNumber( JSHelpers.formatTextToNumber( sInput ), '' );
+				$( this ).val( sInputFormatted );
+			} );
 			$( 'input.format-number' ).change( function() {
 				var sInput = $( this ).val();
-				sInput = sInput.split( ' ' ).join( '' );
-				sInput = sInput.split( ',' ).join( '.' );
-				$( this ).val( sInput );
+				var sInputFormatted = JSHelpers.formatNumber( JSHelpers.formatTextToNumber( sInput ), '' );
+				$( this ).val( sInputFormatted );
 			} );
 		},
 		
@@ -971,6 +919,38 @@ var WDGFormsFunctions = (function($) {
 				}
 				$( '#' + inputID ).click();
 			} );
+		},
+		
+		initSelectMultiple: function() {
+			$( '.select-multiple-items-retracted' ).click( function() {
+				var siblings = $( this ).siblings( '.select-multiple-items' );
+				// On change l'état du bouton à l'inverse de celui de la liste, avant le changement car il y a un délai
+				if ( siblings.is( ':visible' ) ) {
+					$( this ).removeClass( 'reverse' );
+				} else {
+					$( this ).addClass( 'reverse' );
+				}
+				siblings.toggle( 50 );
+			} );
+		},
+		
+		refreshSelectMultiple: function( checkboxContainer ) {
+			var selectSpanItem = checkboxContainer.find( 'span.select-multiple-items-retracted-values' )[ 0 ];
+			
+			var sLabelText = '';
+			var checkboxLabelList = checkboxContainer.find( 'label.radio-label' );
+			var checkboxList = checkboxContainer.find( 'label.radio-label input' );
+			var nCheckbox = checkboxLabelList.length;
+			for ( var i = 0; i <nCheckbox; i++ ) {
+				if ( checkboxList[ i ].checked ) {
+					if ( sLabelText !== '' ) {
+						sLabelText += ', ';
+					}
+					sLabelText += $( checkboxLabelList[ i ] ).text();
+				}
+			}
+			sLabelText = sLabelText.split( '\n' ).join( '' ).split( '\t' ).join( '' );
+			$( selectSpanItem ).text( sLabelText );
 		},
 		
 		setRateCheckboxes: function( sRateType, nRate ) {
@@ -1063,206 +1043,5 @@ var WDGFormsFunctions = (function($) {
 			}
 		}
 		
-	};
-})(jQuery);
-
-/* Projet */
-WDGProjectPageFunctions=(function($) {
-	return {
-		currentDiv: 0,
-		isInit: false,
-		isEditing: "",
-		isClickBlocked: false,
-		navigationHeight: 0,
-		initUI:function() {
-			WDGProjectPageFunctions.navigationHeight = ($("nav.project-navigation").height() > 0 && $("nav.project-navigation").is(':visible')) ? $("nav.project-navigation").height() : $("nav").height();
-			WDGProjectPageFunctions.initClick();
-			$('.project-content-icon').click(function(){
-				var contentDiv = $("#project-content-" + $(this).data("content"));
-				contentDiv.trigger("click");
-			});
-			$('.project-content-icon').css("cursor", "pointer");
-
-			$("#btn-validate_project-true").click(function(){
-				$("#validate_project-true").show();
-				$("#validate_project-false").hide();
-			});
-			$("#btn-validate_project-false").click(function(){
-				$("#validate_project-false").show();
-				$("#validate_project-true").hide();
-			});
-		},
-
-		update_jycrois:function(jy_crois,campaign_id,home_url){
-			var img_url=home_url+'/images/';
-			if(jy_crois==0) {
-				jy_crois_temp=1;
-				img_url+='grenage_projet.jpg';
-				$('#jy-crois-btn').css('background-image','url("'+img_url+'")');
-				$('#jy-crois-txt').text('J\'y crois');
-			}else{
-				jy_crois_temp=0;
-				img_url+='jycrois_gris.png';
-				$('#jy-crois-txt').text('');
-				$('#jy-crois-btn').css('background-image','url("'+img_url+'")');
-			}
-			var actual_text=$('#nb-jycrois').text();
-			if (jy_crois==1) {
-				$('#nb-jycrois').text(parseInt(actual_text)+1);
-			}
-			else{
-				$('#nb-jycrois').text(parseInt(actual_text)-1);
-			}
-			$('.jy-crois').attr("href", "javascript:WDGProjectPageFunctions.update_jycrois("+jy_crois_temp+","+campaign_id+",\""+home_url+"\")");
-			$.ajax({
-				'type' : "POST",
-				'url' : ajax_object.ajax_url,
-				'data': {
-					'action':'update_jy_crois',
-					'jy_crois' : jy_crois,
-					'id_campaign' : campaign_id
-				}
-			}).done(function(){});
-		},
-
-		share_btn_click:function() {
-			$("#dialog").dialog({
-				width: '350px',
-				zIndex: 5,
-				draggable: false,
-				resizable: false,
-				autoOpen: false,
-				modal: true,
-				show: {
-					effect: "blind",
-					duration: 300
-				},
-				hide: {
-					effect: "blind",
-					duration: 300
-				}
-			});
-			$("#dialog").dialog("open");
-		},
-
-
-		//Initialisation du comportement des différentes parties
-		initClick: function() {
-			WDGProjectPageFunctions.currentDiv = 0;
-			$(".projects-more").remove();
-			$('.projects-desc-content').each(function(){
-				//Si il y a plus d'un paragraphe, on initialise le clic
-				if ($(this).find('p').length > 1) {
-					$(this).css("cursor", "pointer");
-					var sDisplay = '';
-					if ((!WDGProjectPageFunctions.isInit && WDGProjectPageFunctions.currentDiv === 0) || $(this).attr("id") === "project-content-" + WDGProjectPageFunctions.isEditing) sDisplay = 'style="display:none"';
-					var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'></div>';
-					$(this).find('div *:lt(1)').append(sProjectMore);
-					$(this).unbind("click");
-					$(this).click(function(){
-						WDGProjectPageFunctions.clickItem($(this));
-					});
-				}
-
-				//Rétractation des parties qui ne sont pas la description
-				if ((WDGProjectPageFunctions.isInit || WDGProjectPageFunctions.currentDiv > 0) && $(this).attr("id") !== "project-content-" + WDGProjectPageFunctions.isEditing) {
-					//On prend toutes les balises de la description
-					var children = $(this).children().children();
-					//On les masque sauf la première
-					$(this).find(children.not('*:eq(0)')).hide();
-				}
-				WDGProjectPageFunctions.currentDiv++;
-			});
-			$('.projects-desc-content img, .projects-desc-content .expandator, .projects-desc-content .edit-button, .projects-desc-content .edit-button-validate, .projects-desc-content .cancel-button').click(function() {
-				WDGProjectPageFunctions.isClickBlocked = true;
-			});
-			WDGProjectPageFunctions.refreshEditable();
-			WDGProjectPageFunctions.isInit = true;
-		},
-
-		//Clic sur une partie
-		clickItem: function(clickedElement) {
-			//Ne déclenche pas d'action si l'utilisateur sélectionnait du texte
-			var select = getSelection().toString();
-			if (!select && !WDGProjectPageFunctions.isClickBlocked) {
-				//Si la balise "lire plus" de l'élément cliqué est affichée
-				var projectMore = clickedElement.find('.projects-more');
-				if (projectMore.is(':visible')) {
-					//il faut la masquer puis afficher les éléments qui suivent
-					projectMore.hide(400, function(){
-						setTimeout( function() {
-							var offset = - 60;
-							if ( $( document ).width() < 997 ) {
-								offset = - 45;
-							}
-							$('html, body').animate({scrollTop: clickedElement.offset().top - WDGProjectPageFunctions.navigationHeight + offset}, "slow");
-							clickedElement.find('.zone-content > div, p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
-							//on empêche les petites zones d'être éditable si une partie est en cours d'édition
-							if ( WDGProjectPageFunctions.isEditing === "" ) {
-								WDGProjectPageFunctions.refreshEditable();
-							}
-						}, 200 );
-					});
-					//on masque aussi toutes les autres parties si aucune partie est en cours d'édition
-					if ( WDGProjectPageFunctions.isEditing === "" ) {
-						WDGProjectPageFunctions.hideOthers(parseInt(projectMore.attr("data-value")));
-					}
-					//Sinon on masque tout
-				} else if ( WDGProjectPageFunctions.isEditing === "" ) {
-					WDGProjectPageFunctions.hideOthers(-1);
-					WDGProjectPageFunctions.refreshEditable();
-				}
-			} 
-			WDGProjectPageFunctions.isClickBlocked = false;
-		},
-
-		//Masque des parties non utilisées
-		hideOthers:function(currentDiv){
-			//Parcours des différentes parties
-			var index = 0;
-			$('.projects-desc-content').each(function(){
-				//On teste pour masquer toutes celles qui ne sont pas celle clickée
-				if (index !== currentDiv) {
-					$(this).find('.projects-more').slideDown(200);
-					$(this).children().children().not('*:eq(0)').slideUp(400);
-				}
-				index++;
-			});
-		},
-
-		//Rafraichit chacune des zones pour savoir si elles sont éditables
-		refreshEditable: function() {
-			$(".projects-desc-content .zone-content").removeClass("editable");
-			$('.projects-desc-content').each(function(){
-				var projectMore = $(this).find('.projects-more');
-				var property = $(this).attr("id").substr(("project-content-").length);
-				//Si le Lire plus est visible, la zone n'est pas éditable
-				if (projectMore.is(':visible')) {
-					WDGProjectPageFunctions.hideEditButton(property);
-					//Si le Lire plus n'est pas visible & si la page est en cours d'édition, la zone est éditable
-				} else if ($("#content").hasClass("editing") && property !== "statistics") {
-					$(this).children(".zone-content").addClass("editable");
-					WDGProjectPageFunctions.showEditButton(property);
-					//Sinon, la zone n'est pas éditable
-				} else {
-					WDGProjectPageFunctions.hideEditButton(property);
-				}
-			});
-		},
-
-		//Affiche le bouton d'édition d'une zone en particulier
-		showEditButton: function(property) {
-			if (typeof ProjectEditor !== 'undefined') {
-				ProjectEditor.showEditButton(property);
-			}
-		},
-
-		//Masque le bouton d'édition d'une zone en particulier
-		hideEditButton: function(property) {
-			if (typeof ProjectEditor !== 'undefined') {
-				ProjectEditor.hideEditButton(property);
-			}
-		}
-
 	};
 })(jQuery);

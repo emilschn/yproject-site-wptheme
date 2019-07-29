@@ -1,6 +1,7 @@
 jQuery(document).ready( function($) {
     WDGProjectViewer.init();
 	WDGProjectVote.init();
+	WDGProjectPageFunctions.initUI();
 });
 
 
@@ -41,6 +42,12 @@ var WDGProjectViewer = (function($) {
 			$("div#content.version-3 div.project-banner div.project-banner-title form select").change(function() {
 				$(this).parent().submit();
 			});
+
+			if ($("#scroll-to-utilite-societale").length > 0) {
+				$("#scroll-to-utilite-societale").click(function() {
+					$('html, body').animate({scrollTop: $('#anchor-societal_challenge').offset().top - $("#navigation").height()}, "slow");
+				});
+			}
 			
 			if ( $( document ).width() < 997 ) {
 				if ( $( 'div#project-banner-picture .video-element iframe' ).length > 0 ) {
@@ -170,7 +177,8 @@ var WDGProjectViewer = (function($) {
 			}
 
 			$( '.project-description-item a' ).attr( 'target', '_blank' );
-			$( '.project-description-item a > img' ).parent().click( function( e ) { e.preventDefault(); } );
+			$( '.project-description-item a > img, .project-news-item a > img' ).parent().css( 'cursor', 'default' );
+			$( '.project-description-item a > img, .project-news-item a > img' ).parent().click( function( e ) { e.preventDefault(); } );
 		},
 		
 		refreshScroll: function() {
@@ -288,4 +296,200 @@ var WDGProjectVote = (function($) {
 		}
 	};
     
+})(jQuery);
+
+/* Projet */
+WDGProjectPageFunctions=(function($) {
+	return {
+		currentDiv: 0,
+		isInit: false,
+		isEditing: "",
+		isClickBlocked: false,
+		navigationHeight: 0,
+		initUI:function() {
+			WDGProjectPageFunctions.navigationHeight = ($("nav.project-navigation").height() > 0 && $("nav.project-navigation").is(':visible')) ? $("nav.project-navigation").height() : $("nav").height();
+			WDGProjectPageFunctions.initClick();
+			$('.project-content-icon').click(function(){
+				var contentDiv = $("#project-content-" + $(this).data("content"));
+				contentDiv.trigger("click");
+			});
+			$('.project-content-icon').css("cursor", "pointer");
+
+			$("#btn-validate_project-true").click(function(){
+				$("#validate_project-true").show();
+				$("#validate_project-false").hide();
+			});
+			$("#btn-validate_project-false").click(function(){
+				$("#validate_project-false").show();
+				$("#validate_project-true").hide();
+			});
+		},
+
+		update_jycrois:function(jy_crois,campaign_id,home_url){
+			var img_url=home_url+'/images/';
+			if(jy_crois==0) {
+				jy_crois_temp=1;
+				img_url+='grenage_projet.jpg';
+				$('#jy-crois-btn').css('background-image','url("'+img_url+'")');
+				$('#jy-crois-txt').text('J\'y crois');
+			}else{
+				jy_crois_temp=0;
+				img_url+='jycrois_gris.png';
+				$('#jy-crois-txt').text('');
+				$('#jy-crois-btn').css('background-image','url("'+img_url+'")');
+			}
+			var actual_text=$('#nb-jycrois').text();
+			if (jy_crois==1) {
+				$('#nb-jycrois').text(parseInt(actual_text)+1);
+			}
+			else{
+				$('#nb-jycrois').text(parseInt(actual_text)-1);
+			}
+			$('.jy-crois').attr("href", "javascript:WDGProjectPageFunctions.update_jycrois("+jy_crois_temp+","+campaign_id+",\""+home_url+"\")");
+			$.ajax({
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': {
+					'action':'update_jy_crois',
+					'jy_crois' : jy_crois,
+					'id_campaign' : campaign_id
+				}
+			}).done(function(){});
+		},
+
+		share_btn_click:function() {
+			$("#dialog").dialog({
+				width: '350px',
+				zIndex: 5,
+				draggable: false,
+				resizable: false,
+				autoOpen: false,
+				modal: true,
+				show: {
+					effect: "blind",
+					duration: 300
+				},
+				hide: {
+					effect: "blind",
+					duration: 300
+				}
+			});
+			$("#dialog").dialog("open");
+		},
+
+
+		//Initialisation du comportement des différentes parties
+		initClick: function() {
+			WDGProjectPageFunctions.currentDiv = 0;
+			$(".projects-more").remove();
+			$('.projects-desc-content').each(function(){
+				//Si il y a plus d'un paragraphe, on initialise le clic
+				if ($(this).find('p').length > 1) {
+					$(this).css("cursor", "pointer");
+					var sDisplay = '';
+					if ((!WDGProjectPageFunctions.isInit && WDGProjectPageFunctions.currentDiv === 0) || $(this).attr("id") === "project-content-" + WDGProjectPageFunctions.isEditing) sDisplay = 'style="display:none"';
+					var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'></div>';
+					$(this).find('div *:lt(1)').append(sProjectMore);
+					$(this).unbind("click");
+					$(this).click(function(){
+						WDGProjectPageFunctions.clickItem($(this));
+					});
+				}
+
+				//Rétractation des parties qui ne sont pas la description
+				if ((WDGProjectPageFunctions.isInit || WDGProjectPageFunctions.currentDiv > 0) && $(this).attr("id") !== "project-content-" + WDGProjectPageFunctions.isEditing) {
+					//On prend toutes les balises de la description
+					var children = $(this).children().children();
+					//On les masque sauf la première
+					$(this).find(children.not('*:eq(0)')).hide();
+				}
+				WDGProjectPageFunctions.currentDiv++;
+			});
+			$('.projects-desc-content img, .projects-desc-content .expandator, .projects-desc-content .edit-button, .projects-desc-content .edit-button-validate').click(function() {
+				WDGProjectPageFunctions.isClickBlocked = true;
+			});
+			WDGProjectPageFunctions.refreshEditable();
+			WDGProjectPageFunctions.isInit = true;
+		},
+
+		//Clic sur une partie
+		clickItem: function(clickedElement) {
+			//Ne déclenche pas d'action si l'utilisateur sélectionnait du texte
+			var select = getSelection().toString();
+			if (!select && WDGProjectPageFunctions.isEditing === "" && !WDGProjectPageFunctions.isClickBlocked) {
+				//Si la balise "lire plus" de l'élément cliqué est affichée
+				var projectMore = clickedElement.find('.projects-more');
+				if (projectMore.is(':visible')) {
+					//il faut la masquer puis afficher les éléments qui suivent
+					projectMore.hide(400, function(){
+						setTimeout( function() {
+							var offset = - 60;
+							if ( $( document ).width() < 997 ) {
+								offset = - 45;
+							}
+							$('html, body').animate({scrollTop: clickedElement.offset().top - WDGProjectPageFunctions.navigationHeight + offset}, "slow");
+							clickedElement.find('.zone-content > div, p, ul, table, blockquote, h1, h2, h3, h4, h5, h6').slideDown(400);
+							WDGProjectPageFunctions.refreshEditable();
+						}, 200 );
+					});
+					//on masque aussi toutes les autres parties
+					WDGProjectPageFunctions.hideOthers(parseInt(projectMore.attr("data-value")));
+					//Sinon on masque tout
+				} else {
+					WDGProjectPageFunctions.hideOthers(-1);
+					WDGProjectPageFunctions.refreshEditable();
+				}
+			}
+			WDGProjectPageFunctions.isClickBlocked = false;
+		},
+
+		//Masque des parties non utilisées
+		hideOthers:function(currentDiv){
+			//Parcours des différentes parties
+			var index = 0;
+			$('.projects-desc-content').each(function(){
+				//On teste pour masquer toutes celles qui ne sont pas celle clickée
+				if (index !== currentDiv) {
+					$(this).find('.projects-more').slideDown(200);
+					$(this).children().children().not('*:eq(0)').slideUp(400);
+				}
+				index++;
+			});
+		},
+
+		//Rafraichit chacune des zones pour savoir si elles sont éditables
+		refreshEditable: function() {
+			$(".projects-desc-content .zone-content").removeClass("editable");
+			$('.projects-desc-content').each(function(){
+				var projectMore = $(this).find('.projects-more');
+				var property = $(this).attr("id").substr(("project-content-").length);
+				//Si le Lire plus est visible, la zone n'est pas éditable
+				if (projectMore.is(':visible')) {
+					WDGProjectPageFunctions.hideEditButton(property);
+					//Si le Lire plus n'est pas visible & si la page est en cours d'édition, la zone est éditable
+				} else if ($("#content").hasClass("editing") && property !== "statistics") {
+					$(this).children(".zone-content").addClass("editable");
+					WDGProjectPageFunctions.showEditButton(property);
+					//Sinon, la zone n'est pas éditable
+				} else {
+					WDGProjectPageFunctions.hideEditButton(property);
+				}
+			});
+		},
+
+		//Affiche le bouton d'édition d'une zone en particulier
+		showEditButton: function(property) {
+			if (typeof ProjectEditor !== 'undefined') {
+				ProjectEditor.showEditButton(property);
+			}
+		},
+
+		//Masque le bouton d'édition d'une zone en particulier
+		hideEditButton: function(property) {
+			if (typeof ProjectEditor !== 'undefined') {
+				ProjectEditor.hideEditButton(property);
+			}
+		}
+
+	};
 })(jQuery);

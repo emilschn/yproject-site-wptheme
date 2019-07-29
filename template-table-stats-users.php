@@ -45,13 +45,6 @@ $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 						$files_path = $roi_declaration->get_file_path();
 						?>
 						- <strong><?php echo $declaration_data->name_project; ?> :</strong>
-							<?php if ( $roi_declaration->get_adjustment_validated() ): ?>
-							Ajustement validé
-							<?php else: ?>
-							Ajustement en cours
-							<?php endif; ?>
-							<br>
-							
 							<?php if ( empty( $roi_declaration_file_list ) ): ?>
 							Aucun fichier transmis
 							<?php else: ?>
@@ -276,12 +269,12 @@ $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 					<tr>
 						<td>Prénom Nom</td>
 						<td>e-mail</td>
-						<td>Sexe / Entité</td>
+						<td>Entité morale</td>
+						<td>Sexe</td>
 						<td>Date de naissance</td>
 						<td>Adresse</td>
 						<td>CP</td>
 						<td>Ville</td>
-						<td>Pays</td>
 						<td>Nb projets suivis</td>
 						<td>Nb projets votés</td>
 						<td>Nb investissements</td>
@@ -292,12 +285,12 @@ $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 					<tr>
 						<td>Prénom Nom</td>
 						<td>e-mail</td>
-						<td>Sexe / Entité</td>
+						<td>Entité morale</td>
+						<td>Sexe</td>
 						<td>Date de naissance</td>
 						<td>Adresse</td>
 						<td>CP</td>
 						<td>Ville</td>
-						<td>Pays</td>
 						<td>Nb projets suivis</td>
 						<td>Nb projets votés</td>
 						<td>Nb investissements</td>
@@ -351,12 +344,12 @@ $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 						<tr>
 							<td><?php echo $entity_name; ?></td>
 							<td><?php echo $entity_email; ?></td>
+							<td><?php echo ( $entity_gender == 'O' ) ? 'OUI' : 'NON'; ?></td>
 							<td><?php echo $entity_gender; ?></td>
 							<td><?php echo $entity_birthdate; ?></td>
 							<td><?php echo $entity_address; ?></td>
 							<td><?php echo $entity_postal_code; ?></td>
 							<td><?php echo $entity_city; ?></td>
-							<td><?php echo $entity_country; ?></td>
 							<td><?php echo $user_result->nb_follow; ?></td>
 							<td><?php echo $user_result->nb_votes; ?></td>
 							<td><?php echo $user_result->nb_invest; ?></td>
