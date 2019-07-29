@@ -1902,7 +1902,7 @@ WDGCampaignDashboard.prototype.initFinance = function(){
 						'<td>Année&nbsp;<span class="year">'+(i+1+nb_years_li_existing)+'</span></td>'+
 						'<td class="field field-value" data-type="number" data-id="new_estimated_turnover_'+(i+nb_years_li_existing)+'">'+
 						'<i class="right fa" aria-hidden="true"></i>'+
-						'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon format-number" />&nbsp;'+$('#estimated-turnover').data('symbol')+                                   
+						'<input type="number" value="0" id="new_estimated_turnover_'+(i+nb_years_li_existing)+'" class="right-icon" />&nbsp;'+$('#estimated-turnover').data('symbol')+                                   
 						'</td>'+
 						'<td id="roi-amount-'+(i+nb_years_li_existing)+'">0 '+$('#estimated-turnover').data('symbol')+
 						'</td>'+
