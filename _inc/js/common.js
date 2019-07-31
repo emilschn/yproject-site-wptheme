@@ -18,13 +18,17 @@ JSHelpers = ( function( $ ) {
 		},
 		
 		formatNumber: function( nInput, sSuffix ) {
+			// On passe les entiers en float avec .00 pour qu'ils soient reconnus par le pattern en dessous
 			if ( nInput === parseInt( nInput, 10 ) ) {
-				nInput = nInput.toFixed( 2 );
+				nInput = parseFloat( nInput ).toFixed( 2 );
 			}
 			var sInput = nInput.toString();
+			// Ecarts pour les milliers
 			sInput = sInput.replace( /\d(?=(\d{3})+\.)/g, '$& ' );
+			// Remplacement . par , pour les décimales
 			sInput = sInput.split( '.' ).join( ',' );
 			
+			// Si c'est en fait un entier, on enlève les chiffres après la virgule
 			var aCutDecimals = sInput.split( ',' );
 			if ( aCutDecimals[ 1 ] === '00' ) {
 				sInput = aCutDecimals[ 0 ];
