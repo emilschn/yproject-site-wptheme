@@ -246,6 +246,14 @@ YPUIFunctions = (function($) {
 					}
 				});
 			}
+			
+			$( '.avoid-enter-validation' ).on( 'keyup keypress', function(e) {
+				var keyCode = e.keyCode || e.which;
+				if  (keyCode === 13 ) { 
+					e.preventDefault();
+					return false;
+				}
+			} );
 		},
 		/**
 		 * Fonction pour récupérer la position x,y d'un élément
