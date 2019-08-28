@@ -141,16 +141,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="project-filter-container">
-                <select id="project-filter-activity" class="project-filter-select">
-                    <option value="all"><?php _e( "Tous les types de projet", 'yproject' ); ?></option>
-                    <?php foreach ( $activities_list as $activity ): ?>
-						<?php if ( $activity->slug != 'epargne-positive' ): ?>
-						<option value="<?php echo $activity->slug; ?>" <?php selected( $activity->slug, 'entreprises' ); ?>><?php echo $activity->name; ?></option>
-						<?php endif; ?>
-                    <?php endforeach; ?>
-                </select>
-            </div>
 		</nav>
 				
 	<?php
@@ -219,7 +209,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<div class="padder">
 				<section class="wdg-component-projects-preview">
 					<h2 class="standard">/ <?php _e( "Lev&eacute;es de fonds en cl&ocirc;ture", 'yproject' ); ?> /</h2>
-					<div class="projects-after-end-date-precisions"><?php _e( "Ces projets ont &eacute;t&eacute; financ&eacute;s avec succ&egrave;s mais il est toujours possible d'investir jusqu'au d&eacute;marrage de leur contrat de royalties.", 'yproject' ); ?></div>
+					<div class="projects-title-precisions"><?php _e( "Ces projets ont &eacute;t&eacute; financ&eacute;s avec succ&egrave;s mais il est toujours possible d'investir jusqu'au d&eacute;marrage de leur contrat de royalties.", 'yproject' ); ?></div>
 
 					<div class="project-slider">
 						<div class="block-projects">
@@ -253,7 +243,77 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 // FIN CURRENT PROJECTS
 /******************************************************************************/
 ?>
-		
+
+
+<?php
+/******************************************************************************/
+// POSITIVE SAVINGS PROJECTS
+/******************************************************************************/
+?>
+					
+<?php $positive_savings_projects_html = $page_controler->get_positive_savings_projects_html(); ?>
+
+<?php if ( !$positive_savings_projects_html ): ?>
+
+<?php ob_start(); ?>
+						
+	<?php $project_list_positive_savings = $page_controler->get_positive_savings_projects_list(); ?>
+	<?php if ( count( $project_list_positive_savings ) > 0 ): ?>
+
+	<div>
+		<div class="padder projects-positive-savings">
+
+			<section class="wdg-component-projects-preview">
+				<h2 class="standard">/ <?php _e( "&Eacute;pargne Positive", 'yproject' ); ?> /</h2>
+				<div class="projects-title-precisions">
+					<?php _e( "Ces projets sont disponibles en continu et permettent d'investir autant de fois que vous le souhaitez dans la transition &eacute;cologique.", 'yproject' ); ?><br>
+					<a href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( "En savoir plus sur l'&Eacute;pargne Positive.", 'yproject' ); ?></a>
+				</div>
+
+
+				<div class="project-slider">
+					<div class="block-projects">
+
+						<?php
+						foreach ( $project_list_positive_savings as $project_post ) {
+							$project_id = $project_post->ID;
+							locate_template( array( "projects/preview.php" ), true, false );
+						}
+						?>
+						
+					</div>
+				</div>
+			</section>
+
+		</div><!-- .padder -->
+	</div>
+
+	<?php endif; ?>
+	
+<?php
+if ( $index_project > 1 ) {
+	$cache_positive_savings_projects = ob_get_contents();
+	$page_controler->set_positive_savings_projects_html( $cache_positive_savings_projects, $index_cache );
+	ob_end_clean();
+}
+?>
+					
+<?php endif; ?>
+
+<?php echo $page_controler->get_positive_savings_projects_html(); ?>
+
+<?php
+/******************************************************************************/
+// FIN POSITIVE SAVINGS PROJECTS
+/******************************************************************************/
+?>
+
+
+<?php
+/******************************************************************************/
+// FUNDED PROJECTS
+/******************************************************************************/
+?>
 	<div>
 		<div class="padder projects-funded">
 
@@ -309,5 +369,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 		</div><!-- .padder -->
 	</div>
+
+<?php
+/******************************************************************************/
+// FIN FUNDED PROJECTS
+/******************************************************************************/
+?>
 	
 </div><!-- #content -->

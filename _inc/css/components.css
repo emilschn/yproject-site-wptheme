@@ -319,6 +319,13 @@
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-status{
     width: 50%;
 }
+.wdg-component-projects-preview .project-container.cat-epargne-positive .project-framed .progress-info .progress-pers {
+	width: 100%;
+	border-right: 0px;
+}
+.wdg-component-projects-preview .project-container.cat-epargne-positive .project-framed .progress-info .progress-days {
+	display: none;
+}
 
 .wdg-component-projects-preview .project-container .project-framed .progress-info .info-nb{
 	display: block;

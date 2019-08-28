@@ -229,11 +229,9 @@ YPUIFunctions = (function($) {
 				$("#project-filter .project-filter-select").click(function() {
 					var step = $("#project-filter-step").val();
 					var location = $("#project-filter-location").val();
-					var activity = $("#project-filter-activity").val();
 					var impact = $("#project-filter-impact").val();
-					YPUIFunctions.refreshProjectList( step, location, activity, impact );
+					YPUIFunctions.refreshProjectList( step, location, impact );
 				});
-				$("#project-filter-activity").val( 'entreprises' );
 				$("#project-filter .project-filter-select").trigger("click");
 				
 				$("div.padder.projects-funded button").click(function() {
@@ -347,7 +345,7 @@ YPUIFunctions = (function($) {
 			}
 		},
 
-		refreshProjectList: function( step, location, activity, impact ) {
+		refreshProjectList: function( step, location, impact ) {
 			var locationList = location.split(',');
 			$(".wdg-component-projects-preview .block-projects .project-container").show();
 			$(".wdg-component-projects-preview .block-projects .project-container").each(function() {
@@ -356,9 +354,6 @@ YPUIFunctions = (function($) {
 					$(this).hide();
 				}
 				if ( location !== "all" && locationList.indexOf( $(this).data("location").toString() ) === -1 ) {
-					$(this).hide();
-				}
-				if ( activity !== "all" && categoryList.indexOf( activity ) === -1 ) {
 					$(this).hide();
 				}
 				if ( impact !== "all" && categoryList.indexOf( impact ) === -1 ) {

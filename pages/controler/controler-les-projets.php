@@ -19,6 +19,12 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	private $currentprojects_html;
 	private $currentprojects_list;
 	
+	private static $positive_savings_projects_html_key = 'projectlist-projects-positive-savings';
+	private static $positive_savings_projects_html_duration = 7200; // 2 heures de cache
+	private static $positive_savings_projects_html_version = 2;
+	private $positive_savings_projects_html;
+	private $positive_savings_projects_list;
+	
 	private static $fundedprojects_html_key = 'projectlist-projects-funded';
 	private static $fundedprojects_html_duration = 7200; // 2 heures de cache
 	private static $fundedprojects_html_version = 2;
@@ -34,6 +40,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		$this->prepare_stats();
 		$this->prepare_filters();
 		$this->prepare_currentprojects();
+		$this->prepare_positive_savings_projects();
 		$this->prepare_fundedprojects();
 	}
 	
@@ -145,9 +152,9 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		$this->currentprojects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$currentprojects_html_key, WDG_Page_Controler_ProjectList::$currentprojects_html_version );
 		if ( empty( $this->currentprojects_html ) ) {
 			$this->currentprojects_list = array(
-				'funding'		=> ATCF_Campaign::get_list_funding( 0, '', TRUE ),
-				'funding_after'	=> ATCF_Campaign::get_list_funding( 0, '', TRUE, FALSE ),
-				'vote'			=> ATCF_Campaign::get_list_vote( 0, '', TRUE )
+				'funding'			=> ATCF_Campaign::get_list_funding( 0, '', TRUE ),
+				'funding_after'		=> ATCF_Campaign::get_list_funding( 0, '', TRUE, FALSE ),
+				'vote'				=> ATCF_Campaign::get_list_vote( 0, '', TRUE )
 			);
 		}
 	}
@@ -163,6 +170,29 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	
 	public function get_currentprojects_list() {
 		return $this->currentprojects_list;
+	}
+	
+/******************************************************************************/
+// POSITIVE SAVINGS PROJECTS
+/******************************************************************************/
+	private function prepare_positive_savings_projects() {
+		$this->positive_savings_projects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$positive_savings_projects_html_key, WDG_Page_Controler_ProjectList::$positive_savings_projects_html_version );
+		if ( empty( $this->positive_savings_projects_html ) ) {
+			$this->positive_savings_projects_list = ATCF_Campaign::get_list_positive_savings( 0 );
+		}
+	}
+	
+	public function get_positive_savings_projects_html() {
+		return $this->positive_savings_projects_html;
+	}
+	
+	public function set_positive_savings_projects_html( $html, $index ) {
+		$this->positive_savings_projects_html = $html;
+		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$positive_savings_projects_html_key, $html, WDG_Page_Controler_ProjectList::$positive_savings_projects_html_duration, WDG_Page_Controler_ProjectList::$positive_savings_projects_html_version );
+	}
+	
+	public function get_positive_savings_projects_list() {
+		return $this->positive_savings_projects_list;
 	}
 	
 /******************************************************************************/

@@ -5,10 +5,31 @@ global $stylesheet_directory_uri, $project_id;
  *
  */
 $campaign = atcf_get_campaign( $project_id );
+$title = get_the_title( $campaign->ID );
+$description = html_entity_decode( $campaign->summary() );
 $img = $campaign->get_home_picture_src( TRUE, 'large' );
 $campaign_status = $campaign->campaign_status();
 $campaign_categories_str = $campaign->get_categories_str();
 $class_category = ( strpos( $campaign_categories_str, 'actifs' ) !== FALSE ) ? 'cat-actifs' : 'cat-entreprises';
+if ( strpos( $campaign_categories_str, 'epargne-positive' ) !== FALSE ) {
+	$class_category .= ' cat-epargne-positive';
+
+	$term_positive_savings_by_slug = get_term_by( 'slug', 'epargne-positive', 'download_category' );
+	$id_cat_positive_savings = $term_positive_savings_by_slug->term_id;
+	$categories = get_the_terms( $campaign->ID, 'download_category' );
+	foreach ( $categories as $category ) {
+		if ( $category->parent == $id_cat_positive_savings ) {
+			$title = $category->name;
+			$description = $category->description;
+			$array_description_exploded = preg_split( "/\n/", $description );
+			if ( count( $array_description_exploded ) > 1 ) {
+				$img = array_pop( $array_description_exploded );
+				$description = implode( '<br>', $array_description_exploded );
+			}
+			break;
+		}
+	}
+}
 
 $percent = min(100, $campaign->percent_minimum_completed(false));
 $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
@@ -31,11 +52,9 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
     </a>
         <div class="project-framed">
             <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
-                <h2 class="project-title"> <?php echo get_the_title($project_id) ?> </h2>           
+                <h2 class="project-title"> <?php echo $title; ?> </h2>           
                 <div class="project-img" style="background-image: url('<?php echo $img; ?>')"></div>
-                <div class="project-summary">
-                    <?php echo html_entity_decode($campaign->summary()); ?>   
-                </div>
+                <div class="project-summary"><?php echo $description; ?></div>
             </a>
         <?php 
             $jycrois = $campaign->get_jycrois_nb();
