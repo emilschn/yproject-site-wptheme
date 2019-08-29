@@ -56,6 +56,11 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
         <a class="hidden-link" href="<?php echo get_permalink($campaign->ID); ?>">
 			<?php
 				$time_remaining_str = $campaign->time_remaining_str();
+
+				if ( $time_remaining_str == '-' && $campaign_status === ATCF_Campaign::$campaign_status_collecte && $campaign->can_invest_until_contract_start_date() ) {
+					$time_remaining_str = $campaign->time_remaining_str_until_contract_start_date();
+				}
+
 				if ($time_remaining_str != '-') {
 					$time_remaining_str_split = explode('-', $time_remaining_str);
 					$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
@@ -68,9 +73,9 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 				}
 				
 
-                if ($campaign_status === ATCF_Campaign::$campaign_status_collecte):
+                if ( $campaign_status === ATCF_Campaign::$campaign_status_collecte ):
                     $projectAction = __(" pour investir", "yproject");
-                    $buttonAction = __("investir sur ce projet", "yproject");
+					$buttonAction = __("investir sur ce projet", "yproject");
         ?>              
                     <div class="progress-bar">
                         <span class="current-amount" style="min-width:<?php echo $width; ?>%">&nbsp;<span><?php echo $campaign->current_amount(); ?></span>&nbsp;</span>
@@ -78,8 +83,8 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
                     </div>
         <?php
 
-                elseif ($campaign_status === ATCF_Campaign::$campaign_status_vote):
-					if ($time_remaining_str != '-') {
+                elseif ( $campaign_status === ATCF_Campaign::$campaign_status_vote ):
+					if ( $time_remaining_str != '-' ) {
 						$projectAction = __(" pour &eacute;valuer", "yproject");
 						$buttonAction = __("&Eacute;valuer ce projet", "yproject");
 						$project_status = __("Projet en cours d'&eacute;valuation", "yproject");
