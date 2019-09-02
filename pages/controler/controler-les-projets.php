@@ -186,7 +186,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		return $this->positive_savings_projects_html;
 	}
 	
-	public function set_positive_savings_projects_html( $html, $index ) {
+	public function set_positive_savings_projects_html( $html ) {
 		$this->positive_savings_projects_html = $html;
 		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$positive_savings_projects_html_key, $html, WDG_Page_Controler_ProjectList::$positive_savings_projects_html_duration, WDG_Page_Controler_ProjectList::$positive_savings_projects_html_version );
 	}

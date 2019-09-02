@@ -1306,7 +1306,7 @@ body.template-les-projets nav#project-filter select option#environnemental {
 body.template-les-projets nav#project-filter select option#social {
 	background-image: url("../../images/common/impact-social-small.png") ;
 }
-body.template-les-projets .projects-after-end-date {
+body.template-les-projets .projects-positive-savings {
 	background-color: rgba(51, 51, 51, .1);
 }
 body.template-les-projets .wdg-component-projects-preview .project-container {

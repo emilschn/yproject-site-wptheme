@@ -202,31 +202,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				</div>
 			</section>
 		</div>
-		
-		<?php $project_list_funding_after = $currentprojects_list[ 'funding_after' ]; ?>
-		<?php if ( count( $project_list_funding_after ) > 0 ): ?>
-		<div class="projects-after-end-date">
-			<div class="padder">
-				<section class="wdg-component-projects-preview">
-					<h2 class="standard">/ <?php _e( "Lev&eacute;es de fonds en cl&ocirc;ture", 'yproject' ); ?> /</h2>
-					<div class="projects-title-precisions"><?php _e( "Ces projets ont &eacute;t&eacute; financ&eacute;s avec succ&egrave;s mais il est toujours possible d'investir jusqu'au d&eacute;marrage de leur contrat de royalties.", 'yproject' ); ?></div>
-
-					<div class="project-slider">
-						<div class="block-projects">
-
-						<?php
-						foreach ( $project_list_funding_after as $project_post ) {
-							$project_id = $project_post->ID;
-							locate_template( array( "projects/preview.php" ), true, false );
-						}
-						?>
-
-						</div>
-					</div>
-				</section>
-			</div>
-		</div>
-		<?php endif; ?>
 				
 	<?php
 	$cache_currentprojects = ob_get_contents();
@@ -256,13 +231,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <?php if ( !$positive_savings_projects_html ): ?>
 
 <?php ob_start(); ?>
-						
+
 	<?php $project_list_positive_savings = $page_controler->get_positive_savings_projects_list(); ?>
 	<?php if ( count( $project_list_positive_savings ) > 0 ): ?>
-
-	<div>
-		<div class="padder projects-positive-savings">
-
+	<div class="projects-positive-savings">
+		<div class="padder">
 			<section class="wdg-component-projects-preview">
 				<h2 class="standard">/ <?php _e( "&Eacute;pargne Positive", 'yproject' ); ?> /</h2>
 				<div class="projects-title-precisions">
@@ -284,20 +257,41 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					</div>
 				</div>
 			</section>
-
-		</div><!-- .padder -->
+		</div>
 	</div>
+	<?php endif; ?>
+	
+	<?php $project_list_funding_after = $currentprojects_list[ 'funding_after' ]; ?>
+	<?php if ( count( $project_list_funding_after ) > 0 ): ?>
+	<div class="projects-after-end-date">
+		<div class="padder">
+			<section class="wdg-component-projects-preview">
+				<h2 class="standard">/ <?php _e( "Lev&eacute;es de fonds en cl&ocirc;ture", 'yproject' ); ?> /</h2>
+				<div class="projects-title-precisions"><?php _e( "Ces projets ont &eacute;t&eacute; financ&eacute;s avec succ&egrave;s mais il est toujours possible d'investir jusqu'au d&eacute;marrage de leur contrat de royalties.", 'yproject' ); ?></div>
 
+				<div class="project-slider">
+					<div class="block-projects">
+
+					<?php
+					foreach ( $project_list_funding_after as $project_post ) {
+						$project_id = $project_post->ID;
+						locate_template( array( "projects/preview.php" ), true, false );
+					}
+					?>
+
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
 	<?php endif; ?>
 	
 <?php
-if ( $index_project > 1 ) {
-	$cache_positive_savings_projects = ob_get_contents();
-	$page_controler->set_positive_savings_projects_html( $cache_positive_savings_projects, $index_cache );
-	ob_end_clean();
-}
+$cache_positive_savings_projects = ob_get_contents();
+$page_controler->set_positive_savings_projects_html( $cache_positive_savings_projects );
+ob_end_clean();
 ?>
-					
+
 <?php endif; ?>
 
 <?php echo $page_controler->get_positive_savings_projects_html(); ?>
