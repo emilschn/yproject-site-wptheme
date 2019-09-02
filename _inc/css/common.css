@@ -1314,6 +1314,7 @@ body.template-les-projets .wdg-component-projects-preview .project-container {
 	min-width: 240px;
 }
 body.template-les-projets .projects-current .wdg-component-projects-preview .project-container,
+body.template-les-projets .projects-positive-savings .wdg-component-projects-preview .project-container,
 body.template-les-projets .projects-after-end-date .wdg-component-projects-preview .project-container {
 	width: 33%;
 }
@@ -1340,10 +1341,10 @@ body.template-les-projets div#content > div:last-child .wdg-component-projects-p
 	max-height: 550px;
 	margin: auto;
 }
-body.template-les-projets div#content .projects-after-end-date .wdg-component-projects-preview .project-container .project-framed {
+body.template-les-projets div#content .projects-positive-savings .wdg-component-projects-preview .project-container .project-framed {
 	background-color: #FFFFFF;
 }
-body.template-les-projets div#content .projects-after-end-date .wdg-component-projects-preview .project-container .project-framed::before {
+body.template-les-projets div#content .projects-positive-savings .wdg-component-projects-preview .project-container .project-framed::before {
 	border-top: 60px solid rgba(51, 51, 51, 0.1);
 }
 body.template-les-projets div#content > div:last-child .wdg-component-projects-preview .project-container .project-framed {
