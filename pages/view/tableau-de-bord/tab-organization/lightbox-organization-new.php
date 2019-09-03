@@ -171,6 +171,7 @@ global $campaign_id
 		<h3><?php _e( "Informations bancaires", 'yproject' ); ?></h3>
 		<div class="field">
 			<label for="org_bankownername"><?php _e( "Nom du propri&eacute;taire du compte", 'yproject' ); ?></label>
+			<div class="field-description"><?php _e( "Le nom de votre organisation", 'yproject' ); ?></div>
 			<div class="field-container">
 				<span class="field-value">
 					<input type="text" name="org_bankownername" value="<?php echo filter_input( INPUT_POST, 'org_bankownername' ); ?>">
@@ -180,6 +181,7 @@ global $campaign_id
 
 		<div class="field">
 			<label for="org_bankowneraddress"><?php _e( "Adresse du compte", 'yproject' ); ?></label>
+			<div class="field-description"><?php _e( "En g&eacute;n&eacute;ral, le nom de l'agence", 'yproject' ); ?></div>
 			<div class="field-container">
 				<span class="field-value">
 					<input type="text" name="org_bankowneraddress" value="<?php echo filter_input( INPUT_POST, 'org_bankowneraddress' ); ?>">
