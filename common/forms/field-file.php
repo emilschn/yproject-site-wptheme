@@ -4,9 +4,9 @@ $date_upload = '';
 $message_instead_of_field = '';
 $display_refused_alert = FALSE;
 if ( isset( $wdg_current_field[ 'options' ] ) ) {
-	$date_upload = ( is_array( $wdg_current_field[ 'options' ] ) ) ? $wdg_current_field[ 'options' ][ 'date_upload' ] : $wdg_current_field[ 'options' ];
-	$message_instead_of_field = ( is_array( $wdg_current_field[ 'options' ] ) ) ? $wdg_current_field[ 'options' ][ 'message_instead_of_field' ] : '';
-	$display_refused_alert = ( is_array( $wdg_current_field[ 'options' ] ) ) ? $wdg_current_field[ 'options' ][ 'display_refused_alert' ] : FALSE;
+	$date_upload = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'date_upload' ] ) ) ? $wdg_current_field[ 'options' ][ 'date_upload' ] : $wdg_current_field[ 'options' ];
+	$message_instead_of_field = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'message_instead_of_field' ] ) ) ? $wdg_current_field[ 'options' ][ 'message_instead_of_field' ] : '';
+	$display_refused_alert = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'display_refused_alert' ] ) ) ? $wdg_current_field[ 'options' ][ 'display_refused_alert' ] : FALSE;
 }
 ?>
 
