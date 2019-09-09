@@ -99,10 +99,23 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
 			$WDGUser_current->construct_with_api_data();
 		}
 		$this->current_user = $WDGUser_current;
+
+		// Si on surcharge avec un utilisateur passé en paramètre
 		if ( $WDGUser_current->is_admin() ) {
-			$input_user_id = filter_input( INPUT_GET, 'override_current_user' );
-			if ( !empty( $input_user_id ) ) {
-				$this->current_user = new WDGUser( $input_user_id );
+			$input_user = filter_input( INPUT_GET, 'override_current_user' );
+			if ( !empty( $input_user ) ) {
+				// Test par e-mail
+				$wpuser_by_email = get_user_by_email( $input_user );
+				if ( !empty( $wpuser_by_email ) ) {
+					$this->current_user = new WDGUser( $wpuser_by_email->ID );
+
+				} else {
+					// Test par ID
+					$wpuser_by_id = get_user_by( 'ID', $input_user );
+					if ( !empty( $wpuser_by_id ) ) {
+						$this->current_user = new WDGUser( $input_user );
+					}
+				}
 			}
 		}
 		
