@@ -20,7 +20,11 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 
 <?php if ( $display_refused_alert ): ?>
 <div class="wdg-message error">
-	<?php _e( "Le fichier a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement.", 'yproject' ); ?>
+	<?php if ( $display_refused_alert === TRUE ): ?>
+		<?php _e( "Le fichier a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement.", 'yproject' ); ?>
+	<?php else: ?>
+		<?php echo $display_refused_alert; ?>
+	<?php endif; ?>
 </div>
 <?php endif; ?>
 
