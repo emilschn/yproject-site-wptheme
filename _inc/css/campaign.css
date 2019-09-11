@@ -699,7 +699,10 @@ div#content.version-3 .projects-desc-content h5,
 div#content.version-3 .projects-desc-content h6{
     padding-left: 0px;
 }
-div#content.version-3 .projects-desc-content iframe, div#content.version-3 .projects-desc-content img, div#content.version-3 .projects-desc-content .zone-content div {
+div#content.version-3 .projects-desc-content iframe {
+	max-width: 100%;
+}
+div#content.version-3 .projects-desc-content img, div#content.version-3 .projects-desc-content .zone-content div {
 	max-width: 100%;
 	height: auto;
 }
