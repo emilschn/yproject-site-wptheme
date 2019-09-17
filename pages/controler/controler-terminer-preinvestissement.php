@@ -203,6 +203,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 			$this->current_investment->set_contract_status( WDGInvestment::$contract_status_investment_refused );
 			$WDGCurrent_User->get_pending_preinvestments( TRUE );
 			$this->current_investment->refund();
+			$this->current_investment->cancel();
 			NotificationsEmails::preinvestment_canceled( $WDGCurrent_User->get_email(), $this->current_investment->get_saved_campaign() );
 		}
 		
