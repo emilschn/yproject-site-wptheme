@@ -6,6 +6,7 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 	
 	private $login_error_reason;
 	private $display_alert_project;
+	private $login_init;
 	
 	public function __construct() {
 		parent::__construct();
@@ -35,6 +36,7 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 		ypcf_session_start();
 		$_SESSION[ 'login-fb-referer' ] = WDGUser::get_login_redirect_page();
 		
+		$this->login_init = '';
 		$this->init_login_error_reason();
 		
 		$input_source = filter_input( INPUT_GET, 'source' );
@@ -60,6 +62,10 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 					break;
 				default:
 					$this->login_error_reason = __( "Cet utilisateur n'existe pas ou le mot de passe ne correspond pas.", 'yproject' );
+					$this->login_init = $error_reason;
+					if ( !empty( $this->login_init ) ) {
+						$this->login_init = stripslashes( htmlentities( $this->login_init, ENT_QUOTES | ENT_HTML401 ) );
+					}
 					break;
 			}
 		}
@@ -68,6 +74,9 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 	public function get_display_alert_project() {
 		return $this->display_alert_project;
 	}
-		
+	
+	public function get_login_init() {
+		return $this->login_init;
+	}
 	
 }
