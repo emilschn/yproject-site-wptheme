@@ -11,8 +11,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 	<?php _e( "Ensuite, envoyez-nous ce ch&egrave;que &agrave; l'adresse suivante :", 'yproject' ); ?><br>
 	WE DO GOOD<br>
-	chez Novapuls<br>
-	13 Square la Pérouse<br>
+	Tour Bretagne<br>
+	Place de Bretagne<br>
 	44000 Nantes<br><br>
 
 	<?php _e( "Le ch&egrave;que ne sera encaiss&eacute; que si la lev&eacute;e de fonds r&eacute;ussit.", 'yproject' ); ?><br><br>
