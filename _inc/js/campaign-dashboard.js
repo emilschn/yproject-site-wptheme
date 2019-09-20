@@ -1654,7 +1654,7 @@ WDGCampaignDashboard.prototype.refreshTurnoverAmountToPay = function() {
 };
 
 WDGCampaignDashboard.prototype.refreshAjustmentAmountToPay = function( formTarget ) {
-	var idTarget = '#form-add-adjustment';
+	var idTarget = 'form-add-adjustment';
 	if ( formTarget !== false ) {
 		idTarget = formTarget.attr( 'id' );
 	}
