@@ -200,8 +200,10 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		if ( !empty( $input_init_with_id ) ) {
 			$input_cancel = filter_input( INPUT_GET, 'cancel' );
 			if ( empty( $input_cancel ) ) {
-				$this->current_step = 3;
-				$reload_form = TRUE;
+				if ( $this->current_investment->get_session_amount() >= 10 ) {
+					$this->current_step = 3;
+					$reload_form = TRUE;
+				}
 			} else {
 				$this->current_step = -1;
 				$WDGUser_current = WDGUser::current();
