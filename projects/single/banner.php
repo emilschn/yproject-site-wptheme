@@ -202,6 +202,9 @@ $lang_list = $campaign->get_lang_list();
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
 
+						<?php elseif ( $has_voted ): ?>
+							<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
+						
 						<?php else: ?>
 							<a href="#vote" class="button red wdg-button-lightbox-open" data-lightbox="vote" data-thankyoumsg="<?php _e( "Merci pour votre &eacute;valuation !", 'yproject' ); ?>">
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
