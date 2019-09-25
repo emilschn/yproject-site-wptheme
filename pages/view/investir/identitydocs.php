@@ -12,9 +12,11 @@ $form_errors = $page_controler->get_form_errors();
 
 <?php if ( $page_controler->is_form_success_displayed() ): ?>
 	<div class="center upload-docs">
-		<div class="wdg-message confirm">
-			<?php _e( "Nous avons bien re&ccedil;u vos documents. Ils ont &eacute;t&eacute; transmis &agrave; notre prestataire Lemon Way pour validation.", 'yproject' ); ?>
-		</div>
+		<?php if ( $page_controler->is_form_file_sent_displayed() ): ?>
+			<div class="wdg-message confirm">
+				<?php _e( "Nous avons bien re&ccedil;u vos documents. Ils ont &eacute;t&eacute; transmis &agrave; notre prestataire Lemon Way pour validation.", 'yproject' ); ?>
+			</div>
+		<?php endif; ?>
 
 		<div>
 			<?php echo sprintf( __( "Nous avons enregistr&eacute; votre intention d'investissement de %s &euro;.", 'yproject' ), $page_controler->get_current_investment()->get_session_amount() ); ?><br>

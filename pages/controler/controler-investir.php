@@ -23,6 +23,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	private $current_step;
 	private $form;
 	private $form_display_success;
+	private $form_display_file_sent;
 	
 	public function __construct() {
 		parent::__construct();
@@ -195,6 +196,8 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 			ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 1 >> $action_posted != WDG_Form_Invest_Input::$name && !$current_investment->is_session_correct()' );
 		}
 		
+		$this->form_display_success = FALSE;
+		$this->form_display_file_sent = FALSE;
 		$reload_form = FALSE;
 		$input_init_with_id = filter_input( INPUT_GET, 'init_with_id' );
 		if ( !empty( $input_init_with_id ) ) {
@@ -290,6 +293,9 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					if ( $this->form->postForm() ) {
 						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> GOTO success' );
 						$this->form_display_success = TRUE;
+						if ( $this->form->getNbFileSent() > 0 ) {
+							$this->form_display_file_sent = TRUE;
+						}
 						// Si l'investisseur n'a pas encore envoyé tous ses documents malgré la validation du formulaire, on lui envoie un mail immédiatement
 						if ( WDGOrganization::is_user_organization( $identity_docs_user_id ) ) {
 							$WDGEntity = new WDGOrganization( $identity_docs_user_id );
@@ -382,6 +388,10 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	
 	public function is_form_success_displayed() {
 		return $this->form_display_success;
+	}
+	
+	public function is_form_file_sent_displayed() {
+		return $this->form_display_file_sent;
 	}
 	
 	public function get_form_action() {
