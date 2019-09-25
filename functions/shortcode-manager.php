@@ -308,7 +308,7 @@ class YPShortcodeManager {
 			if ( is_user_logged_in() ) {
 				$buffer = '<a href="' .home_url( '/investir/' ). '?campaign_id=' .$atts[ 'project' ]. '&amp;invest_start=1" class="' .$atts[ 'class' ]. '" style="' .$atts[ 'style' ]. '">' .$atts[ 'label' ]. '</a>';
 			} else {
-				$buffer = '<a href="' .home_url( '/connexion/' ). '" class="' .$atts[ 'class' ]. '" style="' .$atts[ 'style' ]. '">' .$atts[ 'label' ]. '</a>';
+				$buffer = '<a href="' .home_url( '/connexion/' ). '?redirect-invest=' .$atts[ 'project' ] . '" class="' .$atts[ 'class' ]. '" style="' .$atts[ 'style' ]. '">' .$atts[ 'label' ]. '</a>';
 			}
 		}
 		return $buffer;
