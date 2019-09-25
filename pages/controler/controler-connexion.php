@@ -35,6 +35,11 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 		
 		ypcf_session_start();
 		$_SESSION[ 'login-fb-referer' ] = WDGUser::get_login_redirect_page();
+		$input_redirect_invest = filter_input( INPUT_GET, 'redirect-invest' );
+		if ( !empty( $input_redirect_invest ) ) {
+			$invest_url = home_url( '/investir/?campaign_id=' .$input_redirect_invest. '&amp;invest_start=1' );
+			$_SESSION[ 'login-fb-referer' ] = $invest_url;
+		}
 		
 		$this->login_init = '';
 		$this->init_login_error_reason();

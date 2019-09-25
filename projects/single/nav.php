@@ -9,7 +9,7 @@ $menu_project_parts = array (
 
 $WDGUser_current = WDGUser::current();
 $invest_url = home_url( '/investir/?campaign_id=' .$campaign->ID. '&amp;invest_start=1' );
-$invest_url_href = home_url( '/connexion/' ) . '?source=project';
+$invest_url_href = home_url( '/connexion/' ) . '?source=project&redirect-invest=' .$campaign->ID;
 $user_name_str = '';
 
 if (is_user_logged_in()) {

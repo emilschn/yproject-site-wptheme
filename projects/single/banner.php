@@ -232,7 +232,7 @@ $lang_list = $campaign->get_lang_list();
 				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
 					<?php
 					$invest_url = home_url( '/investir/?campaign_id=' .$campaign->ID. '&amp;invest_start=1' );
-					$invest_url_href = home_url( '/connexion/' ) . '?source=project';
+					$invest_url_href = home_url( '/connexion/' ) . '?source=project&redirect-invest=' .$campaign->ID;
 					if ( is_user_logged_in() ) {
 						$invest_url_href = $invest_url;
 					}
