@@ -30,7 +30,7 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 
 <div class="field-description">
 	<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 8 Mo.", 'yproject' ); ?><br>
-	<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?>
+	<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, GIF et PNG.", 'yproject' ); ?>
 </div>
 <input type="file" name="<?php echo $wdg_current_field[ 'name' ]; ?>" id="<?php echo $wdg_current_field[ 'name' ]; ?>">
 <label for="<?php echo $wdg_current_field[ 'name' ]; ?>" class="file-label hidden-responsive" data-input="<?php echo $wdg_current_field[ 'name' ]; ?>">
@@ -52,7 +52,7 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 <div id="lightbox-<?php echo $wdg_current_field[ 'name' ]; ?>" class="align-left">
 	<strong><?php echo $wdg_current_field[ 'label' ]; ?></strong><br><br>
 	<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 8 Mo.", 'yproject' ); ?><br>
-	<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?><br><br>
+	<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, GIF et PNG.", 'yproject' ); ?><br><br>
 	<?php echo $wdg_current_field[ 'description' ]; ?><br><br>
 	
 	<div class="align-center">
