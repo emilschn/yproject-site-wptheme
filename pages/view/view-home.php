@@ -144,5 +144,5 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 
 <div id="home-press" class="hidden-inf997">
-	<a href="<?php echo home_url( '/a-propos/press-book/' ); ?>"><img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse-mars-2017.png" alt="presse" /></a>
+	<a href="<?php echo home_url( '/a-propos/press-book/' ); ?>"><img id="press-banner" src="<?php echo $stylesheet_directory_uri; ?>/images/bandeau-presse-2019.png" alt="presse" /></a>
 </div> <!-- section#home-press -->
