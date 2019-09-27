@@ -120,6 +120,20 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'value_not_validated' ] = $investment_results[ 'amount_not_validate_investments' ];
 			array_push( $params[ 'hidden' ], $item );
 		}
+		$project_list_hidden_notime = ATCF_Campaign::get_list_current_hidden( ATCF_Campaign::$campaign_status_collecte, FALSE );
+		foreach ( $project_list_hidden_notime as $project_post ) {
+			$campaign = new ATCF_Campaign( $project_post->ID );
+			$investment_results = WDGCampaignInvestments::get_list( $project_post->ID );
+			$item = array();
+			$item[ 'name' ] = $campaign->get_name();
+			$item[ 'min_goal' ] = $campaign->minimum_goal();
+			$item[ 'time_remaining' ] = $campaign->time_remaining_str();
+			$item[ 'nb_invest' ] = $campaign->backers_count();
+			$item[ 'value_invest' ] = $campaign->current_amount( false );
+			$item[ 'nb_not_validated' ] = $investment_results[ 'count_not_validate_investments' ];
+			$item[ 'value_not_validated' ] = $investment_results[ 'amount_not_validate_investments' ];
+			array_push( $params[ 'hidden' ], $item );
+		}
 		
 		NotificationsSlack::send_update_summary_current_projects( $params );
 	}
