@@ -56,7 +56,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
         <div class="project-framed">
             <a class="hidden-link" href="<?php echo $link; ?>">
                 <h2 class="project-title"> <?php echo $title; ?> </h2>           
-                <div class="project-img" style="background-image: url('<?php echo $img; ?>')"></div>
+                <div class="project-img" <?php if ( !empty( $img ) ) { ?>style="background-image: url('<?php echo $img; ?>')"<?php } ?>></div>
                 <div class="project-summary"><?php echo $description; ?></div>
             </a>
         <?php 
