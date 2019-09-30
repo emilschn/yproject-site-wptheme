@@ -242,6 +242,9 @@
 		width: 320px;
 		height: 620px;
 	}
+	body.template-les-projets .projects-positive-savings .wdg-component-projects-preview .project-container {
+		height: 490px;
+	}
 	body.template-les-projets .wdg-component-projects-preview .project-container .project-framed {
 		position: absolute;
 		height: 82%;
