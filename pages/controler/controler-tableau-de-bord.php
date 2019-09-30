@@ -8,6 +8,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $campaign_url;
 	private $campaign_stats;
 	private $campaign_contracts_url;
+	private $campaign_is_funded;
 	private $can_access;
 	private $can_access_admin;
 	private $can_access_author;
@@ -131,6 +132,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		if ( !empty( $this->campaign_id ) && is_user_logged_in() ) {
 			$this->current_user = WDGUser::current();
 			$this->campaign = new ATCF_Campaign( $this->campaign_id );
+			$this->campaign_is_funded = $this->campaign->is_funded();
 			$this->author_user = new WDGUser( $this->campaign->data->post_author );
 			$this->campaign_url = get_permalink( $this->campaign_id );
 			$this->can_access = $this->campaign->current_user_can_edit();
@@ -183,7 +185,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		return $buffer;
 	}
 	public function is_campaign_funded() {
-		return $this->campaign->is_funded();
+		return $this->campaign_is_funded;
 	}
 	
 /******************************************************************************/
