@@ -164,6 +164,10 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/investissement/'		=> '0.9',
 			'/epargne-positive/'	=> '0.9',
 			// 0.8
+			'/epargne-positive/electronique/'				=> '0.8',
+			'/epargne-positive/mobilite-durable/'			=> '0.8',
+			'/epargne-positive/tourisme-durable/'			=> '0.8',
+			'/epargne-positive/zero-pesticide/'				=> '0.8',
 			'/financement/entreprises/'				=> '0.8',
 			'/financement/royalties/levee-de-fonds-privee/'	=> '0.8',
 //			'/financement/solutions/'				=> '0.8',
@@ -235,6 +239,9 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/a-propos/partenaires/des-bons-plans-pour-votre-entreprise/'	=> '0.2',
 			'/a-propos/recrutement/'			=> '0.2',
 			'/a-propos/statistiques/rapport-activite-2017/'					=> '0.2',
+			'/epargne-positive/mobilite-durable/investissement/'			=> '0.2',
+			'/epargne-positive/tourisme-durable/investissement/'			=> '0.2',
+			'/epargne-positive/zero-pesticide/investissement/'				=> '0.2',
 			// 0.1
 			'/placement-royalties/'				=> '0.1',
 			'/a-propos/'						=> '0.1',
