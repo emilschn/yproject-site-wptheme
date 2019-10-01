@@ -2,38 +2,33 @@
 global $campaign, $current_user, $stylesheet_directory_uri, $can_modify, $language_list;
 $video_element = '';
 $img_src = '';
+$campaign_video_url = $campaign->video();
 //Si aucune vidéo n'est définie, on affiche l'image
-if ($campaign->video() == '') {
+if ( empty( $campaign_video_url ) ) {
 	$img_src = $campaign->get_home_picture_src();
 
 //Sinon on utilise l'objet vidéo fourni par wordpress
 } else {
-	$video_element = wp_oembed_get( $campaign->video(), array( 'height' => 400 ) );
-}
-$campaign_status = $campaign->campaign_status();
-$campaign_categories_str = $campaign->get_categories_str();
-
-$btn_follow_href = home_url( '/connexion/' ) . '?source=project';
-$btn_follow_classes = 'wdg-button-lightbox-open';
-$btn_follow_data_lightbox = 'connexion';
-$btn_follow_text = __('Suivre', 'yproject');
-$btn_follow_following = '0';
-$has_voted = false;
-if (is_user_logged_in()) {
-	$WDGUser_current = WDGUser::current();
-	$btn_follow_classes = 'update-follow';
-	$btn_follow_data_lightbox = $campaign->ID;
-	global $wpdb;
-	$table_jcrois = $wpdb->prefix . "jycrois";
-	$users = $wpdb->get_results( 'SELECT * FROM '.$table_jcrois.' WHERE campaign_id = '.$campaign->ID.' AND user_id='.$current_user->ID );
-	$btn_follow_text = (!empty($users[0]->ID)) ? __('Suivi !', 'yproject') : __('Suivre', 'yproject');
-	$btn_follow_following = (!empty($users[0]->ID)) ? '1' : '0';
-	if ($btn_follow_following == '1') { $btn_follow_classes .= ' btn-followed'; }
-	if (!empty($users[0]->ID)) { $btn_follow_href = '#'; }
+	// Normalement le node de video se créera ici
+	$video_element = wp_oembed_get( $campaign_video_url, array( 'height' => 400 ) );
 	
-	if ($campaign_status == "vote") {
-		$has_voted = $WDGUser_current->has_voted_on_campaign( $campaign->ID );
-	}
+	// Il arrive que certaines vidéos posent soucis, peut-être à cause de leur taille, dans ce cas, petit ajout de test :
+	if ( empty( $video_element ) ) {
+		$campaign_video_url = $campaign->video();
+		$youtube_id = '';
+		if ( strpos( $campaign_video_url, 'watch?v=' ) > -1 ) {
+			$youtube_id_exploded = explode( 'watch?v=', $campaign_video_url );
+			$youtube_id = $youtube_id_exploded[ 1 ];
+		} else if ( strpos( $campaign_video_url, 'youtu.be' ) > -1 ) {
+			$youtube_id_exploded = explode( 'youtu.be/', $campaign_video_url );
+			$youtube_id = $youtube_id_exploded[ 1 ];
+		}
+		$link = $campaign_video_url;
+		if ( !empty( $youtube_id ) ) {
+			$link = 'https://www.youtube.com/embed/' . $youtube_id . '?feature=oembed&rel=0&wmode=transparent';
+		}
+		$video_element = '<iframe width="578" height="325" src="' . $link . '" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+	}		
 }
 
 $owner_str = '';
