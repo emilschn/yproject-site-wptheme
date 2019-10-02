@@ -303,6 +303,9 @@ div.mean-payment-list a, div.mean-payment-list p, div.mean-payment-list div.mean
 	border: 1px solid #333;
 	color: #333333;
 }
+div.mean-payment-list a.selected {
+	background: #F4F4F4;
+}
 div.mean-payment-list a img, div.mean-payment-list p img, div.mean-payment-list div.mean-payment img {
 	float: left;
 	margin-right: 10px;
@@ -316,7 +319,7 @@ div.mean-payment-list a span.mean-payment-name, div.mean-payment-list p span.mea
 }
 
 div.mean-payment-list p.disabled {
-	background: rgba( 0, 0, 0, 0.1);
+	color: #888;
 	border: 0px;
 }
 div.mean-payment-list p.disabled img {
@@ -328,12 +331,6 @@ div.mean-payment-list p > span, div.mean-payment-list div.mean-payment > span {
 div.mean-payment-list a div, div.mean-payment-list p > span, div.mean-payment-list div.mean-payment > div {
 	margin-left: 130px;
 	text-align: justify;
-}
-div.mean-payment-list div.mean-payment {
-	cursor: pointer;
-}
-div.mean-payment-list div.mean-payment.selected {
-	background: #F4F4F4;
 }
 
 /**

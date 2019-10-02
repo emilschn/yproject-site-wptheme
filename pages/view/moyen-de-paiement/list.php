@@ -57,7 +57,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 		
 		<?php if ( $page_controler->can_use_wire() ): ?>
-			<a href="#" id="mean-payment-wire" class="mean-payment mean-payment-button <?php if ( !$page_controler->is_user_lemonway_registered() ): ?>alert-confirm" data-alertconfirm="<?php _e( "Attention : pour investir via un virement bancaire, vous devrez nous fournir une copie de votre pi&egrave;ce d'identit&eacute; et un justificatif de domicile.", 'yproject' ); ?><?php endif; ?>">
+			<a href="#" id="mean-payment-wire" class="mean-payment mean-payment-button">
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Virement bancaire", 'yproject' ); ?>" width="120">
 				<div>
 					<span class="mean-payment-name"><?php _e( "Virement bancaire", 'yproject' ); ?></span><br>
@@ -95,5 +95,14 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			</p>
 		<?php endif; ?>
 	</div>
+	
+	<form id="contract-buttons" action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
+
+		<input type="hidden" id="input-meanofpayment" name="meanofpayment" value="">
+		<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
+		<button type="submit" class="button half right red hidden"><?php _e( "Payer", 'yproject' ); ?></button>
+
+		<div class="clear"></div>
+	</form>
 	
 </div>

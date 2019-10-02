@@ -134,8 +134,8 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 /******************************************************************************/
 // ACCEPTED MEAN OF PAYMENTS
 /******************************************************************************/
-	public function get_payment_url( $param ) {
-		return home_url( '/moyen-de-paiement/' ) . '?campaign_id=' .$this->current_campaign->ID. '&meanofpayment=' .$param;
+	public function get_form_action() {
+		return home_url( '/moyen-de-paiement/' ) . '?campaign_id=' .$this->current_campaign->ID;
 	}
 	
 	public function get_lemonway_amount() {
@@ -160,7 +160,13 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	public function can_use_card() {
 		$buffer = TRUE;
 		
-		if ( $this->current_user_investments->can_invest_nb() != TRUE ) {
+		if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
+			$WDGInvestorEntity = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
+		} else {
+			$WDGInvestorEntity = WDGUser::current();
+		}
+		$WDGCurrent_User_Investments = new WDGUserInvestments( $WDGInvestorEntity );
+		if ( $WDGCurrent_User_Investments->can_invest_nb() != TRUE ) {
 			$buffer = FALSE;
 		}
 		
@@ -218,7 +224,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	}
 	
 	public function display_inactive_check() {
-		return $this->current_campaign->can_use_check_option() && !$this->current_investment->has_token();
+		return !$this->current_investment->has_token();
 	}
 	
 /******************************************************************************/
@@ -226,52 +232,56 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 /******************************************************************************/
 	private function init_current_mean_of_payment() {
 		$this->current_meanofpayment = filter_input( INPUT_GET, 'meanofpayment' );
-		
-		switch ( $this->current_meanofpayment ) {
-			case WDGInvestment::$meanofpayment_wallet:
-				$return = $this->current_investment->try_payment( WDGInvestment::$meanofpayment_wallet );
-				if ( empty( $return ) ) {
-					$this->current_view = 'wallet-error';
-				} else {
-					$this->current_view = 'wallet-success';
-				}
-				break;
-				
-			case WDGInvestment::$meanofpayment_cardwallet:
-			case WDGInvestment::$meanofpayment_card:
-				$return = $this->current_investment->try_payment( $this->current_meanofpayment );
-				if ( empty( $return ) ) {
-					$this->display_error = __( "Il y a eu une erreur de connexion &agrave; notre prestataire de paiement Lemon Way.", 'yproject' );
-					$investment_error = $this->current_investment->get_error();
-					if ( !empty( $investment_error ) ) {
-						$this->display_error .= '<br>';
-						$this->display_error .= __( "Merci de nous transmettre les informations ci-dessous via le chat en ligne en bas &agrave; droite de l'&eacute;cran, ou par e-mail &agrave; l'adresse investir@wedogood.co.", 'yproject' );
-						$this->display_error .= '<br><br>';
-						$this->display_error .= $investment_error[0];
-						$this->display_error .= '<br><br>';
-					}
-				}
-				break;
-			
-			case WDGInvestment::$meanofpayment_wire:
-				$this->current_view = 'wire';
-				break;
-			
-			case WDGInvestment::$meanofpayment_check:
-				$check_return = $this->get_check_return();
-				if ( !empty( $check_return ) ) {
-					// Stock avant destruction
-					$this->current_investment->get_session_amount();
-					$this->current_investment->get_session_user_type();
-					WDGInvestment::unset_session();
-					$this->current_view = 'check-return';
-				} else {
-					$this->current_investment->set_status( WDGInvestment::$status_waiting_check );
-					$this->current_view = 'check-form';
-				}
-				break;
+		if ( empty( $this->current_meanofpayment ) ) {
+			$this->current_meanofpayment = filter_input( INPUT_POST, 'meanofpayment' );
 		}
 		
+		if ( !empty( $this->current_meanofpayment ) ) {
+			switch ( $this->current_meanofpayment ) {
+				case WDGInvestment::$meanofpayment_wallet:
+					$return = $this->current_investment->try_payment( WDGInvestment::$meanofpayment_wallet );
+					if ( empty( $return ) ) {
+						$this->current_view = 'wallet-error';
+					} else {
+						$this->current_view = 'wallet-success';
+					}
+					break;
+					
+				case WDGInvestment::$meanofpayment_cardwallet:
+				case WDGInvestment::$meanofpayment_card:
+					$return = $this->current_investment->try_payment( $this->current_meanofpayment );
+					if ( empty( $return ) ) {
+						$this->display_error = __( "Il y a eu une erreur de connexion &agrave; notre prestataire de paiement Lemon Way.", 'yproject' );
+						$investment_error = $this->current_investment->get_error();
+						if ( !empty( $investment_error ) ) {
+							$this->display_error .= '<br>';
+							$this->display_error .= __( "Merci de nous transmettre les informations ci-dessous via le chat en ligne en bas &agrave; droite de l'&eacute;cran, ou par e-mail &agrave; l'adresse investir@wedogood.co.", 'yproject' );
+							$this->display_error .= '<br><br>';
+							$this->display_error .= $investment_error[0];
+							$this->display_error .= '<br><br>';
+						}
+					}
+					break;
+				
+				case WDGInvestment::$meanofpayment_wire:
+					$this->current_view = 'wire';
+					break;
+				
+				case WDGInvestment::$meanofpayment_check:
+					$check_return = $this->get_check_return();
+					if ( !empty( $check_return ) ) {
+						// Stock avant destruction
+						$this->current_investment->get_session_amount();
+						$this->current_investment->get_session_user_type();
+						WDGInvestment::unset_session();
+						$this->current_view = 'check-return';
+					} else {
+						$this->current_investment->set_status( WDGInvestment::$status_waiting_check );
+						$this->current_view = 'check-form';
+					}
+					break;
+			}
+		}
 	}
 	
 	public function get_current_mean_of_payment() {
