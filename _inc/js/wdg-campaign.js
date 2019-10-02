@@ -384,7 +384,7 @@ WDGProjectPageFunctions=(function($) {
 					$(this).css("cursor", "pointer");
 					var sDisplay = '';
 					if ((!WDGProjectPageFunctions.isInit && WDGProjectPageFunctions.currentDiv === 0) || $(this).attr("id") === "project-content-" + WDGProjectPageFunctions.isEditing) sDisplay = 'style="display:none"';
-					var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'></div>';
+					var sProjectMore = '<div class="projects-more" data-value="' + WDGProjectPageFunctions.currentDiv + '" '+sDisplay+'><button class="button transparent">Lire plus</button></div>';
 					$(this).find('div *:lt(1)').append(sProjectMore);
 					$(this).unbind("click");
 					$(this).click(function(){

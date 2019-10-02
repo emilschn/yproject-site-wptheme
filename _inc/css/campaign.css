@@ -665,16 +665,11 @@ div#content.version-3 div.project-description {
 }
 div#content.version-3 div.project-description div.projects-desc-content .projects-more {
     position: relative;
-    width: 30px;
-    height: 30px;
-	margin: 20px auto 0px;
-	border: 2px solid #333;
-	font-size: 17pt;
+	margin: 24px auto 0px;
 	text-align: center;
-    cursor: pointer;
 }
-div#content.version-3 div.project-description div.projects-desc-content .projects-more:after {
-	content: "+";
+div#content.version-3 div.project-description div.projects-desc-content .projects-more button {
+    height: 56px;
 }
 
 div#content.version-3 .projects-desc-content h3{
