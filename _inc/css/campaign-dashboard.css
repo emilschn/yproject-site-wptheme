@@ -461,8 +461,12 @@ div#container div#content main #item-body-contacts #direct-mail {
 #item-body-finance table tbody tr td:nth-child(2) {
 	min-width: 180px;
 }
-#item-body-finance table input[type=number] {
+#item-body-finance table input[type=text] {
 	background: #E1E3E2;
+	width: 80%;
+}
+#item-body-finance table br {
+	display: inherit;
 }
 
 /*******************************************************************************

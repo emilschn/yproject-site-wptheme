@@ -576,7 +576,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 	?>
 	<h2><?php _e('Situation', 'yproject'); ?></h2>
 	<ul>
-		<li><strong><?php echo UIHelpers::format_number( $page_controler->get_campaign_organization()->get_lemonway_balance() ); ?> €</strong> <?php _e( "dans votre porte-monnaie", 'yproject' ); ?></li>
+		<li><strong><?php echo UIHelpers::format_number( $page_controler->get_campaign_organization()->get_lemonway_balance( 'campaign' ) ); ?> €</strong> <?php _e( "dans votre porte-monnaie de projet", 'yproject' ); ?></li>
 		<li><strong><?php echo UIHelpers::format_number( $page_controler->get_campaign()->current_amount( false ) ); ?> €</strong> <?php _e( "lev&eacute;s", 'yproject' ); ?></li>
 
 		<?php if ( $roi_percent > 0 ): ?>

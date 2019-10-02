@@ -267,9 +267,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<td></td>
 					<td><?php _e( "CA pr&eacute;visionnel", 'yproject' ); ?></td>
 					<td>
-						<?php _e( "Montant des Royalties reversées pour", 'yproject' ); ?>
-						<span id="total-funding">---</span>&nbsp;&euro;
-						<?php _e( "investis", 'yproject' ); ?>
+						<?php _e( "Montant des Royalties reversées", 'yproject' ); ?><br>
+						<?php _e( "pour", 'yproject' ); ?> <span id="total-funding">---</span>&nbsp;&euro; <?php _e( "investis", 'yproject' ); ?>
 					</td>
 				</tr>
 			</thead>
@@ -289,7 +288,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 							</td>
 							<td class="field field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>" data-type="number">
 								<?php if ( $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing() ): ?>
-									<input type="number" value="<?php echo $turnover; ?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon format-number" />&nbsp;<?php echo $data_symbol; ?>
+									<input type="text" pattern="\d*" value="<?php echo $turnover; ?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />&nbsp;<?php echo $data_symbol; ?>
 								<?php else: ?>
 									<?php echo $turnover; ?>
 									<span style="padding-right: 70px;"><?php echo $data_symbol; ?></span>
@@ -315,8 +314,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				</tr>
 				<tr>
 					<td colspan="2">
-						<?php _e( "Pour vos investisseurs :", 'yproject' ); ?><br>
-						<?php _e( "Rendement final", 'yproject' ); ?>
+						<?php _e( "Rendement pour vos investisseurs&nbsp;:", 'yproject' ); ?>
 					</td>
 					<td id="medium-rend">---&nbsp;%</td>
 				</tr>

@@ -23,5 +23,8 @@
     "gulp-load-plugins": "^1.4.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.0"
+  },
+  "dependencies": {
+    "natives": "^1.1.6"
   }
 }

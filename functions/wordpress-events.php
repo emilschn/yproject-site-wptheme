@@ -38,6 +38,26 @@ class WDG_WordPress_Events {
 		remove_action( 'edd_weekly_scheduled_events', 'edd_mark_abandoned_orders' );
 		// Suppression de la notification envoyée quand on modifie l'adresse d'un utilisateur
 		add_filter( 'send_email_change_email', '__return_false' );
+		// Suppression d'actions d'easy digital downloads lancées dans template_redirect
+		remove_action( 'template_redirect', 'edd_disable_woo_ssl_on_checkout', 9 );
+		remove_action( 'template_redirect', 'edd_disable_404_redirected_redirect', 9 );
+		remove_action( 'template_redirect', 'edd_delayed_get_actions' );
+		remove_action( 'template_redirect', 'edd_delayed_post_actions' );
+		remove_action( 'template_redirect', 'edd_listen_for_failed_payments' );
+		remove_action( 'template_redirect', 'edd_enforced_ssl_redirect_handler' );
+		remove_action( 'template_redirect', 'edd_enforced_ssl_asset_handler' );
+		remove_action( 'template_redirect', 'edd_paypal_process_pdt_on_return' );
+		remove_action( 'template_redirect', 'edd_recovery_user_mismatch' );
+		remove_action( 'template_redirect', 'edd_disable_jetpack_og_on_checkout' );
+		remove_action( 'template_redirect', 'edd_display_email_template_preview' );
+		remove_action( 'template_redirect', 'edd_block_attachments' );
+		remove_action( 'template_redirect', 'edd_refresh_permalinks_on_bad_404' );
+		remove_action( 'template_redirect', 'edd_process_cart_endpoints', 100 );
+		// Désactivation du XMLRPC
+		add_filter( 'xmlrpc_enabled', '__return_false' );
+		remove_action( 'wp_head', 'rsd_link' );
+		// Limitation de l'accès à l'API REST
+		add_filter('rest_authentication_errors', 'WDG_WordPress_Events::secure_api');
 	}
 	
 	/**
@@ -363,4 +383,14 @@ class WDG_WordPress_Events {
 		) );
 		
 	}
+
+	private function secure_api( $result ) {
+		if ( ! empty( $result ) ) {
+			return $result;
+		}
+		if ( ! is_user_logged_in() ) {
+			return new WP_Error( 'rest_not_logged_in', 'You are not currently logged in.', array( 'status' => 401 ) );
+		}
+		return $result;
+	  }
 }

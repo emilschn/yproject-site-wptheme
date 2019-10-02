@@ -1,4 +1,15 @@
-<?php global $page_register, $signup_errors, $signup_step, $stylesheet_directory_uri; ?>
+<?php global $page_register, $signup_errors, $signup_step, $stylesheet_directory_uri, $signup_email_init, $signup_firstname_init, $signup_lastname_init; ?>
+<?php
+	if ( empty( $signup_email_init ) ) {
+		$signup_email_init = '';
+	}
+	if ( empty( $signup_firstname_init ) ) {
+		$signup_firstname_init = '';
+	}
+	if ( empty( $signup_lastname_init ) ) {
+		$signup_lastname_init = '';
+	}
+?>
 
 <div class="wdg-lightbox-ref">
 	<br><br>
@@ -23,7 +34,7 @@
 					<label for="signup_email"><?php _e( 'Adresse e-mail', 'yproject' ); ?> *</label>
 					<div class="field-container">
 						<span class="field-value">
-							<input type="email" name="signup_email" id="signup_email" value="<?php if (!empty($_POST['signup_email'])) { echo $_POST['signup_email']; } ?>" />
+							<input type="email" name="signup_email" id="signup_email" value="<?php echo $signup_email_init; ?>" />
 						</span>
 					</div>
 				</div>
@@ -32,7 +43,7 @@
 					<label for="signup_firstname"><?php _e( "Pr&eacute;nom", 'yproject' ); ?> *</label>
 					<div class="field-container">
 						<span class="field-value">
-							<input type="text" name="signup_firstname" id="signup_firstname" value="<?php if ( !empty( $_POST[ 'signup_firstname' ] ) ) { echo $_POST[ 'signup_firstname' ]; } ?>" />
+							<input type="text" name="signup_firstname" id="signup_firstname" value="<?php echo $signup_firstname_init; ?>" />
 						</span>
 					</div>
 				</div>
@@ -41,7 +52,7 @@
 					<label for="signup_lastname"><?php _e( "Nom de famille", 'yproject' ); ?> *</label>
 					<div class="field-container">
 						<span class="field-value">
-							<input type="text" name="signup_lastname" id="signup_lastname" value="<?php if ( !empty( $_POST[ 'signup_lastname' ] ) ) { echo $_POST[ 'signup_lastname' ]; } ?>" />
+							<input type="text" name="signup_lastname" id="signup_lastname" value="<?php echo $signup_lastname_init; ?>" />
 						</span>
 					</div>
 				</div>

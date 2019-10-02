@@ -1,5 +1,7 @@
 <?php
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
+global $login_init;
+$login_init = $page_controler->get_login_init();
 ?>
 
 <div id="content" class="login-page-container">

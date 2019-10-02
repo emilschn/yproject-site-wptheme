@@ -37,59 +37,11 @@ var WDGInvestPageFunctions = (function($) {
 			if ( $( '.mean-payment-button' ).length > 0 ) {
 				$( '.mean-payment-button' ).click( function( e ) {
 					e.preventDefault();
-					$( '.mean-payment' ).hide();
-					$( this ).show();
-					$( '#change-mean-payment' ).show();
+					$( '.mean-payment' ).removeClass( 'selected' );
+					$( this ).addClass( 'selected' );
+					$( '#contract-buttons button' ).show();
 					var sMeanPayment = 'mean-payment-';
-					$( '#meanofpayment' ).val( $( this ).attr( 'id' ).substr( sMeanPayment.length ) );
-					if ( $( this ).attr( 'id' ).indexOf( 'card' ) > -1 && $( '#two-contracts-preview' ).length > 0 ) {
-						if ( $( this ).attr( 'id' ).indexOf( 'wallet' ) > -1 ) {
-							if ( $( '#two-contracts-preview-with-wallet' ).length > 0 ) {
-								$( '#two-contracts-preview-with-wallet' ).show();
-								$( '#two-contracts-preview-with-wallet .contract-preview-with-tabs .contract-preview-tabs div:first' ).addClass( 'selected' );
-								$( '#two-contracts-preview-with-wallet .contract-preview-with-tabs .contract-preview-content > div:first' ).show();
-							} else {
-								$( '#contract-preview' ).show();
-							}
-						} else {
-							$( '#two-contracts-preview' ).show();
-							$( '#two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div:first' ).addClass( 'selected' );
-							$( '#two-contracts-preview .contract-preview-with-tabs .contract-preview-content > div:first' ).show();
-						}
-					} else {
-						$( '#contract-preview' ).show();
-					}
-					$( '#contract-buttons' ).show();
-				} );
-				
-				$( '#change-mean-payment' ).click( function( e ) {
-					e.preventDefault();
-					$( '.mean-payment' ).show();
-					$( this ).hide();
-					$( '#contract-preview' ).hide();
-					$( '.two-contracts-preview' ).hide();
-					$( '#contract-buttons' ).hide();
-					$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).removeClass( 'selected' );
-					$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-content > div' ).hide();
-				} );
-				
-				$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).click( function() {
-					if ( !$( this ).hasClass( 'selected' ) ) {
-						$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-content > div' ).each( function() {
-							if ( $( this ).is( ':visible' ) ) {
-								$( this ).hide();
-							} else {
-								$( this ).show();
-							}
-						} );
-						$( 'div.two-contracts-preview .contract-preview-with-tabs .contract-preview-tabs div' ).each( function() {
-							if ( $( this ).hasClass( 'selected' ) ) {
-								$( this ).removeClass( 'selected' );
-							} else {
-								$( this ).addClass( 'selected' );
-							}
-						} );
-					}
+					$( '#input-meanofpayment' ).val( $( this ).attr( 'id' ).substr( sMeanPayment.length ) );
 				} );
 			}
 			
@@ -162,34 +114,34 @@ var WDGInvestPageFunctions = (function($) {
 			$( '.invest_success' ).hide();
 
 			var bValidInput = true;
-			$( 'form input#amount' ).val( ( $( 'form input#amount' ).val() ).replace( /,/g, "." ) );
+			var sAmount = ( $( 'form input#amount' ).val() ).replace( /,/g, "." ).split( ' ' ).join( '' );
             
-			if ( $( 'form input#amount' ).val() == '' ) {
+			if ( sAmount== '' ) {
 			    bValidInput = false;
 				
-			} else if ( !$.isNumeric( $( 'form input#amount' ).val() ) ) {
+			} else if ( !$.isNumeric( sAmount ) ) {
 			    $( '#invest_error_general' ).show();
 			    bValidInput = false;
 				
 			} else {
-			    if ( $( 'form input#amount' ).val() != Math.floor( $( 'form input#amount' ).val() ) ) {
+			    if ( sAmount != Math.floor( sAmount ) ) {
 					$( '#invest_error_integer' ).show();
 					bValidInput = false;
 			    }
-			    if ( parseInt( $( 'form input#amount' ).val() ) < $( '#input_invest_min_value' ).val() ) {
+			    if ( parseInt( sAmount ) < $( '#input_invest_min_value' ).val() ) {
 					$( '#invest_error_min' ).show();
 					bValidInput = false;
 			    }
-			    if ( parseInt( $( 'form input#amount' ).val() ) > $( '#input_invest_max_value' ).val() ) {
+			    if ( parseInt( sAmount ) > $( '#input_invest_max_value' ).val() ) {
 					$( '#invest_error_max' ).show();
 					bValidInput = false;
 			    }
-				if ( parseInt( $( 'form input#amount' ).val() ) > $( '#input_invest_user_max_value' ).val() ) {
+				if ( parseInt( sAmount ) > $( '#input_invest_user_max_value' ).val() ) {
 					$( '#invest_error_max' ).text( $( '#input_invest_user_max_reason' ).val() );
 					$( '#invest_error_max' ).show();
 					bValidInput = false;
 				}
-			    var nAmountInterval = $( '#input_invest_max_value' ).val() - parseInt( $( 'form input#amount' ).val()); 		
+			    var nAmountInterval = $( '#input_invest_max_value' ).val() - parseInt( sAmount ); 		
 				if ( nAmountInterval < $( '#input_invest_min_value' ).val() && nAmountInterval > 0 ) {
 					$( '#invest_error_interval' ).show(); 		
 					bValidInput = false; 		
@@ -198,7 +150,7 @@ var WDGInvestPageFunctions = (function($) {
 			
 			var ratioOfPercentRoundStr = 0;
 			if (bValidInput) {
-				var inputVal = Number( $( 'form input#amount' ).val() );
+				var inputVal = Number( sAmount );
 				if ( isNaN( inputVal ) || inputVal < 0) inputVal = 0;
 				var percentProject = Number( $( 'input#roi_percent_project' ).val() );
 				var goalProject = Number( $( 'input#roi_goal_project' ).val() );

@@ -18,13 +18,17 @@ JSHelpers = ( function( $ ) {
 		},
 		
 		formatNumber: function( nInput, sSuffix ) {
+			// On passe les entiers en float avec .00 pour qu'ils soient reconnus par le pattern en dessous
 			if ( nInput === parseInt( nInput, 10 ) ) {
-				nInput = nInput.toFixed( 2 );
+				nInput = parseFloat( nInput ).toFixed( 2 );
 			}
 			var sInput = nInput.toString();
+			// Ecarts pour les milliers
 			sInput = sInput.replace( /\d(?=(\d{3})+\.)/g, '$& ' );
+			// Remplacement . par , pour les décimales
 			sInput = sInput.split( '.' ).join( ',' );
 			
+			// Si c'est en fait un entier, on enlève les chiffres après la virgule
 			var aCutDecimals = sInput.split( ',' );
 			if ( aCutDecimals[ 1 ] === '00' ) {
 				sInput = aCutDecimals[ 0 ];
@@ -225,11 +229,9 @@ YPUIFunctions = (function($) {
 				$("#project-filter .project-filter-select").click(function() {
 					var step = $("#project-filter-step").val();
 					var location = $("#project-filter-location").val();
-					var activity = $("#project-filter-activity").val();
 					var impact = $("#project-filter-impact").val();
-					YPUIFunctions.refreshProjectList( step, location, activity, impact );
+					YPUIFunctions.refreshProjectList( step, location, impact );
 				});
-				$("#project-filter-activity").val( 'entreprises' );
 				$("#project-filter .project-filter-select").trigger("click");
 				
 				$("div.padder.projects-funded button").click(function() {
@@ -242,6 +244,14 @@ YPUIFunctions = (function($) {
 					}
 				});
 			}
+			
+			$( '.avoid-enter-validation' ).on( 'keyup keypress', function(e) {
+				var keyCode = e.keyCode || e.which;
+				if  (keyCode === 13 ) { 
+					e.preventDefault();
+					return false;
+				}
+			} );
 		},
 		/**
 		 * Fonction pour récupérer la position x,y d'un élément
@@ -335,7 +345,7 @@ YPUIFunctions = (function($) {
 			}
 		},
 
-		refreshProjectList: function( step, location, activity, impact ) {
+		refreshProjectList: function( step, location, impact ) {
 			var locationList = location.split(',');
 			$(".wdg-component-projects-preview .block-projects .project-container").show();
 			$(".wdg-component-projects-preview .block-projects .project-container").each(function() {
@@ -344,9 +354,6 @@ YPUIFunctions = (function($) {
 					$(this).hide();
 				}
 				if ( location !== "all" && locationList.indexOf( $(this).data("location").toString() ) === -1 ) {
-					$(this).hide();
-				}
-				if ( activity !== "all" && categoryList.indexOf( activity ) === -1 ) {
 					$(this).hide();
 				}
 				if ( impact !== "all" && categoryList.indexOf( impact ) === -1 ) {

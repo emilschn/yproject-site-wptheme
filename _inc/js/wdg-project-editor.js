@@ -209,9 +209,6 @@ var ProjectEditor = (function($) {
 						$("#wdg-edit-"+sProperty).addClass("wait-button");
 						ProjectEditor.requestLockProject(sProperty);
 						break;
-					case "picture-head":
-						ProjectEditor.createfile(sProperty);
-						break;
 					case "video-zone":
 						ProjectEditor.editImageVideo(sProperty);
 						break;
@@ -287,126 +284,6 @@ var ProjectEditor = (function($) {
 			}
 			
 			return buffer;
-		},
-
-		//Enregistre la bannière
-		createfile: function(property){
-			var url_image_start=$(".project-banner-img img").attr('src');
-
-			var newElement_1 = '<form id="upload-img-form" enctype="multipart/form-data"> <input type="hidden" name="action" value="save_image_head" /> <input name="image_header_blur" type="hidden"/> <input type="hidden" name="campaign_id" value="'+$("#content").data("campaignid")+'" /> <input id="wdg-edit-picture-head-next" type="file" class="input_image_home" name="image_header"/> </form>';
-			$(ProjectEditor.elements[property].elementId).after(newElement_1);
-    		$("#wdg-edit-picture-head-next").css("display","none");
-
-			var newElement_1_input = '<button id="wdg-edit-picture-head-next_update">Télécharger une image</button>';
-			$(ProjectEditor.elements[property].elementId).after(newElement_1_input);
-			$("#wdg-edit-picture-head-next_update").css("left", $(".project-banner-content").position().left);
-			$("#wdg-edit-picture-head-next_update").css("top", $(".project-banner-content").position().top);
-			$("#wdg-edit-picture-head-next_update").css("z-index", "150");
-    		$("#wdg-edit-picture-head-next_update").css("position","absolute");
-
-			var newElement_2 = '<input type="submit" id="wdg-edit-picture-head-next_valid" value="Valider"/>';
-			$(ProjectEditor.elements[property].elementId).after(newElement_2);
-			$("#wdg-edit-picture-head-next_valid").css("left", $(".project-banner-content").position().left + $("#wdg-edit-picture-head-next_update").outerWidth());
-			$("#wdg-edit-picture-head-next_valid").css("top", $(".project-banner-content").position().top);
-			$("#wdg-edit-picture-head-next_valid").css("z-index", "150");
-    		$("#wdg-edit-picture-head-next_valid").css("position","absolute");
-
-
-			var newElement_3 = '<input type="submit" id="wdg-edit-picture-head-next_cancel" value="Annuler"/>';
-			$(ProjectEditor.elements[property].elementId).after(newElement_3);
-			$("#wdg-edit-picture-head-next_cancel").css("left", $(".project-banner-content").position().left + $("#wdg-edit-picture-head-next_update").outerWidth() + $("#wdg-edit-picture-head-next_valid").outerWidth());
-			$("#wdg-edit-picture-head-next_cancel").css("top", $(".project-banner-content").position().top);
-			$("#wdg-edit-picture-head-next_cancel").css("z-index", "150");
-    		$("#wdg-edit-picture-head-next_cancel").css("position","absolute");
-			
-
-			var button_waiting = '<input type="submit" id="wdg-validate-picture-wait"/>';
-			$(ProjectEditor.elements[property].elementId).after(button_waiting);
-			$("#wdg-validate-picture-wait").addClass("wait-button");
-			$("#wdg-validate-picture-wait").unbind("click");
-			$("#wdg-validate-picture-wait").attr('style','display:none; ');
-			$("#wdg-validate-picture-wait").innerHTML = "";
-
-			var newElement_span = '<span id="extra-comment">(Max. 2Mo ; idéalement 370px de hauteur et au minimum 960px de largeur)</span>';
-			$(ProjectEditor.elements[property].elementId).after(newElement_span);
-			$("#extra-comment").css("left", $(".project-banner-content").position().left);
-			$("#extra-comment").css("top", $(".project-banner-content").position().top + $("#wdg-edit-picture-head-next_update").outerHeight(true));
-			$("#extra-comment").css("z-index", "150");
-    		$("#extra-comment").css("position","absolute");
-
-			$("#wdg-move-picture-head").hide();
-
-			$("#wdg-edit-picture-head-next_cancel").click(function() {
-				ProjectEditor.validateInputDone(true);
-				$("#wdg-edit-"+property).show();
-				$("#wdg-edit-picture-head-next").remove();
-				$("#wdg-edit-picture-head-next_update").remove();
-				$("#wdg-edit-picture-head-next_valid").remove();
-				$("#wdg-edit-picture-head-next_cancel").remove();
-				$("#wdg-move-picture-head").show();
-				$("#extra-comment").remove();
-				$("#project-banner-src").remove();
-				$('.project-banner-img').append('<img id="project-banner-src" src="'+url_image_start+'">');
-				$(".project-banner-content").css("background", "none");
-			});
-			
-			$("#wdg-edit-picture-head-next_update").click(function() {
-				$("#wdg-edit-picture-head-next").click();
-			});
-
-			$("#wdg-edit-picture-head-next_valid").click(function() {
-
-  				var formData = new FormData($('form#upload-img-form')[0]);
-  				$("#wdg-edit-picture-head-next").remove();
-				$("#wdg-edit-picture-head-next_update").remove();
-				$("#wdg-edit-picture-head-next_valid").remove();
-				$("#wdg-edit-picture-head-next_cancel").remove();
-				$("#wdg-move-picture-head").css("left", $("#wdg-edit-picture-head").outerWidth(true));
-				$("#wdg-move-picture-head").css("top", 0);
-				$('.project-banner-img').css("top", 0);
-				$("#extra-comment").remove();
-				$("#wdg-validate-picture-wait").attr('style',' border: medium none; background-color:#41ACB1; font-size: 0px; display:inline-block; z-index:2001;');
-				
-				$.ajax({
-					'type' : "POST",
-					'url' :ajax_object.ajax_url,
-					'data': formData,
-		            'cache': false,
-		            'contentType': false,
-		            'processData': false
-				}).done(function(result) {
-					$("#wdg-edit-"+property).show();
-					$("#wdg-validate-picture-wait").attr('style','display:none;');
-					$("#wdg-move-picture-head").show();
-					ProjectEditor.validateInputDone(result);
-
-				});
-
-
-			});
-
-			$(".input_image_home").change(function(){
-				$("#project-banner-src").remove();
-				if (this.files) {
-					$.each(this.files, function(index, file) {
-						switch (file.type) {
-						case "image/jpeg":
-						case "image/jpg":
-						case "image/png":
-						case "image/gif":
-						var reader = new FileReader();
-						reader.onload = function (e) {
-							$('.project-banner-img').append('<img id="project-banner-src" src="'+e.target.result+'">');
-						}
-
-						reader.readAsDataURL(file);
-						default:
-						break;
-						}
-					});
-				}
-			});
-			$("#wdg-edit-"+property).hide();
 		},
 	 
 		// Enregistre l'image et/ou l'url de la vidéo
@@ -849,74 +726,10 @@ var ProjectEditor = (function($) {
 		},
 		
 		
-		//Déplacement de l'image dans le header
-		moveHeaderPicture:function() {
-			$('.project-banner-img').draggable({ axis: "y" });
-			$('.project-banner-img').draggable('enable');
-			$('#wdg-edit-picture-head').hide();
-			$('#wdg-move-picture-head').addClass("edit-button-validate");
-			$('#wdg-move-picture-head').removeClass('move-button');
-			$(".project-banner-content").css({ opacity: 0 });
-			$(".project-banner-content").css({ 'z-index': -1 });
-			$(".project-banner-deco").css({ opacity: 0 });
-			$(".project-banner-deco").css({ 'z-index': -1 });
-		},
 
-		//Enregistrement de la position de l'image dans le header
-		saveHeaderPicturePosition:function(){
-//			$('.project-banner-img').draggable('disable');
-			$('#wdg-move-picture-head').addClass('wait-button');
-			$('#wdg-move-picture-head').removeClass("edit-button-validate");
-			$(".project-banner-content").css({ opacity: 1 });
-			$(".project-banner-content").css({ 'z-index': "auto" });
-			$(".project-banner-deco").css({ opacity: 1 });
-			$(".project-banner-deco").css({ 'z-index': "auto" });
-			$.ajax({
-				'type' : "POST",
-				'url' : ajax_object.ajax_url,
-				'data': { 
-					'action':   'setCoverPosition',
-					'top':	    $('.project-banner-img').css('top'),
-					'id_campaign': $("#content").data("campaignid")
-				}
-			}).done(function() {
-				$('#wdg-move-picture-head').addClass('move-button');
-				$('#wdg-move-picture-head').removeClass('wait-button');
-				$('#wdg-edit-picture-head').show();
-			});
-		},
-
-		//Déplacement du curseur de localisation
-		moveCursor:function(){
-			$('#map-cursor').draggable({
-				containment: '#project-map'
-			});
-			$('#map-cursor').draggable('enable');
-			$('#wdg-move-picture-location').addClass("edit-button-validate");
-			$('#wdg-move-picture-location').removeClass('move-button');
-		},
-
-		//Enregistrement de la position du curseur de localisation
-		saveCursorPosition:function(){
-			$('#map-cursor').draggable('disable');
-			$('#wdg-move-picture-location').addClass('wait-button');
-			$('#wdg-move-picture-location').removeClass("edit-button-validate");
-			$.ajax({
-				'type' : "POST",
-				'url' : ajax_object.ajax_url,
-				'data': { 
-					'action': 'setCursorPosition',
-					'top': $('#map-cursor').css('top'),
-					'left': $('#map-cursor').css('left'),
-					'id_campaign': $("#content").data("campaignid")
-				}
-			    
-			}).done(function() {
-				$('#wdg-move-picture-location').addClass('move-button');
-				$('#wdg-move-picture-location').removeClass('wait-button');
-			}); 
-		},
-		
+		/**
+		 * Fonctions d'analyse des fichiers présents sur la page projet pour signaler les plus gros
+		 */
 		analyseImageFiles: function() {
 			if ( ( '#project-banner-picture img' ).length > 0 ) {
 				var sSrc = $( '#project-banner-picture img' ).attr( 'src' );

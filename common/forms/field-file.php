@@ -4,9 +4,9 @@ $date_upload = '';
 $message_instead_of_field = '';
 $display_refused_alert = FALSE;
 if ( isset( $wdg_current_field[ 'options' ] ) ) {
-	$date_upload = ( is_array( $wdg_current_field[ 'options' ] ) ) ? $wdg_current_field[ 'options' ][ 'date_upload' ] : $wdg_current_field[ 'options' ];
-	$message_instead_of_field = ( is_array( $wdg_current_field[ 'options' ] ) ) ? $wdg_current_field[ 'options' ][ 'message_instead_of_field' ] : '';
-	$display_refused_alert = ( is_array( $wdg_current_field[ 'options' ] ) ) ? $wdg_current_field[ 'options' ][ 'display_refused_alert' ] : FALSE;
+	$date_upload = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'date_upload' ] ) ) ? $wdg_current_field[ 'options' ][ 'date_upload' ] : $wdg_current_field[ 'options' ];
+	$message_instead_of_field = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'message_instead_of_field' ] ) ) ? $wdg_current_field[ 'options' ][ 'message_instead_of_field' ] : '';
+	$display_refused_alert = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'display_refused_alert' ] ) ) ? $wdg_current_field[ 'options' ][ 'display_refused_alert' ] : FALSE;
 }
 ?>
 
@@ -20,13 +20,17 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 
 <?php if ( $display_refused_alert ): ?>
 <div class="wdg-message error">
-	<?php _e( "Le fichier a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement.", 'yproject' ); ?>
+	<?php if ( $display_refused_alert === TRUE ): ?>
+		<?php _e( "Le fichier a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement.", 'yproject' ); ?>
+	<?php else: ?>
+		<?php echo $display_refused_alert; ?>
+	<?php endif; ?>
 </div>
 <?php endif; ?>
 
 <div class="field-description">
 	<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 8 Mo.", 'yproject' ); ?><br>
-	<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?>
+	<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, GIF et PNG.", 'yproject' ); ?>
 </div>
 <input type="file" name="<?php echo $wdg_current_field[ 'name' ]; ?>" id="<?php echo $wdg_current_field[ 'name' ]; ?>">
 <label for="<?php echo $wdg_current_field[ 'name' ]; ?>" class="file-label hidden-responsive" data-input="<?php echo $wdg_current_field[ 'name' ]; ?>">
@@ -48,7 +52,7 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 <div id="lightbox-<?php echo $wdg_current_field[ 'name' ]; ?>" class="align-left">
 	<strong><?php echo $wdg_current_field[ 'label' ]; ?></strong><br><br>
 	<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 8 Mo.", 'yproject' ); ?><br>
-	<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, BMP, GIF, TIF, TIFF et PNG.", 'yproject' ); ?><br><br>
+	<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, GIF et PNG.", 'yproject' ); ?><br><br>
 	<?php echo $wdg_current_field[ 'description' ]; ?><br><br>
 	
 	<div class="align-center">

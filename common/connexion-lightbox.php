@@ -1,4 +1,9 @@
-<?php global $signup_errors, $stylesheet_directory_uri; $has_register_errors = ($signup_errors->get_error_message() != ""); ?>
+<?php global $signup_errors, $stylesheet_directory_uri, $login_init; $has_register_errors = ($signup_errors->get_error_message() != ""); ?>
+<?php
+	if ( empty( $login_init ) ) {
+		$login_init = '';
+	}
+?>
 
 <div id="connect-form" class="align-center wdg-lightbox-ref <?php if ($has_register_errors): ?>specific-hidden<?php endif; ?>">
 	<?php if (WDGFormUsers::has_login_errors()): ?>
@@ -12,7 +17,7 @@
 				<label for="signin_username"><?php _e( 'E-mail ou identifiant', 'yproject' ); ?> *</label>
 				<div class="field-container">
 					<span class="field-value">
-						<input type="email" name="log" id="signin_username" value="<?php if (isset($_POST["log"])) echo $_POST["log"]; ?>" />
+						<input type="text" name="log" id="signin_username" value="<?php echo $login_init; ?>" />
 					</span>
 				</div>
 			</div>

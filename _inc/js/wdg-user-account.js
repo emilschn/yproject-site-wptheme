@@ -249,6 +249,7 @@ UserAccountDashboard.prototype.initProjectList = function() {
 			}
 			$( '#investment-synthesis-pictos-' + userID + ' .funded-projects .data' ).text( nProject );
 			$( '#investment-synthesis-pictos-' + userID + ' .amount-invested .data' ).html( JSHelpers.formatNumber( nAmountInvested, '&euro;' ) );
+			nAmountReceived = Math.round( nAmountReceived * 100 ) / 100;
 			$( '#investment-synthesis-pictos-' + userID + ' .royalties-received .data' ).html( JSHelpers.formatNumber( nAmountReceived, '&euro;' ) );
 			$( '#investment-synthesis-' + userID ).removeClass( 'hidden' );
 			$( '#investment-synthesis-pictos-' + userID ).removeClass( 'hidden' );

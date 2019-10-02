@@ -233,15 +233,17 @@
 	}
 	body.template-les-projets .wdg-component-projects-preview .block-projects {
 		display: block;
-		width: 960px;
-		max-height: 620px;
 	}
 	body.template-les-projets .projects-current .wdg-component-projects-preview .project-container,
+	body.template-les-projets .projects-positive-savings .wdg-component-projects-preview .project-container,
 	body.template-les-projets .projects-after-end-date .wdg-component-projects-preview .project-container,
 	body.template-les-projets .projects-funded .wdg-component-projects-preview .project-container {
 		display: inline-block;
 		width: 320px;
 		height: 620px;
+	}
+	body.template-les-projets .projects-positive-savings .wdg-component-projects-preview .project-container {
+		height: 490px;
 	}
 	body.template-les-projets .wdg-component-projects-preview .project-container .project-framed {
 		position: absolute;

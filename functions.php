@@ -74,29 +74,6 @@ add_action('personal_options_update', 'wdg_admin_save_user_profile');
 /**
  * Gestion ajax
  */
-/**
- * Permet d'envoyer la position de l'image de couverture d'un projet.
- */
-function set_cover_position(){
-	if (isset($_POST['top'])) {
-		update_post_meta($_POST['id_campaign'],'campaign_cover_position', $_POST['top']);
-		do_action('wdg_delete_cache', array('project-header-image-' . $_POST['id_campaign'], 'project-content-summary-' . $_POST['id_campaign']));
-	}
-}
-add_action( 'wp_ajax_setCoverPosition', 'set_cover_position' );
-
-/**
- * Permet d'envoyer la position de l'image de couverture d'un projet.
- */
-function set_cursor_position(){
-	if (isset($_POST['top'])) {
-		update_post_meta($_POST['id_campaign'],'campaign_cursor_top_position', $_POST['top']);
-		update_post_meta($_POST['id_campaign'],'campaign_cursor_left_position', $_POST['left']);
-		do_action('wdg_delete_cache', array('project-content-about-' . $_POST['id_campaign']));
-	}
-}
-add_action( 'wp_ajax_setCursorPosition', 'set_cursor_position' );
-
 	
 function update_jy_crois(){
 	global $post;
