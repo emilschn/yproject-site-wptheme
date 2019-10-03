@@ -333,6 +333,10 @@ div.mean-payment-list a div, div.mean-payment-list p > span, div.mean-payment-li
 	text-align: justify;
 }
 
+div.mean-payment-list #save_card_zone {
+	font-size: 13px;
+}
+
 /**
  ETAPE 4 : Partage
 **/

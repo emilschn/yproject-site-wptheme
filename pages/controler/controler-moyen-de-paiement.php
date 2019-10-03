@@ -176,18 +176,13 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	public function init_can_use_wallet() {
 		if ( !isset( $this->can_use_wallet ) ) {
 			$this->can_use_wallet = FALSE;
-			$this->can_use_card_and_wallet = FALSE;
+			$this->can_use_card_and_wallet = TRUE;
 			if ( !$this->current_investment->has_token() && ATCF_CrowdFunding::get_platform_context() == "wedogood" ) {
 				if ( $this->current_investment->get_session_user_type() == 'user' ) {
 					$WDGUser_current = WDGUser::current();
 					$this->can_use_wallet = $WDGUser_current->can_pay_with_wallet( $this->current_investment->get_session_amount(), $this->current_campaign );
 					$this->can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $this->current_investment->get_session_amount(), $this->current_campaign );
-				}/* else {
-					$invest_type = $this->current_investment->get_session_user_type();
-					$organization = new WDGOrganization($invest_type);
-					$this->can_use_wallet = $organization->can_pay_with_wallet( $this->current_investment->get_session_amount(), $this->current_campaign );
-					$this->can_use_card_and_wallet = $organization->can_pay_with_card_and_wallet( $this->current_investment->get_session_amount(), $this->current_campaign );
-				}*/
+				}
 			}
 		}
 	}
@@ -249,7 +244,9 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 					
 				case WDGInvestment::$meanofpayment_cardwallet:
 				case WDGInvestment::$meanofpayment_card:
-					$return = $this->current_investment->try_payment( $this->current_meanofpayment );
+					$save_card_input = filter_input( INPUT_POST, 'meanofpayment-save' );
+					$save_card = ( $save_card_input === '1' );
+					$return = $this->current_investment->try_payment( $this->current_meanofpayment, $save_card );
 					if ( empty( $return ) ) {
 						$this->display_error = __( "Il y a eu une erreur de connexion &agrave; notre prestataire de paiement Lemon Way.", 'yproject' );
 						$investment_error = $this->current_investment->get_error();

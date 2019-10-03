@@ -28,6 +28,19 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<span><?php _e( "CB, Visa, Mastercard ; e-carte bleue provisoire non accept&eacute;e", 'yproject' ); ?></span>
 				</div>
 			</a>
+
+			<div id="save_card_zone_cardwallet" class="hidden db-form v3 full bg-white save_card_zone">
+				<div class="field field-checkboxes">
+					<div class="field-container">
+						<span class="field-value">
+							<label for="save_card_cardwallet" class="radio-label">
+								<input type="checkbox" id="save_card_cardwallet" name="save_card_cardwallet" value="1"><span></span>
+								<?php _e( "Enregistrer ma carte bancaire pour de futurs investissements (enregistr&eacute;e chez notre prestataire de paiement agr&eacute;&eacute; Lemon Way)", 'yproject' ); ?>
+							</label>
+						</span>
+					</div>
+				</div>
+			</div>
 		<?php endif; ?>
 		
 		
@@ -44,6 +57,19 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<?php endif; ?>
 				</div>
 			</a>
+
+			<div id="save_card_zone_card" class="hidden db-form v3 full bg-white save_card_zone">
+				<div class="field field-checkboxes">
+					<div class="field-container">
+						<span class="field-value">
+							<label for="save_card_card" class="radio-label">
+								<input type="checkbox" id="save_card_card" name="save_card_card" value="1"><span></span>
+								<?php _e( "Enregistrer ma carte bancaire pour de futurs investissements (enregistr&eacute;e chez notre prestataire de paiement agr&eacute;&eacute; Lemon Way)", 'yproject' ); ?>
+							</label>
+						</span>
+					</div>
+				</div>
+			</div>
 		
 		<?php else: ?>
 			<p class="disabled mean-payment">
@@ -96,9 +122,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 	</div>
 	
-	<form id="contract-buttons" action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
+	<form id="form-navigation" action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
 
 		<input type="hidden" id="input-meanofpayment" name="meanofpayment" value="">
+		<input type="hidden" id="input-meanofpayment-save" name="meanofpayment-save" value="">
 		<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
 		<button type="submit" class="button half right red hidden"><?php _e( "Payer", 'yproject' ); ?></button>
 

@@ -39,9 +39,29 @@ var WDGInvestPageFunctions = (function($) {
 					e.preventDefault();
 					$( '.mean-payment' ).removeClass( 'selected' );
 					$( this ).addClass( 'selected' );
-					$( '#contract-buttons button' ).show();
-					var sMeanPayment = 'mean-payment-';
-					$( '#input-meanofpayment' ).val( $( this ).attr( 'id' ).substr( sMeanPayment.length ) );
+					$( '#form-navigation button' ).show();
+					var sMeanPaymentStr = 'mean-payment-';
+					var sMeanOfPayment = $( this ).attr( 'id' ).substr( sMeanPaymentStr.length );
+
+					// Si on change de moyen de paiement
+					if ( sMeanOfPayment != $( '#input-meanofpayment' ).val() ) {
+						$( '#input-meanofpayment' ).val( sMeanOfPayment );
+						$( '#input-meanofpayment-save' ).val( '' );
+						$( '.save_card_zone input' ).attr( 'checked', false );
+						$( '.save_card_zone' ).slideUp( 200 );
+						if ( sMeanOfPayment == 'card' || sMeanOfPayment == 'cardwallet' ) {
+							$( '#save_card_zone_' + sMeanOfPayment ).slideDown( 200 );
+						}
+					}
+				} );
+
+				$( '.save_card_zone' ).click( function() {
+					console.log( $( this ).find( 'input' ) );
+					if ( $( this ).find( 'input' ).is( ':checked' ) ) {
+						$( '#input-meanofpayment-save' ).val( '1' );
+					} else {
+						$( '#input-meanofpayment-save' ).val( '' );
+					}
 				} );
 			}
 			
