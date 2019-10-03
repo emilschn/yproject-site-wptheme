@@ -23,13 +23,7 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contrac
 		<?php echo $page_controler->get_contract_warning(); ?>
 	</div>
 	
-	<?php locate_template( array( 'pages/view/moyen-de-paiement/list.php'  ), true ); ?>
-	
-	<div id="change-mean-payment" class="align-center hidden">
-		<a href="#" class="button transparent"><?php _e( "Modifier le moyen de paiement", 'yproject' ); ?></a>
-	</div>
-	
-	<div id="contract-preview" class="hidden">
+	<div id="contract-preview">
 		<?php echo $page_controler->get_current_investment_contract_preview(); ?>
 	</div>
 
@@ -38,7 +32,7 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contrac
 		<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 	<?php endforeach; ?>
 	
-	<div id="contract-buttons" class="hidden">
+	<div id="contract-buttons">
 		<br /><br /><br />
 
 		<button type="submit" class="button half right red"><?php _e( "Valider le contrat", 'yproject' ); ?></button>
