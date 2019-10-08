@@ -1,5 +1,24 @@
 <?php 
 global $campaign, $current_user, $stylesheet_directory_uri, $can_modify, $language_list;
+
+$btn_follow_href = home_url( '/connexion/' ) . '?source=project';
+$btn_follow_classes = 'wdg-button-lightbox-open';
+$btn_follow_data_lightbox = 'connexion';
+$btn_follow_text = __('Suivre', 'yproject');
+$btn_follow_following = '0';
+if (is_user_logged_in()) {
+	$WDGUser_current = WDGUser::current();
+	$btn_follow_classes = 'update-follow';
+	$btn_follow_data_lightbox = $campaign->ID;
+	global $wpdb;
+	$table_jcrois = $wpdb->prefix . "jycrois";
+	$users = $wpdb->get_results( 'SELECT * FROM '.$table_jcrois.' WHERE campaign_id = '.$campaign->ID.' AND user_id='.$current_user->ID );
+	$btn_follow_text = (!empty($users[0]->ID)) ? __('Suivi !', 'yproject') : __('Suivre', 'yproject');
+	$btn_follow_following = (!empty($users[0]->ID)) ? '1' : '0';
+	if ($btn_follow_following == '1') { $btn_follow_classes .= ' btn-followed'; }
+	if (!empty($users[0]->ID)) { $btn_follow_href = '#'; }
+}
+
 $video_element = '';
 $img_src = '';
 $campaign_video_url = $campaign->video();
