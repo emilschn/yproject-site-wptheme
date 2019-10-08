@@ -77,7 +77,11 @@ Slideshow.prototype.gotoSlide = function(num){
     var cssStart = {"left" : direction*this.elem.width()};
     var cssEnd = {"left" : -direction*this.elem.width()};
     this.elem.find('#slide-'+num).show().css(cssStart);//élément qui va arriver
-    this.elem.find('#slide-'+num).animate({"top": 0, "left": 0}, 1500);
+    this.elem.find('#slide-'+num).animate(
+		{"top": 0, "left": 0}, 1500, function() {
+			$( '.wdg-component-slider .slider-container #slider .slider-item .message-banner' ).css( 'width', '100%' ).css( 'width', '-=282px' );
+		}
+	);
     this.elemCurrent.animate(cssEnd, 1500);
     
     this.currentIndex = (parseInt(num))-1;
