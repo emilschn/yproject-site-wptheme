@@ -116,6 +116,12 @@ else {
 		<br>
 		<button id="cookies-alert-close" class="button red"><?php _e( "Accepter", 'yproject' ); ?></button>
 	</div>
+	<script>
+		var hidecookiealert = YPUIFunctions.getCookie( 'hidecookiealert' );
+		if ( hidecookiealert === '1' ) {
+			$( '#cookies-alert' ).hide();
+		}
+	</script>
 	<?php endif; ?>
 
 	<?php wp_footer(); ?>
