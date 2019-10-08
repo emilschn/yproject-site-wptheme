@@ -11,6 +11,7 @@ if ( isset( $organization_obj ) ) {
 	$WDGOrganizationDetailsForm = new WDG_Form_Organization_Details( $WDGOrganization->get_wpref(), TRUE );
 	$fields_hidden = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_hidden );
 	$fields_complete = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_complete );
+	$fields_dashboard = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_dashboard );
 	$fields_address = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_address );
 ?>
 	    
@@ -45,6 +46,11 @@ if ( isset( $organization_obj ) ) {
 		<?php endif; ?>
 
 		<?php foreach ( $fields_complete as $field ): ?>
+			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+		<?php endforeach; ?>
+
+		<?php foreach ( $fields_dashboard as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 		<?php endforeach; ?>
