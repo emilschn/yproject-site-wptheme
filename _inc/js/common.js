@@ -120,7 +120,7 @@ YPUIFunctions = (function($) {
 				var hidecookiealert = YPUIFunctions.getCookie( 'hidecookiealert' );
 				if ( hidecookiealert === '1' ) {
 					$( '#cookies-alert' ).hide();
-				}
+				} 
 				$( '#cookies-alert-close' ).click(function() {
 					$( '#cookies-alert' ).hide();
 					var date = new Date();
