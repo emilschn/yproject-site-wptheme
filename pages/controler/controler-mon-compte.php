@@ -2,7 +2,7 @@
 $template_engine = WDG_Templates_Engine::instance();
 $template_engine->set_controler( new WDG_Page_Controler_User_Account() );
 
-class WDG_Page_Controler_User_Account extends WDG_Page_Controler {
+class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	
 	/**
 	 * @var WDGUser 

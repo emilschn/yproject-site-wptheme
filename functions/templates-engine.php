@@ -69,6 +69,7 @@ class WDG_Templates_Engine {
 	 */
 	public static function load_controler( $template ) {
 		locate_template( WDG_Templates_Engine::$controler_path. 'controler.php', TRUE );
+		locate_template( WDG_Templates_Engine::$controler_path. 'controler-wdg.php', TRUE );
 		
 		$wdg_templates_engine = WDG_Templates_Engine::instance();
 		$controler_name = $wdg_templates_engine->get_controler_name();
