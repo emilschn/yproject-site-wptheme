@@ -45,7 +45,7 @@ class YPShortcodeManager {
 	}
 	
 	
-	function yproject_crowdfunding_invest_form($atts, $content = '') {
+	public static function yproject_crowdfunding_invest_form($atts, $content = '') {
 		$form = '';
 		if (ypcf_get_current_step() == 1) {
 			$form = YPShortcodeManager::include_template('invest/input.php');
@@ -53,7 +53,7 @@ class YPShortcodeManager {
 		return $form;
 	}
 	
-	function yproject_crowdfunding_invest_confirm($atts, $content = '') {
+	public static function yproject_crowdfunding_invest_confirm($atts, $content = '') {
 		$form = '';
 		if (ypcf_get_current_step() == 2) {
 			$form = YPShortcodeManager::include_template('invest/confirm.php');
@@ -61,27 +61,27 @@ class YPShortcodeManager {
 		return $form;
 	}
 	
-	function yproject_crowdfunding_invest_mean_payment($atts, $content = '') {
+	public static function yproject_crowdfunding_invest_mean_payment($atts, $content = '') {
 		return YPShortcodeManager::include_template('invest/mean-payment.php');
 	}
 	
-	function yproject_crowdfunding_invest_payment_check($atts, $content = '') {
+	public static function yproject_crowdfunding_invest_payment_check($atts, $content = '') {
 		return YPShortcodeManager::include_template('invest/payment-check.php');
 	}
 	
-	function yproject_crowdfunding_invest_payment_wire($atts, $content = '') {
+	public static function yproject_crowdfunding_invest_payment_wire($atts, $content = '') {
 		return YPShortcodeManager::include_template('invest/payment-wire.php');
 	}
 	
-	function yproject_crowdfunding_invest_return($atts, $content = '') {
+	public static function yproject_crowdfunding_invest_return($atts, $content = '') {
 		return YPShortcodeManager::include_template('invest/return.php');
 	}
 	
-	function yproject_crowdfunding_invest_share($atts, $content = '') {
+	public static function yproject_crowdfunding_invest_share($atts, $content = '') {
 		return YPShortcodeManager::include_template('invest/share.php');
 	}
 	
-	function yproject_lightbox_button($atts, $content = '') {
+	public static function yproject_lightbox_button($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'label'	=> 'Afficher',
 			'id'	=> 'lightbox',
@@ -94,7 +94,7 @@ class YPShortcodeManager {
 	/**
 	 * Lightbox avec coin transparent
 	 */
-	function yproject_lightbox_cornered( $atts, $content = '' ) {
+	public static function yproject_lightbox_cornered( $atts, $content = '' ) {
 		$atts = shortcode_atts( array(
 			'id'		=> 'lightbox',
 			'title'		=> '',
@@ -136,7 +136,7 @@ class YPShortcodeManager {
 		return $buffer;
 	}
 
-	function yproject_lightbox($atts, $content = '') {
+	public static function yproject_lightbox($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'id'		=> 'lightbox',
 			'scrolltop' => '0',
@@ -162,7 +162,7 @@ class YPShortcodeManager {
 			</div>';
 	}
 	
-	function yproject_widelightbox($atts, $content = '') {
+	public static function yproject_widelightbox($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'id'		=> 'lightbox',
 			'scrolltop'	=> '0',
@@ -178,7 +178,7 @@ class YPShortcodeManager {
 	}
 	
 	//Shortcodes lightbox Connexion
-	function yproject_connexion_lightbox($atts, $content = '') {
+	public static function yproject_connexion_lightbox($atts, $content = '') {
 		ob_start();
 		locate_template('common/connexion-lightbox.php',true);
 		$lightbox_content = ob_get_contents();
@@ -187,7 +187,7 @@ class YPShortcodeManager {
 	}
 	
 	//Shortcodes lightbox d'inscription 
-	function yproject_register_lightbox($atts, $content = '') {
+	public static function yproject_register_lightbox($atts, $content = '') {
 		ob_start();
 		locate_template('common/register-lightbox.php',true);
 		$lightbox_content = ob_get_contents();
@@ -197,7 +197,7 @@ class YPShortcodeManager {
 	
 	//Shortcode lightbox Tableau de bord
 	// ->TB Stats
-	function yproject_statsadvanced_lightbox($atts, $content = '') {
+	public static function yproject_statsadvanced_lightbox($atts, $content = '') {
 		ob_start();
 		locate_template('projects/dashboard/dashboard-statsadvanced-lightbox.php',true);
 		$content = ob_get_contents();
@@ -206,7 +206,7 @@ class YPShortcodeManager {
 	}
 	
 	//Shortcode pour Lightbox de création de projet
-	function yproject_newproject_lightbox($atts, $content = '') {
+	public static function yproject_newproject_lightbox($atts, $content = '') {
 		ob_start();
 		locate_template('common/newproject-lightbox.php',true);
 		$content = ob_get_contents();
@@ -215,7 +215,7 @@ class YPShortcodeManager {
 		echo do_shortcode('[yproject_register_lightbox]');
 	}
 	
-	function wdg_page_auto_refresh($atts, $content = '') {
+	public static function wdg_page_auto_refresh($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'nb_minutes' => '2',
 		), $atts );
@@ -226,7 +226,7 @@ class YPShortcodeManager {
 		return $code;
 	}
 	
-	function wdg_project_vote_count($atts, $content = '') {
+	public static function wdg_project_vote_count($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
 			'project_list' => ''
@@ -247,7 +247,7 @@ class YPShortcodeManager {
 		return UIHelpers::format_number( $buffer_nb_voters, 0 );
 	}
 	
-	function wdg_project_vote_intention_sum($atts, $content = '') {
+	public static function wdg_project_vote_intention_sum($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
 			'project_list' => ''
@@ -271,7 +271,7 @@ class YPShortcodeManager {
 		return UIHelpers::format_number( $buffer_sum_vote_intention, 0 );
 	}
 	
-	function wdg_project_investors_count($atts, $content = '') {
+	public static function wdg_project_investors_count($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
 		), $atts );
@@ -283,7 +283,7 @@ class YPShortcodeManager {
 		}
 	}
 	
-	function wdg_project_amount_count($atts, $content = '') {
+	public static function wdg_project_amount_count($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
 		), $atts );
@@ -295,7 +295,7 @@ class YPShortcodeManager {
 		}
 	}
 
-	function wdg_project_investment_link($atts, $content = '') {
+	public static function wdg_project_investment_link($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
 			'label' => '',
@@ -314,7 +314,7 @@ class YPShortcodeManager {
 		return $buffer;
 	}
 
-	function wdg_project_progress_bar( $atts, $content = '' ) {
+	public static function wdg_project_progress_bar( $atts, $content = '' ) {
 		$atts = shortcode_atts( array(
 			'project' => ''
 		), $atts );
@@ -332,7 +332,7 @@ class YPShortcodeManager {
 		return $buffer;
 	}
 
-	function wdg_project_royalties_simulator( $atts, $content = '' ) {
+	public static function wdg_project_royalties_simulator( $atts, $content = '' ) {
 		$atts = shortcode_atts( array(
 			'project' => ''
 		), $atts );
@@ -353,7 +353,7 @@ class YPShortcodeManager {
 		return $buffer;
 	}
 	
-	function wdg_royalties_simulator( $atts, $content = '' ) {
+	public static function wdg_royalties_simulator( $atts, $content = '' ) {
 		$atts = shortcode_atts( array(
 			'title_color'				=> '#00879b',
 			'title_1'					=> __( "MON PR&Eacute;VISIONNEL :", 'yproject' ),
@@ -423,7 +423,7 @@ class YPShortcodeManager {
 		return $buffer;
 	}
 	
-	function wdg_page_breadcrumb( $atts, $content = '' ) {
+	public static function wdg_page_breadcrumb( $atts, $content = '' ) {
 		$atts = shortcode_atts( array(
 			'separator'				=> '&gt;',
 			'separator_unpublished'	=> '-'
@@ -483,7 +483,7 @@ class YPShortcodeManager {
 		return $buffer;
 	}
 	
-	function wdg_footer_banner_link( $atts, $content = '' ) {
+	public static function wdg_footer_banner_link( $atts, $content = '' ) {
 		$atts = shortcode_atts( array(
 			'link' => ''
 		), $atts );
@@ -500,9 +500,3 @@ class YPShortcodeManager {
 		return $buffer;
 	}
 }
-
-
-
-
-
-
