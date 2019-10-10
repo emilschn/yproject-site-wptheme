@@ -328,13 +328,62 @@ div.mean-payment-list p.disabled img {
 div.mean-payment-list p > span, div.mean-payment-list div.mean-payment > span {
 	display: block;
 }
-div.mean-payment-list a div, div.mean-payment-list p > span, div.mean-payment-list div.mean-payment > div {
+div.mean-payment-list a > div, div.mean-payment-list p > span, div.mean-payment-list div.mean-payment > div {
 	margin-left: 130px;
 	text-align: justify;
 }
 
-div.mean-payment-list #save_card_zone {
+
+div.mean-payment-list a > div.save-card-zone {
+	margin-top: 16px;
+}
+.db-form.v3.save-card-zone .field label.radio-label {
+	margin-left: 37px;
+	width: calc(100% - 37px);
+	line-height: normal;
+	text-align: justify;
+}
+.db-form.v3.save-card-zone .field label.radio-label input {
+	margin-left: -42px;
+}
+
+div.mean-payment-list #save-card-zone {
 	font-size: 13px;
+}
+
+div.mean-payment-list a.mean-payment p.registered-card-preview {
+	display: none;
+	margin: 16px 0px;
+	padding: 0px;
+	border: 0px;
+	text-align: center;
+}
+div.mean-payment-list a.mean-payment p.registered-card-preview img {
+	margin-left: 25px;
+}
+div.mean-payment-list a.mean-payment p.registered-card-preview span {
+	line-height: 24px;
+	text-transform: uppercase;
+}
+div.mean-payment-list a.mean-payment p.registered-card-preview button {
+	width: 45%;
+	height: 50px;
+}
+
+div.mean-payment-list a.mean-payment div.card-options-list {
+	margin: 16px 0px 16px 130px;
+	padding: 0px;
+	border: 0px;
+}
+div.mean-payment-list a.mean-payment .db-form.v3.card-options-list .field label.radio-label {
+	margin-left: 37px;
+	width: calc(100% - 37px);
+	line-height: normal;
+	text-align: justify;
+	text-transform: uppercase;
+}
+div.mean-payment-list a.mean-payment .db-form.v3.card-options-list .field label.radio-label input {
+	margin-left: -42px;
 }
 
 /**

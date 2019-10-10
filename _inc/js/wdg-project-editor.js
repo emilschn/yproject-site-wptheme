@@ -28,7 +28,10 @@ var ProjectEditor = (function($) {
 					}
 				} );
 
-				ProjectEditor.analyseImageFiles();
+				// On ne relance l'analyse des images que si on n'a eu aucune erreur pour l'instant
+				if ( $( '.project-admin div.intro' ).length == 0 ) {
+					ProjectEditor.analyseImageFiles();
+				}
 				ProjectEditor.initElements();
 				ProjectEditor.initEdition();
 				ProjectEditor.stopEdition();

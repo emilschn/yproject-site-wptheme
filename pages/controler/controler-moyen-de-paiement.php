@@ -28,6 +28,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	
 	private $can_use_wallet;
 	private $can_use_card_and_wallet;
+	private $list_registered_cards;
 	
 	private $display_error;
 	
@@ -171,6 +172,52 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 		}
 		
 		return $buffer;
+	}
+
+	public function has_registered_cards() {
+		$registered_cards_list = $this->get_registered_cards_list();
+		return ( count( $registered_cards_list ) > 1 );
+	}
+
+	public function get_registered_cards_list() {
+		if ( !isset( $this->list_registered_cards ) ) {
+			$this->list_registered_cards = array();
+	
+			if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
+				$WDGInvestorEntity = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
+			} else {
+				$WDGInvestorEntity = WDGUser::current();
+			}
+			if ( $WDGInvestorEntity->has_saved_card_expiration_date() ) {
+				$entity_registered_cards_list = $WDGInvestorEntity->get_lemonway_registered_cards();
+				foreach ( $entity_registered_cards_list as $registered_item ) {
+					$card_item = array(
+						'id'			=> $registered_item[ 'id' ],
+						'label'			=> __( "Carte bancaire enregistr&eacute;e", 'yproject' ),
+						'number'		=> $registered_item[ 'number' ],
+						'expiration'	=> $registered_item[ 'expiration' ]
+					);
+					array_push( $this->list_registered_cards, $card_item );
+				}
+			}
+	
+			// On ajoute toujours "autre"
+			$card_item = array(
+				'id'			=> 'other',
+				'label'			=> __( "Autre carte bancaire", 'yproject' )
+			);
+			array_push( $this->list_registered_cards, $card_item );
+		}
+
+		return $this->list_registered_cards;
+	}
+
+	public function get_first_registered_card() {
+		$registered_cards_list = $this->get_registered_cards_list();
+		if ( $registered_cards_list[ 0 ][ 'id' ] != 'error' ) {
+			return $registered_cards_list[ 0 ];
+		} 
+		return FALSE;
 	}
 	
 	public function init_can_use_wallet() {

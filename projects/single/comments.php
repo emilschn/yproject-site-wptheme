@@ -20,7 +20,7 @@ $WDGUser_current = WDGUser::current();
 		<?php if ( count($comment_list) > 0 ) : ?>
 			<ul>
 			<?php foreach ($comment_list as $comment): ?>
-				<?php $WDGUser_author = new WDGUser( $comment->user_id ); ?>
+				<?php $WDGUser_author = new WDGUser( $comment->user_id, FALSE ); ?>
 				<li id="comment-<?php echo $comment->comment_ID; ?>">
 					<strong><?php echo $WDGUser_author->get_display_name(). ' (' .get_comment_date('', $comment->comment_ID). ') : '; ?></strong>
 					<?php echo $comment->comment_content; ?>
