@@ -291,9 +291,10 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 					
 				case WDGInvestment::$meanofpayment_cardwallet:
 				case WDGInvestment::$meanofpayment_card:
-					$save_card_input = filter_input( INPUT_POST, 'meanofpayment-save' );
-					$save_card = ( $save_card_input === '1' );
-					$return = $this->current_investment->try_payment( $this->current_meanofpayment, $save_card );
+					$input_card_option_type = filter_input( INPUT_POST, 'meanofpayment-card-type' );
+					$input_card_option_save = filter_input( INPUT_POST, 'meanofpayment-card-save' );
+					$save_card = ( $input_card_option_save === '1' );
+					$return = $this->current_investment->try_payment( $this->current_meanofpayment, $save_card, $input_card_option_type );
 					if ( empty( $return ) ) {
 						$this->display_error = __( "Il y a eu une erreur de connexion &agrave; notre prestataire de paiement Lemon Way.", 'yproject' );
 						$investment_error = $this->current_investment->get_error();
