@@ -27,6 +27,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<span><?php echo sprintf( __( "Je paierai %s &euro; via carte bancaire.", 'yproject' ), $page_controler->get_remaining_amount() ); ?></span><br>
 					<span><?php _e( "CB, Visa, Mastercard ; e-carte bleue provisoire non accept&eacute;e", 'yproject' ); ?></span>
 				</div>
+
+				<?php global $mean_of_payment; $mean_of_payment = 'cardwallet'; ?>
+				<?php locate_template( array( 'pages/view/moyen-de-paiement/card-choice.php'  ), true, false ); ?>
 			</a>
 		<?php endif; ?>
 		
@@ -43,6 +46,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<span><?php _e( "Attention : le montant que vous souhaitez investir risque de d&eacute;passer le plafond de paiement de votre carte. Si vous avez un message d'erreur, contactez votre banque pour augmenter votre plafond de paiement par carte ou choisissez un autre mode de paiement.", 'yproject' ); ?></span>
 					<?php endif; ?>
 				</div>
+
+				<?php global $mean_of_payment; $mean_of_payment = 'card'; ?>
+				<?php locate_template( array( 'pages/view/moyen-de-paiement/card-choice.php'  ), true, false ); ?>
 			</a>
 		
 		<?php else: ?>
@@ -96,9 +102,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 	</div>
 	
-	<form id="contract-buttons" action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
+	<form id="form-navigation" action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
 
 		<input type="hidden" id="input-meanofpayment" name="meanofpayment" value="">
+		<input type="hidden" id="input-meanofpayment-card-type" name="meanofpayment-card-type" value="">
+		<input type="hidden" id="input-meanofpayment-card-save" name="meanofpayment-card-save" value="">
 		<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
 		<button type="submit" class="button half right red hidden"><?php _e( "Payer", 'yproject' ); ?></button>
 

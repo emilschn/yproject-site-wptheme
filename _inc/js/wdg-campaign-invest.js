@@ -39,9 +39,74 @@ var WDGInvestPageFunctions = (function($) {
 					e.preventDefault();
 					$( '.mean-payment' ).removeClass( 'selected' );
 					$( this ).addClass( 'selected' );
-					$( '#contract-buttons button' ).show();
-					var sMeanPayment = 'mean-payment-';
-					$( '#input-meanofpayment' ).val( $( this ).attr( 'id' ).substr( sMeanPayment.length ) );
+					$( '#form-navigation button' ).show();
+					var sMeanPaymentStr = 'mean-payment-';
+					var sMeanOfPayment = $( this ).attr( 'id' ).substr( sMeanPaymentStr.length );
+
+					// Si on change de moyen de paiement
+					if ( sMeanOfPayment != $( '#input-meanofpayment' ).val() ) {
+						$( '#input-meanofpayment' ).val( sMeanOfPayment );
+						$( '#input-meanofpayment-card-type' ).val( '' );
+						$( '#input-meanofpayment-card-save' ).val( '' );
+
+						$( '.save-card-zone input' ).attr( 'checked', false );
+						$( '.save-card-zone' ).slideUp( 200 );
+						$( '.card-options-list' ).slideUp( 200 );
+						$( '.registered-card-preview' ).slideUp( 200 );
+
+						if ( $( '.card-options-list' ).length > 0 ) {
+							$( '.expand-on-card-choice' ).slideUp( 200 );
+							if ( sMeanOfPayment == 'card' || sMeanOfPayment == 'cardwallet' ) {
+								$( '#deploy-on-card-choice-' + sMeanOfPayment ).slideDown( 200 );
+								var idDefaultCardType = $( '#deploy-on-card-choice-' + sMeanOfPayment ).data( 'default-card-type' );
+								$( '#input-meanofpayment-card-type' ).val( idDefaultCardType );
+								$( '#card-option-' + sMeanOfPayment + '-' + idDefaultCardType ).attr( 'checked', true );
+							}
+
+						} else {
+							if ( sMeanOfPayment == 'card' || sMeanOfPayment == 'cardwallet' ) {
+								$( '#save-card-zone-' + sMeanOfPayment ).slideDown( 200 );
+							}
+
+						}
+					}
+				} );
+
+				$( '.card-options-list div.field' ).click( function( e ) {
+					e.stopImmediatePropagation();
+				} );
+
+				$( '.edit-card' ).click( function() {
+					var sMeanOfPayment = $( this ).data( 'type' );
+					$( '#deploy-on-card-choice-' + sMeanOfPayment ).slideUp( 200 );
+					$( '#card-options-list-' + sMeanOfPayment ).slideDown( 200 );
+				} );
+
+				$( '.card-options-list .field-container' ).click( function() {
+					var childrenInput = $( this ).find( 'input' );
+					var nChildren = childrenInput.length;
+					for ( var i = 0; i < nChildren; i++ ) {
+						var childInput = childrenInput[ i ];
+						if ( $( childInput ).is( ':checked' ) ) {
+							$( '#input-meanofpayment-card-type' ).val( $( childInput ).val() );
+						}
+					}
+					var sMeanOfPayment = $( '#input-meanofpayment' ).val();
+					if ( $( '#input-meanofpayment-card-type' ).val() == 'other' ) {
+						$( '#save-card-zone-' + sMeanOfPayment ).slideDown( 200 );
+					} else {
+						$( '#input-meanofpayment-card-save' ).val( '' );
+						$( '.save-card-zone input' ).attr( 'checked', false );
+						$( '#save-card-zone-' + sMeanOfPayment ).slideUp( 200 );
+					}
+				} );
+
+				$( '.save-card-zone' ).click( function() {
+					if ( $( this ).find( 'input' ).is( ':checked' ) ) {
+						$( '#input-meanofpayment-card-save' ).val( '1' );
+					} else {
+						$( '#input-meanofpayment-card-save' ).val( '' );
+					}
 				} );
 			}
 			

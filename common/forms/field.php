@@ -6,7 +6,7 @@ if ( isset( $wdg_current_field[ 'admin_theme' ] ) && $wdg_current_field[ 'admin_
 	$additional_classes .= 'admin-theme';
 }
 if ( isset( $wdg_current_field[ 'options' ] ) ) {
-	if ( is_array( $wdg_current_field[ 'options' ] ) && $wdg_current_field[ 'options' ][ 'secondary' ] ) {
+	if ( is_array( $wdg_current_field[ 'options' ] ) && !empty( $wdg_current_field[ 'options' ][ 'secondary' ] ) ) {
 		$additional_classes .= 'secondary';
 	}
 }

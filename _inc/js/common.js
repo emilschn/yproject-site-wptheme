@@ -120,7 +120,7 @@ YPUIFunctions = (function($) {
 				var hidecookiealert = YPUIFunctions.getCookie( 'hidecookiealert' );
 				if ( hidecookiealert === '1' ) {
 					$( '#cookies-alert' ).hide();
-				}
+				} 
 				$( '#cookies-alert-close' ).click(function() {
 					$( '#cookies-alert' ).hide();
 					var date = new Date();
@@ -602,6 +602,8 @@ var WDGNavFunctions = (function($) {
 							$( '#content' ).append( '<div class="project-admin"></div>' );
 							$( '#content .project-admin' ).append( '<a href="' +infoDecoded[ 'context' ][ 'dashboard_url' ]+ '" class="btn-dashboard">Tableau de bord</a>' );
 							$( '#content .project-admin' ).append( '<div id="wdg-edit-project" class="btn-edit"></div>' );
+							// Reinit de l'édition
+							ProjectEditor.isInit = false;
 							ProjectEditor.init();
 						}
 					}

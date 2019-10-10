@@ -873,7 +873,7 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 		var thisForm = $(this);
 
 		var campaign_id, org_name, org_email, org_representative_function, org_description, org_legalform,
-		org_idnumber, org_rcs,org_capital, org_ape, org_vat, org_fiscal_year_end_month, org_address_number, org_address_number_comp, org_address, org_postal_code,
+		org_idnumber, org_rcs,org_capital, org_ape, org_vat, org_fiscal_year_end_month, org_employees_count, org_address_number, org_address_number_comp, org_address, org_postal_code,
 		org_city, org_nationality, org_bankownername, org_bankowneraddress,
 		org_bankowneriban, org_bankownerbic, org_capable;
 
@@ -889,6 +889,7 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 		org_ape = $('#wdg-lightbox-newOrga input[name=org_ape]').val();
 		org_vat = $('#wdg-lightbox-newOrga input[name=org_vat]').val();
 		org_fiscal_year_end_month = $('#wdg-lightbox-newOrga select[name=org_fiscal_year_end_month]').val();
+		org_employees_count = $('#wdg-lightbox-newOrga select[name=org_employees_count]').val();
 		org_address_number = $('#wdg-lightbox-newOrga input[name=org_address_number]').val();
 		org_address_number_comp = $('#wdg-lightbox-newOrga input[name=org_address_number_comp]').val();
 		org_address = $('#wdg-lightbox-newOrga input[name=org_address]').val();
@@ -925,6 +926,7 @@ WDGCampaignDashboard.prototype.initOrgaForms = function() {
 				'org_ape': org_ape,
 				'org_vat': org_vat,
 				'org_fiscal_year_end_month': org_fiscal_year_end_month,
+				'org_employees_count': org_employees_count,
 				'org_address_number': org_address_number,
 				'org_address_number_comp': org_address_number_comp,
 				'org_address': org_address,
@@ -1054,6 +1056,7 @@ WDGCampaignDashboard.prototype.updateOrgaForm = function(feedback){
    $("#wdg-lightbox-editOrga input[name=org_ape]").val(feedback.organization.ape);
    $("#wdg-lightbox-editOrga input[name=org_vat]").val(feedback.organization.vat);
    $("#wdg-lightbox-editOrga input[name=org_fiscal_year_end_month]").val(feedback.organization.fiscal_year_end_month);
+   $("#wdg-lightbox-editOrga input[name=org_employees_count]").val(feedback.organization.employees_count);
    $("#wdg-lightbox-editOrga input[name=org_address_number]").val(feedback.organization.address_number);
    $("#wdg-lightbox-editOrga input[name=org_address_number_comp]").val(feedback.organization.address_number_comp);
    $("#wdg-lightbox-editOrga input[name=org_address]").val(feedback.organization.address);
