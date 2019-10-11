@@ -10,6 +10,42 @@ $fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_fil
 <h2><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></h2>
 
 <div class="db-form v3">
+	<?php if ( $WDGUser_displayed->has_saved_card_expiration_date() ): ?>
+	<h3><?php _e( "Ma carte bancaire", 'yproject' ); ?></h3>
+
+	<p class="align-justify">
+		<?php _e( "Les informations de vos cartes bancaires sont stock&eacute;es par Lemon Way, prestataire de service de paiement agr&eacute;&eacute;.", 'yproject' ); ?>
+		<?php _e( "WE DO GOOD ne stocke que la date d'expiration afin de vous pr&eacute;venir quand la date approche.", 'yproject' ); ?><br><br>
+	</p>
+
+	<?php $lemonway_registered_cards = $WDGUser_displayed->get_lemonway_registered_cards(); ?>
+	<?php if ( !empty( $lemonway_registered_cards ) ): ?>
+
+		<div class="align-justify">
+			<strong><?php _e( "Mes cartes bancaires enregistr&eacute;es", 'yproject' ); ?></strong><br>
+
+			<?php foreach ( $lemonway_registered_cards as $registered_card ): ?>
+				<div class="user-registered-card">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-cb.png" alt="<?php _e( "Carte bancaire", 'yproject' ); ?>" width="120">
+					<span>
+						<?php echo $registered_card[ 'number' ]; ?><br>
+						Exp <?php echo $registered_card[ 'expiration' ]; ?>
+					</span>
+					<form method="POST" action="<?php echo admin_url( 'admin-post.php?action=remove_user_registered_card' ); ?>" class="db-form v3">
+						<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->get_wpref(); ?>">
+						<input type="hidden" name="card_id" value="<?php echo $registered_card[ 'id' ]; ?>">
+						<button type="submit" class="button blue"><?php _e( "Supprimer", 'yproject' ); ?></button>
+					</form>
+				</div>
+			<?php endforeach; ?>
+		</div>
+
+	<?php endif; ?>
+
+	<br><br>
+	<?php endif; ?>
+
+	<h3><?php _e( "Mon relev&eacute; d'identit&eacute; bancaire", 'yproject' ); ?></h3>
 	<p class="align-justify">
 		<?php if ( !$WDGUser_displayed->can_register_lemonway() ): ?>
 			<?php _e( "Pensez &agrave; renseigner vos informations personnelles pour que notre prestataire puisse valider votre RIB.", 'yproject' ); ?><br>
@@ -24,7 +60,7 @@ $fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_fil
 		
 		<br>
 	</p>
-</div>
+
 
 <?php
 $WDGUser_lw_bank_info = $page_controler->get_current_user_iban();
@@ -184,3 +220,5 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 
 	</form>
 <?php endif; ?>
+
+</div>
