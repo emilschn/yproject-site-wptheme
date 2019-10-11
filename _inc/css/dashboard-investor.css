@@ -292,6 +292,30 @@ body.template-mon-compte div#container div#content div.authentication-items div.
 	text-align: center;
 }
 
+body.template-mon-compte div#container div#content div#item-body-bank div.user-registered-card {
+	display: block;
+	clear: both;
+	min-height: 80px;
+	padding: 5px;
+    margin: 5px;
+	border: 1px solid #333;
+	color: #333333;
+}
+body.template-mon-compte div#container div#content div#item-body-bank div.user-registered-card img {
+	float: left;
+	margin-right: 10px;
+}
+body.template-mon-compte div#container div#content div#item-body-bank div.user-registered-card span {
+	float: left;
+	width: calc( 100% - 230px );
+	margin-top: 16px;
+}
+body.template-mon-compte div#container div#content div#item-body-bank div.user-registered-card form {
+	float: right;
+	width: 100px;
+	line-height: 80px;
+}
+
 @media screen and (max-width: 900px) {
 	body.template-mon-compte div#container div#content main {
 		display: block;
