@@ -48,7 +48,7 @@ $fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_fil
 
 
 	<h3><?php _e( "Relev&eacute; d'identit&eacute; bancaire", 'yproject' ); ?></h3>
-	<p class="center">
+	<p class="align-justify">
 		<?php if ( !$WDGOrganization->can_register_lemonway() ): ?>
 			<?php _e( "Pensez &agrave; renseigner les informations de l'organisation pour que notre prestataire puisse valider votre RIB.", 'yproject' ); ?><br><br>
 			<a href="#orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>" class="button blue go-to-tab" data-tab="orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Informations de l'organisation" ); ?></a><br>
