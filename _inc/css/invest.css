@@ -302,8 +302,9 @@ div.mean-payment-list a, div.mean-payment-list p, div.mean-payment-list div.mean
     margin: 5px;
 	border: 1px solid #333;
 	color: #333333;
+	cursor: pointer;
 }
-div.mean-payment-list a.selected {
+div.mean-payment-list a.selected, div.mean-payment-list div.mean-payment.selected {
 	background: #F4F4F4;
 }
 div.mean-payment-list a img, div.mean-payment-list p img, div.mean-payment-list div.mean-payment img {
