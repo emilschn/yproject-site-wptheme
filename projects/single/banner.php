@@ -85,6 +85,7 @@ if (!empty($current_organization)) {
 $current_lang = get_locale();
 $campaign->set_current_lang($current_lang);
 $lang_list = $campaign->get_lang_list();
+$campaign_categories_str = $campaign->get_categories_str();
 ?>
 	
 <div class="project-banner">

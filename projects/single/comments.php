@@ -42,7 +42,7 @@ $WDGUser_current = WDGUser::current();
 			
 		<?php else: ?>
 			
-			<?php if (!comments_open()): ?>
+			<?php if ( !comments_open( $campaign->ID ) ): ?>
 				<div class="align-center"><?php _e('Les commentaires ne sont pas ouverts.', 'yproject'); ?></div>
 				
 			<?php else: ?>
