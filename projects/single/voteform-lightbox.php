@@ -153,7 +153,7 @@ $lightbox_content = ob_get_contents();
 ob_end_clean();
 $campaign_title = $post->post_title;
 echo do_shortcode('[yproject_lightbox_cornered id="vote" title="'.__( "&Eacute;valuation de ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
-echo do_shortcode('[yproject_lightbox_cornered id="vote-simple-confirmation" msgtype="valid"]'.__( "Votre &eacute;valuation est enregistr&eacute;e !", 'yproject' ).'[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="vote-simple-confirmation" msgtype="valid"]'.__( "Votre &eacute;valuation est enregistr&eacute;e !", 'yproject' ).'<br><br>[/yproject_lightbox_cornered]');
 // *****************************************************************************
 ?>
 
@@ -183,9 +183,9 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 		
 		<p class="align-left">
 		<i><?php _e( "Votre &eacute;valuation a bien &eacute;t&eacute; enregistr&eacute; !", 'yproject' ); ?></i>
-		<br /><br />
+		<br><br>
 		<?php _e( "Vous avez indiqu&eacute; &ecirc;tre int&eacute;ress&eacute;(e) pour investir, confirmez vos informations afin que le porteur de projet puisse vous joindre lors du lancement de la lev&eacute;e de fonds.", 'yproject' ); ?>
-		<br /><br />
+		<br><br>
 		</p>
 		
 		<?php foreach ( $fields_vote_basics as $field ): ?>
@@ -199,18 +199,16 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 		<?php endforeach; ?>
 		
 		
-		<div id="user-details-form-buttons">
-			
-			<button class="button save red" data-close="user-details-vote" data-open="preinvest-warning"><?php _e( "Confirmer et pr&eacute;-investir", 'yproject' ); ?></button>
-			<br><br>
-			
-			<button class="button save blue" data-close="user-details-vote" data-open="user-details-confirmation" data-callback="WDGProjectVote.saveVoteUserCallback"><?php _e( "Confirmer", 'yproject' ); ?></button>
+		<div id="user-details-vote-form-buttons">
+			<button class="button save red" data-close="user-details-vote" data-open="preinvest-warning"><?php _e( "Confirmer", 'yproject' ); ?></button>
 			
 			<div class="loading align-center hidden">
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
 			</div>
 			
 		</div>
+
+		<br><br>
 		
 	</form>
 	
@@ -220,22 +218,18 @@ $fields_vote_vote = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$fiel
 $lightbox_content = ob_get_contents();
 ob_end_clean();
 echo do_shortcode('[yproject_lightbox_cornered id="user-details-vote" title="'.__( "&Eacute;valuation de ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
-echo do_shortcode('[yproject_lightbox_cornered id="user-details-confirmation" msgtype="valid"]'.__( "Donn&eacute;es enregistr&eacute;es ! Merci !", 'yproject' ).'[/yproject_lightbox_cornered]');
 // *****************************************************************************
-?>
 
 
-
-
-<?php
 // *****************************************************************************
 // Lightbox d'avertissement de pré-investissement
 // *****************************************************************************
 $edd_settings = get_option( 'edd_settings' );
+$campaign = new ATCF_Campaign( $post->ID );
 ?>
 
 <?php ob_start(); ?>
-<div id="user-details-form" class="wdg-lightbox-ref">
+<div class="wdg-lightbox-ref">
 	
 	<form method="post" class="sidebar-login-form db-form v3 full ajax-form">
 		
@@ -243,8 +237,10 @@ $edd_settings = get_option( 'edd_settings' );
 			<?php echo apply_filters( 'the_content', $edd_settings[ 'preinvest_warning' ] ); ?>
 		</div>
 		
-		<div id="user-details-form-buttons">
+		<div>
 			
+			<button type="button" class="button half left transparent" data-redirecturl="<?php echo $campaign->get_public_url() . '#vote-share'; ?>"><?php _e( "Plus tard", 'yproject' ); ?></button>
+
 			<button type="button" class="button redirect half right red" data-redirecturl="<?php echo home_url( '/investir/' ) . '?campaign_id=' .$post->ID. '&invest_start=1'; ?>"><?php _e( "Continuer", 'yproject' ); ?></button>
 			
 		</div>

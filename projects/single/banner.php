@@ -222,7 +222,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
 
-						<?php elseif ( $has_voted ): ?>
+						<?php elseif ( $WDGUser_current->has_voted_on_campaign( $campaign->ID ) ): ?>
 							<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
 						
 						<?php else: ?>
@@ -232,7 +232,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 						<?php endif; ?>
 						
 					<?php else: ?>
-						<?php if ( $has_voted ): ?>
+						<?php if ( $WDGUser_current->has_voted_on_campaign( $campaign->ID ) ): ?>
 							<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
 						
 						<?php else: ?>
