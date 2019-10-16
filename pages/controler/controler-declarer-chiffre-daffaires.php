@@ -336,7 +336,8 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	}
 	
 	public function can_display_payment_error() {
-		return $this->display_payment_error;
+		$input_has_error = filter_input( INPUT_GET, 'has_error' );
+		return ( $this->display_payment_error || !empty( $input_has_error ) );
 	}
 	
 	public function has_sign_mandate() {
@@ -399,6 +400,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$campaign_organization_item = $this->current_campaign->get_organization();
 		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
 		$return_url = $this->get_form_action() . '&cardreturn=1';
+		$error_url = $return_url . '&has_error=1';
 		
 		if ( !empty( $card_type ) && $card_type != 'other' ) {
 			$transaction_result = LemonwayLib::ask_payment_registered_card( $WDGOrganization->get_lemonway_id(), $input_card_option_type, $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay() );
@@ -435,7 +437,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			$wk_token = LemonwayLib::make_token( '', $this->current_declaration->id );
 			$this->current_declaration->payment_token = $wk_token;
 			$this->current_declaration->save();
-			$return = LemonwayLib::ask_payment_webkit( $WDGOrganization->get_lemonway_id(), $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay(), $wk_token, $return_url, $return_url, $return_url, $input_card_option_save );
+			$return = LemonwayLib::ask_payment_webkit( $WDGOrganization->get_lemonway_id(), $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay(), $wk_token, $return_url, $error_url, $error_url, $input_card_option_save );
 			if ( !empty( $return->MONEYINWEB->TOKEN ) ) {
 				wp_redirect( YP_LW_WEBKIT_URL . '?moneyInToken=' . $return->MONEYINWEB->TOKEN );
 				exit();
