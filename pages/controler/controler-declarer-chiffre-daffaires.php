@@ -277,7 +277,8 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 						$input_cardreturn = filter_input( INPUT_GET, 'cardreturn' );
 						$input_response_wkToken = filter_input( INPUT_GET, 'response_wkToken' );
 						if ( $input_cardreturn == '1' && !empty( $input_response_wkToken ) ) {
-							if ( $input_response_wkToken == 'error' ) {
+							$input_has_error = filter_input( INPUT_GET, 'has_error' );
+							if ( $input_response_wkToken == 'error' || !empty( $input_has_error ) ) {
 								$has_tried_payment = TRUE;
 								$this->display_payment_error = TRUE;
 								
