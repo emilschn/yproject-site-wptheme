@@ -300,6 +300,7 @@ div#container div#content main #item-body-contacts .authentication-more-info a {
 }
 div#container div#content main #item-body-contacts .authentication-more-info span {
 	position: absolute;
+	z-index: 2;
 	margin: 8px;
 	padding: 4px;
 	width: 200px;
