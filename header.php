@@ -99,6 +99,7 @@
 			<div id="menu">
 				<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
 				<a href="<?php echo home_url( '/les-projets/' ); ?>" class="lines"><?php _e( "Les projets", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/epargne-positive/' ); ?>" class="lines"><?php _e( "&Eacute;pargne positive", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/financement/' ); ?>" class="lines"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/investissement/' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/a-propos/vision/' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
@@ -116,6 +117,7 @@
 				<div id="submenu-search" class="submenu-style hidden">
 					<div class="only-inf997">
 						<a href="<?php echo home_url( '/les-projets/' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( "&Eacute;pargne positive", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/financement/' ); ?>"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/investissement/' ); ?>"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/a-propos/vision/' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
