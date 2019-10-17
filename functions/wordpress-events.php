@@ -248,8 +248,9 @@ class WDG_WordPress_Events {
 		global $can_modify, $is_campaign, $is_campaign_page, $post;
 		$campaign = atcf_get_current_campaign();
 		$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
-		$is_dashboard_page = ($post->post_name == 'gestion-financiere' || $post->post_name == 'tableau-de-bord');
+		$is_dashboard_page = ($post->post_name == 'tableau-de-bord');
 		$is_admin_page = ($post->post_name == 'liste-des-paiements');
+		$is_user_account = ($post->post_name == 'mon-compte');
 		
 		// Modification version jquery chargée
 		include_once( 'assets-version.php' );
@@ -280,21 +281,27 @@ class WDG_WordPress_Events {
 			wp_enqueue_style('font-awesome');
 
 			wp_enqueue_script( 'jquery-form', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.form.js', array('jquery'));
-
-			wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.min.js', array('jquery'));
-			wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, 'all');
 			
-		} else {
-			remove_action('wp_head', 'print_emoji_detection_script', 7);
-			remove_action('wp_print_styles', 'print_emoji_styles');
+		}
+		
+		if ( in_array( $post->post_name, $pages_simple ) || is_home() || is_front_page() || $is_user_account ) {
+			remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+			remove_action( 'wp_print_styles', 'print_emoji_styles' );
+			wp_deregister_script( 'wp-embed' );
 			wp_deregister_script( 'wp-embed.min.js' );
-			wp_deregister_script('contact-form-7');
-			wp_deregister_style('contact-form-7');
+			wp_deregister_script( 'contact-form-7' );
+			wp_deregister_style(' contact-form-7' );
+			wp_deregister_style( 'font-awesome' );
+			wp_deregister_script( 'jquery-form' );
 		}
 
 		// Chargement de la lib de graphs (uniquement en liaison avec les projets)
 		if ( ( $is_campaign || $is_campaign_page ) && !$is_dashboard_page ) {
 			wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
+		}
+		if ( $is_dashboard_page ) {
+			wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.min.js', array('jquery'));
+			wp_enqueue_style('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/css/jquery.qtip.min.css', null, false, 'all');
 		}
 		
 		// Styles et scripts liés aux projets

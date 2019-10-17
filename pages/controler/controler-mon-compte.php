@@ -436,13 +436,15 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 				the_post();
 				$campaign = new ATCF_Campaign( get_the_ID() );
 				$campaign_organization = $campaign->get_organization();
-				$WDGOrganization = new WDGOrganization( $campaign_organization->wpref );
-				$project = array(
-					'link'	=> home_url( '/tableau-de-bord/' ) . '?campaign_id=' . get_the_ID(),
-					'name'	=> get_the_title(),
-					'authentified'	=> $WDGOrganization->is_registered_lemonway_wallet()
-				);
-				array_push( $this->user_project_list, $project );
+				if ( !empty( $campaign_organization->wpref ) ) {
+					$WDGOrganization = new WDGOrganization( $campaign_organization->wpref );
+					$project = array(
+						'link'	=> home_url( '/tableau-de-bord/' ) . '?campaign_id=' . get_the_ID(),
+						'name'	=> get_the_title(),
+						'authentified'	=> $WDGOrganization->is_registered_lemonway_wallet()
+					);
+					array_push( $this->user_project_list, $project );
+				}
 			}
 		}
 		wp_reset_query();
@@ -453,13 +455,15 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 			foreach ($project_list as $project) {
 				$campaign = new ATCF_Campaign( $project->wpref );
 				$campaign_organization = $campaign->get_organization();
-				$WDGOrganization = new WDGOrganization( $campaign_organization->wpref );
-				$project = array(
-					'link'	=> home_url( '/tableau-de-bord/' ) . '?campaign_id=' . $project->wpref,
-					'name'	=> $project->name,
-					'authentified'	=> $WDGOrganization->is_registered_lemonway_wallet()
-				);
-				array_push( $this->user_project_list, $project );
+				if ( !empty( $campaign_organization->wpref ) ) {
+					$WDGOrganization = new WDGOrganization( $campaign_organization->wpref );
+					$project = array(
+						'link'	=> home_url( '/tableau-de-bord/' ) . '?campaign_id=' . $project->wpref,
+						'name'	=> $project->name,
+						'authentified'	=> $WDGOrganization->is_registered_lemonway_wallet()
+					);
+					array_push( $this->user_project_list, $project );
+				}
 			}
 		}
 	}
