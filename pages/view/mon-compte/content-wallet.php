@@ -103,7 +103,7 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 				?>
 				<?php if ( $transfer_post->post_status == 'publish' ): ?>
 					<li id="withdrawal-<?php echo $transfer_post->ID; ?>">
-						<span><?php echo $transfer_post->post_date; ?></span>
+						<span><?php echo get_the_date( 'd/m/Y', $transfer_post ); ?></span>
 						<span><?php echo UIHelpers::format_number( $post_amount ); ?> &euro;</span>
 						<span><?php _e( "vers&eacute;s sur votre compte bancaire", 'yproject' ); ?></span>
 					</li>
