@@ -21,6 +21,7 @@ $table_vote = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
 $input_poll = filter_input( INPUT_GET, 'poll' );
 $input_official_data = filter_input( INPUT_GET, 'official_data' );
 $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
+$input_user_stats = filter_input( INPUT_GET, 'user_stats' );
 ?>
 
 <div id="content">
@@ -259,7 +260,243 @@ $input_declarations_list = filter_input( INPUT_GET, 'declarations_list' );
 			</table>
 		</div>
 		
+
+
+
+
 		
+
+
+		<?php elseif ( $input_user_stats == 'users' ): ?>
+			<?php
+			$users = get_users();
+			$count_users = count( $users );
+
+			$users_female = get_users( array(
+				'meta_key'		=> 'user_gender',
+				'meta_value'	=> 'female'
+			) );
+			$count_users_female = count( $users_female );
+
+			$users_male = get_users( array(
+				'meta_key'		=> 'user_gender',
+				'meta_value'	=> 'male'
+			) );
+			$count_users_male = count( $users_male );
+
+			$users_orga = get_users( array(
+				'meta_query'	=> array( array(
+					'key'		=> 'organisation_bopp_id',
+					'compare'	=> 'EXISTS'
+				) )
+			) );
+			$count_users_orga = count( $users_orga );
+
+			$results_age = $wpdb->get_results( "SELECT AVG(meta_value) as avg_year FROM ".$wpdb->usermeta." WHERE meta_key = 'user_birthday_year'" );
+			$avg_year = round( $results_age[ 0 ]->avg_year, 2 );
+			$this_year = date( 'Y' );
+			?>
+			<b>Membres</b><br>
+			Nb comptes utilisateurs : <?php echo $count_users; ?><br>
+			Nb femme : <?php echo $count_users_female; ?><br>
+			% femme : <?php echo round( $count_users_female / $count_users * 100, 2 ); ?><br>
+			Nb Homme : <?php echo $count_users_male; ?><br>
+			% Homme : <?php echo round( $count_users_male / $count_users * 100, 2 ); ?><br>
+			Nb Orga : <?php echo $count_users_orga; ?><br>
+			% Orga : <?php echo round( $count_users_orga / $count_users * 100, 2 ); ?><br>
+			Date de naissance moyenne : <?php echo $avg_year; ?><br>
+			Age moyen approximatif : <?php echo ( $this_year - $avg_year ); ?> ans<br>
+		
+
+
+
+		<?php elseif ( $input_user_stats == 'investments' ): ?>
+			<?php
+			$count_total_investments = 0;
+			$amount_total_investments = 0;
+			$array_amount_investments = array();
+			$project_list_funded = ATCF_Campaign::get_list_funded( WDG_Cache_Plugin::$nb_query_campaign_funded, '', true, false );
+			foreach ( $project_list_funded as $project_post ) {
+				$campaign = atcf_get_campaign( $project_post->ID );
+				$payments_data = $campaign->payments_data();
+				foreach ( $payments_data as $payment_data ) {
+					if ( $payment_data[ 'status' ] == 'publish' ) {
+						$count_total_investments++;
+						$amount_total_investments += $payment_data[ 'amount' ];
+						array_push( $array_amount_investments, $payment_data[ 'amount' ] );
+					}
+				}
+			}
+			sort( $array_amount_investments );
+			$index_median = round( ( $count_total_investments + 1 ) / 2 ) - 1;
+			?>
+			<b>Investissements globaux</b><br>
+			Nb investissements : <?php echo $count_total_investments; ?><br>
+			Montant investissements : <?php echo $amount_total_investments; ?><br>
+			Moyenne investissements : <?php echo round( $amount_total_investments / $count_total_investments, 2 ); ?><br>
+			Médiane investissements : <?php echo $array_amount_investments[ $index_median ]; ?><br>
+
+
+
+
+		<?php elseif ( $input_user_stats == 'investors' ): ?>
+			<?php
+			$this_year = date( 'Y' );
+			$count_total_investments = 0;
+			$amount_total_investments = 0;
+			$array_investors = array();
+
+			$global_stats = array(
+				'count_female'	=> 0,
+				'amount_female'	=> 0,
+				'count_male'	=> 0,
+				'amount_male'	=> 0,
+				'count_orga'	=> 0,
+				'amount_orga'	=> 0,
+				'count_age_inf25'	=> 0,
+				'amount_age_inf25'	=> 0,
+				'count_age_2534'	=> 0,
+				'amount_age_2534'	=> 0,
+				'count_age_3549'	=> 0,
+				'amount_age_3549'	=> 0,
+				'count_age_5064'	=> 0,
+				'amount_age_5064'	=> 0,
+				'count_age_sup64'	=> 0,
+				'amount_age_sup64'	=> 0,
+			);
+			$total_real_person_with_birthday_year = 0;
+			$total_birthday_year = 0;
+
+			$project_list_funded = ATCF_Campaign::get_list_funded( WDG_Cache_Plugin::$nb_query_campaign_funded, '', true, false );
+			foreach ( $project_list_funded as $project_post ) {
+				$campaign = atcf_get_campaign( $project_post->ID );
+				$payments_data = $campaign->payments_data();
+				foreach ( $payments_data as $payment_data ) {
+					if ( $payment_data[ 'status' ] == 'publish' ) {
+
+						// init
+						$user_id = $payment_data[ 'user' ];
+						if ( !isset( $array_investors[ $user_id ] ) ) {
+							$array_investors[ $user_id ] = array();
+							$array_investors[ $user_id ][ 'amount_count' ] = 0;
+							$array_investors[ $user_id ][ 'amount_total' ] = 0;
+							$array_investors[ $user_id ][ 'type' ] = '';
+							if ( WDGOrganization::is_user_organization( $user_id ) ) {
+								$array_investors[ $user_id ][ 'type' ] = 'orga';
+							} else {
+								$user_gender = get_user_meta( $user_id, 'user_gender', TRUE );
+								if ( $user_gender == 'male' ) {
+									$array_investors[ $user_id ][ 'type' ] = 'male';
+
+								} else if ( $user_gender == 'female' )  {
+									$array_investors[ $user_id ][ 'type' ] = 'female';
+								}
+
+								$birthday_year = get_user_meta( $user_id, 'user_birthday_year', TRUE );
+								if ( !empty( $birthday_year ) ) {
+									$total_real_person_with_birthday_year++;
+									$total_birthday_year += $birthday_year;
+								}
+								// todo : multi
+							}
+						}
+
+						// adds
+						$count_total_investments++;
+						$amount_total_investments += $payment_data[ 'amount' ];
+
+						$array_investors[ $user_id ][ 'amount_count' ]++;
+						$array_investors[ $user_id ][ 'amount_total' ] += $payment_data[ 'amount' ];
+						if ( !empty( $array_investors[ $user_id ][ 'type' ] ) ) {
+							$global_stats[ 'count_' . $array_investors[ $user_id ][ 'type' ] ]++;
+							$global_stats[ 'amount_' . $array_investors[ $user_id ][ 'type' ] ] += $payment_data[ 'amount' ];
+
+							$birthday_year = get_user_meta( $user_id, 'user_birthday_year', TRUE );
+							$age = $this_year - $birthday_year;
+							if ( !empty( $age ) ) {
+								if ( $age < 25 ) {
+									$global_stats[ 'count_age_inf25' ]++;
+									$global_stats[ 'amount_age_inf25' ] += $payment_data[ 'amount' ];
+								} elseif ( $age >= 25 && $age <= 34 ) {
+									$global_stats[ 'count_age_2534' ]++;
+									$global_stats[ 'amount_age_2534' ] += $payment_data[ 'amount' ];
+								} elseif ( $age >= 35 && $age <= 49 ) {
+									$global_stats[ 'count_age_3549' ]++;
+									$global_stats[ 'amount_age_3549' ] += $payment_data[ 'amount' ];
+								} elseif ( $age >= 50 && $age <= 64 ) {
+									$global_stats[ 'count_age_5064' ]++;
+									$global_stats[ 'amount_age_5064' ] += $payment_data[ 'amount' ];
+								} elseif ( $age > 64 ) {
+									$global_stats[ 'count_age_sup64' ]++;
+									$global_stats[ 'amount_age_sup64' ] += $payment_data[ 'amount' ];
+								}
+
+							}
+						}
+					}
+				}
+			}
+			$nb_investors = count( $array_investors );
+			$avg_birthday_year = round( ( $total_birthday_year / $total_real_person_with_birthday_year ), 2 );
+			?>
+			<b>Investissements</b><br>
+			Nb investisseurs : <?php echo $nb_investors; ?><br><br>
+
+			Nb par une orga : <?php echo $global_stats[ 'count_orga' ]; ?><br>
+			% par une orga : <?php echo round( $global_stats[ 'count_orga' ] / $count_total_investments * 100, 2 ); ?><br>
+			Moyenne par une orga : <?php echo $global_stats[ 'amount_orga' ] ? round( $global_stats[ 'amount_orga' ] / $global_stats[ 'count_orga' ], 2 ) : 0; ?><br>
+			% montant par une orga : <?php echo round( $global_stats[ 'amount_orga' ] / $amount_total_investments * 100, 2 ); ?><br><br>
+
+			Nb par une femme : <?php echo $global_stats[ 'count_female' ]; ?><br>
+			% par une femme : <?php echo round( $global_stats[ 'count_female' ] / $count_total_investments * 100, 2 ); ?><br>
+			Moyenne par une femme : <?php echo $global_stats[ 'count_female' ] ? round( $global_stats[ 'amount_female' ] / $global_stats[ 'count_female' ], 2 ) : 0; ?><br>
+			% montant par une femme : <?php echo round( $global_stats[ 'amount_female' ] / $amount_total_investments * 100, 2 ); ?><br><br>
+
+			Nb par un homme : <?php echo $global_stats[ 'count_male' ]; ?><br>
+			% par un homme : <?php echo round( $global_stats[ 'count_male' ] / $count_total_investments * 100, 2 ); ?><br>
+			Moyenne par un homme : <?php echo $global_stats[ 'count_male' ] ? round( $global_stats[ 'amount_male' ] / $global_stats[ 'count_male' ], 2 ) : 0; ?><br>
+			% montant par un homme : <?php echo round( $global_stats[ 'amount_male' ] / $amount_total_investments * 100, 2 ); ?><br><br>
+		
+			Année de naissance moyenne : <?php echo $avg_birthday_year; ?><br>
+			Age moyen approximatif : <?php echo $this_year - $avg_birthday_year; ?><br><br>
+
+			Nb par moins de 24 ans : <?php echo $global_stats[ 'count_age_inf25' ]; ?><br>
+			% par moins de 24 ans : <?php echo round( $global_stats[ 'count_age_inf25' ] / $count_total_investments * 100, 2 ); ?><br>
+			Moyenne par moins de 24 ans : <?php echo $global_stats[ 'count_age_inf25' ] ? round( $global_stats[ 'amount_age_inf25' ] / $global_stats[ 'count_age_inf25' ], 2 ) : 0; ?><br>
+			Total par moins de 24 ans : <?php echo $global_stats[ 'amount_age_inf25' ]; ?><br><br>
+
+			Nb par 25-34 ans : <?php echo $global_stats[ 'count_age_2534' ]; ?><br>
+			% par 25-34 ans : <?php echo round( $global_stats[ 'count_age_2534' ] / $count_total_investments * 100, 2 ); ?><br>
+			Moyenne par 25-34 ans : <?php echo $global_stats[ 'count_age_2534' ] ? round( $global_stats[ 'amount_age_2534' ] / $global_stats[ 'count_age_2534' ], 2 ) : 0; ?><br>
+			Total par 25-34 ans : <?php echo $global_stats[ 'amount_age_2534' ]; ?><br><br>
+
+			Nb par 35-49 ans : <?php echo $global_stats[ 'count_age_3549' ]; ?><br>
+			% par 35-49 ans : <?php echo round( $global_stats[ 'count_age_3549' ] / $count_total_investments * 100, 2 ); ?><br>
+			Moyenne par 35-49 ans : <?php echo $global_stats[ 'count_age_3549' ] ? round( $global_stats[ 'amount_age_3549' ] / $global_stats[ 'count_age_3549' ], 2 ) : 0; ?><br>
+			Total par 35-49 ans : <?php echo $global_stats[ 'amount_age_3549' ]; ?><br><br>
+
+			Nb par 50-64 ans : <?php echo $global_stats[ 'count_age_5064' ]; ?><br>
+			% par 50-64 ans : <?php echo round( $global_stats[ 'count_age_5064' ] / $count_total_investments * 100, 2 ); ?><br>
+			Moyenne par 50-64 ans : <?php echo $global_stats[ 'count_age_5064' ] ? round( $global_stats[ 'amount_age_5064' ] / $global_stats[ 'count_age_5064' ], 2 ) : 0; ?><br>
+			Total par 50-64 ans : <?php echo $global_stats[ 'amount_age_5064' ]; ?><br><br>
+
+			Nb par plus de 64 ans : <?php echo $global_stats[ 'count_age_sup64' ]; ?><br>
+			% par plus de 64 ans : <?php echo round( $global_stats[ 'count_age_sup64' ] / $count_total_investments * 100, 2 ); ?><br>
+			Moyenne par plus de 64 ans : <?php echo $global_stats[ 'count_age_sup64' ] ? round( $global_stats[ 'amount_age_sup64' ] / $global_stats[ 'count_age_sup64' ], 2 ) : 0; ?><br>
+			Total par plus de 64 ans : <?php echo $global_stats[ 'amount_age_sup64' ]; ?><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
 		<?php else: ?>
 		<h1>Tableau complet de la liste des utilisateurs</h1>
 		
