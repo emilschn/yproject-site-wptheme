@@ -86,10 +86,11 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 		<?php
 		$transfers = get_posts( array(
 			'author'		=> $WDGUser_displayed->get_wpref(),
+			'numberposts'	=> -1,
 			'post_type'		=> 'withdrawal_order_lw',
 			'post_status'	=> 'any',
 			'orderby'		=> 'post_date',
-			'order'			=> 'ASC'
+			'order'			=> 'DESC'
 		) );
 		?>
 
