@@ -84,33 +84,33 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 
 		<h3><?php _e( "Historique de mes transactions", 'yproject' ); ?></h3>
 		<?php
-		$args = array(
-			'author'    => get_current_user_id(),
-			'post_type' => 'withdrawal_order_lw',
-			'post_status' => 'any',
-			'orderby'   => 'post_date',
-			'order'     =>  'ASC'
-		);
-		$transfers = get_posts($args);
-		if ($transfers) :
+		$transfers = get_posts( array(
+			'author'		=> $WDGUser_displayed->get_wpref(),
+			'post_type'		=> 'withdrawal_order_lw',
+			'post_status'	=> 'any',
+			'orderby'		=> 'post_date',
+			'order'			=> 'ASC'
+		) );
 		?>
-		<ul class="user_history">
-			<?php 
-			foreach ( $transfers as $post ) :
-				$post = get_post($post);
-				$post_amount = $post->post_title;
+
+		<?php if ( $transfers ): ?>
+		<ul class="user-history">
+			<?php foreach ( $transfers as $transfer_post ): ?>
+
+				<?php
+				$post_amount = $transfer_post->post_title;
 				?>
-				<?php if ($post->post_status == 'publish'): ?>
-				<li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Termin&eacute;</li>
-				<?php elseif ($post->post_status == 'draft'): ?>
-				<li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- Annul&eacute;</li>
-				<?php else: ?>
-				<li id="<?php echo $post->post_content; ?>"><?php echo $post->post_date; ?> : <?php echo $post_amount; ?>&euro; -- En cours</li>
+				<?php if ( $transfer_post->post_status == 'publish' ): ?>
+					<li id="withdrawal-<?php echo $transfer_post->ID; ?>">
+						<span><?php echo $transfer_post->post_date; ?></span>
+						<span><?php echo UIHelpers::format_number( $post_amount ); ?> &euro;</span>
+						<span><?php _e( "vers&eacute;s sur votre compte bancaire", 'yproject' ); ?></span>
+					</li>
 				<?php endif; ?>
-			<?php
-			endforeach;
-			?>
+
+			<?php endforeach; ?>
 		</ul>
+
 		<?php else: ?>
 			Aucun transfert d&apos;argent.
 		<?php endif; ?>
