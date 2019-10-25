@@ -81,24 +81,24 @@ button.red {
 }
 .button.red, .wpcf7-submit {
     background: none repeat scroll 0 0 #EA4F51;
-    border: 1px solid #EA4F51 !important;
+    border: 0px solid #EA4F51 !important;
 }
 .button.blue {
     background: none repeat scroll 0 0 #00879B;
-    border: 1px solid #00879B;
+    border: 0px solid #00879B;
 }
 .button.blue-facebook {
     background: none repeat scroll 0 0 #3B5998;
-    border: 1px solid #3B5998;
+    border: 0px solid #3B5998;
 }
 .button.blue-pale {
     background: none repeat scroll 0 0 #D3EAE9;
-    border: 1px solid #D3EAE9;
+    border: 0px solid #D3EAE9;
 	color: #000000;
 }
 .button.admin-theme{
     background: none repeat scroll 0 0 #F1A074;
-    border: 1px solid #F1A074;
+    border: 0px solid #F1A074;
 }
 .button.big {
     font-size: 15px;
@@ -106,7 +106,7 @@ button.red {
 }
 .button.disabled {
     background: #e1e3e2;
-    border: 1px solid #e1e3e2 !important;
+    border: 0px solid #e1e3e2 !important;
     color: #333333;
     cursor: default;
 }

@@ -292,6 +292,8 @@ $input_user_stats = filter_input( INPUT_GET, 'user_stats' );
 			) );
 			$count_users_orga = count( $users_orga );
 
+			//todo : répartition par département
+
 			$results_age = $wpdb->get_results( "SELECT AVG(meta_value) as avg_year FROM ".$wpdb->usermeta." WHERE meta_key = 'user_birthday_year'" );
 			$avg_year = round( $results_age[ 0 ]->avg_year, 2 );
 			$this_year = date( 'Y' );
