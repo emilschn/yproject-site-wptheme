@@ -37,6 +37,21 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 		<a href="#authentication" class="button red go-to-tab" data-tab="authentication"><?php _e( "Voir le statut de mon authentification", 'yproject' ); ?></a>
 
 	<?php else: ?>
+		<h3><?php _e( "Recharger mon porte-monnaie par virement", 'yproject' ); ?></h3>
+		<?php _e( "Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement.", 'yproject' ); ?><br><br>
+
+		<strong><?php _e( "Compte bancaire de destination", 'yproject' ); ?></strong><br>
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/footer/lemonway-gris.png" class="wire-lw right" alt="logo Lemonway" width="250">
+		<strong><?php _e( "Titulaire du compte :", 'yproject' ); ?></strong> LEMON WAY<br>
+		<strong>IBAN :</strong> FR76 3000 4025 1100 0111 8625 268<br>
+		<strong>BIC :</strong> BNPAFRPPIFE
+		<br><br>
+		
+		<strong><?php _e( "Code &agrave; indiquer (pour identifier votre paiement) :", 'yproject' ); ?></strong> wedogood-<?php echo $WDGUser_displayed->get_lemonway_id(); ?><br>
+		<i><?php _e( "Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !", 'yproject' ); ?></i>
+		<br><br>
+
+
 		<?php if ( !$page_controler->is_iban_validated() ): ?>
 			<h3><?php _e( "Retirer sur mon compte bancaire", 'yproject' ); ?></h3>
 
@@ -58,12 +73,11 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 			<h3><?php _e( "Retirer sur mon compte bancaire", 'yproject' ); ?></h3>
 
 			<form action="" method="POST" enctype="multipart/form-data" class="db-form v3">
-				<p class="align-center">
-					<input type="submit" class="button blue" value="Reverser sur mon compte bancaire" />
-				</p>
+				<button type="submit" class="button blue"><?php _e( "Retirer sur mon compte bancaire", 'yproject' ); ?></button>
 				<input type="hidden" name="action" value="user_wallet_to_bankaccount" />
 				<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->get_wpref(); ?>" />
 			</form>
+			<br><br>
 
 		<?php endif; ?>
 
