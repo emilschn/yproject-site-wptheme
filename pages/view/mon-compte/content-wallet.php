@@ -26,28 +26,27 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 	</div>
 
 	<?php if ( !$WDGUser_displayed->is_lemonway_registered() ): ?>
-		<?php if ( $pending_amount > 0 ): ?>
-			<?php echo $pending_amount; ?> &euro; sont en attente d'authentification.<br>
-		<?php endif; ?>
-
 		<div class="wdg-message error msg-authentication-alert">
+			<?php if ( $pending_amount > 0 ): ?>
+				<?php echo sprintf( __( "Nous attendons votre authentification pour verser %s &euro; sur votre porte-monnaie.", 'yproject' ), UIHelpers::format_number( $pending_amount ) ); ?><br><br>
+			<?php endif; ?>
+
 			<?php _e( "Depuis Janvier 2019, l'authentification de votre compte est n&eacute;cessaire aupr&egrave;s de notre prestataire de paiement pour lib&eacute;rer l'acc&egrave;s &agrave; votre porte-monnaie et pouvoir retirer vos royalties." ); ?>
 		</div>
 
-		<div class="align-center">
-			<a href="#authentication" class="button red go-to-tab" data-tab="authentication"><?php _e( "Voir le statut de mon authentification", 'yproject' ); ?></a>
-		</div>
+		<a href="#authentication" class="button red go-to-tab" data-tab="authentication"><?php _e( "Voir le statut de mon authentification", 'yproject' ); ?></a>
 
 	<?php else: ?>
-		<h3><?php _e( "Retirer sur mon compte bancaire", 'yproject' ); ?></h3>
 		<?php if ( !$page_controler->is_iban_validated() ): ?>
+			<h3><?php _e( "Retirer sur mon compte bancaire", 'yproject' ); ?></h3>
+
 			<?php if ( $page_controler->is_iban_waiting() ): ?>
 				<?php _e( "Votre RIB est en cours de validation par notre prestataire de paiement. Merci de revenir d'ici 48h pour vous assurer de sa validation.", 'yproject' ); ?>
 				<br><br>
 
 			<?php else: ?>
-				<?php if ( $WDGUser_displayed->get_lemonway_iban_status() != WDGUser::$iban_status_rejected ): ?>
-				<?php _e( "Votre RIB a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement.", 'yproject' ); ?><br>
+				<?php if ( $WDGUser_displayed->get_lemonway_iban_status() == WDGUser::$iban_status_rejected ): ?>
+					<?php _e( "Votre RIB a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement.", 'yproject' ); ?><br>
 				<?php endif; ?>
 				<?php _e( "Afin de retirer vos royalties, merci de renseigner vos coordonn&eacute;es bancaires.", 'yproject' ); ?><br><br>
 				<a href="#bank" class="button blue go-to-tab" data-tab="bank"><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></a>
@@ -56,6 +55,8 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 			<?php endif; ?>
 
 		<?php elseif ( $lw_wallet_amount > 0 ): ?>
+			<h3><?php _e( "Retirer sur mon compte bancaire", 'yproject' ); ?></h3>
+
 			<form action="" method="POST" enctype="multipart/form-data" class="db-form v3">
 				<p class="align-center">
 					<input type="submit" class="button blue" value="Reverser sur mon compte bancaire" />
@@ -63,7 +64,6 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 				<input type="hidden" name="action" value="user_wallet_to_bankaccount" />
 				<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->get_wpref(); ?>" />
 			</form>
-			<br><br>
 
 		<?php endif; ?>
 
@@ -100,7 +100,8 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 		<?php else: ?>
 			Aucun transfert d&apos;argent.
 		<?php endif; ?>
-		<br><br>
 		
 	<?php endif; ?>
+
+	<br><br>
 </div>
