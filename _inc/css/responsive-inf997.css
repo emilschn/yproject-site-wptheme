@@ -87,7 +87,7 @@
 		display: none;
 		margin: 0px 0px 30px;
 	}
-	footer a {
+	footer > .footer-container > section:nth-child(1) a {
 		font-size: 20pt;
 	}
 	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle {
@@ -109,56 +109,15 @@
 	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.clickable.expanded::after {
 		content: "-";
 	}
-	
-	footer > .footer-container > div > div:nth-child(1), footer > .footer-container > div > div:nth-child(2) {
-		width: 50%;
-		padding: 0px;
-		text-align: center;
-		margin: 0px;
+	footer > .footer-container > div.logo-list {
+		padding: 24px 16px;
+		flex-wrap: wrap;
 	}
-	footer > .footer-container > div > div:nth-child(3) {
-		width: 96%;
-		height: 120px;
-		margin: 0px 1%;
-		text-align: center;
+	footer > .footer-container > div.logo-list > div {
+		margin: 0px auto 16px
 	}
-	footer > .footer-container > div > div:nth-child(3) img {
-		margin-top: 5px;
-	}
-	footer > .footer-container > div > div:nth-child(4) {
-		clear: both;
-		width: 60%;
-		margin: 0% 20%;
-		text-align: center;
-	}
-	footer > .footer-container > div > div:nth-child(4) img {
-		width: 100%;
-	}
-	footer > .footer-container > div > div:nth-child(5) {
-		background: #EA4F51;
-		width: 98%;
-		margin: 0px;
-		padding: 0% 1%;
-		padding-top: 50px;
-	}
-	footer > .footer-container > div > div:nth-child(5) li {
-		margin: 5px 0px;
-		text-align: center;
-	}
-	footer > .footer-container > div > div:nth-child(5) a {
-		color: #FFF;
-		font-size: 14pt;
-	}
-	footer > .footer-container > div > div:nth-child(6) {
-		display: none;
-	}
-	footer > .footer-container > div > div:nth-child(7) {
-		float: left;
-		margin: 0px;
-		margin-top: -295px;
-		width: 100%;
-		height: 35px;
-		background: #FFF;
+	footer > .footer-container div.term-links {
+		padding: 1px 32px 0px;
 	}
 	
 	body.home section.project-stats > div div.left {
@@ -257,5 +216,16 @@
 		width: 96%;
 		padding: 24px 2%;
 		font-size: 16px;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	footer > .footer-container div.term-links li ul li {
+		display: block;
+	}
+	
+	footer > .footer-container div.term-links li ul li a:after {
+		content: "";
+		margin: 0px;
 	}
 }

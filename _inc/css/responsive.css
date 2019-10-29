@@ -272,13 +272,6 @@
 	#wdg-lightbox-connexion .submit-center { float: none !important; }
 	#wdg-lightbox-connexion .connexion_facebook_container { float: none !important; margin: -25px auto !important; }
 	#wdg-lightbox-connexion .connexion_facebook_container.box_connection_buttons.blue { margin-top: 40px !important; }
-
-/*******************************************************************************
-* THEME PHOTOREPORTER
-*******************************************************************************/
-	#content.theme-myphotoreporter nav.menu-client { padding-top: 5px !important; height: 55px !important; }
-	#content.theme-myphotoreporter .client-header { height: 180px !important; background-size: 250% !important; }
-	#content.theme-myphotoreporter .client-header .center { display: none; }
 }
 
 /*******************************************************************************

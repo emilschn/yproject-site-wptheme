@@ -29,68 +29,69 @@ else {
 								<?php dynamic_sidebar( 'second-footer-widget-area' ); ?>
 							</ul>
 
+							<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) : ?>
 							<span class="footer-subtitle clickable"><?php _e('Investisseurs', 'yproject'); ?></span>
 							<ul>
 								<?php dynamic_sidebar( 'third-footer-widget-area' ); ?>
 							</ul>
+							<?php endif; ?>
 						</div>
 					<?php endif; ?>
 
-					<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) : ?>
+					<div>
+						<span class="footer-subtitle"><?php _e('Nous suivre', 'yproject'); ?></span>
+
+						<div style="margin: 16px 0px;">
+							<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook"/></a>
+							<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter"/></a>
+							<a class="social_network" href="https://www.linkedin.com/company/we-do-good/" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin"/></a>
+							<a class="social_network" href="https://www.wedogood.co/rss.xml" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-rss.jpg" alt="<?php _e("Flux RSS", 'yproject'); ?>"/></a>
+						</div>
+
 						<div>
-							<span class="footer-subtitle"><?php _e('Nous suivre', 'yproject'); ?></span>
-
-							<div style="margin: 16px 0px;">
-								<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook"/></a>
-								<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter"/></a>
-								<a class="social_network" href="https://www.linkedin.com/company/we-do-good/" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin"/></a>
-								<a class="social_network" href="https://www.wedogood.co/rss.xml" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-rss.jpg" alt="<?php _e("Flux RSS", 'yproject'); ?>"/></a>
-							</div>
-
-							<div>
-								<a class="link" href="<?php echo home_url('/a-propos/contact/'); ?>"><?php _e( "Contactez-nous", 'yproject' ); ?></a>
-							</div>
+							<a class="link" href="<?php echo home_url('/a-propos/contact/'); ?>"><?php _e( "Contactez-nous", 'yproject' ); ?></a><br>
+							<a class="link" href="<?php echo home_url('/a-propos/newsletter/'); ?>"><?php _e( "S'inscrire &agrave; la newsletter", 'yproject' ); ?></a>
 						</div>
-					<?php endif; ?>
-
-					<div class="clear"></div>
-
+					</div>
 				</section>
 
-				<div>
+				<div class="logo-list clear">
 					<div>
-						<a href="https://acpr.banque-france.fr/agrements-et-autorisations/le-financement-participatif-crowdfunding.html" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/ifp.png" alt="logo label IFP" width="160"/></a>
+						<a href="https://acpr.banque-france.fr/agrements-et-autorisations/le-financement-participatif-crowdfunding.html" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/ifp.png" alt="logo label IFP" width="160"></a>
 						<span>Immatricul&eacute;e &agrave; l'ORIAS sous le num&eacute;ro <strong>17002712</strong></span>
 					</div>
 					
 					<div>
-						<a href="http://www.financeparticipative.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/membre-fpf-2019.png" alt="logo membre financement participatif France" width="140"/></a>
+						<a href="http://www.financeparticipative.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/membre-fpf-2019.png" alt="logo membre financement participatif France" width="140"></a>
 					</div>
 
 					<div>					
-						<a href="https://finance-innovation.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/finance-innovation-labellise.png" alt="logo finance innovation" width="200"/></a>
+						<a href="https://finance-innovation.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/finance-innovation-labellise.png" alt="logo finance innovation" width="200"></a>
 					</div>
 
 					<div>
-						<a href="http://www.lemonway.fr" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/lemonway-gris.png" alt="logo Lemonway" width="258"/></a><br />
+						<a href="http://www.lemonway.fr" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/lemonway-gris.png" alt="logo Lemonway" width="258"></a><br>
 						<p class="lines">Partenaire de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l’ACPR en France le 24/12/2012 sous le num&eacute;ro 16568J.</p>
 					</div>
+
 					<div>
+						<a href="https://bcorporation.net/directory/we-do-good" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/bcorp.png" alt="logo BCorp" width="120"></a>
+					</div>
+				</div>
+
+				<div class="term-links aligncenter">
 					<?php if ( is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>
+						<hr>
 						<ul>
 							<?php dynamic_sidebar( 'fourth-footer-widget-area' ); ?>
 						</ul>
 					<?php endif; ?>
-					</div>
+				</div>
 
-					<div class="clear"></div>
-
-					<div class="aligncenter" role="contentinfo">
-						<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/" target="_blank">
-							<img alt="Licence Creative Commons" width="25" height="25" style="vertical-align: middle" src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/cc-01.png" /> Some rights reserved
-						</a>
-					</div>
-
+				<div class="licence aligncenter" role="contentinfo">
+					<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/" target="_blank">
+						<img alt="Licence Creative Commons" width="25" height="25" style="vertical-align: middle" src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/cc-01.png" /> Some rights reserved
+					</a>
 				</div>
 			</div>
 		</footer>
