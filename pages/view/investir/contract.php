@@ -7,7 +7,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contract::$field_group_hidden );
 ?>
 
-<form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white enlarge">
+<form action="<?php echo $page_controler->get_form_action(); ?>#contractvalidated" method="post" class="db-form v3 full bg-white enlarge">
 	
 	<div class="align-left">
 		<?php $form_errors = $page_controler->get_form_errors(); ?>

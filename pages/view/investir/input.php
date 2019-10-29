@@ -8,7 +8,7 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::
 $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::$field_group_amount );
 ?>
 
-<form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white" novalidate>
+<form action="<?php echo $page_controler->get_form_action(); ?>#amounttyped" method="post" class="db-form v3 full bg-white" novalidate>
 	
 	<?php if ( $page_controler->is_authentication_alert_visible() ): ?>
 		<p class="align-justify">
