@@ -72,10 +72,30 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 		<?php elseif ( $lw_wallet_amount > 0 ): ?>
 			<h3><?php _e( "Retirer sur mon compte bancaire", 'yproject' ); ?></h3>
 
-			<form action="" method="POST" enctype="multipart/form-data" class="db-form v3">
+			<form action="" method="POST" enctype="multipart/form-data" class="db-form v3 full align-left">
+				<input type="hidden" name="action" value="user_wallet_to_bankaccount">
+				<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->get_wpref(); ?>">
+
+				<div id="field-amount_to_bank" class="field field-text-money">
+					<label for="amount_to_bank"><?php echo sprintf( __( "Montant &agrave; retirer (maximum %s &euro;) :", 'yproject' ), UIHelpers::format_number( $lw_wallet_amount ) ); ?></label>
+					<div class="field-container">
+						<span class="field-value">
+							<input type="text" name="amount_to_bank" id="amount_to_bank" value="<?php echo $lw_wallet_amount; ?>" class="format-number">
+							<span class="field-money">&euro;</span>
+						</span>
+					</div>
+				</div>
+
+				<?php $WDGUser_lw_bank_info = $page_controler->get_current_user_iban(); ?>
+				<strong><?php _e( "Compte bancaire associ&eacute; :", 'yproject' ); ?></strong><br>
+				<?php echo $WDGUser_lw_bank_info->HOLDER; ?><br>
+				<?php echo $WDGUser_lw_bank_info->DATA; ?><br>
+				<?php echo $WDGUser_lw_bank_info->SWIFT; ?><br>
+				<br><br>
+
+				<a href="#bank" class="button transparent go-to-tab" data-tab="bank"><?php _e( "Modifier mon RIB", 'yproject' ); ?></a>
+				<br><br>
 				<button type="submit" class="button blue"><?php _e( "Retirer sur mon compte bancaire", 'yproject' ); ?></button>
-				<input type="hidden" name="action" value="user_wallet_to_bankaccount" />
-				<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->get_wpref(); ?>" />
 			</form>
 			<br><br>
 
