@@ -183,7 +183,7 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 					<tr>
 						<td>
 							<?php _e( "Frais de gestion (", 'yproject' ); ?>
-							<?php echo ( $declaration->percent_commission / 1.2 ). ' % HT'; ?>
+							<?php echo $declaration->get_percent_commission_without_tax() . ' % HT'; ?>
 							<?php if ( $page_controler->get_campaign()->get_minimum_costs_to_organization() > 0 ): ?>
 								<?php echo ', min. ' .( $page_controler->get_campaign()->get_minimum_costs_to_organization() / 1.2 ). ' &euro;'; ?>
 							<?php endif; ?>
