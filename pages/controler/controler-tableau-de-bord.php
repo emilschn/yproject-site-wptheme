@@ -79,7 +79,6 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		WDGFormProjects::form_submit_account_files();
 		WDGFormProjects::form_approve_payment();
 		WDGFormProjects::form_cancel_payment();
-		WDGFormProjects::form_try_pending_card();
 		
 		$this->init_context();
 		$this->init_stats();
