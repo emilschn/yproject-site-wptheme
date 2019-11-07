@@ -562,7 +562,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $date_target->format( 'Y-m-d' ) ] = round( $this->campaign_stats[ 'goal' ] * 45 / 100 ); // J2
 		$date_target->add( new DateInterval( 'P5D' ) );
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $date_target->format( 'Y-m-d' ) ] = round( $this->campaign_stats[ 'goal' ] * 60 / 100 ); // J7
-		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $this->campaign_stats[ 'funding' ][ 'end' ] ] = min( $this->campaign_stats[ 'funding' ][ 'amount_investment' ][ 'average' ], $this->campaign->goal() );
+		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $this->campaign_stats[ 'funding' ][ 'end' ] ] = min( $this->campaign_stats[ 'funding' ][ 'amount_investment' ][ 'average' ], $this->campaign->goal( FALSE ) );
 		
 		// Stats
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'age' ] = max( 0, $investment_results[ 'average_age' ] );
