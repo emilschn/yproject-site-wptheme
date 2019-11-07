@@ -1,6 +1,21 @@
 <?php
 locate_template( array("projects/dashboard/dashboardutility.php"), true );
 $WDGUser_current = WDGUser::current();
+
+global $WDG_cache_plugin;
+if ( $WDG_cache_plugin == null ) {
+	$WDG_cache_plugin = new WDG_Cache_Plugin();
+}
+$cache_project_list = $WDG_cache_plugin->get_cache( 'WDGUser::get_projects_by_id(' .$WDGUser_current->get_wpref(). ', TRUE)', 1 );
+if ( $cache_project_list !== FALSE ) {
+	$project_list = json_decode( $cache_project_list );
+	
+} else {
+	$project_list = WDGUser::get_projects_by_id( $WDGUser_current->get_wpref(), TRUE );
+	$WDG_cache_plugin->set_cache( 'WDGUser::get_projects_by_id(' .$WDGUser_current->get_wpref(). ', TRUE)', json_encode( $project_list ), 60*10, 1 ); //MAJ 10min
+}
+
+
 $organizations_list = $WDGUser_current->get_organizations_list();
 $first_organization_email = '';
 
@@ -30,9 +45,7 @@ if ($organizations_list) {
 <?php endif; ?>
 
 <form id="newproject_form" class="db-form v3 full form-register" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>" <?php if (!is_user_logged_in()){ ?>style="display: none;"<?php } ?>>
-    <h2 style="text-align: center;"><?php _e('Lancement de levée de fonds','yproject');?></h2>
-	
-	<?php
+    <?php
 	$input_error = filter_input( INPUT_GET, 'error' );
 	$errors_submit_new = $_SESSION[ 'newproject-errors-submit' ];
 	$errors_create_orga = $_SESSION[ 'newproject-errors-orga' ];
@@ -59,6 +72,32 @@ if ($organizations_list) {
 			Certains champs n'ont pas été remplis. Chaque champ est obligatoire.
 		<?php endif; ?>
 		</div>
+	<?php endif; ?>
+
+	<?php if ( !empty( $project_list ) ): ?>
+		<?php
+		$page_dashboard = home_url( '/tableau-de-bord/' );
+		$project_string = '';
+		?>
+		<?php foreach ( $project_list as $project_id ): ?>
+			<?php if ( !empty( $project_id ) ): ?>
+				<?php $project_campaign = new ATCF_Campaign( $project_id ); ?>
+				<?php if ( isset( $project_campaign ) && $project_campaign->get_name() != '' ): ?>
+					<?php
+					$campaign_dashboard_url = $page_dashboard. '?campaign_id=' .$project_id;
+					$project_string .= '- <a href="' . $campaign_dashboard_url . '">' . $project_campaign->get_name() . '</a><br>';
+					?>
+				<?php endif; ?>
+			<?php endif; ?>
+		<?php endforeach; ?>
+
+		<?php if ( !empty( $project_string ) ): ?>
+			<div class="align-justify">
+				<?php _e( "Vous avez d&eacute;j&agrave; cr&eacute;&eacute; un (ou des) projet(s) sur la plateforme pr&eacute;c&eacute;demment :", 'yproject' ); ?><br>
+				<?php echo $project_string; ?><br><br>
+				<?php _e( "Si vous souhaitez tout de m&ecirc;me cr&eacute;er un nouveau projet, veuillez remplir le formulaire ci-dessous.", 'yproject' ); ?><br><br>
+			</div>
+		<?php endif; ?>
 	<?php endif; ?>
 		
 	<?php
