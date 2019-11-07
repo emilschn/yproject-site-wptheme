@@ -9,32 +9,36 @@
 	<br>
 	
 	<div class="align-justify">
-		<strong><?php _e( "WE DO GOOD est une plateforme d'investissement en &eacute;change de royalties.", 'yproject' ); ?></strong><br />
-		<br />
-		<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ): ?>
-			<?php echo sprintf( __( "Vous souhaitez acc&eacute;der à la pr&eacute;sentation du projet %s, actuellement en &eacute;valuation, phase pr&eacute;alable au lancement de la lev&eacute;e de fonds.", 'yproject' ), $campaign->data->post_title ); ?><br />
-			<br />
-		<?php endif; ?>
-		<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte ): ?>
-			<?php echo sprintf( __( "Vous souhaitez acc&eacute;der &agrave; la pr&eacute;sentation du projet %s, actuellement en lev&eacute;e de fonds.", 'yproject' ), $campaign->data->post_title ); ?><br />
-			<br />
-		<?php endif; ?>
-		<?php _e( "Vous pouvez y acc&eacute;der sans investir mais la r&eacute;glementation nous impose de vous informer que l'investissement dans des soci&eacute;t&eacute;s non cot&eacute;es comporte des risques sp&eacute;cifiques :", 'yproject' ); ?><br />
-		<?php _e( "&gt; Le retour sur investissement d&eacute;pend de la r&eacute;ussite du projet financ&eacute;.", 'yproject' ); ?><br />
-		<?php _e( "&gt; Risque de perte totale ou partielle du capital investi.", 'yproject' ); ?><br />
-		<br />
-		<?php if ( $campaign->has_category_slug( 'partners', 'investisur' ) ): ?>
-		<?php _e( "Ce projet est n&eacute;anmoins labellis&eacute; &quot;InvestiS&ucirc;r&quot;, un syst&egrave;me de protection de l'investissement propos&eacute; par notre partenaire Le Fonds Compagnon.", 'yproject' ); ?>
-		<?php _e( "Nous vous invitons &agrave; lire les conditions de ce label dans la pr&eacute;sentation du projet et sur leur site.", 'yproject' ); ?><br />
-		<?php _e( "Rendez-vous sur le site", 'yproject' ); ?> https://www.investisur.com/.<br />
-		<br />
-		<?php endif; ?>
-		<strong><?php _e( "Avez‐vous conscience que, dans le cas o&ugrave; vous investissez, vous pouvez perdre &eacute;ventuellement la totalit&eacute; de votre investissement ?", 'yproject' ); ?></strong><br />
-		<br />
+		<?php _e( "Bonjour,", 'yproject' ); ?><br>
+		<?php echo sprintf( __( "Vous &ecirc;tes sur le point d'acc&eacute;der &agrave; la pr&eacute;sentation du projet %s sur WE DO GOOD, plateforme d'investissement en &eacute;change de royalties.", 'yproject' ), $campaign->data->post_title ); ?><br>
+		<br>
+		
+		<?php _e( "Vous pouvez acc&eacute;der &agrave; la pr&eacute;sentation du projet sans investir, mais la r&eacute;glementation et notre &eacute;thique nous imposent de vous informer que l'investissement dans des soci&eacute;t&eacute;s non cot&eacute;es comporte des risques sp&eacute;cifiques :", 'yproject' ); ?><br>
+		<?php _e( "&gt; Le retour sur investissement d&eacute;pend de la r&eacute;ussite du projet financ&eacute;.", 'yproject' ); ?><br>
+		<?php _e( "&gt; Risque de perte totale ou partielle du capital investi.", 'yproject' ); ?><br>
+		<br>
+
+		<?php _e( "Ceci est normal : l'aventure entrepreneuriale est risqu&eacute;e et peut &eacute;chouer, mais cela vaut le coup d'essayer pour faire &eacute;merger des id&eacute;es qui am&eacute;liorent le monde dans lequel nous vivons.", 'yproject' ); ?><br>
+		<br>
+
+		<?php _e( "Donc si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez que de l'argent dont vous n'avez pas besoin.", 'yproject' ); ?>
+		<?php _e( "Sinon, vous pouvez simplement donner votre avis sur les projets.", 'yproject' ); ?><br>
+		<br>
+
+		<?php _e( "WE DO GOOD est agr&eacute;&eacute;e par l'ORIAS et membre de l'association professionnelle Financement Participatif France.", 'yproject' ); ?>
+		<?php _e( "Pour les paiements, nous utilisons les services de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l'ACPR.", 'yproject' ); ?><br>
+		<br>
+		
+		<strong><?php _e( "Avez‐vous conscience que, dans le cas o&ugrave; vous investissez, vous pouvez perdre &eacute;ventuellement la totalit&eacute; de votre investissement ?", 'yproject' ); ?></strong><br>
+		<br>
+
 		<form class="db-form v3">
 			<a href="<?php echo home_url( '/investissement/' ); ?>" class="button half left transparent"><?php _e( "Non / En savoir plus", 'yproject' ); ?></a>
 			<button type="button" class="button half right close red" data-close="project-warning"><?php _e( "Oui / Continuer", 'yproject' ); ?></button>
 		</form>
+		<div class="clear">
+			<br><br>
+		</div>
 	</div>
 	
 </div>
