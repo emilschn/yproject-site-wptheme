@@ -4,18 +4,6 @@
 		$WDG_cache_plugin = new WDG_Cache_Plugin();
 	}
 	$page_controler = WDG_Templates_Engine::instance()->get_controler();
-	
-	$project_list = array();
-	if (is_user_logged_in()) {
-		$WDGUser_current = WDGUser::current();
-		$cache_project_list = $WDG_cache_plugin->get_cache('WDGUser::get_projects_by_id('.$WDGUser_current->wp_user->ID.', TRUE)', 1);
-		if ($cache_project_list !== FALSE) { $project_list = json_decode($cache_project_list); }
-		else {
-			$project_list = WDGUser::get_projects_by_id($WDGUser_current->wp_user->ID, TRUE);
-			$WDG_cache_plugin->set_cache('WDGUser::get_projects_by_id('.$WDGUser_current->wp_user->ID.', TRUE)', json_encode($project_list), 60*10, 1); //MAJ 10min
-		}
-	}
-	
 	wp_reset_query();
 ?>
 <!DOCTYPE html>

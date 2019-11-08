@@ -167,7 +167,7 @@ class YPShortcodeManager {
 		locate_template('common/newproject-lightbox.php',true);
 		$content = ob_get_contents();
 		ob_end_clean();
-		echo do_shortcode('[yproject_lightbox_cornered id="newproject" class="wdg-lightbox-ref"]' .$content . '[/yproject_lightbox_cornered]');
+		echo do_shortcode('[yproject_lightbox_cornered id="newproject" class="wdg-lightbox-ref" title="'.__( "Lancement de levée de fonds", 'yproject' ).'"]' .$content . '[/yproject_lightbox_cornered]');
 		echo do_shortcode('[yproject_register_lightbox]');
 	}
 	
