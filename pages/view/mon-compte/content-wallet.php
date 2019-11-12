@@ -38,7 +38,9 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 
 	<?php else: ?>
 		<h3><?php _e( "Recharger mon porte-monnaie par virement", 'yproject' ); ?></h3>
-		<?php _e( "Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement.", 'yproject' ); ?><br><br>
+		<p class="align-justify">
+			<?php _e( "Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement.", 'yproject' ); ?><br><br>
+		</p>
 
 		<strong><?php _e( "Compte bancaire de destination", 'yproject' ); ?></strong><br>
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/footer/lemonway-gris.png" class="wire-lw right" alt="logo Lemonway" width="250">
@@ -47,10 +49,11 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 		<strong>BIC :</strong> BNPAFRPPIFE
 		<br><br>
 		
-		<strong><?php _e( "Code &agrave; indiquer (pour identifier votre paiement) :", 'yproject' ); ?></strong> wedogood-<?php echo $WDGUser_displayed->get_lemonway_id(); ?><br>
-		<i><?php _e( "Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !", 'yproject' ); ?></i>
-		<br><br>
-
+		<p class="align-justify">
+			<strong><?php _e( "Code &agrave; indiquer (pour identifier votre paiement) :", 'yproject' ); ?></strong> wedogood-<?php echo $WDGUser_displayed->get_lemonway_id(); ?><br>
+			<i><?php _e( "Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !", 'yproject' ); ?></i>
+			<br><br>
+		</p>
 
 		<?php if ( !$page_controler->is_iban_validated() ): ?>
 			<h3><?php _e( "Retirer sur mon compte bancaire", 'yproject' ); ?></h3>
