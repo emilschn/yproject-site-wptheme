@@ -318,7 +318,7 @@ var ProjectEditor = (function($) {
 
 			newElement = '<input type="button" id="wdg-edit-video-image_update" value="Télécharger une image d\'aperçu ..." class="button blue-pale">';
 			$(".block_url_image").after(newElement);
-			var span_image = '<span id="extra-comment-image">(Max. 2Mo ; idéalement 870px de largeur * 460px de hauteur)</span>';
+			var span_image = '<span id="extra-comment-image">(Max. 300Ko ; idéalement 870px de largeur * 460px de hauteur)</span>';
 			$("#upload-video-form").after(span_image);
 
 			$("#wdg-edit-video-image_update").click(function() {
