@@ -310,7 +310,12 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		}
 	}
 	
-	public function get_form_adjustment_action() {
+	public function get_form_adjustment_add_action() {
+		$url = admin_url( 'admin-post.php?action=add_adjustment' );
+		return $url;
+	}
+	
+	public function get_form_adjustment_edit_action() {
 		$url = admin_url( 'admin-post.php?action=edit_adjustment' );
 		return $url;
 	}

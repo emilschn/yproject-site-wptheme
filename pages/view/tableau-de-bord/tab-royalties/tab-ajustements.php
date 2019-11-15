@@ -47,7 +47,7 @@ $adjustments = $page_controler->get_adjustment_list();
 	
 	
 
-		<form action="<?php echo $page_controler->get_form_adjustment_action(); ?>" method="post" id="form-add-adjustment" class="db-form v3 full center bg-white admin-theme-block hidden" novalidate>
+		<form action="<?php echo $page_controler->get_form_adjustment_add_action(); ?>" method="post" id="form-add-adjustment" class="db-form v3 full center bg-white admin-theme-block hidden" novalidate>
 
 			<?php foreach ( $fields_hidden as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
