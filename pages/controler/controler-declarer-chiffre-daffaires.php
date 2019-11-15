@@ -224,9 +224,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 						$this->current_step = $this->current_declaration->get_status();
 					}
 				}
-			}
-
-			if ( $this->current_step == WDGROIDeclaration::$status_payment ) {
+			}elseif ( $this->current_step == WDGROIDeclaration::$status_payment ) {
 				$this->init_summary_data();
 				$has_tried_payment = FALSE;
 				switch( $action_posted ) {
@@ -403,7 +401,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$return_url = $this->get_form_action() . '&cardreturn=1';
 		$error_url = $return_url . '&has_error=1';
 		
-		if ( !empty( $card_type ) && $card_type != 'other' ) {
+		if ( !empty( $input_card_option_type ) && $input_card_option_type != 'other' ) {
 			$transaction_result = LemonwayLib::ask_payment_registered_card( $WDGOrganization->get_lemonway_id(), $input_card_option_type, $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay() );
 			
 			if ( $transaction_result->STATUS == 3 ) {
