@@ -197,6 +197,11 @@ div#content button.clear {
 	}
 }
 
+div#content .phone-info {
+	margin: -32px 0px 16px;
+	padding-left: 32px;
+}
+
 /**
  ETAPE 3A : Contrat
 **/

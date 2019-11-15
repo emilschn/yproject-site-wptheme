@@ -164,6 +164,21 @@ var WDGInvestPageFunctions = (function($) {
 					$( '#field-would-invest-number-per-year-with-warranty' ).hide( 100 );
 				} );
 			}
+
+			// Options de notification par téléphone pour l'envoi de document
+			if ( $( '#-phone-notification' ).is( ':checked' ) ) {
+				$( '.phone-number-hidden' ).show();
+			} else {
+				$( '.phone-number-hidden' ).hide();
+			}
+		
+			$( '#-phone-notification' ).parent().click( function() {
+				if ( $( '#-phone-notification' ).is( ':checked' ) ) {
+					$( '.phone-number-hidden' ).slideDown( 300 );
+				} else {
+					$( '.phone-number-hidden' ).slideUp( 300 );
+				}
+			} );
 		},
 
 		userTypeSelect: function( userType ) {
