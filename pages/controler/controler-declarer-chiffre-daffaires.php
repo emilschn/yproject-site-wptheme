@@ -434,12 +434,12 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			$wk_token = LemonwayLib::make_token( '', $this->current_declaration->id );
 			$this->current_declaration->payment_token = $wk_token;
 			$this->current_declaration->save();
-			$return = LemonwayLib::ask_payment_webkit( $WDGOrganization->get_lemonway_id(), $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay(), $wk_token, $return_url, $error_url, $error_url, $input_card_option_save );
-			if ( !empty( $return->MONEYINWEB->TOKEN ) ) {
-				$url_css = 'https://www.wedogood.co/wp-content/themes/yproject/_inc/css/lemonway.css';
-				$url_css_encoded = urlencode( $url_css );
-				wp_redirect( YP_LW_WEBKIT_URL . '?moneyInToken=' . $return->MONEYINWEB->TOKEN . '&lang=fr&p=' . $url_css_encoded);
+			$ask_payment_webkit_url = LemonwayLib::ask_payment_webkit( $WDGOrganization->get_lemonway_id(), $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay(), $wk_token, $return_url, $error_url, $error_url, $input_card_option_save );
+			if ( $ask_payment_webkit_url !== FALSE ) {
+				wp_redirect( $ask_payment_webkit_url);
 				exit();
+			} else {
+				ypcf_debug_log( 'WDG_Page_Controler_DeclarationInput::proceed_payment_card > error - ' .LemonwayLib::get_last_error_code(). ' - ' .LemonwayLib::get_last_error_message() );
 			}
 		}
 
