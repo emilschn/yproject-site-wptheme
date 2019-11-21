@@ -398,9 +398,11 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$input_card_option_type = filter_input( INPUT_POST, 'meanofpayment-card-type' );
 		$campaign_organization_item = $this->current_campaign->get_organization();
 		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+		$WDGOrganization->register_lemonway(true);
+		$WDGOrganization->check_register_royalties_lemonway_wallet();
 		$return_url = $this->get_form_action() . '&cardreturn=1';
 		$error_url = $return_url . '&has_error=1';
-		
+
 		if ( !empty( $input_card_option_type ) && $input_card_option_type != 'other' ) {
 			$transaction_result = LemonwayLib::ask_payment_registered_card( $WDGOrganization->get_lemonway_id(), $input_card_option_type, $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay() );
 			
@@ -413,11 +415,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				NotificationsEmails::send_notification_roi_payment_success_admin( $this->current_declaration->id );
 				NotificationsEmails::send_notification_roi_payment_success_user( $this->current_declaration->id );
 				
-				$campaign = atcf_get_current_campaign();
-				$current_organization = $campaign->get_organization();
-				$organization = new WDGOrganization( $current_organization->wpref, $current_organization );
-				$organization->check_register_royalties_lemonway_wallet();
-				LemonwayLib::ask_transfer_funds( $organization->get_lemonway_id(), $organization->get_royalties_lemonway_id(), $this->current_declaration->get_amount_with_adjustment() );
+				LemonwayLib::ask_transfer_funds( $WDGOrganization->get_lemonway_id(), $WDGOrganization->get_royalties_lemonway_id(), $this->current_declaration->get_amount_with_adjustment() );
 				
 				$purchase_key = $transaction_result->TRANS->HPAY->ID;
 
@@ -438,7 +436,9 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			$this->current_declaration->save();
 			$return = LemonwayLib::ask_payment_webkit( $WDGOrganization->get_lemonway_id(), $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay(), $wk_token, $return_url, $error_url, $error_url, $input_card_option_save );
 			if ( !empty( $return->MONEYINWEB->TOKEN ) ) {
-				wp_redirect( YP_LW_WEBKIT_URL . '?moneyInToken=' . $return->MONEYINWEB->TOKEN );
+				$url_css = 'https://www.wedogood.co/wp-content/themes/yproject/_inc/css/lemonway.css';
+				$url_css_encoded = urlencode( $url_css );
+				wp_redirect( YP_LW_WEBKIT_URL . '?moneyInToken=' . $return->MONEYINWEB->TOKEN . '&lang=fr&p=' . $url_css_encoded);
 				exit();
 			}
 		}
