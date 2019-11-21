@@ -136,15 +136,6 @@ if ($organizations_list) {
 			"label"		=> "Nom de mon entreprise *",
 			"value"		=> "",
 		));
-
-		DashboardUtility::create_field(array(
-			"id"		=> "email-organization",
-			"type"		=> "text",
-			"label"		=> "E-mail de contact *",
-			"value"		=> "",
-			"description"	=> __( "Cette adresse doit &ecirc;tre diff&eacute;rente de celle de votre compte personnel, utilisez une adresse telle que contact@votre-entreprise.fr", 'yproject' ),
-			"infobubble"	=> __( "Cet e-mail ne doit pas &ecirc;tre utilis&eacute; par un compte existant.", 'yproject' )
-		));
 		
 	} else {
 		DashboardUtility::create_field(array(
@@ -154,6 +145,16 @@ if ($organizations_list) {
 			"value"		=> "",
 		));
 	}
+	
+
+	DashboardUtility::create_field(array(
+		"id"		=> "email-organization",
+		"type"		=> "text",
+		"label"		=> "E-mail de contact *",
+		"value"		=> "",
+		"description"	=> __( "Cette adresse doit &ecirc;tre diff&eacute;rente de celle de votre compte personnel, utilisez une adresse telle que contact@votre-entreprise.fr", 'yproject' ),
+		"infobubble"	=> __( "Cet e-mail ne doit pas &ecirc;tre utilis&eacute; par un compte existant.", 'yproject' )
+	));
 
     DashboardUtility::create_field(array(
         "id"		=> "project-name",

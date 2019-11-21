@@ -692,7 +692,6 @@ var WDGLightboxFunctions = (function($) {
 					$('#newproject_form div#field-new-company-name').hide();
 					$('#newproject_form div#field-email-organization').hide();
 					var val = "";
-					console.log('on change de cpompany!!');
 					if($('#newproject_form input#company-name').length > 0 && $('#newproject_form input#company-name').val() !== "" ) {
 						val = $('#newproject_form input#company-name').val();
 						$('#newproject_form #project-name').val("Projet de "+val);
