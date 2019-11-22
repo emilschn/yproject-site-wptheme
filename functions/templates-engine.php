@@ -152,7 +152,7 @@ class WDG_Templates_Engine {
 			ob_start();
 			locate_template( WDG_Templates_Engine::$view_path. 'view-' .$view. '.php', TRUE );
 			$content = ob_get_contents();
-			ob_clean();
+			@ob_clean();
 		}
 		return $content;
 	}
