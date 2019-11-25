@@ -214,16 +214,7 @@ div#content div.center.upload-docs div.align-center a.button.transparent {
  ETAPE 3B : Contrat
 **/
 div#content div#contract-intro {
-	min-height: 120px;
 	text-align: justify;
-}
-div#content div#contract-intro img {
-	float: left;
-	margin-right: 20px;
-	margin-bottom: 20px;
-}
-div#content div#contract-intro p {
-	margin-left: 170px;
 }
 div#content div#contract-preview {
 	height: 400px;

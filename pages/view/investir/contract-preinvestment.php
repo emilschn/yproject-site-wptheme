@@ -1,14 +1,10 @@
 <?php
 global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
-?>
-
-<?php
 $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contract::$field_group_hidden );
 ?>
 
 <form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white enlarge">
-	
 	<div class="align-left">
 		<?php $form_errors = $page_controler->get_form_errors(); ?>
 		<?php if ( $form_errors ): ?>
@@ -19,7 +15,6 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contrac
 	</div>
 	
 	<div id="contract-intro">
-		<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/picto-contrat.png" width="150" />
 		<?php echo $page_controler->get_contract_warning(); ?>
 	</div>
 	
@@ -33,7 +28,7 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contrac
 	<?php endforeach; ?>
 	
 	<div id="contract-buttons">
-		<br /><br /><br />
+		<br><br><br>
 
 		<button type="submit" class="button half right red"><?php _e( "Valider le contrat", 'yproject' ); ?></button>
 
@@ -42,4 +37,3 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contrac
 		<div class="clear"></div>
 	</div>
 </form>
-
