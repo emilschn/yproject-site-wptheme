@@ -226,18 +226,6 @@
 			</div>
 		<?php endif; ?>
 		
-		<?php if ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' ): ?>
-		<?php if ( $_SESSION['subscribe_newsletter_sendinblue'] == true ): ?>
-			<div class="timeout-lightbox wdg-lightbox">
-				<div class="wdg-lightbox-click-catcher"></div>
-				<div class="wdg-lightbox-padder">
-					<p class="wdg-lightbox-msg-info"><?php _e("Votre inscription a bien &eacute;t&eacute; prise en compte !", 'yproject'); ?></p>
-				</div>
-			</div>
-		<?php endif; ?>
-		<?php $_SESSION['subscribe_newsletter_sendinblue'] = false; ?>
-		<?php endif; ?>
-		
 		<?php if ( $page_controler->get_show_user_pending_investment() ): ?>
 			<?php locate_template( array( 'common/lightbox/pending-investment-lightbox.php' ), true ); ?>
 		<?php endif; ?>
