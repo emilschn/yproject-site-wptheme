@@ -17,16 +17,11 @@ if ( $cache_project_list !== FALSE ) {
 
 
 $organizations_list = $WDGUser_current->get_organizations_list();
-$first_organization_email = '';
 
 if ($organizations_list) {
 	foreach ($organizations_list as $organization_item) {
 		$organizations_options_id[] = $organization_item->wpref;
 		$organizations_options_names[] = $organization_item->name;
-		if ( empty( $first_organization_email ) ) {
-			$first_organization = new WDGOrganization( $organization_item->wpref );
-			$first_organization_email = $first_organization->get_creator()->user_email;
-		}
 	}
 	array_push($organizations_options_id, "new_orga");
 	array_push($organizations_options_names, "Une nouvelle organisation...");
@@ -104,21 +99,21 @@ if ($organizations_list) {
     DashboardUtility::create_field(array(
         "id"		=> "firstname",
         "type"		=> "text",
-        "label"		=> "Mon prénom",
+        "label"		=> "Mon prénom *",
         "value"		=> $WDGUser_current->wp_user->user_firstname,
     ));
 
     DashboardUtility::create_field(array(
         "id"		=> "lastname",
         "type"		=> "text",
-        "label"		=> "Mon nom",
+        "label"		=> "Mon nom *",
         "value"		=> $WDGUser_current->wp_user->user_lastname,
     ));
 
     DashboardUtility::create_field(array(
         "id"		=> "phone",
         "type"		=> "text",
-        "label"		=> "Mon t&eacute;l&eacute;phone mobile",
+        "label"		=> "Mon t&eacute;l&eacute;phone mobile *",
         "value"		=> $WDGUser_current->wp_user->get('user_mobile_phone'),
         "infobubble"=> "Ce num&eacute;ro sera celui utilis&eacute; pour vous contacter &agrave; propos de votre projet",
     ));
@@ -129,7 +124,7 @@ if ($organizations_list) {
 		DashboardUtility::create_field(array(
 			"id"			=> "company-name",
 			"type"			=> "select",
-			"label"			=> "Mon entreprise",
+			"label"			=> "Mon entreprise *",
 			"value"			=> $organizations_list,
 			"options_id"	=> array_values($organizations_options_id),
 			"options_names"	=> array_values($organizations_options_names),
@@ -138,7 +133,7 @@ if ($organizations_list) {
 		DashboardUtility::create_field(array(
 			"id"		=> "new-company-name",
 			"type"		=> "text",
-			"label"		=> "Nom de mon entreprise",
+			"label"		=> "Nom de mon entreprise *",
 			"value"		=> "",
 		));
 		
@@ -146,31 +141,32 @@ if ($organizations_list) {
 		DashboardUtility::create_field(array(
 			"id"		=> "company-name",
 			"type"		=> "text",
-			"label"		=> "Nom de mon entreprise",
+			"label"		=> "Nom de mon entreprise *",
 			"value"		=> "",
 		));
 	}
+	
 
-    DashboardUtility::create_field(array(
-        "id"		=> "email-organization",
-        "type"		=> "text",
-        "label"		=> "E-mail de contact",
-        "value"		=> $first_organization_email,
-        "description"	=> __( "Cette adresse doit &ecirc;tre diff&eacute;rente de celle de votre compte personnel, utilisez une adresse telle que contact@votre-entreprise.fr", 'yproject' ),
-        "infobubble"	=> __( "Cet e-mail ne doit pas &ecirc;tre utilis&eacute; par un compte existant.", 'yproject' )
-    ));
+	DashboardUtility::create_field(array(
+		"id"		=> "email-organization",
+		"type"		=> "text",
+		"label"		=> "E-mail de contact *",
+		"value"		=> "",
+		"description"	=> __( "Cette adresse doit &ecirc;tre diff&eacute;rente de celle de votre compte personnel, utilisez une adresse telle que contact@votre-entreprise.fr", 'yproject' ),
+		"infobubble"	=> __( "Cet e-mail ne doit pas &ecirc;tre utilis&eacute; par un compte existant.", 'yproject' )
+	));
 
     DashboardUtility::create_field(array(
         "id"		=> "project-name",
         "type"		=> "text",
-        "label"		=> "Nom du projet",
+        "label"		=> "Nom du projet *",
         "value"		=> "",
     ));
 
     DashboardUtility::create_field(array(
         "id"		=> "project-description",
         "type"		=> "textarea",
-        "label"		=> "Description du projet",
+        "label"		=> "Description du projet *",
         "value"		=> "",
     ));
 	?>

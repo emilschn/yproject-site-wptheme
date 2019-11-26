@@ -70,7 +70,7 @@ if ( $page_controler->can_access_admin() ) {
 	</div>
 	
 	<?php if ( $page_controler->can_access_admin() ): ?>
-		<form action="<?php echo $page_controler->get_form_adjustment_action(); ?>" method="post" id="form-edit-adjustment-<?php echo $adjustment_obj->id; ?>" class="db-form v3 full center bg-white admin-theme-block adjustment-edit-form hidden" novalidate>
+		<form action="<?php echo $page_controler->get_form_adjustment_edit_action(); ?>" method="post" id="form-edit-adjustment-<?php echo $adjustment_obj->id; ?>" class="db-form v3 full center bg-white admin-theme-block adjustment-edit-form hidden" novalidate>
 
 			<?php foreach ( $fields_hidden as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>

@@ -76,8 +76,6 @@ class WDG_WordPress_Events {
 		// Vérifie si le formulaire de connexion ou d'inscription a été posté
 		WDGFormUsers::login();
 		WDGFormUsers::register();
-		// Vérifie si le fomulaire d'inscription à la NL a été posté
-		WDGPostActions::subscribe_newsletter_sendinblue();
 		
 		// Sécurisation utilisateur
 		show_admin_bar( false );
