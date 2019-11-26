@@ -17,7 +17,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<li id="menu-item-royalties"><a href="#royalties" data-tab="royalties"><?php _e( "Royalties", 'yproject' ); ?></a></li>
 		
 		<li><?php _e( "Param&egrave;tres", 'yproject' ); ?></li>
-		<li id="menu-item-author"><a href="#author" data-tab="author" <?php if ( !ypcf_check_user_is_complete( $page_controler->get_campaign()->post_author() ) ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Repr&eacute;sentant l&eacute;gal", 'yproject' ); ?></a></li>
+	<!--	<li id="menu-item-author"><a href="#author" data-tab="author" <?php if ( !ypcf_check_user_is_complete( $page_controler->get_campaign()->post_author() ) ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Repr&eacute;sentant l&eacute;gal", 'yproject' ); ?></a></li>-->
 		<li id="menu-item-organization"><a href="#organization" data-tab="organization"><?php _e( "Organisation", 'yproject' ); ?></a></li>
 		<li id="menu-item-team"><a href="#team" data-tab="team"><?php _e( "&Eacute;quipe", 'yproject' ); ?></a></li>
 		<li id="menu-item-finance"><a href="#finance" data-tab="finance"><?php _e( "Financement", 'yproject' ); ?></a></li>
