@@ -3,6 +3,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGUserIdentityDocsForm = $page_controler->get_user_identitydocs_form();
 $fields_hidden = $WDGUserIdentityDocsForm->getFields(WDG_Form_User_Identity_Docs::$field_group_hidden );
 $fields_files = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files );
+$fields_phone_notification = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_phone_notification );
+$fields_phone_number = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_phone_number );
 ?>
 
 <h2><?php _e( "Mes justificatifs d'identit&eacute;", 'yproject' ); ?></h2>
@@ -28,6 +30,21 @@ $fields_files = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs
 	<p class="align-left">
 		<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
 	</p>
+
+	<?php foreach ( $fields_phone_notification as $field ): ?>
+		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+	<?php endforeach; ?>
+	<div class="align-left phone-info">
+		<?php _e( "Ce SMS sera envoy&eacute; uniquement lorsque tous les documents sont valid&eacute;s, ou en cas de documents incomplets ou refus&eacute;s.", 'yproject' ); ?>
+	</div>
+
+	<div class="phone-number-hidden">
+		<?php foreach ( $fields_phone_number as $field ): ?>
+			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+		<?php endforeach; ?>
+	</div>
 	
 	<div id="user-identify-docs-form-buttons">
 		<button type="submit" class="button save red"><?php _e( "Envoyer les documents", 'yproject' ); ?></button>
