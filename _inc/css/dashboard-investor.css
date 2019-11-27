@@ -74,6 +74,40 @@ body.template-mon-compte div#container div#content .db-form.v3 {
 	max-width: 600px;
 	margin: 0px auto;
 }
+body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview {
+	background: #FFFFFF;
+	padding: 16px;
+	margin-bottom: 24px;
+	height: 72px;
+}
+body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview > img {
+	float: left;
+}
+body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview > div {
+	float: left;
+	text-align: left;
+	margin-left: 8px;
+	margin-top: 8px;
+}
+body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview > div span:first-child {
+	font-size: 32px;
+	color: #93626D;
+}
+body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview > a {
+	float: right;
+	margin-top: 11px;
+}
+@media screen and (max-width: 500px) {
+	body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview {
+		height: 132px;
+	}
+	body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview > a {
+		float: none;
+		width: -webkit-calc(100% - 2px);
+		width: -moz-calc(100% - 2px);
+		width: calc(100% - 2px);
+	}
+}
 body.template-mon-compte div#container div#content #item-body-wallet .wdg-message {
 	margin: 16px auto;
 	padding: 16px;
@@ -84,6 +118,34 @@ body.template-mon-compte div#container div#content #item-body-wallet .wdg-messag
 	top: 0px;
 	left: 40px;
 }
+
+@media screen and (max-width: 600px) {
+	body.template-mon-compte div#container div#content #item-body-wallet .wire-lw {
+		float: none;
+		display: block;
+		margin: 8px 0px;
+	}
+}
+
+body.template-mon-compte div#container div#content #item-body-wallet ul.user-history {
+	margin: 0px;
+	padding-left: 0px;
+	list-style: none;
+	background: #FFFFFF;
+}
+body.template-mon-compte div#container div#content #item-body-wallet ul.user-history li {
+	padding: 8px;
+	margin-bottom: 16px;
+}
+body.template-mon-compte div#container div#content #item-body-wallet ul.user-history li span:nth-child(1) {
+	display: inline-block;
+	width: 100px;
+	color: #00879b;
+}
+body.template-mon-compte div#container div#content #item-body-wallet ul.user-history li span:nth-child(2) {
+	color: #CFB7B7;
+}
+
 body.template-mon-compte div#container div#content a.download-certificate {
 	display: inline-block;
 	padding: 16px 32px;

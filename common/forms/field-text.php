@@ -1,6 +1,6 @@
 <?php
 global $wdg_current_field;
-$input_type = empty( $wdg_current_field[ 'options' ] ) ? 'text' : $wdg_current_field[ 'options' ];
+$input_type = ( empty( $wdg_current_field[ 'options' ] ) || is_array( $wdg_current_field[ 'options' ] ) ) ? 'text' : $wdg_current_field[ 'options' ];
 if ( empty( $wdg_current_field[ 'complementary_class' ] ) ) {
 	$wdg_current_field[ 'complementary_class' ] = '';
 }

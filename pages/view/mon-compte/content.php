@@ -10,7 +10,9 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 		<?php if ( $page_controler->get_wallet_to_bankaccount_result() === TRUE ): ?>
 			<div class="success">Transfert effectué</div>
 		<?php else: ?>
-			<div class="errors center"><?php echo $page_controler->get_wallet_to_bankaccount_result(); ?></div>
+			<div class="wdg-message error">
+				<?php echo $page_controler->get_wallet_to_bankaccount_result(); ?>
+			</div>
 		<?php endif; ?>
 	<?php endif; ?>
 

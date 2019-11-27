@@ -85,6 +85,7 @@ if (!empty($current_organization)) {
 $current_lang = get_locale();
 $campaign->set_current_lang($current_lang);
 $lang_list = $campaign->get_lang_list();
+$campaign_categories_str = $campaign->get_categories_str();
 ?>
 	
 <div class="project-banner">
@@ -221,7 +222,7 @@ $lang_list = $campaign->get_lang_list();
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
 
-						<?php elseif ( $has_voted ): ?>
+						<?php elseif ( $WDGUser_current->has_voted_on_campaign( $campaign->ID ) ): ?>
 							<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
 						
 						<?php else: ?>
@@ -231,7 +232,7 @@ $lang_list = $campaign->get_lang_list();
 						<?php endif; ?>
 						
 					<?php else: ?>
-						<?php if ( $has_voted ): ?>
+						<?php if ( $WDGUser_current->has_voted_on_campaign( $campaign->ID ) ): ?>
 							<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
 						
 						<?php else: ?>

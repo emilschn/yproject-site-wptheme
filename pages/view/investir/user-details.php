@@ -13,7 +13,7 @@ $fields_orga_info_new = $page_controler->get_form()->getFields( WDG_Form_Invest_
 $fields_info_confirm = $page_controler->get_form()->getFields( WDG_Form_Invest_User_Details::$field_group_confirm );
 ?>
 	
-<form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
+<form action="<?php echo $page_controler->get_form_action(); ?>#infosfilled" method="post" class="db-form v3 full bg-white">
 	
 	<div class="align-left">
 		<?php $form_errors = $page_controler->get_form_errors(); ?>

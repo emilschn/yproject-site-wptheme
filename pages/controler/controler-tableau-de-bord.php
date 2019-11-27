@@ -79,7 +79,6 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		WDGFormProjects::form_submit_account_files();
 		WDGFormProjects::form_approve_payment();
 		WDGFormProjects::form_cancel_payment();
-		WDGFormProjects::form_try_pending_card();
 		
 		$this->init_context();
 		$this->init_stats();
@@ -311,7 +310,12 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		}
 	}
 	
-	public function get_form_adjustment_action() {
+	public function get_form_adjustment_add_action() {
+		$url = admin_url( 'admin-post.php?action=add_adjustment' );
+		return $url;
+	}
+	
+	public function get_form_adjustment_edit_action() {
 		$url = admin_url( 'admin-post.php?action=edit_adjustment' );
 		return $url;
 	}
@@ -506,7 +510,8 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		
 		// Plus d'infos
 		$this->campaign_stats[ 'vote' ][ 'more_info' ] = array();
-		$this->campaign_stats[ 'vote' ][ 'more_info' ][ 'impact' ] = max( 0, $vote_results[ 'count_more_info_impact' ] );
+		// Valeur à 1 car pose problème si 0 pour construire le graph => provoque une division par 0 quelque part difficile à comprendre. Le passage à 1 évite les soucis...
+		$this->campaign_stats[ 'vote' ][ 'more_info' ][ 'impact' ] = max( 1, $vote_results[ 'count_more_info_impact' ] );
 		$this->campaign_stats[ 'vote' ][ 'more_info' ][ 'product' ] = max( 0, $vote_results[ 'count_more_info_service' ] );
 		$this->campaign_stats[ 'vote' ][ 'more_info' ][ 'team' ] = max( 0, $vote_results[ 'count_more_info_team' ] );
 		$this->campaign_stats[ 'vote' ][ 'more_info' ][ 'finance' ] = max( 0, $vote_results[ 'count_more_info_finance' ] );
@@ -563,7 +568,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $date_target->format( 'Y-m-d' ) ] = round( $this->campaign_stats[ 'goal' ] * 45 / 100 ); // J2
 		$date_target->add( new DateInterval( 'P5D' ) );
 		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $date_target->format( 'Y-m-d' ) ] = round( $this->campaign_stats[ 'goal' ] * 60 / 100 ); // J7
-		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $this->campaign_stats[ 'funding' ][ 'end' ] ] = $this->campaign_stats[ 'funding' ][ 'amount_investment' ][ 'average' ];
+		$this->campaign_stats[ 'funding' ][ 'list_investment' ][ 'target' ][ $this->campaign_stats[ 'funding' ][ 'end' ] ] = min( $this->campaign_stats[ 'funding' ][ 'amount_investment' ][ 'average' ], $this->campaign->goal( FALSE ) );
 		
 		// Stats
 		$this->campaign_stats[ 'funding' ][ 'stats' ][ 'age' ] = max( 0, $investment_results[ 'average_age' ] );

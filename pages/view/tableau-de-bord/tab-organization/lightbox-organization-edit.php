@@ -468,14 +468,7 @@ if ( isset( $organization_obj ) ) {
 	?>
 	<h2 class="underlined"><?php _e( "Transferts d&apos;argent", 'yproject' ); ?></h2>
 	<?php
-	$args = array(
-		'author'	    => $organization_obj->get_wpref(),
-		'post_type'	    => 'withdrawal_order',
-		'post_status'   => 'any',
-		'orderby'	    => 'post_date',
-		'order'			=>  'ASC'
-	);
-	$transfers = get_posts($args);
+	$transfers = $organization_obj->get_transfers();
 	if ($transfers) :
 	?>
 	<ul class="user_history">

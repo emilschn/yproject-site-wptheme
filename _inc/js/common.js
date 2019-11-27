@@ -681,16 +681,24 @@ var WDGLightboxFunctions = (function($) {
 				
 				$('#newproject_form input#new-company-name').val(" ");
 				$('#newproject_form div#field-new-company-name').hide();
+				
+				if ( $('#newproject_form select[name=company-name]').length > 0 ) {
+					$('#newproject_form input#email-organization').val(" ");
+					$('#newproject_form div#field-email-organization').hide();
+				}
+
 				if($('#newproject_form input#company-name').val() === ""){
 					$('#newproject_form #project-name').val("");
 				}
 				$('#newproject_form #select-company-name').on("keyup change", function() {
 					$('#newproject_form div#field-new-company-name').hide();
+					$('#newproject_form div#field-email-organization').hide();
 					var val = "";
 					if($('#newproject_form input#company-name').length > 0 && $('#newproject_form input#company-name').val() !== "" ) {
 						val = $('#newproject_form input#company-name').val();
 						$('#newproject_form #project-name').val("Projet de "+val);
 						$('#newproject_form input#new-company-name').val(" ");
+						$('#newproject_form input#email-organization').val(" ");
 					} else {
 						if($('#newproject_form select[name=company-name]').length > 0) {
 							var option = $('#newproject_form select[name=company-name] option:selected').val();
@@ -698,6 +706,7 @@ var WDGLightboxFunctions = (function($) {
 								val = $('#newproject_form select[name=company-name] option:selected').text();
 								$('#newproject_form #project-name').val("Projet de "+val);
 								$('#newproject_form input#new-company-name').val(" ");
+								$('#newproject_form input#email-organization').val(" ");
 							} else {
 								$('#newproject_form input#new-company-name').val("");
 								$('#newproject_form #project-name').val('');
@@ -710,12 +719,16 @@ var WDGLightboxFunctions = (function($) {
 										$('#newproject_form #project-name').val("");
 									}
 								});
+								$('#newproject_form input#email-organization').val("");
+								$('#newproject_form input#new-company-name').val("");
+								$('#newproject_form div#field-email-organization').show();
 							}
 						}
 					}
 				});
 				$('#newproject_form input#new-company-name').focus(function(){
 					$('#newproject_form input#new-company-name').val('');
+
 				});
 				if($('#newproject_form #company-name').val() !== ''){
 					var val = $('#newproject_form #company-name option:selected').text();

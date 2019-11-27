@@ -18,6 +18,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	private $summary_data;
 	private $display_payment_error;
 	private $has_added_declaration;
+	private $list_registered_cards;
 	
 	public function __construct() {
 		parent::__construct();
@@ -67,10 +68,15 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	public function get_current_campaign() {
 		return $this->current_campaign;
 	}
-	
-	public function get_current_campaign_organization_wallet_id() {
+
+	public function get_current_campaign_organization() {
 		$campaign_organization_item = $this->current_campaign->get_organization();
 		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+		return $WDGOrganization;
+	}
+	
+	public function get_current_campaign_organization_wallet_id() {
+		$WDGOrganization = $this->get_current_campaign_organization();
 		return $WDGOrganization->get_lemonway_id();
 	}
 	
@@ -218,9 +224,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 						$this->current_step = $this->current_declaration->get_status();
 					}
 				}
-			}
-
-			if ( $this->current_step == WDGROIDeclaration::$status_payment ) {
+			}elseif ( $this->current_step == WDGROIDeclaration::$status_payment ) {
 				$this->init_summary_data();
 				$has_tried_payment = FALSE;
 				switch( $action_posted ) {
@@ -271,13 +275,20 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 						$input_cardreturn = filter_input( INPUT_GET, 'cardreturn' );
 						$input_response_wkToken = filter_input( INPUT_GET, 'response_wkToken' );
 						if ( $input_cardreturn == '1' && !empty( $input_response_wkToken ) ) {
-							$return_lemonway_card = WDGFormProjects::return_lemonway_card();
-							if ( $return_lemonway_card == TRUE ) {
-								$this->current_step = WDGROIDeclaration::$status_transfer;
-
-							} elseif ( $return_lemonway_card !== FALSE ) {
+							$input_has_error = filter_input( INPUT_GET, 'has_error' );
+							if ( $input_response_wkToken == 'error' || !empty( $input_has_error ) ) {
 								$has_tried_payment = TRUE;
 								$this->display_payment_error = TRUE;
+								
+							} else {
+								$return_lemonway_card = WDGFormProjects::return_lemonway_card();
+								if ( $return_lemonway_card == TRUE ) {
+									$this->current_step = WDGROIDeclaration::$status_transfer;
+	
+								} elseif ( $return_lemonway_card !== FALSE ) {
+									$has_tried_payment = TRUE;
+									$this->display_payment_error = TRUE;
+								}
 							}
 						}
 						break;
@@ -324,7 +335,8 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	}
 	
 	public function can_display_payment_error() {
-		return $this->display_payment_error;
+		$input_has_error = filter_input( INPUT_GET, 'has_error' );
+		return ( $this->display_payment_error || !empty( $input_has_error ) );
 	}
 	
 	public function has_sign_mandate() {
@@ -332,24 +344,105 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
 		return $WDGOrganization->has_signed_mandate();
 	}
+
+	
+/******************************************************************************/
+// REGISTERED CARDS
+/******************************************************************************/
+	public function has_registered_cards() {
+		$registered_cards_list = $this->get_registered_cards_list();
+		return ( count( $registered_cards_list ) > 1 );
+	}
+
+	public function get_registered_cards_list() {
+		if ( !isset( $this->list_registered_cards ) ) {
+			$this->list_registered_cards = array();
+	
+			$WDGOrganization = $this->get_current_campaign_organization();
+			if ( $WDGOrganization->has_saved_card_expiration_date() ) {
+				$entity_registered_cards_list = $WDGOrganization->get_lemonway_registered_cards();
+				foreach ( $entity_registered_cards_list as $registered_item ) {
+					$card_item = array(
+						'id'			=> $registered_item[ 'id' ],
+						'label'			=> __( "Carte bancaire enregistr&eacute;e", 'yproject' ),
+						'number'		=> $registered_item[ 'number' ],
+						'expiration'	=> $registered_item[ 'expiration' ]
+					);
+					array_push( $this->list_registered_cards, $card_item );
+				}
+			}
+	
+			// On ajoute toujours "autre"
+			$card_item = array(
+				'id'			=> 'other',
+				'label'			=> __( "Autre carte bancaire", 'yproject' )
+			);
+			array_push( $this->list_registered_cards, $card_item );
+		}
+
+		return $this->list_registered_cards;
+	}
+
+	public function get_first_registered_card() {
+		$registered_cards_list = $this->get_registered_cards_list();
+		if ( $registered_cards_list[ 0 ][ 'id' ] != 'error' ) {
+			return $registered_cards_list[ 0 ];
+		} 
+		return FALSE;
+	}
 	
 /******************************************************************************/
 // PAYMENT
 /******************************************************************************/
 	public function proceed_payment_card() {
+		$input_card_option_type = filter_input( INPUT_POST, 'meanofpayment-card-type' );
 		$campaign_organization_item = $this->current_campaign->get_organization();
 		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
-		
+		$WDGOrganization->register_lemonway(true);
+		$WDGOrganization->check_register_royalties_lemonway_wallet();
 		$return_url = $this->get_form_action() . '&cardreturn=1';
-		$wk_token = LemonwayLib::make_token( '', $this->current_declaration->id );
-		$this->current_declaration->payment_token = $wk_token;
-		$this->current_declaration->save();
-		$WDGOrganization->register_lemonway( TRUE );
-		$return = LemonwayLib::ask_payment_webkit( $WDGOrganization->get_lemonway_id(), $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay(), $wk_token, $return_url, $return_url, $return_url );
-		if ( !empty( $return->MONEYINWEB->TOKEN ) ) {
-			wp_redirect( YP_LW_WEBKIT_URL . '?moneyInToken=' . $return->MONEYINWEB->TOKEN );
+		$error_url = $return_url . '&has_error=1';
+
+		if ( !empty( $input_card_option_type ) && $input_card_option_type != 'other' ) {
+			$transaction_result = LemonwayLib::ask_payment_registered_card( $WDGOrganization->get_lemonway_id(), $input_card_option_type, $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay() );
+			
+			if ( $transaction_result->STATUS == 3 ) {
+				$date_now = new DateTime();
+				$this->current_declaration->date_paid = $date_now->format( 'Y-m-d' );
+				$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_card;
+				$this->current_declaration->status = WDGROIDeclaration::$status_transfer;
+				$this->current_declaration->save();
+				NotificationsEmails::send_notification_roi_payment_success_admin( $this->current_declaration->id );
+				NotificationsEmails::send_notification_roi_payment_success_user( $this->current_declaration->id );
+				
+				LemonwayLib::ask_transfer_funds( $WDGOrganization->get_lemonway_id(), $WDGOrganization->get_royalties_lemonway_id(), $this->current_declaration->get_amount_with_adjustment() );
+				
+				$purchase_key = $transaction_result->TRANS->HPAY->ID;
+
+			} else {
+				NotificationsEmails::send_notification_roi_payment_error_admin( $this->current_declaration->id );
+				$purchase_key = 'error';
+
+			}
+
+			$return_url .= '&response_wkToken=' . $purchase_key . '&with_registered_card=1';
+			wp_redirect( $return_url );
 			exit();
+
+		} else {
+			$input_card_option_save = filter_input( INPUT_POST, 'meanofpayment-card-save' );
+			$wk_token = LemonwayLib::make_token( '', $this->current_declaration->id );
+			$this->current_declaration->payment_token = $wk_token;
+			$this->current_declaration->save();
+			$ask_payment_webkit_url = LemonwayLib::ask_payment_webkit( $WDGOrganization->get_lemonway_id(), $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay(), $wk_token, $return_url, $error_url, $error_url, $input_card_option_save );
+			if ( $ask_payment_webkit_url !== FALSE ) {
+				wp_redirect( $ask_payment_webkit_url);
+				exit();
+			} else {
+				ypcf_debug_log( 'WDG_Page_Controler_DeclarationInput::proceed_payment_card > error - ' .LemonwayLib::get_last_error_code(). ' - ' .LemonwayLib::get_last_error_message() );
+			}
 		}
+
 		return FALSE;
 	}
 	

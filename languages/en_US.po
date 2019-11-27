@@ -8,10 +8,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-04-03 11:52+0200\n"
+"PO-Revision-Date: 2019-11-07 15:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.2.4\n"
 "Language: en_US\n"
 
 # ############################## PROJECT COMMON ################################
@@ -231,7 +231,6 @@ msgstr "pollution prevention"
 
 msgid "produit ou service &eacute;coresponsable"
 msgstr "eco-friendly product ou service"
-
 
 # ################################ PROJECT PAGE ################################
 # THEME - commun
@@ -510,9 +509,7 @@ msgstr "Statistics"
 msgid "Les statistiques de vote et d&apos;investissement du projet"
 msgstr "The project vote and investment statistics"
 
-msgid ""
-"Afin de r&eacute;pondre aux recommandations des autorit&eacute;s financi&egrave;res sur la pr&eacute;vention du risque repr&eacute;"
-"sent&eacute; par l&apos;investissement participatif,"
+msgid "Afin de r&eacute;pondre aux recommandations des autorit&eacute;s financi&egrave;res sur la pr&eacute;vention du risque repr&eacute;sent&eacute; par l&apos;investissement participatif,"
 msgstr "In order to meet the financial authorities recommendations on the prevention of crowdfunding's risks,"
 
 msgid "vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet."
@@ -595,17 +592,14 @@ msgid "Donn&eacute;es enregistr&eacute;es ! Merci !"
 msgstr "Parameters saved! Thank you!"
 
 # THEME - projects/single/warning-lightbox.php
-msgid "WE DO GOOD est une plateforme d'investissement en &eacute;change de royalties."
-msgstr "WE DO GOOD is a fundraising platform where you can invest in exchange of royalties."
+msgid "Bonjour,"
+msgstr "Hello!"
 
-msgid "Vous souhaitez acc&eacute;der à la pr&eacute;sentation du projet %s, actuellement en &eacute;valuation, phase pr&eacute;alable au lancement de la lev&eacute;e de fonds."
-msgstr "You would like to access to the project's presentation currently open to the evaluation by the public (before investment)."
+msgid "Vous &ecirc;tes sur le point d'acc&eacute;der &agrave; la pr&eacute;sentation du projet %s sur WE DO GOOD, plateforme d'investissement en &eacute;change de royalties."
+msgstr "You are about to access the project %s's presentation on WE DO GOOD, a fundraising platform where you can invest in exchange of royalties."
 
-msgid "Vous souhaitez acc&eacute;der &agrave; la pr&eacute;sentation du projet %s, actuellement en lev&eacute;e de fonds."
-msgstr "You would like to access to the project's presentation currently open to investment."
-
-msgid "Vous pouvez y acc&eacute;der sans investir mais la r&eacute;glementation nous impose de vous informer que l'investissement dans des soci&eacute;t&eacute;s non cot&eacute;es comporte des risques sp&eacute;cifiques :"
-msgstr "You can access it without investing but regulation requires us to inform you that investing in a non quoted company entails specific risks:"
+msgid "Vous pouvez acc&eacute;der &agrave; la pr&eacute;sentation du projet sans investir, mais la r&eacute;glementation et notre &eacute;thique nous imposent de vous informer que l'investissement dans des soci&eacute;t&eacute;s non cot&eacute;es comporte des risques sp&eacute;cifiques :"
+msgstr "You can access the presentation without investing but regulation and our ethics require us to inform you that investing in a non quoted company entails specific risks:"
 
 msgid "&gt; Le retour sur investissement d&eacute;pend de la r&eacute;ussite du projet financ&eacute;."
 msgstr "&gt; Return on investment depends on the success of the funded project."
@@ -613,8 +607,23 @@ msgstr "&gt; Return on investment depends on the success of the funded project."
 msgid "&gt; Risque de perte totale ou partielle du capital investi."
 msgstr "&gt; Risk of partial or total loss of the invested capital."
 
+msgid "Ceci est normal : l'aventure entrepreneuriale est risqu&eacute;e et peut &eacute;chouer, mais cela vaut le coup d'essayer pour faire &eacute;merger des id&eacute;es qui am&eacute;liorent le monde dans lequel nous vivons."
+msgstr "This is normal: entrepreneurship is risky and can fail but it’s worth trying to help emerge ideas that improve the world we live in."
+
+msgid "Donc si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez que de l'argent dont vous n'avez pas besoin."
+msgstr "Therefore if you wish to participate and decide to invest, use only the money that you don't need."
+
+msgid "Sinon, vous pouvez simplement donner votre avis sur les projets."
+msgstr "You can also evaluate the projects without investing."
+
+msgid "WE DO GOOD est agr&eacute;&eacute;e par l'ORIAS et membre de l'association professionnelle Financement Participatif France."
+msgstr "WE DO GOOD is approved by the ORIAS and member of the professional association Financement Participatif France."
+
+msgid "Pour les paiements, nous utilisons les services de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l'ACPR."
+msgstr "Our payments provider is Lemon Way, payment institution approved by the ACPR."
+
 msgid "Avez‐vous conscience que, dans le cas o&ugrave; vous investissez, vous pouvez perdre &eacute;ventuellement la totalit&eacute; de votre investissement ?"
-msgstr "In the case of an investment, are you aware that you might lose your investment?"
+msgstr "In the case of an investment, are you aware that you might lose the totality of your investment?"
 
 msgid "Non / En savoir plus"
 msgstr "No (know more)"
@@ -640,7 +649,6 @@ msgstr "Complete my account"
 
 msgid "Merci d'avoir &eacute;valu&eacute; sur ce projet, pensez &agrave; en parler autour de vous !"
 msgstr "Thank you for your evaluation, don't forget to spread the word about this project around you!"
-
 
 # ################################ INVEST PAGES ################################
 # THEME - template-single-campaign-invest.php
@@ -766,9 +774,7 @@ msgstr "your company parameters"
 msgid "sur une ann&eacute;e, vous devez fournir une pi&egrave;ce d&apos;identit&eacute;."
 msgstr "on a single year, please provide us with your ID."
 
-msgid ""
-"Si il s&apos;agit d&apos;une carte nationale d&apos;identit&eacute;, veillez &agrave; ce que le fichier contienne le recto et le "
-"verso de votre carte."
+msgid "Si il s&apos;agit d&apos;une carte nationale d&apos;identit&eacute;, veillez &agrave; ce que le fichier contienne le recto et le verso de votre carte."
 msgstr "If this is an national ID, please check that the file contains the recto and the verso."
 
 msgid "Le fichier doit &ecirc;tre de type jpeg, gif, png ou pdf et son poids inf&eacute;rieur &agrave; 2 Mo."
@@ -945,9 +951,7 @@ msgstr "Account owner:"
 msgid "Code unique (pour identifier votre paiement) :"
 msgstr "Unique code (to identify your payment):"
 
-msgid ""
-"Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du "
-"virement !"
+msgid "Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !"
 msgstr "You need to specify this code as 'beneficiary label' or 'recipient code' when you will order the bank transfer!"
 
 msgid "Une fois le virement effectu&eacute;, cliquez sur"
@@ -975,19 +979,13 @@ msgstr "We are waiting for your bank transfer."
 msgid "Une fois valid&eacute;, vous recevrez deux e-mails :"
 msgstr "Once validated, you will receive two e-mails:"
 
-msgid ""
-"un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement. Cet e-mail contient votre code pour signer le pouvoir"
+msgid "un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement. Cet e-mail contient votre code pour signer le pouvoir"
 msgstr "an e-mail sent by WEDOGOOD to confirm your payment. This e-mail contains your unique code to sign the power"
 
-msgid ""
-"un e-mail envoy&eacute; par notre partenaire Signsquid. Cet e-mail contient un lien vous permettant de signer le pouvoir pour le "
-"contrat d&apos;investissement"
-msgstr ""
-"an e-mail sent by our partner Signsquid. This e-mail contains a link which will let you sign the power for the investment contract"
+msgid "un e-mail envoy&eacute; par notre partenaire Signsquid. Cet e-mail contient un lien vous permettant de signer le pouvoir pour le contrat d&apos;investissement"
+msgstr "an e-mail sent by our partner Signsquid. This e-mail contains a link which will let you sign the power for the investment contract"
 
-msgid ""
-"Une fois valid&eacute;, vous recevrez un e-mail confirmant votre paiement. Votre contrat d&apos;investissement sera joint &agrave; "
-"cet e-mail."
+msgid "Une fois valid&eacute;, vous recevrez un e-mail confirmant votre paiement. Votre contrat d&apos;investissement sera joint &agrave; cet e-mail."
 msgstr "Once validated, you will receive an e-mail confirming your payment. Your investment contract will be enclosed to that e-mail."
 
 msgid "Transaction en cours."
@@ -1011,9 +1009,7 @@ msgstr "You will also get an SMS containing the code to the number that was set:
 msgid "Vous allez recevoir un e-mail de confirmation de paiement."
 msgstr "You are about to receive a payment confirmation e-mail."
 
-msgid ""
-"Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la "
-"r&eacute;solution de ce probl&egrave;me."
+msgid "Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me."
 msgstr "However, there was a problem while generating the contract. Our support teams are working to solve this problem."
 
 msgid "Votre investissement est valid&eacute;."
@@ -1193,4 +1189,3 @@ msgstr "WE DO GOOD's newsletter or website"
 
 msgid "Un article de presse"
 msgstr "A news article"
-

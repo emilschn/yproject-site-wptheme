@@ -270,33 +270,6 @@ UserAccountDashboard.prototype.initProjectList = function() {
 /**
  * Affiche ou masque les détails de paiement
  */
-UserAccountDashboard.prototype.togglePayments = function(){
-	var self = this;
-	
-	$('.user-history-payments-list').each(function(){
-		$(this).hide();
-	});
-	$('.history-projects').each(function(){
-		$(this).find('.show-payments').each(function(){
-			$(this).css("cursor", "pointer");
-			$(this).click(function(){
-				campaign_id=$(this).attr('data-value');
-				$('.history-projects').each(function(){
-					if($(this).attr('data-value')===campaign_id){
-						$(this).find('.user-history-payments-list').toggle(400);
-					}
-					else{
-						$(this).find('.user-history-payments-list').hide(400);
-					}
-				});
-			});
-		});
-	});
-};
-
-/**
- * Affiche ou masque les détails de paiement
- */
 UserAccountDashboard.prototype.toggleRois = function(){
 	var self = this;
 	

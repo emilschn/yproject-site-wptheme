@@ -5,6 +5,7 @@ $WDGUserNotificationsForm = $page_controler->get_user_notifications_form();
 $fields_hidden = $WDGUserNotificationsForm->getFields( WDG_Form_User_Notifications::$field_group_hidden );
 $fields_newsletters = $WDGUserNotificationsForm->getFields( WDG_Form_User_Notifications::$field_group_newsletters );
 $fields_projects = $WDGUserNotificationsForm->getFields( WDG_Form_User_Notifications::$field_group_projects );
+$fields_transactions = $WDGUserNotificationsForm->getFields( WDG_Form_User_Notifications::$field_group_transactions );
 ?>
 
 <h2><?php _e( "Notifications en provenance de WE DO GOOD", 'yproject' ); ?></h2>
@@ -26,6 +27,13 @@ $fields_projects = $WDGUserNotificationsForm->getFields( WDG_Form_User_Notificat
 	<h3><?php _e( "Projets suivis", 'yproject' ); ?></h3>
 
 	<?php foreach ( $fields_projects as $field ): ?>
+		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+	<?php endforeach; ?>
+
+	<h3><?php _e( "Transactions", 'yproject' ); ?></h3>
+
+	<?php foreach ( $fields_transactions as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>

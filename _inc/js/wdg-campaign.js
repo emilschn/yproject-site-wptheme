@@ -225,6 +225,15 @@ var WDGProjectVote = (function($) {
 						$( '#field-would-invest-number-per-year-with-warranty' ).hide( 100 );
 					} );
 				}
+
+				$( '#wdg-lightbox-preinvest-warning button.transparent' ).click( function() {
+					setTimeout( function() {
+						var currentAddress = location.href;
+						var newUrl = currentAddress.split( '#' )[ 0 ];
+						window.location = newUrl + '#vote-share';
+						location.reload( true );
+					}, 100 );
+				} );
 			}
 		},
 		
@@ -266,7 +275,12 @@ var WDGProjectVote = (function($) {
 					$( '#wdg-lightbox-user-details-vote' ).show();
 				} else {
 					$( '#wdg-lightbox-vote-simple-confirmation' ).show();
-					setTimeout( function() { location.reload( true ) }, 1000 );
+					setTimeout( function() {
+						var currentAddress = location.href;
+						var newUrl = currentAddress.split( '#' )[ 0 ];
+						window.location = newUrl + '#vote-share';
+						location.reload( true );
+					}, 1000 );
 				}
 				$( '#wdg-lightbox-vote' ).remove();
 				$( 'a[href="#vote"]' ).click( function( e ) { e.preventDefault(); } );
@@ -275,19 +289,6 @@ var WDGProjectVote = (function($) {
 				$( 'a[href="#vote"]' ).removeClass( 'wdg-button-lightbox-open' );
 				$( 'a[href="#vote"]' ).data( 'lightbox', '' );
 				$( 'a[href="#vote"]' ).attr( 'href', '#' );
-			}
-		},
-		
-		saveVoteUserCallback: function( result ) {
-			var jsonResult = JSON.parse( result );
-			if ( jsonResult.errors == undefined || jsonResult.errors.length == 0 ) {
-				$( '#wdg-lightbox-user-details-vote' ).remove();
-				setTimeout( function() {
-					var currentAddress = location.href;
-					var newUrl = currentAddress.split( '#' )[ 0 ];
-					window.location = newUrl + '#vote-share';
-					location.reload( true );
-				}, 1000 );
 			}
 		}
 	};

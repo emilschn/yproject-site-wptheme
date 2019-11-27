@@ -900,6 +900,14 @@ body input[type=text], body input[type=number], body input[type=email], body sel
 	margin-top: -25px;
 }
 
+.db-form.v3 .field span.tooltiptext {
+	display: block;
+	width: 100%;
+	background: #EACDCB;
+	height: 50px;
+	line-height: 50px;
+}
+
 .db-form.v3 .field div.field-description {
 	font-size: 14px;
 	text-align: justify;

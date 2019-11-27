@@ -1393,6 +1393,16 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 		} );
 		self.initQtip();
 
+		$( 'span.authentication-more-info a' ).click( function( e ) {
+			e.preventDefault();
+			$( this ).siblings( "span" ).toggle();
+			if ( $( this ).text() == '+' ) {
+				$( this ).text( '-' );
+			} else {
+				$( this ).text( '+' );
+			}
+		} );
+
 	}).fail(function(){
 		$('#ajax-contacts-load').after("<em>Le chargement du tableau a échoué</em>");
 		$('#ajax-loader-img').hide();//On cache la roue de chargement.
