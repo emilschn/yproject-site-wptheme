@@ -7,6 +7,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_User_Identity_Docs::$field_group_hidden );
 $fields_files = $page_controler->get_form()->getFields( WDG_Form_User_Identity_Docs::$field_group_files );
 $fields_files_orga = $page_controler->get_form()->getFields( WDG_Form_User_Identity_Docs::$field_group_files_orga );
+$fields_phone_notification = $page_controler->get_form()->getFields( WDG_Form_User_Identity_Docs::$field_group_phone_notification );
+$fields_phone_number = $page_controler->get_form()->getFields( WDG_Form_User_Identity_Docs::$field_group_phone_number );
 $form_errors = $page_controler->get_form_errors();
 ?>
 
@@ -68,6 +70,21 @@ $form_errors = $page_controler->get_form_errors();
 		<p class="align-left resp-item-5">
 			<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
 		</p>
+
+		<?php foreach ( $fields_phone_notification as $field ): ?>
+			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+		<?php endforeach; ?>
+		<div class="align-left phone-info">
+			<?php _e( "Ce SMS sera envoy&eacute; uniquement lorsque tous les documents sont valid&eacute;s, ou en cas de documents incomplets ou refus&eacute;s.", 'yproject' ); ?>
+		</div>
+
+		<div class="phone-number-hidden">
+			<?php foreach ( $fields_phone_number as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+		</div>
 
 		<div class="align-center resp-item-6">
 			<button type="submit" class="button save red"><?php _e( "Envoyer les documents", 'yproject' ); ?></button>
