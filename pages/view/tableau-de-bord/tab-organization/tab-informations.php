@@ -14,7 +14,6 @@ if ( isset( $organization_obj ) ) {
 
 <div id="stat-subtab-informations" class="stat-subtab">
 
-	<h3><?php _e( "&Eacute;diter l'organisation portant le projet", 'yproject' ); ?></h3>
 	<form id="orgaedit_form" action="" method="POST" enctype="multipart/form-data" class="db-form v3 full center bg-white" data-action="save_edit_organization" novalidate>
 		
 		<?php foreach ( $fields_hidden as $field ): ?>
@@ -51,7 +50,7 @@ if ( isset( $organization_obj ) ) {
 			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 		<?php endforeach; ?>
 
-		<h2><?php _e( "Si&egrave;ge social" ); ?></h2>
+		<h3><?php _e( "Si&egrave;ge social" ); ?></h3>
 		<?php foreach ( $fields_address as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
