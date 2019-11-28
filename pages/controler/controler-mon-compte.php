@@ -517,5 +517,13 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	public function get_wallet_to_bankaccount_result() {
 		return $this->wallet_to_bankaccount_result;
 	}
+
+
+/******************************************************************************/
+// CONTEXTE
+/******************************************************************************/	
+	public function get_form_css() {
+		return 'db-form form-register v3 full';
+	}
 	
 }
