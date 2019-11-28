@@ -7,7 +7,7 @@
 	$fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_file );
 ?>
 
-<div class="db-form v3">
+<div class="<?php echo $page_controler->get_form_css();?>">
 	<?php if ( $WDGOrganization->has_saved_card_expiration_date() ): ?>
 		<h3><?php _e( "Carte bancaire", 'yproject' ); ?></h3>
 
@@ -44,7 +44,9 @@
 	<?php endif; ?>
 
 
-	<h3><?php _e( "Relev&eacute; d'identit&eacute; bancaire", 'yproject' ); ?></h3>
+	<div class="align-justify">
+		<h3><?php _e( "Relev&eacute; d'identit&eacute; bancaire", 'yproject' ); ?></h3>
+	</div>
 	<p class="align-justify">
 		<?php if ( !$WDGOrganization->can_register_lemonway() ): ?>
 			<?php _e( "Pensez &agrave; renseigner les informations de l'organisation pour que notre prestataire puisse valider votre RIB.", 'yproject' ); ?><br><br>

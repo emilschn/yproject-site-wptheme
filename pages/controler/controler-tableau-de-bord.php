@@ -24,6 +24,8 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $form_user_details;
 	private $form_user_feedback;
 	private $form_user_identitydocs;
+	
+	private $controler_title;
 	/**
 	 * @var ATCF_Campaign
 	 */
@@ -93,6 +95,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$core->include_form( 'organization-details' );
 		$core->include_form( 'user-details' );
 		$core->include_form( 'user-identitydocs' );
+		$core->include_form( 'user-bank' );
 		
 		$this->init_declarations();
 		$this->init_form_document();
@@ -109,6 +112,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$current_organization->submit_transfer_wallet_lemonway();
 
 
+		$this->controler_title = 'controler-tableau-de-bord';
 	}
 	
 /******************************************************************************/
@@ -246,6 +250,9 @@ public function get_user_form_feedback() {
 		return 'db-form v3 full center bg-white';
 	}
 
+	public function get_controler_title() {
+		return $this->controler_title;
+	}
 
 /******************************************************************************/
 // CONTROLE FORMULAIRES

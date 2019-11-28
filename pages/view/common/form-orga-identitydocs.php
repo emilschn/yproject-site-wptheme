@@ -20,10 +20,12 @@
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
 
-	<?php foreach ( $fields_files as $field ): ?>
-		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
-	<?php endforeach; ?>
+	<?php if ($page_controler->get_controler_title() == 'controler-mon-compte'): ?>
+		<?php foreach ( $fields_files as $field ): ?>
+			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+		<?php endforeach; ?>
+	<?php endif; ?>
 
 	<?php foreach ( $fields_files_orga as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
