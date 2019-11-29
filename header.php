@@ -210,8 +210,7 @@
 			<?php $_SESSION['has_displayed_connected_lightbox'] = $current_user->ID; ?>
 			<div class="timeout-lightbox wdg-lightbox">
 				<div class="wdg-lightbox-click-catcher"></div>
-				<?php 
-				get_currentuserinfo();
+				<?php
 				$user_name_str = $current_user->user_firstname;
 				if ($user_name_str == '') {
 					$user_name_str = $current_user->user_login;
