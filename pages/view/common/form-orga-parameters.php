@@ -5,6 +5,7 @@
 	$fields_hidden = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_hidden );
 	$fields_complete = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_complete );
 	$fields_address = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_address );
+	$WDGUser_current = WDGUser::current();
 ?>
 
 <form method="POST" class="<?php echo $page_controler->get_form_css();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_details' ); ?>" novalidate>
@@ -43,6 +44,17 @@
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
 	
+	<?php if ( $WDGUser_current->is_admin() ): ?>
+		<div class="field admin-theme">
+			<label for="org_id_quickbooks"><?php _e( "ID Quickbooks", 'yproject' ); ?></label>
+			<div class="field-container">
+				<span class="field-value">
+					<input type="text" name="org_id_quickbooks" value="<?php echo $WDGOrganization->get_id_quickbooks(); ?>">
+				</span>
+			</div>
+		</div>
+	<?php endif; ?>
+
 	<p class="align-left">
 		<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
 	</p>

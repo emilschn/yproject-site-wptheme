@@ -578,7 +578,7 @@ var WDGNavFunctions = (function($) {
 					$( '#menu .btn-user' ).append( infoDecoded[ 'userinfos' ][ 'image_dom_element' ] );
 					
 					$( '#submenu-user.not-connected .menu-loading-init' ).hide();
-					$( '#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name' ).text( infoDecoded[ 'userinfos' ][ 'username' ] );
+					$( '#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name' ).html( infoDecoded[ 'userinfos' ][ 'username' ] );
 					var lengthInfoProjects = infoDecoded[ 'projectlist' ].length;
 					for ( var i = 0; i < lengthInfoProjects; i++ ) {
 						itemProject = infoDecoded[ 'projectlist' ][ i ];

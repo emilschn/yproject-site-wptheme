@@ -3,7 +3,7 @@
 	global $country_list;
 ?>
 
-<div id="stat-subtab-parameters" class="stat-subtab">
+<div id="stat-subtab-parameters" class="stat-subtab hidden">
     <?php 
    		locate_template( array( 'pages/view/common/form-parameters.php'  ), true );
     ?>	

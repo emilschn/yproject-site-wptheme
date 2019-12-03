@@ -5,7 +5,7 @@
         $WDGOrganization = $organization_obj;
 ?>
 
-<div id="stat-subtab-orga-bank" class="stat-subtab">
+<div id="stat-subtab-orga-bank" class="stat-subtab hidden">
     <?php 
         locate_template( array( 'pages/view/common/form-orga-bank.php'  ), true );
     ?>	
