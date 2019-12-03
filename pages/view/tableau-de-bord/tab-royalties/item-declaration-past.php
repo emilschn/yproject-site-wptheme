@@ -7,9 +7,7 @@ $class_status = ( $declaration->get_status == WDGROIDeclaration::$status_failed 
 $form_bill = $page_controler->get_form_declaration_bill( $declaration->id );
 $fields_hidden = $form_bill->getFields( WDG_Form_Declaration_Bill::$field_group_hidden );
 $fields_file = $form_bill->getFields( WDG_Form_Declaration_Bill::$field_group_file );
-?>
-			
-<?php
+
 $nb_fields = $page_controler->get_campaign()->get_turnover_per_declaration();
 $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' );
 ?>
@@ -188,7 +186,7 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 					<?php endforeach; ?>
 
 					<?php if ( $page_controler->can_access_admin() ): ?>
-					<button type="submit" class="button admin-theme clear"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+						<button type="submit" class="button admin-theme clear"><?php _e( "Enregistrer", 'yproject' ); ?></button>
 					<?php endif; ?>
 
 					<div class="clear"></div>
