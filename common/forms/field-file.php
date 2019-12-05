@@ -1,16 +1,19 @@
 <?php global $wdg_current_field; ?>
 <?php
+$WDGUser_current = WDGUser::current();
 $date_upload = '';
 $message_instead_of_field = '';
 $display_refused_alert = FALSE;
+$keep_editing_for_admin = FALSE;
 if ( isset( $wdg_current_field[ 'options' ] ) ) {
 	$date_upload = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'date_upload' ] ) ) ? $wdg_current_field[ 'options' ][ 'date_upload' ] : $wdg_current_field[ 'options' ];
 	$message_instead_of_field = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'message_instead_of_field' ] ) ) ? $wdg_current_field[ 'options' ][ 'message_instead_of_field' ] : '';
 	$display_refused_alert = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'display_refused_alert' ] ) ) ? $wdg_current_field[ 'options' ][ 'display_refused_alert' ] : FALSE;
+	$keep_editing_for_admin = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'keep_editing_for_admin' ] ) ) ? $wdg_current_field[ 'options' ][ 'keep_editing_for_admin' ] : FALSE;
 }
 ?>
 
-<?php if ( !empty( $message_instead_of_field ) ): ?>
+<?php if ( !empty( $message_instead_of_field ) && ( !$keep_editing_for_admin || !$WDGUser_current->is_admin() ) ): ?>
 <div class="wdg-message confirm">
 	<?php echo $message_instead_of_field; ?>
 </div>
