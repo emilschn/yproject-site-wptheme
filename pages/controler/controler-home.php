@@ -47,10 +47,10 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 		} else {
 			$stats_array = json_decode($stats, true);
 			$this->stats_list = array(
-				'count_amount'	=> $stats_array['count_amount'],
-				'count_people'	=> $stats_array['count_people'],
-				'nb_projects'	=> $stats_array['nb_projects'],
-				'count_roi'		=> $stats_array['count_roi']
+				'count_amount'				=> $stats_array['count_amount'],
+				'count_people'				=> $stats_array['count_people'],
+				'nb_projects'				=> $stats_array['nb_projects'],
+				'royaltying_projects'		=> $stats_array['royaltying_projects']
 			);
 		}
 	}

@@ -71,8 +71,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<p>
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="money" />
 		<span>
-			<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?></span><br>
-			<?php _e( "versements", 'yproject' ); ?>
+			<span><?php echo number_format( $stats_list[ 'royaltying_projects' ], 0, '', ' ' ); ?></span><br>
+			<?php _e( "entreprises royaltisent*", 'yproject' ); ?>
 		</span>
 	</p>
 </div>
@@ -129,7 +129,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
                 <select id="project-filter-location" class="project-filter-select">
                     <option value="all" selected="selected"><?php _e( "Toutes les r&eacute;gions", 'yproject' ); ?></option>
                     <?php foreach ( $region_list as $region => $dpt_list ): ?>
-						<option value="<?php echo implode($dpt_list, ','); ?>"><?php echo $region; ?></option>
+						<option value="<?php echo implode(',', $dpt_list); ?>"><?php echo $region; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

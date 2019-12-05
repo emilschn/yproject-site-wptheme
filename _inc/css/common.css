@@ -1028,22 +1028,29 @@ body.home section.project-stats > div {
 	width: calc(100% - 20px);
 	max-width: 1280px;
 	margin: auto;
+	text-align: left;
 }
 body.home section.project-stats > div div.left {
 	width: calc(100% / 3 - 16px);
-	text-align: left;
 	font-size: 18pt;
 	margin-left: 15px;
+	display: flex;
+	justify-content: flex-start;
 }
-body.home section.project-stats > div div.left img {
+body.home section.project-stats > div div.left div img {
 	float: left;
 	margin-right: 20px;
 }
-body.home section.project-stats > div div.left span span {
+body.home section.project-stats > div div.left div span {
 	font-size: 23pt;
 	letter-spacing: 2px;
 	font-weight: bold;
 	line-height: 50px;
+	text-align: left;
+}
+body.home section.project-stats > div div.left div p {
+	font-size: 10pt;
+	text-align: left;
 }
 
 /*******************************************************************************

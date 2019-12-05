@@ -35,28 +35,41 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <section class="project-stats">
 	<div>
 		<div class="left">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-montgolfiere-noir-h100.png" alt="montgolfiere" width="115" height="100">
-			<span>
+			<div>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-montgolfiere-noir-h100.png" alt="montgolfiere" width="115" height="100">
+			</div>
+			<div>
 				<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span><br>
 					<?php _e( "lev&eacute;s", 'yproject' ); ?>
-			</span>
+			</div>
 		</div>
 		<div class="left">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-ensemble-noir-h100.png" alt="ensemble" width="139" height="100">
-			<span>
+			<div>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-ensemble-noir-h100.png" alt="ensemble" width="139" height="100">
+			</div>
+			<div>
 				<span><?php echo number_format( $stats_list[ 'count_people' ], 0, '', ' ' ); ?></span><br>
 					<?php _e( "investisseurs", 'yproject' ); ?>
-			</span>
+			</div>
 		</div>
 		<div class="left">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-monnaie-noir-h100.png" alt="monnaie" width="102" height="100">
-			<span>
-				<span><?php echo number_format( $stats_list[ 'count_roi' ], 0, '', ' ' ); ?></span><br>
-				<?php _e( "versements de royalties", 'yproject' ); ?>
-			</span>
+			<div>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-monnaie-noir-h100.png" alt="monnaie" width="102" height="100">
+			</div>
+			<div>
+				<span><?php echo number_format( $stats_list[ 'royaltying_projects' ], 0, '', ' ' ); ?></span><br>
+				<?php _e( "entreprises royaltisent*", 'yproject' ); ?>
+				<!-- <span class="definition"> -->
+					<p>
+						ROYALTISER, v. intr. XXIe siècle. d'apr. angl. Verser une partie de son chiffre d'affaires à ses merveilleux investisseurs. "Un projet qui royaltise plus que prévu"
+					</p>
+				<!-- </span> -->
+			</div>
 		</div>
-			<div class="clear"></div>
-		</div>
+		
+		<div class="clear"></div>
+
+	</div>
 </section>
 				
 <?php
