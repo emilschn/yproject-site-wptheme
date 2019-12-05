@@ -9,7 +9,7 @@
     $form_feedback = $page_controler->get_user_form_feedback();
 ?>
 
-<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css();?>">
+<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?>">
 		
     <?php foreach ( $fields_hidden as $field ): ?>
         <?php global $wdg_current_field; $wdg_current_field = $field; ?>

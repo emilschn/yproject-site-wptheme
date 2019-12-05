@@ -8,7 +8,7 @@
 	$WDGUser_current = WDGUser::current();
 ?>
 
-<form method="POST" class="<?php echo $page_controler->get_form_css();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_details' ); ?>" novalidate>
+<form method="POST" class="<?php echo $page_controler->get_form_css_classes();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_details' ); ?>" novalidate>
 		
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>

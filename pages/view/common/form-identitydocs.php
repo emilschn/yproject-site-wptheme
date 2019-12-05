@@ -6,7 +6,7 @@
     $fields_files = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files );
 ?>
 
-<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css();?>">
+<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?>">
 	
 	<p class="align-justify">
 		<?php _e( "Afin d'authentifier votre compte, Lemon Way (prestataire de services de paiement agr&eacute;&eacute;) a besoin de deux documents justificatifs d'identit&eacute;.", 'yproject' ); ?>

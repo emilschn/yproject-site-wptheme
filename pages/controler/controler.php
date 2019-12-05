@@ -9,6 +9,7 @@ class WDG_Page_Controler {
 	private $show_user_pending_preinvestment;
 	private $show_user_pending_investment;
 	private $show_user_needs_authentication;
+	private $controler_name;
 	
 	public function __construct() {
 		ypcf_session_start();
@@ -36,6 +37,10 @@ class WDG_Page_Controler {
 		$this->db_cache_manager->set_cache( $key, $value, $duration, $version );
 	}
 	
+	public function get_controler_name () {
+		return $this->controler_name;
+	}
+
 	/**
 	 * Retourne le titre de la page
 	 * @return string

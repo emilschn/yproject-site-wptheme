@@ -7,7 +7,7 @@
 	$fields_files_orga = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files_orga );
 ?>
 
-<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_identitydocs' ); ?>">
+<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_identitydocs' ); ?>">
 	
 	<p class="align-justify">
 		<?php _e( "Les justificatifs d'identit&eacute; sont imm&eacute;diatement transmis, puis v&eacute;rifi&eacute;s sous 48h par notre prestataire de paiement, Lemon Way.", 'yproject' ); ?>
@@ -20,7 +20,7 @@
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
 
-	<?php if ($page_controler->get_controler_title() == 'controler-mon-compte'): ?>
+	<?php if ($page_controler->get_controler_name()() == 'mon-compte'): ?>
 		<?php foreach ( $fields_files as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>

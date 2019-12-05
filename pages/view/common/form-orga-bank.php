@@ -7,7 +7,7 @@
 	$fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_file );
 ?>
 
-<div class="<?php echo $page_controler->get_form_css();?>">
+<div class="<?php echo $page_controler->get_form_css_classes();?>">
 	<?php if ( $WDGOrganization->has_saved_card_expiration_date() ): ?>
 		<h3><?php _e( "Carte bancaire", 'yproject' ); ?></h3>
 
@@ -64,7 +64,7 @@
 		<?php echo $WDGOrganization->get_document_lemonway_error( LemonwayDocument::$document_type_bank ); ?><br>
 	<?php endif; ?>
 
-	<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_bank' ); ?>">
+	<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_bank' ); ?>">
 			
 		<?php foreach ( $fields_hidden as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
