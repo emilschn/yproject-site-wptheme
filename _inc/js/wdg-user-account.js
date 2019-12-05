@@ -1,6 +1,7 @@
 function UserAccountDashboard() {
 	this.initWithHash();
 	this.initMenu();
+	this.initPhoneNotification();
 }
 
 /**
@@ -51,7 +52,7 @@ UserAccountDashboard.prototype.initMenu = function() {
 /**
  * Change d'onglet
  */
-UserAccountDashboard.prototype.switchTab = function( sType, clickedElement ) {
+UserAccountDashboard.prototype.switchTab = function( sType ) {
 	
 	if ( $( 'ul.nav-menu li#menu-item-' + sType ).length > 0 ) {
 		$( 'ul.nav-menu li' ).removeClass( 'selected' );
@@ -299,7 +300,27 @@ UserAccountDashboard.prototype.initTaxExemption = function(){
 	} );
 };
 
+/**
+ * Gestion de l'affichage de l'affichage des notifications SMS
+ */
+UserAccountDashboard.prototype.initPhoneNotification = function(){
+	if ( $( '#-phone-notification' ).is( ':checked' ) ) {
+		$( '.phone-number-hidden' ).show();
+	} else {
+		$( '.phone-number-hidden' ).hide();
+	}
+
+	$( '#-phone-notification' ).parent().click( function() {
+		if ( $( '#-phone-notification' ).is( ':checked' ) ) {
+			$( '.phone-number-hidden' ).slideDown( 300 );
+		} else {
+			$( '.phone-number-hidden' ).slideUp( 300 );
+		}
+	} );
+};
+
 $(function(){
-    new UserAccountDashboard();
-    
+	jQuery(document).ready( function($) {
+		new UserAccountDashboard();
+	} );
 });

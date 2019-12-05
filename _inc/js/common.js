@@ -908,7 +908,7 @@ var WDGFormsFunctions = (function($) {
 					WDGLightboxFunctions.hideAll();
 				} );
 			} );
-			
+						
 			$( 'label.file-label' ).on( 'dragover', function( e ) {
 				$( this ).addClass( 'dragover' );
 				e.stopPropagation();

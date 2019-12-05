@@ -13,7 +13,6 @@ $invest_url_href = home_url( '/connexion/' ) . '?source=project&redirect-invest=
 $user_name_str = '';
 
 if (is_user_logged_in()) {
-	get_currentuserinfo();
 	$user_name_str = $current_user->user_firstname;
 	if ($user_name_str == '') {
 		$user_name_str = $current_user->user_login;
@@ -39,7 +38,7 @@ if (is_user_logged_in()) {
 			$campaign_status = $campaign->campaign_status();
 			switch ($campaign_status) {
 				case ATCF_Campaign::$campaign_status_vote: ?>
-					<?php if ( $WDGUser_current->has_voted_on_campaign( $campaign->ID ) ): ?>
+					<?php if ( is_user_logged_in() && $WDGUser_current->has_voted_on_campaign( $campaign->ID ) ): ?>
 						<a href="#preinvest-warning" class="button red wdg-button-lightbox-open" data-lightbox="preinvest-warning"><?php _e( "Pr&eacute;-investir", 'yproject' ); ?></a>
 
 					<?php elseif ( $campaign->time_remaining_str() != '-' ): ?>

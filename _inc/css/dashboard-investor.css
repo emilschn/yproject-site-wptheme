@@ -146,6 +146,12 @@ body.template-mon-compte div#container div#content #item-body-wallet ul.user-his
 	color: #CFB7B7;
 }
 
+
+body.template-mon-compte div#container div#content #item-body-identitydocs .phone-info {
+	margin: -32px 0px 16px;
+	padding-left: 32px;
+}
+
 body.template-mon-compte div#container div#content a.download-certificate {
 	display: inline-block;
 	padding: 16px 32px;
@@ -410,4 +416,14 @@ body.template-mon-compte div#container div#content div#item-body-bank div.user-r
 	body.template-mon-compte div#container div#content nav.visible button#swap-menu {
 		left: -2px;
 	}
+}
+
+@media screen and (max-width: 700px) {
+	body.template-mon-compte div#container div#content main #tax-exemption-form button {
+		width: 100%;
+	}
+	body.template-mon-compte div#container div#content main #tax-exemption-form button.transparent {
+		margin-bottom: 16px;
+	}
+
 }
