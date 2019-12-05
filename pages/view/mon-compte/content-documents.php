@@ -96,7 +96,7 @@ $date_start_for_wdg = 2018;
 
 	<button type="button" class="button transparent half left"><?php _e( "Annuler", 'yproject' ); ?></button>
 	<button type="submit" class="button red half right"><?php _e( "Enregistrer ma demande de dispense", 'yproject' ); ?></button>
-	
+	<div class="clear"></div>
 </form>
 
 <?php endif; ?>
