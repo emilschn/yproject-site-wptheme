@@ -59,6 +59,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		wp_enqueue_script( 'datatable-colreorder-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.colReorder.min.js', array( 'datatable-script' ), true, true );
 		wp_enqueue_style( 'datatable-colreorder-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/colReorder.dataTables.min.css', null, false, 'all' );
 
+		wp_enqueue_script( 'datatable-responsive-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.responsive.min.js', array( 'datatable-script' ), true, true );
+		wp_enqueue_style( 'datatable-responsive-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/responsive.dataTables.min.css', null, false, 'all' );
+
 		wp_enqueue_script( 'datatable-select-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.select.min.js', array( 'datatable-script' ), true, true );
 		wp_enqueue_style('datatable-select-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/select.dataTables.min.css', null, false, 'all' );
 

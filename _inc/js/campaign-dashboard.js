@@ -1186,7 +1186,8 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 		$('#ajax-loader-img').hide();//On cache la roue de chargement.
 
 		//Création du tableau dynamique dataTable
-		self.table = $('#contacts-table').DataTable({
+		self.table = $('#contacts-table').DataTable({       
+			responsive: true,
 			scrollX: '100%',
 			scrollY: '70vh', //Taille max du tableau : 70% de l'écran
 			scrollCollapse: true, //Diminue taille du tableau si peu d'éléments*/
@@ -1200,7 +1201,6 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 			fixedColumns : {
 				leftColumns: result_contacts_table['id_column_index']+1
 			},
-
 
 			columnDefs: [
 				{

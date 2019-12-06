@@ -621,6 +621,9 @@ $input_user_stats = filter_input( INPUT_GET, 'user_stats' );
 <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/dataTables.colReorder.min.js"></script>
 <link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/dataTables/colReorder.dataTables.min.css" type="text/css" media="screen" />
 
+<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/dataTables.responsive.min.js"></script>
+<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/dataTables/responsive.dataTables.min.css" type="text/css" media="screen" />
+
 <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/dataTables/dataTables.select.min.js"></script>
 <link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/dataTables/select.dataTables.min.css" type="text/css" media="screen" />
 
