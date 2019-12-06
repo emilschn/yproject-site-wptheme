@@ -76,6 +76,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		</span>
 	</p>
 </div>
+<div id="wdg-project-definition"><?php _e( "definition_royaltiser", 'yproject' ); ?></div>
 				
 <?php
 /******************************************************************************/
