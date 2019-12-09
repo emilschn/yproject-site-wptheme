@@ -20,7 +20,7 @@
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
 
-	<?php if ($page_controler->get_controler_name()() == 'mon-compte'): ?>
+	<?php if ($page_controler->get_controler_name() == 'mon-compte'): ?>
 		<?php foreach ( $fields_files as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>

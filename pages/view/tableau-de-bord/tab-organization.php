@@ -10,9 +10,9 @@
 <ul class="menu-onglet">
   <li><a href="#organization" data-subtab="orga-parameters" class="focus<?php if ( !$page_controler->get_campaign_organization()->has_filled_invest_infos() || !$page_controler->get_campaign_organization()->can_register_lemonway()): ?> needs-authentication<?php endif; ?>"><?php _e( "Informations", 'yproject' ); ?></a></li>
   <li><a href="#organization" data-subtab="orga-identitydocs" <?php if ( !$page_controler->get_campaign_organization()->has_sent_orga_documents() ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Justificatifs", 'yproject' ); ?></a></li>
-  <li><a href="#organization" data-subtab="orga-bank" <?php if ( !$page_controler->get_campaign_organization()->has_saved_iban() ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Infos bancaires", 'yproject' ); ?></a></li>
+  <li><a href="#organization" data-subtab="orga-bank" <?php if ( !$page_controler->get_campaign_organization()->has_saved_iban() ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Informations bancaires", 'yproject' ); ?></a></li>
   <li><a href="#organization" data-subtab="parameters" <?php if ( !$page_controler->get_campaign_author()->has_filled_invest_infos($page_controler->get_campaign()->funding_type()) ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Représentant légal", 'yproject' ); ?></a></li>
-  <li><a href="#organization" data-subtab="identitydocs" <?php if ( !$page_controler->get_campaign_author()->is_lemonway_registered() ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Justificatifs du RL", 'yproject' ); ?></a></li>
+  <li><a href="#organization" data-subtab="identitydocs" <?php if ( !$page_controler->get_campaign_author()->is_lemonway_registered() ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Justificatifs du représentant légal", 'yproject' ); ?></a></li>
 </ul>
 
 <?php
