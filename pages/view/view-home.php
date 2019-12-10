@@ -59,11 +59,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<div>
 				<span><?php echo number_format( $stats_list[ 'royaltying_projects' ], 0, '', ' ' ); ?></span><br>
 				<?php _e( "entreprises royaltisent*", 'yproject' ); ?>
-				<p><?php _e( "definition_royaltiser", 'yproject' ); ?></p>
 			</div>
 		</div>
 		
 		<div class="clear"></div>
+				<p><?php _e( "definition_royaltiser", 'yproject' ); ?></p>
 
 	</div>
 </section>

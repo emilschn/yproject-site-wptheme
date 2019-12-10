@@ -1051,7 +1051,7 @@ body.home section.project-stats > div div.left div span {
 	line-height: 50px;
 	text-align: left;
 }
-body.home section.project-stats > div div.left div p {
+body.home section.project-stats > div p {
 	font-size: 10pt;
 	text-align: justify;
 }
