@@ -5,6 +5,7 @@
 	$fields_hidden = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_hidden );
 	$fields_complete = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_complete );
 	$fields_address = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_address );
+	$fields_admin = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_admin );
 	$WDGUser_current = WDGUser::current();
 ?>
 
@@ -44,14 +45,12 @@
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
 	
-	<?php if ( $WDGUser_current->is_admin() ): ?>
+	<?php if ( $WDGUser_current->is_admin() ): ?>		
 		<div class="field admin-theme">
-			<label for="org_id_quickbooks"><?php _e( "ID Quickbooks", 'yproject' ); ?></label>
-			<div class="field-container">
-				<span class="field-value">
-					<input type="text" name="org_id_quickbooks" value="<?php echo $WDGOrganization->get_id_quickbooks(); ?>">
-				</span>
-			</div>
+			<?php foreach ( $fields_admin as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
 		</div>
 	<?php endif; ?>
 
