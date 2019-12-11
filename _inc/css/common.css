@@ -1018,7 +1018,7 @@ footer > .footer-container > div.licence a{
 * HOME - STATS
 *******************************************************************************/
 body.home section.project-stats {
-	padding: 40px 0px;
+	padding: 40px 0 0px;
 	color: #333333;
 	background: #FFFFFF;
 }
@@ -1053,7 +1053,7 @@ body.home section.project-stats > div div.left div span {
 }
 body.home section.project-stats > div p {
 	font-size: 10pt;
-	text-align: justify;
+	text-align: center;
 }
 
 /*******************************************************************************
@@ -1239,7 +1239,7 @@ body.template-les-projets header .header-container > div > div#wdg-project-stats
 	margin-right: 37px;
 }
 body.template-les-projets header .header-container > div > div#wdg-project-stats p span {
-	font-size: 20pt;
+	font-size: 16pt;
 }
 body.template-les-projets header .header-container > div > div#wdg-project-stats p span span {
 	font-size: 25pt;
