@@ -131,6 +131,27 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 				<input type="submit" name="send_option" value="Envoyer test" class="button admin-theme">
 				<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
 			</form>
+
+			<br><br>
+			<hr>
+			<br><br>
+
+			<?php if ( $page_controler->is_campaign_funded() ): ?>
+			<a href="#contacts" data-mailtype="end-success-public" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications de succ&egrave;s de campagne publique", 'yproject' ); ?></a><br><br>
+			<a href="#contacts" data-mailtype="end-success-private" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications de succ&egrave;s de campagne priv&eacute;e", 'yproject' ); ?></a><br><br>
+			<?php else: ?>
+			<a href="#contacts" data-mailtype="end-pending-goal" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications d'attente de validation de seuil de campagne", 'yproject' ); ?></a><br><br>
+			<a href="#contacts" data-mailtype="end-failure" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications d'&eacute;chec de campagne", 'yproject' ); ?></a><br><br>
+			<?php endif; ?>
+		
+			<form id="form-notifications-end" action="<?php echo admin_url( 'admin-post.php?action=send_project_notifications_end' ); ?>" method="POST" class="hidden align-left">
+				<span id="notifications_content"></span><br>
+				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
+				<input type="hidden" id="mail_type" name="mail_type" value="">
+				<input type="submit" name="send_option" value="Envoyer test" class="button admin-theme">
+				<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
+			</form>
+				
 		</div>
 	
 	
