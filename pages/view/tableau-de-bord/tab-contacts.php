@@ -137,11 +137,14 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 			<br><br>
 
 			<?php if ( $page_controler->is_campaign_funded() ): ?>
-			<a href="#contacts" data-mailtype="end-success-public" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications de succ&egrave;s de campagne publique", 'yproject' ); ?></a><br><br>
-			<a href="#contacts" data-mailtype="end-success-private" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications de succ&egrave;s de campagne priv&eacute;e", 'yproject' ); ?></a><br><br>
+				<?php if ( $page_controler->get_campaign()->is_hidden() ): ?>
+					<a href="#contacts" data-mailtype="end-success-private" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications de succ&egrave;s de campagne priv&eacute;e", 'yproject' ); ?></a><br><br>
+				<?php else: ?>
+					<a href="#contacts" data-mailtype="end-success-public" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications de succ&egrave;s de campagne publique", 'yproject' ); ?></a><br><br>
+				<?php endif; ?>
 			<?php else: ?>
-			<a href="#contacts" data-mailtype="end-pending-goal" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications d'attente de validation de seuil de campagne", 'yproject' ); ?></a><br><br>
-			<a href="#contacts" data-mailtype="end-failure" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications d'&eacute;chec de campagne", 'yproject' ); ?></a><br><br>
+				<a href="#contacts" data-mailtype="end-pending-goal" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications d'attente de validation de seuil de campagne", 'yproject' ); ?></a><br><br>
+				<a href="#contacts" data-mailtype="end-failure" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications d'&eacute;chec de campagne", 'yproject' ); ?></a><br><br>
 			<?php endif; ?>
 		
 			<form id="form-notifications-end" action="<?php echo admin_url( 'admin-post.php?action=send_project_notifications_end' ); ?>" method="POST" class="hidden align-left">
