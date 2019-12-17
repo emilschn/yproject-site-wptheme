@@ -881,32 +881,28 @@ var WDGFormsFunctions = (function($) {
 		},
 		
 		initFileInput: function() {
-			$( '.field-file input' ).each( function() {
-				var self = $( this ),
-				label_element = self.next( 'label' ),
-				labelVal = label_element.html();
+			$( '.field-file input' ).on( 'change', function( e ) {
+				var label_element = $( this ).next( 'label' );
+				var labelVal = label_element.html();
+				var fileName = '';
 
-				self.on( 'change', function( e ) {
-					var fileName = '';
+				if( this.files && this.files.length > 1 )
+					fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+				else if( e.target.value )
+					fileName = e.target.value.split( '\\' ).pop();
 
-					if( this.files && this.files.length > 1 )
-						fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-					else if( e.target.value )
-						fileName = e.target.value.split( '\\' ).pop();
-
-					if( fileName ) {
-						label_element.find( 'span' ).html( fileName );
-						label_element.find( 'span.hide-when-filled' ).hide();
-					} else {
-						label_element.html( labelVal );
-					}
-					
-					// Exécutés quand chargement de fichier appelé depuis lightbox
-					label_element.show();
-					label_element.css( 'display', 'inline-block' );
-					label_element.next( '.displayed-responsive' ).hide();
-					WDGLightboxFunctions.hideAll();
-				} );
+				if( fileName ) {
+					label_element.find( 'span' ).html( fileName );
+					label_element.find( 'span.hide-when-filled' ).hide();
+				} else {
+					label_element.html( labelVal );
+				}
+				
+				// Exécutés quand chargement de fichier appelé depuis lightbox
+				label_element.show();
+				label_element.css( 'display', 'inline-block' );
+				label_element.next( '.displayed-responsive' ).hide();
+				WDGLightboxFunctions.hideAll();
 			} );
 						
 			$( 'label.file-label' ).on( 'dragover', function( e ) {

@@ -490,6 +490,14 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		$( '#form-notifications' ).hide();
 		$( '#form-notifications' ).slideDown( 100 );
 	} );
+		
+	$( '.show-notifications-end' ).click( function( e ) {
+		e.preventDefault();
+		$( '#form-notifications-end #notifications_content' ).html( $( this ).html() );
+		$( '#form-notifications-end #mail_type' ).val( $( this ).data( 'mailtype' ) );
+		$( '#form-notifications-end' ).hide();
+		$( '#form-notifications-end' ).slideDown( 100 );
+	} );
 				
 	if ( $( '.button-contacts-add-check' ).length > 0 ) {
 		$( '.button-contacts-add-check' ).click( function() {
