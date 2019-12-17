@@ -506,7 +506,7 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		$( '#form-notifications' ).hide();
 		$( '#form-notifications' ).slideDown( 100 );
 	} );
-	
+		
 	$( '.show-notifications-end' ).click( function( e ) {
 		e.preventDefault();
 		$( '#form-notifications-end #notifications_content' ).html( $( this ).html() );
