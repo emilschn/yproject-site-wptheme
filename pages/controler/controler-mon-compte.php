@@ -8,6 +8,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	 * @var WDGUser 
 	 */
 	private $current_user;
+
 	private $current_user_organizations;
 	private $current_user_authentication;
 	private $current_user_authentication_info;
@@ -25,6 +26,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private $form_user_tax_exemption;
 	private $list_intentions_to_confirm;
 	private $tax_documents;
+	
 	
 	public function __construct() {
 		parent::__construct();
@@ -54,6 +56,8 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$this->init_form_user_notifications();
 		$this->init_form_user_tax_exemption();
 		$this->init_tax_documents();
+
+		$this->controler_name = 'mon-compte';
 		
 		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
 		wp_enqueue_script( 'wdg-user-account', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-user-account.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION);
@@ -517,5 +521,12 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	public function get_wallet_to_bankaccount_result() {
 		return $this->wallet_to_bankaccount_result;
 	}
-	
+
+
+/******************************************************************************/
+// CONTEXTE
+/******************************************************************************/	
+	public function get_form_css_classes() {
+		return 'db-form form-register v3 full';
+	}
 }

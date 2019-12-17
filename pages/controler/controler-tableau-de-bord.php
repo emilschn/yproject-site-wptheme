@@ -20,6 +20,11 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $form_adjustment;
 	private $form_adjustment_edit_list;
 	private $emails;
+
+	private $form_user_details;
+	private $form_user_feedback;
+	private $form_user_identitydocs;
+	
 	/**
 	 * @var ATCF_Campaign
 	 */
@@ -87,6 +92,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$core->include_form( 'dashboard-add-check' );
 		$this->form_add_check = new WDG_Form_Dashboard_Add_Check( $this->campaign_id );
 		$core->include_form( 'organization-details' );
+		$core->include_form( 'user-details' );
+		$core->include_form( 'user-identitydocs' );
+		$core->include_form( 'user-bank' );
 		
 		$this->init_declarations();
 		$this->init_form_document();
@@ -101,8 +109,44 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			$current_organization->send_kyc();
 		}
 		$current_organization->submit_transfer_wallet_lemonway();
+
+
+		$this->controler_name = 'tableau-de-bord';
 	}
 	
+/******************************************************************************/
+// USER DATA
+/******************************************************************************/
+private function init_form_user_details() {
+	$this->form_user_details = new WDG_Form_User_Details( $this->current_user->get_wpref(), WDG_Form_User_Details::$type_extended );
+	
+	$action_posted = filter_input( INPUT_POST, 'action' );
+	if ( $action_posted == WDG_Form_User_Details::$name ) {
+		$this->form_user_feedback = $this->form_user_details->postForm();
+	}	
+}
+
+public function get_user_details_form() {
+	$this->init_form_user_details();
+	return $this->form_user_details;
+}	
+
+private function init_form_user_identitydocs() {
+	$this->form_user_identitydocs = new WDG_Form_User_Identity_Docs( $this->current_user->get_wpref() );
+	$action_posted = filter_input( INPUT_POST, 'action' );
+	if ( $action_posted == WDG_Form_User_Identity_Docs::$name ) {
+		$this->form_user_feedback = $this->form_user_identitydocs->postForm();
+	}
+}
+
+public function get_user_identitydocs_form() {
+	$this->init_form_user_identitydocs();
+	return $this->form_user_identitydocs;
+}
+	
+public function get_user_form_feedback() {
+	return $this->form_user_feedback;
+}
 /******************************************************************************/
 // SECURISATION
 /******************************************************************************/
@@ -200,7 +244,12 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	public function get_show_lightbox_welcome() {
 		return $this->must_show_lightbox_welcome;
 	}
-	
+
+	public function get_form_css_classes() {
+		return 'db-form v3 full center bg-white';
+	}
+
+
 /******************************************************************************/
 // CONTROLE FORMULAIRES
 /******************************************************************************/
