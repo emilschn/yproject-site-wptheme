@@ -118,7 +118,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 // USER DATA
 /******************************************************************************/
 private function init_form_user_details() {
-	$this->form_user_details = new WDG_Form_User_Details( $this->current_user->get_wpref(), WDG_Form_User_Details::$type_extended );
+	$this->form_user_details = new WDG_Form_User_Details( $this->campaign->post_author(), WDG_Form_User_Details::$type_extended );
 	
 	$action_posted = filter_input( INPUT_POST, 'action' );
 	if ( $action_posted == WDG_Form_User_Details::$name ) {
@@ -132,7 +132,7 @@ public function get_user_details_form() {
 }	
 
 private function init_form_user_identitydocs() {
-	$this->form_user_identitydocs = new WDG_Form_User_Identity_Docs( $this->current_user->get_wpref() );
+	$this->form_user_identitydocs = new WDG_Form_User_Identity_Docs( $this->campaign->post_author() );
 	$action_posted = filter_input( INPUT_POST, 'action' );
 	if ( $action_posted == WDG_Form_User_Identity_Docs::$name ) {
 		$this->form_user_feedback = $this->form_user_identitydocs->postForm();
