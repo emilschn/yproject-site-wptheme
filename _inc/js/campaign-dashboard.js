@@ -96,21 +96,21 @@ WDGCampaignTurnoverSimulator.prototype.refreshTurnover = function() {
 	if ( nFundingDuration > 0 && nCampaignGoal > 0 ) {
 		var sSymbol = $('#estimated-turnover').data('symbol');
 
-		$( '#total-funding' ).html( self.getNumberValueToString( nCampaignGoal, '' ) );
+		$( '#total-funding' ).html( self.getNumberValueToString( nCampaignGoal ) + ' &euro;' );
 
 		// Calcul des royalties
 		var nTotalRoyalties = 0;
 		for ( var i = 0; i < nFundingDuration; i++ ) {
-			var nYearRoyalties = nROIPercent * self.getInputValue( 'new_estimated_turnover_' + i, 2 ) / 100;
+			var nYearRoyalties = ( sSymbol == '%' ) ? nCampaignGoal * self.getInputValue( 'new_estimated_turnover_' + i, 2 ) / 100: nROIPercent * self.getInputValue( 'new_estimated_turnover_' + i, 2 ) / 100;
 			nYearRoyalties = nYearRoyalties.toFixed( 2 );
-			$( '#roi-amount-' + i ).html( self.getNumberValueToString( nYearRoyalties, sSymbol ) );
+			$( '#roi-amount-' + i ).html( self.getNumberValueToString( nYearRoyalties ) + ' &euro;' );
 			nTotalRoyalties += parseFloat( nYearRoyalties );
 		}
-		$( '#total-roi' ).html( self.getNumberValueToString( nTotalRoyalties, sSymbol ) );
+		$( '#total-roi' ).html( self.getNumberValueToString( nTotalRoyalties ) + ' &euro;' );
 
 		// Calcul du rendement
 		var nYield = Math.round( ( ( nTotalRoyalties / nCampaignGoal ) - 1 ) * 100 * 100 ) / 100;
-		var nYieldFormatted = self.getNumberValueToString( nYield, '' );
+		var nYieldFormatted = self.getNumberValueToString( nYield );
 		if ( nYield > 0 ) {
 			nYieldFormatted = "+" + nYieldFormatted;
 		}
@@ -124,7 +124,7 @@ WDGCampaignTurnoverSimulator.prototype.refreshTurnover = function() {
 
 		// Calcul du gain
 		var nProfit = nTotalRoyalties / nCampaignGoal;
-		var sProfit = self.getNumberValueToString( nProfit, '' );
+		var sProfit = self.getNumberValueToString( nProfit );
 		$( '#gain' ).html( 'x' + sProfit + ' en ' + nFundingDuration + ' ans' );
 
 
