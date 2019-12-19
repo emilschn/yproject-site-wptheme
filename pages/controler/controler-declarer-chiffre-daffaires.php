@@ -64,7 +64,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			$this->can_access = $this->current_campaign->current_user_can_edit();
 
 			if ( $this->current_campaign->roi_percent() == 0 ) {
-				$value_roi_percent = $this->current_campaign->roi_percent_estimated() * $this->current_campaign->current_amount( FALSE ) / $this->current_campaign->goal( FALSE ) ;
+				$value_roi_percent = round($this->current_campaign->roi_percent_estimated() * $this->current_campaign->current_amount( FALSE ) / $this->current_campaign->goal( FALSE ), 10) ;
 				if( $value_roi_percent >= 0 ){
 					update_post_meta( $campaign_id, ATCF_Campaign::$key_roi_percent, $value_roi_percent );
 					$this->current_campaign->set_api_data( 'roi_percent', $value_roi_percent );
