@@ -135,52 +135,42 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 						<div class="details-card"><?php echo $page_controler->get_campaign()->time_remaining_fullstr()?></div>
 					</div>
 				</div>
+				<div class="db-form v3 padding-top">
+					<a class="button blue half switch-tab" href="#stats"><?php _e( "Voir les statistiques d'&eacute;valuation", 'yproject' ); ?></a>
+				</div>
 
 			<?php elseif( $status == ATCF_Campaign::$campaign_status_collecte ): ?>
 				<?php $big_number_class = ( $page_controler->get_campaign()->current_amount(false) > 10000 ) ? 'less-big' : ''; ?>
 				<div id="stats-invest">
-					<div class="quart-card">
+					<div class="half-card">
 						<div class="stat-big-number <?php echo $big_number_class; ?>"><?php echo $page_controler->get_campaign()->current_amount(); ?></div>
 						<div class="stat-little-number">sur <?php echo $page_controler->get_campaign()->minimum_goal(false) / 1; ?> &euro; requis</div>
 						<div class="details-card">
 							<strong><?php echo $page_controler->get_campaign()->current_amount(); ?></strong> investis par
 							<strong><?php echo $nb_invests; ?></strong> personne<?php if( $nb_invests > 1 ){ echo 's'; } ?>
 						</div>
-					</div><!--
-					--><div class="half-card">
-						<div class="ajax-investments-load" id="ajax-invests-graph-load" style="text-align: center;" data-value="<?php echo $page_controler->get_campaign()->ID?>">
-							<div id="ajax-graph-loader-img" >
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/loading.gif" alt="chargement" />
-								<p style="font-style:italic">Chargement des donn&eacute;es d'investissement,<br/>cela peut prendre un peu de temps</p></div>
-						</div>
-						<canvas id="canvas-line-block" width="400" height="200" hidden></canvas>
-					</div><!--
-					--><div class="quart-card">
+					</div><div class="half-card">
 						<div class="stat-big-number"><?php echo $page_controler->get_campaign()->time_remaining_str();?><br/></div>
 						<div class="stat-little-number">Avant la fin de collecte</div>
 						<div class="details-card"><?php echo $page_controler->get_campaign()->time_remaining_fullstr()?></div>
 					</div>
 				</div>
+				<div class="db-form v3 padding-top">
+					<a class="button blue half switch-tab" href="#stats"><?php _e( "Voir les statistiques d'investissement", 'yproject' ); ?></a>
+				</div>
 
 			<?php elseif ( $status == ATCF_Campaign::$campaign_status_funded || $status == ATCF_Campaign::$campaign_status_archive ): ?>
 				<div id="stats-funded">
-					<div class="half-card">
-						<?php $big_number_class = ( $page_controler->get_campaign()->current_amount(false) > 10000 ) ? 'less-big' : ''; ?>
-						<div class="stat-big-number <?php echo $big_number_class; ?>"><?php echo $page_controler->get_campaign()->current_amount(); ?></div>
-						<div class="stat-little-number">levés sur <?php echo $page_controler->get_campaign()->minimum_goal(false) / 1; ?> &euro;</div>
-						<div class="details-card">
-							<strong><?php echo $page_controler->get_campaign()->current_amount(); ?></strong> investis par
-							<strong><?php echo $nb_invests; ?></strong> personne<?php if($nb_invests>1){echo 's';}?>
-						</div>
-					</div><!--
-					--><div class="half-card">
-						<div class="ajax-investments-load" id="ajax-invests-graph-load" style="text-align: center;" data-value="<?php echo $page_controler->get_campaign()->ID?>">
-							<div id="ajax-graph-loader-img" >
-								<img src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />
-								<p style="font-style:italic">Chargement des donn&eacute;es d'investissement,<br/>cela peut prendre un peu de temps</p></div>
-						</div>
-						<canvas id="canvas-line-block" width="400" height="200" hidden></canvas>
+					<?php $big_number_class = ( $page_controler->get_campaign()->current_amount(false) > 10000 ) ? 'less-big' : ''; ?>
+					<div class="stat-big-number <?php echo $big_number_class; ?>"><?php echo $page_controler->get_campaign()->current_amount(); ?></div>
+					<div class="stat-little-number">levés sur <?php echo $page_controler->get_campaign()->minimum_goal(false) / 1; ?> &euro;</div>
+					<div class="details-card">
+						<strong><?php echo $page_controler->get_campaign()->current_amount(); ?></strong> investis par
+						<strong><?php echo $nb_invests; ?></strong> personne<?php if($nb_invests>1){echo 's';}?>
 					</div>
+				</div>
+				<div class="db-form v3 padding-top">
+					<a class="button blue half switch-tab" href="#stats"><?php _e( "Voir les statistiques d'investissement", 'yproject' ); ?></a>
 				</div>
 			<?php endif; ?>
 

@@ -483,7 +483,7 @@ public function get_user_form_feedback() {
 		$this->campaign_stats[ 'vote' ][ 'amount_preinvestment' ][ 'median' ] = round( $reference_for_median_ratio_amount_preinvestment_percent * $this->campaign_stats[ 'goal' ] / 100 );
 		$this->campaign_stats[ 'vote' ][ 'average_intent' ] = max( 0, $vote_results[ 'average_invest_ready' ] );
 		$this->campaign_stats[ 'vote' ][ 'percent_intent' ] = 0;
-		if ( $vote_results[ 'goal' ] > 0 ) {
+		if ( $this->campaign_stats[ 'goal' ] > 0 ) {
 			$this->campaign_stats[ 'vote' ][ 'percent_intent' ] = max( 0, round( $vote_results[ 'sum_invest_ready' ] / $this->campaign_stats[ 'goal' ] * 100, 2 ) );
 		}
 		
