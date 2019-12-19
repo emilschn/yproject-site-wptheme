@@ -1018,7 +1018,7 @@ footer > .footer-container > div.licence a{
 * HOME - STATS
 *******************************************************************************/
 body.home section.project-stats {
-	padding: 40px 0px;
+	padding: 40px 0 0px;
 	color: #333333;
 	background: #FFFFFF;
 }
@@ -1028,22 +1028,32 @@ body.home section.project-stats > div {
 	width: calc(100% - 20px);
 	max-width: 1280px;
 	margin: auto;
+	text-align: left;
 }
 body.home section.project-stats > div div.left {
 	width: calc(100% / 3 - 16px);
-	text-align: left;
 	font-size: 18pt;
 	margin-left: 15px;
+	display: flex;
+	justify-content: flex-start;
 }
-body.home section.project-stats > div div.left img {
+body.home section.project-stats > div div.left div {
+	text-align: left;
+}
+body.home section.project-stats > div div.left div img {
 	float: left;
 	margin-right: 20px;
 }
-body.home section.project-stats > div div.left span span {
+body.home section.project-stats > div div.left div span {
 	font-size: 23pt;
 	letter-spacing: 2px;
 	font-weight: bold;
 	line-height: 50px;
+	text-align: left;
+}
+body.home section.project-stats > div p {
+	font-size: 10pt;
+	text-align: center;
 }
 
 /*******************************************************************************
@@ -1157,7 +1167,6 @@ body.template-les-projets header .header-container {
 }
 body.template-les-projets header .header-container > div > div {
 	display: inline-block;
-	height: 460px;
 	padding-bottom: 20px;
 }
 
@@ -1230,12 +1239,20 @@ body.template-les-projets header .header-container > div > div#wdg-project-stats
 	margin-right: 37px;
 }
 body.template-les-projets header .header-container > div > div#wdg-project-stats p span {
-	font-size: 20pt;
+	font-size: 16pt;
 }
 body.template-les-projets header .header-container > div > div#wdg-project-stats p span span {
 	font-size: 25pt;
 	letter-spacing: 2px;
 	font-weight: bold;
+}
+
+
+body.template-les-projets header .header-container > div > div#wdg-project-definition {
+	height: 0;
+	width: 100%;
+	font-size: 10pt;
+	text-align: right;
 }
 
 body.template-les-projets div#content > h2 {
