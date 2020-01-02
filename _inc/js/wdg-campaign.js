@@ -136,7 +136,7 @@ var WDGProjectViewer = (function($) {
 						$("div.project-rewards-content table tr:first-child td span.hidden").each(function(index) {
 							var estTO = Number($(this).text());
 							var amountOfTO = 0;
-							if ( estimatedTurnoverUnit == '%' ) {
+							if ( estimatedTurnoverUnit == 'percent' ) {
 								amountOfTO = Math.round( inputVal * estTO ) / 100;
 							} else {
 								amountOfTO = estTO * ratioOfPercent / 100;
