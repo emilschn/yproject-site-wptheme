@@ -100,7 +100,7 @@ var WDGProjectViewer = (function($) {
 					var percentProject = Number( $( 'input#roi_percent_project' ).val() );
 					var goalProject = Number( $( 'input#roi_goal_project' ).val() );
 					var maxProfit = Number( $( 'input#roi_maximum_profit' ).val() );
-					var estimatedTurnoverUnit = Number( $( 'input#estimated_turnover_unit' ).val());
+					var estimatedTurnoverUnit = $( 'input#estimated_turnover_unit' ).val();
 					$( '#error-maximum, #error-input, #error-amount' ).hide( 100 );
 					
 					var bIsCorrectInput = true;
