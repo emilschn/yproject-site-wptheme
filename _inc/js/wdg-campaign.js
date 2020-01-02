@@ -97,9 +97,10 @@ var WDGProjectViewer = (function($) {
 					$(".project-rewards-padder div.hidden").show();
 					
 				} else {
-					var percentProject = Number($("input#roi_percent_project").val());
-					var goalProject = Number($("input#roi_goal_project").val());
-					var maxProfit = Number($("input#roi_maximum_profit").val());
+					var percentProject = Number( $( 'input#roi_percent_project' ).val() );
+					var goalProject = Number( $( 'input#roi_goal_project' ).val() );
+					var maxProfit = Number( $( 'input#roi_maximum_profit' ).val() );
+					var estimatedTurnoverUnit = Number( $( 'input#estimated_turnover_unit' ).val());
 					$( '#error-maximum, #error-input, #error-amount' ).hide( 100 );
 					
 					var bIsCorrectInput = true;
@@ -134,7 +135,12 @@ var WDGProjectViewer = (function($) {
 
 						$("div.project-rewards-content table tr:first-child td span.hidden").each(function(index) {
 							var estTO = Number($(this).text());
-							var amountOfTO = estTO * ratioOfPercent / 100;
+							var amountOfTO = 0;
+							if ( estimatedTurnoverUnit == '%' ) {
+								amountOfTO = Math.round( inputVal * estTO ) / 100;
+							} else {
+								amountOfTO = estTO * ratioOfPercent / 100;
+							}
 							// Gestion du plafond de versement
 							if ( maxRoiRemaining < amountOfTO ) {
 								amountOfTO = maxRoiRemaining;
