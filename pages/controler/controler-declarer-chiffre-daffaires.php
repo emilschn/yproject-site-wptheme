@@ -231,6 +231,9 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 						// La déclaration a été validée, le statut a changé, il faut recharger
 						$this->current_declaration = new WDGROIDeclaration( $this->current_declaration->id );
 						$this->current_step = $this->current_declaration->get_status();
+						if ( $this->current_step == WDGROIDeclaration::$status_payment ) {
+							$this->init_summary_data();
+						}
 					}
 				}
 			}elseif ( $this->current_step == WDGROIDeclaration::$status_payment ) {
