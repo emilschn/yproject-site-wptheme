@@ -774,8 +774,12 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 
 		//Création du tableau dynamique dataTable
 		self.table = $('#contacts-table').DataTable({       
-			responsive: true,
-			scrollX: '100%',
+			responsive: {
+				details: {
+					type: 'column',
+					target: 'td:not(:first-child)'
+				}
+			},
 			scrollY: '70vh', //Taille max du tableau : 70% de l'écran
 			scrollCollapse: true, //Diminue taille du tableau si peu d'éléments*/
 
