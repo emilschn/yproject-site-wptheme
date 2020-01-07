@@ -415,26 +415,6 @@
 /*******************************************************************************
 * Page informations
 *******************************************************************************/
-#page-informations #tab-organization #orgainfo_form_button {
-	display: inline;
-}
-#page-informations #tab-organization #btn-new-orga {
-	display: block;
-	width: 170px;
-	text-align: center;
-	margin: 30px 0 0;
-}
-#page-informations #tab-organization #orgainfo_form .feedback_save {
-	position: absolute;
-	top: 350px;
-	left: 680px;
-}
-#page-informations #tab-organization #orgaedit_form .download-file {
-	display: block;
-	width: 290px;
-	margin-top: 10px;
-	color: #333333;
-}
 
 #page-informations #estimated-turnover {
     list-style: none;

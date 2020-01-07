@@ -39,14 +39,14 @@ if ( !empty( $init_username ) ) {
 			$message .= get_permalink($page_forgot_password->ID) . "?action=rp&key=$key&login=" . rawurlencode($user_login);
 
 			if (FALSE == wp_mail($user_email, sprintf(__('[%s] Password Reset'), get_option('blogname')), $message)) {
-				$error[] = "Problème d'envoi : l'e-mail de réinitialisation n'a pas été envoyé.";
+				array_push( $error, "Problème d'envoi : l'e-mail de réinitialisation n'a pas été envoyé." );
 			}
 			$feedback = "Un message a &eacute;t&eacute; envoy&eacute; &agrave; votre adresse e-mail.";
 		} else {
-			$error[] = "Cet utilisateur est lié par son compte Facebook et nous ne pouvons donc pas renouveler son mot de passe. Merci de nous contacter par e-mail, &agrave; l'adresse investir@wedogood.co, si vous souhaitez d&eacute;lier le compte Facebook.";
+			array_push( $error, "Cet utilisateur est lié par son compte Facebook et nous ne pouvons donc pas renouveler son mot de passe. Merci de nous contacter par e-mail, &agrave; l'adresse investir@wedogood.co, si vous souhaitez d&eacute;lier le compte Facebook." );
 		}
 	} else {
-		$error[] = "Nous n'avons pas trouvé l'utilisateur correspondant sur le site.";
+		array_push( $error, "Nous n'avons pas trouvé l'utilisateur correspondant sur le site." );
 	}	
 	
 } else if (isset($_POST["new_password"]) && isset($_POST["new_password_confirm"]) && isset($_POST["login"]) && isset($_POST["key"])) {
@@ -57,11 +57,11 @@ if ( !empty( $init_username ) ) {
 		if (isset($user, $user->user_login)) {
 			wp_update_user( array ( 'ID' => $user->ID, 'user_pass' => $_POST["new_password"], 'user_status' => 0, 'user_activation_key' => '' ) );
 		} else {
-			$error[] = "La clé ne correspond pas à cet utilisateur.";
+			array_push( $error, "La clé ne correspond pas à cet utilisateur." );
 		}
 		$feedback = "Votre mot de passe a été mis à jour.";
 	} else {
-		$error[] = "Erreur de saisie des mots de passe.";
+		array_push( $error, "Erreur de saisie des mots de passe." );
 	}
 }
 ?>

@@ -62,6 +62,15 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		} else {
 			$this->current_campaign = new ATCF_Campaign( $campaign_id );
 			$this->can_access = $this->current_campaign->current_user_can_edit();
+
+			if ( $this->current_campaign->roi_percent() == 0 ) {
+				$value_roi_percent = round($this->current_campaign->roi_percent_estimated() * $this->current_campaign->current_amount( FALSE ) / $this->current_campaign->goal( FALSE ), 10) ;
+				if( $value_roi_percent >= 0 ){
+					update_post_meta( $campaign_id, ATCF_Campaign::$key_roi_percent, $value_roi_percent );
+					$this->current_campaign->set_api_data( 'roi_percent', $value_roi_percent );
+				}
+
+			}
 		}
 	}
 	
@@ -284,6 +293,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 								$return_lemonway_card = WDGFormProjects::return_lemonway_card();
 								if ( $return_lemonway_card == TRUE ) {
 									$this->current_step = WDGROIDeclaration::$status_transfer;
+									$this->start_auto_transfer();
 	
 								} elseif ( $return_lemonway_card !== FALSE ) {
 									$has_tried_payment = TRUE;
@@ -412,6 +422,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_card;
 				$this->current_declaration->status = WDGROIDeclaration::$status_transfer;
 				$this->current_declaration->save();
+				$this->start_auto_transfer();
 				NotificationsEmails::send_notification_roi_payment_success_admin( $this->current_declaration->id );
 				NotificationsEmails::send_notification_roi_payment_success_user( $this->current_declaration->id );
 				
@@ -501,6 +512,24 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$this->current_declaration->save();
 					
 		NotificationsEmails::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
+	}
+
+	private function start_auto_transfer() {
+		$list_investments = $this->current_campaign->roi_payments_data( $this->current_declaration );
+		$total_roi = 0;
+		foreach ($list_investments as $investment_item) {
+			$total_roi += $investment_item[ 'roi_amount' ];
+		}
+
+		$content_mail_auto_royalties = '';
+		$content_mail_auto_royalties .= 'Versement pour ' . $this->current_campaign->get_name() . '<br>';
+		$content_mail_auto_royalties .= 'Declaration du ' . $this->current_declaration->get_formatted_date() . '<br>';
+		$content_mail_auto_royalties .= 'Programmé pour maintenant<br>';
+		$content_mail_auto_royalties .= 'Montant avec ajustement : ' . $this->current_declaration->get_amount_with_adjustment() . ' €<br>';
+		$content_mail_auto_royalties .= 'Montant versé aux investisseurs : ' . $total_roi . ' €<br><br>';
+		NotificationsEmails::send_mail( 'administratif@wedogood.co', 'Notif interne - Versement auto à venir', $content_mail_auto_royalties );
+		
+		WDGQueue::add_royalties_auto_transfer_start( $this->current_declaration->id );
 	}
 	
 	

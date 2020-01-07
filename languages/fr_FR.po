@@ -20,6 +20,9 @@ msgstr "Votez !"
 msgid "Les projets en cours"
 msgstr "Les projets en cours"
 
+msgid "definition_royaltiser"
+msgstr "*ROYALTISER, v. intr. XXIe siècle. d'apr. angl. Verser une partie de son chiffre d'affaires à ses merveilleux investisseurs. \"Un projet qui royaltise plus que prévu\""
+
 msgid "Soutenez le projet en votant !"
 msgstr "Soutenez le projet en votant !"
 
