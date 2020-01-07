@@ -233,10 +233,12 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 						$this->current_step = $this->current_declaration->get_status();
 						if ( $this->current_step == WDGROIDeclaration::$status_payment ) {
 							$this->init_summary_data();
+						} elseif ( $this->current_step == WDGROIDeclaration::$status_transfer ) {
+							$this->start_auto_transfer();
 						}
 					}
 				}
-			}elseif ( $this->current_step == WDGROIDeclaration::$status_payment ) {
+			} elseif ( $this->current_step == WDGROIDeclaration::$status_payment ) {
 				$this->init_summary_data();
 				$has_tried_payment = FALSE;
 				switch( $action_posted ) {
