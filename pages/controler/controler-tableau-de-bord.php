@@ -301,7 +301,7 @@ public function get_user_form_feedback() {
 // GESTION DECLARATIONS
 /******************************************************************************/
 	private function init_declarations() {
-		$this->declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $this->get_campaign_id() );
+		$this->declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $this->get_campaign_id(), '' );
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'declaration-bill' );
