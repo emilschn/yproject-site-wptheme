@@ -75,7 +75,11 @@ $estimated_turnover = $campaign->estimated_turnover();
 					</div>
 
 					<div class="field">
-						<label for="init_invest"><?php _e( "Je recevrais :", 'yproject' ); ?></label>
+						<?php
+						$campaign_periodicity = $campaign->get_declaration_periodicity();
+						$campaign_periodicity_str = __( ATCF_Campaign::$declaration_period_list_plural[ $campaign_periodicity ], 'yproject' );
+						?>
+						<label for="init_invest"><?php echo sprintf( __( "Je recevrais tous les %s :", 'yproject' ), $campaign_periodicity_str ); ?></label>
 						<div class="field-container align-left">
 							<?php $complementary_text = '.'; ?>
 							<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
