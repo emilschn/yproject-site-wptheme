@@ -174,7 +174,6 @@ var WDGProjectViewer = (function($) {
 									amountOfTO = maxRoiRemaining;
 								}
 								var amountPercent = Math.round( amountOfTO / maxAmountOfTO * 100 );
-								console.log( amountPercent );
 								var heightPercent = 100 - amountPercent;
 								$( "span.roi_amount_user" + index ).parent().parent().height( heightPercent + '%' );
 								maxRoiRemaining -= amountOfTO;
