@@ -102,7 +102,12 @@ $summary_data = $page_controler->get_summary_data();
 </div>
 
 <form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
-	
+	<?php if ( $page_controler->can_display_payment_error() ): ?>
+		<div class="wdg-message error">
+			<?php _e( "Une erreur s'est produite pendant la tentative de paiement", 'yproject' ); ?>
+		</div>
+		<br><br>
+	<?php endif; ?>
 	<?php if ( $page_controler->is_card_shortcut_displayed() ): ?>
 		<button type="submit" name="action" value="gotopayment" class="button red"><?php _e( "Valider et payer par carte", 'yproject' ); ?></button>
 		<div class="clear"><br></div>

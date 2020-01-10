@@ -59,10 +59,16 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 	<?php endif; ?>
 	
 	<?php if ( !$is_future ): ?>
-		<?php if ( $declaration->get_status() != WDGROIDeclaration::$status_transfer && $declaration->get_status() != WDGROIDeclaration::$status_waiting_transfer ): ?>
-		<div class="single-line">
-			<a href="<?php echo home_url( '/declarer-chiffre-daffaires/?campaign_id=' .$page_controler->get_campaign()->ID. '&declaration_id=' .$declaration->id ); ?>" class="button red force-size"><?php _e( "D&eacute;clarer" ); ?></a>
-		</div>
+		<?php if ( $declaration->get_status() != WDGROIDeclaration::$status_transfer && $declaration->get_status() != WDGROIDeclaration::$status_waiting_transfer ): ?>			
+			<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_payment ): ?>
+				<div class="single-line">
+					<a href="<?php echo home_url( '/declarer-chiffre-daffaires/?campaign_id=' .$page_controler->get_campaign()->ID. '&declaration_id=' .$declaration->id ); ?>" class="button red force-size"><?php _e( "Payer" ); ?></a>
+				</div>				
+			<?php else: ?>
+				<div class="single-line">
+					<a href="<?php echo home_url( '/declarer-chiffre-daffaires/?campaign_id=' .$page_controler->get_campaign()->ID. '&declaration_id=' .$declaration->id ); ?>" class="button red force-size"><?php _e( "D&eacute;clarer" ); ?></a>
+				</div>				
+			<?php endif; ?>
 		<?php elseif ( $page_controler->can_access_admin() ): ?>
 			<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
 			<div class="single-line">
