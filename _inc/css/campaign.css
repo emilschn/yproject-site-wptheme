@@ -579,7 +579,8 @@ div#content.version-3 div.project-rewards-content table:before {
 }
 div#content.version-3 div.project-rewards-content table tr td {
     min-width: 75px;
-    text-align: center;
+	text-align: center;
+	border: 0px;
 }
 div#content.version-3 div.project-rewards-content table tr td:nth-child(1) {
     vertical-align: bottom;

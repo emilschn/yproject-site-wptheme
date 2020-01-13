@@ -292,11 +292,30 @@ UserAccountDashboard.prototype.toggleRois = function(){
  */
 UserAccountDashboard.prototype.initTaxExemption = function(){
 	$( '#display-tax-exemption-form' ).click( function() {
-		$( '#tax-exemption-form' ).slideDown( 300 );
+		if ( $( '#tax-exemption-form' ).is(':visible')) {
+			$( '#tax-exemption-form' ).slideUp( 300 );
+		} else {
+			$( '#tax-exemption-form' ).slideDown( 300 );
+		}		
+		$( '#upload-tax-exemption-form' ).slideUp( 300 );
 	} );
 	
 	$( '#tax-exemption-form button.half.left' ).click( function() {
 		$( '#tax-exemption-form' ).slideUp( 300 );
+	} );
+
+	
+	$( '#display-upload-tax-exemption-form' ).click( function() {		
+		if ( $( '#upload-tax-exemption-form' ).is(':visible')) {
+			$( '#upload-tax-exemption-form' ).slideUp( 300 );
+		} else {
+			$( '#upload-tax-exemption-form' ).slideDown( 300 );
+		}
+		$( '#tax-exemption-form' ).slideUp( 300 );
+	} );
+	
+	$( '#upload-tax-exemption-form button.half.left' ).click( function() {
+		$( '#upload-tax-exemption-form' ).slideUp( 300 );
 	} );
 };
 

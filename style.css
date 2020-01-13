@@ -86,7 +86,9 @@ tbody {
     font-size: 14pt !important;
 }
 
-.padding-top { padding-top: 45px; }
+.padding-top { padding-top: 40px; }
+.padding-bottom { padding-bottom: 40px; }
+
 .margin-height { margin: 15px auto; }
 .padder_more {
     margin-top: 22px;

@@ -115,6 +115,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"id"			=> "new_roi_percent",
 			"type"			=> "text-percent",
 			"label"			=> "Royalties r&eacute;els (selon montant collect&eacute;)",
+			"description"	=> "Si ce pourcentage n'est pas défini, il sera calculé automatiquement lors du premier versement de royalties.",
 			"value"			=> $page_controler->get_campaign()->roi_percent(),
 			"unit"			=> "% du CA",
 			"min"			=> 0,

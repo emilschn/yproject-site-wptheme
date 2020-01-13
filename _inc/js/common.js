@@ -271,26 +271,6 @@ YPUIFunctions = (function($) {
 			return {'x':x, 'y':y};
 		},
 
-		getInvestsGraph : function(inv_data, campaign_id) {
-			$.ajax({
-				'type' : "POST",
-				'url' : ajax_object.ajax_url,
-				'data': {
-					'action':'get_invests_graph',
-					'id_campaign' : campaign_id,
-					'data' : inv_data
-				}
-			}).done(function(result){
-				$('#ajax-invests-graph-load').after(result);
-				$('#ajax-graph-loader-img').hide();//On cache la roue de chargement.
-				$('#canvas-line-block').slideDown();
-			}).fail(function(){
-				$('#ajax-invests-graph-load').after("<em>Le chargement du graphe a échoué</em>");
-				$('#ajax-graph-loader-img').hide();//On cache la roue de chargement.
-				$('#canvas-line-block').slideDown();
-			});
-		},
-
 		getInvestments: function(campaign_id, bShortVersion){
 			YPUIFunctions.currentRequest = $.ajax({
 				'type' : "POST",
@@ -309,11 +289,6 @@ YPUIFunctions = (function($) {
 					$('.data-inv-'+key).html(value);
 				});
 				$('.ajax-data-inv-loader-img').slideUp();
-
-				// Crée le graphe des investissements si besoin
-				if ($("#ajax-invests-graph-load").length > 0) {
-					YPUIFunctions.getInvestsGraph(JSON.stringify(inv_data),campaign_id);
-				}
 
 				//Crée le tableau de contacts si besoin
                 if ($("#ajax-contacts-load").length > 0) {
@@ -578,7 +553,7 @@ var WDGNavFunctions = (function($) {
 					$( '#menu .btn-user' ).append( infoDecoded[ 'userinfos' ][ 'image_dom_element' ] );
 					
 					$( '#submenu-user.not-connected .menu-loading-init' ).hide();
-					$( '#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name' ).text( infoDecoded[ 'userinfos' ][ 'username' ] );
+					$( '#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name' ).html( infoDecoded[ 'userinfos' ][ 'username' ] );
 					var lengthInfoProjects = infoDecoded[ 'projectlist' ].length;
 					for ( var i = 0; i < lengthInfoProjects; i++ ) {
 						itemProject = infoDecoded[ 'projectlist' ][ i ];
@@ -904,7 +879,7 @@ var WDGFormsFunctions = (function($) {
 				label_element.next( '.displayed-responsive' ).hide();
 				WDGLightboxFunctions.hideAll();
 			} );
-			
+						
 			$( 'label.file-label' ).on( 'dragover', function( e ) {
 				$( this ).addClass( 'dragover' );
 				e.stopPropagation();

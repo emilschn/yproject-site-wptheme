@@ -97,9 +97,10 @@ var WDGProjectViewer = (function($) {
 					$(".project-rewards-padder div.hidden").show();
 					
 				} else {
-					var percentProject = Number($("input#roi_percent_project").val());
-					var goalProject = Number($("input#roi_goal_project").val());
-					var maxProfit = Number($("input#roi_maximum_profit").val());
+					var percentProject = Number( $( 'input#roi_percent_project' ).val() );
+					var goalProject = Number( $( 'input#roi_goal_project' ).val() );
+					var maxProfit = Number( $( 'input#roi_maximum_profit' ).val() );
+					var estimatedTurnoverUnit = $( 'input#estimated_turnover_unit' ).val();
 					$( '#error-maximum, #error-input, #error-amount' ).hide( 100 );
 					
 					var bIsCorrectInput = true;
@@ -131,20 +132,54 @@ var WDGProjectViewer = (function($) {
 						var ratioOfPercentRound = Math.round(ratioOfPercent * 100000) / 100000;
 						var ratioOfPercentRoundStr = ratioOfPercentRound.toString().replace('.', ',');
 						$("span.roi_percent_user").text(ratioOfPercentRoundStr);
+						var maxAmountOfTO = 0;
+						var needHeightRefresh = false;
 
 						$("div.project-rewards-content table tr:first-child td span.hidden").each(function(index) {
 							var estTO = Number($(this).text());
-							var amountOfTO = estTO * ratioOfPercent / 100;
+							var amountOfTO = 0;
+							if ( estimatedTurnoverUnit == 'percent' ) {
+								amountOfTO = Math.round( inputVal * estTO ) / 100;
+							} else {
+								amountOfTO = estTO * ratioOfPercent / 100;
+							}
+
 							// Gestion du plafond de versement
 							if ( maxRoiRemaining < amountOfTO ) {
 								amountOfTO = maxRoiRemaining;
+								needHeightRefresh = true;
 							}
+							maxAmountOfTO = Math.max( maxAmountOfTO, amountOfTO );
+							
 							maxRoiRemaining -= amountOfTO;
 							amountOfGoal += amountOfTO;
-							var amountOfTORound = Math.round(amountOfTO * 100) / 100;
-							var amountOfTORoundStr = amountOfTORound.toString().replace('.', ',');
-							$("span.roi_amount_user" + index).text(amountOfTORoundStr);
+							var amountOfTORound = Math.round( amountOfTO * 100 ) / 100;
+							var amountOfTORoundStr = amountOfTORound.toString().replace( '.', ',' );
+							$("span.roi_amount_user" + index).html( amountOfTORoundStr + '&nbsp;&euro;' );
 						});
+
+						if ( needHeightRefresh ) {
+							maxRoiRemaining = maxRoi;
+							// Reparcours pour les tailles des barres quand le prévisionnel est supérieur au max potentiel
+							$("div.project-rewards-content table tr:first-child td span.hidden").each(function(index) {
+								var estTO = Number($(this).text());
+								var amountOfTO = 0;
+								if ( estimatedTurnoverUnit == 'percent' ) {
+									amountOfTO = Math.round( inputVal * estTO ) / 100;
+								} else {
+									amountOfTO = estTO * ratioOfPercent / 100;
+								}
+
+								if ( maxRoiRemaining < amountOfTO ) {
+									amountOfTO = maxRoiRemaining;
+								}
+								var amountPercent = Math.round( amountOfTO / maxAmountOfTO * 100 );
+								var heightPercent = 100 - amountPercent;
+								$( "span.roi_amount_user" + index ).parent().parent().height( heightPercent + '%' );
+								maxRoiRemaining -= amountOfTO;
+							});
+						}
+
 						var amountOfGoalRound = Math.round(amountOfGoal * 100) / 100;
 						var amountOfGoalRoundStr = amountOfGoalRound.toString().replace('.', ',');
 						$("span.roi_amount_user").text(amountOfGoalRoundStr);
