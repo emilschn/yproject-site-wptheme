@@ -777,7 +777,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 			responsive: {
 				details: {
 					type: 'column',
-					target: 'td:not(:first-child)'
+					target: 'td:not(:first-child)' // un clic sur la ligne excepté la checbox permet de déplier la ligne
 				}
 			},
 			scrollY: '70vh', //Taille max du tableau : 70% de l'écran
@@ -786,21 +786,17 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 			paging: false, //Pas de pagination, affiche tous les éléments yolo
 			order: [[result_contacts_table['default_sort'],"desc"]],
 
-			colReorder: { //On peut réorganiser les colonnes
-				fixedColumnsLeft: result_contacts_table['id_column_index']+1 //Les 5 colonnes à gauche sont fixes
-			},
-			fixedColumns : {
-				leftColumns: result_contacts_table['id_column_index']+1
+			colReorder: { //On ne peut pas réorganiser les colonnes, l'ordre est défini suivant la phase, évaluation ou investissement
+				fixedColumnsLeft: result_contacts_table['id_column_index']+1, //Les 5 colonnes à gauche sont fixes
+				order: result_contacts_table['column_order']
 			},
 
 			columnDefs: [
 				{
 					targets: result_contacts_table['array_hidden'], //Cache colonnes par défaut
 					visible: false
-				},{
-					targets: [result_contacts_table['id_column_index']], //Cache colonnes par défaut
-					visible: false
-				},{
+				},
+				{
 					className: 'select-checkbox',
 					targets : 0,
 					orderable: false,
@@ -824,7 +820,8 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 					action: function () {
 						self.table.rows( { search: 'applied' } ).select();
 					}
-				},{
+				},
+				{
 					//Bouton envoi de mail
 					extend: 'selected',
 					text: '<i class="fa fa-envelope" aria-hidden="true"></i> Envoyer un mail',
