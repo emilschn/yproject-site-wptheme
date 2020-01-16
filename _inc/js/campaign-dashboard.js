@@ -772,6 +772,9 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 		$('#ajax-contacts-load').after(result);
 		$('#ajax-loader-img').hide();//On cache la roue de chargement.
 
+
+		var nb_visible_colums_filters = (result_contacts_table['id_column_user_id'] - result_contacts_table['id_column_index'] - 2);
+
 		//Création du tableau dynamique dataTable
 		self.table = $('#contacts-table').DataTable({       
 			responsive: {
@@ -785,11 +788,6 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 
 			paging: false, //Pas de pagination, affiche tous les éléments yolo
 			order: [[result_contacts_table['default_sort'],"desc"]],
-
-			colReorder: { //On ne peut pas réorganiser les colonnes, l'ordre est défini suivant la phase, évaluation ou investissement
-				fixedColumnsLeft: result_contacts_table['id_column_index']+1, //Les 5 colonnes à gauche sont fixes
-				order: result_contacts_table['column_order']
-			},
 
 			columnDefs: [
 				{
@@ -841,12 +839,12 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 						//Bouton d'affichage de colonnes
 						extend: 'colvis',
 						text: '<i class="fa fa-columns" aria-hidden="true"></i> Colonnes à afficher',
-						columns: ':gt('+result_contacts_table['id_column_index']+')', //On ne peut pas cacher les 5 premières colonnes
+						columns: ':gt('+result_contacts_table['id_column_index']+'):lt('+nb_visible_colums_filters+')', //On ne peut pas cacher les 5 premières colonnes, ni la dernière
 						collectionLayout: 'two-column'
 					},{
 						extend: 'colvisGroup',
 						text: 'Tout afficher',
-						show: ':gt('+result_contacts_table['id_column_index']+'):hidden'
+						show: ':gt('+result_contacts_table['id_column_index']+'):lt('+nb_visible_colums_filters+'):hidden'
 					},{
 						extend: 'colvisGroup',
 						text: 'Tout masquer',
@@ -953,7 +951,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 			//Maj liste des identifiants à mailer
 			var recipients_array = [];
 			$.each(self.table.rows({ selected: true }).data(), function(index, element){
-				recipients_array.push(element[result_contacts_table['id_column_index']]);
+				recipients_array.push(element[result_contacts_table['id_column_user_id']]);
 			});
 			$("#mail_recipients").val(recipients_array);
 		} );

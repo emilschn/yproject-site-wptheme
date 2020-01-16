@@ -14,6 +14,14 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 </div>
 <?php endif; ?>
 
+<div class="db-form v3 center">
+	<br>
+	<p class="align-justify">
+		<?php _e( "Vous pouvez cliquer sur une ligne du tableau pour avoir plus d'informations", 'yproject' ); ?>
+	</p>
+	<br><br>
+</div>
+
 <div class="tab-content-large">
 	<div id="ajax-contacts-load" class="ajax-investments-load align-center" data-value="<?php echo $page_controler->get_campaign_id(); ?>">
 		<img id="ajax-loader-img" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />
