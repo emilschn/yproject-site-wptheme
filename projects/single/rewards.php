@@ -75,7 +75,11 @@ $estimated_turnover = $campaign->estimated_turnover();
 					</div>
 
 					<div class="field">
-						<label for="init_invest"><?php _e( "Je recevrais :", 'yproject' ); ?></label>
+						<?php
+						$campaign_periodicity = $campaign->get_declaration_periodicity();
+						$campaign_periodicity_str = __( ATCF_Campaign::$declaration_period_list_plural[ $campaign_periodicity ], 'yproject' );
+						?>
+						<label for="init_invest"><?php echo sprintf( __( "Je recevrais tous les %s :", 'yproject' ), $campaign_periodicity_str ); ?></label>
 						<div class="field-container align-left">
 							<?php $complementary_text = '.'; ?>
 							<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
@@ -103,7 +107,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 								<?php foreach ( $estimated_turnover as $i => $value ): ?>
 									<?php $height = 100 - round($value / $max_turnover * 100); ?>
 									<td class="<?php if ( $count_estimated_turnover > 5 && $index > 1 && $index < $count_estimated_turnover - 2 ): ?>hidden<?php endif; ?>">
-										<div><div style="height: <?php echo $height; ?>%;"><span class="roi_amount_user_container"><span class="roi_amount_user<?php echo $index; ?>">0</span> &euro;</span></div></div>
+										<div><div style="height: <?php echo $height; ?>%;"><span class="roi_amount_user_container"><span class="roi_amount_user<?php echo $index; ?>">0&nbsp;&euro;</span></span></div></div>
 										<?php echo ( $index + 1 ); ?><span class="hidden estimated-turnover-<?php echo $i; ?>"><?php echo $value; ?></span>
 									</td>
 									<?php if ( $count_estimated_turnover > 5 && $index == 2 ): ?>

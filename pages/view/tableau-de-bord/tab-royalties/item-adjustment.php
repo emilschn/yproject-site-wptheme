@@ -52,7 +52,7 @@ if ( $page_controler->can_access_admin() ) {
 		<strong><?php _e( "Versements &agrave; marquer comme v&eacute;rifi&eacute;s", 'yproject' ); ?></strong><br>
 		<?php $declaration_list = $adjustment_obj->get_declarations_checked(); ?>
 		<?php foreach( $declaration_list as $declaration_item ): ?>
-			<?php $declaration = new WDGROIDeclaration( $declaration_item->id, FALSE, $declaration_item ); ?>
+			<?php $declaration = new WDGROIDeclaration( $declaration_item->id, $declaration_item ); ?>
 			- <?php echo $declaration->get_formatted_date(); ?><br>
 		<?php endforeach; ?>
 		<br>

@@ -78,6 +78,12 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		wp_enqueue_style( 'datatable-buttons-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/buttons.dataTables.min.css', null, false, 'all' );
 		
 		$this->init_campaign_data();
+
+		if ( !is_user_logged_in() ) {
+			wp_redirect( home_url( '/connexion/' ) . '?redirect-page=tableau-de-bord&campaign_id='.$this->campaign_id  );
+			exit();
+		}
+
 		if ( !$this->can_access ) {
 			wp_redirect( home_url() );
 			exit();
@@ -304,7 +310,7 @@ public function get_user_form_feedback() {
 // GESTION DECLARATIONS
 /******************************************************************************/
 	private function init_declarations() {
-		$this->declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $this->get_campaign_id() );
+		$this->declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $this->get_campaign_id(), '' );
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'declaration-bill' );

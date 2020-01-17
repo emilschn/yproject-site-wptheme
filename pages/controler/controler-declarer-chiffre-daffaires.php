@@ -30,6 +30,12 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$this->has_added_declaration = FALSE;
 		$this->init_current_campaign();
 		$this->init_current_declaration();
+		
+		if ( !is_user_logged_in() ) {
+			wp_redirect( home_url( '/connexion/' ) . '?redirect-page=declarer-chiffre-daffaires&campaign_id='.$this->current_campaign->ID.'&declaration_id='.$this->current_declaration->id  );
+			exit();
+		}
+
 		if ( !$this->can_access ) {
 			wp_redirect( home_url() );
 			exit();
@@ -231,9 +237,14 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 						// La déclaration a été validée, le statut a changé, il faut recharger
 						$this->current_declaration = new WDGROIDeclaration( $this->current_declaration->id );
 						$this->current_step = $this->current_declaration->get_status();
+						if ( $this->current_step == WDGROIDeclaration::$status_payment ) {
+							$this->init_summary_data();
+						} elseif ( $this->current_step == WDGROIDeclaration::$status_transfer ) {
+							$this->start_auto_transfer();
+						}
 					}
 				}
-			}elseif ( $this->current_step == WDGROIDeclaration::$status_payment ) {
+			} elseif ( $this->current_step == WDGROIDeclaration::$status_payment ) {
 				$this->init_summary_data();
 				$has_tried_payment = FALSE;
 				switch( $action_posted ) {

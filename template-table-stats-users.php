@@ -41,7 +41,7 @@ $input_user_stats = filter_input( INPUT_GET, 'user_stats' );
 				$declarations_list = WDGWPREST_Entity_Declaration::get_list_by_date( $date_start->format( 'Y-m-d' ), $date_end->format( 'Y-m-d' ) );
 				if ( $declarations_list ):
 					foreach ( $declarations_list as $declaration_data ):
-						$roi_declaration = new WDGROIDeclaration( FALSE, FALSE, $declaration_data );
+						$roi_declaration = new WDGROIDeclaration( $declaration_data->id, $declaration_data );
 						$roi_declaration_file_list = $roi_declaration->get_file_list();
 						$files_path = $roi_declaration->get_file_path();
 						?>
