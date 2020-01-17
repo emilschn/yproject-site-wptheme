@@ -67,7 +67,7 @@
 		<meta property="og:description" content="<?php echo str_replace( array( '<br>', '<br />' ), '', $campaign->summary() ); ?>" />
 		
 		<?php else: ?>
-		<meta property="og:description" content="Première plateforme de financement participatif en royalties (royalty crowdfunding). Entrepreneurs : levez des fonds sans diluer votre capital !" />
+		<meta property="og:description" content="<?php echo $page_controler->get_page_description(); ?>" />
 		
 		<?php endif; ?>
 		<meta property="og:image" content="<?php echo $imageFacebook ?>" />
