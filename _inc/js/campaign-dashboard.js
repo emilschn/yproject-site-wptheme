@@ -801,7 +801,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 				},{
 					width: "30px",
 					className: "dt-body-center nopadding",
-					targets: [2,3,4]
+					targets: [3,4,5]
 				}
 			],
 
@@ -911,7 +911,8 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 				}
 			}
 		});
-		self.table.columns.adjust();
+		self.table.columns.adjust();		
+		self.table.responsive.recalc();
 
 		var mailButtonDefault = self.table.button(1).text()
 		self.table.on("select.dt deselect.dt", function ( e, dt, type, indexes ) {

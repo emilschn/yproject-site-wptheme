@@ -17,7 +17,7 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 <div class="db-form v3 center">
 	<br>
 	<p class="align-justify">
-		<?php _e( "Vous pouvez cliquer sur une ligne du tableau pour avoir plus d'informations", 'yproject' ); ?>
+		<?php _e( "Cliquez sur les lignes du tableau pour voir plus d’informations.", 'yproject' ); ?>
 	</p>
 	<br><br>
 </div>
@@ -36,8 +36,8 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 		<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>"/>
 		<div class="step-write field field-container">
 			<p><strong><?php _e("Vous pouvez utiliser les variables suivantes : ", 'yproject'); ?></strong>
-			<?php DashboardUtility::get_infobutton('Au moment de l\'envoi, les variables seront remplacées par les valeurs correspondantes.<br/><br/>
-				Ainsi, par exemple, <b>%userfirstname%</b> sera remplacé par le prénom de l\'utilisateur qui recevra le message.',true)?></p>
+			<?php DashboardUtility::get_infobutton('Au moment de l\'envoi, les variables seront remplacées par les valeurs correspondantes.<br/><br/>Ainsi, par exemple, <b>%userfirstname%</b> sera remplacé par le prénom de l\'utilisateur qui recevra le message.', true); ?></p>
+			
 			<ul style="list-style-type: square;">
 				<li><i>%userfirstname%</i> : Prénom de l'utilisateur destinataire</li>
 				<li><i>%userlastname%</i> : Nom de famille de l'utilisateur destinataire</li>

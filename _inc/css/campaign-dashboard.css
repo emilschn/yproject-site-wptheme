@@ -291,6 +291,19 @@ div#container div#content main #item-body-contacts #direct-mail {
 	text-align: left;
 }
 
+#item-body-contacts #direct-mail .preview {
+    border: 1px dotted black;
+    background-color: #FFF !important;
+    padding: 10px;
+}
+
+#item-body-contacts #direct-mail .preview-title {
+    padding: 10px;
+    font-weight: bold;
+    border: 1px dotted;
+    border-bottom: 0px;
+}
+
 div#container div#content main #item-body-contacts .authentication-more-info {
 	display: inline-block;
 	margin-left: 20px;
@@ -306,6 +319,65 @@ div#container div#content main #item-body-contacts .authentication-more-info spa
 	width: 200px;
 	border: 1px solid black;
 	background: #E1E3E2;
+}
+
+#item-body-contacts .wdg-datatable table.dataTable thead th,
+#item-body-contacts .wdg-datatable table.dataTable thead td {
+    padding: 5px 17px 5px 8px;
+    cursor: move;
+}
+
+#item-body-contacts .wdg-datatable table.dataTable tbody th,
+#item-body-contacts .wdg-datatable table.dataTable tbody td {
+    padding: 5px 5px;
+}
+
+#item-body-contacts .wdg-datatable table.dataTable tfoot th,
+#item-body-contacts .wdg-datatable table.dataTable tfoot td {
+    padding: 8px 8px 15px;
+}
+
+#item-body-contacts .wdg-datatable table.dataTable thead th.nopadding,
+#item-body-contacts .wdg-datatable table.dataTable thead td.nopadding {
+    padding: 5px 2px;
+    cursor: default;
+    background-image: none;
+}
+
+#item-body-contacts .wdg-datatable table.dataTable tbody th.nopadding,
+#item-body-contacts .wdg-datatable table.dataTable tbody td.nopadding {
+    padding: 5px 2px;
+}
+
+#item-body-contacts .wdg-datatable table.dataTable tfoot th.nopadding,
+#item-body-contacts .wdg-datatable table.dataTable tfoot td.nopadding {
+    padding: 8px 0px 15px;
+}
+
+#item-body-contacts .wdg-datatable table.dataTable tfoot tr{
+    vertical-align: top;
+}
+
+#item-body-contacts .wdg-datatable #contacts-table{
+    margin: 0;
+}
+
+#item-body-contacts .wdg-datatable tfoot th input{
+    width: 90%;
+}
+
+#item-body-contacts .wdg-datatable .dirty-hide{
+    width: 0px;
+    overflow: hidden;
+    height: 0px;
+}
+
+div.dt-button-collection{
+    width: auto !important;
+}
+
+table.dataTable td.select-checkbox::before {
+    border-radius: 1px;
 }
 
 /*******************************************************************************
