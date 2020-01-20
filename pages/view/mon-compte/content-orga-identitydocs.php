@@ -6,5 +6,5 @@
 
 
 <?php 
-    locate_template( array( 'pages/view/common/form-orga-identitydocs.php'  ), true );
+    locate_template( array( 'pages/view/common/form-orga-identitydocs.php'  ), true, false );
 ?>
