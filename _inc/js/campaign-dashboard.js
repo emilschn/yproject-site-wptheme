@@ -952,7 +952,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 			//Maj liste des identifiants à mailer
 			var recipients_array = [];
 			$.each(self.table.rows({ selected: true }).data(), function(index, element){
-				recipients_array.push(element[result_contacts_table['id_column_user_id']]);
+				recipients_array.push(element[result_contacts_table['id_column_user_id']-1]);
 			});
 			$("#mail_recipients").val(recipients_array);
 		} );
