@@ -29,7 +29,7 @@ var ProjectEditor = (function($) {
 				} );
 
 				// On ne relance l'analyse des images que si on n'a eu aucune erreur pour l'instant
-				if ( $( '.project-admin div.intro' ).length == 0 ) {
+				if ( $( '.project-admin .project-errors div.intro' ).length == 0 ) {
 					ProjectEditor.analyseImageFiles();
 				}
 				ProjectEditor.initElements();
@@ -57,6 +57,9 @@ var ProjectEditor = (function($) {
 				ProjectEditor.initEdition();
 				$(clickedElement).addClass("btn-edit-validate");
 				$("#wdg-edit-project-add-lang").show();
+				// on déplace la div d'erreur 
+				var divh = $("#wdg-edit-project-add-lang").height() + 5;
+				$( '.project-admin .project-errors').css('top', divh + 'px');
 			} else {
 				if (WDGProjectPageFunctions.isEditing !== "") {
 					alert("Vous ne pouvez pas valider si un champ est en cours d'édition");
@@ -65,6 +68,7 @@ var ProjectEditor = (function($) {
 					ProjectEditor.stopEdition();
 					$(clickedElement).removeClass("btn-edit-validate");
 					$("#wdg-edit-project-add-lang").hide();
+					$( '.project-admin .project-errors').css('top', '0px');
 					var background = $("#project-banner-picture").css('background-image');
 					if(background){
 						$("#project-banner-picture").attr('style','display:inline-block; left: 387px; top: 506px; background-image:'+background+'; background-repeat:no-repeat;');
@@ -798,8 +802,10 @@ var ProjectEditor = (function($) {
 		},
 		
 		addEditIntroErrorMessage: function() {
-			if ( $( '.project-admin div.intro' ).length == 0 ) {
-				$( '.project-admin' ).append( '<div class="intro">Afin de ne pas surcharger votre page et accélérer le temps d\'ouverture, nous vous encourageons à limiter le poids des images à 200 Ko.</div>' );
+			if ( $( '.project-admin .project-errors div.intro' ).length == 0 ) {
+				$( '.project-admin' ).append( '<div class="project-errors"></div>');				
+				$( '.project-admin .project-errors').css('position', 'relative');
+				$( '.project-admin .project-errors' ).append( '<div class="intro">Afin de ne pas surcharger votre page et accélérer le temps d\'ouverture, nous vous encourageons à limiter le poids des images à 200 Ko.</div>' );
 			}
 		},
 		
@@ -808,7 +814,7 @@ var ProjectEditor = (function($) {
 			if ( bIsBig ) {
 				sClass += ' error-big';
 			}
-			$( '.project-admin' ).append( '<div class="' + sClass + '">' + sMsg + '</div>' );
+			$( '.project-admin .project-errors' ).append( '<div class="' + sClass + '">' + sMsg + '</div>' );
 		}
 	};
     
