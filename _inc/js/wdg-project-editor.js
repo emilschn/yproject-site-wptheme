@@ -20,6 +20,11 @@ var ProjectEditor = (function($) {
 					ProjectEditor.clickAddLang();
 				});
 
+				$(".wdg-send-project-notification").show();
+				$(".wdg-send-project-notification").click(function() {
+					ProjectEditor.sendProjectNotification( $( this ).attr( 'id' ) );
+				});
+
 				window.addEventListener( 'beforeunload', function (e) {
 					if ( WDGProjectPageFunctions.isEditing !== '' ) {
 						var confirmationMessage = "Vous avez réservé une des parties du projet pour l'éditer, prenez le temps de la sauvegarder ou d'annuler la réservation. Êtes vous sûr de vouloir quitter ?";
@@ -815,6 +820,44 @@ var ProjectEditor = (function($) {
 				sClass += ' error-big';
 			}
 			$( '.project-admin .project-errors' ).append( '<div class="' + sClass + '">' + sMsg + '</div>' );
+		},
+
+		sendProjectNotification: function( sButtonId ) {
+			var bIsNotificationForProject = ( sButtonId == 'wdg-send-project-notification-to-project' );
+
+			var sMsgConfirm = "Vous allez envoyer une notification à WE DO GOOD indiquant que nous pouvons relire votre présentation, voulez-vous continuer ?";
+			if ( bIsNotificationForProject ) {
+				sMsgConfirm = "Vous allez envoyer une notification au porteur de projet indiquant qu'il doit faire des modifications, voulez-vous continuer ?";
+			}
+
+			var confirmNotification = false;
+			if ( !$( '.wdg-send-project-notification' ).hasClass( 'clicked' ) ) {
+				confirmNotification = window.confirm( sMsgConfirm );
+			}
+
+			if ( confirmNotification ) {
+				$( '.wdg-send-project-notification' ).addClass( 'clicked' );
+				$( '.wdg-send-project-notification' ).width( $( '#wdg-send-project-notification' ).width() );
+				$( '.wdg-send-project-notification' ).text( "Envoi en cours..." );
+				
+				$.ajax( {
+					'type' : "POST",
+					'url' : ajax_object.ajax_url,
+					'data': {
+						'action':			'send_project_notification',
+						'id_campaign':		$( '#content' ).data( 'campaignid' ),
+						'is_for_project':	( bIsNotificationForProject ? '1' : '0' )
+					}
+				} ).done( function(result) {
+					if ( result == '1' ) {
+						$( '.wdg-send-project-notification' ).text( "Envoyé !" );
+						$( '.wdg-send-project-notification' ).addClass( 'confirm' );
+					} else {
+						$( '.wdg-send-project-notification' ).text( "Erreur d'envoi..." );
+						$( '.wdg-send-project-notification' ).addClass( 'error' );
+					}
+				} );
+			}
 		}
 	};
     
