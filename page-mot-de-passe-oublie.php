@@ -22,7 +22,8 @@ if ( !empty( $init_username ) ) {
 
 	$error = array();
 	if (isset($user, $user->user_login)) {
-		if (strpos($user->user_url, 'facebook.com') === false) {
+		$facebook_meta = $user->get( 'social_connect_facebook_id' );
+		if (!isset($facebook_meta) || $facebook_meta == "") {
 			global $wpdb;
 			$user_login = $user->user_login;
 			$user_email = $user->user_email;
