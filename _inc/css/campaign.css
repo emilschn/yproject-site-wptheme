@@ -150,15 +150,15 @@ div#content.version-3 div.project-admin {
 	top: 90px;
 	z-index: 2;
 }
-div#content.version-3 div.project-admin > a, div#content.version-3 div.project-admin > div.btn-edit {
+div#content.version-3 div.project-admin > a, div#content.version-3 div.project-admin > div.btn-edit, .wdg-send-project-notification {
 	display: block;
-	width: 140px;
-	margin-bottom: 10px;
-	padding: 5px 20px;
+	margin-bottom: 8px;
+	padding: 8px;
 	font-weight: bold;
 	text-transform: uppercase;
 	color: #000000;
 	background-color: #D3EAE9;
+	text-align: right;
 }
 .edit-button, .move-button, .cancel-button, .wait-button, #wdg-edit-project-add-lang button.add-button {
 	background-color: #D3EAE9;
@@ -168,6 +168,27 @@ div#content.version-3 div.project-admin > div.btn-edit.edit-button-validate {
 }
 #wdg-edit-project-add-lang {
 	color: #000000;
+}
+.wdg-send-project-notification {
+	width: 100%;
+	display: none;
+	border: 0px;
+	font-family: Trebuchet MS, sans-serif;
+	font-weight: bold;
+	font-size: 12pt;
+	cursor: pointer;
+}
+#wdg-send-project-notification-to-project {
+	background-color: #F1A074;
+}
+.wdg-send-project-notification.clicked {
+	cursor: default;
+}
+.wdg-send-project-notification.clicked.confirm {
+	background-color: #8BC79C;
+}
+.wdg-send-project-notification.clicked.error {
+	background-color: #EACDCB;
 }
 div#content.version-3 div.project-admin > div.btn-edit {
 	display: none;
@@ -212,7 +233,7 @@ div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before 
 }
 
 div#content div.project-admin div.intro {
-	width: 176px;
+	width: 210px;
 	margin-right: 4px;
 	margin-bottom: 8px;
 	text-align: justify;
@@ -221,7 +242,7 @@ div#content div.project-admin div.intro {
 }
 
 div#content div.project-admin div.error {
-	width: 172px;
+	width: 202px;
 	margin-bottom: 4px;
 	padding: 4px;
 	text-align: justify;
