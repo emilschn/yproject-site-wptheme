@@ -24,6 +24,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $form_user_details;
 	private $form_user_feedback;
 	private $form_user_identitydocs;
+	private $controler_name;
 	
 	/**
 	 * @var ATCF_Campaign
@@ -121,6 +122,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 
 
 		$this->controler_name = 'tableau-de-bord';
+	}
+	public function get_controler_name () {
+		return $this->controler_name;
 	}
 	
 /******************************************************************************/

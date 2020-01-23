@@ -26,6 +26,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private $form_user_tax_exemption;
 	private $list_intentions_to_confirm;
 	private $tax_documents;
+	private $controler_name;
 	
 	
 	public function __construct() {
@@ -61,6 +62,9 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		
 		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
 		wp_enqueue_script( 'wdg-user-account', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-user-account.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION);
+	}
+	public function get_controler_name () {
+		return $this->controler_name;
 	}
 	
 /******************************************************************************/

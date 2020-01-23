@@ -1,10 +1,10 @@
 <?php
-$page_controler = WDG_Templates_Engine::instance()->get_controler();
+	$page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 <h2><?php _e( "Financement", 'yproject' ); ?></h2>
 
 <div class="db-form v3 full center bg-white">
-	<form id="projectfunding_form" class="ajax-db-form" data-action="save_project_funding" novalidate>
+<	<form id="projectfunding_form" class="ajax-db-form" data-action="save_project_funding" <?php if (!$page_controler->get_campaign()->is_preparing()){ ?>data-confirm="true"<?php } ?> novalidate>
 		<?php
 		DashboardUtility::create_field(array(
 			'id'			=> 'new_minimum_goal',
