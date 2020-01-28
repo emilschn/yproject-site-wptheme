@@ -1018,7 +1018,7 @@ footer > .footer-container > div.licence a{
 * HOME - STATS
 *******************************************************************************/
 body.home section.project-stats {
-	padding: 40px 0 0px;
+	padding: 40px 0px 20px;
 	color: #333333;
 	background: #FFFFFF;
 }
@@ -1062,37 +1062,73 @@ body.home section.project-stats > div p {
 body.home section.news {
 	color: #333333;
 	background: #FFFFFF;
-    background: url("../../images/template-home/bee-background-min.jpg") center center no-repeat;
+	background: url("../../images/template-home/quiz-2020-bg.jpg") no-repeat;
+	background-position: center top;
+	background-size: cover;
 }
-body.home section.news > div {
+body.home section.news div.news-content {
+	display: flex;
 	width: -webkit-calc(100% - 20px);
 	width: -moz-calc(100% - 20px);
 	width: calc(100% - 20px);
 	max-width: 1280px;
+	height: 500px;
 	margin: auto;
 }
-body.home section.news > div div.news-content {
-	float: right;
-	width: 40%;
-	min-width: 250px;
-	padding: 20px;
-	text-align: right;
-	background-color: rgba( 255, 255, 255, .7 );
+body.home section.news img {
+	margin: auto;
 }
-body.home section.news > div div.news-content span.news-description {
-	font-size: 18px;
-}
-body.home section.news > div div.news-content span.news-title {
-	display: inline-block;
-	padding: 32px 0px;
-	font-size: 32px;
-	text-transform: uppercase;
-}
-body.home section.news > div div.news-content a.button {
-	width: 40%;
-	display: inline-block;
+body.home section.news div.news-text {
+	width: 45%;
+	min-width: 240px;
+	margin: auto;
+	padding: 48px;
 	text-align: center;
-	padding: 15px;
+	background-color: rgba( 255, 255, 255, 0.7 );
+}
+body.home section.news div.news-text span {
+	display: inline-block;
+	text-align: justify;
+	font-size: 20px;
+}
+body.home section.news div.news-text a.button {
+	display: inline-block;
+	width: 264px;
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	letter-spacing: 2px;
+}
+
+@media screen and (max-width: 997px) {
+	body.home section.news div.news-text {
+		margin: auto 8px;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	body.home section.news div.news-content {
+		display: block;
+		text-align: center;
+	}
+	body.home section.news img {
+		width: calc(100% - 16px);
+		max-width: 432px;
+		margin: 80px 0px 24px;
+	}
+	body.home section.news div.news-text {
+		width: calc(100% - 112px);
+		margin: auto;
+		padding: 24px;
+	}
+	body.home section.news div.news-text a.button {
+		width: auto;
+		padding: 8px;
+		font-size: 18px;
+		letter-spacing: 1px;
+	}
 }
 
 /*******************************************************************************
