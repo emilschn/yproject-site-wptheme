@@ -80,22 +80,13 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 /******************************************************************************/
 ?>
 <section class="news">
-	<div>
-		<h2 class="standard">/ <?php _e("Actualit&eacute;", "yproject") ?> /</h2>
+	<div class="news-content">
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/quiz-2020-txt.png" alt="quiz de l'ann&eacute;e" width="889">
 		
-		<div class="news-content">
-			<span class="news-description">
-				<?php _e( "Ruches, &eacute;nergie renouvelable,", 'yproject' ); ?><br>
-				<?php _e( "mobilit&eacute; et &eacute;lectronique durable...", 'yproject' ); ?>
-			</span>
-			<br>
-			<span class="news-title"><?php _e( "D&eacute;couvrez l'&eacute;pargne positive !", 'yproject' ); ?></span>
-			<br>
-			<a href="https://www.wedogood.co/epargne-positive/" class="button transparent"><?php _e( "Lire", 'yproject' ); ?></a>
-		</div>
-		
-		<div class="clear">
-			<br><br>
+		<div class="news-text">
+			<span><?php _e( "Mesure 75cm, n'a besoin que d'&eacute;nergie solaire pour fonctionner, mais passe sa journ&eacute;e &agrave; manger de l'herbe&nbsp;?", 'yproject' ); ?></span>
+			<br><br><br>
+			<a href="https://www.wedogood.co/epargne-positive/" class="button blue"><?php _e( "D&eacute;couvrir la r&eacute;ponse", 'yproject' ); ?></a>
 		</div>
 	</div>
 </section>		
