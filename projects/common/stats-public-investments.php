@@ -14,10 +14,10 @@
     <?php _e("Les", 'yproject'); ?> <?php echo $voc['investor_name']?>s <?php _e("ont", 'yproject'); ?> <strong class="data-inv-average_age">&hellip;</strong> <?php _e("ans de moyenne", 'yproject'); ?>.<br />
     <?php _e("Ce sont", 'yproject'); ?> <strong class="data-inv-percent_female">&hellip;</strong><?php _e("% de femmes et", 'yproject'); ?> <strong class="data-inv-percent_male">&hellip;</strong><?php _e("% d&apos;hommes", 'yproject'); ?>.<br />
     <strong class="data-campaign_days_remaining"><?php echo $campaign->time_remaining_fullstr()?></strong><br />
-    <?php echo ucfirst($voc['investor_action'])?> <?php _e("moyen", 'yproject'); ?><?php if ($voc['action_feminin']){echo 'ne';}?> <?php _e("par personne :", 'yproject'); ?> <strong class="data-inv-average_invest">&hellip;</strong>&euro;<br />
-    <?php echo ucfirst($voc['investor_action'])?> <?php _e("minimal", 'yproject'); ?><?php if ($voc['action_feminin']){echo 'e';}?> : <strong class="data-inv-min_invest">&hellip;</strong>&euro;<br />
-    <?php echo ucfirst($voc['investor_action'])?> <?php _e("m&eacute;dian", 'yproject'); ?><?php if ($voc['action_feminin']){echo 'e';}?> : <strong class="data-inv-median_invest">&hellip;</strong>&euro;<br />
-    <?php echo ucfirst($voc['investor_action'])?> <?php _e("maximal", 'yproject'); ?><?php if ($voc['action_feminin']){echo 'e';}?> : <strong class="data-inv-max_invest">&hellip;</strong>&euro;<br />
+    <?php echo ucfirst($voc['investor_action'])?> <?php _e("moyen", 'yproject'); ?><?php if ($voc['action_feminin']){echo 'ne';}?> <?php _e("par personne :", 'yproject'); ?> <strong class="data-inv-average_invest">&hellip;</strong> &euro;<br />
+    <?php echo ucfirst($voc['investor_action'])?> <?php _e("minimal", 'yproject'); ?><?php if ($voc['action_feminin']){echo 'e';}?> : <strong class="data-inv-min_invest">&hellip;</strong> &euro;<br />
+    <?php echo ucfirst($voc['investor_action'])?> <?php _e("m&eacute;dian", 'yproject'); ?><?php if ($voc['action_feminin']){echo 'e';}?> : <strong class="data-inv-median_invest">&hellip;</strong> &euro;<br />
+    <?php echo ucfirst($voc['investor_action'])?> <?php _e("maximal", 'yproject'); ?><?php if ($voc['action_feminin']){echo 'e';}?> : <strong class="data-inv-max_invest">&hellip;</strong> &euro;<br />
     
     <?php /*if ($is_advanced === TRUE): ?>
     <br />
