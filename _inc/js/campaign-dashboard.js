@@ -302,12 +302,11 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 		}
 		var thisForm = $(this);
 
-		//Receuillir informations du formulaire
+		//Recueillir informations du formulaire
 		var data_to_update = {
 			'action': $( this ).data( 'action' ),
 			'campaign_id': campaign_id
 		};
-
 		$( this ).find( '.field' ).each( function( index ){
 			var id = $( this ).data( 'id' );
 			if ( id != undefined ) {
@@ -364,53 +363,65 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 		$(":input", this).prop('disabled', true);
 
 		thisForm.find('.feedback_save span').fadeOut();
+		
+		if($( this ).data( 'confirm' ) == "true" || $( this ).data( 'confirm' ) == true) {
+			var confirmSave = window.confirm("Etes-vous sûrs de vouloir enregistrer ces modifications ?");
+		}else{
+			var confirmSave = true;		
+		}
+		if ( confirmSave ) {
+			//Envoi de requête Ajax
+			$.ajax({
+				'type': "POST",
+				'url': ajax_object.ajax_url,
+				'data': data_to_update
+			}).done(function (result) {
+				if (result != "") {
+					var jsonResult = JSON.parse(result);
+					feedback = jsonResult;
 
-		//Envoi de requête Ajax
-		$.ajax({
-			'type': "POST",
-			'url': ajax_object.ajax_url,
-			'data': data_to_update
-		}).done(function (result) {
-			if (result != "") {
-				var jsonResult = JSON.parse(result);
-				feedback = jsonResult;
+					//Affiche les erreurs
+					var firstErrorInput = false;
+					for ( var input in feedback.errors ) {
+						firstErrorInput = $( '#field-' + input + ' .field-error' );
+						$( '#field-' + input + ' .field-error' ).html( feedback.errors[ input ] );
+						$( '#field-' + input + ' .field-error' ).show();
+						$( '#field-' + input ).find('i.fa.validation').remove();
+					}
 
-				//Affiche les erreurs
-				var firstErrorInput = false;
-				for ( var input in feedback.errors ) {
-					firstErrorInput = $( '#field-' + input + ' .field-error' );
-					$( '#field-' + input + ' .field-error' ).html( feedback.errors[ input ] );
-					$( '#field-' + input + ' .field-error' ).show();
-					$( '#field-' + input ).find('i.fa.validation').remove();
+					for(var input in feedback.success){
+						$( '#field-' + input + ' .field-error' ).hide();
+						thisinput = thisForm.find( 'input[name=' + input + '],select[name=select-' + input + ']');
+						self.removeFieldError(thisinput);
+						thisinput.parent().parent().find('i.fa.validation').remove();
+						thisinput.addClass("validation");
+						thisinput.parent().after('<i class="fa fa-check validation" aria-hidden="true"></i>');
+					}
+
+					//Scrolle jusqu'à la 1ère erreur et la sélectionne
+					if ( firstErrorInput !== false ) {
+						self.scrollTo( firstErrorInput );
+						thisForm.find('.save_errors').fadeIn();
+					} else {
+						thisForm.find('.save_ok').fadeIn();                          
+					}
+
+
 				}
-
-				for(var input in feedback.success){
-					$( '#field-' + input + ' .field-error' ).hide();
-					thisinput = thisForm.find( 'input[name=' + input + '],select[name=select-' + input + ']');
-					self.removeFieldError(thisinput);
-					thisinput.parent().parent().find('i.fa.validation').remove();
-					thisinput.addClass("validation");
-					thisinput.parent().after('<i class="fa fa-check validation" aria-hidden="true"></i>');
-				}
-
-				//Scrolle jusqu'à la 1ère erreur et la sélectionne
-				if ( firstErrorInput !== false ) {
-					self.scrollTo( firstErrorInput );
-					thisForm.find('.save_errors').fadeIn();
-				} else {
-					thisForm.find('.save_ok').fadeIn();                          
-				}
-
-
-			}
-		}).fail(function() {
-			thisForm.find('.save_fail').fadeIn();
-		}).always(function() {
+			}).fail(function() {
+				thisForm.find('.save_fail').fadeIn();
+			}).always(function() {
+				//Réactive les champs
+				save_button.find(".button-waiting").hide();
+				save_button.find(".button-text").show();
+				thisForm.find(":input").prop('disabled', false);
+			});
+		} else {
 			//Réactive les champs
 			save_button.find(".button-waiting").hide();
 			save_button.find(".button-text").show();
 			thisForm.find(":input").prop('disabled', false);
-		});
+		}
 	});
 };
 

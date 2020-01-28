@@ -206,7 +206,6 @@ div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before 
 .en_US div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before {
     content: "Normal Mode";
 }
-
 #wdg-edit-project-add-lang {
 	display: none;
     position: fixed;
