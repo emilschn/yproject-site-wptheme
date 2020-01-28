@@ -791,6 +791,13 @@ var WDGFormsFunctions = (function($) {
 				var formId = $( this ).parent().parent().attr( 'id' );
 				WDGFormsFunctions.postForm( '#' + formId, WDGFormsFunctions.postFormCallback, this );
 			} );
+			$( '.db-form button.confirm' ).click( function( e ) {
+				var confirmSave = window.confirm("Etes-vous sûrs de vouloir enregistrer ces modifications ?");			
+				if ( !confirmSave ) {
+					e.stopPropagation();
+					e.preventDefault();
+				}
+			} );
 			$( '.wdg-lightbox button.close, .wdg-lightbox-ref button.close' ).click( function( e ) {
 				WDGLightboxFunctions.hideAll();
 			} );
