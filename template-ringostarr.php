@@ -12,7 +12,6 @@
     
     $input_first_name = filter_input( INPUT_GET, 'firstname' );
     
-    echo $input_first_name;
 
 ?>
 
@@ -33,7 +32,7 @@
     </div><!-- .padder -->
     
     <!-- le composant Vue récupéré plus tôt sera injecté dans cette div -->
-    <div id="app" data-test="hehehe"></div> 
+    <div id="app" data-test="<?php echo $input_first_name; ?>"></div> 
 	
 </div><!-- #content -->
 
