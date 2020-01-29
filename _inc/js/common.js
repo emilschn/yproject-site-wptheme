@@ -286,6 +286,9 @@ YPUIFunctions = (function($) {
 
 				//Injecte les données directement affichées dans leurs emplacements
 				$.each(inv_data, function(key, value) {
+					if ( key == 'investors_string' ) {
+						value = value.split('&amp;').join('&');
+					}
 					$('.data-inv-'+key).html(value);
 				});
 				$('.ajax-data-inv-loader-img').slideUp();
