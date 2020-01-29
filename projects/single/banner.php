@@ -1,6 +1,12 @@
 <?php 
 global $campaign, $current_user, $stylesheet_directory_uri, $can_modify, $language_list;
 
+if ( empty( $campaign ) ) {
+	$campaign = atcf_get_current_campaign();
+	if ( empty( $campaign ) ) {
+		exit( 'Access error current campaign - AECC1431' );
+	}
+}
 $btn_follow_href = home_url( '/connexion/' ) . '?source=project';
 $btn_follow_classes = 'wdg-button-lightbox-open';
 $btn_follow_data_lightbox = 'connexion';

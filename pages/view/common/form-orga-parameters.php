@@ -59,7 +59,7 @@
 	</p>
 
 	<div id="organization-details-form-buttons">
-		<button type="submit" class="button save red <?php if (!$page_controler->get_campaign()->is_preparing()){ ?>confirm<?php } ?>">
+		<button type="submit" class="button save red <?php if ( $page_controler->get_campaign() !== FALSE && !$page_controler->get_campaign()->is_preparing() ) { ?>confirm<?php } ?>">
 			<?php _e( "Enregistrer les modifications", 'yproject' ); ?>
 		</button>
 	</div>
