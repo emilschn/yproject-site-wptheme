@@ -578,3 +578,10 @@ if ( !function_exists( 'array_key_last' ) ) {
 		return array_keys( $array )[ count( $array ) - 1 ];
 	}
 }
+
+if ( defined( 'WP_IS_DEV_SITE' ) && WP_IS_DEV_SITE ) {
+	function add_cors_http_header(){
+		header("Access-Control-Allow-Origin: *");
+	}
+	add_action('init','add_cors_http_header');
+}
