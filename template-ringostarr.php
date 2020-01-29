@@ -10,7 +10,8 @@
 
     // on récupère les données envoyées en GET
     
-    $input_first_name = filter_input( INPUT_GET, 'firstname' );
+    $input_firstname = filter_input( INPUT_GET, 'firstname' );
+    $input_lastname = filter_input( INPUT_GET, 'lastname' );
     
 
 ?>
@@ -32,7 +33,7 @@
     </div><!-- .padder -->
     
     <!-- le composant Vue récupéré plus tôt sera injecté dans cette div -->
-    <div id="app" data-test="<?php echo $input_first_name; ?>"></div> 
+    <div id="app" data-firstname="<?php echo $input_firstname; ?>" data-lastname="<?php echo $input_lastname; ?>"></div> 
 	
 </div><!-- #content -->
 
