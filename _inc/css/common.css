@@ -1034,6 +1034,7 @@ body.home section.project-stats > div div.left {
 	width: calc(100% / 3 - 16px);
 	font-size: 18pt;
 	margin-left: 15px;
+    display: -webkit-flex;
 	display: flex;
 	justify-content: flex-start;
 }
@@ -1067,20 +1068,29 @@ body.home section.news {
 	background-size: cover;
 }
 body.home section.news div.news-content {
+    display: -webkit-flex;
 	display: flex;
-	width: -webkit-calc(100% - 20px);
-	width: -moz-calc(100% - 20px);
-	width: calc(100% - 20px);
+	width: -webkit-calc(100% - 16px);
+	width: -moz-calc(100% - 16px);
+	width: calc(100% - 16px);
 	max-width: 1280px;
 	height: 500px;
 	margin: auto;
 }
-body.home section.news img {
+body.home section.news div.news-image {
+	background: url("../../images/template-home/quiz-2020-txt.png") no-repeat;
+	background-position: center top;
+	background-size: 100%;
+	width: 55%;
+	height: 164px;
 	margin: auto;
 }
 body.home section.news div.news-text {
-	width: 45%;
+	width: -webkit-calc(45% - 96px);
+	width: -moz-calc(45% - 96px);
+	width: calc(45% - 96px);
 	min-width: 240px;
+	height: 164px;
 	margin: auto;
 	padding: 48px;
 	text-align: center;
@@ -1110,24 +1120,46 @@ body.home section.news div.news-text a.button {
 
 @media screen and (max-width: 800px) {
 	body.home section.news div.news-content {
-		display: block;
-		text-align: center;
+		flex-direction: column;
 	}
-	body.home section.news img {
+	body.home section.news div.news-image {
+		width: -webkit-calc(100% - 16px);
+		width: -moz-calc(100% - 16px);
 		width: calc(100% - 16px);
-		max-width: 432px;
-		margin: 80px 0px 24px;
+		height: 200px;
+		background-position: center;
 	}
 	body.home section.news div.news-text {
+		width: -webkit-calc(100% - 112px);
+		width: -moz-calc(100% - 112px);
 		width: calc(100% - 112px);
 		margin: auto;
 		padding: 24px;
+	}
+	body.home section.news div.news-text span {
+		font-size: 19px;
 	}
 	body.home section.news div.news-text a.button {
 		width: auto;
 		padding: 8px;
 		font-size: 18px;
 		letter-spacing: 1px;
+	}
+}
+@media screen and (max-width: 400px) {
+	body.home section.news div.news-image {
+		height: 100px;
+		margin: 32px auto;
+	}
+	body.home section.news div.news-text {
+		height: 200px;
+		margin: 32px auto;
+	}
+	body.home section.news div.news-text br {
+		display: none;
+	}
+	body.home section.news div.news-text a.button {
+		margin-top: 16px;
 	}
 }
 
@@ -1297,6 +1329,7 @@ body.template-les-projets div#content > h2 {
 }
 
 body.template-les-projets nav#project-filter {
+    display: -webkit-flex;
 	display: flex;
 	justify-content: space-around;
 	height: 45px;

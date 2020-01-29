@@ -81,12 +81,12 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 <section class="news">
 	<div class="news-content">
-		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/quiz-2020-txt.png" alt="quiz de l'ann&eacute;e" width="889">
+		<div class="news-image"></div>
 		
 		<div class="news-text">
 			<span><?php _e( "Mesure 75cm, n'a besoin que d'&eacute;nergie solaire pour fonctionner, mais passe sa journ&eacute;e &agrave; manger de l'herbe&nbsp;?", 'yproject' ); ?></span>
 			<br><br><br>
-			<a href="https://www.wedogood.co/epargne-positive/" class="button blue"><?php _e( "D&eacute;couvrir la r&eacute;ponse", 'yproject' ); ?></a>
+			<a href="https://www.wedogood.co/voeux-2020/" class="button blue"><?php _e( "D&eacute;couvrir la r&eacute;ponse", 'yproject' ); ?></a>
 		</div>
 	</div>
 </section>		
