@@ -580,8 +580,9 @@ if ( !function_exists( 'array_key_last' ) ) {
 }
 
 if ( defined( 'WP_IS_DEV_SITE' ) && WP_IS_DEV_SITE ) {
-	function add_cors_http_header(){
-		header("Access-Control-Allow-Origin: *");
+	function wdg_add_allowed_origins($origins) {
+		$origins[] = 'http://localhost:8080';
+		return $origins;
 	}
-	add_action('init','add_cors_http_header');
+	add_filter('allowed_http_origins', 'wdg_add_allowed_origins');
 }
