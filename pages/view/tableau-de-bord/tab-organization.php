@@ -7,6 +7,16 @@
 
 <h2><?php _e( "Organisation", 'yproject' ); ?></h2>
 
+<?php if ( !$page_controler->get_campaign_organization()->is_registered_lemonway_wallet() ): ?>
+	<div class="wdg-message error">
+		<?php _e( "L'organisation n'est pas encore authentifi&eacute;e", 'yproject' ); ?>
+	</div>
+<?php else: ?>
+	<div class="wdg-message confirm">
+		<?php _e( "L'organisation est authentifi&eacute;e", 'yproject' ); ?>
+	</div>
+<?php endif; ?>
+
 <ul class="menu-onglet">
   <li><a href="#organization" data-subtab="orga-parameters" class="focus<?php if ( !$page_controler->get_campaign_organization()->has_filled_invest_infos() || !$page_controler->get_campaign_organization()->can_register_lemonway()): ?> needs-authentication<?php endif; ?>"><?php _e( "Informations", 'yproject' ); ?></a></li>
   <li><a href="#organization" data-subtab="orga-identitydocs" <?php if ( !$page_controler->get_campaign_organization()->has_sent_orga_documents() ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Justificatifs", 'yproject' ); ?></a></li>
