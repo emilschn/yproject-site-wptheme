@@ -215,7 +215,6 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/solutions/incubateurs-accelerateurs/'			=> '0.6',
 			// 0.5
 			// PROJETS
-			'/a-propos/statistiques/rapport-activite-2018/'			=> '0.5',
 			'/financement/offres/crowdfunding/'						=> '0.5',
 			'/financement/offres/crowdfunding-accompagnement/'		=> '0.5',
 			'/financement/offres/love-money/'						=> '0.5',
@@ -224,6 +223,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 //			'/investissement/cooperatives/'							=> '0.5',
 			'/investissement/fiscalite-royalties/'					=> '0.5',
 			// 0.4
+			'/a-propos/statistiques/rapport-activite-2019/'			=> '0.4',
 			'/financement/offres/'									=> '0.4',
 //			'/financement/offres/amorcage-crowdfunding/'			=> '0.4',
 //			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
@@ -241,6 +241,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/a-propos/partenaires/des-bons-plans-pour-votre-entreprise/'	=> '0.2',
 			'/a-propos/recrutement/'			=> '0.2',
 			'/a-propos/statistiques/rapport-activite-2017/'					=> '0.2',
+			'/a-propos/statistiques/rapport-activite-2018/'					=> '0.2',
 			'/epargne-positive/mobilite-durable/investissement/'			=> '0.2',
 			'/epargne-positive/tourisme-durable/investissement/'			=> '0.2',
 			'/epargne-positive/zero-pesticide/investissement/'				=> '0.2',
