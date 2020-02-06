@@ -8,4 +8,7 @@ global $WDGOrganization;
 
 <br><br>
 <?php $edd_settings = get_option( 'edd_settings' ); ?>
-<?php echo wpautop( $edd_settings[ 'lemonway_generalities' ] );
+
+<div class="center">
+	<?php echo wpautop( $edd_settings[ 'lemonway_generalities' ] ); ?>
+</div>
