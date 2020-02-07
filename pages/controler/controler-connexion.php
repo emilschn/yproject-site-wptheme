@@ -40,48 +40,16 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 			$invest_url = home_url( '/investir/?campaign_id=' .$input_redirect_invest. '&amp;invest_start=1' );
 			$_SESSION[ 'login-fb-referer' ] = $invest_url;
 		}
-		
-		$this->login_init = '';
-		$this->init_login_error_reason();
+
+		$WDG_Vue_Components = WDG_Vue_Components::instance();
+		$WDG_Vue_Components->enqueue_component( WDG_Vue_Components::$component_signin_signup );
 		
 		$input_source = filter_input( INPUT_GET, 'source' );
 		$this->display_alert_project = ( $input_source == 'project' );
 	}
 	
-/******************************************************************************/
-// LOGIN ERROR
-/******************************************************************************/
-	public function get_login_error_reason() {
-		return $this->login_error_reason;
-	}
-	
-	private function init_login_error_reason() {
-		$error_reason = filter_input( INPUT_GET, 'error_reason' );
-		if ( !empty( $error_reason ) ) {
-			switch( $error_reason ) {
-				case 'empty_fields':
-					$this->login_error_reason = __( "Merci de remplir tous les champs", 'yproject' );
-					break;
-				case 'orga_account':
-					$this->login_error_reason = __( "Ce compte correspond &agrave; une organisation", 'yproject' );
-					break;
-				default:
-					$this->login_error_reason = __( "Cet utilisateur n'existe pas ou le mot de passe ne correspond pas.", 'yproject' );
-					$this->login_init = $error_reason;
-					if ( !empty( $this->login_init ) ) {
-						$this->login_init = stripslashes( htmlentities( $this->login_init, ENT_QUOTES | ENT_HTML401 ) );
-					}
-					break;
-			}
-		}
-	}
-	
 	public function get_display_alert_project() {
 		return $this->display_alert_project;
-	}
-	
-	public function get_login_init() {
-		return $this->login_init;
 	}
 	
 }

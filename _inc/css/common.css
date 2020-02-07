@@ -707,75 +707,17 @@ ul.project-list a.needs-authentication:after {
 .template-connexion, .template-inscription {
 	background-color: #f2f2f2;
 }
-.template-connexion .center, .template-inscription .center {
-	width: 100%;
+.template-connexion .alert-connect-project, .template-inscription .alert-connect-project {
+	width: 480px;
+	margin: auto;
 }
 .login-page-container {
 	padding-top: 90px;
-}
-.template-connexion h1, .template-inscription h1 {
-	text-align: center;
-	margin: 0px;
-	font-family: Trebuchet MS,sans-serif;
-	font-size: 28px;
-	font-weight: bold;
-	letter-spacing: .125em;
-}
-
-
-.post_bottom_buttons_connexion div { 
-    border-bottom: 1px solid #FFFFFF;
-    font-family: Arial, sans-serif;
-    font-size: 9pt;
-    text-transform: uppercase;
-    width: 200px;
-    height: 25px;
-    background-color: #333333;
-}
-
-.login_fail { color : red; margin-bottom: 10px; }
-
-hr.login-separator {
-	margin: 50px 0px 25px;
-	-moz-border-bottom-colors: none;
-	-moz-border-left-colors: none;
-	-moz-border-right-colors: none;
-	-moz-border-top-colors: none;
-	border-color: -moz-use-text-color;
-	border-image: none;
-	border-right: 0 none;
-	border-style: solid none none;
-	border-width: 2px 0 0;
-	color: #000000;
-}
-nav hr.login-separator {
-	margin: 20px 5%;
-}
-div.login-separator-label {
-	margin-top: -38px;
-	margin-bottom: 30px;
-}
-div.login-separator-label span {
-	background: #f2f2f2;
-	padding: 0px 5px;
-}
-
-.sidebar-login-form a.forgotten {
-    color: #606060;
-    font-style: italic;
-    font-size: 11px;
 }
 
 /*******************************************************************************
 * REGISTER PAGE / REGISTER LIGHTBOX
 *******************************************************************************/
-.template-connexion #content #connect-form .wdg-button-lightbox-open
-#newproject-register-user .wdg-button-lightbox-open {
-	border: none;
-	background: none;
-	font-size: 12pt;
-}
-
 .form-register .on-focus input { margin-left: 110px; }
 .form-register .on-focus .tool-tip { width: 110px; margin-top: -20px; }
 
