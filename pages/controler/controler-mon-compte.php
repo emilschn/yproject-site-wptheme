@@ -183,6 +183,13 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	public function init_show_user_needs_authentication() {
 		$this->show_user_needs_authentication = false;
 	}
+
+	/**
+	 * Fonction de triche pour passer dans Mon compte
+	 */
+	public function get_campaign() {
+		return FALSE;
+	}
 	
 /******************************************************************************/
 // USER ID

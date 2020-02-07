@@ -286,6 +286,9 @@ YPUIFunctions = (function($) {
 
 				//Injecte les données directement affichées dans leurs emplacements
 				$.each(inv_data, function(key, value) {
+					if ( key == 'investors_string' ) {
+						value = value.split('&amp;').join('&');
+					}
 					$('.data-inv-'+key).html(value);
 				});
 				$('.ajax-data-inv-loader-img').slideUp();
@@ -787,6 +790,13 @@ var WDGFormsFunctions = (function($) {
 				$( this ).hide();
 				var formId = $( this ).parent().parent().attr( 'id' );
 				WDGFormsFunctions.postForm( '#' + formId, WDGFormsFunctions.postFormCallback, this );
+			} );
+			$( '.db-form button.confirm' ).click( function( e ) {
+				var confirmSave = window.confirm("Etes-vous sûrs de vouloir enregistrer ces modifications ?");			
+				if ( !confirmSave ) {
+					e.stopPropagation();
+					e.preventDefault();
+				}
 			} );
 			$( '.wdg-lightbox button.close, .wdg-lightbox-ref button.close' ).click( function( e ) {
 				WDGLightboxFunctions.hideAll();
