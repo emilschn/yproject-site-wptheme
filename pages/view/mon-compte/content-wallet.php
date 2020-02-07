@@ -14,7 +14,7 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 
 <h2>Mon porte-monnaie électronique</h2>
 
-<div class="db-form v3 align-left">
+<div class="db-form v3 align-left"  id="item-body-wallet">
 
 	<div class="wallet-preview">
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-invest/picto-porte-monnaie.png" alt="porte-monnaie" width="100" height="69">
@@ -56,7 +56,7 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 		</p>
 
 		<?php if ( !$page_controler->is_iban_validated() ): ?>
-			<h3><?php _e( "Retirer sur mon compte bancaire", 'yproject' ); ?></h3>
+			<h3><?php _e( "Virer vers mon compte bancaire", 'yproject' ); ?></h3>
 
 			<?php if ( $page_controler->is_iban_waiting() ): ?>
 				<?php _e( "Votre RIB est en cours de validation par notre prestataire de paiement. Merci de revenir d'ici 48h pour vous assurer de sa validation.", 'yproject' ); ?>
@@ -73,7 +73,7 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 			<?php endif; ?>
 
 		<?php elseif ( $lw_wallet_amount > 0 ): ?>
-			<h3><?php _e( "Retirer sur mon compte bancaire", 'yproject' ); ?></h3>
+			<h3><?php _e( "Virer vers mon compte bancaire", 'yproject' ); ?></h3>
 
 			<form action="" method="POST" enctype="multipart/form-data" class="db-form v3 full align-left">
 				<input type="hidden" name="action" value="user_wallet_to_bankaccount">
@@ -98,7 +98,7 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 
 				<a href="#bank" class="button transparent go-to-tab" data-tab="bank"><?php _e( "Modifier mon RIB", 'yproject' ); ?></a>
 				<br><br>
-				<button type="submit" class="button blue"><?php _e( "Retirer sur mon compte bancaire", 'yproject' ); ?></button>
+				<button type="submit" class="button blue"><?php _e( "Virer vers mon compte bancaire", 'yproject' ); ?></button>
 			</form>
 			<br><br>
 

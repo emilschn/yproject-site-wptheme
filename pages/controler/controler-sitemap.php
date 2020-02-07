@@ -52,6 +52,8 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	private function daily_call() {
 		$this->rebuild_sitemap();
 		WDG_Cache_Plugin::initialize_home_stats();
+		// Tous les jours, suppression de listes de SMS qui s'accumulent
+		WDGWPRESTLib::call_get_wdg( 'sms/clean' );
 	}
 	
 	private function summary_call() {

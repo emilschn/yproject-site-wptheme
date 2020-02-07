@@ -302,12 +302,11 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 		}
 		var thisForm = $(this);
 
-		//Receuillir informations du formulaire
+		//Recueillir informations du formulaire
 		var data_to_update = {
 			'action': $( this ).data( 'action' ),
 			'campaign_id': campaign_id
 		};
-
 		$( this ).find( '.field' ).each( function( index ){
 			var id = $( this ).data( 'id' );
 			if ( id != undefined ) {
@@ -364,53 +363,65 @@ WDGCampaignDashboard.prototype.initAjaxForms = function() {
 		$(":input", this).prop('disabled', true);
 
 		thisForm.find('.feedback_save span').fadeOut();
+		
+		if($( this ).data( 'confirm' ) == "true" || $( this ).data( 'confirm' ) == true) {
+			var confirmSave = window.confirm("Etes-vous sûrs de vouloir enregistrer ces modifications ?");
+		}else{
+			var confirmSave = true;		
+		}
+		if ( confirmSave ) {
+			//Envoi de requête Ajax
+			$.ajax({
+				'type': "POST",
+				'url': ajax_object.ajax_url,
+				'data': data_to_update
+			}).done(function (result) {
+				if (result != "") {
+					var jsonResult = JSON.parse(result);
+					feedback = jsonResult;
 
-		//Envoi de requête Ajax
-		$.ajax({
-			'type': "POST",
-			'url': ajax_object.ajax_url,
-			'data': data_to_update
-		}).done(function (result) {
-			if (result != "") {
-				var jsonResult = JSON.parse(result);
-				feedback = jsonResult;
+					//Affiche les erreurs
+					var firstErrorInput = false;
+					for ( var input in feedback.errors ) {
+						firstErrorInput = $( '#field-' + input + ' .field-error' );
+						$( '#field-' + input + ' .field-error' ).html( feedback.errors[ input ] );
+						$( '#field-' + input + ' .field-error' ).show();
+						$( '#field-' + input ).find('i.fa.validation').remove();
+					}
 
-				//Affiche les erreurs
-				var firstErrorInput = false;
-				for ( var input in feedback.errors ) {
-					firstErrorInput = $( '#field-' + input + ' .field-error' );
-					$( '#field-' + input + ' .field-error' ).html( feedback.errors[ input ] );
-					$( '#field-' + input + ' .field-error' ).show();
-					$( '#field-' + input ).find('i.fa.validation').remove();
+					for(var input in feedback.success){
+						$( '#field-' + input + ' .field-error' ).hide();
+						thisinput = thisForm.find( 'input[name=' + input + '],select[name=select-' + input + ']');
+						self.removeFieldError(thisinput);
+						thisinput.parent().parent().find('i.fa.validation').remove();
+						thisinput.addClass("validation");
+						thisinput.parent().after('<i class="fa fa-check validation" aria-hidden="true"></i>');
+					}
+
+					//Scrolle jusqu'à la 1ère erreur et la sélectionne
+					if ( firstErrorInput !== false ) {
+						self.scrollTo( firstErrorInput );
+						thisForm.find('.save_errors').fadeIn();
+					} else {
+						thisForm.find('.save_ok').fadeIn();                          
+					}
+
+
 				}
-
-				for(var input in feedback.success){
-					$( '#field-' + input + ' .field-error' ).hide();
-					thisinput = thisForm.find( 'input[name=' + input + '],select[name=select-' + input + ']');
-					self.removeFieldError(thisinput);
-					thisinput.parent().parent().find('i.fa.validation').remove();
-					thisinput.addClass("validation");
-					thisinput.parent().after('<i class="fa fa-check validation" aria-hidden="true"></i>');
-				}
-
-				//Scrolle jusqu'à la 1ère erreur et la sélectionne
-				if ( firstErrorInput !== false ) {
-					self.scrollTo( firstErrorInput );
-					thisForm.find('.save_errors').fadeIn();
-				} else {
-					thisForm.find('.save_ok').fadeIn();                          
-				}
-
-
-			}
-		}).fail(function() {
-			thisForm.find('.save_fail').fadeIn();
-		}).always(function() {
+			}).fail(function() {
+				thisForm.find('.save_fail').fadeIn();
+			}).always(function() {
+				//Réactive les champs
+				save_button.find(".button-waiting").hide();
+				save_button.find(".button-text").show();
+				thisForm.find(":input").prop('disabled', false);
+			});
+		} else {
 			//Réactive les champs
 			save_button.find(".button-waiting").hide();
 			save_button.find(".button-text").show();
 			thisForm.find(":input").prop('disabled', false);
-		});
+		}
 	});
 };
 
@@ -772,38 +783,36 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 		$('#ajax-contacts-load').after(result);
 		$('#ajax-loader-img').hide();//On cache la roue de chargement.
 
+
+		var nb_visible_colums_filters = (result_contacts_table['id_column_user_id'] - result_contacts_table['id_column_index'] - 2);
+
 		//Création du tableau dynamique dataTable
-		self.table = $('#contacts-table').DataTable({
-			scrollX: '100%',
+		self.table = $('#contacts-table').DataTable({       
+			responsive: {
+				details: {
+					type: 'column',
+					target: 'td:not(:first-child)' // un clic sur la ligne excepté la checbox permet de déplier la ligne
+				}
+			},
 			scrollY: '70vh', //Taille max du tableau : 70% de l'écran
 			scrollCollapse: true, //Diminue taille du tableau si peu d'éléments*/
 
 			paging: false, //Pas de pagination, affiche tous les éléments yolo
 			order: [[result_contacts_table['default_sort'],"desc"]],
 
-			colReorder: { //On peut réorganiser les colonnes
-				fixedColumnsLeft: result_contacts_table['id_column_index']+1 //Les 5 colonnes à gauche sont fixes
-			},
-			fixedColumns : {
-				leftColumns: result_contacts_table['id_column_index']+1
-			},
-
-
 			columnDefs: [
 				{
 					targets: result_contacts_table['array_hidden'], //Cache colonnes par défaut
 					visible: false
-				},{
-					targets: [result_contacts_table['id_column_index']], //Cache colonnes par défaut
-					visible: false
-				},{
+				},
+				{
 					className: 'select-checkbox',
 					targets : 0,
 					orderable: false,
 				},{
 					width: "30px",
 					className: "dt-body-center nopadding",
-					targets: [2,3,4]
+					targets: [3,4,5]
 				}
 			],
 
@@ -820,7 +829,8 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 					action: function () {
 						self.table.rows( { search: 'applied' } ).select();
 					}
-				},{
+				},
+				{
 					//Bouton envoi de mail
 					extend: 'selected',
 					text: '<i class="fa fa-envelope" aria-hidden="true"></i> Envoyer un mail',
@@ -840,12 +850,12 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 						//Bouton d'affichage de colonnes
 						extend: 'colvis',
 						text: '<i class="fa fa-columns" aria-hidden="true"></i> Colonnes à afficher',
-						columns: ':gt('+result_contacts_table['id_column_index']+')', //On ne peut pas cacher les 5 premières colonnes
+						columns: ':gt('+result_contacts_table['id_column_index']+'):lt('+nb_visible_colums_filters+')', //On ne peut pas cacher les 5 premières colonnes, ni la dernière
 						collectionLayout: 'two-column'
 					},{
 						extend: 'colvisGroup',
 						text: 'Tout afficher',
-						show: ':gt('+result_contacts_table['id_column_index']+'):hidden'
+						show: ':gt('+result_contacts_table['id_column_index']+'):lt('+nb_visible_colums_filters+'):hidden'
 					},{
 						extend: 'colvisGroup',
 						text: 'Tout masquer',
@@ -912,7 +922,8 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 				}
 			}
 		});
-		self.table.columns.adjust();
+		self.table.columns.adjust();		
+		self.table.responsive.recalc();
 
 		var mailButtonDefault = self.table.button(1).text()
 		self.table.on("select.dt deselect.dt", function ( e, dt, type, indexes ) {
@@ -952,7 +963,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 			//Maj liste des identifiants à mailer
 			var recipients_array = [];
 			$.each(self.table.rows({ selected: true }).data(), function(index, element){
-				recipients_array.push(element[result_contacts_table['id_column_index']]);
+				recipients_array.push(element[result_contacts_table['id_column_user_id']-1]);
 			});
 			$("#mail_recipients").val(recipients_array);
 		} );

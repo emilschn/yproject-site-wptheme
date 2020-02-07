@@ -487,7 +487,7 @@ function get_investments_data() {
 	$disable_logs = TRUE;
 	$campaign_id = filter_input(INPUT_POST, 'id_campaign');
 	$input_is_short_version = filter_input(INPUT_POST, 'is_short_version');
-	$investments_list = WDGCampaignInvestments::get_list( $campaign_id, TRUE );
+	$investments_list = WDGCampaignInvestments::get_list( $campaign_id, ( $input_is_short_version == '0' ) );
 	if ( $input_is_short_version == '1' ) {
 		unset( $investments_list[ 'campaign' ] );
 		unset( $investments_list[ 'payments_data' ] );
@@ -577,4 +577,12 @@ if ( !function_exists( 'array_key_last' ) ) {
 		}
 		return array_keys( $array )[ count( $array ) - 1 ];
 	}
+}
+
+if ( defined( 'WP_IS_DEV_SITE' ) && WP_IS_DEV_SITE ) {
+	function wdg_add_allowed_origins($origins) {
+		$origins[] = 'http://localhost:8080';
+		return $origins;
+	}
+	add_filter('allowed_http_origins', 'wdg_add_allowed_origins');
 }
