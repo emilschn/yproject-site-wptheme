@@ -791,7 +791,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 			responsive: {
 				details: {
 					type: 'column',
-					target: 'td:not(:first-child)' // un clic sur la ligne excepté la checbox permet de déplier la ligne
+					target: 'td:not(:first-child)' // un clic sur la ligne excepté la checkbox permet de déplier la ligne
 				}
 			},
 			scrollY: '70vh', //Taille max du tableau : 70% de l'écran
@@ -924,6 +924,16 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 		});
 		self.table.columns.adjust();		
 		self.table.responsive.recalc();
+		
+		// on réinitialise les toolti quand on change les colonnes affichées
+		self.table.on( 'column-visibility.dt', function ( e, settings, column, state ) {
+			self.initQtip();
+		} );
+
+		self.table.on( 'responsive-display', function ( e, datatable, row, showHide, update ) {
+			self.initQtip();
+		} );
+
 
 		var mailButtonDefault = self.table.button(1).text()
 		self.table.on("select.dt deselect.dt", function ( e, dt, type, indexes ) {
