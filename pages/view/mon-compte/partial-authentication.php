@@ -2,6 +2,7 @@
 global $stylesheet_directory_uri, $WDGOrganization;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGUser_displayed = $page_controler->get_current_user();
+$WDGUser_current = WDGUser::current();
 $can_register_lemonway = ( isset( $WDGOrganization ) ) ? $WDGOrganization->can_register_lemonway() : $WDGUser_displayed->can_register_lemonway();
 $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_registered_lemonway_wallet() : $WDGUser_displayed->is_lemonway_registered();
 ?>
@@ -79,5 +80,15 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 			
 		</div>
 
+	<?php endif; ?>
+
+	<?php if ( $WDGUser_current->is_admin() ): ?>		
+		<div class="admin-theme">
+			<?php if ( isset( $WDGOrganization ) ): ?>
+				ID LemonWay : <?php echo $WDGOrganization->get_lemonway_id(); ?>
+			<?php else: ?>
+				ID LemonWay : <?php echo $WDGUser_displayed->get_lemonway_id(); ?>
+			<?php endif; ?>
+		</div>
 	<?php endif; ?>
 </div>
