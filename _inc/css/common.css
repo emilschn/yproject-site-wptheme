@@ -59,6 +59,14 @@ img.alignleft {
     margin: 5px 20px 20px 0;
 }
 
+
+div.admin-theme{
+    border-left: 3px solid #F1A074;
+    background-color: rgba( 241, 160, 116, 0.2 );
+    padding: 10px;
+    margin: 0px;
+}
+
 .button, .wpcf7-submit {
     background: none repeat scroll 0 0 #333333;
     border: 1px solid #333333;
