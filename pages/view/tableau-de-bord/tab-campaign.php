@@ -402,6 +402,14 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			</form>
 		</div>
 	
+		
+		<div class="field admin-theme">
+			<form id="campaign_duplicate" class="ajax-db-form" data-action="campaign_duplicate">
+				<?php DashboardUtility::create_save_button( 'campaign_duplicate', $page_controler->can_access_admin(), 'Dupliquer la campagne', 'Duplication en cours', TRUE ); ?>
+				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+			</form>
+		</div>
+
 		<?php $can_conclude = ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_archive || $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_closed ); ?>
 		<?php if ( $can_conclude ): ?>
 		<div class="field admin-theme">
