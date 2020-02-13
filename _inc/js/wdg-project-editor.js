@@ -20,6 +20,11 @@ var ProjectEditor = (function($) {
 					ProjectEditor.clickAddLang();
 				});
 
+				$(".wdg-send-project-notification").show();
+				$(".wdg-send-project-notification").click(function() {
+					ProjectEditor.sendProjectNotification( $( this ).attr( 'id' ) );
+				});
+
 				window.addEventListener( 'beforeunload', function (e) {
 					if ( WDGProjectPageFunctions.isEditing !== '' ) {
 						var confirmationMessage = "Vous avez réservé une des parties du projet pour l'éditer, prenez le temps de la sauvegarder ou d'annuler la réservation. Êtes vous sûr de vouloir quitter ?";
@@ -29,7 +34,7 @@ var ProjectEditor = (function($) {
 				} );
 
 				// On ne relance l'analyse des images que si on n'a eu aucune erreur pour l'instant
-				if ( $( '.project-admin div.intro' ).length == 0 ) {
+				if ( $( '.project-admin .project-errors div.intro' ).length == 0 ) {
 					ProjectEditor.analyseImageFiles();
 				}
 				ProjectEditor.initElements();
@@ -57,6 +62,9 @@ var ProjectEditor = (function($) {
 				ProjectEditor.initEdition();
 				$(clickedElement).addClass("btn-edit-validate");
 				$("#wdg-edit-project-add-lang").show();
+				// on déplace la div d'erreur 
+				var divh = $("#wdg-edit-project-add-lang").height() + 5;
+				$( '.project-admin .project-errors').css('top', divh + 'px');
 			} else {
 				if (WDGProjectPageFunctions.isEditing !== "") {
 					alert("Vous ne pouvez pas valider si un champ est en cours d'édition");
@@ -65,6 +73,7 @@ var ProjectEditor = (function($) {
 					ProjectEditor.stopEdition();
 					$(clickedElement).removeClass("btn-edit-validate");
 					$("#wdg-edit-project-add-lang").hide();
+					$( '.project-admin .project-errors').css('top', '0px');
 					var background = $("#project-banner-picture").css('background-image');
 					if(background){
 						$("#project-banner-picture").attr('style','display:inline-block; left: 387px; top: 506px; background-image:'+background+'; background-repeat:no-repeat;');
@@ -798,8 +807,10 @@ var ProjectEditor = (function($) {
 		},
 		
 		addEditIntroErrorMessage: function() {
-			if ( $( '.project-admin div.intro' ).length == 0 ) {
-				$( '.project-admin' ).append( '<div class="intro">Afin de ne pas surcharger votre page et accélérer le temps d\'ouverture, nous vous encourageons à limiter le poids des images à 200 Ko.</div>' );
+			if ( $( '.project-admin .project-errors div.intro' ).length == 0 ) {
+				$( '.project-admin' ).append( '<div class="project-errors"></div>');				
+				$( '.project-admin .project-errors').css('position', 'relative');
+				$( '.project-admin .project-errors' ).append( '<div class="intro">Afin de ne pas surcharger votre page et accélérer le temps d\'ouverture, nous vous encourageons à limiter le poids des images à 200 Ko.</div>' );
 			}
 		},
 		
@@ -808,7 +819,45 @@ var ProjectEditor = (function($) {
 			if ( bIsBig ) {
 				sClass += ' error-big';
 			}
-			$( '.project-admin' ).append( '<div class="' + sClass + '">' + sMsg + '</div>' );
+			$( '.project-admin .project-errors' ).append( '<div class="' + sClass + '">' + sMsg + '</div>' );
+		},
+
+		sendProjectNotification: function( sButtonId ) {
+			var bIsNotificationForProject = ( sButtonId == 'wdg-send-project-notification-to-project' );
+
+			var sMsgConfirm = "Vous allez envoyer une notification à WE DO GOOD indiquant que nous pouvons relire votre présentation, voulez-vous continuer ?";
+			if ( bIsNotificationForProject ) {
+				sMsgConfirm = "Vous allez envoyer une notification au porteur de projet indiquant qu'il doit faire des modifications, voulez-vous continuer ?";
+			}
+
+			var confirmNotification = false;
+			if ( !$( '.wdg-send-project-notification' ).hasClass( 'clicked' ) ) {
+				confirmNotification = window.confirm( sMsgConfirm );
+			}
+
+			if ( confirmNotification ) {
+				$( '.wdg-send-project-notification' ).addClass( 'clicked' );
+				$( '.wdg-send-project-notification' ).width( $( '#wdg-send-project-notification' ).width() );
+				$( '.wdg-send-project-notification' ).text( "Envoi en cours..." );
+				
+				$.ajax( {
+					'type' : "POST",
+					'url' : ajax_object.ajax_url,
+					'data': {
+						'action':			'send_project_notification',
+						'id_campaign':		$( '#content' ).data( 'campaignid' ),
+						'is_for_project':	( bIsNotificationForProject ? '1' : '0' )
+					}
+				} ).done( function(result) {
+					if ( result == '1' ) {
+						$( '.wdg-send-project-notification' ).text( "Envoyé !" );
+						$( '.wdg-send-project-notification' ).addClass( 'confirm' );
+					} else {
+						$( '.wdg-send-project-notification' ).text( "Erreur d'envoi..." );
+						$( '.wdg-send-project-notification' ).addClass( 'error' );
+					}
+				} );
+			}
 		}
 	};
     

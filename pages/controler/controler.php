@@ -9,7 +9,7 @@ class WDG_Page_Controler {
 	private $show_user_pending_preinvestment;
 	private $show_user_pending_investment;
 	private $show_user_needs_authentication;
-	private $controler_name;
+	protected $controler_name;
 	
 	public function __construct() {
 		ypcf_session_start();

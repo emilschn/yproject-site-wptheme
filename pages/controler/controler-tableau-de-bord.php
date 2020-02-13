@@ -64,6 +64,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		wp_enqueue_script( 'datatable-colreorder-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.colReorder.min.js', array( 'datatable-script' ), true, true );
 		wp_enqueue_style( 'datatable-colreorder-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/colReorder.dataTables.min.css', null, false, 'all' );
 
+		wp_enqueue_script( 'datatable-responsive-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.responsive.min.js', array( 'datatable-script' ), true, true );
+		wp_enqueue_style( 'datatable-responsive-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/responsive.dataTables.min.css', null, false, 'all' );
+
 		wp_enqueue_script( 'datatable-select-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.select.min.js', array( 'datatable-script' ), true, true );
 		wp_enqueue_style('datatable-select-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/select.dataTables.min.css', null, false, 'all' );
 
@@ -75,6 +78,12 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		wp_enqueue_style( 'datatable-buttons-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/buttons.dataTables.min.css', null, false, 'all' );
 		
 		$this->init_campaign_data();
+
+		if ( !is_user_logged_in() ) {
+			wp_redirect( home_url( '/connexion/' ) . '?redirect-page=tableau-de-bord&campaign_id='.$this->campaign_id  );
+			exit();
+		}
+
 		if ( !$this->can_access ) {
 			wp_redirect( home_url() );
 			exit();
@@ -429,8 +438,12 @@ public function get_user_form_feedback() {
 		$vote_results = WDGCampaignVotes::get_results( $this->campaign_id );
 		$this->campaign_stats[ 'vote' ] = array();
 		$date_begin = new DateTime( $this->campaign->get_begin_vote_str() );
-		$this->campaign_stats[ 'vote' ][ 'start' ] = $date_begin->format( 'Y-m-d' );
 		$date_end = new DateTime( $this->campaign->get_end_vote_str() );
+		// la date de début d'évaluation n'étant pas toujours recalculée (levée de fond privée), on s'assure qu'elle ne soit pas postérieure à la date de fin
+		if( $date_begin > $date_end ){
+			$date_begin = $date_end;
+		}
+		$this->campaign_stats[ 'vote' ][ 'start' ] = $date_begin->format( 'Y-m-d' );
 		$this->campaign_stats[ 'vote' ][ 'end' ] = $date_end->format( 'Y-m-d' );
 		
 		// Stocks des références pour calculer les bonnes données, avec le bon ratio
@@ -576,8 +589,14 @@ public function get_user_form_feedback() {
 		// Stats des investissements
 		$investment_results = WDGCampaignInvestments::get_list( $this->campaign_id );
 		$this->campaign_stats[ 'funding' ] = array();
-		$this->campaign_stats[ 'funding' ][ 'start' ] = $this->campaign->begin_collecte_date( 'Y-m-d' );
-		$this->campaign_stats[ 'funding' ][ 'end' ] = $this->campaign->end_date( 'Y-m-d' );
+		$date_begin = $this->campaign->begin_collecte_date( 'Y-m-d' );
+		$date_end = $this->campaign->end_date( 'Y-m-d' );
+		// la date de début d'évaluation n'étant pas toujours recalculée (levée de fond privée), on s'assure qu'elle ne soit pas postérieure à la date de fin
+		if( $date_begin > $date_end ){
+			$date_begin = $date_end;
+		}
+		$this->campaign_stats[ 'funding' ][ 'start' ] = $date_begin;
+		$this->campaign_stats[ 'funding' ][ 'end' ] = $date_end;
 		if ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated || $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ) {
 			$this->campaign_stats[ 'funding' ][ 'start' ] = $this->campaign_stats[ 'vote' ][ 'end' ];
 			$this->campaign_stats[ 'funding' ][ 'end' ] = $this->campaign_stats[ 'vote' ][ 'end' ];

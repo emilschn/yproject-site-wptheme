@@ -7,5 +7,5 @@
 
 
 <?php 
-    locate_template( array( 'pages/view/common/form-orga-bank.php'  ), true );
+    locate_template( array( 'pages/view/common/form-orga-bank.php'  ), true, false );
 ?>

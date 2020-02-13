@@ -21,7 +21,12 @@ $campaign_status = $campaign->campaign_status();
 	$minimum_goal = $campaign->minimum_goal( false );
 	$percent_minimum_completed = $campaign->percent_minimum_completed( false );
 	$percent_minimum_display = min( 100, $percent_minimum_completed );
-	$width_to_minimum_goal = $minimum_goal / $maximum_goal * 100;
+	if ( isset($maximum_goal) && $maximum_goal != 0 ) {
+		$width_to_minimum_goal = $minimum_goal / $maximum_goal * 100;
+	} else {
+		$width_to_minimum_goal = 0;
+	}
+
 	$width_to_minimum_completed = $percent_minimum_display * $width_to_minimum_goal / 100;
 	$file_check = 'minimum-goal-empty.png';
 	$width_to_completed = 0;

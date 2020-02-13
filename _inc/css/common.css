@@ -59,6 +59,14 @@ img.alignleft {
     margin: 5px 20px 20px 0;
 }
 
+
+div.admin-theme{
+    border-left: 3px solid #F1A074;
+    background-color: rgba( 241, 160, 116, 0.2 );
+    padding: 10px;
+    margin: 0px;
+}
+
 .button, .wpcf7-submit {
     background: none repeat scroll 0 0 #333333;
     border: 1px solid #333333;
@@ -1018,7 +1026,7 @@ footer > .footer-container > div.licence a{
 * HOME - STATS
 *******************************************************************************/
 body.home section.project-stats {
-	padding: 40px 0 0px;
+	padding: 40px 0px 20px;
 	color: #333333;
 	background: #FFFFFF;
 }
@@ -1034,6 +1042,7 @@ body.home section.project-stats > div div.left {
 	width: calc(100% / 3 - 16px);
 	font-size: 18pt;
 	margin-left: 15px;
+    display: -webkit-flex;
 	display: flex;
 	justify-content: flex-start;
 }
@@ -1062,37 +1071,104 @@ body.home section.project-stats > div p {
 body.home section.news {
 	color: #333333;
 	background: #FFFFFF;
-    background: url("../../images/template-home/bee-background-min.jpg") center center no-repeat;
+	background: url("../../images/template-home/quiz-2020-bg.jpg") no-repeat;
+	background-position: center top;
+	background-size: cover;
 }
-body.home section.news > div {
-	width: -webkit-calc(100% - 20px);
-	width: -moz-calc(100% - 20px);
-	width: calc(100% - 20px);
+body.home section.news div.news-content {
+    display: -webkit-flex;
+	display: flex;
+	width: -webkit-calc(100% - 16px);
+	width: -moz-calc(100% - 16px);
+	width: calc(100% - 16px);
 	max-width: 1280px;
+	height: 500px;
 	margin: auto;
 }
-body.home section.news > div div.news-content {
-	float: right;
-	width: 40%;
-	min-width: 250px;
-	padding: 20px;
-	text-align: right;
-	background-color: rgba( 255, 255, 255, .7 );
+body.home section.news div.news-image {
+	background: url("../../images/template-home/quiz-2020-txt.png") no-repeat;
+	background-position: center top;
+	background-size: 100%;
+	width: 55%;
+	height: 164px;
+	margin: auto;
 }
-body.home section.news > div div.news-content span.news-description {
-	font-size: 18px;
-}
-body.home section.news > div div.news-content span.news-title {
-	display: inline-block;
-	padding: 32px 0px;
-	font-size: 32px;
-	text-transform: uppercase;
-}
-body.home section.news > div div.news-content a.button {
-	width: 40%;
-	display: inline-block;
+body.home section.news div.news-text {
+	width: -webkit-calc(45% - 96px);
+	width: -moz-calc(45% - 96px);
+	width: calc(45% - 96px);
+	min-width: 240px;
+	height: 164px;
+	margin: auto;
+	padding: 48px;
 	text-align: center;
-	padding: 15px;
+	background-color: rgba( 255, 255, 255, 0.7 );
+}
+body.home section.news div.news-text span {
+	display: inline-block;
+	text-align: justify;
+	font-size: 20px;
+}
+body.home section.news div.news-text a.button {
+	display: inline-block;
+	width: 264px;
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	letter-spacing: 2px;
+}
+
+@media screen and (max-width: 997px) {
+	body.home section.news div.news-text {
+		margin: auto 8px;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	body.home section.news div.news-content {
+		flex-direction: column;
+	}
+	body.home section.news div.news-image {
+		width: -webkit-calc(100% - 16px);
+		width: -moz-calc(100% - 16px);
+		width: calc(100% - 16px);
+		height: 200px;
+		background-position: center;
+	}
+	body.home section.news div.news-text {
+		width: -webkit-calc(100% - 112px);
+		width: -moz-calc(100% - 112px);
+		width: calc(100% - 112px);
+		margin: auto;
+		padding: 24px;
+	}
+	body.home section.news div.news-text span {
+		font-size: 19px;
+	}
+	body.home section.news div.news-text a.button {
+		width: auto;
+		padding: 8px;
+		font-size: 18px;
+		letter-spacing: 1px;
+	}
+}
+@media screen and (max-width: 400px) {
+	body.home section.news div.news-image {
+		height: 100px;
+		margin: 32px auto;
+	}
+	body.home section.news div.news-text {
+		height: 200px;
+		margin: 32px auto;
+	}
+	body.home section.news div.news-text br {
+		display: none;
+	}
+	body.home section.news div.news-text a.button {
+		margin-top: 16px;
+	}
 }
 
 /*******************************************************************************
@@ -1261,6 +1337,7 @@ body.template-les-projets div#content > h2 {
 }
 
 body.template-les-projets nav#project-filter {
+    display: -webkit-flex;
 	display: flex;
 	justify-content: space-around;
 	height: 45px;
@@ -1367,14 +1444,6 @@ body.template-les-projets div#content > div:last-child .wdg-component-projects-p
 }
 body.template-les-projets div#content > div:last-child .wdg-component-projects-preview .project-container .project-framed::before {
 	border-top: 60px solid rgba(51, 51, 51, 0.05);
-}
-
-
-/*******************************************************************************
-* TEMPLATE - USER HOME
-*******************************************************************************/
-body.bp-user #item-header {
-	margin-top: 80px;
 }
 
 /*******************************************************************************
