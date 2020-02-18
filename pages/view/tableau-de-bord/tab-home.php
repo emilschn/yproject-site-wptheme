@@ -3,6 +3,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 <h2><?php _e( "Vue d'ensemble", 'yproject' ); ?></h2>
 
+<?php DashboardUtility::add_help_item( $page_controler->get_current_user(), 'home', 1 ); ?>
+
 <?php
 $status = $page_controler->get_campaign_status();
 $collecte_or_after = $status==ATCF_Campaign::$campaign_status_collecte || $status==ATCF_Campaign::$campaign_status_funded || $status==ATCF_Campaign::$campaign_status_archive || $status==ATCF_Campaign::$campaign_status_closed;
