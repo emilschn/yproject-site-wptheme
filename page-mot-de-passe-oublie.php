@@ -33,13 +33,9 @@ if ( !empty( $init_username ) ) {
 				do_action('retrieve_password_key', $user_login, $key);
 				$wpdb->update($wpdb->users, array('user_activation_key' => $key), array('user_login' => $user_login));
 			}
+			$link = get_permalink($page_forgot_password->ID) . "?action=rp&key=$key&login=" . rawurlencode($user_login);
 
-			$message = "Quelqu'un a demandé à changer votre mot de passe sur le site ".ATCF_CrowdFunding::get_platform_name()." pour l'utilisateur suivant :\r\n\r\n";
-			$message .= $user_login . "\r\n\r\n";
-			$message .= "Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous. Sinon, ignorez simplement ce message.\r\n\r\n";
-			$message .= get_permalink($page_forgot_password->ID) . "?action=rp&key=$key&login=" . rawurlencode($user_login);
-
-			if (FALSE == wp_mail($user_email, sprintf(__('[%s] Password Reset'), get_option('blogname')), $message)) {
+			if (FALSE == NotificationsAPI::password_reinit( $user_email, $user_login, $link ) ) {
 				array_push( $error, "Problème d'envoi : l'e-mail de réinitialisation n'a pas été envoyé." );
 			}
 			$feedback = "Un message a &eacute;t&eacute; envoy&eacute; &agrave; votre adresse e-mail.";
