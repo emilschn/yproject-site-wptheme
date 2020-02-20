@@ -3,6 +3,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 <h2><?php _e( "Vue d'ensemble", 'yproject' ); ?></h2>
 
+<?php DashboardUtility::add_help_item( $page_controler->get_current_user(), 'home', 1 ); ?>
+
 <?php
 $status = $page_controler->get_campaign_status();
 $collecte_or_after = $status==ATCF_Campaign::$campaign_status_collecte || $status==ATCF_Campaign::$campaign_status_funded || $status==ATCF_Campaign::$campaign_status_archive || $status==ATCF_Campaign::$campaign_status_closed;
@@ -563,11 +565,14 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 	$finished_declarations = $page_controler->get_campaign()->get_roi_declarations_by_status( WDGROIDeclaration::$status_finished );
 	$nb_finished_declarations = count( $finished_declarations );
 	$roi_percent = $page_controler->get_campaign()->roi_percent();
+	$campaign_id = $page_controler->get_campaign()->ID;
+	$investment_results = WDGCampaignInvestments::get_list( $campaign_id );
 	?>
 	<h2><?php _e('Situation', 'yproject'); ?></h2>
 	<ul>
 		<li><strong><?php echo UIHelpers::format_number( $page_controler->get_campaign_organization()->get_lemonway_balance( 'campaign' ) ); ?> €</strong> <?php _e( "dans votre porte-monnaie de projet", 'yproject' ); ?></li>
 		<li><strong><?php echo UIHelpers::format_number( $page_controler->get_campaign()->current_amount( false ) ); ?> €</strong> <?php _e( "lev&eacute;s", 'yproject' ); ?></li>
+		<li><strong><?php echo UIHelpers::format_number( $investment_results[ 'amount_not_validate_investments' ] ); ?> €</strong> <?php _e( "en attente de validation", 'yproject' ); ?></li>
 
 		<?php if ( $roi_percent > 0 ): ?>
 			<li><strong><?php echo $page_controler->get_campaign()->roi_percent(); ?> %</strong> <?php _e( "du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>

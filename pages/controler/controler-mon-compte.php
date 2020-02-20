@@ -16,6 +16,8 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private $user_name;
 	private $user_project_list;
 	private $user_data;
+	private $display_user_override_not_found;
+
 	private $wallet_to_bankaccount_result;
 	private $form_user_details;
 	private $form_user_password;
@@ -47,6 +49,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		// Si on met à jour le RIB, il faut recharger l'utilisateur en cours
 		$reload = WDGFormUsers::register_rib();
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
+		$this->display_user_override_not_found = FALSE;
 		$this->init_current_user( $reload );
 		$this->init_project_list();
 		$this->init_intentions_to_confirm();
@@ -119,6 +122,8 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 					$wpuser_by_id = get_user_by( 'ID', $input_user );
 					if ( !empty( $wpuser_by_id ) ) {
 						$this->current_user = new WDGUser( $input_user );
+					} else {
+						$this->display_user_override_not_found = TRUE;
 					}
 				}
 			}
@@ -189,6 +194,13 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	 */
 	public function get_campaign() {
 		return FALSE;
+	}
+
+	/**
+	 * Doit-on afficher une alerte si l'utilisateur qu'on essaie d'afficher n'existe pas ?
+	 */
+	public function is_displayed_user_override_not_found() {
+		return $this->display_user_override_not_found;
 	}
 	
 /******************************************************************************/

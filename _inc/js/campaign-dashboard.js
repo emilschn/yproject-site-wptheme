@@ -177,6 +177,7 @@ function WDGCampaignDashboard() {
     this.initWithHash();
     this.initLinks();
 	this.initMenu();
+	this.initHelp();
 	this.initStatsSubTabs();
 	this.drawTimetable();
 	this.initAjaxForms();
@@ -238,6 +239,33 @@ WDGCampaignDashboard.prototype.initMenu = function() {
 		self.switchTab( $( this ).attr( 'href' ).substr( 1 ) );
 	} );
 	
+};
+
+/**
+ * Initialise les éléments d'aide
+ */
+WDGCampaignDashboard.prototype.initHelp = function() {
+	$( '.help-item-remove' ).hover(
+		function() {
+			$( this ).parent().addClass( 'hover' );
+		},
+		function() {
+			$( this ).parent().removeClass( 'hover' );
+		}
+	);
+	
+	$( '.help-item-remove' ).click( function() {
+		$( this ).parent().fadeOut( 100 );
+		$.ajax({
+			'type' : "POST",
+			'url' : ajax_object.ajax_url,
+			'data': {
+				'action':'remove_help_item',
+				'name': $( this ).data( 'item-name'),
+				'version': $( this ).data( 'item-version')
+			}
+		});
+	} );
 };
 
 /**
@@ -791,7 +819,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 			responsive: {
 				details: {
 					type: 'column',
-					target: 'td:not(:first-child)' // un clic sur la ligne excepté la checbox permet de déplier la ligne
+					target: 'td:not(:first-child)' // un clic sur la ligne excepté la checkbox permet de déplier la ligne
 				}
 			},
 			scrollY: '70vh', //Taille max du tableau : 70% de l'écran
@@ -924,6 +952,16 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 		});
 		self.table.columns.adjust();		
 		self.table.responsive.recalc();
+		
+		// on réinitialise les toolti quand on change les colonnes affichées
+		self.table.on( 'column-visibility.dt', function ( e, settings, column, state ) {
+			self.initQtip();
+		} );
+
+		self.table.on( 'responsive-display', function ( e, datatable, row, showHide, update ) {
+			self.initQtip();
+		} );
+
 
 		var mailButtonDefault = self.table.button(1).text()
 		self.table.on("select.dt deselect.dt", function ( e, dt, type, indexes ) {
