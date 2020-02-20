@@ -4,6 +4,8 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 ?>
 <h2><?php _e( "Contacts", 'yproject' ); ?></h2>
 
+<?php DashboardUtility::add_help_item( $page_controler->get_current_user(), 'contacts', 1 ); ?>
+
 <?php if (!empty($send_mail_success)): ?>
 <div class="success"><?php _e( "E-mails envoy&eacute;s avec succ&egrave;s !", 'yproject' ); ?></div>
 <?php endif; ?>

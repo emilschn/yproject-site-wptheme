@@ -8,6 +8,8 @@
 
 <h2><?php _e( "Organisation", 'yproject' ); ?></h2>
 
+<?php DashboardUtility::add_help_item( $page_controler->get_current_user(), 'organization', 1 ); ?>
+
 <?php if ( !$current_organization->is_registered_lemonway_wallet() ): ?>
 	<div class="wdg-message error">
 		<?php _e( "L'organisation n'est pas encore authentifi&eacute;e", 'yproject' ); ?>
