@@ -93,17 +93,14 @@
 				<a href="<?php echo home_url( '/a-propos/vision/' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
                                 
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
-				<?php /*if ( is_user_logged_in() ): ?>
-					<a href="#" class="btn-user connected <?php if ( $page_controler->get_show_user_needs_authentication() ): ?>needs-authentication<?php endif; ?>"><?php UIHelpers::print_user_avatar($WDGUser_current->wp_user->ID, 'icon'); ?></a>				
-				<?php else:*/ ?>
-					<a href="#" class="btn-user not-connected inactive"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/profil-icon-noir.png" alt="USER" /></a>
-				<?php /*endif;*/ ?>
+				<a href="#" class="btn-user not-connected inactive"><?php _e( "Connexion", 'yproject' ); ?></a>
 				<a href="#" id="btn-burger" class="only-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/menu-burger.png" alt="MENU" /></a>
 				
 				
 				<?php /* Affichage quand clic sur Rechercher */ ?>
 				<div id="submenu-search" class="submenu-style hidden">
 					<div class="only-inf997">
+						<a href="<?php echo home_url( '/mon-compte/' ); ?>"><?php _e( "Mon compte", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/les-projets/' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( "&Eacute;pargne positive", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/financement/' ); ?>"><?php _e( "Financer mon projet", 'yproject' ); ?></a>

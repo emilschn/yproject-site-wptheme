@@ -418,10 +418,15 @@ nav#main > div#menu > a {
 	-webkit-transition: color 0.4s;
 	transition: color 0.4s;
 }
-@media screen and (max-width: 1200px) and (min-width: 998px) {
+@media screen and (max-width: 1230px) and (min-width: 998px) {
 	nav#main > div#menu > a {
 		margin: 0px 5px;
 		letter-spacing: 0px;
+	}
+}
+@media screen and (max-width: 1030px) and (min-width: 998px) {
+	nav#main > div#menu > a {
+		font-size: 14px;
 	}
 }
 
@@ -563,26 +568,18 @@ nav#main > div#menu > a.btn-user:before {
 	padding-top: 3px;
 	padding-bottom: 3px;
 }
-nav#main > div#menu > a.btn-user > img {
-    vertical-align: middle;
-}
 nav#main > div#menu > a.btn-user.active {
 	border-left: 2px solid #E1E3E2;
     background-color: #E1E3E2;
 	margin-top: -10px;
 	height: 60px;
+	line-height: 60px;
 	padding-right: 15px;
 	margin-right: -10px;
 	margin-bottom: -10px;
 }
 nav#main > div#menu > a.btn-user.active:before {
 	border-left: 0px;
-}
-nav#main > div#menu > a.btn-user.active > img {
-	margin-top: 16px;
-}
-nav#main > div#menu > a.btn-user.active.connected > img {
-	margin-top: 13px;
 }
 nav#main > div#menu > a.btn-user.connected.needs-authentication:after, #submenu-user li a.needs-authentication:after, nav ul.nav-menu li a.needs-authentication:after, table.authentication-list a.needs-authentication:after, ul.project-list a.needs-authentication:after {
 	content: "!";

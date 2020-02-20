@@ -3,6 +3,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 <h2><?php _e( "Actualit&eacute;s", 'yproject' ); ?></h2>
 
+<?php DashboardUtility::add_help_item( $page_controler->get_current_user(), 'news', 1 ); ?>
+
 <?php
 $news_link = esc_url( get_category_link( $page_controler->get_campaign()->get_news_category_id() ) );
 $posts_blog = $page_controler->get_campaign()->get_news_posts();
