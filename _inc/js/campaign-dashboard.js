@@ -177,6 +177,7 @@ function WDGCampaignDashboard() {
     this.initWithHash();
     this.initLinks();
 	this.initMenu();
+	this.initHelp();
 	this.initStatsSubTabs();
 	this.drawTimetable();
 	this.initAjaxForms();
@@ -238,6 +239,33 @@ WDGCampaignDashboard.prototype.initMenu = function() {
 		self.switchTab( $( this ).attr( 'href' ).substr( 1 ) );
 	} );
 	
+};
+
+/**
+ * Initialise les éléments d'aide
+ */
+WDGCampaignDashboard.prototype.initHelp = function() {
+	$( '.help-item-remove' ).hover(
+		function() {
+			$( this ).parent().addClass( 'hover' );
+		},
+		function() {
+			$( this ).parent().removeClass( 'hover' );
+		}
+	);
+	
+	$( '.help-item-remove' ).click( function() {
+		$( this ).parent().fadeOut( 100 );
+		$.ajax({
+			'type' : "POST",
+			'url' : ajax_object.ajax_url,
+			'data': {
+				'action':'remove_help_item',
+				'name': $( this ).data( 'item-name'),
+				'version': $( this ).data( 'item-version')
+			}
+		});
+	} );
 };
 
 /**

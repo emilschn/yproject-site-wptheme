@@ -1,7 +1,6 @@
 <?php
-
-class DashboardUtility
-{
+class DashboardUtility {
+	
     public static function get_infobutton($hovertext, $display=false, $other_icon=""){
         if(!empty($hovertext)) {
             if(empty($other_icon)){
@@ -19,7 +18,36 @@ class DashboardUtility
         } else {
             return "";
         }
-    }
+	}
+	
+	public static function add_help_item( $user, $item_name, $version ) {
+		$items = array(
+			'home'			=> '<a href="https://support.wedogood.co/g%C3%A9rer-ma-lev%C3%A9e-de-fonds/g%C3%A9rer-mon-tableau-de-bord-et-les-informations-de-ma-campagne/comment-utiliser-mon-tableau-de-bord" target="_blank">Comment utiliser mon tableau de bord ?</a>',
+			'stats'			=> '<a href="https://support.wedogood.co/comment-utiliser-les-statistiques-du-tableau-de-bord" target="_blank">Comment utiliser les statistiques de mon tableau de bord ?</a>',
+			'contacts'		=> '<a href="https://support.wedogood.co/comment-utiliser-mon-tableau-de-contacts" target="_blank">Comment utiliser mon tableau de contacts ?</a>',
+			'news'			=> '<a href="https://support.wedogood.co/comment-animer-ma-campagne-de-financement/les-diff%C3%A9rents-supports-de-communication-pour-animer-ma-campagne/comment-publier-des-actualitc3a9s-sur-we-do-good" target="_blank">Comment publier des actualités sur WE DO GOOD ?</a>',
+			'organization'	=> '<a href="https://support.wedogood.co/comment-authentifier-mon-entreprise" target="_blank">Comment authentifier mon entreprise ?</a>'
+		);
+		if ( !isset( $items[ $item_name ] ) ) {
+			return;
+		}
+
+		if ( $user->has_removed_help_item( $item_name, $version ) ) {
+			return;
+		}
+
+		$current_item = $items[ $item_name ];
+		?>
+
+		<div id="help-item-<?php echo $item_name; ?>" class="help-item">
+			<span>
+				<button type="button" class="help-item-remove" data-item-name="<?php echo $item_name; ?>" data-item-version="<?php echo $version; ?>">X</button>
+				<?php echo $current_item; ?>
+			</span>
+		</div>
+
+		<?php
+	}
 
     public static function get_admin_infobutton($display=false){
         $infobutton = self::get_infobutton("Vous pouvez voir ce champ en tant qu'administrateur WDG",false,"unlock-alt");
