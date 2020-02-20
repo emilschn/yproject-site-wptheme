@@ -27,6 +27,7 @@ if ( !empty( $init_username ) ) {
 			global $wpdb;
 			$user_login = $user->user_login;
 			$user_email = $user->user_email;
+			$user_firstname = $user->user_firstname;
 			$key = $wpdb->get_var($wpdb->prepare("SELECT user_activation_key FROM $wpdb->users WHERE user_login = %s", $user_login));
 			if ( empty($key) ) {
 				$key = wp_generate_password(20, false);
@@ -35,7 +36,7 @@ if ( !empty( $init_username ) ) {
 			}
 			$link = get_permalink($page_forgot_password->ID) . "?action=rp&key=$key&login=" . rawurlencode($user_login);
 
-			if (FALSE == NotificationsAPI::password_reinit( $user_email, $user_login, $link ) ) {
+			if (FALSE == NotificationsAPI::password_reinit( $user_email, $user_firstname, $link ) ) {
 				array_push( $error, "Problème d'envoi : l'e-mail de réinitialisation n'a pas été envoyé." );
 			}
 			$feedback = "Un message a &eacute;t&eacute; envoy&eacute; &agrave; votre adresse e-mail.";
