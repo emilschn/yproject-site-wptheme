@@ -20,63 +20,55 @@
     $metadata = json_decode( $project_draft_data->metadata) ;
 
     $user = new WDGUser( $id_user);
-    // TODO : récupérer la liste des projets de cet utilisateur
-    // à envoyer sous forme de json dans    data-existingprojects="<?php echo $existingprojects; 
-    // data-existingprojects='{"projects":[{"name":"Le roi de la betterave","url":"http://wedogood.local/le-roi-de-la-betterave/"},{"name":"Projet de catatak","url":"http://wedogood.local/projet-de-catatak/"}]}'
-   /* 
-    $WDGUser_current = WDGUser::current();
 
+    // on récupère la liste des projets de cet utilisateur
     global $WDG_cache_plugin;
     if ( $WDG_cache_plugin == null ) {
       $WDG_cache_plugin = new WDG_Cache_Plugin();
     }
-    $cache_project_list = $WDG_cache_plugin->get_cache( 'WDGUser::get_projects_by_id(' .$WDGUser_current->get_wpref(). ', TRUE)', 1 );
+    $cache_project_list = $WDG_cache_plugin->get_cache( 'WDGUser::get_projects_by_id(' .$user->get_wpref(). ', TRUE)', 1 );
     if ( $cache_project_list !== FALSE ) {
       $project_list = json_decode( $cache_project_list );
       
     } else {
-      $project_list = WDGUser::get_projects_by_id( $WDGUser_current->get_wpref(), TRUE );
-      $WDG_cache_plugin->set_cache( 'WDGUser::get_projects_by_id(' .$WDGUser_current->get_wpref(). ', TRUE)', json_encode( $project_list ), 60*10, 1 ); //MAJ 10min
+      $project_list = WDGUser::get_projects_by_id( $user->get_wpref(), TRUE );
+      $WDG_cache_plugin->set_cache( 'WDGUser::get_projects_by_id(' .$user->get_wpref(). ', TRUE)', json_encode( $project_list ), 60*10, 1 ); //MAJ 10min
     }
     
-    
-    $organizations_list = $WDGUser_current->get_organizations_list();
-    
-    if ($organizations_list) {
-      foreach ($organizations_list as $organization_item) {
-        $organizations_options_id[] = $organization_item->wpref;
-        $organizations_options_names[] = $organization_item->name;
-      }
-      array_push($organizations_options_id, "new_orga");
-      array_push($organizations_options_names, "Une nouvelle organisation...");
-    }
-
-    if ( !empty( $project_list ) ) {
+    if ( !empty( $project_list ) ){
+      $existingprojects = array();
+      $existingprojects["projects"] = array();
       $page_dashboard = home_url( '/tableau-de-bord/' );
       $project_string = '';
-      foreach ( $project_list as $project_id ){
-        if (!empty( $project_id )) {
+      foreach ( $project_list as $project_id ) {
+        if ( !empty( $project_id ) ){
           $project_campaign = new ATCF_Campaign( $project_id );
           if ( isset( $project_campaign ) && $project_campaign->get_name() != '' ){
             $campaign_dashboard_url = $page_dashboard. '?campaign_id=' .$project_id;
-            $project_string .= '- <a href="' . $campaign_dashboard_url . '">' . $project_campaign->get_name() . '</a><br>';
+            $project = array('name' => $project_campaign->get_name() , 'url' => $campaign_dashboard_url );
+            $existingprojects["projects"][] = $project;
 
           }
         }
       }
+      $existingprojects = json_encode($existingprojects, JSON_HEX_APOS );
+
 
     }
-*/
 
+    // on récupère la liste des organisations de cet utilisateur
+    $organizations_list = $user->get_organizations_list();    
+    $user_organisations = array();
+    $user_organisations["organisations"] = array();
+    if ($organizations_list) {
+      foreach ($organizations_list as $organization_item) {
+        $orga = array('Id' => $organization_item->wpref , 'Text' => $organization_item->name );
+        $user_organisations["organisations"][] = $orga;
+      }
+      $user_organisations["organisations"][] = array('Id' => "new_orga" , 'Text' => "Une nouvelle organisation..." );
+      $user_organisations = json_encode($user_organisations, JSON_HEX_APOS );
 
-
-    $existingprojects = 'test';
-
-
-
-
-
-
+    }
 ?>
 
 <?php get_header( ATCF_CrowdFunding::get_platform_context() ); ?>
@@ -116,6 +108,9 @@
     data-email="<?php echo $email; ?>"
     data-projectname=""
     data-projectdescription=""
+    data-existingprojects='<?php echo $existingprojects; ?>'
+    data-existingorganisations='<?php echo $user_organisations; ?>'
+    data-urlcgu='<?php echo home_url('/a-propos/cgu/conditions-particulieres/'); ?>'
     
     ></div> 
 
