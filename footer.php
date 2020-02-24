@@ -62,7 +62,7 @@ else {
 					</div>
 					
 					<div>
-						<a href="http://www.financeparticipative.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/membre-fpf-2019.png" alt="logo membre financement participatif France" width="140"></a>
+						<a href="http://www.financeparticipative.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/membre-fpf-2020.png" alt="logo membre financement participatif France" width="140"></a>
 					</div>
 
 					<div>					
