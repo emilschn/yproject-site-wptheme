@@ -411,7 +411,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		</div>
 
 		<!-- TODO : actualiser la liste ci-dessous quand on vient de faire une copie ci-dessus -->
-		<?php if ( $page_controler->get_campaign()->get_duplicate_campaigns_id() ): ?>
+		<?php if ( $page_controler->get_campaign()->get_duplicate_campaigns_id() && $page_controler->get_campaign()->is_funded()): ?>
 			<div class="field admin-theme">
 				<form id="campaign_transfer_investments_form" class="ajax-db-form" data-action="campaign_transfer_investments">
 					<?php DashboardUtility::create_field(array(
