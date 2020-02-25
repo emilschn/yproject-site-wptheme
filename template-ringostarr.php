@@ -101,6 +101,7 @@
 
     <!-- le composant Vue récupéré plus tôt sera injecté dans cette div -->
     <div id="app" 
+    data-ajaxurl="http://wedogood.local/wp-admin/admin-ajax.php"
     data-firstname="<?php echo $user->get_firstname(); ?>" 
     data-lastname="<?php echo $user->get_lastname(); ?>"
     data-phonenumber="<?php echo $user->get_phone_number(); ?>"
