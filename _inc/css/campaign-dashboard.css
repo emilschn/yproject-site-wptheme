@@ -68,6 +68,32 @@ body.template-tableau-de-bord div#container div#content main h2 {
 	text-align: center;
 }
 
+body.template-tableau-de-bord div#container div#content main .help-item {
+	max-width: 500px;
+	margin: 8px auto;
+	text-align: center;
+}
+body.template-tableau-de-bord div#container div#content main .help-item span {
+	display: inline-block;
+	padding: 8px 16px;
+	max-width: calc(100% - 48px);
+}
+body.template-tableau-de-bord div#container div#content main .help-item span.hover {
+	background: #f2f2f2;
+}
+body.template-tableau-de-bord div#container div#content main .help-item button {
+	float: right;
+	position: relative;
+	left: 8px;
+	border: 0px;
+	padding: 2px 5px;
+	border-radius: 80px;
+	font-size: 10px;
+	background: #333;
+	color: #FFF;
+	cursor: pointer;
+}
+
 /*******************************************************************************
 * HOME
 *******************************************************************************/

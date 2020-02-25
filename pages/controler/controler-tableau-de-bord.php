@@ -126,36 +126,41 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 /******************************************************************************/
 // USER DATA
 /******************************************************************************/
-private function init_form_user_details() {
-	$this->form_user_details = new WDG_Form_User_Details( $this->campaign->post_author(), WDG_Form_User_Details::$type_extended );
-	
-	$action_posted = filter_input( INPUT_POST, 'action' );
-	if ( $action_posted == WDG_Form_User_Details::$name ) {
-		$this->form_user_feedback = $this->form_user_details->postForm();
-	}	
-}
-
-public function get_user_details_form() {
-	$this->init_form_user_details();
-	return $this->form_user_details;
-}	
-
-private function init_form_user_identitydocs() {
-	$this->form_user_identitydocs = new WDG_Form_User_Identity_Docs( $this->campaign->post_author() );
-	$action_posted = filter_input( INPUT_POST, 'action' );
-	if ( $action_posted == WDG_Form_User_Identity_Docs::$name ) {
-		$this->form_user_feedback = $this->form_user_identitydocs->postForm();
+	public function get_current_user() {
+		return $this->current_user;
 	}
-}
 
-public function get_user_identitydocs_form() {
-	$this->init_form_user_identitydocs();
-	return $this->form_user_identitydocs;
-}
-	
-public function get_user_form_feedback() {
-	return $this->form_user_feedback;
-}
+	private function init_form_user_details() {
+		$this->form_user_details = new WDG_Form_User_Details( $this->campaign->post_author(), WDG_Form_User_Details::$type_extended );
+		
+		$action_posted = filter_input( INPUT_POST, 'action' );
+		if ( $action_posted == WDG_Form_User_Details::$name ) {
+			$this->form_user_feedback = $this->form_user_details->postForm();
+		}	
+	}
+
+	public function get_user_details_form() {
+		$this->init_form_user_details();
+		return $this->form_user_details;
+	}	
+
+	private function init_form_user_identitydocs() {
+		$this->form_user_identitydocs = new WDG_Form_User_Identity_Docs( $this->campaign->post_author() );
+		$action_posted = filter_input( INPUT_POST, 'action' );
+		if ( $action_posted == WDG_Form_User_Identity_Docs::$name ) {
+			$this->form_user_feedback = $this->form_user_identitydocs->postForm();
+		}
+	}
+
+	public function get_user_identitydocs_form() {
+		$this->init_form_user_identitydocs();
+		return $this->form_user_identitydocs;
+	}
+		
+	public function get_user_form_feedback() {
+		return $this->form_user_feedback;
+	}
+
 /******************************************************************************/
 // SECURISATION
 /******************************************************************************/
@@ -438,8 +443,12 @@ public function get_user_form_feedback() {
 		$vote_results = WDGCampaignVotes::get_results( $this->campaign_id );
 		$this->campaign_stats[ 'vote' ] = array();
 		$date_begin = new DateTime( $this->campaign->get_begin_vote_str() );
-		$this->campaign_stats[ 'vote' ][ 'start' ] = $date_begin->format( 'Y-m-d' );
 		$date_end = new DateTime( $this->campaign->get_end_vote_str() );
+		// la date de début d'évaluation n'étant pas toujours recalculée (levée de fond privée), on s'assure qu'elle ne soit pas postérieure à la date de fin
+		if( $date_begin > $date_end ){
+			$date_begin = $date_end;
+		}
+		$this->campaign_stats[ 'vote' ][ 'start' ] = $date_begin->format( 'Y-m-d' );
 		$this->campaign_stats[ 'vote' ][ 'end' ] = $date_end->format( 'Y-m-d' );
 		
 		// Stocks des références pour calculer les bonnes données, avec le bon ratio
@@ -585,8 +594,14 @@ public function get_user_form_feedback() {
 		// Stats des investissements
 		$investment_results = WDGCampaignInvestments::get_list( $this->campaign_id );
 		$this->campaign_stats[ 'funding' ] = array();
-		$this->campaign_stats[ 'funding' ][ 'start' ] = $this->campaign->begin_collecte_date( 'Y-m-d' );
-		$this->campaign_stats[ 'funding' ][ 'end' ] = $this->campaign->end_date( 'Y-m-d' );
+		$date_begin = $this->campaign->begin_collecte_date( 'Y-m-d' );
+		$date_end = $this->campaign->end_date( 'Y-m-d' );
+		// la date de début d'évaluation n'étant pas toujours recalculée (levée de fond privée), on s'assure qu'elle ne soit pas postérieure à la date de fin
+		if( $date_begin > $date_end ){
+			$date_begin = $date_end;
+		}
+		$this->campaign_stats[ 'funding' ][ 'start' ] = $date_begin;
+		$this->campaign_stats[ 'funding' ][ 'end' ] = $date_end;
 		if ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated || $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ) {
 			$this->campaign_stats[ 'funding' ][ 'start' ] = $this->campaign_stats[ 'vote' ][ 'end' ];
 			$this->campaign_stats[ 'funding' ][ 'end' ] = $this->campaign_stats[ 'vote' ][ 'end' ];

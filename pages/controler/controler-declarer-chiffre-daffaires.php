@@ -250,6 +250,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				switch( $action_posted ) {
 					case 'gobacktodeclaration':
 						$this->current_declaration->status = WDGROIDeclaration::$status_declaration;
+						$this->current_declaration->save();
 						$this->current_step = $this->current_declaration->get_status();
 						$core = ATCF_CrowdFunding::instance();
 						$core->include_form( 'declaration-input' );
