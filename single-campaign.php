@@ -1,7 +1,7 @@
 <?php
 global $campaign, $post, $campaign_id, $client_context;
 $campaign = atcf_get_current_campaign();
-if (isset($campaign)) {
+if (!empty($campaign)) {
 	if ( ($campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated) && !$campaign->current_user_can_edit()) {
 		wp_redirect(home_url());
 	}
