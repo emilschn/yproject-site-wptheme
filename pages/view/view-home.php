@@ -85,8 +85,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		
 		<div class="news-text">
 			<a href="https://www.wedogood.co/vision/">
-				<span><?php _e( "PREMIÈRE PLATEFORME D'INVESTISSEMENT PARTICIPATIF", 'yproject' ); ?></span><br>
-				<span class="news-text-certified"><?php _e( "CERTIFIÉE B CORP", 'yproject' ); ?></span>
+				<span><?php _e( "Première plateforme d'investissement participatif", 'yproject' ); ?></span><br>
+				<span class="news-text-certified"><?php _e( "certifiée B Corp", 'yproject' ); ?></span>
 			</a> 
 		</div>
 	</div>

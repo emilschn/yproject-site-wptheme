@@ -1083,7 +1083,7 @@ body.home section.news div.news-content {
 	margin: auto;
 }
 body.home section.news div.news-image {
-	background: url("../../images/template-home/2018-Certifee-B-Logo-Black-S.png") no-repeat;
+	background: url("../../images/template-home/logo-bcorp-certified.png") no-repeat;
 	background-position: left center;
 	background-size: contain;
 	width: 10%;
@@ -1100,7 +1100,8 @@ body.home section.news div.news-text {
 body.home section.news div.news-text span {
 	display: inline-block;
 	text-align: justify;
-	font-size: 40px;
+	font-size: 40px;	
+	text-transform: uppercase;
 }
 body.home section.news div.news-text a {
 	color: #333333;
