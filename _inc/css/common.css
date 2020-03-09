@@ -1084,7 +1084,7 @@ body.home section.news div.news-content {
 }
 body.home section.news div.news-image {
 	background: url("../../images/template-home/2018-Certifee-B-Logo-Black-S.png") no-repeat;
-	background-position: left top;
+	background-position: left center;
 	background-size: contain;
 	width: 10%;
 	height: 95%;
@@ -1143,9 +1143,11 @@ body.home section.news span.news-text-certified {
 		width: calc(100% - 112px);
 		margin: auto;
 		padding: 24px;
+		text-align: center;
 	}
 	body.home section.news div.news-text span {
 		font-size: 19px;
+		text-align: center;
 	}
 }
 @media screen and (max-width: 400px) {
