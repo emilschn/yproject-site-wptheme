@@ -96,6 +96,19 @@
 				"admin_theme"	=> true
 			));
 
+			DashboardUtility::create_field(array(
+				"id"			=> "new_common_goods_turnover_percent",
+				"type"			=> "text-percent",
+				"label"			=> "Pourcentage que prend Common Goods sur le CA de l'actif",
+				"value"			=> $page_controler->get_campaign()->get_api_data( 'common_goods_turnover_percent' ),
+				"unit"			=> "%",
+				"min"			=> 0,
+				"max"			=> 100,
+				"step"			=> 0.000000000000000000000001,
+				"editable"		=> $page_controler->can_access_admin(),
+				"visible"		=> $page_controler->can_access_admin(),
+				"admin_theme"	=> true
+			));
 		}
 
 		DashboardUtility::create_field(array(
