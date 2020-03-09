@@ -542,8 +542,6 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		NotificationsEmails::send_mail( 'administratif@wedogood.co', 'Notif interne - Versement auto à venir', $content_mail_auto_royalties );
 
 		$this->current_declaration->init_rois_and_tax();
-		
-		WDGQueue::add_royalties_auto_transfer_start( $this->current_declaration->id );
 	}
 	
 	
