@@ -402,6 +402,33 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			</form>
 		</div>
 	
+		
+		<div class="field admin-theme">
+			<form id="campaign_duplicate" class="ajax-db-form" data-action="campaign_duplicate">
+				<?php DashboardUtility::create_save_button( 'campaign_duplicate', $page_controler->can_access_admin(), 'Dupliquer la campagne', 'Duplication en cours', TRUE ); ?>
+				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+			</form>
+		</div>
+
+		<!-- TODO : actualiser la liste ci-dessous quand on vient de faire une copie ci-dessus -->
+		<?php if ( $page_controler->get_campaign()->get_duplicate_campaigns_id() && $page_controler->get_campaign()->is_funded()): ?>
+			<div class="field admin-theme">
+				<form id="campaign_transfer_investments_form" class="ajax-db-form" data-action="campaign_transfer_investments">
+					<?php DashboardUtility::create_field(array(
+						"id"			=> "duplicated_campaign",
+						"type"			=> "select",
+						"label"			=> __( "Campagne vers laquelle transférer les investissements", 'yproject' ),
+						"value"			=> 0,
+						"options_id"	=> $page_controler->get_campaign()->get_duplicate_campaigns_id(),
+						"options_names"	=> $page_controler->get_campaign()->get_duplicate_campaigns_titles()
+					));?>
+
+					<?php DashboardUtility::create_save_button( 'campaign_transfer_investments', $page_controler->can_access_admin(), 'Transférer les investissements vers une autre campagne', 'Transfert en cours', TRUE ); ?>
+					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+				</form>
+			</div>
+		<?php endif; ?>
+
 		<?php $can_conclude = ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_archive || $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_closed ); ?>
 		<?php if ( $can_conclude ): ?>
 		<div class="field admin-theme">
