@@ -8,18 +8,23 @@
     $WDG_Vue_Components = WDG_Vue_Components::instance();
     $WDG_Vue_Components->enqueue_component( WDG_Vue_Components::$component_launch_project );
 
+    // quand l'interface prospect et la gestion de brouillon de projet sera effective
+    /*
     // on récupère le guid envoyé en GET    
     $input_guid = filter_input( INPUT_GET, 'guid' );
     // grâce à ce guid, on récupère les données du brouillon de projet    
     $project_draft_data = WDGWPREST_Entity_Project_Draft::get( $input_guid );
     $id_user = $project_draft_data->id_user;
-    $email = $project_draft_data->email;
+    $email = $project_draft_data->email; // c'est l'email de l'organisation qu'on veut, si elle existe
     $status = $project_draft_data->status;
     $step = $project_draft_data->step;
     $authorization = $project_draft_data->authorization;
     $metadata = json_decode( $project_draft_data->metadata) ;
 
     $user = new WDGUser( $id_user);
+    */
+    // en attendant on récupère l'utilisateur connecté
+    $user = WDGUser::current();
 
     // on récupère la liste des projets de cet utilisateur
     global $WDG_cache_plugin;
@@ -62,10 +67,11 @@
     $user_organisations["organisations"] = array();
     if ($organizations_list) {
       foreach ($organizations_list as $organization_item) {
-        $orga = array('Id' => $organization_item->wpref , 'Text' => $organization_item->name );
+        $WDGOrganization = new WDGOrganization( $organization_item->wpref );
+        $orga = array('Id' => $organization_item->wpref , 'Text' => $WDGOrganization->get_name(), 'Mail' => $WDGOrganization->get_email() );
         $user_organisations["organisations"][] = $orga;
       }
-      $user_organisations["organisations"][] = array('Id' => "new_orga" , 'Text' => "Une nouvelle organisation..." );
+      $user_organisations["organisations"][] = array('Id' => "new_orga" , 'Text' => "Une nouvelle organisation...", 'Mail' => 'new_email' );
       $user_organisations = json_encode($user_organisations, JSON_HEX_APOS );
 
     }
