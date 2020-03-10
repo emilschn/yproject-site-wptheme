@@ -1143,7 +1143,7 @@ body.home section.news span.news-text-certified {
 		width: -moz-calc(100% - 112px);
 		width: calc(100% - 112px);
 		margin: auto;
-		padding: 24px;
+		padding: 12px;
 		text-align: center;
 	}
 	body.home section.news div.news-text span {
@@ -1153,10 +1153,11 @@ body.home section.news span.news-text-certified {
 }
 @media screen and (max-width: 400px) {
 	body.home section.news div.news-text {
-		height: 200px;
+		height: 120px;
+		padding: 10px;
 	}
 	body.home section.news div.news-text span {
-		font-size: 14px;
+		font-size: 17px;
 	}
 }
 
