@@ -318,13 +318,15 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 						// Stock avant destruction
 						$this->current_investment->get_session_amount();
 						$this->current_investment->get_session_user_type();
+						if ( !$this->current_investment->needs_signature() ) {
+							WDGInvestment::unset_session();
+						}
 						WDGInvestment::unset_session();
 						$this->current_view = 'check-return';
 					} else {
 						$this->current_investment->set_status( WDGInvestment::$status_waiting_check );
 						$this->current_view = 'check-form';
 					}
-					break;
 			}
 		}
 	}
@@ -355,7 +357,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	public function get_current_user_phone() {
 		$buffer = FALSE;
 		$WDGUser_current = WDGUser::current();
-		if ( ypcf_check_user_phone_format( $WDGUser_current->get_phone_number() ) ) {
+		if ( $WDGUser_current->has_phone_number_correct() ) {
 			$buffer = $WDGUser_current->get_phone_number();
 		}
 		return $buffer;

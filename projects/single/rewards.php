@@ -118,7 +118,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 						</table>
 					</div>
 					<?php endif; ?>
-
+					
 				<?php endif; ?>
 
 				

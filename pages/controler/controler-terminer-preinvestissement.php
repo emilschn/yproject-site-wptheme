@@ -8,7 +8,6 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 	 */
 	private $current_campaign;
 	/**
-	 *
 	 * @var WDGInvestment
 	 */
 	private $current_investment;

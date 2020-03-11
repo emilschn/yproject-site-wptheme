@@ -252,6 +252,7 @@ class WDG_WordPress_Events {
 		
 		// Modification version jquery chargée
 		include_once( 'assets-version.php' );
+		
 		if ( !is_admin() ) {
 			wp_deregister_script('jquery');
 			wp_register_script('jquery', (dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.min.js'), false);

@@ -22,7 +22,6 @@ if (!is_user_logged_in()) {
 			&lt;&lt; <a href="<?php echo home_url('/mon-compte/'); ?>">Mon compte</a><br /><br />
 					
 					
-					
 			<?php
 			//Recherche des retraits en cours
 			$args = array(
