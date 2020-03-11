@@ -540,8 +540,8 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$content_mail_auto_royalties .= 'Montant avec ajustement : ' . $this->current_declaration->get_amount_with_adjustment() . ' €<br>';
 		$content_mail_auto_royalties .= 'Montant versé aux investisseurs : ' . $total_roi . ' €<br><br>';
 		NotificationsEmails::send_mail( 'administratif@wedogood.co', 'Notif interne - Versement auto à venir', $content_mail_auto_royalties );
-		
-		WDGQueue::add_royalties_auto_transfer_start( $this->current_declaration->id );
+
+		$this->current_declaration->init_rois_and_tax();
 	}
 	
 	
