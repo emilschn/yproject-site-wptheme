@@ -715,7 +715,7 @@ ul.project-list a.needs-authentication:after {
 /*******************************************************************************
 * CONNEXION PAGE
 *******************************************************************************/
-.template-connexion, .template-inscription {
+.template-connexion, .template-inscription, .template-lancement {
 	background-color: #f2f2f2;
 }
 .template-connexion .center, .template-inscription .center {
