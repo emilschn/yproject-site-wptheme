@@ -16,7 +16,10 @@
 	<div class="padder_more">
         <div class="center_small margin-height">
             <?php if (!is_user_logged_in()): ?>
-                <p class="align-center"><?php _e('Connectez-vous afin de cr&eacute;er un projet.', 'yproject'); ?></p>            
+                <p class="align-center"><?php _e('F&eacute;licitations, votre dossier a &eacute;t&eacute; valid&eacute; par WE DO GOOD !', 'yproject'); ?></p>            
+                <p class="align-center"><?php _e('Attention, la lev&eacute;e de fonds doit &ecirc;tre configur&eacute;e par le repr&eacute;sentant l&eacute;gal de l’entreprise avec son compte personnel, qui pourra ensuite inviter le reste de l’&eacute;quipe.', 'yproject'); ?></p>            
+                <p class="align-center"><?php _e('Vous devez disposez d’une adresse mail personnelle pour votre compte et d’une seconde adresse mail pour l’entreprise (adresse g&eacute;n&eacute;rique ou d’entreprise).', 'yproject'); ?></p>            
+                <p class="align-center"><?php _e('Connectez-vous afin de cr&eacute;er un projet.', 'yproject'); ?></p>         
                 <?php locate_template( array("common/connexion-lightbox.php"), true, false ); ?>            
                 <?php global $signup_errors; $has_register_errors = ($signup_errors->get_error_message() != ""); ?>
                 <div id="newproject-register-user" class="<?php if (!$has_register_errors): ?>hidden<?php endif; ?>">
