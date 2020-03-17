@@ -17,6 +17,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private $user_project_list;
 	private $user_data;
 	private $display_user_override_not_found;
+	private $display_user_override_organization_manager_mail;
 
 	private $wallet_to_bankaccount_result;
 	private $form_user_details;
@@ -50,6 +51,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$reload = WDGFormUsers::register_rib();
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
 		$this->display_user_override_not_found = FALSE;
+		$this->display_user_override_organization_manager_mail = FALSE;
 		$this->init_current_user( $reload );
 		$this->init_project_list();
 		$this->init_intentions_to_confirm();
@@ -124,6 +126,16 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 						$this->current_user = new WDGUser( $input_user );
 					} else {
 						$this->display_user_override_not_found = TRUE;
+					}
+				}
+
+				if ( WDGOrganization::is_user_organization( $this->current_user->get_wpref() ) ) {
+					$this->display_user_override_organization_manager_mail = '---';
+					$WDGOrganization = new WDGOrganization( $this->current_user->get_wpref() );
+					$linked_users_creator = $WDGOrganization->get_linked_users( WDGWPREST_Entity_Organization::$link_user_type_creator );
+					if ( !empty( $linked_users_creator ) ) {
+						$WDGUser_creator = $linked_users_creator[ 0 ];
+						$this->display_user_override_organization_manager_mail = $WDGUser_creator->get_email();
 					}
 				}
 			}
@@ -201,6 +213,20 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	 */
 	public function is_displayed_user_override_not_found() {
 		return $this->display_user_override_not_found;
+	}
+
+	/**
+	 * Doit-on afficher une alerte si l'utilisateur qu'on essaie d'afficher est une organisation
+	 */
+	public function is_displayed_user_override_organization() {
+		return ( $this->display_user_override_organization_manager_mail !== FALSE );
+	}
+
+	/**
+	 * Récupération de l'adresse e-mail
+	 */
+	public function user_override_organization_manager_mail() {
+		return $this->display_user_override_organization_manager_mail;
 	}
 	
 /******************************************************************************/
