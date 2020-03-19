@@ -86,7 +86,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 								<?php $complementary_text = __( " (pourcentage indicatif).", 'yproject' ); ?>
 							<?php endif; ?>
 							<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires de ce projet pendant", 'yproject' ) . ' ' .$funding_duration_str. $complementary_text; ?><br>
-							<?php _e("Soit", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro; </span><?php _e( "(brut) selon", 'yproject' ); ?>
+							<?php _e("Soit un total de", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro; </span><?php _e( "(brut) selon", 'yproject' ); ?>
 							<?php if ( empty( $is_simulator_shortcode ) ): ?>
 								<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet :", 'yproject' )?></a>
 							<?php else: ?>
