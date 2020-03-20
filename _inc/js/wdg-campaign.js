@@ -124,14 +124,36 @@ var WDGProjectViewer = (function($) {
 					}
 					
 					if ( bIsCorrectInput ) {
+
 						var maxRoi = inputVal * maxProfit;
 						var maxRoiRemaining = maxRoi;
 						var ratioOfGoal = inputVal / goalProject;
 						var amountOfGoal = 0;
 						var ratioOfPercent = ratioOfGoal * percentProject;
-						var ratioOfPercentRound = Math.round(ratioOfPercent * 100000) / 100000;
-						var ratioOfPercentRoundStr = ratioOfPercentRound.toString().replace('.', ',');
-						$("span.roi_percent_user").text(ratioOfPercentRoundStr);
+						// différencier calculateur EP 
+						if ( $( 'input#is_positive_savings' ).val() == "true" ){
+							var asset_price = $( 'input#asset_price' ).val();
+							var common_goods_turnover_percent = $( 'input#common_goods_turnover_percent' ).val();
+							var asset_singular = $( 'input#asset_singular' ).val();
+							var asset_plural = $( 'input#asset_plural' ).val();
+							var asset_nb = Math.ceil(inputVal / asset_price);
+							$("span.nb_assets").text(asset_nb);
+							if (asset_nb > 1){
+								$("span.name_assets").text(' '+asset_plural);
+							} else {
+								$("span.name_assets").text(' '+asset_singular);
+							}
+							if (asset_nb != 0){
+								var ratioOfPercentRoundStr = Math.round( inputVal / asset_price / asset_nb * percentProject * common_goods_turnover_percent ) /100;
+							} else {
+								var ratioOfPercentRoundStr = 0;
+							}
+							$("span.roi_percent_user").text(ratioOfPercentRoundStr);
+						} else {
+							var ratioOfPercentRound = Math.round(ratioOfPercent * 100000) / 100000;
+							var ratioOfPercentRoundStr = ratioOfPercentRound.toString().replace('.', ',');
+							$("span.roi_percent_user").text(ratioOfPercentRoundStr);
+						}
 						var maxAmountOfTO = 0;
 						var needHeightRefresh = false;
 
@@ -216,6 +238,7 @@ var WDGProjectViewer = (function($) {
 			if ($("div#content.version-3 nav.project-navigation").length > 0) {
 				$("div#content.version-3 nav.project-navigation ul li a").removeClass("selected");
 				for (i = 0; i < WDGProjectViewer.nProjectParts; i++) {
+					console.log(WDGProjectViewer.aProjectParts[i]);
 					if ($(document).scrollTop() >= $("div.project-" + WDGProjectViewer.aProjectParts[i]).offset().top - $("nav#navigation").height() - $("nav.project-navigation").height()) {
 						$("div#content.version-3 nav.project-navigation ul li a#target-" + WDGProjectViewer.aProjectParts[i]).addClass("selected");
 						break;
