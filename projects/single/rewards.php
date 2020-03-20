@@ -87,10 +87,9 @@ $estimated_turnover = $campaign->estimated_turnover();
 							<?php $complementary_text = '.'; ?>
 							<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
 								<?php $complementary_text = __( " (pourcentage indicatif).", 'yproject' ); ?>
-							<?php endif; ?>
-							
+							<?php endif; ?>							
 							<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires de", 'yproject' ) . ' '; ?><span class="nb_assets">0</span><span class="name_assets"><?php echo ' '.$campaign->get_asset_name_singular(); ?></span><?php echo ' '.__( "pendant", 'yproject' ).' '.$funding_duration_str. $complementary_text; ?><br>
-							<?php _e("Soit", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro; </span><?php _e( "(brut) selon", 'yproject' ); ?>
+							<?php _e("Soit un total de", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro; </span><?php _e( "(brut) selon", 'yproject' ); ?>
 							<?php if ( empty( $is_simulator_shortcode ) ): ?>
 								<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet :", 'yproject' )?></a>
 							<?php else: ?>
@@ -203,7 +202,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 										<?php $complementary_text = __( " (pourcentage indicatif).", 'yproject' ); ?>
 									<?php endif; ?>
 									<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires de ce projet pendant", 'yproject' ) . ' ' .$funding_duration_str. $complementary_text; ?><br>
-									<?php _e("Soit", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro; </span><?php _e( "(brut) selon", 'yproject' ); ?>
+									<?php _e("Soit un total de", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro; </span><?php _e( "(brut) selon", 'yproject' ); ?>
 									<?php if ( empty( $is_simulator_shortcode ) ): ?>
 										<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet :", 'yproject' )?></a>
 									<?php else: ?>
