@@ -132,19 +132,19 @@ var WDGProjectViewer = (function($) {
 						var ratioOfPercent = ratioOfGoal * percentProject;
 						// différencier calculateur EP 
 						if ( $( 'input#is_positive_savings' ).val() == "true" ){
-							var asset_price = $( 'input#asset_price' ).val();
-							var common_goods_turnover_percent = $( 'input#common_goods_turnover_percent' ).val();
-							var asset_singular = $( 'input#asset_singular' ).val();
-							var asset_plural = $( 'input#asset_plural' ).val();
-							var asset_nb = Math.ceil(inputVal / asset_price);
-							$("span.nb_assets").text(asset_nb);
-							if (asset_nb > 1){
-								$("span.name_assets").text(' '+asset_plural);
+							var assetPrice = $( 'input#asset_price' ).val();
+							var commonGoodsTurnoverPercent = $( 'input#common_goods_turnover_percent' ).val();
+							var assetSingular = $( 'input#asset_singular' ).val();
+							var assetPlural = $( 'input#asset_plural' ).val();
+							var nbAssets = Math.ceil(inputVal / assetPrice);
+							$("span.nb_assets").text(nbAssets);
+							if (nbAssets > 1){
+								$("span.name_assets").text(' '+assetPlural);
 							} else {
-								$("span.name_assets").text(' '+asset_singular);
+								$("span.name_assets").text(' '+assetSingular);
 							}
-							if (asset_nb != 0){
-								var ratioOfPercentRoundStr = Math.round( inputVal / asset_price / asset_nb * percentProject * common_goods_turnover_percent ) /100;
+							if (nbAssets != 0){
+								var ratioOfPercentRoundStr = Math.round( inputVal / assetPrice / nbAssets * percentProject * commonGoodsTurnoverPercent * 1000) /100000;
 							} else {
 								var ratioOfPercentRoundStr = 0;
 							}
