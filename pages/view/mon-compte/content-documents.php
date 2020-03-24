@@ -56,14 +56,14 @@
 	<h3><?php _e( "Mes demandes annuelles de dispense de pr&eacute;l&egrave;vement", 'yproject' ); ?></h3>
 
 	<?php _e( "Lorsque les royalties vers&eacute;es par un projet sont sup&eacute;rieures &agrave; la somme initialement investie, la plus value r&eacute;alis&eacute;e doit &ecirc;tre d&eacute;clar&eacute;e dans le cadre de l'imp&ocirc;t sur le revenu.", 'yproject' ); ?>
-	<?php _e( "Elle est soumise au Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30 %, dont 12,8 % de pr&eacute;l&egrave;vement forfaitaire et 17,2 % de contributions et pr&eacute;l&egrave;vements sociaux.", 'yproject' ); ?>
+	<?php _e( "Elle est soumise au Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30 %, dont 12,8 % d'imp&ocirc;ts sur le revenu et 17,2 % de contributions et pr&eacute;l&egrave;vements sociaux.", 'yproject' ); ?>
 	<?php _e( "La d&eacute;claration est effectu&eacute;e de fa&ccedil;on automatis&eacute;e tous les ans par WE DO GOOD &agrave; la Direction G&eacute;n&eacute;rale des Finances Publiques.", 'yproject' ); ?><br><br>
 
 	<?php _e( "Toutefois, vous pouvez nous adresser en amont une demande de dispense pour &ecirc;tre impos&eacute;(e) au bar&egrave;me de l'imp&ocirc;t sur le revenu selon votre taux d'imposition, si le revenu fiscal de référence de votre foyer fiscal est inf&eacute;rieur &agrave; :", 'yproject' ); ?><br>
 	<?php _e( "- 25 000 € (pour les contribuables c&eacute;libataires, divorc&eacute;s ou veufs) ;", 'yproject' ); ?><br>
 	<?php _e( "- 50 000 € (pour les contribuables soumis &agrave; imposition commune).", 'yproject' ); ?><br><br>
 		
-	<?php _e( "Cette dispense ne s'appliquera qu'&agrave; la partie concernant le pr&eacute;l&egrave;vement forfaitaire (12,8 %) et ne peut &ecirc;tre faite que par les investisseurs dont la r&eacute;sidence fiscale est en France.", 'yproject' ); ?><br>
+	<?php _e( "Cette dispense ne s'appliquera qu'&agrave; la partie concernant l'imp&ocirc;t sur le revenu (12,8 %) et ne peut &ecirc;tre faite que par les investisseurs dont la r&eacute;sidence fiscale est en France.", 'yproject' ); ?><br>
 	<br>
 
 	<?php
