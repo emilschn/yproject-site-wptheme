@@ -33,11 +33,14 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Pr&eacute;l&egrave;vement bancaire", 'yproject' ); ?>" width="120">
 			<div>
 				<span class="mean-payment-name"><?php _e( "Pr&eacute;l&egrave;vement bancaire", 'yproject' ); ?></span><br>
-				<span><?php _e( "Le virement n'est d&eacute;finitivement pris en compte que lors de l'authentification de votre compte par notre prestataire de paiement. Une copie de votre pi&egrave;ce d'identit&eacute; et un justificatif de domicile seront n&eacute;cessaires", 'yproject' ); ?></span>
+				<span><?php _e( "Le pr&eacute;l&egrave;vement bancaire s'effectuera sur le compte bancaire dont l'IBAN est le suivant :", 'yproject' ); ?> <?php echo $page_controler->get_mandate_infos(); ?></span><br>
+				<span><?php _e( "Merci de vous assurer que les fonds sont suffisants sur ce compte. En cas d'annulation, notre prestataire de services de paiement nous pr&eacute;l&egrave;ve des frais que nous vous refacturerons &agrave; hauteur de 30 € HT.", 'yproject' ); ?></span><br>
+				<span><?php _e( "De plus, l'utilisation de ce moyen de paiement provoque un d&eacute;lais de versement &agrave; vos investisseurs de 10 jours &agrave; compter de la r&eacute;ception de votre paiement.", 'yproject' ); ?></span>
 			</div>
 		</div>
+		<?php endif; ?>
 
-		<?php elseif ( !$page_controler->is_card_shortcut_displayed() ): ?>
+		<?php if ( $page_controler->can_display_wire() ): ?>
 		<div class="mean-payment" data-meanofpayment="wire">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Virement bancaire", 'yproject' ); ?>" width="120">
 			<div>

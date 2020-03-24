@@ -108,19 +108,12 @@ $summary_data = $page_controler->get_summary_data();
 		</div>
 		<br><br>
 	<?php endif; ?>
-	<?php if ( $page_controler->is_card_shortcut_displayed() ): ?>
-		<button type="submit" name="action" value="gotopayment" class="button red"><?php _e( "Valider et payer par carte", 'yproject' ); ?></button>
-		<div class="clear"><br></div>
-	<?php endif; ?>
+
+	<button type="submit" name="action" value="gotopayment" class="button red"><?php _e( "Valider et payer par carte", 'yproject' ); ?></button>
+	<div class="clear"><br></div>
 	
 	<button type="submit" name="action" value="gobacktodeclaration" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
-	<button type="submit" name="action" value="changepayment" class="button half right <?php if ( $page_controler->is_card_shortcut_displayed() ): ?>transparent<?php else: ?>red<?php endif; ?>"><?php
-		if ( $page_controler->is_card_shortcut_displayed() ) {
-			_e( "Autre mode de paiement", 'yproject' ); 
-		} else {
-			_e( "Suivant", 'yproject' ); 
-		}
-	?></button>
+	<button type="submit" name="action" value="changepayment" class="button half right transparent"><?php _e( "Autre mode de paiement", 'yproject' ); ?></button>
 	<div class="clear"></div>
 
 </form>
