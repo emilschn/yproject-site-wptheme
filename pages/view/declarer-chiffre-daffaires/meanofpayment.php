@@ -33,9 +33,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Pr&eacute;l&egrave;vement bancaire", 'yproject' ); ?>" width="120">
 			<div>
 				<span class="mean-payment-name"><?php _e( "Pr&eacute;l&egrave;vement bancaire", 'yproject' ); ?></span><br>
-				<span><?php _e( "Le pr&eacute;l&egrave;vement bancaire s'effectuera sur le compte bancaire dont l'IBAN est le suivant :", 'yproject' ); ?> <?php echo $page_controler->get_mandate_infos(); ?></span><br>
-				<span><?php _e( "Merci de vous assurer que les fonds sont suffisants sur ce compte. En cas d'annulation, notre prestataire de services de paiement nous pr&eacute;l&egrave;ve des frais que nous vous refacturerons &agrave; hauteur de 30 € HT.", 'yproject' ); ?></span><br>
-				<span><?php _e( "De plus, l'utilisation de ce moyen de paiement provoque un d&eacute;lais de versement &agrave; vos investisseurs de 10 jours &agrave; compter de la r&eacute;ception de votre paiement.", 'yproject' ); ?></span>
+				<span><?php _e( "Le pr&eacute;l&egrave;vement bancaire s'effectuera sur le compte bancaire dont l'IBAN est le suivant :", 'yproject' ); ?> <strong><?php echo $page_controler->get_mandate_infos(); ?></strong></span><br><br>
+				<span><?php _e( "Merci de vous assurer que les fonds sont suffisants sur ce compte. En cas d'annulation, notre prestataire de services de paiement nous pr&eacute;l&egrave;ve des frais que <strong>nous vous refacturerons &agrave; hauteur de 30 € HT</strong>.", 'yproject' ); ?></span><br><br>
+				<span><?php _e( "De plus, l'utilisation de ce moyen de paiement provoque un d&eacute;lais de versement &agrave; vos investisseurs de <strong>10 jours</strong> &agrave; compter de la r&eacute;ception de votre paiement.", 'yproject' ); ?></span>
 			</div>
 		</div>
 		<?php endif; ?>
