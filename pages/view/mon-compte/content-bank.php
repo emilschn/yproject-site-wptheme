@@ -129,20 +129,16 @@ if ( $page_controler->is_iban_validated() ): ?>
 <?php
 // Si l'IBAN et le document de RIB sont en attente, on affiche juste un résumé
 elseif( $page_controler->is_iban_waiting() ): ?>
-	<div class="center">
-		<div class="wdg-message error">
-			<?php _e( "Coordonn&eacute;es bancaires en attente de validation", 'yproject' ); ?>
-		</div>
+	<div class="wdg-message error">
+		<?php _e( "Coordonn&eacute;es bancaires en attente de validation", 'yproject' ); ?>
 	</div>
 
-	<div class="center">
-		<strong><?php _e( "Propri&eacute;taire du compte :" );?></strong><br>
-		<?php echo $WDGUser_lw_bank_info->HOLDER; ?><br>
-		<strong><?php _e( "IBAN :" );?></strong><br>
-		<?php echo $WDGUser_lw_bank_info->DATA; ?><br>
-		<strong><?php _e( "BIC :" );?></strong><br>
-		<?php echo $WDGUser_lw_bank_info->SWIFT; ?><br>
-	</div>
+	<strong><?php _e( "Propri&eacute;taire du compte :" );?></strong><br>
+	<?php echo $WDGUser_lw_bank_info->HOLDER; ?><br>
+	<strong><?php _e( "IBAN :" );?></strong><br>
+	<?php echo $WDGUser_lw_bank_info->DATA; ?><br>
+	<strong><?php _e( "BIC :" );?></strong><br>
+	<?php echo $WDGUser_lw_bank_info->SWIFT; ?><br>
 
 	<?php
 	$current_filelist_bank = WDGKYCFile::get_list_by_owner_id( $page_controler->get_current_user()->get_wpref(), WDGKYCFile::$owner_user, WDGKYCFile::$type_bank );
@@ -156,24 +152,19 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 
 <?php else: ?>
 	<?php if ( $WDGUser_lw_bank_status == WDGUser::$iban_status_disabled ): ?>
-		<div class="center">
-			<div class="wdg-message error">
-				<?php _e( "Coordonn&eacute;es bancaires d&eacute;sactiv&eacute;es", 'yproject' ); ?>
-			</div>
+		<div class="wdg-message error">
+			<?php _e( "Coordonn&eacute;es bancaires d&eacute;sactiv&eacute;es", 'yproject' ); ?>
 		</div>
+
 	<?php elseif ( $WDGUser_lw_bank_status == WDGUser::$iban_status_rejected ): ?>
-		<div class="center">
-			<div class="wdg-message error">
-				<?php _e( "Coordonn&eacute;es bancaires refus&eacute;es", 'yproject' ); ?>
-			</div>
+		<div class="wdg-message error">
+			<?php _e( "Coordonn&eacute;es bancaires refus&eacute;es", 'yproject' ); ?>
 		</div>
 	<?php endif; ?>
 
 	<?php if ( $WDGUser_displayed->has_document_lemonway_error( LemonwayDocument::$document_type_bank ) ): ?>
-		<div class="center">
-			<div class="wdg-message error">
-				<?php echo $WDGUser_displayed->get_document_lemonway_error( LemonwayDocument::$document_type_bank ); ?>
-			</div>
+		<div class="wdg-message error">
+			<?php echo $WDGUser_displayed->get_document_lemonway_error( LemonwayDocument::$document_type_bank ); ?>
 		</div>
 	<?php endif; ?>
 

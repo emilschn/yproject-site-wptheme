@@ -202,9 +202,9 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		return $this->summary_data;
 	}
 	
-	public function is_card_shortcut_displayed() {
+	public function can_display_wire() {
 		$declaration_amount_to_pay = $this->current_declaration->get_amount_with_commission();
-		return ( $declaration_amount_to_pay < 500 );
+		return ( $declaration_amount_to_pay >= 500 && !$this->has_sign_mandate() );
 	}
 	
 	public function has_commission() {
@@ -215,8 +215,6 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 // CURRENT FORM
 /******************************************************************************/
 	private function init_form() {
-		ypcf_debug_log( 'WDG_Page_Controler_DeclarationInput::init_form' );
-		
 		$input_close_declarations = filter_input( INPUT_POST, 'close_declarations' );
 		if ( !empty( $input_close_declarations ) ) {
 			
@@ -264,14 +262,8 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					case 'gotopayment':
 						$this->current_step = WDGROIDeclaration::$status_payment . '2';
 						$has_tried_payment = TRUE;
-						if ( $this->is_card_shortcut_displayed() ) {
-							// Démarrer paiement par carte
-							$this->display_payment_error = !$this->proceed_payment_card();
-
-						} else {
-							// Procéder au prélèvement
-							$this->display_payment_error = !$this->proceed_payment_mandate();
-						}
+						// Démarrer paiement par carte
+						$this->display_payment_error = !$this->proceed_payment_card();
 						break;
 
 					case 'proceedpayment':
@@ -326,8 +318,6 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			}
 			
 		}
-		
-		ypcf_debug_log( 'WDG_Page_Controler_DeclarationInput::init_form > ' .$this->current_step );
 	}
 	
 	public function get_form() {
@@ -365,6 +355,12 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$campaign_organization_item = $this->current_campaign->get_organization();
 		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
 		return $WDGOrganization->has_signed_mandate();
+	}
+
+	public function get_mandate_infos() {
+		$campaign_organization_item = $this->current_campaign->get_organization();
+		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+		return $WDGOrganization->get_mandate_infos_str();
 	}
 
 	
@@ -540,8 +536,8 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$content_mail_auto_royalties .= 'Montant avec ajustement : ' . $this->current_declaration->get_amount_with_adjustment() . ' €<br>';
 		$content_mail_auto_royalties .= 'Montant versé aux investisseurs : ' . $total_roi . ' €<br><br>';
 		NotificationsEmails::send_mail( 'administratif@wedogood.co', 'Notif interne - Versement auto à venir', $content_mail_auto_royalties );
-		
-		WDGQueue::add_royalties_auto_transfer_start( $this->current_declaration->id );
+
+		$this->current_declaration->init_rois_and_tax();
 	}
 	
 	

@@ -8,10 +8,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-11-07 15:56+0100\n"
+"PO-Revision-Date: 2020-03-18 10:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "Language: en_US\n"
 
 # ############################## PROJECT COMMON ################################
@@ -21,7 +21,7 @@ msgstr "Votes"
 
 # THEME - projects/common/stats-public-votes.php
 msgid "personnes ont vot&eacute; sur ce projet."
-msgstr "persons have voted on this project"
+msgstr "persons have voted on this project."
 
 msgid "Impact et coh&eacute;rence du projet"
 msgstr "Impact and consistency of the project"
@@ -133,7 +133,7 @@ msgid "moyen"
 msgstr "on average"
 
 msgid "par personne :"
-msgstr "per person"
+msgstr "per person:"
 
 msgid "minimal"
 msgstr "minimal"
@@ -167,7 +167,7 @@ msgid "minute"
 msgstr "minute"
 
 msgid " pour voter !"
-msgstr "remaining to vote!"
+msgstr " remaining to vote!"
 
 msgid " !"
 msgstr " remaining!"
@@ -215,7 +215,7 @@ msgid "lien social"
 msgstr "social bonds"
 
 msgid "acc&egrave;s &agrave; l&rsquo;emploi"
-msgstr "Access to employment"
+msgstr "access to employment"
 
 msgid "conditions de vie"
 msgstr "life conditions"
@@ -358,7 +358,7 @@ msgid "minutes"
 msgstr "minutes"
 
 msgid "Merci pour votre pr&eacute;-investissement !"
-msgstr "Thank you for your pre-investment"
+msgstr "Thank you for your pre-investment!"
 
 msgid "Pr&eacute;-investir"
 msgstr "Pre-invest"
@@ -451,8 +451,8 @@ msgstr "Target yield:"
 msgid "% par an en moyenne*"
 msgstr "% per year on average"
 
-msgid "Soit"
-msgstr "I.e."
+msgid "Soit un total de"
+msgstr "I.e. in total"
 
 msgid "soit"
 msgstr "i.e."
@@ -562,7 +562,7 @@ msgid "En finan&ccedil;ant l'&eacute;conomie r&eacute;elle, vous pouvez avoir un
 msgstr "When you finance real economy, you have a positive impact on the environment and the society."
 
 msgid "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable à l'investissement et ne prend que 2 petites minutes !"
-msgstr "Evaluation is a pre-hearing phase, before investment. It takes about 2 minutes."
+msgstr "Evaluation is a pre-hearing phase, before investment. It takes about 2 minutes!"
 
 msgid "Les entrepreneurs ont besoin de votre avis sur le projet pour mesurer l'int&eacute;r&ecirc;t qu'il suscite et bien lancer leur lev&eacute;e de fonds."
 msgstr "Project owners need your feedback to mesure the potential interest and prepare their fundraise."
@@ -1130,7 +1130,7 @@ msgid "Je souhaite que mes conseils soient publi&eacute;s sur la page de pr&eacu
 msgstr "I would like my advices to be published on the page of the project"
 
 msgid "Vous n'avez pas exprim&eacute; votre note."
-msgstr "You have not rated the project"
+msgstr "You have not rated the project."
 
 msgid "Votre intention d'investissement doit &ecirc;tre un nombre."
 msgstr "The amount you intent to invest should be a number."
