@@ -143,7 +143,9 @@ UserAccountDashboard.prototype.initProjectList = function() {
 
 						sCampaignBuffer += '<div class="align-center">';
 						sCampaignBuffer += 'Investissement sur ' + oCampaignItem[ 'funding_duration' ] + ' ans<br>';
-						sCampaignBuffer += 'à compter du ' + oCampaignItem[ 'start_date' ];
+						if ( oCampaignItem[ 'start_date' ] !== '' ) {
+							sCampaignBuffer += 'à compter du ' + oCampaignItem[ 'start_date' ];
+						}
 						sCampaignBuffer += '</div>';
 
 						sCampaignBuffer += '<div class="align-center">';

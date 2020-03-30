@@ -198,6 +198,17 @@
 
 		if ( $page_controler->can_access_admin() ) {
 			DashboardUtility::create_field(array(
+				"id"			=> "new_contract_start_date_is_undefined",
+				"type"			=> "select",
+				"label"			=> "La date de d&eacute;marrage du contrat est indéfinie",
+				"value"			=> $page_controler->get_campaign()->contract_start_date_is_undefined(),
+				"options_id"	=> array( 0, 1 ),
+				"options_names"	=> array( 'Non', 'Oui' ),
+				"editable"		=> $page_controler->can_access_admin(),
+				"admin_theme"	=> true
+			));
+
+			DashboardUtility::create_field(array(
 				"id"			=> "new_turnover_per_declaration",
 				"type"			=> "select",
 				"label"			=> "Nb d&eacute;claration CA par versement",
