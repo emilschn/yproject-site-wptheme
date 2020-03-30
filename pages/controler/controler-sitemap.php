@@ -245,6 +245,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/epargne-positive/mobilite-durable/investissement/'			=> '0.2',
 			'/epargne-positive/tourisme-durable/investissement/'			=> '0.2',
 			'/epargne-positive/zero-pesticide/investissement/'				=> '0.2',
+			'/initiatives-covid-19/'										=> '0.2',
 			// 0.1
 			'/placement-royalties/'				=> '0.1',
 			'/a-propos/'						=> '0.1',
