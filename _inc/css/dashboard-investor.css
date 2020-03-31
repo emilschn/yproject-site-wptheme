@@ -310,6 +310,52 @@ body.template-mon-compte div#container div#content .royalties-list .roi-table tr
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.finished {
 	border-left: 4px solid #8BC79C;
 }
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.future {
+	border-left: 4px dotted #F4F2F2;
+	font-weight: normal;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.future div.tooltip {
+	display: inline-block;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.future div.tooltip button {
+	display: inline-block;
+	width: 22px;
+	height: 22px;
+	padding: 3px;
+	border: 0px;
+	border-radius: 12px;
+	text-align: center;
+	font-weight: bold;
+	background: #F4F2F2;
+	color: #333;
+	cursor: pointer;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.future div.tooltip div.tooltip-text {
+	position: absolute;
+	display: none;
+	z-index: 1;
+	margin-left: -16px;
+	margin-top: -120px;
+	width: 200px;
+	height: 70px;
+	padding: 8px;
+	border-radius: 8px;
+	font-size: 13px;
+	font-weight: normal;
+	text-align: justify;
+	background: #333;
+	color: #FFF;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.future div.tooltip div.tooltip-text:after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 27px;
+	margin-left: -8px;
+	border-width: 8px;
+	border-style: solid;
+	border-color: #333 transparent transparent transparent;
+}
 
 body.template-mon-compte div#container div#content div.authentication-items {
     display: -webkit-flex;
