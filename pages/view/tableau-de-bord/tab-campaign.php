@@ -149,6 +149,33 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 
 		<?php
+			$array_item_types = array();
+			foreach ( WDGCampaignBill::$item_types as $type_key => $type_item ) {
+				$array_item_types[ $type_key ] = $type_item[ 'label' ];
+			}
+			DashboardUtility::create_field(array(
+				"id"			=> "new_project_product_type",
+				"type"			=> "select",
+				'admin_theme'	=> true,
+				"label"			=> __( "Type de produit Quickbooks", 'yproject' ),
+				"value"			=> $page_controler->get_campaign()->get_api_data( 'product_type' ),
+				"options_id"	=> array_keys( $array_item_types ),
+				"options_names"	=> array_values( $array_item_types )
+			));
+
+			$array_acquisition = array();
+			foreach ( WDGCampaignBill::$classes as $acquisition_key => $acquisition_item ) {
+				$array_acquisition[ $acquisition_key ] = $acquisition_item[ 'label' ];
+			}
+			DashboardUtility::create_field(array(
+				"id"			=> "new_project_acquisition",
+				"type"			=> "select",
+				'admin_theme'	=> true,
+				"label"			=> __( "Acquisition Quickbooks", 'yproject' ),
+				"value"			=> $page_controler->get_campaign()->get_api_data( 'acquisition' ),
+				"options_id"	=> array_keys( $array_acquisition ),
+				"options_names"	=> array_values( $array_acquisition )
+			));
 		}
 		
 		$locations = atcf_get_locations();
