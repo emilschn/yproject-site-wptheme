@@ -56,7 +56,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<input type="hidden" id="input-meanofpayment" name="meanofpayment" value="">
 	<input type="hidden" id="input-meanofpayment-card-type" name="meanofpayment-card-type" value="">
 	<input type="hidden" id="input-meanofpayment-card-save" name="meanofpayment-card-save" value="">
-	<button type="submit" name="action" value="gobacktodeclaration" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
+	<button type="submit" name="action" value="gobacktosummary" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
 	<button type="submit" name="action" value="proceedpayment" class="button half right red hidden"><?php _e( "Payer", 'yproject' ); ?></button>
 	<div class="clear"></div>
 

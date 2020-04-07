@@ -255,6 +255,11 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 						$this->form = new WDG_Form_Declaration_Input( $this->current_campaign->ID, $this->current_declaration->id );
 						break;
 
+					case 'gobacktosummary':
+						$this->current_step = WDGROIDeclaration::$status_payment;
+						$this->init_summary_data();
+						break;
+
 					case 'changepayment':
 						$this->current_step = WDGROIDeclaration::$status_payment . '2';
 						break;
