@@ -150,6 +150,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 		<?php
 			$array_item_types = array();
+			$array_item_types[ '' ] = '';
 			foreach ( WDGCampaignBill::$item_types as $type_key => $type_item ) {
 				$array_item_types[ $type_key ] = $type_item[ 'label' ];
 			}
@@ -164,6 +165,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			));
 
 			$array_acquisition = array();
+			$array_acquisition[ '' ] = '';
 			foreach ( WDGCampaignBill::$classes as $acquisition_key => $acquisition_item ) {
 				$array_acquisition[ $acquisition_key ] = $acquisition_item[ 'label' ];
 			}
