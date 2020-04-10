@@ -22,6 +22,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private $wallet_to_bankaccount_result;
 	private $form_user_details;
 	private $form_user_password;
+	private $form_user_delete;
 	private $form_user_identitydocs;
 	private $form_user_bank;
 	private $form_user_notifications;
@@ -43,6 +44,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'user-password' );
 		$core->include_form( 'user-unlink-facebook' );
+		$core->include_form( 'user-delete' );
 		$core->include_form( 'user-identitydocs' );
 		$core->include_form( 'user-bank' );
 		$core->include_form( 'user-notifications' );
@@ -284,6 +286,11 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 				$this->form_user_feedback = $this->form_user_password->postForm();
 			}
 		}
+		$this->form_user_delete = new WDG_Form_User_Delete( $this->current_user->get_wpref() );
+		if ( $action_posted == WDG_Form_User_Delete::$name ) {
+			$this->form_user_feedback = $this->form_user_delete->postForm();
+			$this->init_current_user( TRUE );
+		}
 	}
 	
 	public function get_user_details_form() {
@@ -302,6 +309,10 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		return $this->form_user_feedback;
 	}
 	
+	public function get_user_form_delete() {
+		return $this->form_user_delete;
+	}
+
 	public function get_user_data( $data_key ) {
 		$buffer = '';
 		if ( !empty( $data_key ) ) {
@@ -524,35 +535,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$this->list_intentions_to_confirm = array();
 		
 		if ( $this->current_user->is_lemonway_registered() ) {
-			
-			$list_campaign_funding = ATCF_Campaign::get_list_funding( 0, '', true );
-			foreach ( $list_campaign_funding as $project_post ) {
-				$amount_voted = $this->current_user->get_amount_voted_on_campaign( $project_post->ID );
-				if ( $amount_voted > 0 && !$this->current_user->has_invested_on_campaign( $project_post->ID ) ) {
-					$intention_item = array(
-						'campaign_name'	=> $project_post->post_title,
-						'campaign_id'	=> $project_post->ID,
-						'vote_amount'	=> $amount_voted,
-						'status'		=> ATCF_Campaign::$campaign_status_collecte
-					);
-					array_push( $this->list_intentions_to_confirm, $intention_item );
-				}
-			}
-
-			$list_campaign_vote = ATCF_Campaign::get_list_vote( 0, '', true );
-			foreach ( $list_campaign_vote as $project_post ) {
-				$amount_voted = $this->current_user->get_amount_voted_on_campaign( $project_post->ID );
-				if ( $amount_voted > 0 && !$this->current_user->has_invested_on_campaign( $project_post->ID ) ) {
-					$intention_item = array(
-						'campaign_name'	=> $project_post->post_title,
-						'campaign_id'	=> $project_post->ID,
-						'vote_amount'	=> $amount_voted,
-						'status'		=> ATCF_Campaign::$campaign_status_vote
-					);
-					array_push( $this->list_intentions_to_confirm, $intention_item );
-				}
-			}
-			
+			$this->list_intentions_to_confirm = $this->current_user->get_campaigns_voted();
 		}
 	}
 	

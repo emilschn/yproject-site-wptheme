@@ -10,6 +10,13 @@
 		$fields_unlink_facebook_hidden = $WDGUserUnlinkFacebookForm->getFields( WDG_Form_User_Unlink_Facebook::$field_group_hidden );
 		$fields_unlink_facebook_visible = $WDGUserUnlinkFacebookForm->getFields( WDG_Form_User_Unlink_Facebook::$field_group_password );
 	}
+	
+	$WDGUserDeleteForm = $page_controler->get_user_form_delete();
+	if ( $WDGUserDeleteForm ) {
+		$fields_delete_hidden = $WDGUserDeleteForm->getFields( WDG_Form_User_Delete::$field_group_hidden );
+	}
+	$WDGUser_current = WDGUser::current();
+	$WDGUser_override = $page_controler->get_current_user();
 ?>
 
 
@@ -64,4 +71,27 @@
 	</form>
 
 
-<?php endif;
+<?php endif; ?>
+
+<!-- si l'utilisateur courant est un admin et qu'il prend le contrôle d'un autre utilisateur, il a accès à une fonction de suppression d'utilisateur -->
+<?php if ( $WDGUser_current && $WDGUser_current->is_admin() && $WDGUser_override && $WDGUser_current != $WDGUser_override): ?>	
+	<br>
+	<hr>
+	<br>	
+	<div class="field admin-theme">
+		<form method="post" class="db-form form-register v3 full" enctype="multipart/form-data">
+			<h2><?php _e( "Supprimer ce compte utilisateur ", 'yproject' ); ?></h2>
+			Vous êtes : <?php echo $WDGUser_current->get_email(); ?><br>
+			et vous pouvez supprimer le compte de : <?php echo $WDGUser_override->get_email(); ?><br>
+			<br>
+			<br>
+			<?php foreach ( $fields_delete_hidden as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+			<div id="user-details-form-buttons">
+				<button type="submit" class="button save red"><?php _e( "Supprimer ce compte utilisateur", 'yproject' ); ?></button>
+			</div>
+		</form>
+	</div>
+<?php endif; ?>
