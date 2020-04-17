@@ -143,7 +143,9 @@ UserAccountDashboard.prototype.initProjectList = function() {
 
 						sCampaignBuffer += '<div class="align-center">';
 						sCampaignBuffer += 'Investissement sur ' + oCampaignItem[ 'funding_duration' ] + ' ans<br>';
-						sCampaignBuffer += 'à compter du ' + oCampaignItem[ 'start_date' ];
+						if ( oCampaignItem[ 'start_date' ] !== '' ) {
+							sCampaignBuffer += 'à compter du ' + oCampaignItem[ 'start_date' ];
+						}
 						sCampaignBuffer += '</div>';
 
 						sCampaignBuffer += '<div class="align-center">';
@@ -216,6 +218,20 @@ UserAccountDashboard.prototype.initProjectList = function() {
 									sCampaignBuffer += '</tr>';
 								}
 							}
+							
+							if ( oInvestmentItem[ 'status' ] === 'publish' && oInvestmentItem[ 'roi_return' ] < 100 ) {
+								sCampaignBuffer += '<tr class="year-title">';
+								sCampaignBuffer += '<td></td>';
+								sCampaignBuffer += '<td class="status future">';
+								sCampaignBuffer += 'Autres échéances éventuelles jusqu&apos;à remboursement';
+								sCampaignBuffer += '<div class="tooltip">';
+								sCampaignBuffer += '<button type="button">i</button>';
+								sCampaignBuffer += '<div class="tooltip-text">L&apos;entreprise est engagée à vous verser des royalties jusqu&apos;à remboursement, sauf en cas d&apos;arrêt définitif de l&apos;activité.</div>';
+								sCampaignBuffer += '</div>';
+								sCampaignBuffer += '</td>';
+								sCampaignBuffer += '</tr>';
+							}
+
 							sCampaignBuffer += '</table>';
 							
 							sCampaignBuffer += '<div class="align-center">';
@@ -265,6 +281,10 @@ UserAccountDashboard.prototype.initProjectList = function() {
 		$( '#ajax-loader-img-' + userID ).hide();
 		
 		self.toggleRois();
+
+		$( '.tooltip button' ).click( function() {
+			$( this ).siblings().toggle();
+		} );
 	});
 };
 

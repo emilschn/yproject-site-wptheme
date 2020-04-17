@@ -33,17 +33,21 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Pr&eacute;l&egrave;vement bancaire", 'yproject' ); ?>" width="120">
 			<div>
 				<span class="mean-payment-name"><?php _e( "Pr&eacute;l&egrave;vement bancaire", 'yproject' ); ?></span><br>
-				<span><?php _e( "Le virement n'est d&eacute;finitivement pris en compte que lors de l'authentification de votre compte par notre prestataire de paiement. Une copie de votre pi&egrave;ce d'identit&eacute; et un justificatif de domicile seront n&eacute;cessaires", 'yproject' ); ?></span>
+				<span><?php _e( "Le pr&eacute;l&egrave;vement bancaire s'effectuera sur le compte bancaire dont l'IBAN est le suivant :", 'yproject' ); ?> <strong><?php echo $page_controler->get_mandate_infos(); ?></strong></span><br><br>
+				<span><?php _e( "Merci de vous assurer que les fonds sont suffisants sur ce compte. En cas d'annulation, notre prestataire de services de paiement nous pr&eacute;l&egrave;ve des frais que <strong>nous vous refacturerons &agrave; hauteur de 30 € HT</strong>.", 'yproject' ); ?></span><br><br>
+				<span><?php _e( "De plus, l'utilisation de ce moyen de paiement provoque un d&eacute;lai de versement &agrave; vos investisseurs de <strong>10 jours</strong> &agrave; compter de la r&eacute;ception de votre paiement.", 'yproject' ); ?></span>
 			</div>
 		</div>
+		<?php endif; ?>
 
-		<?php elseif ( !$page_controler->is_card_shortcut_displayed() ): ?>
+		<?php if ( $page_controler->can_display_wire() ): ?>
 		<div class="mean-payment" data-meanofpayment="wire">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Virement bancaire", 'yproject' ); ?>" width="120">
 			<div>
 				<span class="mean-payment-name"><?php _e( "Virement bancaire", 'yproject' ); ?></span><br>
 				<span><?php _e( "Doit &ecirc;tre fait depuis le compte bancaire de l'entreprise vers l'IBAN de Lemon Way : FR76 3000 4025 1100 0111 8625 268.", 'yproject' ); ?></span><br>
-				<span><?php _e( "Il faut imp&eacute;rativement indiquer le code destinataire ou b&eacute;n&eacute;ficiaire suivant :", 'yproject' ); ?> <?php echo $page_controler->get_current_campaign_organization_wallet_id(); ?></span>
+				<span><?php _e( "Il faut imp&eacute;rativement indiquer le code destinataire ou b&eacute;n&eacute;ficiaire suivant :", 'yproject' ); ?><br>
+				<?php echo $page_controler->get_current_campaign_organization_wallet_id(); ?></span>
 			</div>
 		</div>
 		<?php endif; ?>
@@ -53,7 +57,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<input type="hidden" id="input-meanofpayment" name="meanofpayment" value="">
 	<input type="hidden" id="input-meanofpayment-card-type" name="meanofpayment-card-type" value="">
 	<input type="hidden" id="input-meanofpayment-card-save" name="meanofpayment-card-save" value="">
-	<button type="submit" name="action" value="gobacktodeclaration" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
+	<button type="submit" name="action" value="gobacktosummary" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
 	<button type="submit" name="action" value="proceedpayment" class="button half right red hidden"><?php _e( "Payer", 'yproject' ); ?></button>
 	<div class="clear"></div>
 

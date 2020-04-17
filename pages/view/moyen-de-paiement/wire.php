@@ -11,13 +11,13 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<li><strong><?php _e( "Titulaire du compte :", 'yproject' ); ?></strong> LEMON WAY</li>
 	<li><strong>IBAN :</strong> FR76 3000 4025 1100 0111 8625 268</li>
 	<li><strong>BIC :</strong> BNPAFRPPIFE</li>
-	<li>
-		<strong><?php _e( "Code &agrave; indiquer (pour identifier votre paiement) :", 'yproject' ); ?></strong> wedogood-<?php echo $page_controler->get_investor_lemonway_id(); ?><br>
-		<ul>
-			<li><?php _e( "Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !", 'yproject' ); ?></li>
-		</ul>
-	</li>
 </ul>
+
+<?php _e( "Code &agrave; indiquer (pour identifier votre paiement) :", 'yproject' ); ?><br>
+<strong>wedogood-<?php echo $page_controler->get_investor_lemonway_id(); ?></strong>
+<br><br>
+<?php _e( "Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !", 'yproject' ); ?>
+
 <br><br>
 
 <div class="db-form full v3">

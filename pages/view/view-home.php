@@ -80,13 +80,14 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 /******************************************************************************/
 ?>
 <section class="news">
-	<div class="news-content">
+	<div class="news-content">		
 		<div class="news-image"></div>
 		
 		<div class="news-text">
-			<span><?php _e( "Mesure 75cm, n'a besoin que d'&eacute;nergie solaire pour fonctionner, mais passe sa journ&eacute;e &agrave; manger de l'herbe&nbsp;?", 'yproject' ); ?></span>
-			<br><br><br>
-			<a href="https://www.wedogood.co/voeux-2020/" class="button blue"><?php _e( "D&eacute;couvrir la r&eacute;ponse", 'yproject' ); ?></a>
+			<a href="https://www.wedogood.co/a-propos/vision/">
+				<span><?php _e( "Première plateforme d'investissement participatif", 'yproject' ); ?></span><br>
+				<span class="news-text-certified"><?php _e( "certifiée B Corp", 'yproject' ); ?></span>
+			</a> 
 		</div>
 	</div>
 </section>		

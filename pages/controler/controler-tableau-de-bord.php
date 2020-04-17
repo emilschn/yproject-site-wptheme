@@ -596,7 +596,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'funding' ] = array();
 		$date_begin = $this->campaign->begin_collecte_date( 'Y-m-d' );
 		$date_end = $this->campaign->end_date( 'Y-m-d' );
-		// la date de début d'évaluation n'étant pas toujours recalculée (levée de fond privée), on s'assure qu'elle ne soit pas postérieure à la date de fin
+		// la date de début d'investissement n'étant pas toujours recalculée (levée de fond privée), on s'assure qu'elle ne soit pas postérieure à la date de fin
 		if( $date_begin > $date_end ){
 			$date_begin = $date_end;
 		}
@@ -609,6 +609,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		if ( $this->campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte && $this->campaign->can_invest_until_contract_start_date() ) {
 			$end_date_when_can_invest_until_contract_start_date = $this->campaign->get_end_date_when_can_invest_until_contract_start_date();
 			$this->campaign_stats[ 'funding' ][ 'end' ] = $end_date_when_can_invest_until_contract_start_date->format( 'Y-m-d' );
+		}
+		// on remet ici une sécurité
+		if( $this->campaign_stats[ 'funding' ][ 'start' ] > $this->campaign_stats[ 'funding' ][ 'end' ] ){
+			$this->campaign_stats[ 'funding' ][ 'start' ] = $this->campaign_stats[ 'funding' ][ 'end' ];
 		}
 		$this->campaign_stats[ 'funding' ][ 'nb_investment' ] = array();
 		$this->campaign_stats[ 'funding' ][ 'nb_investment' ][ 'current' ] = max( 0, $investment_results[ 'count_validate_investments' ] );

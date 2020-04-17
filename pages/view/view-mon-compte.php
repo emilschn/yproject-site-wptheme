@@ -12,6 +12,12 @@
 	<div class="wdg-message error">
 		<?php _e( "L'utilisateur que vous essayez d'afficher n'existe pas...", 'yproject' ); ?>
 	</div>
+
+	<?php elseif ( $page_controler->is_displayed_user_override_organization() ): ?>
+	<div class="wdg-message error">
+		<?php _e( "L'utilisateur que vous essayez d'afficher est une organisation.", 'yproject' ); ?><br>
+		<?php _e( "L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :", 'yproject' ); ?> <?php echo $page_controler->user_override_organization_manager_mail(); ?>.
+	</div>
 	
 	<?php else: ?>
 	<?php locate_template( array( 'pages/view/mon-compte/nav.php'  ), true ); ?>	

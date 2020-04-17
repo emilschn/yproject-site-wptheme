@@ -38,6 +38,10 @@ class WDG_WordPress_Events {
 		remove_action( 'edd_weekly_scheduled_events', 'edd_mark_abandoned_orders' );
 		// Suppression de la notification envoyée quand on modifie l'adresse d'un utilisateur
 		add_filter( 'send_email_change_email', '__return_false' );
+		// Suppression de la notification envoyée quand on modifie le mot de passe d'un utilisateur
+		add_filter('send_password_change_email', '__return_false');
+		/* Disable Admin Password Change Notification */
+		remove_action('after_password_reset', 'wp_password_change_notification');
 		// Suppression d'actions d'easy digital downloads lancées dans template_redirect
 		remove_action( 'template_redirect', 'edd_disable_woo_ssl_on_checkout', 9 );
 		remove_action( 'template_redirect', 'edd_disable_404_redirected_redirect', 9 );

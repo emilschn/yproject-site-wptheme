@@ -707,9 +707,15 @@ ul.project-list a.needs-authentication:after {
 }
 
 /*******************************************************************************
+* PAGE DE CREATION DE PROJET
+*******************************************************************************/
+.lancement-page-container {
+	padding-top: 90px;
+}
+/*******************************************************************************
 * CONNEXION PAGE
 *******************************************************************************/
-.template-connexion, .template-inscription {
+.template-connexion, .template-inscription, .template-lancement {
 	background-color: #f2f2f2;
 }
 .template-connexion .alert-connect-project, .template-inscription .alert-connect-project {
@@ -1010,8 +1016,8 @@ body.home section.project-stats > div p {
 body.home section.news {
 	color: #333333;
 	background: #FFFFFF;
-	background: url("../../images/template-home/quiz-2020-bg.jpg") no-repeat;
-	background-position: center top;
+	background: url("../../images/template-home/fond-bandeau.jpg") no-repeat;
+	background-position: left top;
 	background-size: cover;
 }
 body.home section.news div.news-content {
@@ -1021,47 +1027,51 @@ body.home section.news div.news-content {
 	width: -moz-calc(100% - 16px);
 	width: calc(100% - 16px);
 	max-width: 1280px;
-	height: 500px;
+	height: 200px;
 	margin: auto;
 }
 body.home section.news div.news-image {
-	background: url("../../images/template-home/quiz-2020-txt.png") no-repeat;
-	background-position: center top;
-	background-size: 100%;
-	width: 55%;
-	height: 164px;
-	margin: auto;
+	background: url("../../images/template-home/logo-bcorp-certified.png") no-repeat;
+	background-position: left center;
+	background-size: contain;
+	width: 10%;
+	height: 95%;
 }
 body.home section.news div.news-text {
 	width: -webkit-calc(45% - 96px);
 	width: -moz-calc(45% - 96px);
-	width: calc(45% - 96px);
+	width: auto;
 	min-width: 240px;
-	height: 164px;
-	margin: auto;
-	padding: 48px;
-	text-align: center;
-	background-color: rgba( 255, 255, 255, 0.7 );
+	margin: auto 50px;
+	text-align: left;
 }
 body.home section.news div.news-text span {
 	display: inline-block;
 	text-align: justify;
-	font-size: 20px;
+	font-size: 40px;	
+	text-transform: uppercase;
 }
-body.home section.news div.news-text a.button {
-	display: inline-block;
-	width: 264px;
-	height: 48px;
-	line-height: 48px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 20px;
-	letter-spacing: 2px;
+body.home section.news div.news-text a {
+	color: #333333;
+}
+body.home section.news span.news-text-certified {
+	color: #00879B;
 }
 
+@media screen and (max-width: 1420px) {
+	body.home section.news div.news-text {
+		margin: auto 20px;
+	}
+	body.home section.news div.news-text span {
+		font-size: 32px;
+	}
+}
 @media screen and (max-width: 997px) {
 	body.home section.news div.news-text {
 		margin: auto 8px;
+	}
+	body.home section.news div.news-text span {
+		font-size: 24px;
 	}
 }
 
@@ -1081,32 +1091,21 @@ body.home section.news div.news-text a.button {
 		width: -moz-calc(100% - 112px);
 		width: calc(100% - 112px);
 		margin: auto;
-		padding: 24px;
+		padding: 12px;
+		text-align: center;
 	}
 	body.home section.news div.news-text span {
 		font-size: 19px;
-	}
-	body.home section.news div.news-text a.button {
-		width: auto;
-		padding: 8px;
-		font-size: 18px;
-		letter-spacing: 1px;
+		text-align: center;
 	}
 }
 @media screen and (max-width: 400px) {
-	body.home section.news div.news-image {
-		height: 100px;
-		margin: 32px auto;
-	}
 	body.home section.news div.news-text {
-		height: 200px;
-		margin: 32px auto;
+		height: 120px;
+		padding: 10px;
 	}
-	body.home section.news div.news-text br {
-		display: none;
-	}
-	body.home section.news div.news-text a.button {
-		margin-top: 16px;
+	body.home section.news div.news-text span {
+		font-size: 17px;
 	}
 }
 

@@ -578,3 +578,11 @@ if ( !function_exists( 'array_key_last' ) ) {
 		return array_keys( $array )[ count( $array ) - 1 ];
 	}
 }
+
+if ( defined( 'WP_IS_DEV_SITE' ) && WP_IS_DEV_SITE ) {
+	function wdg_add_allowed_origins($origins) {
+		$origins[] = 'http://localhost:8080';
+		return $origins;
+	}
+	add_filter('allowed_http_origins', 'wdg_add_allowed_origins');
+}
