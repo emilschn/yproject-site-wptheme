@@ -33,7 +33,7 @@ $pending_amount = $WDGOrganization->get_pending_rois_amount();
 			<?php _e( "Depuis Janvier 2019, l'authentification de votre organisation est n&eacute;cessaire aupr&egrave;s de notre prestataire de paiement pour lib&eacute;rer l'acc&egrave;s au porte-monnaie de votre organisation et pouvoir retirer les royalties." ); ?>
 		</div>
 
-		<a href="#authentication" class="button red go-to-tab" data-tab="authentication"><?php _e( "Voir le statut de l'authentification", 'yproject' ); ?></a>
+		<a href="#authentication" class="button red go-to-tab" data-tab="orga-authentication-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Voir le statut de l'authentification", 'yproject' ); ?></a>
 
 	<?php else: ?>
 		<h3><?php _e( "Recharger le porte-monnaie par virement", 'yproject' ); ?></h3>
