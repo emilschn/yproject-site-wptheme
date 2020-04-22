@@ -11,12 +11,14 @@
 		$fields_unlink_facebook_visible = $WDGUserUnlinkFacebookForm->getFields( WDG_Form_User_Unlink_Facebook::$field_group_password );
 	}
 	
-	$WDGUserDeleteForm = $page_controler->get_user_form_delete();
-	if ( $WDGUserDeleteForm ) {
-		$fields_delete_hidden = $WDGUserDeleteForm->getFields( WDG_Form_User_Delete::$field_group_hidden );
-	}
-	$WDGUser_current = WDGUser::current();
+	$WDGUser_current = $page_controler->get_current_admin_user();
 	$WDGUser_override = $page_controler->get_current_user();
+	if ( $WDGUser_current->is_admin() ) {
+		$WDGUserDeleteForm = $page_controler->get_user_form_delete();
+		if ( $WDGUserDeleteForm ) {
+			$fields_delete_hidden = $WDGUserDeleteForm->getFields( WDG_Form_User_Delete::$field_group_hidden );
+		}
+	}
 ?>
 
 

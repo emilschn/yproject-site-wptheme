@@ -8,6 +8,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	 * @var WDGUser 
 	 */
 	private $current_user;
+	private $current_admin_user;
 
 	private $current_user_organizations;
 	private $current_user_authentication;
@@ -44,11 +45,13 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'user-password' );
 		$core->include_form( 'user-unlink-facebook' );
-		$core->include_form( 'user-delete' );
 		$core->include_form( 'user-identitydocs' );
 		$core->include_form( 'user-bank' );
-		$core->include_form( 'user-notifications' );
-		
+		$core->include_form( 'user-notifications' );	
+		if ( $this->current_admin_user->is_admin() ) {
+			$core->include_form( 'user-delete' );
+		}
+
 		// Si on met à jour le RIB, il faut recharger l'utilisateur en cours
 		$reload = WDGFormUsers::register_rib();
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
@@ -79,6 +82,13 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	 */
 	public function get_current_user() {
 		return $this->current_user;
+	}
+	/**
+	 * Retourne les informations de l'utilisateur admin en cours (si override)
+	 * @return WDGUser
+	 */
+	public function get_current_admin_user() {
+		return $this->current_admin_user;
 	}
 	
 	public function get_current_user_organizations() {
@@ -111,6 +121,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 			$WDGUser_current->construct_with_api_data();
 		}
 		$this->current_user = $WDGUser_current;
+		$this->current_admin_user = $WDGUser_current; 
 
 		// Si on surcharge avec un utilisateur passé en paramètre
 		if ( $WDGUser_current->is_admin() ) {
@@ -285,11 +296,14 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 			if ( $action_posted == WDG_Form_User_Password::$name ) {
 				$this->form_user_feedback = $this->form_user_password->postForm();
 			}
-		}
-		$this->form_user_delete = new WDG_Form_User_Delete( $this->current_user->get_wpref() );
-		if ( $action_posted == WDG_Form_User_Delete::$name ) {
-			$this->form_user_feedback = $this->form_user_delete->postForm();
-			$this->init_current_user( TRUE );
+		}		
+		$WDGUser_current = WDGUser::current();
+		if ( $WDGUser_current->is_admin() ) {
+			$this->form_user_delete = new WDG_Form_User_Delete( $this->current_user->get_wpref() );
+			if ( $action_posted == WDG_Form_User_Delete::$name ) {
+				$this->form_user_feedback = $this->form_user_delete->postForm();
+				$this->init_current_user( TRUE );
+			}
 		}
 	}
 	
