@@ -252,6 +252,16 @@ YPUIFunctions = (function($) {
 					return false;
 				}
 			} );
+
+			$( '.copy-clipboard' ).click( function( e ) {
+				e.stopPropagation();
+				var clipboardId = $( this ).data( 'clipboard' );
+				$( '#' + clipboardId ).after('<input id="new-element-to-select" type="text" value="' + $( '#' + clipboardId ).text() + '">');
+				$( '#new-element-to-select' ).select();
+				document.execCommand('copy');
+				$( '#new-element-to-select' ).remove();
+				$( this ).siblings( 'span.hidden' ).show();
+			} );
 		},
 		/**
 		 * Fonction pour récupérer la position x,y d'un élément

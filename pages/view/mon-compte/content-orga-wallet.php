@@ -49,7 +49,12 @@ $pending_amount = $WDGOrganization->get_pending_rois_amount();
 		<br><br>
 		
 		<p class="align-justify">
-			<strong><?php _e( "Code &agrave; indiquer (pour identifier votre paiement) :", 'yproject' ); ?></strong> wedogood-<?php echo $WDGOrganization->get_lemonway_id(); ?><br>
+			<strong><?php _e( "Code &agrave; indiquer (pour identifier votre paiement) :", 'yproject' ); ?></strong> <span id="clipboard-user-lw-code-<?php echo $WDGOrganization->get_lemonway_id(); ?>">wedogood-<?php echo $WDGOrganization->get_lemonway_id(); ?></span><br>
+			<div class="align-center">
+				<button type="button" class="button blue copy-clipboard" data-clipboard="clipboard-user-lw-code-<?php echo $WDGOrganization->get_lemonway_id(); ?>"><?php _e( "Copier le code", 'yproject' ); ?></button>
+				<span class="hidden"><?php _e( "Code copi&eacute;", 'yproject' ); ?></span>
+			</div>
+			<br><br>
 			<i><?php _e( "Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !", 'yproject' ); ?></i>
 			<br><br>
 		</p>
