@@ -7,7 +7,7 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 <?php DashboardUtility::add_help_item( $page_controler->get_current_user(), 'contacts', 1 ); ?>
 
 <?php if (!empty($send_mail_success)): ?>
-<div class="success"><?php _e( "E-mails envoy&eacute;s avec succ&egrave;s !", 'yproject' ); ?></div>
+<div class="wdg-message confirm"><?php _e( "E-mail(s) envoy&eacute;s avec succ&egrave;s !", 'yproject' ); ?></div>
 <?php endif; ?>
 
 <?php if ( $page_controler->can_add_check() ): ?>
