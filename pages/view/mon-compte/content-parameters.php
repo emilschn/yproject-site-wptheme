@@ -82,6 +82,7 @@
 	<br>	
 	<div class="field admin-theme">
 		<form method="post" class="db-form form-register v3 full" enctype="multipart/form-data">
+			<?php echo $WDGUserDeleteForm->getNonce(); ?>    
 			<h2><?php _e( "Supprimer ce compte utilisateur ", 'yproject' ); ?></h2>
 			Vous êtes : <?php echo $WDGUser_current->get_email(); ?><br>
 			et vous pouvez supprimer le compte de : <?php echo $WDGUser_override->get_email(); ?><br>

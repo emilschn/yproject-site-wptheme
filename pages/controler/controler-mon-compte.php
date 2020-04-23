@@ -48,9 +48,11 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$core->include_form( 'user-identitydocs' );
 		$core->include_form( 'user-bank' );
 		$core->include_form( 'user-notifications' );	
-		if ( $this->current_admin_user->is_admin() ) {
+		$WDGUser_current = WDGUser::current();
+		if ( $WDGUser_current->is_admin() ) {
 			$core->include_form( 'user-delete' );
 		}
+
 
 		// Si on met à jour le RIB, il faut recharger l'utilisateur en cours
 		$reload = WDGFormUsers::register_rib();
@@ -66,7 +68,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$this->init_form_user_notifications();
 		$this->init_form_user_tax_exemption();
 		$this->init_tax_documents();
-
+		
 		$this->controler_name = 'mon-compte';
 		
 		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
@@ -297,8 +299,8 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 				$this->form_user_feedback = $this->form_user_password->postForm();
 			}
 		}		
-		$WDGUser_current = WDGUser::current();
-		if ( $WDGUser_current->is_admin() ) {
+
+		if ( $this->current_admin_user->is_admin() ) {
 			$this->form_user_delete = new WDG_Form_User_Delete( $this->current_user->get_wpref() );
 			if ( $action_posted == WDG_Form_User_Delete::$name ) {
 				$this->form_user_feedback = $this->form_user_delete->postForm();
