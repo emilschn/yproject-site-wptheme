@@ -1075,98 +1075,68 @@ body.home section.project-stats > div p {
 * HOME - NEWS
 *******************************************************************************/
 body.home section.news {
-	color: #333333;
-	background: #FFFFFF;
-	background: url("../../images/template-home/fond-bandeau.jpg") no-repeat;
-	background-position: left top;
+	height: 500px;
+	color: #FFFFFF;
+	background: #333333;
+	background: url("../../images/template-home/background-desktop.jpg") no-repeat;
+	background-position: center top;
 	background-size: cover;
 }
 body.home section.news div.news-content {
-    display: -webkit-flex;
-	display: flex;
+	padding-top: 175px;
+	background: url("../../images/template-home/logo-desktop.png") no-repeat;
+}
+body.home section.news div.news-text {
 	width: -webkit-calc(100% - 16px);
 	width: -moz-calc(100% - 16px);
 	width: calc(100% - 16px);
-	max-width: 1280px;
-	height: 200px;
-	margin: auto;
-}
-body.home section.news div.news-image {
-	background: url("../../images/template-home/logo-bcorp-certified.png") no-repeat;
-	background-position: left center;
-	background-size: contain;
-	width: 10%;
-	height: 95%;
-}
-body.home section.news div.news-text {
-	width: -webkit-calc(45% - 96px);
-	width: -moz-calc(45% - 96px);
 	width: auto;
-	min-width: 240px;
-	margin: auto 50px;
-	text-align: left;
+	max-width: 1280px;
+	margin: 0px auto;
+	text-align: center;
 }
 body.home section.news div.news-text span {
 	display: inline-block;
-	text-align: justify;
-	font-size: 40px;	
-	text-transform: uppercase;
+	margin-bottom: 48px;
+	font-size: 32px;
+}
+body.home section.news div.news-text span:first-child {
+	margin-bottom: 32px;
+	font-size: 28px;
 }
 body.home section.news div.news-text a {
-	color: #333333;
-}
-body.home section.news span.news-text-certified {
-	color: #00879B;
-}
-
-@media screen and (max-width: 1420px) {
-	body.home section.news div.news-text {
-		margin: auto 20px;
-	}
-	body.home section.news div.news-text span {
-		font-size: 32px;
-	}
-}
-@media screen and (max-width: 997px) {
-	body.home section.news div.news-text {
-		margin: auto 8px;
-	}
-	body.home section.news div.news-text span {
-		font-size: 24px;
-	}
+	font-size: 36px;
+	padding: 16px 32px;
+	color: #FFFFFF;
+	border-color: #FFFFFF;
 }
 
+@media screen and (max-width: 1200px) {
+	body.home section.news div.news-text span {
+		font-size: 30px;
+	}
+}
 @media screen and (max-width: 800px) {
+	body.home section.news {
+		background: url("../../images/template-home/background-mobile.jpg") no-repeat;
+	}
 	body.home section.news div.news-content {
-		flex-direction: column;
-	}
-	body.home section.news div.news-image {
-		width: -webkit-calc(100% - 16px);
-		width: -moz-calc(100% - 16px);
-		width: calc(100% - 16px);
-		height: 200px;
-		background-position: center;
-	}
-	body.home section.news div.news-text {
-		width: -webkit-calc(100% - 112px);
-		width: -moz-calc(100% - 112px);
-		width: calc(100% - 112px);
-		margin: auto;
-		padding: 12px;
-		text-align: center;
-	}
-	body.home section.news div.news-text span {
-		font-size: 19px;
-		text-align: center;
+		padding-top: 100px;
+		background: url("../../images/template-home/logo-mobile.png") no-repeat;
 	}
 }
-@media screen and (max-width: 400px) {
-	body.home section.news div.news-text {
-		height: 120px;
-		padding: 10px;
+@media screen and (max-width: 600px) {
+	body.home section.news div.news-content {
+		padding-top: 120px;
 	}
 	body.home section.news div.news-text span {
-		font-size: 17px;
+		font-size: 20px;
+	}
+	body.home section.news div.news-text span:first-child {
+		font-size: 18px;
+	}
+	body.home section.news div.news-text a {
+		font-size: 20px;
 	}
 }
 
