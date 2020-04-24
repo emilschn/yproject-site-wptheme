@@ -84,7 +84,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<div class="news-text">
 			<span><?php _e( "#confinement", 'yproject' ); ?></span><br>
 			<span><?php _e( "D&eacute;couvrez notre initiative de soutien aux commerces qui vous tiennent &agrave; coeur !", 'yproject' ); ?></span><br>
-			<a class="button transparent" href="http://www.commercemonamour.fr" target="_blank"><?php _e( "Soutenir mes commerces", 'yproject' ); ?></a>
+			<a class="button transparent" href="http://commercemonamour.fr" target="_blank"><?php _e( "Soutenir mes commerces", 'yproject' ); ?></a>
 		</div>
 	</div>
 </section>		
