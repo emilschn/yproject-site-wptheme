@@ -290,16 +290,17 @@ body.template-mon-compte div#container div#content .royalties-list .roi-table tr
 	padding-left: 16px;
 	border-left: 4px solid #FFF;
 }
-body.template-mon-compte div#container div#content .royalties-list .roi-table tr.year-title td {
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr.yearly-title td {
+	font-style: italic;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr.yearly-title td:nth-child(1) {
+	width: 49%;
+	text-align: right;
+}
+body.template-mon-compte div#container div#content .royalties-list .roi-table tr.yearly-title.year-title td {
 	padding-top: 8px;
 	font-weight: bold;
-}
-body.template-mon-compte div#container div#content .royalties-list .roi-table tr.year-title td:nth-child(1) {
-	width: 49%;
-	padding-left: 40px;
-}
-body.template-mon-compte div#container div#content .royalties-list .roi-table tr.year-title td span {
-	font-weight: normal;
+	font-style: normal;
 }
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status {
 	border-left: 4px solid #F4F2F2;

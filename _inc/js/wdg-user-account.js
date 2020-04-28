@@ -194,14 +194,31 @@ UserAccountDashboard.prototype.initProjectList = function() {
 							sCampaignBuffer += '<table class="roi-table">';
 							for ( var i = 0; i < nYears; i++ ) {
 								var oYearItem = oInvestmentItem[ 'rois_by_year' ][ i ];
-								sCampaignBuffer += '<tr class="year-title">';
+								sCampaignBuffer += '<tr class="year-title yearly-title">';
 								sCampaignBuffer += '<td>Ann&eacute;e ' +(i+1)+ '</td>';
+								sCampaignBuffer += '<td></td>';
+								sCampaignBuffer += '</tr>';
+								
+								sCampaignBuffer += '<tr class="yearly-title">';
+								sCampaignBuffer += '<td>Chiffre d&apos;affaires</td>';
+								if ( oYearItem[ 'estimated_turnover' ] != '-' ) {
+									sCampaignBuffer += '<td>' +oYearItem[ 'amount_turnover' ]+ ' / ' +oYearItem[ 'estimated_turnover' ]+ ' <span>(pr&eacute;visionnel)</span></td>';
+								} else {
+									sCampaignBuffer += '<td></td>';
+								}
+								sCampaignBuffer += '</tr>';
+								
+								sCampaignBuffer += '<tr class="yearly-title">';
+								sCampaignBuffer += '<td>Royalties</td>';
 								if ( oYearItem[ 'estimated_rois' ] != '-' ) {
 									sCampaignBuffer += '<td>' +oYearItem[ 'amount_rois' ]+ ' / ' +oYearItem[ 'estimated_rois' ]+ ' <span>(pr&eacute;visionnel)</span></td>';
 								} else {
-									sCampaignBuffer += '<td>' +oYearItem[ 'amount_rois' ]+ '</td>';
+									sCampaignBuffer += '<td></td>';
 								}
 								sCampaignBuffer += '</tr>';
+
+
+
 								
 								var nRois = oYearItem[ 'roi_items' ].length;
 								for ( var j = 0; j < nRois; j++ ) {
