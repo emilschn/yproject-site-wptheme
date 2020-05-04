@@ -76,18 +76,20 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 				if ( $this->current_campaign->is_positive_savings() ) {
 					$core->include_form( 'invest-poll-continuous' );
 					$this->form = new WDG_Form_Invest_Poll_Continuous( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
+					$this->form->setContextAmount( $this->current_investment->get_session_amount() );
 					$this->form_fields_hidden_slug = WDG_Form_Invest_Poll_Continuous::$field_group_hidden;
 					$this->form_fields_displayed_slug = WDG_Form_Invest_Poll_Continuous::$field_group_poll_continuous;
-					if ( $this->form->isPosted() && $this->form->postForm( $this->current_investment->get_session_amount() ) ) {
+					if ( $this->form->isPosted() && $this->form->postForm() ) {
 						$this->can_display_form = FALSE;
 					}
 					
 				} else {
 					$core->include_form( 'invest-poll' );
 					$this->form = new WDG_Form_Invest_Poll( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
+					$this->form->setContextAmount( $this->current_investment->get_session_amount() );
 					$this->form_fields_hidden_slug = WDG_Form_Invest_Poll::$field_group_hidden;
 					$this->form_fields_displayed_slug = WDG_Form_Invest_Poll::$field_group_poll_source;
-					if ( $this->form->isPosted() && $this->form->postForm( $this->current_investment->get_session_amount() ) ) {
+					if ( $this->form->isPosted() && $this->form->postForm() ) {
 						$this->can_display_form = FALSE;
 					}
 				}
