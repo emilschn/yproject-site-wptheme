@@ -596,8 +596,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'funding' ] = array();
 		$date_begin = $this->campaign->begin_collecte_date( 'Y-m-d' );
 		$date_end = $this->campaign->end_date( 'Y-m-d' );
+		$datetime_begin = new DateTime( $date_begin );
+		$datetime_end = new DateTime( $date_end );
 		// la date de début d'investissement n'étant pas toujours recalculée (levée de fond privée), on s'assure qu'elle ne soit pas postérieure à la date de fin
-		if( $date_begin > $date_end ){
+		if( $datetime_begin > $datetime_end ){
 			$date_begin = $date_end;
 		}
 		$this->campaign_stats[ 'funding' ][ 'start' ] = $date_begin;
