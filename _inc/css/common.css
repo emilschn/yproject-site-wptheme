@@ -1075,7 +1075,7 @@ body.home section.project-stats > div p {
 * HOME - NEWS
 *******************************************************************************/
 body.home section.news {
-	height: 500px;
+	height: 300px;
 	color: #FFFFFF;
 	background: #333333;
 	background: url("../../images/template-home/background-desktop.jpg") no-repeat;
@@ -1083,8 +1083,9 @@ body.home section.news {
 	background-size: cover;
 }
 body.home section.news div.news-content {
-	padding-top: 175px;
+	padding-top: 65px;
 	background: url("../../images/template-home/logo-desktop.png") no-repeat;
+	background-size: 300px;
 }
 body.home section.news div.news-text {
 	width: -webkit-calc(100% - 16px);
@@ -1098,42 +1099,39 @@ body.home section.news div.news-text {
 body.home section.news div.news-text span {
 	display: inline-block;
 	margin-bottom: 48px;
-	font-size: 32px;
+	font-size: 22px;
 }
 body.home section.news div.news-text span:first-child {
 	margin-bottom: 32px;
-	font-size: 28px;
+	font-size: 25px;
 }
 body.home section.news div.news-text a {
-	font-size: 36px;
+	font-size: 18px;
 	padding: 16px 32px;
 	color: #FFFFFF;
 	border-color: #FFFFFF;
 }
 
-@media screen and (max-width: 1200px) {
-	body.home section.news div.news-text span {
-		font-size: 30px;
-	}
-}
 @media screen and (max-width: 800px) {
 	body.home section.news {
 		background: url("../../images/template-home/background-mobile.jpg") no-repeat;
 	}
 	body.home section.news div.news-content {
-		padding-top: 100px;
 		background: url("../../images/template-home/logo-mobile.png") no-repeat;
 	}
 }
 @media screen and (max-width: 600px) {
+	body.home section.news {
+		height: 400px;
+	}
 	body.home section.news div.news-content {
 		padding-top: 120px;
 	}
 	body.home section.news div.news-text span {
-		font-size: 20px;
+		font-size: 18px;
 	}
 	body.home section.news div.news-text span:first-child {
-		font-size: 18px;
+		font-size: 20px;
 	}
 	body.home section.news div.news-text a {
 		font-size: 20px;
