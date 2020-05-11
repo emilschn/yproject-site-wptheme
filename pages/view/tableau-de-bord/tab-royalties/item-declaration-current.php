@@ -20,7 +20,12 @@ if ( $is_future ) {
 		$label_status .= "<br>" . __( "En attente de paiement", 'yproject' );
 		$label_button = __( "Payer", 'yproject' );
 	} elseif ( $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ) {
-		$label_status .= "<br>" . __( "En attente de virement", 'yproject' );
+		if ( $declaration->mean_payment == WDGROIDeclaration::$mean_payment_wire ) {
+			$label_status .= "<br>" . __( "En attente de virement", 'yproject' );
+		} else {
+			$label_status .= "<br>" . __( "En attente de pr&eacute;l&egrave;vement", 'yproject' );
+		}
+
 	} elseif ( $declaration->get_status() == WDGROIDeclaration::$status_transfer ) {
 		$label_status .= "<br>" . __( "En cours de versement", 'yproject' );
 	} else {
