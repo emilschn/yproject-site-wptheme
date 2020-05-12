@@ -5,7 +5,7 @@ if ( is_user_logged_in() ) {
 $page_forgot_password = home_url( '/mot-de-passe-oublie/' );
 $init_username = '';
 if ( isset( $_POST[ 'user_login' ] ) ) {
-	$init_username = $_POST['user_login'];
+	$init_username = htmlentities( $_POST['user_login'] );
 }
 
 if ( !empty( $init_username ) ) {
