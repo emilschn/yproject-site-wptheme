@@ -34,6 +34,10 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		define( 'SKIP_BASIC_HTML', TRUE );
 		
 		$this->init_current_campaign();
+		if ( empty( $this->current_campaign ) ) {
+			wp_redirect( home_url( '/les-projets/' ) );
+			exit();
+		}
 		WDGRoutes::redirect_invest_if_not_logged_in();
 		WDGRoutes::redirect_invest_if_project_not_investable();
 		WDGRoutes::redirect_invest_if_investment_not_initialized();
