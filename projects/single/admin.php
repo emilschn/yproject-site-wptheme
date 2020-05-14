@@ -6,7 +6,7 @@ $page_dashboard = home_url( '/tableau-de-bord/?campaign_id=' . $campaign->ID );	
 <div class="project-admin">
 	<a href="<?php echo $page_dashboard; ?>" class="btn-dashboard"><?php _e('Tableau de bord', 'yproject'); ?></a>
 
-	<?php if ( $campaign->is_preparing() || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte ): ?>
+	<?php if ( $WDGUser_current->is_admin() || $campaign->is_preparing() || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte ): ?>
 		<div id="wdg-edit-project" class="btn-edit"></div>
 		<?php if ( $WDGUser_current->is_admin() ): ?>
 		<button id="wdg-send-project-notification-to-project" class="wdg-send-project-notification"><?php _e( "J'ai fini ma relecture", 'yproject'); ?></button>
