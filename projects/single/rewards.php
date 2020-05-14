@@ -36,14 +36,14 @@ $estimated_turnover = $campaign->estimated_turnover();
 		<?php // ROYALTIES // ?>
 		<?php elseif ($campaign->funding_type() == 'fundingproject'): ?>			
 			<div class="db-form v3 full bg-white">
-				<!-- différencier le calculateur de royalties pour l'épargne positive  -->
+				<?php /* différencier le calculateur de royalties pour l'épargne positive */ ?>
 				<?php if ($campaign->is_positive_savings() ): ?>
 					<input type="hidden" id="is_positive_savings" value="true"><input type="hidden" id="asset_price" value="<?php echo $campaign->minimum_goal(); ?>">
 					<input type="hidden" id="asset_singular" value="<?php echo $campaign->get_asset_name_singular(); ?>">
 					<input type="hidden" id="asset_plural" value="<?php echo $campaign->get_asset_name_plural(); ?>">
 					<input type="hidden" id="common_goods_turnover_percent" value="<?php echo $campaign->get_api_data( 'common_goods_turnover_percent' ); ?>">
 				<?php else: ?>
-					<input type="hidden" id="is_positive_savings" value=false">					
+					<input type="hidden" id="is_positive_savings" value=false">
 				<?php endif; ?>
 				<input type="hidden" id="roi_percent_project" value="<?php echo $campaign->roi_percent_estimated(); ?>">
 				<input type="hidden" id="roi_goal_project" value="<?php echo $campaign->goal(false); ?>">
@@ -89,9 +89,9 @@ $estimated_turnover = $campaign->estimated_turnover();
 							<?php $complementary_text = '.'; ?>
 							<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
 								<?php $complementary_text = __( " (pourcentage indicatif).", 'yproject' ); ?>
-							<?php endif; ?>		
+							<?php endif; ?>
 							
-							<?php if ($campaign->is_positive_savings() ): ?>					
+							<?php if ($campaign->is_positive_savings() ): ?>
 								<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires de", 'yproject' ) . ' '; ?><span class="nb_assets">0</span><span class="name_assets"><?php echo ' '.$campaign->get_asset_name_singular(); ?></span><?php echo ' '.__( "pendant", 'yproject' ).' '.$funding_duration_str. $complementary_text; ?><br>
 							<?php else: ?>
 								<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires de ce projet pendant", 'yproject' ) . ' ' .$funding_duration_str. $complementary_text; ?><br>

@@ -9,6 +9,15 @@ $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::
 ?>
 
 <form action="<?php echo $page_controler->get_form_action(); ?>#amounttyped" method="post" class="db-form v3 full bg-white" novalidate>
+	<?php /* différencier le calculateur de royalties pour l'épargne positive */ ?>
+	<?php if ($page_controler->get_current_campaign()->is_positive_savings() ): ?>
+		<input type="hidden" id="is_positive_savings" value="true"><input type="hidden" id="asset_price" value="<?php echo $page_controler->get_current_campaign()->minimum_goal(); ?>">
+		<input type="hidden" id="asset_singular" value="<?php echo $page_controler->get_current_campaign()->get_asset_name_singular(); ?>">
+		<input type="hidden" id="asset_plural" value="<?php echo $page_controler->get_current_campaign()->get_asset_name_plural(); ?>">
+		<input type="hidden" id="common_goods_turnover_percent" value="<?php echo $page_controler->get_current_campaign()->get_api_data( 'common_goods_turnover_percent' ); ?>">
+	<?php else: ?>
+		<input type="hidden" id="is_positive_savings" value=false">
+	<?php endif; ?>
 	
 	<?php if ( $page_controler->is_authentication_alert_visible() ): ?>
 		<p class="align-justify">
@@ -44,11 +53,20 @@ $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::
 	</div>
 
 	<div class="align-left">
-		<?php $complementary_text = '.'; ?>
-		<?php if ( $page_controler->get_current_campaign()->contract_budget_type() == 'collected_funds' ): ?>
-			<?php $complementary_text = __( " (pourcentage indicatif).", 'yproject' ); ?>
+		<?php 
+		$funding_duration = $page_controler->get_current_campaign()->funding_duration();
+		$funding_duration_str = ( $funding_duration == 0 ) ? __( "une dur&eacute;e ind&eacute;termin&eacute;e", 'yproject' ) : $funding_duration. " " .__( "ans", 'yproject' );
+		$complementary_text = '.';
+		if ( $page_controler->get_current_campaign()->contract_budget_type() == 'collected_funds' ):
+			$complementary_text = __( " (pourcentage indicatif).", 'yproject' );
+		endif;
+		?>
+		
+		<?php if ($page_controler->get_current_campaign()->is_positive_savings() ): ?>
+			<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires de", 'yproject' ) . ' '; ?><span class="nb_assets">0</span><span class="name_assets"><?php echo ' '.$page_controler->get_current_campaign()->get_asset_name_singular(); ?></span><?php echo ' '.__( "pendant", 'yproject' ).' '.$funding_duration_str. $complementary_text; ?><br>
+		<?php else: ?>
+			<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires de ce projet pendant", 'yproject' ) . ' ' .$funding_duration_str. $complementary_text; ?><br>
 		<?php endif; ?>
-		<span class="number"><span id="royalties-percent">0</span> %</span> <?php _e( "du chiffre d'affaires pendant", 'yproject' ); ?> <?php echo $page_controler->get_current_campaign()->funding_duration_str() . $complementary_text; ?>
 	</div>
 
 	<div id="thanks-to-me">
