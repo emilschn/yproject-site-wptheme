@@ -587,7 +587,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			// Ajoute une seule déclaration dans le rythme habituel
 			$month_count = 12 / $this->current_campaign->get_declararations_count_per_year();
 			$declarations_count = 1;
-			$this->current_campaigns->generate_missing_declarations( $month_count, $declarations_count );
+			$this->current_campaign->generate_missing_declarations( $month_count, $declarations_count );
 		}
 		
 		return $add_declaration;

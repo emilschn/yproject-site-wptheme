@@ -80,14 +80,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 /******************************************************************************/
 ?>
 <section class="news">
-	<div class="news-content">		
-		<div class="news-image"></div>
-		
+	<div class="news-content">
 		<div class="news-text">
-			<a href="https://www.wedogood.co/a-propos/vision/">
-				<span><?php _e( "Première plateforme d'investissement participatif", 'yproject' ); ?></span><br>
-				<span class="news-text-certified"><?php _e( "certifiée B Corp", 'yproject' ); ?></span>
-			</a> 
+			<span><?php _e( "#confinement", 'yproject' ); ?></span><br>
+			<span><?php _e( "D&eacute;couvrez notre initiative de soutien aux commerces qui vous tiennent &agrave; coeur !", 'yproject' ); ?></span><br>
+			<a class="button transparent" href="http://commercemonamour.fr" target="_blank"><?php _e( "Soutenir mes commerces", 'yproject' ); ?></a>
 		</div>
 	</div>
 </section>		

@@ -329,6 +329,11 @@ div#container div#content main #item-body-contacts #direct-mail {
     border: 1px dotted;
     border-bottom: 0px;
 }
+#item-body-contacts #direct-mail .tooltiptext {
+	height: auto;
+	padding: 8px;
+	line-height: initial;
+}
 
 div#container div#content main #item-body-contacts .authentication-more-info {
 	display: inline-block;

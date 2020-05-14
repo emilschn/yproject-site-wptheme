@@ -14,7 +14,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 </ul>
 
 <?php _e( "Code &agrave; indiquer (pour identifier votre paiement) :", 'yproject' ); ?><br>
-<strong>wedogood-<?php echo $page_controler->get_investor_lemonway_id(); ?></strong>
+<strong><span id="clipboard-user-lw-code">wedogood-<?php echo $page_controler->get_investor_lemonway_id(); ?></span></strong>
+<div class="align-center">
+	<button type="button" class="button blue copy-clipboard" data-clipboard="clipboard-user-lw-code"><?php _e( "Copier le code", 'yproject' ); ?></button>
+	<span class="hidden"><?php _e( "Code copi&eacute;", 'yproject' ); ?></span>
+</div>
 <br><br>
 <?php _e( "Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !", 'yproject' ); ?>
 
