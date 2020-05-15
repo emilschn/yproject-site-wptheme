@@ -76,7 +76,7 @@
 <?php endif; ?>
 
 <!-- si l'utilisateur courant est un admin et qu'il prend le contrôle d'un autre utilisateur, il a accès à une fonction de suppression d'utilisateur -->
-<?php if ( $WDGUser_current && $WDGUser_current->is_admin() && $WDGUser_override && $WDGUser_current != $WDGUser_override): ?>	
+<?php if ( $page_controler->admin_is_overriding_user() ): ?>	
 	<br>
 	<hr>
 	<br>	

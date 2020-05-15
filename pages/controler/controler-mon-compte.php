@@ -93,6 +93,18 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		return $this->current_admin_user;
 	}
 	
+	/**
+	 * si l'utilisateur courant est un admin et qu'il prend le contrôle d'un autre utilisateur 
+	 * @return boolean
+	 */
+	public function admin_is_overriding_user() {
+        if (($this->get_current_admin_user() && $this->get_current_admin_user()->is_admin() && $this->get_current_user() && $this->get_current_admin_user() != $this->get_current_user())) {
+            return TRUE;
+        } else {
+			return FALSE;
+		}
+	}
+
 	public function get_current_user_organizations() {
 		return $this->current_user_organizations;
 	}
