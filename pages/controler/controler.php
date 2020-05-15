@@ -97,7 +97,7 @@ class WDG_Page_Controler {
 	}
 	
 	private function init_page_description() {
-		$this->page_description = "Première plateforme française de royalty crowdfunding. Levez des fonds sans dilution de capital ni endettement.";
+		$this->page_description = "WE DO GOOD est le leader français des levées de fonds en royalties et du crowdinvesting. Investissez en ligne à partir de 10 € dans les projets qui vous parlent.";
 		if ( have_posts() ){
 			while ( have_posts() ) {
 				the_post();
