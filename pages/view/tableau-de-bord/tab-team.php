@@ -38,7 +38,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<div class="field">
 			<label for="new_team_member_string"><?php _e( "E-mail d&apos;un utilisateur", 'yproject' ); ?></label>
 			<div class="field-description">
-				<?php _e( "Les membres de l'&eacute;quipe peuvent acc&eacute;der au tableau de bord, modifier les param&egrave;tres et la page de projet.", 'yproject' ); ?><br>
+				<?php _e( "Les membres de l'&eacute;quipe peuvent acc&eacute;der au tableau de bord, modifier les param&egrave;tres et la page de projet.", 'yproject' ); ?>
+				<?php _e( "Seul le porteur de projet peut &eacute;diter l'onglet Organisation.", 'yproject' ); ?><br>
 				<?php _e( "Attention : pour ajouter un membre, il faut que celui-ci ait d&eacute;j&agrave; un compte sur la plateforme.", 'yproject' ); ?>
 			</div>
 			<div class="field-container">
