@@ -8,6 +8,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	 * @var WDGUser 
 	 */
 	private $current_user;
+	private $current_admin_user;
 
 	private $current_user_organizations;
 	private $current_user_authentication;
@@ -22,6 +23,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private $wallet_to_bankaccount_result;
 	private $form_user_details;
 	private $form_user_password;
+	private $form_user_delete;
 	private $form_user_identitydocs;
 	private $form_user_bank;
 	private $form_user_notifications;
@@ -45,8 +47,13 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$core->include_form( 'user-unlink-facebook' );
 		$core->include_form( 'user-identitydocs' );
 		$core->include_form( 'user-bank' );
-		$core->include_form( 'user-notifications' );
-		
+		$core->include_form( 'user-notifications' );	
+		$WDGUser_current = WDGUser::current();
+		if ( $WDGUser_current->is_admin() ) {
+			$core->include_form( 'user-delete' );
+		}
+
+
 		// Si on met à jour le RIB, il faut recharger l'utilisateur en cours
 		$reload = WDGFormUsers::register_rib();
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
@@ -61,7 +68,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$this->init_form_user_notifications();
 		$this->init_form_user_tax_exemption();
 		$this->init_tax_documents();
-
+		
 		$this->controler_name = 'mon-compte';
 		
 		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
@@ -78,7 +85,26 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	public function get_current_user() {
 		return $this->current_user;
 	}
+	/**
+	 * Retourne les informations de l'utilisateur admin en cours (si override)
+	 * @return WDGUser
+	 */
+	public function get_current_admin_user() {
+		return $this->current_admin_user;
+	}
 	
+	/**
+	 * si l'utilisateur courant est un admin et qu'il prend le contrôle d'un autre utilisateur 
+	 * @return boolean
+	 */
+	public function admin_is_overriding_user() {
+        if (($this->get_current_admin_user() && $this->get_current_admin_user()->is_admin() && $this->get_current_user() && $this->get_current_admin_user() != $this->get_current_user())) {
+            return TRUE;
+        } else {
+			return FALSE;
+		}
+	}
+
 	public function get_current_user_organizations() {
 		return $this->current_user_organizations;
 	}
@@ -109,6 +135,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 			$WDGUser_current->construct_with_api_data();
 		}
 		$this->current_user = $WDGUser_current;
+		$this->current_admin_user = $WDGUser_current; 
 
 		// Si on surcharge avec un utilisateur passé en paramètre
 		if ( $WDGUser_current->is_admin() ) {
@@ -283,6 +310,14 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 			if ( $action_posted == WDG_Form_User_Password::$name ) {
 				$this->form_user_feedback = $this->form_user_password->postForm();
 			}
+		}		
+
+		if ( $this->current_admin_user->is_admin() ) {
+			$this->form_user_delete = new WDG_Form_User_Delete( $this->current_user->get_wpref() );
+			if ( $action_posted == WDG_Form_User_Delete::$name ) {
+				$this->form_user_feedback = $this->form_user_delete->postForm();
+				$this->init_current_user( TRUE );
+			}
 		}
 	}
 	
@@ -302,6 +337,10 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		return $this->form_user_feedback;
 	}
 	
+	public function get_user_form_delete() {
+		return $this->form_user_delete;
+	}
+
 	public function get_user_data( $data_key ) {
 		$buffer = '';
 		if ( !empty( $data_key ) ) {
@@ -524,35 +563,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$this->list_intentions_to_confirm = array();
 		
 		if ( $this->current_user->is_lemonway_registered() ) {
-			
-			$list_campaign_funding = ATCF_Campaign::get_list_funding( 0, '', true );
-			foreach ( $list_campaign_funding as $project_post ) {
-				$amount_voted = $this->current_user->get_amount_voted_on_campaign( $project_post->ID );
-				if ( $amount_voted > 0 && !$this->current_user->has_invested_on_campaign( $project_post->ID ) ) {
-					$intention_item = array(
-						'campaign_name'	=> $project_post->post_title,
-						'campaign_id'	=> $project_post->ID,
-						'vote_amount'	=> $amount_voted,
-						'status'		=> ATCF_Campaign::$campaign_status_collecte
-					);
-					array_push( $this->list_intentions_to_confirm, $intention_item );
-				}
-			}
-
-			$list_campaign_vote = ATCF_Campaign::get_list_vote( 0, '', true );
-			foreach ( $list_campaign_vote as $project_post ) {
-				$amount_voted = $this->current_user->get_amount_voted_on_campaign( $project_post->ID );
-				if ( $amount_voted > 0 && !$this->current_user->has_invested_on_campaign( $project_post->ID ) ) {
-					$intention_item = array(
-						'campaign_name'	=> $project_post->post_title,
-						'campaign_id'	=> $project_post->ID,
-						'vote_amount'	=> $amount_voted,
-						'status'		=> ATCF_Campaign::$campaign_status_vote
-					);
-					array_push( $this->list_intentions_to_confirm, $intention_item );
-				}
-			}
-			
+			$this->list_intentions_to_confirm = $this->current_user->get_campaigns_voted();
 		}
 	}
 	
