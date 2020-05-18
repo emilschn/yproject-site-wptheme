@@ -6,11 +6,16 @@ if (!isset($campaign) && isset($_GET["campaign_id"])) { $campaign = atcf_get_cam
 if (!empty($campaign)):
 	$campaign_id = $campaign->ID;
 	$status = $campaign->campaign_status();
+	
+	global $wpdb;
+	$table_name = $wpdb->prefix . WDGCampaignVotes::$table_name_votes;
+	$count_voters = $wpdb->get_var( "SELECT count(user_id) FROM ".$table_name." WHERE post_id = ".$campaign_id );
 ?>
 
+	<?php if ( $status == ATCF_Campaign::$campaign_status_vote || $count_voters > 0 ): ?>
 	<h2 class="expandator" data-target="votes"><?php _e('&Eacute;valuations', 'yproject'); ?> <img src="<?php echo $stylesheet_directory_uri; ?>/images/plus.png" alt="signe plus"/></h2>
 	
-    <div id="extendable-votes" class="expandable <?php if ($status==ATCF_Campaign::$campaign_status_vote){echo 'default-expanded';} ?>">
+    <div id="extendable-votes" class="expandable <?php if ($status == ATCF_Campaign::$campaign_status_collecte ){echo 'default-expanded';} ?>">
     <?php
             $post_campaign = get_post($campaign_id);
             $upload_dir = wp_upload_dir();
@@ -33,6 +38,7 @@ if (!empty($campaign)):
             }
     ?>
     </div>
+	<?php endif; ?>
 
 	<?php if ( $status == ATCF_Campaign::$campaign_status_collecte 
 	|| $status == ATCF_Campaign::$campaign_status_funded 
