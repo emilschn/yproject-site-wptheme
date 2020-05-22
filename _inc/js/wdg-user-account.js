@@ -46,7 +46,18 @@ UserAccountDashboard.prototype.initMenu = function() {
 			$( 'nav button#swap-menu' ).html( '&lt;' );
 		}
 	} );
-	
+	if ( $( 'div.user-transactions-init button' ).length > 0 ) {
+		$( 'div.user-transactions-init button' ).click( function() {
+			$.ajax({
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': {
+					'user_id': $( this ).data( 'userid' ),
+					'action' : 'temp_init_transactions'
+				}
+			});
+		} );
+	}
 };
 
 /**

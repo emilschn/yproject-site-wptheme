@@ -75,14 +75,14 @@
 
 <?php endif; ?>
 
-<!-- si l'utilisateur courant est un admin et qu'il prend le contrôle d'un autre utilisateur, il a accès à une fonction de suppression d'utilisateur -->
-<?php if ( $page_controler->admin_is_overriding_user() ): ?>	
+<?php /* si l'utilisateur courant est un admin et qu'il prend le contrôle d'un autre utilisateur, il a accès à une fonction de suppression d'utilisateur */ ?>
+<?php if ( $page_controler->admin_is_overriding_user() ): ?>
 	<br>
 	<hr>
-	<br>	
+	<br>
 	<div class="field admin-theme">
 		<form method="post" class="db-form form-register v3 full" enctype="multipart/form-data">
-			<?php echo $WDGUserDeleteForm->getNonce(); ?>    
+			<?php echo $WDGUserDeleteForm->getNonce(); ?>
 			<h2><?php _e( "Supprimer ce compte utilisateur ", 'yproject' ); ?></h2>
 			Vous êtes : <?php echo $WDGUser_current->get_email(); ?><br>
 			et vous pouvez supprimer le compte de : <?php echo $WDGUser_override->get_email(); ?><br>
@@ -96,5 +96,17 @@
 				<button type="submit" class="button save red"><?php _e( "Supprimer ce compte utilisateur", 'yproject' ); ?></button>
 			</div>
 		</form>
+	</div>
+<?php endif; ?>
+
+<?php if ( $page_controler->get_current_admin_user()->is_admin() ): ?>
+	<br>
+	<hr>
+	<br>
+	<div class="db-form form-register v3 full field admin-theme">
+		<h2><?php _e( "Transactions (test - présence admin temporaire)", 'yproject' ); ?></h2>
+		<div id="user-transactions-init">
+			<button type="submit" class="button save red" data-userid="<?php echo $page_controler->get_current_user()->get_wpref(); ?>"><?php _e( "Initialiser les données", 'yproject' ); ?></button>
+		</div>
 	</div>
 <?php endif; ?>
