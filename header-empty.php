@@ -1,3 +1,4 @@
+<?php $page_controler = WDG_Templates_Engine::instance()->get_controler(); ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<head>
@@ -6,7 +7,7 @@
 		<link href="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png" rel="shortcut icon" type="image/vnd.microsoft.icon" />
 		<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="<?php echo $stylesheet_directory_uri; ?>/images/favicon.ico"/><![endif]-->
 		<?php endif; ?>
-		<title><?php echo wp_title(); ?></title>
+		<title><?php echo $page_controler->get_page_title(); ?></title>
 
 		<!-- Google Tag Manager -->
 		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -19,7 +20,7 @@
 		<link href="https://plus.google.com/+WedogoodCo" rel="publisher" />
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="Première plateforme de financement participatif en royalties (royalty crowdfunding). Entrepreneurs : levez des fonds sans diluer votre capital !" />
+		<meta name="description" content="<?php echo $page_controler->get_page_description(); ?>" />
 
 		<!--[if lt IE 9]>
 		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
@@ -35,7 +36,11 @@
 		<?php wp_head(); ?>
 
 		<!-- Meta spécifiques à Facebook -->
-		<meta property="og:description" content="Première plateforme de financement participatif en royalties (royalty crowdfunding). Entrepreneurs : levez des fonds sans diluer votre capital !" />
+		<meta property="og:description" content="<?php echo $page_controler->get_page_description(); ?>" />
+		<?php $imageFacebook = $stylesheet_directory_uri .'/images/common/wedogood-logo-rouge.png'; ?>
+		<meta property="og:image" content="<?php echo $imageFacebook ?>" />
+		<meta property="og:image:secure_url" content="<?php echo $imageFacebook ?>" />
+		<meta property="og:image:type" content="image/png" />
 		<meta property="fb:app_id" content="<?php echo YP_FB_APP_ID; ?>" />
 	</head>
 
