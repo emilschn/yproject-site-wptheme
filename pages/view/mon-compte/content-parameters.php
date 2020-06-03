@@ -103,10 +103,12 @@
 	<br>
 	<hr>
 	<br>
-	<div class="db-form form-register v3 full field admin-theme">
-		<h2><?php _e( "Transactions (test - présence admin temporaire)", 'yproject' ); ?></h2>
-		<div class="user-transactions-init">
-			<button type="submit" class="button save red" data-userid="<?php echo $page_controler->get_current_user()->get_wpref(); ?>"><?php _e( "Initialiser les données", 'yproject' ); ?></button>
+	<div class="field admin-theme">
+		<div class="db-form form-register v3 full">
+			<h2><?php _e( "Transactions (Beta - présence admin temporaire)", 'yproject' ); ?></h2>
+			<div class="user-transactions-init">
+				<button type="submit" class="button save red" data-userid="<?php echo $page_controler->get_current_user()->get_wpref(); ?>"><?php _e( "Initialiser les données", 'yproject' ); ?></button>
+			</div>
 		</div>
 	</div>
 <?php endif; ?>

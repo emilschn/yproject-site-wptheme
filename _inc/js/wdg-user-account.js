@@ -48,6 +48,7 @@ UserAccountDashboard.prototype.initMenu = function() {
 	} );
 	if ( $( 'div.user-transactions-init button' ).length > 0 ) {
 		$( 'div.user-transactions-init button' ).click( function() {
+			$( this ).prop( 'disabled', true );
 			$.ajax({
 				'type' : "POST",
 				'url' : ajax_object.ajax_url,
@@ -55,7 +56,11 @@ UserAccountDashboard.prototype.initMenu = function() {
 					'user_id': $( this ).data( 'userid' ),
 					'action' : 'temp_init_transactions'
 				}
-			});
+
+			}).done( function( result ){
+				$( 'div.user-transactions-init button' ).hide();
+				$( 'div.user-transactions-init' ).parent().parent().append( result );
+			} );
 		} );
 	}
 };
