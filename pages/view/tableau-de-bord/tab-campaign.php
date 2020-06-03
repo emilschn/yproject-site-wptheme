@@ -305,9 +305,19 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 
 		DashboardUtility::create_field(array(
+			'id'			=> 'new_google_tag_manager_id',
+			'type'			=> 'text',
+			'label'			=> __( "ID Google Tag Manager (GTM-XXXXXXX)", 'yproject' ),
+			'value'			=> $page_controler->get_campaign()->google_tag_manager_id(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
+
+		DashboardUtility::create_field(array(
 			'id'			=> 'new_custom_footer_code',
 			'type'			=> 'textarea',
-			'label'			=> __( "Code personnalis&eacute; (tracking...)", 'yproject' ),
+			'label'			=> __( "Code personnalis&eacute; (tracking...) dans le footer", 'yproject' ),
 			'value'			=> $page_controler->get_campaign()->custom_footer_code(),
 			'admin_theme'	=> true,
 			'editable'		=> $page_controler->can_access_admin(),
