@@ -19,7 +19,7 @@ if (!empty($campaign)) {
 			
 <?php get_header(); ?>
 
-<?php if (isset($campaign)) : ?>
+<?php if ( !empty( $campaign ) ) : ?>
 <div id="content" data-campaignid="<?php echo $campaign->ID; ?>" data-campaignstatus="<?php echo $campaign->campaign_status(); ?>" class="<?php echo $classes; ?>">
 
 	<?php locate_template( array("projects/single/template.php"), true ); ?>
