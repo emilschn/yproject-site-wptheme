@@ -60,6 +60,7 @@ UserAccountDashboard.prototype.initMenu = function() {
 			}).done( function( result ){
 				$( 'div.user-transactions-init button' ).hide();
 				$( 'div.user-transactions-init' ).parent().parent().append( result );
+				$( 'table.user-transactions' ).DataTable();
 			} );
 		} );
 	}

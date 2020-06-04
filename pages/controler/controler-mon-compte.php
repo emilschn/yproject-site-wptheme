@@ -73,6 +73,10 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		
 		wp_enqueue_style( 'dashboard-investor-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/dashboard-investor.css', null, ASSETS_VERSION, 'all');
 		wp_enqueue_script( 'wdg-user-account', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-user-account.js', array('jquery', 'jquery-ui-dialog'), ASSETS_VERSION);
+		
+		if ( $this->get_current_admin_user() ) {
+			$this->enqueue_datatable();
+		}
 	}
 	
 /******************************************************************************/
