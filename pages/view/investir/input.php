@@ -3,6 +3,12 @@ global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 
+<?php if ( $page_controler->get_display_session_lost() ): ?>
+<p class="wdg-message error">
+	<?php _e( "Votre parcours a subi une perte de donn&eacute;e de session. Merci de reprendre votre parcours.", 'yproject' ); ?>
+</p>
+<?php endif; ?>
+
 <?php
 $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::$field_group_hidden );
 $fields_amount = $page_controler->get_form()->getFields( WDG_Form_Invest_Input::$field_group_amount );
