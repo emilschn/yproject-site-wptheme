@@ -35,11 +35,12 @@ if ( empty( $campaign_video_url ) ) {
 //Sinon on utilise l'objet vidéo fourni par wordpress
 } else {
 	// Normalement le node de video se créera ici
-	$video_element = wp_oembed_get( $campaign_video_url, array( 'height' => 400 ) );
+	if ( strpos( $campaign_video_url, 'youtu' ) !== FALSE || strpos( $campaign_video_url, 'dailymotion' ) !== FALSE || strpos( $campaign_video_url, 'vimeo' ) !== FALSE ) {
+		$video_element = wp_oembed_get( $campaign_video_url, array( 'height' => 400 ) );
+	}
 	
 	// Il arrive que certaines vidéos posent soucis, peut-être à cause de leur taille, dans ce cas, petit ajout de test :
 	if ( empty( $video_element ) ) {
-		$campaign_video_url = $campaign->video();
 		$youtube_id = '';
 		if ( strpos( $campaign_video_url, 'watch?v=' ) > -1 ) {
 			$youtube_id_exploded = explode( 'watch?v=', $campaign_video_url );
