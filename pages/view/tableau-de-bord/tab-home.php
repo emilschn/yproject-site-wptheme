@@ -380,7 +380,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 				<li>
 					<label>
 						Nombre de jours d'évaluation :
-						<input type="number" id="innbdayvote" name="innbdayvote" min="10" max="30" value="30" style="width: 40px;">
+						<input type="number" id="innbdayvote" name="innbdayvote" min="10" max="45" value="45" style="width: 40px;">
 					</label>
 					Fin de l'évaluation : <span id="previewenddatevote"></span>
 					<?php //TODO : choisir l'heure de fin de vote ?>
