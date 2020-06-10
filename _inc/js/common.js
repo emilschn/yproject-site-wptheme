@@ -226,13 +226,17 @@ YPUIFunctions = (function($) {
 					$("#project-filter select").toggle();
 				});
 				
-				$("#project-filter .project-filter-select").click(function() {
-					var step = $("#project-filter-step").val();
-					var location = $("#project-filter-location").val();
-					var impact = $("#project-filter-impact").val();
-					YPUIFunctions.refreshProjectList( step, location, impact );
+				$("#project-filter .project-filter-select").change(function() {
+					$( '#loader-project-list' ).show();
+					setTimeout( function() {
+						$( '#loader-project-list' ).hide();
+						var step = $("#project-filter-step").val();
+						var location = $("#project-filter-location").val();
+						var impact = $("#project-filter-impact").val();
+						YPUIFunctions.refreshProjectList( step, location, impact );
+					}, 500 );
 				});
-				$("#project-filter .project-filter-select").trigger("click");
+				$("#project-filter .project-filter-select").trigger( 'change' );
 				
 				$("div.padder.projects-funded button").click(function() {
 					var lineHeight = 620;

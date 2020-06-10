@@ -169,13 +169,17 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 // CURRENT PROJECTS
 /******************************************************************************/
 ?>
-					
+
 <?php $currentprojects_html = $page_controler->get_currentprojects_html(); ?>
 
 <?php if ( !$currentprojects_html ): ?>
 
 	<?php ob_start(); ?>
 		<div class="padder projects-current">
+			<div class="align-center">
+				<img id="loader-project-list" class="hidden" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" />
+			</div>
+
 			<section class="wdg-component-projects-preview">
 				<div class="project-slider">
 					<div class="block-projects">
