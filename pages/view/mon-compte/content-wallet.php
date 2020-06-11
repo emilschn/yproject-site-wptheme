@@ -110,39 +110,15 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 		<?php endif; ?>
 
 
+
 		<h3><?php _e( "Historique de mes transactions", 'yproject' ); ?></h3>
-		<?php
-		$transfers = get_posts( array(
-			'author'		=> $WDGUser_displayed->get_wpref(),
-			'numberposts'	=> -1,
-			'post_type'		=> 'withdrawal_order_lw',
-			'post_status'	=> 'any',
-			'orderby'		=> 'post_date',
-			'order'			=> 'DESC'
-		) );
-		?>
-
-		<?php if ( $transfers ): ?>
-		<ul class="user-history">
-			<?php foreach ( $transfers as $transfer_post ): ?>
-
-				<?php
-				$post_amount = $transfer_post->post_title;
-				?>
-				<?php if ( $transfer_post->post_status == 'publish' ): ?>
-					<li id="withdrawal-<?php echo $transfer_post->ID; ?>">
-						<span><?php echo get_the_date( 'd/m/Y', $transfer_post ); ?></span>
-						<span><?php echo UIHelpers::format_number( $post_amount ); ?> &euro;</span>
-						<span><?php _e( "vers&eacute;s sur votre compte bancaire", 'yproject' ); ?></span>
-					</li>
-				<?php endif; ?>
-
-			<?php endforeach; ?>
-		</ul>
-
-		<?php else: ?>
-			Aucun transfert d&apos;argent.
-		<?php endif; ?>
+		<div class="user-transactions-init db-form v3 align-left">
+			<button type="submit" class="button blue" data-userid="<?php echo $page_controler->get_current_user()->get_wpref(); ?>"><?php _e( "Voir l'historique de mes transactions", 'yproject' ); ?></button>
+			<div class="loading align-center hidden">
+				<br>
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" />
+			</div>
+		</div>
 		
 	<?php endif; ?>
 

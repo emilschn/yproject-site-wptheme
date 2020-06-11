@@ -146,6 +146,96 @@ body.template-mon-compte div#container div#content #item-body-wallet ul.user-his
 	color: #CFB7B7;
 }
 
+/***** HISTORIQUE DES TRANSACTIONS *****/
+body.template-mon-compte div#container div.dataTables_length label {
+	display: none;
+}
+body.template-mon-compte div#container .dataTables_filter {
+	display: none;
+}
+body.template-mon-compte div#container .dt-button.buttons-excel.buttons-html5 {
+	width: auto;
+	padding: 10px;
+	border: none;
+	color: #fff;
+	background-color: #00879b;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+body.template-mon-compte div#container table.user-transactions {
+	margin-top: 8px;
+}
+body.template-mon-compte div#container table.user-transactions thead tr {
+	color: #00879B;
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: #F4F2F3;;
+}
+body.template-mon-compte div#container table.user-transactions thead td {
+	border-bottom: 2px solid #D3EAE9;
+}
+
+body.template-mon-compte div#container table.user-transactions tbody tr td {
+	border-bottom: 1.5px solid #F4F2F3;
+	padding: 20px 0px;
+}
+body.template-mon-compte div#container table.user-transactions tbody tr td .date-mobile {
+	display: none;
+}
+body.template-mon-compte div#container table.user-transactions tbody tr td.transaction-titre {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+body.template-mon-compte div#container table.user-transactions tbody tr td .organization-name, body.template-mon-compte div#container table.user-transactions tbody tr td .mean-payment-info{
+	font-size: 13px;
+	text-transform: none;
+	font-weight: normal;
+}
+body.template-mon-compte div#container table.user-transactions tbody tr .transaction-date, body.template-mon-compte div#container table.user-transactions tbody tr .sorting_1 {
+	padding-left: 16px;
+}
+body.template-mon-compte div#container table.user-transactions td:nth-of-type(2) {
+	padding-left: 16px;
+}
+body.template-mon-compte div#container table.user-transactions tbody td.positive, body.template-mon-compte div#container table.user-transactions tbody td.negative {
+	text-align: center;
+	font-weight: bold;
+}
+body.template-mon-compte div#container table.user-transactions tbody td.positive {
+	color: #8BC79C;
+}
+
+/* Style de la pagination  */
+body.template-mon-compte div#container .user-transactions-init .paginate_button {
+	border: none;
+}
+body.template-mon-compte div#container .user-transactions-init .paginate_button.current {
+	border: none;
+	background: #D3EAE9;
+}
+body.template-mon-compte div#container .user-transactions-init .paginate_button.current:hover, body.template-mon-compte div#container .user-transactions-init .paginate_button:hover {
+	background: #00879B;
+	border: none;
+}
+
+
+@media only screen and (max-width: 767px) {
+	body.template-mon-compte div#container table.user-transactions thead tr td:nth-of-type(2) { /* Masquer la catégorie transaction */
+		display: none;
+	}
+	body.template-mon-compte div#container table.user-transactions tbody tr td .date-mobile { /* Afficher la date dans le bloc transaction en mobile  */
+		display: block;
+		font-weight: normal;
+		margin-bottom: 10px;
+	}
+	body.template-mon-compte div#container table.user-transactions tbody tr td:first-of-type { /* Masquer la colonne date */
+		display: none;
+	}
+	body.template-mon-compte div#container table.user-transactions tbody td.transaction-titre {
+		padding-left: 20px;
+	}
+}
+
 
 body.template-mon-compte div#container div#content #item-body-identitydocs .phone-info {
 	margin: -32px 0px 16px;

@@ -98,17 +98,3 @@
 		</form>
 	</div>
 <?php endif; ?>
-
-<?php if ( $page_controler->get_current_admin_user()->is_admin() ): ?>
-	<br>
-	<hr>
-	<br>
-	<div class="field admin-theme">
-		<div class="db-form form-register v3 full">
-			<h2><?php _e( "Transactions (Beta - présence admin temporaire)", 'yproject' ); ?></h2>
-			<div class="user-transactions-init">
-				<button type="submit" class="button save red" data-userid="<?php echo $page_controler->get_current_user()->get_wpref(); ?>"><?php _e( "Initialiser les données", 'yproject' ); ?></button>
-			</div>
-		</div>
-	</div>
-<?php endif; ?>
