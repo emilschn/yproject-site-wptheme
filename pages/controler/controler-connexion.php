@@ -60,13 +60,13 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 		if ( !empty( $error_reason ) ) {
 			switch( $error_reason ) {
 				case 'empty_fields':
-					$this->login_error_reason = __( "Merci de remplir tous les champs", 'yproject' );
+					$this->login_error_reason = __( 'login.ERROR_EMPTY_FIELD', 'yproject' );
 					break;
 				case 'orga_account':
-					$this->login_error_reason = __( "Ce compte correspond &agrave; une organisation", 'yproject' );
+					$this->login_error_reason = __( 'login.ERROR_ORGANIZATION_ACCOUNT', 'yproject' );
 					break;
 				default:
-					$this->login_error_reason = __( "Cet utilisateur n'existe pas ou le mot de passe ne correspond pas.", 'yproject' );
+					$this->login_error_reason = __( 'login.ERROR_USER_NOT_FOUND', 'yproject' );
 					$this->login_init = $error_reason;
 					if ( !empty( $this->login_init ) ) {
 						$this->login_init = stripslashes( htmlentities( $this->login_init, ENT_QUOTES | ENT_HTML401 ) );
