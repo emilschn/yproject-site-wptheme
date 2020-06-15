@@ -134,3 +134,6 @@ msgstr "Probl&egrave;me de cr&eacute;ation d'utilisateur."
 
 msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Merci de cocher la case confirmant que vous n'&ecirc;tes pas un robot."
+
+msgid "definition_royaltiser"
+msgstr "*ROYALTISER, v. intr. XXIe siècle. d'apr. angl. Verser une partie de son chiffre d'affaires à ses merveilleux investisseurs. \"Un projet qui royaltise plus que prévu\""
