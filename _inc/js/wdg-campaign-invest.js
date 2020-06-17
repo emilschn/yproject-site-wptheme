@@ -271,12 +271,35 @@ var WDGInvestPageFunctions = (function($) {
 				var amountReached = inputVal + currentAmount;
 				$( 'span#amount-reached' ).text( amountReached.toLocaleString( 'fr-FR' ) );
 				
+				// différencier calculateur EP 
+				if ( $( 'input#is_positive_savings' ).val() == "true" ){
+					var assetPrice = $( 'input#asset_price' ).val();
+					var commonGoodsTurnoverPercent = $( 'input#common_goods_turnover_percent' ).val();
+					var assetSingular = $( 'input#asset_singular' ).val();
+					var assetPlural = $( 'input#asset_plural' ).val();
+					var nbAssets = Math.ceil(inputVal / assetPrice);
+					$("span.nb_assets").text(nbAssets);
+					if (nbAssets > 1){
+						$("span.name_assets").text(' '+assetPlural);
+					} else {
+						$("span.name_assets").text(' '+assetSingular);
+					}
+					if (nbAssets != 0){
+						var ratioOfPercentRoundStr = Math.round( inputVal / assetPrice / nbAssets * percentProject * commonGoodsTurnoverPercent * 1000) /100000;
+					} else {
+						var ratioOfPercentRoundStr = 0;
+					}
+					$("span.roi_percent_user").text(ratioOfPercentRoundStr);
+				} else {
+					var ratioOfPercentRound = Math.round(ratioOfPercent * 100000) / 100000;
+					var ratioOfPercentRoundStr = ratioOfPercentRound.toString().replace('.', ',');
+					$("span.roi_percent_user").text(ratioOfPercentRoundStr);
+				}
+				
 				$( 'form button' ).slideDown( 200 );
 			} else {
 				$( 'form button' ).slideUp( 200 );
 			}
-			
-			$( 'span#royalties-percent' ).text( ratioOfPercentRoundStr );
 
 			return bValidInput;
 		},

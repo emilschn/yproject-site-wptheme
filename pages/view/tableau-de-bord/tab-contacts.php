@@ -136,9 +136,10 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 				<input type="text" name="image_url"><br><br>
 				Description sous l'image :<br>
 				<input type="text" name="image_description"><br><br>
+				<input type="hidden" name="action" value="send_project_notifications">
 				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
 				<input type="hidden" id="mail_type" name="mail_type" value="">
-				<input type="submit" name="send_option" value="Envoyer test" class="button admin-theme">
+				<button type="button" name="send_option" class="button admin-theme button-test-notification">Envoyer test</button>
 				<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
 			</form>
 
@@ -159,9 +160,10 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 		
 			<form id="form-notifications-end" action="<?php echo admin_url( 'admin-post.php?action=send_project_notifications_end' ); ?>" method="POST" class="hidden align-left">
 				<span id="notifications_content"></span><br>
+				<input type="hidden" name="action" value="send_project_notifications_end">
 				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
 				<input type="hidden" id="mail_type" name="mail_type" value="">
-				<input type="submit" name="send_option" value="Envoyer test" class="button admin-theme">
+				<button type="button" name="send_option" class="button admin-theme button-test-notification">Envoyer test</button>
 				<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
 			</form>
 				

@@ -6,8 +6,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 	<?php if ( $page_controler->get_display_alert_project() ): ?>
 		<div class="alert-connect-project">
-			<?php _e( "Il est n&eacute;cessaire d'&ecirc;tre identifi&eacute; avec son compte WE DO GOOD pour &eacute;valuer ou investir sur un projet.", 'yproject' ); ?>
-			<a href="<?php echo home_url( '/inscription/' ); ?>"><?php _e( "Je n'ai pas de compte" ); ?></a>.
+			<?php _e( 'login.PROJECT_ALERT', 'yproject' ); ?>
+			<a href="<?php echo home_url( '/inscription/' ); ?>"><?php _e( 'login.DONT_HAVE_ACCOUNT', 'yproject' ); ?></a>.
 		</div>
 	<?php endif; ?>
 

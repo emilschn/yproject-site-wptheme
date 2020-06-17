@@ -1,246 +1,139 @@
-# Copyright (C) 2013 the WordPress team
 # This file is distributed under the GNU General Public License v2 or later.
+# ############################## COMMON ################################
 msgid ""
 msgstr ""
-"Project-Id-Version: Y Project 0.1\n"
-"Report-Msgid-Bugs-To: https://code.google.com/p/yproject-site-wptheme\n"
-"POT-Creation-Date: 2013-05-01 00:19:44+00:00\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-09-05 12:37+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"X-Generator: Poedit 1.5.5\n"
+"Language: fr_FR\n"
+"X-Generator: Poedit 2.3.1\n"
 
-# page-home.php - Page d'accueil
-msgid "Votez !"
-msgstr "Votez !"
+msgid "common.OR"
+msgstr "ou"
 
-msgid "Les projets en cours"
-msgstr "Les projets en cours"
+msgid "common.REQUIRED_FIELDS"
+msgstr "Champs obligatoires"
+
+msgid "common.EMAIL"
+msgstr "Adresse e-mail"
+
+msgid "common.PASSWORD"
+msgstr "Mot de passe"
+
+msgid "common.FIRST_NAME"
+msgstr "Pr&eacute;nom"
+
+msgid "common.LAST_NAME"
+msgstr "Nom de famille"
+
+# ############################## /connexion ################################
+msgid "login.INTRO"
+msgstr "Connexion sur WE DO GOOD"
+
+msgid "login.PROJECT_ALERT"
+msgstr "Il est n&eacute;cessaire d'&ecirc;tre identifi&eacute; avec son compte WE DO GOOD pour &eacute;valuer ou investir sur un projet."
+
+msgid "login.DONT_HAVE_ACCOUNT"
+msgstr "Je n'ai pas de compte"
+
+msgid "login.LOG_IN"
+msgstr "Se connecter"
+
+msgid "login.LOG_IN_FACEBOOK"
+msgstr "Se connecter avec Facebook"
+
+msgid "login.CREATE_ACCOUNT"
+msgstr "Cr&eacute;er un compte"
+
+msgid "login.REMEMBER_ME"
+msgstr "Se souvenir de moi"
+
+msgid "login.EMAIL_OR_LOGIN"
+msgstr "E-mail ou identifiant"
+
+msgid "login.FORGOTTEN_PASSWORD"
+msgstr "Mot de passe oubli&eacute;"
+
+msgid "login.ERROR_EMPTY_FIELD"
+msgstr "Merci de remplir tous les champs"
+
+msgid "login.ERROR_ORGANIZATION_ACCOUNT"
+msgstr "Ce compte correspond &agrave; une organisation"
+
+msgid "login.ERROR_USER_NOT_FOUND"
+msgstr "Cet utilisateur n'existe pas ou le mot de passe ne correspond pas."
+
+# ############################## /inscription ################################
+msgid "signup.INTRO"
+msgstr "Inscription sur WE DO GOOD"
+
+msgid "signup.WARNING_1"
+msgstr "La cr&eacute;ation d&apos;un compte de Membre sur WE DO GOOD est exclusivement r&eacute;serv&eacute;e aux personnes physiques."
+
+msgid "signup.WARNING_2"
+msgstr "Chaque membre ne peut b&eacute;n&eacute;ficier que d&apos;un seul compte &agrave; son nom."
+
+msgid "signup.WARNING_3"
+msgstr "Si vous souhaitez investir ou porter un projet pour une organisation, vous pourrez l&apos;indiquer au moment de l&apos;investissement ou dans les param&egrave;tres du projet."
+
+msgid "signup.PASSWORD_CONFIRMATION"
+msgstr "Confirmation du mot de passe"
+
+msgid "signup.I_ACCEPT"
+msgstr "J'accepte"
+
+msgid "signup.THE_TERMS"
+msgstr "les conditions g&eacute;n&eacute;rales d&apos;utilisation"
+
+msgid "signup.ALREADY_HAVE_ACCOUNT"
+msgstr "J&apos;ai d&eacute;j&agrave; un compte"
+
+msgid "signup.WELCOME_TO_WEDOGOOD"
+msgstr "Bienvenue chez WE DO GOOD !"
+
+msgid "signup.ACCOUNT_CREATED"
+msgstr "Votre compte est cr&eacute;&eacute; et vous &ecirc;tes connect&eacute;."
+
+msgid "signup.GO_TO_PROJECT_LIST"
+msgstr "Rendez-vous sur la page des projets en cliquant sur"
+
+msgid "signup.THIS_LINK"
+msgstr "ce lien"
+
+msgid "signup.ERROR_EMAIL_EMPTY"
+msgstr "L'adresse e-mail doit &ecirc;tre d&eacute;finie."
+
+msgid "signup.ERROR_EMAIL_ALREADY_USED"
+msgstr "Cette adresse e-mail est d&eacute;j&agrave; utilis&eacute;e."
+
+msgid "signup.ERROR_EMAIL_NOT_OK"
+msgstr "Cette adresse e-mail n'est pas valide."
+
+msgid "signup.ERROR_FIRST_NAME_EMPTY"
+msgstr "Le pr&eacute;nom doit &ecirc;tre d&eacute;fini."
+
+msgid "signup.ERROR_LAST_NAME_EMPTY"
+msgstr "Le nom de famille doit &ecirc;tre d&eacute;fini."
+
+msgid "signup.ERROR_PASSWORD_EMPTY"
+msgstr "Avez-vous saisi deux fois le mot de passe ?"
+
+msgid "signup.ERROR_PASSWORDS_DONT_MATCH"
+msgstr "Les mots de passe saisis ne correspondent pas."
+
+msgid "signup.ERROR_TERMS_NOT_CHECKED"
+msgstr "Merci de cocher la case pour accepter les conditions g&eacute;n&eacute;rales d&apos;utilisation."
+
+msgid "signup.ERROR_USER_CREATION"
+msgstr "Probl&egrave;me de cr&eacute;ation d'utilisateur."
+
+msgid "signup.ERROR_ROBOT_CHECKBOX"
+msgstr "Merci de cocher la case confirmant que vous n'&ecirc;tes pas un robot."
 
 msgid "definition_royaltiser"
 msgstr "*ROYALTISER, v. intr. XXIe siècle. d'apr. angl. Verser une partie de son chiffre d'affaires à ses merveilleux investisseurs. \"Un projet qui royaltise plus que prévu\""
-
-msgid "Soutenez le projet en votant !"
-msgstr "Soutenez le projet en votant !"
-
-msgid "voter"
-msgstr "voter"
-
-msgid "pour ce projet"
-msgstr "pour ce projet"
-
-msgid "en savoir"
-msgstr "en savoir"
-
-msgid "plus"
-msgstr "plus"
-
-msgid "Participez à un projet"
-msgstr "Participez à un projet"
-
-msgid "Proposez un projet"
-msgstr "Proposez un projet"
-
-msgid "Actualites"
-msgstr "Actualit&eacute;s"
-
-msgid "Trouvez les projets"
-msgstr "Trouvez les projets"
-
-# single-campaign.php - Page projet
-msgid "Investissez"
-msgstr "Investissez"
-
-msgid "Bient&ocirc;t !"
-msgstr "Bient&ocirc;t !"
-
-msgid "Participer autrement"
-msgstr "Participer autrement"
-
-msgid "Blog"
-msgstr "Blog"
-
-msgid "Forum"
-msgstr "Forum"
-
-msgid "Statistiques"
-msgstr "Statistiques"
-
-msgid "Jy crois"
-msgstr "J'y crois"
-
-msgid "Partager sur Facebook"
-msgstr "Partager sur Facebook"
-
-msgid "Partager sur Twitter"
-msgstr "Partager sur Twitter"
-
-msgid "Fermer"
-msgstr "Fermer"
-
-msgid "Page projet"
-msgstr "Page projet"
-
-msgid "G&eacute;rer vos informations"
-msgstr "G&eacute;rer vos informations"
-
-msgid "Ajouter une actualit&eacute;"
-msgstr "Ajouter une actualit&eacute;"
-
-# register.php / page-modifier-mon-compte.php - S'inscrire/Modifier mon compte
-msgid "Inscription"
-msgstr "Inscription"
-
-msgid "Modifier mon compte"
-msgstr "Modifier mon compte"
-
-msgid "Informations de base"
-msgstr "Informations de base"
-
-msgid "Ces informations sont n&eacute;cessaires pour obtenir un compte."
-msgstr "Ces informations sont n&eacute;cessaires pour obtenir un compte."
-
-msgid "Adresse e-mail"
-msgstr "Adresse e-mail"
-
-msgid "Confirmation de l&apos;adresse e-mail"
-msgstr "Confirmation de l&apos;adresse e-mail"
-
-msgid "Les deux adresses ne sont pas identiques"
-msgstr "Les deux adresses ne sont pas identiques"
-
-msgid "Confirmation du mot de passe"
-msgstr "Confirmation du mot de passe"
-
-msgid "Les deux mots de passe ne sont pas identiques"
-msgstr "Les deux mots de passe ne sont pas identiques"
-
-msgid " (vide si pas de changement)"
-msgstr " (vide si pas de changement)"
-
-msgid "Informations compl&eacute;mentaires"
-msgstr "Informations compl&eacute;mentaires"
-
-msgid "Ces informations sont n&eacute;cessaires pour investir dans un projet."
-msgstr "Ces informations sont n&eacute;cessaires pour investir dans un projet."
-
-msgid "Pr&eacute;nom"
-msgstr "Pr&eacute;nom"
-
-msgid "Nom"
-msgstr "Nom"
-
-msgid "Date de naissance"
-msgstr "Date de naissance"
-
-msgid "Nationalit&eacute;"
-msgstr "Nationalit&eacute;"
-
-msgid "Type de personne"
-msgstr "Type de personne"
-
-msgid "Physique"
-msgstr "Physique"
-
-msgid "Morale"
-msgstr "Morale"
-
-msgid "Un e-mail de confirmation vous a &eacute;t&eacute; envoy&eacute;."
-msgstr "Un e-mail de confirmation vous a &eacute;t&eacute; envoy&eacute;."
-
-msgid ""
-"Votre compte est maintenant cr&eacute;&eacute;. Pour l&apos;utiliser, rendez-"
-"vous sur l&apos;e-mail que nous avons envoy&eacute;."
-msgstr ""
-"Votre compte est maintenant cr&eacute;&eacute;. Pour l&apos;utiliser, rendez-"
-"vous sur l&apos;e-mail que nous avons envoy&eacute;."
-
-msgid ""
-"Votre compte est maintenant cr&eacute;&eacute;. Vous pouvez &agrave; "
-"pr&eacute;sent vous identifier."
-msgstr ""
-"Votre compte est maintenant cr&eacute;&eacute;. Vous pouvez &agrave; "
-"pr&eacute;sent vous identifier."
-
-msgid "Erreur d&apos;identification"
-msgstr "Erreur d&apos;identification"
-
-# archive.php - Blog
-msgid "Revenir à la description du projet"
-msgstr "Revenir à la description du projet"
-
-msgid "Derni&egrave;res actualit&eacute;s du projet %1$s"
-msgstr "Derni&egrave;res actualit&eacute;s du projet %1$s"
-
-# header.php - menu
-msgid "Decouvrir les projets"
-msgstr "D&eacute;couvrir les projets"
-
-msgid "Proposer un projet"
-msgstr "Proposer un projet"
-
-msgid "Communaute"
-msgstr "Communaut&eacute;"
-
-msgid "Comment ca marche ?"
-msgstr "Comment &ccedil;a marche ?"
-
-msgid "Mon compte"
-msgstr "Mon compte"
-
-msgid "Se deconnecter"
-msgstr "Se d&eacute;connecter"
-
-msgid "Connexion"
-msgstr "Connexion"
-
-msgid "Identifiant"
-msgstr "Identifiant"
-
-msgid "Mot de passe"
-msgstr "Mot de passe"
-
-msgid "Se souvenir de moi"
-msgstr "Se souvenir de moi"
-
-msgid "Sinscrire"
-msgstr "S&apos;inscrire"
-
-msgid "Fil dactivite"
-msgstr "Fil d'activit&eacute;"
-
-msgid "Qui sommes-nous ?"
-msgstr "Qui sommes-nous ?"
-
-msgid "Terminer mon inscription"
-msgstr "Terminer mon inscription"
-
-msgid "Welcome Text 1"
-msgstr "Bienvenue dans la communauté WE DO GOOD !"
-
-msgid "Welcome Text 2"
-msgstr ""
-"Nous agissons positivement et selon les moyens de chacun en soutenant des "
-"projets utiles. Nous croyons que la valeur doit être partagée entre les "
-"entrepreneurs, ceux qui investissent, l’environnement et la société. Nous "
-"faisons du financement participatif ou crowdfunding (mais pas que) où tout "
-"le monde peut investir. Participez de la manière qui vous convient, recevez-"
-"en les bénéfices, et ayez de l’impact !"
-
-# footer.php - Creative Commons
-msgid "Informations"
-msgstr "Informations"
-
-msgid "Questions"
-msgstr "Questions"
-
-msgid "CREATIVE COMMONS PART 1"
-msgstr "Cette &oelig;uvre est mise à disposition selon les termes de la "
-
-msgid "CREATIVE COMMONS PART 2"
-msgstr ""
-"Licence Creative Commons Attribution - Partage dans les M&ecirc;mes "
-"Conditions 3.0 France"

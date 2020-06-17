@@ -20,6 +20,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	private $form;
 	private $form_display_success;
 	private $form_display_file_sent;
+	private $display_session_lost;
 	
 	public function __construct() {
 		parent::__construct();
@@ -45,6 +46,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		$this->init_current_investment();
 		$this->init_current_step();
 		$this->init_form();
+		$this->init_show_lost_session();
 	}
 	
 /******************************************************************************/
@@ -101,6 +103,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	public function init_show_user_pending_investment() {
 		$this->show_user_pending_investment = false;
 	}
+
 	/**
 	 * Surcharge de WDG_Page_Controler	
 	*/
@@ -152,6 +155,15 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	}
 	public function get_current_step() {
 		return $this->current_step;
+	}
+
+	private function init_show_lost_session() {
+		$input_lost_session = filter_input( INPUT_GET, 'lost_session' );
+		$this->display_session_lost = ( $input_lost_session == '1' );
+	}
+	
+	public function get_display_session_lost() {
+		return $this->display_session_lost;
 	}
 	
 	/**
@@ -286,6 +298,10 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 				} else {
 					$this->current_step = 2.5;
 					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2.5 >> WDG_Form_User_Identity_Docs::$name POSTED' );
+					if ( !isset( $_SESSION[ 'redirect_current_user_type' ] ) ) {
+						wp_redirect( $this->get_form_action() . '&lost_session=1' );
+						exit();
+					}
 					$WDGCurrent_User = WDGUser::current();
 					$identity_docs_user_id = ( $_SESSION[ 'redirect_current_user_type' ] == 'user' ) ? $WDGCurrent_User->get_wpref() : $_SESSION[ 'redirect_current_user_type' ];
 					$this->form = new WDG_Form_User_Identity_Docs( $identity_docs_user_id, ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ), $this->current_campaign );

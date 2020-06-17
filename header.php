@@ -5,6 +5,11 @@
 	}
 	$page_controler = WDG_Templates_Engine::instance()->get_controler();
 	wp_reset_query();
+
+	$campaign_google_tag_manager_id = FALSE;
+	if ( $is_campaign_page && !empty( $campaign ) ) {
+		$campaign_google_tag_manager_id = $campaign->google_tag_manager_id();
+	}
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
@@ -18,13 +23,23 @@
 		<?php endif; ?>
 		<title><?php echo $page_controler->get_page_title(); ?></title>
 
-		<!-- Google Tag Manager -->
+		<?php /* Google Tag Manager */ ?>
+		<?php /* WDG */ ?>
 		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 		})(window,document,'script','dataLayer','GTM-KFV5RN5');</script>
-		<!-- End Google Tag Manager -->
+
+		<?php /* Campagne */ ?>
+		<?php if ( !empty( $campaign_google_tag_manager_id ) ): ?>
+			<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','<?php echo $campaign_google_tag_manager_id; ?>');</script>
+		<?php endif; ?>
+		<?php /* End Google Tag Manager */ ?>
 		
 		<?php if ($is_campaign_page): ?>
 		<link rel="alternate" href="<?php echo get_permalink( $campaign->ID ); ?>?lang=fr_FR" hreflang="fr" />
@@ -77,10 +92,15 @@
 	</head>
 
 	<body <?php body_class(get_locale()); ?>>
-		<!-- Google Tag Manager (noscript) -->
+		<?php /* Google Tag Manager (noscript) */ ?>
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KFV5RN5"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-		<!-- End Google Tag Manager (noscript) -->
+		
+		<?php if ( !empty( $campaign_google_tag_manager_id ) ): ?>
+			<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $campaign_google_tag_manager_id; ?>"
+			height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<?php endif; ?>
+		<?php /* End Google Tag Manager (noscript) */ ?>
 		
 		<?php if ( $page_controler->get_header_nav_visible() ): ?>
 		<nav id="main">

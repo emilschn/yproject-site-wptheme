@@ -8,6 +8,14 @@
 
 <h2><?php _e( "Organisation", 'yproject' ); ?></h2>
 
+<?php if ( !$page_controler->can_access_admin() && !$page_controler->can_access_author() ): ?>
+	<div class="wdg-message error">
+		<?php _e( "Seul le porteur de projet peut &eacute;diter les informations de cet onglet", 'yproject' ); ?>
+	</div>
+
+
+<?php else: ?>
+
 <?php DashboardUtility::add_help_item( $page_controler->get_current_user(), 'organization', 1 ); ?>
 
 <?php if ( !$current_organization->is_registered_lemonway_wallet() ): ?>
@@ -20,12 +28,12 @@
 	</div>
 <?php endif; ?>
 
-<?php if ( $WDGUser_current->is_admin() ): ?>		
-  <?php if ( isset( $current_organization ) ): ?>
-    <div class="admin-theme">
-      ID LemonWay : <?php echo $current_organization->get_lemonway_id(); ?>
-    </div>
-  <?php endif; ?>
+<?php if ( $WDGUser_current->is_admin() ): ?>
+	<?php if ( isset( $current_organization ) ): ?>
+		<div class="admin-theme">
+			ID LemonWay : <?php echo $current_organization->get_lemonway_id(); ?>
+		</div>
+	<?php endif; ?>
 <?php endif; ?>
 
 <ul class="menu-onglet">
@@ -43,4 +51,7 @@ locate_template( array( 'pages/view/tableau-de-bord/tab-organization/tab-orga-id
 locate_template( array( 'pages/view/tableau-de-bord/tab-organization/tab-orga-bank.php'  ), true );
 locate_template( array( 'pages/view/tableau-de-bord/tab-organization/tab-parameters.php'  ), true );
 locate_template( array( 'pages/view/tableau-de-bord/tab-organization/tab-identitydocs.php'  ), true );
+?>
 
+
+<?php endif; ?>

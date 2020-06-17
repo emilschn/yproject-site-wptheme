@@ -1,18 +1,179 @@
-# Copyright (C) 2013 the WordPress team
 # This file is distributed under the GNU General Public License v2 or later.
+# ############################## COMMON ################################
 msgid ""
 msgstr ""
-"Project-Id-Version: yproject 0.1\n"
-"Report-Msgid-Bugs-To: https://code.google.com/p/yproject-site-wptheme\n"
-"POT-Creation-Date: 2013-05-01 00:19:44+00:00\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2020-03-18 10:25+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.3\n"
 "Language: en_US\n"
+"X-Generator: Poedit 2.3.1\n"
+
+# FR : ou
+msgid "common.OR"
+msgstr "or"
+
+# FR : Champs obligatoires
+msgid "common.REQUIRED_FIELDS"
+msgstr "Required fields"
+
+# FR : Adresse e-mail
+msgid "common.EMAIL"
+msgstr "E-mail address"
+
+# FR : Mot de passe
+msgid "common.PASSWORD"
+msgstr "Password"
+
+# FR : Prénom
+msgid "common.FIRST_NAME"
+msgstr "First name"
+
+# FR : Nom de famille
+msgid "common.LAST_NAME"
+msgstr "Last name"
+
+# ############################## /connexion ################################
+# FR : Connexion sur WE DO GOOD
+msgid "login.INTRO"
+msgstr "Login to WE DO GOOD"
+
+# FR : Il est n&eacute;cessaire d'&ecirc;tre identifi&eacute; avec son compte WE DO GOOD pour &eacute;valuer ou investir sur un projet.
+msgid "login.PROJECT_ALERT"
+msgstr "You need to be logged in with your WE DO GOOD account to evaluate or invest on projects."
+
+# FR : Je n'ai pas de compte
+msgid "login.DONT_HAVE_ACCOUNT"
+msgstr "I don't have an account"
+
+# FR : Se connecter
+msgid "login.LOG_IN"
+msgstr "Log in"
+
+# FR : Se connecter avec Facebook
+msgid "login.LOG_IN_FACEBOOK"
+msgstr "Log in with Facebook"
+
+# FR : Cr&eacute;er un compte
+msgid "login.CREATE_ACCOUNT"
+msgstr "Create an account"
+
+# FR : Se souvenir de moi
+msgid "login.REMEMBER_ME"
+msgstr "Remember me"
+
+# FR : E-mail ou identifiant
+msgid "login.EMAIL_OR_LOGIN"
+msgstr "E-mail or login"
+
+# FR : Mot de passe oubli&eacute;
+msgid "login.FORGOTTEN_PASSWORD"
+msgstr "Forgotten password"
+
+# FR : Merci de remplir tous les champs
+msgid "login.ERROR_EMPTY_FIELD"
+msgstr "Please fill in all the blanks"
+
+# FR : Ce compte correspond &agrave; une organisation
+msgid "login.ERROR_ORGANIZATION_ACCOUNT"
+msgstr "This account is linked to an organization"
+
+# FR : Cet utilisateur n'existe pas ou le mot de passe ne correspond pas.
+msgid "login.ERROR_USER_NOT_FOUND"
+msgstr "This user doesn't exist or the password doesn't match."
+
+# ############################## /inscription ################################
+# FR : Inscription sur WE DO GOOD
+msgid "signup.INTRO"
+msgstr "Register to WE DO GOOD"
+
+# FR : La cr&eacute;ation d&apos;un compte de Membre sur WE DO GOOD est exclusivement r&eacute;serv&eacute;e aux personnes physiques.
+msgid "signup.WARNING_1"
+msgstr "Creating an account on WE DO GOOD is exclusively reserved for physical persons."
+
+# FR : Chaque membre ne peut b&eacute;n&eacute;ficier que d&apos;un seul compte &agrave; son nom.
+msgid "signup.WARNING_2"
+msgstr "Each user can only have a unique account."
+
+# FR : Si vous souhaitez investir ou porter un projet pour une organisation, vous pourrez l&apos;indiquer au moment de l&apos;investissement ou dans les param&egrave;tres du projet.
+msgid "signup.WARNING_3"
+msgstr "If you wish to invest or raise funds for an organization, you will indicate it when investing or creating a project."
+
+# FR : Confirmation du mot de passe
+msgid "signup.PASSWORD_CONFIRMATION"
+msgstr "Password confirmation"
+
+# FR : J'accepte
+msgid "signup.I_ACCEPT"
+msgstr "I accept"
+
+# FR : les conditions g&eacute;n&eacute;rales d&apos;utilisation
+msgid "signup.THE_TERMS"
+msgstr "the general conditions of use"
+
+# FR : J&apos;ai d&eacute;j&agrave; un compte
+msgid "signup.ALREADY_HAVE_ACCOUNT"
+msgstr "I already have an account"
+
+# FR : Bienvenue chez WE DO GOOD !
+msgid "signup.WELCOME_TO_WEDOGOOD"
+msgstr "Welcome to WE DO GOOD!"
+
+# FR : Votre compte est cr&eacute;&eacute; et vous &ecirc;tes connect&eacute;.
+msgid "signup.ACCOUNT_CREATED"
+msgstr "Your account is created and you are logged in."
+
+# FR : Rendez-vous sur la page des projets en cliquant sur
+msgid "signup.GO_TO_PROJECT_LIST"
+msgstr "To go to the project list, click on"
+
+# FR : ce lien
+msgid "signup.THIS_LINK"
+msgstr "this link"
+
+# FR : L'adresse e-mail doit &ecirc;tre d&eacute;finie.
+msgid "signup.ERROR_EMAIL_EMPTY"
+msgstr "The e-mail field should not be left blank."
+
+# FR : Cette adresse e-mail est d&eacute;j&agrave; utilis&eacute;e.
+msgid "signup.ERROR_EMAIL_ALREADY_USED"
+msgstr "The e-mail is already used."
+
+# FR : Cette adresse e-mail n'est pas valide.
+msgid "signup.ERROR_EMAIL_NOT_OK"
+msgstr "This e-mail address is not valid"
+
+# FR : Le pr&eacute;nom doit &ecirc;tre d&eacute;fini.
+msgid "signup.ERROR_FIRST_NAME_EMPTY"
+msgstr "The first name field should not be left blank."
+
+# FR : Le nom de famille doit &ecirc;tre d&eacute;fini.
+msgid "signup.ERROR_LAST_NAME_EMPTY"
+msgstr "The last name field should not be left blank."
+
+# FR : Avez-vous saisi deux fois le mot de passe ?
+msgid "signup.ERROR_PASSWORD_EMPTY"
+msgstr "Have you filled in the two passwords fields?"
+
+# FR : Les mots de passe saisis ne correspondent pas.
+msgid "signup.ERROR_PASSWORDS_DONT_MATCH"
+msgstr "The passwords don't match."
+
+# FR : Merci de cocher la case pour accepter les conditions g&eacute;n&eacute;rales d&apos;utilisation.
+msgid "signup.ERROR_TERMS_NOT_CHECKED"
+msgstr "Please check the general conditions of use checkbox."
+
+# FR : Probl&egrave;me de cr&eacute;ation d'utilisateur.
+msgid "signup.ERROR_USER_CREATION"
+msgstr "There was a problem while creating your user account."
+
+# FR : Merci de cocher la case confirmant que vous n'&ecirc;tes pas un robot.
+msgid "signup.ERROR_ROBOT_CHECKBOX"
+msgstr "Please check the box to confirm you are not a robot."
 
 # ############################## PROJECT COMMON ################################
 # THEME - projects/common/stats-public.php
@@ -237,9 +398,6 @@ msgstr "eco-friendly product ou service"
 msgid "Inscription"
 msgstr "Register"
 
-msgid "Connexion"
-msgstr "Log in"
-
 # THEME - projects/single/header.php
 msgid "R&eacute;sum&eacute;"
 msgstr "Summary"
@@ -433,8 +591,17 @@ msgstr "If I invest:"
 msgid "Calculer"
 msgstr "Calculate"
 
-msgid "Je recevrais :"
-msgstr "I'll receive:"
+msgid "Je recevrais tous les %s :"
+msgstr "I'll receive every %s:"
+
+msgid "mois"
+msgstr "month"
+
+msgid "trimestres"
+msgstr "quarter"
+
+msgid "semestres"
+msgstr "semester"
 
 msgid " (pourcentage indicatif)."
 msgstr " (estimated percentage)"

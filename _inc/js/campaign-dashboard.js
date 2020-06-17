@@ -523,6 +523,7 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		$("#direct-mail .step-write").slideDown();
 	});
 	
+
 	$( '.show-notifications' ).click( function( e ) {
 		e.preventDefault();
 		$( '#form-notifications #mail_type' ).val( $( this ).data( 'mailtype' ) );
@@ -537,7 +538,48 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		$( '#form-notifications-end' ).hide();
 		$( '#form-notifications-end' ).slideDown( 100 );
 	} );
-				
+
+	$( '.button-test-notification' ).click( function( e ) {
+		e.preventDefault();
+		var self = this;
+		$( this ).addClass( 'disabled' );
+		
+		var sTypeNotif = $( $( this ).siblings( "input[name=action]" )[0] ).val();
+		var sCampaignID = $( $( this ).siblings( "input[name=campaign_id]" )[0] ).val();
+		var sMailType = $( $( this ).siblings( "input[name=mail_type]" )[0] ).val();
+		var sTestimony = '';
+		var sImageURL = '';
+		var sImageDescription = '';
+		if ( $( this ).siblings( "input[name=image_description]" ).length > 0 ) {
+			sTestimony = tinyMCE.get( 'testimony' ).getContent();
+			sImageURL = $( $( this ).siblings( "input[name=image_url]" )[0] ).val();
+			sImageDescription = $( $( this ).siblings( "input[name=image_description]" )[0] ).val();
+		}
+
+		$.ajax({
+			'type' : "POST",
+			'url' : ajax_object.ajax_url,
+			'data': {
+				'action':'send_test_notifications',
+				'campaign_id': sCampaignID,
+				'notif_type': sTypeNotif,
+				'mail_type': sMailType,
+				'send_option': 'test',
+				'testimony': sTestimony,
+				'image_url': sImageURL,
+				'image_description': sImageDescription
+			}
+		}).done( function( result ) {
+			$( self ).removeClass( 'disabled' );
+			if ( result == '1' ) {
+				alert( 'Test envoyé' );
+			} else {
+				alert( 'Erreur envoi du test' );
+			}
+		} );
+	} );
+
+	
 	if ( $( '.button-contacts-add-check' ).length > 0 ) {
 		$( '.button-contacts-add-check' ).click( function() {
 			$( '#form-contacts-add-check' ).slideDown( 30 );

@@ -152,9 +152,9 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		$this->currentprojects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$currentprojects_html_key, WDG_Page_Controler_ProjectList::$currentprojects_html_version );
 		if ( empty( $this->currentprojects_html ) ) {
 			$this->currentprojects_list = array(
-				'funding'			=> ATCF_Campaign::get_list_funding( 0, '', TRUE ),
-				'funding_after'		=> ATCF_Campaign::get_list_funding( 0, '', TRUE, FALSE ),
-				'vote'				=> ATCF_Campaign::get_list_vote( 0, '', TRUE )
+				'funding'			=> ATCF_Campaign::get_list_funding( -1, '', TRUE ),
+				'funding_after'		=> ATCF_Campaign::get_list_funding( -1, '', TRUE, FALSE ),
+				'vote'				=> ATCF_Campaign::get_list_vote( -1, '', TRUE )
 			);
 		}
 	}

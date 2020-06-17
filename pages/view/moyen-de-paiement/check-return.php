@@ -33,8 +33,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php echo $page_controler->get_campaign_organization_name(); ?>
 	<?php _e( "&agrave; l'adresse suivante :", 'yproject' ); ?><br>
 	WE DO GOOD<br>
-	Tour Bretagne<br>
-	Place de Bretagne<br>
+	38 rue des Olivettes<br>
 	44000 Nantes<br><br>
 
 	<div class="db-form v3 full">

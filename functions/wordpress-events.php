@@ -393,7 +393,7 @@ class WDG_WordPress_Events {
 		
 	}
 
-	private function secure_api( $result ) {
+	public function secure_api( $result ) {
 		if ( ! empty( $result ) ) {
 			return $result;
 		}

@@ -97,7 +97,7 @@ class WDG_Page_Controler {
 	}
 	
 	private function init_page_description() {
-		$this->page_description = "Première plateforme française de royalty crowdfunding. Levez des fonds sans dilution de capital ni endettement.";
+		$this->page_description = "WE DO GOOD est le leader français des levées de fonds en royalties et du crowdinvesting. Investissez en ligne à partir de 10 € dans les projets qui vous parlent.";
 		if ( have_posts() ){
 			while ( have_posts() ) {
 				the_post();
@@ -116,6 +116,42 @@ class WDG_Page_Controler {
 	 */
 	public function get_header_nav_visible() {
 		return ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' );
+	}
+
+//******************************************************************************
+	/**
+	 * Chargement script et style de datatable
+	 */
+	protected function enqueue_datatable( $cdn = false ) {
+		if ( $cdn ) {
+			wp_enqueue_style( 'datatable-css', 'https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css', null, false, 'all' );
+	
+			wp_enqueue_script( 'datatable-script', 'https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js', array( 'jquery', 'wdg-script' ), true, true );
+			wp_enqueue_script( 'datatable-buttons', 'https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js', array( 'jquery', 'wdg-script' ), true, true );
+			wp_enqueue_script( 'datatable-jszip', 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js', array( 'jquery', 'wdg-script' ), true, true );
+			wp_enqueue_script( 'datatable-fonts', 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js', array( 'jquery', 'wdg-script' ), true, true );
+			wp_enqueue_script( 'datatable-buttons-html5', 'https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js', array( 'jquery', 'wdg-script' ), true, true );
+		
+		} else {
+			wp_enqueue_script( 'datatable-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/jquery.dataTables.min.js', array( 'jquery', 'wdg-script' ), true, true );
+			wp_enqueue_style( 'datatable-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/jquery.dataTables.min.css', null, false, 'all' );
+	
+			wp_enqueue_script( 'datatable-colreorder-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.colReorder.min.js', array( 'datatable-script' ), true, true );
+			wp_enqueue_style( 'datatable-colreorder-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/colReorder.dataTables.min.css', null, false, 'all' );
+	
+			wp_enqueue_script( 'datatable-responsive-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.responsive.min.js', array( 'datatable-script' ), true, true );
+			wp_enqueue_style( 'datatable-responsive-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/responsive.dataTables.min.css', null, false, 'all' );
+	
+			wp_enqueue_script( 'datatable-select-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.select.min.js', array( 'datatable-script' ), true, true );
+			wp_enqueue_style('datatable-select-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/select.dataTables.min.css', null, false, 'all' );
+	
+			wp_enqueue_script( 'datatable-buttons-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.buttons.min.js', array( 'datatable-script' ), true, true );
+			wp_enqueue_script( 'datatable-buttons-colvis-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/buttons.colVis.min.js', array( 'datatable-script' ), true, true );
+			wp_enqueue_script( 'datatable-buttons-html5-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/buttons.html5.min.js', array( 'datatable-script' ), true, true );
+			wp_enqueue_script( 'datatable-buttons-print-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/buttons.print.min.js', array( 'datatable-script' ), true, true );
+			wp_enqueue_script( 'datatable-jszip-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/jszip.min.js', array( 'datatable-script' ), true, true );
+			wp_enqueue_style( 'datatable-buttons-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/buttons.dataTables.min.css', null, false, 'all' );
+		}
 	}
 	
 	
