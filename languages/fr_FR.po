@@ -135,5 +135,67 @@ msgstr "Probl&egrave;me de cr&eacute;ation d'utilisateur."
 msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Merci de cocher la case confirmant que vous n'&ecirc;tes pas un robot."
 
+# ############################## /mon-compte ################################
+msgid "account.OVERRIDE_USER_DOESNT_EXIST"
+msgstr "L'utilisateur que vous essayez d'afficher n'existe pas..."
+
+msgid "account.OVERRIDE_USER_IS_ORGANIZATION"
+msgstr "L'utilisateur que vous essayez d'afficher est une organisation."
+
+msgid "account.OVERRIDE_ORGANIZATION_MANAGER_EMAIL"
+msgstr "L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :"
+
+msgid "account.HELLO"
+msgstr "Bonjour"
+
+msgid "account.menu.MY_WALLET"
+msgstr "Mon porte-monnaie"
+
+msgid "account.menu.MY_INVESTMENTS"
+msgstr "Mes investissements"
+
+msgid "account.menu.MY_DOCUMENTS"
+msgstr "Mes documents"
+
+msgid "account.menu.MY_INFO"
+msgstr "Mes informations personnelles"
+
+msgid "account.menu.MY_ID_FILES"
+msgstr "Mes justificatifs d'identit&eacute;"
+
+msgid "account.menu.MY_BANK_INFO"
+msgstr "Mes coordonn&eacute;es bancaires"
+
+msgid "account.menu.MY_AUTHENTICATION"
+msgstr "Mon authentification"
+
+msgid "account.menu.MY_NOTIFICATIONS"
+msgstr "Mes notifications"
+
+msgid "account.menu.organization.WALLET"
+msgstr "Porte-monnaie"
+
+msgid "account.menu.organization.INVESTMENTS"
+msgstr "Investissements"
+
+msgid "account.menu.organization.DOCUMENTS"
+msgstr "Documents"
+
+msgid "account.menu.organization.INFO"
+msgstr "Informations"
+
+msgid "account.menu.organization.ID_FILES"
+msgstr "Justificatifs d'identification"
+
+msgid "account.menu.organization.BANK_INFO"
+msgstr "Coordonn&eacute;es bancaires"
+
+msgid "account.menu.organization.AUTHENTICATION"
+msgstr "Authentification"
+
+msgid "account.menu.LINKED_PROJECTS"
+msgstr "Projets li&eacute;s"
+
+# ############################## PROJECT COMMON ################################
 msgid "definition_royaltiser"
 msgstr "*ROYALTISER, v. intr. XXIe siècle. d'apr. angl. Verser une partie de son chiffre d'affaires à ses merveilleux investisseurs. \"Un projet qui royaltise plus que prévu\""

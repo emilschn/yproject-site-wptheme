@@ -175,6 +175,87 @@ msgstr "There was a problem while creating your user account."
 msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Please check the box to confirm you are not a robot."
 
+# ############################## /mon-compte ################################
+# FR : L'utilisateur que vous essayez d'afficher n'existe pas...
+msgid "account.OVERRIDE_USER_DOESNT_EXIST"
+msgstr "L'utilisateur que vous essayez d'afficher n'existe pas..."
+
+# FR : L'utilisateur que vous essayez d'afficher est une organisation.
+msgid "account.OVERRIDE_USER_IS_ORGANIZATION"
+msgstr "L'utilisateur que vous essayez d'afficher est une organisation."
+
+# FR : L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :
+msgid "account.OVERRIDE_ORGANIZATION_MANAGER_EMAIL"
+msgstr "L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :"
+
+# FR : Bonjour
+msgid "account.HELLO"
+msgstr "Bonjour"
+
+# FR : Mon porte-monnaie
+msgid "account.menu.MY_WALLET"
+msgstr "Mon porte-monnaie"
+
+# FR : Mes investissements
+msgid "account.menu.MY_INVESTMENTS"
+msgstr "Mes investissements"
+
+# FR : Mes documents
+msgid "account.menu.MY_DOCUMENTS"
+msgstr "Mes documents"
+
+# FR : Mes informations personnelles
+msgid "account.menu.MY_INFO"
+msgstr "Mes informations personnelles"
+
+# FR : Mes justificatifs d'identit&eacute;
+msgid "account.menu.MY_ID_FILES"
+msgstr "Mes justificatifs d'identit&eacute;"
+
+# FR : Mes coordonn&eacute;es bancaires
+msgid "account.menu.MY_BANK_INFO"
+msgstr "Mes coordonn&eacute;es bancaires"
+
+# FR : Mon authentification
+msgid "account.menu.MY_AUTHENTICATION"
+msgstr "Mon authentification"
+
+# FR : Mes notifications
+msgid "account.menu.MY_NOTIFICATIONS"
+msgstr "Mes notifications"
+
+# FR : Porte-monnaie
+msgid "account.menu.organization.WALLET"
+msgstr "Porte-monnaie"
+
+# FR : Investissements
+msgid "account.menu.organization.INVESTMENTS"
+msgstr "Investissements"
+
+# FR : Documents
+msgid "account.menu.organization.DOCUMENTS"
+msgstr "Documents"
+
+# FR : Informations
+msgid "account.menu.organization.INFO"
+msgstr "Informations"
+
+# FR : Justificatifs d'identification
+msgid "account.menu.organization.ID_FILES"
+msgstr "Justificatifs d'identification"
+
+# FR : Coordonn&eacute;es bancaire
+msgid "account.menu.organization.BANK_INFO"
+msgstr "Coordonn&eacute;es bancaires"
+
+# FR : Authentifications
+msgid "account.menu.organization.AUTHENTICATION"
+msgstr "Authentification"
+
+# FR : Projets li&eacute;s
+msgid "account.menu.LINKED_PROJECTS"
+msgstr "Projets li&eacute;s"
+
 # ############################## PROJECT COMMON ################################
 # THEME - projects/common/stats-public.php
 msgid "Votes"
