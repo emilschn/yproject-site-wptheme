@@ -330,10 +330,12 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	$saved_mandates_list = $page_controler->get_campaign_organization()->get_lemonway_mandates();
 	$last_mandate_status = '';
 	$last_mandate_id = FALSE;
+	$last_mandate_type = FALSE;
 	if ( !empty( $saved_mandates_list ) ) {
 		$last_mandate = end( $saved_mandates_list );
 		$last_mandate_status = $last_mandate[ "S" ];
 		$last_mandate_id = $last_mandate[ "ID" ];
+		$last_mandate_type = FALSE;
 	}
 	?>
 	<h3><?php _e('Autorisation de pr&eacute;l&egrave;vement', 'yproject'); ?></h3>
@@ -451,7 +453,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<?php endif; ?>
 
 		<?php elseif ( $last_mandate_status == 5 || $last_mandate_status == 6 ): //Si 5 ou 6, afficher que OK ?>
-			<?php _e( "Merci d'avoir signé l'autorisation de pr&eacute;l&egrave;vement automatique.", 'yproject' ); ?>
+			<?php if ( $page_controler->get_campaign_organization()->is_mandate_b2b() ): ?>
+				<?php _e( "Merci d'avoir sign&eacute; l'autorisation de pr&eacute;l&egrave;vement (mandat de type B2B).", 'yproject' ); ?>
+			<?php else: ?>
+				<?php _e( "Merci d'avoir sign&eacute; l'autorisation de pr&eacute;l&egrave;vement (mandat de type Core).", 'yproject' ); ?>
+			<?php endif; ?>
 
 
 			<?php if ( $page_controler->can_access_admin() ): ?>
