@@ -61,7 +61,7 @@ class DashboardUtility {
 		$buffer = FALSE;
 		
         $type = $params[ 'type' ];
-		$override_with_template = array( 'select', 'check', 'text', 'text-money', 'text-percent', 'number', 'date' );
+		$override_with_template = array( 'select', 'check', 'text', 'text-money', 'text-percent', 'number', 'date', 'file' );
 		if ( in_array( $type, $override_with_template ) ) {
 			$editable = ( isset( $params[ 'editable' ] ) ) ? $params[ 'editable' ] : TRUE;
 			$warning = false;

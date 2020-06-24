@@ -455,50 +455,105 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php elseif ( $last_mandate_status == 5 || $last_mandate_status == 6 ): //Si 5 ou 6, afficher que OK ?>
 			<?php if ( $page_controler->get_campaign_organization()->is_mandate_b2b() ): ?>
 				<?php _e( "Merci d'avoir sign&eacute; l'autorisation de pr&eacute;l&egrave;vement (mandat de type B2B).", 'yproject' ); ?>
+
+				<?php if ( $page_controler->get_campaign_organization()->get_mandate_file_url() != '' ): ?>
+					<br>
+					<a href="<?php echo $page_controler->get_campaign_organization()->get_mandate_file_url(); ?>" target="_blank" download="mandat-prelevement.pdf">Télécharger le mandat</a>
+				<?php endif; ?>
+
 			<?php else: ?>
 				<?php _e( "Merci d'avoir sign&eacute; l'autorisation de pr&eacute;l&egrave;vement (mandat de type Core).", 'yproject' ); ?>
 			<?php endif; ?>
 
-
 			<?php if ( $page_controler->can_access_admin() ): ?>
-				<br /><br />
-				<form class="ajax-db-form" data-action="pay_with_mandate">
+				<?php if ( $page_controler->get_campaign_organization()->is_mandate_b2b() ): ?>
+				<br><br>
+				<form class="db-form" action="<?php echo admin_url( 'admin-post.php?action=mandate_b2b_admin_update'); ?>" method="post" enctype="multipart/form-data">
 					<div class="field admin-theme">
-
 						<?php
-						DashboardUtility::create_field(array(
-							'id'			=> 'pay_with_mandate_amount_for_organization',
-							'type'			=> 'text',
-							'label'			=> "Montant vers&eacute; sur le porte-monnaie de l'organisation",
-							'suffix'		=> " &euro;",
+						DashboardUtility::create_field( array(
+							'id'			=> 'mandate_b2b_file',
+							'type'			=> 'file',
+							'label'			=> "Mandat sign&eacute;",
 							"admin_theme"	=> true
-						));
-						?>
-						<br />
-
-						<?php
-						DashboardUtility::create_field(array(
-							'id'			=> 'pay_with_mandate_amount_for_commission',
-							'type'			=> 'text',
-							'label'			=> "Montant vers&eacute; en commission",
-							'suffix'		=> " &euro;",
-							"admin_theme"	=> true
-						));
-						?>
-						<br />
-
-						<?php
+						) );
+						
+						$mandate_b2b_is_approved_by_bank_ids = array( 0, 1 );
+						$mandate_b2b_is_approved_by_bank_names = array( 'Non', 'Oui' );
+						DashboardUtility::create_field( array(
+							'id'			=> 'mandate_b2b_is_approved_by_bank',
+							'type'			=> 'select',
+							'label'			=> "Le mandat a-t-il &eacute;t&eacute; valid&eacute; par la banque",
+							"admin_theme"	=> true,
+							"value"			=> $page_controler->get_campaign_organization()->is_mandate_b2b_approved_by_bank(),
+							"options_id"	=> $mandate_b2b_is_approved_by_bank_ids,
+							"options_names"	=> $mandate_b2b_is_approved_by_bank_names,
+						) );
+						
 						DashboardUtility::create_field( array(
 							'id'			=> 'organization_id',
 							'type'			=> 'hidden',
 							'value'			=> $page_controler->get_campaign_organization()->get_wpref()
 						) );
+						
+						DashboardUtility::create_field( array(
+							'id'			=> 'campaign_id',
+							'type'			=> 'hidden',
+							'value'			=> $page_controler->get_campaign_id()
+						) );
 						?>
 
-						<?php DashboardUtility::create_save_button( "pay_with_mandate" ); ?>
-
+						<?php DashboardUtility::create_save_button( 'mandate_b2b_admin_update' ); ?>
 					</div>
 				</form>
+				<?php endif; ?>
+
+
+				<br><br>
+				<div class="field admin-theme">
+					<strong>Prélever sur le compte bancaire :</strong><br>
+					<?php if ( !$page_controler->get_campaign_organization()->is_mandate_b2b() || $page_controler->get_campaign_organization()->is_mandate_b2b_approved_by_bank() ): ?>
+						<form class="ajax-db-form" data-action="pay_with_mandate">
+							<div class="field admin-theme">
+								<?php
+								DashboardUtility::create_field(array(
+									'id'			=> 'pay_with_mandate_amount_for_organization',
+									'type'			=> 'text',
+									'label'			=> "Montant vers&eacute; sur le porte-monnaie de l'organisation",
+									'suffix'		=> " &euro;",
+									"admin_theme"	=> true
+								));
+								?>
+								<br>
+
+								<?php
+								DashboardUtility::create_field(array(
+									'id'			=> 'pay_with_mandate_amount_for_commission',
+									'type'			=> 'text',
+									'label'			=> "Montant vers&eacute; en commission",
+									'suffix'		=> " &euro;",
+									"admin_theme"	=> true
+								));
+								?>
+								<br>
+
+								<?php
+								DashboardUtility::create_field( array(
+									'id'			=> 'organization_id',
+									'type'			=> 'hidden',
+									'value'			=> $page_controler->get_campaign_organization()->get_wpref()
+								) );
+								?>
+
+								<?php DashboardUtility::create_save_button( "pay_with_mandate" ); ?>
+
+							</div>
+						</form>
+
+					<?php else: ?>
+						Le mandat B2B n'a pas encore été validé par la banque.
+					<?php endif; ?>
+				</div>
 			<?php endif; ?>
 
 
