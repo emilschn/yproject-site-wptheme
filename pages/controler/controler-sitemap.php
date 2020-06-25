@@ -10,6 +10,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
 		$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
 		$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
+		$input_force_clean_sms_lists = filter_input( INPUT_GET, 'clean_sms_lists' );
 		$input_force_daily_notifications = filter_input( INPUT_GET, 'force_daily_notifications' );
 		
 		if ( !empty( $input_queue ) && $input_queue == '1' ) {
@@ -33,6 +34,9 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		} else if ( !empty( $input_force_daily_call ) && $input_force_daily_call == '1' ) {
 			$this->daily_call();
 			
+		} else if ( !empty( $input_force_clean_sms_lists ) && $input_force_clean_sms_lists == '1' ) {
+			$this->clean_sms_lists();
+			
 		} else if ( !empty( $input_force_daily_notifications ) && $input_force_daily_notifications == '1' ) {
 			WDGCronActions::send_notifications();
 			
@@ -52,6 +56,9 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	private function daily_call() {
 		$this->rebuild_sitemap();
 		WDG_Cache_Plugin::initialize_home_stats();
+	}
+
+	private function clean_sms_lists() {
 		// Tous les jours, suppression de listes de SMS qui s'accumulent
 		WDGWPRESTLib::call_get_wdg( 'sms/clean' );
 	}
