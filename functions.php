@@ -226,7 +226,8 @@ function yproject_save_edit_project() {
 	$lang = filter_input( INPUT_POST, 'lang' );
 	
 	$meta_key = $property.'_add_value_reservation_'.$lang;
-	$meta_value = get_post_meta( $campaign_id, $meta_key, TRUE );
+	$meta_value_encoded = get_post_meta( $campaign_id, $meta_key, TRUE );
+	$meta_value = json_decode( $meta_value_encoded );
 	$WDGUser = new WDGUser( $meta_value[ 'user' ] );
 	$name = $WDGUser->get_firstname()." ".$WDGUser->get_lastname();
 	
