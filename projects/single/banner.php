@@ -265,8 +265,8 @@ $campaign_categories_str = $campaign->get_categories_str();
 					<?php if ( $time_remaining_str == '-' ): ?>
 						<?php if ( $campaign->is_investable() ): ?>
 							<div class="end-sentence">
-								<?php $datetime_end = $campaign->get_end_date_when_can_invest_until_contract_start_date(); ?>
-								<?php echo __( "L'investissement est possible jusqu'au d&eacute;marrage du contrat de royalties", 'yproject' ). " (" .$datetime_end->format( 'd/m/Y' ). ")."; ?>
+								<?php $datetime_end_str = $campaign->get_end_date_when_can_invest_until_contract_start_date_as_string(); ?>
+								<?php echo __( "L'investissement est possible jusqu'au d&eacute;marrage du contrat de royalties", 'yproject' ). " (" .$datetime_end_str. ")."; ?>
 							</div>
 							<a href="<?php echo $invest_url_href; ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
 						<?php endif; ?>
