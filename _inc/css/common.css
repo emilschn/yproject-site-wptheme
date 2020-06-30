@@ -1075,66 +1075,84 @@ body.home section.project-stats > div p {
 * HOME - NEWS
 *******************************************************************************/
 body.home section.news {
-	height: 300px;
-	color: #FFFFFF;
-	background: #333333;
-	background: url("../../images/template-home/background-desktop.jpg") no-repeat;
+	height: 194px;
+	color: #333333;
+	background: #FFFFFF;
+	background: url("../../images/template-home/bg-100-projets-finances.jpg") no-repeat;
 	background-position: center top;
 	background-size: cover;
 }
-body.home section.news div.news-content {
-	padding-top: 65px;
-	background: url("../../images/template-home/logo-desktop.png") no-repeat;
-	background-size: 300px;
+body.home section.news div.news-container {
+	max-width: 1280px;
+	margin: auto;
+}
+body.home section.news div.news-pic {
+	float: left;
+	width: 50%;
+	text-align: center;
 }
 body.home section.news div.news-text {
-	width: -webkit-calc(100% - 16px);
-	width: -moz-calc(100% - 16px);
-	width: calc(100% - 16px);
-	width: auto;
-	max-width: 1280px;
-	margin: 0px auto;
+	float: right;
+	width: -webkit-calc(50% - 64px);
+	width: -moz-calc(50% - 64px);
+	width: calc(50% - 64px);
+	padding: 16px 32px;
 	text-align: center;
+}
+body.home section.news div.news-text-bg {
+	background: rgba(255, 255, 255, 0.8);
+	width: -webkit-calc(100% - 32px);
+	width: -moz-calc(100% - 32px);
+	width: calc(100% - 32px);
+	height: 130px;
+	padding: 16px;
+	text-align: right;
 }
 body.home section.news div.news-text span {
 	display: inline-block;
-	margin-bottom: 48px;
-	font-size: 22px;
-}
-body.home section.news div.news-text span:first-child {
+	width: 100%;
 	margin-bottom: 32px;
-	font-size: 25px;
+	font-size: 22px;
+	line-height: 30px;
+	text-align: right;
 }
 body.home section.news div.news-text a {
 	font-size: 18px;
 	padding: 16px 32px;
-	color: #FFFFFF;
-	border-color: #FFFFFF;
+	color: #333333;
+	border-color: #333333;
 }
 
-@media screen and (max-width: 800px) {
-	body.home section.news {
-		background: url("../../images/template-home/background-mobile.jpg") no-repeat;
+@media screen and (max-width: 1000px) {
+	body.home section.news div.news-pic {
+		display: none;
 	}
-	body.home section.news div.news-content {
-		background: url("../../images/template-home/logo-mobile.png") no-repeat;
+	body.home section.news div.news-text {
+		width: -webkit-calc(100% - 64px);
+		width: -moz-calc(100% - 64px);
+		width: calc(100% - 64px);
+		text-align: center;
 	}
-}
-@media screen and (max-width: 600px) {
-	body.home section.news {
-		height: 400px;
-	}
-	body.home section.news div.news-content {
-		padding-top: 120px;
+	body.home section.news div.news-text-bg {
+		text-align: center;
 	}
 	body.home section.news div.news-text span {
-		font-size: 18px;
+		text-align: center;
+		margin-bottom: 56px;
 	}
-	body.home section.news div.news-text span:first-child {
-		font-size: 20px;
+}
+@media screen and (max-width: 700px) {
+	body.home section.news div.news-text span {
+		margin-bottom: 32px;
+	}
+}
+@media screen and (max-width: 450px) {
+	body.home section.news div.news-text span {
+		font-size: 16px;
 	}
 	body.home section.news div.news-text a {
-		font-size: 20px;
+		font-size: 16px;
+		padding: 16px 16px;
 	}
 }
 

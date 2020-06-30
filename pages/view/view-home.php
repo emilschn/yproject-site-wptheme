@@ -80,14 +80,20 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 /******************************************************************************/
 ?>
 <section class="news">
-	<div class="news-content">
+	<div class="news-container">
+		<div class="news-pic">
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/txt-100-projets-finances.png" alt="100 projets financ&eacute;s">
+		</div>
 		<div class="news-text">
-			<span><?php _e( "#confinement", 'yproject' ); ?></span><br>
-			<span><?php _e( "D&eacute;couvrez notre initiative de soutien aux commerces qui vous tiennent &agrave; coeur !", 'yproject' ); ?></span><br>
-			<a class="button transparent" href="http://commercemonamour.fr" target="_blank"><?php _e( "Soutenir mes commerces", 'yproject' ); ?></a>
+			<div class="news-text-bg">
+				<span>
+					<?php _e( "Plus de 100 projets financ&eacute;s en royalties avec&nbsp;WE&nbsp;DO&nbsp;GOOD", 'yproject' ); ?>
+				</span>
+				<a class="button transparent" href="https://blog.wedogood.co/retours-experience-entrepreneurs/100-levees-de-fonds-wedogood/" target="_blank"><?php _e( "D&eacute;couvrir le panorama", 'yproject' ); ?></a>
+			</div>
 		</div>
 	</div>
-</section>		
+</section>
 <?php
 /******************************************************************************/
 // FIN NEWS
@@ -133,8 +139,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
             <div class="button-video"><img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-nb.jpg" alt="Bouton video" /></div>
             <div class="button-video-shadows hidden-inf997">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow2.png" alt="Ombre video 1" />
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow1.png" alt="Ombre video 2" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow2.png" alt="Ombre video 1">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/header-video-button-shadow1.png" alt="Ombre video 2">
             </div>
         </div>
     </div>
