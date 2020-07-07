@@ -444,7 +444,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				$purchase_key = $transaction_result->TRANS->HPAY->ID;
 
 			} else {
-				NotificationsEmails::send_notification_roi_payment_error_admin( $this->current_declaration->id );
+				NotificationsSlack::send_notification_roi_payment_error_admin( $this->current_declaration->id );
 				$purchase_key = 'error';
 
 			}
