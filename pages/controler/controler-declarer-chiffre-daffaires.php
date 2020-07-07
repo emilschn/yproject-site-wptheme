@@ -436,7 +436,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				$this->current_declaration->status = WDGROIDeclaration::$status_transfer;
 				$this->current_declaration->save();
 				$this->start_auto_transfer();
-				NotificationsEmails::send_notification_roi_payment_success_admin( $this->current_declaration->id );
+				NotificationsSlack::send_notification_roi_payment_success_admin( $this->current_declaration->id );
 				NotificationsEmails::send_notification_roi_payment_success_user( $this->current_declaration->id );
 				
 				LemonwayLib::ask_transfer_funds( $WDGOrganization->get_lemonway_id(), $WDGOrganization->get_royalties_lemonway_id(), $this->current_declaration->get_amount_with_adjustment() );
