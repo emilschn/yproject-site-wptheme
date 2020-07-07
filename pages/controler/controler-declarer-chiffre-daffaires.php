@@ -508,7 +508,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					$this->current_declaration->status = WDGROIDeclaration::$status_waiting_transfer;
 					$this->current_declaration->save();
 					
-					NotificationsEmails::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
+					NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
 				}
 			}
 
@@ -524,7 +524,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_wire;
 		$this->current_declaration->save();
 					
-		NotificationsEmails::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
+		NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
 	}
 
 	private function start_auto_transfer() {
