@@ -84,7 +84,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		}
 		
 		$params[ 'funding' ] = array();
-		$project_list_funding_current = ATCF_Campaign::get_list_funding( 0, '', FALSE );
+		$project_list_funding_current = ATCF_Campaign::get_list_funding( -1, '', FALSE );
 		foreach ( $project_list_funding_current as $project_post ) {
 			$campaign = new ATCF_Campaign( $project_post->ID );
 			$investment_results = WDGCampaignInvestments::get_list( $project_post->ID );
@@ -98,7 +98,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'value_not_validated' ] = $investment_results[ 'amount_not_validate_investments' ];
 			array_push( $params[ 'funding' ], $item );
 		}
-		$project_list_funding_notime = ATCF_Campaign::get_list_funding( 0, '', FALSE, FALSE );
+		$project_list_funding_notime = ATCF_Campaign::get_list_funding( -1, '', FALSE, FALSE );
 		foreach ( $project_list_funding_notime as $project_post ) {
 			$campaign = new ATCF_Campaign( $project_post->ID );
 			$investment_results = WDGCampaignInvestments::get_list( $project_post->ID );
