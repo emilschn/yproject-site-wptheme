@@ -1,6 +1,6 @@
 <?php $edd_settings = get_option( 'edd_settings' ); ?>
 
-<h2><?php _e( 'Mon authentification', 'yproject' ); ?></h2>
+<h2><?php _e( 'account.menu.MY_AUTHENTICATION', 'yproject' ); ?></h2>
 
 <?php locate_template( array( 'pages/view/mon-compte/partial-authentication.php' ), true, false ); ?>
 

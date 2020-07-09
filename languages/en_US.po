@@ -178,59 +178,59 @@ msgstr "Please check the box to confirm you are not a robot."
 # ############################## /mon-compte ################################
 # FR : L'utilisateur que vous essayez d'afficher n'existe pas...
 msgid "account.OVERRIDE_USER_DOESNT_EXIST"
-msgstr "L'utilisateur que vous essayez d'afficher n'existe pas..."
+msgstr "The user you're trying to display doesn't exist..."
 
 # FR : L'utilisateur que vous essayez d'afficher est une organisation.
 msgid "account.OVERRIDE_USER_IS_ORGANIZATION"
-msgstr "L'utilisateur que vous essayez d'afficher est une organisation."
+msgstr "The user you're trying to display is an organization."
 
 # FR : L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :
 msgid "account.OVERRIDE_ORGANIZATION_MANAGER_EMAIL"
-msgstr "L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :"
+msgstr "The e-mail address of the physical person managing the account is:"
 
 # FR : Bonjour
 msgid "account.HELLO"
-msgstr "Bonjour"
+msgstr "Hello"
 
 # FR : Mon porte-monnaie
 msgid "account.menu.MY_WALLET"
-msgstr "Mon porte-monnaie"
+msgstr "My wallet"
 
 # FR : Mes investissements
 msgid "account.menu.MY_INVESTMENTS"
-msgstr "Mes investissements"
+msgstr "My investments"
 
 # FR : Mes documents
 msgid "account.menu.MY_DOCUMENTS"
-msgstr "Mes documents"
+msgstr "My documents"
 
 # FR : Mes informations personnelles
 msgid "account.menu.MY_INFO"
-msgstr "Mes informations personnelles"
+msgstr "My personal information"
 
 # FR : Mes justificatifs d'identit&eacute;
 msgid "account.menu.MY_ID_FILES"
-msgstr "Mes justificatifs d'identit&eacute;"
+msgstr "My identification documents"
 
 # FR : Mes coordonn&eacute;es bancaires
 msgid "account.menu.MY_BANK_INFO"
-msgstr "Mes coordonn&eacute;es bancaires"
+msgstr "My bank account"
 
 # FR : Mon authentification
 msgid "account.menu.MY_AUTHENTICATION"
-msgstr "Mon authentification"
+msgstr "My authentication"
 
 # FR : Mes notifications
 msgid "account.menu.MY_NOTIFICATIONS"
-msgstr "Mes notifications"
+msgstr "My notifications"
 
 # FR : Porte-monnaie
 msgid "account.menu.organization.WALLET"
-msgstr "Porte-monnaie"
+msgstr "Wallet"
 
 # FR : Investissements
 msgid "account.menu.organization.INVESTMENTS"
-msgstr "Investissements"
+msgstr "Investments"
 
 # FR : Documents
 msgid "account.menu.organization.DOCUMENTS"
@@ -238,23 +238,91 @@ msgstr "Documents"
 
 # FR : Informations
 msgid "account.menu.organization.INFO"
-msgstr "Informations"
+msgstr "Information"
 
 # FR : Justificatifs d'identification
 msgid "account.menu.organization.ID_FILES"
-msgstr "Justificatifs d'identification"
+msgstr "Identification documents"
 
 # FR : Coordonn&eacute;es bancaire
 msgid "account.menu.organization.BANK_INFO"
-msgstr "Coordonn&eacute;es bancaires"
+msgstr "Bank account"
 
 # FR : Authentifications
 msgid "account.menu.organization.AUTHENTICATION"
-msgstr "Authentification"
+msgstr "Authentication"
 
 # FR : Projets li&eacute;s
 msgid "account.menu.LINKED_PROJECTS"
-msgstr "Projets li&eacute;s"
+msgstr "Linked projects"
+
+# FR : Transfert effectu&eacute;
+msgid "account.transfert.TRANSFERT_COMPLETED"
+msgstr "Transfert completed"
+
+# FR : Ce transfert n'est pas autoris&eacute;.
+msgid "account.transfert.TRANSFERT_NOT_AUTHORIZED"
+msgstr "This transfert is not authorized."
+
+# FR : Votre compte bancaire n'est pas encore valid&eacute;.
+msgid "account.transfert.BANK_ACCOUNT_NOT_VALIDATED"
+msgstr "Your bank account has not been validated yet."
+
+# FR : Montant non-autoris&eacute;
+msgid "account.transfert.AMOUNT_NOT_AUTHORIZED"
+msgstr "Amount not authorized"
+
+# FR : Erreur de montant.
+msgid "account.transfert.AMOUNT_ERROR"
+msgstr "Amount error."
+
+# FR : Votre compte est authentifi&eacute; aupr&egrave;s de notre prestataire de paiement Lemon Way.
+msgid "account.authentication.ACCOUNT_AUTHENTICATED"
+msgstr "Your account has been authentified by our payment provider Lemon Way."
+
+# FR : Merci pour votre confiance.
+msgid "account.authentication.THANK_YOU_FOR_TRUST"
+msgstr "Thank you for your trust."
+
+# FR : Voir mes investissements
+msgid "account.authentication.VIEW_MY_INVESTMENTS"
+msgstr "View my investments"
+
+# FR : Depuis Janvier 2019 et suite &agrave; un renforcement de la l&eacute;gislation contre le blanchiment d'argent, l'authentification sera n&eacute;cessaire aupr&egrave;s de notre prestataire pour tout investissement.
+msgid "account.authentication.AUTHENTICATION_IS_NECESSARY"
+msgstr "Starting on January 2019 and following a legislation enforcement against money laundering, authentication is now necessary at our payment provider for any investment."
+
+# FR : Nous vous invitons ainsi &agrave; renseigner d&egrave;s maintenant les documents permettant de vous authentifier.
+msgid "account.authentication.PROVIDE_DOCUMENTS"
+msgstr "Please provide the documents needed for authentication right away."
+
+# FR : Pour investir sur WEDOGOOD, vous devez &ecirc;tre authentifi&eacute; aupr&egrave;s de notre prestataire de paiement, Lemon Way.
+msgid "account.authentication.PROVIDE_DOCUMENTS_TO_INVEST"
+msgstr "To invest on WE DO GOOD, you need to be authenticated at our payment provider, Lemon Way."
+
+# FR : Merci de saisir vos informations personnelles, puis de nous transmettre vos justificatifs d'identit&eacute;.
+msgid "account.authentication.FILL_IN_PERSONAL_INFO"
+msgstr "Please fill in personal information and send your identification documents."
+
+# FR : Ils seront &eacute;tudi&eacute;s sous 48h par des services de v&eacute;rification automatiques puis par une personne physique en cas d'erreur ou de cas particulier.
+msgid "account.authentication.DOCUMENTS_WILL_BE_PROCESSED"
+msgstr "They will be studied within 48h by automatic services, and then by a physical person if an error or particular case appears."
+
+# FR : Informations personnelles
+msgid "account.authentication.PERSONAL_INFORMATION"
+msgstr "Personal information"
+
+# FR : Editer mes informations
+msgid "account.authentication.EDIT_MY_INFORMATION"
+msgstr "Edit my information"
+
+# FR : Justificatifs d'identit&eacute;
+msgid "account.authentication.IDENTITY_DOCUMENTS"
+msgstr "Identity documents"
+
+# FR : Editer mes justificatifs
+msgid "account.authentication.EDIT_IDENTITY_DOCUMENTS"
+msgstr "Edit my documents"
 
 # ############################## PROJECT COMMON ################################
 # THEME - projects/common/stats-public.php

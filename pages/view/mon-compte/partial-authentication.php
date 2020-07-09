@@ -11,29 +11,29 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 <div class="center">
 	<?php if ( $is_lemonway_registered ): ?>
 		<div class="wdg-message confirm">
-			<?php _e( "Votre compte est authentifi&eacute; aupr&egrave;s de notre prestataire de paiement Lemon Way.", 'yproject' ); ?><br>
-			<?php _e( "Merci pour votre confiance.", 'yproject' ); ?>
+			<?php _e( 'account.authentication.ACCOUNT_AUTHENTICATED', 'yproject' ); ?><br>
+			<?php _e( 'account.authentication.THANK_YOU_FOR_TRUST', 'yproject' ); ?>
 		</div>
 	
 		<p class="align-center">
 			<?php if ( isset( $WDGOrganization ) ): ?>
-				<a href="#orga-investments-<?php echo $WDGOrganization->get_wpref(); ?>" class="button blue go-to-tab" data-tab="orga-investments-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Voir mes investissements", 'yproject' ); ?></a>
+				<a href="#orga-investments-<?php echo $WDGOrganization->get_wpref(); ?>" class="button blue go-to-tab" data-tab="orga-investments-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( 'account.authentication.VIEW_MY_INVESTMENTS', 'yproject' ); ?></a>
 			<?php else: ?>
-				<a href="#investments" class="button blue go-to-tab" data-tab="investments"><?php _e( "Voir mes investissements", 'yproject' ); ?></a>
+				<a href="#investments" class="button blue go-to-tab" data-tab="investments"><?php _e( 'account.authentication.VIEW_MY_INVESTMENTS', 'yproject' ); ?></a>
 			<?php endif; ?>
 		</p>
 
 
 	<?php else: ?>
 		<div class="wdg-message notification">
-			<?php _e( "Depuis Janvier 2019 et suite &agrave; un renforcement de la l&eacute;gislation contre le blanchiment d'argent, l'authentification sera n&eacute;cessaire aupr&egrave;s de notre prestataire pour tout investissement.", 'yproject' ); ?>
-			<?php _e( "Nous vous invitons ainsi &agrave; renseigner d&egrave;s maintenant les documents permettant de vous authentifier.", 'yproject' ); ?>
+			<?php _e( 'account.authentication.AUTHENTICATION_IS_NECESSARY', 'yproject' ); ?>
+			<?php _e( 'account.authentication.PROVIDE_DOCUMENTS', 'yproject' ); ?>
 		</div>
 
 		<div>
-			<?php _e( "Pour investir sur WEDOGOOD, vous devez &ecirc;tre authentifi&eacute; aupr&egrave;s de notre prestataire de paiement, Lemon Way.", 'yproject' ); ?><br>
-			<?php _e( "Merci de saisir vos informations personnelles, puis de nous transmettre vos justificatifs d'identit&eacute;.", 'yproject' ); ?>
-			<?php _e( "Ils seront &eacute;tudi&eacute;s sous 48h par des services de v&eacute;rification automatiques puis par une personne physique en cas d'erreur ou de cas particulier.", 'yproject' ); ?>
+			<?php _e( 'account.authentication.PROVIDE_DOCUMENTS_TO_INVEST', 'yproject' ); ?><br>
+			<?php _e( 'account.authentication.FILL_IN_PERSONAL_INFO', 'yproject' ); ?>
+			<?php _e( 'account.authentication.DOCUMENTS_WILL_BE_PROCESSED', 'yproject' ); ?>
 		</div>
 		
 		<div class="authentication-items">
@@ -41,7 +41,7 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 			<div class="authentication-item <?php if ( !$can_register_lemonway ) { echo 'alert'; } ?>">
 				<div>
 					<div>
-						<?php _e( "Informations personnelles", 'yproject' ); ?>
+						<?php _e( 'account.authentication.PERSONAL_INFORMATION', 'yproject' ); ?>
 					</div>
 
 					<?php if ( $can_register_lemonway ): ?>
@@ -52,16 +52,16 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 				</div>
 				
 				<?php if ( isset( $WDGOrganization ) ): ?>
-					<a href="#orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>" class="button <?php echo ( $can_register_lemonway ) ? 'blue' : 'red'; ?> go-to-tab" data-tab="orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Editer mes informations", 'yproject' ); ?></a>
+					<a href="#orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>" class="button <?php echo ( $can_register_lemonway ) ? 'blue' : 'red'; ?> go-to-tab" data-tab="orga-parameters-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( 'account.authentication.EDIT_MY_INFORMATION', 'yproject' ); ?></a>
 				<?php else: ?>
-					<a href="#parameters" class="button <?php echo ( $can_register_lemonway ) ? 'blue' : 'red'; ?> go-to-tab" data-tab="parameters"><?php _e( "Editer mes informations", 'yproject' ); ?></a>
+					<a href="#parameters" class="button <?php echo ( $can_register_lemonway ) ? 'blue' : 'red'; ?> go-to-tab" data-tab="parameters"><?php _e( 'account.authentication.EDIT_MY_INFORMATION', 'yproject' ); ?></a>
 				<?php endif; ?>
 			</div>
 			
 			<div class="authentication-item <?php if ( !$is_lemonway_registered ) { echo 'alert'; } ?>">
 				<div>
 					<div>
-						<?php _e( "Justificatifs d'identit&eacute;", 'yproject' ); ?>
+						<?php _e( 'account.authentication.IDENTITY_DOCUMENTS', 'yproject' ); ?>
 					</div>
 
 					<?php if ( $is_lemonway_registered ): ?>
@@ -72,9 +72,9 @@ $is_lemonway_registered = ( isset( $WDGOrganization ) ) ? $WDGOrganization->is_r
 				</div>
 				
 				<?php if ( isset( $WDGOrganization ) ): ?>
-					<a href="#orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>" class="button <?php echo ( $is_lemonway_registered ) ? 'blue' : 'red'; ?>  go-to-tab" data-tab="orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Editer mes justificatifs", 'yproject' ); ?></a>
+					<a href="#orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>" class="button <?php echo ( $is_lemonway_registered ) ? 'blue' : 'red'; ?>  go-to-tab" data-tab="orga-identitydocs-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( 'account.authentication.EDIT_IDENTITY_DOCUMENTS', 'yproject' ); ?></a>
 				<?php else: ?>
-					<a href="#identitydocs" class="button <?php echo ( $is_lemonway_registered ) ? 'blue' : 'red'; ?>  go-to-tab" data-tab="identitydocs"><?php _e( "Editer mes justificatifs", 'yproject' ); ?></a>
+					<a href="#identitydocs" class="button <?php echo ( $is_lemonway_registered ) ? 'blue' : 'red'; ?>  go-to-tab" data-tab="identitydocs"><?php _e( 'account.authentication.EDIT_IDENTITY_DOCUMENTS', 'yproject' ); ?></a>
 				<?php endif; ?>
 			</div>
 			
