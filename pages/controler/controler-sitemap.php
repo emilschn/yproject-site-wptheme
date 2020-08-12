@@ -64,6 +64,21 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	}
 	
 	private function summary_call() {
+		$today_date = new DateTime();
+		$today_date->sub( new DateInterval( 'P1D' ) );
+		$args = [
+			'date_query' => [
+				[   
+					'year'  => $today_date->format( 'Y' ),
+					'month' => $today_date->format( 'm' ),
+					'day'   => $today_date->format( 'd' ),
+				],
+			] 
+		];
+		$query = new WP_User_Query( $args );
+		$users = $query->get_results();
+		NotificationsSlack::send_update_summary_user_subscribed( $users );
+
 		$params = array();
 		$params[ 'vote' ] = array();
 		$project_list_vote = ATCF_Campaign::get_list_vote();
