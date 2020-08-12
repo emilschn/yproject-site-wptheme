@@ -535,12 +535,12 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		}
 
 		$content_mail_auto_royalties = '';
-		$content_mail_auto_royalties .= 'Versement pour ' . $this->current_campaign->get_name() . '<br>';
-		$content_mail_auto_royalties .= 'Declaration du ' . $this->current_declaration->get_formatted_date() . '<br>';
-		$content_mail_auto_royalties .= 'Programmé pour maintenant<br>';
-		$content_mail_auto_royalties .= 'Montant avec ajustement : ' . $this->current_declaration->get_amount_with_adjustment() . ' €<br>';
-		$content_mail_auto_royalties .= 'Montant versé aux investisseurs : ' . $total_roi . ' €<br><br>';
-		NotificationsEmails::send_mail( 'administratif@wedogood.co', 'Notif interne - Versement auto à venir', $content_mail_auto_royalties );
+		$content_mail_auto_royalties .= 'Versement pour ' . $this->current_campaign->get_name() . "\n";
+		$content_mail_auto_royalties .= 'Declaration du ' . $this->current_declaration->get_formatted_date() . "\n";
+		$content_mail_auto_royalties .= "Programmé pour maintenant\n";
+		$content_mail_auto_royalties .= 'Montant avec ajustement : ' . $this->current_declaration->get_amount_with_adjustment() . " €\n";
+		$content_mail_auto_royalties .= 'Montant versé aux investisseurs : ' . $total_roi . ' €';
+		NotificationsSlack::send_notification_roi_transfer_to_come( $content_mail_auto_royalties );
 
 		$this->current_declaration->init_rois_and_tax();
 	}
