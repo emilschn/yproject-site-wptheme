@@ -235,6 +235,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 				
 		DashboardUtility::create_field(array(
+			"id"			=> "new_presentation_visible_only_to_investors",
+			"type"			=> "check",
+			"label"			=> __( "Afficher la pr&eacute;sentation uniquement aux investisseurs", 'yproject' ),
+			"description"	=> __( "Si cette option est activ&eacute;e, seuls les investisseurs du projet auront acc&egrave;s &agrave; la partie pr&eacute;sentation de votre page :", 'yproject' ),
+			"value"			=> ( $page_controler->get_campaign()->is_presentation_visible_only_to_investors() != FALSE ),
+			'editable'		=> !$page_controler->get_campaign()->is_remaining_time,
+			'visible'		=> !$page_controler->get_campaign()->is_remaining_time()
+		));
+				
+		DashboardUtility::create_field(array(
 			"id"			=> "new_enable_advice_notifications",
 			"type"			=> "check",
 			"label"			=> __( "Activer les notifications de conseils", 'yproject' ),

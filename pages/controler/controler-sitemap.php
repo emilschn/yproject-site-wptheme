@@ -10,6 +10,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
 		$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
 		$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
+		$input_force_clean_sms_lists = filter_input( INPUT_GET, 'clean_sms_lists' );
 		$input_force_daily_notifications = filter_input( INPUT_GET, 'force_daily_notifications' );
 		
 		if ( !empty( $input_queue ) && $input_queue == '1' ) {
@@ -33,6 +34,9 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		} else if ( !empty( $input_force_daily_call ) && $input_force_daily_call == '1' ) {
 			$this->daily_call();
 			
+		} else if ( !empty( $input_force_clean_sms_lists ) && $input_force_clean_sms_lists == '1' ) {
+			$this->clean_sms_lists();
+			
 		} else if ( !empty( $input_force_daily_notifications ) && $input_force_daily_notifications == '1' ) {
 			WDGCronActions::send_notifications();
 			
@@ -52,11 +56,29 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	private function daily_call() {
 		$this->rebuild_sitemap();
 		WDG_Cache_Plugin::initialize_home_stats();
+	}
+
+	private function clean_sms_lists() {
 		// Tous les jours, suppression de listes de SMS qui s'accumulent
 		WDGWPRESTLib::call_get_wdg( 'sms/clean' );
 	}
 	
 	private function summary_call() {
+		$today_date = new DateTime();
+		$today_date->sub( new DateInterval( 'P1D' ) );
+		$args = [
+			'date_query' => [
+				[   
+					'year'  => $today_date->format( 'Y' ),
+					'month' => $today_date->format( 'm' ),
+					'day'   => $today_date->format( 'd' ),
+				],
+			] 
+		];
+		$query = new WP_User_Query( $args );
+		$users = $query->get_results();
+		NotificationsSlack::send_update_summary_user_subscribed( $users );
+
 		$params = array();
 		$params[ 'vote' ] = array();
 		$project_list_vote = ATCF_Campaign::get_list_vote();
@@ -77,7 +99,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		}
 		
 		$params[ 'funding' ] = array();
-		$project_list_funding_current = ATCF_Campaign::get_list_funding( 0, '', FALSE );
+		$project_list_funding_current = ATCF_Campaign::get_list_funding( -1, '', FALSE );
 		foreach ( $project_list_funding_current as $project_post ) {
 			$campaign = new ATCF_Campaign( $project_post->ID );
 			$investment_results = WDGCampaignInvestments::get_list( $project_post->ID );
@@ -91,7 +113,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$item[ 'value_not_validated' ] = $investment_results[ 'amount_not_validate_investments' ];
 			array_push( $params[ 'funding' ], $item );
 		}
-		$project_list_funding_notime = ATCF_Campaign::get_list_funding( 0, '', FALSE, FALSE );
+		$project_list_funding_notime = ATCF_Campaign::get_list_funding( -1, '', FALSE, FALSE );
 		foreach ( $project_list_funding_notime as $project_post ) {
 			$campaign = new ATCF_Campaign( $project_post->ID );
 			$investment_results = WDGCampaignInvestments::get_list( $project_post->ID );

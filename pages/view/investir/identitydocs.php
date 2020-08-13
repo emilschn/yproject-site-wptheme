@@ -71,10 +71,10 @@ $form_errors = $page_controler->get_form_errors();
 			<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
 		</p>
 
-		<?php foreach ( $fields_phone_notification as $field ): ?>
+		<?php if ( $fields_phone_notification ): foreach ( $fields_phone_notification as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
-		<?php endforeach; ?>
+		<?php endforeach; endif; ?>
 		<div class="align-left phone-info">
 			<?php _e( "Ce SMS sera envoy&eacute; uniquement lorsque tous les documents sont valid&eacute;s, ou en cas de documents incomplets ou refus&eacute;s.", 'yproject' ); ?>
 		</div>

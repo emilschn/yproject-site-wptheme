@@ -437,7 +437,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 			<?php endif; ?>
 		</ul>
 
-		<div class="list-button">
+		<div class="list-button align-center">
 			<?php if ($status == ATCF_Campaign::$campaign_status_preparing): ?>
 				<?php if ( $page_controler->can_access_admin() ): ?>
 				<?php DashboardUtility::get_admin_infobutton( TRUE ); ?>
