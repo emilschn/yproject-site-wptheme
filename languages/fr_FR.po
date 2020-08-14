@@ -34,8 +34,17 @@ msgstr "Nom de famille"
 msgid "common.SAVE"
 msgstr "Enregistrer"
 
+msgid "common.SAVE_MODIFICATION"
+msgstr "Enregistrer les modifications"
+
 msgid "common.CANCEL"
 msgstr "Annuler"
+
+msgid "common.INVEST"
+msgstr "Investir"
+
+msgid "common.PREINVEST"
+msgstr "Pr&eacute;-investir"
 
 msgid "common.PREVIEW"
 msgstr "Aper&ccedil;u"
@@ -222,6 +231,12 @@ msgstr "Authentification"
 msgid "account.menu.LINKED_PROJECTS"
 msgstr "Projets li&eacute;s"
 
+msgid "account.common.INFORMATION_BELOW_PERSONAL_ACCOUNT"
+msgstr "Les informations ci-dessous sont celles de votre compte personnel."
+
+msgid "account.common.IF_INVESTMENT_ORGA"
+msgstr "Si vous avez investi avec votre entreprise, vous retrouverez les informations respectives dans la partie Organisation, dans le menu de votre compte."
+
 msgid "account.transfert.TRANSFERT_COMPLETED"
 msgstr "Transfert effectu&eacute;"
 
@@ -339,12 +354,6 @@ msgstr "RIB en attente de validation"
 msgid "account.documents.DOCUMENTS_OF"
 msgstr "Documents de"
 
-msgid "account.documents.INFORMATION_BELOW_PERSONAL_ACCOUNT"
-msgstr "Les informations ci-dessous sont celles de votre compte personnel."
-
-msgid "account.documents.IF_INVESTMENT_ORGA"
-msgstr "Si vous avez investi avec votre entreprise, vous retrouverez les informations respectives dans la partie Organisation, dans le menu de votre compte."
-
 msgid "account.documents.MY_YEARLY_TRANSACTIONS_CERTIFICATES"
 msgstr "Mes attestations de transactions annuelles"
 
@@ -405,6 +414,48 @@ msgstr "Ce SMS sera envoy&eacute; uniquement lorsque tous les documents sont val
 msgid "account.identitydocs.SEND_DOCUMENTS"
 msgstr "Envoyer les documents"
 
+msgid "account.investments.INVESTMENTS_OF"
+msgstr "Investissements de"
+
+msgid "account.investments.INVESTMENTS_VALIDATED"
+msgstr "investissements valid&eacute;s"
+
+msgid "account.investments.INVESTMENTS_PENDING"
+msgstr "en attente"
+
+msgid "account.investments.PROJECTS_FUNDED"
+msgstr "projets financ&eacute;s"
+
+msgid "account.investments.INVESTED"
+msgstr "investis"
+
+msgid "account.investments.ROYALTIES_RECEIVED"
+msgstr "royalties re&ccedil;ues"
+
+msgid "account.investments.INVESTMENTS_TO_CONCLUDE"
+msgstr "Mes intentions d'investissement &agrave; concr&eacute;tiser"
+
+msgid "account.investments.STATUS_INVESTMENT"
+msgstr "en investissement"
+
+msgid "account.investments.STATUS_VOTE"
+msgstr "en &eacute;valuation"
+
+msgid "account.parameters.SAVE_PARAMETERS"
+msgstr "Enregistrez vos informations"
+
+msgid "account.parameters.PASSWORD_MODIFICATION"
+msgstr "Modification de mot de passe"
+
+msgid "account.parameters.UNLINK_FACEBOOK"
+msgstr "D&eacute;lier mon compte Facebook"
+
+msgid "account.parameters.UNLINK_FACEBOOK_APPLY_PASSWORD"
+msgstr "D&eacute;lier mon compte Facebook et appliquer ce mot de passe"
+
+msgid "account.parameters.SOME_ERRORS"
+msgstr "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :"
+
 # ############################## form - user-bank ################################
 msgid "form.user-bank.NAME_ACCOUNT_OWNER"
 msgstr "Nom du propri&eacute;taire du compte"
@@ -429,6 +480,49 @@ msgstr "BIC"
 
 msgid "form.user-bank.RIB"
 msgstr "RIB"
+
+# ############################## form - user-details ################################
+msgid "form.user-details.EMAIL"
+msgstr "E-mail"
+
+msgid "form.user-details.FIRSTNAME"
+msgstr "Pr&eacute;nom"
+
+msgid "form.user-details.LASTNAME"
+msgstr "Nom"
+
+msgid "form.user-details.USENAME"
+msgstr "Nom d'usage"
+
+msgid "form.user-details.WISH_RECEIVE_NEWSLETTER"
+msgstr "Je souhaite recevoir la newsletter WE DO GOOD mensuelle"
+
+msgid "form.user-details.YOU_ARE"
+msgstr "Vous &ecirc;tes"
+
+msgid "form.user-details.A_WOMAN"
+msgstr "une femme"
+
+msgid "form.user-details.A_MAN"
+msgstr "un homme"
+
+msgid "form.user-details.BIRTH_DATE"
+msgstr "Date de naissance"
+
+msgid "form.user-details.BIRTH_PLACE"
+msgstr "Ville de naissance"
+
+msgid "form.user-details.BIRTH_PLACE_DISTRICT"
+msgstr "Arrondissement dans la ville de naissance"
+
+msgid "form.user-details.BIRTH_PLACE_DISTRICT_DESCRIPTION"
+msgstr "Uniquement si la naissance a eu lieu &agrave; Paris, Marseille ou Lyon"
+
+msgid "form.user-details.BIRTH_PLACE_COUNTY"
+msgstr "D&eacute;partement de naissance"
+
+msgid "form.user-details.BIRTH_PLACE_COUNTY_DESCRIPTION"
+msgstr "Uniquement si la naissance a eu lieu en France"
 
 # ############################## form - user-identitydocs ################################
 msgid "form.user-identitydocs.ID_OF_PRESIDENT"
@@ -526,6 +620,28 @@ msgstr "&Ecirc;tre averti par SMS de l'&eacute;tat de mon authentification"
 
 msgid "form.user-identitydocs.PHONE_NUMBER"
 msgstr "Le SMS sera envoy&eacute; au num&eacute;ro suivant :"
+
+# ############################## form - user-password ################################
+msgid "form.user-password.PASSWORD_CURRENT"
+msgstr "Mot de passe actuel"
+
+msgid "form.user-password.PASSWORD_NEW"
+msgstr "Nouveau mot de passe"
+
+msgid "form.user-password.PASSWORD_NEW_CONFIRM"
+msgstr "Confirmer le nouveau mot de passe"
+
+msgid "form.user-password.error.PASSWORD_EMPTY"
+msgstr "Le nouveau mot de passe ne peut pas &ecirc;tre vide."
+
+msgid "form.user-password.error.PASSWORD_DOESNT_MATCH"
+msgstr "Le mot de passe de confirmation ne correspond pas au nouveau mot de passe."
+
+msgid "form.user-password.error.PASSWORD_CURRENT_WRONG"
+msgstr "Votre mot de passe actuel ne correspond pas."
+
+msgid "form.user-password.PASSWORD_MODIFIED"
+msgstr "Votre mot de passe a &eacute;t&eacute; modifi&eacute; avec succ&egrave;s."
 
 # ############################## /lemonway-document ################################
 msgid "lemonway.document.CONTACT"

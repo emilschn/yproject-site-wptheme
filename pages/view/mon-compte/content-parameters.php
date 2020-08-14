@@ -22,7 +22,7 @@
 ?>
 
 
-<h2><?php _e( "Enregistrez vos informations", 'yproject' ); ?></h2>
+<h2><?php _e( 'account.parameters.SAVE_PARAMETERS', 'yproject' ); ?></h2>
 
 
 <?php 
@@ -36,7 +36,7 @@
 
 <?php if ( $WDGUserPasswordForm ): ?>
 	<form method="post" class="db-form form-register v3 full" enctype="multipart/form-data">
-		<h2><?php _e( "Modification de mot de passe", 'yproject' ); ?></h2>
+		<h2><?php _e( 'account.parameters.PASSWORD_MODIFICATION', 'yproject' ); ?></h2>
 
 		<?php foreach ( $fields_password_hidden as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
@@ -49,13 +49,13 @@
 		<?php endforeach; ?>
 
 		<div id="user-details-form-buttons">
-			<button type="submit" class="button save red"><?php _e( "Enregistrer les modifications", 'yproject' ); ?></button>
+			<button type="submit" class="button save red"><?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?></button>
 		</div>
 	</form>
 
 <?php else: ?>
 	<form method="post" class="db-form form-register v3 full" enctype="multipart/form-data">
-		<h2><?php _e( "D&eacute;lier mon compte Facebook", 'yproject' ); ?></h2>
+		<h2><?php _e( 'account.parameters.UNLINK_FACEBOOK', 'yproject' ); ?></h2>
 
 		<?php foreach ( $fields_unlink_facebook_hidden as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
@@ -68,7 +68,7 @@
 		<?php endforeach; ?>
 
 		<div id="user-details-form-buttons">
-			<button type="submit" class="button save red"><?php _e( "D&eacute;lier mon compte Facebook et appliquer ce mot de passe", 'yproject' ); ?></button>
+			<button type="submit" class="button save red"><?php _e( 'account.parameters.UNLINK_FACEBOOK_APPLY_PASSWORD', 'yproject' ); ?></button>
 		</div>
 	</form>
 
@@ -83,7 +83,7 @@
 	<div class="field admin-theme">
 		<form method="post" class="db-form form-register v3 full" enctype="multipart/form-data">
 			<?php echo $WDGUserDeleteForm->getNonce(); ?>
-			<h2><?php _e( "Supprimer ce compte utilisateur ", 'yproject' ); ?></h2>
+			<h2>Supprimer ce compte utilisateur</h2>
 			Vous êtes : <?php echo $WDGUser_current->get_email(); ?><br>
 			et vous pouvez supprimer le compte de : <?php echo $WDGUser_override->get_email(); ?><br>
 			<br>
@@ -93,7 +93,7 @@
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 			<?php endforeach; ?>
 			<div id="user-details-form-buttons">
-				<button type="submit" class="button save red"><?php _e( "Supprimer ce compte utilisateur", 'yproject' ); ?></button>
+				<button type="submit" class="button save red">Supprimer ce compte utilisateur</button>
 			</div>
 		</form>
 	</div>

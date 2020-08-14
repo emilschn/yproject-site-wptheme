@@ -41,9 +41,21 @@ msgstr "Last name"
 msgid "common.SAVE"
 msgstr "Save"
 
+# FR : Enregistrer les modifications
+msgid "common.SAVE_MODIFICATION"
+msgstr "Enregistrer les modifications"
+
 # FR : Annuler
 msgid "common.CANCEL"
 msgstr "Cancel"
+
+# FR : Investir
+msgid "common.INVEST"
+msgstr "Investir"
+
+# FR : Pr&eacute;-investir
+msgid "common.PREINVEST"
+msgstr "Pr&eacute;-investir"
 
 # FR : Aper&ccedil;u
 msgid "common.PREVIEW"
@@ -56,6 +68,26 @@ msgstr "Other"
 # FR : Aucune
 msgid "common.NONE.F"
 msgstr "None"
+
+# FR : Enregistrez vos informations
+msgid "account.parameters.SAVE_PARAMETERS"
+msgstr "Enregistrez vos informations"
+
+# FR : Modification de mot de passe
+msgid "account.parameters.PASSWORD_MODIFICATION"
+msgstr "Modification de mot de passe"
+
+# FR : D&eacute;lier mon compte Facebook
+msgid "account.parameters.UNLINK_FACEBOOK"
+msgstr "D&eacute;lier mon compte Facebook"
+
+# FR : D&eacute;lier mon compte Facebook et appliquer ce mot de passe
+msgid "account.parameters.UNLINK_FACEBOOK_APPLY_PASSWORD"
+msgstr "D&eacute;lier mon compte Facebook et appliquer ce mot de passe"
+
+# FR : Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :
+msgid "account.parameters.SOME_ERRORS"
+msgstr "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :"
 
 # ############################## COMMON - FORMS - ERROR ################################
 # FR : Ce fichier n'est pas au bon format.
@@ -285,6 +317,14 @@ msgstr "Authentication"
 msgid "account.menu.LINKED_PROJECTS"
 msgstr "Linked projects"
 
+# FR : Les informations ci-dessous sont celles de votre compte personnel.
+msgid "account.common.INFORMATION_BELOW_PERSONAL_ACCOUNT"
+msgstr "The information below concerns your personal account."
+
+# FR : Si vous avez investi avec votre entreprise, vous retrouverez les informations respectives dans la partie Organisation, dans le menu de votre compte.
+msgid "account.common.IF_INVESTMENT_ORGA"
+msgstr "If you invested on behalf of your company, you will find information regarding your organization in your account menu."
+
 # FR : Transfert effectu&eacute;
 msgid "account.transfert.TRANSFERT_COMPLETED"
 msgstr "Transfert completed"
@@ -441,14 +481,6 @@ msgstr "Bank details RIB awaiting validation"
 msgid "account.documents.DOCUMENTS_OF"
 msgstr "Documents of"
 
-# FR : Les informations ci-dessous sont celles de votre compte personnel.
-msgid "account.documents.INFORMATION_BELOW_PERSONAL_ACCOUNT"
-msgstr "The information below concerns your personal account."
-
-# FR : Si vous avez investi avec votre entreprise, vous retrouverez les informations respectives dans la partie Organisation, dans le menu de votre compte.
-msgid "account.documents.IF_INVESTMENT_ORGA"
-msgstr "If you invested on behalf of your company, you will find information regarding your organization in your account menu."
-
 # FR : Mes attestations de transactions annuelles
 msgid "account.documents.MY_YEARLY_TRANSACTIONS_CERTIFICATES"
 msgstr "My yearly transactions certificates"
@@ -529,6 +561,42 @@ msgstr "Ce SMS sera envoy&eacute; uniquement lorsque tous les documents sont val
 msgid "account.identitydocs.SEND_DOCUMENTS"
 msgstr "Envoyer les documents"
 
+# FR : Investissements de
+msgid "account.investments.INVESTMENTS_OF"
+msgstr "Investissements de"
+
+# FR : investissements valid&eacute;s
+msgid "account.investments.INVESTMENTS_VALIDATED"
+msgstr "investissements valid&eacute;s"
+
+# FR : en attente
+msgid "account.investments.INVESTMENTS_PENDING"
+msgstr "en attente"
+
+# FR : projets financ&eacute;s
+msgid "account.investments.PROJECTS_FUNDED"
+msgstr "projets financ&eacute;s"
+
+# FR : investis
+msgid "account.investments.INVESTED"
+msgstr "investis"
+
+# FR : royalties re&ccedil;ues
+msgid "account.investments.ROYALTIES_RECEIVED"
+msgstr "royalties re&ccedil;ues"
+
+# FR : Mes intentions d'investissement &agrave; concr&eacute;tiser
+msgid "account.investments.INVESTMENTS_TO_CONCLUDE"
+msgstr "Mes intentions d'investissement &agrave; concr&eacute;tiser"
+
+# FR : en investissement
+msgid "account.investments.STATUS_INVESTMENT"
+msgstr "en investissement"
+
+# FR : en &eacute;valuation
+msgid "account.investments.STATUS_VOTE"
+msgstr "en &eacute;valuation"
+
 # ############################## form - user-bank ################################
 # FR : Nom du propri&eacute;taire du compte
 msgid "form.user-bank.NAME_ACCOUNT_OWNER"
@@ -561,6 +629,63 @@ msgstr "BIC"
 # FR : RIB
 msgid "form.user-bank.RIB"
 msgstr "RIB"
+
+# ############################## form - user-details ################################
+# FR : E-mail
+msgid "form.user-details.EMAIL"
+msgstr "E-mail"
+
+# FR : Pr&eacute;nom
+msgid "form.user-details.FIRSTNAME"
+msgstr "First name"
+
+# FR : Nom
+msgid "form.user-details.LASTNAME"
+msgstr "Last name"
+
+# FR : Nom d'usage
+msgid "form.user-details.USENAME"
+msgstr "Nom d'usage"
+
+# FR : Je souhaite recevoir la newsletter WE DO GOOD mensuelle
+msgid "form.user-details.WISH_RECEIVE_NEWSLETTER"
+msgstr "I wish to receive the monthly newsletter"
+
+# FR : Vous &ecirc;tes
+msgid "form.user-details.YOU_ARE"
+msgstr "You are"
+
+# FR : une femme
+msgid "form.user-details.A_WOMAN"
+msgstr "a woman"
+
+# FR : un homme
+msgid "form.user-details.A_MAN"
+msgstr "a man"
+
+# FR : Date de naissance
+msgid "form.user-details.BIRTH_DATE"
+msgstr "Date de naissance"
+
+# FR : Ville de naissance
+msgid "form.user-details.BIRTH_PLACE"
+msgstr "Ville de naissance"
+
+# FR : Arrondissement dans la ville de naissance
+msgid "form.user-details.BIRTH_PLACE_DISTRICT"
+msgstr "Arrondissement dans la ville de naissance"
+
+# FR : Uniquement si la naissance a eu lieu &agrave; Paris, Marseille ou Lyon
+msgid "form.user-details.BIRTH_PLACE_DISTRICT_DESCRIPTION"
+msgstr "Only if you are born in Paris, Marseille or Lyon"
+
+# FR : D&eacute;partement de naissance
+msgid "form.user-details.BIRTH_PLACE_COUNTY"
+msgstr "French birthplace county"
+
+# FR : Uniquement si la naissance a eu lieu en France
+msgid "form.user-details.BIRTH_PLACE_COUNTY_DESCRIPTION"
+msgstr "Only for people born in France"
 
 # ############################## form - user-identitydocs ################################
 # FR : Justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident
@@ -686,6 +811,35 @@ msgstr "Il doit dater de moins de 3 mois, et provenir d'un fournisseur d'&eacute
 # FR : Le SMS sera envoy&eacute; au num&eacute;ro suivant :
 msgid "form.user-identitydocs.PHONE_NUMBER"
 msgstr "Le SMS sera envoy&eacute; au num&eacute;ro suivant :"
+
+# ############################## form - user-password ################################
+# FR : Mot de passe actuel
+msgid "form.user-password.PASSWORD_CURRENT"
+msgstr "Mot de passe actuel"
+
+# FR : Nouveau mot de passe
+msgid "form.user-password.PASSWORD_NEW"
+msgstr "Nouveau mot de passe"
+
+# FR : Confirmer le nouveau mot de passe
+msgid "form.user-password.PASSWORD_NEW_CONFIRM"
+msgstr "Confirmer le nouveau mot de passe"
+
+# FR : Le nouveau mot de passe ne peut pas &ecirc;tre vide.
+msgid "form.user-password.error.PASSWORD_EMPTY"
+msgstr "Le nouveau mot de passe ne peut pas &ecirc;tre vide."
+
+# FR : Le mot de passe de confirmation ne correspond pas au nouveau mot de passe.
+msgid "form.user-password.error.PASSWORD_DOESNT_MATCH"
+msgstr "Le mot de passe de confirmation ne correspond pas au nouveau mot de passe."
+
+# FR : Votre mot de passe actuel ne correspond pas.
+msgid "form.user-password.error.PASSWORD_CURRENT_WRONG"
+msgstr "Votre mot de passe actuel ne correspond pas."
+
+# FR : Votre mot de passe a &eacute;t&eacute; modifi&eacute; avec succ&egrave;s.
+msgid "form.user-password.PASSWORD_MODIFIED"
+msgstr "Votre mot de passe a &eacute;t&eacute; modifi&eacute; avec succ&egrave;s."
 
 # ############################## /lemonway-document ################################
 # FR : Merci de nous contacter par chat ou par mail sur investir@wedogood.co.
