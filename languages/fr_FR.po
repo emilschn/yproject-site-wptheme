@@ -31,6 +31,19 @@ msgstr "Pr&eacute;nom"
 msgid "common.LAST_NAME"
 msgstr "Nom de famille"
 
+msgid "common.SAVE"
+msgstr "Enregistrer"
+
+msgid "common.PREVIEW"
+msgstr "Aper&ccedil;u"
+
+msgid "common.OTHER"
+msgstr "Autre"
+
+# ############################## ACCUEIL ################################
+msgid "definition_royaltiser"
+msgstr "*ROYALTISER, v. intr. XXIe siècle. d'apr. angl. Verser une partie de son chiffre d'affaires à ses merveilleux investisseurs. \"Un projet qui royaltise plus que prévu\""
+
 # ############################## /connexion ################################
 msgid "login.INTRO"
 msgstr "Connexion sur WE DO GOOD"
@@ -247,6 +260,138 @@ msgstr "Justificatifs d'identit&eacute;"
 msgid "account.authentication.EDIT_IDENTITY_DOCUMENTS"
 msgstr "Editer mes justificatifs"
 
-# ############################## PROJECT COMMON ################################
-msgid "definition_royaltiser"
-msgstr "*ROYALTISER, v. intr. XXIe siècle. d'apr. angl. Verser une partie de son chiffre d'affaires à ses merveilleux investisseurs. \"Un projet qui royaltise plus que prévu\""
+msgid "account.bank.MY_BANK_CARD"
+msgstr "Ma carte bancaire"
+
+msgid "account.bank.YOUR_BANK_CARD_INFO_ON_LEMON_WAY"
+msgstr "Les informations de vos cartes bancaires sont stock&eacute;es par Lemon Way, prestataire de service de paiement agr&eacute;&eacute;."
+
+msgid "account.bank.WEDOGOOD_KEEPS_EXPIRATION_DATE"
+msgstr "WE DO GOOD ne stocke que la date d'expiration afin de vous pr&eacute;venir quand la date approche."
+
+msgid "account.bank.MY_REGISTERED_BANK_CARDS"
+msgstr "Mes cartes bancaires enregistr&eacute;es"
+
+msgid "account.bank.BANK_CARD"
+msgstr "Carte bancaire"
+
+msgid "account.bank.REMOVE_CARD"
+msgstr "Supprimer"
+
+msgid "account.bank.MY_BANK_DETAILS"
+msgstr "Mon relev&eacute; d'identit&eacute; bancaire"
+
+msgid "account.bank.PROVIDE_PERSONAL_INFORMATION"
+msgstr "Pensez &agrave; renseigner vos informations personnelles pour que notre prestataire puisse valider votre RIB."
+
+msgid "account.bank.BANK_DETAILS_TO_BE_CHECKED"
+msgstr "Afin de lutter contre la fraude et le blanchiment d'argent, il est n&eacute;cessaire que votre RIB soit contr&ocirc;l&eacute; par notre prestataire de paiement."
+
+msgid "account.bank.BANK_DETAILS_WITH_YOUR_NAME"
+msgstr "Le compte bancaire qui vous permettra de r&eacute;cup&eacute;rer l'argent doit &ecirc;tre &agrave; votre nom."
+
+msgid "account.bank.ONLINE_BANK_ACCOUNT_AUTHENTICATION"
+msgstr "Si votre compte bancaire est un compte en ligne (Ex : Compte Nickel), notre prestataire vous demandera une deuxi&egrave;me pi&egrave;ce d'identit&eacute; pour le valider. Il sera &agrave; transmettre dans l'onglet Mes justificatifs d'identit&eacute;."
+
+msgid "account.bank.VALIDATED_BANK_DETAILS"
+msgstr "Coordonn&eacute;es bancaires valid&eacute;es"
+
+msgid "account.bank.VALIDATED_BANK_DETAILS_ARE"
+msgstr "Le RIB valid&eacute; est le suivant :"
+
+msgid "account.bank.BANK_ACCOUNT_OWNER"
+msgstr "Propri&eacute;taire du compte :"
+
+msgid "account.bank.IBAN"
+msgstr "IBAN :"
+
+msgid "account.bank.BIC"
+msgstr "BIC :"
+
+msgid "account.bank.MODIFY_BANK_DETAILS"
+msgstr "Modifier mon RIB"
+
+msgid "account.bank.BANK_DETAILS_AWAITING_VALIDATION"
+msgstr "Coordonn&eacute;es bancaires en attente de validation"
+
+msgid "account.bank.BANK_DETAILS_DISABLED"
+msgstr "Coordonn&eacute;es bancaires d&eacute;sactiv&eacute;es"
+
+msgid "account.bank.BANK_DETAILS_REJECTED"
+msgstr "Coordonn&eacute;es bancaires refus&eacute;es"
+
+msgid "account.bank.BANK_DETAILS_RIB_AWAITING_VALIDATION"
+msgstr "RIB en attente de validation"
+
+# ############################## /lemonway-document ################################
+msgid "lemonway.document.CONTACT"
+msgstr "Merci de nous contacter par chat ou par mail sur investir@wedogood.co."
+
+msgid "lemonway.document.MISSING_INFO"
+msgstr "Il manque des informations pour permettre la validation."
+
+msgid "lemonway.document.DOCUMENT_RECEIVED_NOT_ANALYZED"
+msgstr "Le document est re&ccedil;u mais pas encore analys&eacute;."
+
+msgid "lemonway.document.DOCUMENT_REJECTED"
+msgstr "Le document a &eacute;t&eacute; refus&eacute; par notre prestataire."
+
+msgid "lemonway.document.DOCUMENT_REJECTED_ILLEGIBLE"
+msgstr "Le document a &eacute;t&eacute; refus&eacute; par notre prestataire qui l'a jug&eacute; illisible."
+
+msgid "lemonway.document.DOCUMENT_REJECTED_EXPIRED"
+msgstr "Le document a &eacute;t&eacute; refus&eacute; par notre prestataire car le document a expir&eacute;."
+
+msgid "lemonway.document.DOCUMENT_REJECTED_WRONG"
+msgstr "Le document a &eacute;t&eacute; refus&eacute; par notre prestataire car ce n'est pas le bon document."
+
+msgid "lemonway.document.DOCUMENT_REJECTED_WRONG_OWNER"
+msgstr "Le document a &eacute;t&eacute; refus&eacute; par notre prestataire car il ne correspond pas au propri&eacute;taire du porte-monnaie."
+
+msgid "lemonway.document.ADDITIONAL_COMMENT"
+msgstr "Commentaire compl&eacute;mentaire de Lemon Way :"
+
+msgid "lemonway.document.type.ID"
+msgstr "Pi&egrave;ce d'identit&eacute;"
+
+msgid "lemonway.document.type.PROOF_ADDRESS"
+msgstr "Justificatif de domicile"
+
+msgid "lemonway.document.type.RIB"
+msgstr "RIB"
+
+msgid "lemonway.document.type.PASSPORT"
+msgstr "Passeport"
+
+msgid "lemonway.document.type.RESIDENCY_PERMIT"
+msgstr "Permis de r&eacute;sidence"
+
+msgid "lemonway.document.type.KBIS"
+msgstr "KBIS"
+
+msgid "lemonway.document.status.WAITING"
+msgstr "En attente de v&eacute;rification"
+
+msgid "lemonway.document.status.PENDING"
+msgstr "En attente"
+
+msgid "lemonway.document.status.ACCEPTED"
+msgstr "Accept&eacute;"
+
+msgid "lemonway.document.status.REJECTED"
+msgstr "Refus&eacute;"
+
+msgid "lemonway.document.status.ILLEGIBLE"
+msgstr "Illisible"
+
+msgid "lemonway.document.status.EXPIRED"
+msgstr "Expir&eacute;"
+
+msgid "lemonway.document.status.WRONG_TYPE"
+msgstr "Mauvais type"
+
+msgid "lemonway.document.status.WRONG_OWNER"
+msgstr "Mauvaise personne"
+
+msgid "lemonway.document.details_MAIN_ID"
+msgstr "La pièce d'identité principale"

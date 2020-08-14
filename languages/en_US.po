@@ -37,6 +37,18 @@ msgstr "First name"
 msgid "common.LAST_NAME"
 msgstr "Last name"
 
+# FR : Enregistrer
+msgid "common.SAVE"
+msgstr "Save"
+
+# FR : Aper&ccedil;u
+msgid "common.PREVIEW"
+msgstr "Preview"
+
+# FR : Aper&ccedil;u
+msgid "common.OTHER"
+msgstr "Other"
+
 # ############################## /connexion ################################
 # FR : Connexion sur WE DO GOOD
 msgid "login.INTRO"
@@ -323,6 +335,187 @@ msgstr "Identity documents"
 # FR : Editer mes justificatifs
 msgid "account.authentication.EDIT_IDENTITY_DOCUMENTS"
 msgstr "Edit my documents"
+
+# FR : Ma carte bancaire
+msgid "account.bank.MY_BANK_CARD"
+msgstr "Ma bank card"
+
+# FR : Les informations de vos cartes bancaires sont stock&eacute;es par Lemon Way, prestataire de service de paiement agr&eacute;&eacute;.
+msgid "account.bank.YOUR_BANK_CARD_INFO_ON_LEMON_WAY"
+msgstr "Your bank card information are registered on Lemon Way, approved payment provider."
+
+# FR : WE DO GOOD ne stocke que la date d'expiration afin de vous pr&eacute;venir quand la date approche.
+msgid "account.bank.WEDOGOOD_KEEPS_EXPIRATION_DATE"
+msgstr "WE DO GOOD only saves the expiration date to let you know when the time is coming."
+
+# FR : Mes cartes bancaires enregistr&eacute;es
+msgid "account.bank.MY_REGISTERED_BANK_CARDS"
+msgstr "My registered bank cards"
+
+# FR : Carte bancaire
+msgid "account.bank.BANK_CARD"
+msgstr "Bank card"
+
+# FR : Supprimer
+msgid "account.bank.REMOVE_CARD"
+msgstr "Remove"
+
+# FR : Mon relev&eacute; d'identit&eacute; bancaire
+msgid "account.bank.MY_BANK_DETAILS"
+msgstr "My bank details"
+
+# FR : Pensez &agrave; renseigner vos informations personnelles pour que notre prestataire puisse valider votre RIB.
+msgid "account.bank.PROVIDE_PERSONAL_INFORMATION"
+msgstr "Please provide your personal information so that our provider can validate your bank details."
+
+# FR : Afin de lutter contre la fraude et le blanchiment d'argent, il est n&eacute;cessaire que votre RIB soit contr&ocirc;l&eacute; par notre prestataire de paiement.
+msgid "account.bank.BANK_DETAILS_TO_BE_CHECKED"
+msgstr "In order to fight money laundering, it is necessary that your bank details are checked by our payment provider."
+
+# FR : Le compte bancaire qui vous permettra de r&eacute;cup&eacute;rer l'argent doit &ecirc;tre &agrave; votre nom.
+msgid "account.bank.BANK_DETAILS_WITH_YOUR_NAME"
+msgstr "The bank account on which you will transfer money needs to be in your name."
+
+# FR : Si votre compte bancaire est un compte en ligne (Ex : Compte Nickel), notre prestataire vous demandera une deuxi&egrave;me pi&egrave;ce d'identit&eacute; pour le valider. Il sera &agrave; transmettre dans l'onglet Mes justificatifs d'identit&eacute;.
+msgid "account.bank.ONLINE_BANK_ACCOUNT_AUTHENTICATION"
+msgstr "If your bank account is an online account (Compte Nickel, ...), our payment provider will need a second id to validate it."
+
+# FR : Coordonn&eacute;es bancaires valid&eacute;es
+msgid "account.bank.VALIDATED_BANK_DETAILS"
+msgstr "Validated bank details"
+
+# FR : Le RIB valid&eacute; est le suivant :
+msgid "account.bank.VALIDATED_BANK_DETAILS_ARE"
+msgstr "Validated bank details are as follow:"
+
+# FR : Propri&eacute;taire du compte :
+msgid "account.bank.BANK_ACCOUNT_OWNER"
+msgstr "Bank account owner :"
+
+# FR : IBAN :
+msgid "account.bank.IBAN"
+msgstr "IBAN:"
+
+# FR : BIC :
+msgid "account.bank.BIC"
+msgstr "BIC:"
+
+# FR : Modifier mon RIB
+msgid "account.bank.MODIFY_BANK_DETAILS"
+msgstr "Modify my bank details"
+
+# FR : Coordonn&eacute;es bancaires en attente de validation
+msgid "account.bank.BANK_DETAILS_AWAITING_VALIDATION"
+msgstr "Bank details awaiting validation"
+
+# FR : Coordonn&eacute;es bancaires d&eacute;sactiv&eacute;es
+msgid "account.bank.BANK_DETAILS_DISABLED"
+msgstr "Bank details disabled"
+
+# FR : Coordonn&eacute;es bancaires refus&eacute;es
+msgid "account.bank.BANK_DETAILS_REJECTED"
+msgstr "Bank details rejected"
+
+# FR : RIB en attente de validation
+msgid "account.bank.BANK_DETAILS_RIB_AWAITING_VALIDATION"
+msgstr "Bank details RIB awaiting validation"
+
+# ############################## /lemonway-document ################################
+# FR : Merci de nous contacter par chat ou par mail sur investir@wedogood.co.
+msgid "lemonway.document.CONTACT"
+msgstr "Please contact us through the chat or our e-mail address: investir@wedogood.co."
+
+# FR : Il manque des informations pour permettre la validation.
+msgid "lemonway.document.MISSING_INFO"
+msgstr "There is information missing to validate your account."
+
+# FR : Le document est re&ccedil;u mais pas encore analys&eacute;.
+msgid "lemonway.document.DOCUMENT_RECEIVED_NOT_ANALYZED"
+msgstr "The document has been received but has not been analyzed yet."
+
+# FR : Le document a &eacute;t&eacute; refus&eacute; par notre prestataire.
+msgid "lemonway.document.DOCUMENT_REJECTED"
+msgstr "The document has been rejected by our payment provider."
+
+# FR : Le document a &eacute;t&eacute; refus&eacute; par notre prestataire qui l'a jug&eacute; illisible.
+msgid "lemonway.document.DOCUMENT_REJECTED_ILLEGIBLE"
+msgstr "The document has been rejected by our payment provider, judging it illegible."
+
+# FR : Le document a &eacute;t&eacute; refus&eacute; par notre prestataire car le document a expir&eacute;.
+msgid "lemonway.document.DOCUMENT_REJECTED_EXPIRED"
+msgstr "The document has been rejected by our payment provider, judging it expired."
+
+# FR : Le document a &eacute;t&eacute; refus&eacute; par notre prestataire car ce n'est pas le bon document.
+msgid "lemonway.document.DOCUMENT_REJECTED_WRONG"
+msgstr "The document has been rejected by our payment provider, the type of document doesn't match."
+
+# FR : Le document a &eacute;t&eacute; refus&eacute; par notre prestataire car il ne correspond pas au propri&eacute;taire du porte-monnaie.
+msgid "lemonway.document.DOCUMENT_REJECTED_WRONG_OWNER"
+msgstr "The document has been rejected by our payment provider, the document doesn't match the wallet owner."
+
+# FR : Commentaire compl&eacute;mentaire de Lemon Way :
+msgid "lemonway.document.ADDITIONAL_COMMENT"
+msgstr "Additional comment from Lemon Way:"
+
+# FR : Pi&egrave;ce d'identit&eacute;
+msgid "lemonway.document.type.ID"
+msgstr "ID"
+
+# FR : Justificatif de domicile
+msgid "lemonway.document.type.PROOF_ADDRESS"
+msgstr "Proof of address"
+
+# FR : RIB
+msgid "lemonway.document.type.RIB"
+msgstr "Bank details"
+
+# FR : Passeport
+msgid "lemonway.document.type.PASSPORT"
+msgstr "Passport"
+
+# FR : Permis de r&eacute;sidence
+msgid "lemonway.document.type.RESIDENCY_PERMIT"
+msgstr "Residency permit"
+
+# FR : KBIS
+msgid "lemonway.document.type.KBIS"
+msgstr "Company KBIS"
+
+# FR : En attente de v&eacute;rification
+msgid "lemonway.document.status.WAITING"
+msgstr "Awaiting validation"
+
+# FR : En attente
+msgid "lemonway.document.status.PENDING"
+msgstr "Pending"
+
+# FR : Accept&eacute;
+msgid "lemonway.document.status.ACCEPTED"
+msgstr "Accepted"
+
+# FR : Refus&eacute;
+msgid "lemonway.document.status.REJECTED"
+msgstr "Rejected"
+
+# FR : Illisible
+msgid "lemonway.document.status.ILLEGIBLE"
+msgstr "Illegible"
+
+# FR : Expir&eacute;
+msgid "lemonway.document.status.EXPIRED"
+msgstr "Expired"
+
+# FR : Mauvais type
+msgid "lemonway.document.status.WRONG_TYPE"
+msgstr "Wrong type"
+
+# FR : Mauvaise personne
+msgid "lemonway.document.status.WRONG_OWNER"
+msgstr "Wrong owner"
+
+# FR : La pièce d'identité principale
+msgid "lemonway.document.details_MAIN_ID"
+msgstr "The main ID"
 
 # ############################## PROJECT COMMON ################################
 # THEME - projects/common/stats-public.php
