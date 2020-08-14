@@ -41,6 +41,10 @@ msgstr "Last name"
 msgid "common.SAVE"
 msgstr "Save"
 
+# FR : Annuler
+msgid "common.CANCEL"
+msgstr "Cancel"
+
 # FR : Aper&ccedil;u
 msgid "common.PREVIEW"
 msgstr "Preview"
@@ -48,6 +52,19 @@ msgstr "Preview"
 # FR : Aper&ccedil;u
 msgid "common.OTHER"
 msgstr "Other"
+
+# FR : Aucune
+msgid "common.NONE.F"
+msgstr "None"
+
+# ############################## COMMON - FORMS - ERROR ################################
+# FR : Ce fichier n'est pas au bon format.
+msgid "common.forms.error.FILE_WRONG_FORMAT"
+msgstr "This file is in the wrong format."
+
+# FR : Ce fichier est trop lourd.
+msgid "common.forms.error.FILE_TOO_BIG"
+msgstr "This file is too big."
 
 # ############################## /connexion ################################
 # FR : Connexion sur WE DO GOOD
@@ -419,6 +436,256 @@ msgstr "Bank details rejected"
 # FR : RIB en attente de validation
 msgid "account.bank.BANK_DETAILS_RIB_AWAITING_VALIDATION"
 msgstr "Bank details RIB awaiting validation"
+
+# FR : Documents de
+msgid "account.documents.DOCUMENTS_OF"
+msgstr "Documents of"
+
+# FR : Les informations ci-dessous sont celles de votre compte personnel.
+msgid "account.documents.INFORMATION_BELOW_PERSONAL_ACCOUNT"
+msgstr "The information below concerns your personal account."
+
+# FR : Si vous avez investi avec votre entreprise, vous retrouverez les informations respectives dans la partie Organisation, dans le menu de votre compte.
+msgid "account.documents.IF_INVESTMENT_ORGA"
+msgstr "If you invested on behalf of your company, you will find information regarding your organization in your account menu."
+
+# FR : Mes attestations de transactions annuelles
+msgid "account.documents.MY_YEARLY_TRANSACTIONS_CERTIFICATES"
+msgstr "My yearly transactions certificates"
+
+# FR : T&eacute;l&eacute;charger l'attestation
+msgid "account.documents.DOWNLOAD_CERTIFICATE"
+msgstr "Download the certificate"
+
+# FR : Mes attestations IFU (Imprim&eacute; Fiscal Unique - 2561)
+msgid "account.documents.MY_CERTIFICATES_IFU"
+msgstr "My IFU certificates (In french : Imprim&eacute; Fiscal Unique - 2561)"
+
+# FR : Mes demandes annuelles de dispense de pr&eacute;l&egrave;vement
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION"
+msgstr "Mes demandes annuelles de dispense de pr&eacute;l&egrave;vement"
+
+# FR : Lorsque les royalties vers&eacute;es par un projet sont sup&eacute;rieures &agrave; la somme initialement investie, la plus value r&eacute;alis&eacute;e doit &ecirc;tre d&eacute;clar&eacute;e dans le cadre de l'imp&ocirc;t sur le revenu.
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_1"
+msgstr "Lorsque les royalties vers&eacute;es par un projet sont sup&eacute;rieures &agrave; la somme initialement investie, la plus value r&eacute;alis&eacute;e doit &ecirc;tre d&eacute;clar&eacute;e dans le cadre de l'imp&ocirc;t sur le revenu."
+
+# FR : Elle est soumise au Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30 %, dont 12,8 % d'imp&ocirc;ts sur le revenu et 17,2 % de contributions et pr&eacute;l&egrave;vements sociaux.
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_2"
+msgstr "Elle est soumise au Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30 %, dont 12,8 % d'imp&ocirc;ts sur le revenu et 17,2 % de contributions et pr&eacute;l&egrave;vements sociaux."
+
+# FR : La d&eacute;claration est effectu&eacute;e de fa&ccedil;on automatis&eacute;e tous les ans par WE DO GOOD &agrave; la Direction G&eacute;n&eacute;rale des Finances Publiques.
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_3"
+msgstr "La d&eacute;claration est effectu&eacute;e de fa&ccedil;on automatis&eacute;e tous les ans par WE DO GOOD &agrave; la Direction G&eacute;n&eacute;rale des Finances Publiques."
+
+# FR : Toutefois, vous pouvez nous adresser en amont une demande de dispense pour &ecirc;tre impos&eacute;(e) au bar&egrave;me de l'imp&ocirc;t sur le revenu selon votre taux d'imposition, si le revenu fiscal de référence de votre foyer fiscal est inf&eacute;rieur &agrave; :
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_4"
+msgstr "Toutefois, vous pouvez nous adresser en amont une demande de dispense pour &ecirc;tre impos&eacute;(e) au bar&egrave;me de l'imp&ocirc;t sur le revenu selon votre taux d'imposition, si le revenu fiscal de référence de votre foyer fiscal est inf&eacute;rieur &agrave; :"
+
+# FR : - 25 000 € (pour les contribuables c&eacute;libataires, divorc&eacute;s ou veufs) ;
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_5"
+msgstr "- 25 000 € (pour les contribuables c&eacute;libataires, divorc&eacute;s ou veufs) ;"
+
+# FR : - 50 000 € (pour les contribuables soumis &agrave; imposition commune).
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_6"
+msgstr "- 50 000 € (pour les contribuables soumis &agrave; imposition commune)."
+
+# FR : Cette dispense ne s'appliquera qu'&agrave; la partie concernant l'imp&ocirc;t sur le revenu (12,8 %) et ne peut &ecirc;tre faite que par les investisseurs dont la r&eacute;sidence fiscale est en France.
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_7"
+msgstr "Cette dispense ne s'appliquera qu'&agrave; la partie concernant l'imp&ocirc;t sur le revenu (12,8 %) et ne peut &ecirc;tre faite que par les investisseurs dont la r&eacute;sidence fiscale est en France."
+
+# FR : T&eacute;l&eacute;charger la dispense
+msgid "account.documents.DOWNLOAD_EXEMPTION_FILE"
+msgstr "T&eacute;l&eacute;charger la dispense"
+
+# FR : Faire ma demande de dispense annuelle
+msgid "account.documents.ASK_ANNUAL_EXEMPTION"
+msgstr "Faire ma demande de dispense annuelle"
+
+# FR : Envoyer ma demande de dispense annuelle
+msgid "account.documents.SEND_ANNUAL_EXEMPTION"
+msgstr "Envoyer ma demande de dispense annuelle"
+
+# FR : Enregistrer ma demande de dispense
+msgid "account.documents.SAVE_ANNUAL_EXEMPTION"
+msgstr "Enregistrer ma demande de dispense"
+
+# FR : Afin d'authentifier votre compte, Lemon Way (prestataire de services de paiement agr&eacute;&eacute;) a besoin de deux documents justificatifs d'identit&eacute;.
+msgid "account.identitydocs.AUTHENTICATION_TEXT_1"
+msgstr "Afin d'authentifier votre compte, Lemon Way (prestataire de services de paiement agr&eacute;&eacute;) a besoin de deux documents justificatifs d'identit&eacute;."
+
+# FR : Ces documents sont imm&eacute;diatement transmis, puis v&eacute;rifi&eacute;s sous 48h par Lemon Way. Ils sont d'abord analys&eacute;s par des services automatiques puis par une personne physique en cas d'erreur ou de cas particulier.
+msgid "account.identitydocs.AUTHENTICATION_TEXT_2"
+msgstr "Ces documents sont imm&eacute;diatement transmis, puis v&eacute;rifi&eacute;s sous 48h par Lemon Way. Ils sont d'abord analys&eacute;s par des services automatiques puis par une personne physique en cas d'erreur ou de cas particulier."
+
+# FR : En cas d'erreur manifeste de l'analyse de vos documents, vous pouvez nous contacter &agrave; l'adresse investir@wedogood.co ou sur le chat en ligne.
+msgid "account.identitydocs.AUTHENTICATION_TEXT_3"
+msgstr "En cas d'erreur manifeste de l'analyse de vos documents, vous pouvez nous contacter &agrave; l'adresse investir@wedogood.co ou sur le chat en ligne."
+
+# FR : Ce SMS sera envoy&eacute; uniquement lorsque tous les documents sont valid&eacute;s, ou en cas de documents incomplets ou refus&eacute;s.
+msgid "account.identitydocs.SMS_EXPLAINED"
+msgstr "Ce SMS sera envoy&eacute; uniquement lorsque tous les documents sont valid&eacute;s, ou en cas de documents incomplets ou refus&eacute;s."
+
+# FR : Envoyer les documents
+msgid "account.identitydocs.SEND_DOCUMENTS"
+msgstr "Envoyer les documents"
+
+# ############################## form - user-bank ################################
+# FR : Nom du propri&eacute;taire du compte
+msgid "form.user-bank.NAME_ACCOUNT_OWNER"
+msgstr "Nom du propri&eacute;taire du compte"
+
+# FR : Adresse du compte
+msgid "form.user-bank.ADDRESS_ACCOUNT"
+msgstr "Adresse du compte"
+
+# FR : Pays
+msgid "form.user-bank.ADDRESS_ACCOUNT_2"
+msgstr "Pays"
+
+# FR : Cette valeur ne correspond pas &agrave; un IBAN.
+msgid "form.user-bank.error.ISNT_IBAN"
+msgstr "Cette valeur ne correspond pas &agrave; un IBAN."
+
+# FR : IBAN
+msgid "form.user-bank.IBAN"
+msgstr "IBAN"
+
+# FR : Cette valeur ne correspond pas &agrave; un BIC.
+msgid "form.user-bank.error.ISNT_BIC"
+msgstr "Cette valeur ne correspond pas &agrave; un BIC."
+
+# FR : BIC
+msgid "form.user-bank.BIC"
+msgstr "BIC"
+
+# FR : RIB
+msgid "form.user-bank.RIB"
+msgstr "RIB"
+
+# ############################## form - user-identitydocs ################################
+# FR : Justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident
+msgid "form.user-identitydocs.ID_OF_PRESIDENT"
+msgstr "Justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident"
+
+# FR : Justificatif d'identit&eacute;
+msgid "form.user-identitydocs.ID"
+msgstr "Justificatif d'identit&eacute;"
+
+# FR : Carte d'identit&eacute; recto-verso ou passeport avec bande MRZ lisible en int&eacute;gralit&eacute;.
+msgid "form.user-identitydocs.ID_DESCRIPTION"
+msgstr "Carte d'identit&eacute; recto-verso ou passeport avec bande MRZ lisible en int&eacute;gralit&eacute;."
+
+# FR : Deuxi&egrave;me justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident
+msgid "form.user-identitydocs.SECOND_ID_ORGA"
+msgstr "Deuxi&egrave;me justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident"
+
+# FR : M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis.
+msgid "form.user-identitydocs.SECOND_ID_ORGA_DESCRIPTION"
+msgstr "M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
+
+# FR : K-BIS ou &eacute;quivalent &agrave; un registre du commerce
+msgid "form.user-identitydocs.KBIS"
+msgstr "K-BIS ou &eacute;quivalent &agrave; un registre du commerce"
+
+# FR : Datant de moins de 3 mois
+msgid "form.user-identitydocs.KBIS_DESCRIPTION"
+msgstr "Datant de moins de 3 mois"
+
+# FR : Statuts de la soci&eacute;t&eacute;, certifi&eacute;s conformes à l'original par le g&eacute;rant (faisant figurer id&eacute;alement la r&eacute;partition du capital de l'entreprise)
+msgid "form.user-identitydocs.STATUS"
+msgstr "Statuts de la soci&eacute;t&eacute;, certifi&eacute;s conformes à l'original par le g&eacute;rant (faisant figurer id&eacute;alement la r&eacute;partition du capital de l'entreprise)"
+
+# FR : Attestation de r&eacute;partition du capital (facultatif)
+msgid "form.user-identitydocs.CAPITAL_ALLOCATION"
+msgstr "Attestation de r&eacute;partition du capital (facultatif)"
+
+# FR : Si la r&eacute;partition du capital n'est pas exprim&eacute;e clairement dans les statuts
+msgid "form.user-identitydocs.CAPITAL_ALLOCATION_DESCRIPTION"
+msgstr "Si la r&eacute;partition du capital n'est pas exprim&eacute;e clairement dans les statuts"
+
+# FR : Justificatif d'identit&eacute; de la deuxi&egrave;me personne (facultatif)
+msgid "form.user-identitydocs.ID_SECOND_PERSON"
+msgstr "Justificatif d'identit&eacute; de la deuxi&egrave;me personne (facultatif)"
+
+# FR : Si une deuxi&egrave;me personne physique d&eacute;tient au moins 25% du capital
+msgid "form.user-identitydocs.ID_SECOND_PERSON_DESCRIPTION"
+msgstr "Si une deuxi&egrave;me personne physique d&eacute;tient au moins 25% du capital"
+
+# FR : Deuxi&egrave;me justificatif d'identit&eacute; de la deuxi&egrave;me personne (facultatif)
+msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON"
+msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la deuxi&egrave;me personne (facultatif)"
+
+# FR : M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis.
+msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON_DESCRIPTION"
+msgstr "M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
+
+# FR : Justificatif d'identit&eacute; de la troisi&egrave;me personne (facultatif)
+msgid "form.user-identitydocs.ID_THIRD_PERSON"
+msgstr "Justificatif d'identit&eacute; de la troisi&egrave;me personne (facultatif)"
+
+# FR : Si une troisi&egrave;me personne physique d&eacute;tient au moins 25% du capital
+msgid "form.user-identitydocs.ID_THIRD_PERSON_DESCRIPTION"
+msgstr "Si une troisi&egrave;me personne physique d&eacute;tient au moins 25% du capital"
+
+# FR : Deuxi&egrave;me justificatif d'identit&eacute; de la troisi&egrave;me personne (facultatif)
+msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON"
+msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la troisi&egrave;me personne (facultatif)"
+
+# FR : M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis.
+msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON_DESCRIPTION"
+msgstr "M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
+
+# FR : Verso du justificatif d'identit&eacute;
+msgid "form.user-identitydocs.ID_BACK"
+msgstr "Verso du justificatif d'identit&eacute;"
+
+# FR : Ce fichier n'est utile que si le verso ne figure pas dans le fichier pr&eacute;c&eacute;dent.
+msgid "form.user-identitydocs.ID_BACK_DESCRIPTION"
+msgstr "Ce fichier n'est utile que si le verso ne figure pas dans le fichier pr&eacute;c&eacute;dent."
+
+# FR : Deuxi&egrave;me justificatif d'identit&eacute;
+msgid "form.user-identitydocs.SECOND_ID"
+msgstr "Deuxi&egrave;me justificatif d'identit&eacute;"
+
+# FR : Passeport ou carte d'identit&eacute; recto-verso avec bande MRZ lisible en intégralit&eacute;, qui n'aurait pas &eacute;t&eacute; d&eacute;pos&eacute; en premi&egrave;re pi&egrave;ce d'identit&eacute;.
+msgid "form.user-identitydocs.SECOND_ID_DESCRIPTION_1"
+msgstr "Passeport ou carte d'identit&eacute; recto-verso avec bande MRZ lisible en intégralit&eacute;, qui n'aurait pas &eacute;t&eacute; d&eacute;pos&eacute; en premi&egrave;re pi&egrave;ce d'identit&eacute;."
+
+# FR : Sinon un des documents suivants : permis de conduire, dernier avis d'imposition, carte vitale, livret de famille, acte de naissance.
+msgid "form.user-identitydocs.SECOND_ID_DESCRIPTION_2"
+msgstr "Sinon un des documents suivants : permis de conduire, dernier avis d'imposition, carte vitale, livret de famille, acte de naissance."
+
+# FR : Les titres de s&eacute;jour sont accept&eacute;s pour les personnes qui ne sont pas fran&ccedil;aises.
+msgid "form.user-identitydocs.SECOND_ID_DESCRIPTION_3"
+msgstr "Les titres de s&eacute;jour sont accept&eacute;s pour les personnes qui ne sont pas fran&ccedil;aises."
+
+# FR : Verso du deuxi&egrave;me justificatif d'identit&eacute;
+msgid "form.user-identitydocs.SECOND_ID_BACK"
+msgstr "Verso du deuxi&egrave;me justificatif d'identit&eacute;"
+
+# FR : Ce fichier n'est utile que si le verso ne figure pas dans le fichier pr&eacute;c&eacute;dent.
+msgid "form.user-identitydocs.SECOND_ID_BACK_DESCRIPTION"
+msgstr "Ce fichier n'est utile que si le verso ne figure pas dans le fichier pr&eacute;c&eacute;dent."
+
+# FR : Justificatif de domicile
+msgid "form.user-identitydocs.PROOF_ADDRESS"
+msgstr "Justificatif de domicile"
+
+# FR : Depuis septembre 2019, Lemon Way n'accepte plus les justificatifs de domicile pour authentifier les comptes.
+msgid "form.user-identitydocs.PROOF_ADDRESS_ALERT"
+msgstr "Depuis septembre 2019, Lemon Way n'accepte plus les justificatifs de domicile pour authentifier les comptes."
+
+# FR : Ce champ est facultatif. Il est utile si vous n'avez pas de deuxi&egrave;me pi&egrave;ce d'identit&eacute;.
+msgid "form.user-identitydocs.PROOF_ADDRESS_DESCRIPTION_1"
+msgstr "Ce champ est facultatif. Il est utile si vous n'avez pas de deuxi&egrave;me pi&egrave;ce d'identit&eacute;."
+
+# FR : Il doit dater de moins de 3 mois, et provenir d'un fournisseur d'&eacute;nergie (&eacute;lectricit&eacute;, gaz, eau) ou d'un bailleur, ou &ecirc;tre un relev&eacute; d'imp&ocirc;t.
+msgid "form.user-identitydocs.PROOF_ADDRESS_DESCRIPTION_2"
+msgstr "Il doit dater de moins de 3 mois, et provenir d'un fournisseur d'&eacute;nergie (&eacute;lectricit&eacute;, gaz, eau) ou d'un bailleur, ou &ecirc;tre un relev&eacute; d'imp&ocirc;t."
+
+# FR : Le SMS sera envoy&eacute; au num&eacute;ro suivant :
+msgid "form.user-identitydocs.PHONE_NUMBER"
+msgstr "Le SMS sera envoy&eacute; au num&eacute;ro suivant :"
 
 # ############################## /lemonway-document ################################
 # FR : Merci de nous contacter par chat ou par mail sur investir@wedogood.co.
