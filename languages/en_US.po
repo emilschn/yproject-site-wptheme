@@ -81,6 +81,10 @@ msgstr "Royalties"
 msgid "common.AVAILABLE.P"
 msgstr "disponibles"
 
+# FR : Supprimer
+msgid "common.REMOVE"
+msgstr "Remove"
+
 # ############################## COMMON - FORMS - ERROR ################################
 # FR : Ce fichier n'est pas au bon format.
 msgid "common.forms.error.FILE_WRONG_FORMAT"
@@ -385,6 +389,10 @@ msgstr "Identity documents"
 msgid "account.authentication.EDIT_IDENTITY_DOCUMENTS"
 msgstr "Edit my documents"
 
+# FR : Authentification de
+msgid "account.authentication.orga.AUTHENTICATION_OF"
+msgstr "Authentication of"
+
 # FR : Ma carte bancaire
 msgid "account.bank.MY_BANK_CARD"
 msgstr "Ma bank card"
@@ -469,6 +477,26 @@ msgstr "Bank details rejected"
 msgid "account.bank.BANK_DETAILS_RIB_AWAITING_VALIDATION"
 msgstr "Bank details RIB awaiting validation"
 
+# FR : Coordonn&eacute;es bancaires de
+msgid "account.bank.orga.BANK_DETAILS_OF"
+msgstr "Bank details of"
+
+# FR : Coordonn&eacute;es bancaires de
+msgid "account.bank.orga.BANK_DETAILS"
+msgstr "Bank details"
+
+# FR : Pensez &agrave; renseigner les informations de l'organisation pour que notre prestataire puisse valider votre RIB.
+msgid "account.bank.orga.NEED_ORGANIZATION_INFORMATION"
+msgstr "Please provide your organization information so that our provider can validate your bank details."
+
+# FR : Informations de l'organisation
+msgid "account.bank.orga.ORGANIZATION_INFORMATION"
+msgstr "Organization information"
+
+# FR : Le compte bancaire qui vous permettra de r&eacute;cup&eacute;rer l'argent doit &ecirc;tre &agrave; votre nom.
+msgid "account.bank.orga.BANK_DETAILS_WITH_ORGA_NAME"
+msgstr "The bank account on which you will transfer money needs to be in the organization name."
+
 # FR : Documents de
 msgid "account.documents.DOCUMENTS_OF"
 msgstr "Documents of"
@@ -533,6 +561,18 @@ msgstr "Envoyer ma demande de dispense annuelle"
 msgid "account.documents.SAVE_ANNUAL_EXEMPTION"
 msgstr "Enregistrer ma demande de dispense"
 
+# FR : Documents de
+msgid "account.documents.orga.DOCUMENTS_OF"
+msgstr "Documents of"
+
+# FR : Attestations de transactions annuelles
+msgid "account.documents.orga.YEARLY_TRANSACTIONS_CERTIFICATES"
+msgstr "Attestations de transactions annuelles"
+
+# FR : Attestations IFU (Imprim&eacute; Fiscal Unique - 2561)
+msgid "account.documents.orga.CERTIFICATES_IFU"
+msgstr "Attestations IFU (Imprim&eacute; Fiscal Unique - 2561)"
+
 # FR : Afin d'authentifier votre compte, Lemon Way (prestataire de services de paiement agr&eacute;&eacute;) a besoin de deux documents justificatifs d'identit&eacute;.
 msgid "account.identitydocs.AUTHENTICATION_TEXT_1"
 msgstr "Afin d'authentifier votre compte, Lemon Way (prestataire de services de paiement agr&eacute;&eacute;) a besoin de deux documents justificatifs d'identit&eacute;."
@@ -552,6 +592,26 @@ msgstr "Ce SMS sera envoy&eacute; uniquement lorsque tous les documents sont val
 # FR : Envoyer les documents
 msgid "account.identitydocs.SEND_DOCUMENTS"
 msgstr "Envoyer les documents"
+
+# FR : Justificatifs d'identitification de
+msgid "account.identitydocs.orga.TITLE"
+msgstr "Justificatifs d'identitification de"
+
+# FR : Les justificatifs d'identit&eacute; sont imm&eacute;diatement transmis, puis v&eacute;rifi&eacute;s sous 48h par notre prestataire de paiement, Lemon Way.
+msgid "account.identitydocs.orga.AUTHENTICATION_TEXT_1"
+msgstr "Les justificatifs d'identit&eacute; sont imm&eacute;diatement transmis, puis v&eacute;rifi&eacute;s sous 48h par notre prestataire de paiement, Lemon Way."
+
+# FR : Ils sont d'abord analys&eacute;s par des services automatiques puis par une personne physique en cas d'erreur ou de cas particulier.
+msgid "account.identitydocs.orga.AUTHENTICATION_TEXT_2"
+msgstr "Ils sont d'abord analys&eacute;s par des services automatiques puis par une personne physique en cas d'erreur ou de cas particulier."
+
+# FR : En cas d'erreur manifeste de l'analyse de vos documents, vous pouvez nous contacter &agrave; l'adresse investir@wedogood.co ou sur le chat en ligne.
+msgid "account.identitydocs.orga.AUTHENTICATION_TEXT_3"
+msgstr "En cas d'erreur manifeste de l'analyse de vos documents, vous pouvez nous contacter &agrave; l'adresse investir@wedogood.co ou sur le chat en ligne."
+
+# FR : Si une quatri&egrave;me personne ou une personne morale d&eacute;tient au moins 25% de votre capital, merci de nous le signaler sur support@wedogood.co.
+msgid "account.identitydocs.orga.FOURTH_PERSON"
+msgstr "Si une quatri&egrave;me personne ou une personne morale d&eacute;tient au moins 25% de votre capital, merci de nous le signaler sur support@wedogood.co."
 
 # FR : Investissements de
 msgid "account.investments.INVESTMENTS_OF"
@@ -589,6 +649,10 @@ msgstr "en investissement"
 msgid "account.investments.STATUS_VOTE"
 msgstr "en &eacute;valuation"
 
+# FR : Investissements de
+msgid "account.investments.orga.TITLE"
+msgstr "Investissements de"
+
 # FR : Notifications en provenance de WE DO GOOD
 msgid "account.notifications.TITLE"
 msgstr "Notifications coming from WE DO GOOD"
@@ -624,6 +688,18 @@ msgstr "D&eacute;lier mon compte Facebook et appliquer ce mot de passe"
 # FR : Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :
 msgid "account.parameters.SOME_ERRORS"
 msgstr "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :"
+
+# FR : Informations de
+msgid "account.parameters.orga.TITLE"
+msgstr "Information of"
+
+# FR : Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :
+msgid "account.parameters.orga.ERROR"
+msgstr "Some errors stopped your data record!"
+
+# FR : Si&egrave;ge social
+msgid "account.parameters.orga.HEAD_OFFICE"
+msgstr "Head office"
 
 # FR : Mon porte-monnaie &eacute;lectronique
 msgid "account.wallet.TITLE"
@@ -703,7 +779,47 @@ msgstr "Transactions history"
 
 # FR : Voir l'historique de mes transactions
 msgid "account.wallet.VIEW_TRANSACTIONS_HISTORY"
-msgstr "Voir l'historique de mes transactions"
+msgstr "View the transactions history"
+
+# FR : %s &euro; sont en attente d'authentification.
+msgid "account.wallet.orga.AWAITING_AUTHENTICATION"
+msgstr "%s &euro; need the organization authentication to be transfered."
+
+# FR : Depuis Janvier 2019, l'authentification de votre organisation est n&eacute;cessaire aupr&egrave;s de notre prestataire de paiement pour lib&eacute;rer l'acc&egrave;s au porte-monnaie de votre organisation et pouvoir retirer les royalties.
+msgid "account.wallet.orga.AUTHENTICATION_NECESSARY"
+msgstr "Your organization account needs to be authenticated by our payment provider to access your personal wallet and transfer your royalties on your bank account."
+
+# FR : Virer vers le compte bancaire de
+msgid "account.wallet.orga.TRANSFER_MY_BANK_ACCOUNT"
+msgstr "Transfer to the bank account of"
+
+# FR : Le RIB de l'organisation est en cours de validation par notre prestataire de paiement. Merci de revenir d'ici 48h pour vous assurer de sa validation.
+msgid "account.wallet.orga.RIB_AWAITING_VALIDATION"
+msgstr "Our payment provider is analyzing your organization RIB. Please come back in 48h to make sure of its validation."
+
+# FR : Afin de retirer les royalties per&ccedil;ues par l'organisation, merci de renseigner ses coordonn&eacute;es bancaires.
+msgid "account.wallet.orga.INPUT_YOUR_BANK_ACCOUNT_DETAILS"
+msgstr "Please type in your bank account details to transfer your organization royalties."
+
+# FR : Virer sur le compte bancaire de
+msgid "account.wallet.orga.TRANSFER_TO_BANK_ACCOUNT"
+msgstr "Transfer to the bank account of"
+
+# FR : vers&eacute;s sur le compte bancaire
+msgid "account.wallet.orga.TRANSFERED_TO_BANK_ACCOUNT"
+msgstr "transfered to the bank account"
+
+# FR : annul&eacute;s
+msgid "account.wallet.orga.CANCELED"
+msgstr "canceled"
+
+# FR : en cours de versement sur le compte bancaire
+msgid "account.wallet.orga.BEING_TRANSFERED"
+msgstr "being transfered to bank account"
+
+# FR : Aucun transfert d&apos;argent
+msgid "account.wallet.orga.NO_MONEY_TRANSFER"
+msgstr "No money transfer."
 
 # ############################## form - user-bank ################################
 # FR : Nom du propri&eacute;taire du compte
@@ -874,6 +990,79 @@ msgstr "Error in the city field."
 # FR : Vos informations ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s.
 msgid "form.user-details.SAVE_SUCCESS"
 msgstr "Your personal information has been saved."
+
+# ############################## form - organization-details ################################
+# FR : D&eacute;nomination sociale
+msgid "form.organization-details.NAME"
+msgstr "Corporate name"
+
+# FR : E-mail
+msgid "form.organization-details.EMAIL"
+msgstr "E-mail"
+
+# FR : Num&eacute;ro SIRET
+msgid "form.organization-details.ID_NUMBER"
+msgstr "SIRET Number"
+
+# FR : Descriptif de l'activit&eacute;
+msgid "form.organization-details.ACTIVITY"
+msgstr "Activity description"
+
+# FR : Site Web
+msgid "form.organization-details.WEBSITE"
+msgstr "Web site"
+
+# FR : Adresse de votre site Internet, commen&ccedil;ant par http ou www
+msgid "form.organization-details.WEBSITE_DESCRIPTION"
+msgstr "Your website address, starting with http or www"
+
+# FR : Fonction du repr&eacute;sentant
+msgid "form.organization-details.ORGANIZATION_MANAGER_TITLE"
+msgstr "Organization manager role"
+
+# FR : Forme juridique
+msgid "form.organization-details.LEGAL_FORM"
+msgstr "Legal form"
+
+# FR : RCS (Ville)
+msgid "form.organization-details.CITY"
+msgstr "Trade and society register city"
+
+# FR : Capital social (en euros)
+msgid "form.organization-details.SHARE_CAPITAL"
+msgstr "Share capital (in euros)"
+
+# FR : Code APE
+msgid "form.organization-details.APE"
+msgstr "Main activity code (APE)"
+
+# FR : VAT number
+msgid "form.organization-details.VAT_NUMBER"
+msgstr "Num&eacute;ro de TVA"
+
+# FR : L'exercice comptable se termine &agrave; la fin du mois
+msgid "form.organization-details.FISCAL_YEAR_END_MONTH"
+msgstr "Fiscal year end month"
+
+# FR : Nombre d'employ&eacute;s
+msgid "form.organization-details.EMPLOYEES_COUNT"
+msgstr "Employees count"
+
+# FR : Le nom de l'organisation ne peut pas &ecirc;tre vide.
+msgid "form.organization-details.error.NAME"
+msgstr "The name of the organization cannot be empty."
+
+# FR : Le capital de l'organisation doit &ecirc;tre un nombre.
+msgid "form.organization-details.error.CAPITAL"
+msgstr "The organization shared capital should be a number"
+
+# FR : Le num&eacute;ro de rue de l'organisation doit &ecirc;tre un nombre.
+msgid "form.organization-details.error.ADDRESS_NUMBER"
+msgstr "The address number should be a number"
+
+# FR : Le code postal de l'organisation doit &ecirc;tre un nombre.
+msgid "form.organization-details.error.ZIP_CODE"
+msgstr "The zip code should be a number"
 
 # ############################## form - user-identitydocs ################################
 # FR : Justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident
