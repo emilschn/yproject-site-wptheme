@@ -13,7 +13,7 @@
 <p>
 	<?php _e( 'account.common.INFORMATION_BELOW_PERSONAL_ACCOUNT', 'yproject' ); ?><br>
 	<?php if ( count( $list_current_organizations ) > 0 ): ?>
-		<?php _e( 'account.documents.IF_INVESTMENT_ORGA', 'yproject' ); ?>
+		<?php _e( 'account.common.IF_INVESTMENT_ORGA', 'yproject' ); ?>
 	<?php endif; ?>
 </p>
 

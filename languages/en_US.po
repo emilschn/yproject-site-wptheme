@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en_US\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 # FR : ou
 msgid "common.OR"
@@ -69,25 +69,17 @@ msgstr "Other"
 msgid "common.NONE.F"
 msgstr "None"
 
-# FR : Enregistrez vos informations
-msgid "account.parameters.SAVE_PARAMETERS"
-msgstr "Enregistrez vos informations"
+# FR : Toujours
+msgid "common.ALWAYS"
+msgstr "Always"
 
-# FR : Modification de mot de passe
-msgid "account.parameters.PASSWORD_MODIFICATION"
-msgstr "Modification de mot de passe"
+# FR : Royalties
+msgid "common.ROYALTIES"
+msgstr "Royalties"
 
-# FR : D&eacute;lier mon compte Facebook
-msgid "account.parameters.UNLINK_FACEBOOK"
-msgstr "D&eacute;lier mon compte Facebook"
-
-# FR : D&eacute;lier mon compte Facebook et appliquer ce mot de passe
-msgid "account.parameters.UNLINK_FACEBOOK_APPLY_PASSWORD"
-msgstr "D&eacute;lier mon compte Facebook et appliquer ce mot de passe"
-
-# FR : Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :
-msgid "account.parameters.SOME_ERRORS"
-msgstr "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :"
+# FR : disponibles
+msgid "common.AVAILABLE.P"
+msgstr "disponibles"
 
 # ############################## COMMON - FORMS - ERROR ################################
 # FR : Ce fichier n'est pas au bon format.
@@ -597,6 +589,122 @@ msgstr "en investissement"
 msgid "account.investments.STATUS_VOTE"
 msgstr "en &eacute;valuation"
 
+# FR : Notifications en provenance de WE DO GOOD
+msgid "account.notifications.TITLE"
+msgstr "Notifications coming from WE DO GOOD"
+
+# FR : Newsletters
+msgid "account.notifications.TITLE_NEWSLETTERS"
+msgstr "Newsletters"
+
+# FR : Projets suivis
+msgid "account.notifications.TITLE_FOLLOWED_PROJECTS"
+msgstr "Followed projects"
+
+# FR : Transactions
+msgid "account.notifications.TITLE_TRANSACTIONS"
+msgstr "Transactions"
+
+# FR : Enregistrez vos informations
+msgid "account.parameters.SAVE_PARAMETERS"
+msgstr "Enregistrez vos informations"
+
+# FR : Modification de mot de passe
+msgid "account.parameters.PASSWORD_MODIFICATION"
+msgstr "Modification de mot de passe"
+
+# FR : D&eacute;lier mon compte Facebook
+msgid "account.parameters.UNLINK_FACEBOOK"
+msgstr "D&eacute;lier mon compte Facebook"
+
+# FR : D&eacute;lier mon compte Facebook et appliquer ce mot de passe
+msgid "account.parameters.UNLINK_FACEBOOK_APPLY_PASSWORD"
+msgstr "D&eacute;lier mon compte Facebook et appliquer ce mot de passe"
+
+# FR : Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :
+msgid "account.parameters.SOME_ERRORS"
+msgstr "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :"
+
+# FR : Mon porte-monnaie &eacute;lectronique
+msgid "account.wallet.TITLE"
+msgstr "Mon porte-monnaie &eacute;lectronique"
+
+# FR : Nous attendons votre authentification pour verser %s &euro; sur votre porte-monnaie.
+msgid "account.wallet.AWAITING_AUTHENTICATION"
+msgstr "We are waiting for your authentication so that we can transfer %s &euro; on your wallet."
+
+# FR : Depuis Janvier 2019, l'authentification de votre compte est n&eacute;cessaire aupr&egrave;s de notre prestataire de paiement pour lib&eacute;rer l'acc&egrave;s &agrave; votre porte-monnaie et pouvoir retirer vos royalties.
+msgid "account.wallet.AUTHENTICATION_NECESSARY"
+msgstr "Your account needs to be authenticated by our payment provider to access your personal wallet and transfer your royalties on your bank account."
+
+# FR : Voir le statut de mon authentification
+msgid "account.wallet.VIEW_AUTHENTICATION_STATUS"
+msgstr "View my authentication status"
+
+# FR : Recharger mon porte-monnaie par virement
+msgid "account.wallet.SEND_MONEY_TO_WALLET"
+msgstr "Make a bank transfer to my wallet"
+
+# FR : Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement.
+msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER"
+msgstr "To prevent money laundering, you can only transfer money to your wallet through a bank transfer."
+
+# FR : Compte bancaire de destination
+msgid "account.wallet.RECIPIENT_BANK_ACCOUNT"
+msgstr "Recipient bank account"
+
+# FR : Code &agrave; indiquer (pour identifier votre paiement) :
+msgid "account.wallet.TRANSFER_ID_CODE"
+msgstr "Transfer code (for your payment identification):"
+
+# FR : Copier le code
+msgid "account.wallet.COPY_CODE"
+msgstr "Copy the code"
+
+# FR : Code copi&eacute;
+msgid "account.wallet.CODE_COPIED"
+msgstr "Code copied"
+
+# FR : Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !
+msgid "account.wallet.WHERE_TO_COPY_THE_CODE"
+msgstr "Please paste this code as 'recipient label' when you will execute the bank transfer!"
+
+# FR : Virer vers mon compte bancaire
+msgid "account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT"
+msgstr "Transfer to my bank account"
+
+# FR : Votre RIB est en cours de validation par notre prestataire de paiement. Merci de revenir d'ici 48h pour vous assurer de sa validation.
+msgid "account.wallet.RIB_AWAITING_VALIDATION"
+msgstr "Our payment provider is analyzing your RIB. Please come back in 48h to make sure of its validation."
+
+# FR : Votre RIB a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement.
+msgid "account.wallet.RIB_REJECTED"
+msgstr "Your RIB has been rejected by our payment provider."
+
+# FR : Afin de retirer vos royalties, merci de renseigner vos coordonn&eacute;es bancaires.
+msgid "account.wallet.INPUT_YOUR_BANK_ACCOUNT_DETAILS"
+msgstr "Please type in your bank account details to transfer your royalties."
+
+# FR : Montant &agrave; retirer (maximum %s &euro;) :
+msgid "account.wallet.AMOUNT_TO_TRANSFER"
+msgstr "Amount that you want to transfer (max %s &euro;):"
+
+# FR : Compte bancaire associ&eacute; :
+msgid "account.wallet.ACCOUNT_LINKED"
+msgstr "Linked bank account:"
+
+# FR : Modifier mon RIB
+msgid "account.wallet.MODIFY_RIB"
+msgstr "Modify my RIB"
+
+# FR : Historique de mes transactions
+msgid "account.wallet.TRANSACTIONS_HISTORY"
+msgstr "Transactions history"
+
+# FR : Voir l'historique de mes transactions
+msgid "account.wallet.VIEW_TRANSACTIONS_HISTORY"
+msgstr "Voir l'historique de mes transactions"
+
 # ############################## form - user-bank ################################
 # FR : Nom du propri&eacute;taire du compte
 msgid "form.user-bank.NAME_ACCOUNT_OWNER"
@@ -686,6 +794,86 @@ msgstr "French birthplace county"
 # FR : Uniquement si la naissance a eu lieu en France
 msgid "form.user-details.BIRTH_PLACE_COUNTY_DESCRIPTION"
 msgstr "Only for people born in France"
+
+# FR : Pays de naissance
+msgid "form.user-details.BIRTH_COUNTRY"
+msgstr "Birth country"
+
+# FR : Nationalit&eacute;
+msgid "form.user-details.NATIONALITY"
+msgstr "Nationalit&eacute;"
+
+# FR : Num&eacute;ro de rue
+msgid "form.user-details.ADDRESS_NUMBER"
+msgstr "Street number"
+
+# FR : Compl&eacute;ment de num&eacute;ro
+msgid "form.user-details.ADDRESS_NUMBER_COMPLEMENT"
+msgstr "Street number complement"
+
+# FR : Adresse
+msgid "form.user-details.ADDRESS"
+msgstr "Address"
+
+# FR : Code postal
+msgid "form.user-details.ZIP_CODE"
+msgstr "Zip code"
+
+# FR : Ville
+msgid "form.user-details.CITY"
+msgstr "City"
+
+# FR : Pays
+msgid "form.user-details.COUNTRY"
+msgstr "Country"
+
+# FR : R&eacute;sidence fiscale
+msgid "form.user-details.TAX_COUNTRY"
+msgstr "Tax country"
+
+# FR : T&eacute;l&eacute;phone
+msgid "form.user-details.PHONE"
+msgstr "Phone number"
+
+# FR : Personne de confiance
+msgid "form.user-details.CONTACT_IF_DECEASED"
+msgstr "Trusted person"
+
+# FR : Identifiez ici les coordonn&eacute;es (nom, mail, t&eacute;l&eacute;phone) de votre personne de confiance &agrave; contacter en cas de souci majeur, notamment en cas de d&eacute;c&egrave;s. Pensez &agrave; l'informer au pr&eacute;alable de vos investissements sur WE DO GOOD pour qu'elle soit au courant. En remplissant ce champ, vous nous autorisez &agrave; lui donner l'acc&egrave;s &agrave; votre compte personnel sur justificatif de votre impossibilit&eacute; à acc&eacute;der &agrave; votre compte.
+msgid "form.user-details.CONTACT_IF_DECEASED_DESCRIPTION"
+msgstr "Please write the contact information (name, e-mail, phone number) of the trusted person we should contact in the case of a major problem (death). Let this person know when you will write it down, we will let this person access your account if needed."
+
+# FR : Cette adresse e-mail n'est pas valide.
+msgid "form.user-details.EMAIL_ADDRESS_NOT_OK"
+msgstr "This is not a valid e-mail address"
+
+# FR : Votre pr&eacute;nom n'a pas &eacute;t&eacute; renseign&eacute;.
+msgid "form.user-details.FIRST_NAME_EMPTY"
+msgstr "The first name field is empty."
+
+# FR : Votre nom n'a pas &eacute;t&eacute; renseign&eacute;.
+msgid "form.user-details.LAST_NAME_EMPTY"
+msgstr "The last name field is empty."
+
+# FR : Votre lieu de naissance n'est pas correct.
+msgid "form.user-details.BIRTH_PLACE_ERROR"
+msgstr "Error in the birth place field."
+
+# FR : Votre adresse n'est pas correcte.
+msgid "form.user-details.ADDRESS_ERROR"
+msgstr "Error in the address field."
+
+# FR : Votre code postal n'est pas correct.
+msgid "form.user-details.ZIP_CODE_ERROR"
+msgstr "Error in the zip code field."
+
+# FR : Votre ville n'est pas correcte.
+msgid "form.user-details.CITY_ERROR"
+msgstr "Error in the city field."
+
+# FR : Vos informations ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s.
+msgid "form.user-details.SAVE_SUCCESS"
+msgstr "Your personal information has been saved."
 
 # ############################## form - user-identitydocs ################################
 # FR : Justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident
@@ -811,6 +999,35 @@ msgstr "Il doit dater de moins de 3 mois, et provenir d'un fournisseur d'&eacute
 # FR : Le SMS sera envoy&eacute; au num&eacute;ro suivant :
 msgid "form.user-identitydocs.PHONE_NUMBER"
 msgstr "Le SMS sera envoy&eacute; au num&eacute;ro suivant :"
+
+# ############################## form - user-notifications ################################
+# FR : Newsletter WE DO GOOD
+msgid "form.user-notifications.newsletters.WEDOGOOD"
+msgstr "WE DO GOOD newsletter"
+
+# FR : Actualit&eacute;s des projets
+msgid "form.user-notifications.newsletters.PROJECT_NEWS"
+msgstr "Projects news"
+
+# FR : Projets &agrave; impact &eacute;conomique
+msgid "form.user-notifications.newsletters.PROJECTS_ECONOMIC"
+msgstr "Projects with economic impact"
+
+# FR : Projets &agrave; impact social
+msgid "form.user-notifications.newsletters.PROJECTS_SOCIAL"
+msgstr "Projects with social impact"
+
+# FR : Projets &agrave; impact environnemental
+msgid "form.user-notifications.newsletters.PROJECTS_ENVIRONMENT"
+msgstr "Projects with environment impact"
+
+# FR : Projets autour de chez moi
+msgid "form.user-notifications.newsletters.PROJECTS_AROUND_ME"
+msgstr "Projects around me"
+
+# FR : Si le montant est positif
+msgid "form.user-notifications.royalties.ONLY_POSITIVE"
+msgstr "Only if the amount is positive"
 
 # ############################## form - user-password ################################
 # FR : Mot de passe actuel
