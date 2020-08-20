@@ -1,5 +1,5 @@
 <?php 
-	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user;
+	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user, $sitepress;
 	if ($WDG_cache_plugin == null) {
 		$WDG_cache_plugin = new WDG_Cache_Plugin();
 	}
@@ -111,11 +111,27 @@
 				<a href="<?php echo home_url( '/financement/' ); ?>" class="lines"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/investissement/' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/a-propos/vision/' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
-                                
+
+				<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+					<a href="#" id="btn-switch-lang">
+						<?php echo $sitepress->get_current_language(); ?>
+					</a>
+				<?php endif; ?>
+				
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
 				<a href="#" class="btn-user not-connected inactive"><?php _e( "Connexion", 'yproject' ); ?></a>
 				<a href="#" id="btn-burger" class="only-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/menu-burger.png" alt="MENU" /></a>
 				
+				<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+				<div id="submenu-switch-lang" class="submenu-style hidden">
+					<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
+					<ul class="submenu-list">
+					<?php foreach ( $active_languages as $language_key => $language_item ): ?>
+						<li <?php if ( $language_item[ 'active' ] ) { echo 'class="active"'; } ?>><a href="<?php echo $language_item[ 'url' ]; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
+					<?php endforeach; ?>
+					</ul>
+				</div>
+				<?php endif; ?>
 				
 				<?php /* Affichage quand clic sur Rechercher */ ?>
 				<div id="submenu-search" class="submenu-style hidden">

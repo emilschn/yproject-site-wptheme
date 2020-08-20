@@ -411,6 +411,7 @@ var WDGNavFunctions = (function($) {
 			// Navbar : bouton recherche
 			$('#btn-search, #btn-burger').click(function(e){
 				e.preventDefault();
+				$( '#submenu-switch-lang' ).hide();
 				if ($('#btn-search, #btn-burger').hasClass('active')) {
 					$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
 					$('#submenu-search').hide();
@@ -472,6 +473,10 @@ var WDGNavFunctions = (function($) {
 					}
 				}
 			});
+
+			$( '#menu #btn-switch-lang' ).click( function() {
+				$( '#submenu-switch-lang' ).toggle();
+			} );
 			
 			
 			$('#menu .btn-user').click(function(){
