@@ -85,6 +85,22 @@ msgstr "disponibles"
 msgid "common.REMOVE"
 msgstr "Remove"
 
+# FR : Date
+msgid "common.DATE"
+msgstr "Date"
+
+# FR : Montant
+msgid "common.AMOUNT"
+msgstr "Amount"
+
+# FR : Transaction
+msgid "common.TRANSACTION"
+msgstr "Transaction"
+
+# FR : Investissement
+msgid "common.INVESTMENT"
+msgstr "Investment"
+
 # ############################## COMMON - FORMS - ERROR ################################
 # FR : Ce fichier n'est pas au bon format.
 msgid "common.forms.error.FILE_WRONG_FORMAT"
@@ -649,6 +665,54 @@ msgstr "en investissement"
 msgid "account.investments.STATUS_VOTE"
 msgstr "en &eacute;valuation"
 
+# FR : En attente de paiement
+msgid "account.investments.status.PENDING_PAYMENT"
+msgstr "En attente de paiement"
+
+# FR : A valider
+msgid "account.investments.status.TO_BE_VALIDATED"
+msgstr "To be validated"
+
+# FR : Valid&eacute;
+msgid "account.investments.status.VALIDATED"
+msgstr "Validated"
+
+# FR : Versements termin&eacute;s
+msgid "account.investments.status.ROYALTIES_FINISHED"
+msgstr "Finished contract"
+
+# FR : Annul&eacute;
+msgid "account.investments.status.CANCELED"
+msgstr "Canceled"
+
+# FR : En suspend
+msgid "account.investments.status.SUSPENDED"
+msgstr "Suspended"
+
+# FR : Versements &agrave; venir
+msgid "account.investments.status.CONTRACT_GOING_TO_START"
+msgstr "Upcoming contract"
+
+# FR : Versements en cours
+msgid "account.investments.status.PAYMENTS_STARTED"
+msgstr "Payments started"
+
+# FR : Versements termin&eacute;s
+msgid "account.investments.status.PAYMENTS_FINISHED"
+msgstr "Payments finished"
+
+# FR : En retard
+msgid "account.investments.status.LATE"
+msgstr "Late"
+
+# FR : A venir
+msgid "account.investments.status.UPCOMING"
+msgstr "Upcoming"
+
+# FR : En d&eacute;faut
+msgid "account.investments.status.FAILED"
+msgstr "Failed"
+
 # FR : Investissements de
 msgid "account.investments.orga.TITLE"
 msgstr "Investissements de"
@@ -820,6 +884,62 @@ msgstr "being transfered to bank account"
 # FR : Aucun transfert d&apos;argent
 msgid "account.wallet.orga.NO_MONEY_TRANSFER"
 msgstr "No money transfer."
+
+# FR : Aucune transaction
+msgid "account.wallet.transactions.NONE"
+msgstr "No transaction"
+
+# FR : Investissement sur
+msgid "account.wallet.transactions.INVESTMENT_ON"
+msgstr "Investment on"
+
+# FR : Projet port&eacute; par
+msgid "account.wallet.transactions.PROJECT_MANAGED_BY"
+msgstr "Project managed by"
+
+# FR : Versement de royalties de
+msgid "account.wallet.transactions.ROYALTIES_TRANSFER_FROM"
+msgstr "Royalties payment from"
+
+# FR : Versement de royalties
+msgid "account.wallet.transactions.ROYALTIES_TRANSFER"
+msgstr "Royalties payment"
+
+# FR : Rechargement depuis votre compte bancaire
+msgid "account.wallet.transactions.TRANSFER_FROM_BANK_ACCOUNT"
+msgstr "Transfer from your bank account"
+
+# FR : Remboursement d'investissement
+msgid "account.wallet.transactions.REFUND_INVESTMENT"
+msgstr "Investment refund"
+
+# FR : Retrait vers votre compte bancaire
+msgid "account.wallet.transactions.TRANSFER_TO_BANK_ACCOUNT"
+msgstr "Transfer to your bank account"
+
+# FR : Remboursement sur votre porte-monnaie de
+msgid "account.wallet.transactions.REFUND_TO_WALLET_FROM"
+msgstr "Refund to your wallet from"
+
+# FR : Correction d'erreur de versement
+msgid "account.wallet.transactions.TRANSFER_CORRECTION"
+msgstr "Transfer adjustment"
+
+# FR : D&eacute;bit ind&eacute;fini
+msgid "account.wallet.transactions.UNDEFINED_DEBIT"
+msgstr "Undefined debit"
+
+# FR : Carte bancaire :
+msgid "account.wallet.transactions.BANK_CARD"
+msgstr "Bank card:"
+
+# FR : Virement :
+msgid "account.wallet.transactions.BANK_TRANSFER"
+msgstr "Bank transfer:"
+
+# FR : Pr&eacute;l&egrave;vement bancaire :
+msgid "account.wallet.transactions.BANK_DIRECT_DEBIT"
+msgstr "Bank direct debit:"
 
 # ############################## form - user-bank ################################
 # FR : Nom du propri&eacute;taire du compte
