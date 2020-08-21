@@ -52,6 +52,18 @@ else {
 							<a class="link" href="<?php echo home_url('/a-propos/contact/'); ?>"><?php _e( "Contactez-nous", 'yproject' ); ?></a><br>
 							<a class="link" href="<?php echo home_url('/a-propos/newsletter/'); ?>"><?php _e( "S'inscrire &agrave; la newsletter", 'yproject' ); ?></a>
 						</div>
+
+						<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+						<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
+						<div class="select">
+							<select id="footer-switch-lang">
+								<?php foreach ( $active_languages as $language_key => $language_item ): ?>
+									<option value="<?php echo $language_item[ 'url' ]; ?>" <?php if ( $language_item[ 'active' ] ) { echo 'selected="selected"'; } ?>><?php echo mb_strtoupper( $language_item[ 'native_name' ], 'UTF-8' ); ?></option>
+								<?php endforeach; ?>
+							</select>
+							<div class="select_arrow"></div>
+						</div>
+						<?php endif; ?>
 					</div>
 				</section>
 
