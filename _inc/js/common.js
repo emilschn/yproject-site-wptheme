@@ -477,6 +477,9 @@ var WDGNavFunctions = (function($) {
 			$( '#menu #btn-switch-lang' ).click( function() {
 				$( '#submenu-switch-lang' ).toggle();
 			} );
+			$( '#footer-switch-lang' ).change( function() {
+				window.location = $( this ).val();
+			} );
 			
 			
 			$('#menu .btn-user').click(function(){
