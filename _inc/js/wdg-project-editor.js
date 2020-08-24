@@ -148,8 +148,21 @@ var ProjectEditor = (function($) {
 					$("#wdg-edit-"+property).css("left", $(elementId).position().left + $(elementId).outerWidth());
 					var marginTop = Number($(elementId).css("marginTop").replace("px", ""));
 					$("#wdg-edit-"+property).css("top", $(elementId).position().top + marginTop);
+
+					// Largeur de l'écran récupérée avec la largeur de la zone de navigation
+					var nScreenWidth = $('nav#main').width();
+					var nLeftPos = Number( $( '#wdg-edit-' + property ).css( 'left' ).replace( 'px', '' ) );
+					if ( nLeftPos + $( '#wdg-edit-' + property ).width() > nScreenWidth ) {
+						var nPadding = 4;
+						if ( property == 'description' || property == 'societal_challenge' || property == 'added_value' || property == 'economic_model' || property == 'implementation' ) {
+							nPadding = 30;
+						}
+						$( '#wdg-edit-' + property ).css( 'left', nScreenWidth - $( '#wdg-edit-' + property ).width() - nPadding );
+					}
 				}
-				$("#wdg-edit-"+property).show();
+				if ( $(elementId).is( ':visible' ) ) {
+					$("#wdg-edit-"+property).show();
+				}
 			}
 			
 		},
@@ -509,8 +522,8 @@ var ProjectEditor = (function($) {
 			
 			var buttonValidate = '<div id="wdg-validate-'+property+'" class="edit-button-validate" data-property="'+property+'"></div>';
 			$("#wdg-input-"+property).after(buttonValidate);
-			$("#wdg-validate-"+property).css("left", $("#wdg-input-"+property).position().left + $("#wdg-input-"+property).outerWidth());
-			$("#wdg-validate-"+property).css("top", $("#wdg-input-"+property).position().top - $("#wdg-input-"+property).outerHeight());
+			$("#wdg-validate-"+property).css("left", $("#wdg-edit-"+property).css("left"));
+			$("#wdg-validate-"+property).css("top", $("#wdg-edit-"+property).css("top"));
 			$("#wdg-validate-"+property).click(function() {
 				ProjectEditor.validateInput($(this).data("property"));
 			});
@@ -537,8 +550,8 @@ var ProjectEditor = (function($) {
                         
 			var buttonValidate = '<div id="wdg-validate-'+property+'" class="edit-button-validate" data-property="'+property+'"></div>';
 			$("#wdg-input-"+property).after(buttonValidate);
-			$("#wdg-validate-"+property).css("left", $("#wdg-input-"+property).position().left + $("#wdg-input-"+property).outerWidth());
-			$("#wdg-validate-"+property).css("top", $("#wdg-input-"+property).position().top - $("#wdg-input-"+property).outerHeight());
+			$("#wdg-validate-"+property).css("left", $("#wdg-edit-"+property).css("left"));
+			$("#wdg-validate-"+property).css("top", $("#wdg-edit-"+property).css("top"));
 			$("#wdg-validate-"+property).click(function() {
 				ProjectEditor.validateInput($(this).data("property"));
 			});
@@ -556,16 +569,16 @@ var ProjectEditor = (function($) {
 			$(ProjectEditor.elements[property].contentId + "> div").show();
 			var buttonValidate = '<div id="wdg-validate-'+property+'" class="edit-button-validate" data-property="'+property+'" title="Enregistrer"></div>';
 			$(ProjectEditor.elements[property].contentId).after(buttonValidate);
-			$("#wdg-validate-"+property).css("left", $(ProjectEditor.elements[property].contentId).position().left + $(ProjectEditor.elements[property].contentId).outerWidth());
-			$("#wdg-validate-"+property).css("top", $(ProjectEditor.elements[property].contentId).position().top);
+			$("#wdg-validate-"+property).css("left", $("#wdg-edit-"+property).css("left"));
+			$("#wdg-validate-"+property).css("top", $("#wdg-edit-"+property).css("top"));
 			$("#wdg-validate-"+property).click(function() {
 				ProjectEditor.validateInput($(this).data("property"));
 			});
 			
 			var buttonCancel = '<div id="wdg-cancel-'+property+'" class="cancel-button" data-property="'+property+'" title="Annuler l\'édition"></div>';
 			$(ProjectEditor.elements[property].contentId).after(buttonCancel);
-			$("#wdg-cancel-"+property).css("left", $(ProjectEditor.elements[property].contentId).position().left + $(ProjectEditor.elements[property].contentId).outerWidth());
-			$("#wdg-cancel-"+property).css("top", $(ProjectEditor.elements[property].contentId).position().top);
+			$("#wdg-cancel-"+property).css("left", $("#wdg-edit-"+property).css("left"));
+			$("#wdg-cancel-"+property).css("top", $("#wdg-edit-"+property).css("top"));
 			$("#wdg-cancel-"+property).click(function() {
 				ProjectEditor.cancelInput(property);
 			});
