@@ -187,6 +187,8 @@ UserAccountDashboard.prototype.reloadUserInvestments = function() {
 };
 
 UserAccountDashboard.prototype.displayUserInvestments = function( result, userID, userType ) {
+	var self = this;
+
 	// Affichage par campagne
 	var nInvestmentPublishCount = 0;
 	var nInvestmentPendingCount = 0;
