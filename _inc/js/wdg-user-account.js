@@ -148,7 +148,7 @@ UserAccountDashboard.prototype.initProjectList = function() {
 		self.displayUserInvestments( result, userID, userType );
 
 	}).fail(function() {
-		var sBuffer = '<button id="reload-investments-' + userID + '" class="button blue">Recharger</button>';
+		var sBuffer = '<div id="container-reload-investments-' + userID + '" class="db-form v3"><button id="reload-investments-' + userID + '" class="button blue">Recharger</button></div>';
 		$( '#ajax-loader-' + userID ).after( sBuffer );
 		$( '#ajax-loader-img-' + userID ).hide();
 		$( '#reload-investments-' + userID ).click( function() { self.reloadUserInvestments(); } );
@@ -164,7 +164,7 @@ UserAccountDashboard.prototype.reloadUserInvestments = function() {
 	var userType = $('ul.nav-menu li.selected a').data('usertype');
 	
 	$( '#ajax-loader-img-' + userID ).show();
-	$( '#reload-investments-' + userID ).hide();
+	$( '#container-reload-investments-' + userID ).hide();
 	
 	$.ajax({
 		'type' : "POST",
