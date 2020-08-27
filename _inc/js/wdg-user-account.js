@@ -150,8 +150,8 @@ UserAccountDashboard.prototype.initProjectList = function() {
 	}).fail(function() {
 		var sBuffer = '<button id="reload-investments-' + userID + '" class="button blue">Recharger</button>';
 		$( '#ajax-loader-' + userID ).after( sBuffer );
-		$( '#reload-investments-' + userID ).click( function() { self.reloadUserInvestments(); } );
 		$( '#ajax-loader-img-' + userID ).hide();
+		$( '#reload-investments-' + userID ).click( function() { self.reloadUserInvestments(); } );
 	});
 };
 
@@ -167,6 +167,7 @@ UserAccountDashboard.prototype.reloadUserInvestments = function() {
 	if ( !$( '#ajax-loader-img-' + userID ).is( ':visible' ) ) {
 		return;
 	}
+	$( '#ajax-loader-img-' + userID ).show();
 	
 	$.ajax({
 		'type' : "POST",
