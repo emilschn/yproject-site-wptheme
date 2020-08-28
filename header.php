@@ -142,6 +142,10 @@
 						<a href="<?php echo home_url( '/financement/' ); ?>"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/investissement/' ); ?>"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
 						<a href="<?php echo home_url( '/a-propos/vision/' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
+						<?php if ( is_user_logged_in() ): ?>
+							<br>
+							<a href="<?php echo wp_logout_url(); ?>"><?php _e( "Me d&eacute;connecter", 'yproject' ); ?></a>
+						<?php endif; ?>
 					</div>
 					
 					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher un projet", 'yproject'); ?>" />

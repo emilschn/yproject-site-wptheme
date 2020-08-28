@@ -101,6 +101,26 @@ msgstr "Transaction"
 msgid "common.INVESTMENT"
 msgstr "Investment"
 
+# FR : ans
+msgid "common.YEARS"
+msgstr "years"
+
+# FR : investisseurs
+msgid "common.INVESTORS"
+msgstr "investors"
+
+# FR : Suivant
+msgid "common.NEXT"
+msgstr "Next"
+
+# FR : Continuer
+msgid "common.CONTINUE"
+msgstr "Continue"
+
+# FR : Pr&eacute;c&eacute;dent
+msgid "common.PREVIOUS"
+msgstr "Previous"
+
 # ############################## COMMON - FORMS - ERROR ################################
 # FR : Ce fichier n'est pas au bon format.
 msgid "common.forms.error.FILE_WRONG_FORMAT"
@@ -941,6 +961,143 @@ msgstr "Bank transfer:"
 msgid "account.wallet.transactions.BANK_DIRECT_DEBIT"
 msgstr "Bank direct debit:"
 
+# ############################## /investir ################################
+# FR : Investir en royalties
+msgid "invest.header.INVEST_ROYALTIES"
+msgstr "Investir en royalties"
+
+# FR : Investir sur le projet
+msgid "invest.header.INVEST_ON_PROJECT"
+msgstr "Invest on the project"
+
+# FR : Retour au projet
+msgid "invest.header.BACK_TO_PROJECT"
+msgstr "Back to the project"
+
+# FR : Montant
+msgid "invest.header.steps.AMOUNT"
+msgstr "Amount"
+
+# FR : Informations personnelles
+msgid "invest.header.steps.INFORMATION"
+msgstr "Personal information"
+
+# FR : Contrat
+msgid "invest.header.steps.CONTRACT"
+msgstr "Contract"
+
+# FR : Paiement
+msgid "invest.header.steps.PAYMENT"
+msgstr "Payment"
+
+# FR : Partage
+msgid "invest.header.steps.SHARE"
+msgstr "Share"
+
+# FR : Afin de lutter contre le blanchiment d'argent, des justificatifs d'identit&eacute; vous seront demand&eacute;s au format num&eacute;rique pour authentifier votre compte.
+msgid "invest.input.ALERT_AUTHENTICATION_1"
+msgstr "Afin de lutter contre le blanchiment d'argent, des justificatifs d'identit&eacute; vous seront demand&eacute;s au format num&eacute;rique pour authentifier votre compte."
+
+# FR : Si vous ne les avez pas avec vous, vous aurez la possibilit&eacute; de revenir plus tard pour compl&eacute;ter votre profil et finaliser votre investissement.
+msgid "invest.input.ALERT_AUTHENTICATION_2"
+msgstr "Si vous ne les avez pas avec vous, vous aurez la possibilit&eacute; de revenir plus tard pour compl&eacute;ter votre profil et finaliser votre investissement."
+
+# FR : Votre parcours a subi une perte de donn&eacute;e de session. Merci de reprendre votre parcours.
+msgid "invest.input.error.SESSION"
+msgstr "Votre parcours a subi une perte de donn&eacute;e de session. Merci de reprendre votre parcours."
+
+# FR : Vous devez investir au moins
+msgid "invest.input.error.MINIMUM"
+msgstr "Vous devez investir au moins"
+
+# FR : Vous ne pouvez pas investir plus de
+msgid "invest.input.error.MAXIMUM"
+msgstr "Vous ne pouvez pas investir plus de"
+
+# FR : Merci de ne pas laisser moins de
+msgid "invest.input.error.INTERVAL_1"
+msgstr "Merci de ne pas laisser moins de"
+
+# FR : &agrave; investir.
+msgid "invest.input.error.INTERVAL_2"
+msgstr "&agrave; investir."
+
+# FR : Le montant que vous pouvez investir doit &ecirc;tre entier.
+msgid "invest.input.error.INTEGER"
+msgstr "Le montant que vous pouvez investir doit &ecirc;tre entier."
+
+# FR : Le montant saisi semble comporter une erreur.
+msgid "invest.input.error.GENERAL"
+msgstr "Le montant saisi semble comporter une erreur."
+
+# FR : une dur&eacute;e ind&eacute;termin&eacute;e
+msgid "invest.input.UNDEFINED_DURATION"
+msgstr "une dur&eacute;e ind&eacute;termin&eacute;e"
+
+# FR :  (pourcentage indicatif).
+msgid "invest.input.INDICATIVE_PERCENTAGE"
+msgstr " (pourcentage indicatif)."
+
+# FR : du chiffre d'affaires de
+msgid "invest.input.OF_TURNOVER_OF"
+msgstr "du chiffre d'affaires de"
+
+# FR : pendant
+msgid "invest.input.DURING"
+msgstr "pendant"
+
+# FR : du chiffre d'affaires de ce projet pendant
+msgid "invest.input.OF_TURNOVER_OF_PROJECT_DURING"
+msgstr "du chiffre d'affaires de ce projet pendant"
+
+# FR : Gr&acirc;ce &agrave; moi
+msgid "invest.input.THANKS_TO_ME"
+msgstr "Gr&acirc;ce &agrave; moi"
+
+# FR : atteints
+msgid "invest.input.REACHED"
+msgstr "atteints"
+
+# FR : Avant d'investir
+msgid "invest.input.BEFORE_INVESTING"
+msgstr "Avant d'investir"
+
+# FR : Informations personnelles
+msgid "invest.user-details.PERSONAL_INFORMATION"
+msgstr "Personal information"
+
+# FR : Informations de votre organisation
+msgid "invest.user-details.ORGANIZATION_INFORMATION"
+msgstr "Information about your organization"
+
+# FR : Nous avons bien re&ccedil;u vos documents. Ils ont &eacute;t&eacute; transmis &agrave; notre prestataire Lemon Way pour validation.
+msgid "invest.identitydocs.DOCUMENTS_RECEIVED"
+msgstr "Nous avons bien re&ccedil;u vos documents. Ils ont &eacute;t&eacute; transmis &agrave; notre prestataire Lemon Way pour validation."
+
+# FR : Nous avons enregistr&eacute; votre intention d'investissement de %s &euro;.
+msgid "invest.identitydocs.INVESTMENT_SAVED"
+msgstr "Nous avons enregistr&eacute; votre intention d'investissement de %s &euro;."
+
+# FR : Lorsque les documents seront valid&eacute;s, vous recevrez une notification vous permettant de finaliser votre investissement en proc&eacute;dant au paiement.
+msgid "invest.identitydocs.WILL_BE_NOTIFIED"
+msgstr "Lorsque les documents seront valid&eacute;s, vous recevrez une notification vous permettant de finaliser votre investissement en proc&eacute;dant au paiement."
+
+# FR : Vous pourrez aussi le retrouver au sein de votre compte personnel.
+msgid "invest.identitydocs.DOCS_IN_ACCOUNT"
+msgstr "Vous pourrez aussi le retrouver au sein de votre compte personnel."
+
+# FR : Merci, et &agrave; bient&ocirc;t !
+msgid "invest.identitydocs.THANKS"
+msgstr "Merci, et &agrave; bient&ocirc;t !"
+
+# FR : Envoyer plus tard
+msgid "invest.identitydocs.SEND_LATER"
+msgstr "Envoyer plus tard"
+
+# FR : et investir plus tard
+msgid "invest.identitydocs.INVEST_LATER"
+msgstr "et investir plus tard"
+
 # ############################## form - user-bank ################################
 # FR : Nom du propri&eacute;taire du compte
 msgid "form.user-bank.NAME_ACCOUNT_OWNER"
@@ -1119,6 +1276,10 @@ msgstr "Corporate name"
 # FR : E-mail
 msgid "form.organization-details.EMAIL"
 msgstr "E-mail"
+
+# FR : Cette adresse doit &ecirc;tre diff&eacute;rente de celle de votre compte personnel.
+msgid "form.organization-details.EMAIL_DESCRIPTION"
+msgstr "Cette adresse doit &ecirc;tre diff&eacute;rente de celle de votre compte personnel."
 
 # FR : Num&eacute;ro SIRET
 msgid "form.organization-details.ID_NUMBER"
@@ -1366,6 +1527,104 @@ msgstr "Votre mot de passe actuel ne correspond pas."
 # FR : Votre mot de passe a &eacute;t&eacute; modifi&eacute; avec succ&egrave;s.
 msgid "form.user-password.PASSWORD_MODIFIED"
 msgstr "Votre mot de passe a &eacute;t&eacute; modifi&eacute; avec succ&egrave;s."
+
+# ############################## form - invest-input ################################
+# FR : Je souhaite investir
+msgid "form.invest-input.I_WISH_TO_INVEST"
+msgstr "Je souhaite investir"
+
+# FR : Vous n'&ecirc;tes pas identifi&eacute;.
+msgid "form.invest-input.error.NOT_LOGGED_IN"
+msgstr "Vous n'&ecirc;tes pas identifi&eacute;."
+
+# FR : Il n'est pas possible d'investir.
+msgid "form.invest-input.error.INVESTMENT_NOT_POSSIBLE"
+msgstr "Il n'est pas possible d'investir."
+
+# FR : Vous n'avez pas saisi le montant que vous souhaitez investir.
+msgid "form.invest-input.error.AMOUNT_EMPTY"
+msgstr "Vous n'avez pas saisi le montant que vous souhaitez investir."
+
+# FR : Vous n'avez pas saisi un nombre correct.
+msgid "form.invest-input.error.AMOUNT_NOT_NUMERIC"
+msgstr "Vous n'avez pas saisi un nombre correct."
+
+# FR : Vous n'avez pas saisi un nombre entier.
+msgid "form.invest-input.error.AMOUNT_NOT_INTEGER"
+msgstr "Vous n'avez pas saisi un nombre entier."
+
+# FR : Vous n'avez pas saisi un montant suffisant.
+msgid "form.invest-input.error.AMOUNT_NOT_ENOUGH"
+msgstr "Vous n'avez pas saisi un montant suffisant."
+
+# FR : Vous ne pouvez pas investir autant.
+msgid "form.invest-input.error.AMOUNT_TOO_MUCH"
+msgstr "Vous ne pouvez pas investir autant."
+
+# ############################## form - invest-user-details ################################
+# FR : En mon nom (personne physique)
+msgid "form.invest-user-details.IN_MY_NAME"
+msgstr "En mon nom (personne physique)"
+
+# FR : En tant qu'organisation (personne morale)
+msgid "form.invest-user-details.AS_ORGANIZATION"
+msgstr "En tant qu'organisation (personne morale)"
+
+# FR : Je d&eacute;clare que ces informations sont exactes
+msgid "form.invest-user-details.CORRECT_INFORMATION"
+msgstr "Je d&eacute;clare que ces informations sont exactes"
+
+# FR : Je d&eacute;clare que ces informations sont exactes
+msgid "form.invest-user-details.A_NEW_ORGANIZATION"
+msgstr "Une nouvelle organisation"
+
+# FR : Au nom de
+msgid "form.invest-user-details.ORGANIZATION_SELECT"
+msgstr "Au nom de"
+
+# FR : Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette organisation
+msgid "form.invest-user-details.CAPACITY_REPRESENT_ORGANIZATION"
+msgstr "Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette organisation"
+
+# FR : Votre pr&eacute;nom doit faire au moins 2 caract&egrave;res.
+msgid "form.invest-user-details.error.FIRST_NAME_SIZE"
+msgstr "Votre pr&eacute;nom doit faire au moins 2 caract&egrave;res."
+
+# FR : Votre nom doit faire au moins 2 caract&egrave;res.
+msgid "form.invest-user-details.error.LAST_NAME_SIZE"
+msgstr "Votre nom doit faire au moins 2 caract&egrave;res."
+
+# FR : Vous n'avez pas d&eacute;clar&eacute; vos informations comme exactes.
+msgid "form.invest-user-details.error.NOT_DECLARED_INFORMATION"
+msgstr "Vous n'avez pas d&eacute;clar&eacute; vos informations comme exactes."
+
+# FR : Vous devez choisir en quel nom vous souhaitez investir.
+msgid "form.invest-user-details.error.CHOOSE_USER_TYPE"
+msgstr "Vous devez choisir en quel nom vous souhaitez investir."
+
+# FR : Vous n'avez pas choisi l'organisation au nom de laquelle vous souhaitez investir.
+msgid "form.invest-user-details.error.ORGANIZATION_SELECTION"
+msgstr "Vous n'avez pas choisi l'organisation au nom de laquelle vous souhaitez investir."
+
+# FR : Vous n'avez pas d&eacute;clar&eacute; &ecirc;tre en mesure de repr&eacute;senter l'organisation.
+msgid "form.invest-user-details.error.ORGANIZATION_REPRESENT"
+msgstr "Vous n'avez pas d&eacute;clar&eacute; &ecirc;tre en mesure de repr&eacute;senter l'organisation."
+
+# FR : Vous ne pouvez pas investir avec l'organisation qui porte le projet.
+msgid "form.invest-user-details.error.SAME_ORGANIZATION_PROJECT"
+msgstr "Vous ne pouvez pas investir avec l'organisation qui porte le projet."
+
+# FR : L'adresse e-mail de l'organisation n'est pas valide.
+msgid "form.invest-user-details.error.ORGANIZATION_EMAIL_NOT_OK"
+msgstr "L'adresse e-mail de l'organisation n'est pas valide."
+
+# FR : L'adresse e-mail de l'organisation est d&eacute;j&agrave; utilis&eacute;e.
+msgid "form.invest-user-details.error.ORGANIZATION_EMAIL_ALREADY_USED"
+msgstr "L'adresse e-mail de l'organisation est d&eacute;j&agrave; utilis&eacute;e."
+
+# FR : Le site web de l'organisation n'est pas d&eacute;fini.
+msgid "form.invest-user-details.error.ORGANIZATION_WEBSITE_EMPTY"
+msgstr "Le site web de l'organisation n'est pas d&eacute;fini."
 
 # ############################## /lemonway-document ################################
 # FR : Merci de nous contacter par chat ou par mail sur investir@wedogood.co.

@@ -42,7 +42,7 @@ $fields_info_confirm = $page_controler->get_form()->getFields( WDG_Form_Invest_U
 	</div>
 	
 	<div id="fieldgroup-user-info" class="hidden">
-	<h2><?php _e( "Informations personnelles", 'yproject' ); ?></h2>
+	<h2><?php _e( 'invest.user-details.PERSONAL_INFORMATION', 'yproject' ); ?></h2>
 	<?php foreach ( $fields_user_info as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
@@ -50,7 +50,7 @@ $fields_info_confirm = $page_controler->get_form()->getFields( WDG_Form_Invest_U
 	</div>
 	
 	<div id="fieldgroup-orga-info" class="fieldgroup-user-type hidden">
-	<h2><?php _e( "Informations de votre organisation", 'yproject' ); ?></h2>
+	<h2><?php _e( 'invest.user-details.ORGANIZATION_INFORMATION', 'yproject' ); ?></h2>
 	<?php foreach ( $fields_orga_info as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
@@ -71,12 +71,12 @@ $fields_info_confirm = $page_controler->get_form()->getFields( WDG_Form_Invest_U
 		<?php endforeach; ?>
 
 		<p class="align-left">
-			<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+			* <?php _e( 'common.REQUIRED_FIELDS', 'yproject' ); ?><br>
 		</p>
 
-		<button type="submit" class="button half right transparent"><?php _e( "Suivant", 'yproject' ); ?></button>
+		<button type="submit" class="button half right transparent"><?php _e( 'common.NEXT', 'yproject' ); ?></button>
 	
-		<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
+		<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( 'common.PREVIOUS', 'yproject' ); ?></button>
 	</div>
 	
 	<div class="clear"></div>
