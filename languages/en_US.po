@@ -125,6 +125,14 @@ msgstr "Previous"
 msgid "common.MY_ACCOUNT"
 msgstr "Mon compte"
 
+# FR : Modifier
+msgid "common.MODIFY"
+msgstr "Modify"
+
+# FR : Envoyer
+msgid "common.SEND"
+msgstr "Envoyer"
+
 # ############################## COMMON - FORMS - ERROR ################################
 # FR : Ce fichier n'est pas au bon format.
 msgid "common.forms.error.FILE_WRONG_FORMAT"
@@ -1206,6 +1214,238 @@ msgstr "Retour &agrave; la page &Eacute;pargne positive"
 msgid "invest.share.BACK_PROJECT"
 msgstr "Retour au projet"
 
+# FR : Je choisis mon mode de paiement :
+msgid "invest.mean-payment.TITLE"
+msgstr "Je choisis mon mode de paiement :"
+
+# FR : Porte-monnaie WEDOGOOD
+msgid "invest.mean-payment.list.WALLET"
+msgstr "Porte-monnaie WEDOGOOD"
+
+# FR : Porte-monnaie WE DO GOOD et carte bancaire
+msgid "invest.mean-payment.list.CARD_WALLET"
+msgstr "Porte-monnaie WE DO GOOD et carte bancaire"
+
+# FR : Carte bancaire
+msgid "invest.mean-payment.list.CARD"
+msgstr "Carte bancaire"
+
+# FR : Carte bancaire enregistr&eacute;e
+msgid "invest.mean-payment.list.CARD_SAVED"
+msgstr "Carte bancaire enregistr&eacute;e"
+
+# FR : Virement bancaire
+msgid "invest.mean-payment.list.WIRE"
+msgstr "Virement bancaire"
+
+# FR : Ch&egrave;que
+msgid "invest.mean-payment.list.CHECK"
+msgstr "Ch&egrave;que"
+
+# FR : Je dispose actuellement de %s &euro; sur mon porte-monnaie.
+msgid "invest.mean-payment.I_OWN"
+msgstr "Je dispose actuellement de %s &euro; sur mon porte-monnaie."
+
+# FR : Je paierai %s &euro; via carte bancaire.
+msgid "invest.mean-payment.I_WILL_PAY_WITH_CARD"
+msgstr "Je paierai %s &euro; via carte bancaire."
+
+# FR : CB, Visa, Mastercard ; e-carte bleue provisoire non accept&eacute;e
+msgid "invest.mean-payment.CARD_DETAILS"
+msgstr "CB, Visa, Mastercard ; e-carte bleue provisoire non accept&eacute;e"
+
+# FR : D&eacute;bit imm&eacute;diat, remboursement int&eacute;gral si la lev&eacute;e de fonds &eacute;choue.
+msgid "invest.mean-payment.CARD_DETAILS_DEBIT"
+msgstr "D&eacute;bit imm&eacute;diat, remboursement int&eacute;gral si la lev&eacute;e de fonds &eacute;choue."
+
+# FR : Attention : le montant que vous souhaitez investir risque de d&eacute;passer le plafond de paiement de votre carte. Si vous avez un message d'erreur, contactez votre banque pour augmenter votre plafond de paiement par carte ou choisissez un autre mode de paiement.
+msgid "invest.mean-payment.CARD_DETAILS_ALERT"
+msgstr "Attention : le montant que vous souhaitez investir risque de d&eacute;passer le plafond de paiement de votre carte. Si vous avez un message d'erreur, contactez votre banque pour augmenter votre plafond de paiement par carte ou choisissez un autre mode de paiement."
+
+# FR : Le RIB de notre prestataire sera indiqu&eacute; sur la page suivante, ainsi qu'un code destinataire sp&eacute;cifique &agrave; transmettre imp&eacute;rativement lors du virement.
+msgid "invest.mean-payment.WIRE_DETAILS"
+msgstr "Le RIB de notre prestataire sera indiqu&eacute; sur la page suivante, ainsi qu'un code destinataire sp&eacute;cifique &agrave; transmettre imp&eacute;rativement lors du virement."
+
+# FR : Pour une comptabilisation plus rapide, munissez-vous d'une photo de ce ch&egrave;que.
+msgid "invest.mean-payment.CHECK_DETAILS"
+msgstr "Pour une comptabilisation plus rapide, munissez-vous d'une photo de ce ch&egrave;que."
+
+# FR : Payer
+msgid "invest.mean-payment.PAY"
+msgstr "Payer"
+
+# FR : Enregistrer ma carte bancaire pour de futurs investissements (enregistr&eacute;e chez notre prestataire de paiement agr&eacute;&eacute; Lemon Way)
+msgid "invest.mean-payment.SAVE_CARD"
+msgstr "Enregistrer ma carte bancaire pour de futurs investissements (enregistr&eacute;e chez notre prestataire de paiement agr&eacute;&eacute; Lemon Way)"
+
+# FR : Afin d'investir par ch&egrave;que, prenez une photo du ch&egrave;que que vous souhaitez faire &agrave; l'ordre de
+msgid "invest.mean-payment.check-form.TAKE_PICTURE"
+msgstr "Afin d'investir par ch&egrave;que, prenez une photo du ch&egrave;que que vous souhaitez faire &agrave; l'ordre de"
+
+# FR : et envoyez cette photo gr&acirc;ce au formulaire ci-dessous.
+msgid "invest.mean-payment.check-form.SEND_PICTURE"
+msgstr "et envoyez cette photo gr&acirc;ce au formulaire ci-dessous."
+
+# FR : Ensuite, envoyez-nous ce ch&egrave;que &agrave; l'adresse suivante :
+msgid "invest.mean-payment.check-form.SEND_CHECK"
+msgstr "Ensuite, envoyez-nous ce ch&egrave;que &agrave; l'adresse suivante :"
+
+# FR : Le ch&egrave;que ne sera encaiss&eacute; que si la lev&eacute;e de fonds r&eacute;ussit.
+msgid "invest.mean-payment.check-form.CHECK_CASHED_IF_SUCCESS"
+msgstr "Le ch&egrave;que ne sera encaiss&eacute; que si la lev&eacute;e de fonds r&eacute;ussit."
+
+# FR : Lorsque nous l'aurons valid&eacute;, vous recevrez un contrat d'investissement &agrave; signer en ligne, via notre partenaire Eversign.
+msgid "invest.mean-payment.check-form.CHECK_CONTRACT_IF_RECEIVED"
+msgstr "Lorsque nous l'aurons valid&eacute;, vous recevrez un contrat d'investissement &agrave; signer en ligne, via notre partenaire Eversign."
+
+# FR : Si vous ne pouvez pas prendre le ch&egrave;que en photo pour l'instant,
+msgid "invest.mean-payment.check-form.LATER_1"
+msgstr "Si vous ne pouvez pas prendre le ch&egrave;que en photo pour l'instant,"
+
+# FR : vous pouvez confirmer votre investissement
+msgid "invest.mean-payment.check-form.LATER_2"
+msgstr "vous pouvez confirmer votre investissement"
+
+# FR : et nous envoyer ce chèque &agrave; l'adresse investir@wedogood.co quand ce sera possible.
+msgid "invest.mean-payment.check-form.LATER_3"
+msgstr "et nous envoyer ce chèque &agrave; l'adresse investir@wedogood.co quand ce sera possible."
+
+# FR : Confirmer et envoyer plus tard
+msgid "invest.mean-payment.check-form.SEND_LATER"
+msgstr "Confirmer et envoyer plus tard"
+
+# FR : Merci pour votre investissement de
+msgid "invest.mean-payment.check-return.THANK_YOU"
+msgstr "Merci pour votre investissement de"
+
+# FR : par ch&egrave;que pour
+msgid "invest.mean-payment.check-return.BY_CHECK"
+msgstr "par ch&egrave;que pour"
+
+# FR : Pour que celui-ci soit comptabilis&eacute; dans la lev&eacute;e de fonds, vous devez nous envoyer une photo par mail &agrave; l'adresse investir@wedogood.co.
+msgid "invest.mean-payment.check-return.SEND_PICTURE"
+msgstr "Pour que celui-ci soit comptabilis&eacute; dans la lev&eacute;e de fonds, vous devez nous envoyer une photo par mail &agrave; l'adresse investir@wedogood.co."
+
+# FR : Une fois re&ccedil;u et confirm&eacute;, nous vous enverrons une validation de votre investissement par e-mail &agrave; l'adresse
+msgid "invest.mean-payment.check-return.VALIDATION_IF_RECEIVED"
+msgstr "Une fois re&ccedil;u et confirm&eacute;, nous vous enverrons une validation de votre investissement par e-mail &agrave; l'adresse"
+
+# FR : Nous vous rappelons que pour que celui-ci soit valid&eacute;, vous devez signer le contrat électronique qui vous a &eacute;t&eacute; envoy&eacute; &agrave; l'adresse
+msgid "invest.mean-payment.check-return.SIGN_CONTRACT"
+msgstr "Nous vous rappelons que pour que celui-ci soit valid&eacute;, vous devez signer le contrat électronique qui vous a &eacute;t&eacute; envoy&eacute; &agrave; l'adresse"
+
+# FR : Pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable (spam).
+msgid "invest.mean-payment.check-return.CHECK_SPAM"
+msgstr "Pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable (spam)."
+
+# FR : Cet e-mail contiendra le contrat d'investissement correspondant.
+msgid "invest.mean-payment.check-return.CONTRACT_IN_MAIL"
+msgstr "Cet e-mail contiendra le contrat d'investissement correspondant."
+
+# FR : Pensez aussi &agrave; nous faire parvenir le ch&egrave;que de
+msgid "invest.mean-payment.check-return.SEND_CHECK"
+msgstr "Pensez aussi &agrave; nous faire parvenir le ch&egrave;que de"
+
+# FR : &agrave; l'ordre de
+msgid "invest.mean-payment.check-return.ORDER"
+msgstr "&agrave; l'ordre de"
+
+# FR : &agrave; l'adresse suivante :
+msgid "invest.mean-payment.check-return.TO_THE_ADDRESS"
+msgstr "&agrave; l'adresse suivante :"
+
+# FR : Afin de proc&eacute;der au virement, voici les informations bancaires dont vous aurez besoin :
+msgid "invest.mean-payment.wire.INFORMATION"
+msgstr "Afin de proc&eacute;der au virement, voici les informations bancaires dont vous aurez besoin :"
+
+# FR : Titulaire du compte :
+msgid "invest.mean-payment.wire.ACCOUNT_OWNER"
+msgstr "Titulaire du compte :"
+
+# FR : Une fois le virement effectu&eacute;, cliquez sur
+msgid "invest.mean-payment.wire.ONCE_WIRE_DONE"
+msgstr "Une fois le virement effectu&eacute;, cliquez sur"
+
+# FR : Exemple de saisie du code destinataire sur diff&eacute;rentes banques :
+msgid "invest.mean-payment.wire.CODE_EXAMPLES"
+msgstr "Exemple de saisie du code destinataire sur diff&eacute;rentes banques :"
+
+# FR : Vous allez recevoir deux e-mails cons&eacute;cutifs &agrave; l&apos;adresse
+msgid "invest.mean-payment.success.TWO_EMAILS"
+msgstr "Vous allez recevoir deux e-mails cons&eacute;cutifs &agrave; l&apos;adresse"
+
+# FR : (pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable) :
+msgid "invest.mean-payment.success.TWO_EMAILS_CHECK_SPAM"
+msgstr "(pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable) :"
+
+# FR : un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement,
+msgid "invest.mean-payment.success.TWO_EMAILS_LIST_1"
+msgstr "un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement,"
+
+# FR : un e-mail envoy&eacute; par notre partenaire Eversign. Cet e-mail contient un lien vous permettant de signer le contrat d&apos;investissement.
+msgid "invest.mean-payment.success.TWO_EMAILS_LIST_2"
+msgstr "un e-mail envoy&eacute; par notre partenaire Eversign. Cet e-mail contient un lien vous permettant de signer le contrat d&apos;investissement."
+
+# FR : Vous allez recevoir un e-mail de confirmation de paiement.
+msgid "invest.mean-payment.success.TWO_EMAILS_ERROR_1"
+msgstr "Vous allez recevoir un e-mail de confirmation de paiement."
+
+# FR : Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me.
+msgid "invest.mean-payment.success.TWO_EMAILS_ERROR_2"
+msgstr "Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me."
+
+# FR : Votre investissement est valid&eacute;.
+msgid "invest.mean-payment.success.ONE_EMAIL_1"
+msgstr "Votre investissement est valid&eacute;."
+
+# FR : Vous allez recevoir un e-mail &agrave; l&apos;adresse
+msgid "invest.mean-payment.success.ONE_EMAIL_2"
+msgstr "Vous allez recevoir un e-mail &agrave; l&apos;adresse"
+
+# FR : Votre contrat d&apos;investissement sera joint &agrave; cet e-mail.
+msgid "invest.mean-payment.success.ONE_EMAIL_3"
+msgstr "Votre contrat d&apos;investissement sera joint &agrave; cet e-mail."
+
+# FR : Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacute;es &agrave; l'issue de la phase de vote."
+msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_1"
+msgstr "Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacute;es &agrave; l'issue de la phase de vote."
+
+# FR : Si aucun changement ne survient, votre investissement sera valid&eacute; automatiquement.
+msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_2"
+msgstr "Si aucun changement ne survient, votre investissement sera valid&eacute; automatiquement."
+
+# FR : Si un changement devait survenir, vous devrez confirmer ou infirmer votre investissement.
+msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_3"
+msgstr "Si un changement devait survenir, vous devrez confirmer ou infirmer votre investissement."
+
+# FR : Vous allez valider le transfert d'argent de votre porte-monnaie vers celui du projet.
+msgid "invest.mean-payment.alert.TRANSFER"
+msgstr "Vous allez valider le transfert d'argent de votre porte-monnaie vers celui du projet."
+
+# FR : Vous avez d&eacute;pass&eacute; le nombre d'investissement possible par carte
+msgid "invest.mean-payment.error.PAYMENT_NUMBER"
+msgstr "Vous avez d&eacute;pass&eacute; le nombre d'investissement possible par carte"
+
+# FR : Les virements bancaires sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement
+msgid "invest.mean-payment.error.WIRE_AMOUNT"
+msgstr "Les virements bancaires sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement"
+
+# FR : Les paiements par ch&egrave;que sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement. L'authentification de votre compte ne sera n&eacute;cessaire qu'apr&egrave;s le 1er versement de royalties. Vous pouvez par ailleurs n&eacute;gocier la date d'encaissement du ch&egrave;que avec le porteur de projet.
+msgid "invest.mean-payment.error.CHECK_AMOUNT"
+msgstr "Les paiements par ch&egrave;que sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement. L'authentification de votre compte ne sera n&eacute;cessaire qu'apr&egrave;s le 1er versement de royalties. Vous pouvez par ailleurs n&eacute;gocier la date d'encaissement du ch&egrave;que avec le porteur de projet."
+
+# FR : Il y a eu une erreur lors du transfert d'argent entre porte-monnaies.
+msgid "invest.mean-payment.error.WALLET_TRANSFER"
+msgstr "Il y a eu une erreur lors du transfert d'argent entre porte-monnaies."
+
+# FR : Merci de nous contacter ou de
+msgid "invest.mean-payment.error.WALLET_TRANSFER_CONTACT"
+msgstr "Merci de nous contacter ou de"
+
+# FR : Red&eacute;marrer l'investissement
+msgid "invest.mean-payment.error.WALLET_TRANSFER_RESTART"
+msgstr "Red&eacute;marrer l'investissement"
+
 # ############################## share-buttons ################################
 # FR : Faites comme moi, épargnez positif dès 10 € pour soutenir
 msgid "share-buttons.DO_LIKE_ME_POSITIVE_SAVINGS"
@@ -1758,6 +1998,136 @@ msgstr "L'adresse e-mail de l'organisation est d&eacute;j&agrave; utilis&eacute;
 # FR : Le site web de l'organisation n'est pas d&eacute;fini.
 msgid "form.invest-user-details.error.ORGANIZATION_WEBSITE_EMPTY"
 msgstr "Le site web de l'organisation n'est pas d&eacute;fini."
+
+# ############################## form - invest-poll ################################
+# FR : Ce qui m'a motiv&eacute;(e) &agrave; investir aujourd'hui&nbsp;:
+msgid "form.invest-poll.source.TITLE"
+msgstr "Ce qui m'a motiv&eacute;(e) &agrave; investir aujourd'hui&nbsp;:"
+
+# FR : Ce qui me donnerait envie d'investir sur ce projet&nbsp;:
+msgid "form.invest-poll.source.TITLE_VOTE"
+msgstr "Ce qui me donnerait envie d'investir sur ce projet&nbsp;:"
+
+# FR : Je connais le(s) porteur(s) de projet
+msgid "form.invest-poll.source.OPTION_PROJECT_MANAGER"
+msgstr "Je connais le(s) porteur(s) de projet"
+
+# FR : Le projet fait partie d'un secteur qui m'int&eacute;resse
+msgid "form.invest-poll.source.OPTION_INTEREST"
+msgstr "Le projet fait partie d'un secteur qui m'int&eacute;resse"
+
+# FR : Je cherche &agrave; diversifier les placements de mon &eacute;pargne
+msgid "form.invest-poll.source.OPTION_SAVINGS"
+msgstr "Je cherche &agrave; diversifier les placements de mon &eacute;pargne"
+
+# FR : Je cherche &agrave; investir dans un projet &agrave; impact positif
+msgid "form.invest-poll.source.OPTION_IMPACTS"
+msgstr "Je cherche &agrave; investir dans un projet &agrave; impact positif"
+
+# FR : Autre(s) :
+msgid "form.invest-poll.source.OPTION_OTHER"
+msgstr "Autre(s) :"
+
+# FR : J'ai connu cette lev&eacute;e de fonds via&nbsp;:
+msgid "form.invest-poll.known.TITLE"
+msgstr "J'ai connu cette lev&eacute;e de fonds via&nbsp;:"
+
+# FR : L'entrepreneur
+msgid "form.invest-poll.known.OPTION_PROJECT_MANAGER"
+msgstr "L'entrepreneur"
+
+# FR : WE DO GOOD
+msgid "form.invest-poll.known.OPTION_WEDOGOOD"
+msgstr "WE DO GOOD"
+
+# FR : Un autre investisseur du projet
+msgid "form.invest-poll.known.OPTION_OTHER_INVESTOR"
+msgstr "Un autre investisseur du projet"
+
+# FR : Autre (presse...)
+msgid "form.invest-poll.known.OPTION_OTHER"
+msgstr "Autre (presse...)"
+
+# FR : Je suis arriv&eacute;(e) sur la page de cette lev&eacute;e de fonds via&nbsp;:
+msgid "form.invest-poll.come-from.TITLE"
+msgstr "Je suis arriv&eacute;(e) sur la page de cette lev&eacute;e de fonds via&nbsp;:"
+
+# FR : Un mail du porteur de projet
+msgid "form.invest-poll.come-from.OPTION_MAIL"
+msgstr "Un mail du porteur de projet"
+
+# FR : Un message priv&eacute; sur Facebook, LinkedIn, Twitter...
+msgid "form.invest-poll.come-from.OPTION_SOCIAL_PRIVATE"
+msgstr "Un message priv&eacute; sur Facebook, LinkedIn, Twitter..."
+
+# FR : Une publication sur les r&eacute;seaux sociaux
+msgid "form.invest-poll.come-from.OPTION_SOCIAL_PUBLIC"
+msgstr "Une publication sur les r&eacute;seaux sociaux"
+
+# FR : La newsletter ou le site de WE DO GOOD
+msgid "form.invest-poll.come-from.OPTION_WEDOGOOD"
+msgstr "La newsletter ou le site de WE DO GOOD"
+
+# FR : Un article de presse
+msgid "form.invest-poll.come-from.OPTION_PRESS"
+msgstr "Un article de presse"
+
+# FR : Autre(s) :
+msgid "form.invest-poll.come-from.OPTION_OTHER"
+msgstr "Autre(s) :"
+
+# ############################## form - invest-poll-continuous ################################
+# FR : Je voudrais recevoir une notification&nbsp;:
+msgid "form.invest-poll-continuous.notifications.TITLE"
+msgstr "Je voudrais recevoir une notification&nbsp;:"
+
+# FR : Lorsqu'il sera possible d'investir sur les prochains
+msgid "form.invest-poll-continuous.notifications.OPTION_NEXT"
+msgstr "Lorsqu'il sera possible d'investir sur les prochains"
+
+# FR : Lorsqu'il sera possible d'investir sur une nouvelle th&eacute;matique (apiculture, &eacute;nergie, mobilit&eacute;, logement...)
+msgid "form.invest-poll-continuous.notifications.OPTION_NEW"
+msgstr "Lorsqu'il sera possible d'investir sur une nouvelle th&eacute;matique (apiculture, &eacute;nergie, mobilit&eacute;, logement...)"
+
+# FR : Je souhaiterais investir sur les projets d'&eacute;pargne positive, de mani&egrave;re&nbsp;:
+msgid "form.invest-poll-continuous.invest-rythm.TITLE"
+msgstr "Je souhaiterais investir sur les projets d'&eacute;pargne positive, de mani&egrave;re&nbsp;:"
+
+# FR : Ponctuelle
+msgid "form.invest-poll-continuous.invest-rythm.OPTION_PONCTUAL"
+msgstr "Ponctuelle"
+
+# FR : R&eacute;guli&egrave;re : mensuelle
+msgid "form.invest-poll-continuous.invest-rythm.OPTION_MONTHLY"
+msgstr "R&eacute;guli&egrave;re : mensuelle"
+
+# FR : R&eacute;guli&egrave;re : trimestrielle
+msgid "form.invest-poll-continuous.invest-rythm.OPTION_QUARTERLY"
+msgstr "R&eacute;guli&egrave;re : trimestrielle"
+
+# FR : Occasionnelle : &agrave; chaque fois qu'il est possible d'investir sur de nouveaux
+msgid "form.invest-poll-continuous.invest-rythm.OPTION_STOCK"
+msgstr "Occasionnelle : &agrave; chaque fois qu'il est possible d'investir sur de nouveaux"
+
+# FR : Autre
+msgid "form.invest-poll-continuous.invest-rythm.OPTION_OTHER"
+msgstr "Autre"
+
+# FR : Comment avez-vous connu l'&eacute;pargne positive&nbsp;?
+msgid "form.invest-poll-continuous.known.TITLE"
+msgstr "Comment avez-vous connu l'&eacute;pargne positive&nbsp;?"
+
+# FR : Par WE DO GOOD
+msgid "form.invest-poll-continuous.known.OPTION_WEDOGOOD"
+msgstr "Par WE DO GOOD"
+
+# FR : Par
+msgid "form.invest-poll-continuous.known.OPTION_BY"
+msgstr "Par"
+
+# FR : Autre
+msgid "form.invest-poll-continuous.known.OPTION_OTHER"
+msgstr "Autre"
 
 # ############################## /lemonway-document ################################
 # FR : Merci de nous contacter par chat ou par mail sur investir@wedogood.co.
