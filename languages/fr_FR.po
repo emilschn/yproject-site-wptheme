@@ -94,6 +94,9 @@ msgstr "Continuer"
 msgid "common.PREVIOUS"
 msgstr "Pr&eacute;c&eacute;dent"
 
+msgid "common.MY_ACCOUNT"
+msgstr "Mon compte"
+
 # ############################## COMMON - FORMS - ERROR ################################
 msgid "common.forms.error.FILE_WRONG_FORMAT"
 msgstr "Ce fichier n'est pas au bon format."
@@ -831,6 +834,103 @@ msgstr "Envoyer plus tard"
 
 msgid "invest.identitydocs.INVEST_LATER"
 msgstr "et investir plus tard"
+
+msgid "invest.contract.VALIDATE_CONTRACT"
+msgstr "Valider le contrat"
+
+msgid "invest.cancel.YOU_CHOSE_CANCEL_PROJECT"
+msgstr "Vous avez choisi d'annuler votre investissement sur le projet %s."
+
+msgid "invest.cancel.ARE_YOU_SURE"
+msgstr "En &ecirc;tes-vous certain(e) ?"
+
+msgid "invest.cancel.IF_SURE"
+msgstr "Si oui, vous serez int&eacute;gralement rembours&eacute;(e)."
+
+msgid "invest.cancel.CANCEL_INVESTMENT"
+msgstr "Annuler mon investissement"
+
+msgid "invest.cancel.CONFIRM_INVESTMENT"
+msgstr "Confirmer mon investissement"
+
+msgid "invest.cancel-not-validated.INTENTION_CANCELED"
+msgstr "Votre intention d'investissement sur le projet %s a bien &eacute;t&eacute; annul&eacute;e."
+
+msgid "invest.cancel-not-validated.YOU_CAN_INVEST"
+msgstr "Vous pourrez investir &agrave; tout moment sur le projet en cliquant sur le bouton INVESTIR sur la page du projet."
+
+msgid "invest.cancel-not-validated.VIEW_PROJECT"
+msgstr "Voir le projet"
+
+msgid "invest.confirm-cancel.INVESTMENT_CANCELED"
+msgstr "Votre investissement a bien &eacute;t&eacute; annul&eacute;."
+
+msgid "invest.confirm-cancel.IF_CARD"
+msgstr "Si vous aviez pay&eacute; par carte bancaire, l'argent a &eacute;t&eacute; revers&eacute; sur votre compte bancaire."
+
+msgid "invest.confirm-cancel.IF_WIRE_OR_WALLET"
+msgstr "Si vous aviez pay&eacute; par virement ou porte-monnaie électronique, l'argent est vers&eacute; sur votre porte-monnaie &eacute;lectronique. Rendez-vous sur votre compte personnel."
+
+msgid "invest.confirm-cancel.IF_CHECK"
+msgstr "Si vous aviez pay&eacute; par ch&egrave;que, l'argent ne sera pas retir&eacute;, le ch&egrave;que sera annul&eacute;."
+
+msgid "invest.confirm-cancel.VIEW_CURRENT_PROJECTS"
+msgstr "Voir les projets en cours"
+
+msgid "invest.confirm-cancel.INVEST_ANOTHER_AMOUNT"
+msgstr "Investir un autre montant"
+
+msgid "invest.finish-preinvestment.CHANGE_TERMS"
+msgstr "Modification d'investissement sur le projet"
+
+msgid "invest.finish-preinvestment.YOU_HAD_PREINVESTED"
+msgstr "Vous aviez pr&eacute;-investi %s &euro; sur le projet %s."
+
+msgid "invest.finish-preinvestment.AFTER_THE_VOTE"
+msgstr "A l'issue de l'&eacute;valuation, les conditions de la lev&eacute;e de fonds ont &eacute;t&eacute; modifi&eacute;es :"
+
+msgid "invest.share.SORRY_FOR_CONTRACT_REJECTED"
+msgstr "Nous sommes navr&eacute;s de votre refus de signer ce contrat."
+
+msgid "invest.share.GOING_TO_REFUND"
+msgstr "Nous allons proc&eacute;der &agrave; l'annulation de votre investissement."
+
+msgid "invest.share.INVESTMENT_VALIDATED"
+msgstr "Votre investissement a bien &eacute;t&eacute; pris en compte, merci !"
+
+msgid "invest.share.THANK_YOU_SIGNING"
+msgstr "Merci pour votre signature &eacute;lectronique !"
+
+msgid "invest.share.SHARE_POSITIVE_SAVINGS"
+msgstr "Pour d&eacute;multiplier mon impact et permettre &agrave; plus de projets positifs de voir le jour, je passe le mot sur :"
+
+msgid "invest.share.SHARE_PROJECT"
+msgstr "Pour augmenter les chances de r&eacute;ussite de ce projet, je passe le mot sur :"
+
+msgid "invest.share.BACK_POSITIVE_SAVINGS"
+msgstr "Retour &agrave; la page &Eacute;pargne positive"
+
+msgid "invest.share.BACK_PROJECT"
+msgstr "Retour au projet"
+
+# ############################## share-buttons ################################
+msgid "share-buttons.DO_LIKE_ME_POSITIVE_SAVINGS"
+msgstr "Faites comme moi, épargnez positif dès 10 € pour soutenir"
+
+msgid "share-buttons.HASHTAGS_POSITIVE_SAVINGS"
+msgstr "épargne, impact, investissement, royalties"
+
+msgid "share-buttons.DO_LIKE_ME_PROJECT"
+msgstr "Faites comme moi, investissez sur le projet"
+
+msgid "share-buttons.HASHTAGS_PROJECT"
+msgstr "royalty, crowdfunding"
+
+msgid "share-buttons.email.TITLE"
+msgstr "Je viens d'investir sur le projet"
+
+msgid "share-buttons.email.SUBJECT"
+msgstr "Un projet sur lequel investir !"
 
 # ############################## form - user-bank ################################
 msgid "form.user-bank.NAME_ACCOUNT_OWNER"

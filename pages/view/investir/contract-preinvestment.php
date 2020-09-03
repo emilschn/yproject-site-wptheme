@@ -30,9 +30,9 @@ $fields_hidden = $page_controler->get_form()->getFields( WDG_Form_Invest_Contrac
 	<div id="contract-buttons">
 		<br><br><br>
 
-		<button type="submit" class="button half right red"><?php _e( "Valider le contrat", 'yproject' ); ?></button>
+		<button type="submit" class="button half right red"><?php _e( 'invest.contract.VALIDATE_CONTRACT', 'yproject' ); ?></button>
 
-		<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( "Pr&eacute;c&eacute;dent", 'yproject' ); ?></button>
+		<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( 'common.PREVIOUS', 'yproject' ); ?></button>
 
 		<div class="clear"></div>
 	</div>
