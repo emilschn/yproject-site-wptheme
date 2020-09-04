@@ -1064,13 +1064,16 @@ msgid "invest.mean-payment.success.ONE_EMAIL_3"
 msgstr "Votre contrat d&apos;investissement sera joint &agrave; cet e-mail."
 
 msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_1"
-msgstr "Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacute;es &agrave; l'issue de la phase de vote."
+msgstr "Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacute;es &agrave; l'issue de la phase d'&eacute;valuation'."
 
 msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_2"
 msgstr "Si aucun changement ne survient, votre investissement sera valid&eacute; automatiquement."
 
 msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_3"
 msgstr "Si un changement devait survenir, vous devrez confirmer ou infirmer votre investissement."
+
+msgid "invest.mean-payment.success.ACCOUNT_DEBIT"
+msgstr "Votre compte bancaire a &eacute;t&eacute; d&eacute;bit&eacute;."
 
 msgid "invest.mean-payment.alert.TRANSFER"
 msgstr "Vous allez valider le transfert d'argent de votre porte-monnaie vers celui du projet."
@@ -1092,6 +1095,36 @@ msgstr "Merci de nous contacter ou de"
 
 msgid "invest.mean-payment.error.WALLET_TRANSFER_RESTART"
 msgstr "Red&eacute;marrer l'investissement"
+
+msgid "invest.done.error.CONTACT_1"
+msgstr "Il y a eu une erreur pendant votre tentative d'investissement, ou celui-ci &eacute;tait d&eacute;j&agrave; comptabilis&eacute."
+
+msgid "invest.done.error.CONTACT_2"
+msgstr "Merci de nous contacter afin d'&eacute;tudier votre tentative sur investir@wedogood.co."
+
+msgid "invest.done.error.CODE"
+msgstr "Code erreur :"
+
+msgid "invest.pending.PENDING"
+msgstr "Transaction en cours."
+
+msgid "invest.pending.PLEASE_GO_1"
+msgstr "Merci de vous rendre sur la page"
+
+msgid "invest.pending.PLEASE_GO_2"
+msgstr "Mes investissements"
+
+msgid "invest.pending.PLEASE_GO_3"
+msgstr "pour suivre l&apos;&eacute;volution de votre paiement."
+
+msgid "invest.pending.WIRE"
+msgstr "Dans l'attente de votre virement, vous recevrez un e-mail rappelant les informations &agrave; nous fournir."
+
+msgid "invest.pending.WIRE_WHEN_VALIDATED"
+msgstr "Une fois valid&eacute;, vous recevrez deux e-mails :"
+
+msgid "invest.pending.WIRE_WHEN_VALIDATED_ONE_EMAIL"
+msgstr "Une fois valid&eacute;, vous recevrez un e-mail confirmant votre paiement. Votre contrat d'investissement sera joint &agrave; cet e-mail."
 
 # ############################## share-buttons ################################
 msgid "share-buttons.DO_LIKE_ME_POSITIVE_SAVINGS"
