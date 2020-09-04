@@ -116,9 +116,9 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 			$this->filters_list[ 'regions' ] = atcf_get_regions();
 
 			$this->filters_list[ 'status' ] = array(
-				'vote'		=> __( "En &eacute;valuation", 'yproject' ),
-				'collecte'	=> __( "En financement", 'yproject' ),
-				'funded'	=> __( "Financ&eacute;", 'yproject' )	
+				'vote'		=> __( 'project.status.VOTE', 'yproject' ),
+				'collecte'	=> __( 'project.status.FUNDING', 'yproject' ),
+				'funded'	=> __( 'project.status.FUNDED', 'yproject' )	
 			);
 
 			$terms_activity = get_terms('download_category', array( 'slug' => 'types', 'hide_empty' => false ) );

@@ -43,33 +43,33 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
     <a class="hidden-link" href="<?php echo $link; ?>">
         <div class="impacts-container" id="impacts-<?php echo $project_id ?>">
 			<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="impact environnemental" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('impact environnemental', 'yproject')?></span>
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="<?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?></span>
 			<?php endif; ?>
 			<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="impact social" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('impact social', 'yproject')?></span>
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="<?php _e( 'project.impact.SOCIAL', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.SOCIAL', 'yproject' ); ?></span>
 			<?php endif; ?>
 			<?php if (strpos($campaign_categories_str, 'economique') !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="impact économique" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('impact économique', 'yproject')?></span>
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="<?php _e( 'project.impact.ECO', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ECO', 'yproject' ); ?></span>
 			<?php endif; ?>
         </div>
     </a>
         <div class="project-framed">
             <a class="hidden-link" href="<?php echo $link; ?>">
-                <h2 class="project-title"> <?php echo $title; ?> </h2>           
+                <h2 class="project-title"> <?php echo $title; ?> </h2>
                 <div class="project-img" <?php if ( !empty( $img ) ) { ?>style="background-image: url('<?php echo $img; ?>')"<?php } ?>></div>
                 <div class="project-summary"><?php echo $description; ?></div>
             </a>
-        <?php 
+        <?php
             $jycrois = $campaign->get_jycrois_nb();
             if($jycrois > 1){
-                $persStatus = __("suivent le projet", "yproject");
+                $persStatus = __( 'project.FOLLOW.P', 'yproject' );
             }
             else if ($jycrois == 1){
-                $persStatus = __("suit le projet", "yproject");
+                $persStatus = __( 'project.FOLLOW.ONE', 'yproject' );
             }
             else if ($jycrois == 0){ // voir si utile, car si 0 backers, on a tout de même 1 pers qui s'affiche
                 $jycrois = false;
-                $persStatus = __("Soyez le 1er", "yproject") . '<br />' . __("&agrave; suivre le projet", "yproject");
+                $persStatus = __( 'project.FOLLOW.BE_FIRST_1', 'yproject' ) . '<br />' . __( 'project.FOLLOW.BE_FIRST_2', 'yproject' );
             }
 
             //Projets en cours de collecte ou en vote
@@ -88,16 +88,16 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 					$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
 					$time_remaining_str_unit = $time_remaining_str_split[0];
 					switch ($time_remaining_str_split[0]) {
-						case 'J': $time_remaining_str .= __("jours", "yproject"); break;
-						case 'H': $time_remaining_str .= __("heures", "yproject"); break;
-						case 'M': $time_remaining_str .= __("minutes", "yproject"); break;
+						case 'J': $time_remaining_str .= __( 'project.DAYS', 'yproject' ); break;
+						case 'H': $time_remaining_str .= __( 'project.HOURS', 'yproject' ); break;
+						case 'M': $time_remaining_str .= __( 'project.MINUTES', 'yproject' ); break;
 					}
 				}
 				
 
                 if ( $campaign_status === ATCF_Campaign::$campaign_status_collecte ):
-                    $projectAction = __(" pour investir", "yproject");
-					$buttonAction = __("investir sur ce projet", "yproject");
+                    $projectAction = __( 'project.TO_INVEST', 'yproject' );
+					$buttonAction = __( 'project.INVEST_ON_PROJECT', 'yproject' );
         ?>              
                     <div class="progress-bar">
                         <span class="current-amount" style="min-width:<?php echo $width; ?>%">&nbsp;<span><?php echo $campaign->current_amount(); ?></span>&nbsp;</span>
@@ -107,13 +107,13 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 
                 elseif ( $campaign_status === ATCF_Campaign::$campaign_status_vote ):
 					if ( $time_remaining_str != '-' ) {
-						$projectAction = __(" pour &eacute;valuer", "yproject");
-						$buttonAction = __("&Eacute;valuer ce projet", "yproject");
-						$project_status = __("Projet en cours d'&eacute;valuation", "yproject");
+						$projectAction = __( 'project.TO_EVALUATE', 'yproject' );
+						$buttonAction = __( 'project.EVALUATE_PROJECT', 'yproject' );
+						$project_status = __( 'project.PROJECT_CURRENTLY_EVALUATED', 'yproject' );
 					} else {
 						$projectAction = '';
-						$buttonAction = __("D&eacute;couvrir ce projet", "yproject");
-						$project_status = __("&Eacute;valuation termin&eacute;e", "yproject");
+						$buttonAction = __( 'project.DISCOVER_THIS_PROJECT', 'yproject' );
+						$project_status = __( 'project.EVALUATION_FINISHED', 'yproject' );
 					}
         ?>
                     <div class="progress-bar">
@@ -126,7 +126,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
         <a class="hidden-link" href="<?php echo $link; ?>">
                 <div class="progress-info">
                     <span class="progress-pers"><?php if($jycrois): ?><span class="info-nb"><?php echo $jycrois; ?>&nbsp;pers.</span><?php endif; ?><span class="info-action"><?php echo $persStatus ?></span></span>
-                    <span class="progress-days"><span class="info-nb"><?php echo $time_remaining_str; ?></span><span class="info-action"><?php echo $projectAction ?></span></span>
+                    <span class="progress-days"><span class="info-nb"><?php echo $time_remaining_str; ?></span><span class="info-action"> <?php echo $projectAction ?></span></span>
                 </div>
         </a>
 		<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php echo $buttonAction ?></a>
@@ -134,8 +134,8 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 
             //Projets déja financés
             else :
-                $projectStatus = __("projet<br />financé !", "yproject");
-                $buttonAction = __("découvrir ce projet", "yproject"); // vers plus d'info sur ce projet
+                $projectStatus = __( 'project.CAMPAIGN_FUNDED', 'yproject' );
+                $buttonAction = __( 'project.DISCOVER_THIS_PROJECT', 'yproject' ); // vers plus d'info sur ce projet
         ?>
             <a class="hidden-link" href="<?php echo $link; ?>">
                 <div class="progress-bar">

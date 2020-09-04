@@ -63,7 +63,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		</div>
 		
 		<div class="clear"></div>
-		<p><?php _e( "definition_royaltiser", 'yproject' ); ?></p>
+		<p><?php _e( 'common.ROYALTIZE_DEFINITION', 'yproject' ); ?></p>
 
 	</div>
 </section>

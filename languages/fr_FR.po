@@ -103,6 +103,15 @@ msgstr "Modifier"
 msgid "common.SEND"
 msgstr "Envoyer"
 
+msgid "common.CONNECTION"
+msgstr "Connexion"
+
+msgid "common.VALIDATE"
+msgstr "Valider"
+
+msgid "common.ACCEPT"
+msgstr "Accepter"
+
 # ############################## COMMON - FORMS - ERROR ################################
 msgid "common.forms.error.FILE_WRONG_FORMAT"
 msgstr "Ce fichier n'est pas au bon format."
@@ -110,9 +119,190 @@ msgstr "Ce fichier n'est pas au bon format."
 msgid "common.forms.error.FILE_TOO_BIG"
 msgstr "Ce fichier est trop lourd."
 
+# ############################## HEADER - MENU ################################
+msgid "menu.THE_PROJECTS"
+msgstr "Les projets"
+
+msgid "menu.POSITIVE_SAVINGS"
+msgstr "&Eacute;pargne positive"
+
+msgid "menu.FUND_PROJECT"
+msgstr "Financer mon projet"
+
+msgid "menu.INVEST"
+msgstr "Investir en royalties"
+
+msgid "menu.VISION"
+msgstr "Vision"
+
+msgid "menu.LOGOUT"
+msgstr "Me d&eacute;connecter"
+
+msgid "menu.SEARCH_PROJECT"
+msgstr "Rechercher un projet"
+
+msgid "menu.WELCOME_TO_WEDOGOOD"
+msgstr "et bienvenue sur WE DO GOOD !"
+
+# ############################## HEADER - CONDITIONS GENERALES ################################
+msgid "terms.UPDATE"
+msgstr "Mise &agrave; jour des conditions g&eacute;n&eacute;rales d&apos;utilisation"
+
+msgid "terms.ACCEPT"
+msgstr "J&apos;accepte les conditions g&eacute;n&eacute;rales d&apos;utilisation"
+
+# ############################## FOOTER - MENU ################################
+msgid "footer.WHO_WE_ARE"
+msgstr "Qui sommes-nous&nbsp;?"
+
+msgid "footer.ENTREPRENEURS"
+msgstr "Entrepreneurs"
+
+msgid "footer.INVESTORS"
+msgstr "Investisseurs"
+
+msgid "footer.FOLLOW_US"
+msgstr "Nous suivre"
+
+msgid "footer.RSS_FEED"
+msgstr "Flux RSS"
+
+msgid "footer.CONTACT_US"
+msgstr "Contactez-nous"
+
+msgid "footer.SUBSCRIBE_NEWSLETTER"
+msgstr "S'inscrire &agrave; la newsletter"
+
+msgid "footer.REGISTERED_ORIAS"
+msgstr "Immatricul&eacute;e &agrave; l'ORIAS sous le num&eacute;ro"
+
+msgid "footer.LEMONWAY_PARTNER"
+msgstr "Partenaire de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l’ACPR en France le 24/12/2012 sous le num&eacute;ro"
+
+msgid "footer.cookies.DESCRIPTION"
+msgstr "En poursuivant votre navigation sur WE DO GOOD.co, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur"
+
+msgid "footer.cookies.KNOW_MORE"
+msgstr "en savoir plus"
+
 # ############################## ACCUEIL ################################
-msgid "definition_royaltiser"
+msgid "common.ROYALTIZE_DEFINITION"
 msgstr "*ROYALTISER, v. intr. XXIe siècle. d'apr. angl. Verser une partie de son chiffre d'affaires à ses merveilleux investisseurs. \"Un projet qui royaltise plus que prévu\""
+
+msgid "common.WEDOGOOD_IS"
+msgstr "WE DO GOOD c'est :"
+
+msgid "common.RAISED.P"
+msgstr "lev&eacute;s"
+
+msgid "common.COMPANIES_ROYALTIZE"
+msgstr "entreprises royaltisent*"
+
+# ############################## /les-projets ################################
+msgid "project.status.VOTE"
+msgstr "En &eacute;valuation"
+
+msgid "project.status.FUNDING"
+msgstr "En financement"
+
+msgid "project.status.FUNDED"
+msgstr "Financ&eacute;"
+
+msgid "project.DISCOVER"
+msgstr "D&eacute;couvrir le projet"
+
+msgid "project.impact.ENVIRONMENT"
+msgstr "impact environnemental"
+
+msgid "project.impact.SOCIAL"
+msgstr "impact social"
+
+msgid "project.impact.ECO"
+msgstr "impact &eacute;conomique"
+
+msgid "project.FOLLOW.P"
+msgstr "suivent le projet"
+
+msgid "project.FOLLOW.ONE"
+msgstr "suit le projet"
+
+msgid "project.FOLLOW.BE_FIRST_1"
+msgstr "Soyez le 1er"
+
+msgid "project.FOLLOW.BE_FIRST_2"
+msgstr "&agrave; suivre le projet"
+
+msgid "project.DAYS"
+msgstr "jours"
+
+msgid "project.HOURS"
+msgstr "heures"
+
+msgid "project.MINUTES"
+msgstr "minutes"
+
+msgid "project.TO_INVEST"
+msgstr "pour investir"
+
+msgid "project.INVEST_ON_PROJECT"
+msgstr "investir sur ce projet"
+
+msgid "project.TO_EVALUATE"
+msgstr "pour &eacute;valuer"
+
+msgid "project.EVALUATE_PROJECT"
+msgstr "&Eacute;valuer ce projet"
+
+msgid "project.PROJECT_CURRENTLY_EVALUATED"
+msgstr "Projet en cours d'&eacute;valuation"
+
+msgid "project.DISCOVER_THIS_PROJECT"
+msgstr "D&eacute;couvrir ce projet"
+
+msgid "project.EVALUATION_FINISHED"
+msgstr "&Eacute;valuation termin&eacute;e"
+
+msgid "project.CAMPAIGN_FUNDED"
+msgstr "projet<br />financ&eacute; !"
+
+msgid "projects.THE_PROJECTS"
+msgstr "les projets"
+
+msgid "projects.FILTERS"
+msgstr "Filtres"
+
+msgid "projects.PROJECTS"
+msgstr "projets"
+
+msgid "projects.ALL_IMPACTS"
+msgstr "Tous les impacts"
+
+msgid "projects.ALL_LOCALIZATIONS"
+msgstr "Toutes les r&eacute;gions"
+
+msgid "projects.ALL_STEPS"
+msgstr "Toutes les &eacute;tapes de lev&eacute;e de fonds"
+
+msgid "projects.POSITIVE_SAVINGS"
+msgstr "&Eacute;pargne Positive"
+
+msgid "projects.POSITIVE_SAVINGS_DESCRIPTION"
+msgstr "Ces projets sont disponibles en continu et permettent d'investir autant de fois que vous le souhaitez dans la transition &eacute;cologique."
+
+msgid "projects.POSITIVE_SAVINGS_KNOW_MORE"
+msgstr "En savoir plus sur l'&Eacute;pargne Positive."
+
+msgid "projects.CLOSING_CAMPAIGNS"
+msgstr "Lev&eacute;es de fonds en cl&ocirc;ture"
+
+msgid "projects.CLOSING_CAMPAIGNS_DESCRIPTION"
+msgstr "Ces projets ont &eacute;t&eacute; financ&eacute;s avec succ&egrave;s mais il est toujours possible d'investir jusqu'au d&eacute;marrage de leur contrat de royalties."
+
+msgid "projects.FUNDED_CAMPAIGNS"
+msgstr "projets financ&eacute;s"
+
+msgid "projects.FUNDED_CAMPAIGNS_SEE_MORE"
+msgstr "Voir plus de projets"
 
 # ############################## /connexion ################################
 msgid "login.INTRO"
@@ -230,6 +420,12 @@ msgstr "L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :
 
 msgid "account.HELLO"
 msgstr "Bonjour"
+
+msgid "account.lightbox.VALIDATE_INFORMATION"
+msgstr "Validation de vos informations"
+
+msgid "account.lightbox.DATA_SAVED"
+msgstr "Donn&eacute;es enregistr&eacute;es ! Merci !"
 
 msgid "account.menu.MY_WALLET"
 msgstr "Mon porte-monnaie"
@@ -1125,6 +1321,30 @@ msgstr "Une fois valid&eacute;, vous recevrez deux e-mails :"
 
 msgid "invest.pending.WIRE_WHEN_VALIDATED_ONE_EMAIL"
 msgstr "Une fois valid&eacute;, vous recevrez un e-mail confirmant votre paiement. Votre contrat d'investissement sera joint &agrave; cet e-mail."
+
+msgid "invest.lightbox.preinvestment.TITLE"
+msgstr "Modification de votre investissement"
+
+msgid "invest.lightbox.preinvestment.INTRO"
+msgstr "Vous aviez pr&eacute;-investi %s &euro; sur le projet %s."
+
+msgid "invest.lightbox.preinvestment.DESCRIPTION"
+msgstr "A l'issue de l'&eacute;valuation, les conditions de la lev&eacute;e de fonds ont &eacute;t&eacute; modifi&eacute;es :"
+
+msgid "invest.lightbox.CONFIRM"
+msgstr "Confirmer mon investissement"
+
+msgid "invest.lightbox.CANCEL"
+msgstr "Annuler mon investissement"
+
+msgid "invest.lightbox.investment.TITLE"
+msgstr "Confirmation de votre investissement"
+
+msgid "invest.lightbox.investment.INTRO"
+msgstr "Vous aviez l'intention d'investir %s &euro; sur le projet %s."
+
+msgid "invest.lightbox.investment.DESCRIPTION"
+msgstr "Votre compte a &eacute;t&eacute; authentifi&eacute; par notre prestataire de paiement. Nous vous proposons donc de reprendre votre d&eacute;marche d'investissement."
 
 # ############################## share-buttons ################################
 msgid "share-buttons.DO_LIKE_ME_POSITIVE_SAVINGS"

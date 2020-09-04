@@ -15,7 +15,7 @@ else {
 
 					<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) : ?>
 						<div>
-							<span class="footer-subtitle clickable border-hidden"><?php _e('Qui sommes-nous&nbsp;?', 'yproject'); ?></span>
+							<span class="footer-subtitle clickable border-hidden"><?php _e( 'footer.WHO_WE_ARE', 'yproject' ); ?></span>
 							<ul>
 								<?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
 							</ul>
@@ -24,13 +24,13 @@ else {
 
 					<?php if ( is_active_sidebar( 'second-footer-widget-area' ) ) : ?>
 						<div>
-							<span class="footer-subtitle clickable"><?php _e('Entrepreneurs', 'yproject'); ?></span>
+							<span class="footer-subtitle clickable"><?php _e( 'footer.ENTREPRENEURS', 'yproject' ); ?></span>
 							<ul>
 								<?php dynamic_sidebar( 'second-footer-widget-area' ); ?>
 							</ul>
 
 							<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) : ?>
-							<span class="footer-subtitle clickable"><?php _e('Investisseurs', 'yproject'); ?></span>
+							<span class="footer-subtitle clickable"><?php _e( 'footer.INVESTORS', 'yproject' ); ?></span>
 							<ul>
 								<?php dynamic_sidebar( 'third-footer-widget-area' ); ?>
 							</ul>
@@ -39,18 +39,18 @@ else {
 					<?php endif; ?>
 
 					<div>
-						<span class="footer-subtitle"><?php _e('Nous suivre', 'yproject'); ?></span>
+						<span class="footer-subtitle"><?php _e( 'footer.FOLLOW_US', 'yproject' ); ?></span>
 
 						<div style="margin: 16px 0px;">
 							<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook"/></a>
 							<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter"/></a>
 							<a class="social_network" href="https://www.linkedin.com/company/we-do-good/" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin"/></a>
-							<a class="social_network" href="https://www.wedogood.co/rss.xml" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-rss.jpg" alt="<?php _e("Flux RSS", 'yproject'); ?>"/></a>
+							<a class="social_network" href="https://www.wedogood.co/rss.xml" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-rss.jpg" alt="<?php _e( 'footer.RSS_FEED', 'yproject' ); ?>"/></a>
 						</div>
 
 						<div>
-							<a class="link" href="<?php echo home_url('/a-propos/contact/'); ?>"><?php _e( "Contactez-nous", 'yproject' ); ?></a><br>
-							<a class="link" href="<?php echo home_url('/a-propos/newsletter/'); ?>"><?php _e( "S'inscrire &agrave; la newsletter", 'yproject' ); ?></a>
+							<a class="link" href="<?php echo home_url('/a-propos/contact/'); ?>"><?php _e( 'footer.CONTACT_US', 'yproject' ); ?></a><br>
+							<a class="link" href="<?php echo home_url('/a-propos/newsletter/'); ?>"><?php _e( 'footer.SUBSCRIBE_NEWSLETTER', 'yproject' ); ?></a>
 						</div>
 
 						<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
@@ -70,7 +70,7 @@ else {
 				<div class="logo-list clear">
 					<div>
 						<a href="https://acpr.banque-france.fr/agrements-et-autorisations/le-financement-participatif-crowdfunding.html" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/ifp.png" alt="logo label IFP" width="160"></a>
-						<span>Immatricul&eacute;e &agrave; l'ORIAS sous le num&eacute;ro <strong>17002712</strong></span>
+						<span><?php _e( 'footer.REGISTERED_ORIAS', 'yproject' ); ?> <strong>17002712</strong></span>
 					</div>
 					
 					<div>
@@ -83,7 +83,7 @@ else {
 
 					<div>
 						<a href="http://www.lemonway.fr" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/lemonway-gris.png" alt="logo Lemonway" width="258"></a><br>
-						<p class="lines">Partenaire de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l’ACPR en France le 24/12/2012 sous le num&eacute;ro 16568J.</p>
+						<p class="lines"><?php _e( 'footer.LEMONWAY_PARTNER', 'yproject' ); ?> 16568J.</p>
 					</div>
 
 					<div>
@@ -121,13 +121,9 @@ else {
 	<?php $hidecookiealert = filter_input( INPUT_COOKIE, 'hidecookiealert' ); ?>
 	<?php if ( empty( $hidecookiealert ) ): ?>
 	<div id="cookies-alert" class="bg-dark-gray aligncenter">
-		<?php if ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' ): ?>
-		<?php _e( "En poursuivant votre navigation sur WE DO GOOD.co, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu/' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
-		<?php else: ?>
-		<?php _e( "En poursuivant votre navigation, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur", 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu/' ); ?>"><?php _e( "en savoir plus", 'yproject' ); ?></a>).
-		<?php endif; ?>
+		<?php _e( 'footer.cookies.DESCRIPTION', 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu/' ); ?>"><?php _e( 'footer.cookies.KNOW_MORE', 'yproject' ); ?></a>).
 		<br>
-		<button id="cookies-alert-close" class="button red"><?php _e( "Accepter", 'yproject' ); ?></button>
+		<button id="cookies-alert-close" class="button red"><?php _e( 'common.ACCEPT', 'yproject' ); ?></button>
 	</div>
 	<script>
 		var hidecookiealert = YPUIFunctions.getCookie( 'hidecookiealert' );

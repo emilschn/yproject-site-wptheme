@@ -35,7 +35,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 										<p class="screen-message"><?php echo $project_item[ 'title' ]; ?></p>
 									</div>
 									<div id="button-container">
-										<a class="button-slide" href="<?php echo $project_item[ 'link' ]; ?>"><?php _e("D&eacute;couvrir le projet", "yproject") ?></a>
+										<a class="button-slide" href="<?php echo $project_item[ 'link' ]; ?>"><?php _e( 'project.DISCOVER', 'yproject'); ?></a>
 									</div>
 								</div>
 							<?php endforeach; ?>
@@ -53,30 +53,30 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		
 <?php $stats_list = $page_controler->get_stats_list(); ?>
 <div id="wdg-project-stats" class="right">
-	<p><?php _e( "WE DO GOOD c'est :" ); ?></p>
+	<p><?php _e( 'common.WEDOGOOD_IS', 'yproject' ); ?></p>
 	<p>
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-balloon.png" alt="air balloon" />
 		<span>
 			<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span><br>
-			<?php _e( "lev&eacute;s", 'yproject' ); ?>
+			<?php _e( 'common.RAISED.P', 'yproject' ); ?>
 		</span>
 	</p>
 	<p>
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-people.png" alt="people" />
 		<span>
 			<span><?php echo number_format( $stats_list[ 'count_people' ], 0, '', ' ' ); ?></span><br>
-			<?php _e( "investisseurs", 'yproject' ); ?>
+			<?php _e( 'common.INVESTORS', 'yproject' ); ?>
 		</span>
 	</p>
 	<p>
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="money" />
 		<span>
 			<span><?php echo number_format( $stats_list[ 'royaltying_projects' ], 0, '', ' ' ); ?></span><br>
-			<?php _e( "entreprises royaltisent*", 'yproject' ); ?>
+			<?php _e( 'common.COMPANIES_ROYALTIZE', 'yproject' ); ?>
 		</span>
 	</p>
 </div>
-<div id="wdg-project-definition"><?php _e( "definition_royaltiser", 'yproject' ); ?></div>
+<div id="wdg-project-definition"><?php _e( 'common.ROYALTIZE_DEFINITION', 'yproject' ); ?></div>
 				
 <?php
 /******************************************************************************/
@@ -92,7 +92,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		
 	</header>
 	
-	<h2 class="standard only-inf997">/ <?php _e("les projets", "yproject") ?> /</h2>
+	<h2 class="standard only-inf997">/ <?php _e( 'projects.THE_PROJECTS', 'yproject' ) ?> /</h2>
 	
 		
 <?php
@@ -117,10 +117,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php ob_start(); ?>
 		
 		<nav id="project-filter">
-			<span><?php _e( "Filtres", 'yproject' ); ?> <span class="only-inf997 inline"><?php _e( "projets", 'yproject' ); ?></span></span>
+			<span><?php _e( 'projects.FILTERS', 'yproject' ); ?> <span class="only-inf997 inline"><?php _e( 'projects.PROJECTS', 'yproject' ); ?></span></span>
             <div class="project-filter-container">
                 <select id="project-filter-impact" class="project-filter-select">
-                    <option id="all-impacts" value="all" selected="selected"><?php _e( "Tous les impacts", 'yproject' ); ?></option>
+                    <option id="all-impacts" value="all" selected="selected"><?php _e( 'projects.ALL_IMPACTS', 'yproject' ); ?></option>
                     <?php foreach ( $impacts_list as $impact ): ?>							
 						<option id="<?php echo $impact->slug; ?>" value="<?php echo $impact->slug; ?>" ><?php echo $impact->name; ?></option>
                     <?php endforeach; ?>
@@ -128,7 +128,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
             </div>
             <div class="project-filter-container">
                 <select id="project-filter-location" class="project-filter-select">
-                    <option value="all" selected="selected"><?php _e( "Toutes les r&eacute;gions", 'yproject' ); ?></option>
+                    <option value="all" selected="selected"><?php _e( 'projects.ALL_LOCALIZATIONS', 'yproject' ); ?></option>
                     <?php foreach ( $region_list as $region => $dpt_list ): ?>
 						<option value="<?php echo implode(',', $dpt_list); ?>"><?php echo $region; ?></option>
                     <?php endforeach; ?>
@@ -136,7 +136,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
             </div>
             <div class="project-filter-container">
                 <select id="project-filter-step" class="project-filter-select">
-                    <option value="all" selected="selected"><?php _e( "Toutes les &eacute;tapes de lev&eacute;e de fonds", 'yproject' ); ?></option>
+                    <option value="all" selected="selected"><?php _e( 'projects.ALL_STEPS', 'yproject' ); ?></option>
                     <?php foreach ( $status_list as $status_key => $status_label ): ?>
 						<option value="<?php echo $status_key; ?>"><?php echo $status_label; ?></option>
                     <?php endforeach; ?>
@@ -242,10 +242,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<div class="projects-positive-savings">
 		<div class="padder">
 			<section class="wdg-component-projects-preview">
-				<h2 class="standard">/ <?php _e( "&Eacute;pargne Positive", 'yproject' ); ?> /</h2>
+				<h2 class="standard">/ <?php _e( 'projects.POSITIVE_SAVINGS', 'yproject' ); ?> /</h2>
 				<div class="projects-title-precisions">
-					<?php _e( "Ces projets sont disponibles en continu et permettent d'investir autant de fois que vous le souhaitez dans la transition &eacute;cologique.", 'yproject' ); ?><br>
-					<a href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( "En savoir plus sur l'&Eacute;pargne Positive.", 'yproject' ); ?></a>
+					<?php _e( 'projects.POSITIVE_SAVINGS_DESCRIPTION', 'yproject' ); ?><br>
+					<a href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( 'projects.POSITIVE_SAVINGS_KNOW_MORE', 'yproject' ); ?></a>
 				</div>
 
 
@@ -271,8 +271,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<div class="projects-after-end-date">
 		<div class="padder">
 			<section class="wdg-component-projects-preview">
-				<h2 class="standard">/ <?php _e( "Lev&eacute;es de fonds en cl&ocirc;ture", 'yproject' ); ?> /</h2>
-				<div class="projects-title-precisions"><?php _e( "Ces projets ont &eacute;t&eacute; financ&eacute;s avec succ&egrave;s mais il est toujours possible d'investir jusqu'au d&eacute;marrage de leur contrat de royalties.", 'yproject' ); ?></div>
+				<h2 class="standard">/ <?php _e( 'projects.CLOSING_CAMPAIGNS', 'yproject' ); ?> /</h2>
+				<div class="projects-title-precisions"><?php _e( 'projects.CLOSING_CAMPAIGNS_DESCRIPTION', 'yproject' ); ?></div>
 
 				<div class="project-slider">
 					<div class="block-projects">
@@ -317,7 +317,7 @@ ob_end_clean();
 		<div class="padder projects-funded">
 
 			<section class="wdg-component-projects-preview">
-				<h2 class="standard">/ <?php _e("projets financ&eacute;s", "yproject") ?> /</h2>
+				<h2 class="standard">/ <?php _e( 'projects.FUNDED_CAMPAIGNS', 'yproject' ) ?> /</h2>
 
 				<div class="project-slider">
 					<div class="block-projects">
@@ -363,7 +363,7 @@ ob_end_clean();
 			</section>
 			
 			<div class="align-center">
-				<button class="button big more-content"><?php _e( "Voir plus de projets", 'yproject' ); ?></button>
+				<button class="button big more-content"><?php _e( 'projects.FUNDED_CAMPAIGNS_SEE_MORE', 'yproject' ); ?></button>
 			</div>
 
 		</div><!-- .padder -->
