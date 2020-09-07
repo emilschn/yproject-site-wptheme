@@ -8,6 +8,7 @@ if ( isset( $_POST[ 'user_login' ] ) ) {
 	$init_username = htmlentities( $_POST['user_login'] );
 }
 
+$error = array();
 if ( !empty( $init_username ) ) {
 	$user = get_user_by( 'login', $init_username);
 	if ( !isset( $user, $user->user_login, $user->user_status ) ) {
@@ -20,7 +21,6 @@ if ( !empty( $init_username ) ) {
 		$username = $init_username;
 	}
 
-	$error = array();
 	if (isset($user, $user->user_login)) {
 		$facebook_meta = $user->get( 'social_connect_facebook_id' );
 		if (!isset($facebook_meta) || $facebook_meta == "") {
