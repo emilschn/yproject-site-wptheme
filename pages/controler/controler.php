@@ -120,6 +120,27 @@ class WDG_Page_Controler {
 
 //******************************************************************************
 	/**
+	 * Gestion multilingue
+	 */
+	protected function init_override_languages() {
+		add_filter( 'wpml_active_languages', 'WDG_Page_Controler::override_languages', 10 );
+	}
+
+	public static function override_languages( $languages ) {
+		global $post, $locale;
+		$buffer = array();
+		foreach ( $languages as $language_key => $language_item ) {
+			$buffer_item = $language_item;
+			$buffer_item[ 'active' ] = ( substr( $locale, 0, 2 ) == $language_item[ 'code' ] );
+			$buffer_item[ 'url' ] = home_url( '/' . $post->post_name . '/?lang=' . $language_item[ 'code' ] );
+			array_push( $buffer, $buffer_item );
+		}
+
+		return $buffer;
+	}
+
+//******************************************************************************
+	/**
 	 * Chargement script et style de datatable
 	 */
 	protected function enqueue_datatable( $cdn = false ) {

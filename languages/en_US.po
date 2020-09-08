@@ -157,7 +157,7 @@ msgstr "This file is too big."
 # ############################## HEADER - MENU ################################
 # FR : Les projets
 msgid "menu.THE_PROJECTS"
-msgstr "Les projets"
+msgstr "The projects"
 
 # FR : &Eacute;pargne positive
 msgid "menu.POSITIVE_SAVINGS"

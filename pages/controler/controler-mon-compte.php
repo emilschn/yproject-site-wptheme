@@ -56,6 +56,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 
 		// Si on met à jour le RIB, il faut recharger l'utilisateur en cours
 		$reload = WDGFormUsers::register_rib();
+		$this->init_override_languages();
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
 		$this->display_user_override_not_found = FALSE;
 		$this->display_user_override_organization_manager_mail = FALSE;

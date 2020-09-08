@@ -113,8 +113,11 @@
 				<a href="<?php echo home_url( '/a-propos/vision/' ); ?>" class="lines"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
 
 				<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+					<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
 					<a href="#" id="btn-switch-lang">
-						<?php echo $sitepress->get_current_language(); ?>
+					<?php foreach ( $active_languages as $language_key => $language_item ): if ( $language_item[ 'active' ] ): ?>
+						<?php echo $language_item[ 'code' ]; ?>
+					<?php endif; endforeach; ?>
 					</a>
 				<?php endif; ?>
 				
@@ -124,7 +127,6 @@
 				
 				<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
 				<div id="submenu-switch-lang" class="submenu-style hidden">
-					<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
 					<ul class="submenu-list">
 					<?php foreach ( $active_languages as $language_key => $language_item ): ?>
 						<li <?php if ( $language_item[ 'active' ] ) { echo 'class="active"'; } ?>><a href="<?php echo $language_item[ 'url' ]; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
