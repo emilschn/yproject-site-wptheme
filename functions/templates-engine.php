@@ -36,9 +36,14 @@ class WDG_Templates_Engine {
 				self::$current_page_name = 'projet';
 
 			} else {
-				global $post;
+				global $post, $locale;
 				self::$current_page_name = $post->post_name;
-
+		
+				if ( $locale != 'fr' && $locale != 'fr_FR' ) {
+					$post_in_french_id = apply_filters( 'wpml_object_id', $post->ID, 'page', FALSE, 'fr' );
+					$post_in_french = get_post( $post_in_french_id );
+					self::$current_page_name = $post_in_french->post_name;
+				}
 			}
 		}
 		return self::$current_page_name;

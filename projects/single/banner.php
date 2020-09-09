@@ -95,14 +95,30 @@ $campaign_categories_str = $campaign->get_categories_str();
 <div class="project-banner">
 	<div class="project-banner-title padder">
 		<?php if (!empty($lang_list)): ?>
-			<form method="GET" action="<?php the_permalink(); ?>">
-				<select name="lang">
-					<option value="fr_FR" <?php selected($current_lang , "fr_FR"); ?>>Fran&ccedil;ais</option>
-					<?php foreach ($lang_list as $lang): ?>
-					<option value="<?php echo $lang; ?>" <?php selected($current_lang, $lang); ?>><?php echo $language_list[$lang]; ?></option>
-					<?php endforeach; ?>
-				</select>
-			</form>
+			<select name="lang">
+				<?php
+				global $locale, $wpml_request_handler;
+				$language_cookie_lang = $wpml_request_handler->get_cookie_lang();
+				$active_languages = apply_filters( 'wpml_active_languages', NULL );
+				?>
+				<option value="<?php echo site_url( '/' . $campaign->get_url() . '/' ); ?>" <?php selected( $active_languages[ 'fr' ][ 'active' ] ); ?>>Fran&ccedil;ais</option>
+
+				<?php foreach ($lang_list as $lang): ?>
+					<?php
+					$language_key = substr( $lang, 0, 2 );
+					$language_name = '';
+					$language_is_active = ( $language_cookie_lang == $language_key );
+					if ( isset( $active_languages[ $language_key ] ) ) {
+						$language_item = $active_languages[ $language_key ];
+						$language_name = $language_item[ 'native_name' ];
+						$language_is_active = $language_item[ 'active' ];
+					} else {
+						$language_name = $language_list[ $lang ];
+					}
+					?>
+					<option value="<?php echo site_url( '/' . $language_key . '/' . $campaign->get_url() ); ?>" <?php selected( $language_is_active ); ?>><?php echo $language_name; ?></option>
+				<?php endforeach; ?>
+			</select>
 		<?php endif; ?>
 		
 		<h1><?php echo $campaign->data->post_title; ?></h1>
