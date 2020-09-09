@@ -97,12 +97,22 @@ $campaign_categories_str = $campaign->get_categories_str();
 		<?php if (!empty($lang_list)): ?>
 			<select name="lang">
 				<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
-				<?php foreach ( $active_languages as $language_key => $language_item ): ?>
-					<?php if ( $language_key == 'fr' ): ?>
-						<option value="<?php echo get_permalink( $campaign->ID ); ?>" <?php selected($language_item[ 'active' ]); ?>><?php echo $language_item[ 'native_name' ]; ?></option>
-					<?php else: ?>
-						<option value="<?php echo site_url( '/' . $language_key . '/' . $campaign->get_url() ); ?>" <?php selected($language_item[ 'active' ]); ?>><?php echo $language_item[ 'native_name' ]; ?></option>
-					<?php endif; ?>
+				<option value="<?php echo site_url( '/' . $campaign->get_url() . '/' ); ?>" <?php selected( $active_languages[ 'fr' ][ 'active' ] ); ?>>Fran&ccedil;ais</option>
+
+				<?php foreach ($lang_list as $lang): ?>
+					<?php
+					$language_key = substr( $lang, 0, 2 );
+					$language_name = '';
+					$language_is_active = false;
+					if ( isset( $active_languages[ $language_key ] ) ) {
+						$language_item = $active_languages[ $language_key ];
+						$language_name = $language_item[ 'native_name' ];
+						$language_is_active = $language_item[ 'active' ];
+					} else {
+						$language_name = $language_list[ $lang ];
+					}
+					?>
+					<option value="<?php echo site_url( '/' . $language_key . '/' . $campaign->get_url() ); ?>" <?php selected( $language_is_active ); ?>><?php echo $language_name; ?></option>
 				<?php endforeach; ?>
 			</select>
 		<?php endif; ?>
