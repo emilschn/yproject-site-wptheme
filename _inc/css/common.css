@@ -505,6 +505,10 @@ nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.cur
 .submenu-style ul.submenu-list li a:hover {
 	background: #E1E3E2;
 }
+.submenu-style .empty-list-info {
+	text-transform: none;
+	padding: 8px;
+}
 	
 	
 /* RECHERCHE */

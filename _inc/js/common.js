@@ -456,14 +456,20 @@ var WDGNavFunctions = (function($) {
 				} else {
 					var search = $("#submenu-search-input").val().toLowerCase();
 					$("#submenu-search .submenu-list li").addClass("hidden");
+					$( '.empty-list-info' ).addClass("hidden");
 					
 					if (search != "") {
+						var bFoundProject = false;
 						$("#submenu-search .submenu-list li").each(function() {
 							var itemText = $(this).find('a').text().toLowerCase();
 							if (itemText.indexOf(search) > -1) {
 								$(this).removeClass("hidden");
+								bFoundProject = true;
 							}
 						});
+						if ( !bFoundProject ) {
+							$( '.empty-list-info' ).removeClass("hidden");
+						}
 					}
 					$("#submenu-search").height("auto");
 					
