@@ -95,14 +95,16 @@ $campaign_categories_str = $campaign->get_categories_str();
 <div class="project-banner">
 	<div class="project-banner-title padder">
 		<?php if (!empty($lang_list)): ?>
-			<form method="GET" action="<?php the_permalink(); ?>">
-				<select name="lang">
-					<option value="fr_FR" <?php selected($current_lang , "fr_FR"); ?>>Fran&ccedil;ais</option>
-					<?php foreach ($lang_list as $lang): ?>
-					<option value="<?php echo $lang; ?>" <?php selected($current_lang, $lang); ?>><?php echo $language_list[$lang]; ?></option>
-					<?php endforeach; ?>
-				</select>
-			</form>
+			<select name="lang">
+				<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
+				<?php foreach ( $active_languages as $language_key => $language_item ): ?>
+					<?php if ( $language_key == 'fr' ): ?>
+						<option value="<?php echo get_permalink( $campaign->ID ); ?>" <?php selected($language_item[ 'active' ]); ?>><?php echo $language_item[ 'native_name' ]; ?></option>
+					<?php else: ?>
+						<option value="<?php echo site_url( '/' . $language_key . '/' . $campaign->get_url() ); ?>" <?php selected($language_item[ 'active' ]); ?>><?php echo $language_item[ 'native_name' ]; ?></option>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</select>
 		<?php endif; ?>
 		
 		<h1><?php echo $campaign->data->post_title; ?></h1>

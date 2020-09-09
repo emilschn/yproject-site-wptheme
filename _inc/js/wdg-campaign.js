@@ -39,8 +39,8 @@ var WDGProjectViewer = (function($) {
 				); 
 			});
 			
-			$("div#content.version-3 div.project-banner div.project-banner-title form select").change(function() {
-				$(this).parent().submit();
+			$("div#content.version-3 div.project-banner div.project-banner-title select").change(function() {
+				window.location = $(this).val();
 			});
 
 			if ($("#scroll-to-utilite-societale").length > 0) {
