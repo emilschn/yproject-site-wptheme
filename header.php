@@ -111,7 +111,7 @@
 				<a href="<?php echo home_url( '/financement/' ); ?>" class="lines"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/investissement/' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/a-propos/vision/' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
-                                
+
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
 				<a href="#" class="btn-user not-connected inactive"><?php _e( "Connexion", 'yproject' ); ?></a>
 				<a href="#" id="btn-burger" class="only-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/menu-burger.png" alt="MENU" /></a>
