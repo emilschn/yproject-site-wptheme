@@ -73,6 +73,20 @@ class WDG_Templates_Engine {
 	 * - charge le controler spécifique si existant
 	 */
 	public static function load_controler( $template ) {
+		// Si il y a une préférence de langue définie pour l'utilisateur, on vérifie que c'est bien cette langue qui est affichée
+		if ( is_user_logged_in() ) {
+			$WDGUser_current = WDGUser::current();
+			$user_language = $WDGUser_current->get_language();
+			global $post, $locale;
+			if ( !empty( $user_language ) && substr( $locale, 0, 2 ) != $user_language ) {
+				$language_permalink = apply_filters( 'wpml_permalink', get_permalink( $post->ID ), $user_language );
+				if ( !empty( $language_permalink ) ) {
+					wp_redirect( $language_permalink );
+					exit();
+				}
+			}
+		}
+
 		locate_template( WDG_Templates_Engine::$controler_path. 'controler.php', TRUE );
 		locate_template( WDG_Templates_Engine::$controler_path. 'controler-wdg.php', TRUE );
 		
