@@ -1950,6 +1950,10 @@ msgstr "Trusted person"
 msgid "form.user-details.CONTACT_IF_DECEASED_DESCRIPTION"
 msgstr "Please write the contact information (name, e-mail, phone number) of the trusted person we should contact in the case of a major problem (death). Let this person know when you will write it down, we will let this person access your account if needed."
 
+# FR : Langue d'affichage
+msgid "form.user-details.LANGUAGE"
+msgstr "Langue d'affichage"
+
 # FR : Cette adresse e-mail n'est pas valide.
 msgid "form.user-details.EMAIL_ADDRESS_NOT_OK"
 msgstr "This is not a valid e-mail address"

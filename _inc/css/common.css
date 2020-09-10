@@ -510,6 +510,11 @@ nav#main > div#menu > .wpml-ls {
 .submenu-style ul.submenu-list li a:hover {
 	background: #E1E3E2;
 }
+.submenu-style .empty-list-info {
+	text-transform: none;
+	padding: 8px;
+}
+
 #submenu-switch-lang {
 	position: relative;
 	float: right;
@@ -523,6 +528,8 @@ nav#main > div#menu > .wpml-ls {
 	font-weight: bold;
 }
 
+	
+	
 /* RECHERCHE */
 nav#main > div#menu > a#btn-search {
 	margin-left: 15px;
