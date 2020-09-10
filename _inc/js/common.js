@@ -434,7 +434,7 @@ var WDGNavFunctions = (function($) {
 							var nProjects = aProjectList.length;
 							for ( var i = 0; i < nProjects; i++ ) {
 								$( '#submenu-search ul.submenu-list' ).append(
-									'<li class="hidden"><a href="https://www.wedogood.co/'+aProjectList[i].post_name+'">'+aProjectList[i].post_title+'<span class="hidden">'+aProjectList[i].post_name+'</span></a></li>'
+									'<li class="hidden"><a href="https://www.wedogood.co/'+aProjectList[i].url+'">'+aProjectList[i].name+'<span class="hidden">'+aProjectList[i].url+' '+aProjectList[i].organization_name+'</span></a></li>'
 								);
 							}
 							$("#submenu-search-input").trigger( 'keyup' );
