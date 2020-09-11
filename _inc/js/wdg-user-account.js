@@ -140,7 +140,7 @@ UserAccountDashboard.prototype.initProjectList = function() {
 		'data': {
 			'user_id': userID,
 			'user_type': userType,
-			'action' : 'display_user_investments'
+			'action' : 'display_user_investments_optimized'
 		}
 		
 	// Une fois les projets obtenus
