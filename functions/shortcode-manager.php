@@ -10,6 +10,7 @@ class YPShortcodeManager {
 		'yproject_register_lightbox',
 		'yproject_statsadvanced_lightbox',
 		'yproject_newproject_lightbox',
+		'wdg_home_stats',
 		'wdg_page_auto_refresh',
 		'wdg_project_vote_count',
 		'wdg_project_vote_intention_sum',
@@ -18,6 +19,7 @@ class YPShortcodeManager {
 		'wdg_project_investment_link',
 		'wdg_project_progress_bar',
 		'wdg_project_royalties_simulator',
+		'wdg_project_preview',
 		'wdg_royalties_simulator',
 		'wdg_page_breadcrumb',
 		'wdg_footer_banner_link'
@@ -171,6 +173,66 @@ class YPShortcodeManager {
 		echo do_shortcode('[yproject_register_lightbox]');
 	}
 	
+	public static function wdg_home_stats($atts, $content = '') {
+		$atts = shortcode_atts( array(
+		), $atts );
+		
+		global $stylesheet_directory_uri;
+		$db_cacher = WDG_Cache_Plugin::current();
+		$stats = $db_cacher->get_cache( WDG_Cache_Plugin::$stats_key, WDG_Cache_Plugin::$stats_version );
+
+		if (!$stats) {
+			$stats_list = WDG_Cache_Plugin::initialize_home_stats();
+		} else {
+			$stats_list = json_decode( $stats, true );
+		}
+
+		ob_start();
+		?>
+
+			<section class="project-stats">
+				<div>
+					<div class="left">
+						<div>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-montgolfiere-noir-h100.png" alt="montgolfiere" width="115" height="100">
+						</div>
+						<div>
+							<span><?php echo number_format( $stats_list[ 'count_amount' ], 0, '', ' ' ); ?> &euro;</span><br>
+							<?php _e( 'common.RAISED.P', 'yproject' ); ?>
+						</div>
+					</div>
+					<div class="left">
+						<div>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-ensemble-noir-h100.png" alt="ensemble" width="139" height="100">
+						</div>
+						<div>
+							<span><?php echo number_format( $stats_list[ 'count_people' ], 0, '', ' ' ); ?></span><br>
+							<?php _e( 'common.INVESTORS', 'yproject' ); ?>
+						</div>
+					</div>
+					<div class="left">
+						<div>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-home/picto-monnaie-noir-h100.png" alt="monnaie" width="102" height="100">
+						</div>
+						<div>
+							<span><?php echo number_format( $stats_list[ 'royaltying_projects' ], 0, '', ' ' ); ?></span><br>
+							<?php _e( 'common.COMPANIES_ROYALTIZE', 'yproject' ); ?>
+						</div>
+					</div>
+					
+					<div class="clear"></div>
+					<p><?php _e( 'common.ROYALTIZE_DEFINITION', 'yproject' ); ?></p>
+
+				</div>
+			</section>
+
+		<?php
+		$content = ob_get_contents();
+		ob_end_clean();
+
+		return $content;
+	}
+	
 	public static function wdg_page_auto_refresh($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'nb_minutes' => '2',
@@ -303,6 +365,55 @@ class YPShortcodeManager {
 		<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/wdg-campaign.js?d=<?php echo ASSETS_VERSION; ?>"></script>
 		<?php
 		locate_template( array( 'projects/single/rewards.php' ), true );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
+	}
+
+	public static function wdg_project_preview( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'project' => '',
+			'home' => ''
+		), $atts );
+		
+		global $stylesheet_directory_uri, $project_id;
+		$stylesheet_directory_uri = get_stylesheet_directory_uri();
+		
+		ob_start();
+		?>
+		<section class="wdg-component-projects-preview">
+			<div class="project-slider">
+				<div class="block-projects">
+					<?php
+
+					// Projets qui s'affichent sur l'accueil
+					if ( $atts[ 'home' ] == 1 ) {
+						$db_cacher = WDG_Cache_Plugin::current();
+						$projects = $db_cacher->get_cache( WDG_Cache_Plugin::$projects_key, WDG_Cache_Plugin::$projects_version );
+
+						if ( !$projects ) {
+							$projects_list = WDG_Cache_Plugin::initialize_home_projects();
+						} else {
+							$projects_list = json_decode( $projects, TRUE );
+						}
+
+						foreach ( $projects_list as $project_id ) {
+							locate_template( array("projects/preview.php"), true, false );
+						}
+
+					// Un projet spécifique
+					} else if ( isset( $atts[ 'project' ] ) ) {
+						$project_id = $atts[ 'project' ];
+						locate_template( array( 'projects/preview.php' ), true );
+					}
+
+					?>
+				</div>
+			</div>
+		</section>
+		<?php
+
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		
