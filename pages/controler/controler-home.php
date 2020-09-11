@@ -31,10 +31,6 @@ class WDG_Page_Controler_Home extends WDG_Page_Controler {
 		}
 	}
 	
-	public function get_projects_list() {
-		return $this->projects_list;
-	}
-	
 /******************************************************************************/
 // PROJECT STATS
 /******************************************************************************/
