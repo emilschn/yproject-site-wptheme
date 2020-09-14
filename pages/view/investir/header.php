@@ -3,7 +3,7 @@ global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 
-
+<?php if ( $page_controler->get_current_campaign() !== FALSE ): ?>
 <header>
 	
 	<div class="center">
@@ -29,3 +29,4 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	</div>
 
 </header>
+<?php endif; ?>
