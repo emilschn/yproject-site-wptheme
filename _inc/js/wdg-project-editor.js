@@ -20,18 +20,21 @@ var ProjectEditor = (function($) {
 					ProjectEditor.clickAddLang();
 				});
 
-				$( '#wdg-remove-cache' ).click( function() {
-					$.ajax({
-						'type' : "POST",
-						'url' : ajax_object.ajax_url,
-						'data': {
-							'action':	'remove_project_cache',
-							'id_campaign':  $("#content").data("campaignid")
-						}
-					}).done(function(result) {
-						Location.reload();
-					});
-				} );
+				if ( $( '#wdg-remove-cache' ).length > 0 ) {
+					$( '#wdg-remove-cache' ).show();
+					$( '#wdg-remove-cache' ).click( function() {
+						$.ajax({
+							'type' : "POST",
+							'url' : ajax_object.ajax_url,
+							'data': {
+								'action':	'remove_project_cache',
+								'id_campaign':  $("#content").data("campaignid")
+							}
+						}).done(function(result) {
+							Location.reload();
+						});
+					} );
+				}
 
 				$(".wdg-send-project-notification").show();
 				$(".wdg-send-project-notification").click(function() {
