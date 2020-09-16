@@ -295,8 +295,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	
 	public function is_iban_validated() {
 		$lw_iban_status = $this->campaign_organization->get_lemonway_iban_status();
-		$lw_doc_iban_status = $this->campaign_organization->get_document_lemonway_status( LemonwayDocument::$document_type_bank );
-		return ( $lw_iban_status == WDGUser::$iban_status_validated && $lw_doc_iban_status == LemonwayDocument::$document_status_accepted );
+		return ( $lw_iban_status == WDGUser::$iban_status_validated );
 	}
 	
 	
