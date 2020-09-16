@@ -23,6 +23,7 @@ var ProjectEditor = (function($) {
 				if ( $( '#wdg-remove-cache' ).length > 0 ) {
 					$( '#wdg-remove-cache' ).show();
 					$( '#wdg-remove-cache' ).click( function() {
+						$( '#wdg-remove-cache' ).text( '...' );
 						$.ajax({
 							'type' : "POST",
 							'url' : ajax_object.ajax_url,
@@ -31,7 +32,7 @@ var ProjectEditor = (function($) {
 								'id_campaign':  $("#content").data("campaignid")
 							}
 						}).done(function(result) {
-							Location.reload();
+							window.location.reload(false); 
 						});
 					} );
 				}
