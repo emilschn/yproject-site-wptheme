@@ -158,7 +158,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		}
 		if ( empty( $this->currentprojects_list ) ) {
 			$this->currentprojects_list = array(
-				'funding_after'		=> ATCF_Campaign::get_list_funding( 0, '', TRUE, FALSE )
+				'funding_after'		=> ATCF_Campaign::get_list_funding( -1, '', TRUE, FALSE )
 			);
 		}
 	}

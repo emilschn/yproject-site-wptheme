@@ -267,7 +267,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	</div>
 	<?php endif; ?>
 	
-	<?php $project_list_funding_after = $currentprojects_list[ 'funding_after' ]; ?>
+	<?php
+	$currentprojects_list = $page_controler->get_currentprojects_list();
+	$project_list_funding_after = $currentprojects_list[ 'funding_after' ];
+	?>
 	<?php if ( count( $project_list_funding_after ) > 0 ): ?>
 	<div class="projects-after-end-date">
 		<div class="padder">
