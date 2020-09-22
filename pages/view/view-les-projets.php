@@ -253,6 +253,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<div class="block-projects">
 
 						<?php
+						global $project_id;
 						foreach ( $project_list_positive_savings as $project_post ) {
 							$project_id = $project_post->ID;
 							locate_template( array( "projects/preview.php" ), true, false );
@@ -278,12 +279,12 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<div class="block-projects">
 
 					<?php
+					global $project_id;
 					foreach ( $project_list_funding_after as $project_post ) {
 						$project_id = $project_post->ID;
 						locate_template( array( "projects/preview.php" ), true, false );
 					}
 					?>
-
 					</div>
 				</div>
 			</section>
