@@ -196,6 +196,9 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		
 		// message
 		$this->summary_data[ 'message' ] = $this->current_declaration->get_message();
+		if ( $this->current_declaration->get_is_message_rich() ) {
+			$this->summary_data[ 'message' ] = $this->current_declaration->get_message_rich_decoded();
+		}
 	}
 	
 	public function get_summary_data() {

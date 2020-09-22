@@ -419,6 +419,10 @@ div.mean-payment-list a.mean-payment .db-form.v3.card-options-list .field label.
 .declaration-summary table tr.bold td {
 	font-weight: bold;
 }
+.declaration-summary img {
+	max-width: 500px;
+	height: auto;
+}
 
 .meanofpayment-select {
 	width: 100%;
