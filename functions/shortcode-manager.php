@@ -175,6 +175,7 @@ class YPShortcodeManager {
 	
 	public static function wdg_home_stats($atts, $content = '') {
 		$atts = shortcode_atts( array(
+			'stat'		=> ''
 		), $atts );
 		
 		global $stylesheet_directory_uri;
@@ -185,6 +186,10 @@ class YPShortcodeManager {
 			$stats_list = WDG_Cache_Plugin::initialize_home_stats();
 		} else {
 			$stats_list = json_decode( $stats, true );
+		}
+
+		if ( !empty( $atts[ 'stat' ] ) ) {
+			return number_format( $stats_list[ $atts[ 'stat' ] ], 0, '', ' ' );
 		}
 
 		ob_start();
