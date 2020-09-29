@@ -224,7 +224,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"label"	=> __( "Nombre d'employ&eacute;s au lancement", 'yproject' ),
 			"value"	=> $page_controler->get_campaign()->get_api_data( 'employees_number' )
 		));
-				
+		
 		DashboardUtility::create_field(array(
 			"id"			=> "new_minimum_goal_display",
 			"type"			=> "select",
@@ -233,7 +233,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"options_id"	=> array( ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_max, ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ),
 			"options_names"	=> array( "Afficher l'objectif minimum", "Afficher l'objectif maximum et un seuil de validation" )
 		));
-				
+		
 		DashboardUtility::create_field(array(
 			"id"			=> "new_presentation_visible_only_to_investors",
 			"type"			=> "check",
@@ -243,7 +243,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'editable'		=> !$page_controler->get_campaign()->is_remaining_time,
 			'visible'		=> !$page_controler->get_campaign()->is_remaining_time()
 		));
-				
+		
 		DashboardUtility::create_field(array(
 			"id"			=> "new_enable_advice_notifications",
 			"type"			=> "check",
@@ -253,7 +253,19 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'editable'		=> $page_controler->can_access_admin(),
 			'visible'		=> $page_controler->can_access_admin()
 		));
-				
+		
+		DashboardUtility::create_field(array(
+			"id"			=> "new_advice_notifications_frequency",
+			"type"			=> "select",
+			"label"			=> __( "Fr&eacute;quence d'envoi des notifications", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->get_advice_notifications_frequency(),
+			"options_id"	=> array( 1, 3, 5, 7 ),
+			"options_names"	=> array( "Quotidienne", "Tous les 3 jours", "Tous les 5 jours", "Hebdomadaire" ),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
+
 		DashboardUtility::create_field(array(
 			"id"			=> "new_show_comments_for_everyone",
 			"type"			=> "check",
