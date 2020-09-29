@@ -24,14 +24,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			));
 
 			DashboardUtility::create_field(array(
-				'id'			=> 'new_project_url',
-				'type'			=> 'text',
-				'label'			=> __( "URL du projet", 'yproject' ),
-				'value'			=> $page_controler->get_campaign()->data->post_name,
-				'admin_theme'	=> true
-			));
-
-			DashboardUtility::create_field(array(
 				'id'			=> 'new_is_hidden',
 				'type'			=> 'check',
 				'label'			=> __( "Masquée du public", 'yproject' ),
@@ -179,6 +171,14 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				"options_names"	=> array_values( $array_acquisition )
 			));
 		}
+
+		DashboardUtility::create_field(array(
+			'id'			=> 'new_project_url',
+			'type'			=> 'text',
+			'label'			=> __( "URL du projet", 'yproject' ),
+			"description"	=> __( "Privil&eacute;giez une URL courte pour mieux communiquer", 'yproject' ),
+			'value'			=> $page_controler->get_campaign()->data->post_name
+		));
 		
 		$locations = atcf_get_locations();
 		DashboardUtility::create_field(array(
