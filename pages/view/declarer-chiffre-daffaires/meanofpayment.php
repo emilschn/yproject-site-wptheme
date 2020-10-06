@@ -12,7 +12,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<br><br>
 	<?php endif; ?>
 	
-	<?php echo sprintf( __( "Vous allez proc&eacute;der &agrave; un r&egrave;glement de %s &euro;.", 'yproject' ), YPUIHelpers::display_number( $page_controler->get_current_declaration_amount() ) ); ?>
+	<?php echo sprintf( __( "Vous allez proc&eacute;der &agrave; un r&egrave;glement de %s &euro;.", 'yproject' ), YPUIHelpers::display_number( $page_controler->get_current_declaration_amount(), TRUE, 0 ) ); ?>
 	<br><br>
 	
 	<div class="mean-payment-list">

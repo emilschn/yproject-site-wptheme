@@ -16,13 +16,13 @@ class YPUIHelpers {
 	 * @param int $number
 	 * @return string
 	 */
-	public static function display_number( $number, $money = FALSE ) {
+	public static function display_number( $number, $money = FALSE, $decimals = 2 ) {
 		if ( empty( $number ) ) {
 			return '0';
 		}
 		
 		//Remplace les points par des virgules
-		$buffer = UIHelpers::format_number( $number );
+		$buffer = UIHelpers::format_number( $number, $decimals );
 		
 		return $buffer;
 	}

@@ -194,11 +194,11 @@ $campaign_categories_str = $campaign->get_categories_str();
 					</div>
 					<div class="left bordered">
 						<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
-							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro; MIN<br />
-							<?php echo YPUIHelpers::display_number( $campaign->goal( false ) ); ?> &euro; MAX</span>
+							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro; MIN<br />
+							<?php echo YPUIHelpers::display_number( $campaign->goal( false ), TRUE, 0 ); ?> &euro; MAX</span>
 							<span></span>
 						<?php else: ?>
-							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro;</span><br />
 							<span><?php _e('Objectif minimum', 'yproject'); ?></span>
 						<?php endif; ?>
 					</div>
@@ -305,10 +305,10 @@ $campaign_categories_str = $campaign->get_categories_str();
 						<div class="left bordered">
 							<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
 								<span></span>
-								<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro; MIN<br />
-								<?php echo YPUIHelpers::display_number( $campaign->goal( false ) ); ?> &euro; MAX</span>
+								<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro; MIN<br />
+								<?php echo YPUIHelpers::display_number( $campaign->goal( false ), TRUE, 0 ); ?> &euro; MAX</span>
 							<?php else: ?>
-								<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+								<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro;</span><br />
 								<span><?php _e('Objectif minimum', 'yproject'); ?></span>
 							<?php endif; ?>
 						</div>
