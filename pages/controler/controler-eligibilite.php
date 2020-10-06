@@ -36,8 +36,12 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 					$datetime = new DateTime();
 					$metadata_decoded->package->paymentDate = $datetime->format( 'Y-m-d H:i:s' );
 					$api_result->metadata = json_encode( $metadata_decoded );
+					WDGWPREST_Entity_Project_Draft::update( $input_guid, $api_result->id_user, $api_result->email, $new_status, $new_step, $new_authorization, $api_result->metadata );
+					
+					// Envoi notif à Zapier
+					$api_result = WDGWPREST_Entity_Project_Draft::get( $input_guid );
+					NotificationsZapier::send_prospect_setup_payment_received( $api_result );
 				}
-				WDGWPREST_Entity_Project_Draft::update( $input_guid, $api_result->id_user, $api_result->email, $new_status, $new_step, $new_authorization, $api_result->metadata );
 			
 			// Erreur de paiement
 			} elseif ( $input_is_error === '1' || $input_is_canceled === '1' ) {
