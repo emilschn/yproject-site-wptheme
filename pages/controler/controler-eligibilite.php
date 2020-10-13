@@ -18,6 +18,7 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 		if ( !empty( $input_is_success ) || !empty( $input_is_error ) || !empty( $input_is_canceled ) ) {
 			$input_guid = filter_input( INPUT_GET, 'guid' );
 			$api_result = WDGWPREST_Entity_Project_Draft::get( $input_guid );
+			$metadata_decoded = json_decode( $api_result->metadata );
 
 			// Succès de paiement
 			if ( $input_is_success === '1' ) {
@@ -25,15 +26,14 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 				$new_step = 'project-complete';
 				$new_authorization = 'can-create-db';
 				if ( $api_result->authorization != 'can-create-db' ) {
-					$metadata_decoded = json_decode( $api_result->metadata );
 
 					// Notif réception de paiement par carte
-					$draft_url = home_url( '/financement/eligibilite/?guid=' . $guid );
-					NotificationsAPI::prospect_setup_payment_method_received_card( $api_result->email, $metadata_decoded->user->name, $draft_url );
-					
-					// Mise à jour date de paiement
+					$amount = '...';
 					date_default_timezone_set("Europe/Paris");
 					$datetime = new DateTime();
+					NotificationsAPI::prospect_setup_payment_method_received_card( $api_result->email, $metadata_decoded->user->name, $amount, $datetime->format( 'd/m/Y H:i' ) );
+					
+					// Mise à jour date de paiement
 					$metadata_decoded->package->paymentDate = $datetime->format( 'Y-m-d H:i:s' );
 					$api_result->metadata = json_encode( $metadata_decoded );
 					WDGWPREST_Entity_Project_Draft::update( $input_guid, $api_result->id_user, $api_result->email, $new_status, $new_step, $new_authorization, $api_result->metadata );
@@ -41,10 +41,14 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 					// Envoi notif à Zapier
 					$api_result = WDGWPREST_Entity_Project_Draft::get( $input_guid );
 					NotificationsZapier::send_prospect_setup_payment_received( $api_result );
+
+					// Ajout test dans 3 jours si TBPP créé
+					WDGQueue::add_notifications_dashboard_not_created( $api_result->id );
 				}
 			
 			// Erreur de paiement
 			} elseif ( $input_is_error === '1' || $input_is_canceled === '1' ) {
+				$draft_url = home_url( '/financement/eligibilite/?guid=' . $guid );
 				NotificationsAPI::prospect_setup_payment_method_error_card( $api_result->email, $metadata_decoded->user->name, $draft_url );
 					
 			}
