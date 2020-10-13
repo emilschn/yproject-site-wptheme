@@ -31,7 +31,7 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 				<?php echo sprintf( __( "Nous attendons votre authentification pour verser %s &euro; sur votre porte-monnaie.", 'yproject' ), UIHelpers::format_number( $pending_amount ) ); ?><br><br>
 			<?php endif; ?>
 
-			<?php _e( "Depuis Janvier 2019, l'authentification de votre compte est n&eacute;cessaire aupr&egrave;s de notre prestataire de paiement pour lib&eacute;rer l'acc&egrave;s &agrave; votre porte-monnaie et pouvoir retirer vos royalties." ); ?>
+			<?php _e( "L'authentification de votre compte est une obligation l&eacute;gale dans le cadre de la lutte contre le blanchiment de capitaux et le financement du terrorisme. Elle est donc n&eacute;cessaire pour que vous puissiez activer votre porte-monnaie &eacute;lectronique et pouvoir retirer vos royalties.", 'yproject' ); ?>
 		</div>
 
 		<a href="#authentication" class="button red go-to-tab" data-tab="authentication"><?php _e( "Voir le statut de mon authentification", 'yproject' ); ?></a>

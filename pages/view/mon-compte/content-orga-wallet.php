@@ -30,7 +30,7 @@ $pending_amount = $WDGOrganization->get_pending_rois_amount();
 				<?php echo sprintf( __( "%s &euro; sont en attente d'authentification..", 'yproject' ), UIHelpers::format_number( $pending_amount ) ); ?><br><br>
 			<?php endif; ?>
 
-			<?php _e( "Depuis Janvier 2019, l'authentification de votre organisation est n&eacute;cessaire aupr&egrave;s de notre prestataire de paiement pour lib&eacute;rer l'acc&egrave;s au porte-monnaie de votre organisation et pouvoir retirer les royalties." ); ?>
+			<?php _e( "L'authentification de votre compte est une obligation l&eacute;gale dans le cadre de la lutte contre le blanchiment de capitaux et le financement du terrorisme. Elle est donc n&eacute;cessaire pour que vous puissiez activer votre porte-monnaie &eacute;lectronique et pouvoir retirer vos royalties.", 'yproject' ); ?>
 		</div>
 
 		<a href="#authentication" class="button red go-to-tab" data-tab="orga-authentication-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( "Voir le statut de l'authentification", 'yproject' ); ?></a>
