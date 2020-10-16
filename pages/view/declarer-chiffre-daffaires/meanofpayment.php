@@ -12,7 +12,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<br><br>
 	<?php endif; ?>
 	
-	<?php echo sprintf( __( "Vous allez proc&eacute;der &agrave; un r&egrave;glement de %s &euro;.", 'yproject' ), YPUIHelpers::display_number( $page_controler->get_current_declaration_amount() ) ); ?>
+	<?php echo sprintf( __( "Vous allez proc&eacute;der &agrave; un r&egrave;glement de %s &euro;.", 'yproject' ), YPUIHelpers::display_number( $page_controler->get_current_declaration_amount(), TRUE, 0 ) ); ?>
 	<br><br>
 	
 	<div class="mean-payment-list">
@@ -32,7 +32,13 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<div class="mean-payment" data-meanofpayment="mandate">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Pr&eacute;l&egrave;vement bancaire", 'yproject' ); ?>" width="120">
 			<div>
-				<span class="mean-payment-name"><?php _e( "Pr&eacute;l&egrave;vement bancaire", 'yproject' ); ?></span><br>
+				<span class="mean-payment-name">
+					<?php if ( $page_controler->get_current_campaign_organization()->is_mandate_b2b() ): ?>
+						<?php _e( "Pr&eacute;l&egrave;vement bancaire (mandat de type B2B)", 'yproject' ); ?>
+					<?php else: ?>
+						<?php _e( "Pr&eacute;l&egrave;vement bancaire (mandat de type Core)", 'yproject' ); ?>
+					<?php endif; ?>
+				</span><br>
 				<span><?php _e( "Le pr&eacute;l&egrave;vement bancaire s'effectuera sur le compte bancaire dont l'IBAN est le suivant :", 'yproject' ); ?> <strong><?php echo $page_controler->get_mandate_infos(); ?></strong></span><br><br>
 				<span><?php _e( "Merci de vous assurer que les fonds sont suffisants sur ce compte. En cas d'annulation, notre prestataire de services de paiement nous pr&eacute;l&egrave;ve des frais que <strong>nous vous refacturerons &agrave; hauteur de 30 € HT</strong>.", 'yproject' ); ?></span><br><br>
 				<span><?php _e( "De plus, l'utilisation de ce moyen de paiement provoque un d&eacute;lai de versement &agrave; vos investisseurs de <strong>10 jours</strong> &agrave; compter de la r&eacute;ception de votre paiement.", 'yproject' ); ?></span>

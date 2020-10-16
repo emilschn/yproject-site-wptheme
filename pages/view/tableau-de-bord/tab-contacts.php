@@ -147,6 +147,24 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 			<hr>
 			<br><br>
 
+			<?php if ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_vote ): ?>
+				<a href="#contacts" data-mailtype="vote-end-pending-campaign" class="button admin-theme show-notifications-end-vote"><?php _e( "Envoyer les notifications de fin d'évaluation de campagne en attente", "yproject" ) ?></a>
+				<a href="#contacts" data-mailtype="vote-end-canceled-campaign" class="button admin-theme show-notifications-end-vote"><?php _e( "Envoyer les notifications de fin d'évaluation de campagne annulée", "yproject" ) ?></a>
+				<br><br>
+		
+				<form id="form-notifications-end-vote" action="<?php echo admin_url( 'admin-post.php?action=send_project_notifications_end_vote' ); ?>" method="POST" class="hidden align-left">
+					<input type="hidden" name="action" value="send_project_notifications_end_vote">
+					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
+					<input type="hidden" id="mail_type" name="mail_type" value="">
+					<button type="button" name="send_option" class="button admin-theme button-test-notification">Envoyer test</button>
+					<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
+				</form>
+
+				<br><br>
+				<hr>
+				<br><br>
+			<?php endif; ?>
+
 			<?php if ( $page_controler->is_campaign_funded() ): ?>
 				<?php if ( $page_controler->get_campaign()->is_hidden() ): ?>
 					<a href="#contacts" data-mailtype="end-success-private" class="button admin-theme show-notifications-end"><?php _e( "Envoyer les notifications de succ&egrave;s de campagne priv&eacute;e", 'yproject' ); ?></a><br><br>

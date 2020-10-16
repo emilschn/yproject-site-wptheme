@@ -209,7 +209,7 @@ add_action('wp_ajax_nopriv_get_current_projects', 'yproject_get_current_projects
 
 function yproject_save_edit_project() {
 	$current_lang = get_locale();
-	if ($current_lang == 'fr_FR') { $current_lang = ''; }
+	if ( $current_lang == 'fr_FR' || $current_lang == 'fr' ) { $current_lang = ''; }
 	else { $current_lang = '_' . $current_lang; }
 	
 	ypcf_debug_log( 'yproject_save_edit_project > property ('.$current_lang.') => ' . $_POST['property'], TRUE );
@@ -227,8 +227,13 @@ function yproject_save_edit_project() {
 	
 	$meta_key = $property.'_add_value_reservation_'.$lang;
 	$meta_value = get_post_meta( $campaign_id, $meta_key, TRUE );
-	$WDGUser = new WDGUser( $meta_value[ 'user' ] );
-	$name = $WDGUser->get_firstname()." ".$WDGUser->get_lastname();
+	$meta_user_id = FALSE;
+	$name = 'undefined';
+	if ( !empty( $meta_value[ 'user' ] ) ) {
+		$meta_user_id = $meta_value[ 'user' ];
+		$WDGUser = new WDGUser( $meta_user_id );
+		$name = $WDGUser->get_firstname()." ".$WDGUser->get_lastname();
+	}
 	
 	$return_values = array(
 			"response" => "done",
@@ -238,7 +243,7 @@ function yproject_save_edit_project() {
 	);
 
 	if ( !empty($meta_value) ) {
-	    if ( $meta_value[ 'user' ] == $user_id ) {			
+	    if ( $meta_user_id == $user_id ) {			
 			$buffer = TRUE;
 	    } else {
 	    	$return_values[ 'response' ] = "error";

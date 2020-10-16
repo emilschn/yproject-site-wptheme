@@ -166,9 +166,6 @@ div#content.version-3 div.project-admin > a, div#content.version-3 div.project-a
 div#content.version-3 div.project-admin > div.btn-edit.edit-button-validate {
 	background-color: #00879B;
 }
-#wdg-edit-project-add-lang {
-	color: #000000;
-}
 .wdg-send-project-notification {
 	width: 100%;
 	display: none;
@@ -206,14 +203,15 @@ div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before 
 .en_US div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before {
     content: "Normal Mode";
 }
+div#content.version-3 div.project-admin > div.btn-edit#wdg-remove-cache:before {
+    content: "Suppr cache";
+}
 #wdg-edit-project-add-lang {
 	display: none;
-    position: fixed;
-    top: 165px;
-    right: 0px;
 	width: 149px;
 	color: #000;
 	cursor: pointer;
+	margin-bottom: 8px;
 }
 #wdg-edit-project-add-lang select, #wdg-edit-project-add-lang button.add-button {
 	display: none;

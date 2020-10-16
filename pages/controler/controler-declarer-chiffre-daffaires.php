@@ -196,6 +196,9 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		
 		// message
 		$this->summary_data[ 'message' ] = $this->current_declaration->get_message();
+		if ( $this->current_declaration->get_is_message_rich() ) {
+			$this->summary_data[ 'message' ] = $this->current_declaration->get_message_rich_decoded();
+		}
 	}
 	
 	public function get_summary_data() {
@@ -436,7 +439,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				$this->current_declaration->status = WDGROIDeclaration::$status_transfer;
 				$this->current_declaration->save();
 				$this->start_auto_transfer();
-				NotificationsEmails::send_notification_roi_payment_success_admin( $this->current_declaration->id );
+				NotificationsSlack::send_notification_roi_payment_success_admin( $this->current_declaration->id );
 				NotificationsEmails::send_notification_roi_payment_success_user( $this->current_declaration->id );
 				
 				LemonwayLib::ask_transfer_funds( $WDGOrganization->get_lemonway_id(), $WDGOrganization->get_royalties_lemonway_id(), $this->current_declaration->get_amount_with_adjustment() );
@@ -444,7 +447,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				$purchase_key = $transaction_result->TRANS->HPAY->ID;
 
 			} else {
-				NotificationsEmails::send_notification_roi_payment_error_admin( $this->current_declaration->id );
+				NotificationsSlack::send_notification_roi_payment_error_admin( $this->current_declaration->id );
 				$purchase_key = 'error';
 
 			}
@@ -508,7 +511,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					$this->current_declaration->status = WDGROIDeclaration::$status_waiting_transfer;
 					$this->current_declaration->save();
 					
-					NotificationsEmails::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
+					NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
 				}
 			}
 
@@ -524,7 +527,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_wire;
 		$this->current_declaration->save();
 					
-		NotificationsEmails::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
+		NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
 	}
 
 	private function start_auto_transfer() {
@@ -535,12 +538,12 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		}
 
 		$content_mail_auto_royalties = '';
-		$content_mail_auto_royalties .= 'Versement pour ' . $this->current_campaign->get_name() . '<br>';
-		$content_mail_auto_royalties .= 'Declaration du ' . $this->current_declaration->get_formatted_date() . '<br>';
-		$content_mail_auto_royalties .= 'Programmé pour maintenant<br>';
-		$content_mail_auto_royalties .= 'Montant avec ajustement : ' . $this->current_declaration->get_amount_with_adjustment() . ' €<br>';
-		$content_mail_auto_royalties .= 'Montant versé aux investisseurs : ' . $total_roi . ' €<br><br>';
-		NotificationsEmails::send_mail( 'administratif@wedogood.co', 'Notif interne - Versement auto à venir', $content_mail_auto_royalties );
+		$content_mail_auto_royalties .= 'Versement pour ' . $this->current_campaign->get_name() . "\n";
+		$content_mail_auto_royalties .= 'Declaration du ' . $this->current_declaration->get_formatted_date() . "\n";
+		$content_mail_auto_royalties .= "Programmé pour maintenant\n";
+		$content_mail_auto_royalties .= 'Montant avec ajustement : ' . $this->current_declaration->get_amount_with_adjustment() . " €\n";
+		$content_mail_auto_royalties .= 'Montant versé aux investisseurs : ' . $total_roi . ' €';
+		NotificationsSlack::send_notification_roi_transfer_to_come( $content_mail_auto_royalties );
 
 		$this->current_declaration->init_rois_and_tax();
 	}

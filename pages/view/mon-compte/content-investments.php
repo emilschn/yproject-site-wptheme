@@ -51,7 +51,7 @@ $list_intentions_to_confirm = $page_controler->get_intentions_to_confirm();
 			<?php if ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote || $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_collecte ): ?>
 				<?php $status_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? "en &eacute;valuation" : "en investissement"; ?>
 				<?php $button_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? "Pr&eacute;-investir" : "Investir"; ?>
-				<h4><?php echo YPUIHelpers::display_number( $intention_item[ 'vote_amount' ] ). ' &euro; sur ' .$intention_item[ 'campaign_name' ]. ' (' .$status_str. ')'; ?></h4>
+				<h4><?php echo YPUIHelpers::display_number( $intention_item[ 'vote_amount' ], TRUE, 0 ). ' &euro; sur ' .$intention_item[ 'campaign_name' ]. ' (' .$status_str. ')'; ?></h4>
 				<a href="<?php echo home_url( '/investir/?campaign_id=' .$intention_item[ 'campaign_id' ]. '&invest_start=1&init_invest=' .$intention_item[ 'vote_amount' ] ); ?>" class="button red"><?php echo $button_str; ?></a>
 			<?php endif; ?>
 

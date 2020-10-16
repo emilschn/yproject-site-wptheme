@@ -530,7 +530,14 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		$( '#form-notifications' ).hide();
 		$( '#form-notifications' ).slideDown( 100 );
 	} );
-		
+
+	$( '.show-notifications-end-vote' ).click( function( e ) {
+		e.preventDefault();
+		$( '#form-notifications-end-vote #mail_type' ).val( $( this ).data( 'mailtype' ) );
+		$( '#form-notifications-end-vote' ).hide();
+		$( '#form-notifications-end-vote' ).slideDown( 100 );
+	} );
+
 	$( '.show-notifications-end' ).click( function( e ) {
 		e.preventDefault();
 		$( '#form-notifications-end #notifications_content' ).html( $( this ).html() );

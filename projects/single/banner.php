@@ -95,14 +95,26 @@ $campaign_categories_str = $campaign->get_categories_str();
 <div class="project-banner">
 	<div class="project-banner-title padder">
 		<?php if (!empty($lang_list)): ?>
-			<form method="GET" action="<?php the_permalink(); ?>">
-				<select name="lang">
-					<option value="fr_FR" <?php selected($current_lang , "fr_FR"); ?>>Fran&ccedil;ais</option>
-					<?php foreach ($lang_list as $lang): ?>
-					<option value="<?php echo $lang; ?>" <?php selected($current_lang, $lang); ?>><?php echo $language_list[$lang]; ?></option>
-					<?php endforeach; ?>
-				</select>
-			</form>
+			<select name="lang">
+				<?php global $locale; $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
+				<option value="<?php echo site_url( '/' . $campaign->get_url() . '/' ); ?>" <?php selected( $active_languages[ 'fr' ][ 'active' ] ); ?>>Fran&ccedil;ais</option>
+
+				<?php foreach ($lang_list as $lang): ?>
+					<?php
+					$language_key = substr( $lang, 0, 2 );
+					$language_name = '';
+					$language_is_active = ( $locale == $lang || $locale == $language_key );
+					if ( isset( $active_languages[ $language_key ] ) ) {
+						$language_item = $active_languages[ $language_key ];
+						$language_name = $language_item[ 'native_name' ];
+						$language_is_active = $language_item[ 'active' ];
+					} else {
+						$language_name = $language_list[ $lang ];
+					}
+					?>
+					<option value="<?php echo site_url( '/' . $language_key . '/' . $campaign->get_url() ); ?>" <?php selected( $language_is_active ); ?>><?php echo $language_name; ?></option>
+				<?php endforeach; ?>
+			</select>
 		<?php endif; ?>
 		
 		<h1><?php echo $campaign->data->post_title; ?></h1>
@@ -182,11 +194,11 @@ $campaign_categories_str = $campaign->get_categories_str();
 					</div>
 					<div class="left bordered">
 						<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
-							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro; MIN<br />
-							<?php echo YPUIHelpers::display_number( $campaign->goal( false ) ); ?> &euro; MAX</span>
+							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro; MIN<br />
+							<?php echo YPUIHelpers::display_number( $campaign->goal( false ), TRUE, 0 ); ?> &euro; MAX</span>
 							<span></span>
 						<?php else: ?>
-							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro;</span><br />
 							<span><?php _e('Objectif minimum', 'yproject'); ?></span>
 						<?php endif; ?>
 					</div>
@@ -265,8 +277,8 @@ $campaign_categories_str = $campaign->get_categories_str();
 					<?php if ( $time_remaining_str == '-' ): ?>
 						<?php if ( $campaign->is_investable() ): ?>
 							<div class="end-sentence">
-								<?php $datetime_end = $campaign->get_end_date_when_can_invest_until_contract_start_date(); ?>
-								<?php echo __( "L'investissement est possible jusqu'au d&eacute;marrage du contrat de royalties", 'yproject' ). " (" .$datetime_end->format( 'd/m/Y' ). ")."; ?>
+								<?php $datetime_end_str = $campaign->get_end_date_when_can_invest_until_contract_start_date_as_string(); ?>
+								<?php echo __( "L'investissement est possible jusqu'au d&eacute;marrage du contrat de royalties", 'yproject' ). " (" .$datetime_end_str. ")."; ?>
 							</div>
 							<a href="<?php echo $invest_url_href; ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
 						<?php endif; ?>
@@ -293,10 +305,10 @@ $campaign_categories_str = $campaign->get_categories_str();
 						<div class="left bordered">
 							<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
 								<span></span>
-								<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro; MIN<br />
-								<?php echo YPUIHelpers::display_number( $campaign->goal( false ) ); ?> &euro; MAX</span>
+								<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro; MIN<br />
+								<?php echo YPUIHelpers::display_number( $campaign->goal( false ), TRUE, 0 ); ?> &euro; MAX</span>
 							<?php else: ?>
-								<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal() ); ?> &euro;</span><br />
+								<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro;</span><br />
 								<span><?php _e('Objectif minimum', 'yproject'); ?></span>
 							<?php endif; ?>
 						</div>
