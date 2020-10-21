@@ -20,6 +20,7 @@ class YPShortcodeManager {
 		'wdg_project_progress_bar',
 		'wdg_project_royalties_simulator',
 		'wdg_project_preview',
+		'wdg_project_warning_lightbox',
 		'wdg_royalties_simulator',
 		'wdg_page_breadcrumb',
 		'wdg_footer_banner_link'
@@ -419,6 +420,31 @@ class YPShortcodeManager {
 		</section>
 		<?php
 
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
+	}
+
+	public static function wdg_project_warning_lightbox( $atts, $content = '' ) {
+		$atts = shortcode_atts( array(
+			'project_id' => ''
+		), $atts );
+
+		if ( empty( $atts[ 'project_id' ] ) ) {
+			return '';
+		}
+
+		global $campaign, $stylesheet_directory_uri;
+		$campaign = new ATCF_Campaign( $atts[ 'project_id' ] );
+		$campaign_status = $campaign->campaign_status();
+
+		ob_start();
+		
+		if ( !is_user_logged_in() && ( $campaign_status == ATCF_Campaign::$campaign_status_preview || $campaign_status == ATCF_Campaign::$campaign_status_vote || $campaign_status == ATCF_Campaign::$campaign_status_collecte ) ) {
+			locate_template( array( 'projects/single/warning-lightbox.php' ), true, false );
+		}
+	
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		
