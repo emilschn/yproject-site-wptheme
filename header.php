@@ -80,7 +80,10 @@
 		<meta property="og:url" content="<?php echo $url; ?>" />
 		<meta property="og:title" content="<?php echo $post->post_title; ?>" />
 		<meta property="og:description" content="<?php echo str_replace( array( '<br>', '<br />' ), '', $campaign->summary() ); ?>" />
-		
+		<?php if ( $campaign->is_hidden() ):?>
+			<meta name="robots" content="noindex">
+		<?php endif; ?>
+
 		<?php else: ?>
 		<meta property="og:description" content="<?php echo $page_controler->get_page_description(); ?>" />
 		
