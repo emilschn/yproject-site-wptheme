@@ -5,8 +5,18 @@ $today_date = new DateTime();
 
 <h2><?php _e( "Documents", 'yproject' ); ?></h2>
 <div class="db-form v3 center">
-	<br>
+	<div class="align-left">
+		<br>
+		<strong><?php _e( "Documents g&eacute;n&eacute;raux :", 'yproject' ); ?></strong>
+		<br><br>
+		<a href="https://www.wedogood.co/wp-content/uploads/2018/08/WDG-kit-expert-comptable-2.pdf" target="_blank"><?php _e( "Kit pour expert comptable", 'yproject' ); ?></a>
+		<br><br><br><br>
+	</div>
 	
+	<div class="align-left">
+		<strong><?php _e( "Documents de votre lev&eacute;e de fonds :", 'yproject' ); ?></strong>
+		<br><br>
+	</div>
 	<?php if ( $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
 		<a href="<?php echo $page_controler->get_campaign()->get_funded_certificate_url(); ?>?time=<?php echo time(); ?>" download="attestation-levee-fonds.pdf" class="button red"><?php _e( "Attestation de lev&eacute;e de fonds", 'yproject' ); ?></a>
 			<form action="<?php echo admin_url( 'admin-post.php?action=generate_campaign_funded_certificate'); ?>" method="post" id="generate_campaign_funded_certificate" class="field admin-theme">
