@@ -59,8 +59,12 @@ $today_date = new DateTime();
 
 			<?php else: ?>
 			<div class="field admin-theme">
-				Vous ne pouvez pas encore générer la facture pour cette campagne.
-				Avez-vous vérifié que l'identifiant Quickbooks et la commission sont bien paramétrés ?
+				Vous ne pouvez pas encore générer la facture pour cette campagne.<br>
+				Paramètres à vérifier :<br>
+				- Identifiant Quickbooks (Organisation)<br>
+				- Commission de la plateforme (Financement)<br>
+				- Type de produit Quickbooks (Campagne)<br>
+				- Acquisition Quickbooks (Campagne)<br>
 			</div>
 			<?php endif; ?>
 			<br><br>
