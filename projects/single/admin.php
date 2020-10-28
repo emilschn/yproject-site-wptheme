@@ -19,7 +19,7 @@ $page_dashboard = home_url( '/tableau-de-bord/?campaign_id=' . $campaign->ID );	
 		</form>
 		<?php if ( $WDGUser_current->is_admin() ): ?>
 		<button id="wdg-send-project-notification-to-project" class="wdg-send-project-notification"><?php _e( "J'ai fini ma relecture", 'yproject'); ?></button>
-		<?php else: ?>
+		<?php elseif ( WDGCampaignNotifications::can_ask_proofreading( $campaign->ID ) ): ?>
 		<button id="wdg-send-project-notification-to-wdg" class="wdg-send-project-notification"><?php _e( "J'ai fini ma présentation", 'yproject'); ?></button>
 		<?php endif; ?>
 	<?php endif; ?>
