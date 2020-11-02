@@ -60,7 +60,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 			<?php else: ?>
 
-				<?php if ( $page_controler->get_current_campaign()->is_positive_savings() ): ?>
+				<?php if ( $page_controler->get_current_campaign() != FALSE && $page_controler->get_current_campaign()->is_positive_savings() ): ?>
 					<strong><?php _e( "Pour d&eacute;multiplier mon impact et permettre &agrave; plus de projets positifs de voir le jour, je passe le mot sur :" ); ?></strong><br><br>
 				<?php else: ?>
 					<strong><?php _e( "Pour augmenter les chances de r&eacute;ussite de ce projet, je passe le mot sur :" ); ?></strong><br><br>
@@ -72,10 +72,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<br><br>
 
 				<div class="db-form v3 full">
-					<?php if ( $page_controler->get_current_campaign()->is_positive_savings() ): ?>
+					<?php if ( $page_controler->get_current_campaign() != FALSE && $page_controler->get_current_campaign()->is_positive_savings() ): ?>
 						<a class="button transparent" href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( "Retour &agrave; la page &Eacute;pargne positive", 'yproject' ); ?></a>
 					<?php else: ?>
-						<a class="button transparent" href="<?php echo $page_controler->get_current_campaign()->get_public_url(); ?>"><?php _e( "Retour au projet", 'yproject' ); ?></a>
+						<?php $public_url = ( $page_controler->get_current_campaign() != FALSE ) ? $page_controler->get_current_campaign()->get_public_url() : home_url(); ?>
+						<a class="button transparent" href="<?php echo $public_url; ?>"><?php _e( "Retour au projet", 'yproject' ); ?></a>
 					<?php endif; ?>
 				</div>
 
