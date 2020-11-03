@@ -21,7 +21,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<li id="menu-item-organization"><a href="#organization" data-tab="organization" <?php if ( !$page_controler->get_campaign_organization()->is_registered_lemonway_wallet() ): ?>class="needs-authentication"<?php endif; ?>><?php _e( "Organisation", 'yproject' ); ?></a></li>
 		<li id="menu-item-team"><a href="#team" data-tab="team"><?php _e( "&Eacute;quipe", 'yproject' ); ?></a></li>
 		<li id="menu-item-finance"><a href="#finance" data-tab="finance"><?php _e( "Financement", 'yproject' ); ?></a></li>
-		<li id="menu-item-contracts"><a href="#contracts" data-tab="contracts"><?php _e( "Contrats", 'yproject' ); ?></a></li>
+		<li id="menu-item-contracts"><a href="#contracts" data-tab="contracts"><?php _e( "Contrat", 'yproject' ); ?></a></li>
 		<li id="menu-item-campaign"><a href="#campaign" data-tab="campaign"><?php _e( "Campagne", 'yproject' ); ?></a></li>
 		
 	</ul>
