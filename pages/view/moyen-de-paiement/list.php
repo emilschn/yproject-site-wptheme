@@ -87,7 +87,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-cheque.png" alt="<?php _e( "Ch&egrave;que", 'yproject' ); ?>" width="120">
 				<div>
 					<span class="mean-payment-name"><?php _e( "Ch&egrave;que", 'yproject' ); ?></span><br>
-					<span><?php _e( "Pour une comptabilisation plus rapide, munissez-vous d'une photo de ce ch&egrave;que.", 'yproject' ); ?></span>
+					<span><?php _e( "Pour une comptabilisation plus rapide, munissez-vous d'une photo de ce ch&egrave;que.", 'yproject' ); ?></span><br>
+					<span><?php _e( "Le ch&egrave;que reste en attente d'encaissement jusqu'&agrave; la r&eacute;ussite de la lev&eacute;e de fonds.", 'yproject' ); ?></span>
 				</div>
 			</a>
 			
