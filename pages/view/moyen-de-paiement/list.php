@@ -67,6 +67,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Virement bancaire", 'yproject' ); ?>" width="120">
 				<div>
 					<span class="mean-payment-name"><?php _e( "Virement bancaire", 'yproject' ); ?></span><br>
+					<span><?php _e( "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom.", 'yproject' ); ?></span><br>
 					<span><?php _e( "Le RIB de notre prestataire sera indiqu&eacute; sur la page suivante, ainsi qu'un code destinataire sp&eacute;cifique &agrave; transmettre imp&eacute;rativement lors du virement.", 'yproject' ); ?></span>
 				</div>
 			</a>
