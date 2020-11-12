@@ -7,6 +7,12 @@
 	$fields_address = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_address );
 	$fields_admin = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_admin );
 	$WDGUser_current = WDGUser::current();
+
+	$form_feedback = FALSE;
+	if ( !empty( $_SESSION[ 'account_organization_form_feedback_' . $WDGOrganization->get_wpref() ] ) ) {
+		$form_feedback = $_SESSION[ 'account_organization_form_feedback_' . $WDGOrganization->get_wpref() ];
+
+	}
 ?>
 
 <form method="POST" class="<?php echo $page_controler->get_form_css_classes();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_details' ); ?>" novalidate>
@@ -17,21 +23,19 @@
 	<?php endforeach; ?>
 
 	<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
-	<div class="form-error-general align-left">
 		<?php _e( "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :", 'yproject' ); ?><br>
 		<?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
-			- <?php echo $error[ 'text' ]; ?><br>
+			<div class="wdg-message error">
+				<?php echo $error[ 'text' ]; ?>
+			</div>
 		<?php endforeach; ?>
-		<br><br>
-	</div>
 	<?php endif; ?>
 	<?php if ( !empty( $form_feedback[ 'success' ] ) ): ?>
-	<div class="form-success-general align-left">
 		<?php foreach ( $form_feedback[ 'success' ] as $message ): ?>
-			<?php echo $message; ?>
+			<div class="wdg-message confirm">
+				<?php echo $message; ?>
+			</div>
 		<?php endforeach; ?>
-		<br><br>
-	</div>
 	<?php endif; ?>
 
 	<?php foreach ( $fields_complete as $field ): ?>
