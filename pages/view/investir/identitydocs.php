@@ -79,12 +79,14 @@ $form_errors = $page_controler->get_form_errors();
 			<?php _e( 'account.identitydocs.SMS_EXPLAINED', 'yproject' ); ?>
 		</div>
 
+		<?php if ( $fields_phone_number ): ?>
 		<div class="phone-number-hidden">
 			<?php foreach ( $fields_phone_number as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 			<?php endforeach; ?>
 		</div>
+		<?php endif; ?>
 
 		<div class="align-center resp-item-6">
 			<button type="submit" class="button save red"><?php _e( 'account.identitydocs.SEND_DOCUMENTS', 'yproject' ); ?></button>

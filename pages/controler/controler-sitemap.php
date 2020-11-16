@@ -299,7 +299,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			"<priority>0.7</priority>".
 		"</url>\n";
 		
-		// Ajout accueil et les-projets d'abord
+		// Ajout de chaque page priorisée
 		foreach ( $priority_by_url as $uri => $priority ) {
 			$page_by_uri = get_page_by_path( $uri );
 			if ( $page_by_uri ) {

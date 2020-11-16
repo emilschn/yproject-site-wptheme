@@ -39,7 +39,8 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 	<?php else: ?>
 		<h3><?php _e( 'account.wallet.SEND_MONEY_TO_WALLET', 'yproject' ); ?></h3>
 		<p class="align-justify">
-			<?php _e( 'account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER', 'yproject' ); ?><br><br>
+			<?php _e( 'account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER', 'yproject' ); ?><br>
+			<?php _e( "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom", 'yproject' ); ?><br><br>
 		</p>
 
 		<strong><?php _e( 'account.wallet.RECIPIENT_BANK_ACCOUNT', 'yproject' ); ?></strong><br>

@@ -60,7 +60,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 			<?php else: ?>
 
-				<?php if ( $page_controler->get_current_campaign()->is_positive_savings() ): ?>
+				<?php if ( $page_controler->get_current_campaign() != FALSE && $page_controler->get_current_campaign()->is_positive_savings() ): ?>
 					<strong><?php _e( 'invest.share.SHARE_POSITIVE_SAVINGS', 'yproject' ); ?></strong><br><br>
 				<?php else: ?>
 					<strong><?php _e( 'invest.share.SHARE_PROJECT', 'yproject' ); ?></strong><br><br>
@@ -72,10 +72,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<br><br>
 
 				<div class="db-form v3 full">
-					<?php if ( $page_controler->get_current_campaign()->is_positive_savings() ): ?>
+					<?php if ( $page_controler->get_current_campaign() != FALSE && $page_controler->get_current_campaign()->is_positive_savings() ): ?>
 						<a class="button transparent" href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( 'invest.share.BACK_POSITIVE_SAVINGS', 'yproject' ); ?></a>
 					<?php else: ?>
-						<a class="button transparent" href="<?php echo $page_controler->get_current_campaign()->get_public_url(); ?>"><?php _e( 'invest.share.BACK_PROJECT', 'yproject' ); ?></a>
+						<?php $public_url = ( $page_controler->get_current_campaign() != FALSE ) ? $page_controler->get_current_campaign()->get_public_url() : home_url(); ?>
+						<a class="button transparent" href="<?php echo $public_url; ?>"><?php _e( 'invest.share.BACK_PROJECT', 'yproject' ); ?></a>
 					<?php endif; ?>
 				</div>
 

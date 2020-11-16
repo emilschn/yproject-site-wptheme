@@ -17,6 +17,7 @@ if ( $campaign->is_positive_savings() ) {
 	$twitter_message .= ' ' . $campaign->data->post_title;
 	$twitter_hashtags = __( 'share-buttons.HASHTAGS_PROJECT', 'yproject' );
 }
+
 ?>
 <button class="sharer button" data-sharer="twitter" data-title="<?php echo $twitter_message; ?>" data-hashtags="<?php echo $twitter_hashtags; ?>" data-url="<?php echo $campaign_url; ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partage/twitter.png" /></button>
 <button class="sharer button" data-sharer="facebook" data-url="<?php echo $campaign_url; ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partage/facebook.png" /></button>

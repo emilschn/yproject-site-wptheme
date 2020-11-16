@@ -67,6 +67,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( 'invest.mean-payment.list.WIRE', 'yproject' ); ?>" width="120">
 				<div>
 					<span class="mean-payment-name"><?php _e( 'invest.mean-payment.list.WIRE', 'yproject' ); ?></span><br>
+					<?php if ( $page_controler->can_use_wallet() ): ?>
+						<span><?php _e( "Vous pouvez directement choisir votre porte-monnaie &eacute;lectronique comme moyen de paiement, pour gagner du temps.", 'yproject' ); ?></span><br>
+					<?php endif; ?>
+					<span><?php _e( "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom.", 'yproject' ); ?></span><br>
 					<span><?php _e( 'invest.mean-payment.WIRE_DETAILS', 'yproject' ); ?></span>
 				</div>
 			</a>
@@ -88,6 +92,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<div>
 					<span class="mean-payment-name"><?php _e( 'invest.mean-payment.list.CHECK', 'yproject' ); ?></span><br>
 					<span><?php _e( 'invest.mean-payment.CHECK_DETAILS', 'yproject' ); ?></span>
+					<span><?php _e( "Le ch&egrave;que reste en attente d'encaissement jusqu'&agrave; la r&eacute;ussite de la lev&eacute;e de fonds.", 'yproject' ); ?></span>
 				</div>
 			</a>
 			

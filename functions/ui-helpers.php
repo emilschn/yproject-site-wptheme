@@ -11,33 +11,18 @@ class YPUIHelpers {
 	}
 	
 	/**
+	 * @deprecated Use UIHelpers::format_number
 	 * Affiche les nombres de manière standardisée
 	 * @param int $number
 	 * @return string
 	 */
-	public static function display_number( $number, $money = FALSE ) {
+	public static function display_number( $number, $money = FALSE, $decimals = 2 ) {
 		if ( empty( $number ) ) {
 			return '0';
 		}
 		
-		//Place des espaces entre les milliers
-		$exceeds_one_thousand = floor( $number / 1000 );
-		if ( $exceeds_one_thousand > 0 ) {
-			$number_with_spaces = $exceeds_one_thousand .'&nbsp;'. YPUIHelpers::complete_number_str( $number % 1000 );
-		} else {
-			$number_with_spaces = $number;
-		}
-		
 		//Remplace les points par des virgules
-		$buffer = str_replace('.', ',', $number_with_spaces);
-		
-		//Si c'est de la monnaie, on voit pour ajouter un 0 pour les centimes, éventuellement
-		if ( $money && strpos($buffer, ',') ) {
-			$buffer_comma_exploded = explode( ',', $buffer );
-			if (count($buffer_comma_exploded) < 2) {
-				$buffer .= '0';
-			}
-		}
+		$buffer = UIHelpers::format_number( $number, $decimals );
 		
 		return $buffer;
 	}

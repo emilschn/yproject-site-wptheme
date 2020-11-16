@@ -143,7 +143,6 @@ button.red {
 .wdg-message {
 	margin: 20px 0px;
 	padding: 20px 0px;
-	text-transform: uppercase;
 	text-align: center;
 }
 .wdg-message.confirm {

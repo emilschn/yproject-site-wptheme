@@ -809,7 +809,7 @@ msgid "account.wallet.AWAITING_AUTHENTICATION"
 msgstr "Nous attendons votre authentification pour verser %s &euro; sur votre porte-monnaie."
 
 msgid "account.wallet.AUTHENTICATION_NECESSARY"
-msgstr "Depuis Janvier 2019, l'authentification de votre compte est n&eacute;cessaire aupr&egrave;s de notre prestataire de paiement pour lib&eacute;rer l'acc&egrave;s &agrave; votre porte-monnaie et pouvoir retirer vos royalties."
+msgstr "L'authentification de votre compte est une obligation l&eacute;gale dans le cadre de la lutte contre le blanchiment de capitaux et le financement du terrorisme. Elle est donc n&eacute;cessaire pour que vous puissiez activer votre porte-monnaie &eacute;lectronique et pouvoir retirer vos royalties."
 
 msgid "account.wallet.VIEW_AUTHENTICATION_STATUS"
 msgstr "Voir le statut de mon authentification"
@@ -866,7 +866,7 @@ msgid "account.wallet.orga.AWAITING_AUTHENTICATION"
 msgstr "%s &euro; sont en attente d'authentification."
 
 msgid "account.wallet.orga.AUTHENTICATION_NECESSARY"
-msgstr "Depuis Janvier 2019, l'authentification de votre organisation est n&eacute;cessaire aupr&egrave;s de notre prestataire de paiement pour lib&eacute;rer l'acc&egrave;s au porte-monnaie de votre organisation et pouvoir retirer les royalties."
+msgstr "L'authentification de votre compte est une obligation l&eacute;gale dans le cadre de la lutte contre le blanchiment de capitaux et le financement du terrorisme. Elle est donc n&eacute;cessaire pour que vous puissiez activer votre porte-monnaie &eacute;lectronique et pouvoir retirer vos royalties."
 
 msgid "account.wallet.orga.TRANSFER_MY_BANK_ACCOUNT"
 msgstr "Virer vers le compte bancaire de"
@@ -1354,10 +1354,10 @@ msgid "share-buttons.HASHTAGS_POSITIVE_SAVINGS"
 msgstr "épargne, impact, investissement, royalties"
 
 msgid "share-buttons.DO_LIKE_ME_PROJECT"
-msgstr "Faites comme moi, investissez sur le projet"
+msgstr "Faites comme moi, investissez dès 10 € sur le projet"
 
 msgid "share-buttons.HASHTAGS_PROJECT"
-msgstr "royalty, crowdfunding"
+msgstr "royaltycrowdfunding, finpart, investissement"
 
 msgid "share-buttons.email.TITLE"
 msgstr "Je viens d'investir sur le projet"

@@ -29,9 +29,7 @@ $can_display_presentation = $can_modify
 	<?php endif; ?>
 <?php endif; ?>
 
-<?php if ( !is_user_logged_in() && ( $campaign_status == ATCF_Campaign::$campaign_status_preview || $campaign_status == ATCF_Campaign::$campaign_status_vote || $campaign_status == ATCF_Campaign::$campaign_status_collecte ) ): ?>
-	<?php locate_template( array( 'projects/single/warning-lightbox.php' ), true ); ?>
-<?php endif; ?>
+<?php echo do_shortcode('[wdg_project_warning_lightbox project_id="' .$campaign->ID. '"][/wdg_project_warning_lightbox]'); ?>
 
 <?php if ($can_modify): ?>
 <?php locate_template( array("projects/single/admin.php"), true ); ?>

@@ -133,6 +133,11 @@ UserAccountDashboard.prototype.initProjectList = function() {
 	if ( !$( '#ajax-loader-img-' + userID ).is( ':visible' ) ) {
 		return;
 	}
+
+	var sAction = 'display_user_investments_optimized';
+	if (userType == 'organization') {
+		sAction = 'display_user_investments';
+	}
 	
 	$.ajax({
 		'type' : "POST",
@@ -140,7 +145,7 @@ UserAccountDashboard.prototype.initProjectList = function() {
 		'data': {
 			'user_id': userID,
 			'user_type': userType,
-			'action' : 'display_user_investments'
+			'action' : sAction
 		}
 		
 	// Une fois les projets obtenus

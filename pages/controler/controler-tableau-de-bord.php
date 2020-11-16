@@ -293,12 +293,23 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		return $buffer;
 	}
 	
+	public function is_iban_validated() {
+		$lw_iban_status = $this->campaign_organization->get_lemonway_iban_status();
+		return ( $lw_iban_status == WDGUser::$iban_status_validated );
+	}
+	
 	
 /******************************************************************************/
 // GESTION DECLARATIONS
 /******************************************************************************/
 	private function init_declarations() {
 		$this->declaration_list = WDGROIDeclaration::get_list_by_campaign_id( $this->get_campaign_id(), '' );
+		// Ordre par date de déclaration
+		usort( $this->declaration_list, function ( $item1, $item2 ) {
+			$item1_date = new DateTime( $item1->date_due );
+			$item2_date = new DateTime( $item2->date_due );
+			return ( $item1_date > $item2_date );
+		} );
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'declaration-bill' );

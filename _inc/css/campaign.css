@@ -203,6 +203,9 @@ div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before 
 .en_US div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before {
     content: "Normal Mode";
 }
+div#content.version-3 div.project-admin > div.btn-edit#wdg-remove-cache:before {
+    content: "Suppr cache";
+}
 #wdg-edit-project-add-lang {
 	display: none;
 	width: 149px;

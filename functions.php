@@ -209,7 +209,7 @@ add_action('wp_ajax_nopriv_get_current_projects', 'yproject_get_current_projects
 
 function yproject_save_edit_project() {
 	$current_lang = get_locale();
-	if ($current_lang == 'fr_FR') { $current_lang = ''; }
+	if ( $current_lang == 'fr_FR' || $current_lang == 'fr' ) { $current_lang = ''; }
 	else { $current_lang = '_' . $current_lang; }
 	
 	ypcf_debug_log( 'yproject_save_edit_project > property ('.$current_lang.') => ' . $_POST['property'], TRUE );

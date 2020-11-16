@@ -650,15 +650,21 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 
 	<?php if ( $page_controler->can_access_admin() && $lemonway_balance > 0 ): ?>
 
-		<div class="db-form">
-			Ce formulaire n'est accessible qu'en administration :<br />
-			<form action="" method="POST" class="field admin-theme">
-				<input type="hidden" name="submit_transfer_wallet_lemonway" value="1" />
-				Somme à verser au porteur de projet : <input type="text" name="transfer_amount" value="0" /><br />
-				Somme à prendre en commission : <input type="text" name="transfer_commission" value="0" /><br />
-				<input type="submit" value="Verser" />
-			</form>
-		</div>
+		<?php if ( $page_controler->is_iban_validated() ): ?>
+			<div class="db-form">
+				Ce formulaire n'est accessible qu'en administration :<br />
+				<form action="" method="POST" class="field admin-theme">
+					<input type="hidden" name="submit_transfer_wallet_lemonway" value="1" />
+					Somme à verser au porteur de projet : <input type="text" name="transfer_amount" value="0" /><br />
+					Somme à prendre en commission : <input type="text" name="transfer_commission" value="0" /><br />
+					<input type="submit" value="Verser" />
+				</form>
+			</div>
+
+		<?php else: ?>
+			Le RIB de l'organisation n'est pas prêt
+
+		<?php endif; ?>
 
 	<?php endif; ?>
 </div>

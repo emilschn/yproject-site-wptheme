@@ -20,6 +20,23 @@ var ProjectEditor = (function($) {
 					ProjectEditor.clickAddLang();
 				});
 
+				if ( $( '#wdg-remove-cache' ).length > 0 ) {
+					$( '#wdg-remove-cache' ).show();
+					$( '#wdg-remove-cache' ).click( function() {
+						$( '#wdg-remove-cache' ).text( '...' );
+						$.ajax({
+							'type' : "POST",
+							'url' : ajax_object.ajax_url,
+							'data': {
+								'action':	'remove_project_cache',
+								'id_campaign':  $("#content").data("campaignid")
+							}
+						}).done(function(result) {
+							window.location.reload(false); 
+						});
+					} );
+				}
+
 				$(".wdg-send-project-notification").show();
 				$(".wdg-send-project-notification").click(function() {
 					ProjectEditor.sendProjectNotification( $( this ).attr( 'id' ) );
