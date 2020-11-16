@@ -18,7 +18,7 @@
 
     <?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
         <div class="wdg-message error">
-            <?php _e( "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :", 'yproject' ); ?><br>
+            <?php _e( 'account.parameters.SOME_ERRORS', 'yproject' ); ?><br>
             <?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
                 - <?php echo $error[ 'text' ]; ?><br>
             <?php endforeach; ?>
@@ -52,12 +52,12 @@
     <?php endif; ?>
     
     <p class="align-left">
-        <?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+        * <?php _e( 'common.REQUIRED_FIELDS', 'yproject' ); ?><br>
     </p>
 
     <div id="user-details-form-buttons">
         <button type="submit" class="button save red <?php if ($page_controler->get_controler_name() == 'tableau-de-bord' && !$page_controler->get_campaign()->is_preparing()){ ?>confirm<?php } ?>">
-            <?php _e( "Enregistrer les modifications", 'yproject' ); ?>
+            <?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?>
         </button>
     </div>
     

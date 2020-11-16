@@ -11,11 +11,8 @@
 		width: calc(100% - 10px);
 		padding: 5px;
 	}
-	nav#main > div#menu > a, nav#main > div#menu > a.lines { display: none; }
-	nav#main > div#menu > a:first-child, nav#main > div#menu > a.btn-user, nav#main > div#menu > a#btn-burger { display: inline-block; }
-	nav#main > div#menu > a.btn-user {
-		display: none;
-	}
+	nav#main > div#menu > a, nav#main > div#menu > a.lines, nav#main > div#menu > a.btn-user { display: none; }
+	nav#main > div#menu > a:first-child, nav#main > div#menu > a#btn-switch-lang, nav#main > div#menu > a#btn-burger { display: inline-block; }
 	
 	nav#main > div#menu > a#btn-burger.active {
 		margin: -5px;
@@ -24,6 +21,11 @@
 	}
 	nav#main > div#menu > a#btn-burger img {
 		vertical-align: middle;
+	}
+	#submenu-switch-lang {
+		position: absolute;
+		top: 50px;
+		right: 20px;
 	}
 	
 	

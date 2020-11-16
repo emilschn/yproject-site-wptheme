@@ -2,13 +2,12 @@
 global $WDGOrganization;
 ?>
 
-<h2><?php _e( 'Authentification de ', 'yproject' ); echo $WDGOrganization->get_name(); ?></h2>
+<h2><?php _e( 'account.authentication.orga.AUTHENTICATION_OF', 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
 
 <?php locate_template( array( 'pages/view/mon-compte/partial-authentication.php' ), true, false ); ?>
 
 <br><br>
-<?php $edd_settings = get_option( 'edd_settings' ); ?>
 
 <div class="center">
-	<?php echo wpautop( $edd_settings[ 'lemonway_generalities' ] ); ?>
+	<?php echo wpautop( ATCF_CrowdFunding::get_translated_setting( 'lemonway_generalities' ) ); ?>
 </div>

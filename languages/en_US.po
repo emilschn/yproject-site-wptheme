@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en_US\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 # FR : ou
 msgid "common.OR"
@@ -36,6 +36,368 @@ msgstr "First name"
 # FR : Nom de famille
 msgid "common.LAST_NAME"
 msgstr "Last name"
+
+# FR : Enregistrer
+msgid "common.SAVE"
+msgstr "Save"
+
+# FR : Enregistrer les modifications
+msgid "common.SAVE_MODIFICATION"
+msgstr "Save changes"
+
+# FR : Annuler
+msgid "common.CANCEL"
+msgstr "Cancel"
+
+# FR : Investir
+msgid "common.INVEST"
+msgstr "Invest"
+
+# FR : Pr&eacute;-investir
+msgid "common.PREINVEST"
+msgstr "Pre-invest"
+
+# FR : Aper&ccedil;u
+msgid "common.PREVIEW"
+msgstr "Preview"
+
+# FR : Aper&ccedil;u
+msgid "common.OTHER"
+msgstr "Other"
+
+# FR : Aucune
+msgid "common.NONE.F"
+msgstr "None"
+
+# FR : Toujours
+msgid "common.ALWAYS"
+msgstr "Always"
+
+# FR : Royalties
+msgid "common.ROYALTIES"
+msgstr "Royalties"
+
+# FR : disponibles
+msgid "common.AVAILABLE.P"
+msgstr "available"
+
+# FR : Supprimer
+msgid "common.REMOVE"
+msgstr "Remove"
+
+# FR : Date
+msgid "common.DATE"
+msgstr "Date"
+
+# FR : Montant
+msgid "common.AMOUNT"
+msgstr "Amount"
+
+# FR : Transaction
+msgid "common.TRANSACTION"
+msgstr "Transaction"
+
+# FR : Investissement
+msgid "common.INVESTMENT"
+msgstr "Investment"
+
+# FR : ans
+msgid "common.YEARS"
+msgstr "years"
+
+# FR : investisseurs
+msgid "common.INVESTORS"
+msgstr "investors"
+
+# FR : Suivant
+msgid "common.NEXT"
+msgstr "Next"
+
+# FR : Continuer
+msgid "common.CONTINUE"
+msgstr "Continue"
+
+# FR : Pr&eacute;c&eacute;dent
+msgid "common.PREVIOUS"
+msgstr "Previous"
+
+# FR : Mon compte
+msgid "common.MY_ACCOUNT"
+msgstr "My account"
+
+# FR : Modifier
+msgid "common.MODIFY"
+msgstr "Modify"
+
+# FR : Envoyer
+msgid "common.SEND"
+msgstr "Send"
+
+# FR : Connexion
+msgid "common.CONNECTION"
+msgstr "Log in"
+
+# FR : Valider
+msgid "common.VALIDATE"
+msgstr "Validate"
+
+# FR : Accepter
+msgid "common.ACCEPT"
+msgstr "Accept"
+
+# ############################## COMMON - FORMS - ERROR ################################
+# FR : Ce fichier n'est pas au bon format.
+msgid "common.forms.error.FILE_WRONG_FORMAT"
+msgstr "This file is in the wrong format."
+
+# FR : Ce fichier est trop lourd.
+msgid "common.forms.error.FILE_TOO_BIG"
+msgstr "This file is too big."
+
+# ############################## HEADER - MENU ################################
+# FR : Les projets
+msgid "menu.THE_PROJECTS"
+msgstr "The projects"
+
+# FR : &Eacute;pargne positive
+msgid "menu.POSITIVE_SAVINGS"
+msgstr "Positive savings"
+
+# FR : Financer mon projet
+msgid "menu.FUND_PROJECT"
+msgstr "Finance my project"
+
+# FR : Investir en royalties
+msgid "menu.INVEST"
+msgstr "Invest in royalties"
+
+# FR : Vision
+msgid "menu.VISION"
+msgstr "Vision"
+
+# FR : Me d&eacute;connecter
+msgid "menu.LOGOUT"
+msgstr "Sign out"
+
+# FR : Rechercher un projet
+msgid "menu.SEARCH_PROJECT"
+msgstr "Find a project"
+
+# FR : et bienvenue sur WE DO GOOD !
+msgid "menu.WELCOME_TO_WEDOGOOD"
+msgstr "and welcome to WE DO GOOD!"
+
+# ############################## HEADER - CONDITIONS GENERALES ################################
+# FR : Mise &agrave; jour des conditions g&eacute;n&eacute;rales d&apos;utilisation
+msgid "terms.UPDATE"
+msgstr "Update to the general terms and conditions of use"
+
+# FR : J&apos;accepte les conditions g&eacute;n&eacute;rales d&apos;utilisation
+msgid "terms.ACCEPT"
+msgstr "I accept the general terms and conditions of use"
+
+# ############################## FOOTER - MENU ################################
+# FR : Qui sommes-nous&nbsp;?
+msgid "footer.WHO_WE_ARE"
+msgstr "Who are we?"
+
+# FR : Entrepreneurs
+msgid "footer.ENTREPRENEURS"
+msgstr "Entrepreneurs"
+
+# FR : Investisseurs
+msgid "footer.INVESTORS"
+msgstr "Investors"
+
+# FR : Nous suivre
+msgid "footer.FOLLOW_US"
+msgstr "Follow us"
+
+# FR : Flux RSS
+msgid "footer.RSS_FEED"
+msgstr "RSS feed"
+
+# FR : Contactez-nous
+msgid "footer.CONTACT_US"
+msgstr "Contact us"
+
+# FR : S'inscrire &agrave; la newsletter
+msgid "footer.SUBSCRIBE_NEWSLETTER"
+msgstr "Subscribe to the newsletter"
+
+# FR : Immatricul&eacute;e &agrave; l'ORIAS sous le num&eacute;ro
+msgid "footer.REGISTERED_ORIAS"
+msgstr "Registered with ORIAS under number"
+
+# FR : Partenaire de Lemon Way, &eacute;tablissement de paiement agr&eacute;&eacute; par l’ACPR en France le 24/12/2012 sous le num&eacute;ro
+msgid "footer.LEMONWAY_PARTNER"
+msgstr "Partner of Lemon Way, payment institution approved by the ACPR in France on 24/12/2012 under number"
+
+# FR : En poursuivant votre navigation sur WE DO GOOD.co, vous acceptez l'utilisation de cookies afin de nous permettre d'am&eacute;liorer votre exp&eacute;rience utilisateur
+msgid "footer.cookies.DESCRIPTION"
+msgstr "By continuing to browse WE DO GOOD.co, you accept the use of cookies to allow us to improve your user experience"
+
+# FR : en savoir plus
+msgid "footer.cookies.KNOW_MORE"
+msgstr "find out more"
+
+# ############################## ACCUEIL ################################
+# FR : *ROYALTISER, v. intr. XXIe siècle. d'apr. angl. Verser une partie de son chiffre d'affaires à ses merveilleux investisseurs. \"Un projet qui royaltise plus que prévu\"
+msgid "common.ROYALTIZE_DEFINITION"
+msgstr "* ROYALTISE, v. 21st century. To give some turnover back to wonderful investors."
+
+# FR : WE DO GOOD c'est :
+msgid "common.WEDOGOOD_IS"
+msgstr "WE DO GOOD is:"
+
+# FR : lev&eacute;s
+msgid "common.RAISED.P"
+msgstr "raised"
+
+# FR : entreprises royaltisent*
+msgid "common.COMPANIES_ROYALTIZE"
+msgstr "companies royaltise*"
+
+# ############################## /les-projets ################################
+# FR : En &eacute;valuation
+msgid "project.status.VOTE"
+msgstr "Under evaluation"
+
+# FR : En financement
+msgid "project.status.FUNDING"
+msgstr "Financing in progress"
+
+# FR : Financ&eacute;
+msgid "project.status.FUNDED"
+msgstr "Funded"
+
+# FR : D&eacute;couvrir le projet
+msgid "project.DISCOVER"
+msgstr "Discover the project"
+
+# FR : impact environnemental
+msgid "project.impact.ENVIRONMENT"
+msgstr "environmental impact"
+
+# FR : impact social
+msgid "project.impact.SOCIAL"
+msgstr "social impact"
+
+# FR : impact &eacute;conomique
+msgid "project.impact.ECO"
+msgstr "economic impact"
+
+# FR : suivent le projet
+msgid "project.FOLLOW.P"
+msgstr "follow the project"
+
+# FR : suit le projet
+msgid "project.FOLLOW.ONE"
+msgstr "follows the project"
+
+# FR : Soyez le 1er
+msgid "project.FOLLOW.BE_FIRST_1"
+msgstr "Be the first"
+
+# FR : &agrave; suivre le projet
+msgid "project.FOLLOW.BE_FIRST_2"
+msgstr "to follow the project"
+
+# FR : jours
+msgid "project.DAYS"
+msgstr "days"
+
+# FR : heures
+msgid "project.HOURS"
+msgstr "hours"
+
+# FR : minutes
+msgid "project.MINUTES"
+msgstr "minutes"
+
+# FR : pour investir
+msgid "project.TO_INVEST"
+msgstr "to invest"
+
+# FR : investir sur ce projet
+msgid "project.INVEST_ON_PROJECT"
+msgstr "invest in this project"
+
+# FR : pour &eacute;valuer
+msgid "project.TO_EVALUATE"
+msgstr "to be evaluated"
+
+# FR : &eacute;valuer ce projet
+msgid "project.EVALUATE_PROJECT"
+msgstr "evaluate this project"
+
+# FR : Projet en cours d'&eacute;valuation
+msgid "project.PROJECT_CURRENTLY_EVALUATED"
+msgstr "Project under evaluation"
+
+# FR : D&eacute;couvrir ce projet
+msgid "project.DISCOVER_THIS_PROJECT"
+msgstr "Discover this project"
+
+# FR : &Eacute;valuation termin&eacute;e
+msgid "project.EVALUATION_FINISHED"
+msgstr "Evaluation completed"
+
+# FR : projet<br />financ&eacute; !
+msgid "project.CAMPAIGN_FUNDED"
+msgstr "project funded!"
+
+# FR : les projets
+msgid "projects.THE_PROJECTS"
+msgstr "projects"
+
+# FR : Filtres
+msgid "projects.FILTERS"
+msgstr "Filters"
+
+# FR : projets
+msgid "projects.PROJECTS"
+msgstr "projects"
+
+# FR : Tous les impacts
+msgid "projects.ALL_IMPACTS"
+msgstr "All impacts"
+
+# FR : Toutes les r&eacute;gions
+msgid "projects.ALL_LOCALIZATIONS"
+msgstr "All regions"
+
+# FR : Toutes les &eacute;tapes de lev&eacute;e de fonds
+msgid "projects.ALL_STEPS"
+msgstr "All stages of fundraising"
+
+# FR : &Eacute;pargne Positive
+msgid "projects.POSITIVE_SAVINGS"
+msgstr "Positive Savings"
+
+# FR : Ces projets sont disponibles en continu et permettent d'investir autant de fois que vous le souhaitez dans la transition &eacute;cologique.
+msgid "projects.POSITIVE_SAVINGS_DESCRIPTION"
+msgstr "These projects are available on an ongoing basis and allow you to invest as many times as you want in the environmental transition."
+
+# FR : En savoir plus sur l'&Eacute;pargne Positive.
+msgid "projects.POSITIVE_SAVINGS_KNOW_MORE"
+msgstr "Learn more about Positive Savings."
+
+# FR : Lev&eacute;es de fonds en cl&ocirc;ture
+msgid "projects.CLOSING_CAMPAIGNS"
+msgstr "Fundraising closed"
+
+# FR : Ces projets ont &eacute;t&eacute; financ&eacute;s avec succ&egrave;s mais il est toujours possible d'investir jusqu'au d&eacute;marrage de leur contrat de royalties.
+msgid "projects.CLOSING_CAMPAIGNS_DESCRIPTION"
+msgstr "These projects have been successfully funded but you can still invest until the start of their royalties contract."
+
+# FR : projets financ&eacute;s
+msgid "projects.FUNDED_CAMPAIGNS"
+msgstr "funded projects"
+
+# FR : Voir plus de projets
+msgid "projects.FUNDED_CAMPAIGNS_SEE_MORE"
+msgstr "See more projects"
 
 # ############################## /connexion ################################
 # FR : Connexion sur WE DO GOOD
@@ -174,6 +536,2040 @@ msgstr "There was a problem while creating your user account."
 # FR : Merci de cocher la case confirmant que vous n'&ecirc;tes pas un robot.
 msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Please check the box to confirm you are not a robot."
+
+# ############################## /mon-compte ################################
+# FR : L'utilisateur que vous essayez d'afficher n'existe pas...
+msgid "account.OVERRIDE_USER_DOESNT_EXIST"
+msgstr "The user you're trying to display doesn't exist..."
+
+# FR : L'utilisateur que vous essayez d'afficher est une organisation.
+msgid "account.OVERRIDE_USER_IS_ORGANIZATION"
+msgstr "The user you're trying to display is an organization."
+
+# FR : L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :
+msgid "account.OVERRIDE_ORGANIZATION_MANAGER_EMAIL"
+msgstr "The e-mail address of the physical person managing the account is:"
+
+# FR : Bonjour
+msgid "account.HELLO"
+msgstr "Hello"
+
+# FR : Validation de vos informations
+msgid "account.lightbox.VALIDATE_INFORMATION"
+msgstr "Validation of your information"
+
+# FR : Donn&eacute;es enregistr&eacute;es ! Merci !
+msgid "account.lightbox.DATA_SAVED"
+msgstr "Information recorded! Thank you!"
+
+# FR : Mon porte-monnaie
+msgid "account.menu.MY_WALLET"
+msgstr "My wallet"
+
+# FR : Mes investissements
+msgid "account.menu.MY_INVESTMENTS"
+msgstr "My investments"
+
+# FR : Mes documents
+msgid "account.menu.MY_DOCUMENTS"
+msgstr "My documents"
+
+# FR : Mes informations personnelles
+msgid "account.menu.MY_INFO"
+msgstr "My personal information"
+
+# FR : Mes justificatifs d'identit&eacute;
+msgid "account.menu.MY_ID_FILES"
+msgstr "My identification documents"
+
+# FR : Mes coordonn&eacute;es bancaires
+msgid "account.menu.MY_BANK_INFO"
+msgstr "My bank account"
+
+# FR : Mon authentification
+msgid "account.menu.MY_AUTHENTICATION"
+msgstr "My authentication"
+
+# FR : Mes notifications
+msgid "account.menu.MY_NOTIFICATIONS"
+msgstr "My notifications"
+
+# FR : Porte-monnaie
+msgid "account.menu.organization.WALLET"
+msgstr "Wallet"
+
+# FR : Investissements
+msgid "account.menu.organization.INVESTMENTS"
+msgstr "Investments"
+
+# FR : Documents
+msgid "account.menu.organization.DOCUMENTS"
+msgstr "Documents"
+
+# FR : Informations
+msgid "account.menu.organization.INFO"
+msgstr "Information"
+
+# FR : Justificatifs d'identification
+msgid "account.menu.organization.ID_FILES"
+msgstr "Identification documents"
+
+# FR : Coordonn&eacute;es bancaire
+msgid "account.menu.organization.BANK_INFO"
+msgstr "Bank account"
+
+# FR : Authentifications
+msgid "account.menu.organization.AUTHENTICATION"
+msgstr "Authentication"
+
+# FR : Projets li&eacute;s
+msgid "account.menu.LINKED_PROJECTS"
+msgstr "Linked projects"
+
+# FR : Les informations ci-dessous sont celles de votre compte personnel.
+msgid "account.common.INFORMATION_BELOW_PERSONAL_ACCOUNT"
+msgstr "The information below concerns your personal account."
+
+# FR : Si vous avez investi avec votre entreprise, vous retrouverez les informations respectives dans la partie Organisation, dans le menu de votre compte.
+msgid "account.common.IF_INVESTMENT_ORGA"
+msgstr "If you invested on behalf of your company, you will find information regarding your organization in your account menu."
+
+# FR : Transfert effectu&eacute;
+msgid "account.transfert.TRANSFERT_COMPLETED"
+msgstr "Transfert completed"
+
+# FR : Ce transfert n'est pas autoris&eacute;.
+msgid "account.transfert.TRANSFERT_NOT_AUTHORIZED"
+msgstr "This transfert is not authorized."
+
+# FR : Votre compte bancaire n'est pas encore valid&eacute;.
+msgid "account.transfert.BANK_ACCOUNT_NOT_VALIDATED"
+msgstr "Your bank account has not been validated yet."
+
+# FR : Montant non-autoris&eacute;
+msgid "account.transfert.AMOUNT_NOT_AUTHORIZED"
+msgstr "Amount not authorized"
+
+# FR : Erreur de montant.
+msgid "account.transfert.AMOUNT_ERROR"
+msgstr "Amount error."
+
+# FR : Votre compte est authentifi&eacute; aupr&egrave;s de notre prestataire de paiement Lemon Way.
+msgid "account.authentication.ACCOUNT_AUTHENTICATED"
+msgstr "Your account has been authentified by our payment provider Lemon Way."
+
+# FR : Merci pour votre confiance.
+msgid "account.authentication.THANK_YOU_FOR_TRUST"
+msgstr "Thank you for your trust."
+
+# FR : Voir mes investissements
+msgid "account.authentication.VIEW_MY_INVESTMENTS"
+msgstr "View my investments"
+
+# FR : Depuis Janvier 2019 et suite &agrave; un renforcement de la l&eacute;gislation contre le blanchiment d'argent, l'authentification sera n&eacute;cessaire aupr&egrave;s de notre prestataire pour tout investissement.
+msgid "account.authentication.AUTHENTICATION_IS_NECESSARY"
+msgstr "Starting on January 2019 and following a legislation enforcement against money laundering, authentication is now necessary at our payment provider for any investment."
+
+# FR : Nous vous invitons ainsi &agrave; renseigner d&egrave;s maintenant les documents permettant de vous authentifier.
+msgid "account.authentication.PROVIDE_DOCUMENTS"
+msgstr "Please provide the documents needed for authentication right away."
+
+# FR : Pour investir sur WEDOGOOD, vous devez &ecirc;tre authentifi&eacute; aupr&egrave;s de notre prestataire de paiement, Lemon Way.
+msgid "account.authentication.PROVIDE_DOCUMENTS_TO_INVEST"
+msgstr "To invest on WE DO GOOD, you need to be authenticated at our payment provider, Lemon Way."
+
+# FR : Merci de saisir vos informations personnelles, puis de nous transmettre vos justificatifs d'identit&eacute;.
+msgid "account.authentication.FILL_IN_PERSONAL_INFO"
+msgstr "Please fill in personal information and send your identification documents."
+
+# FR : Ils seront &eacute;tudi&eacute;s sous 48h par des services de v&eacute;rification automatiques puis par une personne physique en cas d'erreur ou de cas particulier.
+msgid "account.authentication.DOCUMENTS_WILL_BE_PROCESSED"
+msgstr "They will be studied within 48h by automatic services, and then by a physical person if an error or particular case appears."
+
+# FR : Informations personnelles
+msgid "account.authentication.PERSONAL_INFORMATION"
+msgstr "Personal information"
+
+# FR : Editer mes informations
+msgid "account.authentication.EDIT_MY_INFORMATION"
+msgstr "Edit my information"
+
+# FR : Justificatifs d'identit&eacute;
+msgid "account.authentication.IDENTITY_DOCUMENTS"
+msgstr "Identity documents"
+
+# FR : Editer mes justificatifs
+msgid "account.authentication.EDIT_IDENTITY_DOCUMENTS"
+msgstr "Edit my documents"
+
+# FR : Authentification de
+msgid "account.authentication.orga.AUTHENTICATION_OF"
+msgstr "Authentication of"
+
+# FR : Ma carte bancaire
+msgid "account.bank.MY_BANK_CARD"
+msgstr "My bank card"
+
+# FR : Les informations de vos cartes bancaires sont stock&eacute;es par Lemon Way, prestataire de service de paiement agr&eacute;&eacute;.
+msgid "account.bank.YOUR_BANK_CARD_INFO_ON_LEMON_WAY"
+msgstr "Your bank card information are registered on Lemon Way, approved payment provider."
+
+# FR : WE DO GOOD ne stocke que la date d'expiration afin de vous pr&eacute;venir quand la date approche.
+msgid "account.bank.WEDOGOOD_KEEPS_EXPIRATION_DATE"
+msgstr "WE DO GOOD only saves the expiration date to let you know when the time is coming."
+
+# FR : Mes cartes bancaires enregistr&eacute;es
+msgid "account.bank.MY_REGISTERED_BANK_CARDS"
+msgstr "My registered bank cards"
+
+# FR : Carte bancaire
+msgid "account.bank.BANK_CARD"
+msgstr "Bank card"
+
+# FR : Supprimer
+msgid "account.bank.REMOVE_CARD"
+msgstr "Remove"
+
+# FR : Mon relev&eacute; d'identit&eacute; bancaire
+msgid "account.bank.MY_BANK_DETAILS"
+msgstr "My bank details"
+
+# FR : Pensez &agrave; renseigner vos informations personnelles pour que notre prestataire puisse valider votre RIB.
+msgid "account.bank.PROVIDE_PERSONAL_INFORMATION"
+msgstr "Please provide your personal information so that our provider can validate your bank details."
+
+# FR : Afin de lutter contre la fraude et le blanchiment d'argent, il est n&eacute;cessaire que votre RIB soit contr&ocirc;l&eacute; par notre prestataire de paiement.
+msgid "account.bank.BANK_DETAILS_TO_BE_CHECKED"
+msgstr "In order to fight money laundering, it is necessary that your bank details are checked by our payment provider."
+
+# FR : Le compte bancaire qui vous permettra de r&eacute;cup&eacute;rer l'argent doit &ecirc;tre &agrave; votre nom.
+msgid "account.bank.BANK_DETAILS_WITH_YOUR_NAME"
+msgstr "The bank account on which you will transfer money needs to be in your name."
+
+# FR : Si votre compte bancaire est un compte en ligne (Ex : Compte Nickel), notre prestataire vous demandera une deuxi&egrave;me pi&egrave;ce d'identit&eacute; pour le valider. Il sera &agrave; transmettre dans l'onglet Mes justificatifs d'identit&eacute;.
+msgid "account.bank.ONLINE_BANK_ACCOUNT_AUTHENTICATION"
+msgstr "If your bank account is an online account (Compte Nickel, ...), our payment provider will need a second id to validate it."
+
+# FR : Coordonn&eacute;es bancaires valid&eacute;es
+msgid "account.bank.VALIDATED_BANK_DETAILS"
+msgstr "Validated bank details"
+
+# FR : Le RIB valid&eacute; est le suivant :
+msgid "account.bank.VALIDATED_BANK_DETAILS_ARE"
+msgstr "Validated bank details are as follow:"
+
+# FR : Propri&eacute;taire du compte :
+msgid "account.bank.BANK_ACCOUNT_OWNER"
+msgstr "Bank account owner :"
+
+# FR : IBAN :
+msgid "account.bank.IBAN"
+msgstr "IBAN:"
+
+# FR : BIC :
+msgid "account.bank.BIC"
+msgstr "BIC:"
+
+# FR : Modifier mon RIB
+msgid "account.bank.MODIFY_BANK_DETAILS"
+msgstr "Modify my bank details"
+
+# FR : Coordonn&eacute;es bancaires en attente de validation
+msgid "account.bank.BANK_DETAILS_AWAITING_VALIDATION"
+msgstr "Bank details awaiting validation"
+
+# FR : Coordonn&eacute;es bancaires d&eacute;sactiv&eacute;es
+msgid "account.bank.BANK_DETAILS_DISABLED"
+msgstr "Bank details disabled"
+
+# FR : Coordonn&eacute;es bancaires refus&eacute;es
+msgid "account.bank.BANK_DETAILS_REJECTED"
+msgstr "Bank details rejected"
+
+# FR : RIB en attente de validation
+msgid "account.bank.BANK_DETAILS_RIB_AWAITING_VALIDATION"
+msgstr "Bank details RIB awaiting validation"
+
+# FR : Coordonn&eacute;es bancaires de
+msgid "account.bank.orga.BANK_DETAILS_OF"
+msgstr "Bank details of"
+
+# FR : Coordonn&eacute;es bancaires de
+msgid "account.bank.orga.BANK_DETAILS"
+msgstr "Bank details"
+
+# FR : Pensez &agrave; renseigner les informations de l'organisation pour que notre prestataire puisse valider votre RIB.
+msgid "account.bank.orga.NEED_ORGANIZATION_INFORMATION"
+msgstr "Please provide your organization information so that our provider can validate your bank details."
+
+# FR : Informations de l'organisation
+msgid "account.bank.orga.ORGANIZATION_INFORMATION"
+msgstr "Organization information"
+
+# FR : Le compte bancaire qui vous permettra de r&eacute;cup&eacute;rer l'argent doit &ecirc;tre &agrave; votre nom.
+msgid "account.bank.orga.BANK_DETAILS_WITH_ORGA_NAME"
+msgstr "The bank account on which you will transfer money needs to be in the organization name."
+
+# FR : Documents de
+msgid "account.documents.DOCUMENTS_OF"
+msgstr "Documents of"
+
+# FR : Mes attestations de transactions annuelles
+msgid "account.documents.MY_YEARLY_TRANSACTIONS_CERTIFICATES"
+msgstr "My yearly transactions certificates"
+
+# FR : T&eacute;l&eacute;charger l'attestation
+msgid "account.documents.DOWNLOAD_CERTIFICATE"
+msgstr "Download the certificate"
+
+# FR : Mes attestations IFU (Imprim&eacute; Fiscal Unique - 2561)
+msgid "account.documents.MY_CERTIFICATES_IFU"
+msgstr "My IFU certificates (In french : Imprim&eacute; Fiscal Unique - 2561)"
+
+# FR : Mes demandes annuelles de dispense de pr&eacute;l&egrave;vement
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION"
+msgstr "My annual debit exemption requests"
+
+# FR : Lorsque les royalties vers&eacute;es par un projet sont sup&eacute;rieures &agrave; la somme initialement investie, la plus value r&eacute;alis&eacute;e doit &ecirc;tre d&eacute;clar&eacute;e dans le cadre de l'imp&ocirc;t sur le revenu.
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_1"
+msgstr "When the royalties paid by a project are greater than the amount initially invested, you must declare the capital gain for income tax purposes."
+
+# FR : Elle est soumise au Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30 %, dont 12,8 % d'imp&ocirc;ts sur le revenu et 17,2 % de contributions et pr&eacute;l&egrave;vements sociaux.
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_2"
+msgstr "This is subject to a flat tax of 30%, including 12.8% income tax and 17.2% social contributions and deductions."
+
+# FR : La d&eacute;claration est effectu&eacute;e de fa&ccedil;on automatis&eacute;e tous les ans par WE DO GOOD &agrave; la Direction G&eacute;n&eacute;rale des Finances Publiques.
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_3"
+msgstr "The declaration is made automatically every year by WE DO GOOD to the French Tax Directorate."
+
+# FR : Toutefois, vous pouvez nous adresser en amont une demande de dispense pour &ecirc;tre impos&eacute;(e) au bar&egrave;me de l'imp&ocirc;t sur le revenu selon votre taux d'imposition, si le revenu fiscal de référence de votre foyer fiscal est inf&eacute;rieur &agrave; :
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_4"
+msgstr "However, you can send us a request in advance for an exemption from the income tax scale according to your tax rate, if your household income is less than:"
+
+# FR : - 25 000 € (pour les contribuables c&eacute;libataires, divorc&eacute;s ou veufs) ;
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_5"
+msgstr "- €25,000 (for single, divorced or widowed taxpayers);"
+
+# FR : - 50 000 € (pour les contribuables soumis &agrave; imposition commune).
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_6"
+msgstr "- €50,000 (for taxpayers subject to joint taxation)."
+
+# FR : Cette dispense ne s'appliquera qu'&agrave; la partie concernant l'imp&ocirc;t sur le revenu (12,8 %) et ne peut &ecirc;tre faite que par les investisseurs dont la r&eacute;sidence fiscale est en France.
+msgid "account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_7"
+msgstr "This exemption will only apply to the part relating to income tax (12.8%) and can only be made by investors whose tax residence is in France."
+
+# FR : T&eacute;l&eacute;charger la dispense
+msgid "account.documents.DOWNLOAD_EXEMPTION_FILE"
+msgstr "Download the exemption"
+
+# FR : Faire ma demande de dispense annuelle
+msgid "account.documents.ASK_ANNUAL_EXEMPTION"
+msgstr "Apply for an annual exemption"
+
+# FR : Envoyer ma demande de dispense annuelle
+msgid "account.documents.SEND_ANNUAL_EXEMPTION"
+msgstr "Send my annual exemption application"
+
+# FR : Enregistrer ma demande de dispense
+msgid "account.documents.SAVE_ANNUAL_EXEMPTION"
+msgstr "Register my exemption request"
+
+# FR : Documents de
+msgid "account.documents.orga.DOCUMENTS_OF"
+msgstr "Documents of"
+
+# FR : Attestations de transactions annuelles
+msgid "account.documents.orga.YEARLY_TRANSACTIONS_CERTIFICATES"
+msgstr "Annual transaction certificates"
+
+# FR : Attestations IFU (Imprim&eacute; Fiscal Unique - 2561)
+msgid "account.documents.orga.CERTIFICATES_IFU"
+msgstr "Combined tax return certificates (IFU - 2561)"
+
+# FR : Afin d'authentifier votre compte, Lemon Way (prestataire de services de paiement agr&eacute;&eacute;) a besoin de deux documents justificatifs d'identit&eacute;.
+msgid "account.identitydocs.AUTHENTICATION_TEXT_1"
+msgstr "In order to authenticate your account, Lemon Way (authorised payment service provider) needs two proof of identity documents."
+
+# FR : Ces documents sont imm&eacute;diatement transmis, puis v&eacute;rifi&eacute;s sous 48h par Lemon Way. Ils sont d'abord analys&eacute;s par des services automatiques puis par une personne physique en cas d'erreur ou de cas particulier.
+msgid "account.identitydocs.AUTHENTICATION_TEXT_2"
+msgstr "These documents are sent off immediately and checked within 48 hours by Lemon Way. They are first analysed by automated services and then by a person in the event of an error or special situation."
+
+# FR : En cas d'erreur manifeste de l'analyse de vos documents, vous pouvez nous contacter &agrave; l'adresse investir@wedogood.co ou sur le chat en ligne.
+msgid "account.identitydocs.AUTHENTICATION_TEXT_3"
+msgstr "In the event of an obvious error when analysing your documents, you can contact us at investir@wedogood.co or using the online chat."
+
+# FR : Ce SMS sera envoy&eacute; uniquement lorsque tous les documents sont valid&eacute;s, ou en cas de documents incomplets ou refus&eacute;s.
+msgid "account.identitydocs.SMS_EXPLAINED"
+msgstr "We will send you the SMS only when all the documents are validated, or in the event of incomplete or rejected documents."
+
+# FR : Envoyer les documents
+msgid "account.identitydocs.SEND_DOCUMENTS"
+msgstr "Send documents"
+
+# FR : Justificatifs d'identitification de
+msgid "account.identitydocs.orga.TITLE"
+msgstr "Proof of identity of"
+
+# FR : Les justificatifs d'identit&eacute; sont imm&eacute;diatement transmis, puis v&eacute;rifi&eacute;s sous 48h par notre prestataire de paiement, Lemon Way.
+msgid "account.identitydocs.orga.AUTHENTICATION_TEXT_1"
+msgstr "The proof of identity documents are sent off immediately and checked within 48 hours by Lemon Way, our payment services provider."
+
+# FR : Ils sont d'abord analys&eacute;s par des services automatiques puis par une personne physique en cas d'erreur ou de cas particulier.
+msgid "account.identitydocs.orga.AUTHENTICATION_TEXT_2"
+msgstr "They are first analysed by automated services and then by a person in the event of an error or special situation."
+
+# FR : En cas d'erreur manifeste de l'analyse de vos documents, vous pouvez nous contacter &agrave; l'adresse investir@wedogood.co ou sur le chat en ligne.
+msgid "account.identitydocs.orga.AUTHENTICATION_TEXT_3"
+msgstr "In the event of an obvious error when analysing your documents, you can contact us at investir@wedogood.co or using the online chat."
+
+# FR : Si une quatri&egrave;me personne ou une personne morale d&eacute;tient au moins 25% de votre capital, merci de nous le signaler sur support@wedogood.co.
+msgid "account.identitydocs.orga.FOURTH_PERSON"
+msgstr "If a fourth person or a legal entity holds at least 25% of your capital, please let us know at support@wedogood.co."
+
+# FR : Investissements de
+msgid "account.investments.INVESTMENTS_OF"
+msgstr "Investments of"
+
+# FR : investissements valid&eacute;s
+msgid "account.investments.INVESTMENTS_VALIDATED"
+msgstr "validated investments"
+
+# FR : en attente
+msgid "account.investments.INVESTMENTS_PENDING"
+msgstr "waiting"
+
+# FR : projets financ&eacute;s
+msgid "account.investments.PROJECTS_FUNDED"
+msgstr "funded projects"
+
+# FR : investis
+msgid "account.investments.INVESTED"
+msgstr "invested"
+
+# FR : royalties re&ccedil;ues
+msgid "account.investments.ROYALTIES_RECEIVED"
+msgstr "royalties received"
+
+# FR : Mes intentions d'investissement &agrave; concr&eacute;tiser
+msgid "account.investments.INVESTMENTS_TO_CONCLUDE"
+msgstr "My investment intentions I want to realise"
+
+# FR : en investissement
+msgid "account.investments.STATUS_INVESTMENT"
+msgstr "in investment"
+
+# FR : en &eacute;valuation
+msgid "account.investments.STATUS_VOTE"
+msgstr "under evaluation"
+
+# FR : En attente de paiement
+msgid "account.investments.status.PENDING_PAYMENT"
+msgstr "Awaiting payment"
+
+# FR : A valider
+msgid "account.investments.status.TO_BE_VALIDATED"
+msgstr "To be validated"
+
+# FR : Valid&eacute;
+msgid "account.investments.status.VALIDATED"
+msgstr "Validated"
+
+# FR : Versements termin&eacute;s
+msgid "account.investments.status.ROYALTIES_FINISHED"
+msgstr "Finished contract"
+
+# FR : Annul&eacute;
+msgid "account.investments.status.CANCELED"
+msgstr "Canceled"
+
+# FR : En suspend
+msgid "account.investments.status.SUSPENDED"
+msgstr "Suspended"
+
+# FR : Versements &agrave; venir
+msgid "account.investments.status.CONTRACT_GOING_TO_START"
+msgstr "Upcoming contract"
+
+# FR : Versements en cours
+msgid "account.investments.status.PAYMENTS_STARTED"
+msgstr "Payments started"
+
+# FR : Versements termin&eacute;s
+msgid "account.investments.status.PAYMENTS_FINISHED"
+msgstr "Payments finished"
+
+# FR : En retard
+msgid "account.investments.status.LATE"
+msgstr "Late"
+
+# FR : A venir
+msgid "account.investments.status.UPCOMING"
+msgstr "Upcoming"
+
+# FR : En d&eacute;faut
+msgid "account.investments.status.FAILED"
+msgstr "Failed"
+
+# FR : Investissements de
+msgid "account.investments.orga.TITLE"
+msgstr "Investments of"
+
+# FR : Notifications en provenance de WE DO GOOD
+msgid "account.notifications.TITLE"
+msgstr "Notifications coming from WE DO GOOD"
+
+# FR : Newsletters
+msgid "account.notifications.TITLE_NEWSLETTERS"
+msgstr "Newsletters"
+
+# FR : Projets suivis
+msgid "account.notifications.TITLE_FOLLOWED_PROJECTS"
+msgstr "Followed projects"
+
+# FR : Transactions
+msgid "account.notifications.TITLE_TRANSACTIONS"
+msgstr "Transactions"
+
+# FR : Enregistrez vos informations
+msgid "account.parameters.SAVE_PARAMETERS"
+msgstr "Save your information"
+
+# FR : Modification de mot de passe
+msgid "account.parameters.PASSWORD_MODIFICATION"
+msgstr "Change your password"
+
+# FR : D&eacute;lier mon compte Facebook
+msgid "account.parameters.UNLINK_FACEBOOK"
+msgstr "Unlink my Facebook account"
+
+# FR : D&eacute;lier mon compte Facebook et appliquer ce mot de passe
+msgid "account.parameters.UNLINK_FACEBOOK_APPLY_PASSWORD"
+msgstr "Unlink my Facebook account and apply this password"
+
+# FR : Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :
+msgid "account.parameters.SOME_ERRORS"
+msgstr "Some errors have stopped your information from being saved:"
+
+# FR : Informations de
+msgid "account.parameters.orga.TITLE"
+msgstr "Information of"
+
+# FR : Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :
+msgid "account.parameters.orga.ERROR"
+msgstr "Some errors stopped your data record!"
+
+# FR : Si&egrave;ge social
+msgid "account.parameters.orga.HEAD_OFFICE"
+msgstr "Head office"
+
+# FR : Mon porte-monnaie &eacute;lectronique
+msgid "account.wallet.TITLE"
+msgstr "My electronic wallet"
+
+# FR : Nous attendons votre authentification pour verser %s &euro; sur votre porte-monnaie.
+msgid "account.wallet.AWAITING_AUTHENTICATION"
+msgstr "We are waiting for your authentication so that we can transfer %s &euro; on your wallet."
+
+# FR : Depuis Janvier 2019, l'authentification de votre compte est n&eacute;cessaire aupr&egrave;s de notre prestataire de paiement pour lib&eacute;rer l'acc&egrave;s &agrave; votre porte-monnaie et pouvoir retirer vos royalties.
+msgid "account.wallet.AUTHENTICATION_NECESSARY"
+msgstr "Your account needs to be authenticated by our payment provider to access your personal wallet and transfer your royalties on your bank account."
+
+# FR : Voir le statut de mon authentification
+msgid "account.wallet.VIEW_AUTHENTICATION_STATUS"
+msgstr "View my authentication status"
+
+# FR : Recharger mon porte-monnaie par virement
+msgid "account.wallet.SEND_MONEY_TO_WALLET"
+msgstr "Make a bank transfer to my wallet"
+
+# FR : Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement.
+msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER"
+msgstr "To prevent money laundering, you can only transfer money to your wallet through a bank transfer."
+
+# FR : Compte bancaire de destination
+msgid "account.wallet.RECIPIENT_BANK_ACCOUNT"
+msgstr "Recipient bank account"
+
+# FR : Code &agrave; indiquer (pour identifier votre paiement) :
+msgid "account.wallet.TRANSFER_ID_CODE"
+msgstr "Transfer code (for your payment identification):"
+
+# FR : Copier le code
+msgid "account.wallet.COPY_CODE"
+msgstr "Copy the code"
+
+# FR : Code copi&eacute;
+msgid "account.wallet.CODE_COPIED"
+msgstr "Code copied"
+
+# FR : Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !
+msgid "account.wallet.WHERE_TO_COPY_THE_CODE"
+msgstr "Please paste this code as 'recipient label' when you will execute the bank transfer!"
+
+# FR : Virer vers mon compte bancaire
+msgid "account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT"
+msgstr "Transfer to my bank account"
+
+# FR : Votre RIB est en cours de validation par notre prestataire de paiement. Merci de revenir d'ici 48h pour vous assurer de sa validation.
+msgid "account.wallet.RIB_AWAITING_VALIDATION"
+msgstr "Our payment provider is analyzing your RIB. Please come back in 48h to make sure of its validation."
+
+# FR : Votre RIB a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement.
+msgid "account.wallet.RIB_REJECTED"
+msgstr "Your RIB has been rejected by our payment provider."
+
+# FR : Afin de retirer vos royalties, merci de renseigner vos coordonn&eacute;es bancaires.
+msgid "account.wallet.INPUT_YOUR_BANK_ACCOUNT_DETAILS"
+msgstr "Please type in your bank account details to transfer your royalties."
+
+# FR : Montant &agrave; retirer (maximum %s &euro;) :
+msgid "account.wallet.AMOUNT_TO_TRANSFER"
+msgstr "Amount that you want to transfer (max %s &euro;):"
+
+# FR : Compte bancaire associ&eacute; :
+msgid "account.wallet.ACCOUNT_LINKED"
+msgstr "Linked bank account:"
+
+# FR : Modifier mon RIB
+msgid "account.wallet.MODIFY_RIB"
+msgstr "Modify my RIB"
+
+# FR : Historique de mes transactions
+msgid "account.wallet.TRANSACTIONS_HISTORY"
+msgstr "Transactions history"
+
+# FR : Voir l'historique de mes transactions
+msgid "account.wallet.VIEW_TRANSACTIONS_HISTORY"
+msgstr "View the transactions history"
+
+# FR : %s &euro; sont en attente d'authentification.
+msgid "account.wallet.orga.AWAITING_AUTHENTICATION"
+msgstr "%s &euro; need the organization authentication to be transfered."
+
+# FR : Depuis Janvier 2019, l'authentification de votre organisation est n&eacute;cessaire aupr&egrave;s de notre prestataire de paiement pour lib&eacute;rer l'acc&egrave;s au porte-monnaie de votre organisation et pouvoir retirer les royalties.
+msgid "account.wallet.orga.AUTHENTICATION_NECESSARY"
+msgstr "Your organization account needs to be authenticated by our payment provider to access your personal wallet and transfer your royalties on your bank account."
+
+# FR : Virer vers le compte bancaire de
+msgid "account.wallet.orga.TRANSFER_MY_BANK_ACCOUNT"
+msgstr "Transfer to the bank account of"
+
+# FR : Le RIB de l'organisation est en cours de validation par notre prestataire de paiement. Merci de revenir d'ici 48h pour vous assurer de sa validation.
+msgid "account.wallet.orga.RIB_AWAITING_VALIDATION"
+msgstr "Our payment provider is analyzing your organization RIB. Please come back in 48h to make sure of its validation."
+
+# FR : Afin de retirer les royalties per&ccedil;ues par l'organisation, merci de renseigner ses coordonn&eacute;es bancaires.
+msgid "account.wallet.orga.INPUT_YOUR_BANK_ACCOUNT_DETAILS"
+msgstr "Please type in your bank account details to transfer your organization royalties."
+
+# FR : Virer sur le compte bancaire de
+msgid "account.wallet.orga.TRANSFER_TO_BANK_ACCOUNT"
+msgstr "Transfer to the bank account of"
+
+# FR : vers&eacute;s sur le compte bancaire
+msgid "account.wallet.orga.TRANSFERED_TO_BANK_ACCOUNT"
+msgstr "transfered to the bank account"
+
+# FR : annul&eacute;s
+msgid "account.wallet.orga.CANCELED"
+msgstr "canceled"
+
+# FR : en cours de versement sur le compte bancaire
+msgid "account.wallet.orga.BEING_TRANSFERED"
+msgstr "being transfered to bank account"
+
+# FR : Aucun transfert d&apos;argent
+msgid "account.wallet.orga.NO_MONEY_TRANSFER"
+msgstr "No money transfer."
+
+# FR : Aucune transaction
+msgid "account.wallet.transactions.NONE"
+msgstr "No transaction"
+
+# FR : Investissement sur
+msgid "account.wallet.transactions.INVESTMENT_ON"
+msgstr "Investment on"
+
+# FR : Projet port&eacute; par
+msgid "account.wallet.transactions.PROJECT_MANAGED_BY"
+msgstr "Project managed by"
+
+# FR : Versement de royalties de
+msgid "account.wallet.transactions.ROYALTIES_TRANSFER_FROM"
+msgstr "Royalties payment from"
+
+# FR : Versement de royalties
+msgid "account.wallet.transactions.ROYALTIES_TRANSFER"
+msgstr "Royalties payment"
+
+# FR : Rechargement depuis votre compte bancaire
+msgid "account.wallet.transactions.TRANSFER_FROM_BANK_ACCOUNT"
+msgstr "Transfer from your bank account"
+
+# FR : Remboursement d'investissement
+msgid "account.wallet.transactions.REFUND_INVESTMENT"
+msgstr "Investment refund"
+
+# FR : Retrait vers votre compte bancaire
+msgid "account.wallet.transactions.TRANSFER_TO_BANK_ACCOUNT"
+msgstr "Transfer to your bank account"
+
+# FR : Remboursement sur votre porte-monnaie de
+msgid "account.wallet.transactions.REFUND_TO_WALLET_FROM"
+msgstr "Refund to your wallet from"
+
+# FR : Correction d'erreur de versement
+msgid "account.wallet.transactions.TRANSFER_CORRECTION"
+msgstr "Transfer adjustment"
+
+# FR : D&eacute;bit ind&eacute;fini
+msgid "account.wallet.transactions.UNDEFINED_DEBIT"
+msgstr "Undefined debit"
+
+# FR : Carte bancaire :
+msgid "account.wallet.transactions.BANK_CARD"
+msgstr "Bank card:"
+
+# FR : Virement :
+msgid "account.wallet.transactions.BANK_TRANSFER"
+msgstr "Bank transfer:"
+
+# FR : Pr&eacute;l&egrave;vement bancaire :
+msgid "account.wallet.transactions.BANK_DIRECT_DEBIT"
+msgstr "Bank direct debit:"
+
+# ############################## /investir ################################
+# FR : Investir en royalties
+msgid "invest.header.INVEST_ROYALTIES"
+msgstr "Investir en royalties"
+
+# FR : Investir sur le projet
+msgid "invest.header.INVEST_ON_PROJECT"
+msgstr "Invest on the project"
+
+# FR : Retour au projet
+msgid "invest.header.BACK_TO_PROJECT"
+msgstr "Back to the project"
+
+# FR : Montant
+msgid "invest.header.steps.AMOUNT"
+msgstr "Amount"
+
+# FR : Informations personnelles
+msgid "invest.header.steps.INFORMATION"
+msgstr "Personal information"
+
+# FR : Contrat
+msgid "invest.header.steps.CONTRACT"
+msgstr "Contract"
+
+# FR : Paiement
+msgid "invest.header.steps.PAYMENT"
+msgstr "Payment"
+
+# FR : Partage
+msgid "invest.header.steps.SHARE"
+msgstr "Share"
+
+# FR : Afin de lutter contre le blanchiment d'argent, des justificatifs d'identit&eacute; vous seront demand&eacute;s au format num&eacute;rique pour authentifier votre compte.
+msgid "invest.input.ALERT_AUTHENTICATION_1"
+msgstr "In order to combat money laundering, you will be asked to provide digital proof of identity to authenticate your account."
+
+# FR : Si vous ne les avez pas avec vous, vous aurez la possibilit&eacute; de revenir plus tard pour compl&eacute;ter votre profil et finaliser votre investissement.
+msgid "invest.input.ALERT_AUTHENTICATION_2"
+msgstr "If you don't have any proof with you, you can come back later to complete your profile and finalise your investment."
+
+# FR : Votre parcours a subi une perte de donn&eacute;e de session. Merci de reprendre votre parcours.
+msgid "invest.input.error.SESSION"
+msgstr "Your process has suffered a loss of session data. Thank you for resuming the process."
+
+# FR : Vous devez investir au moins
+msgid "invest.input.error.MINIMUM"
+msgstr "You must invest at least"
+
+# FR : Vous ne pouvez pas investir plus de
+msgid "invest.input.error.MAXIMUM"
+msgstr "You cannot invest more than"
+
+# FR : Merci de ne pas laisser moins de
+msgid "invest.input.error.INTERVAL_1"
+msgstr "Please do not leave less than"
+
+# FR : &agrave; investir.
+msgid "invest.input.error.INTERVAL_2"
+msgstr "to invest."
+
+# FR : Le montant que vous pouvez investir doit &ecirc;tre entier.
+msgid "invest.input.error.INTEGER"
+msgstr "The sum to invest must be complete."
+
+# FR : Le montant saisi semble comporter une erreur.
+msgid "invest.input.error.GENERAL"
+msgstr "The amount entered appears to contain an error."
+
+# FR : une dur&eacute;e ind&eacute;termin&eacute;e
+msgid "invest.input.UNDEFINED_DURATION"
+msgstr "an indefinite period"
+
+# FR :  (pourcentage indicatif).
+msgid "invest.input.INDICATIVE_PERCENTAGE"
+msgstr " (indicative percentage)."
+
+# FR : du chiffre d'affaires de
+msgid "invest.input.OF_TURNOVER_OF"
+msgstr "of the turnover of"
+
+# FR : pendant
+msgid "invest.input.DURING"
+msgstr "for"
+
+# FR : du chiffre d'affaires de ce projet pendant
+msgid "invest.input.OF_TURNOVER_OF_PROJECT_DURING"
+msgstr "of the turnover of this project for"
+
+# FR : Gr&acirc;ce &agrave; moi
+msgid "invest.input.THANKS_TO_ME"
+msgstr "Thanks to me"
+
+# FR : atteints
+msgid "invest.input.REACHED"
+msgstr "achieved"
+
+# FR : Avant d'investir
+msgid "invest.input.BEFORE_INVESTING"
+msgstr "Before investing"
+
+# FR : Informations personnelles
+msgid "invest.user-details.PERSONAL_INFORMATION"
+msgstr "Personal information"
+
+# FR : Informations de votre organisation
+msgid "invest.user-details.ORGANIZATION_INFORMATION"
+msgstr "Information about your organization"
+
+# FR : Nous avons bien re&ccedil;u vos documents. Ils ont &eacute;t&eacute; transmis &agrave; notre prestataire Lemon Way pour validation.
+msgid "invest.identitydocs.DOCUMENTS_RECEIVED"
+msgstr "We have received your documents. They have been sent to our service provider Lemon Way for validation."
+
+# FR : Nous avons enregistr&eacute; votre intention d'investissement de %s &euro;.
+msgid "invest.identitydocs.INVESTMENT_SAVED"
+msgstr "We have registered your investment intention of €%s."
+
+# FR : Lorsque les documents seront valid&eacute;s, vous recevrez une notification vous permettant de finaliser votre investissement en proc&eacute;dant au paiement.
+msgid "invest.identitydocs.WILL_BE_NOTIFIED"
+msgstr "When the documents are validated, you will receive a notification allowing you to finalise your investment by proceeding to payment."
+
+# FR : Vous pourrez aussi le retrouver au sein de votre compte personnel.
+msgid "invest.identitydocs.DOCS_IN_ACCOUNT"
+msgstr "You can also retrieve it from your personal account."
+
+# FR : Merci, et &agrave; bient&ocirc;t !
+msgid "invest.identitydocs.THANKS"
+msgstr "Thanks and see you soon!"
+
+# FR : Envoyer plus tard
+msgid "invest.identitydocs.SEND_LATER"
+msgstr "Send later"
+
+# FR : et investir plus tard
+msgid "invest.identitydocs.INVEST_LATER"
+msgstr "and invest later"
+
+# FR : Valider le contrat
+msgid "invest.contract.VALIDATE_CONTRACT"
+msgstr "Validate the contract"
+
+# FR : Vous avez choisi d'annuler votre investissement sur le projet %s.
+msgid "invest.cancel.YOU_CHOSE_CANCEL_PROJECT"
+msgstr "You have chosen to cancel your investment in the %s project."
+
+# FR : En &ecirc;tes-vous certain(e) ?
+msgid "invest.cancel.ARE_YOU_SURE"
+msgstr "Are you sure?"
+
+# FR : Si oui, vous serez int&eacute;gralement rembours&eacute;(e).
+msgid "invest.cancel.IF_SURE"
+msgstr "If you are, you will be refunded in full."
+
+# FR : Annuler mon investissement
+msgid "invest.cancel.CANCEL_INVESTMENT"
+msgstr "Cancel my investment"
+
+# FR : Confirmer mon investissement
+msgid "invest.cancel.CONFIRM_INVESTMENT"
+msgstr "Confirm my investment"
+
+# FR : Votre intention d'investissement sur le projet %s a bien &eacute;t&eacute; annul&eacute;e.
+msgid "invest.cancel-not-validated.INTENTION_CANCELED"
+msgstr "Your intention to invest in the %s project has been cancelled."
+
+# FR : Vous pourrez investir &agrave; tout moment sur le projet en cliquant sur le bouton INVESTIR sur la page du projet.
+msgid "invest.cancel-not-validated.YOU_CAN_INVEST"
+msgstr "You can invest in the project at any time by clicking on the INVEST button on the project page."
+
+# FR : Voir le projet
+msgid "invest.cancel-not-validated.VIEW_PROJECT"
+msgstr "Go to project"
+
+# FR : Votre investissement a bien &eacute;t&eacute; annul&eacute;.
+msgid "invest.confirm-cancel.INVESTMENT_CANCELED"
+msgstr "Your investment has been cancelled."
+
+# FR : Si vous aviez pay&eacute; par carte bancaire, l'argent a &eacute;t&eacute; revers&eacute; sur votre compte bancaire.
+msgid "invest.confirm-cancel.IF_CARD"
+msgstr "If you paid by card, your bank account has been refunded."
+
+# FR : Si vous aviez pay&eacute; par virement ou porte-monnaie électronique, l'argent est vers&eacute; sur votre porte-monnaie &eacute;lectronique. Rendez-vous sur votre compte personnel.
+msgid "invest.confirm-cancel.IF_WIRE_OR_WALLET"
+msgstr "If you paid by bank transfer or electronic wallet, the money is transferred to your electronic wallet. Go to your personal account."
+
+# FR : Si vous aviez pay&eacute; par ch&egrave;que, l'argent ne sera pas retir&eacute;, le ch&egrave;que sera annul&eacute;.
+msgid "invest.confirm-cancel.IF_CHECK"
+msgstr "If you paid by cheque, the funds will not be withdrawn and the cheque will be cancelled."
+
+# FR : Voir les projets en cours
+msgid "invest.confirm-cancel.VIEW_CURRENT_PROJECTS"
+msgstr "See current projects"
+
+# FR : Investir un autre montant
+msgid "invest.confirm-cancel.INVEST_ANOTHER_AMOUNT"
+msgstr "Invest another amount"
+
+# FR : Modification d'investissement sur le projet
+msgid "invest.finish-preinvestment.CHANGE_TERMS"
+msgstr "Change investment in the project"
+
+# FR : Vous aviez pr&eacute;-investi %s &euro; sur le projet %s.
+msgid "invest.finish-preinvestment.YOU_HAD_PREINVESTED"
+msgstr "You had pre-invested €%s in the %s project."
+
+# FR : A l'issue de l'&eacute;valuation, les conditions de la lev&eacute;e de fonds ont &eacute;t&eacute; modifi&eacute;es :
+msgid "invest.finish-preinvestment.AFTER_THE_VOTE"
+msgstr "Upon completion of the evaluation, the fundraising conditions were changed:"
+
+# FR : Nous sommes navr&eacute;s de votre refus de signer ce contrat.
+msgid "invest.share.SORRY_FOR_CONTRACT_REJECTED"
+msgstr "We are sorry that you decided not to sign this contract."
+
+# FR : Nous allons proc&eacute;der &agrave; l'annulation de votre investissement.
+msgid "invest.share.GOING_TO_REFUND"
+msgstr "We will proceed with the cancellation of your investment."
+
+# FR : Votre investissement a bien &eacute;t&eacute; pris en compte, merci !
+msgid "invest.share.INVESTMENT_VALIDATED"
+msgstr "Your investment has been accounted for, thank you!"
+
+# FR : Merci pour votre signature &eacute;lectronique !
+msgid "invest.share.THANK_YOU_SIGNING"
+msgstr "Thank you for your electronic signature!"
+
+# FR : Pour d&eacute;multiplier mon impact et permettre &agrave; plus de projets positifs de voir le jour, je passe le mot sur :
+msgid "invest.share.SHARE_POSITIVE_SAVINGS"
+msgstr "To boost my impact and to shine a light on more positive projects, I am spreading the word about:"
+
+# FR : Pour augmenter les chances de r&eacute;ussite de ce projet, je passe le mot sur :
+msgid "invest.share.SHARE_PROJECT"
+msgstr "To increase the chances of the project succeeding, I am spreading the word about:"
+
+# FR : Retour &agrave; la page &Eacute;pargne positive
+msgid "invest.share.BACK_POSITIVE_SAVINGS"
+msgstr "Back to the Positive Savings page"
+
+# FR : Retour au projet
+msgid "invest.share.BACK_PROJECT"
+msgstr "Back to project"
+
+# FR : Je choisis mon mode de paiement :
+msgid "invest.mean-payment.TITLE"
+msgstr "My chosen payment method:"
+
+# FR : Porte-monnaie WEDOGOOD
+msgid "invest.mean-payment.list.WALLET"
+msgstr "WEDOGOOD wallet"
+
+# FR : Porte-monnaie WE DO GOOD et carte bancaire
+msgid "invest.mean-payment.list.CARD_WALLET"
+msgstr "WE DO GOOD wallet and card"
+
+# FR : Carte bancaire
+msgid "invest.mean-payment.list.CARD"
+msgstr "Card"
+
+# FR : Carte bancaire enregistr&eacute;e
+msgid "invest.mean-payment.list.CARD_SAVED"
+msgstr "Registered card"
+
+# FR : Virement bancaire
+msgid "invest.mean-payment.list.WIRE"
+msgstr "Bank transfer"
+
+# FR : Ch&egrave;que
+msgid "invest.mean-payment.list.CHECK"
+msgstr "Cheque"
+
+# FR : Je dispose actuellement de %s &euro; sur mon porte-monnaie.
+msgid "invest.mean-payment.I_OWN"
+msgstr "I currently have €%s in my wallet."
+
+# FR : Je paierai %s &euro; via carte bancaire.
+msgid "invest.mean-payment.I_WILL_PAY_WITH_CARD"
+msgstr "I will pay €%s by card."
+
+# FR : CB, Visa, Mastercard ; e-carte bleue provisoire non accept&eacute;e
+msgid "invest.mean-payment.CARD_DETAILS"
+msgstr "CB, Visa, Mastercard; provisional e-card not accepted"
+
+# FR : D&eacute;bit imm&eacute;diat, remboursement int&eacute;gral si la lev&eacute;e de fonds &eacute;choue.
+msgid "invest.mean-payment.CARD_DETAILS_DEBIT"
+msgstr "Debited immediately, with a full refund if the fundraising fails."
+
+# FR : Attention : le montant que vous souhaitez investir risque de d&eacute;passer le plafond de paiement de votre carte. Si vous avez un message d'erreur, contactez votre banque pour augmenter votre plafond de paiement par carte ou choisissez un autre mode de paiement.
+msgid "invest.mean-payment.CARD_DETAILS_ALERT"
+msgstr "Warning: the amount you wish to invest may exceed the payment limit of your card. If you get an error message, contact your bank to increase your card payment limit or choose another payment method."
+
+# FR : Le RIB de notre prestataire sera indiqu&eacute; sur la page suivante, ainsi qu'un code destinataire sp&eacute;cifique &agrave; transmettre imp&eacute;rativement lors du virement.
+msgid "invest.mean-payment.WIRE_DETAILS"
+msgstr "The RIB ID of our service provider will be shown on the following page, as well as a specific recipient code that must be sent with the transfer."
+
+# FR : Pour une comptabilisation plus rapide, munissez-vous d'une photo de ce ch&egrave;que.
+msgid "invest.mean-payment.CHECK_DETAILS"
+msgstr "Take a photo of the cheque to process it more quickly."
+
+# FR : Payer
+msgid "invest.mean-payment.PAY"
+msgstr "Pay"
+
+# FR : Enregistrer ma carte bancaire pour de futurs investissements (enregistr&eacute;e chez notre prestataire de paiement agr&eacute;&eacute; Lemon Way)
+msgid "invest.mean-payment.SAVE_CARD"
+msgstr "Register my card for future investments (registered with our approved payment provider Lemon Way)"
+
+# FR : Afin d'investir par ch&egrave;que, prenez une photo du ch&egrave;que que vous souhaitez faire &agrave; l'ordre de
+msgid "invest.mean-payment.check-form.TAKE_PICTURE"
+msgstr "To invest by cheque, take a photo of the cheque you wish to make payable to"
+
+# FR : et envoyez cette photo gr&acirc;ce au formulaire ci-dessous.
+msgid "invest.mean-payment.check-form.SEND_PICTURE"
+msgstr "and send the photo using the form below."
+
+# FR : Ensuite, envoyez-nous ce ch&egrave;que &agrave; l'adresse suivante :
+msgid "invest.mean-payment.check-form.SEND_CHECK"
+msgstr "Then send us the cheque to the following address:"
+
+# FR : Le ch&egrave;que ne sera encaiss&eacute; que si la lev&eacute;e de fonds r&eacute;ussit.
+msgid "invest.mean-payment.check-form.CHECK_CASHED_IF_SUCCESS"
+msgstr "The cheque will only be cashed if the fundraising is successful."
+
+# FR : Lorsque nous l'aurons valid&eacute;, vous recevrez un contrat d'investissement &agrave; signer en ligne, via notre partenaire Eversign.
+msgid "invest.mean-payment.check-form.CHECK_CONTRACT_IF_RECEIVED"
+msgstr "Once we have validated it, you will receive an investment contract to sign online, via our partner Eversign."
+
+# FR : Si vous ne pouvez pas prendre le ch&egrave;que en photo pour l'instant,
+msgid "invest.mean-payment.check-form.LATER_1"
+msgstr "If you can't take a photo of the cheque right now,"
+
+# FR : vous pouvez confirmer votre investissement
+msgid "invest.mean-payment.check-form.LATER_2"
+msgstr "just confirm your investment"
+
+# FR : et nous envoyer ce chèque &agrave; l'adresse investir@wedogood.co quand ce sera possible.
+msgid "invest.mean-payment.check-form.LATER_3"
+msgstr "and send us the photo to investir@wedogood.co when you can."
+
+# FR : Confirmer et envoyer plus tard
+msgid "invest.mean-payment.check-form.SEND_LATER"
+msgstr "Confirm and send later"
+
+# FR : Merci pour votre investissement de
+msgid "invest.mean-payment.check-return.THANK_YOU"
+msgstr "Thank you for your investment of"
+
+# FR : par ch&egrave;que pour
+msgid "invest.mean-payment.check-return.BY_CHECK"
+msgstr "by cheque for"
+
+# FR : Pour que celui-ci soit comptabilis&eacute; dans la lev&eacute;e de fonds, vous devez nous envoyer une photo par mail &agrave; l'adresse investir@wedogood.co.
+msgid "invest.mean-payment.check-return.SEND_PICTURE"
+msgstr "For this to be counted in the fundraising, you must send us a photo by email to investir@wedogood.co."
+
+# FR : Une fois re&ccedil;u et confirm&eacute;, nous vous enverrons une validation de votre investissement par e-mail &agrave; l'adresse
+msgid "invest.mean-payment.check-return.VALIDATION_IF_RECEIVED"
+msgstr "Once received and confirmed, we will send you a validation of your investment by email to"
+
+# FR : Nous vous rappelons que pour que celui-ci soit valid&eacute;, vous devez signer le contrat électronique qui vous a &eacute;t&eacute; envoy&eacute; &agrave; l'adresse
+msgid "invest.mean-payment.check-return.SIGN_CONTRACT"
+msgstr "Please remember that in order to be validated, you must sign the electronic contract sent to you at"
+
+# FR : Pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable (spam).
+msgid "invest.mean-payment.check-return.CHECK_SPAM"
+msgstr "Remember to check your spam folder."
+
+# FR : Cet e-mail contiendra le contrat d'investissement correspondant.
+msgid "invest.mean-payment.check-return.CONTRACT_IN_MAIL"
+msgstr "This email will contain the corresponding investment contract."
+
+# FR : Pensez aussi &agrave; nous faire parvenir le ch&egrave;que de
+msgid "invest.mean-payment.check-return.SEND_CHECK"
+msgstr "Also remember to send us the cheque for"
+
+# FR : &agrave; l'ordre de
+msgid "invest.mean-payment.check-return.ORDER"
+msgstr "made payable to"
+
+# FR : &agrave; l'adresse suivante :
+msgid "invest.mean-payment.check-return.TO_THE_ADDRESS"
+msgstr "to the following address:"
+
+# FR : Afin de proc&eacute;der au virement, voici les informations bancaires dont vous aurez besoin :
+msgid "invest.mean-payment.wire.INFORMATION"
+msgstr "In order to proceed with the transfer, here is the banking information you will need:"
+
+# FR : Titulaire du compte :
+msgid "invest.mean-payment.wire.ACCOUNT_OWNER"
+msgstr "Account owner:"
+
+# FR : Une fois le virement effectu&eacute;, cliquez sur
+msgid "invest.mean-payment.wire.ONCE_WIRE_DONE"
+msgstr "Once the transfer has been made, click on"
+
+# FR : Exemple de saisie du code destinataire sur diff&eacute;rentes banques :
+msgid "invest.mean-payment.wire.CODE_EXAMPLES"
+msgstr "Example of entering the recipient code for different banks:"
+
+# FR : Vous allez recevoir deux e-mails cons&eacute;cutifs &agrave; l&apos;adresse
+msgid "invest.mean-payment.success.TWO_EMAILS"
+msgstr "You will receive two consecutive emails at"
+
+# FR : (pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable) :
+msgid "invest.mean-payment.success.TWO_EMAILS_CHECK_SPAM"
+msgstr "(remember to check your spam folder):"
+
+# FR : un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement,
+msgid "invest.mean-payment.success.TWO_EMAILS_LIST_1"
+msgstr "an email sent by WEDOGOOD confirming your payment,"
+
+# FR : un e-mail envoy&eacute; par notre partenaire Eversign. Cet e-mail contient un lien vous permettant de signer le contrat d&apos;investissement.
+msgid "invest.mean-payment.success.TWO_EMAILS_LIST_2"
+msgstr "an email sent by our partner Eversign. This email contains a link allowing you to sign the investment contract."
+
+# FR : Vous allez recevoir un e-mail de confirmation de paiement.
+msgid "invest.mean-payment.success.TWO_EMAILS_ERROR_1"
+msgstr "You will receive a payment confirmation email."
+
+# FR : Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me.
+msgid "invest.mean-payment.success.TWO_EMAILS_ERROR_2"
+msgstr "However, an error occurred while generating the contract. Our teams are working to resolve this issue."
+
+# FR : Votre investissement est valid&eacute;.
+msgid "invest.mean-payment.success.ONE_EMAIL_1"
+msgstr "Your investment has been validated."
+
+# FR : Vous allez recevoir un e-mail &agrave; l&apos;adresse
+msgid "invest.mean-payment.success.ONE_EMAIL_2"
+msgstr "You will receive an email at"
+
+# FR : Votre contrat d&apos;investissement sera joint &agrave; cet e-mail.
+msgid "invest.mean-payment.success.ONE_EMAIL_3"
+msgstr "Your investment contract will be attached to the email."
+
+# FR : Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacute;es &agrave; l'issue de la phase d'&eacute;valuation.
+msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_1"
+msgstr "Please remember that the conditions that you have accepted may be changed at the end of the evaluation phase."
+
+# FR : Si aucun changement ne survient, votre investissement sera valid&eacute; automatiquement.
+msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_2"
+msgstr "If no change occurs, your investment will be validated automatically."
+
+# FR : Si un changement devait survenir, vous devrez confirmer ou infirmer votre investissement.
+msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_3"
+msgstr "If a change should occur, you will need to confirm or withdraw your investment."
+
+# FR : Votre compte bancaire a &eacute;t&eacute; d&eacute;bit&eacute;.
+msgid "invest.mean-payment.success.ACCOUNT_DEBIT"
+msgstr "Your bank account has been debited."
+
+# FR : Vous allez valider le transfert d'argent de votre porte-monnaie vers celui du projet.
+msgid "invest.mean-payment.alert.TRANSFER"
+msgstr "You are going to validate the transfer of money from your wallet to the project wallet."
+
+# FR : Vous avez d&eacute;pass&eacute; le nombre d'investissement possible par carte
+msgid "invest.mean-payment.error.PAYMENT_NUMBER"
+msgstr "You have exceeded the maximum number of investments per card"
+
+# FR : Les virements bancaires sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement
+msgid "invest.mean-payment.error.WIRE_AMOUNT"
+msgstr "Bank transfers are allowed for investments of €%s or more"
+
+# FR : Les paiements par ch&egrave;que sont autoris&eacute;s &agrave; partir de %s &euro; d'investissement. L'authentification de votre compte ne sera n&eacute;cessaire qu'apr&egrave;s le 1er versement de royalties. Vous pouvez par ailleurs n&eacute;gocier la date d'encaissement du ch&egrave;que avec le porteur de projet.
+msgid "invest.mean-payment.error.CHECK_AMOUNT"
+msgstr "Payments by cheque are allowed for investments of €%s or more. Authentication of your account will only be necessary after the first payment of royalties. You can also negotiate the date the cheque is cashed with the project lead."
+
+# FR : Il y a eu une erreur lors du transfert d'argent entre porte-monnaies.
+msgid "invest.mean-payment.error.WALLET_TRANSFER"
+msgstr "There was an error transferring money between wallets."
+
+# FR : Merci de nous contacter ou de
+msgid "invest.mean-payment.error.WALLET_TRANSFER_CONTACT"
+msgstr "Please contact us or"
+
+# FR : Red&eacute;marrer l'investissement
+msgid "invest.mean-payment.error.WALLET_TRANSFER_RESTART"
+msgstr "Restart the investment"
+
+# FR : Il y a eu une erreur pendant votre tentative d'investissement, ou celui-ci &eacute;tait d&eacute;j&agrave; comptabilis&eacute.
+msgid "invest.done.error.CONTACT_1"
+msgstr "An error occurred during your investment attempt, or it has already been accounted for."
+
+# FR : Merci de nous contacter afin d'&eacute;tudier votre tentative sur investir@wedogood.co.
+msgid "invest.done.error.CONTACT_2"
+msgstr "Please contact us and we will examine this further at investir@wedogood.co."
+
+# FR : Code erreur :
+msgid "invest.done.error.CODE"
+msgstr "Error code:"
+
+# FR : Transaction en cours.
+msgid "invest.pending.PENDING"
+msgstr "Transaction in progress."
+
+# FR : Merci de vous rendre sur la page
+msgid "invest.pending.PLEASE_GO_1"
+msgstr "Please go to the page"
+
+# FR : Mes investissements
+msgid "invest.pending.PLEASE_GO_2"
+msgstr "My investments"
+
+# FR : pour suivre l&apos;&eacute;volution de votre paiement.
+msgid "invest.pending.PLEASE_GO_3"
+msgstr "to follow the progress of your payment."
+
+# FR : Dans l'attente de votre virement, vous recevrez un e-mail rappelant les informations &agrave; nous fournir.
+msgid "invest.pending.WIRE"
+msgstr "While your transfer is pending, you will receive an email reminding you of the information you need to send us."
+
+# FR : Une fois valid&eacute;, vous recevrez deux e-mails :
+msgid "invest.pending.WIRE_WHEN_VALIDATED"
+msgstr "Once validated, you will receive two emails:"
+
+# FR : Une fois valid&eacute;, vous recevrez un e-mail confirmant votre paiement. Votre contrat d'investissement sera joint &agrave; cet e-mail.
+msgid "invest.pending.WIRE_WHEN_VALIDATED_ONE_EMAIL"
+msgstr "Once validated, you will receive an email confirming your payment. Your investment contract will be attached to the email."
+
+# FR : Modification de votre investissement
+msgid "invest.lightbox.preinvestment.TITLE"
+msgstr "Changing your investment"
+
+# FR : Vous aviez pr&eacute;-investi %s &euro; sur le projet %s.
+msgid "invest.lightbox.preinvestment.INTRO"
+msgstr "You had pre-invested €%s in the %s project."
+
+# FR : A l'issue de l'&eacute;valuation, les conditions de la lev&eacute;e de fonds ont &eacute;t&eacute; modifi&eacute;es :
+msgid "invest.lightbox.preinvestment.DESCRIPTION"
+msgstr "Upon completion of the evaluation, the fundraising conditions were changed:"
+
+# FR : Confirmer mon investissement
+msgid "invest.lightbox.preinvestment.CONFIRM"
+msgstr "Confirm my investment"
+
+# FR : Annuler mon investissement
+msgid "invest.lightbox.preinvestment.CANCEL"
+msgstr "Cancel my investment"
+
+# FR : Confirmation de votre investissement
+msgid "invest.lightbox.investment.TITLE"
+msgstr "Confirmation of your investment"
+
+# FR : Vous aviez l'intention d'investir %s &euro; sur le projet %s.
+msgid "invest.lightbox.investment.INTRO"
+msgstr "You have pre-invested €%s in the %s project."
+
+# FR : Votre compte a &eacute;t&eacute; authentifi&eacute; par notre prestataire de paiement. Nous vous proposons donc de reprendre votre d&eacute;marche d'investissement.
+msgid "invest.lightbox.investment.DESCRIPTION"
+msgstr "Your account has been authenticated by our payment provider. You can therefore resume your investment process."
+
+# ############################## share-buttons ################################
+# FR : Faites comme moi, épargnez positif dès 10 € pour soutenir
+msgid "share-buttons.DO_LIKE_ME_POSITIVE_SAVINGS"
+msgstr "Join me in investing positively from €10 to support"
+
+# FR : épargne, impact, investissement, royalties
+msgid "share-buttons.HASHTAGS_POSITIVE_SAVINGS"
+msgstr "savings, impact, investment, royalties"
+
+# FR : Faites comme moi, investissez sur le projet
+msgid "share-buttons.DO_LIKE_ME_PROJECT"
+msgstr "Join me in investing in the project"
+
+# FR : royalty, crowdfunding
+msgid "share-buttons.HASHTAGS_PROJECT"
+msgstr "royalty, crowdfunding"
+
+# FR : Je viens d'investir sur le projet
+msgid "share-buttons.email.TITLE"
+msgstr "I have just invested in the project"
+
+# FR : Un projet sur lequel investir !
+msgid "share-buttons.email.SUBJECT"
+msgstr "A project to invest in!"
+
+# ############################## form - user-bank ################################
+# FR : Nom du propri&eacute;taire du compte
+msgid "form.user-bank.NAME_ACCOUNT_OWNER"
+msgstr "Name of account owner"
+
+# FR : Adresse du compte
+msgid "form.user-bank.ADDRESS_ACCOUNT"
+msgstr "Account address"
+
+# FR : Pays
+msgid "form.user-bank.ADDRESS_ACCOUNT_2"
+msgstr "Country"
+
+# FR : Cette valeur ne correspond pas &agrave; un IBAN.
+msgid "form.user-bank.error.ISNT_IBAN"
+msgstr "This value does not correspond to an IBAN."
+
+# FR : IBAN
+msgid "form.user-bank.IBAN"
+msgstr "IBAN"
+
+# FR : Cette valeur ne correspond pas &agrave; un BIC.
+msgid "form.user-bank.error.ISNT_BIC"
+msgstr "This value does not correspond to a BIC."
+
+# FR : BIC
+msgid "form.user-bank.BIC"
+msgstr "BIC"
+
+# FR : RIB
+msgid "form.user-bank.RIB"
+msgstr "RIB"
+
+# ############################## form - user-details ################################
+# FR : E-mail
+msgid "form.user-details.EMAIL"
+msgstr "E-mail"
+
+# FR : Pr&eacute;nom
+msgid "form.user-details.FIRSTNAME"
+msgstr "First name"
+
+# FR : Nom
+msgid "form.user-details.LASTNAME"
+msgstr "Last name"
+
+# FR : Nom d'usage
+msgid "form.user-details.USENAME"
+msgstr "User name"
+
+# FR : Je souhaite recevoir la newsletter WE DO GOOD mensuelle
+msgid "form.user-details.WISH_RECEIVE_NEWSLETTER"
+msgstr "I wish to receive the monthly newsletter"
+
+# FR : Vous &ecirc;tes
+msgid "form.user-details.YOU_ARE"
+msgstr "You are"
+
+# FR : une femme
+msgid "form.user-details.A_WOMAN"
+msgstr "a woman"
+
+# FR : un homme
+msgid "form.user-details.A_MAN"
+msgstr "a man"
+
+# FR : Date de naissance
+msgid "form.user-details.BIRTH_DATE"
+msgstr "Date of birth"
+
+# FR : Ville de naissance
+msgid "form.user-details.BIRTH_PLACE"
+msgstr "City of birth"
+
+# FR : Arrondissement dans la ville de naissance
+msgid "form.user-details.BIRTH_PLACE_DISTRICT"
+msgstr "District in the city of birth"
+
+# FR : Uniquement si la naissance a eu lieu &agrave; Paris, Marseille ou Lyon
+msgid "form.user-details.BIRTH_PLACE_DISTRICT_DESCRIPTION"
+msgstr "Only if you are born in Paris, Marseille or Lyon"
+
+# FR : D&eacute;partement de naissance
+msgid "form.user-details.BIRTH_PLACE_COUNTY"
+msgstr "French birthplace county"
+
+# FR : Uniquement si la naissance a eu lieu en France
+msgid "form.user-details.BIRTH_PLACE_COUNTY_DESCRIPTION"
+msgstr "Only for people born in France"
+
+# FR : Pays de naissance
+msgid "form.user-details.BIRTH_COUNTRY"
+msgstr "Birth country"
+
+# FR : Nationalit&eacute;
+msgid "form.user-details.NATIONALITY"
+msgstr "Nationality"
+
+# FR : Num&eacute;ro de rue
+msgid "form.user-details.ADDRESS_NUMBER"
+msgstr "Street number"
+
+# FR : Compl&eacute;ment de num&eacute;ro
+msgid "form.user-details.ADDRESS_NUMBER_COMPLEMENT"
+msgstr "Street number complement"
+
+# FR : Adresse
+msgid "form.user-details.ADDRESS"
+msgstr "Address"
+
+# FR : Code postal
+msgid "form.user-details.ZIP_CODE"
+msgstr "Zip code"
+
+# FR : Ville
+msgid "form.user-details.CITY"
+msgstr "City"
+
+# FR : Pays
+msgid "form.user-details.COUNTRY"
+msgstr "Country"
+
+# FR : R&eacute;sidence fiscale
+msgid "form.user-details.TAX_COUNTRY"
+msgstr "Tax country"
+
+# FR : T&eacute;l&eacute;phone
+msgid "form.user-details.PHONE"
+msgstr "Phone number"
+
+# FR : Personne de confiance
+msgid "form.user-details.CONTACT_IF_DECEASED"
+msgstr "Trusted person"
+
+# FR : Identifiez ici les coordonn&eacute;es (nom, mail, t&eacute;l&eacute;phone) de votre personne de confiance &agrave; contacter en cas de souci majeur, notamment en cas de d&eacute;c&egrave;s. Pensez &agrave; l'informer au pr&eacute;alable de vos investissements sur WE DO GOOD pour qu'elle soit au courant. En remplissant ce champ, vous nous autorisez &agrave; lui donner l'acc&egrave;s &agrave; votre compte personnel sur justificatif de votre impossibilit&eacute; à acc&eacute;der &agrave; votre compte.
+msgid "form.user-details.CONTACT_IF_DECEASED_DESCRIPTION"
+msgstr "Please write the contact information (name, e-mail, phone number) of the trusted person we should contact in the case of a major problem (death). Let this person know when you will write it down, we will let this person access your account if needed."
+
+# FR : Langue d'affichage
+msgid "form.user-details.LANGUAGE"
+msgstr "Display language"
+
+# FR : Cette adresse e-mail n'est pas valide.
+msgid "form.user-details.EMAIL_ADDRESS_NOT_OK"
+msgstr "This is not a valid e-mail address"
+
+# FR : Votre pr&eacute;nom n'a pas &eacute;t&eacute; renseign&eacute;.
+msgid "form.user-details.FIRST_NAME_EMPTY"
+msgstr "The first name field is empty."
+
+# FR : Votre nom n'a pas &eacute;t&eacute; renseign&eacute;.
+msgid "form.user-details.LAST_NAME_EMPTY"
+msgstr "The last name field is empty."
+
+# FR : Votre lieu de naissance n'est pas correct.
+msgid "form.user-details.BIRTH_PLACE_ERROR"
+msgstr "Error in the birth place field."
+
+# FR : Votre adresse n'est pas correcte.
+msgid "form.user-details.ADDRESS_ERROR"
+msgstr "Error in the address field."
+
+# FR : Votre code postal n'est pas correct.
+msgid "form.user-details.ZIP_CODE_ERROR"
+msgstr "Error in the zip code field."
+
+# FR : Votre ville n'est pas correcte.
+msgid "form.user-details.CITY_ERROR"
+msgstr "Error in the city field."
+
+# FR : Vos informations ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s.
+msgid "form.user-details.SAVE_SUCCESS"
+msgstr "Your personal information has been saved."
+
+# ############################## form - organization-details ################################
+# FR : D&eacute;nomination sociale
+msgid "form.organization-details.NAME"
+msgstr "Corporate name"
+
+# FR : E-mail
+msgid "form.organization-details.EMAIL"
+msgstr "E-mail"
+
+# FR : Cette adresse doit &ecirc;tre diff&eacute;rente de celle de votre compte personnel.
+msgid "form.organization-details.EMAIL_DESCRIPTION"
+msgstr "This address must be different from that of your personal account."
+
+# FR : Num&eacute;ro SIRET
+msgid "form.organization-details.ID_NUMBER"
+msgstr "SIRET Number"
+
+# FR : Descriptif de l'activit&eacute;
+msgid "form.organization-details.ACTIVITY"
+msgstr "Activity description"
+
+# FR : Site Web
+msgid "form.organization-details.WEBSITE"
+msgstr "Web site"
+
+# FR : Adresse de votre site Internet, commen&ccedil;ant par http ou www
+msgid "form.organization-details.WEBSITE_DESCRIPTION"
+msgstr "Your website address, starting with http or www"
+
+# FR : Fonction du repr&eacute;sentant
+msgid "form.organization-details.ORGANIZATION_MANAGER_TITLE"
+msgstr "Organization manager role"
+
+# FR : Forme juridique
+msgid "form.organization-details.LEGAL_FORM"
+msgstr "Legal form"
+
+# FR : RCS (Ville)
+msgid "form.organization-details.CITY"
+msgstr "Trade and society register city"
+
+# FR : Capital social (en euros)
+msgid "form.organization-details.SHARE_CAPITAL"
+msgstr "Share capital (in euros)"
+
+# FR : Code APE
+msgid "form.organization-details.APE"
+msgstr "Main activity code (APE)"
+
+# FR : VAT number
+msgid "form.organization-details.VAT_NUMBER"
+msgstr "VAT number"
+
+# FR : L'exercice comptable se termine &agrave; la fin du mois
+msgid "form.organization-details.FISCAL_YEAR_END_MONTH"
+msgstr "Fiscal year end month"
+
+# FR : Nombre d'employ&eacute;s
+msgid "form.organization-details.EMPLOYEES_COUNT"
+msgstr "Employees count"
+
+# FR : Le nom de l'organisation ne peut pas &ecirc;tre vide.
+msgid "form.organization-details.error.NAME"
+msgstr "The name of the organization cannot be empty."
+
+# FR : Le capital de l'organisation doit &ecirc;tre un nombre.
+msgid "form.organization-details.error.CAPITAL"
+msgstr "The organization shared capital should be a number"
+
+# FR : Le num&eacute;ro de rue de l'organisation doit &ecirc;tre un nombre.
+msgid "form.organization-details.error.ADDRESS_NUMBER"
+msgstr "The address number should be a number"
+
+# FR : Le code postal de l'organisation doit &ecirc;tre un nombre.
+msgid "form.organization-details.error.ZIP_CODE"
+msgstr "The zip code should be a number"
+
+# ############################## form - user-identitydocs ################################
+# FR : Justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident
+msgid "form.user-identitydocs.ID_OF_PRESIDENT"
+msgstr "Proof of identity of the manager or president"
+
+# FR : Justificatif d'identit&eacute;
+msgid "form.user-identitydocs.ID"
+msgstr "Proof of identity"
+
+# FR : Carte d'identit&eacute; recto-verso ou passeport avec bande MRZ lisible en int&eacute;gralit&eacute;.
+msgid "form.user-identitydocs.ID_DESCRIPTION"
+msgstr "Double-sided identity card or passport with fully readable MRZ strip."
+
+# FR : Deuxi&egrave;me justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident
+msgid "form.user-identitydocs.SECOND_ID_ORGA"
+msgstr "Second proof of identity of the manager or chairperson"
+
+# FR : M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis.
+msgid "form.user-identitydocs.SECOND_ID_ORGA_DESCRIPTION"
+msgstr "Same types as the first. Otherwise a driving licence or the latest tax notice can be provided."
+
+# FR : K-BIS ou &eacute;quivalent &agrave; un registre du commerce
+msgid "form.user-identitydocs.KBIS"
+msgstr "K-BIS or equivalent proof of company identity from a commercial register"
+
+# FR : Datant de moins de 3 mois
+msgid "form.user-identitydocs.KBIS_DESCRIPTION"
+msgstr "Less than 3 months old"
+
+# FR : Statuts de la soci&eacute;t&eacute;, certifi&eacute;s conformes à l'original par le g&eacute;rant (faisant figurer id&eacute;alement la r&eacute;partition du capital de l'entreprise)
+msgid "form.user-identitydocs.STATUS"
+msgstr "Articles of association, certified as an accurate copy of the original by the manager (ideally showing the distribution of the company's capital)"
+
+# FR : Attestation de r&eacute;partition du capital (facultatif)
+msgid "form.user-identitydocs.CAPITAL_ALLOCATION"
+msgstr "Certificate of capital distribution (optional)"
+
+# FR : Si la r&eacute;partition du capital n'est pas exprim&eacute;e clairement dans les statuts
+msgid "form.user-identitydocs.CAPITAL_ALLOCATION_DESCRIPTION"
+msgstr "If the distribution of capital is not clearly expressed in the articles of association"
+
+# FR : Justificatif d'identit&eacute; de la deuxi&egrave;me personne (facultatif)
+msgid "form.user-identitydocs.ID_SECOND_PERSON"
+msgstr "Proof of identity of the second person (optional)"
+
+# FR : Si une deuxi&egrave;me personne physique d&eacute;tient au moins 25% du capital
+msgid "form.user-identitydocs.ID_SECOND_PERSON_DESCRIPTION"
+msgstr "If a second individual holds at least 25% of the capital"
+
+# FR : Deuxi&egrave;me justificatif d'identit&eacute; de la deuxi&egrave;me personne (facultatif)
+msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON"
+msgstr "Second proof of identity of the second person (optional)"
+
+# FR : M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis.
+msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON_DESCRIPTION"
+msgstr "Same types as the first. Otherwise a driving licence or the latest tax notice can be provided."
+
+# FR : Justificatif d'identit&eacute; de la troisi&egrave;me personne (facultatif)
+msgid "form.user-identitydocs.ID_THIRD_PERSON"
+msgstr "Third person's proof of identity (optional)"
+
+# FR : Si une troisi&egrave;me personne physique d&eacute;tient au moins 25% du capital
+msgid "form.user-identitydocs.ID_THIRD_PERSON_DESCRIPTION"
+msgstr "If a third individual holds at least 25% of the capital"
+
+# FR : Deuxi&egrave;me justificatif d'identit&eacute; de la troisi&egrave;me personne (facultatif)
+msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON"
+msgstr "Second proof of identity of the third person (optional)"
+
+# FR : M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis.
+msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON_DESCRIPTION"
+msgstr "Same types as the first. Otherwise a driving licence or the latest tax notice can be provided."
+
+# FR : Verso du justificatif d'identit&eacute;
+msgid "form.user-identitydocs.ID_BACK"
+msgstr "Reverse of proof of identity"
+
+# FR : Ce fichier n'est utile que si le verso ne figure pas dans le fichier pr&eacute;c&eacute;dent.
+msgid "form.user-identitydocs.ID_BACK_DESCRIPTION"
+msgstr "This file is only required if the reverse side is not in the previous file."
+
+# FR : Deuxi&egrave;me justificatif d'identit&eacute;
+msgid "form.user-identitydocs.SECOND_ID"
+msgstr "Second proof of identity"
+
+# FR : Passeport ou carte d'identit&eacute; recto-verso avec bande MRZ lisible en intégralit&eacute;, qui n'aurait pas &eacute;t&eacute; d&eacute;pos&eacute; en premi&egrave;re pi&egrave;ce d'identit&eacute;.
+msgid "form.user-identitydocs.SECOND_ID_DESCRIPTION_1"
+msgstr "Passport or double-sided identity card with fully readable MRZ strip that was not uploaded as the first proof of identity."
+
+# FR : Sinon un des documents suivants : permis de conduire, dernier avis d'imposition, carte vitale, livret de famille, acte de naissance.
+msgid "form.user-identitydocs.SECOND_ID_DESCRIPTION_2"
+msgstr "Otherwise one of the following documents: driving licence, last tax notice, health card, family record book, birth certificate."
+
+# FR : Les titres de s&eacute;jour sont accept&eacute;s pour les personnes qui ne sont pas fran&ccedil;aises.
+msgid "form.user-identitydocs.SECOND_ID_DESCRIPTION_3"
+msgstr "Residence permits are accepted for non-French nationals."
+
+# FR : Verso du deuxi&egrave;me justificatif d'identit&eacute;
+msgid "form.user-identitydocs.SECOND_ID_BACK"
+msgstr "Reverse of second proof of identity"
+
+# FR : Ce fichier n'est utile que si le verso ne figure pas dans le fichier pr&eacute;c&eacute;dent.
+msgid "form.user-identitydocs.SECOND_ID_BACK_DESCRIPTION"
+msgstr "This file is only required if the reverse side is not in the previous file."
+
+# FR : Justificatif de domicile
+msgid "form.user-identitydocs.PROOF_ADDRESS"
+msgstr "Proof of address"
+
+# FR : Depuis septembre 2019, Lemon Way n'accepte plus les justificatifs de domicile pour authentifier les comptes.
+msgid "form.user-identitydocs.PROOF_ADDRESS_ALERT"
+msgstr "As of September 2019, Lemon Way no longer accepts proof of address to authenticate accounts."
+
+# FR : Ce champ est facultatif. Il est utile si vous n'avez pas de deuxi&egrave;me pi&egrave;ce d'identit&eacute;.
+msgid "form.user-identitydocs.PROOF_ADDRESS_DESCRIPTION_1"
+msgstr "This field is optional. It is required if you don't have a second identity document."
+
+# FR : Il doit dater de moins de 3 mois, et provenir d'un fournisseur d'&eacute;nergie (&eacute;lectricit&eacute;, gaz, eau) ou d'un bailleur, ou &ecirc;tre un relev&eacute; d'imp&ocirc;t.
+msgid "form.user-identitydocs.PROOF_ADDRESS_DESCRIPTION_2"
+msgstr "It must be less than 3 months old, and come from a utility supplier (electricity, gas, water) or a landlord, or be a tax statement."
+
+# FR : Le SMS sera envoy&eacute; au num&eacute;ro suivant :
+msgid "form.user-identitydocs.PHONE_NUMBER"
+msgstr "The SMS will be sent to the following number:"
+
+# ############################## form - user-notifications ################################
+# FR : Newsletter WE DO GOOD
+msgid "form.user-notifications.newsletters.WEDOGOOD"
+msgstr "WE DO GOOD newsletter"
+
+# FR : Actualit&eacute;s des projets
+msgid "form.user-notifications.newsletters.PROJECT_NEWS"
+msgstr "Projects news"
+
+# FR : Projets &agrave; impact &eacute;conomique
+msgid "form.user-notifications.newsletters.PROJECTS_ECONOMIC"
+msgstr "Projects with economic impact"
+
+# FR : Projets &agrave; impact social
+msgid "form.user-notifications.newsletters.PROJECTS_SOCIAL"
+msgstr "Projects with social impact"
+
+# FR : Projets &agrave; impact environnemental
+msgid "form.user-notifications.newsletters.PROJECTS_ENVIRONMENT"
+msgstr "Projects with environment impact"
+
+# FR : Projets autour de chez moi
+msgid "form.user-notifications.newsletters.PROJECTS_AROUND_ME"
+msgstr "Projects around me"
+
+# FR : Si le montant est positif
+msgid "form.user-notifications.royalties.ONLY_POSITIVE"
+msgstr "Only if the amount is positive"
+
+# ############################## form - user-password ################################
+# FR : Mot de passe actuel
+msgid "form.user-password.PASSWORD_CURRENT"
+msgstr "Current Password"
+
+# FR : Nouveau mot de passe
+msgid "form.user-password.PASSWORD_NEW"
+msgstr "New Password"
+
+# FR : Confirmer le nouveau mot de passe
+msgid "form.user-password.PASSWORD_NEW_CONFIRM"
+msgstr "Confirm the new password"
+
+# FR : Le nouveau mot de passe ne peut pas &ecirc;tre vide.
+msgid "form.user-password.error.PASSWORD_EMPTY"
+msgstr "The new password cannot be left empty."
+
+# FR : Le mot de passe de confirmation ne correspond pas au nouveau mot de passe.
+msgid "form.user-password.error.PASSWORD_DOESNT_MATCH"
+msgstr "The confirmation password does not match the new password."
+
+# FR : Votre mot de passe actuel ne correspond pas.
+msgid "form.user-password.error.PASSWORD_CURRENT_WRONG"
+msgstr "Your current password does not match."
+
+# FR : Votre mot de passe a &eacute;t&eacute; modifi&eacute; avec succ&egrave;s.
+msgid "form.user-password.PASSWORD_MODIFIED"
+msgstr "Your password has been successfully changed."
+
+# ############################## form - invest-input ################################
+# FR : Je souhaite investir
+msgid "form.invest-input.I_WISH_TO_INVEST"
+msgstr "I want to invest"
+
+# FR : Vous n'&ecirc;tes pas identifi&eacute;.
+msgid "form.invest-input.error.NOT_LOGGED_IN"
+msgstr "You are not logged in."
+
+# FR : Il n'est pas possible d'investir.
+msgid "form.invest-input.error.INVESTMENT_NOT_POSSIBLE"
+msgstr "It has not been possible to invest."
+
+# FR : Vous n'avez pas saisi le montant que vous souhaitez investir.
+msgid "form.invest-input.error.AMOUNT_EMPTY"
+msgstr "You have not entered the amount you want to invest."
+
+# FR : Vous n'avez pas saisi un nombre correct.
+msgid "form.invest-input.error.AMOUNT_NOT_NUMERIC"
+msgstr "You did not enter a correct number."
+
+# FR : Vous n'avez pas saisi un nombre entier.
+msgid "form.invest-input.error.AMOUNT_NOT_INTEGER"
+msgstr "You did not enter a whole number."
+
+# FR : Vous n'avez pas saisi un montant suffisant.
+msgid "form.invest-input.error.AMOUNT_NOT_ENOUGH"
+msgstr "You have not entered a sufficient amount."
+
+# FR : Vous ne pouvez pas investir autant.
+msgid "form.invest-input.error.AMOUNT_TOO_MUCH"
+msgstr "You cannot invest that much."
+
+# ############################## form - invest-user-details ################################
+# FR : En mon nom (personne physique)
+msgid "form.invest-user-details.IN_MY_NAME"
+msgstr "On my own behalf (individual)"
+
+# FR : En tant qu'organisation (personne morale)
+msgid "form.invest-user-details.AS_ORGANIZATION"
+msgstr "As an organisation (legal entity)"
+
+# FR : Je d&eacute;clare que ces informations sont exactes
+msgid "form.invest-user-details.CORRECT_INFORMATION"
+msgstr "I declare that this information is correct"
+
+# FR : Je d&eacute;clare que ces informations sont exactes
+msgid "form.invest-user-details.A_NEW_ORGANIZATION"
+msgstr "A new organisation"
+
+# FR : Au nom de
+msgid "form.invest-user-details.ORGANIZATION_SELECT"
+msgstr "On behalf of"
+
+# FR : Je d&eacute;clare &ecirc;tre en capacit&eacute; de repr&eacute;senter cette organisation
+msgid "form.invest-user-details.CAPACITY_REPRESENT_ORGANIZATION"
+msgstr "I declare that I am able to represent this organisation"
+
+# FR : Votre pr&eacute;nom doit faire au moins 2 caract&egrave;res.
+msgid "form.invest-user-details.error.FIRST_NAME_SIZE"
+msgstr "Your first name must be at least 2 characters long."
+
+# FR : Votre nom doit faire au moins 2 caract&egrave;res.
+msgid "form.invest-user-details.error.LAST_NAME_SIZE"
+msgstr "Your surname must be at least 2 characters long."
+
+# FR : Vous n'avez pas d&eacute;clar&eacute; vos informations comme exactes.
+msgid "form.invest-user-details.error.NOT_DECLARED_INFORMATION"
+msgstr "You have not declared that your information is correct."
+
+# FR : Vous devez choisir en quel nom vous souhaitez investir.
+msgid "form.invest-user-details.error.CHOOSE_USER_TYPE"
+msgstr "You have to choose on whose behalf you want to invest."
+
+# FR : Vous n'avez pas choisi l'organisation au nom de laquelle vous souhaitez investir.
+msgid "form.invest-user-details.error.ORGANIZATION_SELECTION"
+msgstr "You have not chosen the organisation in whose name you wish to invest."
+
+# FR : Vous n'avez pas d&eacute;clar&eacute; &ecirc;tre en mesure de repr&eacute;senter l'organisation.
+msgid "form.invest-user-details.error.ORGANIZATION_REPRESENT"
+msgstr "You have not declared that you are able to represent the organisation."
+
+# FR : Vous ne pouvez pas investir avec l'organisation qui porte le projet.
+msgid "form.invest-user-details.error.SAME_ORGANIZATION_PROJECT"
+msgstr "You cannot invest with the organisation leading the project."
+
+# FR : L'adresse e-mail de l'organisation n'est pas valide.
+msgid "form.invest-user-details.error.ORGANIZATION_EMAIL_NOT_OK"
+msgstr "The organisation's email address is not valid."
+
+# FR : L'adresse e-mail de l'organisation est d&eacute;j&agrave; utilis&eacute;e.
+msgid "form.invest-user-details.error.ORGANIZATION_EMAIL_ALREADY_USED"
+msgstr "The organisation's email address is already in use."
+
+# FR : Le site web de l'organisation n'est pas d&eacute;fini.
+msgid "form.invest-user-details.error.ORGANIZATION_WEBSITE_EMPTY"
+msgstr "The organisation's website is not defined."
+
+# ############################## form - invest-poll ################################
+# FR : Ce qui m'a motiv&eacute;(e) &agrave; investir aujourd'hui&nbsp;:
+msgid "form.invest-poll.source.TITLE"
+msgstr "My reason for investing today:"
+
+# FR : Ce qui me donnerait envie d'investir sur ce projet&nbsp;:
+msgid "form.invest-poll.source.TITLE_VOTE"
+msgstr "What would make me want to invest in this project:"
+
+# FR : Je connais le(s) porteur(s) de projet
+msgid "form.invest-poll.source.OPTION_PROJECT_MANAGER"
+msgstr "I know the project leader(s)"
+
+# FR : Le projet fait partie d'un secteur qui m'int&eacute;resse
+msgid "form.invest-poll.source.OPTION_INTEREST"
+msgstr "The project in a sector that interests me"
+
+# FR : Je cherche &agrave; diversifier les placements de mon &eacute;pargne
+msgid "form.invest-poll.source.OPTION_SAVINGS"
+msgstr "I am looking to diversify my investments"
+
+# FR : Je cherche &agrave; investir dans un projet &agrave; impact positif
+msgid "form.invest-poll.source.OPTION_IMPACTS"
+msgstr "I am looking to invest in a positive impact project"
+
+# FR : Autre(s) :
+msgid "form.invest-poll.source.OPTION_OTHER"
+msgstr "Other:"
+
+# FR : J'ai connu cette lev&eacute;e de fonds via&nbsp;:
+msgid "form.invest-poll.known.TITLE"
+msgstr "I got to know this fundraiser via:"
+
+# FR : L'entrepreneur
+msgid "form.invest-poll.known.OPTION_PROJECT_MANAGER"
+msgstr "The entrepreneur"
+
+# FR : WE DO GOOD
+msgid "form.invest-poll.known.OPTION_WEDOGOOD"
+msgstr "WE DO GOOD"
+
+# FR : Un autre investisseur du projet
+msgid "form.invest-poll.known.OPTION_OTHER_INVESTOR"
+msgstr "Another investor in the project"
+
+# FR : Autre (presse...)
+msgid "form.invest-poll.known.OPTION_OTHER"
+msgstr "Other (press ...)"
+
+# FR : Je suis arriv&eacute;(e) sur la page de cette lev&eacute;e de fonds via&nbsp;:
+msgid "form.invest-poll.come-from.TITLE"
+msgstr "I found this fundraiser's page through:"
+
+# FR : Un mail du porteur de projet
+msgid "form.invest-poll.come-from.OPTION_MAIL"
+msgstr "An email from the project leader"
+
+# FR : Un message priv&eacute; sur Facebook, LinkedIn, Twitter...
+msgid "form.invest-poll.come-from.OPTION_SOCIAL_PRIVATE"
+msgstr "A private message on Facebook, LinkedIn, Twitter..."
+
+# FR : Une publication sur les r&eacute;seaux sociaux
+msgid "form.invest-poll.come-from.OPTION_SOCIAL_PUBLIC"
+msgstr "A social media post"
+
+# FR : La newsletter ou le site de WE DO GOOD
+msgid "form.invest-poll.come-from.OPTION_WEDOGOOD"
+msgstr "The WE DO GOOD newsletter or website"
+
+# FR : Un article de presse
+msgid "form.invest-poll.come-from.OPTION_PRESS"
+msgstr "A press article"
+
+# FR : Autre(s) :
+msgid "form.invest-poll.come-from.OPTION_OTHER"
+msgstr "Other:"
+
+# ############################## form - invest-poll-continuous ################################
+# FR : Je voudrais recevoir une notification&nbsp;:
+msgid "form.invest-poll-continuous.notifications.TITLE"
+msgstr "I would like to receive a notification:"
+
+# FR : Lorsqu'il sera possible d'investir sur les prochains
+msgid "form.invest-poll-continuous.notifications.OPTION_NEXT"
+msgstr "When it will be possible to invest in the next"
+
+# FR : Lorsqu'il sera possible d'investir sur une nouvelle th&eacute;matique (apiculture, &eacute;nergie, mobilit&eacute;, logement...)
+msgid "form.invest-poll-continuous.notifications.OPTION_NEW"
+msgstr "When it will be possible to invest in a new issue (beekeeping, energy, mobility, housing, etc.)"
+
+# FR : Je souhaiterais investir sur les projets d'&eacute;pargne positive, de mani&egrave;re&nbsp;:
+msgid "form.invest-poll-continuous.invest-rythm.TITLE"
+msgstr "I would like to invest in positive savings projects, on the following basis:"
+
+# FR : Ponctuelle
+msgid "form.invest-poll-continuous.invest-rythm.OPTION_PONCTUAL"
+msgstr "One-off"
+
+# FR : R&eacute;guli&egrave;re : mensuelle
+msgid "form.invest-poll-continuous.invest-rythm.OPTION_MONTHLY"
+msgstr "Regular: monthly"
+
+# FR : R&eacute;guli&egrave;re : trimestrielle
+msgid "form.invest-poll-continuous.invest-rythm.OPTION_QUARTERLY"
+msgstr "Regular: quarterly"
+
+# FR : Occasionnelle : &agrave; chaque fois qu'il est possible d'investir sur de nouveaux
+msgid "form.invest-poll-continuous.invest-rythm.OPTION_STOCK"
+msgstr "Occasional: whenever it is possible to invest in new"
+
+# FR : Autre
+msgid "form.invest-poll-continuous.invest-rythm.OPTION_OTHER"
+msgstr "Other"
+
+# FR : Comment avez-vous connu l'&eacute;pargne positive&nbsp;?
+msgid "form.invest-poll-continuous.known.TITLE"
+msgstr "How did you hear about positive savings?"
+
+# FR : Par WE DO GOOD
+msgid "form.invest-poll-continuous.known.OPTION_WEDOGOOD"
+msgstr "From WE DO GOOD"
+
+# FR : Par
+msgid "form.invest-poll-continuous.known.OPTION_BY"
+msgstr "From"
+
+# FR : Autre
+msgid "form.invest-poll-continuous.known.OPTION_OTHER"
+msgstr "Other"
+
+# ############################## /lemonway-document ################################
+# FR : Merci de nous contacter par chat ou par mail sur investir@wedogood.co.
+msgid "lemonway.document.CONTACT"
+msgstr "Please contact us through the chat or our e-mail address: investir@wedogood.co."
+
+# FR : Il manque des informations pour permettre la validation.
+msgid "lemonway.document.MISSING_INFO"
+msgstr "There is information missing to validate your account."
+
+# FR : Le document est re&ccedil;u mais pas encore analys&eacute;.
+msgid "lemonway.document.DOCUMENT_RECEIVED_NOT_ANALYZED"
+msgstr "The document has been received but has not been analyzed yet."
+
+# FR : Le document a &eacute;t&eacute; refus&eacute; par notre prestataire.
+msgid "lemonway.document.DOCUMENT_REJECTED"
+msgstr "The document has been rejected by our payment provider."
+
+# FR : Le document a &eacute;t&eacute; refus&eacute; par notre prestataire qui l'a jug&eacute; illisible.
+msgid "lemonway.document.DOCUMENT_REJECTED_ILLEGIBLE"
+msgstr "The document has been rejected by our payment provider, judging it illegible."
+
+# FR : Le document a &eacute;t&eacute; refus&eacute; par notre prestataire car le document a expir&eacute;.
+msgid "lemonway.document.DOCUMENT_REJECTED_EXPIRED"
+msgstr "The document has been rejected by our payment provider, judging it expired."
+
+# FR : Le document a &eacute;t&eacute; refus&eacute; par notre prestataire car ce n'est pas le bon document.
+msgid "lemonway.document.DOCUMENT_REJECTED_WRONG"
+msgstr "The document has been rejected by our payment provider, the type of document doesn't match."
+
+# FR : Le document a &eacute;t&eacute; refus&eacute; par notre prestataire car il ne correspond pas au propri&eacute;taire du porte-monnaie.
+msgid "lemonway.document.DOCUMENT_REJECTED_WRONG_OWNER"
+msgstr "The document has been rejected by our payment provider, the document doesn't match the wallet owner."
+
+# FR : Commentaire compl&eacute;mentaire de Lemon Way :
+msgid "lemonway.document.ADDITIONAL_COMMENT"
+msgstr "Additional comment from Lemon Way:"
+
+# FR : Pi&egrave;ce d'identit&eacute;
+msgid "lemonway.document.type.ID"
+msgstr "ID"
+
+# FR : Justificatif de domicile
+msgid "lemonway.document.type.PROOF_ADDRESS"
+msgstr "Proof of address"
+
+# FR : RIB
+msgid "lemonway.document.type.RIB"
+msgstr "Bank details"
+
+# FR : Passeport
+msgid "lemonway.document.type.PASSPORT"
+msgstr "Passport"
+
+# FR : Permis de r&eacute;sidence
+msgid "lemonway.document.type.RESIDENCY_PERMIT"
+msgstr "Residency permit"
+
+# FR : KBIS
+msgid "lemonway.document.type.KBIS"
+msgstr "Company KBIS"
+
+# FR : En attente de v&eacute;rification
+msgid "lemonway.document.status.WAITING"
+msgstr "Awaiting validation"
+
+# FR : En attente
+msgid "lemonway.document.status.PENDING"
+msgstr "Pending"
+
+# FR : Accept&eacute;
+msgid "lemonway.document.status.ACCEPTED"
+msgstr "Accepted"
+
+# FR : Refus&eacute;
+msgid "lemonway.document.status.REJECTED"
+msgstr "Rejected"
+
+# FR : Illisible
+msgid "lemonway.document.status.ILLEGIBLE"
+msgstr "Illegible"
+
+# FR : Expir&eacute;
+msgid "lemonway.document.status.EXPIRED"
+msgstr "Expired"
+
+# FR : Mauvais type
+msgid "lemonway.document.status.WRONG_TYPE"
+msgstr "Wrong type"
+
+# FR : Mauvaise personne
+msgid "lemonway.document.status.WRONG_OWNER"
+msgstr "Wrong owner"
+
+# FR : La pièce d'identité principale
+msgid "lemonway.document.details_MAIN_ID"
+msgstr "The main ID"
 
 # ############################## PROJECT COMMON ################################
 # THEME - projects/common/stats-public.php

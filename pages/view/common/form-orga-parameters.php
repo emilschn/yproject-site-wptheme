@@ -7,6 +7,12 @@
 	$fields_address = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_address );
 	$fields_admin = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_admin );
 	$WDGUser_current = WDGUser::current();
+
+	$form_feedback = FALSE;
+	if ( !empty( $_SESSION[ 'account_organization_form_feedback_' . $WDGOrganization->get_wpref() ] ) ) {
+		$form_feedback = $_SESSION[ 'account_organization_form_feedback_' . $WDGOrganization->get_wpref() ];
+
+	}
 ?>
 
 <form method="POST" class="<?php echo $page_controler->get_form_css_classes();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_details' ); ?>" novalidate>
@@ -18,20 +24,19 @@
 
 	<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
 	<div class="form-error-general align-left">
-		<?php _e( "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :", 'yproject' ); ?><br>
+		<?php _e( 'account.parameters.orga.ERROR', 'yproject' ); ?><br>
 		<?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
-			- <?php echo $error[ 'text' ]; ?><br>
+			<div class="wdg-message error">
+				<?php echo $error[ 'text' ]; ?>
+			</div>
 		<?php endforeach; ?>
-		<br><br>
-	</div>
 	<?php endif; ?>
 	<?php if ( !empty( $form_feedback[ 'success' ] ) ): ?>
-	<div class="form-success-general align-left">
 		<?php foreach ( $form_feedback[ 'success' ] as $message ): ?>
-			<?php echo $message; ?>
+			<div class="wdg-message confirm">
+				<?php echo $message; ?>
+			</div>
 		<?php endforeach; ?>
-		<br><br>
-	</div>
 	<?php endif; ?>
 
 	<?php foreach ( $fields_complete as $field ): ?>
@@ -39,7 +44,7 @@
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
 
-	<h2><?php _e( "Si&egrave;ge social" ); ?></h2>
+	<h2><?php _e( 'account.parameters.orga.HEAD_OFFICE', 'yproject' ); ?></h2>
 	<?php foreach ( $fields_address as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
@@ -55,12 +60,12 @@
 	<?php endif; ?>
 
 	<p class="align-left">
-		<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+		* <?php _e( 'common.REQUIRED_FIELDS', 'yproject' ); ?><br>
 	</p>
 
 	<div id="organization-details-form-buttons">
 		<button type="submit" class="button save red <?php if ( $page_controler->get_campaign() !== FALSE && !$page_controler->get_campaign()->is_preparing() ) { ?>confirm<?php } ?>">
-			<?php _e( "Enregistrer les modifications", 'yproject' ); ?>
+			<?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?>
 		</button>
 	</div>
 	

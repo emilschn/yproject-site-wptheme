@@ -37,7 +37,7 @@ $fields_complete = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field
 		
 		<div id="user-details-form-buttons">
 			
-			<button class="button save red" data-close="user-details" data-open="user-details-confirmation"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+			<button class="button save red" data-close="user-details" data-open="user-details-confirmation"><?php _e( 'common.SAVE', 'yproject' ); ?></button>
 			
 			<div class="loading align-center hidden">
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
@@ -52,5 +52,5 @@ $fields_complete = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field
 <?php
 $lightbox_content = ob_get_contents();
 ob_end_clean();
-echo do_shortcode('[yproject_lightbox_cornered id="user-details" title="'.__( "Validation de vos informations", 'yproject' ).'" autoopen="1"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
-echo do_shortcode('[yproject_lightbox_cornered id="user-details-confirmation" msgtype="valid"]'.__( "Donn&eacute;es enregistr&eacute;es ! Merci !", 'yproject' ).'[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="user-details" title="'.__( 'account.lightbox.VALIDATE_INFORMATION', 'yproject' ).'" autoopen="1"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="user-details-confirmation" msgtype="valid"]'.__( 'account.lightbox.DATA_SAVED', 'yproject' ).'[/yproject_lightbox_cornered]');

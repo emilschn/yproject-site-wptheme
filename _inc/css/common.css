@@ -143,7 +143,6 @@ button.red {
 .wdg-message {
 	margin: 20px 0px;
 	padding: 20px 0px;
-	text-transform: uppercase;
 	text-align: center;
 }
 .wdg-message.confirm {
@@ -421,17 +420,6 @@ nav#main > div#menu > a {
 	-webkit-transition: color 0.4s;
 	transition: color 0.4s;
 }
-@media screen and (max-width: 1230px) and (min-width: 998px) {
-	nav#main > div#menu > a {
-		margin: 0px 5px;
-		letter-spacing: 0px;
-	}
-}
-@media screen and (max-width: 1030px) and (min-width: 998px) {
-	nav#main > div#menu > a {
-		font-size: 14px;
-	}
-}
 
 nav#main > div#menu > a.only-inf997 {
 	display: none;
@@ -482,6 +470,22 @@ nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.cur
     transition-duration: 0.4s;
 }
 
+@media screen and (max-width: 1270px) and (min-width: 998px) {
+	nav#main > div#menu > a {
+		margin: 0px 5px;
+		letter-spacing: 0px;
+	}
+}
+@media screen and (max-width: 1070px) and (min-width: 998px) {
+	nav#main > div#menu > a {
+		font-size: 14px;
+	}
+}
+
+nav#main > div#menu > .wpml-ls {
+	display: inline-block;
+}
+
 .submenu-style{
     background-color: #FFFFFF; 
     border: 4px solid #E1E3E2;
@@ -509,6 +513,20 @@ nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.cur
 	text-transform: none;
 	padding: 8px;
 }
+
+#submenu-switch-lang {
+	position: relative;
+	float: right;
+	width: 100px;
+	top: 10px;
+	border: 0px;
+	right: 142px;
+	text-align: center;
+}
+#submenu-switch-lang li.active a {
+	font-weight: bold;
+}
+
 	
 	
 /* RECHERCHE */
@@ -712,6 +730,9 @@ ul.project-list a.needs-authentication:after {
 	#submenu-user { position: relative; top: 10px; left: 977px; }
 	#submenu-search { position: relative; top: 10px; left: 912px; }
 }
+@media screen and (max-width: 1020px) and (min-width: 998px) {
+	nav#main > div#menu > a:nth-child(3) { display: none; }
+}
 
 /*******************************************************************************
 <<<<<<< HEAD
@@ -835,6 +856,60 @@ footer > .footer-container > section > div {
 	float: left;
 	width: 32%;
 	margin: 0% 0.5%;
+}
+
+footer > .footer-container .select {
+	position: relative;
+	display: inline-block;
+	margin: 16px 0px;
+}
+footer > .footer-container .select select {
+	display: inline-block;
+	cursor: pointer;
+	width: 140px;
+	height: 50px;
+	padding: 8px 24px 8px 8px;
+	outline: 0;
+	border: 1px solid #ffffff;
+	border-radius: 0px;
+	background: #333333;
+	color: #ffffff;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-transform: uppercase;
+}
+footer > .footer-container .select select::-ms-expand {
+	display: none;
+}
+footer > .footer-container .select select:hover,
+footer > .footer-container .select select:focus {
+	color: #FFFFFF;
+	background: #333333;
+}
+footer > .footer-container .select select:disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+footer > .footer-container .select_arrow {
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    width: 0px;
+    height: 0px;
+    border: solid #ffffff;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+footer > .footer-container .select select:hover ~ .select_arrow,
+footer > .footer-container .select select:focus ~ .select_arrow {
+    border-color: #ffffff;
+}
+footer > .footer-container .select select:disabled ~ .select_arrow {
+    border-top-color: #cccccc;
 }
 
 footer form img {

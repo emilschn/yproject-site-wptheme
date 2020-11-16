@@ -1,5 +1,5 @@
 <?php 
-	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user;
+	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user, $sitepress;
 	if ($WDG_cache_plugin == null) {
 		$WDG_cache_plugin = new WDG_Cache_Plugin();
 	}
@@ -109,33 +109,51 @@
 		<nav id="main">
 			<div id="menu">
 				<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
-				<a href="<?php echo home_url( '/les-projets/' ); ?>" class="lines"><?php _e( "Les projets", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/epargne-positive/' ); ?>" class="lines"><?php _e( "&Eacute;pargne positive", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/financement/' ); ?>" class="lines"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/investissement/' ); ?>" class="lines"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/a-propos/vision/' ); ?>" class="lines"><?php _e( "Vision", 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/les-projets/' ); ?>" class="lines"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/epargne-positive/' ); ?>" class="lines"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/financement/' ); ?>" class="lines"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/investissement/' ); ?>" class="lines"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
+				<a href="<?php echo home_url( '/a-propos/vision/' ); ?>" class="lines"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
 
+				<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+					<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
+					<a href="#" id="btn-switch-lang">
+					<?php foreach ( $active_languages as $language_key => $language_item ): if ( $language_item[ 'active' ] ): ?>
+						<?php echo $language_item[ 'code' ]; ?>
+					<?php endif; endforeach; ?>
+					</a>
+				<?php endif; ?>
+				
 				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
-				<a href="#" class="btn-user not-connected inactive"><?php _e( "Connexion", 'yproject' ); ?></a>
+				<a href="#" class="btn-user not-connected inactive"><?php _e( 'common.CONNECTION', 'yproject' ); ?></a>
 				<a href="#" id="btn-burger" class="only-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/menu-burger.png" alt="MENU" /></a>
 				
+				<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+				<div id="submenu-switch-lang" class="submenu-style hidden">
+					<ul class="submenu-list">
+					<?php foreach ( $active_languages as $language_key => $language_item ): ?>
+						<li <?php if ( $language_item[ 'active' ] ) { echo 'class="active"'; } ?>><a href="<?php echo $language_item[ 'url' ]; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
+					<?php endforeach; ?>
+					</ul>
+				</div>
+				<?php endif; ?>
 				
 				<?php /* Affichage quand clic sur Rechercher */ ?>
 				<div id="submenu-search" class="submenu-style hidden">
 					<div class="only-inf997">
-						<a href="<?php echo home_url( '/mon-compte/' ); ?>"><?php _e( "Mon compte", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/les-projets/' ); ?>"><?php _e( "Les projets", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( "&Eacute;pargne positive", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/financement/' ); ?>"><?php _e( "Financer mon projet", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/investissement/' ); ?>"><?php _e( "Investir en royalties", 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/a-propos/vision/' ); ?>"><?php _e( "Vision", 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/mon-compte/' ); ?>"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/les-projets/' ); ?>"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/financement/' ); ?>"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/investissement/' ); ?>"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
+						<a href="<?php echo home_url( '/a-propos/vision/' ); ?>"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
 						<?php if ( is_user_logged_in() ): ?>
 							<br>
-							<a href="<?php echo wp_logout_url(); ?>"><?php _e( "Me d&eacute;connecter", 'yproject' ); ?></a>
+							<a href="<?php echo wp_logout_url(); ?>"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
 						<?php endif; ?>
 					</div>
 					
-					<input type="text" id="submenu-search-input" placeholder="<?php _e("Rechercher un projet", 'yproject'); ?>" />
+					<input type="text" id="submenu-search-input" placeholder="<?php _e( 'menu.SEARCH_PROJECT', 'yproject' ); ?>" />
 					<ul class="submenu-list">
 							<div class="empty-list-info hidden">
 								<?php _e( "Vous ne trouvez pas le projet que vous cherchez ? Il est peut-&ecirc;tre priv&eacute;.", 'yproject' ); ?><br>
@@ -155,36 +173,35 @@
 					<div class="menu-connection-forms hidden">
 						<?php /* Au clic picto Compte, afficher menu connexion */ ?>
 						<div class="only-inf997">
-							<a href="<?php echo home_url( '/connexion/' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Connexion", 'yproject' ); ?></span></a>
+							<a href="<?php echo home_url( '/connexion/' ); ?>" class="box_connection_buttons button red"><span><?php _e( 'common.CONNECTION', 'yproject' ); ?></span></a>
 						</div>
 
 						<form method="post" action="<?php echo home_url( "/connexion/" ); ?>" name="login-form" class="sidebar-login-form model-form hidden-inf997">
 							<br>
-							<span id="title-connection"><?php _e('Connexion', 'yproject'); ?></span>
-							<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e('E-mail ou identifiant', 'yproject'); ?>" value="" />
+							<span id="title-connection"><?php _e( 'common.CONNECTION', 'yproject' ); ?></span>
+							<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e( 'login.EMAIL_OR_LOGIN', 'yproject' ); ?>" value="" />
 							<br>
 
-							<input class="input_connection" id="password" type="password" name="pwd" placeholder="Mot de passe" value="" />
-							<div class="submit-center" style="display: none;">             
+							<input class="input_connection" id="password" type="password" name="pwd" placeholder="<?php _e( 'common.PASSWORD', 'yproject' ); ?>" value="" />
+							<div class="submit-center" style="display: none;">
 								<input type="submit" name="wp-submit" class="input_submit button red" id="connect" value="OK"/>
 								<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 								<input type="hidden" name="login-form" value="1" />
 							</div>   
 
 							<div>
-								<?php $page_forgotten = get_page_by_path('mot-de-passe-oublie'); ?>
-								<a href="<?php echo get_permalink($page_forgotten->ID); ?>" class="forgotten"><?php _e('(Mot de passe oubli&eacute;)', 'yproject');?></a>
+								<a href="<?php echo home_url( '/mot-de-passe-oublie/' ); ?>" class="forgotten">(<?php _e( 'login.FORGOTTEN_PASSWORD', 'yproject' );?>)</a>
 							</div>
 
 							<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
-							<label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
+							<label><?php _e( 'login.REMEMBER_ME', 'yproject' ); ?></label>
 							<br><br>
 						</form>
 
 						<hr class="login-separator">
 
 						<div class="box_connection_buttons blue">
-							<a href="#" class="social_connect_login_facebook" data-redirect="<?php echo WDGUser::get_login_redirect_page(); ?>"><span><?php _e('Se connecter avec Facebook', 'yproject'); ?></span></a>
+							<a href="#" class="social_connect_login_facebook" data-redirect="<?php echo WDGUser::get_login_redirect_page(); ?>"><span><?php _e( 'login.LOG_IN_FACEBOOK', 'yproject' ); ?></span></a>
 						</div>
 						<div class="social_connect_login_facebook_loading align-center hidden">
 							<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
@@ -193,17 +210,17 @@
 						<hr class="login-separator">
 
 						<div>
-							<a href="<?php echo home_url( '/inscription/' ); ?>" class="box_connection_buttons button red"><span><?php _e( "Cr&eacute;er un compte", 'yproject' ); ?></span></a>
+							<a href="<?php echo home_url( '/inscription/' ); ?>" class="box_connection_buttons button red"><span><?php _e( 'login.CREATE_ACCOUNT', 'yproject' ); ?></span></a>
 						</div>
 					</div>
 					
 					<div class="menu-connected hidden">
-						<span id="submenu-user-hello"><span><?php _e("Bonjour", 'yproject'); ?></span> <span class="hello-user-name"></span> !</span>
+						<span id="submenu-user-hello"><span><?php _e( 'account.HELLO', 'yproject' ); ?></span> <span class="hello-user-name"></span> !</span>
 						<ul class="submenu-list">
-							<li><a href="<?php echo home_url( '/mon-compte/' ); ?>"><?php _e("Mon compte", 'yproject'); ?></a></li>
+							<li><a href="<?php echo home_url( '/mon-compte/' ); ?>"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a></li>
 						</ul>
 						<div id="button-logout" class="box_connection_buttons red">
-							<a href="" class="button red"><?php _e("Me d&eacute;connecter", 'yproject'); ?></a>
+							<a href="" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
 						</div>
 					</div>
 
@@ -221,14 +238,14 @@
 		?>
 		<div id="validate-terms" class="wdg-lightbox">
 			<div class="wdg-lightbox-padder">
-				<span>Mise &agrave; jour des conditions g&eacute;n&eacute;rales d&apos;utilisation</span>
+				<span><?php _e( 'terms.UPDATE', 'yproject' ); ?></span>
 				<div class="validate-terms-excerpt">
 					<?php echo wpautop( stripslashes( $edd_options[WDGUser::$edd_general_terms_excerpt])); ?>
 				</div>
 				<form method="POST">
 					<input type="hidden" name="action" value="validate-terms" />
-					<label for="validate-terms-check-header"><input type="checkbox" id="validate-terms-check-header" name="validate-terms-check" /> J&apos;accepte les conditions g&eacute;n&eacute;rales d&apos;utilisation</label><br />
-					<div style="text-align: center;"><input type="submit" value="Valider" class="button" /></div>
+					<label for="validate-terms-check-header"><input type="checkbox" id="validate-terms-check-header" name="validate-terms-check" /> <?php _e( 'terms.ACCEPT', 'yproject' ); ?></label><br />
+					<div style="text-align: center;"><input type="submit" value="<?php _e( 'common.VALIDATE', 'yproject' ); ?>" class="button" /></div>
 				</form> 
 			</div>
 		</div>
@@ -245,9 +262,9 @@
 				}
 				?>
 				<div class="wdg-lightbox-padder">
-					<?php _e( "Bonjour", 'yproject' ); ?> <?php echo $user_name_str; ?>
+					<?php _e( 'account.HELLO', 'yproject' ); ?> <?php echo $user_name_str; ?>
 					<?php if ( ATCF_CrowdFunding::get_platform_context() == "wedogood" ): ?>
-					<?php _e( "et bienvenue sur WE DO GOOD !", 'yproject' ); ?>
+					<?php _e( 'menu.WELCOME_TO_WEDOGOOD', 'yproject' ); ?>
 					<?php endif; ?>
 				</div>
 			</div>

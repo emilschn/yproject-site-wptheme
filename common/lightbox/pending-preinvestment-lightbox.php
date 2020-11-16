@@ -15,18 +15,18 @@ $WDGUserPendingPreinvestment = $page_controler->get_show_user_pending_preinvestm
 	</p>
 	
 	<p class="align-justify">
-		<?php echo sprintf( __( "Vous aviez pr&eacute;-investi %s &euro; sur le projet %s.", 'yproject' ), $WDGUserPendingPreinvestment->get_saved_amount(), $WDGUserPendingPreinvestment->get_saved_campaign()->data->post_title ); ?>
+		<?php echo sprintf( __( 'invest.lightbox.preinvestment.INTRO', 'yproject' ), $WDGUserPendingPreinvestment->get_saved_amount(), $WDGUserPendingPreinvestment->get_saved_campaign()->data->post_title ); ?>
 	</p>
 	
 	<p class="align-justify">
-		<?php _e( "A l'issue de l'&eacute;valuation, les conditions de la lev&eacute;e de fonds ont &eacute;t&eacute; modifi&eacute;es :", 'yproject' ); ?><br>
+		<?php _e( 'invest.lightbox.preinvestment.DESCRIPTION', 'yproject' ); ?><br>
 		<?php echo $WDGUserPendingPreinvestment->get_saved_campaign()->contract_modifications(); ?>
 	</p>
 	
 	<form class="db-form v3">
-		<a href="<?php echo home_url( '/terminer-preinvestissement/?validate=1' ) . '&investment_id=' . $WDGUserPendingPreinvestment->get_id(); ?>" class="button red"><?php _e( "Confirmer mon investissement", 'yproject' ); ?></a>
+		<a href="<?php echo home_url( '/terminer-preinvestissement/?validate=1' ) . '&investment_id=' . $WDGUserPendingPreinvestment->get_id(); ?>" class="button red"><?php _e( 'invest.lightbox.CONFIRM', 'yproject' ); ?></a>
 		<br><br>
-		<a href="<?php echo home_url( '/terminer-preinvestissement/?cancel=1' ) . '&investment_id=' . $WDGUserPendingPreinvestment->get_id(); ?>" class="button transparent"><?php _e( "Annuler mon investissement", 'yproject' ); ?></a>
+		<a href="<?php echo home_url( '/terminer-preinvestissement/?cancel=1' ) . '&investment_id=' . $WDGUserPendingPreinvestment->get_id(); ?>" class="button transparent"><?php _e( 'invest.lightbox.CANCEL', 'yproject' ); ?></a>
 	</form>
 	
 </div>
@@ -34,4 +34,4 @@ $WDGUserPendingPreinvestment = $page_controler->get_show_user_pending_preinvestm
 <?php
 $lightbox_content = ob_get_contents();
 ob_end_clean();
-echo do_shortcode('[yproject_lightbox_cornered id="pending-preinvestment" title="'.__( "Modification de votre investissement", 'yproject' ).'" autoopen="1" catchclick="0"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="pending-preinvestment" title="'.__( 'invest.lightbox.preinvestment.TITLE', 'yproject' ).'" autoopen="1" catchclick="0"]' . $lightbox_content . '[/yproject_lightbox_cornered]');

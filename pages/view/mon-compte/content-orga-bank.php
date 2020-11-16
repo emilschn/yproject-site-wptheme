@@ -3,7 +3,7 @@
 ?>
 
 
-<h2><?php _e( "Coordonn&eacute;es bancaires de", 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
+<h2><?php _e( 'account.bank.orga.BANK_DETAILS_OF', 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
 
 
 <?php 

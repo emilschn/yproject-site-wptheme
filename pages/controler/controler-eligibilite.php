@@ -25,11 +25,17 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 			$payment_token = filter_input( INPUT_GET, 'response_wkToken' );
 			if ( $input_is_success === '1' ) {
 				if ( !empty( $payment_token ) ) {
-					$new_status = 'paid';
-					$new_step = 'project-complete';
-					$new_authorization = 'can-create-db';
 					if ( $api_result->authorization != 'can-create-db' ) {
+						// Données à enregistrer en double
+						$new_status = 'paid';
+						$new_step = 'project-complete';
+						$new_authorization = 'can-create-db';
+
+						// Doublon de données
 						$metadata_decoded = json_decode( $api_result->metadata );
+						$metadata_decoded->status = $new_status;
+						$metadata_decoded->step = $new_step;
+						$metadata_decoded->authorization = $new_authorization;
 	
 						// Notif réception de paiement par carte
 						$datetime = new DateTime();
@@ -47,6 +53,9 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 						// Envoi notif à Zapier
 						$api_result = WDGWPREST_Entity_Project_Draft::get( $input_guid );
 						NotificationsZapier::send_prospect_setup_payment_received( $api_result );
+
+						// Ajout test dans 3 jours si TBPP créé
+						WDGQueue::add_notifications_dashboard_not_created( $api_result->id );
 					}
 				}
 			

@@ -96,14 +96,18 @@ $campaign_categories_str = $campaign->get_categories_str();
 	<div class="project-banner-title padder">
 		<?php if (!empty($lang_list)): ?>
 			<select name="lang">
-				<?php global $locale; $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
+				<?php
+				global $locale, $wpml_request_handler;
+				$language_cookie_lang = $wpml_request_handler->get_cookie_lang();
+				$active_languages = apply_filters( 'wpml_active_languages', NULL );
+				?>
 				<option value="<?php echo site_url( '/' . $campaign->get_url() . '/' ); ?>" <?php selected( $active_languages[ 'fr' ][ 'active' ] ); ?>>Fran&ccedil;ais</option>
 
 				<?php foreach ($lang_list as $lang): ?>
 					<?php
 					$language_key = substr( $lang, 0, 2 );
 					$language_name = '';
-					$language_is_active = ( $locale == $lang || $locale == $language_key );
+					$language_is_active = ( $language_cookie_lang == $language_key );
 					if ( isset( $active_languages[ $language_key ] ) ) {
 						$language_item = $active_languages[ $language_key ];
 						$language_name = $language_item[ 'native_name' ];
