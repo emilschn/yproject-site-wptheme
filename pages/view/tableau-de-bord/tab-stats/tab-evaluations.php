@@ -1,5 +1,6 @@
 <?php
 global $stylesheet_directory_uri, $campaign_stats;
+$page_controler = WDG_Templates_Engine::instance()->get_controler(); 
 $goal = $campaign_stats['goal']; // objectif financier de la campagne
 $average_median_for_campaign = $campaign_stats['average_median_for_campaign']; // montant de la campagne moyenne
 
@@ -18,10 +19,12 @@ $vote_rates = $vote['rates']; // données impact et cohérence du projet
 $vote_rates_project = $vote_rates['project']; // données notation du projet
 $vote_risk = $vote['risk']; // données rique
 $vote_more_info = $vote['more_info']; // liste des 'autres informations'
+
+$status = $page_controler->get_campaign_status();
 ?>
 
 <!-- ONGLET EVALUATIONS -->
-<div id="stat-subtab-evaluations" class="stat-subtab">
+<div id="stat-subtab-evaluations" class="stat-subtab <?php if ( $status != ATCF_Campaign::$campaign_status_vote ): ?> hidden<?php endif; ?>">
 
 	<!-- Résumé -->
 	<section id="eval-resume">
