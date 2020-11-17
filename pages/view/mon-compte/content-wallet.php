@@ -39,7 +39,7 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 	<?php else: ?>
 		<h3><?php _e( "Recharger mon porte-monnaie par virement", 'yproject' ); ?></h3>
 		<p class="align-justify">
-			<?php _e( "Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement.", 'yproject' ); ?><br>
+			<?php _e( "Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement. Vous pouvez utiliser votre carte pour investir sur les projets depuis leur page de pr&eacute;sentation.", 'yproject' ); ?><br>
 			<?php _e( "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom", 'yproject' ); ?><br><br>
 		</p>
 

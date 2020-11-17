@@ -38,7 +38,7 @@ $pending_amount = $WDGOrganization->get_pending_rois_amount();
 	<?php else: ?>
 		<h3><?php _e( "Recharger le porte-monnaie par virement", 'yproject' ); ?></h3>
 		<p class="align-justify">
-			<?php _e( "Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement.", 'yproject' ); ?><br><br>
+			<?php _e( "Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement.  Vous pouvez utiliser votre carte pour investir sur les projets depuis leur page de pr&eacute;sentation.", 'yproject' ); ?><br><br>
 		</p>
 
 		<strong><?php _e( "Compte bancaire de destination", 'yproject' ); ?></strong><br>
