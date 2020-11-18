@@ -1082,7 +1082,7 @@ msgstr "View my authentication status"
 msgid "account.wallet.SEND_MONEY_TO_WALLET"
 msgstr "Make a bank transfer to my wallet"
 
-# FR : Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement.
+# FR - TODO : Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement.   Vous pouvez utiliser votre carte pour investir sur les projets depuis leur page de pr&eacute;sentation.
 msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER"
 msgstr "To prevent money laundering, you can only transfer money to your wallet through a bank transfer."
 
