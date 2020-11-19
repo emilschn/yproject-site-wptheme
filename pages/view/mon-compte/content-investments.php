@@ -2,8 +2,13 @@
 global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGUser_displayed = $page_controler->get_current_user();
+$WDGUser_current = WDGUser::current();
+
 $list_current_organizations = $page_controler->get_current_user_organizations();
 $list_intentions_to_confirm = $page_controler->get_intentions_to_confirm();
+
+$has_wire_investments_0 = $WDGUser_displayed->has_wire_investments_0();
+$wire_investments_0 = $WDGUser_displayed->get_wire_investments_0();
 ?>
 
 <h2><?php _e( "Investissements de", 'yproject' ); ?> <?php echo $page_controler->get_user_name(); ?></h2>
@@ -14,6 +19,24 @@ $list_intentions_to_confirm = $page_controler->get_intentions_to_confirm();
 	<?php _e( "Retrouvez celles de vos organisations en utilisant le menu.", 'yproject' ); ?>
 	<?php endif; ?>
 </p>
+
+<?php if ( $WDGUser_current->is_admin() && $has_wire_investments_0 ): ?>		
+		<div class="admin-theme">
+			Attention, il y a des investissements de 0€ : 
+			<?php foreach ( $wire_investments_0 as $wire_investment ): ?>
+				<br>
+				<?php 
+				echo $wire_investment->ID;
+				$WDGInvestment = new WDGInvestment( $wire_investment->ID ); 
+				$campaign = new ATCF_Campaign($WDGInvestment->get_campaign());
+				echo $campaign->get_name();
+				
+				?>
+
+			
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
 
 
 <div id="investment-synthesis-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="investment-synthesis hidden">
