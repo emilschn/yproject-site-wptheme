@@ -21,6 +21,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private $display_user_override_organization_manager_mail;
 
 	private $wallet_to_bankaccount_result;
+	private $change_wire_amount_result;
 	private $form_user_details;
 	private $form_user_password;
 	private $form_user_delete;
@@ -57,6 +58,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		// Si on met à jour le RIB, il faut recharger l'utilisateur en cours
 		$reload = WDGFormUsers::register_rib();
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
+		$this->change_wire_amount_result = WDGFormUsers::change_wire_amount();
 		$this->display_user_override_not_found = FALSE;
 		$this->display_user_override_organization_manager_mail = FALSE;
 		$this->init_current_user( $reload );
@@ -581,6 +583,15 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	public function get_wallet_to_bankaccount_result() {
 		return $this->wallet_to_bankaccount_result;
 	}
+
+
+/******************************************************************************/
+// CHANGE WIRE AMOUNT
+/******************************************************************************/
+	public function get_change_wire_amount_result() {
+		return $this->change_wire_amount_result;
+	}
+
 
 
 /******************************************************************************/
