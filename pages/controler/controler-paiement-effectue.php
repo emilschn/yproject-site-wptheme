@@ -134,7 +134,15 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		if ( empty( $payment_return ) ) {
 			$payment_return = 'error-contact';
 		}
-		if ( $payment_return == 'publish' ) {
+		if (
+				$payment_return == 'publish'
+				|| 
+				(
+					$payment_return == 'pending'
+					&&
+					( $this->current_meanofpayment == WDGInvestment::$meanofpayment_wire || $this->current_meanofpayment == WDGInvestment::$meanofpayment_check )
+				) 
+			) {
 			$this->page_analytics_data[ 'payment' ] = array();
 			// ID de la transaction
 			$this->page_analytics_data[ 'payment' ][ 'event_label' ] = $this->current_investment->get_id();
