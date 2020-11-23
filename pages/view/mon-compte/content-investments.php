@@ -2,8 +2,16 @@
 global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGUser_displayed = $page_controler->get_current_user();
+$WDGUser_current = WDGUser::current();
+
 $list_current_organizations = $page_controler->get_current_user_organizations();
 $list_intentions_to_confirm = $page_controler->get_intentions_to_confirm();
+
+if ( $WDGUser_current->is_admin() ){
+	$has_pending_wire_investments = $WDGUser_displayed->has_pending_wire_investments();
+	$pending_wire_investments = $WDGUser_displayed->get_pending_wire_investments();
+}
+
 ?>
 
 <h2><?php _e( "Investissements de", 'yproject' ); ?> <?php echo $page_controler->get_user_name(); ?></h2>
@@ -11,9 +19,42 @@ $list_intentions_to_confirm = $page_controler->get_intentions_to_confirm();
 <p>
 	<?php _e( "Les informations ci-dessous sont celles de votre compte personnel.", 'yproject' ); ?><br>
 	<?php if ( count( $list_current_organizations ) > 0 ): ?>
-	<?php _e( "Retrouvez celles de vos organisations en utilisant le menu.", 'yproject' ); ?>
+		<?php _e( "Retrouvez celles de vos organisations en utilisant le menu.", 'yproject' ); ?>
 	<?php endif; ?>
 </p>
+
+<?php if ( $WDGUser_current->is_admin() && $has_pending_wire_investments ): ?>		
+	<div class="admin-theme">
+		<strong><?php _e( "Virements en attente: ", 'yproject' ); ?></strong><br>
+		<?php foreach ( $pending_wire_investments as $wire_investment ): ?>
+			<br>
+			<?php 
+				$WDGInvestment = new WDGInvestment( $wire_investment->ID ); 	
+				$post_campaign = atcf_get_campaign_post_by_payment_id($wire_investment->ID);
+				$campaign = atcf_get_campaign($post_campaign);				
+			?>
+			<strong><?php _e( "Identifiants du virement :", 'yproject' ); ?></strong><br>
+			<?php echo $campaign->get_name(); ?><br>
+			<?php echo $WDGInvestment->get_saved_date(); ?><br>
+			<?php $lw_wallet_amount = intval($WDGInvestment->get_saved_amount()) ?>
+			<form action="" method="POST" enctype="multipart/form-data" class="db-form align-left">
+				<input type="hidden" name="action" value="change_wire_value">
+				<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->get_wpref(); ?>">
+				<input type="hidden" name="investment_id" value="<?php echo $wire_investment->ID; ?>">
+				<input type="hidden" name="payment_key" value="<?php echo $WDGInvestment->get_payment_key(); ?>">
+				<input type="hidden" name="campaign_id" value="<?php echo $campaign->ID; ?>">
+				<!-- TODO : essayer de récupérer dans les logs (?) le vrai montant du virement  -->
+				<label for="amount_of_wire"><?php echo sprintf( __( "Montant du virement :", 'yproject' ) ); ?></label>
+				<span class="field-value">
+					<input type="text" name="amount_to_wire" id="amount_to_wire" value="<?php echo $lw_wallet_amount; ?>" class="format-number">
+					<span class="field-money">&euro;</span>
+				</span>
+				<button type="submit" class="button blue"><?php _e( "Modifier le montant du virement", 'yproject' ); ?></button>
+			</form>
+
+		<?php endforeach; ?>
+	</div>
+<?php endif; ?>
 
 
 <div id="investment-synthesis-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="investment-synthesis hidden">
