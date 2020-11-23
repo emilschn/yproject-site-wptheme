@@ -16,15 +16,6 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 		<?php endif; ?>
 	<?php endif; ?>
 
-	<!-- <?php if ( $page_controler->get_change_wire_amount_result() != FALSE ): ?>
-		<?php if ( $page_controler->get_change_wire_amount_result() === TRUE ): ?>
-			<div class="success">Mise à jour du virement effectué</div>
-		<?php else: ?>
-			<div class="wdg-message error">
-				<?php echo $page_controler->get_change_wire_amount_result(); ?>
-			</div>
-		<?php endif; ?>
-	<?php endif; ?> -->
 	<div>
 
 		<div id="item-body">
