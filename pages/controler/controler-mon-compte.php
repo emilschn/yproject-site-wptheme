@@ -41,6 +41,24 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 			wp_redirect( home_url( '/connexion/' ) . '?redirect-page=mon-compte' );
 			exit();
 		}
+
+		// Si l'utilisateur change la langue et l'enregistre,
+		// Raccourci ici pour rediriger vers la bonne langue
+		$action_posted = filter_input( INPUT_POST, 'action' );
+		$input_language = filter_input( INPUT_POST, 'language' );
+		global $locale;
+		if ( !empty( $input_language ) && substr( $locale, 0, 2 ) != $input_language && $action_posted == WDG_Form_User_Details::$name ) {
+			$this->init_current_user( FALSE );
+			$form_user_details = new WDG_Form_User_Details( $this->current_user->get_wpref(), WDG_Form_User_Details::$type_extended );
+			$form_user_details->postForm();
+
+			global $post;
+			$language_permalink = apply_filters( 'wpml_permalink', get_permalink( $post->ID ), $input_language );
+			if ( !empty( $language_permalink ) ) {
+				wp_redirect( $language_permalink );
+				//exit();
+			}
+		}
 		
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'user-password' );

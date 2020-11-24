@@ -13,19 +13,19 @@ $summary_data = $page_controler->get_summary_data();
 		<?php foreach ( $summary_data[ 'turnover_by_month' ] as $month_name => $month_turnover_amount ): ?>
 			<tr>
 				<td><?php echo $month_name. ' : '; ?></td>
-				<td class="align-right"><?php echo YPUIHelpers::display_number( $month_turnover_amount ); ?> &euro;</td>
+				<td class="align-right"><?php echo UIHelpers::format_number( $month_turnover_amount ); ?> &euro;</td>
 			</tr>
 		<?php endforeach; ?>
 
 		<tr class="bold">
 			<td><?php _e( "Total du chiffre d'affaires d&eacute;clar&eacute; :", 'yproject' ); ?></td>
-			<td class="align-right"><?php echo YPUIHelpers::display_number( $summary_data[ 'turnover_total' ] ); ?> &euro;</td>
+			<td class="align-right"><?php echo UIHelpers::format_number( $summary_data[ 'turnover_total' ] ); ?> &euro;</td>
 		</tr>
 
 		<?php if ( !empty( $summary_data[ 'amount_royalties' ] ) ): ?>
 			<tr>
 				<td><?php echo sprintf( __( "Royalties sur le chiffre d'affaires d&eacute;clar&eacute; (%s %s) :", 'yproject' ), YPUIHelpers::display_number( $summary_data[ 'percent_royalties' ] ), '%' ); ?></td>
-				<td class="align-right"><?php echo YPUIHelpers::display_number( $summary_data[ 'amount_royalties' ] ); ?> &euro;</td>
+				<td class="align-right"><?php echo UIHelpers::format_number( $summary_data[ 'amount_royalties' ] ); ?> &euro;</td>
 			</tr>
 		<?php endif; ?>
 
@@ -38,16 +38,18 @@ $summary_data = $page_controler->get_summary_data();
 			
 			<?php foreach ( $summary_data[ 'adjustments' ] as $adjustment_obj ): ?>
 				<tr>
-					<td><?php _e( "Raison :", 'yproject' ); ?></td>
-					<td><?php echo $adjustment_obj[ 'message_organization' ]; ?></td>
+					<td colspan="2"><?php _e( "Raison :", 'yproject' ); ?></td>
+				</tr>
+				<tr>
+					<td colspan="2"><?php echo $adjustment_obj[ 'message_organization' ]; ?></td>
 				</tr>
 				<tr>
 					<td><?php _e( "Diff&eacute;rentiel de CA constat&eacute; lors de l'ajustement :", 'yproject' ); ?></td>
-					<td><?php echo UIHelpers::format_number( $adjustment_obj[ 'turnover_difference' ] ); ?> &euro;</td>
+					<td class="align-right"><?php echo UIHelpers::format_number( $adjustment_obj[ 'turnover_difference' ] ); ?> &euro;</td>
 				</tr>
 				<tr>
 					<td><?php _e( "Montant de l'ajustement :", 'yproject' ); ?></td>
-					<td><?php echo UIHelpers::format_number( $adjustment_obj[ 'amount' ] ); ?> &euro;</td>
+					<td class="align-right"><?php echo UIHelpers::format_number( $adjustment_obj[ 'amount' ] ); ?> &euro;</td>
 				</tr>
 				<tr><td colspan="2"><br></td></tr>
 			<?php endforeach; ?>
@@ -59,7 +61,7 @@ $summary_data = $page_controler->get_summary_data();
 		<?php if ( !empty( $summary_data[ 'amount_royalties_with_adjustment' ] ) ): ?>
 			<tr class="bold">
 				<td><?php _e( "Total de royalties &agrave; verser :", 'yproject' ); ?></td>
-				<td class="align-right"><?php echo YPUIHelpers::display_number( $summary_data[ 'amount_royalties_with_adjustment' ] ); ?> &euro;</td>
+				<td class="align-right"><?php echo UIHelpers::format_number( $summary_data[ 'amount_royalties_with_adjustment' ] ); ?> &euro;</td>
 			</tr>
 		<?php endif; ?>
 
@@ -67,27 +69,27 @@ $summary_data = $page_controler->get_summary_data();
 			<tr>
 				<td>
 					<?php
-					echo sprintf( __( "Frais de gestion (%s %s HT", 'yproject' ), YPUIHelpers::display_number( $summary_data[ 'commission_percent_without_tax' ] ), '%' );
+					echo sprintf( __( "Frais de gestion (%s %s HT", 'yproject' ), UIHelpers::format_number( $summary_data[ 'commission_percent_without_tax' ] ), '%' );
 					if ( !empty( $summary_data[ 'minimum_commission_without_tax' ] ) ):
-						echo sprintf( __( ", min. %s € HT", 'yproject' ), YPUIHelpers::display_number( $summary_data[ 'minimum_commission_without_tax' ] ) );
+						echo sprintf( __( ", min. %s € HT", 'yproject' ), UIHelpers::format_number( $summary_data[ 'minimum_commission_without_tax' ] ) );
 					endif;
 					_e( ") :", 'yproject' );
 					?>
 				</td>
-				<td class="align-right"><?php echo YPUIHelpers::display_number( $summary_data[ 'commission_without_tax' ] ); ?> &euro;</td>
+				<td class="align-right"><?php echo UIHelpers::format_number( $summary_data[ 'commission_without_tax' ] ); ?> &euro;</td>
 			</tr>
 		<?php endif; ?>
 
 		<?php if ( !empty( $summary_data[ 'commission_tax' ] ) ): ?>
 			<tr>
 				<td><?php _e( "TVA sur frais de gestion (20 %) :", 'yproject' ); ?></td>
-				<td class="align-right"><?php echo YPUIHelpers::display_number( $summary_data[ 'commission_tax' ] ); ?> &euro;</td>
+				<td class="align-right"><?php echo UIHelpers::format_number( $summary_data[ 'commission_tax' ] ); ?> &euro;</td>
 			</tr>
 		<?php endif; ?>
 
 		<tr class="bold">
 			<td><?php _e( "Montant total &agrave; r&eacute;gler :", 'yproject' ); ?></td>
-			<td class="align-right"><?php echo YPUIHelpers::display_number( $summary_data[ 'amount_to_pay' ] ); ?> &euro;</td>
+			<td class="align-right"><?php echo UIHelpers::format_number( $summary_data[ 'amount_to_pay' ] ); ?> &euro;</td>
 		</tr>
 	</table>
 	<br>

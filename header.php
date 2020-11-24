@@ -132,9 +132,10 @@
 				<div id="submenu-switch-lang" class="submenu-style hidden">
 					<ul class="submenu-list">
 					<?php foreach ( $active_languages as $language_key => $language_item ): ?>
-						<li <?php if ( $language_item[ 'active' ] ) { echo 'class="active"'; } ?>><a href="<?php echo $language_item[ 'url' ]; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
+						<li <?php if ( $language_item[ 'active' ] ) { echo 'class="active"'; } ?>><a href="<?php echo $language_item[ 'url' ]; ?>" data-key="<?php echo $language_key; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
 					<?php endforeach; ?>
 					</ul>
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" class="hidden">
 				</div>
 				<?php endif; ?>
 				

@@ -376,6 +376,7 @@ var WDGNavFunctions = (function($) {
 	return {
 
 		isConnectionChecked: false,
+		currentHref: '',
 		
 		init: function() {
 			
@@ -495,6 +496,23 @@ var WDGNavFunctions = (function($) {
 			$( '#menu #btn-switch-lang' ).click( function() {
 				$( '#submenu-switch-lang' ).toggle();
 			} );
+			$( '#submenu-switch-lang a' ).click( function( e ) {
+				e.preventDefault();
+				$( '#submenu-switch-lang ul' ).hide();
+				$( '#submenu-switch-lang img' ).show();
+				WDGNavFunctions.currentHref = $( this ).attr( 'href' );
+				$.ajax({
+					'type' : "POST",
+					'url' : ajax_object.ajax_url,
+					'data': {
+						'action':'save_user_language',
+						'language_key':$( this ).data( 'key' )
+					}
+				}).always(function() {
+					window.location = WDGNavFunctions.currentHref;
+				});
+			} );
+
 			$( '#footer-switch-lang' ).change( function() {
 				window.location = $( this ).val();
 			} );

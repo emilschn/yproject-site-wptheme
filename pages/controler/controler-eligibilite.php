@@ -81,5 +81,13 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 	public function get_init_guid() {
 		return $this->guid;
 	}
+
+	public function get_init_locale() {
+		global $locale;
+		if ( empty( $locale ) ) {
+			return 'fr_FR';
+		}
+		return $locale;
+	}
 	
 }

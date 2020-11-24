@@ -1086,6 +1086,10 @@ msgstr "Make a bank transfer to my wallet"
 msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER"
 msgstr "To prevent money laundering, you can only transfer money to your wallet through a bank transfer."
 
+# FR - TODO : Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom.
+msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER_YOUR_NAME"
+msgstr "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom."
+
 # FR : Compte bancaire de destination
 msgid "account.wallet.RECIPIENT_BANK_ACCOUNT"
 msgstr "Recipient bank account"
