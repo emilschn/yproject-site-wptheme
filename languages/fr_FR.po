@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr_FR\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.4.2\n"
 
 msgid "common.OR"
 msgstr "ou"
@@ -818,7 +818,10 @@ msgid "account.wallet.SEND_MONEY_TO_WALLET"
 msgstr "Recharger mon porte-monnaie par virement"
 
 msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER"
-msgstr "Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement.  Vous pouvez utiliser votre carte pour investir sur les projets depuis leur page de pr&eacute;sentation."
+msgstr "Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement. Vous pouvez utiliser votre carte pour investir sur les projets depuis leur page de pr&eacute;sentation."
+
+msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER_YOUR_NAME"
+msgstr "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom."
 
 msgid "account.wallet.RECIPIENT_BANK_ACCOUNT"
 msgstr "Compte bancaire de destination"

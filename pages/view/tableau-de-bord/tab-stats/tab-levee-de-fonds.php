@@ -1,5 +1,6 @@
 <?php
 global $stylesheet_directory_uri, $campaign_stats;
+$page_controler = WDG_Templates_Engine::instance()->get_controler(); 
 $goal = $campaign_stats['goal']; // objectif financier de la campagne
 $average_median_for_campaign = $campaign_stats['average_median_for_campaign']; // montant de la campagne moyenne
 
@@ -9,10 +10,12 @@ $funding = $campaign_stats['funding']; // données de la vue levée de fonds
 $funding_nb_investment = $funding['nb_investment']; // données nb dinvestissement
 $funding_amount_investment = $funding['amount_investment']; // données valeur des investissements
 $funding_stats = $funding['stats']; // statistiques supplémentaires
+
+$status = $page_controler->get_campaign_status();
 ?>
 
 <!-- ONGLET LEVEE DE FONDS -->
-<div id="stat-subtab-leveedefonds" class="stat-subtab hidden">
+<div id="stat-subtab-leveedefonds" class="stat-subtab <?php if ( $status == ATCF_Campaign::$campaign_status_vote ): ?> hidden<?php endif; ?>">
 
 	<!-- Tableau des objectifs -->
 	<section>

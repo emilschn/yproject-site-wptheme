@@ -45,7 +45,6 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		
 		$this->init_current_investment();
 		$this->init_current_step();
-		$this->init_form();
 		$this->init_show_lost_session();
 	}
 	
@@ -196,7 +195,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 /******************************************************************************/
 // CURRENT FORM
 /******************************************************************************/
-	private function init_form() {
+	public function init_form() {
 		$current_investment = WDGInvestment::current();
 		
 		// Récupération d'un éventuel post de formulaire
