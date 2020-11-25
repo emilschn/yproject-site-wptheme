@@ -43,16 +43,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			$file_name_exploded = explode('.', $file_name_contract_orga);
 			$ext = $file_name_exploded[count($file_name_exploded) - 1];
 			$file_name_contract_orga = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_orga;
+	
+			DashboardUtility::create_field(array(
+				"id"				=> "new_backoffice_contract_orga",
+				"type"				=> "upload",
+				"label"				=> "Contrat d'investissement",
+				"value"				=> $file_name_contract_orga . '?time=' .time(),
+				"editable"			=> $page_controler->can_access_admin(),
+				"download_label"	=> $page_controler->get_campaign()->data->post_title . " - Contrat royalties." . $ext
+			));
 		}
-		DashboardUtility::create_field(array(
-			"id"				=> "new_backoffice_contract_orga",
-			"type"				=> "upload",
-			"label"				=> "Contrat d'investissement",
-			"value"				=> $file_name_contract_orga . '?time=' .time(),
-			"editable"			=> $page_controler->can_access_admin(),
-			"download_label"	=> $page_controler->get_campaign()->data->post_title . " - Contrat royalties." . $ext
-		));
-		
 		DashboardUtility::create_field(array(
 			"id"			=> "new_project_agreement_bundle",
 			"type"			=> "editor",
