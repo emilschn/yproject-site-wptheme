@@ -13,22 +13,23 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 }
 ?>
 
+
 <?php if ( !empty( $message_instead_of_field ) && ( !$keep_editing_for_admin || !$WDGUser_current->is_admin() ) ): ?>
-<div class="wdg-message confirm">
-	<?php echo $message_instead_of_field; ?>
-</div>
+	<div class="wdg-message confirm">
+		<?php echo $message_instead_of_field; ?>
+	</div>
 
-
-<?php else: ?>
+	<?php endif; ?>
+	
 
 	<?php if ( $display_refused_alert ): ?>
-	<div class="wdg-message error">
-		<?php if ( $display_refused_alert === TRUE ): ?>
-			<?php _e( "Le fichier a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement.", 'yproject' ); ?>
-		<?php else: ?>
-			<?php echo $display_refused_alert; ?>
-		<?php endif; ?>
-	</div>
+		<div class="wdg-message error">
+			<?php if ( $display_refused_alert === TRUE ): ?>
+				<?php _e( "Le fichier a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement.", 'yproject' ); ?>
+			<?php else: ?>
+				<?php echo $display_refused_alert; ?>
+			<?php endif; ?>
+		</div>
 	<?php endif; ?>
 
 	<div class="field-description">
@@ -72,7 +73,7 @@ if ( isset( $wdg_current_field[ 'options' ] ) ) {
 	echo do_shortcode('[yproject_lightbox_cornered id="lightbox-'. $wdg_current_field[ 'name' ]. '" title="'.__( "Importer un fichier", 'yproject' ).'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
 	?>
 
-<?php endif; ?>
+
 
 <?php if ( !empty( $wdg_current_field[ 'value' ] ) ): ?>
 	<a id="<?php echo $wdg_current_field[ 'name' ]; ?>" class="button blue-pale download-file" target="_blank" href="<?php echo $wdg_current_field[ 'value' ]; ?>">
