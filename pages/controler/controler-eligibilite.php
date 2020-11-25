@@ -42,7 +42,7 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 						$amount = 0;
 						$lw_transaction_result = LemonwayLib::get_transaction_by_id( $payment_token );
 						$amount = $lw_transaction_result->CRED;
-						NotificationsAPI::prospect_setup_payment_method_received_card( $api_result->email, $metadata_decoded->user->name, $amount, $datetime->format( 'd/m/Y H:i:s' ) );
+						NotificationsAPI::prospect_setup_payment_method_received_card( $api_result->email, $metadata_decoded->user->name, $amount, $datetime->format( 'd/m/Y H:i:s' ), $metadata_decoded->organization->name );
 	
 						// Mise à jour date de paiement
 						date_default_timezone_set("Europe/Paris");
