@@ -14,6 +14,16 @@
 		<?php _e( "Ils sont d'abord analys&eacute;s par des services automatiques puis par une personne physique en cas d'erreur ou de cas particulier.", 'yproject' ); ?><br>
 		<?php _e( "En cas d'erreur manifeste de l'analyse de vos documents, vous pouvez nous contacter &agrave; l'adresse investir@wedogood.co ou sur le chat en ligne.", 'yproject' ); ?><br><br>
 	</p>
+
+	<?php $kyc_duplicates = $WDGOrganizationIdentityDocsForm->getDuplicates(); ?>
+	<?php if ( !empty( $kyc_duplicates ) ): ?>
+		<div class="wdg-message error">
+			<?php _e( "Certains fichiers ont &eacute;t&eacute; transmis en doublon :", 'yproject' ); ?><br>
+			<?php foreach ( $kyc_duplicates as $str_duplicate ): ?>
+				- <?php echo $str_duplicate; ?><br>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
 		
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
