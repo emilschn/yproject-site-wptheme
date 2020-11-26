@@ -70,6 +70,8 @@
 								'brand': '<?php echo $analytics_data[ 'payment' ][ 'product_brand' ]; ?>',
 								// Catégorie du projet - Format : String
 								'category': '<?php echo $analytics_data[ 'payment' ][ 'product_category' ]; ?>',
+								// Aide pour Analytics
+								'quantity': 1
 							}]
 						}
 					}
