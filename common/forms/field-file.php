@@ -31,7 +31,7 @@
 <?php endif; ?>
 	
 <?php if ( !empty( $wdg_current_field[ 'value' ] ) ): ?>
-	<a id="<?php echo $wdg_current_field[ 'name' ]; ?>" class="button blue-pale download-file" target="_blank" href="<?php echo $wdg_current_field[ 'value' ]; ?>">
+	<a id="preview-<?php echo $wdg_current_field[ 'name' ]; ?>" class="button blue-pale download-file" target="_blank" href="<?php echo $wdg_current_field[ 'value' ]; ?>">
 		<?php if ( !empty( $date_upload ) && !is_array( $date_upload ) ): ?>
 			<?php _e( "Aper&ccedil;u du fichier envoy&eacute; le", 'yproject' ); ?> <?php echo $date_upload; ?>
 		<?php else: ?>
@@ -45,8 +45,9 @@
 	<?php 
 		if ( $display_refused_alert || !empty( $message_instead_of_field ) ) {
 			_e( "Vous pouvez remplacer votre fichier envoy&eacute;. Il sera revalid&eacute; par notre prestataire.", 'yproject' ); 
+			echo '<br>';
 		}		
-	?>	<br>
+	?>	
 	<?php _e( "Le fichier doit avoir une taille inf&eacute;rieure à 8 Mo.", 'yproject' ); ?><br>
 	<?php _e( "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, GIF et PNG.", 'yproject' ); ?>
 </div>
