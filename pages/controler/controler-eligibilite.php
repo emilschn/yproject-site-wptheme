@@ -44,6 +44,15 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 						$amount = $lw_transaction_result->CRED;
 						NotificationsAPI::prospect_setup_payment_method_received_card( $api_result->email, $metadata_decoded->user->name, $amount, $datetime->format( 'd/m/Y H:i:s' ), $metadata_decoded->organization->name );
 	
+						// Transfert vers le compte bancaire de WDG
+						$transfer_message = 'PROSPECT_SETUP_PAYMENT_CARD ' . $metadata_decoded->user->name . ' - ' . $metadata_decoded->organization->name;
+						$result_transfer = LemonwayLib::ask_transfer_to_iban( 'SC', $amount, 0, 0, $transfer_message );						
+                        if ($result_transfer->TRANS->HPAY->ID) {
+							$metadata_decoded->package->paymentTransferedOnAccount = TRUE;
+						}else{
+							$metadata_decoded->package->paymentTransferedOnAccount = $result_transfer->TRANS->HPAY->MSG;
+						}
+
 						// Mise à jour du type de paiement						
 						$metadata_decoded->package->paymentMethod = 'card';						
 						$metadata_decoded->package->paymentStatus = 'complete';
