@@ -54,6 +54,7 @@ if ( !empty( $init_username ) ) {
 		$user = $wpdb->get_row($wpdb->prepare("SELECT * FROM $wpdb->users WHERE user_activation_key = %s AND user_login = %s", $key, $_POST["login"]));
 		if (isset($user, $user->user_login)) {
 			wp_update_user( array ( 'ID' => $user->ID, 'user_pass' => $_POST["new_password"], 'user_status' => 0, 'user_activation_key' => '' ) );
+			NotificationsAPI::user_password_change( $user->user_email, $user->user_firstname );
 		} else {
 			array_push( $error, "La clé ne correspond pas à cet utilisateur." );
 		}
