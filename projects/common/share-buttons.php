@@ -4,20 +4,21 @@ $campaign_id = filter_input( INPUT_GET, 'campaign_id' );
 if ( !empty( $campaign_id ) ) {
 	$campaign = new ATCF_Campaign( $campaign_id );
 }
-$campaign_url = $campaign->get_public_url();
+if ( $campaign != null) {
+    $campaign_url = $campaign->get_public_url();
+}
 
 $twitter_message = '';
 $twitter_hashtags = '';
 if ( $campaign->is_positive_savings() ) {
 	$twitter_message = __( "Faites comme moi, épargnez positif dès 10 € pour soutenir ", 'yproject' );
 	$twitter_message .= ' ' . $campaign->data->post_title;
-	$twitter_hashtags = 'épargne, impact, investissement, royalties';
+	$twitter_hashtags = 'épargne,impact,investissement,royalties';
 } else {
 	$twitter_message = __( "Faites comme moi, investissez dès 10 € sur le projet", 'yproject' );
 	$twitter_message .= ' ' . $campaign->data->post_title . ' ';
 	$twitter_message .= __( "sur @wedogood_co :", 'yproject' );
-	$twitter_message .= ' ' . $campaign_url;
-	$twitter_hashtags = 'royaltycrowdfunding, finpart, investissement';
+	$twitter_hashtags = 'royaltycrowdfunding,finpart,investissement';
 }
 
 ?>
