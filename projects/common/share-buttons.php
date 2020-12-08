@@ -4,7 +4,8 @@ $campaign_id = filter_input( INPUT_GET, 'campaign_id' );
 if ( !empty( $campaign_id ) ) {
 	$campaign = new ATCF_Campaign( $campaign_id );
 }
-if ( $campaign != null) {
+$campaign_url = '';
+if ( !empty( $campaign ) ) {
     $campaign_url = $campaign->get_public_url();
 }
 
