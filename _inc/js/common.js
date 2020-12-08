@@ -620,7 +620,7 @@ var WDGNavFunctions = (function($) {
 					}
 
 					dataLayer.push({
-						'user_id': '\'' + infoDecoded[ 'userinfos' ][ 'userid' ] + '\''
+						'user_id': infoDecoded[ 'userinfos' ][ 'userid' ]
 					});
 				}
 
