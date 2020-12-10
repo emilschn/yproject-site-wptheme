@@ -42,7 +42,7 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 
 
 
-<div id="declaration-item-more-<?php echo $declaration->id; ?>" class="declaration-item-more hidden">
+<div id="declaration-item-more-<?php echo $declaration->id; ?>" data-turnover-total="<?php echo $declaration->get_turnover_total(); ?>" class="declaration-item-more hidden">
 	<hr>
 	
 	<div class="db-form v3 center align-left">
