@@ -14,6 +14,12 @@ foreach ( $wdg_functions_loaded_required_once as $file_to_locate ) {
 	locate_template( $file_to_locate, true );
 }
 
+// Activer les blocs larges et plein écran
+function mytheme_setup_theme_supported_features() {
+	// Format large
+	add_theme_support( 'align-wide' );
+}
+add_action( 'after_setup_theme', 'mytheme_setup_theme_supported_features' );
 
 /** BACK-OFFICE USERS **/
 function yproject_user_contact_methods( $user_contact ) {
