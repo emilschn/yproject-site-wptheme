@@ -3,48 +3,58 @@ $template_engine = WDG_Templates_Engine::instance();
 $template_engine->set_controler( new WDG_Page_Controler_Sitemap() );
 
 class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
+	private $send_in_blue_templates_count;
+	private $send_in_blue_templates_index;
 	
 	public function __construct() {
-		$input_queue = filter_input( INPUT_GET, 'queue' );
-		$input_rss = filter_input( INPUT_GET, 'rss' );
-		$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
-		$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
-		$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
-		$input_force_clean_sms_lists = filter_input( INPUT_GET, 'clean_sms_lists' );
-		$input_force_daily_notifications = filter_input( INPUT_GET, 'force_daily_notifications' );
-		
-		if ( !empty( $input_queue ) && $input_queue == '1' ) {
-			$nb_done = WDGQueue::execute_next( 10 );
-			exit( $nb_done . ' queued actions executed.' );
-			
-		} else if ( !empty( $input_rss ) && $input_rss == '1' ) {
-			$input_campaign = filter_input( INPUT_GET, 'campaign' );
-			if ( !empty( $input_campaign ) ) {
-				WDGCronActions::make_campaign_xml( $input_campaign );
-			} else {
-				WDGCronActions::make_projects_rss();
-			}
-			
-		} else if ( !empty( $input_make_finished_xml ) && $input_make_finished_xml == '1' ) {
-			WDGCronActions::make_projects_rss( FALSE );
-			
-		} else if ( !empty( $input_force_summary_call ) && $input_force_summary_call == '1' ) {
-			$this->summary_call();
-			
-		} else if ( !empty( $input_force_daily_call ) && $input_force_daily_call == '1' ) {
-			$this->daily_call();
-			
-		} else if ( !empty( $input_force_clean_sms_lists ) && $input_force_clean_sms_lists == '1' ) {
-			$this->clean_sms_lists();
-			
-		} else if ( !empty( $input_force_daily_notifications ) && $input_force_daily_notifications == '1' ) {
-			WDGCronActions::send_notifications();
+		// Procédure particulière pour les templates sib
+		// Ca demande du temps : on va le faire en Ajax
+		$input_force_init_sendinblue_templates = filter_input( INPUT_GET, 'force_init_sendinblue_templates' );
+		if ( !empty( $input_force_init_sendinblue_templates ) && $input_force_init_sendinblue_templates == '1' ) {
+			$this->init_send_in_blue_templates();
 			
 		} else {
-			$this->hourly_call();
+			$input_queue = filter_input( INPUT_GET, 'queue' );
+			$input_rss = filter_input( INPUT_GET, 'rss' );
+			$input_make_finished_xml = filter_input( INPUT_GET, 'input_make_finished_xml' );
+			$input_force_summary_call = filter_input( INPUT_GET, 'force_summary_call' );
+			$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
+			$input_force_clean_sms_lists = filter_input( INPUT_GET, 'clean_sms_lists' );
+			$input_force_daily_notifications = filter_input( INPUT_GET, 'force_daily_notifications' );
 			
+			if ( !empty( $input_queue ) && $input_queue == '1' ) {
+				$nb_done = WDGQueue::execute_next( 10 );
+				exit( $nb_done . ' queued actions executed.' );
+				
+			} else if ( !empty( $input_rss ) && $input_rss == '1' ) {
+				$input_campaign = filter_input( INPUT_GET, 'campaign' );
+				if ( !empty( $input_campaign ) ) {
+					WDGCronActions::make_campaign_xml( $input_campaign );
+				} else {
+					WDGCronActions::make_projects_rss();
+				}
+				
+			} else if ( !empty( $input_make_finished_xml ) && $input_make_finished_xml == '1' ) {
+				WDGCronActions::make_projects_rss( FALSE );
+				
+			} else if ( !empty( $input_force_summary_call ) && $input_force_summary_call == '1' ) {
+				$this->summary_call();
+				
+			} else if ( !empty( $input_force_daily_call ) && $input_force_daily_call == '1' ) {
+				$this->daily_call();
+				
+			} else if ( !empty( $input_force_clean_sms_lists ) && $input_force_clean_sms_lists == '1' ) {
+				$this->clean_sms_lists();
+				
+			} else if ( !empty( $input_force_daily_notifications ) && $input_force_daily_notifications == '1' ) {
+				WDGCronActions::send_notifications();
+				
+			} else {
+				$this->hourly_call();
+				
+			}
+			exit();
 		}
-		exit();
 	}
 	
 	private function hourly_call() {
@@ -356,5 +366,21 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		fwrite($fp, $sitemap);
 		fclose($fp);
 		
+	}
+
+/**
+ * Gestion initialisation des templates SendInBlue
+ */
+	private function init_send_in_blue_templates() {
+		$this->send_in_blue_templates_index = 0;
+		$this->send_in_blue_templates_count = count( NotificationsAPI::$description_str_by_template_id );
+	}
+
+	public function has_send_in_blue_templates_to_init() {
+		return ( $this->send_in_blue_templates_count > 0 );
+	}
+
+	public function get_send_in_blue_templates_count() {
+		return $this->send_in_blue_templates_count;
 	}
 }
