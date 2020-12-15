@@ -17,10 +17,12 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private $user_name;
 	private $user_project_list;
 	private $user_data;
+	private $user_kyc_duplicates;
 	private $display_user_override_not_found;
 	private $display_user_override_organization_manager_mail;
 
 	private $wallet_to_bankaccount_result;
+	private $change_wire_amount_result;
 	private $form_user_details;
 	private $form_user_password;
 	private $form_user_delete;
@@ -75,6 +77,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		// Si on met à jour le RIB, il faut recharger l'utilisateur en cours
 		$reload = WDGFormUsers::register_rib();
 		$this->wallet_to_bankaccount_result = WDGFormUsers::wallet_to_bankaccount();
+		$this->change_wire_amount_result = WDGFormUsers::change_wire_amount();
 		$this->display_user_override_not_found = FALSE;
 		$this->display_user_override_organization_manager_mail = FALSE;
 		$this->init_current_user( $reload );
@@ -393,10 +396,19 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		if ( $action_posted == WDG_Form_User_Identity_Docs::$name ) {
 			$this->form_user_feedback = $this->form_user_identitydocs->postForm();
 		}
+		$this->user_kyc_duplicates = $this->form_user_identitydocs->getDuplicates();
 	}
 	
 	public function get_user_identitydocs_form() {
 		return $this->form_user_identitydocs;
+	}
+
+	public function has_kyc_duplicates() {
+		return !empty( $this->user_kyc_duplicates );
+	}
+
+	public function get_kyc_duplicates() {
+		return $this->user_kyc_duplicates;
 	}
 	
 /******************************************************************************/
@@ -599,6 +611,15 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	public function get_wallet_to_bankaccount_result() {
 		return $this->wallet_to_bankaccount_result;
 	}
+
+
+/******************************************************************************/
+// CHANGE WIRE AMOUNT
+/******************************************************************************/
+	public function get_change_wire_amount_result() {
+		return $this->change_wire_amount_result;
+	}
+
 
 
 /******************************************************************************/

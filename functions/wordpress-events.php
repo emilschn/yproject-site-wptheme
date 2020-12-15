@@ -34,6 +34,8 @@ class WDG_WordPress_Events {
 		add_action( 'wp_insert_comment', array('NotificationsEmails', 'new_comment'), 99 ,2 );
 		// Composants
 		add_action( 'widgets_init', 'WDG_WordPress_Events::widgets_init' );
+		// Activer les blocs larges et plein écran
+		add_action( 'after_setup_theme', 'WDG_WordPress_Events::mytheme_setup_theme_supported_features' );
 		// Suppression de l'action qui passe les paiements en attente en abandonnés au bout d'une semaine
 		remove_action( 'edd_weekly_scheduled_events', 'edd_mark_abandoned_orders' );
 		// Suppression de la notification envoyée quand on modifie l'adresse d'un utilisateur
@@ -399,6 +401,12 @@ class WDG_WordPress_Events {
 			'after_title' => '</h3>',
 		) );
 		
+	}
+
+	// Activer les blocs larges et plein écran
+	public static function mytheme_setup_theme_supported_features() {
+		// Format large
+		add_theme_support( 'align-wide' );
 	}
 
 	public function secure_api( $result ) {

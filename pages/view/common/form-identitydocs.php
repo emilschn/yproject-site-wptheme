@@ -8,13 +8,23 @@
 ?>
 
 <form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?>">
-	
+
 	<p class="align-justify">
 		<?php _e( 'account.identitydocs.AUTHENTICATION_TEXT_1', 'yproject' ); ?>
 		<?php _e( 'account.identitydocs.AUTHENTICATION_TEXT_2', 'yproject' ); ?><br>
 		<?php _e( 'account.identitydocs.AUTHENTICATION_TEXT_3', 'yproject' ); ?><br><br>
 	</p>
-		
+
+	<?php if ( $page_controler->has_kyc_duplicates() ): ?>
+		<div class="wdg-message error">
+			<?php $kyc_duplicates = $page_controler->get_kyc_duplicates(); ?>
+			<?php _e( "Certains fichiers ont &eacute;t&eacute; transmis en doublon :", 'yproject' ); ?><br>
+			<?php foreach ( $kyc_duplicates as $str_duplicate ): ?>
+				- <?php echo $str_duplicate; ?><br>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
+
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>

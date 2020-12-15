@@ -6,6 +6,7 @@
 	$page_controler = WDG_Templates_Engine::instance()->get_controler();
 	wp_reset_query();
 
+	$analytics_data = $page_controler->get_analytics_data();
 	$campaign_google_tag_manager_id = FALSE;
 	if ( $is_campaign_page && !empty( $campaign ) ) {
 		$campaign_google_tag_manager_id = $campaign->google_tag_manager_id();
@@ -24,12 +25,59 @@
 		<title><?php echo $page_controler->get_page_title(); ?></title>
 
 		<?php /* Google Tag Manager */ ?>
-		<?php /* WDG */ ?>
-		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-KFV5RN5');</script>
+		<?php
+			/* WDG : 
+			si c'est déjà défini par le biais des controler (= si l'utilisateur est identifié), 
+			on peut déjà envoyer la donnée ; sinon ce sera envoyé plus tard
+			*/
+		?>
+		<script>
+			function wdg_gtm_call() {
+				(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+				new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+				'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+				})(window,document,'script','dataLayer','GTM-KFV5RN5');
+			}
+			dataLayer = [];
+
+			<?php if ( !empty( $analytics_data[ 'payment' ] ) ): ?>
+				dataLayer.push({
+					'event': 'purchase',
+					'event_category': 'Ecommerce',
+					'event_action': 'Transaction',
+					// ID de la transaction - Format : String
+					'event_label': '<?php echo $analytics_data[ 'payment' ][ 'event_label' ]; ?>',
+					// Montant total de l'investissement - Format : Numérique
+					'value': <?php echo $analytics_data[ 'payment' ][ 'value' ]; ?>,
+					'currency': 'EUR',
+					'ecommerce': {
+						'purchase': {
+							'actionField': {
+								// ID de la transaction - Format : String
+								'id': '<?php echo $analytics_data[ 'payment' ][ 'event_label' ]; ?>',
+								// Montant total de l'investissement, incluant la TVA - Format : Numérique
+								'revenue': <?php echo $analytics_data[ 'payment' ][ 'value' ]; ?>
+							},
+							'products': [{
+								// Titre du projet - Format : String
+								'name': '<?php echo $analytics_data[ 'payment' ][ 'product_name' ]; ?>',
+								// ID du projet - Format : String
+								'id': '<?php echo $analytics_data[ 'payment' ][ 'product_id' ]; ?>',
+								// Montant de l'investissement - Format : Numérique
+								'price': <?php echo $analytics_data[ 'payment' ][ 'value' ]; ?>,
+								// Nom de la société qui porte le projet - Format : String
+								'brand': '<?php echo $analytics_data[ 'payment' ][ 'product_brand' ]; ?>',
+								// Catégorie du projet - Format : String
+								'category': '<?php echo $analytics_data[ 'payment' ][ 'product_category' ]; ?>',
+								// Aide pour Analytics
+								'quantity': 1
+							}]
+						}
+					}
+				});
+			<?php endif; ?>
+		</script>
 
 		<?php /* Campagne */ ?>
 		<?php if ( !empty( $campaign_google_tag_manager_id ) ): ?>
@@ -37,7 +85,7 @@
 			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-			})(window,document,'script','dataLayer','<?php echo $campaign_google_tag_manager_id; ?>');</script>
+			})(window,document,'script','campaignDataLayer','<?php echo $campaign_google_tag_manager_id; ?>');</script>
 		<?php endif; ?>
 		<?php /* End Google Tag Manager */ ?>
 		

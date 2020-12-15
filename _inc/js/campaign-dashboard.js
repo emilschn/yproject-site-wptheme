@@ -1,5 +1,6 @@
 function WDGCampaignTurnoverSimulator() {
 	this.initFinanceFormEvents();
+	this.initAdjustments();
 	this.initDisplayedInfos();
 	this.refreshYears();
 }
@@ -17,22 +18,45 @@ WDGCampaignTurnoverSimulator.prototype.initFinanceFormEvents = function() {
 
 }
 
-WDGCampaignTurnoverSimulator.prototype.reinitTurnoverEvents = function() {
+
+WDGCampaignTurnoverSimulator.prototype.initAdjustments = function() {
+	var self = this;
+	
+	if ( $( '#field-declarations_checked' ).length > 0 ) {
+		$( '#field-declarations_checked .select-multiple-items label.radio-label' ).click( function() {
+			// Dans un setTimeout, sinon l'événement est déclenché avant que la checkbox soit considérée comme cochée
+			setTimeout( function() { self.refreshAdjustmentDeclarationsTurnover(); }, 800 );
+		} );
+	}
+}
+
+WDGCampaignTurnoverSimulator.prototype.refreshAdjustmentDeclarationsTurnover = function() {
 	var self = this;
 
-	var nFundingDuration = self.getFundingDuration();
-	for ( var i = 0; i < nFundingDuration; i++ ) {
-		if ( $( '#new_estimated_turnover_' + i ).length > 0 ) {
-			$( '#new_estimated_turnover_' + i ).unbind();
-			$( '#new_estimated_turnover_' + i ).bind( 'click keyup', function() {
-				self.refreshTurnover();
-			} );
-
-			self.formatTurnover( 'new_estimated_turnover_' + i );
-			$( '#new_estimated_turnover_' + i ).change( function() {
-				self.formatTurnover( $( this ).attr( 'id' ) );
-			} );
+	var nAmount = 0;
+	var sString = '';
+	$( '#field-declarations_checked .select-multiple-items label.radio-label input' ).each( function () {
+		if ( $( this ).is( ':checked' ) ) {
+			var nSizeOfDeclaration = 12; // Taille de la chaine 'declaration-'
+			var nDeclarationId = $( this ).val().substring( nSizeOfDeclaration );
+			if ( $( '#list-declarations #declaration-item-more-' + nDeclarationId ).length > 0 ) {
+				var nDeclarationTurnoverTotal = $( '#list-declarations #declaration-item-more-' + nDeclarationId ).data( 'turnover-total' );
+				if ( nDeclarationTurnoverTotal != undefined ) {
+					if ( sString != '' ) {
+						sString += '+ ';
+					}
+					sString += nDeclarationTurnoverTotal + ' € ';
+					nAmount += nDeclarationTurnoverTotal;
+				}
+			}
 		}
+	} );
+
+	sString += '=> Total déclaré : ' + nAmount.toString() + ' €.';
+	if ( $( '#field-declarations_checked .turnover-total-description' ).length > 0 ) {
+		$( '#field-declarations_checked .turnover-total-description' ).html( sString );
+	} else {
+		$( '#field-declarations_checked' ).append( '<div class="turnover-total-description">' + sString + '</div>' );
 	}
 }
 
@@ -132,6 +156,25 @@ WDGCampaignTurnoverSimulator.prototype.refreshTurnover = function() {
 		self.initDisplayedInfos();
 	}
 
+}
+
+WDGCampaignTurnoverSimulator.prototype.reinitTurnoverEvents = function() {
+	var self = this;
+
+	var nFundingDuration = self.getFundingDuration();
+	for ( var i = 0; i < nFundingDuration; i++ ) {
+		if ( $( '#new_estimated_turnover_' + i ).length > 0 ) {
+			$( '#new_estimated_turnover_' + i ).unbind();
+			$( '#new_estimated_turnover_' + i ).bind( 'click keyup', function() {
+				self.refreshTurnover();
+			} );
+
+			self.formatTurnover( 'new_estimated_turnover_' + i );
+			$( '#new_estimated_turnover_' + i ).change( function() {
+				self.formatTurnover( $( this ).attr( 'id' ) );
+			} );
+		}
+	}
 }
 
 WDGCampaignTurnoverSimulator.prototype.getFundingDuration = function() {

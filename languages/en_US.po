@@ -1798,7 +1798,7 @@ msgstr "Join me in investing positively from €10 to support"
 
 # FR : épargne, impact, investissement, royalties
 msgid "share-buttons.HASHTAGS_POSITIVE_SAVINGS"
-msgstr "savings, impact, investment, royalties"
+msgstr "savings,impact,investment,royalties"
 
 # FR : Faites comme moi, investissez sur le projet
 msgid "share-buttons.DO_LIKE_ME_PROJECT"
@@ -1806,7 +1806,7 @@ msgstr "Join me in investing in the project"
 
 # FR : royalty, crowdfunding
 msgid "share-buttons.HASHTAGS_PROJECT"
-msgstr "royalty, crowdfunding"
+msgstr "royalty,crowdfunding"
 
 # FR : Je viens d'investir sur le projet
 msgid "share-buttons.email.TITLE"
@@ -1904,7 +1904,7 @@ msgstr "French birthplace county"
 
 # FR : Uniquement si la naissance a eu lieu en France
 msgid "form.user-details.BIRTH_PLACE_COUNTY_DESCRIPTION"
-msgstr "Only for people born in France"
+msgstr "Only for people born in France, otherwise please select Etranger"
 
 # FR : Pays de naissance
 msgid "form.user-details.BIRTH_COUNTRY"

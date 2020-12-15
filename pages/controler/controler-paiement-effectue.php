@@ -134,6 +134,32 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		if ( empty( $payment_return ) ) {
 			$payment_return = 'error-contact';
 		}
+		if (
+				$payment_return == 'publish'
+				|| 
+				(
+					$payment_return == 'pending'
+					&&
+					( $this->current_meanofpayment == WDGInvestment::$meanofpayment_wire || $this->current_meanofpayment == WDGInvestment::$meanofpayment_check )
+				) 
+			) {
+			$this->page_analytics_data[ 'payment' ] = array();
+			// ID de la transaction
+			$this->page_analytics_data[ 'payment' ][ 'event_label' ] = $this->current_investment->get_id();
+			// Montant total de l'investissement
+			$this->page_analytics_data[ 'payment' ][ 'value' ] = $this->current_investment->get_session_amount();
+			// Titre du projet
+			$this->page_analytics_data[ 'payment' ][ 'product_name' ] = $this->get_current_campaign()->get_name();
+			// ID du projet
+			$this->page_analytics_data[ 'payment' ][ 'product_id' ] = $this->get_current_campaign()->ID;
+			// Nom de la société qui porte le projet
+			$this->page_analytics_data[ 'payment' ][ 'product_brand' ] = $this->get_campaign_organization_name();
+			// Catégorie du projet
+			$this->page_analytics_data[ 'payment' ][ 'product_category' ] = 'Entreprises';
+			if ( $this->get_current_campaign()->is_positive_savings() ) {
+				$this->page_analytics_data[ 'payment' ][ 'product_category' ] = 'Epargne positive';
+			}
+		}
 		$this->current_view = $this->current_meanofpayment . '-' . $payment_return;
 		ypcf_debug_log( 'paiement-effectue > init_payment_result --- $this->current_view :: ' .$this->current_view );
 	}

@@ -398,14 +398,11 @@ var WDGNavFunctions = (function($) {
 						$('#submenu-user').show();
 						$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
 						$('#submenu-search').hide();
-						
-						if ( $( this ).hasClass( 'not-connected' ) ) {
-							WDGNavFunctions.checkUserConnection();
-						}
 					}
 				}
 			});
-			if ( $( '#content' ).length > 0 && $( '#content' ).data( 'campaignid' ) !== undefined ) {
+						
+			if ( $( 'nav#main .btn-user' ).hasClass( 'not-connected' ) ) {
 				WDGNavFunctions.checkUserConnection();
 			}
 			
@@ -647,7 +644,13 @@ var WDGNavFunctions = (function($) {
 							ProjectEditor.init();
 						}
 					}
+
+					dataLayer.push({
+						'user_id': infoDecoded[ 'userinfos' ][ 'userid' ]
+					});
 				}
+
+				wdg_gtm_call();
 			} );
 		}
 	};
