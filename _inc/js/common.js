@@ -498,8 +498,8 @@ var WDGNavFunctions = (function($) {
 					
 					if (search != "") {
 						var bFoundProject = false;
-						// Découpe par mot recherchés
-						var aSplitSearch = search.split( ' ' );
+						// Découpe par mot recherchés (on considère les tirets comme des mots séparés)
+						var aSplitSearch = search.split( '-' ).join( ' ' ).split( ' ' );
 						$("#submenu-search .submenu-list li").each(function() {
 							var itemText = $(this).find('a').text().toLowerCase();
 							if (itemText.indexOf(search) > -1) {
@@ -513,7 +513,7 @@ var WDGNavFunctions = (function($) {
 								for (var i = 0; i < aSplitSearch.length; i++ ) {
 									if ( aSplitSearch[i].length > 2 ) {
 										for (var j = 0; j < aSplitItem.length; j++) {
-											if (aSplitItem[j] != undefined && YPUIFunctions.getStringsSimilarity(aSplitItem[j], aSplitSearch[i]) > 0.7) {
+											if (aSplitItem[j] != undefined && YPUIFunctions.getStringsSimilarity(aSplitItem[j], aSplitSearch[i]) > 0.6) {
 												bFoundInItem = true;
 												break;
 											}
