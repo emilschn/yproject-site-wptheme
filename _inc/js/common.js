@@ -508,7 +508,7 @@ var WDGNavFunctions = (function($) {
 							}
 							
 							if (!bFoundProject) {
-								var aSplitItem = itemText.split( ' ' );
+								var aSplitItem = itemText.split( '-' ).join( ' ' ).split( ' ' );
 								var bFoundInItem = false;
 								for (var i = 0; i < aSplitSearch.length; i++ ) {
 									if ( aSplitSearch[i].length > 2 ) {
