@@ -14,19 +14,31 @@ body input, body select {
 }
 
 /*******************************************************************************
-* COMMON
+* GESTION CLASSES CSS EN PROVENANCE DE WP / GUTENBERG
 *******************************************************************************/
-.left { float: left; }
-.right { float: right; }
-.clear { clear: both; }
-.clearfix { overflow-x: hidden; overflow-y: hidden; }
-
 .aligncenter, .align-center { text-align: center; }
 .alignleft, .align-left { text-align: left; }
 .align-justify { text-align: justify; }
 .align-right { text-align: right; }
 .alignwide { margin-left: -50px; margin-right: -50px; }
 .alignfull { margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+.wp-block-cover.alignfull,
+.wp-block-cover-image.alignfull {
+	width: 100vw; padding: 0px;
+}
+.wp-block-cover.alignfull .wp-block-cover__inner-container,
+.wp-block-cover-image.alignfull .wp-block-cover__inner-container { 
+    width: 1280px;
+	margin: auto;
+}
+
+/*******************************************************************************
+* COMMON
+*******************************************************************************/
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; }
+.clearfix { overflow-x: hidden; overflow-y: hidden; }
 
 .center-lg { max-width: 1300px; margin: auto; }
 .only-inf997 { display: none; }
