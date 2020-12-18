@@ -5,6 +5,7 @@ class WDG_Page_Controler {
 	private $page_title;
 	private $page_description;
 	private $page_meta_keywords;
+	protected $page_analytics_data;
 	private $show_user_details_confirmation;
 	private $show_user_pending_preinvestment;
 	private $show_user_pending_investment;
@@ -25,6 +26,7 @@ class WDG_Page_Controler {
 		if ( is_single() && get_post_type() == 'download' ) {
 			$this->init_override_languages();
 		}
+		$this->init_analytics_data();
 		
 		if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
 			$this->init_show_user_pending_preinvestment();
@@ -112,6 +114,21 @@ class WDG_Page_Controler {
 					$this->page_description = $meta_description;
 				}
 			}
+		}
+	}
+
+	/**
+	 * Récupère les infos à pusher sur Analytics
+	 */
+	public function get_analytics_data() {
+		return $this->page_analytics_data;
+	}
+
+	private function init_analytics_data() {
+		$this->page_analytics_data = array();
+		if ( is_user_logged_in() ) {
+			$WDG_user_current = WDGUser::current();
+			$this->page_analytics_data[ 'user_id' ] = $WDG_user_current->get_wpref();
 		}
 	}
 	

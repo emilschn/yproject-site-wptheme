@@ -479,7 +479,7 @@ msgid "account.common.INFORMATION_BELOW_PERSONAL_ACCOUNT"
 msgstr "Les informations ci-dessous sont celles de votre compte personnel."
 
 msgid "account.common.IF_INVESTMENT_ORGA"
-msgstr "Si vous avez investi avec votre entreprise, vous retrouverez les informations respectives dans la partie Organisation, dans le menu de votre compte."
+msgstr "Retrouvez celles de vos organisations en utilisant le menu."
 
 msgid "account.transfert.TRANSFERT_COMPLETED"
 msgstr "Transfert effectu&eacute;"
@@ -1354,13 +1354,13 @@ msgid "share-buttons.DO_LIKE_ME_POSITIVE_SAVINGS"
 msgstr "Faites comme moi, épargnez positif dès 10 € pour soutenir"
 
 msgid "share-buttons.HASHTAGS_POSITIVE_SAVINGS"
-msgstr "épargne, impact, investissement, royalties"
+msgstr "épargne,impact,investissement,royalties"
 
 msgid "share-buttons.DO_LIKE_ME_PROJECT"
 msgstr "Faites comme moi, investissez dès 10 € sur le projet"
 
 msgid "share-buttons.HASHTAGS_PROJECT"
-msgstr "royaltycrowdfunding, finpart, investissement"
+msgstr "royaltycrowdfunding,finpart,investissement"
 
 msgid "share-buttons.email.TITLE"
 msgstr "Je viens d'investir sur le projet"
@@ -1434,7 +1434,7 @@ msgid "form.user-details.BIRTH_PLACE_COUNTY"
 msgstr "D&eacute;partement de naissance"
 
 msgid "form.user-details.BIRTH_PLACE_COUNTY_DESCRIPTION"
-msgstr "Uniquement si la naissance a eu lieu en France"
+msgstr "Uniquement si la naissance a eu lieu en France, sinon s&eacute;lectionner &Eacute;tranger"
 
 msgid "form.user-details.BIRTH_COUNTRY"
 msgstr "Pays de naissance"

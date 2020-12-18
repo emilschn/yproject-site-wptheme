@@ -14,6 +14,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	private $can_access_author;
 	private $must_show_lightbox_welcome;
 	private $declaration_list;
+	private $user_kyc_duplicates;
 	private $form_add_check;
 	private $form_document;
 	private $form_declaration_bill_list;
@@ -132,11 +133,20 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		if ( $action_posted == WDG_Form_User_Identity_Docs::$name ) {
 			$this->form_user_feedback = $this->form_user_identitydocs->postForm();
 		}
+		$this->user_kyc_duplicates = $this->form_user_identitydocs->getDuplicates();
 	}
 
 	public function get_user_identitydocs_form() {
 		$this->init_form_user_identitydocs();
 		return $this->form_user_identitydocs;
+	}
+
+	public function has_kyc_duplicates() {
+		return !empty( $this->user_kyc_duplicates );
+	}
+
+	public function get_kyc_duplicates() {
+		return $this->user_kyc_duplicates;
 	}
 		
 	public function get_user_form_feedback() {

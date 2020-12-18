@@ -14,6 +14,16 @@
 		<?php _e( 'account.identitydocs.orga.AUTHENTICATION_TEXT_2', 'yproject' ); ?><br>
 		<?php _e( 'account.identitydocs.orga.AUTHENTICATION_TEXT_3', 'yproject' ); ?><br><br>
 	</p>
+
+	<?php $kyc_duplicates = $WDGOrganizationIdentityDocsForm->getDuplicates(); ?>
+	<?php if ( !empty( $kyc_duplicates ) ): ?>
+		<div class="wdg-message error">
+			<?php _e( "Certains fichiers ont &eacute;t&eacute; transmis en doublon :", 'yproject' ); ?><br>
+			<?php foreach ( $kyc_duplicates as $str_duplicate ): ?>
+				- <?php echo $str_duplicate; ?><br>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
 		
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
