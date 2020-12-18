@@ -29,10 +29,7 @@ class WDG_Templates_Engine {
 		if ( ! isset ( self::$current_page_name ) ) {
 			wp_reset_query();
 			global $wp_query;
-			if ( is_home() or is_front_page() ) {
-				self::$current_page_name = 'home';
-				
-			} elseif ( isset( $wp_query ) && is_single() ) {
+			if ( isset( $wp_query ) && is_single() ) {
 				self::$current_page_name = 'projet';
 
 			} else {
@@ -149,15 +146,6 @@ class WDG_Templates_Engine {
 			return $page_name;
 		}
 		return FALSE;
-	}
-	
-	/**
-	 * Détermine si c'est une page qui doit être surchargée par le contexte
-	 * @param string $page_name
-	 * @return boolean
-	 */
-	public function is_context_overriden( $page_name ) {
-		return ( $page_name == 'home' );
 	}
 	
 	/**

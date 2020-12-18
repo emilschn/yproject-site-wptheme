@@ -479,7 +479,7 @@ msgid "account.common.INFORMATION_BELOW_PERSONAL_ACCOUNT"
 msgstr "Les informations ci-dessous sont celles de votre compte personnel."
 
 msgid "account.common.IF_INVESTMENT_ORGA"
-msgstr "Si vous avez investi avec votre entreprise, vous retrouverez les informations respectives dans la partie Organisation, dans le menu de votre compte."
+msgstr "Retrouvez celles de vos organisations en utilisant le menu."
 
 msgid "account.transfert.TRANSFERT_COMPLETED"
 msgstr "Transfert effectu&eacute;"
@@ -1434,7 +1434,7 @@ msgid "form.user-details.BIRTH_PLACE_COUNTY"
 msgstr "D&eacute;partement de naissance"
 
 msgid "form.user-details.BIRTH_PLACE_COUNTY_DESCRIPTION"
-msgstr "Uniquement si la naissance a eu lieu en France, sinon s&eacute;lectionner Etranger"
+msgstr "Uniquement si la naissance a eu lieu en France, sinon s&eacute;lectionner &Eacute;tranger"
 
 msgid "form.user-details.BIRTH_COUNTRY"
 msgstr "Pays de naissance"
