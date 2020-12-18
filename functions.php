@@ -14,7 +14,6 @@ foreach ( $wdg_functions_loaded_required_once as $file_to_locate ) {
 	locate_template( $file_to_locate, true );
 }
 
-
 /** BACK-OFFICE USERS **/
 function yproject_user_contact_methods( $user_contact ) {
 	$user_contact['user_mobile_phone'] = __('T&eacute;l&eacute;phone');
