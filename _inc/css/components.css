@@ -888,6 +888,9 @@ body input[type=text], body input[type=number], body input[type=email], body sel
 	display: block;
 	width: 100%;
 }
+.db-form.v3 .field label.checkbox-parent {
+	cursor: pointer;
+}
 @-moz-document url-prefix() {
 	.db-form.v3.full .field .field-container label {
 		margin-left: -12px;
