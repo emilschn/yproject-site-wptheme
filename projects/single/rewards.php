@@ -156,7 +156,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 					</form>
 					<?php else: ?>
 						<div class="align-center">
-							<a href="<?php echo home_url( '/connexion' ); ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
 						</div>
 					<?php endif; ?>
 					<br>

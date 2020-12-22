@@ -36,7 +36,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		
 		$this->init_current_campaign();
 		if ( empty( $this->current_campaign ) ) {
-			wp_redirect( home_url( '/les-projets/' ) );
+			WDG_Redirect_Engine::override_redirect( 'les-projets' );
 			exit();
 		}
 		WDGRoutes::redirect_invest_if_not_logged_in();
@@ -46,6 +46,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		$this->init_current_investment();
 		$this->init_current_step();
 		$this->init_show_lost_session();
+		$this->init_form_redirect();
 	}
 	
 /******************************************************************************/
@@ -195,6 +196,44 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 /******************************************************************************/
 // CURRENT FORM
 /******************************************************************************/
+	/**
+	 * On fait les redirections avant que les headers commencent à être envoyés
+	 */
+	private function init_form_redirect() {
+		$action_posted = filter_input( INPUT_POST, 'action' );
+
+		switch ( $action_posted ) {
+			// Analyse formulaire validation authentification
+			case WDG_Form_User_Identity_Docs::$name:
+				$input_nav = filter_input( INPUT_POST, 'nav' );
+				if ( $input_nav != 'previous' ) {
+					$this->current_step = 2.5;
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form_redirect >> current_step = 2.5 >> WDG_Form_User_Identity_Docs::$name POSTED' );
+					if ( !isset( $_SESSION[ 'redirect_current_user_type' ] ) ) {
+						wp_redirect( $this->get_form_action() . '&lost_session=1' );
+						exit();
+					}
+				}
+				break;
+
+			// Analyse formulaire validation contrat
+			case WDG_Form_Invest_Contract::$name:
+				$input_nav = filter_input( INPUT_POST, 'nav' );
+				if ( $input_nav != 'previous' ) {
+					$this->current_step = 3;
+					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 3 >> WDG_Form_Invest_Contract::$name POSTED' );
+					$WDGCurrent_User = WDGUser::current();
+					$this->form = new WDG_Form_Invest_Contract( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
+					if ( $this->form->postForm() ) {
+						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> GOTO moyen-de-paiement' );
+						wp_redirect( home_url( '/moyen-de-paiement/' ) . '?campaign_id=' . $this->current_campaign->ID );
+						exit();
+					}
+				}
+				break;
+		}
+	}
+
 	public function init_form() {
 		$current_investment = WDGInvestment::current();
 		
@@ -298,6 +337,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					$this->current_step = 2.5;
 					ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> current_step = 2.5 >> WDG_Form_User_Identity_Docs::$name POSTED' );
 					if ( !isset( $_SESSION[ 'redirect_current_user_type' ] ) ) {
+						// Normalement, on ne passe plus ici
 						wp_redirect( $this->get_form_action() . '&lost_session=1' );
 						exit();
 					}
@@ -340,8 +380,10 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					$WDGCurrent_User = WDGUser::current();
 					$this->form = new WDG_Form_Invest_Contract( $this->current_campaign, $WDGCurrent_User->wp_user->ID );
 					if ( $this->form->postForm() ) {
+						// Normalement, on ne passe plus ici
 						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> GOTO moyen-de-paiement' );
-						wp_redirect( home_url( '/moyen-de-paiement/' ) . '?campaign_id=' . $this->current_campaign->ID );
+						$page_url = WDG_Redirect_Engine::override_get_page_url( 'moyen-de-paiement' );
+						wp_redirect( $page_url. '?campaign_id=' . $this->current_campaign->ID );
 						exit();
 					}
 				}
@@ -409,7 +451,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	}
 	
 	public function get_form_action() {
-		$url = home_url( '/investir/' );
+		$url = WDG_Redirect_Engine::override_get_page_url( 'investir' );
 		$url .= '?campaign_id=' . $this->current_campaign->ID;
 		return $url;
 	}
