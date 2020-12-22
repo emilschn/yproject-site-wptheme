@@ -242,8 +242,11 @@
 								<a href="<?php echo home_url( '/mot-de-passe-oublie/' ); ?>" class="forgotten">(<?php _e( 'login.FORGOTTEN_PASSWORD', 'yproject' );?>)</a>
 							</div>
 
-							<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
-							<label><?php _e( 'login.REMEMBER_ME', 'yproject' ); ?></label>
+							<br>
+							<label class="checkbox-parent">
+								<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
+								<?php _e( 'login.REMEMBER_ME', 'yproject' ); ?>
+							</label>
 							<br><br>
 						</form>
 

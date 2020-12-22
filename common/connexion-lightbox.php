@@ -36,7 +36,7 @@
             </div>
 
 			<div class="field">
-				<label for="signin_rememberme">
+				<label for="signin_rememberme" class="checkbox-parent">
 					<input id="signin_rememberme" type="checkbox" name="rememberme" value="forever" /><span></span>
 					<?php _e( 'login.REMEMBER_ME', 'yproject' ); ?>
 				</label>
