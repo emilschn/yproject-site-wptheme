@@ -7,6 +7,8 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	private $send_in_blue_templates_index;
 	
 	public function __construct() {
+		$this->send_in_blue_templates_count = 0;
+		
 		// Procédure particulière pour les templates sib
 		// Ca demande du temps : on va le faire en Ajax
 		$input_force_init_sendinblue_templates = filter_input( INPUT_GET, 'force_init_sendinblue_templates' );

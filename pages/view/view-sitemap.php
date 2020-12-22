@@ -2,7 +2,7 @@
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 
-<?php if ( $page_controler->has_send_in_blue_templates_to_init() ): ?>
+<?php if ( !empty( $page_controler ) && $page_controler->has_send_in_blue_templates_to_init() ): ?>
 	<br><br><br><br><br><br><br><br><br>
 	<div class="sendinblue-templates-init-status">
 		En cours d'initialisation...
