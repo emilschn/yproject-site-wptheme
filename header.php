@@ -224,8 +224,11 @@
 								<a href="<?php echo get_permalink($page_forgotten->ID); ?>" class="forgotten"><?php _e('(Mot de passe oubli&eacute;)', 'yproject');?></a>
 							</div>
 
-							<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
-							<label><?php _e('Se souvenir de moi', 'yproject'); ?></label>
+							<br>
+							<label class="checkbox-parent">
+								<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
+								<?php _e('Se souvenir de moi', 'yproject'); ?>
+							</label>
 							<br><br>
 						</form>
 
