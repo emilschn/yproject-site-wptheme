@@ -7,7 +7,7 @@ if ( empty( $campaign ) ) {
 		exit( 'Access error current campaign - AECC1431' );
 	}
 }
-$btn_follow_href = home_url( '/connexion/' ) . '?source=project';
+$btn_follow_href = WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?source=project';
 $btn_follow_classes = 'wdg-button-lightbox-open';
 $btn_follow_data_lightbox = 'connexion';
 $btn_follow_text = __('Suivre', 'yproject');
@@ -238,7 +238,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 					<div class="clear">
 					<?php if ( $campaign->time_remaining_str() != '-' ): ?>
 						<?php if ( !is_user_logged_in() ): ?>
-							<a href="<?php echo home_url( '/connexion/' ); ?>?source=project" class="button red">
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>?source=project" class="button red">
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
 
@@ -271,8 +271,8 @@ $campaign_categories_str = $campaign->get_categories_str();
 				<?php // cas d'un projet en financement ?>
 				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
 					<?php
-					$invest_url = home_url( '/investir/?campaign_id=' .$campaign->ID. '&amp;invest_start=1' );
-					$invest_url_href = home_url( '/connexion/' ) . '?source=project&redirect-invest=' .$campaign->ID;
+					$invest_url = WDG_Redirect_Engine::override_get_page_url( 'investir' ) . '?campaign_id=' .$campaign->ID. '&amp;invest_start=1';
+					$invest_url_href = WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?source=project&redirect-invest=' .$campaign->ID;
 					if ( is_user_logged_in() ) {
 						$invest_url_href = $invest_url;
 					}
@@ -369,7 +369,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 					<div class="end-sentence">
 						<?php echo $nbinvestors. " " .__("personnes","yproject"). " " .__("ont investi","yproject"). " " .$invest_amount. " " .__("pour propulser cette lev&eacute;e de fonds","yproject"); ?>
 					</div>
-					<a href="<?php echo home_url( '/les-projets/' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 				
                                         
 				<?php // cas d'un projet terminé et non financé ?>
@@ -381,7 +381,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 							<?php echo $campaign->archive_message(); ?>
 						<?php endif; ?>
 					</div>
-					<a href="<?php echo home_url( '/les-projets/' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 
 				<?php endif; ?>
                                       				

@@ -702,6 +702,11 @@ ul.project-list a.needs-authentication:after {
     text-transform: uppercase;
 }
 
+#submenu-user form.sidebar-login-form label.checkbox-parent {
+	margin-left: 0px;
+	cursor: pointer;
+}
+
 #submenu-user form.sidebar-login-form .input_connection {
     margin: 7px 0px;
     width: 246px;

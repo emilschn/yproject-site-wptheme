@@ -36,7 +36,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		
 		$this->init_current_campaign();
 		if ( empty( $this->current_campaign ) ) {
-			wp_redirect( home_url( '/les-projets/' ) );
+			WDG_Redirect_Engine::override_redirect( 'les-projets' );
 			exit();
 		}
 		WDGRoutes::redirect_invest_if_not_logged_in();
@@ -386,7 +386,8 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 					if ( $this->form->postForm() ) {
 						// Normalement, on ne passe plus ici
 						ypcf_debug_log( 'WDG_Page_Controler_Invest::init_form >> GOTO moyen-de-paiement' );
-						wp_redirect( home_url( '/moyen-de-paiement/' ) . '?campaign_id=' . $this->current_campaign->ID );
+						$page_url = WDG_Redirect_Engine::override_get_page_url( 'moyen-de-paiement' );
+						wp_redirect( $page_url. '?campaign_id=' . $this->current_campaign->ID );
 						exit();
 					}
 				}
@@ -454,7 +455,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 	}
 	
 	public function get_form_action() {
-		$url = home_url( '/investir/' );
+		$url = WDG_Redirect_Engine::override_get_page_url( 'investir' );
 		$url .= '?campaign_id=' . $this->current_campaign->ID;
 		return $url;
 	}
