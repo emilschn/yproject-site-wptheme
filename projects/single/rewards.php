@@ -1,7 +1,6 @@
 <?php
 global $campaign, $stylesheet_directory_uri, $is_simulator_shortcode;
 $campaign_id = $campaign->ID;
-$page_invest = get_page_by_path('investir');
 $campaign_status = $campaign->campaign_status();
 $funding_duration = $campaign->funding_duration();
 $funding_duration_str = ( $funding_duration == 0 ) ? __( "une dur&eacute;e ind&eacute;termin&eacute;e", 'yproject' ) : $funding_duration. " " .__( "ans", 'yproject' );
@@ -51,7 +50,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 				<input type="hidden" id="estimated_turnover_unit" value="<?php echo $campaign->estimated_turnover_unit(); ?>">					
 				
 				<?php if (is_user_logged_in() && $campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
-					<form method="GET" action="<?php echo home_url( '/investir' ); ?>" class="avoid-enter-validation">
+					<form method="GET" action="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investir' ); ?>" class="avoid-enter-validation">
 				<?php endif; ?>
 
 				<?php if ( $campaign->roi_percent_estimated() > 0 && $firstpayment_year > 2014 ): ?>
