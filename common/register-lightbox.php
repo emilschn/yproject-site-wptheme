@@ -81,8 +81,11 @@
 				<?php endif; ?>
 
 				<div class="field">
-					<label for="validate-terms-check-register" id="label-validate-terms-check-register" data-keepdefault="1"><input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> <?php _e( 'signup.I_ACCEPT', 'yproject' ); ?> <a href="<?php echo home_url().'/cgu/';  ?>" target="_blank"><?php _e( 'signup.THE_TERMS', 'yproject' ); ?></a> *</label><br />
+					<label for="validate-terms-check-register" id="label-validate-terms-check-register" data-keepdefault="1" class="checkbox-parent">
+						<input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> <?php _e( 'signup.I_ACCEPT', 'yproject' ); ?> <a href="<?php echo home_url().'/cgu/';  ?>" target="_blank"><?php _e( 'signup.THE_TERMS', 'yproject' ); ?></a> *
+					</label>
 				</div>
+				<br>
 
 				<p class="align-left">
 					* <?php _e( 'common.REQUIRED_FIELDS', 'yproject' ); ?><br>
