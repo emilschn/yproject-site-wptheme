@@ -379,6 +379,7 @@ body.template-les-projets .wdg-component-projects-preview .project-container.cat
 @media screen and (max-width: 997px) {
 	.wdg-component-projects-preview .project-container {
 		width: 320px;
+		margin-bottom: 48px;
 	}
 }
 @media screen and (max-width: 1100px) {
