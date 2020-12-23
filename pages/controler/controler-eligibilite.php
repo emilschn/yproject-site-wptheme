@@ -75,7 +75,7 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 			// Erreur de paiement
 			} elseif ( $input_is_error === '1' || $input_is_canceled === '1' ) {
 				$draft_url = home_url( '/financement/eligibilite/?guid=' . $guid );
-				NotificationsAPI::prospect_setup_payment_method_error_card( $api_result->email, $metadata_decoded->user->name, $draft_url );
+				NotificationsAPI::prospect_setup_payment_method_error_card( $api_result->email, $metadata_decoded->user->name, $draft_url, $metadata_decoded->organization->name );
 					
 			}
 		}
